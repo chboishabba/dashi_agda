@@ -135,6 +135,7 @@ class FirstLinkCertificateTests(unittest.TestCase):
             '{"x":NaN}',
             '{"x":Infinity}',
             '{"x":-Infinity}',
+            '{"x":1e10000}',
             '{"x":',
         ):
             with self.subTest(source=bad), self.assertRaises(ValueError):
