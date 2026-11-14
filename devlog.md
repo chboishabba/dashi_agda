@@ -1,3 +1,27 @@
+# 2026-10-29 RH/Feynman TOE normalization
+
+- Reused the current Agda RH three-route max-cut as the golden frontier.
+  Added one non-versioned Unified facade and wired it through `Unifier` and
+  `EverythingTOESymmetryResolved369`. A1 carrier/curvature/compensation,
+  the A2 strict scalar payment, and Route-B eventual signed-fifth
+  nonnegativity remain open. The older pole-quotient Off/Gamma allowance
+  compiler remains reusable. The determinant/window-Schur lane remains
+  diagnostic and non-terminal. RH remains unproved.
+
+- Reused the existing Feynman/TSFV derivation and experimental-source owners.
+  `Unified.Physics` now exposes their exact non-promotion boundary through
+  `Unifier` and the TOE root. The architecture is compatible with the
+  Feynman layer and the structural nonseparable action is derived. Justified
+  history realization and action/phase calibration remain open. TSFV does not
+  currently derive the Feynman propagator. The finite-path experiments do not
+  validate TSFV. Stationarity is not promoted to minimum or metric-shortest
+  path.
+
+- `dashi_lean4` mirrors the golden residual-budget/allowance grammar and the
+  Feynman non-promotion status under `AgdaMirror`. Lean does not own route
+  authority. No ESD surface changed. No new Fleet formal-gap identity was
+  asserted.
+
 # 2026-07-17 NS target interaction-closure instrumentation
 
 - Paused further production runs to freeze evidence authority and comparison
