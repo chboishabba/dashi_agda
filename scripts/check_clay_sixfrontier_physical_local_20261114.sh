@@ -122,6 +122,7 @@ fi
 (cd "$LEAN_ROOT" && lake env lean Synthesis/ClaySixFrontierRollup20261114.lean)
 (cd "$LEAN_ROOT" && lake env lean Synthesis/RiemannSignedFifthEventualThreeProducerRollupExact.lean)
 (cd "$LEAN_ROOT" && lake env lean Synthesis/NavierStokesR854RealTimeIntegratedRateConditionalExact.lean)
+(cd "$LEAN_ROOT" && lake env lean Synthesis/NavierStokesR734PurePlusW2NoGoScalarExact.lean)
 (cd "$LEAN_ROOT" && lake env lean Synthesis/NavierStokesR855SharpRealTimeConditionalExact.lean)
 
 echo "SOURCE_KERNEL_TARGETS_PASSED: review transitive axioms, --safe, golden pinned toolchains"
