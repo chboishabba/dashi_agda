@@ -389,3 +389,68 @@ The new **real implementation** at #1478 (pinned through `a7601784d83c7857fc6e6f
 **Status discipline:** this is an exact proof **reduction** and source-written proof consumer, NOT an inhabited dyadic law. The local 13-target eta checker, 100-target Bishop golden checker, analytic two-leaf construction, full local Agda 2.9 kernel receipt, source log multiplicativity, complex exp addition, compact-uniform eta and RH are all still either unrun or unresolved as specified. The 11-lane machine ledger stores this under `BISHOP-ETA-EXP.p2_dyadic_source_reduction`, and `check_dashi_all_lane_source_donors.py` explicitly fails on any unauthorized promotion of those leaves or endpoint. P1.L true-norm and selected 8/27 original Bishop theorem on the same branch remain root-calculus-conditional, not kernel-accepted.
 
 **Other lanes unchanged:** Karp-21 physical parser/heap/bit-clock and original InNP; BSD actual local Kummer/Sha/rank/L-series; NS time-integrated real-time rate; RH original Weil off-line exclusion; Hodge cycle-class naturality; YM original Wilson physical RG/continuum and common spectral gap; World authoritative native proof admission and Postgres source-preserving join; VOA Monster quotient/Griess/VOA; biology genuine physical reaction-diffusion; Cybersyn empirical calibration all remain their prior independently gated obligations.
+
+
+## 14 November 2026 — multi-PR convergence implementation, latest donors and source-correct L7
+
+### Portfolio integration is preferable to automatic bulk merging
+
+The linked GitHub connector returned 280 open \`dashi_agda\` PRs (103 reported mergeable, 177 not), plus 59 open \`dashi_lean4\` PRs and two open \`agda2lean\` PRs. These counts are NOT Agda or Lean acceptance. Do not batch-click merge for 280 PRs: some branches are divergent continuations, duplicate the same source under different heads, or contain conditional receipts/old interface names. The original branch and first-source timestamp should remain recoverable even after merge.
+
+**Actual code on this PR:** \`Docs/roadmaps/ClayPortfolioPinnedIntegration20261114.json\` pins the 15 highest-value Agda and seven Lean PR donors, distinguishes nine do-not-reopen formal producers, and specifies eleven outstanding joins. \`scripts/plan_clay_multi_pr_integrations.py\` performs a strictly read-only local exact-git-blob / merge-base collision audit against pinned SHAs, with optional pairwise \`git merge-tree --write-tree\` tests. \`tests/test_plan_clay_multi_pr_integrations.py\` contains four synthetic-git negative/positive cases for identical donor bytes, divergent source, missing SHA and duplicated/bad pin. This is preparatory implementation, **not actual PR merges**, and not a kernel or Clay theorem receipt.
+
+One known integration ordering: Agda #1495 was originally branched from #1494's exact head. Merge or faithfully port #1494 native-admission prerequisites before #1495 builder work, then independently admit #1484 Postgres world ingestion. Keep Lean/Agda kernel checks separate. Do not blindly overwrite same-path differences.
+
+**Recommended merge waves:**
+
+1. Freeze source branch heads, original first-implementation commits and external authorship; classify exact blob identity and use \`git merge-tree\` to find conflicts. Verify toolchains/lock files remain pinned.
+2. Merge small independent infrastructure, no mathematical promotion. Integrate #1494 → #1495, then #1484 with database rollback and bounded-memory regressions. Promote donor files only with local Agda 2.9 or Lean pinned receipts.
+3. Co-locate proof producers *within each Clay lane* and pass actual source-alignment tests. For Bishop #1408 → #1478, ten original modules were already transferred by Git blob SHA: avoid double-transplant; target the real Nat-log and complex exp-add leaves. For YM #1444+#1498, reuse the 1024-link F19 Wilson partition and original four-sector diagram owners, but do not claim this proves P0.F three-moment cutoff-uniform estimates. Karp #1445+#1474; BSD #1500 + Lean #107; NS #1501 + Lean #109; RH #1497+#1408+Lean #108; Hodge Lean #40 is ALREADY MERGED.
+4. Join cross-lane candidate transports only after exact theorem statement, carrier equality, source correspondence, bounds/clock and trust checks. Keep VOA/Monster, KK/TSVF, Lean-world, and proof-automation lanes visible as donor families rather than inventing additional Clay endpoints.
+
+**Attribution contract:** \`AGENTS.md\`, \`Docs/SourceAttributionPolicy.md\` and \`DASHI.Core.FirstImplementationTimestampExact\` distinguish original publication (DOI/URL), first-source commit/time, source transcription, formal proof, cross-programme mathematical extension, pinned kernel check and merge chronology. Source inputs include Martin Lundfall, *Formalizing Real Numbers in Agda* (2015, https://ncatlab.org/nlab/files/Lundfall-RealNumbersInAgda.pdf), Zachary Murray, *Constructive Analysis in the Agda Proof Assistant* (2022, arXiv:2205.08354, https://doi.org/10.48550/arXiv.2205.08354), the pinned Viktor Csimma Bishop software, and standard Cubical Agda (Vezzosi/Mörtberg/Abel 2019, DOI 10.1145/3341691). The repo already has both Cubical and DCHoTT toolchains pinned. The existing \`CubicalHoTTRealBackendBoundary\` says not to silently replace the Bishop setoid carrier with a quotient. DCHoTT \`--cohesion\` and Cubical flags must remain in separate compilation lanes. A quotient path changes the equality model; the legacy propositions do not become verified merely because their \`rewrite\` syntax can be rephrased.
+
+### Source-specific corrections to the attached L1–L7 list
+
+- L1: \`OriginalFourPhysicalTwoJetReceipt\` is not enough by name; the actual indexed Wilson plaquette, reduced Faddeev–Popov, Fourier/Haar and cutoff-dependent source must be used, with an original signed remainder. The 240 regular cells are an already defined **finite** geometry (of 256); their enumeration is not a uniform continuum bound.
+- L2: the selected \`CMP116\` analytic radius is not automatically a global injectivity radius or invertibility theorem for \`dexp\` on all group elements. Use the actual small-field chart, fluctuation norm, scale/volume domain and marked sources from its source.
+- L3: the compact-group heat/Doob construction is on finite products \`G^E\` with a chosen original Gibbs density. Requiring a global heat semigroup on a smooth \`A/G\` quotient, or Gribov-free continuation before doing the finite heat calculation, changes the research target and is not justified by the original Round87 specification. The hard physical bound is same-density integrated negative Hessian/curvature debt and spatial influence, uniform in cutoff.
+- L4: \`F_{mu nu}\` transforms gauge-*covariantly*, not invariantly. \`Tr(F^2)\` and suitable Wilson/composite observables are invariant. Do not choose an unrenormalized plaquette limit as a theorem without source-specific normalization.
+- L6: a zero-tensor proxy in an unrelated \`FactorVec\` receipt does not show the original YM metric-variation source is zero. Source owner \`BalabanDensityAnchoredStressLaneRound123Exact\` and pinned CMP119 insertions demand the original nontrivial density-derived stress tensor.
+- L7: OS already yields a **positive self-adjoint** \`H_OS\` if the full reconstruction hypotheses hold. A separate Nelson analytic-vectors construction for \`H_OS\` is NOT a prerequisite; the open physical theorem is the Ward/domain identification of the renormalized stress charge with the SAME \`H_OS\`. The real-time unitary group follows from the spectral calculus, not from a Euclidean semigroup being unitary.
+
+### L7 improved graph-core route: positive-time OS smoothing
+
+On one reconstructed Hilbert space \`Hcal\` with a positive self-adjoint \`H=H_OS\`, set \`T(t)=exp(-t H)\`, t>=0. Let \`D0\` be a **dense** set of OS-local vectors in \`Hcal\`, and define
+
+\`\`\`
+D_smooth := span{ T(epsilon) phi : epsilon > 0, phi in D0 }.
+\`\`\`
+
+Because \`H T(epsilon)\` is bounded for every epsilon>0 (by spectral calculus) and \`T(epsilon)\` is strongly continuous and commutes with \`H\`, \`D_smooth\` is a **graph core** for \`H\`: first approximate an arbitrary \`psi in D(H)\` by \`T(epsilon)psi\` in graph norm as epsilon decreases, then approximate \`psi\` in H by \`phi_n in D0\`, and boundedness of \`T(epsilon)\` and \`H T(epsilon)\` lifts these approximants to the graph norm for each fixed epsilon. This is an ordinary self-adjoint functional-calculus theorem, *conditional on the actual OS reconstruction/density premises*, not an unproved Clay-specific spectral theorem.
+
+The remaining original **physical** step is to construct the renormalized integrated density-anchored charge \`Q\` (from the SAME CMP119 T00) with the domain containing \`D_smooth\`, and prove the source Ward identity as a *strong* derivative equation on it:
+
+\`\`\`
+  Q psi = - lim_(t downarrow 0) (T(t) psi - psi)/t
+          = H_OS psi  for psi in D_smooth.
+\`\`\`
+
+Then \`Q|D_smooth\` is essentially self-adjoint *automatically* because it agrees with \`H|D_smooth\` on a graph core. If \`Q\` is the physical self-adjoint charge extending that restriction, maximal self-adjointness implies \`Q=H\`. Equivalently require that Q is the closure of this core action. The major new mathematics is building this source stress charge and proving the actual Ward strong identity uniformly through the cutoff/continuum limit, **not** independently proving Nelson analyticity of the already reconstructed OS \`H\`. A distributional Ward identity cannot be declared a strong operator derivative without a domain/limit proof.
+
+Existing \`YangMillsStressWardCommonCoreGeneratorExact\`, \`YangMillsClayPinnedCMP119StressCommonCoreExact\` and \`YangMillsClayPinnedCMP119Round109ToCommonCoreExact\` provide the conditional closure algebra/owner. PR #1444's \`YangMillsStressOSSourceFirstSemigroupCoreToClosureExact\` supplies the source-first formalization of the same \`-d/dt T(t)\` core action. **No original \`Q\` input currently inhabits that final physical source.**
+
+### Exact decision cuts across the Clay programmes after donor reuse
+
+| Lane | Existing paid producer to reuse | Minimum remaining *genuine* original mathematical obligation |
+| --- | --- | --- |
+| YM | Original physical 1024/64/896 F19 partition and two-marked source (#1444); indexed P0 AST and B4 (#1498); density stress / common OS closure compiler | Three nonconstant F,G,FG uniform RG moment differences, CMP116 differentiated and compact-group heat debt estimates; interacting continuum and nonvacuum gap; source physical OPE/stress/Ward; N1, all compact simple G |
+| NS | Exact zero-output triad refutation R847, nonzero support R848 (#1501), R436 zero nonlinearity, R849–R853 original finite rate owners | Original R736 signed collar/remote flux inequality and time-integrated R828/R829 real trajectory reserve sufficient for all 3D data; external R3 comparator welds separately |
+| RH | G1 algebra, selected signed residual and A1 shell data; #1497 Bishop/odd witnesses and Lean #108 signed fifth *negative* control | Exact source G3 strict residual or valid equivalent Weil positivity/zero-exclusion, including legitimate uniform off-line compensation |
+| P vs NP | Original SAT fixed-instance quantifier no-go on #1499, Karp-21 signed corpus/Conway/FRACTRAN source (#1445,#1474) | Universal polynomial SAT lower bound \`forall D exists F\`; Karp bit-machine clock and NP membership are separate formalization gates, NOT lower bound |
+| Hodge | Native \`RationalAlgebraicCycle\` and rational class map; genuine Lean cycle/correspondence PR #40 is merged | Universal rational (p,p) class algebraic cycle representative across all smooth projective complex varieties; CP1 alone cannot discharge it |
+| BSD | Source Kummer 16→8→4 and level-32 genus-one/Fricke route (#1500); Lean Stoll/Hecke source (#107) | Exact E(Q)/2E–Sel2–Sha[2] local/global theorem, rank and L(E,1) on actual E; odd-primary Sha and full leading coefficient; general BSD stronger |
+| Bishop/eta/Koenigs | Original factorial/native exp theorem, finite eta source and donor transfer #1408→#1478 | Actual source canonical Nat log multiplicativity, native complex exp addition, eta compact-uniform limit, full local Newton/Koenigs proof and global continuation |
+| Other support | Monster Y443/VOA #1472, TSVF/KK #1460, Lean world #1494/#1495/#1484 | Genuine full VOA/Griess and physical KK source; authoritative Lean proof admission/source-identity; not already a YM/NS/RH/BSD theorem |
+
+**Conclusions:** the repository is more advanced in proof infrastructure and original finite theorems than a YM-only six-family list conveys. The outstanding global Clay claims remain open mathematical problems; many immediate donor/source welds can be substantially reduced by merging verified exact-head artifacts, as this ledger now records.
