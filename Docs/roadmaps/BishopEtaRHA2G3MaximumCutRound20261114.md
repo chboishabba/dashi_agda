@@ -97,9 +97,25 @@ divisor/removable-singularity handling for a zeta quotient claim.
 ## RH A2 — source-selected witness is NOT the attachment's bump
 
 The actual Lean #50 source is
-`QuarticFourSignedPolePair t`, with
-`W.fourthLipschitz` defined from its compact-cosh G1 owner
-and source-owned `W.targetStrength`. The already proved
+`QuarticFourSignedPolePair t`, with source-owned `W.targetStrength`.
+**Previously paid G1 progress:** the donor
+`RiemannProjectiveQuarticFourWindowSignedPoleQuantitativeBand.lean`
+defines `W.fourthLipschitz =
+compactCoshFourthLipschitzConstant (quarticFourSignedPoleCombinedProfile
+W.R W.muHalf W.muTwo t)`, where the compact-cosh constant is the
+**actual fifth absolute moment**
+`∫ |P(u)| cosh(|u|) |u|^5 du`.
+It already proves
+`W.fourthLipschitz_le_explicitK0` for t≥200,
+`quarticSignedPoleExplicitK0_lt_four_billion`, and
+`quarticSignedPoleThresholdBelowPlattTrudgian_proved`, compiling
+a quantitative G1 strip band above the PT cutoff. **Do not erase
+these original G1 results or treat K as entirely unconstructed.**
+They are source-written existing theorems and still require the
+relevant exact-head kernel receipts before formal acceptance.
+
+The next A2 task is a MUCH SHARPER same-witness K estimate, not merely
+a finite coarse K. The already proved
 leading local comparison is exactly
 
 `W.postSixthTerminalLeadingAllowance < W.targetStrength
@@ -113,6 +129,10 @@ the required `Lip(W'''')`, and is not a source certificate
 for the current selected W. This number is also *larger*
 than the floor sufficient ceiling; even treating it as the
 same quantity would not discharge the sufficient inequality.
+The previously paid coarse G1 bound `K0<4e9` also does NOT
+satisfy the A2 sufficient ceiling ~737.365. Sharpen the
+*constructed selected* profile estimate (possibly its fifth
+absolute moment) or restore signed eighth-order cancellation.
 
 The exact source `FarExact` is the signed
 `FarBaseExact + FarHorizontalExact` split with an explicit
