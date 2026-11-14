@@ -6,6 +6,7 @@ on:
       - 'DASHI/Wikimedia/IbrahimFiniteOrbitRevisionWeldExact.agda'
       - 'DASHI/Wikimedia/IbrahimMultilingualHyperfabricWeldExact.agda'
       - 'DASHI/Wikimedia/IbrahimPublishedSevenNodeFunnelExact.agda'
+      - 'DASHI/Wikimedia/IbrahimGeneralFiniteCertificateKernelExact.agda'
       - 'DASHI/Wikimedia/IbrahimFiniteFigureBasinCertificateExact.agda'
       - 'DASHI/Wikimedia/IbrahimITIRConsumerRepairExact.agda'
       - 'scripts/ibrahim_fln_reference_analysis.py'
