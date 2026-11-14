@@ -45,6 +45,14 @@ record BishopSameSourceHeatExpectation
     expectation :
       Time → Background → (Background → Bishop.ℝ) → Bishop.ℝ
 
+    -- The actual compact-group/Haar expectation must preserve Bishop's
+    -- mathematical equality, not structural Cauchy-sequence equality.
+    expectationRespectsSetoid :
+      ∀ t background f g →
+      (∀ y → Bishop._≃_ (f y) (g y)) →
+      Bishop._≃_ (expectation t background f)
+        (expectation t background g)
+
   asPostulateFreeAlgebra :
     Core.SameSourceHeatDoobAlgebra action Time
   asPostulateFreeAlgebra = record
@@ -59,3 +67,38 @@ open BishopSameSourceHeatExpectation public
 -- The remaining REAL physical obligation is to derive the finite-cutoff
 -- normalized Haar/heat expectation above from the SAME Wilson density
 -- with analytic derivative, source equality and positivity proofs.
+
+
+
+-- Actual nontrivial algebraic transport: covariance is extensional in
+-- BOTH test functions, using the proved Bishop algebra congruences.
+-- The one source-level analytic premise is expectationRespectsSetoid;
+-- no new equality axiom, postulated real, or finite-measure theorem.
+bishopCovarianceRespectsSetoid :
+  ∀ {Background Tangent Time}
+    {action : BishopDifferentiatedAction Background Tangent}
+    (source : BishopSameSourceHeatExpectation action Time)
+    t background f f' g g' →
+    (∀ y → Bishop._≃_ (f y) (f' y)) →
+    (∀ y → Bishop._≃_ (g y) (g' y)) →
+    Bishop._≃_
+      (Core.covariance (asPostulateFreeAlgebra source) t background f g)
+      (Core.covariance (asPostulateFreeAlgebra source) t background f' g')
+bishopCovarianceRespectsSetoid source t background f f' g g' ff' gg' =
+  let
+    productCong = λ y → BishopProperties.*-cong (ff' y) (gg' y)
+    productExpectation =
+      expectationRespectsSetoid source t background
+        (λ y → Bishop._*_ (f y) (g y))
+        (λ y → Bishop._*_ (f' y) (g' y))
+        productCong
+    firstExpectation =
+      expectationRespectsSetoid source t background f f' ff'
+    secondExpectation =
+      expectationRespectsSetoid source t background g g' gg'
+    meanProductCong =
+      BishopProperties.*-cong firstExpectation secondExpectation
+  in
+  BishopProperties.+-cong
+    productExpectation
+    (BishopProperties.-‿cong meanProductCong)
