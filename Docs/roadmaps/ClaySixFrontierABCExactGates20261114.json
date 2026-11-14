@@ -1703,5 +1703,77 @@
       "complex parameter derivative confused with real-axis FTC derivative",
       "locally uniform eta convergence alone does not prove all zeta divisor/removable singularities"
     ]
+  },
+  "implementation_round_20261114_7": {
+    "date": "2026-11-14",
+    "scope": "Bishop eta Track 5 and RH A2/G3 Track 6 attachment; exact source audits and finite implementations",
+    "trust": "source-written and rational exact regressions, no pinned Lean/Agda kernel receipts",
+    "latest_owner_branches_at_audit": {
+      "bishop": "#1478 chatgpt/analytic-j-tetration-abel-transport",
+      "rh_agda": "#1499 chatgpt/clay-20261112-four-frontier-fail-closed",
+      "rh_lean_a2": "#50 agent/rh-postmerge-maxcut-20261007",
+      "rh_lean_fifth": "#108 chatgpt/clay-continuous-fifth-sign-20261112"
+    },
+    "bishop": {
+      "implemented": "scripts/check_bishop_trig_cauchy_coefficients_20261114.py",
+      "reused": [
+        "scripts/check_bishop_eta_all_cutoffs_maxcut_20261114.py",
+        "scripts/check_bishop_original_natlog_dyadic_remainder_20261114.py",
+        "DASHI/Analysis/BishopOriginalEtaRawAllCutoffPrefixExact.agda"
+      ],
+      "finite_results": {
+        "trigonometric_cauchy_rational_cases": 936,
+        "even_factorial_tail_envelopes": 1300,
+        "prior_original_raw_cutoff_cases": 167481,
+        "prior_natlog_geometric_cases": 400
+      },
+      "new_agda_kernel_receipt": false,
+      "original_cosine_addition": false,
+      "original_sine_addition": false,
+      "original_canonical_log_dyadic": false,
+      "original_FTC": false,
+      "original_eta_uniform_convergence": false,
+      "precise_next": [
+        "originalBishopTrigRectangleTriangleCommonLimit",
+        "originalCanonicalNatLogDyadicAddition",
+        "originalRound11DirichletTermFundamentalTheorem",
+        "originalRound11EtaCompactUniformConvergence"
+      ]
+    },
+    "rh": {
+      "agda_diagnostic": "scripts/check_rh_a2_g3_attachment_maxcut_20261114.py",
+      "lean_candidate": "Synthesis/RiemannA2G3PoleAndSignedHeatNegativeControls.lean on #108",
+      "roadmap": "Docs/roadmaps/BishopEtaRHA2G3MaximumCutRound20261114.md",
+      "exact_controls": {
+        "near_pole": "a=1/4,b=1/2,Re[(a+ib)^-2]=-48/25",
+        "far_pole_negative_cases": 55,
+        "two_mode_mobius_signed_negative_cases": 16,
+        "selected_witness_fourth_lipschitz_source_certified": false
+      },
+      "corrected_even_W_Taylor": "For real even W, odd horizontal terms vanish in Re transform; even a single translate has O(a^4) remainder",
+      "false_proposed_promotions": [
+        "local pole positive floor for all |vertical|<1",
+        "fourth derivative sup for generic smooth bump equals selected W fourthLipschitz",
+        "far original source signed as bare inverse-square sum",
+        "unbounded log far debt and bounded compensation demonstrated for original zeros",
+        "Möbius (+,-) two mode positive; in fact strict negative",
+        "surrogate Gaussian heat signed fifth identified with original physical cap"
+      ],
+      "original_selected_A2_compensation_no_go": false,
+      "original_strict_compensation": false,
+      "original_routeB_eventual_gap": false,
+      "zero_shell_far_bound": false,
+      "uniform_selected_fourth_lipschitz": false
+    },
+    "remaining_original_high_alpha": [
+      "BISHOP:OriginalCosineAddition/SineAddition -> finite-source limit",
+      "BISHOP:OriginalDyadicNatLogLaw on negative-log source",
+      "BISHOP:real-axis derivative and FTC -> all raw-prefix compact uniform Cauchy",
+      "RH:selected witness fourthLipschitz and FarHorizontal CH",
+      "RH:actual zero-cofinal completed compensation strict sign or same-source reverse",
+      "RH:original signedFifthPhysicalCapInteriorAt eventual lower bound, boundary decay, terminal convergence"
+    ],
+    "kernel_checked_new_theorems": 0,
+    "original_rh_or_eta_endpoints_closed": 0
   }
 }
