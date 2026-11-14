@@ -761,3 +761,27 @@ Official Neptoon documentation (https://www.neptoon.org/en/latest/user-guide/par
 | D1/D2 | Curved Einstein–massless-scalar spacelike S1 solution and rational Friedmann source | Kernel full metric/tensor calculus, model-specific KK/observer weld, actual empirical transport |
 | E1 | Exact Movebank original independent provider MD5, real human AMS/NH curves | Original downloaded treatment-linked GPS/FASTQ, human diet/fractionation/assay calibration |
 | E2 | Source-conditional Poisson bound and isotope effect-size model | Genuine same-specimen controlled counts, measured exposure upper limits or conditional physical exclusion |
+
+### T7.P0 exact MMS1–4 official acquisition wiring
+
+The original SDC direct downloader was MMS1-only and could not supply four-probe geometry. The same existing script now supports --probe 1/2/3/4 and --products fgm (or default FGM+EDP+FPI), with per-probe original LASP source file listings, SHA-256 receipts and CDF Epoch-overlap checks.
+
+New scripts/ksw668_mms4_merge_original_fgm_receipts.py turns FOUR actually downloaded FGM receipts into the schema required by scripts/ksw668_mms4_fgm_ephemeris_bridge.py after re-verifying actual raw CDF bytes, probe, date and source file patterns. On a networked host with numpy/cdflib:
+
+    for probe in 1 2 3 4; do
+      python3 scripts/ksw668_mms_sdc_direct.py \
+        --probe "$probe" --products fgm --execute \
+        --cache data/mms_original_SDC_20170617 \
+        --receipt "data/mms_original_SDC_20170617/mms$probe.fgm.json"
+    done
+
+    python3 scripts/ksw668_mms4_merge_original_fgm_receipts.py \
+      --cache data/mms_original_SDC_20170617 \
+      --receipts data/mms_original_SDC_20170617/mms{1,2,3,4}.fgm.json \
+      --out data/mms_original_SDC_20170617/mms4_fgm_original_manifest.json
+
+    python3 scripts/ksw668_mms4_fgm_ephemeris_bridge.py \
+      --manifest data/mms_original_SDC_20170617/mms4_fgm_original_manifest.json \
+      --out data/mms_original_SDC_20170617/mms4_original_GSE_ephemeris.json
+
+Only original positions and their timestamps follow. The B2 boundary still needs original source-qualified four-probe E/B/J, error and quality flags, a common field frame and synchronized event epochs. The finite-volume source program always reports a model, not a verified physical measurement. MMS FGM original guide documents mms#_fgm_r_gse_brst_l2 [km] and Epoch_state; survey cadence is not burst measurement.
