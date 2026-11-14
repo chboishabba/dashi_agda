@@ -1816,5 +1816,141 @@
     "agda_kernel_accepted": false,
     "original_eta_uniform_convergence_proved": false,
     "authoritative_Clay_endpoint_closed": false
+  },
+  "implementation_round_20261114_9": {
+    "date": "2026-11-14",
+    "scope": "Six-frontier source implementation and exact local diagnostics: original gates preserved fail-closed",
+    "YM": {
+      "owner_PR": "#1503",
+      "finite_implementation": "scripts/check_ym_r445_interacting_transfer_contraction_20261114.py",
+      "additional_owner": "scripts/check_ym_r445_weighted_exterior_influence.py",
+      "tested": {
+        "binary_interacting_transfer_distances": 41,
+        "exact_geometric_tails": 30
+      },
+      "new_source_compiler": "Interacting binary Markov kernel 3/4,1/4 has D_k=(1/2)^k; analogy only",
+      "original_SU_N_Wilson_conditionals_proved": false,
+      "physical_D_k_proved": false,
+      "cutoff_uniform_RG": false,
+      "E1": false,
+      "D1": false
+    },
+    "Karp": {
+      "owner_PR": "#1502",
+      "agda_candidate": "DASHI/Mathematics/Complexity/Karp21NativeGammaPhysicalAcceptanceObservationExact.agda",
+      "diagnostic": "scripts/check_karp21_literal_gamma_allwords_20261114.py",
+      "runner": "scripts/check_karp21_allwords_physical_local.sh",
+      "tested": {
+        "all_binary_words_length_up_to_14": 32767
+      },
+      "actual_positive_payload_parser_observation_source_written": true,
+      "malformed_zero_empty_rejection_source_written": true,
+      "kernel_checked": false,
+      "all_input_physical_parsing_closed": false,
+      "physical_N21_F3": false,
+      "complete_heap_F2": false,
+      "polynomial_clock_F4": false,
+      "original_InNP": false
+    },
+    "BSD": {
+      "owner_PR": "#107 dashi_lean4",
+      "lean_candidates": [
+        "Synthesis/MillenniumBSDCMQ2AllOddUnitHenselExact.lean",
+        "Synthesis/MillenniumBSDCMQ2ActualCurvePointAt39Exact.lean",
+        "Synthesis/MillenniumBSDCMQ2EightLocalPointWitnessesExact.lean"
+      ],
+      "diagnostic": "scripts/check_bsd_q2_eight_squareclasses_20261114.py",
+      "runner": "scripts/check_bsd_q2_hensel_3705_local.sh",
+      "original_E": "y^2=x^3-x",
+      "eight_distinct_original_rational_x_Q2_local_point_witnesses": [
+        "28",
+        "31",
+        "33",
+        "39",
+        "41",
+        "112",
+        "1/4",
+        "1/16"
+      ],
+      "squareclass_coordinate_triples": "(squareclass(x-1),squareclass(x),squareclass(x+1)), each (v2 mod2,odd_unit mod8) and all eight are distinct",
+      "odd_units_with_Hensel_root": [
+        5481,
+        465,
+        561,
+        3705,
+        4305,
+        87801,
+        -15,
+        -255
+      ],
+      "integer_x_window": [
+        -16384,
+        16384
+      ],
+      "integer_x_q2_compatible_cases": 2732,
+      "distinct_integer_slice_classes": 6,
+      "nonintegral_witnesses_add_new_classes": 2,
+      "lean_kernel_acceptance": false,
+      "all_eight_actual_H1_classes_proved": false,
+      "local_Kummer_image_transport": false,
+      "continuous_Kummer_to_Sha2": false
+    },
+    "NS": {
+      "owner_PR": "#1501",
+      "diagnostic": "scripts/check_ns_r853_quadratic_lie_derivative_20261114.py",
+      "symbolic_original_rate_normal_form": "6*(12*C-P+D) at nu=delta=1",
+      "exact_sparse_polynomial_lie_derivative": "sum_i partial_i(r)*F_i with rational coefficient box bound",
+      "tests": 2,
+      "original_R71_to_complete_real_field": false,
+      "real_Galerkin_trajectory": false,
+      "along_solution_R853_identity": false,
+      "true_R828_R854_rate_Lipschitz": false,
+      "original_integrated_negative_rate": false
+    },
+    "Bishop": {
+      "owner_PR": "#1478",
+      "agda_candidate": "DASHI/Analysis/BishopOriginalEtaRawSeriesOfSameSourceExact.agda",
+      "existing_predecessors": [
+        "DASHI/Analysis/BishopOriginalEtaRawAllCutoffPrefixExact.agda",
+        "DASHI/Analysis/BishopOriginalEtaFiniteAbelSourceExact.agda"
+      ],
+      "runner": "scripts/check_bishop_eta_native_exp_cross_pr_local.sh",
+      "kernel_target_roots": 16,
+      "literal_raw_re_im_prefix_to_Murray_Sequence_SeriesOf_source_written": true,
+      "kernel_checked": false,
+      "canonical_Nat_log_increment_sandwich": false,
+      "trig_addition": false,
+      "eta_geometric_variation": false,
+      "derivative_FTC": false,
+      "eta_uniform_convergence": false
+    },
+    "RH": {
+      "owner_PRs": [
+        "#108 dashi_lean4",
+        "#1499 dashi_agda"
+      ],
+      "lean_candidate": "Synthesis/RiemannA2ActualSelectedIntervalDecisionExact.lean",
+      "diagnostic": "scripts/check_rh_original_a2_interval_maxcut_20261114.py",
+      "runner": "scripts/check_rh_a2_g3_attachment_local.sh",
+      "exact_signed_gap": "compensationTargetThreshold + localMuGain - localPositiveDebt - literalFarExactAt; same original W,rho,EV,n",
+      "finite_interval_cases": 4,
+      "compiler_pass_source_intervals": true,
+      "compiler_cofinal_nogo_source_intervals": true,
+      "actual_selected_fourth_Lipschitz_sharp_bound": false,
+      "actual_selected_horizontal_far_curvature_CH": false,
+      "actual_zero_cofinal_signed_compensation": false,
+      "actual_same_source_no_go": false,
+      "actual_fifth_gap_sign": false,
+      "boundary_decay_and_outer_terminal": false,
+      "RH": false
+    },
+    "acceptance": {
+      "finite_checks_all_passed": true,
+      "source_written_lemmas_are_not_kernel_acceptance": true,
+      "agda_lean_nix_available_here": false,
+      "queried_PR_workflow_receipts": 0,
+      "Clay_endpoints_closed_this_round": [],
+      "open_physical_analytic_leaves_are_not_proved": true
+    }
   }
 }
