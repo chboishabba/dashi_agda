@@ -1041,3 +1041,48 @@ bash scripts/run_native_schaka101_lila.sh \
 ### E8/Leech code-theoretic donor check — ternary versus binary Golay
 
 Checked `DASHI/Foundations/TernaryGolay/ExplicitCode729.agda`, `CompleteWeightEnumerator.agda`, `GolaySelfDualSubspace.agda`, `CoxeterToddRoutesBoundary.agda` and `DASHI/Moonshine/VNaturalOrbifoldConstruction.agda`. The existing 729-message ternary Golay code and composition count proofs are a genuine finite `F₃` donor with explicit duality and three-symbol structure; however **the extended binary Golay code used in a standard 24-dimensional Leech lattice construction is a distinct carrier**. A 12-symbol ternary self-dual code cannot be silently substituted for the binary length-24 Golay code or for a proof of Leech rootlessness. The Coxeter–Todd and FLM orbifold modules expose relevant separate boundaries; `VNaturalOrbifoldConstruction` supplies a typed conditional assembly, not completed locality/Jacobi/Monster VOA existence. Next M2c should identify the exact existing binary Golay 24-bit carrier, or construct one with its own weight enumerator, lattice glue and norm checking. The ternary Golay 729 proof remains reusable for C3 semantics and Coxeter–Todd comparisons, without importing false Leech isomorphisms.
+
+---
+
+## 2026-11-14 native C2/C3 action and full recurrent-history decisive receipts; next repair max-cut
+
+**New original user-run evidence (RX580, HIP 7.16)** updates the earlier B2/C1 unknowns without creating new programme gates. DASHI finite E8/Leech source arithmetic tests **5/5 PASS**, Leech source contract suite **29/29 PASS** *at time of run*, and original-checkpoint router/history audits now have source-specific physical receipts. The newest additional history-cap unit tests/source are committed *after* those 29/29 and are **not yet host verified**.
+
+- `c2c3_source_action_audit.json`: actual trained model is **`moe_route_geometry="c2_invariant"`**, 12 layers, 4 experts, top2. Empirical selected IDs/top-k weights invariant under antipodal sign in all twelve layers, maximum absolute weight delta **0.0**. Under cyclic triad C3 rotation, all twelve trained original routers change selected expert IDs/weights (max delta in ~0.065–0.189); reflection changes weights ~0.038–0.187. This is a seeded synthetic-hidden-state router action probe; the model is not thereby globally C2-equivariant, and no C3 or S3 trained intertwiner is present. The key consequence for Sophontic: **C2 permits C3 as representational capacity, but this specific checkpoint never trained a C3-invariant router**.
+- `actual_student_history_32.json`: original full strict student-only KV+history transitions were actually run on 32 consecutive source tokens, with learned expert-bias included in margin calculation. Layer10 final RMS **251.07**, max **1212.2051**, margin **278.5124**; layer11 final RMS **10990.6821**, max **42608.7734**, margin **27628.9336**. Layer11 RMS step1 **0.3162**, step16 **46.2432**, step32 **10990.6821**. Layers0–9 remained below RMS 0.9 **for this one input/32-step trace**, not a global bound. These numbers now establish large state growth in an **actual recurrent student**, not just previously noted teacher-forced local proxy. Token choices were data/source-sequence forced by default, although model histories were genuinely recurrent; a free-running greedy continuation remains a separate control.
+- **Correction of an overstrong interpretation:** 32 observed steps of a nonlinear, expert-switched, input-driven recurrence do not imply a well-defined fixed linear transition matrix `A` with `ρ(A)>1`, still less a proved spectral-radius lower bound. We have witnessed rapidly growing norms, severe downstream top-k margin saturation, and a potential dynamical quality hazard. To claim local Jacobian gain/spectral radius, evaluate the actual selected-transition Jacobian on recorded states or prove a source-specific bound; routing changes make global differentiability conditional.
+
+**New exact source intervention owner** in Leech PR #4: `scripts/screen_c2_history_even_repair.py`, `tests/test_c2_history_even_repair.py`, allowed launcher and consolidated contracts. This implements an **inference-only reversible** controlled intervention grid, ranked entirely on original train-derived **development** rows from verified receipt (not heldout):
+1. Layer10/11 selected history transition cap `h→h min(1,R/||h||)` with R=1,4,16,64; exact finite invariant `||h_e(t)||≤R` for initially bounded histories, because selected states are clipped and unselected states are copied. C2 antipodal oddness is preserved because the radial clip is odd. This is a post-transition bound on *retained* state, not a spectral-radius theorem or a guarantee of bounded intermediate FFN activations.
+2. Layer10/11 attenuation `h→αh` α=0.1 or 0.5 for comparison. Attenuation without cap is not a general nonlinear stability proof.
+3. Layer0/1 even-channel output scaling β=0,.5,.75,1.25,1.5, separate and small combined controls, to test whether early-layer odd/even cancellation actually hurts full student CE.
+4. All intervention candidates evaluated as original strict student-only **full development CE** from the SAME immutable pretrained candidate; no retraining, no checkpoint replacement, no independent heldout model selection, and no claimed improvement until physical measurement.
+
+Run after pulling latest Leech PR #4:
+```bash
+cd /home/c/Documents/code/DASHIg/LeechTransformer
+bash scripts/check_c2_quality_maxcut.sh
+ROOT=/mnt/truenas/comet-net/experiments/lila_quality_curriculum_20261113
+bash scripts/run_native_schaka101_lila.sh \
+  --module scripts.screen_c2_history_even_repair -- \
+  --candidate "$ROOT/candidate.pt" \
+  --teacher "$TEACHER" --config "$CONFIG" \
+  --train-ids "$TRAIN_IDS" --curriculum-receipt "$ROOT/candidate.json" \
+  --batch 1 --output "$ROOT/c2_history_even_dev_repair_screen.json"
+```
+Use the **already existing original** source teacher/train/config actual paths; do not invent or overwrite artifacts. `--config` can be omitted if embedded. **The user has not reported running this new repair screen**; acceptance pending.
+
+### Revised phase scoreboard and proof/experiment targets
+
+| Phase | Changed status | Next accountable source exit |
+|---|---|---|
+| A3 E8/Leech theta | Finite exact integer 5/5 PASS, not all-index | `thetaE8EqualsE4SameCarrier`, `thetaLeechEqualsDeltaTimesJPlus24`, `e8EpsteinZetaMellinFactorization`: same-object infinite theta, convergence and cross-language weld OPEN |
+| B2 Leech C2/C3 source router | **PHYSICAL SOURCE PROBE ACCEPTED** for C2-only checkpoint | C3 and S3 actions are non-invariant controls here; genuine `c2c3_wave` training or parameter transport and full Sophontic semantics remain OPEN |
+| C1 original histories | **ACTUAL 32-STEP RECURRENCE MEASURED**, large late-layer growth CONFIRMED | `originalStudentRecurrentHistoryNormBoundOrCounterexample`: postcap C2-preserving finite invariant written/test pending, actual trained candidate postcap CE, recurrent Jacobian/selection stability OPEN |
+| C1 original early quality | Layer0/1 static mismatch established previously | `originalC2EarlyLayerOddEvenCorrection`: dev-only even scaling screen pending; source full student CE gain not yet measured |
+| Q2.3/Q2.4 learner | Prior single-readout Dust/SPSA/AdamW 8-step native comparison unchanged | Cached source activation credit/gradient fidelity, fair repeated budget and early-layer correction OPEN |
+| Q2.5 quality | Original full teacher-free CE **4.762983** vs teacher **2.583408** | Independent heldout promotion FAIL; don't use heldout to select cap or early-channel scale |
+| Q3 standalone | 33.61% tensor reduction, exact tested logits and 8-step histories accepted | Warmed ABBA, longer cached trace, independent quality promotion OPEN |
+| C3 triality/Sophontic | Current C2 router proven empirically *not* C3/S3 invariant under tested action | Matched `c2c3_wave`/S3 versus C2 features with actual trained model and semantic intervention; no geometry improvement claimed |
+
+**Most decisive next physical evidence:** baseline and dev-only capped/attenuated late recurrence vs early odd/even scaling in `c2_history_even_dev_repair_screen.json`; controlled full-student recurrent history for winning variant; only then a small train-derived warm-start correction, not a second 80-minute 825-step curriculum. D4/F4 and E8/Leech same-carrier proofs remain separate formal work; neither is a prerequisite for this immediate C2 quality repair.
