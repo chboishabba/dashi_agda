@@ -86,3 +86,6 @@ import DASHI.Physics.Plasma.KSW668OriginalRationalTransferCountermodelExact
 import DASHI.Physics.Plasma.KSW668MHDSelectedStateTransferExact
 import DASHI.Physics.Plasma.KSW668MaxwellLocalPoyntingExact
 import DASHI.Physics.Plasma.KSW668IsotopeCausalResidualExact
+
+-- Cross-lane source-indexed acquisition and quantitative physical closure gates.
+import DASHI.Physics.Plasma.KSW668EmpiricalBoundariesExact
