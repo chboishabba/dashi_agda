@@ -32,6 +32,39 @@ def graph_digest(graph: Mapping[str, str | None]) -> str:
     return hashlib.sha256(raw).hexdigest()
 
 
+
+def finite_total_reachability(
+    graph: Mapping[str, str | None], start: str, target: str,
+) -> bool:
+    """M2 finite bound: reachability iff a target appears in fewer than |V| steps.
+
+    For a shortest walk to the target no vertex can repeat before its
+    endpoint: removing a repeated interval yields a shorter valid walk.
+    A complete finite carrier has at most |V| distinct vertices, so the
+    first occurrence has index below |V|. This checks the given finite
+    graph and has no Wikipedia or QID source-authority implications.
+    """
+    if (not graph or start not in graph or target not in graph or
+        any(not isinstance(node, str) or not node for node in graph) or
+        any(not isinstance(dst, str) or dst not in graph
+            for dst in graph.values())):
+        raise ValueError("M2 requires a nonempty finite TOTAL source graph")
+    current = start
+    for _ in range(len(graph)):
+        if current == target:
+            return True
+        current = graph[current]
+    return False
+
+
+def finite_mutual_rotation_decision(
+    graph: Mapping[str, str | None], a: str, b: str,
+) -> bool:
+    """Two bounded M2 reachability queries decide intrinsic mutual reach."""
+    return (finite_total_reachability(graph, a, b) and
+            finite_total_reachability(graph, b, a))
+
+
 def trace_start(graph: Mapping[str, str | None], start: str) -> dict[str, Any]:
     if start not in graph:
         raise ValueError('start must be in graph')
@@ -119,7 +152,8 @@ def check_graph_certificate(graph: Mapping[str, str | None], cert: dict[str, Any
         raise ValueError('invalid graph certificate header')
     if cert['schema'] != SCHEMA or cert['graph_sha256'] != graph_digest(graph):
         raise ValueError('wrong graph fingerprint / certificate schema')
-    if cert['node_count'] != len(graph) or not isinstance(cert['traces'], list):
+    if (type(cert['node_count']) is not int or
+        cert['node_count'] != len(graph) or not isinstance(cert['traces'], list)):
         raise ValueError('invalid node-count / trace array')
     starts = [t.get('start') if isinstance(t, dict) else None for t in cert['traces']]
     if starts != sorted(graph):
