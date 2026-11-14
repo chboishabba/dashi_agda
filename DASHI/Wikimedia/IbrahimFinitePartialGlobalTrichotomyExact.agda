@@ -82,33 +82,21 @@ continuingMatchesTotal select fallback zero start finish visited =
   visitingInjective visited
 continuingMatchesTotal {Outside = Outside}
   select fallback (suc n) start finish visited
-  with select start in choice
+  with select start
 ... | Partial.knownTarget next =
-  trans
-    (cong (Orbit.iterate (totalisedNext select fallback) n)
-      (cong (totalisedSelection fallback) choice))
-    (continuingMatchesTotal select fallback n next finish
-      (trans
-        (sym
-          (cong (Partial.partialIterate select n)
-            (knownAdvance select start next choice)))
-        visited))
+  continuingMatchesTotal select fallback n next finish visited
 ... | Partial.explicitDeadEnd =
   ⊥-elim
     (Partial.activeNotDeadEnd {Outside = Outside}
-      (trans (sym visited)
-        (trans
-          (cong (Partial.partialIterate select n)
-            (deadAdvance select start choice))
-          (Partial.partialDeadEndAbsorbs select n start))))
+      (trans
+        (sym visited)
+        (Partial.partialDeadEndAbsorbs select n start)))
 ... | Partial.unresolvedTarget target =
   ⊥-elim
     (Partial.activeNotMissingTarget
-      (trans (sym visited)
-        (trans
-          (cong (Partial.partialIterate select n)
-            (outsideAdvance select start target choice))
-          (Partial.partialUnresolvedAbsorbs select n target))))
+      (trans
+        (sym visited)
+        (Partial.partialUnresolvedAbsorbs select n target)))
 
 -- If an observation is still visiting at depth prefix+extra, it was
 -- also visiting at prefix: terminal observations absorb.
