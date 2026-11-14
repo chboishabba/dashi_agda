@@ -43,6 +43,23 @@ def check():
         assert squared(magnetic(k,sign))==Q(1,2)
         assert squared(magnetic(q,sign))==Q(1,4)
     assert transfer(1)+transfer(-1)==0
+    # Same pointwise z+/z- values at x=(0,0,0) for opposite
+    # modal-transfer signs. The imaginary +/- p conjugate pair cancels
+    # at the origin, but its first x derivative changes sign.
+    def local_origin(sign):
+        supported=(p,neg(p),q,neg(q),k,neg(k))
+        zplus=tuple(sum(plus(m)[j] for m in supported) for j in range(3))
+        zminus=tuple(sum(minus(m,sign)[j] for m in supported) for j in range(3))
+        return zplus,zminus
+    assert local_origin(1)==local_origin(-1)==(
+        (4+0j,-2+0j,0j),(0j,0j,0j))
+    # d_x zMinus at x=0 is i*sum_m m_x zMinus(m).
+    def minus_x_gradient_at_origin(sign):
+        return tuple(1j*sum(m[0]*minus(m,sign)[j]
+                            for m in (p,neg(p))) for j in range(3))
+    assert minus_x_gradient_at_origin(1)==(0j,-2+0j,0j)
+    assert minus_x_gradient_at_origin(-1)==(0j,2+0j,0j)
+
     return {
        "status":"PASS","source":"DASHI/Physics/Plasma/KSW668MHDSelectedStateTransferExact.agda",
        "original_p_q_k":[p,q,k],
@@ -54,7 +71,11 @@ def check():
        "physical_B_strength_k":"1/2","physical_B_strength_q":"1/4",
        "positive_transfer":"+1","negative_transfer":"-1",
        "all_mode_Agda_state_constructed":False,
-       "instrument_calibrated_same_event_MMS":False
+       "instrument_calibrated_same_event_MMS":False,
+       "both_states_local_origin_zplus":"(4,-2,0)",
+       "both_states_local_origin_zminus":"(0,0,0)",
+       "sign_plus_minus_first_x_derivative":"(0,-2,0) vs (0,+2,0)",
+       "exact_single_point_identifiability_no_go":"same z+/z- local field, opposite Fourier transfer"
     }
 if __name__=="__main__":
     print(json.dumps(check(),indent=2))
