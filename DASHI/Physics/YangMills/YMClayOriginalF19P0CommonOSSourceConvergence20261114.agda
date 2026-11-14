@@ -49,3 +49,5 @@ import DASHI.Physics.YangMills.BalabanP0TransverseTensorNotAutomaticallyScalarPr
 
 import DASHI.Physics.YangMills.YangMillsStressWardCommonCoreGeneratorExact
 import DASHI.Physics.YangMills.YangMillsStressOSSourceFirstSemigroupCoreToClosureExact
+
+import DASHI.Physics.YangMills.YMClayR445OneLocalTVThreeMomentsSourceWeldExact
