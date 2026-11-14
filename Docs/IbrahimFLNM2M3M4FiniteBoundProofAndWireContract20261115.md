@@ -12,22 +12,26 @@ Original First Link Network research: **Mark Ibrahim, Christopher M. Danforth an
 
 ## M2 — complete finite reachability bound (mathematical proof)
 
-**Input:** a finite complete carrier (V) of (N) listed positions (duplicates permissible), a total deterministic function (f:V\to V), and vertices (a,b\in V). Let (f^k) denote the original iterate.
+**Input:** a finite complete carrier \(V\) of \(N\) listed positions (duplicates permissible), a total deterministic function \(f:V\to V\), and vertices \(a,b\in V\). Let \(f^k\) denote the original iterate.
 
-**Exact claim:** ((\exists k\in\mathbb N,\ f^k(a)=b)\iff(\exists k<N,\ f^k(a)=b)) for an inhabited carrier. The right-to-left implication is immediate. For the forward implication take the *least* qualifying (k), constructively available by well-founded search below an already supplied witness. If (k\ge N), the (k+1) vertices (a,f(a),\ldots,f^k(a)) contain a repeat (f^i(a)=f^j(a)) with (i<j\le k), because the carrier has at most (N) distinct vertices. Determinism gives
-[
- f^{k-(j-i)}(a)=f^k(a)=b.
-]
-The index is a natural number strictly smaller than (k), contradicting minimality. The argument applies to both directions independently. Thus
-[
+**Exact claim:** \((\exists k\in\mathbb N,\ f^k(a)=b)\iff(\exists k<N,\ f^k(a)=b)\) for an inhabited carrier. The right-to-left implication is immediate. For the forward implication take the *least* qualifying \(k\), constructively available by well-founded search below an already supplied witness. If \(k\ge N\), the \(k+1\) vertices \(a,f(a),\ldots,f^k(a)\) contain a repeat \(f^i(a)=f^j(a)\) with \(i<j\le k\), because the carrier has at most \(N\) distinct vertices. Determinism gives
+
+\[
+ f^{k-\(j-i\)}(a)=f^k(a)=b.
+\]
+
+The index is a natural number strictly smaller than \(k\), contradicting minimality. The argument applies to both directions independently. Thus
+
+\[
  a\leftrightarrow b\quad\Longleftrightarrow\quad
- mathrm{ReachWithin}(f,b,N-1,a)\ ∧ mathrm{ReachWithin}(f,a,N-1,b).
-]
-Using fuel (N) instead of (N-1) is sound and slightly redundant, and simplifies the Agda interface. For the impossible empty-carrier/start combination, no vertex input exists.
+ \mathrm{ReachWithin}(f,b,N-1,a)\ \land\ \mathrm{ReachWithin}(f,a,N-1,b).
+\]
+
+Using fuel \(N\) instead of \(N-1\) is sound and slightly redundant, and simplifies the Agda interface. For the impossible empty-carrier/start combination, no vertex input exists.
 
 **Current Agda reuse:** `finiteNodeEqualityFromCarrier`, `decideReachWithin`, `decideBoundedMutualRotation`, `boundedMutualRotationIsSound` (all in `IbrahimFiniteDecidableReachabilityExact`). **Exact missing kernel chain (M2a–M2d):**
 
-1. `finitePathLoopErasure`: remove an earlier repeated vertex from a supplied `Rotation.ForwardRotation` without changing its endpoint; use `Orbit.iterateAppend` and (i+(j-i)=j).
+1. `finitePathLoopErasure`: remove an earlier repeated vertex from a supplied `Rotation.ForwardRotation` without changing its endpoint; use `Orbit.iterateAppend` and (i+\(j-i\)=j).
 2. `unboundedReachHasFiniteBound`: use pigeonhole over the complete `General.allNodes` to produce `ReachWithin next target (Pigeonhole.carrierSize (General.allNodes carrier)) start` from any `Rotation.ForwardRotation next start target`.
 3. `finiteCycleMembershipDecidableFromFinEquality`: pair the complete finite-direction deciders and convert the `inj₂` branches by `unboundedReachHasFiniteBound`; output either an actual `Rotation.MutualOrbitRotation next a b` or its negation.
 4. `canonicalCycleRootExistsWithoutMembershipOracle` and `canonicalCycleChoiceIndependentWithoutOracle`: instantiate existing `IbrahimFiniteCanonicalCycleRootExact` theorems with M2c. The total-order structure is still an **explicit** assumption; it cannot be inferred from an unordered carrier without specifying a canonical order.
@@ -36,9 +40,9 @@ Using fuel (N) instead of (N-1) is sound and slightly redundant, and simplifies 
 
 ## M3 — partial FLN complete finite trichotomy (mathematical proof)
 
-**Input:** the same finite complete carrier of size (N), a deterministic `FirstLinkSelection Node Outside`, and a start node. `knownTarget` stays in the declared carrier; `explicitDeadEnd` retains the source node; `unresolvedTarget` retains its original outside token.
+**Input:** the same finite complete carrier of size \(N\), a deterministic `FirstLinkSelection Node Outside`, and a start node. `knownTarget` stays in the declared carrier; `explicitDeadEnd` retains the source node; `unresolvedTarget` retains its original outside token.
 
-Run `advancePartial` for (N) transitions from `visiting start`. If the resulting state is `stoppedAt node`, an eligible-link dead-end was reached no later than depth (N) and persists forever by `partialDeadEndPersistsAfterDiscovery`. Likewise `missingTarget token` retains the exact token and persists forever by `partialUnresolvedPersistsAfterDiscovery`. If the state at time (N) is still `visiting node`, **every** earlier state was also visiting: either terminal state would have been absorbing. This gives (N+1) in-carrier visiting nodes at times (0,\ldots,N); by the finite pigeonhole theorem some (0\le i<j\le N) have the same original node. Determinism forces an eventual orbit cycle of positive period (j-i); since no earlier terminal state was visited, the repeated interval consists entirely of known-target edges.
+Run `advancePartial` for \(N\) transitions from `visiting start`. If the resulting state is `stoppedAt node`, an eligible-link dead-end was reached no later than depth \(N\) and persists forever by `partialDeadEndPersistsAfterDiscovery`. Likewise `missingTarget token` retains the exact token and persists forever by `partialUnresolvedPersistsAfterDiscovery`. If the state at time \(N\) is still `visiting node`, **every** earlier state was also visiting: either terminal state would have been absorbing. This gives \(N+1\) in-carrier visiting nodes at times \(0,\ldots,N\); by the finite pigeonhole theorem some \(0\le i<j\le N\) have the same original node. Determinism forces an eventual orbit cycle of positive period \(j-i\); since no earlier terminal state was visited, the repeated interval consists entirely of known-target edges.
 
 These three cases are exhaustive and disjoint as observations; a repeated source is a cycle receipt **only if all intervening source edges are `knownTarget`**, never by casting a dead-end or an outside token to a self-loop.
 
