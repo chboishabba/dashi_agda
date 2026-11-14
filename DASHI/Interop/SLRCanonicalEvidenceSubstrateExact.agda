@@ -188,6 +188,117 @@ mkCandidateObservation observation revision evidenceSpan predicate value =
     false refl
 
 ------------------------------------------------------------------------
+-- Public parser lazy span generation.
+--
+-- The parser emits a request, not an EvidenceSpan.
+-- The shared reducer is the materialization boundary.
+-- A generation licence is a capability receipt for this exact revision/span
+-- pair. It is not a copyright, reuse, applicability, or truth authority.
+------------------------------------------------------------------------
+
+record SpanGenerationLicence
+    (revision : String)
+    (spanId : String) : Set where
+  constructor span-generation-licence
+  field
+    licenceRevisionRef : String
+    licenceRevisionRefIsExact :
+      licenceRevisionRef ≡ revision
+
+    licenceSpanRef : String
+    licenceSpanRefIsExact :
+      licenceSpanRef ≡ spanId
+
+    permitsLazyMaterialization : Bool
+    permitsLazyMaterializationIsTrue :
+      permitsLazyMaterialization ≡ true
+
+    createsSemanticAuthority : Bool
+    createsSemanticAuthorityIsFalse :
+      createsSemanticAuthority ≡ false
+
+    createsReuseAuthority : Bool
+    createsReuseAuthorityIsFalse :
+      createsReuseAuthority ≡ false
+
+open SpanGenerationLicence public
+
+canonicalSpanGenerationLicence :
+  (revision spanId : String) →
+  SpanGenerationLicence revision spanId
+canonicalSpanGenerationLicence revision spanId =
+  span-generation-licence
+    revision refl
+    spanId refl
+    true refl
+    false refl
+    false refl
+
+record PublicParserLazySpanRequest : Set where
+  constructor public-parser-lazy-span-request
+  field
+    requestSourceRevisionRef : String
+    requestSpanRef : String
+    requestSpanKind : EvidenceSpanKind
+    requestGenerationLicence :
+      SpanGenerationLicence requestSourceRevisionRef requestSpanRef
+
+open PublicParserLazySpanRequest public
+
+mkLazyTextRangeRequest :
+  String → String → Nat → Nat → PublicParserLazySpanRequest
+mkLazyTextRangeRequest revision spanId start end =
+  public-parser-lazy-span-request
+    revision
+    spanId
+    (textRange start end)
+    (canonicalSpanGenerationLicence revision spanId)
+
+mkLazyStructuredCoordinateRequest :
+  String → String → String → PublicParserLazySpanRequest
+mkLazyStructuredCoordinateRequest revision spanId coordinate =
+  public-parser-lazy-span-request
+    revision
+    spanId
+    (structuredCoordinate coordinate)
+    (canonicalSpanGenerationLicence revision spanId)
+
+mkLazyWholeRevisionRequest :
+  String → String → PublicParserLazySpanRequest
+mkLazyWholeRevisionRequest revision spanId =
+  public-parser-lazy-span-request
+    revision
+    spanId
+    wholeRevision
+    (canonicalSpanGenerationLicence revision spanId)
+
+publicParserMaterializeLazySpan :
+  PublicParserLazySpanRequest → EvidenceSpan
+publicParserMaterializeLazySpan request =
+  evidence-span
+    (requestSourceRevisionRef request)
+    (requestSpanRef request)
+    (requestSpanKind request)
+
+publicParserMaterializedRevisionIsExact :
+  (request : PublicParserLazySpanRequest) →
+  spanSourceRevisionRef (publicParserMaterializeLazySpan request)
+  ≡ requestSourceRevisionRef request
+publicParserMaterializedRevisionIsExact request = refl
+
+publicParserMaterializedSpanRefIsExact :
+  (request : PublicParserLazySpanRequest) →
+  spanRef (publicParserMaterializeLazySpan request)
+  ≡ requestSpanRef request
+publicParserMaterializedSpanRefIsExact request = refl
+
+publicParserMaterializedKindIsExact :
+  (request : PublicParserLazySpanRequest) →
+  spanKind (publicParserMaterializeLazySpan request)
+  ≡ requestSpanKind request
+publicParserMaterializedKindIsExact request = refl
+
+------------------------------------------------------------------------
 -- Firewalls matching the Rust substrate.
 ------------------------------------------------------------------------
 
