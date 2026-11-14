@@ -1,0 +1,1884 @@
+{
+  "upstream": "openai/math",
+  "revision": "7ef5c0cc5ca4b0e072b7a050fca09ab24bc6fa3a",
+  "source_contens_blob": "7e1ed90ac5a666f1bbecb22027387c4ad79e9d03",
+  "source_main_results_blob": "372bcd714cd3a186a9139ac8e0f3318961fb2df1",
+  "author_credit": "OpenAI manuscripts and formalizations; primary mathematician/date citations to be checked individually",
+  "dashi_acceptance": "none asserted",
+  "note": "Inventory is not a complete proof integration",
+  "count": 208,
+  "declarations": [
+    {
+      "index": 1,
+      "comparator": "ComparatorChallenges/AbhyankarSathaye.json",
+      "declaration": "OAI.AbhyankarSathaye.exists_noncoordinate_polynomial",
+      "source": "OAI/AlgebraicGeometry/AbhyankarSathaye/Counterexample.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 2,
+      "comparator": "ComparatorChallenges/AmplitudeDamping.json",
+      "declaration": "OAI.GAD.main",
+      "source": "OAI/InformationTheory/AmplitudeDamping/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 3,
+      "comparator": "ComparatorChallenges/ArnoldCounterexample.json",
+      "declaration": "OAI.ArnoldCounterexample.main",
+      "source": "OAI/Geometry/Arnold/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 4,
+      "comparator": "ComparatorChallenges/ArtinCAT0.json",
+      "declaration": "OAI.ArtinCAT0.main",
+      "source": "OAI/GroupTheory/ArtinCAT0/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 5,
+      "comparator": "ComparatorChallenges/AsymptoticallyMinimalLittlewood.json",
+      "declaration": "OAI.AsymptoticallyMinimalLittlewood.main",
+      "source": "OAI/Analysis/Littlewood/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 6,
+      "comparator": "ComparatorChallenges/AuslanderReiten.json",
+      "declaration": "OAI.ArExplicit.Statement.main",
+      "source": "OAI/Algebra/AuslanderReiten/All.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 7,
+      "comparator": "ComparatorChallenges/BackwardIntertwiners.json",
+      "declaration": "OAI.BackwardIntertwiners.direct_algebra_corollary",
+      "source": "OAI/Analysis/BackwardIntertwiners/AlgebraCorollary.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 8,
+      "comparator": "ComparatorChallenges/BassTrace.json",
+      "declaration": "OAI.BassTrace.RightProjective.bassTraceModules_vanishing_and_support",
+      "source": "OAI/RingTheory/BassTrace/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 9,
+      "comparator": "ComparatorChallenges/BiholderTransport.json",
+      "declaration": "OAI.WeakMTWTransport.uniform_biHolder_transport",
+      "source": "OAI/Analysis/BiholderTransport/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 10,
+      "comparator": "ComparatorChallenges/BinPackingGap.json",
+      "declaration": "OAI.BinPackingGap.main_results",
+      "source": "OAI/Computability/BinPacking/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 11,
+      "comparator": "ComparatorChallenges/BinaryMatching.json",
+      "declaration": "OAI.BinaryMatching.deterministic_approximate_counting",
+      "source": "OAI/Computability/MatchingCount/BinarySolve.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 12,
+      "comparator": "ComparatorChallenges/BinarySweep.json",
+      "declaration": "OAI.binary_sweep_contraction_and_mixing",
+      "source": "OAI/Probability/BinarySweep/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 13,
+      "comparator": "ComparatorChallenges/BipartiteCrossing.json",
+      "declaration": "OAI.Zarankiewicz.mainTarget_proof",
+      "source": "OAI/Combinatorics/Crossing/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 14,
+      "comparator": "ComparatorChallenges/BorsukNine.json",
+      "declaration": "OAI.BorsukNine.main_theorem",
+      "source": "OAI/Geometry/Borsuk/Counterexample.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 15,
+      "comparator": "ComparatorChallenges/BoundedRecovery.json",
+      "declaration": "OAI.BoundedRecovery.bounded_recovery",
+      "source": "OAI/Analysis/ModularRecovery/Recovery.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 16,
+      "comparator": "ComparatorChallenges/BoundedTreePotentials.json",
+      "declaration": "OAI.BoundedTreePotentials.TreeCalculus.main_counterexample",
+      "source": "OAI/Analysis/TreePotential/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 17,
+      "comparator": "ComparatorChallenges/BoundedTreewidthL1.json",
+      "declaration": "OAI.BoundedTreewidthL1.main_theorem",
+      "source": "OAI/Combinatorics/TreewidthL1/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 18,
+      "comparator": "ComparatorChallenges/Brennan.json",
+      "declaration": "OAI.Brennan.main_theorem",
+      "source": "OAI/Analysis/IntegralMeans/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 19,
+      "comparator": "ComparatorChallenges/BrennanSharp.json",
+      "declaration": "OAI.Brennan.Sharp.sharp_endpoints",
+      "source": "OAI/Analysis/IntegralMeans/SharpEndpoints.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 20,
+      "comparator": "ComparatorChallenges/C0Absorption.json",
+      "declaration": "OAI.C0Absorption.main_result",
+      "source": "OAI/Analysis/C0Absorption/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 21,
+      "comparator": "ComparatorChallenges/CHObstruction.json",
+      "declaration": "OAI.CHObstruction.main",
+      "source": "OAI/ModelTheory/Categoricity/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 22,
+      "comparator": "ComparatorChallenges/CartierChartCompactnessSupport.json",
+      "declaration": "OAI.CartierSections.isCompact_closedChartFieldRetraction_cone",
+      "source": "OAI/AlgebraicGeometry/CartierSections/ChartCompactness.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 23,
+      "comparator": "ComparatorChallenges/CharacterCriterion.json",
+      "declaration": "OAI.KirchbergRordam.character_criterion",
+      "source": "OAI/Analysis/CharacterCriterion/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 24,
+      "comparator": "ComparatorChallenges/CharacterVarietiesAllSeamsSupport.json",
+      "declaration": "OAI.IntegralCharacterVarieties.SurfacePresentation.Diagram.producedMarkedValues_allSeams",
+      "source": "OAI/AlgebraicGeometry/CharacterVarieties/Seams/ProducedSolution.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 25,
+      "comparator": "ComparatorChallenges/ChoicelessPolynomialTime.json",
+      "declaration": "OAI.CPTSeparation.main",
+      "source": "OAI/ModelTheory/Choiceless/Separation.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 26,
+      "comparator": "ComparatorChallenges/CirculantHadamard.json",
+      "declaration": "OAI.CirculantHadamard.exists_iff_order_one_or_four",
+      "source": "OAI/LinearAlgebra/CirculantHadamard/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 27,
+      "comparator": "ComparatorChallenges/ClassicalON.json",
+      "declaration": "OAI.ClassicalON.main",
+      "source": "OAI/Probability/ClassicalON/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 28,
+      "comparator": "ComparatorChallenges/CliqueFreeLog.json",
+      "declaration": "OAI.CliqueFreeLog.logarithmic_independence_bound",
+      "source": "OAI/Combinatorics/CliqueFree/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 29,
+      "comparator": "ComparatorChallenges/CommonBasesFPRAS.json",
+      "declaration": "OAI.common_bases_fpras",
+      "source": "OAI/Combinatorics/MatroidCounting/CommonBases.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 30,
+      "comparator": "ComparatorChallenges/CommutingDerivations.json",
+      "declaration": "OAI.AbhyankarSathaye.CommutingDerivations.commuting_derivations_with_ordinary_extras",
+      "source": "OAI/AlgebraicGeometry/CommutingDerivations/OrdinaryExtraMain.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 31,
+      "comparator": "ComparatorChallenges/CompactBanach.json",
+      "declaration": "OAI.CompactBanach.main",
+      "source": "OAI/Geometry/DoublingHilbert/CompactBanach.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 32,
+      "comparator": "ComparatorChallenges/CompleteCrossing.json",
+      "declaration": "OAI.Paper170.complete_graph_crossing_number",
+      "source": "OAI/Combinatorics/CompleteCrossing/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 33,
+      "comparator": "ComparatorChallenges/CompleteCrouzeix.json",
+      "declaration": "OAI.CompleteCrouzeix.main",
+      "source": "OAI/Analysis/NumericalRange/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 34,
+      "comparator": "ComparatorChallenges/ComplexCancellation.json",
+      "declaration": "OAI.ComplexCancellation.main",
+      "source": "OAI/Algebra/AffineCancellation/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 35,
+      "comparator": "ComparatorChallenges/Conductivity.json",
+      "declaration": "OAI.ScalarConductivity.main_nonuniqueness",
+      "source": "OAI/Analysis/Conductivity/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 36,
+      "comparator": "ComparatorChallenges/ConjugatePoints.json",
+      "declaration": "OAI.ThreeManifold.main_theorem",
+      "source": "OAI/Geometry/ConjugatePoints/ThreeManifold.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 37,
+      "comparator": "ComparatorChallenges/ContinuumTransition.json",
+      "declaration": "OAI.ContinuumTemperature.main_theorem",
+      "source": "OAI/Probability/ContinuumTransition/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 38,
+      "comparator": "ComparatorChallenges/CoordinateSweeps.json",
+      "declaration": "OAI.CoordinateSweeps.conditional_main",
+      "source": "OAI/Probability/CoordinateSweeps/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 39,
+      "comparator": "ComparatorChallenges/Cotype.json",
+      "declaration": "OAI.Cotype.mainTarget_proved",
+      "source": "OAI/Analysis/Cotype/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 40,
+      "comparator": "ComparatorChallenges/CoulombIonization.json",
+      "declaration": "OAI.CoulombAtom.generalized_ionization",
+      "source": "OAI/Analysis/CoulombIonization/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 41,
+      "comparator": "ComparatorChallenges/CourtadeKumar.json",
+      "declaration": "OAI.LeanBlast.CourtadeKumar.courtadeKumarAndAttainment",
+      "source": "OAI/InformationTheory/BooleanNoise/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 42,
+      "comparator": "ComparatorChallenges/CriticalSK.json",
+      "declaration": "OAI.CriticalSK.covariance_and_linear_tests",
+      "source": "OAI/MathematicalPhysics/CriticalSK/Rayleigh.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 43,
+      "comparator": "ComparatorChallenges/CriticalSKMixing.json",
+      "declaration": "OAI.CriticalSK.critical_mixing_bounds",
+      "source": "OAI/MathematicalPhysics/CriticalMixing/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 44,
+      "comparator": "ComparatorChallenges/CriticalZ3.json",
+      "declaration": "OAI.CriticalZ3.critical_no_infinite",
+      "source": "OAI/Probability/CriticalZ3/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 45,
+      "comparator": "ComparatorChallenges/CycleDecomposition.json",
+      "declaration": "OAI.ErdosGallai.erdos_gallai",
+      "source": "OAI/Combinatorics/CycleDecomposition/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 46,
+      "comparator": "ComparatorChallenges/DaugavetModuli.json",
+      "declaration": "OAI.ExactModuli.exact_example",
+      "source": "OAI/Analysis/Daugavet/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 47,
+      "comparator": "ComparatorChallenges/DegreeRigidity.json",
+      "declaration": "OAI.TuringRigidity.ManuscriptMain.rigidity",
+      "source": "OAI/Computability/DegreeRigidity/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 48,
+      "comparator": "ComparatorChallenges/DeligneDrinfeld.json",
+      "declaration": "OAI.DeligneDrinfeld.main",
+      "source": "OAI/Algebra/Drinfeld/Completion.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 49,
+      "comparator": "ComparatorChallenges/DepthThree.json",
+      "declaration": "OAI.DepthThreeLowerBound.exists_polynomial_time_language_depth_three_lower_bound",
+      "source": "OAI/Computability/DepthThree/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 50,
+      "comparator": "ComparatorChallenges/DiamondDistortion.json",
+      "declaration": "OAI.DiamondDistortion.headline_all_pairs",
+      "source": "OAI/Analysis/DiamondDistortion/Descent.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 51,
+      "comparator": "ComparatorChallenges/DirectCrouzeix.json",
+      "declaration": "OAI.DirectCrouzeix.complete_crouzeix",
+      "source": "OAI/Analysis/DirectCrouzeix/CompleteBound.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 52,
+      "comparator": "ComparatorChallenges/DirectionalBallisticity.json",
+      "declaration": "OAI.DirectionalTransience.directional_transience_implies_ballisticity",
+      "source": "OAI/Probability/Ballisticity/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 53,
+      "comparator": "ComparatorChallenges/DirichletSevenEighths.json",
+      "declaration": "OAI.DirichletCharacter.LFunction_ne_zero_of_seven_eighths_lt_re",
+      "source": "OAI/NumberTheory/DirichletL/Nonvanishing.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 54,
+      "comparator": "ComparatorChallenges/DixmierAllDiscrete.json",
+      "declaration": "OAI.Dixmier.current_main_theorem",
+      "source": "OAI/Analysis/Unitarizability/AllDiscrete.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 55,
+      "comparator": "ComparatorChallenges/DoublingHilbert.json",
+      "declaration": "OAI.DoublingHilbert.main",
+      "source": "OAI/Geometry/DoublingHilbert/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 56,
+      "comparator": "ComparatorChallenges/EgyptianFractions.json",
+      "declaration": "OAI.Problem337.main_double_log_order",
+      "source": "OAI/NumberTheory/EgyptianFractions/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 57,
+      "comparator": "ComparatorChallenges/EgyptianFractions.json",
+      "declaration": "OAI.Problem337.counting_double_log_order",
+      "source": "OAI/NumberTheory/EgyptianFractions/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 58,
+      "comparator": "ComparatorChallenges/EgyptianFractions.json",
+      "declaration": "OAI.Problem337.prescribed_denominator_corollary",
+      "source": "OAI/NumberTheory/EgyptianFractions/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 59,
+      "comparator": "ComparatorChallenges/EntangledGames.json",
+      "declaration": "OAI.ThresholdParallelRepetition.threshold_parallel_repetition",
+      "source": "OAI/Probability/EntangledGames/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 60,
+      "comparator": "ComparatorChallenges/EuclideanFiveColor.json",
+      "declaration": "OAI.EuclideanFiveColor.no_proper_five_coloring",
+      "source": "OAI/Geometry/PlaneColoring/Five.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 61,
+      "comparator": "ComparatorChallenges/EuclideanRamsey.json",
+      "declaration": "OAI.EuclideanRamsey.classification",
+      "source": "OAI/Combinatorics/EuclideanRamsey/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 62,
+      "comparator": "ComparatorChallenges/ExactFourier.json",
+      "declaration": "OAI.ExactFourier.main_theorem",
+      "source": "OAI/Computability/FourierCircuit/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 63,
+      "comparator": "ComparatorChallenges/FactorGeneration.json",
+      "declaration": "OAI.Generator.single_generation_of_II1_separable_predual",
+      "source": "OAI/Analysis/FactorGeneration/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 64,
+      "comparator": "ComparatorChallenges/FinitisticAsymmetry.json",
+      "declaration": "OAI.LittleFinitistic.extreme_left_right_asymmetry",
+      "source": "OAI/Algebra/FinitisticAsymmetry/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 65,
+      "comparator": "ComparatorChallenges/ForestSpace.json",
+      "declaration": "OAI.ForestSpace.main_theorem",
+      "source": "OAI/Analysis/ForestSpace/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 66,
+      "comparator": "ComparatorChallenges/FoulkesHowe.json",
+      "declaration": "OAI.Problem346.canonical_foulkes_howe_surjective",
+      "source": "OAI/RepresentationTheory/FoulkesHowe/Stabilization.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 67,
+      "comparator": "ComparatorChallenges/FourierLLogL.json",
+      "declaration": "OAI.FourierLLogL.paperMain",
+      "source": "OAI/Analysis/FourierLLogL/PaperMain.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 68,
+      "comparator": "ComparatorChallenges/FreeIsing.json",
+      "declaration": "OAI.Problem367.free_ising_factor_iff_threshold",
+      "source": "OAI/Probability/FreeIsing/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 69,
+      "comparator": "ComparatorChallenges/GaussianMoat.json",
+      "declaration": "OAI.GaussianMoat.fullMain",
+      "source": "OAI/NumberTheory/GaussianMoat/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 70,
+      "comparator": "ComparatorChallenges/GaussianPropeller.json",
+      "declaration": "OAI.GaussianPropeller.all_partitions",
+      "source": "OAI/Probability/GaussianPropeller/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 71,
+      "comparator": "ComparatorChallenges/GaussianReplacement.json",
+      "declaration": "OAI.CurrentProjection.hybridBlockMain",
+      "source": "OAI/Probability/GaussianReplacement/Hybrid.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 72,
+      "comparator": "ComparatorChallenges/GaussianReplacement.json",
+      "declaration": "OAI.CurrentProjection.fiberBlockMain",
+      "source": "OAI/Probability/GaussianReplacement/FiberBlock.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 73,
+      "comparator": "ComparatorChallenges/GotsmanLinial.json",
+      "declaration": "OAI.LeanBlast.GotsmanLinial.gotsmanLinialStatement",
+      "source": "OAI/Combinatorics/GotsmanLinial/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 74,
+      "comparator": "ComparatorChallenges/GrahamSpherical.json",
+      "declaration": "OAI.GrahamSpherical.full_main",
+      "source": "OAI/Combinatorics/SphericalRamsey/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 75,
+      "comparator": "ComparatorChallenges/GrothendieckElementaryExpansion.json",
+      "declaration": "OAI.Grothendieck.elementary_expansion",
+      "source": "OAI/CategoryTheory/Globular/ElementaryExpansion.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 76,
+      "comparator": "ComparatorChallenges/GroupRingDeterminant.json",
+      "declaration": "OAI.GroupRingDeterminant.main",
+      "source": "OAI/Analysis/GroupDeterminants/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 77,
+      "comparator": "ComparatorChallenges/HadwigerCounterexample.json",
+      "declaration": "OAI.HadwigerCounterexample.not_hadwiger_conjecture",
+      "source": "OAI/Combinatorics/HadwigerCounterexample/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 78,
+      "comparator": "ComparatorChallenges/HarmonicArtin.json",
+      "declaration": "OAI.HarmonicArtin.salvetti_cover_contractible",
+      "source": "OAI/Topology/ArtinGroups/Realizations/SalvettiCoverContractible.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 79,
+      "comparator": "ComparatorChallenges/HarmonicGrowth.json",
+      "declaration": "OAI.HarmonicCounterexample.main",
+      "source": "OAI/Geometry/HarmonicGrowth/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 80,
+      "comparator": "ComparatorChallenges/HeckeSevenEighths.json",
+      "declaration": "OAI.SevenEighths.HeckeFamily.LFunction_ne_zero_of_seven_eighths_lt_re",
+      "source": "OAI/NumberTheory/DirichletL/Hecke/Nonvanishing.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 81,
+      "comparator": "ComparatorChallenges/HenonEmden.json",
+      "declaration": "OAI.HenonLaneEmden.main_nonexistence",
+      "source": "OAI/Analysis/HenonEmden/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 82,
+      "comparator": "ComparatorChallenges/HodgeConjectureCMAbelianVarieties/main.json",
+      "declaration": "HodgeCM.hodge_conjecture_for_cm_abelian_varieties",
+      "source": "ComparatorChallenges/HodgeConjectureCMAbelianVarieties/Solution.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 83,
+      "comparator": "ComparatorChallenges/HoneycombBridgeMassSupport.json",
+      "declaration": "OAI.CriticalHoneycomb.finiteBridgeMassEstimate",
+      "source": "OAI/Combinatorics/HoneycombChords/BridgeMass.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 84,
+      "comparator": "ComparatorChallenges/HyperbolicCones.json",
+      "declaration": "OAI.Paper256.main_result",
+      "source": "OAI/Analysis/HyperbolicCones/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 85,
+      "comparator": "ComparatorChallenges/HyperbolicObstruction.json",
+      "declaration": "OAI.HyperbolicObstruction.main",
+      "source": "OAI/Geometry/HyperbolicGroups/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 86,
+      "comparator": "ComparatorChallenges/IndependentProducts.json",
+      "declaration": "OAI.IndependentProducts.main_general",
+      "source": "OAI/Analysis/ProductSpaces/WeakNullity.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 87,
+      "comparator": "ComparatorChallenges/IndependentProducts.json",
+      "declaration": "OAI.IndependentProducts.main_exponential",
+      "source": "OAI/Analysis/ProductSpaces/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 88,
+      "comparator": "ComparatorChallenges/IndependentSets.json",
+      "declaration": "OAI.LargeIndependentSets.mainTheoremReal",
+      "source": "OAI/Combinatorics/IndependentSets/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 89,
+      "comparator": "ComparatorChallenges/InfiniteMatroid.json",
+      "declaration": "OAI.InfiniteMatroidCounterexample.main",
+      "source": "OAI/Combinatorics/InfiniteMatroid/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 90,
+      "comparator": "ComparatorChallenges/IsometricImmersion.json",
+      "declaration": "OAI.SmoothLocal.Geometry.exists_local_metric_without_local_immersion",
+      "source": "OAI/Geometry/IsometricImmersion/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 91,
+      "comparator": "ComparatorChallenges/Jacobsthal.json",
+      "declaration": "OAI.Erdos970.Erdos970Final.erdos_970_quadratic",
+      "source": "OAI/NumberTheory/Jacobsthal/Conclusions/QuadraticBound.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 92,
+      "comparator": "ComparatorChallenges/KMedianRecovery.json",
+      "declaration": "OAI.MetricKMedianRecovery.global_application",
+      "source": "OAI/Combinatorics/KMedianRecovery/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 93,
+      "comparator": "ComparatorChallenges/KahlerSplitting.json",
+      "declaration": "OAI.UniversalCoverSplitting.main",
+      "source": "OAI/Geometry/KahlerSplitting/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 94,
+      "comparator": "ComparatorChallenges/KaplanskyFinitelyPresented.json",
+      "declaration": "OAI.KaplanskyCounterexample.finitelyPresented_counterexample",
+      "source": "OAI/RingTheory/DirectFiniteness/FinitelyPresented.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 95,
+      "comparator": "ComparatorChallenges/KaplanskyQuasitrace.json",
+      "declaration": "OAI.Kaplansky.kaplansky_quasitrace_counterexample",
+      "source": "OAI/Analysis/Kaplansky/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 96,
+      "comparator": "ComparatorChallenges/LocalSmoothing.json",
+      "declaration": "OAI.Analysis.Fourier.LocalSmoothing.Comparator.euclidean_local_smoothing",
+      "source": "OAI/Analysis/Fourier/LocalSmoothing/Comparator.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 97,
+      "comparator": "ComparatorChallenges/LocalSmoothing.json",
+      "declaration": "OAI.Analysis.Fourier.LocalSmoothing.Comparator.bochner_riesz",
+      "source": "OAI/Analysis/Fourier/LocalSmoothing/Comparator.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 98,
+      "comparator": "ComparatorChallenges/LocalSmoothing.json",
+      "declaration": "OAI.Analysis.Fourier.LocalSmoothing.Comparator.spherical_restriction",
+      "source": "OAI/Analysis/Fourier/LocalSmoothing/Comparator.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 99,
+      "comparator": "ComparatorChallenges/LocalSmoothing.json",
+      "declaration": "OAI.Analysis.Fourier.LocalSmoothing.Comparator.kakeya_maximal",
+      "source": "OAI/Analysis/Fourier/LocalSmoothing/Comparator.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 100,
+      "comparator": "ComparatorChallenges/LocalSmoothing.json",
+      "declaration": "OAI.Analysis.Fourier.LocalSmoothing.Comparator.kakeya",
+      "source": "OAI/Analysis/Fourier/LocalSmoothing/Comparator.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 101,
+      "comparator": "ComparatorChallenges/LocalSmoothing.json",
+      "declaration": "OAI.Analysis.Fourier.LocalSmoothing.Comparator.stein_square",
+      "source": "OAI/Analysis/Fourier/LocalSmoothing/Comparator.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 102,
+      "comparator": "ComparatorChallenges/Laughlin.json",
+      "declaration": "OAI.Laughlin.mainTarget_proved",
+      "source": "OAI/Analysis/Laughlin/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 103,
+      "comparator": "ComparatorChallenges/LiebThirring.json",
+      "declaration": "OAI.SharpLiebThirring.sharp_lieb_thirring",
+      "source": "OAI/Analysis/LiebThirring/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 104,
+      "comparator": "ComparatorChallenges/LipschitzEquivalence.json",
+      "declaration": "OAI.LipschitzCounterexample.main",
+      "source": "OAI/Analysis/LipschitzEquivalence/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 105,
+      "comparator": "ComparatorChallenges/LittleFinitistic.json",
+      "declaration": "OAI.LittleFinitistic.Main.exists_counterexample",
+      "source": "OAI/Algebra/Finitistic/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 106,
+      "comparator": "ComparatorChallenges/LogBrunnMinkowski.json",
+      "declaration": "OAI.LogBrunnMinkowski.main",
+      "source": "OAI/Geometry/LogVolume/BrunnMinkowski.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 107,
+      "comparator": "ComparatorChallenges/LogConcaveQuery.json",
+      "declaration": "OAI.LogConcaveSampling.exact_source_main",
+      "source": "OAI/Probability/LogConcave/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 108,
+      "comparator": "ComparatorChallenges/LogspaceEquality.json",
+      "declaration": "OAI.ExactDerandomization.exact_logarithmic_space_derandomization",
+      "source": "OAI/Computability/Logspace/Equality.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 109,
+      "comparator": "ComparatorChallenges/MahlerConjecture.json",
+      "declaration": "OAI.SymmetricMahler.symmetric_mahler",
+      "source": "OAI/Analysis/Mahler/MainTheorem.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 110,
+      "comparator": "ComparatorChallenges/MarkovType.json",
+      "declaration": "OAI.MarkovSuperreflexivity.hasNontrivialMarkovType_iff_hasEquivalentUCNorm",
+      "source": "OAI/Analysis/MarkovType/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 111,
+      "comparator": "ComparatorChallenges/MatchingEntropy.json",
+      "declaration": "OAI.MatchingEntropy.entropy_main",
+      "source": "OAI/Combinatorics/PerfectMatching/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 112,
+      "comparator": "ComparatorChallenges/MatrixFields.json",
+      "declaration": "OAI.MatrixAllFields.MatrixMultiplication.AllFieldMain.omega_lt_source_constant",
+      "source": "OAI/LinearAlgebra/MatrixFields/Conclusions/AllFieldsBound.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 113,
+      "comparator": "ComparatorChallenges/MatrixMultiplication.json",
+      "declaration": "OAI.MatrixMultiplication.complex_omega_le_nine_quarters",
+      "source": "OAI/LinearAlgebra/MatrixMultiplication/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 114,
+      "comparator": "ComparatorChallenges/MatrixMultiplication.json",
+      "declaration": "OAI.MatrixMultiplication.complex_alpha_gt_93_div_200",
+      "source": "OAI/LinearAlgebra/MatrixMultiplication/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 115,
+      "comparator": "ComparatorChallenges/MatrixMultiplication.json",
+      "declaration": "OAI.MatrixMultiplication.complex_rectangular_omega_lt_523_div_250",
+      "source": "OAI/LinearAlgebra/MatrixMultiplication/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 116,
+      "comparator": "ComparatorChallenges/MatrixRemoval.json",
+      "declaration": "OAI.Problem348.no_polynomial_removal_bound",
+      "source": "OAI/Combinatorics/MatrixRemoval/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 117,
+      "comparator": "ComparatorChallenges/MaximalSeshadriConstants.json",
+      "declaration": "OAI.MaximalSeshadri.Geometry.maximalSeshadriConstants",
+      "source": "OAI/AlgebraicGeometry/Seshadri/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 118,
+      "comparator": "ComparatorChallenges/MemoryPrecision.json",
+      "declaration": "OAI.MemoryPrecision.main",
+      "source": "OAI/Probability/MemoryPrecision/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 119,
+      "comparator": "ComparatorChallenges/MetricEntropyDuality.json",
+      "declaration": "OAI.MetricEntropyDuality.exists_entropy_duality_counterexample_with_covers",
+      "source": "OAI/Analysis/MetricEntropy/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 120,
+      "comparator": "ComparatorChallenges/MidpointLenses.json",
+      "declaration": "OAI.SegmentLenses.midpoint_lens_main",
+      "source": "OAI/Analysis/SegmentLenses/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 121,
+      "comparator": "ComparatorChallenges/Nagata.json",
+      "declaration": "OAI.Nagata.nagata_conjecture",
+      "source": "OAI/AlgebraicGeometry/PlaneCurves/Nagata.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 122,
+      "comparator": "ComparatorChallenges/OddKaplansky.json",
+      "declaration": "OAI.OddKaplansky.main_theorem",
+      "source": "OAI/Algebra/OddKaplansky/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 123,
+      "comparator": "ComparatorChallenges/OneTapeSpace.json",
+      "declaration": "OAI.Fifths.Single.capped",
+      "source": "OAI/Computability/SpaceSimulation/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 124,
+      "comparator": "ComparatorChallenges/OneTapeSpace.json",
+      "declaration": "OAI.Fifths.Single.unknown",
+      "source": "OAI/Computability/SpaceSimulation/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 125,
+      "comparator": "ComparatorChallenges/OneWayLiveness.json",
+      "declaration": "OAI.OneWayLiveness.main_theorem",
+      "source": "OAI/Combinatorics/Automata/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 126,
+      "comparator": "ComparatorChallenges/OptimalMaxCut.json",
+      "declaration": "OAI.OptimalMaxCut.main",
+      "source": "OAI/Computability/MaxCut/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 127,
+      "comparator": "ComparatorChallenges/PartitionPrinciple.json",
+      "declaration": "OAI.PartitionPilot.Forcing.TransitiveGround.exists_model_partitionPrinciple_without_choice",
+      "source": "OAI/SetTheory/PartitionPrinciple/Models/Separation.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 128,
+      "comparator": "ComparatorChallenges/PerfectCompleteness.json",
+      "declaration": "OAI.PerfectCompleteness.Theorem11.exists_reduction",
+      "source": "OAI/Computability/PerfectCompleteness/Theorem11.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 129,
+      "comparator": "ComparatorChallenges/PeriodicTilingThree.json",
+      "declaration": "OAI.PeriodicTilingThree.periodic_tiling_counterexample_and_minimality",
+      "source": "OAI/Geometry/PeriodicTiling/Counterexample.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 130,
+      "comparator": "ComparatorChallenges/PettyProjectionVolume.json",
+      "declaration": "OAI.PettyProjection.petty_projection_volume",
+      "source": "OAI/Geometry/ProjectionBodies/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 131,
+      "comparator": "ComparatorChallenges/PinchedKahler.json",
+      "declaration": "OAI.PinchedHartogs.main_theorem",
+      "source": "OAI/Geometry/Kahler/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 132,
+      "comparator": "ComparatorChallenges/PinnedDistances.json",
+      "declaration": "OAI.WeakPinned.main",
+      "source": "OAI/Geometry/PinnedDistances/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 133,
+      "comparator": "ComparatorChallenges/PlanarFalconer.json",
+      "declaration": "OAI.PlanarFalconer.mainTarget_proved",
+      "source": "OAI/MeasureTheory/Falconer/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 134,
+      "comparator": "ComparatorChallenges/PlanarFirstPassage.json",
+      "declaration": "OAI.PlanarFPP.manuscriptMain",
+      "source": "OAI/Probability/FirstPassage/BoundaryCurve.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 135,
+      "comparator": "ComparatorChallenges/PlanarL1.json",
+      "declaration": "OAI.PlanarL1.planar_graph_metrics_embed_L1",
+      "source": "OAI/Combinatorics/PlanarL1/Embedding.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 136,
+      "comparator": "ComparatorChallenges/PlaneColoring.json",
+      "declaration": "OAI.Problem160.properColoring_seven",
+      "source": "OAI/Geometry/PlaneColoring/Seven.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 137,
+      "comparator": "ComparatorChallenges/PosteriorReplicas.json",
+      "declaration": "OAI.PosteriorReplicas.source_main",
+      "source": "OAI/Probability/PosteriorReplicas/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 138,
+      "comparator": "ComparatorChallenges/PowerFreeValues.json",
+      "declaration": "OAI.QuarticPowerFree.allDegrees",
+      "source": "OAI/NumberTheory/PowerFree/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 139,
+      "comparator": "ComparatorChallenges/ProjectionCounterexample.json",
+      "declaration": "OAI.ProjectionCounterexample.universal_simplex_upper_bound_false",
+      "source": "OAI/Geometry/ProjectionBody/Counterexample.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 140,
+      "comparator": "ComparatorChallenges/ProjectionMoments.json",
+      "declaration": "OAI.ProjectionMoments.main",
+      "source": "OAI/Probability/ProjectionMoments/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 141,
+      "comparator": "ComparatorChallenges/ProjectionVolume.json",
+      "declaration": "OAI.Paper092.product_counterexample",
+      "source": "OAI/Geometry/ProjectionVolume/ProductCounterexample.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 142,
+      "comparator": "ComparatorChallenges/QACParity.json",
+      "declaration": "OAI.QAC.parity_lower_bound",
+      "source": "OAI/InformationTheory/QuantumCircuit/Parity.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 143,
+      "comparator": "ComparatorChallenges/QuadricBundles.json",
+      "declaration": "OAI.QuadricCounterexample.main_theorem",
+      "source": "OAI/Geometry/QuadricBundles/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 144,
+      "comparator": "ComparatorChallenges/QuantitativeVanDerWaerden.json",
+      "declaration": "OAI.QuantitativeVanDerWaerden.uniform_lower_bound",
+      "source": "OAI/Combinatorics/ProgressionColoring/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 145,
+      "comparator": "ComparatorChallenges/QuasiRiemannHypothesis.json",
+      "declaration": "OAI.riemannZeta_ne_zero_of_seven_eighths_lt_re",
+      "source": "OAI/NumberTheory/DirichletL/Nonvanishing.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 146,
+      "comparator": "ComparatorChallenges/QuinticLienard.json",
+      "declaration": "OAI.QuinticLienard.main",
+      "source": "OAI/Analysis/LienardCycles/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 147,
+      "comparator": "ComparatorChallenges/RadialTransition.json",
+      "declaration": "OAI.RadialTransition.main",
+      "source": "OAI/Probability/RadialTransition/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 148,
+      "comparator": "ComparatorChallenges/RandomizedMeanPayoff.json",
+      "declaration": "OAI.randomized_quasipolynomial_mean_payoff",
+      "source": "OAI/Computability/RandomMean/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 149,
+      "comparator": "ComparatorChallenges/RationalHitting.json",
+      "declaration": "OAI.RationalHitting.main",
+      "source": "OAI/Computability/RationalHitting/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 150,
+      "comparator": "ComparatorChallenges/RecursivePotentials.json",
+      "declaration": "OAI.ComparatorModel.RecursivePotentials.main",
+      "source": "OAI/Analysis/RecursivePotentials/Challenge.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 151,
+      "comparator": "ComparatorChallenges/ReflexiveFixedPoints.json",
+      "declaration": "OAI.ReflexiveFixedPoints.exists_fixedPoint_of_canonicallyReflexive",
+      "source": "OAI/Analysis/Nonexpansive/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 152,
+      "comparator": "ComparatorChallenges/RegularParity.json",
+      "declaration": "OAI.QAC.parity_lower_bound_polynomial_size",
+      "source": "OAI/InformationTheory/QuantumCircuit/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 153,
+      "comparator": "ComparatorChallenges/RieszQuantitative.json",
+      "declaration": "OAI.RieszRectifiability.quantitative_higher_codimension_riesz_rectifiability",
+      "source": "OAI/Analysis/RieszRectifiability/Uniformity/Rectifiability.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 154,
+      "comparator": "ComparatorChallenges/RyserCovering.json",
+      "declaration": "OAI.RyserCoveringCounterexample.exists_prime_eventually_counterexampleRank",
+      "source": "OAI/Combinatorics/Ryser/Construction/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 155,
+      "comparator": "ComparatorChallenges/RyserOddExtensions.json",
+      "declaration": "OAI.RyserOdd.eventualOddFailures_and_infinite",
+      "source": "OAI/Combinatorics/Ryser/OddExtensions.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 156,
+      "comparator": "ComparatorChallenges/Saxl.json",
+      "declaration": "OAI.Saxl.saxl_conjecture",
+      "source": "OAI/RepresentationTheory/Saxl/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 157,
+      "comparator": "ComparatorChallenges/SecondKahnKalai.json",
+      "declaration": "OAI.LeanBlast.SecondKahnKalai.secondKahnKalaiBounds",
+      "source": "OAI/Combinatorics/GraphThreshold/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 158,
+      "comparator": "ComparatorChallenges/SelfSimilar.json",
+      "declaration": "OAI.EntropyRateDimension.entropy_rate_dimension",
+      "source": "OAI/MeasureTheory/SelfSimilar/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 159,
+      "comparator": "ComparatorChallenges/SensitivitySeparation.json",
+      "declaration": "OAI.Paper320.quantitative_separation",
+      "source": "OAI/Combinatorics/Sensitivity/Separation.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 160,
+      "comparator": "ComparatorChallenges/SeymourSecondNeighborhood.json",
+      "declaration": "OAI.SeymourSecondNeighborhood.exists_goodVertex",
+      "source": "OAI/Combinatorics/SecondNeighborhood/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 161,
+      "comparator": "ComparatorChallenges/SiegelZeros.json",
+      "declaration": "OAI.SiegelZeros.WeightedTorusJets.exists_absolute_real_zero_gap",
+      "source": "OAI/NumberTheory/SiegelZeros/Conclusions/Theorem.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 162,
+      "comparator": "ComparatorChallenges/SignedFiniteBand.json",
+      "declaration": "OAI.SignedDisk.CenteredDiskEndpoint.main_signed_finite_band",
+      "source": "OAI/Analysis/SignedDisk/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 163,
+      "comparator": "ComparatorChallenges/SimpleAmenable.json",
+      "declaration": "OAI.SimpleAmenable.main",
+      "source": "OAI/GroupTheory/SimpleAmenable/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 164,
+      "comparator": "ComparatorChallenges/SingleFold.json",
+      "declaration": "OAI.SingleFold.main",
+      "source": "OAI/NumberTheory/SingleFold/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 165,
+      "comparator": "ComparatorChallenges/SingleLatticeCovering.json",
+      "declaration": "OAI.SingleLatticeCovering.single_lattice_covering",
+      "source": "OAI/Geometry/LatticeCovering/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 166,
+      "comparator": "ComparatorChallenges/SingletonLoopMatching.json",
+      "declaration": "OAI.LoopMatching.fullEndpoint",
+      "source": "OAI/Computability/LoopMatching/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 167,
+      "comparator": "ComparatorChallenges/SmoothYau.json",
+      "declaration": "OAI.YauCounterexamples.sphere_three",
+      "source": "OAI/Geometry/SmoothYau/SphereMetric/ThreeSphere.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 168,
+      "comparator": "ComparatorChallenges/SmoothYau.json",
+      "declaration": "OAI.YauCounterexamples.sphere_two_torus_two",
+      "source": "OAI/Geometry/SmoothYau/ProductMetric/SphereProduct.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 169,
+      "comparator": "ComparatorChallenges/StableCoordinateFour.json",
+      "declaration": "OAI.StableCoordinate.principal_package",
+      "source": "OAI/AlgebraicGeometry/StableCoordinate/Principal.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 170,
+      "comparator": "ComparatorChallenges/SteinitzBergstrom.json",
+      "declaration": "OAI.EuclideanSteinitzBergstrom.main",
+      "source": "OAI/Analysis/Steinitz/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 171,
+      "comparator": "ComparatorChallenges/StrictMeans.json",
+      "declaration": "OAI.StrictInverseFirstPower.main",
+      "source": "OAI/Analysis/StrictMeans/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 172,
+      "comparator": "ComparatorChallenges/StrongThinTree.json",
+      "declaration": "OAI.StrongThinTree.strongThinTree",
+      "source": "OAI/Combinatorics/ThinTrees/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 173,
+      "comparator": "ComparatorChallenges/StructuralCrouzeix.json",
+      "declaration": "OAI.StructuralCrouzeixReference.challenge",
+      "source": "OAI/Analysis/StructuralCrouzeix/Endpoint.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 174,
+      "comparator": "ComparatorChallenges/SubexponentialSAT.json",
+      "declaration": "OAI.Algorithms.SubexponentialSAT.SqrtLogSpace.exact_count_and_sat",
+      "source": "OAI/Algorithms/SubexponentialSAT/SqrtLogSpace/Final.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 175,
+      "comparator": "ComparatorChallenges/SubpolynomialLp.json",
+      "declaration": "OAI.SubpolynomialLp.source_main",
+      "source": "OAI/Analysis/LpDimension/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 176,
+      "comparator": "ComparatorChallenges/SubsphereCurrent.json",
+      "declaration": "OAI.SubsphereCurrent.full_current_main_scope",
+      "source": "OAI/Probability/Subsphere/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 177,
+      "comparator": "ComparatorChallenges/Superstring.json",
+      "declaration": "OAI.Superstring.main",
+      "source": "OAI/Computability/Superstring/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 178,
+      "comparator": "ComparatorChallenges/SurfaceConeCandidateSupport.json",
+      "declaration": "OAI.SmallCM.candidate_ring_properties",
+      "source": "OAI/AlgebraicGeometry/SurfaceCones/CandidateRing.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 179,
+      "comparator": "ComparatorChallenges/SymmetricDomains.json",
+      "declaration": "OAI.Release061.main",
+      "source": "OAI/Analysis/SymmetricDomains/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 180,
+      "comparator": "ComparatorChallenges/SymmetricMahlerEquality.json",
+      "declaration": "OAI.SymmetricMahler.symmetric_mahler_equality",
+      "source": "OAI/Analysis/Mahler/Classification.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 181,
+      "comparator": "ComparatorChallenges/SymmetricPolar.json",
+      "declaration": "OAI.SymmetricPolar.symmetric_polar_main",
+      "source": "OAI/Geometry/PolarProducts/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 182,
+      "comparator": "ComparatorChallenges/Tachikawa.json",
+      "declaration": "OAI.Tachikawa.main_theorem",
+      "source": "OAI/RingTheory/Tachikawa/Counterexample.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 183,
+      "comparator": "ComparatorChallenges/TalagrandDiscreteConvexity.json",
+      "declaration": "OAI.TalagrandDiscreteConvexity.talagrand_discrete_convexity",
+      "source": "OAI/Combinatorics/DiscreteConvexity/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 184,
+      "comparator": "ComparatorChallenges/TalagrandExpectationThreshold.json",
+      "declaration": "OAI.TalagrandThreshold.talagrand_expectation_threshold_equivalence",
+      "source": "OAI/Combinatorics/ExpectationThreshold/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 185,
+      "comparator": "ComparatorChallenges/TamingCompatibility.json",
+      "declaration": "OAI.TamingCompatibility.taming_implies_compatibility",
+      "source": "OAI/Geometry/TamingCompatibility/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 186,
+      "comparator": "ComparatorChallenges/ThompsonNonamenability.json",
+      "declaration": "OAI.ThompsonNonamenability.thompson_F_nonamenable_composition",
+      "source": "OAI/GroupTheory/Thompson/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 187,
+      "comparator": "ComparatorChallenges/ThorpRouting.json",
+      "declaration": "OAI.ThorpNine.main",
+      "source": "OAI/Probability/ThorpRouting/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 188,
+      "comparator": "ComparatorChallenges/ThorpWeightedCompatibility.json",
+      "declaration": "OAI.ThorpCompatibility.weightedCompatibility_main",
+      "source": "OAI/Probability/ThorpCompatibility/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 189,
+      "comparator": "ComparatorChallenges/TingleySphereIsometry.json",
+      "declaration": "OAI.Tingley.tingley_sphere_isometry_full",
+      "source": "OAI/Analysis/SphereIsometry/Extension.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 190,
+      "comparator": "ComparatorChallenges/TorsionFreeHyperbolic.json",
+      "declaration": "OAI.Release075.main",
+      "source": "OAI/GroupTheory/Hyperbolic/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 191,
+      "comparator": "ComparatorChallenges/TorsionFreeZeroDivisors.json",
+      "declaration": "OAI.TorsionFreeZeroDivisors.main",
+      "source": "OAI/Algebra/GroupRing/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 192,
+      "comparator": "ComparatorChallenges/TraceIdealTransportSupport.json",
+      "declaration": "OAI.TraceConeClassification.TraceConeEquiv.idealOrderIso_finIdeal",
+      "source": "OAI/Analysis/TraceCone/IdealTransport.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 193,
+      "comparator": "ComparatorChallenges/TraceIdealTransportSupport.json",
+      "declaration": "OAI.TraceConeClassification.TraceConeEquiv.idealOrderIso_zeroIdeal",
+      "source": "OAI/Analysis/TraceCone/IdealTransport.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 194,
+      "comparator": "ComparatorChallenges/TraceIdealTransportSupport.json",
+      "declaration": "OAI.TraceConeClassification.closed_ideal_weight_exists",
+      "source": "OAI/Analysis/TraceCone/FiniteIdeal.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 195,
+      "comparator": "ComparatorChallenges/TriangularHilbert.json",
+      "declaration": "OAI.TriangularHilbert.main_estimate",
+      "source": "OAI/Analysis/TriangularHilbert/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 196,
+      "comparator": "ComparatorChallenges/TwoWayComplementation.json",
+      "declaration": "OAI.TwoWayComplementation.complementation_lower_bound_finite",
+      "source": "OAI/Combinatorics/TwoWayAutomata/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 197,
+      "comparator": "ComparatorChallenges/TwoWayDeterminization.json",
+      "declaration": "OAI.TwoWayComplementation.explicit_family_main",
+      "source": "OAI/Combinatorics/TwoWayAutomata/ExplicitFamily.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 198,
+      "comparator": "ComparatorChallenges/UniformFourier.json",
+      "declaration": "OAI.PowerSaving.transform_main",
+      "source": "OAI/Computability/FourierTransform/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 199,
+      "comparator": "ComparatorChallenges/UniformFourier.json",
+      "declaration": "OAI.PowerSaving.convolution_main",
+      "source": "OAI/Computability/FourierTransform/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 200,
+      "comparator": "ComparatorChallenges/UniformGamma.json",
+      "declaration": "OAI.ComparatorModel.CurrentMain.main",
+      "source": "OAI/Analysis/TracialSplitting/Challenge.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 201,
+      "comparator": "ComparatorChallenges/UniformSparsestCut.json",
+      "declaration": "OAI.UniformSparsestCut.mainGap",
+      "source": "OAI/Combinatorics/SparsestCut/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 202,
+      "comparator": "ComparatorChallenges/UniqueGamesTheorem.json",
+      "declaration": "OAI.UniqueGamesTheorem.theorem11",
+      "source": "OAI/Computability/UniqueGames/Theorem.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 203,
+      "comparator": "ComparatorChallenges/UniversalFInfinity.json",
+      "declaration": "OAI.UniversalFInfinity.universal_group_of_type_FInfinity",
+      "source": "OAI/GroupTheory/UniversalGroup/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 204,
+      "comparator": "ComparatorChallenges/VertexCover.json",
+      "declaration": "OAI.VertexCover.every_fixed_factor_below_two",
+      "source": "OAI/Computability/VertexCover/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 205,
+      "comparator": "ComparatorChallenges/VlasovMaxwell.json",
+      "declaration": "OAI.RVM.global_classical_solution",
+      "source": "OAI/Analysis/VlasovMaxwell/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 206,
+      "comparator": "ComparatorChallenges/WeakHessian.json",
+      "declaration": "OAI.WeakHessian.every_geodesic",
+      "source": "OAI/Geometry/WeakHessian/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 207,
+      "comparator": "ComparatorChallenges/WeakMTWGlobalSupport.json",
+      "declaration": "OAI.WeakMTWGlobalSupport.current_main_convexity",
+      "source": "OAI/Geometry/WeakMTW/Convexity.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    },
+    {
+      "index": 208,
+      "comparator": "ComparatorChallenges/YauCounterexample.json",
+      "declaration": "OAI.Yau.Target.yau_nodal_set_upper_bound_counterexample",
+      "source": "OAI/Geometry/NodalSets/Main.lean",
+      "kernel_import": "not_verified_in_DASHI",
+      "same_object": "not_established",
+      "stronger": "not_evaluated"
+    }
+  ]
+}
