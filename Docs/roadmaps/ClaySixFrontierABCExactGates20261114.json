@@ -66,7 +66,10 @@
         ],
         "next": "PROVED generic finite total-variation algebra only; estimate actual physical D uniformly or renormalize target family",
         "status": "OPEN",
-        "proof_receipt": false
+        "proof_receipt": false,
+        "round2_notes": [
+          "generic sharp action-oscillation bound established; original physical TV still unpaid"
+        ]
       },
       {
         "id": "YM.L1.RG",
@@ -228,7 +231,10 @@
         ],
         "next": "Actual REAL Galerkin trajectory + R853 selected signed rate + R828 Lipschitz source identification",
         "status": "OPEN",
-        "proof_receipt": false
+        "proof_receipt": false,
+        "round2_notes": [
+          "real-time negative-rate compiler source-written in Lean; actual R853 trajectory envelope open"
+        ]
       },
       {
         "id": "NS.C2.REMOTE",
@@ -313,7 +319,10 @@
         ],
         "next": "Prove/refute actual weighted signed fifth expression, do not infer sign from first gamma",
         "status": "OPEN",
-        "proof_receipt": false
+        "proof_receipt": false,
+        "round2_notes": [
+          "first-zero positive shortcut disproved under mean-square ordering; actual W signed gap unknown"
+        ]
       },
       {
         "id": "RH.G2",
@@ -384,7 +393,10 @@
         ],
         "next": "Compile true finite-state all-k gamma n/m/u/v/w/W and signed ledger",
         "status": "OPEN",
-        "proof_receipt": false
+        "proof_receipt": false,
+        "round2_notes": [
+          "real all-prefix finite transition program source-written and tested; Agda all-k bisimulation still open"
+        ]
       },
       {
         "id": "PNP.F2",
@@ -528,7 +540,10 @@
         ],
         "next": "Real sign and Q2 local fields, torsion exceptions, H1 equivalence all places",
         "status": "OPEN",
-        "proof_receipt": false
+        "proof_receipt": false,
+        "round2_notes": [
+          "Hensel local square root at x39 constructive; original H1 carrier open"
+        ]
       },
       {
         "id": "BSD.K2",
@@ -634,7 +649,10 @@
         ],
         "next": "Bishop partial-summation estimate and uniform locally analytic continuation",
         "status": "OPEN",
-        "proof_receipt": false
+        "proof_receipt": false,
+        "round2_notes": [
+          "complex eta Abel uniform tail proved analytically with exact finite identity; original Bishop analytic transport open"
+        ]
       },
       {
         "id": "BISHOP.KOENIGS",
@@ -1194,5 +1212,72 @@
     "RH candidate A1/A2/Fifth finite countermodels before global positivity claims",
     "E1/D1/D2/N1/G1 and general universal C endpoints"
   ],
-  "merge_policy": "Keep 1499, 1502 and 1503 draft until pinned kernel/axiom receipt; never bulk merge divergent files; original author/first-Git-implementation/date preserved"
+  "merge_policy": "Keep 1499, 1502 and 1503 draft until pinned kernel/axiom receipt; never bulk merge divergent files; original author/first-Git-implementation/date preserved",
+  "implementation_round_20261114_2": {
+    "time": "2026-11-14",
+    "scope": "Six active cuts; actual mathematical producer/finite machine and negative controls, no universal Clay promotions",
+    "lanes": {
+      "YM.R445.TV": {
+        "branch": "chatgpt/ym-f19-p0-source-convergence-20261114",
+        "new_script": "scripts/check_ym_r445_action_oscillation_tv.py",
+        "proven_mathematics": "for same finite carrier, TV(P,Q) <= (sqrt(M)-sqrt(m))/(sqrt(M)+sqrt(m)); with s=e^{-DeltaS}, <=tanh(osc(DeltaS)/4)",
+        "tested": "361 exact rational density examples and tensor-volume negative control through n=16 (TV>99/100)",
+        "unpaid": "original Wilson 1024-link fine blocked vs renormalized coarse action oscillation/TV at every cutoff uniformly in volume; generic comparison not sufficient",
+        "agda_kernel": false
+      },
+      "PNP.F1": {
+        "branch": "chatgpt/karp21-stacked-head-convergence-20261114",
+        "new_agda": "DASHI/Mathematics/Complexity/Karp21NativeGammaAllLengthFiniteTablePhysicalExact.agda",
+        "new_script": "scripts/check_karp21_gamma_all_length_physical.py",
+        "tested": "31713 valid gamma words k<=9, 7 malformed controls, physical 3-state/one-work tape, k>=1:2k+2 steps",
+        "new_source_proofs": [
+          "gammaAllLengthFuelledPhysicalCellBound",
+          "sourceAllLengthGammaWordExact",
+          "finishZeroPrefixGamma"
+        ],
+        "unpaid": "Agda kernel all-k physical/source bisimulation; original graph multi-token first-enabled N21 tape compiler F1-F3; F2 full heap and F4 polynomial PR.InNP",
+        "agda_kernel": false
+      },
+      "BSD.K1.LOCAL": {
+        "branch": "chatgpt/clay-20261112-four-frontier-fail-closed",
+        "new_script": "scripts/check_bsd_q2_39_coherent_hensel.py",
+        "proven_mathematics": "for x=39, y=4*r in Q2 where r^2=3705 by compatible Hensel square root, r_(n+1)=r_n+2^(n-1)*(([3705-r_n^2]/2^n) mod2) produces Cauchy root mod2^(n+1)",
+        "tested": "all stages n=3..511, corrected 2-adic Cauchy congruence mod 2^(n-1), actual curve equation",
+        "unpaid": "formal original Agda complete Q2 and R carriers, actual E(Q2)/E(R), all-image local Kummer and H1 naturality, Selmer",
+        "agda_kernel": false
+      },
+      "NS.R854": {
+        "branch": "chatgpt/ns-c-energy-smooth-weld-20261112 (dashi_lean4)",
+        "new_lean": "Synthesis/NavierStokesR854RealTimeAffineRateConditionalExact.lean",
+        "source_proof": "for every real t in [0,T], if actual selected r(t)<=r0+L*t then r(t)<0, using original R854 r0,L,T",
+        "unpaid": "actual selected real Galerkin trajectory, R71->real chart, R853 same-rate and true Lipschitz estimate, original integral source object; Lean kernel",
+        "lean_kernel": false
+      },
+      "BISHOP.ETA": {
+        "branch": "chatgpt/analytic-j-tetration-abel-transport",
+        "new_script": "scripts/check_bishop_eta_abel_uniform_tail.py",
+        "proven_mathematics": "finite Abel identity; for sigma>0, |eta-block from N| <= (1+|s|/sigma)N^-sigma, uniform on compact sigma>=delta>0 and |s|<=M",
+        "tested": "9841 exact rational Abel sequences and 320 complex numerical tail diagnostics",
+        "unpaid": "actual Bishop canonical NatLog equals log(n+1), expC addition and trig laws; real/complex integral and uniform convergence in Bishop setoid, Agda kernel",
+        "agda_kernel": false
+      },
+      "RH.B": {
+        "branch": "chatgpt/clay-continuous-fifth-sign-20261112 (dashi_lean4)",
+        "new_lean": "Synthesis/RiemannFirstZeroSignedFifthCoefficientNoGo.lean",
+        "proven_mathematics": "if 0<=gamma and gamma²<=meanSquare, gamma^5-meanSquare*gamma³<=0; disproves proposed first-zero strictly positive shortcut",
+        "unpaid": "actual signedFifthCorrelationGapAt and full A2 selected W fourthLipschitz threshold, FarHorizontal, boundary, compensated G3 eventually; check exact-head Lean kernel",
+        "lean_kernel": false
+      }
+    },
+    "kernel_status": "NO new exact-head Agda/Lean pinned checker in this execution environment",
+    "universal_claims_promoted": [],
+    "research_hypotheses_still_unproved": [
+      "YM uniform interacting TV(R445)",
+      "full N21 physical bit clock",
+      "BSD global/local H1 proof",
+      "NS actual real R853 source envelope",
+      "original Bishop analytic function laws and eta tail transport",
+      "RH actual signed A2/G3 inequality"
+    ]
+  }
 }
