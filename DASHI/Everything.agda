@@ -262,3 +262,6 @@ import DASHI.Physics.Closure.WolfPrize2026UltracoldControlBridge
 
 -- Economic source/phenomenon non-promotion using existing proof owners.
 import DASHI.Unified.WealthTaxEvidenceNonPromotionTOEExact
+-- Zipf / Hurwitz / rank-family exact finite methods and empirical authority gates.
+-- Import graph ownership only; no analytic RH, NS, fractal or empirical promotion.
+import DASHI.Statistics.ZipfFamilyEverything
