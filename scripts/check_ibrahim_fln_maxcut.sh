@@ -13,6 +13,7 @@ for source in \
   DASHI/Wikimedia/IbrahimPartialFirstLinkSemanticsExact.agda \
   DASHI/Wikimedia/IbrahimFiniteTraceCheckerWeldExact.agda \
   DASHI/Wikimedia/IbrahimFiniteCanonicalCycleRootExact.agda \
+  DASHI/Wikimedia/IbrahimFiniteDecidableReachabilityExact.agda \
   DASHI/Wikimedia/IbrahimFiniteFigureBasinCertificateExact.agda \
   DASHI/Wikimedia/IbrahimITIRConsumerRepairExact.agda; do
   test -s "$source"
@@ -50,6 +51,7 @@ for source in \
   DASHI/Wikimedia/IbrahimPartialFirstLinkSemanticsExact.agda \
   DASHI/Wikimedia/IbrahimFiniteTraceCheckerWeldExact.agda \
   DASHI/Wikimedia/IbrahimFiniteCanonicalCycleRootExact.agda \
+  DASHI/Wikimedia/IbrahimFiniteDecidableReachabilityExact.agda \
   DASHI/Wikimedia/IbrahimFiniteFigureBasinCertificateExact.agda \
   DASHI/Wikimedia/IbrahimITIRConsumerRepairExact.agda; do
   NO_TMUX=1 ./scripts/parallel_check.sh "$source"
