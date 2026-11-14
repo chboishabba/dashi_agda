@@ -1,5 +1,22 @@
 # Zelph ↔ trie / ultrametric ↔ indexed hyperfabric ↔ Nat/NORA — exact maximum-cut
 
+## 15 November 2026: Ibrahim FLN ↔ Zelph physical-gate crosswalk
+
+**Separate original objects, shared mathematics.** The [Ibrahim FLN exact-lemma matrix](https://github.com/chboishabba/dashi_agda/blob/feat/ibrahim-fln-ternary-revision-maxcut-20261114/Docs/IbrahimFLNMaximumCutAcceptanceAndExactLemmas20261115.md) (Agda [PR #1505](https://github.com/chboishabba/dashi_agda/pull/1505)) now distinguishes finite first-link graph mathematics, original author-parser source spans, and reviewed ITIR query objects. This Zelph [PR #1506](https://github.com/chboishabba/dashi_agda/pull/1506) continues to own the **different** original published HF `.bin`/Cap'n Proto source-evidence gate. Reuse the existing trie/hyperfabric and conditional consumer-lift owners, but **do not identify** an original Zelph QID/name edge with an original Wikipedia first-qualifying article link without an authenticated crosswalk.
+
+| Coupled gate | Golden mathematical owner | Actual physical obligation | State |
+| --- | --- | --- | --- |
+| Z.P0 original byte identity | Zelph A1–A6 conditional contracts (#1506) | Published immutable `.bin` original range, offset/length/hash, selected HF chunk, content-addressed manifest and matching native packed decoder | **OPEN** |
+| Z.A1 source names | QID/name trie exact route and A1 complete partition | Exhaustive original name objects, collision buckets, returned node IDs, complete declared original universe | **OPEN** |
+| Z.A2 selected adjacency | A2 query-family original/selected equivalence and scoped negatives | Original source-graph/selected native first-hop equality and full required query closure | **OPEN** |
+| FLN.B1 selected wiki link | Ibrahim original author-parser behavioural port; revision-bound edge Agda contract (#1505) | Actual independently retrieved `pageid`, `oldid`, wikitext bytes/SHA, first qualifying selected link and source-span receipt | **OPEN** |
+| FLN.B2 original physical join | Existing ITIR Hyperfabric incidence/restriction + conditional crosswalk | Show the **same physically authenticated entity and edge** appear in both original physical and original wiki-revision packets; QID alone never pays semantic or byte equality | **OPEN** |
+| FLN.B3 review + S29 | Existing consumer-bounded repair, evidence-scoped licence, selective reopening and SLR owners | Genuine reviewer-authorised query-specific after-state, qualifier/P854/GUID/P14143 retention, S29 persistence/reload | **OPEN** |
+
+**ITIR native acceptance next:** clean checkout [ITIR #14](https://github.com/chboishabba/ITIR-suite/pull/14) at the source head represented by `e64c04f`; execute `bash tools/check_zelph_physical_maxcut_offline.sh` with the required `clang++ -fuse-ld=lld -std=c++17 -O2` path. The **reported** 90/90 Python passes comprise 58 earlier PASS plus 32 PASS **after two local corrections at `bcbf7c3`**; those fixes were committed later, not independently reverified at the current clean head. Decoder compilation is not a complete native packed writer/reader roundtrip. Then rerun `audit_zelph_native_selected_physical.py --source-bin ...` against the *actual* original original-byte object and immutable shards. Offline synthetic success is weaker than native original-object verification.
+
+**No-promotion conditions:** no automatic QID/title/first-link identity, no absolute absence proof from a selected shard, no graph-only source-truth or Wikipedia edit authority, no unapproved NORA export, and no S29 evidence payment by a Python unit test. Keep original external attribution separate: Ibrahim–Danforth–Dodds original FLN, Duta et al. sheaf-hypergraph source inspiration, Éder Porto external NORA, and Zelph original upstream dataset/source. The new crosswalk text is DASHI programme governance, not a new original research citation.
+
 ## Authoritative current programme cut — 15 November 2026 (exact-head operator replay)
 
 **This section supersedes the dated checkpoint summaries below; those remain for audit history, not current gate status.**
