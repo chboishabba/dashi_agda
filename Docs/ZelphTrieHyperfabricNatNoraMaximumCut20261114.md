@@ -1,5 +1,27 @@
 # Zelph ↔ trie / ultrametric ↔ indexed hyperfabric ↔ Nat/NORA — exact maximum-cut
 
+## Verified Agda gate + concrete physical original-.bin max-cut (14 November 2026)
+
+**A1–A6 conditional proof source: EXACT-HEAD KERNEL PASS at `4c89edbe90ef0e29ea5c02b18bd5dfe090ab9e61`**. Operator reported clean tracked worktree, no overlays, seven Agda 2.9.0 targets checked using `scripts/check_zelph_trie_hyperfabric_maxcut.sh`, exit 0. It replaces the older tentative overlay-only status. No underlying Agda proof source has been changed in the following physical ITIR tranche; a later documentation-only PR head does not retroactively change that Agda result.
+
+**ITIR 58/58 local Python:** reported on `a119add`, before the *new* physical-replay source below. **Not** evidence that the latest remote PR head passes all new Python tests or compiles its native C++ adapter.
+
+**Physical P0/P2 big cut source-written in the same ITIR PR #14:**
+- `verify_zelph_bin_shard_exact.py`: selected packed shard bytes = exact local original `.bin` offset/length slices; independently rehash manifest + selected chunks.
+- `verify_zelph_hf_remote_original_ranges.py`: optional no-local-82-GiB-blob path with immutable HF original `.bin` exact HTTP 206 range requests and byte equality. Must fail closed if range requests are unsupported.
+- `plan_zelph_hf_selected_fetch.py`: manifest/route-selected-only immutable HF download plan with explicit GiB cap and opt-in existing HF client.
+- `zelph_selected_packed_shard_decoder.cpp`: thin native Zelph Cap'n Proto four-section decoder for selected QIDs/nodes, preserving collisions and neighbour truncation.
+- `audit_zelph_native_selected_physical.py`: requires an exact same-original byte-range equality receipt, independently rehashes selected physical objects, then compares actual `nodeOfName` + inverse `nameOfNode` and root `left/right` neighbour sets and raw counts with the original-bin producer oracle. All four corresponding new Python test files have been added but **not yet run**; native C++ has **not yet been compiled** here.
+
+**Operator's next decisive acceptance** is to run the exact five-QID producer/fetch/range/native sequence in [ITIR's consolidated physical execution document](https://github.com/chboishabba/ITIR-suite/blob/agent/nat-filtered-route-producer/docs/planning/zelph_original_bin_hf_ranges_maxcut_20261114.md) and archive the recomputed raw SHAs, source-revision correspondence, full native JSON and fail-closed checks. The prior historical filtered-route/receipt digests are not reusable after the C++ producer's added adjacency output.
+
+**Exact gate disposition:** A1's *formal source* CLOSED; *selected real original name bytes* OPEN; complete original name-domain partition OPEN. A2's *conditional factorisation source* CLOSED; actual selected-root one-hop equality OPEN; all specified relation words/joins OPEN. A3–A6 physical premises OPEN; real native GUID/P14143/P854 + S29 production + Éder Porto NORA export OPEN. A successful byte-range comparison alone does not fill those semantic gaps, create global absence or grant edit authority.
+
+**Current physical blocker:** This chat's environment could not resolve `huggingface.co` via DNS or open the pinned raw manifest using web retrieval, so no physical HF bytes were fetched here. The published Zelph full network is roughly 82 GiB, but the published manifest supplies source offsets and exact packed shard paths for selective comparisons. See [Zelph Sharding](https://zelph.org/sharding/).
+
+
+
+
 ## Latest kernel/dependency integration checkpoint — 14 November 2026 (after local Agda 2.9 investigation)
 
 **Current authoritative distinction:** The operator ran ITIR's six targeted suites at prior PR head `a119add`: **58/58 tests passed in 3.54 s**. SLR reported **4/4** focused Rust tests and SensibLaw/NORA **17/17** Python tests. These are native *local reported* test receipts for those recorded heads; they do **not** authenticate raw remote HF payloads, nor automatically certify later source heads.
