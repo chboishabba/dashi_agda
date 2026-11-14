@@ -109,3 +109,7 @@ import DASHI.Interop.LeanRound11MachinCanonicalRouteBParityExact
 import DASHI.Interop.LeanRound11MachinReplayEvidenceExact
 
 import DASHI.Interop.HierarchicalSpectralParetoExact
+import DASHI.Interop.WorldEigenResidualStratification
+import DASHI.Interop.HierarchicalSpectralParetoExact
+import DASHI.Interop.SublinearTopicConductorCostExact
+import DASHI.Interop.CombinatorialMaxCutPhysicsAlignmentExact

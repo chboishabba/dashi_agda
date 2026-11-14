@@ -6,6 +6,8 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
+open import Data.Fin.Base using (Fin)
+open import Relation.Binary.PropositionalEquality using (_≢_)
 
 import DASHI.Interop.SLRWorldResearchIterationBudgetExact as Budget
 
@@ -126,6 +128,94 @@ allocationDoesNotCreateSemanticAuthority = refl
 parallelStillRequiresNoTypedMeet :
   parallelDispatchRequiresNoTypedMeet canonicalDynamicConductorBoundary ≡ true
 parallelStillRequiresNoTypedMeet = refl
+
+
+------------------------------------------------------------------------
+-- FULL TWENTY-WORKER CONCURRENT SCHEDULE
+--
+-- A total function from Fin 20 occupies every slot.
+-- Pairwise independence is supplied as typed noTypedMeet evidence.
+------------------------------------------------------------------------
+
+twentyWorkerCapacity : Nat
+twentyWorkerCapacity = 20
+
+twentyWorkerCapacityIsTwenty :
+  twentyWorkerCapacity ≡ 20
+twentyWorkerCapacityIsTwenty = refl
+
+record FullTwentyWorkerSchedule
+    (Goal : Set)
+    (NoTypedMeet : Goal → Goal → Set) : Set₁ where
+  constructor full-twenty-worker-schedule
+  field
+    assignment : Fin 20 → Goal
+    GoalUnblocked : Goal → Set
+    scheduledGoalUnblocked :
+      (slot : Fin 20) →
+      GoalUnblocked (assignment slot)
+    GoalParetoEligible : Goal → Set
+    scheduledGoalParetoEligible :
+      (slot : Fin 20) →
+      GoalParetoEligible (assignment slot)
+    TopParetoRanked : Goal → Set
+    scheduledGoalTopParetoRanked :
+      (slot : Fin 20) →
+      TopParetoRanked (assignment slot)
+    distinctSlotsHaveDistinctGoals :
+      (left right : Fin 20) →
+      left ≢ right →
+      assignment left ≢ assignment right
+    pairwiseNoTypedMeet :
+      (left right : Fin 20) →
+      left ≢ right →
+      NoTypedMeet (assignment left) (assignment right)
+
+open FullTwentyWorkerSchedule public
+
+record TwentyWorkerConcurrencyBoundary : Set where
+  constructor twenty-worker-concurrency-boundary
+  field
+    capacity : Nat
+    capacityIsTwenty : capacity ≡ 20
+    allSlotsMustBeOccupied : Bool
+    allSlotsMustBeOccupiedIsTrue :
+      allSlotsMustBeOccupied ≡ true
+    allGoalsMustBeUnblocked : Bool
+    allGoalsMustBeUnblockedIsTrue :
+      allGoalsMustBeUnblocked ≡ true
+    allGoalsMustBeParetoEligible : Bool
+    allGoalsMustBeParetoEligibleIsTrue :
+      allGoalsMustBeParetoEligible ≡ true
+    allGoalsMustBeTopParetoRanked : Bool
+    allGoalsMustBeTopParetoRankedIsTrue :
+      allGoalsMustBeTopParetoRanked ≡ true
+    distinctSlotsRequireNoTypedMeet : Bool
+    distinctSlotsRequireNoTypedMeetIsTrue :
+      distinctSlotsRequireNoTypedMeet ≡ true
+    serialModuloEightIsAcceptedAsTwentyWorkerSchedule : Bool
+    serialModuloEightIsAcceptedAsTwentyWorkerScheduleIsFalse :
+      serialModuloEightIsAcceptedAsTwentyWorkerSchedule ≡ false
+
+open TwentyWorkerConcurrencyBoundary public
+
+canonicalTwentyWorkerConcurrencyBoundary :
+  TwentyWorkerConcurrencyBoundary
+canonicalTwentyWorkerConcurrencyBoundary =
+  twenty-worker-concurrency-boundary
+    20 refl
+    true refl
+    true refl
+    true refl
+    true refl
+    true refl
+    false refl
+
+serialModuloEightIsNotFullTwentyWorkerConcurrency :
+  serialModuloEightIsAcceptedAsTwentyWorkerSchedule
+    canonicalTwentyWorkerConcurrencyBoundary
+  ≡ false
+serialModuloEightIsNotFullTwentyWorkerConcurrency = refl
 
 budgetAnchor : Budget.WorldResearchIterationBudget
 budgetAnchor = Budget.canonicalWorldResearchIterationBudget

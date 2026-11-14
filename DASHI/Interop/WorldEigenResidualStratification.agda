@@ -1,8 +1,13 @@
+{-# OPTIONS --safe #-}
 module DASHI.Interop.WorldEigenResidualStratification where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
+open import Data.Fin.Base using (Fin)
 
 import DASHI.Core.CoarseFineFabricCalculusExact as Coarse
 import DASHI.Cognition.PNF.WikidataRepairProposal as Repair
@@ -47,6 +52,211 @@ subEigenDepthIsTwo = refl
 
 fibreDepthIsThree : scaleDepth fibreScale ≡ 3
 fibreDepthIsThree = refl
+
+
+------------------------------------------------------------------------
+-- AO HIGH-RESOLUTION SPECTRAL STRATIFICATION
+--
+-- Keep these levels distinct:
+-- eigenspace -> primary topic -> subtopic -> fibre -> goal.
+-- The older WorldEigenScale remains available for existing consumers.
+------------------------------------------------------------------------
+
+data AOSpectralScale : Set where
+  eigenspaceScale : AOSpectralScale
+  primaryTopicScale : AOSpectralScale
+  subtopicScale : AOSpectralScale
+  aoFibreScale : AOSpectralScale
+  goalScale : AOSpectralScale
+
+aoScaleDepth : AOSpectralScale → Nat
+aoScaleDepth eigenspaceScale = 0
+aoScaleDepth primaryTopicScale = 1
+aoScaleDepth subtopicScale = 2
+aoScaleDepth aoFibreScale = 3
+aoScaleDepth goalScale = 4
+
+goalDepthIsFour : aoScaleDepth goalScale ≡ 4
+goalDepthIsFour = refl
+
+data SpectralTruncationK : Set where
+  k50 : SpectralTruncationK
+  k100 : SpectralTruncationK
+
+spectralTruncationValue : SpectralTruncationK → Nat
+spectralTruncationValue k50 = 50
+spectralTruncationValue k100 = 100
+
+k50ValueIsFifty : spectralTruncationValue k50 ≡ 50
+k50ValueIsFifty = refl
+
+k100ValueIsOneHundred : spectralTruncationValue k100 ≡ 100
+k100ValueIsOneHundred = refl
+
+record MPSpectralBasisWitness (Scalar Vector : Set) : Set₁ where
+  constructor mp-spectral-basis-witness
+  field
+    truncation : SpectralTruncationK
+    sampleCount : Nat
+    activation : Fin sampleCount → Vector
+    covarianceAction : Vector → Vector
+    EmpiricalCovarianceAATOverM :
+      (Fin sampleCount → Vector) →
+      (Vector → Vector) →
+      Set
+    covarianceIsEmpiricalAATOverM :
+      EmpiricalCovarianceAATOverM activation covarianceAction
+    eigenvalue : Vector → Scalar
+    lambdaPlus : Scalar
+    AboveBulkEdge : Scalar → Scalar → Set
+    selectedAboveBulkEdge :
+      (vector : Vector) →
+      AboveBulkEdge (eigenvalue vector) lambdaPlus
+    Orthonormal : Vector → Vector → Set
+    selectedBasisOrthonormal :
+      (left right : Vector) →
+      Orthonormal left right
+
+open MPSpectralBasisWitness public
+
+record PrimaryTopicQuotient
+    (Representation Threshold Topic : Set) : Set₁ where
+  constructor primary-topic-quotient
+  field
+    tauPrimary : Threshold
+    primaryProject : Representation → Topic
+    PrimaryRelated : Representation → Representation → Set
+    primaryRelationRespectsProjection :
+      ∀ {left right} →
+      PrimaryRelated left right →
+      primaryProject left ≡ primaryProject right
+
+open PrimaryTopicQuotient public
+
+record SubtopicOrbit
+    (Representation Subtopic : Set) : Set₁ where
+  constructor subtopic-orbit
+  field
+    subtopicProject : Representation → Subtopic
+    LocalOrbit : Representation → Representation → Set
+    localOrbitRespectsSubtopic :
+      ∀ {left right} →
+      LocalOrbit left right →
+      subtopicProject left ≡ subtopicProject right
+
+open SubtopicOrbit public
+
+record CompleteLinkFibre
+    (Representation : Set)
+    (Near : Representation → Representation → Set) : Set₁ where
+  constructor complete-link-fibre
+  field
+    Member : Representation → Set
+    pairwiseNear :
+      ∀ {left right} →
+      Member left →
+      Member right →
+      Near left right
+
+open CompleteLinkFibre public
+
+record TypedUnblockedGoal (GoalKind : Set) : Set where
+  constructor typed-unblocked-goal
+  field
+    goalKind : GoalKind
+    unblocked : Bool
+    unblockedIsTrue : unblocked ≡ true
+
+open TypedUnblockedGoal public
+
+------------------------------------------------------------------------
+-- TOKEN ADMISSION FIREWALL
+--
+-- Concrete lexical recognition belongs to the runtime discriminator.
+-- Agda owns the typed admission rule.
+------------------------------------------------------------------------
+
+data TokenClass : Set where
+  semanticToken : TokenClass
+  hexLiteralNoise : TokenClass
+  memoryAddressNoise : TokenClass
+  rawUITokenNoise : TokenClass
+  rawDOMTokenNoise : TokenClass
+
+record CorpusToken : Set where
+  constructor corpus-token
+  field
+    rawToken : String
+    tokenClass : TokenClass
+
+open CorpusToken public
+
+TopicTokenAdmissible : CorpusToken → Set
+TopicTokenAdmissible token =
+  tokenClass token ≡ semanticToken
+
+noiseTokenCannotBeAdmitted :
+  (raw : String) →
+  (noise : TokenClass) →
+  (noise ≡ semanticToken → ⊥) →
+  TopicTokenAdmissible (corpus-token raw noise) →
+  ⊥
+noiseTokenCannotBeAdmitted raw noise notSemantic admitted =
+  notSemantic admitted
+
+hexLiteralExample : CorpusToken
+hexLiteralExample =
+  corpus-token "0xffff1000" hexLiteralNoise
+
+memoryDumpExample : CorpusToken
+memoryDumpExample =
+  corpus-token "0xffff1000()" memoryAddressNoise
+
+rawUICollapseExample : CorpusToken
+rawUICollapseExample =
+  corpus-token "collapse(property: auto)" rawUITokenNoise
+
+hexLiteralExampleRejected :
+  TopicTokenAdmissible hexLiteralExample → ⊥
+hexLiteralExampleRejected ()
+
+memoryDumpExampleRejected :
+  TopicTokenAdmissible memoryDumpExample → ⊥
+memoryDumpExampleRejected ()
+
+rawUICollapseExampleRejected :
+  TopicTokenAdmissible rawUICollapseExample → ⊥
+rawUICollapseExampleRejected ()
+
+record AOSpectralStratificationBoundary : Set where
+  constructor ao-spectral-stratification-boundary
+  field
+    eigenspaceIsNotPrimaryTopic : Bool
+    primaryTopicIsNotSubtopic : Bool
+    subtopicIsNotFibre : Bool
+    fibreIsNotGoal : Bool
+    tokenNoiseCanCreateTopic : Bool
+    spectralCoordinateCreatesProofAuthority : Bool
+
+open AOSpectralStratificationBoundary public
+
+canonicalAOSpectralStratificationBoundary :
+  AOSpectralStratificationBoundary
+canonicalAOSpectralStratificationBoundary =
+  ao-spectral-stratification-boundary
+    true true true true
+    false false
+
+tokenNoiseDoesNotCreateTopic :
+  tokenNoiseCanCreateTopic canonicalAOSpectralStratificationBoundary
+  ≡ false
+tokenNoiseDoesNotCreateTopic = refl
+
+spectralCoordinateDoesNotCreateProofAuthority :
+  spectralCoordinateCreatesProofAuthority
+    canonicalAOSpectralStratificationBoundary
+  ≡ false
+spectralCoordinateDoesNotCreateProofAuthority = refl
 
 data MacroOrbitRelation : Set where
   orthogonalDomains : MacroOrbitRelation
