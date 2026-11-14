@@ -184,3 +184,4 @@ import DASHI.Wikimedia.IbrahimFirstLinkV3ExecutionLanePruningExact
 -- Ibrahim source-attributed deterministic orbit and ITIR/Hyperfabric welds.
 import DASHI.Wikimedia.IbrahimFiniteOrbitRevisionWeldExact
 import DASHI.Wikimedia.IbrahimMultilingualHyperfabricWeldExact
+import DASHI.Wikimedia.IbrahimPublishedSevenNodeFunnelExact
