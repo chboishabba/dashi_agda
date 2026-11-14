@@ -3,7 +3,7 @@ module DASHI.Education.DigitalESDConnectedTimeFibreHyperfabricExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; suc; _+_)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
@@ -71,6 +71,23 @@ canonicalSourcePreservingRevision :
   SourcePreservingRevision original revision
 canonicalSourcePreservingRevision original revision =
   source-preserving-revision refl refl true refl
+
+
+-- A stronger, evidence-demanding revision relation. Unlike the earlier
+-- reflexive SourcePreservingRevision receipt, this cannot be constructed
+-- for two arbitrary fibres: source identity must match and time advances.
+-- Consequence invalidation remains the responsibility of the existing
+-- temporal diagnosis/dependency-lineage owner and must be linked separately.
+record HistoricalRevisionDependency
+  (original revision : TemporalSourceFibre) : Set where
+  constructor historical-revision-dependency
+  field
+    sameHistoricalSource : sourceIdentity revision ≡ sourceIdentity original
+    elapsedAfterOriginal : Nat
+    revisionTimeAdvances :
+      time revision ≡ suc (time original + elapsedAfterOriginal)
+
+open HistoricalRevisionDependency public
 
 -- A scholarly reader must keep candidate interpretation separate from
 -- admitted study findings.  The policy is a typed relation, not a proof that
