@@ -6,6 +6,7 @@ import DASHI.Wikimedia.IbrahimPublishedSevenNodeFunnelExact as Figure
 import DASHI.Wikimedia.IbrahimFiniteOrbitRevisionWeldExact as Orbit
 import DASHI.Wikimedia.IbrahimGeneralFiniteCertificateKernelExact as General
 import DASHI.Wikimedia.IbrahimFinitePigeonholeProducerExact as Pigeonhole
+import DASHI.Wikimedia.IbrahimCycleRotationRelationExact as Rotation
 import DASHI.Wikimedia.WikipediaFirstLinkNetworkExact as FLN
 
 ------------------------------------------------------------------------
@@ -177,6 +178,28 @@ figureGeneralCensusEntrySound :
   ≡ Orbit.representative (General.eventCycle figureGeneralCensus node)
 figureGeneralCensusEntrySound =
   General.terminalCensusMatchesCertificate figureGeneralCensus
+
+------------------------------------------------------------------------
+-- The genuine three-node period admits two-sided graph rotations.
+-- In particular A and B are NOT equal representatives, even though
+-- they lie on the same terminal cycle. This is a stronger and more
+-- faithful property than choosing identical labels for basins.
+------------------------------------------------------------------------
+
+figureCycleARotatesToB :
+  Rotation.MutualOrbitRotation Figure.figureFirstLink Figure.a Figure.b
+figureCycleARotatesToB =
+  Rotation.knownPeriodMakesMutualRotation 1 2 refl refl
+
+figureCycleARotatesToC :
+  Rotation.MutualOrbitRotation Figure.figureFirstLink Figure.a Figure.c
+figureCycleARotatesToC =
+  Rotation.knownPeriodMakesMutualRotation 2 1 refl refl
+
+figureCycleBRotatesToC :
+  Rotation.MutualOrbitRotation Figure.figureFirstLink Figure.b Figure.c
+figureCycleBRotatesToC =
+  Rotation.knownPeriodMakesMutualRotation 1 2 refl refl
 
 ------------------------------------------------------------------------
 -- Explicit scope boundary: the enumeration is of the 7-node
