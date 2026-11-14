@@ -12,7 +12,7 @@ module DASHI.Cognition.PNF.X369OriginalSignedSiteOrderBidiExact where
 -- This file is a source ordering crosswalk; Python source SHA and Agda
 -- kernel checker receipts remain separate from the mathematical type.
 
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 
