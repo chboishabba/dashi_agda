@@ -268,7 +268,6 @@ zelphQueryScopedNegativeCompletenessIff :
     {InScope : Query → Set} →
   ScopedNegativeCertificate World Query originalMiss viewMiss InScope →
   (world : World) (query : Query) → InScope query →
-  viewMiss world query ≡ true →
   (viewMiss world query ≡ true → originalMiss world query ≡ true)
   ×
   (originalMiss world query ≡ true → viewMiss world query ≡ true)
