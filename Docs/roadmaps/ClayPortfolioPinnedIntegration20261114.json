@@ -638,6 +638,15 @@
         "count": 4,
         "gate": "NS.R854",
         "real_ode_rate_proved": false
+      },
+      {
+        "source_pr": 1498,
+        "donor": "2c4204914d933aff95aa4a046a6237e42ac3eeeb",
+        "destination_pr": 1503,
+        "count": 5,
+        "gate": "YM.P0.L1",
+        "source": "BalabanP0FourOrbitMidpointHessianBudgetAlgebraExact.agda and its four original imports",
+        "physical_Hessian_integrals_proved": false
       }
     ],
     "external_NS_announcement": {
