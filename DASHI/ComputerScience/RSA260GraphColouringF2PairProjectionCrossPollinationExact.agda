@@ -45,7 +45,7 @@ graphColouringCoordinate = graph-colouring-source-coordinate
 record F2PairCovarianceReceipt : Set where
   constructor f2-pair-covariance-receipt
   field
-    field : String
+    scalarField : String
     pairDimension : Nat
     stateCount : Nat
     nonzeroStateCount : Nat
