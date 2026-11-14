@@ -1,0 +1,63 @@
+module DASHI.Physics.Closure.MonsterC3RepresentationNativeCorrectionValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Moonshine.Monster3BWZetaBasisVectorRecognitionCorrectionExact as BasisCorrection
+import DASHI.Moonshine.Monster3BProofRelevantRecognitionHardeningExact as Hardening
+import DASHI.Moonshine.Monster3BHZetaCharacterTransportCompilerExact as HZetaCompiler
+import DASHI.Physics.Chemistry.AmmoniaMonster3BRepresentationNativeCorrectionExact as NativeCorrection
+
+finiteModelIsBasisLabelSurface :
+  BasisCorrection.WZetaBasisVectorCorrectionBoundary.finiteX6Fin90IsBasisLabelSurface
+    BasisCorrection.canonicalBoundary ≡ true
+finiteModelIsBasisLabelSurface = refl
+
+finiteBasisLabelsAreNotWholeVOAStateCarrier :
+  BasisCorrection.WZetaBasisVectorCorrectionBoundary.literalVOAStateCarrierIsBasisLabelCarrier
+    BasisCorrection.canonicalBoundary ≡ false
+finiteBasisLabelsAreNotWholeVOAStateCarrier = refl
+
+wholeLiteralSectorFiniteBijectionNotRequired :
+  BasisCorrection.WZetaBasisVectorCorrectionBoundary.wholeLiteralSectorBijectionToFiniteLabelsRequired
+    BasisCorrection.canonicalBoundary ≡ false
+wholeLiteralSectorFiniteBijectionNotRequired = refl
+
+proofRelevantHZetaWrapperAvailable :
+  Hardening.Boundary.paidHZetaRecognitionWrapperAvailable
+    Hardening.canonicalBoundary ≡ true
+proofRelevantHZetaWrapperAvailable = refl
+
+characterTransportCompilerAvailable :
+  HZetaCompiler.Boundary.paidHZetaRecognitionCompilerAvailable
+    HZetaCompiler.canonicalBoundary ≡ true
+characterTransportCompilerAvailable = refl
+
+native369ChartIsBasisLabelChart :
+  NativeCorrection.RepresentationNativeCorrectionBoundary.native369FiniteChartIsBasisLabelChart
+    NativeCorrection.canonicalRepresentationNativeCorrectionBoundary ≡ true
+native369ChartIsBasisLabelChart = refl
+
+native369ChartIsNotWholeVOAStateBijection :
+  NativeCorrection.RepresentationNativeCorrectionBoundary.native369FiniteChartIsWholeVOAStateBijection
+    NativeCorrection.canonicalRepresentationNativeCorrectionBoundary ≡ false
+native369ChartIsNotWholeVOAStateBijection = refl
+
+actualBasisRecognitionComposesWithNative369 :
+  NativeCorrection.RepresentationNativeCorrectionBoundary.actualBasisRecognitionComposesWithNative369
+    NativeCorrection.canonicalRepresentationNativeCorrectionBoundary ≡ true
+actualBasisRecognitionComposesWithNative369 = refl
+
+legacyFiniteRecognitionIsNotLinearVOARecognition :
+  NativeCorrection.RepresentationNativeCorrectionBoundary.legacyFiniteActualSectorRecognitionPaysLinearVOARecognition
+    NativeCorrection.canonicalRepresentationNativeCorrectionBoundary ≡ false
+legacyFiniteRecognitionIsNotLinearVOARecognition = refl
+
+actualHZetaSameObjectStillUnpaid :
+  NativeCorrection.RepresentationNativeCorrectionBoundary.actualHZetaSameObjectRecognitionPaid
+    NativeCorrection.canonicalRepresentationNativeCorrectionBoundary ≡ false
+actualHZetaSameObjectStillUnpaid = refl
+
+physicalNH3MonsterLinearStateStillUnpaid :
+  NativeCorrection.RepresentationNativeCorrectionBoundary.physicalNH3ToMonsterLinearStatePaid
+    NativeCorrection.canonicalRepresentationNativeCorrectionBoundary ≡ false
+physicalNH3MonsterLinearStateStillUnpaid = refl
