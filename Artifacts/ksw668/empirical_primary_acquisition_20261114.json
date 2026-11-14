@@ -1,0 +1,359 @@
+{
+  "schema": "dashi.ksw668.empirical-source-acquisition.v1",
+  "date_utc": "2026-11-14",
+  "authoritativeness": "source-author measurements distinct from DASHI inference and conditional models",
+  "existing_biology_owners": [
+    {
+      "pr": 1021,
+      "role": "merged multichannel avian magnetoreception evidence and source registry"
+    },
+    {
+      "pr": 1461,
+      "head": "31c2ca1e93213c8f6e8544b10cbd580ec818ee96",
+      "role": "magnetic sensing alternatives, original avian CRY4/vestibular/hepatic and human EEG; read-only creator sequence source"
+    },
+    {
+      "pr": 1471,
+      "head": "bd8de172f4db26e1527b69c6893f0ec759a9dcd0",
+      "role": "measured dmsC nine-mer genotypes, 635085 replicate values, 257565 measured genotype means, source Git blob 151cd87272cbdd6bcc2b1e70bdfd2a4ea2933d2c; no carbon isotope experiment"
+    },
+    {
+      "pr": 1454,
+      "head": "e6d0eee68d248659d2239ee5a4b64191e37a81d1",
+      "role": "BH4 ontology/biochemistry, explicit unmeasured kinetics; no isotope-nuclear closure"
+    },
+    {
+      "pr": 993,
+      "role": "field nitrogen-isotope/BNF provenance discipline, not C14 human production"
+    }
+  ],
+  "empirical": {
+    "atmospheric_bomb_C14": {
+      "source_authors": "Quan Hua et al. 2021/2022",
+      "doi": "10.1017/RDC.2021.95",
+      "basis": "original atmospheric CO2/tree-ring calibrated compiled SH zones 1–2",
+      "primary_source": "https://doi.org/10.1017/RDC.2021.95",
+      "redistributed_curve": "https://github.com/Maarten14C/rintcal/blob/master/inst/extdata/postbomb_SH1-2.14C",
+      "retrieved_repository": "Maarten14C/rintcal",
+      "retrieved_path": "inst/extdata/postbomb_SH1-2.14C",
+      "retrieved_blob_sha1": "22ef8d05b8ca09d71f5b1582206a4c92304674e6",
+      "package_license": "GPL-2.0-or-later, redistributed curve upstream; full raw not vendored in this PR",
+      "rows_read_live": 70,
+      "year_range": [
+        1950,
+        2019
+      ],
+      "storage": "13 source-derived annual calibration rows retained below; full 70 rows fetched live and linked/pinned upstream",
+      "scale": "14C age BP in years; approximate F14C = exp(-14C_ageBP/8033), with first-order sigma F14C/8033 times sigma_ageBP",
+      "peak_source_row": {
+        "calendar_year": 1966,
+        "cal_BP": -16,
+        "radiocarbon_age_BP": -3916,
+        "sigma_age_BP": 64,
+        "fraction_modern": 1.62822279,
+        "sigma_fraction_modern": 0.01297227
+      },
+      "selected_annual_source_rows": [
+        {
+          "calendar_year": 1950,
+          "cal_BP": 0,
+          "radiocarbon_age_BP": 179,
+          "sigma_age_BP": 41,
+          "fraction_modern": 0.97796335,
+          "sigma_fraction_modern": 0.00499147
+        },
+        {
+          "calendar_year": 1955,
+          "cal_BP": -5,
+          "radiocarbon_age_BP": 149,
+          "sigma_age_BP": 32,
+          "fraction_modern": 0.98162248,
+          "sigma_fraction_modern": 0.00391036
+        },
+        {
+          "calendar_year": 1960,
+          "cal_BP": -10,
+          "radiocarbon_age_BP": -1298,
+          "sigma_age_BP": 48,
+          "fraction_modern": 1.17537056,
+          "sigma_fraction_modern": 0.00702325
+        },
+        {
+          "calendar_year": 1963,
+          "cal_BP": -13,
+          "radiocarbon_age_BP": -1888,
+          "sigma_age_BP": 164,
+          "fraction_modern": 1.26494735,
+          "sigma_fraction_modern": 0.02582489
+        },
+        {
+          "calendar_year": 1965,
+          "cal_BP": -15,
+          "radiocarbon_age_BP": -3825,
+          "sigma_age_BP": 168,
+          "fraction_modern": 1.60988192,
+          "sigma_fraction_modern": 0.03366864
+        },
+        {
+          "calendar_year": 1966,
+          "cal_BP": -16,
+          "radiocarbon_age_BP": -3916,
+          "sigma_age_BP": 64,
+          "fraction_modern": 1.62822279,
+          "sigma_fraction_modern": 0.01297227
+        },
+        {
+          "calendar_year": 1967,
+          "cal_BP": -17,
+          "radiocarbon_age_BP": -3817,
+          "sigma_age_BP": 70,
+          "fraction_modern": 1.60827945,
+          "sigma_fraction_modern": 0.01401463
+        },
+        {
+          "calendar_year": 1970,
+          "cal_BP": -20,
+          "radiocarbon_age_BP": -3415,
+          "sigma_age_BP": 36,
+          "fraction_modern": 1.52977608,
+          "sigma_fraction_modern": 0.00685571
+        },
+        {
+          "calendar_year": 1980,
+          "cal_BP": -30,
+          "radiocarbon_age_BP": -2062,
+          "sigma_age_BP": 38,
+          "fraction_modern": 1.29264583,
+          "sigma_fraction_modern": 0.00611484
+        },
+        {
+          "calendar_year": 1990,
+          "cal_BP": -40,
+          "radiocarbon_age_BP": -1231,
+          "sigma_age_BP": 28,
+          "fraction_modern": 1.16560804,
+          "sigma_fraction_modern": 0.00406287
+        },
+        {
+          "calendar_year": 2000,
+          "cal_BP": -50,
+          "radiocarbon_age_BP": -763,
+          "sigma_age_BP": 15,
+          "fraction_modern": 1.09964037,
+          "sigma_fraction_modern": 0.00205336
+        },
+        {
+          "calendar_year": 2010,
+          "cal_BP": -60,
+          "radiocarbon_age_BP": -443,
+          "sigma_age_BP": 23,
+          "fraction_modern": 1.05669648,
+          "sigma_fraction_modern": 0.00302552
+        },
+        {
+          "calendar_year": 2019,
+          "cal_BP": -69,
+          "radiocarbon_age_BP": -163,
+          "sigma_age_BP": 8,
+          "fraction_modern": 1.02049857,
+          "sigma_fraction_modern": 0.00101631
+        }
+      ],
+      "boundary": "regional atmospheric reference for carbon incorporation, NOT emotion-linked body nuclear conversion; this zone not globally valid"
+    },
+    "nuclear_cross_section": {
+      "source_authors": "Gengchen Li, Tatsuya Katabuchi, Ziyue Zhu, Maxwell Clark Maloney, Zefeng Shao, Atsushi Kimura, Shunsuke Endo, Gerard Rovira, Shoji Nakamura",
+      "doi": "10.1080/00223131.2026.2750299",
+      "status": "accepted author version online 2026-10-23",
+      "facility": "ANNRI J-PARC, LiF reference plus PPO scintillator",
+      "measured_range_eV": [
+        0.0036,
+        1.8
+      ],
+      "energy_thermal_eV": 0.0253,
+      "thermal_measured_barn": 1.828,
+      "thermal_reported_total_sigma_barn": 0.053,
+      "fitted_powerlaw": {
+        "formula": "sigma(E_eV) = A*(E_eV)^B barns",
+        "A_barn": 0.2706,
+        "sigma_A_barn": 0.0074,
+        "B": -0.5103,
+        "sigma_B": 0.005,
+        "rho_AB": 0.993
+      },
+      "source_fit_grid": [
+        {
+          "energy_eV": 0.0036,
+          "fit_barn": 4.779106,
+          "fit_sigma_only_barn": 0.01613
+        },
+        {
+          "energy_eV": 0.01,
+          "fit_barn": 2.837447,
+          "fit_sigma_only_barn": 0.014876
+        },
+        {
+          "energy_eV": 0.0253,
+          "fit_barn": 1.766914,
+          "fit_sigma_only_barn": 0.016514
+        },
+        {
+          "energy_eV": 0.05,
+          "fit_barn": 1.248083,
+          "fit_sigma_only_barn": 0.015723
+        },
+        {
+          "energy_eV": 0.1,
+          "fit_barn": 0.87625,
+          "fit_sigma_only_barn": 0.013996
+        },
+        {
+          "energy_eV": 0.5,
+          "fit_barn": 0.385428,
+          "fit_sigma_only_barn": 0.009215
+        },
+        {
+          "energy_eV": 1,
+          "fit_barn": 0.2706,
+          "fit_sigma_only_barn": 0.0074
+        },
+        {
+          "energy_eV": 1.8,
+          "fit_barn": 0.200476,
+          "fit_sigma_only_barn": 0.006068
+        }
+      ],
+      "fit_value_at_thermal_barn": 1.766914,
+      "difference_fit_vs_reported_thermal_barn": 0.061086,
+      "source_uncertainty_scope": "fit parameter covariance is NOT same as paper's 0.053-b thermal total error; model/paper discrepancy retained",
+      "conditional_exposure_example": {
+        "target_atoms_N14": 100000000000000000000,
+        "flux_neutrons_cm2_s": 1000000,
+        "rate_per_s": 182.8,
+        "rate_sigma_per_s": 5.3,
+        "status": "hypothetical high flux; not biological ambient exposure"
+      },
+      "boundary": "energy-binned raw event counts not available from article body; no source-matched in-body neutron spectrum"
+    },
+    "measured_environmental_neutrons": {
+      "source": "Dirk, Nelson, Ziegler, Thompson (2003), Terrestrial Thermal Neutrons, IEEE TNS",
+      "url": "https://research.ibm.com/publications/terrestrial-thermal-neutrons",
+      "primary_measurement": "NIST-traceable terrestrial thermal-neutron monitor; mean sea level flux approx 4 neutrons/(cm² hour), normalized to US geomagnetic station",
+      "flux_neutrons_cm2_hour": 4,
+      "flux_neutrons_cm2_s": 0.0011111111111111111,
+      "conditional_crosssection_rate_for_1e20_targets_per_s": 2.0311111111111109e-7,
+      "conditional_crosssection_rate_for_1e20_targets_per_year": 6.409699199999999,
+      "limitations": "geographic, altitude, indoor shielding, angular spectrum, thermal transport and body neutron field not calibrated; only illustrative unshielded thin-target estimate"
+    },
+    "pigeon_macrophage_intervention": {
+      "source_authors": "Clivia Lisowski et al.",
+      "doi": "10.1126/science.ady2486",
+      "original_source": "https://doi.org/10.1126/science.ady2486",
+      "trial_condition": "19 km homing route, overcast, control liposomes vs liver macrophage depletion, trained subjects, randomized",
+      "n_total": 34,
+      "n_control": 16,
+      "n_depleted": 18,
+      "control_homed_same_day": 16,
+      "depleted_homed_same_day": 0,
+      "single_tail_fisher_hypergeometric_p": 4.537284484148164e-10,
+      "intervention_effect_risk_difference": 1,
+      "one_sided_marginal_95_percent_clopper_pearson_conservative_lower_RD": 0.608790817654325,
+      "caveat_stats": "conditional hypergeometric p from published counts; reported timing 'within 70 min' for controls vs 'none same day' for depleted; CI from independent group 95 percent marginal bounds is conservative/non-simultaneous, not a registered primary trial analysis",
+      "original_material": {
+        "magnetic_blocking_temperature_K": 12,
+        "magnetization_2K_A_m2_per_kg": 0.024,
+        "identified_expressed_protein_coding_genes": 7116,
+        "macrophage_signature_overlap_genes": 43,
+        "macrophage_signature_p_adj": 0.0321,
+        "other_cell_signature_p_adj": 0.2461
+      },
+      "raw_tracking": "Movebank promised by publication; actual birds' GPS trajectories NOT fetched or verified",
+      "sequencing": {
+        "bioproject": "PRJEB98986",
+        "NCBI": "https://www.ncbi.nlm.nih.gov/bioproject/1489155",
+        "registered_date": "2026-07-02",
+        "public_SRA_experiments": 1,
+        "reported_sequence_volume_MB": 395,
+        "raw_FASTQ_downloaded": false
+      },
+      "mechanisms": "observed liver material / behavior intervention; not direct vagus spike encoding; not isotope nuclear transmutation"
+    },
+    "vestibular_competing_physics": {
+      "original_experimental_DOI": "10.1126/science.aea6425",
+      "authors": "Daniel R. Kattnig",
+      "evidence": "vestibular neuronal activation and proposed electromagnetic induction mechanism",
+      "physical_negative_control_DOI": "10.1098/rsif.2026.0332",
+      "status": "2026-09-16 theory / information-theory analysis, NOT new experimental negation",
+      "content": "idealized Faraday-induction toy model finds insufficient directional signal-to-noise/information for semicircular canals; does not reject observed vestibular neural activation"
+    },
+    "plasma_signed_conversion": {
+      "observed_DOI": "10.1029/2022GL098445",
+      "source": "MMS event observed positive and negative excursions approx 0.1 nW/m^3; electron-frame J·E' distinct from lab-frame J·E",
+      "additional_DOI": "10.1029/2022JA030514",
+      "approximate_excursion_abs_nW_m3": 0.1,
+      "raw_MMS_CDF_acquired": false,
+      "open_archive": "https://lasp.colorado.edu/mms/sdc/public/",
+      "caveat": "summary from published observations, not direct reprocessing of downloaded CDF or original local MHD Fourier triad",
+      "original_MMS1_event_date_utc": "2017-06-17",
+      "original_paper_GSE_to_LMN_approx": {
+        "L": [
+          -0.885,
+          -0.265,
+          0.383
+        ],
+        "M": [
+          -0.37,
+          -0.099,
+          -0.924
+        ],
+        "N": [
+          0.282,
+          -0.959,
+          -0.01
+        ],
+        "source": "Original Xiong et al. 2022 GRL, DOI 10.1029/2022GL098445"
+      },
+      "exact_UTC_time_window": "not yet extracted or verified; never substitute a guessed interval",
+      "required_original_raw_missions": [
+        "MMS1 FGM magnetic field",
+        "MMS1 EDP electric field",
+        "MMS1 FPI electron and ion moments"
+      ]
+    },
+    "lorentz_speed_empirical": {
+      "original_event": "GW170817/GRB170817A",
+      "doi": "10.1103/PhysRevLett.119.161101",
+      "companion": "https://dcc.ligo.org/LIGO-P1700308/public",
+      "signal_lag_seconds": 1.74,
+      "sigma_lag_seconds": 0.05,
+      "relative_gravity_light_speed_range": [
+        -3e-15,
+        7e-16
+      ],
+      "raw_strain_archive": "https://gwosc.org/events/GW170817/",
+      "raw_strain_downloaded": false,
+      "scope": "empirical propagation constraint on gravitational and EM waves, not a test of field conditioning travel or global KK spacetime"
+    },
+    "human_radiocarbon": {
+      "source": "Spalding et al., Cell 2005, human genomic DNA atmospheric bomb-pulse 14C turnover",
+      "doi": "10.1016/j.cell.2005.04.028",
+      "corroborating_UNSCEAR": "UNSCEAR 2008 Annex B, para 70: atmospheric carbon cycle isotope; approx 230 Bq/kg total C, 2700 Bq total human body illustrative",
+      "direct_original_sample_radiocarbon_values_acquired": false,
+      "isotope_emotion_intervention_nuclear_data_acquired": false,
+      "causal_boundary": "environmental isotope incorporation into human tissue is observed; cannot infer or fully disprove emotion-driven nuclear transmutation without intervention and matched neutron/metabolic observations"
+    }
+  },
+  "verification": {
+    "measured_numbers": "retrieved from source authors' original papers or original source records on 2026-11-14",
+    "derived_numbers": "explicitly computed calculations; original published inference kept separate",
+    "source_identification": "DOI/git blob/NCBI accession",
+    "unpaid_primary_raw": [
+      "MMS matched burst CDF waveform trio",
+      "pigeon original Movebank GPS",
+      "ENA FASTQ 395 MB",
+      "human specimen isotope/mass-spectrometry paired causal intervention",
+      "original nuclear event-by-energy spectrum"
+    ],
+    "no_invented_trial_data": true
+  }
+}
