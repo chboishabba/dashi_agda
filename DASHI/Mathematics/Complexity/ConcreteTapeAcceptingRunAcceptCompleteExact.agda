@@ -8,7 +8,8 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
+open import Data.Product using (Σ; _,_; proj₁; proj₂)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans; sym)
 import Data.Fin.Base as Fin
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
@@ -28,6 +29,7 @@ import DASHI.Mathematics.Complexity.ConcreteTapeGlobalBlockSliceConsistencyExact
 import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalWindowPlacementExact as Placement
 import DASHI.Mathematics.Complexity.CNFVariableRenamingExact as Rename
 import DASHI.Mathematics.Complexity.CNFPlacedConstraintConjunctionExact as Placed
+import DASHI.Mathematics.Complexity.ConcreteTapeRuleSelectorExact as Selector
 import DASHI.Mathematics.Complexity.FixedWidthTruthTableCNFExact as CNF
 
 ------------------------------------------------------------------------
@@ -36,7 +38,7 @@ import DASHI.Mathematics.Complexity.FixedWidthTruthTableCNFExact as CNF
 
 zerosLookupFalse :
   ∀ n (i : Fin.Fin n) →
-  CNF.lookupBit (DASHI.Mathematics.Complexity.ConcreteTapeRuleSelectorExact.zeros n) i
+  CNF.lookupBit (Selector.zeros n) i
   ≡ false
 zerosLookupFalse (suc n) Fin.zero = refl
 zerosLookupFalse (suc n) (Fin.suc i) =
@@ -52,11 +54,11 @@ oneHotTrueImpliesOccurrence :
 oneHotTrueImpliesOccurrence Indexed.here Fin.zero accepted =
   Indexed.here
 oneHotTrueImpliesOccurrence {xs = x ∷ xs}
-    Indexed.here (Fin.suc i) accepted
-    with zerosLookupFalse (Canonical.listLength xs) i
-... | refl
-    with accepted
-... | ()
+    Indexed.here (Fin.suc i) accepted =
+  falseNotTrue (trans (sym (zerosLookupFalse (Canonical.listLength xs) i)) accepted)
+  where
+    falseNotTrue : false ≡ true → ∀ {B : Set} → B
+    falseNotTrue ()
 oneHotTrueImpliesOccurrence
     (Indexed.there occurrence) Fin.zero ()
 oneHotTrueImpliesOccurrence
@@ -75,6 +77,33 @@ atValueUnique
     (Indexed.there left)
     (Indexed.there right) =
   atValueUnique left right
+
+------------------------------------------------------------------------
+-- Fin and bit transport helpers
+------------------------------------------------------------------------
+
+castFin : ∀ {m n} → m ≡ n → Fin.Fin m → Fin.Fin n
+castFin refl i = i
+
+castFinToNat : ∀ {m n} (eq : m ≡ n) (i : Fin.Fin m) → Fin.toℕ (castFin eq i) ≡ Fin.toℕ i
+castFinToNat refl i = refl
+
+lookupCastBits :
+  ∀ {m n} (eq : m ≡ n) (bits : CNF.Bits m) (i : Fin.Fin n) →
+  CNF.lookupBit (Assignment.castBits eq bits) i ≡ CNF.lookupBit bits (castFin (sym eq) i)
+lookupCastBits refl bits i = refl
+
+lookupCastBitsAt :
+  ∀ {m n} (eq : m ≡ n) (bits : CNF.Bits m) (i : Fin.Fin m) →
+  CNF.lookupBit (Assignment.castBits eq bits) (castFin eq i) ≡ CNF.lookupBit bits i
+lookupCastBitsAt refl bits i = refl
+
+transportAtNat :
+  ∀ {A : Set} {m n : Nat} {x : A} {xs : List A} →
+  m ≡ n →
+  Indexed.At m x xs →
+  Indexed.At n x xs
+transportAtNat refl occ = occ
 
 ------------------------------------------------------------------------
 -- Witness suffix lookup
@@ -216,12 +245,12 @@ witnessPredicateTrueAccepting :
   ≡ true
 witnessPredicateTrueAccepting
     {machine} stateCoverage symbolCoverage
-    (true CNF.∷ᵇ bits) symbol refl decoded
-    rewrite decoded
-          | Local.decideEqualRefl
-              (Local.finiteState machine)
-              (Local.acceptingState machine) =
-  refl
+    (true CNF.∷ᵇ cellBits) symbol refl decoded =
+  trans
+    (cong (Endpoint.cellDecodedAcceptingCell {machine}) decoded)
+    (Local.decideEqualRefl
+      (Local.finiteState machine)
+      (Local.acceptingState machine))
 witnessPredicateTrueAccepting
     stateCoverage symbolCoverage
     (false CNF.∷ᵇ bits) symbol ()
@@ -258,23 +287,22 @@ positiveWitnessClauseTrue :
     {i : Fin.Fin cols}
     (indices : List (Fin.Fin cols)) →
   Member i indices →
-  CNF.lookupBit assignment (Endpoint.witnessIndex i) ≡ true →
+  CNF.lookupBit assignment (Endpoint.witnessIndex {machine} {steps} {cols} i) ≡ true →
   CNF.evaluateClause
     (Endpoint.allWitnessPositiveLiterals
-      (λ j → CNF.positive (Endpoint.witnessIndex j))
+      (λ j → CNF.positive (Endpoint.witnessIndex {machine} {steps} {cols} j))
       indices)
     assignment
   ≡ true
-positiveWitnessClauseTrue assignment
-    (i ∷ rest) here witnessTrue
-    rewrite witnessTrue =
-  refl
-positiveWitnessClauseTrue assignment
+positiveWitnessClauseTrue {machine} {steps} {cols} assignment
+    (._ ∷ rest) here witnessTrue =
+  cong (λ b → CNF.orBool b _) witnessTrue
+positiveWitnessClauseTrue {machine} {steps} {cols} assignment
     (j ∷ rest) (there membership) witnessTrue
-    with CNF.lookupBit assignment (Endpoint.witnessIndex j)
+    with CNF.lookupBit assignment (Endpoint.witnessIndex {machine} {steps} {cols} j)
 ... | true = refl
 ... | false =
-  positiveWitnessClauseTrue
+  positiveWitnessClauseTrue {machine} {steps} {cols}
     assignment rest membership witnessTrue
 
 ------------------------------------------------------------------------
@@ -296,37 +324,45 @@ acceptingEndpointCNF_complete_for_run :
     (Assignment.encodeAcceptingRunAssignment
       stateCoverage symbolCoverage certificate)
   ≡ true
-acceptingEndpointCNF_complete_for_run
-    stateCoverage symbolCoverage certificate
-    with Assignment.runFinishCanonicalLength
-      (Accepting.run certificate)
-... | refl
-    with Assignment.acceptingHeadOccurrence
-      (Accepting.accepting certificate)
-... | n , symbol , acceptingOccurrence =
+acceptingEndpointCNF_complete_for_run {machine} {start = start} {finish = finish}
+    stateCoverage symbolCoverage certificate =
   endpointComplete
   where
+    cols = Canonical.listLength (Local.cells start)
+    lenFinish = Canonical.listLength (Local.cells finish)
+    lenEq = sym (Assignment.runFinishCanonicalLength (Accepting.run certificate))
+
+    occPair =
+      Assignment.acceptingHeadOccurrence
+        (Accepting.accepting certificate)
+    n = Data.Product.proj₁ occPair
+    symbol = Data.Product.proj₁ (Data.Product.proj₂ occPair)
+    acceptingOccurrence = Data.Product.proj₂ (Data.Product.proj₂ occPair)
+
     assignment =
       Assignment.encodeAcceptingRunAssignment
         stateCoverage symbolCoverage certificate
 
     witnessBits =
-      Assignment.oneHotAtOccurrence acceptingOccurrence
+      Assignment.acceptingWitnessBits (Accepting.accepting certificate)
 
-    acceptingIndex :
-      Fin.Fin (Canonical.listLength
-        (Local.cells _))
-    acceptingIndex =
-      atFin acceptingOccurrence
-      where
-        atFin :
-          ∀ {A : Set} {k : Nat} {x : A} {xs : List A} →
-          Indexed.At k x xs →
-          Fin.Fin (Canonical.listLength xs)
-        atFin Indexed.here =
-          Fin.zero
-        atFin (Indexed.there occurrence) =
-          Fin.suc (atFin occurrence)
+    witnessAtStart =
+      Assignment.castBits lenEq witnessBits
+
+    atFin :
+      ∀ {A : Set} {k : Nat} {x : A} {xs : List A} →
+      Indexed.At k x xs →
+      Fin.Fin (Canonical.listLength xs)
+    atFin Indexed.here =
+      Fin.zero
+    atFin (Indexed.there occurrence) =
+      Fin.suc (atFin occurrence)
+
+    acceptingIndexFinish : Fin.Fin lenFinish
+    acceptingIndexFinish = atFin acceptingOccurrence
+
+    acceptingIndex : Fin.Fin cols
+    acceptingIndex = castFin lenEq acceptingIndexFinish
 
     acceptingIndexTrue :
       CNF.lookupBit assignment
@@ -337,30 +373,25 @@ acceptingEndpointCNF_complete_for_run
         (witnessLookup
           stateCoverage symbolCoverage certificate
           acceptingIndex)
-        oneHotSelf
+        (trans
+          (lookupCastBitsAt lenEq witnessBits acceptingIndexFinish)
+          oneHotSelf)
       where
         oneHotSelf :
-          CNF.lookupBit witnessBits acceptingIndex ≡ true
+          CNF.lookupBit witnessBits acceptingIndexFinish ≡ true
         oneHotSelf =
           prove acceptingOccurrence
           where
             prove :
               ∀ {A : Set} {k : Nat} {x : A} {xs : List A}
-                (occurrence : Indexed.At k x xs) →
+                (occ : Indexed.At k x xs) →
               CNF.lookupBit
-                (Assignment.oneHotAtOccurrence occurrence)
-                (let
-                  atFin :
-                    ∀ {m : Nat} {y : A} {ys : List A} →
-                    Indexed.At m y ys →
-                    Fin.Fin (Canonical.listLength ys)
-                  atFin Indexed.here = Fin.zero
-                  atFin (Indexed.there p) = Fin.suc (atFin p)
-                in atFin occurrence)
+                (Assignment.oneHotAtOccurrence occ)
+                (atFin occ)
               ≡ true
             prove Indexed.here = refl
-            prove (Indexed.there occurrence) =
-              prove occurrence
+            prove (Indexed.there occ) =
+              prove occ
 
     witnessClauseTrue :
       CNF.evaluateClause
@@ -375,7 +406,7 @@ acceptingEndpointCNF_complete_for_run
         acceptingIndexTrue
 
     localPredicateTrue :
-      ∀ (i : Fin.Fin (Canonical.listLength (Local.cells _))) →
+      ∀ (i : Fin.Fin cols) →
       Placed.predicate
         (Endpoint.acceptancePlacedPredicate
           stateCoverage symbolCoverage (Endpoint.finToSlot i))
@@ -385,109 +416,134 @@ acceptingEndpointCNF_complete_for_run
               stateCoverage symbolCoverage (Endpoint.finToSlot i)))
           assignment)
       ≡ true
-    localPredicateTrue i
-      with CNF.lookupBit witnessBits i
-    ... | false =
-      witnessPredicateFalse
-        stateCoverage symbolCoverage localBits
-        headFalse
+    localPredicateTrue i =
+      dispatch (CNF.lookupBit witnessAtStart i) refl
       where
-        localBits =
-          Rename.pullbackBits
-            (Endpoint.acceptanceLocalRename (Endpoint.finToSlot i))
-            assignment
-        headFalse :
-          CNF.lookupBit localBits Fin.zero ≡ false
-        headFalse =
-          trans
-            (acceptanceLocalHeadLookup
-              stateCoverage symbolCoverage assignment i)
-            (trans
-              (witnessLookup
-                stateCoverage symbolCoverage certificate i)
-              refl)
-    ... | true =
-      witnessPredicateTrueAccepting
-        stateCoverage symbolCoverage localBits symbol
-        headTrue decodedAccepting
-      where
-        localBits =
-          Rename.pullbackBits
-            (Endpoint.acceptanceLocalRename (Endpoint.finToSlot i))
-            assignment
-
-        headTrue :
-          CNF.lookupBit localBits Fin.zero ≡ true
-        headTrue =
-          trans
-            (acceptanceLocalHeadLookup
-              stateCoverage symbolCoverage assignment i)
-            (trans
-              (witnessLookup
-                stateCoverage symbolCoverage certificate i)
-              refl)
-
-        acceptingAtI :
-          Indexed.At (Fin.toℕ i)
-            (Local.headed
-              (Local.acceptingState machine) symbol)
-            (Local.cells finish)
-        acceptingAtI =
-          oneHotTrueImpliesOccurrence
-            acceptingOccurrence i refl
-
-        decodedFinalOccurrence =
-          Same.decodeCellsAtBlockSlice
-            stateCoverage symbolCoverage
-            (Endpoint.finToSlot i)
-            (Global.rowSliceBits
-              (Endpoint.finalRowSlot
-                (Accepting.acceptingRunLength certificate))
-              (FormulaSem.baseTraceBits assignment))
-
-        decodedFinalEq =
-          Ends.decodedAcceptingAssignment_finalRow
-            stateCoverage symbolCoverage certificate
-
-        decodedCellEq :
-          Canonical.decodeCell stateCoverage symbolCoverage
-            (Slice.blockSliceBits
-              (Endpoint.finToSlot i)
-              (Global.rowSliceBits
-                (Endpoint.finalRowSlot
-                  (Accepting.acceptingRunLength certificate))
-                (FormulaSem.baseTraceBits assignment)))
-          ≡ Local.headed
-              (Local.acceptingState machine) symbol
-        decodedCellEq =
-          atValueUnique
-            (transportList decodedFinalEq decodedFinalOccurrence)
-            acceptingAtI
+        dispatch :
+          (b : Bool) →
+          CNF.lookupBit witnessAtStart i ≡ b →
+          Placed.predicate
+            (Endpoint.acceptancePlacedPredicate
+              stateCoverage symbolCoverage (Endpoint.finToSlot i))
+            (Rename.pullbackBits
+              (Placed.rename
+                (Endpoint.acceptancePlacedPredicate
+                  stateCoverage symbolCoverage (Endpoint.finToSlot i)))
+              assignment)
+          ≡ true
+        dispatch false eqBit =
+          witnessPredicateFalse
+            stateCoverage symbolCoverage localBits
+            headFalse
           where
-            transportList :
-              ∀ {A : Set} {m : Nat} {x : A}
-                {left right : List A} →
-              left ≡ right →
-              Indexed.At m x left →
-              Indexed.At m x right
-            transportList refl occurrence =
-              occurrence
+            localBits =
+              Rename.pullbackBits
+                (Endpoint.acceptanceLocalRename (Endpoint.finToSlot i))
+                assignment
+            headFalse :
+              CNF.lookupBit localBits Fin.zero ≡ false
+            headFalse =
+              trans
+                (acceptanceLocalHeadLookup
+                  stateCoverage symbolCoverage assignment i)
+                (trans
+                  (witnessLookup
+                    stateCoverage symbolCoverage certificate i)
+                  eqBit)
+        dispatch true eqBit =
+          witnessPredicateTrueAccepting
+            stateCoverage symbolCoverage localBits symbol
+            headTrue decodedAccepting
+          where
+            localBits =
+              Rename.pullbackBits
+                (Endpoint.acceptanceLocalRename (Endpoint.finToSlot i))
+                assignment
 
-        decodedAccepting :
-          Canonical.decodeCell stateCoverage symbolCoverage
-            (Canonical.dropBits 1 localBits)
-          ≡ Local.headed
-              (Local.acceptingState machine) symbol
-        decodedAccepting =
-          trans
-            (cong
-              (Canonical.decodeCell
-                stateCoverage symbolCoverage)
-              (trans
-                (acceptanceLocalTail assignment i)
-                (Final.extendedFinalCellBits_eq_finalRowBlock
-                  i assignment)))
-            decodedCellEq
+            headTrue :
+              CNF.lookupBit localBits Fin.zero ≡ true
+            headTrue =
+              trans
+                (acceptanceLocalHeadLookup
+                  stateCoverage symbolCoverage assignment i)
+                (trans
+                  (witnessLookup
+                    stateCoverage symbolCoverage certificate i)
+                  eqBit)
+
+            iFinish : Fin.Fin lenFinish
+            iFinish = castFin (sym lenEq) i
+
+            witnessBitsAtIFinish :
+              CNF.lookupBit witnessBits iFinish ≡ true
+            witnessBitsAtIFinish =
+              trans
+                (sym (lookupCastBits lenEq witnessBits i))
+                eqBit
+
+            acceptingAtI :
+              Indexed.At (Fin.toℕ i)
+                (Local.headed
+                  (Local.acceptingState machine) symbol)
+                (Local.cells finish)
+            acceptingAtI =
+              transportAtNat
+                (castFinToNat (sym lenEq) i)
+                (oneHotTrueImpliesOccurrence
+                  acceptingOccurrence iFinish witnessBitsAtIFinish)
+
+            decodedFinalOccurrence =
+              Same.decodeCellsAtBlockSlice
+                stateCoverage symbolCoverage
+                (Endpoint.finToSlot i)
+                (Global.rowSliceBits
+                  (Endpoint.finalRowSlot
+                    (Accepting.acceptingRunLength certificate))
+                  (FormulaSem.baseTraceBits assignment))
+
+            decodedFinalEq =
+              Ends.decodedAcceptingAssignment_finalRow
+                stateCoverage symbolCoverage certificate
+
+            decodedCellEq :
+              Canonical.decodeCell stateCoverage symbolCoverage
+                (Slice.blockSliceBits
+                  (Endpoint.finToSlot i)
+                  (Global.rowSliceBits
+                    (Endpoint.finalRowSlot
+                      (Accepting.acceptingRunLength certificate))
+                    (FormulaSem.baseTraceBits assignment)))
+              ≡ Local.headed
+                  (Local.acceptingState machine) symbol
+            decodedCellEq =
+              atValueUnique
+                (transportList (cong Local.cells decodedFinalEq) decodedFinalOccurrence)
+                acceptingAtI
+              where
+                transportList :
+                  ∀ {A : Set} {m : Nat} {x : A}
+                    {left right : List A} →
+                  left ≡ right →
+                  Indexed.At m x left →
+                  Indexed.At m x right
+                transportList refl occurrence =
+                  occurrence
+
+            decodedAccepting :
+              Canonical.decodeCell stateCoverage symbolCoverage
+                (Canonical.dropBits 1 localBits)
+              ≡ Local.headed
+                  (Local.acceptingState machine) symbol
+            decodedAccepting =
+              trans
+                (cong
+                  (Canonical.decodeCell
+                    stateCoverage symbolCoverage)
+                  (trans
+                    (acceptanceLocalTail assignment i)
+                    (Final.extendedFinalCellBits_eq_finalRowBlock
+                      i assignment)))
+                decodedCellEq
 
     allPlaced :
       Placed.AllPlacedSatisfied assignment
@@ -530,7 +586,7 @@ acceptingEndpointCNF_complete_for_run
           stateCoverage symbolCoverage)
         assignment
       ≡ true
-    endpointComplete
-      rewrite witnessClauseTrue
-            | implicationsTrue =
-      refl
+    endpointComplete =
+      trans
+        (cong₂ CNF.andBool witnessClauseTrue implicationsTrue)
+        refl
