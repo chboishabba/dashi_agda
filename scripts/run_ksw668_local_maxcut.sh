@@ -6,6 +6,10 @@ MODE="--math"
 if [ "$#" -gt 0 ]; then MODE="$1"; fi
 KSW_MOVEBANK_GPS_FILE="${KSW_MOVEBANK_GPS_FILE:-}"
 KSW_ENA_ORIGINAL_RECEIPT="${KSW_ENA_ORIGINAL_RECEIPT:-}"
+KSW_ENDF_N14_FILE="${KSW_ENDF_N14_FILE:-}"
+KSW_SITE_SPECTRUM_CSV="${KSW_SITE_SPECTRUM_CSV:-}"
+KSW_SITE_FLUX_SOURCE="${KSW_SITE_FLUX_SOURCE:-}"
+KSW_N14_TARGET_ATOMS="${KSW_N14_TARGET_ATOMS:-}"
 mkdir -p Artifacts/ksw668/local-check
 LOG=Artifacts/ksw668/local-check/acceptance-command-log.tsv
 printf 'kind\tcommand\tstate\n' > "$LOG"
@@ -39,6 +43,8 @@ run python python3 scripts/ksw668_e2_neutron_isotope_visibility_bound.py
 run python python3 scripts/test_ksw668_movebank_join.py
 run python python3 scripts/ksw668_mms_burst_acquire.py
 run python python3 scripts/ksw668_mms_sdc_direct.py
+run python python3 scripts/ksw668_movebank_lisowski_original_bitstream.py
+run python python3 scripts/ksw668_parma_site_spectrum_adapter.py
 run python python3 scripts/ksw668_ena_reads_acquire.py
 
 if [ "$MODE" = "--math" ]; then
@@ -65,11 +71,38 @@ fi
 run raw python3 scripts/ksw668_movebank_gps_acquire.py \
   --input "$KSW_MOVEBANK_GPS_FILE" \
   --receipt Artifacts/ksw668/local-check/movebank_sha256.json
+run raw python3 scripts/ksw668_movebank_lisowski_original_bitstream.py \
+  --input "$KSW_MOVEBANK_GPS_FILE" \
+  --receipt Artifacts/ksw668/local-check/movebank_lisowski_original_sha256.json
 
 if [ -z "$KSW_ENA_ORIGINAL_RECEIPT" ] || [ ! -f "$KSW_ENA_ORIGINAL_RECEIPT" ]; then
   echo "BLOCKED: original ENA FASTQ checksum receipt absent" >&2
   exit 65
 fi
+run raw python3 scripts/ksw668_ena_fastq_receipt_verify.py \
+  --receipt "$KSW_ENA_ORIGINAL_RECEIPT" \
+  --out Artifacts/ksw668/local-check/ena_original_fastq_verified.json
+
+if [ -z "$KSW_ENDF_N14_FILE" ] || [ ! -f "$KSW_ENDF_N14_FILE" ]; then
+  echo "BLOCKED: original ENDF/B-VIII.1 N14 data bytes absent (KSW_ENDF_N14_FILE)" >&2
+  exit 65
+fi
+run raw python3 scripts/ksw668_endf81_n14np_original.py \
+  --endf "$KSW_ENDF_N14_FILE" \
+  --out Artifacts/ksw668/local-check/endf81_n14_sha_receipt.json
+
+if [ -z "$KSW_SITE_SPECTRUM_CSV" ] || [ ! -f "$KSW_SITE_SPECTRUM_CSV" ] || \
+   [ -z "$KSW_SITE_FLUX_SOURCE" ] || [ -z "$KSW_N14_TARGET_ATOMS" ]; then
+  echo "BLOCKED: actual source site spectrum + description + N14 atoms required" >&2
+  exit 65
+fi
+run raw python3 scripts/ksw668_endf81_c2_law_integral.py \
+  --endf "$KSW_ENDF_N14_FILE" \
+  --flux-csv "$KSW_SITE_SPECTRUM_CSV" \
+  --flux-source "$KSW_SITE_FLUX_SOURCE" \
+  --n14-atoms "$KSW_N14_TARGET_ATOMS" \
+  --out Artifacts/ksw668/local-check/endf81_source_spectrum_fold.json
+
 if ! command -v nix >/dev/null 2>&1 && ! command -v agda >/dev/null 2>&1; then
   echo "BLOCKED: pinned Agda toolchain not installed" >&2
   exit 66
