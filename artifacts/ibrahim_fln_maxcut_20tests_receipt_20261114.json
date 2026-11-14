@@ -1,0 +1,54 @@
+{
+  "execution_scope": "local copies of byte-identical GitHub source blobs; no Agda kernel or historical corpus run",
+  "failed": 0,
+  "files": {
+    "scripts/ibrahim_fln_certificates.py": {
+      "git_blob_sha1": "26bb393bd5e2000e73099dd76abb7136af7645a0",
+      "length": 9149,
+      "sha256": "928e0ba5b0152a0424c0c935ad4c6c9e8ee80693c5c9450ed1f5c3d04f7ede5f"
+    },
+    "scripts/ibrahim_fln_reference_analysis.py": {
+      "git_blob_sha1": "9a536fae3240dc0e554f8dc5ac5ca54b07486541",
+      "length": 16291,
+      "sha256": "23f952094e33d69890eb79f88e815bf9d06cd1aeaa645a36f270e11a0be1d0fd"
+    },
+    "scripts/ibrahim_itir_multilingual_candidate.py": {
+      "git_blob_sha1": "79e42ebf40ad00bc8185f0f9a00cef52463cadee",
+      "length": 6046,
+      "sha256": "d4f7cb01a8c5e4c38f20a620961a5c37df737922cc3c9888265e1b2479760bb3"
+    },
+    "tests/test_ibrahim_fln_certificate_cli.py": {
+      "git_blob_sha1": "32284806535a49820e295043dd04b7343e2368a4",
+      "length": 3979,
+      "sha256": "6614a3bfcca29720832ecc424900ffcb577a8f830f095dea85888c3897c3d84f"
+    },
+    "tests/test_ibrahim_fln_certificates.py": {
+      "git_blob_sha1": "456655580d0c99647638bd5cf83c33e08566db0d",
+      "length": 3668,
+      "sha256": "3cdb3d5bd347492778d3b0fcf5751ebc69b24b0511096dc5a82c272f87d114a0"
+    },
+    "tests/test_ibrahim_itir_multilingual_candidate.py": {
+      "git_blob_sha1": "6e1d2caa6d24d305aa4880f444bb45db03b81011",
+      "length": 2918,
+      "sha256": "40480c68ba543b00628883aa51c2871fcd255b5cc45b384af9fdfa385633e98b"
+    }
+  },
+  "log_sha256": "79bea2ec5dc82fc5a33c13fe7994a54c6ad4e268b3aa3775cadd31648e28a11e",
+  "python_version": "3.13.5",
+  "schema": "dashi.ibrahim.fln.maxcut_local_receipt.v2",
+  "source_attribution": {
+    "authors": "Mark Ibrahim; Christopher M. Danforth; Peter Sheridan Dodds",
+    "title": "Connecting every bit of knowledge: The structure of Wikipedia's First Link Network",
+    "doi": "10.1016/j.jocs.2016.12.001",
+    "methodology_owned_by": "original authors",
+    "certificate_runtime_and_regression_owned_by": "DASHI",
+    "multilingual_candidate_identity_not_verified_from_wikidata": true
+  },
+  "test_command": "python3 -m unittest discover -s tests -p 'test_ibrahim*.py' -v",
+  "test_count": 20,
+  "distinct_random_graph_revision_pairs": 5000,
+  "source_bytes_match_github_blobs": true,
+  "agda_kernel_checked_in_this_tranche": false,
+  "wikimedia_historical_corpus_reproduced": false,
+  "reviewed_multilingual_real_source_pair": false
+}
