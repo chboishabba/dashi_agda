@@ -993,3 +993,15 @@ physicsLevel2ClayPromotionStillFalse :
   Balaban.balabanLevel2ClayPromotionFlag ≡ false
 physicsLevel2ClayPromotionStillFalse =
   Physics.yangMillsBalabanLevel2ClayPromotionStillFalse
+-- Direct canonical scale-transfer eliminator reachability.
+------------------------------------------------------------------------
+
+toeDirectScaleTransferPromotionImpossible :
+  Balaban.BalabanRGScaleTransferPromotion → ⊥
+toeDirectScaleTransferPromotionImpossible =
+  TOE.toeBalabanScaleTransferPromotionImpossible
+
+unifierDirectScaleTransferPromotionImpossible :
+  Balaban.BalabanRGScaleTransferPromotion → ⊥
+unifierDirectScaleTransferPromotionImpossible =
+  Unifier.unifierBalabanScaleTransferPromotionImpossible
