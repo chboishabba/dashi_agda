@@ -12,6 +12,7 @@ on:
       - 'scripts/ibrahim_fln_certificates.py'
       - 'tests/test_ibrahim_fln_reference_analysis.py'
       - 'tests/test_ibrahim_fln_certificates.py'
+      - 'tests/test_ibrahim_fln_certificate_cli.py'
       - 'scripts/check_ibrahim_fln_maxcut.sh'
       - '.github/workflows/ibrahim-fln-reference-checks.yml'
   workflow_dispatch:
