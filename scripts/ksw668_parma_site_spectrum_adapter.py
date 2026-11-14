@@ -20,6 +20,7 @@ Output uses energy_eV,differential_flux_cm2_s_eV, as required by
 ksw668_endf81_c2_law_integral.py, with full inputs and checksum receipt.
 """
 import argparse,csv,hashlib,json,math
+from datetime import date
 from pathlib import Path
 
 def execute(args):
@@ -81,6 +82,13 @@ def main():
     ap.add_argument("--out",type=Path)
     ap.add_argument("--receipt",type=Path)
     a=ap.parse_args()
+    if a.execute:
+        try:
+            day=date.fromisoformat(a.date)
+        except (TypeError,ValueError):
+            ap.error("Valid ISO source calendar --date YYYY-MM-DD required")
+        if day>date(2026,3,26):
+            ap.error("Bundled Neptoon PARMA4.10 original solar W index ends 2026-03-26; do not extrapolate. Provide a verified external W-index extension in a separately versioned adapter.")
     if not a.execute:
         result={"status":"PLAN ONLY. No site inferred and no PARMA data generated.",
             "external_model_requires":"neptoon offline PARMA4.10 installed, or official JAEA EXPACS 4.19 used under terms",
