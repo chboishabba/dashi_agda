@@ -198,6 +198,28 @@ transportEventualCycle certificate entryStable cycleStable =
            (closed certificate))
 
 ------------------------------------------------------------------------
+-- End-to-end finite revision transport: if the old entry prefix and
+-- one full certified cycle avoid every changed outgoing link, the
+-- old eventual-cycle certificate remains valid for the new version.
+-- The representative and positive period are preserved as data.
+------------------------------------------------------------------------
+
+oldOrbitAvoidsEditsPreservesCycleCertificate :
+  ∀ {Node : Set} (delta : TypedRevisionDelta Node)
+    {start : Node} →
+  (certificate : EventualCycle (oldLink delta) start) →
+  AvoidsEditedVertices (oldLink delta) (changedAt delta)
+    (entryHops certificate) start →
+  AvoidsEditedVertices (oldLink delta) (changedAt delta)
+    (suc (periodTail certificate)) (representative certificate) →
+  EventualCycle (newLink delta) start
+oldOrbitAvoidsEditsPreservesCycleCertificate delta certificate
+    entryAvoid cycleAvoid =
+  transportEventualCycle certificate
+    (avoidanceImpliesStable delta entryAvoid)
+    (avoidanceImpliesStable delta cycleAvoid)
+
+------------------------------------------------------------------------
 -- Connection to the canonical revision-indexed FLN owner. A snapshot
 -- label is not silently identified with a corpus or a parser run.
 ------------------------------------------------------------------------
