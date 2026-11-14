@@ -3,6 +3,7 @@ module DASHI.Wikimedia.IbrahimCycleRotationRelationExact where
 open import DASHI.Core.Prelude
 
 import DASHI.Wikimedia.IbrahimFiniteOrbitRevisionWeldExact as Orbit
+import DASHI.Wikimedia.IbrahimGeneralFiniteCertificateKernelExact as General
 
 ------------------------------------------------------------------------
 -- NEW DASHI mathematical consequences of Ibrahim-style deterministic
@@ -115,3 +116,163 @@ knownPeriodMakesMutualRotation {next = next} {a = a} {b = b}
 -- The known-period premise prevents an erroneous converse for a
 -- transient path leading into a cycle. A QID collision, title equality
 -- or fabricated source record cannot instantiate it.
+
+
+------------------------------------------------------------------------
+-- A2a-A2e: GENERAL uniqueness of eventual cycles up to original-graph
+-- rotation. Unlike the earlier ordered-entry lemma, NO comparison,
+-- period decomposition or rotation witness is passed by the caller.
+------------------------------------------------------------------------
+
+mutualOrbitRotationReflexive :
+  ∀ {Node : Set} {next : Node → Node} {a : Node} →
+  MutualOrbitRotation next a a
+mutualOrbitRotationReflexive =
+  mutualOrbitRotation (forwardRotation zero refl)
+    (forwardRotation zero refl)
+
+mutualOrbitRotationSym :
+  ∀ {Node : Set} {next : Node → Node} {a b : Node} →
+  MutualOrbitRotation next a b → MutualOrbitRotation next b a
+mutualOrbitRotationSym (mutualOrbitRotation fwd bwd) =
+  mutualOrbitRotation bwd fwd
+
+mutualOrbitRotationTransitive :
+  ∀ {Node : Set} {next : Node → Node} {a b c : Node} →
+  MutualOrbitRotation next a b →
+  MutualOrbitRotation next b c →
+  MutualOrbitRotation next a c
+mutualOrbitRotationTransitive
+  (mutualOrbitRotation ab ba) (mutualOrbitRotation bc cb) =
+  mutualOrbitRotation
+    (forwardRotationTransitive ab bc)
+    (forwardRotationTransitive cb ba)
+
+periodicPointEveryOffsetIsMutualRotation :
+  ∀ {Node : Set} (next : Node → Node) →
+  (periodTail : Nat) (point : Node) →
+  Orbit.iterate next (suc periodTail) point ≡ point →
+  (k : Nat) →
+  MutualOrbitRotation next point (Orbit.iterate next k point)
+periodicPointEveryOffsetIsMutualRotation next tail point closes k =
+  mutualOrbitRotation
+    (forwardRotation k refl)
+    (forwardRotation (k * tail)
+      (trans
+        (sym (Orbit.iterateAppend next k (k * tail) point))
+        (trans
+          (cong (λ index → Orbit.iterate next index point)
+            (sym (*-suc k tail)))
+          (Orbit.positiveCycleRepeats next (suc tail) point
+            closes k))))
+
+earlierEntryGivesMutualRotation :
+  ∀ {Node : Set} {next : Node → Node} {start : Node} →
+  (first second : Orbit.EventualCycle next start) →
+  Orbit.entryHops first ≤ Orbit.entryHops second →
+  MutualOrbitRotation next
+    (Orbit.representative first) (Orbit.representative second)
+earlierEntryGivesMutualRotation {next = next} first second ordered =
+  subst
+    (λ target → MutualOrbitRotation next
+      (Orbit.representative first) target)
+    (laterEntryIsForwardRotation first second
+      (Orbit.entryHops second ∸ Orbit.entryHops first)
+      (sym (m+[n∸m]≡n ordered)))
+    (periodicPointEveryOffsetIsMutualRotation next
+      (Orbit.periodTail first)
+      (Orbit.representative first)
+      (Orbit.closed first)
+      (Orbit.entryHops second ∸ Orbit.entryHops first))
+
+terminalCycleUniqueUpToRotation :
+  ∀ {Node : Set} {next : Node → Node} {start : Node} →
+  (first second : Orbit.EventualCycle next start) →
+  MutualOrbitRotation next
+    (Orbit.representative first) (Orbit.representative second)
+terminalCycleUniqueUpToRotation first second
+  with ≤-total (Orbit.entryHops first) (Orbit.entryHops second)
+... | inj₁ first≤second =
+  earlierEntryGivesMutualRotation first second first≤second
+... | inj₂ second≤first =
+  mutualOrbitRotationSym
+    (earlierEntryGivesMutualRotation second first second≤first)
+
+------------------------------------------------------------------------
+-- A2f: canonical roots are UNIQUE whenever a least-root certificate
+-- is provided for a total antisymmetric ordering. Finding such a root
+-- algorithmically from the finite carrier is a DISTINCT producer gate.
+------------------------------------------------------------------------
+
+record CanonicalCycleRoot {Node : Set}
+    (next : Node → Node)
+    (order : Node → Node → Set)
+    (start : Node) : Set where
+  constructor canonicalCycleRoot
+  field
+    root : Node
+    onCycle : MutualOrbitRotation next start root
+    minimal : (other : Node) →
+      MutualOrbitRotation next start other → order root other
+
+canonicalCycleRepresentativeUnique :
+  ∀ {Node : Set} {next : Node → Node} {start : Node}
+    {order : Node → Node → Set} →
+  (antisymmetric : ∀ {a b} → order a b → order b a → a ≡ b) →
+  (first second : Orbit.EventualCycle next start) →
+  (firstRoot : CanonicalCycleRoot next order
+    (Orbit.representative first)) →
+  (secondRoot : CanonicalCycleRoot next order
+    (Orbit.representative second)) →
+  CanonicalCycleRoot.root firstRoot ≡
+    CanonicalCycleRoot.root secondRoot
+canonicalCycleRepresentativeUnique antisymmetric first second
+    firstRoot secondRoot =
+  antisymmetric
+    (CanonicalCycleRoot.minimal firstRoot
+      (CanonicalCycleRoot.root secondRoot)
+      (mutualOrbitRotationTransitive
+        (terminalCycleUniqueUpToRotation first second)
+        (CanonicalCycleRoot.onCycle secondRoot)))
+    (CanonicalCycleRoot.minimal secondRoot
+      (CanonicalCycleRoot.root firstRoot)
+      (mutualOrbitRotationTransitive
+        (mutualOrbitRotationSym
+          (terminalCycleUniqueUpToRotation first second))
+        (CanonicalCycleRoot.onCycle firstRoot)))
+
+------------------------------------------------------------------------
+-- A2g: intrinsic basin membership is mutual orbit reachability of
+-- terminal representatives, NOT arbitrary selected-label equality.
+------------------------------------------------------------------------
+
+IntrinsicTerminalSameBasin :
+  ∀ {Node : Set} {next : Node → Node} →
+  General.VerifiedFiniteFirstLinkCensus next → Node → Node → Set
+IntrinsicTerminalSameBasin {next = next} census a b =
+  MutualOrbitRotation next
+    (Orbit.representative (General.eventCycle census a))
+    (Orbit.representative (General.eventCycle census b))
+
+terminalBasinsPartitionByCycle :
+  ∀ {Node : Set} {next : Node → Node} →
+  (census : General.VerifiedFiniteFirstLinkCensus next) →
+  General.BasinEquivalence Node (IntrinsicTerminalSameBasin census)
+terminalBasinsPartitionByCycle census =
+  General.basinEquivalence
+    (λ node → mutualOrbitRotationReflexive)
+    mutualOrbitRotationSym
+    mutualOrbitRotationTransitive
+
+terminalBasinIndependentOfCertificateChoice :
+  ∀ {Node : Set} {next : Node → Node} {start : Node} →
+  (first second : Orbit.EventualCycle next start) →
+  MutualOrbitRotation next
+    (Orbit.representative first)
+    (Orbit.representative second)
+terminalBasinIndependentOfCertificateChoice =
+  terminalCycleUniqueUpToRotation
+
+-- Everything above concerns total deterministic graph orbits only.
+-- Neither Wikipedia source provenance nor canonical-root EXISTENCE is
+-- created by the intrinsic rotation-equivalence proof.
