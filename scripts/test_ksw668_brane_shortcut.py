@@ -5,6 +5,7 @@ import unittest
 import ksw668_brane_bulk_shortcut_same_metric as Geometry
 import ksw668_brane_winding_stability_source as Worldvolume
 import ksw668_compact_kk_mode_dispersion as ProductKK
+import ksw668_caldwell_langlois_original_eq19 as OriginalAdS
 
 class BraneMaxCutTests(unittest.TestCase):
     def test_actual_same_ambient_metric_and_apparent_shortcut(self):
@@ -42,6 +43,26 @@ class BraneMaxCutTests(unittest.TestCase):
         self.assertFalse(report["5D_gravitating_Einstein_Israel_solution"])
         self.assertFalse(report["localized_source_receiver_coupling"])
         self.assertFalse(report["real_free_energy_or_superluminal"])
+
+    def test_caldwell_langlois_original_AdS5_metric_and_FRW(self):
+        r=OriginalAdS.audit()
+        self.assertEqual(r["original_paper_DOI"],"10.1016/S0370-2693(01)00631-1")
+        self.assertEqual(r["bulk_Ricci_scalar"],"-20")
+        self.assertTrue(r["bulk_Einstein_Lambda_all_25"])
+        self.assertTrue(r["original_Friedmann_and_continuity"])
+        self.assertTrue(r["brane_rho_plus_pressure_positive"])
+        self.assertTrue(r["original_bulk_null_and_geodesic"])
+        self.assertFalse(r["all_Israel_distributional_conditions_independently_accepted"])
+
+    def test_same_receiver_original_gravitational_horizon_arrives_earlier(self):
+        r=OriginalAdS.audit()
+        self.assertAlmostEqual(r["photon_horizon_at_t2"],math.log(2),places=12)
+        self.assertAlmostEqual(r["bulk_horizon_at_t2"],.697797781099381,places=9)
+        self.assertGreater(r["same_receiver_comoving_r"],r["photon_horizon_at_t2"])
+        self.assertAlmostEqual(r["same_receiver_photon_proper_t"],2.009322862731128,places=9)
+        self.assertAlmostEqual(r["same_receiver_bulk_time_advantage"],.009322862731128,places=9)
+        self.assertFalse(r["bulk_graviton_emission_detection"])
+        self.assertFalse(r["FTL_in_full5D_or_CTC"])
 
     def test_KK_mass_tower_is_not_a_shortcut(self):
         report=ProductKK.audit()
