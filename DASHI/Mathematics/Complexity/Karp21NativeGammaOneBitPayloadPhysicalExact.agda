@@ -27,6 +27,7 @@ open import Data.Nat.Base using (_≤_)
 import Data.Fin.Base as Fin
 import Data.Vec.Base as Vec
 open import Data.Maybe.Base using (just)
+open import Data.Product using (_,_) 
 
 import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
 import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativePayloadExact as Gamma
