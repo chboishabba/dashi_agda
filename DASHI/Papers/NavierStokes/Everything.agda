@@ -45,3 +45,7 @@ import DASHI.Papers.NavierStokes.TheoremInterfaceRound90Exact
 import DASHI.Papers.NavierStokes.TheoremInterfaceRound103Exact
 import DASHI.Papers.NavierStokes.TheoremInterfaceRound104Exact
 import DASHI.Papers.NavierStokes.TheoremInterfaceRound105Exact
+
+-- Source-attributed conditional Miller A3 and Yan-Radulescu pressure interfaces.
+import DASHI.Physics.Closure.NSMillerAnisotropicA3BridgeExact
+import DASHI.Physics.Closure.NSYanRadulescuStationaryPressureExact
