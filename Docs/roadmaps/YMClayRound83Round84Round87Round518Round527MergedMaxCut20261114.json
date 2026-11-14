@@ -1,0 +1,480 @@
+{
+  "schema": "dashi-ym-maxcut-crosswalk-v1",
+  "date": "2026-11-14",
+  "reference_branch_head": "0ec0d5e67221232797db064b166eab2d39d39ffa",
+  "round518_reconciliation": {
+    "source_analysis": 15,
+    "source_attachment": 18,
+    "endpoint_semantic": 8,
+    "source_bundle": 2,
+    "total": 43
+  },
+  "research_counts": {
+    "round83_seven_named_physical_roles": 7,
+    "round84_independent_analytic_families": 6,
+    "round87_frozen_clay_research_rows": 4,
+    "round527_C_source_packages": 5
+  },
+  "round87_package_map": {
+    "A": [
+      "A.L1",
+      "A.L2"
+    ],
+    "B": [
+      "B.D1_D2",
+      "B.same_H",
+      "A.L2",
+      "heat_L3"
+    ],
+    "C": [
+      "heat_L3",
+      "B.D1_D2",
+      "B.same_H"
+    ],
+    "D": [
+      "D.L4",
+      "D.L5",
+      "D.L6_L7"
+    ]
+  },
+  "round84_six_cut_map": {
+    "L1": {
+      "round518": [
+        "A.L1"
+      ],
+      "not_exhausted_by_43": [
+        "Bałaban actual four original Wilson/ghost/Haar indexed numerators and all-momentum Ward scalar",
+        "cutoff-uniform physical remainder"
+      ]
+    },
+    "L2": {
+      "round518": [
+        "A.L2",
+        "B.D1_D2"
+      ],
+      "not_exhausted_by_43": [
+        "all three mark-kind source analytic radii and physical coordinates"
+      ]
+    },
+    "L3": {
+      "round518": [],
+      "not_exhausted_by_43": [
+        "same-density continuous-time negative Hessian/Doob integral bound and Ricci reserve"
+      ]
+    },
+    "L4": {
+      "round518": [
+        "D.L4"
+      ],
+      "not_exhausted_by_43": [
+        "same-E1 continuum curvature and composite operator existence"
+      ]
+    },
+    "L5": {
+      "round518": [
+        "D.L5"
+      ],
+      "not_exhausted_by_43": [
+        "actual OPE coefficients and one-step AF matching"
+      ]
+    },
+    "L6_L7": {
+      "round518": [
+        "D.L6_L7"
+      ],
+      "not_exhausted_by_43": [
+        "stress Ward charge generates exact OS semigroup on a common dense graph core; L7 then functional-analysis downstream"
+      ]
+    }
+  },
+  "outside_43_mandatory": [
+    {
+      "gate": "E1",
+      "reason": "full changing-cutoff interacting Wilson measure and projective/OS continuum estimates"
+    },
+    {
+      "gate": "D2",
+      "reason": "positive full nonvacuum mass gap for same OS Hamiltonian and uniform physical-time decay"
+    },
+    {
+      "gate": "N1",
+      "reason": "actual non-generalized-free/nontrivial continuum witness, not Gaussian nonlinear-observable cumulant"
+    },
+    {
+      "gate": "G1",
+      "reason": "physical group-specific construction all compact simple types rather than only Casimir positivity"
+    },
+    {
+      "gate": "L1.literal_P0",
+      "reason": "actual diagram numerators, Ward identity and quadrature omitted by simply naming A1 WQR"
+    },
+    {
+      "gate": "L3.heat",
+      "reason": "not separately enumerated among the 43 R518 leaf names"
+    },
+    {
+      "gate": "L7.same_OS_charge",
+      "reason": "not separately enumerated among the 43 R518 leaf names"
+    },
+    {
+      "gate": "legacy_real_trust",
+      "reason": "Bishop setoid migration and safe-import closure unresolved"
+    },
+    {
+      "gate": "G2_source_witness",
+      "reason": "earlier R496 G2 source witnesses not explicitly included in R518's 43; review via later nontriviality compiler"
+    }
+  ],
+  "promotion": {
+    "round518_43_open": true,
+    "round84_6_closed": false,
+    "round87_4_closed": false,
+    "agda_kernel_accepted": false
+  },
+  "entries": [
+    {
+      "id": "a1WilsonHessianVariation",
+      "layer": "source_analysis",
+      "controlling_cut": "A.L1",
+      "work_type": "physical_analysis",
+      "status": "open_source_instantiation",
+      "source_owner": "R496.ResidualLeaf"
+    },
+    {
+      "id": "a1AveragingConstraintVariation",
+      "layer": "source_analysis",
+      "controlling_cut": "A.L1",
+      "work_type": "physical_analysis",
+      "status": "open_source_instantiation",
+      "source_owner": "R496.ResidualLeaf"
+    },
+    {
+      "id": "a1GaugeProjectionVariation",
+      "layer": "source_analysis",
+      "controlling_cut": "A.L1",
+      "work_type": "physical_analysis",
+      "status": "open_source_instantiation",
+      "source_owner": "R496.ResidualLeaf"
+    },
+    {
+      "id": "a1WQRAssembly",
+      "layer": "source_analysis",
+      "controlling_cut": "A.L1",
+      "work_type": "same_object_weld",
+      "status": "open_source_instantiation",
+      "source_owner": "R496.ResidualLeaf"
+    },
+    {
+      "id": "a1ConstrainedGaussianMixedCoefficient",
+      "layer": "source_analysis",
+      "controlling_cut": "A.L1",
+      "work_type": "physical_analysis",
+      "status": "open_source_instantiation",
+      "source_owner": "R496.ResidualLeaf"
+    },
+    {
+      "id": "a1PhysicalJetFiveChannelSplit",
+      "layer": "source_analysis",
+      "controlling_cut": "A.L1",
+      "work_type": "same_object_weld",
+      "status": "open_source_instantiation",
+      "source_owner": "R496.ResidualLeaf"
+    },
+    {
+      "id": "a1FourJointReceiptEvaluation",
+      "layer": "source_analysis",
+      "controlling_cut": "A.L1",
+      "work_type": "physical_analysis",
+      "status": "open_source_instantiation",
+      "source_owner": "R496.ResidualLeaf"
+    },
+    {
+      "id": "a3ProjectiveEventExpectationConsistency",
+      "layer": "source_analysis",
+      "controlling_cut": "E1.continuum_OS",
+      "work_type": "physical_analysis",
+      "status": "open_source_instantiation",
+      "source_owner": "R496.ResidualLeaf"
+    },
+    {
+      "id": "a3ContinuityAtEmpty",
+      "layer": "source_analysis",
+      "controlling_cut": "E1.continuum_OS",
+      "work_type": "physical_analysis",
+      "status": "open_source_instantiation",
+      "source_owner": "R496.ResidualLeaf"
+    },
+    {
+      "id": "bWilsonTwoMarkExpansion",
+      "layer": "source_analysis",
+      "controlling_cut": "B.D1_D2",
+      "work_type": "physical_analysis",
+      "status": "open_source_instantiation",
+      "source_owner": "R496.ResidualLeaf"
+    },
+    {
+      "id": "bWilsonConnectingWeightTail",
+      "layer": "source_analysis",
+      "controlling_cut": "B.D1_D2",
+      "work_type": "physical_analysis",
+      "status": "open_source_instantiation",
+      "source_owner": "R496.ResidualLeaf"
+    },
+    {
+      "id": "bSameHamiltonianTransferCoordinate",
+      "layer": "source_analysis",
+      "controlling_cut": "B.same_H",
+      "work_type": "same_object_weld",
+      "status": "open_source_instantiation",
+      "source_owner": "R496.ResidualLeaf"
+    },
+    {
+      "id": "c1MarkedSourceHilbertModulus",
+      "layer": "source_analysis",
+      "controlling_cut": "D.L4",
+      "work_type": "physical_analysis",
+      "status": "open_source_instantiation",
+      "source_owner": "R496.ResidualLeaf"
+    },
+    {
+      "id": "c4LiteralDensityMetricDerivative",
+      "layer": "source_analysis",
+      "controlling_cut": "D.L6_L7",
+      "work_type": "same_object_weld",
+      "status": "open_source_instantiation",
+      "source_owner": "R496.ResidualLeaf"
+    },
+    {
+      "id": "g1ArbitraryCompactSimpleSourceMap",
+      "layer": "source_analysis",
+      "controlling_cut": "G1.all_groups",
+      "work_type": "physical_group_realization",
+      "status": "open_source_instantiation",
+      "source_owner": "R496.ResidualLeaf"
+    },
+    {
+      "id": "aFiniteEuclideanSameObjectAttachment",
+      "layer": "source_attachment",
+      "controlling_cut": "E1.continuum_OS",
+      "work_type": "same_object_weld",
+      "status": "open_source_instantiation",
+      "source_owner": "R496.ResidualLeaf"
+    },
+    {
+      "id": "aFiniteBosonicSameObjectAttachment",
+      "layer": "source_attachment",
+      "controlling_cut": "E1.continuum_OS",
+      "work_type": "same_object_weld",
+      "status": "open_source_instantiation",
+      "source_owner": "R496.ResidualLeaf"
+    },
+    {
+      "id": "aFiniteWilsonRPSameObjectAttachment",
+      "layer": "source_attachment",
+      "controlling_cut": "E1.continuum_OS",
+      "work_type": "same_object_weld",
+      "status": "open_source_instantiation",
+      "source_owner": "R496.ResidualLeaf"
+    },
+    {
+      "id": "a2BetaMarkGeneratedHistoryShell",
+      "layer": "source_attachment",
+      "controlling_cut": "A.L2",
+      "work_type": "same_object_weld",
+      "status": "open_source_instantiation",
+      "source_owner": "R496.ResidualLeaf"
+    },
+    {
+      "id": "a3StressDensityIsLiteralFiniteMeasure",
+      "layer": "source_attachment",
+      "controlling_cut": "E1.continuum_OS",
+      "work_type": "same_object_weld",
+      "status": "open_source_instantiation",
+      "source_owner": "R496.ResidualLeaf"
+    },
+    {
+      "id": "a3SourceOSIsLiteralSchwinger",
+      "layer": "source_attachment",
+      "controlling_cut": "E1.continuum_OS",
+      "work_type": "same_object_weld",
+      "status": "open_source_instantiation",
+      "source_owner": "R496.ResidualLeaf"
+    },
+    {
+      "id": "a3CylinderEventIndicatorSemantics",
+      "layer": "source_attachment",
+      "controlling_cut": "E1.continuum_OS",
+      "work_type": "same_object_weld",
+      "status": "open_source_instantiation",
+      "source_owner": "R496.ResidualLeaf"
+    },
+    {
+      "id": "a3CylinderExpectationIntegralIdentification",
+      "layer": "source_attachment",
+      "controlling_cut": "E1.continuum_OS",
+      "work_type": "same_object_weld",
+      "status": "open_source_instantiation",
+      "source_owner": "R496.ResidualLeaf"
+    },
+    {
+      "id": "a45QuantitativeFiniteExpectationAttachment",
+      "layer": "source_attachment",
+      "controlling_cut": "E1.continuum_OS",
+      "work_type": "same_object_weld",
+      "status": "open_source_instantiation",
+      "source_owner": "R496.ResidualLeaf"
+    },
+    {
+      "id": "a4RepresentedRegularityExtensionality",
+      "layer": "source_attachment",
+      "controlling_cut": "E1.continuum_OS",
+      "work_type": "same_object_weld",
+      "status": "open_source_instantiation",
+      "source_owner": "R496.ResidualLeaf"
+    },
+    {
+      "id": "a5RepresentedGrowthExtensionality",
+      "layer": "source_attachment",
+      "controlling_cut": "E1.continuum_OS",
+      "work_type": "same_object_weld",
+      "status": "open_source_instantiation",
+      "source_owner": "R496.ResidualLeaf"
+    },
+    {
+      "id": "c1CurvatureGaugeLocalSemantics",
+      "layer": "source_attachment",
+      "controlling_cut": "D.L4",
+      "work_type": "same_object_weld",
+      "status": "open_source_instantiation",
+      "source_owner": "R496.ResidualLeaf"
+    },
+    {
+      "id": "c2PhysicalRemainderIsCompositeTail",
+      "layer": "source_attachment",
+      "controlling_cut": "D.L5",
+      "work_type": "same_object_weld",
+      "status": "open_source_instantiation",
+      "source_owner": "R496.ResidualLeaf"
+    },
+    {
+      "id": "c3OneStepAFRGIdentification",
+      "layer": "source_attachment",
+      "controlling_cut": "D.L5",
+      "work_type": "physical_coefficient_identification",
+      "status": "open_source_instantiation",
+      "source_owner": "R496.ResidualLeaf"
+    },
+    {
+      "id": "c4FiniteStressInsertionIsCMP119Local",
+      "layer": "source_attachment",
+      "controlling_cut": "D.L6_L7",
+      "work_type": "same_object_weld",
+      "status": "open_source_instantiation",
+      "source_owner": "R496.ResidualLeaf"
+    },
+    {
+      "id": "c4StressCompletionIsCompletedMarkedStress",
+      "layer": "source_attachment",
+      "controlling_cut": "D.L6_L7",
+      "work_type": "same_object_weld",
+      "status": "open_source_instantiation",
+      "source_owner": "R496.ResidualLeaf"
+    },
+    {
+      "id": "c4CompletedStressIsClayStress",
+      "layer": "source_attachment",
+      "controlling_cut": "D.L6_L7",
+      "work_type": "same_object_weld",
+      "status": "open_source_instantiation",
+      "source_owner": "R496.ResidualLeaf"
+    },
+    {
+      "id": "c4DensityAnchoredLaneInstantiation",
+      "layer": "source_attachment",
+      "controlling_cut": "D.L6_L7",
+      "work_type": "same_object_weld",
+      "status": "open_source_instantiation",
+      "source_owner": "R496.ResidualLeaf"
+    },
+    {
+      "id": "t4GaugeInvariantLocalObservableSemantics",
+      "layer": "endpoint_semantic",
+      "controlling_cut": "D.L4",
+      "work_type": "endpoint_semantics",
+      "status": "open_source_instantiation",
+      "source_owner": "R496.ResidualLeaf"
+    },
+    {
+      "id": "t4CurvatureCorrespondenceSemantics",
+      "layer": "endpoint_semantic",
+      "controlling_cut": "D.L4",
+      "work_type": "endpoint_semantics",
+      "status": "open_source_instantiation",
+      "source_owner": "R496.ResidualLeaf"
+    },
+    {
+      "id": "t4CurvatureGaugeInvariantSemantics",
+      "layer": "endpoint_semantic",
+      "controlling_cut": "D.L4",
+      "work_type": "endpoint_semantics",
+      "status": "open_source_instantiation",
+      "source_owner": "R496.ResidualLeaf"
+    },
+    {
+      "id": "t4CurvatureLocalitySemantics",
+      "layer": "endpoint_semantic",
+      "controlling_cut": "D.L4",
+      "work_type": "endpoint_semantics",
+      "status": "open_source_instantiation",
+      "source_owner": "R496.ResidualLeaf"
+    },
+    {
+      "id": "t4ShortDistanceAFSemantics",
+      "layer": "endpoint_semantic",
+      "controlling_cut": "D.L5",
+      "work_type": "endpoint_semantics",
+      "status": "open_source_instantiation",
+      "source_owner": "R496.ResidualLeaf"
+    },
+    {
+      "id": "t4StressTensorAndOPESemantics",
+      "layer": "endpoint_semantic",
+      "controlling_cut": "D.L6_L7",
+      "work_type": "endpoint_semantics",
+      "status": "open_source_instantiation",
+      "source_owner": "R496.ResidualLeaf"
+    },
+    {
+      "id": "t4PhysicalOPECoefficientSemantics",
+      "layer": "endpoint_semantic",
+      "controlling_cut": "D.L5",
+      "work_type": "endpoint_semantics",
+      "status": "open_source_instantiation",
+      "source_owner": "R496.ResidualLeaf"
+    },
+    {
+      "id": "t4PhysicalOPERemainderSemantics",
+      "layer": "endpoint_semantic",
+      "controlling_cut": "D.L5",
+      "work_type": "endpoint_semantics",
+      "status": "open_source_instantiation",
+      "source_owner": "R496.ResidualLeaf"
+    },
+    {
+      "id": "allGroupCompactSimpleWitness",
+      "layer": "source_bundle",
+      "controlling_cut": "G1.all_groups",
+      "work_type": "source_realization",
+      "status": "open_source_instantiation",
+      "source_owner": "R518.AddedSourceLeaf"
+    },
+    {
+      "id": "literalCMP119Section2Family",
+      "layer": "source_bundle",
+      "controlling_cut": "E1.continuum_OS",
+      "work_type": "source_realization",
+      "status": "open_source_instantiation",
+      "source_owner": "R518.AddedSourceLeaf"
+    }
+  ]
+}
