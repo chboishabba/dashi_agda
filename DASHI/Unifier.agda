@@ -11,6 +11,9 @@ import DASHI.Unified.InvariantSpine as BrainSpine
 import DASHI.Cognition.PNF.SensibLawGWBv01PostCertificationRoadmapExact as SensibLawDirect
 
 
+-- Reuse-only PNF boundary normalization. No source theorem is promoted.
+open import DASHI.Unified.PNFSourceBoundaryTOEExact public
+
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
 
 open import Agda.Primitive using (Level; lzero; lsuc)
