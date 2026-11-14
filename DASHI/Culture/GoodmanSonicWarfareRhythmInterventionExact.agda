@@ -96,7 +96,10 @@ countCollidesOnPhase =
 countCannotRecoverPhase :
   Query.AdequateFor pulseCount pulseSemantics phaseQuestion → ⊥
 countCannotRecoverPhase =
-  Query.queryAdequacyDefectBlocksFactorisation countCollidesOnPhase
+  Query.queryAdequacyDefectBlocksFactorisation
+    {semantics = pulseSemantics}
+    {query = phaseQuestion}
+    countCollidesOnPhase
 
 phaseIsAdequateForPhase :
   Query.AdequateFor pulsePhase pulseSemantics phaseQuestion
