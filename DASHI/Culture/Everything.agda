@@ -149,6 +149,8 @@ import DASHI.Culture.BlochfieldHistoricalWalletReviewCandidateExact
 import DASHI.Culture.BlochfieldMediumSavedReadingSnowballExact
 import DASHI.Culture.BlochfieldAcquisitionResidualSnowballExact
 
+import DASHI.Culture.GoodmanSonicWarfareExact
+
 module DASHI.Culture.Everything where
 
 -- Culture domain rollup.

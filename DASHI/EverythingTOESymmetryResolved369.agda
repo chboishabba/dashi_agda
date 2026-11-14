@@ -21,6 +21,8 @@ open AdelicSpectralTOE public using
   )
 
 import DASHI.Empirical.KozyrevMirrorClaimTesting as KozyrevMirror
+-- Reuse source-typed finite Sonic Warfare witness; no external promotion.
+import DASHI.Culture.GoodmanSonicWarfareExact as GoodmanSonicWarfare
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Governance.ParallelNeedsInstitutionalTransitionExact as ParallelNeeds
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
