@@ -874,3 +874,56 @@ toeAndUnifierDepthPromotionImpossible :
   Balaban.DepthContinuumLimitPromotion → ⊥
 toeAndUnifierDepthPromotionImpossible =
   TOE.toeDepthContinuumLimitPromotionImpossible
+------------------------------------------------------------------------
+-- Same-family and C-package max-cut agreement.
+------------------------------------------------------------------------
+
+receiptSameFamilyRecoveryCompilerMatchesOwner :
+  Balaban.sameFamilyRecoveryCompiler Balaban.canonicalBalabanRGTOEReceipt
+  ≡ Balaban.balabanSameFamilyRecoveryCompilerLevel
+receiptSameFamilyRecoveryCompilerMatchesOwner = refl
+
+receiptGoal1CSourceCutCompilerMatchesOwner :
+  Balaban.goal1CSourceCutCompiler Balaban.canonicalBalabanRGTOEReceipt
+  ≡ Balaban.balabanGoal1CSourceCutCompilerLevel
+receiptGoal1CSourceCutCompilerMatchesOwner = refl
+
+receiptCPhysicalPackageMaxCutMatchesOwner :
+  Balaban.cPhysicalPackageMaxCutCompiler Balaban.canonicalBalabanRGTOEReceipt
+  ≡ Balaban.balabanCPhysicalPackageMaxCutCompilerLevel
+receiptCPhysicalPackageMaxCutMatchesOwner = refl
+
+receiptCPackageCountMatchesOwner :
+  Balaban.cPhysicalPackageCount Balaban.canonicalBalabanRGTOEReceipt
+  ≡ Balaban.balabanCPhysicalPackageCount
+receiptCPackageCountMatchesOwner = refl
+
+toeSameFamilyRecoveryCompilerMatchesOwner :
+  TOE.toeBalabanSameFamilyRecoveryCompilerLevel
+  ≡ Balaban.balabanSameFamilyRecoveryCompilerLevel
+toeSameFamilyRecoveryCompilerMatchesOwner = refl
+
+unifierSameFamilyRecoveryCompilerMatchesOwner :
+  Unifier.toeBalabanSameFamilyRecoveryCompilerLevel
+  ≡ Balaban.balabanSameFamilyRecoveryCompilerLevel
+unifierSameFamilyRecoveryCompilerMatchesOwner = refl
+
+toeCPhysicalPackageMaxCutMatchesOwner :
+  TOE.toeBalabanCPhysicalPackageMaxCutCompilerLevel
+  ≡ Balaban.balabanCPhysicalPackageMaxCutCompilerLevel
+toeCPhysicalPackageMaxCutMatchesOwner = refl
+
+unifierCPhysicalPackageMaxCutMatchesOwner :
+  Unifier.toeBalabanCPhysicalPackageMaxCutCompilerLevel
+  ≡ Balaban.balabanCPhysicalPackageMaxCutCompilerLevel
+unifierCPhysicalPackageMaxCutMatchesOwner = refl
+
+toeCPackageCountMatchesOwner :
+  TOE.toeBalabanCPhysicalPackageCount
+  ≡ Balaban.balabanCPhysicalPackageCount
+toeCPackageCountMatchesOwner = refl
+
+unifierCPackageCountMatchesOwner :
+  Unifier.toeBalabanCPhysicalPackageCount
+  ≡ Balaban.balabanCPhysicalPackageCount
+unifierCPackageCountMatchesOwner = refl
