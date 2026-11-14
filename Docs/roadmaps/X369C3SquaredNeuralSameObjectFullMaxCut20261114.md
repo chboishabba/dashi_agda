@@ -356,3 +356,40 @@ An independent direct GitHub source-blob comparison checked the live Leech `mode
 - **P7:** domain-owner X369-B/C/D/E/G physical map and assumption checks; no propagation from finite ternary index coincidences.
 
 Preserve **one active X369 formal PR (#1442)** and **one neural PR (#4)**. DASHI branch is still diverged from master; perform non-destructive merge/rebase with transitive type-checking only when the golden checker can execute. No scientific closure is inferred from absence of CI checks.
+
+## 14 November 2026 host replay — selected eight Agda leaves pass, current remote-head replay pending
+
+A host run against the source revision **`7c549c9892f5`**, on local testing worktree `test/pr1442`, reports that the **selected** `scripts/check_x369_finite_original_torus_maxcut.sh` using `scripts/run_agda29_parallel_check.sh` completed with exit 0, zero errors and zero warnings. Its exact per-leaf reported checks:
+
+| Selected leaf | Host count | Host disposition |
+|---|---:|---|
+| `X369OriginalTorusGroupLawExact` | 64 | PASS |
+| `X369FiniteTorusAndRouterActionWeldExact` | 157 | PASS |
+| `X369OriginalTorusCharacterOrthogonalityExact` | 194 | PASS |
+| `X369OriginalSignedSiteOrderBidiExact` | 158 | PASS |
+| `X369OriginalTorusSpectralBasisExact` | 196 | PASS |
+| `X369OriginalPointedEightSlotBidiExact` | 159 | PASS |
+| `X369OriginalTorusPointedAffineBidiExact` | 65 | PASS |
+| `X369OrbitAbsolutePhaseGaugeExact` | 18 | PASS |
+
+The **1011** checks above are the host's count of selected leaf checks and are not 1011 newly proved independent general theorems. A00, A01/A02, and the finite delta-basis cases of A03/A04 and conditional A05 spatial BIDI now have a positive **host-reported kernel receipt** at that tested worktree.
+
+**Important branch reconciliation:** the testing branch `test/pr1442` has not been pushed as a named branch to GitHub. The connected remote PR branch still showed Agda 2.9 parser issues in the imported original files despite the host's clean local run. To avoid leaving the fixes stranded on an untracked local worktree, this continuation synchronized the same described compatibility patch directly into the existing PR #1442 branch:
+1. `DASHI/Physics/Common/FiniteThreeCycleTorusExact.agda`: binder `field` → `fld` (preserving the actual `field` record declaration), `FiniteTorusBoundary : Set₁`.
+2. `DASHI/Biology/BalancedTernaryFourierModeExact.agda`: `field` binder → `fld`; `FourierModeBoundary : Set₁`; remove unsupported/unused Equality `cong` import.
+3. `DASHI/Cognition/PNF/X369OriginalSignedSiteOrderBidiExact.agda`: clean Equality `cong` import.
+
+**A fresh Agda 2.9 replay of the later remote PR head is still mandatory.** Reassigning the earlier local checker result to unexecuted later commits would violate source/verification provenance; no whole-repository/Track A proof is claimed.
+
+### Revised exact formal gates
+
+- **A00 / site & sign:** original Python SITES ↔ existing nine-point torus BIDI, exact positive and negative generator phase conventions. Host-reported kernel PASS for the selected leaf; remote-head replay OPEN.
+- **A01/A02 / group & orthogonality:** finite original group and 81-character normalisation selected leaf host PASS, current remote-head replay OPEN.
+- **A03 / original arbitrary-field Fourier:** delta-character multiplicativity and basis inverse/convolution leaf host PASS. Required next named lemmas: `originalNineSiteFieldExpansion`, `originalEisensteinFiniteDoubleSumInterchange`, `originalAllFieldFourierConvolution`, `originalNineSiteInverseScaledByNine`. State ring identities and exact 1/9 convention explicitly; do NOT promote basis tests into these general theorems.
+- **A04 / full Parseval and real descent:** 81 sesquilinear Parseval/reality delta coefficients source host PASS. Next: `originalAllFieldParsevalBilinear`, `originalConjugateFrequencyRealityAllSites`, `originalCentredNineSheetGramInvariant`. Reuse original orthogonality and character ring rather than introducing a synthetic torus.
+- **A05 / original eight+centre ↔ real Fourier four-pair:** original spatial eight+centre pointwise BIDI leaf host PASS under explicitly stated affine cancellation. Next: `originalEightCentreToFourWavePairs`, `originalFourWavePairsToEightCentre`, `originalCentredNineNormUnderReGauge`, and source `signedFloatWaveConsumerRefinement`.
+- **A06 / authoritative Track A:** selected Track B acceptance is now host-reported, not equivalent to full transitive kernel audit/whole-repo acceptance. Need a current-branch pinned Agda 2.9 zero-warning log, assumptions/termination/sort audit and integration with master without force rewriting the many intervening master changes.
+- **F1/F2/F3** companion Leech owner: host reports 9-row pooled C3 bootstrap with layer-1 CI above 0.05, but NOT a bootstrap of the original full d×d hidden commutator; the new Leech code now performs both full-matrix and pooled row bootstrap. Task-defined original model consumer/causal agreement remains unmeasured.
+- **F4/F5/F6:** no original fresh corpus is included in a PR source diff; Leech now has a SHA-bound and 16-gram-distinct real source-document token-split generator with a provisional path if the historical document inventory is unavailable. Document identity must not be inferred merely from token nonoverlap.
+
+**Next handoff:** run `DASHI_NO_TMUX=1 bash scripts/check_x369_finite_original_torus_maxcut.sh` on the pushed PR #1442 head; run the Leech full native test command on the latest PR #4 head; separately rerun F1 from the existing TrueNAS residual `.npy` files to generate **actual full-hidden** row-cluster confidence intervals. Do not consume frozen F5/F6 sets to explore source actions.
