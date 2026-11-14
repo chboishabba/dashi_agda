@@ -2,7 +2,7 @@ module DASHI.Metric.AgreementUltrametric where
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans; subst)
 open import Data.Nat using (_≤_; _<_; _≥_; _⊔_; _⊓_; _∸_; z≤n; s≤s)
 open import Data.Nat.Properties as NatP
 open import Data.Sum using (inj₁; inj₂)
