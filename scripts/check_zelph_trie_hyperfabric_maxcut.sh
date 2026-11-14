@@ -14,10 +14,12 @@ fi
 HEAD="$(git rev-parse HEAD)"
 printf '%s\n' "DASHI Zelph trie/hyperfabric kernel acceptance" "HEAD=$HEAD"
 
-# A dirty worktree may be a legitimate local iteration, but cannot be
-# mistaken for a verified GitHub PR head.
+# An exact-head verification receipt requires no uncommitted changes to
+# tracked source. A locally patched worktree must first be committed (or
+# verified separately and explicitly called an overlay test).
 if [ -n "$(git status --porcelain --untracked-files=no)" ]; then
-  echo "WARNING: tracked working tree differs from HEAD; result is NOT an exact-head receipt." >&2
+  echo "BLOCKED: tracked working tree differs from HEAD; not an exact-head receipt." >&2
+  exit 3
 fi
 
 TARGETS=(
