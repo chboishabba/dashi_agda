@@ -13,6 +13,7 @@ from __future__ import annotations
 from collections import deque
 import hashlib
 import json
+import math
 from typing import Any, Mapping
 
 SCHEMA = 'dashi.ibrahim.fln.finite_certificate.v1'
@@ -93,6 +94,8 @@ def strict_json_loads(source: str) -> Any:
         raise ValueError("malformed JSON at M4 wire boundary") from exc
 
     def reject_surrogates(value: Any) -> None:
+        if isinstance(value, float) and not math.isfinite(value):
+            raise ValueError("nonfinite JSON numeric value after float decoding")
         if isinstance(value, str):
             if any(0xD800 <= ord(char) <= 0xDFFF for char in value):
                 raise ValueError("unpaired Unicode surrogate in JSON string")
