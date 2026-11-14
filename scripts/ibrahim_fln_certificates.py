@@ -65,6 +65,49 @@ def finite_mutual_rotation_decision(
             finite_total_reachability(graph, b, a))
 
 
+
+def strict_json_loads(source: str) -> Any:
+    """M4 wire boundary: duplicate keys and non-JSON numeric tokens fail closed.
+
+    This is an executable decoder contract, NOT a machine-checked proof of
+    CPython's JSON implementation or of original Wikipedia source bytes.
+    """
+    if not isinstance(source, str):
+        raise ValueError("JSON source must be decoded UTF-8 text")
+
+    def unique_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+        result: dict[str, Any] = {}
+        for key, value in pairs:
+            if key in result:
+                raise ValueError(f"duplicate JSON object key: {key!r}")
+            result[key] = value
+        return result
+
+    def reject_non_json_constant(token: str) -> Any:
+        raise ValueError(f"non-JSON numeric constant: {token!r}")
+
+    try:
+        parsed = json.loads(source, object_pairs_hook=unique_object,
+                            parse_constant=reject_non_json_constant)
+    except (json.JSONDecodeError, UnicodeError) as exc:
+        raise ValueError("malformed JSON at M4 wire boundary") from exc
+
+    def reject_surrogates(value: Any) -> None:
+        if isinstance(value, str):
+            if any(0xD800 <= ord(char) <= 0xDFFF for char in value):
+                raise ValueError("unpaired Unicode surrogate in JSON string")
+        elif isinstance(value, list):
+            for element in value:
+                reject_surrogates(element)
+        elif isinstance(value, dict):
+            for key, element in value.items():
+                reject_surrogates(key)
+                reject_surrogates(element)
+
+    reject_surrogates(parsed)
+    return parsed
+
+
 def trace_start(graph: Mapping[str, str | None], start: str) -> dict[str, Any]:
     if start not in graph:
         raise ValueError('start must be in graph')
