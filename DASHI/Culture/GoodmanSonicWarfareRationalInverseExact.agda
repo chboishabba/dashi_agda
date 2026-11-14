@@ -159,6 +159,14 @@ commonModeSecondCoordinateRecovers q r x y sharedError paid =
 ridgeSecond : ℚ → ℚ → ℚ → ℚ → ℚ
 ridgeSecond q rho a b = (rho * q) * (b - a)
 
+ridgeRingDecomposition :
+  ∀ (q rho x y firstError secondError : ℚ) →
+  (rho * q) * (((x + q * y) + secondError) - (x + firstError))
+  ≡ ((rho * (q * q)) * y)
+      + ((rho * q) * (secondError - firstError))
+ridgeRingDecomposition q rho x y firstError secondError =
+  solve (q ∷ rho ∷ x ∷ y ∷ firstError ∷ secondError ∷ [])
+
 ridgeTwoChannelDecomposition :
   ∀ (q rho x y firstError secondError : ℚ) →
   ridgeSecond q rho
@@ -166,8 +174,7 @@ ridgeTwoChannelDecomposition :
     ((x + q * y) + secondError)
   ≡ ((rho * (q * q)) * y)
       + ((rho * q) * (secondError - firstError))
-ridgeTwoChannelDecomposition q rho x y firstError secondError =
-  solve (q ∷ rho ∷ x ∷ y ∷ firstError ∷ secondError ∷ [])
+ridgeTwoChannelDecomposition = ridgeRingDecomposition
 
 ridgeBiasBalance :
   ∀ (q rho lambda y : ℚ) →
@@ -180,6 +187,13 @@ ridgeBiasBalance q rho lambda y paid =
       (cong (λ factor → factor * y) paid)
       (QProperties.*-identityˡ y))
 
+ridgeNormalRing :
+  ∀ (q rho lambda a b : ℚ) →
+  (q * q + lambda) * ((rho * q) * (b - a))
+    ≡ ((q * q + lambda) * rho) * (q * (b - a))
+ridgeNormalRing q rho lambda a b =
+  solve (q ∷ rho ∷ lambda ∷ a ∷ b ∷ [])
+
 -- Algebraic normal equation for the candidate: no claim of unique
 -- minimisation is made because lambda and the inverse are not built.
 ridgeNormalEquation :
@@ -189,7 +203,7 @@ ridgeNormalEquation :
     ≡ q * (b - a)
 ridgeNormalEquation q rho lambda a b paid =
   trans
-    (solve (q ∷ rho ∷ lambda ∷ a ∷ b ∷ []))
+    (ridgeNormalRing q rho lambda a b)
     (trans
       (cong (λ factor → factor * (q * (b - a))) paid)
       (QProperties.*-identityˡ (q * (b - a))))
