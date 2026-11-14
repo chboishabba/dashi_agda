@@ -54,7 +54,12 @@ def source_bound(receipt):
            for v in (eff,b,t)) or not(0<eff<=1 and b>=0 and t>0):
         raise ValueError("No valid lower efficiency, background and live time")
     upper=one_sided_upper_mean(n)
-    s=max(0.,upper-b)/eff
+    if b>upper:
+        raise ValueError(
+            "Original background lower bound is incompatible with observed "
+            "counts at the chosen confidence level; do not report a zero "
+            "signal upper bound from a falsified background model")
+    s=(upper-b)/eff
     return {
       "status":"CONDITIONAL one-sided Poisson 95% upper bound",
       "original_source_sha256":receipt["original_file_sha256"],
