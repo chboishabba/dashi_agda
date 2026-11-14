@@ -34,8 +34,8 @@
 | `terminalCycleUniqueUpToRotation` | **New source written**; takes **any** two `EventualCycle next start` objects, does not require caller-provided ordering/period split; **kernel OPEN** |
 | `IntrinsicTerminalSameBasin`, `terminalBasinsPartitionByCycle` | **New source written**; basins are classes of mutually reachable terminal representatives, not equality of selected labels |
 | `canonicalCycleRepresentativeUnique` | **New source written** under two `CanonicalCycleRoot` minimum receipts and antisymmetric order; does **not** construct the minimum algorithmically |
-| `canonicalCycleRootExistsForFiniteDecidableOrder` | **OPEN**: build a minimum root from finite enumeration, decidable total ordering, intrinsic terminal cycle membership, and prove it satisfies `CanonicalCycleRoot.minimal` |
-| `canonicalCycleChoiceIndependent` | **OPEN**: combine finite minimum producer and the existing uniqueness result, independent of pigeonhole collision certificate and traversal order |
+| `canonicalCycleRootExistsForFiniteDecidableOrder` | **NEW SOURCE WRITTEN** in `IbrahimFiniteCanonicalCycleRootExact.agda`: fold over the complete finite carrier, with a decidable intrinsic cycle-membership predicate and a total antisymmetric/transitive/reflexive order; prove the chosen root is below every member |
+| `canonicalCycleChoiceIndependent` | **NEW SOURCE WRITTEN**: compose the finite minimum producer with `terminalCycleUniqueUpToRotation` and `canonicalCycleRepresentativeUnique` for two independent eventual-cycle certificates |
 
 ### A2 partial-link semantics (golden Agda `IbrahimPartialFirstLinkSemanticsExact`)
 
@@ -120,3 +120,11 @@ If any original immutable object is missing or the server rejects ranges, preser
 **Deliverable 1:** Agda proves finite orbits, intrinsic terminal-cycle equivalence and trace semantics for total graphs, preserving partial-source distinctions. **Deliverable 2:** one genuine independently acquired wiki article pair with source-bytes/editions, parser-selected first links and query-specific consumer repair. **Deliverable 3:** original physical native HF/ITIR/SLR join, exact revision selective reopening and persisted/reloaded reviewed result. **Deliverable 4:** separate reproducible original 2014 and contemporary comparative census. Close a gate only with the exact accepted source commit, kernel/log evidence, original-byte provenance and negative controls.
 
 This page is the **current authoritative status/lemma matrix**; earlier chronology and detailed source archaeology remain preserved in [`IbrahimFLNITIRTernaryHyperfabricMaxCut20261114.md`](IbrahimFLNITIRTernaryHyperfabricMaxCut20261114.md). Those appendices may describe older unverified heads and must not override this matrix.
+
+## Final A2 minimum-producer extension — source implementation, pending kernel
+
+New `DASHI/Wikimedia/IbrahimFiniteCanonicalCycleRootExact.agda` introduces `FiniteTotalOrder`, `LeastFromSeed`, `leastFromFiniteList`, `canonicalCycleRootExistsForFiniteDecidableOrder`, and `canonicalCycleChoiceIndependent`. This is a **constructive finite fold**, not a least-element axiom: the seed is the base periodic vertex, `decideCycle` determines which enumerated vertices are on its intrinsic cycle, and each comparison retains a proof that the current candidate is `≤` all accepted candidates. Coverage of `General.CompleteFiniteCarrier` lifts the minimum to every candidate in `Node`.
+
+**Boundary:** source written; new-head Agda acceptance is pending. A decision procedure `finiteCycleMembershipDecidableFromFinEquality` remains **OPEN**; it would search bounded original-graph orbits under an explicitly decidable equality of vertices. Neither a Wikidata QID nor a title order establishes that decision or source attribution. The separate unsolved proof-relevance/semantic Python decoder contract and all physical HF, S29 and real Wiki source gates remain OPEN.
+
+**Current exact acceptance count from focused script:** eleven explicit source modules (`IbrahimFiniteOrbitRevisionWeldExact`, `IbrahimMultilingualHyperfabricWeldExact`, `IbrahimPublishedSevenNodeFunnelExact`, `IbrahimGeneralFiniteCertificateKernelExact`, `IbrahimFinitePigeonholeProducerExact`, `IbrahimCycleRotationRelationExact`, `IbrahimPartialFirstLinkSemanticsExact`, `IbrahimFiniteTraceCheckerWeldExact`, `IbrahimFiniteCanonicalCycleRootExact`, `IbrahimFiniteFigureBasinCertificateExact`, `IbrahimITIRConsumerRepairExact`) plus one dynamically generated `GeneratedIbrahimFigureCertificateExact`. Previous `8/8` pass is deliberately not promoted to `12/12`.
