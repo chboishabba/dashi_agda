@@ -137,3 +137,32 @@ Every completed gate must carry: **(1)** exact Agda statement/source path, **(2)
 **Historical replication complete** additionally requires P1 historical dump→released map lineage and P2 producer-exact traversal results.
 
 **Contemporary multilingual evaluation complete** additionally requires P6 edition-specific snapshots, Gabella/ABC source-separated results and confounder tests. **Cultural causality is not a theorem furnished by first-link topology.**
+
+
+## 2026-11-14 A1–A3 implementation tranche: exact validation status
+
+The following are new source commits in PR #1505, NOT kernel certificates. The active runtime has no Agda executable and cannot clone GitHub because DNS is unavailable; GitHub Actions showed no runs for the branch when checked. No claim is made that the exact committed Python files were executed locally.
+
+| Workstream | New source | Proofs or executable checks now written | Still unpaid |
+| --- | --- | --- | --- |
+| **P2 finite manuscript figure** | IbrahimFiniteFigureBasinCertificateExact.agda (3920040c) | An exhaustive seven-node enumeration; figureEventuallyC creates one explicit period-3 cycle witness from every A–G starting vertex; figureEveryEntryCertificateSound; figureSameBasinForEveryPair | Agda kernel; general finite graph certificate algorithm and equivalence to Python |
+| **P4/I9 consumer repair** | IbrahimITIRConsumerRepairExact.agda (e8e179dd, extended at 98ca1bf2) | firstLinkCollisionIsConsumerNonDescent; sharedQidCannotPayFirstLinkConsumer; firstLinkRepairSeparatesConsumerCollision; firstLinkRepairRetainsOriginalView; firstLinkRepairPaysSelectedConsumer; firstLinkRepairDoesNotPayAllConsumers; evidence-scoped consumerObservablePreservedByReviewedAlignment; conditional reviewedRepairRerunSound | Agda kernel; real two-edition revision-pinned wikitext, parser/source hash, reviewed consumer licence, repair and post-repair execution |
+| **P5 finite revision impact** | IbrahimFiniteOrbitRevisionWeldExact.agda (0c70f378, extended 9c823753) | oldOrbitHitOrAvoid; changedResultWitnessesOldEditedPath: with decidable changed-node predicate and unequal n-step endpoints, obtain a concrete old-path edited edge; oldOrbitAvoidsEditsPreservesCycleCertificate composes existing transport proofs | Agda kernel; whole terminal-census update and added/deleted/redirected pages |
+| **P2 runtime test** | tests/test_ibrahim_fln_reference_analysis.py (6a778ff1) | A committed deterministic 1,600-graph independent-oracle regression covering terminal classes, visits, both funnel conventions, and revision bounds | Test/CI log of the exact committed test/runtime files |
+| **Independent offline arithmetic** | Separate model runtime, not GitHub clone | 12,000 random functional graphs (sizes 1–8, seed 49) checked against separate brute-force walks; 24,000 cycle-entry-policy cases passed | Exact repository-source execution and source-code equivalence NOT paid |
+
+**First-implementation times, separate from validation:** finite consumer repair was committed 2026-11-14 11:14:52 UTC (e8e179dd), seven-node orbit certificate at 11:16:14 UTC (3920040c), property regressions at 11:19:08 UTC (6a778ff1), constructive edited-path result at 11:22:05 UTC (0c70f378), and heterogeneous consumer transport adapter at 11:22:48 UTC (98ca1bf2). The external source methods/results and original author publication timelines are separate.
+
+### Exact remaining acceptance after this tranche
+
+**A1.** Run isolated golden Agda 2.9 typechecking of all five new Agda modules, import closure and full Wikimedia aggregate, plus the committed Python tests. Archive exact branch commit, toolchain, log and no-trust-escape receipt.
+
+**A2.** General finite-functional-graph orbit classification and terminal/basin certificate *produced by a checked algorithm*, canonicalized cycle uniqueness and exact Python/kernel semantics alignment. The figure-only certificates do not prove the general theorem or historical graph identity.
+
+**A3/I9.** Supply two genuine Wikipedia language revisions with page IDs, oldids, wikitext bytes/hashes, exact parser policies, first qualifying edges and QID alignment evidence. Instantiate the existing ITIR query relative witness and reviewed least-coordinate repair, preserving original variants. The current synthetic model does not prove a historical translation defect or create Wikipedia edit authority.
+
+**B.** Connect revised-page identity transport, ITIR selective reopening, actual Hyperfabric link-incidence witnesses, and source-licensed balanced-ternary trie encoding without reducing unknown to zero.
+
+**C.** Reproduce historical dump/producer/result identity and modern edition-specific census, then control for parser/revision/editorial factors. Neither published findings nor a source citation become a new formal theorem.
+
+The attribution constitution remains: original Ibrahim/Gabella empirical claims, existing DASHI/ITIR/SensibLaw owners, and new DASHI finite proof extensions are distinct; DOI, QID, Dewey, revision, source hash and proof-payment role are separately tracked.
