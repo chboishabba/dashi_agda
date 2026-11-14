@@ -142,6 +142,61 @@ def single_visit_funnels(
     return flow
 
 
+
+def paper_traversal_visits(
+    graph: Mapping[str, str | None],
+    terminal: Mapping[str, tuple[str, tuple[str, ...]]],
+    basins: Counter,
+) -> dict[str, int]:
+    """Published traversal-visits convention: count destinations after start.
+
+    Fig. 2 of Ibrahim-Danforth-Dodds: A,B,C = 7; E = 2; D,F,G = 0.
+    A cycle vertex is visited by EVERY start in its basin (including a
+    start at the cycle vertex); a noncycle vertex does not count its own
+    zero-length start.
+    """
+    inclusive = single_visit_funnels(graph, terminal, basins)
+    return {
+        node: amount if (
+            terminal[node][0] == "cycle" and node in terminal[node][1]
+        ) else amount - 1
+        for node, amount in inclusive.items()
+    }
+
+
+def traversal_funnels(
+    graph: Mapping[str, str | None],
+    terminal: Mapping[str, tuple[str, tuple[str, ...]]],
+    basins: Counter,
+    *,
+    include_cycle_entry: bool,
+) -> dict[str, int]:
+    """Cycle-boundary funnel measure, explicitly versioned.
+
+    Published Fig. 3/Fig. 4 include the first cycle-entry vertex, and
+    exclude the rest of the cycle. The earlier unamended pseudocode
+    omits all cycle vertices. The 2019 code correction to count cycle
+    starts is tracked independently in ProducerRevisionArchaeologyExact.
+
+    For noncycle vertices, paths count destination arrivals after the
+    start, not self-visits. For cycle entry c, sum descendant start
+    counts over the noncycle in-neighbors u -> c. Cycle starts themselves
+    contribute zero funnel edges.
+    """
+    inclusive = single_visit_funnels(graph, terminal, basins)
+    result = paper_traversal_visits(graph, terminal, basins)
+    cycle_nodes = {
+        node for node, outcome in terminal.items()
+        if outcome[0] == "cycle" and node in outcome[1]
+    }
+    for node in cycle_nodes:
+        result[node] = 0
+    if include_cycle_entry:
+        for source, destination in graph.items():
+            if source not in cycle_nodes and destination in cycle_nodes:
+                result[destination] += inclusive[source]
+    return result
+
 def reverse_edited_closure(
     graph: Mapping[str, str | None], changed: set[str],
 ) -> set[str]:
@@ -184,6 +239,13 @@ def compare_same_carrier(
 def summarise(graph: Mapping[str, str | None], *, top: int) -> dict[str, Any]:
     terminal, basins = terminal_census(graph)
     flows = single_visit_funnels(graph, terminal, basins)
+    paper_visits = paper_traversal_visits(graph, terminal, basins)
+    published_funnels = traversal_funnels(
+        graph, terminal, basins, include_cycle_entry=True
+    )
+    unamended_funnels = traversal_funnels(
+        graph, terminal, basins, include_cycle_entry=False
+    )
     if len(terminal) != len(graph) or sum(basins.values()) != len(graph):
         raise AssertionError("terminal partition was not exhaustive")
     ordered_basins = sorted(
@@ -208,6 +270,20 @@ def summarise(graph: Mapping[str, str | None], *, top: int) -> dict[str, Any]:
             for node, amount in sorted(flows.items(), key=lambda x: (-x[1], x[0]))[:top]
         ],
         "counting_rule": "one visit per starting article per target vertex",
+        "top_traversal_visits_paper_figure_rule": [
+            {"article": node, "visits": amount}
+            for node, amount in sorted(paper_visits.items(), key=lambda x: (-x[1], x[0]))[:top]
+        ],
+        "top_traversal_funnels_published_figure_rule": [
+            {"article": node, "funnels": amount}
+            for node, amount in sorted(published_funnels.items(), key=lambda x: (-x[1], x[0]))[:top]
+        ],
+        "top_traversal_funnels_unamended_pseudocode_rule": [
+            {"article": node, "funnels": amount}
+            for node, amount in sorted(unamended_funnels.items(), key=lambda x: (-x[1], x[0]))[:top]
+        ],
+        "funnel_cycle_entry_discriminator": "published Fig. 3/4 includes first cycle entry; unamended pseudocode excludes it",
+        "published_seven_node_example_regression_separate_from_full_corpus": True,
         "historical_traversal_funnel_algorithm_parity_paid": False,
         "corpus_to_historical_dump_identity_paid": False,
         "wikipedia_parser_equivalence_paid": False,
