@@ -94,6 +94,38 @@ nor finite prefix alignment closes that analytic source theorem.
 The special points where `1-2^(1-s)=0` also need independent
 divisor/removable-singularity handling for a zeta quotient claim.
 
+## Bishop B2 alternative — direct source Nat-log dyadic variation
+
+**New highest-alpha cut on #1478:** the canonical finite
+`-log(1-x)` polynomial itself has the two-sided inequality
+
+`(1-a^N)/(m+1) ≤ L_N(m+1)-L_N(m) ≤ (1-b^N)/m`
+for `a=(m-1)/m`, `b=m/(m+1)`, `m≥1`.
+
+Once transported through the original Murray/Bishop order and
+`SeriesOf` convergence (still an OPEN proof), this gives
+`1/(m+1)≤L(m+1)-L(m)≤1/m` and
+`L(2m)-L(m)≥1/2`, hence
+`L(n)≥k/2` for `2^k≤n<2^(k+1)`.
+Let `q=exp_B(-delta/2)<1` for `Re s≥delta>0`.
+Native expC addition, modulus and difference estimates imply the
+direct all-raw-cutoffs geometric Abel bound
+
+`|Σ_(n=N)^M (-1)^(n-1)expC(-s L(n))|
+   ≤ (1+R exp_B(R)/(1-q))*q^K`, `2^K≤N≤M`.
+
+This can close the ORIGINAL compact-uniform eta route **without**
+constructing the real-variable FTC on u↦u^-s or even first
+proving `OriginalDyadicNatLogLaw`. Those remain independent
+Bishop targets for other consumers. This is mathematical
+implication/reduction and a rational diagnostic, NOT Agda kernel
+acceptance. New checker
+`scripts/check_bishop_natlog_two_sided_dyadic_20261114.py`:
+3,150 exact finite increments, 64 exact shell lower bounds,
+15 dyadic rational growth checks, 252 distinct numerical tests.
+The source-order limit and true expC norm/difference are the
+new decisive B2 producers.
+
 ## RH A2 — source-selected witness is NOT the attachment's bump
 
 The actual Lean #50 source is
