@@ -1779,5 +1779,42 @@
     ],
     "kernel_checked_new_theorems": 0,
     "original_rh_or_eta_endpoints_closed": 0
+  },
+  "implementation_round_20261114_8": {
+    "date": "2026-11-14",
+    "scope": "Highest-alpha Bishop eta direct discrete route, avoiding full real-variable FTC and exact dyadic Nat-log equality",
+    "owner": "Agda PR #1478",
+    "script": "scripts/check_bishop_natlog_two_sided_dyadic_20261114.py",
+    "roadmap": "Docs/roadmaps/BishopEtaOriginalAllCutoffsAndNatLogMaxCut20261114.md",
+    "exact_checked_cases": {
+      "finite_two_sided_original_NatLog_increment": 3150,
+      "rational_dyadic_shell_lower": 64,
+      "rational_dyadic_growth_lower": 15,
+      "auxiliary_complex_numeric_geometric_tails": 252
+    },
+    "new_mathematical_lemma": "For L_N(m)=Σ_{j=1}^N ((m-1)/m)^j/j: (1-((m-1)/m)^N)/(m+1)≤L_N(m+1)-L_N(m)≤(1-(m/(m+1))^N)/m",
+    "original_Bishop_limit_consequence": "1/(m+1)≤L(m+1)-L(m)≤1/m; L(2m)-L(m)≥1/2; L(2^k)≥k/2",
+    "geometric_uniform_eta_target": "For |s|≤R, Re(s)≥δ>0, q=e^{-δ/2}<1 and all M≥N≥2^K: |Σ_{n=N}^M(-1)^(n-1)expC(-sL(n))|≤(1+Re^R/(1-q))q^K",
+    "analytical_preconditions": [
+      "actual Bishop negative-log finite source order limit",
+      "true expC multiplication and modulus on original term",
+      "expC finite difference bound",
+      "original finite Abel all-cutoff transport",
+      "Bishop uniform limit and continuity"
+    ],
+    "bypasses": [
+      "continuous real-variable FTC for eta tails",
+      "exact dyadic Nat-log addition for eta tails",
+      "global exp(log Nat) inversion for eta tails"
+    ],
+    "not_bypassed": [
+      "complex trigonometric addition or equivalent native expC addition",
+      "original series/order limit",
+      "Bishop analytic uniform convergence acceptance"
+    ],
+    "source_written_implementation": true,
+    "agda_kernel_accepted": false,
+    "original_eta_uniform_convergence_proved": false,
+    "authoritative_Clay_endpoint_closed": false
   }
 }
