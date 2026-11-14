@@ -1,0 +1,30 @@
+{
+  "source_url": "https://ipie.readthedocs.io/en/latest/python_api.html",
+  "source_kind": "independent example; not IonQ nickel geometry",
+  "atoms": [
+    [
+      "H",
+      0,
+      0,
+      0
+    ],
+    [
+      "H",
+      1.6,
+      0,
+      0
+    ]
+  ],
+  "basis": "sto-6g",
+  "charge": 0,
+  "spin": 0,
+  "unit": "Bohr",
+  "walkers": 100,
+  "blocks": 20,
+  "steps_per_block": 20,
+  "time_step": 0.005,
+  "seed": 59306159,
+  "stabilize_freq": 5,
+  "pop_control_freq": 5,
+  "equilibration_blocks": 2
+}
