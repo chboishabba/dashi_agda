@@ -793,6 +793,9 @@
         "Clay continuum/OS/gap"
       ],
       "agda_kernel_verified": false
-    }
+    },
+    "local_acceptance_runner": "scripts/check_ym_r445_original_physical_maxcut_local.sh",
+    "source_only_command": "R445_SOURCE_ONLY=1 bash scripts/check_ym_r445_original_physical_maxcut_local.sh",
+    "pinned_kernel_command": "bash scripts/check_ym_r445_original_physical_maxcut_local.sh"
   }
 }
