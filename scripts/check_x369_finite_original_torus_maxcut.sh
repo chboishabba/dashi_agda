@@ -10,6 +10,7 @@ scripts/run_agda29_parallel_check.sh \
   DASHI/Cognition/PNF/X369OriginalTorusCharacterOrthogonalityExact.agda \
   DASHI/Cognition/PNF/X369OriginalSignedSiteOrderBidiExact.agda \
   DASHI/Cognition/PNF/X369OriginalTorusSpectralBasisExact.agda \
+  DASHI/Cognition/PNF/X369OriginalPointedEightSlotBidiExact.agda \
   DASHI/Cognition/PNF/X369OriginalTorusPointedAffineBidiExact.agda \
   DASHI/Cognition/PNF/X369OrbitAbsolutePhaseGaugeExact.agda
 echo "X369 finite original-torus selected Agda leaf modules passed Track B; authoritative Track A still independent."
