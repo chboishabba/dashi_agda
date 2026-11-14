@@ -11,6 +11,7 @@ import ksw668_brane_scalar_emitter_receiver_retarded as ScalarReceiver
 import ksw668_ads5_tensor_mode_moving_israel_bc as TensorBC
 import ksw668_ads5_gravitational_horizon_variance_bound as StrictHorizon
 import ksw668_brane_winding_allmode_linear_stability as AllModeWinding
+import ksw668_ads5_z2_distributional_israel_coefficient as Distributional
 
 class BraneMaxCutTests(unittest.TestCase):
     def test_actual_same_ambient_metric_and_apparent_shortcut(self):
@@ -148,6 +149,15 @@ class BraneMaxCutTests(unittest.TestCase):
         self.assertTrue(r["marginal_zero_modes_k2_zero"])
         self.assertFalse(r["zero_mode_linear_drift_or_nonlinear_instability_ruled_out"])
         self.assertFalse(r["full_self_gravitating_5D_Einstein_Israel_stability"])
+
+
+    def test_real_z2_distributional_adS5_jump_not_four_dimensional_spherical_shell(self):
+        r=Distributional.audit()
+        self.assertTrue(r["all_16_original_component_identities"])
+        self.assertEqual(r["selected_t4over3_Gsing_diagonal"][0],"15/2")
+        self.assertEqual(r["selected_t4over3_Gsing_diagonal"][1],"-176/15")
+        self.assertFalse(r["time_dependent_TT_graviton_BC_solved"])
+        self.assertFalse(r["bulk_metric_global_distribution_constructed"])
 
 if __name__=="__main__":
     unittest.main(verbosity=2)
