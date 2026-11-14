@@ -23,6 +23,7 @@ import DASHI.Biology.KSW668HumanCarbon14ObservedExact as HumanAMS
 import DASHI.Physics.Plasma.KSW668EmpiricalBoundariesExact as Empirical
 import DASHI.Physics.Plasma.KSW668FullVectorMaxwellJetExact as VectorMaxwell
 import DASHI.Physics.Gravity.KSW668KaluzaKleinSpacelikeFiberCausalExact as KK
+import DASHI.Physics.Gravity.KSW668FiveDimensionalEinsteinScalarFRWFriedmannExact as FiveDimensionalScalar
 import DASHI.Physics.Chemistry.KSW668NuclearElectronStateLedgerExact as Nuclear
 
 ------------------------------------------------------------------------
