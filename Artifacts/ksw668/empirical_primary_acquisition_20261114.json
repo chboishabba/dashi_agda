@@ -355,5 +355,91 @@
       "original nuclear event-by-energy spectrum"
     ],
     "no_invented_trial_data": true
+  },
+  "acquisition_round3_20261114": {
+    "status": "source-audited and reproducible acquisition implemented; no new external Movebank/MMS/ENA/PARMA bytes fetched",
+    "source_audits": {
+      "mms_event": {
+        "original_doi": "10.1029/2020GL088761",
+        "original_paper_selected_utc": [
+          "2017-06-17T20:24:03Z",
+          "2017-06-17T20:24:11Z"
+        ],
+        "corroborating_edr_utc": [
+          "2017-06-17T20:24:06Z",
+          "2017-06-17T20:24:09Z"
+        ],
+        "original_signed_JdotE_source": "10.1029/2022GL098445",
+        "targeted_probe": 1,
+        "product_types": [
+          "FGM L2 brst",
+          "EDP L2 DCE brst",
+          "FPI DES-MOMS L2 brst",
+          "FPI DIS-MOMS L2 brst"
+        ],
+        "raw_cdf_bytedownload": false,
+        "replayer": "scripts/ksw668_mms_burst_acquire.py",
+        "data_status": "exact event source-pinned; segment index and SHA256 pending"
+      },
+      "movebank_pigeons": {
+        "user_supplied_candidate_doi": "10.5441/001/1.744_2",
+        "user_supplied_landing": "https://datarepository.movebank.org/entities/datapackage/2f38f106-42bf-4c4a-b7a4-17d758bdd9a9",
+        "expected_member_name": "Navigation with macrophage depletion in homing pigeons.csv",
+        "direct_archive_link_confirmed": false,
+        "page_http_response_in_this_environment": "403 Forbidden",
+        "raw_bytes_acquired": false,
+        "script": "scripts/ksw668_movebank_gps_acquire.py",
+        "treatment_metadata_join": false,
+        "original_source": "10.1126/science.ady2486"
+      },
+      "ena_pigeon_transcriptomics": {
+        "study_accession": "PRJEB98986",
+        "official_api": "https://www.ebi.ac.uk/ena/portal/api/filereport",
+        "script": "scripts/ksw668_ena_reads_acquire.py",
+        "metadata_newly_downloaded": false,
+        "fastq_newly_downloaded": false,
+        "gene_count_matrix_available": false,
+        "checksum_scheme": "source MD5 plus local SHA256 when executed"
+      },
+      "neutron_ground_spectrum": {
+        "official_generator": "JAEA EXPACS/PARMA, conditions for use require compliance",
+        "measured_reference": "Gordon et al. (2004) ground cosmic-neutron Bonner sphere spectral data",
+        "spectrum_csv_acquired": false,
+        "fold_script": "scripts/ksw668_neutron_spectrum_fold.py",
+        "fit_measured_eV": [
+          0.0036,
+          1.8
+        ],
+        "PARMA_nominal_floor_meV": "10^-8 MeV = 0.01 eV",
+        "synthetic_flat_flux_0p01_to_1eV_rate_per_second": 0.00004946406530001149,
+        "synthetic_trapezoid_1000_steps_rate_per_second": 0.00004946524605506864,
+        "source_fit_covariance_only_sigma_rate_per_second": 9.846232180669247e-7,
+        "empirical_site_rate_established": false
+      },
+      "original_human_tissue_ams": {
+        "primary_DOI": "10.1096/fj.12-225599",
+        "human_original_table": "https://faseb.onlinelibrary.wiley.com/doi/10.1096/fj.12-225599",
+        "original_rows_acquired": 34,
+        "distinct_donors": 28,
+        "tendon_assays": 30,
+        "muscle_assays": 4,
+        "original_author_outlier_rows": 5,
+        "source_extracted_csv": "Artifacts/ksw668/heinemeier2013_original_human_ams_table1.csv",
+        "source_review_and_analysis": "scripts/check_ksw668_human_ams_original.py",
+        "typed_original_Agda": "DASHI/Biology/KSW668HumanCarbon14ObservedExact.agda",
+        "typed_physics_Agda": "DASHI/Physics/Plasma/KSW668EmpiricalBoundariesExact.agda",
+        "non_outlier_paired_donor24_delta_pMC": 25.75,
+        "non_outlier_paired_donor26_delta_pMC": 38.69,
+        "interpreted_as": "different tissue turnover; no within-person repeated-time or emotion intervention",
+        "caution": "pMC not directly interchangeable with previous regional atmospheric F14C calibration without transformation"
+      }
+    },
+    "validation_status": {
+      "original_human_row_count": "cross-checked via original paper Table 1 and GitHub file parse",
+      "original_MMS_event": "two original peer-reviewed reports; raw waveform not retrieved",
+      "spectral_integration": "independent symbolic analytic baseline reproduced locally",
+      "scripts_exact_head_execution": "pending",
+      "agda29_kernel": "pending"
+    }
   }
 }
