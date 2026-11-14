@@ -9802,3 +9802,144 @@ unless a line explicitly says it describes the live monitor surface.
   `scripts/ym_reflection_positivity_consolidation_harness.py` and
   `scripts/ym_final_authority_packaging_harness.py`.
   These are diagnostic only; they do not prove theorems or promote any lane.
+
+## 2026-11-08 Moonshine / Y443 / VOA current exact phase status
+
+Canonical live theorem and deliverable ledger:
+`Docs/support/reference/Y443JMDVNaturalMaxCut20261106.md`.
+
+- R0 original owner archaeology and redundant operation-rigidity cleanup: DONE.
+- V0 original selected Leech orbifold and actual VOA/source-native Griess laws:
+  OPEN source-specific proof (the conditional constructor exists).
+- V1 original selected VOA ↔ canonical published FLM all-mode iso:
+  OPEN real witness; direct and sound DGL routes are alternatives.
+- V2 selected Y443 group ↔ authentic Q80 ↔ published Monster and actual
+  JMD u/v operator agreement: OPEN original source/group/actions;
+  conditional propagation is implemented.
+- V3 direct same-object Monster/FLM action capstone: compiler EXISTS,
+  original selected-object provider not yet verified, thus not closed.
+- 194-class/cyclotomic character table, K3/umbral/CFT, physical 5D KK/GR,
+  and original 4D Clay YM continuum/full gap: independent source-specific
+  research frontiers, not results of numeric Moonshine decomposition.
+
+No Agda kernel run or new Clay/physics theorem is asserted by this status update.
+
+### 2026-11-08 original Moonshine orbifold V0 state-space partial result
+
+On Y443 PR #1472, the original VNaturalOrbifoldConstruction now proves
+fixed/twisted summand inclusion injectivity and disjointness and constructs
+an injection from its actual fixed-plus-even-twisted tagged carrier into
+its selected orbifold VOA state carrier. The source identifyCarrier map is
+proved to be its left inverse. The converse (no-extra-states) identity is
+NOT proved; neither original mixed VOA identities nor FLM/Monster action
+isomorphism is thereby supplied. Code source-written; Agda kernel not run.
+
+### 2026-11-08 source-native V0 state-fibre refinement
+
+On existing VNaturalOrbifoldConstruction, original state normalization
+P=R∘identifyCarrier is idempotent and preserves original tagged sector
+state. Exact source proof establishes I(x)=I(y) iff P(x)=P(y), and
+original I injectivity iff the no-extra-states reconstruction law.
+This reduces the V0 *state-carrier* remaining lemma to source-specific
+injectivity of the actual identifyCarrier; no such inhabitant, true
+mixed-sector VOA, full FLM identification or Agda kernel pass claimed.
+
+### 2026-11-08 V0 genuine linear-orbifold structural no-go
+
+The original VNaturalOrbifoldConstruction used tagged A ⊎ B but called it
+V_Lambda^+ ⊕ (V_Lambda^T)^+. Actual old inclusion maps have disjoint images,
+which is incompatible with both being linear embeddings to a single
+vector-space zero. New Agda source proves this incompatibility on the
+actual selected assembly and defines source-tied paired LinearOrbifoldCarrier
+A × B with common-zero fixed/twisted inclusions and injection/coordinate
+recovery proofs. VnaturalLinearCarrier now exposes this carrier without
+silently breaking the legacy state owners. The old no-junk fibre equivalence
+remains a true set statement but is no longer the priority physical VOA
+source gate. Actual mixed-vertex VOA laws, migration and canonical FLM
+all-mode equivalence remain open. Source-written, Agda kernel not run.
+
+
+### 2026-11-08 VOA original source V03/V04 plus LeanVOA real donor
+
+DASHI/Moonshine/VNaturalOrbifoldConstruction now source-defines the actual
+selected paired GradedModule, the fixed operations and grading from the
+preexisting fixed-point VOA via original source maps, and the four original
+Z2 parity-sector mode channels. FF is transported from the fixed-point VOA;
+FT is required to match the original Leech twisted module; TF/TT require
+original source witnesses. The paired formula is implemented, NOT its full
+mixed Jacobi/locality law.
+
+External primary-source audit: Popov–Rastelli LeanVOA (arXiv:2611.06616,
+Nov 4 2026, source github.com/Fedor-Popov/Lean_VOA) contains an actual
+unconditional theorem VOA.Moonshine.moonshine and finite locality bridge
+TopPairs.top_pairs0, topPairs_one; the canonical Vnat carrier is a product,
+not a tagged sum. This is a major already-formalized donor but does not
+automatically yield Agda's selected original source or the Monster action.
+No Agda kernel execution or original FLM/Y443 same-object completion claimed.
+
+
+### 2026-11-08 source-native paired VOA vertex-data assembly
+
+Added actualSourcePairedVertexData to the existing Agda
+VNaturalOrbifoldConstruction, using the actual original fixedVOA's
+vacuum, conformal and translation, an explicit twisted-even translation,
+and the source-tied four parity modes. The proofs decode the fixed source
+vacuum/conformal vector and establish exact four-channel mode equation.
+Agda kernel not executed; the actual mixed Jacobi/locality and original
+operator inhabitants remain open.
+
+The published Popov–Rastelli LeanVOA source unconditionally proves Moonshine
+VOA construction, with YnatG genuine nonzero Wbar and topPairs_one source;
+this is donor evidence, NOT an Agda theorem, and does not establish selected
+Monster action. TauCeti's Y443 presented-group equivalence likewise covers
+the presented quotient, NOT a source-verified Monster action.
+
+
+### 2026-11-08 pure source FT block reduction
+
+OriginalPureFTZeroLaws and the exact Agda originalPureFTModeIsNativeTwisted
+/ originalPureFTModeAgreesWithLeechTwistedModule proofs on the actual
+selected fixed-plus-even-twisted pair reduce its pure fixed/twisted
+four-block mode to the ORIGINAL Leech theta-twisted module mode through
+includePlus. Conditional native source zero equations remain explicit;
+the original TT and reverse cross intertwiners, full VOA axioms and
+LeanVOA-to-Agda canonical-source identification are NOT paid. Source
+committed, no Agda kernel verification executed.
+
+
+### 2026-11-09 native Lean group/VOA owner consolidation
+
+Inspected dashi_lean4 PR #47 Synthesis/MonsterRepresentationPostRecognitionEverything,
+MonsterWholeCharacterModuleAdapterLive and MonsterNormalizerHomAction:
+Maschke fixed-conformal-line complement, original FDRep/module action,
+isotypic/Schur/normalizer-Hom machinery already exists, given genuine
+same-object representation sources. No extra 196883-dimensional matrix
+model or generic Hom assembler is needed.
+
+Agda #1472 VNaturalOriginalPairedFourSectorModesExact now has same-source
+toNativeMixedParity and toNativeTranslation and proof equalities of
+both existing paired four-sector mode/vertex-data owners. Remaining
+original source inhabitants, canonical Popov FLM all-mode identification
+and genuine Y443-Monster group/action equality are OPEN. Popov paths
+weren't located in default branch index; do not infer absence from a
+search that excludes PR/worktree files. Source readback only, no
+Agda or Lean kernel result claimed.
+
+
+### 2026-11-09 distinct Popov owners and Agda four-sector convergence
+
+The user-linked BalabanReducedFlatFaddeevPopovKernelExact.agda is an
+original finite-lattice Yang-Mills proof attributed to Faddeev and
+V. N. Popov (1967), NOT Popov-Rastelli's different Moonshine formal
+VOA source. Its flat ghost-kernel and anchored trivial-kernel results
+are already paid on the finite SU(2) Yang-Mills source, not an FLM
+source-locality proof.
+
+Original paired four-sector Agda owner is now reconciled bidirectionally
+with the other original source record: fromNativeSources,
+nativeSourcesAfterFrom, fromAfterNativeSources, and same-mode
+vacuum/conformal/translation comparisons. Genuine original Leech
+twisted-even source laws, actual FLM all-mode isomorphism and original
+Y443/Monster group/action proof remain open. The dashi_lean4 #47
+Maschke/Schur/FDRep/Hom machinery is existing reusable code.
+No kernel run claimed.
