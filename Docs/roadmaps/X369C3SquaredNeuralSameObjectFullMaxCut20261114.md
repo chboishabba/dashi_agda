@@ -527,3 +527,25 @@ This is exact over commutative real scalar arithmetic, and summing over original
 - `originalBlockwiseMixedC3NormUnderAllExpertHistories`
 
 Leech PR #4 has a native `directed_c3_displacement_energy_exact` analytic implementation plus route-feature audit, exact ± mixed-permutation source control, and regressions. The legacy F3 experimental null matched hidden activation norm/displacement but NOT the nonlinear feature map; this new analytic equality eliminates that specific confound without implying a trained semantic C3 mechanism. Both native-head acceptance and new RX 580 CE remain **OPEN** after current source edits. Original finite Agda A00–A05 selected 8/8 Track B prior receipts do not include these new formal targets or A03–A06 universal/weld closures.
+
+## 15 Nov 2026 — source formal candidate and 12-draw frozen F3 ensemble (post-09:20)
+
+**Host prior-head acceptance:** Leech PR #4 commit `33a34876bf13`: full native 125/125 across 26 suites, portable 37/37, targeted original mixed-C3 source + CE tests 12/12. Agda PR #1442 commit `272bb1be33ee`: selected original torus 8/8 leaves accepted on Agda 2.9. Independent host float64 original source polynomial test over 4×384×8 reported coherent/polynomial max absolute squared-energy error 9.09e−13 and mixed/polynomial 4.55e−13. These acceptance receipts do not automatically apply to later GitHub heads.
+
+**New actual Agda module drafted, on existing PR #1442:** `DASHI/Cognition/PNF/X369OriginalDirectedTriadC3PolynomialCandidate.agda` uses `Data.Integer.Tactic.RingSolver.solve-∀` for six-variable original directed triadic correlation displacement identities, and structurally inducts over arbitrarily many original triads with arbitrary independent ±120° orientation and original per-expert history coordinates. It contains these proposed lemma names:
+```text
+originalTriadRotationSquaredDisplacementEqualsTwoQ
+originalTriadInverseRotationSquaredDisplacementEqualsTwoQ
+originalDirectedTriadC3DisplacementSquaredFactors
+originalDirectedInverseC3DisplacementSquaredFactors
+originalDirectedTriadMixedOrientationEnergyEqualsCoherent
+originalBlockMixedEqualsCoherent
+originalMixedTriadC3RouterFeatureEnergyEqualsCoherent
+```
+This source is **NOT AGDA KERNEL CHECKED** in the received host evidence. The standalone new runner `scripts/check_x369_original_directed_c3_polynomial_candidate.sh` requires Agda 2.9 validation. It deliberately leaves the accepted 8-leaf Track B suite untouched. This candidate proves only an integer polynomial analogue if the kernel accepts it; full abstract-real scalar transport and exact trained neural consumer remain separate and OPEN.
+
+**F3 next source:** `scripts/audit_x369_f3_mixed_orientation_ensemble_ce.py` on Leech PR #4 does a frozen original model CE comparison using **12 predeclared independent mask draws** versus a single coherent C3 action, with separate seed41 (best step 0) and seed42 (best step 24), document-row paired bootstrap and deterministic whole-original-source SHA/provenance receipts. The original 16 F3 probe rows are already viewed: this is an exploratory sensitivity result, never a calibrated null-test p-value or final F5 release. F5 reserved token bytes are not loaded by the new scorer; original old F3 overlap-producer *did* inspect them, but did not score F5 CE. Five new test contracts are included and need new-head native acceptance. The **physical RX 580 new ensemble CE is not yet measured in evidence supplied**.
+
+**Decision order:** (1) exact new-head Leech native and portable acceptance; (2) isolated Agda candidate checker, repair parser/ring normalizer if needed and only then add the kernel proof receipt; (3) physical seed41/42 frozen 12-draw F3 CE on previously viewed probe (with no F5 raw data); (4) independently task-labelled new-document F2/L0 original spectral action; (5) separately calibrated zero-initial C3 residual feature F4 on new documents; (6) retain F5 final CE seal and A03–A06 arbitrary-field/full neural weld OPEN.
+
+Attribution: original Leech-LILA trained model owned by original author; DASHI proposed integer ring proofs and C3/C3² finite-torus kernel proofs are mathematically distinct; prior negative F4-C2 development result not overwritten by the new F3 exploratory plan.
