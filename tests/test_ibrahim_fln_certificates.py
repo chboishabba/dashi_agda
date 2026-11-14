@@ -1,6 +1,7 @@
 """Independent negative and randomized tests for first-link proof-carrying censuses."""
 from __future__ import annotations
 import copy
+from itertools import product
 import random
 from pathlib import Path
 import sys
@@ -64,5 +65,71 @@ class FirstLinkCertificateTests(unittest.TestCase):
                 reach=cert.check_reverse_edit_cone(old,new,cone)
                 self.assertEqual(reach,ref.reverse_edited_closure(old,{v for v in nodes if old[v]!=new[v]}))
                 self.assertTrue(ref.compare_same_carrier(old,new)['outside_bound_unaffected'])
+
+
+    def test_m2_complete_finite_bound_exhaustive_total_graphs(self):
+        """All labelled total functions on 1..5 nodes, 82,481 source-target pairs.
+
+        Compare the bounded < |V| decision with an independent run until
+        repeat; a transient-to-cycle false positive is not admissible.
+        """
+        count_graphs = count_pairs = 0
+        for n in range(1, 6):
+            vertices = tuple(f'v{i}' for i in range(n))
+            for targets in product(vertices, repeat=n):
+                graph = dict(zip(vertices, targets))
+                count_graphs += 1
+                for a in vertices:
+                    for b in vertices:
+                        current, seen, oracle = a, set(), False
+                        while current not in seen:
+                            if current == b:
+                                oracle = True
+                                break
+                            seen.add(current)
+                            current = graph[current]
+                        self.assertEqual(cert.finite_total_reachability(graph, a, b),
+                                         oracle)
+                        count_pairs += 1
+                        if oracle:
+                            # A two-way relation additionally needs b -> a.
+                            back = cert.finite_total_reachability(graph, b, a)
+                            self.assertEqual(
+                                cert.finite_mutual_rotation_decision(graph, a, b),
+                                back)
+        self.assertEqual((count_graphs, count_pairs), (3413, 82481))
+        with self.assertRaises(ValueError):
+            cert.finite_total_reachability({'a': None}, 'a', 'a')
+        with self.assertRaises(ValueError):
+            cert.finite_total_reachability({'a': 'outside'}, 'a', 'a')
+
+    def test_m3_exhaustive_partial_trichotomy_and_receipt_shape(self):
+        """Every partial map of up to four vertices, including Outside."""
+        count_graphs = 0
+        for n in range(1, 5):
+            vertices = tuple(f'v{i}' for i in range(n))
+            for targets in product((*vertices, None, 'outside'), repeat=n):
+                graph = dict(zip(vertices, targets))
+                count_graphs += 1
+                reference, _ = ref.terminal_census(graph)
+                for start in vertices:
+                    trace = cert.trace_start(graph, start)
+                    self.assertLessEqual(len(trace['trace']), n)
+                    self.assertEqual(cert.check_trace(graph, trace),
+                                     reference[start])
+                    if trace['kind'] == 'unresolved_target':
+                        self.assertEqual(trace['terminal'], 'outside')
+                    elif trace['kind'] == 'dead_end':
+                        self.assertIsNone(graph[trace['terminal']])
+                    else:
+                        self.assertEqual(len(trace['cycle']), len(set(trace['cycle'])))
+        self.assertEqual(count_graphs, 1440)
+
+    def test_m4_boolean_node_count_must_not_pass_one_vertex_schema(self):
+        graph = {'only': 'only'}
+        forged = cert.certify_graph(graph)
+        forged['node_count'] = True  # JSON true compares equal to Python 1.
+        with self.assertRaises(ValueError):
+            cert.check_graph_certificate(graph, forged)
 
 if __name__=='__main__':unittest.main()
