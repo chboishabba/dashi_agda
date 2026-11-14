@@ -150,6 +150,12 @@ data OverlapValue : Set where oldValue newValue : OverlapValue
 differentOverlap : oldValue ≡ newValue → ⊥
 differentOverlap ()
 
+conflictingOverlapsCannotGlue :
+  (common : OverlapValue) →
+  oldValue ≡ common → newValue ≡ common → ⊥
+conflictingOverlapsCannotGlue common left right =
+  differentOverlap (trans left (sym right))
+
 ------------------------------------------------------------------------
 -- A4. Exact fibre-constancy criterion under an explicit representative
 -- for each observed fibre.  This is the existing factorisation criterion
@@ -248,6 +254,10 @@ record ScopedNegativeCertificate
       (world : World) (query : Query) → InScope query →
       viewMiss world query ≡ true →
       originalMiss world query ≡ true
+    missingAnswerReflected :
+      (world : World) (query : Query) → InScope query →
+      originalMiss world query ≡ true →
+      viewMiss world query ≡ true
 
 open ScopedNegativeCertificate public
 
@@ -258,9 +268,12 @@ zelphQueryScopedNegativeCompletenessIff :
   ScopedNegativeCertificate World Query originalMiss viewMiss InScope →
   (world : World) (query : Query) → InScope query →
   viewMiss world query ≡ true →
-  originalMiss world query ≡ true
-zelphQueryScopedNegativeCompletenessIff cert world query within absent =
-  missingAnswerPreserved cert world query within absent
+  (viewMiss world query ≡ true → originalMiss world query ≡ true)
+  ×
+  (originalMiss world query ≡ true → viewMiss world query ≡ true)
+zelphQueryScopedNegativeCompletenessIff cert world query within =
+  missingAnswerPreserved cert world query within ,
+  missingAnswerReflected cert world query within
 
 data NegativeEvidence (Proof : Set) : Set where
   noCertificate : NegativeEvidence Proof
