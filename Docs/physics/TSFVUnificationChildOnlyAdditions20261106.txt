@@ -1,0 +1,271 @@
+TSFV #1460 child-only additions archive — 2026-11-06
+Purpose: preserve all child-owned edits to YM-parent-managed shared files BEFORE reconciling to latest #1444 parent. This is an exact source text archive, not proof acceptance.
+Original old common-ancestor commit: e80d63c5f19f1b7c84f2513ee66e9dad99879a3e
+
+===== BEGIN CHANGELOG.md =====
+CHILD_ORIGINAL_BLOB_SHA 17abb6543763c301fb7936869d4bccfcab522ae9
+COMMON_BASE_SHA a40861ff98a09cab7706bed39db05915e49e0578
+CHILD_FULL_LINES 311
+CHILD_ONLY_ADDED_LINES 40
+----- CHILD ONLY CONTENT BEGIN -----
+## 2026-11-04 — TSVF correlation-aware global Born error, conditional source theorem
+
+`TSVF2017ControlledComplexOrderedRateBridgeExact` now also exposes `ControlledCorrelationBornError`, `correlatedWrongRateWithError`, `correlatedTwoChannelCrossWithError`: actual global complex wrong Born `W_actual <= W_independent+delta` implies `2^k W_actual <= 1+2^k delta` and `(2^k+1)W_actual <= 1+W_actual+2^k delta`. Explicit delta nonnegative, no factorization from marginal records; actual correlated physical global source and ABL postselection remain unconstructed. 3200 exact-rational independent error-reference cases passed. Agda typecheck pending; no change to Clay or P07 same-H proof status.
+
+## 2026-11-04 — P01 complex controlled Born → ordered original ABL rate (SOURCE, kernel pending)
+
+`TSVF2017ControlledComplexOrderedRateBridgeExact.agda` reuses the chosen original `TSVF2017ControlledPointerRecordUnitaryExact`, heterogeneous tensor complex/Hermitian overlap, and original `Q.ablProbability` numerators/denominators. Heterogeneous *actual emitted* rational Born factors with explicit `2*siteBorn<=1`, complex gamma squared-product bound `<=1`, and rational monotone multiplication yield `(2^k+1)*wrongABL.numerator <= rightABL.denominator` with the nonzero ABL normalizer already proved in original Hetero. Canonical emitted `3/5` pulse gives exact `9/25` Born factor. No Nat calibration proxy, no independent probability law.
+
+Independent `scripts/check_tsvf_controlled_complex_ordered_rate.py` reference passed 3000 exact-Fraction heterogeneous fixtures/21000 checks plus two invalid-input negative controls. **Golden header is source-written only; exact-head Agda kernel not run.** The selected physical correlated N-body pointer/environment model, actual disturbance bound and final bra, real-time/OS domain equivalence, R443/R445/R320/R333 and standalone Clay construction remain open. New dossier: `Docs/physics/TSVF2017ControlledComplexOrderedRateOriginalABLMaxCut20261104.md`. P00 parent/child comparison: 20/26 shared changed files byte-identical; six documentation/regression file blobs diverged, parent YM #1444 and downstream #1460 both have independent changes, no merge. Keep 186 roadmap lemma IDs unchanged and 219 Clay submission fields unchanged.
+
+## 2026-11-03 — genuine complex TSVF gamma/ABL max-cut and OS-indexed same-state physical boundary
+
+- Verified original 2017 source Eqs.22–25 and isolated unsquared-complex-gamma/printed-probability notation mismatch with an exact i-vs-1 phase negative control. Attributed to Aharonov, Cohen and Landsberger; no claim source authors made an empirically false prediction.
+- Added four safe SOURCE-WRITTEN modules: TSVF2017ComplexEnvironmentRobustnessExact (rational-complex Hermitian site, actual tensor overlap, arbitrary complex gamma lists and Born factorization/nonnegativity); TSVF2017OriginalComplexABLSelectedExact (inhabited original TSVF QuantumSurface/ABLContext, selected positive numerator and denominator, complete orthogonal projectors, true original Bidi admissibility and normalized original ablProbability); TSVF2017QuantitativeRateExact (all-k >=2^k odds conditional on effective gamma order); TSVFOSSameSelectedClockIterateExact (selected original R331 OS H, all-step/readout clock commuting, wrong-clock no-go, typed original TSVF forward ket = selected Lorentz physical-state condition).
+- No artificial freely inhabited ContinuumStoneOSClockMatch token; physical continuous Stone/Ward and pure YM OS spectrum/measure remain open. Four modules reexported through native BalabanRGTOERegression. Native rational order/OS authority --safe headers source-audited only, Agda kernel not run.
+- Added physical source audit Docs/physics/TSVF2017ComplexABLAndOSSameClockMaxCut20261103.md, reproducible exact Fraction script check_tsvf_2017_complex_abl_os_maxcut.py and 186-lemma roadmap status. Independently executed 7,250 complex gamma/ABL cases, 51 selected normalized ratios, 100 exponent bounds; script itself not run at GitHub head. No actual 2017 macro reversal, physical unification or Clay positive YM gap claim.
+
+## 2026-11-03 — exact complex TSVF gamma norm-product and conjugation payment
+
+- Declared original rational-complex Cayley–Dickson algebra owner --safe after local axiom inspection (transitive Agda still pending). Added TSVFComplexGammaProductBornExact.agda reusing its actual complexNormMultiplicative, conjugation and rational complex carrier to prove for all finite gamma lists |product gamma_j|²=product |gamma_j|². Proved combined Born invariance under componentwise conjugation and exact imaginary-unit phase insertion; these remain distinct from physically reversing an observed Lorentzian clock/OS Hamiltonian.
+- Exported new Golden theorem owners in BalabanRGTOERegression; independently reproduced 10,000 rational-complex gamma product/phase/conjugation reference cases; committed check_tsvf_complex_gamma_product_born.py.
+- Updated exact source audit and P01.L15/P07.L15 open physical-source statuses: the original 2017 gamma_j environmental branch amplitudes, ABL physical projection source, nonfactorized disturbance evolution and same-clock/OS bridge are not yet populated. No Agda kernel check, full physical Eq.(25), multiverse claim or Clay YM completion.
+
+## 2026-11-03 — largest TSVF max-cut: original bidirectional admissibility → populated original ABL tensor probability
+
+- Reused the original source-owned BidirectionallyAdmissibleHistoryFibreExact, TwoBoundarySystem, and DASHI.Quantum.TSVF; added --safe declarations after a local no-postulate inspection of these original modules, **without claiming exact-head Agda acceptance**.
+- Added Golden TSVFAdmissibleQuantumOverlapRobustnessExact, with source-defined actual projectors onto admissible histories, conditional derivation of original ABL binary normalization, exact general tensor product overlap law and a concrete normalized real rational two-qubit source e_right=(5,0)/5, e_wrong=(3,4)/5. Proved tensor squared overlap (9/25)^k, right/wrong mass 25^k:9^k with positive total, wrong-tail cross bound, gamma-factor normalization, zero-factor and unequal-gamma negative control. Proved logically admissible history need not have nonzero Born amplitude.
+- Added Golden TSVFConcreteAdmissibleQubitABLExact: **inhabited original QuantumSurface/TSVFEnsemble/ProjectiveMeasurement/ABLContext**, explicit idempotent coordinate projectors, both alternative histories genuinely admissible under one selected boundary pair, right/wrong amplitudes 5^k/3^k, and original Q.ablProbability finiteOriginalABLNormalization, positive right/left Born weights and SAME source exact tensor-overlap cross identity selectedABLMatchesActualTensorOverlap. Not a full complex physical Hilbert or literal many-body 2017 apparatus.
+- Root BalabanRGTOERegression exports both new quantitative source owners. Independent equivalent Python Fraction calculation passed k=0..50, 960 gamma cases, zero wrong and high-k tiny-right negative controls. Committed scripts/check_tsvf_admissible_tensor_overlap_born.py; no source-head Agda kernel executed.
+- Synced Docs/physics/TSVFAdmissibleTensorOverlapABLMaxCut20261103.md, the 186-lemma P00–P11 roadmap, TSVF macro/multiverse audit, (3,1) steelman and Lorentz/Clay/core theorem roadmaps. The actual 2017 complex gamma_j, dynamical environment, single physical clock↔OS H, Yang–Mills R443/R445/R320/R333/H6 remain OPEN. Original scientific and repository theorem owner attribution preserved.
+
+## 2026-11-03 — source-first TSVF macroscopic time-reversal / multiverse BIDI and YM native-source sync
+
+- Verified published Aharonov–Cohen–Gruss–Landsberger (2014) and Aharonov–Cohen–Landsberger (2017) proposals for **selected-single-branch macroscopic time-reversal robustness**. Distinguished this from microscopic reversal, thermodynamic entropy reversal, no-backwards-signal operational filtration and Everett/multiverse ontology. Verified original in-repo multiverse/TSFV discriminators; preserved all scientific/theorem-owner attribution.
+- Added Golden source-written `TSVFMacroscopicSingleBranchRobustnessExact.agda`: concrete three-bit pointer redundancy, exact all six single-site macro recovery cases plus a sharp two-site failure counterexample, distinct fine corruption states/no macro-to-micro decoder, original same past with boundary-selected distinct histories and macro branches, and micro reversal + robust macro coexistence. Re-exported in `BalabanRGTOERegression.agda`. Finite equivalent Python check passed; **no Agda kernel**.
+- Added external-primary-source audit `Docs/physics/TSVFMacroscopicReversibilityMultiverseBidiSourceAudit20261103.md`; exposed actual 2017 physical N/n environment-overlap/Born-postselection ratio as the next max-cut, not already proved.
+- Source-copied from **#1444@7c6b2efd** into #1460 nonconflicting Golden `YMClayNativePositiveBondEnumerationVectorExact`, `YMClayNativeFiniteGaugeVectorNaturalitySafeExact`, `YMClaySUNConstructedPeriodicGaugeCodecExact`, `YMClaySUNVariablePeriodicProductHaarExact`, `YMClaySUNVariablePeriodicGaugeHaarExact`, plus original external-source cutoff family and two reference scripts; adopted original safe declarations for two reused owner modules. This is not a complete PR merge or Agda acceptance. Analysis-only moving-cutoff family remains outside the Golden regression import.
+- Enlarged canonical phase ledger **176→186 exact lemmas**, retaining P00–P11 and original IDs, with new P01 selected physical macro-reversal, P07 physical same-clock OS-reversal comparison, and P11 world-interpretation BIDI. Synchronized TODO, roadmaps and proposed (3,1) manuscript.
+- Unpaid: exact-head safe compile/transitive assumptions; physically correct 2017 ratio and same-observer source; actual compact one-link Haar/R124/CMP119, uniform R445/R320, physical R333/OS Δ and H6, KK/2D/3D true observable BIDI. No physically demonstrated time reversal, cosmological multiverse or Clay Yang–Mills solution.
+
+----- CHILD ONLY CONTENT END -----
+===== END CHANGELOG.md =====
+
+===== BEGIN Docs/roadmaps/ClayYMProofRoadmap.md =====
+CHILD_ORIGINAL_BLOB_SHA 38a9abfc16aa7f6ed65756c624f000b59d97a80d
+COMMON_BASE_SHA ec4970b044672d74cc05bd66c948d2f4d1c9ab3f
+CHILD_FULL_LINES 1062
+CHILD_ONLY_ADDED_LINES 50
+----- CHILD ONLY CONTENT BEGIN -----
+### 2026-11-03 original OS-indexed TSVF clock connection — not a Clay shortcut
+
+[Quantitative complex ABL, 2017 source and original R331 same-clock proof cut](../physics/TSVF2017ComplexABLAndOSSameClockMaxCut20261103.md): source-written all-k complex environment Born overlap, exact original TSVF ABL postselection normalization, quantified conditional robust odds, and finite observer/OS step/readout commuting on the original selected OS.hamiltonian. The actual source-selected Hilbert unitary, Stone domain, physical R443 Haar, R445 continuum, R320 differentiated-source decay and R333 same-H gap/H6 remain OPEN.
+
+### 2026-11-03 Admissible → TSVF quantum overlap source (additional independent consumer)
+
+[Finite exact original-source ABL/quantum tensor BIDI](../physics/TSVFAdmissibleTensorOverlapABLMaxCut20261103.md) now gives a nontrivial bounded model of selected two-boundary histories, Born-normalized right/wrong alternative outcomes and environmental overlap q=(9/25)^k. This is SOURCE-WRITTEN with no Agda kernel receipt, and **does not** construct R443 continuous Haar, physical R445/R320 or R333 same-H mass gap. Use the populated finite Q.ablProbability as an independent future P07 observer-state/OS comparator once the real physical gauge/quantum source is supplied.
+
+### 2026-11-03 — Cross-lane emergent (3,1) / quantum / YM / KK exact-lemma phase roadmap
+
+**Read-first cross-lane source:** [Emergent31QuantumYMKKExactLemmaRoadmap20261103](Emergent31QuantumYMKKExactLemmaRoadmap20261103.md). It specifies **P00–P11, 186 numbered distinct proof obligations**, per-phase deliverables, original owners, exact R443/R445/R320/R333 source, source-native physical (3,1) time/metric/Hilbert, **same clock = same OS H** and KK/2D/3D/positive-G stress BIDI; it carries kernel/physical/experimental status firewalls and independent negative controls.
+
+**2026-11-03 source-sync update:** #1444 source at `7c6b2efd2a68ff4b280160af54616663f9b3a8a6` has been selectively copied into #1460: new variable-periodic Haar/Gibbs, native positive-bond Vec codec, original finite gauge naturality and constructed SUN gauge-vector codec, plus local reference scripts. Existing original owners retain attribution. This is not a full branch merge; the moving-cutoff family has no Golden `--safe` header and is not imported into the Golden root. Exact-head Agda check, genuine compact one-link Haar and R124/R445/R320/R333 still OPEN. This roadmap does not call the Clay problem solved. For the standalone Clay claim, P05 actual native R443 physical Haar, R124/CMP119 and P06 R445/R320/R333/H6 remain authoritative independently of the stronger proposed (3,1)/KK theory.
+
+**Additional candidate calculation:** The source-written rational identity `treeLevelCouplingTowerCoheres` composes three zero-mode inverse-coupling circumference factors (L_3L_4L_5); actual physical coupling matching, thresholds and dimensioned units remain unpaid.
+
+### 2026-11-03: Constructed five-sector YM / Lorentz / KK / exotic-gravity BIDI steelman
+
+Full proposed physical mathematical model, original-source attribution, known 2D and partial 3D anchors, 4D Euclidean/3+1 OS reconstruction, effective 5D KK fields, positive-G typed-stress exotic gravity, actual falsifiers, and exact source-holder proof cuts: [YMClayFiveSectorBidiSteelman20261103](../physics/YMClayFiveSectorBidiSteelman20261103.md). This is a **conditional candidate complete-theory specification**, NOT a published physical proof or closed Clay claim.
+
+New `YMClayFiveSectorBidiSteelmanExact.agda` proves finite nonnegative ten-plane (5D) to six-plane (4D) to three-plane (3D) to one-plane (2D) decompositions, the theorem that an exact parent/projected action equality forces all discarded cross-fibre weights zero, and a nonzero fifth-axis counterexample. It composes chosen-state matched observer transports and **reuses** `TSFVKKSameMetricTransportExact` for the independently selected physical Lorentzian signature. `scripts/check_ym_five_sector_bidi_steelman.py` checks 10 one-plane assignments, 1024 exhaustive binary assignments and 100000 deterministic bounded random assignments; an independent equivalent local run passed. No exact-head Agda compiler has run. The Nat-valued finite fixture is not an SU(N) Haar measure or a KK action.
+
+New physical blockers: model-specific source/wilson pullback of the 5D ten-plane fibre with adjoint scalar/radion and source action; valid `g4^2=g5^2/L` tree-level convention and threshold bounds; lower-D effective gauge + scalar matches to exact 2D Wilson and 3D stochastic theorems; full same-metric OS / YM physical mass gap R443/R445/R320/R333; single positive-G Local-C/Wightman stress -> geometry for exotic gravity with no universal negative-G promotion. Original `#1120`, `#1132`, `#1045`, `#1284` remain independent, NOT silently merged into the #1460 stack.
+
+**New finite reversal/descent no-go:** `globalStrictReversalRankImpossible` (same source-written module) refutes a universal strict Nat rank under `FiniteHistoryOrientationExact.reverseHistory` using its fixed history. This tightens the required distinction between microscopic T-reversal and the separate coarse shift/MDL semigroup. The physical same-carrier map is still uninhabited.
+
+### 2026-11-03: TSFV/KK same-selected-metric weld and UV/OS firewall
+
+New `TSFVKKSameMetricTransportExact` (in #1460, stacked on #1444/#1440) transports the source-indexed observer-filtration arrow's calibrated `3+1` result to the **very same** selected KK-reduced 4D metric, provided the actual physical metric-state selection and four pointwise quadratic-sign equalities. The reversed `1+3` count is excluded for this same calibrated physical orientation. This is exact *conditional* same-metric transport, **not** an inhabited physical construction or an Agda kernel receipt. It is exported from `BalabanRGTOERegression`.
+
+The older physical UV owners are `BalabanClayGate4CombinedRGUVIterationExact` (conditional complete one-step source bounds → all-scale RG induction) and `BalabanClayConcreteUVToMassGapDependencyExact` (conditional all-scale UV → real selected continuum OS measure → same reconstructed Hilbert space/gap → physical mass). They remain separately typed and cannot be substituted for the R443/R445/R320/R333 physical inputs. The shift-depth/MDL chain and the reversible-history/filtration action remain different state carriers until an explicit transition-and-observation map is proved.
+
+Exact uninhabited cut: (1) same-carrier shift-to-history dynamics/filtration; (2) actual physical TSFV arrow and quadratic from measured state, inhabiting `SameMetricTSFVKK`; (3) #1241 selected five-dimensional KK reduction/stress and same selected 4D physical metric; (4) R443 physical compact SU2/SUN Haar, R445 changing-cutoff Wilson/Schwinger convergence and OS positivity, R320 selected physical rooted-shell decay, R333 same-`H_OS` uniform spectral gap, nontriviality and full Clay scope. Details and attribution: [source-pinned max-cut](../physics/Lorentz31SignatureKKYMProvenanceMaxCut20261103.md).
+
+**2026-11-03 deeper TSFV/arrow audit:** [Lorentz/time-arrow source proof atlas](../physics/Lorentz31SignatureKKYMProvenanceMaxCut20261103.md) now traces `FiniteHistoryOrientationExact` same-carrier T-invariant action with identical recorded past / different hidden histories, original filtration, finite shift collapse/MDL descent, and the conditional tag-free 3+1 bridge. The new source-written `historyNotRecoverableFromActionAlone` lemma only proves finite action-history non-identifiability. Physical timelike-axis calibration, 4D OS reconstruction, KK selected same-action reduction and R443/R445/R320/R333 are still open. Distinguish established 2D YM, special 4D Euclidean classical/finite sectors and 5D *lattice* phase diagrams from a proof of Clay 4D continuum YM.
+
+
+**Lorentz (3,1) and KK/YM same-source follow-on, 2026-11-03:** See [directional proof and attribution max-cut](../physics/Lorentz31SignatureKKYMProvenanceMaxCut20261103.md), added on the #1444 continuation branch. Reuse original PR #70 arrow/isotropy uniqueness and the real dashifine signatures; finite calibrated orientation and Hodge-square proofs are source-written, kernel-unchecked; actual physical 3+1 calibration, OS reconstruction and KK #1241 same-action weld remain OPEN.
+
+
+### 2026-11-03 downstream #1460 native SU(2) R445 blocking and trust correction
+
+A fresh source-first max-cut in downstream [#1460](https://github.com/chboishabba/dashi_agda/pull/1460) reuses **the original** `BalabanClayGate4PeriodicBondPathBianchiExact.pathHolonomy`, `pathSiteGaugeCancellation`, `BalabanClayGate4RationalSU2ExactGroupLaws.rationalSU2ExactLinkGroup`, the original oriented-link covariance constructor and the now source-synced #1444 `YMClayNativeBlockedPeriodicBondWeldExact`. New `YMClayNativeBlockedSU2PathHolonomyGaugeExact` constructs an actual ordered L-step original SU(2) positive-bond holonomy across the exact M*L blocked site carrier and *derives* the endpoint gauge covariance. The L=1 path is exactly the original positive bond. This does NOT assume a second independent group-valued action or a gauge-covariance proof field. Independent **exact** Q8⊂SU(2) reference runs passed 11,784 blocked bond/endpoint/cancellation checks, with non-Abelian wrong-order negative control. The new source is **NOT Golden --safe** because historical dependencies are not yet transitive safe; no Agda compiler run.
+
+Six source-owned #1444 late finite geometry/C3 modules were selectively synced into #1460 at donor head `5e81c4f5bd5041fc7fa6259b915a6f2ce0c42261`, with original blob identities preserved. The donor `YMClayCurrentExactLemmaLedger20261103.md`, all-219 literal submission field inventory and the inventory checker were also source-copied. The canonical **219 inventory is NOT 219 proofs**. The `LinkPermutation 1024` C3 adjacent-swap term and exact canonical-label equality remain an independent finite R443.F07 leaf; the executable adjacent-swap producer does not discharge Agda. The full [downstream R445/P01 max-cut dossier](../physics/YMClayNativeBlockedSU2TSVFBellMaxCut20261103.md) distinguishes SOURCE, KERNEL, PHYSICAL.
+
+**Still exact physical hard cut:** (i) canonical coarse endpoint and genuine coarse SU(N) gauge/Wilson observables, physical compact one-link Haar, CMP119/R124 beta/metric and normalized measure disintegration; (ii) R445 actual changing-scale tightness/cutoff compatibility and uniform source estimates; (iii) R320 CMP116 mixed-J derivative/rooted-shell decay; (iv) R333 the identical continuum OS Hamiltonian with a positive cutoff/volume-independent spectral gap and nontrivial 4D R⁴ quantum theory. The independent Clay task does NOT require the selected TSVF/(3,1)/KK thesis.
+
+
+**3 Nov additional exact SOURCE R445 loop composition:** the downstream `YMClayNativeBlockedSU2PathHolonomyGaugeExact` now defines dependent composable blocked paths on the **original** native SU(2) link field. All-length path gauge covariance and closed-path conjugation follow by induction and original gauge cancellation. The actual rational quaternion SU(2) **real trace** is constructed as a conjugation-invariant Wilson observable by exact realPart(ab)=realPart(ba) polynomial identity and original group inverse laws. No independent Wilson trace/covariance proof is assumed for this instance. Exact local reference passed 11,784 closed Q8⊂SU(2) path-loop identities including a noncommutative control. This does NOT construct R445 normalized physical Gibbs pushforward, Haar disintegration, uniform UV/IR estimates, OS Hamiltonian or mass gap. Agda KERNEL OPEN.\n
+----- CHILD ONLY CONTENT END -----
+===== END Docs/roadmaps/ClayYMProofRoadmap.md =====
+
+===== BEGIN Docs/roadmaps/YMClayCurrentExactLemmaLedger20261103.md =====
+CHILD_ORIGINAL_BLOB_SHA d64d8e8b2dc38b6186a1efb1f054b3cb62fa751d
+COMMON_BASE_SHA NOT_PRESENT
+CHILD_FULL_LINES 94
+CHILD_ONLY_ADDED_LINES 94
+----- CHILD ONLY CONTENT BEGIN -----
+# Yang–Mills: canonical current exact-lemma ledger
+**Snapshot:** 3 November 2026, YM [PR #1444](https://github.com/chboishabba/dashi_agda/pull/1444), stacked on Route-S #1440. PR #1460 is downstream TSVF/Lorentz/KK work, **not** a Clay YM proof premise.
+
+**Proof-status rule:** `SOURCE` means source-written Agda terms with GitHub readback, **NOT** typechecked, unless a pinned exact-head Agda transcript is separately attached. `CONDITIONAL` means a compiler/theorem requires an unconstructed selected physical producer. `OPEN` is a literal theorem-bearing leaf, not a missing name. `TRUST` is source or kernel/axiom acceptance debt. No item below is labelled kernel accepted. Do not decrement a frozen physical family from a finite calculation or a conditional compiler.
+
+## A. The three inventories are distinct — no false equivalence
+
+**Exact all-219 field extract:** [YMClaySubmission219FieldInventory20261103.json](YMClaySubmission219FieldInventory20261103.json) enumerates EVERY original A–I field under a stable `YM-A001` … `YM-I013` ID with its literal Agda record, field name and source blob SHA. It was generated by parsing the original two contract sources, and the 14 source-record group sizes matched the declared `58+56+13+10+13+20+21+15+13=219`. Each row is explicitly `individual_discharge: NOT_AUDITED`: this establishes **inventory completeness**, not that 219 theorem proofs exist or that none were independently constructed elsewhere. `scripts/check_ym_219_field_inventory.py` is a fail-closed, read-only field-order/count/blob drift check for checked-out repo copies; kernel proof validation remains separate.
+
+
+
+1. **Clay endpoint:** `DASHI/Physics/YangMills/YangMillsClayProblemContractExact.agda` defines `ClayYangMillsSolution`: 8 preconditions, 9 postconditions, 11 invariants, requiring a nontrivial four-dimensional quantum Yang–Mills theory on R⁴ and strictly positive physical gap with the stated gauge-group scope. **NO witness produced.**
+2. **Submission inventory:** `YangMillsSubmissionExactCutset.agda` + `YangMillsSubmissionObligationCardinalityExact.agda`: `58+56+13+10+13+20+21=191` theorem-spine obligations (Gate4, local Step V, RG transfer, fixed-lattice gap, thermodynamic limit, continuum limit, OS endpoint); plus `15+13=28` foundation/gauge-structural obligations; **219 total**. These are record fields/inventory counts; do not claim 219 proved.
+3. **Frozen research-cut A–D:** `BalabanClayHighestAlphaRound87FourAnalyticLemmaExact.agda` and `BalabanClayFrozenFourCompletionContractExact.agda`: A positive/tuned same-history beta, B selected differentiated marked-J/locality/stress-shell energy, C same-density gap/Heat–Doob or competing source-native physical route, D OPE/AF/stress same quantum family. **All four physical rows remain open.** The R443/R445/R320/R333/P5 rows below are **producer gates**, not substitutes for the Clay endpoint, 219 fields, or four physical completions.
+
+## B. R443: original finite Wilson/Gibbs + compact SU(N) Haar
+
+| Exact ID | Source owner / statement | Current state | Remaining literal proof |
+|---|---|---|---|
+| R443.F01 | `YMClayNativePositiveBondEnumerationVectorExact.originalPositiveBondCountFormula` — original \(4L^4\) bond count and side-four 1024 | SOURCE | Exact-head Agda kernel acceptance |
+| R443.F02 | `originalBondsDecodeEncodeAt`, `originalBondsEncodeDecodeExactly` — original field/Vec correspondence | SOURCE | Exact-head Agda kernel acceptance |
+| R443.F03 | `YMClayNativeFiniteGaugeVectorNaturalitySafeExact.encodeGaugeNatural`; SUN constructed physical adapter | SOURCE / CONDITIONAL | Kernel check; identify actual SU(N) gauge group against selected matrix carrier |
+| R443.F04 | `YMClayNativeSideFourC3VectorWeldExact`: existing C3 site/axis action, inverse, cube, original native Vec compatibility | SOURCE | Kernel check, finite adjacent-swap program |
+| R443.F05 | `YMClaySUNConstructedNativeC3SetoidHaarExact.originalNativeC3SetoidCodec`: real SU(N) Gibbs setoid encoding and original C3 witness reduction | SOURCE / CONDITIONAL | One `LinkPermutation 1024` program matching canonical native C3; one-link Haar for physical application |
+| R443.F06 | `YMClayNativeC3SingleVectorPermutationCertificateExact.singleVectorC3ImpliesAllVectors` | SOURCE | No universal vector certificate as a primitive: derive from **one** program equality on `canonicalLabelVector` |
+| R443.F07 | Concrete adjacent-swap program and `permuteLinks program canonicalLabelVector ≡ C3.forwardVector canonicalLabelVector` | OPEN | Build `program` and prove/decide its **single 1024-label vector equality**; the existing F06 theorem transports to all Link vectors |
+| R443.P01 | True compact continuous SU(2)/SU(N) matrix group and real/Bishop/legacy scalar identification, with full chosen observable class | OPEN / LEAN DONOR | Bring actual selected group + matrix + trace to Golden Agda; Lean PR #15 has real SU(2) finite-Haar donor but not an accepted same-object Agda import |
+| R443.P02 | Normalized compact Haar on a defensible measurable/integrable one-link test algebra | OPEN | Construct (not assume) integration and normalization with correct domain; existing `OneLinkProductHaar` is a **total-function interface**, not the measure construction |
+| R443.P03 | Selected one-link measurable Haar/Fubini + product integration, positivity/full support and Wilson Gibbs normalization | CONDITIONAL | Match `CompactLieAnalyticPackage.NormalizedHaarTheory.Integrable` to the original finite SU(N) Gibbs/cylinder functions; avoid all-functions-vs-measurable conflation |
+| R443.P04 | Original selected CMP119 R124 E/R/B/V nonlinear metric insertion, boundaries and counterterms | OPEN | Same literal physical action/density/evaluator and printed-source constants, not a gauge-invariant surrogate |
+| R443.P05 | Original six-plane/ordered-plane trace/adjoint C3 and real-action correspondence | SOURCE / CONDITIONAL | Kernel-accept selected original matrix/trace representation and all-source correspondence |
+
+## C. R445: actual changing lattice, physical refinement and continuum
+
+| Exact ID | Source owner / statement | Current state | Remaining literal proof |
+|---|---|---|---|
+| R445.F01 | `YMClaySUNVariablePhysicalCutoffFamilyExact` — original \((n+1)^4\) changing site lattice, \(4(n+1)^4\) links, β(n), same conditional finite Gibbs/Haar source | SOURCE / CONDITIONAL | True Haar and coupling, physical scaling; varying β at fixed side four **does not** count |
+| R445.F02 | `YMClayNativeCyclicFinIsoSafeExact` two exact roundtrips | SOURCE | Agda acceptance |
+| R445.F03 | `YMClayNativeBlockedPeriodicBondWeldExact` same-original \(M L\) four-torus site/bond ↔ Bałaban blocked coordinates, both inverse laws | SOURCE | Kernel acceptance; this is **label geometry**, not a blocked gauge field |
+| R445.P01 | Original group-valued coarse link as ordered fine-path holonomy | OPEN | Construct on original positive bonds; reuse `BalabanClayGate4PeriodicBondPathBianchiExact.pathHolonomy` with concrete block-edge directions |
+| R445.P02 | Gauge-equivariant blocked-link/plaquette map, same Wilson action | OPEN | Reuse `pathSiteGaugeCancellation`; match coarse endpoints and show selected Wilson/cylinder naturality |
+| R445.P03 | Reflection-halfspace/OS-compatible block and Wilson measure | OPEN / CONDITIONAL | Same physical reflection + `BalabanReflectionPositiveCoarseGrainingTransportExact`; mere positive weights do not imply RP |
+| R445.P04 | Actual Gibbs pushforward, normalized disintegration/reopening kernel | OPEN | Same continuous SU(N) measure, source beta, fine/coarse expectation; reuse `BalabanFiniteRGObservableReopeningExact` only after its actual hypotheses |
+| R445.P05 | Spacing \(a_n\), physical volume, beta(a), renormalized scale map | OPEN | Tune same generated RG history; no arbitrary Nat index masquerading as a continuum lattice |
+| R445.P06 | Uniform source moments, tails, coercivity/tightness, surface/volume constants | OPEN | Physical estimates independent of spacing and relevant infinite-volume cutoff |
+| R445.P07 | Cylinder/projective compatibility, gauge/OS observables, source-consistent continuum extraction | OPEN | Physical measures and source spectra, not only type-level limit fields |
+| R445.P08 | Thermodynamic and continuum existence/uniqueness and selected O(4) covariance | OPEN | Precisely the 13 thermodynamic and 20 continuum field obligations in the full submission inventory |
+| R445.P09 | Same-limit nontriviality and fourth-cumulant or appropriate non-Gaussian witness | OPEN / CONDITIONAL | Source nonvanishing estimate in the completed physical limit, not just the generic `FourthCumulantWitness` record |
+
+## D. R320: selected physical CMP116 mixed-J decay
+
+| Exact ID | Current state | Literal remaining payment |
+|---|---|---|
+| R320.P01 | OPEN | Differentiate the **same physical** selected logarithmic partition \(\partial_{J_1}\partial_{J_2}\log Z\), not an unrelated real covariance |
+| R320.P02 | OPEN | Construct common marked-source analytic radii, complete local J domain and actual source differentiability |
+| R320.P03 | SOURCE / CONDITIONAL | Existing P06 support/DFS/rooted shells/entropy combinatorics reusable; kernel and literal marked-source bridge still necessary |
+| R320.P04 | OPEN | Selected CMP116 uniform-in-cutoff/volume rooted-shell exponential envelope and quantitative constants |
+| R320.P05 | OPEN | Physical mixed-J connected clustering/decay from that envelope on the exact original Gibbs measure |
+| R320.P06 | OPEN | Match decay transfer to the **same** OS reconstruction and physical time/space scaling; no separate covariance family |
+
+## E. R333: same OS Hamiltonian and mass gap
+
+| Exact ID | Current state | Literal remaining payment |
+|---|---|---|
+| R333.P01 | CONDITIONAL | Original selected Wilson finite-lattice reflection positivity and complete CMP119 E/R/B/V action; match published Osterwalder–Seiler / Menotti–Pelissetto theorem hypotheses on same gauge carrier |
+| R333.P02 | OPEN | Original blocked physical reflection positivity through the actual R445 maps and limiting full reflected Gram forms |
+| R333.P03 | CONDITIONAL | Use one OS null quotient, Hilbert completion, vacuum, semigroup and positive selfadjoint Hamiltonian; Kato/generic OS compilers are not selected physical producers |
+| R333.P04 | OPEN | Same-Hamiltonian identification: Wilson transfer, reconstructed time translation, action variation/domain/core and physical scale |
+| R333.P05 | OPEN | Construct cutoff/volume uniform **strict positive** gap, in physical units, for this exact OS Hamiltonian |
+| R333.P06 | OPEN | Prove gap survives both thermodynamic and UV limits (not merely fixed lattice/β clustering) |
+| R333.P07 | OPEN | Vacuum uniqueness, locality/spectrum conditions, full Wightman/OS endpoint and nontrivial physical excitation |
+
+## F. Final Clay / trust gates
+
+| Exact ID | Status | Final obligation |
+|---|---|---|
+| CLAY.P01 | OPEN | Selected nontrivial 4D quantum YM with gauge-invariant local operators and accepted axiomatic QFT framework |
+| CLAY.P02 | OPEN | Physical O(4)/Poincaré covariance, locality, regularity and same-family short-distance/OPE/AF |
+| CLAY.P03 | OPEN | The prescribed compact simple gauge-group scope, positive physical mass gap and literal `ClayYangMillsSolution` witness |
+| TRUST.K01 | OPEN | Exact PR-head Agda typecheck of all new finite sources and TOE root; zero holes, no unsafe escape |
+| TRUST.K02 | OPEN | Transitive postulate/source authority audit. `DASHI/Foundations/RealAnalysisAxioms.agda` explicitly postulates the real carrier and laws. `BalabanClayFrozenFourCompletionContractExact.agda` carries `--safe` while importing that authority. Local `--safe` syntax ≠ accepted trusted proof |
+| TRUST.K03 | OPEN | Independent compiler clean-room receipt, exact theorem names, revisions, dependency graph, author/source provenance and manuscript correspondence |
+
+**Executable R443.F07 swap-word receipt (reference, not Agda):** `scripts/check_ym_native_c3_adjacent_swap_word.py` constructs the exact original positive-bond spatial C3 permutation and a minimal adjacent-transposition word by left insertion. Independent local Python execution of that algorithm verified side four has **46,592 adjacent swaps** (SHA-256 of comma-separated swap indices `a61adb9c6fe7bbfaa12f9255f8fd0fc139e26991e5c158e0643cfa174eca4dc7`), 1,024 links and order three. The generated swap sequence is a runnable reference, **not** an inhabitant of `Product.LinkPermutation 1024` in Agda and not a proof of the `onCanonicalLabels` term. Constructing that Agda term is still an R443.F07 requirement.
+
+## G. Programmatic checks and stable owners
+
+- Sources are under `DASHI/Physics/YangMills/`, with the new native owners re-exported by `DASHI/Unified/BalabanRGTOERegression.agda`. The repo is authoritative; Lean donor results must be same-object mapped into Agda before counting as Golden closure.
+- Finite references: `scripts/check_ym_native_periodic_bond_vec_codec.py`, `scripts/check_ym_original_c3_bond_vector_reference.py`, `scripts/check_ym_original_blocked_bond_reference.py`. C3 integer orbit fixture at side 4 has 16 fixed labels and 336 disjoint 3-cycles (1024 positive bonds). These are **reference** results, not compiler/kernel acceptance.
+- Source trust scanner: `scripts/check_ym_golden_agda_trust_cut.py`; static/source read only.
+- Preferred same-source terminal cut still uses `BalabanClayCurrentTerminalCutsetRound191Exact` and the old Eq.119/Kato/T5 producer owners. The 219-item submission inventory remains the full A–I *field* inventory; the 4-row analytic cut remains a *research compression*. Neither is decremented by the finite R443/R445 work.
+- Highest-alpha order: **F07** one 1024-label adjacent-swap certificate → R443.P01–P05 genuinely physical Haar/measurability and selected action → R445.P01–P08 original blocked gauge/path/refinement and physical limits → R320.P01–P06 selected CMP116 mixed-J decay → R333.P01–P07 same OS Hamiltonian physical gap → Clay contract. Parallel work on physical Haar and R445 path blocking is permissible; they do not imply R320/R333 automatically.
+- The other worker's TSVF selected-branch macroscopic record and proposed same-clock compatibility live downstream in PR #1460; no identification with OS reflection positivity/time semigroup is established. Avoid reverse import into #1444.
+
+----- CHILD ONLY CONTENT END -----
+===== END Docs/roadmaps/YMClayCurrentExactLemmaLedger20261103.md =====
+
+===== BEGIN TODO.md =====
+CHILD_ORIGINAL_BLOB_SHA c4c5b80c564cd0aeac768932f0e8831a769d76eb
+COMMON_BASE_SHA ce899ad0631093e5c97ea3b6e29cbd8eebf72496
+CHILD_FULL_LINES 17570
+CHILD_ONLY_ADDED_LINES 48
+----- CHILD ONLY CONTENT BEGIN -----
+- [x] P01 correlated-global Born error SOURCE: actual complex whole-environment wrong amplitude plus explicit nonnegative `delta` compared to independent controlled ABL numerator gives corrected `2^k*Wactual <= 1+2^k*delta` and two-channel cross bound; 3200 Fraction fixtures PASS. **Kernel pending; not a physical estimate.**
+- [ ] P01 physical next producer: construct selected many-body global Hilbert overlap and prove a useful source-derived correlation error `delta`, then identify original selected pre/post ABL ensemble; local Bell marginals cannot provide delta.
+
+- [x] P01.L15/L16 SOURCE: controlled complex emitter/site Born > rational ordered-rate original-ABL inequality (same original Q.ablProbability), certified 3/5, heterogeneous pulses, complex gamma bound; 3000 exact-Fraction fixtures, two invalid controls PASS. Agda KERNEL PENDING; physical correlated many-body postselection OPEN.
+- [ ] P00.L02: reconcile #1444 parent later R445 F08–F12 with #1460 child TSVF/KK; 20/26 shared changed paths have identical blobs, six docs/root differ; no overwrite/false same-object physical source.
+
+### 2026-11-03 maximal source payment — 2017 TSVF complex amplitudes, actual original ABL and same OS clock
+- [x] Verify original 2017 Aharonov/Cohen/Landsberger Eqs.22–25. Track printed unsquared gamma overlap products in a probability ratio; source-write a literal i-vs-1 complex phase counterexample and correct Born-squared factorized alternative, without claiming to have resolved author notation.
+- [x] Reuse existing rational CayleyDickson complex norm, gamma-product theorem, rational square nonnegativity and original two-boundary/TSVF owners. Source-write complex two-coordinate Hermitian environmental site and k-fold tensor overlap, arbitrary complex gamma product amplitudes, Born right/wrong factorization and exact ratio cross equation (safe; kernel pending).
+- [x] Source-write an INHABITED original TSVF.QuantumSurface/ProjectiveMeasurement/TSVFEnsemble/ABLContext with complex states, complete orthogonal projectors, genuine original two-admitted/one-excluded history fibre and strict selected positive normalizer. Original ablProbability common-denominator normalization and complex gamma/environment wrong-branch identity are derived (not axiomatized), with nonzero right gamma=1.
+- [x] Source-write all-k quantitative rate for q=(9/25)^k: 25^k >= 2^k*9^k; with effective gammaW<=gammaR, bound wrong probability by 1/(2^k+1), plus adverse gamma and wrong OS clock controls.
+- [x] Reuse original OS reconstruction/R331/R577 selected same Hamiltonian, prove all-n observer/OS clock-step/readout commuting conditional on an actual one-step physical intertwiner; keep real Stone semigroup/Hilbert domain OPEN. Optional (3,1)/KK metric requires original TSVF observed forward ket equal selected metric physical state.
+- [x] Independent equivalent Python Fraction calculation passed 7,250 complex gamma/ABL cases, 51 selected normalized examples and 100 exponent/rate checks. A reproducible GitHub reference script is committed, exact script itself not run at remote head.
+- [ ] Golden exact-head Agda kernel typecheck and full transitive safe/no-postulate audit of all new modules and BalabanRGTOERegression; cannot claim kernel without executed compiler.
+- [ ] Physical selected N-body pointer/environment/postselection gamma_j source and explicit Eq.25 convention, nonfactorized corrections and uniformly quantified disturbance/control bounds, on one actual physical Hilbert/observer.
+- [ ] Real selected observer causal clock ↔ same OS reconstructed H in physical 4D SU(N) continuum with unitary onto map, strongly continuous groups, common Ward/Stone domain and true same gauge observable; 4D Clay R443/R445/R320/R333/H6 remains OPEN.
+- [ ] Genuine 5D KK EFT scalar/radion/threshold decoupling, 2D/3D matched observable comparisons, positive-G gravitational stress optional BIDI remain OPEN.
+
+### 2026-11-03 P0 complex gamma follow-on (original owner reuse)
+- [x] Reuse original CayleyDicksonRationalComplexQuaternionExact RationalComplex complex multiplication/conjugation/norm and multiplicative norm; original module now declares --safe after a local no-postulate audit, with exact-head Agda still pending.
+- [x] Source-write TSVFComplexGammaProductBornExact: arbitrary finite *complex* gamma_j amplitude products have Born norm squared equal to the product of each norm squared; conjugating every gamma_j or inserting an i phase preserves combined Born weight. Root BalabanRGTOERegression exports source theorem terms.
+- [x] Independent exact rational-complex Python reference passed 10,000 finite complex gamma lists and conjugation/phase controls; GitHub script committed, its own exact-head execution pending.
+- [ ] Construct the literal 2017 source gamma_j as selected environmental branch-state overlaps and compare the original Eq.(25) complex conventions to actual postselected projector probabilities. Cannot relabel finite nonnegative Gamma weights as physical complex amplitudes.
+- [ ] Physically inhabit full complex Hilbert/OS same-clock and the R443/R445/R320/R333 4D YM source; no mass-gap, retrocausal signaling or multiverse promotion.
+
+### 2026-11-03 P0 max-cut payment — ORIGINAL admissible histories → ORIGINAL quantum TSVF ABL → true finite tensor overlap
+- [x] Explicitly reuse BidirectionallyAdmissibleHistoryFibreExact/admissibleFromBoth, TwoBoundarySystem, and the ORIGINAL DASHI.Quantum.TSVF QuantumSurface/transitionAmplitude/transitionWeight/ABLContext/ablProbability. The former is a logical two-sided history predicate, NOT an automatically nonzero Hilbert amplitude.
+- [x] Declare --safe locally on the original Bidi/TwoBoundary/TSVF modules after no-local-postulate inspection, preserving original source owners; **transitive Agda kernel trust pending**.
+- [x] Source-write TSVFAdmissibleQuantumOverlapRobustnessExact: actual general k-fold tensor dot, rational unit qubit vectors (5,0)/5 and (3,4)/5, squared overlap q=(9/25)^k, exact normalized binary masses, wrong-tail bound, weighted-gamma normalization, zero branch, and adversarial gamma counterexample; plus conditional original TSVF projector/ABL normalization and original source's admissible-but-zero countermodel.
+- [x] Source-write TSVFConcreteAdmissibleQubitABLExact: inhabited ORIGINAL QuantumSurface/TSVFEnsemble/ProjectiveMeasurement/ABLContext, actual idempotent coordinate projectors, both histories admitted by **same** boundary pair, branch amplitudes 5^k/3^k, exact original Q.ablProbability weights 25^k/9^k with positive denominator, finiteOriginalABLNormalization, both branches positive, and selectedABLMatchesActualTensorOverlap source-commuting cross identity.
+- [x] Independently check exact rational Hilbert tensor products and original ABL-compatible masses for k=0..50; 960 positive/zero gamma cases and adversarial high-k tiny right factor passed. Committed check_tsvf_admissible_tensor_overlap_born.py; equivalent local Python run passed but pushed script/exact-head Agda not executed.
+- [x] Update Docs/physics/TSVFAdmissibleTensorOverlapABLMaxCut20261103.md and 186-lemma roadmap P01.L13–16 / P07.L15–16 statuses without altering previous lemma IDs.
+- [ ] Execute focused Golden Agda kernel checks and full transitive 0-postulate trust cut for original TSVF and two new source modules, then BalabanRGTOERegression root. Keep SOURCE≠KERNEL≠PHYSICAL.
+- [ ] Physically populate original 2017 Aharonov/Cohen/Landsberger complex-gamma many-body environment, true final projector and allowed disturbance class; prove literal Eq.(25) normalization, overlap decay and robust R lower bounds on same selected quantum Hilbert/observer source.
+- [ ] Same physical observed Lorentz (3,1) clock, antiunitary reversal, two-boundary bra and Euclidean OS reflection must be distinguished and explicitly unitary-intertwined at P07; no fifth time, backwards signalling, multiverse ontology or YM gap promotion.
+- [ ] Literal 4D Clay R443 continuous Haar, R445 physical cutoff continuity, R320 mixed-J rooted shell and R333 same-OS-H positivity/gap/H6 remain OPEN.
+
+### 2026-11-03 P0 follow-on — TSVF single-branch macroscopic robustness, multiverse separation and YM native codec sync
+- [x] Primary-source audit Aharonov/Cohen/Gruss/Landsberger 2014 and Aharonov/Cohen/Landsberger 2017 macroscopic time-reversibility; independent Everett/observer-selection 2025. Distinguish micro reversibility, selected macro record recovery, operational filtration and physical multiverse ontology.
+- [x] Reuse existing FiniteHistoryOrientationExact, TSFVMultiverseViabilityCrossPollinationExact and MultiverseAttractorDiscriminatorBidiExact. Source-write safe TSVFMacroscopicSingleBranchRobustnessExact with 6/6 one-flip majority restorations, fine-data nonrecoverability, original same-past/different-branch proof and reversal conjunction; Golden root exported. **Not Agda-kernel checked**.
+- [x] Independently replicate 6 finite selected-pointer disturbances plus nine microhistories; commit reference test check_tsvf_macroscopic_single_branch_robustness.py. A numerical check is not a physical quantum robustness proof.
+- [x] Selectively sync #1444@7c6b2efd native bond enumeration, finite gauge naturality, constructed SUN gauge codec and variable-periodic Haar/Gibbs source plus reference scripts into #1460; original source owner/SHAs retained. **Not full branch merge or Agda acceptance**.
+- [x] Update P00–P11 exact roadmap **176→186** (new P01.L13–19, P07.L15–16, P11.L19); sync source audit, phase deliverables and non-promotion firewalls.
+- [ ] Prove literal 2017 selected many-body postselection/overlap robustness ratio Eq.(25) with N−n and genuine physical Born/ABL probability, gamma factors, nonzero denominator and quantitative lower bound; finite triple-majority analogue insufficient.
+- [ ] Source-inhabit single selected observer/clock ↔ physical Lorentz (3,1) metric ↔ OS reflection/Hamiltonian, preserving no backwards signalling and avoiding a second time dimension.
+- [ ] Finish full #1444↔#1460 branch reconciliation, Golden exact-head compile + transitive no-postulate audit; keep non-safe moving-cutoff family out of Golden imports until safe checked.
+- [ ] R443 actual compact one-link SU(N) Haar/R124-CMP119, R445 real cutoff-uniform moments/tails, R320 selected CMP116 differentiated-source decay, R333 same-H OS gap/H6/nontriviality and physical 2D/3D/5D BIDI remain OPEN.
+
+----- CHILD ONLY CONTENT END -----
+===== END TODO.md =====
