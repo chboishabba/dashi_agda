@@ -274,3 +274,51 @@ canonicalPlantHydraulicAtmosphereCarbonBoundary =
     false refl
     true refl
     true refl
+
+
+------------------------------------------------------------------------
+-- Leaf-area / nutrient-acquisition boundary.
+--
+-- Leaf area can change photosynthetic and transpiring surface. Whole-plant
+-- water demand can couple to root transport. These facts do not make leaf area
+-- a sufficient predictor of nutrient uptake. Root state, soil water, ion
+-- availability, transporters, fungal pathways, atmosphere and demand remain
+-- explicit parts of the model.
+------------------------------------------------------------------------
+
+record LeafAreaNutrientCouplingBoundary : Set where
+  constructor leafAreaNutrientCouplingBoundary
+  field
+    leafAreaCanChangeTranspiringSurface : Bool
+    transpirationCanCoupleToRootWaterDemand : Bool
+    photosyntheticSurfaceCanCoupleToCarbonSupply : Bool
+    nutrientDemandCanCoupleToWholePlantGrowth : Bool
+    leafAreaAloneDeterminesNutrientUptake : Bool
+    soilMoistureAloneDeterminesNutrientUptake : Bool
+    wholePlantStateNeededForNutrientCouplingClaim : Bool
+
+open LeafAreaNutrientCouplingBoundary public
+
+canonicalLeafAreaNutrientCouplingBoundary :
+  LeafAreaNutrientCouplingBoundary
+canonicalLeafAreaNutrientCouplingBoundary =
+  leafAreaNutrientCouplingBoundary
+    true
+    true
+    true
+    true
+    false
+    false
+    true
+
+leafAreaDoesNotDetermineNutrientUptakeAlone :
+  leafAreaAloneDeterminesNutrientUptake
+    canonicalLeafAreaNutrientCouplingBoundary
+  ≡ false
+leafAreaDoesNotDetermineNutrientUptakeAlone = refl
+
+soilMoistureDoesNotDetermineWholePlantNutrientUptakeAlone :
+  soilMoistureAloneDeterminesNutrientUptake
+    canonicalLeafAreaNutrientCouplingBoundary
+  ≡ false
+soilMoistureDoesNotDetermineWholePlantNutrientUptakeAlone = refl
