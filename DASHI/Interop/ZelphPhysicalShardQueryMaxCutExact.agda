@@ -17,6 +17,7 @@ import DASHI.Core.IndexedRelationalHyperfabricSpineExact as Fabric
 import DASHI.Reasoning.TypedHyperfabricCore as Hyper
 import DASHI.Foundations.BalancedTernaryUltrametricExact as Prefix
 import DASHI.Interop.ZelphBoundedGraphCoverageExact as Coverage
+import DASHI.Interop.ExternalContextSafetyBoundary as Safety
 
 ------------------------------------------------------------------------
 -- A1. Explicit finite-domain physical partition: a declared key is
