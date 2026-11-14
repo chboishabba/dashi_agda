@@ -771,6 +771,28 @@
       "actual scale summable irrelevant activity",
       "original uniform RG F,G,FG moment estimates",
       "OS reflection positivity/cluster and same-H positive gap"
-    ]
+    ],
+    "additional_genuine_original_A_source": {
+      "path": "DASHI/Physics/YangMills/YMClayF19OriginalAllCoarseCylinderNormalizationExact.agda",
+      "owning_pr": "Agda #1503",
+      "source_written_theorem_names": [
+        "originalF19AllCoarseNumeratorsSamePhysicalSource",
+        "originalF19AllCoarseNormalizedSamePhysicalSource"
+      ],
+      "consumers": "DASHI/Physics/YangMills/YMClayOriginalF19P0CommonOSSourceConvergence20261114.agda",
+      "proof_sources": [
+        "Fibre.selected64Pair896SpectatorWeightedDisintegration",
+        "F19.originalFinePhysicalPartitionEqualsActualEffectivePartition"
+      ],
+      "scope": "F19-internal original interacting Wilson all coarse tests and shared physical normalizer; exact original SU(N) 64+896 disintegration",
+      "not_proved": [
+        "pointwise R445 nativeSUNBlockLinks map identity",
+        "R445 renormalized target physical density",
+        "localized effective/target TV bound",
+        "physical RG scale summability",
+        "Clay continuum/OS/gap"
+      ],
+      "agda_kernel_verified": false
+    }
   }
 }
