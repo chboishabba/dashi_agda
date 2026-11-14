@@ -2,7 +2,7 @@
 module DASHI.Unified.BalabanRGTOEMaxCutValidation where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Bool using (false)
+open import Agda.Builtin.Bool using (false; true)
 open import Data.Empty using (⊥)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
@@ -11,6 +11,7 @@ import DASHI.Unified.BalabanRGTOERegression as Balaban
 import DASHI.EverythingTOESymmetryResolved369 as TOE
 import DASHI.Unifier as Unifier
 import DASHI.Unified.Physics as Physics
+import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGap
 
 ------------------------------------------------------------------------
 -- Receipt completeness.
@@ -694,6 +695,111 @@ physicsDepthContinuumLimitPromotionImpossible :
   Balaban.DepthContinuumLimitPromotion → ⊥
 physicsDepthContinuumLimitPromotionImpossible =
   Physics.yangMillsDepthContinuumLimitPromotionImpossible
+
+------------------------------------------------------------------------
+-- Direct fleet planning-owner agreement.
+-- Fleet 58 remains distinct from Yang-Mills Gate-4 58.
+------------------------------------------------------------------------
+
+toeFleetFormalGapReceiptMatchesOwner :
+  TOE.toeFleetFormalGapTargetReceipt ≡
+  FleetGap.canonicalFleetFormalGapTargetReceipt
+toeFleetFormalGapReceiptMatchesOwner = refl
+
+unifierFleetFormalGapReceiptMatchesOwner :
+  Unifier.unifierFleetFormalGapTargetReceipt ≡
+  FleetGap.canonicalFleetFormalGapTargetReceipt
+unifierFleetFormalGapReceiptMatchesOwner = refl
+
+toeFleetRecordedGapCountIs58 :
+  FleetGap.unformalisedFormalGaps TOE.toeFleetFormalGapTargetReceipt ≡ 58
+toeFleetRecordedGapCountIs58 =
+  TOE.toeFleetRecordedUnformalisedGapCountIs58
+
+unifierFleetRecordedGapCountIs58 :
+  FleetGap.unformalisedFormalGaps Unifier.unifierFleetFormalGapTargetReceipt ≡ 58
+unifierFleetRecordedGapCountIs58 =
+  Unifier.unifierFleetRecordedUnformalisedGapCountIs58
+
+toeFleetDischargedCountIs584 :
+  FleetGap.dischargedCoreKnowledgeFibres TOE.toeFleetFormalGapTargetReceipt ≡ 584
+toeFleetDischargedCountIs584 =
+  TOE.toeFleetRecordedDischargedCountIs584
+
+unifierFleetDischargedCountIs584 :
+  FleetGap.dischargedCoreKnowledgeFibres Unifier.unifierFleetFormalGapTargetReceipt ≡ 584
+unifierFleetDischargedCountIs584 =
+  Unifier.unifierFleetRecordedDischargedCountIs584
+
+toeFleetContradictionCountIs44 :
+  FleetGap.polarityContradictionGaps TOE.toeFleetFormalGapTargetReceipt ≡ 44
+toeFleetContradictionCountIs44 =
+  TOE.toeFleetRecordedContradictionCountIs44
+
+unifierFleetContradictionCountIs44 :
+  FleetGap.polarityContradictionGaps Unifier.unifierFleetFormalGapTargetReceipt ≡ 44
+unifierFleetContradictionCountIs44 =
+  Unifier.unifierFleetRecordedContradictionCountIs44
+
+toeFleetMotifCountIs3 :
+  FleetGap.macroscopicEigenMotifCount TOE.toeFleetFormalGapTargetReceipt ≡ 3
+toeFleetMotifCountIs3 =
+  TOE.toeFleetRecordedMacroscopicMotifCountIs3
+
+unifierFleetMotifCountIs3 :
+  FleetGap.macroscopicEigenMotifCount Unifier.unifierFleetFormalGapTargetReceipt ≡ 3
+unifierFleetMotifCountIs3 =
+  Unifier.unifierFleetRecordedMacroscopicMotifCountIs3
+
+toeFleetTargetsOnlyFormalGaps :
+  FleetGap.targetOnlyUnformalisedFormalGaps TOE.toeFleetFormalGapTargetReceipt ≡ true
+toeFleetTargetsOnlyFormalGaps =
+  TOE.toeFleetTargetsOnlyUnformalisedFormalGaps
+
+unifierFleetTargetsOnlyFormalGaps :
+  FleetGap.targetOnlyUnformalisedFormalGaps Unifier.unifierFleetFormalGapTargetReceipt ≡ true
+unifierFleetTargetsOnlyFormalGaps =
+  Unifier.unifierFleetTargetsOnlyUnformalisedFormalGaps
+
+toeFleetSpectralLabelDoesNotIdentifyOwner :
+  FleetGap.spectralLabelsIdentifyTheoremOwners TOE.toeFleetFormalGapTargetReceipt ≡ false
+toeFleetSpectralLabelDoesNotIdentifyOwner =
+  TOE.toeFleetSpectralLabelDoesNotIdentifyTheoremOwner
+
+unifierFleetSpectralLabelDoesNotIdentifyOwner :
+  FleetGap.spectralLabelsIdentifyTheoremOwners Unifier.unifierFleetFormalGapTargetReceipt ≡ false
+unifierFleetSpectralLabelDoesNotIdentifyOwner =
+  Unifier.unifierFleetSpectralLabelDoesNotIdentifyTheoremOwner
+
+toeFleetBalabanOwnerMatchesSource :
+  TOE.toeFleetBalabanDischargedOwnerReceipt ≡
+  FleetGap.fleetBalabanDischargedOwnerReceipt
+toeFleetBalabanOwnerMatchesSource = refl
+
+unifierFleetBalabanOwnerMatchesSource :
+  Unifier.unifierFleetBalabanDischargedOwnerReceipt ≡
+  FleetGap.fleetBalabanDischargedOwnerReceipt
+unifierFleetBalabanOwnerMatchesSource = refl
+
+toeFleetNSM2StatusMatchesSource :
+  TOE.toeFleetNSPhysicalM2SummationCompilerStatus ≡
+  FleetGap.fleetNSPhysicalM2SummationCompilerStatus
+toeFleetNSM2StatusMatchesSource = refl
+
+unifierFleetNSM2StatusMatchesSource :
+  Unifier.unifierFleetNSPhysicalM2SummationCompilerStatus ≡
+  FleetGap.fleetNSPhysicalM2SummationCompilerStatus
+unifierFleetNSM2StatusMatchesSource = refl
+
+toeFleetQuantumMereologyMatchesSource :
+  TOE.toeFleetQuantumMereologyBoundary ≡
+  FleetGap.fleetQuantumMereologyBoundary
+toeFleetQuantumMereologyMatchesSource = refl
+
+unifierFleetQuantumMereologyMatchesSource :
+  Unifier.unifierFleetQuantumMereologyBoundary ≡
+  FleetGap.fleetQuantumMereologyBoundary
+unifierFleetQuantumMereologyMatchesSource = refl
 
 ------------------------------------------------------------------------
 -- ZKP frame remains the existing typed contract.

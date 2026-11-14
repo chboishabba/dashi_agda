@@ -801,3 +801,14 @@ W4 source calibration, W5/PDF, W6 runtime, and GR metric recovery.
 After every gate closes, the target claim can become:
 
 > DASHI is complete and verified physics unification.
+
+
+## TOE direct fleet-gap / Balaban convergence implementation plan
+
+Goal: expose the canonical fleet formal-gap receipt directly through the TOE root and Unifier while retaining existing Balaban RG and Ibrahim/Pareto/snowball proof owners.
+
+Reuse: `FleetFormalGapTargetTOEExact`, `BalabanRGTOERegression`, and `BalabanIbrahimParetoSnowballTOEExact`. Add aliases only. Do not create a theorem family.
+
+Preconditions: canonical owners already exist. Invariants: 584 discharged fibres stay discharged; 44 contradiction gaps stay separate; the fleet 58 is not the Yang-Mills Gate-4 58; the three eigen-motif labels are planning labels only; ESD surfaces are read-only; trust escapes remain forbidden. Postcondition: both TOE roots expose the same canonical counts, target-only invariant, and discharged-owner witnesses.
+
+Verification: extend the existing Balaban max-cut validation first, then run the focused TOE referee, preflight, ESD/trust checks, and Agda kernel workflow.
