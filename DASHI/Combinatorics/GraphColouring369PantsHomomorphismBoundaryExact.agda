@@ -1,9 +1,12 @@
 module DASHI.Combinatorics.GraphColouring369PantsHomomorphismBoundaryExact where
+import DASHI.Combinatorics.GraphColouring369PantsSymmetryCutInvariantExact as S3Cut369
+import DASHI.Combinatorics.GraphColouring369PantsEdgeCoverageExact as EdgeChart369
 
 open import DASHI.Core.Prelude
 
 import DASHI.Combinatorics.GraphColouringHomomorphismCoreExact as Colour
 import DASHI.Moonshine.JInvariantColourWheelNineSheetPantsGluingExact as Pants369
+import DASHI.Combinatorics.GraphColouring369PantsGridAdjacencyExact as Grid
 
 ------------------------------------------------------------------------
 -- 369 / 27-VOXEL / PANTS GRAPH-COLOURING BOUNDARY
@@ -87,3 +90,60 @@ colouringCoreKeepsPantsAdjacencyFailClosed : Bool
 colouringCoreKeepsPantsAdjacencyFailClosed =
   Colour.GraphColouringHomomorphismCoreBoundary.pantsAdjacencyInvented
     Colour.canonicalGraphColouringHomomorphismCoreBoundary
+
+------------------------------------------------------------------------
+-- 2026-10-30 source-written finite closure candidate (kernel pending).
+--
+-- Existing status flags above intentionally remain conservative until an
+-- exact-head Agda safe-mode receipt is produced.  These new typed terms
+-- consume the actual Geometry.HypervoxelAdjacent, NOT an invented relation.
+------------------------------------------------------------------------
+
+nativeVoxelGrid : Colour.RelGraph
+nativeVoxelGrid = Grid.voxelGrid
+
+nativePantsGrid : Colour.RelGraph
+nativePantsGrid = Grid.pantsGrid
+
+nativeVoxelToPantsGraphHom :
+  Colour.GraphHom nativeVoxelGrid nativePantsGrid
+nativeVoxelToPantsGraphHom = Grid.voxelToPantsGraphHom
+
+nativePantsToVoxelGraphHom :
+  Colour.GraphHom nativePantsGrid nativeVoxelGrid
+nativePantsToVoxelGraphHom = Grid.pantsToVoxelGraphHom
+
+nativeC3PantsAutomorphism :
+  Colour.GraphHom nativePantsGrid nativePantsGrid
+nativeC3PantsAutomorphism = Grid.rotatePantsGraphHom
+
+nativeSecondSeamFlipGraphAutomorphism :
+  Colour.GraphHom nativePantsGrid nativePantsGrid
+nativeSecondSeamFlipGraphAutomorphism = Grid.flipPantsGraphHom
+
+nativeSelectedColouring :
+  Colour.Colouring nativePantsGrid Grid.selectedPalette
+nativeSelectedColouring = Grid.selectedPantsColouring
+
+nativeFlipPreservesProperColouring :
+  Colour.Colouring nativePantsGrid Grid.selectedPalette
+nativeFlipPreservesProperColouring = Grid.selectedFlippedColouring
+
+record GraphColouring369PantsSourceWrittenCandidate : Set where
+  constructor graph-colouring-369-pants-source-written-candidate
+  field
+    geometryAdjacencyReused : Bool
+    pathAdjacencyExplicit : Bool
+    bothGraphHomTermsWritten : Bool
+    C3RotationGraphHomWritten : Bool
+    seamFlipGraphHomWritten : Bool
+    selectedPaletteColouringWritten : Bool
+    exactHeadAgdaKernelChecked : Bool
+    smoothPantsSurfaceEstablished : Bool
+    minimumColourCountEstablished : Bool
+
+currentGraphColouring369PantsSourceWrittenCandidate :
+  GraphColouring369PantsSourceWrittenCandidate
+currentGraphColouring369PantsSourceWrittenCandidate =
+  graph-colouring-369-pants-source-written-candidate
+    true true true true true true false false false
