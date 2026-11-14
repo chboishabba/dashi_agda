@@ -739,5 +739,38 @@
     ],
     "all_general_Clay_endpoint_gates": "OPEN; no unsupported promotion",
     "source_status": "new A-class source proof terms and conditional consumers written; B/C physical-math estimates not solved"
+  },
+  "r445_attached_maxcut_round4": {
+    "date": "2026-11-14",
+    "original_owner": "chboishabba/dashi_agda#1503",
+    "donor_head": "ada2ac4da5ecef28cb512c320e25250e65910671",
+    "files": [
+      "DASHI/Physics/YangMills/YMClayR445LocalizedTVInferenceNoGoExact.agda",
+      "scripts/check_ym_r445_localized_tv_maxcut_countermodels.py",
+      "tests/test_ym_r445_localized_tv_maxcut_countermodels.py",
+      "Docs/physics/YMClayR445OriginalLocalizedTVCorrectedMaxCut20261114.md"
+    ],
+    "root_import": "DASHI/Physics/YangMills/YMClayOriginalF19P0CommonOSSourceConvergence20261114.agda",
+    "verified_independent_finite_rational_cases": 6561,
+    "counterexamples": [
+      "outside-only reweight changes interior marginal TV by 1/8",
+      "rare reference bad event P_bad 1/2",
+      "fixed 1/16 vs invented 16^-k; 1/k harmonic divergence",
+      "D_k=0 with alternating uncauchy scale families",
+      "D_k=0 with covariance 1/4 at any distance",
+      "positive probability with OS Gram -1"
+    ],
+    "valid_conditional_finite_bound": "TV(P_X,Q_X) ≤ sup_y TV(P(X|y),Q(X|y)) + TV(P_Y,Q_Y)",
+    "false_attachment_claim": "A/B/C physical closed is unsupported; cutoff-uniform source Wilson D_k, mass gap E1/D1/D2 all remain OPEN",
+    "pinned_kernel_receipt": false,
+    "python_committed_tests_executed_here": false,
+    "continued_work": [
+      "original F19↔R445 same block map and same target density",
+      "original normalized conditional SU(N) gauge action variation",
+      "actual physical outside influence / pinned large-field two-measure bound",
+      "actual scale summable irrelevant activity",
+      "original uniform RG F,G,FG moment estimates",
+      "OS reflection positivity/cluster and same-H positive gap"
+    ]
   }
 }
