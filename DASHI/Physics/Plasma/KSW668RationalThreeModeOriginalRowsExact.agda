@@ -14,6 +14,7 @@ open import Data.Rational.Tactic.RingSolver using (solve)
 open import Agda.Builtin.List using ([]; _∷_)
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
+import DASHI.Physics.Closure.NSTriadKNComplex3FieldAlgebra as Algebra
 import DASHI.Physics.Closure.NSTriadKNComplex3RealityPhaseAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNComplex3OrderedRealityCancellation as Ordered
 import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
@@ -80,18 +81,22 @@ selectedSourceNormalForm E sign =
 selectedPositiveSignFromOriginalSource :
   (E : C3.IntegerEmbedding F) →
   selectedSourceNormalForm E Source.plusSigned
-    ≡ C3.embedInteger E (+ 1)
+    ≡ C3.realEmbed F (C3.embedInteger E (+ 1))
 selectedPositiveSignFromOriginalSource E
   rewrite C3.embedZero E =
-  solve (C3.embedInteger E (+ 1) ∷ [])
+  Algebra.complexExt
+    (solve (C3.embedInteger E (+ 1) ∷ []))
+    refl
 
 selectedNegativeSignFromOriginalSource :
   (E : C3.IntegerEmbedding F) →
   selectedSourceNormalForm E Source.minusSigned
-    ≡ - (C3.embedInteger E (+ 1))
+    ≡ C3.realEmbed F (- (C3.embedInteger E (+ 1)))
 selectedNegativeSignFromOriginalSource E
   rewrite C3.embedZero E =
-  solve (C3.embedInteger E (+ 1) ∷ [])
+  Algebra.complexExt
+    (solve (C3.embedInteger E (+ 1) ∷ []))
+    refl
 
 -- The remaining all-mode reality/transversality hypotheses are recorded
 -- without pretending to be the missing proof or a physical MMS measurement.
