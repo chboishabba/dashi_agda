@@ -1,0 +1,169 @@
+{
+  "schema": "openai-math-vendor-full-source-tree-20261114-v1",
+  "upstream_repo": "openai/math",
+  "pinned_revision": "1581d4cbdd69a0faf34b2089614fe2a814316a6a",
+  "pinned_lean_tree_sha": "b67b84636537041bf8da1e7263a827a5ab7ffba4",
+  "pinned_oai_subtree_sha": "351061cd373017200b8e08122a9ecdf78ffd2f0c",
+  "pinned_comparator_subtree_sha": "d692296ebfc3def4d7788a6c205e1f781b7ab6f3",
+  "method": "Recursively list each of 23 immutable OAI academic-domain Git tree SHAs, and ComparatorChallenges separately, to avoid a truncated full-tree GitHub result; count only type=blob paths ending in .lean. All 25 constituent subtree requests returned truncated=false.",
+  "initial_whole_lean_tree_truncated": true,
+  "initial_whole_tree_visible_lean_files": 59790,
+  "exact_source_file_total": 122876,
+  "oai_lean_files": 122458,
+  "comparator_challenge_lean_files": 416,
+  "root_lean_files": 2,
+  "root_paths": [
+    "lean/OAI.lean",
+    "lean/lakefile.lean"
+  ],
+  "oai_domain_subtrees": [
+    {
+      "name": "Algebra",
+      "git_tree_sha": "70b23ffb2bbb977e5c6d623962fe436e372ce7cd",
+      "lean_files": 2081,
+      "subtree_complete": true
+    },
+    {
+      "name": "AlgebraicGeometry",
+      "git_tree_sha": "dd4e73fa4306db6958399d324116427b787be67e",
+      "lean_files": 975,
+      "subtree_complete": true
+    },
+    {
+      "name": "AlgebraicTopology",
+      "git_tree_sha": "ed01aec0436d54f6cf71d76ab1931a2c60748138",
+      "lean_files": 45,
+      "subtree_complete": true
+    },
+    {
+      "name": "Analysis",
+      "git_tree_sha": "31ee05829b116f3a2ae102665b7a0bfcdeb7c5b7",
+      "lean_files": 26567,
+      "subtree_complete": true
+    },
+    {
+      "name": "CategoryTheory",
+      "git_tree_sha": "588645c2b2d905fe783949b22460caa6e27280f4",
+      "lean_files": 312,
+      "subtree_complete": true
+    },
+    {
+      "name": "Combinatorics",
+      "git_tree_sha": "1c13837c1d7c42a9828e5d805cfbb87bb0c5da37",
+      "lean_files": 16614,
+      "subtree_complete": true
+    },
+    {
+      "name": "Computability",
+      "git_tree_sha": "9fe1124f7e8e1629dfb56f964087caad51922e17",
+      "lean_files": 5213,
+      "subtree_complete": true
+    },
+    {
+      "name": "Dynamics",
+      "git_tree_sha": "3ac4ebd40bdd3f03b13f47975716f8edcacda2e9",
+      "lean_files": 664,
+      "subtree_complete": true
+    },
+    {
+      "name": "GameTheory",
+      "git_tree_sha": "91d6c9b2d4633e91eb0927eb1e9381ad37b8b3b1",
+      "lean_files": 303,
+      "subtree_complete": true
+    },
+    {
+      "name": "Geometry",
+      "git_tree_sha": "802c5efb3142a299fb780105e14b7a9f268c4d32",
+      "lean_files": 14057,
+      "subtree_complete": true
+    },
+    {
+      "name": "GroupTheory",
+      "git_tree_sha": "10488f44fe2e06c2e62dd2fc259f3da04174e992",
+      "lean_files": 4192,
+      "subtree_complete": true
+    },
+    {
+      "name": "InformationTheory",
+      "git_tree_sha": "8fbc55211aefc4ed5922845768e78a2f4a93e6d6",
+      "lean_files": 339,
+      "subtree_complete": true
+    },
+    {
+      "name": "LinearAlgebra",
+      "git_tree_sha": "7b267fd75dd170c2d21469a0907a061afd056735",
+      "lean_files": 954,
+      "subtree_complete": true
+    },
+    {
+      "name": "MathematicalPhysics",
+      "git_tree_sha": "8ff63ddc3f0ba9604f2a3c039cd6e00a34e49b64",
+      "lean_files": 6736,
+      "subtree_complete": true
+    },
+    {
+      "name": "MeasureTheory",
+      "git_tree_sha": "14769f9bf222b1e1dd36b247016aa8c94d6d8a6f",
+      "lean_files": 2950,
+      "subtree_complete": true
+    },
+    {
+      "name": "ModelTheory",
+      "git_tree_sha": "a672e3a86cc962bd36fe0d4f4a50b616e3722612",
+      "lean_files": 42,
+      "subtree_complete": true
+    },
+    {
+      "name": "NumberTheory",
+      "git_tree_sha": "bd483de1f2aabba45a8fed73ad80fc7edcec6515",
+      "lean_files": 23530,
+      "subtree_complete": true
+    },
+    {
+      "name": "Optimization",
+      "git_tree_sha": "fbdbfdcaff7b3b71bad12420c86502badf215c49",
+      "lean_files": 2,
+      "subtree_complete": true
+    },
+    {
+      "name": "Probability",
+      "git_tree_sha": "fb517d878a6acc1e4ea2ecc2af331dbd4e70a958",
+      "lean_files": 12971,
+      "subtree_complete": true
+    },
+    {
+      "name": "RepresentationTheory",
+      "git_tree_sha": "82b2c23c0149bf9106392d87a5d8a8b92bec9bd6",
+      "lean_files": 1108,
+      "subtree_complete": true
+    },
+    {
+      "name": "RingTheory",
+      "git_tree_sha": "c73c85500fa22b4c68dec7248b3b2ce96344b238",
+      "lean_files": 536,
+      "subtree_complete": true
+    },
+    {
+      "name": "SetTheory",
+      "git_tree_sha": "12bb2c3c9ef59f4a7e7bef47ddd344235a768b3e",
+      "lean_files": 1018,
+      "subtree_complete": true
+    },
+    {
+      "name": "Topology",
+      "git_tree_sha": "700ea8e85ef83671b303ac99eaaa5ffeaf2e2a4a",
+      "lean_files": 1249,
+      "subtree_complete": true
+    }
+  ],
+  "prior_main_result_catalogue_declaration_references": 200,
+  "later_different_revision_main_result_references": 208,
+  "total_lean_theorem_declarations": "NOT_COUNTED",
+  "independent_mathematical_proofs": "NOT_COUNTED",
+  "native_dashi_kernel_imports_established_by_tree_scan": 0,
+  "dashi_same_object_crosswalk_completed_for_all_files": false,
+  "full_source_module_level_candidate_index_generated": false,
+  "next_compiler": "dashi_lean4#108 scripts/check_openai_math_vendor_tree_20261114.py",
+  "world_builder_route": "dashi_agda#1495 / native Lean 4.28 world ingestion, subject to exact source+version proof checks",
+  "source_tree_audit_is_not_kernel_acceptance": true
+}

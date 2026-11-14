@@ -1034,7 +1034,15 @@
     "agda_kernel_root_checked": false,
     "lean_kernel_root_checked": false,
     "usable_upstream_v434_proof_export_checked": false,
-    "actual_original_tseitin_machine_m05_checked": false
+    "actual_original_tseitin_machine_m05_checked": false,
+    "pinned_vendor_total_lean_files": 122876,
+    "pinned_vendor_oai_lean_files": 122458,
+    "pinned_vendor_comparator_lean_files": 416,
+    "pinned_vendor_lean_root_files": 2,
+    "pinned_source_tree_inventory": "Docs/roadmaps/OpenAIMathCorpusCrosswalk20261114/pinned_vendor_full_lean_tree_20261114.json",
+    "vendor_full_module_streaming_checker": "dashi_lean4#108 scripts/check_openai_math_vendor_tree_20261114.py",
+    "total_proof_declarations_counted": false,
+    "verified_full_module_semantic_crosswalk": false
   },
   "clay_original_terminal_source_audit_20261114": {
     "audited_agda_rollup_pr": 1499,

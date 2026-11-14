@@ -173,3 +173,45 @@ Agda PR #1212:
 Earlier source protocols and exact first-implementation history remain
 separately identifiable; this fresh roadmap is a status addendum, not a
 retroactive claim of the old tests having run.
+
+
+## 14 November: exact full vendored source volume — NOT 208 files
+
+**Major source-inventory correction.** The **immutable**
+`openai/math@1581d4cbdd69a0faf34b2089614fe2a814316a6a`
+source tree contains **122,876 distinct `.lean` source files** under
+`lean/`:
+
+* **122,458** inside `lean/OAI/`, split across **23** academic-domain
+  Git trees;
+* **416** inside `lean/ComparatorChallenges/`;
+* **2** at `lean/OAI.lean` and `lean/lakefile.lean`.
+
+The first whole-`lean/` recursive GitHub tree returned **59,790**
+visible Lean files with `truncated=true` and was **incomplete**.
+The 23 `OAI/<domain>` and separate Comparator tree lookups all returned
+`truncated=false`; their independent counts sum to **122,876**.
+All exact subtree SHA and counts are in
+`Docs/roadmaps/OpenAIMathCorpusCrosswalk20261114/pinned_vendor_full_lean_tree_20261114.json`.
+An offline Git-object-only verifier, implemented on the one Lean rollup
+#108 as `scripts/check_openai_math_vendor_tree_20261114.py`, can stream
+all source path/blob identities into optional NDJSON after the
+original submodule is materialized. **Its local execution and complete
+source-level semantic indexing have not been performed in this
+connector-only audit.**
+
+The **200** pinned and **208** later `formalization.yaml`
+`main_results` references represent selected **headline theorem
+declarations**, not a full theorem/lemma inventory. The number of
+all actual Lean declarations and independently checked proof terms
+was **not counted** here. Do not substitute 122,876 for a number
+of *proofs*, or 208 for the total source tree.
+
+**Implication for our DASHI crosswalk:** the previous 101/208
+lexical theorem-to-owner discovery is a **headline-catalogue pilot**,
+not a comprehensive map of the enormous vendored Lean module graph.
+The full path/blobs and import/declaration DAG need streaming
+content-addressed ingestion (existing #1495 world builder) and
+semantic prioritization, ideally by source mathematical dependency
+and original DASHI theorem consumer, not blind copying or compiling
+122,876 files into the incompatible Lean 4.28 environment.
