@@ -6,8 +6,8 @@ module DASHI.Mathematics.Complexity.ConcreteTapeDecodedWindowSameObjectExact whe
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans; sym)
 import Data.Fin.Base as Fin
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
@@ -50,20 +50,20 @@ pullbackCompose first second bits =
 
 pullbackFinSumCases :
   ∀ {m n global}
-    (left : Fin.Fin m → Fin.Fin global)
-    (right : Fin.Fin n → Fin.Fin global)
+    (leftMap : Fin.Fin m → Fin.Fin global)
+    (rightMap : Fin.Fin n → Fin.Fin global)
     (bits : CNF.Bits global) →
   Rename.pullbackBits
-    (Placement.finSumCases left right) bits
+    (Placement.finSumCases leftMap rightMap) bits
   ≡
   Canonical.appendBits
-    (Rename.pullbackBits left bits)
-    (Rename.pullbackBits right bits)
-pullbackFinSumCases {m = zero} left right bits =
+    (Rename.pullbackBits leftMap bits)
+    (Rename.pullbackBits rightMap bits)
+pullbackFinSumCases {m = zero} leftMap rightMap bits =
   refl
-pullbackFinSumCases {m = suc m} left right bits
+pullbackFinSumCases {m = suc m} leftMap rightMap bits
     rewrite pullbackFinSumCases
-      (λ i → left (Fin.suc i)) right bits =
+      (λ i → leftMap (Fin.suc i)) rightMap bits =
   refl
 
 ------------------------------------------------------------------------
@@ -79,17 +79,17 @@ decodeCellsAtBlockSlice :
     (slot : Global.Slot index count)
     (bits : CNF.Bits (Decode.RowBitsWidth machine count)) →
   Indexed.At index
-    (Canonical.decodeCell stateCoverage symbolCoverage
-      (Slice.blockSliceBits slot bits))
-    (Decode.decodeCells stateCoverage symbolCoverage count bits)
-decodeCellsAtBlockSlice stateCoverage symbolCoverage
+    (Canonical.decodeCell {machine} stateCoverage symbolCoverage
+      (Slice.blockSliceBits {width = Canonical.CellWidth machine} slot bits))
+    (Decode.decodeCells {machine} stateCoverage symbolCoverage count bits)
+decodeCellsAtBlockSlice {machine} stateCoverage symbolCoverage
     Global.here bits =
   Indexed.here
 decodeCellsAtBlockSlice {machine}
     stateCoverage symbolCoverage
     (Global.there slot) bits =
   Indexed.there
-    (decodeCellsAtBlockSlice
+    (decodeCellsAtBlockSlice {machine}
       stateCoverage symbolCoverage slot
       (Canonical.dropBits
         (Canonical.CellWidth machine) bits))
@@ -103,26 +103,26 @@ decodedRowTriple :
     (start : Raw.WindowStart index cols)
     (bits : CNF.Bits (Decode.RowBitsWidth machine cols)) →
   Indexed.TripleAt index
-    (Canonical.decodeCell stateCoverage symbolCoverage
-      (Slice.blockSliceBits (Raw.windowLeftSlot start) bits))
-    (Canonical.decodeCell stateCoverage symbolCoverage
-      (Slice.blockSliceBits (Raw.windowCenterSlot start) bits))
-    (Canonical.decodeCell stateCoverage symbolCoverage
-      (Slice.blockSliceBits (Raw.windowRightSlot start) bits))
+    (Canonical.decodeCell {machine} stateCoverage symbolCoverage
+      (Slice.blockSliceBits {width = Canonical.CellWidth machine} (Raw.windowLeftSlot start) bits))
+    (Canonical.decodeCell {machine} stateCoverage symbolCoverage
+      (Slice.blockSliceBits {width = Canonical.CellWidth machine} (Raw.windowCenterSlot start) bits))
+    (Canonical.decodeCell {machine} stateCoverage symbolCoverage
+      (Slice.blockSliceBits {width = Canonical.CellWidth machine} (Raw.windowRightSlot start) bits))
     (Local.cells (Decode.decodeRow
       stateCoverage symbolCoverage cols bits))
-decodedRowTriple stateCoverage symbolCoverage start bits =
+decodedRowTriple {machine} stateCoverage symbolCoverage start bits =
   record
-    { Indexed.leftAt =
-        decodeCellsAtBlockSlice
+    { leftAt =
+        decodeCellsAtBlockSlice {machine}
           stateCoverage symbolCoverage
           (Raw.windowLeftSlot start) bits
-    ; Indexed.centerAt =
-        decodeCellsAtBlockSlice
+    ; centerAt =
+        decodeCellsAtBlockSlice {machine}
           stateCoverage symbolCoverage
           (Raw.windowCenterSlot start) bits
-    ; Indexed.rightAt =
-        decodeCellsAtBlockSlice
+    ; rightAt =
+        decodeCellsAtBlockSlice {machine}
           stateCoverage symbolCoverage
           (Raw.windowRightSlot start) bits
     }
@@ -137,20 +137,21 @@ globalCellBits_eq_rowBlockSlice :
     (cellSlot : Global.Slot cellIndex cols)
     (globalBits : CNF.Bits (Trace.GlobalTraceWidth machine steps cols)) →
   Rename.pullbackBits
-    (Raw.globalCellRename rowSlot cellSlot)
+    (Raw.globalCellRename {machine} {steps} {cols} rowSlot cellSlot)
     globalBits
   ≡
-  Slice.blockSliceBits cellSlot
-    (Global.rowSliceBits rowSlot globalBits)
-globalCellBits_eq_rowBlockSlice rowSlot cellSlot globalBits =
+  Slice.blockSliceBits {width = Canonical.CellWidth machine} cellSlot
+    (Global.rowSliceBits {machine} {steps} {cols} rowSlot globalBits)
+globalCellBits_eq_rowBlockSlice {machine} {steps} {cols} rowSlot cellSlot globalBits =
   trans
     (pullbackCompose
       (Global.blockRename cellSlot)
-      (Global.globalRowRename rowSlot)
+      (Global.globalRowRename {machine} {steps} {cols} rowSlot)
       globalBits)
     (Slice.pullbackBlockRename_eq_blockSlice
+      {width = Canonical.CellWidth machine}
       cellSlot
-      (Global.rowSliceBits rowSlot globalBits))
+      (Global.rowSliceBits {machine} {steps} {cols} rowSlot globalBits))
 
 sixCellRawBits :
   ∀ {machine steps cols timeIndex columnIndex}
@@ -158,78 +159,111 @@ sixCellRawBits :
     (start : Raw.WindowStart columnIndex cols)
     (globalBits : CNF.Bits (Trace.GlobalTraceWidth machine steps cols)) →
   CNF.Bits (Canonical.WindowWidth machine)
-sixCellRawBits timeSlot start globalBits =
+sixCellRawBits {machine} {steps} {cols} timeSlot start globalBits =
   Rename.pullbackBits
-    (Raw.sixCellGlobalRename timeSlot start) globalBits
+    (Raw.sixCellGlobalRename {machine} {steps} {cols} timeSlot start) globalBits
 
 sixCellRawBits_decompose :
   ∀ {machine steps cols timeIndex columnIndex}
     (timeSlot : Global.Slot timeIndex steps)
     (start : Raw.WindowStart columnIndex cols)
     (globalBits : CNF.Bits (Trace.GlobalTraceWidth machine steps cols)) →
-  sixCellRawBits timeSlot start globalBits
+  sixCellRawBits {machine} {steps} {cols} timeSlot start globalBits
   ≡
   Canonical.appendBits
     (Rename.pullbackBits
-      (Raw.globalCellRename
+      (Raw.globalCellRename {machine} {steps} {cols}
         (Global.sameSlotInSucc timeSlot)
         (Raw.windowLeftSlot start))
       globalBits)
     (Canonical.appendBits
       (Rename.pullbackBits
-        (Raw.globalCellRename
+        (Raw.globalCellRename {machine} {steps} {cols}
           (Global.sameSlotInSucc timeSlot)
           (Raw.windowCenterSlot start))
         globalBits)
       (Canonical.appendBits
         (Rename.pullbackBits
-          (Raw.globalCellRename
+          (Raw.globalCellRename {machine} {steps} {cols}
             (Global.sameSlotInSucc timeSlot)
             (Raw.windowRightSlot start))
           globalBits)
         (Canonical.appendBits
           (Rename.pullbackBits
-            (Raw.globalCellRename
+            (Raw.globalCellRename {machine} {steps} {cols}
               (Global.nextSlotInSucc timeSlot)
               (Raw.windowLeftSlot start))
             globalBits)
           (Canonical.appendBits
             (Rename.pullbackBits
-              (Raw.globalCellRename
+              (Raw.globalCellRename {machine} {steps} {cols}
                 (Global.nextSlotInSucc timeSlot)
                 (Raw.windowCenterSlot start))
               globalBits)
             (Rename.pullbackBits
-              (Raw.globalCellRename
+              (Raw.globalCellRename {machine} {steps} {cols}
                 (Global.nextSlotInSucc timeSlot)
                 (Raw.windowRightSlot start))
               globalBits)))))
-sixCellRawBits_decompose timeSlot start globalBits
-  rewrite pullbackFinSumCases
-    (Raw.globalCellRename
-      (Global.sameSlotInSucc timeSlot)
-      (Raw.windowLeftSlot start))
-    (Placement.finSumCases
-      (Raw.globalCellRename
-        (Global.sameSlotInSucc timeSlot)
-        (Raw.windowCenterSlot start))
-      (Placement.finSumCases
-        (Raw.globalCellRename
-          (Global.sameSlotInSucc timeSlot)
-          (Raw.windowRightSlot start))
-        (Placement.finSumCases
-          (Raw.globalCellRename
-            (Global.nextSlotInSucc timeSlot)
-            (Raw.windowLeftSlot start))
-          (Placement.finSumCases
-            (Raw.globalCellRename
-              (Global.nextSlotInSucc timeSlot)
-              (Raw.windowCenterSlot start))
-            (Raw.globalCellRename
-              (Global.nextSlotInSucc timeSlot)
-              (Raw.windowRightSlot start))))))
-    globalBits
-  = refl
+sixCellRawBits_decompose {machine} {steps} {cols} timeSlot start globalBits =
+  trans step1
+    (cong (Canonical.appendBits (Rename.pullbackBits oldLeft globalBits))
+      (trans step2
+        (cong (Canonical.appendBits (Rename.pullbackBits oldCenter globalBits))
+          (trans step3
+            (cong (Canonical.appendBits (Rename.pullbackBits oldRight globalBits))
+              (trans step4
+                (cong (Canonical.appendBits (Rename.pullbackBits newLeft globalBits))
+                  step5)))))))
+  where
+    cw = Canonical.CellWidth machine
+    gw = Trace.GlobalTraceWidth machine steps cols
+
+    beforeSlot = Global.sameSlotInSucc timeSlot
+    afterSlot = Global.nextSlotInSucc timeSlot
+
+    oldLeft =
+      Raw.globalCellRename {machine} {steps} {cols} beforeSlot (Raw.windowLeftSlot start)
+    oldCenter =
+      Raw.globalCellRename {machine} {steps} {cols} beforeSlot (Raw.windowCenterSlot start)
+    oldRight =
+      Raw.globalCellRename {machine} {steps} {cols} beforeSlot (Raw.windowRightSlot start)
+
+    newLeft =
+      Raw.globalCellRename {machine} {steps} {cols} afterSlot (Raw.windowLeftSlot start)
+    newCenter =
+      Raw.globalCellRename {machine} {steps} {cols} afterSlot (Raw.windowCenterSlot start)
+    newRight =
+      Raw.globalCellRename {machine} {steps} {cols} afterSlot (Raw.windowRightSlot start)
+
+    step1 = pullbackFinSumCases {m = cw} {n = cw + (cw + (cw + (cw + cw)))} {global = gw}
+      oldLeft
+      (Placement.finSumCases {m = cw} {n = cw + (cw + (cw + cw))} {global = gw} oldCenter
+        (Placement.finSumCases {m = cw} {n = cw + (cw + cw)} {global = gw} oldRight
+          (Placement.finSumCases {m = cw} {n = cw + cw} {global = gw} newLeft
+            (Placement.finSumCases {m = cw} {n = cw} {global = gw} newCenter newRight))))
+      globalBits
+
+    step2 = pullbackFinSumCases {m = cw} {n = cw + (cw + (cw + cw))} {global = gw}
+      oldCenter
+      (Placement.finSumCases {m = cw} {n = cw + (cw + cw)} {global = gw} oldRight
+        (Placement.finSumCases {m = cw} {n = cw + cw} {global = gw} newLeft
+          (Placement.finSumCases {m = cw} {n = cw} {global = gw} newCenter newRight)))
+      globalBits
+
+    step3 = pullbackFinSumCases {m = cw} {n = cw + (cw + cw)} {global = gw}
+      oldRight
+      (Placement.finSumCases {m = cw} {n = cw + cw} {global = gw} newLeft
+        (Placement.finSumCases {m = cw} {n = cw} {global = gw} newCenter newRight))
+      globalBits
+
+    step4 = pullbackFinSumCases {m = cw} {n = cw + cw} {global = gw}
+      newLeft
+      (Placement.finSumCases {m = cw} {n = cw} {global = gw} newCenter newRight)
+      globalBits
+
+    step5 = pullbackFinSumCases {m = cw} {n = cw} {global = gw}
+      newCenter newRight globalBits
 
 rawSelectedRuleBits_eq_selectorSliceBits :
   ∀ {machine steps cols timeIndex columnIndex}
@@ -237,20 +271,25 @@ rawSelectedRuleBits_eq_selectorSliceBits :
     (start : Raw.WindowStart columnIndex cols)
     (globalBits : CNF.Bits (Trace.GlobalTraceWidth machine steps cols)) →
   Canonical.takeBits (Selector.RuleWidth machine)
-    (Raw.rawSelectedWindowBits timeSlot start globalBits)
+    (Raw.rawSelectedWindowBits {machine} {steps} {cols} timeSlot start globalBits)
   ≡
-  Global.selectorSliceBits timeSlot globalBits
-rawSelectedRuleBits_eq_selectorSliceBits
-    timeSlot start globalBits
-  rewrite pullbackFinSumCases
-    (Global.globalSelectorRename timeSlot)
-    (Raw.sixCellGlobalRename timeSlot start)
-    globalBits
-        | Canonical.takeAppendBits
-            (Global.selectorSliceBits timeSlot globalBits)
-            (sixCellRawBits timeSlot start globalBits)
-  = refl
-
+  Global.selectorSliceBits {machine} {steps} {cols} timeSlot globalBits
+rawSelectedRuleBits_eq_selectorSliceBits {machine} {steps} {cols}
+    timeSlot start globalBits =
+  trans
+    (cong (Canonical.takeBits (Selector.RuleWidth machine))
+      (pullbackFinSumCases
+        {m = Selector.RuleWidth machine}
+        {n = Canonical.WindowWidth machine}
+        {global = Trace.GlobalTraceWidth machine steps cols}
+        (Global.globalSelectorRename {machine} {steps} {cols} timeSlot)
+        (Raw.sixCellGlobalRename {machine} {steps} {cols} timeSlot start)
+        globalBits))
+    (Canonical.takeAppendBits
+      {m = Selector.RuleWidth machine}
+      {n = Canonical.WindowWidth machine}
+      (Global.selectorSliceBits {machine} {steps} {cols} timeSlot globalBits)
+      (sixCellRawBits {machine} {steps} {cols} timeSlot start globalBits))
 
 rawSelectedSixBits_eq_sixCellRawBits :
   ∀ {machine steps cols timeIndex columnIndex}
@@ -258,18 +297,24 @@ rawSelectedSixBits_eq_sixCellRawBits :
     (start : Raw.WindowStart columnIndex cols)
     (globalBits : CNF.Bits (Trace.GlobalTraceWidth machine steps cols)) →
   Canonical.dropBits (Selector.RuleWidth machine)
-    (Raw.rawSelectedWindowBits timeSlot start globalBits)
-  ≡ sixCellRawBits timeSlot start globalBits
-rawSelectedSixBits_eq_sixCellRawBits timeSlot start globalBits
-  rewrite pullbackFinSumCases
-    (Global.globalSelectorRename timeSlot)
-    (Raw.sixCellGlobalRename timeSlot start)
-    globalBits
-        | Canonical.dropAppendBits
-            (Rename.pullbackBits
-              (Global.globalSelectorRename timeSlot) globalBits)
-            (sixCellRawBits timeSlot start globalBits)
-  = refl
+    (Raw.rawSelectedWindowBits {machine} {steps} {cols} timeSlot start globalBits)
+  ≡ sixCellRawBits {machine} {steps} {cols} timeSlot start globalBits
+rawSelectedSixBits_eq_sixCellRawBits {machine} {steps} {cols}
+    timeSlot start globalBits =
+  trans
+    (cong (Canonical.dropBits (Selector.RuleWidth machine))
+      (pullbackFinSumCases
+        {m = Selector.RuleWidth machine}
+        {n = Canonical.WindowWidth machine}
+        {global = Trace.GlobalTraceWidth machine steps cols}
+        (Global.globalSelectorRename {machine} {steps} {cols} timeSlot)
+        (Raw.sixCellGlobalRename {machine} {steps} {cols} timeSlot start)
+        globalBits))
+    (Canonical.dropAppendBits
+      {m = Selector.RuleWidth machine}
+      {n = Canonical.WindowWidth machine}
+      (Global.selectorSliceBits {machine} {steps} {cols} timeSlot globalBits)
+      (sixCellRawBits {machine} {steps} {cols} timeSlot start globalBits))
 
 ------------------------------------------------------------------------
 -- Canonical six-cell decoding is componentwise canonical cell decoding
@@ -336,6 +381,53 @@ decodeCanonicalSixAppend
 -- The exact adjacent decoded-row window
 ------------------------------------------------------------------------
 
+decodedAdjacentWindowFromRows :
+  ∀ {machine cols columnIndex}
+    (stateCoverage :
+      Canonical.EnumerationCoverage (Local.finiteState machine))
+    (symbolCoverage :
+      Canonical.EnumerationCoverage (Local.finiteSymbol machine))
+    (start : Raw.WindowStart columnIndex cols)
+    (beforeBits afterBits : CNF.Bits (Decode.RowBitsWidth machine cols)) →
+  Indexed.IndexedSixCellWindow machine
+    (Decode.decodeRow stateCoverage symbolCoverage cols beforeBits)
+    (Decode.decodeRow stateCoverage symbolCoverage cols afterBits)
+decodedAdjacentWindowFromRows {machine} {cols}
+    stateCoverage symbolCoverage start beforeBits afterBits =
+  record
+    { index = _
+    ; oldLeft =
+        Canonical.decodeCell {machine} stateCoverage symbolCoverage
+          (Slice.blockSliceBits {width = Canonical.CellWidth machine}
+            (Raw.windowLeftSlot start) beforeBits)
+    ; oldCenter =
+        Canonical.decodeCell {machine} stateCoverage symbolCoverage
+          (Slice.blockSliceBits {width = Canonical.CellWidth machine}
+            (Raw.windowCenterSlot start) beforeBits)
+    ; oldRight =
+        Canonical.decodeCell {machine} stateCoverage symbolCoverage
+          (Slice.blockSliceBits {width = Canonical.CellWidth machine}
+            (Raw.windowRightSlot start) beforeBits)
+    ; newLeft =
+        Canonical.decodeCell {machine} stateCoverage symbolCoverage
+          (Slice.blockSliceBits {width = Canonical.CellWidth machine}
+            (Raw.windowLeftSlot start) afterBits)
+    ; newCenter =
+        Canonical.decodeCell {machine} stateCoverage symbolCoverage
+          (Slice.blockSliceBits {width = Canonical.CellWidth machine}
+            (Raw.windowCenterSlot start) afterBits)
+    ; newRight =
+        Canonical.decodeCell {machine} stateCoverage symbolCoverage
+          (Slice.blockSliceBits {width = Canonical.CellWidth machine}
+            (Raw.windowRightSlot start) afterBits)
+    ; oldTriple =
+        decodedRowTriple {machine}
+          stateCoverage symbolCoverage start beforeBits
+    ; newTriple =
+        decodedRowTriple {machine}
+          stateCoverage symbolCoverage start afterBits
+    }
+
 decodedAdjacentWindow :
   ∀ {machine steps cols timeIndex columnIndex}
     (stateCoverage :
@@ -347,53 +439,18 @@ decodedAdjacentWindow :
     (globalBits : CNF.Bits (Trace.GlobalTraceWidth machine steps cols)) →
   Indexed.IndexedSixCellWindow machine
     (Decode.decodeRow stateCoverage symbolCoverage cols
-      (Global.rowSliceBits
+      (Global.rowSliceBits {machine} {steps} {cols}
         (Global.sameSlotInSucc timeSlot) globalBits))
     (Decode.decodeRow stateCoverage symbolCoverage cols
-      (Global.rowSliceBits
+      (Global.rowSliceBits {machine} {steps} {cols}
         (Global.nextSlotInSucc timeSlot) globalBits))
-decodedAdjacentWindow
+decodedAdjacentWindow {machine} {steps} {cols}
     stateCoverage symbolCoverage timeSlot start globalBits =
-  record
-    { Indexed.index = _
-    ; Indexed.oldLeft =
-        Canonical.decodeCell stateCoverage symbolCoverage
-          (Slice.blockSliceBits
-            (Raw.windowLeftSlot start) beforeBits)
-    ; Indexed.oldCenter =
-        Canonical.decodeCell stateCoverage symbolCoverage
-          (Slice.blockSliceBits
-            (Raw.windowCenterSlot start) beforeBits)
-    ; Indexed.oldRight =
-        Canonical.decodeCell stateCoverage symbolCoverage
-          (Slice.blockSliceBits
-            (Raw.windowRightSlot start) beforeBits)
-    ; Indexed.newLeft =
-        Canonical.decodeCell stateCoverage symbolCoverage
-          (Slice.blockSliceBits
-            (Raw.windowLeftSlot start) afterBits)
-    ; Indexed.newCenter =
-        Canonical.decodeCell stateCoverage symbolCoverage
-          (Slice.blockSliceBits
-            (Raw.windowCenterSlot start) afterBits)
-    ; Indexed.newRight =
-        Canonical.decodeCell stateCoverage symbolCoverage
-          (Slice.blockSliceBits
-            (Raw.windowRightSlot start) afterBits)
-    ; Indexed.oldTriple =
-        decodedRowTriple
-          stateCoverage symbolCoverage start beforeBits
-    ; Indexed.newTriple =
-        decodedRowTriple
-          stateCoverage symbolCoverage start afterBits
-    }
-  where
-    beforeBits =
-      Global.rowSliceBits
-        (Global.sameSlotInSucc timeSlot) globalBits
-    afterBits =
-      Global.rowSliceBits
-        (Global.nextSlotInSucc timeSlot) globalBits
+  decodedAdjacentWindowFromRows stateCoverage symbolCoverage start
+    (Global.rowSliceBits {machine} {steps} {cols}
+      (Global.sameSlotInSucc timeSlot) globalBits)
+    (Global.rowSliceBits {machine} {steps} {cols}
+      (Global.nextSlotInSucc timeSlot) globalBits)
 
 decodedRawWindowEqualsAdjacentRowsWindow :
   ∀ {machine steps cols timeIndex columnIndex}
@@ -406,58 +463,71 @@ decodedRawWindowEqualsAdjacentRowsWindow :
     (start : Raw.WindowStart columnIndex cols)
     (globalBits : CNF.Bits (Trace.GlobalTraceWidth machine steps cols)) →
   Semantic.decodedSelectedWindow stateCoverage symbolCoverage
-    (Raw.rawSelectedWindowBits timeSlot start globalBits)
+    (Raw.rawSelectedWindowBits {machine} {steps} {cols} timeSlot start globalBits)
   ≡
   Indexed.forgetIndex
-    (decodedAdjacentWindow
+    (decodedAdjacentWindow {machine} {steps} {cols}
       stateCoverage symbolCoverage timeSlot start globalBits)
 decodedRawWindowEqualsAdjacentRowsWindow
-    {machine} stateCoverage symbolCoverage nonempty
-    timeSlot start globalBits
-  rewrite rawSelectedSixBits_eq_sixCellRawBits
-    timeSlot start globalBits
-        | sixCellRawBits_decompose
-            timeSlot start globalBits
-        | globalCellBits_eq_rowBlockSlice
-            (Global.sameSlotInSucc timeSlot)
-            (Raw.windowLeftSlot start) globalBits
-        | globalCellBits_eq_rowBlockSlice
-            (Global.sameSlotInSucc timeSlot)
-            (Raw.windowCenterSlot start) globalBits
-        | globalCellBits_eq_rowBlockSlice
-            (Global.sameSlotInSucc timeSlot)
-            (Raw.windowRightSlot start) globalBits
-        | globalCellBits_eq_rowBlockSlice
-            (Global.nextSlotInSucc timeSlot)
-            (Raw.windowLeftSlot start) globalBits
-        | globalCellBits_eq_rowBlockSlice
-            (Global.nextSlotInSucc timeSlot)
-            (Raw.windowCenterSlot start) globalBits
-        | globalCellBits_eq_rowBlockSlice
-            (Global.nextSlotInSucc timeSlot)
-            (Raw.windowRightSlot start) globalBits
-        | decodeCanonicalSixAppend
-            stateCoverage symbolCoverage
-            (Slice.blockSliceBits
-              (Raw.windowLeftSlot start) beforeBits)
-            (Slice.blockSliceBits
-              (Raw.windowCenterSlot start) beforeBits)
-            (Slice.blockSliceBits
-              (Raw.windowRightSlot start) beforeBits)
-            (Slice.blockSliceBits
-              (Raw.windowLeftSlot start) afterBits)
-            (Slice.blockSliceBits
-              (Raw.windowCenterSlot start) afterBits)
-            (Slice.blockSliceBits
-              (Raw.windowRightSlot start) afterBits)
-  = refl
+    {machine} {steps} {cols} stateCoverage symbolCoverage nonempty
+    timeSlot start globalBits =
+  trans eq1 (trans eq2 (trans eq3 eq4))
   where
+    codec =
+      Canonical.canonicalWindowCodec
+        machine stateCoverage symbolCoverage
+
     beforeBits =
-      Global.rowSliceBits
+      Global.rowSliceBits {machine} {steps} {cols}
         (Global.sameSlotInSucc timeSlot) globalBits
     afterBits =
-      Global.rowSliceBits
+      Global.rowSliceBits {machine} {steps} {cols}
         (Global.nextSlotInSucc timeSlot) globalBits
+
+    b1 = Slice.blockSliceBits {width = Canonical.CellWidth machine} (Raw.windowLeftSlot start) beforeBits
+    b2 = Slice.blockSliceBits {width = Canonical.CellWidth machine} (Raw.windowCenterSlot start) beforeBits
+    b3 = Slice.blockSliceBits {width = Canonical.CellWidth machine} (Raw.windowRightSlot start) beforeBits
+    b4 = Slice.blockSliceBits {width = Canonical.CellWidth machine} (Raw.windowLeftSlot start) afterBits
+    b5 = Slice.blockSliceBits {width = Canonical.CellWidth machine} (Raw.windowCenterSlot start) afterBits
+    b6 = Slice.blockSliceBits {width = Canonical.CellWidth machine} (Raw.windowRightSlot start) afterBits
+
+    p1 = globalCellBits_eq_rowBlockSlice {machine} {steps} {cols}
+      (Global.sameSlotInSucc timeSlot) (Raw.windowLeftSlot start) globalBits
+    p2 = globalCellBits_eq_rowBlockSlice {machine} {steps} {cols}
+      (Global.sameSlotInSucc timeSlot) (Raw.windowCenterSlot start) globalBits
+    p3 = globalCellBits_eq_rowBlockSlice {machine} {steps} {cols}
+      (Global.sameSlotInSucc timeSlot) (Raw.windowRightSlot start) globalBits
+    p4 = globalCellBits_eq_rowBlockSlice {machine} {steps} {cols}
+      (Global.nextSlotInSucc timeSlot) (Raw.windowLeftSlot start) globalBits
+    p5 = globalCellBits_eq_rowBlockSlice {machine} {steps} {cols}
+      (Global.nextSlotInSucc timeSlot) (Raw.windowCenterSlot start) globalBits
+    p6 = globalCellBits_eq_rowBlockSlice {machine} {steps} {cols}
+      (Global.nextSlotInSucc timeSlot) (Raw.windowRightSlot start) globalBits
+
+    bitsEq =
+      cong₂ Canonical.appendBits p1
+        (cong₂ Canonical.appendBits p2
+          (cong₂ Canonical.appendBits p3
+            (cong₂ Canonical.appendBits p4
+              (cong₂ Canonical.appendBits p5 p6))))
+
+    eq1 =
+      cong (Window.decode codec)
+        (rawSelectedSixBits_eq_sixCellRawBits {machine} {steps} {cols}
+          timeSlot start globalBits)
+
+    eq2 =
+      cong (Window.decode codec)
+        (sixCellRawBits_decompose {machine} {steps} {cols}
+          timeSlot start globalBits)
+
+    eq3 =
+      cong (Window.decode codec) bitsEq
+
+    eq4 =
+      decodeCanonicalSixAppend {machine = machine}
+        stateCoverage symbolCoverage
+        b1 b2 b3 b4 b5 b6
 
 record DecodedWindowSameObjectReceipt
     (machine : Local.ConcreteTapeMachine) : Set₁ where
