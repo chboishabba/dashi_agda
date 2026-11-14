@@ -75,7 +75,7 @@ observationCollisionCreatesIdentificationDefect :
   StrategicIdentificationDefect S query
 observationCollisionCreatesIdentificationDefect {S} {query} witness =
   Fibre.sameObservationDifferentAnswerGivesDefect
-    (Fibre.same-observation-different-consumer-answer
+    (Fibre.sameObservationDifferentConsumerAnswer
       (leftModel witness)
       (rightModel witness)
       (sameObservation witness)
@@ -207,3 +207,5 @@ canonicalStrategicExperimentalIdentificationBoundary :
 canonicalStrategicExperimentalIdentificationBoundary =
   strategic-experimental-identification-boundary
     true true true true false false
+
+open StrategicExperimentalIdentificationBoundary public
