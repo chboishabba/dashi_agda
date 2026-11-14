@@ -1,0 +1,26 @@
+module DASHI.Analysis.RiemannG21LeanScaledCothReceiptRegression where
+
+import DASHI.Analysis.RiemannG21LeanScaledCothReceiptBoundary as Receipt
+
+open import DASHI.Core.Prelude
+
+regressionLeanCandidateSourceWritten :
+  Receipt.LeanScaledCothReceiptBoundary.scaledCothMonotonicitySourceWritten
+    Receipt.canonicalLeanScaledCothReceiptBoundary ≡ true
+regressionLeanCandidateSourceWritten =
+  Receipt.LeanScaledCothReceiptBoundary.scaledCothMonotonicitySourceWrittenIsTrue
+    Receipt.canonicalLeanScaledCothReceiptBoundary
+
+regressionNotImportedAsAgdaProof :
+  Receipt.LeanScaledCothReceiptBoundary.scaledCothMonotonicityImportedIntoAgda
+    Receipt.canonicalLeanScaledCothReceiptBoundary ≡ false
+regressionNotImportedAsAgdaProof =
+  Receipt.LeanScaledCothReceiptBoundary.scaledCothMonotonicityImportedIntoAgdaIsFalse
+    Receipt.canonicalLeanScaledCothReceiptBoundary
+
+regressionContinuumSignStillOpen :
+  Receipt.LeanScaledCothReceiptBoundary.continuumOddMomentSignPaid
+    Receipt.canonicalLeanScaledCothReceiptBoundary ≡ false
+regressionContinuumSignStillOpen =
+  Receipt.LeanScaledCothReceiptBoundary.continuumOddMomentSignPaidIsFalse
+    Receipt.canonicalLeanScaledCothReceiptBoundary
