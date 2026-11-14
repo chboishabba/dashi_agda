@@ -54,8 +54,8 @@ einstein00FiveSpatialMetric u = solve (u ∷ [])
 
 einsteinSpatialFourDirections :
   ∀ u →
-  - ((+ 3) * HubbleDerivative5 u)
-  - ((+ 6) * (Hubble5 u * Hubble5 u))
+  (- ((+ 3) * HubbleDerivative5 u))
+    + (- ((+ 6) * (Hubble5 u * Hubble5 u)))
     ≡ scalarPressure5 u
 einsteinSpatialFourDirections u = solve (u ∷ [])
 
