@@ -16,6 +16,7 @@ import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3HermitianScalingLaws as ScalingLaws
 import DASHI.Physics.Closure.NSTriadKNComplex3AlgebraLaws as Algebra
 import DASHI.Physics.Closure.NSTriadKNComplex3HermitianAlgebraProgram as Hermitian
+import DASHI.Physics.Closure.NSTriadKNComplex3HermitianAdditiveLaws as Additive
 
 ------------------------------------------------------------------------
 -- The minimal real carrier used by the literal C^3 construction already
@@ -384,86 +385,24 @@ complex3ScaleNegativeOne (C3.complex3 vx vy vz) =
 bilinearDotCommutative :
   ∀ {r} {F : C3.RealField r} (u v : C3.Complex3 F) →
   C3.bilinearDot3 u v ≡ C3.bilinearDot3 v u
-bilinearDotCommutative
-  (C3.complex3 ux uy uz) (C3.complex3 vx vy vz) =
-  trans
-    (cong₂ C3.complexAdd
-      (cong₂ C3.complexAdd
-        (complexMultiplyCommutative ux vx)
-        (complexMultiplyCommutative uy vy))
-      (complexMultiplyCommutative uz vz))
-    (cong
-      (λ pair → C3.complexAdd pair (C3.complexMultiply vz uz))
-      (complexAddCommutative
-        (C3.complexMultiply vx ux)
-        (C3.complexMultiply vy uy)))
+bilinearDotCommutative = Algebra.bilinearDot3Commutative
 
 bilinearDotConjugate :
   ∀ {r} {F : C3.RealField r} (u v : C3.Complex3 F) →
   C3.bilinearDot3 (C3.complex3Conjugate u) (C3.complex3Conjugate v)
   ≡ C3.complexConjugate (C3.bilinearDot3 u v)
-bilinearDotConjugate {F = F}
-  (C3.complex3 (C3.complex uxr uxi) (C3.complex uyr uyi)
-    (C3.complex uzr uzi))
-  (C3.complex3 (C3.complex vxr vxi) (C3.complex vyr vyi)
-    (C3.complex vzr vzi)) =
-  complexExt
-    (P.R.solve 12
-      (λ uxr uxi uyr uyi uzr uzi vxr vxi vyr vyi vzr vzi →
-        ((P.multiplyReal uxr (P.R.⊝ uxi) vxr (P.R.⊝ vxi)
-          P.R.⊕ P.multiplyReal uyr (P.R.⊝ uyi) vyr (P.R.⊝ vyi))
-          P.R.⊕ P.multiplyReal uzr (P.R.⊝ uzi) vzr (P.R.⊝ vzi))
-        P.R.⊜
-        ((P.multiplyReal uxr uxi vxr vxi
-          P.R.⊕ P.multiplyReal uyr uyi vyr vyi)
-          P.R.⊕ P.multiplyReal uzr uzi vzr vzi))
-      refl uxr uxi uyr uyi uzr uzi vxr vxi vyr vyi vzr vzi)
-    (P.R.solve 12
-      (λ uxr uxi uyr uyi uzr uzi vxr vxi vyr vyi vzr vzi →
-        ((P.multiplyImaginary uxr (P.R.⊝ uxi) vxr (P.R.⊝ vxi)
-          P.R.⊕ P.multiplyImaginary uyr (P.R.⊝ uyi) vyr (P.R.⊝ vyi))
-          P.R.⊕ P.multiplyImaginary uzr (P.R.⊝ uzi) vzr (P.R.⊝ vzi))
-        P.R.⊜
-        P.R.⊝
-          ((P.multiplyImaginary uxr uxi vxr vxi
-            P.R.⊕ P.multiplyImaginary uyr uyi vyr vyi)
-            P.R.⊕ P.multiplyImaginary uzr uzi vzr vzi))
-      refl uxr uxi uyr uyi uzr uzi vxr vxi vyr vyi vzr vzi)
-  where module P = Polynomial F
+bilinearDotConjugate u v = sym (Hermitian.bilinearDot3Conjugate u v)
 
 bilinearDotNegateRight :
   ∀ {r} {F : C3.RealField r} (u v : C3.Complex3 F) →
   C3.bilinearDot3 u (C3.complex3Negate v)
   ≡ C3.complexNegate (C3.bilinearDot3 u v)
-bilinearDotNegateRight {F = F}
-  (C3.complex3 (C3.complex uxr uxi) (C3.complex uyr uyi)
-    (C3.complex uzr uzi))
-  (C3.complex3 (C3.complex vxr vxi) (C3.complex vyr vyi)
-    (C3.complex vzr vzi)) =
-  complexExt
-    (P.R.solve 12
-      (λ uxr uxi uyr uyi uzr uzi vxr vxi vyr vyi vzr vzi →
-        ((P.multiplyReal uxr uxi (P.R.⊝ vxr) (P.R.⊝ vxi)
-          P.R.⊕ P.multiplyReal uyr uyi (P.R.⊝ vyr) (P.R.⊝ vyi))
-          P.R.⊕ P.multiplyReal uzr uzi (P.R.⊝ vzr) (P.R.⊝ vzi))
-        P.R.⊜
-        P.R.⊝
-          ((P.multiplyReal uxr uxi vxr vxi
-            P.R.⊕ P.multiplyReal uyr uyi vyr vyi)
-            P.R.⊕ P.multiplyReal uzr uzi vzr vzi))
-      refl uxr uxi uyr uyi uzr uzi vxr vxi vyr vyi vzr vzi)
-    (P.R.solve 12
-      (λ uxr uxi uyr uyi uzr uzi vxr vxi vyr vyi vzr vzi →
-        ((P.multiplyImaginary uxr uxi (P.R.⊝ vxr) (P.R.⊝ vxi)
-          P.R.⊕ P.multiplyImaginary uyr uyi (P.R.⊝ vyr) (P.R.⊝ vyi))
-          P.R.⊕ P.multiplyImaginary uzr uzi (P.R.⊝ vzr) (P.R.⊝ vzi))
-        P.R.⊜
-        P.R.⊝
-          ((P.multiplyImaginary uxr uxi vxr vxi
-            P.R.⊕ P.multiplyImaginary uyr uyi vyr vyi)
-            P.R.⊕ P.multiplyImaginary uzr uzi vzr vzi))
-      refl uxr uxi uyr uyi uzr uzi vxr vxi vyr vyi vzr vzi)
-  where module P = Polynomial F
+bilinearDotNegateRight {F = F} u v =
+  trans
+    (cong (C3.bilinearDot3 u) (sym (Additive.complex3ScaleMinusOne v)))
+    (trans
+      (ScalingLaws.bilinearDot3ScaleRight (Additive.minusOne F) u v)
+      (Additive.complexMultiplyMinusOneLeft (C3.bilinearDot3 u v)))
 
 hermitianAddRight :
   ∀ {r} {F : C3.RealField r} (u v w : C3.Complex3 F) →
@@ -471,51 +410,7 @@ hermitianAddRight :
   ≡ C3.complexAdd
       (C3.hermitianPairing3 u v)
       (C3.hermitianPairing3 u w)
-hermitianAddRight {F = F}
-  (C3.complex3 (C3.complex uxr uxi) (C3.complex uyr uyi)
-    (C3.complex uzr uzi))
-  (C3.complex3 (C3.complex vxr vxi) (C3.complex vyr vyi)
-    (C3.complex vzr vzi))
-  (C3.complex3 (C3.complex wxr wxi) (C3.complex wyr wyi)
-    (C3.complex wzr wzi)) =
-  complexExt
-    (P.R.solve 18
-      (λ uxr uxi uyr uyi uzr uzi
-         vxr vxi vyr vyi vzr vzi wxr wxi wyr wyi wzr wzi →
-        ((P.multiplyReal uxr (P.R.⊝ uxi) (vxr P.R.⊕ wxr) (vxi P.R.⊕ wxi)
-          P.R.⊕
-          P.multiplyReal uyr (P.R.⊝ uyi) (vyr P.R.⊕ wyr) (vyi P.R.⊕ wyi))
-          P.R.⊕
-          P.multiplyReal uzr (P.R.⊝ uzi) (vzr P.R.⊕ wzr) (vzi P.R.⊕ wzi))
-        P.R.⊜
-        (((P.multiplyReal uxr (P.R.⊝ uxi) vxr vxi
-          P.R.⊕ P.multiplyReal uyr (P.R.⊝ uyi) vyr vyi)
-          P.R.⊕ P.multiplyReal uzr (P.R.⊝ uzi) vzr vzi)
-          P.R.⊕
-        ((P.multiplyReal uxr (P.R.⊝ uxi) wxr wxi
-          P.R.⊕ P.multiplyReal uyr (P.R.⊝ uyi) wyr wyi)
-          P.R.⊕ P.multiplyReal uzr (P.R.⊝ uzi) wzr wzi)))
-      refl uxr uxi uyr uyi uzr uzi
-        vxr vxi vyr vyi vzr vzi wxr wxi wyr wyi wzr wzi)
-    (P.R.solve 18
-      (λ uxr uxi uyr uyi uzr uzi
-         vxr vxi vyr vyi vzr vzi wxr wxi wyr wyi wzr wzi →
-        ((P.multiplyImaginary uxr (P.R.⊝ uxi) (vxr P.R.⊕ wxr) (vxi P.R.⊕ wxi)
-          P.R.⊕
-          P.multiplyImaginary uyr (P.R.⊝ uyi) (vyr P.R.⊕ wyr) (vyi P.R.⊕ wyi))
-          P.R.⊕
-          P.multiplyImaginary uzr (P.R.⊝ uzi) (vzr P.R.⊕ wzr) (vzi P.R.⊕ wzi))
-        P.R.⊜
-        (((P.multiplyImaginary uxr (P.R.⊝ uxi) vxr vxi
-          P.R.⊕ P.multiplyImaginary uyr (P.R.⊝ uyi) vyr vyi)
-          P.R.⊕ P.multiplyImaginary uzr (P.R.⊝ uzi) vzr vzi)
-          P.R.⊕
-        ((P.multiplyImaginary uxr (P.R.⊝ uxi) wxr wxi
-          P.R.⊕ P.multiplyImaginary uyr (P.R.⊝ uyi) wyr wyi)
-          P.R.⊕ P.multiplyImaginary uzr (P.R.⊝ uzi) wzr wzi)))
-      refl uxr uxi uyr uyi uzr uzi
-        vxr vxi vyr vyi vzr vzi wxr wxi wyr wyi wzr wzi)
-  where module P = Polynomial F
+hermitianAddRight = Additive.hermitianPairingAddRight
 
 bilinearDotAddRight :
   ∀ {r} {F : C3.RealField r} (u v w : C3.Complex3 F) →
@@ -523,92 +418,20 @@ bilinearDotAddRight :
   ≡ C3.complexAdd
       (C3.bilinearDot3 u v)
       (C3.bilinearDot3 u w)
-bilinearDotAddRight u v w =
-  trans
-    (cong
-      (λ first → C3.bilinearDot3 first (C3.complex3Add v w))
-      (sym (C3.complex3ConjugateInvolutive u)))
-    (trans
-      (hermitianAddRight (C3.complex3Conjugate u) v w)
-      (cong₂ C3.complexAdd
-        (cong
-          (λ first → C3.bilinearDot3 first v)
-          (C3.complex3ConjugateInvolutive u))
-        (cong
-          (λ first → C3.bilinearDot3 first w)
-          (C3.complex3ConjugateInvolutive u))))
+bilinearDotAddRight = Algebra.bilinearDot3RightAdd
 
 hermitianScaleRight :
   ∀ {r} {F : C3.RealField r}
     (u v : C3.Complex3 F) (a : C3.Complex F) →
   C3.hermitianPairing3 u (C3.complex3Scale a v)
   ≡ C3.complexMultiply a (C3.hermitianPairing3 u v)
-hermitianScaleRight {F = F}
-  (C3.complex3 (C3.complex uxr uxi) (C3.complex uyr uyi)
-    (C3.complex uzr uzi))
-  (C3.complex3 (C3.complex vxr vxi) (C3.complex vyr vyi)
-    (C3.complex vzr vzi))
-  (C3.complex ar ai) =
-  complexExt
-    (P.R.solve 14
-      (λ uxr uxi uyr uyi uzr uzi
-         vxr vxi vyr vyi vzr vzi ar ai →
-        ((P.multiplyReal uxr (P.R.⊝ uxi) (P.multiplyReal ar ai vxr vxi)
-            (P.multiplyImaginary ar ai vxr vxi)
-          P.R.⊕
-          P.multiplyReal uyr (P.R.⊝ uyi) (P.multiplyReal ar ai vyr vyi)
-            (P.multiplyImaginary ar ai vyr vyi))
-          P.R.⊕
-          P.multiplyReal uzr (P.R.⊝ uzi) (P.multiplyReal ar ai vzr vzi)
-            (P.multiplyImaginary ar ai vzr vzi))
-        P.R.⊜
-        P.multiplyReal ar ai
-          ((P.multiplyReal uxr (P.R.⊝ uxi) vxr vxi
-            P.R.⊕ P.multiplyReal uyr (P.R.⊝ uyi) vyr vyi)
-            P.R.⊕ P.multiplyReal uzr (P.R.⊝ uzi) vzr vzi)
-          ((P.multiplyImaginary uxr (P.R.⊝ uxi) vxr vxi
-            P.R.⊕ P.multiplyImaginary uyr (P.R.⊝ uyi) vyr vyi)
-            P.R.⊕ P.multiplyImaginary uzr (P.R.⊝ uzi) vzr vzi))
-      refl uxr uxi uyr uyi uzr uzi
-        vxr vxi vyr vyi vzr vzi ar ai)
-    (P.R.solve 14
-      (λ uxr uxi uyr uyi uzr uzi
-         vxr vxi vyr vyi vzr vzi ar ai →
-        ((P.multiplyImaginary uxr (P.R.⊝ uxi) (P.multiplyReal ar ai vxr vxi)
-            (P.multiplyImaginary ar ai vxr vxi)
-          P.R.⊕
-          P.multiplyImaginary uyr (P.R.⊝ uyi) (P.multiplyReal ar ai vyr vyi)
-            (P.multiplyImaginary ar ai vyr vyi))
-          P.R.⊕
-          P.multiplyImaginary uzr (P.R.⊝ uzi) (P.multiplyReal ar ai vzr vzi)
-            (P.multiplyImaginary ar ai vzr vzi))
-        P.R.⊜
-        P.multiplyImaginary ar ai
-          ((P.multiplyReal uxr (P.R.⊝ uxi) vxr vxi
-            P.R.⊕ P.multiplyReal uyr (P.R.⊝ uyi) vyr vyi)
-            P.R.⊕ P.multiplyReal uzr (P.R.⊝ uzi) vzr vzi)
-          ((P.multiplyImaginary uxr (P.R.⊝ uxi) vxr vxi
-            P.R.⊕ P.multiplyImaginary uyr (P.R.⊝ uyi) vyr vyi)
-            P.R.⊕ P.multiplyImaginary uzr (P.R.⊝ uzi) vzr vzi))
-      refl uxr uxi uyr uyi uzr uzi
-        vxr vxi vyr vyi vzr vzi ar ai)
-  where module P = Polynomial F
+hermitianScaleRight u v a = ScalingLaws.hermitianPairingScaleRight a u v
 
 hermitianNegateRight :
   ∀ {r} {F : C3.RealField r} (u v : C3.Complex3 F) →
   C3.hermitianPairing3 u (C3.complex3Negate v)
   ≡ C3.complexNegate (C3.hermitianPairing3 u v)
-hermitianNegateRight u v =
-  trans
-    (cong (C3.hermitianPairing3 u)
-      (sym (complex3ScaleNegativeOne v)))
-    (trans
-      (hermitianScaleRight u v (C3.complexNegate (C3.complexOne _)))
-      (trans
-        (complexNegateMultiplyLeft
-          (C3.complexOne _) (C3.hermitianPairing3 u v))
-        (cong C3.complexNegate
-          (complexOneMultiply (C3.hermitianPairing3 u v)))))
+hermitianNegateRight = Additive.hermitianPairingNegateRight
 
 hermitianAddLeft :
   ∀ {r} {F : C3.RealField r} (u v w : C3.Complex3 F) →
@@ -616,69 +439,7 @@ hermitianAddLeft :
   ≡ C3.complexAdd
       (C3.hermitianPairing3 u w)
       (C3.hermitianPairing3 v w)
-hermitianAddLeft {F = F} u v w =
-  trans
-    conjugateAddStep
-    dotAddStep
-  where
-  conjugateVectorAdd :
-    ∀ {r} {F : C3.RealField r} (a b : C3.Complex3 F) →
-    C3.complex3Conjugate (C3.complex3Add a b)
-    ≡ C3.complex3Add (C3.complex3Conjugate a) (C3.complex3Conjugate b)
-  conjugateVectorAdd
-    (C3.complex3 (C3.complex axr axi) (C3.complex ayr ayi)
-      (C3.complex azr azi))
-    (C3.complex3 (C3.complex bxr bxi) (C3.complex byr byi)
-      (C3.complex bzr bzi)) =
-    complex3Ext
-      (complexExt refl
-        (P.R.solve 2
-          (λ a b → P.R.⊝ (a P.R.⊕ b) P.R.⊜
-                    ((P.R.⊝ a) P.R.⊕ (P.R.⊝ b))) refl axi bxi))
-      (complexExt refl
-        (P.R.solve 2
-          (λ a b → P.R.⊝ (a P.R.⊕ b) P.R.⊜
-                    ((P.R.⊝ a) P.R.⊕ (P.R.⊝ b))) refl ayi byi))
-      (complexExt refl
-        (P.R.solve 2
-          (λ a b → P.R.⊝ (a P.R.⊕ b) P.R.⊜
-                    ((P.R.⊝ a) P.R.⊕ (P.R.⊝ b))) refl azi bzi))
-    where module P = Polynomial F
-
-  conjugateAddStep :
-    C3.hermitianPairing3 (C3.complex3Add u v) w
-    ≡ C3.bilinearDot3
-        (C3.complex3Add
-          (C3.complex3Conjugate u)
-          (C3.complex3Conjugate v))
-        w
-  conjugateAddStep =
-    cong (λ x → C3.bilinearDot3 x w) (conjugateVectorAdd u v)
-
-  dotAddStep :
-    C3.bilinearDot3
-      (C3.complex3Add
-        (C3.complex3Conjugate u)
-        (C3.complex3Conjugate v))
-      w
-    ≡ C3.complexAdd
-        (C3.hermitianPairing3 u w)
-        (C3.hermitianPairing3 v w)
-  dotAddStep =
-    trans
-      (bilinearDotCommutative
-        (C3.complex3Add
-          (C3.complex3Conjugate u)
-          (C3.complex3Conjugate v))
-        w)
-      (trans
-        (bilinearDotAddRight
-          w
-          (C3.complex3Conjugate u)
-          (C3.complex3Conjugate v))
-        (cong₂ C3.complexAdd
-          (bilinearDotCommutative w (C3.complex3Conjugate u))
-          (bilinearDotCommutative w (C3.complex3Conjugate v))))
+hermitianAddLeft = Additive.hermitianPairingAddLeft
 
 hermitianScaleLeft :
   ∀ {r} {F : C3.RealField r}
@@ -687,105 +448,13 @@ hermitianScaleLeft :
   ≡ C3.complexMultiply
       (C3.complexConjugate a)
       (C3.hermitianPairing3 u v)
-hermitianScaleLeft {F = F}
-  (C3.complex ar ai)
-  (C3.complex3 (C3.complex uxr uxi) (C3.complex uyr uyi)
-    (C3.complex uzr uzi))
-  (C3.complex3 (C3.complex vxr vxi) (C3.complex vyr vyi)
-    (C3.complex vzr vzi)) =
-  complexExt
-    (P.R.solve 14
-      (λ ar ai uxr uxi uyr uyi uzr uzi
-         vxr vxi vyr vyi vzr vzi →
-        ((P.multiplyReal
-            (P.multiplyReal ar (P.R.⊝ ai) uxr (P.R.⊝ uxi))
-            (P.R.⊝
-              (P.multiplyImaginary ar (P.R.⊝ ai) uxr (P.R.⊝ uxi)))
-            vxr vxi
-          P.R.⊕
-          P.multiplyReal
-            (P.multiplyReal ar (P.R.⊝ ai) uyr (P.R.⊝ uyi))
-            (P.R.⊝
-              (P.multiplyImaginary ar (P.R.⊝ ai) uyr (P.R.⊝ uyi)))
-            vyr vyi)
-          P.R.⊕
-          P.multiplyReal
-            (P.multiplyReal ar (P.R.⊝ ai) uzr (P.R.⊝ uzi))
-            (P.R.⊝
-              (P.multiplyImaginary ar (P.R.⊝ ai) uzr (P.R.⊝ uzi)))
-            vzr vzi)
-        P.R.⊜
-        P.multiplyReal ar (P.R.⊝ ai)
-          ((P.multiplyReal uxr (P.R.⊝ uxi) vxr vxi
-            P.R.⊕ P.multiplyReal uyr (P.R.⊝ uyi) vyr vyi)
-            P.R.⊕ P.multiplyReal uzr (P.R.⊝ uzi) vzr vzi)
-          ((P.multiplyImaginary uxr (P.R.⊝ uxi) vxr vxi
-            P.R.⊕ P.multiplyImaginary uyr (P.R.⊝ uyi) vyr vyi)
-            P.R.⊕ P.multiplyImaginary uzr (P.R.⊝ uzi) vzr vzi))
-      refl ar ai uxr uxi uyr uyi uzr uzi
-        vxr vxi vyr vyi vzr vzi)
-    (P.R.solve 14
-      (λ ar ai uxr uxi uyr uyi uzr uzi
-         vxr vxi vyr vyi vzr vzi →
-        ((P.multiplyImaginary
-            (P.multiplyReal ar (P.R.⊝ ai) uxr (P.R.⊝ uxi))
-            (P.R.⊝
-              (P.multiplyImaginary ar (P.R.⊝ ai) uxr (P.R.⊝ uxi)))
-            vxr vxi
-          P.R.⊕
-          P.multiplyImaginary
-            (P.multiplyReal ar (P.R.⊝ ai) uyr (P.R.⊝ uyi))
-            (P.R.⊝
-              (P.multiplyImaginary ar (P.R.⊝ ai) uyr (P.R.⊝ uyi)))
-            vyr vyi)
-          P.R.⊕
-          P.multiplyImaginary
-            (P.multiplyReal ar (P.R.⊝ ai) uzr (P.R.⊝ uzi))
-            (P.R.⊝
-              (P.multiplyImaginary ar (P.R.⊝ ai) uzr (P.R.⊝ uzi)))
-            vzr vzi)
-        P.R.⊜
-        P.multiplyImaginary ar (P.R.⊝ ai)
-          ((P.multiplyReal uxr (P.R.⊝ uxi) vxr vxi
-            P.R.⊕ P.multiplyReal uyr (P.R.⊝ uyi) vyr vyi)
-            P.R.⊕ P.multiplyReal uzr (P.R.⊝ uzi) vzr vzi)
-          ((P.multiplyImaginary uxr (P.R.⊝ uxi) vxr vxi
-            P.R.⊕ P.multiplyImaginary uyr (P.R.⊝ uyi) vyr vyi)
-            P.R.⊕ P.multiplyImaginary uzr (P.R.⊝ uzi) vzr vzi))
-      refl ar ai uxr uxi uyr uyi uzr uzi
-        vxr vxi vyr vyi vzr vzi)
-  where module P = Polynomial F
+hermitianScaleLeft = ScalingLaws.hermitianPairingScaleLeft
 
 hermitianNegateLeft :
   ∀ {r} {F : C3.RealField r} (u v : C3.Complex3 F) →
   C3.hermitianPairing3 (C3.complex3Negate u) v
   ≡ C3.complexNegate (C3.hermitianPairing3 u v)
-hermitianNegateLeft u v =
-  trans
-    (cong (λ x → C3.hermitianPairing3 x v)
-      (sym (complex3ScaleNegativeOne u)))
-    (trans
-      (hermitianScaleLeft (C3.complexNegate (C3.complexOne _)) u v)
-      scalarIdentity)
-  where
-  scalarIdentity :
-    C3.complexMultiply
-      (C3.complexConjugate (C3.complexNegate (C3.complexOne _)))
-      (C3.hermitianPairing3 u v)
-    ≡ C3.complexNegate (C3.hermitianPairing3 u v)
-  scalarIdentity =
-    trans
-      (cong
-        (λ scalar → C3.complexMultiply scalar (C3.hermitianPairing3 u v))
-        (trans
-          (complexConjugateNegate (C3.complexOne _))
-          (cong C3.complexNegate
-            (C3.realEmbedConjugate _ (C3.one _)))))
-      (trans
-        (complexNegateMultiplyLeft
-          (C3.complexOne _) (C3.hermitianPairing3 u v))
-        (cong C3.complexNegate
-          (complexOneMultiply (C3.hermitianPairing3 u v))))
+hermitianNegateLeft = Additive.hermitianPairingNegateLeft
 
 hermitianConjugatePair :
   ∀ {r} {F : C3.RealField r} (u v : C3.Complex3 F) →
@@ -806,13 +475,7 @@ hermitianConjugateSymmetry :
   C3.hermitianPairing3 v u
   ≡ C3.complexConjugate (C3.hermitianPairing3 u v)
 hermitianConjugateSymmetry u v =
-  trans
-    (bilinearDotCommutative (C3.complex3Conjugate v) u)
-    (trans
-      (cong
-        (λ first → C3.bilinearDot3 first (C3.complex3Conjugate v))
-        (sym (C3.complex3ConjugateInvolutive u)))
-      (bilinearDotConjugate (C3.complex3Conjugate u) v))
+  sym (Hermitian.hermitianPairingConjugateSymmetric u v)
 
 ------------------------------------------------------------------------
 -- Literal Leray identities.  The self-adjoint theorem is proved for the
@@ -887,40 +550,37 @@ rankOneCorrectionSymmetry :
       (C3.complexConjugate
         (C3.complexMultiply (C3.realEmbed F c) dx))
       dy)
-rankOneCorrectionSymmetry {F = F} c
-  (C3.complex dxr dxi) (C3.complex dyr dyi) =
-  complexExt
-    (P.R.solve 5
-      (λ c dxr dxi dyr dyi →
-        P.R.⊝
-          (P.multiplyReal
-            (P.multiplyReal c (P.R.Κ (C3.zero F)) dyr dyi)
-            (P.multiplyImaginary c (P.R.Κ (C3.zero F)) dyr dyi)
-            dxr (P.R.⊝ dxi))
-        P.R.⊜
-        P.R.⊝
-          (P.multiplyReal
-            (P.multiplyReal c (P.R.Κ (C3.zero F)) dxr dxi)
-            (P.R.⊝
-              (P.multiplyImaginary c (P.R.Κ (C3.zero F)) dxr dxi))
-            dyr dyi))
-      refl c dxr dxi dyr dyi)
-    (P.R.solve 5
-      (λ c dxr dxi dyr dyi →
-        P.R.⊝
-          (P.multiplyImaginary
-            (P.multiplyReal c (P.R.Κ (C3.zero F)) dyr dyi)
-            (P.multiplyImaginary c (P.R.Κ (C3.zero F)) dyr dyi)
-            dxr (P.R.⊝ dxi))
-        P.R.⊜
-        P.R.⊝
-          (P.multiplyImaginary
-            (P.multiplyReal c (P.R.Κ (C3.zero F)) dxr dxi)
-            (P.R.⊝
-              (P.multiplyImaginary c (P.R.Κ (C3.zero F)) dxr dxi))
-            dyr dyi))
-      refl c dxr dxi dyr dyi)
-  where module P = Polynomial F
+rankOneCorrectionSymmetry {F = F} c dx dy =
+  cong C3.complexNegate
+    (begin
+      C3.complexMultiply
+        (C3.complexMultiply (C3.realEmbed F c) dy)
+        (C3.complexConjugate dx)
+    ≡⟨ complexMultiplyAssociative (C3.realEmbed F c) dy (C3.complexConjugate dx) ⟩
+      C3.complexMultiply
+        (C3.realEmbed F c)
+        (C3.complexMultiply dy (C3.complexConjugate dx))
+    ≡⟨ cong (C3.complexMultiply (C3.realEmbed F c))
+         (complexMultiplyCommutative dy (C3.complexConjugate dx)) ⟩
+      C3.complexMultiply
+        (C3.realEmbed F c)
+        (C3.complexMultiply (C3.complexConjugate dx) dy)
+    ≡⟨ sym (complexMultiplyAssociative (C3.realEmbed F c) (C3.complexConjugate dx) dy) ⟩
+      C3.complexMultiply
+        (C3.complexMultiply (C3.realEmbed F c) (C3.complexConjugate dx))
+        dy
+    ≡⟨ cong (λ scalar → C3.complexMultiply scalar dy)
+         (cong (λ scalar → C3.complexMultiply scalar (C3.complexConjugate dx))
+           (sym (C3.realEmbedConjugate F c))) ⟩
+      C3.complexMultiply
+        (C3.complexMultiply (C3.complexConjugate (C3.realEmbed F c)) (C3.complexConjugate dx))
+        dy
+    ≡⟨ cong (λ scalar → C3.complexMultiply scalar dy)
+         (sym (complexConjugateMultiply (C3.realEmbed F c) dx)) ⟩
+      C3.complexMultiply
+        (C3.complexConjugate (C3.complexMultiply (C3.realEmbed F c) dx))
+        dy
+    ∎)
 
 lerayProjectSelfAdjoint :
   ∀ {r} {F : C3.RealField r}
