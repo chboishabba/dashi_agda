@@ -435,3 +435,26 @@ OK
 The tests cover all one-/two-vertex total functional maps, 5,600 seeded random graphs across sizes 1–14 (multiple sampled starts) with deliberately repeated carrier-list entries, and fail-closed behaviour for partial/missing links. Each test checks a repeated orbit within the *carrier-list-size + 1* observation bound, a positive period, and equality at the original orbit indices. It is a model oracle only; it **does not** type-check `IbrahimFinitePigeonholeProducerExact.agda`. The pre-existing 33-test full Python suite has **not yet been rerun on this new head**; the expected expanded suite is **36 tests** (33 previous + 3 newly locally tested). The shadow-tree focused Agda checker now includes the producer as its seventh source module and the dynamically generated figure as an eighth check. Exact-head kernel acceptance is pending.
 
 The new proof's reuse of `Data.Fin.Properties.pigeonhole` and the natural subtraction lemma is grounded in the standard-library theorem, rather than an axiomatic claim. Compiler acceptance must verify all imports and reductions on this repository's pinned Agda 2.9/stdlib combination.
+
+
+## 2026-11-14 exact-head local discriminator: finite-pigeonhole A2 CLOSED
+
+The user supplied a local verifier report that checked out **exact head `70babf96e29875e6fa945f1c1528b5a1b3af8277`** from the remote feature branch with a clean worktree. This original SHA has been corroborated via GitHub PR head inspection before this documentation commit. This is a user-reported execution outcome; no raw full compiler log or cryptographically pinned toolchain manifest was provided to the assistant.
+
+| Gate | User-reported exact-head verification | Disposition |
+| --- | --- | --- |
+| Expanded Python suite | `python3 -m unittest discover -s tests -p 'test_ibrahim*.py' -v`: **36/36 passed, 1.316 s**. Includes three new finite-pigeonhole property tests, author-parser port, 5,600 seeded finite samples, generated-certificate exporter, manifest and candidate tests | **PASSED locally** |
+| Six existing Agda source modules | Each target under `NO_TMUX=1 ./scripts/check_ibrahim_fln_maxcut.sh` | **PASSED locally** |
+| New finite-pigeonhole source | `IbrahimFinitePigeonholeProducerExact.agda`: positive-gap collision theorem, `finiteCarrierImpliesEveryStartRepeats`, `finiteFirstLinkOrbitClassifiesAutomatically`; 238/238 reported import closure | **A2 pigeonhole producer kernel-accepted locally** |
+| Updated manuscript fixture | `IbrahimFiniteFigureBasinCertificateExact.agda`: automatic pigeonhole fixture, 240/240 reported import closure | **PASSED locally** |
+| Generated Agda proof carrier | `GeneratedIbrahimFigureCertificateExact.agda`: hash-manifest-bound manuscript fixture; 239/239 reported import closure | **PASSED locally** |
+| Complete focused checker | `NO_TMUX=1 ./scripts/check_ibrahim_fln_maxcut.sh`: reported **exit 0** | **A1/A2 focused checker CLOSED locally** |
+| Global `DASHI/Wikimedia/Everything.agda` aggregate | Prior ~4,940-module 8-GiB Agda 2.9 watchdog and unrelated 2.8 legacy imports, not rerun to a clean pass in this report | **OPEN / separate integration gate** |
+
+**Precise theorem scope:** an exhaustive `CompleteFiniteCarrier Node` for a **total** `Node → Node` next function yields a constructive positive-period repeated-orbit witness for each start, hence an `EventualCycle` and a typed census, with no caller-provided collision or decidable equality on `Node`. This is **new DASHI mathematics**; the external First Link Network methodology remains attributed to Ibrahim, Danforth, Dodds, DOI 10.1016/j.jocs.2016.12.001. It does not prove the original data set's completeness or that every Wikipedia page has a qualifying first link.
+
+**A2 remaining:** `terminalCycleUniqueUpToRotation` for two independent cycle certificates (intrinsic periodic orbit, not equality of chosen representatives), and a general semantic correspondence between the Python `check_trace`/`certify_graph` algorithm and Agda proof-object acceptance. The particular seven-node generator is accepted but not a formal proof of the Python algorithm.
+
+**A3/I9, B, C remain:** independently retrieved two-edition oldid-wikitext + verified Wikidata QID sitelinks, scope-licensed consumer repair/human review and reparse; actual page-id and revision transport, SLR/ITIR/Hyperfabric source-incidence and selective reopening; 2014 dump/112-chunk original producer reconstruction and modern multilingual census. The user separately mentioned HF physical adjacency commit `0d4bd670959e` and S29 persistence, but **no physical original-object decode or persistence completion is evidenced by this report**.
+
+**Current-head status nuance:** documentation commits after `70babf96` change the PR head, not the Agda source theorem bytes. Log and test claims above explicitly attach to the exact source head that was run.
