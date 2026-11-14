@@ -137,13 +137,22 @@ complexConjugateMultiply {F = F}
           (Algebra.realNegateMultiplyRight F ar bi)
           (Algebra.realNegateMultiplyLeft F ai br))
 
+cong₃ :
+  ∀ {a b c d : Level}
+    {A : Set a} {B : Set b} {C : Set c} {D : Set d}
+    (f : A → B → C → D)
+    {x x' : A} {y y' : B} {z z' : C} →
+  x ≡ x' → y ≡ y' → z ≡ z' → f x y z ≡ f x' y' z'
+cong₃ f refl refl refl = refl
+
 complex3AddZeroRight :
   ∀ {r} {F : C3.RealField r} (v : C3.Complex3 F) →
   C3.complex3Add v (C3.complex3Zero F) ≡ v
-complex3AddZeroRight (C3.complex3 vx vy vz)
-  rewrite Algebra.complexAddZeroRight vx
-        | Algebra.complexAddZeroRight vy
-        | Algebra.complexAddZeroRight vz = refl
+complex3AddZeroRight (C3.complex3 vx vy vz) =
+  cong₃ C3.complex3
+    (Algebra.complexAddZeroRight vx)
+    (Algebra.complexAddZeroRight vy)
+    (Algebra.complexAddZeroRight vz)
 
 complex3NegateZero :
   ∀ {r} (F : C3.RealField r) →
@@ -154,17 +163,19 @@ complex3NegateZero F
 complex3SubtractZero :
   ∀ {r} {F : C3.RealField r} (v : C3.Complex3 F) →
   C3.complex3Subtract v (C3.complex3Zero F) ≡ v
-complex3SubtractZero {F = F} v
-  rewrite complex3NegateZero F
-        | complex3AddZeroRight v = refl
+complex3SubtractZero {F = F} v =
+  trans
+    (cong (C3.complex3Add v) (complex3NegateZero F))
+    (complex3AddZeroRight v)
 
 complex3ScaleZero :
   ∀ {r} {F : C3.RealField r} (v : C3.Complex3 F) →
   C3.complex3Scale (C3.complexZero F) v ≡ C3.complex3Zero F
-complex3ScaleZero (C3.complex3 vx vy vz)
-  rewrite complexMultiplyZeroLeft vx
-        | complexMultiplyZeroLeft vy
-        | complexMultiplyZeroLeft vz = refl
+complex3ScaleZero (C3.complex3 vx vy vz) =
+  cong₃ C3.complex3
+    (complexMultiplyZeroLeft vx)
+    (complexMultiplyZeroLeft vy)
+    (complexMultiplyZeroLeft vz)
 
 bilinearDot3Conjugate :
   ∀ {r} {F : C3.RealField r} (u v : C3.Complex3 F) →
