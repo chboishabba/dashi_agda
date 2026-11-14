@@ -10,6 +10,7 @@ import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 import DASHI.Unified.RiemannRHMaxCutTOEExact as RiemannRHTOE
 import DASHI.Cognition.PNF.SensibLawGWBv01PostCertificationRoadmapExact as SensibLawDirect
+import DASHI.Wikimedia.IbrahimCannabisTerpeneCommercialSampleQuantitativeAssayExact as CannabisAssay
 
 -- Reuse-only PNF boundary normalization. No source theorem is promoted.
 import DASHI.Unified.PNFSourceBoundaryTOEValidation
@@ -980,3 +981,17 @@ wetteVerificationStatusDoesNotCreateMajorDerivation :
   Wette915.VerificationStatusCreatesMajorDerivation → ⊥
 wetteVerificationStatusDoesNotCreateMajorDerivation =
   Wette915.verificationStatusDoesNotCreateMajorDerivation
+
+------------------------------------------------------------------------
+-- Cannabis evidence surface.
+------------------------------------------------------------------------
+
+unifiedCannabisPotencyPreferenceBoundary :
+  CannabisAssay.CannabisPotencyPreferenceBoundary
+unifiedCannabisPotencyPreferenceBoundary =
+  CannabisAssay.canonicalCannabisPotencyPreferenceBoundary
+
+unifiedCannabisPotencyOnlyMonotoneDoesNotFitCurrentFixture :
+  CannabisAssay.PotencyOnlyMonotoneFitsCurrentFixture → ⊥
+unifiedCannabisPotencyOnlyMonotoneDoesNotFitCurrentFixture =
+  CannabisAssay.potencyOnlyMonotoneDoesNotFitCurrentFixture
