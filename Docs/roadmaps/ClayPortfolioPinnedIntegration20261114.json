@@ -1035,5 +1035,33 @@
     "lean_kernel_root_checked": false,
     "usable_upstream_v434_proof_export_checked": false,
     "actual_original_tseitin_machine_m05_checked": false
+  },
+  "clay_original_terminal_source_audit_20261114": {
+    "audited_agda_rollup_pr": 1499,
+    "audited_agda_source_head": "fa751e1c9c1a0b0a52a33d97f69531bb0934786a",
+    "audited_lean_rollup_pr": 108,
+    "audited_lean_source_head": "df214149df612797cd1a3bb71d52dda00bd45c26",
+    "signed_source_rows": 13,
+    "machine_manifest": "Docs/roadmaps/ClaySourceVerifiedExistingVsOpen20261114.json",
+    "reproducible_source_checker": "scripts/check_clay_existing_vs_open_source_20261114.py",
+    "canonical_runner": "scripts/check_clay_sixfrontier_physical_local_20261114.sh",
+    "old_math_vendor_gitlink_sha": "1581d4cbdd69a0faf34b2089614fe2a814316a6a",
+    "new_oai_ym_external_vendor_gitlink_present": false,
+    "new_oai_ym_exact_source_receipt": true,
+    "terminal_physical_producers_checked_as_inhabited": false,
+    "source_ledger_does_not_prove_absence_of_other_proofs": true,
+    "pinned_agda_kernel_this_round": false,
+    "pinned_lean_kernel_this_round": false,
+    "statuses": {
+      "YM": "original finite Wilson/F19 theorem source available; Clay constructors conditional on DirectSourceOSLiteralClayInputs; physical D1/D2 open",
+      "NS": "R736 preferred leaves are source-proved false-status; R240 trajectory is a record to inhabit; R854 negative integral assumes hOriginalRateEnvelope",
+      "RH": "actual W/rho zero-carrier interval compiler assumes four source interval bounds and gap",
+      "PNP": "UniversalPolynomialSATDecisionFailure defined; implications from this predicate, no universal witness constructed",
+      "KARP": "all-positive-k physical gamma run owned; malformed/physical total F3/F4 and NP remain open",
+      "BSD": "selected E[2] H1 and E(Qbar)-valued Sha[2] target owned; classical Selmer/Sha exactness and leading value unpaid",
+      "BISHOP": "source finite Abel and raw prefixes available; compact uniform convergence unpaid",
+      "OAI": "older original math corpus vendored as Git submodule; new Yang-Mills Lean proof registered externally, not compiled or physically transported"
+    },
+    "scope": "source/hash/theorem-interface audit, not mathematical no-go, completeness proof, kernel or Clay solution"
   }
 }

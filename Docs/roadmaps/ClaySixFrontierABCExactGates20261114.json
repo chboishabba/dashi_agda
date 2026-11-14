@@ -2139,5 +2139,18 @@
     },
     "execution": "scripts/check_clay_sixfrontier_physical_local_20261114.sh from Agda #1499 and DASHI_CLAY_LEAN_WORKTREE=Lean #108",
     "note": "User original maxcut target list follows canonical A/B/C source ownership; source co-location != inhabited analytic/physical estimates"
+  },
+  "current_rollup_source_signature_audit_20261114": {
+    "agda_pr": 1499,
+    "agda_audited_head": "fa751e1c9c1a0b0a52a33d97f69531bb0934786a",
+    "lean_pr": 108,
+    "lean_audited_head": "df214149df612797cd1a3bb71d52dda00bd45c26",
+    "source_rows": 13,
+    "manifest": "Docs/roadmaps/ClaySourceVerifiedExistingVsOpen20261114.json",
+    "runner": "scripts/check_clay_existing_vs_open_source_20261114.py",
+    "verified_historical_original_proof_source_exists": true,
+    "verified_terminal_unconditional_physical_witnesses": false,
+    "kernel_receipt": false,
+    "note": "Precise original conditional theorem types and false R736 flags; not a universal proof absence assertion or newly solved Clay theorem"
   }
 }
