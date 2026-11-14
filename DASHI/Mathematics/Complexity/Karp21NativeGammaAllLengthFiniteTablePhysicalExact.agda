@@ -31,7 +31,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Nat.Base using (_≤_)
-import Data.List.Base
+import Data.List.Base as List
 import Data.Fin.Base as Fin
 import Data.Vec.Base as Vec
 open import Data.Maybe.Base using (just)
@@ -152,9 +152,8 @@ finishZeroPrefixGamma (true ∷ suffix) = refl
 sourceAllLengthGammaWordExact :
   (payload suffix : Word.BitWord) →
   Gamma.readGammaBinary
-    (Original.zeroPrefix (Data.List.Base.length payload)
-      Data.List.Base.++ (true ∷
-        (payload Data.List.Base.++ suffix)))
+    (List._++_ (Original.zeroPrefix (List.length payload))
+      (true ∷ (List._++_ payload suffix)))
     ≡ just (true ∷ payload , suffix)
 sourceAllLengthGammaWordExact = Gamma.readGammaBinaryPayloadExact
 
