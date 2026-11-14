@@ -98,3 +98,8 @@ Actual Q₂/R valuation/sign realization, local E[2]-valued H¹
 Kummer transport, good-prime supported global H¹ and Agda 2.9
 kernel acceptance remain OPEN. Do NOT promote K1/Sha/rank.
 These files stay on donor #1500 until a separately checked join.
+
+
+## 14 November seven-frontier implementation receipts
+
+The current source-pinned implementation ledger is [DASHISevenFrontierMaxCutExecution20261114.md](./DASHISevenFrontierMaxCutExecution20261114.md). It records newly committed K1 odd-prime local parity and the real Q2 negative control; the YM common-total-variation three-moment cut; the RH mixed-cone quartic sign negative control; the NS R854 sharper affine signed-integral arithmetic; the Karp-21 literal one-payload physical gamma table; and genuine Hodge Lean #110 point-cycle isomorphism transport. K2/K3/K4/K5 existing original owners are credited without source duplication. All terminal Clay mathematics and new local kernel receipts remain OPEN.
