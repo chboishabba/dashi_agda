@@ -31,19 +31,6 @@ def check(c):
     xs={k:Decimal(str(c[k])) for k in FIELDS}
     with localcontext() as ctx:
         ctx.prec=68
-        # Decimal Chudnovsky π approximation for DIAGNOSTICS ONLY.
-        def pi_chudnovsky():
-            c0=Decimal(426880)*Decimal(10005).sqrt()
-            m=1
-            l=13591409
-            x=1
-            s=Decimal(l)
-            for k in range(1,10):
-                m=m*(6*k-5)*(2*k-1)*(6*k-1)//(k*k*k*26680)
-                l+=545140134
-                x*=-262537412640768000
-                s+=Decimal(m*l)/Decimal(x)
-            return c0/s
         # Use the installed independently-tested mpmath high precision
         # for exact selected constant diagnostics; this is not a proof.
         import mpmath as mp
