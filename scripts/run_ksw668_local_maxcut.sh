@@ -27,6 +27,12 @@ run python python3 scripts/ksw668_neutron_energy_nonextrapolation.py
 run python python3 scripts/ksw668_nuclear_electron_final_states.py
 run python python3 scripts/ksw668_bare_nuclear_two_body_kinematics.py
 run python python3 scripts/check_ksw668_spacelike_kk_projection.py
+run python python3 scripts/ksw668_a1_original_rational_fourier_witness.py
+run python python3 scripts/ksw668_u1_4potential_continuum.py
+run python python3 scripts/ksw668_kk_vacuum_observer_solution.py
+run python python3 scripts/test_ksw668_endf81_primary.py
+run python python3 scripts/test_ksw668_e2_bound.py
+run python python3 scripts/test_ksw668_movebank_join.py
 run python python3 scripts/ksw668_mms_burst_acquire.py
 run python python3 scripts/ksw668_mms_sdc_direct.py
 run python python3 scripts/ksw668_ena_reads_acquire.py
@@ -68,6 +74,7 @@ fi
 run agda bash scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/Plasma/KSW668FiniteDiscriminatorsExact.agda \
   DASHI/Physics/Plasma/KSW668MHDSelectedStateTransferExact.agda \
+  DASHI/Physics/Plasma/KSW668RationalThreeModeSourceExact.agda \
   DASHI/Physics/Plasma/KSW668MaxwellLocalPoyntingExact.agda \
   DASHI/Physics/Plasma/KSW668FullVectorMaxwellJetExact.agda \
   DASHI/Physics/Plasma/KSW668IsotopeCausalResidualExact.agda \
