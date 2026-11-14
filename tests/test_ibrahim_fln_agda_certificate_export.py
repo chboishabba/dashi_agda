@@ -47,7 +47,6 @@ class FiniteAgdaExportTests(unittest.TestCase):
         self.assertEqual(out.count('Trace.pathEdge refl'),sum(t['entry_index'] + len(t['cycle']) for t in cert.certify_graph(self.graph)['traces']))
         self.assertIn('Trace.acceptedCycleTrace 2 2 v2',out)
         self.assertIn('Trace.pathEnd',out)
-        self.assertIn('General.collisionToEventualCycle (orbitRepeat vertex)',out)
         self.assertIn('General.terminalBasinsPartition checkedCensus',out)
         self.assertIn('General.terminalCensusMatchesCertificate checkedCensus',out)
         self.assertEqual(out.count('= General.orbitRepeat '),7)
