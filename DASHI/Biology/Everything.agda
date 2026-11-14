@@ -274,3 +274,7 @@ import DASHI.Biology.BrainITConnectomeFMRIWeldExact
 import DASHI.Biology.BrainITConsumerRelativeExact
 import DASHI.Biology.BrainITTableReceiptsExact
 import DASHI.Biology.BrainITValidation
+import DASHI.Biology.AvianMagnetoreceptionStreamFiniteCore
+import DASHI.Biology.AvianMagnetoreceptionThoughtEmporiumEvidenceExact
+import DASHI.Biology.GenBankInterpretationInteropExact
+import DASHI.Biology.GenBankCanonicalDNAFibreIndexExact

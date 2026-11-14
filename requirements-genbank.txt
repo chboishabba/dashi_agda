@@ -1,0 +1,5 @@
+# Read-only GenBank interpretation tools (optional, scoped dependencies)
+# Biopython original authors: Cock et al., Bioinformatics 2009
+# https://doi.org/10.1093/bioinformatics/btp163
+biopython==1.86
+pytest>=8,<10

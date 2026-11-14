@@ -1,0 +1,57 @@
+{
+  "schema": "dashi.genbank.source-geometry-independent-audit.v2",
+  "source": "thethoughtemporium/Whose-gene-is-it-anyway",
+  "records": [
+    {
+      "path": "magnetoreception/paav syn with pigeonized human cacna1d.gb",
+      "git_blob_sha": "0578ad167666789fbfd3faa849a455c25097b90c",
+      "length": 11214,
+      "features": 22,
+      "joined_features": 1,
+      "reverse_strand_spans": 7,
+      "all_parts_unstranded_compounds": 0,
+      "rule": "Biopython CompoundLocation._flip: reverse parts iff all child part strands are None; otherwise retain part order",
+      "coordinate_bounds_and_mirror_twice_pass": true,
+      "failed_feature_indices": []
+    },
+    {
+      "path": "penicillin/penicillin_yeast_-_2020-04-17.gb",
+      "git_blob_sha": "d350cf735f0a2061d0eb9ca006ed155c20f4034f",
+      "length": 27921,
+      "features": 53,
+      "joined_features": 0,
+      "reverse_strand_spans": 9,
+      "all_parts_unstranded_compounds": 0,
+      "rule": "Biopython CompoundLocation._flip: reverse parts iff all child part strands are None; otherwise retain part order",
+      "coordinate_bounds_and_mirror_twice_pass": true,
+      "failed_feature_indices": []
+    },
+    {
+      "path": "p46815 empty yeast backbone.gb",
+      "git_blob_sha": "f0b0076aa86722004322f20185b9227459c8e90b",
+      "length": 6981,
+      "features": 20,
+      "joined_features": 0,
+      "reverse_strand_spans": 9,
+      "all_parts_unstranded_compounds": 0,
+      "rule": "Biopython CompoundLocation._flip: reverse parts iff all child part strands are None; otherwise retain part order",
+      "coordinate_bounds_and_mirror_twice_pass": true,
+      "failed_feature_indices": []
+    }
+  ],
+  "source_feature_count_total": 95,
+  "all_features_valid": true,
+  "independent_synthetic_biopython_reference": {
+    "case_count": 2000,
+    "failures": 0,
+    "mixed_part_strand_cases": 1471,
+    "uniform_part_strand_cases": 529,
+    "biopython_version": "1.86",
+    "executed_locally": true
+  },
+  "original_bytes_emitted": false,
+  "exact_head_python_checkout_run": false,
+  "agda_kernel_accepted": false,
+  "native_ontology_proved": false,
+  "note": "Read-only independent original feature-coordinate audit plus separate local synthetic Biopython reference. Neither verifies that committed source script ran against originals nor proves raw parser semantics."
+}
