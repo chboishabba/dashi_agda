@@ -380,3 +380,44 @@ The user's local cooperative verifier reports a clean worktree checkout and push
 **C1/C2 — OPEN:** exact original 2014 Wikimedia dump→112 producer chunks→published graph provenance, plus modern edition-specific empirical census, sensitivity controls and appropriately scoped source claims. No cultural causal theorem follows from FLN topology.
 
 **Next local acceptor:** avoid rechecking the now accepted seven-node fixture as the main deliverable. Prioritize the fully general **finite-pigeonhole-to-collision witness**, then cycle-rotation normalization; separately assemble one **genuine source-backed cross-language consumer repair** through the existing ITIR/SLR/SensibLaw owners and feed source-validated certificates into the DASHI consumer theorems.
+
+
+## 2026-11-14 finite-pigeonhole maximum cut — automatic A2 collision producer
+
+**Author/provenance:** original First Link Network empirical/methodological source remains Mark Ibrahim, Christopher M. Danforth and Peter Sheridan Dodds, *Connecting every bit of knowledge: The structure of Wikipedia's First Link Network*, *Journal of Computational Science* 19 (2017), DOI 10.1016/j.jocs.2016.12.001. The following generic Agda finite-proof adapter is **new DASHI work** and reuses standard-library `Data.Fin.Properties.pigeonhole`; this is not attributed to the original authors as an original paper theorem. The source-generated figure remains an exact **manuscript diagram transcription**, not the historical 2014 corpus.
+
+### A2.08 — substantial source-written theorem tranche
+
+New golden owner `DASHI/Wikimedia/IbrahimFinitePigeonholeProducerExact.agda` imports only the existing `IbrahimGeneralFiniteCertificateKernelExact` and `IbrahimFiniteOrbitRevisionWeldExact` core, plus standard `Data.Fin.Base` and `Data.Fin.Properties`.
+
+| Formal target | Constructive mechanism | Scope |
+| --- | --- | --- |
+| `carrierSize`, `lookupCarrier`, `indexOfListed`, `lookupIndexedListed` | `Listed node allNodes` produces a `Fin (carrierSize allNodes)` index with decoded identity | No assumed distinctness of enumeration: repeated list entries are permitted; coverage is a **proof** |
+| `carrierEncode`, `carrierDecode`, `carrierDecodeEncode`, `encodedEqualityReflectsOriginal` | Injective finite-coordinate encoding as a **consequence** of the supplied carrier coverage | Does not conflate QID or source page title with physical/wiki object identity |
+| `strictGapRebuild` | For `m < n`, derive `m + suc (n ∸ suc m) ≡ n` using stdlib `+-suc` and `m+[n∸m]≡n` | Proves strictly positive cycle period, never accepts zero-period fake |
+| `finiteCarrierImpliesEveryStartRepeats` | Apply constructive stdlib `pigeonhole : m < n → (Fin n → Fin m) → ∃₂ …` to **N+1 orbit samples into N finite carrier coordinates**, decode equal indices to equal actual orbit nodes, reconstruct the positive gap | **No presupposed orbit collision, no decidable Node equality, no excluded middle** |
+| `finiteCarrierProducesAllRepeats` | Pointwise total collision certificate family for every `Node` | Precisely pays the old producer-premise gap in `FiniteOrbitRepeatCertificate` |
+| `finiteFirstLinkOrbitClassifiesAutomatically` | Compose this theorem with existing conditional `General.finiteFirstLinkOrbitClassifies` | Now a general **total deterministic finite** graph-classification source theorem, subject to kernel acceptance |
+| `allFiniteStartsEventuallyCycle` | Project the resulting `EventualCycle` at every start | Does not certify partial dead ends, redirects or historical data |
+| `figurePigeonholeCensus`, `figurePigeonholeEveryStartHasCycle` | Instantiate automatic construction for every A..G manuscript vertex, independent of the prior manual repeating-orbit evidence | Separate demo/test carrier, not proof of 2014 dump |
+| Generated `automaticallyClassifiedCensus`, `automaticEveryStartCycles` | The generated SHA-manifest-verified Agda source now *also* checks the automatic theorem on a total bounded graph, not only the original hand-checked `refl` repeats | Each emitted equality must still pass Agda kernel |
+
+**Verification status:** SOURCE COMMITTED on current PR #1505; the local user-reported 33/33 Python and seven Agda module successes were from prior head `fcad748f10` **before** these commits. No new Agda typecheck or Python suite has been executed in this turn. Do not promote source-written `finiteCarrierImpliesEveryStartRepeats` to a kernel theorem until an exact-head clean local acceptance receipt reports zero errors. This new file adds one focused Agda module; the focus sequence becomes **seven non-generated source modules + one generated Agda certificate = eight checks**. Existing 33 Python tests now include strengthened automatic-generation assertions; check script is updated for the module.
+
+### Still-open mathematical and empirical boundary
+
+- **A2.09** `terminalCycleUniqueUpToRotation`: actual uniqueness of the periodic orbit *up to rotation*, rather than chosen-representative equality. The automatic producer may return a nonminimum entry/period; canonicalization must normalize all certificates and prove equivalence.
+- **A2.10** Formal checker-ABI agreement: Python `trace_start`/`check_trace` and `certify_graph` vs Agda encoded finite `next` and bounded orbit proof. Generated concrete `refl` verifies supplied edges/cycles but not a universal mathematical proof of every Python checker transformation.
+- **A3/I9** Real two-edition Wikipedia revision bytes, independent QID sitelinks, first-eligible-link proof under pinned original parser, consumer licence, human review and rerun.
+- **B1/B2** Page identity/revision transport, real Hyperfabric edge incidence/source span, physical selective reopening and balanced-ternary unknown/conflict-preserving encoding.
+- **C** Original complete 2014 dump/chunk/FLN graph lineage and modern multilingual census/sensitivity/causal caveats remain open. None are supplied by the finite theorem.
+
+### Exact local acceptor
+
+```sh
+git rev-parse HEAD
+python3 -m unittest discover -s tests -p 'test_ibrahim*.py' -v
+NO_TMUX=1 ./scripts/check_ibrahim_fln_maxcut.sh
+```
+
+Use the repository's existing isolated shadow-tree routine with Agda 2.9 and pinned stdlib; report the first failing module, actual exit status and import closure, rather than treating old-head passes as new-head passes. Generated certificate code now exercises both `General.finiteFirstLinkOrbitClassifies` and `Pigeonhole.finiteFirstLinkOrbitClassifiesAutomatically`.
