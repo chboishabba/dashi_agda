@@ -116,3 +116,37 @@ totalGraphCannotCreateDeadEnd next n start stop false =
 -- A typed first-link observation remains a navigation projection.
 -- Source/QID identity, parser legitimacy, human repair authority and
 -- physical shard acceptance do not follow from these constructors.
+
+------------------------------------------------------------------------
+-- Synthetic negative control for the complete three-way observation
+-- surface. The two terminal values are distinct, even when the
+-- navigation process is stopped after an equal number of steps.
+------------------------------------------------------------------------
+
+data FixturePage : Set where
+  fixtureFirst fixtureSecond fixtureMissing : FixturePage
+
+data FixtureOutside : Set where
+  fixtureUnknown : FixtureOutside
+
+fixtureSelection : FixturePage →
+  FirstLinkSelection FixturePage FixtureOutside
+fixtureSelection fixtureFirst = knownTarget fixtureSecond
+fixtureSelection fixtureSecond = explicitDeadEnd
+fixtureSelection fixtureMissing = unresolvedTarget fixtureUnknown
+
+fixtureFollowKnownThenStops :
+  partialIterate fixtureSelection 2 (visiting fixtureFirst) ≡
+  stoppedAt fixtureSecond
+fixtureFollowKnownThenStops = refl
+
+fixtureUnresolvedStaysUnresolved :
+  partialIterate fixtureSelection 3 (visiting fixtureMissing) ≡
+  missingTarget fixtureUnknown
+fixtureUnresolvedStaysUnresolved = refl
+
+fixtureUnknownCannotEqualDeadEnd :
+  missingTarget {Node = FixturePage} fixtureUnknown ≡
+  stoppedAt fixtureSecond → ⊥
+fixtureUnknownCannotEqualDeadEnd equality =
+  missingTargetNotDeadEnd (sym equality)
