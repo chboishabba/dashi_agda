@@ -645,10 +645,12 @@ bilinearDot3Commutative :
   C3.bilinearDot3 u v ≡ C3.bilinearDot3 v u
 bilinearDot3Commutative
   (C3.complex3 ux uy uz)
-  (C3.complex3 vx vy vz)
-  rewrite complexMultiplyCommutative ux vx
-        | complexMultiplyCommutative uy vy
-        | complexMultiplyCommutative uz vz = refl
+  (C3.complex3 vx vy vz) =
+  cong₂ C3.complexAdd
+    (cong₂ C3.complexAdd
+      (complexMultiplyCommutative ux vx)
+      (complexMultiplyCommutative uy vy))
+    (complexMultiplyCommutative uz vz)
 
 realEmbedAdd :
   ∀ {r} (F : C3.RealField r)
