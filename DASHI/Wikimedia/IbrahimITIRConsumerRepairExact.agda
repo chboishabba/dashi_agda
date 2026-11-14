@@ -11,6 +11,7 @@ import DASHI.Core.ConsumerFamilyRefinementKernelExact as Family
 import DASHI.Core.ObserverRefinementLatticeExact as Observer
 import DASHI.Core.IntersectionalNonFactorability as NF
 import DASHI.Core.ContextIndexedPNFComparisonTransportExact as Transport
+import DASHI.Core.HeterogeneousPNFObservableBridgeExact as Heterogeneous
 
 ------------------------------------------------------------------------
 -- IBRAHIM / ITIR FIRST-LINK CONSUMER-RELATIVE REPAIR
@@ -168,6 +169,30 @@ firstLinkRepairDoesNotPayAllConsumers :
 firstLinkRepairDoesNotPayAllConsumers =
   Family.collisionRulesOutFamilyFactorisation
     revisionQueryStillCollides
+
+
+------------------------------------------------------------------------
+-- Evidence-scoped heterogeneous PNF transport is not rebuilt here:
+-- reuse its consumer-specific preservation proof. Source revisions,
+-- query identity and licensing evidence remain attached to the caller.
+------------------------------------------------------------------------
+
+consumerObservablePreservedByReviewedAlignment :
+  ∀ {A B OutA OutB Common : Set}
+    {observeA : A → OutA} {observeB : B → OutB}
+    {toCommonA : OutA → Common} {toCommonB : OutB → Common} →
+  (licensed : Heterogeneous.EvidenceScopedHeterogeneousLicence
+    A B OutA OutB Common
+    observeA observeB toCommonA toCommonB) →
+  (x : A) →
+  toCommonB
+    (observeB
+      (Heterogeneous.mapRepresentation
+        (Heterogeneous.underlyingLicence licensed) x))
+    ≡ toCommonA (observeA x)
+consumerObservablePreservedByReviewedAlignment licensed x =
+  Heterogeneous.heterogeneousConsumerPreservation
+    (Heterogeneous.underlyingLicence licensed) x
 
 ------------------------------------------------------------------------
 -- Existing ITIR source comparison + bounded repair stay separate from
