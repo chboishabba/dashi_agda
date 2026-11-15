@@ -76,7 +76,7 @@
     "interpretation": "genuine compact 3D TT test source constructed; numerical UV/cutoff/convergence fail"
   },
   "acceptance": {
-    "source_equivalent_unit_tests": "171/171 in locally tested source-equivalent committed suite; broader local 184/184 including exploratory",
+    "source_equivalent_unit_tests": "172/172 source-equivalent committed tests; 185/185 broader exploratory local suite",
     "full_3d_B4_numerical_convergence": false,
     "external_analytical_Green_operator_previously_claimed_by_external_theorem": true,
     "tensor_matter_generating_action": false,
@@ -424,8 +424,8 @@
     "new_numerical_stencil_owner": "scripts/ksw668_f8_radial_fv_contract.py",
     "new_original_moving_pde_manufactured_owner": "scripts/ksw668_f8_manufactured_original_pde.py",
     "threegrid_machine_receipt": "Artifacts/ksw668/ads5_f8_tt_conservative_fv_threegrid_20261115.json",
-    "source_equivalent_committed_test_count": 171,
-    "local_broader_exploratory_test_superset": 184,
+    "source_equivalent_committed_test_count": 172,
+    "local_broader_exploratory_test_superset": 185,
     "failed_numerical_receiver": {
       "H_medium_to_fine_relative_drift": 0.21762040770235527,
       "intrinsic4D_Weyl_medium_to_fine_relative_drift": 0.9027364882008849,
@@ -437,6 +437,7 @@
     "actual_boundary_Weyl_trace_error_theorem": false,
     "original_t2_FIO_theorem_referee_acceptance": false,
     "Agda_pinned_kernel_checked": false,
-    "experimental_graviton_observed": false
+    "experimental_graviton_observed": false,
+    "exact_source_mass_runtime_gate": true
   }
 }
