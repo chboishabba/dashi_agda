@@ -1,0 +1,200 @@
+[
+  {
+    "id": "Golkowski2010",
+    "source_type": "experiment",
+    "url": "https://doi.org/10.1029/2009JA014610",
+    "source_scope": "Nonlinear whistler echo amplitude/phase and source-onset delay",
+    "formalizable_kernel": "retarded wave-particle coupling",
+    "verified_same_apparatus": false,
+    "imported_as_empirical_lemma": false
+  },
+  {
+    "id": "Cohen2010",
+    "source_type": "experiment",
+    "url": "https://doi.org/10.1029/2009JA014410",
+    "source_scope": "ELF/VLF experimental HF heating geometric vs AM comparisons",
+    "formalizable_kernel": "spatial/time-modulated environmental current",
+    "verified_same_apparatus": false,
+    "imported_as_empirical_lemma": false
+  },
+  {
+    "id": "Cohen2011",
+    "source_type": "simulation + satellite comparison",
+    "url": "https://doi.org/10.1029/2010JA016194",
+    "source_scope": "5–7 dB modeled circle sweep injected-power advantage; satellite signatures",
+    "formalizable_kernel": "3D retarded ionospheric spatial response",
+    "verified_same_apparatus": false,
+    "imported_as_empirical_lemma": false
+  },
+  {
+    "id": "Papadopoulos2011",
+    "source_type": "theory",
+    "url": "https://doi.org/10.1029/2011GL047368",
+    "source_scope": "F-region heated diamagnetic current => magnetosonic field => E-region Hall current",
+    "formalizable_kernel": "two-hop environmental transfer",
+    "verified_same_apparatus": false,
+    "imported_as_empirical_lemma": false
+  },
+  {
+    "id": "ICD2011",
+    "source_type": "experiment",
+    "url": "https://doi.org/10.1029/2011GL049263",
+    "source_scope": "0.1–70 Hz HF-driven ionospheric current demonstration without electrojet requirement",
+    "formalizable_kernel": "independent study test of two-hop source",
+    "verified_same_apparatus": false,
+    "imported_as_empirical_lemma": false
+  },
+  {
+    "id": "FosterFinch1974",
+    "source_type": "experiment",
+    "url": "https://doi.org/10.1126/science.185.4147.256",
+    "source_scope": "Pulsed microwave absorption generates material thermoacoustic signals",
+    "formalizable_kernel": "material heating-pressure observation",
+    "verified_same_apparatus": false,
+    "imported_as_empirical_lemma": false
+  },
+  {
+    "id": "KimMetamaterial2026",
+    "source_type": "experiment",
+    "url": "https://doi.org/10.1038/s41467-026-73604-0",
+    "source_scope": "Ultrasound, acoustic and elastic metastructure jointly shape nonlinear difference-frequency sound",
+    "formalizable_kernel": "nonlinear acoustic + structural modes",
+    "verified_same_apparatus": false,
+    "imported_as_empirical_lemma": false
+  },
+  {
+    "id": "KimZhongJing2026",
+    "source_type": "experiment",
+    "url": "https://doi.org/10.1109/TUSON.2026.3689544",
+    "source_scope": "Passive metasurface spatially focuses audible parametric sound",
+    "formalizable_kernel": "wavefront-phase observation",
+    "verified_same_apparatus": false,
+    "imported_as_empirical_lemma": false
+  },
+  {
+    "id": "US12185058B2",
+    "source_type": "patent",
+    "url": "https://patents.google.com/patent/US12185058B2/en",
+    "source_scope": "Independent carrier/sideband phase-shift claims",
+    "formalizable_kernel": "phase-indexed sideband operator",
+    "verified_same_apparatus": false,
+    "imported_as_empirical_lemma": false
+  },
+  {
+    "id": "US20180310111A1",
+    "source_type": "patent application",
+    "url": "https://patents.google.com/patent/US20180310111A1/en",
+    "source_scope": "Virtual acoustic point source and time-of-flight correction",
+    "formalizable_kernel": "retarded virtual source field",
+    "verified_same_apparatus": false,
+    "imported_as_empirical_lemma": false
+  },
+  {
+    "id": "US20170289722A1",
+    "source_type": "patent application",
+    "url": "https://patents.google.com/patent/US20170289722A1/en",
+    "source_scope": "Focused ultrasound local audible-source claim",
+    "formalizable_kernel": "nonlinear spatial acoustic field",
+    "verified_same_apparatus": false,
+    "imported_as_empirical_lemma": false
+  },
+  {
+    "id": "US6470214B1",
+    "source_type": "patent",
+    "url": "https://patents.google.com/patent/US6470214B1/en",
+    "source_scope": "RF auditory claims",
+    "formalizable_kernel": "distinct material observation, not air speaker",
+    "verified_same_apparatus": false,
+    "imported_as_empirical_lemma": false
+  },
+  {
+    "id": "TeslaUS787412A",
+    "source_type": "historical patent",
+    "url": "https://patents.google.com/patent/US787412A/en",
+    "source_scope": "Terrestrial transmission",
+    "formalizable_kernel": "source provenance, not independent measurement",
+    "verified_same_apparatus": false,
+    "imported_as_empirical_lemma": false
+  },
+  {
+    "id": "HingsUS3361957A",
+    "source_type": "historical patent",
+    "url": "https://patents.google.com/patent/US3361957A/en",
+    "source_scope": "Telluric transduction",
+    "formalizable_kernel": "candidate ground energy source",
+    "verified_same_apparatus": false,
+    "imported_as_empirical_lemma": false
+  },
+  {
+    "id": "PlausonUS1540998A",
+    "source_type": "historical patent",
+    "url": "https://patents.google.com/patent/US1540998A/en",
+    "source_scope": "Atmospheric collector",
+    "formalizable_kernel": "candidate atmospheric source",
+    "verified_same_apparatus": false,
+    "imported_as_empirical_lemma": false
+  },
+  {
+    "id": "EarthEnergies675",
+    "source_type": "patent application",
+    "url": "https://patents.google.com/patent/US20150102675A1/en",
+    "source_scope": "Dinwiddie/Wright/Ames Earth energies application",
+    "formalizable_kernel": "source candidate",
+    "verified_same_apparatus": false,
+    "imported_as_empirical_lemma": false
+  },
+  {
+    "id": "EarthEnergies676",
+    "source_type": "patent application",
+    "url": "https://patents.google.com/patent/US20150102676A1/en",
+    "source_scope": "Dinwiddie/Wright Earth energies application",
+    "formalizable_kernel": "source candidate",
+    "verified_same_apparatus": false,
+    "imported_as_empirical_lemma": false
+  },
+  {
+    "id": "IonPowerUS9331603B2",
+    "source_type": "patent",
+    "url": "https://patents.google.com/patent/US9331603B2/en",
+    "source_scope": "Ambient ion collection claim",
+    "formalizable_kernel": "ion source candidate",
+    "verified_same_apparatus": false,
+    "imported_as_empirical_lemma": false
+  },
+  {
+    "id": "SmithMexicanApplication",
+    "source_type": "published application",
+    "url": "https://patents.google.com/patent/MXNL02000035A/en",
+    "source_scope": "Donald Smith application",
+    "formalizable_kernel": "device lineage not performance receipt",
+    "verified_same_apparatus": false,
+    "imported_as_empirical_lemma": false
+  },
+  {
+    "id": "FilsingerReelCommercial",
+    "source_type": "user-supplied reel/transcript",
+    "url": "https://www.instagram.com/reel/Dfu9Jseviz9/",
+    "source_scope": "Midpoint transformer, split rectifier and spark-gap dump claim",
+    "formalizable_kernel": "actual commercial reel netlist untraced",
+    "verified_same_apparatus": false,
+    "imported_as_empirical_lemma": false
+  },
+  {
+    "id": "FilsingerReelShunt",
+    "source_type": "user-supplied reel/transcript",
+    "url": "https://www.instagram.com/reel/DfiqPnkPnP5/",
+    "source_scope": "1/2/4 MΩ shunt and ZVS tuning claim",
+    "formalizable_kernel": "distinct shunt reel",
+    "verified_same_apparatus": false,
+    "imported_as_empirical_lemma": false
+  },
+  {
+    "id": "FilsingerReelEarth",
+    "source_type": "user-supplied reel/transcript",
+    "url": "https://www.instagram.com/reel/Dfi1D7CPzyM/",
+    "source_scope": "Earth electrodes and capacitor voltage claim",
+    "formalizable_kernel": "distinct source-reel",
+    "verified_same_apparatus": false,
+    "imported_as_empirical_lemma": false
+  }
+]
