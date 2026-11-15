@@ -6,7 +6,8 @@ module DASHI.Computation.PathfindingTemporalFibreEvolutionExact where
 -- under transport.  Any preservation/splitting/reopening claim must therefore
 -- be indexed by the same literal transition.
 
-open import Agda.Builtin.Equality using (_≡_; refl; cong; trans; sym)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Nat using (Nat; suc)
 

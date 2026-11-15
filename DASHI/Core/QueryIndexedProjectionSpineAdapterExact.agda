@@ -27,8 +27,12 @@ queryAdequacyDefectToProjectionCollision :
     {query : Query} →
   Indexed.QueryAdequacyDefect project semantics query →
   Coarse.ProjectionCollision project (Indexed.answer semantics query)
-queryAdequacyDefectToProjectionCollision =
+queryAdequacyDefectToProjectionCollision
+  {project = project} {semantics = semantics} {query = query} defect =
   Crosswalk.nonFactorabilityToProjectionCollision
+    {project = project}
+    {consumer = Indexed.answer semantics query}
+    defect
 
 projectionCollisionToQueryAdequacyDefect :
   ∀ {State Observation Query Answer : Set}
@@ -37,8 +41,12 @@ projectionCollisionToQueryAdequacyDefect :
     {query : Query} →
   Coarse.ProjectionCollision project (Indexed.answer semantics query) →
   Indexed.QueryAdequacyDefect project semantics query
-projectionCollisionToQueryAdequacyDefect =
+projectionCollisionToQueryAdequacyDefect
+  {project = project} {semantics = semantics} {query = query} collision =
   Crosswalk.projectionCollisionToNonFactorability
+    {project = project}
+    {consumer = Indexed.answer semantics query}
+    collision
 
 queryAdequacyDefectRepairRequiresSeparation :
   ∀ {State Observation Query Answer Refinement : Set}
@@ -49,13 +57,24 @@ queryAdequacyDefectRepairRequiresSeparation :
   (defect : Indexed.QueryAdequacyDefect project semantics query) →
   Repair.RefinementRepairs project refine (Indexed.answer semantics query) →
   refine
-      (Coarse.left (queryAdequacyDefectToProjectionCollision defect))
+      (Coarse.left (queryAdequacyDefectToProjectionCollision
+        {project = project} {semantics = semantics} {query = query} defect))
     ≡ refine
-      (Coarse.right (queryAdequacyDefectToProjectionCollision defect)) →
+      (Coarse.right (queryAdequacyDefectToProjectionCollision
+        {project = project} {semantics = semantics} {query = query} defect)) →
   ⊥
-queryAdequacyDefectRepairRequiresSeparation defect =
+queryAdequacyDefectRepairRequiresSeparation
+  {project = project} {semantics = semantics}
+  {query = query} {refine = refine} defect =
   Crosswalk.projectionCollisionRepairRequiresSeparation
-    (queryAdequacyDefectToProjectionCollision defect)
+    {project = project}
+    {refine = refine}
+    {consumer = Indexed.answer semantics query}
+    (queryAdequacyDefectToProjectionCollision
+      {project = project}
+      {semantics = semantics}
+      {query = query}
+      defect)
 
 ------------------------------------------------------------------------
 -- Boundary: observer identity/axis/protocol can be a retained coordinate for a

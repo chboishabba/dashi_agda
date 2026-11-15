@@ -63,7 +63,7 @@ open PhotosyntheticPhotonField public
 
 record LeafLightInterceptionReceipt
     {LeafPoint Wavelength PhotonFlux : Set}
-    (field : PhotosyntheticPhotonField LeafPoint Wavelength PhotonFlux) : Set₁ where
+    (photonField : PhotosyntheticPhotonField LeafPoint Wavelength PhotonFlux) : Set₁ where
   constructor leaf-light-interception-receipt
   field
     LeafOpticalState : Set
@@ -85,8 +85,8 @@ record PhotosyntheticOpticsPlantWeld
     {LeafPoint Wavelength PhotonFlux : Set}
     (leaf : Plant.LeafGasExchangeReceipt)
     (calibration : Calibration.LeafCarbonWaterCalibration leaf)
-    (field : PhotosyntheticPhotonField LeafPoint Wavelength PhotonFlux)
-    (interception : LeafLightInterceptionReceipt field) : Set₁ where
+    (photonField : PhotosyntheticPhotonField LeafPoint Wavelength PhotonFlux)
+    (interception : LeafLightInterceptionReceipt photonField) : Set₁ where
   constructor photosynthetic-optics-plant-weld
   field
     CoupledState : Set
@@ -106,9 +106,9 @@ carbonAssimilationAt :
   ∀ {LeafPoint Wavelength PhotonFlux : Set}
     {leaf : Plant.LeafGasExchangeReceipt}
     {calibration : Calibration.LeafCarbonWaterCalibration leaf}
-    {field : PhotosyntheticPhotonField LeafPoint Wavelength PhotonFlux}
-    {interception : LeafLightInterceptionReceipt field} →
-    (weld : PhotosyntheticOpticsPlantWeld leaf calibration field interception) →
+    {photonField : PhotosyntheticPhotonField LeafPoint Wavelength PhotonFlux}
+    {interception : LeafLightInterceptionReceipt photonField} →
+    (weld : PhotosyntheticOpticsPlantWeld leaf calibration photonField interception) →
     CoupledState weld →
     SI.Quantity SI.MolarFluxDensity (Plant.gasFluxScale leaf)
 carbonAssimilationAt {leaf = leaf} {calibration = calibration} weld state =
@@ -132,15 +132,15 @@ record SiteConditionedPhotosynthesisRealisation
       SiteId Spectrum AngleDistribution Temperature Shading Soiling Wind Humidity)
     (leaf : Plant.LeafGasExchangeReceipt)
     (calibration : Calibration.LeafCarbonWaterCalibration leaf)
-    (field : PhotosyntheticPhotonField LeafPoint Wavelength PhotonFlux)
-    (interception : LeafLightInterceptionReceipt field)
-    (weld : PhotosyntheticOpticsPlantWeld leaf calibration field interception) : Set₁ where
+    (photonField : PhotosyntheticPhotonField LeafPoint Wavelength PhotonFlux)
+    (interception : LeafLightInterceptionReceipt photonField)
+    (weld : PhotosyntheticOpticsPlantWeld leaf calibration photonField interception) : Set₁ where
   constructor site-conditioned-photosynthesis-realisation
   field
     retainedSiteFibre : Site.SolarOpticalSiteFibre
       SiteId Spectrum AngleDistribution Temperature Shading Soiling Wind Humidity
     retainedSiteFibreIsSameObject : retainedSiteFibre ≡ siteFibre
-    retainedPlantOpticsWeld : PhotosyntheticOpticsPlantWeld leaf calibration field interception
+    retainedPlantOpticsWeld : PhotosyntheticOpticsPlantWeld leaf calibration photonField interception
     retainedPlantOpticsWeldIsSameObject : retainedPlantOpticsWeld ≡ weld
     siteSpectrumToPhotonFieldReference : String
     incidenceAngleToInterceptionReference : String

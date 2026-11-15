@@ -351,9 +351,14 @@ if [ "${AGDA_RTS_STATS:-0}" = "1" ]; then
 fi
 AGDA_RTS_ARGS+=(-RTS)
 
+PARALLEL_OPT=()
+if "$AGDA_BIN" --help 2>&1 | grep -q -- ' -j'; then
+  PARALLEL_OPT+=("-j$JOBS")
+fi
+
 AGDA_RUN=("$AGDA_BIN" "${AGDA_RTS_ARGS[@]}" \
   --no-libraries --no-default-libraries \
-  "-j$JOBS" \
+  "${PARALLEL_OPT[@]}" \
   -i . -i DCHoTT-Agda -i vendor/bishop -i cubical -i "$STDLIB_INCLUDE" \
   -WnoUnsupportedIndexedMatch \
   "${AGDA_PROFILE_ARGS[@]}" \

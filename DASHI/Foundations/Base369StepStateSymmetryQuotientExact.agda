@@ -188,9 +188,9 @@ stepDiscrepancy left right =
 stepDiscrepancySelf :
   (state : EnhancedStepState) → stepDiscrepancy state state ≡ 0
 stepDiscrepancySelf
-  (enhancedStepState orientation zero live cost drift boundary)
+  (enhancedStepState orientation zk live cost drift boundary)
   rewrite tritMismatchSelf orientation
-        | zeroKindMismatchSelf zero
+        | zeroKindMismatchSelf zk
         | boolMismatchSelf live
         | natMismatchSelf cost
         | tritMismatchSelf drift

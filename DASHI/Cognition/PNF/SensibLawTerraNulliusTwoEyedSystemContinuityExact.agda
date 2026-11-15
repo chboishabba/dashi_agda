@@ -62,32 +62,32 @@ data RelationTransformationCoordinate : Set where
 data CoordinateState : Set where
   paid : CoordinateState
   partial : CoordinateState
-  open : CoordinateState
+  openState : CoordinateState
   sourceOutcomeRequired : CoordinateState
 
 
 currentCoordinateState : RelationTransformationCoordinate → CoordinateState
 currentCoordinateState doctrineRejected = paid
 currentCoordinateState indigenousOrderConstitutiveStanding = partial
-currentCoordinateState communityAuthorityBearing = open
-currentCoordinateState landCountryControl = open
-currentCoordinateState communityDefinedOutcomeAuthority = open
-currentCoordinateState independentCorrectionAvailable = open
-currentCoordinateState externalEvidenceCanChangeDecision = open
-currentCoordinateState dissentRemainsAdmissibleEvidence = open
-currentCoordinateState compensationAndReparationRealised = open
+currentCoordinateState communityAuthorityBearing = openState
+currentCoordinateState landCountryControl = openState
+currentCoordinateState communityDefinedOutcomeAuthority = openState
+currentCoordinateState independentCorrectionAvailable = openState
+currentCoordinateState externalEvidenceCanChangeDecision = openState
+currentCoordinateState dissentRemainsAdmissibleEvidence = openState
+currentCoordinateState compensationAndReparationRealised = openState
 currentCoordinateState recurrencePreventionRealised = sourceOutcomeRequired
 
 doctrineIsRejected : currentCoordinateState doctrineRejected ≡ paid
 doctrineIsRejected = refl
 
-landControlStillOpen : currentCoordinateState landCountryControl ≡ open
+landControlStillOpen : currentCoordinateState landCountryControl ≡ openState
 landControlStillOpen = refl
 
-communityAuthorityStillOpen : currentCoordinateState communityAuthorityBearing ≡ open
+communityAuthorityStillOpen : currentCoordinateState communityAuthorityBearing ≡ openState
 communityAuthorityStillOpen = refl
 
-compensationStillOpen : currentCoordinateState compensationAndReparationRealised ≡ open
+compensationStillOpen : currentCoordinateState compensationAndReparationRealised ≡ openState
 compensationStillOpen = refl
 
 ------------------------------------------------------------------------

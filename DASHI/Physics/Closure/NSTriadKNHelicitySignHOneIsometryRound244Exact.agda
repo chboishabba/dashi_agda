@@ -29,7 +29,8 @@ module DASHI.Physics.Closure.NSTriadKNHelicitySignHOneIsometryRound244Exact wher
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong)
 
 record HelicalComponentEnergy {a} (Component Scalar : Set a) : Set a where
   constructor helical-component-energy

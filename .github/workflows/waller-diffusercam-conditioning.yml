@@ -1,0 +1,58 @@
+name: Waller DiffuserCam conditioning audit
+
+on:
+  push:
+    branches:
+      - feature/diffraction-3d-imaging-physical-maxcut-20261008
+  workflow_dispatch:
+
+jobs:
+  conditioning:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install numerical dependencies
+        run: python -m pip install --disable-pip-version-check numpy scipy pytest
+      - name: Run focused static and offline numerical contracts
+        run: |
+          python scripts/check_waller_diffusercam_conditioning_selftest.py
+          python -m pytest -q \
+            tests/test_waller_diffusercam_conditioning_numeric.py \
+            tests/test_waller_diffusercam_claim_scale.py \
+            tests/test_waller_diffusercam_public_artifact_maxcut.py \
+            tests/test_diffraction_3d_imaging_acquisition_maxcut.py \
+            tests/test_diffraction_3d_imaging_physical_maxcut.py
+      - name: Download pinned public PSF artifact once
+        run: |
+          python - <<'PY'
+          import urllib.request
+          url = "https://raw.githubusercontent.com/Waller-Lab/DiffuserCam/c8516cb8f482c2bb15e75ebebd91a74b88732c95/example_data/example_psfs.mat"
+          urllib.request.urlretrieve(url, "example_psfs.mat")
+          PY
+      - name: Plan memory-safe selected-H claim scale
+        run: |
+          python scripts/plan_waller_diffusercam_claim_scale.py \
+            --psf example_psfs.mat \
+            --budget-gib 5 \
+            --radii 0,1,2 \
+            --steps 1 \
+            --require-safe-radius 1 \
+            --require-safe-step 1 \
+            --json-out waller_diffusercam_claim_scale.json
+      - name: Run pinned public-PSF audit
+        run: |
+          python scripts/check_waller_diffusercam_conditioning.py \
+            --psf example_psfs.mat \
+            --lateral-radius 1 \
+            --lateral-step 1 \
+            --json-out waller_diffusercam_conditioning.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: waller-diffusercam-conditioning
+          path: |
+            waller_diffusercam_claim_scale.json
+            waller_diffusercam_conditioning.json

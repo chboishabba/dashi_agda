@@ -51,7 +51,8 @@ module DASHI.Physics.YangMills.YangMillsLocalChargeCommutatorToCoreStabilization
 --   * vacuum-neutral Ward decomposition on local states.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl; cong; sym; trans)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Nat.Base using (_≤_)
 

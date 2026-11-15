@@ -1,0 +1,32 @@
+name: Y443 source finite certificates (Agda 2.9 via parallel_checker separately)
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - agent/y443-monster-vnatural-maxcut-20261106
+    paths:
+      - 'DASHI/Moonshine/Y443*.agda'
+      - 'scripts/check_y443_vnatural_pair_bridge.py'
+      - 'scripts/check_y443_jmd_*.py'
+      - '.github/workflows/y443-vnatural-pair.yml'
+  pull_request:
+    paths:
+      - 'DASHI/Moonshine/Y443*.agda'
+      - 'scripts/check_y443_vnatural_pair_bridge.py'
+      - '.github/workflows/y443-vnatural-pair.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  y443-finite-source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      # Agda golden acceptance uses scripts/run_agda29_parallel_check.sh
+      # with the pinned DASHI 2.9 standard library and sources. The generic
+      # GitHub runner's old 2.6.4 compiler must NOT be called a golden pass.
+      - name: Run independent finite Y443 35-step and 141-step audits
+        run: python3 scripts/check_y443_vnatural_pair_bridge.py --finite-only
