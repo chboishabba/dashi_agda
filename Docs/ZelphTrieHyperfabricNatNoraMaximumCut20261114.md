@@ -1,5 +1,111 @@
 # Zelph ↔ trie / ultrametric ↔ indexed hyperfabric ↔ Nat/NORA — exact maximum-cut
 
+## A2-B source-original sparse routing / constructive Agda weld — 15 November 2026
+
+**Latest operator-accepted evidence:** physical original HTTP206 `left:5`,
+`right:1`, `right:983` **127,798,753 total** original byte parity
+against immutable `wikidata-20260309-all.bin` and exact pinned published
+HF shards; source schema native decoder scanned those 3 adjacency chunks,
+reporting incomplete directions as `unknown_outside_scanned_source_chunks=true`.
+The Agda #1505 Ibrahim spine **15/15** Agda 2.8.0.2 + **57/57** Python
+passed at its last checked head. The A1 name audit separately has
+4/204 original `nodeOfName` chunks, 4,000,000 native rows and five
+replayed positive QIDs. **No full adjacency section or 20-word original
+finite query result is yet physically accepted.**
+
+**Decisive upstream producer invariant:** `acrion/zelph`'s
+`src/lib/network/network.hpp` declares adjacency storage as
+`ankerl::unordered_dense::segmented_map<Node,adjacency_set>`; the
+`saveToFile` path in `zelph_persistence.cpp` iterates `_left.begin()` /
+`_right.begin()` when making source-global Cap'n Proto chunks.
+Therefore numeric node ID order, min/max first/last source key and
+`nodeId % numberOfChunks` do **not** give a proved original route.
+The original Cap'n Proto AdjChunk contains exact `AdjPair.node`
+keys; section-global membership requires true key evidence.
+
+**New source-written ITIR #14 A2-B maximum cut, not yet new-head
+accepted:** `--adjacency-bloom` in the genuine original-schema C++
+decoder enumerates EVERY original native `AdjPair.node` per physically
+witnessed chunk, constructs a deterministic 2MiB Bloom membership map,
+and publishes it ONLY after exact packed EOF/trailer validation.
+`build_zelph_original_lr_bloom.py` pins original HTTP206/published
+byte SHA, source offset/section/chunk, actual decoder binary SHA,
+bitmap SHA and native row count, with resumable receipts.
+`query_zelph_original_lr_blooms.py` returns possible-hit chunk IDs
+for the five source-positive QIDs and additional bounded numeric roots,
+plus exact exclusions **only for verified chunks**. Any unverified
+source chunk is UNKNOWN. Full original 984+984 Bloom filters are a
+precondition for node-direction completeness.
+
+**The second half of the large cut is now implemented:**
+`replay_zelph_original_lr_bloom_candidates.py` chooses only
+Bloom-positive candidate chunks after full original-key-cover, verifies
+their earlier physical original HTTP206 receipts, optionally
+re-fetches *only the pinned standalone candidate object* and
+SHA-verifies it against original source, invokes the real original
+C++ selected adjacency decoder, and excludes false positives.
+`close_original_http206_lr_finite_words.py` accepts this provenance
+under its own distinct Bloom-pruned receipt version and requires
+every candidate to have genuine native replay before promoting
+any original finite `left/right` word. The original full-section
+scan alternative remains supported; no new route oracle or unsupported
+numeric chunk-order assumption is introduced.
+
+**New golden Agda module (SOURCE WRITTEN; local kernel acceptance OPEN):**
+`DASHI.Interop.ZelphOriginalBloomPrunedSourceRouteExact` states and
+constructively proves the conditional original-edge equivalence:
+
+- `bloomNegativeExcludesSourceRow`: for a *verified original chunk*,
+  a no-false-negative native membership certificate and a Bloom-negative
+  witness exclude an original row in THAT chunk;
+- `originalEdgeToBloomCandidate` and
+  `bloomCandidateToOriginalEdge`: full original chunk coverage +
+  no false negatives + exact native candidate-row refinement give
+  both directions of original/selected edge membership;
+- `originalEdgesEquivalentToBloomReplayedEdges`: the
+  two-direction extensional original adjacency statement for a fixed
+  source node and target node.
+
+These theorems explicitly **REQUIRE** a complete
+`(c : Chunk) → Verified c` premise and the real
+`OriginalRow ↔ NativeRow` refinement for possible hits.
+They do not prove those empirical/source-execution premises from
+a receipt name, nor do they prove concrete splitmix64 hash
+implementation correctness. The existing
+`ZelphFiniteQueryWordClosureExact.SourceReachableBoundary` remains
+the trusted *conditional finite-word induction* to use after actual
+source-scoped frontier equality certificates.
+
+**Exact remaining A2 gate chain:**
+
+1. **A2-B0** kernel-check the new golden Agda module via
+   `scripts/check_zelph_trie_hyperfabric_maxcut.sh` (now 10 targets);
+   run ITIR `bash tools/check_zelph_physical_maxcut_offline.sh` with the
+   new original-schema binary Bloom + native candidate tests;
+2. **A2-B1** generate actual source-bound membership filters for
+   `left:5`, `right:1`, `right:983` from already accepted
+   local original-equal packed files; count source keys and produce
+   original SHA/bitmap/decoder-witness receipts;
+3. **A2-B2** audit physical original `left/right` coverage or
+   independently obtain a provably same-original-node route index;
+   full Bloom section coverage is OPEN (currently only three chunks);
+4. **A2-B3** source-native replay all true/false Bloom candidate
+   chunks for root and each reached numeric frontier, then compile
+   original `SourceReachableBoundary` and close all **20 distinct**
+   QID/relation-word contracts;
+5. **A1** full original name inverse section and indexed multi-fibre
+   Agda weld, plus P854 native semantic primary evidence, S29 real
+   PostgreSQL reopen and NORA export all remain OPEN.
+
+ITIR executable operator receipt runbook:
+[original A2-B Bloom / exact candidate + 20-word source gate](https://github.com/chboishabba/ITIR-suite/blob/agent/nat-filtered-route-producer/docs/planning/zelph_original_lr_bloom_sparse_a2_maxcut_20261115.md).
+The initial full 984+984 original physical comparison cost is NOT
+avoided by Bloom; the gain is avoiding repeated large native scans for
+each additional query frontier. All positive routing remains conditional
+on explicit original provenance and downstream read-only authority.
+
+---
+
 ## Recovered architectural source: Agda + Zelph native / HF routing already implemented — 15 Nov
 
 **Correction to the A2 maximum cut:** Real prior engineering already provides original Zelph Cap'n Proto `.index-file`/`.load-partial`, manifest-driven HF v2 remote shards and an optional exact `zelph-node-route/v1` sidecar with `route-node`/`route-name`, plus v3 rebucketed query-shaped proof and HF revision-aware cache. Upstream `acrion/zelph#25` is closed with local + remote v3 route smoke (remote routed ~5.476s, explicit ~7.948s vs sequential ~21s); `#26` corrected manifest load-all; `#30` provided revision/ETag cache policy with 156/156 tests and successful live payload revalidation. Upstream Zelph sharding documentation explicitly credits chboishabba. Local ITIR March 26 report `docs/planning/zelph_bin_sharding_note_20260326.md` documents exact 2017 pruned source route `.route.json` (~735MiB) and upstream routed HTTP; July 2 report documents live 60,731,574-byte remote partial Zelph selection. SLR #28 implemented canonical physical-object planning, P31/P279 slice preference, route-aware HF snapshot, <=5 distinct cold objects, cache/receipt replay and live Wikidata fallback. Our earlier prompts overemphasized original 984+984 brute-force scans without reciting these existing source-and-log owners.
