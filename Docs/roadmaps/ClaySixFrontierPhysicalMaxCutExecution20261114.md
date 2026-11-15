@@ -7,6 +7,10 @@ No Clay problem or NP-completeness consequence is claimed solved.
 
 ## 15 November 2026 — governing P0–F3 six-endpoint execution (supersedes older broad gap descriptions)
 
+**Gate-count and receipt update (15 November): P0 source-owner/donor-dedup gate CLOSED. 14 of the original 15 independent gates remain active (A1,A2,B1,B2,C1,C2,D1,D2,E0,E1,E2,F1,F2,F3), and all six original mathematical endpoints remain OPEN.** The canonical JSON now retains checked original owner blob SHA and term/flag line receipts for all 135 entries (47 Agda, three Lean), six original donor same-blob receipts and negative controls. Pinned kernel was intentionally *not* marked paid: it is retained under E0 and each mathematical terminal gate. Source-only P0 completion is not a Clay/NP/OS result.
+
+
+
 **Start here and nowhere else for the six contested endpoints:** [ClayRecoveredProducersW2NoGoR856SourceMaxCut20261115.md](ClayRecoveredProducersW2NoGoR856SourceMaxCut20261115.md#canonical-execution-plan--exact-symbol-re-audit-15-november-2026) and its **135-term** machine-readable [ClaySixFrontierABCExactGates20261114.json](ClaySixFrontierABCExactGates20261114.json) under `six_endpoint_exact_symbol_audit_20261115`. This is the canonical roadmap/phase/deliverable/exact-lemma source; the old sections below are historical phase records and must not be read as current independent obligations. Update the canonical pair **first** after any found in-repo producer and **with** every new source/kernel receipt. No duplicate generic compiler, no new donor PR, no new competing roadmap.
 
 **Phases and acceptance**:
