@@ -11,7 +11,7 @@ module DASHI.Moonshine.Monster3BFiniteSchrodingerDeltaExtractionExact where
 --   4. pointwise extensional closure transports membership to delta_s.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
