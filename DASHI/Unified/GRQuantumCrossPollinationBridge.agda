@@ -12,7 +12,7 @@ open import DASHI.Unified.GRQuantumUnification
 -- it records where proof terms can be transported into the unified closure.
 import DASHI.Foundations.SSPTritCarrier
 import DASHI.Foundations.SSPBase369Bridge
-import DASHI.Foundations.SSPPrimeLane369DepthPhaseBridge
+import DASHI.Physics.Closure.SSPPrimeLane369DepthPhaseBridge
 import DASHI.Geometry.SSP369Ultrametric
 import DASHI.Geometry.SSP369SymmetryIsometry
 import DASHI.Geometry.DifferentialGeometryParity
