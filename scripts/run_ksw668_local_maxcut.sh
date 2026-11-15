@@ -39,6 +39,23 @@ run python python3 scripts/ksw668_u1_4potential_continuum.py
 run python python3 scripts/test_ksw668_mms4_tetrahedron.py
 run python python3 scripts/ksw668_kk_vacuum_observer_solution.py
 run python python3 scripts/ksw668_kk_einstein_scalar_cosmology.py
+run python python3 scripts/ksw668_brane_bulk_shortcut_same_metric.py
+run python python3 scripts/ksw668_brane_winding_stability_source.py
+run python python3 scripts/ksw668_compact_kk_mode_dispersion.py
+run python python3 scripts/ksw668_caldwell_langlois_original_eq19.py
+run python python3 scripts/ksw668_caldwell_langlois_israel_exact.py
+run python python3 scripts/ksw668_brane_winding_allmode_linear_stability.py
+run python python3 scripts/ksw668_ads5_gravitational_horizon_variance_bound.py
+run python python3 scripts/ksw668_ads5_tensor_mode_moving_israel_bc.py
+run python python3 scripts/ksw668_brane_finite_energy_and_sourced_tt_witness.py
+run python python3 scripts/ksw668_brane_original_maxcut_exact.py
+run python python3 scripts/ksw668_ads5_induced_weyl_receiver_partial.py
+run python python3 scripts/ksw668_ads5_mode_energy_scale_guard.py
+run python python3 scripts/test_ksw668_brane_original_maxcut.py
+run python python3 scripts/ksw668_ads5_z2_distributional_israel_coefficient.py
+run python python3 scripts/ksw668_brane_scalar_emitter_receiver_retarded.py
+run python python3 scripts/ksw668_original_eq19_rational_pair_horizon.py
+run python python3 scripts/test_ksw668_brane_shortcut.py
 run python python3 scripts/test_ksw668_endf81_primary.py
 run python python3 scripts/test_ksw668_endf81_law_integral.py
 run python python3 scripts/test_ksw668_e2_bound.py
@@ -142,6 +159,15 @@ run agda bash scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/Chemistry/KSW668NuclearElectronStateLedgerExact.agda \
   DASHI/Physics/Gravity/KSW668KaluzaKleinSpacelikeFiberCausalExact.agda \
   DASHI/Physics/Gravity/KSW668FiveDimensionalEinsteinScalarFRWFriedmannExact.agda \
+  DASHI/Physics/Gravity/KSW668BraneBulkRationalNullComparatorExact.agda \
+  DASHI/Physics/Gravity/KSW668BraneWindingSourceFiniteExact.agda \
+  DASHI/Physics/Gravity/KSW668CaldwellLangloisHorizonSourceRationalExact.agda \
+  DASHI/Physics/Gravity/KSW668BraneLevinStringTSFVPromotionBoundaryExact.agda \
+  DASHI/Physics/Gravity/KSW668AdS5IsraelOriginalRationalSliceExact.agda \
+  DASHI/Physics/Gravity/KSW668BulkScalarReceiverRationalSliceExact.agda \
+  DASHI/Physics/Gravity/KSW668CylinderZ2WindingIsraelRationalExact.agda \
+  DASHI/Physics/Gravity/KSW668AdS5LinearIsraelTTRationalSliceExact.agda \
+  DASHI/Physics/Gravity/KSW668BraneBulkMaxCutEverything.agda \
   DASHI/Biology/KSW668EmpiricalIsotopeMagnetoreceptionSourceExact.agda \
   DASHI/Biology/KSW668HumanCarbon14ObservedExact.agda \
   DASHI/Physics/Plasma/KSW668SourceCrosswalkExact.agda
