@@ -31,6 +31,7 @@ TARGETS=(
   DASHI/Interop/ZelphBoundedGraphCoverageExact.agda
   DASHI/Interop/ZelphPhysicalShardQueryMaxCutExact.agda
   DASHI/Interop/ZelphFiniteQueryWordClosureExact.agda
+  DASHI/Interop/ZelphOriginalBloomPrunedSourceRouteExact.agda
   DASHI/Interop/ZelphMultiNameShardFibreExact.agda
 )
 
