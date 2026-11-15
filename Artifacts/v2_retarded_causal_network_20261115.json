@@ -1,0 +1,53 @@
+{
+  "scope": "source-independent finite-front routing; no measured V2 geometry",
+  "donor": "Smith/Filsinger discrete RetardedFlight, time-indexed transfer and Maxwell source boundaries",
+  "c_m_per_s": 299792458,
+  "example_half_meter_cable": {
+    "name": "illustrative 0.5 m cable",
+    "length_m": 0.5,
+    "front_speed_m_s": 209854720.6,
+    "amplitude_transmission": 0.9
+  },
+  "example_round_trip": {
+    "links": [
+      {
+        "name": "illustrative 0.5 m cable",
+        "length_m": 0.5,
+        "front_speed_m_s": 209854720.6,
+        "amplitude_transmission": 0.9
+      },
+      {
+        "name": "illustrative 0.5 m cable",
+        "length_m": 0.5,
+        "front_speed_m_s": 209854720.6,
+        "amplitude_transmission": 0.9
+      }
+    ],
+    "path_m": 1,
+    "fastest_vacuum_arrival_s": 3.3356409519815204e-9,
+    "continuous_front_delay_s": 4.765201359973601e-9,
+    "conservative_sampled_arrival_s": 6.000000000000001e-9,
+    "discrete_ticks": 6,
+    "overshoot_s": 1.2347986400264e-9,
+    "bounded_by_total_per_hop_grid_error_s": 2e-9,
+    "finite_speed_pass": true,
+    "source": "conditional specified link geometry, not original V2 wiring"
+  },
+  "shaft_period_s": 0.025488530161427356,
+  "pwm_period_s": 0.00005,
+  "existing_180_steps_per_rev_step_s": 0.0001416029453412631,
+  "pwm_phase_scale": {
+    "frequency_hz": 20000,
+    "front_delay_s": 2.3826006799868004e-9,
+    "omega_tau_rad": 0.0002994064317073831,
+    "wavelength_in_link_m": 10492.73603,
+    "interpretation": "scale diagnostic only; requires separate field-error theorem"
+  },
+  "invalid_inference": "a lumped mutual L has no literal superluminal field; it is an approximation requiring causality-error control",
+  "remaining_gates": [
+    "v2SpatialCausalRetardedMagneticFieldWeld",
+    "v2DistributedLineMaxwellPassivityAndWavefrontBound",
+    "v2LumpedQuasistaticErrorAndControllerLatencyBound",
+    "v2ActualCableGeometryMaterialAndProbeDelayReceipt"
+  ]
+}
