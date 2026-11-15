@@ -14,7 +14,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.List.Base using (List; []; _∷_)
 open import Data.Nat.Base using (NonZero)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 open import DASHI.Physics.YangMills.P06FaceCubeTorusGeometry using (Cube4)
 open import DASHI.Physics.YangMills.BalabanPeriodicGaugeTransport using
@@ -118,33 +118,44 @@ nestedRadialSegmentGaugeCovariant :
       rootOperator junctionOperator Y U A sample)
 nestedRadialSegmentGaugeCovariant
   rootOperator junctionOperator gauge Y U A {root = root} sample =
-  cong
-    (applyRadialReduced rootOperator (su2Adjoint (gauge root) (Y root)))
-    step3
-  ⟪-trans-⟫
-  sym
-    (applyRadialReducedGaugeCovariant
-      rootOperator
-      (gauge root)
-      (Y root)
-      transportedValue)
+  trans
+    (cong
+      (applyRadialReduced rootOperator (su2Adjoint (gauge root) (Y root)))
+      (trans
+        (cong₂ su2Adjoint
+          (pathTransportGaugeCovariant
+            su2QuaternionGroup gauge U (prefix sample))
+          (trans
+            (cong
+              (applyRadialReduced junctionOperator
+                (su2Adjoint (gauge (junction sample)) (Y (junction sample))))
+              (covariantPathIntegralGaugeCovariant
+                su2QuaternionGroup su2AdjointLinearModule gauge U A
+                (segment sample)))
+            (sym
+              (applyRadialReducedGaugeCovariant
+                junctionOperator
+                (gauge (junction sample))
+                (Y (junction sample))
+                originalSegment))))
+        (conjugatedTransportAction
+          su2QuaternionGroup su2AdjointLinearModule
+          (gauge root)
+          originalPrefix
+          (gauge (junction sample))
+          junctionValue)))
+    (sym
+      (applyRadialReducedGaugeCovariant
+        rootOperator
+        (gauge root)
+        (Y root)
+        transportedValue))
   where
-    _⟪-trans-⟫_ = trans
-
     originalSegment : SU2LieAlgebra
     originalSegment =
       covariantPathIntegral
         su2QuaternionGroup su2AdjointLinearModule
         U A (segment sample)
-
-    transformedSegment : SU2LieAlgebra
-    transformedSegment =
-      covariantPathIntegral
-        su2QuaternionGroup su2AdjointLinearModule
-        (gaugeTransformBond su2QuaternionGroup gauge U)
-        (transformAdjointBondField
-          su2QuaternionGroup su2AdjointLinearModule gauge A)
-        (segment sample)
 
     junctionValue : SU2LieAlgebra
     junctionValue =
@@ -156,75 +167,8 @@ nestedRadialSegmentGaugeCovariant
       directedPathTransport
         su2QuaternionGroup U (prefix sample)
 
-    transformedPrefix : SU2Quaternion
-    transformedPrefix =
-      directedPathTransport su2QuaternionGroup
-        (gaugeTransformBond su2QuaternionGroup gauge U)
-        (prefix sample)
-
     transportedValue : SU2LieAlgebra
     transportedValue = su2Adjoint originalPrefix junctionValue
-
-    step1 :
-      applyRadialReduced junctionOperator
-        (su2Adjoint (gauge (junction sample)) (Y (junction sample)))
-        transformedSegment
-      ≡
-      su2Adjoint (gauge (junction sample)) junctionValue
-    step1 =
-      trans
-        (cong
-          (applyRadialReduced junctionOperator
-            (su2Adjoint (gauge (junction sample)) (Y (junction sample))))
-          (covariantPathIntegralGaugeCovariant
-            su2QuaternionGroup su2AdjointLinearModule gauge U A
-            (segment sample)))
-        (sym
-          (applyRadialReducedGaugeCovariant
-            junctionOperator
-            (gauge (junction sample))
-            (Y (junction sample))
-            originalSegment))
-
-    step2 :
-      su2Adjoint transformedPrefix
-        (applyRadialReduced junctionOperator
-          (su2Adjoint (gauge (junction sample)) (Y (junction sample)))
-          transformedSegment)
-      ≡
-      su2Adjoint
-        (multiply su2QuaternionGroup
-          (gauge root)
-          (multiply su2QuaternionGroup
-            originalPrefix
-            (inverse su2QuaternionGroup (gauge (junction sample)))))
-        (su2Adjoint (gauge (junction sample)) junctionValue)
-    step2 =
-      trans
-        (cong (su2Adjoint transformedPrefix) step1)
-        (cong
-          (λ transport →
-            su2Adjoint transport
-              (su2Adjoint (gauge (junction sample)) junctionValue))
-          (pathTransportGaugeCovariant
-            su2QuaternionGroup gauge U (prefix sample)))
-
-    step3 :
-      su2Adjoint transformedPrefix
-        (applyRadialReduced junctionOperator
-          (su2Adjoint (gauge (junction sample)) (Y (junction sample)))
-          transformedSegment)
-      ≡
-      su2Adjoint (gauge root) transportedValue
-    step3 =
-      trans
-        step2
-        (conjugatedTransportAction
-          su2QuaternionGroup su2AdjointLinearModule
-          (gauge root)
-          originalPrefix
-          (gauge (junction sample))
-          junctionValue)
 
 nestedRadialDifferenceTerm :
   ∀ {N : Nat} {{_ : NonZero N}} →
@@ -267,32 +211,19 @@ nestedRadialDifferenceGaugeCovariant :
 nestedRadialDifferenceGaugeCovariant
   rootOperator junctionOperator gauge Y U A {root = root} sample =
   trans
-    (cong
-      (λ first → lieSubtract first
-        (transportedSegmentIntegral su2QuaternionGroup
-          su2AdjointLinearModule
-          (gaugeTransformBond su2QuaternionGroup gauge U)
-          (transformAdjointBondField
-            su2QuaternionGroup su2AdjointLinearModule gauge A)
-          sample))
+    (cong₂ lieSubtract
       (nestedRadialSegmentGaugeCovariant
-        rootOperator junctionOperator gauge Y U A sample))
-    (trans
-      (cong
-        (lieSubtract
-          (su2Adjoint (gauge root)
-            (nestedRadialSegmentTerm
-              rootOperator junctionOperator Y U A sample)))
-        (transportedSegmentIntegralGaugeCovariant
-          su2QuaternionGroup su2AdjointLinearModule
-          gauge U A sample))
-      (sym
-        (su2AdjointSubtract
-          (gauge root)
-          (nestedRadialSegmentTerm
-            rootOperator junctionOperator Y U A sample)
-          (transportedSegmentIntegral
-            su2QuaternionGroup su2AdjointLinearModule U A sample))))
+        rootOperator junctionOperator gauge Y U A sample)
+      (transportedSegmentIntegralGaugeCovariant
+        su2QuaternionGroup su2AdjointLinearModule
+        gauge U A sample))
+    (sym
+      (su2AdjointSubtract
+        (gauge root)
+        (nestedRadialSegmentTerm
+          rootOperator junctionOperator Y U A sample)
+        (transportedSegmentIntegral
+          su2QuaternionGroup su2AdjointLinearModule U A sample)))
 
 nestedRadialDifferenceSum :
   ∀ {N : Nat} {{_ : NonZero N}} →
@@ -336,36 +267,20 @@ nestedRadialDifferenceSumGaugeCovariant :
       rootOperator junctionOperator Y U A samples)
 nestedRadialDifferenceSumGaugeCovariant
   rootOperator junctionOperator gauge Y U A {root = root} [] =
-  su2AdjointZero (gauge root)
+  sym (su2AdjointZero (gauge root))
 nestedRadialDifferenceSumGaugeCovariant
   rootOperator junctionOperator gauge Y U A {root = root}
   (sample ∷ samples) =
   trans
-    (cong
-      (λ tail →
-        lieAdd
-          (nestedRadialDifferenceTerm rootOperator junctionOperator
-            (transformSU2LieField gauge Y)
-            (gaugeTransformBond su2QuaternionGroup gauge U)
-            (transformAdjointBondField
-              su2QuaternionGroup su2AdjointLinearModule gauge A)
-            sample)
-          tail)
+    (cong₂ lieAdd
+      (nestedRadialDifferenceGaugeCovariant
+        rootOperator junctionOperator gauge Y U A sample)
       (nestedRadialDifferenceSumGaugeCovariant
         rootOperator junctionOperator gauge Y U A samples))
-    (trans
-      (cong
-        (λ head →
-          lieAdd head
-            (su2Adjoint (gauge root)
-              (nestedRadialDifferenceSum
-                rootOperator junctionOperator Y U A samples)))
-        (nestedRadialDifferenceGaugeCovariant
-          rootOperator junctionOperator gauge Y U A sample))
-      (sym
-        (su2AdjointAdd
-          (gauge root)
-          (nestedRadialDifferenceTerm
-            rootOperator junctionOperator Y U A sample)
-          (nestedRadialDifferenceSum
-            rootOperator junctionOperator Y U A samples))))
+    (sym
+      (su2AdjointAdd
+        (gauge root)
+        (nestedRadialDifferenceTerm
+          rootOperator junctionOperator Y U A sample)
+        (nestedRadialDifferenceSum
+          rootOperator junctionOperator Y U A samples)))
