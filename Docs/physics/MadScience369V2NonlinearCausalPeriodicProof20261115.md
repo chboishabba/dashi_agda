@@ -54,6 +54,6 @@ Illustrative test: ell=.0256 H, Lambda=.0584 H, R=1 ohm, K=.25 ohm, tau=.0001000
 
 ## Acceptance and remaining exact gates
 
-Full local source and 53 new adversarial tests are in separately supplied artifact v2_nonlinear_causal_maxcut_round4_20261115.zip. Complete local Python acceptance: 216/216 PASS, including preceding 163 tests. The local default wrapper passes; full historic SLSQP producer replay remains opt-in; pinned Agda/Nix unavailable and no Agda kernel PASS is asserted.
+Full producer and all 53 new adversarial tests are committed to this PR. Their Git blob hashes match the independently tested local files exactly. The complete independently verified ZIP v2_nonlinear_causal_maxcut_round4_20261115.zip also contains detailed local numerical receipts and the expanded proof. Complete local Python acceptance: 216/216 PASS, including preceding 163 tests. The local default wrapper passes; full historic SLSQP producer replay remains opt-in; pinned Agda/Nix unavailable and no Agda kernel PASS is asserted.
 
 All **16 original strict P0–P4 gates remain OPEN** at their original strong levels: real/kernel calculus acceptance, hysteretic nonlinear passive memory, real hybrid switch/thermal limitations, full distributed Maxwell-to-motor error, global physical optimiser, original V2 netlist/flux/torque, complete signed shaft/controller/load/storage experiments and causal probe calibration.
