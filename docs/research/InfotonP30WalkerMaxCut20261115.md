@@ -87,3 +87,14 @@ See [round-2 source / physical-discriminator audit](./InfotonP30WalkerRound2Phys
 A real (72,64) syndrome-based SECDED reference corrects all 72 single-bit and detects all 2556 double-bit corruptions. An explicitly non-P30 coprime-unit surrogate does *not* detect 4352/5376 legal one-position substitutions, disproving residue membership alone as universal ECC. **Neither test runs Walker's unavailable original P30 codec.**
 
 The 130kW→1.73kW slide is conditional on *all* rack load scaling with a non-equivalent counted-operation ratio. With 25% fixed load, the conditional projected remaining rack power is 33.796kW; no measured efficiency or water elimination is inferred. Original P30 implementation/verification, Agda kernel checking, real GPU/rack Wattmeter, reactor-specific physical testing, biology spectroscopy and gauge-charge derivations remain OPEN.
+
+
+## 15 November 2026: quantum-369 + critical safety + thermal rebase
+
+See [the exact cross-programme weld](./InfotonP30WalkerQuantum369CriticalSystemsThermalWeld20261115.md) and its new source-written Agda module \`DASHI/Quantum/Infoton369FermiChargeBoundaryExact.agda\`.
+
+Corrections: Walker's **300 K** Infoton mass is a reference-temperature value of the family \`k_B T ln(2)/c²\`; FD \`1/3\` is independent of temperature **at the scaled energy offset**. Existing finite qutrit Weyl and magnetic C3 are exact, but not automatically SU3 colour charge. Reece, JHEP 10 (2023) 116 §2 provides a physically relevant **conditional Z3 centre / fractional-charge congruence** for \`[SU(3)×U(1)]/Z3\`. New module reuses existing C3 arithmetic to source-write its three cases, and separately proves that **occupation alone** cannot recover charge labels. The positive FD→electromagnetic gauge charge endpoint remains OPEN; kernel checking of this new finite module remains OPEN.
+
+Existing thermal owners already give PUE/ERF/ERE and exact source-heat versus compressor-output boundaries; do not substitute a fresh rack-only PUE model or confuse useful heat with electrical savings. Real critical systems have scope-dependent **binding** standards (10 CFR 50.55a(h), FIPS 140-3), but the unspecified nine laws in the reel have not been located and an IBM byte-only obligation is not demonstrated.
+
+**This rebase does not change the original 8/19 Infoton closure ledger: 11 physical/authority/codec gates remain OPEN.** It makes the proof prerequisites and donor reuse more specific without promoting finite source-written material to independent physical endpoints.
