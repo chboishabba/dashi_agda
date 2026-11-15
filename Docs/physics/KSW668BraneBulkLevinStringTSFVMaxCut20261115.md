@@ -526,3 +526,17 @@ under the *correct transformed Neumann boundary* \(Q\psi(b)=0\). The normalizabl
 | D1 | independent operational test defined | actual source-characterised gravitational response and independent observations |
 
 **Next highest-alpha order: B3 (+ local B2 physical stress) → B4 same-source Green convolution and tidal receiver → moving B5, then C1/D1.** Also separately A4 → doubled-disc scalar/tensor evolution on exactly that new metric. Use one PR (#1504) per repo; no invented kernel acceptance, universal FTL, free energy or observational signal.
+
+
+### B4 added: correctly gauge-invariant induced 4D electric-Weyl discriminator (NOT retarded transport)
+
+On the original homogeneous/isotropic \(a=t\) FRW brane, background 4D Weyl is zero. Its first-order perturbation is therefore gauge invariant. In conformal time \(\eta=\log t\), with plus-polarized TT \(H_{yy}=H_+(\eta,x),H_{zz}=-H_+\), the linear Weyl electric component in an orthonormal 4D receiver frame is
+\[
+\delta E_{\hat y\hat y}=\frac{1}{a^2}\delta C_{0y0y}
+=-\frac{1}{4a^2}(\partial_\eta^2+\partial_x^2)H_+.
+\]
+This expression **does not require** the intrinsic 4D vacuum Einstein equation. Only if \(H_+\) satisfies the *4D* vacuum wave equation does it reduce to \(-\partial_\eta^2 H_+/(2a^2)\). Using \(-\ddot H/2\) for a generic expanding brane and calling the 4D Riemann equal to Weyl is otherwise wrong.
+
+New source \`scripts/ksw668_ads5_induced_weyl_receiver_partial.py\` inserts the already constructed **nonretarded**, nonlocalized, separated AdS5 mode at the same original geometric receiving location \(r_g=0.697797781099381,t=2\), with \(T_b(1)=0,k=m=1\). It computes \(\delta E_{\hat y\hat y}\approx-0.008053773977753403\) in the declared mathematical mode normalization. This proves that the existing manufactured tensor mode induces a nonzero *candidate gauge-invariant brane curvature observable*, not an early physical message: there is still no finite-energy compact emission, no retarded moving-boundary tensor Green solution, and no calibrated detector. B4 remains OPEN on those exact original source-to-observer obligations.
+
+Relevant source studies: Kodama–Ishibashi–Seto, Phys Rev D 62, 064022 (2000), DOI 10.1103/PhysRevD.62.064022, treats gauge-invariant bulk/brane junction variables; Maartens–Koyama 2010 section 7 explains nonseparable cosmological moving-brane tensor propagation and the anisotropic stress boundary; Caldwell–Langlois 2001 owns the geometric horizon only.
