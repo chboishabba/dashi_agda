@@ -1,4 +1,23 @@
 # Six-frontier original-source maximum cut — implementation rounds 9–10
+
+## Governing 15 November 2026 SIX CLAY Millennium problems — update over historical six A–F frontiers
+
+**Important correction:** the **six A–F research frontiers** in this document were **not** the **six unsolved Clay Millennium problems**. A/B/C all belong to Navier–Stokes, D to Yang–Mills, and E/F both to the P≠NP research programme. They inadvertently excluded RH, BSD and Hodge from the front-page endpoint count. The complete original all-six endpoint authority is now **[ClaySixMillenniumEndpointsExactRoadmap20261115.md](ClaySixMillenniumEndpointsExactRoadmap20261115.md)** and the same canonical JSON's **clay_six_millennium_endpoints_20261115** object.
+
+**No prior decision invalidated or silently upgraded:** the historical A–F subledger retains **6/15 resolved research decisions, 9 open**, none equal to a complete original Millennium proof. The newly expanded research inventory has **28 tracked gates: 6 source/classical decisions settled, 22 OPEN** (new RH R1–R4, BSD S1–S6, Hodge H1–H3 are ALL OPEN). The true mathematically established Clay prize statements remain **0/6**. Negative B1 is a refutation of a proposed auxiliary NS bound; source-only P0 and classical finite C1/C2 and verifier E2 and model F1 cannot increment the endpoint score.
+
+**Full six-problem maximum-cut handoff:**
+
+| Clay terminal problem | Direct blocking original mathematical producers | Gate IDs | Native/terminal status |
+| --- | --- | --- | --- |
+| Navier–Stokes | Original R³ projected resolvent/signed q and actual integrable majorants plus all-data continuation; or valid repaired periodic B2 with W1 (unrestricted signed B1 false) | A1,A2 / B2; C1/C2 finite diagnosis | OPEN |
+| Yang–Mills existence + mass gap | Original interacting Wilson R445 TV+RG cutoff summability OR R320 selected T5 H1; then same physical E1 continuum/OS Hilbert/Hamiltonian, full nonvacuum Δ>0, all groups | D1,D2 | OPEN |
+| Riemann Hypothesis | Original completed zeta/prime-power/gamma/pole zero carrier plus selected signed quartic zero compensation **or** selected signed-fifth cap, then all-zero critical-line exclusion | R1,R2 or R3,R4 | OPEN |
+| Birch and Swinnerton–Dyer | Original conductor-32 Q₂/real H¹ Kummer, Selmer–Sha[2], rank, analytic eta/newform/Mellin L(E,1), all-primary leading coefficient; **separate all-curves universal rank conjecture** | S1–S6 | OPEN |
+| Hodge | Actual smooth projective rational Hodge intersection and original cycle-class map; P¹ physical weld as local test; all-variety all-codimension rational algebraic-cycle reopening | H1–H3 | OPEN |
+| P versus NP | Standard P and actual NP verifier already mathematical protocol; remaining noncircular own-Cook resource closure or different lower bound, ∀D polynomial ∃φ SAT decision failure | E0,E1,F2,F3 (E2,F1 classical decided) | OPEN |
+
+**Acceptance mandate:** each terminal's official all-input/all-group/all-variety quantifiers, exact original-source carrier, rigorous noncircular analysis, and trusted formal kernel checks must be paid separately. The inherited earlier “1/15” and “14 active” lines below are **historical snapshots only**, not the current authoritative counter; source-written and Python-run no-kernel receipts are not equivalent to native kernel acceptance.
 **Date:** 14 November 2026
 **Owner:** Agda Clay PR #1499 and Lean Clay PR #108 (both source rollups); historical owner branches are donors only.
 **Trust:** every linked source-written Agda/Lean candidate is **NOT**
