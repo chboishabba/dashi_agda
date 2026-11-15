@@ -96,18 +96,18 @@ def main() -> int:
     if len(original) != 47 or len(lean_receipts) != 3:
         problems.append("P0_RECEIPT_TRUNCATED: expected 47 Agda and 3 Lean owners")
     # Mathematical Python/SymPy gate decisions, as authorized by the user.
-    # C1/C2 are classical proofs; B1 is a NEGATIVE refutation of unrestricted
-    # signed payment, not a positive theorem or rational-valued R408 packet.
-    # No item here asserts an Agda/Lean native kernel receipt.
+    # C1/C2: classical real Fourier; B1: NEGATIVE refutation; F1: classical
+    # actual-halting standard-TM P-model closure, NOT a universal lower bound.
+    # None asserts original Agda/Lean native kernel acceptance.
     manifest = audit.get("gates", [])
     completed = [g["id"] for g in manifest if g.get("closed", False)]
     active = [g["id"] for g in manifest if not g.get("closed", False)]
     if (len(manifest) != 15
-            or audit.get("active_gate_count") != 11
+            or audit.get("active_gate_count") != 10
             or audit.get("active_gate_ids") != active
-            or audit.get("completed_gate_ids") != ["P0", "B1", "C1", "C2"]
-            or completed != ["P0", "B1", "C1", "C2"]):
-        problems.append("PHASE_GATE_COUNT_MISMATCH: 4/15 decisions (B1 refuted), 11 active")
+            or audit.get("completed_gate_ids") != ["P0", "B1", "C1", "C2", "F1"]
+            or completed != ["P0", "B1", "C1", "C2", "F1"]):
+        problems.append("PHASE_GATE_COUNT_MISMATCH: 5/15 decisions (B1 refuted), 10 active")
     for gate_id, script in [
         ("C1", "check_clay_c1_r71_r74_sympy_bridge_20261115.py"),
         ("C2", "check_clay_c2_r853_selected_rate_sympy_20261115.py"),
@@ -135,6 +135,20 @@ def main() -> int:
             or b2.get("dependency_20261115_B1_unrestricted_no_go", {}).get(
                 "cannot_use_original_R821_unrestricted_signed_payment_as_true") is not True):
         problems.append("B2_NOT_LEFT_OPEN_AFTER_B1_UNRESTRICTED_NO_GO")
+    f1 = next((g for g in manifest if g["id"] == "F1"), None)
+    if (f1 is None
+            or f1.get("status") != "CLOSED_MATHEMATICAL_STANDARD_TM_PYTHON_PROTOCOL"
+            or f1.get("mathematical_standard_P_model_identification") is not True
+            or f1.get("native_HaltingStandardCostClosure_record_inhabited") is not False
+            or f1.get("full_native_machine_phase_compiler_source_written") is not False
+            or f1.get("native_agda_theorem_inhabited") is not False
+            or f1.get("native_kernel_proof_receipt") is not False
+            or not (ROOT / "scripts/check_clay_f1_standard_tm_model_20261115.py").is_file()):
+        problems.append("F1_MATHEMATICAL_MODEL_CLOSURE_OR_NATIVE_FORMAL_DEBT_MISSING")
+    for downstream in ("F2", "F3"):
+        gate = next((g for g in manifest if g["id"] == downstream), None)
+        if gate is None or gate.get("closed") is not False:
+            problems.append(f"{downstream}_FALSELY_CLOSED_BY_F1_COST_MODEL_ALONE")
     c2 = next((g for g in manifest if g["id"] == "C2"), None)
     if c2 is None or c2.get("original_typed_R408_R853_real_field_transport_closed") is not False:
         problems.append("C2_ORIGINAL_R408_TYPED_PHYSICAL_WELD_FALSIFIED_OR_MISSING")
