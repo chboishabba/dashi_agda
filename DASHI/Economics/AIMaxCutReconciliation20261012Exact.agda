@@ -1,9 +1,9 @@
 module DASHI.Economics.AIMaxCutReconciliation20261012Exact where
 
-open import DASHI.Core.Prelude
-open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.String using (String)
+openState import DASHI.Core.Prelude
+openState import Agda.Builtin.Bool using (Bool; false; true)
+openState import Agda.Builtin.Equality using (_≡_; refl)
+openState import Agda.Builtin.String using (String)
 
 import DASHI.Economics.AICapitalAcquisitionProgress20261008Exact as Progress
 import DASHI.Economics.AICapitalProducerBoundedEvidence2026Exact as Bounded
@@ -20,7 +20,7 @@ import DASHI.Economics.AICapitalObservedStateTimeSeries2026Exact as Global
 ------------------------------------------------------------------------
 
 data ReconciledState : Set where
-  open partial paid : ReconciledState
+  openState partial paid : ReconciledState
 
 record ReconciledProducer : Set where
   constructor reconciledProducer
@@ -31,7 +31,7 @@ record ReconciledProducer : Set where
     receipt : String
     promotesGlobalCapitalRecovery : Bool
 
-open ReconciledProducer public
+openState ReconciledProducer public
 
 coreWeaveEntityRolloverPaid : ReconciledProducer
 coreWeaveEntityRolloverPaid = reconciledProducer
@@ -45,7 +45,7 @@ entityPersistencePaid = reconciledProducer
 
 globalPersistenceStillOpen : ReconciledProducer
 globalPersistenceStillOpen = reconciledProducer
-  "global AI-capital persistence" open "global complex"
+  "global AI-capital persistence" openState "global complex"
   "global graph/fundamental coverage changed; no second comparable whole-complex X_t is yet available" false
 
 cerebrasRoleOverlapPaid : ReconciledProducer
@@ -55,7 +55,7 @@ cerebrasRoleOverlapPaid = reconciledProducer
 
 terminalPayerIndependenceStillOpen : ReconciledProducer
 terminalPayerIndependenceStillOpen = reconciledProducer
-  "independent terminal-payer provenance" open "global and entity terminal payer"
+  "independent terminal-payer provenance" openState "global and entity terminal payer"
   "customer concentration and multi-role counterparty receipts do not establish independent external terminal cash" false
 
 infrastructureCommitmentTrajectoryPaid : ReconciledProducer
@@ -65,7 +65,7 @@ infrastructureCommitmentTrajectoryPaid = reconciledProducer
 
 realisedROICWACCStillOpen : ReconciledProducer
 realisedROICWACCStillOpen = reconciledProducer
-  "realised ROIC-WACC capital spread" open "entity and global"
+  "realised ROIC-WACC capital spread" openState "entity and global"
   "operating/cash-flow trajectories exist, but an admissible same-entity realised ROIC and WACC join remains absent" false
 
 qualityAdjustedInferenceMarginStillOpen : ReconciledProducer
@@ -107,7 +107,7 @@ australiaPolicyTrajectoryPaid = reconciledProducer
 
 regulatoryMeasuredBurdenStillOpen : ReconciledProducer
 regulatoryMeasuredBurdenStillOpen = reconciledProducer
-  "measured regulatory compliance burden / concentration response" open "policy-economy"
+  "measured regulatory compliance burden / concentration response" openState "policy-economy"
   "structural moat mechanism and an observed Australian policy trajectory exist, but a same-basis compliance-cost vector and observed entry/open-weight/concentration response remain unacquired" false
 
 ------------------------------------------------------------------------

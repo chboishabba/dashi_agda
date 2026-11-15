@@ -1,9 +1,9 @@
 module DASHI.Economics.AITerminalPayerConsumerSufficiency20261012Exact where
 
-open import DASHI.Core.Prelude
-open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.String using (String)
+openState import DASHI.Core.Prelude
+openState import Agda.Builtin.Bool using (Bool; false; true)
+openState import Agda.Builtin.Equality using (_≡_; refl)
+openState import Agda.Builtin.String using (String)
 
 import DASHI.Economics.AICoreWeaveMicrosoftTerminalPayerBoundary20261012Exact as Microsoft
 import DASHI.Economics.AICoreWeaveNamedPayerSaturation20261012Exact as Saturation
@@ -25,14 +25,14 @@ data TerminalPayerConsumer : Set where
   circularRevenueExclusion : TerminalPayerConsumer
 
 data ConsumerPaymentState : Set where
-  paid partial open : ConsumerPaymentState
+  paid partial openState : ConsumerPaymentState
 
 consumerPaymentState : TerminalPayerConsumer → ConsumerPaymentState
 consumerPaymentState selectedMicrosoftExternalCashCapacity = paid
 consumerPaymentState selectedMetaExternalCashCapacity = paid
-consumerPaymentState selectedOpenAIExternalCashCapacity = open
-consumerPaymentState exhaustiveCoreWeaveTerminalIndependence = open
-consumerPaymentState circularRevenueExclusion = open
+consumerPaymentState selectedOpenAIExternalCashCapacity = openState
+consumerPaymentState exhaustiveCoreWeaveTerminalIndependence = openState
+consumerPaymentState circularRevenueExclusion = openState
 
 record ConsumerRelativePayerReceipt (consumer : TerminalPayerConsumer) : Set where
   constructor consumer-relative-payer-receipt
@@ -44,7 +44,7 @@ record ConsumerRelativePayerReceipt (consumer : TerminalPayerConsumer) : Set whe
     completeGraphTraced : Bool
     everyFundingLoopExcluded : Bool
 
-open ConsumerRelativePayerReceipt public
+openState ConsumerRelativePayerReceipt public
 
 selectedMicrosoftCapacityReceipt :
   ConsumerRelativePayerReceipt selectedMicrosoftExternalCashCapacity
@@ -62,13 +62,13 @@ selectedOpenAICashReceipt :
   ConsumerRelativePayerReceipt selectedOpenAIExternalCashCapacity
 selectedOpenAICashReceipt = consumer-relative-payer-receipt
   "CoreWeave -> OpenAI named contract edge is source-paid; equivalent public external-customer cash provenance remains open"
-  open true false false false
+  openState true false false false
 
 exhaustiveCoreWeaveIndependenceReceipt :
   ConsumerRelativePayerReceipt exhaustiveCoreWeaveTerminalIndependence
 exhaustiveCoreWeaveIndependenceReceipt = consumer-relative-payer-receipt
   "selected Microsoft/Meta/OpenAI edges are insufficient for exhaustive payer-graph independence"
-  open true true false false
+  openState true true false false
 
 selectedMicrosoftCapacityConsumerPaid :
   consumerPaymentState selectedMicrosoftExternalCashCapacity ≡ paid
@@ -79,11 +79,11 @@ selectedMetaCapacityConsumerPaid :
 selectedMetaCapacityConsumerPaid = refl
 
 selectedOpenAICashConsumerOpen :
-  consumerPaymentState selectedOpenAIExternalCashCapacity ≡ open
+  consumerPaymentState selectedOpenAIExternalCashCapacity ≡ openState
 selectedOpenAICashConsumerOpen = refl
 
 coreWeaveExhaustiveIndependenceConsumerOpen :
-  consumerPaymentState exhaustiveCoreWeaveTerminalIndependence ≡ open
+  consumerPaymentState exhaustiveCoreWeaveTerminalIndependence ≡ openState
 coreWeaveExhaustiveIndependenceConsumerOpen = refl
 
 selectedMicrosoftCapacityReusesSourcePaidBoundary :
