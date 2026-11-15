@@ -1400,3 +1400,20 @@ The next strong cut is a **quantitative coupled semidiscrete/fully discrete movi
 
 
 **Additional source-conservation runtime fail-close:** each propagated compact 3D TT source now checks its *actual radial cell-volume sums*: the normalized \(\ell=0\) and \(\ell=2\) weighted moments must be zero to the declared \(10^{-7}\) floating tolerance, and \(\ell=4\) must match the independently integrated positive source moment \(27\int_0^1u^2f(u)du\). A corrupted source grid is rejected before PDE evolution. The broader local superset now passes **185/185** tests; the committed smoke has **172** source-equivalent test cases. The quantitative full moving receiver/Weyl convergence remains OPEN.
+
+
+---
+
+## 2026-11-15 maximum-cut VI — original moving TT forced Neumann wall flux closes, full stability still OPEN
+
+**New exact theorem/source/report owner:** \`Docs/physics/KSW668F8OriginalMovingNeumannFluxEnergyMaxCut20261115.md\`, \`scripts/ksw668_f8_moving_neumann_flux_square.py\` and \`DASHI/Physics/Gravity/KSW668AdS5MovingNeumannFluxRationalExact.agda\` (imported into canonical KSW rollup). For the **actual original wall** \(v=-1/\sqrt{1+t^2}\), \(q_-=\beta q_+-2G/(1-v)\), \(\beta=(1+v)/(1-v)\), the **incoming minus outgoing characteristic quadratic energy flux** has exact completed square
+\[
+\boxed{\mathcal F=(1-v)|q_-|^2-(1+v)|q_+|^2
+=2v\beta|q_+-G/v|^2-\frac2v|G|^2
+\le 2\sqrt5\,|G|^2}
+\]
+uniformly on **original** \(1\le t\le2\), and componentwise for TT. \(G=-6\pi^{TT}\sqrt{1-v^2}/b\) is the original sourced normal Israel datum. The rational \(t=4/3\) Agda **source-only** specializes the identity with \(v=-3/5,q_+=1/8,G=1/12,q_-=-7/96\), proving the exact rational sampled flux \(13/5760\). Homogeneous \(G=0\) is dissipative. This is not a stationary Neumann-series approximation; its source term and velocity are the actual moving wall.
+
+**Combined structural status:** continuous-time/source characteristic boundary flux **CLOSED** and effective \(d=3,7,11\) weighted radial FV Green energy **CLOSED**. The F8 \`ads5OriginalTTSourceCellFluxConservationFullDiscreteEnergy\` remains **PARTIAL**: no fully discrete \((T,y,r)\) moving-domain SSPRK3 CFL/symmetrizer/receiver-Weyl curvature-error theorem yet. Previous actual 3-grid \(H,E^{(4)},E^{(5)}\) fail-closed drift 21.8%, 90.3%, 82.7% and beyond-cone leakage do NOT improve just from this flux algebra. \`ads5OriginalMovingTTThreeMultipoleThreeObservableConvergence\`, \`ads5OriginalMovingWeylSobolevBoundaryTraceAndError\`, the independent original \(t=2\) FIO theorem acceptance, F9 matter/full stability, F10 calibration, F11 Agda kernel/semantic weld and empirical D1 all remain **OPEN**.
+
+**Acceptance:** prior **172** committed-source-equivalent F8 regression cases plus **12** original moving forced wall-flux tests = **184/184 source-equivalent local mathematical tests**; local broader 197/197 includes 13 exploratory uncommitted prepotential tests. Exact GitHub-head, pinned Agda 2.9 kernel and physical apparatus have NOT been checked in this tool environment.
