@@ -67,4 +67,9 @@ class OriginalTTMultipole(unittest.TestCase):
  def test_numerical_nonpromotion_after_fv_repair(self):
   self.assertTrue(self.sol['receiver_convergence_not_implied_by_discrete_energy'])
   self.assertFalse(self.sol['numerical_convergence_certified'])
+ def test_exact_global_cell_moment_guard(self):
+  mass=self.sol['normalized_conservative_cell_moments']
+  self.assertLess(abs(mass[0]),1e-7)
+  self.assertLess(abs(mass[1]),1e-7)
+  self.assertAlmostEqual(mass[2],2.57616988094614,places=8)
 if __name__=='__main__':unittest.main(verbosity=2)
