@@ -1116,3 +1116,76 @@ This uses the bulk null relation to identify the squared **timelike boundary pro
 | D1 | prospective detector discrimination | source-characterized independent gravitational observation |
 
 Local command \`bash scripts/check_ksw668_f8_maxcut.sh --smoke\` now executes **23 source-equivalent PASS** test cases (8 moving PDE, 5 original-t2 ray, 6 strict 5D null convex, 4 SMS). \`--full\` remains **exit 42** until its 3D compact TT and both Weyl numerical convergence gates are actually satisfied. These results are not Agda kernel receipts; CI remains out of acceptance.
+
+
+### F8.10 Exact five-dimensional direct null WKB transport and first curvature correction
+
+The direct-ray FIO amplitude is no longer an unspecified symbol *along the interior chord*. For the **original same AdS5 tensor scalar operator**
+\[
+L=-\partial_T^2+\partial_z^2-\frac3z\partial_z+
+\sum_{i=1}^3\partial_{x_i}^2
+\]
+choose a local null phase \(\Phi=-T+s z+\kappa x\), \(s^2+\kappa^2=1\), with \(s=-0.5824218543413765\), \(\kappa>0\). The geometric-optics ansatz \(H=e^{i\lambda\Phi}\big[a_0(z)+(i\lambda)^{-1}a_1(z)+\cdots\big]\) yields
+\[
+L(ae^{i\lambda\Phi})e^{-i\lambda\Phi}
+=\lambda^2(1-s^2-\kappa^2)a
++i\lambda\,s(2a'-3a/z)+(a''-3a'/z).
+\]
+The leading transport is \(2a_0'-3a_0/z=0\), so **exactly**
+\[
+\boxed{a_0(z)=Cz^{3/2}},\qquad
+\frac{a_0(z_r)}{a_0(z_e)}
+=\left(\frac{z_r}{z_e}\right)^{3/2}
+=0.35362840120100064>0.
+\]
+Here \(z_e=1/t_e=0.9998585836439983,z_r=1/2\), and no interior null caustic intervenes. Substituting \(a_0=z^{3/2}\) leaves the *nonzero lower-order* residual
+\[
+(L a_0 e^{i\lambda\Phi})e^{-i\lambda\Phi}
+=-\frac{15}{4z^2}a_0.
+\]
+Do **not** call a single geometrical-optics wave an exact solution! The next amplitude, fixed to zero correction at the emitter, is
+\[
+\boxed{a_1(z)=\frac{15}{8s}z^{3/2}
+\left(\frac1{z_e}-\frac1z\right)},
+\]
+for which the \(\lambda^0\) transport and curvature residual **cancel exactly**:
+\[
+s(2a_1'-3a_1/z)+(a_0''-3a_0'/z)=0.
+\]
+The remaining interior residual is \((i\lambda)^{-1}(a_1''-3a_1'/z)\), finite along the compact chord. The standard WKB transport recurrence can continue this construction; its actual **Neumann boundary/source adaptation**, the finite-width compact cutoffs, and a uniform global response remainder in \(1/\lambda\) remain part of the precise F8-FIO weld.
+
+For *unit normalized prescribed* \(\pi^{TT}_{yy}\) amplitude at the emitter, original Israel \(n\cdot\partial H=-6\pi\) supplies the leading emitting boundary field coefficient \(-6/(i\lambda n_e\cdot\xi_e)\). Homogeneous Neumann reflection at the first receiving boundary makes incident+reflected **trace** \(2H_{\rm inc}\). The computed **known local leading-magnitude factors** (excluding only a potential global lens/cutoff phase/Jacobian and global remainder) are:
+\[
+\begin{array}{ll}
+\text{H boundary:}&
+\displaystyle \left|\frac{-12}{n_e\cdot\xi_e}
+\left(\frac{z_r}{z_e}\right)^{3/2}\right|
+=24.08051461465392
+\quad\text{multiplying }\lambda^{-1},\\[1ex]
+\text{intrinsic 4D electric Weyl:}&
+2.023397085087704\quad\text{multiplying }\lambda,\\
+\text{SMS projected 5D electric Weyl:}&
+0.06878476060720297\quad\text{multiplying }\lambda.
+\end{array}
+\]
+These are **asymptotic symbol coefficients in a declared unit-frequency/TT-source normalization**, NOT finite-band physical amplitudes, observations, or the full numerical source-to-receiver Green solution. The 5D projection coefficient uses the sign-corrected SMS identity from F8.08. The coefficients are nonzero, and the actual physical \(\pi\) can always be scaled small for linearity.
+
+Mathematical owner: \`scripts/ksw668_f8_direct_wkb_transport.py\`; its six new local tests check null eikonal, leading WKB transport, exact first correction, both Weyl principal symbols, and physical/FIO non-promotion. **New total F8 smoke: 8 moving PDE + 5 original t2 ray + 6 strict null-convex + 4 SMS + 6 WKB = 29 source-equivalent PASS.** The full 3D *numerical convergence* test still FAILS CLOSED with exit 42, and the **actual analytic Neumann-to-Weyl FIO composition remains OPEN until a complete receiver-side microlocal theorem/parametrix remainder is written and accepted**.
+
+### F8.11 Final condensed lemma dependency roadmap, owners and acceptance
+
+| Phase | Exact proof obligation | Current mathematical evidence | Gate |
+|---|---|---|---|
+| F8-G1 | \`ads5OriginalT2CompactTTInteriorEmitterAndPhotonExclusion\` | exact smooth interior source ray, photon-dark margin 0.0036506, original t=2 same receiver, compact TT operator | Source-equivalent **PASS**, Agda kernel open |
+| F8-G2 | \`ads5OriginalT2OutwardStrictNullConvexity\` | exact \(\kappa=t^3/(1+t^2)^{3/2}>0\), n=4 spatial 5D, stationary negative control | Source-equivalent **PASS**, Agda kernel open |
+| F8-G3 | \`ads5OriginalT2TTWKBTransportFirstCorrection\` | exact \(z^{3/2}\), \(a_1\), residual order reduction, nonzero 0.3536284 transport | Source-equivalent **PASS**, microlocal remainder open |
+| F8-G4 | \`ads5OriginalT2BothWeylPrincipalSymbols\` | exact SMS tensor coupling and 123/20 rational slice; nonzero intrinsic 4D & projected 5D Weyl factors, no conflation | Source-equivalent **PASS**, retarded Weyl value open |
+| F8-G5 | \`ads5OriginalT2NeumannToWeylEllipticFIOComposition\` | Stefanov–Yang 2018 1+n lens FIO and local elliptic DN; Uhlmann–Zhang 2022 ND lens source restricted to 1+3; original 1+4 geometry/null convexity all checked | **OPEN terminal analytic weld**: full 5D Neumann reflection, cutoff and remainder/localized noncancellation |
+| F8-G6 | \`ads5MovingTTCompact3DSpectralCutoffConvergence\` | original actual moving-wall PDE and compact TT source, early plane control; 3-grid 3D F8 fails (48.4% field / 83% Weyl) | **OPEN exit42**; independent analytic alternative F8-G5 |
+| F8-G7 | \`ads5OriginalT2ActualCompactTTNonzeroEarlyBothWeyl\` | original compact source, timelike 5D wall, abstract retarded existence and nonzero WKB principals | **OPEN until G5**; no physical matter action assumed |
+| F9 | \`ads5CompactTTMatterActionRealization\` plus \`ads5MovingModeStabilityAndBackreaction\`, \`cylinderDoubledDiscPerturbedBulkAndRetardedGreen\` | separate exact background tensor and shell results; original source prescribed | **OPEN** complete dynamical coupled Einstein-matter model |
+| F10 | \`ads5PhysicalScaleSourceDetectorComparison\` | geometric cubic local law and proper-time invariant | **OPEN** realistic H, dot H, ell, band, attenuation, emission lag and physical constraints |
+| F11 | \`braneBulkOriginalAnalyticAgdaKernel\` | prior rational modules and current symbolic WKB/curvature producers | **OPEN** pinned Agda 2.9 original continuum kernel |
+| D1 | \`physicalGravitonObservation\` | experimental discriminator clearly defined | **OPEN** original calibration/physical evidence; cannot be satisfied by computations alone |
+
+**Repository owner:** #1512 is the only new active continuation for these five post-#1508 and subsequent F8 additions; #1508 and #1504 are already integrated, and their existing source owners should not be duplicated. Run smoke \`bash scripts/check_ksw668_f8_maxcut.sh --smoke\` for 29 source-level tests and the 3D full failclosed \`bash scripts/check_ksw668_f8_maxcut.sh --full\` (currently exit42). Treat the exact source-equivalent scripts, GitHub committed head, executable local receipt, independently kernel-checked continuum and an empirical detector result as **four distinct** acceptance classes.
