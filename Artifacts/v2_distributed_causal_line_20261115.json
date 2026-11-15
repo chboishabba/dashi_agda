@@ -1,0 +1,60 @@
+{
+  "scope": "mathematical 1D passive causal transmission line, NOT same-device V2 measurement",
+  "continuum_identity": {
+    "identity": "d_t U + d_x(VI) = -Rprime*I^2 - Gprime*V^2",
+    "symbolic_residual": "0",
+    "traveling_wave_power": "(Wplus^2-Wminus^2)/(4*Z)",
+    "wavefront_speed": "1/sqrt(Lprime*Cprime)",
+    "speed_admission": "Lprime*Cprime >= 1/c^2 required for this nondispersive physical model"
+  },
+  "exact_rational_finite_certificate": {
+    "exact_rational_conservation": true,
+    "reflection_count": "two passive boundaries plus interfering source drive",
+    "energy_balance_residual": "0",
+    "note": "All values Fraction; common positive energy factor suppressed"
+  },
+  "reflected_lossy_line": {
+    "parameters": {
+      "length_m": 0.5,
+      "front_speed_m_s": 209854720.6,
+      "impedance_ohm": 50.0,
+      "load_reflection": 0.3,
+      "source_reflection": -0.25,
+      "amplitude_survival_per_tick": 0.98
+    },
+    "dt_s": 3.4037152571240005e-10,
+    "cells": 7,
+    "first_forward_arrival_tick": 7,
+    "first_forward_arrival_s": 2.3826006799868004e-09,
+    "source_work_j": 3.9042918700323e-12,
+    "load_work_j": 2.8218664372929875e-12,
+    "dissipated_work_j": 1.0824254327393143e-12,
+    "initial_stored_j": 0,
+    "final_stored_j": 5.225620872089053e-28,
+    "energy_residual_j": -2.5420460045746955e-27,
+    "max_tick_residual_j": 7.573064690121713e-28
+  },
+  "quasistatic_lipschitz_certificate": {
+    "flight_s": 1.9999999999999997e-08,
+    "lipschitz_v_per_s": 25130095.443337694,
+    "amplitude_bound_v": 0.5026019088667538,
+    "amplitude_max_observed_v": 0.5022844948308134,
+    "power_bound_w": 0.020102489021315027,
+    "power_max_observed_w": 0.010025867022324872,
+    "scope": "matched passive delay, piecewise-linear input; excludes discontinuous and unobserved edges"
+  },
+  "physical_clock_example": {
+    "flight_s": 2.3826006799868004e-09,
+    "front_speed_m_s": 209854720.6,
+    "carrier_phase_rad": 0.0002994064317073831,
+    "electrical_phase_rad": 2.3493424674639328e-06,
+    "delay_over_switch_edge": 1.1913003399934001,
+    "fundamental_small_phase_not_edge_certificate": true
+  },
+  "gates_open": [
+    "actual source material and Maxwell boundary",
+    "rigorous dispersive front and passivity",
+    "quasistatic bound for nonlinear multi-coil field including switching edges",
+    "original V2 topology and metrology"
+  ]
+}
