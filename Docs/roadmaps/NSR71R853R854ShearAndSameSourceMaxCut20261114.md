@@ -130,3 +130,50 @@ These are Fourier-algebra checks, not an Agda or Lean kernel receipt.
 transitive axioms/trust and no reserved physical hypothesis smuggled in
 as an interface. **Current status: A1–B3 remain open; R823 proposed
 example refuted as a *method*, original R823 result undecided.**
+
+## 6. 15 November source update: same-packet rate identity and fixed-horizon real ODE proof
+
+Added directly to the existing Clay #1499 R823 theorem owner (no new rollup):
+`originalR823CompleteRateIsR853SelectedRate`,
+`originalR823ReserveDemandIsR853SelectedRate`,
+`originalR823IntegratedRateIsR853SelectedIntegral`, and
+`originalR823IntegratedReserveDemandIsR853SelectedIntegral`.
+
+The new **Agda source-written, kernel-unchecked** witnesses compose R820's
+complete-four-helicity-to-R815 rate identity, R853's original selected
+normal form, and R823's exact reserve-minus-demand decomposition **on
+the same abstract live R408 packet**. The enstrophy identity is not used.
+
+The independent classical real finite-Galerkin ODE for the R828/850
+3-4-5 cutoff-four snapshot is a finite polynomial vector field. Standard
+ODE existence/first-exit continuation plus the 728-mode component bound
+`K=5032512` and initial component max 6 give an actual real solution
+on the unchanged R854 interval `T` (because `K*T < 6` inside the
+component ball of radius 12). The original R828 state-Lipschitz calculation
+for the selected real-valued finite-Fourier rate gives
+`L=391309593930357307785216`. Importantly the rate **time**
+bound is `L*K`, not `L`. Exact rational arithmetic verifies
+`L*K*T=226189/2`, so throughout the *original* horizon
+
+`r(t) <= -28273644/125+226189/2 = -28273663/250 < 0`
+
+and the real Fourier rate integral is strictly negative. This does not
+replace the original rate by an enstrophy residual or require a shorter
+time interval. The state factor `K` is safely below R856's
+10,065,030 pointwise integer multiplier ceiling.
+
+**Still not an Agda original R408/R823 real-time inhabitation:** the old
+physical stack specializes to ℚ with globally quantified helical projector
+laws, whereas the real solution is nonconstant and generic mode `|k|`
+is irrational. The missing formal C1/C2 obligations are transporting the
+actual real field/ODE and physical all-mode rate into the original theorem
+carriers, kernel-checking the new same-packet Agda identity, and native
+fixed-horizon derivative/FTC acceptance. The universal physical R823
+reserve inequality is contradicted in the natural classical real-Fourier
+semantics, not formally refuted in the original uninhabited rational
+trajectory interface. **Original endpoint and B/C gates remain OPEN.**
+
+Canonical evidence: `ClayRecoveredProducersW2NoGoR856SourceMaxCut20261115.md`
+and `ClaySixFrontierABCExactGates20261114.json`. Regression:
+`scripts/check_ns_r823_initial_rate_continuity_cut_20261115.py`.
+
