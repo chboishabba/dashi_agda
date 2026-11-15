@@ -131,13 +131,13 @@ originalBlockMixedEqualsCoherent originalReverse
 -- per-expert history coordinates. All oriented blocks are used once.
 originalMixedBlockEnergy :
   List (OriginalMixedOrientation × OriginalExpertTriad) → ℤ
-originalMixedBlockEnergy [] = 0
+originalMixedBlockEnergy [] = (+ 0)
 originalMixedBlockEnergy ((orientation , block) ∷ rest) =
   originalBlockMixed orientation block + originalMixedBlockEnergy rest
 
 originalCoherentBlockEnergy :
   List (OriginalMixedOrientation × OriginalExpertTriad) → ℤ
-originalCoherentBlockEnergy [] = 0
+originalCoherentBlockEnergy [] = (+ 0)
 originalCoherentBlockEnergy ((_ , block) ∷ rest) =
   originalBlockCoherent block + originalCoherentBlockEnergy rest
 
