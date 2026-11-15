@@ -71,9 +71,9 @@ def stage(U,P,M,outU,outP,outM,dr,dy,b,v,amplitude,sources,cp,cm,normal_order=2)
         for iy in range(ny):
             z=b+iy*dy
             for ir in range(nr):
-                p=P[q,iy,ir] if iy<ny-1 else 0.
+                p=P[q,iy,ir] if iy<ny-1 or normal_order==3 else 0.
                 m=M[q,iy,ir]
-                if iy==0:
+                if iy==0 and normal_order!=3:
                     m=(2*amplitude*sources[q,ir]-(1+v)*p)/(v-1)
                 w=.5*(p-m)
                 if ir==nr-1:
@@ -88,7 +88,11 @@ def stage(U,P,M,outU,outP,outM,dr,dy,b,v,amplitude,sources,cp,cm,normal_order=2)
                         coeffminus*(U[q,iy,ir]-U[q,iy,ir-1]))/d2
                 force=radial-3*w/z
                 outU[q,iy,ir]=.5*((1+v)*p+(1-v)*m)
-                if iy==ny-1:
+                if normal_order==3:
+                    dpy=(P[q,iy+1,ir]-p)/dy if iy==0 else ((p-P[q,iy-1,ir])/dy if iy==ny-1 else (P[q,iy+1,ir]-P[q,iy-1,ir])/(2*dy))
+                    outP[q,iy,ir]=(1+v)*dpy+force
+                    if iy==ny-1:outP[q,iy,ir]-=2*(1+v)*p/dy
+                elif iy==ny-1:
                     outP[q,iy,ir]=0.
                 elif normal_order==1:
                     outP[q,iy,ir]=(1+v)*(P[q,iy+1,ir]-p)/dy+force
@@ -96,7 +100,13 @@ def stage(U,P,M,outU,outP,outM,dr,dy,b,v,amplitude,sources,cp,cm,normal_order=2)
                     outP[q,iy,ir]=(1+v)*(-3*p+4*P[q,iy+1,ir]-P[q,iy+2,ir])/(2*dy)+force
                 else:
                     outP[q,iy,ir]=(1+v)*(P[q,iy+1,ir]-p)/dy+force
-                if iy==0:
+                if normal_order==3:
+                    dmy=(M[q,iy+1,ir]-m)/dy if iy==0 else ((m-M[q,iy-1,ir])/dy if iy==ny-1 else (M[q,iy+1,ir]-M[q,iy-1,ir])/(2*dy))
+                    outM[q,iy,ir]=(v-1)*dmy+force
+                    if iy==0:
+                        target=(2*amplitude*sources[q,ir]-(1+v)*p)/(v-1)
+                        outM[q,iy,ir]+=2*(1-v)*(target-m)/dy
+                elif iy==0:
                     outM[q,iy,ir]=0.
                 elif normal_order==1:
                     outM[q,iy,ir]=(v-1)*(m-M[q,iy-1,ir])/dy+force
@@ -106,9 +116,10 @@ def stage(U,P,M,outU,outP,outM,dr,dy,b,v,amplitude,sources,cp,cm,normal_order=2)
                     outM[q,iy,ir]=(v-1)*(m-M[q,iy-1,ir])/dy+force
 
 @njit(cache=True)
-def enforce(U,P,M,v,amp,sources):
-    M[:,0,:]=(2*amp*sources-(1+v)*P[:,0,:])/(v-1)
-    P[:,-1,:]=0
+def enforce(U,P,M,v,amp,sources,normal_order=2):
+    if normal_order!=3:
+        M[:,0,:]=(2*amp*sources-(1+v)*P[:,0,:])/(v-1)
+        P[:,-1,:]=0
     U[:,:,-1]=0;P[:,:,-1]=0;M[:,:,-1]=0
 
 def F(t):return math.asinh(t)-math.sqrt(1+t*t)/t
@@ -116,7 +127,7 @@ def F(t):return math.asinh(t)-math.sqrt(1+t*t)/t
 def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
               pulse=.065,inside_chord=.012,r_outer=4.3,y_outer=3.0,drive=1.,
               conservative_source=True,normal_order=2):
-    if normal_order not in (1,2):raise ValueError('normal order must be 1 SBP or 2 legacy')
+    if normal_order not in (1,2,3):raise ValueError('normal order must be 1 SBP, 2 legacy, 3 SBP2 SAT')
     if not(2<final_t<=20 and 0<dr<eps/3 and 0<dy<=.03
             and 0<dt<min(dr*math.sqrt(3/44),dy*.45) and 0<eps<.08
             and r_outer>3 and y_outer>2 and 0<pulse<.12):
@@ -184,26 +195,26 @@ def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
         if it==nt:now_wall=U[:,0,:].copy()
         T=T0+it*dt
         v,b,amp=coeff(T)
-        enforce(U,P,M,v,amp,src)
+        enforce(U,P,M,v,amp,src,normal_order)
         stage(U,P,M,dU,dP,dM,dr,dy,b,v,amp,src,cp,cm,normal_order)
         if it==nt-1:prev_walldot=dU[:,0,:].copy()
         if it==nt:now_walldot=dU[:,0,:].copy()
         U1[:]=U+dt*dU;P1[:]=P+dt*dP;M1[:]=M+dt*dM
         v,b,amp=coeff(T+dt)
-        enforce(U1,P1,M1,v,amp,src)
+        enforce(U1,P1,M1,v,amp,src,normal_order)
         stage(U1,P1,M1,dU,dP,dM,dr,dy,b,v,amp,src,cp,cm,normal_order)
         U2[:]=.75*U+.25*(U1+dt*dU)
         P2[:]=.75*P+.25*(P1+dt*dP)
         M2[:]=.75*M+.25*(M1+dt*dM)
         v,b,amp=coeff(T+dt/2)
-        enforce(U2,P2,M2,v,amp,src)
+        enforce(U2,P2,M2,v,amp,src,normal_order)
         stage(U2,P2,M2,dU,dP,dM,dr,dy,b,v,amp,src,cp,cm,normal_order)
         U[:]=(U+2*(U2+dt*dU))/3
         P[:]=(P+2*(P2+dt*dP))/3
         M[:]=(M+2*(M2+dt*dM))/3
     next_wall=U[:,0,:].copy()
     v,b,amp=coeff(T0+(nt+1)*dt)
-    enforce(U,P,M,v,amp,src)
+    enforce(U,P,M,v,amp,src,normal_order)
     stage(U,P,M,dU,dP,dM,dr,dy,b,v,amp,src,cp,cm,normal_order)
     next_walldot=dU[:,0,:].copy()
     def read_all(r):
@@ -260,6 +271,8 @@ def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
         original_radial_multipoles=[0,2,4],
         normal_order=normal_order,
         normal_only_characteristic_SBP_closed=(normal_order==1),
+        normal_second_order_SBP_SAT_weak_neumann=(normal_order==3),
+        strong_wall_neumann_enforced=(normal_order!=3),
         full_coupled_weighted_SSPRK3_energy_proved=False,
         effective_radial_dimensions=[3,7,11],
         step_radial=dr,step_bulk=dy,step_time=dt,
