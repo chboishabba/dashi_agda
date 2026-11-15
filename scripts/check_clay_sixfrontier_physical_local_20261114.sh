@@ -33,6 +33,14 @@ AGDA_SHA="$(git -C "$AGDA_ROOT" rev-parse HEAD)"
 LEAN_SHA="$(git -C "$LEAN_ROOT" rev-parse HEAD)"
 echo "AGDA_ROLLUP_PR=1499 SHA=$AGDA_SHA"
 echo "LEAN_ROLLUP_PR=108 SHA=$LEAN_SHA"
+# Mandatory P0: classify all 135 exact symbols against the live checked-out
+# Agda and Lean rollup sources BEFORE any source-only or kernel claims.
+# A discovered theorem previously marked TARGET_NAME_ONLY is a useful
+# fail-closed RECLASSIFY_TARGET: update canonical roadmap/JSON first.
+python3 "$AGDA_ROOT/scripts/check_clay_endpoint_symbol_audit_20261115.py" \
+  --lean-root "$LEAN_ROOT" --strict
+echo "P0_CANONICAL_SIX_ENDPOINT_SYMBOL_AUDIT=SOURCE_CHECKED_NOT_KERNEL"
+
 
 # Existence checks ensure no implicit fallthrough to historical
 # separate donor PR heads.
