@@ -44,13 +44,13 @@ originalTTThreeMultipoles : ∀ μ →
 originalTTThreeMultipoles = ℚRing.solve-∀
 
 p0AtReceiverAxis : p0 1ℚ ≡ 1ℚ
-p0AtReceiverAxis = ℚRing.solve-∀
+p0AtReceiverAxis = ℚRing.solve []
 
 p2AtReceiverAxis : p2 1ℚ ≡ 1ℚ
-p2AtReceiverAxis = ℚRing.solve-∀
+p2AtReceiverAxis = ℚRing.solve []
 
 p4AtReceiverAxis : p4 1ℚ ≡ 1ℚ
-p4AtReceiverAxis = ℚRing.solve-∀
+p4AtReceiverAxis = ℚRing.solve []
 
 -- For H_ell=r^ell V_ell the 3D Laplacian's l(l+1)/r²
 -- term cancels, leaving effective radial dimension 3+2*ell.
