@@ -1,0 +1,110 @@
+{
+  "scope": "COMPRESSED verified summary of local 10-phase 1024-sample report; full per-phase receipt preserved in accompanying fifth-cut ZIP; recompute full via python scripts/v2_retarded_memory_periodic_maxcut.py",
+  "original_v2_measurement": false,
+  "physical_parameters": "hypothetical",
+  "sympy_twowinding_residual": "0",
+  "periodic_model": true,
+  "delay_s": 0.00010000238260067999,
+  "causal_front_speed": "0.7c",
+  "pointwise_energy_residual_max_w": 5.4817261840867104e-15,
+  "sufficient_gain": {
+    "rho": 0.015723397162906237,
+    "instantaneous_margin_per_s": 9.670222739663107,
+    "delayed_gain_per_s": 1.8606225972627906,
+    "history_decay_rate_per_s": 7.808146739000299
+  },
+  "coil_count_cases": [
+    {
+      "m": 3,
+      "shaft_extraction_w": 3.5497483711441795,
+      "copper_w": 1.18,
+      "memory_loss_w": 0.01941412188623279,
+      "net_terminal_export_w": 2.350334249257947,
+      "continuous_voltage_upper_v": 32.001645226777285,
+      "sampled_voltage_peak_v": 19.94999768885453
+    },
+    {
+      "m": 4,
+      "shaft_extraction_w": 3.5497483711441795,
+      "copper_w": 1.18,
+      "memory_loss_w": 0.01941412188623279,
+      "net_terminal_export_w": 2.350334249257947,
+      "continuous_voltage_upper_v": 27.71423772928615,
+      "sampled_voltage_peak_v": 17.626711166728974
+    },
+    {
+      "m": 5,
+      "shaft_extraction_w": 3.5497483711441795,
+      "copper_w": 1.18,
+      "memory_loss_w": 0.01941412188623279,
+      "net_terminal_export_w": 2.350334249257947,
+      "continuous_voltage_upper_v": 24.7883678029093,
+      "sampled_voltage_peak_v": 15.960402530405124
+    },
+    {
+      "m": 6,
+      "shaft_extraction_w": 3.5497483711441795,
+      "copper_w": 1.18,
+      "memory_loss_w": 0.01941412188623279,
+      "net_terminal_export_w": 2.350334249257947,
+      "continuous_voltage_upper_v": 22.62858034898033,
+      "sampled_voltage_peak_v": 14.679181140281965
+    },
+    {
+      "m": 7,
+      "shaft_extraction_w": 3.5497483711441795,
+      "copper_w": 1.18,
+      "memory_loss_w": 0.01941412188623279,
+      "net_terminal_export_w": 2.350334249257947,
+      "continuous_voltage_upper_v": 20.949994516404164,
+      "sampled_voltage_peak_v": 13.655876677779677
+    },
+    {
+      "m": 8,
+      "shaft_extraction_w": 3.5497483711441795,
+      "copper_w": 1.18,
+      "memory_loss_w": 0.01941412188623279,
+      "net_terminal_export_w": 2.350334249257947,
+      "continuous_voltage_upper_v": 19.5969254337943,
+      "sampled_voltage_peak_v": 12.815294981157676
+    },
+    {
+      "m": 9,
+      "shaft_extraction_w": 3.5497483711441795,
+      "copper_w": 1.18,
+      "memory_loss_w": 0.01941412188623279,
+      "net_terminal_export_w": 2.350334249257947,
+      "continuous_voltage_upper_v": 18.47615848619077,
+      "sampled_voltage_peak_v": 12.110233365497406
+    },
+    {
+      "m": 10,
+      "shaft_extraction_w": 3.5497483711441795,
+      "copper_w": 1.18,
+      "memory_loss_w": 0.01941412188623279,
+      "net_terminal_export_w": 2.350334249257947,
+      "continuous_voltage_upper_v": 17.528022967983443,
+      "sampled_voltage_peak_v": 11.507940787049693
+    },
+    {
+      "m": 11,
+      "shaft_extraction_w": 3.5497483711441795,
+      "copper_w": 1.18,
+      "memory_loss_w": 0.01941412188623279,
+      "net_terminal_export_w": 2.350334249257947,
+      "continuous_voltage_upper_v": 16.712314163409705,
+      "sampled_voltage_peak_v": 10.98611501404383
+    },
+    {
+      "m": 12,
+      "shaft_extraction_w": 3.5497483711441795,
+      "copper_w": 1.18,
+      "memory_loss_w": 0.01941412188623279,
+      "net_terminal_export_w": 2.350334249257947,
+      "continuous_voltage_upper_v": 16.000822613388642,
+      "sampled_voltage_peak_v": 10.528398818081225
+    }
+  ],
+  "strict_gates": "Original 16 P0-P4 OPEN",
+  "kernel": "NOT RUN"
+}
