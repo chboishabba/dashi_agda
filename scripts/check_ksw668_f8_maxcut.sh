@@ -5,6 +5,8 @@ cd "$(dirname "$0")/.."
 mode="--smoke"
 if [ "$#" -gt 0 ]; then mode="$1"; fi
 python3 scripts/test_ksw668_f8_moving_maxcut.py
+python3 scripts/test_ksw668_f8_non_glancing_source.py
+python3 scripts/ksw668_f8_non_glancing_source.py
 if [ "$mode" = "--smoke" ]; then
   echo "F8 smoke accepted; three-grid and physical receiver NOT accepted."
   exit 0
