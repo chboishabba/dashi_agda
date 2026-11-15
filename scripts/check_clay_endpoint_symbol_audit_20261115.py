@@ -105,8 +105,8 @@ def main() -> int:
     if (len(manifest) != 15
             or audit.get("active_gate_count") != 11
             or audit.get("active_gate_ids") != active
-            or audit.get("completed_gate_ids") != ["P0", "C1", "C2", "B1"]
-            or completed != ["P0", "C1", "C2", "B1"]):
+            or audit.get("completed_gate_ids") != ["P0", "B1", "C1", "C2"]
+            or completed != ["P0", "B1", "C1", "C2"]):
         problems.append("PHASE_GATE_COUNT_MISMATCH: 4/15 decisions (B1 refuted), 11 active")
     for gate_id, script in [
         ("C1", "check_clay_c1_r71_r74_sympy_bridge_20261115.py"),
