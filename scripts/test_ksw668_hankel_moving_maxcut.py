@@ -36,6 +36,10 @@ class HankelBraneMaxcut(unittest.TestCase):
         self.assertTrue(r['abstract_smooth_retarded_operator_established_by_theorem'])
         self.assertTrue(r['same_metric_causal_chord_interiors'])
         self.assertFalse(r['nonzero_electric_Weyl_from_retarded_source_proved'])
+    def test_stationary_Hankel_is_no_shortcut_control(self):
+        r=a.stationary_no_shortcut_control()
+        self.assertTrue(r['stationary_bulk_earliest_photon_time_equal'])
+        self.assertFalse(r['geometric_early_signal_for_static_wall'])
     def test_no_physical_promotion(self):
         r=a.audit()
         self.assertFalse(r['explicit_original_moving_retarded_Green_kernel'])
