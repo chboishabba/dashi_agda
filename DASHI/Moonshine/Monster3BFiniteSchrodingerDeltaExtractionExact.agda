@@ -34,10 +34,12 @@ import DASHI.Moonshine.Monster3BFiniteX6ConstructiveComparisonExact as Compare
 --    the off-point projector theorem.
 ------------------------------------------------------------------------
 
+deltaFromComparison : ∀ {s x} → Compare.X6Comparison s x → C3.Cyclotomic3
+deltaFromComparison (Compare.sameX6 refl) = C3.one
+deltaFromComparison (Compare.differentX6 difference) = C3.zero
+
 comparisonDelta : H.X6 → V.SchrodingerFunction
-comparisonDelta selected x with Compare.compareX6 selected x
-... | Compare.sameX6 refl = C3.one
-... | Compare.differentX6 difference = C3.zero
+comparisonDelta selected x = deltaFromComparison (Compare.compareX6 selected x)
 
 ------------------------------------------------------------------------
 -- 2. A nonzero subspace witness names the actual selected coefficient and
@@ -121,15 +123,11 @@ normalisedPointProjection witness =
     (normalizer witness)
     (Point.pointProjector (selected witness) (vector witness))
 
-normalisedProjectionIsDeltaPointwise :
-  ∀ {Member inv}
-    (witness : NonzeroInvariantVector {Member} inv) →
-  V.PointwiseEqual
-    (normalisedPointProjection witness)
-    (comparisonDelta (selected witness))
-normalisedProjectionIsDeltaPointwise witness x
-  with Compare.compareX6 (selected witness) x
-... | Compare.sameX6 refl =
+projectionMatchesDelta :
+  ∀ {Member inv} (witness : NonzeroInvariantVector {Member} inv) (x : H.X6)
+  (cmp : Compare.X6Comparison (selected witness) x) →
+  normalisedPointProjection witness x ≡ deltaFromComparison cmp
+projectionMatchesDelta witness .(selected witness) (Compare.sameX6 refl) =
   trans
     (cong (C3.multiply (normalizer witness))
       (trans
@@ -138,12 +136,21 @@ normalisedProjectionIsDeltaPointwise witness x
         (P729.sixTriplesAre729
           (vector witness (selected witness)))))
     (normalizerCancels729Amplitude witness)
-... | Compare.differentX6 difference =
+projectionMatchesDelta witness x (Compare.differentX6 difference) =
   trans
     (cong (C3.multiply (normalizer witness))
       (Eval.pointProjectorOffPoint
         (selected witness) x (vector witness) difference))
     (L.zeroActsLeft (normalizer witness))
+
+normalisedProjectionIsDeltaPointwise :
+  ∀ {Member inv}
+    (witness : NonzeroInvariantVector {Member} inv) →
+  V.PointwiseEqual
+    (normalisedPointProjection witness)
+    (comparisonDelta (selected witness))
+normalisedProjectionIsDeltaPointwise witness x =
+  projectionMatchesDelta witness x (Compare.compareX6 (selected witness) x)
 
 ------------------------------------------------------------------------
 -- 5. Membership extraction: all operations are already justified by the
