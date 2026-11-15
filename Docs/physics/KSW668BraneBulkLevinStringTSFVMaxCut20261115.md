@@ -675,3 +675,33 @@ A change of homogeneous time coordinates does not change measured receiver prope
 7. \`physicalGravitonObservation\`: independently acquire source-characterized gravitational signal and control measurements. No qualifying experimental data presented.
 
 **Acceptance:** local source-equivalent SymPy scripts/tests PASS 9/9; current repository PR-head execution and Agda kernel not verified. No claim of a physically demonstrated bulk carrier, FTL in full 5D spacetime, free energy, phenomenological bound on \(\ell\), or complete TOE.
+
+
+### B3 stronger 2026-11-15 result: tangential energy, exact boundary flux cancellation, homogeneous uniqueness
+
+The ordinary \(\partial_T\) energy flux is sign-indefinite for a moving Neumann wall. This does *not* mean uniqueness is unavailable. The original physical brane admits the globally timelike-on-this-interval tangent multiplier \(X=\partial_T+v(T)\partial_z\), \(v=b'(T)\), with \(|v|\le 1/\sqrt2\).
+
+Let \(w(z)=z^{-3}\) and
+\[
+e_X=\frac w2\left[H_T^2+H_z^2+|\nabla_xH|^2+2vH_TH_z\right]
+=\frac w2\left[(H_T+vH_z)^2+(1-v^2)H_z^2+|\nabla_xH|^2\right].
+\]
+For \(E_X(T)=\int_{b(T)}^\infty\int_{\mathbb R^3}e_X\,d^3x\,dz\), the original tensor PDE implies the **exact** multiplier identity
+\[
+\frac{dE_X}{dT}
+=-\int_{\mathbb R^3}b^{-3}(H_z+vH_T)(H_T+vH_z)\big|_{z=b(T)}\,d^3x
++\int_{b(T)}^\infty\!\!\int_{\mathbb R^3}
+\left[v' w H_T H_z+\frac{v w'}2(-H_T^2+H_z^2+|\nabla_xH|^2)\right]d^3x\,dz,
+\]
+assuming zero flux at the distant spatial/horizon ends. The boundary factorization is a genuine **moving-normal** formula: \(H_z+vH_T=(t^2/\sqrt{1+t^2})\,n^A\partial_AH=-6t^2\pi^{TT}/\sqrt{1+t^2}\).
+
+With \(\pi^{TT}=0\), the boundary term vanishes. The bulk deformation is bounded because \(|v'|<1\), \(|v|\le1/\sqrt2\), \(b\ge1/2\) and \(w'/w=-3/z\), so
+\[
+E'_X(T)\le C E_X(T),\qquad
+C=\frac{1+3\sqrt2}{1-1/\sqrt2}
+\]
+is a conservative uniform coefficient on \(1\le t\le2\). Thus \(E_X(T)\le E_X(T_0)e^{C(T-T_0)}\). For two smooth finite-energy solutions with the same initial data and homogeneous boundary data, their difference has zero initial energy and hence vanishes: **finite-interval homogeneous uniqueness**. This is the exact mathematical result, conditional on the usual regularity, compact/decaying data and no incoming infinity flux; it is not a proof of global nonlinear stability, inhomogeneous boundary trace bounds, or construction of a retarded Green operator.
+
+For nonzero tensor boundary source \(g=H_z+vH_T\), the boundary energy term is \(-b^{-3}g\,XH\). An inhomogeneous trace/energy estimate, data compatibility at the initial slice, an outgoing-horizon condition and existence by approximation remain the explicit B3 primitives. The fixed-domain PDE in the previous section and this tangential multiplier supply an exact **non-characteristic hyperbolic plus coercivity** starting point.
+
+Source-equivalent independently checked 1+1+one Fourier spatial-axis stress-energy differential identity returned exact SymPy zero residual after substituting the original tensor PDE. New \`tangential_wall_energy()\` symbolically proves pointwise coercive completion of squares, boundary factorization and sign control; \`test_B3_wall_tangent_energy_unique\` brings the local test total to **10/10 PASS**. The pinned Agda kernel and new exact GitHub-head scripts remain unexecuted in this tool runtime. No detector signal is inferred.
