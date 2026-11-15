@@ -49,6 +49,21 @@ class OriginalPhysicalCharacteristicConstraint(unittest.TestCase):
   self.assertTrue(all(x['source_lift_operator_error']<1e-9 for x in self.data['full_coupled_original_sourced_lift_checks']))
  def test_sourced_interior_constraint(self):
   self.assertTrue(all(x['interior_constraint_Cdot']<1e-9 for x in self.data['full_coupled_original_sourced_lift_checks']))
+ def test_original_compact_TT_four_time_slices(self):
+  x=self.data['actual_original_compact_3D_TT_sourced_lift_checks']
+  self.assertEqual([r['t'] for r in x],[1.,4/3,2.,12.])
+  self.assertTrue(all(r['original_compact_3D_TT_source'] for r in x))
+ def test_actual_compact_TT_source_lift_residual(self):
+  self.assertTrue(all(r['source_lift_operator_error']<1e-9
+    for r in self.data['actual_original_compact_3D_TT_sourced_lift_checks']))
+ def test_actual_compact_TT_interior_physical_constraint(self):
+  self.assertTrue(all(r['interior_constraint_Cdot']<1e-9
+    for r in self.data['actual_original_compact_3D_TT_sourced_lift_checks']))
+ def test_actual_compact_TT_no_fictitious_Weyl_closure(self):
+  x=self.data['actual_original_compact_3D_TT_sourced_lift_checks']
+  self.assertTrue(all(r['original_compact_3D_TT_source'] and
+    r['energy_derivative']<=r['forced_energy_bound'] for r in x))
+  self.assertTrue(self.data['both_Weyl_curvature_convergence_accepted']==False)
  def test_sourced_energy_includes_radial_force(self):
   x=forced_source_lift(t=12.)
   self.assertLessEqual(x['energy_derivative'],x['forced_energy_bound'])
