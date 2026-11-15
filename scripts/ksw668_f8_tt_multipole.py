@@ -71,9 +71,9 @@ def stage(U,P,M,outU,outP,outM,dr,dy,b,v,amplitude,sources,cp,cm,normal_order=2)
         for iy in range(ny):
             z=b+iy*dy
             for ir in range(nr):
-                p=P[q,iy,ir] if iy<ny-1 or normal_order==3 else 0.
+                p=P[q,iy,ir] if iy<ny-1 or normal_order in (3,4) else 0.
                 m=M[q,iy,ir]
-                if iy==0 and normal_order!=3:
+                if iy==0 and normal_order not in (3,4):
                     m=(2*amplitude*sources[q,ir]-(1+v)*p)/(v-1)
                 w=.5*(p-m)
                 if ir==nr-1:
@@ -88,8 +88,17 @@ def stage(U,P,M,outU,outP,outM,dr,dy,b,v,amplitude,sources,cp,cm,normal_order=2)
                         coeffminus*(U[q,iy,ir]-U[q,iy,ir-1]))/d2
                 force=radial-3*w/z
                 outU[q,iy,ir]=.5*((1+v)*p+(1-v)*m)
-                if normal_order==3:
-                    dpy=(P[q,iy+1,ir]-p)/dy if iy==0 else ((p-P[q,iy-1,ir])/dy if iy==ny-1 else (P[q,iy+1,ir]-P[q,iy-1,ir])/(2*dy))
+                if normal_order in (3,4):
+                    if normal_order==4:
+                        # Original AdS weighted SBP split: Dw f=z^1.5 D(z^-1.5 f)+1.5f/z.
+                        if iy==0:
+                            dpy=((z/(z+dy))**1.5*P[q,iy+1,ir]-p)/dy+1.5*p/z
+                        elif iy==ny-1:
+                            dpy=(p-(z/(z-dy))**1.5*P[q,iy-1,ir])/dy+1.5*p/z
+                        else:
+                            dpy=((z/(z+dy))**1.5*P[q,iy+1,ir]-(z/(z-dy))**1.5*P[q,iy-1,ir])/(2*dy)+1.5*p/z
+                    else:
+                        dpy=(P[q,iy+1,ir]-p)/dy if iy==0 else ((p-P[q,iy-1,ir])/dy if iy==ny-1 else (P[q,iy+1,ir]-P[q,iy-1,ir])/(2*dy))
                     outP[q,iy,ir]=(1+v)*dpy+force
                     if iy==ny-1:outP[q,iy,ir]-=2*(1+v)*p/dy
                 elif iy==ny-1:
@@ -100,8 +109,16 @@ def stage(U,P,M,outU,outP,outM,dr,dy,b,v,amplitude,sources,cp,cm,normal_order=2)
                     outP[q,iy,ir]=(1+v)*(-3*p+4*P[q,iy+1,ir]-P[q,iy+2,ir])/(2*dy)+force
                 else:
                     outP[q,iy,ir]=(1+v)*(P[q,iy+1,ir]-p)/dy+force
-                if normal_order==3:
-                    dmy=(M[q,iy+1,ir]-m)/dy if iy==0 else ((m-M[q,iy-1,ir])/dy if iy==ny-1 else (M[q,iy+1,ir]-M[q,iy-1,ir])/(2*dy))
+                if normal_order in (3,4):
+                    if normal_order==4:
+                        if iy==0:
+                            dmy=((z/(z+dy))**1.5*M[q,iy+1,ir]-m)/dy+1.5*m/z
+                        elif iy==ny-1:
+                            dmy=(m-(z/(z-dy))**1.5*M[q,iy-1,ir])/dy+1.5*m/z
+                        else:
+                            dmy=((z/(z+dy))**1.5*M[q,iy+1,ir]-(z/(z-dy))**1.5*M[q,iy-1,ir])/(2*dy)+1.5*m/z
+                    else:
+                        dmy=(M[q,iy+1,ir]-m)/dy if iy==0 else ((m-M[q,iy-1,ir])/dy if iy==ny-1 else (M[q,iy+1,ir]-M[q,iy-1,ir])/(2*dy))
                     outM[q,iy,ir]=(v-1)*dmy+force
                     if iy==0:
                         target=(2*amplitude*sources[q,ir]-(1+v)*p)/(v-1)
@@ -117,7 +134,7 @@ def stage(U,P,M,outU,outP,outM,dr,dy,b,v,amplitude,sources,cp,cm,normal_order=2)
 
 @njit(cache=True)
 def enforce(U,P,M,v,amp,sources,normal_order=2):
-    if normal_order!=3:
+    if normal_order not in (3,4):
         M[:,0,:]=(2*amp*sources-(1+v)*P[:,0,:])/(v-1)
         P[:,-1,:]=0
     U[:,:,-1]=0;P[:,:,-1]=0;M[:,:,-1]=0
@@ -127,7 +144,7 @@ def F(t):return math.asinh(t)-math.sqrt(1+t*t)/t
 def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
               pulse=.065,inside_chord=.012,r_outer=4.3,y_outer=3.0,drive=1.,
               conservative_source=True,normal_order=2):
-    if normal_order not in (1,2,3):raise ValueError('normal order must be 1 SBP, 2 legacy, 3 SBP2 SAT')
+    if normal_order not in (1,2,3,4):raise ValueError('normal order must be 1 SBP, 2 legacy, 3 SBP2 SAT, 4 AdS-weighted SBP2 SAT')
     if not(2<final_t<=20 and 0<dr<eps/3 and 0<dy<=.03
             and 0<dt<min(dr*math.sqrt(3/44),dy*.45) and 0<eps<.08
             and r_outer>3 and y_outer>2 and 0<pulse<.12):
@@ -271,8 +288,10 @@ def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
         original_radial_multipoles=[0,2,4],
         normal_order=normal_order,
         normal_only_characteristic_SBP_closed=(normal_order==1),
-        normal_second_order_SBP_SAT_weak_neumann=(normal_order==3),
-        strong_wall_neumann_enforced=(normal_order!=3),
+        normal_second_order_SBP_SAT_weak_neumann=(normal_order in (3,4)),
+        weighted_original_AdS_SBP2SAT_full_semidiscrete_contract=(normal_order==4),
+        original_full_RK3_stability_certified=False,
+        strong_wall_neumann_enforced=(normal_order not in (3,4)),
         full_coupled_weighted_SSPRK3_energy_proved=False,
         effective_radial_dimensions=[3,7,11],
         step_radial=dr,step_bulk=dy,step_time=dt,
