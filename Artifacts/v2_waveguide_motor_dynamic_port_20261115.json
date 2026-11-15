@@ -1,0 +1,271 @@
+{
+  "model": "constructed nonlinear multi-coil memory + lossy passive finite-speed waveguide with signed dynamic matching",
+  "assumptions": {
+    "phases": 3,
+    "dt_s": 2e-05,
+    "delay_cells": 3,
+    "front_m_s": 209854720.6,
+    "characteristic_ohm": 6.0,
+    "line_transmission": 0.985,
+    "resistance_ohm": 1.0,
+    "l0_h": 0.04,
+    "lharm_h": 0.008,
+    "mutual_h": 0.0006,
+    "saturation_h": 0.003,
+    "saturation_a": 3.0,
+    "coupling_g": 0.002,
+    "memory_h": 0.004,
+    "memory_mobility": 5500.0,
+    "omega_rad_s": 246.5103035516791,
+    "pole_harmonic": 4
+  },
+  "cable_m": 12591.283236000001,
+  "delay_s": 6.000000000000001e-05,
+  "steps": 35,
+  "exact_wave_fraction": {
+    "incident": "7/3",
+    "reflected": "11/15",
+    "absorbed_energy": "92/525",
+    "line_depletion": "92/525",
+    "equal": true
+  },
+  "exact_lossy_packet_fraction": {
+    "e0": "4588/12375",
+    "e1": "214281/539000",
+    "source_work": "7/88",
+    "motor_work": "-59/539",
+    "dissipated": "8029/49500",
+    "exact": true,
+    "signed_motor_port": "-59/539"
+  },
+  "cumulative": {
+    "source_work_j": -0.0013212377460479741,
+    "shaft_mechanical_work_j": 5.653826974536674e-05,
+    "copper_loss_j": 0.0002292186269337052,
+    "memory_loss_j": 2.4208417473592103e-06,
+    "line_loss_j": 0.000132437698448574,
+    "total_energy_change_j": -0.0016287766434322495,
+    "integrated_balance_error_j": -3.686287386450715e-18
+  },
+  "maximum_single_step_residual_j": 1.0089856467693226e-17,
+  "max_implicit_residual_inf": 3.721185143877592e-15,
+  "causal_trace": [
+    {
+      "k": 0,
+      "incident0_v": 0.0,
+      "source_return0_v": 0.0,
+      "motor_port_w": -2.1978999656840905
+    },
+    {
+      "k": 1,
+      "incident0_v": 0.0,
+      "source_return0_v": 0.0,
+      "motor_port_w": -2.18379831679443
+    },
+    {
+      "k": 2,
+      "incident0_v": 0.0,
+      "source_return0_v": 0.0,
+      "motor_port_w": -2.1698683698774412
+    },
+    {
+      "k": 3,
+      "incident0_v": 1.0512387875000002,
+      "source_return0_v": -2.0042338553819152,
+      "motor_port_w": -1.4276839341105787
+    },
+    {
+      "k": 4,
+      "incident0_v": 0.0,
+      "source_return0_v": -1.9989491371406247,
+      "motor_port_w": -2.1458323047197263
+    },
+    {
+      "k": 5,
+      "incident0_v": 0.0,
+      "source_return0_v": -1.9938003618598648,
+      "motor_port_w": -2.1323838955044288
+    },
+    {
+      "k": 6,
+      "incident0_v": -0.1944557792337919,
+      "source_return0_v": -0.9865110344522369,
+      "motor_port_w": -2.518038755866309
+    },
+    {
+      "k": 7,
+      "incident0_v": -0.19394304265822626,
+      "source_return0_v": -1.9886275977294752,
+      "motor_port_w": -2.499990457830895
+    },
+    {
+      "k": 8,
+      "incident0_v": -0.19344349560854873,
+      "source_return0_v": -1.983866833773715,
+      "motor_port_w": -2.4821568621650294
+    },
+    {
+      "k": 9,
+      "incident0_v": -0.09571376684014216,
+      "source_return0_v": -2.16464844300465,
+      "motor_port_w": -2.3981014514797563
+    },
+    {
+      "k": 10,
+      "incident0_v": -0.192941621100708,
+      "source_return0_v": -2.1588110775619245,
+      "motor_port_w": -2.1073711606352523
+    },
+    {
+      "k": 11,
+      "incident0_v": -0.1924797198798103,
+      "source_return0_v": -2.153118194214665,
+      "motor_port_w": -2.432658777149554
+    },
+    {
+      "k": 12,
+      "incident0_v": -0.21001960356141866,
+      "source_return0_v": -2.0548546763673077,
+      "motor_port_w": -2.4516994708638626
+    },
+    {
+      "k": 13,
+      "incident0_v": -0.20945324777275187,
+      "source_return0_v": -2.14301672284554,
+      "motor_port_w": -2.4341747993513603
+    },
+    {
+      "k": 14,
+      "incident0_v": -0.20890090999819233,
+      "source_return0_v": -2.1377261994710843,
+      "motor_port_w": -2.41684746042899
+    },
+    {
+      "k": 15,
+      "incident0_v": -0.19936713783784712,
+      "source_return0_v": -2.1497433023256156,
+      "motor_port_w": -2.393654755572426
+    },
+    {
+      "k": 16,
+      "incident0_v": -0.20792083999228145,
+      "source_return0_v": -2.144542002748875,
+      "motor_port_w": -2.352776921645708
+    },
+    {
+      "k": 17,
+      "incident0_v": -0.20740754018818325,
+      "source_return0_v": -2.1394775468148644,
+      "motor_port_w": -2.3664437403424436
+    },
+    {
+      "k": 18,
+      "incident0_v": -0.20857346954988704,
+      "source_return0_v": -2.125972078278325,
+      "motor_port_w": -2.3531165413553476
+    },
+    {
+      "k": 19,
+      "incident0_v": -0.20806882646170272,
+      "source_return0_v": -2.129870934363674,
+      "motor_port_w": -2.3366205133362508
+    },
+    {
+      "k": 20,
+      "incident0_v": -0.20757746028584517,
+      "source_return0_v": -2.1252030505859985,
+      "motor_port_w": -2.3202953058207494
+    },
+    {
+      "k": 21,
+      "incident0_v": -0.2062671259647588,
+      "source_return0_v": -2.1222552931390406,
+      "motor_port_w": -2.3035830161173263
+    },
+    {
+      "k": 22,
+      "incident0_v": -0.20664540272929954,
+      "source_return0_v": -2.117823295828423,
+      "motor_port_w": -2.285493545034641
+    },
+    {
+      "k": 23,
+      "incident0_v": -0.20619251297548005,
+      "source_return0_v": -2.1135184761620884,
+      "motor_port_w": -2.2723566526638117
+    },
+    {
+      "k": 24,
+      "incident0_v": -0.20590651417858255,
+      "source_return0_v": -2.1085458753713686,
+      "motor_port_w": -2.2569654112618887
+    },
+    {
+      "k": 25,
+      "incident0_v": -0.20547651071951317,
+      "source_return0_v": -2.1052983499905946,
+      "motor_port_w": -2.241419614496834
+    },
+    {
+      "k": 26,
+      "incident0_v": -0.2050588463534362,
+      "source_return0_v": -2.101364566240112,
+      "motor_port_w": -2.2260195254199315
+    },
+    {
+      "k": 27,
+      "incident0_v": -0.20457639219321863,
+      "source_return0_v": -2.0976985661653287,
+      "motor_port_w": -2.2107106537283676
+    },
+    {
+      "k": 28,
+      "incident0_v": -0.20426130916196245,
+      "source_return0_v": -2.0940015919534547,
+      "motor_port_w": -2.195407634194725
+    },
+    {
+      "k": 29,
+      "incident0_v": -0.20387964362803124,
+      "source_return0_v": -2.090421899722835,
+      "motor_port_w": -2.180662307569531
+    },
+    {
+      "k": 30,
+      "incident0_v": -0.2035239591357756,
+      "source_return0_v": -2.0868844488296086,
+      "motor_port_w": -2.1658346318362893
+    },
+    {
+      "k": 31,
+      "incident0_v": -0.20316526945530408,
+      "source_return0_v": -2.0836094046053804,
+      "motor_port_w": -2.151107174276971
+    },
+    {
+      "k": 32,
+      "incident0_v": -0.20281795876585873,
+      "source_return0_v": -2.080371504757682,
+      "motor_port_w": -2.1365044646275275
+    },
+    {
+      "k": 33,
+      "incident0_v": -0.20247474643657068,
+      "source_return0_v": -2.077257850706794,
+      "motor_port_w": -2.1220188554167487
+    },
+    {
+      "k": 34,
+      "incident0_v": -0.2021569934583255,
+      "source_return0_v": -2.0742392017176474,
+      "motor_port_w": -2.1076407798776926
+    }
+  ],
+  "fails_to_prove": [
+    "same-object original V2 geometry/wiring",
+    "continuum Maxwell retarded PDE",
+    "arbitrary hysteresis, dissipation inside cable, semiconductor PWM",
+    "validated ODE/PDE existence and Agda kernel acceptance",
+    "steady device efficiency without shaft/auxiliary metrology"
+  ]
+}
