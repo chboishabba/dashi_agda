@@ -76,7 +76,7 @@ def audit():
        k_squared+(angular_mode**2+1)/R0**2-omega_squared)
     assert s.simplify(characteristic-expected_char)==0
     evs=normalized.eigenvals()
-    assert set(evs)=={k_squared,k_squared+(angular_mode**2+1)/R0**2}
+    assert {s.simplify(e) for e in evs}=={s.simplify(k_squared),s.simplify(k_squared+(angular_mode**2+1)/R0**2)}
     # Concrete original T=f=n=2,2,1 R0=1 numerical families
     Rstar=s.simplify(f*n/s.sqrt(2*T))
     assert s.simplify(Rstar.subs({T:2,f:2,n:1})-1)==0
