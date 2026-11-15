@@ -60,25 +60,26 @@ module Replication
   (K : CaseySubstrate {sℓ})
   where
 
-  open JoinSemilattice (stateJoin K)
+  private
+    semilattice = stateJoin K
 
   merge : State K → State K → State K
-  merge = join
+  merge = JoinSemilattice.join semilattice
 
   merge-associative :
     ∀ x y z →
     merge (merge x y) z ≡ merge x (merge y z)
-  merge-associative = join-associative
+  merge-associative = JoinSemilattice.join-associative semilattice
 
   merge-commutative :
     ∀ x y →
     merge x y ≡ merge y x
-  merge-commutative = join-commutative
+  merge-commutative = JoinSemilattice.join-commutative semilattice
 
   merge-idempotent :
     ∀ x →
     merge x x ≡ x
-  merge-idempotent = join-idempotent
+  merge-idempotent = JoinSemilattice.join-idempotent semilattice
 
 ------------------------------------------------------------------------
 -- Receipt-based governance.
