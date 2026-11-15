@@ -152,7 +152,11 @@ def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
         amp=(-6*drive*math.sqrt(1-v*v)/b*
              math.exp(1-1/(1-q*q)) if 0<ds<pulse else 0.)
         return v,b,amp
-    for it in range(nt):
+    prev_wall=None
+    now_wall=None
+    for it in range(nt+1):
+        if it==nt-1:prev_wall=U[:,0,:].copy()
+        if it==nt:now_wall=U[:,0,:].copy()
         T=T0+it*dt
         v,b,amp=coeff(T)
         enforce(U,P,M,v,amp,src)
@@ -170,19 +174,47 @@ def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
         U[:]=(U+2*(U2+dt*dU))/3
         P[:]=(P+2*(P2+dt*dP))/3
         M[:]=(M+2*(M2+dt*dM))/3
-    def read(r):
-        # Evaluate SAME physical receiver radius at every grid resolution.
-        x=r/dr;ir=int(math.floor(x));frac=x-ir
+    next_wall=U[:,0,:].copy()
+    def read_all(r):
+        x=r/dr;ir=int(math.floor(x));q=x-ir
         if ir<1 or ir+2>=nr:raise ValueError('receiver interior to grid')
-        weights=np.array([-frac*(frac-1)*(frac-2)/6,
-                           (frac+1)*(frac-1)*(frac-2)/2,
-                          -(frac+1)*frac*(frac-2)/2,
-                           (frac+1)*frac*(frac-1)/6])
-        modes=[float((r/eps)**(2*j)*np.dot(weights,U[j,0,ir-1:ir+3]))
-               for j in range(3)]
-        return r,modes,sum(modes)
-    rr,components,yy=read(rx)
-    far,fc,fy=read(bulk+.1)
+        weights=np.array([-q*(q-1)*(q-2)/6,
+                           (q+1)*(q-1)*(q-2)/2,
+                          -(q+1)*q*(q-2)/2,
+                           (q+1)*q*(q-1)/6])
+        dw=np.array([-(3*q*q-6*q+2)/6,
+                     (3*q*q-4*q-1)/2,
+                     (-3*q*q+2*q+2)/2,
+                     (3*q*q-1)/6])/dr
+        d2w=np.array([1-q,3*q-2,1-3*q,q])/dr**2
+        pieces=[];derivxx=[];lapieces=[]
+        tprev=[];tnext=[]
+        for j in range(3):
+            ell=2*j;factor=(r/eps)**ell
+            vj=now_wall[j,ir-1:ir+3]
+            val=float(np.dot(weights,vj))
+            v1=float(np.dot(dw,vj));v2=float(np.dot(d2w,vj))
+            pieces.append(factor*val)
+            derivxx.append(factor*(v2+2*ell*v1/r+ell*(ell-1)*val/r**2))
+            lapieces.append(factor*(v2+(2*ell+2)*v1/r))
+            tprev.append(factor*float(np.dot(weights,prev_wall[j,ir-1:ir+3])))
+            tnext.append(factor*float(np.dot(weights,next_wall[j,ir-1:ir+3])))
+        H=sum(pieces)
+        HT=(sum(tnext)-sum(tprev))/(2*dt)
+        HTT=(sum(tnext)-2*H+sum(tprev))/(dt*dt)
+        S=math.sqrt(1+final_t*final_t)/final_t
+        Heta=S*HT
+        Hetaeta=S*S*HTT-HT/(final_t*math.sqrt(1+final_t*final_t))
+        E4=-(Hetaeta+sum(derivxx))/(4*final_t**2)
+        # Source-free receiver: SMS projected 5D Weyl=-delta G4 TT.
+        E5=-(Hetaeta+2*Heta-sum(lapieces))/(2*final_t**2)
+        return dict(r=r,mode_values=pieces,H=H,Hxx=sum(derivxx),
+           Delta3H=sum(lapieces),HT=HT,HTT=HTT,
+           intrinsic4D_Eyy=E4,projected5D_Eyy=E5)
+    rec=read_all(rx)
+    far=read_all(bulk+.1)
+    rr,components,yy=rec['r'],rec['mode_values'],rec['H']
+    far_r,fc,fy=far['r'],far['mode_values'],far['H']
     return dict(model='original moving AdS5 a=t Neumann compact TT',
         original_radial_multipoles=[0,2,4],
         effective_radial_dimensions=[3,7,11],
@@ -195,13 +227,19 @@ def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
         conservative_source_cell_average=conservative_source,
         raw_mode_values=components,
         retarded_TT_yy_scaled_by_eps4=yy,
-        far_receiver_grid_r=far,far_mode_values=fc,
+        far_receiver_grid_r=far_r,far_mode_values=fc,
         far_TT_yy_scaled_by_eps4=fy,
         fixed_physical_receiver_cubic_interpolation=True,
-        no_post_evolution_spatial_derivatives=True,
+        receiver_intrinsic_4D_electric_Weyl=rec['intrinsic4D_Eyy'],
+        receiver_projected_5D_electric_Weyl=rec['projected5D_Eyy'],
+        far_intrinsic_4D_electric_Weyl=far['intrinsic4D_Eyy'],
+        far_projected_5D_electric_Weyl=far['projected5D_Eyy'],
+        second_order_spatial_radial_readout=True,
+        no_post_evolution_spatial_derivatives=False,
         no_spatial_Fourier_Bessel_inverse=True,
         compact_support_of_boundary_stress=True,
         numerical_convergence_certified=False,
+        both_Weyl_numerically_evaluated=True,
         full_Weyl_receiver_certified=False,
         Agda_kernel_accepted=False,
         physical_graviton_measured=False)
