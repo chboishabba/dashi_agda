@@ -50,7 +50,7 @@ scaleEmbeddedNormToOne witness =
   in
   C3.cyclotomic3Ext
     (trans (ℚP.*-comm (1/ n) n) inverseRight)
-    refl
+    (ℚP.*-zeroʳ (1/ n))
 
 rightInverse : (witness : NonzeroCyclotomicAmplitude) →
   C3.multiply (amplitude witness) (inverse witness) ≡ C3.one
