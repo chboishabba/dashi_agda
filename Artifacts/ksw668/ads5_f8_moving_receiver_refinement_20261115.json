@@ -76,7 +76,7 @@
     "interpretation": "genuine compact 3D TT test source constructed; numerical UV/cutoff/convergence fail"
   },
   "acceptance": {
-    "source_equivalent_unit_tests": "172/172 source-equivalent committed tests; 185/185 broader exploratory local suite",
+    "source_equivalent_unit_tests": "184 committed-source-equivalent local PASS; 197/197 broader exploratory local PASS",
     "full_3d_B4_numerical_convergence": false,
     "external_analytical_Green_operator_previously_claimed_by_external_theorem": true,
     "tensor_matter_generating_action": false,
@@ -424,8 +424,8 @@
     "new_numerical_stencil_owner": "scripts/ksw668_f8_radial_fv_contract.py",
     "new_original_moving_pde_manufactured_owner": "scripts/ksw668_f8_manufactured_original_pde.py",
     "threegrid_machine_receipt": "Artifacts/ksw668/ads5_f8_tt_conservative_fv_threegrid_20261115.json",
-    "source_equivalent_committed_test_count": 172,
-    "local_broader_exploratory_test_superset": 185,
+    "source_equivalent_committed_test_count": 184,
+    "local_broader_exploratory_test_superset": 197,
     "failed_numerical_receiver": {
       "H_medium_to_fine_relative_drift": 0.21762040770235527,
       "intrinsic4D_Weyl_medium_to_fine_relative_drift": 0.9027364882008849,
@@ -439,5 +439,19 @@
     "Agda_pinned_kernel_checked": false,
     "experimental_graviton_observed": false,
     "exact_source_mass_runtime_gate": true
+  },
+  "f8_moving_wall_forced_flux_maxcut_20261115": {
+    "original_wall_beta": "(1+v)/(1-v)",
+    "wall_velocity": "-1/sqrt(1+t²)",
+    "forced_incoming_characteristic": "qminus=beta*qplus-2G/(1-v)",
+    "characteristic_flux": "(1-v)*|qminus|²-(1+v)*|qplus|²",
+    "exact_square": "2v*beta*|qplus-G/v|²-(2/v)*|G|²",
+    "uniform_original_t1_to_t2": "flux<=2 sqrt(5)*|G|²",
+    "homogeneous_wall_dissipative": true,
+    "original_t4over3_rational_flux": "13/5760",
+    "source_equivalent_tests_added": 12,
+    "full_time_discrete_CFL_error_proved": false,
+    "full_original_boundary_Weyl_receiver_convergence_proved": false,
+    "Agda_pinned_kernel_pass": false
   }
 }
