@@ -18,9 +18,9 @@ module DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound2Exact where
 -- appraisal-fibre <-> X6 chart.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; true; false)
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+leafOpen import Agda.Builtin.Bool using (Bool; true; false)
+leafOpen import Agda.Builtin.Equality using (_≡_; refl)
+leafOpen import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchExact as R1
 import DASHI.Moonshine.Monster3BFiniteSchrodingerIrreducibilityBidiCutExact as Irred
@@ -37,7 +37,7 @@ record OrdinaryIrreducibilityMachineryAssumed : Set₁ where
   constructor ordinary-irreducibility-machinery-assumed
   field
     irreducibilityAuthority : Irred.SchrodingerIrreducibilityAuthority
-open OrdinaryIrreducibilityMachineryAssumed public
+leafOpen OrdinaryIrreducibilityMachineryAssumed public
 
 ------------------------------------------------------------------------
 -- 2. Character isotypy and action recognition remain distinct.
@@ -49,7 +49,7 @@ record ActualKernelIsotypyAuthority : Set₁ where
     promotion : Kernel.ActualKernelCharacterPromotion
     ninetyCopyCharacterIsotypy :
       Kernel.NinetyHeisenbergCharacterIsotypy promotion
-open ActualKernelIsotypyAuthority public
+leafOpen ActualKernelIsotypyAuthority public
 
 fromActualKernelPromotion :
   (promotion : Kernel.ActualKernelCharacterPromotion) → ActualKernelIsotypyAuthority
@@ -66,7 +66,7 @@ record ActualActionRecognitionAuthority : Set₁ where
   field
     ActualSector : Set
     recognition : Actual.ActualZetaSectorRecognition ActualSector
-open ActualActionRecognitionAuthority public
+leafOpen ActualActionRecognitionAuthority public
 
 base369RecognitionFromActualAction :
   (authority : ActualActionRecognitionAuthority) →
@@ -88,14 +88,14 @@ data Round2Leaf : Set where
 data LeafState : Set where
   outsourced : LeafState
   closed : LeafState
-  open : LeafState
+  leafOpen : LeafState
   generated : LeafState
   blocked : LeafState
 
 leafState : Round2Leaf → LeafState
 leafState ordinarySchrodingerIrreducibility = outsourced
 leafState actualKernelCharacterIsotypy = closed
-leafState actualActionRecognition = open
+leafState actualActionRecognition = leafOpen
 leafState base369ActionRecognition = generated
 leafState structuredFiftyThreeResidual = blocked
 
@@ -103,7 +103,7 @@ highestImpactScientificLeaf : Round2Leaf
 highestImpactScientificLeaf = actualActionRecognition
 
 highestImpactScientificLeafIsOpen :
-  leafState highestImpactScientificLeaf ≡ open
+  leafState highestImpactScientificLeaf ≡ leafOpen
 highestImpactScientificLeafIsOpen = refl
 
 base369RecognitionIsGeneratedNotIndependent :
@@ -124,7 +124,7 @@ record Round2Boundary : Set where
     characterEqualityPromotedDirectlyToIntertwiner : Bool
     dimensionEqualityPromotedDirectlyToIntertwiner : Bool
     fiftyThreeResidualPromotedBeforeActionRecognition : Bool
-open Round2Boundary public
+leafOpen Round2Boundary public
 
 canonicalRound2Boundary : Round2Boundary
 canonicalRound2Boundary =

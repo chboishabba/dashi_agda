@@ -17,8 +17,8 @@ module DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound3Exact where
 -- actual action-recognition record.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_; refl)
+leafOpen import Agda.Builtin.Bool using (Bool; false; true)
+leafOpen import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchRound2Exact as R2
 import DASHI.Moonshine.Base369Monster3BMultiplicityInertiaTwelveSeventyEightBidiExact as Ninety
@@ -39,15 +39,15 @@ data Round3Leaf : Set where
 data LeafState : Set where
   closed : LeafState
   generated : LeafState
-  open : LeafState
+  leafOpen : LeafState
   blocked : LeafState
 
 leafState : Round3Leaf → LeafState
-leafState actualZetaActionRecognition = open
+leafState actualZetaActionRecognition = leafOpen
 leafState actualFin90InertiaAttachment = blocked
 leafState actualTwelveSeventyEightSameActionSplit = blocked
 leafState typedFiftyFourFiveModeSkeleton = generated
-leafState actualFiftyFourResidualActionRecognition = open
+leafState actualFiftyFourResidualActionRecognition = leafOpen
 leafState actualFiveModeMonsterIdentification = blocked
 
 ------------------------------------------------------------------------
@@ -58,7 +58,7 @@ highestImpactMN3BLeaf : Round3Leaf
 highestImpactMN3BLeaf = actualZetaActionRecognition
 
 highestImpactMN3BLeafIsOpen :
-  leafState highestImpactMN3BLeaf ≡ open
+  leafState highestImpactMN3BLeaf ≡ leafOpen
 highestImpactMN3BLeafIsOpen = refl
 
 round2HighestLeafAgrees :
@@ -74,7 +74,7 @@ typedFiftyFourSkeletonIsGenerated :
 typedFiftyFourSkeletonIsGenerated = refl
 
 actualFiftyFourResidualActionIsOpen :
-  leafState actualFiftyFourResidualActionRecognition ≡ open
+  leafState actualFiftyFourResidualActionRecognition ≡ leafOpen
 actualFiftyFourResidualActionIsOpen = refl
 
 fiveModeMonsterIdentificationWaitsForActualAction :

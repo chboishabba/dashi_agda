@@ -1,7 +1,7 @@
 module DASHI.Economics.AICapitalAcquisitionProgress20261008Exact where
 
-open import DASHI.Core.Prelude
-open import Agda.Builtin.String using (String)
+openState import DASHI.Core.Prelude
+openState import Agda.Builtin.String using (String)
 
 import DASHI.Economics.AICapitalObservedStateTimeSeries2026Exact as Global
 import DASHI.Economics.AICompanyObservedTrajectory2026Exact as Entity
@@ -17,7 +17,7 @@ data EvidenceScope : Set where
   globalComplexScope : EvidenceScope
 
 data ClosureState : Set where
-  open : ClosureState
+  openState : ClosureState
   partial : ClosureState
   closed : ClosureState
 
@@ -30,7 +30,7 @@ record ProducerProgress : Set where
     receipt : String
     promotesGlobalClosure : Bool
 
-open ProducerProgress public
+openState ProducerProgress public
 
 coreWeaveRolloverProgress : ProducerProgress
 coreWeaveRolloverProgress = producerProgress
@@ -84,21 +84,21 @@ entityPersistenceProgress = producerProgress
 globalPersistenceProgress : ProducerProgress
 globalPersistenceProgress = producerProgress
   "persistence trajectory"
-  globalComplexScope open
+  globalComplexScope openState
   "the global AI-capital X_t series still lacks a second point with comparable graph/fundamental coverage"
   false
 
 globalRolloverProgress : ProducerProgress
 globalRolloverProgress = producerProgress
   "rollover dependence"
-  globalComplexScope open
+  globalComplexScope openState
   "entity maturity schedules do not yet produce a weighted complex-wide rollover coordinate"
   false
 
 globalCapitalSpreadProgress : ProducerProgress
 globalCapitalSpreadProgress = producerProgress
   "realised ROIC-WACC"
-  globalComplexScope open
+  globalComplexScope openState
   "filings provide operating and cash-flow trajectories but no admissible same-entity realised ROIC-WACC join yet"
   false
 
@@ -125,13 +125,13 @@ debtScheduleDoesNotAutoCreateCapitalSpread ()
 coreWeaveEntityRolloverIsClosed : closure coreWeaveRolloverProgress ≡ closed
 coreWeaveEntityRolloverIsClosed = refl
 
-globalRolloverStillOpen : closure globalRolloverProgress ≡ open
+globalRolloverStillOpen : closure globalRolloverProgress ≡ openState
 globalRolloverStillOpen = refl
 
 entityPersistenceIsClosed : closure entityPersistenceProgress ≡ closed
 entityPersistenceIsClosed = refl
 
-globalPersistenceStillOpen : closure globalPersistenceProgress ≡ open
+globalPersistenceStillOpen : closure globalPersistenceProgress ≡ openState
 globalPersistenceStillOpen = refl
 
 currentGlobalPointStillNonPromotable :
