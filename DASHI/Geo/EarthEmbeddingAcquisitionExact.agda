@@ -1,7 +1,8 @@
 module DASHI.Geo.EarthEmbeddingAcquisitionExact where
 
 open import Agda.Builtin.Nat using (Nat)
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong)
 open import Agda.Builtin.String using (String)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Data.Empty using (⊥)

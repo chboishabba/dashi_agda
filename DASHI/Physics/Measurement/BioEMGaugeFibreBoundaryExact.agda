@@ -7,7 +7,8 @@ module DASHI.Physics.Measurement.BioEMGaugeFibreBoundaryExact where
 -- plus all required conditions is independently supplied.
 
 open import Agda.Primitive using (Level)
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong)
 import DASHI.Physics.Measurement.CausalBioelectromagneticExperimentExact as C
 
 -- An abstract electromagnetic potential may have gauge-equivalent

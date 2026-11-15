@@ -4,7 +4,8 @@ module DASHI.Physics.QuantumSensors.NVPhotonHistoryCountSufficiencyExact where
 -- equal click/dark counts entail equal rational likelihood.
 -- Mathematical statement only; no measured independence claim.
 
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ; 1ℚ; _*_)

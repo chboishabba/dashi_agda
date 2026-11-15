@@ -22,7 +22,8 @@ module DASHI.Physics.YangMills.YangMillsWilsonProjectiveFiniteCylinderRound554Ex
 --   limitExpectation(W) = integral W dmu.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; cong)
+open import Agda.Builtin.Equality using (_≡_)
+open import Relation.Binary.PropositionalEquality using (cong)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Product using (Σ; _,_)
 

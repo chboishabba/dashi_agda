@@ -5,7 +5,8 @@ module DASHI.Physics.QuantumSensors.NVPhotonObserverRefinementExact where
 -- Source owner: NVPhotonBinaryLikelihoodExact for normalized outcome pairs.
 -- Methodological neighbour: Agda observer collision PR #1266.
 
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong)
 open import Data.Empty using (⊥)
 open import Relation.Binary.PropositionalEquality using (sym; trans)
 open import Data.Rational.Base using (ℚ)

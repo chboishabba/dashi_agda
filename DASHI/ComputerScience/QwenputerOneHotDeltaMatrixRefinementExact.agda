@@ -9,7 +9,8 @@ module DASHI.ComputerScience.QwenputerOneHotDeltaMatrixRefinementExact where
 -- The operations and identities are supplied by a carrier witness.
 -- This does NOT establish BF16/FP32 exactness of emitted Qwen weights.
 
-open import Agda.Builtin.Equality using (_≡_; refl; sym; trans; cong)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (sym; trans; cong)
 open import Agda.Builtin.Bool using (Bool; true; false)
 
 import DASHI.ComputerScience.QwenputerGatedDeltaArchitectureExact as RAM

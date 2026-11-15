@@ -17,7 +17,8 @@ module DASHI.Reasoning.Ternary27HeisenbergThirteenSchlafliBridgeExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong)
 open import Agda.Builtin.Nat using (Nat; _+_)
 open import Agda.Builtin.String using (String)
 open import Data.Product using (_×_; _,_)

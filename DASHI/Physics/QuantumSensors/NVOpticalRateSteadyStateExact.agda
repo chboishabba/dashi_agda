@@ -7,7 +7,8 @@ module DASHI.Physics.QuantumSensors.NVOpticalRateSteadyStateExact where
 -- not a derived NV seven-level Lindblad or intersystem crossing model.
 -- All rates and fluorescence intensities need physical calibration.
 
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)

@@ -3,7 +3,8 @@ module DASHI.Physics.QuantumSensors.NVPhotonHistoryFiniteSumExact where
 -- Exact all-words mass recursion for the MCG Bernoulli product law.
 -- Reuses the existing photon likelihood and finite history semantics.
 
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.List using (List; []; _∷_; _++_)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_)

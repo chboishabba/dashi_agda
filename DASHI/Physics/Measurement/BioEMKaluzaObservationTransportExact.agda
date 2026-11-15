@@ -6,7 +6,8 @@ module DASHI.Physics.Measurement.BioEMKaluzaObservationTransportExact where
 -- Provenance: classical Kaluza/Klein gauge geometry; formal consumer DASHI.
 
 open import Agda.Primitive using (Level)
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong)
 import DASHI.Physics.Measurement.CausalBioelectromagneticExperimentExact as Bio
 
 record LocalKKConnection {ℓ : Level} (Form : Set ℓ) : Set ℓ where

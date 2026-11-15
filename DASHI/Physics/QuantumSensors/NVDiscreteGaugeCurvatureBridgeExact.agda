@@ -7,7 +7,8 @@ module DASHI.Physics.QuantumSensors.NVDiscreteGaugeCurvatureBridgeExact where
 -- Discrete cochains/gauge cancellation: classical mathematics.
 -- Source-written implementation: DASHI, based on #1238 and sibling #1239.
 
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong)
 open import Data.Rational.Base using (ℚ; _+_; _*_)
 import DASHI.Physics.Measurement.BioEMDiscreteCurvatureGaugeExact as G
 import DASHI.Physics.QuantumSensors.NVSpinOneAxialExact as NV

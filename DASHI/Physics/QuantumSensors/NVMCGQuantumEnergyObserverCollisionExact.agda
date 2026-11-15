@@ -5,7 +5,8 @@ module DASHI.Physics.QuantumSensors.NVMCGQuantumEnergyObserverCollisionExact whe
 -- Cross-pollination: observer-collision / factorisation methodology used
 -- in Agda #1266, while keeping this an independent physical-model result.
 
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong)
 open import Relation.Binary.PropositionalEquality using (sym; trans)
 open import Data.Empty using (⊥)
 open import Data.Rational.Base using (ℚ; 0ℚ)
