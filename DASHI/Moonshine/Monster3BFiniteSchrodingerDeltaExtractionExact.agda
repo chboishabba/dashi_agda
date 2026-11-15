@@ -12,12 +12,12 @@ module DASHI.Moonshine.Monster3BFiniteSchrodingerDeltaExtractionExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
-open import Agda.Builtin.Equality using (_≡_; refl; sym; trans)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _*_; _/_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Moonshine.C3CyclotomicAmplitudeAlgebraExact as C3
 import DASHI.Moonshine.Monster3BCyclotomicLinearAlgebraExact as L
