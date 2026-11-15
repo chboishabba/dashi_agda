@@ -14,11 +14,42 @@ assert r0 == Q(-28273644, 125) and r0 < 0
 
 # Original R828/R854 physical-Fourier enclosure constants, not an
 # assertion that Agda's rational R408 trajectory has been constructed.
+# Source R828 728-mode finite Fourier component estimates, recomputed
+# from the original projection/helicity row bounds rather than trusted
+# as unexplained hard-coded constants. These are physical real-Fourier
+# estimates, not an inhabitant of rational-valued R408 trajectories.
+n = (2 * 4 + 1) ** 3 - 1
+M, initial_max = 12, 6
+projection_row, helicity_row, cross, dot, lap = 4, 3, 2, 12, 48
+assert n == 728
+force_bound = projection_row * n * dot * M * M
+force_state_lipschitz = projection_row * n * 2 * dot * M
+ode_bound = force_bound + lap * M
+hu, hu_lip = helicity_row * M, helicity_row
+hf, hf_lip = helicity_row * force_bound, helicity_row * force_state_lipschitz
+mixed = n * cross * hu * hu
+mixed_lip = n * cross * 2 * hu * hu_lip
+comm = n * 2 * cross * hf * hu
+comm_lip = n * 2 * cross * (hf_lip * hu + hf * hu_lip)
+work_lip = 2 * n * 3 * (mixed_lip * comm + mixed * comm_lip)
+production_lip = 8 * 2 * n * 3 * (force_bound + M * force_state_lipschitz)
+dissipation_lip = 8 * n * 3 * lap * 2 * M
+rate_state_lipschitz = 6 * (12 * work_lip + production_lip + dissipation_lip)
+
 K = 5032512
 L = 391309593930357307785216
+assert (ode_bound, rate_state_lipschitz) == (K, L)
+assert 0 < initial_max < M
+
 T = Q(226189, 3938540454339300631433585885184)
 assert K > 0 and L > 0 and T > 0
-assert K * T < 6  # M=12 with initial component maximum <=6
+assert K * T < M - initial_max
+# For the genuine real Galerkin polynomial u'=F(u), the standard
+# finite-dimensional continuation/first-exit argument proves
+# max |u_k,j(t)| <= initial_max + K*t < M on [0,T].
+# Thus |r(u(t))-r(u(0))| <= L*K*t, not merely L*t.
+assert K < 10065030  # exact R856 pointwise safe integer multiplier
+assert K < 20130061  # exact R856 integrated safe integer multiplier
 assert L * K * T == Q(226189, 2)
 rate_at_most = r0 + L * K * T
 assert rate_at_most == -Q(28273663, 250)
