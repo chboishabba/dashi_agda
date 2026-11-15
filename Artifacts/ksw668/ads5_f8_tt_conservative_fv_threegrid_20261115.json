@@ -1,0 +1,158 @@
+{
+  "schema": "KSW668F8TTOriginalConservativeFV20261115",
+  "original_model": "a=t 5D AdS tensor Israel Neumann; exact three spatial angular multipoles",
+  "event": {
+    "receiver_t": 12,
+    "spatial_support_radius": 0.04,
+    "time_support_poincare": 0.065,
+    "receiver_radius": 2.5373657609619378,
+    "bulk_horizon": 2.549365760961938,
+    "photon_dark_margin": 0.012459111173937387
+  },
+  "numerical": {
+    "fix": "FV shell-volume denominator exact; radial compact source integral exact derivative primitives",
+    "original_wrong_first_cell_Lr2": [
+      6.5,
+      34.15625,
+      172.994140625
+    ],
+    "correct_first_cell_Lr2": [
+      6,
+      14,
+      22
+    ],
+    "effective_dimensions": [
+      3,
+      7,
+      11
+    ],
+    "discrete_radial_Green_energy_nonpositive": true,
+    "TT_source_integrals": {
+      "ell0": 0,
+      "ell2": 0,
+      "ell4": 2.5761698809461424
+    },
+    "full_original_manufactured_PDE_local_consistency_pass": true,
+    "grid_results": [
+      {
+        "dr": 0.012,
+        "dy": 0.016,
+        "dt": 0.0024992243525406577,
+        "H": -0.000002838143712830983,
+        "E4": -0.0000623958175453122,
+        "E5": -0.000003453895138459439,
+        "E4_tangent": -0.0000623629624727562,
+        "E5_tangent": -0.0000033880800330027724,
+        "farH": -7.927980318670159e-7,
+        "farE4": 0.000004326607397703515,
+        "farE5": 1.3357597781001168e-7
+      },
+      {
+        "dr": 0.008,
+        "dy": 0.012,
+        "dt": 0.0017989104901421466,
+        "H": -0.00000676189917760608,
+        "E4": -0.00005644325405215102,
+        "E5": -0.0000029008031422332182,
+        "E4_tangent": -0.00005643906140819261,
+        "E5_tangent": -0.0000028877474282298085,
+        "farH": 1.5116830139986467e-7,
+        "farE4": -0.0000013620330569585246,
+        "farE5": -4.5857443814887786e-8
+      },
+      {
+        "dr": 0.006,
+        "dy": 0.011,
+        "dt": 0.0013498551062053178,
+        "H": -0.000008642734606290211,
+        "E4": -0.0005803127299035545,
+        "E5": -0.000016736713621150142,
+        "E4_tangent": -0.0005800550353804825,
+        "E5_tangent": -0.000016231727441397667,
+        "farH": -2.2727694832513574e-7,
+        "farE4": 0.00000718909006856379,
+        "farE5": 1.5326731392697792e-7
+      }
+    ],
+    "medium_to_fine_relative_drifts": {
+      "field_H": 0.21762040770235527,
+      "intrinsic_E4": 0.9027364882008849,
+      "projected_E5": 0.826680242734901
+    },
+    "tangent_derivative_Weyl_crosscheck": true,
+    "full_3D_compact_TT_numerical_receiver_converged": false,
+    "outside_bulk_front_numerical_leakage_persists": true,
+    "source_moment_runtime_failclosed": true,
+    "actual_normalized_moments_for_dr_012": [
+      -3.388131789017201e-15,
+      -1.5146129380243424e-14,
+      2.576169880946148
+    ]
+  },
+  "acceptance": {
+    "source_equivalent_committed_regression_cases": 255,
+    "local_superset_including_uncommitted_exploratory_cases": 269,
+    "pinned_Agda_2_9_kernel": false,
+    "exact_GitHub_head_runner": false,
+    "matter_generating_action": false,
+    "quantitative_physical_signal": false,
+    "empirical_graviton_observation": false
+  },
+  "next_exact_lemmas": [
+    "ads5OriginalMovingFullCoupledYRadialSSPRK3SymmetrizerCFL",
+    "ads5OriginalMovingH4PlusEpsilonNeumannToBothWeylTrace",
+    "ads5OriginalMovingTTThreeMultipoleThreeObservableConvergence",
+    "ads5OriginalT2NeumannToWeylEllipticFIOComposition",
+    "ads5OriginalT2ActualCompactTTNonzeroEarlyBothWeyl",
+    "ads5CompactTTMatterActionRealization",
+    "ads5MovingModeStabilityAndBackreaction",
+    "cylinderDoubledDiscPerturbedBulkAndRetardedGreen",
+    "ads5PhysicalScaleSourceDetectorComparison",
+    "braneBulkOriginalAnalyticAgdaKernel",
+    "ads5OriginalSourceToObservationSemanticWeld",
+    "physicalGravitonObservation"
+  ],
+  "f8_moving_wall_forced_flux_maxcut_20261115": {
+    "original_wall_beta": "(1+v)/(1-v)",
+    "wall_velocity": "-1/sqrt(1+t²)",
+    "forced_incoming_characteristic": "qminus=beta*qplus-2G/(1-v)",
+    "characteristic_flux": "(1-v)*|qminus|²-(1+v)*|qplus|²",
+    "exact_square": "2v*beta*|qplus-G/v|²-(2/v)*|G|²",
+    "uniform_original_t1_to_t2": "flux<=2 sqrt(5)*|G|²",
+    "homogeneous_wall_dissipative": true,
+    "original_t4over3_rational_flux": "13/5760",
+    "source_equivalent_tests_added": 12,
+    "full_time_discrete_CFL_error_proved": false,
+    "full_original_boundary_Weyl_receiver_convergence_proved": false,
+    "Agda_pinned_kernel_pass": false
+  },
+  "maximum_cut_VII_original_normal_SBP_and_Weyl": {
+    "document": "Docs/physics/KSW668F8DiscreteNormalSBPSSPRK3WeylMaxCut20261115.md",
+    "original_radial_SSPRK3_exact_polynomial": "|R(i*x)|²-1 = x^4*(x²-3)/36",
+    "original_d11_radial_only_certified_dt_over_dr": 0.26111648393354675,
+    "legacy_d11_dt_over_dr_045_radial_modal_growth": 1.8021850018750494,
+    "legacy_normal_homogeneous_energy_injection_exact": "277/2 on 16-node integer outgoing P",
+    "firstorder_normal_SBP_exact": true,
+    "normal_only_forced_SSPRK3_exact": true,
+    "original_normal_uniform_t1_t2_dt_over_dy": 0.5857864376269049,
+    "secondorder_SBP_SAT_weak_original_Israel_energy_exact": true,
+    "actual_original_SBP2_SAT_two_grid_field_drift": 0.1731857869461011,
+    "actual_original_SBP2_SAT_two_grid_intrinsic_Weyl_drift": 1.3996217560264992,
+    "actual_original_SBP2_SAT_two_grid_projected_Weyl_drift": 0.2596832410676931,
+    "exact_5D_bulk_periodic_T3_H1_to_Weyl_trace_no_go": {
+      "mode": "H_N=sin(N*x)cos(N*(T-Tstar))/N",
+      "energy": "pi^3/b(T)^2 independent of N",
+      "original_t2_intrinsic_Weyl_peak": "9N/64",
+      "compact_R3_source_counterexample": false
+    },
+    "source_equivalent_committed_local_test_pass": 255,
+    "broader_source_equivalent_local_test_pass": 269,
+    "pinned_Agda_kernel_run": false,
+    "exact_GitHub_branch_checkout_runner_run": false,
+    "original_complete_coupled_SSPRK3_stability_closed": false,
+    "actual_three_grid_both_Weyl_convergence_closed": false,
+    "FIO_original_t2_independent_theorem_acceptance": false,
+    "physical_matter_action_closed": false,
+    "D1_physical_graviton_observed": false
+  }
+}
