@@ -2945,6 +2945,11 @@
           "exact_head_agda_kernel_receipt": false,
           "gate_closed": false,
           "caution": "40 source check invocations are not 40 typechecked theorems; dependency trust and Agda success remain open."
+        },
+        "dependency_20261115_e2_math": {
+          "source_E2_original_bidi_binary_typed_owners_read": true,
+          "Agda_29_exact_kernel_receipts_obtained": false,
+          "E0_closed": false
         }
       },
       {
@@ -2958,20 +2963,66 @@
           "all allocation/resource and polynomial physical clock"
         ],
         "kernel_acceptance_required_before_full_closure": true,
-        "kernel_acceptance_state": "NOT_OBTAINED_THIS_ROUND"
+        "kernel_acceptance_state": "NOT_OBTAINED_THIS_ROUND",
+        "dependency_20261115_e2_np_math": {
+          "original_source_N21_word_language_mathematically_in_NP_via_independent_standard_TM": true,
+          "source_native_whole_binary_verifier_matches_original_typed_source_written": true,
+          "separate_E1_actual_first_enabled_N21_priority_FRACTRAN_full_instruction_clock_proved": false,
+          "E1_closed": false,
+          "prohibited_conflation": "Independent polynomial verifier of same original language does NOT prove selected original N21/FRACTRAN machine clock"
+        }
       },
       {
         "id": "E2",
         "phase": "E",
         "title": "Karp actual cost-model NP G2-G4",
-        "status": "OPEN",
+        "status": "CLOSED_MATHEMATICAL_ORIGINAL_N21_BITWORD_NP",
         "deliverables": [
           "polynomialTimeVerifier",
           "polynomialCertificateBound",
           "original typed PR.InNP"
         ],
-        "kernel_acceptance_required_before_full_closure": true,
-        "kernel_acceptance_state": "NOT_OBTAINED_THIS_ROUND"
+        "kernel_acceptance_required_before_full_closure": false,
+        "kernel_acceptance_state": "DEFERRED_UNDER_USER_MATHEMATICAL_PROTOCOL__NATIVE_TYPECHECK_AND_BITWORD_COST_MODEL_NOT_BUILT",
+        "closed": true,
+        "closure_kind": "CLASSICAL_SAME_ORIGINAL_SOURCE_SIGNED_N21_WORD_BIT_TURING_MACHINE_NP_MEMBERSHIP",
+        "closure_protocol": "USER_REQUESTED_EXACT_PYTHON_AND_CONSTRUCTIVE_CLASSICAL_MATH_WITHOUT_AGDA_CI_20261115",
+        "closure_method": "SOURCE_GAMMA_SIGNED_NATIVE_BINARY_GRAPH_AND_2M_SPARSE_CERT_BIDI_PLUS_FULL_STANDARD_BIT_TM_POLYNOMIAL_CLOCK_AND_BOUND",
+        "native_agda_theorem_inhabited": false,
+        "native_kernel_proof_receipt": false,
+        "native_PR_InNP_term_constructed": false,
+        "native_PR_PolynomialCostModel_BitWord_constructed": false,
+        "source_written_conditional_original_PR_InNP_assembler_reused": true,
+        "E1_specific_selected_priority_FRACTRAN_machine_clock_proved": false,
+        "original_signed_weighted_maxcut_word_language_mathematically_in_NP": true,
+        "mathematical_actual_bit_verifier_polynomial": true,
+        "mathematical_certificate_original_source_length_bound": true,
+        "exact_executed_script_git_blob": "78427d9c75768602c7e38f3104814c14a35c0113",
+        "acceptance_script": "scripts/check_clay_e2_n21_original_bit_np_20261115.py",
+        "source_document": "Docs/roadmaps/ClayE2OriginalN21BitwordNPClassical20261115.md",
+        "mathematical_certificate_bound": "|certificate|=2*m <= |original_gamma_signed_graph_word|",
+        "mathematical_bit_verifier_clock": "O((1+|graph_word|+|certificate|)^8) on standard finite one-tape TM",
+        "mathematical_bit_verifier_multi_clock": "O((1+|graph_word|+|certificate|)^4) on fixed finite multitape TM",
+        "mathematical_live_space": "O((1+|graph_word|+|certificate|)^2)",
+        "repository_original_typed_source_proof": "Karp21NativeWholeBinaryTypedAcceptanceExact.nativeCanonicalTypedSparseVerifierSameWord",
+        "original_source_bidi_owner": "Karp21SparseGraphWordNPBoundaryExact.n21EncodedSparseWordBidi",
+        "original_source_conditional_innp_owner": "Karp21SparseGraphWordNPBoundaryExact.karpWeightedMaxCutInNPFromMachineReceipts",
+        "source_cert_tight_bound_owner": "Karp21NativeOriginalSparseCertificateTightBoundExact.actualN21AcceptedCertificateFitsOriginalGraphWord",
+        "analysis_note": "Mathematically construct a conventional independent finite bit TM for the SAME source gamma signed verifier; no claim that E1's first-enabled N21 priority/FRACTRAN machine has acquired its particular physical clock; typed Agda PR.InNP source term remains formalization debt.",
+        "original_Millennium_endpoint_proved": false,
+        "executed_check": {
+          "exact_reference_cases": 478508,
+          "accepted_cases": 3189,
+          "native_bit_vs_original_integer_signed_semantics_exact_finite_regression": true,
+          "malformed_truncated_suffix_cases": true,
+          "astronomical_n_gamma_no_Fin_allocation": true,
+          "original_signed_negative_weights": true,
+          "history_same_original_order": true,
+          "actual_gamma_count_binary_budgeted": true,
+          "expected_original_2m_tight_cert_bound": true,
+          "exact_executed_script_git_blob": "78427d9c75768602c7e38f3104814c14a35c0113",
+          "native_agda_29_kernel_run": false
+        }
       },
       {
         "id": "F1",
@@ -5451,16 +5502,16 @@
       "D2",
       "E0",
       "E1",
-      "E2",
       "F2",
       "F3"
     ],
-    "active_gate_count": 10,
+    "active_gate_count": 9,
     "completed_gate_ids": [
       "P0",
       "B1",
       "C1",
       "C2",
+      "E2",
       "F1"
     ],
     "round_20261115_packet_weld_real_ode_audit": {
@@ -5520,8 +5571,8 @@
       "independent_kernel_receipt": false,
       "original_endpoint_closed": false
     },
-    "completed_gate_count": 5,
-    "closure_counting_protocol": "P0_SOURCE_AUDIT_B1_REFUTED_C1_C2_CLASSICAL_REAL_FOURIER_MATH_F1_CLASSICAL_STANDARD_TM_COST_MODEL_MATH; USER_PYTHON_PROTOCOL_ONLY; ALL_NATIVE_KERNEL_AND_SIX_TERMINAL_CLAY_OPEN",
+    "completed_gate_count": 6,
+    "closure_counting_protocol": "SIX_SOURCE_OR_MATH_DECISIONS: P0_SOURCE_ONLY; B1_REFUTED_UNRESTRICTED; C1_C2_CLASSICAL_FOURIER; E2_CLASSICAL_SAME_ORIGINAL_SIGNED_MAXCUT_NP; F1_CLASSICAL_STANDARD_TM_COST. NONE NATIVE AGDA KERNEL OR MILLENNIUM ENDPOINT.",
     "original_native_gate_acceptance_pending_including_c1": true,
     "round_20261115_c1_python_math_closure": {
       "date": "2026-11-15",
@@ -5613,6 +5664,39 @@
       "exact_executed_script_git_blob": "eb7c8b2a87e1727706f596668c283bc66e484b39",
       "source_status": "NON_NATIVE_MATH_PROOF_ONLY; ORIGINAL SOURCE TYPED AGDA RECORD AND MACHINE PHASE COMPILER REMAIN TO WRITE",
       "remaining_after_round": 10
+    },
+    "round_20261115_E2_original_N21_np": {
+      "date": "2026-11-15",
+      "gate_resolution": "CLOSED_MATHEMATICAL_ORIGINAL_N21_BITWORD_NP",
+      "source_binary_typed_same_word_owner_inspected": true,
+      "source_g3_tight_2m_certificate_bound_inspected": true,
+      "source_original_PR_InNP_conditional_assembler_reused": true,
+      "mathematical_actual_bit_TM_physical_verifier_clock": "O(S^8) standard one tape, S=1+|word|+|cert|",
+      "mathematical_certificate_bound": "2m <= |original word|",
+      "original_gamma_binary_native_m_header_guard": true,
+      "physical_largest_decoded_n_vertex_array_allocated": false,
+      "exact_independent_comparisons": 478508,
+      "accepted_witnesses": 3189,
+      "native_Agda_PR_InNP_inhabited": false,
+      "native_BitWord_PolynomialCostModel_inhabited": false,
+      "E1_selected_N21_priority_machine_clock_proved": false,
+      "E0_kernel_checked": false,
+      "PNotEqualsNP_proved": false,
+      "all_six_original_endpoints_open": true,
+      "source_doc": "Docs/roadmaps/ClayE2OriginalN21BitwordNPClassical20261115.md",
+      "executed_script": "scripts/check_clay_e2_n21_original_bit_np_20261115.py",
+      "executed_blob": "78427d9c75768602c7e38f3104814c14a35c0113",
+      "remaining_active_gate_ids_after_round": [
+        "A1",
+        "A2",
+        "B2",
+        "D1",
+        "D2",
+        "E0",
+        "E1",
+        "F2",
+        "F3"
+      ]
     }
   }
 }
