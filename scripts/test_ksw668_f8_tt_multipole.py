@@ -72,4 +72,11 @@ class OriginalTTMultipole(unittest.TestCase):
   self.assertLess(abs(mass[0]),1e-7)
   self.assertLess(abs(mass[1]),1e-7)
   self.assertAlmostEqual(mass[2],2.57616988094614,places=8)
+ def test_default_legacy_normal_preserved(self):
+  self.assertEqual(self.sol['normal_order'],2)
+  self.assertFalse(self.sol['normal_only_characteristic_SBP_closed'])
+ def test_new_CFL_input_guard_rejects_old_unstable_ratio(self):
+  with self.assertRaises(ValueError):propagate(**dict(PARAM,dt=.004))
+ def test_reject_unknown_normal_stencil(self):
+  with self.assertRaises(ValueError):propagate(**dict(PARAM,normal_order=3))
 if __name__=='__main__':unittest.main(verbosity=2)
