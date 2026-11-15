@@ -2732,20 +2732,50 @@
         "id": "C1",
         "phase": "C",
         "title": "NS R853 complete real ODE source correspondence",
-        "status": "OPEN",
+        "status": "CLOSED_MATHEMATICAL_PYTHON_SYMPY",
         "deliverables": [
           "R71=R74 original real chart field",
           "actual Picard solution on original R854 T"
         ],
-        "kernel_acceptance_required_before_full_closure": true,
-        "kernel_acceptance_state": "NOT_OBTAINED_THIS_ROUND",
+        "kernel_acceptance_required_before_full_closure": false,
+        "kernel_acceptance_state": "DEFERRED_NOT_OBTAINED__USER_APPROVED_PYTHON_MATH_GATE_ONLY",
         "source_note_20261115": "The independent real finite Galerkin ODE is polynomial and locally well-posed classically, but R71/R74 exact real chart and same R408/R853 physical packet transport still require source-written kernel proofs. Neither rational-time R408 nor a new shorter time substitutes for the unchanged R854 horizon.",
         "nonterminal_20261115_real_finite_ode": {
           "classical_finite_fourier_ode_existence_original_T": true,
           "mathematical_fixed_radius_certified": true,
           "real_agda_chart_field_equality": false,
           "kernel_checked": false,
-          "gate_closed": false
+          "gate_closed": false,
+          "classical_real_R71_R74_generated_atom_identity": "SYMPY_UNIVERSAL_IDENTITY",
+          "source_specific_R829_active_rows_exact": "24/24",
+          "original_T_first_exit_proof": true,
+          "gate_closed_under_python_math_protocol": true
+        },
+        "closed": true,
+        "closure_method": "EXACT_SYMPY_ALL_WORD_TRIAD_IDENTITY_PLUS_EXACT_R829_SOURCE_ROW_REPLAY_AND_CLASSICAL_FINITE_ODE_FIRST_EXIT",
+        "closure_protocol": "USER_REQUESTED_PYTHON_SYMPY_NO_AGDA_OR_CI_20261115",
+        "closure_document": "Docs/roadmaps/ClayC1R71R74PythonSympyMathematicalClosure20261115.md",
+        "acceptance_script": "scripts/check_clay_c1_r71_r74_sympy_bridge_20261115.py",
+        "original_native_kernel_acceptance_required": true,
+        "native_agda_theorem_inhabited": false,
+        "native_kernel_proof_receipt": false,
+        "physical_R408_time_packet_constructed": false,
+        "note": "Mathematical proof closure under explicit alternative Python/SymPy protocol; do not turn R74/833 Agda false flags true, do not count original endpoint or C2. Native theorem/formalization debt retained.",
+        "python_sympy_acceptance": {
+          "exact_general_triad_identity": "SYMPY_EXPAND_ZERO_ALL_3_AXES_AND_ARBITRARY_EPSILON_P_EPSILON_Q",
+          "actual_r829_r836_projected_forcing_real_components": 24,
+          "physical_cutoff_4_nonzero_modes": 728,
+          "canonical_reality_modes": 364,
+          "real_coordinates": 2184,
+          "original_initial_max": 6,
+          "ball_radius": 12,
+          "original_R71_vectorfield_component_bound": 5032512,
+          "original_R854_T": "226189/3938540454339300631433585885184",
+          "K_times_T_strictly_below_six": true,
+          "classical_real_picard_and_first_exit_proof": true,
+          "sympy_version": "1.14.0",
+          "local_command_passed": true,
+          "full_source_agda_kernel_checked": false
         }
       },
       {
@@ -5279,7 +5309,6 @@
       "A2",
       "B1",
       "B2",
-      "C1",
       "C2",
       "D1",
       "D2",
@@ -5290,9 +5319,10 @@
       "F2",
       "F3"
     ],
-    "active_gate_count": 14,
+    "active_gate_count": 13,
     "completed_gate_ids": [
-      "P0"
+      "P0",
+      "C1"
     ],
     "round_20261115_packet_weld_real_ode_audit": {
       "date": "2026-11-15",
@@ -5350,6 +5380,31 @@
       "repair": "Five omitted original owners were added, new direct-root manifest fail-closed on deletion/duplicates; existing 35 source checks retained.",
       "independent_kernel_receipt": false,
       "original_endpoint_closed": false
+    },
+    "completed_gate_count": 2,
+    "closure_counting_protocol": "P0_SOURCE_PREFLIGHT_PLUS_C1_USER_REQUESTED_SYMPY_MATHEMATICAL; ORIGINAL_NATIVE_KERNEL_COUNTS_UNCHANGED",
+    "original_native_gate_acceptance_pending_including_c1": true,
+    "round_20261115_c1_python_math_closure": {
+      "date": "2026-11-15",
+      "source_pr": 1499,
+      "scope": "C1 mathematical R71 field/source real chart plus original R854 real-time C1 ODE existence; not C2 or R408 source typed",
+      "gate_closed_under_python_protocol": true,
+      "generic_symbolic_triad_identity": true,
+      "all_eight_actual_R829_projected_forcing_rows_match": true,
+      "real_component_checks": 24,
+      "independent_extended_differential_checks": 546,
+      "mode_count": 728,
+      "real_dimension": 2184,
+      "vector_field_bound_K": 5032512,
+      "original_T": "226189/3938540454339300631433585885184",
+      "finite_picard_first_exit_completed_mathematically": true,
+      "code": "scripts/check_clay_c1_r71_r74_sympy_bridge_20261115.py",
+      "math_proof": "Docs/roadmaps/ClayC1R71R74PythonSympyMathematicalClosure20261115.md",
+      "native_agda_kernel_run": false,
+      "original_R408_real_packet": false,
+      "c2_still_open": true,
+      "original_endpoint_closed": false,
+      "caution": "Explicit user waiver of CI/Agda applies to C1 Python mathematical acceptance only. Do not conflate with Agda-native or Clay endpoint proof."
     }
   }
 }
