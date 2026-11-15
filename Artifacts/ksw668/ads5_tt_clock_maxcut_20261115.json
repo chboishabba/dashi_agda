@@ -1,0 +1,67 @@
+{
+  "record_type": "KSW668 original braneworld model-only mathematical maximum cut",
+  "as_of": "2026-11-15",
+  "base_branch": "master",
+  "previous_rollup": "#1504 (closed following manual integration, not reopened)",
+  "source_equivalent_local_replay": {
+    "python": "3.x",
+    "sympy": "1.14.0",
+    "tests": "9/9 PASS",
+    "exact_new_GitHub_head_scripts_executed": false,
+    "agda_kernel_executed": false
+  },
+  "source_priority": [
+    "Caldwell and Langlois 2001 DOI 10.1016/S0370-2693(01)00631-1",
+    "Maartens and Koyama 2010 DOI 10.12942/lrr-2010-5",
+    "Pawlowski 2014 arXiv 1403.3879 geometric time, not bulk wave",
+    "Seokcheon Lee 2026 arXiv 2609.35903v2 dimensional/cross epoch comparison"
+  ],
+  "gates": {
+    "A4": {
+      "status": "partial, exact flat-bulk ansatz rigidity obstruction",
+      "theorem": "K_u^u=0 => R^2=f^2 n^2/(2T) hence R is constant for fixed T,f,n",
+      "coupled_perturbations": false
+    },
+    "B2": {
+      "status": "compact prescribed TT source constructed",
+      "theorem": "pi_ij=g(t)(P_ik P_jl-P_ij P_kl/2)Q_kl phi, divergence=trace=0",
+      "physical_generating_action": false,
+      "DEC_margin": "rho+p>=1/(6 sqrt 5) on t in [1,2]"
+    },
+    "B3": {
+      "status": "exact fixed-domain reduction, causality/timelike coefficient",
+      "uniform_coefficient": "1-v^2>=1/2",
+      "physical_moving_Green": false,
+      "flux_sign_definite": false
+    },
+    "B4": {
+      "status": "open",
+      "retarded_nonzero_physical_receiver": false
+    },
+    "B5": {
+      "status": "finite-energy static Neumann TT wavepacket positive control",
+      "radial_weight_integral": "1/(2 b^2)",
+      "moving_mode_stability": false
+    },
+    "C1": {
+      "status": "derived local geometric cubic law",
+      "formula": "delta_tau_adv=(dot x)^2 Delta_tau^3/[24(1+x^2)]+O(Delta_tau^4), x=ell H/c",
+      "original_t0_1_coefficient": "1/48",
+      "dimensionless_clock_geometric_advance": 0.009322862731128
+    },
+    "clock": {
+      "status": "exact model coordinate transformation check",
+      "conformal_time_advance": 0.00465060054,
+      "proper_time_advance": 0.009322862731128
+    },
+    "C2": {
+      "status": "Agda kernel not executed, source-level analytic proofs only"
+    },
+    "D1": {
+      "status": "no observation, cannot be closed mathematically"
+    }
+  },
+  "next_critical": "B2 independent matter action + B3 retarded moving-boundary tensor Green + B4 nonzero same-object Weyl receipt",
+  "physical_superluminal_5D": false,
+  "empirical_usable_shortcut": false
+}
