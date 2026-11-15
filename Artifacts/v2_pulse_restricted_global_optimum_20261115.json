@@ -1,0 +1,109 @@
+{
+  "derivative": {
+    "first_derivative_exact": true,
+    "unique_zero_derivative_exact": true,
+    "monotonicity": "Nprime=Kc*acos(q)+Ksw>0 for 0<=q<1 and Kc>0, Ksw>=0"
+  },
+  "base": {
+    "scope": "GLOBAL only within q\u2208[0,1), ideal constant-current window family at FIXED mechanical extraction",
+    "model": {
+      "rotor_rpm": 2354.0,
+      "mean_mechanical_extraction_w": 45.0,
+      "l0_h": 0.04,
+      "l_harmonic_h": 0.012,
+      "pole_pairs": 4,
+      "phase_r_ohm": 1.0,
+      "current_limit_a": 8.0,
+      "switch_fixed_j": 0.002,
+      "switch_per_i2_j_per_a2": 0.00015,
+      "other_loss_w": 0.5
+    },
+    "q_max_from_current": 0.9276836626750551,
+    "unconstrained_unique_minimum": 0.7597979451258575,
+    "selected_q_global": 0.7597979451258575,
+    "optimum": {
+      "q": 0.7597979451258575,
+      "active_fraction": 0.22529784214103624,
+      "peak_current_a": 6.062449765440346,
+      "current_limit_feasible": true,
+      "mechanical_extraction_w": 45.0,
+      "copper_loss_w": 8.280438541375558,
+      "switch_loss_w": 2.358078563554934,
+      "other_loss_w": 0.5,
+      "ideal_net_bus_w": 33.86148289506951,
+      "complete_balance_residual_w": 0.0,
+      "note": "Conditional model with fixed mechanical extraction and no reactive-power processing losses"
+    },
+    "grid_gap_w": 4.837268861024313e-07,
+    "strict_proof": "dLoss/dq has strictly increasing numerator N; root unique; current feasible interval [0,qmax]",
+    "not_proved": "finite slew, voltage, hysteresis, coupled phases, topology or measured original V2 optimum"
+  },
+  "high_switch": {
+    "scope": "GLOBAL only within q\u2208[0,1), ideal constant-current window family at FIXED mechanical extraction",
+    "model": {
+      "rotor_rpm": 2354.0,
+      "mean_mechanical_extraction_w": 45.0,
+      "l0_h": 0.04,
+      "l_harmonic_h": 0.012,
+      "pole_pairs": 4,
+      "phase_r_ohm": 1.0,
+      "current_limit_a": 8.0,
+      "switch_fixed_j": 0.002,
+      "switch_per_i2_j_per_a2": 0.015,
+      "other_loss_w": 0.5
+    },
+    "q_max_from_current": 0.9276836626750551,
+    "unconstrained_unique_minimum": 0.06123403250986816,
+    "selected_q_global": 0.06123403250986816,
+    "optimum": {
+      "q": 0.06123403250986816,
+      "active_fraction": 0.48049640063603755,
+      "peak_current_a": 4.8928951311672,
+      "current_limit_feasible": true,
+      "mechanical_extraction_w": 45.0,
+      "copper_loss_w": 11.503286968095207,
+      "switch_loss_w": 113.33924370906867,
+      "other_loss_w": 0.5,
+      "ideal_net_bus_w": -80.34253067716388,
+      "complete_balance_residual_w": 0.0,
+      "note": "Conditional model with fixed mechanical extraction and no reactive-power processing losses"
+    },
+    "grid_gap_w": 3.4144190550478015e-06,
+    "strict_proof": "dLoss/dq has strictly increasing numerator N; root unique; current feasible interval [0,qmax]",
+    "not_proved": "finite slew, voltage, hysteresis, coupled phases, topology or measured original V2 optimum"
+  },
+  "near_ideal_switch": {
+    "scope": "GLOBAL only within q\u2208[0,1), ideal constant-current window family at FIXED mechanical extraction",
+    "model": {
+      "rotor_rpm": 2354.0,
+      "mean_mechanical_extraction_w": 45.0,
+      "l0_h": 0.04,
+      "l_harmonic_h": 0.012,
+      "pole_pairs": 4,
+      "phase_r_ohm": 1.0,
+      "current_limit_a": 8.0,
+      "switch_fixed_j": 0.002,
+      "switch_per_i2_j_per_a2": 0.0,
+      "other_loss_w": 0.5
+    },
+    "q_max_from_current": 0.9276836626750551,
+    "unconstrained_unique_minimum": 1.0,
+    "selected_q_global": 0.927683662675055,
+    "optimum": {
+      "q": 0.927683662675055,
+      "active_fraction": 0.12179682268999477,
+      "peak_current_a": 7.999999999999999,
+      "current_limit_feasible": true,
+      "mechanical_extraction_w": 45.0,
+      "copper_loss_w": 7.794996652159664,
+      "switch_loss_w": 0.6277333333333334,
+      "other_loss_w": 0.5,
+      "ideal_net_bus_w": 36.077270014507,
+      "complete_balance_residual_w": 7.105427357601002e-15,
+      "note": "Conditional model with fixed mechanical extraction and no reactive-power processing losses"
+    },
+    "grid_gap_w": 0.001839023408592766,
+    "strict_proof": "dLoss/dq has strictly increasing numerator N; root unique; current feasible interval [0,qmax]",
+    "not_proved": "finite slew, voltage, hysteresis, coupled phases, topology or measured original V2 optimum"
+  }
+}

@@ -1,3 +1,5 @@
+> **Canonical current acceptance / lemma ledger:** [`MadScience369V2ExactLemmaRoadmap20261115.md`](MadScience369V2ExactLemmaRoadmap20261115.md). Second round adds an analytic restricted pulse-window optimum, finite-bus nonlinear multi-coil ODE, a passive magnetic-memory model, approximate PWM-state closure, and an Agda clamp-partition proof. **79/79 local Python tests PASSED; Agda kernel and original V2 physical validation NOT RUN/CLOSED.** Run `bash scripts/check_madscience369_reluctance_maxcut.sh`; on pinned Agda environment use `RUN_AGDA=1`.
+
 # V2 generator × reluctance/permeance × Tesla-compatible 369 maximum cut
 
 **Synthetic mathematics and testbench only. Not calibrated or reproduced from any real generator.**
