@@ -36,3 +36,10 @@ import DASHI.Physics.Gravity.KSW668AdS5FrozenNeumannSeriesReuseExact
 -- UV/IR cutoff reuse: exact Balaban finite dyadic tail conditional on
 -- original physical adjacent-cutoff estimate; no false F8 convergence.
 import DASHI.Physics.Gravity.KSW668AdS5UVIRDyadicTailReuseExact
+
+-- New F8: actual original moving bulk/Neumann tensor prepotential
+-- commutation and exact three-component TT angular polynomial algebra.
+-- Both source-derived continuum analytic hypotheses and the numerical
+-- source-to-receiver convergence are guarded as separate OPEN gates.
+import DASHI.Physics.Gravity.KSW668AdS5TensorPrepotentialCommutationExact
+import DASHI.Physics.Gravity.KSW668AdS5TTMultipoleAngularRationalExact
