@@ -63,7 +63,7 @@ module Replication
   open JoinSemilattice (stateJoin K)
 
   merge : State K → State K → State K
-  merge = _⊔_
+  merge x y = x ⊔ y
 
   merge-associative :
     ∀ x y z →
