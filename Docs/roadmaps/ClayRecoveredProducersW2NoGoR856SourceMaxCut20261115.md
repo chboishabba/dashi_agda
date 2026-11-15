@@ -92,6 +92,86 @@ Thus a *universal physical R823 reserve-demand inequality demanded for every ter
 
 **Required C deliverables**: C1 same `R71` literal vector field = R74 complete real polynomial on the proper reality/conjugacy chart; C2 verified finite real Picard solution with its **original R854 horizon** (ball radius, quadratic forcing and Lipschitz constants explicit); C3 differentiate *literal R853 selected functional* along that solution and establish the R855/R856-eligible derivative upper bound, without substituting the identically zero enstrophy balance; C4 apply existing strict scalar affine/integrated consumer. R856's \(10,065,030/20,130,061\) integer headroom is **already mathematically checked by exact SymPy**, not a trajectory proof.
 
+### 15 November C/B1 source-rate weld and fixed-horizon real-Fourier audit (commit 2d63b8e)
+
+**New Agda proof source, kernel status UNCHECKED:** In
+`NSTriadKNR650SignedComparableReserveRound823Exact.agda` the four named
+equalities `originalR823CompleteRateIsR853SelectedRate`,
+`originalR823ReserveDemandIsR853SelectedRate`,
+`originalR823IntegratedRateIsR853SelectedIntegral`, and
+`originalR823IntegratedReserveDemandIsR853SelectedIntegral`
+are written using **existing** R820 `actualR815RateIsFullR813CCTouchedViscousRate`,
+R853 `signedRateNormalForm` and R823 `actualFullRateIsReserveMinusDemand`.
+They use the same R408/R405/R821 live packet, cutoff, time, viscosity, margin
+`delta=nu` and integral operator. They do **not** replace the selected
+rate with the identically-zero enstrophy balance. These are source-level
+algebraic witnesses, **not** a real-valued R408 trajectory constructor,
+an Agda kernel receipt, an original W1 payment, or a B/C terminal theorem.
+
+**Independent classical real-Fourier proof, original radius-four 3-4-5 data:**
+The physical Galerkin ODE is the 728-nonzero-mode ODE
+`u'_k=-|k|²u_k-iP_k sum_{p+q=k}(q·u_p)u_q`, with initial data
+from `Docs/papers/live/NSR828Rational345FourierWitness.md`.
+It is an autonomous quadratic polynomial in the finite real and imaginary
+components, hence has a unique local C¹ real solution. Complex-conjugate
+reality and transversality are invariant. On the coordinate ball
+`|u_{k,j}|<=12`, counting the 728 ordered-input modes and using
+`|P_k|_row<=4`, `|q_j|<=4`, `|k|²<=48`, one obtains
+`F_bound = 4*728*12*12² = 5031936` and
+`K=F_bound+48*12=5032512`.
+The initial coordinate bound is 6. Standard first-exit continuation
+therefore gives a solution through the *original* R854 time
+`T=226189/3938540454339300631433585885184`, because `K*T<6`.
+This is an analytic proof for the **direct physical real-Fourier system**,
+not an Agda complete-real chart construction.
+
+Define its real-valued selected rate on the full finite Fourier solution by
+`r(u)=6*(12*C_comm(u)-P_crit(u)+d(u))`, where the helical projectors
+`H_k^±=(P_k±i(k×)/|k|)/2` are now legitimate real/complex operators
+for every nonzero lattice mode. Its original R850 initial evaluation is
+`r(u0)=-28273644/125`. Reusing the original R828 **state**
+Lipschitz computation (row bounds `|H_k^±|_row<=3`,
+`weight_k<=8`, cross-coordinate factor 2 and component count 3)
+yields the exact constant
+`L=391309593930357307785216`. Therefore along the classical solution
+`|r(u(t))-r(u0)|<=L*K*t`; **L alone is not a time derivative bound**.
+The exact integer regression recomputes the previously claimed constants,
+and on the full unchanged R854 horizon proves:
+
+```
+L*K*T = 226189/2
+r(t) <= -28273644/125 + 226189/2 = -28273663/250 < 0
+int_0^T r(t) dt <= (-28273663/250)*T < 0.
+```
+
+In particular the source physical (K=5032512) is strictly less than
+the R856 pointwise multiplier ceiling (10065030), and the integrated
+ceiling (20130061). This is the **classical real-Fourier quantitative
+negative-reserve result**. The direct fixed-horizon result is stronger
+than the earlier continuity-only negative-short-time argument.
+
+**Irreducible formal physical weld remains:** R408/R820/R823 specialize to
+the *rational* `Rational.rationalRealField` and require a **globally
+quantified rational helical projector**; actual real-time nonlinear
+solutions generally leave ℚ, while `|k|=sqrt(2)` is not rational for
+mode (1,1,0). The new same-packet Agda theorem proves the identity
+conditional on a live R408 packet; it does **not construct** such a packet
+in a real scalar carrier. For true original-source/kernel C1/C2 closure:
+(1) formalize the complete real chart and real-time original R71 solution,
+(2) rebase R408/R823/R853 selected helical algebra to actual real/complex
+fields or a proven finite-support/real-time abstraction preserving all
+folds, (3) kernel-check the K/L estimates, exact source evaluation and
+rate transport and the unaltered R854 horizon, (4) run transitive-axiom
+and trust checks. The classical Fourier physical auxiliary R823 inequality
+is thereby mathematically contradicted, but no original Agda gate, global
+NS regularity theorem, or Millennium endpoint is marked closed by
+the source-written proof and arithmetic receipt.
+
+**Regression:** `python3 scripts/check_ns_r823_initial_rate_continuity_cut_20261115.py`
+now independently reconstructs (K,L), validates the (LK) bootstrap
+and both R856 safe-multiplier thresholds. Exact arithmetic PASS was
+reproduced; no pinned Agda 2.9 or Lean 4.28 kernel acceptance in this runtime.
+
 ### Phase D — Yang–Mills original Wilson F19/P0 / R320 direct H1 or R445 TV
 
 | Checked exact terms | Source owner | Adjudication |
