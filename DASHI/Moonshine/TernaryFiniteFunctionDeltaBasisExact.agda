@@ -2,7 +2,7 @@ module DASHI.Moonshine.TernaryFiniteFunctionDeltaBasisExact where
 
 open import DASHI.Core.Prelude
 open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_)
+open import Data.Rational.Base using (ℚ; 0ℚ) renaming (_+_ to _+ℚ_)
 import Data.Rational.Properties as ℚP
 open import Agda.Builtin.List using ([]; _∷_)
 
@@ -41,20 +41,20 @@ addZeroRight (C3.cyclotomic3 a b) =
 plusZeroZero : (a : C3.Cyclotomic3) → V.addC3 a (V.addC3 C3.zero C3.zero) ≡ a
 plusZeroZero (C3.cyclotomic3 a b) =
   C3.cyclotomic3Ext
-    (trans (cong (a +_) (ℚP.+-identityˡ 0ℚ)) (ℚP.+-identityʳ a))
-    (trans (cong (b +_) (ℚP.+-identityˡ 0ℚ)) (ℚP.+-identityʳ b))
+    (trans (cong (a +ℚ_) (ℚP.+-identityˡ 0ℚ)) (ℚP.+-identityʳ a))
+    (trans (cong (b +ℚ_) (ℚP.+-identityˡ 0ℚ)) (ℚP.+-identityʳ b))
 
 zeroPlusPlusZero : (a : C3.Cyclotomic3) → V.addC3 C3.zero (V.addC3 a C3.zero) ≡ a
 zeroPlusPlusZero (C3.cyclotomic3 a b) =
   C3.cyclotomic3Ext
-    (trans (ℚP.+-identityˡ (a + 0ℚ)) (ℚP.+-identityʳ a))
-    (trans (ℚP.+-identityˡ (b + 0ℚ)) (ℚP.+-identityʳ b))
+    (trans (ℚP.+-identityˡ (a +ℚ 0ℚ)) (ℚP.+-identityʳ a))
+    (trans (ℚP.+-identityˡ (b +ℚ 0ℚ)) (ℚP.+-identityʳ b))
 
 zeroPlusZeroPlus : (a : C3.Cyclotomic3) → V.addC3 C3.zero (V.addC3 C3.zero a) ≡ a
 zeroPlusZeroPlus (C3.cyclotomic3 a b) =
   C3.cyclotomic3Ext
-    (trans (ℚP.+-identityˡ (0ℚ + a)) (ℚP.+-identityˡ a))
-    (trans (ℚP.+-identityˡ (0ℚ + b)) (ℚP.+-identityˡ b))
+    (trans (ℚP.+-identityˡ (0ℚ +ℚ a)) (ℚP.+-identityˡ a))
+    (trans (ℚP.+-identityˡ (0ℚ +ℚ b)) (ℚP.+-identityˡ b))
 
 multiplyRightOne : (a : C3.Cyclotomic3) → C3.multiply a C3.one ≡ a
 multiplyRightOne a = trans (L.multiplyCommutative a C3.one) (L.oneActsLeft a)
