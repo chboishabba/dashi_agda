@@ -559,3 +559,119 @@ At \(\ell=1\,\mathrm m\), this is only \(3.10977\times10^{-11}\) s, **but** the 
 For the same manufactured \(k=m=1\) mode, a fixed brane receiver's instantaneous *proper phase* frequency is \(\sqrt2(dT_b/dt)c/(2\pi\ell)\), which decreases from approximately \(95.427\ \mathrm{MHz}/(\ell/\mathrm m)\) at \(t=1\) to \(37.721\ \mathrm{MHz}/(\ell/\mathrm m)\) at \(t=2\). This is a kinematic scale control, NOT a measured detector band or dispersion spectrum. In particular neither GW170817 timing nor these dimensional conversions alone imply the attachment's claimed \(\ell\le 10^{-19}\ \mathrm m\).
 
 Local producer \`scripts/ksw668_ads5_mode_energy_scale_guard.py\` symbolically verifies the Bessel derivative identity, checks the large-z radial energy density numerically and computes original same-worldline SI rescaling. It is in the local-only acceptance runner. Physical C1 and experimental D1 remain OPEN.
+
+
+---
+
+## 2026-11-15 continuation — compact TT source, moving-wall reduction, static packet, cubic proper-time law
+
+**Provenance:** original PR #1504 was CLOSED after manual integration to master (comment: "Merged into master and verified on Colab in b38e3ce9ca"). Its branch is an ancestor of the current master. This continuation starts from **current master**; do not resurrect the obsolete original PR or duplicate its 32-file content. The active new source owner is
+\`scripts/ksw668_ads5_tt_clock_maxcut.py\`, with \`scripts/test_ksw668_ads5_tt_clock_maxcut.py\`. The scripts and tests were independently executed source-equivalently on SymPy 1.14: **9/9 PASS**. Exact connected-GitHub head scripts and pinned Agda kernel have NOT been run here; don't promote a source-equivalent replay into a kernel receipt.
+
+**Source attribution:** Caldwell and Langlois, "Shortcuts in the Fifth Dimension" (2001), DOI 10.1016/S0370-2693(01)00631-1, owns the original FRW/AdS bulk horizon. Maartens and Koyama, "Brane-World Gravity" (2010), DOI 10.12942/lrr-2010-5, owns the physical moving-brane tensor equations. Koyama, "Late time behavior of cosmological perturbations in a single brane model" (2004), astro-ph/0407263, demonstrates numerical moving-boundary mode summation. Pawłowski, "Geometric time in quantum cosmology" (2014), arXiv:1403.3879v1, addresses choices of internal geometric time in an isotropic quantum-cosmology model; it does **NOT** derive an AdS5 Green operator, photon shortcut, or same-receiver signal. Seokcheon Lee, "Revisiting the Duff Argument in Cosmology: From Dimensional Quantities to Cross-Epoch Observables" (2026), arXiv:2609.35903v2, addresses dimensional unit conventions, clock standards and operational cross-epoch maps; no new fifth-dimensional causal cone follows from reparametrization alone.
+
+### A4: rigidity of the EXACT doubled-interior-disc flat-bulk shell (NEW obstruction)
+
+For any time-dependent but exactly flat interior shell \(r=R(\tau)\), retaining flat longitudinal \((u,v)\) directions,
+\[
+(K^\tau{}_\tau,K^\theta{}_\theta,K^u{}_u,K^v{}_v)
+=(-\ddot R/\sqrt{1+\dot R^2},-\sqrt{1+\dot R^2}/R,0,0)
+\]
+with the inward orientation of the prior static doubled-disc model. For fixed tension \(T>0\), winding \(f,n\), \(a(R)=f^2n^2/(2R^2)\), the mixed shell stress is
+\(S^a{}_b=\operatorname{diag}(-T-a,-T+a,-T-a,-T-a)\).
+The \(Z_2\) Israel source is
+\(K^a{}_b=-\frac{\kappa_5^2}{2}(S^a{}_b-\delta^a_b S/3)\).
+Its **longitudinal \(u\)-component** demands
+\[
+0=K^u{}_u=-\frac{\kappa_5^2}{6}(T-a(R))
+\quad\Rightarrow\quad R^2=f^2n^2/(2T).
+\]
+For fixed \(T,f,n\), \(R(\tau)\) must be constant. Therefore an actual moving radial perturbation **cannot** stay within the restrictive model of two exactly flat interior bulks with the same fixed winding matter and flat longitudinal directions. It must disturb the bulk metric, add material sectors, or alter assumptions. This is an exact ansatz obstruction, not a proof that the fully gravitating shell is stable or unstable. The prior static junction solution remains valid.
+
+### B2: explicit conserved, compact TT anisotropic stress on the ORIGINAL a=t brane (NEW constructive result)
+
+For \(D_i=\partial/\partial x_i\), define the local second-order transverse operator \(P_{ij}=-\delta_{ij}\Delta+D_iD_j\). Pick smooth compact spatial \(\varphi\), compact temporal drive \(g(t)\), and constant symmetric \(Q=\mathrm{diag}(0,1,-1)\). Define the **fourth-order local compact** tensor
+\[
+\boxed{\pi_{ij}(t,\mathbf x)
+=g(t)\left(P_{ik}P_{jl}-\frac12P_{ij}P_{kl}\right)Q_{kl}\varphi(\mathbf x).}
+\]
+In Fourier variables \(P_{ij}(k)=|\mathbf k|^2\delta_{ij}-k_i k_j\), with \(k_iP_{ij}=0,\ P_{ik}P_{kj}=|\mathbf k|^2P_{ij},\ \mathrm{tr}P=2|\mathbf k|^2\).
+It follows *identically for arbitrary k* that \(\pi=\pi^\top,\ k^i\pi_{ij}=0,\ \pi^i_i=0\). Support remains compact because no inverse Laplacian occurs. Choose \(\varphi=x^4\) near the origin inside a \(C_c^\infty\) cutoff to witness \(\pi_{yy}(0)=24,\ \pi_{zz}(0)=-24\); the source is not identically zero. For mixed-index perturbative stress on the original isotropic FRW brane, \(\bar\nabla_a\delta S^a{}_i=\partial_j\pi^j{}_i=0\) and \(\bar\nabla_a\delta S^a{}_0=-H\,\mathrm{tr}\pi=0\). Therefore this defines a conserved **prescribed linear TT source** compatible with the original tensor Israel condition
+\[
+n^A\partial_AH_i{}^j=-6\pi_i{}^j.
+\]
+On \(1\le t\le 2\), \(\rho+p\ge1/(6\sqrt5)>0\). A sufficiently small amplitude keeps the instantaneous perturbed principal stresses inside this strict background dominant-energy margin. **Not yet solved:** a microphysical brane action generating that source and the corresponding full perturbed matter/metric constraints. Conserved source existence does not alone imply a sourced retarded response.
+
+### B3: fixed-domain moving boundary and coercive PRINCIPAL geometry (NEW exact reduction, Green OPEN)
+
+Write original Poincaré brane \(z=b(T)=1/t\), \(v(T)=b'(T)=-1/\sqrt{1+t^2}\) and \(y=z-b(T)\ge0\). With \(H(T,z,\mathbf x)=u(T,y,\mathbf x)\),
+\[
+\boxed{u_{TT}-2v u_{Ty}-(1-v^2)u_{yy}
++\left(\frac3{y+b}-v'\right)u_y-\Delta_{\mathbf x}u=0.}
+\]
+Here \(v'=t^3/(1+t^2)^2\). The true original unit-normal source is
+\[
+\boxed{\frac{\sqrt{1+t^2}}{t^2}
+\left[(1-v^2)u_y+v u_T\right]_{y=0}
+=-6\pi^{TT}(t,\mathbf x).}
+\]
+For \(1\le t\le2\), \(1-v^2=t^2/(1+t^2)\ge1/2\): no characteristic-wall degeneracy. The existing exact moving-wall energy flux remains
+\[
+E_T=-\int_{\Sigma_T}b^{-3}[H_T H_z+\tfrac v2(H_T^2+H_z^2+|\nabla_\mathbf xH|^2)]\,d^3x
+\]
+without incoming horizon flux. Under \(g=H_z+vH_T\), the integrand transforms to
+\[
+E_T=b^{-3}\big[-(1-v^2)H_T g
++\tfrac v2(1-v^2)H_T^2-\tfrac v2(g^2+|\nabla_\mathbf xH|^2)\big]
+\]
+and has **either sign** even when \(g=0\). The transform and checks close the moving coefficient/normal/flux *algebra*. Full finite-energy existence/uniqueness with an incoming-horizon condition and a retarded boundary-to-brane operator, including compatibility and energy/trace estimates, remain open. General hyperbolic timelike-boundary theory is relevant but ultrastatic Robin/Neumann results cannot be imported without verifying hypotheses; see Dappiaggi–Drago–Longhi (2019/2020) DOI 10.1007/s00023-020-00929-x and Fournodavlos–Smulevici (2023) DOI 10.1093/imrn/rnab359 for related but nonidentical IBVPs.
+
+### B5: a genuine FINITE-ENERGY stationary AdS5 tensor wavepacket (NEW positive control)
+
+Fix a *stationary* AdS wall \(z=b>0\) with source-free Neumann \(H_z|_{b}=0\), but retain the same AdS5 bulk tensor PDE. Choose any nonzero \(f_{ij}^{TT}\in C_c^\infty(\mathbb R^3)\) supplied by the B2 differential construction. Then
+\[
+\boxed{H_{ij}(T,z,\mathbf x)=
+\cos(T\sqrt{-\Delta_{\mathbf x}})\,f^{TT}_{ij}(\mathbf x)}
+\]
+is independent of \(z\), satisfies \(-H_{TT}+H_{zz}-3H_z/z+\Delta_{\mathbf x}H=0\), remains transverse/traceless and meets stationary Neumann exactly. Its compact initial profile gives finite 3D wave energy and
+\[
+\int_b^\infty z^{-3}\,dz=\frac1{2b^2}<\infty,
+\]
+so it is **finite total bulk perturbative energy**. This is a localized brane-spatial 4D massless tensor zero-mode packet, not the divergent \(z^2J_2\) separated radial basis, and not a solution to the original **moving** boundary unless the correct source is supplied. The static radial spectral gap remains zero; a nonnegative radial operator does not imply a strict mass gap.
+
+### C1 / clock: invariant short-baseline cubic source horizon advance (NEW analytic asymptotic)
+
+For \(A=\int_{\tau_0}^{\tau_0+\delta}d\tau/a,\ x(\tau)=\ell H(\tau)/c\), \(w=d\tau/a>0\), Caldwell–Langlois's exact horizon difference reads
+\[
+r_g^2-r_\gamma^2 =
+\iint w(s)w(t)
+[\cosh(\operatorname{asinh}x(s)-\operatorname{asinh}x(t))-1]\,ds\,dt.
+\]
+Expand \(x(s)=x_0+\dot x_0(s-\tau_0)+O((s-\tau_0)^2)\) and the integrand. The identity
+\(\int_0^\delta\int_0^\delta(s-t)^2\,ds\,dt=\delta^4/6\) yields
+\[
+\boxed{\delta\tau_{\mathrm{advance}}
+=\frac{\dot x_0^2}{24(1+x_0^2)}\delta^3+O(\delta^4).}
+\]
+For original dimensionless \(a=t,\ell=1,\tau_0=1\), \(\dot x_0=-1,x_0=1\), so coefficient = \(1/48\). High-precision original exact Eq19 checks for \(\delta=.1,.03,.01,.003,.001\) approach this coefficient; ratio for .001 is 0.9990007474. For a short local baseline \(D\simeq c\delta\tau\),
+\(\delta\tau_{\mathrm{advance}}\simeq
+\ell^2\dot H_0^2 D^3/[24c^5(1+(\ell H_0/c)^2)]\).
+This is a **GEOMETRIC, local asymptotic** under smooth expansion, not the retarded graviton detector prediction and not an observational AdS bound. An illustrative \(\ell=D=1\) metre and \(\dot H=-H_0^2\) with \(H_0=2.2\times10^{-18}\mathrm s^{-1}\) gives \(4.03\times10^{-115}\) seconds (illustrative, no empirical extrapolation claim).
+
+Conformal-time \(\eta=\log t\) gives \(ds_{\rm brane}^2=t^2(-d\eta^2+d\mathbf x^2)\) and lapse \(N=t\). The same geometric receiver at \(t_g=2,r=r_g\) has coordinate \(\eta_g=\log2\), while the brane-photon arrival coordinate is \(\eta_\gamma=r_g\). Their coordinate difference is \(r_g-\log2\simeq0.00465060054\), but the proper time difference is uniquely
+\[
+\int_{\log2}^{r_g}e^\eta d\eta=e^{r_g}-2\simeq0.00932286273.
+\]
+A change of homogeneous time coordinates does not change measured receiver proper time. Physical clock standards, source-equivalence and propagation maps are separate empirical/model obligations (Pawłowski and Lee crosswalk, not a shortcut theorem).
+
+### Exact remaining B3/B4 B5/C1/D1 proof targets
+
+1. \`ads5MovingNeumannRetardedGreenFiniteEnergy\`: choose correct AdS bulk side, compatible zero data and compact causal TT boundary source, prove finite-energy operator existence, uniqueness, support and appropriate horizon condition on a closed proper-time interval.
+2. \`ads5CompactTTMatterActionRealization\`: find genuine conserved matter fields/action on the original FRW brane implementing the compact TT stress while satisfying full linearized Einstein–matter constraints, without merely prescribing \(\pi\).
+3. \`ads5FiniteEnergyLocalizedTTReceiverNonzero\`: convolve B3 Green with B2 stress, prove nonzero **gauge-invariant Weyl** on the SAME comoving receiver strictly before the intrinsic photon; account for direct, reflected and KK-mode tails, and specify signal bandwidth.
+4. \`cylinderDoubledDiscPerturbedBulkAndRetardedGreen\`: permit genuine gravitational departures from two exactly flat discs, derive coupled shell normal/tangential stability and the new metric-specific tensor/scalar propagator; do not borrow the unglued Minkowski receiver.
+5. \`ads5LocalShortBaselineObservedComparison\`: fix \(\ell,H,\dot H\), epoch, clock standards, source equivalence, attenuation and detector band, and propagate uncertainties to GW+EM tests. The cubic geometric law alone does not pay this.
+6. \`braneBulkOriginalAnalyticAgdaKernel\`: type-check all original rational owners plus new finite analytic bridges in the pinned Agda kernel; source-level polynomial checks are NOT formal kernel receipts.
+7. \`physicalGravitonObservation\`: independently acquire source-characterized gravitational signal and control measurements. No qualifying experimental data presented.
+
+**Acceptance:** local source-equivalent SymPy scripts/tests PASS 9/9; current repository PR-head execution and Agda kernel not verified. No claim of a physically demonstrated bulk carrier, FTL in full 5D spacetime, free energy, phenomenological bound on \(\ell\), or complete TOE.
