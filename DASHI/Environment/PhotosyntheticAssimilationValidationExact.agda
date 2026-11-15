@@ -1,6 +1,6 @@
 module DASHI.Environment.PhotosyntheticAssimilationValidationExact where
 
-open import DASHI.Core.Prelude
+open import DASHI.Core.Prelude hiding (_≤_)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Environment.PlantHydraulicAtmosphereCarbonCouplingExact as Plant

@@ -85,20 +85,20 @@ monographBridgeCountExact = Audit.requiredPromotionBridgeCountExact
 
 monographAudit : Audit.PaperClaimAudit
 monographAudit = record
-  { Audit.PaperClaimAudit.Source = CizekSource
-  ; Audit.PaperClaimAudit.Claim = CizekClaim
-  ; Audit.PaperClaimAudit.Assumption = CizekAssumption
-  ; Audit.PaperClaimAudit.MissingBridge = CizekMissingBridge
-  ; Audit.PaperClaimAudit.sourceStatus = Audit.repositoryDeposit
-  ; Audit.PaperClaimAudit.sourceTheory =
+  { Source = CizekSource
+  ; Claim = CizekClaim
+  ; Assumption = CizekAssumption
+  ; MissingBridge = CizekMissingBridge
+  ; sourceStatus = Audit.repositoryDeposit
+  ; sourceTheory =
       Audit.einsteinCartanYangMillsTheory
-  ; Audit.PaperClaimAudit.claimedOperator =
+  ; claimedOperator =
       Audit.physicalReconstructedHamiltonian
-  ; Audit.PaperClaimAudit.evidence = Audit.proofSketch
-  ; Audit.PaperClaimAudit.outcome = Audit.firstDependencyOpen
-  ; Audit.PaperClaimAudit.assumptions = monographAssumptions
-  ; Audit.PaperClaimAudit.requiredBridges = monographRequiredBridges
-  ; Audit.PaperClaimAudit.firstOpenDependency =
+  ; evidence = Audit.proofSketch
+  ; outcome = Audit.firstDependencyOpen
+  ; assumptions = monographAssumptions
+  ; requiredBridges = monographRequiredBridges
+  ; firstOpenDependency =
       torsionGravitySectorExactlyDecouplesToPureYM
   }
 
@@ -129,18 +129,18 @@ slabBridgeCountExact = refl
 
 slabAudit : Audit.PaperClaimAudit
 slabAudit = record
-  { Audit.PaperClaimAudit.Source = CizekSource
-  ; Audit.PaperClaimAudit.Claim = CizekClaim
-  ; Audit.PaperClaimAudit.Assumption = CizekAssumption
-  ; Audit.PaperClaimAudit.MissingBridge = CizekMissingBridge
-  ; Audit.PaperClaimAudit.sourceStatus = Audit.repositoryDeposit
-  ; Audit.PaperClaimAudit.sourceTheory = Audit.latticeYangMillsFixedSpacing
-  ; Audit.PaperClaimAudit.claimedOperator = Audit.boundarySlabTransferKernel
-  ; Audit.PaperClaimAudit.evidence = Audit.conditionalDerivation
-  ; Audit.PaperClaimAudit.outcome = Audit.conditionalTheorem
-  ; Audit.PaperClaimAudit.assumptions = slabAssumptions
-  ; Audit.PaperClaimAudit.requiredBridges = slabRequiredBridges
-  ; Audit.PaperClaimAudit.firstOpenDependency =
+  { Source = CizekSource
+  ; Claim = CizekClaim
+  ; Assumption = CizekAssumption
+  ; MissingBridge = CizekMissingBridge
+  ; sourceStatus = Audit.repositoryDeposit
+  ; sourceTheory = Audit.latticeYangMillsFixedSpacing
+  ; claimedOperator = Audit.boundarySlabTransferKernel
+  ; evidence = Audit.conditionalDerivation
+  ; outcome = Audit.conditionalTheorem
+  ; assumptions = slabAssumptions
+  ; requiredBridges = slabRequiredBridges
+  ; firstOpenDependency =
       ultravioletContinuumOnR4ActuallyConstructed
   }
 

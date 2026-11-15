@@ -1,0 +1,229 @@
+{
+  "schema": "dashi.ksw668.original-AMS-NH-zonal-screen.v1",
+  "date_utc": "2026-11-14",
+  "original_sources": {
+    "individual_human_ams": {
+      "authors": "Heinemeier et al.",
+      "doi": "10.1096/fj.12-225599",
+      "artifact": "Artifacts/ksw668/heinemeier2013_original_human_ams_table1.csv",
+      "Git_blob": "4708c5b3fdf584a7e03c8f9a4050ae2dfff0609b"
+    },
+    "atmosphere": {
+      "authors": "Quan Hua et al.",
+      "doi": "10.1017/RDC.2021.95",
+      "license": "GPL >= 2 for rintcal distribution; upstream original raw unchanged, not vendored",
+      "zone_source": "Maarten14C/rintcal",
+      "zonal_files": [
+        {
+          "zone": "NH1",
+          "path": "inst/extdata/postbomb_NH1.14C",
+          "git_blob_sha1": "f7ff49b2ff6ed99f2a6b5aa811c86a774082cbcf",
+          "source_rows": 70,
+          "calendar_year_span": [
+            2019.5,
+            1950.5
+          ]
+        },
+        {
+          "zone": "NH2",
+          "path": "inst/extdata/postbomb_NH2.14C",
+          "git_blob_sha1": "296b7fbbee8f69f87501be05f9b1a1391a49e0f5",
+          "source_rows": 70,
+          "calendar_year_span": [
+            2019.5,
+            1950.5
+          ]
+        },
+        {
+          "zone": "NH3",
+          "path": "inst/extdata/postbomb_NH3.14C",
+          "git_blob_sha1": "aafd74536ec0690f1c1943ac98da3caf7972f59f",
+          "source_rows": 70,
+          "calendar_year_span": [
+            2019.5,
+            1950.5
+          ]
+        }
+      ]
+    }
+  },
+  "method": "For each tendon assay born in year b, restrict original annual NH atmospheric curve to midyear years max(b,1950) through 2000; compute F14C_proxy = 100 exp(-C14_ageBP/8033). Compare measured pMC value numerically only as an uncalibrated screen. Do not use pMC differences as a calibrated likelihood or nuclear source-rate estimate.",
+  "counts": {
+    "original_human_source_assay_rows": 34,
+    "original_tendon_source_assay_rows": 30,
+    "author_flagged_outlier_assays": 5,
+    "author_flagged_outlier_donors": [
+      "25",
+      "28",
+      "30"
+    ],
+    "all_original_OL_outside_NH1_NH2_NH3": true,
+    "non_flagged_outside_any_zone": 0
+  },
+  "original_outliers": [
+    {
+      "original_AMS_ID": "15882.1",
+      "donor": "25",
+      "birth_year": 1969,
+      "original_observed_pMC": 105.56,
+      "original_sigma_pMC": 0.33,
+      "original_OL_flag": true,
+      "bounds": {
+        "NH1": {
+          "min": 109.950349,
+          "max": 156.26898,
+          "below": 4.390349,
+          "above": 0,
+          "outside": true
+        },
+        "NH2": {
+          "min": 109.950349,
+          "max": 155.667087,
+          "below": 4.390349,
+          "above": 0,
+          "outside": true
+        },
+        "NH3": {
+          "min": 109.950349,
+          "max": 152.996653,
+          "below": 4.390349,
+          "above": 0,
+          "outside": true
+        }
+      }
+    },
+    {
+      "original_AMS_ID": "15882.2",
+      "donor": "25",
+      "birth_year": 1969,
+      "original_observed_pMC": 104.93,
+      "original_sigma_pMC": 0.26,
+      "original_OL_flag": true,
+      "bounds": {
+        "NH1": {
+          "min": 109.950349,
+          "max": 156.26898,
+          "below": 5.020349,
+          "above": 0,
+          "outside": true
+        },
+        "NH2": {
+          "min": 109.950349,
+          "max": 155.667087,
+          "below": 5.020349,
+          "above": 0,
+          "outside": true
+        },
+        "NH3": {
+          "min": 109.950349,
+          "max": 152.996653,
+          "below": 5.020349,
+          "above": 0,
+          "outside": true
+        }
+      }
+    },
+    {
+      "original_AMS_ID": "16252",
+      "donor": "30",
+      "birth_year": 1980,
+      "original_observed_pMC": 143.34,
+      "original_sigma_pMC": 0.37,
+      "original_OL_flag": true,
+      "bounds": {
+        "NH1": {
+          "min": 109.950349,
+          "max": 127.872159,
+          "below": 0,
+          "above": 15.467841,
+          "outside": true
+        },
+        "NH2": {
+          "min": 109.950349,
+          "max": 127.872159,
+          "below": 0,
+          "above": 15.467841,
+          "outside": true
+        },
+        "NH3": {
+          "min": 109.950349,
+          "max": 127.872159,
+          "below": 0,
+          "above": 15.467841,
+          "outside": true
+        }
+      }
+    },
+    {
+      "original_AMS_ID": "15883",
+      "donor": "28",
+      "birth_year": 1982,
+      "original_observed_pMC": 142.28,
+      "original_sigma_pMC": 0.37,
+      "original_OL_flag": true,
+      "bounds": {
+        "NH1": {
+          "min": 109.950349,
+          "max": 124.789917,
+          "below": 0,
+          "above": 17.490083,
+          "outside": true
+        },
+        "NH2": {
+          "min": 109.950349,
+          "max": 124.789917,
+          "below": 0,
+          "above": 17.490083,
+          "outside": true
+        },
+        "NH3": {
+          "min": 109.950349,
+          "max": 124.789917,
+          "below": 0,
+          "above": 17.490083,
+          "outside": true
+        }
+      }
+    },
+    {
+      "original_AMS_ID": "16247",
+      "donor": "28",
+      "birth_year": 1982,
+      "original_observed_pMC": 144.59,
+      "original_sigma_pMC": 0.42,
+      "original_OL_flag": true,
+      "bounds": {
+        "NH1": {
+          "min": 109.950349,
+          "max": 124.789917,
+          "below": 0,
+          "above": 19.800083,
+          "outside": true
+        },
+        "NH2": {
+          "min": 109.950349,
+          "max": 124.789917,
+          "below": 0,
+          "above": 19.800083,
+          "outside": true
+        },
+        "NH3": {
+          "min": 109.950349,
+          "max": 124.789917,
+          "below": 0,
+          "above": 19.800083,
+          "outside": true
+        }
+      }
+    }
+  ],
+  "other_nonflagged_outside": [],
+  "nonpromotions": [
+    "Atmospheric fraction modern proxy is not exactly human pMC without sample convention and model timing calibration",
+    "Dietary incorporation lag/uncertainty is not modelled",
+    "Arkansas source region modeled as NH2, NH1 and NH3 sensitivity controls",
+    "No individual donor food residence medical contamination records",
+    "Observed analytical sigma is not full environmental uncertainty",
+    "No within-subject nuclear production/emotion intervention data"
+  ]
+}

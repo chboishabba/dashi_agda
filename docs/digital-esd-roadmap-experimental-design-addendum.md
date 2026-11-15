@@ -4,6 +4,16 @@
 
 **Status:** roadmap refinement. This addendum narrows the current live roadmap around study-level evidentiary discipline. It does not create evidence or alter the requirement to reconcile the feature branch with current `master` before a large integration tranche.
 
+## November 2026 origins, selection and incoming-EfS evidence gates
+
+Canonical orientation: [Digital-ESD research origins and derivation](digital-esd-research-origins-and-derivation.md). The first verified education loom [#341](https://github.com/chboishabba/dashi_agda/pull/341) contained seven **source papers**; the current education register contains nine **papers/items**; the later synthesis contains seven **candidate principles**. Distinguish all three denominators. The seven-row principle mapping is source-written but no independently justified seven-vs-alternative grouping is established. Maintain an alternatives/rejections ledger with reviewer decisions, not just a retrospective rationale.
+
+New [#1448](https://github.com/chboishabba/dashi_agda/pull/1448) EfS intake has 14 newly attributed original sources plus two canonical Tilbury/IUCN donors. Those 16 candidate source-to-principle cases require exact-span review, claim ceilings, source genealogy, local-context transport, contradiction and reviewer permission/admission. Existing 19 manuscript coordinates + separate 16-subcoordinate claim ceiling remain canonical: no EfS-specific duplicate ontology is justified.
+
+**Methodological options:** primary source-governed integrative conceptual review and qualitative interpretive synthesis; a quantitative meta-analysis is only admissible after matching estimand, effect units, independent studies, outcomes, comparator/follow-up, variance and bias diagnostics. No such poolable admitted subset has been verified here.
+
+**Immediate weekly P0/P1:** before 6 November, coauthor-approved research question/200-word abstract/title plus paper type and ownership; by 13 November, author corpus selection rationale, independently coded EfS evidence and recorded alternative principle partitions. Preserve documented ambiguity where archaeology cannot recover who selected a theme or when.
+
 ## Why this changes the roadmap
 
 The paper now has enough conceptual architecture. The main empirical risk is no longer only *which papers are found*, but *what each admitted paper is allowed to prove*.
@@ -200,3 +210,87 @@ find papers
 ```
 
 This is now the operational interpretation of “each paper should prove only as much as it is able to.”
+
+
+## 2026-10-22 EfS / Digital Pedagogy source-grounded survival audit (PR #1237)
+
+**Authoritative scope:** This is an update to the review-work roadmap, **not** admission or empirical validation. The actual ESD/Digital-ESD working manuscript currently targets the *Sustainability* special-issue conceptual/integrative review. A separate *Nature* journal submission roadmap is not established by these Digital-ESD files; references to 'nature' in this lane commonly describe nature-connected learning, not a verified *Nature* submission. Do not rename or silently change the target journal.
+
+**Canonical added owner:** `DASHI/Education/DigitalESDPrincipleSurvivalAuditExact.agda` + regression, consuming existing seven-principle sources and independent EfS challenge. The earlier `DigitalESDEfSCanonicalReuseAdapterExact` consumes `DigitalESDEvidenceBraidTensionExact`, the Alice corpus and the DB-native extraction owner without duplicating their ontologies. Both are source-written and need exact-head Agda checks.
+
+### What survives the *conceptual* cross-corpus challenge (NOT the full search)
+
+| Candidate digital principle | Current conceptual status | Main EfS discriminator |
+| --- | --- | --- |
+| Situated relational engagement | provisional revise/retain | engagement vs actual EfS teaching, ecological and community practice |
+| Feedback as revisable signal | provisional revise/retain | feedback classification vs critical values deliberation |
+| Constitutive learner agency | provisional split candidate | individual voice vs group decision rights / collective action |
+| Adaptive support with local choice | provisional revise/retain | accessibility gains vs fragmentation of common inquiry |
+| Plural situated observers | provisional revise/retain | distinct source authority, non-human ecological observations, Indigenous knowledge permissions |
+| Contextual custodianship | provisional revise/retain | contextual representation vs measured systems thinking |
+| Iterative evidence return/recharting | provisional revise/retain | revision of feedback vs futures literacy and durable change |
+
+**None of the seven is yet supported by a completed screened-and-admitted independent EfS corpus at an intervention-effect claim ceiling.** This is a typed candidate-status report, not a quantitative support vote. Independent EfS coding additionally leaves ecological/more-than-human pedagogy unmatched by the seven *labels* (though the wider DASHI has ecological machinery). Keep it as an open possible augmentation, not an automatic eighth principle.
+
+### Executable evidence pipeline already owned
+
+- Real ERIC: 46,597 query occurrences -> 43,996 distinct metadata/abstract records -> 2,601 duplicate occurrences. These are not 43,996 full texts or review inclusions. A 43,996-row **synthetic SLR scale fixture is unrelated** except by intentionally matching its scale.
+- `interop_scripts/digital_esd/run_world.py`: review/retrieval -> byte verification/text materialisation -> SCALE-1 DB-native PostgreSQL parse/PNF -> processing census/world revisions -> bounded review projections. Never treat a parser nomination as source-level admission or source truth.
+- Exact 19 coordinates from `DigitalESDManuscriptMethodologyExact` stay unchanged. Route EfS nominations through pedagogy/competence, sustainability, time, authority, context-transfer and uncertainty; do not add 6x7 universal enumerative cells.
+- `DigitalESDAcademicCorpusWorldCrossPollinationExact` and `DigitalESDStudyClaimCeilingExact` continue to own source identity, distinct manifestations/revisions/spans, design-specific claim ceiling, study-family genealogy and independence.
+
+### Ranked scientific P0/P1
+
+**P0-A** Execute/verify authoritative screened full-text/admission receipts (including precise text spans) on local real ERIC artifacts; retain missing/inaccessible/source-only stages. *Not paid by this source-written tranche.*
+
+**P0-B** Independently code Tilbury et al. (2002) chapters, Tilbury & Wortman (2004) practice framework, GreenComp (2022), Elliott's EfS essay, Vikane/Høydalsvik's Norwegian ECE study and relevant empirical Digital-ESD studies; distinguish conceptual prescription from empirical results and from an actual human blind-coding exercise. Record rival codes and disagreements.
+
+**P0-C** Run deliberate discriminators: awareness vs systems understanding; reported student voice vs consequential collective authority; individual adaptive scaffolding vs common inquiry; ecological source provenance and access permissions; participation as classroom activity vs observed collective action; future scenarios vs futures competence; short-term response vs institutional durability.
+
+**P0-D** Reevaluate each of the seven via actual admitted study-by-study/context-specific evidence. Each gets source spans, claim ceiling, proposed method, reviewer disagreement, and one of support/narrow/split/merge/defeat/extend/unresolved. A conceptual fit alone never pays an effect claim.
+
+**P1** Update manuscript results only when P0 paid; publish a transparent evidence table showing each relationship, contextual transfer, source-role, independent evidence units and unresolved contradictions. Reconcile the review draft's outdated statement that ERIC has never been executed with the ERIC retrieval evidence, without conflating retrieval with screening closure.
+
+**Non-goals:** new parser/DB ontology, new generic non-factorability calculus, claiming all 43,996 records were semantically coded, or attributing DASHI mathematical results to EfS/Indigenous scholarship.
+
+
+## 2026-10-22 correction from coauthor correspondence: manuscript phase, meta-synthesis and deliverables
+
+**Decision evidence**: Alice Brown's 13 October 2026 team email and the follow-up 14 October exchange, inspected in the connected Gmail (private working correspondence; do not quote/distribute without authors' permission), point to an **integrative conceptual review with a bounded author-nominated scholarship corpus, explicit relevance rationales, independently challenged ESD competency mapping, and retrospective/prospective scholarly praxis**. Do not claim the collaboration agreed on statistical meta-analysis. The letter explicitly cautions against describing the authors' work as a 'meta-analysis' and against committing the whole manuscript to a new action-research case study. The seven existing principles are an intermediate, revisable output rather than the headline novelty.
+
+### Correct paper type and conditional meta-analytic lane
+
+Canonical primary consumer: `DigitalESDPaperTypeRequirementParetoExact.integrativeConceptualReview`. The cross-paper operation is **interpretive evidence synthesis / candidate qualitative meta-synthesis** under transparent source-role, scope and alternative-interpretation discipline. A systematic mapping of admitted external studies may supplement this; avoid calling it completed or a quantitative meta-analysis.
+
+Statistical meta-analysis is a **conditionally enabled secondary consumer only** after accepted studies show: (1) a common estimand/intervention-comparator/outcome and compatible population/time horizon, (2) recoverable effects plus uncertainty, (3) reviewed study-family genealogy to avoid double-counting, (4) heterogeneity/explanatory context and missingness review, (5) risk-of-bias/publication-bias and sensitivity receipts, and (6) an explicit reason pooling is meaningful. Otherwise deliver stratified narrative evidence tables and falsification/claim-ceiling analysis. Existing `DigitalESDAcademicCorpusWorldCrossPollinationExact` and `DigitalESDStudyClaimCeilingExact` already own much of this; do not introduce another pooling ontology.
+
+### Updated publication phases / deliverables
+
+| Phase | Current status | Acceptance/deliverable |
+| --- | --- | --- |
+| 0. Target, rubric, governance | Owner implemented / editorial deadline reverify | Named MDPI *Sustainability* special issue; exact call + paper-type rubric + ethics/AI disclosures, coauthor agreement |
+| 1. Bounded author scholarship selection | Partly formalised, author decisions required | Nominated paper list with reasons, source boundaries and accepted/rejected candidates; not just the original nine-item starter |
+| 2. Source reconstruction and conceptual synthesis | Seven-principle starter + survival audit source-written | Exact source/revision/span/claim ceiling and rival theme audit; preserve what each source can prove |
+| 3. EfS competency and reciprocal challenge | Initial EfS-first formal owner and candidate comparisons committed | Reviewer-audited GreenComp/Tilbury/Elliott/Vikane mappings; relationships support/narrow/split/merge/defeat/extend |
+| 4. Broader external review | 43,996 ERIC metadata universe acquired/dedup reported; full review not demonstrated | Actual eligibility decisions, retained full texts, source-audit admission, cross-database status, reviewer disagreement |
+| 5. Synthesis and worked applications | Partial manuscript; revised framework not final | One bounded retrospective reconstruction and one prospective research-design demonstration, both source-grounded |
+| 6. Quantitative pooling gate | Not demonstrated eligible; optional | Either justified statistical pooled model with full diagnostics OR explicit documented 'pooling not warranted' decision |
+| 7. Writing and submission | Working draft only | Revised abstract; introduction, methods, evidence tables, discussion/limitations, references, declarations, coauthor signoff, submission-ready package |
+
+**Phase judgment:** conceptual/methodological architecture and processing apparatus are substantially built; manuscript execution is between phases 2–4, with phases 4–7 *not yet closed*. This is not a finished meta-analysis and not yet a completed external review.
+
+### Highest-alpha deliverable order
+
+1. Obtain collaborative acceptance of the question, paper type, selection logic and retrospective/prospective contributions; retain exact team feedback.
+2. Complete the nominated-author-corpus ledger including the additional named works in Alice's 13 October proposal, and make study-level claim ceilings visible.
+3. Turn existing EfS source candidates into reviewed source spans and author adjudications, not just further source-written Agda types.
+4. Run admitted external screening on real ERIC artifacts and other databases as available, with denominator and missingness receipts.
+5. Publish a principle-survival table and two contrasting worked applications, then make a deliberate pooling-feasibility determination.
+6. Assemble the *Sustainability* submission, subject to current journal/editorial requirements and responsible GenAI disclosure.
+
+**Hard boundaries:** Being one of ~43,996 ERIC records does not make a study included; reviewer nomination != evidence; team mail != methodological execution; interpretive meta-synthesis != statistical meta-analysis; reflexive worked application != prospective human-subjects research; author invitation != finding.
+
+
+## Current-week checkpoint — 22–23 October 2026
+
+**Current authoritative planning packet:** [digital-esd-weekly-brief-2026-10-23.md](digital-esd-weekly-brief-2026-10-23.md). It inventories PR #1237, evidence/source boundaries, the repo's integrative-review paper-type owner and the coauthor October correspondence. **This week's P0 is coauthor decisions** on research question, both directions of sustainability, paper type, title/abstract owner, optional 6 November abstract target, and 30 April manuscript milestone. The intended deliverable is a recorded decision packet and abstract outline, **not** statistical meta-analysis or completion of the ERIC corpus. 6 November and 30 April remain proposed internal targets pending team confirmation.

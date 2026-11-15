@@ -51,6 +51,14 @@ class Tests(unittest.TestCase):
         with self.assertRaises(ArchiveError):
             list(stream_archive(src, REPO, REV, max_total_bytes=3))
 
+    def test_total_uncompressed_budget_counts_nonlean_files(self):
+        src = archive_fixture([
+            ("repo-aaaa/Huge-README", b"x"*10000),
+            ("repo-aaaa/Foo.lean", DATA),
+        ])
+        with self.assertRaises(ArchiveError):
+            list(stream_archive(src, REPO, REV, max_total_bytes=1000))
+
     def test_transfer_budget_includes_nonlean_files(self):
         src = archive_fixture([("repo-aaaa/README.md", b"x" * 20000),
                                ("repo-aaaa/Foo.lean", DATA)])
@@ -65,6 +73,25 @@ class Tests(unittest.TestCase):
         src = archive_fixture([("repo-aaaa/Foo.lean", DATA)])
         with self.assertRaises(ValueError):
             list(stream_archive(src, REPO, "master"))
+
+    def test_verified_source_callback_gets_exact_bytes(self):
+        seen = []
+        src = archive_fixture([("repo-aaaa/Foo.lean", DATA)])
+        rows = list(stream_archive(
+            src, REPO, REV,
+            on_source=lambda receipt, raw: seen.append((receipt, raw))))
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(seen[0][0], rows[0])
+        self.assertEqual(seen[0][1], DATA)
+
+    def test_no_source_callback_for_skipped_size_cap(self):
+        seen = []
+        src = archive_fixture([("repo-aaaa/Foo.lean", DATA)])
+        rows = list(stream_archive(
+            src, REPO, REV, max_file_bytes=1,
+            on_source=lambda receipt, raw: seen.append(raw)))
+        self.assertEqual(seen, [])
+        self.assertEqual(rows[0]["status"], "skipped-size-cap")
 
     def test_multiple_source_files(self):
         src = archive_fixture([

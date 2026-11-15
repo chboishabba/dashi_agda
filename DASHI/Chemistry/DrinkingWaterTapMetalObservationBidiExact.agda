@@ -108,3 +108,5 @@ canonicalTapMetalObservationBoundary : TapMetalObservationBoundary
 canonicalTapMetalObservationBoundary =
   tapMetalObservationBoundary
     false refl false refl false refl false refl false refl true refl
+
+open TapMetalObservationBoundary public

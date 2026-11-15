@@ -12,11 +12,12 @@ module DASHI.Mathematics.Complexity.ConcreteTapeHeadMarginExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _≤_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
+open import Data.Nat.Base using (_≤_; z≤n; s≤s)
 open import Data.Empty using (⊥-elim)
 open import Data.Product using (_×_; _,_)
 import Data.Nat.Properties as NatP
-open import Relation.Binary.PropositionalEquality using (sym; trans; cong)
+open import Relation.Binary.PropositionalEquality using (sym; trans; cong; subst)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.ConcreteTapeWellFormedConfigurationExact as WF
@@ -84,9 +85,8 @@ leftOfHead_appendPlain_head :
 leftOfHead_appendPlain_head WF.plainNil =
   refl
 leftOfHead_appendPlain_head
-    (WF.plainCons plain)
-    rewrite leftOfHead_appendPlain_head plain =
-  refl
+    (WF.plainCons plain) =
+  cong suc (leftOfHead_appendPlain_head plain)
 
 rightOfHead_appendPlain_head :
   ∀ {State Symbol : Set}
@@ -104,28 +104,26 @@ rightOfHead_appendPlain_head :
 rightOfHead_appendPlain_head WF.plainNil =
   refl
 rightOfHead_appendPlain_head
-    (WF.plainCons plain)
-    rewrite rightOfHead_appendPlain_head plain =
-  refl
+    (WF.plainCons plain) =
+  rightOfHead_appendPlain_head plain
 
 leftOfHead_appendPlain_head_left :
   ∀ {State Symbol : Set}
     {prefix suffix : List (Local.TapeCell State Symbol)}
-    {q : State} {a b : Symbol} →
+    {q : State} {a b c : Symbol} →
   WF.PlainCells prefix →
   leftOfHead
     (Local.append prefix
       (Local.headed q a
         ∷ Local.plain b
-        ∷ Local.plain b
+        ∷ Local.plain c
         ∷ suffix))
   ≡ Coordinate.listLength prefix
 leftOfHead_appendPlain_head_left WF.plainNil =
   refl
 leftOfHead_appendPlain_head_left
-    (WF.plainCons plain)
-    rewrite leftOfHead_appendPlain_head_left plain =
-  refl
+    (WF.plainCons plain) =
+  cong suc (leftOfHead_appendPlain_head_left plain)
 
 rightOfHead_appendPlain_head_left :
   ∀ {State Symbol : Set}
@@ -142,28 +140,26 @@ rightOfHead_appendPlain_head_left :
 rightOfHead_appendPlain_head_left WF.plainNil =
   refl
 rightOfHead_appendPlain_head_left
-    (WF.plainCons plain)
-    rewrite rightOfHead_appendPlain_head_left plain =
-  refl
+    (WF.plainCons plain) =
+  rightOfHead_appendPlain_head_left plain
 
 leftOfHead_appendPlain_head_right :
   ∀ {State Symbol : Set}
     {prefix suffix : List (Local.TapeCell State Symbol)}
-    {q : State} {a b : Symbol} →
+    {q : State} {a b c : Symbol} →
   WF.PlainCells prefix →
   leftOfHead
     (Local.append prefix
       (Local.plain a
         ∷ Local.plain b
-        ∷ Local.headed q a
+        ∷ Local.headed q c
         ∷ suffix))
   ≡ suc (suc (Coordinate.listLength prefix))
 leftOfHead_appendPlain_head_right WF.plainNil =
   refl
 leftOfHead_appendPlain_head_right
-    (WF.plainCons plain)
-    rewrite leftOfHead_appendPlain_head_right plain =
-  refl
+    (WF.plainCons plain) =
+  cong suc (leftOfHead_appendPlain_head_right plain)
 
 rightOfHead_appendPlain_head_right :
   ∀ {State Symbol : Set}
@@ -180,20 +176,22 @@ rightOfHead_appendPlain_head_right :
 rightOfHead_appendPlain_head_right WF.plainNil =
   refl
 rightOfHead_appendPlain_head_right
-    (WF.plainCons plain)
-    rewrite rightOfHead_appendPlain_head_right plain =
-  refl
+    (WF.plainCons plain) =
+  rightOfHead_appendPlain_head_right plain
 
 ------------------------------------------------------------------------
 -- A well-formed radius-one step consumes at most one margin cell.
 ------------------------------------------------------------------------
+
+≤-step : ∀ {m n : Nat} → m ≤ n → m ≤ suc n
+≤-step h = NatP.≤-trans h (NatP.n≤1+n _)
 
 wellFormedStepMargin :
   ∀ {machine before after k} →
   (step : WF.WellFormedMachineStep machine before after) →
   HeadMargin (suc k) (Local.cells before) →
   HeadMargin k (Local.cells after)
-wellFormedStepMargin {k = k} step margin
+wellFormedStepMargin {before = before} {after = after} {k = k} step margin
     with Local.ruleIsConfigured (WF.step step)
 ... | Local.realizes-left =
   record
@@ -207,52 +205,40 @@ wellFormedStepMargin {k = k} step margin
     hBeforeLeft :
       leftOfHead (Local.cells before)
       ≡ suc (Coordinate.listLength (Local.prefix occ))
-    hBeforeLeft
-      rewrite Local.beforeShape occ
-            | leftOfHead_appendPlain_head pp = refl
+    hBeforeLeft =
+      trans (cong leftOfHead (Local.beforeShape occ))
+            (leftOfHead_appendPlain_head pp)
 
     hAfterLeft :
       leftOfHead (Local.cells after)
       ≡ Coordinate.listLength (Local.prefix occ)
-    hAfterLeft
-      rewrite Local.afterShape occ
-            | leftOfHead_appendPlain_head_left pp = refl
+    hAfterLeft =
+      trans (cong leftOfHead (Local.afterShape occ))
+            (leftOfHead_appendPlain_head_left pp)
 
     hBeforeRight :
       rightOfHead (Local.cells before)
       ≡ suc (Coordinate.listLength (Local.suffix occ))
-    hBeforeRight
-      rewrite Local.beforeShape occ
-            | rightOfHead_appendPlain_head pp = refl
+    hBeforeRight =
+      trans (cong rightOfHead (Local.beforeShape occ))
+            (rightOfHead_appendPlain_head pp)
 
     hAfterRight :
       rightOfHead (Local.cells after)
       ≡ suc (suc (Coordinate.listLength (Local.suffix occ)))
-    hAfterRight
-      rewrite Local.afterShape occ
-            | rightOfHead_appendPlain_head_left pp = refl
+    hAfterRight =
+      trans (cong rightOfHead (Local.afterShape occ))
+            (rightOfHead_appendPlain_head_left pp)
 
     leftBound : k ≤ leftOfHead (Local.cells after)
-    leftBound
-      rewrite hAfterLeft =
-      NatP.≤-pred
-        (substRight hBeforeLeft (leftMargin margin))
-      where
-        substRight : ∀ {a b c : Nat} → a ≡ b → c ≤ a → c ≤ b
-        substRight refl h = h
+    leftBound =
+      subst (k ≤_) (sym hAfterLeft)
+        (NatP.≤-pred (subst (suc k ≤_) hBeforeLeft (leftMargin margin)))
 
     rightBound : k ≤ rightOfHead (Local.cells after)
-    rightBound
-      rewrite hAfterRight =
-      NatP.≤-trans
-        (NatP.≤-trans
-          (NatP.n≤1+n k)
-          (NatP.≤-pred
-            (substRight hBeforeRight (rightMargin margin))))
-        (NatP.n≤1+n _)
-      where
-        substRight : ∀ {a b c : Nat} → a ≡ b → c ≤ a → c ≤ b
-        substRight refl h = h
+    rightBound =
+      subst (k ≤_) (sym hAfterRight)
+        (≤-step (≤-step (NatP.≤-pred (subst (suc k ≤_) hBeforeRight (rightMargin margin)))))
 
 ... | Local.realizes-stay =
   record
@@ -266,52 +252,40 @@ wellFormedStepMargin {k = k} step margin
     hBeforeLeft :
       leftOfHead (Local.cells before)
       ≡ suc (Coordinate.listLength (Local.prefix occ))
-    hBeforeLeft
-      rewrite Local.beforeShape occ
-            | leftOfHead_appendPlain_head pp = refl
+    hBeforeLeft =
+      trans (cong leftOfHead (Local.beforeShape occ))
+            (leftOfHead_appendPlain_head pp)
 
     hAfterLeft :
       leftOfHead (Local.cells after)
       ≡ suc (Coordinate.listLength (Local.prefix occ))
-    hAfterLeft
-      rewrite Local.afterShape occ
-            | leftOfHead_appendPlain_head pp = refl
+    hAfterLeft =
+      trans (cong leftOfHead (Local.afterShape occ))
+            (leftOfHead_appendPlain_head pp)
 
     hBeforeRight :
       rightOfHead (Local.cells before)
       ≡ suc (Coordinate.listLength (Local.suffix occ))
-    hBeforeRight
-      rewrite Local.beforeShape occ
-            | rightOfHead_appendPlain_head pp = refl
+    hBeforeRight =
+      trans (cong rightOfHead (Local.beforeShape occ))
+            (rightOfHead_appendPlain_head pp)
 
     hAfterRight :
       rightOfHead (Local.cells after)
       ≡ suc (Coordinate.listLength (Local.suffix occ))
-    hAfterRight
-      rewrite Local.afterShape occ
-            | rightOfHead_appendPlain_head pp = refl
+    hAfterRight =
+      trans (cong rightOfHead (Local.afterShape occ))
+            (rightOfHead_appendPlain_head pp)
 
     leftBound : k ≤ leftOfHead (Local.cells after)
-    leftBound
-      rewrite hAfterLeft =
-      NatP.≤-trans
-        (NatP.n≤1+n k)
-        (NatP.≤-pred
-          (substRight hBeforeLeft (leftMargin margin)))
-      where
-        substRight : ∀ {a b c : Nat} → a ≡ b → c ≤ a → c ≤ b
-        substRight refl h = h
+    leftBound =
+      subst (k ≤_) (sym hAfterLeft)
+        (≤-step (NatP.≤-pred (subst (suc k ≤_) hBeforeLeft (leftMargin margin))))
 
     rightBound : k ≤ rightOfHead (Local.cells after)
-    rightBound
-      rewrite hAfterRight =
-      NatP.≤-trans
-        (NatP.n≤1+n k)
-        (NatP.≤-pred
-          (substRight hBeforeRight (rightMargin margin)))
-      where
-        substRight : ∀ {a b c : Nat} → a ≡ b → c ≤ a → c ≤ b
-        substRight refl h = h
+    rightBound =
+      subst (k ≤_) (sym hAfterRight)
+        (≤-step (NatP.≤-pred (subst (suc k ≤_) hBeforeRight (rightMargin margin))))
 
 ... | Local.realizes-right =
   record
@@ -325,50 +299,40 @@ wellFormedStepMargin {k = k} step margin
     hBeforeLeft :
       leftOfHead (Local.cells before)
       ≡ suc (Coordinate.listLength (Local.prefix occ))
-    hBeforeLeft
-      rewrite Local.beforeShape occ
-            | leftOfHead_appendPlain_head pp = refl
+    hBeforeLeft =
+      trans (cong leftOfHead (Local.beforeShape occ))
+            (leftOfHead_appendPlain_head pp)
 
     hAfterLeft :
       leftOfHead (Local.cells after)
       ≡ suc (suc (Coordinate.listLength (Local.prefix occ)))
-    hAfterLeft
-      rewrite Local.afterShape occ
-            | leftOfHead_appendPlain_head_right pp = refl
+    hAfterLeft =
+      trans (cong leftOfHead (Local.afterShape occ))
+            (leftOfHead_appendPlain_head_right pp)
 
     hBeforeRight :
       rightOfHead (Local.cells before)
       ≡ suc (Coordinate.listLength (Local.suffix occ))
-    hBeforeRight
-      rewrite Local.beforeShape occ
-            | rightOfHead_appendPlain_head pp = refl
+    hBeforeRight =
+      trans (cong rightOfHead (Local.beforeShape occ))
+            (rightOfHead_appendPlain_head pp)
 
     hAfterRight :
       rightOfHead (Local.cells after)
       ≡ Coordinate.listLength (Local.suffix occ)
-    hAfterRight
-      rewrite Local.afterShape occ
-            | rightOfHead_appendPlain_head_right pp = refl
+    hAfterRight =
+      trans (cong rightOfHead (Local.afterShape occ))
+            (rightOfHead_appendPlain_head_right pp)
 
     leftBound : k ≤ leftOfHead (Local.cells after)
-    leftBound
-      rewrite hAfterLeft =
-      NatP.≤-trans
-        (NatP.≤-pred
-          (substRight hBeforeLeft (leftMargin margin)))
-        (NatP.≤-trans (NatP.n≤1+n _) (NatP.n≤1+n _))
-      where
-        substRight : ∀ {a b c : Nat} → a ≡ b → c ≤ a → c ≤ b
-        substRight refl h = h
+    leftBound =
+      subst (k ≤_) (sym hAfterLeft)
+        (≤-step (≤-step (NatP.≤-pred (subst (suc k ≤_) hBeforeLeft (leftMargin margin)))))
 
     rightBound : k ≤ rightOfHead (Local.cells after)
-    rightBound
-      rewrite hAfterRight =
-      NatP.≤-pred
-        (substRight hBeforeRight (rightMargin margin))
-      where
-        substRight : ∀ {a b c : Nat} → a ≡ b → c ≤ a → c ≤ b
-        substRight refl h = h
+    rightBound =
+      subst (k ≤_) (sym hAfterRight)
+        (NatP.≤-pred (subst (suc k ≤_) hBeforeRight (rightMargin margin)))
 
 ------------------------------------------------------------------------
 -- Unique head + one cell of margin on each side reconstructs interiority.
@@ -425,14 +389,14 @@ interiorCellsFromUniqueMargin
     }
 interiorCellsFromUniqueMargin
     (WF.plainBefore {symbol = first}
-      (WF.plainBefore unique))
+      (WF.plainBefore {symbol = second} unique))
     margin =
   prepend first
-    (interiorCellsFromUniqueMargin unique tailMargin)
+    (interiorCellsFromUniqueMargin (WF.plainBefore unique) tailMargin)
   where
     tailMargin : HeadMargin 1 _
     tailMargin = record
-      { leftMargin = NatP.≤-pred (leftMargin margin)
+      { leftMargin = s≤s z≤n
       ; rightMargin = rightMargin margin
       }
 
@@ -478,15 +442,15 @@ interiorFromUniqueMargin unique margin
     with interiorCellsFromUniqueMargin unique margin
 ... | interior =
   record
-    { Character.prefix = prefix interior
-    ; Character.suffix = suffix interior
-    ; Character.leftSymbol = leftSymbol interior
-    ; Character.readSymbol = readSymbol interior
-    ; Character.rightSymbol = rightSymbol interior
-    ; Character.headState = headState interior
-    ; Character.prefixPlain = prefixPlain interior
-    ; Character.suffixPlain = suffixPlain interior
-    ; Character.rowShape = shape interior
+    { prefix = prefix interior
+    ; suffix = suffix interior
+    ; leftSymbol = leftSymbol interior
+    ; readSymbol = readSymbol interior
+    ; rightSymbol = rightSymbol interior
+    ; headState = headState interior
+    ; prefixPlain = prefixPlain interior
+    ; suffixPlain = suffixPlain interior
+    ; rowShape = shape interior
     }
 
 afterInteriorOfMargin :

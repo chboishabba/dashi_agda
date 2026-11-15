@@ -238,6 +238,9 @@ pairAblationRequirementDirectionDefect :
     askRequirementDirection
 pairAblationRequirementDirectionDefect =
   Query.queryAdequacyDefect
+    {project = pairAblationProject}
+    {semantics = requirementDirectionSemantics}
+    {query = askRequirementDirection}
     worldLeftRequiresRight
     worldRightRequiresLeft
     refl
@@ -250,6 +253,9 @@ pairAblationRequirementDirectionNotAdequate :
     askRequirementDirection → ⊥
 pairAblationRequirementDirectionNotAdequate =
   Query.queryAdequacyDefectBlocksFactorisation
+    {project = pairAblationProject}
+    {semantics = requirementDirectionSemantics}
+    {query = askRequirementDirection}
     pairAblationRequirementDirectionDefect
 
 pairAblationRequirementDirectionCollisionPaid : Bool

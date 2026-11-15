@@ -1,0 +1,83 @@
+name: Clinic-to-Streets max-cut Agda
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Cognition/ClinicToStreets*.agda'
+      - 'DASHI/Core/AttributedSourceCore.agda'
+      - 'DASHI/Core/HumanReviewCore.agda'
+      - 'DASHI/Core/IntersectionalNonFactorability.agda'
+      - 'DASHI/Core/RequiredObserverAxisJoinAdequacyExact.agda'
+      - 'DASHI/Biology/IntersectionalLongitudinalResidualDynamics.agda'
+      - 'DASHI/Biology/CausalEffectEstimandExact.agda'
+      - 'DASHI/Biology/CausalIdentificationFamiliesExact.agda'
+      - 'DASHI/Biology/MultiscaleCausalProvenanceProofSearchRouterExact.agda'
+      - 'DASHI/Governance/SituatedConstituency.agda'
+      - 'DASHI/Governance/RecognitionDistributionRepresentationAxesExact.agda'
+      - 'scripts/run_agda29_parallel_check.sh'
+      - 'flake.nix'
+      - 'flake.lock'
+      - '.github/workflows/clinic-to-streets-maxcut-agda.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: clinic-to-streets-maxcut-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v3
+
+      - name: Type-check Clinic causal-provenance regression
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Cognition/ClinicToStreetsCausalProvenanceRegression.agda
+
+      - name: Type-check Clinic causal max-cut regression
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Cognition/ClinicToStreetsCausalProvenanceMaxCutRegression.agda
+
+      - name: Type-check Clinic causal-identification reuse regression
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Cognition/ClinicToStreetsCausalIdentificationReuseRegression.agda
+
+      - name: Type-check Clinic intersectionality reuse regression
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Cognition/ClinicToStreetsIntersectionalityReuseRegression.agda
+
+      - name: Type-check Clinic multiscale causal-router regression
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Cognition/ClinicToStreetsMultiscaleCausalReuseRegression.agda
+
+      - name: Type-check Clinic source/review reuse regression
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Cognition/ClinicToStreetsSourceReviewReuseRegression.agda
+
+      - name: Type-check Clinic focused rollup
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Cognition/ClinicToStreetsEverything.agda

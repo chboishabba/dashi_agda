@@ -60,8 +60,9 @@ complexMultiplyMinusOneRight value =
 complexConjugateMinusOne :
   ∀ {r} (F : C3.RealField r) →
   C3.complexConjugate (minusOne F) ≡ minusOne F
-complexConjugateMinusOne F
-  rewrite C3.negateZero F = refl
+complexConjugateMinusOne F =
+  Algebra.cong₂ C3.complex refl
+    (trans (C3.negateInvolutive F (C3.zero F)) (sym (C3.negateZero F)))
 
 complexAddInverseRight :
   ∀ {r} {F : C3.RealField r} (value : C3.Complex F) →

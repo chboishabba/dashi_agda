@@ -293,23 +293,26 @@ bilinearDot3ScaleLeft :
   ≡ C3.complexMultiply scalar (C3.bilinearDot3 u v)
 bilinearDot3ScaleLeft scalar
   (C3.complex3 ux uy uz)
-  (C3.complex3 vx vy vz)
-  rewrite complexMultiplyAssociative scalar ux vx
-        | complexMultiplyAssociative scalar uy vy
-        | complexMultiplyAssociative scalar uz vz =
+  (C3.complex3 vx vy vz) =
   trans
-    (cong
-      (λ first →
-        C3.complexAdd first
-          (C3.complexMultiply scalar (C3.complexMultiply uz vz)))
+    (Algebra.cong₂ C3.complexAdd
+      (Algebra.cong₂ C3.complexAdd
+        (complexMultiplyAssociative scalar ux vx)
+        (complexMultiplyAssociative scalar uy vy))
+      (complexMultiplyAssociative scalar uz vz))
+    (trans
+      (cong
+        (λ first →
+          C3.complexAdd first
+            (C3.complexMultiply scalar (C3.complexMultiply uz vz)))
+        (sym (Algebra.complexMultiplyDistributesLeft scalar
+          (C3.complexMultiply ux vx)
+          (C3.complexMultiply uy vy))))
       (sym (Algebra.complexMultiplyDistributesLeft scalar
-        (C3.complexMultiply ux vx)
-        (C3.complexMultiply uy vy))))
-    (sym (Algebra.complexMultiplyDistributesLeft scalar
-      (C3.complexAdd
-        (C3.complexMultiply ux vx)
-        (C3.complexMultiply uy vy))
-      (C3.complexMultiply uz vz)))
+        (C3.complexAdd
+          (C3.complexMultiply ux vx)
+          (C3.complexMultiply uy vy))
+        (C3.complexMultiply uz vz))))
 
 bilinearDot3ScaleRight :
   ∀ {r} {F : C3.RealField r}

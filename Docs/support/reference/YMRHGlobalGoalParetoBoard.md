@@ -6,6 +6,99 @@ Historical archaeology belongs in `YMRHPRRoundArchaeologyAudit.md`; the focused 
 
 **Update rule:** whenever a Pareto recut changes the preferred producer, first live theorem leaf, or same-object acquisition path, update this file in the same tranche. Source/DOI/QID/Dewey/status metadata never manufacture theorem payment.
 
+## Current RH normalization — 2026-10-29
+
+Agda is the golden theorem and status ledger.
+
+The current RH search surface is the merged three-route max-cut in
+`DASHI/Analysis/RiemannThreeTapCurrentLeanFrontierExact.agda`.
+
+The live leaves are:
+
+```text
+A1
+  countable carrier-to-shell summation
+  fixed-width / compact-alpha uniform curvature
+  translated Gamma+pole compensation
+
+A2
+  lower-order local debt + signed FarExact
+    < compensation target + positive smooth-mu gain
+
+B
+  eventual signedFifthCorrelationGapAt >= 0
+```
+
+The older universal pole-quotient allowance machinery stays reusable.
+It is not deleted.
+
+```text
+Off producer:
+  one common quarter-period crossing cutoff J
+  near(J) + far(J) <= A_off
+
+Gamma producer:
+  same universal pole-quotient taper
+  Gamma budget <= A_Gamma
+
+consumer:
+  A_off + A_Gamma < cluster margin
+  -> existing order/attachment compiler
+  -> contradiction
+```
+
+The determinant and window-Schur lanes remain donor and diagnostic machinery.
+They do not become the terminal carrier by similarity alone.
+
+The projected-zero-tail Lean return proves convergence support.
+It does not prove the strict RH margin.
+
+The TOE normalization owner is:
+
+```text
+DASHI/Unified/RiemannRHMaxCutTOEExact.agda
+```
+
+The Lean mirror consumes only the golden residual-budget grammar.
+Lean does not redefine route authority.
+
+### ZKP frame
+
+```text
+O  Expose the current RH max-cut through the TOE.
+R  Reuse current three-tap, pole-quotient, tail, and residual-budget owners.
+C  Add one Unified facade. Do not duplicate analytic owners.
+S  Keep route status, proof status, and RH promotion separate.
+L  Use one nonblocking RH-to-TOE normalization lane.
+P  Require existing theorem owners and explicit open-leaf receipts.
+G  Agda is golden. Lean mirrors. ESD surfaces stay read-only.
+F  TOE exposes the cut and non-promotion facts. RH remains open.
+```
+
+### C4 / PlantUML view
+
+```plantuml
+@startuml
+rectangle "Agda golden RH owners" as Agda
+rectangle "DASHI.Unified.RiemannRHMaxCutTOEExact" as TOE
+rectangle "DASHI.Unifier" as Unifier
+rectangle "EverythingTOESymmetryResolved369" as Root
+rectangle "dashi_lean4 AgdaMirror" as Mirror
+rectangle "RiemannAnalytic budget consumers" as LeanRH
+
+Agda --> TOE : reuse
+TOE --> Unifier : normalized surface
+TOE --> Root : TOE import
+Agda --> Mirror : golden contract
+Mirror --> LeanRH : residual / allowance grammar
+LeanRH ..> Agda : proof return requires explicit transport
+@enduml
+```
+
+ITIL, ISO 9000, ISO/IEC 42001, ISO/IEC 27001, ISO/IEC 27701,
+ISO/IEC 23894, ISO 9241, NIST AI RMF, Six Sigma, and C4 guide process quality.
+They do not create mathematical authority.
+
 ## 0. Current ownership snapshot — 2026-09-16
 
 ```text

@@ -15,6 +15,10 @@ FILES=(
   DASHI/Foundations/Wette1969Rule915Premise18CoreLeafClosureExact.agda
   DASHI/Foundations/Wette1969Rule915Premise18Rule9323ResolutionExact.agda
   DASHI/Foundations/Wette1969Rule915Premise27DirectionalClosureExact.agda
+  DASHI/Foundations/Wette1969Rule915MajorDerivationProblemExact.agda
+  DASHI/EverythingTOESymmetryResolved369.agda
+  DASHI/Unifier.agda
+  DASHI/Unified/Everything.agda
   DASHI/Foundations/Wette/Everything.agda
 )
 FORBIDDEN_PATTERN='\{![^}]*!\}|(^|[[:space:]=:(])\?([[:space:];,)}]|$)|^[[:space:]]*postulate([[:space:]]|$)|--allow-unsolved-metas|\{-# OPTIONS[^#]*--(unsafe|type-in-type|no-positivity-check|no-termination-check|rewriting)([[:space:]]|#)|=[[:space:]]*_[[:space:]]*$'
@@ -40,4 +44,20 @@ grep -q 'genericScaffoldAutomaticallySuppliesFive9323PremisesIsFalse' DASHI/Foun
 grep -q 'exactP145Premise27ReducedToTwoDirectionalLeavesIsTrue' DASHI/Foundations/Wette1969Rule915Premise27DirectionalClosureExact.agda
 grep -q 'closureUsesOneRule935AndTwoRule939StepsIsTrue' DASHI/Foundations/Wette1969Rule915Premise27DirectionalClosureExact.agda
 grep -q 'closureManufacturesEitherDirectionalLeafIsFalse' DASHI/Foundations/Wette1969Rule915Premise27DirectionalClosureExact.agda
+grep -q 'CanonicalRule915CurrentProblem' DASHI/Foundations/Wette1969Rule915MajorDerivationProblemExact.agda
+grep -q 'selectedRouteToCurrentProblem' DASHI/Foundations/Wette1969Rule915MajorDerivationProblemExact.agda
+grep -q 'generatedScaffoldDoesNotCreatePremise18' DASHI/Foundations/Wette1969Rule915MajorDerivationProblemExact.agda
+grep -q 'generatedScaffoldDoesNotCreatePremise27' DASHI/Foundations/Wette1969Rule915MajorDerivationProblemExact.agda
+grep -q 'documentationDoesNotCreateMajorDerivation' DASHI/Foundations/Wette1969Rule915MajorDerivationProblemExact.agda
+grep -q 'verificationStatusDoesNotCreateMajorDerivation' DASHI/Foundations/Wette1969Rule915MajorDerivationProblemExact.agda
+grep -q 'canonicalRule915MajorZKPFrame' DASHI/Foundations/Wette1969Rule915MajorDerivationProblemExact.agda
+grep -q 'typedPreconditionsInvariantAndPostconditionAreConnectedIsTrue' DASHI/Foundations/Wette1969Rule915MajorDerivationProblemExact.agda
+grep -q 'buildCanonicalRule915ResidualContract' DASHI/Foundations/Wette1969Rule915MajorDerivationProblemExact.agda
+grep -q 'selected9323RouteIsKnownCompleteForPremise18IsFalse' DASHI/Foundations/Wette1969Rule915MajorDerivationProblemExact.agda
+grep -q 'canonicalPremise18SpineRecoveryIsDefinitionallyDischargedIsTrue' DASHI/Foundations/Wette1969Rule915MajorDerivationProblemExact.agda
+grep -q 'canonicalPremise18P145SpineRecovery' DASHI/Foundations/Wette1969Rule915MajorDerivationProblemExact.agda
+grep -q 'toeWetteGeneratedScaffoldDoesNotCreatePremise18' DASHI/EverythingTOESymmetryResolved369.agda
+grep -q 'toeFleetPriorityStillDoesNotCreateWetteProofAuthority' DASHI/EverythingTOESymmetryResolved369.agda
+grep -q 'unifiedWetteRule915CurrentProblemBoundary' DASHI/Unifier.agda
+grep -q 'wetteRule915CurrentProblemBoundary' DASHI/Unified/Everything.agda
 scripts/run_agda29_parallel_check.sh "${FILES[@]}"
