@@ -144,9 +144,16 @@ def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
         P[:]=(P+2*(P2+dt*dP))/3
         M[:]=(M+2*(M2+dt*dM))/3
     def read(r):
-        ir=int(np.rint(r/dr));rad=ir*dr
-        modes=[float((rad/eps)**(2*j)*U[j,0,ir]) for j in range(3)]
-        return rad,modes,sum(modes)
+        # Evaluate SAME physical receiver radius at every grid resolution.
+        x=r/dr;ir=int(math.floor(x));frac=x-ir
+        if ir<1 or ir+2>=nr:raise ValueError('receiver interior to grid')
+        weights=np.array([-frac*(frac-1)*(frac-2)/6,
+                           (frac+1)*(frac-1)*(frac-2)/2,
+                          -(frac+1)*frac*(frac-2)/2,
+                           (frac+1)*frac*(frac-1)/6])
+        modes=[float((r/eps)**(2*j)*np.dot(weights,U[j,0,ir-1:ir+3]))
+               for j in range(3)]
+        return r,modes,sum(modes)
     rr,components,yy=read(rx)
     far,fc,fy=read(bulk+.1)
     return dict(model='original moving AdS5 a=t Neumann compact TT',
@@ -161,6 +168,7 @@ def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
         retarded_TT_yy_scaled_by_eps4=yy,
         far_receiver_grid_r=far,far_mode_values=fc,
         far_TT_yy_scaled_by_eps4=fy,
+        fixed_physical_receiver_cubic_interpolation=True,
         no_post_evolution_spatial_derivatives=True,
         no_spatial_Fourier_Bessel_inverse=True,
         compact_support_of_boundary_stress=True,
