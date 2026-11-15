@@ -26,8 +26,19 @@ class OriginalTTMultipole(unittest.TestCase):
    recovered=sum(uu**(2*j)*coeff[j] for j in range(3))
    self.assertAlmostEqual(float(actual),recovered,delta=max(1e-8,abs(float(actual))*1e-10))
  def test_photon_dark_source(self):self.assertGreater(self.sol['source_adjusted_brane_photon_margin'],0)
- def test_no_derivatives_after_evolution(self):self.assertTrue(self.sol['no_post_evolution_spatial_derivatives'])
+ def test_low_order_weyl_readout(self):
+  self.assertTrue(self.sol['second_order_spatial_radial_readout'])
+  self.assertTrue(self.sol['both_Weyl_numerically_evaluated'])
  def test_no_fourier_inverse(self):self.assertTrue(self.sol['no_spatial_Fourier_Bessel_inverse'])
+ def test_same_physical_event(self):
+  self.assertAlmostEqual(self.sol['receiver_grid_r'],self.sol['nominal_receiver_r'],places=13)
+ def test_both_weyl_finite(self):
+  import math
+  self.assertTrue(math.isfinite(self.sol['receiver_intrinsic_4D_electric_Weyl']))
+  self.assertTrue(math.isfinite(self.sol['receiver_projected_5D_electric_Weyl']))
+ def test_weyl_outside_cone_negative(self):
+  self.assertGreater(abs(self.sol['far_intrinsic_4D_electric_Weyl']),1e-10)
+  self.assertFalse(self.sol['full_Weyl_receiver_certified'])
  def test_beyond_cone_leak_negative(self):
   self.assertGreater(abs(self.sol['far_TT_yy_scaled_by_eps4']),1e-8)
   self.assertFalse(self.sol['numerical_convergence_certified'])
@@ -39,6 +50,8 @@ class OriginalTTMultipole(unittest.TestCase):
   no=propagate(**dict(PARAM,drive=0.))
   self.assertEqual(no['retarded_TT_yy_scaled_by_eps4'],0.)
   self.assertEqual(no['far_TT_yy_scaled_by_eps4'],0.)
+  self.assertEqual(no['receiver_intrinsic_4D_electric_Weyl'],0.)
+  self.assertEqual(no['receiver_projected_5D_electric_Weyl'],0.)
  def test_invalid_cone(self):
   with self.assertRaises(ValueError):propagate(**dict(PARAM,eps=.07))
 if __name__=='__main__':unittest.main(verbosity=2)
