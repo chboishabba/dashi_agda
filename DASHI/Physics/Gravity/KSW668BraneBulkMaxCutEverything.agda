@@ -43,3 +43,8 @@ import DASHI.Physics.Gravity.KSW668AdS5UVIRDyadicTailReuseExact
 -- source-to-receiver convergence are guarded as separate OPEN gates.
 import DASHI.Physics.Gravity.KSW668AdS5TensorPrepotentialCommutationExact
 import DASHI.Physics.Gravity.KSW668AdS5TTMultipoleAngularRationalExact
+
+-- Original a=t TT radial 3/7/11-dim effective multipoles: EXACT
+-- rational first-cell conservative finite-volume quadratic identities.
+-- General source/observer convergence and pinned Agda kernel remain OPEN.
+import DASHI.Physics.Gravity.KSW668AdS5TTFiniteVolumeFirstCellRationalExact
