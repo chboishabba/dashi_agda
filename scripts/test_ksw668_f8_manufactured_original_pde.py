@@ -15,4 +15,7 @@ class OriginalMovingManufactured(unittest.TestCase):
     def test_firstorder_SBP_moving_Israel(self):
         self.assertTrue(check(normal_order=1)['semidiscrete_manufactured_consistency'])
         self.assertTrue(check(normal_order=1,t=4/3)['original_moving_Israel_exact'])
+    def test_second_order_SBP_SAT_weak_boundary_manufactured(self):
+        self.assertTrue(check(normal_order=3)['semidiscrete_manufactured_consistency'])
+        self.assertTrue(check(normal_order=3,t=4/3,T=.4)['original_moving_Israel_exact'])
 if __name__=='__main__':unittest.main(verbosity=2)
