@@ -79,7 +79,7 @@ def ads_tensor_audit():
     # True moving-brane unit-normal derivative; must equal source function.
     required_source=sp.simplify((-sp.diff(h,T)+sp.sqrt(1+t*t)*sp.diff(h,z))/t**2)
     expected=sp.simplify((-omega*sp.sin(k*x-omega*T)*psi
-                        +sp.sqrt(1+t*t)*m*z*z*sp.besselj(1,m*z))/t**2)
+                        +sp.sqrt(1+t*t)*m*z*z*sp.besselj(1,m*z)*sp.cos(k*x-omega*T))/t**2)
     assert sp.simplify(required_source-expected)==0
     residual=sp.simplify(required_source.subs({t:1,z:1,T:0,x:0,k:1,m:1}))
     assert sp.simplify(residual-sp.sqrt(2)*sp.besselj(1,1))==0
