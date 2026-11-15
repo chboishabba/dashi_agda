@@ -276,6 +276,8 @@ record TernaryFiniteFunctionDeltaBasisBoundary : Set where
     all729DeltasSpanEverySchrodingerFunction : Bool
     MonsterRepresentationIdentifiedByThisAlone : Bool
 
+open TernaryFiniteFunctionDeltaBasisBoundary public
+
 canonicalTernaryFiniteFunctionDeltaBasisBoundary :
   TernaryFiniteFunctionDeltaBasisBoundary
 canonicalTernaryFiniteFunctionDeltaBasisBoundary =
