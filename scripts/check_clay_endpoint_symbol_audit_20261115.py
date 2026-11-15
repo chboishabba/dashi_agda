@@ -22,7 +22,14 @@ import subprocess
 import sys
 
 AUDIT = "six_endpoint_exact_symbol_audit_20261115"
+SIX_CLAY = "clay_six_millennium_endpoints_20261115"
 LEDGER = "Docs/roadmaps/ClaySixFrontierABCExactGates20261114.json"
+SIX_CANONICAL_IDS = ("NS", "YM", "RH", "BSD", "HODGE", "PNP")
+NEW_RESEARCH_GATE_IDS = (
+    "R1", "R2", "R3", "R4",
+    "S1", "S2", "S3", "S4", "S5", "S6",
+    "H1", "H2", "H3",
+)
 ROOT = Path(__file__).resolve().parents[1]
 SIMPLE = re.compile(r"^[A-Za-z_][A-Za-z_0-9.]*$")
 STATUS = {
@@ -167,6 +174,63 @@ def main() -> int:
     c2 = next((g for g in manifest if g["id"] == "C2"), None)
     if c2 is None or c2.get("original_typed_R408_R853_real_field_transport_closed") is not False:
         problems.append("C2_ORIGINAL_R408_TYPED_PHYSICAL_WELD_FALSIFIED_OR_MISSING")
+
+    # The historical 15 A-F workstreams are not the six Clay problems.
+    # The expanded scope MUST retain every original gate unchanged and
+    # separately record RH, BSD and Hodge with exact universal endpoints.
+    scope = data.get(SIX_CLAY, {})
+    six = scope.get("six_clay_problems", [])
+    added = scope.get("newly_added_exact_gates", [])
+    original_ids = [g["id"] for g in manifest]
+    new_ids = [g.get("id") for g in added]
+    expanded = original_ids + new_ids
+    if ([e.get("id") for e in six] != list(SIX_CANONICAL_IDS)
+            or len(six) != 6
+            or scope.get("clay_endpoint_theorems_proved_count") != 0
+            or any(e.get("terminal_proved") is not False for e in six)):
+        problems.append("SIX_CLAY_ENDPOINTS_MISSING_OR_FALSELY_PROMOTED")
+    if (new_ids != list(NEW_RESEARCH_GATE_IDS)
+            or len(set(expanded)) != 28
+            or scope.get("all_gate_ids") != expanded
+            or scope.get("new_gate_count") != 13
+            or scope.get("expanded_portfolio_gate_total") != 28):
+        problems.append("SIX_CLAY_NEW_RH_BSD_HODGE_GATE_MANIFEST_INVALID")
+    if (scope.get("legacy_gate_total") != 15
+            or scope.get("legacy_source_or_math_decisions_settled") != 6
+            or scope.get("legacy_active_gates") != 9
+            or scope.get("expanded_portfolio_decisions_settled") != 6
+            or scope.get("expanded_portfolio_active_gates") != 22
+            or scope.get("legacy_completed_ids") != completed
+            or scope.get("legacy_active_ids") != active):
+        problems.append("SIX_CLAY_LEGACY_OR_EXPANDED_GATE_COUNTS_MISMATCH")
+    if (any(g.get("settled") is not False or
+            g.get("status") != "OPEN" or
+            g.get("native_kernel_acceptance") is not False or
+            g.get("original_endpoint_proved") is not False
+            for g in added)):
+        problems.append("NEW_RH_BSD_HODGE_GATE_FALSELY_PROVED")
+    for endpoint in six:
+        owned = endpoint.get("legacy_gates", []) + endpoint.get("new_gates", [])
+        if (not endpoint.get("terminal_gate_ids") or
+                any(gid not in expanded for gid in owned) or
+                any(gid not in expanded for gid in endpoint["terminal_gate_ids"])):
+            problems.append(f"SIX_CLAY_ENDPOINT_OWNER_OR_TERMINAL_INVALID: {endpoint.get('id')}")
+    if not (ROOT / scope.get("source_of_truth_doc", "__missing__")).is_file():
+        problems.append("SIX_CLAY_CANONICAL_SIX_PROBLEM_ROADMAP_MISSING")
+    for g in added:
+        if not g.get("exact_target_terms") or not g.get("original_owner_paths"):
+            problems.append(f"SIX_CLAY_TARGET_OR_OWNER_MISSING {g.get('id')}")
+            continue
+        for path_string in g["original_owner_paths"]:
+            if path_string.endswith(".lean"):
+                if "lean" not in roots:
+                    counts["SIX_CLAY_LEAN_ROOT_NOT_PROVIDED"] += 1
+                    continue
+                owner_root = roots["lean"]
+            else:
+                owner_root = ROOT
+            if not (owner_root / path_string).is_file():
+                problems.append(f"SIX_CLAY_ORIGINAL_OWNER_MISSING {g['id']}: {path_string}")
     for owner, receipt in original.items():
         if (ROOT / owner).is_file():
             actual = git_blob_sha(ROOT, owner)
@@ -243,7 +307,11 @@ def main() -> int:
     print(json.dumps({
         "schema": "six-endpoint-source-audit-run-v1",
         "repo": str(ROOT), "symbol_entries": len(index),
-        "phase_gates": len(audit["gates"]), "classification_counts": counts,
+        "phase_gates": len(audit["gates"]),
+        "clay_problem_count": len(data.get(SIX_CLAY, {}).get("six_clay_problems", [])),
+        "expanded_portfolio_gates": len(audit["gates"]) + len(data.get(SIX_CLAY, {}).get("newly_added_exact_gates", [])),
+        "original_clay_endpoints_proved": data.get(SIX_CLAY, {}).get("clay_endpoint_theorems_proved_count"),
+        "classification_counts": counts,
         "problems": problems,
         "claim": "SOURCE_STRUCTURE_ONLY_NOT_KERNEL_CERTIFICATION",
     }, indent=2, sort_keys=True, default=dict))
