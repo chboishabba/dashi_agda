@@ -139,14 +139,20 @@ def rk3_constraint_step(t0=4/3,dt=.0005,ny=11,nr=6,dy=.012,dr=.025):
         for q in range(3)])
     def rhs(X,t,s,mode):
         return actual_stage(dict(data,U=X[0],P=X[1],M=X[2],t=t),mode,s*G)
+    # Use actual ORIGINAL Poincare-stage clock T=F(t), not arbitrary t offsets.
+    from scipy.optimize import brentq
+    from ksw668_f8_tt_multipole import F
+    T0=F(t0)
+    tmid=brentq(lambda t:F(t)-(T0+dt/2),t0,t0+.2)
+    tnext=brentq(lambda t:F(t)-(T0+dt),t0,t0+.2)
     out={}
     for mode in (3,4):
         X=[data[k].copy() for k in ('U','P','M')]
         one=[x+dt*y for x,y in zip(X,rhs(X,t0,1,mode))]
         two=[.75*x+.25*(a+dt*b) for x,a,b in
-            zip(X,one,rhs(one,t0+.003,1.3,mode))]
+            zip(X,one,rhs(one,tnext,1.3,mode))]
         final=[x/3+2*(a+dt*b)/3 for x,a,b in
-            zip(X,two,rhs(two,t0+.0015,.6,mode))]
+            zip(X,two,rhs(two,tmid,.6,mode))]
         dc=physical_constraint(*final,dy)-original
         out[mode]=dict(interior=float(np.max(abs(dc[:,1:-1,:]))),
                        boundary=float(np.max(abs(dc[:,[0,-1],:]))))
