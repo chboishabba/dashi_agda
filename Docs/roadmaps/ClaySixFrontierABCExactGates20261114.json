@@ -2977,12 +2977,50 @@
         "id": "F1",
         "phase": "F",
         "title": "PNP candidate cost model and actual-halting standard coverage",
-        "status": "MODEL_PROJECTION_SOURCE_WRITTEN",
+        "status": "CLOSED_MATHEMATICAL_STANDARD_TM_PYTHON_PROTOCOL",
         "deliverables": [
           "construct required cost closure and identify genuine textbook P model"
         ],
-        "kernel_acceptance_required_before_full_closure": true,
-        "kernel_acceptance_state": "NOT_OBTAINED_THIS_ROUND"
+        "kernel_acceptance_required_before_full_closure": false,
+        "kernel_acceptance_state": "DEFERRED_UNDER_USER_MATH_PROTOCOL_NOT_NATIVE_AGDA_ACCEPTED",
+        "closed": true,
+        "closure_kind": "CLASSICAL_FINITE_STANDARD_TURING_MACHINE_COST_MODEL_THEOREM_NOT_SAT_LOWER_BOUND",
+        "closure_protocol": "USER_REQUESTED_PYTHON_MATHEMATICAL_NO_AGDA_OR_CI_20261115",
+        "closure_method": "CONSTRUCTIVE_FINITE_ACTUAL_HALTING_TRANSDUCER_COMPOSITION_MODEL_PLUS_VERIFIER_CERTIFICATE_SIZE_CLASSES_AND_SAT_ALPHA_NORMALIZED_ENCODING_EQUIVALENCE",
+        "original_native_kernel_acceptance_required": true,
+        "native_agda_theorem_inhabited": false,
+        "native_kernel_proof_receipt": false,
+        "native_HaltingStandardCostClosure_record_inhabited": false,
+        "full_native_machine_phase_compiler_source_written": false,
+        "original_native_cost_model_same_word_identification_accepted": false,
+        "mathematical_standard_P_model_identification": true,
+        "mathematical_fixed_input_actual_halting_clock": true,
+        "mathematical_cost_model_closure_fields_constructed": true,
+        "source_document": "Docs/roadmaps/ClayF1StandardHaltingCostModel20261115.md",
+        "acceptance_script": "scripts/check_clay_f1_standard_tm_model_20261115.py",
+        "note": "Mathematical constructive standard deterministic TM polynomial closure + SAT-specific encoding normalization under user protocol, not an Agda record proof, and not P != NP. Existing candidate coverage is source-written and NOT duplicated. F2/F3 remain fully open.",
+        "python_mathematical_acceptance": {
+          "literal_source_eight_three_bit_formula_tokens": true,
+          "unary_original_variable_indices_charged": true,
+          "source_roundtrip_formula_tests": 64,
+          "polynomial_composition_integer_test_tuples": 2800,
+          "checker_exec_pass": true,
+          "exact_executed_script_git_blob": "eb7c8b2a87e1727706f596668c283bc66e484b39",
+          "source_encoding_cook_formula_roundtrip_owned": "PNotEqualsNPCookFormulaBinaryCodecExact.agda",
+          "canonical_input_no_clock_padding": "CodedStandardCanonicalInputExact.agda",
+          "guarded_steps_preserved_source_owned": "CodedStandardGuardedExecutionCompilerExact.agda",
+          "physical_map_clock": "a*(1+n)^d",
+          "physical_decider_clock": "b*(1+m)^e",
+          "output_locality": "m<=n+t_map+O(1)",
+          "universal_composed_clock_degree": "3*max(1,d)*max(1,e)",
+          "universal_composed_clock_coefficient": "C*(2+a+b*(2+a)^e)^3",
+          "textbook_P_fixed_source_encoding_equivalence": "CLASSICAL_DETERMINISTIC_SINGLE_VS_FIXED_MULTITAPE_TM_QUADRATIC_SIMULATION",
+          "sat_compact_binary_formula_encoding": "SAT_EQUIVALENCE_VIA_FIRST_OCCURRENCE_ALPHA_RENAMING_QUADRATIC_OUTPUT_SIZE",
+          "arbitrary_index_sensitive_binary_encoding_equivalence_claimed": false,
+          "native_agda_cost_closure_record": false,
+          "native_kernel_check": false,
+          "PNotEqualsNP_proved": false
+        }
       },
       {
         "id": "F2",
@@ -2994,7 +3032,14 @@
           "do not reuse anchored literal no-go as positive proof"
         ],
         "kernel_acceptance_required_before_full_closure": true,
-        "kernel_acceptance_state": "NOT_OBTAINED_THIS_ROUND"
+        "kernel_acceptance_state": "NOT_OBTAINED_THIS_ROUND",
+        "dependency_20261115_F1_math": {
+          "standard_TM_P_cost_model_mathematically_closed": true,
+          "actual_native_halting_cost_closure_record_deferred": true,
+          "same_own_Cook_formula_structural_resource_compiler_constructed": false,
+          "positive_F2_lower_bound_result": false,
+          "F2_closed": false
+        }
       },
       {
         "id": "F3",
@@ -3006,7 +3051,13 @@
           "SATNotInP and PNotEqualsNP in same justified cost model"
         ],
         "kernel_acceptance_required_before_full_closure": true,
-        "kernel_acceptance_state": "NOT_OBTAINED_THIS_ROUND"
+        "kernel_acceptance_state": "NOT_OBTAINED_THIS_ROUND",
+        "dependency_20261115_F1_math": {
+          "standard_TM_P_cost_model_mathematically_closed": true,
+          "universal_polynomial_SAT_decider_failure_constructed": false,
+          "any_original_PNotEqualsNP_endpoint_proved": false,
+          "F3_closed": false
+        }
       }
     ],
     "symbol_index": [
@@ -5399,16 +5450,16 @@
       "E0",
       "E1",
       "E2",
-      "F1",
       "F2",
       "F3"
     ],
-    "active_gate_count": 11,
+    "active_gate_count": 10,
     "completed_gate_ids": [
       "P0",
       "B1",
       "C1",
-      "C2"
+      "C2",
+      "F1"
     ],
     "round_20261115_packet_weld_real_ode_audit": {
       "date": "2026-11-15",
@@ -5467,8 +5518,8 @@
       "independent_kernel_receipt": false,
       "original_endpoint_closed": false
     },
-    "completed_gate_count": 4,
-    "closure_counting_protocol": "FOUR_DECIDED: P0_SOURCE_PREFLIGHT_C1_C2_REAL_FOURIER_MATH_B1_NEGATIVE_REFUTATION; B1_NOT_POSITIVE_SIGNED_PAYMENT; ORIGINAL_NATIVE_KERNEL_COUNTS_UNCHANGED",
+    "completed_gate_count": 5,
+    "closure_counting_protocol": "P0_SOURCE_AUDIT_B1_REFUTED_C1_C2_CLASSICAL_REAL_FOURIER_MATH_F1_CLASSICAL_STANDARD_TM_COST_MODEL_MATH; USER_PYTHON_PROTOCOL_ONLY; ALL_NATIVE_KERNEL_AND_SIX_TERMINAL_CLAY_OPEN",
     "original_native_gate_acceptance_pending_including_c1": true,
     "round_20261115_c1_python_math_closure": {
       "date": "2026-11-15",
@@ -5537,6 +5588,29 @@
       "executed_git_blob": "8efba6064c86c86fb29c5f4cbaac4a5598dfc313",
       "B2_status": "OPEN_AND_BLOCKED_ON_ORIGINAL_UNRESTRICTED_SIGNED_PAYMENT",
       "caution": "A negative resolution of one invalid universal auxiliary estimate does not produce a positive B proof or close NS."
+    },
+    "round_20261115_f1_standard_tm_cost_math": {
+      "date": "2026-11-15",
+      "gate_resolution": "CLOSED_MATHEMATICAL_STANDARD_TM_PYTHON_PROTOCOL",
+      "target": "Actual halting coded standard TM cost closure, map/verifier/certificate-bound, P identification on exact source encoding, SAT renaming equivalence",
+      "original_operational_cost_fields_mathematically_constructed": true,
+      "original_native_Agda_HaltingStandardCostClosure_record": false,
+      "actual_Tm_clock_poly_not_guarded_budget": true,
+      "canonical_input_original_code": true,
+      "exact_formula_source_3bit_codec_owned": true,
+      "source_variable_encoding_unary_distinction_preserved": true,
+      "compact_binary_SAT_equivalence_by_alpha_normalization": true,
+      "all_original_boolean_predicate_encodings_equivalent_claimed": false,
+      "source_encoder_and_standard_coded_TM_same_object_source_owner_read": true,
+      "source_candidate_coverage_already_written_not_reproved": true,
+      "compiler_resource_self_quotation_F2": false,
+      "universal_sat_lower_bound_F3": false,
+      "original_endpoint_closed": false,
+      "source_doc": "Docs/roadmaps/ClayF1StandardHaltingCostModel20261115.md",
+      "checker": "scripts/check_clay_f1_standard_tm_model_20261115.py",
+      "exact_executed_script_git_blob": "eb7c8b2a87e1727706f596668c283bc66e484b39",
+      "source_status": "NON_NATIVE_MATH_PROOF_ONLY; ORIGINAL SOURCE TYPED AGDA RECORD AND MACHINE PHASE COMPILER REMAIN TO WRITE",
+      "remaining_after_round": 10
     }
   }
 }
