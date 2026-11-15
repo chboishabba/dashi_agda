@@ -227,3 +227,27 @@ See [NonlinearCausalPeriodicProof](MadScience369V2NonlinearCausalPeriodicProof20
 **Interpretation:** a first-order relaxing magnetic memory is a special dissipative internal-state model, not all hysteretic materials. A pure delay from a guided electromagnetic wave (bound `<=c`) is a distinct model of *control signal arrival*, not a retarded **mutual magnetic field solution**; simultaneous `L(θ)` remains a quasistatic approximation. The constructed controller has a known feedforward periodic waveform plus an explicitly signed active delayed feedback port, not an experimentally observed V2 controller. The passive 1D line/motor signed-port composition is algebraic, not a complete nonlinear PDE boundary wellposedness result.
 
 **Strict gate accounting is unchanged:** the 16 original P0–P4 declarations retain their stated strong acceptance, even though the one-rate magnetic-memory periodicity and conditional energy-port composition subgates have now closed. Next highest-value mathematical cut: rigorous waveform edge/finite slew plus delay under a *dynamically coupled* cable/motor boundary with verified Poincaré/energy contraction, and Agda kernel acceptance. P3/P4 cannot be discharged without original physical measurements.
+
+
+## 2026-11-15 — sixth maximum cut: dynamically coupled waveguide / nonlinear-memory motor port
+
+**New proof note:** [MadScience369V2WaveguideMotorDynamicPortProof20261115.md](MadScience369V2WaveguideMotorDynamicPortProof20261115.md). **Producer:** `scripts/v2_waveguide_motor_port_maxcut.py`. **Tests:** `tests/test_v2_waveguide_motor_port_maxcut.py`. **Receipt:** `Artifacts/v2_waveguide_motor_acceptance_20261115.json`.
+
+This closes the **discrete dynamic bidirectional port-connection subgate** that was left conditional in the fifth cut. A finite, nonzero-flight waveguide delivers incident waves to the nonlinear reluctance winding; the winding's implicit solved current determines terminal voltage and the reflected wave at the *same signed port*. Feedback is based only on waves already returned to the source. A passive amplitude transmission factor gives explicit nonnegative distributed guide loss. For fixed θ at an electrical step, a nonlinear discrete-gradient solver enforces magnetic-memory/copper dissipation; advancing θ separately meters shaft work at constant magnetic flux and memory.
+
+The exact defined-model identities are `ΔE_line = W_source − W_terminal − D_line` and `ΔU_motor = W_terminal + W_shaft − D_copper − D_memory`; therefore **`Δ(E_line+U_motor)=W_source+W_shaft−D_line−D_copper−D_memory`**. Signed generator and load direction are both supported. The wave identity, including dissipative reflection, is independently checked with exact rational Fractions; nonlinear implicit solves are numerical and conditional on root convergence. The default constructed test's max step ledger residual is ~1e−17 J; no apparatus measurement is implied.
+
+**Causal acceptance:** changing a launch cannot change the remote terminal until after N finite flight steps, or the source's returned wave before 2N. Positive distance and `v_front<=c` are enforced. Unlike a fictitious one-step motor-delay approximation, a 0.5m cable at 0.7c needs 2.3826ns of flight; the default coarse-motor-step line is 12.59km **by construction**. A multi-rate, passive original-device cable/controller weld remains OPEN.
+
+| Sixth-cut exact target | Status | Still-open strict parent |
+|---|---|---|
+| `v2DynamicBidirectionalWaveguideMemoryMotorSignedPort` | CLOSED restricted discrete model + root-residual tests | Maxwell field/motor wellposedness; original terminal geometry |
+| `v2LossyWaveguideMotorDiscreteTotalEnergyBalance` | CLOSED exact finite algebra/Fraction and signed numeric coupled-port check | continuum full PDE/Agda calculus/original energy metrology |
+| `v2CausalSourceMotorReturnRoundTripNonanticipation` | CLOSED constructed N/2N trace tests | actual original cable length/material/probe delay |
+| `v2DiscreteGradientNonlinearMemoryHeatNonnegative` | CLOSED conditional positive dissipative model and numerical step tests | general rate-independent hysteresis, validated flow, switched semiconductor losses |
+| `v2SubNanosecondCableMultiRatePassiveCouplingCertificate` | **OPEN** | passive cross-rate coupling over full mechanical cycle and PWM switching edge spectrum |
+| `v2DynamicCoupledMotorLinePeriodicOrbitGlobalAttractor` | **OPEN** | full joint waveguide/magnetic memory/hybrid active controller periodicity |
+
+**Acceptance:** 41/41 new Python tests and 65/65 combined original V2 baseline + new tests independently completed. The full historical mega-suite was attempted but timed out; do NOT claim complete full-suite replay. Agda kernel remains **NOT RUN** (no compiler in active runtime). The **16 original P0–P4 strong gates remain OPEN**, including original V2 netlist, nonlinear material map, all-port power, shaft torque and metrology. No measured extra energy, universal 369 optimum or Don Smith hardware identity follows.
+
+**Next maximum cut:** mathematical wellposedness and periodic contraction for a dynamically coupled lossy line/memory motor under *finite switched controller* plus passive multirate certification; pinned Agda 2.9 kernel; original V2 physical evidence where available.
