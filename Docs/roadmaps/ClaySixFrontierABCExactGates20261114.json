@@ -2507,7 +2507,12 @@
         "actual_compact_Haar_incidence_weld": false,
         "actual_blocked_Wilson_effective_bare_local_tv": false,
         "actual_R320_selected_marked_decay": false,
-        "actual_same_H_continuum_mass_gap": false
+        "actual_same_H_continuum_mass_gap": false,
+        "selected_distance_time_R304_already_source": true,
+        "actual_selected_R318_R284_carrier_weld_unpaid": true,
+        "selected_limit_order_closure_unpaid": true,
+        "same_H_projection_constructor_already_source": true,
+        "actual_R331_transfer_coordinate_calibration_unpaid": true
       },
       "pnp": {
         "imported_original_complexity_blobs": 172,
@@ -2517,7 +2522,11 @@
         "universal_SAT_lower_bound": false,
         "imported_original_karp_pr1445_blobs": 114,
         "finite_theorem_source_gate": true,
-        "kernel": false
+        "kernel": false,
+        "concrete_coded_model_candidate_coverage_already_constructed": "codedStandardCostCandidateCoverage",
+        "actual_halting_model_candidate_coverage_already_constructed": "haltingCostCandidateCoverage",
+        "cost_model_closure_and_standard_P_identification_unpaid": true,
+        "universal_resource_closing_compiler_unpaid": true
       }
     },
     "executable_source_receipts": {
@@ -2529,7 +2538,8 @@
       "verified_native_kernel": false,
       "lean_r734_sqrt_certificate": "Synthesis/NavierStokesR734PurePlusW2NoGoScalarExact.lean",
       "lean_r734_sqrt_native_kernel": false,
-      "historical_regressions_original_blobs_in_clay": true
+      "historical_regressions_original_blobs_in_clay": true,
+      "all_k_gamma_companion_blobs_identical_donor_1502_clay_1499": true
     },
     "dont_promote": [
       "conditional implication as physical estimate",
@@ -2539,5 +2549,1290 @@
       "source-written Agda/Lean as kernel accepted",
       "Q1 semantics as universal P!=NP lower bound"
     ]
+  },
+  "six_endpoint_exact_symbol_audit_20261115": {
+    "schema": "dashi-clay-source-symbol-audit-v1",
+    "as_of": "2026-11-15",
+    "authoritative_roadmap": "Docs/roadmaps/ClayRecoveredProducersW2NoGoR856SourceMaxCut20261115.md",
+    "audited_heads_input": {
+      "agda_clay": "1cf1d8a447a2c6b71eb0cad551f8cff373ba02d7",
+      "lean_clay": "0060149c16eda3e6e8629d50547c65829ed28016",
+      "toe_agda": "1d3b3eb3d6916bb635faf65874d74ee5bb61df4e"
+    },
+    "rollup_destinations": {
+      "agda_clay_pr": 1499,
+      "lean_clay_pr": 108,
+      "agda_toe_pr": 1393
+    },
+    "endpoint_close_count_kernel_confirmed": 0,
+    "endpoint_close_count_source_original_confirmed": 0,
+    "audit_scope": "Exact named user-provided symbols and semantically equivalent owners on rollup PR heads, default-branch term-search and selected historical donor PRs; non-exhaustive of all historical branches",
+    "proof_status_definitions": {
+      "SOURCE_TERM_UNCHECKED": "actual theorem-body source exists; current exact-head kernel receipt not available",
+      "SOURCE_CANDIDATE_UNCHECKED": "new source proof candidate; exact-head native kernel receipt not available",
+      "CONDITIONAL_RECORD": "record fields not constructed for original physical/model instance",
+      "CONDITIONAL_COMPILER": "theorem takes decisive original physical/cost/semantic premise as argument",
+      "EXPLICIT_OPEN_FLAG": "literal Bool false source metadata, not itself a proof of metatheoretic absence",
+      "OPEN_ENUM_CONSTRUCTOR": "datatype name for unfinished leaf, NOT its proof",
+      "TARGET_NAME_ONLY": "documented contract/search term, not source implementation in identified owner",
+      "TARGET_TYPE_UNINHABITED": "actual target type defined, no unconditional inhabitation established",
+      "COST_MODEL_COVERAGE_CONSTRUCTED": "coverage projection theorem exists for chosen conditional concrete cost model",
+      "KNOWN_NEGATIVE_CONTROL": "counterexample or no-go against auxiliary inference, not endpoint claim",
+      "REFUTED_UNIVERSAL_AUX": "universal auxiliary inequality refuted by original physical counterexample"
+    },
+    "gates": [
+      {
+        "id": "P0",
+        "phase": 0,
+        "title": "Mandatory exact source/PR terms and pinned kernel verification",
+        "status": "SOURCE_AUDITED_KERNEL_UNVERIFIED",
+        "deliverables": [
+          "branch-local literal grep and donor comparison",
+          "pinned Agda/Lean exact-head checks",
+          "trace transitive axioms and negative controls"
+        ]
+      },
+      {
+        "id": "A1",
+        "phase": "A",
+        "title": "NS A actual near/high resolvent and selected signed q",
+        "status": "OPEN",
+        "deliverables": [
+          "PhysicalKernelIdentification near/high for original R3",
+          "selected directional slot and signed Gram source identity/FTC"
+        ]
+      },
+      {
+        "id": "A2",
+        "phase": "A",
+        "title": "NS A physical low/high majorants and continuation",
+        "status": "OPEN",
+        "deliverables": [
+          "inhabit PhysicalEnvelopeInputs actual integrable envelopes",
+          "same original all-data continuation"
+        ]
+      },
+      {
+        "id": "B1",
+        "phase": "B",
+        "title": "NS B true signed four-helicity physical payment",
+        "status": "OPEN",
+        "deliverables": [
+          "actual R820/R825 signed estimate on same R408 trajectory",
+          "no use of refuted unrestricted R734 W2"
+        ]
+      },
+      {
+        "id": "B2",
+        "phase": "B",
+        "title": "NS B W1 and cutoff-uniform continuum continuation",
+        "status": "OPEN",
+        "deliverables": [
+          "original W1",
+          "true signed barrier and uniform continuation"
+        ]
+      },
+      {
+        "id": "C1",
+        "phase": "C",
+        "title": "NS R853 complete real ODE source correspondence",
+        "status": "OPEN",
+        "deliverables": [
+          "R71=R74 original real chart field",
+          "actual Picard solution on original R854 T"
+        ]
+      },
+      {
+        "id": "C2",
+        "phase": "C",
+        "title": "NS R853 selected-rate differentiated envelope",
+        "status": "OPEN",
+        "deliverables": [
+          "same-trajectory literal R853 r(t)",
+          "original weak derivative bound and R856 consumer"
+        ]
+      },
+      {
+        "id": "D1",
+        "phase": "D",
+        "title": "YM R320 selected H1 OR R445 interacting local TV",
+        "status": "OPEN",
+        "deliverables": [
+          "R320 direct selected mixed log derivative estimate or R445 source-target physical TV + cutoff summability"
+        ]
+      },
+      {
+        "id": "D2",
+        "phase": "D",
+        "title": "YM same selected continuum OS/reconstructed Hamiltonian",
+        "status": "OPEN",
+        "deliverables": [
+          "R349 R318/R284 carrier weld",
+          "R342 selected order closure",
+          "R331 actual physical transfer coordinate",
+          "R333 application/completion and nontrivial continuum"
+        ]
+      },
+      {
+        "id": "E0",
+        "phase": "E",
+        "title": "Karp existing B1-B6/D1-D2/E1-E2/F2/G3 exact kernel",
+        "status": "SOURCE_WRITTEN_UNVERIFIED",
+        "deliverables": [
+          "Agda 2.9 kernel-cut and transitive repairs"
+        ]
+      },
+      {
+        "id": "E1",
+        "phase": "E",
+        "title": "Karp entire original N21 bit-TM F1-F4",
+        "status": "OPEN",
+        "deliverables": [
+          "complete instruction table including malformed words",
+          "same-rule step simulation",
+          "all allocation/resource and polynomial physical clock"
+        ]
+      },
+      {
+        "id": "E2",
+        "phase": "E",
+        "title": "Karp actual cost-model NP G2-G4",
+        "status": "OPEN",
+        "deliverables": [
+          "polynomialTimeVerifier",
+          "polynomialCertificateBound",
+          "original typed PR.InNP"
+        ]
+      },
+      {
+        "id": "F1",
+        "phase": "F",
+        "title": "PNP candidate cost model and actual-halting standard coverage",
+        "status": "MODEL_PROJECTION_SOURCE_WRITTEN",
+        "deliverables": [
+          "construct required cost closure and identify genuine textbook P model"
+        ]
+      },
+      {
+        "id": "F2",
+        "phase": "F",
+        "title": "PNP noncircular resource closing or alternative lower bound",
+        "status": "OPEN",
+        "deliverables": [
+          "valid compile on actual own Cook formula",
+          "do not reuse anchored literal no-go as positive proof"
+        ]
+      },
+      {
+        "id": "F3",
+        "phase": "F",
+        "title": "PNP universal polynomial SAT failure and official endpoint",
+        "status": "OPEN",
+        "deliverables": [
+          "∀ D polynomial ∃ φ decision failure",
+          "SATNotInP and PNotEqualsNP in same justified cost model"
+        ]
+      }
+    ],
+    "symbol_index": [
+      {
+        "lane": "NSA",
+        "term": "PhysicalKernelIdentification.nearOrigin",
+        "owner": "DASHI/Physics/Closure/NSClayFacingATwoPhysicalSeamCompilerExact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_RECORD",
+        "consequence": "same original Euclidean resolvent needed"
+      },
+      {
+        "lane": "NSA",
+        "term": "PhysicalKernelIdentification.highFrequency",
+        "owner": "DASHI/Physics/Closure/NSClayFacingATwoPhysicalSeamCompilerExact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_RECORD",
+        "consequence": "same original Euclidean resolvent needed"
+      },
+      {
+        "lane": "NSA",
+        "term": "ClayFacingATwoPhysicalSeams.kernelIdentification",
+        "owner": "DASHI/Physics/Closure/NSClayFacingATwoPhysicalSeamCompilerExact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_RECORD",
+        "consequence": "same original Euclidean resolvent needed"
+      },
+      {
+        "lane": "NSA",
+        "term": "ClayFacingATwoPhysicalSeams.stateMajorantIdentification",
+        "owner": "DASHI/Physics/Closure/NSClayFacingATwoPhysicalSeamCompilerExact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_RECORD",
+        "consequence": "same physical majorant carrier"
+      },
+      {
+        "lane": "NSA",
+        "term": "PhysicalEnvelopeInputs",
+        "owner": "DASHI/Physics/Closure/NSClayFacingATwoPhysicalSeamCompilerExact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_RECORD",
+        "consequence": "same physical majorant carrier"
+      },
+      {
+        "lane": "NSA",
+        "term": "DirectionalSecondMomentSlot.secondMomentIsDirectionalSquare",
+        "owner": "DASHI/Physics/Closure/NSWholeSpaceR3DirectionalSecondMomentQGainExact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_RECORD",
+        "consequence": "selected physical signed second moment required"
+      },
+      {
+        "lane": "NSA",
+        "term": "lagrangeIdentity",
+        "owner": "DASHI/Physics/Closure/NSWholeSpaceR3DirectionalSecondMomentQGainExact.agda",
+        "repo": "agda",
+        "classification": "SOURCE_TERM_UNCHECKED",
+        "consequence": ""
+      },
+      {
+        "lane": "NSA",
+        "term": "directionalSquareBelowNormProduct",
+        "owner": "DASHI/Physics/Closure/NSWholeSpaceR3DirectionalSecondMomentQGainExact.agda",
+        "repo": "agda",
+        "classification": "SOURCE_TERM_UNCHECKED",
+        "consequence": ""
+      },
+      {
+        "lane": "NSA",
+        "term": "directionalSlotCarriesOutputQ",
+        "owner": "DASHI/Physics/Closure/NSWholeSpaceR3DirectionalSecondMomentQGainExact.agda",
+        "repo": "agda",
+        "classification": "SOURCE_TERM_UNCHECKED",
+        "consequence": ""
+      },
+      {
+        "lane": "NSA",
+        "term": "resolventShiftIdentifiedWithOutputRadius",
+        "owner": "DASHI/Physics/Closure/NSWholeSpaceR3DirectionalSecondMomentQGainExact.agda",
+        "repo": "agda",
+        "classification": "EXPLICIT_OPEN_FLAG",
+        "consequence": ""
+      },
+      {
+        "lane": "NSA",
+        "term": "physicalDerivativeSlotIdentificationClosedHere",
+        "owner": "DASHI/Physics/Closure/NSWholeSpaceR3DirectionalSecondMomentQGainExact.agda",
+        "repo": "agda",
+        "classification": "EXPLICIT_OPEN_FLAG",
+        "consequence": ""
+      },
+      {
+        "lane": "NSA",
+        "term": "continuousFTCToDirectionalSlotClosedHere",
+        "owner": "DASHI/Physics/Closure/NSWholeSpaceR3DirectionalSecondMomentQGainExact.agda",
+        "repo": "agda",
+        "classification": "EXPLICIT_OPEN_FLAG",
+        "consequence": ""
+      },
+      {
+        "lane": "NSA",
+        "term": "PhysicalEnvelopeInputs.lowPhysicalMajorant",
+        "owner": "DASHI/Physics/Closure/NSWholeSpacePhysicalMajorantDominationProducerExact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_RECORD",
+        "consequence": "actual integrable low/high envelopes"
+      },
+      {
+        "lane": "NSA",
+        "term": "PhysicalEnvelopeInputs.highPhysicalMajorant",
+        "owner": "DASHI/Physics/Closure/NSWholeSpacePhysicalMajorantDominationProducerExact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_RECORD",
+        "consequence": "actual integrable low/high envelopes"
+      },
+      {
+        "lane": "NSA",
+        "term": "PhysicalEnvelopeInputs.lowDominated",
+        "owner": "DASHI/Physics/Closure/NSWholeSpacePhysicalMajorantDominationProducerExact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_RECORD",
+        "consequence": "actual integrable low/high envelopes"
+      },
+      {
+        "lane": "NSA",
+        "term": "PhysicalEnvelopeInputs.highDominated",
+        "owner": "DASHI/Physics/Closure/NSWholeSpacePhysicalMajorantDominationProducerExact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_RECORD",
+        "consequence": "actual integrable low/high envelopes"
+      },
+      {
+        "lane": "NSA",
+        "term": "PhysicalEnvelopeInputs.lowConvolutionEnvelopeIntegrable",
+        "owner": "DASHI/Physics/Closure/NSWholeSpacePhysicalMajorantDominationProducerExact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_RECORD",
+        "consequence": "actual integrable low/high envelopes"
+      },
+      {
+        "lane": "NSA",
+        "term": "PhysicalEnvelopeInputs.highWeightedConvolutionEnvelopeIntegrable",
+        "owner": "DASHI/Physics/Closure/NSWholeSpacePhysicalMajorantDominationProducerExact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_RECORD",
+        "consequence": "actual integrable low/high envelopes"
+      },
+      {
+        "lane": "NSA",
+        "term": "lowConvolutionEnvelopeIntegrable",
+        "owner": "DASHI/Physics/Closure/NSWholeSpacePhysicalMajorantDominationProducerExact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_RECORD",
+        "consequence": "actual integrable low/high envelopes"
+      },
+      {
+        "lane": "NSA",
+        "term": "highWeightedConvolutionEnvelopeIntegrable",
+        "owner": "DASHI/Physics/Closure/NSWholeSpacePhysicalMajorantDominationProducerExact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_RECORD",
+        "consequence": "actual integrable low/high envelopes"
+      },
+      {
+        "lane": "NSA",
+        "term": "lowEnvelopeAnalyticProducerInhabitedHere",
+        "owner": "DASHI/Physics/Closure/NSWholeSpacePhysicalMajorantDominationProducerExact.agda",
+        "repo": "agda",
+        "classification": "EXPLICIT_OPEN_FLAG",
+        "consequence": ""
+      },
+      {
+        "lane": "NSA",
+        "term": "highEnvelopeAnalyticProducerInhabitedHere",
+        "owner": "DASHI/Physics/Closure/NSWholeSpacePhysicalMajorantDominationProducerExact.agda",
+        "repo": "agda",
+        "classification": "EXPLICIT_OPEN_FLAG",
+        "consequence": ""
+      },
+      {
+        "lane": "NSA",
+        "term": "physicalMajorantDomination",
+        "owner": "DASHI/Physics/Closure/NSWholeSpacePhysicalMajorantDominationProducerExact.agda",
+        "repo": "agda",
+        "classification": "SOURCE_TERM_UNCHECKED",
+        "consequence": ""
+      },
+      {
+        "lane": "NSA",
+        "term": "PhysicalKernelProjectedGramWeld.gramScalarIsProjectedPairGram",
+        "owner": "DASHI/Physics/Closure/NSWholeSpaceR3PhysicalKernelProjectedQWeldExact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_RECORD",
+        "consequence": "same signed off-diagonal Gram, not positivity"
+      },
+      {
+        "lane": "NSA",
+        "term": "ActualPhysicalCompensatedFieldInputs.domination",
+        "owner": "DASHI/Physics/Closure/NSWholeSpaceActualPhysicalCompensatedFieldExact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_RECORD",
+        "consequence": "actual flow instance"
+      },
+      {
+        "lane": "NSA",
+        "term": "ActualPhysicalCompensatedFieldInputs.pointwiseCompensation",
+        "owner": "DASHI/Physics/Closure/NSWholeSpaceActualPhysicalCompensatedFieldExact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_RECORD",
+        "consequence": "actual flow instance"
+      },
+      {
+        "lane": "NSA",
+        "term": "ActualPhysicalCompensatedFieldInputs.globalMajorantIsPhysicalProduct",
+        "owner": "DASHI/Physics/Closure/NSWholeSpaceActualPhysicalCompensatedFieldExact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_RECORD",
+        "consequence": "actual flow instance"
+      },
+      {
+        "lane": "NSB",
+        "term": "unrestricted universal R734/R735 W2",
+        "owner": "DASHI/Physics/Closure/NSTriadKNR650SharedWeightedQuarticCutRound735Exact.agda",
+        "repo": "agda",
+        "classification": "REFUTED_UNIVERSAL_AUX",
+        "consequence": "original six-mode source physical counterexample #1271"
+      },
+      {
+        "lane": "NSB",
+        "term": "R735 W1",
+        "owner": "DASHI/Physics/Closure/NSTriadKNR650SharedWeightedQuarticCutRound735Exact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_COMPILER",
+        "consequence": "W2 unrestricted premise false"
+      },
+      {
+        "lane": "NSB",
+        "term": "R736 W2",
+        "owner": "DASHI/Physics/Closure/NSTriadKNR650SharedWeightedQuarticCutRound735Exact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_COMPILER",
+        "consequence": "W2 unrestricted premise false"
+      },
+      {
+        "lane": "NSB",
+        "term": "round820CompleteSignedInequalityClosed",
+        "owner": "DASHI/Physics/Closure/NSTriadKNR650CompleteSignedW2HelicityRateRound820Exact.agda",
+        "repo": "agda",
+        "classification": "EXPLICIT_OPEN_FLAG",
+        "consequence": ""
+      },
+      {
+        "lane": "NSB",
+        "term": "round820W1Closed",
+        "owner": "DASHI/Physics/Closure/NSTriadKNR650CompleteSignedW2HelicityRateRound820Exact.agda",
+        "repo": "agda",
+        "classification": "EXPLICIT_OPEN_FLAG",
+        "consequence": ""
+      },
+      {
+        "lane": "NSB",
+        "term": "R820 complete four-helicity rate identity",
+        "owner": "DASHI/Physics/Closure/NSTriadKNR650CompleteSignedW2HelicityRateRound820Exact.agda",
+        "repo": "agda",
+        "classification": "SOURCE_TERM_UNCHECKED",
+        "consequence": ""
+      },
+      {
+        "lane": "NSB",
+        "term": "round821SignedAnalyticPaymentClosed",
+        "owner": "DASHI/Physics/Closure/NSTriadKNR650CompleteSignedFourHelicityBarrierRound821Exact.agda",
+        "repo": "agda",
+        "classification": "EXPLICIT_OPEN_FLAG",
+        "consequence": ""
+      },
+      {
+        "lane": "NSB",
+        "term": "round821W1AnalyticPaymentClosed",
+        "owner": "DASHI/Physics/Closure/NSTriadKNR650CompleteSignedFourHelicityBarrierRound821Exact.agda",
+        "repo": "agda",
+        "classification": "EXPLICIT_OPEN_FLAG",
+        "consequence": ""
+      },
+      {
+        "lane": "NSB",
+        "term": "round821SmoothContinuationClosed",
+        "owner": "DASHI/Physics/Closure/NSTriadKNR650CompleteSignedFourHelicityBarrierRound821Exact.agda",
+        "repo": "agda",
+        "classification": "EXPLICIT_OPEN_FLAG",
+        "consequence": ""
+      },
+      {
+        "lane": "NSB",
+        "term": "round825SignedReserveProved",
+        "owner": "DASHI/Physics/Closure/NSTriadKNR650PhysicalReserveFeasibilityRound825Exact.agda",
+        "repo": "agda",
+        "classification": "EXPLICIT_OPEN_FLAG",
+        "consequence": ""
+      },
+      {
+        "lane": "NSB",
+        "term": "round825W1Proved",
+        "owner": "DASHI/Physics/Closure/NSTriadKNR650PhysicalReserveFeasibilityRound825Exact.agda",
+        "repo": "agda",
+        "classification": "EXPLICIT_OPEN_FLAG",
+        "consequence": ""
+      },
+      {
+        "lane": "NSB",
+        "term": "round825ContinuumContinuationProved",
+        "owner": "DASHI/Physics/Closure/NSTriadKNR650PhysicalReserveFeasibilityRound825Exact.agda",
+        "repo": "agda",
+        "classification": "EXPLICIT_OPEN_FLAG",
+        "consequence": ""
+      },
+      {
+        "lane": "NSB",
+        "term": "round825StrictPhysicalCounterexampleConstructed",
+        "owner": "DASHI/Physics/Closure/NSTriadKNR650PhysicalReserveFeasibilityRound825Exact.agda",
+        "repo": "agda",
+        "classification": "EXPLICIT_OPEN_FLAG",
+        "consequence": ""
+      },
+      {
+        "lane": "NSB",
+        "term": "decideActualReserve",
+        "owner": "DASHI/Physics/Closure/NSTriadKNR650PhysicalReserveFeasibilityRound825Exact.agda",
+        "repo": "agda",
+        "classification": "SOURCE_TERM_UNCHECKED",
+        "consequence": ""
+      },
+      {
+        "lane": "NSB",
+        "term": "physical reserve grading R824/R823",
+        "owner": "DASHI/Physics/Closure/NSTriadKNR650PhysicalReserveFeasibilityRound825Exact.agda",
+        "repo": "agda",
+        "classification": "SOURCE_TERM_UNCHECKED",
+        "consequence": ""
+      },
+      {
+        "lane": "NSR853",
+        "term": "round74PhysicalRHSAgreesWithFiniteChartPolynomial",
+        "owner": "DASHI/Physics/Closure/NSTriadKNFiniteRationalSlotAssignmentBridgeRound74Exact.agda",
+        "repo": "agda",
+        "classification": "EXPLICIT_OPEN_FLAG",
+        "consequence": ""
+      },
+      {
+        "lane": "NSR853",
+        "term": "round74RealPicardLindelofAppliedToFiniteChart",
+        "owner": "DASHI/Physics/Closure/NSTriadKNFiniteRationalSlotAssignmentBridgeRound74Exact.agda",
+        "repo": "agda",
+        "classification": "EXPLICIT_OPEN_FLAG",
+        "consequence": ""
+      },
+      {
+        "lane": "NSR853",
+        "term": "RealODELeaf.physicalRHSToFiniteRealQuadraticField",
+        "owner": "DASHI/Physics/Closure/NSTriadKNR650Rational345RealODEMaxCutRound833Exact.agda",
+        "repo": "agda",
+        "classification": "OPEN_ENUM_CONSTRUCTOR",
+        "consequence": ""
+      },
+      {
+        "lane": "NSR853",
+        "term": "RealODELeaf.selectedR828BoundsAndRateTransport",
+        "owner": "DASHI/Physics/Closure/NSTriadKNR650Rational345RealODEMaxCutRound833Exact.agda",
+        "repo": "agda",
+        "classification": "OPEN_ENUM_CONSTRUCTOR",
+        "consequence": ""
+      },
+      {
+        "lane": "NSR853",
+        "term": "physicalRHSToFiniteRealQuadraticField",
+        "owner": "DASHI/Physics/Closure/NSTriadKNR650Rational345RealODEMaxCutRound833Exact.agda",
+        "repo": "agda",
+        "classification": "OPEN_ENUM_CONSTRUCTOR",
+        "consequence": ""
+      },
+      {
+        "lane": "NSR853",
+        "term": "selectedR828BoundsAndRateTransport",
+        "owner": "DASHI/Physics/Closure/NSTriadKNR650Rational345RealODEMaxCutRound833Exact.agda",
+        "repo": "agda",
+        "classification": "OPEN_ENUM_CONSTRUCTOR",
+        "consequence": ""
+      },
+      {
+        "lane": "NSR853",
+        "term": "round853RealTrajectoryCarrierWeldClosed",
+        "owner": "DASHI/Physics/Closure/NSTriadKNR650CanonicalSelectedRateNormalFormRound853Exact.agda",
+        "repo": "agda",
+        "classification": "EXPLICIT_OPEN_FLAG",
+        "consequence": ""
+      },
+      {
+        "lane": "NSR853",
+        "term": "round853R823DecisionClosed",
+        "owner": "DASHI/Physics/Closure/NSTriadKNR650CanonicalSelectedRateNormalFormRound853Exact.agda",
+        "repo": "agda",
+        "classification": "EXPLICIT_OPEN_FLAG",
+        "consequence": ""
+      },
+      {
+        "lane": "NSR853",
+        "term": "R853 selected signed rate normal form",
+        "owner": "DASHI/Physics/Closure/NSTriadKNR650CanonicalSelectedRateNormalFormRound853Exact.agda",
+        "repo": "agda",
+        "classification": "SOURCE_TERM_UNCHECKED",
+        "consequence": ""
+      },
+      {
+        "lane": "NSR853",
+        "term": "originalR71RealGalerkinLocalSolution",
+        "owner": "Docs/roadmaps/NSR71R853R854ShearAndSameSourceMaxCut20261114.md",
+        "repo": "agda",
+        "classification": "TARGET_NAME_ONLY",
+        "consequence": ""
+      },
+      {
+        "lane": "NSR853",
+        "term": "originalR853SignedRateAlongGalerkinSolution",
+        "owner": "Docs/roadmaps/NSR71R853R854ShearAndSameSourceMaxCut20261114.md",
+        "repo": "agda",
+        "classification": "TARGET_NAME_ONLY",
+        "consequence": ""
+      },
+      {
+        "lane": "NSR853",
+        "term": "originalR854PhysicalRateEnvelope",
+        "owner": "Docs/roadmaps/NSR71R853R854ShearAndSameSourceMaxCut20261114.md",
+        "repo": "agda",
+        "classification": "TARGET_NAME_ONLY",
+        "consequence": ""
+      },
+      {
+        "lane": "NSR853",
+        "term": "originalR853RateDerivativeBoundAtMostWeakBudget855",
+        "owner": "DASHI/Physics/Closure/NSTriadKNR650Rational345RelaxedEnvelopeRound855Exact.agda",
+        "repo": "agda",
+        "classification": "TARGET_NAME_ONLY",
+        "consequence": ""
+      },
+      {
+        "lane": "NSR853",
+        "term": "pointwiseOptimalIntegerSafe856",
+        "owner": "DASHI/Physics/Closure/NSTriadKNR650Rational345OptimalEnvelopeRound856Exact.agda",
+        "repo": "agda",
+        "classification": "SOURCE_CANDIDATE_UNCHECKED",
+        "consequence": "last is explicit false marker, not physical result"
+      },
+      {
+        "lane": "NSR853",
+        "term": "integratedOptimalIntegerSafe856",
+        "owner": "DASHI/Physics/Closure/NSTriadKNR650Rational345OptimalEnvelopeRound856Exact.agda",
+        "repo": "agda",
+        "classification": "SOURCE_CANDIDATE_UNCHECKED",
+        "consequence": "last is explicit false marker, not physical result"
+      },
+      {
+        "lane": "NSR853",
+        "term": "physicalR853RateAlongActualCurveClosed856",
+        "owner": "DASHI/Physics/Closure/NSTriadKNR650Rational345OptimalEnvelopeRound856Exact.agda",
+        "repo": "agda",
+        "classification": "SOURCE_CANDIDATE_UNCHECKED",
+        "consequence": "last is explicit false marker, not physical result"
+      },
+      {
+        "lane": "NSR853",
+        "term": "nsR856LargestPointwiseCapNegative",
+        "owner": "Synthesis/NavierStokesR855SharpRealTimeConditionalExact.lean",
+        "repo": "lean",
+        "classification": "SOURCE_CANDIDATE_UNCHECKED",
+        "consequence": "Lean 4.28 pending"
+      },
+      {
+        "lane": "NSR853",
+        "term": "nsR856LargestIntegratedAffineNegative",
+        "owner": "Synthesis/NavierStokesR855SharpRealTimeConditionalExact.lean",
+        "repo": "lean",
+        "classification": "SOURCE_CANDIDATE_UNCHECKED",
+        "consequence": "Lean 4.28 pending"
+      },
+      {
+        "lane": "NSR853",
+        "term": "nsR856RateNegFromOriginalEnvelope",
+        "owner": "Synthesis/NavierStokesR855SharpRealTimeConditionalExact.lean",
+        "repo": "lean",
+        "classification": "SOURCE_CANDIDATE_UNCHECKED",
+        "consequence": "Lean 4.28 pending"
+      },
+      {
+        "lane": "NSR853",
+        "term": "nsR734PurePlusPcritStrictLower",
+        "owner": "Synthesis/NavierStokesR734PurePlusW2NoGoScalarExact.lean",
+        "repo": "lean",
+        "classification": "SOURCE_CANDIDATE_UNCHECKED",
+        "consequence": "scalar negative control not literal source weld"
+      },
+      {
+        "lane": "YM",
+        "term": "DirectSelectedT5MarkedDecayPayment.mixedDerivativeMagnitudeBelowSelectedShell",
+        "owner": "DASHI/Physics/YangMills/BalabanT5DirectSelectedMarkedDecayRound320Exact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_RECORD",
+        "consequence": ""
+      },
+      {
+        "lane": "YM",
+        "term": "mixedDerivativeMagnitudeBelowSelectedShell",
+        "owner": "DASHI/Physics/YangMills/BalabanT5DirectSelectedMarkedDecayRound320Exact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_RECORD",
+        "consequence": ""
+      },
+      {
+        "lane": "YM",
+        "term": "round320DirectSelectedMarkedDecayLevel",
+        "owner": "DASHI/Physics/YangMills/BalabanT5DirectSelectedMarkedDecayRound320Exact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_COMPILER",
+        "consequence": ""
+      },
+      {
+        "lane": "YM",
+        "term": "literalSelectedJMagnitudeBelowShell",
+        "owner": "DASHI/Physics/YangMills/BalabanT5DirectSelectedMarkedDecayRound320Exact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_COMPILER",
+        "consequence": ""
+      },
+      {
+        "lane": "YM",
+        "term": "SelectedT5CMP116AuthorityApplication",
+        "owner": "DASHI/Physics/YangMills/BalabanCMP116PublishedAuthoritySelectedT5ApplicationExact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_RECORD",
+        "consequence": ""
+      },
+      {
+        "lane": "YM",
+        "term": "RouteSH1ModeSelectedInputs.h1",
+        "owner": "DASHI/Physics/YangMills/YMClayRouteSH1ModeSelectedContinuumUpperExact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_RECORD",
+        "consequence": ""
+      },
+      {
+        "lane": "YM",
+        "term": "RouteSH1ModeSelectedInputs.selectedPairDistanceIsTime",
+        "owner": "DASHI/Physics/YangMills/YMClayRouteSH1ModeSelectedContinuumUpperExact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_RECORD",
+        "consequence": ""
+      },
+      {
+        "lane": "YM",
+        "term": "RouteSH1ModeSelectedInputs.selectedLimitUpperClosure",
+        "owner": "DASHI/Physics/YangMills/YMClayRouteSH1ModeSelectedContinuumUpperExact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_RECORD",
+        "consequence": ""
+      },
+      {
+        "lane": "YM",
+        "term": "SelectedDistanceCarrierWeld.r318DistanceIsR284Distance",
+        "owner": "DASHI/Physics/YangMills/BalabanSelectedDistanceCarrierWeldRound349Exact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_RECORD",
+        "consequence": ""
+      },
+      {
+        "lane": "YM",
+        "term": "selectedR318DistanceIsTime",
+        "owner": "DASHI/Physics/YangMills/BalabanSelectedDistanceCarrierWeldRound349Exact.agda",
+        "repo": "agda",
+        "classification": "SOURCE_TERM_UNCHECKED",
+        "consequence": "R304 already gives selected pair distance equals time"
+      },
+      {
+        "lane": "YM",
+        "term": "R342.SelectedLimitUpperClosure",
+        "owner": "DASHI/Physics/YangMills/YMClayRouteSSelectedLimitClosureExact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_COMPILER",
+        "consequence": "the order closure inhabitant remains required"
+      },
+      {
+        "lane": "YM",
+        "term": "r310UpperClosureToTerminalSelectedClosure",
+        "owner": "DASHI/Physics/YangMills/YMClayRouteSSelectedLimitClosureExact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_COMPILER",
+        "consequence": "the order closure inhabitant remains required"
+      },
+      {
+        "lane": "YM",
+        "term": "r330PackagingToTerminalSelectedClosure",
+        "owner": "DASHI/Physics/YangMills/YMClayRouteSSelectedLimitClosureExact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_COMPILER",
+        "consequence": "the order closure inhabitant remains required"
+      },
+      {
+        "lane": "YM",
+        "term": "DirectSourceOSMassGapInputs.application",
+        "owner": "DASHI/Physics/YangMills/YMClayDirectSourceOSMassGapFrontierExact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_RECORD",
+        "consequence": ""
+      },
+      {
+        "lane": "YM",
+        "term": "DirectSourceOSMassGapInputs.completion",
+        "owner": "DASHI/Physics/YangMills/YMClayDirectSourceOSMassGapFrontierExact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_RECORD",
+        "consequence": ""
+      },
+      {
+        "lane": "YM",
+        "term": "DirectSourceOSMassGapInputs",
+        "owner": "DASHI/Physics/YangMills/YMClayDirectSourceOSMassGapFrontierExact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_RECORD",
+        "consequence": ""
+      },
+      {
+        "lane": "YM",
+        "term": "PreferredSameHamiltonianTransfer.transfer",
+        "owner": "DASHI/Physics/YangMills/YangMillsPreferredSameHamiltonianTransferRound577Exact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_RECORD",
+        "consequence": "physical transfer coordinate still required"
+      },
+      {
+        "lane": "YM",
+        "term": "asHistoricalR311",
+        "owner": "DASHI/Physics/YangMills/YangMillsPreferredSameHamiltonianTransferRound577Exact.agda",
+        "repo": "agda",
+        "classification": "SOURCE_TERM_UNCHECKED",
+        "consequence": "postHocHamiltonianEqualityRequired=false means no extra equality premise"
+      },
+      {
+        "lane": "YM",
+        "term": "selectedHamiltonianIsReconstructedByConstruction",
+        "owner": "DASHI/Physics/YangMills/YangMillsPreferredSameHamiltonianTransferRound577Exact.agda",
+        "repo": "agda",
+        "classification": "SOURCE_TERM_UNCHECKED",
+        "consequence": "postHocHamiltonianEqualityRequired=false means no extra equality premise"
+      },
+      {
+        "lane": "YM",
+        "term": "postHocHamiltonianEqualityRequired",
+        "owner": "DASHI/Physics/YangMills/YangMillsPreferredSameHamiltonianTransferRound577Exact.agda",
+        "repo": "agda",
+        "classification": "SOURCE_TERM_UNCHECKED",
+        "consequence": "postHocHamiltonianEqualityRequired=false means no extra equality premise"
+      },
+      {
+        "lane": "YM",
+        "term": "originalR445F19P0LocalizedMarginalSameSource",
+        "owner": "Docs/physics/YMClayR445WeightedExteriorInfluenceMaxCut20261114.md",
+        "repo": "agda",
+        "classification": "TARGET_NAME_ONLY",
+        "consequence": ""
+      },
+      {
+        "lane": "YM",
+        "term": "originalR445TargetCountertermNormalizedDensity",
+        "owner": "Docs/physics/YMClayR445WeightedExteriorInfluenceMaxCut20261114.md",
+        "repo": "agda",
+        "classification": "TARGET_NAME_ONLY",
+        "consequence": ""
+      },
+      {
+        "lane": "YM",
+        "term": "originalR445PhysicalConditionalKernelDisintegration",
+        "owner": "Docs/physics/YMClayR445WeightedExteriorInfluenceMaxCut20261114.md",
+        "repo": "agda",
+        "classification": "TARGET_NAME_ONLY",
+        "consequence": ""
+      },
+      {
+        "lane": "YM",
+        "term": "originalR445ActualConditionalKernelTVUniform",
+        "owner": "Docs/physics/YMClayR445WeightedExteriorInfluenceMaxCut20261114.md",
+        "repo": "agda",
+        "classification": "TARGET_NAME_ONLY",
+        "consequence": ""
+      },
+      {
+        "lane": "YM",
+        "term": "originalR445PhysicalExteriorInfluenceSiteBound",
+        "owner": "Docs/physics/YMClayR445WeightedExteriorInfluenceMaxCut20261114.md",
+        "repo": "agda",
+        "classification": "TARGET_NAME_ONLY",
+        "consequence": ""
+      },
+      {
+        "lane": "YM",
+        "term": "originalR445ExteriorDisagreementCoupling",
+        "owner": "Docs/physics/YMClayR445WeightedExteriorInfluenceMaxCut20261114.md",
+        "repo": "agda",
+        "classification": "TARGET_NAME_ONLY",
+        "consequence": ""
+      },
+      {
+        "lane": "YM",
+        "term": "originalR445ActualLocalizedEffectiveTargetTVBound",
+        "owner": "Docs/physics/YMClayR445WeightedExteriorInfluenceMaxCut20261114.md",
+        "repo": "agda",
+        "classification": "TARGET_NAME_ONLY",
+        "consequence": ""
+      },
+      {
+        "lane": "YM",
+        "term": "originalR445LocalTVCutoffUniformSummable",
+        "owner": "Docs/physics/YMClayR445WeightedExteriorInfluenceMaxCut20261114.md",
+        "repo": "agda",
+        "classification": "TARGET_NAME_ONLY",
+        "consequence": ""
+      },
+      {
+        "lane": "YM",
+        "term": "YMClayR445OneLocalTVThreeMomentsSourceWeldExact",
+        "owner": "DASHI/Physics/YangMills/YMClayR445OneLocalTVThreeMomentsSourceWeldExact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_COMPILER",
+        "consequence": ""
+      },
+      {
+        "lane": "YM",
+        "term": "exteriorFactorCancels",
+        "owner": "Synthesis/YMFiniteRangeGibbsExteriorCancellationExact.lean",
+        "repo": "lean",
+        "classification": "SOURCE_CANDIDATE_UNCHECKED",
+        "consequence": "finite discrete Gibbs not SU(N) blocked Wilson"
+      },
+      {
+        "lane": "YM",
+        "term": "farExteriorSiteHasZeroLocalInfluence",
+        "owner": "Synthesis/YMFiniteRangeGibbsExteriorCancellationExact.lean",
+        "repo": "lean",
+        "classification": "SOURCE_CANDIDATE_UNCHECKED",
+        "consequence": "finite discrete Gibbs not SU(N) blocked Wilson"
+      },
+      {
+        "lane": "KARP",
+        "term": "nativeBinaryStrictAfterSameOriginal",
+        "owner": "DASHI/Mathematics/Complexity/Karp21NativeBinaryStrictAfterOriginalExact.agda",
+        "repo": "agda",
+        "classification": "SOURCE_TERM_UNCHECKED",
+        "consequence": ""
+      },
+      {
+        "lane": "KARP",
+        "term": "nativeBinaryValidRawEdgesSameOriginal",
+        "owner": "DASHI/Mathematics/Complexity/Karp21NativeBinaryValidRawEdgesOriginalExact.agda",
+        "repo": "agda",
+        "classification": "SOURCE_TERM_UNCHECKED",
+        "consequence": ""
+      },
+      {
+        "lane": "KARP",
+        "term": "nativeBinaryGraphHeadersSameOriginal",
+        "owner": "DASHI/Mathematics/Complexity/Karp21NativeBinaryHeaderBudgetExact.agda",
+        "repo": "agda",
+        "classification": "SOURCE_TERM_UNCHECKED",
+        "consequence": ""
+      },
+      {
+        "lane": "KARP",
+        "term": "nativeBinaryBudgetedHeadersSameOriginal",
+        "owner": "DASHI/Mathematics/Complexity/Karp21NativeBinaryHeaderBudgetExact.agda",
+        "repo": "agda",
+        "classification": "SOURCE_TERM_UNCHECKED",
+        "consequence": ""
+      },
+      {
+        "lane": "KARP",
+        "term": "nativeWholeBinaryGraphWordSameOriginal",
+        "owner": "DASHI/Mathematics/Complexity/Karp21NativeWholeBinaryGraphOriginalExact.agda",
+        "repo": "agda",
+        "classification": "SOURCE_TERM_UNCHECKED",
+        "consequence": ""
+      },
+      {
+        "lane": "KARP",
+        "term": "nativeWholeBinaryVerifierSameOriginalFinFree",
+        "owner": "DASHI/Mathematics/Complexity/Karp21NativeWholeBinaryVerifierOriginalExact.agda",
+        "repo": "agda",
+        "classification": "SOURCE_TERM_UNCHECKED",
+        "consequence": ""
+      },
+      {
+        "lane": "KARP",
+        "term": "nativeCanonicalTypedSparseVerifierSameWord",
+        "owner": "DASHI/Mathematics/Complexity/Karp21NativeWholeBinaryTypedAcceptanceExact.agda",
+        "repo": "agda",
+        "classification": "SOURCE_TERM_UNCHECKED",
+        "consequence": ""
+      },
+      {
+        "lane": "KARP",
+        "term": "initialBinaryWholeWordState",
+        "owner": "DASHI/Mathematics/Complexity/Karp21NativeWholeBinaryPriorityMachineExact.agda",
+        "repo": "agda",
+        "classification": "SOURCE_TERM_UNCHECKED",
+        "consequence": ""
+      },
+      {
+        "lane": "KARP",
+        "term": "karpNativeBinaryFirstEnabledSameVerifierStep",
+        "owner": "DASHI/Mathematics/Complexity/Karp21NativeWholeBinaryPriorityMachineExact.agda",
+        "repo": "agda",
+        "classification": "SOURCE_TERM_UNCHECKED",
+        "consequence": ""
+      },
+      {
+        "lane": "KARP",
+        "term": "karpFractranTraceRebuildExact",
+        "owner": "DASHI/Mathematics/Complexity/Karp21NativeWholeBinaryTraceRebuildExact.agda",
+        "repo": "agda",
+        "classification": "SOURCE_TERM_UNCHECKED",
+        "consequence": ""
+      },
+      {
+        "lane": "KARP",
+        "term": "Karp21NativeGammaAllLengthCompositePhysical",
+        "owner": "DASHI/Mathematics/Complexity/Karp21NativeGammaAllLengthCompositePhysicalExact.agda",
+        "repo": "agda",
+        "classification": "SOURCE_TERM_UNCHECKED",
+        "consequence": "5 original blobs match #1502 in #1499"
+      },
+      {
+        "lane": "KARP",
+        "term": "physical all-k gamma token",
+        "owner": "DASHI/Mathematics/Complexity/Karp21NativeGammaAllLengthCompositePhysicalExact.agda",
+        "repo": "agda",
+        "classification": "SOURCE_TERM_UNCHECKED",
+        "consequence": "5 original blobs match #1502 in #1499"
+      },
+      {
+        "lane": "KARP",
+        "term": "actualN21FirstEnabledLivePayloadFitsOriginalWords",
+        "owner": "DASHI/Mathematics/Complexity/Karp21NativeLivePayloadPotentialExact.agda",
+        "repo": "agda",
+        "classification": "SOURCE_TERM_UNCHECKED",
+        "consequence": "partial live payload, not full allocation"
+      },
+      {
+        "lane": "KARP",
+        "term": "nativeSuccessfulSparseCursorConsumesExactlyTwoBitsPerEdge",
+        "owner": "DASHI/Mathematics/Complexity/Karp21NativeOriginalSparseCertificateBoundExact.agda",
+        "repo": "agda",
+        "classification": "SOURCE_TERM_UNCHECKED",
+        "consequence": "source bit length, not typed cost"
+      },
+      {
+        "lane": "KARP",
+        "term": "actualN21AcceptedCertificateBoundByOriginalGraphWord",
+        "owner": "DASHI/Mathematics/Complexity/Karp21NativeOriginalSparseCertificateBoundExact.agda",
+        "repo": "agda",
+        "classification": "SOURCE_TERM_UNCHECKED",
+        "consequence": "source bit length, not typed cost"
+      },
+      {
+        "lane": "KARP",
+        "term": "originalBitTapeStepSimulatesN21Rule",
+        "owner": "Docs/roadmaps/Karp21ActualMaxCutBlockers20261109.md",
+        "repo": "agda",
+        "classification": "TARGET_NAME_ONLY",
+        "consequence": ""
+      },
+      {
+        "lane": "KARP",
+        "term": "nativeWholeGraphLiveAllocationBound",
+        "owner": "Docs/roadmaps/Karp21ActualMaxCutBlockers20261109.md",
+        "repo": "agda",
+        "classification": "TARGET_NAME_ONLY",
+        "consequence": ""
+      },
+      {
+        "lane": "KARP",
+        "term": "karpFractranBitMachineClockPolynomial",
+        "owner": "Docs/roadmaps/Karp21ActualMaxCutBlockers20261109.md",
+        "repo": "agda",
+        "classification": "TARGET_NAME_ONLY",
+        "consequence": ""
+      },
+      {
+        "lane": "KARP",
+        "term": "originalN21PolynomialVerifierClock",
+        "owner": "Docs/roadmaps/Karp21ActualMaxCutBlockers20261109.md",
+        "repo": "agda",
+        "classification": "TARGET_NAME_ONLY",
+        "consequence": ""
+      },
+      {
+        "lane": "KARP",
+        "term": "PR.polynomialTimeVerifier",
+        "owner": "DASHI/Mathematics/Complexity/Karp21SparseGraphWordNPBoundaryExact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_COMPILER",
+        "consequence": "actual cost-model fields required"
+      },
+      {
+        "lane": "KARP",
+        "term": "PR.polynomialCertificateBound",
+        "owner": "DASHI/Mathematics/Complexity/Karp21SparseGraphWordNPBoundaryExact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_COMPILER",
+        "consequence": "actual cost-model fields required"
+      },
+      {
+        "lane": "KARP",
+        "term": "karpWeightedMaxCutInNPFromMachineReceipts",
+        "owner": "DASHI/Mathematics/Complexity/Karp21SparseGraphWordNPBoundaryExact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_COMPILER",
+        "consequence": "actual cost-model fields required"
+      },
+      {
+        "lane": "KARP",
+        "term": "originalN21InNP",
+        "owner": "Docs/roadmaps/Karp21ActualMaxCutBlockers20261109.md",
+        "repo": "agda",
+        "classification": "TARGET_NAME_ONLY",
+        "consequence": "latter must be located in exact donor before marking source absent"
+      },
+      {
+        "lane": "KARP",
+        "term": "nativeBinaryFirstEnabledNonterminalSameOriginalRawStep",
+        "owner": "Docs/roadmaps/Karp21ActualMaxCutBlockers20261109.md",
+        "repo": "agda",
+        "classification": "TARGET_NAME_ONLY",
+        "consequence": "latter must be located in exact donor before marking source absent"
+      },
+      {
+        "lane": "PNP",
+        "term": "StandardPolynomialCandidateCoverage.realize",
+        "owner": "DASHI/Mathematics/Complexity/PNotEqualsNPStandardMachineMaxCutClosureExact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_RECORD",
+        "consequence": ""
+      },
+      {
+        "lane": "PNP",
+        "term": "ResourceClosingCompiler.compile",
+        "owner": "DASHI/Mathematics/Complexity/PNotEqualsNPStandardMachineMaxCutClosureExact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_RECORD",
+        "consequence": ""
+      },
+      {
+        "lane": "PNP",
+        "term": "codedStandardCostCandidateCoverage",
+        "owner": "DASHI/Mathematics/Complexity/CodedStandardPolynomialCostModelExact.agda",
+        "repo": "agda",
+        "classification": "COST_MODEL_COVERAGE_CONSTRUCTED",
+        "consequence": "subject to CodedStandardCostClosure fields"
+      },
+      {
+        "lane": "PNP",
+        "term": "codedStandardPolynomialCostModel",
+        "owner": "DASHI/Mathematics/Complexity/CodedStandardPolynomialCostModelExact.agda",
+        "repo": "agda",
+        "classification": "COST_MODEL_COVERAGE_CONSTRUCTED",
+        "consequence": "subject to CodedStandardCostClosure fields"
+      },
+      {
+        "lane": "PNP",
+        "term": "haltingCostCandidateCoverage",
+        "owner": "DASHI/Mathematics/Complexity/CodedStandardHaltingPolynomialCostModelExact.agda",
+        "repo": "agda",
+        "classification": "COST_MODEL_COVERAGE_CONSTRUCTED",
+        "consequence": "subject to HaltingStandardCostClosure fields and standard P model identification"
+      },
+      {
+        "lane": "PNP",
+        "term": "haltingStandardPolynomialCostModel",
+        "owner": "DASHI/Mathematics/Complexity/CodedStandardHaltingPolynomialCostModelExact.agda",
+        "repo": "agda",
+        "classification": "COST_MODEL_COVERAGE_CONSTRUCTED",
+        "consequence": "subject to HaltingStandardCostClosure fields and standard P model identification"
+      },
+      {
+        "lane": "PNP",
+        "term": "StructuralResourceClosingFixedProgramCompilation",
+        "owner": "DASHI/Mathematics/Complexity/PNotEqualsNPStructuralResourceClosingCompilerExact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_RECORD",
+        "consequence": ""
+      },
+      {
+        "lane": "PNP",
+        "term": "VirtualSelfQuotationCompilation",
+        "owner": "DASHI/Mathematics/Complexity/PNotEqualsNPVirtualQuotationFrontierExact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_RECORD",
+        "consequence": ""
+      },
+      {
+        "lane": "PNP",
+        "term": "UniversalGuardedCookBitGenerator",
+        "owner": "DASHI/Mathematics/Complexity/PNotEqualsNPVirtualQuotationFrontierExact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_RECORD",
+        "consequence": ""
+      },
+      {
+        "lane": "PNP",
+        "term": "VirtualRunSimulation",
+        "owner": "DASHI/Mathematics/Complexity/PNotEqualsNPVirtualQuotationFrontierExact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_RECORD",
+        "consequence": ""
+      },
+      {
+        "lane": "PNP",
+        "term": "anchoredLiteralStructuralResourceImpossible",
+        "owner": "DASHI/Mathematics/Complexity/PNotEqualsNPCodedLiteralResourceCompilerAnchoredNoGoExact.agda",
+        "repo": "agda",
+        "classification": "KNOWN_NEGATIVE_CONTROL",
+        "consequence": ""
+      },
+      {
+        "lane": "PNP",
+        "term": "PNotEqualsNPCodedLiteralResourceCompilerAnchoredNoGoExact",
+        "owner": "DASHI/Mathematics/Complexity/PNotEqualsNPCodedLiteralResourceCompilerAnchoredNoGoExact.agda",
+        "repo": "agda",
+        "classification": "KNOWN_NEGATIVE_CONTROL",
+        "consequence": ""
+      },
+      {
+        "lane": "PNP",
+        "term": "UniversalPolynomialSATDecisionFailure cost",
+        "owner": "DASHI/Mathematics/Complexity/PNotEqualsNPDirectSATLowerBoundExact.agda",
+        "repo": "agda",
+        "classification": "TARGET_TYPE_UNINHABITED",
+        "consequence": ""
+      },
+      {
+        "lane": "PNP",
+        "term": "UniversalPolynomialSATDecisionFailure",
+        "owner": "DASHI/Mathematics/Complexity/PNotEqualsNPDirectSATLowerBoundExact.agda",
+        "repo": "agda",
+        "classification": "TARGET_TYPE_UNINHABITED",
+        "consequence": ""
+      },
+      {
+        "lane": "PNP",
+        "term": "universalDecisionFailureGivesSATNotInP",
+        "owner": "DASHI/Mathematics/Complexity/PNotEqualsNPDirectSATLowerBoundExact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_COMPILER",
+        "consequence": ""
+      },
+      {
+        "lane": "PNP",
+        "term": "universalDecisionFailureClosesPNotEqualsNP",
+        "owner": "DASHI/Mathematics/Complexity/PNotEqualsNPDirectSATLowerBoundExact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_COMPILER",
+        "consequence": ""
+      },
+      {
+        "lane": "PNP",
+        "term": "UniversalAnchoredPolynomialSATDecisionCollision",
+        "owner": "DASHI/Mathematics/Complexity/PNotEqualsNPAnchoredCollisionEquivalenceExact.agda",
+        "repo": "agda",
+        "classification": "CONDITIONAL_EQUIVALENCE",
+        "consequence": "equivalent universal lower-bound claim, not proof"
+      },
+      {
+        "lane": "PNP",
+        "term": "fixed-instance quantifier swap",
+        "owner": "DASHI/Mathematics/Complexity/PNotEqualsNPFixedInstanceQuantifierNoGoExact.agda",
+        "repo": "agda",
+        "classification": "KNOWN_NEGATIVE_CONTROL",
+        "consequence": "correct order ∀ candidate ∃ formula"
+      }
+    ],
+    "forbidden_promotions": [
+      "source-written != Agda/Lean kernel accepted",
+      "R734 unrestricted W2 FALSE on original physical data",
+      "all-k gamma parser != original full N21 bit verifier clock",
+      "finite TV/Gibbs != blocked Wilson physical RG",
+      "R856 scalar != actual R853 derivative",
+      "candidate coverage in special model != all textbook P",
+      "abstract rank-one Hamiltonian != interacting YM Hamiltonian",
+      "Boolean status flag != theorem"
+    ],
+    "sympy_exact_r856": {
+      "safe_pointwise": 10065030,
+      "unsafe_next_pointwise": 10065031,
+      "safe_integrated": 20130061,
+      "unsafe_next_integrated": 20130062,
+      "confirmed_in_this_session": true
+    },
+    "required_next_step": "Work exclusively from canonical roadmap gate IDs A1...F3, update JSON and exact-head provenance with every new proof source/kernel receipt"
   }
 }
