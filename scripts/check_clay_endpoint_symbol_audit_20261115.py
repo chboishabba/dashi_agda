@@ -30,7 +30,7 @@ STATUS = {
     "CONDITIONAL_RECORD", "CONDITIONAL_COMPILER", "EXPLICIT_OPEN_FLAG",
     "OPEN_ENUM_CONSTRUCTOR", "TARGET_NAME_ONLY", "TARGET_TYPE_UNINHABITED",
     "COST_MODEL_COVERAGE_CONSTRUCTED", "KNOWN_NEGATIVE_CONTROL",
-    "REFUTED_UNIVERSAL_AUX", "CONDITIONAL_EQUIVALENCE",
+    "REFUTED_UNIVERSAL_AUX", "CONDITIONAL_EQUIVALENCE", "SOURCE_MODULE_REUSED",
 }
 
 def tracked_source(root: Path) -> list[Path]:
@@ -97,6 +97,8 @@ def main() -> int:
         if not path.is_file():
             problems.append(f"OWNER_MISSING {lane}: {owner} for {name}")
             continue
+        if kind == "SOURCE_MODULE_REUSED":
+            continue  # Module/source file verified above, not an identically named binder.
         if not SIMPLE.fullmatch(name):
             continue  # Explicit natural-language and compound gate labels.
         leaf = name.split(".")[-1]
