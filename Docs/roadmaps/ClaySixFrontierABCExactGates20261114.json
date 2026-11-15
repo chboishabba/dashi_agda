@@ -2705,6 +2705,15 @@
           "source_regression": "scripts/check_ns_r823_initial_rate_continuity_cut_20261115.py",
           "kernel_acceptance": false,
           "gate_closed": false
+        },
+        "nonterminal_20261115_packet_weld": {
+          "proof_source_written": true,
+          "source_owner": "DASHI/Physics/Closure/NSTriadKNR650SignedComparableReserveRound823Exact.agda",
+          "actual_r823_r853_packet_identified_algebraically": true,
+          "physical_real_R408_constructor": false,
+          "original_r823_universal_physical_inequality": "Classical real-Fourier counterexample; formal R408 rational-field instantiation remains open",
+          "kernel_checked": false,
+          "gate_closed": false
         }
       },
       {
@@ -2730,7 +2739,14 @@
         ],
         "kernel_acceptance_required_before_full_closure": true,
         "kernel_acceptance_state": "NOT_OBTAINED_THIS_ROUND",
-        "source_note_20261115": "The independent real finite Galerkin ODE is polynomial and locally well-posed classically, but R71/R74 exact real chart and same R408/R853 physical packet transport still require source-written kernel proofs. Neither rational-time R408 nor a new shorter time substitutes for the unchanged R854 horizon."
+        "source_note_20261115": "The independent real finite Galerkin ODE is polynomial and locally well-posed classically, but R71/R74 exact real chart and same R408/R853 physical packet transport still require source-written kernel proofs. Neither rational-time R408 nor a new shorter time substitutes for the unchanged R854 horizon.",
+        "nonterminal_20261115_real_finite_ode": {
+          "classical_finite_fourier_ode_existence_original_T": true,
+          "mathematical_fixed_radius_certified": true,
+          "real_agda_chart_field_equality": false,
+          "kernel_checked": false,
+          "gate_closed": false
+        }
       },
       {
         "id": "C2",
@@ -2742,7 +2758,19 @@
           "original weak derivative bound and R856 consumer"
         ],
         "kernel_acceptance_required_before_full_closure": true,
-        "kernel_acceptance_state": "NOT_OBTAINED_THIS_ROUND"
+        "kernel_acceptance_state": "NOT_OBTAINED_THIS_ROUND",
+        "nonterminal_20261115_rate_envelope": {
+          "selected_packet_rate_bridge_source_written": true,
+          "state_L": "391309593930357307785216",
+          "field_K": 5032512,
+          "necessary_time_derivative_bound": "L*K",
+          "fixed_T": "226189/3938540454339300631433585885184",
+          "exact_rate_upper": "-28273663/250",
+          "classical_fourier_integral_negative": true,
+          "actual_R408_real_carrier_constructed": false,
+          "kernel_checked": false,
+          "gate_closed": false
+        }
       },
       {
         "id": "D1",
@@ -5243,6 +5271,50 @@
     "active_gate_count": 14,
     "completed_gate_ids": [
       "P0"
-    ]
+    ],
+    "round_20261115_packet_weld_real_ode_audit": {
+      "date": "2026-11-15",
+      "source_pr": 1499,
+      "source_commit": "2d63b8e7dd22cc651a6ab4658e8a13773b2fb0b8",
+      "owner": "DASHI/Physics/Closure/NSTriadKNR650SignedComparableReserveRound823Exact.agda",
+      "named_source_lemmas": [
+        "originalR823CompleteRateIsR853SelectedRate",
+        "originalR823ReserveDemandIsR853SelectedRate",
+        "originalR823IntegratedRateIsR853SelectedIntegral",
+        "originalR823IntegratedReserveDemandIsR853SelectedIntegral"
+      ],
+      "source_chain": [
+        "R820.At.actualR815RateIsFullR813CCTouchedViscousRate",
+        "R853.At.signedRateNormalForm",
+        "R823.At.actualFullRateIsReserveMinusDemand",
+        "R823.integratedReserveMinusDemand"
+      ],
+      "owner_type": "SOURCE_WRITTEN_UNVERIFIED",
+      "original_R408_rational_real_physical_traj_constructed": false,
+      "original_R408_global_rational_helicity_projector_constructed": false,
+      "classical_real_fourier_728_mode_theorem": {
+        "status": "MATHEMATICAL_FIXED_HORIZON_FINITE_ODE_ESTIMATE; NOT AGDA KERNEL",
+        "mode_cutoff": 4,
+        "nonzero_modes": 728,
+        "initial_coordinate_max": 6,
+        "ball_coordinate_max": 12,
+        "physical_velocity_component_bound_K": 5032512,
+        "physical_rate_state_lipschitz_L": "391309593930357307785216",
+        "original_T": "226189/3938540454339300631433585885184",
+        "exact_L_K_T": "226189/2",
+        "initial_rate": "-28273644/125",
+        "full_time_rate_upper": "-28273663/250",
+        "integral_negative_true_for_classical_real_finite_ode": true,
+        "required_to_claim_original_kernel_closure": "real/complex R408/R823/R853 type transport, globally defined helical physical packet and genuine real ODE, exact-head Agda/Lean kernel"
+      },
+      "regression": "scripts/check_ns_r823_initial_rate_continuity_cut_20261115.py",
+      "roadmap": "Docs/roadmaps/ClayRecoveredProducersW2NoGoR856SourceMaxCut20261115.md",
+      "physical_same_carrier_kernel_accepted": false,
+      "rate_derivative_is_L_not_LK": false,
+      "original_C1_closed": false,
+      "original_C2_closed": false,
+      "original_B1_closed": false,
+      "original_six_endpoints_closed_this_round": 0
+    }
   }
 }
