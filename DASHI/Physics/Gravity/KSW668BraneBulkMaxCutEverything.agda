@@ -26,3 +26,9 @@ import DASHI.Physics.Gravity.KSW668BulkScalarReceiverRationalSliceExact
 -- New independent rational-only source witnesses; no Agda kernel receipt.
 import DASHI.Physics.Gravity.KSW668CylinderZ2WindingIsraelRationalExact
 import DASHI.Physics.Gravity.KSW668AdS5LinearIsraelTTRationalSliceExact
+
+-- Original moving Neumann normal condition, plus explicit REUSE of
+-- DASHI Balaban finite/weighted Neumann-series algebra. Different uses of
+-- 'Neumann' are not conflated; the physical 5D FIO is still OPEN.
+import DASHI.Physics.Gravity.KSW668AdS5MovingNeumannCharacteristicRationalExact
+import DASHI.Physics.Gravity.KSW668AdS5FrozenNeumannSeriesReuseExact
