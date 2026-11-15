@@ -145,6 +145,40 @@ def moving_abstract_green_and_bulk_chord():
         actual_graviton_observation=False)
 
 
+
+def evaluated_spectral_packet(time=0.2,z=1.5,b=1.0,mlo=.6,mhi=1.4):
+    """Actually evaluate stationary finite-energy TT continuum packet Hyy.
+
+    fhat_ij(k)=k^4 TT_ij(khat,Q) exp(-k^2/2), Q=diag(0,1,-1).
+    At x=0 spherical angular average TT_yy=2/5, with unitary Fourier.
+    """
+    from scipy.special import gamma
+    if not (0<=time<=1 and b>0 and z>=b):
+        raise ValueError('Stationary finite-energy packet domain')
+    def A(m):
+        d=(m-mlo)*(mhi-m)
+        return math.exp(-.03/d) if d>0 else 0.
+    def I_k(m):
+        return quad(lambda k:k**6*math.exp(-k*k/2)*math.cos(
+          math.hypot(k,m)*time),0,12,epsabs=1e-9)[0]
+    def integrand(m):
+        return A(m)*normalized_modes(b,m,z)['continuum_H']*I_k(m)
+    Hyy=(8*math.pi/5)/(2*math.pi)**1.5*quad(
+      integrand,mlo,mhi,epsabs=2e-8)[0]
+    norm=quad(lambda m:A(m)**2,mlo,mhi)[0]
+    mass_sq=quad(lambda m:m*m*A(m)**2,mlo,mhi)[0]
+    I10=gamma(11/2)/2
+    I12=gamma(13/2)/2
+    E0=(8*math.pi/5)*(I12*norm+I10*mass_sq)
+    assert 0<E0<math.inf and math.isfinite(Hyy) and abs(Hyy)>1e-9
+    return dict(time=time,wall_b=b,bulk_z=z,
+       TT_yy_at_x_origin=Hyy,complete_initial_bulk_energy=float(E0),
+       angular_TT_yy_average='2/5*k^4*exp(-k^2/2)',
+       spatial_TT_nonzero=True,mode_band=[mlo,mhi],
+       mode_individual_delta_normalized=True,
+       full_packet_finite_energy=True,retarded_boundary_emitter=False,
+       moving_brane=False)
+
 def stationary_no_shortcut_control():
     """Static planar brane: earliest bulk/null and induced photon times match."""
     d,b=s.symbols('d b',positive=True)
@@ -162,6 +196,7 @@ def audit():
       moving_source_lift=moving_boundary_lift(),
       moving_abstract=moving_abstract_green_and_bulk_chord(),
       static_no_shortcut=stationary_no_shortcut_control(),
+      evaluated_KK_packet=evaluated_spectral_packet(),
       explicit_original_moving_retarded_Green_kernel=False,
       gravitational_observation=False)
 
