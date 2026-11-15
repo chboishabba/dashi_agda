@@ -1,5 +1,9 @@
 # January Walker / Infoton / P30: quantum-369, regulation, thermal formalism weld — 15 November 2026
 
+
+> **16 November 2026 — original-owner correction:** The \`U(3) = [SU(3)_c × U(1)_em]/Z3\` selection rule and \`3Q_em ≡ −t_c (mod 3)\` were **already** derived for the same original 27 states in Johl Brown's DASHI KK/E6/Higgs source programme. Original owning roadmap: \`Docs/physics/KKE6GlobalHiggsChainZ6U3Original27Pareto20261027.md\`; original execution: \`scripts/check_kk_e6_post_e21_u3_photon.py\`; antecedents: Agda #1106 and #1241. **Matthew Reece** is now an explicitly credited independent published source (JHEP 10 (2023) 116; §2 eqs. (2.1)–(2.4); DOI 10.1007/JHEP10(2023)116), **not the originator of these DASHI computations or a code contributor**. The structured source is \`DASHI.Physics.Gravity.KKE6TrinificationDiagonalZThreeQuotientExact.reece2023AxionGaugeGlobalFormSource\`. The finite three-label \`conditionalU3QuotientChargeCancellation\` is only a presentation/reader projection of the stronger existing source-specific result. The separate Reece axion-coupling selection constraint is published prior art, **not** proved by our existing 27-state checker.
+
+
 This is a **same-object reuse and evidence-boundary addendum**, not a new theory of charge, a verified infoton particle, a finished physical efficiency claim, or a change to Clay statuses. Canonical Infoton ledger is \`docs/research/InfotonP30WalkerMaxCut20261115.md\`; round-2 source record is \`docs/research/InfotonP30WalkerRound2PhysicalDiscriminators20261115.md\`.
 
 **Status: 8/19 Infoton gates adjudicated, 11 open.** This pass adds a finite countermodel and existing-owner weld, **not** a new physical gate closure. Kernel acceptance of \`DASHI/Quantum/Infoton369FermiChargeBoundaryExact.agda\` remains OPEN.
