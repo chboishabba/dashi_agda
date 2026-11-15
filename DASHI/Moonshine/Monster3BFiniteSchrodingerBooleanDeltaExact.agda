@@ -24,7 +24,7 @@ import DASHI.Moonshine.Monster3BFiniteSchrodingerPointProjectorExact as Point
 import DASHI.Moonshine.Monster3BFiniteX6ConstructiveComparisonExact as Compare
 import DASHI.Moonshine.Monster3BFiniteSchrodingerDeltaExtractionExact as Extract
 
-boolToC3 : Bool → C3.Amplitude
+boolToC3 : Bool → C3.Cyclotomic3
 boolToC3 true = C3.one
 boolToC3 false = C3.zero
 
