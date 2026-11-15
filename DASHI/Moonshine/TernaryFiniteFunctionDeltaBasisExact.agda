@@ -96,12 +96,6 @@ interpretLiftHead head observed (combine left right) tail =
     (gateAdd (V.tritEqual head observed)
       (interpret left tail)
       (interpret right tail))
-  where
-  cong₂ :
-    ∀ {A B C : Set}
-      (f : A → B → C) {a a' : A} {b b' : B} →
-      a ≡ a' → b ≡ b' → f a b ≡ f a' b'
-  cong₂ f refl refl = refl
 
 decompose :
   ∀ {n} → (TritCube n → C3.Cyclotomic3) → DeltaCombination n
