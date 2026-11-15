@@ -1,14 +1,18 @@
 module DASHI.Physics.YangMills.BalabanSU2AdScalarReduction where
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.List.Base using ([]; _∷_)
-import Tactic.RingSolver as Solver
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
+open import DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver using
+  ( module RealPolynomialSolver )
+open import DASHI.Physics.YangMills.BalabanComputedPolynomialSolver using
+  ( solveComputed; computed )
+open RealPolynomialSolver using ( Polynomial; _:=_; _:+_; _:*_; :-_ )
+
 open import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier using
-  (_+R_; _*R_; -R_; realSolverRing)
+  (_+R_; _*R_; -R_)
 open import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier using
-  (SU2LieAlgebra; su2Lie; su2LieExt; lieAdd; lieScale)
+  (SU2LieAlgebra; su2Lie; su2LieExt; lieAdd; lieScale; xComponent; yComponent; zComponent)
 open import DASHI.Physics.YangMills.BalabanSU2LieBracket using
   (adOperator)
 open import DASHI.Physics.YangMills.BalabanSU2AdOperator using
@@ -43,6 +47,16 @@ reduceCubicCoefficient cubic coefficients Y =
       (cubic *R (-R (cAd *R lieNormSquared Y))))
     (quadraticCoefficient coefficients)
 
+scalarAdLemma : ∀ i x l w q v c k →
+  ((i *R x) +R ((l *R w) +R (q *R v))) +R (c *R (k *R w)) ≡
+  (i *R x) +R (((l +R (c *R k)) *R w) +R (q *R v))
+scalarAdLemma =
+  solveComputed 8
+    (λ i x l w q v c k →
+      ((i :* x :+ (l :* w :+ q :* v)) :+ (c :* (k :* w))) :=
+      ((i :* x) :+ (((l :+ (c :* k)) :* w) :+ (q :* v))))
+    computed
+
 adQuadraticPlusCubicReduced :
   ∀ cubic coefficients Y X →
   lieAdd
@@ -52,18 +66,24 @@ adQuadraticPlusCubicReduced :
   ≡ adQuadratic (reduceCubicCoefficient cubic coefficients Y) Y X
 adQuadraticPlusCubicReduced
   cubic (adCoefficients identity linear quadratic)
-  Y@(su2Lie x₀ y₀ z₀) X@(su2Lie x y z)
+  Y X
   rewrite adCubic Y X =
   su2LieExt
-    (Solver.solve
-      (cubic ∷ identity ∷ linear ∷ quadratic ∷ x₀ ∷ y₀ ∷ z₀ ∷ x ∷ y ∷ z ∷ [])
-      realSolverRing)
-    (Solver.solve
-      (cubic ∷ identity ∷ linear ∷ quadratic ∷ x₀ ∷ y₀ ∷ z₀ ∷ x ∷ y ∷ z ∷ [])
-      realSolverRing)
-    (Solver.solve
-      (cubic ∷ identity ∷ linear ∷ quadratic ∷ x₀ ∷ y₀ ∷ z₀ ∷ x ∷ y ∷ z ∷ [])
-      realSolverRing)
+    (scalarAdLemma
+      identity (xComponent X)
+      linear (xComponent (adOperator Y X))
+      quadratic (xComponent (adOperator Y (adOperator Y X)))
+      cubic (-R (cAd *R lieNormSquared Y)))
+    (scalarAdLemma
+      identity (yComponent X)
+      linear (yComponent (adOperator Y X))
+      quadratic (yComponent (adOperator Y (adOperator Y X)))
+      cubic (-R (cAd *R lieNormSquared Y)))
+    (scalarAdLemma
+      identity (zComponent X)
+      linear (zComponent (adOperator Y X))
+      quadratic (zComponent (adOperator Y (adOperator Y X)))
+      cubic (-R (cAd *R lieNormSquared Y)))
 
 record BoundedAdScalarApproximation : Set₁ where
   constructor boundedAdApproximation
