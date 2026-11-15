@@ -1,4 +1,4 @@
-> **Canonical exact-lemma status (15 Nov 2026, second max-cut):** [MadScience369V2ExactLemmaRoadmap20261115.md](MadScience369V2ExactLemmaRoadmap20261115.md). Earlier phase obligations remain source records; consult canonical ledger for pulse-control, nonlinear-memory, storage-aware comparison and original-world acceptance.
+> **Canonical latest status and exact remaining lemmas:** [`MadScience369V2ExactLemmaRoadmap20261115.md`](MadScience369V2ExactLemmaRoadmap20261115.md). Older numbered gates below remain source records; the canonical ledger resolves overlaps and records the second P1/P2 execution round.
 
 # V2 reluctance × Don Smith time-dependent nonlinear pump — next maximum cut
 
@@ -53,3 +53,8 @@ A high switching-energy countermodel *reverses* the efficiency benefit. Low swit
 
 ## Verification
 `python -m pytest -q tests/test_v2_pulse_nonlinear_recovery.py`: 20/20 PASS at authoring. Exact source scripts and receipt must be run in the repository's pinned environment before repository acceptance. No measured anomalous energy, no exact V2 identity, no source-identical Smith/Filsinger hardware, no unmeasured natural work.
+
+
+## Causal propagation donor — no instantaneous global circuit state
+
+The original Smith/Filsinger `RetardedFlight` and `delayed_wave` logic preserves per-link launch, propagation and receiver times. Physical electromagnetic field changes cannot convey information faster than c in vacuum; actual cables, cores, transmission lines and environments often produce slower responses. The motor's instantaneous mutual-L coupling is a quasistatic *approximation* with a new required validity/error gate; see `MadScience369V2ExactLemmaRoadmap20261115.md` P1.C1–P3.C4. Retarded field/line modelling and gate/measurement timing must precede claims about distributed high-frequency power-recovery efficiency.
