@@ -9,6 +9,14 @@ python3 scripts/test_ksw668_f8_frozen_oblique_neumann.py
 python3 scripts/ksw668_f8_frozen_oblique_neumann.py
 python3 scripts/test_ksw668_f8_moving_neumann_characteristic.py
 python3 scripts/ksw668_f8_moving_neumann_characteristic.py
+python3 scripts/test_ksw668_f8_two_patch_neumann_block.py
+python3 scripts/ksw668_f8_two_patch_neumann_block.py
+python3 scripts/test_ksw668_f8_forced_moving_neumann_energy.py
+python3 scripts/ksw668_f8_forced_moving_neumann_energy.py
+python3 scripts/test_ksw668_f8_frozen_oblique_neumann.py
+python3 scripts/ksw668_f8_frozen_oblique_neumann.py
+python3 scripts/test_ksw668_f8_moving_neumann_characteristic.py
+python3 scripts/ksw668_f8_moving_neumann_characteristic.py
 python3 scripts/test_ksw668_f8_non_glancing_source.py
 python3 scripts/test_ksw668_f8_null_convex_lens.py
 python3 scripts/ksw668_f8_null_convex_lens.py
@@ -18,7 +26,7 @@ python3 scripts/ksw668_f8_direct_wkb_transport.py
 python3 scripts/ksw668_f8_projected_weyl_sms.py
 python3 scripts/ksw668_f8_non_glancing_source.py
 if [ "$mode" = "--smoke" ]; then
-  echo "F8 smoke accepted; three-grid and physical receiver NOT accepted."
+  echo "F8 algebraic/theorem-application smoke accepted (63 source-equivalent tests); full 3D convergence, Agda, matter action and observation NOT accepted."
   exit 0
 fi
 if [ "$mode" != "--full" ]; then
