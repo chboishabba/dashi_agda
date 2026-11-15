@@ -87,3 +87,23 @@ Existing \`DASHI.Environment.DataCentreThermalReuseBalanceExact.PhysicalSiteObli
 | B1–B3 / C1–C2 | original P30 codec, ECC fault model, verification and measured deployment | Existing Infoton audit + FRACDASH compiler/transport, positive original bridge OPEN |
 
 **Adjudication ledger stays 8/19 / 11 OPEN.** This work replaces a vague "fractional charge coincidence" objection with a finite independence lemma and a precise positive physics endpoint, and replaces blanket "NIST doesn't mandate it" with actual critical-system scope and certification requirements. No newly invented 369 basis, thermodynamic law, cooling model, safety test or particle detection is credited.
+
+
+## 6. Primary-source upgrade — exact Z3 centre ↔ fractional-charge congruence
+
+This goes beyond the finite no-recovery observation. M. Reece, *Axion-gauge coupling quantization with a twist*, **JHEP 10 (2023) 116**, §2 eqs (2.2)–(2.4), https://doi.org/10.1007/JHEP10(2023)116, gives a **physical gauge-group conditional relation**. For the low-energy global choice
+\`G = U(3) = [SU(3)_C × U(1)_em] / Z3\` and integer \`qhat = 3 Q/e\`,
+the common centre acts trivially on a representation precisely when
+\`triality + qhat ≡ 0 (mod 3)\`.
+
+Thus:
+- colour singlet triality 0 → \`qhat≡0\`, an integer electric charge;
+- colour triplet triality 1 → \`qhat≡2\`, e.g. up charge \`+2/3\` and down charge \`−1/3\`;
+- colour antitriplet triality 2 → \`qhat≡1\`, the corresponding antiparticle classes.
+
+This is an **actual connection between three-valued representation data and fractional electric charge**. It does **not** come from evaluating the Fermi-Dirac distribution. It is conditional on selecting the specified global quotient (the full Standard Model often uses \`[SU(3)×SU(2)×U(1)]/Z6\`; several global choices are possible) and does not identify the existing orbital magnetic \`C3\` with the physical \`SU(3)_C\` colour centre.
+
+The new Agda owner \`Infoton369FermiChargeBoundaryExact.agda\` now **reuses** \`DASHI.Algebra.TriadicFiniteArithmetic.addResidue\`, \`TriadicDepthOneCharacters.rZero/rPos/rNeg\` and \`TriadicFiniteQuotient.Residue3Pow\` to express
+\`conditionalU3QuotientChargeCancellation\` for singlet/triplet/antitriplet. The three definitional cases are source-written, pending pinned Agda verification. This is a finite congruence certificate **conditional on the global gauge-group model**, NOT a realization of the physical SU(3) matrix action and NOT a Landauer/FD explanation.
+
+**Stronger D2 donor path:** (i) identify a genuine \`SU(3)_C\` colour representation and centre eigenvalue; (ii) prove the relevant \`Z3/Z6\` quotient action is trivial on actual fermion field states; (iii) transport its charge residue through the existing 369 \`C3\` adapter with an **explicit physical intertwiner**, not a cardinality match; (iv) separately ask whether Landauer-scaled thermal occupation determines, covaries with, or is completely independent of that \`U(1)\` gauge action under controlled dynamics. The last question is the actual discriminator of Walker's hypothesis. Physics literature supports (i)–(ii) **conditional on the gauge model**, not the proposed FD→charge identification.
