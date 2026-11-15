@@ -5,6 +5,27 @@
 kernel-accepted in this round; local exact-rational regressions PASS.
 No Clay problem or NP-completeness consequence is claimed solved.
 
+## 15 November 2026 — governing P0–F3 six-endpoint execution (supersedes older broad gap descriptions)
+
+**Start here and nowhere else for the six contested endpoints:** [ClayRecoveredProducersW2NoGoR856SourceMaxCut20261115.md](ClayRecoveredProducersW2NoGoR856SourceMaxCut20261115.md#canonical-execution-plan--exact-symbol-re-audit-15-november-2026) and its **135-term** machine-readable [ClaySixFrontierABCExactGates20261114.json](ClaySixFrontierABCExactGates20261114.json) under `six_endpoint_exact_symbol_audit_20261115`. This is the canonical roadmap/phase/deliverable/exact-lemma source; the old sections below are historical phase records and must not be read as current independent obligations. Update the canonical pair **first** after any found in-repo producer and **with** every new source/kernel receipt. No duplicate generic compiler, no new donor PR, no new competing roadmap.
+
+**Phases and acceptance**:
+
+| Phase | Next non-duplicate deliverable | Gate IDs / status |
+| --- | --- | --- |
+| P0 preflight | Exact symbol+synonym grep on checked-out rollup **and donor** PR trees; local Agda 2.9/Lean 4.28 proof checks/negative controls, transitive axiom audit | P0: source-audited, local kernel receipts absent |
+| NS whole-space A | Pay *literal* `PhysicalKernelIdentification`, `DirectionalSecondMomentSlot`, signed Gram/FTC, original integrable `PhysicalEnvelopeInputs`, all-data flow continuation | A1–A2: OPEN |
+| NS periodic B | Reuse R820/R823–R825 signed source and R734 helical identity, obtain an actually true same-source signed inequality and W1, cutoff-uniform continuum; never demand **refuted unrestricted R734 W2** | B1–B2: OPEN |
+| NS selected R853 | Prove exact R71/R74 real-chart RHS correspondence and local solution on unchanged R854 T; selected R853 derivative bound; reuse R856 safe thresholds | C1–C2: OPEN |
+| YM Wilson/T5 | Original same-source CMP116 R320 selected H1 **or** interacting R445 local TV+summability; R349 distance-carrier weld, R342 upper-order closure, physical R331 transfer coordinate, actual R333 OS completion | D1–D2: OPEN |
+| Karp-21 | Kernel-check already-written B1–B6/D1–D2/E1–E2/F2/G3 and all-k physical gamma; then complete original all-word bit machine/cost/memory F1–F4, G2/G3/G4 `PR.InNP` | E0–E2: finite source present, physical NP OPEN |
+| P≠NP | Reuse **already constructed** `codedStandardCostCandidateCoverage` / `haltingCostCandidateCoverage`; prove standard-P model closure and valid resource-limited own-Cook compiler or an independent lower-bound route; true `UniversalPolynomialSATDecisionFailure` | F1–F3: lower bound OPEN |
+
+**Important corrected overpayments:** the two concrete PNP *candidate coverage projections are already source-written*, so do not request a new arbitrary coverage compiler. YM R304 selected pair distance=time and R577 same-H projection are already source-written; only their **same physical carrier/coordinate calibration** remains. Karp all-`k` gamma source is already byte-identical in current Clay and #1502. R856 strict rational pointwise/integrated thresholds are already SymPy-confirmed; **actual** R853 (r'(t)) is not. Conditional spectral/Bochner/rooted-shell compilers do not pay YM/NS original physics.
+
+**Endpoint closure verdict on audited heads:** 0/6 original endpoints independently demonstrated complete, 0 fresh exact-head Agda/Lean kernel receipts. This is a fail-closed repository evidence status, not a theorem that no stronger branch exists. **The canonical symbol ledger is the only basis for future commits.**
+
+
 ## Canonical PR topology and execution contract (rollup revision)
 
 The active work destination is **one open draft PR per repository**:
