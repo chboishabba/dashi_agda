@@ -13,6 +13,7 @@ module DASHI.Moonshine.Monster3BFiniteSchrodingerDeltaExtractionExact where
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl; sym; trans)
+open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _*_; _/_)
 open import Data.Rational.Tactic.RingSolver using (solve)
@@ -61,10 +62,10 @@ open NonzeroInvariantVector public
 ------------------------------------------------------------------------
 
 reciprocal729 : ℚ
-reciprocal729 = 1ℚ / 729
+reciprocal729 = + 1 / 729
 
-reciprocal729Exact : reciprocal729 * 729 ≡ 1ℚ
-reciprocal729Exact = solve []
+reciprocal729Exact : reciprocal729 * P729.729ℚ ≡ 1ℚ
+reciprocal729Exact = refl
 
 normalizer :
   ∀ {Member inv} →
@@ -77,7 +78,7 @@ normalizerCancels729Amplitude :
     (witness : NonzeroInvariantVector {Member} inv) →
   C3.multiply
     (normalizer witness)
-    (L.scale 729 (vector witness (selected witness)))
+    (L.scale P729.729ℚ (vector witness (selected witness)))
   ≡ C3.one
 normalizerCancels729Amplitude witness =
   let
@@ -87,14 +88,14 @@ normalizerCancels729Amplitude witness =
   in
   trans
     (L.multiplyScaleLeft reciprocal729 aInv
-      (L.scale 729 (vector witness (selected witness))))
+      (L.scale P729.729ℚ (vector witness (selected witness))))
     (trans
       (cong (L.scale reciprocal729)
         (trans
-          (L.multiplyScaleRight 729 aInv
+          (L.multiplyScaleRight P729.729ℚ aInv
             (vector witness (selected witness)))
           (trans
-            (cong (L.scale 729)
+            (cong (L.scale P729.729ℚ)
               (trans
                 (L.multiplyCommutative aInv (vector witness (selected witness)))
                 (trans
@@ -103,7 +104,7 @@ normalizerCancels729Amplitude witness =
                   (Inv.rightInverse aWitness))))
             refl)))
       (trans
-        (L.scaleScale reciprocal729 729 C3.one)
+        (L.scaleScale reciprocal729 P729.729ℚ C3.one)
         (trans
           (cong (λ r → L.scale r C3.one) reciprocal729Exact)
           refl)))
