@@ -2,7 +2,7 @@
   "timestamp_local": "2026-11-15",
   "scope": "constructed finite waveguide and nonlinear magnetic-memory motor port; NOT apparatus",
   "new_test_module": "41/41 PASS",
-  "combined_local_baseline_and_new": "65/65 PASS (3 original baseline modules + new module)",
+  "combined_local_baseline_and_new": "68/68 PASS: 27 baseline tests from three original modules + 41 sixth-cut tests; exact final files rerun",
   "all_prior_model_suite": "NOT replayed in one completed run; previous 270 separately verified, subsequent aggregated run timed out",
   "agda_kernel": "NOT RUN; compiler absent",
   "strict_original_device_gates": "OPEN 16/16",
