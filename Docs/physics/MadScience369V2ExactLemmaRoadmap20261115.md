@@ -251,3 +251,14 @@ The exact defined-model identities are `ΔE_line = W_source − W_terminal − D
 **Acceptance:** 41/41 new Python tests and 68/68 combined (27 original V2 baseline + 41 new) tests independently completed. The full historical mega-suite was attempted but timed out; do NOT claim complete full-suite replay. Agda kernel remains **NOT RUN** (no compiler in active runtime). The **16 original P0–P4 strong gates remain OPEN**, including original V2 netlist, nonlinear material map, all-port power, shaft torque and metrology. No measured extra energy, universal 369 optimum or Don Smith hardware identity follows.
 
 **Next maximum cut:** mathematical wellposedness and periodic contraction for a dynamically coupled lossy line/memory motor under *finite switched controller* plus passive multirate certification; pinned Agda 2.9 kernel; original V2 physical evidence where available.
+
+
+## 2026-11-15 — seventh exact finite-flight multirate / periodic coupled-port cut
+
+New source: `scripts/v2_exact_multirate_periodic_port.py` with `tests/test_v2_exact_multirate_periodic_port.py` and full proof `Docs/physics/MadScience369V2ExactMultiratePeriodicPortMaxCut20261115.md`. This is a restricted **linear lag-memory, locally clocked reluctance** model with passive discrete finite-flight packet line, not a nonlinear continuum Maxwell/V2 hardware reconstruction.
+
+**Five new model-level subgates:** `v2FinitePacketMotorMemoryQuadraticEnergyAllStates` (exact rational coefficient-wise identity); `v2CausalBlockSemigroupAllSignedWorkExact` (exact affine/Gramian binary block composition preserving source/terminal/copper/memory/line work); `v2ClockedReluctanceCoupledLineMemoryPeriodicBanach` (exact rational period map, a strict `||P^16||∞<1` contraction, unique periodic state and zero exact energy residual); `v2LocalRotorParameterWorkNoFreeGain` (signed mechanical/modulation energy on local L changes); `v2ShortCableHeldParameterTenMillionTickReduction` (10,697,777-step numerical block reduction at illustrative 0.5m/0.7c with constant L/source, not a smooth rotating-machine certificate).
+
+**Acceptance:** 85/85 new local tests PASS, 126/126 with old dynamic waveguide tests PASS, 139/139 with old retarded-memory tests PASS = 180 distinct targeted tests. Old *aggregate* legacy PWM warm-up suite timed out and is not represented as passing. Agda kernel NOT RUN (compiler unavailable).
+
+**Still OPEN at full strength:** `v2SubNanosecondCableMultiRatePassiveCouplingCertificate` for validated nonlinear/hybrid multirate + interval flow, `v2DynamicCoupledMotorLinePeriodicOrbitGlobalAttractor` for a **smoothly rotating nonlinear coupled mutual/saturated/hysteretic machine**, spatial `v2DistributedLineMaxwellPassivityAndWavefrontBound` and `v2LumpedQuasistaticErrorAndControllerLatencyBound`, Agda 2.9 kernel and all 16 original strict P0–P4 endpoint definitions. Source-specific V2 wiring, field maps, shaft torque, timing and all-port calibrated work are still missing.
