@@ -76,7 +76,7 @@
     "interpretation": "genuine compact 3D TT test source constructed; numerical UV/cutoff/convergence fail"
   },
   "acceptance": {
-    "source_equivalent_unit_tests": "255/255 committed-source-equivalent local; 269/269 broader local",
+    "source_equivalent_unit_tests": "284/284 source-equivalent local replay PASS; exact GitHub-head Agda kernel unverified",
     "full_3d_B4_numerical_convergence": false,
     "external_analytical_Green_operator_previously_claimed_by_external_theorem": true,
     "tensor_matter_generating_action": false,
@@ -104,7 +104,9 @@
     "exact_GitHub_PR_head_execution": false
   },
   "next_exact_lemmas": [
-    "ads5OriginalMovingFullCoupledYRadialSSPRK3SymmetrizerCFL",
+    "ads5OriginalMovingSBP4SATFullyDiscreteSSPRK3CFLAndTruncationError",
+    "ads5OriginalTTCharacteristicConstraintPropagationUnderWeakSAT",
+    "ads5OriginalMovingCompactTTCharacteristicLiftUniformSobolevSourceBudget",
     "ads5OriginalMovingH4PlusEpsilonNeumannToBothWeylTrace",
     "ads5OriginalMovingTTThreeMultipoleThreeObservableConvergence",
     "ads5OriginalT2NeumannToWeylEllipticFIOComposition",
@@ -482,5 +484,37 @@
     "FIO_original_t2_independent_theorem_acceptance": false,
     "physical_matter_action_closed": false,
     "D1_physical_graviton_observed": false
+  },
+  "original_full_coupled_maxcut_viii_20261115": {
+    "merged_baseline": "PR #1512 merged before this continuation; new branch from master",
+    "new_Agda_source_owner": "DASHI/Physics/Gravity/KSW668AdS5OriginalCoupledSBPSymmetrizerRationalExact.agda",
+    "new_math_owner": "scripts/ksw668_f8_full_coupled_weighted_sbp_energy.py",
+    "new_lift_owner": "scripts/ksw668_f8_full_coupled_source_lift.py",
+    "new_actual_PDE_mode": "normal_order=4 (physical z^-3 weighted SBP2 SAT, weak original Israel)",
+    "original_domain": "t>=1, including original t=2 and long-baseline t=12",
+    "homogeneous_coupled_semidiscrete_exact_energy_identity": true,
+    "homogeneous_coupled_semidiscrete_uniform_bound": "E'(T)<=5E(T)",
+    "forced_coupled_semidiscrete_characteristic_source_lift": true,
+    "forced_coupled_semidiscrete_uniform_bound": "E_tilde'(T)<=6E_tilde(T)+0.5||F(T)||_E²",
+    "source_lift_norm_includes_radial_gradient": true,
+    "uncontrolled_full_symmetrizer_source_G2_wall_bound_false": true,
+    "actual_solver_numba_stage_matches_independent_coupled_operator": true,
+    "new_Agda_pinned_kernel_run": false,
+    "full_coupled_SSPRK3_stability_closed": false,
+    "pointwise_both_Weyl_high_order_trace_closed": false,
+    "numerical_original_t12_new_mode_two_grid": {
+      "H_medium_relative_drift": 0.13279253862280352,
+      "intrinsic_E4_medium_relative_drift": 1.5792966478391468,
+      "projected_E5_medium_relative_drift": 0.3171589515039925,
+      "medium_far_control_ratios": [
+        0.020710004476031232,
+        0.04376268577913253,
+        0.01728457059973629
+      ],
+      "physical_Weyl_early_signal_accepted": false
+    },
+    "source_equivalent_local_replay": "284/284 PASS (merged 255 baseline, 29 new)",
+    "exact_connected_branch_head_executable_run": false,
+    "prior_standalone_FIO_markdown_present_in_merged_master": true
   }
 }
