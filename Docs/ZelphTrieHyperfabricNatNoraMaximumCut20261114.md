@@ -1,5 +1,16 @@
 # Zelph ↔ trie / ultrametric ↔ indexed hyperfabric ↔ Nat/NORA — exact maximum-cut
 
+## New maximum-cut P0: immutable source header ↔ original index ↔ full manifest
+
+**Last locally accepted source checkpoint (operator receipt):** ITIR #14 `fb61e629` passed 165/165 Python plus native C++ Cap'n Proto / original two-pass mini-bin; DASHI #1506 `9512b316` passed 9/9 Agda 2.9.0 modules (proof source unchanged from cf3ba8d); SLR #10 `06bda03d` passed 24/24 Rust; SensibLaw #514 `f77b28f` passed 17/17 Python. The following NEW source additions in ITIR are not covered by the 165/165 receipt.
+
+**New P0 physical-source-independent of 82 GiB local original:** ITIR #14 now has `verify_zelph_index_manifest_original.py`, `zelph_original_packed_header_probe.cpp`, `verify_zelph_hf_original_header.py`, `probe_zelph_hf_original_metadata.py` and adversarial tests. This pipeline (1) fetches **only** the original full HF-v2 manifest and `artifact.index.json` at the pinned immutable dataset revision; (2) checks exact raw manifest and optionally externally pinned index hashes, crosschecking **all** indexed source chunks, section-global numbers, language, direction and full gap-free original-bin geometry; (3) requests the small original packed header ONLY via exact TLS/HTTP206 `Range: bytes=0-(headerLengthBytes-1)`; (4) executes the native original Zelph Cap'n Proto header parser and checks all four actual chunk counts against the published manifest/index; (5) stores original header raw bytes and a SHA-linked read-only receipt. Default metadata command is plan/dry-run; explicit `--execute` must be supplied. No full `.bin` download, new graph index or parallel runtime owner.
+
+**Mathematical frontier refinement:** An authentic original header plus gap-free published offset index/manifest shows only SOURCE STRUCTURE/INDEX GEOMETRY. It does **not** establish that the individual published chunk payloads match the original `.bin`, that every source name row has been decoded, nor uniqueness/collision completeness for A1; and it does not discharge `SourceReachableBoundary` for A2's actual physical node/direction frontiers. Next A1 cut is **all original `nodeOfName` source packed-range byte equality + decoder enumeration + list-fibre completeness**, then A2 same-original selected adjacency and dependency-closed query words. P854 native source verification and S29 persisted review remain independent.
+
+**Acceptance commands:** clean latest ITIR `bash tools/check_zelph_physical_maxcut_offline.sh` (now includes full index/manifest HTTP206 header tests and native original-header probe; new head UNVERIFIED) and the source-pinned operator metadata/header workflow detailed in [ITIR P0 original-header execution runbook](https://github.com/chboishabba/ITIR-suite/blob/agent/nat-filtered-route-producer/docs/planning/zelph_original_bin_hf_ranges_maxcut_20261114.md). This chat runtime cannot resolve huggingface.co by DNS, so **no real original HF header byte receipt was produced here**.
+
+
 ## B5 discriminator exact-head acceptance — 15 November 2026
 
 **Local operator receipts at checked commits (not inferred from source existence):**
