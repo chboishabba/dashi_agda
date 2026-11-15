@@ -1,0 +1,33 @@
+{
+  "agda_kernel_checked": false,
+  "branch": "feat/ibrahim-fln-ternary-revision-maxcut-20261114",
+  "checked_at_utc": "2026-11-14T11:29:42.503095+00:00",
+  "historical_corpus_reproduced": false,
+  "multilingual_real_revision_witness_paid": false,
+  "python_version": "3.13.5",
+  "repository": "chboishabba/dashi_agda",
+  "schema": "dashi.ibrahim.exact_python_test_receipt.v1",
+  "scope_note": "exact local Git blobs verified against current PR file blob identifiers; a full repository checkout or Agda run was not performed",
+  "source_attribution": "Ibrahim, Danforth, Dodds, DOI 10.1016/j.jocs.2016.12.001; finite figure is a DASHI transcribed synthetic fixture",
+  "source_files": {
+    "scripts/ibrahim_fln_reference_analysis.py": {
+      "github_blob_sha1": "3616428636bebdcee3cf989fe88d1cb8fa551742",
+      "local_blob_sha1": "3616428636bebdcee3cf989fe88d1cb8fa551742",
+      "sha256": "1b053fd076080e62226bd8a1b8a9af9305c32143be45413f179e360e3216836f"
+    },
+    "tests/test_ibrahim_fln_reference_analysis.py": {
+      "github_blob_sha1": "0f1a253b24917f9b70ae211136d726101ef8fc73",
+      "local_blob_sha1": "0f1a253b24917f9b70ae211136d726101ef8fc73",
+      "sha256": "2e4ecba5de04198b5529b35c89ec6ec1b8f6bb9750884b89bdc6163965c8febe"
+    }
+  },
+  "synthetic_figure_cli_pass": true,
+  "synthetic_figure_input_sha256": "734512a0773c184962079ad774771aed95c012f11a2016ab06b4902a5262d215",
+  "synthetic_figure_output_sha256": "d686e01db9fa7a41628087eedea28a1589cf7dc957ad10dd1c3870da9cb1fa86",
+  "test_log_sha256": "51830e663190a8bcdfceb07256b330669de8e115c1d6aeb7764720cd52ba3794",
+  "unittest_command": "python3 -m unittest discover -s tests -p test_ibrahim_fln_reference_analysis.py -v",
+  "unittest_errors": 0,
+  "unittest_failures": 0,
+  "unittest_pass": true,
+  "unittest_tests_run": 9
+}

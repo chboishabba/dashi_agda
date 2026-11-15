@@ -80,7 +80,8 @@ aggregateErasesDisagreementDirection = refl
 
 countAggregateIsManyToOne :
   acceptCount (Sheet.bit1 , Sheet.bit0) ≡ acceptCount (Sheet.bit0 , Sheet.bit1)
-  × ((Sheet.bit1 , Sheet.bit0) ≡ (Sheet.bit0 , Sheet.bit1) → ⊥)
+  × (_≡_ {A = BinaryComparison4}
+       (Sheet.bit1 , Sheet.bit0) (Sheet.bit0 , Sheet.bit1) → ⊥)
 countAggregateIsManyToOne = refl , (λ ())
 
 comparisonNineDimension : Comparison.comparisonDimension ≡ 9
