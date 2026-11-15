@@ -169,13 +169,17 @@ def smooth_drift(dy):
     delta+=c*(sbp_D(M,dy)-weighted_normal_D(M,z,dy))
     return float(max(abs(delta[2:-2])))
 
-def forced_source_lift(t=4/3,ny=11,nr=7,dy=.012,dr=.025,seed=4):
+def forced_source_lift(t=4/3,ny=11,nr=7,dy=.012,dr=.025,seed=4,compact_source=False):
     from ksw668_f8_full_coupled_source_lift import chi_compact
     data=setup(t=t,ny=ny,nr=nr,dy=dy,dr=dr,seed=seed)
     b,v,vt,a,c=coeff(t)
     rng=np.random.default_rng(seed+777)
     G=rng.normal(size=(3,nr))*.02
     GT=rng.normal(size=(3,nr))*.01
+    if compact_source:
+        from ksw668_f8_fv_source_flux import exact_cell_averages
+        G=1e-5*exact_cell_averages(.04,np.arange(nr)*dr,dr)
+        GT=.35*G
     chi=chi_compact(np.arange(ny)*dy,dy*6)
     Lam=-2*chi[None,:,None]*G[:,None,:]/(1-v)
     LamT=-2*chi[None,:,None]*(GT[:,None,:]/(1-v)+
@@ -204,7 +208,8 @@ def forced_source_lift(t=4/3,ny=11,nr=7,dy=.012,dr=.025,seed=4):
     assert Ep+work<=upper+1e-8*max(1,upper)
     Cdot=D_y(Ud,dy)-.5*(Pd-Md)
     assert np.max(abs(Cdot[:,1:-1,:]))<1e-9
-    return dict(t=t,source_lift_operator_error=float(err),
+    return dict(t=t,original_compact_3D_TT_source=compact_source,
+        source_lift_operator_error=float(err),
         interior_constraint_Cdot=float(np.max(abs(Cdot[:,1:-1,:]))),
         energy_derivative=Ep+work,
         forced_energy_bound=upper,
@@ -222,12 +227,15 @@ def audit():
     h=[.04,.02,.01,.005];smooth=[smooth_drift(x) for x in h]
     assert all(smooth[i]/smooth[i+1]>3.7 for i in range(3))
     forced=[forced_source_lift(t) for t in (1.,4/3,2.,12.)]
+    compact_forced=[forced_source_lift(t,ny=11,nr=12,dr=.008,compact_source=True)
+        for t in (1.,4/3,2.,12.)]
     return dict(original_model='a=t moving AdS5 compact TT characteristic',
        measured_original_slices=rows,
        explicit_normal_commutator_Gershgorin_certificates=bound,
        smooth_weighted_constraint_defect=smooth,
        actual_RK3_stage_constraint_test=rk3_constraint_step(),
        full_coupled_original_sourced_lift_checks=forced,
+       actual_original_compact_3D_TT_sourced_lift_checks=compact_forced,
        mode3_physical_interior_constraint_exact=True,
        source_lifted_mode3_Eprime_bound='(6+16t)E+0.5||F||², dy<=b/4',
        global_weak_Israel_constraint_weld_accepted=False,
