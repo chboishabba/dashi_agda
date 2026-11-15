@@ -8,7 +8,8 @@
 
 **Exact heads inspected before this revision:** Agda Clay #1499 `1cf1d8a447a2c6b71eb0cad551f8cff373ba02d7`; Lean Clay #108 `0060149c16eda3e6e8629d50547c65829ed28016`; TOE #1393 `1d3b3eb3d6916bb635faf65874d74ee5bb61df4e`. Donors #1271 `bccd48a0`, #1501 `58bd8fe1`, #1502 `806b9968`, #1503 `b93909a0`, #1474 `53487133`, #1129 `730ec95c`, #1445 `b3915126`. GitHub default-branch search was used for term discovery, followed by explicit pull-request-branch `fetch_file` proof-body inspection: **default-branch search misses PR-only symbols**, especially Karp-21 and R856. These heads are the *audit input*, not claims about subsequent commits.
 
-**Result: zero of the six terminal original-source endpoints is demonstrated closed by this audit.** This is an exact-source **failure to establish closure**, not a formal metatheorem that no other branch contains an unknown proof. No new Agda/Lean kernel or complete test suite was run. Some items are proven in the source and only need kernel acceptance; others are merely conditional compilers, documented target names, or invalidated universal auxiliary inequalities.
+**Gate-count update (15 Nov, audited source): P0 source-owner/donor-identity preflight is CLOSED; 14/15 independent phase gates remain active: A1,A2,B1,B2,C1,C2,D1,D2,E0,E1,E2,F1,F2,F3. No theorem or native kernel gate was closed.**
+\n**Result: zero of the six terminal original-source endpoints is demonstrated closed by this audit.** This is an exact-source **failure to establish closure**, not a formal metatheorem that no other branch contains an unknown proof. No new Agda/Lean kernel or complete test suite was run. Some items are proven in the source and only need kernel acceptance; others are merely conditional compilers, documented target names, or invalidated universal auxiliary inequalities.
 
 ### Source-status vocabulary (apply to EVERY row)
 
@@ -23,9 +24,9 @@
 
 **Deliverable P0.1:** enumerate **every named source**, record original donor/current Clay blob SHA, verify exact symbol with `git grep -nF` on **the rollup head** (not GitHub default-branch-only search). Re-run on donor branches for purported missing terms. Current important check: Karp #1502's five all-`k` gamma owner blobs are **byte-identical** to Clay #1499, so F1 gamma-token composition is *already source-written* and MUST NOT be repeated.
 
-**Deliverable P0.2:** run focused local K0 `DASHI_NO_TMUX=1 bash scripts/referee_karp21_maxcut.sh kernel-cut`; R734 no-go/SymPy; Agda R856; Lean native root; and transitive trust/axioms audit on exactly these heads. Log *per theorem* pass/fail including compiler version and SHA; do not use `no executable available` as a proof or infer kernel success from a successful Python run.
+**Deliverable P0.2 — source-only CLOSED:** GitHub exact-head inspection of 47 Agda owner files and three Lean proof-candidate owners, 135 indexed terms with line/declaration/explicit-false-flag receipts, zero indicated implemented-owner mismatches, six byte-identical historical donor/Clay source comparisons, and independent SymPy verification of R734/R445 negative controls plus R856 integer threshold arithmetic. The source-only P0 audit is complete. The committed `scripts/check_clay_endpoint_symbol_audit_20261115.py` remains available as a strict **local recheck** but **was not executed** against a local checkout this round. This closure is a source-integrity receipt, **not kernel proof acceptance**.
 
-**Deliverable P0.3:** if a candidate already exists, repair/check its exact source before opening a new owner; update JSON evidence/status *only with supporting receipt*. All six terminal endpoints remain `UNPROVEN` until explicit same-original terminal proof terms exist.
+**Deliverable P0.3 — acceptance obligations retained:** the previously duplicate P0 kernel demands now remain expressly in **E0** for Karp original B1–G3 and in **each active theorem gate A1–F3** for its own Agda/Lean exact-head kernel and transitive trust/axiom checks (including Agda R856 and native Lean NS/YM candidates). Run pinned Agda 2.9, native Lean 4.28, R734/SymPy and relevant negative-control tests at the corresponding gate before marking *that* theorem closed. No native kernel receipt was produced by this source audit. All six original terminal endpoints remain unproved/uncertified.
 
 ### Phase A — NS whole-space R³: exact two-seam source payments
 
@@ -127,7 +128,7 @@
 
 | Gate | Demonstration needed for CLOSE | Current source determination |
 | --- | --- | --- |
-| P0 exact-source, no duplicate | term-by-term Git-tree/owner audit, same-head SHA, local pinned kernel receipts | **AUDITED AT SOURCE**, kernel **NOT RUN** |
+| P0 source-owner preflight | 135 indexed terms across 47 Agda + 3 Lean owner files, 6 original-donor blob equality receipts, zero implemented/flag mismatches; source-specific SymPy negatives | **CLOSED — SOURCE INTEGRITY ONLY**; native kernel requirements retained under E0 and all active A1–F3 theorem gates |
 | A original physical kernel+envelopes+continuation | source-specific A1–A4 true on real Euclidean NSE | **OPEN** |
 | B original signed/helical W1+reserve+uniform continuation | true B1–B4; old universal W2 marked **REFUTED** | **OPEN** |
 | C original fixed-horizon R853 real ODE+rate bound | original same-field C1–C4; scalar R856 reused | **OPEN** |
