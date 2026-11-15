@@ -12,8 +12,8 @@ module DASHI.Moonshine.Monster3BFiniteSchrodingerBooleanDeltaExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (sym; trans)
-open import Relation.Binary.PropositionalEquality using (cong)
+open import Relation.Binary.PropositionalEquality using (sym; trans; cong)
+open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)
 
 import DASHI.Moonshine.C3CyclotomicAmplitudeAlgebraExact as C3
 import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as H
@@ -111,11 +111,41 @@ booleanDeltaMemberFromExtraction inv witness =
 -- six-coordinate Boolean test, so reuse the already-proved covariance theorem.
 ------------------------------------------------------------------------
 
+vTritEqualIncrement : ∀ left right →
+  V.tritEqual (H.increment left) (H.increment right)
+  ≡ V.tritEqual left right
+vTritEqualIncrement neg neg = refl
+vTritEqualIncrement neg zer = refl
+vTritEqualIncrement neg pos = refl
+vTritEqualIncrement zer neg = refl
+vTritEqualIncrement zer zer = refl
+vTritEqualIncrement zer pos = refl
+vTritEqualIncrement pos neg = refl
+vTritEqualIncrement pos zer = refl
+vTritEqualIncrement pos pos = refl
+
 x6EqualTranslationCovariant :
   (axis : H.Axis6) (left right : H.X6) →
   V.x6Equal (H.translate axis left) (H.translate axis right)
   ≡ V.x6Equal left right
-x6EqualTranslationCovariant = Weight.x6EqualTranslationCovariant
+x6EqualTranslationCovariant H.axis0
+    (H.x6 a0 a1 a2 a3 a4 a5) (H.x6 b0 b1 b2 b3 b4 b5)
+  rewrite vTritEqualIncrement a0 b0 = refl
+x6EqualTranslationCovariant H.axis1
+    (H.x6 a0 a1 a2 a3 a4 a5) (H.x6 b0 b1 b2 b3 b4 b5)
+  rewrite vTritEqualIncrement a1 b1 = refl
+x6EqualTranslationCovariant H.axis2
+    (H.x6 a0 a1 a2 a3 a4 a5) (H.x6 b0 b1 b2 b3 b4 b5)
+  rewrite vTritEqualIncrement a2 b2 = refl
+x6EqualTranslationCovariant H.axis3
+    (H.x6 a0 a1 a2 a3 a4 a5) (H.x6 b0 b1 b2 b3 b4 b5)
+  rewrite vTritEqualIncrement a3 b3 = refl
+x6EqualTranslationCovariant H.axis4
+    (H.x6 a0 a1 a2 a3 a4 a5) (H.x6 b0 b1 b2 b3 b4 b5)
+  rewrite vTritEqualIncrement a4 b4 = refl
+x6EqualTranslationCovariant H.axis5
+    (H.x6 a0 a1 a2 a3 a4 a5) (H.x6 b0 b1 b2 b3 b4 b5)
+  rewrite vTritEqualIncrement a5 b5 = refl
 
 unitTranslationCarriesBooleanDeltaPointwise :
   (axis : H.Axis6) (selected : H.X6) →
