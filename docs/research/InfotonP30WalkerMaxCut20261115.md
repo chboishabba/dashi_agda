@@ -1,5 +1,9 @@
 # Infoton / January Walker P30 maximum-cut — 15 November 2026
 
+
+> **16 November 2026 — original-owner correction:** The \`U(3) = [SU(3)_c × U(1)_em]/Z3\` selection rule and \`3Q_em ≡ −t_c (mod 3)\` were **already** derived for the same original 27 states in Johl Brown's DASHI KK/E6/Higgs source programme. Original owning roadmap: \`Docs/physics/KKE6GlobalHiggsChainZ6U3Original27Pareto20261027.md\`; original execution: \`scripts/check_kk_e6_post_e21_u3_photon.py\`; antecedents: Agda #1106 and #1241. **Matthew Reece** is now an explicitly credited independent published source (JHEP 10 (2023) 116; §2 eqs. (2.1)–(2.4); DOI 10.1007/JHEP10(2023)116), **not the originator of these DASHI computations or a code contributor**. The structured source is \`DASHI.Physics.Gravity.KKE6TrinificationDiagonalZThreeQuotientExact.reece2023AxionGaugeGlobalFormSource\`. The finite three-label \`conditionalU3QuotientChargeCancellation\` is only a presentation/reader projection of the stronger existing source-specific result. The separate Reece axion-coupling selection constraint is published prior art, **not** proved by our existing 27-state checker.
+
+
 **Scope:** exact primary-source/intake audit, finite mathematical counterexamples, and a runnable neutral comparator. **No original P30 implementation, energy experiment, ECC equivalence or Clay theorem is claimed.** This is an independent P30 gate ledger, not the existing 15-gate Clay closure ledger.
 
 ## Primary sources and provenance (do not collapse)
