@@ -4,7 +4,7 @@ module DASHI.Moonshine.Monster3BFiniteSchrodingerPointProjectorEvaluationExact w
 -- EVALUATION SEMANTICS OF THE SIX-COORDINATE POINT PROJECTOR
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (false; true)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_)
 open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)
