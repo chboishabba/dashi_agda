@@ -28,7 +28,7 @@ rotate3 : TripleWave → TripleWave
 rotate3 (tripleWave a b c) = tripleWave b c a
 
 rotate3ThreeTimes :
-  (field : TripleWave) → rotate3 (rotate3 (rotate3 field)) ≡ field
+  (w : TripleWave) → rotate3 (rotate3 (rotate3 w)) ≡ w
 rotate3ThreeTimes (tripleWave a b c) = refl
 
 -- A fixed state-indexed update acts independently on each channel.
@@ -44,9 +44,9 @@ transport3 state (tripleWave a b c) =
 -- channels use exactly the same transport law and state parameter.
 transport3CommutesWithRotate3 :
   (state : Shift.ShiftWavePhaseState) →
-  (field : TripleWave) →
-  transport3 state (rotate3 field)
-    ≡ rotate3 (transport3 state field)
+  (w : TripleWave) →
+  transport3 state (rotate3 w)
+    ≡ rotate3 (transport3 state w)
 transport3CommutesWithRotate3 state (tripleWave a b c) = refl
 
 -- Homogeneous channel permutation is thus a C3 action, not a
@@ -78,9 +78,9 @@ evolveWith (tripleOperator f g h) (tripleWave a b c) =
 
 heterogeneousCovariance :
   (operators : TripleOperator) →
-  (field : TripleWave) →
-  evolveWith (rotateOperators operators) (rotate3 field)
-    ≡ rotate3 (evolveWith operators field)
+  (w : TripleWave) →
+  evolveWith (rotateOperators operators) (rotate3 w)
+    ≡ rotate3 (evolveWith operators w)
 heterogeneousCovariance (tripleOperator f g h) (tripleWave a b c) = refl
 
 rotateOperatorsThreeTimes :
