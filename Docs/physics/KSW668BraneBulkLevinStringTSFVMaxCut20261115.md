@@ -1,6 +1,6 @@
 # KSW/KK → AdS₅ brane bulk-shortcut maximum cut — Levin, SUSY, string, TSFV, wormholes, exotic gravity
 
-**As of 2026-11-15 (Melbourne); ownership:** original existing DASHI Agda PR #1504, not a new PR or CI acceptance. **Source checked:** Caldwell & Langlois, *Shortcuts in the fifth dimension*, Phys. Lett. B 511 (2001) 129–135, DOI [10.1016/S0370-2693(01)00631-1](https://doi.org/10.1016/S0370-2693(01)00631-1), original [arXiv:gr-qc/0103070](https://arxiv.org/pdf/gr-qc/0103070), actual Eqs (1),(4),(7)–(20) verified against original PDF (especially pages 2–5).
+**As of 2026-11-15 (Australia/Brisbane); current ownership:** original KSW #1504 work already integrated and #1508 merged; ongoing F8/UVIR continuation is **single active draft PR #1512**, branch `research/ksw668-f8-original-t2-microlocal-20261115`. All result classes remain separate: paper-theorem application, source-equivalent numerical audit, exact GitHub-head execution, pinned local Agda kernel and physical observation. **Source checked:** Caldwell & Langlois, *Shortcuts in the fifth dimension*, Phys. Lett. B 511 (2001) 129–135, DOI [10.1016/S0370-2693(01)00631-1](https://doi.org/10.1016/S0370-2693(01)00631-1), original [arXiv:gr-qc/0103070](https://arxiv.org/pdf/gr-qc/0103070), actual Eqs (1),(4),(7)–(20) verified against original PDF (especially pages 2–5).
 
 ## Crucial non-equivalence: internal KK projection ≠ curved brane geodesic comparison
 
