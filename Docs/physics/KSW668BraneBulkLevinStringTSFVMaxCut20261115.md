@@ -1453,3 +1453,40 @@ The prior legacy **three-grid** fail-closed receipt remains unchanged. New norma
 - \`ads5OriginalMovingTTThreeMultipoleThreeObservableConvergence\`: original H, intrinsic Weyl, SMS projected Weyl AND outside bulk-cone convergence on independently varied radial/normal/time meshes; **OPEN**.
 - \`ads5OriginalT2NeumannToWeylEllipticFIOComposition\` / \`ads5OriginalT2ActualCompactTTNonzeroEarlyBothWeyl\`: external-theorem-dependent original compact-source prescribed-source existential proof *candidate*, independent referee/Agda continuum acceptance **OPEN**.
 - F9 action-generated anisotropic stress, scalar/vector/brane-bending/cylinder stability; F10 physical scale/receiver; F11 Agda kernel/observable weld; D1 independently calibrated experiment remain **OPEN**.
+
+
+---
+
+## 15 November 2026 maximum-cut VIII — full coupled moving AdS₅ weighted SBP–SAT energy closed semidiscretely, sourced version included
+
+**Repository:** previous canonical KSW F8 rollup [PR #1512](https://github.com/chboishabba/dashi_agda/pull/1512) is **MERGED**. This is a follow-on based on merged \`master\`, not further edits to #1512. **Full new proof and audit:** [KSW668F8FullCoupledWeightedSBPEnergyMaxCut20261115.md](KSW668F8FullCoupledWeightedSBPEnergyMaxCut20261115.md). The originally requested standalone FIO proof \`Docs/physics/KSW668F8OriginalT2NeumannFIOProof20261115.md\` remains preserved in master and is not overwritten.
+
+**New actual original solver mode:** \`normal_order=4\` uses the *true* AdS \(z^{-3}\)-weighted normal SBP2 split derivative \(D_wf=z^{3/2}D(z^{-3/2}f)+3f/(2z)\), the original sourced moving Israel weak SAT boundary, and the existing exact \(d=3,7,11\) conservative radial FV. Modes 1/2/3 remain unchanged as negative and comparison controls.
+
+**New large mathematical closure:** For \(U_T=aP+cM\), \(a=(1+v)/2,c=(1-v)/2\), the full **coupled normal+radial+warp+moving-weight** energy
+\[
+E=\tfrac12\sum H_y z^{-3}V_r\bigl(aP^2+cM^2+U(-L_r)U\bigr)
+\]
+has an exact finite-grid semidiscrete identity with the negative original Israel homogeneous wall square
+\[
+-\tfrac{w_0}{4}\|(1+v)P_0-(1-v)M_0\|^2_{V_r}
+\]
+and negative far SAT squares, plus exact bulk remainder
+\[
+\sum H_y wV_r\left[
+\tfrac{3v}{2z}\bigl(PM-U(-L_r)U\bigr)+\tfrac{v_T}{4}(P^2-M^2)
+\right].
+\]
+On the **entire original physical interval \(t\ge1\)** (including exact FIO \(t=2\) and long-baseline numerical \(t=12\)) the coefficient bounds give **mesh-independent** \(\boxed{E'(T)\le5E(T)}\). The calculation uses **all three original angular multipoles and the correct physical warp \(3/z\)**; the full semidiscrete identity is independently checked against the *actual* \`normal_order=4\` Numba stage at the original \(t=1,4/3,2\).
+
+**Sourced boundary weld and NO-GO:** with nonzero Israel datum \(G\), the coupled wall has extra \(-w_0(1-v)\langle M_0,G\rangle\). It has no state-independent \(C\|G\|^2\) bound; importing the previous normal-only \(2\sqrt5\) flux inequality into this coupled symmetrizer would be incorrect. The explicit *algebraic first-order characteristic* lift \(\Lambda_U=\Lambda_P=0,\ \Lambda_M=-2G(T,r)\chi(y)/(1-v(T))\), \(\chi(0)=1\), homogenizes the weak Israel SAT target and yields a fully coupled **semidiscrete** bulk residual \(F\) including its actual normal derivative, \(G_T\) and radial gradient contribution. Young's inequality closes
+\[
+\boxed{\widetilde E'\le6\widetilde E+\tfrac12\|F\|_E^2},
+\]
+with a standard forced Gronwall integral. The lift is **algebraic in the first-order discrete state**, NOT a newly generated physical scalar tensor metric or matter source action. The original weak SAT characteristic constraint-propagation, uniform high-Sobolev TT source budget, entire **fully discrete** SSPRK3 stability and both-Weyl boundary trace still remain OPEN.
+
+**Formal owners and executable verification:** new \`DASHI/Physics/Gravity/KSW668AdS5OriginalCoupledSBPSymmetrizerRationalExact.agda\` (generic rational bulk/warp cancellation, forced SAT square and boundary-lift algebra), imported into \`KSW668BraneBulkMaxCutEverything.agda\`; **source only, pinned Agda 2.9 kernel not run**. Producers \`scripts/ksw668_f8_full_coupled_weighted_sbp_energy.py\`, \`scripts/ksw668_f8_full_coupled_source_lift.py\`, and **29** new tests plus merged baseline **255** give **284/284 source-equivalent local PASS**, explicitly NOT an exact connected branch-head or Agda kernel receipt.
+
+**Actual new compact-TT original \(t=12\) normal-order-4 two-grid negative receipt:** \(H_{yy}\) drift **13.28%**, intrinsic 4D electric Weyl drift **157.93%**, projected 5D Weyl drift **31.72%**. Outside-bulk-cone field and both-Weyl controls remain nonzero (medium ratios **2.07%**, **4.38%**, **1.73%**). **Only two grids have run**, and neither the 3-grid original Weyl acceptance nor real physical detection has been established. Machine evidence \`Artifacts/ksw668/ads5_f8_full_coupled_weighted_SBP4_maxcut_20261115.json\`; \`scripts/check_ksw668_f8_maxcut.sh --weighted-two-grid\` deliberately produces a receipt and exits **42**.
+
+**Exact remaining maximum cut** now moves to (1) \`ads5OriginalMovingSBP4SATFullyDiscreteSSPRK3CFLAndTruncationError\`; (2) \`ads5OriginalTTCharacteristicConstraintPropagationUnderWeakSAT\`; (3) \`ads5OriginalMovingCompactTTCharacteristicLiftUniformSobolevSourceBudget\`; (4) \`ads5OriginalMovingH4PlusEpsilonNeumannToBothWeylTrace\`; and (5) \`ads5OriginalMovingTTThreeMultipoleThreeObservableConvergence\`, all **OPEN**. The original \(t=2\) FIO and actual compact-source dual-Weyl existential theorem **still require independent mathematical/referee/Agda acceptance**. F9 generating matter action, all-mode backreaction and separate cylinder; F10 calibrated physical attenuation/detection; F11 pinned continuum kernel/semantic weld; and D1 independent experimental graviton observation remain OPEN. No new physics or empirical early signal is asserted.
