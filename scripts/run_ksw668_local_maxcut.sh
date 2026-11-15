@@ -53,6 +53,8 @@ run python python3 scripts/ksw668_ads5_induced_weyl_receiver_partial.py
 run python python3 scripts/ksw668_ads5_mode_energy_scale_guard.py
 run python python3 scripts/ksw668_ads5_tt_clock_maxcut.py
 run python python3 scripts/test_ksw668_ads5_tt_clock_maxcut.py
+run python python3 scripts/ksw668_hankel_moving_maxcut.py
+run python python3 scripts/test_ksw668_hankel_moving_maxcut.py
 run python python3 scripts/test_ksw668_brane_original_maxcut.py
 run python python3 scripts/ksw668_ads5_z2_distributional_israel_coefficient.py
 run python python3 scripts/ksw668_brane_scalar_emitter_receiver_retarded.py
