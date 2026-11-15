@@ -1,0 +1,11 @@
+# Rectangular Maxwell boundary benchmark, source-independent normalization (2026-11-12)
+
+Following Smith/Filsinger quadrature steelman, this adds an **actual closed-form Maxwell field solution** for a *2D perfectly conducting rectangular CAVITY* (not yet the open, thin, loaded conducting plate proposed by Filsinger). Reuses canonical field-equation and source-admission obligations in Agda owners; Python supplies a numerical testbench, not a new Agda kernel certificate.
+
+Let TMz phasor `E_z = sin(mπx/a) sin(nπy/b)` with time convention exp(-iωt). At mu=eps=1 the exact cavity eigenfrequency is `ω_mn = π sqrt((m/a)² + (n/b)²)`. The magnetic field from Faraday is `H=(∂y E_z,-∂x E_z)/(iωμ)`. The Ampere current required to drive an off-eigenfrequency mode is `J_z= -i(k_mn²−ω²με)E_z/(ωμ)`. A genuine source-free eigenmode has J_z=0 at its own frequency; forcing two nondegenerate eigenmodes at the SAME frequency requires a nonzero source, different boundaries, or reactive loading.
+
+For a:b = φ:1, the 2D `(1,2)` and `(2,1)` cavity eigenfrequencies are approximately 6.5763 and 4.9949 in c=1 units; their ratio is **1.31661**, NOT φ. Earlier independent-axis f_y/f_x=φ is a toy 1D branch relationship and does NOT give the correct frequencies of 2D TMz eigenmodes. Therefore full physical geometry must be evaluated for the proposed golden rectangle. Boundary satisfies E_tangential=0 (E_z=0) on PEC walls. This is a precise MAXWELL test and an explicit limit on transfer to the actual open radiating conductor.
+
+Local `/mnt/data/smith_filsinger_nonlinear/maxwell_cavity.py` passed **8/8 tests** after fixing the initial Ampere curl-sign error. Repository counterpart `scripts/smith_filsinger_pec_maxwell_mode_benchmark.py` is compact. Neither physically computes finite-surface impedance, wave irradiation, output rectifier, ground electrodes, nonlinear ferromagnetics, actual fields or integrated external harvesting power.
+
+The user-supplied PDF pp48–51 and pp80–82 is source material about coil lengths and opposed secondary voltage phases; do not attribute this mathematical cavity derivation to Don Smith, Patrick Kelly, Darrer or Filsinger. The **complete** Maxwell/PEC boundary-to-open antenna weld, real Poynting load, scalar-to-vector surface current and measured phase/power source remain **OPEN**.

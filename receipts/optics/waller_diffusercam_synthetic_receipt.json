@@ -1,0 +1,63 @@
+{
+  "gershgorin_bound_violations": 0,
+  "gershgorin_supports_checked": 22218,
+  "max_fft_vs_roll_abs_error": 1.6653345369377348e-16,
+  "physical_photon_calibration": false,
+  "real_psf_receipt": false,
+  "receipt_kind": "synthetic_source_H_operator_and_exhaustive_gershgorin_validation",
+  "seed": 1729,
+  "shape_details": [
+    {
+      "columns": 27,
+      "exhaustive_supports": {
+        "1": {"lower_bound": 1.0, "supports": 27, "worst_margin": -4.440892098500626e-16},
+        "2": {"lower_bound": 0.2919927438470522, "supports": 351, "worst_margin": 5.551115123125783e-17},
+        "3": {"lower_bound": 0.0, "supports": 2925, "worst_margin": 0.14409011064637864}
+      },
+      "fft_vs_roll_max_abs_error": 5.551115123125783e-17,
+      "min_column_norm": 0.32689325423047527,
+      "mu": 0.7080072561529478,
+      "shape": [4,4,3]
+    },
+    {
+      "columns": 27,
+      "exhaustive_supports": {
+        "1": {"lower_bound": 1.0, "supports": 27, "worst_margin": -3.3306690738754696e-16},
+        "2": {"lower_bound": 0.3563014862902818, "supports": 351, "worst_margin": -1.1102230246251565e-16},
+        "3": {"lower_bound": 0.0, "supports": 2925, "worst_margin": 0.2626504971472594}
+      },
+      "fft_vs_roll_max_abs_error": 1.6653345369377348e-16,
+      "min_column_norm": 0.3698950151144968,
+      "mu": 0.6436985137097182,
+      "shape": [5,5,3]
+    },
+    {
+      "columns": 36,
+      "exhaustive_supports": {
+        "1": {"lower_bound": 1.0, "supports": 36, "worst_margin": -3.3306690738754696e-16},
+        "2": {"lower_bound": 0.36874585468734167, "supports": 630, "worst_margin": 1.6653345369377348e-16},
+        "3": {"lower_bound": 0.0, "supports": 7140, "worst_margin": 0.20851106779403994}
+      },
+      "fft_vs_roll_max_abs_error": 4.163336342344337e-17,
+      "min_column_norm": 0.32238371314128744,
+      "mu": 0.6312541453126583,
+      "shape": [4,5,4]
+    },
+    {
+      "columns": 36,
+      "exhaustive_supports": {
+        "1": {"lower_bound": 1.0, "supports": 36, "worst_margin": -3.3306690738754696e-16},
+        "2": {"lower_bound": 0.44286892702598846, "supports": 630, "worst_margin": -1.1102230246251565e-16},
+        "3": {"lower_bound": 0.0, "supports": 7140, "worst_margin": 0.18148287294983512}
+      },
+      "fft_vs_roll_max_abs_error": 3.2711774359133475e-17,
+      "min_column_norm": 0.26416138073786305,
+      "mu": 0.5571310729740115,
+      "shape": [5,4,4]
+    }
+  ],
+  "shapes_checked": 4,
+  "support_orders_exhaustive": [1,2,3],
+  "synthetic_only": true,
+  "worst_observed_minus_bound_margin": -4.440892098500626e-16
+}

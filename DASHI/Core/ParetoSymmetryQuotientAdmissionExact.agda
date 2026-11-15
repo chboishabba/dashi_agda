@@ -60,7 +60,7 @@ mapsWeakDominance :
   Pareto.WeaklyDominates costs
     (mapModel symmetry left)
     (mapModel symmetry right)
-mapsWeakDominance symmetry dominates axis
+mapsWeakDominance symmetry {left} {right} dominates axis
   rewrite preservesAxisCost symmetry axis left
         | preservesAxisCost symmetry axis right =
   dominates axis
@@ -95,6 +95,8 @@ record ParetoSymmetryQuotientBoundary : Set where
     eligibilityPreservationIsRequiredForParetoQuotient : Bool
     validParetoSymmetryMaySupportRepresentativeSearch : Bool
     symmetryQuotientCreatesUniqueOptimum : Bool
+
+open ParetoSymmetryQuotientBoundary public
 
 canonicalParetoSymmetryQuotientBoundary : ParetoSymmetryQuotientBoundary
 canonicalParetoSymmetryQuotientBoundary =

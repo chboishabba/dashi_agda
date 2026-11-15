@@ -1,6 +1,6 @@
 module DASHI.Physics.Optics.InverseCausticNumericalProducerExact where
 
-open import DASHI.Core.Prelude
+open import DASHI.Core.Prelude hiding (_≤_)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Physics.Optics.AsphericCausticManipulationExact as Caustic
@@ -22,7 +22,7 @@ import DASHI.Physics.Optics.CausticFreeformSourceAtlasExact as Sources
 record ResidualAlgebra (Scalar : Set) : Set₁ where
   constructor residual-algebra
   field
-    zero : Scalar
+    zeroScalar : Scalar
     _≤_ : Scalar → Scalar → Set
 
 open ResidualAlgebra public

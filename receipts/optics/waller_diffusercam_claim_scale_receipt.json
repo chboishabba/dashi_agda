@@ -1,0 +1,75 @@
+{
+  "budget_bytes": 200000000,
+  "candidates": [
+    {
+      "conservative_peak_bytes": 4803200,
+      "gram_bytes": 3200,
+      "lateral_positions": 1,
+      "lateral_radius": 0,
+      "lateral_step": 1,
+      "nx": 100,
+      "ny": 100,
+      "nz": 20,
+      "resident_lower_bound_bytes": 3203200,
+      "safe": true,
+      "selected_columns": 20,
+      "selected_h_bytes": 1600000,
+      "sensor_pixels": 10000
+    },
+    {
+      "conservative_peak_bytes": 43459200,
+      "gram_bytes": 259200,
+      "lateral_positions": 9,
+      "lateral_radius": 1,
+      "lateral_step": 1,
+      "nx": 100,
+      "ny": 100,
+      "nz": 20,
+      "resident_lower_bound_bytes": 29059200,
+      "safe": true,
+      "selected_columns": 180,
+      "selected_h_bytes": 14400000,
+      "sensor_pixels": 10000
+    },
+    {
+      "conservative_peak_bytes": 122000000,
+      "gram_bytes": 2000000,
+      "lateral_positions": 25,
+      "lateral_radius": 2,
+      "lateral_step": 1,
+      "nx": 100,
+      "ny": 100,
+      "nz": 20,
+      "resident_lower_bound_bytes": 82000000,
+      "safe": true,
+      "selected_columns": 500,
+      "selected_h_bytes": 40000000,
+      "sensor_pixels": 10000
+    },
+    {
+      "conservative_peak_bytes": 242883200,
+      "gram_bytes": 7683200,
+      "lateral_positions": 49,
+      "lateral_radius": 3,
+      "lateral_step": 1,
+      "nx": 100,
+      "ny": 100,
+      "nz": 20,
+      "resident_lower_bound_bytes": 164483200,
+      "safe": false,
+      "selected_columns": 980,
+      "selected_h_bytes": 78400000,
+      "sensor_pixels": 10000
+    }
+  ],
+  "geometry": [
+    100,
+    100,
+    20
+  ],
+  "largest_safe_radius": 2,
+  "planner_is_numerical_certificate": false,
+  "planner_is_physical_receipt": false,
+  "receipt_kind": "synthetic_claim_scale_memory_planner_validation",
+  "synthetic_only": true
+}

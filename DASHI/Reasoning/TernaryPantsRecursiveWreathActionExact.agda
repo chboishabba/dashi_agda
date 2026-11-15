@@ -68,7 +68,8 @@ identityActsAt :
   act (identityAut n) path ≡ path
 identityActsAt vnil = refl
 identityActsAt (slot vcons rest)
-  rewrite identityActsAt rest = refl
+  rewrite identityActsAt rest
+        | Local.slotTruthRoundTrip slot = refl
 
 ------------------------------------------------------------------------
 -- Recursive inverse.
