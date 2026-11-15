@@ -76,7 +76,7 @@
     "interpretation": "genuine compact 3D TT test source constructed; numerical UV/cutoff/convergence fail"
   },
   "acceptance": {
-    "source_equivalent_unit_tests": "111/111 local F8 source-equivalent unittest discover PASS (2026-11-15, 3.079 seconds)",
+    "source_equivalent_unit_tests": "134/134 distinct local source-equivalent PASS",
     "full_3d_B4_numerical_convergence": false,
     "external_analytical_Green_operator_previously_claimed_by_external_theorem": true,
     "tensor_matter_generating_action": false,
@@ -95,14 +95,21 @@
     "experimental_graviton_observation": false,
     "exact_realspace_compact_TT_source_positive_and_zero_controls": true,
     "discrete_3d_TT_source_support_null_check_passed": false,
-    "original_3D_Weyl_receiver_numerically_converged": false
+    "original_3D_Weyl_receiver_numerically_converged": false,
+    "new_both_Weyl_numerical_readouts_implemented": true,
+    "new_both_Weyl_convergence": false
   },
   "next_exact_lemmas": [
-    "ads5OriginalT2MicrolocalFIOCompositionIndependentProofAcceptance",
-    "ads5OriginalT2ActualCompactTTBothWeylIndependentProofAcceptance",
-    "ads5MovingTTCompact3DSpectralCutoffConvergence",
+    "ads5OriginalMovingTTPrepotentialBulkAndIsraelContinuumAgdaKernel",
+    "ads5OriginalTTZonalMultipoleAngularRationalAgdaAcceptance",
+    "ads5OriginalTTMultipoleRegularRadialConjugacyAgdaKernel",
+    "ads5OriginalCompactTTConservativeRadialCellSourceErrorBound",
+    "ads5OriginalMovingTTThreeMultipoleThreeObservableConvergence",
+    "ads5OriginalMovingWeylSobolevBoundaryTraceAndError",
+    "ads5OriginalT2NeumannToWeylEllipticFIOComposition",
+    "ads5OriginalT2ActualCompactTTNonzeroEarlyBothWeyl",
     "ads5CompactTTMatterActionRealization",
-    "ads5MovingFullCoupledStability",
+    "ads5MovingModeStabilityAndBackreaction",
     "cylinderDoubledDiscPerturbedBulkAndRetardedGreen",
     "ads5PhysicalScaleSourceDetectorComparison",
     "braneBulkOriginalAnalyticAgdaKernel",
@@ -353,5 +360,55 @@
     "epsilon_scaling_at_fixed_r_over_epsilon": "epsilon^-3",
     "local_math_tests": "8/8 PASS",
     "original_moving_receiver_model_wave_converged": false
+  },
+  "latest_maxcut_20261115": {
+    "phase": "F8 original moving AdS5 compact TT three radial multipoles",
+    "new_owners": [
+      "DASHI/Physics/Gravity/KSW668AdS5TensorPrepotentialCommutationExact.agda",
+      "DASHI/Physics/Gravity/KSW668AdS5TTMultipoleAngularRationalExact.agda",
+      "scripts/ksw668_f8_prepotential_commutation.py",
+      "scripts/ksw668_f8_tt_multipole.py",
+      "scripts/ksw668_f8_tt_multipole_refinement.py",
+      "Docs/physics/KSW668F8TTMultipoleMaxCut20261115.md",
+      "Artifacts/ksw668/ads5_f8_tt_multipole_threegrid_20261115.json"
+    ],
+    "principle": "TT local differential S commutes with homogeneous-in-brane-x original AdS5 moving tensor L and boundary Israel B",
+    "legendre": "(mu^4+6mu^2+1)/8=2/5 P0+4/7 P2+1/35 P4",
+    "multipoles": [
+      0,
+      2,
+      4
+    ],
+    "regular_effective_radial_dimensions": [
+      3,
+      7,
+      11
+    ],
+    "source_sampling": "analytic compact stress conservative Gauss radial-cell averages",
+    "receiver": "same original geometry, dimensionless original t=12 numerical control with original t=2 microlocal candidate separate",
+    "original_photon_dark_margin": 0.012459111173937387,
+    "same_physical_event": true,
+    "dual_Weyl_source_level_readout": true,
+    "tested_grid_radial_steps": [
+      0.012,
+      0.008,
+      0.006
+    ],
+    "last_pair_relative_drift": {
+      "H": 0.47311856387071777,
+      "E4": 0.928476086100418,
+      "E5": 0.8661999981241326
+    },
+    "finest_outside_bulk_field_ratio": {
+      "H": 0.022818326379657656,
+      "E4": 0.012195342329609626,
+      "E5": 0.008844591319719795
+    },
+    "numeric_B4_success": false,
+    "distinct_local_source_equivalent_tests": "134/134 PASS",
+    "agda_kernel_acceptance": false,
+    "exact_GitHub_branch_runner_executed": false,
+    "referee_early_receiver_theorem_accepted": false,
+    "physical_emitter_detected": false
   }
 }
