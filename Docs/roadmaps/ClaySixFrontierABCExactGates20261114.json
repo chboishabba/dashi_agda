@@ -2687,13 +2687,13 @@
         "id": "B1",
         "phase": "B",
         "title": "NS B true signed four-helicity physical payment",
-        "status": "OPEN",
+        "status": "CLOSED_REFUTED_UNRESTRICTED_REAL_FOURIER",
         "deliverables": [
           "actual R820/R825 signed estimate on same R408 trajectory",
           "no use of refuted unrestricted R734 W2"
         ],
-        "kernel_acceptance_required_before_full_closure": true,
-        "kernel_acceptance_state": "NOT_OBTAINED_THIS_ROUND",
+        "kernel_acceptance_required_before_full_closure": false,
+        "kernel_acceptance_state": "DEFERRED_UNDER_PYTHON_MATH_PROTOCOL__ORIGINAL_AGDA_R408_CARRIER_NOT_CONSTRUCTED",
         "nonterminal_20261115_continuity_reduction": {
           "target": "Physical unrestricted every-terminal R823 signed reserve, not the NS global regularity endpoint",
           "proof": "For continuous real r with r(0)<0, r is negative on a short interval and therefore has a strictly negative integral on every sufficiently short positive terminal time",
@@ -2714,6 +2714,41 @@
           "original_r823_universal_physical_inequality": "Classical real-Fourier counterexample; formal R408 rational-field instantiation remains open",
           "kernel_checked": false,
           "gate_closed": false
+        },
+        "closed": true,
+        "closure_protocol": "USER_REQUESTED_PYTHON_SYMPY_CLASSICAL_REAL_FOURIER_NO_AGDA_OR_CI_20261115",
+        "closure_method": "ORIGINAL_R820_R823_R824_R825_SAME_PACKET_ALGEBRA_AND_C1_C2_REAL_GALERKIN_SELECTED_RATE_STRICT_NEGATIVE_FOR_EVERY_POSITIVE_TERMINAL",
+        "closure_kind": "NEGATIVE_ROUTE_REFUTATION_NOT_POSITIVE_PHYSICAL_SIGNED_PAYMENT",
+        "original_positive_B1_target_proved": false,
+        "unrestricted_R820_R825_nonnegative_payment_possible": false,
+        "alternate_physical_signed_payment_and_restricted_class_coverage_proved": false,
+        "original_native_kernel_acceptance_required": true,
+        "native_agda_theorem_inhabited": false,
+        "native_kernel_proof_receipt": false,
+        "physical_R408_time_packet_constructed": false,
+        "original_typed_R820_R825_real_field_transport_closed": false,
+        "source_document": "Docs/roadmaps/ClayB1R820R825UnrestrictedSignedPaymentNoGo20261115.md",
+        "acceptance_script": "scripts/check_clay_b1_r820_r825_real_signed_payment_nogo_20261115.py",
+        "proof_of_disposal": "B1 all-data nonnegative signed-payment hypothesis is false on original physical 728-mode real Galerkin solution for all h in (0,T_R854]. B1 closed only in REFUTED sense; B2 requires a different genuinely valid all-data signed barrier or a proved restriction/coverage. No global regularity or original endpoint.",
+        "python_sympy_acceptance": {
+          "exact_source_r820_r823_reserve_demand_ring_identity": true,
+          "exact_source_r824_r825_original_incidence_graded_ring_identity": true,
+          "original_same_packet_r820_r823_r853_algebra_source_written": true,
+          "full_r829_original_initial_r853_rate": "-28273644/125",
+          "first_exit_real_C1_R71": true,
+          "full_real_C2_selected_rate_source_vector_replay": true,
+          "physical_selected_rate_state_Lambda": "618365778064115445891072",
+          "physical_r71_field_K": 5032512,
+          "original_R854_T": "226189/3938540454339300631433585885184",
+          "strict_selected_rate_pointwise_upper": "-19/125",
+          "strict_negative_integral_every_h_from_0_to_original_T": true,
+          "source_denom_and_comparable_incidence_no_substitution": true,
+          "exact_local_command_passed": true,
+          "exact_executed_script_git_blob": "8efba6064c86c86fb29c5f4cbaac4a5598dfc313",
+          "real_field_extension_semantics": "Classical finite Fourier sums with genuine sqrt norm, NOT formalized Agda rational R408",
+          "original_R408_typed_trajectory_constructed": false,
+          "original_positive_signed_estimate_proved": false,
+          "original_endpoint_proved": false
         }
       },
       {
@@ -2726,7 +2761,15 @@
           "true signed barrier and uniform continuation"
         ],
         "kernel_acceptance_required_before_full_closure": true,
-        "kernel_acceptance_state": "NOT_OBTAINED_THIS_ROUND"
+        "kernel_acceptance_state": "NOT_OBTAINED_THIS_ROUND",
+        "dependency_20261115_B1_unrestricted_no_go": {
+          "B1_original_unrestricted_nonnegative_signed_rate_refuted_in_real_Fourier": true,
+          "cannot_use_original_R821_unrestricted_signed_payment_as_true": true,
+          "replacement_requires_new_valid_positive_balance_or_proved_coverage_of_restricted_initial_class": true,
+          "original_W1_still_open": true,
+          "original_all_data_continuation_still_open": true,
+          "B2_closed": false
+        }
       },
       {
         "id": "C1",
@@ -5349,7 +5392,6 @@
     "active_gate_ids": [
       "A1",
       "A2",
-      "B1",
       "B2",
       "D1",
       "D2",
@@ -5360,11 +5402,12 @@
       "F2",
       "F3"
     ],
-    "active_gate_count": 12,
+    "active_gate_count": 11,
     "completed_gate_ids": [
       "P0",
       "C1",
-      "C2"
+      "C2",
+      "B1"
     ],
     "round_20261115_packet_weld_real_ode_audit": {
       "date": "2026-11-15",
@@ -5423,8 +5466,8 @@
       "independent_kernel_receipt": false,
       "original_endpoint_closed": false
     },
-    "completed_gate_count": 3,
-    "closure_counting_protocol": "P0_SOURCE_PREFLIGHT_PLUS_C1_C2_USER_REQUESTED_SYMPY_MATHEMATICAL; ORIGINAL_NATIVE_KERNEL_COUNTS_UNCHANGED",
+    "completed_gate_count": 4,
+    "closure_counting_protocol": "FOUR_DECIDED: P0_SOURCE_PREFLIGHT_C1_C2_REAL_FOURIER_MATH_B1_NEGATIVE_REFUTATION; B1_NOT_POSITIVE_SIGNED_PAYMENT; ORIGINAL_NATIVE_KERNEL_COUNTS_UNCHANGED",
     "original_native_gate_acceptance_pending_including_c1": true,
     "round_20261115_c1_python_math_closure": {
       "date": "2026-11-15",
@@ -5472,6 +5515,27 @@
       "original_R408_real_packet": false,
       "original_endpoint_closed": false,
       "caution": "Python mathematical C2 success under user waiver only, not Agda/Lean/native formal accepted proof or official Clay result."
+    },
+    "positive_signed_B1_payment_count": 0,
+    "round_20261115_b1_unrestricted_signed_no_go": {
+      "date": "2026-11-15",
+      "gate_resolution": "CLOSED_REFUTED_UNRESTRICTED_REAL_FOURIER",
+      "original_R820_R821_R823_R824_R825_source_read": true,
+      "classical_physical_r71_solution_and_r853_rate_from_C1_C2": true,
+      "universal_terminal_time_counterexample": true,
+      "original_R854_T": "226189/3938540454339300631433585885184",
+      "strict_rate_upper": "-19/125",
+      "original_R823_reserve_minus_demand_integral_strict_negative": true,
+      "original_R825_quadratic_plus_high_minus_low_integral_strict_negative": true,
+      "positive_B1_estimate_proved": false,
+      "original_native_R408_real_packet": false,
+      "native_kernel_checked": false,
+      "original_Millennium_endpoint_closed": false,
+      "script": "scripts/check_clay_b1_r820_r825_real_signed_payment_nogo_20261115.py",
+      "documentation": "Docs/roadmaps/ClayB1R820R825UnrestrictedSignedPaymentNoGo20261115.md",
+      "executed_git_blob": "8efba6064c86c86fb29c5f4cbaac4a5598dfc313",
+      "B2_status": "OPEN_AND_BLOCKED_ON_ORIGINAL_UNRESTRICTED_SIGNED_PAYMENT",
+      "caution": "A negative resolution of one invalid universal auxiliary estimate does not produce a positive B proof or close NS."
     }
   }
 }
