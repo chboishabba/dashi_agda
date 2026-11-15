@@ -76,7 +76,7 @@
     "interpretation": "genuine compact 3D TT test source constructed; numerical UV/cutoff/convergence fail"
   },
   "acceptance": {
-    "source_equivalent_unit_tests": "103/103 F8 local source-equivalent tests PASS (full 103-test unittest discover in 5.314s)",
+    "source_equivalent_unit_tests": "111/111 local F8 source-equivalent unittest discover PASS (2026-11-15, 3.079 seconds)",
     "full_3d_B4_numerical_convergence": false,
     "external_analytical_Green_operator_previously_claimed_by_external_theorem": true,
     "tensor_matter_generating_action": false,
@@ -92,7 +92,10 @@
     "source_uv_ir_diagnostic_verified_numerically": true,
     "original_3d_bessel_inverse_outside_support_null_control_passed": false,
     "original_3d_bessel_inverse_outside_support_null_control_detects_failure": true,
-    "experimental_graviton_observation": false
+    "experimental_graviton_observation": false,
+    "exact_realspace_compact_TT_source_positive_and_zero_controls": true,
+    "discrete_3d_TT_source_support_null_check_passed": false,
+    "original_3D_Weyl_receiver_numerically_converged": false
   },
   "next_exact_lemmas": [
     "ads5OriginalT2MicrolocalFIOCompositionIndependentProofAcceptance",
@@ -338,5 +341,17 @@
     "standalone_previous_proof_verbatim": "Docs/physics/KSW668F8OriginalT2NeumannFIOProof20261115.md",
     "new_uvir_maxcut": "Docs/physics/KSW668F8UVIRCutoffAndDyadicReuse20261115.md",
     "canonical_updated": "Docs/physics/KSW668BraneBulkLevinStringTSFVMaxCut20261115.md"
+  },
+  "f8_exact_local_TT_spatial_realspace_20261115": {
+    "differential_operator_on_x_axis": "d4 f/dr4 + (2/r)d3 f/dr3 - (3/r²)d2 f/dr2 + (3/r³)df/dr",
+    "source": "same unit-mass Cinf radial compact bump epsilon=0.024, Q=diag(0,1,-1), TT projection local order4",
+    "original_source_convention": "epsilon^4 times local operator",
+    "sample_at_r_0p008": -1852823.059351569,
+    "sample_at_receiver_r_1p8220210521210103_exact": 0,
+    "support_preservation_proved_by_differential_locality": true,
+    "nontrivial_Gaussian_cartesian_Sympy_crosscheck": true,
+    "epsilon_scaling_at_fixed_r_over_epsilon": "epsilon^-3",
+    "local_math_tests": "8/8 PASS",
+    "original_moving_receiver_model_wave_converged": false
   }
 }
