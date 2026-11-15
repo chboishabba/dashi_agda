@@ -57,6 +57,25 @@
 
 **Required exact B deliverables**: B1 obtain real original R408 cutoff/time/packet helical decomposition; B2 prove or honestly refute an actually *valid* signed R820–R825 rate/reserve estimate (may require different state restrictions and a proof of coverage, never a hidden assumption of global regularity); B3 pay independent original W1; B4 uniform-in-\(N\) critical barrier and continuum/all-data continuation. A finite `decideActualReserve` or `R820` normal form is not B2.
 
+### 2026-11-15 R823 initial-sign continuity cut (new dependency reduction, NOT terminal closure)
+
+**Original source checked:** R850 already has an actual repository R692/R847 instantaneous same-object certificate for the radius-four 3-4-5 rational state; it computes
+\(C(0)=-557627/125\), \(P(0)=0\), \(D(0)=15834\), and
+\(r(0)=6(12C-P+D)=-28273644/125<0\).
+The independent physical 728-mode finite Galerkin ODE has the real field
+\(\dot u_k=-|k|^2u_k-iP_k\sum_{p+q=k}(q\cdot u_p)u_q\).
+It is a polynomial vector field on finite real coordinates, so standard finite-dimensional Picard theory gives a *nonconstant real-valued* local solution through this initial state. The genuine real helical projectors have \(|k|\) in \(\mathbb R\) on **all** nonzero modes; their selected finite sums define a real continuous functional \(r(u(t))\).
+
+**Elementary local-negative-integral theorem.** If \(r:[0,a)\to\mathbb R\) is continuous at zero and \(r(0)=r_0<0\), let \(\varepsilon=-r_0/2>0\). By continuity some \(\eta>0\) satisfies \(|r(t)-r_0|<\varepsilon\) for \(0\le t\le\eta\). Therefore \(r(t)<r_0/2<0\) and
+\[
+\forall\,0<h\le\eta:\quad \int_0^h r(t)\,dt <(r_0/2)h<0.
+\]
+Thus a *universal physical R823 reserve-demand inequality demanded for every terminal time* is incompatible with the true real finite-Fourier selected rate, **provided** its original signed R823 rate is transported faithfully to this continuous real functional. This refutation requires neither the R854 derivative constant nor the *particular* R854 horizon. It is NOT the same as refuting Navier–Stokes regularity. Without continuity (e.g. a jump with \(r(0)<0\) but \(r(t)=1\) for \(t>0\)), the implication fails.
+
+**Independent fixed-horizon exact check (not an R408 type weld):** existing R828 estimate has \(K=5032512\), \(L=391309593930357307785216\), \(T=226189/3938540454339300631433585885184\). Exact rational arithmetic gives \(LKT=226189/2\) and \(r_0+LKT=-28273663/250<-226189/2<0\). The affine integrated upper bound is negative. The new regression is `scripts/check_ns_r823_initial_rate_continuity_cut_20261115.py`.
+
+**Fail-closed boundary:** R408/R823's global rational `PeriodicHelicalProjectorLaws` cannot be fabricated from a rational 3-4-5 snapshot: the physical norm at (1,1,0) uses \(\sqrt2\). Nor can a nonconstant continuous real-time trajectory be rational-valued on a connected interval. A *real-field finite-sum/source transport* and a native proof/kernel receipt remain owed. The classical real-Fourier negative integral is stronger than a purely scalar R856 certificate but **does not close B1, C1, C2, or any of the six original endpoints**. The terminal and 14/15 gate statuses remain unchanged.
+
 ### Phase C — NS R71/R74/R833/R853–R856: exact real-rate route
 
 | Exact checked name | Real owner | Adjudication |
