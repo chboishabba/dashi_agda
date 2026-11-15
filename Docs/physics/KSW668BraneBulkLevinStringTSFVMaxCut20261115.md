@@ -1278,3 +1278,6 @@ A \(\lambda^{-4}\) normalized smooth compact oscillatory TT source supported nea
 | D1 | \`physicalGravitonObservation\` | **OPEN** independently calibrated and replicated experiment; not mathematically completable |
 
 The **next largest scientific cut is now F9.1 (physical matter action) + F9.2 (coupled stability)** once F8.1/2 theorem transfer is reviewed, while **F8.3 remains a separate independent quantitative numerical benchmark**, not a veto against a valid microlocal existential theorem.
+
+
+**Original-ray phase matching (essential F8.1 correction).** A microlocal source launched from the moving boundary must have the tangential phase obtained by restricting the five-dimensional direct-null phase `Phi(T,z,x)=-T+s z+k_x x` to `z=b(T)`: `Phi_src(T,x)=-T+s b(T)+k_x x`, with `s=Delta z/Delta T` for the exact original chord and `s²+k_x²=1`. In particular the induced boundary temporal frequency is `-1+s v(T)`, not `-1`; omitting `s b(T)` launches a different bicharacteristic and invalidates the chosen-source-to-original-receiver symbol match. Source phase is compactly cut off and TT-projected by the local spatial differential operator. This correction does not itself prove the full Neumann-FIO transfer/cutoff/error theorem, which remains subject to independent audit.
