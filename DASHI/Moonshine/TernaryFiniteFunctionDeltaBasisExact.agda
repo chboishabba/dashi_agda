@@ -2,7 +2,7 @@ module DASHI.Moonshine.TernaryFiniteFunctionDeltaBasisExact where
 
 open import DASHI.Core.Prelude
 open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)
-open import Data.Rational.Base using (ℚ)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_)
 import Data.Rational.Properties as ℚP
 open import Agda.Builtin.List using ([]; _∷_)
 
