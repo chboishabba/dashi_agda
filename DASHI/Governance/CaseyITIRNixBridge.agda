@@ -30,19 +30,19 @@ record JoinSemilattice
   (A : Set ℓ)
   : Set ℓ where
   field
-    _⊔_ : A → A → A
+    join : A → A → A
 
-    ⊔-associative :
+    join-associative :
       ∀ x y z →
-      (x ⊔ y) ⊔ z ≡ x ⊔ (y ⊔ z)
+      join (join x y) z ≡ join x (join y z)
 
-    ⊔-commutative :
+    join-commutative :
       ∀ x y →
-      x ⊔ y ≡ y ⊔ x
+      join x y ≡ join y x
 
-    ⊔-idempotent :
+    join-idempotent :
       ∀ x →
-      x ⊔ x ≡ x
+      join x x ≡ x
 
 open JoinSemilattice public
 
@@ -63,22 +63,22 @@ module Replication
   open JoinSemilattice (stateJoin K)
 
   merge : State K → State K → State K
-  merge x y = x ⊔ y
+  merge = join
 
   merge-associative :
     ∀ x y z →
     merge (merge x y) z ≡ merge x (merge y z)
-  merge-associative = ⊔-associative
+  merge-associative = join-associative
 
   merge-commutative :
     ∀ x y →
     merge x y ≡ merge y x
-  merge-commutative = ⊔-commutative
+  merge-commutative = join-commutative
 
   merge-idempotent :
     ∀ x →
     merge x x ≡ x
-  merge-idempotent = ⊔-idempotent
+  merge-idempotent = join-idempotent
 
 ------------------------------------------------------------------------
 -- Receipt-based governance.
