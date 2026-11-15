@@ -983,3 +983,36 @@ python3 scripts/ksw668_f8_refinement.py
 The existing \`scripts/run_ksw668_local_maxcut.sh --math\` imports F8's **smoke** checks, leaving the expensive/failed convergence gate explicit and separate. CI is not substituted for local verification. Exact new PR-head GitHub checkout and pinned Agda have not been executed in this tool environment; the local source-equivalent producer and its **8/8** unit cases ran independently here.
 
 **Highest-alpha cut next:** fix compact 3D \(k^4\) ultraviolet/angular reconstruction using high-order/validated spectral inversion with independent \(k_{\max}\) and \(\Delta k\) control, then implement the **projected 5D Weyl** source-to-receiver observable and the same *t=2* original comparator. An alternative rigorous route is a non-glancing, no-conjugate-point boundary Fourier-integral principal-symbol nonvanishing theorem with a prepared compact high-frequency TT pulse. Both routes need actual proof; no shortcut by model-label coincidence or arbitrary waveform threshold.
+
+
+### F8.05 Steelman: exact ORIGINAL t=2 non-glancing compact-source microlocal preflight (5 additional tests)
+
+The exploratory \(t=6\) finite-difference control deliberately enlarged the photon-dark window but does **not** replace the original \(t=2\) endpoint. Now independently check the original **same receiver** \(r=r_g(2)=0.697797781099381\), \(t_{\rm obs}=2\) with a **smooth compact 3D TT source genuinely supported inside** \(|\mathbf x|<\epsilon=0.001\) and a temporal drive with interior point \(T_e-T(1)=0.0002\). The corresponding actual emission proper time and brane spatial point are
+\[
+t_e=1.000141436357416,\qquad
+x_e=r_g(2)-r_g(t_e,2)=0.00014471324980684235,
+\]
+so \(\boldsymbol x_e\) is **strictly inside the source's compact spatial support**, not a zero-amplitude boundary point. The intrinsic photon exclusion, even allowing the entire spatial source support, is
+\[
+r_g(2)-\epsilon-\log2=0.003650600539435688>0.
+\]
+The direct null interior chord has radial Poincaré slope \(\dot z/\dot T=-0.5824218543413765\), while the brane velocities at its two endpoints are
+\[
+v_{\rm emit}=-0.707056777651097,\qquad v_{\rm recv}=-0.4472135954999579.
+\]
+Thus \(v_{\rm emit}<\dot z/\dot T<v_{\rm recv}\) (strictly enters the allowed bulk at emission, exits to receiver), and convexity \(b''(T)=t^3/(1+t^2)^2>0\) ensures the straight chord lies in \(z>b(T)\) at all intermediate times. The actual unit-normal principal factors for \(\omega_{\rm bulk}=1\) are
+\[
+\boxed{n\cdot\xi|_e=+0.17622301193802767,\quad
+n\cdot\xi|_r=-0.07558371447219975}
+\]
+and therefore neither brane interaction is glancing. Constant-curvature AdS5 has \(R(J,k)k=0\) for orthogonal screen Jacobi fields along a null \(k\), excluding an interior null conjugate-point focusing obstruction for this direct chord. For \(Q=\operatorname{diag}(0,+1,-1)\) and spatial wavevector along the x-ray, the **local compact TT projector** has nonzero \(yy\) principal symbol, and the **intrinsic 4D electric-Weyl** principal factor at the receiver is
+\[
+\boxed{\frac{\omega_\eta^2+k_x^2}{4a^2}=0.0840263224215478>0.}
+\]
+All these **geometric and algebraic** factors are exact original-model expressions and were independently checked numerically at high precision in \`scripts/ksw668_f8_non_glancing_source.py\`; \`scripts/test_ksw668_f8_non_glancing_source.py\` passed **5/5** local cases including too-small-source failure. The same conditions hold with wider margin at \(t=6\).
+
+**Next theorem to import rigorously rather than assert:** the non-glancing boundary Neumann-to-Dirichlet wave operator is a microlocal elliptic Fourier integral operator associated with the lens relation, with nonzero principal trace symbol. Useful original sources: Melrose–Sjöstrand, *Singularities of boundary value problems I/II* (1978/1982); Stefanov–Yang, *The inverse problem for the Dirichlet-to-Neumann map on Lorentzian manifolds*, *Analysis & PDE* 11 (2018), elliptic FIO lens relation; and *Inverse boundary value problems for wave equations with quadratic nonlinearities*, *J. Differential Equations* (2022), §6.4 Lemma 13, which explicitly constructs Neumann boundary waves with a singularity reaching a transversally-hit receiving boundary and nonzero incident/reflected trace principal symbol. This theorem route, composed with the now **nonzero original Neumann factors**, the nonzero compact TT differential symbol and the nonzero Weyl symbol, has a serious prospect of proving an **existential** nonzero early retarded smooth high-frequency wavepacket for *prescribed* brane TT stress without brute-force \(k^4\) numerical inversion. One must check the precise hypotheses of the source FIO theorem on the original noncompact time strip and construct compatible compact microlocal oscillatory data; it is **not yet a kernel-accepted proof** of the composition or the full physical receiver.
+
+**Precise additional lemma:** \`ads5OriginalT2NonGlancingCompactTTRayPrincipalExact\` — **PASS mathematical exact-model algebra/smooth interior support check; Agda OPEN**. \`ads5OriginalT2NeumannToWeylEllipticFIOComposition\` — **OPEN analytic theorem application**. \`ads5OriginalT2CompactTTActualEarlyNonzeroWeyl\` — **OPEN final prescribed-source existential wave proof**. The microphysical stress-generating brane action, SMS projected 5D electric Weyl, nonlinear/all-mode stability, physical scale, Agda kernel and empirical observation remain distinct and OPEN.
+
+**Local checks:** \`bash scripts/check_ksw668_f8_maxcut.sh --smoke\` now includes 8 original time-domain controls plus 5 original t2 non-glancing controls (**13 new independent tests**), and prints the exact t2/t6 ray contract. \`--full\` continues to **exit 42** for unresolved 3D Fourier/Weyl numerical convergence. The canonical model does not assume that one failed finite-difference discretization refutes the five-dimensional shortcut hypothesis; the microlocal and spectral/convergent-numerical paths are complementary.
