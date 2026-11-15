@@ -1,0 +1,62 @@
+module DASHI.Culture.PowersPlantationParadiseEmpiricalPhase3Validation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Core.IntersectionalNonFactorability as INF
+import DASHI.Culture.PowersPlantationParadiseMethodologySourceAtlasExact as Methodology
+import DASHI.Culture.PowersPlantationParadiseArchiveModalityExact as ArchiveModality
+import DASHI.Culture.PowersPlantationParadiseInvestigationParetoExact as Routing
+import DASHI.Culture.PowersPlantationParadiseHistoricalDiscriminatorExact as Discriminator
+import DASHI.Culture.ColonialTheatreSensoryAccessExact as Sensory
+import DASHI.Culture.PowersPlantationParadiseEvidenceGraphExact as Graph
+import DASHI.Culture.PowersPlantationParadiseMobilityRegimeTransitionExact as Mobility
+import DASHI.Culture.PowersPlantationParadiseResearchThroughPerformanceExact as PerformanceProbe
+import DASHI.Culture.PowersPlantationParadiseSourceAcquisitionPromotionExact as Promotion
+import DASHI.Culture.PowersPlantationParadiseFrontierGenealogyExact as Genealogy
+import DASHI.Culture.PowersPlantationParadiseEmpiricalRoadmapExact as Roadmap
+
+_methodology-boundary-paid : Methodology.PowersMethodologySourceBoundary
+_methodology-boundary-paid = Methodology.canonicalPowersMethodologySourceBoundary
+
+_archive-modality-boundary-paid : ArchiveModality.PowersArchiveModalityBoundary
+_archive-modality-boundary-paid = ArchiveModality.canonicalPowersArchiveModalityBoundary
+
+_five-axis-routing-paid : Routing.PowersInvestigationRoutingBoundary
+_five-axis-routing-paid = Routing.canonicalPowersInvestigationRoutingBoundary
+
+_selective-reopening-paid : Routing.PrimaryIssueChronologyReopening
+_selective-reopening-paid = Routing.primaryIssueReopensChronology
+
+_discriminator-boundary-paid : Discriminator.PowersHistoricalDiscriminatorBoundary
+_discriminator-boundary-paid = Discriminator.canonicalPowersHistoricalDiscriminatorBoundary
+
+_sensory-access-gap-paid : Sensory.EntryDoesNotRecoverSensoryAccess → ⊥
+_sensory-access-gap-paid = Sensory.entryDoesNotRecoverSensoryAccess
+
+_evidence-graph-boundary-paid : Graph.PowersEvidenceGraphBoundary
+_evidence-graph-boundary-paid = Graph.canonicalPowersEvidenceGraphBoundary
+
+_mobility-regime-boundary-paid : Mobility.PowersMobilityRegimeBoundary
+_mobility-regime-boundary-paid = Mobility.canonicalPowersMobilityRegimeBoundary
+
+_performance-probe-boundary-paid : PerformanceProbe.PowersResearchThroughPerformanceBoundary
+_performance-probe-boundary-paid = PerformanceProbe.canonicalPowersResearchThroughPerformanceBoundary
+
+_source-acquisition-promotion-boundary-paid : Promotion.PowersSourceAcquisitionPromotionBoundary
+_source-acquisition-promotion-boundary-paid = Promotion.canonicalPowersSourceAcquisitionPromotionBoundary
+
+_location-inspection-gap-paid :
+  INF.FactorsThrough Promotion.locationReading Promotion.inspectionReading → ⊥
+_location-inspection-gap-paid = Promotion.locationCannotRecoverInspection
+
+_frontier-genealogy-boundary-paid : Genealogy.PowersFrontierGenealogyBoundary
+_frontier-genealogy-boundary-paid = Genealogy.canonicalPowersFrontierGenealogyBoundary
+
+_compensation-frontier-genealogy-paid : Genealogy.FrontierGenealogyReceipt
+_compensation-frontier-genealogy-paid = Genealogy.compensationFrontierGenealogy
+
+_roadmap-boundary-paid : Roadmap.PowersEmpiricalRoadmapBoundary
+_roadmap-boundary-paid = Roadmap.canonicalPowersEmpiricalRoadmapBoundary
+
+roadmapBoundary : Roadmap.PowersEmpiricalRoadmapBoundary
+roadmapBoundary = Roadmap.canonicalPowersEmpiricalRoadmapBoundary

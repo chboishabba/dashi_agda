@@ -1,0 +1,81 @@
+name: Zhang 2025 EM gravity-like BIDI max-cut
+
+on:
+  push:
+    paths:
+      - 'DASHI/Physics/ExoticGravity/Zhang2025EMGravity*.agda'
+      - 'DASHI/Physics/ExoticGravity/Everything.agda'
+      - 'scripts/check_zhang2025_em_gravity*'
+      - 'scripts/check_zhang2025_quantitative_consumers.py'
+      - 'scripts/check_zhang2025_source_stress_dynamics.py'
+      - 'scripts/check_zhang2025_torsion_consumer.py'
+      - 'scripts/check_zhang2025_evidence_packets.py'
+      - 'tests/test_zhang2025_em_gravity_bidi.py'
+      - 'tests/test_zhang2025_quantitative_consumers.py'
+      - 'tests/test_zhang2025_source_stress_dynamics.py'
+      - 'tests/test_zhang2025_torsion_consumer.py'
+      - 'tests/test_zhang2025_evidence_packets.py'
+      - 'tests/fixtures/zhang2025_*.json'
+      - '.github/workflows/zhang2025-em-gravity-bidi.yml'
+  pull_request:
+    paths:
+      - 'DASHI/Physics/ExoticGravity/Zhang2025EMGravity*.agda'
+      - 'DASHI/Physics/ExoticGravity/Everything.agda'
+      - 'scripts/check_zhang2025_em_gravity*'
+      - 'scripts/check_zhang2025_quantitative_consumers.py'
+      - 'scripts/check_zhang2025_source_stress_dynamics.py'
+      - 'scripts/check_zhang2025_torsion_consumer.py'
+      - 'scripts/check_zhang2025_evidence_packets.py'
+      - 'tests/test_zhang2025_em_gravity_bidi.py'
+      - 'tests/test_zhang2025_quantitative_consumers.py'
+      - 'tests/test_zhang2025_source_stress_dynamics.py'
+      - 'tests/test_zhang2025_torsion_consumer.py'
+      - 'tests/test_zhang2025_evidence_packets.py'
+      - 'tests/fixtures/zhang2025_*.json'
+      - '.github/workflows/zhang2025-em-gravity-bidi.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  bounded-force-python:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run synthetic controls and non-promotion regression
+        run: |
+          python3 -m unittest discover -s tests -p 'test_zhang2025_em_gravity_bidi.py' -v
+          python3 -m unittest discover -s tests -p 'test_zhang2025_quantitative_consumers.py' -v
+          python3 -m unittest discover -s tests -p 'test_zhang2025_source_stress_dynamics.py' -v
+          python3 -m unittest discover -s tests -p 'test_zhang2025_torsion_consumer.py' -v
+          python3 -m unittest discover -s tests -p 'test_zhang2025_evidence_packets.py' -v
+          python3 scripts/check_zhang2025_source_stress_dynamics.py --input tests/fixtures/zhang2025_synthetic_translation_timed.json > zhang2025-translation-synthetic.json
+          python3 scripts/check_zhang2025_torsion_consumer.py --input tests/fixtures/zhang2025_synthetic_torsion_timed.json > zhang2025-torsion-synthetic.json
+          python3 scripts/check_zhang2025_quantitative_consumers.py > zhang2025-quantitative.json
+
+  scoped-agda-source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/dashi-agda29
+          key: zhang2025-agda29-${{ runner.os }}-86a1179
+      - name: Check focused Agda source and exact proof target
+        shell: bash
+        run: |
+          set -euo pipefail
+          export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
+          export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+          export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+          export AGDA_JOBS=2
+          bash scripts/check_zhang2025_em_gravity_formal.sh

@@ -1,0 +1,177 @@
+{
+  "schema": "dashi.ksw668.phase4.verified-math-and-original-source-coverage.v1",
+  "date": "2026-11-14",
+  "source_references": {
+    "MMS_SDC": "https://lasp.colorado.edu/mms/sdc/public/about/how-to/",
+    "MMS_event_DOIs": [
+      "10.1029/2020GL088761",
+      "10.1029/2022GL098445"
+    ],
+    "ENDF81_release_DOI": "10.11578/endf/2571019",
+    "ENDF81_original_N14_eval_secondary_preexisting_receipt": "AvilaLabs/OpenBNCT validation/fir1-k63-water-phantom/evaluated-neutron-source-selection.json, commit fe5150b896bf525f98bcc5c0a544b6b9d4428e79",
+    "Movebank_candidate_DOI_user_supplied": "10.5441/001/1.744_2",
+    "pigeon_paper_DOI": "10.1126/science.ady2486",
+    "human_AMS_DOI": "10.1096/fj.12-225599",
+    "atmospheric_DOI": "10.1017/RDC.2021.95"
+  },
+  "P0": {
+    "network_environment": "DNS inaccessible for external archive host, demonstrated local",
+    "agda_nix_installed": false,
+    "actual_raw_mms_cdf_downloaded_this_round": false,
+    "actual_Movebank_gps_downloaded_this_round": false,
+    "actual_ENA_FASTQ_downloaded_this_round": false,
+    "actual_ENDF_BVIII1_n14_member_downloaded_this_round": false,
+    "verified_SHA256_receipts_for_new_external_original_bytes": 0,
+    "runner": "scripts/run_ksw668_local_maxcut.sh --math or --all; original-data acceptance fails closed"
+  },
+  "A1": {
+    "original_math_source": "DASHI/Physics/Plasma/KSW668RationalThreeModeSourceExact.agda",
+    "rational_signed_regression": "scripts/ksw668_a1_original_rational_fourier_witness.py",
+    "positive_support": "z+(q)=ex, z+(k)=ex-ey, z-(p)=+i ey/-i ey with negative mode conjugates; zero elsewhere",
+    "k": [
+      1,
+      1,
+      0
+    ],
+    "p": [
+      1,
+      0,
+      0
+    ],
+    "q": [
+      0,
+      1,
+      0
+    ],
+    "B_squared_k": 0.5,
+    "B_squared_q": 0.25,
+    "transfer_values": [
+      1,
+      -1
+    ],
+    "both_sign_states_point_origin_zplus": [
+      4,
+      -2,
+      0
+    ],
+    "both_sign_states_point_origin_zminus": [
+      0,
+      0,
+      0
+    ],
+    "negative_control": "same local field but different spatial x derivatives ±2 -> opposite selected modal transfers",
+    "agda_complete_IdealElsasser_state_inhabited": false,
+    "same_MMS_3D_spatial_Fourier_observation": false
+  },
+  "B1_B2": {
+    "U1_4potential_continuum": "scripts/ksw668_u1_4potential_continuum.py",
+    "original_gauge_socket": "DASHI/Physics/Electromagnetism/U1ElectromagneticApplicationExact.agda",
+    "gauge_F_invariant": true,
+    "Bianchi_all_4": true,
+    "Maxwell_4D_sourced": true,
+    "continuity": true,
+    "source_current": [
+      "-x-y-z",
+      "-t",
+      "-t",
+      "-t"
+    ],
+    "exact_cube_dU_dt": "L^5*t",
+    "outward_flux": "-11*L^5*t/4",
+    "J_dot_E_integral": "7*L^5*t/4",
+    "measured_boundary_SI_calibrated": false
+  },
+  "C1": {
+    "prior_nuclear_Q_and_electron_state_receipt": "scripts/ksw668_bare_nuclear_two_body_kinematics.py; scripts/ksw668_nuclear_electron_final_states.py",
+    "neutral_atom_Q_eV": 625870.6545424724,
+    "bare_nucleus_Q_eV": 626313.0054367827,
+    "source_constant_reconciliation_eV": 0.3172437579179653,
+    "branching_and_recoil_experiment_acquired": false
+  },
+  "C2": {
+    "current_evaluation": "ENDF/B-VIII.1",
+    "raw_evaluated_neutron_archive_original_bytes": 343724780,
+    "raw_evaluated_neutron_archive_SHA256": "decff90016bfb5c25c8d4c7fb8d81f94ff2f104853165f0fe6a21bf61c4164e4",
+    "original_n14_archive_member": "neutrons-version.VIII.1/n-007_N_014.endf",
+    "original_n14_MAT": 725,
+    "reaction_MF": 3,
+    "reaction_MT": 103,
+    "original_n14_bytes": 1253924,
+    "original_n14_SHA256": "fd5c0c0beccefbcd0b57c49bcdf835449d2014e3740830377ce24760478c06d8",
+    "source_sha_from_existing_thirdparty_receipt_not_personally_downloaded": true,
+    "original_extract": "scripts/ksw668_endf81_extract_n14.py",
+    "source_interpolation_and_partial_whole_spectrum_gate": "scripts/ksw668_endf81_n14np_original.py",
+    "synthetic_ENDF_format_tests": "scripts/test_ksw668_endf81_primary.py",
+    "actual_full_energy_sigma_grid_newly_retrieved": false,
+    "site_specific_neutron_flux_or_body_transport_reconstructed": false
+  },
+  "D1_D2": {
+    "original_KK_causal_Agda": "DASHI/Physics/Gravity/KSW668KaluzaKleinSpacelikeFiberCausalExact.agda",
+    "original_KK_vacuum_script": "scripts/ksw668_kk_vacuum_observer_solution.py",
+    "metric": "Minkowski(-+++) + (dw + (2/3)dt)^2",
+    "Einstein_vacuum_solution": true,
+    "Christoffel_nonzero": 0,
+    "Riemann_nonzero": 0,
+    "Ricci_nonzero": 0,
+    "Einstein_nonzero": 0,
+    "coordinate_model_null_ray_times_x4": [
+      4,
+      5
+    ],
+    "interacting_5D_matter_solution_or_measured_arrival": false
+  },
+  "E1": {
+    "original_GPS_treatment_homing_join": "scripts/ksw668_movebank_original_treatment_join.py",
+    "real_GPS_treatment_data_joined": false,
+    "absent_GPS_is_censored_not_nonhoming_without_source_monitoring_coverage": true,
+    "human_AMS_measurement_count": 34,
+    "source_region_and_lag_screen": "NH1/NH2/NH3 original Hua annual 70 curves each, 5 author-flagged samples outside numeric proxy over tested temporal windows",
+    "human_pMC_F14C_calibration_completed": false
+  },
+  "E2": {
+    "conditional_poisson_upper": "scripts/ksw668_e2_zero_count_exclusion.py",
+    "source_admission": "original raw SHA256, same human specimen, original controls, measured efficiency/background/exposure, calibrated nuclear-product counting",
+    "synthetic_test": "scripts/test_ksw668_e2_bound.py",
+    "zero_count_95_mean_upper": 2.995732273553991,
+    "physical_human_exclusion_bound_established": false
+  },
+  "local_source_equivalent_validation": {
+    "local_equivalent_python_checks_passed": 8,
+    "checked_local_scripts": [
+      "A1 finite Fourier",
+      "U1 4 potential",
+      "KK 5D vacuum",
+      "ENDF original format",
+      "E2 Poisson",
+      "E1 GPS treatment",
+      "3D Maxwell cube",
+      "70 row atmospheric/N14 source acquisition replay"
+    ],
+    "github_exact_head_scripts_executed_locally": false,
+    "agda_kernel_verified": false
+  },
+  "unpaid_primitive_gates": {
+    "A1": [
+      "global original Agda Fourier-reality and transverse proof for sparse z±",
+      "normalized inverse-square projected signed coefficient",
+      "measured 3D MHD four-spacecraft data"
+    ],
+    "B1_B2": [
+      "same-original Agda U1 field derivation, calibrated SI constitutive medium",
+      "actual instrument sampled boundary 3D/4D"
+    ],
+    "C1_C2": [
+      "real target ionization/final-state branching and uncertainty",
+      "modern original N14 ENDF file bytes + source site neutron flux and body transport"
+    ],
+    "D1_D2": [
+      "interacting 5D Einstein-matter and common observer Hamiltonian",
+      "measured arrival, exclude unsupported transport extrapolation"
+    ],
+    "E1_E2": [
+      "original GPS/reference FASTQ bytes and source treatment/heading reconstruction",
+      "proper dietary/AMS calibration",
+      "controlled human same-specimen isotope experimental evidence"
+    ]
+  }
+}

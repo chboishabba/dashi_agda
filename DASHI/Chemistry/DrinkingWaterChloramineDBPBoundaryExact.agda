@@ -163,3 +163,5 @@ canonicalDrinkingWaterCombinedChlorineBoundary : DrinkingWaterCombinedChlorineBo
 canonicalDrinkingWaterCombinedChlorineBoundary =
   drinkingWaterCombinedChlorineBoundary
     false refl false refl false refl false refl false refl true refl
+
+open DrinkingWaterCombinedChlorineBoundary public

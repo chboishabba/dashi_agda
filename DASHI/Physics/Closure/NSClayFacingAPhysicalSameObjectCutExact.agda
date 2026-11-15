@@ -15,10 +15,15 @@ module DASHI.Physics.Closure.NSClayFacingAPhysicalSameObjectCutExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Sigma using (Σ; _,_)
+open import Data.Product.Base using (_×_; _,_)
 open import Data.Rational.Base using (ℚ; _≤_)
+open import Data.Rational.Unnormalised using (ℚᵘ)
 open import Relation.Binary.PropositionalEquality using (sym)
 
 import Real as BishopReal
+import RealProperties as BishopP
+import DASHI.Analysis.BishopPositiveCrossReciprocalUpperExact as Reciprocal
 
 import DASHI.Physics.Closure.NSCanonicalEuclideanPeriodicSemanticCarriersExact as Canonical
 import DASHI.Physics.Closure.NSTriadKNEuclideanSignedFrequencyCarrierRealizationExact as Euclidean
@@ -68,6 +73,176 @@ nearOriginPhysicalBound :
         (Origin.saturationCell (saturationWeld D I))))
 nearOriginPhysicalBound D I =
   Origin.physicalKernelSaturationOriginBound (saturationWeld D I)
+
+------------------------------------------------------------------------
+-- ALL-REAL A1 HEAT FLOOR: constructive rational interpolation.
+--
+-- The legacy HighFrequencyEnvelopeData below requires a rational
+-- `outputHeatRate` whose Bishop embedding EQUALS ν|xi|². This cannot
+-- inhabit arbitrary physical real frequencies or arbitrary positive
+-- real viscosity (consider ν=sqrt(2), xi=(1,0,0)). Do NOT infer a
+-- universal same-object weld from it.
+--
+-- The correct all-real bridge is a positive rational STRICT LOWER
+-- bound for the actual, same-frequency viscous heat rate. Murray/
+-- Bishop constructive rational density already gives this without
+-- classical choice or a global lattice gap. The remaining real
+-- resolvent comparison and physical kernel identification are still
+-- mathematical obligations; this theorem only pays the floor
+-- existence step, with the original physical viscosity and frequency.
+------------------------------------------------------------------------
+
+physicalViscousHeatAdmitsPositiveRationalFloor :
+  (fluid : Heat.PositiveViscosity) →
+  (point : Heat.PuncturedEuclideanFrequency) →
+  Σ ℚᵘ
+    (λ rational →
+      BishopReal._<_ BishopReal.0ℝ (BishopReal._⋆ rational) ×
+      BishopReal._<_ (BishopReal._⋆ rational)
+        (Heat.viscousHeatRate fluid (Heat.frequency point)))
+physicalViscousHeatAdmitsPositiveRationalFloor fluid point
+  with BishopP.fast-density-of-ℚ
+    BishopReal.0ℝ
+    (Heat.viscousHeatRate fluid (Heat.frequency point))
+    (Heat.viscousHeatRatePositive fluid point)
+... | rational , lowerPositive , lowerBelowHeat =
+  rational , lowerPositive , lowerBelowHeat
+
+------------------------------------------------------------------------
+-- UNIFORM SHELL FLOOR (a stronger A1 application than a pointwise floor).
+--
+-- Fix an output-frequency shell |xi|² >= radiusSquared > 0.
+-- A single positive rational can be chosen BELOW nu*radiusSquared;
+-- its value is INDEPENDENT of xi within that shell. The downstream
+-- comparison nu*radiusSquared <= nu*|xi|² and the real inverse-cube
+-- antitone inequality are still explicit owner obligations. The
+-- rational is chosen by the already-pinned Bishop density theorem,
+-- NOT by claiming nu*radiusSquared is itself rational.
+------------------------------------------------------------------------
+
+physicalShellHeatAdmitsPositiveRationalFloor :
+  (fluid : Heat.PositiveViscosity) →
+  (radiusSquared : BishopReal.ℝ) →
+  BishopReal._<_ BishopReal.0ℝ radiusSquared →
+  Σ ℚᵘ
+    (λ rational →
+      BishopReal._<_ BishopReal.0ℝ (BishopReal._⋆ rational) ×
+      BishopReal._<_ (BishopReal._⋆ rational)
+        (BishopReal._*_ (Heat.viscosity fluid) radiusSquared))
+physicalShellHeatAdmitsPositiveRationalFloor
+    fluid radiusSquared radiusSquaredPositive
+  with BishopP.fast-density-of-ℚ
+    BishopReal.0ℝ
+    (BishopReal._*_ (Heat.viscosity fluid) radiusSquared)
+    (BishopP.posx⇒0<x
+      (BishopP.posx,y⇒posx*y
+        (BishopP.0<x⇒posx (Heat.viscosityPositive fluid))
+        (BishopP.0<x⇒posx radiusSquaredPositive)))
+... | rational , floorPositive , floorBelowShellHeat =
+  rational , floorPositive , floorBelowShellHeat
+
+------------------------------------------------------------------------
+-- REAL-INVERSE ANALYTIC A1 SEAM ON THE ACTUAL BISHOP CARRIER
+--
+-- For a physical heat rate a and a *genuine unnormalised rational*
+-- q supplied by the pinned Bishop density theorem, 0<q<a proves
+-- 1/a <= 1/q. The pre-existing PositiveCrossReciprocalUpper
+-- owns the nontrivial constructive inverse law. No fictitious
+-- exact identification of a with an embedded rational is made.
+-- This is a scalar bound, not the unresolved full physical
+-- resolvent curvature/kernel/Gram same-object identification.
+------------------------------------------------------------------------
+
+positiveRationalFloorBoundsPhysicalInverse :
+  (a : BishopReal.ℝ) →
+  (q : ℚᵘ) →
+  (aPositive : BishopReal._<_ BishopReal.0ℝ a) →
+  (qPositive : BishopReal._<_ BishopReal.0ℝ
+    (BishopReal._⋆ q)) →
+  BishopReal._<_ (BishopReal._⋆ q) a →
+  BishopReal._≤_
+    (Reciprocal.positiveInverse aPositive)
+    (Reciprocal.positiveInverse qPositive)
+positiveRationalFloorBoundsPhysicalInverse
+    a q aPositive qPositive qBelowA =
+  BishopP.≤-respʳ-≃
+    (BishopP.*-identityˡ (Reciprocal.positiveInverse qPositive))
+    (Reciprocal.positiveCrossReciprocalUpper
+      qPositive
+      aPositive
+      (BishopP.≤-respʳ-≃
+        (BishopP.≃-symm (BishopP.*-identityˡ a))
+        (BishopP.<⇒≤ qBelowA)))
+
+-- Producer specialized to each physical ν|xi|²: returns both the
+-- EXACT rational witness and its proven reciprocal inequality.
+-- A single shell floor uses the same lemma with the shell lower rate.
+physicalHeatInverseAdmitsRationalUpper :
+  (fluid : Heat.PositiveViscosity) →
+  (point : Heat.PuncturedEuclideanFrequency) →
+  Σ ℚᵘ
+    (λ q →
+      Σ (BishopReal._<_ BishopReal.0ℝ
+            (BishopReal._⋆ q))
+        (λ qPositive →
+          BishopReal._≤_
+            (Reciprocal.positiveInverse
+              (Heat.viscousHeatRatePositive fluid point))
+            (Reciprocal.positiveInverse qPositive)))
+physicalHeatInverseAdmitsRationalUpper fluid point
+  with physicalViscousHeatAdmitsPositiveRationalFloor fluid point
+... | q , qPositive , qBelowA =
+  q , (qPositive ,
+    positiveRationalFloorBoundsPhysicalInverse
+      (Heat.viscousHeatRate fluid (Heat.frequency point))
+      q
+      (Heat.viscousHeatRatePositive fluid point)
+      qPositive
+      qBelowA)
+
+------------------------------------------------------------------------
+-- ONE SAME-SHELL RATIONAL FLOOR UNIFORMLY CONTROLS EACH PHYSICAL RATE.
+--
+-- The extra hypothesis is exactly the high-frequency SHELL membership
+-- inequality (viscosity * radiusSquared <= viscosity * |xi|²).
+-- It must be discharged from the existing Bishop-real squared-norm
+-- and viscosity monotonicity owners, rather than pretending that
+-- generic continuum frequencies have rational norm squares.
+--
+-- This reuses the *same* rational q chosen for the shell. The output
+-- frequency is still the actual punctured Euclidean frequency.
+------------------------------------------------------------------------
+
+physicalShellFloorBoundsEveryOutputInverse :
+  (fluid : Heat.PositiveViscosity) →
+  (radiusSquared : BishopReal.ℝ) →
+  (radiusPositive :
+    BishopReal._<_ BishopReal.0ℝ radiusSquared) →
+  (point : Heat.PuncturedEuclideanFrequency) →
+  BishopReal._≤_
+    (BishopReal._*_ (Heat.viscosity fluid) radiusSquared)
+    (Heat.viscousHeatRate fluid (Heat.frequency point)) →
+  Σ ℚᵘ
+    (λ q →
+      Σ (BishopReal._<_ BishopReal.0ℝ
+            (BishopReal._⋆ q))
+        (λ qPositive →
+          BishopReal._≤_
+            (Reciprocal.positiveInverse
+              (Heat.viscousHeatRatePositive fluid point))
+            (Reciprocal.positiveInverse qPositive)))
+physicalShellFloorBoundsEveryOutputInverse
+    fluid radiusSquared radiusPositive point shellBelowHeat
+  with physicalShellHeatAdmitsPositiveRationalFloor
+    fluid radiusSquared radiusPositive
+... | q , qPositive , qBelowShell =
+  q , (qPositive ,
+    positiveRationalFloorBoundsPhysicalInverse
+      (Heat.viscousHeatRate fluid (Heat.frequency point))
+      q
+      (Heat.viscousHeatRatePositive fluid point)
+      qPositive
+      (BishopP.<-≤-trans qBelowShell shellBelowHeat))
 
 ------------------------------------------------------------------------
 -- High-frequency physical identification.

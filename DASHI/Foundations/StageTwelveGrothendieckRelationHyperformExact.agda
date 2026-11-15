@@ -75,24 +75,24 @@ relationAt :
   StageAxis12 →
   StageAxis12 →
   Base.TriTruth
-relationAt field left right = field (left , right)
+relationAt fld left right = fld (left , right)
 
 transposeRelation :
   StageRelationField →
   StageRelationField
-transposeRelation field (left , right) = field (right , left)
+transposeRelation fld (left , right) = fld (right , left)
 
 transposeRelationInvolutive :
-  (field : StageRelationField) →
+  (fld : StageRelationField) →
   (cell : StageRelation144) →
-  transposeRelation (transposeRelation field) cell ≡ field cell
-transposeRelationInvolutive field (left , right) = refl
+  transposeRelation (transposeRelation fld) cell ≡ fld cell
+transposeRelationInvolutive fld (left , right) = refl
 
 diagonalObservation :
   StageRelationField →
   StageAxis12 →
   Base.TriTruth
-diagonalObservation field axis = field (axis , axis)
+diagonalObservation fld axis = fld (axis , axis)
 
 ------------------------------------------------------------------------
 -- 2. The 144 cells are a relation carrier, not 144 ternary states.
@@ -150,8 +150,8 @@ sameDiagonalObservation Atlas.atlas-11 = refl
 offDiagonal01 :
   StageRelationField →
   Base.TriTruth
-offDiagonal01 field =
-  field (Atlas.atlas-0 , Atlas.atlas-1)
+offDiagonal01 fld =
+  fld (Atlas.atlas-0 , Atlas.atlas-1)
 
 offDiagonal01Differs :
   offDiagonal01 flatRelation
@@ -230,8 +230,8 @@ signedMultiplicityToTriTruth (Signed.positiveMultiplicity n) = Base.tri-high
 
 coarseSignedRelationField :
   SignedRelationField → StageRelationField
-coarseSignedRelationField field cell =
-  signedMultiplicityToTriTruth (field cell)
+coarseSignedRelationField fld cell =
+  signedMultiplicityToTriTruth (fld cell)
 
 SignedRelationCellState : Set
 SignedRelationCellState =
@@ -379,7 +379,7 @@ SignedRelationCellBundleSheaf =
 signedRelationCellBundleSheaf :
   SignedRelationCellBundleSheaf
 signedRelationCellBundleSheaf = record
-  { restrict = λ field cell → field cell
+  { restrict = λ fld cell → fld cell
   ; compatible = λ locals → ⊤
   ; glue = λ locals witness → locals
   ; glueRestricts = λ locals witness cell → refl
@@ -669,7 +669,7 @@ RelationCellBundleSheaf =
 relationCellBundleSheaf :
   RelationCellBundleSheaf
 relationCellBundleSheaf = record
-  { restrict = λ field cell → field cell
+  { restrict = λ fld cell → fld cell
   ; compatible = λ locals → ⊤
   ; glue = λ locals witness → locals
   ; glueRestricts = λ locals witness cell → refl

@@ -624,17 +624,20 @@ bilinearDot3RightAdd :
 bilinearDot3RightAdd
   (C3.complex3 ux uy uz)
   (C3.complex3 vx vy vz)
-  (C3.complex3 wx wy wz)
-  rewrite complexMultiplyDistributesLeft ux vx wx
-        | complexMultiplyDistributesLeft uy vy wy
-        | complexMultiplyDistributesLeft uz vz wz =
-  complexThreePairInterchange
-    (C3.complexMultiply ux vx)
-    (C3.complexMultiply uy vy)
-    (C3.complexMultiply uz vz)
-    (C3.complexMultiply ux wx)
-    (C3.complexMultiply uy wy)
-    (C3.complexMultiply uz wz)
+  (C3.complex3 wx wy wz) =
+  trans
+    (cong₂ C3.complexAdd
+      (cong₂ C3.complexAdd
+        (complexMultiplyDistributesLeft ux vx wx)
+        (complexMultiplyDistributesLeft uy vy wy))
+      (complexMultiplyDistributesLeft uz vz wz))
+    (complexThreePairInterchange
+      (C3.complexMultiply ux vx)
+      (C3.complexMultiply uy vy)
+      (C3.complexMultiply uz vz)
+      (C3.complexMultiply ux wx)
+      (C3.complexMultiply uy wy)
+      (C3.complexMultiply uz wz))
 
 bilinearDot3Commutative :
   ∀ {r} {F : C3.RealField r}
@@ -642,10 +645,12 @@ bilinearDot3Commutative :
   C3.bilinearDot3 u v ≡ C3.bilinearDot3 v u
 bilinearDot3Commutative
   (C3.complex3 ux uy uz)
-  (C3.complex3 vx vy vz)
-  rewrite complexMultiplyCommutative ux vx
-        | complexMultiplyCommutative uy vy
-        | complexMultiplyCommutative uz vz = refl
+  (C3.complex3 vx vy vz) =
+  cong₂ C3.complexAdd
+    (cong₂ C3.complexAdd
+      (complexMultiplyCommutative ux vx)
+      (complexMultiplyCommutative uy vy))
+    (complexMultiplyCommutative uz vz)
 
 realEmbedAdd :
   ∀ {r} (F : C3.RealField r)

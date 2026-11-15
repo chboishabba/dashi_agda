@@ -222,7 +222,8 @@ orientationBase27RoundTrip :
   (state : Orientation2 × Base27) →
   completion54ToOrientationBase27 (orientationBase27ToCompletion54 state) ≡ state
 orientationBase27RoundTrip (orientation , base27 a b c)
-  rewrite orientationRoundTrip orientation = refl
+  rewrite orientationRoundTrip orientation
+        | triColumnRoundTrip a = refl
 
 completion54OrientationRoundTrip :
   (state : Completion54) →
@@ -248,18 +249,50 @@ five54AppraisalToBulk (mode , completion , appraisal) with completion54ToOrienta
 bulkFive54FromTo :
   (state : MonsterBulk196830) →
   five54AppraisalToBulk (bulkToFive54Appraisal state) ≡ state
-bulkFive54FromTo (pointed , (state27 , appraisal)) with pointed10ToFiveByTwo pointed
-... | mode , orientation
-  rewrite pointed10FromTo pointed
-        | orientationBase27RoundTrip (orientation , state27) = refl
+bulkFive54FromTo (Five.ordinary0 , (base27 a b c , appraisal))
+  rewrite triColumnRoundTrip a = refl
+bulkFive54FromTo (Five.ordinary1 , (base27 a b c , appraisal))
+  rewrite triColumnRoundTrip a = refl
+bulkFive54FromTo (Five.ordinary2 , (base27 a b c , appraisal))
+  rewrite triColumnRoundTrip a = refl
+bulkFive54FromTo (Five.ordinary3 , (base27 a b c , appraisal))
+  rewrite triColumnRoundTrip a = refl
+bulkFive54FromTo (Five.ordinary4 , (base27 a b c , appraisal))
+  rewrite triColumnRoundTrip a = refl
+bulkFive54FromTo (Five.ordinary5 , (base27 a b c , appraisal))
+  rewrite triColumnRoundTrip a = refl
+bulkFive54FromTo (Five.ordinary6 , (base27 a b c , appraisal))
+  rewrite triColumnRoundTrip a = refl
+bulkFive54FromTo (Five.ordinary7 , (base27 a b c , appraisal))
+  rewrite triColumnRoundTrip a = refl
+bulkFive54FromTo (Five.ordinary8 , (base27 a b c , appraisal))
+  rewrite triColumnRoundTrip a = refl
+bulkFive54FromTo (Five.completionJ , (base27 a b c , appraisal))
+  rewrite triColumnRoundTrip a = refl
 
 bulkFive54ToFrom :
   (state : BulkFive54Appraisal) →
   bulkToFive54Appraisal (five54AppraisalToBulk state) ≡ state
-bulkFive54ToFrom (mode , completion , appraisal) with completion54ToOrientationBase27 completion
-... | orientation , state27
-  rewrite pointed10ToFrom (mode , orientation)
-        | completion54OrientationRoundTrip completion = refl
+bulkFive54ToFrom (Five.A1 , (Completion.situated-slot Completion.observationalRow column , nonary) , appraisal)
+  rewrite columnRoundTrip column = refl
+bulkFive54ToFrom (Five.A1 , (Completion.situated-slot Completion.governedRow column , nonary) , appraisal)
+  rewrite columnRoundTrip column = refl
+bulkFive54ToFrom (Five.A2 , (Completion.situated-slot Completion.observationalRow column , nonary) , appraisal)
+  rewrite columnRoundTrip column = refl
+bulkFive54ToFrom (Five.A2 , (Completion.situated-slot Completion.governedRow column , nonary) , appraisal)
+  rewrite columnRoundTrip column = refl
+bulkFive54ToFrom (Five.B1 , (Completion.situated-slot Completion.observationalRow column , nonary) , appraisal)
+  rewrite columnRoundTrip column = refl
+bulkFive54ToFrom (Five.B1 , (Completion.situated-slot Completion.governedRow column , nonary) , appraisal)
+  rewrite columnRoundTrip column = refl
+bulkFive54ToFrom (Five.B2 , (Completion.situated-slot Completion.observationalRow column , nonary) , appraisal)
+  rewrite columnRoundTrip column = refl
+bulkFive54ToFrom (Five.B2 , (Completion.situated-slot Completion.governedRow column , nonary) , appraisal)
+  rewrite columnRoundTrip column = refl
+bulkFive54ToFrom (Five.E , (Completion.situated-slot Completion.observationalRow column , nonary) , appraisal)
+  rewrite columnRoundTrip column = refl
+bulkFive54ToFrom (Five.E , (Completion.situated-slot Completion.governedRow column , nonary) , appraisal)
+  rewrite columnRoundTrip column = refl
 
 monsterBulkIsFiveBy54By729 :
   CarrierIso MonsterBulk196830 BulkFive54Appraisal

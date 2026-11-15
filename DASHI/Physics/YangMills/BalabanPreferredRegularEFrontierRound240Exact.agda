@@ -39,27 +39,27 @@ data PreferredBC1Leaf240 : Set where
   regularEToBC1SameObjectCompiler : PreferredBC1Leaf240
 
 data LeafState240 : Set where
-  closed open blocked : LeafState240
+  leafClosed leafOpen leafBlocked : LeafState240
 
 preferredBC1LeafState240 : PreferredBC1Leaf240 → LeafState240
-preferredBC1LeafState240 literalCMP119RegularESourceProjection = open
-preferredBC1LeafState240 literalCMP119RegularEPointwiseSemantics = blocked
-preferredBC1LeafState240 literalCMP116SelectedLocalization = blocked
-preferredBC1LeafState240 literalCMP116UniformCommonRadius = open
-preferredBC1LeafState240 physicalSecondVariationCalculus = open
-preferredBC1LeafState240 literalCMP109Equation51Binding = blocked
-preferredBC1LeafState240 selectedDensitySemanticsCompiler = closed
-preferredBC1LeafState240 regularEToBC1SameObjectCompiler = closed
+preferredBC1LeafState240 literalCMP119RegularESourceProjection = leafOpen
+preferredBC1LeafState240 literalCMP119RegularEPointwiseSemantics = leafBlocked
+preferredBC1LeafState240 literalCMP116SelectedLocalization = leafBlocked
+preferredBC1LeafState240 literalCMP116UniformCommonRadius = leafOpen
+preferredBC1LeafState240 physicalSecondVariationCalculus = leafOpen
+preferredBC1LeafState240 literalCMP109Equation51Binding = leafBlocked
+preferredBC1LeafState240 selectedDensitySemanticsCompiler = leafClosed
+preferredBC1LeafState240 regularEToBC1SameObjectCompiler = leafClosed
 
 preferredFirstBC1Coordinate240 : PreferredBC1Leaf240
 preferredFirstBC1Coordinate240 = literalCMP119RegularESourceProjection
 
 selectedDensitySemanticsCompilerClosed :
-  preferredBC1LeafState240 selectedDensitySemanticsCompiler ≡ closed
+  preferredBC1LeafState240 selectedDensitySemanticsCompiler ≡ leafClosed
 selectedDensitySemanticsCompilerClosed = refl
 
 regularEToBC1SameObjectCompilerClosed :
-  preferredBC1LeafState240 regularEToBC1SameObjectCompiler ≡ closed
+  preferredBC1LeafState240 regularEToBC1SameObjectCompiler ≡ leafClosed
 regularEToBC1SameObjectCompilerClosed = refl
 
 regularESourceProjectionLevel : ProofLevel

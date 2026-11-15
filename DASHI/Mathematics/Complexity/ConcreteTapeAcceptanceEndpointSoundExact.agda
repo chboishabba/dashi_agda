@@ -7,8 +7,10 @@ module DASHI.Mathematics.Complexity.ConcreteTapeAcceptanceEndpointSoundExact whe
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Product using (Σ; _,_)
 import Data.Fin.Base as Fin
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans; subst)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalCellBitsExact as Canonical
@@ -21,7 +23,7 @@ import DASHI.Mathematics.Complexity.FixedWidthTruthTableCNFExact as CNF
 
 record DecodedAcceptingCell
     {machine : Local.ConcreteTapeMachine}
-    {steps cols : Agda.Builtin.Nat.Nat}
+    {steps cols : Nat}
     (stateCoverage :
       Canonical.EnumerationCoverage (Local.finiteState machine))
     (symbolCoverage :
@@ -31,20 +33,20 @@ record DecodedAcceptingCell
   field
     index : Fin.Fin cols
     witnessTrue :
-      CNF.lookupBit assignment (Endpoint.witnessIndex index) ≡ true
+      CNF.lookupBit assignment (Endpoint.witnessIndex {machine} {steps} {cols} index) ≡ true
     cellBits :
       CNF.Bits (Canonical.CellWidth machine)
     cellBitsExact :
       cellBits ≡ Rename.pullbackBits
         (λ i →
-          Endpoint.liftBaseIndex
-            (Global.globalRowRename
+          Endpoint.liftBaseIndex {machine} {steps} {cols}
+            (Global.globalRowRename {machine} {steps} {cols}
               (Endpoint.finalRowSlot steps)
               (Global.blockRename (Endpoint.finToSlot index) i)))
         assignment
     decodedSymbol : Local.Symbol machine
     decodedAccepting :
-      Canonical.decodeCell stateCoverage symbolCoverage cellBits
+      Canonical.decodeCell {machine} stateCoverage symbolCoverage cellBits
       ≡ Local.headed (Local.acceptingState machine) decodedSymbol
 
 open DecodedAcceptingCell public
@@ -54,7 +56,7 @@ data Member {A : Set} (x : A) : List A → Set where
   there : ∀ {y xs} → Member x xs → Member x (y ∷ xs)
 
 record TrueWitnessIn
-    {global n : Agda.Builtin.Nat.Nat}
+    {global n : Nat}
     (literalIndex : Fin.Fin n → Fin.Fin global)
     (indices : List (Fin.Fin n))
     (assignment : CNF.Bits global) : Set where
@@ -80,9 +82,9 @@ orPositiveWitness :
   TrueWitnessIn literalIndex indices assignment
 orPositiveWitness literalIndex [] assignment ()
 orPositiveWitness literalIndex (i ∷ rest) assignment accepted
-    with CNF.lookupBit assignment (literalIndex i)
+    with CNF.lookupBit assignment (literalIndex i) in bitEq
 ... | true =
-  record { index = i ; member = here ; witnessTrue = refl }
+  record { index = i ; member = here ; witnessTrue = bitEq }
 ... | false =
   let tail =
         orPositiveWitness literalIndex rest assignment accepted
@@ -102,13 +104,13 @@ acceptancePredicateTrueWithWitness :
     (assignment :
       CNF.Bits (Endpoint.ExtendedGlobalWidth machine steps cols))
     (i : Fin.Fin cols) →
-  CNF.lookupBit assignment (Endpoint.witnessIndex i) ≡ true →
+  CNF.lookupBit assignment (Endpoint.witnessIndex {machine} {steps} {cols} i) ≡ true →
   Placed.predicate
-    (Endpoint.acceptancePlacedPredicate
+    (Endpoint.acceptancePlacedPredicate {machine} {steps} {cols}
       stateCoverage symbolCoverage (Endpoint.finToSlot i))
     (Rename.pullbackBits
       (Placed.rename
-        (Endpoint.acceptancePlacedPredicate
+        (Endpoint.acceptancePlacedPredicate {machine} {steps} {cols}
           stateCoverage symbolCoverage (Endpoint.finToSlot i)))
       assignment)
   ≡ true →
@@ -117,140 +119,139 @@ acceptancePredicateTrueWithWitness :
       (Canonical.dropBits 1
         (Rename.pullbackBits
           (Placed.rename
-            (Endpoint.acceptancePlacedPredicate
+            (Endpoint.acceptancePlacedPredicate {machine} {steps} {cols}
               stateCoverage symbolCoverage (Endpoint.finToSlot i)))
           assignment))
     ≡ Local.headed (Local.acceptingState machine) symbol)
 acceptancePredicateTrueWithWitness
-    {machine} stateCoverage symbolCoverage assignment i
+    {machine} {steps} {cols} stateCoverage symbolCoverage assignment i
     witnessTrue accepted
     with Rename.pullbackBits
       (Placed.rename
-        (Endpoint.acceptancePlacedPredicate
+        (Endpoint.acceptancePlacedPredicate {machine} {steps} {cols}
           stateCoverage symbolCoverage (Endpoint.finToSlot i)))
-      assignment
-... | false CNF.∷ᵇ cellBits
-    with Rename.pullbackLookup
-      (Placed.rename
-        (Endpoint.acceptancePlacedPredicate
-          stateCoverage symbolCoverage (Endpoint.finToSlot i)))
-      assignment Fin.zero
-... | lookupEq =
-  absurd witnessTrue lookupEq
+      assignment in bitsEq | accepted
+... | false CNF.∷ᵇ cellBits | _ =
+  absurd
+    (trans
+      (trans
+        (trans
+          (sym (cong (λ b → CNF.lookupBit b Fin.zero) bitsEq))
+          (Rename.pullbackLookup
+            (Placed.rename
+              (Endpoint.acceptancePlacedPredicate {machine} {steps} {cols}
+                stateCoverage symbolCoverage (Endpoint.finToSlot i)))
+            assignment Fin.zero))
+        (cong (CNF.lookupBit assignment)
+          (Endpoint.acceptanceLocalRename_zero_eq_witnessIndex {machine} {steps} {cols} i)))
+      witnessTrue)
   where
-    absurd : false ≡ true → false ≡ false → _
-    absurd () _
-... | true CNF.∷ᵇ cellBits
-    with Canonical.decodeCell stateCoverage symbolCoverage cellBits
-... | Local.plain symbol
-    with accepted
-... | ()
-... | Local.headed state symbol
-    with Local.decideEqual (Local.finiteState machine)
-      state (Local.acceptingState machine)
-      | accepted
-... | false | ()
-... | true | refl =
+    absurd : false ≡ true → _
+    absurd ()
+... | true CNF.∷ᵇ cellBits | accepted'
+    with Canonical.decodeCell {machine} stateCoverage symbolCoverage cellBits in cellEq
+      | accepted'
+... | Local.plain symbol | ()
+... | Local.headed state symbol | stateEq =
   symbol ,
-  cong (λ q → Local.headed q symbol)
-    (Local.decideEqualSound
-      (Local.finiteState machine) refl)
+  trans
+    (cong (λ b → Canonical.decodeCell {machine} stateCoverage symbolCoverage (Canonical.dropBits 1 b)) bitsEq)
+    (trans
+      cellEq
+      (cong (λ q → Local.headed q symbol)
+        (Local.decideEqualSound
+          (Local.finiteState machine) stateEq)))
 
 data AllAcceptancePredicatesSatisfied
-    {machine}
+    {machine : Local.ConcreteTapeMachine}
+    {steps cols : Nat}
     (stateCoverage :
       Canonical.EnumerationCoverage (Local.finiteState machine))
     (symbolCoverage :
       Canonical.EnumerationCoverage (Local.finiteSymbol machine))
-    {steps cols}
     (assignment :
       CNF.Bits (Endpoint.ExtendedGlobalWidth machine steps cols)) :
     List (Fin.Fin cols) → Set where
   acceptDone :
-    AllAcceptancePredicatesSatisfied
+    AllAcceptancePredicatesSatisfied {machine} {steps} {cols}
       stateCoverage symbolCoverage assignment []
   acceptStep :
     ∀ {i rest} →
     Placed.predicate
-      (Endpoint.acceptancePlacedPredicate
+      (Endpoint.acceptancePlacedPredicate {machine} {steps} {cols}
         stateCoverage symbolCoverage (Endpoint.finToSlot i))
       (Rename.pullbackBits
         (Placed.rename
-          (Endpoint.acceptancePlacedPredicate
+          (Endpoint.acceptancePlacedPredicate {machine} {steps} {cols}
             stateCoverage symbolCoverage (Endpoint.finToSlot i)))
         assignment)
     ≡ true →
-    AllAcceptancePredicatesSatisfied
+    AllAcceptancePredicatesSatisfied {machine} {steps} {cols}
       stateCoverage symbolCoverage assignment rest →
-    AllAcceptancePredicatesSatisfied
+    AllAcceptancePredicatesSatisfied {machine} {steps} {cols}
       stateCoverage symbolCoverage assignment (i ∷ rest)
 
 allPlacedToAcceptanceSatisfied :
-  ∀ {machine}
+  ∀ {machine steps cols}
     (stateCoverage :
       Canonical.EnumerationCoverage (Local.finiteState machine))
     (symbolCoverage :
       Canonical.EnumerationCoverage (Local.finiteSymbol machine))
-    {steps cols}
     (assignment :
       CNF.Bits (Endpoint.ExtendedGlobalWidth machine steps cols))
     (indices : List (Fin.Fin cols)) →
   Placed.AllPlacedSatisfied assignment
-    (Endpoint.acceptanceImplicationPredicatesFin
+    (Endpoint.acceptanceImplicationPredicatesFin {machine} {steps} {cols}
       stateCoverage symbolCoverage indices) →
-  AllAcceptancePredicatesSatisfied
+  AllAcceptancePredicatesSatisfied {machine} {steps} {cols}
     stateCoverage symbolCoverage assignment indices
 allPlacedToAcceptanceSatisfied
     stateCoverage symbolCoverage assignment
     [] Placed.allPlacedDone =
   acceptDone
-allPlacedToAcceptanceSatisfied
+allPlacedToAcceptanceSatisfied {machine} {steps} {cols}
     stateCoverage symbolCoverage assignment
     (i ∷ rest)
     (Placed.allPlacedStep current remainder) =
   acceptStep current
-    (allPlacedToAcceptanceSatisfied
+    (allPlacedToAcceptanceSatisfied {machine} {steps} {cols}
       stateCoverage symbolCoverage assignment rest remainder)
 
 findAcceptingFromWitness :
-  ∀ {machine}
+  ∀ {machine steps cols}
     (stateCoverage :
       Canonical.EnumerationCoverage (Local.finiteState machine))
     (symbolCoverage :
       Canonical.EnumerationCoverage (Local.finiteSymbol machine))
-    {steps cols}
     (assignment :
       CNF.Bits (Endpoint.ExtendedGlobalWidth machine steps cols))
     (indices : List (Fin.Fin cols))
     (witness :
-      TrueWitnessIn Endpoint.witnessIndex indices assignment) →
-  AllAcceptancePredicatesSatisfied
+      TrueWitnessIn (Endpoint.witnessIndex {machine} {steps} {cols}) indices assignment) →
+  AllAcceptancePredicatesSatisfied {machine} {steps} {cols}
     stateCoverage symbolCoverage assignment indices →
-  DecodedAcceptingCell
+  DecodedAcceptingCell {machine} {steps} {cols}
     stateCoverage symbolCoverage assignment
-findAcceptingFromWitness
+findAcceptingFromWitness {machine} {steps} {cols}
     stateCoverage symbolCoverage assignment
-    [] witness acceptDone
-    with member witness
-... | ()
-findAcceptingFromWitness
+    [] (record { member = () }) acceptDone
+findAcceptingFromWitness {machine} {steps} {cols}
     stateCoverage symbolCoverage assignment
-    (i ∷ rest) witness
+    (i ∷ rest)
+    (record { index = .i ; member = here ; witnessTrue = wTrue })
     (acceptStep current remainder)
-    with member witness
-... | here
-    with acceptancePredicateTrueWithWitness
+    with acceptancePredicateTrueWithWitness {machine} {steps} {cols}
       stateCoverage symbolCoverage assignment i
-      (witnessTrue witness) current
+      wTrue current
 ... | symbol , decoded =
   record
     { index = i
-    ; witnessTrue = witnessTrue witness
+    ; witnessTrue = wTrue
     ; cellBits =
-        Canonical.dropBits 1
+        Canonical.dropBits 1 {Canonical.CellWidth machine}
           (Rename.pullbackBits
             (Placed.rename
-              (Endpoint.acceptancePlacedPredicate
+              (Endpoint.acceptancePlacedPredicate {machine} {steps} {cols}
                 stateCoverage symbolCoverage
                 (Endpoint.finToSlot i)))
             assignment)
@@ -258,17 +259,20 @@ findAcceptingFromWitness
     ; decodedSymbol = symbol
     ; decodedAccepting = decoded
     }
-... | there membership =
-  findAcceptingFromWitness
+findAcceptingFromWitness {machine} {steps} {cols}
+    stateCoverage symbolCoverage assignment
+    (i ∷ rest)
+    (record { index = wIndex ; member = there m ; witnessTrue = wTrue })
+    (acceptStep current remainder) =
+  findAcceptingFromWitness {machine} {steps} {cols}
     stateCoverage symbolCoverage assignment
     rest
     (record
-      { index = index witness
-      ; member = membership
-      ; witnessTrue = witnessTrue witness
+      { index = wIndex
+      ; member = m
+      ; witnessTrue = wTrue
       })
     remainder
-
 
 acceptingEndpointCNF_sound :
   ∀ {machine steps cols}
@@ -279,28 +283,28 @@ acceptingEndpointCNF_sound :
     (assignment :
       CNF.Bits (Endpoint.ExtendedGlobalWidth machine steps cols)) →
   CNF.evaluateCNF
-    (Endpoint.acceptingEndpointCNF
+    (Endpoint.acceptingEndpointCNF {machine} {steps} {cols}
       stateCoverage symbolCoverage)
     assignment
   ≡ true →
-  DecodedAcceptingCell
+  DecodedAcceptingCell {machine} {steps} {cols}
     stateCoverage symbolCoverage assignment
-acceptingEndpointCNF_sound
+acceptingEndpointCNF_sound {machine} {steps} {cols}
     stateCoverage symbolCoverage assignment accepted =
-  findAcceptingFromWitness
+  findAcceptingFromWitness {machine} {steps} {cols}
     stateCoverage symbolCoverage assignment
-    (Endpoint.finList _)
+    (Endpoint.finList cols)
     witness
     allSatisfied
   where
     witnessClauseValue =
       CNF.evaluateClause
-        Endpoint.someAcceptanceWitnessClause assignment
+        (Endpoint.someAcceptanceWitnessClause {machine} {steps} {cols}) assignment
 
     implicationCNF =
       Placed.compilePlacedAll
-        (Endpoint.acceptanceImplicationPredicatesFin
-          stateCoverage symbolCoverage (Endpoint.finList _))
+        (Endpoint.acceptanceImplicationPredicatesFin {machine} {steps} {cols}
+          stateCoverage symbolCoverage (Endpoint.finList cols))
 
     implicationValue =
       CNF.evaluateCNF implicationCNF assignment
@@ -314,14 +318,14 @@ acceptingEndpointCNF_sound
       Endpoint.andTrueRight witnessClauseValue implicationValue accepted
 
     witness =
-      orPositiveWitness Endpoint.witnessIndex
-        (Endpoint.finList _) assignment witnessClauseTrue
+      orPositiveWitness (Endpoint.witnessIndex {machine} {steps} {cols})
+        (Endpoint.finList cols) assignment witnessClauseTrue
 
     allSatisfied =
       allPlacedToAcceptanceSatisfied
         stateCoverage symbolCoverage assignment
-        (Endpoint.finList _)
+        (Endpoint.finList cols)
         (Placed.compilePlacedAllSound
-          (Endpoint.acceptanceImplicationPredicatesFin
-            stateCoverage symbolCoverage (Endpoint.finList _))
+          (Endpoint.acceptanceImplicationPredicatesFin {machine} {steps} {cols}
+            stateCoverage symbolCoverage (Endpoint.finList cols))
           assignment implicationTrue)

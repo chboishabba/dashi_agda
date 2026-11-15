@@ -68,6 +68,10 @@ boolAnd : Bool → Bool → Bool
 boolAnd true b = b
 boolAnd false _ = false
 
+boolNot : Bool → Bool
+boolNot true = false
+boolNot false = true
+
 allAdmissible : Bool → Bool → Bool → Bool → Bool → Bool → Bool → Bool → Bool
 allAdmissible sameRun sameSplit sameHorizon frozen extractionStable interventionStable thresholdStable betaPaid =
   boolAnd sameRun
@@ -143,9 +147,7 @@ makeAlignment obs traj sameRun sameSplit sameHorizon frozen outcomeUsed =
         (allBetaMaximalityPaid traj)
 
     noLeakage : Bool
-    noLeakage with outcomeUsed
-    ... | true = false
-    ... | false = true
+    noLeakage = boolNot outcomeUsed
 
     admissible : Bool
     admissible = boolAnd rulesAndBeta noLeakage

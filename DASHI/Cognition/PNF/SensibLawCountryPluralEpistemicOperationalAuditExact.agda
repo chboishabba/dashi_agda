@@ -182,11 +182,11 @@ doctrineRejectedButLandControlOpen :
 doctrineRejectedButLandControlOpen = refl
 
 landControlResidualSurvivesDoctrinalRejection :
-  Continuity.currentCoordinateState Continuity.landCountryControl ≡ Continuity.open
+  Continuity.currentCoordinateState Continuity.landCountryControl ≡ Continuity.openState
 landControlResidualSurvivesDoctrinalRejection = refl
 
 communityAuthorityResidualSurvivesDoctrinalRejection :
-  Continuity.currentCoordinateState Continuity.communityAuthorityBearing ≡ Continuity.open
+  Continuity.currentCoordinateState Continuity.communityAuthorityBearing ≡ Continuity.openState
 communityAuthorityResidualSurvivesDoctrinalRejection = refl
 
 doctrinalRejectionOnlyCanStillCarryStructuralContinuityRisk :
