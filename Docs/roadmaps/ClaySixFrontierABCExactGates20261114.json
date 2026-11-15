@@ -2578,7 +2578,8 @@
       "TARGET_TYPE_UNINHABITED": "actual target type defined, no unconditional inhabitation established",
       "COST_MODEL_COVERAGE_CONSTRUCTED": "coverage projection theorem exists for chosen conditional concrete cost model",
       "KNOWN_NEGATIVE_CONTROL": "counterexample or no-go against auxiliary inference, not endpoint claim",
-      "REFUTED_UNIVERSAL_AUX": "universal auxiliary inequality refuted by original physical counterexample"
+      "REFUTED_UNIVERSAL_AUX": "universal auxiliary inequality refuted by original physical counterexample",
+      "SOURCE_MODULE_REUSED": "The identified file/module is source-present; its individual theorem statements need typechecking; not an identically named declaration"
     },
     "gates": [
       {
@@ -2679,7 +2680,8 @@
         "title": "Karp existing B1-B6/D1-D2/E1-E2/F2/G3 exact kernel",
         "status": "SOURCE_WRITTEN_UNVERIFIED",
         "deliverables": [
-          "Agda 2.9 kernel-cut and transitive repairs"
+          "Agda 2.9 kernel-cut and transitive repairs",
+          "Found D2 nativeBinaryFirstEnabledNonterminalSameOriginalRawStep already source-written in Karp21NativeBinaryToOriginalRawMachineStepExact; do not add as new theorem"
         ]
       },
       {
@@ -3564,8 +3566,8 @@
         "term": "Karp21NativeGammaAllLengthCompositePhysical",
         "owner": "DASHI/Mathematics/Complexity/Karp21NativeGammaAllLengthCompositePhysicalExact.agda",
         "repo": "agda",
-        "classification": "SOURCE_TERM_UNCHECKED",
-        "consequence": "5 original blobs match #1502 in #1499"
+        "classification": "SOURCE_MODULE_REUSED",
+        "consequence": "Module filename/source owner, not an Agda theorem declaration; five same-sha #1502 companion files in Clay"
       },
       {
         "lane": "KARP",
@@ -3666,10 +3668,10 @@
       {
         "lane": "KARP",
         "term": "nativeBinaryFirstEnabledNonterminalSameOriginalRawStep",
-        "owner": "Docs/roadmaps/Karp21ActualMaxCutBlockers20261109.md",
+        "owner": "DASHI/Mathematics/Complexity/Karp21NativeBinaryToOriginalRawMachineStepExact.agda",
         "repo": "agda",
-        "classification": "TARGET_NAME_ONLY",
-        "consequence": "latter must be located in exact donor before marking source absent"
+        "classification": "SOURCE_TERM_UNCHECKED",
+        "consequence": "Real D2 nonterminal binary→original raw-list physical source proof found in donor #1474 and byte-present Clay #1499; kernel acceptance pending"
       },
       {
         "lane": "PNP",
