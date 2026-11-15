@@ -1,0 +1,108 @@
+{
+  "schema": "KSW668F8TTOriginalConservativeFV20261115",
+  "original_model": "a=t 5D AdS tensor Israel Neumann; exact three spatial angular multipoles",
+  "event": {
+    "receiver_t": 12,
+    "spatial_support_radius": 0.04,
+    "time_support_poincare": 0.065,
+    "receiver_radius": 2.5373657609619378,
+    "bulk_horizon": 2.549365760961938,
+    "photon_dark_margin": 0.012459111173937387
+  },
+  "numerical": {
+    "fix": "FV shell-volume denominator exact; radial compact source integral exact derivative primitives",
+    "original_wrong_first_cell_Lr2": [
+      6.5,
+      34.15625,
+      172.994140625
+    ],
+    "correct_first_cell_Lr2": [
+      6,
+      14,
+      22
+    ],
+    "effective_dimensions": [
+      3,
+      7,
+      11
+    ],
+    "discrete_radial_Green_energy_nonpositive": true,
+    "TT_source_integrals": {
+      "ell0": 0,
+      "ell2": 0,
+      "ell4": 2.5761698809461424
+    },
+    "full_original_manufactured_PDE_local_consistency_pass": true,
+    "grid_results": [
+      {
+        "dr": 0.012,
+        "dy": 0.016,
+        "dt": 0.0024992243525406577,
+        "H": -0.000002838143712830983,
+        "E4": -0.0000623958175453122,
+        "E5": -0.000003453895138459439,
+        "E4_tangent": -0.0000623629624727562,
+        "E5_tangent": -0.0000033880800330027724,
+        "farH": -7.927980318670159e-7,
+        "farE4": 0.000004326607397703515,
+        "farE5": 1.3357597781001168e-7
+      },
+      {
+        "dr": 0.008,
+        "dy": 0.012,
+        "dt": 0.0017989104901421466,
+        "H": -0.00000676189917760608,
+        "E4": -0.00005644325405215102,
+        "E5": -0.0000029008031422332182,
+        "E4_tangent": -0.00005643906140819261,
+        "E5_tangent": -0.0000028877474,
+        "farH": 1.5116830139986467e-7,
+        "farE4": -0.0000013620330569585246,
+        "farE5": -4.5857443814887786e-8
+      },
+      {
+        "dr": 0.006,
+        "dy": 0.011,
+        "dt": 0.0013498551062053178,
+        "H": -0.000008642734606290211,
+        "E4": -0.0005803127299035545,
+        "E5": -0.000016736713621150142,
+        "E4_tangent": -0.0005800550353804825,
+        "E5_tangent": -0.00001622,
+        "farH": -2.2727694832513574e-7,
+        "farE4": 0.00000718909006856379,
+        "farE5": 1.5326731392697792e-7
+      }
+    ],
+    "medium_to_fine_relative_drifts": {
+      "field_H": 0.21762040770235527,
+      "intrinsic_E4": 0.9027364882008849,
+      "projected_E5": 0.826680242734901
+    },
+    "tangent_derivative_Weyl_crosscheck": true,
+    "full_3D_compact_TT_numerical_receiver_converged": false,
+    "outside_bulk_front_numerical_leakage_persists": true
+  },
+  "acceptance": {
+    "source_equivalent_committed_regression_cases": 171,
+    "local_superset_including_uncommitted_exploratory_cases": 184,
+    "pinned_Agda_2_9_kernel": false,
+    "exact_GitHub_head_runner": false,
+    "matter_generating_action": false,
+    "quantitative_physical_signal": false,
+    "empirical_graviton_observation": false
+  },
+  "next_exact_lemmas": [
+    "ads5OriginalMovingTTThreeMultipoleThreeObservableConvergence",
+    "ads5OriginalMovingWeylSourceToReceiverSobolevTraceAndError",
+    "ads5OriginalT2NeumannToWeylEllipticFIOComposition",
+    "ads5OriginalT2ActualCompactTTNonzeroEarlyBothWeyl",
+    "ads5CompactTTMatterActionRealization",
+    "ads5MovingModeStabilityAndBackreaction",
+    "cylinderDoubledDiscPerturbedBulkAndRetardedGreen",
+    "ads5PhysicalScaleSourceDetectorComparison",
+    "braneBulkOriginalAnalyticAgdaKernel",
+    "ads5OriginalSourceToObservationSemanticWeld",
+    "physicalGravitonObservation"
+  ]
+}
