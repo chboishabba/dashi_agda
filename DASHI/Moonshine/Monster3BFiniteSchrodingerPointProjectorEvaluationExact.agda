@@ -6,6 +6,7 @@ module DASHI.Moonshine.Monster3BFiniteSchrodingerPointProjectorEvaluationExact w
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_)
 open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)
 
@@ -83,19 +84,18 @@ coordinateProjectorDifferentAt target axis f x different
 pointProjectorSelected :
   (selected : H.X6) → (f : V.SchrodingerFunction) →
   Point.pointProjector selected f selected ≡ triple6 (f selected)
-pointProjectorSelected selected f
-  rewrite P.coordinateProjectorPointwise (H.x5 selected) H.axis5 _ selected
-        | P.projectAmplitudeSame (H.x5 selected) _
-        | P.coordinateProjectorPointwise (H.x4 selected) H.axis4 _ selected
-        | P.projectAmplitudeSame (H.x4 selected) _
-        | P.coordinateProjectorPointwise (H.x3 selected) H.axis3 _ selected
-        | P.projectAmplitudeSame (H.x3 selected) _
-        | P.coordinateProjectorPointwise (H.x2 selected) H.axis2 _ selected
-        | P.projectAmplitudeSame (H.x2 selected) _
-        | P.coordinateProjectorPointwise (H.x1 selected) H.axis1 _ selected
-        | P.projectAmplitudeSame (H.x1 selected) _
-        | P.coordinateProjectorPointwise (H.x0 selected) H.axis0 f selected
-        | P.projectAmplitudeSame (H.x0 selected) (f selected) = refl
+pointProjectorSelected selected f =
+  trans (P.projectAmplitudeSame (H.x5 selected) _)
+        (cong triple
+          (trans (P.projectAmplitudeSame (H.x4 selected) _)
+            (cong triple
+              (trans (P.projectAmplitudeSame (H.x3 selected) _)
+                (cong triple
+                  (trans (P.projectAmplitudeSame (H.x2 selected) _)
+                    (cong triple
+                      (trans (P.projectAmplitudeSame (H.x1 selected) _)
+                        (cong triple
+                          (P.projectAmplitudeSame (H.x0 selected) (f selected)))))))))))
 
 ------------------------------------------------------------------------
 -- 3. Any explicitly separated point vanishes.  The proof follows the actual
