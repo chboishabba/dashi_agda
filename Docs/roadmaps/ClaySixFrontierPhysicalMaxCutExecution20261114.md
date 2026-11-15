@@ -1,25 +1,85 @@
-# Six-frontier original-source maximum cut — implementation round 9
+# Six-frontier original-source maximum cut — implementation rounds 9–10
 **Date:** 14 November 2026
-**Owner:** dashi_agda #1499 canonical tracker; owner PR branches below.
+**Owner:** Agda Clay PR #1499 and Lean Clay PR #108 (both source rollups); historical owner branches are donors only.
 **Trust:** every linked source-written Agda/Lean candidate is **NOT**
 kernel-accepted in this round; local exact-rational regressions PASS.
 No Clay problem or NP-completeness consequence is claimed solved.
 
-## Execution contract
+## 15 November 2026 — governing P0–F3 six-endpoint execution (supersedes older broad gap descriptions)
 
-Combined fail-closed runner:
-`scripts/check_clay_sixfrontier_physical_local_20261114.sh`
+**Gate-count and receipt update (15 November): P0 source-owner/donor-dedup gate CLOSED. 14 of the original 15 independent gates remain active (A1,A2,B1,B2,C1,C2,D1,D2,E0,E1,E2,F1,F2,F3), and all six original mathematical endpoints remain OPEN.** The canonical JSON now retains checked original owner blob SHA and term/flag line receipts for all 135 entries (47 Agda, three Lean), six original donor same-blob receipts and negative controls. Pinned kernel was intentionally *not* marked paid: it is retained under E0 and each mathematical terminal gate. Source-only P0 completion is not a Clay/NP/OS result.
 
-Set six explicit worktree env vars:
-`DASHI_YM_WORKTREE` (#1503), `DASHI_KARP_WORKTREE` (#1502),
-`DASHI_NS_WORKTREE` (#1501), `DASHI_BISHOP_WORKTREE` (#1478),
-`DASHI_BSD_LEAN_WORKTREE` (dashi_lean4 #107),
-`DASHI_RH_LEAN_WORKTREE` (dashi_lean4 #108).
-`CLAY_SIX_SOURCE_ONLY=1` runs only exact finite regression tests.
-The default runner demands pinned Agda/Nix and Lean/Lake and stops
-on missing roots, kernel errors and unadmitted sources; a green run
-would accept only the named *auxiliary source roots*, **not**
-the original six terminal theorems.
+
+
+**Start here and nowhere else for the six contested endpoints:** [ClayRecoveredProducersW2NoGoR856SourceMaxCut20261115.md](ClayRecoveredProducersW2NoGoR856SourceMaxCut20261115.md#canonical-execution-plan--exact-symbol-re-audit-15-november-2026) and its **135-term** machine-readable [ClaySixFrontierABCExactGates20261114.json](ClaySixFrontierABCExactGates20261114.json) under `six_endpoint_exact_symbol_audit_20261115`. This is the canonical roadmap/phase/deliverable/exact-lemma source; the old sections below are historical phase records and must not be read as current independent obligations. Update the canonical pair **first** after any found in-repo producer and **with** every new source/kernel receipt. No duplicate generic compiler, no new donor PR, no new competing roadmap.
+
+**Phases and acceptance**:
+
+| Phase | Next non-duplicate deliverable | Gate IDs / status |
+| --- | --- | --- |
+| P0 preflight | Exact symbol+synonym grep on checked-out rollup **and donor** PR trees; local Agda 2.9/Lean 4.28 proof checks/negative controls, transitive axiom audit | P0: source-audited, local kernel receipts absent |
+| NS whole-space A | Pay *literal* `PhysicalKernelIdentification`, `DirectionalSecondMomentSlot`, signed Gram/FTC, original integrable `PhysicalEnvelopeInputs`, all-data flow continuation | A1–A2: OPEN |
+| NS periodic B | Reuse R820/R823–R825 signed source and R734 helical identity, obtain an actually true same-source signed inequality and W1, cutoff-uniform continuum; never demand **refuted unrestricted R734 W2** | B1–B2: OPEN |
+| NS selected R853 | Prove exact R71/R74 real-chart RHS correspondence and local solution on unchanged R854 T; selected R853 derivative bound; reuse R856 safe thresholds | C1–C2: OPEN |
+| YM Wilson/T5 | Original same-source CMP116 R320 selected H1 **or** interacting R445 local TV+summability; R349 distance-carrier weld, R342 upper-order closure, physical R331 transfer coordinate, actual R333 OS completion | D1–D2: OPEN |
+| Karp-21 | Kernel-check already-written B1–B6/D1–D2/E1–E2/F2/G3 and all-k physical gamma; then complete original all-word bit machine/cost/memory F1–F4, G2/G3/G4 `PR.InNP` | E0–E2: finite source present, physical NP OPEN |
+| P≠NP | Reuse **already constructed** `codedStandardCostCandidateCoverage` / `haltingCostCandidateCoverage`; prove standard-P model closure and valid resource-limited own-Cook compiler or an independent lower-bound route; true `UniversalPolynomialSATDecisionFailure` | F1–F3: lower bound OPEN |
+
+**Important corrected overpayments:** the two concrete PNP *candidate coverage projections are already source-written*, so do not request a new arbitrary coverage compiler. YM R304 selected pair distance=time and R577 same-H projection are already source-written; only their **same physical carrier/coordinate calibration** remains. Karp all-`k` gamma source is already byte-identical in current Clay and #1502. R856 strict rational pointwise/integrated thresholds are already SymPy-confirmed; **actual** R853 (r'(t)) is not. Conditional spectral/Bochner/rooted-shell compilers do not pay YM/NS original physics.
+
+**Endpoint closure verdict on audited heads:** 0/6 original endpoints independently demonstrated complete, 0 fresh exact-head Agda/Lean kernel receipts. This is a fail-closed repository evidence status, not a theorem that no stronger branch exists. **The canonical symbol ledger is the only basis for future commits.**
+
+
+## Canonical PR topology and execution contract (rollup revision)
+
+The active work destination is **one open draft PR per repository**:
+Agda **#1499**, `chatgpt/clay-20261112-four-frontier-fail-closed`
+against `master`; Lean **#108**,
+`chatgpt/clay-continuous-fifth-sign-20261112`
+against `main`.
+The former per-lane PRs are source/provenance donors, **not** active
+destinations for new work. Their histories are not Git-merged or closed.
+All transferred files have retained their content-addressed Git
+blob SHA; overlapping paths are deduplicated or reconciled explicitly.
+
+The original round-9 donor groups now co-reside in the rollups:
+- Agda: 661 donor-file transfers; 25 BSD Agda blobs already
+  identical and additional original YM/NS files already present.
+  Donors #1444, #1498, #1503 (YM), #1474, #1502 (Karp),
+  #1478 (Bishop), #1500 (BSD), #1501 (NS).
+- Lean: 56 original donor files from #107 BSD, #50 RH, and
+  #109 NS; additional Route B cutoff/three-producer proof is
+  source-written directly on the Lean rollup. The two divergent
+  RH existing files were retained, with the useful missing
+  Route B consequence in a nonbreaking new module.
+- Shared critical global surfaces were deliberately NOT
+  overwritten: `CHANGELOG.md`, `TODO.md`,
+  `scripts/run_agda29_parallel_check.sh`,
+  `.github/workflows/ym-native-maxcut-exact-agda.yml`,
+  `Synthesis.lean`, and stacked external LeanDojo
+  comparator files. These are explicit integration review items.
+
+The **single-rollup** acceptance driver is
+`scripts/check_clay_sixfrontier_physical_local_20261114.sh`.
+Run it from the checked-out Agda #1499 worktree, pointing only to
+the Lean #108 worktree:
+
+```bash
+DASHI_CLAY_LEAN_WORKTREE=/path/to/dashi_lean4-clay108 \
+  CLAY_SIX_SOURCE_ONLY=1 \
+  bash scripts/check_clay_sixfrontier_physical_local_20261114.sh
+```
+
+Omit `CLAY_SIX_SOURCE_ONLY=1` to request pinned local source
+Agda/Lean checks; the script fails closed when kernels/toolchains
+are unavailable. The script never treats the finite-only run as
+a proof of any physical/analytic C gate. Kernel exit zero still
+requires the original Agda golden and Lean `#print axioms` /
+transitive trust audit before admission.
+
+Full precise donor head hashes, transfer counts, incomplete global
+surface inventory, source trust, and promotion booleans:
+`Docs/roadmaps/ClayPortfolioPinnedIntegration20261114.json`.
 
 The native source still owns its declared blame and attribution:
 separate proofs for direct finite arithmetic, original-carrier
@@ -35,7 +95,7 @@ finite TV obstruction, covariance compiler, conditional mixture
 inference; new exterior influence bound script
 `scripts/check_ym_r445_weighted_exterior_influence.py`.
 
-**Round 9:** `check_ym_r445_interacting_transfer_contraction_20261114.py`
+**Round 9 source:** `check_ym_r445_interacting_transfer_contraction_20261114.py`
 uses the genuinely correlated two-state transfer matrix
 `[[3/4,1/4],[1/4,3/4]]`. It computes
 `D_k=(1/2)^k` at 41 exact rational distances and the summable
@@ -245,3 +305,329 @@ All source-owned comments must retain known methods/authorities
 (Bishop/Murray; Karp/Elias/Conway; Hensel/Kummer/Selmer;
 Wilson/Bałaban; Navier–Stokes/Galerkin; Weil/Riemann)
 and declare which gates were paid versus merely reduced.
+
+
+## 14 November 2026: irreducible NEW-mathematics audit (C-min)
+
+**Scope.** This section is a strict *novelty* cut, not the A/B/C source-implementation backlog above. Classify `VERIFY` (native kernel), `FORMALISE` (established mathematics), `SOURCE` (prove the same existing mathematical object is represented), and `NEW` (an unconditional, original-source estimate or universal theorem not supplied by a known result). A `SOURCE` proof can require hard engineering/analysis without being a new mathematical discovery. Existing scripted finite examples are not terminal theorems.
+
+| Lane | Existing/known mathematics not to reopen as NEW | Minimal genuinely NEW mathematical leaves | Why they are independent |
+| --- | --- | --- | --- |
+| **Yang–Mills** | F19/R445 finite density, weighted-coupling TV, SU(2) uniform plaquette-deficit/density bounds, reflection Gram algebra, Haar and Wilson finite identities | `originalR445PhysicalExteriorInfluenceSiteBound` **and** `originalR445GenuineScaleIrrelevantContraction` for the actual renormalised Wilson effective/target pair; a cutoff-uniform interacting local-correlation estimate on the same physical continuum E1 source; nontrivial E1 limit with preserved OS positivity; physically uniform mass gap and compact-simple-group coverage | Full-volume TV, one-site plaquette density and finite transfer contraction do not establish local connected-polymer summability. Even decay of an approximate bare action is not E1 projective consistency, nor a continuum D1/D2 result. |
+| **Karp-21** | Gamma parser, physical bit tape, costed simulation, NP membership are classical computability/complexity constructions; the repo's F2/F3/F4 are implementation/formalisation leaves | **None for proving N21 ∈ NP.** Separate unsolved Clay proposition `UniversalPolynomialSATDecisionFailure` (`∀ D ∈ P ∃ φ, D(φ) ≠ SAT(φ)`) only if pursuing P≠NP | Polynomial N21 verification does not imply SAT∉P. Original same-word physical correctness and bit-clock still need completion, but are not new mathematical barriers. |
+| **BSD selected E: y²=x³−x** | Standard local Kummer/H¹/Selmer exact sequences, Mordell–Weil, modularity, rank-zero Kolyvagin finiteness, published CM level-32 special value and Rubin's CM odd-prime BSD theorem | **No novel number-theory theorem is presently identified for this one curve.** K1–K4 and the remaining two-primary / odd-primary K5 are application and faithful formalisation of known theorems, subject to their exact hypotheses | Universal BSD for arbitrary E/Q remains new mathematics and must be a separate gate; selected-curve completion does not solve it. |
+| **Navier–Stokes** | Finite quadratic Galerkin ODE local C¹ flow, chain rule, the R853 pointwise polynomial rate, and local negative integral from a negative initial value plus continuity | `originalR736SignedCollarAbsorbable`, actual remote boundary/collar flux control, and a **cutoff-uniform global a-priori/continuation estimate for the original 3D PDE** | A negative integrated rate for one fixed finite Galerkin system or a fixed R854 horizon is not global regularity; it needs only classical ODE analysis once its source is identified. |
+| **Bishop eta** | Classical Abel summation, the finite negative-log increment sandwich, dyadic bounds, exponential variation, locally uniform eta convergence on Re(s)>0, holomorphic-limit theorems | **None for ordinary eta convergence.** `originalCanonicalNatLogSuccessorIncrementSandwich`, `originalRound11EtaDyadicGeometricVariation` and `originalRound11EtaCompactUniformConvergence` are important original-carrier *formalisation* targets, not newly unknown analysis | The source's Bishop setoid/order/completion and native complex exp identities must be inhabited faithfully. This is not a RH proof. |
+| **RH** | G1 coarse witness, finite A2 PASS/NO-GO compilers, parity/IBP controls and selected finite-polynomial bounds | Actual-zero `originalA2FarExactZeroShellBound` + full `originalSelectedA2StrictSignedCompensation` (or a same-zero-carrier no-go to **that route**, not to RH); alternatively Route-B `originalSignedFifthPhysicalCapEventualGap` with controlled actual boundary terms; actual G3 strict signed residual | These require nontrivial signed estimates on the real Riemann-zeta zero carrier. A generic pole, coarse witness, synthetic interval or different heat spectrum does not pay them. |
+
+### BSD K5 short route: theorem reuse, not a newly invented odd-primary lemma
+
+For the *actual* selected curve, LMFDB `32.a3` / Cremona `32a2`, not `32.a4` / Cremona `32a1`, gives `E: y²=x³−x`, rank 0, `E(Q)_tors ≅ (Z/2)^2`, `c₂=2`, and the **exact analytic BSD order** 1 (an *analytic prediction*, not a Sha proof). With the **standard full** period Ω, its rigorously computed modular-symbol ratio is `L(E,1)/Ω=1/8` (do not replace this exact theorem by a decimal). The rank-zero formula would require `#Sha = (L/Ω)*16/2=1`.
+
+Under the **exact applicability hypotheses** of John Coates, *Lectures on the Birch–Swinnerton-Dyer Conjecture*, Theorem 32 (Rubin), a nonzero CM central L-value gives the BSD p-part for every odd prime here (`K=Q(i)`, no extra p=3 exclusion); hence each odd-primary Sha order is 1 when the normalized analytic ratio is 1/8. Rank-zero modularity/Kolyvagin supplies finiteness. If the *classical, same-object* Selmer sequence and actual cardinalities show `Sha(E)[2]=0`, finiteness gives the entire 2-primary part zero. Since a nontrivial finite abelian group has a prime-order element, all parts zero imply Sha trivial. This is a **conditional proof plan using established theorems**, not a kernel proof or a claim the source hypotheses are discharged.
+
+Exact remaining selected-curve *formal* lemmas: `originalSelmerTwoEqualsKummerKernel`, `originalShaTwoExactSequence`, `cmOriginalLevel32LValueOverFullPeriod_eq_oneEighth` (target, modular-symbol / CM result with correct nonoptimal curve period), `cmOriginalAnalyticRankZeroShaFinite_fromKolyvagin` (target), `cmOriginalOddPrimeBSD_fromRubin` (target, with theorem hypotheses), and `cmOriginalShaTrivial_of_classicalTwoSelmer_and_Rubin` (target). **These are not novel arithmetic discoveries.** The existing period-normalisation and Gamma-candidate positivity modules are not L-value equalities.
+
+Sources: https://www.lmfdb.org/EllipticCurve/Q/32/a/3 ; https://www.lmfdb.org/knowledge/show/rcs.rigor.ec.q ; John Coates, *Lectures on the Birch–Swinnerton-Dyer Conjecture* (2013), Theorem 32, https://intlpress.com/site/pub/files/_fulltext/journals/iccm/2013/0001/0002/ICCM-2013-0001-0002-a005.pdf . Existing local owner: Lean Clay #108, with donors Lean #107.
+
+### NS and Karp promotion firewall
+
+- `r(0)<0` and continuity of the same finite-Galerkin rate imply an interval `[0,ε]` on which `r(t)<0`, hence a negative integral. This **does not** imply the prescribed R854 fixed-horizon bound, nor 3D PDE continuation. No novel differential inequality should be charged to this local sign consequence.
+- The actual N21 polynomial verifier remains uncompleted and must pay physical F2/F3/F4; classify it as **FORMALISE/SOURCE**, regardless of engineering difficulty. Reserve **NEW** exclusively for the universal SAT lower bound. Do not conflate original N21 NP membership with P≠NP.
+
+### Next max-cut deliverables without theorem duplication
+
+1. `VERIFY`: pinned Agda/Lean exact heads, `--safe` / trust and transitive axioms, before promoting any source candidate. No CI prerequisite.
+2. `SOURCE/FORMALISE`: Karp actual F3 with heap+bit clock; BSD local `Q₂/R` H¹ and classical Sha; Bishop original Nat-log increment and eta limit; NS actual R71→R853 real flow; YM original R445/F19 effective/target identity; RH selected witness curvature.
+3. `NEW`: focus mathematical research on **actual interacting Wilson summability/continuum/mass**, **actual Riemann-zero signed compensation or sign no-go**, **3D NS cutoff-uniform global reserve**, and **universal SAT lower bounds**. Universal BSD is separately open and cannot be inferred from one CM curve.
+
+**Status:** documentation-only mathematical source audit. No source theorem, original C estimate or pinned kernel acceptance is promoted by this amendment. Attribution remains with Wilson/Bałaban, Karp/Cook–Levin, Kummer/Selmer/Kolyvagin/Rubin, Bishop/Abel, Navier–Stokes/Galerkin and the RH zero-analysis sources; DASHI's original-source adapter work remains separately attributed.
+
+
+## 14 November 2026: external OpenAI YM existence intake, source-precise
+
+**Source now PUBLIC, not just the 26 October announcement.** The October 28 OpenAI
+Wilson construction was released via the Yang--Mills shepherding group on
+11 November: `yang-mills-group/OpenAI-YM-20261028@3456e5e7...` (Lean 4.32.0),
+reviewed independently in `yang-mills-group/YM@55ba9fc3...`, with
+`YMReview.Acceptance.combined_acceptance` and separate
+`YMReview.OPE.constructed` evidence. Review checks report that the combined
+single Wilson family, phase-averaged table, fixed-volume UV and extracted IR
+hierarchy, scalar OS, stress Ward, operator dictionary and short-distance trace
+satisfy their **stated formal interfaces**. External independent validation is
+not a native DASHI kernel receipt. Source details and limits:
+`Docs/roadmaps/OpenAIYangMills2026SourceExactMaxCut20261114.md`.
+Machine source/claim manifest:
+`Docs/roadmaps/OpenAIYangMills2026ProofIngest20261114.json`.
+Typed Agda source bridge:
+`DASHI/Research/OpenAIMath/OpenAIYangMills2026SourceIntakeExact.agda`.
+
+**Effect on cut:** E1 must now be split into
+(1) **external released/reviewed candidate existence theorem** on its
+specified Wilson family, construction and permitted gauge groups;
+(2) **unpaid original DASHI F19/R445/P0-to-upstream same-source carrier**
+and native Agda/Lean kernel transport; and
+(3) independent **original physical D1/D2/N1/G1 and mass gap**.
+This can significantly shorten original E1 discovery work **if** same-source
+correspondence succeeds. It does not pay the same-family mapping, a unique
+infinite-volume limit, full-field OS matching, D1 mass decay, D2 same-H gap or
+Clay Yang--Mills. The published review expressly excludes these broader claims.
+
+**Other OAI proof ingest integrated:** exact Git blobs from Agda #1212
+`OpenAIMathUpstreamReceiptExact`, `OpenAIMathPriorityAtlasExact`,
+`OpenAIMathSourceAtlasExact`, `OpenAIMathSourceAtlasRegression`
+are now colocated on the **same Clay rollup #1499**; OpenAI's older
+`openai/math` (`1581d4cb...`, Lean 4.34.1) remains **distinct**
+from the new Yang--Mills submission (Lean 4.32.0). Local Lean world-builder
+#1495 uses Lean 4.28.0; source-only manifest cannot be promoted to an
+accepted DAG or a native kernel proof. Source identity before proof identity.
+
+
+## 14 November 2026: all-208 OpenAI math corpus crosswalk reconciled with Golden and Lean
+
+Authoritative scope **`openai/math` ≠ OpenAI October YM**. Original Lean ingestion
+[#78](https://github.com/chboishabba/dashi_lean4/pull/78) had already collected
+the full later **721 manuscripts / 373 families / 208 source-qualified Lean
+declaration references (192 comparator configurations)**. Older immutable vendor
+`1581d4cb...` contains **719/372/200/189** respectively. The later indexed
+revision `7ef5c0cc...` adds **eight**: CM-Hodge (1), six Fourier
+LocalSmoothing, SubexponentialSAT (1). These are distinct source versions.
+
+The historical complete candidate scan provided **101/208 lexical candidate**
+leads, **107/208 none**, across 22,761 Agda and 4,661 Lean source paths;
+the Lean search tree was **truncated**, so this is not exhaustive owner
+identification. **Six** genuine source-read comparisons, all with **zero**
+verified same-object transport and **zero** DASHI kernel ports, identify
+critical negative controls for SAT machine, Max-Cut hardness vs fixed
+checkerboard, 7/8 zero-free vs RH, CM-Hodge subclass, classical
+Vlasov-Maxwell vs YM, Fourier circuit vs PDE Fourier analysis.
+
+**Executed source co-location:** exact original Git blob copies of all
+five indexed machine registries from Lean #78 are now on this same
+Golden #1499 under `Docs/roadmaps/OpenAIMathCorpusCrosswalk20261114/`.
+`DASHI.Research.OpenAIMath.OpenAIMathCrosswalkReview20261114` records
+the six reviewed source relationships and fail-closed trust statuses.
+`scripts/check_openai_math_full_crosswalk_20261114.py` checks donor
+byte hashes, joins 208 exact rows with 208 candidate rows and six reviews,
+and optionally verifies both source YAML snapshots and the eight-entry
+historical source delta. The independent JS connector readback checked
+208/208 row identity, 373/373 family membership, 721 manuscript references
+and 6/6 reviewed source declaration associations; **Python script execution,
+Agda 2.9 checking and Lean 4.28 checking remain unperformed**.
+
+The single Lean Clay rollup **#108** now imports the *original exact-blob*
+Lean #78 `FullUpstreamMainResultsCatalogue.lean` and `UpstreamPin.lean`,
+and exposes `Integration.OpenAIMath.ClayCrosswalkSourceIndex20261114`.
+Lean rollup commit `5454c5d60e17ac6beb651caa57e6e984ed48de74`.
+The new source-index theorem checks a **List length**, not 208 mathematics
+theorem proofs. No automatic upgrade from Lean 4.34.1 to DASHI Lean 4.28.
+
+For full A/B/C/D cross-corpus roadmap and precise reviewed comparisons:
+`Docs/roadmaps/OpenAIMathCorpusCrosswalk20261114.md`. Highest value
+semantic next cuts: OAI378 original real SAT machine; OAI optimal Max-Cut
+vs original Karp graph/cost; OAI CM-Hodge actual cycle maps; OAI quasi-RH
+correct zero-carrier; and separate OAI YM E1 Wilson original-source weld.
+No RH/BSD/Hodge/P≠NP/NS/YM Clay endpoint is promoted by importing metadata.
+
+
+## 14 November full source-only migration completion (OpenAI math corpus)
+
+At this update, all **37 changed paths** from the original
+`dashi_lean4#78` ingestion PR are present in the single Lean Clay #108
+rollup, including the exact immutable upstream `openai/math` Git submodule
+at `1581d4cb...`, original formal-source atlas and 208-index, finite
+CNF adapters and original 13 local scripts (Lean rollup donor integration
+commit `df214149df612797cd1a3bb71d52dda00bd45c26`).
+
+The Golden Agda #1499 rollup now also includes **all 12 Agda
+OpenAIMath modules from #1212** with identical Git blob hashes, plus
+the separate original shared-circuit semantics which differs at one
+nonfunctional binder-name line and was preserved from the current
+Golden owner instead of overwritten. All six historical OAI planning
+documents, including the 39-ID exact-lemma ledger, and three original
+scripts were preserved. Only AGENTS, CHANGELOG and the existing
+agda_preflight README were deliberately not replaced. New focused
+Golden source root `OpenAIMathFullSourceRollup20261114.agda`.
+
+The canonical local six-frontier acceptance runner now requires
+both focused source roots, and stages the new immutable crosswalk
+`--self-test` plus independent pinned Agda/Lean kernel compilation
+in non-source-only mode. **The runner has not been operator-executed
+at the new heads; no syntax/axiom/kernel-greens are asserted.**
+The separate OpenAI 378 source machine still requires its later Lean
+4.34.1 checkout; the standard Lean source-index root must not pretend
+that the original 200-entry vendor contains all later 208 entries.
+
+**Mathematics still new and NOT paid:** physical interacting original
+Wilson conditional decay/RG and same-H spectral mass gap, genuine
+RH signed zero estimates, NS global cutoff-uniform collar/flux,
+universal SAT lower bounds, universal BSD. OAI378 M00–M05, exact
+Hodge CM cycle-map adapter, MaxCut original graph-cost comparison,
+RH quasi-zero carrier and 4.32 OAI YM same-original Wilson E1
+correspondence remain **original-source/formalization**, not proof
+of those universal frontiers.
+
+
+## 14 November: does the Clay rollup already contain the research-level proofs?
+
+**Source-verified correction:** the rollups do own extensive exact mathematics,
+including physical finite Wilson source laws, selected spectral/covariance
+algebra, NS signed-barrier equivalences, real Galerkin *records*, RH
+same-zero finite A2 interval decisions, correct P≠NP universal quantifier
+*types*, genuine Karp gamma physical runs, Bishop finite Abel, and original
+BSD E[2]-H1/local image facts. The prior shorthand “new mathematics absent”
+was imprecise: **many mathematical ingredients and all major terminal
+interfaces are already there**.
+
+The decisive difference is **terminal witness production versus
+implication from an uninhabited premise**. This has now been audited against
+13 exact Git-blob source files on Agda #1499
+`fa751e1c9c1a0b0a52a33d97f69531bb0934786a` and Lean #108
+`df214149df612797cd1a3bb71d52dda00bd45c26`.
+Exact declaration/assumption/source hashes:
+`Docs/roadmaps/ClaySourceVerifiedExistingVsOpen20261114.json`;
+fail-closed audit and five deliberately invalid mutation controls:
+`scripts/check_clay_existing_vs_open_source_20261114.py`.
+The canonical six-frontier local acceptance runner calls this checker.
+**The checker has not been executed under the local pinned toolchains
+during this connector-only audit.** A cross-repository source SHA
+confirmation is not an Agda or Lean proof receipt.
+
+| Lane | Actual ORIGINAL owned source | Why terminal source proof still requires a producer |
+|---|---|---|
+| YM | `YangMillsDirectSourceOSLiteralClayMaxCutExact.literalClaySolution` | Its theorem type **takes** `DirectSourceOSLiteralClayInputs Y`; physical instantiation level is explicitly `conditional`. `YMClayE1OriginalSUNFiniteCylinderLawsExact` is cutoff-finite and uses non-safe real axiom infrastructure. 2026 OAI Lean external **existence** review is a candidate E1 donor, not same-object D1/D2 mass gap. |
+| NS | `NSTriadKNR650CurrentSharedWeightedWallRound736Exact` and `NSTriadKNPhysicalNSGalerkinTrajectoryRound240Exact` | R736 proves both preferred weighted-closure flags equal **false**; R240 states an original Galerkin trajectory *record* with derivative/equation fields, not a witness. R854 Lean strict negative integral assumes `hOriginalRateEnvelope`. |
+| RH | `Synthesis.RiemannA2ActualSelectedIntervalDecisionExact` | PASS and NO-GO results use explicit actual-source interval assumptions `hd,hf,hc,hm,hgap` on `W,rho,EV,n`. The same-zero signed bounds are not derived from the zero distribution in these proofs. |
+| P≠NP | `PNotEqualsNPDirectSATLowerBoundExact` and `PNotEqualsNPAnchoredCollisionEquivalenceExact` | `UniversalPolynomialSATDecisionFailure` is a **defined proposition**. Its consequences and equivalence to anchored collision are proved; no witness of `∀D∃φ` is produced. |
+| Karp-21 | `Karp21NativeGammaAllLengthCompositePhysicalExact` | Actual gamma positive-word `Tape.machineRun` is source-written for all `k≥1`; full malformed parsing, F3 N21 physical simulation, F4 actual bit clock and `originalN21InNP` remain. These require *known algorithmic formalization*, not new P≠NP mathematics. |
+| BSD | `MillenniumBSDCMOriginalK1Q2H1SameSourceConvergence` and `MillenniumBSDCMActualEBarRestrictedShaTwoTargetExact` | Real/Q₂ image fragments and *actual E(Qbar)-coefficient* `Sha[2]` target exist; classical Kummer/Selmer exact sequence, full identified Sha and selected L/period value are not constructed here. Selected CM curve should reuse known results; universal BSD is separate new math. |
+| Bishop | `BishopOriginalEtaFiniteAbelSourceExact` | Actual finite eta Abel law is written. Same-carrier Nat-log and complex tail/compact-uniform convergence remain known-mathematics proof work. |
+
+**OpenAI vendoring precision:** the original `openai/math` source is
+**already vendored as a Git submodule link** in Lean #108 at exact
+`1581d4cb...`, containing 200 pinned headline Lean main-result
+references. Separate revision `7ef5c0cc...` carries 208 indexed
+references. The independent October OpenAI Yang--Mills Lean 4.32 source
+is only externally Git-pinned/source-registered in Golden; it has *not*
+been vendored as a second submodule or kernel-imported. A Gitlink
+makes source content available after `git submodule update --init`;
+it does **not** elaborate all upstream proofs under DASHI Lean 4.28.
+
+**Resulting max cut:** stop writing parallel Clay terminal compilers.
+For YM, target exactly the physical `DirectSourceOSLiteralClayInputs Y`
+construction (prioritize same-Wilson OAI E1 comparison first).
+For NS, pay the original R736 W1/W2 cutoff-uniform signed producer, or
+prove original-source route failure. For RH, construct/refute strict
+A2 actual-zero source intervals or Route B original signed-cap theorem.
+For P≠NP, supply `UniversalPolynomialSATDecisionFailure` witness.
+Selected BSD/Karp/Bishop instead need extant known-math carrier
+proofs and exact-head kernel tests. False promotion remains blocked.
+
+**Limit:** this is an exact-head audit of selected authoritative modules,
+not an exhaustive syntactic/theorem-semantic search of every historical
+DASHI declaration. Open status is recorded **at the audited original
+consumer interfaces**; do not interpret it as mathematical impossibility.
+
+
+## 14 November: OAI Clay comparison and A7/A8 same-witness maximum cut
+
+See canonical scoped comparison:
+\`Docs/roadmaps/ClayOpenAIOriginalWitnessComparativeMaximumCut20261114.md\`.
+This section is an additive 14-Nov source cut, **not** a revision of earlier
+rounds' physical or kernel outcomes.
+
+- External OpenAI October 28 YM A7 \`combined_acceptance\` at its own Lean
+  4.32 types keeps \`C,q,S,F\` together. External OPE A8 was separately checked.
+  The review explicitly leaves a same-existential-witness A7+A8 theorem open.
+- A new **candidate** in Lean Clay #108,
+  \`Integration/OpenAIYangMills32/CombinedA7A8SameWitnessCandidate.lean\`,
+  uses the SAME A7 \`Accepted.source\` OPE property and external review
+  \`YMReview.OPE.from_source\`, rather than choosing an independent A8 witness.
+  The exact 4.32 compile/type/axiom receipt is **OPEN**, and the candidate is
+  intentionally excluded from the native 4.28 acceptance root.
+- New **Agda source candidate** on this PR,
+  \`DASHI/Research/OpenAIMath/OpenAIYangMillsSameWitnessNonEntailmentExact.agda\`,
+  gives a synthetic two-witness countermodel and an explicit same-witness
+  lift, plus a separate positive-probe/all-mode counterexample.
+  Its pinned Agda 2.9 kernel is **OPEN**; not a physical Yang--Mills model.
+- New finite regression
+  \`scripts/check_oai_ym_endpoint_logic_maxcut_20261114.py\` is included in
+  the single-rollup source-only driver. **Exact Git blob
+  \`3d72ed3b3f592dcd49f97d8a99b239ab588fa5a7\` was executed independently
+  locally and passed all 16 finite predicate pairs (two independent-but-not-
+  joint models).** This is not a native theorem check.
+- No original Wilson E1/D1/D2, OS-H or physically uniform gap is discharged.
+  The earlier E1 original-source and R445 RG work remains a distinct B/C
+  set of physical obligations. The OpenAI 4 Nov YM submission is not covered
+  by the independently reviewed 28 Oct source package.
+
+Original mathematical credit: OpenAI and the cited prior mathematical
+sources; external 10 Nov review: Douglas, Gross, Jaffe, Klebanov, Nekrasov.
+New DASHI contribution: fail-closed endpoint composition *candidate* and
+independent finite logical audit, not new existence/mass-gap mathematics.
+
+
+## 14 November late maximum cut: OpenAI × DASHI YM/NS/SAT bidirectional steelman
+
+**Canonical detailed ledger and source attribution:**
+`Docs/roadmaps/ClayOpenAIThreeFrontierBidirectionalSteelman20261114.md`
+(26 A/B/C gate rows, with Karp F1–F4 grouped in one row). This adds to, rather than overwrites, the
+prior six-frontier A/B/C register. Newly inspected external pins are separate:
+October YM Lean 4.32.0, September NS Lean 4.34.0-rc2, October OAI #SAT
+Lean 4.34.1. Do NOT identify the later 7ef5 OAI index with the older
+1581d vendored source.
+
+**Positive cross-pollination this round:**
+- **PNP:** `OpenAIMathOriginalOptimizedSATDecisionBitExact.agda` composes
+  original `Source.originalGlobalCNFCountExact`,
+  `Opt.optGlobalCNFCountExact`, and
+  `Creation.creationOptimizedTseitinCountExact` to the same original
+  SAT nonzero bit. No duplicate evaluator. Golden kernel acceptance OPEN.
+- **OAI #SAT 4.34:** external staged Lean
+  `Integration/OpenAIMath34/OriginalListFinsetCountTransportCandidate.lean`
+  targets the *real* OAI `SAT.CNF (Fin n)` and `SAT.count`, not a
+  surrogate. It must be built in the pinned foreign toolchain and still
+  needs original Agda literal/byte matching M00/M01b/M02-M05.
+- **OAI NS 4.34-rc2:** external staged Lean
+  `Integration/OpenAINavierStokes34/ForcedGlobalScopeCorollariesCandidate.lean`
+  derives no universal **forced** global solution for exact Comparator C/D
+  classes and conditional unforced-no-solution→forced-breakdown lifts.
+  This does not disprove unforced R736/B or construct a blow-up.
+- **YM:** existing same-A7-F A8 OPE proof *candidate* stays intact.
+  The new ledger spells out OAI A3 finite-law↔original F19 64+896 Haar,
+  A7 continuum↔original E1 and original R445→OAI marked observables
+  in BOTH directions. Physical D1/D2 still open.
+
+**Verified finite reference this round:** the *exact committed Git blob* `5a37096a5d7579bea3a439b31020d1621259eb21` of `check_oai_bidi_ns_sat_20261114.py` was independently executed locally and passed 580 small
+list/Finset CNF formulas and four abstract forced/unforced scope models,
+with unused-variable, duplicate and empty-clause controls. It is now
+registered in the single Agda/Lean rollup acceptance driver. No exact
+new Agda 2.9 or Lean 4.28/4.32/4.34 kernel receipt is claimed.
+
+
+## 15 November: TOE A/B/C/D / R³ source-faithful correction
+
+**Canonical correction:** [ClayNSABCDTOER3OpenAIBidiReconciliation20261115.md](ClayNSABCDTOER3OpenAIBidiReconciliation20261115.md).
+Earlier six-frontier rows focusing on periodic R736 **under-counted the existing NS programme**. They remain historically correct as the specific B proof attempt, not as an exhaustive A/B/C/D account.
+
+- A / unforced ℝ³: actual `NSWholeSpaceCanonicalPairSaturationOriginExact` pair resolvents, `NSWholeSpaceProjectedSaturationOriginBoundExact` near-origin bound and `NSWholeSpaceR3RadialFactorBudgetExact` inverse-cube measure-aware compiler already source-written. Outstanding: physical (q=|\xi|^2) second-moment gain, actual radial/Fubini and finite-energy majorant, then A continuation. No need to restart abstract resolvent calculation or demand unphysical `|xi|^6` pointwise compensation.
+- B / unforced T³: R568/R650 two genuine physical payment leaves; R571 finite dissipation fold consumed in TOE; R71/R74 original finite quadratic Galerkin RHS and R854 negative-rate/real-integral conditional work remain separate B validation lanes. Original physical R853 rate along a real solution and uniform B continuation are open.
+- C/D / forced breakdown: `dashi_lean4/ExternalClayNS` **already** has independent `ClaySpec.lean`, `Gap.lean`, `ClauseAudit.lean`, `ProvenanceAudit.lean`, `SubmissionAudit.lean` direct C/D proof terms and `LiteralABCD.lean` `literalAnyOneClayResolution`. Earlier source-written elementary C/D no-universal-forced corollaries add no new mathematical result. External construction remains attributed to OpenAI; DASHI's independent formal specification/semantic audit retains separate credit. No independent physical certification is asserted.
+- Exact external pin correction: nested `ExternalClayNS/lakefile.toml` references `openai/NavierStokesAndEuler@f9e8bc5b38b6e212696e8a30e3e91517af887bbd` on Lean 4.34.0-rc2, **one commit later** than the prior sampled `8937a8f4...`. Current C/D proof spines use `NavierStokesR3.theorem_1_1` / `comparator_of_breakdown` and `PeriodicPaper.periodic_corollary` / `option_D_of_paper_candidate`.
+- Independent exact SymPy 1.14.0 regression `scripts/check_ns_abcd_r3_toe_sympy_20261115.py` on Git blob `2b70c3cc0323abe7ce04c80e94668a9d6109a6af` passed: pressure commutator (\int_{\mathbb R^3}K_R^{4/3}=16\pi/R), paid A radial factor (q(\nu q)^{-3}(qG)(qQ)=GQ/\nu^3), missing-second-q origin divergence, and literal R854 rational negativity. **Finite/symbolic analytic receipt, not an Agda/Lean kernel or physical source-equivalence proof.**
+- Added fail-closed paired source and optional local-kernel script `scripts/check_ns_toe_abcd_pinned_local_20261115.sh`; registered `source-only` in single six-frontier Clay driver. This execution environment lacks `agda`, `lake`, `lean` and `nix` and cannot clone the repositories, so **the new external and Golden exact-head kernels remain unrun in this turn**.
+
+The full NS programme remains A/B/C/D; the TOE `Everything` and `NavierStokesClayFrontierTOEConvergenceValidation` carry non-promotion contracts and do not upgrade finite/structural truths into general PDE solutions.
+
+
+## 15 NOVEMBER SOURCE-CORRECTED MAXIMUM CUT — OVERRIDES ANY PRIOR UNIVERSAL NS W2 TARGET
+
+See [ClayRecoveredProducersW2NoGoR856SourceMaxCut20261115.md](ClayRecoveredProducersW2NoGoR856SourceMaxCut20261115.md).
+
+**IMPORTANT:** [Agda #1271](https://github.com/chboishabba/dashi_agda/pull/1271) already supplied a physical smooth six-mode, unforced, real divergence-free Galerkin counterexample to the **unrestricted universal R734/R735 augmented W2 inequality**. The actual original dyadic X production at N=2 and amplitude 512 is positive while the mixed W rate initially vanishes. The conditional W1+W2→barrier compiler is valid, but its W2 premise is **false on actual physical data**, NOT merely awaiting a weld or general estimate. The counterexample is NOT a counterexample to NS regularity or a Clay solution. Do not spend work proving universal W2 or silently strengthen hypotheses with the desired regularity conclusion. The correct replacement is a physically signed R92/R102 helicity/negative-helicity/dyadic-defect production estimate, separately from W1.
+
+Coalesced exact sources into this single Agda Clay PR #1499: original PR #1271 R734 fuller ring identities, 25 authored research/test/script files and status warning (20 via atomic blob tree, 5 prior exact copy); original P≠NP PR #1129 172 complexity owners via atomic unchanged Git blobs (commit `5a5d1de6bd649a1e5d18c8d420449b5d9240308a`); original Yang–Mills PR #1440 R320→R313→R333 direct OS same-source compilation; preserved #1503 original R445 finite TV. Lean #108 has existing #7 clustering→gap and adds `YMFiniteRangeGibbsExteriorCancellationExact` plus NS R856.
+
+New exact scalar R856 at original R829/R854 values gives pointwise safe integer 10,065,030 (first unsafe 10,065,031) and integrated safe integer 20,130,061 (first unsafe 20,130,062). These are source-written Agda/Lean math with independent SymPy 1.14.0 PASS, **not kernel checked**, and **not a physical R853 rate derivative certificate**. General Lane A physical derivative-slot and low/high integrable-envelope identifications, YM actual interacting R320/R445 physical inputs, SAT M00–M05 bit/cost, Karp F1–F4 and universal SAT lower bound remain open.
+
+TOE original-owner facade is [Agda #1393](https://github.com/chboishabba/dashi_agda/pull/1393), not a new Clay theorem owner. No old donor PR was merged to master.
