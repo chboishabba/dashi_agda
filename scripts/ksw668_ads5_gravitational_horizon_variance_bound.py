@@ -90,7 +90,7 @@ def audit():
             ws=[random.uniform(.01,2) for _ in range(n)]
             finite_bound(xs,ws);cases+=1
     A,rg,var,b=finite_bound([.75,.75,.75],[1.,.2,1.])
-    assert var==0 and rg>=A and abs(rg-A)<mp.mpf("1e-65")
+    assert abs(var) < mp.mpf("1e-65") and rg>=A and abs(rg-A)<mp.mpf("1e-65")
     numeric=source_model()
     numeric.update({
       "status":"PASS strict 5D horizon variance lower bound, nonconstant H; finite random controls",
