@@ -55,6 +55,7 @@ run python python3 scripts/ksw668_ads5_tt_clock_maxcut.py
 run python python3 scripts/test_ksw668_ads5_tt_clock_maxcut.py
 run python python3 scripts/ksw668_hankel_moving_maxcut.py
 run python python3 scripts/test_ksw668_hankel_moving_maxcut.py
+run python bash scripts/check_ksw668_f8_maxcut.sh --smoke
 run python python3 scripts/test_ksw668_brane_original_maxcut.py
 run python python3 scripts/ksw668_ads5_z2_distributional_israel_coefficient.py
 run python python3 scripts/ksw668_brane_scalar_emitter_receiver_retarded.py
