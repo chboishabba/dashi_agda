@@ -42,7 +42,7 @@ with an **elliptic FIO principal symbol of order -1** because all three factors 
 
 Use the existing local fourth-order TT operator \`S_TT=(P_i^kP_j^l-1/2 P_ij P^kl)Q_kl\`, \`P=-delta Delta+∂∂\`, \`Q=diag(0,1,-1)\`. It preserves spatial compact support, has zero divergence and trace, has a nonzero yy principal symbol for k along x, and its mixed-index background FRW stress is conserved. Set for every finite large \`lambda\`
 \[
-\pi^{TT}_\lambda=\lambda^{-4}S_{TT}[\chi(T,x)\cos(\lambda(-T+k_x x)+\theta)]
+\pi^{TT}_\lambda=\lambda^{-4}S_{TT}[\chi(T,x)\cos(\lambda(-T+s b(T)+k_x x)+\theta)]
 \]
 with a fixed smooth compact cutoff \`chi\` supported near the actual interior emitter. It is a **real smooth compact** stress, not a delta distribution, and the factor \`lambda^-4\` keeps its leading TT amplitude O(1). Include the original smooth nonzero Israel source normalization \`-6\` and time-dependent unit-normal factor.
 
@@ -65,3 +65,6 @@ The previous coefficients \`24.0805/lambda,2.0234 lambda,0.06878 lambda\` are **
 At the **paper/theorem-application level** the causal block inversion is algebraically exact and the source-to-Weyl existential argument is supplied using Stefanov–Yang's 1+n FIO theorem. The **Agda kernel acceptance** of all continuum steps is *not* present, so F11 remains open. The numerical **compact 3D** F8.3 still fails mesh convergence (48.4% field /83.0% curvature drift) and does not acquire a numerical receipt from this analytic argument.
 
 Still OPEN: F8.3 quantitatively converged 3D numerical propagator; F9.1 generating matter action with complete constraints; F9.2 coupled tensor/scalar/vector and backreaction stability; F9.3 the distinct doubled-disc-cylinder gravitational perturbations; F10 physical scale, timing, frequency, attenuation and detector calibration; F11.1 pinned Agda continuum kernel; F11.2 source-to-observation semantic weld; D1 independent calibrated physical graviton observation. Review the external-theorem application before any formal promotion. No claim of a freely usable communications device or free energy.
+
+
+**Original-ray phase matching (essential F8.1 correction).** A microlocal source launched from the moving boundary must have the tangential phase obtained by restricting the five-dimensional direct-null phase `Phi(T,z,x)=-T+s z+k_x x` to `z=b(T)`: `Phi_src(T,x)=-T+s b(T)+k_x x`, with `s=Delta z/Delta T` for the exact original chord and `s²+k_x²=1`. In particular the induced boundary temporal frequency is `-1+s v(T)`, not `-1`; omitting `s b(T)` launches a different bicharacteristic and invalidates the chosen-source-to-original-receiver symbol match. Source phase is compactly cut off and TT-projected by the local spatial differential operator. This correction does not itself prove the full Neumann-FIO transfer/cutoff/error theorem, which remains subject to independent audit.
