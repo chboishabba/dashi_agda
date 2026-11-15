@@ -76,3 +76,14 @@ Local Python 11/11 passed 2026-11-15; the **Agda kernel target is not certified*
 **DASHI Agda remains golden.** Existing \`DASHI/Algebra/BalancedTernaryIntegerExact.agda\`, \`DASHI/Algebra/BalancedTernaryPositionalInjectiveExact.agda\`, \`DASHI/Codec/BalancedTritBitFibre.agda\`, \`DASHI/Programmes/FRACDASHExact.agda\`, and \`DASHI/Programmes/FRACDASHNumericInterpreterTargetExact.agda\` are reused, **not duplicated or declared equivalent to P30**. Existing \`DASHI/Quantum/QuantumBirthmarkHistorySectorDarkEnergyExact.agda\` already cautions against a Landauer→gravity converse.
 
 **Critical path B1 + B2 + B3 ⇒ C1 ⇒ C2.** It is not scientifically defensible to estimate a 75× electricity cut until the original P30 verifier and matched ECC work exist. D1–D3, E1–E3 are separate model and authority gates; they are not closed by algebra. All open gates have named original-evidence criteria; this pass does not claim to finish unprovided original code or unavailable physical experiments.
+
+
+## 15 November 2026 second maximum-cut addendum
+
+See [round-2 source / physical-discriminator audit](./InfotonP30WalkerRound2PhysicalDiscriminators20261115.md) and the real SECDED reference and non-original-P30 negative control in \`scripts/infoton_p30_ecc_maxcut.py\` and \`scripts/test_infoton_p30_ecc_maxcut.py\`.
+
+**Independent ledger after round 2: 8/19 CLOSED / 11 OPEN.** The new E1 closure is **NEGATIVE**: a primary-source NRC 1980 reactor protection 100ms technical-specification threshold and independently verified less-than-50ms actual tests refute the purported *universal fixed two-second blindness* claim. Separately IAEA INSAG-7 describes ~5min supervisory SKALA calculations and <1s selected DREG data capture; conflating them with fast protection is invalid.
+
+A real (72,64) syndrome-based SECDED reference corrects all 72 single-bit and detects all 2556 double-bit corruptions. An explicitly non-P30 coprime-unit surrogate does *not* detect 4352/5376 legal one-position substitutions, disproving residue membership alone as universal ECC. **Neither test runs Walker's unavailable original P30 codec.**
+
+The 130kW→1.73kW slide is conditional on *all* rack load scaling with a non-equivalent counted-operation ratio. With 25% fixed load, the conditional projected remaining rack power is 33.796kW; no measured efficiency or water elimination is inferred. Original P30 implementation/verification, Agda kernel checking, real GPU/rack Wattmeter, reactor-specific physical testing, biology spectroscopy and gauge-charge derivations remain OPEN.
