@@ -380,3 +380,149 @@ The F1 profile is supported in a compact **ambient four-spatial-dimensional neig
 Additional exact missing target: `cylinderThinBraneDeltaSourceEnergyTrace` — formulate (J=q(t)f(\theta,u,v)\delta_{\Sigma}) on the actual cylindrical worldvolume, establish the correct Sobolev trace/dual-source estimate, causal retarded solution, nonzero antipodal pickup, and stress-energy/backreaction compatibility. The smooth thick-source limit may require uniform renormalized energy estimates; the F1 (L^2(\mathbb R^4)) estimate is **not uniform as thickness tends to zero**, so it cannot pay this lemma.
 
 The source manuscript and the exact PR-head new Python file were not jointly executed in this tool runtime. Independent quadrature of the explicit F1 kernel with tensor-product Gauss–Legendre orders 3/5/7/9 converged near **0.004545273184896** at (t=2.125), compared with the ideal point-source value **0.004547233491053**; the rigorous support-based positive lower estimate at this parameter point is **0.00408853005758**. These are independent numerical sanity checks, not a replacement for repository-head execution or Agda kernel acceptance.
+
+
+---
+
+## 15 Nov 2026 — second max-cut: genuine thin emitter, static self-gravitating winding cylinder, normalized AdS5 TT source and moving-energy negative controls
+
+**This addendum supersedes the earlier F1 thickness-only assessment for the NEW A3 model.** Keep the former four-dimensional ambient *thick* source as a separate control. The new source is precisely supported on the original cylindrical three-spatial-dimensional hypersurface in ambient \(\mathbb R^4\). Both sources are TEST SCALARS. The shell construction below is a DIFFERENT Z2-glued geometry and does not automatically inherit the flat test-scalar propagator.
+
+Executable: \`scripts/ksw668_brane_original_maxcut_exact.py\`; local analogue ran with SymPy and positive quadrature. Rational-only Agda sources: \`KSW668CylinderZ2WindingIsraelRationalExact.agda\`, \`KSW668AdS5LinearIsraelTTRationalSliceExact.agda\`; both imported in the existing \`KSW668BraneBulkMaxCutEverything.agda\`. Exact new PR-head Python and Agda 2.9 kernel execution has not been performed by this tool runtime; local-first runner updated, CI irrelevant.
+
+### A1/A2/A3: a truly thin, compact, finite-energy source on the original FLAT cylinder
+
+Take flat 5D \(ds^2=-dt^2+dX^2+dY^2+du^2+dv^2\), cylindrical brane \(X=\cos\theta,Y=\sin\theta\), \(R=1\), source at \((1,0,0,0)\), receiver at \((-1,0,0,0)\). Define
+\[
+p_\delta(s)=\frac{15}{16\delta}(1-(s/\delta)^2)^2 {\bf1}_{|s|<\delta},
+\quad f_\delta(\theta,u,v)=p_\delta(\theta)p_\delta(u)p_\delta(v)
+\]
+and the ambient **surface distribution**
+\[
+F(\varphi)=\int_{\Sigma_t}f_\delta(\theta,u,v)
+\varphi(\cos\theta,\sin\theta,u,v)\,d\theta\,du\,dv,\qquad
+J(t,X)=q_\tau(t)F(X),
+\]
+with \(q_\tau(t)=t_+-2(t-\tau)_++(t-2\tau)_+\), \(q_\tau(0)=0\). This \(F\) is supported exactly on the cylinder, not in a thick neighborhood.
+
+The 4D spatial free-wave operator \(A=-\Delta_{\mathbb R^4}\) has \(F\in \dot H^{-1}(\mathbb R^4)\) for smooth compact surface density on a 3D hypersurface. One explicit proof is its positive Newtonian quadratic form:
+\[
+\|F\|_{\dot H^{-1}}^2=
+\frac1{4\pi^2}\int_{\Sigma_t}\int_{\Sigma_t}
+\frac{f_\delta(\xi)f_\delta(\eta)}{|\xi-\eta|^2}\,d\Sigma_\xi d\Sigma_\eta<\infty.
+\]
+The diagonal singularity is locally \(r^{-2}r^2dr\), integrable in three surface dimensions, and the compact, smooth density controls the remaining pairs. This is *not* an \(L^2(\mathbb R^4)\) source. For zero initial data, Duhamel gives
+\[
+\partial_t\phi+iA^{1/2}\phi
+=\int_0^t e^{i(t-s)A^{1/2}}F q_\tau(s)\,ds.
+\]
+Integrate by parts in \(s\) using \(q_\tau(0)=0\). Spectral unitarity yields
+\[
+\sqrt{2E(t)}\le\|F\|_{\dot H^{-1}}
+\left(|q_\tau(t)|+\int_0^t|q_\tau'(s)|ds\right)
+\le 3\tau\|F\|_{\dot H^{-1}},
+\quad E(t)\le\frac{9\tau^2}{2}\|F\|_{\dot H^{-1}}^2.
+\]
+Thus existence/uniqueness of the standard flat-space retarded finite-energy mild wave follows from the spectral Duhamel construction. The limiting spatial point source is not covered.
+
+The **correct four-spatial-dimensional** retarded ramp kernel is
+\[
+G_{\mathrm{ramp}}(t,d)={\bf1}_{t>d}\frac{\sqrt{t^2-d^2}}{4\pi^2d^2}.
+\]
+The attachment's \(\delta(t-d)/(4\pi d)\) is a *three-spatial-dimensional* retarded kernel, NOT the present 5D wave. With \(\delta=0.02,\tau=0.25,t_\mathrm{rec}=2.125\), every surface-source to antipodal-receiver distance obeys
+\[
+2\cos(\delta/2)\le d\le\sqrt{4+2\delta^2},
+\]
+hence \(t_\mathrm{rec}-\tau<d<t_\mathrm{rec}<\pi\). Only the strictly positive first ramp contributes to the receiver. Numerical normalized three-dimensional surface convolution:
+**response 0.004546916546865**, lower **0.004542796011697**, upper **0.004549451795781** (unit scalar couplings). Analytic inequalities prove strictly positive early response; numbers are cross-checks, not physical units. This closes A1/A2/A3 for the **flat-bulk test scalar**, not for dynamical gravity or the glued shell.
+
+### A4: static fully sourced 5D Einstein–Israel *background* via two interior discs
+
+Original probe cylinder \(K\neq0\) cannot be a pure-tension, source-free junction. A more substantial model glues two flat five-dimensional regions with transverse discs \(0\le r\le R\) along their common cylindrical timelike shell \(\Sigma=\mathbb R^{1,2}\times S^1_R\). This Z2 double-disc spacetime is smooth and flat **away** from its shell; it is not the unglued global \(\mathbb R^{4,1}\) used for the exact scalar Green calculation. With normals pointing *into each disc*, the mixed extrinsic tensor and trace are
+\[
+K^a{}_b=\mathrm{diag}(0,-1/R,0,0),\qquad K=-1/R.
+\]
+The full Z2 Israel tensor \([K^a{}_b-K\delta^a_b]=-\kappa_5^2 S^a{}_b\) requires
+\[
+S^a{}_b=-\frac{2}{\kappa_5^2R}\operatorname{diag}(1,0,1,1).
+\]
+For the original positive-tension compact winding-scalar brane action
+\(S_\Sigma=-\int\sqrt{-h}\,[T+(f^2/2)(\partial\chi)^2]\), \(\chi=n\theta\), define \(a=f^2n^2/(2R^2)\). Its **actual full** stress is
+\(S^a{}_b=\operatorname{diag}(-(T+a),-T+a,-(T+a),-(T+a))\).
+The complete 16-component junction matches iff
+\[
+T=a=\frac1{\kappa_5^2 R}
+\quad\Longleftrightarrow\quad f^2n^2=\frac{2R}{\kappa_5^2}.
+\]
+Example \(R=1,T=2,f=2,n=1,\kappa_5^2=1/2\) exactly reproduces the prior probe parameters. The compact-scalar worldvolume equation \(\Box_h\chi=0\) and source conservation hold; the stress satisfies NEC and saturates DEC. The old uniform probe radial potential has \(E'(1)=0,E''(1)=8\pi\). **The background is an exact piecewise-flat distributional Einstein–Israel source candidate**, not a proof of coupled perturbation stability or the same globally Minkowski bulk scalar receiver. A *new* Green function on the doubled-disc geometry and normal/brane perturbation estimates remain needed to combine them.
+
+### B1/B2: genuine TT projection of LINEARIZED Israel on the same expanding original AdS5
+
+For the existing \(a(t)=t,z_b(t)=1/t,\kappa_5^2=6\) homogeneous/isotropic brane, use *mixed-index*, dimensionless TT perturbations in Gaussian-normal gauge:
+\[
+q_{ij}=a^2(\delta_{ij}+H_{ij}),\quad
+K^i{}_j=K_{\mathrm{spatial}}\delta^i_j+\tfrac12 n^A\partial_A H^i{}_j+O(H^2).
+\]
+The background \(K_{\mathrm{spatial}} H\) terms cancel when raising an index. Write the actual brane stress \(S^i{}_j=(p-\sigma)\delta^i_j+\pi^i{}_j\), \(\pi^i{}_i=\partial_i\pi^i{}_j=0\). The variation of its trace vanishes in the pure tensor sector, so the original Z2 Israel equation implies
+\[
+\boxed{n^A\partial_A H^i{}_j=-\kappa_5^2\pi^i{}_j=-6\pi^i{}_j},\quad
+n^A\partial_A=\frac{-\partial_T+\sqrt{1+t^2}\partial_z}{t^2}\Big|_{z=1/t,T=T_b(t)}.
+\]
+This **resolves B2's tensor-sector algebraic normalization and sign** for the existing dimensionless H. It does NOT derive that some independently localized matter apparatus generates a given \(\pi^\mathrm{TT}\). For a covariant metric perturbation \(\delta g_{ij}=a^2H_{ij}\), its covariant derivative contains connections; the attachment's added \(-H/L\) term cannot be transplanted to the *dimensionless* \(H\) unchanged. A rational two-polarization and nine-component source check is added in Agda source.
+
+### B3/B5: exact moving-boundary energy identity; zero-mode negative control
+
+In Poincare coordinates \(ds^2=z^{-2}(-dT^2+dz^2+d\mathbf x^2)\), one tensor-polarization wave is
+\(\partial_T^2H=\partial_z^2H-3z^{-1}\partial_zH+\Delta_{\mathbf x}H\).
+Let \(b(T)=z_b(T)=1/t\), \(v(T)=db/dT=-1/\sqrt{1+t^2}\). In the physical one-sided domain \(z\ge b(T)\), absent outer/infinite flux, the bulk positive quadratic energy
+\[
+E(T)=\frac12\int_{b(T)}^\infty dz\,z^{-3}\int d^3x
+\bigl(H_T^2+H_z^2+|\nabla_{\mathbf x}H|^2\bigr)
+\]
+has the **exact Reynolds/moving-wall flux identity**
+\[
+\boxed{\frac{dE}{dT}=-\int d^3x\,b^{-3}
+\left[H_T H_z+\frac v2(H_T^2+H_z^2+|\nabla_{\mathbf x}H|^2)\right]_{z=b}.}
+\]
+At zero anisotropic stress the *moving* Neumann condition is \(H_z=-v H_T\); the flux reduces to
+\[
+\frac{dE}{dT}=\int d^3x\,\frac{v}{2b^3}
+\left[(1-v^2)H_T^2-|\nabla_{\mathbf x}H|^2\right]_{z=b}.
+\]
+This is **not sign definite** and is not simply zero. A finite-time retarded moving-wall Green theorem still needs precise initial data, compatible source, coercive boundary estimate, chosen AdS side and horizon condition; do not assert a naive method-of-images solution.
+
+Static brane (\(b=\)const) control: with \(H=z^{3/2}\psi\),
+\[
+\mathcal H=-\partial_z^2+\frac{15}{4z^2}
+=Q^\dagger Q,\quad Q=\partial_z+\frac{3}{2z}
+\]
+under the *correct transformed Neumann boundary* \(Q\psi(b)=0\). The normalizable radial zero mode \(\psi_0=z^{-3/2}\) satisfies \(Q\psi_0=\mathcal H\psi_0=0\) and \(\int_b^\infty|\psi_0|^2dz=1/(2b^2)\). Thus the attachment's \(\omega^2>0\) assertion is FALSE. Correct stationary conclusion is **nonnegative** radial operator, zero mode present; nothing about fully moving nonlinear stability follows.
+
+### Explicit correction of unsupported promotions in attached 232-line proposed proof
+
+* A1: a wave **on** a cylinder has no bulk shortcut; retain the R4 ambient spatial operator.
+* A2: the 3-spatial \(1/(4\pi d)\delta(t-d)\) kernel is the wrong dimension; positive everywhere until photon arrival is not true for arbitrary finite pulses. The narrower positivity window above is proved.
+* A3: trace of \(H^1\) alone is not a wave-energy theorem; the \(\dot H^{-1}\) source and time-integration-by-parts provide the missing argument for the **test scalar**.
+* A4: Israel requires all mixed components and tuned \(\kappa_5^2\), not the scalar condition \(1/R=4\pi G_5\tau\) alone.
+* B2: the correct boundary source is stated for an explicit variable (\(H\)); derivative/Robin coefficients cannot be imported between \(H\) and \(\delta g\) without change of variables.
+* B3: dynamic-wall flux is nonzero, and static images do not solve the generic moving wall; Green existence/nonzero source coupling remain open.
+* B4: causal **support** does not imply an excited nonzero gauge-invariant receiver amplitude. \(R_{0i0j}=-\ddot H_{ij}/2\) is a *local linear TT Minkowski limit*, not a general FRW Riemann/Weyl identity.
+* B5: positive \(15/(4z^2)\) does not imply strict mode gap with this Robin boundary; explicit zero mode above.
+* C1: GW170817 relative-speed limits are conditional on source lag and propagation model. NO \(\ell\le10^{-19}\mathrm m\) follows from that timing datum alone.
+
+### Updated exact primitive frontier
+
+| Cut | Accepted scope from this tranche | Remaining genuine primitive |
+|---|---|---|
+| A1–A3 | analytic thin-source \(\dot H^{-1}\to E\) argument, retarded same-receiver positive convolution in unglued flat bulk; source-equivalent Python checks | formal Agda analytic Sobolev/spectral/Green integration; couple scalar stress/backreaction to Einstein |
+| A4 | exact tuned static double-disc Z2 Israel background with winding source, NEC/DEC; rational Agda 16-component slice source | coupled normal/tangential gravitational perturbation and retarded wave on the **doubled-disc** global geometry |
+| B1 | existing bulk TT PDE/moving normal; confirmed in independent originals | Agda differentiable tensor owner and kernel receipt |
+| B2 | exact linearized mixed TT Israel coefficient and 2-polarization algebraic check | *physical* localized \(\pi^\mathrm{TT}\) generated by a conserved brane source, with any required scalar/vector gauge sectors |
+| B3 | exact moving-boundary energy identity and static factorization/zero-mode control | full retarded Green operator, positivity/coercivity, uniqueness, horizon, source/initial data |
+| B4 | geometric same-receiver early null; original scalar control separate | nonzero, finite-energy *AdS5 tensor* source/receiver at same original clock with calibrated gauge-invariant tidal observable |
+| B5 | stationary radial spectrum nonnegative, zero mode; moving energy sign indefinite | moving/coupled stability and spectral transfer |
+| C1 | prior dimensional geometric benchmark; timing observational comparisons identified | physically scaled \(\ell,\kappa_5,\omega,D\), emission delay, GW/EM constraints; no unsupported \(\ell\) bound |
+| C2 | two rational Agda source files integrated in brane rollup | **Agda 2.9 local kernel acceptance** for both and original analytic continuum |
+| D1 | independent operational test defined | actual source-characterised gravitational response and independent observations |
+
+**Next highest-alpha order: B3 (+ local B2 physical stress) → B4 same-source Green convolution and tidal receiver → moving B5, then C1/D1.** Also separately A4 → doubled-disc scalar/tensor evolution on exactly that new metric. Use one PR (#1504) per repo; no invented kernel acceptance, universal FTL, free energy or observational signal.
