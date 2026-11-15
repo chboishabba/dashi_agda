@@ -1,0 +1,13 @@
+{
+  "canonical_url": "https://doi.org/10.1016/j.jocs.2016.12.001",
+  "claim_scope": "seven-node paper figure synthetic algorithm fixture only",
+  "dewey_status": "not applicable to abstract figure nodes",
+  "expected_sha256": "734512a0773c184962079ad774771aed95c012f11a2016ab06b4902a5262d215",
+  "link_selection_policy": "author figure A-B-C and D/E/F/G source diagram",
+  "parser_policy": "explicit source-figure edges; no wikitext parser",
+  "qid_status": "not applicable to abstract figure nodes",
+  "source_author": "Mark Ibrahim; Christopher M. Danforth; Peter Sheridan Dodds (external figure); DASHI local transcription",
+  "source_role": "DASHI transcription of published seven-node figure, NOT original historical corpus",
+  "source_title": "Connecting every bit of knowledge: The structure of Wikipedia's First Link Network — Figures 2-4",
+  "version_or_revision": "synthetic-figure-2-4-local-v1"
+}

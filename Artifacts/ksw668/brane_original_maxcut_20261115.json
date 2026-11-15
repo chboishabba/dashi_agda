@@ -1,0 +1,87 @@
+{
+  "ledger_date": "2026-11-15",
+  "repo": "chboishabba/dashi_agda",
+  "pr": 1504,
+  "branch": "research/ksw668-plasma-369-causal-maxcut-20261114",
+  "original_science": [
+    {
+      "work": "Caldwell & Langlois (2001)",
+      "doi": "10.1016/S0370-2693(01)00631-1",
+      "scope": "geometric fifth-dimensional shortcut"
+    },
+    {
+      "work": "Maartens & Koyama (2010)",
+      "doi": "10.12942/lrr-2010-5",
+      "scope": "brane tensor bulk perturbation and Israel boundary"
+    },
+    {
+      "work": "Kodama Ishibashi Seto (2000)",
+      "doi": "10.1103/PhysRevD.62.064022",
+      "scope": "gauge-invariant braneworld perturbations"
+    }
+  ],
+  "replay_files": [
+    "scripts/ksw668_brane_original_maxcut_exact.py",
+    "scripts/ksw668_ads5_induced_weyl_receiver_partial.py",
+    "scripts/ksw668_ads5_mode_energy_scale_guard.py",
+    "scripts/test_ksw668_brane_original_maxcut.py"
+  ],
+  "agda_source_files": [
+    "DASHI/Physics/Gravity/KSW668CylinderZ2WindingIsraelRationalExact.agda",
+    "DASHI/Physics/Gravity/KSW668AdS5LinearIsraelTTRationalSliceExact.agda"
+  ],
+  "cut_status": {
+    "A1": "mathematical test scalar energy proof supplied; not Agda kernel",
+    "A2": "thin-cylinder test scalar positive early receiver lower bound; not physical graviton",
+    "A3": "compact codimension-one L1_t Hdot^-1 source finite energy; not backreacted",
+    "A4": "new Z2 doubled-interior-disc exact static Israel+winding background; coupled perturbation stability and same-background Green OPEN",
+    "B1": "bulk AdS5 TT PDE and moving normal already checked; Agda continuum OPEN",
+    "B2": "dimensionless mixed TT n.dH=-6*pi exact linearized junction in original AdS5; independently generated compact physical pi OPEN",
+    "B3": "exact moving-boundary energy flux and correct source form; full retarded causal Green and well-posedness receipt OPEN",
+    "B4": "gauge-invariant 4D FRW electric Weyl nonzero for manufactured nonretarded TT mode; compact-source signal OPEN",
+    "B5": "static radial operator QadjQ, zero mode and divergent separated Bessel radial energy; coupled moving stability OPEN",
+    "C1": "conditional SI time/frequency rescaling only; no model-specific observational AdS bound",
+    "C2": "rational Agda source written+aggregated; pinned Agda 2.9 kernel not run",
+    "D1": "independent actual gravitational observer/detector measurement unavailable"
+  },
+  "mathematical_receipts": {
+    "thin_brane_radius": 1,
+    "thin_brane_source_halfwidth": 0.02,
+    "thin_brane_pulse_tau": 0.25,
+    "thin_brane_receiver_time": 2.125,
+    "thin_brane_photon_front": 3.141592653589793,
+    "thin_brane_receiver_response_quadrature": 0.0045469165468648804,
+    "thin_brane_positive_receiver_lower": 0.004542796011696708,
+    "thin_brane_positive_receiver_upper": 0.004549451795780869,
+    "thin_brane_energy_bound_factor_times_Hdotminus1_squared": 0.28125,
+    "static_cylinder_example": {
+      "R": 1,
+      "T": 2,
+      "f": 2,
+      "n": 1,
+      "kappa5_squared": 0.5
+    },
+    "TT_israel_kappa5_squared": 6,
+    "induced_Weyl_manufactured_plus": -0.008053773977753403,
+    "original_same_receiver_dimensionless_advance": 0.009322862731128074,
+    "conditional_advance_seconds_for_ell_one_metre": 3.109772271565309e-11,
+    "induced_Bessel_mode_radial_energy_finite": false,
+    "static_radial_strict_positive_gap": false
+  },
+  "acceptance": {
+    "local_source_equivalent_sympy_numeric": "PASS",
+    "local_independent_unit_regressions": "7/7 PASS",
+    "exact_repository_head_scripts": "NOT RUN IN THIS TOOL RUNTIME",
+    "agda_pinned_kernel": "NOT RUN — toolchain unavailable",
+    "observed_physical_graviton_signal": false,
+    "created_actual_retarded_TT_Green": false,
+    "CI_is_gate": false
+  },
+  "next_maxcut": [
+    "derive divergence-free compact original brane TT source pi with allowed detector coupling",
+    "prove causal forward Neumann Green on original moving a=t AdS5 incl no incoming horizon",
+    "convolve source and compute nonzero brane gauge-invariant Weyl before photon on same receiver",
+    "analyze full moving self-gravitating stability and finite-energy wavepacket",
+    "calibrate ell, epochs, mode attenuation, electromagnetic lag; test against primary observations"
+  ]
+}

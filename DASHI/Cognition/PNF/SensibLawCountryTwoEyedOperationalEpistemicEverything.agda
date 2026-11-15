@@ -143,7 +143,7 @@ indigenousOrderIndependenceRemainsPositive = refl
 
 doctrineRejectedButLandControlStillOpen :
   Continuity.currentCoordinateState Continuity.doctrineRejected ≡ Continuity.paid
-  × Continuity.currentCoordinateState Continuity.landCountryControl ≡ Continuity.open
+  × Continuity.currentCoordinateState Continuity.landCountryControl ≡ Continuity.openState
 doctrineRejectedButLandControlStillOpen = refl , refl
 
 ------------------------------------------------------------------------

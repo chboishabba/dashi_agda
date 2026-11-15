@@ -1,0 +1,567 @@
+module DASHI.Biology.Physical.Biological369CubicalBoundaryMaterialExact where
+
+------------------------------------------------------------------------
+-- THE SIX PHYSICAL OUTER FACES of the actual 3×3×3 ternary cube.
+-- Every external material influx must prove OnFace for its voxel.
+-- No interior voxel is silently a source/sink.
+--
+-- The laws here certify exact discrete material bookkeeping, not
+-- calibrated permeability, flow, chemistry or external source data.
+------------------------------------------------------------------------
+
+open import DASHI.Core.Prelude
+
+import Data.Vec.Base as V
+import Data.Fin.Base as F
+import DASHI.Foundations.SSPTritCarrier as SSP
+import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Cube
+import DASHI.Biology.Physical.BiologicalOriginal54BondSharedVectorExact as Index
+import DASHI.Biology.Physical.BiologicalFullCubeIncidenceExact as Grid
+import DASHI.Biology.Physical.BiologicalSharedFiniteVectorTransferExact as Transfer
+
+originalOuterFacePoints : Cube.Face6 → List Cube.Ternary27Point
+originalOuterFacePoints Cube.xNegativeFace =
+  Grid.flatMap (λ y → Grid.mapList
+    (λ z → Cube.ternary27Point SSP.sspNegOne y z) Grid.trits)
+    Grid.trits
+originalOuterFacePoints Cube.xPositiveFace =
+  Grid.flatMap (λ y → Grid.mapList
+    (λ z → Cube.ternary27Point SSP.sspPosOne y z) Grid.trits)
+    Grid.trits
+originalOuterFacePoints Cube.yNegativeFace =
+  Grid.flatMap (λ x → Grid.mapList
+    (λ z → Cube.ternary27Point x SSP.sspNegOne z) Grid.trits)
+    Grid.trits
+originalOuterFacePoints Cube.yPositiveFace =
+  Grid.flatMap (λ x → Grid.mapList
+    (λ z → Cube.ternary27Point x SSP.sspPosOne z) Grid.trits)
+    Grid.trits
+originalOuterFacePoints Cube.zNegativeFace =
+  Grid.flatMap (λ x → Grid.mapList
+    (λ y → Cube.ternary27Point x y SSP.sspNegOne) Grid.trits)
+    Grid.trits
+originalOuterFacePoints Cube.zPositiveFace =
+  Grid.flatMap (λ x → Grid.mapList
+    (λ y → Cube.ternary27Point x y SSP.sspPosOne) Grid.trits)
+    Grid.trits
+
+everyOriginalOuterFaceHasNineVoxels :
+  (face : Cube.Face6) →
+  Grid.countList (originalOuterFacePoints face) ≡ 9
+everyOriginalOuterFaceHasNineVoxels Cube.xNegativeFace = refl
+everyOriginalOuterFaceHasNineVoxels Cube.xPositiveFace = refl
+everyOriginalOuterFaceHasNineVoxels Cube.yNegativeFace = refl
+everyOriginalOuterFaceHasNineVoxels Cube.yPositiveFace = refl
+everyOriginalOuterFaceHasNineVoxels Cube.zNegativeFace = refl
+everyOriginalOuterFaceHasNineVoxels Cube.zPositiveFace = refl
+
+-- Inject q units at exactly one verified original voxel.
+-- The finite vector is merely the original cubical material chart.
+injectAtIndex :
+  ∀ {n} → F.Fin n → Nat → V.Vec Nat n → V.Vec Nat n
+injectAtIndex F.zero q (V._∷_ a xs) =
+  V._∷_ (q + a) xs
+injectAtIndex (F.suc index) q (V._∷_ a xs) =
+  V._∷_ a (injectAtIndex index q xs)
+
+injectAtIndexAddsAmount :
+  ∀ {n}
+  (index : F.Fin n) (q : Nat)
+  (state : V.Vec Nat n) →
+  V.sum (injectAtIndex index q state) ≡ V.sum state + q
+injectAtIndexAddsAmount F.zero q (V._∷_ a xs) =
+  trans
+    (+-assoc q a (V.sum xs))
+    (+-comm q (a + V.sum xs))
+injectAtIndexAddsAmount (F.suc index) q (V._∷_ a xs) =
+  trans
+    (cong (λ t → a + t) (injectAtIndexAddsAmount index q xs))
+    (sym (+-assoc a (V.sum xs) q))
+
+-- A true boundary-source event MUST carry the original face proof.
+-- Physical flow sign must be explicit at higher layers.
+record OriginalOuterFaceInjection : Set where
+  constructor original-outer-face-injection
+  field
+    face : Cube.Face6
+    physicalVoxel : Cube.Ternary27Point
+    boundaryMembership : Cube.OnFace face physicalVoxel
+    incomingMaterial : Nat
+    originalBoundaryReference : String
+
+open OriginalOuterFaceInjection public
+
+applyBoundaryInjection :
+  OriginalOuterFaceInjection →
+  V.Vec Nat 27 → V.Vec Nat 27
+applyBoundaryInjection event state =
+  injectAtIndex
+    (Index.originalPointIndex (physicalVoxel event))
+    (incomingMaterial event) state
+
+eachOriginalBoundaryInjectionIsPaid :
+  (event : OriginalOuterFaceInjection)
+  (state : V.Vec Nat 27) →
+  V.sum (applyBoundaryInjection event state)
+    ≡ V.sum state + incomingMaterial event
+eachOriginalBoundaryInjectionIsPaid event state =
+  injectAtIndexAddsAmount
+    (Index.originalPointIndex (physicalVoxel event))
+    (incomingMaterial event) state
+
+runBoundaryInputs :
+  List OriginalOuterFaceInjection →
+  V.Vec Nat 27 → V.Vec Nat 27
+runBoundaryInputs [] state = state
+runBoundaryInputs (event ∷ rest) state =
+  runBoundaryInputs rest (applyBoundaryInjection event state)
+
+totalBoundaryInput :
+  List OriginalOuterFaceInjection → Nat
+totalBoundaryInput [] = 0
+totalBoundaryInput (event ∷ rest) =
+  incomingMaterial event + totalBoundaryInput rest
+
+allOriginalFaceBoundaryInputsBalance :
+  (events : List OriginalOuterFaceInjection)
+  (state : V.Vec Nat 27) →
+  V.sum (runBoundaryInputs events state)
+    ≡ V.sum state + totalBoundaryInput events
+allOriginalFaceBoundaryInputsBalance [] state =
+  sym (+-identityʳ (V.sum state))
+allOriginalFaceBoundaryInputsBalance (event ∷ rest) state =
+  trans
+    (allOriginalFaceBoundaryInputsBalance rest
+      (applyBoundaryInjection event state))
+    (trans
+      (cong (λ n → n + totalBoundaryInput rest)
+        (eachOriginalBoundaryInjectionIsPaid event state))
+      (+-assoc (V.sum state)
+        (incomingMaterial event)
+        (totalBoundaryInput rest)))
+
+-- Concrete, actual original x=-1 boundary point.
+selectedOriginalBoundaryEvent : OriginalOuterFaceInjection
+selectedOriginalBoundaryEvent =
+  original-outer-face-injection
+    Cube.xNegativeFace
+    Cube.negativeCorner
+    (Cube.onFace refl)
+    1
+    "selected synthetic face input; original biological rate not measured"
+
+originalBoundaryDoesNotAutomaticallyPayPhysiology : Bool
+originalBoundaryDoesNotAutomaticallyPayPhysiology = false
+
+------------------------------------------------------------------------
+-- Actual finite-volume outflow: selected boundary voxel, debit a
+-- SINGLE available quantum or remain stationary if empty.
+-- The external loss is the amount actually debited, not a requested
+-- but impossible flux. Original rates, valences and chemical species
+-- have to be supplied by the later physical model.
+------------------------------------------------------------------------
+
+record OriginalOuterFaceDischarge : Set where
+  constructor original-outer-face-discharge
+  field
+    dischargeFace : Cube.Face6
+    dischargeVoxel : Cube.Ternary27Point
+    dischargeMembership : Cube.OnFace dischargeFace dischargeVoxel
+    originalDischargeReference : String
+
+open OriginalOuterFaceDischarge public
+
+dischargeIndex :
+  OriginalOuterFaceDischarge → F.Fin 27
+dischargeIndex event = Index.originalPointIndex (dischargeVoxel event)
+
+oneIfNonzero : Nat → Nat
+oneIfNonzero zero = 0
+oneIfNonzero (suc _) = 1
+
+actualDischargedAmount :
+  OriginalOuterFaceDischarge → V.Vec Nat 27 → Nat
+actualDischargedAmount event state =
+  oneIfNonzero (V.lookup state (dischargeIndex event))
+
+applyBoundaryDischarge :
+  OriginalOuterFaceDischarge →
+  V.Vec Nat 27 → V.Vec Nat 27
+applyBoundaryDischarge event state =
+  V.updateAt state (dischargeIndex event)
+    (λ n → pred n)
+
+-- Reuse the original generic source-debit conservation proof owner.
+-- pred(suc n)=n and pred(0)=0 is definitionally equal to the
+-- original debitAt, at every finite vector index.
+dischargeIsOriginalDebit :
+  ∀ {n}
+  (index : F.Fin n)
+  (state : V.Vec Nat n) →
+  V.updateAt state index pred ≡ Transfer.debitAt index state
+dischargeIsOriginalDebit F.zero (V._∷_ zero xs) = refl
+dischargeIsOriginalDebit F.zero (V._∷_ (suc a) xs) = refl
+dischargeIsOriginalDebit (F.suc index) (V._∷_ a xs) =
+  cong (V._∷_ a) (dischargeIsOriginalDebit index xs)
+
+failedDebitConserves :
+  ∀ {n}
+  (index : F.Fin n)
+  (state : V.Vec Nat n) →
+  V.lookup state index ≡ zero →
+  V.sum (Transfer.debitAt index state) ≡ V.sum state
+failedDebitConserves F.zero (V._∷_ zero xs) refl = refl
+failedDebitConserves F.zero (V._∷_ (suc a) xs) ()
+failedDebitConserves (F.suc index) (V._∷_ a xs) proof =
+  cong (λ n → a + n)
+    (failedDebitConserves index xs proof)
+
+rightOneIsSucc : (n : Nat) → n + 1 ≡ suc n
+rightOneIsSucc n =
+  trans (+-suc n zero) (cong suc (+-identityʳ n))
+
+outflowIndexBalance :
+  ∀ {n}
+  (index : F.Fin n)
+  (state : V.Vec Nat n) →
+  V.sum (Transfer.debitAt index state)
+    + oneIfNonzero (V.lookup state index)
+    ≡ V.sum state
+outflowIndexBalance index state with V.lookup state index
+... | zero =
+  trans
+    (+-identityʳ (V.sum (Transfer.debitAt index state)))
+    (failedDebitConserves index state refl)
+... | suc k =
+  trans
+    (rightOneIsSucc (V.sum (Transfer.debitAt index state)))
+    (Transfer.successfulDebitDecreasesTotalByOne index state k refl)
+
+outflowMaterialBalance :
+  (event : OriginalOuterFaceDischarge)
+  (state : V.Vec Nat 27) →
+  V.sum (applyBoundaryDischarge event state)
+    + actualDischargedAmount event state
+    ≡ V.sum state
+outflowMaterialBalance event state =
+  trans
+    (cong
+      (λ vector →
+        V.sum vector + actualDischargedAmount event state)
+      (dischargeIsOriginalDebit (dischargeIndex event) state))
+    (outflowIndexBalance (dischargeIndex event) state)
+
+data OriginalFaceExchange : Set where
+  addAtOuterFace : OriginalOuterFaceInjection → OriginalFaceExchange
+  removeAtOuterFace : OriginalOuterFaceDischarge → OriginalFaceExchange
+
+applyOriginalFaceExchange :
+  OriginalFaceExchange →
+  V.Vec Nat 27 → V.Vec Nat 27
+applyOriginalFaceExchange (addAtOuterFace event) state =
+  applyBoundaryInjection event state
+applyOriginalFaceExchange (removeAtOuterFace event) state =
+  applyBoundaryDischarge event state
+
+faceExchangeInput : OriginalFaceExchange → Nat
+faceExchangeInput (addAtOuterFace event) = incomingMaterial event
+faceExchangeInput (removeAtOuterFace event) = 0
+
+faceExchangeOutput :
+  OriginalFaceExchange → V.Vec Nat 27 → Nat
+faceExchangeOutput (addAtOuterFace event) state = 0
+faceExchangeOutput (removeAtOuterFace event) state =
+  actualDischargedAmount event state
+
+originalFaceExchangeBalance :
+  (event : OriginalFaceExchange)
+  (state : V.Vec Nat 27) →
+  V.sum (applyOriginalFaceExchange event state)
+    + faceExchangeOutput event state
+    ≡ V.sum state + faceExchangeInput event
+originalFaceExchangeBalance (addAtOuterFace event) state =
+  trans
+    (+-identityʳ (V.sum (applyBoundaryInjection event state)))
+    (eachOriginalBoundaryInjectionIsPaid event state)
+originalFaceExchangeBalance (removeAtOuterFace event) state =
+  trans
+    (outflowMaterialBalance event state)
+    (sym (+-identityʳ (V.sum state)))
+
+record BoundaryHistoryResult : Set where
+  constructor boundary-history-result
+  field
+    finalMaterial : V.Vec Nat 27
+    totalExternalInput : Nat
+    totalExternalOutput : Nat
+
+open BoundaryHistoryResult public
+
+runOriginalBoundaryExchange :
+  List OriginalFaceExchange →
+  V.Vec Nat 27 → BoundaryHistoryResult
+runOriginalBoundaryExchange [] state =
+  boundary-history-result state 0 0
+runOriginalBoundaryExchange (event ∷ rest) state
+  with runOriginalBoundaryExchange rest
+    (applyOriginalFaceExchange event state)
+... | boundary-history-result final incoming outgoing =
+  boundary-history-result
+    final
+    (faceExchangeInput event + incoming)
+    (faceExchangeOutput event state + outgoing)
+
+exchangeAssociative :
+  (a b c : Nat) → a + (b + c) ≡ (a + c) + b
+exchangeAssociative a b c =
+  trans
+    (cong (λ x → a + x) (+-comm b c))
+    (sym (+-assoc a c b))
+
+allOriginalBoundaryExchangeHistoriesBalance :
+  (events : List OriginalFaceExchange)
+  (state : V.Vec Nat 27) →
+  V.sum (finalMaterial (runOriginalBoundaryExchange events state))
+    + totalExternalOutput (runOriginalBoundaryExchange events state)
+    ≡
+  V.sum state
+    + totalExternalInput (runOriginalBoundaryExchange events state)
+allOriginalBoundaryExchangeHistoriesBalance [] state =
+  sym (+-identityʳ (V.sum state))
+allOriginalBoundaryExchangeHistoriesBalance (event ∷ rest) state
+  with runOriginalBoundaryExchange rest
+    (applyOriginalFaceExchange event state)
+    | allOriginalBoundaryExchangeHistoriesBalance rest
+        (applyOriginalFaceExchange event state)
+... | boundary-history-result final incoming outgoing | induction =
+  trans
+    (exchangeAssociative
+      (V.sum final) (faceExchangeOutput event state) outgoing)
+    (trans
+      (cong (λ n → n + faceExchangeOutput event state) induction)
+      (trans
+        (exchangeAssociative
+          (V.sum (applyOriginalFaceExchange event state))
+          incoming (faceExchangeOutput event state))
+        (trans
+          (cong (λ n → n + incoming)
+            (originalFaceExchangeBalance event state))
+          (+-assoc (V.sum state)
+            (faceExchangeInput event) incoming))))
+
+
+------------------------------------------------------------------------
+-- POINTWISE ORIGINAL FACE FLUX: complement the earlier global ledger
+-- with the amount actually entering the selected exterior voxel.
+------------------------------------------------------------------------
+
+lookupAfterFaceInjection :
+  ∀ {n} (i : F.Fin n) (q : Nat) (xs : V.Vec Nat n) →
+  V.lookup (injectAtIndex i q xs) i ≡ q + V.lookup xs i
+lookupAfterFaceInjection F.zero q (V._∷_ a xs) = refl
+lookupAfterFaceInjection (F.suc i) q (V._∷_ a xs) =
+  lookupAfterFaceInjection i q xs
+
+originalBoundaryInjectionLocalReceipt :
+  (event : OriginalOuterFaceInjection) (state : V.Vec Nat 27) →
+  V.lookup (applyBoundaryInjection event state)
+    (Index.originalPointIndex (physicalVoxel event))
+    ≡ incomingMaterial event
+      + V.lookup state (Index.originalPointIndex (physicalVoxel event))
+originalBoundaryInjectionLocalReceipt event state =
+  lookupAfterFaceInjection
+    (Index.originalPointIndex (physicalVoxel event))
+    (incomingMaterial event) state
+
+
+-- Localized physical boundary support: no new material appears at
+-- an unrelated cubical voxel when the certified face event fires.
+lookupFaceInjectionAwayFromEvent :
+  ∀ {n} (source observer : F.Fin n) (q : Nat)
+  (state : V.Vec Nat n) →
+  ¬ (source ≡ observer) →
+  V.lookup (injectAtIndex source q state) observer
+    ≡ V.lookup state observer
+lookupFaceInjectionAwayFromEvent F.zero F.zero q state different =
+  ⊥-elim (different refl)
+lookupFaceInjectionAwayFromEvent F.zero (F.suc observer) q
+  (V._∷_ amount rest) different = refl
+lookupFaceInjectionAwayFromEvent (F.suc source) F.zero q
+  (V._∷_ amount rest) different = refl
+lookupFaceInjectionAwayFromEvent (F.suc source) (F.suc observer) q
+  (V._∷_ amount rest) different =
+  lookupFaceInjectionAwayFromEvent source observer q rest
+    (λ equality → different (cong F.suc equality))
+
+originalFaceInjectionLeavesOtherVoxelUnchanged :
+  (event : OriginalOuterFaceInjection)
+  (observer : F.Fin 27) (state : V.Vec Nat 27) →
+  ¬ (Index.originalPointIndex (physicalVoxel event) ≡ observer) →
+  V.lookup (applyBoundaryInjection event state) observer
+    ≡ V.lookup state observer
+originalFaceInjectionLeavesOtherVoxelUnchanged
+  event observer state different =
+  lookupFaceInjectionAwayFromEvent
+    (Index.originalPointIndex (physicalVoxel event))
+    observer (incomingMaterial event) state different
+
+-- Discharge uses the *actual* available amount. The event never
+-- removes material at a voxel distinct from its OnFace-certified site.
+originalFaceDischargeLeavesOtherVoxelUnchanged :
+  (event : OriginalOuterFaceDischarge)
+  (observer : F.Fin 27) (state : V.Vec Nat 27) →
+  ¬ (dischargeIndex event ≡ observer) →
+  V.lookup (applyBoundaryDischarge event state) observer
+    ≡ V.lookup state observer
+originalFaceDischargeLeavesOtherVoxelUnchanged
+  event observer state different =
+  dischargeOther (dischargeIndex event) observer state different
+  where
+    dischargeOther :
+      ∀ {n} (source target : F.Fin n) (xs : V.Vec Nat n) →
+      ¬ (source ≡ target) →
+      V.lookup (V.updateAt xs source pred) target
+        ≡ V.lookup xs target
+    dischargeOther F.zero F.zero xs neq =
+      ⊥-elim (neq refl)
+    dischargeOther F.zero (F.suc target)
+      (V._∷_ amount rest) neq = refl
+    dischargeOther (F.suc source) F.zero
+      (V._∷_ amount rest) neq = refl
+    dischargeOther (F.suc source) (F.suc target)
+      (V._∷_ amount rest) neq =
+      dischargeOther source target rest
+        (λ equality → neq (cong F.suc equality))
+
+
+------------------------------------------------------------------------
+-- ACTUAL LOCAL EXTERIOR OUTFLOW: a selected outer-face withdrawal
+-- debits exactly the available (zero-or-one) source quantum.
+------------------------------------------------------------------------
+
+boundaryActualDebitAgreesWithSharedTransfer :
+  ∀ {n} (index : F.Fin n) (state : V.Vec Nat n) →
+  oneIfNonzero (V.lookup state index)
+    ≡ Transfer.actualSourceDebit index state
+boundaryActualDebitAgreesWithSharedTransfer index state
+  with V.lookup state index
+... | zero = refl
+... | suc amount = refl
+
+originalBoundaryDischargeLocalReceipt :
+  (event : OriginalOuterFaceDischarge) (state : V.Vec Nat 27) →
+  V.lookup (applyBoundaryDischarge event state) (dischargeIndex event)
+    + actualDischargedAmount event state
+    ≡ V.lookup state (dischargeIndex event)
+originalBoundaryDischargeLocalReceipt event state =
+  trans
+    (cong
+      (λ after → V.lookup after (dischargeIndex event)
+        + actualDischargedAmount event state)
+      (dischargeIsOriginalDebit (dischargeIndex event) state))
+    (trans
+      (cong
+        (λ debit → V.lookup
+          (Transfer.debitAt (dischargeIndex event) state)
+          (dischargeIndex event) + debit)
+        (boundaryActualDebitAgreesWithSharedTransfer
+          (dischargeIndex event) state))
+      (Transfer.lookupAfterDebit (dischargeIndex event) state))
+
+
+------------------------------------------------------------------------
+-- COMPLETE EXTERIOR-FACE LOCAL CONTINUITY: each real face event
+-- selects exactly one original voxel. Actual debits, actual inlets
+-- and all off-face sites are accounted for in one identity.
+------------------------------------------------------------------------
+
+import Data.Fin.Properties as FinProps
+import Relation.Nullary as Nullary
+
+faceEventIndex : OriginalFaceExchange → F.Fin 27
+faceEventIndex (addAtOuterFace event) =
+  Index.originalPointIndex (physicalVoxel event)
+faceEventIndex (removeAtOuterFace event) = dischargeIndex event
+
+data FaceVoxelRole (event : OriginalFaceExchange)
+  (observer : F.Fin 27) : Set where
+  atSelectedFace : faceEventIndex event ≡ observer →
+    FaceVoxelRole event observer
+  awayFromSelectedFace : ¬ (faceEventIndex event ≡ observer) →
+    FaceVoxelRole event observer
+
+classifyFaceVoxel :
+  (event : OriginalFaceExchange) (observer : F.Fin 27) →
+  FaceVoxelRole event observer
+classifyFaceVoxel event observer
+  with FinProps._≟_ (faceEventIndex event) observer
+... | Nullary.yes equal = atSelectedFace equal
+... | Nullary.no different = awayFromSelectedFace different
+
+localFaceOut :
+  (event : OriginalFaceExchange) (state : V.Vec Nat 27)
+  (observer : F.Fin 27) → FaceVoxelRole event observer → Nat
+localFaceOut (addAtOuterFace event) state observer role = 0
+localFaceOut (removeAtOuterFace event) state observer
+  (atSelectedFace equal) = actualDischargedAmount event state
+localFaceOut (removeAtOuterFace event) state observer
+  (awayFromSelectedFace different) = 0
+
+localFaceIn :
+  (event : OriginalFaceExchange) (state : V.Vec Nat 27)
+  (observer : F.Fin 27) → FaceVoxelRole event observer → Nat
+localFaceIn (addAtOuterFace event) state observer
+  (atSelectedFace equal) = incomingMaterial event
+localFaceIn (addAtOuterFace event) state observer
+  (awayFromSelectedFace different) = 0
+localFaceIn (removeAtOuterFace event) state observer role = 0
+
+originalFaceVoxelBalance :
+  (event : OriginalFaceExchange) (state : V.Vec Nat 27)
+  (observer : F.Fin 27) (role : FaceVoxelRole event observer) →
+  V.lookup (applyOriginalFaceExchange event state) observer
+    + localFaceOut event state observer role
+    ≡ V.lookup state observer + localFaceIn event state observer role
+originalFaceVoxelBalance (addAtOuterFace event) state observer
+  (atSelectedFace equality) rewrite sym equality =
+  trans
+    (+-identityʳ
+      (V.lookup (applyBoundaryInjection event state)
+        (Index.originalPointIndex (physicalVoxel event))))
+    (trans (originalBoundaryInjectionLocalReceipt event state)
+      (+-comm (incomingMaterial event)
+        (V.lookup state
+          (Index.originalPointIndex (physicalVoxel event)))))
+originalFaceVoxelBalance (addAtOuterFace event) state observer
+  (awayFromSelectedFace different) =
+  trans
+    (+-identityʳ (V.lookup (applyBoundaryInjection event state) observer))
+    (trans
+      (originalFaceInjectionLeavesOtherVoxelUnchanged
+        event observer state different)
+      (sym (+-identityʳ (V.lookup state observer))))
+originalFaceVoxelBalance (removeAtOuterFace event) state observer
+  (atSelectedFace equality) rewrite sym equality =
+  trans
+    (originalBoundaryDischargeLocalReceipt event state)
+    (sym (+-identityʳ
+      (V.lookup state (dischargeIndex event))))
+originalFaceVoxelBalance (removeAtOuterFace event) state observer
+  (awayFromSelectedFace different) =
+  trans
+    (+-identityʳ (V.lookup (applyBoundaryDischarge event state) observer))
+    (trans
+      (originalFaceDischargeLeavesOtherVoxelUnchanged
+        event observer state different)
+      (sym (+-identityʳ (V.lookup state observer))))
+
+originalFaceEveryVoxelBalance :
+  (event : OriginalFaceExchange) (state : V.Vec Nat 27)
+  (observer : F.Fin 27) →
+  V.lookup (applyOriginalFaceExchange event state) observer
+    + localFaceOut event state observer (classifyFaceVoxel event observer)
+    ≡ V.lookup state observer
+      + localFaceIn event state observer (classifyFaceVoxel event observer)
+originalFaceEveryVoxelBalance event state observer =
+  originalFaceVoxelBalance event state observer
+    (classifyFaceVoxel event observer)

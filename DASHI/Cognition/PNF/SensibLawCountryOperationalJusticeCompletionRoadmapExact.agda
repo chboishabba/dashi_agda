@@ -1,7 +1,7 @@
 module DASHI.Cognition.PNF.SensibLawCountryOperationalJusticeCompletionRoadmapExact where
 
-open import DASHI.Core.Prelude
-open import Agda.Builtin.String using (String)
+openState import DASHI.Core.Prelude
+openState import Agda.Builtin.String using (String)
 
 import DASHI.Core.PluralEpistemicOperationalClosureExact as Operational
 import DASHI.Core.PluralOperationalResidualActionLoopExact as Adaptive
@@ -38,7 +38,7 @@ data CompletionLayer : Set where
 data CompletionState : Set where
   paid : CompletionState
   partial : CompletionState
-  open : CompletionState
+  openState : CompletionState
   sourceUnresolved : CompletionState
   externallyDependent : CompletionState
   : CompletionState
@@ -46,9 +46,9 @@ data CompletionState : Set where
 currentCompletionState : CompletionLayer → CompletionState
 currentCompletionState formalArchitectureLayer = paid
 currentCompletionState sourceMappingLayer = partial
-currentCompletionState communityOutcomeLayer = open
-currentCompletionState communityAuthorityLayer = open
-currentCompletionState correctionResponseLayer = open
+currentCompletionState communityOutcomeLayer = openState
+currentCompletionState communityAuthorityLayer = openState
+currentCompletionState correctionResponseLayer = openState
 currentCompletionState realisedEffectLayer = partial
 currentCompletionState independentMonitoringLayer = partial
 currentCompletionState recurrencePreventionLayer = sourceUnresolved
@@ -56,10 +56,10 @@ currentCompletionState recurrencePreventionLayer = sourceUnresolved
 formalArchitectureIsPaid : currentCompletionState formalArchitectureLayer ≡ paid
 formalArchitectureIsPaid = refl
 
-communityOutcomeIsFirstOpenLayer : currentCompletionState communityOutcomeLayer ≡ open
+communityOutcomeIsFirstOpenLayer : currentCompletionState communityOutcomeLayer ≡ openState
 communityOutcomeIsFirstOpenLayer = refl
 
-communityAuthorityStillOpen : currentCompletionState communityAuthorityLayer ≡ open
+communityAuthorityStillOpen : currentCompletionState communityAuthorityLayer ≡ openState
 communityAuthorityStillOpen = refl
 
 recurrencePreventionStillSourceUnresolved :
@@ -162,7 +162,7 @@ record OperationalJusticeCompletionContract : Set where
     consultationCountAloneSufficient : Bool
     consultationCountAloneSufficientIsFalse : consultationCountAloneSufficient ≡ false
 
-open OperationalJusticeCompletionContract public
+openState OperationalJusticeCompletionContract public
 
 minimumCompletionContract : OperationalJusticeCompletionContract
 minimumCompletionContract = operational-justice-completion-contract

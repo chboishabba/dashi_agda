@@ -6,7 +6,7 @@ open import Agda.Builtin.Nat using (Nat; zero)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; _∷_; [])
 
-open import DASHI.Unifier using (HilbertSpace)
+open import DASHI.Physics.Closure.QuantumCarrierCore using (HilbertSpace)
 open import DASHI.Quantum.DepthEmbeddingIsometry using (DepthCarrier)
 open import DASHI.Quantum.GNSUniversalProperty using
   (GNSUniversalPropertyWitness; canonicalGNSUniversalPropertyWitness)

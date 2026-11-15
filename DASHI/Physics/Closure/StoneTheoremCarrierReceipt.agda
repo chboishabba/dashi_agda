@@ -9,7 +9,7 @@ open import Data.List.Base using (List; _∷_; [])
 import DASHI.Quantum.Stone as Stone
 import DASHI.Quantum.Stone_Gates as StoneGates
 import DASHI.Quantum.StrongContinuity as StrongContinuity
-import DASHI.Unifier as Unifier
+import DASHI.Physics.Closure.QuantumCarrierCore as Unifier
 
 ------------------------------------------------------------------------
 -- Gate 5 Stone theorem carrier receipt.

@@ -170,3 +170,42 @@ From DASHI into LES:
 5. Add a surrogate-calibration receipt linked to held-out authoritative simulations.
 6. Add Pareto dominance and constraint-satisfaction proofs for finite candidate sets.
 7. Build one executable golden scenario, preferably a small pond/catchment nutrient and floating-planter example, with all assumptions and escalation decisions exported into an Agda-readable receipt.
+
+
+## Plant nutrient transport and spatial sentinel bioassay
+
+The canonical owner is `DASHI.Environment.RootSoilFungalIonWaterPhysiologyExact`.
+
+The model separates three claims.
+
+1. Soil water participates in dissolved-ion transport.
+2. Soil moisture can change nutrient availability and residual-herbicide behaviour.
+3. A visible plant phenotype does not identify one chemical cause by itself.
+
+The implementation reuses the existing PNP, fluid, chemistry, conservation, functional-ecology, root-soil and whole-plant hydraulic-carbon surfaces.
+
+The spatial sentinel receipt records same-species use, propagation provenance, spacing, boundary geometry, comparison areas, watering source, soil depth, moisture state, leaf phenotype, root phenotype and repeated spatial pattern.
+
+Interveinal chlorosis has explicit compatibility witnesses for residual-herbicide, pH-availability and metal-residue hypotheses. Therefore the formal layer blocks promotion from that phenotype alone to a unique cause.
+
+A controlled pot or plot comparison can increase diagnostic value. It does not create chemical identification by itself. Laboratory analysis, application history, label constraints and mechanistic follow-up remain separate evidence.
+
+Moisture is a modifier, not a single-cause oracle. Dry soil can limit dissolved transport and microbial herbicide breakdown. Excess water can produce root hypoxia and can confound a plant bioassay.
+
+The ZKP frame uses these roles.
+
+- O: formalize moisture-mediated transport and spatial sentinel diagnosis.
+- R: reuse the canonical root-soil and plant hydraulic owners.
+- C: extend one canonical owner only.
+- S: block phenotype-to-unique-cause promotion.
+- L: keep one nonblocking plant-transport lane.
+- P: require recorded controls, geometry, moisture and source history.
+- G: treat ITIL, ISO 9000/42001/27001/27701/23894/9241, NIST AI RMF, Six Sigma and C4/PlantUML as governance lenses only.
+- F: expose the same exact boundary through the TOE root and Unifier.
+
+Agda remains the golden formal authority. Lean may mirror this boundary. A Lean mirror must not strengthen it.
+
+Primary scientific attribution remains with Marschner and Rengel for nutrient availability and with the cited Australian agricultural agencies for residual-herbicide carryover and bioassay guidance. DASHI owns the typed reconstruction and non-promotion interface.
+
+
+Leaf area enters as a coupled driver, not as a nutrient-uptake oracle. The canonical whole-plant owner records that leaf area can change transpiring and photosynthetic surface, while root state, soil moisture, dissolved-ion availability, transporters, fungal pathways, atmosphere and demand remain explicit. The exact non-promotion theorem states that leaf area alone does not determine nutrient uptake.

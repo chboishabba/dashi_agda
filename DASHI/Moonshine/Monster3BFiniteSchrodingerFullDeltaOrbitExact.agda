@@ -5,7 +5,8 @@ module DASHI.Moonshine.Monster3BFiniteSchrodingerFullDeltaOrbitExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
-open import Agda.Builtin.Equality using (_≡_; refl; trans)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (trans)
 open import Relation.Binary.PropositionalEquality using (sym)
 open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)
 

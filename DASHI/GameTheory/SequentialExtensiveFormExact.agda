@@ -111,7 +111,7 @@ SequentialBestResponseAt :
   (G : ExtensiveStrategicGame) →
   (plans : PlanProfile G) →
   (history : History G) →
-  Set₁
+  Set
 SequentialBestResponseAt G plans history =
   (alternative : ActionPlan G (mover G (currentNode G history))) →
   SequentialProfitableDeviationAt G plans history alternative →
@@ -237,3 +237,5 @@ canonicalSequentialExtensiveFormBoundary : SequentialExtensiveFormBoundary
 canonicalSequentialExtensiveFormBoundary =
   sequential-extensive-form-boundary
     true true true true true false false
+
+open SequentialExtensiveFormBoundary public

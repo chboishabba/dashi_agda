@@ -17,6 +17,7 @@ module DASHI.Moonshine.Base369Ternary27CharacterAdjacencyEquivarianceExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (sym)
 
 import DASHI.Foundations.SSPTritCarrier as SSP
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geometry
@@ -202,7 +203,7 @@ monsterAxisConjugationIntertwines :
   ≡ Monster.transportPhase Monster.invertsGenerator
       (Fourier.phaseToMonster (axisCharacterValue f t))
 monsterAxisConjugationIntertwines f t
-  rewrite <- axisCharacterConjugation f t =
+  rewrite sym (axisCharacterConjugation f t) =
   Fourier.monsterInversionIntertwinesConjugation (axisCharacterValue f t)
 
 ------------------------------------------------------------------------

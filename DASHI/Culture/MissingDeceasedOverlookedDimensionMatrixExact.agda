@@ -1,7 +1,7 @@
 module DASHI.Culture.MissingDeceasedOverlookedDimensionMatrixExact where
 
-open import DASHI.Core.Prelude
-open import Agda.Builtin.String using (String)
+openState import DASHI.Core.Prelude
+openState import Agda.Builtin.String using (String)
 
 import DASHI.Core.EventTimeCapabilityAlignmentBidiExact as T
 import DASHI.Core.CapabilityFragilityConfoundersBidiExact as F
@@ -18,7 +18,7 @@ data DimensionState : Set where
   closedPositive : DimensionState
   closedNegative : DimensionState
   partial : DimensionState
-  open : DimensionState
+  openState : DimensionState
 
 
 record OverlookedCaseRow : Set where
@@ -33,26 +33,26 @@ record OverlookedCaseRow : Set where
     highestAlphaLeaf : String
     boundedReading : String
 
-open OverlookedCaseRow public
+openState OverlookedCaseRow public
 
 eskridgeRow : OverlookedCaseRow
 eskridgeRow = overlooked-case-row
   "Amy Eskridge"
-  partial partial open partial open
+  partial partial openState partial openState
   "recover 2020-2022 Institute/HoloChron apparatus, repository, notebook, company-governance and custody records"
   "Public team/company surfaces exist, but exact experimental object custody and event-time application state remain unresolved."
 
 maiwaldRow : OverlookedCaseRow
 maiwaldRow = overlooked-case-row
   "Frank Maiwald"
-  closedPositive closedPositive partial closedPositive open
+  closedPositive closedPositive partial closedPositive openState
   "test whether project-level succession included same apparatus calibration, qualification and failure-history transfer"
   "JPL project succession and overlapping team are closed; same-carrier transfer remains narrower and open."
 
 mccaslandRow : OverlookedCaseRow
 mccaslandRow = overlooked-case-row
   "William Neil McCasland"
-  partial closedPositive open partial open
+  partial closedPositive openState partial openState
   "recover post-2025 AeroVironment role, portfolio, access and handover records"
   "ATA -> BlueHalo -> AeroVironment creates a source-backed organisational transition surface before disappearance; exact event-time carrier remains open."
 
@@ -66,28 +66,28 @@ loureiroRow = overlooked-case-row
 hicksRow : OverlookedCaseRow
 hicksRow = overlooked-case-row
   "Michael David Hicks"
-  closedNegative partial open partial open
+  closedNegative partial openState partial openState
   "recover whether any DART/small-body operational role or access continued after his 2022 JPL departure"
   "JPL tenure ended in 2022 and death occurred in 2023; historical mission expertise cannot be promoted to event-time operational possession without a continuity receipt."
 
 chavezRow : OverlookedCaseRow
 chavezRow = overlooked-case-row
   "Anthony Chavez"
-  partial closedPositive partial closedPositive open
+  partial closedPositive partial closedPositive openState
   "recover exact event-time Scorpius/DARHT configuration, calibration, access and same-carrier handover"
   "Public records show distributed multi-lab procedures and design surfaces while exact application-carrier concentration remains unresolved."
 
 leblancRow : OverlookedCaseRow
 leblancRow = overlooked-case-row
   "Joshua Kyle LeBlanc"
-  closedPositive partial partial closedPositive open
+  closedPositive partial partial closedPositive openState
   "recover TechMat qualification/failure-map custody and handover"
   "Named technology-maturation leadership is source-backed inside a visibly distributed executive/working-group structure."
 
 rezaRow : OverlookedCaseRow
 rezaRow = overlooked-case-row
   "Monica Jacinto / Reza"
-  partial closedPositive open closedPositive open
+  partial closedPositive openState closedPositive openState
   "recover validated manufacturing process-window custody, corporate assignment lineage and successor/handover"
   "Patent co-invention and corporate IP assignment show shared/corporate surfaces; exact tacit manufacturing and qualification custody remains open."
 
