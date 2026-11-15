@@ -22,6 +22,11 @@ class TestOriginalObjectMaxCut(unittest.TestCase):
         r=a.moving_boundary()
         self.assertTrue(r['flux_can_have_either_sign'])
         self.assertFalse(r['Green_operator_wellposedness_from_this_alone'])
+    def test_B3_wall_tangent_energy_unique(self):
+        r=a.tangential_wall_energy()
+        self.assertTrue(r['homogeneous_neumann_wall_flux_zero'])
+        self.assertTrue(r['finite_interval_smooth_homogeneous_uniqueness'])
+        self.assertFalse(r['retarded_Green_constructed'])
     def test_B5_static_packet(self):
         r=a.static_finite_energy_packet()
         self.assertTrue(r['finite_total_energy_for_f_TT_H1'])
