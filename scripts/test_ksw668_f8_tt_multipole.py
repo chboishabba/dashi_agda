@@ -54,4 +54,17 @@ class OriginalTTMultipole(unittest.TestCase):
   self.assertEqual(no['receiver_projected_5D_electric_Weyl'],0.)
  def test_invalid_cone(self):
   with self.assertRaises(ValueError):propagate(**dict(PARAM,eps=.07))
+ def test_new_exact_source_moments(self):
+  self.assertEqual(self.sol['source_cell_integration'],'exact compact TT endpoint primitives')
+ def test_new_shell_volume_polynomial(self):
+  self.assertTrue(self.sol['corrected_radial_shell_volume'])
+  self.assertTrue(self.sol['radial_polynomial_r2_consistency_exact'])
+ def test_independent_time_derivative_Weyl(self):
+  e=self.sol['receiver_intrinsic_4D_electric_Weyl']
+  w=self.sol['receiver_projected_5D_electric_Weyl']
+  self.assertLess(abs(e-self.sol['receiver_intrinsic_4D_electric_Weyl_tangent'])/max(abs(e),1e-30),.05)
+  self.assertLess(abs(w-self.sol['receiver_projected_5D_electric_Weyl_tangent'])/max(abs(w),1e-30),.05)
+ def test_numerical_nonpromotion_after_fv_repair(self):
+  self.assertTrue(self.sol['receiver_convergence_not_implied_by_discrete_energy'])
+  self.assertFalse(self.sol['numerical_convergence_certified'])
 if __name__=='__main__':unittest.main(verbosity=2)
