@@ -1,0 +1,39 @@
+{
+  "model": "nonlinear quartic coupled magnetic-memory generator with strictly causal finite packet transport",
+  "symbolic_identity": {
+    "phase_count": 3,
+    "polynomial_identity_residual": "0",
+    "scope": "arbitrary symmetric coupled A and all states, independent of implicit solver"
+  },
+  "periodic_work": {
+    "source": "-5858768036190658118511439/2125662289920000000000000000",
+    "line_loss": "14412914712054174081488561/2125662289920000000000000000",
+    "copper": "126485283427/7372800000000",
+    "memory": "21/26000",
+    "port": "-914052915449/95846400000000",
+    "rotor_param": "11/400"
+  },
+  "periodic_endpoint_exact": true,
+  "causal_flight_ticks": 1,
+  "implied_cable_length_m": 49965409.666666664,
+  "periodic_nonzero_state": true,
+  "local_attractor": {
+    "period_derivative_inf_norm": "3333423451253927985476489456893662984153151607318957226789561186808942984227381179/3482159528585648381732864406156272325026159173043358621380134553290194983810104953",
+    "contraction_power": 1,
+    "iterate_inf_norm": "3333423451253927985476489456893662984153151607318957226789561186808942984227381179/3482159528585648381732864406156272325026159173043358621380134553290194983810104953",
+    "locally_attracting": true,
+    "interpretation": "local attraction by continuous derivative and exact rational strict norm; NOT global"
+  },
+  "nonlinear_implicit_step_numeric_error": 1.1102230246251565e-16,
+  "physical_speed_m_per_s": 199861638.66666666,
+  "original_device": "NOT reconstructed",
+  "open": [
+    "realistic meter-scale cable and mechanical-cycle validated multirate coupling",
+    "global attraction for unrestricted nonlinear motor",
+    "arbitrary Preisach hysteresis",
+    "physical rotor and semiconductor edge dynamics",
+    "spatial Maxwell to conductor fields",
+    "original V2 calibrated full energy boundary",
+    "Agda kernel proof"
+  ]
+}

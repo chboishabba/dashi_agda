@@ -1,0 +1,39 @@
+{
+  "date": "2026-11-15",
+  "scope": "eighth restricted nonlinear exact causal generator cut, not V2 hardware",
+  "python_tests_new": "66/66 passed",
+  "python_tests_targeted": "192/192 passed",
+  "acceptance_runner": "bash scripts/check_v2_nonlinear_exact_causal_boundary.sh",
+  "stdout": "........................................................................ [ 37%]\n........................................................................ [ 75%]\n................................................                         [100%]\n192 passed in 14.46s\nKernel: NOT RUN. Model exact proof and numeric tests do not imply Agda acceptance.\n16.94 s",
+  "legacy_full_aggregate": "not run this round",
+  "agda_kernel": "NOT RUN: executable absent",
+  "original_v2_metrology": "NOT AVAILABLE",
+  "environment": {
+    "python": "3.13.5",
+    "numpy": "2.3.5",
+    "sympy": "1.14.0",
+    "scipy": "1.17.0",
+    "pytest": "9.0.2"
+  },
+  "source_sha256": {
+    "scripts/v2_nonlinear_exact_causal_boundary.py": "2366dfceb14b2dfb2e35efbdb6cc7ff80d418782991eb80178d7b7048cb30c46",
+    "tests/test_v2_nonlinear_exact_causal_boundary.py": "2454f78acc0148437338fcb6f55a5f407ba6708ecf3c3ef8b808883c6d1f1510",
+    "Docs/physics/MadScience369V2NonlinearExactCausalPeriodicGeneratorMaxCut20261115.md": "7ba8dcab1f6084e3d382ae90c5f589ad76100837e6e88c6be9aeb890076a2f31",
+    "scripts/check_v2_nonlinear_exact_causal_boundary.sh": "722dfd7c74ecc4e4d581b5f3cdd96b126d6b75b5596a33c0d8ebef12ce424b40",
+    "Artifacts/v2_nonlinear_exact_causal_boundary_20261115.json": "1b3e4396b619772bfdb63c326dc84378d0c3e34031fa24f49ea9c5d0de14eb6b"
+  },
+  "theorems": [
+    "arbitrary-state exact AVF polynomial energy secant",
+    "uniform SPD convexity implies unique coupled implicit step",
+    "signed finite-flight line and nonlinear motor energy budget",
+    "nonzero rational periodic generator with all storage states matched",
+    "exact rational period Jacobian norm below one implies LOCAL attraction",
+    "smooth rotor parameter-work approximation bound under supplied Lipschitz and total variation limits"
+  ],
+  "not_closed": [
+    "global nonlinear rotating hybrid Maxwell periodic attractor",
+    "realistic cable-length multirate nonlinear validated flow",
+    "Agda kernel P0",
+    "original V2 P3 and P4 hardware/metrology"
+  ]
+}
