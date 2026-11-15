@@ -11,7 +11,7 @@ import math,json
 import numpy as np
 from ksw668_f8_tt_multipole import stage,enforce
 
-def check(dr=.025,dy=.035,nr=25,ny=12,t=1.7,T=.3):
+def check(dr=.025,dy=.035,nr=25,ny=12,t=1.7,T=.3,normal_order=2):
     if min(dr,dy,T)<=0 or nr<6 or ny<6:
         raise ValueError('positive original-model manufactured test')
     dims=(3,ny,nr)
@@ -29,7 +29,7 @@ def check(dr=.025,dy=.035,nr=25,ny=12,t=1.7,T=.3):
     amp=2*v*T
     enforce(U,P,M,v,amp,src)
     outU=U.copy();outP=U.copy();outM=U.copy()
-    stage(U,P,M,outU,outP,outM,dr,dy,b,v,amp,src,cp,cm)
+    stage(U,P,M,outU,outP,outM,dr,dy,b,v,amp,src,cp,cm,normal_order)
     errU=[];errP=[];errM=[]
     for q in range(3):
         d=3+4*q
@@ -42,7 +42,7 @@ def check(dr=.025,dy=.035,nr=25,ny=12,t=1.7,T=.3):
         assert abs((1+v)*qplus+(v-1)*qminus-2*amp*d)<2e-12
     maxerr=max(errU+errP+errM)
     assert maxerr<1e-9
-    return dict(original_a_t_model=True,effective_dimensions=[3,7,11],
+    return dict(original_a_t_model=True,normal_order=normal_order,effective_dimensions=[3,7,11],
         manufactured_bulk_H='d*T²+r², independent of z',
         manufactured_Israel_G='2*d*v(T)*T',
         max_err_dU=max(errU),max_err_dP=max(errP),max_err_dM=max(errM),
