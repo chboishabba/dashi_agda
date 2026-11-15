@@ -27,10 +27,15 @@ def tt_source():
     # FRW mixed tensor: ∇_mu δS^mu_i = ∂_j pi^j_i and
     # ∇_mu δS^mu_0=-H tr pi, so the prescribed TT source is conserved
     # against the ORIGINAL background; no generating matter action.
+    t=s.symbols('t',positive=True)
+    rp=1/(3*t*s.sqrt(1+t*t))
+    assert s.simplify(rp.subs(t,2)-1/(6*s.sqrt(5)))==0
+    assert s.simplify(s.diff(rp,t)+(2*t*t+1)/(3*t*t*(1+t*t)**s.Rational(3,2)))==0
     return dict(symmetric=True,transverse=True,traceless=True,
         compact_by_local_4th_order_operator=True,
         initial_local_x4_yy_value=24,initial_local_x4_zz_value=-24,
         background_FRW_covariant_divergence_zero=True,
+        DEC_min_rho_plus_p_t1_to2='1/(6 sqrt(5))',
         TT_source_shape='pi_ij = g(t) [P_i^k P_j^l - P_ij P^kl/2] Q_kl phi',
         P_symbol='|k|² I - k kT',
         gravity_boundary_condition='n·∂H_i^j = -6 pi_i^j',
@@ -99,6 +104,9 @@ def static_finite_energy_packet():
         original_moving_brane_solution=False)
 
 def short_baseline():
+    h,u,v=s.symbols('h u v',positive=True)
+    pair=s.integrate(s.integrate((u-v)**2,(u,0,h)),(v,0,h))
+    assert s.simplify(pair-h**4/6)==0
     mp.mp.dps=95
     t0=mp.mpf('1')
     F=lambda t:mp.asinh(t)-mp.sqrt(1+t*t)/t
@@ -116,6 +124,7 @@ def short_baseline():
     ell=mp.mpf('1'); D=mp.mpf('1'); dotH=-H0*H0
     local_adv=ell**2*dotH**2*D**3/(24*c**5*(1+(ell*H0/c)**2))
     return dict(model='original a=t, ell=1, t0=1',
+        exact_pair_second_moment='h^4/6',
         ratio_delta_tau_to_delta_t_cubed='1/48 leading order',
         exact_numeric_eps_delta_ratio=results,
         general_short_baseline='delta_tau_adv = (ell/c)^2 (dH/dtau)^2 Delta_tau^3/[24*(1+(ell H/c)^2)] + O(Delta_tau^4)',
