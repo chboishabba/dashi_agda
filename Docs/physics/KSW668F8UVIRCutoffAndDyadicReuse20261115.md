@@ -93,3 +93,32 @@ bash scripts/check_ksw668_f8_maxcut.sh --full  # still expected exit 42
 \`\`\`
 
 **Acceptance provenance:** 25/25 source-equivalent new UVIR tests independently run; the earlier 68/68 F8 checks remain as previously accepted at source-equivalent level. Exact GitHub current-head checkout, pinned local Agda kernel, rigorous interval-bounded moment calculation, global Neumann FIO theorem-review and actual physical observation are separate open gates.
+
+
+## F8-NEG — exact local TT outside-support null control exposes discrete inverse leakage
+
+An additional **equation-independent negative control** now independently checks the inverse 3D angular-Bessel transform itself. The original source is \(\pi_{ij}^{TT}=\epsilon^4[P_{ik}P_{jl}-\frac12P_{ij}P_{kl}]Q_{kl}\varphi_\epsilon\), where **every \(P\) is a local differential operator** and \(\operatorname{supp}\varphi_\epsilon\subset B_\epsilon(0)\). Therefore
+\[
+\boxed{\pi^{TT}_{yy}(\mathbf x)=0\quad\text{exactly whenever }|\mathbf x|>\epsilon.}
+\]
+In particular \(r=1.8220210521210103\gg\epsilon=0.024\) is a **mathematically exact zero** regardless of bulk propagation. Reconstruct this *unpropagated* source using precisely the existing \`ksw668_f8_moving_maxcut.py\` formula
+\[
+\pi_{yy,\mathrm{grid}}^{TT}(r)=
+\epsilon^4\frac{\Delta k}{4\pi^2}
+\sum_{n=0}^{N_x/2}k_n^6\widehat\varphi_\epsilon(k_n)
+\,2\!\left(\frac25j_0(k_nr)-\frac47j_2(k_nr)+\frac1{35}j_4(k_nr)\right),
+\quad k_n=\frac{2\pi n}{L}.
+\]
+The **false outside-support reconstruction** is:
+
+| \(N_x\) | Exact compact TT outside-support value | Same-rule numerical value |
+| ---: | ---: | ---: |
+| 256 | 0 | \(+481.9432930\) |
+| 512 | 0 | \(+611.4094224\) |
+| 768 | 0 | \(+626.2563619\) |
+
+The original 96-node vs independent 384-node radial bump quadrature changes the last value by **less than \(4\times10^{-11}\)**. The failure is not an original moving-AdS physical effect, not an incoming bulk signal, and not predominantly insufficient radial quadrature for the bump. It is a **static inverse-transform UV/spacing artifact**, observed before any PDE time evolution. Do **not** compare its numerical amplitude directly to the moving receiver signal (different source/response normalization); this is a zero-control of the reconstruction operator itself.
+
+New owner: \`scripts/ksw668_f8_static_tt_reconstruction_null.py\` and its **10/10** local tests. This supplies a strict **mandatory acceptance prerequisite** for F8.3: the same inverse transform must reproduce compact local TT-source support to the designated numerical tolerance on an independently converged grid **before** the moving-wave source-to-Weyl value can be accepted. It also pinpoints the positive repair route: adaptive/oscillatory \(k\)-quadrature with independent \(\Delta k\) and \(k_{\max}\), plus a provably controlled source support null check.
+
+**Combined independent source-equivalent run (2026-11-15):** F8 original 68 previous tests plus 13 source-UVIR, 12 IR-spacing, and 10 exact-support static null tests = **103/103 PASS**, captured in \`ksw668_f8_uvir_combined_local_acceptance_20261115.log\`. The 10 negative-control tests PASS because they correctly detect a failed numerical method; this does NOT mean the physical F8 receiver convergence passed. Exact GitHub-head executable, Agda 2.9 kernel and physical measurements remain unverified.
