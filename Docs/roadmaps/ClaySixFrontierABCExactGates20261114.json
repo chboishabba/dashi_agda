@@ -4973,9 +4973,140 @@
               "expected_false": null
             }
           ]
+        },
+        "Docs/roadmaps/Karp21ActualMaxCutBlockers20261109.md": {
+          "owner": "Docs/roadmaps/Karp21ActualMaxCutBlockers20261109.md",
+          "blob": "f74d07d398997b474eb63a64dcee04c232c5dcd9",
+          "terms": [
+            {
+              "name": "originalBitTapeStepSimulatesN21Rule",
+              "kind": "TARGET_NAME_ONLY",
+              "mention": 11,
+              "declaration": 0,
+              "expected_false": null
+            },
+            {
+              "name": "nativeWholeGraphLiveAllocationBound",
+              "kind": "TARGET_NAME_ONLY",
+              "mention": 77,
+              "declaration": 0,
+              "expected_false": null
+            },
+            {
+              "name": "karpFractranBitMachineClockPolynomial",
+              "kind": "TARGET_NAME_ONLY",
+              "mention": 11,
+              "declaration": 0,
+              "expected_false": null
+            },
+            {
+              "name": "originalN21PolynomialVerifierClock",
+              "kind": "TARGET_NAME_ONLY",
+              "mention": 85,
+              "declaration": 0,
+              "expected_false": null
+            },
+            {
+              "name": "originalN21InNP",
+              "kind": "TARGET_NAME_ONLY",
+              "mention": 11,
+              "declaration": 0,
+              "expected_false": null
+            }
+          ]
+        },
+        "Docs/roadmaps/NSR71R853R854ShearAndSameSourceMaxCut20261114.md": {
+          "owner": "Docs/roadmaps/NSR71R853R854ShearAndSameSourceMaxCut20261114.md",
+          "blob": "530aa0799d36667bdafff7ad8b31ae85c4d1a9ad",
+          "terms": [
+            {
+              "name": "originalR71RealGalerkinLocalSolution",
+              "kind": "TARGET_NAME_ONLY",
+              "mention": 122,
+              "declaration": 0,
+              "expected_false": null
+            },
+            {
+              "name": "originalR853SignedRateAlongGalerkinSolution",
+              "kind": "TARGET_NAME_ONLY",
+              "mention": 123,
+              "declaration": 0,
+              "expected_false": null
+            },
+            {
+              "name": "originalR854PhysicalRateEnvelope",
+              "kind": "TARGET_NAME_ONLY",
+              "mention": 125,
+              "declaration": 0,
+              "expected_false": null
+            }
+          ]
         }
       },
-      "method": "exact PR-head GitHub fetch_file proof bodies; source-structural not kernel; subsequent audit commits do not modify these original proof owners"
+      "method": "exact PR-head GitHub fetch_file proof bodies; source-structural not kernel; subsequent audit commits do not modify these original proof owners",
+      "lean_head_at_source_evidence": "3f9c607f36bc2da0fe7abe1fcb4648da79912aa6",
+      "lean_sources": {
+        "Synthesis/NavierStokesR855SharpRealTimeConditionalExact.lean": {
+          "owner": "Synthesis/NavierStokesR855SharpRealTimeConditionalExact.lean",
+          "blob": "d0b130c93fa2db56b68fe5d6d3d555526b9aeeaa",
+          "terms": [
+            {
+              "name": "nsR856LargestPointwiseCapNegative",
+              "kind": "SOURCE_CANDIDATE_UNCHECKED",
+              "mention": 20,
+              "declaration": 20,
+              "expected_false": null
+            },
+            {
+              "name": "nsR856LargestIntegratedAffineNegative",
+              "kind": "SOURCE_CANDIDATE_UNCHECKED",
+              "mention": 32,
+              "declaration": 32,
+              "expected_false": null
+            },
+            {
+              "name": "nsR856RateNegFromOriginalEnvelope",
+              "kind": "SOURCE_CANDIDATE_UNCHECKED",
+              "mention": 48,
+              "declaration": 48,
+              "expected_false": null
+            }
+          ]
+        },
+        "Synthesis/NavierStokesR734PurePlusW2NoGoScalarExact.lean": {
+          "owner": "Synthesis/NavierStokesR734PurePlusW2NoGoScalarExact.lean",
+          "blob": "5fa702e468ad292919ad77302585ed834322f516",
+          "terms": [
+            {
+              "name": "nsR734PurePlusPcritStrictLower",
+              "kind": "SOURCE_CANDIDATE_UNCHECKED",
+              "mention": 41,
+              "declaration": 41,
+              "expected_false": null
+            }
+          ]
+        },
+        "Synthesis/YMFiniteRangeGibbsExteriorCancellationExact.lean": {
+          "owner": "Synthesis/YMFiniteRangeGibbsExteriorCancellationExact.lean",
+          "blob": "9d3e9f6aa6d17159b628402ed55b810ede1357ab",
+          "terms": [
+            {
+              "name": "exteriorFactorCancels",
+              "kind": "SOURCE_CANDIDATE_UNCHECKED",
+              "mention": 34,
+              "declaration": 34,
+              "expected_false": null
+            },
+            {
+              "name": "farExteriorSiteHasZeroLocalInfluence",
+              "kind": "SOURCE_CANDIDATE_UNCHECKED",
+              "mention": 51,
+              "declaration": 51,
+              "expected_false": null
+            }
+          ]
+        }
+      }
     }
   }
 }
