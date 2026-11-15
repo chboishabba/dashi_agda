@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# KSW original a=t AdS5: 171 DISTINCT source-equivalent F8 regression cases.
+# KSW original a=t AdS5: 172 DISTINCT source-equivalent F8 regression cases.
 # Full 3D numerical acceptance is separate; failures remain explicit.
 set -euo pipefail
 cd "$(dirname "$0")/.."
@@ -8,7 +8,7 @@ if [ "$#" -gt 0 ]; then mode="$1"; fi
 export PYTHONPATH="scripts:."
 python3 -m unittest discover -s scripts -p 'test_ksw668_f8_*.py' -v
 if [ "$mode" = "--smoke" ]; then
-  echo "F8 smoke PASS only: 171 distinct local source-level tests."
+  echo "F8 smoke PASS only: 172 distinct local source-level tests."
   echo "3D tensor/Weyl convergence, Agda, matter action and observation NOT ACCEPTED."
   exit 0
 fi
