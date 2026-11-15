@@ -430,3 +430,147 @@ Leech PR #4 now owns a seeded `audit_x369_f1_rank_and_orientation_null.py` to qu
 - **F2/F3:** original frozen checkpoint, independently semantic C3 task action, source hidden readout and actual output consumer, paired causal CE against equal-displacement random null.
 - **F4/F5/F6:** source-bound truly fresh documents, non-overlapping 16-token windows and original model training; reserved independent holdouts must remain untouched.
 - **P0:** Host reports 103/103 Leech tests across 22 suites on a working tree referencing `4761459` with a local Python multiline syntax correction. The correction has since been pushed to the existing PR branch; later source changes require a new current-head replay. Do not label those 103 tests as an execution of a subsequent GitHub head.
+
+
+## 15 Nov 2026 — source formal candidate and 12-draw frozen F3 ensemble (post-09:20)
+
+**Host prior-head acceptance:** Leech PR #4 commit `33a34876bf13`: full native 125/125 across 26 suites, portable 37/37, targeted original mixed-C3 source + CE tests 12/12. Agda PR #1442 commit `272bb1be33ee`: selected original torus 8/8 leaves accepted on Agda 2.9. Independent host float64 original source polynomial test over 4×384×8 reported coherent/polynomial max absolute squared-energy error 9.09e−13 and mixed/polynomial 4.55e−13. These acceptance receipts do not automatically apply to later GitHub heads.
+
+**New actual Agda module drafted, on existing PR #1442:** `DASHI/Cognition/PNF/X369OriginalDirectedTriadC3PolynomialCandidate.agda` uses `Data.Integer.Tactic.RingSolver.solve-∀` for six-variable original directed triadic correlation displacement identities, and structurally inducts over arbitrarily many original triads with arbitrary independent ±120° orientation and original per-expert history coordinates. It contains these proposed lemma names:
+```text
+originalTriadRotationSquaredDisplacementEqualsTwoQ
+originalTriadInverseRotationSquaredDisplacementEqualsTwoQ
+originalDirectedTriadC3DisplacementSquaredFactors
+originalDirectedInverseC3DisplacementSquaredFactors
+originalDirectedTriadMixedOrientationEnergyEqualsCoherent
+originalBlockMixedEqualsCoherent
+originalMixedTriadC3RouterFeatureEnergyEqualsCoherent
+```
+This source is **NOT AGDA KERNEL CHECKED** in the received host evidence. The standalone new runner `scripts/check_x369_original_directed_c3_polynomial_candidate.sh` requires Agda 2.9 validation. It deliberately leaves the accepted 8-leaf Track B suite untouched. This candidate proves only an integer polynomial analogue if the kernel accepts it; full abstract-real scalar transport and exact trained neural consumer remain separate and OPEN.
+
+**F3 next source:** `scripts/audit_x369_f3_mixed_orientation_ensemble_ce.py` on Leech PR #4 does a frozen original model CE comparison using **12 predeclared independent mask draws** versus a single coherent C3 action, with separate seed41 (best step 0) and seed42 (best step 24), document-row paired bootstrap and deterministic whole-original-source SHA/provenance receipts. The original 16 F3 probe rows are already viewed: this is an exploratory sensitivity result, never a calibrated null-test p-value or final F5 release. F5 reserved token bytes are not loaded by the new scorer; original old F3 overlap-producer *did* inspect them, but did not score F5 CE. Five new test contracts are included and need new-head native acceptance. The **physical RX 580 new ensemble CE is not yet measured in evidence supplied**.
+
+**Decision order:** (1) exact new-head Leech native and portable acceptance; (2) isolated Agda candidate checker, repair parser/ring normalizer if needed and only then add the kernel proof receipt; (3) physical seed41/42 frozen 12-draw F3 CE on previously viewed probe (with no F5 raw data); (4) independently task-labelled new-document F2/L0 original spectral action; (5) separately calibrated zero-initial C3 residual feature F4 on new documents; (6) retain F5 final CE seal and A03–A06 arbitrary-field/full neural weld OPEN.
+
+Attribution: original Leech-LILA trained model owned by original author; DASHI proposed integer ring proofs and C3/C3² finite-torus kernel proofs are mathematically distinct; prior negative F4-C2 development result not overwritten by the new F3 exploratory plan.
+
+
+## 15 Nov integrated maximum cut: binary/ternary zero, punctured gluing, Monster-C3/S3, time/tetration, SLR and grokking
+
+**Ownership and acceptance:** Keep all this source and formal work on existing Agda PR #1442, and original student experiments on Leech PR #4. Consume existing Monster/FLM PR #1472 and SensibLaw/SLR spaCy producer, rather than asserting they have merged. Original Leech 383ad3f35350 had **130/130 native tests and 37/37 portable**, host-reported; original Agda 2c079f536028 had **8/8 selected torus leaves**. The isolated NEW polynomial candidate failed Agda with Nat 2 where integer ℤ is required; e909cf6 replaces all four integer multipliers with (+ 2), and 3e38f04 replaces the two integer list-fold bases with (+ 0). **Agda kernel rerun and solver closure OPEN.** Local integer Python exhaustive checks are not Agda-kernel acceptance.
+
+### Z — Binary versus ternary and the typed meanings of zero
+
+Reuse these already-existing exact owners:
+- DASHI/ComputerScience/BalancedTernaryC2C3DihedralCodecBridgeExact.agda, DASHI/Codec/BalancedTritBitFibre.agda: support-plus-sign binary **roundtrips** a balanced trit. A Boolean support-only/absolute-value quotient loses sign; binary representation in general does **not** necessarily lose sign. On one trit, antipode and successor satisfy the dihedral S3 law.
+- DASHI/Reasoning/LeechParityC3ActionKernelExact.agda: inversion of the whole triple and cycling of its three sites **commute**; their faithful combined product may be C6. That is a different action, not the prior S3.
+- DASHI/Foundations/SignedZeroTernaryOrientationExact.agda: −0, unoriented 0 and +0 are separate orientation phases projecting to a single neutral scalar.
+- DASHI/Cognition/PNF/OrientedZeroFutureQuotientExact.agda: signed zeros with identical current observations but distinct future values; an exact source non-factorability witness.
+- DASHI/Cognition/PhaseEnrichedTrit.agda: neutral dominance, balanced opposition and phase-bearing ties can share observed zero without the same hidden state.
+
+Do not merge: scalar additive identity, zero-frequency Fourier character (DC), zero vector amplitude, punctured absent origin, centre residual, unobserved evidence, unknown truth, explicit false, withheld judgment, conflicting evidence, router tie, padding and missing spaCy attribute. Each has a different constructor/evidence authority. Lack of a parser label is not a grammatical zero and unknown epistemic status is not the negative trit.
+
+**Exact proposed Z lemmas** (source owner first; original same-neural-object instances OPEN):
+Z1 originalBinarySupportSignRoundtripReused;
+Z2 supportOnlyQuotientErasesSignedFutureWitness;
+Z3 signedZeroWaveTransitionNonDescentToScalar;
+Z4 phaseEnrichedZeroCannotPromoteUnknownEvidence;
+Z5 spaCyMissingFeatureDistinctFromNeutralTrinary;
+Z6 puncturedSpatialCentreDistinctFromDCFourierMode;
+Z7 selectedSourceLeechC6VersusS3ActionDiscriminator;
+Z8 sourceExpertHistorySignChartConjugationWeld.
+
+### P — Punctured nine, twenty-seven, fifty-three; pants and wave
+
+Source Docs/LeechLILAPrimePuncturedNineJWaveMaxCut20261101.md already defines 384 = 16×3×(3²−1), the eight-site punctured-nine carrier, 9-site completion, 4 conjugate Fourier pairs, and essential missing-centre residual. The additive group is C3×C3, **not C9**; translation moves the puncture, so original eight-site action requires centre re-gauging. Do not equate eight nonzero spatial points with eight nonconstant dual characters.
+
+Source docs/punctured27_nine_pants_xor_crosspollination_20261026.md has punctured T³ without origin, **26=8+9+9**, and its antipodal **13** unoriented point directions in support orbits 3+6+4. It is not 3×8. ReducedFiftyThreeFibreExact has the independent 54 = 1 + 53 constant-plus-reduced decomposition. An additional oriented count-compatible chart is **53 = one seam + two copies of the punctured 27 (1+2×26)**. This is not yet a geometric isomorphism with the selected 6×9 Laplacian, or a proven pants gluing.
+
+**Exact proposed P lemmas:**
+P1 punctured27CentralEightOuterNineNineBidi — constructive converse to 8+9+9;
+P2 punctured27AntipodalThirteenOrbitsExact — same puncture and involution;
+P3 punctured53TwoCopiesPlusSeamBidi — explicit source index maps;
+P4 originalReduced53LaplacianToPunctured53SameGeometry — actual matrix and invariant form, not cardinality;
+P5 originalPuncturedNineFourierZeroCentreResidualBidi — invertible wave/source lift and centre gauge;
+P6 originalPantsEdgeStalkAdmissibleMatch — compatible incidence, orientation and provenance on every gluing boundary;
+P7 wavePantsGluingTemporalRefinementCommutationOrResidual — do not assume time/refinement squares commute without consumer proof.
+
+### M — Constructive 196884 C3/S3 carrier, then actual Monster gate
+
+New SOURCE scripts in this SAME Agda PR:
+- scripts/check_monster196884_native_c3_d4_intertwiner.py. On the existing PointedTernaryBulkExact one-unmarked-or-nine-marked × 3^9 sheet, increment the selected marker's trit (or unmarked D4-fixed centre). Explicit inverse to an orbit/phase address: **65,610 free C3 three-cycles**. Exhaustive local integer verification over all **196,830 fine states** includes r³=id, zero fine fixed points, inverse/reopen, D4 rotation and reflection transporting the sheet and marker jointly. Add **54 declared C3-fixed coarse states**, producing χ(e)=196884 and χ(r)=χ(r²)=54.
+- scripts/check_monster196884_s3_punctured27_fibre.py. Reflect only the SELECTED trit (not the nine-trit global sign), and exchange the oriented copies of the coarse punctured-27 chart, fixing invariant/seam. Exhaustively checked 196884 states for s²=id, srs=r⁻¹, D4 commuting with s and r; χ(reflection)=65612. Explicit S3 irreducible multiplicities: **trivial 65638, sign 26, standard2D 65610**. They sum as 65638+26+2×65610=196884.
+- Both source checks are **local finite integer evidence**, not kernel-accepted Agda proof or an FLM identification. The action is a concrete source-marked-sheet group action, not just dimension arithmetic. The coarse 53 identification is a chosen carrier, not a native reduced-Laplacian isometry.
+
+**Exact proposed M lemmas and missing inputs:**
+M1 nativeMarkedSheetC3ActionOrderThreeAgda;
+M2 nativeMarkedSiteD4CommutationAgda;
+M3 nativeFineToRegularC3OrbitPhaseBidiAgda;
+M4 nativePairedPunctured27S3CoarseActionAgda;
+M5 nativeSelectedS3ActionCharacterAndFormExact;
+M6 originalReduced53ToSelectedCoarse53Intertwiner (must provide matrix/geometry);
+M7 publishedFLM3BOriginalWeightTwoAction (select actual FLM generator, normalized basis and action);
+M8 originalFineCoarseToPublishedFLM3BIntertwiner (actual invertible linear map satisfying Φρ_native(g)=ρ_FLM(g)Φ);
+M9 originalGriessProductInvariantFormTransport (actual Griess product, form and conformal unit, not just character);
+M10 originalAllMonsterGeneratorsRelatorsAndVOAModes (selected FLM/VOA, beyond restricted subgroup).
+
+Character equality ensures abstract C3 representation equivalence over suitable characteristic-zero fields, but does NOT supply the original-basis M8/M9 maps or full Monster action. Existing Monster PR #1472 owns the selected Griess/FLM/VOA construction; do not invent another implementation of its original source.
+
+### K — What determines each k; exact dimension continuation
+
+The **n=9** coincidence is driven by a declared model, not by tetration: 9 ternary sites, 1+9 marker choices, and a 6×9 coarse sector. If this RULE persists for n sites, then
+
+D(n)=(n+1)3^n+6n; q(n)=(n+1)3^(n−1) free C3 blocks; C3 trace=6n.
+
+A compatible chosen S3 extension has multiplicities **trivial=q+3n+1; sign=3n−1; standard=q**, and **coarse 6n=1+[1+2(3n−1)]**. When n=3^d, 3n−1 is the puncture of a (d+1)-dimensional ternary cube; at n=9 it is 27−1=26. This is one structurally justified extension, NOT a unique next Moonshine coefficient.
+
+Exact checked script scripts/check_monster196884_hyperfabric_k_growth.py:
+n=9 => D=196884, q=65610, trace=54;
+n=10 => D=649599, q=216513, trace=60;
+n=11 => D=2125830, q=708588, trace=66;
+n=12 => D=6908805, q=2302911, trace=72;
+n=18 => D=7360989399, q=2453663097, trace=108;
+n=27 => D=213516729579798, q=71172243193212, trace=162.
+
+Distinguish TWO other prior formal recursions:
+- Tensor depth k gives dimension 196884^k and C3 trace 54^k, with irreducible multiplicities [(d+2t)/3,(d−t)/3,(d−t)/3]; this is not the marked-sheet n extension.
+- Actual self-indexing in SelfIndexingHyperfabricTetrationExact: A0=1; A_(k+1)=9^A_k because each entire prior carrier indexes a 9-valued field. A1=9; A2=387420489; A3=9^(387420489) has 369693100 digits. A chosen D(A2) has around 184846559 digits. The recurrence follows from **function-space indexing**, not from the special number 196884.
+
+Keep time/event index t, refinement depth k, observer a and optimiser step s separate: W[t,k,a;s]. Source update and projection commute only with a proven chosen-consumer factorization; otherwise carry residual. Reuse existing wave/inverse-limit, time-fibre, MDL/codec, and exact gluing owners.
+
+**Exact proposed K lemmas:** K1 markedSheetGeneralSiteCount; K2 markedC3FreeOrbitCountGeneralN; K3 selectedS3IrrepMultiplicityGeneralN; K4 punctured3NCoarseSeamChartWhenPowerOfThree; K5 functionSpaceSelfIndexingNotTensorRecurrence; K6 temporalRefinementConsumerNonDescentOrResidual.
+
+### L — SensibLaw/SLR spaCy and early-epoch TinyStories learner
+
+SensibLaw src/storage/postgres/spacy_numeric_projection.py already persists source-bound numeric spaCy token offsets, POS, lemma, morphology, dependency heads, named-entity spans and parser execution IDs. Reuse this producer and original Leech SentencePiece tokens with exact character-span overlap and Unicode normalization; do not add another parser owner in Leech.
+
+**Early supervised target:** from input token sequence, predict sparse/multi-hot spaCy POS, morphology, dependency labels and head links. One-hot categorical class indices can be represented by an embedding lookup; unknown/absent capability is a masked target, never the zero class. Compare baseline token-only predictions, prepopulated syntax side input and zero-initialised gated SLR features. Report POS/morph macro/micro F1, dependency UAS/LAS, prediction CE, time-to-quality and memory/energy costs, with a parser-shuffled negative control. Google's SyntaxNet / Parsey McParseface is a genuine dedicated neural POS+dependency parser (2016); Gemma 3 270M is a much later generic small LM, not a POS-only network. No Google-trained result has been replicated locally.
+
+Two **legitimate distinct** visibility contracts: FULL-CONTEXT completed story for infilling/diffusion and PNF hypothesis revision; PREFIX-CAUSAL partial story for autoregressive next-token prediction. Full-story parsed labels are allowed for full-context tasks; for prefix generation they are either unavailable or teacher-only supervision, never an unqualified inference-time input. Train rich-parser teacher then distil a prefix-available structure predictor. Distinguish parser candidate authority from actual observed narrator-world facts.
+
+**Exact proposed L lemmas:** L1 originalTinyStoriesSLRDocumentRevisionReceipt; L2 originalSentencePieceSpacySourceSpanTransport; L3 categoricalSpacyMissingnessNotNeutral; L4 parserCandidatePNFAdmissionAuthority; L5 prefixVsFullContextVisibilityBidi; L6 originalSpacyOneHotMultiHotTargetWeld; L7 observerEventTimeVsObservationTime; L8 falseBeliefSurvivesConsumerRelevantQuotient; L9 LeechZeroGatePreservesSourceLogits; L10 maskedDiffusionPNFRevisionEvidenceBound; L11 KVExpertWorldTimeHistoryReplay.
+
+### G — Grokking continuation, not premature stopping
+
+Existing owners: DASHIg mod-97 reproductions; GrokkingInvariantSubspaceSelectionExact; GrokkingMeasureStrataExact; GrokkingGeometricCrystallisationMemoryRoutingExact; PNF Marchenko–Pastur null classification and consumer non-promotion; MDL/fibre routing source. The 64-sequence one-epoch TinyStories student and 24-step F4 C3 screen do not settle delayed symmetry selection.
+
+**Every optimiser step:** log cheap scalars only (train CE by head, grad/update norms, router balance/entropy, signed-history energy, numerical status, data cursor). **Geometric checkpoints** at steps 128,256,512,1024,2048,... up to a precommitted compute budget save *full* model+AdamW+scheduler+RNG+data identity and selectively measure heldout CE, task-action defect, actual C2/C3 representation and S3 control, Gram spectra, MP nulls, effective rank, causal interventions, MDL rate/distortion, parsed-world counterfactual QA. Dense extra sampling near a phase transition should be triggered by a predeclared criterion, not only after a pretty result. Full SVD every optimiser step is unnecessary. If task-character composition improves while heldout score stalls and training remains stable, continue through a registered longer horizon; proven semantic nonfactorability, malformed source parity or unstable gradients require correction.
+
+**Exact proposed G lemmas:** G1 sameSourceOptimizerRNGScheduleReplay; G2 originalModelSignedHistoryC2C3OrS3ActionEvidence; G3 heldoutGrokkingTaskCharacterHomomorphism; G4 perStepLatentMechanismMassNotTrainingFit; G5 timeIndexedActivationMPNullAndNoiseCalibration; G6 spectralCleanupPreservesEpistemicFutureConsumers; G7 measuredMDLCodecQualityPareto; G8 longerHorizonTinyStoriesWorldParserMinimalPairGeneralization.
+
+### Releases and acceptance
+
+R0: exact-head Agda polynomial kernel with corrected ℤ literals, original 8/8 torus retained; execute the **three** new Python exact finite C3/S3/growth scripts on that checkout and publish outputs as finite-source receipts.
+
+R1: original TinyStories file+revision, SLR parser numeric source receipts, exact span alignment, early-epoch token→one-hot grammar head with matched baseline and explicit completed-text/prefix evaluation modes.
+
+R2: matched longer mod-97/TinyStories runs for dense/C2/C3/structured-side-input controls; every-step low-cost logs, log-spaced full snapshots; mechanism and semantic diagnostic Pareto fronts.
+
+R3: source-bound PNF/world observer-knowledge, false-belief and masked diffusion revision, cache/state replay and actual gluing/refinement, with negative controls.
+
+R4: published Monster 3B original action, explicit basis Φ, Griess product/VOA and original-neural-consumer transport; no automatic promotion of R0 candidate finite actions.
+
+
+### Review ownership correction 15 November
+
+This continuation is carried on current-master-derived branch `chatgpt/x369-pnf-world-rollup-20261115`; historical #1442 was merged/closed, and newer source commits on its obsolete feature branch did not automatically become part of an active review. Status is SOURCE WRITTEN for Agda six-variable proof, local finite Python tests for C3/S3 arithmetic, and OPEN for original FLM 3B/Griess and neural source physical weld.
