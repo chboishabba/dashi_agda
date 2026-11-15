@@ -76,7 +76,7 @@
     "interpretation": "genuine compact 3D TT test source constructed; numerical UV/cutoff/convergence fail"
   },
   "acceptance": {
-    "source_equivalent_unit_tests": "63/63 source-equivalent local PASS",
+    "source_equivalent_unit_tests": "68/68 local source-equivalent PASS",
     "full_3d_B4_numerical_convergence": false,
     "external_analytical_Green_operator_previously_claimed_by_external_theorem": true,
     "tensor_matter_generating_action": false,
@@ -86,7 +86,9 @@
     "exact_branch_head_execution_in_this_environment": false,
     "exact_GitHub_branch_runner_run": false,
     "external_FIO_theorem_application_proof_candidate": true,
-    "independent_referee_review_completed": false
+    "independent_referee_review_completed": false,
+    "original_boundary_ray_phase_pulled_back_exact": true,
+    "projected_5d_Weyl_numerical_receiver_converged": false
   },
   "next_exact_lemmas": [
     "ads5OriginalT2MicrolocalFIOCompositionIndependentProofAcceptance",
@@ -223,11 +225,22 @@
       "microscopic_matter_action_completed": false
     },
     "verification": {
-      "source_equivalent_local_math_unittests": "63/63 PASS (29 earlier + 9 + 8 + 10 + 7)",
+      "source_equivalent_local_math_unittests": "68/68 PASS (29 earlier + 5 original phase + 9 + 8 + 10 + 7)",
       "exact_PR_head_exec": false,
       "agda2_9_kernel": false,
       "full_3D_numerical_B4_convergence": false,
       "physical_observation": false
+    },
+    "original_boundary_phase": {
+      "bulk_phase": "-T+s*z+k*x",
+      "correct_boundary_pullback": "-T+s*b(T)+k*x",
+      "boundary_time_covector": "-1+s*v(T)",
+      "induced_timelike_norm": "-b²(s-v)²/(1-v²)",
+      "emitter_normal_original_israel_inward": 0.17622301193802767,
+      "receiver_normal_original_israel_inward": -0.07558371447219975,
+      "outward_convexity_unit_normal_is_negative_of_israel_inward": true,
+      "source_tangential_covector_elliptic": true,
+      "full_FIO_receiver_referee_accepted": false
     }
   }
 }
