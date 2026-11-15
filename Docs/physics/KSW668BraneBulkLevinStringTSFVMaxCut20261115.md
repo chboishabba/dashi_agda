@@ -859,3 +859,127 @@ The new \`scripts/test_ksw668_hankel_moving_maxcut.py\` now contains **11** sour
 **Revised exact terminal status:** A1–A3 analytic test-scalar positive receiver on flat cylinder; A4 static self-gravitating shell background with moving-flat-bulk rigidity only; B2 mathematical compact TT stress and linearized Israel coefficient, **microphysical action open**; B3 abstract smooth prescribed-source moving retarded operator **exists by Ginoux–Murro theorem application**, explicit brane-to-brane Green kernel/constructive evaluation open; B4 physical nonzero early TT Weyl reception open; B5 stationary TT packet finite energy but moving full coupled stability open; C1 realistic observation/scale fit open; C2 pinned Agda analytic kernel open; D1 experimental evidence open.
 
 **Next maximum-cut implementation** must compute the original moving background boundary-to-boundary *Schwartz kernel* or a convergently validated discretization of its abstract \(G_N^{ret}\), choose the prepared compact TT source with nonzero ray polarization, calculate an early \(E_{\hat y\hat y}\) receiver and explicit source normalization, then weld a genuine brane matter action and full constraints. The stationary resolvent is a correct test/limit, not a substitute for that moving kernel.
+
+
+---
+
+## 15 Nov 2026 F8 steelman: ORIGINAL moving AdS5 source-to-Weyl time-domain simulation, plus UV fail-closed compact TT extension
+
+**Authoritative existing PR:** #1508, branch \`research/ksw668-brane-tt-clock-maxcut-20261115\`. New source \`scripts/ksw668_f8_moving_maxcut.py\`, local unit tests \`scripts/test_ksw668_f8_moving_maxcut.py\`, three-grid \`scripts/ksw668_f8_refinement.py\`, smoke/full gate \`scripts/check_ksw668_f8_maxcut.sh\`; new record \`Artifacts/ksw668/ads5_f8_moving_receiver_refinement_20261115.json\`. We are **not** copying stationary RS2 onto a moving wall; same original a=t, original \(\kappa_5^2=6\), original Israel source. Independent source-equivalent local 8/8 unit PASS. The full F8 convergence gate returns **exit 42** by design for the unresolved compact 3D Weyl endpoint.
+
+### Primary-source ownership and corrections
+
+- **Hiramatsu, Koyama & Taruya**, hep-th/0308072 (2003), hep-th/0410247 (2004): direct Poincaré-coordinate 5D tensor cosmological evolution and KK suppression — the appropriate *numerical algorithmic precedent*, not an early compact-source detector claim.
+- **Gorbunov, Rubakov & Sibiryakov**, hep-th/0108017 (2001): inflating and terminating dS brane, Bogoliubov mixing; not the present a=t source/receiver experiment.
+- **Clarkson & Seahra**, gr-qc/0505145 (2005), *Braneworld resonances*: **two** authors, stationary Einstein-static brane in Schwarzschild–AdS, quasinormal time-domain resonance analysis. The supplied description attributing this paper to "Seahra, Clarkson & Maartens" and saying it proves **moving AdS5 early Weyl arrival** is incorrect. Seahra–Clarkson–Maartens are authors of a *different* 2005 black-string/KK spectroscopy paper.
+- **Shiromizu, Maeda & Sasaki**, gr-qc/9910076 (2000): the brane effective field equation features **projected electric 5D Weyl** \(\mathcal E_{ij}^{(5)}=C^{(5)}_{ABCD}n^A e_i^B n^C e_j^D\), *not identical* to our **intrinsic 4D electric Weyl** \(\delta C^{(4)}_{\hat0\hat i\hat0\hat j}\). Both gauge-invariant readout definitions require explicit distinct normalization and weld.
+- **Bridgman, Malik & Wands**, astro-ph/0107245 (2001/02): bulk/brane perturbations and gauge-invariant master fields; tensor-only positive results are not full scalar/vector/coupled Einstein-matter closure.
+- **Ginoux & Murro**, arXiv:2007.02544, *Advances in Differential Equations* 27 (2022) 497–542: theorem 6.8 supplies smooth compatible Neumann IBVP existence, as previously stated; it is not a quantitative numerical error estimate.
+- The original **flat spatial** \(k=0,\ a=t\) model is *linear-coasting flat FRW*, **not Milne** (the empty Milne form uses spatial curvature \(k=-1\)). Calling this original model "Milne" confuses physically distinct geometries.
+- Do not infer that only dS permits all possible analytic Green kernels: this would require an exhaustive nonexistence theorem, not provided.
+
+### F8.01 Exact original moving-wall tensor PDE and boundary source
+
+Define \(T(t)=\operatorname{arsinh}t-\sqrt{1+t^2}/t\), \(z_b=b(T)=1/t\), \(v=b'=-1/\sqrt{1+t^2}\), \(y=z-b(T)\). For spatial Fourier \(e^{ikx}\), use
+\[
+p=H_T|_{z},\quad w=H_z,\quad q_\pm=p\pm w,
+\]
+where derivatives \(\partial_T\) on \(p,w,q_\pm\) in the displayed equations below are taken at fixed moving \(y\). Then the **original** bulk tensor PDE and sourced Israel normal reduce exactly to
+\[
+\begin{aligned}
+\partial_T q_+&=(v+1)\partial_y q_+ -\frac{3}{y+b}\frac{q_+-q_-}{2}-k^2H,\\
+\partial_T q_-&=(v-1)\partial_y q_- -\frac{3}{y+b}\frac{q_+-q_-}{2}-k^2H,\\
+\partial_T H&=\frac{1+v}{2}q_++\frac{1-v}{2}q_-.
+\end{aligned}
+\]
+At \(y=0\),
+\[
+\boxed{q_-(T,0,k)=\frac{2g(T,k)-(1+v)q_+(T,0,k)}{v-1}},\qquad
+g=-6\frac{\sqrt{1-v^2}}{b}\widehat{\pi}^{TT}.
+\]
+Thus only the **incoming** characteristic is prescribed. The source is a compact smooth \(C^\infty\) temporal bump in \(T\), with the correct original moving Israel coefficient. Spatial one-sided 2nd-order characteristic upwind and SSP-RK3 are used. Initial data are exactly zero; the remote boundary has zero incoming characteristic, with a domain width chosen so its return cannot contaminate the tested physical causal window.
+
+### F8.02 Two source models; finite-energy distinction is mandatory
+
+**Control P (plane-symmetric).** \(H_{yy}=-H_{zz}=H(T,y,x)\), uniform in the other two brane spatial directions. The compact \(C^\infty\) source \(f(x)\) with support \(|x|<\epsilon\) supplies a well-defined, finite-energy-*per-transverse-area* retarded linear tensor solution. Its total energy integrated across the infinite transverse plane is **infinite**. It is a genuine mathematical moving-boundary source/receiver **control**, not the full physical 3D compact B4 witness.
+
+**Control C (genuinely compact 3D TT).** Let \(\varphi(\mathbf x)\) be smooth radial bump of support \(r<\epsilon\), normalized spatial integral one. Apply the earlier local fourth-order divergence-free/traceless TT projector \(Q=\mathrm{diag}(0,1,-1)\) to obtain a smooth, spatially compact 3D tensor boundary source. This has a finite-energy retarded tensor solution at the *continuum/theorem* level. In Fourier \(k\), its \(yy\) angular factor on the \(x\)-axis is
+\[
+W(\mu)=\frac{\mu^4+6\mu^2+1}{8}
+=\frac25P_0(\mu)+\frac47P_2(\mu)+\frac1{35}P_4(\mu).
+\]
+Thus \(H_{yy}(T,r)\) is reconstructed from \(\frac1{4\pi^2}\int_0^\infty k^6\widehat\varphi(k)\widehat H_{\rm transfer}(T,k)\mathcal A(kr)\,dk\),
+\[
+\mathcal A(\xi)=2\left[\tfrac25j_0(\xi)-\tfrac47j_2(\xi)+\tfrac1{35}j_4(\xi)\right].
+\]
+The \(x\)-second-derivative reconstruction requires the distinct \(\mu^2W(\mu)\) angular weights
+\[
+\mu^2W(\mu)=\frac{22}{105}P_0+\frac47P_2+\frac{81}{385}P_4+\frac2{231}P_6.
+\]
+This **fourth-order compact TT construction strongly magnifies ultraviolet/spectral truncation errors**. The implemented mesh and cutoff do not yet resolve those errors.
+
+### F8.03 Physical photon-dark receiver, and two distinct electric Weyl observables
+
+Choose source onset \(t=1\), receiver time \(t=6\) (a *longer* same-original-background window than the original t=2 comparator, to avoid falsely resolving a tiny signal with inadequate grid spacing). Exact source-metric horizons are:
+\[
+r_g(6)=1.8300210521210103,\quad
+r_\gamma(6)=\log6=1.791759469228055.
+\]
+Choose \(r_{\rm obs}=r_g(6)-0.008=1.8220210521210103\), \(C^\infty\) source spatial support half-width \(\epsilon=.024\), and temporal support \(0<T-T(1)<.007\). Then
+\[
+r_{\rm obs}-\epsilon-r_\gamma(6)=
+\boxed{0.006261582892955309>0}.
+\]
+**Every brane-confined photon emitted from the stated compact source after t=1 still lies outside this receiving location at t=6.** However this is an enlarged geometric comparator, not a substituted proof for the earlier specifically requested t=2 receiver.
+
+For the induced FRW brane metric in conformal time \(\eta=\log t\), the **intrinsic 4D** electric Weyl plus component on the \(x\)-axis is
+\[
+\boxed{\delta E_{\hat y\hat y}^{(4)}
+=-\frac{1}{4t^2}(\partial_\eta^2+\partial_x^2)H_{yy}},
+\quad \frac{dT}{d\eta}=\frac{\sqrt{1+t^2}}t.
+\]
+Time differences are centred at the **same actual physical t** for each grid. We do *not* equate this to the **projected 5D Weyl** tensor \(\mathcal E_{ij}^{(5)}\) in Shiromizu–Maeda–Sasaki without an independent Gauss–Codazzi/Israel gauge weld. The latter is an explicit new B4 subgate.
+
+### F8.04 Measured source-equivalent LOCAL mesh results (mathematical model units)
+
+| Source | N_x | dy | H_yy | intrinsic electric Weyl |
+|---|---:|---:|---:|---:|
+| Plane control | 256 | 0.012 | +0.00606200 | +0.0603973 |
+| Plane control | 512 | 0.007 | +0.00645275 | +0.1043860 |
+| Plane control | 768 | 0.005 | +0.00655405 | +0.1123832 |
+| Compact 3D TT | 256 | 0.012 | +0.02690186 | −0.775852 |
+| Compact 3D TT | 512 | 0.007 | +0.09542997 | −15.6923 |
+| Compact 3D TT | 768 | 0.005 | +0.06429828 | −92.4320 |
+
+Fine-to-medium relative drift: plane field **1.55%**, plane Weyl **7.12%**; compact 3D TT field **48.42%**, compact 3D Weyl **83.02%**. Near a receiver beyond the entire bulk null future the 768-grid plane residual is \(1.35\times10^{-11}\) versus early field \(0.00655\); the compact 3D TT residual is \(1.32\times10^{-4}\), numerically **not negligible**. Numerical Fourier truncation can leak outside a compact continuum light cone, so a nonzero early grid value alone is **not** a causality/nonvanishing certificate.
+
+**Disposition:** This is the first executable ORIGINAL moving-wall retarded TT receiver and electric-Weyl *numerical* test with a strictly brane-photon-dark support window, but it has **NOT** passed the full 3D compact TT convergence gate. No change to physical B4 = OPEN. A claimed finished 'nonzero graviton signal' would be mathematically premature.
+
+### Phases, exact remaining lemma contracts, and next big cut
+
+| Phase | Exact lemma / deliverable | Acceptance |
+|---|---|---|
+| F8a | \`ads5MovingTTCharacteristicIsraelBoundaryExact\` | Algebraic transform and incoming-only source; source written/checks; Agda continuum OPEN |
+| F8b | \`ads5MovingTTPlanarReceiverAndPhotonDarkControl\` | True original moving PDE; local 8 unit cases PASS; plane early *numerical control*, not total-energy 3D |
+| F8c | \`ads5MovingTTCompact3DSpectralCutoffConvergence\` | **OPEN (failed)**: show 3D compact TT field and both 4D Weyl, 5D projected Weyl converge under independent k-cutoff, angular resolution, dy, dt, source-width and outer-boundary refinements; eliminate outside-cone Fourier leakage |
+| F8d | \`ads5LocalizedTTSourceProducesNonzeroEarlyWeyl\` | **OPEN**: original same-worldline compact 3D source gives finite-energy and stable *nonzero* retarded Weyl before the photon with controllable error; need also t=2 comparator |
+| F8e | \`ads5OriginalNoGlancingNeumannPoissonPrincipalSymbol\` | **OPEN**: non-glancing Neumann boundary microlocal principal symbol, no caustics, transverse source/detector polarization and non-cancelling leading coefficient; prior Melrose–Sjöstrand boundary-propagation literature relevant but not automatically a proof |
+| F9a | \`ads5CompactTTMatterActionRealization\` | **OPEN** microphysical stress generating action satisfying complete perturbed Einstein–matter constraints |
+| F9b | \`cylinderDoubledDiscPerturbedBulkAndRetardedGreen\` | **OPEN** separate same-global-metric coupled shell/gravity perturbation |
+| F9c | \`ads5MovingModeStabilityAndBackreaction\` | **OPEN** all physical modes and backreaction, not only tensor linear finite-strip energy |
+| F10 | \`ads5PhysicalScaleSourceDetectorComparison\` | **OPEN** physical AdS length, cosmological epoch, frequency, source emission lag, attenuation, GW constraints; zero free-energy or 5D FTL inferred |
+| F11 | \`braneBulkOriginalAnalyticAgdaKernel\` | **OPEN** pinned local Agda 2.9 acceptance, actual differentiable geometry and source/Green/projection proof |
+| D1 | \`physicalGravitonObservation\` | **OPEN** independent controlled measurements and independently replicated evidence |
+
+**Acceptance and exact commands**
+\`\`\`bash
+bash scripts/check_ksw668_f8_maxcut.sh --smoke
+# 8 local unit/control tests PASS, not B4 acceptance
+bash scripts/check_ksw668_f8_maxcut.sh --full
+# 3-grid BOTH source classes; presently exits 42 (correct failed 3D convergence)
+python3 scripts/ksw668_f8_refinement.py
+# saves scripts/ksw668_f8_refinement_receipt.json
+\`\`\`
+The existing \`scripts/run_ksw668_local_maxcut.sh --math\` imports F8's **smoke** checks, leaving the expensive/failed convergence gate explicit and separate. CI is not substituted for local verification. Exact new PR-head GitHub checkout and pinned Agda have not been executed in this tool environment; the local source-equivalent producer and its **8/8** unit cases ran independently here.
+
+**Highest-alpha cut next:** fix compact 3D \(k^4\) ultraviolet/angular reconstruction using high-order/validated spectral inversion with independent \(k_{\max}\) and \(\Delta k\) control, then implement the **projected 5D Weyl** source-to-receiver observable and the same *t=2* original comparator. An alternative rigorous route is a non-glancing, no-conjugate-point boundary Fourier-integral principal-symbol nonvanishing theorem with a prepared compact high-frequency TT pulse. Both routes need actual proof; no shortcut by model-label coincidence or arbitrary waveform threshold.
