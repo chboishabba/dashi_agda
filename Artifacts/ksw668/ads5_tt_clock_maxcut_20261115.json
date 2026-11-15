@@ -9,7 +9,7 @@
     "tests": "10/10 PASS",
     "exact_new_GitHub_head_scripts_executed": false,
     "agda_kernel_executed": false,
-    "hankel_suite": "9/9 PASS",
+    "hankel_suite": "11/11 PASS",
     "exact_github_checkout_run": false
   },
   "source_priority": [
@@ -58,7 +58,8 @@
       "comoving_bulk_horizon": 0.697797781099381,
       "brane_photon_horizon": 0.6931471805599453,
       "physical_chord_strict_interior": true,
-      "nonzero_early_retarded_Weyl": false
+      "nonzero_early_retarded_Weyl": false,
+      "static_control_no_shortcut": true
     },
     "B5": {
       "status": "stationary outgoing resolvent and KK normalizable packet completed at model level; original moving coupled stability open",
@@ -66,7 +67,19 @@
       "zero_pole": "lim(q→0) q² Z_b=-2/b",
       "continuum_eigenfunctions": "sqrt(m) z² (Y1(mb)J2(mz)-J1(mb)Y2(mz))/sqrt(J1(mb)²+Y1(mb)²)",
       "smooth_compact_continuum_packet_finite_energy": true,
-      "original_moving_metric_packet": false
+      "original_moving_metric_packet": false,
+      "actual_stationary_TT_packet": {
+        "mass_band": [
+          0.6,
+          1.4
+        ],
+        "spectral_L2": 0.41073100423980546,
+        "weighted_mass_energy": 0.4249976277102043,
+        "initial_bulk_energy": 353.08728191472755,
+        "computed_Hyy_at_T_point2_z1point5_x0": 1.5683695535242972,
+        "finite_energy": true,
+        "original_moving_wall": false
+      }
     },
     "C1": {
       "status": "derived local geometric cubic law",
@@ -123,11 +136,12 @@
     "physicalGravitonObservation"
   ],
   "acceptance": {
-    "source_equivalent_new_hankel_tests": "9/9 PASS",
+    "source_equivalent_new_hankel_tests": "11/11 PASS",
     "previous_tt_clock_suite": "10/10 source equivalent as earlier",
     "exact_branch_runner": "NOT RUN",
     "pinned_Agda_2_9": "NOT RUN",
     "physical_observation": false,
     "CI_is_acceptance": false
-  }
+  },
+  "last_verified_independent_local": "source-equivalent exact formulas, 11/11 tests, SciPy/Sympy/mPm"
 }
