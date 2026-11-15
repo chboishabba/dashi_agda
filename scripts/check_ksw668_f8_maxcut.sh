@@ -6,6 +6,10 @@ mode="--smoke"
 if [ "$#" -gt 0 ]; then mode="$1"; fi
 python3 scripts/test_ksw668_f8_moving_maxcut.py
 python3 scripts/test_ksw668_f8_uvir_source_cutoff.py
+python3 scripts/test_ksw668_f8_uvir_sampling_contract.py
+python3 scripts/ksw668_f8_uvir_sampling_contract.py
+python3 scripts/test_ksw668_f8_static_tt_reconstruction_null.py
+python3 scripts/ksw668_f8_static_tt_reconstruction_null.py
 python3 scripts/ksw668_f8_uvir_source_cutoff.py
 python3 scripts/test_ksw668_f8_frozen_oblique_neumann.py
 python3 scripts/ksw668_f8_frozen_oblique_neumann.py
@@ -30,7 +34,7 @@ python3 scripts/ksw668_f8_direct_wkb_transport.py
 python3 scripts/ksw668_f8_projected_weyl_sms.py
 python3 scripts/ksw668_f8_non_glancing_source.py
 if [ "$mode" = "--smoke" ]; then
-  echo "F8 algebraic/theorem-application smoke accepted (81 source-equivalent tests); full 3D convergence, Agda, matter action and observation NOT accepted."
+  echo "F8 algebraic/theorem-application smoke accepted (103 source-equivalent tests); full 3D convergence, Agda, matter action and observation NOT accepted."
   exit 0
 fi
 if [ "$mode" != "--full" ]; then
