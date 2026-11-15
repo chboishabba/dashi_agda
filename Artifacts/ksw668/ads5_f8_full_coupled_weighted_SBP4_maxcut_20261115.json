@@ -1,0 +1,87 @@
+{
+  "schema": "KSW668F8OriginalFullCoupledEnergyMaxcutVIII20261115",
+  "base": "master after merged KSW PR #1512",
+  "model": "Poincare AdS5, original flat FRW a=t, moving z_b=1/t, physical linear TT Israel Neumann",
+  "mathematical": {
+    "scheme": "normal_order=4, z^-3 weighted split SBP2 SAT + exact conservative radial FV d=3,7,11",
+    "symmetrizer": "E=(1/2) sum H_y z^-3 V_r [((1+v)/2)P²+((1-v)/2)M²+U(-L_r)U]",
+    "normal_derivative": "D_w f=z^(3/2) D_y(z^(-3/2) f)+3f/(2z)",
+    "coefficient_derivative": "v_T=t³/(1+t²)²",
+    "homogeneous_exact_boundary_wall": "-w0/4 ||(1+v)P0-(1-v)M0||²",
+    "homogeneous_exact_boundary_far": "-wN/4 [ (1+v)²||PN||² + (1-v)²||MN||² ]",
+    "homogeneous_exact_bulk": "sum Hy z^-3 Vr [3v/(2z)(PM-U(-Lr)U)+v_T/4(P²-M²)]",
+    "uniform_original_t1_to_t2": "E'(T) <= 5 E(T)",
+    "forced_wall_extra": "-w0(1-v) <M0,G>_Vr; no pure C||G||² bound",
+    "lift": "Lambda_U=Lambda_P=0; Lambda_M=-2G(T,r)chi(y)/(1-v(T))",
+    "lift_residual": "F_U=c Lambda_M; F_P=3 Lambda_M/(2z); F_M=(v-1)D_w Lambda_M+3 Lambda_M/(2z)-d_T Lambda_M",
+    "forced_energy": "E_tilde'(T) <= 6 E_tilde(T)+0.5||F(T)||_E²",
+    "contains_real_physical_matter_generating_action": false,
+    "complete_explicit_coupled_SSPRK3_theorem": false,
+    "both_Weyl_high_order_trace_bound": false
+  },
+  "numerical": {
+    "model_receiver_t": 12,
+    "source_spatial_support_radius": 0.04,
+    "time_support_Poincare": 0.065,
+    "same_physical_receiver": true,
+    "meshes": [
+      {
+        "dr": 0.012,
+        "dy": 0.016,
+        "dt": 0.0024992243525406577
+      },
+      {
+        "dr": 0.008,
+        "dy": 0.012,
+        "dt": 0.0017989104901421466
+      }
+    ],
+    "H": {
+      "coarse": -0.000005459194224683912,
+      "medium": -0.000006295142128982913,
+      "relative_drift": 0.13279253862280352,
+      "medium_far": 1.303724216684889e-7,
+      "medium_far_ratio": 0.020710004476031232
+    },
+    "intrinsic_Weyl4": {
+      "coarse": -0.00006812375792476837,
+      "medium": -0.000026411757632391877,
+      "relative_drift": 1.5792966478391468,
+      "medium_far": -0.000001155849450140971,
+      "medium_far_ratio": 0.04376268577913253
+    },
+    "projected_Weyl5": {
+      "coarse": -0.0000028751353507231145,
+      "medium": -0.0000021828309692160943,
+      "relative_drift": 0.3171589515039925,
+      "medium_far": -3.7729295994706377e-8,
+      "medium_far_ratio": 0.01728457059973629
+    },
+    "three_grid_convergence": false,
+    "outside_bulk_null_control_zero": false,
+    "experimental_graviton_observed": false
+  },
+  "verification": {
+    "local_source_equivalent_suite": "282/282 PASS on reconstructed merged baseline + 27 new tests, runtime ~19s",
+    "new_subgate_tests": 27,
+    "actual_solver_stage_independent_operator_match": true,
+    "exact_connected_PR_head_runner_executed": false,
+    "pinned_Agda_2_9_kernel_executed": false,
+    "referee_acceptance_original_t2_FIO": false
+  },
+  "next_exact_lemmas": [
+    "ads5OriginalMovingSBP4SATFullyDiscreteSSPRK3CFLAndTruncationError",
+    "ads5OriginalMovingCompactTTCharacteristicLiftUniformSobolevSourceBudget",
+    "ads5OriginalMovingH4PlusEpsilonNeumannToBothWeylTrace",
+    "ads5OriginalMovingTTThreeMultipoleThreeObservableConvergence",
+    "ads5OriginalT2NeumannToWeylEllipticFIOComposition",
+    "ads5OriginalT2ActualCompactTTNonzeroEarlyBothWeyl",
+    "ads5CompactTTMatterActionRealization",
+    "ads5MovingModeStabilityAndBackreaction",
+    "cylinderDoubledDiscPerturbedBulkAndRetardedGreen",
+    "ads5PhysicalScaleSourceDetectorComparison",
+    "braneBulkOriginalAnalyticAgdaKernel",
+    "ads5OriginalSourceToObservationSemanticWeld",
+    "physicalGravitonObservation"
+  ]
+}
