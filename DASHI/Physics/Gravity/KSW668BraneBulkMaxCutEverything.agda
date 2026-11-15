@@ -61,3 +61,9 @@ import DASHI.Physics.Gravity.KSW668AdS5MovingNeumannFluxRationalExact
 -- independently; coupled (T,y,r), H^(4+epsilon) Weyl trace, FIO,
 -- pinned Agda kernel and physical observation all remain OPEN.
 import DASHI.Physics.Gravity.KSW668AdS5MovingNormalFiniteSBPTelescopeExact
+
+-- Exact SSPRK3 pure radial imaginary-axis rational amplification identity
+-- for the original effective 3/7/11 radial multipoles. The positive-real
+-- spectral CFL, full moving y/r/warp coupling, Agda kernel and Weyl
+-- observations remain independent OPEN gates.
+import DASHI.Physics.Gravity.KSW668AdS5RadialSSPRK3ImaginaryPolynomialExact
