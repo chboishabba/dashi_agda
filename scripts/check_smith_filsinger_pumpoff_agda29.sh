@@ -11,6 +11,7 @@ files=(
   DASHI/Physics/Motors/SmithFilsingerHybridRegimeStudyBidiExact.agda
   DASHI/Physics/Motors/SmithFilsingerPumpOffDualPathExact.agda
   DASHI/Physics/Motors/SmithFilsingerAcousticOrderAndModalCutExact.agda
+  DASHI/Physics/Motors/SmithFilsingerFiniteReservoirPortExact.agda
 )
 for f in "${files[@]}";do test -s "$f";done
 if grep -nE '^[[:space:]]*postulate([[:space:]]|$)' "${files[@]}";then
@@ -19,4 +20,4 @@ fi
 for f in "${files[@]}";do
   scripts/run_agda29_parallel_check.sh "$f"
 done
-echo "PASS Agda 2.9 kernel accepted eight same-source motors/Maxwell modules"
+echo "PASS Agda 2.9 kernel accepted nine same-source motors/Maxwell modules"
