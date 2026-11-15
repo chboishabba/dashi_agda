@@ -54,15 +54,15 @@ data HeatWeightedTTStarLeaf : Set where
   cutoffUniformCotlarAggregation : HeatWeightedTTStarLeaf
   spacetimeFsPayment : HeatWeightedTTStarLeaf
 
-data LeafState : Set where closed open blocked optional : LeafState
+data LeafState : Set where leafClosed leafOpen leafBlocked optional : LeafState
 
 leafState : HeatWeightedTTStarLeaf → LeafState
-leafState literalShellOperatorRealization = open
-leafState physicalLeftPairProductEnvelope = blocked
-leafState physicalRightPairProductEnvelope = blocked
+leafState literalShellOperatorRealization = leafOpen
+leafState physicalLeftPairProductEnvelope = leafBlocked
+leafState physicalRightPairProductEnvelope = leafBlocked
 leafState optionalWeightedAdjointCollapse = optional
-leafState cutoffUniformCotlarAggregation = blocked
-leafState spacetimeFsPayment = blocked
+leafState cutoffUniformCotlarAggregation = leafBlocked
+leafState spacetimeFsPayment = leafBlocked
 
 operatorCotlarCompilerDisposition : Admission.RouteDisposition
 operatorCotlarCompilerDisposition = Admission.redirectedReuse

@@ -46,16 +46,16 @@ data NestedPairIncidenceLeaf : Set where
   exactKernelAction : NestedPairIncidenceLeaf
   weightedSchurCertificate : NestedPairIncidenceLeaf
 
-data LeafState : Set where closed open blocked : LeafState
+data LeafState : Set where leafClosed leafOpen leafBlocked : LeafState
 
 leafState : NestedPairIncidenceLeaf → LeafState
-leafState pairCoordinateReuse = closed
-leafState nestedPairContribution = open
-leafState rowCoordinateSemantics = open
-leafState columnCoordinateSemantics = open
-leafState concreteKernelPointwiseMatch = blocked
-leafState exactKernelAction = blocked
-leafState weightedSchurCertificate = blocked
+leafState pairCoordinateReuse = leafClosed
+leafState nestedPairContribution = leafOpen
+leafState rowCoordinateSemantics = leafOpen
+leafState columnCoordinateSemantics = leafOpen
+leafState concreteKernelPointwiseMatch = leafBlocked
+leafState exactKernelAction = leafBlocked
+leafState weightedSchurCertificate = leafBlocked
 
 pairIncidenceKernelInfrastructureDisposition : Admission.RouteDisposition
 pairIncidenceKernelInfrastructureDisposition = Admission.redirectedReuse
