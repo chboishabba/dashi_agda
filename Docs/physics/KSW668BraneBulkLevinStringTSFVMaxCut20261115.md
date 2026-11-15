@@ -540,3 +540,22 @@ This expression **does not require** the intrinsic 4D vacuum Einstein equation. 
 New source \`scripts/ksw668_ads5_induced_weyl_receiver_partial.py\` inserts the already constructed **nonretarded**, nonlocalized, separated AdS5 mode at the same original geometric receiving location \(r_g=0.697797781099381,t=2\), with \(T_b(1)=0,k=m=1\). It computes \(\delta E_{\hat y\hat y}\approx-0.008053773977753403\) in the declared mathematical mode normalization. This proves that the existing manufactured tensor mode induces a nonzero *candidate gauge-invariant brane curvature observable*, not an early physical message: there is still no finite-energy compact emission, no retarded moving-boundary tensor Green solution, and no calibrated detector. B4 remains OPEN on those exact original source-to-observer obligations.
 
 Relevant source studies: Kodama–Ishibashi–Seto, Phys Rev D 62, 064022 (2000), DOI 10.1103/PhysRevD.62.064022, treats gauge-invariant bulk/brane junction variables; Maartens–Koyama 2010 section 7 explains nonseparable cosmological moving-brane tensor propagation and the anisotropic stress boundary; Caldwell–Langlois 2001 owns the geometric horizon only.
+
+
+### B5/C1 original model extra negative control — basis mode has divergent total radial energy; SI scaling is conditional
+
+The exact \(z^2J_2(mz)\cos(kx-\omega T)\) tensor basis mode from the original source is an *infinite spatial plane wave* and additionally fails the required finite **radial** energy criterion on the noncompact AdS side \(z\in[b,\infty)\). For \(k=m=1,\omega=\sqrt2\), the time-averaged radial quadratic energy per unit brane spatial volume is
+\[
+\overline{\mathcal E}(z)=\frac{z}{4}[3J_2(z)^2+J_1(z)^2].
+\]
+Using the genuine large-\(z\) Bessel asymptotics, its oscillation-average is \(1/\pi>0\). Thus \(\int_b^\infty \overline{\mathcal E}(z)\,dz\) diverges **linearly**. The nonzero electric Weyl response previously computed for this nonretarded basis element cannot count as finite-energy emission. A localized spectrally integrable packet and its nonzero retarded receiver must still be constructed.
+
+For any declared AdS physical length \(\ell\) in metres, simply rescaling **the entire existing dimensionless a=t solution** gives the conditional same-event clock advance
+\[
+\Delta t_{\rm phys}=0.009322862731128\frac{\ell}{c}.
+\]
+At \(\ell=1\,\mathrm m\), this is only \(3.10977\times10^{-11}\) s, **but** the same original model then has \(H(t=1)=c/\ell\simeq2.9979\times10^8\,\mathrm{s^{-1}}\), wildly unlike today's expansion. Changing \(\ell\) without the associated cosmological epoch is not a valid modern signal prediction.
+
+For the same manufactured \(k=m=1\) mode, a fixed brane receiver's instantaneous *proper phase* frequency is \(\sqrt2(dT_b/dt)c/(2\pi\ell)\), which decreases from approximately \(95.427\ \mathrm{MHz}/(\ell/\mathrm m)\) at \(t=1\) to \(37.721\ \mathrm{MHz}/(\ell/\mathrm m)\) at \(t=2\). This is a kinematic scale control, NOT a measured detector band or dispersion spectrum. In particular neither GW170817 timing nor these dimensional conversions alone imply the attachment's claimed \(\ell\le 10^{-19}\ \mathrm m\).
+
+Local producer \`scripts/ksw668_ads5_mode_energy_scale_guard.py\` symbolically verifies the Bessel derivative identity, checks the large-z radial energy density numerically and computes original same-worldline SI rescaling. It is in the local-only acceptance runner. Physical C1 and experimental D1 remain OPEN.
