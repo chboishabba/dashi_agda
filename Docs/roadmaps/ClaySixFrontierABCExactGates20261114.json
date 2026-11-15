@@ -2807,7 +2807,29 @@
           "Found D2 nativeBinaryFirstEnabledNonterminalSameOriginalRawStep already source-written in Karp21NativeBinaryToOriginalRawMachineStepExact; do not add as new theorem"
         ],
         "kernel_acceptance_required_before_full_closure": true,
-        "kernel_acceptance_state": "NOT_OBTAINED_THIS_ROUND"
+        "kernel_acceptance_state": "NOT_OBTAINED_THIS_ROUND",
+        "acceptance_root_coverage_repair_20261115": {
+          "scope": "STATIC COVERAGE ONLY, NOT AGDA KERNEL ACCEPTANCE",
+          "reason": "Focused kernel-cut had 35 direct checks but omitted five named B1-B5 theorem owners",
+          "original_missing_roots": [
+            "Karp21NativeBinaryStrictAfterOriginalExact.agda",
+            "Karp21NativeBinaryValidRawEdgesOriginalExact.agda",
+            "Karp21NativeBinaryHeaderBudgetExact.agda",
+            "Karp21NativeBinaryCountBudgetExact.agda",
+            "Karp21NativeBinaryEndpointHistoryOriginalExact.agda"
+          ],
+          "focused_kernel_check_roots_after_patch": 40,
+          "original_e0_explicit_manifest_roots": 16,
+          "guard": "scripts/check_karp21_e0_kernel_root_coverage.py",
+          "runner": "scripts/referee_karp21_maxcut.sh",
+          "runner_patch_commit": "50327db5f771905b348fde7f52209e227a794383",
+          "guard_python_mock_self_test": "PASS (empty, missing-root and duplicate-root fixtures)",
+          "github_exact_branch_40_root_and_16_manifest_static_inspection": "PASS",
+          "full_local_agda29_kernel_run": false,
+          "exact_head_agda_kernel_receipt": false,
+          "gate_closed": false,
+          "caution": "40 source check invocations are not 40 typechecked theorems; dependency trust and Agda success remain open."
+        }
       },
       {
         "id": "E1",
@@ -5315,6 +5337,19 @@
       "original_C2_closed": false,
       "original_B1_closed": false,
       "original_six_endpoints_closed_this_round": 0
+    },
+    "round_20261115_e0_acceptance_coverage": {
+      "date": "2026-11-15",
+      "target": "E0",
+      "classification": "CORRECTED_ACCEPTANCE_DRIVER_ONLY",
+      "completed_gate_ids": [
+        "P0"
+      ],
+      "active_gate_count": 14,
+      "finding": "The original focused kernel-cut was not sufficient even if it exited 0, because B1-B5 were absent.",
+      "repair": "Five omitted original owners were added, new direct-root manifest fail-closed on deletion/duplicates; existing 35 source checks retained.",
+      "independent_kernel_receipt": false,
+      "original_endpoint_closed": false
     }
   }
 }
