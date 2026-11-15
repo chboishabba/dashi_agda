@@ -1,0 +1,302 @@
+#!/usr/bin/env python3
+"""Source-bound P1 exported Lean Expr intake into EXISTING source PostgreSQL.
+
+The exact Expr codec is imported from the selected #1495 worktree, never
+reimplemented here. This writer validates actual stored source bytes, exact
+type/proof roundtrip, alpha-key derivation and immutable source provenance.
+It persists *observations*, NOT accepted typechecked declarations, complete
+native import closures, an alternate world builder or theorem certificates.
+"""
+from __future__ import annotations
+from hashlib import sha256
+from pathlib import Path
+import base64
+import importlib.util
+import json
+import re
+
+from run_lean_world_stream_pg import retrieve_source,SCHEMA_RE
+
+class NativeP1PGError(ValueError): pass
+
+HEX40=re.compile(r"[0-9a-f]{40}\Z")
+HEX64=re.compile(r"[0-9a-f]{64}\Z")
+SOURCE_LIMIT=8*1024*1024
+
+def _hex(value,n=64):
+    return type(value) is str and (HEX64 if n==64 else HEX40).fullmatch(value) is not None
+
+def load_selected_codec(path: Path):
+    """The *actual* #1495 owner is supplied from its isolated worktree."""
+    path=Path(path).resolve(strict=True)
+    if path.name!="lean_world_native_p1_codec.py" or not path.is_file():
+        raise NativeP1PGError("requires original selected #1495 P1 codec file")
+    spec=importlib.util.spec_from_file_location("dashi_selected_p1_codec",path)
+    if spec is None or spec.loader is None:
+        raise NativeP1PGError("unloadable source-owner codec")
+    module=importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    for symbol in ("alpha_type","exact_type_roundtrip","exact_proof_roundtrip"):
+        if not callable(getattr(module,symbol,None)):
+            raise NativeP1PGError("selected source-owner codec lacks "+symbol)
+    return module
+
+def _decode(obs,key):
+    v=obs.get(key)
+    if type(v) is not str or len(v)>12_000_000:
+        raise NativeP1PGError("missing or oversized "+key)
+    try:
+        result=base64.b64decode(v,validate=True)
+    except (ValueError,UnicodeError) as exc:
+        raise NativeP1PGError("invalid encoded "+key) from exc
+    if len(result)>SOURCE_LIMIT:
+        raise NativeP1PGError("exporter expression exceeds reviewed cap")
+    return result
+
+def inspect_observation(path:Path,codec):
+    """Reject any promotion, unverifiable source or falsified alpha relation."""
+    path=Path(path)
+    if path.is_symlink() or not path.is_file() or path.stat().st_size>25_000_000:
+        raise NativeP1PGError("unsafe native observation")
+    raw=path.read_bytes()
+    digest=sha256(raw).hexdigest()
+    if path.name!=digest+".native-type-observation.json":
+        raise NativeP1PGError("content-addressed observation filename mismatch")
+    try: o=json.loads(raw)
+    except (ValueError,UnicodeError) as exc:
+        raise NativeP1PGError("invalid observation JSON") from exc
+    if (not isinstance(o,dict) or
+        o.get("schema")!="dashi-lean-v3-type-projection-observation-v1" or
+        o.get("status")!="native-v3-type-projected-uncertified" or
+        o.get("native_dag_complete") is not False or
+        o.get("imported_dependencies_resolved") is not False or
+        o.get("kernel_certified") is not False or
+        o.get("world_admitted") is not False or
+        o.get("exported_expr_roundtrip") is not True or
+        o.get("original_source_text_reconstructed_by_codec") is not False):
+        raise NativeP1PGError("observation status/authority boundary invalid")
+    for key in ("repository","path","declaration","toolchain","handoff_key"):
+        field="original_source_path" if key=="path" else key
+        if type(o.get(field)) is not str or not o[field]:
+            raise NativeP1PGError("missing original identity: "+field)
+    if (not _hex(o.get("revision"),40) or
+        not _hex(o.get("artifact_sha256")) or
+        not _hex(o.get("handoff_key")) or
+        not _hex(o.get("p1_codec_sha256")) or
+        not _hex(o.get("original_source_sha256")) or
+        type(o.get("proof_value_present")) is not bool):
+        raise NativeP1PGError("invalid immutable original/export identity")
+    implementation=getattr(codec,"__file__",None)
+    if (type(implementation) is not str or
+        sha256(Path(implementation).read_bytes()).hexdigest()!=
+           o["p1_codec_sha256"]):
+        raise NativeP1PGError("P1 source-owner codec implementation mismatch")
+    source_closure=o.get("source_closure")
+    if (not isinstance(source_closure,list) or not source_closure or
+        any(type(s) is not list or len(s)!=2 or
+            type(s[0]) is not str or not _hex(s[1])
+            for s in source_closure)):
+        raise NativeP1PGError("invalid original source closure")
+    sources={r[0]:r[1] for r in source_closure}
+    if (len(sources)!=len(source_closure) or
+        sources.get(o["original_source_path"])!=o["original_source_sha256"]):
+        raise NativeP1PGError("selected source was not in original closure")
+    for field in ("direct_statement_constants","direct_proof_constants"):
+        names=o.get(field)
+        if (type(names) is not list or
+            any(type(n) is not str or not n for n in names) or
+            len(set(names))!=len(names)):
+            raise NativeP1PGError("invalid direct constant reference list")
+    exact=_decode(o,"exact_exported_type_b64")
+    alpha=_decode(o,"alpha_type_b64")
+    proof=_decode(o,"exact_exported_proof_b64")
+    old=_decode(o,"canonical_type_b64")
+    if exact!=old:
+        raise NativeP1PGError("original exported type re-bound")
+    if (codec.exact_type_roundtrip(exact)!=exact or
+        codec.alpha_type(exact)!=alpha or
+        sha256(exact).hexdigest()!=o.get("exact_exported_type_sha256") or
+        sha256(exact).hexdigest()!=o.get("canonical_type_sha256") or
+        sha256(alpha).hexdigest()!=o.get("alpha_type_sha256")):
+        raise NativeP1PGError("exported exact/alpha expression mismatch")
+    if o["proof_value_present"]:
+        if (not proof or codec.exact_proof_roundtrip(proof)!=proof or
+            sha256(proof).hexdigest()!=o.get("exact_exported_proof_sha256")):
+            raise NativeP1PGError("original proof expression mismatch")
+    elif proof or o.get("exact_exported_proof_sha256") is not None:
+        raise NativeP1PGError("unexpected proof expression")
+    return o,digest,exact,alpha,proof
+
+def persist_original_p1(conn,path,codec):
+    """Idempotent append-only source-bound observation, not world promotion."""
+    o,observation_sha,exact,alpha,proof=inspect_observation(path,codec)
+    raw_source=retrieve_source(conn,o["repository"],o["revision"],
+                               o["original_source_path"])
+    if sha256(raw_source).hexdigest()!=o["original_source_sha256"]:
+        raise NativeP1PGError("P1 export disagrees with original PostgreSQL bytes")
+    identity=(o["repository"],o["revision"],o["original_source_path"],
+              o["declaration"],bytes.fromhex(o["artifact_sha256"]))
+    fields=(bytes.fromhex(o["original_source_sha256"]),o["toolchain"],
+            o["handoff_key"],bytes.fromhex(o["p1_codec_sha256"]),
+            o.get("dependency_closure_id",""),
+            exact,sha256(exact).digest(),alpha,sha256(alpha).digest(),
+            proof,sha256(proof).digest() if proof else None,
+            o["direct_statement_constants"],o["direct_proof_constants"],
+            bytes.fromhex(observation_sha),"source-bound-projected-not-kernel-checked")
+    sqlfile=Path(__file__).resolve().parent/"sql"/"lean_world_native_p1_observation_v1.sql"
+    with conn.transaction():
+        with conn.cursor() as cur:
+            cur.execute(sqlfile.read_text(encoding="utf-8"))
+            cur.execute("""
+              INSERT INTO lean_world_native_p1_observation (
+                repository,revision,path,declaration,native_export_sha256,
+                original_source_sha256,toolchain,handoff_key,
+                p1_codec_sha256,dependency_closure_id,type_exact,type_exact_sha256,
+                type_alpha,type_alpha_sha256,proof_exact,proof_exact_sha256,
+                direct_statement_constants,direct_proof_constants,
+                observation_sha256)
+              VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,
+                      %s::jsonb,%s::jsonb,%s) ON CONFLICT DO NOTHING
+            """,(*identity,*fields[:11],json.dumps(fields[11]),
+                  json.dumps(fields[12]),fields[13]))
+            cur.execute("""
+              SELECT original_source_sha256,toolchain,handoff_key,
+                p1_codec_sha256,dependency_closure_id,type_exact,type_exact_sha256,
+                type_alpha,type_alpha_sha256,proof_exact,proof_exact_sha256,
+                direct_statement_constants,direct_proof_constants,
+                observation_sha256,status
+              FROM lean_world_native_p1_observation
+              WHERE repository=%s AND revision=%s AND path=%s
+                AND declaration=%s AND native_export_sha256=%s
+            """,identity)
+            found=cur.fetchone()
+            if found is None:
+                raise NativeP1PGError("native P1 observation missing after insert")
+            actual=tuple(bytes(x) if isinstance(x,memoryview) else x for x in found)
+            if actual!=fields:
+                raise NativeP1PGError("conflicting native observation history")
+    return {
+        "status":"source-bound-projected-not-kernel-checked",
+        "repository":o["repository"],"revision":o["revision"],
+        "source_path":o["original_source_path"],
+        "declaration":o["declaration"],
+        "export_sha256":o["artifact_sha256"],
+        "type_exact_sha256":sha256(exact).hexdigest(),
+        "type_alpha_sha256":sha256(alpha).hexdigest(),
+        "proof_exact_sha256":sha256(proof).hexdigest() if proof else None,
+        "p1_codec_sha256":o["p1_codec_sha256"],
+        "source_bytes_retrieved_and_verified":True,
+        "exported_expr_roundtrip":True,
+        "dependencies_resolved":False,
+        "kernel_certified":False,
+        "world_admitted":False
+    }
+
+
+def bounded_original_alpha_fibre(conn,*,toolchain,alpha_type,limit=25,after=None):
+    """Bounded exact-alpha byte matches, candidate ONLY, no implicit equivalence.
+
+    All keys belong to the EXISTING PostgreSQL source world. The full alpha
+    bytes are compared after digest-index lookup. A hash collision fails
+    closed instead of merging unlike types. SQL keyset ordering avoids a
+    global theorem-pair table or OFFSET scans.
+    """
+    if (type(toolchain) is not str or not toolchain or
+        type(alpha_type) is not bytes or not alpha_type or
+        type(limit) is not int or not 1<=limit<=256):
+        raise NativeP1PGError("invalid typed fibre retrieval budget/profile")
+    cursor=None
+    if after is not None:
+        if (type(after) is not tuple or len(after)!=5 or
+            any(type(x) is not str for x in after[:4]) or
+            type(after[4]) is not bytes or len(after[4])!=32):
+            raise NativeP1PGError("invalid source-original keyset cursor")
+        cursor=after
+    digest=sha256(alpha_type).digest()
+    with conn.cursor() as cur:
+        cur.execute("""
+            SELECT repository,revision,path,declaration,native_export_sha256,
+                   type_alpha,type_exact_sha256,proof_exact_sha256,
+                   original_source_sha256
+            FROM lean_world_native_p1_observation
+            WHERE toolchain=%s AND type_alpha_sha256=%s
+              AND (%s::boolean OR
+                   (repository,revision,path,declaration,native_export_sha256)
+                      > (%s,%s,%s,%s,%s))
+            ORDER BY repository,revision,path,declaration,native_export_sha256
+            LIMIT %s
+        """,(toolchain,digest,cursor is None,
+             cursor[0] if cursor else "",cursor[1] if cursor else "",
+             cursor[2] if cursor else "",cursor[3] if cursor else "",
+             cursor[4] if cursor else bytes(32),limit+1))
+        rows=cur.fetchall()
+    for row in rows:
+        if bytes(row[5])!=alpha_type:
+            raise NativeP1PGError("native alpha fibre SHA collision")
+    selected=rows[:limit]
+    result=[]
+    for r in selected:
+        result.append({
+            "repository":r[0],"revision":r[1],"path":r[2],
+            "declaration":r[3],"native_export_sha256":bytes(r[4]).hex(),
+            "type_exact_sha256":bytes(r[6]).hex(),
+            "proof_exact_sha256":bytes(r[7]).hex() if r[7] else None,
+            "original_source_sha256":bytes(r[8]).hex(),
+            "status":"typed-structural-candidate-only"
+        })
+    last=selected[-1] if selected else None
+    keyset=(last[0],last[1],last[2],last[3],bytes(last[4])) if last else None
+    return {
+        "status":"typed-structural-candidates-not-equivalence",
+        "matches":result,"returned":len(result),
+        "more_possible":len(rows)>limit,
+        "complete":len(rows)<=limit,
+        "next_keyset":keyset if len(rows)>limit else None,
+        "kernel_certified":False,"world_admitted":False
+    }
+
+
+def retrieve_original_native_p1(conn,*,repository,revision,path,declaration,
+                                export_sha256):
+    """Read ACTUAL exported type/proof bytes, alpha key and original source.
+
+    A theorem searcher or MDL worker consumes the SAME selected source-bound
+    payload; neither gets a materialized theorem-pair table. No proof status
+    is upgraded by readback.
+    """
+    if not _hex(revision,40) or not _hex(export_sha256):
+        raise NativeP1PGError("immutable original P1 key required")
+    with conn.cursor() as cur:
+        cur.execute("""
+            SELECT type_exact,type_exact_sha256,type_alpha,type_alpha_sha256,
+                   proof_exact,proof_exact_sha256,original_source_sha256,
+                   toolchain,direct_statement_constants,direct_proof_constants,
+                   status,p1_codec_sha256
+            FROM lean_world_native_p1_observation
+            WHERE repository=%s AND revision=%s AND path=%s
+              AND declaration=%s AND native_export_sha256=%s
+        """,(repository,revision,path,declaration,bytes.fromhex(export_sha256)))
+        row=cur.fetchone()
+    if row is None or row[10]!="source-bound-projected-not-kernel-checked":
+        raise NativeP1PGError("original expression observation not present")
+    exact=bytes(row[0])
+    alpha=bytes(row[2])
+    proof=bytes(row[4])
+    original=retrieve_source(conn,repository,revision,path)
+    if (sha256(exact).digest()!=bytes(row[1]) or
+        sha256(alpha).digest()!=bytes(row[3]) or
+        (sha256(proof).digest() if proof else None)!=(
+            bytes(row[5]) if row[5] is not None else None) or
+        sha256(original).digest()!=bytes(row[6])):
+        raise NativeP1PGError("original expression/source readback integrity failure")
+    return {
+        "status":row[10],
+        "repository":repository,"revision":revision,"path":path,
+        "declaration":declaration,
+        "source":original,"type_exact":exact,"type_alpha":alpha,
+        "proof_exact":proof,"toolchain":row[7],
+        "direct_statement_constants":row[8],
+        "direct_proof_constants":row[9],
+        "p1_codec_sha256":bytes(row[11]).hex(),
+        "kernel_certified":False,"world_admitted":False
+    }

@@ -18,13 +18,14 @@ module DASHI.Mathematics.Complexity.ConcreteTapeRawGlobalWindowCNFExact where
 -- so truth-table CNF compilation applies to every SAT assignment.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 import Data.Fin.Base as Fin
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalCellBitsExact as Canonical
+import DASHI.Mathematics.Complexity.ConcreteTapeFixedDimensionDecodeExact as Decode
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalTraceDecodeExact as Trace
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalTracePlacementExact as Global
 import DASHI.Mathematics.Complexity.ConcreteTapeRuleSelectorExact as Selector
@@ -83,10 +84,9 @@ cellInRowRename :
   Global.Slot index cols →
   Fin.Fin (Canonical.CellWidth machine) →
   Fin.Fin
-    (DASHI.Mathematics.Complexity.ConcreteTapeFixedDimensionDecodeExact.RowBitsWidth
-      machine cols)
-cellInRowRename =
-  Global.blockRename
+    (Decode.RowBitsWidth machine cols)
+cellInRowRename {machine} {cols} =
+  Global.blockRename {width = Canonical.CellWidth machine}
 
 globalCellRename :
   ∀ {machine steps cols timeIndex cellIndex} →
@@ -94,9 +94,9 @@ globalCellRename :
   Global.Slot cellIndex cols →
   Fin.Fin (Canonical.CellWidth machine) →
   Fin.Fin (Trace.GlobalTraceWidth machine steps cols)
-globalCellRename rowSlot cellSlot i =
-  Global.globalRowRename rowSlot
-    (cellInRowRename cellSlot i)
+globalCellRename {machine} {steps} {cols} rowSlot cellSlot i =
+  Global.globalRowRename {machine} {steps} {cols} rowSlot
+    (cellInRowRename {machine} {cols} cellSlot i)
 
 ------------------------------------------------------------------------
 -- Six fixed cell blocks + shared selector
@@ -108,29 +108,32 @@ sixCellGlobalRename :
   WindowStart columnIndex cols →
   Fin.Fin (Canonical.WindowWidth machine) →
   Fin.Fin (Trace.GlobalTraceWidth machine steps cols)
-sixCellGlobalRename timeSlot start =
-  Placement.finSumCases oldLeft
-    (Placement.finSumCases oldCenter
-      (Placement.finSumCases oldRight
-        (Placement.finSumCases newLeft
-          (Placement.finSumCases newCenter newRight))))
+sixCellGlobalRename {machine} {steps} {cols} timeSlot start =
+  Placement.finSumCases {m = cw} {n = cw + (cw + (cw + (cw + cw)))} {global = gw} oldLeft
+    (Placement.finSumCases {m = cw} {n = cw + (cw + (cw + cw))} {global = gw} oldCenter
+      (Placement.finSumCases {m = cw} {n = cw + (cw + cw)} {global = gw} oldRight
+        (Placement.finSumCases {m = cw} {n = cw + cw} {global = gw} newLeft
+          (Placement.finSumCases {m = cw} {n = cw} {global = gw} newCenter newRight))))
   where
+    cw = Canonical.CellWidth machine
+    gw = Trace.GlobalTraceWidth machine steps cols
+
     beforeSlot = Global.sameSlotInSucc timeSlot
     afterSlot = Global.nextSlotInSucc timeSlot
 
     oldLeft =
-      globalCellRename beforeSlot (windowLeftSlot start)
+      globalCellRename {machine} {steps} {cols} beforeSlot (windowLeftSlot start)
     oldCenter =
-      globalCellRename beforeSlot (windowCenterSlot start)
+      globalCellRename {machine} {steps} {cols} beforeSlot (windowCenterSlot start)
     oldRight =
-      globalCellRename beforeSlot (windowRightSlot start)
+      globalCellRename {machine} {steps} {cols} beforeSlot (windowRightSlot start)
 
     newLeft =
-      globalCellRename afterSlot (windowLeftSlot start)
+      globalCellRename {machine} {steps} {cols} afterSlot (windowLeftSlot start)
     newCenter =
-      globalCellRename afterSlot (windowCenterSlot start)
+      globalCellRename {machine} {steps} {cols} afterSlot (windowCenterSlot start)
     newRight =
-      globalCellRename afterSlot (windowRightSlot start)
+      globalCellRename {machine} {steps} {cols} afterSlot (windowRightSlot start)
 
 rawSelectedWindowRename :
   ∀ {machine steps cols timeIndex columnIndex} →
@@ -138,10 +141,13 @@ rawSelectedWindowRename :
   WindowStart columnIndex cols →
   Fin.Fin (Selected.TransitionLocalWidth machine) →
   Fin.Fin (Trace.GlobalTraceWidth machine steps cols)
-rawSelectedWindowRename timeSlot start =
+rawSelectedWindowRename {machine} {steps} {cols} timeSlot start =
   Placement.finSumCases
-    (Global.globalSelectorRename timeSlot)
-    (sixCellGlobalRename timeSlot start)
+    {m = Selector.RuleWidth machine}
+    {n = Canonical.WindowWidth machine}
+    {global = Trace.GlobalTraceWidth machine steps cols}
+    (Global.globalSelectorRename {machine} {steps} {cols} timeSlot)
+    (sixCellGlobalRename {machine} {steps} {cols} timeSlot start)
 
 rawSelectedWindowBits :
   ∀ {machine steps cols timeIndex columnIndex} →
@@ -149,9 +155,11 @@ rawSelectedWindowBits :
   WindowStart columnIndex cols →
   CNF.Bits (Trace.GlobalTraceWidth machine steps cols) →
   CNF.Bits (Selected.TransitionLocalWidth machine)
-rawSelectedWindowBits timeSlot start globalBits =
+rawSelectedWindowBits {machine} {steps} {cols} timeSlot start globalBits =
   Rename.pullbackBits
-    (rawSelectedWindowRename timeSlot start)
+    {local = Selected.TransitionLocalWidth machine}
+    {global = Trace.GlobalTraceWidth machine steps cols}
+    (rawSelectedWindowRename {machine} {steps} {cols} timeSlot start)
     globalBits
 
 rawSelectedWindowPlacedPredicate :
@@ -166,11 +174,11 @@ rawSelectedWindowPlacedPredicate :
   Placed.PlacedPredicate
     (Selected.TransitionLocalWidth machine)
     (Trace.GlobalTraceWidth machine steps cols)
-rawSelectedWindowPlacedPredicate
+rawSelectedWindowPlacedPredicate {machine} {steps} {cols}
     stateCoverage symbolCoverage nonempty timeSlot start =
   Placed.placed-predicate
-    (rawSelectedWindowRename timeSlot start)
-    (Selected.selectedRuleWindowPredicateWithCoverage
+    (rawSelectedWindowRename {machine} {steps} {cols} timeSlot start)
+    (Selected.selectedRuleWindowPredicateWithCoverage {machine = machine}
       stateCoverage symbolCoverage nonempty)
 
 rawSelectedWindowCNF :
@@ -183,10 +191,10 @@ rawSelectedWindowCNF :
     (timeSlot : Global.Slot timeIndex steps)
     (start : WindowStart columnIndex cols) →
   CNF.CNF (Trace.GlobalTraceWidth machine steps cols)
-rawSelectedWindowCNF
+rawSelectedWindowCNF {machine} {steps} {cols}
     stateCoverage symbolCoverage nonempty timeSlot start =
   Placed.compilePlaced
-    (rawSelectedWindowPlacedPredicate
+    (rawSelectedWindowPlacedPredicate {machine} {steps} {cols}
       stateCoverage symbolCoverage nonempty timeSlot start)
 
 rawSelectedWindowCNF_sound :
@@ -200,20 +208,20 @@ rawSelectedWindowCNF_sound :
     (start : WindowStart columnIndex cols)
     (globalBits : CNF.Bits (Trace.GlobalTraceWidth machine steps cols)) →
   CNF.evaluateCNF
-    (rawSelectedWindowCNF
+    (rawSelectedWindowCNF {machine} {steps} {cols}
       stateCoverage symbolCoverage nonempty timeSlot start)
     globalBits
   ≡ true →
-  Selected.selectedRuleWindowPredicateWithCoverage
+  Selected.selectedRuleWindowPredicateWithCoverage {machine = machine}
     stateCoverage symbolCoverage nonempty
-    (rawSelectedWindowBits timeSlot start globalBits)
+    (rawSelectedWindowBits {machine} {steps} {cols} timeSlot start globalBits)
   ≡ true
-rawSelectedWindowCNF_sound
+rawSelectedWindowCNF_sound {machine} {steps} {cols}
     stateCoverage symbolCoverage nonempty
     timeSlot start globalBits accepted =
   Rename.placedTruthTableCNFSound
-    (rawSelectedWindowRename timeSlot start)
-    (Selected.selectedRuleWindowPredicateWithCoverage
+    (rawSelectedWindowRename {machine} {steps} {cols} timeSlot start)
+    (Selected.selectedRuleWindowPredicateWithCoverage {machine = machine}
       stateCoverage symbolCoverage nonempty)
     globalBits
     accepted
@@ -228,21 +236,21 @@ rawSelectedWindowCNF_complete :
     (timeSlot : Global.Slot timeIndex steps)
     (start : WindowStart columnIndex cols)
     (globalBits : CNF.Bits (Trace.GlobalTraceWidth machine steps cols)) →
-  Selected.selectedRuleWindowPredicateWithCoverage
+  Selected.selectedRuleWindowPredicateWithCoverage {machine = machine}
     stateCoverage symbolCoverage nonempty
-    (rawSelectedWindowBits timeSlot start globalBits)
+    (rawSelectedWindowBits {machine} {steps} {cols} timeSlot start globalBits)
   ≡ true →
   CNF.evaluateCNF
-    (rawSelectedWindowCNF
+    (rawSelectedWindowCNF {machine} {steps} {cols}
       stateCoverage symbolCoverage nonempty timeSlot start)
     globalBits
   ≡ true
-rawSelectedWindowCNF_complete
+rawSelectedWindowCNF_complete {machine} {steps} {cols}
     stateCoverage symbolCoverage nonempty
     timeSlot start globalBits accepted =
   Rename.placedTruthTableCNFComplete
-    (rawSelectedWindowRename timeSlot start)
-    (Selected.selectedRuleWindowPredicateWithCoverage
+    (rawSelectedWindowRename {machine} {steps} {cols} timeSlot start)
+    (Selected.selectedRuleWindowPredicateWithCoverage {machine = machine}
       stateCoverage symbolCoverage nonempty)
     globalBits
     accepted

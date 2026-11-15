@@ -171,22 +171,22 @@ data UniquenessLeaf : Set where
   constructActualZetaRecognition : UniquenessLeaf
 
 
-data LeafStatus : Set where closed open blocked : LeafStatus
+data LeafStatus : Set where leafClosed leafOpen leafBlocked : LeafStatus
 
 leafStatus : UniquenessLeaf → LeafStatus
-leafStatus nonlinearSignatureInventory = closed
-leafStatus fixedPhaseSelectsUniqueSignature = closed
-leafStatus modelWitnessedIrreducibility = closed
-leafStatus modelScalarCommutant = closed
-leafStatus instantiateCharacterDeterminationTheorem = open
-leafStatus attachActualRestrictedIrreduciblesToSignature = blocked
-leafStatus constructActualZetaRecognition = blocked
+leafStatus nonlinearSignatureInventory = leafClosed
+leafStatus fixedPhaseSelectsUniqueSignature = leafClosed
+leafStatus modelWitnessedIrreducibility = leafClosed
+leafStatus modelScalarCommutant = leafClosed
+leafStatus instantiateCharacterDeterminationTheorem = leafOpen
+leafStatus attachActualRestrictedIrreduciblesToSignature = leafBlocked
+leafStatus constructActualZetaRecognition = leafBlocked
 
 highestImpactUniquenessLeaf : UniquenessLeaf
 highestImpactUniquenessLeaf = instantiateCharacterDeterminationTheorem
 
 highestImpactUniquenessLeafIsOpen :
-  leafStatus highestImpactUniquenessLeaf ≡ open
+  leafStatus highestImpactUniquenessLeaf ≡ leafOpen
 highestImpactUniquenessLeafIsOpen = refl
 
 ------------------------------------------------------------------------

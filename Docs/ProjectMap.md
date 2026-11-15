@@ -269,3 +269,49 @@ This map covers **18,133** Agda source modules under `DASHI/`. It is navigation 
 ```bash
 python scripts/build_project_map.py
 ```
+
+
+## Wette constructive foundations TOE convergence
+
+Agda is the golden formal source.
+
+The canonical p.145 rule 9.1.5 transcription fixes all 27 premise words.
+The generated historical scaffold produces premises 1-17 and 19-26.
+Premises 10-15 are produced once and reused by both major branches.
+
+The live premise-18 problem remains a certified historical derivation of D18.
+A matched historical 9.3.23 instance is one selected sufficient route.
+That route requires the five printed 9.3.23 premises and an exact core-leaf match.
+Two existing 9.3.9 steps then close premise 18.
+The repository does not claim that the selected 9.3.23 route is complete for D18.
+
+The live premise-27 residual is two directional implication leaves.
+Existing rule 9.3.5 combines the leaves.
+Two existing 9.3.9 steps then close premise 27.
+
+The two major traces start from the same generated scaffold.
+Certified weakening replays the second trace after the first.
+The joined target preserves the scaffold and both major conclusions.
+
+The TOE imports this canonical owner directly.
+`DASHI/EverythingTOESymmetryResolved369.agda`, `DASHI/Unifier.agda`, and
+`DASHI/Unified/Everything.agda` expose the same boundary and non-promotion
+results.
+
+Fleet spectral priority does not create Wette proof authority.
+The recorded 584 discharged fibres remain outside the target.
+The 44 contradiction gaps remain separate.
+The 58 unformalised formal gaps remain a planning target.
+No theorem in this lane identifies Wette as a named member of that set.
+
+The process frame uses O/R/C/S/L/P/G/F.
+ITIL, ISO 9000, ISO/IEC 42001, ISO/IEC 27001, ISO/IEC 27701,
+ISO/IEC 23894, ISO 9241, NIST AI RMF, Six Sigma, and C4/PlantUML are
+governance and verification lenses only.
+They do not create mathematical authority.
+
+Architecture: `Docs/architecture/WetteConstructiveFoundationsTOE.puml`.
+
+Primary source attribution remains Eduard Wette (1969),
+DOI 10.1007/978-3-642-86745-3_9.
+Meta-introspector repository attribution remains with the existing Fleet owner.

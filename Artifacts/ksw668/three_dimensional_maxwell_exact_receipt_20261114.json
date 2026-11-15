@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "scope": "exact polynomial not empirical",
+  "Maxwell_Ampere_Faraday": "PASS",
+  "divB_zero": true,
+  "charge_continuity": "PASS",
+  "local_Poynting": "PASS",
+  "integrated_energy_derivative": "L**5*t",
+  "integrated_outward_flux": "-11*L**5*t/4",
+  "integrated_current_work": "7*L**5*t/4",
+  "boundary_face_direct_integration": "PASS",
+  "local_and_integrated_residual": "0",
+  "sample_L1_t1": {
+    "rate": "1",
+    "flux": "-11/4",
+    "work": "7/4"
+  },
+  "same_mms_observation": false,
+  "local_independent_sympy_replay": "PASS",
+  "github_script_exact_head_execution": "PENDING"
+}

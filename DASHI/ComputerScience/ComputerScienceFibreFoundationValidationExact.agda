@@ -1,4 +1,11 @@
 module DASHI.ComputerScience.ComputerScienceFibreFoundationValidationExact where
+import DASHI.ComputerScience.QwenputerRv32LayerScheduleSourceExact
+import DASHI.ComputerScience.QwenputerOneHotDeltaMatrixRefinementExact
+import DASHI.ComputerScience.QwenputerRv32RecordCommitExact
+import DASHI.ComputerScience.QwenputerBinaryTernaryRamTraceSimulationExact
+import DASHI.ComputerScience.QwenputerBinary32Framed27CodecExact
+import DASHI.ComputerScience.QwenputerGatedDeltaArchitectureExact
+import DASHI.ComputerScience.QwenputerHybridStateAndFileStoreExact
 
 ------------------------------------------------------------------------
 -- SMALL VALIDATION ROOT FOR THE CLASSICAL / REPRESENTATION CS SPINE

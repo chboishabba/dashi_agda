@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+OWNER="DASHI/Governance/ArchiveGenocideGeolocationAntiTargetingExact.agda"
+PRECISION="DASHI/Governance/ArchiveGenocideGeolocationPrecisionDisclosureExact.agda"
+VALIDATION="DASHI/Governance/ArchiveGenocideGeolocationAntiTargetingValidation.agda"
+
+[ -f "$OWNER" ]
+[ -f "$PRECISION" ]
+[ -f "$VALIDATION" ]
+
+grep -q "archiveGenocideGeolocationSource" "$OWNER"
+grep -q "LocationPrecision" "$OWNER"
+grep -q "GeolocationReviewState" "$OWNER"
+grep -q "EventTimeBasis" "$OWNER"
+grep -q "GeolocationOrigin" "$OWNER"
+grep -q "GeolocationEvidence" "$OWNER"
+grep -q "coarsen" "$OWNER"
+grep -q "rivalFineClaimsAgreeCoarsely" "$OWNER"
+grep -q "rivalFineClaimsRemainDistinct" "$OWNER"
+grep -q "coarseObserverIsConsumerSufficient" "$OWNER"
+grep -q "coarseObserverIsLeastSufficient" "$OWNER"
+grep -q "coarseObserverCannotServeFineConsumer" "$OWNER"
+grep -q "EvidenceConsumer" "$OWNER"
+grep -q "operationalTargetingConsumerIsNotEvidenceConsumer" "$OWNER"
+grep -q "SafeDisclosureReceipt" "$OWNER"
+grep -q "protectedNearRealTimeExactReleaseImpossible" "$OWNER"
+grep -q "minimumSufficientObserverRequired" "$OWNER"
+grep -q "provenanceMustSurviveDisclosure" "$OWNER"
+grep -q "conflictMustRemainVisible" "$OWNER"
+grep -q "reviewDoesNotCreateExactness" "$OWNER"
+grep -q "thirdPartyCreditMustRemainDistinct" "$OWNER"
+grep -q "antiPanopticonBoundaryAnchor" "$OWNER"
+grep -q "consumerDescentBoundaryAnchor" "$OWNER"
+grep -q "archiveGenocideGeolocationMaxCutBoundary" "$OWNER"
+
+grep -q "PrecisionRefines" "$PRECISION"
+grep -q "precisionRefinesTrans" "$PRECISION"
+grep -q "DisclosureView" "$PRECISION"
+grep -q "minimumNeighbourhoodDisclosure" "$PRECISION"
+grep -q "provenanceSurvivesMinimumDisclosure" "$PRECISION"
+grep -q "originSurvivesMinimumDisclosure" "$PRECISION"
+grep -q "reviewStateSurvivesMinimumDisclosure" "$PRECISION"
+grep -q "eventTimeBasisSurvivesMinimumDisclosure" "$PRECISION"
+grep -q "reviewedExactPrecisionDiffersFromReviewedTown" "$PRECISION"
+grep -q "thirdPartyOriginRemainsDistinct" "$PRECISION"
+grep -q "canonicalPrecisionDisclosureBoundary" "$PRECISION"
+
+grep -q "rivalFineAgreementValidated" "$VALIDATION"
+grep -q "rivalFineDistinctnessValidated" "$VALIDATION"
+grep -q "fineConsumerNonDescentValidated" "$VALIDATION"
+grep -q "targetingConsumerBlockedValidated" "$VALIDATION"
+grep -q "protectedLiveExactBlockedValidated" "$VALIDATION"
+grep -q "provenanceRetentionValidated" "$VALIDATION"
+grep -q "precisionTransitivityValidated" "$VALIDATION"
+grep -q "reviewDoesNotDeterminePrecisionValidated" "$VALIDATION"
+grep -q "thirdPartyCreditSeparationValidated" "$VALIDATION"
+grep -q "minimumDisclosurePreservesProvenanceValidated" "$VALIDATION"

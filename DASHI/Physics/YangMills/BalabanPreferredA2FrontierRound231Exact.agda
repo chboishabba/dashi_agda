@@ -23,14 +23,14 @@ data PreferredA2Leaf231 : Set where
   literalCMP109MarginalPlusIrrelevantDecomposition : PreferredA2Leaf231
 
 data LeafState231 : Set where
-  closed open blocked : LeafState231
+  leafClosed leafOpen leafBlocked : LeafState231
 
 preferredA2LeafState231 : PreferredA2Leaf231 → LeafState231
-preferredA2LeafState231 literalCMP109LocalBetaDerivativeBound = open
-preferredA2LeafState231 marginalCubicSummation = blocked
-preferredA2LeafState231 literalGeneratedHistoryDerivativeIsCMP116BetaMark = open
-preferredA2LeafState231 betaMarkPartialSummation = closed
-preferredA2LeafState231 literalCMP109MarginalPlusIrrelevantDecomposition = blocked
+preferredA2LeafState231 literalCMP109LocalBetaDerivativeBound = leafOpen
+preferredA2LeafState231 marginalCubicSummation = leafBlocked
+preferredA2LeafState231 literalGeneratedHistoryDerivativeIsCMP116BetaMark = leafOpen
+preferredA2LeafState231 betaMarkPartialSummation = leafClosed
+preferredA2LeafState231 literalCMP109MarginalPlusIrrelevantDecomposition = leafBlocked
 
 preferredFirstA2Coordinate231 : PreferredA2Leaf231
 preferredFirstA2Coordinate231 = literalCMP109LocalBetaDerivativeBound

@@ -261,3 +261,73 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseGuardedCalib
 -- fill missing per-state energies, make a visual readout exact, or turn relative
 -- free energy into absolute thermodynamic free energy.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseMetadynamicsUncertaintyExact
+
+
+-- Hydrogen-assisted combustion/carbon-regeneration conditional audit (2026-11-09).
+-- Reuses existing conservation owners; claims, measured performance,
+-- inventor/assignee records and kernel validation remain separate.
+import DASHI.Chemistry.IndustrialReactiveEnergyBalanceExact
+import DASHI.Chemistry.HydrogenFuelCycleExact
+import DASHI.Chemistry.CarbonFuelRegenerationExact
+
+-- Extended max-cut: concrete projected elemental left-kernel, general
+-- natural-number break-even iff, and conditional electrolyser first law.
+import DASHI.Chemistry.HydrogenFuelCycleStoichiometricExact
+import DASHI.Chemistry.HydrogenFuelCycleBreakEvenExact
+import DASHI.Chemistry.HydrogenElectrolyserEnergyExact
+
+-- Same-run join: fixed-load engine certificate meets energy-saving criterion.
+import DASHI.Chemistry.HydrogenCombustionBreakEvenBridgeExact
+
+-- Guarded molecule-resolved electrolysis/methanation/combustion inventory and paths.
+import DASHI.Chemistry.HydrogenMolecularInventoryExact
+
+-- Denominator-safe matched-output efficiency identity, no float arithmetic.
+import DASHI.Chemistry.HydrogenEfficiencyCrossMultiplyExact
+
+-- SI/atomic owner welds: metrology is BIPM-attributed; atomic-number and
+-- standard atomic-weight ownership stays with existing DASHI source modules.
+-- These bridges do not infer isotope mass, empirical efficiency, or patent title.
+import DASHI.Chemistry.HydrogenFuelCycleSIExact
+import DASHI.Chemistry.HydrogenFuelCycleAtomicIdentityExact
+
+-- Derived finite-path mass-weight convention invariance from existing C/H/O proofs.
+import DASHI.Chemistry.HydrogenFuelCycleAtomicMassConservationExact
+
+-- Source-bounded interval / thermochemical / experiment / carbon / IP cut.
+-- These are explicitly conditional on meter, reactor, and patent-specific
+-- source receipts. K0 compiler checks are tracked separately, not asserted.
+import DASHI.Chemistry.HydrogenFuelCycleIntervalBoundsExact
+import DASHI.Chemistry.HydrogenFuelCycleMolarThermochemistryExact
+import DASHI.Chemistry.HydrogenFuelCycleDeviceEvidenceExact
+import DASHI.Chemistry.HydrogenCarbonOpenCycleExact
+import DASHI.Chemistry.HydrogenFuelCycleSourceAuthorityExact
+
+-- NIST-attributed HHV reference-state measurements and conservative interval comparison.
+import DASHI.Chemistry.HydrogenFuelCycleNISTThermochemistryExact
+
+-- Physical steelman falsification: mechanism under-identification, imported
+-- heat/chemical inputs, and H2/O2 factorial interaction identification.
+import DASHI.Chemistry.HydrogenCombustionIdentifiabilityExact
+import DASHI.Chemistry.HydrogenProcessFullBoundaryExact
+import DASHI.Chemistry.HydrogenOxygenFactorialIdentificationExact
+
+-- DC voltage-current-duration energy-integral negative control (not a meter).
+import DASHI.Chemistry.HydrogenElectricalInputIntegrationExact
+
+-- Original-author literature observations, source reconciliation and exact steelman energy ratios.
+import DASHI.Chemistry.HydrogenDieselLiteratureSteelmanExact
+
+-- Distinct user-described deployments: solar-driven power-plant carbon synthesis
+-- and externally charged battery-driven car hydrogen enrichment.
+import DASHI.Chemistry.HydrogenFuelCycleTwoApplicationsExact
+
+-- Solar PV/water/CO2-to-hydrocarbon ideal material and energy maxcut.
+import DASHI.Chemistry.HydrogenSolarCarbonGeneralStoichiometryExact
+import DASHI.Chemistry.HydrogenSolarCarbonEnergyOptimizationExact
+
+-- User-directed power-station maximum cut: fixed-output carbon makeup,
+-- direct-PV versus synthetic-fuel dispatch, attributed PV/biogas pilot.
+import DASHI.Chemistry.HydrogenSolarCarbonSteadyStateExact
+import DASHI.Chemistry.HydrogenPowerStationDispatchDecisionExact
+import DASHI.Chemistry.HydrogenSolarCarbonPublishedPilotExact

@@ -11,12 +11,13 @@ module DASHI.Moonshine.Monster3BFiniteSchrodingerDeltaExtractionExact where
 --   4. pointwise extensional closure transports membership to delta_s.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; true)
-open import Agda.Builtin.Equality using (_≡_; refl; sym; trans)
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _*_; _/_)
 open import Data.Rational.Tactic.RingSolver using (solve)
-open import Relation.Binary.PropositionalEquality using (cong)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Moonshine.C3CyclotomicAmplitudeAlgebraExact as C3
 import DASHI.Moonshine.Monster3BCyclotomicLinearAlgebraExact as L
@@ -33,10 +34,12 @@ import DASHI.Moonshine.Monster3BFiniteX6ConstructiveComparisonExact as Compare
 --    the off-point projector theorem.
 ------------------------------------------------------------------------
 
+deltaFromComparison : ∀ {s x} → Compare.X6Comparison s x → C3.Cyclotomic3
+deltaFromComparison (Compare.sameX6 refl) = C3.one
+deltaFromComparison (Compare.differentX6 difference) = C3.zero
+
 comparisonDelta : H.X6 → V.SchrodingerFunction
-comparisonDelta selected x with Compare.compareX6 selected x
-... | Compare.sameX6 refl = C3.one
-... | Compare.differentX6 difference = C3.zero
+comparisonDelta selected x = deltaFromComparison (Compare.compareX6 selected x)
 
 ------------------------------------------------------------------------
 -- 2. A nonzero subspace witness names the actual selected coefficient and
@@ -61,10 +64,10 @@ open NonzeroInvariantVector public
 ------------------------------------------------------------------------
 
 reciprocal729 : ℚ
-reciprocal729 = 1ℚ / 729
+reciprocal729 = + 1 / 729
 
-reciprocal729Exact : reciprocal729 * 729 ≡ 1ℚ
-reciprocal729Exact = solve []
+reciprocal729Exact : reciprocal729 * P729.729ℚ ≡ 1ℚ
+reciprocal729Exact = refl
 
 normalizer :
   ∀ {Member inv} →
@@ -77,7 +80,7 @@ normalizerCancels729Amplitude :
     (witness : NonzeroInvariantVector {Member} inv) →
   C3.multiply
     (normalizer witness)
-    (L.scale 729 (vector witness (selected witness)))
+    (L.scale P729.729ℚ (vector witness (selected witness)))
   ≡ C3.one
 normalizerCancels729Amplitude witness =
   let
@@ -87,14 +90,14 @@ normalizerCancels729Amplitude witness =
   in
   trans
     (L.multiplyScaleLeft reciprocal729 aInv
-      (L.scale 729 (vector witness (selected witness))))
+      (L.scale P729.729ℚ (vector witness (selected witness))))
     (trans
       (cong (L.scale reciprocal729)
         (trans
-          (L.multiplyScaleRight 729 aInv
+          (L.multiplyScaleRight P729.729ℚ aInv
             (vector witness (selected witness)))
           (trans
-            (cong (L.scale 729)
+            (cong (L.scale P729.729ℚ)
               (trans
                 (L.multiplyCommutative aInv (vector witness (selected witness)))
                 (trans
@@ -103,7 +106,7 @@ normalizerCancels729Amplitude witness =
                   (Inv.rightInverse aWitness))))
             refl)))
       (trans
-        (L.scaleScale reciprocal729 729 C3.one)
+        (L.scaleScale reciprocal729 P729.729ℚ C3.one)
         (trans
           (cong (λ r → L.scale r C3.one) reciprocal729Exact)
           refl)))
@@ -120,15 +123,11 @@ normalisedPointProjection witness =
     (normalizer witness)
     (Point.pointProjector (selected witness) (vector witness))
 
-normalisedProjectionIsDeltaPointwise :
-  ∀ {Member inv}
-    (witness : NonzeroInvariantVector {Member} inv) →
-  V.PointwiseEqual
-    (normalisedPointProjection witness)
-    (comparisonDelta (selected witness))
-normalisedProjectionIsDeltaPointwise witness x
-  with Compare.compareX6 (selected witness) x
-... | Compare.sameX6 refl =
+projectionMatchesDelta :
+  ∀ {Member inv} (witness : NonzeroInvariantVector {Member} inv) (x : H.X6)
+  (cmp : Compare.X6Comparison (selected witness) x) →
+  normalisedPointProjection witness x ≡ deltaFromComparison cmp
+projectionMatchesDelta witness .(selected witness) (Compare.sameX6 refl) =
   trans
     (cong (C3.multiply (normalizer witness))
       (trans
@@ -137,12 +136,23 @@ normalisedProjectionIsDeltaPointwise witness x
         (P729.sixTriplesAre729
           (vector witness (selected witness)))))
     (normalizerCancels729Amplitude witness)
-... | Compare.differentX6 difference =
+projectionMatchesDelta witness x (Compare.differentX6 difference) =
   trans
     (cong (C3.multiply (normalizer witness))
       (Eval.pointProjectorOffPoint
         (selected witness) x (vector witness) difference))
-    (L.zeroActsLeft (normalizer witness))
+    (trans
+      (L.multiplyCommutative (normalizer witness) C3.zero)
+      (L.zeroActsLeft (normalizer witness)))
+
+normalisedProjectionIsDeltaPointwise :
+  ∀ {Member inv}
+    (witness : NonzeroInvariantVector {Member} inv) →
+  V.PointwiseEqual
+    (normalisedPointProjection witness)
+    (comparisonDelta (selected witness))
+normalisedProjectionIsDeltaPointwise witness x =
+  projectionMatchesDelta witness x (Compare.compareX6 (selected witness) x)
 
 ------------------------------------------------------------------------
 -- 5. Membership extraction: all operations are already justified by the

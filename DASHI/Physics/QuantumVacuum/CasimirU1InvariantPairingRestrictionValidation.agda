@@ -1,0 +1,25 @@
+module DASHI.Physics.QuantumVacuum.CasimirU1InvariantPairingRestrictionValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Physics.QuantumVacuum.CasimirU1InvariantPairingRestrictionExact as P
+
+su2InvariantPairingReusedRegression :
+  P.su2InvariantPairingReused P.canonicalCasimirU1InvariantPairingBoundary ≡ true
+su2InvariantPairingReusedRegression = refl
+
+cartanPairingRestrictionPaidRegression :
+  P.cartesianU1PairingRestrictionPaid P.canonicalCasimirU1InvariantPairingBoundary ≡ true
+cartanPairingRestrictionPaidRegression = refl
+
+independentKillingDecompositionNotRequiredRegression :
+  P.independentKillingDecompositionRequired P.canonicalCasimirU1InvariantPairingBoundary ≡ false
+independentKillingDecompositionNotRequiredRegression = refl
+
+physicalChargeNormalizationStillOpenRegression :
+  P.physicalChargeCouplingNormalizationPaid P.canonicalCasimirU1InvariantPairingBoundary ≡ false
+physicalChargeNormalizationStillOpenRegression = refl
+
+firstNormalizationBlockerRegression :
+  P.firstNormalizationBlocker ≡ P.missingPhysicalChargeCouplingNormalization
+firstNormalizationBlockerRegression = refl

@@ -38,13 +38,14 @@ data PNFZeroCellRef : Set where
 data PNFOneCellRef : Set where
   pnfOneCellRef : Nat → PNFOneCellRef
   pnfResidualOneCell :
-  Core.ResidualEdgeRef → :
-  PNFOneCellRef :
+    Core.ResidualEdgeRef →
+    PNFOneCellRef
   pnfTransportOneCell :
-  Core.BraidPathRef → :
-  PNFOneCellRef :
+    Core.BraidPathRef →
+    PNFOneCellRef
   pnfGraphOneCell :
-  Graph.PNFGraphEdge → : PNFOneCellRef
+    Graph.PNFGraphEdge →
+    PNFOneCellRef
   pnfOneCellFallback : PNFOneCellRef
 
 data PNFTwoCellRef : Set where

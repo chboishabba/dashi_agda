@@ -4,6 +4,7 @@ module DASHI.Physics.YangMills.YMClayLiteralWilsonP2NativeMeasureExact where
 open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.List using (List; map)
 open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base as ℚ using (ℚ)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -14,6 +15,9 @@ import DASHI.Physics.YangMills.BalabanLiteralRationalSU2WilsonBoundedAlgebraExac
 import DASHI.Physics.YangMills.BalabanLiteralRationalSU2WilsonCylinderBoundDataExact as Bounds
 import DASHI.Physics.YangMills.BalabanLiteralWilsonNativeThermodynamicProducerExact as NativeThermo
 import DASHI.Physics.YangMills.BalabanLiteralWilsonNativePhysicalMeasureExact as NativeMeasure
+import DASHI.Physics.YangMills.BalabanClayT5MarkedPreferredExpectationRound445Exact as R445
+import DASHI.Physics.YangMills.BalabanClayT5PhysicalClusterMomentCompactnessExact as Physical
+import DASHI.Physics.YangMills.BalabanClayT5MarkedFernandezProcacciExact as FP
 
 ------------------------------------------------------------------------
 -- P2 ON THE NATIVE WILSON MEASURE CARRIER, WITH NO DISTANCE SEMANTICS.
@@ -131,3 +135,51 @@ p2SupportDistanceGeometryRequired = Agda.Builtin.Bool.false
 
 p2NativeMeasureCompilerLevel : ProofLevel
 p2NativeMeasureCompilerLevel = machineChecked
+
+------------------------------------------------------------------------
+-- DIRECT CANONICAL SOURCE -> THREE LITERAL P2 LIMITS
+--
+-- Existing R444/R445 marked moments + native thermodynamic carrier produce
+-- one preferred physical-measure record. The existing nativeWilsonP2Limits
+-- then pays ALL THREE selected finite-Wilson expectations without a second
+-- moment constructor or any support-distance/time equality.
+------------------------------------------------------------------------
+
+nativeWilsonP2FromMarkedSource :
+  ∀ {Measure : Set} {n : Nat}
+    {operationsInputs : NativeThermo.NativeWilsonOSOperationsInputs Measure n}
+    {Polymer : Set}
+    {model : FP.AbstractPolymerModel Polymer}
+    {marked :
+      FP.MarkedActivityData Polymer (Wilson.RationalWilsonObservable n) model}
+    {closure :
+      Physical.MarkedMomentClosure
+        Polymer (Wilson.RationalWilsonObservable n) model marked}
+    (thermodynamic :
+      NativeThermo.NativeWilsonThermodynamicInputs Measure n operationsInputs)
+    (preferred :
+      R445.MarkedPreferredExpectationInputs
+        (NativeThermo.nativeWilsonThermodynamicData thermodynamic)
+        model marked closure)
+    (translateLoop :
+      Wilson.RationalWilsonPath n → Nat → Wilson.RationalWilsonPath n)
+    (left right : List (Wilson.RationalWilsonPath n))
+    (time : Nat) →
+  NativeWilsonP2Limits
+    (NativeMeasure.nativeWilsonPreferredFromMarked thermodynamic preferred)
+    translateLoop left right time
+nativeWilsonP2FromMarkedSource
+    thermodynamic preferred translateLoop left right time =
+  nativeWilsonP2Limits
+    (NativeMeasure.nativeWilsonPreferredFromMarked thermodynamic preferred)
+    translateLoop left right time
+
+p2NativeIndependentMomentSelectionRequired : Bool
+p2NativeIndependentMomentSelectionRequired = false
+
+p2NativeIndependentMomentSelectionRequiredIsFalse :
+  p2NativeIndependentMomentSelectionRequired ≡ false
+p2NativeIndependentMomentSelectionRequiredIsFalse = refl
+
+p2CanonicalMarkedSourceCompilerLevel : ProofLevel
+p2CanonicalMarkedSourceCompilerLevel = conditional

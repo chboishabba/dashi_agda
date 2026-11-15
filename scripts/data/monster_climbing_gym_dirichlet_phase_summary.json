@@ -1,0 +1,62 @@
+{
+  "schema_version": "1.0.0",
+  "contract": "monster_climbing_gym_dirichlet_phase_maxcut",
+  "observable": "C(gamma)=sum_{p in Ogg15} p^(i gamma)-3 sum_{q in nonOgg5} q^(i gamma)",
+  "balanced_assignment_count": 15504,
+  "discovery_window": {
+    "zero_numbers": [1, 849],
+    "count": 849,
+    "raw": {
+      "mean_energy": 59.765824545590604,
+      "energy_lower_or_equal_count": 3459,
+      "mean_vector_magnitude": 0.31545945933872405,
+      "coherence_upper_or_equal_count": 541
+    },
+    "landau_prime_main_residual": {
+      "mean_energy": 59.66802532587303,
+      "energy_lower_or_equal_count": 2294,
+      "mean_vector_magnitude": 0.04141800053966033,
+      "coherence_upper_or_equal_count": 248
+    }
+  },
+  "held_out_window": {
+    "zero_numbers": [850, 1698],
+    "count": 849,
+    "lower_cumulative_height_is_zero_849": true,
+    "raw": {
+      "mean_energy": 60.225531083840416,
+      "energy_lower_or_equal_count": 11261,
+      "mean_vector_magnitude": 0.20313557831068135,
+      "coherence_upper_or_equal_count": 1067
+    },
+    "landau_prime_main_residual": {
+      "mean_energy": 60.18449964789069,
+      "energy_lower_or_equal_count": 10819,
+      "mean_vector_magnitude": 0.015252122012603253,
+      "coherence_upper_or_equal_count": 7367
+    },
+    "odlyzko_anchors": {
+      "zero_850": "1243.538146526",
+      "zero_1698": "2195.231687681",
+      "stated_source_accuracy": "within 3e-9 for zeros1",
+      "observed_anchor_abs_difference_lt": "5e-10"
+    }
+  },
+  "interpretation": {
+    "discovery_raw_tail_exploratory": true,
+    "discovery_residual_tail_exploratory": true,
+    "held_out_raw_replicates_discovery_tail": false,
+    "held_out_residual_replicates_discovery_tail": false,
+    "randomization_group_invariance_established": false,
+    "exhaustive_rank_claimed_as_exact_p_value": false,
+    "monster_specificity_promoted": false,
+    "moonshine_mechanism_promoted": false,
+    "riemann_hypothesis_evidence_promoted": false
+  },
+  "attribution_boundary": {
+    "landau_gonek_own_explicit_formula_prior_art": true,
+    "odlyzko_owns_independent_zero_table_reference": true,
+    "dashi_owns_centered_ogg_control_contrast_and_held_out_experiment": true,
+    "external_sources_credited_with_dashi_ogg_result": false
+  }
+}

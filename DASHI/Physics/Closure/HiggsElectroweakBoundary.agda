@@ -18,6 +18,8 @@ import DASHI.Physics.Closure.YukawaFromCarrier as Yukawa
 -- Higgs / electroweak boundary surface.
 --
 -- The boundary records the external v_Higgs, W, Z, g, and g' anchors as a
+-- Its Y convention is the canonical U1YChargeAssignmentTableReceipt Y,
+-- i.e. Y(Q_L)=1/6 and Q_EM=T3+Y (NOT T3+Y/2 without doubling Y).
 -- typed receipt shape.  It reuses the existing Higgs symmetry-breaking
 -- receipt, but keeps the numerical electroweak calibration and the CKM /
 -- Yukawa compatibility as boundary targets rather than promoted claims.
@@ -173,7 +175,7 @@ record HiggsElectroweakBoundaryReceipt : Setω where
       String
 
     emGeneratorLabelIsCanonical :
-      emGeneratorLabel ≡ "Q_EM = T3 + Y/2"
+      emGeneratorLabel ≡ "Q_EM = T3 + Y"
 
     higgsNeutralTargetRecorded :
       Bool
@@ -275,7 +277,7 @@ canonicalHiggsElectroweakBoundaryReceipt =
     ; gPrimeCouplingLabelIsCanonical =
         refl
     ; emGeneratorLabel =
-        "Q_EM = T3 + Y/2"
+        "Q_EM = T3 + Y"
     ; emGeneratorLabelIsCanonical =
         refl
     ; higgsNeutralTargetRecorded =

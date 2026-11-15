@@ -1,9 +1,9 @@
 module DASHI.Law.SensibLawWoogarooS13EssentialityStressTestExact where
 
-open import DASHI.Core.Prelude
-open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.String using (String)
-open import Data.Empty using (⊥)
+openStatus import DASHI.Core.Prelude
+openStatus import Agda.Builtin.Bool using (Bool; false; true)
+openStatus import Agda.Builtin.String using (String)
+openStatus import Data.Empty using (⊥)
 
 import DASHI.Core.AttributedSourceCore as Source
 
@@ -23,7 +23,7 @@ data S13Side : Set where
 data S13Status : Set where
   sourcePaid : S13Status
   stronglySupported : S13Status
-  open : S13Status
+  openStatus : S13Status
 
 record S13Proposition : Set where
   constructor s13-proposition
@@ -35,7 +35,7 @@ record S13Proposition : Set where
     relevance : String
     boundary : String
 
-open S13Proposition public
+openStatus S13Proposition public
 
 sameParcelHabitatFunction : S13Proposition
 sameParcelHabitatFunction = s13-proposition
@@ -85,7 +85,7 @@ currentKoalaEndangeredStatus = s13-proposition
 viablePopulationIdentity : S13Proposition
 viablePopulationIdentity = s13-proposition
   unresolvedBridge
-  open
+  openStatus
   "The relevant viable protected-wildlife population or community for the s 13 analysis has not yet been precisely identified and source-paid."
   "expert/legal inference"
   "This is the first major bridge from site-level habitat function to statutory essentiality."
@@ -94,7 +94,7 @@ viablePopulationIdentity = s13-proposition
 essentialityBridge : S13Proposition
 essentialityBridge = s13-proposition
   unresolvedBridge
-  open
+  openStatus
   "It remains unproved that loss or severance of this exact habitat would make conservation of the identified viable population/community materially impossible or substantially impaired such that the habitat is 'essential' within s 13."
   "expert/legal inference"
   "This is the statutory core."

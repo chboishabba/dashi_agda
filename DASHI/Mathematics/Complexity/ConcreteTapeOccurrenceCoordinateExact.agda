@@ -32,16 +32,16 @@ tripleAfterPrefix :
     left center right
     (Local.append prefix (left ∷ center ∷ right ∷ suffix))
 tripleAfterPrefix [] left center right suffix = record
-  { Indexed.leftAt = Indexed.here
-  ; Indexed.centerAt = Indexed.there Indexed.here
-  ; Indexed.rightAt = Indexed.there (Indexed.there Indexed.here)
+  { leftAt = Indexed.here
+  ; centerAt = Indexed.there Indexed.here
+  ; rightAt = Indexed.there (Indexed.there Indexed.here)
   }
 tripleAfterPrefix (x ∷ prefix) left center right suffix
     with tripleAfterPrefix prefix left center right suffix
 ... | rest = record
-  { Indexed.leftAt = Indexed.there (Indexed.leftAt rest)
-  ; Indexed.centerAt = Indexed.there (Indexed.centerAt rest)
-  ; Indexed.rightAt = Indexed.there (Indexed.rightAt rest)
+  { leftAt = Indexed.there (Indexed.leftAt rest)
+  ; centerAt = Indexed.there (Indexed.centerAt rest)
+  ; rightAt = Indexed.there (Indexed.rightAt rest)
   }
 
 transportTriple :
@@ -56,14 +56,14 @@ occurrenceToIndexedWindow :
   Local.WindowRewriteOccurrence machine before after window →
   Indexed.IndexedSixCellWindow machine before after
 occurrenceToIndexedWindow {window = window} occurrence = record
-  { Indexed.index = listLength (Local.prefix occurrence)
-  ; Indexed.oldLeft = Local.oldLeft window
-  ; Indexed.oldCenter = Local.oldCenter window
-  ; Indexed.oldRight = Local.oldRight window
-  ; Indexed.newLeft = Local.newLeft window
-  ; Indexed.newCenter = Local.newCenter window
-  ; Indexed.newRight = Local.newRight window
-  ; Indexed.oldTriple =
+  { index = listLength (Local.prefix occurrence)
+  ; oldLeft = Local.oldLeft window
+  ; oldCenter = Local.oldCenter window
+  ; oldRight = Local.oldRight window
+  ; newLeft = Local.newLeft window
+  ; newCenter = Local.newCenter window
+  ; newRight = Local.newRight window
+  ; oldTriple =
       transportTriple
         (sym (Local.beforeShape occurrence))
         (tripleAfterPrefix
@@ -72,7 +72,7 @@ occurrenceToIndexedWindow {window = window} occurrence = record
           (Local.oldCenter window)
           (Local.oldRight window)
           (Local.suffix occurrence))
-  ; Indexed.newTriple =
+  ; newTriple =
       transportTriple
         (sym (Local.afterShape occurrence))
         (tripleAfterPrefix

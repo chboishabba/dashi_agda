@@ -20,7 +20,7 @@ asphericSagAuthority =
 record AsphericSagAlgebra (Scalar : Set) : Set₁ where
   constructor aspheric-sag-algebra
   field
-    zero one : Scalar
+    zeroScalar oneScalar : Scalar
     add subtract multiply divide : Scalar → Scalar → Scalar
     negate sqrt : Scalar → Scalar
     square fourth sixth eighth : Scalar → Scalar
@@ -44,12 +44,12 @@ record RotationalAsphereSagReceipt
     denominatorLaw :
       baseConicDenominator
       ≡ add algebra
-          (one algebra)
+          (oneScalar algebra)
           (sqrt algebra
             (subtract algebra
-              (one algebra)
+              (oneScalar algebra)
               (multiply algebra
-                (add algebra (one algebra) conicConstant)
+                (add algebra (oneScalar algebra) conicConstant)
                 (multiply algebra
                   (square algebra curvature)
                   (square algebra radialCoordinate)))))

@@ -105,7 +105,7 @@ fixedTargetForcesFixedInternal S e =
             (trans
               (targetRamifiedPointFixed S)
               (sym (rightInverse e (ramifiedPoint S)))))))
-      (leftInverse e (backward e (ramifiedPoint S)))
+      (leftInverse e (backward e (ramifiedPoint S))))
 
 noFreeTernaryOggEquivariantLabelling :
   (S : OggObservedSystem) → EquivariantOggLabelling S → ⊥
