@@ -76,7 +76,7 @@
     "interpretation": "genuine compact 3D TT test source constructed; numerical UV/cutoff/convergence fail"
   },
   "acceptance": {
-    "source_equivalent_unit_tests": "8/8 PASS",
+    "source_equivalent_unit_tests": "8/8 moving PDE, 5/5 original t2 microlocal, 13/13 total",
     "full_3d_B4_numerical_convergence": false,
     "external_analytical_Green_operator_previously_claimed_by_external_theorem": true,
     "tensor_matter_generating_action": false,
@@ -86,6 +86,8 @@
     "exact_branch_head_execution_in_this_environment": false
   },
   "next_exact_lemmas": [
+    "ads5OriginalT2NeumannToWeylEllipticFIOComposition",
+    "ads5OriginalT2CompactTTActualEarlyNonzeroWeyl",
     "ads5MovingTTCompactSource3DConvergentFourierInverse",
     "ads5MovingTTBoundaryNearChordMicrolocalPrincipalSymbolNonzero",
     "ads5Projected5DWeylOriginalReceiverExact",
@@ -94,5 +96,27 @@
     "ads5PhysicalScaleSourceDetectorComparison",
     "braneBulkOriginalAnalyticAgdaKernel",
     "physicalGravitonObservation"
-  ]
+  ],
+  "original_t2_microlocal_preflight": {
+    "source_t1": 1,
+    "actual_emission_t": 1.000141436357416,
+    "source_intermediate_T_after_t1": 0.0002,
+    "exact_receiver_t2": 2,
+    "original_receiver_comoving_r": 0.697797781099381,
+    "compact_source_ball_radius": 0.001,
+    "actual_emitter_x": 0.00014471324980684235,
+    "photon_dark_margin": 0.003650600539435688,
+    "ray_slope": -0.5824218543413765,
+    "brane_v_emit": -0.707056777651097,
+    "brane_v_receiver": -0.4472135954999579,
+    "normal_principal_at_emission": 0.17622301193802767,
+    "normal_principal_at_receiver": -0.07558371447219975,
+    "TT_local_polarization_yy": 1,
+    "intrinsic4D_Weyl_principal": 0.0840263224215478,
+    "direct_bulk_chord_non_glancing": true,
+    "actual_compact_smooth_source_can_include_emitting_event": true,
+    "no_null_AdS_screen_conjugate_points": true,
+    "Neumann_to_Dirichlet_FIO_composition_actually_proved": false,
+    "nonzero_original_t2_Weyl_retarded_proved": false
+  }
 }
