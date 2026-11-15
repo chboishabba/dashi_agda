@@ -53,3 +53,18 @@ kswFrozenBoundaryWeightedResidual :
       (boundPower control depth)
       (norm control source))
 kswFrozenBoundaryWeightedResidual = finiteNeumannResidualControl
+
+-- Specialize DASHI's actual finite telescope at depth TWO.
+-- When the causal two-patch DN residual is strictly lower triangular,
+-- R²=0 identically by noncommutative block multiplication.
+-- The present theorem transports that fact through existing Agda
+-- Balaban finite-Neumann algebra; FIO symbol identification is separate.
+kswTwoCausalPatchExactIfResidualSquareZero :
+  ∀ {a} {Carrier : Set a}
+  (bundle : AdditiveParametrixData Carrier) →
+  ∀ source →
+  residualPower bundle 2 source ≡ additiveZero bundle →
+  operator bundle (finiteNeumannApproximation bundle 2 source)
+    ≡ source
+kswTwoCausalPatchExactIfResidualSquareZero bundle source =
+  finiteRightNeumannExactAtDepth bundle 2 source
