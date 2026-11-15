@@ -56,10 +56,14 @@ def index_corpus(*, jsonl: Path, db: sqlite3.Connection,
     h = sha256()
     count = 0
     with jsonl.open("rb") as stream:
-        for line in stream:
-            h.update(line)
+        while True:
+            # read a bounded line; never materialise a multi-GiB malformed row
+            line = stream.readline(max_line_bytes + 1)
+            if not line:
+                break
             if not 0 < len(line) <= max_line_bytes:
                 raise ValueError("empty/oversized corpus JSONL row")
+            h.update(line)
             row = json.loads(line.decode("utf-8"), object_pairs_hook=_pairs)
             if type(row) is not dict:
                 raise ValueError("corpus JSONL row must be an object")
