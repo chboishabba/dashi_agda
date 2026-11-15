@@ -81,3 +81,22 @@ originalThreeStageSSPRK3ConstraintCombination :
   + ((two * third) * ((three * quarter) * C0 + quarter * C0))
   ≡ C0
 originalThreeStageSSPRK3ConstraintCombination C0 = solve []
+
+-- The actual second-order diagonal SBP SAT has H_wall=dy/2.
+-- SAT_M=(1-v)/H_wall * (M_target-M_wall), so
+--      dy * Cdot_wall=(1+v)P_wall-(1-v)M_wall-2G.
+-- At the weak outgoing remote boundary dy*Cdot_far=(1+v)P_far.
+-- The exact rational original t=4/3 initial constrained state
+-- U=y/2, P=1, M=0, G=0 has wall and far constraint rate
+-- (2/5)/dy even though all initial C nodes are zero.
+originalWallConstraintSATResidual :
+  (v P M G : ℚ) →
+  ((1ℚ + v) * P + - ((1ℚ + - v) * M) + - (two * G))
+    ≡ ((1ℚ + v) * P)
+       + - ((1ℚ + - v) * M + two * G)
+originalWallConstraintSATResidual v P M G = solve []
+
+originalT43WeakWallConstraintNoGo :
+  ((1ℚ + - ((+ 3) / 5)) * 1ℚ)
+  ≡ (+ 2) / 5
+originalT43WeakWallConstraintNoGo = solve []
