@@ -15,7 +15,7 @@ module DASHI.Cognition.PNF.X369OriginalDirectedTriadC3PolynomialCandidate where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Integer using (ℤ; _+_; _*_; _-_)
+open import Data.Integer using (ℤ; +_; _+_; _*_; _-_)
 open import Data.Integer.Tactic.RingSolver using (solve-∀)
 open import Data.Product using (_×_; _,_)
 
@@ -31,13 +31,13 @@ qTriad a b c =
 originalTriadRotationSquaredDisplacementEqualsTwoQ :
   ∀ (a b c : ℤ) →
   square (b - a) + square (c - b) + square (a - c)
-  ≡ (2 * qTriad a b c)
+  ≡ ((+ 2) * qTriad a b c)
 originalTriadRotationSquaredDisplacementEqualsTwoQ = solve-∀
 
 originalTriadInverseRotationSquaredDisplacementEqualsTwoQ :
   ∀ (a b c : ℤ) →
   square (c - a) + square (a - b) + square (b - c)
-  ≡ (2 * qTriad a b c)
+  ≡ ((+ 2) * qTriad a b c)
 originalTriadInverseRotationSquaredDisplacementEqualsTwoQ = solve-∀
 
 -- Original directed triple T(x,h)=(self,cyclic,anticyclic).
@@ -74,13 +74,13 @@ originalMinusDirectedDisplacementSquared a b c A B C =
 originalDirectedTriadC3DisplacementSquaredFactors :
   ∀ (a b c A B C : ℤ) →
   originalPlusDirectedDisplacementSquared a b c A B C
-  ≡ 2 * qTriad a b c * qTriad A B C
+  ≡ (+ 2) * qTriad a b c * qTriad A B C
 originalDirectedTriadC3DisplacementSquaredFactors = solve-∀
 
 originalDirectedInverseC3DisplacementSquaredFactors :
   ∀ (a b c A B C : ℤ) →
   originalMinusDirectedDisplacementSquared a b c A B C
-  ≡ 2 * qTriad a b c * qTriad A B C
+  ≡ (+ 2) * qTriad a b c * qTriad A B C
 originalDirectedInverseC3DisplacementSquaredFactors = solve-∀
 
 -- The exact first new source-level group-agnostic equality needed
