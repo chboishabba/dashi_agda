@@ -4389,6 +4389,333 @@
               "expected_false": null
             }
           ]
+        },
+        "DASHI/Physics/Closure/NSTriadKNR650PhysicalReserveFeasibilityRound825Exact.agda": {
+          "owner": "DASHI/Physics/Closure/NSTriadKNR650PhysicalReserveFeasibilityRound825Exact.agda",
+          "blob": "abedafed959ced97649d9a90ed7943d68d9c03bd",
+          "terms": [
+            {
+              "name": "round825SignedReserveProved",
+              "kind": "EXPLICIT_OPEN_FLAG",
+              "mention": 333,
+              "declaration": 333,
+              "expected_false": true
+            },
+            {
+              "name": "round825W1Proved",
+              "kind": "EXPLICIT_OPEN_FLAG",
+              "mention": 336,
+              "declaration": 336,
+              "expected_false": true
+            },
+            {
+              "name": "round825ContinuumContinuationProved",
+              "kind": "EXPLICIT_OPEN_FLAG",
+              "mention": 339,
+              "declaration": 339,
+              "expected_false": true
+            },
+            {
+              "name": "round825StrictPhysicalCounterexampleConstructed",
+              "kind": "EXPLICIT_OPEN_FLAG",
+              "mention": 330,
+              "declaration": 330,
+              "expected_false": true
+            },
+            {
+              "name": "decideActualReserve",
+              "kind": "SOURCE_TERM_UNCHECKED",
+              "mention": 298,
+              "declaration": 298,
+              "expected_false": null
+            },
+            {
+              "name": "physical reserve grading R824/R823",
+              "kind": "SOURCE_TERM_UNCHECKED",
+              "mention": 0,
+              "declaration": 0,
+              "expected_false": null
+            }
+          ]
+        },
+        "DASHI/Physics/Closure/NSTriadKNR650Rational345OptimalEnvelopeRound856Exact.agda": {
+          "owner": "DASHI/Physics/Closure/NSTriadKNR650Rational345OptimalEnvelopeRound856Exact.agda",
+          "blob": "fac7cb2b48d84c81af54cd2cfee0e00c3a4a8caf",
+          "terms": [
+            {
+              "name": "pointwiseOptimalIntegerSafe856",
+              "kind": "SOURCE_CANDIDATE_UNCHECKED",
+              "mention": 57,
+              "declaration": 57,
+              "expected_false": null
+            },
+            {
+              "name": "integratedOptimalIntegerSafe856",
+              "kind": "SOURCE_CANDIDATE_UNCHECKED",
+              "mention": 67,
+              "declaration": 67,
+              "expected_false": null
+            },
+            {
+              "name": "physicalR853RateAlongActualCurveClosed856",
+              "kind": "SOURCE_CANDIDATE_UNCHECKED",
+              "mention": 77,
+              "declaration": 77,
+              "expected_false": null
+            }
+          ]
+        },
+        "DASHI/Physics/Closure/NSTriadKNR650Rational345RealODEMaxCutRound833Exact.agda": {
+          "owner": "DASHI/Physics/Closure/NSTriadKNR650Rational345RealODEMaxCutRound833Exact.agda",
+          "blob": "e66c6862351979bf4c1a3818c3b9165377ad3c88",
+          "terms": [
+            {
+              "name": "RealODELeaf.physicalRHSToFiniteRealQuadraticField",
+              "kind": "OPEN_ENUM_CONSTRUCTOR",
+              "mention": 34,
+              "declaration": 34,
+              "expected_false": null
+            },
+            {
+              "name": "RealODELeaf.selectedR828BoundsAndRateTransport",
+              "kind": "OPEN_ENUM_CONSTRUCTOR",
+              "mention": 35,
+              "declaration": 35,
+              "expected_false": null
+            },
+            {
+              "name": "physicalRHSToFiniteRealQuadraticField",
+              "kind": "OPEN_ENUM_CONSTRUCTOR",
+              "mention": 34,
+              "declaration": 34,
+              "expected_false": null
+            },
+            {
+              "name": "selectedR828BoundsAndRateTransport",
+              "kind": "OPEN_ENUM_CONSTRUCTOR",
+              "mention": 35,
+              "declaration": 35,
+              "expected_false": null
+            }
+          ]
+        },
+        "DASHI/Physics/Closure/NSTriadKNR650Rational345RelaxedEnvelopeRound855Exact.agda": {
+          "owner": "DASHI/Physics/Closure/NSTriadKNR650Rational345RelaxedEnvelopeRound855Exact.agda",
+          "blob": "d0a431dd56cdc0a7149a88015e14c34485dc71cd",
+          "terms": [
+            {
+              "name": "originalR853RateDerivativeBoundAtMostWeakBudget855",
+              "kind": "TARGET_NAME_ONLY",
+              "mention": 63,
+              "declaration": 0,
+              "expected_false": null
+            }
+          ]
+        },
+        "DASHI/Physics/Closure/NSTriadKNR650SharedWeightedQuarticCutRound735Exact.agda": {
+          "owner": "DASHI/Physics/Closure/NSTriadKNR650SharedWeightedQuarticCutRound735Exact.agda",
+          "blob": "329ffbf1d8efb74432d3822b6412a02496732a07",
+          "terms": [
+            {
+              "name": "unrestricted universal R734/R735 W2",
+              "kind": "REFUTED_UNIVERSAL_AUX",
+              "mention": 0,
+              "declaration": 0,
+              "expected_false": null
+            },
+            {
+              "name": "R735 W1",
+              "kind": "CONDITIONAL_COMPILER",
+              "mention": 0,
+              "declaration": 0,
+              "expected_false": null
+            },
+            {
+              "name": "R736 W2",
+              "kind": "CONDITIONAL_COMPILER",
+              "mention": 0,
+              "declaration": 0,
+              "expected_false": null
+            }
+          ]
+        },
+        "DASHI/Physics/Closure/NSWholeSpaceActualPhysicalCompensatedFieldExact.agda": {
+          "owner": "DASHI/Physics/Closure/NSWholeSpaceActualPhysicalCompensatedFieldExact.agda",
+          "blob": "9c03db7fedcc45aedaecdfab507463713b8130f8",
+          "terms": [
+            {
+              "name": "ActualPhysicalCompensatedFieldInputs.domination",
+              "kind": "CONDITIONAL_RECORD",
+              "mention": 25,
+              "declaration": 25,
+              "expected_false": null
+            },
+            {
+              "name": "ActualPhysicalCompensatedFieldInputs.pointwiseCompensation",
+              "kind": "CONDITIONAL_RECORD",
+              "mention": 34,
+              "declaration": 34,
+              "expected_false": null
+            },
+            {
+              "name": "ActualPhysicalCompensatedFieldInputs.globalMajorantIsPhysicalProduct",
+              "kind": "CONDITIONAL_RECORD",
+              "mention": 61,
+              "declaration": 61,
+              "expected_false": null
+            }
+          ]
+        },
+        "DASHI/Physics/Closure/NSWholeSpacePhysicalMajorantDominationProducerExact.agda": {
+          "owner": "DASHI/Physics/Closure/NSWholeSpacePhysicalMajorantDominationProducerExact.agda",
+          "blob": "fa16638abd5b0351db7919ee2c46897c053586e2",
+          "terms": [
+            {
+              "name": "PhysicalEnvelopeInputs.lowPhysicalMajorant",
+              "kind": "CONDITIONAL_RECORD",
+              "mention": 25,
+              "declaration": 25,
+              "expected_false": null
+            },
+            {
+              "name": "PhysicalEnvelopeInputs.highPhysicalMajorant",
+              "kind": "CONDITIONAL_RECORD",
+              "mention": 27,
+              "declaration": 27,
+              "expected_false": null
+            },
+            {
+              "name": "PhysicalEnvelopeInputs.lowDominated",
+              "kind": "CONDITIONAL_RECORD",
+              "mention": 39,
+              "declaration": 39,
+              "expected_false": null
+            },
+            {
+              "name": "PhysicalEnvelopeInputs.highDominated",
+              "kind": "CONDITIONAL_RECORD",
+              "mention": 42,
+              "declaration": 42,
+              "expected_false": null
+            },
+            {
+              "name": "PhysicalEnvelopeInputs.lowConvolutionEnvelopeIntegrable",
+              "kind": "CONDITIONAL_RECORD",
+              "mention": 45,
+              "declaration": 45,
+              "expected_false": null
+            },
+            {
+              "name": "PhysicalEnvelopeInputs.highWeightedConvolutionEnvelopeIntegrable",
+              "kind": "CONDITIONAL_RECORD",
+              "mention": 48,
+              "declaration": 48,
+              "expected_false": null
+            },
+            {
+              "name": "lowConvolutionEnvelopeIntegrable",
+              "kind": "CONDITIONAL_RECORD",
+              "mention": 45,
+              "declaration": 45,
+              "expected_false": null
+            },
+            {
+              "name": "highWeightedConvolutionEnvelopeIntegrable",
+              "kind": "CONDITIONAL_RECORD",
+              "mention": 48,
+              "declaration": 48,
+              "expected_false": null
+            },
+            {
+              "name": "lowEnvelopeAnalyticProducerInhabitedHere",
+              "kind": "EXPLICIT_OPEN_FLAG",
+              "mention": 81,
+              "declaration": 81,
+              "expected_false": true
+            },
+            {
+              "name": "highEnvelopeAnalyticProducerInhabitedHere",
+              "kind": "EXPLICIT_OPEN_FLAG",
+              "mention": 84,
+              "declaration": 84,
+              "expected_false": true
+            },
+            {
+              "name": "physicalMajorantDomination",
+              "kind": "SOURCE_TERM_UNCHECKED",
+              "mention": 59,
+              "declaration": 59,
+              "expected_false": null
+            }
+          ]
+        },
+        "DASHI/Physics/Closure/NSWholeSpaceR3DirectionalSecondMomentQGainExact.agda": {
+          "owner": "DASHI/Physics/Closure/NSWholeSpaceR3DirectionalSecondMomentQGainExact.agda",
+          "blob": "f91d76b7441e5828461b2bb9972401a42734ed2b",
+          "terms": [
+            {
+              "name": "DirectionalSecondMomentSlot.secondMomentIsDirectionalSquare",
+              "kind": "CONDITIONAL_RECORD",
+              "mention": 174,
+              "declaration": 174,
+              "expected_false": null
+            },
+            {
+              "name": "lagrangeIdentity",
+              "kind": "SOURCE_TERM_UNCHECKED",
+              "mention": 92,
+              "declaration": 92,
+              "expected_false": null
+            },
+            {
+              "name": "directionalSquareBelowNormProduct",
+              "kind": "SOURCE_TERM_UNCHECKED",
+              "mention": 145,
+              "declaration": 145,
+              "expected_false": null
+            },
+            {
+              "name": "directionalSlotCarriesOutputQ",
+              "kind": "SOURCE_TERM_UNCHECKED",
+              "mention": 181,
+              "declaration": 181,
+              "expected_false": null
+            },
+            {
+              "name": "resolventShiftIdentifiedWithOutputRadius",
+              "kind": "EXPLICIT_OPEN_FLAG",
+              "mention": 199,
+              "declaration": 199,
+              "expected_false": true
+            },
+            {
+              "name": "physicalDerivativeSlotIdentificationClosedHere",
+              "kind": "EXPLICIT_OPEN_FLAG",
+              "mention": 202,
+              "declaration": 202,
+              "expected_false": true
+            },
+            {
+              "name": "continuousFTCToDirectionalSlotClosedHere",
+              "kind": "EXPLICIT_OPEN_FLAG",
+              "mention": 205,
+              "declaration": 205,
+              "expected_false": true
+            }
+          ]
+        },
+        "DASHI/Physics/Closure/NSWholeSpaceR3PhysicalKernelProjectedQWeldExact.agda": {
+          "owner": "DASHI/Physics/Closure/NSWholeSpaceR3PhysicalKernelProjectedQWeldExact.agda",
+          "blob": "79c78d4d55f9145e0187977e964939081348c0cf",
+          "terms": [
+            {
+              "name": "PhysicalKernelProjectedGramWeld.gramScalarIsProjectedPairGram",
+              "kind": "CONDITIONAL_RECORD",
+              "mention": 48,
+              "declaration": 48,
+              "expected_false": null
+            }
+          ]
         }
       },
       "method": "exact PR-head GitHub fetch_file proof bodies; source-structural not kernel; subsequent audit commits do not modify these original proof owners"
