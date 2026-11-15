@@ -1,28 +1,52 @@
 #!/usr/bin/env bash
-# KSW F8 original AdS5 TT model: LOCAL evidence only; never CI promotion.
+# KSW original a=t AdS5: 255 DISTINCT source-equivalent F8 regression cases.
+# Full 3D numerical acceptance is separate; failures remain explicit.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 mode="--smoke"
 if [ "$#" -gt 0 ]; then mode="$1"; fi
-python3 scripts/test_ksw668_f8_moving_maxcut.py
+export PYTHONPATH="scripts:."
+python3 -m unittest discover -s scripts -p 'test_ksw668_f8_*.py' -v
 if [ "$mode" = "--smoke" ]; then
-  echo "F8 smoke accepted; three-grid and physical receiver NOT accepted."
+  echo "F8 smoke PASS only: 255 distinct local source-level tests."
+  echo "3D tensor/Weyl convergence, Agda, matter action and observation NOT ACCEPTED."
   exit 0
 fi
-if [ "$mode" != "--full" ]; then
-  echo "Usage: $0 --smoke | --full" >&2
-  exit 2
+if [ "$mode" = "--normal-compare" ]; then
+  python3 scripts/ksw668_f8_normal_operator_comparison.py --reproduce
+  exit $?
 fi
-python3 scripts/ksw668_f8_refinement.py
-if python3 - <<'PY'
+if [ "$mode" = "--multipole-full" ]; then
+  python3 scripts/ksw668_f8_tt_multipole_refinement.py
+  exit $?
+fi
+if [ "$mode" = "--legacy-full" ]; then
+  python3 scripts/ksw668_f8_refinement.py
+  python3 - <<'PY'
 import json
-p='scripts/ksw668_f8_refinement_receipt.json'
-with open(p,encoding='utf8') as f: d=json.load(f)
-assert d["full_B4_converged"], "3D compact TT / electric Weyl mesh-convergence gate OPEN"
+with open('scripts/ksw668_f8_refinement_receipt.json',encoding='utf8') as f:
+    result=json.load(f)
+assert result['full_B4_converged'], 'legacy 3D Fourier/Weyl convergence OPEN'
 PY
-then
-  echo "F8 numerical provisional gate pass; Agda and physical gates remain separate."
-else
-  echo "F8 original compact TT receiver is NOT converged: exit 42." >&2
-  exit 42
+  exit $?
 fi
+if [ "$mode" = "--full" ]; then
+  status=0
+  if ! python3 scripts/ksw668_f8_refinement.py; then status=42; fi
+  if ! python3 - <<'PY'
+import json
+with open('scripts/ksw668_f8_refinement_receipt.json',encoding='utf8') as f:
+    result=json.load(f)
+assert result['full_B4_converged'], 'legacy Fourier receiver FAILED'
+PY
+  then status=42; fi
+  if ! python3 scripts/ksw668_f8_tt_multipole_refinement.py; then status=42; fi
+  if [ "$status" -ne 0 ]; then
+    echo "F8 B4 convergence remains OPEN; physical and formal gates not promoted." >&2
+    exit 42
+  fi
+  echo "Provisional numeric thresholds met; analytic/Agda/physical gates separate."
+  exit 0
+fi
+echo "Usage: $0 --smoke | --normal-compare | --legacy-full | --multipole-full | --full" >&2
+exit 2
