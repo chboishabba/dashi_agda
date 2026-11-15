@@ -52,3 +52,12 @@ import DASHI.Physics.Gravity.KSW668AdS5TTFiniteVolumeFirstCellRationalExact
 -- Original moving a=t Neumann TT forced characteristic boundary-flux
 -- exact rational square; full continuum/SSPRK3/receiver Weyl gate OPEN.
 import DASHI.Physics.Gravity.KSW668AdS5MovingNeumannFluxRationalExact
+
+-- F8 VII: exact finite-grid first-order normal SBP forward/backward
+-- rational telescopes. The original second-order normal boundary closure
+-- has an exact integer energy-injection counterexample (277/2);
+-- SBP2 SAT is an alternative weak-Israel discretization.
+-- Continuous / fully discrete normal-only source-energy contracts exist
+-- independently; coupled (T,y,r), H^(4+epsilon) Weyl trace, FIO,
+-- pinned Agda kernel and physical observation all remain OPEN.
+import DASHI.Physics.Gravity.KSW668AdS5MovingNormalFiniteSBPTelescopeExact
