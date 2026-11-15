@@ -24,10 +24,12 @@ import DASHI.Moonshine.Monster3BFiniteSchrodingerPointProjectorExact as Point
 import DASHI.Moonshine.Monster3BFiniteX6ConstructiveComparisonExact as Compare
 import DASHI.Moonshine.Monster3BFiniteSchrodingerDeltaExtractionExact as Extract
 
+boolToC3 : Bool → C3.Amplitude
+boolToC3 true = C3.one
+boolToC3 false = C3.zero
+
 booleanDelta : H.X6 → V.SchrodingerFunction
-booleanDelta selected x with V.x6Equal selected x
-... | true = C3.one
-... | false = C3.zero
+booleanDelta selected x = boolToC3 (V.x6Equal selected x)
 
 ------------------------------------------------------------------------
 -- Coordinate-difference witnesses force the complete Boolean equality false.
@@ -153,30 +155,10 @@ unitTranslationCarriesBooleanDeltaPointwise :
     (V.translationAction axis (booleanDelta selected))
     (booleanDelta (H.translate axis selected))
 unitTranslationCarriesBooleanDeltaPointwise axis selected x =
-  let
-    inverseX = H.translateInverse axis x
-    cov = x6EqualTranslationCovariant axis selected inverseX
-    restore = Perm.translateAfterTranslateInverse axis x
-  in
-  -- Both functions branch only on the displayed Boolean equality.  Rewrite
-  -- the target equality back to the source/inverse equality.
   trans
-    refl
-    (helper axis selected x cov restore)
-  where
-  helper :
-    (axis : H.Axis6) (selected x : H.X6) →
-    V.x6Equal (H.translate axis selected)
-      (H.translate axis (H.translateInverse axis x))
-      ≡ V.x6Equal selected (H.translateInverse axis x) →
-    H.translate axis (H.translateInverse axis x) ≡ x →
-    booleanDelta selected (H.translateInverse axis x)
-      ≡ booleanDelta (H.translate axis selected) x
-  helper axis selected x cov restore
-    rewrite sym restore | cov
-    with V.x6Equal selected (H.translateInverse axis x)
-  ... | true = refl
-  ... | false = refl
+    (cong boolToC3 (sym (x6EqualTranslationCovariant axis selected (H.translateInverse axis x))))
+    (cong (λ y → boolToC3 (V.x6Equal (H.translate axis selected) y))
+          (Perm.translateAfterTranslateInverse axis x))
 
 record BooleanDeltaBoundary : Set where
   constructor boolean-delta-boundary
