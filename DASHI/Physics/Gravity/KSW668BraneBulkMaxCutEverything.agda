@@ -22,3 +22,7 @@ import DASHI.Physics.Gravity.KSW668CaldwellLangloisHorizonSourceRationalExact
 import DASHI.Physics.Gravity.KSW668BraneLevinStringTSFVPromotionBoundaryExact
 import DASHI.Physics.Gravity.KSW668AdS5IsraelOriginalRationalSliceExact
 import DASHI.Physics.Gravity.KSW668BulkScalarReceiverRationalSliceExact
+
+-- New independent rational-only source witnesses; no Agda kernel receipt.
+import DASHI.Physics.Gravity.KSW668CylinderZ2WindingIsraelRationalExact
+import DASHI.Physics.Gravity.KSW668AdS5LinearIsraelTTRationalSliceExact
