@@ -6,7 +6,7 @@
   "source_equivalent_local_replay": {
     "python": "3.x",
     "sympy": "1.14.0",
-    "tests": "9/9 PASS",
+    "tests": "10/10 PASS",
     "exact_new_GitHub_head_scripts_executed": false,
     "agda_kernel_executed": false
   },
@@ -29,10 +29,16 @@
       "DEC_margin": "rho+p>=1/(6 sqrt 5) on t in [1,2]"
     },
     "B3": {
-      "status": "exact fixed-domain reduction, causality/timelike coefficient",
+      "status": "exact moving PDE/normal plus coercive tangential energy and homogeneous finite-interval uniqueness; inhom retarded Green OPEN",
       "uniform_coefficient": "1-v^2>=1/2",
       "physical_moving_Green": false,
-      "flux_sign_definite": false
+      "flux_sign_definite": false,
+      "homogeneous_uniqueness": true,
+      "tangential_energy": "1/2 int z^-3 [(HT+v Hz)^2+(1-v²)Hz²+|grad_x H|²]",
+      "boundary_flux": "-b^-3*(Hz+v HT)*(HT+v Hz)",
+      "conservative_Gronwall_constant": "(1+3 sqrt(2))/(1-1/sqrt(2))",
+      "inhomogeneous_trace_bound_proved": false,
+      "retarded_Green_existence_proved": false
     },
     "B4": {
       "status": "open",
