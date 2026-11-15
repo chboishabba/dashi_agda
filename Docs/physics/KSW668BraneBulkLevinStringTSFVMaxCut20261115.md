@@ -1189,3 +1189,92 @@ Mathematical owner: \`scripts/ksw668_f8_direct_wkb_transport.py\`; its six new l
 | D1 | \`physicalGravitonObservation\` | experimental discriminator clearly defined | **OPEN** original calibration/physical evidence; cannot be satisfied by computations alone |
 
 **Repository owner:** #1512 is the only new active continuation for these five post-#1508 and subsequent F8 additions; #1508 and #1504 are already integrated, and their existing source owners should not be duplicated. Run smoke \`bash scripts/check_ksw668_f8_maxcut.sh --smoke\` for 29 source-level tests and the 3D full failclosed \`bash scripts/check_ksw668_f8_maxcut.sh --full\` (currently exit42). Treat the exact source-equivalent scripts, GitHub committed head, executable local receipt, independently kernel-checked continuum and an empirical detector result as **four distinct** acceptance classes.
+
+
+---
+
+## 2026-11-15 F8 maximum-cut IV — repo Neumann reuse, actual moving-wall stress, causal 2-patch DN→ND theorem application
+
+**Canonical detailed proof:** [KSW668F8OriginalT2NeumannFIOTheoremApplication20261115.md](KSW668F8OriginalT2NeumannFIOTheoremApplication20261115.md). **Existing repo proof owners reused, not reinvented:** \`BalabanFiniteNeumannParametrix.agda\`, \`BalabanWeightedNeumannRemainder.agda\`, \`BalabanGeometricNeumannClosure.agda\`; original \`KSW668AdS5LinearIsraelTTRationalSliceExact.agda\`; original \`KSW668BraneBulkMaxCutEverything.agda\`. All updates remain in the single active #1512 PR, with #1508 already merged.
+
+### Three exact distinct Neumann results, now checked
+
+**(N1) Actual physical moving boundary.** At \(z=b(T)=1/t\), \(v=-1/\sqrt{1+t^2}\), the original TT Israel source \(\mathcal B H=G\) gives
+\[
+q_\pm=H_T\pm H_z,\qquad
+(1+v)q_+ +(v-1)q_-=2G,\quad
+\boxed{q_-=\beta(t)q_+-\frac{2}{1-v}G},
+\quad
+\beta=\frac{1+v}{1-v}=
+\frac{\sqrt{1+t^2}-1}{\sqrt{1+t^2}+1}.
+\]
+All original \(1\le t\le2\) satisfy \(0<\beta(t)\le(3-\sqrt5)/2=0.38196601125\), with \(\beta(1)=(\sqrt2-1)^2\). For homogeneous stress the characteristic **flux ratio** is \(\beta\); it is not a claim that an arbitrary sequence of reflected bulk rays occurs. At the existing physical exact Israel rational slice \(t=4/3\): \(v=-3/5,\beta=1/4\), and for \(q_+=1/8,G=1/12\) one gets \(q_-=-7/96\). The new \`DASHI/Physics/Gravity/KSW668AdS5MovingNeumannCharacteristicRationalExact.agda\` explicitly proves the rational boundary and sourced reflection identities using the existing ring solver; source written but **Agda kernel acceptance pending**. Python \`ksw668_f8_moving_neumann_characteristic.py\` independently tests the exact full interval.
+
+**(N2) Original frozen stationary-Bessel boundary parametrix — high-s positive / low-s NO-GO.** For frozen \(b=1/t,v=b'(T)\), real \(s>0\), spatial \(k\) and \(q=\sqrt{s^2+k^2}\), stationary Neumann impedance \(Z_b=-K_2(qb)/(qK_1(qb))\) gives physical oblique residual \(R=-vsZ_b\). From \(K_2=K_0+2K_1/(qb)\) and \(K_0<K_1\), uniformly on the ORIGINAL \(1\le t\le2\),
+\[
+|R|<|v|\frac{s}{q}(1+2/(qb))\le(1+4/s)/\sqrt2.
+\]
+For **all real \(s\ge16\)** the strict contraction factor can be taken as \(\rho=5/(4\sqrt2)=0.88388347648\), so its **finite depth 128** Neumann remainder is bounded by \(\rho^{128}=1.3758210\times10^{-7}\). The existing Balaban weighted-Neumann theorem handles the finite geometric consequence once the physical frozen model is supplied to its interface. **Counterexample:** at \(t=1,s=.05,k=0\), \(|R|=28.39487557>1\); hence the stationary approximation is **not a uniform all-frequency moving Green operator**, and no false general convergence is promoted. Producer \`ksw668_f8_frozen_oblique_neumann.py\` + nine tests.
+
+**(N3) The causal emitter→receiver two-patch Neumann inverse is EXACT after TWO terms, no contraction needed.** On original source E and later receiver R microlocal boundary patches the **Dirichlet-to-Neumann** operator is lower causal triangular
+\[
+A=\begin{pmatrix}D_e&0\\F_{re}&D_r\end{pmatrix}
+\quad(\bmod\text{ microlocal smoothing}),
+\]
+with local DN elliptic parametrices \(E_e=D_e^{-1},E_r=D_r^{-1}\) and the first-return lens map \(F_{re}\). Let \(G_0=\operatorname{diag}(E_e,E_r)\). The residual
+\[
+R=I-AG_0=\begin{pmatrix}0&0\\-F_{re}E_e&0\end{pmatrix}
+\quad\implies\boxed{R^2=0}
+\]
+by **noncommutative operator multiplication**. Therefore existing \`BalabanFiniteNeumannParametrix.finiteRightNeumannExactAtDepth\` at depth 2 yields
+\[
+\boxed{A^{-1}=G_0(I+R)=
+\begin{pmatrix}E_e&0\\-E_rF_{re}E_e&E_r\end{pmatrix}},
+\quad
+\boxed{ND_{r\leftarrow e}=-E_rF_{re}E_e}.
+\]
+This is exact *operator algebra* (modulo elliptic parametrix smoothing), not an assertion about the full physical Green amplitude. Existing Agda reuse and its exact depth-2 consequence are added in \`KSW668AdS5FrozenNeumannSeriesReuseExact.agda\` and imported by \`KSW668BraneBulkMaxCutEverything.agda\`. Noncommutative free-word algebra, noncommuting rational 2×2 blocks, negative order-control, and both inverse sides are tested in \`ksw668_f8_two_patch_neumann_block.py\` (10 cases).
+
+### B3 forced finite-energy completion — actual compact Neumann data
+
+Take \(y=z-b(T)\) and compact source \(G(T,\mathbf x)\), vanishing near the initial slice. \(W=y\chi(y)G/(1-v^2)\), \(\chi=e^{-y^2/(1-y^2)}\) on \(0\le y<1\) and zero beyond, satisfies the sourced original oblique normal condition **exactly**. \(U=H-W\) has homogeneous Neumann wall and compact smooth force \(f=-\mathcal L_yW\). For the previously defined boundary-tangent energy \(E_X\), write \(E_0=\frac12\int z^{-3}(H_T^2+H_z^2+|\nabla_xH|^2)\). There is an **exact sum-of-squares identity** (for original \(v<0\))
+\[
+\boxed{E_X-(1+v)E_0
+=\frac{-v}{2}\int z^{-3}\big[(H_T-H_z)^2+|\nabla_xH|^2\big]\ge0.}
+\]
+Using \(|v|\le1/\sqrt2,z\ge1/2,|v'|\le1\), Young's inequality and zero homogeneous initial data gives
+\[
+\boxed{E'_U\le\gamma E_U+\frac12\|f(T)\|^2_{L^2(z^{-3})},\quad
+\gamma=1+\frac{1+3\sqrt2}{1-1/\sqrt2}=18.8994949366,}
+\]
+thus
+\[
+E_U(T)\le\frac12\int_{T_0}^{T}
+e^{\gamma(T-S)}\|f(S)\|^2_{L^2(z^{-3})}\,dS.
+\]
+For smooth compact boundary source the right side is finite; this **closes the inhomogeneous quantitative linear energy estimate** for the smooth retarded IBVP under the no-incoming assumption, not the nonzero detector result. \`ksw668_f8_forced_moving_neumann_energy.py\` + seven tests.
+
+### F8.1/F8.2 paper-theorem application: original compact TT early Weyl EXISTENCE argument, scoped carefully
+
+Original mathematical input is **Stefanov–Yang (2018)**, DOI 10.2140/apde.2018.11.1381, **Theorems 3.1 and 4.2**, which directly cover **1+n, n≥2**, smooth timelike moving boundaries, elliptic local outgoing DN ΨDO of order 1, and non-glancing first-return DN FIO of order 1 on the null lens canonical graph. At the actual original \(t=2,r=r_g(2)\) receiver, the chosen real compact source's emission point is strictly inside its support, its entire support is photon-dark by 0.0036506, its direct AdS null chord lies in the physical bulk, the wall is strictly null convex, both normal symbols are nonzero, and the null-screen transport is nonzero. The **causal two-patch exact inverse** then gives the Neumann-to-Dirichlet FIO \(-E_rF_{re}E_e\), elliptic order -1 modulo smoothing. The local compact fourth-order TT source has nonzero \(yy\) principal, and both intrinsic 4D and SMS projected 5D electric Weyl receiver operators have nonzero distinct order-2 principal symbols.
+
+A \(\lambda^{-4}\) normalized smooth compact oscillatory TT source supported near the actual emitting point produces Weyl asymptotics of order \(\lambda\) with nonzero leading coefficient by that elliptic FIO theorem, after choosing the source phase to avoid real cancellation and sufficiently large *finite* \(\lambda\). The forced energy bound above ensures every such finite smooth retarded linear solution is finite-energy. Thus **F8.1 and F8.2 now have a written external-theorem-dependent paper-mathematics proof candidate for existential prescribed-source early reception** at the same original \(t=2\) event, including both electric Weyl definitions. This is NOT an Agda continuum proof, independently refereed new theorem, converged quantitative 3D time-domain waveform, a physical generating matter action, or an experiment. The local WKB coefficients previously quoted omit the full FIO Jacobian/cutoffs and **must not be treated as measured amplitude**. The proof's theorem application, microlocal cutoff/reminder and tensor gauge conventions should undergo independent peer audit before unqualified acceptance; \`Docs/physics/KSW668F8OriginalT2NeumannFIOTheoremApplication20261115.md\` contains the detailed contract.
+
+### Final acceptance / exact remaining gates after max-cut IV
+
+**Current local source-equivalent tests:** previous 29 F8 math tests **plus 9 frozen Neumann, 8 moving-characteristic, 10 exact two-patch noncommutative, 7 forced-energy = 63/63 PASS**. Existing \`scripts/check_ksw668_f8_maxcut.sh --smoke\` runs them all and is explicitly **local/source-level**, not kernel. The expensive \`--full\` 3D compact source test **still exits 42**, with ~48.4% field and ~83% Weyl fine-to-medium drifts. Exact connected-branch checkout and pinned Agda 2.9 are not executed in the current runtime. No numerical/physical promotion.
+
+| Gate | Meaning | Status / required real deliverable |
+|---|---|---|
+| F8.1 | \`ads5OriginalT2NeumannToWeylEllipticFIOComposition\` | **External-theorem application proof candidate written**; exact causal block algebra CLOSED; require independent review/formal weld for certified mathematical acceptance |
+| F8.2 | \`ads5OriginalT2ActualCompactTTNonzeroEarlyBothWeyl\` | **Prescribed-source existential proof candidate written** with full source support/photon gap/finite energy; quantitative 3D waveform and independent proof acceptance separate |
+| F8.3 | \`ads5MovingTTCompact3DSpectralCutoffConvergence\` | **OPEN** high-order/validated original source-to-Weyl numerical convergence; current full gate FAILS |
+| F9.1 | \`ads5CompactTTMatterActionRealization\` | **OPEN** actual brane matter action and full physical Einstein–matter constraints |
+| F9.2 | \`ads5MovingModeStabilityAndBackreaction\` | **OPEN** tensor/scalar/vector/brane bending and backreaction on *same* global metric |
+| F9.3 | \`cylinderDoubledDiscPerturbedBulkAndRetardedGreen\` | **OPEN** separate cylinder gravity/matter stability and retarded tensor operator |
+| F10.1 | \`ads5PhysicalScaleSourceDetectorComparison\` | **OPEN** \(\ell,H,\dot H\), epoch, attenuation, source lag, detector bandwidth and observation constraints |
+| F11.1 | \`braneBulkOriginalAnalyticAgdaKernel\` | **OPEN** pinned Agda 2.9 kernel acceptance of continuum metric, PDE and microlocal theorem application |
+| F11.2 | \`ads5OriginalSourceToObservationSemanticWeld\` | **OPEN** physical source/detector instrument relation without model substitution |
+| D1 | \`physicalGravitonObservation\` | **OPEN** independently calibrated and replicated experiment; not mathematically completable |
+
+The **next largest scientific cut is now F9.1 (physical matter action) + F9.2 (coupled stability)** once F8.1/2 theorem transfer is reviewed, while **F8.3 remains a separate independent quantitative numerical benchmark**, not a veto against a valid microlocal existential theorem.
