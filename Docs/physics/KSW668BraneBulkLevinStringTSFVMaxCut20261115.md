@@ -1417,3 +1417,39 @@ uniformly on **original** \(1\le t\le2\), and componentwise for TT. \(G=-6\pi^{T
 **Combined structural status:** continuous-time/source characteristic boundary flux **CLOSED** and effective \(d=3,7,11\) weighted radial FV Green energy **CLOSED**. The F8 \`ads5OriginalTTSourceCellFluxConservationFullDiscreteEnergy\` remains **PARTIAL**: no fully discrete \((T,y,r)\) moving-domain SSPRK3 CFL/symmetrizer/receiver-Weyl curvature-error theorem yet. Previous actual 3-grid \(H,E^{(4)},E^{(5)}\) fail-closed drift 21.8%, 90.3%, 82.7% and beyond-cone leakage do NOT improve just from this flux algebra. \`ads5OriginalMovingTTThreeMultipoleThreeObservableConvergence\`, \`ads5OriginalMovingWeylSobolevBoundaryTraceAndError\`, the independent original \(t=2\) FIO theorem acceptance, F9 matter/full stability, F10 calibration, F11 Agda kernel/semantic weld and empirical D1 all remain **OPEN**.
 
 **Acceptance:** prior **172** committed-source-equivalent F8 regression cases plus **12** original moving forced wall-flux tests = **184/184 source-equivalent local mathematical tests**; local broader 197/197 includes 13 exploratory uncommitted prepotential tests. Exact GitHub-head, pinned Agda 2.9 kernel and physical apparatus have NOT been checked in this tool environment.
+
+
+---
+
+## 2026-11-15 F8 maximum-cut VII — exact normal SBP, SSPRK3 CFL, original Weyl regularity NO-GO, three-scheme comparison
+
+**Canonical full derivation and current exact gate ledger:** [KSW668F8DiscreteNormalSBPSSPRK3WeylMaxCut20261115.md](KSW668F8DiscreteNormalSBPSSPRK3WeylMaxCut20261115.md). **Machine numeric negative receipt:** \`Artifacts/ksw668/ads5_f8_three_normal_schemes_SBP_comparison_20261115.json\`. **Standalone previously delivered original FIO proof remains committed:** \`KSW668F8OriginalT2NeumannFIOProof20261115.md\`. All remain in the single active PR #1512, no parallel rollup.
+
+**New SOURCE-level mathematical closures:** (1) for the original three TT effective radial \(d=3,7,11\) finite-volume operators, the pure-radial SSPRK3 exact imaginary-axis factor \(|R(i\xi)|^2-1=\xi^4(\xi^2-3)/36\) and conservative Gershgorin radial-only timestep \(\Delta T/\Delta r\le\sqrt{3/44}=0.26111648\); the old allowed 0.45 can AMPLIFY the d11 pure radial mode by 1.802185 in a single timestep. Source-only Agda owner \`KSW668AdS5RadialSSPRK3ImaginaryPolynomialExact.agda\` is imported; pinned Agda 2.9 unrun. The original three-multipole solver now rejects the old unsafe requested radial timestep.
+
+(2) exact original **finite-grid first-order characteristic normal SBP**, with strong physical moving Israel wall and outgoing outer boundary; new Agda source-only generic forward/backward rational telescope \`KSW668AdS5MovingNormalFiniteSBPTelescopeExact.agda\`. The legacy second-order boundary closure has the **exact 16-node homogeneous integer witness** \(\sum P D^{\rm legacy}_+P=277/2>0\), demonstrating an artificial numerical energy-injection channel—not physical signal. \`normal_order=1\` enables the strong-Israel energy-SBP comparator.
+
+(3) genuinely **fully discrete normal-only** forward-Euler and SSPRK3 forced Neumann estimate for original \(1\le t\le2\), \(h=\Delta T/\Delta y\le2-\sqrt2=0.585786\): \(E_{n+1}\le E_n+2\sqrt5h(\|G_n\|^2/6+2\|G_{mid}\|^2/3+\|G_{n+1}\|^2/6)\). This is the moving Neumann characteristic **normal subsystem**, not the FULL radial/warp-weighted SSPRK3 model.
+
+(4) second-order **SBP2+SAT weak-Neumann** physical original wall comparator, \`normal_order=3\`: diagonal trapezoidal normal norm, centered second-order interior derivative, weak original incoming Neumann SAT. Exact semidiscrete normal energy: \(\dot E_H=F_{\rm wall}-(1+v)P_{far}^2-(1-v)M_{far}^2-(1-v)(M_0-M_{target})^2\le2\sqrt5G^2\). Unlike normal_order=1/2, this is explicitly **WEAK** wall enforcement. The original manufactured polynomial PDE passes all THREE normal stencil modes. Full (T,y,r), SSPRK3 SAT, physical source-to-Weyl and experimental claims remain OPEN.
+
+(5) **exact original five-dimensional wave NO-GO for H1→pointwise Weyl**: \(H_N=\sin(Nx)\cos(N(T-T_*))/N\) solves the original AdS5 TT bulk wave and its actual sourced Israel wall data (on a **periodic spatial 3-torus, not the compact R3 source**). The weighted first-order bulk energy \(E_N(T)=\pi^3/b(T)^2\) is independent of N; intrinsic 4D electric-Weyl value at original \(t=2,T=T_*\), \(x=\pi/(2N)\) is **\(9N/64\)** and grows unboundedly. Therefore our earlier H1 and wall-flux estimates can NEVER alone control pointwise second-derivative Weyl curvature. The next analytic endpoint must establish an actual **localized higher-order** (e.g. \(H^{4+\epsilon}\) in four spatial bulk dimensions, with compatible time/normal traces) source-to-Weyl transfer bound. This NO-GO does not refute the separate compact-source FIO *existential* theorem-application candidate.
+
+**New actual two-grid original moving source/receiver negative comparison (t=12, same compact 3D TT source and photon-dark event):**
+
+| Normal scheme | H medium-vs-coarse relative to medium | Intrinsic Weyl relative drift | Projected Weyl relative drift | Acceptance |
+|---|---:|---:|---:|---|
+| legacy order2 strong wall | 58.0% | 10.5% | 19.1% | FAILED |
+| SBP1 order1 strong wall | 1204.8% | 13.9% | 48.3% | FAILED |
+| SBP2 SAT order3 weak wall | 17.3% | 140.0% | 26.0% | FAILED |
+
+The prior legacy **three-grid** fail-closed receipt remains unchanged. New normal schemes have **TWO-grid only**; the finest SBP1 long-run exceeded the bounded execution window. All preserve nonzero numerical beyond-bulk-cone leakage, no certified source-to-Weyl error, no original experimental reception.
+
+**Test acceptance:** prior 184 committed-source-equivalent cases plus 13 radial CFL, 10 exact original H1/Weyl counterexample, 12 first-order normal SBP, 13 normal-only SSPRK3 forced, 13 second-order SBP+SAT, 5 method comparator, 5 manufactured/solver assertions = **255/255 local committed-source-equivalent checks**. Broader local selection with prior exploratory cases and one extra trace check **269/269 PASS**. Neither test set is claimed to be an exact connected-PR-head checkout or pinned Agda kernel acceptance. \`scripts/check_ksw668_f8_maxcut.sh --normal-compare\` executes the two-grid source comparison and correctly exits **42** rather than promoting a positive early signal.
+
+**Next exact gates now at highest priority:**
+- \`ads5OriginalMovingFullCoupledYRadialSSPRK3SymmetrizerCFL\`: original \(z^{-3}\) weighted, variable moving wall, radial and normal semidiscrete components, SAT/strong source, SSPRK3 and outer controls all in ONE stable operator; **OPEN**.
+- \`ads5OriginalMovingH4PlusEpsilonNeumannToBothWeylTrace\`: high-order boundary-compatible actual moving source-to-both-curvature trace with explicit constants and cutoff/error transfer; **OPEN**.
+- \`ads5OriginalMovingTTThreeMultipoleThreeObservableConvergence\`: original H, intrinsic Weyl, SMS projected Weyl AND outside bulk-cone convergence on independently varied radial/normal/time meshes; **OPEN**.
+- \`ads5OriginalT2NeumannToWeylEllipticFIOComposition\` / \`ads5OriginalT2ActualCompactTTNonzeroEarlyBothWeyl\`: external-theorem-dependent original compact-source prescribed-source existential proof *candidate*, independent referee/Agda continuum acceptance **OPEN**.
+- F9 action-generated anisotropic stress, scalar/vector/brane-bending/cylinder stability; F10 physical scale/receiver; F11 Agda kernel/observable weld; D1 independently calibrated experiment remain **OPEN**.
