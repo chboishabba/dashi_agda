@@ -90,8 +90,8 @@
     ]
   },
   "acceptance": {
-    "source_equivalent_committed_regression_cases": 172,
-    "local_superset_including_uncommitted_exploratory_cases": 185,
+    "source_equivalent_committed_regression_cases": 184,
+    "local_superset_including_uncommitted_exploratory_cases": 197,
     "pinned_Agda_2_9_kernel": false,
     "exact_GitHub_head_runner": false,
     "matter_generating_action": false,
@@ -110,5 +110,19 @@
     "braneBulkOriginalAnalyticAgdaKernel",
     "ads5OriginalSourceToObservationSemanticWeld",
     "physicalGravitonObservation"
-  ]
+  ],
+  "f8_moving_wall_forced_flux_maxcut_20261115": {
+    "original_wall_beta": "(1+v)/(1-v)",
+    "wall_velocity": "-1/sqrt(1+t²)",
+    "forced_incoming_characteristic": "qminus=beta*qplus-2G/(1-v)",
+    "characteristic_flux": "(1-v)*|qminus|²-(1+v)*|qplus|²",
+    "exact_square": "2v*beta*|qplus-G/v|²-(2/v)*|G|²",
+    "uniform_original_t1_to_t2": "flux<=2 sqrt(5)*|G|²",
+    "homogeneous_wall_dissipative": true,
+    "original_t4over3_rational_flux": "13/5760",
+    "source_equivalent_tests_added": 12,
+    "full_time_discrete_CFL_error_proved": false,
+    "full_original_boundary_Weyl_receiver_convergence_proved": false,
+    "Agda_pinned_kernel_pass": false
+  }
 }
