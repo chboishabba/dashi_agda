@@ -5872,7 +5872,7 @@
           "R3",
           "R4"
         ],
-        "current_roadmap_maxcut": "R1 genuine completed zeta/Weil equality + (R2 signed selected A2 OR R3 signed fifth Route B) → R4 all-zero exclusion",
+        "current_roadmap_maxcut": "R1 original zeta completed explicit formula / Weil criterion WITHOUT assuming positivity + (R2 signed A2 OR R3 signed fifth Route B OR independently proved original Weil positivity) → R4 all-zero exclusion",
         "terminal_gate_ids": [
           "R4"
         ],
@@ -5918,7 +5918,7 @@
           "H2",
           "H3"
         ],
-        "current_roadmap_maxcut": "H1 actual rational singular/deRham Hodge intersection + algebraic-cycle class; H2 physical P1 weld special case; H3 universal rational-cycle representative",
+        "current_roadmap_maxcut": "H1 true rational Hodge intersection/cycle-class carrier; H2 physical P1 special case; H3 actual primitive algebraic lift with Lefschetz assembly and algebraic inverse firewall, ultimately universal",
         "terminal_gate_ids": [
           "H3"
         ],
@@ -5959,17 +5959,24 @@
         "exact_target_terms": [
           "RiemannZetaProgram",
           "RiemannHypothesisWitness",
-          "RH.G2 completed prime-power/gamma/pole explicit formula and zero-shell"
+          "CompletedZetaOwner",
+          "WeilExplicitFormula",
+          "WeilRiemannCriterion",
+          "DashiRiemannAssembly",
+          "RH.G2 original completed prime-power/gamma/pole explicit formula and zero-shell"
         ],
         "original_owner_paths": [
           "DASHI/Analysis/RiemannZetaProgramBoundary.agda",
+          "DASHI/Analysis/DashiWeilRiemannBridge.agda",
+          "DASHI/Analysis/RiemannMillenniumAssembly.agda",
+          "DASHI/Analysis/WeilPositivityCore.agda",
           "DASHI/Analysis/RiemannQuarticSignedPoleCompensationExact.agda"
         ],
         "status": "OPEN",
         "settled": false,
         "classification": "ORIGINAL_UNPAID_ANALYTIC_OR_GEOMETRIC_PRODUCER",
-        "mathematical_deliverable": "Same original ζ(s), analytic continuation and functional equation, exact prime/gamma/pole explicit formula on genuine test space and zero exhaustion",
-        "acceptance_criteria": "Actual zeta and completed Weil zero/prime carrier equality and justified exchanges; no synthetic zero set",
+        "mathematical_deliverable": "Original completed ζ analytic carrier, actual zero/prime/gamma/pole explicit formula, test-space and Weil criterion/source identification; DO NOT presume Weil positivity, whose true signed construction remains open",
+        "acceptance_criteria": "Original all-term explicit formula and no synthetic zero carrier; WeilPositiveDecomposition and DashiRiemannAssembly are conditional consumers, NOT positive definite spectral premises automatically supplied",
         "depends_on": [
           "P0"
         ],
@@ -6046,8 +6053,8 @@
         "status": "OPEN",
         "settled": false,
         "classification": "TERMINAL_CLAY_UNIVERSAL",
-        "mathematical_deliverable": "For every nontrivial original ζ zero ρ, Re ρ=1/2, from completed source and either paid A2 or Route B",
-        "acceptance_criteria": "All-zero quantifier and original analytic zeta carrier, actual off-line zero exclusion, no assumed Weil positivity",
+        "mathematical_deliverable": "Every nontrivial original ζ zero has Re=1/2 by complete R1 and genuine R2 or R3 signed estimates, OR independently proved original Weil positivity",
+        "acceptance_criteria": "No assumption of Weil positivity without independently constructed positive decomposition; source ζ zero quantifier and entire completed functional relation",
         "depends_on": [
           "R1",
           "R2_OR_R3"
@@ -6272,17 +6279,22 @@
         "exact_target_terms": [
           "UniversalHodgeReopening.reopen",
           "UniversalHodgeReopening.reopeningCorrect",
-          "HodgeClayCoreAtCodimensionAlgebraicExact.algebraicRepresentative"
+          "HodgeClayCoreAtCodimensionAlgebraicExact.algebraicRepresentative",
+          "PrimitiveAlgebraicLift",
+          "primitiveLiftGivesHodgeClayCoreAt",
+          "AlgebraicLefschetzInverseRealization"
         ],
         "original_owner_paths": [
           "DASHI/Mathematics/AlgebraicGeometry/HodgePrizeBoundaryExact.agda",
-          "DASHI/Mathematics/AlgebraicGeometry/HodgeAlgebraicCycleClayCoreExact.agda"
+          "DASHI/Mathematics/AlgebraicGeometry/HodgeAlgebraicCycleClayCoreExact.agda",
+          "DASHI/Mathematics/AlgebraicGeometry/HodgePrimitiveLefschetzClayReductionExact.agda",
+          "DASHI/Mathematics/AlgebraicGeometry/HodgeLefschetzInverseStandardConjectureFirewallExact.agda"
         ],
         "status": "OPEN",
         "settled": false,
         "classification": "TERMINAL_CLAY_UNIVERSAL",
-        "mathematical_deliverable": "∀ smooth projective complex X,p,α rational Hodge class ∃ rational actual algebraic cycle Z with [Z]=α",
-        "acceptance_criteria": "Actual universal representative and equality on singular rational class; conditional universalReopeningImpliesHodge not an inhabitant",
+        "mathematical_deliverable": "∀ smooth projective X,p, rational Hodge α, ∃ literal rational algebraic Z with class α, by a true primitive algebraic lift or other universal cycle producer and correct exact-rational carrier bridge",
+        "acceptance_criteria": "Actual primitive algebraic lift with rational singular class equality; Hard Lefschetz cohomological inverse alone is NOT algebraic inverse correspondence; don't equate older weak Hodge carrier to exact rational intersection without proof",
         "depends_on": [
           "H1",
           "H2_OPTIONAL_NOT_SUFFICIENT"
