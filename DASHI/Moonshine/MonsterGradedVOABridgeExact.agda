@@ -32,7 +32,7 @@ module DASHI.Moonshine.MonsterGradedVOABridgeExact where
 
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; _+_)
 open import Data.Empty using (⊥)
 
 import DASHI.Moonshine.GradedRepresentation as GR

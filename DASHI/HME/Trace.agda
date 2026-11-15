@@ -6,6 +6,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Data.List using (List)
 open import Data.Product using (_×_; _,_)
+open import DASHI.DA51.Provenance using (EvidenceRef)
 open import DASHI.Physics.Closure.DynamicalClosureStatus as DCS
 
 ------------------------------------------------------------------------
@@ -35,6 +36,14 @@ record TraceWitness : Set where
     vector      : TraceVector
     invariant   : TraceInvariant
     admissible  : Bool
+
+-- Producer-owned provenance for a trace witness.  The evidence edge and the
+-- witness semantics remain distinct: possessing a DA51 reference does not
+-- prove admissibility or any theorem.
+record AddressedTrace : Set where
+  field
+    evidence : EvidenceRef
+    witness  : TraceWitness
 
 record CanonicalWitness : Set where
   field

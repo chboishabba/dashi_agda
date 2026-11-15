@@ -1,0 +1,28 @@
+module DASHI.Physics.QuantumVacuum.CasimirGRNullFocusingValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Physics.QuantumVacuum.CasimirGRNullFocusingBridgeExact as Bridge
+import DASHI.Physics.QuantumVacuum.CasimirBrownMaclayEnergyConditionExact as CasimirEC
+import DASHI.Physics.Gravity.NullRaychaudhuriSachsFocusingExact as Focusing
+
+casimirLocalNECRegression :
+  CasimirEC.casimirNEC ≡ CasimirEC.conditionViolated
+casimirLocalNECRegression = refl
+
+existingNECNullConvergenceFirewallRegression :
+  Focusing.nullEnergyConditionIsNotNullConvergenceWithoutEinsteinEquation
+    Focusing.canonicalNullFocusingCompositionBoundary
+  ≡ true
+existingNECNullConvergenceFirewallRegression =
+  Bridge.existingNECNullConvergenceFirewall
+
+casimirNECDoesNotAutoProduceCurvatureRegression :
+  Bridge.CasimirNECViolationAutomaticallyProducesNegativeNullRicci → ⊥
+casimirNECDoesNotAutoProduceCurvatureRegression =
+  Bridge.casimirNECNeedsSemiclassicalEinsteinWeld
+
+casimirNECDoesNotAutoProduceDefocusingRegression :
+  Bridge.CasimirNECViolationAutomaticallyProducesNullDefocusing → ⊥
+casimirNECDoesNotAutoProduceDefocusingRegression =
+  Bridge.casimirNECNeedsCurvatureAndOpticalWeld

@@ -181,6 +181,8 @@ record CriticalSamplingReceipt : Set₁ where
     exactFourBlockReconstruction : ∀ xs → synthesise4 (analyse4 xs) ≡ xs
     countsAgree : sourceSymbols ≡ coefficientSymbols
 
+open CriticalSamplingReceipt public
+
 criticalSamplingReceipt : CriticalSamplingReceipt
 criticalSamplingReceipt = record
   { sourceSymbols = 256

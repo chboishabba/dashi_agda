@@ -42,31 +42,31 @@ data PreferredSourceSemanticLeaf213 : Set where
   literalPhysicalCompositeD1ChainRule : PreferredSourceSemanticLeaf213
 
 data LeafState213 : Set where
-  closed open blocked : LeafState213
+  leafClosed leafOpen leafBlocked : LeafState213
 
 preferredLeafState213 : PreferredSourceSemanticLeaf213 → LeafState213
-preferredLeafState213 literalCMP122DensityEffectivePotentialSemantics = open
-preferredLeafState213 literalSourceFixedCMP116LocalizationAndRadius = blocked
-preferredLeafState213 r108PotentialUsesFixedSourceSemantics = closed
-preferredLeafState213 r108SelectedPotentialEqualsBC1ByConstruction = closed
-preferredLeafState213 literalR108BackedBC1CalculusEq51DemandsCompositeHeat = blocked
-preferredLeafState213 literalCMP109GeneratedHistoryResponseProducer = open
-preferredLeafState213 literalCMP109BetaDifferenceDecomposition = blocked
-preferredLeafState213 literalPhysicalCompositeD1ChainRule = blocked
+preferredLeafState213 literalCMP122DensityEffectivePotentialSemantics = leafOpen
+preferredLeafState213 literalSourceFixedCMP116LocalizationAndRadius = leafBlocked
+preferredLeafState213 r108PotentialUsesFixedSourceSemantics = leafClosed
+preferredLeafState213 r108SelectedPotentialEqualsBC1ByConstruction = leafClosed
+preferredLeafState213 literalR108BackedBC1CalculusEq51DemandsCompositeHeat = leafBlocked
+preferredLeafState213 literalCMP109GeneratedHistoryResponseProducer = leafOpen
+preferredLeafState213 literalCMP109BetaDifferenceDecomposition = leafBlocked
+preferredLeafState213 literalPhysicalCompositeD1ChainRule = leafBlocked
 
 preferredFirstMissingCoordinate213 : PreferredSourceSemanticLeaf213
 preferredFirstMissingCoordinate213 = literalCMP122DensityEffectivePotentialSemantics
 
 preferredFirstMissingCoordinate213IsOpen :
-  preferredLeafState213 preferredFirstMissingCoordinate213 ≡ open
+  preferredLeafState213 preferredFirstMissingCoordinate213 ≡ leafOpen
 preferredFirstMissingCoordinate213IsOpen = refl
 
 r108SourceSemanticsWeldClosed :
-  preferredLeafState213 r108PotentialUsesFixedSourceSemantics ≡ closed
+  preferredLeafState213 r108PotentialUsesFixedSourceSemantics ≡ leafClosed
 r108SourceSemanticsWeldClosed = refl
 
 r108ToBC1PotentialWeldClosed :
-  preferredLeafState213 r108SelectedPotentialEqualsBC1ByConstruction ≡ closed
+  preferredLeafState213 r108SelectedPotentialEqualsBC1ByConstruction ≡ leafClosed
 r108ToBC1PotentialWeldClosed = refl
 
 ------------------------------------------------------------------------

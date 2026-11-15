@@ -1,0 +1,37 @@
+name: AI capital max-cut Agda
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Economics/**'
+      - 'DASHI/Law/AI*'
+      - 'DASHI/Law/OpenAIMedicare*'
+      - 'tests/test_ai_*'
+      - '.github/workflows/ai-capital-maxcut-agda.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: dashi-global-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: cachix/install-nix-action@v27
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
+      - name: Typecheck AI capital max-cut owners and rollup
+        run: |
+          nix develop --command bash scripts/run_agda29_parallel_check.sh \
+            DASHI/Economics/AICoreWeaveAggregateCustomerCashRealisation20261014Exact.agda \
+            DASHI/Economics/AIInfrastructureStackReturnNonCollapse20261014Exact.agda \
+            DASHI/Economics/AIPolicyReviewedCausalAttribution20261014Exact.agda \
+            DASHI/Economics/AIMI355XAcquisitionDepreciationEnvelope20261014Exact.agda \
+            DASHI/Economics/AICreditSpreadDifferential20261014Exact.agda \
+            DASHI/Economics/AICerebrasProviderCostComposition20261014Exact.agda \
+            DASHI/Economics/AICapitalRoadmapMaxCut20261014Exact.agda \
+            DASHI/Economics/AIEntanglementEverything2026.agda

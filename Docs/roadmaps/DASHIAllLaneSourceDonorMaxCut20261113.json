@@ -1,0 +1,790 @@
+{
+  "title": "DASHI eleven-lane exact source-donor and unfinished integration ledger",
+  "date": "2026-11-13",
+  "status": "source-reconciled; kernel and semantic promotion fail-closed",
+  "source_authority": "GitHub exact-head source readback per listed PR; local golden Agda 2.9 and pinned Lean needed for acceptance",
+  "heads": [
+    {
+      "repository": "chboishabba/dashi_agda",
+      "pr": 1408,
+      "sha": "28d85aa529155352a025de9e12853ecad1e4214e",
+      "branch": "feat/twin-prime-six-wheel-bounded-gap-reuse-20261028"
+    },
+    {
+      "repository": "chboishabba/dashi_agda",
+      "pr": 1478,
+      "sha": "a7601784d83c7857fc6e6f0e786ce850e03f3102",
+      "branch": "chatgpt/analytic-j-tetration-abel-transport"
+    },
+    {
+      "repository": "chboishabba/dashi_agda",
+      "pr": 1497,
+      "sha": "f213b5bfb893e49ae9b29b2915257884b3b0e14e",
+      "branch": "feat/zeta-odd-irrationality-same-object-transport"
+    },
+    {
+      "repository": "chboishabba/dashi_agda",
+      "pr": 1474,
+      "sha": "fcadcb35b2d6d629952f70f2d1f46714fe77b36f",
+      "branch": "chatgpt/conway-karp-gamma-weld-20261106"
+    },
+    {
+      "repository": "chboishabba/dashi_agda",
+      "pr": 1500,
+      "sha": "cd6583da3dcaae333f452a6cef67e82dd53ebe29",
+      "branch": "chatgpt/bsd-agda-kummer-selmer-sieve-maxcut-20261113"
+    },
+    {
+      "repository": "chboishabba/dashi_agda",
+      "pr": 1495,
+      "sha": "53db64eea732920eb7841bd06e9816defd91646c",
+      "branch": "codex/lean-world-builder-contract"
+    },
+    {
+      "repository": "chboishabba/dashi_agda",
+      "pr": 1484,
+      "sha": "6c829bdf0d284dca393abecbebfb13e939908d56",
+      "branch": "perf/lean-world-postgres-retrieval-20261109"
+    },
+    {
+      "repository": "chboishabba/dashi_agda",
+      "pr": 1494,
+      "sha": "a3e0e9cfdcce8bc3aa6c1a0a31fd2f90f8b2bedd",
+      "branch": "feat/lean-world-native-admission-handoff-20261111"
+    },
+    {
+      "repository": "chboishabba/dashi_agda",
+      "pr": 1501,
+      "sha": "2f382b4d8e5a7c3493dfcc660099a8c0d2bd9c39",
+      "branch": "chatgpt/ns-r846-zero-mode-source-repair-20261113"
+    },
+    {
+      "repository": "chboishabba/dashi_agda",
+      "pr": 1499,
+      "sha": "05f89e2d9c1346531e725687dcb56e888ee75540",
+      "branch": "chatgpt/clay-20261112-four-frontier-fail-closed"
+    },
+    {
+      "repository": "chboishabba/dashi_agda",
+      "pr": 1444,
+      "sha": "7a559643506cc1de24ffb8a64c78a5b45493c97d",
+      "branch": "research/ym-voyager2026-completeness-crosswalk-20261101"
+    },
+    {
+      "repository": "chboishabba/dashi_agda",
+      "pr": 1498,
+      "sha": "c979a2822471e1e8511dbc5fbf11a6c2469befb5",
+      "branch": "chatgpt/balaban-p0-semantic-four-orbit-20261112"
+    },
+    {
+      "repository": "chboishabba/dashi_lean4",
+      "pr": 107,
+      "sha": "96d1a0ea2422769ef07afad6f513df39e9de6519",
+      "branch": "agent/bsd-q2-actual-selmer-maxcut-20261112"
+    },
+    {
+      "repository": "chboishabba/dashi_lean4",
+      "pr": 108,
+      "sha": "7ac99d0807c31e20a7fd8e8a6a9ae50b63210b87",
+      "branch": "chatgpt/clay-continuous-fifth-sign-20261112"
+    },
+    {
+      "repository": "chboishabba/dashi_lean4",
+      "pr": 109,
+      "sha": "317ff04a74e51f35d72e7784e3de2999f32ab15b",
+      "branch": "chatgpt/ns-c-energy-smooth-weld-20261112"
+    },
+    {
+      "repository": "chboishabba/dashi_lean4",
+      "pr": 40,
+      "sha": "28e99cd51ab4dc1e538c1f70cf77e460aa3ac672",
+      "branch": "agent/hodge-real-algebraic-cycle-v435-20261002"
+    },
+    {
+      "repository": "chboishabba/dashi_agda",
+      "pr": 1472,
+      "sha": "00eadae44260d4a229543cff0eed8dff8be04b11",
+      "branch": "agent/y443-monster-vnatural-maxcut-20261106"
+    },
+    {
+      "repository": "chboishabba/dashi_agda",
+      "pr": 1454,
+      "sha": "e6d0eee68d248659d2239ee5a4b64191e37a81d1",
+      "branch": "feat/kitzerow-bh4-pathway-ontology-interop"
+    },
+    {
+      "repository": "chboishabba/dashi_agda",
+      "pr": 1471,
+      "sha": "bd8de172f4db26e1527b69c6893f0ec759a9dcd0",
+      "branch": "chatgpt/biology-history-future-quotient-20261106"
+    },
+    {
+      "repository": "chboishabba/dashi_agda",
+      "pr": 1496,
+      "sha": "2e6aa8c4c162c30070f917ed082c6b260de56bdb",
+      "branch": "feat/cybersyn-global-viability-maxcut-20261112"
+    }
+  ],
+  "bridges": [
+    {
+      "id": "BISHOP-ETA-EXP",
+      "lane": "BISHOP",
+      "donors": [
+        {
+          "pr": 1408,
+          "path": "DASHI/Analysis/BishopOriginalEtaEvenSourceScaleFiniteWeldExact.agda",
+          "declaration": "originalEtaScaleToNativeZetaEvenCutoff",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "28d85aa529155352a025de9e12853ecad1e4214e"
+        },
+        {
+          "pr": 1478,
+          "path": "DASHI/Analysis/BishopComplexExpFactEqualsNativeExpExact.agda",
+          "declaration": "originalBishopExpFactEqualsNativeExp",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "a7601784d83c7857fc6e6f0e786ce850e03f3102"
+        }
+      ],
+      "consumer": "original Bishop dyadic a(2k+1)=2^(-s)*a(k) proof",
+      "paid": "Finite eta/zeta 2N identity; arbitrary complex factorial exp equals native complex exp separately written; 10 original #1408 eta source modules transferred byte-for-byte into #1478; original Round11 eta term native factorial-exp real/imag convergence source-written on same branch; original dyadic source scaling reduced to TWO explicit real log add/native complex exponential add laws, with actual Round11 all-cutoff finite consumer on #1478",
+      "missing": "Kernel-check 13-root eta+factorial+dyadic-reduction chain. Mathematical: prove original Bishop log(2n)=log2+logn on the selected canonical Nat-log candidate, prove the original native complex exponential addition/multiplication law, then inhabit both precise leaves in the same-object dyadic scaling theorem; compact-uniform eta tails and continuation remain open.",
+      "classification": "analytic_source",
+      "source_closure_checker": "scripts/check_bishop_cross_pr_dependency_closure.py",
+      "source_closure_regression": "scripts/test_bishop_cross_pr_dependency_closure.py",
+      "source_closure_status": "10 source blobs and 35 original immediate DASHI import paths co-located; 13-root focused local Agda checker registered, exact-head kernel unobserved",
+      "source_closure_kernel_receipt": null,
+      "cross_branch_state": "source_dependencies_co_located_on_pr1478_kernel_unverified",
+      "kernel_accepted_in_this_reconciliation": false,
+      "terminal_gate_closed": false,
+      "source_weld_promotion": false,
+      "p2_dyadic_source_reduction": {
+        "pr": 1478,
+        "pinned_pr_sha": "a7601784d83c7857fc6e6f0e786ce850e03f3102",
+        "owner": "DASHI/Analysis/BishopOriginalEtaDyadicSourceLawReductionExact.agda",
+        "declarations": [
+          "originalDyadicNegativeSLogIsSum",
+          "originalEtaDyadicScaleFromLogAndExp",
+          "originalRound11EtaZetaFiniteFromTwoLaws"
+        ],
+        "source_readback": true,
+        "source_written": true,
+        "agda29_kernel_accepted": false,
+        "original_log_dyadic_law_inhabited": false,
+        "original_native_complex_exp_add_inhabited": false,
+        "unconditional_original_dyadic_proved": false,
+        "compact_uniform_eta_convergence_proved": false,
+        "terminal_gate_closed": false
+      }
+    },
+    {
+      "id": "BISHOP-ETA-TAIL",
+      "lane": "BISHOP",
+      "donors": [
+        {
+          "pr": 1408,
+          "path": "DASHI/Analysis/BishopOriginalEtaEvenSourceScaleFiniteWeldExact.agda",
+          "declaration": "originalEvenSourceScaleFinite",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "28d85aa529155352a025de9e12853ecad1e4214e"
+        }
+      ],
+      "consumer": "Bishop complex compact-uniform eta tail for Re(s)>=delta>0",
+      "paid": "Finite alternating-even pairing and conditional dyadic scaling source-written",
+      "missing": "Native Bishop difference/integral domination for |s|/sigma*(2N+1)^(-sigma); uniform Cauchy convergence, analytic continuation and divisor zeros",
+      "classification": "analytic_source",
+      "cross_branch_state": "source_dependencies_co_located_on_pr1478_kernel_unverified",
+      "kernel_accepted_in_this_reconciliation": false,
+      "terminal_gate_closed": false,
+      "source_weld_promotion": false
+    },
+    {
+      "id": "BISHOP-KOENIGS-LOG",
+      "lane": "BISHOP",
+      "donors": [
+        {
+          "pr": 1478,
+          "path": "DASHI/Analysis/BishopComplexExpFactEqualsNativeExpExact.agda",
+          "declaration": "originalBishopExpFactEqualsNativeExp",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "a7601784d83c7857fc6e6f0e786ce850e03f3102"
+        },
+        {
+          "pr": 1478,
+          "path": "DASHI/Moonshine/AbelBishopLogOnePlusOriginalSeriesExact.agda",
+          "declaration": "originalBishopLogOnePlusSeriesValue",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "a7601784d83c7857fc6e6f0e786ce850e03f3102"
+        },
+        {
+          "pr": 1478,
+          "path": "DASHI/Moonshine/AbelBishopLogOnePlusUpperDiskConvergenceExact.agda",
+          "declaration": "originalBishopLogUpperDiskAbsoluteConvergence",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "a7601784d83c7857fc6e6f0e786ce850e03f3102"
+        },
+        {
+          "pr": 1478,
+          "path": "DASHI/Moonshine/AbelBishopSelectedLocalLogDiskAdmissionExact.agda",
+          "declaration": "selectedOriginalLocalLogGermOnDisk",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "a7601784d83c7857fc6e6f0e786ce850e03f3102"
+        },
+        {
+          "pr": 1478,
+          "path": "DASHI/Moonshine/AbelBishopNewtonSourceInhabitationExact.agda",
+          "declaration": "originalBishopSelectedNewtonFixedPointIsExpFixed",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "a7601784d83c7857fc6e6f0e786ce850e03f3102"
+        },
+        {
+          "pr": 1478,
+          "path": "DASHI/Moonshine/AbelBishopInverseKoenigsSchroederLimitExact.agda",
+          "declaration": "originalBishopInverseKoenigsLimitSchroeder",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "a7601784d83c7857fc6e6f0e786ce850e03f3102"
+        }
+      ],
+      "consumer": "original Newton-orbit principal logarithm and Koenigs Schroeder fixed point",
+      "paid": "Native complex exponential equality; original Bishop log(1+u) upper-disk absolute convergence and actual canonical series germ, selected p-dependent disk normalization/relative radius, source Newton fixed-point compiler and inverse-Koenigs Schroeder limit transport all source-written with their stated premises. The original P1.L source now has original complex true-norm finite triangle/geometric and norm-square Bishop limit-order transport, plus selected 8/27 numerical remainder theorem on the same original p^-1*t chart; its R4 square-root calculus is an uninhabited input and its Agda 2.9 kernel run is pending.",
+      "missing": "Inhabit the original arbitrary Bishop-real R4.BishopSquareRootCalculus and kernel-check P1.L (including original selected 8/27 source theorem); supply actual selected Newton fixed-point norm lower, native expC Taylor centre and uniform squared contraction, original exp/sin/cos orbit continuity; principal complex Log inverse, local Koenigs univalence and globally normalized Kneser continuation still open.",
+      "classification": "analytic_source",
+      "cross_branch_state": "same_branch_unclosed",
+      "kernel_accepted_in_this_reconciliation": false,
+      "terminal_gate_closed": false,
+      "source_weld_promotion": false,
+      "p1l_original_source": {
+        "pr": 1478,
+        "pinned_pr_sha": "a7601784d83c7857fc6e6f0e786ce850e03f3102",
+        "finite_to_limit_owner": "DASHI/Moonshine/AbelBishopLogQuadraticTrueNormLimitOrderExact.agda",
+        "finite_to_limit_declaration": "originalBishopUpperDiskLogQuadraticTrueNormBound",
+        "selected_numeric_owner": "DASHI/Moonshine/AbelBishopSelectedLogEightTwentySevenNormExact.agda",
+        "selected_numeric_declaration": "originalSelectedLogQuadraticEightOverTwentySeven",
+        "true_displacement_constant": "8/27",
+        "uses_existing_uninhabited_root_calculus": true,
+        "source_readback": true,
+        "kernel_elaborated": false,
+        "unconditional_semantic_proof": false,
+        "terminal_gate_closed": false
+      }
+    },
+    {
+      "id": "BISHOP-ODD-ZETA-CARRIER",
+      "lane": "BISHOP",
+      "donors": [
+        {
+          "pr": 1497,
+          "path": "DASHI/Analysis/BishopFastCauchyRationalNormalizationRoundTripExact.agda",
+          "declaration": "canonicalFastReducedTermRoundTrip",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "f213b5bfb893e49ae9b29b2915257884b3b0e14e"
+        }
+      ],
+      "consumer": "native original odd-zeta same-value transport",
+      "paid": "Original Bishop/FastCauchy rational-representation provenance on #1497",
+      "missing": "Native full Bishop-FastCauchy analytic carrier equivalence and original odd-zeta value identity; no irrationality implied",
+      "classification": "formal_weld",
+      "cross_branch_state": "needs_verified_import_closure",
+      "kernel_accepted_in_this_reconciliation": false,
+      "terminal_gate_closed": false,
+      "source_weld_promotion": false
+    },
+    {
+      "id": "KARP-GAMMA-F1",
+      "lane": "KARP21",
+      "donors": [
+        {
+          "pr": 1474,
+          "path": "DASHI/Mathematics/Complexity/Karp21NativeGammaPrefixPhysicalSimulationExact.agda",
+          "declaration": "sourceGammaZeroPrefixAgreement",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "fcadcb35b2d6d629952f70f2d1f46714fe77b36f"
+        },
+        {
+          "pr": 1474,
+          "path": "DASHI/Mathematics/Complexity/Karp21NativeWholeBinaryGraphRuntimeExact.agda",
+          "declaration": "readNativeWholeBinaryGraphWord",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "fcadcb35b2d6d629952f70f2d1f46714fe77b36f"
+        }
+      ],
+      "consumer": "originalBitTapeStepSimulatesN21Rule",
+      "paid": "One-k-zero gamma prefix = k+1 finite-table physical steps; native binary graph executable with input-bounded edge loop",
+      "missing": "Full physical gamma payload, graph fields, endpoint-history, signed ledger and threshold same-word simulation on one whole physical bit-tape",
+      "classification": "formalization",
+      "cross_branch_state": "same_branch_unclosed",
+      "kernel_accepted_in_this_reconciliation": false,
+      "terminal_gate_closed": false,
+      "source_weld_promotion": false
+    },
+    {
+      "id": "KARP-G3",
+      "lane": "KARP21",
+      "donors": [
+        {
+          "pr": 1474,
+          "path": "DASHI/Mathematics/Complexity/Karp21NativeOriginalSparseCertificateTightBoundExact.agda",
+          "declaration": "actualN21AcceptedCertificateFitsOriginalGraphWord",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "fcadcb35b2d6d629952f70f2d1f46714fe77b36f"
+        }
+      ],
+      "consumer": "original PR.polynomialCertificateBound and originalN21InNP",
+      "paid": "Actual accepted N21 sparse certificate source claim length <= original graph word length; original parser correspondence dependencies explicit",
+      "missing": "Kernel-check B6-G3 import closure; transport to typed PR cost model; no PR.InNP or verifier clock yet",
+      "classification": "formal_weld",
+      "cross_branch_state": "same_branch_unclosed",
+      "kernel_accepted_in_this_reconciliation": false,
+      "terminal_gate_closed": false,
+      "source_weld_promotion": false
+    },
+    {
+      "id": "KARP-CLOCK-NP",
+      "lane": "KARP21",
+      "donors": [
+        {
+          "pr": 1474,
+          "path": "DASHI/Mathematics/Complexity/Karp21NativeWholeBinaryGraphRuntimeExact.agda",
+          "declaration": "readNativeWholeBinaryGraphWord",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "fcadcb35b2d6d629952f70f2d1f46714fe77b36f"
+        }
+      ],
+      "consumer": "karpFractranBitMachineClockPolynomial; CertifiedKarpNetwork",
+      "paid": "Binary parsed graph avoids unary native gamma Nat materialization in the whole-graph executable",
+      "missing": "Full live heap and temporary buffers; complete finite-table trace and polynomial step bound; 20 costed reductions, Cook-Levin, 21 original NP memberships; SATNotInP independent",
+      "classification": "formalization",
+      "cross_branch_state": "same_branch_unclosed",
+      "kernel_accepted_in_this_reconciliation": false,
+      "terminal_gate_closed": false,
+      "source_weld_promotion": false
+    },
+    {
+      "id": "BSD-K1-K3",
+      "lane": "BSD",
+      "donors": [
+        {
+          "pr": 1500,
+          "path": "DASHI/Mathematics/Arithmetic/EllipticActualDyadicPrimePlaceExact.agda",
+          "declaration": "actualDyadicFinitePrime",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "cd6583da3dcaae333f452a6cef67e82dd53ebe29"
+        },
+        {
+          "pr": 1500,
+          "path": "DASHI/Mathematics/Arithmetic/EllipticOriginalSelmerCohomologyExhaustionExact.agda",
+          "declaration": "originalSelmerGlobalH1ExhaustedByActualTorsion",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "cd6583da3dcaae333f452a6cef67e82dd53ebe29"
+        },
+        {
+          "pr": 107,
+          "path": "Synthesis/MillenniumBSDCMOriginalGeometricKummerGaloisEquivariantExact.lean",
+          "declaration": "cmSelectedGeometricKummerShortExact_galois_equivariant",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "96d1a0ea2422769ef07afad6f513df39e9de6519"
+        }
+      ],
+      "consumer": "actual E(Q) local Kummer image to Selmer class, faithful global cohomology and rank",
+      "paid": "Prime-2 actual label; 16->8->4 rational class sieve; genuine H1 exhaustion compiler with five explicit premises",
+      "missing": "Prove real/Q2 and all-good-prime Kummer images, cohomology naturality, faithful global H1 encoding; Mordell-Weil rank theorem",
+      "classification": "arithmetic_source",
+      "cross_branch_state": "agda_lean_donor_weld",
+      "kernel_accepted_in_this_reconciliation": false,
+      "terminal_gate_closed": false,
+      "source_weld_promotion": false
+    },
+    {
+      "id": "BSD-K2-SHA",
+      "lane": "BSD",
+      "donors": [
+        {
+          "pr": 1500,
+          "path": "DASHI/Mathematics/Arithmetic/EllipticOriginalSelmerCohomologyExhaustionExact.agda",
+          "declaration": "originalSelmerElementH1ImageExhausted",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "cd6583da3dcaae333f452a6cef67e82dd53ebe29"
+        },
+        {
+          "pr": 107,
+          "path": "Synthesis/MillenniumBSDCMActualEBarRestrictedShaTwoTargetExact.lean",
+          "declaration": "cmSelectedEBarRestrictedShaTwo_mem_iff",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "96d1a0ea2422769ef07afad6f513df39e9de6519"
+        }
+      ],
+      "consumer": "classical 0->E(Q)/2E(Q)->Sel2(E)->Sha(E)[2]->0",
+      "paid": "Source-specific global H1 exhaustion conditional; Lean selected Ebar geometry and naturality donor present",
+      "missing": "Genuine continuous Galois cohomology Kummer LES and classical Sha[2] identification; source-selected actual E(Q) map",
+      "classification": "formal_weld",
+      "cross_branch_state": "agda_lean_donor_weld",
+      "kernel_accepted_in_this_reconciliation": false,
+      "terminal_gate_closed": false,
+      "source_weld_promotion": false
+    },
+    {
+      "id": "BSD-K4-K5",
+      "lane": "BSD",
+      "donors": [
+        {
+          "pr": 1500,
+          "path": "DASHI/Mathematics/Automorphic/EllipticSelectedHeckePrimePowerExact.agda",
+          "declaration": "rowHeckeEulerCancellation",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "cd6583da3dcaae333f452a6cef67e82dd53ebe29"
+        },
+        {
+          "pr": 1500,
+          "path": "DASHI/Mathematics/Arithmetic/EllipticShaTwoNotFullShaAgdaNegativeControlExact.agda",
+          "declaration": "vanishingTwoTorsionDoesNotForceGroupTrivial",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "cd6583da3dcaae333f452a6cef67e82dd53ebe29"
+        },
+        {
+          "pr": 107,
+          "path": "Synthesis/MillenniumBSDCMLevel32GammaSpecialValuePositiveExact.lean",
+          "declaration": "cmLevel32PublishedSpecialValueCandidate_pos",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "96d1a0ea2422769ef07afad6f513df39e9de6519"
+        }
+      ],
+      "consumer": "selected curve original L(E,1)>0, exact leading term and full Sha",
+      "paid": "Seven Frobenius original Hecke recurrence; constructive C3[2]=0 C3!=0 negative control",
+      "missing": "All-prime modular coefficients, eta product and Bishop Mellin identity to original selected L; odd-primary Sha and leading coefficient; never deduce full Sha from Sha2",
+      "classification": "arithmetic_source",
+      "cross_branch_state": "same_branch_unclosed",
+      "kernel_accepted_in_this_reconciliation": false,
+      "terminal_gate_closed": false,
+      "source_weld_promotion": false
+    },
+    {
+      "id": "NS-R850-R830",
+      "lane": "NS",
+      "donors": [
+        {
+          "pr": 1501,
+          "path": "DASHI/Physics/Closure/NSTriadKNR650Rational345SnapshotIdentificationRound850Exact.agda",
+          "declaration": "round850R829VectorClosed",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "2f382b4d8e5a7c3493dfcc660099a8c0d2bd9c39"
+        },
+        {
+          "pr": 1501,
+          "path": "DASHI/Physics/Closure/NSTriadKNR650CanonicalSelectedRateNormalFormRound853Exact.agda",
+          "declaration": "round853GeneralR815SelectedRateNormalFormClosed",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "2f382b4d8e5a7c3493dfcc660099a8c0d2bd9c39"
+        },
+        {
+          "pr": 1501,
+          "path": "DASHI/Physics/Closure/NSTriadKNR650Rational345ForcingSupportMaxCutRound846Exact.agda",
+          "declaration": "round846ZeroOutputUsesR436TransverseVanishing",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "2f382b4d8e5a7c3493dfcc660099a8c0d2bd9c39"
+        }
+      ],
+      "consumer": "R830 same selected real ODE trajectory / negative short-time rate integral",
+      "paid": "R850 actual t=0 signed rate negative and R853 general pointwise expression source-written; R846 repaired zero mode using R436",
+      "missing": "Construct actual Round71 real-time finite ODE solution and identify derivative with R853 physical rate, strict integrated negative window; unrelated NS global T3 wall remains",
+      "classification": "formal_weld",
+      "cross_branch_state": "same_branch_unclosed",
+      "kernel_accepted_in_this_reconciliation": false,
+      "terminal_gate_closed": false,
+      "source_weld_promotion": false
+    },
+    {
+      "id": "NS-C-LEAN",
+      "lane": "NS",
+      "donors": [
+        {
+          "pr": 109,
+          "path": "ExternalClayNS/LeanDojoCComparatorBridge.lean",
+          "declaration": "leanDojoFeffermanC_of_transport",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "317ff04a74e51f35d72e7784e3de2999f32ab15b"
+        }
+      ],
+      "consumer": "Fefferman C actual initial/forcing decay, momentum, div=0, finite energy",
+      "paid": "Smooth-slice strongly measurable transport source-written on stacked Lean branch",
+      "missing": "Five exact same-solution R3 transport leaves, original time-zero momentum/equation and energy; pinned Lean local checker",
+      "classification": "formal_weld",
+      "cross_branch_state": "stacked_lean_unclosed",
+      "kernel_accepted_in_this_reconciliation": false,
+      "terminal_gate_closed": false,
+      "source_weld_promotion": false
+    },
+    {
+      "id": "RH-A2-G3",
+      "lane": "RH",
+      "donors": [
+        {
+          "pr": 108,
+          "path": "Synthesis/RiemannContinuousFifthMomentSignAudit.lean",
+          "declaration": "continuousFifthGap_strictly_negative",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "7ac99d0807c31e20a7fd8e8a6a9ae50b63210b87"
+        }
+      ],
+      "consumer": "Lean #50 original strict signed A2 debt vs far-zero compensation + original discrete signedFifthCorrelationGapAt",
+      "paid": "Continuous fifth-moment negative IBP sign is distinct from original Route-B and cannot promote RH; selected signed M6 cap and debt/gain algebra present",
+      "missing": "Original strict A2/G3 same-zero-shell compensation and eventual Route-B discrete sign; source-specific uniform analytic inequalities, not the continuous false target",
+      "classification": "new_mathematics",
+      "cross_branch_state": "different_functional",
+      "kernel_accepted_in_this_reconciliation": false,
+      "terminal_gate_closed": false,
+      "source_weld_promotion": false
+    },
+    {
+      "id": "HODGE-P1-CYCLECLASS",
+      "lane": "HODGE",
+      "donors": [
+        {
+          "pr": 40,
+          "path": "Synthesis/MillenniumHodgeP1QRulingCyclesExact.lean",
+          "declaration": "p1QRulingDifference_antiInvariant",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "28e99cd51ab4dc1e538c1f70cf77e460aa3ac672"
+        }
+      ],
+      "consumer": "cycleClass selected Hodge carrier and pushforward naturality",
+      "paid": "Genuine Proj P1xP1, ruling algebraic cycles, actual factor-swap pushforward anti-invariant source-written in merged PR",
+      "missing": "Geometric instances, original cohomology cycle-class map and proper pushforward naturality; universal Hodge distinct",
+      "classification": "formal_weld",
+      "cross_branch_state": "merged_donor_unclosed",
+      "kernel_accepted_in_this_reconciliation": false,
+      "terminal_gate_closed": false,
+      "source_weld_promotion": false
+    },
+    {
+      "id": "WORLD-1495-1484",
+      "lane": "WORLD",
+      "donors": [
+        {
+          "pr": 1494,
+          "path": "scripts/lean_world_native_admission_queue.py",
+          "declaration": "verify_receipt",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "a3e0e9cfdcce8bc3aa6c1a0a31fd2f90f8b2bedd"
+        },
+        {
+          "pr": 1495,
+          "path": "scripts/lean_world_builder_contract.py",
+          "declaration": "validate_through_builder",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "53db64eea732920eb7841bd06e9816defd91646c"
+        },
+        {
+          "pr": 1484,
+          "path": "scripts/lean_world_postgres_candidate.py",
+          "declaration": "persist_candidate_world",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "6c829bdf0d284dca393abecbebfb13e939908d56"
+        }
+      ],
+      "consumer": "authoritative native-v3 Lean checker proof DAG -> same canonical PostgreSQL world",
+      "paid": "Stacked content-addressed handoff and builder contract; independent PostgreSQL keyset source; pinned JMD read-only observation owner exists",
+      "missing": "Execute pinned Rust nanoda/native proof acceptance plus negative controls, join exact same-export checker result to #1484 DAG; contract adapter cannot certify itself",
+      "classification": "integration",
+      "cross_branch_state": "divergent_stack_unjoined",
+      "kernel_accepted_in_this_reconciliation": false,
+      "terminal_gate_closed": false,
+      "source_weld_promotion": false
+    },
+    {
+      "id": "YM-R445-P0",
+      "lane": "YM",
+      "donors": [
+        {
+          "pr": 1444,
+          "path": "DASHI/Physics/YangMills/YMClayE1OriginalR445ThreeMomentCutoffTransportExact.agda",
+          "declaration": "originalE1CovarianceErrorFromThreePhysicalCutoffMoments",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "7a559643506cc1de24ffb8a64c78a5b45493c97d"
+        },
+        {
+          "pr": 1498,
+          "path": "DASHI/Physics/YangMills/BalabanP0LiteralIndexedTensorWardSourceExact.agda",
+          "declaration": "fourAxisContraction",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "c979a2822471e1e8511dbc5fbf11a6c2469befb5"
+        }
+      ],
+      "consumer": "original nonconstant Wilson F/G/FG error and four-diagram Ward-physical source",
+      "paid": "Original E1 F/G/FG source and covariance weld + physical indexed Ward AST separate",
+      "missing": "Original uniform RG estimates, physical four-diagram numerators and Ward, same-Bishop trace/scalar; never identify this with Clay E1/D1/D2 closure",
+      "classification": "new_mathematics",
+      "cross_branch_state": "not_present_together",
+      "kernel_accepted_in_this_reconciliation": false,
+      "terminal_gate_closed": false,
+      "source_weld_promotion": false
+    },
+    {
+      "id": "VOA-Y443-FLM",
+      "lane": "VOA",
+      "donors": [
+        {
+          "pr": 1472,
+          "path": "DASHI/Moonshine/Y443Original79CentralQuotientIs80Exact.agda",
+          "declaration": "original80IffHistorical79Central",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "00eadae44260d4a229543cff0eed8dff8be04b11"
+        },
+        {
+          "pr": 1472,
+          "path": "DASHI/Moonshine/Y443FLMDirectSameObjectCapstoneExact.agda",
+          "declaration": "PublishedFLMAndJMDSource",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "00eadae44260d4a229543cff0eed8dff8be04b11"
+        }
+      ],
+      "consumer": "actual historical Q80 Monster isomorphism and selected FLM/Vnatural same action",
+      "paid": "Historical 79+central source congruence matches universal 80 relators; FLM/JMD concrete same-VOA action compiler consumes explicit genuine Griess and Huang inputs",
+      "missing": "Actual group quotient isomorphism, genuine Griess product/weight-two generation, selected VOA action and class traces; no Monster uniqueness from relator count alone",
+      "classification": "formal_weld",
+      "cross_branch_state": "same_branch_unclosed",
+      "kernel_accepted_in_this_reconciliation": false,
+      "terminal_gate_closed": false,
+      "source_weld_promotion": false
+    },
+    {
+      "id": "BIOLOGY-BH4-PNP",
+      "lane": "BIOLOGY",
+      "donors": [
+        {
+          "pr": 1454,
+          "path": "DASHI/Biology/Molecular/BH4OriginalNativeComputedBishopConservationExact.agda",
+          "declaration": "originalNativeComputedSixAxisBishopConserves",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "e6d0eee68d248659d2239ee5a4b64191e37a81d1"
+        },
+        {
+          "pr": 1454,
+          "path": "DASHI/Biology/Molecular/BH4OriginalSGPhysicalMaxCutCounterexamplesExact.agda",
+          "declaration": "originalGlobalNotCellwiseCounterexample",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "e6d0eee68d248659d2239ee5a4b64191e37a81d1"
+        },
+        {
+          "pr": 1471,
+          "path": "DASHI/Biology/Physical/BiologicalHistoryFutureQuotientExact.agda",
+          "declaration": "traceAgreementFromCoarse",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "bd8de172f4db26e1527b69c6893f0ec759a9dcd0"
+        }
+      ],
+      "consumer": "actual semidiscrete BH4 SG/Poisson positivity, conservation and history-indexed tissue evolution",
+      "paid": "Native 27x54 transfer per-species conservation; 29x12 reaction six-axis neutralities as source premises; selected global-not-cellwise counterexample and finite future quotient test",
+      "missing": "Actual nonlinear SG/Poisson RHS and nonnegative simplex invariant, physical reaction rate bounds, diffusion, tissue source/morphology and calibrated experimental trajectories; #1454 and #1471 live on distinct branches",
+      "classification": "analytic_source",
+      "cross_branch_state": "not_present_together",
+      "kernel_accepted_in_this_reconciliation": false,
+      "terminal_gate_closed": false,
+      "source_weld_promotion": false
+    },
+    {
+      "id": "CYBERSYN-WORLD",
+      "lane": "CYBERSYN",
+      "donors": [
+        {
+          "pr": 1496,
+          "path": "scripts/cybersyn_policy_rate_network_cost_forecast.py",
+          "declaration": "calculate",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "2e6aa8c4c162c30070f917ed082c6b260de56bdb"
+        },
+        {
+          "pr": 1495,
+          "path": "scripts/lean_world_builder_contract.py",
+          "declaration": "validate_through_builder",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "53db64eea732920eb7841bd06e9816defd91646c"
+        }
+      ],
+      "consumer": "sourced Fed/RBA rate forecast, Australian AER network incidence, and reproducible economic observation world",
+      "paid": "Scenario/sourced sensitivity code and pinned dated public records; independent immutable proof-world builder contract exists",
+      "missing": "Calibrate source-date and real AER/market time series, model forecast error and counterfactual allocation without treating futures as actual outcomes or all network increases as data-centre-caused; proof-world adapter cannot auto-admit economic models",
+      "classification": "integration",
+      "cross_branch_state": "cross_repo_semantics_unjoined",
+      "kernel_accepted_in_this_reconciliation": false,
+      "terminal_gate_closed": false,
+      "source_weld_promotion": false
+    }
+  ],
+  "claim_no_clay_problem_solved": true,
+  "no_kernel_acceptances_obtained": true,
+  "import_closure_warning": "Former eta-vs-native-exp source co-location blocker has been addressed by verbatim transfer of 10 PR1408 eta sources onto PR1478 at head 6ff07d854e326c3fab9553c2254fe8cee2c416f1. All 10 donor blob SHAs match exactly. A new source-specific factorial/native exp convergence term weld is committed. Local Agda kernel acceptance is still absent; direct log(2n)/exp-product dyadic identity, compact-uniform eta convergence and analytic zeta identification remain OPEN. Lean world #1495 stacks on #1494 and #1484 PostgreSQL remains independent.",
+  "source_terminal_gates_closed_here": 0,
+  "source_integrity": "All 40 source files and exact declaration identifier strings were individually read back at the 20 pinned PR head SHAs by connected GitHub fetch_file, with false descriptive labels corrected. Readback tests file presence/identifier, NOT Agda or Lean kernel acceptance, import closure or physical content of the claimed theorem.",
+  "programme_scope": "Eight primary mathematical/proof-world lanes plus VOA, BH4/tissue and Cybersyn; this ledger does not substitute for the original six-Clay terminal ledger.",
+  "source_readback_counts": {
+    "donor_files": 40,
+    "identifier_seen": 40,
+    "unverified_terms": 0,
+    "agda_lean_kernel_receipts": 0
+  },
+  "source_dependency_transfer": {
+    "date": "2026-11-13",
+    "destination_pr": 1478,
+    "destination_head_sha": "6ff07d854e326c3fab9553c2254fe8cee2c416f1",
+    "from_pr": 1408,
+    "from_head_sha": "28d85aa529155352a025de9e12853ecad1e4214e",
+    "verbatim_files": 10,
+    "source_blob_sha_matches": 10,
+    "proof_owner": "DASHI/Analysis/BishopOriginalEtaNativeFactorialExpSourceWeldExact.agda",
+    "new_source_theorems": [
+      "actualOriginalEtaExponentialRealIsNativeFactorialLimit",
+      "actualOriginalEtaExponentialImagIsNativeFactorialLimit",
+      "actualOriginalEtaTermFactorialSeriesConverges",
+      "originalRound11EtaTermFactorialConvergence"
+    ],
+    "verification": "source written, Github readback + source SHA identity, NOT Agda kernel accepted",
+    "golden_local_checker": "scripts/check_bishop_eta_native_exp_cross_pr_local.sh",
+    "remaining_analytic_gates": [
+      "same-original canonical Nat logarithm dyadic multiplicativity",
+      "same-original Bishop complex exponential product law",
+      "original even-term dyadic scale identity",
+      "compact-uniform original eta convergence",
+      "zero/division and independent original zeta identification"
+    ],
+    "no_clay_gate_promoted": true
+  }
+}

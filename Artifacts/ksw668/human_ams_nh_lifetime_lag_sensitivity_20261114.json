@@ -1,0 +1,76 @@
+{
+  "schema": "dashi.ksw668.nh-human-atmospheric-lag-original-source-receipt.v1",
+  "date_utc": "2026-11-14",
+  "source": "Heinemeier et al. 2013 DOI 10.1096/fj.12-225599 (30 tendon AMS assays) + Hua et al 2021/22 DOI 10.1017/RDC.2021.95 NH1 NH2 NH3 70 annual calibrated atmospheric rows each",
+  "raw_github_blobs": {
+    "NH1": "f7ff49b2ff6ed99f2a6b5aa811c86a774082cbcf",
+    "NH2": "296b7fbbee8f69f87501be05f9b1a1391a49e0f5",
+    "NH3": "aafd74536ec0690f1c1943ac98da3caf7972f59f"
+  },
+  "method": "Source lifetime original birth year through original 2000 post-mortem assay year; allow both endpoint ages an extra ±L years at L 0,1,2,5, restrict to original annual NH midyear source rows; numerical 100exp(-ageBP/8033) atmospheric proxy compared to uncalibrated original human AMS pMC; not a diet model or causal test",
+  "results": [
+    {
+      "expanded_window_years": 0,
+      "author_flagged_outside_all_NH_zones": 5,
+      "other_tendon_outside_any_zone": 0,
+      "NH2_flagged_margins_proxy": [
+        4.390349,
+        5.020349,
+        15.467841,
+        17.490083,
+        19.800083
+      ]
+    },
+    {
+      "expanded_window_years": 1,
+      "author_flagged_outside_all_NH_zones": 5,
+      "other_tendon_outside_any_zone": 0,
+      "NH2_flagged_margins_proxy": [
+        3.708108,
+        4.338108,
+        13.785442,
+        15.501503,
+        17.811503
+      ]
+    },
+    {
+      "expanded_window_years": 2,
+      "author_flagged_outside_all_NH_zones": 5,
+      "other_tendon_outside_any_zone": 0,
+      "NH2_flagged_margins_proxy": [
+        3.219517,
+        3.849517,
+        10.088804,
+        14.407841,
+        16.717841
+      ]
+    },
+    {
+      "expanded_window_years": 5,
+      "author_flagged_outside_all_NH_zones": 5,
+      "other_tendon_outside_any_zone": 0,
+      "NH2_flagged_margins_proxy": [
+        1.646634,
+        2.276634,
+        4.310529,
+        8.230198,
+        10.540198
+      ]
+    }
+  ],
+  "flagged_original_AMS_order": [
+    "15882.1",
+    "15882.2",
+    "16252",
+    "15883",
+    "16247"
+  ],
+  "script": "scripts/ksw668_human_lifetime_lag_sensitivity.py",
+  "status": "source-derived hypothesis-screen sensitivity, NOT inferred nuclear mechanism",
+  "unresolved": [
+    "pMC convention vs F14C",
+    "original NH location, diet and international food transport",
+    "carbon half-life, AMS laboratory blank/normalization and uncertainty covariance",
+    "actual same-specimen physiological interventions"
+  ]
+}

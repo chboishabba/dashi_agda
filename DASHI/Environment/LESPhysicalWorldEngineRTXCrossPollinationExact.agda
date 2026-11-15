@@ -177,7 +177,7 @@ open WorldAdaptivePhysicsController public
 record WorldPhotosynthesisConsumer
     {world : LESWorldEngineCarrier}
     {LeafPoint Wavelength PhotonFlux : Set}
-    (field : Photo.PhotosyntheticPhotonField LeafPoint Wavelength PhotonFlux)
+    (photonField : Photo.PhotosyntheticPhotonField LeafPoint Wavelength PhotonFlux)
     : Set₁ where
   constructor world-photosynthesis-consumer
   field
