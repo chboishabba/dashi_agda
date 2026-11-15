@@ -27,7 +27,7 @@ def check(dr=.025,dy=.035,nr=25,ny=12,t=1.7,T=.3,normal_order=2):
             cp[q,j]=d*(j+.5)**(d-1)/den
             cm[q,j]=d*(j-.5)**(d-1)/den
     amp=2*v*T
-    enforce(U,P,M,v,amp,src)
+    enforce(U,P,M,v,amp,src,normal_order)
     outU=U.copy();outP=U.copy();outM=U.copy()
     stage(U,P,M,outU,outP,outM,dr,dy,b,v,amp,src,cp,cm,normal_order)
     errU=[];errP=[];errM=[]
