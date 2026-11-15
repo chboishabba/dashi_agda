@@ -44,22 +44,22 @@ data Requires : SourceRealizationLeaf → SourceRealizationLeaf → Set where
   sourceNeedsLiteralD1ChainRule :
     Requires physicalSourceClosure literalPhysicalCompositeChainRule
 
-round151InternalCompilerClosed : leafState round108DirectCompiler ≡ closed
+round151InternalCompilerClosed : leafState round108DirectCompiler ≡ leafClosed
 round151InternalCompilerClosed = refl
 
 round151LiteralRealizationStillLive :
-  leafState literalRound108DensityPotentialRealization ≡ open
+  leafState literalRound108DensityPotentialRealization ≡ leafOpen
 round151LiteralRealizationStillLive = refl
 
-round152InternalCompilerClosed : leafState componentD1ReductionCompiler ≡ closed
+round152InternalCompilerClosed : leafState componentD1ReductionCompiler ≡ leafClosed
 round152InternalCompilerClosed = refl
 
 round152LiteralChainRuleStillLive :
-  leafState literalPhysicalCompositeChainRule ≡ open
+  leafState literalPhysicalCompositeChainRule ≡ leafOpen
 round152LiteralChainRuleStillLive = refl
 
 internalCompilerClosureDoesNotCloseSource :
-  leafState physicalSourceClosure ≡ blocked
+  leafState physicalSourceClosure ≡ leafBlocked
 internalCompilerClosureDoesNotCloseSource = refl
 
 highestImpactRealizationLeaf : SourceRealizationLeaf

@@ -306,5 +306,5 @@ highestImpactStructuralLeaf : StoneVonNeumannProofLeaf
 highestImpactStructuralLeaf = extractNonzeroCoordinateFromNonzeroVector
 
 highestImpactStructuralLeafIsOpen :
-  leafState highestImpactStructuralLeaf ≡ open
+  leafState highestImpactStructuralLeaf ≡ leafOpen
 highestImpactStructuralLeafIsOpen = refl
