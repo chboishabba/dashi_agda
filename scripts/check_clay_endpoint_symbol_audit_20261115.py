@@ -95,26 +95,32 @@ def main() -> int:
     lean_receipts = evidence.get("lean_sources", {})
     if len(original) != 47 or len(lean_receipts) != 3:
         problems.append("P0_RECEIPT_TRUNCATED: expected 47 Agda and 3 Lean owners")
-    # The gate manifest must reflect the original P0 source acceptance and
-    # the explicitly user-authorized C1 Python/SymPy mathematical acceptance;
-    # C1 must not masquerade as native Agda kernel acceptance.
+    # Python/SymPy mathematical gate closure, as explicitly authorized by the
+    # user. Neither C1 nor C2 may masquerade as an Agda kernel or R408 record.
     manifest = audit.get("gates", [])
     completed = [g["id"] for g in manifest if g.get("closed", False)]
     active = [g["id"] for g in manifest if not g.get("closed", False)]
     if (len(manifest) != 15
-            or audit.get("active_gate_count") != 13
+            or audit.get("active_gate_count") != 12
             or audit.get("active_gate_ids") != active
-            or audit.get("completed_gate_ids") != ["P0", "C1"]
-            or completed != ["P0", "C1"]):
-        problems.append("PHASE_GATE_COUNT_MISMATCH: expected P0+C1 (Python math), 13 active")
-    c1 = next((g for g in manifest if g["id"] == "C1"), None)
-    if (c1 is None
-            or c1.get("status") != "CLOSED_MATHEMATICAL_PYTHON_SYMPY"
-            or c1.get("native_agda_theorem_inhabited") is not False
-            or c1.get("native_kernel_proof_receipt") is not False
-            or c1.get("physical_R408_time_packet_constructed") is not False
-            or not (ROOT / "scripts/check_clay_c1_r71_r74_sympy_bridge_20261115.py").is_file()):
-        problems.append("C1_PYTHON_CLOSURE_PROTOCOL_OR_NATIVE_DEBT_MISSING")
+            or audit.get("completed_gate_ids") != ["P0", "C1", "C2"]
+            or completed != ["P0", "C1", "C2"]):
+        problems.append("PHASE_GATE_COUNT_MISMATCH: expected P0+C1+C2 Python math, 12 active")
+    for gate_id, script in [
+        ("C1", "check_clay_c1_r71_r74_sympy_bridge_20261115.py"),
+        ("C2", "check_clay_c2_r853_selected_rate_sympy_20261115.py"),
+    ]:
+        gate = next((g for g in manifest if g["id"] == gate_id), None)
+        if (gate is None
+                or gate.get("status") != "CLOSED_MATHEMATICAL_PYTHON_SYMPY"
+                or gate.get("native_agda_theorem_inhabited") is not False
+                or gate.get("native_kernel_proof_receipt") is not False
+                or gate.get("physical_R408_time_packet_constructed") is not False
+                or not (ROOT / "scripts" / script).is_file()):
+            problems.append(f"{gate_id}_PYTHON_CLOSURE_PROTOCOL_OR_NATIVE_DEBT_MISSING")
+    c2 = next((g for g in manifest if g["id"] == "C2"), None)
+    if c2 is None or c2.get("original_typed_R408_R853_real_field_transport_closed") is not False:
+        problems.append("C2_ORIGINAL_R408_TYPED_PHYSICAL_WELD_FALSIFIED_OR_MISSING")
     for owner, receipt in original.items():
         if (ROOT / owner).is_file():
             actual = git_blob_sha(ROOT, owner)
