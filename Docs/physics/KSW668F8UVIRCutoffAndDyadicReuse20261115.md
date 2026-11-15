@@ -122,3 +122,15 @@ The original 96-node vs independent 384-node radial bump quadrature changes the 
 New owner: \`scripts/ksw668_f8_static_tt_reconstruction_null.py\` and its **10/10** local tests. This supplies a strict **mandatory acceptance prerequisite** for F8.3: the same inverse transform must reproduce compact local TT-source support to the designated numerical tolerance on an independently converged grid **before** the moving-wave source-to-Weyl value can be accepted. It also pinpoints the positive repair route: adaptive/oscillatory \(k\)-quadrature with independent \(\Delta k\) and \(k_{\max}\), plus a provably controlled source support null check.
 
 **Combined independent source-equivalent run (2026-11-15):** F8 original 68 previous tests plus 13 source-UVIR, 12 IR-spacing, and 10 exact-support static null tests = **103/103 PASS**, captured in \`ksw668_f8_uvir_combined_local_acceptance_20261115.log\`. The 10 negative-control tests PASS because they correctly detect a failed numerical method; this does NOT mean the physical F8 receiver convergence passed. Exact GitHub-head executable, Agda 2.9 kernel and physical measurements remain unverified.
+
+
+## F8-REAL — exact positive AND negative local TT source reference
+
+The source support null test above now has an independent **real-space constructive differential formula**, not only an abstract support theorem. With \(P_{ij}=-\delta_{ij}\Delta+\partial_i\partial_j\), \(Q=\operatorname{diag}(0,1,-1)\), and a radial seed \(f(r)\), direct differential algebra on the \(x\)-axis gives
+\[
+\boxed{\left(PQP-\tfrac12P\,\operatorname{tr}(PQ)\right)_{yy}f(r,0,0)
+=f^{(4)}+\frac{2f^{(3)}}r-\frac{3f''}{r^2}+\frac{3f'}{r^3}.}
+\]
+This identity is verified independently by SymPy against direct four-spatial-variable Cartesian differentiation of a nontrivial 3D Gaussian. Applied to the **same normalized original compact \(C^\infty\) radial bump**, with the existing \(\epsilon^4\) convention, it yields **\(-1{,}852{,}823.05935\)** at \(r=\epsilon/3=0.008\) and **exactly \(0\)** for any \(r\ge\epsilon=0.024\), including the F8 numerical receiver at \(r=1.82202\). At fixed scaled radius \(r/\epsilon\), the source value has the expected \(\epsilon^{-3}\) scaling. This is the independent reference that the **radial Fourier reconstruction must reproduce** before its wave-propagated version can be accepted. New \`scripts/ksw668_f8_exact_spatial_tt_local.py\` and **8/8** tests.
+
+Full local source-equivalent F8 math suite: old 68 + new 13 UV moments +12 independent momentum-spacing +10 static false-source +8 exact real-space source = **111/111 PASS** in one independent unittest-discover run. **The numerical F8 3D receiver is still NOT converged.** Tests that demonstrate false nonzero values on an exact-zero control count as successful diagnostic tests, not successes of the physical signal criterion.
