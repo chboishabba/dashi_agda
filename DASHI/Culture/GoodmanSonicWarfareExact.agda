@@ -603,7 +603,11 @@ mirrorMechanismCollision =
 mirrorNameDoesNotDetermineMechanism :
   Query.AdequateFor mirrorProjection mirrorSemantics mechanismQuery → ⊥
 mirrorNameDoesNotDetermineMechanism =
-  Query.queryAdequacyDefectBlocksFactorisation mirrorMechanismCollision
+  Query.queryAdequacyDefectBlocksFactorisation
+    {project = mirrorProjection}
+    {semantics = mirrorSemantics}
+    {query = mechanismQuery}
+    mirrorMechanismCollision
 
 acousticMirrorIsNotKozyrevReferent :
   acousticReflection ≡ kozyrevMirrorClaim → ⊥
@@ -665,7 +669,11 @@ responseProjectionDefect =
 acousticFeaturesDoNotDetermineEveryResponse :
   Query.AdequateFor acousticFeatures encounterSemantics responseQuery → ⊥
 acousticFeaturesDoNotDetermineEveryResponse =
-  Query.queryAdequacyDefectBlocksFactorisation responseProjectionDefect
+  Query.queryAdequacyDefectBlocksFactorisation
+    {project = acousticFeatures}
+    {semantics = encounterSemantics}
+    {query = responseQuery}
+    responseProjectionDefect
 
 
 ------------------------------------------------------------------------
@@ -750,6 +758,9 @@ signalResponseDefect :
     signalOnly contextualSemantics responseFromWorldQuery
 signalResponseDefect =
   Query.queryAdequacyDefect
+    {project = signalOnly}
+    {semantics = contextualSemantics}
+    {query = responseFromWorldQuery}
     loudProtected loudExposed refl (λ ())
 
 contextResponseDefect :
@@ -757,19 +768,30 @@ contextResponseDefect :
     contextOnly contextualSemantics responseFromWorldQuery
 contextResponseDefect =
   Query.queryAdequacyDefect
+    {project = contextOnly}
+    {semantics = contextualSemantics}
+    {query = responseFromWorldQuery}
     quietExposed loudExposed refl (λ ())
 
 signalAloneCannotDetermineContextualResponse :
   Query.AdequateFor
     signalOnly contextualSemantics responseFromWorldQuery → ⊥
 signalAloneCannotDetermineContextualResponse =
-  Query.queryAdequacyDefectBlocksFactorisation signalResponseDefect
+  Query.queryAdequacyDefectBlocksFactorisation
+    {project = signalOnly}
+    {semantics = contextualSemantics}
+    {query = responseFromWorldQuery}
+    signalResponseDefect
 
 contextAloneCannotDetermineContextualResponse :
   Query.AdequateFor
     contextOnly contextualSemantics responseFromWorldQuery → ⊥
 contextAloneCannotDetermineContextualResponse =
-  Query.queryAdequacyDefectBlocksFactorisation contextResponseDefect
+  Query.queryAdequacyDefectBlocksFactorisation
+    {project = contextOnly}
+    {semantics = contextualSemantics}
+    {query = responseFromWorldQuery}
+    contextResponseDefect
 
 jointSignalContextDeterminesSyntheticResponse :
   Query.AdequateFor
