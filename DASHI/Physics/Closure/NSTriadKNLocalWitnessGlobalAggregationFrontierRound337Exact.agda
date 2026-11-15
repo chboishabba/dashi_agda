@@ -24,16 +24,16 @@ data AggregationLeaf : Set where
   spacetimePayment : AggregationLeaf
   packageA : AggregationLeaf
 
-data LeafState : Set where closed open blocked : LeafState
+data LeafState : Set where leafClosed leafOpen leafBlocked : LeafState
 
 leafState : AggregationLeaf → LeafState
-leafState physicalPairedCellMajorant = closed
-leafState fixedOutputRowEnumeration = closed
-leafState deterministicReverseColumn = closed
-leafState physicalPairwiseOverlapEnvelope = open
-leafState cutoffUniformSignedPreTTStar = blocked
-leafState spacetimePayment = blocked
-leafState packageA = blocked
+leafState physicalPairedCellMajorant = leafClosed
+leafState fixedOutputRowEnumeration = leafClosed
+leafState deterministicReverseColumn = leafClosed
+leafState physicalPairwiseOverlapEnvelope = leafOpen
+leafState cutoffUniformSignedPreTTStar = leafBlocked
+leafState spacetimePayment = leafBlocked
+leafState packageA = leafBlocked
 
 data Requires : AggregationLeaf → AggregationLeaf → Set where
   preTTStarNeedsPairwiseEnvelope :
@@ -59,13 +59,13 @@ cutoffUniformAggregationStillOpen : Bool
 cutoffUniformAggregationStillOpen = R336.round336CutoffUniformCotlarSteinClosed
 
 localClosureDoesNotPromoteGlobalAggregation :
-  leafState physicalPairedCellMajorant ≡ closed
+  leafState physicalPairedCellMajorant ≡ leafClosed
 localClosureDoesNotPromoteGlobalAggregation = refl
 
 highestImpactLeaf : AggregationLeaf
 highestImpactLeaf = physicalPairwiseOverlapEnvelope
 
-highestImpactLeafIsOpen : leafState highestImpactLeaf ≡ open
+highestImpactLeafIsOpen : leafState highestImpactLeaf ≡ leafOpen
 highestImpactLeafIsOpen = refl
 
 round337PackageAClosed : Bool

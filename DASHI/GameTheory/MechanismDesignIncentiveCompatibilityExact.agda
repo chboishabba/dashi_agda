@@ -93,7 +93,7 @@ misreportProfileFor = replaceReport
 DominantStrategyTruthfulFor :
   (M : MechanismDesignProblem) →
   (agent : Agent M) →
-  Set₁
+  Set
 DominantStrategyTruthfulFor M agent =
   (trueType : Type M agent) →
   (reports : ReportProfile M) →
@@ -250,3 +250,5 @@ record MechanismDesignBoundary : Set where
 canonicalMechanismDesignBoundary : MechanismDesignBoundary
 canonicalMechanismDesignBoundary =
   mechanism-design-boundary true true true true true true true false
+
+open MechanismDesignBoundary public

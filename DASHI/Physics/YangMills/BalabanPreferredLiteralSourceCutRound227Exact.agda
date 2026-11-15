@@ -30,17 +30,17 @@ data PreferredLiteralSourceWall227 : Set where
   cmp109NormalizedInteractionToMixedCauchy : PreferredLiteralSourceWall227
 
 data WallState227 : Set where
-  open blocked closed : WallState227
+  wallOpen wallBlocked wallClosed : WallState227
 
 preferredWallState227 : PreferredLiteralSourceWall227 → WallState227
-preferredWallState227 cmp119DensityToRegularE = open
-preferredWallState227 cmp109NormalizedInteractionToMixedCauchy = open
+preferredWallState227 cmp119DensityToRegularE = wallOpen
+preferredWallState227 cmp109NormalizedInteractionToMixedCauchy = wallOpen
 
-regularEWallIsOpen : preferredWallState227 cmp119DensityToRegularE ≡ open
+regularEWallIsOpen : preferredWallState227 cmp119DensityToRegularE ≡ wallOpen
 regularEWallIsOpen = refl
 
 mixedInteractionWallIsOpen :
-  preferredWallState227 cmp109NormalizedInteractionToMixedCauchy ≡ open
+  preferredWallState227 cmp109NormalizedInteractionToMixedCauchy ≡ wallOpen
 mixedInteractionWallIsOpen = refl
 
 cmp119RegularEWallLevel : ProofLevel

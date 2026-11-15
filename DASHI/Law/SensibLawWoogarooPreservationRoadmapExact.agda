@@ -1,8 +1,8 @@
 module DASHI.Law.SensibLawWoogarooPreservationRoadmapExact where
 
-open import DASHI.Core.Prelude
-open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.String using (String)
+openState import DASHI.Core.Prelude
+openState import Agda.Builtin.Bool using (Bool; false; true)
+openState import Agda.Builtin.String using (String)
 
 import DASHI.Law.SensibLawWoogarooPreservationLegalCutsetExact as Cutset
 import DASHI.Law.SensibLawWoogarooDecisionMakerAndDelayLineageExact as Decision
@@ -18,7 +18,7 @@ import DASHI.Law.SensibLawWoogarooPoliticalAlignmentExact as Politics
 data RoadmapState : Set where
   paid : RoadmapState
   live : RoadmapState
-  open : RoadmapState
+  openState : RoadmapState
   blockedOnExternalDecision : RoadmapState
 
 data RoadmapLane : Set where
@@ -42,7 +42,7 @@ record RoadmapCoordinate : Set where
     deadlineOrTiming : String
     promotionBoundary : String
 
-open RoadmapCoordinate public
+openState RoadmapCoordinate public
 
 condition6aExecutionGate : RoadmapCoordinate
 condition6aExecutionGate = roadmap-coordinate
@@ -65,7 +65,7 @@ federal8575 = roadmap-coordinate
 qldCriticalHabitat : RoadmapCoordinate
 qldCriticalHabitat = roadmap-coordinate
   queenslandCriticalHabitatLane
-  open
+  openState
   "NCA s 13 rule and candidate Woogaroo threatened-species/habitat evidence are source-paid at different fibres."
   "Produce a same-parcel application receipt showing why the exact habitat is essential for conservation of a viable protected-wildlife population or native-wildlife community."
   "high alpha before irreversible clearing; parallel with the execution gate"
@@ -74,7 +74,7 @@ qldCriticalHabitat = roadmap-coordinate
 qldInterim : RoadmapCoordinate
 qldInterim = roadmap-coordinate
   queenslandInterimRestraintLane
-  open
+  openState
   "NCA ss 102-107 mechanism is source-paid; threatening-process application is not yet same-object paid."
   "Bind exact proposed works/timing to threatened wildlife or s 13 habitat and likely significant detrimental effect; prepare interim conservation-order request."
   "before works commence; strongest once the 9281 same-phase/pre-start chronology is paid"
@@ -83,7 +83,7 @@ qldInterim = roadmap-coordinate
 qldPermanent : RoadmapCoordinate
 qldPermanent = roadmap-coordinate
   queenslandPermanentProtectionLane
-  open
+  openState
   "NCA s 49 compulsory nature-refuge route is source-paid."
   "Pay s 13/area-of-major-interest basis, exact parcels/tenure, suitability, and ministerial initiation package."
   "parallel with federal decision lane"
@@ -110,7 +110,7 @@ politicalAdvocacy = roadmap-coordinate
 enforcementBackstop : RoadmapCoordinate
 enforcementBackstop = roadmap-coordinate
   enforcementBackstopLane
-  open
+  openState
   "EPBC s 475 and NCA s 173D mechanisms are source-paid as legal routes."
   "Map any threatened conduct to an exact contravention/offence and standing/procedure before relying on court restraint. The 9281 Condition 6(a), same-phase, authoritative-geometry and imminence receipts are upstream payments, not substitutes for counsel's legal application."
   "activate if primary execution evidence shows works threaten to outrun or breach applicable legal controls"
@@ -119,7 +119,7 @@ enforcementBackstop = roadmap-coordinate
 custodianshipCommunity : RoadmapCoordinate
 custodianshipCommunity = roadmap-coordinate
   custodianshipCommunityAuthorityLane
-  open
+  openState
   "Woogaroo stewardship owner preserves Country/community authority, permission, representation, ecological evidence and public advocacy as distinct coordinates."
   "Identify and source-pay any local custodial/community authority relevant to Country, knowledge, permission or stewardship without treating ecological evidence or Indigenous identity as mandate."
   "parallel; do not hold statutory ecology work hostage to unresolved authority claims"

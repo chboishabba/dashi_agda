@@ -1,0 +1,179 @@
+module DASHI.Mathematics.Complexity.Karp21Everything where
+
+------------------------------------------------------------------------
+-- Focused compile/check root for the Karp (1972) integration tranche.
+-- DOI: 10.1007/978-1-4684-2001-2_9.
+-- Source-written only until checked with the pinned Agda toolchain.
+------------------------------------------------------------------------
+
+import DASHI.Mathematics.Complexity.Karp21HistoricalDagExact
+import DASHI.Mathematics.Complexity.PolynomialReductionExact
+import DASHI.Mathematics.Complexity.Karp21ReductionTransportExact
+import DASHI.Mathematics.Complexity.Karp21CliqueVertexCoverExact
+import DASHI.Mathematics.Complexity.Karp21CliqueSetPackingExact
+import DASHI.Mathematics.Complexity.Karp21WeightedCutObjectiveExact
+
+import DASHI.Mathematics.Complexity.Karp21VertexSetCoverIncidenceExact
+import DASHI.Mathematics.Complexity.Karp21ColouringCliqueCoverExact
+import DASHI.Mathematics.Complexity.Karp21ExactHittingTransposeExact
+import DASHI.Mathematics.Complexity.Karp21CertifiedDagTransportExact
+import DASHI.Mathematics.Complexity.Karp21PartitionCutQuadraticExact
+import DASHI.Mathematics.Complexity.Karp21SATToThreeSATGadgetExact
+import DASHI.Mathematics.Complexity.Karp21ScaledThresholdExact
+
+import DASHI.Mathematics.Complexity.Karp21PartitionScaledInstanceExact
+
+import DASHI.Mathematics.Complexity.Karp21HeterogeneousEncodingExact
+
+import DASHI.Mathematics.Complexity.Karp21FiniteCliqueCoverCardinalityExact
+
+import DASHI.Mathematics.Complexity.Karp21FiniteCliqueVertexCoverCombinedExact
+import DASHI.Mathematics.Complexity.Karp21FiniteWeightedMaxCutVerifierExact
+import DASHI.Mathematics.Complexity.Karp21SimpleGraphComplementExact
+
+import DASHI.Mathematics.Complexity.Karp21FiniteColouringCliqueCoverExact
+
+import DASHI.Mathematics.Complexity.Karp21SignedLaplacianCutExact
+
+import DASHI.Mathematics.Complexity.Karp21SignedGraphScaleAndAppendExact
+
+import DASHI.Mathematics.Complexity.Karp21PNFSignedTriangleSameObjectExact
+import DASHI.Mathematics.Complexity.Karp21SSPTernaryMaskedCutExact
+import DASHI.Mathematics.Complexity.Karp21SignedFrustrationBidiExact
+import DASHI.Mathematics.Complexity.Karp21SSPDualCheegerSignlessOneExact
+import DASHI.Mathematics.Complexity.Karp21FiniteCompleteGraphGeneratorExact
+import DASHI.Mathematics.Complexity.Karp21FiniteCompleteGraphObjectiveExact
+import DASHI.Mathematics.Complexity.Karp21SignedPartitionIndexedGraphDecisionExact
+
+import DASHI.Mathematics.Complexity.Karp21SignedPartitionActualGraphYESExact
+
+import DASHI.Mathematics.Complexity.Karp21MaxCutCertificateBinaryCodecExact
+
+import DASHI.Mathematics.Complexity.Karp21IndexedUpperPairBijectionExact
+
+import DASHI.Mathematics.Complexity.Karp21FiniteCliquePackingDecisionExact
+
+import DASHI.Mathematics.Complexity.Karp21FiniteNodeSetCoverDecisionExact
+
+import DASHI.Mathematics.Complexity.Karp21MalformedWordTotalReductionExact
+
+import DASHI.Mathematics.Complexity.Karp21UpperPairGraphEnumerationExact
+
+import DASHI.Mathematics.Complexity.Karp21VOAZ2CutOrbitExact
+
+import DASHI.Mathematics.Complexity.Karp21VOAGradeActionCertificateWeldExact
+
+import DASHI.Mathematics.Complexity.Karp21VOAGradeDimensionCutSeparationExact
+
+import DASHI.Mathematics.Complexity.Karp21CookStrictTripleBitBoundaryExact
+
+import DASHI.Mathematics.Complexity.Karp21CookLevinConcreteBitWordReuseExact
+
+import DASHI.Mathematics.Complexity.Karp21CookStrictSATLanguageExact
+
+import DASHI.Mathematics.Complexity.Karp21MichaelLevinGoalExecutionWitnessExact
+
+import DASHI.Mathematics.Complexity.Karp21MichaelLevinObserverCutQuotientBoundaryExact
+
+import DASHI.Mathematics.Complexity.Karp21LevinPrefixFreeCookCodingExact
+
+import DASHI.Mathematics.Complexity.Karp21SparseEndpointCutCertificateExact
+
+
+import DASHI.Mathematics.Complexity.Karp21CookFiniteOccurrenceWitnessExact
+import DASHI.Mathematics.Complexity.Karp21LeonidLevinSearchDecisionExact
+
+import DASHI.Mathematics.Complexity.Karp21PartitionSparseCutBidiExact
+
+import DASHI.Mathematics.Complexity.Karp21CookExecutableFiniteVerifierBidiExact
+
+import DASHI.Mathematics.Complexity.Karp21CookStrictWordCanonicalReencodeExact
+
+import DASHI.Mathematics.Complexity.Karp21StrictSATBoundedCertificateNPBoundaryExact
+
+import DASHI.Mathematics.Complexity.Karp21SparseGraphWordNPBoundaryExact
+
+import DASHI.Mathematics.Complexity.Karp21SignedPartitionActualGraphWordBoundaryExact
+
+import DASHI.Mathematics.Complexity.Karp21WeightedMaxCutFixedNoGraphExact
+
+import DASHI.Mathematics.Complexity.Karp21GammaZigzagPartitionWordDecodeExact
+
+import DASHI.Mathematics.Complexity.Karp21GammaZigzagGraphWordDecodeExact
+
+import DASHI.Mathematics.Complexity.Karp21GammaZigzagWordEncodeExact
+
+import DASHI.Mathematics.Complexity.Karp21EncodedFixedGraphWordsExact
+
+import DASHI.Mathematics.Complexity.Karp21CookAllWordCertificateBoundExact
+
+import DASHI.Mathematics.Complexity.Karp21CookConsistencyComparisonClockExact
+import DASHI.Mathematics.Complexity.Karp21CookUnaryIndexWordBoundExact
+
+import DASHI.Mathematics.Complexity.Karp21GammaBinaryGoldenCoreExact
+
+import DASHI.Mathematics.Complexity.Karp21BoolGoldenExact
+
+import DASHI.Mathematics.Complexity.Karp21StrictSATConcreteRunBidiExact
+
+import DASHI.Mathematics.Complexity.Karp21GammaBinaryPayloadValueExact
+
+import DASHI.Mathematics.Complexity.Karp21GammaBinaryRoundTripExact
+
+import DASHI.Mathematics.Complexity.Karp21GammaSignedListRoundTripExact
+
+import DASHI.Mathematics.Complexity.Karp21GammaGoldenEverything
+
+import DASHI.Mathematics.Complexity.Karp21EncodedGraphSparseBitBoundExact
+
+import DASHI.Mathematics.Complexity.Karp21GammaWeightedEdgeListRoundTripExact
+
+import DASHI.Mathematics.Complexity.Karp21ScaledCompleteGraphEndpointOrderExact
+
+import DASHI.Mathematics.Complexity.Karp21UpperPairStructuralLexOrderExact
+
+import DASHI.Mathematics.Complexity.Karp21ScaledCompleteGraphStrictLexExact
+
+import DASHI.Mathematics.Complexity.Karp21ScaledCompleteGraphStrictAfterExact
+
+import DASHI.Mathematics.Complexity.Karp21FinDecoderIndexBidiExact
+
+import DASHI.Mathematics.Complexity.Karp21DecodedWeightedCutSemanticBidiExact
+
+import DASHI.Mathematics.Complexity.Karp21RawGraphValidatorObservationExact
+
+import DASHI.Mathematics.Complexity.Karp21CanonicalRawValidatorPremisesExact
+
+import DASHI.Mathematics.Complexity.Karp21CanonicalRawValidatorCompleteExact
+
+import DASHI.Mathematics.Complexity.Karp21OriginalGammaGraphWordFieldsReplayExact
+
+import DASHI.Mathematics.Complexity.Karp21PositiveThresholdGammaExact
+
+import DASHI.Mathematics.Complexity.Karp21BinaryFinMaterializationCostExact
+
+import DASHI.Mathematics.Complexity.Karp21FinFreeRawSparseWordVerifierExact
+
+import DASHI.Mathematics.Complexity.Karp21BinaryRuntimeEverything
+
+import DASHI.Mathematics.Complexity.Karp21CanonicalParsedGraphAcceptanceExact
+
+import DASHI.Mathematics.Complexity.Karp21OriginalGammaCompleteGraphParserExact
+import DASHI.Mathematics.Complexity.Karp21FinFreeOriginalGammaFrameExact
+
+import DASHI.Mathematics.Complexity.Karp21FinFreeE20RawValidatorAgreementExact
+import DASHI.Mathematics.Complexity.Karp21FinFreeAllRawValidatorAgreementExact
+import DASHI.Mathematics.Complexity.Karp21FinFreeGammaGeneralSparseBudgetExact
+import DASHI.Mathematics.Complexity.Karp21FinFreeRawReaderSparseBudgetExact
+import DASHI.Mathematics.Complexity.Karp21FinFreeAllWordDecoderAgreementExact
+import DASHI.Mathematics.Complexity.Karp21FinFreeAllGammaSuccessAgreementExact
+import DASHI.Mathematics.Complexity.Karp21FinFreeTypedObservationConsistencyBidiExact
+import DASHI.Mathematics.Complexity.Karp21FinFreeChronologicalConsistencyBidiExact
+import DASHI.Mathematics.Complexity.Karp21FinFreeActualPairwiseConsistencySameExact
+import DASHI.Mathematics.Complexity.Karp21FinFreeActualSparseScoreAcceptanceExact
+import DASHI.Mathematics.Complexity.Karp21FinFreeSparseCertificateCanonicalExact
+import DASHI.Mathematics.Complexity.Karp21FinFreeSparseCertificateWordVerifierSameExact
+
+import DASHI.Mathematics.Complexity.Karp21CliqueComplementUpperTriangleWordExact
+
+import DASHI.Mathematics.Complexity.Karp21CliqueComplementSameGraphWordExact

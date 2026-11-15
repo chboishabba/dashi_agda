@@ -79,13 +79,16 @@ def repository_tree(repo: str, commit: str, *, token: str | None = None,
         if (not isinstance(item, dict) or item.get("type") != "blob"
                 or item.get("mode") not in ("100644", "100755")):
             continue   # exclude submodules, symlinks, directories
-        path = item.get("path")
-        if not isinstance(path, str):
-            raise RemoteError("invalid tree path")
-        if not path.endswith(".lean"):
+        path, sha, size = item.get("path"), item.get("sha"), item.get("size")
+        # Repository trees contain READMEs, workflows and other blobs.  They
+        # are outside this Lean-source inventory and must be filtered before
+        # Lean-path metadata validation; malformed Lean entries still fail
+        # closed below.
+        if not isinstance(path, str) or not path.endswith(".lean"):
             continue
-        sha, size = item.get("sha"), item.get("size")
-        if (not isinstance(sha, str) or not SHA_RE.fullmatch(sha)
+        if (path.startswith("/") or chr(0) in path
+                or any(part in ("", ".", "..") for part in path.split("/"))
+                or not isinstance(sha, str) or not SHA_RE.fullmatch(sha)
                 or type(size) is not int or size < 0):
             raise RemoteError("invalid Lean source tree entry")
         filtered.append({"path": path, "sha": sha.lower(), "size": size})
@@ -123,7 +126,8 @@ def source_blob(repo: str, blob_sha: str, max_size: int,
 
 
 def inventory(repo: str, commit: str, *, max_blob_bytes: int = DEFAULT_MAX_BLOB,
-              token: str | None = None, opener: Callable | None = None):
+              token: str | None = None, opener: Callable | None = None,
+              on_source: Callable[[dict, bytes], None] | None = None):
     """Yield source metadata; never write a repo tree or source blob to disk."""
     for item in repository_tree(repo, commit, token=token, opener=opener):
         if item["size"] > max_blob_bytes:
@@ -133,10 +137,16 @@ def inventory(repo: str, commit: str, *, max_blob_bytes: int = DEFAULT_MAX_BLOB,
             continue
         raw = source_blob(repo, item["sha"], max_blob_bytes,
                           token=token, opener=opener)
-        yield {"kind": "lean-source", "repository": repo, "revision": commit,
-               "path": item["path"], "git_blob": item["sha"], "size": len(raw),
-               "sha256": hashlib.sha256(raw).hexdigest(),
-               "status": "source-verified-not-elaborated"}
+        receipt = {"kind": "lean-source", "repository": repo,
+                   "revision": commit, "path": item["path"],
+                   "git_blob": item["sha"], "size": len(raw),
+                   "sha256": hashlib.sha256(raw).hexdigest(),
+                   "status": "source-verified-not-elaborated"}
+        if on_source is not None:
+            # Bytes are transient, hash-checked and cap-bounded. No checkout,
+            # and no source content is embedded in ordinary JSONL inventory.
+            on_source(receipt, raw)
+        yield receipt
 
 
 def main() -> int:

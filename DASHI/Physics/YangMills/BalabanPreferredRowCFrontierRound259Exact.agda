@@ -53,17 +53,17 @@ data PreferredRowCLeaf259 : Set where
 
 
 data LeafState259 : Set where
-  open closed : LeafState259
+  leafOpen leafClosed : LeafState259
 
 preferredRowCLeafState259 : PreferredRowCLeaf259 → LeafState259
-preferredRowCLeafState259 literalSameDensityCompactGroupHeatExpectation = open
-preferredRowCLeafState259 literalCMP116MarkedHessianComparison = open
-preferredRowCLeafState259 literalReferenceHessianAnchorMajorant = open
-preferredRowCLeafState259 literalExactCovarianceToMarkedFirstGradientMajorant = open
-preferredRowCLeafState259 literalSameDensityWeightedGeneratorIsCMP116HessianRow = open
-preferredRowCLeafState259 literalSameMeasureTemporalRelaxationAtBalancedTime = open
-preferredRowCLeafState259 literalSameGeneratorFiniteSpeedAtBalancedTime = open
-preferredRowCLeafState259 literalGeometricSpatialEnvelope = open
+preferredRowCLeafState259 literalSameDensityCompactGroupHeatExpectation = leafOpen
+preferredRowCLeafState259 literalCMP116MarkedHessianComparison = leafOpen
+preferredRowCLeafState259 literalReferenceHessianAnchorMajorant = leafOpen
+preferredRowCLeafState259 literalExactCovarianceToMarkedFirstGradientMajorant = leafOpen
+preferredRowCLeafState259 literalSameDensityWeightedGeneratorIsCMP116HessianRow = leafOpen
+preferredRowCLeafState259 literalSameMeasureTemporalRelaxationAtBalancedTime = leafOpen
+preferredRowCLeafState259 literalSameGeneratorFiniteSpeedAtBalancedTime = leafOpen
+preferredRowCLeafState259 literalGeometricSpatialEnvelope = leafOpen
 
 sameDensityHeatExpectationLevel : ProofLevel
 sameDensityHeatExpectationLevel =

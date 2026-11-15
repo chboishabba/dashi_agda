@@ -1,6 +1,6 @@
 module DASHI.Physics.Optics.GeometricalOpticsRefractionLensPrismExact where
 
-open import DASHI.Core.Prelude
+open import DASHI.Core.Prelude hiding (zero; _≤_)
 
 ------------------------------------------------------------------------
 -- PROVENANCE / SCOPE

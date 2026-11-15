@@ -1,0 +1,33 @@
+module DASHI.Analysis.RiemannImprovedZeroFreeG21TerminalMaxCutRegression where
+
+import DASHI.Analysis.RiemannImprovedZeroFreeG21TerminalMaxCutExact as Cut
+
+open import DASHI.Core.Prelude
+
+regressionUniformGapPaidConditionally :
+  Cut.ImprovedZeroFreeG21TerminalBoundary.uniformPoleGapCompilerPaid
+    Cut.canonicalImprovedZeroFreeG21TerminalBoundary ≡ true
+regressionUniformGapPaidConditionally =
+  Cut.ImprovedZeroFreeG21TerminalBoundary.uniformPoleGapCompilerPaidIsTrue
+    Cut.canonicalImprovedZeroFreeG21TerminalBoundary
+
+regressionAtomicTP2CandidateAvailable :
+  Cut.ImprovedZeroFreeG21TerminalBoundary.atomicHyperbolicTP2LeanCandidateAvailable
+    Cut.canonicalImprovedZeroFreeG21TerminalBoundary ≡ true
+regressionAtomicTP2CandidateAvailable =
+  Cut.ImprovedZeroFreeG21TerminalBoundary.atomicHyperbolicTP2LeanCandidateAvailableIsTrue
+    Cut.canonicalImprovedZeroFreeG21TerminalBoundary
+
+regressionContinuumMomentStillOpen :
+  Cut.ImprovedZeroFreeG21TerminalBoundary.actualContinuumMomentSignsPaid
+    Cut.canonicalImprovedZeroFreeG21TerminalBoundary ≡ false
+regressionContinuumMomentStillOpen =
+  Cut.ImprovedZeroFreeG21TerminalBoundary.actualContinuumMomentSignsPaidIsFalse
+    Cut.canonicalImprovedZeroFreeG21TerminalBoundary
+
+regressionRHStillOpen :
+  Cut.ImprovedZeroFreeG21TerminalBoundary.riemannHypothesisDerived
+    Cut.canonicalImprovedZeroFreeG21TerminalBoundary ≡ false
+regressionRHStillOpen =
+  Cut.ImprovedZeroFreeG21TerminalBoundary.riemannHypothesisDerivedIsFalse
+    Cut.canonicalImprovedZeroFreeG21TerminalBoundary

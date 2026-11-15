@@ -268,7 +268,7 @@ data ColourWheelAnalyticResidual : Set where
 firstColourWheelAnalyticResidual : ColourWheelAnalyticResidual
 firstColourWheelAnalyticResidual = missingComplexRootOfUnityRealisation
 
-record FiniteColourWheelExact : Set₁ where
+record FiniteColourWheelExact : Set where
   constructor finite-colour-wheel-exact
   field
     sixUncurlRoundTrip : (h : HexTruth) → curlSix (uncurlSix h) ≡ h
