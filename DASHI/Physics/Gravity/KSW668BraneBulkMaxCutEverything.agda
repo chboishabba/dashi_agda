@@ -75,3 +75,20 @@ import DASHI.Physics.Gravity.KSW668AdS5RadialSSPRK3ImaginaryPolynomialExact
 -- Actual complete T-y-r semidiscrete Gronwall on original t>=1
 -- verified separately; fully discrete RK3, H4+Weyl and FIO still OPEN.
 import DASHI.Physics.Gravity.KSW668AdS5OriginalCoupledSBPSymmetrizerRationalExact
+
+-- F8 IX original a=t physical characteristic C=DyU-(P-M)/2.
+-- Unweighted normal SBP2 SAT stage preserves C exactly at every
+-- interior node (even across all SSPRK3 stages and sourced Israel);
+-- weighted split SBP4 has explicit interior D-Dw commutator defect.
+-- Weak SAT global boundary constraint has rational t4/3 negative control.
+-- The full coupled mode3 weighted energy gets explicit commutator bound
+-- E' <= (5+16t)E for dy<=b/4; forced source lift E' <= (6+16t)E+||F||²/2.
+-- Actual Agda rational source, pinned kernel NOT run.
+import DASHI.Physics.Gravity.KSW668AdS5OriginalTTCharacteristicConstraintRationalExact
+
+-- Finite radial -L_d Sobolev powers commute with all original moving
+-- y/warp/SAT operators, with source powers treated in parallel.
+-- Generic natural-order Agda induction conditional on single
+-- commutator; concrete finite matrices checked independently.
+-- NOT a mesh-uniform 5D H4+epsilon Weyl trace theorem.
+import DASHI.Physics.Gravity.KSW668AdS5OriginalRadialSobolevPowerReuseExact
