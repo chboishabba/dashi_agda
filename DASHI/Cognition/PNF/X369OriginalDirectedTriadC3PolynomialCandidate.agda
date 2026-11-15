@@ -18,6 +18,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Integer using (ℤ; +_; _+_; _*_; _-_)
 open import Data.Integer.Tactic.RingSolver using (solve-∀)
 open import Data.Product using (_×_; _,_)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 square : ℤ → ℤ
 square x = x * x
@@ -26,19 +27,29 @@ qTriad : ℤ → ℤ → ℤ → ℤ
 qTriad a b c =
   ((a * a + b * b + c * c) - a * b) - b * c - c * a
 
+rawTriadRotation : ∀ (a b c : ℤ) →
+  (b - a) * (b - a) + (c - b) * (c - b) + (a - c) * (a - c)
+  ≡ ((+ 2) * (((a * a + b * b + c * c) - a * b) - b * c - c * a))
+rawTriadRotation = solve-∀
+
 -- This is the original coherent R+ = (b,c,a) squared source
 -- displacement. The R- = (c,a,b) action has the same displacement.
 originalTriadRotationSquaredDisplacementEqualsTwoQ :
   ∀ (a b c : ℤ) →
   square (b - a) + square (c - b) + square (a - c)
   ≡ ((+ 2) * qTriad a b c)
-originalTriadRotationSquaredDisplacementEqualsTwoQ = solve-∀
+originalTriadRotationSquaredDisplacementEqualsTwoQ = rawTriadRotation
+
+rawTriadInverseRotation : ∀ (a b c : ℤ) →
+  (c - a) * (c - a) + (a - b) * (a - b) + (b - c) * (b - c)
+  ≡ ((+ 2) * (((a * a + b * b + c * c) - a * b) - b * c - c * a))
+rawTriadInverseRotation = solve-∀
 
 originalTriadInverseRotationSquaredDisplacementEqualsTwoQ :
   ∀ (a b c : ℤ) →
   square (c - a) + square (a - b) + square (b - c)
   ≡ ((+ 2) * qTriad a b c)
-originalTriadInverseRotationSquaredDisplacementEqualsTwoQ = solve-∀
+originalTriadInverseRotationSquaredDisplacementEqualsTwoQ = rawTriadInverseRotation
 
 -- Original directed triple T(x,h)=(self,cyclic,anticyclic).
 -- For x=(a,b,c), h=(A,B,C), these are exact original coordinates,
@@ -71,17 +82,31 @@ originalMinusDirectedDisplacementSquared a b c A B C =
       r = originalAnticyclic a b c A B C
   in square (f - s) + square (r - f) + square (s - r)
 
+rawPlusFactors : ∀ (a b c A B C : ℤ) →
+  ((a * C + b * A + c * B) - (a * A + b * B + c * C)) * ((a * C + b * A + c * B) - (a * A + b * B + c * C)) +
+  ((a * A + b * B + c * C) - (a * B + b * C + c * A)) * ((a * A + b * B + c * C) - (a * B + b * C + c * A)) +
+  ((a * B + b * C + c * A) - (a * C + b * A + c * B)) * ((a * B + b * C + c * A) - (a * C + b * A + c * B))
+  ≡ (+ 2) * (((a * a + b * b + c * c) - a * b) - b * c - c * a) * (((A * A + B * B + C * C) - A * B) - B * C - C * A)
+rawPlusFactors = solve-∀
+
 originalDirectedTriadC3DisplacementSquaredFactors :
   ∀ (a b c A B C : ℤ) →
   originalPlusDirectedDisplacementSquared a b c A B C
   ≡ (+ 2) * qTriad a b c * qTriad A B C
-originalDirectedTriadC3DisplacementSquaredFactors = solve-∀
+originalDirectedTriadC3DisplacementSquaredFactors = rawPlusFactors
+
+rawMinusFactors : ∀ (a b c A B C : ℤ) →
+  ((a * B + b * C + c * A) - (a * A + b * B + c * C)) * ((a * B + b * C + c * A) - (a * A + b * B + c * C)) +
+  ((a * C + b * A + c * B) - (a * B + b * C + c * A)) * ((a * C + b * A + c * B) - (a * B + b * C + c * A)) +
+  ((a * A + b * B + c * C) - (a * C + b * A + c * B)) * ((a * A + b * B + c * C) - (a * C + b * A + c * B))
+  ≡ (+ 2) * (((a * a + b * b + c * c) - a * b) - b * c - c * a) * (((A * A + B * B + C * C) - A * B) - B * C - C * A)
+rawMinusFactors = solve-∀
 
 originalDirectedInverseC3DisplacementSquaredFactors :
   ∀ (a b c A B C : ℤ) →
   originalMinusDirectedDisplacementSquared a b c A B C
   ≡ (+ 2) * qTriad a b c * qTriad A B C
-originalDirectedInverseC3DisplacementSquaredFactors = solve-∀
+originalDirectedInverseC3DisplacementSquaredFactors = rawMinusFactors
 
 -- The exact first new source-level group-agnostic equality needed
 -- for a mixed ±C3 negative control, not a semantic phase theorem.
@@ -89,7 +114,10 @@ originalDirectedTriadMixedOrientationEnergyEqualsCoherent :
   ∀ (a b c A B C : ℤ) →
   originalMinusDirectedDisplacementSquared a b c A B C
   ≡ originalPlusDirectedDisplacementSquared a b c A B C
-originalDirectedTriadMixedOrientationEnergyEqualsCoherent = solve-∀
+originalDirectedTriadMixedOrientationEnergyEqualsCoherent a b c A B C =
+  trans
+    (originalDirectedInverseC3DisplacementSquaredFactors a b c A B C)
+    (sym (originalDirectedTriadC3DisplacementSquaredFactors a b c A B C))
 
 data OriginalMixedOrientation : Set where
   originalForward : OriginalMixedOrientation
