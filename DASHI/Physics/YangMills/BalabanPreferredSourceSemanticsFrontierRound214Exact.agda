@@ -40,31 +40,31 @@ data PreferredSourceLeaf214 : Set where
   literalPhysicalCompositeD1ChainRule : PreferredSourceLeaf214
 
 data LeafState214 : Set where
-  closed open blocked : LeafState214
+  leafClosed leafOpen leafBlocked : LeafState214
 
 preferredLeafState214 : PreferredSourceLeaf214 → LeafState214
-preferredLeafState214 literalCMP119DensityActionProjection = open
-preferredLeafState214 literalCMP119ActionCMP116Localization = blocked
-preferredLeafState214 cmp119ActionEqualsR108Potential = closed
-preferredLeafState214 r108PotentialEqualsBC1Potential = closed
-preferredLeafState214 literalR108BackedBC1RemainingSourceData = blocked
-preferredLeafState214 literalCMP109GeneratedHistoryResponseProducer = open
-preferredLeafState214 literalCMP109BetaDifferenceDecomposition = blocked
-preferredLeafState214 literalPhysicalCompositeD1ChainRule = blocked
+preferredLeafState214 literalCMP119DensityActionProjection = leafOpen
+preferredLeafState214 literalCMP119ActionCMP116Localization = leafBlocked
+preferredLeafState214 cmp119ActionEqualsR108Potential = leafClosed
+preferredLeafState214 r108PotentialEqualsBC1Potential = leafClosed
+preferredLeafState214 literalR108BackedBC1RemainingSourceData = leafBlocked
+preferredLeafState214 literalCMP109GeneratedHistoryResponseProducer = leafOpen
+preferredLeafState214 literalCMP109BetaDifferenceDecomposition = leafBlocked
+preferredLeafState214 literalPhysicalCompositeD1ChainRule = leafBlocked
 
 preferredFirstMissingCoordinate214 : PreferredSourceLeaf214
 preferredFirstMissingCoordinate214 = literalCMP119DensityActionProjection
 
 preferredFirstMissingCoordinate214IsOpen :
-  preferredLeafState214 preferredFirstMissingCoordinate214 ≡ open
+  preferredLeafState214 preferredFirstMissingCoordinate214 ≡ leafOpen
 preferredFirstMissingCoordinate214IsOpen = refl
 
 cmp119ToR108WeldClosed :
-  preferredLeafState214 cmp119ActionEqualsR108Potential ≡ closed
+  preferredLeafState214 cmp119ActionEqualsR108Potential ≡ leafClosed
 cmp119ToR108WeldClosed = refl
 
 r108ToBC1WeldClosed :
-  preferredLeafState214 r108PotentialEqualsBC1Potential ≡ closed
+  preferredLeafState214 r108PotentialEqualsBC1Potential ≡ leafClosed
 r108ToBC1WeldClosed = refl
 
 cmp119DensityActionProjectionPackagingLevel : ProofLevel

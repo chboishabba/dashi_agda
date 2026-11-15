@@ -270,3 +270,5 @@ canonicalSaltGeochemistryBoundary =
     false refl
     false refl
     true refl
+
+open SaltGeochemistryBoundary public

@@ -1,7 +1,8 @@
 module DASHI.Philosophy.ProcessCompositionLaws where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong)
 open import Agda.Builtin.List using (List; []; _∷_)
 
 import DASHI.Philosophy.ProcessOntology as Process

@@ -15,6 +15,7 @@ dependencies = [
 [project.scripts]
 dashi-repo = "agda_preflight.product_cli:main"
 dashi-repo-formal-evidence = "agda_preflight.external_evidence_cli:main"
+dashi-repo-xpollenation = "agda_preflight.xpollenation_cli:main"
 dashi-repo-kernel-certify = "agda_preflight.kernel_certification_cli:main"
 dashi-repo-formal-evidence-from-kernel = "agda_preflight.external_evidence_from_kernel_cli:main"
 dashi-repo-mcp = "agda_preflight.repository_mcp:main"

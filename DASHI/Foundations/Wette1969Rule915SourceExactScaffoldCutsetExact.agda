@@ -50,36 +50,33 @@ sourceExactScaffoldTarget inputs = Independence.independenceScaffoldTarget (inde
 
 liftFromInduction :
   {initial : Context} {firstSeven : Rule915.Rule915FirstSevenParameters}
-  {later : Later.Rule915LaterParameters} →
+  {later : Later.Rule915LaterParameters} {formula : Formula} →
   (inputs : SourceExactScaffoldInputs initial firstSeven later) →
-  (formula : Formula) →
   formula Finite.∈Context (Induction.inductionScaffoldTarget (inductionScaffold inputs)) →
   formula Finite.∈Context (sourceExactScaffoldTarget inputs)
-liftFromInduction inputs formula evidence =
+liftFromInduction inputs {formula} evidence =
   Independence.independenceScaffoldPreservesPriorFormula
     (independenceScaffold inputs) formula evidence
 
 liftFromShared :
   {initial : Context} {firstSeven : Rule915.Rule915FirstSevenParameters}
-  {later : Later.Rule915LaterParameters} →
+  {later : Later.Rule915LaterParameters} {formula : Formula} →
   (inputs : SourceExactScaffoldInputs initial firstSeven later) →
-  (formula : Formula) →
   formula Finite.∈Context (Shared.sharedTarget (shared1015 inputs)) →
   formula Finite.∈Context (sourceExactScaffoldTarget inputs)
-liftFromShared inputs formula evidence =
-  liftFromInduction inputs formula
+liftFromShared inputs {formula} evidence =
+  liftFromInduction inputs {formula}
     (Induction.inductionScaffoldPreservesPriorFormula
       (inductionScaffold inputs) formula evidence)
 
 liftFromFormation :
   {initial : Context} {firstSeven : Rule915.Rule915FirstSevenParameters}
-  {later : Later.Rule915LaterParameters} →
+  {later : Later.Rule915LaterParameters} {formula : Formula} →
   (inputs : SourceExactScaffoldInputs initial firstSeven later) →
-  (formula : Formula) →
   formula Finite.∈Context (Formation.formationTarget (formation inputs)) →
   formula Finite.∈Context (sourceExactScaffoldTarget inputs)
-liftFromFormation inputs formula evidence =
-  liftFromShared inputs formula
+liftFromFormation inputs {formula} evidence =
+  liftFromShared inputs {formula}
     (Shared.sharedPreservesPriorFormula (shared1015 inputs) formula evidence)
 
 shared1015AtSourceExactTarget :
@@ -91,12 +88,12 @@ shared1015AtSourceExactTarget :
     (Later.completeTypedTranscription firstSeven later)
 shared1015AtSourceExactTarget inputs =
   Obligations.shared1015Evidence
-    (liftFromShared inputs _ (Obligations.e10 shared))
-    (liftFromShared inputs _ (Obligations.e11 shared))
-    (liftFromShared inputs _ (Obligations.e12 shared))
-    (liftFromShared inputs _ (Obligations.e13 shared))
-    (liftFromShared inputs _ (Obligations.e14 shared))
-    (liftFromShared inputs _ (Obligations.e15 shared))
+    (liftFromShared inputs (Obligations.e10 shared))
+    (liftFromShared inputs (Obligations.e11 shared))
+    (liftFromShared inputs (Obligations.e12 shared))
+    (liftFromShared inputs (Obligations.e13 shared))
+    (liftFromShared inputs (Obligations.e14 shared))
+    (liftFromShared inputs (Obligations.e15 shared))
   where
     shared = Shared.sharedEvidenceAtTarget (shared1015 inputs)
 
@@ -109,20 +106,20 @@ scaffoldEvidenceAtSourceExactTarget :
     (sourceExactScaffoldTarget inputs) firstSeven later
 scaffoldEvidenceAtSourceExactTarget firstSeven later inputs =
   Cutset.rule915SyntacticScaffoldEvidence
-    (liftFromFormation inputs _ (Obligations.e01 formationEvidence))
-    (liftFromFormation inputs _ (Obligations.e02 formationEvidence))
-    (liftFromFormation inputs _ (Obligations.e03 formationEvidence))
-    (liftFromFormation inputs _ (Obligations.e04 formationEvidence))
-    (liftFromFormation inputs _ (Obligations.e05 formationEvidence))
-    (liftFromFormation inputs _ (Obligations.e06 formationEvidence))
-    (liftFromFormation inputs _ (Obligations.e07 formationEvidence))
-    (liftFromInduction inputs _ (Induction.p08AtTarget inductionEvidence))
-    (liftFromInduction inputs _ (Induction.p09AtTarget inductionEvidence))
+    (liftFromFormation inputs (Obligations.e01 formationEvidence))
+    (liftFromFormation inputs (Obligations.e02 formationEvidence))
+    (liftFromFormation inputs (Obligations.e03 formationEvidence))
+    (liftFromFormation inputs (Obligations.e04 formationEvidence))
+    (liftFromFormation inputs (Obligations.e05 formationEvidence))
+    (liftFromFormation inputs (Obligations.e06 formationEvidence))
+    (liftFromFormation inputs (Obligations.e07 formationEvidence))
+    (liftFromInduction inputs (Induction.p08AtTarget inductionEvidence))
+    (liftFromInduction inputs (Induction.p09AtTarget inductionEvidence))
     (Obligations.e10 sharedFinal) (Obligations.e11 sharedFinal)
     (Obligations.e12 sharedFinal) (Obligations.e13 sharedFinal)
     (Obligations.e14 sharedFinal) (Obligations.e15 sharedFinal)
-    (liftFromInduction inputs _ (Induction.p16AtTarget inductionEvidence))
-    (liftFromInduction inputs _ (Induction.p17AtTarget inductionEvidence))
+    (liftFromInduction inputs (Induction.p16AtTarget inductionEvidence))
+    (liftFromInduction inputs (Induction.p17AtTarget inductionEvidence))
     (Independence.p19AtTarget independenceEvidence)
     (Independence.p20AtTarget independenceEvidence)
     (Independence.p21AtTarget independenceEvidence)

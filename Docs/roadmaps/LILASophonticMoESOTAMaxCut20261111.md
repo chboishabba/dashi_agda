@@ -1174,3 +1174,109 @@ agda -i . DASHI/Foundations/BalancedTernaryC3OppositionGrokkingBridgeExact.agda
 ```
 
 Archive Agda version, toolchain store path, module source SHA, full stdout/stderr and exit status. An existing `GrokkingTaskCharacterPhaseExact` or `BalancedTernaryStageSymmetryExact` acceptance is *not* a substitute for checking this new file. If this focused source fails, repair actual definitions/qualification without weakening the semantic separation or adding an axiom/postulate.
+
+---
+
+## 2026-11-14 19:24 AEDT — Physical bounded C2 repair ACCEPTANCE and 369/atomic/NS/quantum/YM Fourier cross-lane reconciliation
+
+**Provenance:** user-supplied native TrueNAS RX580 execution transcript, not a new execution by this source-editing session. The operating authoring repo has a normative Agda verification entrypoint: **only** `scripts/run_agda29_parallel_check.sh`; never invoke bare `agda` or substitute direct Nix binary invocation. For non-interactive verification:
+```bash
+DASHI_NO_TMUX=1 scripts/run_agda29_parallel_check.sh \
+  DASHI/Foundations/BalancedTernaryC3OppositionGrokkingBridgeExact.agda
+```
+User transcript reports this completed with **exit 0 and 310/310 module interfaces checked** on the Agda 2.9 host. This pays G2 finite bridge kernel acceptance on that user's source checkout; it is not an all-input neural or physical source equivalence proof. Operational `AGENTS.md` and `Docs/AgentOperationalNotes.md` updates were made on relevant local branches with separate commits `c835a12e42`, `f75da71f52`; local master-topology scope recovery involved `19ef5326c7`. These worktree commits may not be ancestors of *this* master until deliberately merged. Do not conflate a local source check and master branch provenance.
+
+### Actual RX580 C2 repair — new decisive receipts
+
+User's original output artefacts under `/mnt/truenas/comet-net/experiments/lila_quality_curriculum_20261113`:
+- `c2_bounded_repaired.pt`, `c2_bounded_repaired.json`: original C2 checkpoint warm-start with history cap **64** in layers 10 and 11, layer0 even scale **0.75**, layer1 even **1.0**, trainable only early even branches and late selected transition weights. **24 AdamW optimiser steps** / **146.94 s** on RX580 HIP 7.16. Actual **55 fit rows**, **9 train-derived development rows**, **zero heldout used in training/step selection**. Development original **4.7916**, capped pretrain **4.7831**, best step24 **4.6332** (−0.1584 from original). Best development CE decreased at the reported checks 1,4,8,12,16,20,24; this is not a proof of monotonic optimisation in general.
+- `c2_repaired_pure_unpromoted.pt`, `c2_repaired_pure_unpromoted.json`: physically teacher-free **112.2 MB** vs guarded **168.9 MB**, ~**33.6%** tensor byte saving. On the reported heldout export/BIDI evaluation, **max absolute logit difference 0.0**, repaired full-student heldout CE **4.5966** versus unmodified **4.7630** (−**0.1664**), teacher **2.5834**, remaining teacher gap **~2.0132**. `quality_pass=false`, `release_admitted=false`; preserve these gates. Existing 21-way hyperparameter screen on just nine development windows biases selection; the heldout has now been viewed for this candidate and **must not be reused for further adaptive repair selection**. Future comparison requires fresh, predeclared, duplicate-disjoint validation/heldout if additional tuning occurs.
+- `actual_student_history_32_bounded_repaired.json`: original real KV+expert-history 32-token trace; original vs repaired layer10 RMS **251.07→2.8363**, layer10 top-k margin **569.21→1.1719**, layer11 RMS **10990.68→2.8341**, layer11 margin **27628.93→0.0759**. These are actual source nonzero recurrent histories with native cap and not the previous teacher-input local MoE proxy. The default tracer consumes source sequence tokens while computing recurrent student states; `--greedy` is needed for a true free-running token policy. **Do not claim a stationary attractor, uniformly non-saturated routing across every input, a contractive nonlinear Jacobian, or fixed-matrix spectral-radius result from one 32-token run.** The radius bound is an independent source induction on retained histories for compatible initial state and selected transition cap. Intermediate activations may remain unbounded.
+
+**Phase promotions:** C1/Q2.5 moves from source-ready warm-start to **empirically improved, not quality-promoted**; Q3 repaired standalone finite-source BIDI **PASS**; G2 balanced-ternary C3/S3 bridge source kernel **PASS in the reported local checkout**. G5–G7 actual paired C2/phase diagnostics and learned C3 mechanism still **OPEN**; finite standalone grokking script authored but no native proof receipt in the supplied attachment.
+
+### Cross-programme 369 character maximum cut: avoid treating analogues as the same physical object
+
+The common exact algebra for finite `G=C3×C3` is `χ_k(x+y)=χ_k(x)χ_k(y)`, `1+ω+ω²=0`, character orthogonality `Σ_x χ_k(x)overline{χ_l(x)}=9 δ_kl`, and the unnormalised convolution theorem `F(f*g)=F(f)F(g)`. These are legitimate *index/Fourier* identities, not evidence that the neural layers learn a physics solution. New `scripts/check_369_c3x3_cyclotomic_fourier_crosslane.py` uses **exact Eisenstein integer pairs** `a+bω` with relation `ω²+ω+1=0` to enumerate 9 characters × 9 torus points, phase multiplication, exact shift eigenvalues, inversion, Parseval and convolution for nontrivial integer fields. `tests/test_369_c3x3_cyclotomic_fourier_crosslane.py` adds finite source regressions and explicit non-promotion flags. **Code committed; tests not yet run by a source host.**
+
+| Lane | Existing source owner and exact paid finite carrier | Unpaid same-object or physical obligation |
+|---|---|---|
+| **369/Monster/zeta** | `DASHI/Wikimedia/IbrahimC3ZetaRegularCharacterOEISQuantumGRBidiExact.agda`: 3B character `53 + 65610(1+ζ₃+ζ₃²)` with exact cyclotomic regular-part cancellation; finite Monster trace 53 | Original group action, authentic 3B/VOA trace representative as specified by owner, observer/physical transfer; **Riemann ζ(s) not the root ζ₃** |
+| **Balanced trits / quantum qutrit** | `DASHI/ComputerScience/BalancedTernaryC2C3DihedralCodecBridgeExact.agda`: the *three-point trit carrier* has C2 inversion with `srs=r⁻¹`, C3 successor interwoven with qutrit Weyl X | Quantum amplitudes/real superpositions, actual Hilbert-unitary Shor QFT and same-register Fourier carrier identification; not equal to a classical balanced-trit bit fibre |
+| **NS Fourier/high-high→low** | `DASHI/Physics/Closure/NSTriadKNLuoGalerkinFourierModePairExact.agda`: physical periodic-mode `k+ℓ`, pair diffusion and explicit opposite high-frequency to zero-output wavevector with nonzero directional defect | Physical Galerkin trajectory and actual nonlinear integrated rate/cone estimates, remote boundary flux; aliasing `Z3²` with `Z³` not justified |
+| **YM torus** | `DASHI/Physics/YangMills/BalabanP33ThreeCycleBlockTorusCrossPollinationExact.agda`: 3x3 block-index commuting order-three translations, completed channel fixed | Actual side-4 SU(N) Wilson/Haar/Balaban RG source, physical Dk and cutoff-uniform E1/D1; finite index symmetry cannot pay interacting inequalities |
+| **Atomic 369** | `DASHI/Physics/Chemistry/AtomicPeriodicTable369GenerativeExact.agda`: staged ternary→one-particle quantum representation→antisymmetrised fermion occupancy→shell/valence quotient; exact capacity identities 2,6,10 and 2,8,18 | Concrete Hamiltonian eigenfunctions/energetic filling, isotope/NIST calibration and empirical spectra. There is no automatic map from 3×3 cyclic frequencies to orbital quantum numbers |
+| **LILA/Sophontic** | `DASHI/Cognition/PNF/ModularFourierGrokkingC3Exact.agda`, `CyclotomicGrokkingActionLinearizationExact.agda`, `BalancedTernaryC3OppositionGrokkingBridgeExact.agda`, Leech `models/trialectic_wave_prior.py` | Test actual learned Fourier circuit and triadic/semantic face rather than relying on the existence of optional C3 features; original repaired C2 checkpoint remains router geometry `c2_invariant` |
+
+**New exact remaining cross-lane lemma/experiment gates** (subdivide existing A/B/M/G obligations, not new unrelated projects):
+
+- X369-A `c3x3ExactCyclotomicCharacterConvolution`: proof-level ring/character orthogonality and convolution on the existing **same** `FiniteThreeCycleTorusExact` carrier, no new invented torus; Python exact finite certificate written, in-repo Agda same-carrier bridge OPEN.
+- X369-B `atomic369PhysicalOrbitalRepresentationIntertwiner`: original 369 labels versus actual antisymmetric eigenfunction Hamiltonian modes/shell energies; OPEN, must supply physical representation map.
+- X369-C `nsPeriodicGalerkinNonlinearPhaseConvolutionBidi`: integer torus physical Fourier convolution plus Leray projection/Biot-Savart, pairwise signs and genuine solution trajectory, NO generic C3 alias shortcut; OPEN.
+- X369-D `ymOriginalWilsonC3BlockFourierTransport`: actual gauge-field/block spin index and source Wilson observable covariant transport, Ward/Haar and physical interaction conditional estimates; OPEN.
+- X369-E `quantumC3TritQutritFourierIntertwiner`: existing finite C2⋊C3 exact qutrit basis donor, prove same source Hilbert register/QFT phase action, including unitarity/intertwiner rather than assuming finite code semantics; OPEN.
+- X369-F `lilaGrokkingC3PhaseVsC2RepairedRepresentations`: matched original **repaired 4.5966** C2 checkpoint and optional C3 phase/face ablation using new independent data, real hidden/semantic source action and Fourier-circuit deflection; OPEN.
+- X369-G `monster369RegularTracePhaseVsRiemannZetaTypeBoundary`: preserve exact 53 residual and 65610 regular C3 cancellation without equating phase ζ₃, Monster character multiplicities, Epstein ζ or analytic ζ(s); existing boundary donor, same-object cross-lane wrapper OPEN.
+
+**Maximum information order after new physical success:** (1) verify the new repaired-checkpoint logit/history provenance, full repeated token-policy and quality on **fresh** disjoint validation; (2) run paired `x,-x` teacher-input Fourier/parity-source audit and exact `C3×C3` integer test; (3) instrument actual C3 phase/face spectral probes and source-semantic nongeometric opposition; (4) compare C2, C2×C3, S3 on matched compute and fresh splits; (5) parallel formal X369-A finite same-carrier action reusing existing NS/YM/atomic/quantum donors, without claiming their continuum physical cuts. E8/Leech theta–zeta and physical YM/NS gates remain independently OPEN.
+
+**Host command for new exact finite test** (no bare Agda):
+```bash
+python3 -m unittest discover -s tests -p 'test_369_c3x3_cyclotomic_fourier_crosslane.py' -v
+python3 scripts/check_369_c3x3_cyclotomic_fourier_crosslane.py
+```
+
+---
+
+## 2026-11-14 X369-F — accepted finite C3² / paired activation receipts, matched bounded router screen
+
+**New user-run evidence:** `tests/test_369_c3x3_cyclotomic_fourier_crosslane.py` 4/4 PASS, exact `Z[ω]` C3² character/translation, inversion, Parseval/convolution verifier ACCEPTED on original host. Thus X369 finite integer implementation evidence is accepted, **not** cross-domain Agda same-carrier physical identification. RX580 full original 9-row (576-token) layer0/1 teacher-input paired `c2_layer01_parity_c3_teacher_input_full9.json` audit completed: phase-plane error-energy fractions ~**66.8–67.4%**, indistinguishable on their face from **2/3** expected for an isotropic three-coordinate triad. Do **not** claim the residual is preferentially C3-structured merely because roughly 67% is transverse. Layer1 negative odd/even cross mean ~**−112.86** at source x cancels to **0.0** under paired x/−x, consistent with C2 parity and not evidence of defective symmetry. The cross-term depends on normalization and cannot be compared directly to earlier −0.49 without same reduction definition. These measurements involve **zero initial expert histories** and original teacher pre-FFN inputs; no full recurrent source-data C3 semantic evidence follows.
+
+**X369-F implementation tranche** committed to Leech PR #4:
+- `scripts/screen_bounded_c2_vs_c2c3_router_fresh.py`: clone current original **4.5966-CE bounded repaired** C2 source twice, swap only `moe_route_geometry` between `c2_invariant` and `c2c3_wave`, strictly load identical learned tensors with same `Linear(2d,1)` router parameter count, freeze original FFN/expert/transition/even layers, train **only same router and expert-bias parameters** 24 AdamW steps each for 2 seeds. Same original training fit, dropout-off eval/autograd, same LR, batch, clip and dev step. Preserve source late history cap `R=64`, layer0/1 gains, and no overwritten original checkpoints. Save separately identifiable unpromoted best-state checkpoints optionally.
+- Crucial **fresh validation guard:** require separate new original-tokenized fresh validation input. Reject duplicate rows, differing token lengths, or **any exact overlapping 16-token span** against either original full train or previously exposed heldout. Cross-check original repaired checkpoint SHA and fit/heldout SHAs against existing immutable repair receipt. The previously exposed 4.5966 heldout is only inspected as overlap exclusion, **never scored**. This is conservative token overlap protection and not document-level semantic dedup.
+- `tests/test_bounded_c2_c2c3_matched_screen.py` asserts ngram fail-closed overlap and same trained parameter count/source history cap/initial router tensor parity, registered in `check_c2_quality_maxcut.sh` and native Schaka wrapper. No new 3-test pass or native C3 CE claim in this round.
+- Native directions/acceptance and exact command in Leech `docs/C2_QUALITY_FULL_MAXCUT_Q21_Q3_20261114.md`.
+
+**Phase and exact lemma reconciliation:** finite X369 arithmetic PASS at host; `originalLeechC2PairedOddEvenCrossCancellation` G5 empirical finite-split PASS for paired means; G6 source local parity MSE measured in receipt, full interpretation and out-of-split replication OPEN; G7 `originalLeechC3LearnedWaveCircuitOrCounterexample` OPEN because 2/3 phase-energy ratio equals isotropic expectation; X369-F `lilaGrokkingC3PhaseVsC2RepairedRepresentations` source comparative experiment implementation READY, **fresh independent data and physical RX580 experiment OPEN**; full C3/S3 semantic-action intertwiners OPEN; C2 quality remains 4.5966 vs teacher 2.5834, not promotion. Do not re-run original previously viewed heldout to choose architecture. For publication-level inference, evaluate best frozen arms on another new locked never-tuned final test after selecting by fresh validation.
+
+**Immediate max-cut:** acquire a truly fresh document-disjoint tokenised validation set of matching original tokenizer/context; run source suite; perform two-seed fixed-budget matched C2/C2C3 screen; compare paired validation CE and source action residuals; then test genuine task-defined phase mechanisms and Sophontic triadic-face consumers only if empirical evidence warrants. Keep A3 E8/Leech and physical NS/YM/atomic same-object proofs parallel and distinct.
+
+---
+
+## 2026-11-14 X369-F isotropic-null test: what can actually prove/disprove C3-specific residual structure?
+
+**Latest user-run host:** LeechTransformer original expanded contract suite at X369-F `73c5d95` **45/45 PASS**, original 9-row/576-token layer0/1 Fourier residual rotating energy **66.8–67.4%** and prior independently evaluated bounded C2 CE **4.5966** (original 4.7630; teacher 2.5834). The 67% statement should be `consistent with the two-of-three dimensional isotropic expectation`, not `confirms that the residual is isotropic`. C3-equivariant phase information may have precisely 2/3 rotating-plane energy, and an anisotropic residual may coincidentally project to 2/3. Also 576 tokens from nine windows are correlated; do not use a naive 576-independent-sample confidence interval.
+
+**New source and exact test status** in Leech PR #4:
+- `scripts/audit_c3_rotating_energy_null.py` implements finite empirical row-cluster bootstrap of rotating/DC energy and seed-pinned **signed coordinate-permutation negative controls**, with 95% intervals and two-sided randomisation p, conditional on original residual [rows,tokens,d]. It tests whether the *chosen ordered triple axes* have privileged energy alignment relative to these random coordinate regroupings, not full `SO(d)` isotropy and not semantic C3 equivariance.
+- `scripts/audit_c2_parity_c3_fourier_teacher_inputs.py --residuals-dir` now exports exact source per-row layer0/1 residual tensors after original frozen teacher-input local FFN probes, without changing weights or accessing prior independent heldout.
+- `tests/test_c3_rotating_energy_null.py` covers synthetic isotropic, pure DC, pure rotating, invalid-shape/zero-energy controls. Registered in existing `scripts/check_c2_quality_maxcut.sh`, and null script admitted via native Schaka launcher, accepts wrapper's `--device cuda` but runs NumPy randomisation on CPU.
+- **Source committed; latest new four tests not yet run at user host.** Prior 45/45 belongs to previous head; do not conflate.
+
+**Distinct mathematical/statistical proof obligations:**
+
+| Gate | Precisely necessary observation / same-source theorem | Status |
+|---|---|---|
+| `X369-F0 residualC3PlaneFractionNullCalibrated` | In source real orthonormal wave3 triple, isotropic covariance `σ²I` implies expected rotating/DC squared-energy ratio 2:1, or finite ratio tends to 2/3; row-cluster 95% CI + signed-permutation distribution around original 66.8–67.4% | Deterministic dimension count paid; statistical source audit written, native receipt OPEN |
+| `X369-F1 originalResidualCovarianceIsotropyOrCounterexample` | On independent source rows test full residual 3×3 covariance, eigenvalue spread, cross-axis terms and group commutator with cyclic rotation, with familywise/multiple-comparison control. Failure to reject isotropy never proves exact isotropy; equivalence needs predeclared tolerances and adequate power | OPEN; null above is only *coordinate regrouping*, not full covariance isotropy test |
+| `X369-F2 trainedC3TaskActionEquivarianceDefect` | Typed original task action on inputs and outputs, compare `F(Rx)` to `ρ(R)F(x)` with per-sample normalised defect, random-phase and teacher controls. Coordinate triads alone are not semantic triples | OPEN |
+| `X369-F3 phaseCompositionHeldoutMechanism` | Detect actual learned `u(a)u(b)=u(a+b mod3)` alignment, train/heldout split, phase/intervention/causal Fourier ablations, compare memoriser negative control. No C3 task claim from residual energy | OPEN |
+| `X369-F4 matchedBoundedRouterPredictiveGain` | Fresh original-tokenizer/document- and 16-token-span-disjoint validation, same learned source weights/param count, 24 steps, same R64 bound, two seeds, matched C2 vs C2C3; original heldout never re-used for selecting architecture | Script and prior 3 contract tests 45/45 PASS; fresh corpus and native CE receipt OPEN |
+| `X369-F5 frozenNeverTunedFinalQuality` | One-time later independent test on frozen winning C3/C2 architecture, compare repaired C2 baseline, full student CE, 32+ token source-state bound, pure BIDI and resource cost | OPEN |
+
+**Next actual execution order:** run updated source contracts (expected new four); export source original nine dev residual arrays without treating them as fresh; compute cluster/sign-permutation null for each layer; separately obtain new document-level disjoint corpus for matched C2/C2C3 routing; evaluate genuine typed C3 input/output actions and phase-scrambled negative controls before claiming a *learned grokking mechanism*. Do not block low-cost statistical audit on acquiring a fresh corpus, but do not use already-screened dev/heldout data for fresh generalisation claims.
+
+**Agda programme state unchanged:** finite C3² ring/character tests and balanced-triad C3/S3 source kernel are accepted in user-reported host; X369 NS/YM/atomic/quantum source welds and E8/Leech theta all-index results remain OPEN. No demonstration of original physical field dynamics or NS/YM regularity is implied.
+
+### C3 residual isotropy exact mathematical separation — new X369-F1 source tests
+
+The Leech `audit_c3_rotating_energy_null.py` now computes from each teacher-input residual tensor:
+`M=E[rrᵀ]` (raw pooled 3×3 triad second moments);
+`Σ=M−μμᵀ` (centred covariance);
+`||Σ−tr(Σ)I/3||_F/||Σ||_F` (spherical isotropy defect);
+`||RΣRᵀ−Σ||_F/||Σ||_F` and `||RMRᵀ−M||_F/||M||_F` (C3 commutators on the actual cyclic permutation R). These are *finite measured tests on chosen source coordinate triads*, not a full 384×384 covariance test, and cannot establish a semantic input/output phase action. Per-row bootstrap and signed feature permutation provide sampling/alignment checks, not a rigorous global mathematical isotropy proof.
+
+New synthetic counterexamples in `tests/test_c3_rotating_energy_null.py`: (a) a C3-invariant common/DC covariance with large amplitude can be highly non-isotropic and have near-zero rotating fraction; (b) mean-shifted residuals with approximately isotropic **centred** covariance can have raw rotating energy much less than 2/3. Thus the implication `centre covariance isotropic ⇒ raw rotating fraction=2/3` is INVALID without mean control, and `C3 invariance ⇒ isotropy` is INVALID. This sharpens G7/X369-F1 beyond the naive 67% dimensionality argument.
+
+**Status:** original numerical 9-row 66.8–67.4% and 45/45 host contracts are accepted as reported for the previous source head; new null source and six new regression controls are committed but require a new host test run. Full mathematical physical source/semantics intertwiners remain OPEN.

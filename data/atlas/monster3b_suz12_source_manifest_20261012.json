@@ -1,0 +1,42 @@
+{
+  "schema": "dashi.monster3b.suz12.source_manifest.v1",
+  "date": "2026-10-12",
+  "representation_roles": {
+    "inner_socle": "ATLAS 2SuzG1-f3r12B0 over GF(3)",
+    "outer_extension": "ATLAS 2Suzd2G1-f3r12aB0 over GF(3)"
+  },
+  "upstream_authority": "ATLAS of Group Representations / AtlasRep",
+  "public_mirror": {
+    "repository": "wilcompute/W33-Theory",
+    "commit": "509d5b136f3d4efd0cf9be016700fd7886fc9e34",
+    "note": "Bytes copied verbatim from the vendored ATLAS files in this public mirror; mirror provenance does not replace original ATLAS attribution."
+  },
+  "files": [
+    {
+      "path": "data/atlas/2SuzG1-f3r12B0.m1",
+      "mirror_path": "data/atlas/2SuzG1-f3r12B0.m1",
+      "sha256": "119ad7f81385c66547dd09de9a5effc7fe0fcccdde02994e067e1f6f19eccdf6"
+    },
+    {
+      "path": "data/atlas/2SuzG1-f3r12B0.m2",
+      "mirror_path": "data/atlas/2SuzG1-f3r12B0.m2",
+      "sha256": "c359f80d70d4e58d2b402ddd08577352ac76854d0de2191b6262565a41e862fd"
+    },
+    {
+      "path": "data/atlas/2Suzd2G1-f3r12aB0.m1",
+      "mirror_path": "data/atlas/2Suzd2G1-f3r12aB0.m1",
+      "sha256": "ddd4919ab560f78b065aa08e309bd047942cdb7bb52a1474da84d54d35a031c2"
+    },
+    {
+      "path": "data/atlas/2Suzd2G1-f3r12aB0.m2",
+      "mirror_path": "data/atlas/2Suzd2G1-f3r12aB0.m2",
+      "sha256": "433ba0f0373995b159859df00dd5a5005355fdbf8b59a31d651aeaf43ffcd15f"
+    }
+  ],
+  "independent_public_mirror_checks": {
+    "outer_generator_2_equals_inner_generator_2": true,
+    "outer_generator_1_symplectic_multiplier_mod3": 2,
+    "source": "wilcompute/W33-Theory data/w33_suz_outer_completes_local_e6_weyl.json at the pinned commit"
+  },
+  "authority_boundary": "The manifest pays byte identity and provenance for the finite matrices. It does not by itself identify the repository X6 polarization, GF(729) multiplication, Monster physical realization, or any continuum interpretation."
+}

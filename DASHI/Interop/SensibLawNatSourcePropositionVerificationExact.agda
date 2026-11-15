@@ -30,7 +30,7 @@ dispositionTrit supported = Trit.pos
 
 dispositionAdmissibility : SourceDisposition → Ternary.AdmissibilityState
 dispositionAdmissibility contradicted = Ternary.rejected
-dispositionAdmissibility unresolved = Ternary.open
+dispositionAdmissibility unresolved = Ternary.openState
 dispositionAdmissibility supported = Ternary.admitted
 
 supportPaid : SourceDisposition → Bool
@@ -91,7 +91,7 @@ record SourceSupportAdmission
     sourceSupportPaid : Bool
     sourceSupportPaidIsDisposition : sourceSupportPaid ≡ supportPaid (disposition receipt)
     authorityState : Ternary.AdmissibilityState
-    authorityStillOpen : authorityState ≡ Ternary.open
+    authorityStillOpen : authorityState ≡ Ternary.openState
     semanticPromotionPerformed : Bool
     semanticPromotionPerformedIsFalse : semanticPromotionPerformed ≡ false
     migrationAuthority : Bool
@@ -111,7 +111,7 @@ admitSourceSupport receipt =
     refl
     (supportPaid (disposition receipt))
     refl
-    Ternary.open
+    Ternary.openState
     refl
     false
     refl

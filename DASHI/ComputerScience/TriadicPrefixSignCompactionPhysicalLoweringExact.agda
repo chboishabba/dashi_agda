@@ -176,7 +176,7 @@ currentPortableTriadicCodecRoadmap : PortableTriadicCodecRoadmap
 currentPortableTriadicCodecRoadmap = portable-triadic-codec-roadmap
   true true true true true true
   false false false false false
-  false false false false false false false false
+  false false false false false false false
 
 ------------------------------------------------------------------------
 -- WrongType firewalls.

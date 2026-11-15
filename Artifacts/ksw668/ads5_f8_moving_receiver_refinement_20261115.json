@@ -1,0 +1,98 @@
+{
+  "schema": "ksw668-f8-original-moving-AdS5-v1",
+  "date": "2026-11-15",
+  "model": "original 5D AdS5 a(t)=t k=0 FRW brane with Israel TT n.dH=-6pi",
+  "source_type_choices": [
+    "plane",
+    "compact_3d_TT"
+  ],
+  "source_t1": 1,
+  "receiver_t": 6,
+  "bulk_horizon": 1.8300210521210103,
+  "receiver_comoving_radius": 1.8220210521210103,
+  "photon_horizon": 1.791759469228055,
+  "source_spatial_halfwidth": 0.024,
+  "compact_temporal_support_T": 0.007,
+  "minimum_emitter_to_receiver_photon_gap_comoving": 0.006261582892955309,
+  "scheme": {
+    "radial": "second order one-sided upwind in y=z-b(T)",
+    "time": "SSP RK3",
+    "spatial": "Fourier in brane spatial k, 3D angular-Bessel inversion for compact source",
+    "outer_y": 2.8,
+    "periodic_length_x": 4
+  },
+  "grids": [
+    {
+      "nx": 256,
+      "dy": 0.012,
+      "dt_requested": 0.003
+    },
+    {
+      "nx": 512,
+      "dy": 0.007,
+      "dt_requested": 0.0017
+    },
+    {
+      "nx": 768,
+      "dy": 0.005,
+      "dt_requested": 0.00125
+    }
+  ],
+  "plane_control": {
+    "Hyy": [
+      0.006062004007022159,
+      0.006452752622143852,
+      0.0065540490811664305
+    ],
+    "Weyl4_intrinsic": [
+      0.060397255017818244,
+      0.10438598744966672,
+      0.1123832088774407
+    ],
+    "field_last_pair_relative_drift": 0.015455553928282552,
+    "Weyl_last_pair_relative_drift": 0.0711602872676054,
+    "far_field_fine": 1.3477128373717497e-11,
+    "far_over_signal_fine": 2.0563056832218533e-9,
+    "energy_finite_per_transverse_area": true,
+    "total_three_dimensional_energy_finite": false,
+    "interpretation": "nonzero early retarded plane-symmetric linear TT control, not converged Weyl"
+  },
+  "compact_3d_TT": {
+    "Hyy": [
+      0.026901857924302258,
+      0.09542997414752503,
+      0.06429828045297269
+    ],
+    "Weyl4_intrinsic": [
+      -0.7758515374787027,
+      -15.692281588840054,
+      -92.43199705904851
+    ],
+    "field_last_pair_relative_drift": 0.48417614709497325,
+    "Weyl_last_pair_relative_drift": 0.8302289024566316,
+    "far_field_fine": 0.0001323558558472636,
+    "far_over_signal_fine": 0.0020584664926469962,
+    "continuum_finite_energy": true,
+    "interpretation": "genuine compact 3D TT test source constructed; numerical UV/cutoff/convergence fail"
+  },
+  "acceptance": {
+    "source_equivalent_unit_tests": "8/8 PASS",
+    "full_3d_B4_numerical_convergence": false,
+    "external_analytical_Green_operator_previously_claimed_by_external_theorem": true,
+    "tensor_matter_generating_action": false,
+    "projected_5d_Weyl_not_calculated": true,
+    "physical_graviton_observed": false,
+    "Agda_pinned_kernel": false,
+    "exact_branch_head_execution_in_this_environment": false
+  },
+  "next_exact_lemmas": [
+    "ads5MovingTTCompactSource3DConvergentFourierInverse",
+    "ads5MovingTTBoundaryNearChordMicrolocalPrincipalSymbolNonzero",
+    "ads5Projected5DWeylOriginalReceiverExact",
+    "ads5CompactTTMatterActionRealization",
+    "ads5MovingFullCoupledStability",
+    "ads5PhysicalScaleSourceDetectorComparison",
+    "braneBulkOriginalAnalyticAgdaKernel",
+    "physicalGravitonObservation"
+  ]
+}

@@ -1,6 +1,7 @@
 module DASHI.Foundations.TernaryElementaryOperatorCandidate where
 
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong)
 open import Agda.Builtin.Nat using (Nat)
 open import Base369 using (TriTruth; tri-low; tri-mid; tri-high)
 
