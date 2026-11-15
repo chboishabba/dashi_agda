@@ -1,0 +1,201 @@
+{
+  "schema": "dashi-oai-ym-proof-intake-v1",
+  "date": "2026-11-14",
+  "attribution": {
+    "source_author": "OpenAI",
+    "reviewers": [
+      "Michael R. Douglas",
+      "David J. Gross",
+      "Arthur Jaffe",
+      "Igor R. Klebanov",
+      "Nikita Nekrasov"
+    ],
+    "first_claim": "2026-09-09 (reported by OpenAI)",
+    "source_submitted": "2026-10-28",
+    "assessment_date": "2026-11-10",
+    "source_release": "2026-11-11",
+    "status": "external_source_with_committee_review_not_native_dashi_proof"
+  },
+  "upstream": {
+    "repository": "yang-mills-group/OpenAI-YM-20261028",
+    "commit": "3456e5e75cf8d4cd558955a5c7638fba2d68f464",
+    "lean_toolchain": "leanprover/lean4:v4.32.0",
+    "files": [
+      {
+        "path": "Solution.lean",
+        "git_blob": "840270835f3ef60e74d461c83631dc380a859aa4",
+        "declaration": "YangMills.jointExistence"
+      },
+      {
+        "path": "Construction.lean",
+        "git_blob": "bc1efd87404a5157687cf1a639ef436071c93fdd",
+        "declaration": "YangMills.constructed"
+      },
+      {
+        "path": "ChallengeSpec.lean",
+        "git_blob": "b161625f436a8c5c9f5a8241df916ab7612d6276",
+        "declaration": "YangMills.JointExistence"
+      },
+      {
+        "path": "PublicWilson.lean",
+        "git_blob": "ccf44de9da2ff0010c02be77deff03e447a720bc",
+        "declaration": "YangMills.WilsonFamily"
+      }
+    ]
+  },
+  "review": {
+    "repository": "yang-mills-group/YM",
+    "commit": "55ba9fc36293b3f4d52c6b1f813169a0be76ee98",
+    "root_prefix": "submissions/openai-20261028/",
+    "files": [
+      {
+        "path": "submissions/openai-20261028/checks/AcceptanceSpec.lean",
+        "git_blob": "c8ba61da441bd8052877d789d2f67de78a4cccd6",
+        "declaration": "YMReview.Acceptance.CombinedAcceptance"
+      },
+      {
+        "path": "submissions/openai-20261028/checks/CombinedAcceptance.lean",
+        "git_blob": "2b22d1c94ca5b21fdfaae89e97e6c05ad7096af9",
+        "declaration": "YMReview.Acceptance.combined_acceptance"
+      },
+      {
+        "path": "submissions/openai-20261028/docs/checks.md",
+        "git_blob": "87474d281f9bfa3070969815ca5b68579ba093ed",
+        "declaration": "review scope / limitations"
+      },
+      {
+        "path": "submissions/openai-20261028/evidence/README.md",
+        "git_blob": "8304a11ba74141b2092507124398dfc1a9f7ad5c",
+        "declaration": "review verification chronology"
+      },
+      {
+        "path": "submissions/openai-20261028/checks/OPECheck.lean",
+        "git_blob": "87baa3e02f36aee7b611bac2fe940c504c01c87c",
+        "declaration": "YMReview.OPE.constructed"
+      }
+    ]
+  },
+  "existing_openai_math_corpus": {
+    "repository": "openai/math",
+    "commit": "1581d4cbdd69a0faf34b2089614fe2a814316a6a",
+    "agda_donor_pr": 1212,
+    "source_owner": "DASHI.Research.OpenAIMath.OpenAIMathUpstreamReceiptExact",
+    "same_corpus_as_yang_mills": false
+  },
+  "dashi_owner": {
+    "repo": "chboishabba/dashi_agda",
+    "pr": 1499,
+    "lean_repo": "chboishabba/dashi_lean4",
+    "lean_pr": 108,
+    "world_builder_donor_pr": 1495,
+    "world_builder_lean_version": "v4.28.0",
+    "bridge_status": "SOURCE_ONLY_NO_FORMAL_CROSS_KERNEL_IMPORT"
+  },
+  "clauses": [
+    {
+      "id": "A1",
+      "external": "YMReview.Acceptance.PhaseAndOS",
+      "dashi": "YMClayOriginalR445PublishedWilsonRPWordWeldExact / YangMillsStressOSSourceFirstSemigroupCoreToClosureExact",
+      "status": "not_same_source_proved",
+      "scope": "selected scalar OS only"
+    },
+    {
+      "id": "A2",
+      "external": "YMReview.Acceptance.OperatorContent",
+      "dashi": "YMClayOriginalWilsonFiniteTwoSourceJetExact",
+      "status": "unmatched",
+      "scope": "registered operator content; not canonical all-field identification"
+    },
+    {
+      "id": "A3",
+      "external": "YMReview.Acceptance.LatticeAndScale",
+      "dashi": "YMClayE1A3OriginalR445CrossCutoffSourceExact / YMClayOriginalWilsonPhysicalF19PartitionExact",
+      "status": "unmatched",
+      "scope": "Wilson lattice law, beta conversion, full UV and extracted IR; requires exact block and observable algebra"
+    },
+    {
+      "id": "A4",
+      "external": "YMReview.Acceptance.LeadingTrace",
+      "dashi": "YangMillsStressWardCommonCoreGeneratorExact",
+      "status": "unmatched",
+      "scope": "leading short-distance trace, not positive gap"
+    },
+    {
+      "id": "A5",
+      "external": "YMReview.Acceptance.LatticeAndScale",
+      "dashi": "YMClayE1D1OriginalR445QuantitativeThreeMomentRGCutExact",
+      "status": "unmatched",
+      "scope": "common calibration / positive lattice probe; intrinsic continuum reference mass not proved"
+    },
+    {
+      "id": "A6",
+      "external": "YMReview.Acceptance.TranslationWard",
+      "dashi": "YangMillsStressWardCommonCoreGeneratorExact",
+      "status": "unmatched",
+      "scope": "selected stress Ward / OS Q=H identification not proved"
+    },
+    {
+      "id": "A7",
+      "external": "YMReview.Acceptance.combined_acceptance",
+      "dashi": "YMClayOriginalF19P0CommonOSSourceConvergence20261114",
+      "status": "external_reviewed_not_transported",
+      "scope": "one family, one extracted table, one final witness"
+    },
+    {
+      "id": "A8",
+      "external": "YMReview.OPE.constructed",
+      "dashi": "YMClayOriginalF19P0CommonOSSourceConvergence20261114",
+      "status": "separate_witness_not_joined",
+      "scope": "OPE adapter is separate from A7 combined choice"
+    }
+  ],
+  "prohibited_promotions": {
+    "dashi_agda_kernel_accepted": false,
+    "dashi_lean_kernel_accepted": false,
+    "world_ingest_accepted": false,
+    "dashi_e1_original_wilson_same_object": false,
+    "dashi_d1_continuum_decay": false,
+    "dashi_d2_same_hamiltonian_gap": false,
+    "clay_ym_solved": false,
+    "unique_infinite_volume_limit": false,
+    "confinement": false,
+    "all_orders_msbar": false
+  },
+  "future_lemmas": [
+    {
+      "tier": "A",
+      "name": "oaiYMOriginalSU(N)GroupAndWilsonLawSameObject",
+      "kind": "source identity"
+    },
+    {
+      "tier": "A",
+      "name": "oaiYMOriginalF19R445BlockedCylinderObservableEquality",
+      "kind": "source identity"
+    },
+    {
+      "tier": "A",
+      "name": "oaiYMOriginalContinuumHierarchyAndOSScalarTransport",
+      "kind": "source identity"
+    },
+    {
+      "tier": "B",
+      "name": "oaiYMOriginalPhaseAverageToDASHIE1WilsonCylinderConvergence",
+      "kind": "external-to-original theorem transport"
+    },
+    {
+      "tier": "B",
+      "name": "oaiYMOriginalStressTraceWardToT00CommonGraphCore",
+      "kind": "source identity/analytic domain"
+    },
+    {
+      "tier": "C",
+      "name": "originalR445ActualInteractingExteriorInfluenceAndCutoffUniformDecay",
+      "kind": "new physical estimate"
+    },
+    {
+      "tier": "C",
+      "name": "originalR445SameOSGeneratorPositiveMassGap",
+      "kind": "new physical estimate"
+    }
+  ]
+}

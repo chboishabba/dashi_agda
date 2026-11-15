@@ -29,6 +29,20 @@ module DASHI.Physics.Closure.NSTriadKNR650SharedWeightedQuarticCutRound735Exact 
 --
 -- This removes the quintic R691 commutator from the preferred analytic target
 -- entirely.  It does not prove A' or D'.
+--
+-- CRITICAL PHYSICAL NO-GO (PR #1271, 27 Oct 2026; reimported into Clay #1499):
+-- The unrestricted UNIVERSAL W2/D' inequality is FALSE for a smooth,
+-- real, divergence-free, unforced six-mode Galerkin source state at N=2.
+-- An initially pure-positive-helicity triad has zero mixed initial work
+-- and positive literal dyadic critical production after amplitude 512.
+-- Thus D' cannot be demanded for ALL original physical trajectories.
+-- See Docs/research/ns_r734_pure_plus_physical_w2_no_go_20261027.md,
+-- the exact SymPy test, and R734's Waleffe helicity/weight-defect identity.
+-- The W1+W2 conditional algebra is valid but is NOT a viable general
+-- regularity argument unless W2 is replaced by a valid state-dependent
+-- estimate or the trajectory class is genuinely restricted with proof.
+-- Historical original helical calculus: Waleffe 1992; Leray NSE classical.
+
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
