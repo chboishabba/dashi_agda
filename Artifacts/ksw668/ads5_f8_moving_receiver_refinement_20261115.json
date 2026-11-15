@@ -76,7 +76,7 @@
     "interpretation": "genuine compact 3D TT test source constructed; numerical UV/cutoff/convergence fail"
   },
   "acceptance": {
-    "source_equivalent_unit_tests": "8/8 moving PDE, 5/5 original t2 microlocal, 13/13 total",
+    "source_equivalent_unit_tests": "8 moving + 5 original ray + 6 null convex + 4 SMS + 6 WKB = 29/29 PASS",
     "full_3d_B4_numerical_convergence": false,
     "external_analytical_Green_operator_previously_claimed_by_external_theorem": true,
     "tensor_matter_generating_action": false,
@@ -87,10 +87,8 @@
   },
   "next_exact_lemmas": [
     "ads5OriginalT2NeumannToWeylEllipticFIOComposition",
-    "ads5OriginalT2CompactTTActualEarlyNonzeroWeyl",
-    "ads5MovingTTCompactSource3DConvergentFourierInverse",
-    "ads5MovingTTBoundaryNearChordMicrolocalPrincipalSymbolNonzero",
-    "ads5Projected5DWeylOriginalReceiverExact",
+    "ads5OriginalT2ActualCompactTTNonzeroEarlyBothWeyl",
+    "ads5MovingTTCompact3DSpectralCutoffConvergence",
     "ads5CompactTTMatterActionRealization",
     "ads5MovingFullCoupledStability",
     "ads5PhysicalScaleSourceDetectorComparison",
@@ -118,5 +116,37 @@
     "no_null_AdS_screen_conjugate_points": true,
     "Neumann_to_Dirichlet_FIO_composition_actually_proved": false,
     "nonzero_original_t2_Weyl_retarded_proved": false
+  },
+  "original_t2_null_convex_lens": {
+    "outward_null_second_form": "t^3/(1+t^2)^(3/2)",
+    "emitter_outward_second_form": 0.3536283958961996,
+    "receiver_outward_second_form": 0.7155417527999327,
+    "strict_original_5D_boundary_null_convex": true,
+    "stefanov_yang_2018_dimension": "1+n n>=2, includes 1+4",
+    "stefanov_yang_thm31": "elliptic local DN pseudodifferential order1",
+    "stefanov_yang_thm42": "elliptic first-reflection global DN FIO lens relation",
+    "uhlmann_zhang_2022_lemma13_dimension": "1+3, not direct original 1+4"
+  },
+  "original_t2_SMS_projected_5D_Weyl": {
+    "projected_E5_formula": "[6-3*(rho+3p)]pi_TT -1/2*(d_t²+3H d_t-a^-2Delta)H_TT",
+    "quadratic_S_TT": "-(rho+3p)/12*pi_TT",
+    "rational_t4over3_source_coefficient": "123/20",
+    "receiver_E5_principal_without_local_source": 0.002856448946707509,
+    "intrinsic_4D_Weyl_same_quantity": false,
+    "actual_retarded_receiver_projectedE5_unverified": true
+  },
+  "original_t2_direct_WKB": {
+    "direct_tensor_phase": "-T + s z + kx x, s²+kx²=1",
+    "amplitude_leading": "a0=z^(3/2)",
+    "amplitude_next": "a1=(15/(8s))*z^(3/2)*(1/ze-1/z)",
+    "first_curvature_order_zero_residual_canceled_exactly": true,
+    "emitter_z": 0.9998585836439983,
+    "receiver_z": 0.5,
+    "direct_transport_ratio": 0.35362840120100064,
+    "H_receiver_leading_coeff_per_lambda_unit_TT_source": 24.08051461465392,
+    "intrinsic_Weyl_leading_coeff_times_lambda_unit_TT_source": 2.023397085087704,
+    "projected5D_Weyl_leading_coeff_times_lambda_unit_TT_source": 0.06878476060720297,
+    "global_Neumann_FIO_composition_and_remainder_proved": false,
+    "analytic_existential_actual_smooth_source_Early_Weyl_proved": false
   }
 }
