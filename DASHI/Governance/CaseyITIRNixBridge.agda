@@ -1,6 +1,6 @@
 module DASHI.Governance.CaseyITIRNixBridge where
 
-open import Agda.Primitive using (Level; _⊔_; lsuc)
+open import Agda.Primitive using (Level; lsuc) renaming (_⊔_ to _⊔ℓ_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 cong :
@@ -86,7 +86,7 @@ module Replication
 record GovernanceLayer
   {sℓ rℓ vℓ pℓ : Level}
   (K : CaseySubstrate {sℓ})
-  : Set (lsuc (sℓ ⊔ rℓ ⊔ vℓ ⊔ pℓ)) where
+  : Set (lsuc (sℓ ⊔ℓ rℓ ⊔ℓ vℓ ⊔ℓ pℓ)) where
   field
     ReceiptState : Set rℓ
     receiptJoin : JoinSemilattice ReceiptState
@@ -107,7 +107,7 @@ record BuildBoundary
   {sℓ rℓ vℓ pℓ bℓ aℓ : Level}
   (K : CaseySubstrate {sℓ})
   (G : GovernanceLayer {rℓ = rℓ} {vℓ = vℓ} {pℓ = pℓ} K)
-  : Set (lsuc (sℓ ⊔ rℓ ⊔ vℓ ⊔ pℓ ⊔ bℓ ⊔ aℓ)) where
+  : Set (lsuc (sℓ ⊔ℓ rℓ ⊔ℓ vℓ ⊔ℓ pℓ ⊔ℓ bℓ ⊔ℓ aℓ)) where
   field
     BuildView : Set bℓ
     Artifact : Set aℓ
@@ -154,7 +154,7 @@ module Materialization
 
 record InstitutionalModel
   {oℓ qℓ sℓ rℓ vℓ pℓ fℓ bℓ aℓ : Level}
-  : Set (lsuc (oℓ ⊔ qℓ ⊔ sℓ ⊔ rℓ ⊔ vℓ ⊔ pℓ ⊔ fℓ ⊔ bℓ ⊔ aℓ)) where
+  : Set (lsuc (oℓ ⊔ℓ qℓ ⊔ℓ sℓ ⊔ℓ rℓ ⊔ℓ vℓ ⊔ℓ pℓ ⊔ℓ fℓ ⊔ℓ bℓ ⊔ℓ aℓ)) where
   field
     O-Organization : Set oℓ
     R-Requirement : Set qℓ
@@ -187,7 +187,7 @@ record GovernanceCycle
   {oℓ qℓ sℓ rℓ vℓ pℓ fℓ bℓ aℓ : Level}
   (M : InstitutionalModel
     {oℓ} {qℓ} {sℓ} {rℓ} {vℓ} {pℓ} {fℓ} {bℓ} {aℓ})
-  : Set (oℓ ⊔ qℓ ⊔ sℓ ⊔ rℓ ⊔ vℓ ⊔ pℓ ⊔ fℓ) where
+  : Set (oℓ ⊔ℓ qℓ ⊔ℓ sℓ ⊔ℓ rℓ ⊔ℓ vℓ ⊔ℓ pℓ ⊔ℓ fℓ) where
   field
     organization : O-Organization M
     requirement : R-Requirement M
@@ -226,7 +226,7 @@ record ContractionWitness
   {oℓ qℓ sℓ rℓ vℓ pℓ fℓ bℓ aℓ : Level}
   (M : InstitutionalModel
     {oℓ} {qℓ} {sℓ} {rℓ} {vℓ} {pℓ} {fℓ} {bℓ} {aℓ})
-  : Set (lsuc (oℓ ⊔ qℓ ⊔ sℓ ⊔ rℓ ⊔ vℓ ⊔ pℓ ⊔ fℓ)) where
+  : Set (lsuc (oℓ ⊔ℓ qℓ ⊔ℓ sℓ ⊔ℓ rℓ ⊔ℓ vℓ ⊔ℓ pℓ ⊔ℓ fℓ)) where
   field
     Unresolved :
       State (casey M) →
@@ -251,7 +251,7 @@ record ObserverBoundary
   {sℓ rℓ vℓ pℓ refℓ : Level}
   (K : CaseySubstrate {sℓ})
   (G : GovernanceLayer {rℓ = rℓ} {vℓ = vℓ} {pℓ = pℓ} K)
-  : Set (lsuc (sℓ ⊔ rℓ ⊔ vℓ ⊔ pℓ ⊔ refℓ)) where
+  : Set (lsuc (sℓ ⊔ℓ rℓ ⊔ℓ vℓ ⊔ℓ pℓ ⊔ℓ refℓ)) where
   field
     ImmutableReference : Set refℓ
 
