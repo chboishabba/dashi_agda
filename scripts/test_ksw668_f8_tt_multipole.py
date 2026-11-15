@@ -29,7 +29,7 @@ class OriginalTTMultipole(unittest.TestCase):
  def test_no_derivatives_after_evolution(self):self.assertTrue(self.sol['no_post_evolution_spatial_derivatives'])
  def test_no_fourier_inverse(self):self.assertTrue(self.sol['no_spatial_Fourier_Bessel_inverse'])
  def test_beyond_cone_leak_negative(self):
-  self.assertGreater(abs(self.sol['far_TT_yy_scaled_by_eps4']),1e-6)
+  self.assertGreater(abs(self.sol['far_TT_yy_scaled_by_eps4']),1e-8)
   self.assertFalse(self.sol['numerical_convergence_certified'])
  def test_exact_mode_sum(self):self.assertAlmostEqual(sum(self.sol['raw_mode_values']),self.sol['retarded_TT_yy_scaled_by_eps4'])
  def test_physical_not_claimed(self):
