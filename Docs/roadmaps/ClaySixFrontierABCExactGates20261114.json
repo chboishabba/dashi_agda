@@ -4716,6 +4716,263 @@
               "expected_false": null
             }
           ]
+        },
+        "DASHI/Physics/YangMills/BalabanCMP116PublishedAuthoritySelectedT5ApplicationExact.agda": {
+          "owner": "DASHI/Physics/YangMills/BalabanCMP116PublishedAuthoritySelectedT5ApplicationExact.agda",
+          "blob": "8c94be96ebb6256c6bfd9af4f6703a8a139a0dbf",
+          "terms": [
+            {
+              "name": "SelectedT5CMP116AuthorityApplication",
+              "kind": "CONDITIONAL_RECORD",
+              "mention": 35,
+              "declaration": 0,
+              "expected_false": null
+            }
+          ]
+        },
+        "DASHI/Physics/YangMills/BalabanSelectedDistanceCarrierWeldRound349Exact.agda": {
+          "owner": "DASHI/Physics/YangMills/BalabanSelectedDistanceCarrierWeldRound349Exact.agda",
+          "blob": "08aee8b004dac39b48bb511bba6fdf03b2cd7a56",
+          "terms": [
+            {
+              "name": "SelectedDistanceCarrierWeld.r318DistanceIsR284Distance",
+              "kind": "CONDITIONAL_RECORD",
+              "mention": 55,
+              "declaration": 55,
+              "expected_false": null
+            },
+            {
+              "name": "selectedR318DistanceIsTime",
+              "kind": "SOURCE_TERM_UNCHECKED",
+              "mention": 65,
+              "declaration": 65,
+              "expected_false": null
+            }
+          ]
+        },
+        "DASHI/Physics/YangMills/BalabanT5DirectSelectedMarkedDecayRound320Exact.agda": {
+          "owner": "DASHI/Physics/YangMills/BalabanT5DirectSelectedMarkedDecayRound320Exact.agda",
+          "blob": "ab3bd4f929a67c1c4e861820222769767dff8562",
+          "terms": [
+            {
+              "name": "DirectSelectedT5MarkedDecayPayment.mixedDerivativeMagnitudeBelowSelectedShell",
+              "kind": "CONDITIONAL_RECORD",
+              "mention": 49,
+              "declaration": 49,
+              "expected_false": null
+            },
+            {
+              "name": "mixedDerivativeMagnitudeBelowSelectedShell",
+              "kind": "CONDITIONAL_RECORD",
+              "mention": 49,
+              "declaration": 49,
+              "expected_false": null
+            },
+            {
+              "name": "round320DirectSelectedMarkedDecayLevel",
+              "kind": "CONDITIONAL_COMPILER",
+              "mention": 169,
+              "declaration": 169,
+              "expected_false": null
+            },
+            {
+              "name": "literalSelectedJMagnitudeBelowShell",
+              "kind": "CONDITIONAL_COMPILER",
+              "mention": 62,
+              "declaration": 62,
+              "expected_false": null
+            }
+          ]
+        },
+        "DASHI/Physics/YangMills/YMClayDirectSourceOSMassGapFrontierExact.agda": {
+          "owner": "DASHI/Physics/YangMills/YMClayDirectSourceOSMassGapFrontierExact.agda",
+          "blob": "f94bcf270f58de263f6202b8679610ba3d6cd464",
+          "terms": [
+            {
+              "name": "DirectSourceOSMassGapInputs.application",
+              "kind": "CONDITIONAL_RECORD",
+              "mention": 60,
+              "declaration": 60,
+              "expected_false": null
+            },
+            {
+              "name": "DirectSourceOSMassGapInputs.completion",
+              "kind": "CONDITIONAL_RECORD",
+              "mention": 66,
+              "declaration": 66,
+              "expected_false": null
+            },
+            {
+              "name": "DirectSourceOSMassGapInputs",
+              "kind": "CONDITIONAL_RECORD",
+              "mention": 48,
+              "declaration": 0,
+              "expected_false": null
+            }
+          ]
+        },
+        "DASHI/Physics/YangMills/YMClayR445OneLocalTVThreeMomentsSourceWeldExact.agda": {
+          "owner": "DASHI/Physics/YangMills/YMClayR445OneLocalTVThreeMomentsSourceWeldExact.agda",
+          "blob": "9e97eac7cd2e2de1989e699b3e53fc98d77578e3",
+          "terms": [
+            {
+              "name": "YMClayR445OneLocalTVThreeMomentsSourceWeldExact",
+              "kind": "CONDITIONAL_COMPILER",
+              "mention": 1,
+              "declaration": 0,
+              "expected_false": null
+            }
+          ]
+        },
+        "DASHI/Physics/YangMills/YMClayRouteSH1ModeSelectedContinuumUpperExact.agda": {
+          "owner": "DASHI/Physics/YangMills/YMClayRouteSH1ModeSelectedContinuumUpperExact.agda",
+          "blob": "95b47cc1e3e3249ee2d7a0816797a4452fbdebc6",
+          "terms": [
+            {
+              "name": "RouteSH1ModeSelectedInputs.h1",
+              "kind": "CONDITIONAL_RECORD",
+              "mention": 57,
+              "declaration": 57,
+              "expected_false": null
+            },
+            {
+              "name": "RouteSH1ModeSelectedInputs.selectedPairDistanceIsTime",
+              "kind": "CONDITIONAL_RECORD",
+              "mention": 59,
+              "declaration": 59,
+              "expected_false": null
+            },
+            {
+              "name": "RouteSH1ModeSelectedInputs.selectedLimitUpperClosure",
+              "kind": "CONDITIONAL_RECORD",
+              "mention": 67,
+              "declaration": 67,
+              "expected_false": null
+            }
+          ]
+        },
+        "DASHI/Physics/YangMills/YMClayRouteSSelectedLimitClosureExact.agda": {
+          "owner": "DASHI/Physics/YangMills/YMClayRouteSSelectedLimitClosureExact.agda",
+          "blob": "60d55bbfd7f490f526cfba70b814d9b443b2e1ee",
+          "terms": [
+            {
+              "name": "R342.SelectedLimitUpperClosure",
+              "kind": "CONDITIONAL_COMPILER",
+              "mention": 27,
+              "declaration": 0,
+              "expected_false": null
+            },
+            {
+              "name": "r310UpperClosureToTerminalSelectedClosure",
+              "kind": "CONDITIONAL_COMPILER",
+              "mention": 45,
+              "declaration": 45,
+              "expected_false": null
+            },
+            {
+              "name": "r330PackagingToTerminalSelectedClosure",
+              "kind": "CONDITIONAL_COMPILER",
+              "mention": 53,
+              "declaration": 53,
+              "expected_false": null
+            }
+          ]
+        },
+        "DASHI/Physics/YangMills/YangMillsPreferredSameHamiltonianTransferRound577Exact.agda": {
+          "owner": "DASHI/Physics/YangMills/YangMillsPreferredSameHamiltonianTransferRound577Exact.agda",
+          "blob": "004fc86506caeacea18a45df968ecf34b4628752",
+          "terms": [
+            {
+              "name": "PreferredSameHamiltonianTransfer.transfer",
+              "kind": "CONDITIONAL_RECORD",
+              "mention": 19,
+              "declaration": 40,
+              "expected_false": null
+            },
+            {
+              "name": "asHistoricalR311",
+              "kind": "SOURCE_TERM_UNCHECKED",
+              "mention": 45,
+              "declaration": 45,
+              "expected_false": null
+            },
+            {
+              "name": "selectedHamiltonianIsReconstructedByConstruction",
+              "kind": "SOURCE_TERM_UNCHECKED",
+              "mention": 58,
+              "declaration": 58,
+              "expected_false": null
+            },
+            {
+              "name": "postHocHamiltonianEqualityRequired",
+              "kind": "SOURCE_TERM_UNCHECKED",
+              "mention": 61,
+              "declaration": 61,
+              "expected_false": null
+            }
+          ]
+        },
+        "Docs/physics/YMClayR445WeightedExteriorInfluenceMaxCut20261114.md": {
+          "owner": "Docs/physics/YMClayR445WeightedExteriorInfluenceMaxCut20261114.md",
+          "blob": "5457678e6a6d28af03b8047f59854db831a16433",
+          "terms": [
+            {
+              "name": "originalR445F19P0LocalizedMarginalSameSource",
+              "kind": "TARGET_NAME_ONLY",
+              "mention": 72,
+              "declaration": 0,
+              "expected_false": null
+            },
+            {
+              "name": "originalR445TargetCountertermNormalizedDensity",
+              "kind": "TARGET_NAME_ONLY",
+              "mention": 73,
+              "declaration": 0,
+              "expected_false": null
+            },
+            {
+              "name": "originalR445PhysicalConditionalKernelDisintegration",
+              "kind": "TARGET_NAME_ONLY",
+              "mention": 74,
+              "declaration": 0,
+              "expected_false": null
+            },
+            {
+              "name": "originalR445ActualConditionalKernelTVUniform",
+              "kind": "TARGET_NAME_ONLY",
+              "mention": 76,
+              "declaration": 0,
+              "expected_false": null
+            },
+            {
+              "name": "originalR445PhysicalExteriorInfluenceSiteBound",
+              "kind": "TARGET_NAME_ONLY",
+              "mention": 80,
+              "declaration": 0,
+              "expected_false": null
+            },
+            {
+              "name": "originalR445ExteriorDisagreementCoupling",
+              "kind": "TARGET_NAME_ONLY",
+              "mention": 85,
+              "declaration": 0,
+              "expected_false": null
+            },
+            {
+              "name": "originalR445ActualLocalizedEffectiveTargetTVBound",
+              "kind": "TARGET_NAME_ONLY",
+              "mention": 89,
+              "declaration": 0,
+              "expected_false": null
+            },
+            {
+              "name": "originalR445LocalTVCutoffUniformSummable",
+              "kind": "TARGET_NAME_ONLY",
+              "mention": 92,
+              "declaration": 0,
+              "expected_false": null
+            }
+          ]
         }
       },
       "method": "exact PR-head GitHub fetch_file proof bodies; source-structural not kernel; subsequent audit commits do not modify these original proof owners"
