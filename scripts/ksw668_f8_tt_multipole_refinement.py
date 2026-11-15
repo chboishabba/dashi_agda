@@ -22,6 +22,13 @@ def audit():
     radius=[r['receiver_grid_r'] for r in rows]
     assert max(radius)-min(radius)<1e-12
     assert all(r['discrete_support_photon_margin']>0 for r in rows)
+    # Acceptance must execute the repaired original PDE, not stale centre-FV.
+    assert all(r['corrected_radial_shell_volume']
+        and r['radial_discrete_green_energy_nonpositive']
+        and r['source_cell_integration']=='exact compact TT endpoint primitives'
+        for r in rows)
+    assert all(r['receiver_convergence_not_implied_by_discrete_energy']
+        for r in rows)
     measures={
       'tensor_Hyy':('retarded_TT_yy_scaled_by_eps4','far_TT_yy_scaled_by_eps4'),
       'intrinsic_4D_Weyl':('receiver_intrinsic_4D_electric_Weyl','far_intrinsic_4D_electric_Weyl'),
@@ -49,6 +56,9 @@ def audit():
         both_Weyl_computed=True,
         formal_error_bound_provided=False,
         physical_graviton_observed=False,
+        corrected_shell_FV_and_exact_source_integral_required=True,
+        alternative_time_derivative_Weyl_available=True,
+        original_model_manufactured_stage_checked_separately=True,
         next_gates=['independently controlled dy/dt vs dr refinement',
                     'moving brane tensor source-to-Weyl extraction',
                     'physically certified causal outside-bulk control',
