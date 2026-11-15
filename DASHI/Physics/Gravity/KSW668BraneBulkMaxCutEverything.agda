@@ -48,3 +48,7 @@ import DASHI.Physics.Gravity.KSW668AdS5TTMultipoleAngularRationalExact
 -- rational first-cell conservative finite-volume quadratic identities.
 -- General source/observer convergence and pinned Agda kernel remain OPEN.
 import DASHI.Physics.Gravity.KSW668AdS5TTFiniteVolumeFirstCellRationalExact
+
+-- Original moving a=t Neumann TT forced characteristic boundary-flux
+-- exact rational square; full continuum/SSPRK3/receiver Weyl gate OPEN.
+import DASHI.Physics.Gravity.KSW668AdS5MovingNeumannFluxRationalExact
