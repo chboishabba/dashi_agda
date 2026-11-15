@@ -2782,13 +2782,13 @@
         "id": "C2",
         "phase": "C",
         "title": "NS R853 selected-rate differentiated envelope",
-        "status": "OPEN",
+        "status": "CLOSED_MATHEMATICAL_PYTHON_SYMPY",
         "deliverables": [
           "same-trajectory literal R853 r(t)",
           "original weak derivative bound and R856 consumer"
         ],
-        "kernel_acceptance_required_before_full_closure": true,
-        "kernel_acceptance_state": "NOT_OBTAINED_THIS_ROUND",
+        "kernel_acceptance_required_before_full_closure": false,
+        "kernel_acceptance_state": "DEFERRED_NOT_OBTAINED__USER_APPROVED_PYTHON_MATH_GATE_ONLY",
         "nonterminal_20261115_rate_envelope": {
           "selected_packet_rate_bridge_source_written": true,
           "state_L": "391309593930357307785216",
@@ -2799,7 +2799,49 @@
           "classical_fourier_integral_negative": true,
           "actual_R408_real_carrier_constructed": false,
           "kernel_checked": false,
-          "gate_closed": false
+          "gate_closed": false,
+          "whole_ball_rate_Lambda": "618365778064115445891072",
+          "original_R829_eight_M_and_G_vector_rows": "8/8 each exact",
+          "exact_R856_2K_safe": true,
+          "classical_selected_rate_derivative_and_finite_integral_closed": true,
+          "gate_closed_under_python_math_protocol": true
+        },
+        "closed": true,
+        "closure_method": "R692_R230_R224_R847_R853_EXACT_ORIGINAL_MIXED_AND_COMMUTATOR_COMPONENTS_PLUS_COMPLETE_REAL_BALL_LIPSCHITZ_R856_FIXED_T_FTC",
+        "closure_protocol": "USER_REQUESTED_PYTHON_SYMPY_NO_AGDA_OR_CI_20261115",
+        "closure_document": "Docs/roadmaps/ClayC2R853PythonSympySelectedRateClosure20261115.md",
+        "acceptance_script": "scripts/check_clay_c2_r853_selected_rate_sympy_20261115.py",
+        "original_native_kernel_acceptance_required": true,
+        "native_agda_theorem_inhabited": false,
+        "native_kernel_proof_receipt": false,
+        "physical_R408_time_packet_constructed": false,
+        "original_typed_R408_R853_real_field_transport_closed": false,
+        "note": "Classical real-Fourier selected physical rate and fixed horizon derivative+FTC theorem, not Agda's Q-valued R408 live packet. Original typed formalization debt retained, not claimed kernel accepted.",
+        "python_sympy_acceptance": {
+          "sympy_version": "1.14.0",
+          "exact_original_R829_force_complex_components": 24,
+          "original_R829_R224_mixed_vector_rows": 8,
+          "original_R829_R230_commutator_vector_rows": 8,
+          "C_at_zero": "-557627/125",
+          "P_at_zero": "0",
+          "D_at_zero": "15834",
+          "r_at_zero": "-28273644/125",
+          "finite_real_chart_dimension": 2184,
+          "nonzero_cutoff_4_modes": 728,
+          "physical_R71_Galerkin_flow_from_C1": true,
+          "physical_force_component_bound": 5031936,
+          "physical_rate_state_Lipschitz_Lambda": "618365778064115445891072",
+          "original_R854_scalar_L": "391309593930357307785216",
+          "strict_Lambda_below_2L": true,
+          "field_K": 5032512,
+          "twoK": 10065024,
+          "R856_pointwise_max_safe": 10065030,
+          "original_T": "226189/3938540454339300631433585885184",
+          "exact_strict_rate_bound": "-19/125",
+          "strict_integrated_selected_rate": true,
+          "exact_executed_script_git_blob": "90e75db5722afa236eeb06da68d6847c2d1933e2",
+          "local_command_passed": true,
+          "full_source_agda_kernel_checked": false
         }
       },
       {
@@ -5309,7 +5351,6 @@
       "A2",
       "B1",
       "B2",
-      "C2",
       "D1",
       "D2",
       "E0",
@@ -5319,10 +5360,11 @@
       "F2",
       "F3"
     ],
-    "active_gate_count": 13,
+    "active_gate_count": 12,
     "completed_gate_ids": [
       "P0",
-      "C1"
+      "C1",
+      "C2"
     ],
     "round_20261115_packet_weld_real_ode_audit": {
       "date": "2026-11-15",
@@ -5381,8 +5423,8 @@
       "independent_kernel_receipt": false,
       "original_endpoint_closed": false
     },
-    "completed_gate_count": 2,
-    "closure_counting_protocol": "P0_SOURCE_PREFLIGHT_PLUS_C1_USER_REQUESTED_SYMPY_MATHEMATICAL; ORIGINAL_NATIVE_KERNEL_COUNTS_UNCHANGED",
+    "completed_gate_count": 3,
+    "closure_counting_protocol": "P0_SOURCE_PREFLIGHT_PLUS_C1_C2_USER_REQUESTED_SYMPY_MATHEMATICAL; ORIGINAL_NATIVE_KERNEL_COUNTS_UNCHANGED",
     "original_native_gate_acceptance_pending_including_c1": true,
     "round_20261115_c1_python_math_closure": {
       "date": "2026-11-15",
@@ -5405,6 +5447,31 @@
       "c2_still_open": true,
       "original_endpoint_closed": false,
       "caution": "Explicit user waiver of CI/Agda applies to C1 Python mathematical acceptance only. Do not conflate with Agda-native or Clay endpoint proof."
+    },
+    "original_native_gate_acceptance_pending_including_c1_c2": true,
+    "round_20261115_c2_python_math_closure": {
+      "date": "2026-11-15",
+      "source_pr": 1499,
+      "scope": "C2 original real-Fourier R853 rate, chain derivative and integral on original R854 T; historic Q-valued Agda R408/R853 not inhabited",
+      "gate_closed_under_python_protocol": true,
+      "same_original_snapshot_source_r224_r230_r692_r847_r853_rows": true,
+      "all_8_original_mixed_vectors_matched": true,
+      "all_8_original_commutator_vectors_matched": true,
+      "full_real_ball_rate_Lambda": "618365778064115445891072",
+      "actual_real_ODE_R71_chain_derivative_bounded": true,
+      "first_exit_R854_reused": true,
+      "L_reference": "391309593930357307785216",
+      "safe_multiplier": 10065024,
+      "original_T": "226189/3938540454339300631433585885184",
+      "strict_rate_upper": "-19/125",
+      "original_selected_integral_strict_negative": true,
+      "code": "scripts/check_clay_c2_r853_selected_rate_sympy_20261115.py",
+      "math_proof": "Docs/roadmaps/ClayC2R853PythonSympySelectedRateClosure20261115.md",
+      "exact_executed_script_git_blob": "90e75db5722afa236eeb06da68d6847c2d1933e2",
+      "native_agda_kernel_run": false,
+      "original_R408_real_packet": false,
+      "original_endpoint_closed": false,
+      "caution": "Python mathematical C2 success under user waiver only, not Agda/Lean/native formal accepted proof or official Clay result."
     }
   }
 }
