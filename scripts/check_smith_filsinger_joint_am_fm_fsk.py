@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Original DASHI synthetic controls for joint AM/FM/FSK/nonlinear observation.
-All six tests use synthetic signals, not inferred physical source powers.
+All seven tests use synthetic signals, not inferred physical source powers.
 Actual Filsinger audio SHA and inverse analysis: accompanying report.
 """
 import numpy as np
@@ -54,8 +54,18 @@ def test_drift_is_not_am():
     assert np.std(a)<1e-12
     assert np.allclose(np.diff(f)[100:-100],np.diff(fi)[100:-100],atol=.02)
 
+
+def test_pure_psk_phase_jump_without_amplitude_jump():
+    # PSK switches a phase code, without requiring an AM energy burst.
+    phase=2*np.pi*3*t+np.pi*(np.sin(2*np.pi*1.1*t)>0)
+    a,f=observables(np.exp(1j*phase))
+    assert np.max(abs(a))<1e-10
+    assert np.quantile(abs(f),.999)>100
+
+
 if __name__=="__main__":
     for fn in [test_pure_am,test_pure_fm,test_joint_am_fm,
-               test_phase_continuous_fsk,test_mode_beating,test_drift_is_not_am]:
+               test_phase_continuous_fsk,test_pure_psk_phase_jump_without_amplitude_jump,
+               test_mode_beating,test_drift_is_not_am]:
         fn()
         print("PASS",fn.__name__)
