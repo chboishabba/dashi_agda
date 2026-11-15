@@ -95,8 +95,26 @@ def main() -> int:
     lean_receipts = evidence.get("lean_sources", {})
     if len(original) != 47 or len(lean_receipts) != 3:
         problems.append("P0_RECEIPT_TRUNCATED: expected 47 Agda and 3 Lean owners")
-    if audit.get("active_gate_count") != 14 or audit.get("completed_gate_ids") != ["P0"]:
-        problems.append("P0_GATE_COUNT_MISMATCH: expected P0 closed, 14 active")
+    # The gate manifest must reflect the original P0 source acceptance and
+    # the explicitly user-authorized C1 Python/SymPy mathematical acceptance;
+    # C1 must not masquerade as native Agda kernel acceptance.
+    manifest = audit.get("gates", [])
+    completed = [g["id"] for g in manifest if g.get("closed", False)]
+    active = [g["id"] for g in manifest if not g.get("closed", False)]
+    if (len(manifest) != 15
+            or audit.get("active_gate_count") != 13
+            or audit.get("active_gate_ids") != active
+            or audit.get("completed_gate_ids") != ["P0", "C1"]
+            or completed != ["P0", "C1"]):
+        problems.append("PHASE_GATE_COUNT_MISMATCH: expected P0+C1 (Python math), 13 active")
+    c1 = next((g for g in manifest if g["id"] == "C1"), None)
+    if (c1 is None
+            or c1.get("status") != "CLOSED_MATHEMATICAL_PYTHON_SYMPY"
+            or c1.get("native_agda_theorem_inhabited") is not False
+            or c1.get("native_kernel_proof_receipt") is not False
+            or c1.get("physical_R408_time_packet_constructed") is not False
+            or not (ROOT / "scripts/check_clay_c1_r71_r74_sympy_bridge_20261115.py").is_file()):
+        problems.append("C1_PYTHON_CLOSURE_PROTOCOL_OR_NATIVE_DEBT_MISSING")
     for owner, receipt in original.items():
         if (ROOT / owner).is_file():
             actual = git_blob_sha(ROOT, owner)
