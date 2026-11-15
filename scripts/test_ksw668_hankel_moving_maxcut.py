@@ -40,6 +40,12 @@ class HankelBraneMaxcut(unittest.TestCase):
         r=a.stationary_no_shortcut_control()
         self.assertTrue(r['stationary_bulk_earliest_photon_time_equal'])
         self.assertFalse(r['geometric_early_signal_for_static_wall'])
+    def test_actual_finite_energy_TT_continuum_packet(self):
+        r=a.evaluated_spectral_packet(time=.2,z=1.5)
+        self.assertTrue(r['full_packet_finite_energy'])
+        self.assertGreater(abs(r['TT_yy_at_x_origin']),1e-6)
+        self.assertFalse(r['moving_brane'])
+        self.assertFalse(r['retarded_boundary_emitter'])
     def test_no_physical_promotion(self):
         r=a.audit()
         self.assertFalse(r['explicit_original_moving_retarded_Green_kernel'])
