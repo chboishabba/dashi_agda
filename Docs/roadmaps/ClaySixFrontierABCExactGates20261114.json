@@ -2585,13 +2585,79 @@
       {
         "id": "P0",
         "phase": 0,
-        "title": "Mandatory exact source/PR terms and pinned kernel verification",
-        "status": "SOURCE_AUDITED_KERNEL_UNVERIFIED",
+        "title": "P0 original-source ownership, 135-term provenance and donor deduplication",
+        "status": "CLOSED_SOURCE_OWNER_PREFLIGHT",
         "deliverables": [
-          "branch-local literal grep and donor comparison",
-          "pinned Agda/Lean exact-head checks",
-          "trace transitive axioms and negative controls"
-        ]
+          "CLOSED: exact-source check of 135 indexed terms across 47 Agda + 3 Lean owner blobs",
+          "CLOSED: 0 source declaration/false-flag mismatches in indexed implemented/flag classes",
+          "CLOSED: six original donor-vs-Clay exact blob SHA comparisons (independent donor fetch)",
+          "CLOSED: independent R734 physical W2 auxiliary no-go scalar, R445 TV negative control, R856 exact thresholds",
+          "Kernel checks still OPEN inside the remaining 14 mathematical gates, particularly E0; NOT claimed by P0"
+        ],
+        "closed": true,
+        "closed_scope": "Source discovery, proof-owner classification, original blob identity and negative controls. Kernel proof acceptance is explicitly retained in E0 and the mathematical gate acceptance criteria.",
+        "acceptance_evidence": {
+          "source_terms": 135,
+          "agda_owners": 47,
+          "lean_owners": 3,
+          "source_mismatches": 0,
+          "donor_blob_matches": [
+            {
+              "donor": "#1129",
+              "path": "DASHI/Mathematics/Complexity/PNotEqualsNPStandardMachineMaxCutClosureExact.agda",
+              "donor_blob": "564f3f11ce56e228247992d2fd308f00fd70487f",
+              "clay_blob": "564f3f11ce56e228247992d2fd308f00fd70487f",
+              "identical": true
+            },
+            {
+              "donor": "#1271",
+              "path": "DASHI/Physics/Closure/NSTriadKNR650AugmentedCriticalWeightedNormalFormRound734Exact.agda",
+              "donor_blob": "74877d3c783c3f9e7634c4c521536ce99197e067",
+              "clay_blob": "74877d3c783c3f9e7634c4c521536ce99197e067",
+              "identical": true
+            },
+            {
+              "donor": "#1271",
+              "path": "Docs/research/ns_r734_pure_plus_physical_w2_no_go_20261027.md",
+              "donor_blob": "f498fb3a89683fa90f03c707728f4207310a5581",
+              "clay_blob": "f498fb3a89683fa90f03c707728f4207310a5581",
+              "identical": true
+            },
+            {
+              "donor": "#1503",
+              "path": "DASHI/Physics/YangMills/YMClayR445OneLocalTVThreeMomentsSourceWeldExact.agda",
+              "donor_blob": "9e97eac7cd2e2de1989e699b3e53fc98d77578e3",
+              "clay_blob": "9e97eac7cd2e2de1989e699b3e53fc98d77578e3",
+              "identical": true
+            },
+            {
+              "donor": "#1502",
+              "path": "DASHI/Mathematics/Complexity/Karp21NativeGammaAllLengthCompositePhysicalExact.agda",
+              "donor_blob": "cb720b2ec3d2135dcca0033015e14441a6b10164",
+              "clay_blob": "cb720b2ec3d2135dcca0033015e14441a6b10164",
+              "identical": true
+            },
+            {
+              "donor": "#1474",
+              "path": "DASHI/Mathematics/Complexity/Karp21NativeBinaryToOriginalRawMachineStepExact.agda",
+              "donor_blob": "e187fe48fa94bc9fa0cd0e83348a4dc7cb0e460f",
+              "clay_blob": "e187fe48fa94bc9fa0cd0e83348a4dc7cb0e460f",
+              "identical": true
+            }
+          ],
+          "sympy_1_14": {
+            "r734_Pcrit_gt_three_over_twenty": true,
+            "r734_amplitude512_positive": true,
+            "r445_correlated_exterior_reweighting_tv": "1/8",
+            "r856_pointwise_max_safe": 10065030,
+            "r856_integrated_max_safe": 20130061
+          },
+          "source_check_method": "GitHub PR HEAD fetch_file for every indexed owner + actual text/declaration/flag/sha checks, not local Agda or Lean kernel",
+          "exact_head_at_initial_recheck": "59e4bb55526719c84adfcd62ed52bea42c4c77f9",
+          "check_script_committed": "scripts/check_clay_endpoint_symbol_audit_20261115.py",
+          "check_script_local_run": false,
+          "kernel_verification": false
+        }
       },
       {
         "id": "A1",
@@ -2601,7 +2667,9 @@
         "deliverables": [
           "PhysicalKernelIdentification near/high for original R3",
           "selected directional slot and signed Gram source identity/FTC"
-        ]
+        ],
+        "kernel_acceptance_required_before_full_closure": true,
+        "kernel_acceptance_state": "NOT_OBTAINED_THIS_ROUND"
       },
       {
         "id": "A2",
@@ -2611,7 +2679,9 @@
         "deliverables": [
           "inhabit PhysicalEnvelopeInputs actual integrable envelopes",
           "same original all-data continuation"
-        ]
+        ],
+        "kernel_acceptance_required_before_full_closure": true,
+        "kernel_acceptance_state": "NOT_OBTAINED_THIS_ROUND"
       },
       {
         "id": "B1",
@@ -2621,7 +2691,9 @@
         "deliverables": [
           "actual R820/R825 signed estimate on same R408 trajectory",
           "no use of refuted unrestricted R734 W2"
-        ]
+        ],
+        "kernel_acceptance_required_before_full_closure": true,
+        "kernel_acceptance_state": "NOT_OBTAINED_THIS_ROUND"
       },
       {
         "id": "B2",
@@ -2631,7 +2703,9 @@
         "deliverables": [
           "original W1",
           "true signed barrier and uniform continuation"
-        ]
+        ],
+        "kernel_acceptance_required_before_full_closure": true,
+        "kernel_acceptance_state": "NOT_OBTAINED_THIS_ROUND"
       },
       {
         "id": "C1",
@@ -2641,7 +2715,9 @@
         "deliverables": [
           "R71=R74 original real chart field",
           "actual Picard solution on original R854 T"
-        ]
+        ],
+        "kernel_acceptance_required_before_full_closure": true,
+        "kernel_acceptance_state": "NOT_OBTAINED_THIS_ROUND"
       },
       {
         "id": "C2",
@@ -2651,7 +2727,9 @@
         "deliverables": [
           "same-trajectory literal R853 r(t)",
           "original weak derivative bound and R856 consumer"
-        ]
+        ],
+        "kernel_acceptance_required_before_full_closure": true,
+        "kernel_acceptance_state": "NOT_OBTAINED_THIS_ROUND"
       },
       {
         "id": "D1",
@@ -2660,7 +2738,9 @@
         "status": "OPEN",
         "deliverables": [
           "R320 direct selected mixed log derivative estimate or R445 source-target physical TV + cutoff summability"
-        ]
+        ],
+        "kernel_acceptance_required_before_full_closure": true,
+        "kernel_acceptance_state": "NOT_OBTAINED_THIS_ROUND"
       },
       {
         "id": "D2",
@@ -2672,7 +2752,9 @@
           "R342 selected order closure",
           "R331 actual physical transfer coordinate",
           "R333 application/completion and nontrivial continuum"
-        ]
+        ],
+        "kernel_acceptance_required_before_full_closure": true,
+        "kernel_acceptance_state": "NOT_OBTAINED_THIS_ROUND"
       },
       {
         "id": "E0",
@@ -2682,7 +2764,9 @@
         "deliverables": [
           "Agda 2.9 kernel-cut and transitive repairs",
           "Found D2 nativeBinaryFirstEnabledNonterminalSameOriginalRawStep already source-written in Karp21NativeBinaryToOriginalRawMachineStepExact; do not add as new theorem"
-        ]
+        ],
+        "kernel_acceptance_required_before_full_closure": true,
+        "kernel_acceptance_state": "NOT_OBTAINED_THIS_ROUND"
       },
       {
         "id": "E1",
@@ -2693,7 +2777,9 @@
           "complete instruction table including malformed words",
           "same-rule step simulation",
           "all allocation/resource and polynomial physical clock"
-        ]
+        ],
+        "kernel_acceptance_required_before_full_closure": true,
+        "kernel_acceptance_state": "NOT_OBTAINED_THIS_ROUND"
       },
       {
         "id": "E2",
@@ -2704,7 +2790,9 @@
           "polynomialTimeVerifier",
           "polynomialCertificateBound",
           "original typed PR.InNP"
-        ]
+        ],
+        "kernel_acceptance_required_before_full_closure": true,
+        "kernel_acceptance_state": "NOT_OBTAINED_THIS_ROUND"
       },
       {
         "id": "F1",
@@ -2713,7 +2801,9 @@
         "status": "MODEL_PROJECTION_SOURCE_WRITTEN",
         "deliverables": [
           "construct required cost closure and identify genuine textbook P model"
-        ]
+        ],
+        "kernel_acceptance_required_before_full_closure": true,
+        "kernel_acceptance_state": "NOT_OBTAINED_THIS_ROUND"
       },
       {
         "id": "F2",
@@ -2723,7 +2813,9 @@
         "deliverables": [
           "valid compile on actual own Cook formula",
           "do not reuse anchored literal no-go as positive proof"
-        ]
+        ],
+        "kernel_acceptance_required_before_full_closure": true,
+        "kernel_acceptance_state": "NOT_OBTAINED_THIS_ROUND"
       },
       {
         "id": "F3",
@@ -2733,7 +2825,9 @@
         "deliverables": [
           "∀ D polynomial ∃ φ decision failure",
           "SATNotInP and PNotEqualsNP in same justified cost model"
-        ]
+        ],
+        "kernel_acceptance_required_before_full_closure": true,
+        "kernel_acceptance_state": "NOT_OBTAINED_THIS_ROUND"
       }
     ],
     "symbol_index": [
@@ -5106,7 +5200,36 @@
             }
           ]
         }
+      },
+      "audit_summary": {
+        "status": "CLOSED_SOURCE_OWNER_PREFLIGHT",
+        "source_owners": 50,
+        "symbols": 135,
+        "source_mismatches": 0,
+        "checked_donor_identical_pairs": 6,
+        "local_driver_run": false,
+        "kernel_receipt": false
       }
-    }
+    },
+    "active_gate_ids": [
+      "A1",
+      "A2",
+      "B1",
+      "B2",
+      "C1",
+      "C2",
+      "D1",
+      "D2",
+      "E0",
+      "E1",
+      "E2",
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "active_gate_count": 14,
+    "completed_gate_ids": [
+      "P0"
+    ]
   }
 }
