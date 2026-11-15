@@ -76,3 +76,15 @@ Local Python 11/11 passed 2026-11-15; the **Agda kernel target is not certified*
 **DASHI Agda remains golden.** Existing \`DASHI/Algebra/BalancedTernaryIntegerExact.agda\`, \`DASHI/Algebra/BalancedTernaryPositionalInjectiveExact.agda\`, \`DASHI/Codec/BalancedTritBitFibre.agda\`, \`DASHI/Programmes/FRACDASHExact.agda\`, and \`DASHI/Programmes/FRACDASHNumericInterpreterTargetExact.agda\` are reused, **not duplicated or declared equivalent to P30**. Existing \`DASHI/Quantum/QuantumBirthmarkHistorySectorDarkEnergyExact.agda\` already cautions against a Landauer→gravity converse.
 
 **Critical path B1 + B2 + B3 ⇒ C1 ⇒ C2.** It is not scientifically defensible to estimate a 75× electricity cut until the original P30 verifier and matched ECC work exist. D1–D3, E1–E3 are separate model and authority gates; they are not closed by algebra. All open gates have named original-evidence criteria; this pass does not claim to finish unprovided original code or unavailable physical experiments.
+
+
+## 15 November 2026 second maximum-cut addendum
+
+See [round-2 original-source / physical-discriminator audit](./InfotonP30WalkerRound2PhysicalDiscriminators20261115.md) and the companion true (72,64) SECDED reference with explicit non-original-P30 negative control:
+\`scripts/infoton_p30_ecc_maxcut.py\`, \`scripts/test_infoton_p30_ecc_maxcut.py\`.
+
+**Updated independent ledger: 8/19 CLOSED / 11 OPEN.** This supersedes this document's earlier 7/19 count. **E1 is closed as a NEGATIVE universal-claim adjudication**: original NRC Circular 80-08 documents tested <50ms RPS response at Vermont Yankee, so the assertion that all nuclear reactor protection systems have a fixed two-second blind interval is false. This does NOT prove absence of physical reactor hazards. IAEA INSAG-7 confirms separate five-minute SKALA supervisory calculations and sub-second selected sensor logging, not universal two-second control invisibility.
+
+All P30 algorithm, matched original-verifier, Agda kernel, measured joules, measured oscillator, particle, gauge charge, and overall site WUE gates retain OPEN until their explicit original evidence is available. The new SECDED reference proves its own 72/72 single correction, 2556/2556 double detection, and the non-P30 three-residue membership surrogate exhibits 4352/5376 undetected single valid-symbol substitutions. Neither is falsely represented as Infoton P30.
+
+The earlier P30 130kW→1.73kW estimate requires *zero fixed rack load* even under its assumed 75× operation reduction. At 25% unchanged rack load the conditional projection becomes 33.796kW. Hardware/physics gains must not be inferred from the supplied screenshots.
