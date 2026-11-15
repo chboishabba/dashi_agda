@@ -1,5 +1,22 @@
 # Ibrahim FLN — M2/M3 finite termination proofs, M4 wire-normal form, and exact Agda closure
 
+## 15 November 2026 — operator 14-target acceptance and next source-written maximum cut
+
+**New verified reference (supersedes the 13/13 and 40/40 paragraphs below):** operator locally ran `NO_TMUX=1 ./scripts/check_ibrahim_fln_maxcut.sh` at [`51dcb745ad6a9928ec8018c33be388d75bb1195d`](https://github.com/chboishabba/dashi_agda/commit/51dcb745ad6a9928ec8018c33be388d75bb1195d): **14/14 Agda 2.8.0.2** including fixed `IbrahimFinitePartialGlobalTrichotomyExact` and generated manuscript carrier; **44/44 Python**. The general constructive M3 `finitePartialFLNClassifiesOrTerminates` is now **KERNEL-ACCEPTED**, not open. Earlier historical acceptance references are retained below for provenance only.
+
+**Further committed but not yet locally Agda-checked:** `IbrahimFiniteLoopErasureAndWireNormalFormExact.agda` adds actual-positive-gap `finitePathLoopErasure` (M2a), a first-repeat typed normal form with no earlier collisions and `verifiedNormalFormYieldsCheckedEdgePath` / `verifiedNormalFormYieldsEventualCycle` (M4a *typed proof model only*). The mandatory checker now contains **14 source Agda modules plus one generated target = 15 targets**. These new declarations must be separately checked on the latest head before claiming kernel acceptance. They do not solve M2b finite bound/M2c oracle elimination/M2d canonical choice, nor M4b/c CPython JSON refinement.
+
+**P3 empirical source integration:** `scripts/ibrahim_original_revision_audit.py` accepts a SHA-pinned actual `formatversion=2` MediaWiki Action API original page/revid/main wikitext, runs the existing attributed author-parser behavioural port, records original pageid/oldid/raw text and exact first-qualified-link span/target, and explicitly retains source/QID/Zelph equivalence false. `tests/test_ibrahim_original_revision_audit.py` is included in Python acceptance. No author-original 2016 executable run or historical corpus completeness is implied.
+
+**M5 aggregate diagnostic runner:** `bash scripts/check_ibrahim_wikimedia_aggregate.sh` executes `agda --safe ... DASHI/Wikimedia/Everything.agda` with operator-controlled time/memory and persists exact-head/log SHA receipt. It does not turn a resource timeout into a successful theorem. Use a fresh log directory.
+
+**Operator run:** `NO_TMUX=1 ./scripts/check_ibrahim_fln_maxcut.sh`, then separately `IBRAHIM_M5_LOGDIR=/new/path bash scripts/check_ibrahim_wikimedia_aggregate.sh`. An unchanged 14/14 acceptance record does not cover the newly changed 15-target suite.
+
+**Original-data/production cut:** ITIR #14 adds `acquire_pinned_source_bytes.py`, `build_zelph_native_live.sh`, `run_zelph_live_cohort.py`, and `verify_p854_document_bytes.py`. SLR #10 adds the opt-in same-existing-PostgreSQL candidate/review/reopen adapter with real connection readback; SensibLaw #514 adds the read-only NORA ITIR↔S29 source-coordinate crosswalk. They remain **new source requiring execution**. Original `.bin` identity, P854 substantive support, real S29 legacy consumer wiring and actual NORA-native export remain OPEN.
+
+---
+
+
 **Owner:** existing DASHI/Agda [PR #1505](https://github.com/chboishabba/dashi_agda/pull/1505), not a new PR. **Formal golden:** Agda. **Runtime/transport:** ITIR [#14](https://github.com/chboishabba/ITIR-suite/pull/14); SLR [#10](https://github.com/chboishabba/slr/pull/10); SensibLaw [#514](https://github.com/chboishabba/SensibLaw/pull/514). Zelph original-byte contracts remain independently owned by DASHI [#1506](https://github.com/chboishabba/dashi_agda/pull/1506).
 
 ## Source and acceptance boundary — 15 November 2026
