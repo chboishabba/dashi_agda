@@ -84,3 +84,15 @@ The **separate donor** identity is \(\int V_0 I_s dt=U_s(0)+\int V_sI_{\rm recha
 ### Most important next acceptance boundary
 
 The finite-reservoir case is constructive, **not sustained environmental harvesting**: for the baseline, 0.2288 replenishment work does not compensate 16.7457 donor depletion over the selected interval. The unresolved original endpoint is therefore **same-object source access with sufficient *ongoing* replenishment** and verified real power delivered across the load. That is the frontier, not the existence of nonlinear mode conversion or a large global stored capacitor.
+
+## Additional gate M9: exact repeatable-cycle source requirement
+
+Using the same simulated source, line, material and controller states, the necessary natural replenishment work for a *repeatable whole-system cycle* is
+
+\[
+W_{\mathrm{recharge,needed}}=W_{\mathrm{load}}+W_{\mathrm{distributed\ loss}}+W_{\mathrm{feed\ loss}}-W_{\mathrm{driver}}-W_{\mathrm{material\ mod}}.
+\]
+
+This equality applies only if the **complete** source, line and material stored-energy state returns to its starting value. More generally the missing recharge is exactly the decrease in total stored energy in the run. In the baseline \(g_s=0.75,R_L=1.6\), required replenishment is **13.49498**, actually provided **0.22882**; the remaining **13.26616** comes from whole-system depletion. At the highest-tested \(g_s=24,R_L=.8\), required replenishment is **17.65259**, actually provided **0.17693**, shortfall **17.47566**—approximately a **100×** replenishment deficit. These are *normalised*, model-specific figures; they must not be read as real Earth watts. The exact differential-source ledger and local source-cycle test now implement this as **M9 source-closure discriminator**, not as a second 'energy conservation discovery'.
+
+For the actual Smith/Filsinger claim, this makes the endpoint precise: demonstrate a causally closed **ongoing** Earth/atmospheric replenishment path supplying the measured complete-cycle load and losses under matched input/driver/phase controls—not merely an initial global Earth capacitor energy reserve or a transient output rise. The 2025–2026 global-circuit literature constrains candidate sources but does not certify local source admittance.
