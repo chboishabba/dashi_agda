@@ -262,3 +262,25 @@ New source: `scripts/v2_exact_multirate_periodic_port.py` with `tests/test_v2_ex
 **Acceptance:** 85/85 new local tests PASS, 126/126 with old dynamic waveguide tests PASS, 139/139 with old retarded-memory tests PASS = 180 distinct targeted tests. Old *aggregate* legacy PWM warm-up suite timed out and is not represented as passing. Agda kernel NOT RUN (compiler unavailable).
 
 **Still OPEN at full strength:** `v2SubNanosecondCableMultiRatePassiveCouplingCertificate` for validated nonlinear/hybrid multirate + interval flow, `v2DynamicCoupledMotorLinePeriodicOrbitGlobalAttractor` for a **smoothly rotating nonlinear coupled mutual/saturated/hysteretic machine**, spatial `v2DistributedLineMaxwellPassivityAndWavefrontBound` and `v2LumpedQuasistaticErrorAndControllerLatencyBound`, Agda 2.9 kernel and all 16 original strict P0–P4 endpoint definitions. Source-specific V2 wiring, field maps, shaft torque, timing and all-port calibrated work are still missing.
+
+## 2026-11-15 — eighth maximum cut: nonlinear multiwinding generator + finite-flight causal port
+
+**New canonical proof:** [MadScience369V2NonlinearExactCausalPeriodicGeneratorMaxCut20261115.md](MadScience369V2NonlinearExactCausalPeriodicGeneratorMaxCut20261115.md). **Source:** `scripts/v2_nonlinear_exact_causal_boundary.py`. **Tests:** `tests/test_v2_nonlinear_exact_causal_boundary.py`.
+
+**Closed in explicitly restricted mathematical scope:**
+
+| New leaf | Actual proof / acceptance | Parent full gate |
+|---|---|---|
+| `v2NonlinearMutualMemoryAVFAllStateSignedEnergyExact` | Exact polynomial AVF secant and signed finite-flight packet/motor boundary conservation for all admissible states | Full continuum Maxwell and source-selected V2 OPEN |
+| `v2NonlinearMutualMemoryAVFImplicitExistenceUnique` | Uniformly SPD flux/memory energy Hessian; strict monotonicity and coercivity of the implicit endpoint map | Actual physical constitutive / nonlinear kernel calculus OPEN |
+| `v2NonlinearCausalMultiwindingManufacturedGeneratorCycle` | Nonzero periodic source/line/multi-coil/memory state in exact Fraction arithmetic, mechanically paid electrical export and matched storage endpoints | Original V2 P4.2 OPEN |
+| `v2NonlinearCoupledMotorLinePeriodicLocalAttractor` | Rational Jacobian norm `0.9572862540872351… < 1` for 3-winding periodic model (also synthetic 2/4/6/9/12), **local** contraction only | `v2DynamicCoupledMotorLinePeriodicOrbitGlobalAttractor` general rotating hybrid scope OPEN |
+| `v2SmoothClockedRotorParameterWorkErrorBound` | Conditional `B D h TV(A)` bound for smooth flux and inverse-inductance motion; does not cover switching-edge discontinuities | Realistic continuous nonlinearity + multi-rate validated flow OPEN |
+
+**Generator-polarity exact ledger (abstract units per period):** rotor/clock mechanical work +0.0275, electrical export 0.002756208295, passive line dissipation 0.006780434870, copper 0.017155664527, magnetic-memory loss 0.000807692308; exact storage difference zero. The source is electrically absorbing this exported work; no energy beyond accounted rotor work.
+
+**Critical limitation:** the exact periodic witness uses `dt=1/4 s`, one flight cell at `v=2c/3`, implying ~49,965 km of cable. It is **not** a 0.5 m cable / real V2 mechanical period. An independent negative control confirms a hypothetical 0.5 m cable at 0.7c has ~2.38 ns front delay, requiring a truly validated nonlinear multirate treatment. No new original apparatus, FEA, torque, switching-waveform, or power meter evidence has been acquired.
+
+**Acceptance:** 66/66 new tests and 192/192 targeted integrated Python tests passed in local standalone mirror. Full legacy aggregate NOT run this round; Agda 2.9 executable unavailable; no Agda kernel PASS. Command: `bash scripts/check_v2_nonlinear_exact_causal_boundary.sh`.
+
+**Strict gate accounting:** all original 16 P0–P4 gates remain OPEN under their original full criteria, as do continuum Maxwell `v2DistributedLineMaxwellPassivityAndWavefrontBound`, validated short-cable `v2SubNanosecondCableMultiRatePassiveCouplingCertificate`, globally attracting arbitrary hybrid `v2DynamicCoupledMotorLinePeriodicOrbitGlobalAttractor`, and source-specific P3/P4 evidence.
