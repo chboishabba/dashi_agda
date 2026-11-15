@@ -1,5 +1,18 @@
 # Zelph ↔ trie / ultrametric ↔ indexed hyperfabric ↔ Nat/NORA — exact maximum-cut
 
+## Maximum-cut reuse correction: pinned Hugging Face transport already exists (15 November 2026)
+
+The existing owner is ITIR #14 itir-mcp/src/itir_mcp/shard_transport.py, NOT a new Hugging Face connector and not a shell-only HF CLI. Connector preview methods retain their bounded/truncated semantics and never certify exact source equality. New strict transport APIs fetch_pinned_zelph_object and open_pinned_zelph_range implement immutable revision, original dataset path, TLS and exact HTTP206 range/whole metadata identity.
+
+The existing ITIR P0 native-header/manifest verifier, selected HF object fetcher and original .bin remote range byte-equality auditor now delegate to the existing connector. A new P0 coordinator tools/run_zelph_hf_connector_maxcut.py provides one dry-run or explicit --execute header/index/manifest source check; optionally compares fetched selected HF packed shard object bytes against remote original .bin exact ranges with an independently source-backed original route. It does not retrieve the original 82 GiB file or manufacture a node/QID adjacency index.
+
+**Operator accepted checkpoint before connector integration:** ITIR #14 at c73ad1ee 198/198 Python and original native Cap'n Proto; DASHI 9/9 Agda kernel verified at 549935a9, proof sources unchanged; SLR 24/24 Rust at 06bda03d; SensibLaw 17/17 at f77b28f. All new HF connector code is SOURCE-WRITTEN/UNVERIFIED until the operator runs bash tools/check_zelph_physical_maxcut_offline.sh on the new exact ITIR HEAD. Operator P0 physical --execute still OPEN pending pinned live HTTP206 receipts.
+
+**Mathematical gap partition:** P0-H original header↔index↔manifest source geometry; P0-S selected original source HTTP206 bytes↔published shards; A1 original full name-key byte coverage and collision-preserving list-fibre completeness; A2 source-backed QID/numeric node adjacency routes with all query-word frontiers; B5 Wikibase GUID+revision+P854 primary source; S29 committed PostgreSQL readback/reopen; NORA external native export. A verified P0-H never implies P0-S, and P0-S without a source-backed route cannot imply A1 or A2. No truth or edit authority is inferred.
+
+Operator runbook for actual P0: https://github.com/chboishabba/ITIR-suite/blob/agent/nat-filtered-route-producer/docs/planning/zelph_live_original_cohort_operator_runbook_20261115.md
+
+
 ## 15 November — source-written end-to-end vertical-slice implementation (execution pending)
 
 **Prior exact-head kernel/offline reference remains:** DASHI #1506 `20ef376c` 9/9 Agda 2.9.0; DASHI #1505 `51dcb745` 14/14 Agda 2.8.0.2 and 44/44 Python; ITIR #14 `fb61e629` 165/165 Python plus original-schema native C++; SLR #10 `fc819e6` 24/24 Rust; SensibLaw #514 `8a6605c`/source-identical `f77b28f` 17/17 pytest. These receipts do **NOT** cover subsequent source code additions.
