@@ -81,11 +81,17 @@
     },
     "tangent_derivative_Weyl_crosscheck": true,
     "full_3D_compact_TT_numerical_receiver_converged": false,
-    "outside_bulk_front_numerical_leakage_persists": true
+    "outside_bulk_front_numerical_leakage_persists": true,
+    "source_moment_runtime_failclosed": true,
+    "actual_normalized_moments_for_dr_012": [
+      -3.388131789017201e-15,
+      -1.5146129380243424e-14,
+      2.576169880946148
+    ]
   },
   "acceptance": {
-    "source_equivalent_committed_regression_cases": 171,
-    "local_superset_including_uncommitted_exploratory_cases": 184,
+    "source_equivalent_committed_regression_cases": 172,
+    "local_superset_including_uncommitted_exploratory_cases": 185,
     "pinned_Agda_2_9_kernel": false,
     "exact_GitHub_head_runner": false,
     "matter_generating_action": false,
