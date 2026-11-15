@@ -22,11 +22,13 @@ python3 scripts/test_ksw668_f8_null_convex_lens.py
 python3 scripts/ksw668_f8_null_convex_lens.py
 python3 scripts/test_ksw668_f8_projected_weyl_sms.py
 python3 scripts/test_ksw668_f8_direct_wkb_transport.py
+python3 scripts/test_ksw668_f8_boundary_ray_phase.py
+python3 scripts/ksw668_f8_boundary_ray_phase.py
 python3 scripts/ksw668_f8_direct_wkb_transport.py
 python3 scripts/ksw668_f8_projected_weyl_sms.py
 python3 scripts/ksw668_f8_non_glancing_source.py
 if [ "$mode" = "--smoke" ]; then
-  echo "F8 algebraic/theorem-application smoke accepted (63 source-equivalent tests); full 3D convergence, Agda, matter action and observation NOT accepted."
+  echo "F8 algebraic/theorem-application smoke accepted (68 source-equivalent tests); full 3D convergence, Agda, matter action and observation NOT accepted."
   exit 0
 fi
 if [ "$mode" != "--full" ]; then
