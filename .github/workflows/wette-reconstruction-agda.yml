@@ -45,6 +45,32 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           persist-credentials: false
+          fetch-depth: 0
+      - name: Install DASHI repository referee
+        run: python -m pip install -e './tools/agda_preflight[test,mcp]'
+      - name: Referee Wette reuse, discovery, and lineage
+        run: |
+          dashi-repo index --root .
+          dashi-repo diagnose DASHI/Foundations/Wette1969Rule915MajorDerivationProblemExact.agda --root .
+          dashi-repo related CanonicalRule915CurrentProblem --root . --limit 20
+          dashi-repo related CanonicalRule915SelectedRouteResidual --root . --limit 20
+          dashi-repo related matchedRule9323ClosesPremise18 --root . --limit 20
+          dashi-repo related closeCanonicalPremise27 --root . --limit 20
+          dashi-repo discover 'Wette 1969 rule 9.1.5 premise 18 premise 27 proof carrying cutset' --root . --limit 50
+          dashi-repo lineage --prefix DASHI.Foundations.Wette1969Rule915 --root .
+          dashi-repo diagnose DASHI/EverythingTOESymmetryResolved369.agda --root .
+          dashi-repo diagnose DASHI/Unifier.agda --root .
+          dashi-repo diagnose DASHI/Unified/Everything.agda --root .
+      - name: Reject ESD surface changes
+        shell: bash
+        run: |
+          git fetch origin master --depth=1
+          changed="$(git diff --name-only origin/master...HEAD)"
+          printf '%s\n' "$changed"
+          if printf '%s\n' "$changed" | grep -E '(^|/)([^/]*digital_esd[^/]*|[^/]*ESD[^/]*)($|/)' ; then
+            echo "ESD surface change detected" >&2
+            exit 1
+          fi
       - name: Materialize Agda source dependencies
         run: git submodule update --init --depth 1 DCHoTT-Agda cubical
       - uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342 # v31

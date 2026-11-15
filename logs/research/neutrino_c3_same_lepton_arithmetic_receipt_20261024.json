@@ -1,0 +1,87 @@
+{
+  "schema": "dashi.neutrino-c3-same-lepton-arithmetic-receipt/v1",
+  "generated_on": "2026-10-24",
+  "repository": "chboishabba/dashi_agda",
+  "ref": "chatgpt/neutrino-icecube-maxcut-20261024",
+  "source_blobs": {
+    "DASHI/Physics/QFT/NeutrinoSameLeptonMassOperatorRationalExact.agda": "759b33f8750788c87fe663fc53797ee27122cc08",
+    "DASHI/Physics/QFT/NeutrinoC3FiniteResidualTraceObstructionExact.agda": "433352637c313ecd23cc0181351bf13d73289dde",
+    "tests/test_neutrino_same_lepton_rational.py": "836d318c144864bce51f50e4d411bb212c25cca1"
+  },
+  "attribution": {
+    "background": [
+      "Washington, Introduction to Cyclotomic Fields, 2nd ed. (1997)",
+      "Fonseca and Grimus, JHEP 09 (2014) 033",
+      "Hagedorn and König, Phys Rev D 100 (2019) 075036"
+    ],
+    "empirical_parameter_inputs": "NuFIT 6.1 (2025), IC24+SK, deliberately re-used normal-ordering central mass splittings / angle screen",
+    "user_repo_contribution": "source-written exact rational three-dimensional common-space countermodel with C3 and Klein residual actions",
+    "independent_execution": "GitHub connector literal blob read-back; V8 BigInt recomputation from the nine actual Agda mixNum values"
+  },
+  "data": {
+    "denominator": "13485029",
+    "denominator_squared": "181846007130841",
+    "matrix_integer": [
+      [
+        "11073360",
+        "7428379",
+        "2011440"
+      ],
+      [
+        "-6592029",
+        "7336560",
+        "9195980"
+      ],
+      [
+        "3971380",
+        "-8534640",
+        "9655779"
+      ]
+    ],
+    "neutral_mass_squared_eigenvalues_in_1e_minus8_eV_squared": [
+      "0",
+      "7537",
+      "251100"
+    ],
+    "charged_mass_squared_example_values": [
+      "1",
+      "4",
+      "9"
+    ],
+    "neutral_mass_off_diagonal_e_mu_numerator": "5055394446468860880",
+    "charged_neutral_commutator_e_mu_numerator": "-15166183339406582640",
+    "trace_T_S1_coefficient_numerators": [
+      "213694885170400",
+      "55365974464882"
+    ],
+    "quadratic_galois_trace_numerator": "372023795875918"
+  },
+  "checks": {
+    "row_orthogonality": true,
+    "column_orthogonality": true,
+    "neutral_symmetric": true,
+    "mass_squared_eigen": true,
+    "neutrino_residual_s1_square": true,
+    "neutrino_residual_s2_square": true,
+    "klein_s1s2_is_s3": true,
+    "s1_commutes_with_H": true,
+    "s2_commutes_with_H": true,
+    "charged_neutral_commutator_nonzero": true,
+    "trace_a_between_one_and_two": true,
+    "trace_b_between_zero_and_one": true,
+    "galois_trace_between_two_and_three": true
+  },
+  "status": {
+    "bigint_exact_arithmetic": "PASS",
+    "source_blob_readback": "PASS",
+    "agda_kernel": "NOT_RUN",
+    "checked_out_python_unittest": "NOT_RUN",
+    "finite_order_trace_integrality_general_theorem_in_agda": "NOT_PROVED",
+    "finite_group_counterexample_math": "FOLLOWS_FROM_CLASSICAL_ALGEBRAIC_INTEGER_THEOREM",
+    "physical_neutrino_mass_mechanism": "NOT_DERIVED",
+    "correlated_nufit_likelihood": "NOT_RUN",
+    "icecube_event_level_likelihood": "NOT_RUN",
+    "test_script_cp_check": "SOURCE_WRITTEN_REVISED_AFTER_BIGINT_RECEIPT_NOT_LOCAL_TEST_EXECUTION",
+    "note": "The exact BigInt recomputation parsed the mass-operator Agda source, which is unchanged; the Python test file was later strengthened to test a nonzero complex CP counterfactual."
+  }
+}

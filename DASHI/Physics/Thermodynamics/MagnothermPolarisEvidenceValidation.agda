@@ -1,0 +1,25 @@
+module DASHI.Physics.Thermodynamics.MagnothermPolarisEvidenceValidation where
+
+open import DASHI.Core.Prelude
+import DASHI.Physics.Thermodynamics.MagnothermPolarisEvidenceExact as Polaris
+
+polarisPerformanceIsPeerReviewed :
+  Polaris.PolarisClaimPayment.empiricalPayment Polaris.optimizedPolarisPerformancePayment ≡ true
+polarisPerformanceIsPeerReviewed = refl
+
+polarisWorkingMaterialDiffersFromLaFeSiAgingStudy :
+  Polaris.PolarisClaimPayment.materialRelation Polaris.optimizedPolarisPerformancePayment
+  ≡ Polaris.samePlatformDifferentWorkingMaterial
+polarisWorkingMaterialDiffersFromLaFeSiAgingStudy = refl
+
+polarisCOPIsNotLaFeSiCOP :
+  Polaris.PolarisEvidenceFirewall.polarisCOPDoesNotPromoteToLaFeSiCOP Polaris.canonicalPolarisEvidenceFirewall ≡ true
+polarisCOPIsNotLaFeSiCOP = refl
+
+hydraulicCampaignIsEmpirical :
+  Polaris.PolarisClaimPayment.empiricalPayment Polaris.polarisHydraulicCampaignPayment ≡ true
+hydraulicCampaignIsEmpirical = refl
+
+commercialDeploymentDoesNotProveLaFeSiLifetime :
+  Polaris.PolarisEvidenceFirewall.commercialDeploymentDoesNotProveLaFeSiLifetime Polaris.canonicalPolarisEvidenceFirewall ≡ true
+commercialDeploymentDoesNotProveLaFeSiLifetime = refl

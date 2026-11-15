@@ -1,0 +1,159 @@
+{
+  "schema": "dashi.ccdcoe.p3.cultural_source_atlas.v1",
+  "scope": "bibliographic and source-genre registrations only; not full book text verification",
+  "original_credit": "Named authors, filmmakers, editors, publishers and original researchers retain their intellectual contributions. DASHI only classifies published claims and provenance.",
+  "items": [
+    {
+      "id": "merchants_of_doubt",
+      "authors": "Naomi Oreskes; Erik M. Conway",
+      "title": "Merchants of Doubt",
+      "year": 2010,
+      "kind": "historical_scholarship",
+      "url": "https://www.bloomsbury.com/au/merchants-of-doubt-9781408824832/",
+      "admission": "already_formalised_original_governance_owner",
+      "primary_text_fully_reviewed": false,
+      "empirical_causal_effect_verified": false,
+      "author_endorses_DASHI": false
+    },
+    {
+      "id": "end_times_fascism",
+      "authors": "Naomi Klein; Astra Taylor",
+      "title": "End Times Fascism and the Fight for the Living World",
+      "year": 2026,
+      "kind": "political_analysis",
+      "url": "https://www.penguin.com.au/books/end-times-fascism-9780241848395",
+      "admission": "publisher_excerpt_and_description_only",
+      "primary_text_fully_reviewed": false,
+      "empirical_causal_effect_verified": false,
+      "author_endorses_DASHI": false
+    },
+    {
+      "id": "doppelganger",
+      "authors": "Naomi Klein",
+      "title": "Doppelganger: A Trip into the Mirror World",
+      "year": 2023,
+      "kind": "cultural_political_analysis",
+      "url": "https://naomiklein.org/doppelganger/",
+      "admission": "author_description_only",
+      "primary_text_fully_reviewed": false,
+      "empirical_causal_effect_verified": false,
+      "author_endorses_DASHI": false
+    },
+    {
+      "id": "shock_doctrine",
+      "authors": "Naomi Klein",
+      "title": "The Shock Doctrine",
+      "year": 2007,
+      "kind": "historical_political_analysis",
+      "url": "https://tsd.naomiklein.org/shock-doctrine/the-book.html",
+      "admission": "author_description_only",
+      "primary_text_fully_reviewed": false,
+      "empirical_causal_effect_verified": false,
+      "author_endorses_DASHI": false
+    },
+    {
+      "id": "global_green_new_deal",
+      "authors": "Noam Chomsky; Robert Pollin; editor C. J. Polychroniou",
+      "title": "Climate Crisis and the Global Green New Deal",
+      "year": 2020,
+      "kind": "policy_argument",
+      "url": "https://www.bloomsbury.com/au/climate-crisis-and-the-global-green-new-deal-9781788739856/",
+      "admission": "publisher_description_only",
+      "primary_text_fully_reviewed": false,
+      "empirical_causal_effect_verified": false,
+      "author_endorses_DASHI": false
+    },
+    {
+      "id": "big_myth",
+      "authors": "Naomi Oreskes; Erik M. Conway",
+      "title": "The Big Myth",
+      "year": 2023,
+      "kind": "historical_scholarship",
+      "url": "https://academic.macmillan.com/academictrade/9781635573572/thebigmyth/",
+      "admission": "publisher_description_only",
+      "primary_text_fully_reviewed": false,
+      "empirical_causal_effect_verified": false,
+      "author_endorses_DASHI": false
+    },
+    {
+      "id": "new_climate_war",
+      "authors": "Michael E. Mann",
+      "title": "The New Climate War",
+      "year": 2021,
+      "kind": "climate_communication_analysis",
+      "url": "https://michaelmann.net/books/the-new-climate-war/",
+      "admission": "author_description_only",
+      "primary_text_fully_reviewed": false,
+      "empirical_causal_effect_verified": false,
+      "author_endorses_DASHI": false
+    },
+    {
+      "id": "doubt_their_product",
+      "authors": "David Michaels",
+      "title": "Doubt Is Their Product",
+      "year": 2008,
+      "kind": "science_policy_history",
+      "url": "https://www.drdavidmichaels.com/books",
+      "admission": "author_description_only",
+      "primary_text_fully_reviewed": false,
+      "empirical_causal_effect_verified": false,
+      "author_endorses_DASHI": false
+    },
+    {
+      "id": "heads_in_sand",
+      "authors": "Haydn Washington; John Cook",
+      "title": "Climate Change Denial: Heads in the Sand",
+      "year": 2011,
+      "kind": "social_science_argument",
+      "url": "https://www.routledge.com/Climate-Change-Denial-Heads-in-the-Sand/Cook-Oreskes-Washington/p/book/9781849713351",
+      "admission": "publisher_description_only",
+      "primary_text_fully_reviewed": false,
+      "empirical_causal_effect_verified": false,
+      "author_endorses_DASHI": false
+    },
+    {
+      "id": "planet_humans",
+      "authors": "Jeff Gibbs",
+      "title": "Planet of the Humans",
+      "year": 2020,
+      "kind": "documentary_argument",
+      "url": "https://www.rottentomatoes.com/m/planet_of_the_humans",
+      "admission": "film_synopsis_only",
+      "primary_text_fully_reviewed": false,
+      "empirical_causal_effect_verified": false,
+      "author_endorses_DASHI": false
+    },
+    {
+      "id": "dont_look_up",
+      "authors": "Adam McKay",
+      "title": "Don't Look Up",
+      "year": 2021,
+      "kind": "fictional_satire",
+      "url": "https://media.netflix.com/en/only-on-netflix/81252357",
+      "admission": "official_film_synopsis_only",
+      "primary_text_fully_reviewed": false,
+      "empirical_causal_effect_verified": false,
+      "author_endorses_DASHI": false
+    },
+    {
+      "id": "merchants_documentary",
+      "authors": "Robert Kenner",
+      "title": "Merchants of Doubt",
+      "year": 2014,
+      "kind": "documentary_adaptation",
+      "url": "https://www.sonypictures.com/movies/merchantsofdoubt",
+      "admission": "official_film_synopsis_only",
+      "primary_text_fully_reviewed": false,
+      "empirical_causal_effect_verified": false,
+      "author_endorses_DASHI": false
+    }
+  ],
+  "guards": [
+    "Historical scholarship is not a proof of one centrally commanded network.",
+    "A political critique is not automatically evidence of intentional hostile cognitive operations.",
+    "A documentary's empirical assertions need independent claim-level validation.",
+    "Fictional satire illustrates possible mechanisms but supplies no real-world treatment effect.",
+    "Critiques of renewable energy must be evaluated against technology date, representative performance and independent counterevidence.",
+    "Rights, consent, community voice, dissent and Indigenous custodial authority cannot be flattened into a single attitude score."
+  ]
+}

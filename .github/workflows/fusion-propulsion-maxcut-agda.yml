@@ -1,0 +1,27 @@
+name: Fusion propulsion max-cut Agda
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Plasma/FusionPropulsion*Exact.agda'
+      - 'DASHI/Physics/Plasma/Everything.agda'
+      - '.github/workflows/fusion-propulsion-maxcut-agda.yml'
+  workflow_dispatch:
+
+jobs:
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Materialize Agda source dependencies
+        run: git submodule update --init --depth 1 DCHoTT-Agda cubical
+      - uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342 # v31
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
+      - name: Typecheck fusion-propulsion max-cut
+        run: |
+          nix develop .# --command agda -i . DASHI/Physics/Plasma/FusionPropulsionLiteralMaxCutExact.agda
+          nix develop .# --command agda -i . DASHI/Physics/Plasma/FusionPropulsionPublishedFixtures202609Exact.agda
+          nix develop .# --command agda -i . DASHI/Physics/Plasma/FusionPropulsionExperimentalMaxCutExact.agda
+          nix develop .# --command agda -i . DASHI/Physics/Plasma/FusionPropulsionUncertaintyArithmeticExact.agda

@@ -9,7 +9,7 @@ open import Agda.Builtin.Unit using (⊤; tt)
 open import Data.List.Base using (List; _∷_; [])
 open import Data.Nat using (z≤n; s≤s)
 
-open import DASHI.Unifier using (ℝ; toℝ; _<ℝ_; _≤ℝ_)
+open import DASHI.Physics.Closure.QuantumCarrierCore using (ℝ; toℝ; _<ℝ_; _≤ℝ_)
 
 import DASHI.Physics.Closure.BalabanRGMassGapReceiptSurface as MassGap
 

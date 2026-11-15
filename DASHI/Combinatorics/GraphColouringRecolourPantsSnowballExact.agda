@@ -80,7 +80,7 @@ fourColourPrimary =
   Source.mkDOISource
     "Yuta Inoue; Ken-ichi Kawarabayashi; Atsuyuki Miyashita; Bojan Mohar; Carsten Thomassen; Mikkel Thorup"
     "The Four Color Theorem with Linearly Many Reducible Configurations and Near-Linear Time Coloring"
-    "arXiv:2603.24880 [math.CO], version 2"
+    "arXiv:2603.24880v3 [math.CO], revised 1 October 2026"
     "2026"
     "10.48550/arXiv.2603.24880"
     "https://arxiv.org/abs/2603.24880"

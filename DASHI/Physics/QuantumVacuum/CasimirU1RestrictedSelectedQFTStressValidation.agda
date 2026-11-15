@@ -1,0 +1,58 @@
+module DASHI.Physics.QuantumVacuum.CasimirU1RestrictedSelectedQFTStressValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Physics.QuantumVacuum.CasimirU1RestrictedSelectedQFTStressExact as R
+
+restrictionInterfaceOwnedRegression :
+  R.u1RestrictedSelectedQFTStressInterfaceOwned R.canonicalCasimirU1RestrictedSelectedQFTStressBoundary ≡ true
+restrictionInterfaceOwnedRegression = refl
+
+fullSU2StressNotBrownMaclayTargetRegression :
+  R.fullSelectedSU2StressIsBrownMaclayTarget R.canonicalCasimirU1RestrictedSelectedQFTStressBoundary ≡ false
+fullSU2StressNotBrownMaclayTargetRegression = refl
+
+gaugeEmbeddingInsufficientRegression :
+  R.u1GaugeEmbeddingAloneClosesStressRestriction R.canonicalCasimirU1RestrictedSelectedQFTStressBoundary ≡ false
+gaugeEmbeddingInsufficientRegression = refl
+
+fieldImageReceiptInterfaceOwnedRegression :
+  R.canonicalCartanU1FieldImageReceiptOwned R.canonicalCasimirU1RestrictedSelectedQFTStressBoundary ≡ true
+fieldImageReceiptInterfaceOwnedRegression = refl
+
+selectedQFTFieldRealizationOwnedRegression :
+  R.selectedQFTCartanFieldRealizationInterfaceOwned R.canonicalCasimirU1RestrictedSelectedQFTStressBoundary ≡ true
+selectedQFTFieldRealizationOwnedRegression = refl
+
+arbitraryCartanReceiptNotSelectedFieldRegression :
+  R.ArbitraryCartanReceiptAutomaticallyIdentifiesSelectedQFTField → ⊥
+arbitraryCartanReceiptNotSelectedFieldRegression =
+  R.arbitraryCartanReceiptDoesNotIdentifySelectedQFTField
+
+commutatorCompilerOwnedRegression :
+  R.restrictedFieldBracketZeroCompilerOwned R.canonicalCasimirU1RestrictedSelectedQFTStressBoundary ≡ true
+commutatorCompilerOwnedRegression = refl
+
+independentCommutatorPaymentNotRequiredRegression :
+  R.independentCommutatorPaymentRequiredAfterFieldImage R.canonicalCasimirU1RestrictedSelectedQFTStressBoundary ≡ false
+independentCommutatorPaymentNotRequiredRegression = refl
+
+legacyOpaqueSocketsNotAuthoritativeRegression :
+  R.legacyOpaqueActionStressSocketsAreAuthoritative R.canonicalCasimirU1RestrictedSelectedQFTStressBoundary ≡ false
+legacyOpaqueSocketsNotAuthoritativeRegression = refl
+
+dedicatedActionVariationCompilerPreferredRegression :
+  R.dedicatedActionVariationCompilerPreferred R.canonicalCasimirU1RestrictedSelectedQFTStressBoundary ≡ true
+dedicatedActionVariationCompilerPreferredRegression = refl
+
+selectedFieldRealizationStillOpenRegression :
+  R.selectedQFTCartanFieldRealizationPaid R.canonicalCasimirU1RestrictedSelectedQFTStressBoundary ≡ false
+selectedFieldRealizationStillOpenRegression = refl
+
+firstRestrictionBlockerRegression :
+  R.firstU1RestrictionBlocker ≡ R.missingSelectedQFTCartanFieldRealization
+firstRestrictionBlockerRegression = refl
+
+fullStressEqualityFirewallRegression :
+  R.FullSelectedSU2StressAutomaticallyEqualsBrownMaclay → ⊥
+fullStressEqualityFirewallRegression = R.fullSelectedSU2StressDoesNotAutomaticallyEqualBrownMaclay

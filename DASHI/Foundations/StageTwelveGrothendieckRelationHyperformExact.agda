@@ -75,24 +75,43 @@ relationAt :
   StageAxis12 →
   StageAxis12 →
   Base.TriTruth
-relationAt field left right = field (left , right)
+relationAt fld left right = fld (left , right)
 
 transposeRelation :
   StageRelationField →
   StageRelationField
-transposeRelation field (left , right) = field (right , left)
+transposeRelation fld (left , right) = fld (right , left)
 
 transposeRelationInvolutive :
-  (field : StageRelationField) →
+  (fld : StageRelationField) →
   (cell : StageRelation144) →
-  transposeRelation (transposeRelation field) cell ≡ field cell
-transposeRelationInvolutive field (left , right) = refl
+  transposeRelation (transposeRelation fld) cell ≡ fld cell
+transposeRelationInvolutive fld (left , right) = refl
+
+record StageDiagonal12 : Set where
+  constructor stage-diagonal-12
+  field
+    d0 d1 d2 d3 d4 d5 d6 d7 d8 d9 d10 d11 : Base.TriTruth
+
+open StageDiagonal12 public
 
 diagonalObservation :
   StageRelationField →
-  StageAxis12 →
-  Base.TriTruth
-diagonalObservation field axis = field (axis , axis)
+  StageDiagonal12
+diagonalObservation fld =
+  stage-diagonal-12
+    (fld (Atlas.atlas-0 , Atlas.atlas-0))
+    (fld (Atlas.atlas-1 , Atlas.atlas-1))
+    (fld (Atlas.atlas-2 , Atlas.atlas-2))
+    (fld (Atlas.atlas-3 , Atlas.atlas-3))
+    (fld (Atlas.atlas-4 , Atlas.atlas-4))
+    (fld (Atlas.atlas-5 , Atlas.atlas-5))
+    (fld (Atlas.atlas-6 , Atlas.atlas-6))
+    (fld (Atlas.atlas-7 , Atlas.atlas-7))
+    (fld (Atlas.atlas-8 , Atlas.atlas-8))
+    (fld (Atlas.atlas-9 , Atlas.atlas-9))
+    (fld (Atlas.atlas-10 , Atlas.atlas-10))
+    (fld (Atlas.atlas-11 , Atlas.atlas-11))
 
 ------------------------------------------------------------------------
 -- 2. The 144 cells are a relation carrier, not 144 ternary states.
@@ -131,27 +150,15 @@ offDiagonalRaisedRelation (Atlas.atlas-0 , Atlas.atlas-1) = Base.tri-high
 offDiagonalRaisedRelation cell = Base.tri-mid
 
 sameDiagonalObservation :
-  (axis : StageAxis12) →
-  diagonalObservation flatRelation axis
-  ≡ diagonalObservation offDiagonalRaisedRelation axis
-sameDiagonalObservation Atlas.atlas-0 = refl
-sameDiagonalObservation Atlas.atlas-1 = refl
-sameDiagonalObservation Atlas.atlas-2 = refl
-sameDiagonalObservation Atlas.atlas-3 = refl
-sameDiagonalObservation Atlas.atlas-4 = refl
-sameDiagonalObservation Atlas.atlas-5 = refl
-sameDiagonalObservation Atlas.atlas-6 = refl
-sameDiagonalObservation Atlas.atlas-7 = refl
-sameDiagonalObservation Atlas.atlas-8 = refl
-sameDiagonalObservation Atlas.atlas-9 = refl
-sameDiagonalObservation Atlas.atlas-10 = refl
-sameDiagonalObservation Atlas.atlas-11 = refl
+  diagonalObservation flatRelation
+  ≡ diagonalObservation offDiagonalRaisedRelation
+sameDiagonalObservation = refl
 
 offDiagonal01 :
   StageRelationField →
   Base.TriTruth
-offDiagonal01 field =
-  field (Atlas.atlas-0 , Atlas.atlas-1)
+offDiagonal01 fld =
+  fld (Atlas.atlas-0 , Atlas.atlas-1)
 
 offDiagonal01Differs :
   offDiagonal01 flatRelation
@@ -230,8 +237,8 @@ signedMultiplicityToTriTruth (Signed.positiveMultiplicity n) = Base.tri-high
 
 coarseSignedRelationField :
   SignedRelationField → StageRelationField
-coarseSignedRelationField field cell =
-  signedMultiplicityToTriTruth (field cell)
+coarseSignedRelationField fld cell =
+  signedMultiplicityToTriTruth (fld cell)
 
 SignedRelationCellState : Set
 SignedRelationCellState =
@@ -379,7 +386,7 @@ SignedRelationCellBundleSheaf =
 signedRelationCellBundleSheaf :
   SignedRelationCellBundleSheaf
 signedRelationCellBundleSheaf = record
-  { restrict = λ field cell → field cell
+  { restrict = λ fld cell → fld cell
   ; compatible = λ locals → ⊤
   ; glue = λ locals witness → locals
   ; glueRestricts = λ locals witness cell → refl
@@ -669,7 +676,7 @@ RelationCellBundleSheaf =
 relationCellBundleSheaf :
   RelationCellBundleSheaf
 relationCellBundleSheaf = record
-  { restrict = λ field cell → field cell
+  { restrict = λ fld cell → fld cell
   ; compatible = λ locals → ⊤
   ; glue = λ locals witness → locals
   ; glueRestricts = λ locals witness cell → refl

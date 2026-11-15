@@ -16,6 +16,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Empty using (⊥-elim)
 open import Data.Product using (_×_; _,_; proj₁)
 import Data.Nat.Properties as NatP
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.ConcreteTapeLocalWindowPatternsExact as Pattern
@@ -76,6 +77,13 @@ transportUnique :
   WF.ExactlyOneHead right
 transportUnique refl unique = unique
 
+appendAssoc :
+  ∀ {A : Set} (xs ys zs : List A) →
+  Local.append (Local.append xs ys) zs
+  ≡ Local.append xs (Local.append ys zs)
+appendAssoc [] ys zs = refl
+appendAssoc (x ∷ xs) ys zs rewrite appendAssoc xs ys zs = refl
+
 afterExtractedPrefixIsPlain :
   ∀ {machine rule before after}
     (scan : Whole.GlobalTransitionScan machine rule before after) →
@@ -83,7 +91,9 @@ afterExtractedPrefixIsPlain :
   WF.PlainCells
     (Center.afterPrefix
       (Center.centeredOccurrenceFromGlobalScan scan))
-afterExtractedPrefixIsPlain scan afterUnique
+afterExtractedPrefixIsPlain {machine} {rule} scan afterUnique
+    with Center.centeredOccurrenceFromGlobalScan scan
+... | extracted
     with Center.configured extracted
 ... | Local.realizes-left {b = written} {rightSymbol = rightSymbol} =
   plainPrefixBeforeHead
@@ -94,8 +104,6 @@ afterExtractedPrefixIsPlain scan afterUnique
     (transportUnique
       (Center.afterDecomposition extracted)
       afterUnique)
-  where
-    extracted = Center.centeredOccurrenceFromGlobalScan scan
 ... | Local.realizes-stay =
   proj₁
     (Reconstruct.plainContextsAroundCenteredHead
@@ -104,8 +112,6 @@ afterExtractedPrefixIsPlain scan afterUnique
       (transportUnique
         (Center.afterDecomposition extracted)
         afterUnique))
-  where
-    extracted = Center.centeredOccurrenceFromGlobalScan scan
 ... | Local.realizes-right {b = written} {leftSymbol = leftSymbol} =
   plainPrefixFromAppend
     (Center.afterPrefix extracted)
@@ -116,10 +122,10 @@ afterExtractedPrefixIsPlain scan afterUnique
         (Local.plain leftSymbol ∷ Local.plain written ∷ []))
       (Center.afterSuffix extracted)
       (transportUnique
-        (Center.afterDecomposition extracted)
+        (trans
+          (Center.afterDecomposition extracted)
+          (sym (appendAssoc (Center.afterPrefix extracted) (Local.plain leftSymbol ∷ Local.plain written ∷ []) _)))
         afterUnique))
-  where
-    extracted = Center.centeredOccurrenceFromGlobalScan scan
 
 transportAllToDecomposedRows :
   ∀ {machine rule before after beforeCells afterCells} →
@@ -170,16 +176,61 @@ plainPrefixesEqualFromLegalScan
     ()
 
 plainPrefixesEqualFromLegalScan
-    (Local.plain beforeSymbol ∷ beforePrefix)
-    (Local.plain afterSymbol ∷ afterPrefix)
-    (WF.plainCons beforePlain)
-    (WF.plainCons afterPlain)
+    (Local.plain beforeSymbol ∷ [])
+    (Local.plain afterSymbol ∷ [])
+    (WF.plainCons WF.plainNil)
+    (WF.plainCons WF.plainNil)
+    lengthEqual
+    (Whole.allCons firstLegal restLegal)
+    with Pattern.legalPlainLeftSymbolAgreement firstLegal
+... | refl = refl
+
+plainPrefixesEqualFromLegalScan
+    (Local.plain beforeSymbol ∷ [])
+    (Local.plain a1 ∷ Local.plain a2 ∷ afterRest)
+    (WF.plainCons WF.plainNil)
+    (WF.plainCons (WF.plainCons afterPlain))
+    ()
+    legal
+
+plainPrefixesEqualFromLegalScan
+    (Local.plain b1 ∷ Local.plain b2 ∷ beforeRest)
+    (Local.plain afterSymbol ∷ [])
+    (WF.plainCons (WF.plainCons beforePlain))
+    (WF.plainCons WF.plainNil)
+    ()
+    legal
+
+plainPrefixesEqualFromLegalScan
+    (Local.plain b1 ∷ Local.plain b2 ∷ [])
+    (Local.plain a1 ∷ Local.plain a2 ∷ [])
+    (WF.plainCons (WF.plainCons WF.plainNil))
+    (WF.plainCons (WF.plainCons WF.plainNil))
     lengthEqual
     (Whole.allCons firstLegal restLegal)
     with Pattern.legalPlainLeftSymbolAgreement firstLegal
        | plainPrefixesEqualFromLegalScan
-           beforePrefix afterPrefix
-           beforePlain afterPlain
+           (Local.plain b2 ∷ [])
+           (Local.plain a2 ∷ [])
+           (WF.plainCons WF.plainNil)
+           (WF.plainCons WF.plainNil)
+           (NatP.suc-injective lengthEqual)
+           restLegal
+... | refl | refl = refl
+
+plainPrefixesEqualFromLegalScan
+    (Local.plain b1 ∷ Local.plain b2 ∷ Local.plain b3 ∷ beforeRest)
+    (Local.plain a1 ∷ Local.plain a2 ∷ Local.plain a3 ∷ afterRest)
+    (WF.plainCons (WF.plainCons (WF.plainCons beforePlain)))
+    (WF.plainCons (WF.plainCons (WF.plainCons afterPlain)))
+    lengthEqual
+    (Whole.allCons firstLegal restLegal)
+    with Pattern.legalPlainLeftSymbolAgreement firstLegal
+       | plainPrefixesEqualFromLegalScan
+           (Local.plain b2 ∷ Local.plain b3 ∷ beforeRest)
+           (Local.plain a2 ∷ Local.plain a3 ∷ afterRest)
+           (WF.plainCons (WF.plainCons beforePlain))
+           (WF.plainCons (WF.plainCons afterPlain))
            (NatP.suc-injective lengthEqual)
            restLegal
 ... | refl | refl = refl

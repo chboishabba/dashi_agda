@@ -9,10 +9,11 @@ module DASHI.Mathematics.Complexity.ConcreteTapeInputPaddingExact where
 -- row-0 target consumed by the one-global-vector endpoint CNF.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
-open import Relation.Binary.PropositionalEquality using (cong)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.ConcreteTapeWellFormedConfigurationExact as WF
@@ -31,16 +32,14 @@ replicateBlank :
       (Local.Symbol machine))
 replicateBlank {machine} zero = []
 replicateBlank {machine} (suc n) =
-  Local.plain (Local.blank machine)
-  ∷ replicateBlank n
+  Local.plain {State = Local.State machine} (Local.blank machine)
+  ∷ replicateBlank {machine} n
 
 replicateBlankLength :
   ∀ {machine} (n : Nat) →
   Canonical.listLength (replicateBlank {machine} n) ≡ n
 replicateBlankLength zero = refl
-replicateBlankLength (suc n)
-    rewrite replicateBlankLength n =
-  refl
+replicateBlankLength (suc n) = cong suc (replicateBlankLength n)
 
 replicateBlankPlain :
   ∀ {machine} (n : Nat) →
@@ -55,9 +54,7 @@ appendLength :
   Canonical.listLength (Local.append xs ys)
   ≡ Canonical.listLength xs + Canonical.listLength ys
 appendLength [] ys = refl
-appendLength (x ∷ xs) ys
-    rewrite appendLength xs ys =
-  refl
+appendLength (x ∷ xs) ys = cong suc (appendLength xs ys)
 
 paddedInitialCells :
   ∀ {machine} →
@@ -67,39 +64,40 @@ paddedInitialCells :
     (Local.TapeCell
       (Local.State machine)
       (Local.Symbol machine))
-paddedInitialCells input extra =
+paddedInitialCells {machine} input extra =
   Local.append
-    (Input.initialInputCells input)
-    (replicateBlank extra)
+    (Input.initialInputCells {machine} input)
+    (replicateBlank {machine} extra)
 
 paddedInitialRow :
   ∀ {machine} →
   Input.InputWord machine →
   Nat →
   Local.TapeRow machine
-paddedInitialRow input extra =
-  Local.tape-row (paddedInitialCells input extra)
+paddedInitialRow {machine} input extra =
+  Local.tape-row (paddedInitialCells {machine} input extra)
 
 paddedInitialCellCount :
   ∀ {machine}
     (input : Input.InputWord machine)
     (extra : Nat) →
   Canonical.listLength
-    (paddedInitialCells input extra)
-  ≡ Input.initialInputCellCount input + extra
-paddedInitialCellCount input extra
-    rewrite appendLength
-      (Input.initialInputCells input)
-      (replicateBlank extra)
-          | replicateBlankLength extra =
-  refl
+    (paddedInitialCells {machine} input extra)
+  ≡ Input.initialInputCellCount {machine} input + extra
+paddedInitialCellCount {machine} input extra =
+  trans
+    (appendLength
+      (Input.initialInputCells {machine} input)
+      (replicateBlank {machine} extra))
+    (cong (Input.initialInputCellCount {machine} input +_)
+      (replicateBlankLength {machine} extra))
 
 minimalInitialWidth :
   ∀ {machine} →
   Input.InputWord machine →
   Nat
-minimalInitialWidth input =
-  Input.initialInputCellCount input
+minimalInitialWidth {machine} input =
+  Input.initialInputCellCount {machine} input
 
 record WidthExtension
     {machine : Local.ConcreteTapeMachine}
@@ -108,7 +106,7 @@ record WidthExtension
   constructor width-extension
   field
     extra : Nat
-    exact : minimalInitialWidth input + extra ≡ cols
+    exact : minimalInitialWidth {machine} input + extra ≡ cols
 
 open WidthExtension public
 
@@ -116,24 +114,24 @@ paddedInitialRowAtWidth :
   ∀ {machine}
     (input : Input.InputWord machine)
     (cols : Nat) →
-  WidthExtension input cols →
+  WidthExtension {machine} input cols →
   Local.TapeRow machine
-paddedInitialRowAtWidth input cols extension =
-  paddedInitialRow input (extra extension)
+paddedInitialRowAtWidth {machine} input cols extension =
+  paddedInitialRow {machine} input (extra extension)
 
 paddedInitialRowAtWidth_count :
   ∀ {machine}
     (input : Input.InputWord machine)
     (cols : Nat)
-    (extension : WidthExtension input cols) →
+    (extension : WidthExtension {machine} input cols) →
   Canonical.listLength
     (Local.cells
-      (paddedInitialRowAtWidth input cols extension))
+      (paddedInitialRowAtWidth {machine} input cols extension))
   ≡ cols
-paddedInitialRowAtWidth_count input cols extension
-    rewrite paddedInitialCellCount input (extra extension)
-          | exact extension =
-  refl
+paddedInitialRowAtWidth_count {machine} input cols extension =
+  trans
+    (paddedInitialCellCount {machine} input (extra extension))
+    (exact extension)
 
 paddedInitialBits :
   ∀ {machine}
@@ -143,26 +141,26 @@ paddedInitialBits :
       Canonical.EnumerationCoverage (Local.finiteSymbol machine))
     (input : Input.InputWord machine)
     (cols : Nat)
-    (extension : WidthExtension input cols) →
+    (extension : WidthExtension {machine} input cols) →
   CNF.Bits
     (Canonical.listLength
       (Local.cells
-        (paddedInitialRowAtWidth input cols extension))
+        (paddedInitialRowAtWidth {machine} input cols extension))
       * Canonical.CellWidth machine)
-paddedInitialBits stateCoverage symbolCoverage input cols extension =
+paddedInitialBits {machine} stateCoverage symbolCoverage input cols extension =
   Flat.encodeRow
     stateCoverage symbolCoverage
-    (paddedInitialRowAtWidth input cols extension)
+    (paddedInitialRowAtWidth {machine} input cols extension)
 
 record FixedWidthInputEndpoint
     (machine : Local.ConcreteTapeMachine)
     (input : Input.InputWord machine)
     (cols : Nat) : Set₁ where
   field
-    extension : WidthExtension input cols
+    extension : WidthExtension {machine} input cols
     row : Local.TapeRow machine
     rowIsPaddedInput :
-      row ≡ paddedInitialRowAtWidth input cols extension
+      row ≡ paddedInitialRowAtWidth {machine} input cols extension
     rowWidth :
       Canonical.listLength (Local.cells row) ≡ cols
 
@@ -170,33 +168,33 @@ fixedWidthInputEndpoint :
   ∀ (machine : Local.ConcreteTapeMachine)
     (input : Input.InputWord machine)
     (cols : Nat)
-    (extension : WidthExtension input cols) →
+    (extension : WidthExtension {machine} input cols) →
   FixedWidthInputEndpoint machine input cols
 fixedWidthInputEndpoint machine input cols extension = record
   { extension = extension
-  ; row = paddedInitialRowAtWidth input cols extension
+  ; row = paddedInitialRowAtWidth {machine} input cols extension
   ; rowIsPaddedInput = refl
-  ; rowWidth = paddedInitialRowAtWidth_count input cols extension
+  ; rowWidth = paddedInitialRowAtWidth_count {machine} input cols extension
   }
 
 record InputPaddingReceipt
     (machine : Local.ConcreteTapeMachine) : Set₁ where
   field
-    arbitraryRightBlankPaddingPaid : Agda.Builtin.Bool.Bool
-    exactPaddedWidthPaid : Agda.Builtin.Bool.Bool
-    fixedWidthEndpointCarrierPaid : Agda.Builtin.Bool.Bool
-    canonicalFixedWidthBitsPaid : Agda.Builtin.Bool.Bool
-    choosePolynomialColsPaid : Agda.Builtin.Bool.Bool
-    headTravelFitsWidthPaid : Agda.Builtin.Bool.Bool
+    arbitraryRightBlankPaddingPaid : Bool
+    exactPaddedWidthPaid : Bool
+    fixedWidthEndpointCarrierPaid : Bool
+    canonicalFixedWidthBitsPaid : Bool
+    choosePolynomialColsPaid : Bool
+    headTravelFitsWidthPaid : Bool
 
 inputPaddingReceipt :
   ∀ (machine : Local.ConcreteTapeMachine) →
   InputPaddingReceipt machine
 inputPaddingReceipt machine = record
-  { arbitraryRightBlankPaddingPaid = Agda.Builtin.Bool.true
-  ; exactPaddedWidthPaid = Agda.Builtin.Bool.true
-  ; fixedWidthEndpointCarrierPaid = Agda.Builtin.Bool.true
-  ; canonicalFixedWidthBitsPaid = Agda.Builtin.Bool.true
-  ; choosePolynomialColsPaid = Agda.Builtin.Bool.false
-  ; headTravelFitsWidthPaid = Agda.Builtin.Bool.false
+  { arbitraryRightBlankPaddingPaid = true
+  ; exactPaddedWidthPaid = true
+  ; fixedWidthEndpointCarrierPaid = true
+  ; canonicalFixedWidthBitsPaid = true
+  ; choosePolynomialColsPaid = false
+  ; headTravelFitsWidthPaid = false
   }

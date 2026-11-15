@@ -53,6 +53,12 @@ b4PhysicalResidualNormalForm = F.b4DefectPhysicalResidualNormalFormClosedIsTrue
 b4SignedPhysicalWork : F.b4DefectSignedPhysicalWorkClosed ≡ true
 b4SignedPhysicalWork = F.b4DefectSignedPhysicalWorkClosedIsTrue
 
+b4FourMomentScalar : F.b4DefectR440FourMomentScalarClosed ≡ true
+b4FourMomentScalar = F.b4DefectR440FourMomentScalarClosedIsTrue
+
+b4ZeroPaddingAudit : F.b4DefectR440ZeroPaddingAuditClosed ≡ true
+b4ZeroPaddingAudit = F.b4DefectR440ZeroPaddingAuditClosedIsTrue
+
 b4ResidualNotAbstract : F.b4DefectResidualStillAbstractCarrier ≡ false
 b4ResidualNotAbstract = F.b4DefectResidualStillAbstractCarrierIsFalse
 

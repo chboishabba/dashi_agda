@@ -1,0 +1,13 @@
+{
+  "source_doi": "10.1038/s41535-026-00885-5",
+  "same_stoichiometry": true,
+  "soc_target_paid": true,
+  "nodal_off_nodal_target_paid": true,
+  "published_split_targets_mev": [110, 154],
+  "kagome_like_tb_target_paid": true,
+  "wannier_producer_route_paid": true,
+  "literal_material_hamiltonian_closed": false,
+  "raw_arpes_closed": false,
+  "quantitative_fit_closed": false,
+  "validation_note": "Publication-target contract independently checked; this is not a same-object electronic-structure artifact or raw-data fit."
+}

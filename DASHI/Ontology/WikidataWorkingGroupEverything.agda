@@ -26,6 +26,7 @@ import DASHI.Ontology.RdfViewInformationOrderJMDBridgeExact
 -- Interpretation, governance, reopening and checker attribution.
 import DASHI.Ontology.WikidataInterpretiveDiagnosticExact
 import DASHI.Ontology.WikidataDiagnosticGovernanceExact
+import DASHI.Ontology.WikidataDeliberationGovernanceExact
 import DASHI.Ontology.WikidataRepairReopeningExact
 import DASHI.Ontology.WikidataCheckerResultAttributionExact
 import DASHI.Ontology.WikidataConsumerResidualRefinementExact

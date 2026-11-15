@@ -1,0 +1,47 @@
+{
+  "date": "2026-11-14",
+  "schema": "dashi-karp-stacked-aggregate-superset-v1",
+  "proof_level": "exact-source-only",
+  "repository": "chboishabba/dashi_agda",
+  "pins": {
+    "1445": "b3915126edd096cd09ce7cc1b1b195e75d9e9e87",
+    "1474": "fcadcb35b2d6d629952f70f2d1f46714fe77b36f"
+  },
+  "code_reconciliation": [
+    {
+      "path": "DASHI/Mathematics/Complexity/Karp21Everything.agda",
+      "imports_old": 102,
+      "imports_new": 204,
+      "missing_old_in_new": [],
+      "new_imports": 102,
+      "decision": "1474_STRICT_IMPORT_SUPERSET_OF_1445"
+    },
+    {
+      "path": "DASHI/Mathematics/Complexity/Karp21BinaryRuntimeEverything.agda",
+      "imports_old": 7,
+      "imports_new": 101,
+      "missing_old_in_new": [],
+      "new_imports": 94,
+      "decision": "1474_STRICT_IMPORT_SUPERSET_OF_1445"
+    }
+  ],
+  "unresolved_divergent_files": [
+    "Docs/roadmaps/Karp21NPCompletenessExactLemmaRoadmap20261101.md",
+    "scripts/referee_karp21_maxcut.sh"
+  ],
+  "history_status": "diverged; 1474 ahead 674 commits and behind 4 commits vs literal latest #1445 head; GitHub comparisons may span unrelated changes",
+  "acceptance": {
+    "source_root_superset_verified": true,
+    "all_imports_available_on_same_tree": "not_audited",
+    "semantic_same_source": "not_proved",
+    "kernel_checked": false,
+    "all_PR_sources_merged": false,
+    "bit_clock_proved": false,
+    "SATNotInP_proved": false
+  },
+  "source_authority": [
+    "Robert M. Karp (1972), Reducibility Among Combinatorial Problems; repository Karp-21 historical reduction owners",
+    "John H. Conway's FRACTRAN mathematical construction; original implementations and first Git timestamps remain with their source commits"
+  ],
+  "note": "A superset of aggregate import names preserves module discoverability, not theorem bodies, proof validity or changed underlying semantics. The final two files must be reviewed separately; merge #1474 with its actual ancestor rather than overwrite the two aggregate modules from #1445."
+}

@@ -39,7 +39,6 @@ data Path3SpectralMode : Set where
 
 data CubeSpectralBand : Set where
   bandMinus3 bandMinus2 bandMinus1 bandZero bandPlus1 bandPlus2 bandPlus3 : CubeSpectralBand
-  : CubeSpectralBand
 
 bandMultiplicity : CubeSpectralBand → Nat
 bandMultiplicity bandMinus3 = 1
@@ -110,6 +109,8 @@ record PeriodicVsPathCubeSpectralBoundary : Set where
     sevenBandMultiplicitiesSumToTwentySeven : Bool
     realEigenvectorsConstructedHere : Bool
     exactSqrtTwoScalarModelConstructedHere : Bool
+
+open PeriodicVsPathCubeSpectralBoundary public
 
 canonicalPeriodicVsPathCubeSpectralBoundary : PeriodicVsPathCubeSpectralBoundary
 canonicalPeriodicVsPathCubeSpectralBoundary =

@@ -1,0 +1,242 @@
+module DASHI.Mathematics.Complexity.Karp21GammaZigzagGraphWordDecodeExact where
+
+-- Integration owner: not --safe until the imported weighted-graph
+-- theorem chain is independently checked and transitively --safe.
+
+------------------------------------------------------------------------
+-- N21: LITERAL SIGNED WEIGHTED MAX CUT GRAPH WORD PARSER.
+--
+-- Wire format matches scripts/karp21_signed_cut_binary_codec.py:
+--   gamma(n), gamma(m),
+--   m * [gamma(u),gamma(v),gamma(zigzag(weight))], gamma(W).
+--
+-- Reject malformed gamma words; nonpositive W; u >= v or v >= n;
+-- duplicate, reversed, non-ascending edge pairs; extra trailing bits.
+-- Each typed output is the ORIGINAL
+--   Cut.WeightedCutGraph n, with positive threshold, signed weights,
+--   Fin n endpoints, and actual off-diagonal impossibility proofs.
+--
+-- Unlike a reflected Bool status marker this decoder constructs the
+-- graph itself. It preserves binary-encoded n without allocating an
+-- n-sized Boolean witness. Its bit-clock, byte-count proof and exact
+-- serializer/roundtrip remain independent Karp N21 obligations.
+--
+-- Sources: Richard Karp (1972); DASHI original Python E20/N21 codec.
+------------------------------------------------------------------------
+
+open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Nat.Base using (_≤_; z≤n)
+import Data.Nat.Properties as NatP
+open import Data.List.Base using (List; []; _∷_; length)
+open import Data.Maybe.Base using (Maybe; nothing; just)
+open import Data.Integer.Base using (ℤ; +_)
+open import Data.Product using (Σ; _×_; _,_; proj₁; proj₂)
+open import Data.Empty using (⊥; ⊥-elim)
+open import Relation.Nullary.Decidable.Core using (yes; no)
+import Data.Fin.Base as Fin
+import Data.Fin.Properties as FinP
+import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
+import DASHI.Mathematics.Complexity.Karp21GammaZigzagPartitionWordDecodeExact as Gamma
+import DASHI.Mathematics.Complexity.Karp21FiniteWeightedMaxCutVerifierExact as Cut
+import DASHI.Mathematics.Complexity.Karp21SparseGraphWordNPBoundaryExact as N21
+import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
+import DASHI.Mathematics.Complexity.Karp21SparseEndpointCutCertificateExact as Sparse
+import Data.Integer.Base as Int
+
+record RawEdge : Set where
+  constructor raw-edge
+  field
+    source target : Nat
+    signedWeight : ℤ
+open RawEdge public
+
+readOneRawEdge :
+  Word.BitWord → Maybe (RawEdge × Word.BitWord)
+readOneRawEdge word with Gamma.readGamma word
+... | nothing = nothing
+... | just (u , afterU) with Gamma.readGamma afterU
+...   | nothing = nothing
+...   | just (v , afterV) with Gamma.readSignedGamma afterV
+...     | nothing = nothing
+...     | just (w , rest) =
+  just (raw-edge u v w , rest)
+
+readRawEdges :
+  Nat → Word.BitWord → Maybe (List RawEdge × Word.BitWord)
+readRawEdges zero word = just ([] , word)
+readRawEdges (suc count) word
+  with readOneRawEdge word
+... | nothing = nothing
+... | just (e , afterHead) with readRawEdges count afterHead
+...   | nothing = nothing
+...   | just (es , suffix) = just (e ∷ es , suffix)
+
+data PreviousPair : Set where
+  noPrevious : PreviousPair
+  previous : Nat → Nat → PreviousPair
+
+-- This is the same strict lexicographic pair order as Python's
+-- (u,v) > previous. First edge requires only 0 <= u < v < n.
+strictAfter : PreviousPair → Nat → Nat → Bool
+strictAfter noPrevious u v = true
+strictAfter (previous a b) u v with NatP._<?_ a u
+... | yes _ = true
+... | no _ with NatP._≟_ a u
+...   | no _ = false
+...   | yes _ with NatP._<?_ b v
+...     | yes _ = true
+...     | no _ = false
+
+-- A successful edge validation constructs BOTH Fin n endpoints and
+-- an actual proof they differ, extracted from Fin decidable equality.
+-- No unchecked conversion from Nat to a finite vertex is used.
+validateRawEdges :
+  (n : Nat) (prev : PreviousPair) →
+  List RawEdge → Maybe (List (Cut.SignedUndirectedEdge n))
+validateRawEdges n prev [] = just []
+validateRawEdges n prev (raw-edge u v w ∷ tail)
+  with NatP._<?_ u v | NatP._<?_ v n | strictAfter prev u v
+... | no _    | _     | _     = nothing
+... | yes _   | no _  | _     = nothing
+... | yes _   | yes _ | false = nothing
+... | yes u<v | yes v<n | true
+  with FinP._≟_
+    (Fin.fromℕ< (NatP.<-trans u<v v<n))
+    (Fin.fromℕ< v<n)
+...   | yes _ = nothing
+...   | no apart
+  with validateRawEdges n (previous u v) tail
+...     | nothing = nothing
+...     | just rest =
+  just
+    (Cut.edge
+      (Fin.fromℕ< (NatP.<-trans u<v v<n))
+      (Fin.fromℕ< v<n)
+      apart w ∷ rest)
+
+------------------------------------------------------------------------
+-- Exact nested decode:
+-- * n,m gamma headers
+-- * at least 3 input bits per edge triple, before allocating edges
+-- * exactly m triples
+-- * gamma(W) with W >= 1
+-- * NO remaining suffix.
+------------------------------------------------------------------------
+
+-- A successful parse carries its OWN explicit N21 sparse
+-- certificate bound; it is not an unverified Bool status marker.
+-- Each valid edge triple has 3 positive-length gamma fields.
+-- The additional two-per-edge guard is therefore redundant on
+-- valid canonical Python words, but proving that redundancy as an
+-- Agda semantic agreement theorem remains a separate task.
+GraphWordWithSparseBudget : (word : Word.BitWord) → Set
+GraphWordWithSparseBudget word =
+  Σ N21.GraphInstance (λ graph →
+    Sparse.twoPerEdge (length (Cut.edges (proj₂ graph)))
+      ≤ Word.encodingSize word)
+
+decodeGraphWordCertified :
+  (word : Word.BitWord) →
+  Maybe (GraphWordWithSparseBudget word)
+decodeGraphWordCertified word with Gamma.readGamma word
+... | nothing = nothing
+... | just (n , afterN) with Gamma.readGamma afterN
+...   | nothing = nothing
+...   | just (m , afterM)
+  with NatP._≤?_ (m * (suc (suc (suc zero)))) (length afterM)
+...     | no _ = nothing
+...     | yes _ with readRawEdges m afterM
+...       | nothing = nothing
+...       | just (raw , afterEdges) with Gamma.readGamma afterEdges
+...         | nothing = nothing
+...         | just (zero , suffix) = nothing
+...         | just (suc threshold , _ ∷ _) = nothing
+...         | just (suc threshold , []) with
+            validateRawEdges n noPrevious raw
+...           | nothing = nothing
+...           | just edges
+  with NatP._≤?_
+    (Sparse.twoPerEdge (length edges))
+    (Word.encodingSize word)
+...             | no _ = nothing
+...             | yes budget =
+  just
+    ((n , Cut.graph edges (+ (suc threshold))
+       (Int.+≤+ z≤n , (λ ())))
+     , budget)
+
+decodeGraphWord : Word.BitWord → Maybe N21.GraphInstance
+decodeGraphWord word with decodeGraphWordCertified word
+... | nothing = nothing
+... | just (graph , _) = just graph
+
+noGraphOnDecodeFailure :
+  ∀ {graph : N21.GraphInstance} →
+  nothing ≡ just graph → ⊥
+noGraphOnDecodeFailure ()
+
+n21GraphWordEdgeCountBitBound :
+  (word : Word.BitWord)
+  (graph : N21.GraphInstance) →
+  decodeGraphWord word ≡ just graph →
+  Sparse.twoPerEdge (length (Cut.edges (proj₂ graph)))
+    ≤ Word.encodingSize word
+n21GraphWordEdgeCountBitBound word graph decoded
+  with decodeGraphWordCertified word
+... | nothing = ⊥-elim (noGraphOnDecodeFailure decoded)
+... | just (selected , certified) with decoded
+...   | refl = certified
+
+-- This is an ACTUAL N21 codec, not a user-supplied hypothetical
+-- decoder/edge-size field. Machine verifier cost remains open.
+literalGammaSparseGraphCodec : N21.SparseGraphWordCodec
+literalGammaSparseGraphCodec =
+  record
+    { decodeGraph = decodeGraphWord
+    ; edgeBitBound = n21GraphWordEdgeCountBitBound
+    }
+
+module LiteralN21 = N21.OnCodec literalGammaSparseGraphCodec
+
+------------------------------------------------------------------------
+-- Literal small examples, including empty and malformed target words.
+------------------------------------------------------------------------
+
+decodeEmptyGraphWithPositiveThreshold :
+  decodeGraphWord
+    (true ∷ true ∷ false ∷ true ∷ false ∷ [])
+  ≡ just
+    ( zero
+    , Cut.graph []
+        (+ (suc zero))
+        (Int.+≤+ z≤n , (λ ())) )
+decodeEmptyGraphWithPositiveThreshold = refl
+
+rejectEmptyGraphWord :
+  decodeGraphWord [] ≡ nothing
+rejectEmptyGraphWord = refl
+
+rejectIncompleteGraphHeader :
+  decodeGraphWord (false ∷ true ∷ []) ≡ nothing
+rejectIncompleteGraphHeader = refl
+
+rejectZeroThreshold :
+  decodeGraphWord (true ∷ true ∷ true ∷ []) ≡ nothing
+rejectZeroThreshold = refl
+
+------------------------------------------------------------------------
+-- The original signed MAX CUT *language* is now fixed to this literal
+-- input parser. Future E20 reductions cannot silently choose a
+-- different graph-acceptance predicate to make the iff easier.
+------------------------------------------------------------------------
+
+concreteGraphWordAccepts : Word.BitWord → Set
+concreteGraphWordAccepts word with decodeGraphWord word
+... | nothing = ⊥
+... | just graph = Cut.WeightedMaxCutYES (proj₂ graph)
+
+concreteGraphWordLanguage : PR.Language Word.BitWord
+concreteGraphWordLanguage =
+  record { accepts = concreteGraphWordAccepts }
