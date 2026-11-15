@@ -51,6 +51,7 @@ agda_required=(
   "DASHI/Mathematics/Complexity/Karp21NativeGammaPhysicalAcceptanceObservationExact.agda"
   "DASHI/Analysis/BishopOriginalEtaRawSeriesOfSameSourceExact.agda"
   "DASHI/Physics/Closure/NSTriadKNR650Rational345RelaxedEnvelopeRound855Exact.agda"
+  "DASHI/Physics/Closure/NSTriadKNR650SignedComparableReserveRound823Exact.agda"
   "DASHI/Research/OpenAIMath/OpenAIMathFullSourceRollup20261114.agda"
   "DASHI/Research/OpenAIMath/OpenAIMathOriginalOptimizedSATDecisionBitExact.agda"
   "DASHI/Physics/YangMills/YMClayOriginalF19P0CommonOSSourceConvergence20261114.agda"
@@ -78,7 +79,7 @@ pycheck "$AGDA_ROOT" check_ym_r445_interacting_transfer_contraction_20261114.py
 pycheck "$AGDA_ROOT" check_karp21_literal_gamma_allwords_20261114.py
 pycheck "$AGDA_ROOT" check_ns_r853_quadratic_lie_derivative_20261114.py
 pycheck "$AGDA_ROOT" check_ns_r823_initial_rate_continuity_cut_20261115.py
-echo "NS_R823_INITIAL_CONTINUITY_CUT_PASS: exact scalar only; real R408 same-source weld OPEN"
+echo "NS_R823_R853_CLASSICAL_KL_PASS: exact 728-mode K/L/T arithmetic; real R408 type/carrier and kernel OPEN"
 # R734 physical no-go and R856 optimal scalar source: independent exact
 # SymPy/Fraction math only; these do NOT validate the PDE continuation.
 pycheck "$AGDA_ROOT" check_clay_source_r855_wilson_locality_20261115.py
@@ -128,6 +129,7 @@ fi
 (cd "$AGDA_ROOT" && bash scripts/run_agda29_parallel_check.sh DASHI/Mathematics/CrossPollination/ClayStagedSourceConvergence20261114.agda)
 (cd "$AGDA_ROOT" && bash scripts/run_agda29_parallel_check.sh DASHI/Research/OpenAIMath/OpenAIMathFullSourceRollup20261114.agda)
 (cd "$AGDA_ROOT" && bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNR650Rational345OptimalEnvelopeRound856Exact.agda)
+(cd "$AGDA_ROOT" && bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNR650SignedComparableReserveRound823Exact.agda)
 (cd "$LEAN_ROOT" && lake env lean Integration/OpenAIMath/ClayCrosswalkLeanSourceRollup20261114.lean)
 (cd "$LEAN_ROOT" && lake env lean Synthesis/ClaySixFrontierRollup20261114.lean)
 (cd "$LEAN_ROOT" && lake env lean Synthesis/RiemannSignedFifthEventualThreeProducerRollupExact.lean)
