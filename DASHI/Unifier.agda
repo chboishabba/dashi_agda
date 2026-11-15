@@ -1,18 +1,373 @@
 module DASHI.Unifier where
+import DASHI.Unified.AdelicSpectralPaperTOEExact as AdelicSpectralTOE
+
+-- September 2026 source-typed finite spectral closure and fail-closed gates.
+-- Reuse the existing NonArchimedean owner; do not rebuild source Lean proofs.
+open AdelicSpectralTOE public using
+  ( toeFiniteSpatialCircleClosed
+  ; toeFiniteTwistedPowerClosed
+  ; toeLiteralSpectrumTowerClosed
+  ; toePrefactoredFiniteMixingClosed
+  ; toeConstructiveFiniteStoppingTailClosed
+  ; toeDirectedSizeSigmaHalfRejected
+  ; toeArbitraryDAGCoverNeedsConstruction
+  ; toeDepthSparsityNeedsQuantitativeBound
+  ; toeBoundaryEntropyNeedsSameObjectWeld
+  ; toeRoPEOptimalityNeedsModelConsumer
+  ; toeMultiPrimeSparsityNonPromotion
+  ; toeHolographySameObjectNonPromotion
+  ; toeNoAutomaticSpectralToRoPETransfer
+  ; toeOriginalAdvertisedChainHasNoLiveProducer
+  )
+
+import DASHI.Empirical.KozyrevMirrorClaimTesting as KozyrevMirror
+-- Reuse source-typed finite Sonic Warfare witness; no external promotion.
+import DASHI.Culture.GoodmanSonicWarfareExact as GoodmanSonicWarfare
+import DASHI.Foundations.Wette1969Rule915MajorDerivationProblemExact as Wette915
+
+-- REUSE: original MoonshineOrbifoldSectorProjectorExact rational C2
+-- even/odd operators instantiated on the 11 genuine C3 orbits.
+-- The video's Vandermonde and orbit observables share ONLY sign C2.
+import DASHI.Foundations.PolynomialC3S3RationalCharacterAlgebraExact as RationalC2Adapter
+open RationalC2Adapter public using
+  ( Field11ℚ ; positiveProjectionAt ; negativeProjectionAt
+  ; reflectionPositiveNegativeReconstruct ; positiveReflectionInvariant
+  ; negativeReflectionOdd ; positiveProjectionAtIdempotent
+  ; s3OnRationalField ; positiveIntertwinesS3Parity
+  ; negativeIntertwinesS3Parity ; s3OnRationalFieldFactorsThroughParity )
+
+-- O45: rational 2/3/6 block-field inverse and S3-intertwiner,
+-- assembled into source-written Q^27 ≃ 7triv ⊕ 4sign ⊕ 8std₂.
+-- Agda kernel verification PENDING; char3 modular no-go preserved.
+import DASHI.Foundations.PolynomialS3RationalBlockFieldIsomorphismExact as RationalFieldBlocks
+open RationalFieldBlocks public using
+  ( toCoordinates2 ; fromCoordinates2
+  ; toCoordinates3 ; fromCoordinates3
+  ; toCoordinates6 ; fromCoordinates6
+  ; fromToCoordinates2 ; toFromCoordinates2
+  ; fromToCoordinates3 ; toFromCoordinates3
+  ; fromToCoordinates6 ; toFromCoordinates6
+  ; toCoordinates2Intertwines ; toCoordinates3Intertwines
+  ; toCoordinates6Intertwines
+  ; toCoordinates2Additive ; toCoordinates3Additive
+  ; toCoordinates6Additive )
+import DASHI.Foundations.PolynomialS3RationalTwentySevenFieldIsomorphismExact as RationalNative27
+open RationalNative27 public using
+  ( RationalCoordinates27 ; encodeNative27 ; decodeNative27
+  ; decodeEncodeNativeAt ; encodeDecodeNativeCoordinateAt
+  ; encodeBlocksAdditiveAt ; decodeBlocksAdditiveAt
+  ; encodeBlocksIntertwinesAt ; decodeBlocksIntertwinesAt
+  ; sourceBlockActionAgreesWithNative
+  ; plusNativeFields ; encodeNativeAdditiveAt ; decodeNativeAdditiveAt
+  ; nativeSourceAction27 ; nativeActionAgreesWithBlockAt
+  ; decodeNativeIntertwinesAt
+  ; nativeSourceActionIdentityAt ; nativeSourceActionCompositionAt
+  ; nativeSourceActionAdditiveAt ; encodeNativeRespectsPointwiseAt
+  ; decodedNativeEquivAt ; encodeNativeIntertwinesAt
+  ; projectRationalC3 ; projectRationalS3 ; projectRationalC3IdempotentAt ; projectRationalS3IdempotentAt
+  ; projectRationalC3InvariantAt ; projectRationalS3InvariantAt ; projectRationalS3FixesInvariantAt ; projectRationalS3AdditiveAt
+  ; projectRationalC3AdditiveAt ; projectRationalC3AfterS3At ; projectRationalS3AfterC3At ; projectRationalS3NativeActionInvariantAt
+  ; projectRationalC3FixesInvariantAt ; projectRationalC3NaturalityAt
+  ; projectRationalS3NaturalityAt )
+
+-- Separate F3 no-go: nonsemisimple three-point C3 permutation module
+-- has no C3-equivariant linear retraction onto its constant line.
+import DASHI.Foundations.PolynomialC3CharacteristicThreeRetractionNoGoExact as C3ModularNoGo
+open C3ModularNoGo public using
+  ( tripleSumZero ; tripleSumCannotBeOne
+  ; noC3InvariantLinearFunctionalRetraction )
+
+-- NEW O40 rational S3 block certificates on the ACTUAL native 27 G-set:
+-- integer-scaled Q inverse matrices (sizes 2,3,6), 216 regular Fourier
+-- intertwiners, and 1+2+3+3+6+6+6 code/block action atlas.
+-- Distinct from characteristic-3 full S3 semisimplicity.
+import DASHI.Foundations.PolynomialS3RegularRationalBlockCertificateExact as RationalRegularS3
+open RationalRegularS3 public using
+  (basis6 ; scaledInverse6 ; basisScaledInverse ; inverseScaledBasis
+  ; regularBlockIntertwines)
+import DASHI.Foundations.PolynomialS3SmallRationalBlockCertificateExact as RationalSmallS3
+open RationalSmallS3 public using
+  (basis2 ; basis3 ; scaledInverse2 ; scaledInverse3
+  ; basis2ScaledInverse2 ; inverse2ScaledBasis2
+  ; basis3ScaledInverse3 ; inverse3ScaledBasis3
+  ; twoBlockIntertwines ; threeBlockIntertwines
+  ; nativeTwoAction ; nativeThreeAction ; nativeOneFixed)
+import DASHI.Foundations.PolynomialS3RegularOrbitToNativeCodeExact as RationalNativeRegular
+open RationalNativeRegular public using
+  (regularCode ; regularCodeFree ; nativeRegularActionIntertwines
+  ; regularCodeShape)
+import DASHI.Foundations.PolynomialS3TwentySevenOrbitBlockAssemblyExact as RationalOrbit27
+open RationalOrbit27 public using
+  (OrbitBlock27 ; blockToCode ; codeToBlock
+  ; codeBlockRoundTrip ; blockCodeRoundTrip
+  ; blockAction ; blockActionIdentity ; blockActionComposition
+  ; blockActionPreservesNative ; nativeBlockActionByShape
+  ; toBlockField ; fromBlockField ; fromToBlockField ; toFromBlockField)
+
+-- Exact six S3 permutation-character fixed-point counts 27,3,3,3,3,3.
+-- Rational-character arithmetic reconciles 7 triv + 4 sign + 8 std;
+-- no modular-F3 Maschke decomposition or same-object Monster claim.
+import DASHI.Foundations.PolynomialS3TwentySevenPermutationCharacterExact as RootS3Character
+open RootS3Character public using
+  ( fullEnumerationHasTwentySeven ; fixed0 ; fixed1 ; fixed2
+  ; fixed3 ; fixed4 ; fixed5 ; c3BurnsideNumerator ; s3BurnsideNumerator
+  ; dimensionReconstructed ; threeCycleCharacterReconstructed
+  ; transpositionCharacterReconstructed ; elevenDimensionReconstructed )
+
+-- Exact S3->C2 sign representation ties cubic Vandermonde alternating
+-- action to 7-even+4-odd F3 orbit-field action, without object identity.
+import DASHI.Foundations.PolynomialC3S3ReflectionParityFourierExact as RootParityFourier
+open RootParityFourier public using
+  ( evenAverage ; oddHalfDifference
+  ; encodeEvenOdd ; decodeEvenOdd ; decodeAfterEncodeAt
+  ; encodeAfterDecodeEvenAt ; reflectEvenIsFixed
+  ; reflectOddCycleIsNegative ; reflectOddOneFixedIsNegative
+  ; reflectOddTwoFixedIsNegative ; reflectOddTwoCycleIsNegative )
+import DASHI.Foundations.PolynomialC3S3ReflectionParityLinearExact as RootParityLinear
+open RootParityLinear public using
+  (plusTruth ; plus11 ; plus7 ; plusOdd4 ; plusCoordinates
+  ; encodeEvenAdditiveAt ; encodeOddAdditiveCycle
+  ; encodeOddAdditiveOneFixed ; encodeOddAdditiveTwoFixed
+  ; encodeOddAdditiveTwoCycle ; decodeAdditiveAt)
+import DASHI.Foundations.PolynomialVandermondeOrbitParityIntertwinerExact as RootS3Parity
+open RootS3Parity public using
+  (permutationParity ; parityHomomorphism
+  ; fullS3ActionOnEleven ; fullS3ActionOnElevenComposition
+  ; classifyConjugationByParity ; vandermondeIntertwinesSign)
+import DASHI.Foundations.PolynomialVandermondeOrbitSignCharacterExact as RootSignIntertwiner
+open RootSignIntertwiner public using
+  (pullbackSignField ; evenSevenIntertwines ; oddSignIntertwines)
+
+-- Nested characteristic-free C3/S3 representative-sampling projections:
+-- idempotence, exact invariant ranges, two-sided absorption.
+import DASHI.Foundations.PolynomialC3S3OrbitSamplingProjectionExact as RootOrbitProjectors
+open RootOrbitProjectors public using
+  (projectC3 ; projectS3 ; projectC3Idempotent ; projectS3Idempotent
+  ; projectC3Invariant ; projectS3Invariant
+  ; projectC3FixesInvariant ; projectS3FixesInvariant
+  ; projectC3AfterS3IsS3 ; projectS3AfterC3IsS3)
+
+-- Explicit finite vector charts and pointwise inverses establish a
+-- chosen ordering for 3^7, 3^11, and 3^27 ternary field carriers.
+import DASHI.Foundations.PolynomialC3S3OrbitFieldVectorAtlasExact as RootOrbitFields
+open RootOrbitFields public using
+  ( encode7 ; decode7 ; decodeEncode7Pointwise ; encodeDecode7
+  ; encode11 ; decode11 ; decodeEncode11Pointwise ; encodeDecode11
+  ; encode27 ; decode27 ; decodeEncode27Pointwise ; encodeDecode27
+  ; sevenFieldsAre2187 ; elevenFieldsAre177147
+  ; twentySevenFieldsAre7625597484987
+  ; elevenSlotsSplitSevenAndFour
+  ; elevenFieldCountFactorsIntoSevenAndFour
+  ; fourSwappedPairResidualFields
+  ; codeForIndex27 ; indexCodeRoundTrip ; codeIndexRoundTrip
+  ; transportS3OnIndex27 ; transportIndexIdentity
+  ; transportIndexComposition ; transportIndexPreservesShape
+  ; transportIndexParity )
+
+-- True 27->11->7 S3/C3 conjugacy quotient and invariant ternary fields.
+-- Includes explicit fixed-point no-go versus free output-phase 27->9.
+import DASHI.Foundations.PolynomialC3S3TwentySevenOrbitQuotientExact as RootOrbitQuotient
+open RootOrbitQuotient public using
+  ( Code27 ; Orbit11 ; classify11 ; representative11
+  ; classifyRepresentative11 ; codeFromClassRepresentative
+  ; C3Related ; relatedHasSameClass ; sameClassHasRotation
+  ; reflectionOn11 ; reflection11Involutive
+  ; reflectionFixedClassIsOneOfThree ; mergeToSeven
+  ; classificationFactors ; countEleven
+  ; inflate11 ; inflate7 ; inflate7To27
+  ; pullbackComposes ; inflate11InjectiveAt ; inflate7InjectiveAt
+  ; inflate11C3Invariant ; everyC3InvariantFieldDescends
+  ; inflate7To27S3Invariant ; everyS3InvariantFieldDescends
+  ; inflate7ReflectionInvariant ; everyReflectionInvariantFieldDescends
+  ; noEquivariantMapFromConjugationToFreeOutputPhase )
+
+-- Native 27 unary ternary maps: even C3 gives 11 conjugation orbits;
+-- full S3 gives 7. Same abstract source group as root discriminant
+-- parity; distinct action/carrier and no Galois/Monster promotion.
+import DASHI.Foundations.PolynomialC3S3TwentySevenOrbitRefinementExact as RootParity27
+open RootParity27 public using
+  (cycleCodeThreeTimes ; reflectionCodeTwice ; reflectionInvertsCycle
+  ; fixedIdentity ; fixedRotate ; fixedRotateSquared)
+
+-- Source-generalized nested commutator recovery forces both witnesses
+-- trivial in every explicitly finite-derived solvable target.
+import DASHI.Foundations.PolynomialDoubleCommutatorSolvableNoGoExact as DoubleCommutatorObstruction
+open DoubleCommutatorObstruction public using
+  ( recoveringPairGainsTwoLevels ; atEveryDerivedLevel
+  ; everySolvableRecoveringPairIsTrivial )
+
+-- Classical cubic discriminant: Vandermonde alternates under S3,
+-- its square depends only on Vieta coefficients and vanishes at collisions.
+import DASHI.Foundations.PolynomialVandermondeDiscriminantExact as RootDiscriminant
+open RootDiscriminant public using
+  ( vandermondeTransformsByParity ; discriminantInvariant
+  ; discriminantDependsOnlyOnVietaCoefficients
+  ; firstSecondCollisionGivesZero
+  ; firstThirdCollisionGivesZero ; secondThirdCollisionGivesZero
+  ; splitVandermondeZero ; zeroDiscriminantImpliesCollision
+  ; zeroDifferenceRational ; rationalDomainLawWitness ; zeroDiscriminantImpliesCollisionRational ; collisionImpliesZeroDiscriminantRational ; zeroDiscriminantIffRootCollisionRational
+  ; coefficientDiscriminantZeroIffRootCollisionRational )
+
+-- Artin B3 full twist: trivial root S3 endpoint but C7 signed
+-- crossing exponent six, preserving both braid and cancellation relations.
+import DASHI.Foundations.PolynomialBraidFullTwistSevenWitnessExact as BraidTwist
+open BraidTwist public using
+  ( fullTwistHasIdentityS3Endpoint
+  ; fullTwistHasNonzeroSevenWinding
+  ; nontrivialFullTwistInSignedExponentReadout )
+
+-- Exact ordinary factorial vs subfactorial, 3-cycle derangements and
+-- 44-of-120 quintic derangements; maintain radian phase non-promotion.
+import DASHI.Foundations.PolynomialSubfactorialDerangementS3S5Exact as Subfactorial
+open Subfactorial public using
+  ( subfactorialThree ; subfactorialFive
+  ; exactly44FiveLabelDerangements
+  ; evenFiveLabelDerangementsCount24
+  ; oddFiveLabelDerangementsCount20 )
+
+-- Source-typed Gamma-factorial, Pickover phase, Hatcher perfect-group
+-- observer and signed-quaternion quotient bridges.
+import DASHI.Foundations.PolynomialPickoverFactorialGammaDegreeExact as FactorialPhase
+import DASHI.Foundations.PolynomialHornedPerfectGroupObserverExact as HornedPerfect
+import DASHI.Foundations.PolynomialHornedSpinSignNonDescentExact as HornedSpin
+open FactorialPhase public using
+  ( factorialRecurrence ; gammaAt10000Is9999Factorial
+  ; degreeResidueAtEvenPositivePower ; radianPickoverSignIsNotProved )
+open HornedPerfect public using
+  ( everyCommutatorGeneratedGroupAbelianObserverIsTrivial )
+open HornedSpin public using ( noUniversalReconstructionFromV4 )
+import DASHI.Foundations.PolynomialC3FourierTrialecticChartExact as RootFourier
+
+-- Separate 120↔60×2 quintic parity atlas, exact arithmetic/369 identities,
+-- and attribution-preserving Ibrahim Pareto/snowball non-promotion gate.
+import DASHI.Foundations.QuinticPermutationTripleOrientationAtlasExact as QuinticAtlas
+import DASHI.Foundations.PolynomialNumerologyArithmeticAtlasExact as NumericAtlas
+import DASHI.Foundations.PolynomialIbrahimParetoSnowballMaxCutExact as PolynomialIbrahim
+
+open QuinticAtlas public using
+  ( permCountIs120 ; tripleCountIs60 ; evenPermutationCountIs60
+  ; permutationAtlasRoundTrip ; tripleOrientationAtlasRoundTrip
+  ; firstThreePositionsAgreeWithChart )
+open NumericAtlas public using
+  ( threePowerFiveIsNineTimesTwentySeven
+  ; threePowerSixIsThreeTimes243
+  ; fivePowerThreeIsFiveTimesTwentyFive
+  ; difference243And125Is118
+  ; fivePermutationAtlasFibreCount
+  ; evenPermutationsMatchInjectiveTriples
+  ; paritySignRoundTrip ; signParityRoundTrip
+  ; countingDoesNotPromoteMonsterObject )
+open PolynomialIbrahim public using
+  ( canonicalPolynomialEvidenceMaxCut
+  ; reusedIbrahimRecognitionBoundary
+  ; searchPriorityAloneNeverProvesMonsterRecognition
+  ; noVideoConceptPretendsKernelReceipt
+  ; originalVideoM1CoefficientDiscriminantReceipt
+  ; originalVideoM10OrientationReceipt
+  ; originalVideoM2M10BraidQuaternionNoGoReceipt
+  ; polynomialDiscriminantQid ; galoisTheoryQid
+  ; specificPolynomialMonodromyQid ; qidCannotPayPolynomialProof )
+
+-- Full video concept/lemma atlas. Only source-written finite examples are
+-- opened. The separate uninhabited analytic/Galois/Spin contracts stay scoped.
+import DASHI.Foundations.PolynomialVideo45ConceptContractsExact as Video45
+import DASHI.Foundations.PolynomialVietaRootSymmetryExact as VietaRoot
+import DASHI.Foundations.PolynomialBraidPermutationImageExact as BraidRoot
+import DASHI.Foundations.QuinticOverlappingThreeCyclesExact as QuinticCycle
+import DASHI.Foundations.Polynomial369TrialecticTransportExact as Root369
+import DASHI.Foundations.PolynomialTwoSheetMonodromyExact as SheetRoot
+import DASHI.Foundations.PolynomialGlobalRadicalTopologyContractsExact as RootGlobal
+
+open Video45 public using
+  ( VideoConcept ; Scope ; conceptScope
+  ; kernelVerifiedInThisPR ; kernelVerificationNotAssertedHere )
+open VietaRoot public using
+  ( cubicVietaIdentity ; coefficientInvariantUnderRootPermutation
+  ; imaginaryUnitSolvesX2PlusOne ; negativeImaginarySolvesX2PlusOne )
+open BraidRoot public using
+  ( pureBraidPermutationImageIsIdentity
+  ; braidRelationRespectedByS3Image ; commutatorIsEven
+  ; commutatorOfTwoC3RotationsIsIdentity
+  ; positiveHistoryNotLiterallyEmpty )
+open QuinticCycle public using
+  ( doubleCommutatorRecoversA ; doubleCommutatorRecoversB
+  ; noQuinticTheoremFromTwoCycleWitnessAlone )
+open Root369 public using
+  ( sameCarrierCountDifferentSemantics
+  ; endoSynthesisEndo ; synthesisEndoSynthesis
+  ; conjugateSynthesisChartComposition
+  ; synthesisCellForgetsNothing ; quaternionC3AxisTransport
+  ; hypervoxelReorientation ; braidCoarseReturn )
+open SheetRoot public using
+  ( deckSwapInvolution ; sameCoefficientAfterDeckLoop
+  ; noMonodromyInvariantSelection ; loopActionComposition )
+open RootGlobal public using ( conditionalGeneralQuinticImpossibility )
+
+-- Sourced finite polynomial-root monodromy / 243-vs-125 / quaternion C3 lift.
+-- The same owner carries explicit non-promotion flags for quintic and topology.
+import DASHI.Foundations.PolynomialMonodromyTernaryQuaternionBridgeExact as PolynomialMonodromy
+open PolynomialMonodromy public using
+  ( adjacentSwapsCommutatorIsThreeCycle
+  ; c3CannotProduceAnAdjacentSwap
+  ; coefficientReturnsAfterLabelMotion
+  ; swapChangesIdentityLabelling
+  ; fiveTritCountIs243
+  ; threeFiveModeCountIs125
+  ; differentArithmeticCounts
+  ; spinThirdTurnHasUnitNorm
+  ; spinConjugationIntertwinesABCThreeCycle
+  ; iTimesJIsK ; jTimesIIsNegativeK ; jTimesKIsI ; kTimesJIsNegativeI ; kTimesIIsJ ; iTimesKIsNegativeJ
+  ; positiveINotNegative ; positiveJNotNegative ; positiveKNotNegative
+  ; positiveSwapOfQuaternionAxesImpossible ; positiveSwapIJImpossible ; positiveSwapJKImpossible ; positiveSwapIKImpossible ; spinSignedSwapIJRightInverse
+  ; spinSignedSwapIJLeftInverse ; signedSwapIJMapsIToJ ; signedSwapIJMapsJToI ; signedSwapIJMustNegateK ; noFullPositiveQuaternionS3Action ; noPositiveQuaternionBraidGeneratorLift
+  ; spinThreeStepsCentralMinus
+  ; spinSixStepsIdentity
+  ; finiteQ8CentralSignIsInvisible
+  ; actualComplexMonodromyNotConstructed
+  ; quinticUnsolvabilityNotConstructed
+  )
+import DASHI.Reasoning.TrialecticC3WeightedOrbitSymmetrizationExact as C3Weighted369
+import DASHI.Reasoning.TrialecticGraphWaveConsumerLossCutExact as GraphWaveCut369
+import DASHI.Reasoning.TrialecticGraphWaveHistoricalFibreRecoveryExact as GraphWaveHistory369
+import DASHI.Combinatorics.GraphColouring369PantsSymmetryCutInvariantExact as S3Cut369
+import DASHI.Combinatorics.GraphColouring369PantsEdgeCoverageExact as EdgeChart369
+import DASHI.Reasoning.TrialecticDirectedSourceTargetHyperfabricExact as DirectedFabric369
+import DASHI.Combinatorics.GraphColouring369PantsQidParetoSnowballExact as NativeQid369
+import DASHI.Combinatorics.GraphColouring369PantsWeightedMaxCutExact as NativeMaxCut369
+import DASHI.Reasoning.TrialecticWeightedGraphFaceMediationSelectedExact as SelectedFace369
+import DASHI.Combinatorics.GraphColouring369PantsHomomorphismBoundaryExact as GridPants369
+import DASHI.Reasoning.TrialecticWeightedDirectedGraph369Exact as WeightedGraph369
+import DASHI.Unified.QwenputerBinaryTernaryTOEExact as QwenputerTOE
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
+import DASHI.Governance.ParallelNeedsInstitutionalTransitionExact as ParallelNeeds
+-- Finite quality-guard and shared-canonical history theorems; no trained-model promotion.
+import DASHI.Unified.LeechQualityGuardTOEBridgeExact as LeechQualityBridge
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 import DASHI.Unified.SingularBasinCoarseRGTOEExact as SingularBasinTOE
+import DASHI.Unified.RiemannRHMaxCutTOEExact as RiemannRHTOE
+import DASHI.Unified.Physics as UnifiedPhysics
+import DASHI.Geo.EarthEmbeddingAcquisitionExact as EarthEmbeddingTOE
 import DASHI.Unified.BrainFMRI as BrainFMRI
 import DASHI.Physics.Closure.BrainConnectomeFMRIObservationQuotient as BrainObservation
 import DASHI.Physics.Closure.BidirectionalBrainObservationQuotient as BrainBidirectional
 import DASHI.Unified.InvariantSpine as BrainSpine
 import DASHI.Cognition.PNF.SensibLawGWBv01PostCertificationRoadmapExact as SensibLawDirect
+import DASHI.Environment.RootSoilFungalIonWaterPhysiologyExact as PlantNutrientTransport
+import DASHI.Environment.PlantHydraulicAtmosphereCarbonCouplingExact as PlantHydraulicCarbon
+import DASHI.Wikimedia.IbrahimCannabisTerpeneCommercialSampleQuantitativeAssayExact as CannabisAssay
 
+
+-- Reuse-only PNF boundary normalization. No source theorem is promoted.
+open import DASHI.Unified.PNFSourceBoundaryTOEExact public
 
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
+import DASHI.Unified.RiemannPoleQuotientTOEConvergenceExact as RiemannTOE
 
+import DASHI.Core.GovernanceTrajectoryRealisationExact as GovernanceTrajectory
+import DASHI.Interop.SensibLawSemanticPromotionPolicy as SensibLawPromotion
+import DASHI.Finance.DashiTradeFibreBridgeExact as DashiTradeGJR
 open import Agda.Primitive using (Level; lzero; lsuc)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -51,6 +406,10 @@ open BalabanRGTOE public using
   ; classificationAdjointCasimirAtLeastTwo
   ; classificationGroupUniversalCoefficientAtLeastElevenTwelfths
   ; uniformRemainderBelowEveryCompactSimpleCoefficient
+  ; r129ExportsLiteralContinuumLimit
+  ; r129ExportsLiteralSchwingerMembership
+  ; r129ExportsLiteralStressDerivative
+  ; r129ExportsCompositeMarkedSourceData
   )
 
 balabanRGBlockSpinTransferStillOpen :
@@ -108,6 +467,87 @@ balabanRGTOEReceipt =
 balabanRGZKPFrame : BalabanRGTOE.BalabanTOEZKPFrame
 balabanRGZKPFrame =
   BalabanRGTOE.canonicalBalabanTOEZKPFrame
+
+------------------------------------------------------------------------
+-- Learned Earth-embedding TOE convergence.
+--
+-- Reuse the canonical acquisition/interpretability owner. This facade does
+-- not assign physical meaning to individual learned coordinates.
+------------------------------------------------------------------------
+
+unifierEarthEmbeddingReceipt :
+  EarthEmbeddingTOE.EarthEmbeddingTOEReceipt
+unifierEarthEmbeddingReceipt =
+  EarthEmbeddingTOE.canonicalEarthEmbeddingTOEReceipt
+
+unifierEarthEmbeddingZKPFrame :
+  ParetoSnowballTOE.TOEZKPFrame
+unifierEarthEmbeddingZKPFrame =
+  EarthEmbeddingTOE.canonicalEarthEmbeddingTOEZKPFrame
+
+unifierAlphaEarthDimensionIs64 :
+  EarthEmbeddingTOE.alphaEarthDimension
+    EarthEmbeddingTOE.canonicalEarthEmbeddingTOEReceipt ≡ 64
+unifierAlphaEarthDimensionIs64 =
+  EarthEmbeddingTOE.alphaEarthDimensionIs64
+
+unifierTesseraDimensionIs128 :
+  EarthEmbeddingTOE.tesseraDimension
+    EarthEmbeddingTOE.canonicalEarthEmbeddingTOEReceipt ≡ 128
+unifierTesseraDimensionIs128 =
+  EarthEmbeddingTOE.tesseraDimensionIs128
+
+unifierLearnedCoordinateDoesNotCreatePhysicalIdentity :
+  EarthEmbeddingTOE.LearnedCoordinateCreatesPhysicalIdentity → ⊥
+unifierLearnedCoordinateDoesNotCreatePhysicalIdentity =
+  EarthEmbeddingTOE.learnedCoordinateDoesNotCreatePhysicalIdentity
+
+unifierGradientDoesNotCreateCausalEnvironmentalEffect :
+  EarthEmbeddingTOE.GradientCreatesCausalEnvironmentalEffect → ⊥
+unifierGradientDoesNotCreateCausalEnvironmentalEffect =
+  EarthEmbeddingTOE.gradientDoesNotCreateCausalEnvironmentalEffect
+
+unifierModelOutputDoesNotCreateIndependentFieldMeasurement :
+  EarthEmbeddingTOE.ModelOutputCreatesIndependentFieldMeasurement → ⊥
+unifierModelOutputDoesNotCreateIndependentFieldMeasurement =
+  EarthEmbeddingTOE.modelOutputDoesNotCreateIndependentFieldMeasurement
+
+unifierEmbeddingDoesNotCreateLegalAuthority :
+  EarthEmbeddingTOE.EmbeddingCreatesLegalAuthority → ⊥
+unifierEmbeddingDoesNotCreateLegalAuthority =
+  EarthEmbeddingTOE.embeddingDoesNotCreateLegalAuthority
+
+unifierGeographicRecoverabilityDoesNotCreatePhysicalIdentity :
+  EarthEmbeddingTOE.GeographicRecoverabilityCreatesPhysicalIdentity → ⊥
+unifierGeographicRecoverabilityDoesNotCreatePhysicalIdentity =
+  EarthEmbeddingTOE.geographicRecoverabilityDoesNotCreatePhysicalIdentity
+-- Canonical Riemann pole-quotient frontier.
+------------------------------------------------------------------------
+
+unifierRiemannPoleQuotientZKPFrame :
+  RiemannTOE.RiemannPoleQuotientTOEZKPFrame
+unifierRiemannPoleQuotientZKPFrame =
+  RiemannTOE.canonicalRiemannPoleQuotientTOEZKPFrame
+
+unifierRiemannHighOrdinateCompletionTheorem :
+  RiemannTOE.HighOrdinateCompletionTheorem
+unifierRiemannHighOrdinateCompletionTheorem =
+  RiemannTOE.highOrdinateCompletionTheorem
+
+unifierRiemannDeterminantDiagnosticDoesNotPromote :
+  RiemannTOE.determinantMayReplaceFinalCarrier ≡ false
+unifierRiemannDeterminantDiagnosticDoesNotPromote =
+  RiemannTOE.determinantMayNotReplaceFinalCarrier
+
+unifierRiemannLowOrdinateAttachmentStillOpen :
+  RiemannTOE.plattTrudgianTheoremImportedIntoAgda ≡ false
+unifierRiemannLowOrdinateAttachmentStillOpen =
+  RiemannTOE.plattTrudgianTheoremStillNotImported
+
+unifierRiemannHypothesisStillOpen :
+  RiemannTOE.rhDerived ≡ false
+unifierRiemannHypothesisStillOpen =
+  RiemannTOE.rhStillOpen
 
 ------------------------------------------------------------------------
 -- Normalized Balaban density, regular-E, stress, and continuum surfaces.
@@ -177,6 +617,71 @@ toeBalabanStressCauchyModulusCompilerLevel =
 toeBalabanStressCauchyPhysicalInsertionLevel : ProofLevel
 toeBalabanStressCauchyPhysicalInsertionLevel =
   BalabanRGTOE.balabanStressCauchyPhysicalInsertionLevel
+
+toeBalabanStressCauchyCompletionToMarkedStressLevel : ProofLevel
+toeBalabanStressCauchyCompletionToMarkedStressLevel =
+  BalabanRGTOE.balabanGoal1CStressCompletionIsCompletedMarkedStressLevel
+
+toeBalabanStressCompletedMarkedIsClayStressLevel : ProofLevel
+toeBalabanStressCompletedMarkedIsClayStressLevel =
+  BalabanRGTOE.balabanGoal1CCompletedStressIsClayStressLevel
+
+toeBalabanSameFamilyRecoveryCompilerLevel : ProofLevel
+toeBalabanSameFamilyRecoveryCompilerLevel =
+  BalabanRGTOE.balabanSameFamilyRecoveryCompilerLevel
+
+toeBalabanSameFamilyRecoveryPhysicalLevel : ProofLevel
+toeBalabanSameFamilyRecoveryPhysicalLevel =
+  BalabanRGTOE.balabanSameFamilyRecoveryPhysicalLevel
+
+toeBalabanGoal1CSourceCutCompilerLevel : ProofLevel
+toeBalabanGoal1CSourceCutCompilerLevel =
+  BalabanRGTOE.balabanGoal1CSourceCutCompilerLevel
+
+toeBalabanGoal1CContinuumStressRecoveryCompilerLevel : ProofLevel
+toeBalabanGoal1CContinuumStressRecoveryCompilerLevel =
+  BalabanRGTOE.balabanGoal1CContinuumStressRecoveryCompilerLevel
+
+toeBalabanGoal1CMetricPairingCompilerLevel : ProofLevel
+toeBalabanGoal1CMetricPairingCompilerLevel =
+  BalabanRGTOE.balabanGoal1CMetricPairingCompilerLevel
+
+toeBalabanGoal1CLiteralSourceInstantiationLevel : ProofLevel
+toeBalabanGoal1CLiteralSourceInstantiationLevel =
+  BalabanRGTOE.balabanGoal1CLiteralSourceInstantiationLevel
+
+toeBalabanCPhysicalPackageMaxCutCompilerLevel : ProofLevel
+toeBalabanCPhysicalPackageMaxCutCompilerLevel =
+  BalabanRGTOE.balabanCPhysicalPackageMaxCutCompilerLevel
+
+toeBalabanC0LiteralGaugeInvariantLocalObservableFamilyLevel : ProofLevel
+toeBalabanC0LiteralGaugeInvariantLocalObservableFamilyLevel =
+  BalabanRGTOE.balabanC0LiteralGaugeInvariantLocalObservableFamilyLevel
+
+toeBalabanC1MarkedCurvatureFamilyLevel : ProofLevel
+toeBalabanC1MarkedCurvatureFamilyLevel =
+  BalabanRGTOE.balabanC1MarkedCurvatureFamilyLevel
+
+toeBalabanC2PhysicalRemainderSharedTailLevel : ProofLevel
+toeBalabanC2PhysicalRemainderSharedTailLevel =
+  BalabanRGTOE.balabanC2PhysicalRemainderSharedTailLevel
+
+toeBalabanC3OneStepAFRecurrenceIdentificationLevel : ProofLevel
+toeBalabanC3OneStepAFRecurrenceIdentificationLevel =
+  BalabanRGTOE.balabanC3OneStepAFRecurrenceIdentificationLevel
+
+toeBalabanC4DensityAnchoredStressLaneLevel : ProofLevel
+toeBalabanC4DensityAnchoredStressLaneLevel =
+  BalabanRGTOE.balabanC4DensityAnchoredStressLaneLevel
+
+toeBalabanCPhysicalPackageCount : ℕ
+toeBalabanCPhysicalPackageCount =
+  BalabanRGTOE.balabanCPhysicalPackageCount
+
+toeBalabanLevel2ClayPromotionStillFalse :
+  BalabanRGTOE.balabanLevel2ClayPromotionFlag ≡ false
+toeBalabanLevel2ClayPromotionStillFalse =
+  BalabanRGTOE.balabanLevel2ClayPromotionStillFalse
 
 toeBalabanStressHilbertBoundCompilerLevel : ProofLevel
 toeBalabanStressHilbertBoundCompilerLevel =
@@ -729,22 +1234,32 @@ unifierYangMillsGoal1ParetoZKPFrame = YMMaxCut.canonicalGoal1ParetoTOEZKPFrame
 ------------------------------------------------------------------------
 
 unifierBalabanScaleTransferPromotionImpossible :
-  ParetoSnowballTOE.BalabanScaleTransferPromotion → ⊥
+  BalabanRGTOE.BalabanScaleTransferPromotion → ⊥
 unifierBalabanScaleTransferPromotionImpossible =
-  ParetoSnowballTOE.balabanScaleTransferPromotionImpossible
+  BalabanRGTOE.balabanScaleTransferPromotionImpossible
 
+unifierIbrahimRecognitionParetoBoundary :
+  ParetoSnowballTOE.RecognitionRouteParetoBoundary
 unifierIbrahimRecognitionParetoBoundary =
   ParetoSnowballTOE.ibrahimRecognitionParetoBoundary
 
+unifierIbrahimCharacterExecutionFrontier :
+  ParetoSnowballTOE.Monster3BCharacterExecutionFrontier
 unifierIbrahimCharacterExecutionFrontier =
   ParetoSnowballTOE.ibrahimCharacterExecutionFrontier
 
+unifierIbrahimPhaseResolutionFrontier :
+  ParetoSnowballTOE.InertiaPhaseResolutionFrontier
 unifierIbrahimPhaseResolutionFrontier =
   ParetoSnowballTOE.ibrahimPhaseResolutionFrontier
 
+unifierIbrahimSchrodingerHZetaMaxCutBoundary :
+  ParetoSnowballTOE.SchrodingerHZetaRecognitionMaxCutBoundary
 unifierIbrahimSchrodingerHZetaMaxCutBoundary =
   ParetoSnowballTOE.ibrahimSchrodingerHZetaMaxCutBoundary
 
+unifierIbrahimHistoricalDiscriminatorBoundary :
+  ParetoSnowballTOE.HistoricalDiscriminatorBoundary
 unifierIbrahimHistoricalDiscriminatorBoundary =
   ParetoSnowballTOE.ibrahimHistoricalDiscriminatorBoundary
 
@@ -961,6 +1476,32 @@ unifierFleetFormalGapTargetReceipt :
 unifierFleetFormalGapTargetReceipt =
   FleetGapTOE.canonicalFleetFormalGapTargetReceipt
 
+
+unifierFleetRecordedUnformalisedGapCountIs58 :
+  FleetGapTOE.unformalisedFormalGaps unifierFleetFormalGapTargetReceipt ≡ 58
+unifierFleetRecordedUnformalisedGapCountIs58 =
+  FleetGapTOE.fleetRecordedUnformalisedGapCountIs58
+
+unifierFleetRecordedDischargedCountIs584 :
+  FleetGapTOE.dischargedCoreKnowledgeFibres unifierFleetFormalGapTargetReceipt ≡ 584
+unifierFleetRecordedDischargedCountIs584 =
+  FleetGapTOE.fleetRecordedDischargedCountIs584
+
+unifierFleetRecordedContradictionCountIs44 :
+  FleetGapTOE.polarityContradictionGaps unifierFleetFormalGapTargetReceipt ≡ 44
+unifierFleetRecordedContradictionCountIs44 =
+  FleetGapTOE.fleetRecordedContradictionCountIs44
+
+unifierFleetRecordedMacroscopicMotifCountIs3 :
+  FleetGapTOE.macroscopicEigenMotifCount unifierFleetFormalGapTargetReceipt ≡ 3
+unifierFleetRecordedMacroscopicMotifCountIs3 =
+  FleetGapTOE.fleetRecordedMacroscopicMotifCountIs3
+
+unifierFleetTargetsOnlyUnformalisedFormalGaps :
+  FleetGapTOE.targetOnlyUnformalisedFormalGaps unifierFleetFormalGapTargetReceipt ≡ true
+unifierFleetTargetsOnlyUnformalisedFormalGaps =
+  FleetGapTOE.fleetTargetsOnlyUnformalisedFormalGaps
+
 unifierFleetCoordinateRebuildabilityReceipt =
   FleetGapTOE.fleetCoordinateRebuildabilityReceipt
 
@@ -1076,6 +1617,81 @@ unifierFleetQuantumMereologyAttributionBoundary :
   FleetGapTOE.QuantumMereologyAttributionBoundary
 unifierFleetQuantumMereologyAttributionBoundary =
   FleetGapTOE.fleetQuantumMereologyAttributionBoundary
+
+
+unifierFleetEigenPriorityPromotionImpossible :
+  FleetGapTOE.FleetEigenPriorityCreatesProof → ⊥
+unifierFleetEigenPriorityPromotionImpossible =
+  FleetGapTOE.fleetEigenPriorityPromotionImpossible
+
+unifierFleetExternalCountPromotionImpossible :
+  FleetGapTOE.FleetExternalCountCreatesFormalDischarge → ⊥
+unifierFleetExternalCountPromotionImpossible =
+  FleetGapTOE.fleetExternalCountPromotionImpossible
+
+unifierFleetDischargedFibreRetargetImpossible :
+  FleetGapTOE.FleetDischargedFibreRetargetPermission → ⊥
+unifierFleetDischargedFibreRetargetImpossible =
+  FleetGapTOE.fleetDischargedFibresCannotBeRetargetedByThisBoundary
+
+unifierFleetContradictionGapReclassificationImpossible :
+  FleetGapTOE.FleetContradictionGapReclassificationPermission → ⊥
+unifierFleetContradictionGapReclassificationImpossible =
+  FleetGapTOE.fleetContradictionsCannotBeRelabelledAsFormalGaps
+------------------------------------------------------------------------
+-- Fleet R5 exact target and receipt-level non-promotion projection.
+------------------------------------------------------------------------
+
+unifierFleetR5OrdinalCutReceipt :
+  FleetGapTOE.FleetR5OrdinalCutReceipt
+unifierFleetR5OrdinalCutReceipt =
+  FleetGapTOE.canonicalFleetR5OrdinalCutReceipt
+
+unifierFleetFormalGapOrdinalCountIs58 :
+  FleetGapTOE.fleetFormalGapOrdinalCount ≡ 58
+unifierFleetFormalGapOrdinalCountIs58 =
+  FleetGapTOE.fleetFormalGapOrdinalCountIs58
+
+unifierFleetOrdinalRowIdentityStillUnattached :
+  FleetGapTOE.fleetOrdinalCarriesPersistedRowIdentity ≡ false
+unifierFleetOrdinalRowIdentityStillUnattached =
+  FleetGapTOE.fleetOrdinalCarriesPersistedRowIdentityIsFalse
+
+unifierFleetSharedCardinalityDoesNotCreateIdentity :
+  FleetGapTOE.FleetSharedCardinalityCreatesIdentity → ⊥
+unifierFleetSharedCardinalityDoesNotCreateIdentity =
+  FleetGapTOE.fleetSharedCardinalityDoesNotCreateIdentity
+
+unifierFleetEigenPriorityDoesNotCreateProof :
+  FleetGapTOE.eigenvalueMagnitudeCreatesProofAuthority
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+unifierFleetEigenPriorityDoesNotCreateProof =
+  FleetGapTOE.fleetEigenPriorityDoesNotCreateProof
+
+unifierFleetExternalCountDoesNotCreateFormalDischarge :
+  FleetGapTOE.externalCountCreatesFormalProof
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+unifierFleetExternalCountDoesNotCreateFormalDischarge =
+  FleetGapTOE.fleetExternalCountDoesNotCreateFormalDischarge
+
+unifierFleetDischargedFibresRemainOutOfTarget :
+  FleetGapTOE.dischargedFibresRemainDischarged
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
+unifierFleetDischargedFibresRemainOutOfTarget =
+  FleetGapTOE.fleetDischargedFibresRemainOutOfTarget
+
+unifierFleetContradictionGapsRemainSeparate :
+  FleetGapTOE.contradictionGapsRemainSeparate
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
+unifierFleetContradictionGapsRemainSeparate =
+  FleetGapTOE.fleetContradictionGapsRemainSeparate
+
+unifierFleetPlanningTextDoesNotCreateFormalResidual :
+  FleetGapTOE.externalPlanningTextCreatesFormalResidual
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+unifierFleetPlanningTextDoesNotCreateFormalResidual =
+  FleetGapTOE.fleetExternalPlanningTextDoesNotCreateFormalResidual
+
 
 ------------------------------------------------------------------------
 -- Fleet 58 named-manifest acquisition wall.
@@ -1247,6 +1863,7 @@ unifierTwoDigitStreamCannotRecoverThird =
 
 import DASHI.ComputerScience.TriadicFin27Byte256ABIExact as TriadicABI
 import DASHI.ComputerScience.TriadicU8RuntimeOracleCrossRepoExact as TriadicHost
+import DASHI.ComputerScience.TriadicCompiledScalarU8RuntimeExact as CompiledU8
 
 unifierTriadicRustBindingStillUnpaid :
   TriadicABI.rustU8BindingPaid TriadicABI.canonicalTriadicByteABIBoundary
@@ -1272,6 +1889,22 @@ unifierTriadicFiniteABIImpliesRustImpossible :
   TriadicABI.BoundedABIImpliesRustImplementation → ⊥
 unifierTriadicFiniteABIImpliesRustImpossible =
   TriadicABI.abiDoesNotCreateRust
+
+
+unifierCompiledScalarDoesNotCreateRust :
+  CompiledU8.CUint8ImpliesRustU8 → ⊥
+unifierCompiledScalarDoesNotCreateRust =
+  CompiledU8.cUint8DoesNotCreateRustBinding
+
+unifierCompiledScalarDoesNotCreateBackendEquivalence :
+  CompiledU8.ExhaustiveScalarImpliesBackendEquivalence → ⊥
+unifierCompiledScalarDoesNotCreateBackendEquivalence =
+  CompiledU8.scalarExhaustionDoesNotCreateBackendEquivalence
+
+unifierCompilerSuccessDoesNotCreateAgdaKernelSuccess :
+  CompiledU8.CompilerSuccessImpliesAgdaKernelSuccess → ⊥
+unifierCompilerSuccessDoesNotCreateAgdaKernelSuccess =
+  CompiledU8.compilerSuccessDoesNotCreateKernelSuccess
 
 ------------------------------------------------------------------------
 -- Implement-A-to-D reuse-only TOE facade.
@@ -1507,8 +2140,142 @@ unifierNavierStokesTerminalPromotionImpossible =
 
 
 ------------------------------------------------------------------------
+-- R829-vector instantaneous snapshot and exact non-promotion boundary.
+------------------------------------------------------------------------
+
+unifierNavierStokesInstantaneousVectorSnapshotClosed : Bool
+unifierNavierStokesInstantaneousVectorSnapshotClosed =
+  NSClayTOE.instantaneousVectorSnapshotClosed
+
+unifierNavierStokesInstantaneousVectorSnapshotClosedIsTrue :
+  unifierNavierStokesInstantaneousVectorSnapshotClosed ≡ true
+unifierNavierStokesInstantaneousVectorSnapshotClosedIsTrue =
+  NSClayTOE.instantaneousVectorSnapshotClosedIsTrue
+
+unifierNavierStokesInstantaneousRepositoryRateStrictlyNegative : Bool
+unifierNavierStokesInstantaneousRepositoryRateStrictlyNegative =
+  NSClayTOE.instantaneousRepositoryRateStrictlyNegative
+
+unifierNavierStokesInstantaneousRepositoryRateStrictlyNegativeIsTrue :
+  unifierNavierStokesInstantaneousRepositoryRateStrictlyNegative ≡ true
+unifierNavierStokesInstantaneousRepositoryRateStrictlyNegativeIsTrue =
+  NSClayTOE.instantaneousRepositoryRateStrictlyNegativeIsTrue
+
+unifierNavierStokesRealFiniteODETransportClosed : Bool
+unifierNavierStokesRealFiniteODETransportClosed =
+  NSClayTOE.realFiniteODETransportClosed
+
+unifierNavierStokesRealFiniteODETransportStillOpen :
+  unifierNavierStokesRealFiniteODETransportClosed ≡ false
+unifierNavierStokesRealFiniteODETransportStillOpen =
+  NSClayTOE.realFiniteODETransportStillOpen
+
+unifierNavierStokesUniversalR823IntegratedReserveRefuted : Bool
+unifierNavierStokesUniversalR823IntegratedReserveRefuted =
+  NSClayTOE.universalR823IntegratedReserveRefuted
+
+unifierNavierStokesUniversalR823IntegratedReserveStillUnrefuted :
+  unifierNavierStokesUniversalR823IntegratedReserveRefuted ≡ false
+unifierNavierStokesUniversalR823IntegratedReserveStillUnrefuted =
+  NSClayTOE.universalR823IntegratedReserveStillUnrefuted
+
+unifierNavierStokesInstantaneousSnapshotClayPromotion : Bool
+unifierNavierStokesInstantaneousSnapshotClayPromotion =
+  NSClayTOE.instantaneousSnapshotClayPromotion
+
+unifierNavierStokesInstantaneousSnapshotClayPromotionStillFalse :
+  unifierNavierStokesInstantaneousSnapshotClayPromotion ≡ false
+unifierNavierStokesInstantaneousSnapshotClayPromotionStillFalse =
+  NSClayTOE.instantaneousSnapshotClayPromotionStillFalse
+
+
+------------------------------------------------------------------------
 -- Current periodic-B shared weighted wall from R736.
 -- Proof ownership remains in R736 through the canonical NS Clay facade.
+-- Current periodic-B authoritative wall.
+-- The normalized facade follows NSABCDMaxCut20261007Exact and the current
+-- pure-analysis owner.  Historical R736 and external-commutator routes remain
+-- reachable below only as donor/provenance surfaces.
+------------------------------------------------------------------------
+
+unifierNavierStokesCurrentBHighestInformationIsPhysicalR440 : Bool
+unifierNavierStokesCurrentBHighestInformationIsPhysicalR440 =
+  NSClayTOE.currentPeriodicBHighestInformationIsPhysicalR440
+
+unifierNavierStokesCurrentBHighestInformationIsPhysicalR440IsTrue :
+  unifierNavierStokesCurrentBHighestInformationIsPhysicalR440 ≡ true
+unifierNavierStokesCurrentBHighestInformationIsPhysicalR440IsTrue =
+  NSClayTOE.currentPeriodicBHighestInformationIsPhysicalR440IsTrue
+
+unifierNavierStokesCurrentB4PhysicalPaymentClosed : Bool
+unifierNavierStokesCurrentB4PhysicalPaymentClosed =
+  NSClayTOE.currentPeriodicB4PhysicalPaymentClosed
+
+unifierNavierStokesCurrentB4PhysicalPaymentStillOpen :
+  unifierNavierStokesCurrentB4PhysicalPaymentClosed ≡ false
+unifierNavierStokesCurrentB4PhysicalPaymentStillOpen =
+  NSClayTOE.currentPeriodicB4PhysicalPaymentStillOpen
+
+unifierNavierStokesCurrentB4FourMomentScalarClosed : Bool
+unifierNavierStokesCurrentB4FourMomentScalarClosed =
+  NSClayTOE.currentPeriodicB4FourMomentScalarClosed
+
+unifierNavierStokesCurrentB4FourMomentScalarClosedIsTrue :
+  unifierNavierStokesCurrentB4FourMomentScalarClosed ≡ true
+unifierNavierStokesCurrentB4FourMomentScalarClosedIsTrue =
+  NSClayTOE.currentPeriodicB4FourMomentScalarClosedIsTrue
+
+unifierNavierStokesCurrentB4ZeroPaddingAuditClosed : Bool
+unifierNavierStokesCurrentB4ZeroPaddingAuditClosed =
+  NSClayTOE.currentPeriodicB4ZeroPaddingAuditClosed
+
+unifierNavierStokesCurrentB4ZeroPaddingAuditClosedIsTrue :
+  unifierNavierStokesCurrentB4ZeroPaddingAuditClosed ≡ true
+unifierNavierStokesCurrentB4ZeroPaddingAuditClosedIsTrue =
+  NSClayTOE.currentPeriodicB4ZeroPaddingAuditClosedIsTrue
+
+unifierNavierStokesCurrentB1PhysicalProducerClosed : Bool
+unifierNavierStokesCurrentB1PhysicalProducerClosed =
+  NSClayTOE.currentPeriodicB1PhysicalProducerClosed
+
+unifierNavierStokesCurrentB2PhysicalProducerClosed : Bool
+unifierNavierStokesCurrentB2PhysicalProducerClosed =
+  NSClayTOE.currentPeriodicB2PhysicalProducerClosed
+
+unifierNavierStokesCurrentB3PhysicalProducerClosed : Bool
+unifierNavierStokesCurrentB3PhysicalProducerClosed =
+  NSClayTOE.currentPeriodicB3PhysicalProducerClosed
+
+unifierNavierStokesCurrentBContinuationInputsClosed : Bool
+unifierNavierStokesCurrentBContinuationInputsClosed =
+  NSClayTOE.currentPeriodicBContinuationInputsClosed
+
+unifierNavierStokesCurrentBR823ShouldReopen : Bool
+unifierNavierStokesCurrentBR823ShouldReopen =
+  NSClayTOE.currentPeriodicBR823ShouldReopen
+
+unifierNavierStokesCurrentBR823ShouldNotReopen :
+  unifierNavierStokesCurrentBR823ShouldReopen ≡ false
+unifierNavierStokesCurrentBR823ShouldNotReopen =
+  NSClayTOE.currentPeriodicBR823ShouldNotReopen
+
+unifierNavierStokesHistoricalExternalCommutatorPureRouteClosed : Bool
+unifierNavierStokesHistoricalExternalCommutatorPureRouteClosed =
+  NSClayTOE.historicalExternalSignedCommutatorRouteReachedPureCommutator
+
+unifierNavierStokesHistoricalExternalCommutatorRoutePromotesClay : Bool
+unifierNavierStokesHistoricalExternalCommutatorRoutePromotesClay =
+  NSClayTOE.historicalExternalSignedCommutatorRoutePromotesClay
+
+unifierNavierStokesHistoricalExternalCommutatorRouteDoesNotPromoteClay :
+  unifierNavierStokesHistoricalExternalCommutatorRoutePromotesClay ≡ false
+unifierNavierStokesHistoricalExternalCommutatorRouteDoesNotPromoteClay =
+  NSClayTOE.historicalExternalSignedCommutatorRouteDoesNotPromoteClay
+
+
+------------------------------------------------------------------------
+-- Legacy R736 compatibility surface.
+-- R736 remains theorem-bearing provenance.  It is not the current B max-cut.
 ------------------------------------------------------------------------
 
 unifierNavierStokesSharedWeightedExactlyTwoLeaves : Bool
@@ -1677,6 +2444,197 @@ toeBrainJPromotionBlocked :
   BrainSpine.objectExternalJPromotion BrainFMRI.brainFMRIObject ≡ false
 toeBrainJPromotionBlocked = BrainFMRI.brainFMRIJPromotionBlocked
 
+
+import DASHI.Law.SensibLawITIRParityEverything as LegalGovernance
+
+------------------------------------------------------------------------
+-- Canonical legal-governance, Fleet motif, and evidence handoff.
+------------------------------------------------------------------------
+
+open import DASHI.Governance.PromotionSpineTests public using
+  ( candidateExampleQuarantines
+  ; candidateExampleAbstains
+  ; citationExampleCannotCloseIdentity
+  ; citationExampleQuarantines
+  ; artifactExamplePromotesWhenAllFiveClose
+  ; artifactExampleAuthorizesGovernedPromotion
+  )
+
+open import DASHI.Law.SensibLawITIRParityEverything public using
+  ( selectedLegalRuntimeContract
+  ; selectedITIRNormalizedParity
+  ; selectedStageParityWitness
+  ; selectedOwnerParityWitness
+  ; SemanticPromotionPolicySurface
+  ; semanticPromotionPolicySurface
+  ; heuristic-only-abstains
+  ; promotion-ignores-heuristic-bits
+  ; semantic-promotion-truth-authority-closed
+  ; semantic-promotion-legal-authority-closed
+  ; semantic-promotion-all-authority-closed
+  ; LegalCitationBoundary
+  ; canonicalLegalCitationBoundary
+  ; CompositeCompliance
+  ; composeCertifiedStages
+  ; selectedDomainTransportReceipt
+  ; selectedRepresentationEqualityCreatesLegalAuthorityIsFalse
+  ; selectedVendorIdentityCreatesAuthorityIsFalse
+  ; selectedTargetDomainNeedsOwnAuthorityWitnessIsTrue
+  )
+
+unifierFleetRecordedMacroscopicMotifCountIs3 :
+  FleetGapTOE.macroscopicEigenMotifCount
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 3
+unifierFleetRecordedMacroscopicMotifCountIs3 =
+  FleetGapTOE.fleetRecordedMacroscopicMotifCountIs3
+
+unifierFleetMetaIntrospectorAttributionPreserved :
+  FleetGapTOE.metaIntrospectorAttributionPreserved
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
+unifierFleetMetaIntrospectorAttributionPreserved = refl
+
+unifierFleetMetaIntrospectorProofNotBorrowed :
+  FleetGapTOE.metaIntrospectorProofBorrowed
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+unifierFleetMetaIntrospectorProofNotBorrowed = refl
+
+import DASHI.Interop.SLRCanonicalEvidenceSubstrateExact as SLREvidence
+
+unifierEvidenceManifestationDoesNotCreateSemanticAuthority :
+  SLREvidence.ManifestationCreatesSemanticAuthority → ⊥
+unifierEvidenceManifestationDoesNotCreateSemanticAuthority =
+  SLREvidence.manifestationDoesNotCreateSemanticAuthority
+
+unifierEvidenceObservationDoesNotCreateClaimTruth :
+  SLREvidence.ObservationCreatesClaimTruth → ⊥
+unifierEvidenceObservationDoesNotCreateClaimTruth =
+  SLREvidence.observationDoesNotCreateClaimTruth
+
+unifierEvidenceObservationDoesNotPromoteApplicability :
+  SLREvidence.ObservationPromotesApplicability → ⊥
+unifierEvidenceObservationDoesNotPromoteApplicability =
+  SLREvidence.observationDoesNotPromoteApplicability
+
+unifierEvidenceDoesNotCreateDigitalESDAdmission :
+  SLREvidence.CanonicalEvidenceCreatesDigitalESDAdmission → ⊥
+unifierEvidenceDoesNotCreateDigitalESDAdmission =
+  SLREvidence.canonicalEvidenceDoesNotCreateDigitalESDAdmission
+
+------------------------------------------------------------------------
+-- Exact legal/compliance non-promotion projection.
+------------------------------------------------------------------------
+
+unifierLegalReviewDoesNotCreateClaimTruth =
+  LegalGovernance.selectedLegalReviewDoesNotCreateClaimTruth
+
+unifierQualificationDoesNotAutomaticallyProveForensicCompliance =
+  LegalGovernance.selectedQualificationDoesNotAutomaticallyProveForensicCompliance
+
+unifierReportAdmissionDoesNotRepairMissingInput =
+  LegalGovernance.selectedReportAdmissionDoesNotRepairMissingInput
+
+unifierOfficialLegalSurfaceDoesNotRecoverFineState =
+  LegalGovernance.selectedOfficialLegalSurfaceDoesNotRecoverFineState
+
+unifierOfficialActionDoesNotRecoverAutonomyAndAuthority =
+  LegalGovernance.selectedOfficialActionDoesNotRecoverAutonomyAndAuthority
+
+unifierLegalityAloneDoesNotCreateLegitimacy =
+  LegalGovernance.selectedLegalityAloneDoesNotCreateLegitimacy
+
+unifierMissingAdmissibilityStillAbstains =
+  LegalGovernance.selectedMissingAdmissibilityStillAbstains
+
+unifierMissingValidationStillAbstains =
+  LegalGovernance.selectedMissingValidationStillAbstains
+
+------------------------------------------------------------------------
+-- Fleet-58 acquisition max-cut.
+------------------------------------------------------------------------
+
+unifierFleetTargetsOnlyUnformalisedFormalGaps :
+  FleetGapTOE.targetOnlyUnformalisedFormalGaps
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
+unifierFleetTargetsOnlyUnformalisedFormalGaps =
+  FleetGapTOE.fleetTargetsOnlyUnformalisedFormalGaps
+
+unifierFleetSpectralLabelsDoNotIdentifyTheoremOwners :
+  FleetGapTOE.spectralLabelsIdentifyTheoremOwners
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+unifierFleetSpectralLabelsDoNotIdentifyTheoremOwners =
+  FleetGapTOE.fleetSpectralLabelDoesNotIdentifyTheoremOwner
+
+unifierFleet58ManifestAbsent :
+  FleetManifestTOE.named58ManifestAcquired ≡ false
+unifierFleet58ManifestAbsent =
+  FleetManifestTOE.named58ManifestAcquiredIsFalse
+
+unifierFleet58CountDoesNotNameRows :
+  FleetManifestTOE.countIdentifiesNamedRows ≡ false
+unifierFleet58CountDoesNotNameRows =
+  FleetManifestTOE.countIdentifiesNamedRowsIsFalse
+
+unifierFleet58PerGapDispatchDisabled :
+  FleetManifestTOE.perGapDispatchEnabled ≡ false
+unifierFleet58PerGapDispatchDisabled =
+  FleetManifestTOE.perGapDispatchEnabledIsFalse
+
+unifierFleet58RelatedSymbolsRequired :
+  FleetManifestTOE.relatedSymbolsRequired ≡ true
+unifierFleet58RelatedSymbolsRequired =
+  FleetManifestTOE.relatedSymbolsRequiredIsTrue
+
+unifierFleet58DiscoverRequired :
+  FleetManifestTOE.discoverRequired ≡ true
+unifierFleet58DiscoverRequired =
+  FleetManifestTOE.discoverRequiredIsTrue
+
+unifierFleet58RoundLineageRequired :
+  FleetManifestTOE.roundLineageRequired ≡ true
+unifierFleet58RoundLineageRequired =
+  FleetManifestTOE.roundLineageRequiredIsTrue
+
+unifierFleet58AcquisitionDoesNotCloseConsumer :
+  FleetManifestTOE.BoundDemandAutomaticallyClosesConsumer → ⊥
+unifierFleet58AcquisitionDoesNotCloseConsumer =
+  FleetManifestTOE.acquisitionDoesNotCloseConsumer
+
+unifierFleet58ProducerDoesNotIdentifyResidual :
+  FleetManifestTOE.SameProducerIdentifiesResidual → ⊥
+unifierFleet58ProducerDoesNotIdentifyResidual =
+  FleetManifestTOE.producerDoesNotIdentifyResidual
+
+------------------------------------------------------------------------
+-- Mabo citation-use max-cut.
+------------------------------------------------------------------------
+
+unifierYindjibarndiCitationSeedDoesNotCreateMaboJoin =
+  LegalGovernance.selectedYindjibarndiCitationSeedDoesNotCreateMaboJoin
+
+unifierMunkaraNativeTitleAtomDoesNotPayOffshoreElement =
+  LegalGovernance.selectedMunkaraNativeTitleAtomDoesNotPayOffshoreElement
+
+unifierMunkaraSharedCountryConceptDoesNotCollapseWrongType =
+  LegalGovernance.selectedMunkaraSharedCountryConceptDoesNotCollapseWrongType
+
+unifierPabaiMaboAnalogyStillNonPromoting =
+  LegalGovernance.selectedPabaiMaboAnalogyStillNonPromoting
+
+unifierMaboIsNotClimateNegligencePrecedent =
+  LegalGovernance.selectedMaboIsNotClimateNegligencePrecedent
+
+unifierMaboStructureDoesNotProveClimateDoctrine =
+  LegalGovernance.selectedMaboStructureDoesNotProveClimateDoctrine
+
+unifierAmoduCitationDoesNotMeanWholesaleAdoption =
+  LegalGovernance.selectedAmoduCitationDoesNotMeanWholesaleAdoption
+
+unifierPabaiCurrentRouteStillUnreachable =
+  LegalGovernance.selectedPabaiCurrentRouteStillUnreachable
+
+unifierPabaiSearchStillRequiresProof =
+  LegalGovernance.selectedPabaiSearchStillRequiresProof
+
 ------------------------------------------------------------------------
 -- Live Gate-4 frontier and Fleet target selection.
 ------------------------------------------------------------------------
@@ -1766,3 +2724,266 @@ unifierSensibLawDeclaredCutoverDoesNotMakeParityUniversal :
   SensibLawDirect.DeclaredCutoverMakesParityUniversal → ⊥
 unifierSensibLawDeclaredCutoverDoesNotMakeParityUniversal =
   SensibLawDirect.declaredCutoverDoesNotMakeParityUniversal
+
+------------------------------------------------------------------------
+-- Riemann current max-cut convergence.
+------------------------------------------------------------------------
+
+unifierRiemannRHCurrentFrontier :
+  RiemannRHTOE.CurrentThreeTapFrontier
+unifierRiemannRHCurrentFrontier =
+  RiemannRHTOE.currentThreeTapFrontier
+
+unifierRiemannRHZKPFrame :
+  RiemannRHTOE.RiemannRHTOEZKPFrame
+unifierRiemannRHZKPFrame =
+  RiemannRHTOE.canonicalRiemannRHTOEZKPFrame
+
+unifierRiemannRHA1CarrierStillOpen :
+  RiemannRHTOE.currentA1CarrierSummationPaid ≡ false
+unifierRiemannRHA1CarrierStillOpen =
+  RiemannRHTOE.a1CarrierSummationStillOpen
+
+unifierRiemannRHA2ScalarStillOpen :
+  RiemannRHTOE.currentA2StrictScalarPaid ≡ false
+unifierRiemannRHA2ScalarStillOpen =
+  RiemannRHTOE.a2StrictScalarStillOpen
+
+unifierRiemannRHRouteBStillOpen :
+  RiemannRHTOE.currentRouteBEventualGapPaid ≡ false
+unifierRiemannRHRouteBStillOpen =
+  RiemannRHTOE.routeBEventualGapStillOpen
+
+unifierRiemannRHStillOpen :
+  RiemannRHTOE.currentRHDerived ≡ false
+unifierRiemannRHStillOpen =
+  RiemannRHTOE.riemannHypothesisStillOpen
+
+unifierRiemannTerminalOffPaymentType : Set₁
+unifierRiemannTerminalOffPaymentType =
+  RiemannRHTOE.terminalOffPaymentType
+
+unifierRiemannTerminalGammaPaymentType : Set₁
+unifierRiemannTerminalGammaPaymentType =
+  RiemannRHTOE.terminalGammaPaymentType
+
+------------------------------------------------------------------------
+-- Feynman experiment exact non-promotion convergence.
+------------------------------------------------------------------------
+
+unifierFeynmanDerivationBoundary :
+  UnifiedPhysics.FeynmanDerivationBoundaryType
+unifierFeynmanDerivationBoundary =
+  UnifiedPhysics.feynmanDerivationBoundary
+
+unifierFeynmanArchitectureCompatible :
+  UnifiedPhysics.feynmanArchitectureCompatibleFlag ≡ true
+unifierFeynmanArchitectureCompatible =
+  UnifiedPhysics.feynmanArchitectureCompatible
+
+unifierFeynmanHistoryRealisationStillOpen :
+  UnifiedPhysics.feynmanHistoryRealisationSuppliedFlag ≡ false
+unifierFeynmanHistoryRealisationStillOpen =
+  UnifiedPhysics.feynmanHistoryRealisationStillOpen
+
+unifierTSFVDoesNotDeriveFeynmanPropagator :
+  UnifiedPhysics.feynmanPropagatorDerivedFlag ≡ false
+unifierTSFVDoesNotDeriveFeynmanPropagator =
+  UnifiedPhysics.tsfvDoesNotCurrentlyDeriveFeynmanPropagator
+
+unifierFeynmanExperimentDoesNotValidateTSFV :
+  UnifiedPhysics.feynmanExperimentValidatesTSFVFlag ≡ false
+unifierFeynmanExperimentDoesNotValidateTSFV =
+  UnifiedPhysics.feynmanExperimentDoesNotValidateTSFV
+-- Wette constructive-foundations canonical residual and non-promotion surface.
+------------------------------------------------------------------------
+
+unifiedWetteRule915CurrentProblemBoundary :
+  Wette915.CanonicalRule915CurrentProblemBoundary
+unifiedWetteRule915CurrentProblemBoundary =
+  Wette915.canonicalRule915CurrentProblemBoundary
+
+unifiedWetteRule915ZKPFrame : Wette915.Rule915MajorZKPFrame
+unifiedWetteRule915ZKPFrame =
+  Wette915.canonicalRule915MajorZKPFrame
+
+unifiedWetteScaffoldDoesNotCreatePremise18 :
+  Wette915.GeneratedScaffoldCreatesPremise18 → ⊥
+unifiedWetteScaffoldDoesNotCreatePremise18 =
+  Wette915.generatedScaffoldDoesNotCreatePremise18
+
+unifiedWetteScaffoldDoesNotCreatePremise27 :
+  Wette915.GeneratedScaffoldCreatesPremise27 → ⊥
+unifiedWetteScaffoldDoesNotCreatePremise27 =
+  Wette915.generatedScaffoldDoesNotCreatePremise27
+
+------------------------------------------------------------------------
+-- Plant nutrient transport exact owner.
+------------------------------------------------------------------------
+
+unifierPlantNutrientTransportBoundary :
+  PlantNutrientTransport.SoilMoistureNutrientTransportBoundary
+unifierPlantNutrientTransportBoundary =
+  PlantNutrientTransport.canonicalSoilMoistureNutrientTransportBoundary
+
+unifierPlantPhenotypeDoesNotIdentifyUniqueChemicalCause :
+  PlantNutrientTransport.phenotypeAloneIdentifiesUniqueChemicalCause
+    PlantNutrientTransport.canonicalSoilMoistureNutrientTransportBoundary
+  ≡ false
+unifierPlantPhenotypeDoesNotIdentifyUniqueChemicalCause =
+  PlantNutrientTransport.plantPhenotypeDoesNotIdentifyUniqueChemicalCause
+
+unifierInterveinalChlorosisUniqueCausePromotionImpossible :
+  PlantNutrientTransport.UniqueCausePromotion
+    PlantNutrientTransport.interveinalChlorosis
+  → ⊥
+unifierInterveinalChlorosisUniqueCausePromotionImpossible =
+  PlantNutrientTransport.interveinalChlorosisUniqueCausePromotionImpossible
+
+unifierPlantNutrientTransportZKPFrame : ParetoSnowballTOE.TOEZKPFrame
+unifierPlantNutrientTransportZKPFrame =
+  ParetoSnowballTOE.toe-zkp-frame
+    "formalize soil-moisture nutrient transport and spatial sentinel bioassay without promoting symptoms to a unique cause"
+    "reuse root-soil ion-water, whole-plant hydraulic-carbon, LES, PNP, chemistry, conservation and existing TOE non-promotion owners"
+    "extend the canonical root-soil physiology owner and expose exact aliases through the Unifier"
+    "moisture changes transport and availability; one phenotype can remain compatible with distinct causes"
+    "one disjoint plant nutrient transport normalization lane"
+    "same-species spatial observations need recorded controls, moisture, geometry and source history before causal promotion"
+    "ITIL, ISO 9000/42001/27001/27701/23894/9241, NIST AI RMF, Six Sigma and C4/PlantUML remain process lenses only"
+    "the Unifier reaches the same exact moisture boundary and non-promotion theorem as the TOE root"
+    "GitHub reuse search, exact-owner read-back, trust-escape scan, ESD mutation scan and Agda kernel check"
+    false false false false
+
+
+unifierLeafAreaNutrientCouplingBoundary :
+  PlantHydraulicCarbon.LeafAreaNutrientCouplingBoundary
+unifierLeafAreaNutrientCouplingBoundary =
+  PlantHydraulicCarbon.canonicalLeafAreaNutrientCouplingBoundary
+
+unifierLeafAreaDoesNotDetermineNutrientUptakeAlone :
+  PlantHydraulicCarbon.leafAreaAloneDeterminesNutrientUptake
+    PlantHydraulicCarbon.canonicalLeafAreaNutrientCouplingBoundary
+  ≡ false
+unifierLeafAreaDoesNotDetermineNutrientUptakeAlone =
+  PlantHydraulicCarbon.leafAreaDoesNotDetermineNutrientUptakeAlone
+
+------------------------------------------------------------------------
+-- Cannabis nominal-potency / reported-preference handoff.
+------------------------------------------------------------------------
+
+unifierCannabisPotencyPreferenceBoundary :
+  CannabisAssay.CannabisPotencyPreferenceBoundary
+unifierCannabisPotencyPreferenceBoundary =
+  CannabisAssay.canonicalCannabisPotencyPreferenceBoundary
+
+unifierCannabisRoyaleComparatorPreferenceObservation :
+  CannabisAssay.PotencyPreferenceObservation
+unifierCannabisRoyaleComparatorPreferenceObservation =
+  CannabisAssay.royaleComparatorPreferenceObservation
+
+unifierCannabisJadeRoyalePreferenceObservation :
+  CannabisAssay.PotencyPreferenceObservation
+unifierCannabisJadeRoyalePreferenceObservation =
+  CannabisAssay.jadeRoyalePreferenceObservation
+
+unifierCannabisPotencyOnlyMonotoneDoesNotFitCurrentFixture :
+  CannabisAssay.PotencyOnlyMonotoneFitsCurrentFixture → ⊥
+unifierCannabisPotencyOnlyMonotoneDoesNotFitCurrentFixture =
+  CannabisAssay.potencyOnlyMonotoneDoesNotFitCurrentFixture
+
+unifierCannabisNominalPotencyDoesNotCreateDeliveredDose :
+  CannabisAssay.NominalPotencyCreatesDeliveredDose → ⊥
+unifierCannabisNominalPotencyDoesNotCreateDeliveredDose =
+  CannabisAssay.nominalPotencyDoesNotCreateDeliveredDose
+
+unifierCannabisReportedPreferenceDoesNotCreateTerpeneCause :
+  CannabisAssay.ReportedPreferenceCreatesTerpeneCause → ⊥
+unifierCannabisReportedPreferenceDoesNotCreateTerpeneCause =
+  CannabisAssay.reportedPreferenceDoesNotCreateTerpeneCause
+
+unifierCannabisReportedPreferenceDoesNotCreateOutdoorCause :
+  CannabisAssay.ReportedPreferenceCreatesOutdoorCause → ⊥
+unifierCannabisReportedPreferenceDoesNotCreateOutdoorCause =
+  CannabisAssay.reportedPreferenceDoesNotCreateOutdoorCause
+
+unifierCannabisPotencyPreferenceZKPFrame :
+  ParetoSnowballTOE.TOEZKPFrame
+unifierCannabisPotencyPreferenceZKPFrame =
+  ParetoSnowballTOE.toe-zkp-frame
+    "O: formalise the current Jade/Royale/high-potency comparison without promoting headline THC into dose, exposure, mechanism, or clinical effect"
+    "R: reuse the commercial same-sample assay, composition, interaction, temporal-evidence, and non-promotion owners before extension"
+    "C: extend the existing commercial-assay owner with one bounded potency/preference discriminator and expose exact aliases through TOE roots"
+    "S: product label potency is not exact batch composition; potency is not delivered dose; dose is not exposure; preference does not create terpene or outdoor causation"
+    "L: one disjoint cannabis evidence lane; no ESD mutation; no retargeting of the 584 discharged fibres"
+    "P: Agda remains golden; current preference evidence is source-bounded; exact batch assays remain unpaid; attribution stays with source authors"
+    "G: ITIL, ISO 9000/42001/27001/27701/23894/9241, NIST AI RMF, Six Sigma, and C4/PlantUML are process lenses only and do not create scientific authority"
+    "F: Unifier reaches the same bounded reversal and non-promotion theorems as the TOE root"
+    "verification: code-search deduplication; trust-escape scan; ESD diff scan; Agda kernel check when an Agda runtime is available"
+    false false false false
+
+------------------------------------------------------------------------
+-- Highest-alpha YM Route-S selected source -> OS max-cut (canonical owner).
+-- Reuses R320 -> R295 -> R313 -> R296 -> R333; physical inputs not promoted.
+------------------------------------------------------------------------
+
+unifierBalabanR320RouteSToOSCompilerLevel : ProofLevel
+unifierBalabanR320RouteSToOSCompilerLevel =
+  BalabanRGTOE.balabanR320RouteSToOSCompilerLevel
+
+unifierBalabanR320RouteSSelectedSourceLevel : ProofLevel
+unifierBalabanR320RouteSSelectedSourceLevel =
+  BalabanRGTOE.balabanR320RouteSSelectedPhysicalSourceLevel
+
+unifierBalabanR320RouteSNoDuplicateMagnitude :
+  BalabanRGTOE.balabanR320RouteSMagnitudeNotNewPhysical ≡ false
+unifierBalabanR320RouteSNoDuplicateMagnitude =
+  BalabanRGTOE.balabanR320RouteSNoSecondAbsoluteMagnitudeInput
+
+
+------------------------------------------------------------------------
+-- Pareto P2: existing rational SU2 trace bound -> same-physical Gram
+-- boundedness producer -> canonical Wilson S2 input.
+------------------------------------------------------------------------
+
+unifierBalabanRouteSP2TraceToS2Level : ProofLevel
+unifierBalabanRouteSP2TraceToS2Level =
+  BalabanRGTOE.balabanRouteSP2TraceToCanonicalS2CompilerLevel
+
+unifierBalabanRouteSP2PhysicalInterpretationLevel : ProofLevel
+unifierBalabanRouteSP2PhysicalInterpretationLevel =
+  BalabanRGTOE.balabanRouteSP2TracePhysicalInterpretationLevel
+
+unifierBalabanRouteSP2PerLoopBoundAfterInterpretation :
+  BalabanRGTOE.balabanRouteSP2TracePerLoopBoundFlag ≡ true
+unifierBalabanRouteSP2PerLoopBoundAfterInterpretation =
+  BalabanRGTOE.balabanRouteSP2TracePaysPerLoopBounds
+
+
+------------------------------------------------------------------------
+-- Preferred native rational-Wilson P2 (actual measure producer), not
+-- the generic external trace-to-Gram compatibility adapter.
+------------------------------------------------------------------------
+
+unifierBalabanRouteSP2NativeNoProductPayment :
+  BalabanRGTOE.balabanRouteSP2NativeNoExtraProduct ≡ true
+unifierBalabanRouteSP2NativeNoProductPayment =
+  BalabanRGTOE.balabanRouteSP2NativeNoExtraProductIsTrue
+
+unifierBalabanRouteSP2NativeNoDistancePayment :
+  BalabanRGTOE.balabanRouteSP2NativeNoDistance ≡ false
+unifierBalabanRouteSP2NativeNoDistancePayment =
+  BalabanRGTOE.balabanRouteSP2NativeNoDistanceIsFalse
+
+unifierBalabanRouteSP2NativeCompilerLevel : ProofLevel
+unifierBalabanRouteSP2NativeCompilerLevel =
+  BalabanRGTOE.balabanRouteSP2NativeCompilerLevel
+
+
+unifierBalabanRouteSP2R445NoSecondMoment :
+  BalabanRGTOE.balabanRouteSP2R445IndependentMomentRequired ≡ false
+unifierBalabanRouteSP2R445NoSecondMoment =
+  BalabanRGTOE.balabanRouteSP2R445IndependentMomentRequiredIsFalse
+
+unifierBalabanRouteSP2R445CompilerLevel : ProofLevel
+unifierBalabanRouteSP2R445CompilerLevel =
+  BalabanRGTOE.balabanRouteSP2R445NativeCompilerLevel

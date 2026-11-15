@@ -1,0 +1,205 @@
+"""Mathematical finite bridge certificates and independence no-go tests."""
+from fractions import Fraction as F
+from itertools import permutations
+from pathlib import Path
+import sys
+import pytest
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
+import zipf_heaps_bridge as H
+
+
+def test_exact_finite_pmf_and_shifted_zero_and_uniform():
+    assert H.finite_rank_probabilities(3, 1) == (F(6,11),F(3,11),F(2,11))
+    assert H.finite_rank_probabilities(4, 0, 2) == (F(1,4),)*4
+    assert sum(H.finite_rank_probabilities(5, 3, 2)) == 1
+
+
+def test_exact_cdf_quantile_and_moment_on_attained_mass():
+    p = H.finite_rank_probabilities(3, 1)
+    assert H.finite_cdf(p) == (F(6,11), F(9,11), F(1))
+    assert H.finite_quantile(p, F(6,11)) == 1
+    assert H.finite_quantile(p, F(6,11)+F(1,110)) == 2
+    assert H.finite_quantile(p, F(1)) == 3
+    assert H.finite_rank_moment(p, 0)==1
+    assert H.finite_rank_moment(p, 1)==F(18,11)
+    assert H.finite_rank_moment(p, 2)==F(36,11)
+
+
+def test_finite_probability_parameter_domain_gates():
+    with pytest.raises(ValueError): H.finite_rank_probabilities(0,1)
+    with pytest.raises(ValueError): H.finite_rank_probabilities(2,-1)
+    with pytest.raises(ValueError): H.finite_quantile((F(1),),F(0))
+    with pytest.raises(ValueError): H.expected_iid_vocabulary([F(1,2)],3)
+    with pytest.raises(ValueError): H.expected_permutation_vocabulary((1,2),4)
+
+
+def test_iid_heaps_first_values_and_discrete_derivative():
+    p = H.finite_rank_probabilities(3, 0)
+    assert H.expected_iid_vocabulary(p,0) == 0
+    assert H.expected_iid_vocabulary(p,1) == 1
+    assert H.expected_iid_vocabulary(p,3) == F(19,9)
+    for n in range(6):
+        assert H.expected_iid_vocabulary(p,n+1)-H.expected_iid_vocabulary(p,n) == H.expected_iid_new_type(p,n)
+        assert 0 < H.expected_iid_new_type(p,n+1) < H.expected_iid_new_type(p,n)
+
+
+def test_temporal_permutation_model_differs_from_iid_with_same_marginals():
+    counts=(2,2,2)
+    p=(F(1,3),)*3
+    assert H.expected_permutation_vocabulary(counts,3)==F(12,5)
+    assert H.expected_iid_vocabulary(p,3)==F(19,9)
+    assert H.expected_permutation_vocabulary(counts,6)==3
+    assert H.expected_iid_vocabulary(p,6)<3
+
+
+def test_exact_sharp_envelope_exhaustion_three_types():
+    counts=(3,2,1)
+    all_strings=set(permutations('aaabbc'))
+    assert len(all_strings)==60
+    for t in range(7):
+        observed=[len(set(s[:t])) for s in all_strings]
+        assert H.distinct_envelope(counts,t)==(min(observed),max(observed))
+
+
+def test_witness_same_histogram_but_different_heaps_prefix():
+    a='aabbcc';b='abcabc'
+    assert sorted(a)==sorted(b)
+    assert len(set(a[:3]))==2
+    assert len(set(b[:3]))==3
+    assert H.distinct_envelope((2,2,2),3)==(2,3)
+
+
+def test_same_unigram_rank_different_exact_block_entropy():
+    iid_unigram=(F(1,2),F(1,2))
+    persistent_unigram=(F(1,2),F(1,2))
+    assert iid_unigram==persistent_unigram
+    assert H.dyadic_block_entropy(iid_unigram)==1
+    assert H.dyadic_block_entropy((F(1,4),)*4)==2
+    assert H.dyadic_block_entropy((F(1,2),F(0),F(0),F(1,2)))==1
+    with pytest.raises(ValueError): H.dyadic_block_entropy((F(1,3),)*3)
+
+
+def test_exact_hypergeometric_endpoints_and_singleton_limits():
+    assert H.expected_permutation_vocabulary((1,2,4),0)==0
+    assert H.expected_permutation_vocabulary((1,2,4),1)==1
+    assert H.expected_permutation_vocabulary((1,2,4),7)==3
+    assert H.distinct_envelope((1,2,4),7)==(3,3)
+
+
+def test_zero_drawing_preserves_empty_vocabulary_not_empty_model():
+    assert H.expected_iid_vocabulary((F(1),),0)==0
+    assert H.expected_iid_vocabulary((F(1),),5)==1
+    assert H.expected_iid_new_type((F(1),),1)==0
+
+
+def test_noninjectivity_of_histogram_to_timing_is_independent_of_zipf_fit():
+    a='aaaaabbbbb'; b='ababababab'
+    assert sorted(a)==sorted(b)
+    assert tuple(len(set(a[:i])) for i in range(1,len(a)+1)) != tuple(len(set(b[:i])) for i in range(1,len(b)+1))
+
+
+def test_derived_finite_urn_limit_as_draws_increase():
+    p=H.finite_rank_probabilities(6,3,2)
+    for draws in (0,1,2,5,10,100):
+        e=H.expected_iid_vocabulary(p,draws)
+        assert 0 <= e <= len(p)
+    assert H.expected_iid_vocabulary(p,1000) > F(59,10)
+
+
+def test_all_integer_shifted_moments_via_binomial_hurwitz_decomposition():
+    for n in (1,2,5):
+        for s in (-2,0,1,3):
+            for shift in (0,1,5):
+                if s<0: continue  # PMF carrier intentionally only nonnegative s
+                p=H.finite_rank_probabilities(n,s,shift)
+                for moment in range(5):
+                    assert H.finite_rank_moment(p,moment)==H.finite_shifted_moment_binomial(n,s,shift,moment)
+
+
+def test_finite_hurwitz_sum_additivity_without_infinite_pole_subtraction():
+    for s in (-2,0,1,2,5):
+        for q in (0,2):
+            for n in (0,1,3):
+                assert (H.finite_hurwitz_sum(n+4,s,q)==
+                    H.finite_hurwitz_sum(n,s,q)+H.finite_hurwitz_sum(4,s,q+n))
+
+
+def test_dyadic_entropy_same_unigram_different_block_growth_n4():
+    assert H.dyadic_block_entropy((F(1,16),)*16)==4  # IID fair bits, 4-block
+    assert H.dyadic_block_entropy((F(1,2),)+(F(0),)*14+(F(1,2),))==1  # persistent fair bit
+    assert H.dyadic_block_entropy((F(1,2),F(1,2)))==1  # same singleton law
+
+
+def test_finite_zipf_conditioning_l1_is_twice_discarded_tail():
+    p=H.finite_rank_probabilities(7,2,1)
+    for keep in range(1,len(p)+1):
+        conditioned=H.conditioned_head(p,keep)
+        tail=sum(p[keep:],F())
+        assert H.l1_probability_distance(p,conditioned)==2*tail
+        assert sum(conditioned)==1
+        assert all(x==0 for x in conditioned[keep:])
+    assert H.conditioned_head(p,len(p))==p
+
+
+def test_novelty_run_structure_separates_equal_histograms():
+    grouped=list('aabbcc');interleaved=list('abcabc')
+    assert sorted(grouped)==sorted(interleaved)
+    ga=H.novelty_flags(grouped);ib=H.novelty_flags(interleaved)
+    assert ga==(True,False,True,False,True,False)
+    assert ib==(True,True,True,False,False,False)
+    assert H.equal_flag_runs(ga)!=H.equal_flag_runs(ib)
+    assert sum(ga)==sum(ib)==3
+
+
+def test_iid_expectation_independent_enumeration_of_all_draw_sequences():
+    from itertools import product
+    for p in ((F(1,2),F(1,2)),(F(1,2),F(1,3),F(1,6))):
+        for n in range(5):
+            enumerated=sum((len(set(word))*__import__('math').prod(p[i] for i in word)
+                            for word in product(range(len(p)),repeat=n)),F())
+            assert enumerated==H.expected_iid_vocabulary(p,n)
+
+
+def test_permutation_expectation_independent_multiset_enumeration():
+    for counts in ((1,1,2),(2,2,2),(3,2,1)):
+        word=tuple(i for i,f in enumerate(counts) for _ in range(f))
+        all_perms=set(permutations(word))
+        assert all_perms
+        for n in range(len(word)+1):
+            mean=F(sum(len(set(s[:n])) for s in all_perms),len(all_perms))
+            assert mean==H.expected_permutation_vocabulary(counts,n)
+
+
+def test_head_conditioning_matches_half_l1_subset_supremum():
+    from itertools import combinations
+    p=H.finite_rank_probabilities(5,2,1)
+    for keep in (1,3,5):
+        q=H.conditioned_head(p,keep)
+        sup=max((abs(sum((p[i]-q[i] for i in subset),F()))
+                 for r in range(len(p)+1)
+                 for subset in combinations(range(len(p)),r)))
+        assert 2*sup==H.l1_probability_distance(p,q)
+        assert sup==sum(p[keep:],F())
+
+
+def test_canonical_agda_exact_fraction_hurwitz_parity_and_nonzero_denominators():
+    """Bounded execution of the Agda recurrence shape; NOT kernel typecheck.
+
+    Mirrors the existing canonical FiniteFraction addition:
+      (a/b)+(c/d)=(a*d+c*b)/(b*d).
+    In the Zipf finite owner each term is 1/(r+q)^s for 1-based rank.
+    """
+    for exponent in range(7):
+        for shift in range(5):
+            for count in range(9):
+                numerator, denominator = 0, 1
+                for index in range(count):
+                    term_denom = (index + 1 + shift) ** exponent
+                    numerator, denominator = (
+                        numerator * term_denom + denominator,
+                        denominator * term_denom,
+                    )
+                assert denominator > 0
+                assert F(numerator, denominator) == H.finite_hurwitz_sum(
+                    count, exponent, shift
+                )

@@ -260,7 +260,7 @@ canonicalVerificationDiscipline =
 ------------------------------------------------------------------------
 -- Dashboard consumed by the paper/PR narrative.
 
-record ChronologyVerificationDashboard : Set₁ where
+record ChronologyVerificationDashboard : Set₂ where
   field
     formalism : Set₁
     formalismIs : formalism ≡ G.CanonicalAtomicPeriodicTableStatement

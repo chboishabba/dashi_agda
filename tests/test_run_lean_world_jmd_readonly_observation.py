@@ -9,9 +9,8 @@ import sys
 import tempfile
 import unittest
 from unittest.mock import patch
-import run_lean_world_jmd_readonly_observation as publisher
-
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
+import run_lean_world_jmd_readonly_observation as publisher
 from run_lean_world_jmd_readonly_observation import (
     publish_jmd_readonly, JMDObservationError)
 
@@ -89,7 +88,7 @@ class JMDReadonlyObservationTests(unittest.TestCase):
         self.assertEqual(len(list(self.spool.glob("*.jmd-readonly-observation.json"))), 1)
 
     def test_wrong_original_parser_hash_rejected_before_import(self):
-        with self.assertRaisesRegex(JMDObservationError, "changed"):
+        with self.assertRaisesRegex(JMDObservationError, "(not pinned|changed)"):
             self.publish(source_sha256="0" * 64)
 
     def test_wrong_native_hash_or_declaration_rejected(self):

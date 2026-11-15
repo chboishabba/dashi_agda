@@ -1,0 +1,161 @@
+# CCDCOE P3: G20–COP21 institutional source comparison (8 November 2026)
+
+**Selected original objects:** G20 Brisbane 16 November 2014 (leaders’ communiqué ¶19); G20 Antalya 16 November 2015 (leaders’ communiqué ¶24); COP21 decision 1/CP.21 adopted 12 December 2015 and Paris Agreement Article 4.2; G20 Hamburg 8 July 2017 (the US position **and the position of the other leaders separately**); C20 Turkey communiqué 16 September 2015; B20 Turkey 2015 submissions index.
+
+**Attribution invariant:** original institutions and original document authors retain their full priority and authorship. This file is a DASHI source classification and source-specific formalization, not an attribution of original ideas, legal provisions, empirical measurements or institutional decisions to DASHI, OpenAI, or any prior DASHI contributor. Original mathematical proof owner is `DASHI.Core.IntersectionalNonFactorability`, with source-discriminator machinery reused from `DASHI.Core.DiscriminatorSynthesisExact`. The new G20/COP21 module is a selected instantiation, not the original mathematical theorem, and quotations/citations do not signify endorsement by the original document authors.
+
+## Primary historical source comparison
+
+| Source | Original institutional author | Scope of demonstrated source claim | What it **does not** demonstrate |
+| --- | --- | --- | --- |
+| [G20 Brisbane 2014 ¶19](https://g20.utoronto.ca/2014/2014-1116-communique.html) | G20 leaders | Express support for climate action, growth and investment certainty, and intend a COP21 legal agreement; refer to finance | Legally binding national emissions delivery, industry authorship, or effect of GCC |
+| [G20 Antalya 2015 ¶24](https://g20.org.tr/g20-leaders-commenced-the-antalya-summit/index.html) | G20 leaders | Support a fair/ambitious Paris agreement, differentiated responsibilities, and constructive negotiation | That COP21 outcome was already adopted at Antalya; identity with B20 text or lobbying |
+| [COP21 decision 1/CP.21](https://unfccc.int/files/home/application/pdf/decision1cp21.pdf) | UNFCCC COP21 Conference of the Parties | Formal adoption of Paris Agreement on 12 December 2015 | That any signatory or Party already achieved its future emissions goal |
+| [UNFCCC Article 4 NDC interpretation](https://unfccc.int/process-and-meetings/the-paris-agreement/nationally-determined-contributions-ndcs) | Paris Agreement Parties, source explained by UNFCCC | Each Party has a procedural duty to prepare, communicate and maintain successive NDCs, and pursue domestic mitigation measures | Legally guaranteed achievement of the nationally intended target; implementation of every policy |
+| [Hamburg G20 2017](https://g20.utoronto.ca/2017/2017-G20-leaders-declaration.html) | The declaration records separately US and other G20 leaders | The US withdrawal position and the other leaders' support for Paris are visibly divergent | A common, unanimously shared Hamburg climate position |
+| [C20 Turkey 2015 communiqué](https://g20.utoronto.ca/c20/2015-C20%20Turkey%20Communique_FINAL_16.09.15.pdf) | Organisations of Civil 20 Turkey | A distinct civil-society recommendation: inclusive growth, sustainability, participation, gender justice, civic access to decisions; original PDF cover visually checked | Adoption by G20 leaders; endorsement of DASHI; proof C20 caused any particular 2015 summit sentence |
+| [B20 Turkey 2015 document index](https://g20.utoronto.ca/b20/index.html) | Business 20 Turkey taskforces | Existence of dated recommendations and an energy forum statement | Specific uninspected language of the original B20 submission, direct influence or adopted status |
+| [GCC/Harrison agency account](https://www.climatefiles.com/denial-groups/global-climate-coalition-collection/one-pager-from-e-bruce-harrisons-pr-company-undated/) | E. Bruce Harrison Company | Its own claimed campaign strategy, activity and self-evaluation | That the PR firm wrote or caused G20 or COP21 provisions |
+
+This is a **purposively selected clause-level corpus**. The claim-count matrix computed from the ten selected rows is a documentary index only, not a quantitative prevalence estimate for each institution's entire communication universe.
+
+## Exactly implemented in this PR
+
+- **Golden Agda:** `DASHI/Cognition/CCDCOEP3G20COP21AttributionExact.agda`. Retains eight institutional-source objects plus GCC agency provenance, distinct speaker and speech-act constructors, and concrete original-owner-based nonfactorability proofs: Hamburg US versus other leaders; C20 proposal versus Paris Article 4 obligation; agency self-report versus institutional legal authority. Provides a documented hypothetical source-identity discriminator and blocks automatic agency-to-treaty causal promotion.
+- **Manifest:** `Docs/research/ccdcoe_p3_g20_cop21_attribution_manifest.json`. Nine source objects, ten explicitly selected claims, original author/speech-act/date/source URI/paragraph scope; two uncertainty-dated provenance objects; null original hash, actual document-to-negotiator links and outcome estimates; every claim retains exact original institutional owner.
+- **Source-bound validator:** `scripts/check_ccdcoe_p3_g20_cop21.py`. Checks no actor reassignment, no US–other G20 fusion, no stakeholder-recommendation-as-leaders’-decision, and no B20 catalog promoted into its unread original text. Its optional `--source-map` takes archived original bytes and reviewed extracted text, verifies SHA-256 and each same-source clause anchor and retains each review/extraction receipt. It fails on missing bytes, invalid paths, unverified anchors or unsupported source identities. `--self-test` tests synthetic byte/hash fixtures, wrong Hamburg source identity and business-index promotion. Synthetic fixtures do not amount to real primary-source acceptance.
+- **Integrated:** `DASHI/Cognition/Everything.agda`, P3 Golden regression and canonical `scripts/check_ccdcoe_cognition_agda.sh` which delegates Agda kernel acceptance to `scripts/run_agda29_parallel_check.sh`. Do not substitute Nix or CI for the canonical parallel_checker.
+
+## Higher-alpha empirical hypotheses and acceptance checks
+
+**H-D (discourse persistence):** climate action framed alongside investment and growth in multiple institutional sources. This is testable at the original clause/document level; it is NOT direct historical actor/author continuity.
+
+**H-T (institutional transformation):** earlier G20 aspirational negotiation clauses and later Paris procedural NDC obligations have **different legal speech acts**. This source difference is directly established. Which negotiations or stakeholder submissions changed any particular draft still requires dated drafts and correspondence.
+
+**H-I (direct organised influence):** specific GCC/Harrison or ExxonMobil actors affected specific G20/COP21 language or compliance. **OPEN:** require meeting minutes, actor identity, funds/lobbying trail, dated draft version history, original submission identities and an independent same-object causal bridge. Semantic similarity, shared economics language, or a citation do not establish this.
+
+**H-Implementation:** document adoption or a country's Paris treaty status is not actual emissions or finance implementation. For each state and date, join the UN Treaty Collection, national NDC original files, official emissions/finance records, and source-specific G20 compliance reports with explicit date windows and measurement uncertainty.
+
+**H-Voice:** C20, B20, L20, W20 and Indigenous civil-society organisations have different voice, representation, power, consent and decision authority. C20's own primary source highlights civic space, unpaid work, distributional justice and access to governance. No unconsulted group or Indigenous source is claimed to endorse this comparative scheme.
+
+## Exact unresolved acceptance gates
+
+I0: archive authentic original G20/COP21/C20/B20 bytes, original revisions, extracted text and independently reviewed source-to-clause offsets. I1: extend from the selected 10 clauses to an explicitly enumerated full denominator, code categories and double-coder reliability. I2: establish a *specific* institutional drafting/transmission graph from source-version evidence (or mark no proved edge). I3: join each dated commitment to actual country-specific implementation and compliance observations. I4: causal and counterfactual identification, pre-trend and interference sensitivity, uncertainty, and third-party replication. I5: exact Agda Golden kernel receipt, source provenance/attribution audit and independent institutional voice review.
+
+**No claim of full empirical or Agda completion is made merely from source-written code.**
+
+## Independent measured follow-through: G20 Research Group, not G20 leader self-assessment
+
+This case now has a **real independent selected-commitment evaluation** alongside the original adopted texts. Do NOT attribute the measurements to the communiqués, any member's press office, B20/C20, GCC/Harrison or ExxonMobil.
+
+**2014 Brisbane original evaluation:** G20 Research Group, University of Toronto, and IORI HSE; original authors Krystel Montpetit, Theodora Mladenova, Mickael Deprez, Jonathan Tavone, Phil Gazaleh, Taylor Grott, Antonia Tsapralis, Andrei Sakharov, Andrey Shelepov and Mark Rakhmangulov; final report dated 12 November 2015, actions 16 November 2014–1 October 2015, **17 assessed commitments of the summit's 205**. On the research group's original scored scale (−1, 0, +1), published selected commitment topic scores include climate **+0.10 (55%)**, clean energy **+0.90 (95%)** and fossil-fuel subsidies **−0.45 (28%, rounded)**. https://www.g20.utoronto.ca/compliance/2014brisbane-final/index.html
+
+**2015 Antalya original evaluation:** Sarah Scott, Alissa Wang and G20 Research Group, with Mark Rakhmangulov and the RANEPA Center for International Institutions Research; final report dated 3 September 2016, revised 10 December 2016; actions 16 November 2015–5 September 2016, **17 selected of 113 summit commitments**. Its selected fossil-fuel subsidies commitment was **−0.35 (33%, rounded)**. https://g20.utoronto.ca/compliance/2015antalya-final/index.html
+
+The 2014→2015 comparison 28%→33% is **five percentage points between two original topic-specific report values**, not a controlled trend in fossil subsidies, physical energy use, aggregate emissions or all countries. Both selection frames and commitment specifications differ, and researchers explicitly state their findings only evaluate the **particular selected G20 commitments**. Score conversion is research-specific `P = 50(S + 1)`. The printed whole percentages may differ by half a percent from the displayed decimal score owing to rounding.
+
+Source-new `DASHI/Cognition/CCDCOEP3G20ComplianceObservedExact.agda` owns ONLY DASHI transcription, typed source and scope guards, arithmetic and validation interfaces; **all original research measurement and methodology remains credited to its G20 Research Group/IORI/RANEPA authors**. Agda original generic mathematical donors remain unchanged. The formal module and regression use distinct `brisbaneFinal2014` and `antalyaFinal2015` report owners, 17/205 versus 17/113, measured time windows, four published score summaries, and explicit no-industry-causal or no-emissions-measurement boundaries.
+
+`ccdcoe_p3_g20_cop21_attribution_manifest.json` now retains both independent studies with names, revised publication date, report URIs, selected denominator, topic score and original inferential limitations. `check_ccdcoe_p3_g20_cop21.py` asserts these original values and refuses to present an independent compliance evaluation as adopted-leader wording, authored stakeholder influence, treaty status or emissions effects.
+
+**Higher-alpha next empirical acceptance:** original item-by-item member scores and supporting sources for the assessed commitments; harmonise country/commitment/time units before longitudinal inference; connect Paris national NDC files and emissions to their own original action/dates; use documented B20/C20/industry-draft version trails to test any influence. Do not expand generic Agda interfaces before a real recorded-data failure requires one.
+
+## 8 November 2026 — original October G20 Energy Ministers and B20 Forum temporal disambiguation
+
+**Supersedes the prior B20 index-only limit for one specific source:** the **original B20 Energy Forum Statement, dated 12 October 2015**, is publicly readable as a primary PDF: https://g20.utoronto.ca/b20/B20-Energy-Forum-Statement-121015-final1.pdf. The first PDF page has been visually inspected and its text checked. Original author statement: prepared by **B20 Energy Forum participants and G20-B20 interaction participants**, building on an interaction at the **2 October 2015** Energy Ministers' meeting, with **inputs** from the IEA, OECD, ICC and the 2015 B20 Infrastructure/Investment Taskforce. Those inputs are source credits, not individual co-authorship of particular recommendations or proof each organisation endorses every policy assertion. Its annex reports speakers including BP Turkey, Dow Chemical, Glencore/World Coal Association; **listed participation is not evidence a named speaker authored any particular recommendation**.
+
+Selected original B20 recommendations: carbon pricing to support investment confidence; reform of inefficient energy subsidies; formal B20 representation in the G20 Energy Sustainability Working Group; clean technology/energy access. Each remains B20 participant proposed action, not a G20 leaders' legal act. Original PDF sections: proposals 1–5, PDF text lines 47–154.
+
+The independently published **G20 Energy Ministers' Communiqué of 2 October 2015**, original-source reproduction https://www.g20.utoronto.ca/2015/151002-energy.html, has its own institutional author (energy ministers), **not the November leaders**. Paragraph 11 explicitly links efficiency/clean energy, UNFCCC and COP21 negotiations. These original ministry statements are temporally **earlier** than the October 12 B20 statement. There may have been interaction and earlier drafts at the October 2 meeting, but one cannot backdate *published October 12 words* into the earlier ministers' adopted communiqué without a source-specific original contemporaneous draft and author witness.
+
+**Typed original chain, no causal shortcut:**
+
+- 2 October 2015 — G20 Energy Ministers adopted their own communiqué (ministerial speech act).
+- 12 October 2015 — B20 Energy Forum participants published recommendations arising from a separate interaction (business speech act).
+- 16 November 2015 — G20 leaders adopted Antalya communiqué ¶24 (leaders' speech act).
+- 12 December 2015 — UNFCCC COP21 Parties adopted the Paris Agreement (COP decision and separate treaty text).
+
+`DASHI/Cognition/CCDCOEP3G20COP21AttributionExact.agda` now has **distinct original owners** for the ministers, B20 Forum participants, B20 catalog-only material, C20 civil society, leaders and COP Parties. It implements source-kind/speaker nonfactorability using existing DASHI mathematical donor modules (their original proof ownership unchanged), a dated October-to-Paris record, explicit participant/quote/endorsement limitations and separate non-inference to lobbying causality. The case manifest now contains 11 source identities and 15 selected original-content/index clauses, plus precise attendance and temporal-provenance guards. `scripts/check_ccdcoe_p3_g20_cop21.py` adds source-bounded review and negative regression against reverse-dating B20 influence on ministers. Golden regression and research source ledgers updated. Full original-PDF raw bytes/revision hashes and independent negotiation-draft records remain OPEN.
+
+**New discriminatory experiment:** document-level B20→Antalya/COP21 influence requires (1) an actual B20 version before the relevant negotiating draft, (2) a named representative-to-negotiator documented contact, (3) draft-version or minute-level uptake, and (4) counterfactual discrimination from already-existing G20 ministerial/UNFCCC views. The comparison cannot be resolved from carbon-pricing vocabulary alone.
+
+
+## 9 November 2026 — P3 country-level implementation max-cut (new)
+
+**Branch source receipt:** PR #1467, feat/ccdcoe-cognitive-multiplex-source-weld-20261104. The earlier 11 institutional source identities, 15 intentionally selected clause rows, independently published Brisbane and Antalya selected-commitment compliance summaries, and attribution limitations remain intact. The validator now correctly requires 15 **distinct** claim IDs: the previous count of ten unique identifiers was a defect, not a valid sampling rule.
+
+### Current phase / Pareto ordering
+
+1. **P3.1 original-evidence admission (active)** — immutable bytes, SHA-256, reviewed exact spans, original author, source/claim identity, observation interval and units. Pass with actual archived sources, not fixture-only positives.
+2. **P3.2 original country implementation panel (active)** — country ISO3 × exact commitment × original reporting window × metric × unit × original study, with independent-review receipts. The new fail-closed validator admits only source-digest-confirmed exact text observations and rejects duplicate observations, path escapes, invented causal attributions, and unit confusion. Real country rows have not yet been supplied or independently reproduced.
+3. **P3.3 provenance-rich transmission (open)** — candidate B20/C20→ministerial/leaders/COP21 links require contemporaneous original draft versions, actual documented contact and actor identity, adopted text comparison, and rival-explanation tests. October 12 publication cannot author October 2 ministerial text.
+4. **P3.4 independent replication/causal discrimination (open)** — distinguish descriptive frame continuity, procedural compliance, emissions/finance outcomes and identifiable campaign effects. GCC article and ExxonMobil original-document replication remain independent parallel lanes.
+5. **P3.5 Golden check (open)** — exact-head Agda 2.9 parallel_checker, runtime original-data reproduction and updated source/proof receipts. Script self-tests do not establish Agda or empirical acceptance.
+
+### New deliverables, explicit owners and exact obligations
+
+- **Owner:** `DASHI/Cognition/CCDCOEP3CountryImplementationJoinExact.agda`. Study-indexed observations, metric-indexed units, candidate/review separation and original-study nonidentity. The `Admission` type is conditional on an externally supplied original-review witness. Does not prove authenticity of bytes by itself; no synthetic country results.
+- **Runtime:** `scripts/check_ccdcoe_p3_country_implementation.py`: independently checked source-byte digest, reviewed exact text span, explicit original attribution, country/commitment/study/metric/unit/period, negative controls and a fail-closed empty-data rejection. Binary originals need a separately reviewed extraction; do not pretend raw PDF equals reviewed text.
+- **Golden:** imports in `DASHI/Cognition/Everything.agda` and P3 regression; tests wired to `scripts/check_ccdcoe_cognition_agda.sh`, which retains the repository's canonical Agda parallel checker.
+- **Bug fix:** `scripts/check_ccdcoe_p3_g20_cop21.py` requires every one of its 15 selected claim rows to have a distinct ID.
+
+Exact remaining **real-world** obligations: ORIGINAL_COUNTRY_ROWS, ORIGINAL_DIGEST_AND_SPAN_RECEIPTS, ORIGINAL_COUNTRY_COMMITMENT_CROSSWALK, NDC_VERSION_DATES, EMISSIONS_BASELINE_AND_SCOPE, FINANCE_CURRENCY_PRICE_BASIS, AUDITED_TRANSMISSION_DRAFT_HISTORY, IDENTIFICATION_AND_ALTERNATIVE_EXPLANATIONS, INDEPENDENT_EMPIRICAL_REPRODUCTION, AGDA_KERNEL_ACCEPTANCE. In particular, the fact that original published fossil-subsidy percentages differ by five points does **not** establish a commensurate within-country change or an identified emissions effect.
+
+**Attribution:** All empirical authors and original institutional speakers retain authorship; DASHI owns only its formal adapters and validators. No GCC/Harrison, ExxonMobil, B20, C20 or G20 participant is credited with treaty authorship or demonstrated causal influence without original specific evidence. No ESD source changed.
+
+
+## 9 November — source-member panel and documented stakeholder delivery (second implementation cut)
+
+### Original G20RG member-level empirical result
+
+The University of Toronto G20 Research Group final-report online tables contain **20 assessed-member positions each**, including the European Union as a distinct reported member. The exact two source-specified energy/fossil-subsidy lines have been transcribed into `Docs/research/ccdcoe_p3_g20rg_fossil_member_transcription.json` and examined by `scripts/check_ccdcoe_p3_g20rg_member_panel.py`. No invented country/emissions/finance claims. Both original original-report authorship and study-specific commitment/assessment time remain explicit.
+
+- Brisbane 2014 energy/fossil: 11 scores −1, seven zero, two +1. Sum −9 / 20 = **−0.45**, corresponding to 27.5% and rounded **28%**.
+- Antalya 2015 energy/fossil: ten −1, seven zero, three +1. Sum −7 / 20 = **−0.35**, corresponding to 32.5% and rounded **33%**.
+- Member-aligned score transitions between these **different** study-specific assessed commitments: seven higher, six lower, seven unchanged. These are descriptive changes in published score positions, **not** a harmonized same-policy longitudinal estimate or reduction in subsidies/emissions.
+- **Source inconsistency:** the Brisbane final HTML Table 2 printed aggregate alongside the original 20 scores is **−0.40 (30%)**, inconsistent with the row arithmetic **−0.45** and the report narrative **−0.45 (28%)**. Both printed and derived fields are retained, and the checker fails if the discrepancy is silently erased. Seek original detailed score PDF/erratum for editorial adjudication. This discrepancy must not disappear behind a rounded five-percentage-point cross-summit comparison.
+- **Provenance:** online table contents located and manually transcribed with original URLs; independent immutable raw HTML/PDF SHA-256 and line-level external reviewer receipt remain OPEN, despite the independently checkable arithmetic.
+
+Owner `DASHI/Cognition/CCDCOEP3G20RGMemberPanelExact.agda` encodes the 40 original member scores and proof targets (20 per study; each count distribution; 11−2=9 and 10−3=7). The selected Golden regression and canonical parallel-checker entrypoint import that owner. Source-written is NOT kernel acceptance.
+
+### Institutional delivery is now evidenced, not merely hypothesized
+
+Two different evidence grades remain separate:
+
+1. **C20 actual receipt:** the 2015 Turkish G20 Presidency retrospective records that Deputy Prime Minister Cevdet Yılmaz, former Deputy Prime Minister Ali Babacan and Turkish G20 Sherpa Ayşe Sinirlioğlu attended the 15–16 September C20 summit closing session and received its communiqué on behalf of the presidency. Original owner: Turkish G20 Presidency's report and C20's actual recommendations. URL: https://g20.org.tr/main-achievements-of-turkeys-2015-g20-presidency-2/index.html . The contemporaneous IKV description https://www.ikv.org.tr/ikv.asp?id=1030&lng=en&ust_id=2048 independently identifies the same delivery.
+2. **B20 attributed presentation:** ICC reports that 19 B20 recommendations were presented to Turkey's president in September 2015, and separately describes ICC's own role in the B20 process; this is ICC's participant account of delivery, not independent proof that a specific line was inserted into a leaders' draft. URL: https://iccwbo.org/news-publications/policies-reports/icc-summary-of-the-antalya-g20-leaders-declaration/ .
+
+New ledger `ccdcoe_p3_stakeholder_handoff_evidence.json`, fail-closed `check_ccdcoe_p3_stakeholder_handoff.py`, and `CCDCOEP3StakeholderHandoffExact.agda` distinguish recommendation, presentation, official receipt, adopted speech and independently proven draft uptake. Source review and independent archival byte receipts remain OPEN. All actors keep original authorship; no stakeholder view is converted into G20 or COP authorship, causality or endorsement by delivery.
+
+### Current max-cut exit conditions
+
+- **P3.1 partially paid:** 40 original-source attributed scores and their exact member identities are transcribed, aggregate error discovered, five negative arithmetic/identity controls source-written; original hash/archive and independent human review remain.
+- **P3.2 partially paid:** 20-member correspondence, 7/6/7 descriptive score transitions and study-specific crosswalk; underlying **country action narratives**, subsidies quantities, NDC revision genealogy, original country emissions and finance records still absent.
+- **P3.3 partially paid:** a genuine C20 Sherpa/ministerial receipt and ICC-attributed B20 delivery established. Specific same-proposal drafting/version history and individual institutional uptake still unproved.
+- **P3.4 open:** robust causal effects, pretrend/controls/measurement reliability, GCC article-level and Exxon microdata replication.
+- **P3.5 open:** exact-head 2.9 Agda kernel acceptance and independent original-source runtime receipts (the connector writes source files only).
+
+No ESD surfaces changed. Keep PR draft.
+
+
+## 9 November 2026 — comparative cultural corpus, cognition/attribution boundaries
+
+**Original historical reuse:** `DASHI/Governance/DevelopmentalInfluenceSourceAtlas.agda` already owns the Oreskes–Conway `merchantsOfDoubtHistory` bibliographic source; `EvidenceGradedGenealogyCasesExact.agda` already owns bounded historical-continuity reasoning. No duplicate mathematical genealogy created.
+
+**New case-specific bibliographic source ledger:** `Docs/research/ccdcoe_p3_cultural_source_atlas_20261109.json`, with 12 credited entries: Oreskes–Conway *Merchants of Doubt* (2010) and *The Big Myth* (2023); Klein–Taylor *End Times Fascism and the Fight for the Living World* (2026); Klein *Doppelganger* (2023), *The Shock Doctrine* (2007); Chomsky–Pollin, edited by Polychroniou, *Climate Crisis and the Global Green New Deal* (2020); Mann *The New Climate War* (2021); Michaels *Doubt Is Their Product* (2008); Washington–Cook *Climate Change Denial: Heads in the Sand* (2011); Gibbs *Planet of the Humans* (2020); McKay *Don't Look Up* (2021); Kenner's *Merchants of Doubt* documentary (2014).
+
+**Source limits:** only original institutional/author/publisher metadata and synopses are examined for most additions. This is NOT full-text exegesis or a validated transcription of 2026 book chapters. The 2026 Klein–Taylor publication was independently checked at the Australian publisher (29 September 2026 trade paperback), the authors' site and the US publisher. Other distinct works remain separate by author, year and genre.
+
+**Formal owners:** `DASHI/Cognition/CCDCOEP3CulturalSourceGenreExact.agda` makes historical research, political interpretation, policy proposals, documentary argument and fictional satire distinct constructors, while bibliographic locator, published interpretation, independently verified observation and identified causal effect are separate source stages. Proofs block particular film/book source objects from silently becoming documented real-world treatment effects. `scripts/check_ccdcoe_p3_cultural_sources.py` audits the 12 source records, checks 5 negative tampering controls and forbids full-text review, causal effect and author endorsement promotion. Integrated into the Golden root, P3 regression and canonical checker, with kernel acceptance still OPEN.
+
+**Cognitive warfare discrimination:**
+- *Merchants of Doubt* historically investigates organised production of public scientific uncertainty (retain original academic claim, report-level source provenance and competing explanations). The presence of historical influence operations does not warrant identifying all dissent as hostile.
+- *The Big Myth* adds the authors' historical account of free-market narratives in education and mass communication, not a claim that particular modern actors are a single controller.
+- *End Times Fascism* and *Doppelganger* contribute Klein/Taylor's own interpretive hypotheses about crisis narratives, mirror identity and collective future imagination; neither publisher synopsis demonstrates a measured causal treatment effect.
+- *The Climate Crisis and the Global Green New Deal* is an authored programme for public policy/economic choices, not original empirical evidence of cognitive control.
+- *Planet of the Humans* is an authored documentary argument with independently checkable factual claims, not a blanket observational verdict on all renewable technologies or on its audiences.
+- *Don't Look Up* is fiction/satire illustrating potential media and institutional failure; fictional narrative events are NEVER source evidence of a real intervention.
+
+**Remaining exact proof/data gates:** (CULT-0) obtain licensed complete texts or independently reviewed attributable original passages; (CULT-1) author-owned chapter/scene proposition extraction and contrary primary evidence; (CULT-2) stable source→claim→evidence mapping with counterexamples and uncertainty; (CULT-3) original observations measuring cognitive mechanism and communication exposure; (CULT-4) causal discrimination from nonmalicious dissent, satire, shared language and ordinary institutional debate; (CULT-5) exact-head Agda 2.9 kernel acceptance and executable empirical receipts. An atlas of citations alone pays none of these gates.
+
+**Attribution:** no authorial endorsement, shared authorship, intellectual ownership transfer, invented quotations, uncontrolled full-text reproduction, or automatic inference from political position to intent. No ESD files edited.

@@ -173,12 +173,18 @@ sceneSemantics = Query.querySemantics sceneAnswer
 speciesPresenceAdequateForPresenceQuery :
   Query.AdequateFor scenePresenceProjection sceneSemantics speciesPresentQuery
 speciesPresenceAdequateForPresenceQuery =
-  Query.factorsForQuery (λ surface → bothSpeciesPresent) (λ state → refl)
+  Query.factorsForQuery
+    {semantics = sceneSemantics}
+    {query = speciesPresentQuery}
+    (λ surface → bothSpeciesPresent)
+    (λ state → refl)
 
 scenePresenceEmitterDefect :
   Query.QueryAdequacyDefect scenePresenceProjection sceneSemantics eventEmitterQuery
 scenePresenceEmitterDefect =
   Query.queryAdequacyDefect
+    {semantics = sceneSemantics}
+    {query = eventEmitterQuery}
     magpieProducedEvent
     lorikeetProducedEvent
     refl
@@ -187,7 +193,10 @@ scenePresenceEmitterDefect =
 scenePresenceCannotAssignEmitter :
   Query.AdequateFor scenePresenceProjection sceneSemantics eventEmitterQuery → ⊥
 scenePresenceCannotAssignEmitter =
-  Query.queryAdequacyDefectBlocksFactorisation scenePresenceEmitterDefect
+  Query.queryAdequacyDefectBlocksFactorisation
+    {semantics = sceneSemantics}
+    {query = eventEmitterQuery}
+    scenePresenceEmitterDefect
 
 ------------------------------------------------------------------------
 -- Finite propagation/inverse obstruction:
@@ -226,6 +235,8 @@ sensorMixtureDecompositionDefect :
     sensorMixtureProjection mixtureSemantics uniqueEmitterDecompositionQuery
 sensorMixtureDecompositionDefect =
   Query.queryAdequacyDefect
+    {semantics = mixtureSemantics}
+    {query = uniqueEmitterDecompositionQuery}
     sourceDecompositionMagpiePlusLorikeet
     sourceDecompositionTwoMagpies
     refl
@@ -235,7 +246,10 @@ sensorMixtureCannotDetermineUniqueEmitterDecomposition :
   Query.AdequateFor
     sensorMixtureProjection mixtureSemantics uniqueEmitterDecompositionQuery → ⊥
 sensorMixtureCannotDetermineUniqueEmitterDecomposition =
-  Query.queryAdequacyDefectBlocksFactorisation sensorMixtureDecompositionDefect
+  Query.queryAdequacyDefectBlocksFactorisation
+    {semantics = mixtureSemantics}
+    {query = uniqueEmitterDecompositionQuery}
+    sensorMixtureDecompositionDefect
 
 continuumWaveLawOwnerReused : String
 continuumWaveLawOwnerReused =

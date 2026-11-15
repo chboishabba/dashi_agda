@@ -1,0 +1,33 @@
+{
+  "source_doi": "10.1038/s41467-026-76784-x",
+  "source_arxiv": "2508.12985",
+  "sample_temperature_low_K": 7,
+  "sample_temperature_high_K": 200,
+  "neel_temperature_K": 178,
+  "energy_resolution_meV": 20,
+  "angular_resolution_deg": 0.1,
+  "mdc_integration_half_window_meV": 13,
+  "photon_conditions": [
+    {"photon_energy_eV": 55, "assigned_kz": "approximately pi/(2c)", "published_lineshape": "two-feature/two-peak"},
+    {"photon_energy_eV": 51, "assigned_kz": "approximately pi/(4c)", "published_lineshape": "intermediate broadness"},
+    {"photon_energy_eV": 48, "assigned_kz": "approximately 0", "published_lineshape": "single-peak"}
+  ],
+  "published_momentum_constraints": {
+    "dft_fermi_crossing_separation_inverse_A": 0.01,
+    "voigt_fit_peak_separation_inverse_A": 0.09,
+    "instrumental_gaussian_peak_width_inverse_A": 0.08,
+    "warning": "The 0.01 inverse-A DFT Fermi-crossing separation and 0.09 inverse-A fitted MDC peak separation are distinct source-reported observables and must not be silently equated."
+  },
+  "directional_constraints": {
+    "GammaPrime_KPrime": "spin-degenerate in the presented calculation",
+    "GammaPrime_MPrime": "spin-split at kz approximately pi/(2c)",
+    "kz_zero": "nodal/spin-degenerate plane",
+    "kz_pi_over_c": "nodal/spin-degenerate plane",
+    "Gamma_K_H_A_plane": "nodal/spin-degenerate plane"
+  },
+  "temperature_constraints": {
+    "below_TN": "low-temperature two-peaked/split spectral structure reported",
+    "above_TN": "narrower spectrum and reconstructed spectral weight reported; authors interpret this as suppression of altermagnetic order"
+  },
+  "epistemic_boundary": "Publication-summary constraints only. This is not the raw Igor-wave payload, not a pixel digitisation, not an independently reproduced DFT band file, and not a quantitative raw-data fit."
+}

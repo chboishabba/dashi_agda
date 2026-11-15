@@ -264,6 +264,15 @@
           inherit agdaRecord agdaRecordAll;
         };
 
+        # Focused federation proof shell: avoids the unrelated zkperf Rust
+        # workspace build (which can fail before Agda starts).
+        devShells.federated-topology = pkgs.mkShell {
+          buildInputs = [ agdaWithDashiDeps pkgs.python3 pkgs.bash ];
+          shellHook = ''
+            echo "Federated topology focused Agda shell (no zkperf dependency)"
+          '';
+        };
+
         # Reuse this flake's PINNED nixpkgs closure without changing the Agda shell.
         # Lean version remains tied to flake.lock; never fetch a moving elan toolchain.
         devShells.lean-world = pkgs.mkShell {

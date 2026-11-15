@@ -1,0 +1,13 @@
+module DASHI.Biology.BCICalibrationAgencyBridgeRegression where
+
+import DASHI.Biology.BCICalibrationAgencyBridgeExact as P
+import DASHI.Biology.AliceBrownThreadInquirySynthesisExact as Alice
+
+aliceCapabilityOwnerRegression : Alice.AliceBrownThreadInquirySynthesis
+aliceCapabilityOwnerRegression = P.aliceSynthesis P.canonicalBCICalibrationAgencyBridge
+
+calibrationBurdenRegression : P.ParticipationBurdenCoordinate
+calibrationBurdenRegression = P.calibrationBurden P.canonicalBCICalibrationAgencyBridge
+
+canonicalBoundaryRegression : P.BCICalibrationAgencyBoundary
+canonicalBoundaryRegression = P.canonicalBCICalibrationAgencyBoundary

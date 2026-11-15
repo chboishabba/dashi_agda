@@ -50,15 +50,15 @@ doctrinalRejectionCoordinateIsPaid :
 doctrinalRejectionCoordinateIsPaid = refl
 
 landCountryControlRemainsOpen :
-  Continuity.currentCoordinateState Continuity.landCountryControl ≡ Continuity.open
+  Continuity.currentCoordinateState Continuity.landCountryControl ≡ Continuity.openState
 landCountryControlRemainsOpen = refl
 
 communityAuthorityBearingRemainsOpen :
-  Continuity.currentCoordinateState Continuity.communityAuthorityBearing ≡ Continuity.open
+  Continuity.currentCoordinateState Continuity.communityAuthorityBearing ≡ Continuity.openState
 communityAuthorityBearingRemainsOpen = refl
 
 compensationReparationRemainsOpen :
-  Continuity.currentCoordinateState Continuity.compensationAndReparationRealised ≡ Continuity.open
+  Continuity.currentCoordinateState Continuity.compensationAndReparationRealised ≡ Continuity.openState
 compensationReparationRemainsOpen = refl
 
 doctrinalRejectionOnlyCanStillClassifyAsStructuralContinuityRisk :
