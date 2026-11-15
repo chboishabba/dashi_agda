@@ -3852,6 +3852,165 @@
       "source_assurance": "NO_AGDA_LEAN_KERNEL_RECEIPT_FROM_THIS_AUDIT",
       "verification_driver": "scripts/check_clay_sixfrontier_physical_local_20261114.sh now runs check_clay_endpoint_symbol_audit_20261115.py --lean-root \"$LEAN_ROOT\" --strict before tests/acceptance",
       "audit_preflight_script": "scripts/check_clay_endpoint_symbol_audit_20261115.py"
+    },
+    "p0_source_evidence": {
+      "base_head": "59e4bb55526719c84adfcd62ed52bea42c4c77f9",
+      "repo": "chboishabba/dashi_agda",
+      "observed": {
+        "DASHI/Mathematics/Complexity/CodedStandardHaltingPolynomialCostModelExact.agda": {
+          "owner": "DASHI/Mathematics/Complexity/CodedStandardHaltingPolynomialCostModelExact.agda",
+          "blob": "7d560a19dd5323f582760d02e01d65da904c0ce2",
+          "terms": [
+            {
+              "name": "haltingCostCandidateCoverage",
+              "kind": "COST_MODEL_COVERAGE_CONSTRUCTED",
+              "mention": 69,
+              "declaration": 69,
+              "expected_false": null
+            },
+            {
+              "name": "haltingStandardPolynomialCostModel",
+              "kind": "COST_MODEL_COVERAGE_CONSTRUCTED",
+              "mention": 57,
+              "declaration": 57,
+              "expected_false": null
+            }
+          ]
+        },
+        "DASHI/Mathematics/Complexity/CodedStandardPolynomialCostModelExact.agda": {
+          "owner": "DASHI/Mathematics/Complexity/CodedStandardPolynomialCostModelExact.agda",
+          "blob": "7b9d42eb89a134f208f77f6c674f3e41cd0f417b",
+          "terms": [
+            {
+              "name": "codedStandardCostCandidateCoverage",
+              "kind": "COST_MODEL_COVERAGE_CONSTRUCTED",
+              "mention": 67,
+              "declaration": 67,
+              "expected_false": null
+            },
+            {
+              "name": "codedStandardPolynomialCostModel",
+              "kind": "COST_MODEL_COVERAGE_CONSTRUCTED",
+              "mention": 51,
+              "declaration": 51,
+              "expected_false": null
+            }
+          ]
+        },
+        "DASHI/Mathematics/Complexity/Karp21NativeBinaryHeaderBudgetExact.agda": {
+          "owner": "DASHI/Mathematics/Complexity/Karp21NativeBinaryHeaderBudgetExact.agda",
+          "blob": "5bc0776a3fd89c1b1dd506e24ffcca9f30a450c1",
+          "terms": [
+            {
+              "name": "nativeBinaryGraphHeadersSameOriginal",
+              "kind": "SOURCE_TERM_UNCHECKED",
+              "mention": 92,
+              "declaration": 92,
+              "expected_false": null
+            },
+            {
+              "name": "nativeBinaryBudgetedHeadersSameOriginal",
+              "kind": "SOURCE_TERM_UNCHECKED",
+              "mention": 120,
+              "declaration": 120,
+              "expected_false": null
+            }
+          ]
+        },
+        "DASHI/Mathematics/Complexity/Karp21NativeBinaryStrictAfterOriginalExact.agda": {
+          "owner": "DASHI/Mathematics/Complexity/Karp21NativeBinaryStrictAfterOriginalExact.agda",
+          "blob": "52fb49d5bec3a1d807185eee0f078d8f7a5391d2",
+          "terms": [
+            {
+              "name": "nativeBinaryStrictAfterSameOriginal",
+              "kind": "SOURCE_TERM_UNCHECKED",
+              "mention": 87,
+              "declaration": 87,
+              "expected_false": null
+            }
+          ]
+        },
+        "DASHI/Mathematics/Complexity/Karp21NativeBinaryToOriginalRawMachineStepExact.agda": {
+          "owner": "DASHI/Mathematics/Complexity/Karp21NativeBinaryToOriginalRawMachineStepExact.agda",
+          "blob": "e187fe48fa94bc9fa0cd0e83348a4dc7cb0e460f",
+          "terms": [
+            {
+              "name": "nativeBinaryFirstEnabledNonterminalSameOriginalRawStep",
+              "kind": "SOURCE_TERM_UNCHECKED",
+              "mention": 113,
+              "declaration": 113,
+              "expected_false": null
+            }
+          ]
+        },
+        "DASHI/Mathematics/Complexity/Karp21NativeBinaryValidRawEdgesOriginalExact.agda": {
+          "owner": "DASHI/Mathematics/Complexity/Karp21NativeBinaryValidRawEdgesOriginalExact.agda",
+          "blob": "822dd9a0bcce2588bf19bb97a1f162e18d339d63",
+          "terms": [
+            {
+              "name": "nativeBinaryValidRawEdgesSameOriginal",
+              "kind": "SOURCE_TERM_UNCHECKED",
+              "mention": 96,
+              "declaration": 96,
+              "expected_false": null
+            }
+          ]
+        },
+        "DASHI/Mathematics/Complexity/Karp21NativeGammaAllLengthCompositePhysicalExact.agda": {
+          "owner": "DASHI/Mathematics/Complexity/Karp21NativeGammaAllLengthCompositePhysicalExact.agda",
+          "blob": "cb720b2ec3d2135dcca0033015e14441a6b10164",
+          "terms": [
+            {
+              "name": "Karp21NativeGammaAllLengthCompositePhysical",
+              "kind": "SOURCE_MODULE_REUSED",
+              "mention": 0,
+              "declaration": 0,
+              "expected_false": null
+            },
+            {
+              "name": "physical all-k gamma token",
+              "kind": "SOURCE_TERM_UNCHECKED",
+              "mention": 0,
+              "declaration": 0,
+              "expected_false": null
+            }
+          ]
+        },
+        "DASHI/Mathematics/Complexity/Karp21NativeLivePayloadPotentialExact.agda": {
+          "owner": "DASHI/Mathematics/Complexity/Karp21NativeLivePayloadPotentialExact.agda",
+          "blob": "331dd215a2de9d1f744450f4df109ff93a1ad7d3",
+          "terms": [
+            {
+              "name": "actualN21FirstEnabledLivePayloadFitsOriginalWords",
+              "kind": "SOURCE_TERM_UNCHECKED",
+              "mention": 202,
+              "declaration": 202,
+              "expected_false": null
+            }
+          ]
+        },
+        "DASHI/Mathematics/Complexity/Karp21NativeOriginalSparseCertificateBoundExact.agda": {
+          "owner": "DASHI/Mathematics/Complexity/Karp21NativeOriginalSparseCertificateBoundExact.agda",
+          "blob": "49836be23d5a35c8479a11362fe4884ef669e473",
+          "terms": [
+            {
+              "name": "nativeSuccessfulSparseCursorConsumesExactlyTwoBitsPerEdge",
+              "kind": "SOURCE_TERM_UNCHECKED",
+              "mention": 113,
+              "declaration": 113,
+              "expected_false": null
+            },
+            {
+              "name": "actualN21AcceptedCertificateBoundByOriginalGraphWord",
+              "kind": "SOURCE_TERM_UNCHECKED",
+              "mention": 187,
+              "declaration": 187,
+              "expected_false": null
+            }
+          ]
+        }
+      },
+      "method": "exact PR-head GitHub fetch_file proof bodies; source-structural not kernel; subsequent audit commits do not modify these original proof owners"
     }
   }
 }
