@@ -1,3 +1,5 @@
+> **Canonical exact-lemma status (15 Nov 2026, second max-cut):** [MadScience369V2ExactLemmaRoadmap20261115.md](MadScience369V2ExactLemmaRoadmap20261115.md). Earlier phase obligations remain source records; consult canonical ledger for pulse-control, nonlinear-memory, storage-aware comparison and original-world acceptance.
+
 # V2 reluctance × Don Smith time-dependent nonlinear pump — next maximum cut
 
 ## Original source boundaries
