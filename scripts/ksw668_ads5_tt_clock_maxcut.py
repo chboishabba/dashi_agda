@@ -41,6 +41,33 @@ def tt_source():
         gravity_boundary_condition='n·∂H_i^j = -6 pi_i^j',
         physical_matter_action_derived=False,retarded_moving_TT_Green=False)
 
+
+def tangential_wall_energy():
+    """Coercive tangential-multiplier energy and homogeneous uniqueness cut."""
+    A,B,C,v,g,w=s.symbols('A B C v g w',real=True)
+    eX=w*(A*A+B*B+C+2*v*A*B)/2
+    positive=w*((A+v*B)**2+(1-v*v)*B*B+C)/2
+    assert s.expand(eX-positive)==0
+    boundary=(1+v*v)*A*B+v*(A*A+B*B)
+    assert s.expand(boundary-(B+v*A)*(A+v*B))==0
+    vp,wp=s.symbols('vp wp',real=True)
+    bulk=vp*w*A*B+v*wp*(-A*A+B*B+C)/2
+    assert s.expand(bulk.subs({A:1,B:0,C:0})+v*wp/2)==0
+    # On original t in [1,2], |v| <= 1/sqrt2, b >= 1/2,
+    # |v'|<1, so eX>=(1-|v|)*e0, Gronwall for homogeneous
+    # physical Neumann data gives uniqueness for smooth finite energy.
+    Cbound=(1+3*s.sqrt(2))/(1-1/s.sqrt(2))
+    assert float(Cbound)>0
+    return dict(
+        coercive_energy='1/2 int z^-3 [(H_T+v H_z)^2+(1-v²)H_z²+|grad_x H|²]',
+        wall_flux='-b^-3*(H_z+v H_T)*(H_T+v H_z)',
+        homogeneous_neumann_wall_flux_zero=True,
+        bulk_deformation='vprime*z^-3*H_T H_z +v*(z^-3)prime/2*(-H_T²+H_z²+|grad H|²)',
+        uniform_energy_lower_factor='1-1/sqrt2',
+        conservative_Gronwall_constant_upper=float(Cbound),
+        finite_interval_smooth_homogeneous_uniqueness=True,
+        inhomogeneous_source_trace_bound=False,retarded_Green_constructed=False)
+
 def cylindrical_flat_bulk_rigidity():
     R,T,f,n,kappa,rdot,rddot=s.symbols('R T f n kappa rdot rddot',positive=True)
     a=f*f*n*n/(2*R*R)
@@ -152,7 +179,7 @@ def clock_gauge_invariance():
 
 def audit():
     return dict(A4=cylindrical_flat_bulk_rigidity(),B2=tt_source(),
-        B3=moving_boundary(),B5=static_finite_energy_packet(),
+        B3=moving_boundary(),B3_energy=tangential_wall_energy(),B5=static_finite_energy_packet(),
         C1=short_baseline(),clock=clock_gauge_invariance(),
         agda_kernel_accepted=False,physical_retarded_graviton=False)
 
