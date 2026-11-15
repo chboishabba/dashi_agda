@@ -36,6 +36,31 @@ def normalized_sources(eps,rgrid):
     assert np.isfinite(a).all()
     return a
 
+def averaged_sources(eps,rgrid,dr,quad_nodes=48):
+    """Weighted radial-cell average of exact compact TT multipole source.
+
+    Integrate the analytic smooth source using the true effective
+    d=3+2*ell radial volume measure. Cells crossing source edge
+    may extend up to dr/2 beyond eps; the photon-dark gate accounts
+    for this discrete-support enlargement.
+    """
+    if quad_nodes<8:raise ValueError('source quadrature too small')
+    x,w=np.polynomial.legendre.leggauss(quad_nodes)
+    a=np.zeros((3,len(rgrid)))
+    for j,r in enumerate(rgrid):
+        lo=max(0.,r-dr/2);hi=min(eps,r+dr/2)
+        if hi<=lo:continue
+        radii=lo+(hi-lo)*(x+1)/2
+        u=radii/eps
+        for q,(ell,fun,origin) in enumerate(profiles()):
+            dimension=3+2*ell
+            integrand=w*(radii**(dimension-1))*fun(u)
+            moment=float(np.sum(integrand)*(hi-lo)/2)
+            cell_full_upper=r+dr/2
+            denominator=(cell_full_upper**dimension-lo**dimension)/dimension
+            a[q,j]=moment/denominator
+    return a
+
 @njit(cache=True)
 def stage(U,P,M,outU,outP,outM,dr,dy,b,v,amplitude,sources,cp,cm):
     nm,ny,nr=U.shape
@@ -84,7 +109,8 @@ def enforce(U,P,M,v,amp,sources):
 def F(t):return math.asinh(t)-math.sqrt(1+t*t)/t
 
 def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
-              pulse=.065,inside_chord=.012,r_outer=4.3,y_outer=3.0,drive=1.):
+              pulse=.065,inside_chord=.012,r_outer=4.3,y_outer=3.0,drive=1.,
+              conservative_source=True):
     if not(2<final_t<=20 and 0<dr<eps/3 and 0<dy<=.03
             and 0<dt<min(dr*.45,dy*.45) and 0<eps<.08
             and r_outer>3 and y_outer>2 and 0<pulse<.12):
@@ -94,11 +120,12 @@ def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
     bulk=math.sqrt(span*span-(1-1/final_t)**2)
     rx=bulk-inside_chord
     gap=rx-eps-math.log(final_t)
-    if gap<=0:raise ValueError('receiver inside brane photon cone')
+    if gap<=dr/2:raise ValueError('receiver inside numerical source half-cell photon cone')
     nr=int(math.ceil(r_outer/dr))+1
     ny=int(math.ceil(y_outer/dy))+1
     rg=np.arange(nr)*dr
-    src=normalized_sources(eps,rg)
+    src=(averaged_sources(eps,rg,dr) if conservative_source
+         else normalized_sources(eps,rg))
     cp=np.zeros((3,nr));cm=np.zeros((3,nr))
     for q in range(3):
         ell=2*q
@@ -164,6 +191,8 @@ def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
         eps=eps,pulse=pulse,receiver_t=final_t,
         nominal_receiver_r=rx,receiver_grid_r=rr,
         source_adjusted_brane_photon_margin=gap,
+        discrete_support_photon_margin=gap-dr/2,
+        conservative_source_cell_average=conservative_source,
         raw_mode_values=components,
         retarded_TT_yy_scaled_by_eps4=yy,
         far_receiver_grid_r=far,far_mode_values=fc,
