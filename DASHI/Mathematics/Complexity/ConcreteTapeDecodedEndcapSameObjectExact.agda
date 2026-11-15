@@ -321,7 +321,7 @@ decodedEndcapsToPhysicalBlocks :
 decodedEndcapsToPhysicalBlocks
     stateCoverage symbolCoverage colsMinusOne
     rowSlot assignment decoded = record
-  { Endcap.firstPhysicalCellIsPlain =
+  { firstPhysicalCellIsPlain =
       subst
         (λ cellBits → Pattern.IsPlainCell
           (Canonical.decodeCell stateCoverage symbolCoverage cellBits))
@@ -329,7 +329,7 @@ decodedEndcapsToPhysicalBlocks
         (firstDecodedBlockPlainFromFront
           stateCoverage symbolCoverage colsMinusOne rowBits
           (front decoded))
-  ; Endcap.lastPhysicalCellIsPlain =
+  ; lastPhysicalCellIsPlain =
       subst
         (λ cellBits → Pattern.IsPlainCell
           (Canonical.decodeCell stateCoverage symbolCoverage cellBits))

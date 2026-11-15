@@ -8,8 +8,8 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Product using (Σ; _,_)
-open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
+open import Data.Product using (Σ; _,_; proj₁; proj₂)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans; sym)
 import Data.Fin.Base as Fin
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
@@ -586,7 +586,7 @@ acceptingEndpointCNF_complete_for_run {machine} {start = start} {finish = finish
           stateCoverage symbolCoverage)
         assignment
       ≡ true
-    endpointComplete
-      rewrite witnessClauseTrue
-            | implicationsTrue =
-      refl
+    endpointComplete =
+      trans
+        (cong₂ CNF.andBool witnessClauseTrue implicationsTrue)
+        refl
