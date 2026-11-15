@@ -1,7 +1,7 @@
 # WebKB-2 × DASHI × situated observers × PNF/world × hyperfabric
 ### Consolidated maximum-cut implementation and proof-obligation dossier
 **Version:** 15 November 2026  
-**Scope:** source-native WebKB ingestion; Agda golden contracts; observer-relative sufficiency; residual-driven graph refinement; SLR/ITIR runtime; Lean-world and LeechTransformer consumers.  
+**Scope:** source-native WebKB ingestion; Agda golden contracts; intersectional/situated observers and consumer factorisation; residual-driven hyperfabric refinement; NORA author-feedback candidate; existing ITIR MCP/Zelph and SLR runtime; Lean-world and LeechTransformer consumers.  
 **Evidence status:** repository source inspection on 15 November 2026, local Python reference tests, unverified WebKB-specific formal gates.
 
 > **Contract:** Reuse the existing theorem owners. Preserve authorship and all source/observer/context/revision/authority axes. A pass on a finite reference model cannot be promoted into Agda kernel acceptance, original WebKB bytes, empirical truth, complete world coverage, or safe learner KV reuse.
@@ -270,3 +270,94 @@ No new PR should be created solely to duplicate existing generic mathematics. If
 - Source inputs supplied by user: `Pasted text.txt`, WebKB-2 × DASHI original 39-contract roadmap (15 November 2026).
 
 **Literature attribution:** Kimberlé Crenshaw, *Mapping the Margins* (1991) grounds the intersectionality framing, not the DASHI formal theorem. Blackwell (1953), Cousot & Cousot (1977) motivate comparison/refinement interpretations; they do not independently prove the WebKB-specific bridges. Duta et al., *Sheaf Hypergraph Networks*, arXiv:2309.17116, motivates typed sheaf-like hyperfabric structures without importing its empirical results.
+## 16. NORA alpha: author-supplied announcement, integration scope and attribution
+
+**Primary communications supplied in the request:** On 12 November 2026 at 04:04, **Éder Porto** announced the independently authored **NORA** ontology-mapping alpha/prototype, asked for feedback, and noted that documentation was not yet available. The links supplied were [NORA on Toolforge](https://nora-wmb.toolforge.org) and [Wikimedia Portugal feedback survey](https://lime.wikimedia.pt/wmbr/index.php/834521). On 14 November 2026 at 20:25–20:26, chb replied with [DASHI PR #1506](https://github.com/chboishabba/dashi_agda/pull/1506) and [SensibLaw PR #514](https://github.com/chboishabba/SensibLaw/pull/514). **Neither the author announcement nor the two PR links establish that Éder has reviewed, endorsed, merged, accepted or implemented the proposal.** The live NORA UI was not independently inspectable in this audit.
+
+The existing [DASHI situated NORA projection](https://github.com/chboishabba/dashi_agda/blob/agent/nora-perspective-consumer-maxcut-20261114/DASHI/Ontology/NORAReviewPerspectiveProjectionExact.agda) defines **proposed local interoperability choices** as follows, without equating them to ontology truth values:
+
+| Locally modeled choice | Type of action or judgment | Explicit non-promotion |
+| --- | --- | --- |
+| **valid** | consumer/context-specific reviewer judgment | neither universal truth nor a formal theorem |
+| **invalid** | consumer/context-specific rejection | not global rejection under every observer |
+| **ambiguous** | unresolved judgment | does not distinguish contradictory support from absent support |
+| **manualSearch** | source acquisition request | not evidence that the search was performed |
+| **modelingGap** | missing model construct / residual | not approval to create or edit Wikidata objects |
+
+**Already implemented finite generic owner:** The declaration **ambiguousHidesDistinctSupport** is a consumer non-descent witness: a single ambiguous projection hides two distinct support positions, **both** versus **neither**. The module also has **ambiguousIsNotSufficientForSupport** and **ambiguousCannotFactorThroughSupport**, explicitly reusing **ConsumerDescentMinimalObserverExact**. No new sixfold, tetralemma, intersectional or factorisation calculus is needed. Fresh latest-head Agda acceptance of the WebKB/NORA junction remains a separate gate.
+
+**Source and governance separation:** NORA authorship and user interface belong to Éder Porto. WebKB owns the original source FL ontology assertions. Stefan Zipproth/acrion is the upstream Zelph author/source owner. Crenshaw's intersectionality and the cited sheaf-hypergraph literature are correctly attributed as influences, not as authors of the DASHI lemmas. DASHI/SLR/ITIR proposals are **independent interoperability work**, not already-shipped NORA features.
+
+The existing [author-facing NORA handoff in SensibLaw #514](https://github.com/chboishabba/SensibLaw/blob/agent/nora-review-source-preserving-maxcut-20261114/docs/handoffs/NORA_Developer_Handoff_ASD_STE100_20261114.md) requests a candidate exchange with source dataset/field/revision, candidate Wikidata Q/P identity, method, relation kind, reviewer/context, review choice/reason, evidence references and provenance. It is a **candidate read-only contract**. It neither authorizes Wikidata editing nor certifies author approval.
+
+### NORA-specific remaining maximum-cut gates
+
+| Gate | Proposed bridge / witness | Exact closure condition |
+| --- | --- | --- |
+| N1 | **webKBToNORAAttributedCandidateExact** | WebKB source/creator/revision and relation semantics survive candidate conversion |
+| N2 | **noraReviewChoiceNotTruthPromotion** | reviewer choice cannot manufacture source truth or Agda proof |
+| N3 | **noraAmbiguousConsumerNonDescentReuse** | existing ambiguity witness imported at the WebKB-specific consumer |
+| N4 | **noraManualSearchToITIRBoundedPlan** | action yields a bounded, pending source-acquisition plan, not a completed fetch |
+| N5 | **noraModelingGapPreservesResidual** | missing modelling axis survives coarse-graining and review |
+| N6 | **noraReviewSourceRevisionReplayExact** | identical source/revision/reviewer/candidate after SLR persist/reload |
+| N7 | **webKBWikidataNoraSameObjectBridgeRequiresReceipt** | lexical identity alone cannot conflate ontology classes, QIDs and review items |
+| N8 | **noraAuthorFeedbackExportContract** | author-consented external feedback/export can be round-tripped; not yet received |
+
+**All N1–N8 are proposed integration targets, not newly kernel-checked declarations.** N3's generic underlying lemma already exists. One decisive experiment holds the coarse UI label “ambiguous” constant while varying support between both and neither; a sufficient observer must retain the discriminating residual.
+
+## 17. ITIR MCP: reuse the tools already registered
+
+Existing [ITIR MCP governance tools](https://github.com/chboishabba/ITIR-suite/blob/main/itir-mcp/src/itir_mcp/governance_tools.py) and [registry](https://github.com/chboishabba/ITIR-suite/blob/main/itir-mcp/src/itir_mcp/registry.py) already expose the following tool names, including the disjointness tool registered by its separate module:
+
+| Tool | Existing scope | New WebKB/NORA seam |
+| --- | --- | --- |
+| **itir.wikidata.review_packet** | read-only statement/evidence review | retain original source and proposed reviewer role |
+| **itir.wikidata.object_review_bundle** | normalized review bundles | do not conflate object, source and candidate |
+| **itir.wikidata.migration_candidate** | migration candidate proposal | no editing authority from the packet |
+| **itir.wikidata.disjointness_report** | ontology disjointness report | conflict evidence must be scoped to source/world |
+| **itir.wikidata.tooling_profile** | governed capability summary | report planning/transport limitations |
+| **itir.zelph.hf_manifest_contract** | normalize HF shard manifest contract | pin immutable original revision and digest |
+| **itir.shard.route_selector** | route logical selectors to source chunks | original QID/name/section identity required |
+| **itir.shard.bounded_graph_slice_plan** | estimate and constrain bounded shard reads | make residual acquisitions explicit and bounded |
+| **itir.shard.payload_probe** | prepare bounded physical data probes | a probe plan is not a successful fetch |
+| **itir.zelph.partial_closure** | conditional evidence from partial graphs | absence cannot be concluded without coverage |
+
+See the [existing ITIR HF/Wikidata MCP locator on PR #14](https://github.com/chboishabba/ITIR-suite/blob/agent/nat-filtered-route-producer/docs/planning/zelph_hf_wikidata_mcp_locator_20261114.md) for exact implementation paths and physical runbook. The tool registrations were verified from repository source; **this round did not execute their remote handlers or a full shard decode**.
+
+**Architecture:** NORA manualSearch or the selected consumer's firstResidual → existing ITIR bounded plan + route selector → physical evidence receipt → read-only review packet → production SLR original-evidence persist/reload → consumer-specific Agda admission. Do not fork a parallel MCP interface, graph engine, review store, or collector.
+
+## 18. Zelph Hugging Face publication, physical route and original-source boundary
+
+[Zelph upstream sharding documentation](https://zelph.org/sharding/) and the [acrion/zelph HF dataset](https://huggingface.co/datasets/acrion/zelph) now publish/document the dataset layout. An older July 2026 audit's missing-metadata observation is historical, **not** a current assertion of unpublished shards.
+
+| Graph | Published manifest path | Limit |
+| --- | --- | --- |
+| Full 2026-03-09 Wikidata | **wikidata-20260309-all/wikidata-20260309-all.hf-v2.json** | graph between entities, not the full original Wikidata statement/qualifier/evidence model |
+| Pruned-small 2026-03-09 | **wikidata-20260309-all-pruned-small/wikidata-20260309-all-pruned-small.hf-v2.json** | reduced coverage; does not justify whole-Wikidata negatives |
+
+The HF locator uses the source prefix **hf://datasets/acrion/zelph/**, with the full example **.load-partial hf://datasets/acrion/zelph/wikidata-20260309-all/wikidata-20260309-all.hf-v2.json left=0**. Native layout includes each artifact's **.hf-v2.json** manifest, **artifact.index.json**, and **shards/left**, **shards/right**, **shards/nameOfNode**, **shards/nodeOfName**.
+
+**A manifest location is not a paid physical shard.** In particular, the example **left=0** does not resolve the selected Nat QID. An exact source-name→node mapping and section-global chunk range must be read from the pinned original index/sidecar. Regenerated graph IDs and guessed shard numbers are forbidden.
+
+### The one original-physical maximum cut still to run
+
+1. Pin the **immutable HF revision**, manifest and route-sidecar byte hashes, source version and full chunk geometry.
+2. Resolve the **five Nat QIDs from the existing Nat tranche** without inventing numeric node IDs or language/direction routes.
+3. Fetch/authenticate bounded original shard objects or HTTP206 ranges, verifying Cap'n Proto packing, offsets and digests against the same original source.
+4. Establish selected adjacency/query-family soundness and completeness **relative to the actually fetched, covered source domain**, preserving unknown results for missing shards.
+5. Feed source-qualified receipts into the **existing** ITIR review packet and SLR persisted/reloaded review contract, not directly into author-approved NORA or Wikidata edits.
+6. Record source SHA, commands, environment, test logs, full exact-head exit receipts in existing ITIR #14, SLR #10, SensibLaw #514 and DASHI #1506.
+
+**Source/code status:** HF manifest locations and ITIR tool names located; prior PR-local synthetic/finite tests may be cited at their *previous accepted heads only*. An immutable current dataset SHA, authentic five-QID physical routes, exact bytes/decoder, real SLR production replay and Éder-approved NORA export are **OPEN**.
+
+**Proposed remaining physical bridge targets:** **zelphHfOriginalManifestPinnedDigest**, **zelphNatFiveQIDOriginalNamePartition**, **zelphNatOriginalShardDecodeSameObject**, **webKBNoraZelphClaimSourceQualifierTransport**, **noraPartialGraphNoClosedWorldAbsence**, **slrNoraWebKBOriginalEvidenceRoundTrip**.
+
+## 19. Consolidated acceptance boundary
+
+**Present:** original A–H WebKB/observer maximum-cut ledger; existing Agda theorem owners for intersectional non-factorability, consumer sufficiency, minimal residual, coarse/fine reopening and typed hyperfabric; NORA finite local proposed five-choice model and author-facing handoff; ITIR registered tool interfaces; current published Zelph manifest locations. The 14/14 standalone finite Python tests were rerun locally on 15 November 2026 and are **not** a source-native FL or Agda/SLR validation receipt.
+
+**Still open:** original WebKB FL/native code and pinned HTML fixture; WebKB-specific Agda kernel refinement; original actual Zelph five-QID shard receipt; SLR production persist/reload; NORA live export and developer review; theorem-world certificate and learner KV tensor-context parity.
+
+**Non-promotion rules:** source assertion ≠ accepted proof; same label ≠ same concept; review choice ≠ ontology truth; incomplete graph ≠ absence; coarse query sufficiency ≠ world completeness; typed local hyperedge ≠ compatible global section; matching semantic label ≠ matching KV tensors; acquiring a residual ≠ authority to edit.
+
+The **single existing PR per repository** remains the rule. No DOCX is part of the required deliverable.
