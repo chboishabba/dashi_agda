@@ -50,6 +50,7 @@ run python python3 scripts/ksw668_ads5_tensor_mode_moving_israel_bc.py
 run python python3 scripts/ksw668_brane_finite_energy_and_sourced_tt_witness.py
 run python python3 scripts/ksw668_brane_original_maxcut_exact.py
 run python python3 scripts/ksw668_ads5_induced_weyl_receiver_partial.py
+run python python3 scripts/ksw668_ads5_mode_energy_scale_guard.py
 run python python3 scripts/test_ksw668_brane_original_maxcut.py
 run python python3 scripts/ksw668_ads5_z2_distributional_israel_coefficient.py
 run python python3 scripts/ksw668_brane_scalar_emitter_receiver_retarded.py
