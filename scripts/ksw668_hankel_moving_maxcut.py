@@ -79,19 +79,70 @@ def moving_boundary_lift():
     T,y,x=s.symbols('T y x',real=True)
     v=s.Function('v')(T);b=s.Function('b')(T)
     g=s.Function('g')(T,x)
-    W=y*s.exp(-y*y)*g/(1-v*v)
+    cut=s.exp(-y*y/(1-y*y))  # for 0<=y<1; extend identically zero for y>=1
+    W=y*cut*g/(1-v*v)
     Bw=(1-v*v)*s.diff(W,y)+v*s.diff(W,T)
     assert s.simplify(Bw.subs(y,0)-g)==0
     L=s.diff(W,T,2)-2*v*s.diff(W,T,y)-(1-v*v)*s.diff(W,y,2)+(
       3/(y+b)-s.diff(v,T))*s.diff(W,y)-s.diff(W,x,2)
     assert s.simplify(L.subs(y,0))!=0
     return dict(exact_oblique_boundary_lift=True,
-      lift='y exp(-y²) G(T,x)/(1-v(T)²)',
+      lift='y chi(y) G(T,x)/(1-v(T)²), chi=exp[-y²/(1-y²)] for 0<=y<1; zero otherwise',
       wall='(1-v²)u_y+v u_T=G',
       no_boundary_source_after_lifting=True,
       homogeneous_PDE_interior_force='-L[u_lift]',
       regular_source_smooth_and_zero_near_initial_required=True,
+      lift_compact_in_y_for_compact_drive=True,
       Green_operator_constructed=False,nonzero_receiver_proved=False)
+
+
+def moving_abstract_green_and_bulk_chord():
+    """Apply Ginoux--Murro theorem 6.8 and proposition 5.1 to original AdS5.
+
+    Mathematical theorem-application certificate, NOT explicit kernel/receiver.
+    """
+    t=s.symbols('t',positive=True)
+    Tp=s.sqrt(1+t*t)/t**2
+    b=1/t
+    v=s.simplify(s.diff(b,t)/Tp)
+    vp=s.simplify(s.diff(v,t)/Tp)
+    assert s.simplify(v+1/s.sqrt(1+t*t))==0
+    assert s.simplify(vp-t**3/(1+t*t)**2)==0
+    assert s.simplify(1-v*v-t*t/(1+t*t))==0
+    import mpmath as mp
+    mp.mp.dps=65
+    F=lambda tt:mp.asinh(tt)-mp.sqrt(1+tt*tt)/tt
+    DT=F(2)-F(1)
+    slope=-mp.mpf('0.5')/DT
+    v1=-1/mp.sqrt(2)
+    v2=-1/mp.sqrt(5)
+    assert v1<slope<v2
+    for tt in [mp.mpf('1.2'),mp.mpf('1.5'),mp.mpf('1.8')]:
+        assert 1+slope*(F(tt)-F(1))>1/tt
+    rg=mp.sqrt(DT**2-mp.mpf('0.25'))
+    photon=mp.log(2)
+    assert rg>photon
+    return dict(original_t_interval='[1,2]',
+        original_bulk_domain='z>=b(T)=1/t(T)',
+        wall_timelike_exact='1-v²=t²/(1+t²)>=1/2',
+        strict_wall_convexity_exact='b_second_T=t³/(1+t²)²>0',
+        global_hyperbolicity_argument='T-slices Cauchy, finite light speed, smooth positive timelike boundary; extend b outside finite strip',
+        geometric_wave_operator='Box_AdS=z²*(-dT²+dz²-3/z dz+Delta_x)',
+        Neumann_admissible_from='Ginoux and Murro arXiv:2007.02544 theorem 6.8, Neumann example, proposition 5.1',
+        source_class='smooth compact TT boundary pi, vanishing near initial T',
+        compact_lift='W=y chi(y) G/(1-v²), chi=exp[-y²/(1-y²)] on 0<=y<1 and 0 beyond',
+        homogeneous_green_operator='G_N_ret by Ginoux-Murro theorem 6.8 and proposition 5.1',
+        inhom_boundary_retarded_operator='H=W+G_N_ret[-Box_AdS W]',
+        abstract_smooth_retarded_operator_established_by_theorem=True,
+        explicit_moving_green_kernel_available=False,
+        same_metric_causal_chord_interiors=True,
+        chord_radial_slope=float(slope),
+        boundary_velocities=[float(v1),float(v2)],
+        bulk_null_horizon_comoving=float(rg),
+        brane_photon_horizon_comoving=float(photon),
+        nonzero_electric_Weyl_from_retarded_source_proved=False,
+        physical_matter_action_proved=False,
+        actual_graviton_observation=False)
 
 def audit():
     return dict(stationary_symbolic=verify_resolvent_symbolic(),
@@ -99,7 +150,8 @@ def audit():
       normalized_KK=normalized_modes(),
       KK_packet=finite_energy_packet(),
       moving_source_lift=moving_boundary_lift(),
-      exact_original_moving_retarded_Green=False,
+      moving_abstract=moving_abstract_green_and_bulk_chord(),
+      explicit_original_moving_retarded_Green_kernel=False,
       gravitational_observation=False)
 
 if __name__=='__main__':
