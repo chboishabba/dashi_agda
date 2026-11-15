@@ -1,0 +1,30 @@
+{
+  "date": "2026-11-15",
+  "scope": "source-independent distributed 1D line and restricted periodic reluctance machine",
+  "test_command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m pytest -q tests/test_v2_maxcut.py tests/test_reluctance_permeance_phase_maxcut.py tests/test_reluctance_phase_symmetry_maxcut.py tests/test_v2_pulse_nonlinear_recovery.py tests/test_v2_coupled_pulse_machine_maxcut.py tests/test_v2_pulse_restricted_global_optimum.py tests/test_v2_retarded_causal_network_maxcut.py tests/test_v2_distributed_causal_line_maxcut.py tests/test_v2_periodic_causal_motor_certificate.py",
+  "local_tests_direct": {
+    "passed": 163,
+    "failed": 0,
+    "elapsed_seconds": 24.35
+  },
+  "new_tests": {
+    "line": 27,
+    "periodic": 33,
+    "total": 60
+  },
+  "preflight_runner": "Full bash wrapper exceeds command execution budget in this runtime; direct full pytest source suite passed. Wrapper not claimed accepted.",
+  "agda_kernel": "NOT RUN: Agda/Nix unavailable",
+  "actual_V2_observation": "NONE",
+  "files_sha256": {
+    "DASHI/Physics/Motors/MadScience369V2DelayQueueEnergyExact.agda": "b5f1290c5b7de9c565ad237ba143686f0b6a0ec16949d42834c82fb2eb29fd26",
+    "Docs/physics/MadScience369V2ExactLemmaRoadmap20261115.md": "54e569b414fae992973410ee38699ae7fe963d4993cd578fb64ece8420c83309",
+    "Docs/physics/MadScience369PulsedEfficiencySmithDonorMaxCut20261115.md": "c5624b48448213336e78ef1869de14677cb3fef1717f84b8ee435cbbba1bf5c7",
+    "scripts/check_madscience369_reluctance_maxcut.sh": "8d51e6bdb8d278b79878a98b582097e60221e60dd1a96950b0a0bdf9e4160979",
+    "scripts/v2_distributed_causal_line_maxcut.py": "7a5b3d09ed6bc9045ae616266d08dd8587c87d33b2271f581f68cb708ef7002b",
+    "scripts/v2_periodic_causal_motor_certificate.py": "7e30c4295efe669455584bce72bf39413da18573001795bfcdc0c7ffc921949b",
+    "tests/test_v2_distributed_causal_line_maxcut.py": "2bb42458159dfcce26a601cdb44bbb9f56bcd0a837f79c16b0fbc8db6dba16bb",
+    "tests/test_v2_periodic_causal_motor_certificate.py": "e6031c0a2b54a22aa3bce3b9e9bbd31230c6edff47d1457f187205753cddb489",
+    "Artifacts/v2_distributed_causal_line_20261115.json": "0476d1ca4dc3f99101b3f10f04911a9641d1136734a50192974b88ca92cf51d3",
+    "Artifacts/v2_periodic_causal_motor_certificate_20261115.json": "59314880773d97eb19ba4ff1541528e6e9e3aad99acc57a1f68e6a821e183548"
+  }
+}

@@ -118,3 +118,88 @@ The runner must include four new Agda targets and new P1/P2 tests. Static comman
 | P3.C4 | `v2ActualCableGeometryMaterialAndProbeDelayReceipt` | PHYSICAL OPEN | Device-specific cable/coil lengths, medium/material response, front-speed/dispersion calibration, probe skew and event timebase |
 
 **Acceptance implications:** future P1.3/P2.1 Pareto ranking must enforce finite signal front, gate/sense latency and source-work accounting whenever distributed delays are relevant; do not use delayed observations to double-count stored work. Retarded propagation by itself neither recovers nor creates energy, and the V2 physical P3/P4 gates remain entirely open. The 16 original strict gates remain unchanged; these are four newly explicit causal subgates.
+ 
+
+## 15 November 2026 — P1.C2/P1.C3 and constructive periodic motor maximum cut (third round)
+
+**Ownership:** This continuation follows the *merged* PR #1511 (merge `512e62f88d91`); current master was checked separately. Changes belong in one dedicated continuation PR, not in closed #1511. Historical @madscience369, separate Don Smith/Filsinger, Slobodian and Holmstrom devices remain distinct. The numerical cable and motor parameters below are illustrative, NEVER source-calibrated.
+
+### P1.C2a: exact passive 1D telegrapher energy and finite reflected-wave network
+
+New `scripts/v2_distributed_causal_line_maxcut.py`, tests and `Artifacts/v2_distributed_causal_line_20261115.json`:
+
+For the 1D, constant-parameter line with per-length L', C', R', G' >= 0,
+
+\[
+\partial_x V=-L'\partial_t I-R'I,\qquad
+\partial_x I=-C'\partial_t V-G'V,
+\quad
+\partial_t\tfrac12(C'V^2+L'I^2)+\partial_x(VI)=-R'I^2-G'V^2.
+\]
+
+The last equation is **symbolically established as a local identity** for smooth solutions satisfying the equations. The characteristic speed in the **nondispersive** ideal line is `v=1/sqrt(L'C')`; `v<=c` is an **additional physical admission**, not an algebraic consequence of positive L',C' alone. Wave variables `W±=V±ZI`, `Z=sqrt(L'/C')`, carry `VI=(W+²-W-²)/(4Z)`. Finite amplitude packets propagate one cell per tick; both load and source may reflect with signed amplitudes `|Γ|<=1`; an attenuation amplitude `a∈[0,1]` introduces dissipation. The explicit step identity is
+
+\[
+ E_{n+1}-E_n=W_{\rm source,n}-W_{\rm load,n}-(1-a^2)E_n.
+\]
+
+The source term is **signed net** injection after reflection, not square of the externally prescribed drive. For the tested rational packets (two reflecting boundaries, loss and interference), this is *exact Fraction arithmetic* and the final residual is exactly zero; the continuum algebra also has a SymPy zero residual. This is a **specific passive 1D line**, not a complete 3D Maxwell/coil-field theorem or a physically measured V2 wiring diagram.
+
+The companion **Agda source** `MadScience369V2DelayQueueEnergyExact.agda` implements an exact typed positive-length queue shift with a proposed inductive conservation proof and no-gain consequence. It is **not kernel-accepted**, because Agda/Nix is not installed. This source does **not** assert the rational reflection/telegrapher continuum proof inside Agda.
+
+### P1.C3a: explicit quasistatic-error and causal controller timing bound
+
+For a **matched** delay line and input with certified Lipschitz constant K and |u|<=M, at flight delay τ,
+
+\[
+ |u(t)-u(t-\tau)|\le K\tau,\qquad
+ |P(t)-P(t-\tau)|\le \frac{2MK\tau}{4Z}.
+\]
+
+A reproducible piecewise-linear sampled-input certificate computes K from exactly the specified interpolant. It is **not** a bound for unknown between-sample switching edges, magnetic near-field radiation, nonlinear mutual coupling or a dispersive V2 line. For a frequency \(\omega\) the transfer multiplier is \(e^{-i\omega\tau}\), but *small* `omega*tau` alone does not license a switching-front quasistatic reduction.
+
+For independent rotor observations, a measured remote rotor angle at `t-τ` may be **locally extrapolated** by ωτ without transmitting new data faster than c. Under constant mechanical speed, an uncompensated sinusoidal current-pattern lag `δ=h ω τ` yields averaged ideal reluctance generation multiplied by `cos δ`; a local predictor from previous measurements cancels that phase exactly **only in the exact constant-speed model**. If angular acceleration obeys `|θ¨|<=a`, predictor phase error obeys `|δ_pred|<=h a τ²/2`. A physical feedback-control stability/edge-PWM error theorem remains **OPEN**.
+
+Illustration (not the V2): 0.5 m at 0.7c gives τ≈2.3826 ns; synthetic 20 kHz angular phase ≈0.0002994 rad, while a 2 ns edge has `τ/rise≈1.19` and cannot be dismissed by the fundamental comparison. Do not insert 142 μs of artificial delay into the motor's coarse ODE step.
+
+### P2.1d/P2.2b: constructed *true* periodic generator state and phase cancellation
+
+New `scripts/v2_periodic_causal_motor_certificate.py`, tests and `Artifacts/v2_periodic_causal_motor_certificate_20261115.json` construct a **different restricted linear, independent-winding** model:
+
+\[
+ L_j(\theta)=L_0+A\cos(h\theta-2\pi j/m),\qquad
+ i_j(\theta)=\frac{I_0+I_1\sin(h\theta-2\pi j/m)}{\sqrt m},
+ \quad I_0\ge I_1>0.
+\]
+
+The **explicit**, continuously bounded drive is `v_j=R i_j+L_j di_j/dt+(dL_j/dt)i_j`; therefore this exact wave shape **solves** the lumped continuous winding equation, rather than being an unattainable desired rectangular pulse. A conservative analytic voltage envelope bounds every time, not just samples. For R>0 and `L0>|A|`, the one-cycle homogeneous Poincaré factor is
+
+\[
+ \rho=\exp\left(-\frac{RT}{\sqrt{L_0^2-A^2}}\right)<1.
+\]
+
+The affine period map therefore has **one globally attractive periodic solution** for the specified periodic voltage; the explicitly constructed waveform is that solution. The storage endpoints agree **identically** after every full period. Average extraction/copper are
+
+\[
+ P_{\rm shaft}=\tfrac12 A h \omega I_0 I_1,\quad
+ P_{\rm Cu}=R(I_0^2+I_1^2/2),\quad P_{\rm ideal,bus}=P_{\rm shaft}-P_{\rm Cu},
+\]
+
+which are independent of m under the fixed aggregate current normalization. For this **particular DC+single-sine family**, torque ripple is `I1/(4√2 I0)` at m=3, and **exactly zero at m=4..12** by phase Fourier cancellation. It is not a claim that any physical >=4 phase machine has zero ripple, nor that the nonlinear coupled PWM model has a proved periodic orbit.
+
+Selected illustrative parameters (`2354 RPM` only is reel-derived; L0=40mH,A=12mH,h=4,R=1Ω,I0=1A,I1=.6A,Vmax=320V) yield ≈3.54975 W mechanical extraction, 1.18 W copper, 2.36975 W *ideal* bus, 0.51274 contraction factor. This is not the original V2 shaft or electrical output. A separate restricted unipolar fixed-RMS theorem shows product `I0 I1` maximized at `I0=I1=√(2S/3)` before voltage constraints; it is not the full physical global optimum. Average voltages are ideal **averaged PWM** targets; semiconductor switching ripple, retarded field coupling and converter losses remain open.
+
+### Revised exact remaining obligations — preserve original 16 strict gates
+
+| Gate | Current narrower closure | Exact remaining high-strength acceptance |
+| --- | --- | --- |
+| `v2DistributedLineMaxwellPassivityAndWavefrontBound` (P1.C2) | Symbolic 1D telegrapher Poynting law, explicit reflection/attenuation packets, rational exact balance | Kernel-accepted spatial PDE/retarded Green solution, realistic dispersion and V2 physical boundary/source coefficients |
+| `v2LumpedQuasistaticErrorAndControllerLatencyBound` (P1.C3) | Rigorous Lipschitz delay bound for specified matched line, rotor predictor bounded | Derive nonlinear multi-coil Maxwell-to-lumped error including edge spectrum, near fields and controller stability |
+| `v2CausalFiniteFlightAndNoEarlyArrival` (P1.C1) | Prior Agda source/24 tests; new finite-delay conserved packet source | Run Agda 2.9 pinned kernel, specify physical units and original wire geometry |
+| `v2JointPhaseCountPulseConverterParetoCertified` (P1.3/P2.1) | Added exact, attractive, same-state **linear** periodic family with phase harmonic cancellation | Saturating mutually coupled nonlinear periodic-orbit/real switching certificate plus full cost/mass matched continuous Pareto |
+| `generalPolyphaseConstrainedGlobalOptimality` (P2.2) | Restricted-q global optimum + constructive periodic current family fixed-RMS algebra | Real physical constraints and a certified general nonconvex optimisation bound |
+| `v2PulseControllerFiniteSlewAndBusVoltageEnvelope` (P1.1) | Exact continuous input voltage envelope for restricted linear periodic class; previous constructed nonlinear ODE numeric | Validated nonlinear coupled ODE flow, source-device switching and thermal envelope with real components |
+| `reluctancePermeancePulseAgda29KernelAcceptance` (P0.4) | Six source modules now targeted in runner | **OPEN** Agda 2.9 pinned typecheck; rectify any errors, exact-head receipt |
+| `originalV2*` (P1.4/P3/P4) | **NONE PHYSICALLY CLOSED** | Original source-selected topology, source shaft power, electromagnetic fields, storage endpoints, metrology, repeatability |
+
+Run `bash scripts/check_madscience369_reluctance_maxcut.sh`, and (on a host with pinned Agda/Nix) `RUN_AGDA=1 bash scripts/check_madscience369_reluctance_maxcut.sh`. Do not infer kernel acceptance from Python. **This closes P1.C2a, P1.C3a, and restricted P2 periodic subgates, not their parent full-source gates.**
