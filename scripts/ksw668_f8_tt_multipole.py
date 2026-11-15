@@ -11,7 +11,7 @@ import json, math, functools
 import numpy as np
 import sympy as sp
 from numba import njit
-from ksw668_f8_fv_source_flux import exact_cell_averages
+from ksw668_f8_fv_source_flux import exact_cell_averages,total_scaled_moments
 
 @functools.lru_cache(maxsize=1)
 def profiles():
@@ -128,6 +128,18 @@ def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
     # Exact moment-primitive cell integration for local compact TT source.
     src=(exact_cell_averages(eps,rg,dr) if conservative_source
          else normalized_sources(eps,rg))
+    source_conservative_moments=None
+    if conservative_source:
+        source_conservative_moments=[]
+        for q,ell in enumerate((0,2,4)):
+            d=3+2*ell
+            volumes=((rg+dr/2)**d-np.maximum(rg-dr/2,0)**d)/d
+            source_conservative_moments.append(float(np.dot(volumes,src[q])/eps**d))
+        targets=total_scaled_moments()
+        if (abs(source_conservative_moments[0])>1e-7
+           or abs(source_conservative_moments[1])>1e-7
+           or abs(source_conservative_moments[2]-targets['l4'])>1e-7):
+            raise ValueError('Original compact TT source cell moments fail conservative exact integration')
     cp=np.zeros((3,nr));cm=np.zeros((3,nr))
     for q in range(3):
         ell=2*q
@@ -250,6 +262,7 @@ def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
         discrete_support_photon_margin=gap-dr/2,
         conservative_source_cell_average=conservative_source,
         source_cell_integration='exact compact TT endpoint primitives' if conservative_source else 'point sampling',
+        normalized_conservative_cell_moments=source_conservative_moments,
         corrected_radial_shell_volume=True,
         radial_polynomial_r2_consistency_exact=True,
         radial_discrete_green_energy_nonpositive=True,
