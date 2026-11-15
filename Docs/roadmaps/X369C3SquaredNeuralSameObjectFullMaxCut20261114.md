@@ -574,3 +574,20 @@ R4: published Monster 3B original action, explicit basis Φ, Griess product/VOA 
 ### Review ownership correction 15 November
 
 This continuation is carried on current-master-derived branch `chatgpt/x369-pnf-world-rollup-20261115`; historical #1442 was merged/closed, and newer source commits on its obsolete feature branch did not automatically become part of an active review. Status is SOURCE WRITTEN for Agda six-variable proof, local finite Python tests for C3/S3 arithmetic, and OPEN for original FLM 3B/Griess and neural source physical weld.
+
+## 15 Nov 2026 host verification and Agda solver AST repair at continuation PR #1510
+
+**Host exact-head receipts (source checked `cecee1641228`):** LeechTransformer PR #4 `b7960d432acc` native 146/146 across 30 suites, portable 53/53, syntax audit `--help` exit 0 and original LeechGPT zero-gate logit parity test passed. Agda PR #1510 `cecee1641228` three finite C3/D4, S3 punctured-27, and n/k hyperfabric scripts each exit 0. These are actual host reported receipt counts; they do not imply original Monster FLM operator, original trained neural task phase or a live SLR TinyStories parser result.
+
+**Polynomial A1 new failure resolved at source, Agda 2.9 rerun OPEN:** host's `solve-∀` diagnostic was a type error between ring-solver syntax `Expr n` and semantic integer `ℤ`. The root was not the corrected integer constant `(+ 2)`; it was the proof-building tactic itself, which reified quantified variables before invoking semantic helper functions. Commit `eb17307c0610a81eb0fc616e1ea1238f727116b1` changes the four raw polynomial proofs to the well-tested `Data.Integer.Solver` module `+-*-Solver`, with explicit symbolic `:_+_`-like operations `_:+_`, `_:-_`, `_:*_`, `con`, `_: =_` (`_:=_`) and `solve` over respectively three and six variables. The semantic `square`, `qTriad`, `originalSelf`, `originalCyclic`, `originalAnticyclic` and arbitrary-length mixed block induction are unchanged. This follows repository `DASHI/Analysis/RiemannWeilPairKernelFrobeniusExact.agda` and other exact finite source proofs. Six-variable factorization was independently expanded to zero residual algebraically; formal kernel acceptance requires a fresh exact changed-head Agda 2.9 run.
+
+**Fresh acceptance commands:**
+
+    bash scripts/check_x369_original_directed_c3_polynomial_candidate.sh
+    python3 scripts/check_monster196884_native_c3_d4_intertwiner.py
+    python3 scripts/check_monster196884_s3_punctured27_fibre.py
+    python3 scripts/check_monster196884_hyperfabric_k_growth.py
+
+If the ring proof fails: preserve Agda exact diagnostic line/column and **do not edit the verified underlying identity** without an independent counterexample. Inspect elaboration (`solve` lambda AST and conversion to user-facing raw lemma), then normalize parenthesisation or split the degree-four six-variable proof. A host compiler message/exit 0, not the existence of source code, closes A1. Original eight finite-torus leaves remain separate.
+
+**Remaining experimental gates unchanged:** live SLR numeric spaCy export on original TinyStories documents, actual frozen Leech checkpoint grammar CE/POS/UAS/LAS, 12-mask seed41/42 F3 causal CE on existing exploratory F3 rows with F5 SHA-only, matched long-running C2/C3 grokking and consumer-bearing PNF/world tests. Host accepted Leech **source contracts**, not any of these physical model/quality results.
