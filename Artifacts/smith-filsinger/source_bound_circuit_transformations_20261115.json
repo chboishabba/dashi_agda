@@ -1,0 +1,93 @@
+{
+  "scope": "Source-selected candidate graphs; connection provenance only. NOT terminal-complete netlists.",
+  "figures": [
+    {
+      "key": "Smith-F10",
+      "source": "User-supplied Kelly/Darrer PDF",
+      "page": 28,
+      "label": "Resonant electromagnetic power system",
+      "pin_complete": false
+    },
+    {
+      "key": "Smith-F11",
+      "source": "User-supplied Kelly/Darrer PDF",
+      "page": 29,
+      "label": "Electrical energy generating system",
+      "pin_complete": false
+    },
+    {
+      "key": "Smith-F40",
+      "source": "User-supplied Kelly/Darrer PDF",
+      "page": 65,
+      "label": "Later editor-provided neon-tube driver circuit",
+      "pin_complete": false
+    },
+    {
+      "key": "Filsinger-Earth",
+      "source": "https://www.instagram.com/reel/Dfi1D7CPzyM/",
+      "parts": [
+        "active driver",
+        "three blue capacitors (user-observed)",
+        "white capacitors",
+        "green rectifier candidates",
+        "Earth electrodes",
+        "megohm shunts",
+        "meter COM"
+      ],
+      "edges": [
+        {
+          "from": "white capacitor hot",
+          "to": "Earth-negative",
+          "evidence": "narrated in earlier reel; not traced at pin level"
+        }
+      ],
+      "pin_complete": false
+    },
+    {
+      "key": "Filsinger-Portable",
+      "source": "later Filsinger narration",
+      "parts": [
+        "common midpoint",
+        "proposed 1:1.618 plate",
+        "split capacitance",
+        "driver"
+      ],
+      "edges": [
+        {
+          "from": "proposed plate",
+          "to": "common midpoint",
+          "evidence": "speaker's proposed alteration, not measured"
+        }
+      ],
+      "pin_complete": false
+    }
+  ],
+  "sourceTransformations": [
+    {
+      "from": "Smith-F10",
+      "to": "Filsinger-Earth",
+      "status": "functional ancestry only",
+      "provenElectricalEquivalence": false
+    },
+    {
+      "from": "Filsinger-Earth",
+      "to": "Filsinger-Portable",
+      "status": "narrated replacement of Earth connections with midpoint/antenna",
+      "provenElectricalEquivalence": false
+    }
+  ],
+  "specificOpenPins": [
+    "transformer midpoint",
+    "spark-gap contacts and trigger",
+    "green diode each polarity",
+    "white shunt each endpoint",
+    "three blue capacitor individual terminals",
+    "meter COM and ground",
+    "actual plate geometry/material"
+  ],
+  "ownerPaths": [
+    "DASHI/Physics/Motors/Circuit36927ComponentGraphExact.agda",
+    "DASHI/Physics/Motors/DonSmithFilsingerClaimBidiExact.agda",
+    "DASHI/Promotion/MaxwellExteriorCalculusAdapter.agda"
+  ]
+}
