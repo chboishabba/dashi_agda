@@ -77,6 +77,8 @@ pycheck "$AGDA_ROOT" check_ym_r445_weighted_exterior_influence.py
 pycheck "$AGDA_ROOT" check_ym_r445_interacting_transfer_contraction_20261114.py
 pycheck "$AGDA_ROOT" check_karp21_literal_gamma_allwords_20261114.py
 pycheck "$AGDA_ROOT" check_ns_r853_quadratic_lie_derivative_20261114.py
+pycheck "$AGDA_ROOT" check_ns_r823_initial_rate_continuity_cut_20261115.py
+echo "NS_R823_INITIAL_CONTINUITY_CUT_PASS: exact scalar only; real R408 same-source weld OPEN"
 # R734 physical no-go and R856 optimal scalar source: independent exact
 # SymPy/Fraction math only; these do NOT validate the PDE continuation.
 pycheck "$AGDA_ROOT" check_clay_source_r855_wilson_locality_20261115.py
