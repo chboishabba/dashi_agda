@@ -76,23 +76,28 @@
     "interpretation": "genuine compact 3D TT test source constructed; numerical UV/cutoff/convergence fail"
   },
   "acceptance": {
-    "source_equivalent_unit_tests": "8 moving + 5 original ray + 6 null convex + 4 SMS + 6 WKB = 29/29 PASS",
+    "source_equivalent_unit_tests": "63/63 source-equivalent local PASS",
     "full_3d_B4_numerical_convergence": false,
     "external_analytical_Green_operator_previously_claimed_by_external_theorem": true,
     "tensor_matter_generating_action": false,
     "projected_5d_Weyl_not_calculated": true,
     "physical_graviton_observed": false,
     "Agda_pinned_kernel": false,
-    "exact_branch_head_execution_in_this_environment": false
+    "exact_branch_head_execution_in_this_environment": false,
+    "exact_GitHub_branch_runner_run": false,
+    "external_FIO_theorem_application_proof_candidate": true,
+    "independent_referee_review_completed": false
   },
   "next_exact_lemmas": [
-    "ads5OriginalT2NeumannToWeylEllipticFIOComposition",
-    "ads5OriginalT2ActualCompactTTNonzeroEarlyBothWeyl",
+    "ads5OriginalT2MicrolocalFIOCompositionIndependentProofAcceptance",
+    "ads5OriginalT2ActualCompactTTBothWeylIndependentProofAcceptance",
     "ads5MovingTTCompact3DSpectralCutoffConvergence",
     "ads5CompactTTMatterActionRealization",
     "ads5MovingFullCoupledStability",
+    "cylinderDoubledDiscPerturbedBulkAndRetardedGreen",
     "ads5PhysicalScaleSourceDetectorComparison",
     "braneBulkOriginalAnalyticAgdaKernel",
+    "ads5OriginalSourceToObservationSemanticWeld",
     "physicalGravitonObservation"
   ],
   "original_t2_microlocal_preflight": {
@@ -148,5 +153,81 @@
     "projected5D_Weyl_leading_coeff_times_lambda_unit_TT_source": 0.06878476060720297,
     "global_Neumann_FIO_composition_and_remainder_proved": false,
     "analytic_existential_actual_smooth_source_Early_Weyl_proved": false
+  },
+  "neumann_reuse_maxcut_20261115": {
+    "DASHI_existing_owners": [
+      "DASHI/Physics/YangMills/BalabanFiniteNeumannParametrix.agda",
+      "DASHI/Physics/YangMills/BalabanWeightedNeumannRemainder.agda",
+      "DASHI/Physics/YangMills/BalabanGeometricNeumannClosure.agda",
+      "DASHI/Physics/Gravity/KSW668AdS5LinearIsraelTTRationalSliceExact.agda"
+    ],
+    "new_Agda_owners": [
+      "DASHI/Physics/Gravity/KSW668AdS5FrozenNeumannSeriesReuseExact.agda",
+      "DASHI/Physics/Gravity/KSW668AdS5MovingNeumannCharacteristicRationalExact.agda"
+    ],
+    "actual_moving_neumann": {
+      "boundary": "(1+v)qplus+(v-1)qminus=2G",
+      "incoming": "qminus=beta*qplus-2G/(1-v)",
+      "beta": "(sqrt(1+t²)-1)/(sqrt(1+t²)+1)",
+      "uniform_beta_upper": 0.3819660112501051,
+      "rational_t4over3_beta": "1/4",
+      "rational_sample_qminus": "-7/96",
+      "full_Green_from_reflection_alone": false
+    },
+    "frozen_stationary_symbol": {
+      "R": "-v*s*Z_b, Z_b=-K2(qb)/(qK1(qb)), q²=s²+|k|²",
+      "uniform_high_real_s_domain": "t in [1,2], real s>=16, all |k|>=0",
+      "rho_upper": 0.8838834764831843,
+      "depth": 128,
+      "residual_upper": 1.3758210268297243e-7,
+      "low_frequency_counterexample": {
+        "t": 1,
+        "s": 0.05,
+        "k": 0,
+        "abs_R": 28.39487556797451
+      },
+      "full_time_dependent_inverse_proved": false
+    },
+    "causal_two_patch": {
+      "DN": "[[De,0],[F_re,Dr]]",
+      "residual": "[[0,0],[-F_re Ee,0]]",
+      "residual_squared_zero": true,
+      "finite_Neumann_depth": 2,
+      "exact_noncommutative_inverse": "[[Ee,0],[-Er F_re Ee,Er]]",
+      "offdiag_ND": "-Er F_re Ee",
+      "scalar_or_commutative_assumptions_used": false,
+      "noncommutative_algebra_tested": true,
+      "physical_5D_FIO_global_identification_acceptance": false
+    },
+    "forced_moving_energy": {
+      "energy_identity": "E_X-(1+v)E0=(-v)/2 integral z^-3[(H_T-H_z)²+|grad_x H|²]",
+      "compact_lift": "W=y chi(y) G/(1-v²)",
+      "source_force": "f=-L_y W",
+      "gamma": 18.89949493661166,
+      "retarded_bound": "E_U(T)<=1/2 integral_T0^T exp(gamma*(T-S))||f(S)||²_(z^-3)dS",
+      "quantitative_smooth_IBVP_finite_energy": true
+    },
+    "analytic_external_FIO_theorem": {
+      "reference": "Stefanov and Yang 2018 DOI 10.2140/apde.2018.11.1381 Thm 3.1/4.2",
+      "dimension": "1+4 included in 1+n n>=2",
+      "first_return_geometry_non_glancing": true,
+      "TT_source_compact_conserved": true,
+      "original_t2_receiver_photon_dark": true,
+      "principal_ND_order": -1,
+      "principal_both_Weyl_nonzero": true,
+      "smooth_real_high_frequency_source_existential_proof_candidate_written": true,
+      "document": "Docs/physics/KSW668F8OriginalT2NeumannFIOTheoremApplication20261115.md",
+      "independent_peer_review_completed": false,
+      "Agda_analytic_kernel_completed": false,
+      "numerical_3D_Weyl_convergence_completed": false,
+      "microscopic_matter_action_completed": false
+    },
+    "verification": {
+      "source_equivalent_local_math_unittests": "63/63 PASS (29 earlier + 9 + 8 + 10 + 7)",
+      "exact_PR_head_exec": false,
+      "agda2_9_kernel": false,
+      "full_3D_numerical_B4_convergence": false,
+      "physical_observation": false
+    }
   }
 }
