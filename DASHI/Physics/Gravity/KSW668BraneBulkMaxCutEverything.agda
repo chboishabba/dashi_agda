@@ -32,3 +32,7 @@ import DASHI.Physics.Gravity.KSW668AdS5LinearIsraelTTRationalSliceExact
 -- 'Neumann' are not conflated; the physical 5D FIO is still OPEN.
 import DASHI.Physics.Gravity.KSW668AdS5MovingNeumannCharacteristicRationalExact
 import DASHI.Physics.Gravity.KSW668AdS5FrozenNeumannSeriesReuseExact
+
+-- UV/IR cutoff reuse: exact Balaban finite dyadic tail conditional on
+-- original physical adjacent-cutoff estimate; no false F8 convergence.
+import DASHI.Physics.Gravity.KSW668AdS5UVIRDyadicTailReuseExact
