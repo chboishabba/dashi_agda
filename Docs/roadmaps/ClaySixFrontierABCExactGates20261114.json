@@ -3039,7 +3039,8 @@
           "same_own_Cook_formula_structural_resource_compiler_constructed": false,
           "positive_F2_lower_bound_result": false,
           "F2_closed": false
-        }
+        },
+        "closed": false
       },
       {
         "id": "F3",
@@ -3057,7 +3058,8 @@
           "universal_polynomial_SAT_decider_failure_constructed": false,
           "any_original_PNotEqualsNP_endpoint_proved": false,
           "F3_closed": false
-        }
+        },
+        "closed": false
       }
     ],
     "symbol_index": [
