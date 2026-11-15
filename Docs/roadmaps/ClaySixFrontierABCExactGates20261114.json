@@ -5699,6 +5699,725 @@
         "F2",
         "F3"
       ]
+    },
+    "wider_six_clay_scope_20261115": {
+      "scope_correction": "The 15 A-F gates are only the original NS/YM/Karp/PNP sub-roadmap; not all six Clay Millennium problems",
+      "parent": "clay_six_millennium_endpoints_20261115",
+      "canonical_doc": "Docs/roadmaps/ClaySixMillenniumEndpointsExactRoadmap20261115.md",
+      "historical_legacy_gate_count_unchanged": 15,
+      "legacy_decisions_settled_unchanged": 6,
+      "legacy_active_gate_count_unchanged": 9,
+      "missing_three_problems_now_tracked": [
+        "RH",
+        "BSD",
+        "HODGE"
+      ],
+      "newly_added_RH_BSD_HODGE_gates": 13,
+      "expanded_total_gates": 28,
+      "expanded_active_gates": 22,
+      "original_six_clay_endpoints_closed": 0,
+      "actual_kernel_acceptance_added": false
+    }
+  },
+  "clay_six_millennium_endpoints_20261115": {
+    "schema": "clay-six-millennium-explicit-endpoints-plus-original-fifteen-gates-v1",
+    "as_of": "2026-11-15",
+    "source_of_truth_doc": "Docs/roadmaps/ClaySixMillenniumEndpointsExactRoadmap20261115.md",
+    "legacy_detailed_doc": "Docs/roadmaps/ClayRecoveredProducersW2NoGoR856SourceMaxCut20261115.md",
+    "physical_execution_doc": "Docs/roadmaps/ClaySixFrontierPhysicalMaxCutExecution20261114.md",
+    "original_15_gate_object": "six_endpoint_exact_symbol_audit_20261115",
+    "priority": "ALL_SIX_CURRENTLY_UNSOLVED_CLAY_MILLENNIUM_PROBLEMS_NOT_SIX_A_TO_F_RESEARCH_FRONTIERS",
+    "official_reference": "https://www.claymath.org/Millennium%20Problems/",
+    "historical_Poincare_status": "SOLVED_SEVENTH_OUT_OF_SCOPE",
+    "canonical_repositories": [
+      {
+        "repo": "chboishabba/dashi_agda",
+        "branch": "chatgpt/clay-20261112-four-frontier-fail-closed",
+        "verified_head_at_prior_round": "a9190686e2da79f33728499fd52a7ab423d9b2f9"
+      },
+      {
+        "repo": "chboishabba/dashi_lean4",
+        "branch": "chatgpt/clay-continuous-fifth-sign-20261112",
+        "observed_PR_108_head": "c0dcb1f8f624e427813c7b9f7b5925c04c2fed76"
+      }
+    ],
+    "clay_endpoint_count": 6,
+    "clay_endpoint_theorems_proved_count": 0,
+    "legacy_gate_total": 15,
+    "legacy_source_or_math_decisions_settled": 6,
+    "legacy_active_gates": 9,
+    "legacy_completed_ids": [
+      "P0",
+      "B1",
+      "C1",
+      "C2",
+      "E2",
+      "F1"
+    ],
+    "legacy_active_ids": [
+      "A1",
+      "A2",
+      "B2",
+      "D1",
+      "D2",
+      "E0",
+      "E1",
+      "F2",
+      "F3"
+    ],
+    "expanded_portfolio_gate_total": 28,
+    "expanded_portfolio_decisions_settled": 6,
+    "expanded_portfolio_active_gates": 22,
+    "expanded_portfolio_scope_warning": "6/28 is count of heterogeneous source/mathematical decisions and open research obligations, not percent of mathematical endpoint completion. One settled B1 gate is refutation of a universal proposed auxiliary.",
+    "new_RH_BSD_HODGE_gate_ids": [
+      "R1",
+      "R2",
+      "R3",
+      "R4",
+      "S1",
+      "S2",
+      "S3",
+      "S4",
+      "S5",
+      "S6",
+      "H1",
+      "H2",
+      "H3"
+    ],
+    "new_gate_count": 13,
+    "all_gate_ids": [
+      "P0",
+      "A1",
+      "A2",
+      "B1",
+      "B2",
+      "C1",
+      "C2",
+      "D1",
+      "D2",
+      "E0",
+      "E1",
+      "E2",
+      "F1",
+      "F2",
+      "F3",
+      "R1",
+      "R2",
+      "R3",
+      "R4",
+      "S1",
+      "S2",
+      "S3",
+      "S4",
+      "S5",
+      "S6",
+      "H1",
+      "H2",
+      "H3"
+    ],
+    "six_clay_problems": [
+      {
+        "id": "NS",
+        "official": "Navier-Stokes existence and smoothness / admissible breakdown in 3D",
+        "terminal_proved": false,
+        "original_goal": "Official Fefferman 3D incompressible Navier–Stokes all-admissible-data global smooth solution or valid breakdown alternative",
+        "legacy_gates": [
+          "A1",
+          "A2",
+          "B1",
+          "B2",
+          "C1",
+          "C2"
+        ],
+        "new_gates": [],
+        "current_roadmap_maxcut": "A1→A2 R3 kernel/physical majorants or repaired B2 with W1/continuum; C1/C2 witness invalidates B1 unrestricted",
+        "terminal_gate_ids": [
+          "A2",
+          "B2"
+        ],
+        "source_owners": [
+          "NSClayFacingATwoPhysicalSeamCompilerExact",
+          "NSWholeSpacePhysicalMajorantDominationProducerExact",
+          "NSTriadKNR650PhysicalReserveFeasibilityRound825Exact"
+        ]
+      },
+      {
+        "id": "YM",
+        "official": "Yang-Mills existence and mass gap",
+        "terminal_proved": false,
+        "original_goal": "Nontrivial 4D quantum Yang–Mills for every compact simple group, positive mass gap of same OS reconstructed H",
+        "legacy_gates": [
+          "D1",
+          "D2"
+        ],
+        "new_gates": [],
+        "current_roadmap_maxcut": "Original R320 selected marked H1 OR original R445 interacting TV+summability → same E1 OS Hilbert/Hamiltonian continuum gap; group coverage",
+        "terminal_gate_ids": [
+          "D2"
+        ],
+        "source_owners": [
+          "YMClayR445OneLocalTVThreeMomentsSourceWeldExact",
+          "YMClayDirectSourceOSMassGapFrontierExact"
+        ]
+      },
+      {
+        "id": "RH",
+        "official": "Riemann Hypothesis",
+        "terminal_proved": false,
+        "original_goal": "Every nontrivial zero of original analytically continued Riemann zeta has real part 1/2",
+        "legacy_gates": [],
+        "new_gates": [
+          "R1",
+          "R2",
+          "R3",
+          "R4"
+        ],
+        "current_roadmap_maxcut": "R1 genuine completed zeta/Weil equality + (R2 signed selected A2 OR R3 signed fifth Route B) → R4 all-zero exclusion",
+        "terminal_gate_ids": [
+          "R4"
+        ],
+        "source_owners": [
+          "DASHI/Analysis/RiemannZetaProgramBoundary.agda",
+          "DASHI/Analysis/RiemannQuarticSignedPoleCompensationExact.agda",
+          "Synthesis/RiemannSelectedSignedFifthCorrelationGapAudit.lean"
+        ]
+      },
+      {
+        "id": "BSD",
+        "official": "Birch and Swinnerton-Dyer Conjecture",
+        "terminal_proved": false,
+        "original_goal": "All rational elliptic curves analytic order at s=1 equals Mordell–Weil rank; separately stronger universal leading-coefficient formula",
+        "selected_example": "y²=x³−x conductor 32 CM by Z[i] is laboratory only",
+        "legacy_gates": [],
+        "new_gates": [
+          "S1",
+          "S2",
+          "S3",
+          "S4",
+          "S5",
+          "S6"
+        ],
+        "current_roadmap_maxcut": "S1 K1 actual Q2/real cohomological Kummer → S2 Sha exactness → S3 rank; S4 true level32 Mellin L>0; S5 selected strong BSD; S6 universal all curves independent",
+        "terminal_gate_ids": [
+          "S6"
+        ],
+        "source_owners": [
+          "DASHI/Mathematics/Arithmetic/BirchSwinnertonDyerBoundary.agda",
+          "DASHI/Mathematics/Arithmetic/EllipticOriginalSelmerCohomologyExhaustionExact.agda",
+          "Synthesis/MillenniumBSDMathlibLFunctionWeld.lean"
+        ]
+      },
+      {
+        "id": "HODGE",
+        "official": "Hodge Conjecture",
+        "terminal_proved": false,
+        "original_goal": "Every rational Hodge (p,p) class on arbitrary smooth projective complex X is class of a rational algebraic cycle",
+        "legacy_gates": [],
+        "new_gates": [
+          "H1",
+          "H2",
+          "H3"
+        ],
+        "current_roadmap_maxcut": "H1 actual rational singular/deRham Hodge intersection + algebraic-cycle class; H2 physical P1 weld special case; H3 universal rational-cycle representative",
+        "terminal_gate_ids": [
+          "H3"
+        ],
+        "source_owners": [
+          "DASHI/Mathematics/AlgebraicGeometry/HodgePrizeBoundaryExact.agda",
+          "DASHI/Mathematics/AlgebraicGeometry/HodgeAlgebraicCycleClayCoreExact.agda"
+        ]
+      },
+      {
+        "id": "PNP",
+        "official": "P versus NP",
+        "terminal_proved": false,
+        "original_goal": "Prove standard P ≠ NP by universal polynomial SAT decision failure or other noncircular universal lower bound",
+        "legacy_gates": [
+          "E0",
+          "E1",
+          "E2",
+          "F1",
+          "F2",
+          "F3"
+        ],
+        "new_gates": [],
+        "current_roadmap_maxcut": "E0/E1 original Karp implementation validation, E2 NP, F1 genuine P; F2 noncircular lower bound → F3 ∀D∈P∃φ failure and SATNotInP",
+        "terminal_gate_ids": [
+          "F3"
+        ],
+        "source_owners": [
+          "DASHI/Mathematics/Complexity/PNotEqualsNPDirectSATLowerBoundExact.agda",
+          "DASHI/Mathematics/Complexity/PNotEqualsNPStandardMachineMaxCutClosureExact.agda"
+        ]
+      }
+    ],
+    "newly_added_exact_gates": [
+      {
+        "id": "R1",
+        "clay_problem_id": "RH",
+        "title": "Original completed zeta/Weil analytic carrier and explicit formula",
+        "exact_target_terms": [
+          "RiemannZetaProgram",
+          "RiemannHypothesisWitness",
+          "RH.G2 completed prime-power/gamma/pole explicit formula and zero-shell"
+        ],
+        "original_owner_paths": [
+          "DASHI/Analysis/RiemannZetaProgramBoundary.agda",
+          "DASHI/Analysis/RiemannQuarticSignedPoleCompensationExact.agda"
+        ],
+        "status": "OPEN",
+        "settled": false,
+        "classification": "ORIGINAL_UNPAID_ANALYTIC_OR_GEOMETRIC_PRODUCER",
+        "mathematical_deliverable": "Same original ζ(s), analytic continuation and functional equation, exact prime/gamma/pole explicit formula on genuine test space and zero exhaustion",
+        "acceptance_criteria": "Actual zeta and completed Weil zero/prime carrier equality and justified exchanges; no synthetic zero set",
+        "depends_on": [
+          "P0"
+        ],
+        "native_kernel_acceptance": false,
+        "original_endpoint_proved": false,
+        "sources_inspected_at_branch": true
+      },
+      {
+        "id": "R2",
+        "clay_problem_id": "RH",
+        "title": "Original selected W A2 signed exact-zero compensation",
+        "exact_target_terms": [
+          "QuarticFourSignedPolePair.fourthLipschitz",
+          "selectedOriginalWitnessFourthLipschitzBound",
+          "selectedOriginalHorizontalFarCurvatureBound",
+          "originalA2FarExactZeroShellBound",
+          "originalSelectedA2StrictSignedCompensation",
+          "eventualCompensationGapExists"
+        ],
+        "original_owner_paths": [
+          "DASHI/Analysis/RiemannQuarticSignedPoleCompensationExact.agda",
+          "Synthesis/RiemannA2ActualSelectedIntervalDecisionExact.lean",
+          "Synthesis/RiemannProjectiveQuarticFourWindowSignedPoleQuantitativeBand.lean"
+        ],
+        "status": "OPEN",
+        "settled": false,
+        "classification": "ORIGINAL_UNPAID_ANALYTIC_OR_GEOMETRIC_PRODUCER",
+        "mathematical_deliverable": "Prove same selected zero carrier strict local-debt + signed FarExact bound, sharp selected K or legitimate signed eighth remainder, actual compensation and mu gain",
+        "acceptance_criteria": "True all-selected-zero and canonical cofinal inequalities, not just interval compiler or alternate bump; correct exact FarExact sign",
+        "depends_on": [
+          "R1"
+        ],
+        "native_kernel_acceptance": false,
+        "original_endpoint_proved": false,
+        "sources_inspected_at_branch": true
+      },
+      {
+        "id": "R3",
+        "clay_problem_id": "RH",
+        "title": "Original Route B signed fifth-correlation and terminal convergence",
+        "exact_target_terms": [
+          "signedFifthCorrelationGapAt",
+          "signedFifthPhysicalCapInteriorAt",
+          "signedFifthAnalyticInput_of_three_producers"
+        ],
+        "original_owner_paths": [
+          "Synthesis/RiemannSelectedSignedFifthCorrelationGapAudit.lean",
+          "Docs/roadmaps/BishopEtaRHA2G3MaximumCutRound20261114.md"
+        ],
+        "status": "OPEN",
+        "settled": false,
+        "classification": "ORIGINAL_UNPAID_ANALYTIC_OR_GEOMETRIC_PRODUCER",
+        "mathematical_deliverable": "Same selected W/rho/EV eventual signed physical cap gap ≥0, physical upper-boundary decay and outer-terminal cofinal convergence",
+        "acceptance_criteria": "All three original analytic producers on true zeta zero carrier; no surrogate heat-spectrum sign",
+        "depends_on": [
+          "R1"
+        ],
+        "native_kernel_acceptance": false,
+        "original_endpoint_proved": false,
+        "sources_inspected_at_branch": true
+      },
+      {
+        "id": "R4",
+        "clay_problem_id": "RH",
+        "title": "Universal all nontrivial zeros on critical line",
+        "exact_target_terms": [
+          "RiemannHypothesisWitness.everyNontrivialZeroOnCriticalLine",
+          "g3StrictTargetBound"
+        ],
+        "original_owner_paths": [
+          "DASHI/Analysis/RiemannZetaProgramBoundary.agda",
+          "DASHI/Analysis/RiemannQuarticSignedPoleCompensationExact.agda"
+        ],
+        "status": "OPEN",
+        "settled": false,
+        "classification": "TERMINAL_CLAY_UNIVERSAL",
+        "mathematical_deliverable": "For every nontrivial original ζ zero ρ, Re ρ=1/2, from completed source and either paid A2 or Route B",
+        "acceptance_criteria": "All-zero quantifier and original analytic zeta carrier, actual off-line zero exclusion, no assumed Weil positivity",
+        "depends_on": [
+          "R1",
+          "R2_OR_R3"
+        ],
+        "native_kernel_acceptance": false,
+        "original_endpoint_proved": false,
+        "sources_inspected_at_branch": true
+      },
+      {
+        "id": "S1",
+        "clay_problem_id": "BSD",
+        "title": "Selected E=y²=x³−x original global/local 2-Kummer H1",
+        "exact_target_terms": [
+          "OriginalSelmerCohomologyRealization",
+          "RationalPlaceTwoDescentData",
+          "originalTorsionAllLocalKummerConditions",
+          "genuineSUnitSupport",
+          "cmE_Q2_localPoint_39"
+        ],
+        "original_owner_paths": [
+          "DASHI/Mathematics/Arithmetic/EllipticOriginalSelmerCohomologyExhaustionExact.agda",
+          "DASHI/Mathematics/Arithmetic/EllipticRationalPlaceSelmerExact.agda",
+          "Synthesis/MillenniumBSDCMQ2EightLocalPointWitnessesExact.lean"
+        ],
+        "status": "OPEN",
+        "settled": false,
+        "classification": "ORIGINAL_UNPAID_ANALYTIC_OR_GEOMETRIC_PRODUCER",
+        "mathematical_deliverable": "Actual Q₂/real/odd place E(K) Kummer image and H¹(E[2]) naturality, S={2,∞} faithful support, total local 8-class exhaustion",
+        "acceptance_criteria": "Same original cubic, actual H¹/Galois/local realization; eight witnessed Q₂ classes alone not exhaustive",
+        "depends_on": [
+          "P0"
+        ],
+        "native_kernel_acceptance": false,
+        "original_endpoint_proved": false,
+        "sources_inspected_at_branch": true
+      },
+      {
+        "id": "S2",
+        "clay_problem_id": "BSD",
+        "title": "Classical Sel²/E(Q)/2/Sha[2] connecting exactness",
+        "exact_target_terms": [
+          "MordellWeilShaTwoExactness",
+          "SelmerShaData"
+        ],
+        "original_owner_paths": [
+          "DASHI/Mathematics/Arithmetic/EllipticTwoDescentRoadExact.agda",
+          "DASHI/Mathematics/Arithmetic/BirchSwinnertonDyerBoundary.agda"
+        ],
+        "status": "OPEN",
+        "settled": false,
+        "classification": "ORIGINAL_UNPAID_ANALYTIC_OR_GEOMETRIC_PRODUCER",
+        "mathematical_deliverable": "0→E(Q)/2E(Q)→Sel²(E/Q)→Sha(E/Q)[2]→0, actual E[2] Galois and E(Qbar) local Kummer LES",
+        "acceptance_criteria": "Actual cohomological connecting morphism and classical Sha, not a defined abstract cokernel",
+        "depends_on": [
+          "S1"
+        ],
+        "native_kernel_acceptance": false,
+        "original_endpoint_proved": false,
+        "sources_inspected_at_branch": true
+      },
+      {
+        "id": "S3",
+        "clay_problem_id": "BSD",
+        "title": "Selected actual Selmer exhaustion and Mordell–Weil rank zero",
+        "exact_target_terms": [
+          "originalSelmerGlobalH1ExhaustedByActualTorsion",
+          "cmOriginalMordellWeil_rank_zero_fromStoll",
+          "cmSelectedOriginalMordellWeil_ZRank_zero"
+        ],
+        "original_owner_paths": [
+          "DASHI/Mathematics/Arithmetic/EllipticOriginalSelmerCohomologyExhaustionExact.agda",
+          "Integration/MillenniumBSDStollMordellWeilAdapter.lean"
+        ],
+        "status": "OPEN",
+        "settled": false,
+        "classification": "ORIGINAL_UNPAID_ANALYTIC_OR_GEOMETRIC_PRODUCER",
+        "mathematical_deliverable": "Actual four torsion Selmer classes exhaust all original H¹ and real finite generation gives rank E(Q)=0",
+        "acceptance_criteria": "All-place selected cohomology and typed actual elliptic group; Stoll donor version isolated/rechecked",
+        "depends_on": [
+          "S1",
+          "S2"
+        ],
+        "native_kernel_acceptance": false,
+        "original_endpoint_proved": false,
+        "sources_inspected_at_branch": true
+      },
+      {
+        "id": "S4",
+        "clay_problem_id": "BSD",
+        "title": "Selected level-32 genuine newform + Mellin L(E,1)>0",
+        "exact_target_terms": [
+          "cmLevel32EtaAnalyticExpression_ne_zero",
+          "cmFormalLFunction",
+          "cmAllNCoefficient",
+          "level32FrickeFromTwoEtaInversions",
+          "mellinCentralValueIsTwiceTail"
+        ],
+        "original_owner_paths": [
+          "DASHI/Mathematics/Automorphic/EllipticCMLevel32EtaNewmanArithmeticExact.agda",
+          "DASHI/Mathematics/Automorphic/EllipticCMLevel32FrickeMellinExact.agda",
+          "Synthesis/MillenniumBSDMathlibLFunctionWeld.lean",
+          "Synthesis/MillenniumBSDCMLevel32ActualEtaInfiniteNonzeroExact.lean"
+        ],
+        "status": "OPEN",
+        "settled": false,
+        "classification": "ORIGINAL_UNPAID_ANALYTIC_OR_GEOMETRIC_PRODUCER",
+        "mathematical_deliverable": "Original E L equals η(4z)^2η(8z)^2 normalized newform, Fricke/Mellin actual equality and strictly positive central integral",
+        "acceptance_criteria": "Same analytic L carrier and all-n equality, cusp modularity, positive infinite product and integral convergence, not finite q checks",
+        "depends_on": [
+          "P0"
+        ],
+        "native_kernel_acceptance": false,
+        "original_endpoint_proved": false,
+        "sources_inspected_at_branch": true
+      },
+      {
+        "id": "S5",
+        "clay_problem_id": "BSD",
+        "title": "Selected strong BSD full leading coefficient and odd-primary Sha",
+        "exact_target_terms": [
+          "BSDLeadingCoefficientConjecture",
+          "BSDScalarData",
+          "Sha(E/Q)[p^∞] odd-primary"
+        ],
+        "original_owner_paths": [
+          "DASHI/Mathematics/Arithmetic/BirchSwinnertonDyerBoundary.agda"
+        ],
+        "status": "OPEN",
+        "settled": false,
+        "classification": "ORIGINAL_UNPAID_ANALYTIC_OR_GEOMETRIC_PRODUCER",
+        "mathematical_deliverable": "Actual all-prime Sha cardinality, selected period/regulator/torsion/Tamagawa, original leading coefficient identity for y²=x³−x",
+        "acceptance_criteria": "Strong selected-curve identity; do not infer full Sha from Sha[2]=0 nor use fabricated period normalization",
+        "depends_on": [
+          "S2",
+          "S3",
+          "S4"
+        ],
+        "native_kernel_acceptance": false,
+        "original_endpoint_proved": false,
+        "sources_inspected_at_branch": true
+      },
+      {
+        "id": "S6",
+        "clay_problem_id": "BSD",
+        "title": "Universal rational elliptic-curve BSD rank equality and strong extension",
+        "exact_target_terms": [
+          "FullBSDConjecture",
+          "BSDRankConjecture.analyticRankEqualsAlgebraicRank",
+          "BSDLeadingCoefficientConjecture"
+        ],
+        "original_owner_paths": [
+          "DASHI/Mathematics/Arithmetic/BirchSwinnertonDyerBoundary.agda"
+        ],
+        "status": "OPEN",
+        "settled": false,
+        "classification": "TERMINAL_CLAY_UNIVERSAL",
+        "mathematical_deliverable": "Every E/Q analytic ord_{s=1}L(E,s) equals rank E(Q), including rank≥2; separately track strong leading coefficient formula",
+        "acceptance_criteria": "Actual universal elliptic curve and L definition, no selected conductor-32 extrapolation",
+        "depends_on": [
+          "S1_TO_S5_SELECTED_ONLY_INSUFFICIENT"
+        ],
+        "native_kernel_acceptance": false,
+        "original_endpoint_proved": false,
+        "sources_inspected_at_branch": true
+      },
+      {
+        "id": "H1",
+        "clay_problem_id": "HODGE",
+        "title": "Actual smooth projective X rational Hodge intersection and cycle class",
+        "exact_target_terms": [
+          "SingularDeRhamComparison",
+          "HodgeDecomposition",
+          "RationalHodgeClassExact",
+          "RationalAlgebraicCycleClassBackground"
+        ],
+        "original_owner_paths": [
+          "DASHI/Mathematics/AlgebraicGeometry/HodgeDecompositionCycleClassExact.agda",
+          "DASHI/Mathematics/AlgebraicGeometry/HodgeRationalClassIntersectionExact.agda",
+          "DASHI/Mathematics/AlgebraicGeometry/HodgeAlgebraicCycleClayCoreExact.agda"
+        ],
+        "status": "OPEN",
+        "settled": false,
+        "classification": "ORIGINAL_UNPAID_ANALYTIC_OR_GEOMETRIC_PRODUCER",
+        "mathematical_deliverable": "Same actual H^(2p)(X,Q) ∩ H^(p,p) under original deRham/singular comparison and rational algebraic cycle map",
+        "acceptance_criteria": "Real geometric carrier and source cycle map on arbitrary smooth projective X; not merely record fields",
+        "depends_on": [
+          "P0"
+        ],
+        "native_kernel_acceptance": false,
+        "original_endpoint_proved": false,
+        "sources_inspected_at_branch": true
+      },
+      {
+        "id": "H2",
+        "clay_problem_id": "HODGE",
+        "title": "Projective-line/codim-one physical Hodge geometry and comparison",
+        "exact_target_terms": [
+          "p1CycleClassSurjective",
+          "ProjectiveLineGenericCycleClassWeld",
+          "genericP1WeldGivesHodgeAtOne"
+        ],
+        "original_owner_paths": [
+          "DASHI/Mathematics/AlgebraicGeometry/ProjectiveLineCycleClassExact.agda",
+          "DASHI/Mathematics/AlgebraicGeometry/ProjectiveLineGenericCycleClassWeldExact.agda"
+        ],
+        "status": "OPEN",
+        "settled": false,
+        "classification": "ORIGINAL_UNPAID_ANALYTIC_OR_GEOMETRIC_PRODUCER",
+        "mathematical_deliverable": "Weld finite P¹ rational H11 model to actual CP¹ singular/deRham cycle class; relevant codim-one Lefschetz (1,1) and P¹×P¹ naturality",
+        "acceptance_criteria": "True original geometry, not abstract Q-surjectivity; strictly special-case, no universal claim",
+        "depends_on": [
+          "H1"
+        ],
+        "native_kernel_acceptance": false,
+        "original_endpoint_proved": false,
+        "sources_inspected_at_branch": true
+      },
+      {
+        "id": "H3",
+        "clay_problem_id": "HODGE",
+        "title": "All-variety all-codimension actual rational algebraic cycle reopening",
+        "exact_target_terms": [
+          "UniversalHodgeReopening.reopen",
+          "UniversalHodgeReopening.reopeningCorrect",
+          "HodgeClayCoreAtCodimensionAlgebraicExact.algebraicRepresentative"
+        ],
+        "original_owner_paths": [
+          "DASHI/Mathematics/AlgebraicGeometry/HodgePrizeBoundaryExact.agda",
+          "DASHI/Mathematics/AlgebraicGeometry/HodgeAlgebraicCycleClayCoreExact.agda"
+        ],
+        "status": "OPEN",
+        "settled": false,
+        "classification": "TERMINAL_CLAY_UNIVERSAL",
+        "mathematical_deliverable": "∀ smooth projective complex X,p,α rational Hodge class ∃ rational actual algebraic cycle Z with [Z]=α",
+        "acceptance_criteria": "Actual universal representative and equality on singular rational class; conditional universalReopeningImpliesHodge not an inhabitant",
+        "depends_on": [
+          "H1",
+          "H2_OPTIONAL_NOT_SUFFICIENT"
+        ],
+        "native_kernel_acceptance": false,
+        "original_endpoint_proved": false,
+        "sources_inspected_at_branch": true
+      }
+    ],
+    "endpoint_closure_firewall": {
+      "six_official_terminal_theorems_all_open": true,
+      "old_non_native_python_sympy_math_protocol_not_kernel": true,
+      "B1_negative_refutation_not_a_positive_NS_bound": true,
+      "C1_C2_finite_galerkin_not_NS_global": true,
+      "E2_N21_NP_not_P_neq_NP": true,
+      "F1_standard_P_not_SAT_lower_bound": true,
+      "Q2_eight_witnesses_not_BSD_local_image_exhaustion": true,
+      "BSD_selected_rank_zero_not_universal_BSD": true,
+      "Hodge_P1_finite_model_not_universal_Hodge": true,
+      "RH_selected_interval_compiler_not_real_zero_bounds": true,
+      "YM_finite_TV_not_actual_interacting_OS_mass_gap": true,
+      "actual_quantifiers_and_original_carriers_required": true,
+      "native_kernel_or_independent_full_rigorous_proof_at_terminal_required": true
+    },
+    "cross_programme_edges": [
+      {
+        "from": [
+          "BISHOP.COMPLEX_EXP",
+          "BISHOP.ETA"
+        ],
+        "to": [
+          "R1",
+          "S4"
+        ],
+        "constraint": "Must identify original analytic series/carriers separately; no automatic endpoint theorem"
+      },
+      {
+        "from": [
+          "C1",
+          "C2"
+        ],
+        "to": [
+          "B1",
+          "B2"
+        ],
+        "constraint": "B1 refuted, no positive universal payment; repair B2"
+      },
+      {
+        "from": [
+          "F1"
+        ],
+        "to": [
+          "E2",
+          "F2",
+          "F3"
+        ],
+        "constraint": "Actual P cost semantics not universal lower bound and Cook vs BitWord types differ"
+      },
+      {
+        "from": [
+          "E2"
+        ],
+        "to": [
+          "F3"
+        ],
+        "constraint": "NP membership supports prerequisite only, F3 independent hardness"
+      },
+      {
+        "from": [
+          "D1"
+        ],
+        "to": [
+          "D2"
+        ],
+        "constraint": "Same physical interacting Wilson law and OS Hamiltonian required"
+      },
+      {
+        "from": [
+          "S1",
+          "S2",
+          "S3",
+          "S4",
+          "S5"
+        ],
+        "to": [
+          "S6"
+        ],
+        "constraint": "Selected CM E does not imply all rational curves"
+      },
+      {
+        "from": [
+          "H1",
+          "H2"
+        ],
+        "to": [
+          "H3"
+        ],
+        "constraint": "P1/codim-one optional special case, universal cycle producer unpaid"
+      },
+      {
+        "from": [
+          "R1",
+          "R2_OR_R3"
+        ],
+        "to": [
+          "R4"
+        ],
+        "constraint": "Actual selected zeros and completed source, not surrogate"
+      }
+    ],
+    "preferred_next_endpoint_changing_cuts": [
+      "R2",
+      "D1",
+      "A1",
+      "H1",
+      "S1",
+      "S4",
+      "F2",
+      "F3"
+    ],
+    "acceptance": {
+      "required_per_gate": [
+        "literal original theorem statement",
+        "source owner exact path and ref",
+        "same physical/analytic/algebraic carrier",
+        "non-circular proof or justified conditional boundary",
+        "local source/negative-control tests",
+        "kernel and transitive axioms if claiming formal result",
+        "original endpoint implication"
+      ],
+      "negative_result_counts_as_decision_not_positive_theorem": true,
+      "native_kernel_receipts_added_in_scope_revision": 0,
+      "mathematical_endpoints_added_in_scope_revision": 0,
+      "RH_BSD_HODGE_initial_new_gate_status": "OPEN",
+      "no_silent_upgrade_of_original_15": true
     }
   }
 }
