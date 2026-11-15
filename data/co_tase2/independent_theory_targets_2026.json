@@ -1,0 +1,46 @@
+{
+  "source": {
+    "doi": "10.1038/s41535-026-00885-5",
+    "title": "Altermagnetism, kagome flat band, and Weyl fermion states in magnetically intercalated transition metal dichalcogenides",
+    "compound_label": "CoTa4Se8",
+    "same_stoichiometry_as": "Co1/4TaSe2"
+  },
+  "dft": {
+    "code": "VASP",
+    "xc": "GGA/PBE",
+    "core_valence": "PAW",
+    "plane_wave_cutoff_ev": 450,
+    "k_mesh": [9, 9, 4],
+    "supercell": [2, 2, 1],
+    "gga_plus_u_eff_ev_scan": [0, 3]
+  },
+  "altermagnet_targets": {
+    "nodal_plane_kz": "0",
+    "off_nodal_plane_kz": "pi/(2c)",
+    "off_nodal_split_path": "Gamma'-M'",
+    "soc_included": true,
+    "soc_state_interpretation": "Sz projection of SOC-mixed states, not pure spin eigenstates",
+    "co_ta4_se8_split_mev_at_ef_approx": 110,
+    "co_ta4_se8_split_mev_at_minus_0_25_ev_approx": 154
+  },
+  "kagome_like_tb": {
+    "sites": 4,
+    "distinguished_intercalant_aligned_site": 1,
+    "kagome_like_sites": [2, 3, 4],
+    "example_tprime_over_t": -0.4,
+    "example_epsilon_distinguished_over_t": -2.2,
+    "co_intercalated_tase2_analogous_flat_band_reported": true
+  },
+  "producer_method_donor": {
+    "doi": "10.1103/PhysRevB.107.184429",
+    "route": ["spin DFT", "Wannier tight-binding", "local-force/Liechtenstein exchange model"],
+    "executed_for_literal_current_artifact": false
+  },
+  "promotion_boundary": {
+    "same_object_material_hamiltonian_closed": false,
+    "raw_arpes_closed": false,
+    "quantitative_fit_closed": false,
+    "independent_acceptance_targets_paid": true,
+    "wannier_producer_design_route_paid": true
+  }
+}

@@ -48,7 +48,8 @@ module DASHI.Physics.YangMills.YangMillsStressWardCommonCoreGeneratorExact where
 -- closures remains exactly the operator-theoretic part of the YM stress theorem.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl; cong; sym; trans)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 

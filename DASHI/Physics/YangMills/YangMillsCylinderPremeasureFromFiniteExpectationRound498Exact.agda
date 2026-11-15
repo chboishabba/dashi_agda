@@ -19,7 +19,8 @@ module DASHI.Physics.YangMills.YangMillsCylinderPremeasureFromFiniteExpectationR
 --   E2 projective consistency of those event expectations across cutoffs.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; cong; refl)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong)
 open import Agda.Builtin.Nat using (Nat)
 open import Relation.Binary.PropositionalEquality using (trans)
 

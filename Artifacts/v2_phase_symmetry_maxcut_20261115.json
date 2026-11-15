@@ -1,0 +1,130 @@
+{
+  "author_role": "independent DASHI comparative modelling, not attributed circuit disclosure",
+  "exact": {
+    "conditionality": "identical periodic coil maps, equal R, lossless reversible magnetics, fixed S and pulse shape",
+    "mean_copper_loss": "R*S",
+    "mean_ideal_export": "omega*a*h*S*B/(2*A)-R*S",
+    "mean_torque": "-a*h*S*B/(2*A)",
+    "nonlinear_multicoil_coenergy": "formal symbolic identity = 0",
+    "symbolic_phase_normalization": "m cancels for equal cyclic shifts and fixed total mean current squared"
+  },
+  "models_not_identical": [
+    "madscience369 V2",
+    "Slobodian/Infinity SAV MG10",
+    "David Holmstrom Resonate369 devices"
+  ],
+  "open_physical_producers": [
+    "V2 original selected netlist and waveform",
+    "same-device flux linkage lambda(theta,i), leakage and saturation",
+    "same-run torque/rotor phase/load and all real power ports",
+    "signed beginning/end storage and loss uncertainty",
+    "Agda pinned-kernel acceptance and continuous-voltage bound"
+  ],
+  "phase_model_invariance": {
+    "phase_dependence_of_bus": "imposed m*switch_overhead; other identical-model per-cycle flow invariant",
+    "symmetry_cases": [
+      {
+        "bus_drop_3_to_9_w": 0.8999179196973941,
+        "copper_spread_w": 1.0658141036401503e-14,
+        "ideal_export_spread_w": 3.4151028671658423e-09,
+        "mean_shaft_braking_range_w": 3.4150815508837695e-09,
+        "pulse_exponent": 1.5,
+        "pulse_phase_rad": 0.0,
+        "ripple_3": 0.5487657281923317,
+        "ripple_6": 9.24929443580285e-16,
+        "ripple_9": 0.0012791774035493177
+      },
+      {
+        "bus_drop_3_to_9_w": 0.8998443816033941,
+        "copper_spread_w": 3.552713678800501e-15,
+        "ideal_export_spread_w": 5.969624794488482e-10,
+        "mean_shaft_braking_range_w": 7.744915819785092e-13,
+        "pulse_exponent": 2.3,
+        "pulse_phase_rad": 0.2,
+        "ripple_3": 0.7077256135997221,
+        "ripple_6": 0.05515588476452335,
+        "ripple_9": 0.0008262828112314704
+      },
+      {
+        "bus_drop_3_to_9_w": 0.8998797137843653,
+        "copper_spread_w": 3.552713678800501e-15,
+        "ideal_export_spread_w": 5.400124791776761e-13,
+        "mean_shaft_braking_range_w": 2.842170943040401e-14,
+        "pulse_exponent": 3.0,
+        "pulse_phase_rad": -0.15,
+        "ripple_3": 0.8073433073045442,
+        "ripple_6": 0.11634285395308507,
+        "ripple_9": 1.9995124859660296e-06
+      }
+    ]
+  },
+  "phase_overhead_thresholds": {
+    "adjacent_crossovers": {
+      "10": 0.00298876845248075,
+      "11": 0.0022555848080934027,
+      "3": 0.13540245015858776,
+      "4": 0.049056951978794894,
+      "5": 0.02404529500138608,
+      "6": 0.013731312961134057,
+      "7": 0.008626491011948234,
+      "8": 0.005790442230394488,
+      "9": 0.004081989336394809
+    },
+    "model": "ideal single-active-slope commutation, C_m=H_m+alpha*m, m in [3,12]",
+    "negative_control": "other phase counts also win on open alpha intervals",
+    "phase_3": {
+      "alpha_lower": 0.13540245015858776,
+      "alpha_upper": null
+    },
+    "phase_6": {
+      "alpha_lower": 0.013731312961134057,
+      "alpha_upper": 0.02404529500138608
+    },
+    "phase_9": {
+      "alpha_lower": 0.004081989336394809,
+      "alpha_upper": 0.005790442230394488
+    }
+  },
+  "regulator_efficiency": {
+    "cases": [
+      {
+        "bus_w": -5.087186544109898,
+        "coil_ideal_w": 50.48675299201607,
+        "eta": 0.9,
+        "gross_drive_w": 239.33019901701027,
+        "gross_recovery_w": 289.81695200902635
+      },
+      {
+        "bus_w": 23.399579127511572,
+        "coil_ideal_w": 50.48675299201607,
+        "eta": 0.95,
+        "gross_drive_w": 239.33019901701027,
+        "gross_recovery_w": 289.81695200902635
+      },
+      {
+        "bus_w": 39.80612417597817,
+        "coil_ideal_w": 50.48675299201607,
+        "eta": 0.98,
+        "gross_drive_w": 239.33019901701027,
+        "gross_recovery_w": 289.81695200902635
+      },
+      {
+        "bus_w": 45.17110671417822,
+        "coil_ideal_w": 50.48675299201607,
+        "eta": 0.99,
+        "gross_drive_w": 239.33019901701027,
+        "gross_recovery_w": 289.81695200902635
+      },
+      {
+        "bus_w": 50.48675299201608,
+        "coil_ideal_w": 50.48675299201607,
+        "eta": 1.0,
+        "gross_drive_w": 239.33019901701027,
+        "gross_recovery_w": 289.81695200902635
+      }
+    ],
+    "limit": "at ideal conversion exported electric power equals shaft extraction minus copper and other modelled losses",
+    "mechanism": "large internal bidirectional coil power makes converter loss material"
+  },
+  "schema": "dashi.reluctance.phase-symmetry-maxcut.v2"
+}

@@ -37,13 +37,13 @@ data FinalRHAnalyticLeaf : Set where
 
 
 data FinalLeafState : Set where
-  open : FinalLeafState
+  openState : FinalLeafState
   downstream : FinalLeafState
   pruned : FinalLeafState
 
 finalLeafState : FinalRHAnalyticLeaf → FinalLeafState
-finalLeafState proveUniversalPoleQuotientOffAllowancePayment = open
-finalLeafState proveSameTaperGammaAllowancePayment = open
+finalLeafState proveUniversalPoleQuotientOffAllowancePayment = openState
+finalLeafState proveSameTaperGammaAllowancePayment = openState
 finalLeafState attachOwnedClusterMarginSameObject = downstream
 finalLeafState transportAllowancePaymentsToFinalOrder = downstream
 finalLeafState rebuildStrictCombinedBudget = pruned

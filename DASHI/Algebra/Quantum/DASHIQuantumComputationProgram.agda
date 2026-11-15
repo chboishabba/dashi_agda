@@ -10,6 +10,9 @@ open import DASHI.Algebra.Quantum.DASHIQuantumNormalForm public
 import DASHI.Algebra.Quantum.FiniteQuantumRegister
 import DASHI.Algebra.Quantum.QuantumFourierTransformFinite
 import DASHI.Algebra.Quantum.GeneralShor
+import DASHI.Algebra.Quantum.ShadowTrainedAFQMCReuseExact
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369AFQMCSameSourceExact
+import DASHI.Algebra.Quantum.Atomic369AFQMCSameEnergySourceExact
 
 ------------------------------------------------------------------------
 -- Four original research lanes, matching the DASHI quantum-computation

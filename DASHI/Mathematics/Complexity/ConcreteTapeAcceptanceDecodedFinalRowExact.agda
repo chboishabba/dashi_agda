@@ -5,6 +5,7 @@ module DASHI.Mathematics.Complexity.ConcreteTapeAcceptanceDecodedFinalRowExact w
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 import Data.Fin.Base as Fin
@@ -28,8 +29,8 @@ baseTraceBits :
   ∀ {machine steps cols} →
   CNF.Bits (Endpoint.ExtendedGlobalWidth machine steps cols) →
   CNF.Bits (Trace.GlobalTraceWidth machine steps cols)
-baseTraceBits assignment =
-  Rename.pullbackBits Endpoint.liftBaseIndex assignment
+baseTraceBits {machine} {steps} {cols} assignment =
+  Rename.pullbackBits (Endpoint.liftBaseIndex {machine} {steps} {cols}) assignment
 
 extendedFinalCellBits :
   ∀ {machine steps cols}
@@ -37,12 +38,12 @@ extendedFinalCellBits :
     (assignment :
       CNF.Bits (Endpoint.ExtendedGlobalWidth machine steps cols)) →
   CNF.Bits (Canonical.CellWidth machine)
-extendedFinalCellBits i assignment =
+extendedFinalCellBits {machine} {steps} {cols} i assignment =
   Rename.pullbackBits
     (λ j →
-      Endpoint.liftBaseIndex
-        (Global.globalRowRename
-          (Endpoint.finalRowSlot _)
+      Endpoint.liftBaseIndex {machine} {steps} {cols}
+        (Global.globalRowRename {machine} {steps} {cols}
+          (Endpoint.finalRowSlot steps)
           (Global.blockRename (Endpoint.finToSlot i) j)))
     assignment
 
@@ -51,20 +52,19 @@ extendedFinalCellBits_eq_baseCellPullback :
     (i : Fin.Fin cols)
     (assignment :
       CNF.Bits (Endpoint.ExtendedGlobalWidth machine steps cols)) →
-  extendedFinalCellBits i assignment
+  extendedFinalCellBits {machine} {steps} {cols} i assignment
   ≡
   Rename.pullbackBits
-    (Raw.globalCellRename
+    (Raw.globalCellRename {machine} {steps} {cols}
       (Endpoint.finalRowSlot steps)
       (Endpoint.finToSlot i))
-    (baseTraceBits assignment)
-extendedFinalCellBits_eq_baseCellPullback
-    {steps = steps} i assignment =
+    (baseTraceBits {machine} {steps} {cols} assignment)
+extendedFinalCellBits_eq_baseCellPullback {machine} {steps} {cols} i assignment =
   Same.pullbackCompose
-    (Raw.globalCellRename
+    (Raw.globalCellRename {machine} {steps} {cols}
       (Endpoint.finalRowSlot steps)
       (Endpoint.finToSlot i))
-    Endpoint.liftBaseIndex
+    (Endpoint.liftBaseIndex {machine} {steps} {cols})
     assignment
 
 -- The direct lookup proof avoids depending on the presentation chosen above.
@@ -73,24 +73,23 @@ extendedFinalCellBits_eq_finalRowBlock :
     (i : Fin.Fin cols)
     (assignment :
       CNF.Bits (Endpoint.ExtendedGlobalWidth machine steps cols)) →
-  extendedFinalCellBits i assignment
+  extendedFinalCellBits {machine} {steps} {cols} i assignment
   ≡
-  Slice.blockSliceBits (Endpoint.finToSlot i)
-    (Global.rowSliceBits
+  Slice.blockSliceBits {width = Canonical.CellWidth machine} (Endpoint.finToSlot i)
+    (Global.rowSliceBits {machine} {steps} {cols}
       (Endpoint.finalRowSlot steps)
-      (baseTraceBits assignment))
-extendedFinalCellBits_eq_finalRowBlock
-    {steps = steps} i assignment =
+      (baseTraceBits {machine} {steps} {cols} assignment))
+extendedFinalCellBits_eq_finalRowBlock {machine} {steps} {cols} i assignment =
   trans
-    (extendedFinalCellBits_eq_baseCellPullback i assignment)
-    (Same.globalCellBits_eq_rowBlockSlice
+    (extendedFinalCellBits_eq_baseCellPullback {machine} {steps} {cols} i assignment)
+    (Same.globalCellBits_eq_rowBlockSlice {machine} {steps} {cols}
       (Endpoint.finalRowSlot steps)
       (Endpoint.finToSlot i)
-      (baseTraceBits assignment))
+      (baseTraceBits {machine} {steps} {cols} assignment))
 
 record AcceptingCellInDecodedFinalRow
     {machine : Local.ConcreteTapeMachine}
-    {steps cols : Agda.Builtin.Nat.Nat}
+    {steps cols : Nat}
     (stateCoverage :
       Canonical.EnumerationCoverage (Local.finiteState machine))
     (symbolCoverage :
@@ -103,11 +102,11 @@ record AcceptingCellInDecodedFinalRow
     occurs :
       Indexed.At (Fin.toℕ index)
         (Local.headed (Local.acceptingState machine) symbol)
-        (Local.cells
-          (Decode.decodeRow stateCoverage symbolCoverage cols
-            (Global.rowSliceBits
+        (Local.cells {machine}
+          (Decode.decodeRow {machine} stateCoverage symbolCoverage cols
+            (Global.rowSliceBits {machine} {steps} {cols}
               (Endpoint.finalRowSlot steps)
-              (baseTraceBits assignment))))
+              (baseTraceBits {machine} {steps} {cols} assignment))))
 
 open AcceptingCellInDecodedFinalRow public
 
@@ -119,13 +118,13 @@ acceptanceWitnessCellIsDecodedFinalCell :
       Canonical.EnumerationCoverage (Local.finiteSymbol machine))
     (assignment :
       CNF.Bits (Endpoint.ExtendedGlobalWidth machine steps cols)) →
-  Accept.DecodedAcceptingCell
+  Accept.DecodedAcceptingCell {machine} {steps} {cols}
     stateCoverage symbolCoverage assignment →
-  AcceptingCellInDecodedFinalRow
+  AcceptingCellInDecodedFinalRow {machine} {steps} {cols}
     stateCoverage symbolCoverage assignment
 acceptanceWitnessCellIsDecodedFinalCell
-    {steps = steps} stateCoverage symbolCoverage
-    assignment witness =
+    {machine = machine} {steps = steps} {cols = cols}
+    stateCoverage symbolCoverage assignment witness =
   record
     { index = Accept.index witness
     ; symbol = Accept.decodedSymbol witness
@@ -138,41 +137,41 @@ acceptanceWitnessCellIsDecodedFinalCell
 
     rawOccurrence :
       Indexed.At (Fin.toℕ i)
-        (Canonical.decodeCell stateCoverage symbolCoverage
-          (Slice.blockSliceBits cellSlot
-            (Global.rowSliceBits
+        (Canonical.decodeCell {machine} stateCoverage symbolCoverage
+          (Slice.blockSliceBits {width = Canonical.CellWidth machine} cellSlot
+            (Global.rowSliceBits {machine} {steps} {cols}
               (Endpoint.finalRowSlot steps)
-              (baseTraceBits assignment))))
-        (Local.cells
-          (Decode.decodeRow stateCoverage symbolCoverage _
-            (Global.rowSliceBits
+              (baseTraceBits {machine} {steps} {cols} assignment))))
+        (Local.cells {machine}
+          (Decode.decodeRow {machine} stateCoverage symbolCoverage cols
+            (Global.rowSliceBits {machine} {steps} {cols}
               (Endpoint.finalRowSlot steps)
-              (baseTraceBits assignment))))
+              (baseTraceBits {machine} {steps} {cols} assignment))))
     rawOccurrence =
-      Same.decodeCellsAtBlockSlice
+      Same.decodeCellsAtBlockSlice {machine} {count = cols}
         stateCoverage symbolCoverage cellSlot
-        (Global.rowSliceBits
+        (Global.rowSliceBits {machine} {steps} {cols}
           (Endpoint.finalRowSlot steps)
-          (baseTraceBits assignment))
+          (baseTraceBits {machine} {steps} {cols} assignment))
 
     decodedEq :
-      Canonical.decodeCell stateCoverage symbolCoverage
-        (Slice.blockSliceBits cellSlot
-          (Global.rowSliceBits
+      Canonical.decodeCell {machine} stateCoverage symbolCoverage
+        (Slice.blockSliceBits {width = Canonical.CellWidth machine} cellSlot
+          (Global.rowSliceBits {machine} {steps} {cols}
             (Endpoint.finalRowSlot steps)
-            (baseTraceBits assignment)))
+            (baseTraceBits {machine} {steps} {cols} assignment)))
       ≡
       Local.headed (Local.acceptingState machine)
         (Accept.decodedSymbol witness)
     decodedEq =
       trans
         (cong
-          (Canonical.decodeCell stateCoverage symbolCoverage)
-          (sym (extendedFinalCellBits_eq_finalRowBlock
+          (Canonical.decodeCell {machine} stateCoverage symbolCoverage)
+          (sym (extendedFinalCellBits_eq_finalRowBlock {machine} {steps} {cols}
             i assignment)))
         (trans
           (cong
-            (Canonical.decodeCell stateCoverage symbolCoverage)
+            (Canonical.decodeCell {machine} stateCoverage symbolCoverage)
             (sym (Accept.cellBitsExact witness)))
           (Accept.decodedAccepting witness))
 
