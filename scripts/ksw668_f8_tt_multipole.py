@@ -113,7 +113,7 @@ def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
               pulse=.065,inside_chord=.012,r_outer=4.3,y_outer=3.0,drive=1.,
               conservative_source=True):
     if not(2<final_t<=20 and 0<dr<eps/3 and 0<dy<=.03
-            and 0<dt<min(dr*.45,dy*.45) and 0<eps<.08
+            and 0<dt<min(dr*math.sqrt(3/44),dy*.45) and 0<eps<.08
             and r_outer>3 and y_outer>2 and 0<pulse<.12):
         raise ValueError('positive original-model parameters / resolved source')
     T0,Tend=F(1),F(final_t)
@@ -267,6 +267,8 @@ def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
         radial_polynomial_r2_consistency_exact=True,
         radial_discrete_green_energy_nonpositive=True,
         source_weighted_moments_l0_l2_zero=True,
+        radial_only_SSPRK3_Gershgorin_CFL_guard=math.sqrt(3/44),
+        full_moving_T_y_r_SSPRK3_stability_certified=False,
         receiver_convergence_not_implied_by_discrete_energy=True,
         raw_mode_values=components,
         retarded_TT_yy_scaled_by_eps4=yy,
