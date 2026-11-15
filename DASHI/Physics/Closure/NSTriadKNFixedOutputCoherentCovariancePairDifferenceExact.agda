@@ -31,7 +31,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.List.Base using (length)
+open import Data.List.Base using (length; _++_)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
@@ -137,6 +137,71 @@ divisionFreePairDifferenceCentering rate work xs
     ∷ workSum work xs
     ∷ weightedWorkSum rate work xs
     ∷ [])
+
+------------------------------------------------------------------------
+-- ZERO-CELL PADDING COCYCLE ON THE ORIGINAL SIGNED PAIR-DIFFERENCE SUM.
+--
+-- For a new incidence with work(new)=0, the original centered
+-- pair-difference ledger changes by
+--
+--   P(xs++[new]) - P(xs) = sum_i (r_i-r_new) w_i.
+--
+-- Its NEGATIVE (the actual coherent covariance) changes by
+--   r_new sum_i w_i - sum_i r_i w_i.
+-- This holds exactly before norms, Bony decomposition, or estimates.
+-- It is not a generic bound and does NOT rehabilitate the R440 B4
+-- estimate falsified by the original physical zero-padding shear.
+------------------------------------------------------------------------
+
+pairAgainstHeadAppendZero :
+  ∀ {A : Set} (rate work : A → ℚ)
+    (head : A) (items : List A) (new : A) →
+  work new ≡ 0ℚ →
+  pairAgainstHead rate work head (items ++ (new ∷ []))
+  ≡ pairAgainstHead rate work head items
+     + (rate head - rate new) * work head
+pairAgainstHeadAppendZero rate work head [] new hzero
+  rewrite hzero =
+  solve (rate head ∷ rate new ∷ work head ∷ [])
+pairAgainstHeadAppendZero rate work head (x ∷ xs) new hzero
+  rewrite pairAgainstHeadAppendZero rate work head xs new hzero =
+  solve
+    (rate head ∷ rate new ∷ rate x
+    ∷ work head ∷ work x ∷ pairAgainstHead rate work head xs ∷ [])
+
+pairDifferenceAppendZero :
+  ∀ {A : Set} (rate work : A → ℚ)
+    (items : List A) (new : A) →
+  work new ≡ 0ℚ →
+  pairDifferenceWorkSum rate work (items ++ (new ∷ []))
+  ≡ pairDifferenceWorkSum rate work items
+    + weightedWorkSum rate work items
+    - rate new * workSum work items
+pairDifferenceAppendZero rate work [] new hzero = solve []
+pairDifferenceAppendZero rate work (x ∷ xs) new hzero
+  rewrite pairAgainstHeadAppendZero rate work x xs new hzero
+        | pairDifferenceAppendZero rate work xs new hzero =
+  solve
+    (rate x ∷ rate new ∷ work x
+    ∷ pairAgainstHead rate work x xs
+    ∷ pairDifferenceWorkSum rate work xs
+    ∷ weightedWorkSum rate work xs ∷ workSum work xs ∷ [])
+
+centeredPairCovarianceAppendZero :
+  ∀ {A : Set} (rate work : A → ℚ)
+    (items : List A) (new : A) →
+  work new ≡ 0ℚ →
+  (0ℚ - pairDifferenceWorkSum rate work (items ++ (new ∷ [])))
+  ≡
+    (0ℚ - pairDifferenceWorkSum rate work items)
+    + rate new * workSum work items
+    - weightedWorkSum rate work items
+centeredPairCovarianceAppendZero rate work items new hzero
+  rewrite pairDifferenceAppendZero rate work items new hzero =
+  solve
+    (pairDifferenceWorkSum rate work items
+    ∷ weightedWorkSum rate work items
+    ∷ rate new ∷ workSum work items ∷ [])
 
 cellRate :
   (Z3.FourierMode → ℚ) → Physical.PhysicalTriadIncidence → ℚ

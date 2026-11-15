@@ -2,6 +2,7 @@ module DASHI.ComputerScience.RSA260ShorColouring369MonsterSymmetrySearchExact wh
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
+open import Data.Bool.Base using (not)
 open import Data.Empty using (⊥)
 
 import DASHI.Crypto.ShorFactoring as Shor

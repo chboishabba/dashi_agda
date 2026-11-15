@@ -1,0 +1,69 @@
+name: Goldbach30-to-29 signed-369 reduction weld
+
+on:
+  push:
+    paths:
+      - 'vendor/meta-introspector-aok-goldbach29.VENDOR'
+      - 'vendor/meta-introspector-aok/**'
+      - 'DASHI/ComputerScience/Goldbach29Signed369VendorBridgeExact.agda'
+      - 'DASHI/ComputerScience/Goldbach30To29VendoredSourceAttachmentExact.agda'
+      - 'DASHI/ComputerScience/Goldbach30To29SuccessMacroExact.agda'
+      - 'DASHI/ComputerScience/Goldbach30To29TailWeakSimulationExact.agda'
+      - 'DASHI/ComputerScience/Goldbach30To29CheckpointMachineExact.agda'
+      - 'DASHI/ComputerScience/Goldbach29ExternalHaltingSemanticsExact.agda'
+      - 'DASHI/ComputerScience/Goldbach30HaltingSourceAuditExact.agda'
+      - 'DASHI/ComputerScience/Goldbach30To29HaltingConsumerCompilerExact.agda'
+      - 'DASHI/ComputerScience/Goldbach30To29ReductionReceiptExact.agda'
+      - 'DASHI/ComputerScience/Goldbach30To29VisualizationConsumerExact.agda'
+      - 'DASHI/ComputerScience/GoldbachMachineReductionSOTAExact.agda'
+      - 'DASHI/EverythingGoldbach29Signed369VendorExact.agda'
+      - 'scripts/test_goldbach29_signed369_vendor.py'
+      - 'scripts/test_goldbach30_29_vendor_blobs.py'
+      - 'scripts/test_goldbach_vendor_attachment.py'
+      - 'scripts/verify_goldbach30_29_replay.py'
+      - '.github/workflows/goldbach29-signed369-vendor.yml'
+  pull_request:
+    paths:
+      - 'vendor/meta-introspector-aok-goldbach29.VENDOR'
+      - 'vendor/meta-introspector-aok/**'
+      - 'DASHI/ComputerScience/Goldbach29Signed369VendorBridgeExact.agda'
+      - 'DASHI/ComputerScience/Goldbach30To29VendoredSourceAttachmentExact.agda'
+      - 'DASHI/ComputerScience/Goldbach30To29SuccessMacroExact.agda'
+      - 'DASHI/ComputerScience/Goldbach30To29TailWeakSimulationExact.agda'
+      - 'DASHI/ComputerScience/Goldbach30To29CheckpointMachineExact.agda'
+      - 'DASHI/ComputerScience/Goldbach29ExternalHaltingSemanticsExact.agda'
+      - 'DASHI/ComputerScience/Goldbach30HaltingSourceAuditExact.agda'
+      - 'DASHI/ComputerScience/Goldbach30To29HaltingConsumerCompilerExact.agda'
+      - 'DASHI/ComputerScience/Goldbach30To29ReductionReceiptExact.agda'
+      - 'DASHI/ComputerScience/Goldbach30To29VisualizationConsumerExact.agda'
+      - 'DASHI/ComputerScience/GoldbachMachineReductionSOTAExact.agda'
+      - 'DASHI/EverythingGoldbach29Signed369VendorExact.agda'
+      - 'scripts/test_goldbach29_signed369_vendor.py'
+      - 'scripts/test_goldbach30_29_vendor_blobs.py'
+      - 'scripts/test_goldbach_vendor_attachment.py'
+      - 'scripts/verify_goldbach30_29_replay.py'
+      - '.github/workflows/goldbach29-signed369-vendor.yml'
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify vendor attribution and max-cut regression
+        run: python scripts/test_goldbach29_signed369_vendor.py
+      - name: Verify pinned Program blobs and literal tail delta
+        run: python scripts/test_goldbach30_29_vendor_blobs.py
+      - name: Verify vendored source attachment and weak-tail boundary
+        run: python scripts/test_goldbach_vendor_attachment.py
+      - name: Replay vendored Goldbach30-to-29 FRACTRAN/checkpoint equivalence
+        run: python scripts/verify_goldbach30_29_replay.py
+      - name: Install Agda + stdlib
+        uses: wenkokke/setup-agda@v2
+        with:
+          agda-version: '2.6.4.3'
+          agda-stdlib-version: '2.1'
+      - name: Check Goldbach30-to-29 signed-369 aggregate
+        run: >-
+          agda -i . -i DCHoTT-Agda -i cubical -l standard-library
+          DASHI/EverythingGoldbach29Signed369VendorExact.agda

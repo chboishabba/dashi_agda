@@ -1,0 +1,61 @@
+{
+  "schema": "dashi.ibrahim.figure_2_4_independent_finite_replay.v1",
+  "source": {
+    "authors": [
+      "Mark Ibrahim",
+      "Christopher M. Danforth",
+      "Peter Sheridan Dodds"
+    ],
+    "title": "Connecting every bit of knowledge: The structure of Wikipedia's First Link Network",
+    "doi": "10.1016/j.jocs.2016.12.001",
+    "source_manifestation": "author manuscript dated 2016-11-20",
+    "figure_locator": "Figures 2-4",
+    "url": "https://compstorylab.org/share/papers/ibrahim2016a/paper/2015-11-wikipedia-network.pdf"
+  },
+  "evidence_role": "independently executed finite toy figure replay; not published full FLN algorithm/dataset identity",
+  "graph": {
+    "A": "B",
+    "B": "C",
+    "C": "A",
+    "D": "C",
+    "E": "C",
+    "F": "E",
+    "G": "E"
+  },
+  "traversal_visits": {
+    "A": 7,
+    "B": 7,
+    "C": 7,
+    "D": 0,
+    "E": 2,
+    "F": 0,
+    "G": 0
+  },
+  "published_figure_funnels": {
+    "A": 0,
+    "B": 0,
+    "C": 4,
+    "D": 0,
+    "E": 2,
+    "F": 0,
+    "G": 0
+  },
+  "unamended_pseudocode_funnels": {
+    "A": 0,
+    "B": 0,
+    "C": 0,
+    "D": 0,
+    "E": 2,
+    "F": 0,
+    "G": 0
+  },
+  "model": "Each path begins at its first-link destination; visit counts include cycle revisitation, funnel paths from cycle starts are empty; only first cycle-entry included for published figure.",
+  "validation": {
+    "finite_figure_arithmetic_executed_locally": true,
+    "agda_kernel_verified": false,
+    "repo_reference_script_exact_execution": false,
+    "full_historical_corpus_reproduced": false,
+    "producer_run_same_object_paid": false,
+    "cultural_causality": false
+  }
+}

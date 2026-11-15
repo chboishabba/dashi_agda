@@ -1,0 +1,36 @@
+module DASHI.Biology.GABAPhenotypeEvidenceInstantiationRegression where
+
+open import Agda.Builtin.Bool using (true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import DASHI.Core.Prelude using (⊥)
+
+import DASHI.Biology.GABAPhenotypeEvidenceInstantiationExact as Inst
+import DASHI.Biology.GABAPhenotypeBridgeExact as Bridge
+
+synchronyAttachmentAssociationIsPaid : Inst.SynchronyAttachmentAssociationReceipt
+synchronyAttachmentAssociationIsPaid = Inst.nguyen2024SynchronyAttachmentAssociation
+
+synchronyAttachmentStillNotDefinition :
+  Inst.SynchronyDefinesAttachmentPermission → ⊥
+synchronyAttachmentStillNotDefinition = Inst.synchronyAssociationDoesNotDefineAttachment
+
+neuroimmuneBridgeIsPaid : Bridge.NeurochemicalInflammationBridge Inst.crowley2016NeuroimmuneEvidence
+neuroimmuneBridgeIsPaid = Inst.crowley2016NeuroimmuneBridge
+
+neuroimmuneBridgeStillNotDiagnosisCausation :
+  Inst.NeuroimmuneReviewIsDiagnosisCausalPermission → ⊥
+neuroimmuneBridgeStillNotDiagnosisCausation = Inst.neuroimmuneReviewDoesNotPayDiagnosisCausation
+
+adhdHeterogeneityAtlasRegression : Inst.ADHDEvidenceHeterogeneityAtlas
+adhdHeterogeneityAtlasRegression = Inst.canonicalADHDEvidenceHeterogeneityAtlas
+
+adhdSingleScalarLawBlocked :
+  Inst.ADHDGeneralLowGABAPermission → ⊥
+adhdSingleScalarLawBlocked = Inst.adhdEvidenceDoesNotPayGeneralLowGABA
+
+adhdInverseSeverityLawBlocked :
+  Inst.ADHDHigherGABALowerSeverityPermission → ⊥
+adhdInverseSeverityLawBlocked = Inst.adhdEvidenceDoesNotPayInverseSeverityLaw
+
+instantiationBoundaryRegression : Inst.GABAEvidenceInstantiationBoundary
+instantiationBoundaryRegression = Inst.canonicalGABAEvidenceInstantiationBoundary

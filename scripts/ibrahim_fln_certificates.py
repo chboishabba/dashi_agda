@@ -1,0 +1,278 @@
+#!/usr/bin/env python3
+"""Checkable finite first-link trace and revision-cone certificates.
+
+Original first-link methodology: Ibrahim, Danforth, Dodds (2017),
+DOI 10.1016/j.jocs.2016.12.001. These deterministic certificate
+formats and checkers are new DASHI work, not a historical reproduction.
+
+Graph semantics: known source -> known source, None (recorded dead end), or
+unknown target (unresolved). No QID/cultural/semantic inference is made.
+"""
+from __future__ import annotations
+
+from collections import deque
+import hashlib
+import json
+import math
+from typing import Any, Mapping
+
+SCHEMA = 'dashi.ibrahim.fln.finite_certificate.v1'
+
+
+def canonical_cycle(nodes: list[str]) -> list[str]:
+    if not nodes or len(set(nodes)) != len(nodes):
+        raise ValueError('cycle must be nonempty with distinct vertices')
+    i = min(range(len(nodes)), key=lambda k: nodes[k])
+    return nodes[i:] + nodes[:i]
+
+
+def graph_digest(graph: Mapping[str, str | None]) -> str:
+    """Order-independent digest with explicit no-edge vs absent-target grammar."""
+    raw = json.dumps(dict(graph), ensure_ascii=False, sort_keys=True,
+                     separators=(',', ':')).encode('utf-8')
+    return hashlib.sha256(raw).hexdigest()
+
+
+
+def finite_total_reachability(
+    graph: Mapping[str, str | None], start: str, target: str,
+) -> bool:
+    """M2 finite bound: reachability iff a target appears in fewer than |V| steps.
+
+    For a shortest walk to the target no vertex can repeat before its
+    endpoint: removing a repeated interval yields a shorter valid walk.
+    A complete finite carrier has at most |V| distinct vertices, so the
+    first occurrence has index below |V|. This checks the given finite
+    graph and has no Wikipedia or QID source-authority implications.
+    """
+    if (not graph or start not in graph or target not in graph or
+        any(not isinstance(node, str) or not node for node in graph) or
+        any(not isinstance(dst, str) or dst not in graph
+            for dst in graph.values())):
+        raise ValueError("M2 requires a nonempty finite TOTAL source graph")
+    current = start
+    for _ in range(len(graph)):
+        if current == target:
+            return True
+        current = graph[current]
+    return False
+
+
+def finite_mutual_rotation_decision(
+    graph: Mapping[str, str | None], a: str, b: str,
+) -> bool:
+    """Two bounded M2 reachability queries decide intrinsic mutual reach."""
+    return (finite_total_reachability(graph, a, b) and
+            finite_total_reachability(graph, b, a))
+
+
+
+def strict_json_loads(source: str) -> Any:
+    """M4 wire boundary: duplicate keys and non-JSON numeric tokens fail closed.
+
+    This is an executable decoder contract, NOT a machine-checked proof of
+    CPython's JSON implementation or of original Wikipedia source bytes.
+    """
+    if not isinstance(source, str):
+        raise ValueError("JSON source must be decoded UTF-8 text")
+
+    def unique_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+        result: dict[str, Any] = {}
+        for key, value in pairs:
+            if key in result:
+                raise ValueError(f"duplicate JSON object key: {key!r}")
+            result[key] = value
+        return result
+
+    def reject_non_json_constant(token: str) -> Any:
+        raise ValueError(f"non-JSON numeric constant: {token!r}")
+
+    try:
+        parsed = json.loads(source, object_pairs_hook=unique_object,
+                            parse_constant=reject_non_json_constant)
+    except (json.JSONDecodeError, UnicodeError) as exc:
+        raise ValueError("malformed JSON at M4 wire boundary") from exc
+
+    def reject_surrogates(value: Any) -> None:
+        if isinstance(value, float) and not math.isfinite(value):
+            raise ValueError("nonfinite JSON numeric value after float decoding")
+        if isinstance(value, str):
+            if any(0xD800 <= ord(char) <= 0xDFFF for char in value):
+                raise ValueError("unpaired Unicode surrogate in JSON string")
+        elif isinstance(value, list):
+            for element in value:
+                reject_surrogates(element)
+        elif isinstance(value, dict):
+            for key, element in value.items():
+                reject_surrogates(key)
+                reject_surrogates(element)
+
+    reject_surrogates(parsed)
+    return parsed
+
+
+def trace_start(graph: Mapping[str, str | None], start: str) -> dict[str, Any]:
+    if start not in graph:
+        raise ValueError('start must be in graph')
+    seen: dict[str, int] = {}
+    trace: list[str] = []
+    node = start
+    while True:
+        if node not in graph:
+            return {'start': start, 'trace': trace, 'kind': 'unresolved_target',
+                    'terminal': node}
+        if node in seen:
+            return {'start': start, 'trace': trace, 'kind': 'cycle',
+                    'entry_index': seen[node],
+                    'cycle': canonical_cycle(trace[seen[node]:])}
+        seen[node] = len(trace)
+        trace.append(node)
+        dest = graph[node]
+        if dest is None:
+            return {'start': start, 'trace': trace, 'kind': 'dead_end',
+                    'terminal': node}
+        node = dest
+
+
+def check_trace(graph: Mapping[str, str | None], receipt: dict[str, Any]) -> tuple[str, tuple[str, ...]]:
+    """Independent local verification: no call to trace_start or terminal_census.
+
+    Rejects forged terminal labels, omitted/reordered path edges, a cycle
+    that stops prematurely, and confusion of missing target with dead end.
+    """
+    if not isinstance(receipt, dict) or set(receipt) not in [
+        {'start', 'trace', 'kind', 'terminal'},
+        {'start', 'trace', 'kind', 'entry_index', 'cycle'},
+    ]:
+        raise ValueError('invalid receipt field set')
+    start = receipt['start']
+    path = receipt['trace']
+    if not isinstance(start, str) or start not in graph:
+        raise ValueError('start missing from source graph')
+    if not isinstance(path, list) or not path or any(
+        not isinstance(v, str) or v not in graph for v in path
+    ):
+        raise ValueError('trace must contain nonempty known nodes')
+    if len(path) > len(graph) or len(path) != len(set(path)) or path[0] != start:
+        raise ValueError('trace repeats known vertex or violates graph bound')
+    for left, right in zip(path, path[1:]):
+        if graph[left] != right:
+            raise ValueError('incorrect trace transition')
+    last = graph[path[-1]]
+    kind = receipt['kind']
+    if kind == 'dead_end':
+        if last is not None or receipt['terminal'] != path[-1]:
+            raise ValueError('bad dead-end terminator')
+        return 'dead_end', (path[-1],)
+    if kind == 'unresolved_target':
+        if last is None or last in graph or receipt['terminal'] != last:
+            raise ValueError('bad unresolved-target terminator')
+        return 'unresolved_target', (last,)
+    if kind == 'cycle':
+        at = receipt['entry_index']
+        if not isinstance(at, int) or isinstance(at, bool) or not 0 <= at < len(path):
+            raise ValueError('invalid cycle entry')
+        if last != path[at]:
+            raise ValueError('cycle must close at exact first repeated node')
+        cycle = canonical_cycle(path[at:])
+        if receipt['cycle'] != cycle:
+            raise ValueError('not the canonical terminal cycle')
+        return 'cycle', tuple(cycle)
+    raise ValueError('unknown terminal kind')
+
+
+def certify_graph(graph: Mapping[str, str | None]) -> dict[str, Any]:
+    # No trusting input manifests here: this checks the given in-memory graph.
+    return {'schema': SCHEMA, 'graph_sha256': graph_digest(graph),
+            'node_count': len(graph),
+            'traces': [trace_start(graph, n) for n in sorted(graph)]}
+
+
+def check_graph_certificate(graph: Mapping[str, str | None], cert: dict[str, Any]) -> dict[str, Any]:
+    """Independent exhaustive classifier checker; returns validated basins.
+
+    A certificate is finite only relative to the declared source carrier. It
+    cannot certify a historical Wikimedia dump or source parser provenance.
+    """
+    if not isinstance(cert, dict) or set(cert) != {'schema','graph_sha256','node_count','traces'}:
+        raise ValueError('invalid graph certificate header')
+    if cert['schema'] != SCHEMA or cert['graph_sha256'] != graph_digest(graph):
+        raise ValueError('wrong graph fingerprint / certificate schema')
+    if (type(cert['node_count']) is not int or
+        cert['node_count'] != len(graph) or not isinstance(cert['traces'], list)):
+        raise ValueError('invalid node-count / trace array')
+    starts = [t.get('start') if isinstance(t, dict) else None for t in cert['traces']]
+    if starts != sorted(graph):
+        raise ValueError('missing, duplicate or reordered source starts')
+    result: dict[str, tuple[str, tuple[str, ...]]] = {}
+    for t in cert['traces']:
+        result[t['start']] = check_trace(graph, t)
+    # Classify only verified states. This comparison is useful even without
+    # the path-compression producer and catches certificate corruption.
+    if len(result) != len(graph):
+        raise AssertionError('nonexhaustive verified terminal partition')
+    return {'outcomes': result, 'basin_sizes': {
+        outcome: sum(x == outcome for x in result.values())
+        for outcome in set(result.values())},
+        'partition_size': len(result)}
+
+
+def certify_reverse_edit_cone(old: Mapping[str, str | None],
+                              new: Mapping[str, str | None]) -> dict[str, Any]:
+    if set(old) != set(new):
+        raise ValueError('page-carrier change needs typed identity transport')
+    edits = sorted(v for v in old if old[v] != new[v])
+    predecessor: dict[str, list[str]] = {v: [] for v in old}
+    for src, target in old.items():
+        if target in predecessor:
+            predecessor[target].append(src)
+    witness: dict[str, list[str]] = {edit: [edit] for edit in edits}
+    queue = deque(edits)
+    while queue:
+        v = queue.popleft()
+        for prev in sorted(predecessor[v]):
+            if prev not in witness:
+                witness[prev] = [prev] + witness[v]
+                queue.append(prev)
+    return {'old_sha256': graph_digest(old), 'new_sha256': graph_digest(new),
+            'edited_nodes': edits, 'paths_to_edit': witness}
+
+
+def check_reverse_edit_cone(old: Mapping[str, str | None],
+                            new: Mapping[str, str | None], cert: dict[str, Any]) -> set[str]:
+    """Check *both* witness-path soundness and reverse-closure completeness."""
+    if set(old) != set(new):
+        raise ValueError('page-carrier change needs typed identity transport')
+    if not isinstance(cert, dict) or set(cert) != {
+        'old_sha256', 'new_sha256', 'edited_nodes', 'paths_to_edit'
+    }:
+        raise ValueError('bad revision certificate field set')
+    if cert['old_sha256'] != graph_digest(old) or cert['new_sha256'] != graph_digest(new):
+        raise ValueError('stale revision certificate')
+    edits = {n for n in old if old[n] != new[n]}
+    if cert['edited_nodes'] != sorted(edits):
+        raise ValueError('wrong edited-node set')
+    paths = cert['paths_to_edit']
+    if not isinstance(paths, dict) or not set(paths).issubset(old):
+        raise ValueError('unknown source in predecessor certificate')
+    for src, path in paths.items():
+        if not isinstance(path, list) or not path or path[0] != src or path[-1] not in edits:
+            raise ValueError('bad edited-reachability path')
+        if len(path) > len(old) or len(path) != len(set(path)) or any(v not in old for v in path):
+            raise ValueError('non-simple or out-of-carrier path')
+        if any(old[a] != b for a,b in zip(path,path[1:])):
+            raise ValueError('path is not made of old first-link edges')
+    # No external path-compression call: independently rewalk every old
+    # source through at most |V| distinct vertices to find all reachable edits.
+    closure = set()
+    for start in old:
+        node, seen = start, set()
+        while node in old and node not in seen:
+            if node in edits:
+                closure.add(start)
+                break
+            seen.add(node)
+            node = old[node]
+    if set(paths) != closure:
+        raise ValueError('reverse-closure witnesses incomplete or extraneous')
+    return closure

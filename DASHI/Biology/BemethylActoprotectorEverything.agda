@@ -1,0 +1,11 @@
+module DASHI.Biology.BemethylActoprotectorEverything where
+
+import DASHI.Physics.Chemistry.BemethylChemicalIdentityBoundaryExact
+import DASHI.Biology.BemethylActoprotectorClaimAtlasExact
+import DASHI.Biology.BemethylMetabolicMechanismBoundaryExact
+import DASHI.Biology.BemethylMechanismInterventionAcquisitionExact
+import DASHI.Biology.BemethylModernAthleteReplicationExact
+import DASHI.Biology.BemethylBioenergeticCrossPollinationExact
+import DASHI.Biology.BemethylHumanEvidenceAcquisitionExact
+import DASHI.Biology.BemethylParetoSnowballExact
+import DASHI.Biology.BemethylActoprotectorMaxCutExact

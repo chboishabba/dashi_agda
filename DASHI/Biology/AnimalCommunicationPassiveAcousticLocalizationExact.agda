@@ -78,6 +78,8 @@ localizedCallEmitterDefect :
     localizationProjection localizationSemantics emitterIdentityQuery
 localizedCallEmitterDefect =
   Query.queryAdequacyDefect
+    {semantics = localizationSemantics}
+    {query = emitterIdentityQuery}
     magpieInRegion
     lorikeetInRegion
     refl
@@ -87,7 +89,10 @@ localizedCallDoesNotCreateUniqueBird :
   Query.AdequateFor
     localizationProjection localizationSemantics emitterIdentityQuery → ⊥
 localizedCallDoesNotCreateUniqueBird =
-  Query.queryAdequacyDefectBlocksFactorisation localizedCallEmitterDefect
+  Query.queryAdequacyDefectBlocksFactorisation
+    {semantics = localizationSemantics}
+    {query = emitterIdentityQuery}
+    localizedCallEmitterDefect
 
 ------------------------------------------------------------------------
 -- Additional authority firewalls.

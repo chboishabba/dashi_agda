@@ -52,23 +52,23 @@ data RHAnalyticLeaf : Set where
 
 data LeafState : Set where
   closed : LeafState
-  open : LeafState
+  openState : LeafState
   blocked : LeafState
   pruned : LeafState
 
 leafState : RHAnalyticLeaf → LeafState
-leafState buildCanonicalComplexCharacter = open
+leafState buildCanonicalComplexCharacter = openState
 leafState proveCanonicalTestModulationShift = blocked
 leafState assembleCanonicalAnalyticModulationExtension = blocked
 leafState proveTargetTranslationModulationIntertwiner = blocked
 leafState proveWindowRestrictionResidualCompatibility = blocked
 leafState proveExplicitFormulaFiniteNearEvaluation = blocked
-leafState recoverDirectFinitePoleNearProducer = open
+leafState recoverDirectFinitePoleNearProducer = openState
 leafState weldSelectedDirectZeroCarrier = blocked
 leafState proveSelectedTargetLocalSecondMoment = pruned
 leafState attachDirectEvaluationToSelectedConsumer = blocked
 leafState proveActualZetaLowGapClustering = pruned
-leafState repairGammaPrecision = open
+leafState repairGammaPrecision = openState
 leafState constructSecondPhaseStatisticCarrier = pruned
 leafState sharpenZeroCount = pruned
 leafState sharpenAbsoluteEnvelope = pruned

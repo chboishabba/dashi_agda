@@ -1,0 +1,51 @@
+name: KSW 668 empirical source weld (offline)
+on:
+  push:
+    branches:
+      - research/ksw668-plasma-369-causal-maxcut-20261114
+    paths:
+      - "scripts/ksw668_*.py"
+      - "scripts/check_ksw668_human_ams_original.py"
+      - "scripts/test_ksw668_primary_empirical_weld.py"
+      - "Artifacts/ksw668/**"
+      - ".github/workflows/ksw668-primary-empirical.yml"
+  pull_request:
+    paths:
+      - "scripts/ksw668_*.py"
+      - "scripts/check_ksw668_human_ams_original.py"
+      - "scripts/test_ksw668_primary_empirical_weld.py"
+      - "Artifacts/ksw668/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  offline-primary-integrity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Check original published human AMS Table 1
+        run: |
+          python3 scripts/check_ksw668_human_ams_original.py --out /tmp/ksw668_human_ams.json
+      - name: Replay no-network primary-source regression tests
+        run: |
+          python3 scripts/test_ksw668_primary_empirical_weld.py
+      - name: Validate offline acquisition plans without downloading external data
+        run: |
+          python3 scripts/ksw668_mms_burst_acquire.py
+          python3 scripts/ksw668_ena_reads_acquire.py
+      - name: Run full 3D Maxwell/Poynting exact polynomial benchmark
+        run: |
+          python3 -m pip install sympy==1.14.0
+          python3 scripts/check_ksw668_maxwell_3d_jet.py
+      - name: Reject unsupported N14 14-MeV nuclear fit extrapolation
+        run: |
+          python3 scripts/ksw668_neutron_energy_nonextrapolation.py
+      - name: Validate source-pinned empirical manifest JSON
+        run: |
+          python3 -m json.tool Artifacts/ksw668/empirical_primary_acquisition_20261114.json >/dev/null

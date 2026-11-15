@@ -19,7 +19,7 @@ module DASHI.Mathematics.Complexity.ConcreteTapeWholeRowCNFWeldExact where
 -- No concrete Cell/Bits encoding is introduced here.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
@@ -136,17 +136,17 @@ encodedTransitionCNFGivesLocality :
     machine rule before after
 encodedTransitionCNFGivesLocality {codec = codec} characterization =
   record
-    { Locality.beforeInterior =
+    { beforeInterior =
         beforeInterior characterization
-    ; Locality.afterUnique =
+    ; afterUnique =
         afterUnique characterization
-    ; Locality.localityScan =
+    ; localityScan =
         record
-          { Locality.ruleOccursInMachine =
+          { ruleOccursInMachine =
               ruleOccursInMachine characterization
-          ; Locality.sameRowLength =
+          ; sameRowLength =
               sameRowLength characterization
-          ; Locality.everyWindowLegal =
+          ; everyWindowLegal =
               cnfAllWindowsToSemantic
                 codec
                 (allLocalCNFsSatisfied characterization)

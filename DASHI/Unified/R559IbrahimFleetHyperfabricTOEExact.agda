@@ -26,7 +26,7 @@ module DASHI.Unified.R559IbrahimFleetHyperfabricTOEExact where
 --
 -- L. Lane.
 -- One TOE normalization lane.
--- No ESD or digital_esd surface is edited.
+-- No protected external ESD surface is edited.
 --
 -- Preconditions.
 -- All imported owners exist and retain attribution.
@@ -51,7 +51,8 @@ module DASHI.Unified.R559IbrahimFleetHyperfabricTOEExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_; refl; sym; trans)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
 
@@ -167,12 +168,12 @@ ymGate4InhabitantsLevel =
 fleetEigenPriorityDoesNotCreateProof :
   Fleet.FleetEigenPriorityCreatesProof → ⊥
 fleetEigenPriorityDoesNotCreateProof =
-  Fleet.fleetEigenPriorityDoesNotCreateProof
+  Fleet.fleetEigenPriorityPromotionImpossible
 
 fleetExternalCountDoesNotCreateFormalDischarge :
   Fleet.FleetExternalCountCreatesFormalDischarge → ⊥
 fleetExternalCountDoesNotCreateFormalDischarge =
-  Fleet.fleetExternalCountDoesNotCreateFormalDischarge
+  Fleet.fleetExternalCountPromotionImpossible
 
 fleetDischargedFibresStayOutOfTarget :
   Fleet.FleetDischargedFibreRetargetPermission → ⊥

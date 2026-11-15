@@ -1,0 +1,17 @@
+module DASHI.Physics.Foundations.GRQFTSourceNativeQFTRecoveryProjectionCompatibilityValidation where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Physics.Foundations.GRQFTSourceNativeQFTRecoveryProvenanceExact as M
+
+formalCompatibilityCompilerOwnedRegression :
+  M.formalLegacyProjectionCompatibilityCompilerOwned ≡ true
+formalCompatibilityCompilerOwnedRegression = refl
+
+formalCompatibilityIsRichProvenanceRegression :
+  M.formalLegacyProjectionCompatibilitySuppliesRichSourceNativeProvenance ≡ false
+formalCompatibilityIsRichProvenanceRegression = refl
+
+projectionCompatibilityNoLongerIndependentRegression :
+  M.projectionCompatibilityInterfaceIsIndependentPhysicalPayment ≡ false
+projectionCompatibilityNoLongerIndependentRegression = refl

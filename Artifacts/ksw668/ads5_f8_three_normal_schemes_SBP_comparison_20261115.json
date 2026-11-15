@@ -1,0 +1,191 @@
+{
+  "schema": "KSW668OriginalTTThreeNormalStencilsNoPromotion20261115",
+  "physical_model": "Original a=t moving Poincare AdS5 linear TT Israel Neumann",
+  "source": {
+    "original_compact_spatial_radius": 0.04,
+    "original_poincare_temporal_pulse": 0.065,
+    "receiver_original_t": 12,
+    "source_photon_dark": true
+  },
+  "grid_steps": [
+    {
+      "dr": 0.012,
+      "dy": 0.016,
+      "dt": 0.0024992243525406577
+    },
+    {
+      "dr": 0.008,
+      "dy": 0.012,
+      "dt": 0.0017989104901421466
+    }
+  ],
+  "methods": {
+    "legacy_order2": {
+      "boundary": "strong Israel, energy-injecting one-sided second-order closure",
+      "rows": [
+        {
+          "dr": 0.012,
+          "dy": 0.016,
+          "H": -0.000002838143712830983,
+          "E4": -0.0000623958175453122,
+          "E5": -0.000003453895138459439,
+          "farH": -7.927980318670159e-7,
+          "farE4": 0.000004326607397703515,
+          "farE5": 1.3357597781001168e-7
+        },
+        {
+          "dr": 0.008,
+          "dy": 0.012,
+          "H": -0.00000676189917760608,
+          "E4": -0.00005644325405215102,
+          "E5": -0.0000029008031422332182,
+          "farH": 1.5116830139986467e-7,
+          "farE4": -0.0000013620330569585246,
+          "farE5": -4.5857443814887786e-8
+        }
+      ],
+      "medium_relative_drift_vs_medium": {
+        "H": 0.5802741747125882,
+        "E4": 0.1054610261779251,
+        "E5": 0.19066857318708513
+      },
+      "medium_far_to_receiver": {
+        "H": 0.02235589402168266,
+        "E4": 0.02413101582874842,
+        "E5": 0.015808533556532167
+      }
+    },
+    "first_order_SBP": {
+      "boundary": "strong Israel, first-order normal dissipative",
+      "rows": [
+        {
+          "dr": 0.012,
+          "dy": 0.016,
+          "H": 0.0000033357941518418863,
+          "E4": 0.000004671859712175787,
+          "E5": 0.0000010723815724038962,
+          "farH": -0.00000160322840593152,
+          "farE4": -2.6927209552058118e-8,
+          "farE5": -1.8618294841480232e-8
+        },
+        {
+          "dr": 0.008,
+          "dy": 0.012,
+          "H": 2.5565451218808197e-7,
+          "E4": 0.000005424915982643892,
+          "E5": 7.232854445737263e-7,
+          "farH": 1.6999317129941632e-7,
+          "farE4": 0.0000011898186916301256,
+          "farE5": 8.192356577282968e-8
+        }
+      ],
+      "medium_relative_drift_vs_medium": {
+        "H": 12.04805506185544,
+        "E4": 0.13881436558232088,
+        "E5": 0.48265332926188265
+      },
+      "medium_far_to_receiver": {
+        "H": 0.6649331938031837,
+        "E4": 0.2193248145108147,
+        "E5": 0.11326588470353077
+      }
+    },
+    "second_order_SBP_SAT": {
+      "boundary": "weak Israel SAT, second-order normal SBP, exact normal semidiscrete energy",
+      "rows": [
+        {
+          "dr": 0.012,
+          "dy": 0.016,
+          "H": -0.000005139787590641485,
+          "E4": -0.00006731686787900883,
+          "E5": -0.00000293029492369092,
+          "farH": -7.222926602739536e-7,
+          "farE4": 0.000003959286983682543,
+          "farE5": 1.1916836588674088e-7
+        },
+        {
+          "dr": 0.008,
+          "dy": 0.012,
+          "H": -0.000006216375468023587,
+          "E4": -0.000028053116167140405,
+          "E5": -0.000002326215693087443,
+          "farH": 1.3572961769541815e-7,
+          "farE4": -0.0000011583044448344302,
+          "farE5": -3.952848406149324e-8
+        }
+      ],
+      "medium_relative_drift_vs_medium": {
+        "H": 0.1731857869461011,
+        "E4": 1.3996217560264992,
+        "E5": 0.2596832410676931
+      },
+      "medium_far_to_receiver": {
+        "H": 0.021834205220324563,
+        "E4": 0.04128968910025021,
+        "E5": 0.01699261344464129
+      }
+    }
+  },
+  "acceptance": {
+    "only_two_grids_for_new_schemes": true,
+    "three_grid_both_weyl_convergence": false,
+    "Agda_2_9_kernel_unverified": true,
+    "physical_receiver_nonzero_certified": false,
+    "full_coupled_moving_RK3_discrete_energy_proved": false,
+    "physical_graviton_observed": false
+  },
+  "analytical_subgates": {
+    "radial_ssprk3_imaginary_axis_modulus": "|R(ix)|²-1=x⁴(x²-3)/36",
+    "radial_gershgorin_dim11_dt_over_dr_upper": 0.26111648393354675,
+    "old_allowed_radial_dt_over_dr": 0.45,
+    "old_d11_radial_mode_energy_growth_at_ratio_045": 1.8021850018750494,
+    "normal_sbp_firstorder_wall_legacy_positive_discrete_energy": "277/2",
+    "normal_sbp1_uniform_original_time_CFL": 0.5857864376269049,
+    "normal_sbp2SAT_weak_forced_energy": true,
+    "normal_sbp1_normal_only_full_discrete_ssprk3_forced_bound": true,
+    "original_H1_energy_to_Weyl_pointwise_no_go": "E_N=pi³/b(T)² independent of N; original t2 intrinsic E4 peak 9N/64"
+  },
+  "maximum_cut_VII_original_normal_SBP_and_Weyl": {
+    "document": "Docs/physics/KSW668F8DiscreteNormalSBPSSPRK3WeylMaxCut20261115.md",
+    "original_radial_SSPRK3_exact_polynomial": "|R(i*x)|²-1 = x^4*(x²-3)/36",
+    "original_d11_radial_only_certified_dt_over_dr": 0.26111648393354675,
+    "legacy_d11_dt_over_dr_045_radial_modal_growth": 1.8021850018750494,
+    "legacy_normal_homogeneous_energy_injection_exact": "277/2 on 16-node integer outgoing P",
+    "firstorder_normal_SBP_exact": true,
+    "normal_only_forced_SSPRK3_exact": true,
+    "original_normal_uniform_t1_t2_dt_over_dy": 0.5857864376269049,
+    "secondorder_SBP_SAT_weak_original_Israel_energy_exact": true,
+    "actual_original_SBP2_SAT_two_grid_field_drift": 0.1731857869461011,
+    "actual_original_SBP2_SAT_two_grid_intrinsic_Weyl_drift": 1.3996217560264992,
+    "actual_original_SBP2_SAT_two_grid_projected_Weyl_drift": 0.2596832410676931,
+    "exact_5D_bulk_periodic_T3_H1_to_Weyl_trace_no_go": {
+      "mode": "H_N=sin(N*x)cos(N*(T-Tstar))/N",
+      "energy": "pi^3/b(T)^2 independent of N",
+      "original_t2_intrinsic_Weyl_peak": "9N/64",
+      "compact_R3_source_counterexample": false
+    },
+    "source_equivalent_committed_local_test_pass": 255,
+    "broader_source_equivalent_local_test_pass": 269,
+    "pinned_Agda_kernel_run": false,
+    "exact_GitHub_branch_checkout_runner_run": false,
+    "original_complete_coupled_SSPRK3_stability_closed": false,
+    "actual_three_grid_both_Weyl_convergence_closed": false,
+    "FIO_original_t2_independent_theorem_acceptance": false,
+    "physical_matter_action_closed": false,
+    "D1_physical_graviton_observed": false
+  },
+  "next_exact_lemmas": [
+    "ads5OriginalMovingFullCoupledYRadialSSPRK3SymmetrizerCFL",
+    "ads5OriginalMovingH4PlusEpsilonNeumannToBothWeylTrace",
+    "ads5OriginalMovingTTThreeMultipoleThreeObservableConvergence",
+    "ads5OriginalT2NeumannToWeylEllipticFIOComposition",
+    "ads5OriginalT2ActualCompactTTNonzeroEarlyBothWeyl",
+    "ads5CompactTTMatterActionRealization",
+    "ads5MovingModeStabilityAndBackreaction",
+    "cylinderDoubledDiscPerturbedBulkAndRetardedGreen",
+    "ads5PhysicalScaleSourceDetectorComparison",
+    "braneBulkOriginalAnalyticAgdaKernel",
+    "ads5OriginalSourceToObservationSemanticWeld",
+    "physicalGravitonObservation"
+  ]
+}

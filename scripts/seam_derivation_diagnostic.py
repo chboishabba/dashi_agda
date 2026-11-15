@@ -54,6 +54,19 @@ class Face:
     vertices: tuple[int, int, int, int]
 
 
+@dataclass(frozen=True)
+class ReprojectionQuality:
+    max_distance: float
+    mean_distance: float
+    edge_retention_ratio: float
+    retained_edges: int
+    source_edge_count: int
+
+
+class ReprojectionCompatibilityError(ValueError):
+    """Raised when source and target meshes fail geometric compatibility gates."""
+
+
 def stable_hash(value: object) -> str:
     encoded = json.dumps(value, sort_keys=True, separators=(",", ":")).encode(
         "utf-8"
@@ -94,6 +107,166 @@ def build_toy_patch(width: int, height: int) -> tuple[list[Vertex], list[Edge], 
         for i in range(width - 1)
     ]
     return vertices, edges, faces
+
+
+def build_target_patch(
+    source_vertices: list[Vertex],
+    source_edges: list[Edge],
+    source_faces: list[Face],
+) -> tuple[list[Vertex], list[Edge], list[Face]]:
+    """Build a nearby target fixture without assuming identical coordinates."""
+    target_vertices = [
+        Vertex(
+            v.vid,
+            v.i,
+            v.j,
+            v.x + 0.004 * v.y,
+            v.y - 0.003 * v.x,
+            v.z + 0.002 * (v.x * v.x + v.y * v.y),
+        )
+        for v in source_vertices
+    ]
+    target_edges = [Edge(e.eid, e.a, e.b, e.orientation) for e in source_edges]
+    target_faces = [Face(face.vertices) for face in source_faces]
+    return target_vertices, target_edges, target_faces
+
+
+def vertex_distance(a: Vertex, b: Vertex) -> float:
+    return math.sqrt(
+        (a.x - b.x) * (a.x - b.x)
+        + (a.y - b.y) * (a.y - b.y)
+        + (a.z - b.z) * (a.z - b.z)
+    )
+
+
+def nearest_vertex_reprojection(
+    source_vertices: list[Vertex],
+    target_vertices: list[Vertex],
+) -> tuple[dict[int, int], list[float]]:
+    if not source_vertices:
+        raise ReprojectionCompatibilityError("source mesh has no vertices")
+    if not target_vertices:
+        raise ReprojectionCompatibilityError("target mesh has no vertices")
+
+    mapping: dict[int, int] = {}
+    distances: list[float] = []
+    for source_vertex in source_vertices:
+        target_vertex = min(
+            target_vertices,
+            key=lambda candidate: (
+                vertex_distance(source_vertex, candidate),
+                candidate.vid,
+            ),
+        )
+        mapping[source_vertex.vid] = target_vertex.vid
+        distances.append(vertex_distance(source_vertex, target_vertex))
+    return mapping, distances
+
+
+def reprojection_quality(
+    source_vertices: list[Vertex],
+    source_edges: list[Edge],
+    target_vertices: list[Vertex],
+    target_edges: list[Edge],
+) -> tuple[ReprojectionQuality, dict[int, int]]:
+    mapping, distances = nearest_vertex_reprojection(source_vertices, target_vertices)
+
+    target_edge_keys = {
+        frozenset((edge.a, edge.b))
+        for edge in target_edges
+        if edge.a != edge.b
+    }
+    retained_edges = 0
+    for edge in source_edges:
+        mapped_a = mapping[edge.a]
+        mapped_b = mapping[edge.b]
+        if (
+            mapped_a != mapped_b
+            and frozenset((mapped_a, mapped_b)) in target_edge_keys
+        ):
+            retained_edges += 1
+
+    source_edge_count = len(source_edges)
+    edge_retention_ratio = (
+        retained_edges / source_edge_count
+        if source_edge_count
+        else 1.0
+    )
+    quality = ReprojectionQuality(
+        max_distance=max(distances),
+        mean_distance=sum(distances) / len(distances),
+        edge_retention_ratio=edge_retention_ratio,
+        retained_edges=retained_edges,
+        source_edge_count=source_edge_count,
+    )
+    return quality, mapping
+
+
+def require_reprojection_compatible(
+    quality: ReprojectionQuality,
+    *,
+    max_distance: float,
+    mean_distance: float,
+    min_edge_retention_ratio: float,
+) -> None:
+    if max_distance < 0.0:
+        raise ValueError("max_distance threshold must be non-negative")
+    if mean_distance < 0.0:
+        raise ValueError("mean_distance threshold must be non-negative")
+    if not 0.0 <= min_edge_retention_ratio <= 1.0:
+        raise ValueError("min_edge_retention_ratio must be in [0, 1]")
+
+    failures: list[str] = []
+    if quality.max_distance > max_distance:
+        failures.append(
+            f"max_distance={quality.max_distance:.6f} > {max_distance:.6f}"
+        )
+    if quality.mean_distance > mean_distance:
+        failures.append(
+            f"mean_distance={quality.mean_distance:.6f} > {mean_distance:.6f}"
+        )
+    if quality.edge_retention_ratio < min_edge_retention_ratio:
+        failures.append(
+            "edge_retention_ratio="
+            f"{quality.edge_retention_ratio:.6f} < {min_edge_retention_ratio:.6f}"
+        )
+
+    if failures:
+        raise ReprojectionCompatibilityError(
+            "incompatible source/target meshes: " + "; ".join(failures)
+        )
+
+
+def transfer_edges(
+    selected_source_edges: list[int],
+    source_edges: list[Edge],
+    target_edges: list[Edge],
+    vertex_mapping: dict[int, int],
+) -> list[int]:
+    source_by_id = {edge.eid: edge for edge in source_edges}
+    target_by_key = {
+        frozenset((edge.a, edge.b)): edge.eid
+        for edge in target_edges
+        if edge.a != edge.b
+    }
+
+    transferred: list[int] = []
+    for source_edge_id in selected_source_edges:
+        source_edge = source_by_id[source_edge_id]
+        mapped_key = frozenset(
+            (
+                vertex_mapping[source_edge.a],
+                vertex_mapping[source_edge.b],
+            )
+        )
+        target_edge_id = target_by_key.get(mapped_key)
+        if target_edge_id is None:
+            raise ReprojectionCompatibilityError(
+                "source seam edge "
+                f"{source_edge_id} has no retained target edge after reprojection"
+            )
+        transferred.append(target_edge_id)
+    return transferred
 
 
 def gaussian(x: float, y: float, sx: float, sy: float) -> float:
@@ -311,24 +484,70 @@ def allowance_receipt(
     }
 
 
-def build_receipt(width: int, height: int, residual_threshold: float) -> dict[str, Any]:
-    vertices, edges, faces = build_toy_patch(width, height)
-    fields = projected_fields(vertices)
-    costs = edge_costs(vertices, edges, fields)
-    selected = select_seam_path(width, height, costs)
-    panels0 = panels_from_vertical_seam(width, height, selected, edges)
+def build_receipt(
+    width: int,
+    height: int,
+    residual_threshold: float,
+    max_reprojection_distance: float = 0.02,
+    mean_reprojection_distance: float = 0.01,
+    min_edge_retention_ratio: float = 0.99,
+) -> dict[str, Any]:
+    source_vertices, source_edges, source_faces = build_toy_patch(width, height)
+    target_vertices, target_edges, target_faces = build_target_patch(
+        source_vertices,
+        source_edges,
+        source_faces,
+    )
+
+    quality, vertex_mapping = reprojection_quality(
+        source_vertices,
+        source_edges,
+        target_vertices,
+        target_edges,
+    )
+    require_reprojection_compatible(
+        quality,
+        max_distance=max_reprojection_distance,
+        mean_distance=mean_reprojection_distance,
+        min_edge_retention_ratio=min_edge_retention_ratio,
+    )
+
+    source_fields = projected_fields(source_vertices)
+    costs = edge_costs(source_vertices, source_edges, source_fields)
+    selected_source = select_seam_path(width, height, costs)
+    selected_target = transfer_edges(
+        selected_source,
+        source_edges,
+        target_edges,
+        vertex_mapping,
+    )
+
+    target_fields = projected_fields(target_vertices)
+    panels0 = panels_from_vertical_seam(
+        width,
+        height,
+        selected_target,
+        target_edges,
+    )
     panels = [
-        panel_flattening_and_shaping(panel, vertices, fields, residual_threshold)
+        panel_flattening_and_shaping(
+            panel,
+            target_vertices,
+            target_fields,
+            residual_threshold,
+        )
         for panel in panels0
     ]
     has_shaping = any(panel["shaping_ops"] for panel in panels)
-    allowances = allowance_receipt(selected, costs, has_shaping)
+    allowances = allowance_receipt(selected_source, costs, has_shaping)
 
     field_projection = {
         str(vid): {k: round(v, 6) for k, v in values.items()}
-        for vid, values in fields.items()
+        for vid, values in target_fields.items()
     }
-    selected_cost_rows = [row for row in costs if row["edge_id"] in set(selected)]
+    selected_cost_rows = [
+        row for row in costs if row["edge_id"] in set(selected_source)
+    ]
     blockers = ["synthetic_body", "toy_flattening", "no_real_fabric_validation"]
 
     payload: dict[str, Any] = {
@@ -338,6 +557,7 @@ def build_receipt(width: int, height: int, residual_threshold: float) -> dict[st
         "pipeline_order": [
             "input",
             "body_gate",
+            "reprojection_gate",
             "field_summary",
             "seam_cost_graph",
             "panels",
@@ -351,25 +571,43 @@ def build_receipt(width: int, height: int, residual_threshold: float) -> dict[st
             "fabrication_method": "home_sewing",
             "width": width,
             "height": height,
+            "source_mesh_fixture": "toy_ellipsoid_patch",
+            "target_mesh_fixture": "deterministic_nearby_patch",
         },
         "body_gate": {
             "gate": "diagnostic",
             "severity": 1,
             "reason": "synthetic fixture, not fitted body evidence",
         },
+        "reprojection_gate": {
+            "passed": True,
+            "max_distance": round(quality.max_distance, 9),
+            "mean_distance": round(quality.mean_distance, 9),
+            "edge_retention_ratio": round(quality.edge_retention_ratio, 9),
+            "retained_edges": quality.retained_edges,
+            "source_edge_count": quality.source_edge_count,
+            "thresholds": {
+                "max_distance": max_reprojection_distance,
+                "mean_distance": mean_reprojection_distance,
+                "min_edge_retention_ratio": min_edge_retention_ratio,
+            },
+            "vertex_mapping_hash": stable_hash(vertex_mapping),
+        },
         "field_summary": {
             "fields": ["tension", "pressure", "shear", "support", "curvature", "grain_sector6"],
-            "vertex_count": len(vertices),
-            "edge_count": len(edges),
-            "face_count": len(faces),
+            "vertex_count": len(target_vertices),
+            "edge_count": len(target_edges),
+            "face_count": len(target_faces),
             "field_hash": stable_hash(field_projection),
         },
         "seam_cost_graph": {
-            "edge_count": len(edges),
+            "edge_count": len(source_edges),
             "forbidden_edges": sum(1 for row in costs if row["admissibility"] == "forbidden"),
             "risky_edges": sum(1 for row in costs if row["admissibility"] == "risky"),
             "preferred_edges": sum(1 for row in costs if row["admissibility"] == "preferred"),
-            "selected_seam_edges": selected,
+            "selected_seam_edges": selected_target,
+            "selected_source_seam_edges": selected_source,
+            "selected_target_seam_edges": selected_target,
             "selected_seam_cost": round(sum(float(row["cost"]) for row in selected_cost_rows), 6),
             "cost_hash": stable_hash(costs),
         },
@@ -392,6 +630,7 @@ def build_receipt(width: int, height: int, residual_threshold: float) -> dict[st
                 "claim_boundary": "dict[str,bool]",
                 "input": "dict",
                 "body_gate": "dict",
+                "reprojection_gate": "dict",
                 "field_summary": "dict",
                 "seam_cost_graph": "dict",
                 "panels": "list[panel]",
@@ -405,6 +644,9 @@ def build_receipt(width: int, height: int, residual_threshold: float) -> dict[st
                 "width": width,
                 "height": height,
                 "residual_threshold": residual_threshold,
+                "max_reprojection_distance": max_reprojection_distance,
+                "mean_reprojection_distance": mean_reprojection_distance,
+                "min_edge_retention_ratio": min_edge_retention_ratio,
             }
         ),
         "environment_hash": stable_hash({"python": platform.python_version()}),
@@ -418,6 +660,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--width", type=int, default=6)
     parser.add_argument("--height", type=int, default=5)
     parser.add_argument("--residual-threshold", type=float, default=0.105)
+    parser.add_argument("--max-reprojection-distance", type=float, default=0.02)
+    parser.add_argument("--mean-reprojection-distance", type=float, default=0.01)
+    parser.add_argument("--min-edge-retention-ratio", type=float, default=0.99)
     parser.add_argument("--out-dir", type=Path)
     parser.add_argument("--pretty", action="store_true")
     return parser.parse_args()
@@ -427,7 +672,17 @@ def main() -> None:
     args = parse_args()
     if args.width < 3 or args.height < 3:
         raise SystemExit("width and height must both be at least 3")
-    payload = build_receipt(args.width, args.height, args.residual_threshold)
+    try:
+        payload = build_receipt(
+            args.width,
+            args.height,
+            args.residual_threshold,
+            max_reprojection_distance=args.max_reprojection_distance,
+            mean_reprojection_distance=args.mean_reprojection_distance,
+            min_edge_retention_ratio=args.min_edge_retention_ratio,
+        )
+    except ReprojectionCompatibilityError as exc:
+        raise SystemExit(str(exc)) from exc
     text = json.dumps(payload, indent=2 if args.pretty else None, sort_keys=True) + "\n"
     if args.out_dir is not None:
         args.out_dir.mkdir(parents=True, exist_ok=True)

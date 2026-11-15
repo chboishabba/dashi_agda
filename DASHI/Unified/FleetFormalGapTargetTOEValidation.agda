@@ -263,3 +263,60 @@ toeResidualFieldStillNotPromoted :
   Fleet.ResidualFieldPromotion → ⊥
 toeResidualFieldStillNotPromoted =
   TOE.toeFleetResidualFieldPromotionImpossible
+
+
+------------------------------------------------------------------------
+-- Fleet R5 ordinal-cut root regression.
+------------------------------------------------------------------------
+
+toeFleetOrdinalCutMatchesOwner :
+  TOE.toeFleetR5OrdinalCutReceipt
+  ≡ Fleet.canonicalFleetR5OrdinalCutReceipt
+toeFleetOrdinalCutMatchesOwner = refl
+
+unifierFleetOrdinalCutMatchesOwner :
+  Unifier.unifierFleetR5OrdinalCutReceipt
+  ≡ Fleet.canonicalFleetR5OrdinalCutReceipt
+unifierFleetOrdinalCutMatchesOwner = refl
+
+toeFleetFormalGapOrdinalCountStill58 :
+  Fleet.fleetFormalGapOrdinalCount ≡ 58
+toeFleetFormalGapOrdinalCountStill58 =
+  TOE.toeFleetFormalGapOrdinalCountIs58
+
+unifierFleetFormalGapOrdinalCountStill58 :
+  Fleet.fleetFormalGapOrdinalCount ≡ 58
+unifierFleetFormalGapOrdinalCountStill58 =
+  Unifier.unifierFleetFormalGapOrdinalCountIs58
+
+toeFleetOrdinalStillCarriesNoPersistedIdentity :
+  Fleet.fleetOrdinalCarriesPersistedRowIdentity ≡ false
+toeFleetOrdinalStillCarriesNoPersistedIdentity =
+  TOE.toeFleetOrdinalRowIdentityStillUnattached
+
+unifierFleetOrdinalStillCarriesNoPersistedIdentity :
+  Fleet.fleetOrdinalCarriesPersistedRowIdentity ≡ false
+unifierFleetOrdinalStillCarriesNoPersistedIdentity =
+  Unifier.unifierFleetOrdinalRowIdentityStillUnattached
+
+toeFleetSharedCardinalityStillDoesNotCreateIdentity :
+  Fleet.FleetSharedCardinalityCreatesIdentity → ⊥
+toeFleetSharedCardinalityStillDoesNotCreateIdentity =
+  TOE.toeFleetSharedCardinalityDoesNotCreateIdentity
+
+unifierFleetSharedCardinalityStillDoesNotCreateIdentity :
+  Fleet.FleetSharedCardinalityCreatesIdentity → ⊥
+unifierFleetSharedCardinalityStillDoesNotCreateIdentity =
+  Unifier.unifierFleetSharedCardinalityDoesNotCreateIdentity
+
+toeFleetPlanningTextStillNotFormalResidual :
+  Fleet.externalPlanningTextCreatesFormalResidual
+    Fleet.canonicalFleetFormalGapTargetReceipt ≡ false
+toeFleetPlanningTextStillNotFormalResidual =
+  TOE.toeFleetPlanningTextDoesNotCreateFormalResidual
+
+unifierFleetPlanningTextStillNotFormalResidual :
+  Fleet.externalPlanningTextCreatesFormalResidual
+    Fleet.canonicalFleetFormalGapTargetReceipt ≡ false
+unifierFleetPlanningTextStillNotFormalResidual =
+  Unifier.unifierFleetPlanningTextDoesNotCreateFormalResidual

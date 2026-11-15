@@ -1,6 +1,7 @@
 module DASHI.Cognition.AnalyticLogPolarSpiralCompilerExact where
 
-open import Agda.Builtin.Equality using (_≡_; refl; sym; cong; trans)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (sym; cong; trans)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
 

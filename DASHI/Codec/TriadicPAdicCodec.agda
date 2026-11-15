@@ -19,6 +19,9 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Primitive using (Level; Setω)
 
+data _≡ω_ {A : Setω} (x : A) : A → Setω where
+  refl : x ≡ω x
+
 open import DASHI.Algebra.Trit using (Trit; neg; zer; pos; inv; inv-invol)
 import DASHI.Foundations.SurrealCompactificationBalancedTernaryEmbedding as BalancedEmbedding
 import DASHI.MDL.MDLLyapunov as ExistingMDL
@@ -367,7 +370,7 @@ record ExistingFormalismCrossReference : Setω where
       W9MDL.MDLTerminationSeamWitness
     w9TerminationRouteIdentityIsIdentity :
       (w : W9MDL.MDLTerminationSeamWitness) →
-      w9TerminationRouteIdentity w ≡ w
+      w9TerminationRouteIdentity w ≡ω w
 
 canonicalCrossReference : ExistingFormalismCrossReference
 canonicalCrossReference =

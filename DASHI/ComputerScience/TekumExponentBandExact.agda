@@ -1,6 +1,7 @@
 module DASHI.ComputerScience.TekumExponentBandExact where
 
-open import Agda.Builtin.Equality using (_≡_; _≢_; refl)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (_≢_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Empty using (⊥)
 open import Data.Integer.Base using (ℤ)
