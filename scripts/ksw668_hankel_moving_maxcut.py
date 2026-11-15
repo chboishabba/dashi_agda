@@ -144,6 +144,16 @@ def moving_abstract_green_and_bulk_chord():
         physical_matter_action_proved=False,
         actual_graviton_observation=False)
 
+
+def stationary_no_shortcut_control():
+    """Static planar brane: earliest bulk/null and induced photon times match."""
+    d,b=s.symbols('d b',positive=True)
+    bulk=s.sqrt(d*d+(b-b)**2)
+    assert s.simplify(bulk-d)==0
+    return dict(stationary_bulk_earliest_photon_time_equal=True,
+                geometric_early_signal_for_static_wall=False,
+                moving_wall_required_for_original_shortcut=True)
+
 def audit():
     return dict(stationary_symbolic=verify_resolvent_symbolic(),
       stationary_resolvent=stationary_outgoing(),
@@ -151,6 +161,7 @@ def audit():
       KK_packet=finite_energy_packet(),
       moving_source_lift=moving_boundary_lift(),
       moving_abstract=moving_abstract_green_and_bulk_chord(),
+      static_no_shortcut=stationary_no_shortcut_control(),
       explicit_original_moving_retarded_Green_kernel=False,
       gravitational_observation=False)
 
