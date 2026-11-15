@@ -158,7 +158,11 @@ sameReceiverReadoutCannotRecoverEmitterActivity :
   Query.AdequateFor
     selectedMicrophoneProjection toyQuerySemantics emitterQuestion → ⊥
 sameReceiverReadoutCannotRecoverEmitterActivity =
-  Query.queryAdequacyDefectBlocksFactorisation sourceActivityCollision
+  Query.queryAdequacyDefectBlocksFactorisation
+    {project = selectedMicrophoneProjection}
+    {semantics = toyQuerySemantics}
+    {query = emitterQuestion}
+    sourceActivityCollision
 
 ------------------------------------------------------------------------
 -- A genuinely additional observer can resolve this toy inverse ambiguity.
