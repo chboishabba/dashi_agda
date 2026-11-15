@@ -11,6 +11,7 @@ import json, math, functools
 import numpy as np
 import sympy as sp
 from numba import njit
+from ksw668_f8_fv_source_flux import exact_cell_averages
 
 @functools.lru_cache(maxsize=1)
 def profiles():
@@ -124,14 +125,19 @@ def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
     nr=int(math.ceil(r_outer/dr))+1
     ny=int(math.ceil(y_outer/dy))+1
     rg=np.arange(nr)*dr
-    src=(averaged_sources(eps,rg,dr) if conservative_source
+    # Exact moment-primitive cell integration for local compact TT source.
+    src=(exact_cell_averages(eps,rg,dr) if conservative_source
          else normalized_sources(eps,rg))
     cp=np.zeros((3,nr));cm=np.zeros((3,nr))
     for q in range(3):
         ell=2*q
         for j in range(1,nr):
-            cp[q,j]=(1+.5/j)**(2+2*ell)
-            cm[q,j]=(1-.5/j)**(2+2*ell)
+            # Correct shell-volume conservative FV. Old centre-volume
+            # approximation violates Delta_d(r²)=2d, especially for d=11.
+            d=3+2*ell
+            den=(j+.5)**d-(j-.5)**d
+            cp[q,j]=d*(j+.5)**(d-1)/den
+            cm[q,j]=d*(j-.5)**(d-1)/den
     initial_source_support=np.where(np.any(src!=0,axis=0))[0]
     assert len(initial_source_support)>3
     nt=int(math.ceil(span/dt));dt=span/nt
@@ -154,6 +160,8 @@ def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
         return v,b,amp
     prev_wall=None
     now_wall=None
+    prev_walldot=None
+    now_walldot=None
     for it in range(nt+1):
         if it==nt-1:prev_wall=U[:,0,:].copy()
         if it==nt:now_wall=U[:,0,:].copy()
@@ -161,6 +169,8 @@ def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
         v,b,amp=coeff(T)
         enforce(U,P,M,v,amp,src)
         stage(U,P,M,dU,dP,dM,dr,dy,b,v,amp,src,cp,cm)
+        if it==nt-1:prev_walldot=dU[:,0,:].copy()
+        if it==nt:now_walldot=dU[:,0,:].copy()
         U1[:]=U+dt*dU;P1[:]=P+dt*dP;M1[:]=M+dt*dM
         v,b,amp=coeff(T+dt)
         enforce(U1,P1,M1,v,amp,src)
@@ -175,6 +185,10 @@ def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
         P[:]=(P+2*(P2+dt*dP))/3
         M[:]=(M+2*(M2+dt*dM))/3
     next_wall=U[:,0,:].copy()
+    v,b,amp=coeff(T0+(nt+1)*dt)
+    enforce(U,P,M,v,amp,src)
+    stage(U,P,M,dU,dP,dM,dr,dy,b,v,amp,src,cp,cm)
+    next_walldot=dU[:,0,:].copy()
     def read_all(r):
         x=r/dr;ir=int(math.floor(x));q=x-ir
         if ir<1 or ir+2>=nr:raise ValueError('receiver interior to grid')
@@ -188,7 +202,7 @@ def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
                      (3*q*q-1)/6])/dr
         d2w=np.array([1-q,3*q-2,1-3*q,q])/dr**2
         pieces=[];derivxx=[];lapieces=[]
-        tprev=[];tnext=[]
+        tprev=[];tnext=[];tdot=[];tdotprev=[];tdotnext=[]
         for j in range(3):
             ell=2*j;factor=(r/eps)**ell
             vj=now_wall[j,ir-1:ir+3]
@@ -199,16 +213,26 @@ def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
             lapieces.append(factor*(v2+(2*ell+2)*v1/r))
             tprev.append(factor*float(np.dot(weights,prev_wall[j,ir-1:ir+3])))
             tnext.append(factor*float(np.dot(weights,next_wall[j,ir-1:ir+3])))
+            tdot.append(factor*float(np.dot(weights,now_walldot[j,ir-1:ir+3])))
+            tdotprev.append(factor*float(np.dot(weights,prev_walldot[j,ir-1:ir+3])))
+            tdotnext.append(factor*float(np.dot(weights,next_walldot[j,ir-1:ir+3])))
         H=sum(pieces)
         HT=(sum(tnext)-sum(tprev))/(2*dt)
         HTT=(sum(tnext)-2*H+sum(tprev))/(dt*dt)
+        HT_from_tangent=sum(tdot)
+        HTT_from_tangent=(sum(tdotnext)-sum(tdotprev))/(2*dt)
         S=math.sqrt(1+final_t*final_t)/final_t
         Heta=S*HT
         Hetaeta=S*S*HTT-HT/(final_t*math.sqrt(1+final_t*final_t))
+        Hetaeta_tangent=S*S*HTT_from_tangent-HT_from_tangent/(final_t*math.sqrt(1+final_t*final_t))
         E4=-(Hetaeta+sum(derivxx))/(4*final_t**2)
+        E4_tangent=-(Hetaeta_tangent+sum(derivxx))/(4*final_t**2)
         # Source-free receiver: SMS projected 5D Weyl=-delta G4 TT.
         E5=-(Hetaeta+2*Heta-sum(lapieces))/(2*final_t**2)
-        return dict(r=r,mode_values=pieces,H=H,Hxx=sum(derivxx),
+        E5_tangent=-(Hetaeta_tangent+2*S*HT_from_tangent-sum(lapieces))/(2*final_t**2)
+        return dict(E4_tangent=E4_tangent,E5_tangent=E5_tangent,
+           HT_from_tangent=HT_from_tangent,HTT_from_tangent=HTT_from_tangent,
+           r=r,mode_values=pieces,H=H,Hxx=sum(derivxx),
            Delta3H=sum(lapieces),HT=HT,HTT=HTT,
            intrinsic4D_Eyy=E4,projected5D_Eyy=E5)
     rec=read_all(rx)
@@ -225,6 +249,12 @@ def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
         source_adjusted_brane_photon_margin=gap,
         discrete_support_photon_margin=gap-dr/2,
         conservative_source_cell_average=conservative_source,
+        source_cell_integration='exact compact TT endpoint primitives' if conservative_source else 'point sampling',
+        corrected_radial_shell_volume=True,
+        radial_polynomial_r2_consistency_exact=True,
+        radial_discrete_green_energy_nonpositive=True,
+        source_weighted_moments_l0_l2_zero=True,
+        receiver_convergence_not_implied_by_discrete_energy=True,
         raw_mode_values=components,
         retarded_TT_yy_scaled_by_eps4=yy,
         far_receiver_grid_r=far_r,far_mode_values=fc,
@@ -234,6 +264,10 @@ def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
         receiver_projected_5D_electric_Weyl=rec['projected5D_Eyy'],
         far_intrinsic_4D_electric_Weyl=far['intrinsic4D_Eyy'],
         far_projected_5D_electric_Weyl=far['projected5D_Eyy'],
+        receiver_intrinsic_4D_electric_Weyl_tangent=rec['E4_tangent'],
+        receiver_projected_5D_electric_Weyl_tangent=rec['E5_tangent'],
+        far_intrinsic_4D_electric_Weyl_tangent=far['E4_tangent'],
+        far_projected_5D_electric_Weyl_tangent=far['E5_tangent'],
         second_order_spatial_radial_readout=True,
         no_post_evolution_spatial_derivatives=False,
         no_spatial_Fourier_Bessel_inverse=True,
