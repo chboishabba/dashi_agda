@@ -4174,6 +4174,221 @@
               "expected_false": null
             }
           ]
+        },
+        "DASHI/Mathematics/Complexity/PNotEqualsNPFixedInstanceQuantifierNoGoExact.agda": {
+          "owner": "DASHI/Mathematics/Complexity/PNotEqualsNPFixedInstanceQuantifierNoGoExact.agda",
+          "blob": "17c6d26ffd424c688bffc81d58a3c22143a7c619",
+          "terms": [
+            {
+              "name": "fixed-instance quantifier swap",
+              "kind": "KNOWN_NEGATIVE_CONTROL",
+              "mention": 0,
+              "declaration": 0,
+              "expected_false": null
+            }
+          ]
+        },
+        "DASHI/Mathematics/Complexity/PNotEqualsNPStandardMachineMaxCutClosureExact.agda": {
+          "owner": "DASHI/Mathematics/Complexity/PNotEqualsNPStandardMachineMaxCutClosureExact.agda",
+          "blob": "564f3f11ce56e228247992d2fd308f00fd70487f",
+          "terms": [
+            {
+              "name": "StandardPolynomialCandidateCoverage.realize",
+              "kind": "CONDITIONAL_RECORD",
+              "mention": 43,
+              "declaration": 43,
+              "expected_false": null
+            },
+            {
+              "name": "ResourceClosingCompiler.compile",
+              "kind": "CONDITIONAL_RECORD",
+              "mention": 65,
+              "declaration": 65,
+              "expected_false": null
+            }
+          ]
+        },
+        "DASHI/Mathematics/Complexity/PNotEqualsNPStructuralResourceClosingCompilerExact.agda": {
+          "owner": "DASHI/Mathematics/Complexity/PNotEqualsNPStructuralResourceClosingCompilerExact.agda",
+          "blob": "fcb25111924956904162ec79175eb32cd57719bf",
+          "terms": [
+            {
+              "name": "StructuralResourceClosingFixedProgramCompilation",
+              "kind": "CONDITIONAL_RECORD",
+              "mention": 30,
+              "declaration": 0,
+              "expected_false": null
+            }
+          ]
+        },
+        "DASHI/Mathematics/Complexity/PNotEqualsNPVirtualQuotationFrontierExact.agda": {
+          "owner": "DASHI/Mathematics/Complexity/PNotEqualsNPVirtualQuotationFrontierExact.agda",
+          "blob": "c3937aa89ec37064727d1cbbeb3cd8311a7b7cf8",
+          "terms": [
+            {
+              "name": "VirtualSelfQuotationCompilation",
+              "kind": "CONDITIONAL_RECORD",
+              "mention": 417,
+              "declaration": 0,
+              "expected_false": null
+            },
+            {
+              "name": "UniversalGuardedCookBitGenerator",
+              "kind": "CONDITIONAL_RECORD",
+              "mention": 68,
+              "declaration": 0,
+              "expected_false": null
+            },
+            {
+              "name": "VirtualRunSimulation",
+              "kind": "CONDITIONAL_RECORD",
+              "mention": 338,
+              "declaration": 0,
+              "expected_false": null
+            }
+          ]
+        },
+        "DASHI/Physics/Closure/NSClayFacingATwoPhysicalSeamCompilerExact.agda": {
+          "owner": "DASHI/Physics/Closure/NSClayFacingATwoPhysicalSeamCompilerExact.agda",
+          "blob": "fc8d11ca5466f78b1ea557882059ed3c647fac82",
+          "terms": [
+            {
+              "name": "PhysicalKernelIdentification.nearOrigin",
+              "kind": "CONDITIONAL_RECORD",
+              "mention": 50,
+              "declaration": 50,
+              "expected_false": null
+            },
+            {
+              "name": "PhysicalKernelIdentification.highFrequency",
+              "kind": "CONDITIONAL_RECORD",
+              "mention": 53,
+              "declaration": 53,
+              "expected_false": null
+            },
+            {
+              "name": "ClayFacingATwoPhysicalSeams.kernelIdentification",
+              "kind": "CONDITIONAL_RECORD",
+              "mention": 9,
+              "declaration": 68,
+              "expected_false": null
+            },
+            {
+              "name": "ClayFacingATwoPhysicalSeams.stateMajorantIdentification",
+              "kind": "CONDITIONAL_RECORD",
+              "mention": 14,
+              "declaration": 71,
+              "expected_false": null
+            },
+            {
+              "name": "PhysicalEnvelopeInputs",
+              "kind": "CONDITIONAL_RECORD",
+              "mention": 72,
+              "declaration": 0,
+              "expected_false": null
+            }
+          ]
+        },
+        "DASHI/Physics/Closure/NSTriadKNFiniteRationalSlotAssignmentBridgeRound74Exact.agda": {
+          "owner": "DASHI/Physics/Closure/NSTriadKNFiniteRationalSlotAssignmentBridgeRound74Exact.agda",
+          "blob": "c49ad6a495892808e53ff4611ef96a9061222b6f",
+          "terms": [
+            {
+              "name": "round74PhysicalRHSAgreesWithFiniteChartPolynomial",
+              "kind": "EXPLICIT_OPEN_FLAG",
+              "mention": 244,
+              "declaration": 244,
+              "expected_false": true
+            },
+            {
+              "name": "round74RealPicardLindelofAppliedToFiniteChart",
+              "kind": "EXPLICIT_OPEN_FLAG",
+              "mention": 247,
+              "declaration": 247,
+              "expected_false": true
+            }
+          ]
+        },
+        "DASHI/Physics/Closure/NSTriadKNR650CanonicalSelectedRateNormalFormRound853Exact.agda": {
+          "owner": "DASHI/Physics/Closure/NSTriadKNR650CanonicalSelectedRateNormalFormRound853Exact.agda",
+          "blob": "24d1d228c35181ff4f78da2f299db0e171cbec20",
+          "terms": [
+            {
+              "name": "round853RealTrajectoryCarrierWeldClosed",
+              "kind": "EXPLICIT_OPEN_FLAG",
+              "mention": 223,
+              "declaration": 223,
+              "expected_false": true
+            },
+            {
+              "name": "round853R823DecisionClosed",
+              "kind": "EXPLICIT_OPEN_FLAG",
+              "mention": 226,
+              "declaration": 226,
+              "expected_false": true
+            },
+            {
+              "name": "R853 selected signed rate normal form",
+              "kind": "SOURCE_TERM_UNCHECKED",
+              "mention": 0,
+              "declaration": 0,
+              "expected_false": null
+            }
+          ]
+        },
+        "DASHI/Physics/Closure/NSTriadKNR650CompleteSignedFourHelicityBarrierRound821Exact.agda": {
+          "owner": "DASHI/Physics/Closure/NSTriadKNR650CompleteSignedFourHelicityBarrierRound821Exact.agda",
+          "blob": "f2f31c24829da6ca3fc3720dc356a00f143daaf0",
+          "terms": [
+            {
+              "name": "round821SignedAnalyticPaymentClosed",
+              "kind": "EXPLICIT_OPEN_FLAG",
+              "mention": 211,
+              "declaration": 211,
+              "expected_false": true
+            },
+            {
+              "name": "round821W1AnalyticPaymentClosed",
+              "kind": "EXPLICIT_OPEN_FLAG",
+              "mention": 214,
+              "declaration": 214,
+              "expected_false": true
+            },
+            {
+              "name": "round821SmoothContinuationClosed",
+              "kind": "EXPLICIT_OPEN_FLAG",
+              "mention": 217,
+              "declaration": 217,
+              "expected_false": true
+            }
+          ]
+        },
+        "DASHI/Physics/Closure/NSTriadKNR650CompleteSignedW2HelicityRateRound820Exact.agda": {
+          "owner": "DASHI/Physics/Closure/NSTriadKNR650CompleteSignedW2HelicityRateRound820Exact.agda",
+          "blob": "0218a1be8960b430d67722f98cd161d14b053248",
+          "terms": [
+            {
+              "name": "round820CompleteSignedInequalityClosed",
+              "kind": "EXPLICIT_OPEN_FLAG",
+              "mention": 187,
+              "declaration": 187,
+              "expected_false": true
+            },
+            {
+              "name": "round820W1Closed",
+              "kind": "EXPLICIT_OPEN_FLAG",
+              "mention": 190,
+              "declaration": 190,
+              "expected_false": true
+            },
+            {
+              "name": "R820 complete four-helicity rate identity",
+              "kind": "SOURCE_TERM_UNCHECKED",
+              "mention": 0,
+              "declaration": 0,
+              "expected_false": null
+            }
+          ]
         }
       },
       "method": "exact PR-head GitHub fetch_file proof bodies; source-structural not kernel; subsequent audit commits do not modify these original proof owners"
