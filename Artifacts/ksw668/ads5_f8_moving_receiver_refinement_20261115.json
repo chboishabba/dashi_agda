@@ -76,7 +76,7 @@
     "interpretation": "genuine compact 3D TT test source constructed; numerical UV/cutoff/convergence fail"
   },
   "acceptance": {
-    "source_equivalent_unit_tests": "284/284 source-equivalent local replay PASS; exact GitHub-head Agda kernel unverified",
+    "source_equivalent_unit_tests": "326/326 local source-equivalent suite PASS; exact GitHub PR head and pinned Agda kernel UNRUN",
     "full_3d_B4_numerical_convergence": false,
     "external_analytical_Green_operator_previously_claimed_by_external_theorem": true,
     "tensor_matter_generating_action": false,
@@ -104,9 +104,9 @@
     "exact_GitHub_PR_head_execution": false
   },
   "next_exact_lemmas": [
-    "ads5OriginalMovingSBP4SATFullyDiscreteSSPRK3CFLAndTruncationError",
-    "ads5OriginalTTCharacteristicConstraintPropagationUnderWeakSAT",
-    "ads5OriginalMovingCompactTTCharacteristicLiftUniformSobolevSourceBudget",
+    "ads5OriginalWeakIsraelGlobalConstraintBoundaryWeld",
+    "ads5OriginalMovingSBP3FullCoupledSSPRK3CFLAndError",
+    "ads5OriginalCompactTTFullH4PlusEpsilonNeumannBoundarySourceBudget",
     "ads5OriginalMovingH4PlusEpsilonNeumannToBothWeylTrace",
     "ads5OriginalMovingTTThreeMultipoleThreeObservableConvergence",
     "ads5OriginalT2NeumannToWeylEllipticFIOComposition",
@@ -516,5 +516,47 @@
     "source_equivalent_local_replay": "284/284 PASS (merged 255 baseline, 29 new)",
     "exact_connected_branch_head_executable_run": false,
     "prior_standalone_FIO_markdown_present_in_merged_master": true
+  },
+  "original_physical_constraint_radial_sobolev_maxcut_ix_20261115": {
+    "machine_receipt": "Artifacts/ksw668/ads5_f8_physical_constraint_radial_sobolev_maxcut_ix_20261115.json",
+    "report": "Docs/physics/KSW668F8PhysicalConstraintRadialSobolevMaxCut20261115.md",
+    "original_physical_C": "D_y U-(P-M)/2",
+    "original_unweighted_SBP2_SAT_mode3_interior_C_T_exact_zero": true,
+    "original_SSPRK3_interior_C_exact_at_all_three_stages": true,
+    "weighted_mode4_interior_defect": "a(D_y-D_w)P+c(D_y-D_w)M",
+    "commutator_mesh_assumption": "dy<=b/4",
+    "commutator_bound": "|<f,(D_y-D_w)f>_Hw|<=4/b*||f||²_Hw",
+    "constraint_preserving_full_coupled_homogeneous": "E_3'<=(5+16t)E_3",
+    "constraint_preserving_full_coupled_forced": "E_3_tilde'<=(6+16t)E_3_tilde+0.5||F||²_E",
+    "sourced_original_compact_TT_epsilon": 0.04,
+    "physical_compact_source_slices_verified": [
+      1,
+      1.3333333333333333,
+      2,
+      12
+    ],
+    "actual_SBP_stage_source_lift_pass": true,
+    "weak_SAT_global_boundary_constraint_no_go": "Cdot_wall=Cdot_far=(2/5)/dy for original t4/3 U=y/2 P=1 M=0 G=0",
+    "finite_radial_Sobolev_all_natural_orders_commute_algebraically": true,
+    "actual_compact_source_modes": [
+      0,
+      2,
+      4
+    ],
+    "finite_radial_orders_tested": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "radial_commutation_max_relative_residual": 5.513657351179439e-16,
+    "global_weak_SAT_constraint_accepted": false,
+    "full_coupled_time_SSPRK3_energy_accepted": false,
+    "full_5D_H4_epsilon_to_both_Weyl_trace_accepted": false,
+    "original_three_grid_H_E4_E5_accepted": false,
+    "physical_source_action_or_graviton_observation": false,
+    "source_equivalent_local_tests_passed": "326/326",
+    "exact_branch_head_runner_run": false,
+    "pinned_Agda_2_9_kernel_run": false
   }
 }
