@@ -20,7 +20,7 @@ import sympy as sp
 DIMS=(3,7,11)
 
 def coeff(t):
-    if not 1<=t<=2:raise ValueError('original a=t t in [1,2]')
+    if t<1:raise ValueError('original a=t t>=1')
     b=1/t;v=-1/math.sqrt(1+t*t)
     return b,v,t**3/(1+t*t)**2,(1+v)/2,(1-v)/2
 
@@ -133,7 +133,7 @@ def algebra():
 
 def audit():
     samples=[]
-    for ny,nr,dy,dr,t,seed in ((8,5,.02,.03,1.,1),(11,7,.015,.025,4/3,2),(16,9,.01,.018,2.,3)):
+    for ny,nr,dy,dr,t,seed in ((8,5,.02,.03,1.,1),(11,7,.015,.025,4/3,2),(16,9,.01,.018,2.,3),(15,7,.012,.02,12.,4))
         x=full_energy_derivative(setup(ny,nr,dy,dr,t,seed))
         samples.append(dict(t=t,E=x['E'],Eprime=x['Eprime'],residual=x['exact_identity_residual']))
     return dict(symbolic=algebra(),samples=samples,uniform_growth_constant=5,
