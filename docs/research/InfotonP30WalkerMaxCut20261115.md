@@ -102,3 +102,16 @@ Corrections: Walker's **300 K** Infoton mass is a reference-temperature value of
 Existing thermal owners already give PUE/ERF/ERE and exact source-heat versus compressor-output boundaries; do not substitute a fresh rack-only PUE model or confuse useful heat with electrical savings. Real critical systems have scope-dependent **binding** standards (10 CFR 50.55a(h), FIPS 140-3), but the unspecified nine laws in the reel have not been located and an IBM byte-only obligation is not demonstrated.
 
 **This rebase does not change the original 8/19 Infoton closure ledger: 11 physical/authority/codec gates remain OPEN.** It makes the proof prerequisites and donor reuse more specific without promoting finite source-written material to independent physical endpoints.
+
+
+## 16 Nov 2026 — original physical-adapter max-cut (source code and local tests)
+
+Companion: [Infoton original physical-adapter max-cut](./InfotonOriginalPhysicalAdapterMaxCut20261116.md). **Original endpoint count unchanged: 8/19 adjudicated, 11 OPEN.**
+
+The **actual** DASHI physical law owners were located and reused, not replaced: \`DASHI.Physics.Laws.ExistingPhysicsAdapter\`, \`ThermodynamicStatisticalLaws\`, \`GaugeInteractionLaws\`, \`QuantumFieldLaws\`, \`StandardModelLawBoundary\`, \`ConstantsMetrologyBoundary\`, \`Environment.QuantitiesConservation.WaterBalance\`, and the original heat/PUE/ERF owner. New \`DASHI/Quantum/InfotonOriginalPhysicalAdapterWeldExact.agda\` reuses actual original QED \`+4/6\` versus \`-2/6\`, original E6 centre theorem, site heat/water and canonical physics status. Its \`noOriginalQuarkChargeFromFDScalarAlone\` is a finite **conditional impossibility** for a universal scalar-only charge map, not a no-go on every richer model. It requires a separately specified fermion/gauge-action selector for Walker's positive charge claim.
+
+New \`scripts/infoton_original_physical_adapters_maxcut.py\` and tests implement calibrated-measurement **acceptance gates** for the same data, fault corpus, hardware, workload, service and physical energy and water quantities. Tests directly run the *byte-identical original* \`scripts/datacentre_thermal_reuse_dispatch.py\` (Git blob \`84670c75f2775422c2ce7e284283cc66b50f1f14\`), including heat offtake/no-offtake conservation cases. **41/41 Python tests PASSED locally** across original 23 bundled P30/ECC cases and new 18 physical-adapter cases. GitHub blobs of the three new source/test files match the tested local copies exactly.
+
+Both new Agda source modules are imported in the **Quantum domain rollup** and **EverythingTOESymmetryResolved369 import graph**. The pinned Agda checker is unavailable in the current container, so **B4 remains OPEN**; use \`scripts/check_infoton_original_physical_maxcut.sh\` in a full pinned Agda checkout for original 27-state E6 gauge regression + original thermal dispatcher + Python tests + strict 2.8.0.2 kernel checking. This shell script is not itself an Agda verification result.
+
+GitHub API inspection of Walker's public \`JanuaryNWalker/Infoton\` main (16 Nov 2026) shows only README.md and LICENSE, despite a reported P30 demonstration. No original P30 source codec, detector observation, metered rack energy or site water data is present in that checked public code. No physical positive endpoint is promoted by our framework's existence.
