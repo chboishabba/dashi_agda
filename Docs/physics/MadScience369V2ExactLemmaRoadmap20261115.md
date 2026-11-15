@@ -95,3 +95,26 @@ python scripts/v2_pulse_restricted_global_optimum.py > Artifacts/v2_pulse_restri
 The runner must include four new Agda targets and new P1/P2 tests. Static commands, conditional Grönwall bounds and finite floating-point candidate Pareto DO NOT prove original physical hardware or globally certified non-convex optimal control. The full numerical receipt may be more expensive than quick regressions due to the 29-amplitude fair-shaft candidate search.
 
 **Next highest-value mathematical cut:** kernel-check P0; formal validated ODE flow + a *periodic orbit/endpoint certificate* for one model machine; then exact full-waveform Pareto and global bound in a restricted rigorously specified class. Hardware P3 and P4 remain blocked on original V2 instrumentation. Do not open a separate PR for this round.
+
+
+## 15 November 2026 — P1.C finite propagation and Don Smith causal-flight transfer
+
+**Original donor:** `DASHI/Physics/Motors/SmithFilsingerTimeIndexedTransferExact.agda` (`RetardedFlight`, `arrivalNoEarlier`, `twoHopSecondFlight`) and `scripts/check_smith_filsinger_causal_nonlinear_maxcut.py` (`delayed_wave`, signed timed-pump Hamiltonian). Those are original Smith/Filsinger *model contracts*, not evidence of shared V2 hardware. The physical principle comes from relativistic causal Maxwell propagation: **information/causal electromagnetic fronts propagate no faster than the vacuum c bound**, rather than every system variable propagating *at exactly c*. Material, cable, acoustic, mechanical, thermal and other transport channels may be slower. EM phase/group velocity in a dispersive environment is not in general a signal-front velocity.
+
+**Important correction to P1.1/P1.2 claims:** a simultaneous `L(θ) @ i(t)` mutual-inductance matrix is a *spatially lumped quasistatic approximation*. It does not implement a retarded Maxwell field or physically simultaneous state change between distant coils. For longer transmission paths, fast switching edges, distributed capacitance and boundary coupling, a delay/field solver must be used; a small `ω τ` can justify testing a quasistatic limit, but is **not a rigorous model-reduction theorem by itself**.
+
+**New conditional finite flight controls:**
+- `DASHI/Physics/Motors/MadScience369V2CausalFlightBoundExact.agda` imports the original Smith/Filsinger `RetardedFlight`; `SpatialLightConeLeg` requires a source-supplied integer-grid lightcone witness `distance ≤ flightTicks × frontSpeed`; `SeparatedPhysicalLeg` additionally requires `frontSpeed ≤ vacuumMaxSpeed`. `positiveDistanceNoZeroFlight` and `noInstantRemoteLeg` exclude a positive-distance link crossing in zero time; two-hop arrival never precedes source launch. **Source written, Agda kernel NOT yet run**; a full spatial Maxwell theorem is not implied.
+- `scripts/v2_retarded_causal_network_maxcut.py` and `tests/test_v2_retarded_causal_network_maxcut.py` give 24 new Python regression cases for finite-speed acceptance, invalid superluminal edges, sampled earliest arrival, two-hop causal composition, passive single-link attenuation and quasistatic frequency scale. Sampled `ceil(tau/dt)` arrival is **conservative**; it overdelays each hop by < one sample interval. It must not be grafted into the coarsely sampled motor integrator as one artificial 142 µs step.
+- Under an **illustrative, not V2 measured** half-metre cable at `v_front=0.7c`, one-way latency is ≈2.3826 ns, 20 kHz synthetic PWM `ω τ ≈ 0.0002994`, 2354 RPM shaft period ≈25.49 ms, and 180-steps/revolution original integrator step ≈141.60 µs. Quasistatic approximation is plausible at the selected PWM fundamental, but actual switch-edge bandwidth and machine geometry remain unknown.
+
+### Exact new causal obligations (within P1/P3, not new independent original-V2 gates)
+
+| Gate | Exact lemma/producer | Current disposition | Required for stronger closure |
+|---|---|---|---|
+| P1.C1 | `v2CausalFiniteFlightAndNoEarlyArrival` | Finite conditional Agda source and 24 Python tests | Kernel check imported Smith donor, establish numerical clock units/geometry provenance |
+| P1.C2 | `v2DistributedLineMaxwellPassivityAndWavefrontBound` | OPEN | Driven retarded transmission-line/Maxwell boundary model with `front ≤ c`, passive/active energy ports and no acausal advance |
+| P1.C3 | `v2LumpedQuasistaticErrorAndControllerLatencyBound` | OPEN | Rigorous approximation error for instantaneous coupled L versus retarded field dynamics at the selected switching rise times, plus controller latency |
+| P3.C4 | `v2ActualCableGeometryMaterialAndProbeDelayReceipt` | PHYSICAL OPEN | Device-specific cable/coil lengths, medium/material response, front-speed/dispersion calibration, probe skew and event timebase |
+
+**Acceptance implications:** future P1.3/P2.1 Pareto ranking must enforce finite signal front, gate/sense latency and source-work accounting whenever distributed delays are relevant; do not use delayed observations to double-count stored work. Retarded propagation by itself neither recovers nor creates energy, and the V2 physical P3/P4 gates remain entirely open. The 16 original strict gates remain unchanged; these are four newly explicit causal subgates.
