@@ -141,7 +141,9 @@ projectionMatchesDelta witness x (Compare.differentX6 difference) =
     (cong (C3.multiply (normalizer witness))
       (Eval.pointProjectorOffPoint
         (selected witness) x (vector witness) difference))
-    (L.zeroActsLeft (normalizer witness))
+    (trans
+      (L.multiplyCommutative (normalizer witness) C3.zero)
+      (L.zeroActsLeft (normalizer witness)))
 
 normalisedProjectionIsDeltaPointwise :
   ∀ {Member inv}
