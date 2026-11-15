@@ -361,3 +361,87 @@ The HF locator uses the source prefix **hf://datasets/acrion/zelph/**, with the 
 **Non-promotion rules:** source assertion ≠ accepted proof; same label ≠ same concept; review choice ≠ ontology truth; incomplete graph ≠ absence; coarse query sufficiency ≠ world completeness; typed local hyperedge ≠ compatible global section; matching semantic label ≠ matching KV tensors; acquiring a residual ≠ authority to edit.
 
 The **single existing PR per repository** remains the rule. No DOCX is part of the required deliverable.
+
+
+## 20. User-story correction: NORA as situated semantic crosswalk and residual producer
+
+**Verified source audit: 15 November 2026.** This corrects the too-linear diagram previously used in discussion. **NORA is not a mandatory step between Zelph and SLR, nor a new canonical truth or state owner.** NORA (Éder Porto's independent alpha) is a *possible opt-in consumer-specific ontology review adapter* and producer of reviewer-attributed mapping decisions, conflicts, unanswered questions and acquisition requests. The true live NORA export/API remains an external open gate.
+
+### 20.1 Actual user-story ownership and required separation
+
+| Existing user-story owner | Exact story/contract | NORA integration consequence |
+| --- | --- | --- |
+| [TiRCorder capture](https://github.com/chboishabba/tircorder-JOBBIE/blob/master/README.md), [connector contract](https://github.com/chboishabba/tircorder-JOBBIE/blob/master/docs/tircorder_connector(1).md) | Capture audio, diarisation, transcript, utterances, timestamps and source receipts; explicit ban on semantic/ontology fields in capture packets | Review later through immutable original utterance/span reference; **do not** write concepts or legal claims into the capture artifact |
+| [StatiBaker README](https://github.com/chboishabba/StatiBaker/blob/main/README.md), [ingest contract](https://github.com/chboishabba/StatiBaker/blob/main/ITIR_INGEST_CONTRACT.md), [loss profile](https://github.com/chboishabba/StatiBaker/blob/main/LOSS_PROFILES.md) | Append-only deterministic temporal state compilation; read-only ID/reference overlays; explicit loss; no meaning rewrite | NORA decision can be an externally referenced *event about review*, not a rewrite of SB canonical events or a diagnosis |
+| [ITIR suite stories](https://github.com/chboishabba/ITIR-suite/blob/main/docs/user_stories.md) | US-01–03 context, knowable-then vs known-later, drift; US-11–16 personal memory, review, trauma-safe reconstruction, private/professional handoff and anti-false-coherence; US-17 wiki revision follow | Scoped optional consumer views; preserve authored source, time, uncertainty, standpoint and abstentions, even when ontology labels match |
+| [SensibLaw Wikidata editor/persona/partial-stack stories](https://github.com/chboishabba/SensibLaw/blob/main/docs/user_stories.md) | Work/home legal/psychologist scopes; ontology workers review identity/role/time/sourcing pressure, not unreviewed authority; source-sensitive user stories across legal, audit and private users | A mapping may be adequate for one professional's exact question and inadequate for another; no cross-scope forced consensus |
+| [SLR production roadmap](https://github.com/chboishabba/slr/blob/main/docs/ROADMAP.md) / [sprint board](https://github.com/chboishabba/slr/blob/main/docs/SPRINTS.md) | source/revision/span/observation → consumer residual → producer plan → bounded acquisition → candidate → explicit review/payment → W(n+1) → rediagnosis; Sprint 2 active shared evidence convergence | SLR, not NORA, owns durable production evidence, admission, source acquisition and selective dependency reopening |
+| [ITIR WIKI-US-01–04](https://github.com/chboishabba/ITIR-suite/blob/main/docs/user_stories.md#wiki-and-public-knowledge-operator-integration-stories) | Registered read-only review/object/migration packets; governance; P2738 disjointness; cross-corpus provenance | Reuse existing ITIR MCP, never a separate edit service |
+| [ITIR WIKI-US-05 / US-26 (PR #14)](https://github.com/chboishabba/ITIR-suite/blob/agent/nat-filtered-route-producer/docs/user_stories.md) | exact immutable QID→HF physical name shard, no false negative completeness, (QID, native GUID) population accounting | Physical graph evidence is not a native Wikibase qualified statement, P854 source support or edit permission |
+| [SLR WIKI-US-01–03 (PR #10 branch)](https://github.com/chboishabba/slr/blob/agent/source-unit-wikimedia-handoff/docs/user_stories_wikidata_zelph_mcp_20261114.md) | Native source and statement review, existing MCP source execution, bounded physical slices, full Nat review | Use existing SLR producer/S29 paths; authentic NORA export and persisted reviewed native/graph join still open |
+
+The suite's own words: **ITIR preserves what happened, SensibLaw constrains what can be claimed, and StatiBaker refuses to tell you what it means.** Context is mandatory, interpretation optional, expanding context cheaper than compressing it, and context removal logged. The [SensibLaw extractor→ontology contract](https://github.com/chboishabba/SensibLaw/blob/main/docs/extractor_ontology_mapping_contract_20260213.md) separately requires deterministic pinned lexical/synset resolution and abstention on ambiguous mappings, not LLM inference promoted to canonical ontology identity.
+
+### 20.2 Corrected architecture (multiple entry/exit points)
+
+~~~text
+   TiRCorder + primary sources                 StatiBaker time/state observer
+             |                                           |
+             +------------> ITIR source/context ----------+
+                                  |
+                       SLR canonical evidence state
+                                  |
+             consumer-specific residual / unresolved question
+                     /                         \
+                    v                           v
+       SLR existing bounded producer     NORA optional ontology review
+       local → Zelph HF → governed      source/standpoint/consumer/candidate
+       revision-pinned live                         |
+                    \                           /
+                     +---- candidate evidence -+
+                                  |
+                   independent review / payment
+                                  |
+                  persisted W(n+1) + sparse reopen
+                                  |
+          scoped professional/personal/ontology consumers
+                                  |
+              DASHI Agda conditional proof authority
+~~~
+
+Do not make NORA a compulsory gateway for source capture, state compilation, legal review, formal theorem checking, or user knowledge. An ontology reviewer may use it; another consumer may never call it. Nor may NORA's reviewer status itself authorize a Wikidata write, legal finding, user diagnosis, or a global ontology merge.
+
+### 20.3 Exact situated sufficiency and residual connection
+
+Fix a source situation, world/temporal context, observer and consumer question. A coarse projection pi is sufficient for question q only if an answer on pi exists with q = answer ∘ pi (existing **FactorsThrough**, **ConsumerSufficient**). A pair of situations with equal pi but different q is a **ConsumerNonDescentWitness**; post-composing/recharting pi cannot repair it (existing **IntersectionalNonFactorability**). Acquire a query-relevant residual r and test the refined observer (pi,r), using **ConsumerIndexedResidualRefinementExact**, **RequiredObserverAxisJoinAdequacyExact**, **CoarseFineRelativeFibreExact** and the existing typed hyperfabric.
+
+NORA's internal five-choice review projection is deliberately an **INTERNAL DASHI design**, not a confirmed native Éder Porto NORA export. In that model valid/invalid are scoped judgements, ambiguous is unresolved, manual_search is an acquisition request, and modeling_gap is a modelling residual. Even the same word or Wikidata QID cannot force one consumer's choice onto another's context. A true contradiction requires same-source/same-claim/time/observer scope; disagreement may be legitimate without such identity.
+
+### 20.4 Proposed exchange, not yet native NORA API
+
+~~~text
+ReviewRequest:
+  source_manifestation_id, source_revision_id, raw_span_or_native_GUID,
+  source_hash, capture_context_and_time, observer_scope, access_scope,
+  consumer_question, candidate_ids_and_relation_kinds, evidence_refs,
+  coverage_status, required_discriminator
+
+ReviewReturn:
+  request_digest, reviewer, standpoint, review_time, candidate_id,
+  review_disposition, rationale, inspected_evidence_refs, uncertainty,
+  residual_kind, next_evidence_request, no_semantic_payment, no_edit_right
+~~~
+
+Must not identify an article oldid with a Wikibase entity revision, original HF graph revision or P854 primary-document revision. Native NORA export, review terminology and consent/scopes require original author/source validation. A proposed relation ('equivalent', subtype, part-of, related) is typed; lexical identity is never enough.
+
+### 20.5 Three story-complete high-alpha acceptance pilots
+
+| Pilot | Exact original stories | Exit/decisive witness |
+| --- | --- | --- |
+| **U1. Nat wiki mapping review** | ITIR WIKI-US-01/03/04/05; SensibLaw Wiki editor; SLR WIKI-US-01–03 | Pin original source and selected HF physical route, independent native (QID, GUID, qualifiers, references, P854) evidence, real Éder Porto NORA review fixture, SLR persisted S29 decision, restart, scoped reopen; negative coverage and held alternatives survive |
+| **U2. One utterance, two consumers** | ITIR-US-11/13/15/16; SensibLaw lawyer/psychologist and private→professional; TiRCorder capture | Same immutable capture serves two scoped queries, coarse mapping collision is shown, one consumer receives sufficient residual while the other may abstain; no SB source/state mutation or cross-scope interpretation |
+| **U3. Temporal/role/source drift** | ITIR-US-01/02/03; SB state and explicit loss; SLR recurrent acquisition/replay | Change source revision; preserve what was knowable then, former decisions, and old source; only dependent consumer reviews reopen; unrelated consumers/state replay unchanged |
+
+**Remaining exact story gates US-N1–US-N8 (not additional generic Agda theorems):** US-N1 original NORA export, US-N2 two-consumer scoped review, US-N3 real collision→residual→fresh factorisation, US-N4 immutable TiRCorder/SB source, US-N5 SLR native candidate→review/payment→restart and sparse reopen, US-N6 temporal/role/consent isolation, US-N7 original WebKB FL code/DAG soundness, US-N8 theorem/learner no-promotion. Generic Agda owners are present; real source/physical/current-head specializations remain open.
+
+**Rollup rule:** use existing Agda #1506, ITIR #14, SensibLaw reference #514 and existing SLR #10/#76; no parallel SLR review store, TiRCorder ontology parser, SB semantic reducer or global NORA truth layer. The SLR roadmap reports Sprint 1 certified at its pinned head; that does *not* certify an original NORA integration or Sprint 2.
