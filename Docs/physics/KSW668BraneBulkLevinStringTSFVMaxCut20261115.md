@@ -1284,3 +1284,49 @@ The **next largest scientific cut is now F9.1 (physical matter action) + F9.2 (c
 
 
 **Exact 5D source-phase and normal-orientation crosscheck (2026-11-15).** New `scripts/ksw668_f8_boundary_ray_phase.py` and five local regression tests show that `Phi=-T+s*z+k*x` restricts on the ORIGINAL moving wall to `Phi_source=-T+s*b(T)+k*x`; the tangential boundary time covector is `-1+s*v(T)`. Its induced boundary inverse-metric norm is `-b²(s-v)²/(1-v²)<0`, so the source/reception covectors lie in the elliptic *timelike* domain of the local DN theory. **Sign convention:** the previously quoted `+0.1762230` emitter and `-0.0755837` receiver normal symbols use the **inward Israel normal** into the physical `z>=b(T)` bulk. The **outward geometric convexity normal** has the opposite symbols. Strict null convexity `kappa_out>0` and ellipticity (nonzero normal) are unchanged; any FIO source and reflection formula must carry this normal-orientation sign explicitly. The 68-case source-equivalent math suite includes these controls. This repairs the tangential source-phase matching but does not constitute a global numerical/Agda/referee receipt.
+
+---
+
+## 2026-11-15 F8 maximum cut V: ORIGINAL compact-3D UV/IR source and Fourier-inverse support null
+
+**Detailed new canonical owner:** [KSW668F8UVIRCutoffAndDyadicReuse20261115.md](KSW668F8UVIRCutoffAndDyadicReuse20261115.md). **Previously delivered standalone FIO Markdown now committed verbatim:** [KSW668F8OriginalT2NeumannFIOProof20261115.md](KSW668F8OriginalT2NeumannFIOProof20261115.md); the separate formal theorem-application memo is retained. All are owned by the one active PR #1512, not by a new side-branch. No change to the original \(a=t\) moving brane / finite-compact-source acceptance boundaries.
+
+### Repo UV/IR prior art and honest proof-level reuse
+
+- \`DASHI/Physics/YangMills/BalabanClayDyadicCutoffTailExact.agda\`: existing actual finite dyadic telescope \(\sum_{j=N}^{N+m-1}C2^{-j}\le2C2^{-N}\) under **physical adjacent-scale increment hypothesis**. New \`DASHI/Physics/Gravity/KSW668AdS5UVIRDyadicTailReuseExact.agda\` imports the exact theorem; it does NOT postulate that the original moving tensor receiver has the required incremental bound. This module is imported in the existing canonical KSW Agda rollup.
+- NS Littlewood–Paley \`NSSprint106...\`/107/108/109 explicitly leave analytic subgates OPEN despite detailed typed decomposition ledgers. Do not treat their Boolean source records as analytic proof.
+- \`BalabanClaySpectralUVCompatibilityExact.agda\` is a conditional YM observable compatibility record, not a physical AdS5 tensor spectral mass-gap theorem. Stationary radial zero mode, source spatial \(k=0\), and 5D graviton spectral gap are distinct objects.
+
+### Exact source-only Fourier UV/IR facts (mathematically established)
+
+Original compact radial \(\varphi_\epsilon\in C_c^\infty(B_\epsilon)\), \(\epsilon=.024\), is the **identical** \(\exp[-1/(1-(r/\epsilon)^2)]\) source bump in existing \`ksw668_f8_moving_maxcut.py\`. Local fourth-order TT generator yields \(|k|^4\) at amplitude level. Its 3D radial \(\|\pi^{TT}\|_{L^2}^2\) moment has weight \(u^{10}|\hat\varphi(u)|^2\), \(u=\epsilon|k|\). Two additional spatial derivatives give \(u^{14}|\hat\varphi(u)|^2\), a **source proxy** for curvature sensitivity, **not** the retarded Weyl observable.
+
+- **IR:** \(|\hat\varphi|\le1\) from normalized positive bump, so \(M_{10}(0,U)\le U^{11}/11,\ M_{14}(0,U)\le U^{15}/15\). Compact local TT source spatial \(k=0\) vanishes; the AdS5 radial massless mode at spatial nonzero \(k\) remains.
+- **UV:** \(\hat\varphi\) is Schwartz and for every \(m>0\), \(M_q(U,\infty)\le U^{-2m}M_{q+2m}(0,\infty)\). This proves *source-only* cutoff convergence in principle; quantitative Sobolev constants and *moving-source-to-Weyl* trace transfer are genuinely OPEN.
+- **Numerical cutoff diagnosis:** on existing \(N_x=256,512,768\) with \(L=4\), \(u_{\max}=[4.82549,9.65097,14.47646]\). At finest level the fraction of the **full** positive source moment represented is **at most 1.08832%** (\(q=10\)) and **at most 0.0013433%** (\(q=14\)), computed as ratios to the positive lower-bound integral over \(0\le u\le100\). Independent radial Gaussian-Legendre 192 and 384 orders agree at the \(10^{-15}\) level for these cutoff ratios. This is a robust numerical diagnostic, not a formal interval quadrature theorem.
+- **Independent momentum-resolution failure:** \(\Delta k=2\pi/L\) does not improve as \(N_x\uparrow\) at fixed \(L\). At numerical receiver \(r=1.822021\), current Bessel phase step \(\Delta k\,r=2.86202\). Selected uniform-grid criteria \(u_{\max}\ge100,\ \Delta k\,r\le.25\) require \(L\ge45.7924,N_x\ge60736\) (a design comparison only, not an algorithm-independent lower bound). The recommended F8 producer must decouple cutoff and momentum quadrature using adaptive/oscillatory band integration.
+
+### Stronger negative control: compact local TT inverse MUST vanish outside support, current discrete inverse does not
+
+Since all TT projector derivatives are **local**, the source satisfies exactly \(\pi^{TT}_{yy}(x)=0\) for \(|x|>\epsilon\). At \(r=1.82202\gg\epsilon\), using exactly the current F8 radial-angular inverse rule on this **unpropagated compact source**, the numerical reconstructions are **+481.9433, +611.4094, +626.2564** at \(N_x=256,512,768\), instead of **exact zero**. Independent 96/384-point radial-source quadratures differ by only \(4\times10^{-11}\) at finest grid. This **reproduces spurious nonzero values before the wave equation is run**, independently exposing UV/angular-frequency sampling error. It is an explicit failure of the numerical inverse as presently used, NOT a null test of physical bulk propagation. New \`scripts/ksw668_f8_static_tt_reconstruction_null.py\` + 10 tests are committed.
+
+### Updated acceptance and maximum-cut targets
+
+New Python owners:
+\`ksw668_f8_uvir_source_cutoff.py\` + 13 tests,
+\`ksw668_f8_uvir_sampling_contract.py\` + 12 tests,
+\`ksw668_f8_static_tt_reconstruction_null.py\` + 10 tests.
+Prior F8 smoke 68 + 35 new = **103 source-equivalent local unit tests PASS** in a complete independent \`python -m unittest discover\` run; the tests of numerical-negative controls pass precisely because they identify the method's failure. \`scripts/check_ksw668_f8_maxcut.sh --smoke\` now includes the new producers; \`--full\` still legitimately exits 42 (original 3D Weyl numerical convergence remains open). Exact GitHub-head Python runner and pinned Agda kernel have not been run here.
+
+| Target | Exact remaining lemma | Status |
+|---|---|---|
+| UVIR-SOURCE | \`ads5OriginalCompactTTSourceUVIRMomentAndShellContract\` | **SOURCE-level CLOSED**: original C∞ bump, analytic IR \(U^{11},U^{15}\), arbitrary-order Schwartz UV source tail, source cutoff/spacing measurements; no formal Agda analytic kernel |
+| UVIR-DYADIC | \`ads5OriginalTTSourceAdjacentCutoffSobolevBound\` | **Mathematical norm inequality available**; need explicit same-source Sobolev constants and physical Agda dyadic family, not arbitrary YM scale identification |
+| UVIR-NULL | \`ads5OriginalCompactTTStaticInverseOutsideSupportZero\` | **Exact zero theorem CLOSED** for local TT source; **numerical method FAILS** at all three current N; new mandatory null-acceptance gate |
+| F8.3a | \`ads5OriginalMovingTTAdaptiveKAndRadialPDEConvergence\` | **OPEN** independent \(\Delta k,k_{\max},\Delta y,\Delta T\), angular quadrature and outer-boundary errors |
+| F8.3b | \`ads5OriginalMovingWeylSourceToReceiverSobolevTraceEstimate\` | **OPEN** actual physical 5D bulk-to-brane trace/Weyl derivative bound that transfers source Fourier tail uniformly to receiver |
+| F8.3c | \`ads5MovingTTCompact3DSpectralCutoffConvergence\` | **OPEN FAIL CLOSED** \`--full\`; need both corrected static support null and positive source-to-retarded-Weyl convergence |
+| F8.1/2 | \`ads5OriginalT2NeumannToWeylEllipticFIOComposition\`, \`ads5OriginalT2ActualCompactTTNonzeroEarlyBothWeyl\` | Published-theorem-dependent *paper proof candidate* retained; real compact prescribed source, original receiver, finite energy; independent theorem-transfer/referee/formal acceptance **OPEN** |
+| F9/F10/F11/D1 | existing matter-action, coupled stability/cylinder, physical scales, Agda kernel, source-observer semantics, physical measurement | **OPEN**, unchanged by this UV/IR source analysis |
+
+**Next maximum-cut actual implementation:** replace non-convergent uniform radial-Bessel inverse with an *independently validated adaptive oscillatory quadrature* satisfying exact compact-TT zero-outside-support test before any moving PDE/wavefront promotion. Compare boundary source spectra and two distinct Weyl observables at the SAME original \(t=2\) receiver. Do not spend a round simply increasing \(N_x\) at constant \(L\).
