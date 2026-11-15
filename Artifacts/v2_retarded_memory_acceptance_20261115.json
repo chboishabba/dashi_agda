@@ -1,0 +1,14 @@
+{
+  "scope": "Fifth max-cut new source and existing distinct original-device gates",
+  "new_test_module": "tests/test_v2_retarded_memory_periodic_maxcut.py",
+  "test_module_result": {"passed": 54, "failed": 0},
+  "historical_suite": {"first_group_passed": 163, "second_group_passed": 53, "prior_total": 216},
+  "total_distinct_tests_accepted_in_separate_invocations": 270,
+  "combined_shell_one_shot": "TIMEOUT in legacy + new sequential execution, not claimed PASS",
+  "standalone_new_producer": "COMPLETE; machine-readable outputs recorded in paired JSON",
+  "sympy_twowinding_energy_identity": "EXACT ZERO RESIDUAL",
+  "strict_original_16_gates": "OPEN at their full original acceptance definitions",
+  "agda_2_9_kernel": "NOT RUN; compiler unavailable in this environment",
+  "original_v2_hardware": "NO new netlist, B-H/flux map, shaft torque, all-port VI or storage measurement",
+  "limitations": ["conservative single-rate memory model, not Preisach hysteresis", "smooth averaged voltage, not physical switch edges", "line-to-coil same-port composition conditional, no coupled Maxwell wellposedness", "one Python source unit has numerical ODE diagnostics, not a validated interval solver"]
+}
