@@ -16,12 +16,14 @@ import DASHI.ComputerScience.RSA260ReducerHyperfabricSourceDiligenceExact as Dil
 
 primarySource : Source.AttributedSource
 primarySource =
-  Source.mkWebSource
+  Source.mkNoDOISource
     "Eric Lu"
     "Factoring RSA-260"
     "Cognition"
     "2026-09-09"
     "https://cognition.com/blog/factoring-rsa-260"
+    Source.practitionerSource
+    "primary technical account for RSA-260 linear algebra envelope"
     Source.publicAttribution
 
 record PublicLAEnvelopeSourceCoordinates : Set where

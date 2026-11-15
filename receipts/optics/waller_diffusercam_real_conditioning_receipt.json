@@ -1,0 +1,75 @@
+{
+  "all_resolution_camera_rip_certificate": false,
+  "artifact": "example_data/example_psfs.mat",
+  "artifact_bytes": 10823885,
+  "artifact_git_blob_sha1": "db59065bdaf44fe771a6d3fbe22ae3c703527b5f",
+  "artifact_sha256": "fdbc8b2c7a8753f146e1b270a3f0ae2d0f70cb2c4ff49aef4a926670c0f7c906",
+  "certificate_scope": "declared_finite_selected_columns_of_pinned_source_H",
+  "depth_columns": 44,
+  "depth_matrix_condition_number": 255.26888545359984,
+  "diagnostic_scope": "depth_only_same_lateral",
+  "execution_provenance": {
+    "artifact_identity_verified_by_byte_count": true,
+    "artifact_identity_verified_by_git_blob_sha1": true,
+    "input_supplied_by_user": true,
+    "runtime": "local Python/scipy/numpy"
+  },
+  "gershgorin_sparse_lower_bound": {
+    "1": {
+      "difference_sparse_order": 2,
+      "normalized_gram_lower_bound": 0.02258847940312736,
+      "restricted_kappa_upper_bound": 76.71237130082564,
+      "sensor_gain_lower_bound": 0.013035707057972764
+    },
+    "2": {
+      "difference_sparse_order": 4,
+      "normalized_gram_lower_bound": 0.0,
+      "restricted_kappa_upper_bound": null,
+      "sensor_gain_lower_bound": 0.0
+    },
+    "4": {
+      "difference_sparse_order": 8,
+      "normalized_gram_lower_bound": 0.0,
+      "restricted_kappa_upper_bound": null,
+      "sensor_gain_lower_bound": 0.0
+    },
+    "8": {
+      "difference_sparse_order": 16,
+      "normalized_gram_lower_bound": 0.0,
+      "restricted_kappa_upper_bound": null,
+      "sensor_gain_lower_bound": 0.0
+    }
+  },
+  "global_sparse_inverse_certificate": true,
+  "largest_singular_value": 0.7757374640691569,
+  "matched_photon_comparison": false,
+  "max_abs_adjacent_depth_gram": 0.97741151452274,
+  "max_abs_normalized_depth_gram_offdiag": 0.97741151452274,
+  "max_scene_sparsity_for_positive_bound": 1,
+  "mean_abs_adjacent_depth_gram": 0.955068359802223,
+  "minimum_translated_column_norm": 0.08673434320488643,
+  "numerical_rank": 44,
+  "psf_shape": [270, 320, 44],
+  "selected_source_h_family": {
+    "column_count": 396,
+    "fft_vs_roll_max_abs_error_first_column": 5.204170427930421e-18,
+    "label_count": 396,
+    "lateral_radius_pixels": 1,
+    "lateral_step_pixels": 1,
+    "operator": "padded_circular_convolution_crop",
+    "padded_source_shape": [540, 640, 44]
+  },
+  "smallest_singular_value": 0.0030389033222388653,
+  "source_commit": "c8516cb8f482c2bb15e75ebebd91a74b88732c95",
+  "source_preprocessing": {
+    "depth_circshift": 23,
+    "depth_flip": true,
+    "global_psf_stack_norm": 955497.3109222628,
+    "ifftshift_before_fftn": true,
+    "lateral_pad_both": [135, 160],
+    "psf_bias": 102.0,
+    "recorded_output": "central_sensor_crop_at_z0"
+  },
+  "source_repository": "Waller-Lab/DiffuserCam",
+  "translated_column_mutual_coherence": 0.9774115205968726
+}

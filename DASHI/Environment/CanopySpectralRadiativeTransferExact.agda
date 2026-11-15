@@ -51,8 +51,8 @@ record CanopyToPhotosyntheticPhotonFieldWeld
     {Wavelength Direction CanopyPoint PhotonFlux : Set}
     (canopy : SpectralCanopyRadiationModel
       Wavelength Direction CanopyPoint PhotonFlux)
-    (field : Photo.PhotosyntheticPhotonField CanopyPoint Wavelength PhotonFlux)
-    (interception : Photo.LeafLightInterceptionReceipt field) : Set₁ where
+    (photonField : Photo.PhotosyntheticPhotonField CanopyPoint Wavelength PhotonFlux)
+    (interception : Photo.LeafLightInterceptionReceipt photonField) : Set₁ where
   constructor canopy-to-photosynthetic-photon-field-weld
   field
     directionalReductionReference : String

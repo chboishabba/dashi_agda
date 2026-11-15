@@ -235,3 +235,5 @@ record SaltConservationBoundary : Set where
 canonicalSaltConservationBoundary : SaltConservationBoundary
 canonicalSaltConservationBoundary =
   saltConservationBoundary false refl false refl false refl false refl true refl
+
+open SaltConservationBoundary public

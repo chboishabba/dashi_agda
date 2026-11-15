@@ -123,3 +123,5 @@ canonicalCorrosionMetalReleaseBoundary : CorrosionMetalReleaseBoundary
 canonicalCorrosionMetalReleaseBoundary =
   corrosionMetalReleaseBoundary
     false refl false refl false refl false refl false refl true refl
+
+open CorrosionMetalReleaseBoundary public

@@ -32,7 +32,7 @@ data NullspaceOrientation : Set where
 record ForwardCarrierEnvelope : Set where
   constructor forward-carrier-envelope
   field
-    field : LAScalarField
+    scalarField : LAScalarField
     rows : Nat
     columns : Nat
     nonzeros : Nat

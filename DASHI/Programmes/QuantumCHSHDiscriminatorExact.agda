@@ -51,6 +51,11 @@ chshViolationRefutesCandidateEquivalence :
       violationPermitting)
 chshViolationRefutesCandidateEquivalence =
   Physical.includedDiscriminatorRefutesEquivalence
+    {language = chshLanguage}
+    {predicts = chshPredictions}
+    {experiment = chsh}
+    {left = classicalBounded}
+    {right = violationPermitting}
     tt
     chshViolationDiscriminatesCandidateClasses
 
@@ -93,3 +98,5 @@ canonicalQuantumCHSHBoundary =
     false refl
     true refl
     false refl
+
+open QuantumCHSHBoundary public

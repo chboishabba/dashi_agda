@@ -37,15 +37,15 @@ data PreferredA2Leaf226 : Set where
   canonicalRowASmallCouplingArithmetic : PreferredA2Leaf226
 
 data LeafState226 : Set where
-  closed open blocked : LeafState226
+  leafClosed leafOpen leafBlocked : LeafState226
 
 preferredA2LeafState226 : PreferredA2Leaf226 → LeafState226
-preferredA2LeafState226 literalMixedInteractionCauchySource = open
-preferredA2LeafState226 literalGeneratedHistoryDerivativeIsCMP116BetaMark = open
-preferredA2LeafState226 betaMarkPartialBound = closed
-preferredA2LeafState226 marginalCubicSensitivity = closed
-preferredA2LeafState226 literalCMP109MarginalPlusIrrelevantDecomposition = blocked
-preferredA2LeafState226 canonicalRowASmallCouplingArithmetic = closed
+preferredA2LeafState226 literalMixedInteractionCauchySource = leafOpen
+preferredA2LeafState226 literalGeneratedHistoryDerivativeIsCMP116BetaMark = leafOpen
+preferredA2LeafState226 betaMarkPartialBound = leafClosed
+preferredA2LeafState226 marginalCubicSensitivity = leafClosed
+preferredA2LeafState226 literalCMP109MarginalPlusIrrelevantDecomposition = leafBlocked
+preferredA2LeafState226 canonicalRowASmallCouplingArithmetic = leafClosed
 
 -- `mixedInteraction` is shared with the local/marginal lane.  If another source
 -- owner supplies it, the next independent A2 coordinate is the beta-mark weld.
@@ -57,15 +57,15 @@ preferredFirstA2HistoryCoordinate226 =
   literalGeneratedHistoryDerivativeIsCMP116BetaMark
 
 betaMarkPartialCompilerClosed :
-  preferredA2LeafState226 betaMarkPartialBound ≡ closed
+  preferredA2LeafState226 betaMarkPartialBound ≡ leafClosed
 betaMarkPartialCompilerClosed = refl
 
 marginalCubicCompilerClosed :
-  preferredA2LeafState226 marginalCubicSensitivity ≡ closed
+  preferredA2LeafState226 marginalCubicSensitivity ≡ leafClosed
 marginalCubicCompilerClosed = refl
 
 canonicalArithmeticClosed :
-  preferredA2LeafState226 canonicalRowASmallCouplingArithmetic ≡ closed
+  preferredA2LeafState226 canonicalRowASmallCouplingArithmetic ≡ leafClosed
 canonicalArithmeticClosed = refl
 
 literalGeneratedHistoryDerivativeIsCMP116BetaMarkLevel : ProofLevel

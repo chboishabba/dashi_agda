@@ -42,5 +42,188 @@
     "body_only_equivalence_is_semantic_evidence": false,
     "renamed_supersession_requires_signature_identity_or_explicit_alias": true,
     "missing_evidence_disposition": "UNRESOLVED"
+  },
+  "canonical_navigation": {
+    "schema_version": 1,
+    "rule": "Navigate by mathematical owner. Historical Round modules are evidence, not independent proof obligations.",
+    "routes": [
+      {
+        "id": "NS-ABCD",
+        "aliases": [
+          "ns",
+          "abcd",
+          "clay",
+          "four-alternatives"
+        ],
+        "owner": {
+          "repo": "chboishabba/dashi_agda",
+          "path": "DASHI/Physics/Closure/NSConcreteLiteralClayABCDRunTargetExact.agda"
+        },
+        "support": [
+          {
+            "repo": "chboishabba/dashi_agda",
+            "path": "DASHI/Physics/Closure/NSCanonicalClayResidualExact.agda"
+          }
+        ],
+        "status": "canonical contract; Clay promotion false",
+        "next": "Inspect canonical A/B/C/D residuals; do not reopen historical Round modules."
+      },
+      {
+        "id": "NS-A",
+        "aliases": [
+          "a",
+          "a1",
+          "a2",
+          "a3",
+          "whole-space",
+          "euclidean"
+        ],
+        "owner": {
+          "repo": "chboishabba/dashi_agda",
+          "path": "DASHI/Physics/Closure/NSClayFacingAPureAnalysisFrontier20261007Exact.agda"
+        },
+        "support": [
+          {
+            "repo": "chboishabba/dashi_agda",
+            "path": "DASHI/Physics/Closure/NSTriadKNEuclideanCanonicalProjectedInteractionExact.agda"
+          },
+          {
+            "repo": "chboishabba/dashi_agda",
+            "path": "DASHI/Physics/Closure/NSWholeSpaceFiniteConvolutionSingleLimitExact.agda"
+          },
+          {
+            "repo": "chboishabba/dashi_agda",
+            "path": "scripts/ns_a_schwartz_fourier_same_object.py"
+          }
+        ],
+        "status": "Original local Fourier/Leray source and H1 physical Stokes response continuity available; under NS dilation Eλ=E/λ, Dλ=λD, response-L2² scales λ⁻¹, so this is supercritical and does NOT imply A3. Bishop same-trajectory Fourier/Plancherel, signed A2 critical control and A3 continuation remain.",
+        "next": "Weld existing divergence-form source and H1 density theorem into physical Agda/Bishop Fourier transport; obtain signed A2 bound in a genuine scale-critical regularity/continuation norm rather than promoting supercritical stationary Stokes L2."
+      },
+      {
+        "id": "NS-B",
+        "aliases": [
+          "b",
+          "b1",
+          "b2",
+          "b3",
+          "b7",
+          "bcontinuation",
+          "periodic"
+        ],
+        "owner": {
+          "repo": "chboishabba/dashi_agda",
+          "path": "DASHI/Physics/Closure/NSClayFacingBPureAnalysisFrontier20261005Exact.agda"
+        },
+        "support": [
+          {
+            "repo": "chboishabba/dashi_agda",
+            "path": "DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingDefectR44020261007Exact.agda"
+          },
+          {
+            "repo": "chboishabba/dashi_agda",
+            "path": "DASHI/Physics/Closure/NSCanonicalB7IntegratedControlResidualExact.agda"
+          },
+          {
+            "repo": "chboishabba/dashi_agda",
+            "path": "DASHI/Physics/Closure/NSCanonicalClayResidualExact.agda"
+          }
+        ],
+        "status": "Original full-fibre B4 cutoff-uniform payment false (degree-five smooth shear, physical ED<=4); unprojected R681 mixed-helicity output work not identical to Leray physical forcing (eight-output shear discriminator). R850 physical rational packet also makes the pointwise R741/R853 W2 signed gap negative. Real integrated W2 same-object weld and any corrected global signed payment remain unproved; B123/B7 and continuation are open.",
+        "next": "Use current signed global R685/R690/R691/R735/R756 owners; first verify SAME-source real R815/R853 W2 against Lean R823 negative interval. Do NOT assert universal pointwise W2≥0 or substitute positive 36ED mass for signed commutator. If W2 integral fails, redesign B; then tackle legitimate cutoff-uniform physical B123/B7 and continuation."
+      },
+      {
+        "id": "NS-B4",
+        "aliases": [
+          "b4",
+          "r440",
+          "noncore-core",
+          "signed-defect"
+        ],
+        "owner": {
+          "repo": "chboishabba/dashi_agda",
+          "path": "DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingDefectR44020261007Exact.agda"
+        },
+        "support": [
+          {
+            "repo": "chboishabba/dashi_agda",
+            "path": "DASHI/Physics/Closure/NSTriadKNFixedOutputPhysicalOutputRateNormalFormExact.agda"
+          },
+          {
+            "repo": "chboishabba/dashi_agda",
+            "path": "DASHI/Physics/Closure/NSTriadKNR650RateKernelCrossGradientNormalFormRound681Exact.agda"
+          },
+          {
+            "repo": "chboishabba/dashi_agda",
+            "path": "scripts/ns_b4_literal_padding_adversary.py"
+          }
+        ],
+        "status": "falsified original full-fibre B4 physical payment: exact literal defect D_N=(8/3)N²(2N+1)(3N²+N−2)−840480 for all N≥9, grows as 16N⁵; fixed core companion 1345859672, original selected localED<=4. R681 output-relative work is distinct, not a drop-in replacement.",
+        "next": "Use existing R681→R684→R685→R690 and prove compensated same-source GLOBAL physical critical-production identity before any signed cutoff-uniform estimate. Do NOT resurrect the disproved full-fibre B4 strict-half payment."
+      },
+      {
+        "id": "NS-B-RESERVE",
+        "aliases": [
+          "b-reserve",
+          "reserve",
+          "signed-reserve",
+          "r823",
+          "r829",
+          "r830",
+          "r831",
+          "r832",
+          "r833",
+          "r850",
+          "r851",
+          "r852",
+          "r853"
+        ],
+        "owner": {
+          "repo": "chboishabba/dashi_lean4",
+          "path": "NSBControl/Rational345R823DecisionFreeze.lean"
+        },
+        "support": [
+          {
+            "repo": "chboishabba/dashi_lean4",
+            "path": "NSBControl/Rational345R823RealR749R760.lean"
+          },
+          {
+            "repo": "chboishabba/dashi_lean4",
+            "path": "NSBControl/Rational345Round71TrajectoryPhysical.lean"
+          },
+          {
+            "repo": "chboishabba/dashi_lean4",
+            "path": "NSBControl/Rational345R831PhysicalWeld.lean"
+          }
+        ],
+        "status": "Physical 3-4-5 Agda R850 snapshot has exact pointwise R741/R853 W2 gap=-4712274/125<0; Lean literal real-R823 integrated reserve counterexample source-written but kernel not checked; genuine real W2-source carrier correspondence remains a separate verification gate.",
+        "next": "Audit exact-head Lean proof and same-source R760 chain only; NOT Clay B; do not regenerate R829/R833 wrappers."
+      },
+      {
+        "id": "NS-CD",
+        "aliases": [
+          "c",
+          "d",
+          "cd",
+          "forced",
+          "forced-breakdown"
+        ],
+        "owner": {
+          "repo": "chboishabba/dashi_agda",
+          "path": "DASHI/Physics/Closure/NSCanonicalCDReleasedReconstructionResidualExact.agda"
+        },
+        "support": [
+          {
+            "repo": "chboishabba/dashi_lean4",
+            "path": "ExternalClayNS/SubmissionAudit.lean"
+          },
+          {
+            "repo": "chboishabba/dashi_agda",
+            "path": "DASHI/Physics/Closure/NSClayLiteralABCDExact.agda"
+          }
+        ],
+        "status": "external forced C/D source proof located; independent reconstruction receipt pending",
+        "next": "Inspect pinned source theorem and Lean dependency/axiom profile; do not infer A/B."
+      }
+    ]
   }
 }

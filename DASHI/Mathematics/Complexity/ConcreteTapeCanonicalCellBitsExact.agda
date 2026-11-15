@@ -83,6 +83,25 @@ decodeAgainst fallback (x ∷ xs) (false CNF.∷ᵇ bits) =
 decodeAgainst fallback (x ∷ xs) (true CNF.∷ᵇ bits) =
   x
 
+decodeEncodeAgainstThere :
+  ∀ {A : Set}
+    (enumeration : Local.FiniteEnumeration A)
+    (fallback x y : A)
+    (ys : List A) →
+    Member x ys →
+    (b : Bool) →
+    Local.decideEqual enumeration x y ≡ b →
+    (decodeAgainst fallback ys
+      (encodeAgainst (Local.decideEqual enumeration) x ys) ≡ x) →
+    decodeAgainst fallback (y ∷ ys)
+      (b CNF.∷ᵇ encodeAgainst (Local.decideEqual enumeration) x ys)
+    ≡ x
+decodeEncodeAgainstThere enumeration fallback x y ys membership true eq rec
+  with Local.decideEqualSound enumeration {x} {y} eq
+... | refl = refl
+decodeEncodeAgainstThere enumeration fallback x y ys membership false eq rec =
+  rec
+
 decodeEncodeAgainst :
   ∀ {A : Set}
     (enumeration : Local.FiniteEnumeration A)
@@ -95,13 +114,10 @@ decodeEncodeAgainst :
 decodeEncodeAgainst enumeration fallback x .(x ∷ xs) (here {xs})
     rewrite Local.decideEqualRefl enumeration x =
   refl
-decodeEncodeAgainst enumeration fallback x (y ∷ ys) (there membership)
-    with Local.decideEqual enumeration x y
-... | false =
-  decodeEncodeAgainst enumeration fallback x ys membership
-... | true
-    with Local.decideEqualSound enumeration {x} {y} refl
-... | refl = refl
+decodeEncodeAgainst enumeration fallback x (y ∷ ys) (there membership) =
+  decodeEncodeAgainstThere enumeration fallback x y ys membership
+    (Local.decideEqual enumeration x y) refl
+    (decodeEncodeAgainst enumeration fallback x ys membership)
 
 canonicalFiniteCodec :
   ∀ {A : Set}
@@ -179,7 +195,7 @@ pairCodec :
   FixedBitsCodec A m →
   FixedBitsCodec B n →
   FixedBitsCodec (A × B) (m + n)
-pairCodec {m = m} left right = record
+pairCodec {A = A} {B = B} {m = m} left right = record
   { encode =
       λ pair →
         appendBits
@@ -302,13 +318,13 @@ decodeCell :
   Local.TapeCell
     (Local.State machine)
     (Local.Symbol machine)
-decodeCell {machine} stateCoverage symbolCoverage
+decodeCell {machine = machine} stateCoverage symbolCoverage
     (false CNF.∷ᵇ payload) =
   Local.plain
     (decode
       (canonicalSymbolCodec machine symbolCoverage)
       (dropBits (StateWidth machine) payload))
-decodeCell {machine} stateCoverage symbolCoverage
+decodeCell {machine = machine} stateCoverage symbolCoverage
     (true CNF.∷ᵇ payload) =
   Local.headed
     (decode
@@ -328,44 +344,26 @@ decodeEncodeCell :
       Local.TapeCell
         (Local.State machine)
         (Local.Symbol machine)) →
-  decodeCell stateCoverage symbolCoverage
-    (encodeCell stateCoverage symbolCoverage cell)
+  decodeCell {machine} stateCoverage symbolCoverage
+    (encodeCell {machine} stateCoverage symbolCoverage cell)
   ≡ cell
 decodeEncodeCell {machine} stateCoverage symbolCoverage
     (Local.plain symbol)
-    rewrite dropAppendBits
-      (encode
-        (canonicalStateCodec machine stateCoverage)
-        (Local.initialState machine))
-      (encode
-        (canonicalSymbolCodec machine symbolCoverage)
-        symbol)
-          | decodeEncode
-              (canonicalSymbolCodec machine symbolCoverage)
-              symbol =
+    rewrite dropAppendBits {m = StateWidth machine} {n = SymbolWidth machine}
+      (encode (canonicalStateCodec machine stateCoverage) (Local.initialState machine))
+      (encode (canonicalSymbolCodec machine symbolCoverage) symbol)
+    rewrite decodeEncode (canonicalSymbolCodec machine symbolCoverage) symbol =
   refl
 decodeEncodeCell {machine} stateCoverage symbolCoverage
     (Local.headed state symbol)
-    rewrite takeAppendBits
-      (encode
-        (canonicalStateCodec machine stateCoverage)
-        state)
-      (encode
-        (canonicalSymbolCodec machine symbolCoverage)
-        symbol)
-          | dropAppendBits
-              (encode
-                (canonicalStateCodec machine stateCoverage)
-                state)
-              (encode
-                (canonicalSymbolCodec machine symbolCoverage)
-                symbol)
-          | decodeEncode
-              (canonicalStateCodec machine stateCoverage)
-              state
-          | decodeEncode
-              (canonicalSymbolCodec machine symbolCoverage)
-              symbol =
+    rewrite takeAppendBits {m = StateWidth machine} {n = SymbolWidth machine}
+      (encode (canonicalStateCodec machine stateCoverage) state)
+      (encode (canonicalSymbolCodec machine symbolCoverage) symbol)
+    rewrite dropAppendBits {m = StateWidth machine} {n = SymbolWidth machine}
+      (encode (canonicalStateCodec machine stateCoverage) state)
+      (encode (canonicalSymbolCodec machine symbolCoverage) symbol)
+    rewrite decodeEncode (canonicalStateCodec machine stateCoverage) state
+    rewrite decodeEncode (canonicalSymbolCodec machine symbolCoverage) symbol =
   refl
 
 canonicalCellCodec :
@@ -378,9 +376,9 @@ canonicalCellCodec :
       (Local.Symbol machine))
     (CellWidth machine)
 canonicalCellCodec machine stateCoverage symbolCoverage = record
-  { encode = encodeCell stateCoverage symbolCoverage
-  ; decode = decodeCell stateCoverage symbolCoverage
-  ; decodeEncode = decodeEncodeCell stateCoverage symbolCoverage
+  { encode = encodeCell {machine} stateCoverage symbolCoverage
+  ; decode = decodeCell {machine} stateCoverage symbolCoverage
+  ; decodeEncode = decodeEncodeCell {machine} stateCoverage symbolCoverage
   }
 
 ------------------------------------------------------------------------
@@ -470,13 +468,13 @@ canonicalWindowCodec :
     machine
     (WindowWidth machine)
 canonicalWindowCodec machine stateCoverage symbolCoverage = record
-  { Window.encode =
+  { encode =
       λ window →
         encode tupleCodec (windowToTuple window)
-  ; Window.decode =
+  ; decode =
       λ bits →
         tupleToWindow (decode tupleCodec bits)
-  ; Window.decodeEncode =
+  ; decodeEncode =
       λ window →
         trans
           (cong tupleToWindow

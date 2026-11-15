@@ -1,7 +1,7 @@
 module DASHI.Programmes.ResearchProgrammeExact where
 
-open import DASHI.Core.Prelude
-open import DASHI.Core.PredictionEnvelopeExact
+open import DASHI.Core.Prelude public
+open import DASHI.Core.PredictionEnvelopeExact public
 
 ------------------------------------------------------------------------
 -- Cross-repository research-programme registry.
@@ -116,3 +116,6 @@ canonicalResearchFeedbackBoundary =
     false refl
     true refl
     true refl
+
+open ResearchProgramme public
+open ResearchFeedbackBoundary public
