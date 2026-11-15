@@ -3835,6 +3835,23 @@
       "unsafe_next_integrated": 20130062,
       "confirmed_in_this_session": true
     },
-    "required_next_step": "Work exclusively from canonical roadmap gate IDs A1...F3, update JSON and exact-head provenance with every new proof source/kernel receipt"
+    "required_next_step": "Work exclusively from canonical roadmap gate IDs A1...F3, update JSON and exact-head provenance with every new proof source/kernel receipt",
+    "repo_owner_reconciliation": {
+      "exact_clay_pr_branch_terms_checked": 135,
+      "agda_unique_source_or_document_owner_files_looked_up": 47,
+      "lean_unique_source_owner_files_looked_up": 3,
+      "owner_source_literal_check_missing_named_terms": 0,
+      "classification_note": "All 135 ledger entries have a cited source/document owner; exact-name presence in cited owner inspected through GitHub branch fetch. Some statuses are document-only TARGET_NAME_ONLY, Bool flags, conditional records or semantic labels, not proof declarations. Lean three proof-candidate owners checked separately. This is source lexical/body audit, not exhaustive all-branch metatheorem or kernel acceptance.",
+      "previously_misclassified": {
+        "StandardPolynomialCandidateCoverage.realize": "Paid by codedStandardCostCandidateCoverage and haltingCostCandidateCoverage conditional on respective cost-model closure; not universally absent",
+        "RouteSH1ModeSelectedInputs.selectedPairDistanceIsTime": "R304 theorem paid; R349 R318-to-R284 selected-carrier equality remains",
+        "PreferredSameHamiltonianTransfer": "Same H constructor fact; physical transfer-coordinate calibration remains",
+        "nativeBinaryFirstEnabledNonterminalSameOriginalRawStep": "Found source-written in Karp21NativeBinaryToOriginalRawMachineStepExact.agda blob e187fe48fa94bc9fa0cd0e83348a4dc7cb0e460f, original donor #1474",
+        "Karp21NativeGammaAllLengthCompositePhysical": "Source module owner, full all-k positive-token proof, identical original blob #1502 and Clay"
+      },
+      "source_assurance": "NO_AGDA_LEAN_KERNEL_RECEIPT_FROM_THIS_AUDIT",
+      "verification_driver": "scripts/check_clay_sixfrontier_physical_local_20261114.sh now runs check_clay_endpoint_symbol_audit_20261115.py --lean-root \"$LEAN_ROOT\" --strict before tests/acceptance",
+      "audit_preflight_script": "scripts/check_clay_endpoint_symbol_audit_20261115.py"
+    }
   }
 }
