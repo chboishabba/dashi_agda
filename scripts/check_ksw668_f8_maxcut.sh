@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# KSW original a=t AdS5: 184 DISTINCT source-equivalent F8 regression cases.
+# KSW original a=t AdS5: 255 DISTINCT source-equivalent F8 regression cases.
 # Full 3D numerical acceptance is separate; failures remain explicit.
 set -euo pipefail
 cd "$(dirname "$0")/.."
@@ -8,9 +8,13 @@ if [ "$#" -gt 0 ]; then mode="$1"; fi
 export PYTHONPATH="scripts:."
 python3 -m unittest discover -s scripts -p 'test_ksw668_f8_*.py' -v
 if [ "$mode" = "--smoke" ]; then
-  echo "F8 smoke PASS only: 184 distinct local source-level tests."
+  echo "F8 smoke PASS only: 255 distinct local source-level tests."
   echo "3D tensor/Weyl convergence, Agda, matter action and observation NOT ACCEPTED."
   exit 0
+fi
+if [ "$mode" = "--normal-compare" ]; then
+  python3 scripts/ksw668_f8_normal_operator_comparison.py --reproduce
+  exit $?
 fi
 if [ "$mode" = "--multipole-full" ]; then
   python3 scripts/ksw668_f8_tt_multipole_refinement.py
@@ -44,5 +48,5 @@ PY
   echo "Provisional numeric thresholds met; analytic/Agda/physical gates separate."
   exit 0
 fi
-echo "Usage: $0 --smoke | --legacy-full | --multipole-full | --full" >&2
+echo "Usage: $0 --smoke | --normal-compare | --legacy-full | --multipole-full | --full" >&2
 exit 2
