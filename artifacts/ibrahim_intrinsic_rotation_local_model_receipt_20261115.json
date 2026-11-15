@@ -1,0 +1,27 @@
+{
+  "schema": "dashi.ibrahim.fln.intrinsic_rotation_model.v1",
+  "source_attribution": "Ibrahim, Danforth, Dodds 2017 DOI 10.1016/j.jocs.2016.12.001",
+  "new_implementation_authority": "DASHI proof-model regression only; not original paper result or historical Wikimedia source",
+  "test_path": "tests/test_ibrahim_intrinsic_rotation_model.py",
+  "exact_git_blob_sha1": "14c11290b533ed5eaf2a87548681460b21fbfb9f",
+  "exact_test_source_sha256": "f5cc4fc542d417e3ec0709384b07025b51946f4be7b4af159e4108ed6190a985",
+  "local_execution": "python -m unittest /mnt/data/test_ibrahim_intrinsic_rotation_model.py -v",
+  "python_version": "3.13.5",
+  "test_count": 4,
+  "passed": 4,
+  "failed": 0,
+  "graph_samples": 9000,
+  "coverage": [
+    "same-start independent cycle entries and positive periods",
+    "mutual cycle reachability",
+    "canonical minimum independence",
+    "disjoint-cycle negative control",
+    "transient prefix cannot be mistaken for a terminal cycle",
+    "dead-end versus unresolved target"
+  ],
+  "local_log_sha256": "4fb98a632734581308575aa280531f8f4dd3c7ff4e2b3536c835a164e31d5d65",
+  "new_agda_kernel_accepted": false,
+  "original_wikipedia_revision_retrieved": false,
+  "original_zelph_bin_audited": false,
+  "full_40_test_suite_replayed": false
+}
