@@ -14,6 +14,7 @@ module DASHI.Culture.GoodmanSonicWaveC3EquivarianceExact where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
+open import Data.Integer using (ℤ; +_)
 import DASHI.Physics.ShiftDiscreteWaveStep as Wave
 import DASHI.Physics.SchrodingerGapPhaseWaveShiftInstance as Shift
 
