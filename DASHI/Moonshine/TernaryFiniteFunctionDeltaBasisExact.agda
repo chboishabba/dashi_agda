@@ -38,6 +38,24 @@ addZeroRight : (a : C3.Cyclotomic3) → V.addC3 a C3.zero ≡ a
 addZeroRight (C3.cyclotomic3 a b) =
   C3.cyclotomic3Ext (ℚP.+-identityʳ a) (ℚP.+-identityʳ b)
 
+plusZeroZero : (a : C3.Cyclotomic3) → V.addC3 a (V.addC3 C3.zero C3.zero) ≡ a
+plusZeroZero (C3.cyclotomic3 a b) =
+  C3.cyclotomic3Ext
+    (trans (cong (a +_) (ℚP.+-identityˡ 0ℚ)) (ℚP.+-identityʳ a))
+    (trans (cong (b +_) (ℚP.+-identityˡ 0ℚ)) (ℚP.+-identityʳ b))
+
+zeroPlusPlusZero : (a : C3.Cyclotomic3) → V.addC3 C3.zero (V.addC3 a C3.zero) ≡ a
+zeroPlusPlusZero (C3.cyclotomic3 a b) =
+  C3.cyclotomic3Ext
+    (trans (ℚP.+-identityˡ (a + 0ℚ)) (ℚP.+-identityʳ a))
+    (trans (ℚP.+-identityˡ (b + 0ℚ)) (ℚP.+-identityʳ b))
+
+zeroPlusZeroPlus : (a : C3.Cyclotomic3) → V.addC3 C3.zero (V.addC3 C3.zero a) ≡ a
+zeroPlusZeroPlus (C3.cyclotomic3 a b) =
+  C3.cyclotomic3Ext
+    (trans (ℚP.+-identityˡ (0ℚ + a)) (ℚP.+-identityˡ a))
+    (trans (ℚP.+-identityˡ (0ℚ + b)) (ℚP.+-identityˡ b))
+
 multiplyRightOne : (a : C3.Cyclotomic3) → C3.multiply a C3.one ≡ a
 multiplyRightOne a = trans (L.multiplyCommutative a C3.one) (L.oneActsLeft a)
 
@@ -118,22 +136,19 @@ decomposeExact {suc n} f (cubeS neg tail)
         | interpretLiftHead zer neg (decompose (λ t → f (cubeS zer t))) tail
         | interpretLiftHead pos neg (decompose (λ t → f (cubeS pos t))) tail
         | decomposeExact (λ t → f (cubeS neg t)) tail
-        | addZeroLeft C3.zero
-        | addZeroRight (f (cubeS neg tail)) = refl
+        | plusZeroZero (f (cubeS neg tail)) = refl
 decomposeExact {suc n} f (cubeS zer tail)
   rewrite interpretLiftHead neg zer (decompose (λ t → f (cubeS neg t))) tail
         | interpretLiftHead zer zer (decompose (λ t → f (cubeS zer t))) tail
         | interpretLiftHead pos zer (decompose (λ t → f (cubeS pos t))) tail
         | decomposeExact (λ t → f (cubeS zer t)) tail
-        | addZeroRight (f (cubeS zer tail))
-        | addZeroLeft (f (cubeS zer tail)) = refl
+        | zeroPlusPlusZero (f (cubeS zer tail)) = refl
 decomposeExact {suc n} f (cubeS pos tail)
   rewrite interpretLiftHead neg pos (decompose (λ t → f (cubeS neg t))) tail
         | interpretLiftHead zer pos (decompose (λ t → f (cubeS zer t))) tail
         | interpretLiftHead pos pos (decompose (λ t → f (cubeS pos t))) tail
         | decomposeExact (λ t → f (cubeS pos t)) tail
-        | addZeroLeft (f (cubeS pos tail))
-        | addZeroLeft (f (cubeS pos tail)) = refl
+        | zeroPlusZeroPlus (f (cubeS pos tail)) = refl
 
 Cube6 : Set
 Cube6 = TritCube 6
