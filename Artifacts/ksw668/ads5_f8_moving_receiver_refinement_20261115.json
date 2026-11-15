@@ -76,7 +76,7 @@
     "interpretation": "genuine compact 3D TT test source constructed; numerical UV/cutoff/convergence fail"
   },
   "acceptance": {
-    "source_equivalent_unit_tests": "134/134 distinct local source-equivalent PASS",
+    "source_equivalent_unit_tests": "171/171 in locally tested source-equivalent committed suite; broader local 184/184 including exploratory",
     "full_3d_B4_numerical_convergence": false,
     "external_analytical_Green_operator_previously_claimed_by_external_theorem": true,
     "tensor_matter_generating_action": false,
@@ -97,13 +97,14 @@
     "discrete_3d_TT_source_support_null_check_passed": false,
     "original_3D_Weyl_receiver_numerically_converged": false,
     "new_both_Weyl_numerical_readouts_implemented": true,
-    "new_both_Weyl_convergence": false
+    "new_both_Weyl_convergence": false,
+    "source_radial_FV_polynomial_energy_structure": true,
+    "original_moving_PDE_manufactured_stage": true,
+    "exact_compact_source_IR_moments": true,
+    "exact_GitHub_PR_head_execution": false
   },
   "next_exact_lemmas": [
-    "ads5OriginalMovingTTPrepotentialBulkAndIsraelContinuumAgdaKernel",
-    "ads5OriginalTTZonalMultipoleAngularRationalAgdaAcceptance",
-    "ads5OriginalTTMultipoleRegularRadialConjugacyAgdaKernel",
-    "ads5OriginalCompactTTConservativeRadialCellSourceErrorBound",
+    "ads5OriginalTTSourceCellFluxConservationFullDiscreteEnergy",
     "ads5OriginalMovingTTThreeMultipoleThreeObservableConvergence",
     "ads5OriginalMovingWeylSobolevBoundaryTraceAndError",
     "ads5OriginalT2NeumannToWeylEllipticFIOComposition",
@@ -410,5 +411,32 @@
     "exact_GitHub_branch_runner_executed": false,
     "referee_early_receiver_theorem_accepted": false,
     "physical_emitter_detected": false
+  },
+  "f8_conservative_radial_fv_20261115": {
+    "math_closed_source_level": [
+      "ads5OriginalTTThreeMultipoleExactShellVolumeRadialFV",
+      "ads5OriginalTTCompactSourceL0L2MomentCancellation",
+      "ads5OriginalTTCompactSourceL4PositiveMomentExact",
+      "ads5OriginalMovingTTManufacturedPolynomialInteriorIsrael"
+    ],
+    "Agda_new_source_owner": "DASHI/Physics/Gravity/KSW668AdS5TTFiniteVolumeFirstCellRationalExact.agda",
+    "new_numerical_source_owner": "scripts/ksw668_f8_fv_source_flux.py",
+    "new_numerical_stencil_owner": "scripts/ksw668_f8_radial_fv_contract.py",
+    "new_original_moving_pde_manufactured_owner": "scripts/ksw668_f8_manufactured_original_pde.py",
+    "threegrid_machine_receipt": "Artifacts/ksw668/ads5_f8_tt_conservative_fv_threegrid_20261115.json",
+    "source_equivalent_committed_test_count": 171,
+    "local_broader_exploratory_test_superset": 184,
+    "failed_numerical_receiver": {
+      "H_medium_to_fine_relative_drift": 0.21762040770235527,
+      "intrinsic4D_Weyl_medium_to_fine_relative_drift": 0.9027364882008849,
+      "projected5D_Weyl_medium_to_fine_relative_drift": 0.826680242734901,
+      "beyond_bulk_front_numerical_leakage": true,
+      "closed": false
+    },
+    "full_original_moving_time_integrator_CFL_theorem": false,
+    "actual_boundary_Weyl_trace_error_theorem": false,
+    "original_t2_FIO_theorem_referee_acceptance": false,
+    "Agda_pinned_kernel_checked": false,
+    "experimental_graviton_observed": false
   }
 }
