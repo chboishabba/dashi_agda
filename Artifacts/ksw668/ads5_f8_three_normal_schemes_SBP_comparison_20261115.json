@@ -144,5 +144,48 @@
     "normal_sbp2SAT_weak_forced_energy": true,
     "normal_sbp1_normal_only_full_discrete_ssprk3_forced_bound": true,
     "original_H1_energy_to_Weyl_pointwise_no_go": "E_N=pi³/b(T)² independent of N; original t2 intrinsic E4 peak 9N/64"
-  }
+  },
+  "maximum_cut_VII_original_normal_SBP_and_Weyl": {
+    "document": "Docs/physics/KSW668F8DiscreteNormalSBPSSPRK3WeylMaxCut20261115.md",
+    "original_radial_SSPRK3_exact_polynomial": "|R(i*x)|²-1 = x^4*(x²-3)/36",
+    "original_d11_radial_only_certified_dt_over_dr": 0.26111648393354675,
+    "legacy_d11_dt_over_dr_045_radial_modal_growth": 1.8021850018750494,
+    "legacy_normal_homogeneous_energy_injection_exact": "277/2 on 16-node integer outgoing P",
+    "firstorder_normal_SBP_exact": true,
+    "normal_only_forced_SSPRK3_exact": true,
+    "original_normal_uniform_t1_t2_dt_over_dy": 0.5857864376269049,
+    "secondorder_SBP_SAT_weak_original_Israel_energy_exact": true,
+    "actual_original_SBP2_SAT_two_grid_field_drift": 0.1731857869461011,
+    "actual_original_SBP2_SAT_two_grid_intrinsic_Weyl_drift": 1.3996217560264992,
+    "actual_original_SBP2_SAT_two_grid_projected_Weyl_drift": 0.2596832410676931,
+    "exact_5D_bulk_periodic_T3_H1_to_Weyl_trace_no_go": {
+      "mode": "H_N=sin(N*x)cos(N*(T-Tstar))/N",
+      "energy": "pi^3/b(T)^2 independent of N",
+      "original_t2_intrinsic_Weyl_peak": "9N/64",
+      "compact_R3_source_counterexample": false
+    },
+    "source_equivalent_committed_local_test_pass": 255,
+    "broader_source_equivalent_local_test_pass": 269,
+    "pinned_Agda_kernel_run": false,
+    "exact_GitHub_branch_checkout_runner_run": false,
+    "original_complete_coupled_SSPRK3_stability_closed": false,
+    "actual_three_grid_both_Weyl_convergence_closed": false,
+    "FIO_original_t2_independent_theorem_acceptance": false,
+    "physical_matter_action_closed": false,
+    "D1_physical_graviton_observed": false
+  },
+  "next_exact_lemmas": [
+    "ads5OriginalMovingFullCoupledYRadialSSPRK3SymmetrizerCFL",
+    "ads5OriginalMovingH4PlusEpsilonNeumannToBothWeylTrace",
+    "ads5OriginalMovingTTThreeMultipoleThreeObservableConvergence",
+    "ads5OriginalT2NeumannToWeylEllipticFIOComposition",
+    "ads5OriginalT2ActualCompactTTNonzeroEarlyBothWeyl",
+    "ads5CompactTTMatterActionRealization",
+    "ads5MovingModeStabilityAndBackreaction",
+    "cylinderDoubledDiscPerturbedBulkAndRetardedGreen",
+    "ads5PhysicalScaleSourceDetectorComparison",
+    "braneBulkOriginalAnalyticAgdaKernel",
+    "ads5OriginalSourceToObservationSemanticWeld",
+    "physicalGravitonObservation"
+  ]
 }
