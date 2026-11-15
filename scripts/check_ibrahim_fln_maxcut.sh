@@ -12,6 +12,7 @@ for source in \
   DASHI/Wikimedia/IbrahimCycleRotationRelationExact.agda \
   DASHI/Wikimedia/IbrahimPartialFirstLinkSemanticsExact.agda \
   DASHI/Wikimedia/IbrahimFiniteTraceCheckerWeldExact.agda \
+  DASHI/Wikimedia/IbrahimFiniteLoopErasureAndWireNormalFormExact.agda \
   DASHI/Wikimedia/IbrahimFiniteCanonicalCycleRootExact.agda \
   DASHI/Wikimedia/IbrahimFiniteDecidableReachabilityExact.agda \
   DASHI/Wikimedia/IbrahimFinitePartialGlobalTrichotomyExact.agda \
@@ -51,6 +52,7 @@ for source in \
   DASHI/Wikimedia/IbrahimCycleRotationRelationExact.agda \
   DASHI/Wikimedia/IbrahimPartialFirstLinkSemanticsExact.agda \
   DASHI/Wikimedia/IbrahimFiniteTraceCheckerWeldExact.agda \
+  DASHI/Wikimedia/IbrahimFiniteLoopErasureAndWireNormalFormExact.agda \
   DASHI/Wikimedia/IbrahimFiniteCanonicalCycleRootExact.agda \
   DASHI/Wikimedia/IbrahimFiniteDecidableReachabilityExact.agda \
   DASHI/Wikimedia/IbrahimFinitePartialGlobalTrichotomyExact.agda \
