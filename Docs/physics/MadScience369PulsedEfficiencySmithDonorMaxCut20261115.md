@@ -63,3 +63,7 @@ The original Smith/Filsinger `RetardedFlight` and `delayed_wave` logic preserves
 ## 2026-11-15 causal field and periodic solution continuation
 
 See canonical `MadScience369V2ExactLemmaRoadmap20261115.md`, third-round P1.C2/C3 and P2 sections. The Don Smith retarded-flight abstraction is extended with an exact 1D telegrapher energy identity, bidirectional passive reflection/dissipation, a matched-line Lipschitz delay bound, and an exact periodic reluctance-generator state in a source-independent linear class. Neither a full V2 Maxwell field solution nor a physical 369 efficiency optimum has been observed. Agda kernel remains pending.
+
+## Fourth cut causal retarded-control donor
+
+See [NonlinearCausalPeriodicProof](MadScience369V2NonlinearCausalPeriodicProof20261115.md). Don Smith finite-flight timing can be reused as a causal constraint on a **different constructed** nonlinear reluctance generator. Smooth reversible saturation and mutual coupling admit a periodic flux contraction, and an external active retarded controller is conditionally stable under |K|/ell<R/Lambda. Its feedback source work is signed and counted. This is neither original hardware identity nor a full physical Maxwell/magnetic-memory proof.

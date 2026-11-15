@@ -1,0 +1,21 @@
+{
+  "date": "2026-11-15",
+  "scope": "constructed nonlinear saturating coupled periodic motor and delayed active controller",
+  "new_local_tests": 53,
+  "all_local_tests": 216,
+  "failed": 0,
+  "default_local_test_runner": "PASS",
+  "agda_kernel": "NOT RUN",
+  "standalone_slow_producer": "NOT RUN",
+  "original_v2_physical_data": "NONE",
+  "full_source_bundle": "v2_nonlinear_causal_maxcut_round4_20261115.zip (local conversation artifact; not individual files in this GitHub commit)",
+  "strict_original_gates_open": 16,
+  "illustrative": {
+    "ell_h": 0.0256,
+    "Lambda_h": 0.0584,
+    "feedback_gain_ohm": 0.25,
+    "halanay_rate_per_s": 7.350481656526827,
+    "net_ideal_bus_w": 2.369748371144179,
+    "external_feedback_source_w": 0.2947814043958135
+  }
+}
