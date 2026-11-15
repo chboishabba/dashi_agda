@@ -76,6 +76,12 @@ Thus a *universal physical R823 reserve-demand inequality demanded for every ter
 
 **Fail-closed boundary:** R408/R823's global rational `PeriodicHelicalProjectorLaws` cannot be fabricated from a rational 3-4-5 snapshot: the physical norm at (1,1,0) uses \(\sqrt2\). Nor can a nonconstant continuous real-time trajectory be rational-valued on a connected interval. A *real-field finite-sum/source transport* and a native proof/kernel receipt remain owed. The classical real-Fourier negative integral is stronger than a purely scalar R856 certificate but **does not close B1, C1, C2, or any of the six original endpoints**. The terminal and 14/15 gate statuses remain unchanged.
 
+### C1 Python/SymPy mathematical closure — 15 November 2026
+
+**User-authorized non-Agda mathematical acceptance, C1 only.** The original R71 fixed canonical field is now algebraically expanded into a *source-constructed* real quadratic atom list of the R26/R74 form (rather than asserting that arbitrary R74 atom lists are physical). The generic ordered triad `-i(q·u_p)P_k u_q` admits universal exact SymPy real/imag coefficient identities with the actual negative-mode conjugacy signs. Exact rational source readback matches all eight R829/R836 projected-forcing active mode rows (24 complex components). The complete radius-four state has 728 nonzero modes, 364 positive reality representatives and 2,184 real slots. An explicit physical component bound `K=5032512` on `||x||∞≤12`, original initial max 6, and exact `K*T_R854<6` give the unique classical real Galerkin `C¹` solution on the **original** R854 horizon by Picard–Lindelöf and the first-exit continuation argument.
+
+**Proof and executable receipt:** [Clay C1 Python/SymPy mathematical closure](ClayC1R71R74PythonSympyMathematicalClosure20261115.md); `python3 scripts/check_clay_c1_r71_r74_sympy_bridge_20261115.py` (SymPy 1.14, exact rationals). **The C1 mathematical gate is CLOSED on the user-approved Python protocol; there is NO Agda kernel acceptance**. The original R74 and R833 booleans remain false and the Agda-native representation/weld proof is explicitly retained as formalization debt, not a second missing classical theorem. **C2 remains OPEN**: original R408 time-dependent live packet, selected helical C/P/D rate along the physical real solution, the differentiated selected-rate estimate, and the R856/FTC consumer. No original endpoint or global NS regularity is claimed.
+
 ### Phase C — NS R71/R74/R833/R853–R856: exact real-rate route
 
 | Exact checked name | Real owner | Adjudication |
@@ -232,6 +238,9 @@ reproduced; no pinned Agda 2.9 or Lean 4.28 kernel acceptance in this runtime.
 **Required exact F deliverables:** F0 kernel-check existing finite candidate/concrete code, no-go and model closure; F1 discharge correct actual-halting cost-model and representative **standard-TM P** identification (do not equate a restricted cost model to standard P without proof); F2 produce a legitimate `ResourceClosingCompiler.compile` with a polynomially bounded own-Cook description *or abandon that route if its resource inequality is impossible*; F3 prove `UniversalPolynomialSATDecisionFailure cost` **for every polynomial decider** under true cost-model coverage, with correct \(\forall D\,\exists\phi\) quantifiers, not \(\exists\phi\,\forall D\); F4 combine with established SAT∈NP and reduction/NP background to the official `PNotEqualsNP`. **The universal lower bound remains an independent Clay-open mathematical claim.**
 
 ### Acceptance and phase ledger (canonical, do not silently promote)
+
+**Python/SymPy mathematical protocol as requested this round:** 2/15 gates paid (**P0 + C1**), 13 active (**A1–A2, B1–B2, C2, D1–D2, E0–E2, F1–F3**). Strict native Agda/Lean acceptance has **not** been obtained for C1 or the other mathematical gates; the prior original native C1 requirement remains a separately identified formalization debt. All six terminal mathematical endpoints remain 0/6. The full Phase C terminal row remains OPEN because C2 is not discharged.
+
 
 | Gate | Demonstration needed for CLOSE | Current source determination |
 | --- | --- | --- |
