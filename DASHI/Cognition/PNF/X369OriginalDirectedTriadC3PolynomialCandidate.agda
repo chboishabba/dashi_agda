@@ -16,7 +16,11 @@ module DASHI.Cognition.PNF.X369OriginalDirectedTriadC3PolynomialCandidate where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Integer using (ℤ; +_; _+_; _*_; _-_)
-open import Data.Integer.Tactic.RingSolver using (solve-∀)
+-- Use the typed non-reflective integer polynomial AST, as in the
+-- repository's RiemannWeilPairKernelFrobeniusExact. The tactic
+-- solve-∀ reifies Expr variables and cannot call ℤ-valued helpers.
+open import Data.Integer.Solver using (module +-*-Solver)
+open +-*-Solver using (solve; _:+_; _:-_; _:*_; con; _:=_)
 open import Data.Product using (_×_; _,_)
 open import Relation.Binary.PropositionalEquality using (sym; trans)
 
@@ -30,7 +34,12 @@ qTriad a b c =
 rawTriadRotation : ∀ (a b c : ℤ) →
   (b - a) * (b - a) + (c - b) * (c - b) + (a - c) * (a - c)
   ≡ ((+ 2) * (((a * a + b * b + c * c) - a * b) - b * c - c * a))
-rawTriadRotation = solve-∀
+rawTriadRotation a b c =
+  solve 3
+    (λ a b c →
+      ((((b :- a) :* (b :- a)) :+ ((c :- b) :* (c :- b))) :+ ((a :- c) :* (a :- c)))
+      := (con (+ 2) :* ((((((a :* a) :+ (b :* b)) :+ (c :* c)) :- (a :* b)) :- (b :* c)) :- (c :* a))))
+    refl a b c
 
 -- This is the original coherent R+ = (b,c,a) squared source
 -- displacement. The R- = (c,a,b) action has the same displacement.
@@ -43,7 +52,12 @@ originalTriadRotationSquaredDisplacementEqualsTwoQ = rawTriadRotation
 rawTriadInverseRotation : ∀ (a b c : ℤ) →
   (c - a) * (c - a) + (a - b) * (a - b) + (b - c) * (b - c)
   ≡ ((+ 2) * (((a * a + b * b + c * c) - a * b) - b * c - c * a))
-rawTriadInverseRotation = solve-∀
+rawTriadInverseRotation a b c =
+  solve 3
+    (λ a b c →
+      ((((c :- a) :* (c :- a)) :+ ((a :- b) :* (a :- b))) :+ ((b :- c) :* (b :- c)))
+      := (con (+ 2) :* ((((((a :* a) :+ (b :* b)) :+ (c :* c)) :- (a :* b)) :- (b :* c)) :- (c :* a))))
+    refl a b c
 
 originalTriadInverseRotationSquaredDisplacementEqualsTwoQ :
   ∀ (a b c : ℤ) →
@@ -87,7 +101,12 @@ rawPlusFactors : ∀ (a b c A B C : ℤ) →
   ((a * A + b * B + c * C) - (a * B + b * C + c * A)) * ((a * A + b * B + c * C) - (a * B + b * C + c * A)) +
   ((a * B + b * C + c * A) - (a * C + b * A + c * B)) * ((a * B + b * C + c * A) - (a * C + b * A + c * B))
   ≡ (+ 2) * (((a * a + b * b + c * c) - a * b) - b * c - c * a) * (((A * A + B * B + C * C) - A * B) - B * C - C * A)
-rawPlusFactors = solve-∀
+rawPlusFactors a b c A B C =
+  solve 6
+    (λ a b c A B C →
+      (((((((a :* C) :+ (b :* A)) :+ (c :* B)) :- (((a :* A) :+ (b :* B)) :+ (c :* C))) :* ((((a :* C) :+ (b :* A)) :+ (c :* B)) :- (((a :* A) :+ (b :* B)) :+ (c :* C)))) :+ (((((a :* A) :+ (b :* B)) :+ (c :* C)) :- (((a :* B) :+ (b :* C)) :+ (c :* A))) :* ((((a :* A) :+ (b :* B)) :+ (c :* C)) :- (((a :* B) :+ (b :* C)) :+ (c :* A))))) :+ (((((a :* B) :+ (b :* C)) :+ (c :* A)) :- (((a :* C) :+ (b :* A)) :+ (c :* B))) :* ((((a :* B) :+ (b :* C)) :+ (c :* A)) :- (((a :* C) :+ (b :* A)) :+ (c :* B)))))
+      := ((con (+ 2) :* ((((((a :* a) :+ (b :* b)) :+ (c :* c)) :- (a :* b)) :- (b :* c)) :- (c :* a))) :* ((((((A :* A) :+ (B :* B)) :+ (C :* C)) :- (A :* B)) :- (B :* C)) :- (C :* A))))
+    refl a b c A B C
 
 originalDirectedTriadC3DisplacementSquaredFactors :
   ∀ (a b c A B C : ℤ) →
@@ -100,7 +119,12 @@ rawMinusFactors : ∀ (a b c A B C : ℤ) →
   ((a * C + b * A + c * B) - (a * B + b * C + c * A)) * ((a * C + b * A + c * B) - (a * B + b * C + c * A)) +
   ((a * A + b * B + c * C) - (a * C + b * A + c * B)) * ((a * A + b * B + c * C) - (a * C + b * A + c * B))
   ≡ (+ 2) * (((a * a + b * b + c * c) - a * b) - b * c - c * a) * (((A * A + B * B + C * C) - A * B) - B * C - C * A)
-rawMinusFactors = solve-∀
+rawMinusFactors a b c A B C =
+  solve 6
+    (λ a b c A B C →
+      (((((((a :* B) :+ (b :* C)) :+ (c :* A)) :- (((a :* A) :+ (b :* B)) :+ (c :* C))) :* ((((a :* B) :+ (b :* C)) :+ (c :* A)) :- (((a :* A) :+ (b :* B)) :+ (c :* C)))) :+ (((((a :* C) :+ (b :* A)) :+ (c :* B)) :- (((a :* B) :+ (b :* C)) :+ (c :* A))) :* ((((a :* C) :+ (b :* A)) :+ (c :* B)) :- (((a :* B) :+ (b :* C)) :+ (c :* A))))) :+ (((((a :* A) :+ (b :* B)) :+ (c :* C)) :- (((a :* C) :+ (b :* A)) :+ (c :* B))) :* ((((a :* A) :+ (b :* B)) :+ (c :* C)) :- (((a :* C) :+ (b :* A)) :+ (c :* B)))))
+      := ((con (+ 2) :* ((((((a :* a) :+ (b :* b)) :+ (c :* c)) :- (a :* b)) :- (b :* c)) :- (c :* a))) :* ((((((A :* A) :+ (B :* B)) :+ (C :* C)) :- (A :* B)) :- (B :* C)) :- (C :* A))))
+    refl a b c A B C
 
 originalDirectedInverseC3DisplacementSquaredFactors :
   ∀ (a b c A B C : ℤ) →
