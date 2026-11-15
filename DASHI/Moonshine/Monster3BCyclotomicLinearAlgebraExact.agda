@@ -28,9 +28,9 @@ zetaSumZero : add C3.one (add C3.zeta C3.zetaSquared) ≡ C3.zero
 zetaSumZero = C3.cyclotomic3Ext step1 step2
   where
     step1 : 1ℚ + (0ℚ + - 1ℚ) ≡ 0ℚ
-    step1 = solve []
+    step1 = refl
     step2 : 0ℚ + (1ℚ + - 1ℚ) ≡ 0ℚ
-    step2 = solve []
+    step2 = refl
 
 addAssociative : (a b c : C3.Cyclotomic3) →
   add (add a b) c ≡ add a (add b c)
@@ -144,9 +144,9 @@ zetaSquaredTimesZetaSquaredIsZeta =
   C3.cyclotomic3Ext step1 step2
   where
     step1 : (- 1ℚ) * (- 1ℚ) - (- 1ℚ) * (- 1ℚ) ≡ 0ℚ
-    step1 = solve []
+    step1 = refl
     step2 : (- 1ℚ) * (- 1ℚ) + (- 1ℚ) * (- 1ℚ) - (- 1ℚ) * (- 1ℚ) ≡ 1ℚ
-    step2 = solve []
+    step2 = refl
 
 phaseCycleSumOnOne :
   add C3.one (add C3.zeta C3.zetaSquared) ≡ C3.zero
