@@ -26,6 +26,7 @@ module DASHI.Reasoning.PNFWaveSynthesisCommutatorExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer using (ℤ; +_; -_; _+_; _*_)
+open import Data.Product using (_,_)
 
 import Data.Integer.Tactic.RingSolver as IntRS
 import Tactic.RingSolver.NonReflective as NR
