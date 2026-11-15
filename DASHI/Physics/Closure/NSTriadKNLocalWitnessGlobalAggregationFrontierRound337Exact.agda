@@ -59,13 +59,13 @@ cutoffUniformAggregationStillOpen : Bool
 cutoffUniformAggregationStillOpen = R336.round336CutoffUniformCotlarSteinClosed
 
 localClosureDoesNotPromoteGlobalAggregation :
-  leafState physicalPairedCellMajorant ≡ closed
+  leafState physicalPairedCellMajorant ≡ leafClosed
 localClosureDoesNotPromoteGlobalAggregation = refl
 
 highestImpactLeaf : AggregationLeaf
 highestImpactLeaf = physicalPairwiseOverlapEnvelope
 
-highestImpactLeafIsOpen : leafState highestImpactLeaf ≡ open
+highestImpactLeafIsOpen : leafState highestImpactLeaf ≡ leafOpen
 highestImpactLeafIsOpen = refl
 
 round337PackageAClosed : Bool
