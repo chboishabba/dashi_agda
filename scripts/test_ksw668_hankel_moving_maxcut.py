@@ -31,9 +31,14 @@ class HankelBraneMaxcut(unittest.TestCase):
     def test_wrong_sign_or_zero_source_forbidden(self):
         with self.assertRaises(ValueError):a.stationary_outgoing(laplace_s=-1)
         with self.assertRaises(ValueError):a.finite_energy_packet(mlo=-1)
+    def test_moving_abstract_retarded_theorem_and_strict_chord(self):
+        r=a.moving_abstract_green_and_bulk_chord()
+        self.assertTrue(r['abstract_smooth_retarded_operator_established_by_theorem'])
+        self.assertTrue(r['same_metric_causal_chord_interiors'])
+        self.assertFalse(r['nonzero_electric_Weyl_from_retarded_source_proved'])
     def test_no_physical_promotion(self):
         r=a.audit()
-        self.assertFalse(r['exact_original_moving_retarded_Green'])
+        self.assertFalse(r['explicit_original_moving_retarded_Green_kernel'])
         self.assertFalse(r['gravitational_observation'])
 
 if __name__=='__main__':unittest.main(verbosity=2)
