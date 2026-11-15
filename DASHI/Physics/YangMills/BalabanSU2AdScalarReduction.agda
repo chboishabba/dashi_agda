@@ -1,6 +1,7 @@
 module DASHI.Physics.YangMills.BalabanSU2AdScalarReduction where
 
 open import Agda.Builtin.Equality using (_≡_)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver using
@@ -65,25 +66,27 @@ adQuadraticPlusCubicReduced :
       (adOperator Y (adOperator Y (adOperator Y X))))
   ≡ adQuadratic (reduceCubicCoefficient cubic coefficients Y) Y X
 adQuadraticPlusCubicReduced
-  cubic (adCoefficients identity linear quadratic)
-  Y X
-  rewrite adCubic Y X =
-  su2LieExt
-    (scalarAdLemma
-      identity (xComponent X)
-      linear (xComponent (adOperator Y X))
-      quadratic (xComponent (adOperator Y (adOperator Y X)))
-      cubic (-R (cAd *R lieNormSquared Y)))
-    (scalarAdLemma
-      identity (yComponent X)
-      linear (yComponent (adOperator Y X))
-      quadratic (yComponent (adOperator Y (adOperator Y X)))
-      cubic (-R (cAd *R lieNormSquared Y)))
-    (scalarAdLemma
-      identity (zComponent X)
-      linear (zComponent (adOperator Y X))
-      quadratic (zComponent (adOperator Y (adOperator Y X)))
-      cubic (-R (cAd *R lieNormSquared Y)))
+  cubic (adCoefficients identity linear quadratic) Y X =
+  trans
+    (cong
+      (λ w → lieAdd (adQuadratic (adCoefficients identity linear quadratic) Y X) (lieScale cubic w))
+      (adCubic Y X))
+    (su2LieExt
+      (scalarAdLemma
+        identity (xComponent X)
+        linear (xComponent (adOperator Y X))
+        quadratic (xComponent (adOperator Y (adOperator Y X)))
+        cubic (-R (cAd *R lieNormSquared Y)))
+      (scalarAdLemma
+        identity (yComponent X)
+        linear (yComponent (adOperator Y X))
+        quadratic (yComponent (adOperator Y (adOperator Y X)))
+        cubic (-R (cAd *R lieNormSquared Y)))
+      (scalarAdLemma
+        identity (zComponent X)
+        linear (zComponent (adOperator Y X))
+        quadratic (zComponent (adOperator Y (adOperator Y X)))
+        cubic (-R (cAd *R lieNormSquared Y))))
 
 record BoundedAdScalarApproximation : Set₁ where
   constructor boundedAdApproximation
