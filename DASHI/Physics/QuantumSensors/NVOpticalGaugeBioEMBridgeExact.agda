@@ -6,7 +6,8 @@ module DASHI.Physics.QuantumSensors.NVOpticalGaugeBioEMBridgeExact where
 -- This proves only *gauge invariance* of the finite model; not a
 -- quantitative or experimentally calibrated optical readout.
 
-open import Agda.Builtin.Equality using (_≡_; cong)
+open import Agda.Builtin.Equality using (_≡_)
+open import Relation.Binary.PropositionalEquality using (cong)
 open import Data.Rational.Base using (ℚ)
 import DASHI.Physics.Measurement.BioEMDiscreteCurvatureGaugeExact as Gauge
 import DASHI.Physics.QuantumSensors.NVDiscreteGaugeCurvatureBridgeExact as NV

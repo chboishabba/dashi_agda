@@ -6,7 +6,8 @@ module DASHI.Physics.QuantumSensors.NVTSFVHistoryOpticalNonidentifiabilityExact 
 -- detector arithmetic. This is a formal negative control, not an
 -- empirical claim about a specific diamond NV experiment.
 
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong)
 open import Data.Rational.Base using (ℚ)
 open import Data.Empty using (⊥)
 

@@ -5,7 +5,8 @@ module DASHI.Physics.QuantumSensors.NVFiniteResonanceReadoutExact where
 -- or actual experimental calibration has been derived.
 -- Reuses the exact axial spin-1 finite qutrit owner.
 
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; _*_)
 import DASHI.Algebra.Quantum.FiniteQutrit as Q
 import DASHI.Physics.QuantumSensors.NVSpinOneAxialExact as NV

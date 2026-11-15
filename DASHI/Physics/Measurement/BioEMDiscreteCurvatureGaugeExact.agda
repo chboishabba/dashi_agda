@@ -7,7 +7,8 @@ module DASHI.Physics.Measurement.BioEMDiscreteCurvatureGaugeExact where
 -- Classical provenance: gauge theory / simplicial cohomology.
 -- DASHI contribution: explicit source-to-observable consumer bridge.
 
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (ℚ; _+_; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)

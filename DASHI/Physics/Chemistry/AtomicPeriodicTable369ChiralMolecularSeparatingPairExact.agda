@@ -1,7 +1,8 @@
 module DASHI.Physics.Chemistry.AtomicPeriodicTable369ChiralMolecularSeparatingPairExact where
 
 open import DASHI.Core.Prelude
-open import Agda.Builtin.Equality using (_≡_; refl; sym; trans)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 ------------------------------------------------------------------------
 -- FINITE CHIRAL SEPARATING-PAIR FIXTURE

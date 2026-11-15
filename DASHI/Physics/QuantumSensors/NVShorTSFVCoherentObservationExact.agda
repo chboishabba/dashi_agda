@@ -5,7 +5,8 @@ module DASHI.Physics.QuantumSensors.NVShorTSFVCoherentObservationExact where
 -- This is not an RSA algorithm, a physical NV calibration, a
 -- TSFV Candidate256 S/hbar realization, or a continuum path integral.
 
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Fin.Base using (Fin)
 import DASHI.Algebra.Quantum.ShorCyclicPhaseAmplitudeQFTExact as Phase

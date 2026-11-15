@@ -5,7 +5,8 @@ module DASHI.Physics.QuantumSensors.NVPhotonTwoShotKernelExact where
 -- single-shot photon response or experimental independence.
 -- The underlying one-shot normalized likelihood is imported from MCG.
 
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong)
 open import Relation.Binary.PropositionalEquality using (trans)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Rational.Base using (ℚ; 1ℚ; _+_; _-_; _*_)
