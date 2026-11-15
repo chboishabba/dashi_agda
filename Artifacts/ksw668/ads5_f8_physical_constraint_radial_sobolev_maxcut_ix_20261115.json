@@ -1,0 +1,155 @@
+{
+  "schema": "KSW668F8PhysicalConstraintRadialSobolevMaxCutIX20261115",
+  "date": "2026-11-15",
+  "original_physical_model": "5D Poincare AdS, a(t)=t, z_b=1/t, original compact 3D TT Israel Neumann",
+  "owner": "follow-on PR #1520 after merged #1512",
+  "proof_owners": {
+    "agda_characteristic": "DASHI/Physics/Gravity/KSW668AdS5OriginalTTCharacteristicConstraintRationalExact.agda",
+    "agda_all_powers": "DASHI/Physics/Gravity/KSW668AdS5OriginalRadialSobolevPowerReuseExact.agda",
+    "source_constraint": "scripts/ksw668_f8_characteristic_constraint_maxcut.py",
+    "source_weak_wall_no_go": "scripts/ksw668_f8_weak_sat_constraint_no_go.py",
+    "source_radial_higher": "scripts/ksw668_f8_radial_sobolev_hierarchy.py",
+    "documentation": "Docs/physics/KSW668F8PhysicalConstraintRadialSobolevMaxCut20261115.md"
+  },
+  "physical_constraint": {
+    "C": "D_y U - (P-M)/2",
+    "mode3_interior_C_T": "0 exactly for SBP2-SAT D_y physical, all SSPRK3 stages",
+    "mode4_interior_C_T": "a(D_y-D_w)P+c(D_y-D_w)M",
+    "rough_state_original_slices": [
+      {
+        "t": 1,
+        "mode3_Cdot_max": 4.0234482412415673e-13,
+        "mode4_Cdot_max": 0.9523705982493729
+      },
+      {
+        "t": 1.3333333333333333,
+        "mode3_Cdot_max": 2.573496971081113e-13,
+        "mode4_Cdot_max": 1.1275694286546578
+      },
+      {
+        "t": 2,
+        "mode3_Cdot_max": 6.679101716144942e-13,
+        "mode4_Cdot_max": 2.043786011136987
+      },
+      {
+        "t": 12,
+        "mode3_Cdot_max": 5.400124791776761e-13,
+        "mode4_Cdot_max": 5.858622562053596
+      }
+    ],
+    "physical_original_Poincare_SSPRK3_stage_interior_constraint_residual": 3.552713678800501e-15,
+    "physical_original_mode4_SSPRK3_stage_interior_residual": 0.03271800276076675,
+    "smooth_second_order_refinement_ratios": [
+      3.8806300612059776,
+      3.9123694725213918,
+      3.9662498759050675
+    ],
+    "global_weak_SAT_boundary_preservation": false
+  },
+  "weighted_original_coupled_energy": {
+    "physical_w": "z^-3",
+    "normal_spacing_assumption": "dy<=b(t)/4",
+    "quadratic_commutator_bound": "|<f,(D_y-D_w)f>_Hw| <= 4/b ||f||^2_Hw",
+    "analytic_Gershgorin_tested_16_original_meshes": true,
+    "homogeneous_mode3": "E'(T)<=(5+16t)*E(T)",
+    "forced_mode3": "E_tilde'(T)<=(6+16t)*E_tilde(T)+0.5||F||_E^2",
+    "original_t1_to_t12_uniform_constants": {
+      "homogeneous": 197,
+      "forced": 198
+    },
+    "lift": "Lambda_M=-2G chi/(1-v), Lambda_U=Lambda_P=0",
+    "forced_F_M": "(v-1)D_y Lambda_M+3Lambda_M/(2z)-d_T Lambda_M",
+    "actual_original_compact_TT_source_epsilon": 0.04,
+    "actual_compact_TT_forced_slices_pass": [
+      1,
+      1.3333333333333333,
+      2,
+      12
+    ],
+    "actual_compact_TT_source_lift_residual_order": "1e-11",
+    "complete_fully_discrete_SSPRK3_energy": false
+  },
+  "boundary_exact_no_go": {
+    "initially_C_equals_zero_all_nodes": true,
+    "original_slice_t": 1.3333333333333333,
+    "U": "y/2",
+    "P": 1,
+    "M": 0,
+    "G": 0,
+    "wall_and_far_Cdot": "(1+v)/dy = (2/5)/dy",
+    "dy": [
+      0.04,
+      0.02,
+      0.01
+    ],
+    "rates": [
+      10,
+      20,
+      40
+    ],
+    "independent_physical_Weyl_detection": false
+  },
+  "all_radial_sobolev_powers": {
+    "modes": [
+      0,
+      2,
+      4
+    ],
+    "effective_d": [
+      3,
+      7,
+      11
+    ],
+    "commutation": "[(-L_d)^k, original full linear moving AdS normal/radial/warp/SAT]=0 when G transformed in parallel",
+    "tested_k": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "original_slices": [
+      1,
+      1.3333333333333333,
+      2,
+      12
+    ],
+    "weak_sat_modes": [
+      3,
+      4
+    ],
+    "max_relative_actual_NumBa_stage_residual": 5.513657351179439e-16,
+    "all_N_agda_source_induction_conditional_on_single_commutator": true,
+    "full_mesh_uniform_H4_epsilon_source_norm": false,
+    "pointwise_two_Weyl_trace": false
+  },
+  "verification": {
+    "source_equivalent_previous_regression_count": 284,
+    "new_constraint_and_forced_cases": 24,
+    "new_boundary_no_go_cases": 6,
+    "new_radial_sobolev_cases": 12,
+    "local_source_equivalent_cases_total": 326,
+    "local_source_equivalent_passed": 326,
+    "exact_connected_GitHub_PR_head_runner_run": false,
+    "pinned_Agda_kernel_run": false,
+    "original_t2_FIO_independent_referee_accepted": false,
+    "original_fully_discrete_coupled_SSPRK3_accepted": false,
+    "three_grid_H_E4_E5_converged": false,
+    "experimental_graviton_observed": false
+  },
+  "next_exact_lemmas": [
+    "ads5OriginalWeakIsraelGlobalConstraintBoundaryWeld",
+    "ads5OriginalMovingSBP3FullCoupledSSPRK3CFLAndError",
+    "ads5OriginalCompactTTFullH4PlusEpsilonNeumannBoundarySourceBudget",
+    "ads5OriginalMovingH4PlusEpsilonNeumannToBothWeylTrace",
+    "ads5OriginalMovingTTThreeMultipoleThreeObservableConvergence",
+    "ads5OriginalT2NeumannToWeylEllipticFIOComposition",
+    "ads5OriginalT2ActualCompactTTNonzeroEarlyBothWeyl",
+    "ads5CompactTTMatterActionRealization",
+    "ads5MovingModeStabilityAndBackreaction",
+    "cylinderDoubledDiscPerturbedBulkAndRetardedGreen",
+    "ads5PhysicalScaleSourceDetectorComparison",
+    "braneBulkOriginalAnalyticAgdaKernel",
+    "ads5OriginalSourceToObservationSemanticWeld",
+    "physicalGravitonObservation"
+  ]
+}
