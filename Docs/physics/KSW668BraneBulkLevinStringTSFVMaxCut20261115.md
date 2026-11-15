@@ -819,3 +819,43 @@ bash scripts/run_ksw668_local_maxcut.sh --math
 # Kernel is a SEPARATE local step: requires the repository's pinned Agda 2.9 toolchain
 \`\`\`
 Local new suite **9/9 PASS** on a source-equivalent copy (SymPy/SciPy/MPMath); old 10 tests independently source-equivalent passed in prior round. Exact new connected-GitHub branch runner, full old acceptance and Agda kernel have not been executed by this runtime. No CI results substituted.
+
+
+### F6 numerical packet actually evaluated; static no-shortcut negative control (11/11 new tests)
+
+The stationary Neumann outgoing calculation is supplemented by an actual finite-energy TT packet rather than only a symbolic norm integral. For the radial continuum take \(m\in[0.6,1.4]\) and
+\[
+A(m)=
+\begin{cases}
+\exp[-0.03/((m-0.6)(1.4-m))],&0.6<m<1.4,\\0,&\text{else.}
+\end{cases}
+\]
+For a symmetric tracefree \(Q=\operatorname{diag}(0,1,-1)\), use the real-space local TT fourth-order construction. In Fourier form
+\(\widehat f^{TT}_{ij}(\mathbf k)=[P_{ik}P_{jl}-P_{ij}P_{kl}/2]Q_{kl}\,e^{-|\mathbf k|^2/2}\), \(P=|\mathbf k|^2I-\mathbf k\mathbf k^\top\). The angular averages at \(\mathbf x=0\) are
+\[
+\langle\widehat f_{yy}^{TT}\rangle_{S^2}=\tfrac25 k^4 e^{-k^2/2},
+\qquad
+\langle\|\widehat f^{TT}\|^2\rangle_{S^2}=\tfrac45 k^8e^{-k^2}.
+\]
+Hence the *explicitly evaluated* stationary tensor packet is
+\[
+H_{yy}(T,z,0)
+=\frac{8\pi}{5(2\pi)^{3/2}}\int_{0.6}^{1.4}dm\,A(m)H_m(z)
+\int_0^\infty dk\,k^6e^{-k^2/2}\cos(T\sqrt{k^2+m^2}),
+\]
+with positive finite initial energy
+\[
+E(0)=\frac{8\pi}{5}\left[
+\tfrac12\Gamma(\tfrac{13}{2})\int |A(m)|^2dm+
+\tfrac12\Gamma(\tfrac{11}{2})\int m^2|A(m)|^2dm
+\right].
+\]
+Independent SciPy quadrature: \(\int |A|^2dm=0.41073100423980546\), \(\int m^2|A|^2dm=0.4249976277102043\), \(E(0)=353.08728191472755\) (chosen model amplitude), \(H_{yy}(0.2,1.5,\mathbf0)=1.5683695535242972\). The exact source script tests these quantities and fail-closes physical promotion.
+
+**Static no-shortcut negative control:** in stationary planar AdS conformal coordinates, both emitter and receiver have \(z=b\), so a causal bulk path must satisfy \(\Delta T\ge\sqrt{|\Delta\mathbf x|^2+(b-b)^2}=|\Delta\mathbf x|\), exactly the intrinsic photon earliest time. The stationary outgoing Hankel kernel cannot by itself demonstrate the *expanding-brane* early arrival. The strict shortcut requires the convex moving \(b(T)\) boundary separately certified above.
+
+The new \`scripts/test_ksw668_hankel_moving_maxcut.py\` now contains **11** source-equivalent locally passed tests: radial PDE/Neumann/pole; outgoing static Laplace decay; generalized Bessel Wronskian; normalized zero mode; finite compact KK band; nonzero actually evaluated finite-energy TT packet; compact moving boundary lifting; Ginoux–Murro timelike-Neumann theorem preconditions plus strict interior null chord; illegal parameter rejection; static no-shortcut control; and the physical fail-closed guard. This does **not** mean 11 Agda kernel acceptances or 11 physical results.
+
+**Revised exact terminal status:** A1–A3 analytic test-scalar positive receiver on flat cylinder; A4 static self-gravitating shell background with moving-flat-bulk rigidity only; B2 mathematical compact TT stress and linearized Israel coefficient, **microphysical action open**; B3 abstract smooth prescribed-source moving retarded operator **exists by Ginoux–Murro theorem application**, explicit brane-to-brane Green kernel/constructive evaluation open; B4 physical nonzero early TT Weyl reception open; B5 stationary TT packet finite energy but moving full coupled stability open; C1 realistic observation/scale fit open; C2 pinned Agda analytic kernel open; D1 experimental evidence open.
+
+**Next maximum-cut implementation** must compute the original moving background boundary-to-boundary *Schwartz kernel* or a convergently validated discretization of its abstract \(G_N^{ret}\), choose the prepared compact TT source with nonzero ray polarization, calculate an early \(E_{\hat y\hat y}\) receiver and explicit source normalization, then weld a genuine brane matter action and full constraints. The stationary resolvent is a correct test/limit, not a substitute for that moving kernel.
