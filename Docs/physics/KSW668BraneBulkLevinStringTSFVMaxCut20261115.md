@@ -1330,3 +1330,12 @@ Prior F8 smoke 68 + 35 new = **103 source-equivalent local unit tests PASS** in 
 | F9/F10/F11/D1 | existing matter-action, coupled stability/cylinder, physical scales, Agda kernel, source-observer semantics, physical measurement | **OPEN**, unchanged by this UV/IR source analysis |
 
 **Next maximum-cut actual implementation:** replace non-convergent uniform radial-Bessel inverse with an *independently validated adaptive oscillatory quadrature* satisfying exact compact-TT zero-outside-support test before any moving PDE/wavefront promotion. Compare boundary source spectra and two distinct Weyl observables at the SAME original \(t=2\) receiver. Do not spend a round simply increasing \(N_x\) at constant \(L\).
+
+
+### F8 maximum-cut V.1: exact physical-space 3D TT source benchmark and 111 local tests
+
+Following the UVIR cutoff/spacing/static-inverse diagnosis, independently derive the source itself in real space. On the original radial \(C^\infty\) compact seed \(f(r)\) and spatial x-axis, the exact local fourth-order operator reduces to
+\(S_{yy}f=f^{(4)}+2f^{(3)}/r-3f''/r^2+3f'/r^3\).
+The normalized \(\epsilon=.024\) original source yields \(\epsilon^4S_{yy}f(\epsilon/3)=-1852823.059351569\ne0\), but **exactly zero** at all \(r\ge\epsilon\), including receiver \(r=1.822021\). SymPy separately verifies the operator formula against a nontrivial 3D Gaussian, and positive/negative numerical real-space tests check scale \(\epsilon^{-3}\). New \`scripts/ksw668_f8_exact_spatial_tt_local.py\` (8 tests); **111/111 source-equivalent local F8 suite PASS**. Existing F8 3D *Fourier-Bessel inverse* still spuriously returns 481.9/611.4/626.3 at this exact-zero outside-support point, so **F8.3 receiver remains a FAILED numerical gate**; no observed early graviton or Agda continuum proof is inferred.
+
+**Next decisive code/analytic cut:** use the exact real-space source evaluation as hard positive/negative acceptance benchmark for a replacement adaptive/oscillatory k integral; independently resolve 3D source spectrum \(k_{\max}\), \(\Delta k\), radial dynamics, original receiver Weyl and the bulk null lens. Keep original t2 externally sourced FIO existential theorem application and F9 matter action separate. Full previously delivered standalone FIO proof is now committed verbatim at \`Docs/physics/KSW668F8OriginalT2NeumannFIOProof20261115.md\`.
