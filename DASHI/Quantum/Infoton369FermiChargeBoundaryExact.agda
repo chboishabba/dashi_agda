@@ -145,3 +145,52 @@ sourceWaterNotAlreadyMeasured = refl
 -- a charge operator on the SAME original fermion state, and demonstrated
 -- compatibility with the occupation/Hamiltonian/thermal state.
 -- That bridge is OPEN and not postulated into existence here.
+
+
+------------------------------------------------------------------------
+-- Independent source: M. Reece, "Axion-gauge coupling quantization with a
+-- twist", JHEP 10 (2023) 116, section 2, eqs. (2.2)--(2.4).
+-- DOI https://doi.org/10.1007/JHEP10(2023)116 .
+--
+-- CONDITIONAL on G = [SU(3)_C x U(1)_em]/Z3.  If t is the SU(3)
+-- center triality and qhat = 3 Q/e is integer, then t + qhat = 0 mod 3.
+-- Colour-singlets: qhat = 0 (mod 3); triplets: qhat = 2 (mod 3);
+-- antitriplets: qhat = 1 (mod 3).
+--
+-- Reuses repo's existing residue ring. A matching magnetic C3 carrier is
+-- NOT YET a physical SU(3) colour representation; that requires an
+-- independent gauge-action realization and original SU(3) generator.
+------------------------------------------------------------------------
+
+import DASHI.Foundations.TriadicFiniteQuotient as Quotient
+import DASHI.Algebra.TriadicFiniteArithmetic as TriadicArithmetic
+import DASHI.Algebra.TriadicDepthOneCharacters as Characters
+
+data ColourTrialityClass : Set where
+  colourSinglet : ColourTrialityClass
+  colourTriplet : ColourTrialityClass
+  colourAntitriplet : ColourTrialityClass
+
+colourCenterResidue :
+  ColourTrialityClass → Quotient.Residue3Pow Quotient.one
+colourCenterResidue colourSinglet = Characters.rZero
+colourCenterResidue colourTriplet = Characters.rPos
+colourCenterResidue colourAntitriplet = Characters.rNeg
+
+integerChargeModThree :
+  ColourTrialityClass → Quotient.Residue3Pow Quotient.one
+integerChargeModThree colourSinglet = Characters.rZero
+integerChargeModThree colourTriplet = Characters.rNeg
+integerChargeModThree colourAntitriplet = Characters.rPos
+
+conditionalU3QuotientChargeCancellation :
+  (t : ColourTrialityClass) →
+  TriadicArithmetic.addResidue (colourCenterResidue t)
+    (integerChargeModThree t) ≡ Characters.rZero
+conditionalU3QuotientChargeCancellation colourSinglet = refl
+conditionalU3QuotientChargeCancellation colourTriplet = refl
+conditionalU3QuotientChargeCancellation colourAntitriplet = refl
+
+-- This is only a finite selection rule for the requested global quotient.
+-- It does not derive the quotient from a thermodynamic occupation, identify
+-- qhat with f(E), or identify the p-shell's C3 rotation with colour SU(3).
