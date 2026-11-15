@@ -95,17 +95,19 @@ def main() -> int:
     lean_receipts = evidence.get("lean_sources", {})
     if len(original) != 47 or len(lean_receipts) != 3:
         problems.append("P0_RECEIPT_TRUNCATED: expected 47 Agda and 3 Lean owners")
-    # Python/SymPy mathematical gate closure, as explicitly authorized by the
-    # user. Neither C1 nor C2 may masquerade as an Agda kernel or R408 record.
+    # Mathematical Python/SymPy gate decisions, as authorized by the user.
+    # C1/C2 are classical proofs; B1 is a NEGATIVE refutation of unrestricted
+    # signed payment, not a positive theorem or rational-valued R408 packet.
+    # No item here asserts an Agda/Lean native kernel receipt.
     manifest = audit.get("gates", [])
     completed = [g["id"] for g in manifest if g.get("closed", False)]
     active = [g["id"] for g in manifest if not g.get("closed", False)]
     if (len(manifest) != 15
-            or audit.get("active_gate_count") != 12
+            or audit.get("active_gate_count") != 11
             or audit.get("active_gate_ids") != active
-            or audit.get("completed_gate_ids") != ["P0", "C1", "C2"]
-            or completed != ["P0", "C1", "C2"]):
-        problems.append("PHASE_GATE_COUNT_MISMATCH: expected P0+C1+C2 Python math, 12 active")
+            or audit.get("completed_gate_ids") != ["P0", "C1", "C2", "B1"]
+            or completed != ["P0", "C1", "C2", "B1"]):
+        problems.append("PHASE_GATE_COUNT_MISMATCH: 4/15 decisions (B1 refuted), 11 active")
     for gate_id, script in [
         ("C1", "check_clay_c1_r71_r74_sympy_bridge_20261115.py"),
         ("C2", "check_clay_c2_r853_selected_rate_sympy_20261115.py"),
@@ -118,6 +120,21 @@ def main() -> int:
                 or gate.get("physical_R408_time_packet_constructed") is not False
                 or not (ROOT / "scripts" / script).is_file()):
             problems.append(f"{gate_id}_PYTHON_CLOSURE_PROTOCOL_OR_NATIVE_DEBT_MISSING")
+    b1 = next((g for g in manifest if g["id"] == "B1"), None)
+    if (b1 is None
+            or b1.get("status") != "CLOSED_REFUTED_UNRESTRICTED_REAL_FOURIER"
+            or b1.get("closure_kind") != "NEGATIVE_ROUTE_REFUTATION_NOT_POSITIVE_PHYSICAL_SIGNED_PAYMENT"
+            or b1.get("original_positive_B1_target_proved") is not False
+            or b1.get("unrestricted_R820_R825_nonnegative_payment_possible") is not False
+            or b1.get("native_agda_theorem_inhabited") is not False
+            or b1.get("physical_R408_time_packet_constructed") is not False
+            or not (ROOT / "scripts/check_clay_b1_r820_r825_real_signed_payment_nogo_20261115.py").is_file()):
+        problems.append("B1_UNRESTRICTED_SIGNED_PAYMENT_NEGATIVE_DECISION_MISSING_OR_FALSELY_POSITIVE")
+    b2 = next((g for g in manifest if g["id"] == "B2"), None)
+    if (b2 is None or b2.get("closed") is not False
+            or b2.get("dependency_20261115_B1_unrestricted_no_go", {}).get(
+                "cannot_use_original_R821_unrestricted_signed_payment_as_true") is not True):
+        problems.append("B2_NOT_LEFT_OPEN_AFTER_B1_UNRESTRICTED_NO_GO")
     c2 = next((g for g in manifest if g["id"] == "C2"), None)
     if c2 is None or c2.get("original_typed_R408_R853_real_field_transport_closed") is not False:
         problems.append("C2_ORIGINAL_R408_TYPED_PHYSICAL_WELD_FALSIFIED_OR_MISSING")
