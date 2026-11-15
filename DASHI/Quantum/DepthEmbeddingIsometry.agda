@@ -7,7 +7,7 @@ open import Agda.Builtin.Unit using (⊤; tt)
 open import Data.Empty using (⊥)
 open import Data.List.Base using (List; _∷_; [])
 
-open import DASHI.Unifier using (ℝ; HilbertSpace; toℝ)
+open import DASHI.Physics.Closure.QuantumCarrierCore using (ℝ; HilbertSpace; toℝ)
 open import DASHI.Quantum.Stone using
   (onePointFiniteHilbertSpace; onePointZeroExtensionIota;
    onePointZeroExtensionIota-isometry)
