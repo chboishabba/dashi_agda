@@ -3,7 +3,7 @@ module DASHI.Moonshine.TernaryFiniteFunctionDeltaBasisExact where
 open import DASHI.Core.Prelude
 open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)
 open import Data.Rational.Base using (ℚ)
-open import Data.Rational.Tactic.RingSolver using (solve)
+import Data.Rational.Properties as ℚP
 open import Agda.Builtin.List using ([]; _∷_)
 
 import DASHI.Moonshine.C3CyclotomicAmplitudeAlgebraExact as C3
@@ -32,11 +32,11 @@ cubeEqual (cubeS t ts) (cubeS u us) =
 
 addZeroLeft : (a : C3.Cyclotomic3) → V.addC3 C3.zero a ≡ a
 addZeroLeft (C3.cyclotomic3 a b) =
-  C3.cyclotomic3Ext (solve (a ∷ [])) (solve (b ∷ []))
+  C3.cyclotomic3Ext (ℚP.+-identityˡ a) (ℚP.+-identityˡ b)
 
 addZeroRight : (a : C3.Cyclotomic3) → V.addC3 a C3.zero ≡ a
 addZeroRight (C3.cyclotomic3 a b) =
-  C3.cyclotomic3Ext (solve (a ∷ [])) (solve (b ∷ []))
+  C3.cyclotomic3Ext (ℚP.+-identityʳ a) (ℚP.+-identityʳ b)
 
 multiplyRightOne : (a : C3.Cyclotomic3) → C3.multiply a C3.one ≡ a
 multiplyRightOne a = trans (L.multiplyCommutative a C3.one) (L.oneActsLeft a)
