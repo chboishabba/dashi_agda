@@ -95,19 +95,19 @@ def main() -> int:
     lean_receipts = evidence.get("lean_sources", {})
     if len(original) != 47 or len(lean_receipts) != 3:
         problems.append("P0_RECEIPT_TRUNCATED: expected 47 Agda and 3 Lean owners")
-    # Mathematical Python/SymPy gate decisions, as authorized by the user.
-    # C1/C2: classical real Fourier; B1: NEGATIVE refutation; F1: classical
-    # actual-halting standard-TM P-model closure, NOT a universal lower bound.
-    # None asserts original Agda/Lean native kernel acceptance.
+    # User-authorized mathematical/source gate decisions, not native kernels.
+    # C1/C2: real Fourier; B1: negative refutation; E2: same-original N21
+    # signed-word NP via independent actual bit verifier; F1: standard TM P.
+    # E2 does not claim E1's priority/FRACTRAN physical clock or native InNP.
     manifest = audit.get("gates", [])
     completed = [g["id"] for g in manifest if g.get("closed", False)]
     active = [g["id"] for g in manifest if not g.get("closed", False)]
     if (len(manifest) != 15
-            or audit.get("active_gate_count") != 10
+            or audit.get("active_gate_count") != 9
             or audit.get("active_gate_ids") != active
-            or audit.get("completed_gate_ids") != ["P0", "B1", "C1", "C2", "F1"]
-            or completed != ["P0", "B1", "C1", "C2", "F1"]):
-        problems.append("PHASE_GATE_COUNT_MISMATCH: 5/15 decisions (B1 refuted), 10 active")
+            or audit.get("completed_gate_ids") != ["P0", "B1", "C1", "C2", "E2", "F1"]
+            or completed != ["P0", "B1", "C1", "C2", "E2", "F1"]):
+        problems.append("PHASE_GATE_COUNT_MISMATCH: 6/15 user-protocol decisions, 9 active")
     for gate_id, script in [
         ("C1", "check_clay_c1_r71_r74_sympy_bridge_20261115.py"),
         ("C2", "check_clay_c2_r853_selected_rate_sympy_20261115.py"),
@@ -135,6 +135,21 @@ def main() -> int:
             or b2.get("dependency_20261115_B1_unrestricted_no_go", {}).get(
                 "cannot_use_original_R821_unrestricted_signed_payment_as_true") is not True):
         problems.append("B2_NOT_LEFT_OPEN_AFTER_B1_UNRESTRICTED_NO_GO")
+    e2 = next((g for g in manifest if g["id"] == "E2"), None)
+    if (e2 is None
+            or e2.get("status") != "CLOSED_MATHEMATICAL_ORIGINAL_N21_BITWORD_NP"
+            or e2.get("original_signed_weighted_maxcut_word_language_mathematically_in_NP") is not True
+            or e2.get("native_PR_InNP_term_constructed") is not False
+            or e2.get("native_PR_PolynomialCostModel_BitWord_constructed") is not False
+            or e2.get("native_agda_theorem_inhabited") is not False
+            or e2.get("native_kernel_proof_receipt") is not False
+            or e2.get("E1_specific_selected_priority_FRACTRAN_machine_clock_proved") is not False
+            or not (ROOT / "scripts/check_clay_e2_n21_original_bit_np_20261115.py").is_file()):
+        problems.append("E2_ORIGINAL_N21_NP_MATHEMATICAL_SOURCE_OR_NATIVE_DEBT_MISSING")
+    for parent in ("E0", "E1"):
+        gate = next((g for g in manifest if g["id"] == parent), None)
+        if gate is None or gate.get("closed") is not False:
+            problems.append(f"{parent}_FALSELY_PROMOTED_FROM_E2_DIFFERENT_BIT_TM")
     f1 = next((g for g in manifest if g["id"] == "F1"), None)
     if (f1 is None
             or f1.get("status") != "CLOSED_MATHEMATICAL_STANDARD_TM_PYTHON_PROTOCOL"
