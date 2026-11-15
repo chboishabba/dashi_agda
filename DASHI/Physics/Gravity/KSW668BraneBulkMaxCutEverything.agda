@@ -67,3 +67,11 @@ import DASHI.Physics.Gravity.KSW668AdS5MovingNormalFiniteSBPTelescopeExact
 -- spectral CFL, full moving y/r/warp coupling, Agda kernel and Weyl
 -- observations remain independent OPEN gates.
 import DASHI.Physics.Gravity.KSW668AdS5RadialSSPRK3ImaginaryPolynomialExact
+
+-- F8 VIII: original a=t physical moving AdS5 TT full coupled
+-- homogeneous weighted-SBP2/SAT + exact radial FV symmetrizer algebra,
+-- forced Neumann boundary term and characteristic source lift.
+-- Generic rational polynomial lemmas in Agda SOURCE, not pinned kernel.
+-- Actual complete T-y-r semidiscrete Gronwall on original t>=1
+-- verified separately; fully discrete RK3, H4+Weyl and FIO still OPEN.
+import DASHI.Physics.Gravity.KSW668AdS5OriginalCoupledSBPSymmetrizerRationalExact
