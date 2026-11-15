@@ -779,32 +779,7 @@ toeBalabanTerminalPromotionStillOpen =
 ¬ : Set → Set
 ¬ A = A → ⊥
 
-ℝ : Set
-ℝ = ℕ
-
-ℂ : Set
-ℂ = ℕ
-
-toℝ : ℕ → ℝ
-toℝ n = n
-
-_+ℝ_ : ℝ → ℝ → ℝ
-_+ℝ_ = Nat._+_
-
-_*ℝ_ : ℝ → ℝ → ℝ
-_*ℝ_ = Nat._*_
-
-_-ℝ_ : ℝ → ℝ → ℝ
-_-ℝ_ = Nat._∸_
-
-_≤ℝ_ : ℝ → ℝ → Set
-_≤ℝ_ = Nat._≤_
-
-maxℝ : ℝ → ℝ → ℝ
-maxℝ = Nat._⊔_
-
-_<ℝ_ : ℝ → ℝ → Set
-_<ℝ_ = Nat._<_
+open import DASHI.Physics.Closure.QuantumCarrierCore public
 
 SO : ℕ → ℕ → Set
 SO _ _ = ⊤
@@ -886,25 +861,7 @@ record LorentzInterval {E : Set} (P : Poset E) (CA : ChainAntichain P) : Set₁ 
     p3-unique     : Set
 
 ------------------------------------------------------------------------
--- 4. Multiscale state tower and decimation operator
-
-record Scale : Set where
-  constructor mkScale
-  field
-    ℓ : ℤ
-
-next : Scale → Scale
-next s = s
-
-record Tower : Set₁ where
-  field
-    S   : Scale → Set           -- states at level ℓ
-    R   : ∀ {ℓ} → S ℓ → S (next ℓ)  -- renormalize / refine
-    P   : ∀ {ℓ} → S ℓ → S ℓ        -- projection to invariants
-    C   : ∀ {ℓ} → S ℓ → S ℓ        -- canonical representative
-
--- next : Scale → Scale
--- You can define next by incrementing ℓ; omitted here.
+-- 4. Multiscale state tower and decimation operator (re-exported from QuantumCarrierCore)
 
 ------------------------------------------------------------------------
 -- 5. Ultrametric contractivity and fixed points
@@ -971,20 +928,7 @@ quadratic-forced : Set₁
 quadratic-forced = QuadraticForcedAxiom
 
 ------------------------------------------------------------------------
--- 7. Wave lift, CCR, UV finiteness (axiomatized placeholder interface)
-
-record HilbertSpace : Set₁ where
-  field
-    H : Set
-    ⟨_,_⟩ : H → H → ℂ
-    -- completeness etc
-
-record WaveLift (Tow : Tower) (HS : HilbertSpace) : Set₁ where
-  field
-    Ω : Set        -- cylinders / finite-depth histories
-    embed : ∀ {ℓ} → Tower.S Tow ℓ → HilbertSpace.H HS
-    U : ℝ → HilbertSpace.H HS → HilbertSpace.H HS         -- unitary evolution
-    Hgen : Set                    -- self-adjoint generator packaged
+-- 7. Wave lift, CCR, UV finiteness (HilbertSpace/WaveLift re-exported from QuantumCarrierCore)
 
 record CCRFromContractionAxiom : Set₁ where
   field
