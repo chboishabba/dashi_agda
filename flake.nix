@@ -258,6 +258,7 @@
           cubical = cubicalLocal;
           agda-with-dashi-deps = agdaWithDashiDeps;
           agda29-parallel = agda29.packages.${system}.debug.bin;
+          lean-world-bin = pkgs.lean4;
           check = authoritativeCheck;
           zeta-check = zetaCheck;
           merge-smoke = mergeSmokeCheck;
@@ -273,10 +274,20 @@
           '';
         };
 
-        # Reuse this flake's PINNED nixpkgs closure without changing the Agda shell.
-        # Lean version remains tied to flake.lock; never fetch a moving elan toolchain.
+        # Reuses the same pinned nixpkgs/flake.lock as the Agda runners.
+        # A repo's lean-toolchain MUST match this Lean binary; the worker
+        # refuses mismatches rather than silently selecting another version.
         devShells.lean-world = pkgs.mkShell {
-          packages = [ pkgs.lean4 (pkgs.python3.withPackages (ps: [ ps.psycopg ])) pkgs.git pkgs.postgresql_16 pkgs.rustc pkgs.cargo ];
+          packages = [
+            pkgs.lean4
+            (pkgs.python3.withPackages (ps: [ ps.psycopg ]))
+            pkgs.bash
+            pkgs.coreutils
+            pkgs.git
+            pkgs.postgresql_16
+            pkgs.rustc
+            pkgs.cargo
+          ];
           shellHook = ''
             echo "DASHI source-pinned Lean elaboration worker shell"
             echo "  nix develop .#lean-world --command lean --version"

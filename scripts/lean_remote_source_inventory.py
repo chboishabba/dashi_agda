@@ -90,7 +90,7 @@ def repository_tree(repo: str, commit: str, *, token: str | None = None,
                 or any(part in ("", ".", "..") for part in path.split("/"))
                 or not isinstance(sha, str) or not SHA_RE.fullmatch(sha)
                 or type(size) is not int or size < 0):
-            raise RemoteError("invalid or unsafe source tree entry")
+            raise RemoteError("invalid Lean source tree entry")
         filtered.append({"path": path, "sha": sha.lower(), "size": size})
     return sorted(filtered, key=lambda x: x["path"])
 
