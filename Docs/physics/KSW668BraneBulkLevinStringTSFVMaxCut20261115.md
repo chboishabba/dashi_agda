@@ -1016,3 +1016,103 @@ All these **geometric and algebraic** factors are exact original-model expressio
 **Precise additional lemma:** \`ads5OriginalT2NonGlancingCompactTTRayPrincipalExact\` — **PASS mathematical exact-model algebra/smooth interior support check; Agda OPEN**. \`ads5OriginalT2NeumannToWeylEllipticFIOComposition\` — **OPEN analytic theorem application**. \`ads5OriginalT2CompactTTActualEarlyNonzeroWeyl\` — **OPEN final prescribed-source existential wave proof**. The microphysical stress-generating brane action, SMS projected 5D electric Weyl, nonlinear/all-mode stability, physical scale, Agda kernel and empirical observation remain distinct and OPEN.
 
 **Local checks:** \`bash scripts/check_ksw668_f8_maxcut.sh --smoke\` now includes 8 original time-domain controls plus 5 original t2 non-glancing controls (**13 new independent tests**), and prints the exact t2/t6 ray contract. \`--full\` continues to **exit 42** for unresolved 3D Fourier/Weyl numerical convergence. The canonical model does not assume that one failed finite-difference discretization refutes the five-dimensional shortcut hypothesis; the microlocal and spectral/convergent-numerical paths are complementary.
+
+
+---
+
+## 2026-11-15 F8 max-cut III: strict null-convex ORIGINAL 5D boundary; dimension-correct lens literature; SMS projected 5D Weyl readout
+
+**Owner:** PR #1512, post-merge continuation FROM CURRENT MASTER of merged #1508. All previous original-model producers remain in master; do not reopen/duplicate merged PRs. New \`scripts/ksw668_f8_null_convex_lens.py\`, \`scripts/ksw668_f8_projected_weyl_sms.py\` with six and four fail-closed tests respectively. The total F8 smoke contains **8 moving-PDE + 5 original-t2 non-glancing + 6 null-convex + 4 SMS = 23 independently tested source-equivalent checks**. Exact GitHub-head runner and pinned Agda kernel have not run here; the compact 3D numerical convergence gate **still exits 42**.
+
+### F8.06 New exact ORIGINAL 5D null-convexity lemma
+
+For the *original* Poincaré AdS5 physical one-sided domain \(\mathcal M=\{z\ge b(T)\}\), metric \(g=z^{-2}(-dT^2+dz^2+d\mathbf x_3^2)\), outward unit normal and covector are
+\[
+\nu_{\rm out}=-\frac{b}{\sqrt{1-v^2}}(v,1,0,0,0),\qquad
+(\nu_{\rm out})_\flat=\frac{1}{b\sqrt{1-v^2}}(v,-1,0,0,0),\quad v=b'(T).
+\]
+For a boundary-tangent null vector \(L=(1,v,\mathbf u)\), with \(|\mathbf u|^2=1-v^2\), the null second fundamental form in the *outward normal* convention used by Uhlmann–Zhang satisfies
+\[
+\boxed{\kappa_{\rm out}(L,L)=g(\nabla_L\nu_{\rm out},L)
+=\frac{b''(T)}{b\sqrt{1-v^2}}
+=\frac{t^3}{(1+t^2)^{3/2}}>0.}
+\]
+The conformal Christoffel term cancels identically in this null contraction (both \(g(L,L)=0\) and \(g(\nu,L)=0\)). Thus the ORIGINAL \(a=t\) boundary is *strictly null-convex in five spacetime dimensions* on \(1\le t\le2\), not merely timelike. At the actual source/receiver crossing pair from F8.05:
+\[
+\kappa_e=0.3536283958961996,\quad
+\kappa_r=0.7155417527999327.
+\]
+Stationary \(b''=0\) gives a **non-strict** control, consistent with the static planar no-shortcut geometry. The strict convexity is an original-model geometric result with exact SymPy derivation, independent of the unstable numerical 3D Fourier inversion.
+
+### F8.07 Correct dimension and precise available Fourier-integral theorems
+
+**Caution: do not claim Uhlmann–Zhang 2022 Lemma 13 directly proves our 5D B4.** Uhlmann & Yang Zhang, *Inverse boundary value problems for wave equations with quadratic nonlinearities*, JDE 309 (2022) 558–607, DOI 10.1016/j.jde.2021.11.033, **explicitly begin with a 1+3-dimensional** globally hyperbolic Lorentzian manifold with a timelike/null-convex boundary. Their Lemma 13 (§6.4) constructs Neumann boundary input and shows that the outgoing (incident+Neumann-reflected) receiver trace has a nonvanishing principal symbol, recovering the lens relation. The mechanism is directly relevant, but application to the **1+4** original bulk requires a dimension-check/transfer.
+
+A direct dimension-correct upstream theorem is **Plamen Stefanov & Yang Yang**, *The inverse problem for the Dirichlet-to-Neumann map on Lorentzian manifolds*, Analysis & PDE 11 (2018) 1381–1404, DOI 10.2140/apde.2018.11.1381, original paper §§3–4:
+- explicitly \((M,g)\) has dimension **\(1+n,\ n\ge2\)**, so includes our \(1+4\);
+- **Theorem 3.1:** local outgoing **Dirichlet-to-Neumann** is an *elliptic pseudodifferential* operator of order 1 near a **timelike tangential covector** (its microlocal inverse exists and is an elliptic local Neumann-to-Dirichlet parametrix of order \(-1\));
+- **Theorem 4.2:** semiglobal reflected **Dirichlet-to-Neumann** map is an *elliptic Fourier integral operator* of order 1 on the non-glancing, first-reflection lens canonical graph. The geometric optics principal transport is nonzero along a direct null ray with no interior conjugate point; it is local/semiglobal, so the original noncompact radial horizon is not a blocking global compactness hypothesis;
+- their Eq. (58) exhibits the incident-plus-reflected factor 2, and Eqs. (59)–(60) explicitly introduce local Neumann-to-Dirichlet and interior propagation parametrices.
+
+**Exact distinction:** this paper constructs an elliptic **Dirichlet-to-Neumann**, not by itself our *source-Neumann-to-receiver-boundary-trace-and-Weyl* operator. To convert it, one must (a) apply the elliptic \(\Lambda_{\mathrm{loc}}^{-1}\) at the emitting boundary, (b) propagate the nonzero incident FIO along the unique direct interior chord and (c) impose **homogeneous Neumann**, rather than Dirichlet, reflection at the receiving boundary, giving receiver *trace* factor +2, as in Uhlmann–Zhang's local argument. The known endpoint Neumann principal symbols are nonzero, so the local reciprocal factor is finite. An **explicit detailed 1+4-dimensional Neumann trace/FIO operator composition proof**, with its support cutoffs and remainder estimate, is still the honest \`ads5OriginalT2NeumannToWeylEllipticFIOComposition\` terminal analytic obligation. Do NOT label it kernel-accepted or fully demonstrated simply because the geometry and upstream dimension match.
+
+### F8.08 New exact original projected FIVE-dimensional Weyl SMS tensor coefficient
+
+Do not silently identify the earlier **intrinsic 4D electric Weyl** \(C_{\hat0i\hat0j}^{(4)}\) with the physically distinct **5D projected electric Weyl**
+\[
+\mathcal E^{(5)}_{\mu\nu}=C^{(5)}_{ABCD}n^A e_\mu^B n^C e_\nu^D
+\]
+in Shiromizu–Maeda–Sasaki, *The Einstein equations on the 3-brane world*, PRD 62 024012 (2000), DOI 10.1103/PhysRevD.62.024012.
+
+The original tension-tuned \(\sigma=1,\kappa_5^2=6,\ell=1\) background has \(\Lambda_4=0,\ \kappa_4^2=\kappa_5^4\sigma/6=6\). In mixed-index effective-brane form:
+\[
+G^\mu{}_\nu=\kappa_4^2T^\mu{}_\nu+
+\kappa_5^4\Pi^\mu{}_\nu-\mathcal E^{(5)\mu}{}_\nu,\qquad
+\Pi=-\tfrac14T^2+\tfrac1{12}\operatorname{tr}(T)T+
+\big(\tfrac18\operatorname{tr}(T^2)-\tfrac1{24}\operatorname{tr}(T)^2\big)I.
+\]
+For original perfect-fluid \(T^\mu{}_\nu=\operatorname{diag}(-\rho,p,p,p)\) and a pure TT source \(\delta T^i{}_j=\pi^i{}_j\), direct *matrix differentiation* yields
+\[
+\boxed{\delta\Pi^i{}_j\big|_{\rm TT}
+=-\frac{\rho+3p}{12}\pi^i{}_j},
+\quad
+\boxed{\delta\mathcal E^{(5)i}{}_j\big|_{\rm TT}
+=[6-3(\rho+3p)]\pi^i{}_j
+-\frac12\left(\partial_t^2+3H\partial_t-a^{-2}\Delta\right)H^i{}_j.}
+\]
+**Correct sign:** in Minkowski TT gauge, \(\delta G_{ij}=+\tfrac12(h_{tt}-h_{xx})_{ij}\) (not minus). This check corrects a tempting false sign in previous draft exploration. At the original kernel-friendly \(t=4/3\), \(\rho=1/4,p=-1/10\), the TT source coefficient is **exactly \(123/20\)**, independently SymPy-checked.
+
+At the original \(t=2\) receiving event, the source is absent, \(\pi_{\rm recv}=0\). The *high-frequency projected-5D-Weyl* principal multiplier from the SMS formula is
+\[
+\sigma(\delta\mathcal E^{(5)})=
++\frac12(n\cdot\xi)^2\,\sigma(H)
+\quad\Rightarrow\quad
+\boxed{\frac12(-0.07558371447219975)^2
+=0.002856448946707509>0}.
+\]
+This uses the bulk null relation to identify the squared **timelike boundary projection**, and is distinct from the already-checked positive intrinsic-4D Weyl principal factor \(0.0840263224215478\) for the original ray. Both are *local ellipticity/nondegeneracy factors*, **not measured curvatures and not a retarded amplitude**. The unsupplied lens-FIO global principal transport multiplier remains explicitly unknown. The 5D projector is now algebraically linked to the same original TT source/metric field; its *numerical retarded value* remains open and must not be inferred by combining unrelated model waveforms.
+
+### F8.09 Precise steelman existential proposition and proof gap
+
+**Proposed proposition (P), for prescribed—not microphysically generated—stress.** There exists a real, smooth, compactly supported, background-conserved, nonzero TT boundary anisotropic source of arbitrarily small amplitude whose unique finite-energy retarded *linear* tensor field on the original \(a=t\) AdS5 brane has nonzero **intrinsic 4D** and **projected 5D** electric Weyl response at the original \(t=2,r=r_g(2)\) receiver, strictly before any photon emitted by that source could arrive.
+
+**Proof strategy:** Prepare a microlocal oscillatory \(C_c^\infty\) bump near the exact \((T_e,x_e)=(T(1)+0.0002,\,0.0001447132498)\) in the source ball radius 0.001; apply the earlier compact local fourth-order TT operator with \(\lambda^{-4}\) normalization. The spatial TT \(yy\) symbol is 1 along the selected ray, and the boundary tangential projection of the null covector is strictly timelike. By Stefanov–Yang Thm 3.1, the local outgoing DN operator is elliptic and microlocally invertible: this supplies the Neumann incidence amplitude \(\propto(n\cdot\xi_e)^{-1}\ne0\). Their Thm 4.2 gives an elliptic FIO along the non-glancing direct interior lens relation with nonzero principal propagator, and the original 5D wall is strictly null-convex; constant AdS curvature gives no null screen focusing. Impose homogeneous Neumann at arrival: the leading incident and reflected boundary **trace** coefficients add, rather than cancel. Compose the two **nonzero Weyl** principal multipliers above. An appropriately phased smooth real oscillatory bump then has nonzero leading boundary Weyl value at the same original event for some sufficiently high \(\lambda\), unless the operator composition acquires a cancellation of identical canonical relations not covered by the local microlocal cutoffs. Any nonzero source amplitude may be further rescaled small so that the linear perturbative approximation remains meaningful.
+
+**ACCEPTANCE MUST STILL PROVE:** the full Neumann receiving-boundary reflection/FIO symbolic product in 1+4 dimensions and its \(O(\lambda^{-1})\) remainder after localization, including the removal of all *competing lens branches* near this target, and the selected real smooth compact support. This is now a **single sharply delimited analytic theorem-transfer/weld**, not an undefined “construct a propagator from scratch” task. Source-level B4 existential claim (P) is a **strong steelman conditional conclusion, NOT accepted until this weld**. A physically generated matter action, nonlinear Einstein/Israel perturbations, calibrated amplitude/observations, original C2 Agda kernel and D1 experiment remain separate original gates.
+
+### Revised maximum cuts / deliverables / local acceptance
+
+| Cut | What is DONE in this continuation | Real missing primitive |
+|---|---|---|
+| F8-GEO | exact \(t=2\) photon-dark source-point, allowed strict bulk chord, non-glancing endpoints, **strict 5D null-convex outward K**, nonfocusing | original continuous Agda kernel proof of differential metric/second fundamental form |
+| F8-PDE | original moving retarded operator by Ginoux–Murro theorem, 8-case plane numerical early-wave positive control; compact 3D numerical attempt | full 3D numerical convergence (currently 48% field /83% Weyl drift, exit42) **or** F8-FIO route |
+| F8-FIO | dimension-correct Stefanov–Yang 2018 local DN ellipticity, semiglobal FIO lens, nonzero source normal/TT/Weyl symbols | **\`ads5OriginalT2NeumannToWeylEllipticFIOComposition\`** with real compact source, 5D Neumann receiving reflection/remainder/noncancellation |
+| F8-SMS | exact 5D projected electric Weyl **algebra** and \(t=4/3\) coefficient \(123/20\), nonzero receiver principal | actual retarded \(\delta\mathcal E^{(5)}\) from fully evaluated moving TT field or FIO composition |
+| F9-MAT | prescribed conserved source satisfies homogeneous background conservation | actual generating matter action, full linearized Einstein-matter constraints and DEC under perturbation |
+| F9-CYL | static doubled-disc shell and flat-bulk rigidity proven | bulk/shell perturbations and same-global-metric dynamics |
+| F9-STAB | coercive finite-interval linear tensor energy and static normalizable packet | all physical modes and nonlinear backreaction |
+| F10 | geometric cubic horizon law and proper clock map | correct \(\ell,H,\dot H\), source detector band/attenuation, GW timing and empirical constraints |
+| F11 | symbolic identities/rational modules and source-equivalent tests | actual pinned local Agda 2.9 continuum kernel acceptance |
+| D1 | prospective detector discrimination | source-characterized independent gravitational observation |
+
+Local command \`bash scripts/check_ksw668_f8_maxcut.sh --smoke\` now executes **23 source-equivalent PASS** test cases (8 moving PDE, 5 original-t2 ray, 6 strict 5D null convex, 4 SMS). \`--full\` remains **exit 42** until its 3D compact TT and both Weyl numerical convergence gates are actually satisfied. These results are not Agda kernel receipts; CI remains out of acceptance.
