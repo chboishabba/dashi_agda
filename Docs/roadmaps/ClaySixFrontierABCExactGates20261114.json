@@ -2769,7 +2769,8 @@
           "original_W1_still_open": true,
           "original_all_data_continuation_still_open": true,
           "B2_closed": false
-        }
+        },
+        "closed": false
       },
       {
         "id": "C1",
@@ -5405,9 +5406,9 @@
     "active_gate_count": 11,
     "completed_gate_ids": [
       "P0",
+      "B1",
       "C1",
-      "C2",
-      "B1"
+      "C2"
     ],
     "round_20261115_packet_weld_real_ode_audit": {
       "date": "2026-11-15",
