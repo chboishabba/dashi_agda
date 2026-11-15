@@ -27,6 +27,10 @@ class OriginalFullCoupledForcedSource(unittest.TestCase):
  def test_original_full_forced_t2(self):
   d=setup(t=2,seed=15);G=np.ones((3,7))*.02
   self.assertLess(check(d,G,G*.5)['exact_lift_residual'],1e-9)
+ def test_original_forced_long_baseline_t12(self):
+  d=setup(t=12.,seed=25);G=np.ones((3,7))*.02
+  r=check(d,G,G*.5)
+  self.assertLess(r['exact_lift_residual'],1e-9)
  def test_nontrivial_original_radial_source(self):
   d=setup(t=1.7,seed=9);rng=np.random.default_rng(42)
   G=rng.normal(size=(3,7))*.01;GT=rng.normal(size=(3,7))*.01
