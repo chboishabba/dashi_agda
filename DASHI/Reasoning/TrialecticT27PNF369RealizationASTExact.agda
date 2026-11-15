@@ -18,23 +18,23 @@ data PNF369T27Invariant : Set where
   dynamicsEquivariance actionHamiltonianAgreement : PNF369T27Invariant
   observableAgreement empiricalSameObjectAttachment : PNF369T27Invariant
 
-data InvariantStatus : Set where paid open forbidden : InvariantStatus
+data InvariantStatus : Set where paid openInvariant forbidden : InvariantStatus
 
 currentInvariantStatus : PNF369T27Invariant → InvariantStatus
-currentInvariantStatus coordinateCarrierMap = open
-currentInvariantStatus coordinateCarrierInverse = open
-currentInvariantStatus coordinateRoundTripLeft = open
-currentInvariantStatus coordinateRoundTripRight = open
-currentInvariantStatus ternaryStructurePreserved = open
-currentInvariantStatus c3ActionIntertwined = open
-currentInvariantStatus completionGraphPreserved = open
+currentInvariantStatus coordinateCarrierMap = openInvariant
+currentInvariantStatus coordinateCarrierInverse = openInvariant
+currentInvariantStatus coordinateRoundTripLeft = openInvariant
+currentInvariantStatus coordinateRoundTripRight = openInvariant
+currentInvariantStatus ternaryStructurePreserved = openInvariant
+currentInvariantStatus c3ActionIntertwined = openInvariant
+currentInvariantStatus completionGraphPreserved = openInvariant
 currentInvariantStatus t18ProjectionPreserved = paid
-currentInvariantStatus pnfRoleSemanticsPreserved = open
-currentInvariantStatus documentTimeSemanticsPreserved = open
-currentInvariantStatus dynamicsEquivariance = open
-currentInvariantStatus actionHamiltonianAgreement = open
-currentInvariantStatus observableAgreement = open
-currentInvariantStatus empiricalSameObjectAttachment = open
+currentInvariantStatus pnfRoleSemanticsPreserved = openInvariant
+currentInvariantStatus documentTimeSemanticsPreserved = openInvariant
+currentInvariantStatus dynamicsEquivariance = openInvariant
+currentInvariantStatus actionHamiltonianAgreement = openInvariant
+currentInvariantStatus observableAgreement = openInvariant
+currentInvariantStatus empiricalSameObjectAttachment = openInvariant
 
 record PNF369T27RealizationAST (policy : Tower.T27CompletionPolicy) : Set₁ where
   constructor pnf369-t27-realization-ast

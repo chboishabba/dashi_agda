@@ -19,7 +19,7 @@ import DASHI.Physics.Closure.MonsterC3Native369ZetaCountingEnsembleExact as Nati
 import DASHI.Physics.Closure.EntropyGravityIntertwinerBoundaryExact as Gravity
 import DASHI.Physics.Closure.Monster3Plus1PhysicalSymmetryTargetExact as Physical
 
-data Payment : Set where paid sourcePaid typed open : Payment
+data Payment : Set where paid sourcePaid typed openPayment : Payment
 
 record Row : Set where
   constructor row
@@ -36,7 +36,7 @@ monsterGlobalLinear = row
   "Trialectic369Selected3BSemanticProjectedCompletionExact + Monster3BRepresentationNativeCurrentMaxCutExact"
   "the canonical completion compiler is already owned; it consumes exactly a genuine linear constituent retraction and the equation identifying the selected action with the projection of the SAME full grade-two action"
   "inhabit those two same-object linear/source-facing inputs; finite semantic coordinates cannot manufacture them"
-  open
+  openPayment
 
 monsterZetaLinear : Row
 monsterZetaLinear = row
@@ -44,7 +44,7 @@ monsterZetaLinear = row
   "Monster3BRepresentationNativeCurrentMaxCutExact"
   "fixed-phase H_zeta recognition, the generic nonzero-simple-source classifier, generic semisimple/isotypic assembly and post-recognition copy-count compilation are already available; selected-phase 12+78 character-family data are already paid"
   "inhabit the proof-relevant full weight-two bridge and SAME literal zeta restriction; instantiate the generic classifier with the actual whole-character/simple/nonzero-inclusion data; consume isotypic assembly to obtain W_zeta|E ~= H_zeta^n; then derive n=90 and construct S_zeta=Hom_E(H_zeta,W_zeta) evaluation/recovery plus the actual normalizer action"
-  open
+  openPayment
 
 monsterLiteralOtherPhases : Row
 monsterLiteralOtherPhases = row
@@ -52,7 +52,7 @@ monsterLiteralOtherPhases = row
   "Monster3BLiteralThreePhaseRegularResidualBidiExact"
   "the three phase fibres already come from one literal central action; the action-stable phase-one regular/residual split and conjugate-phase recognition remain distinct payments"
   "inhabit those same-action subspace/transport witnesses; do not infer them from character arithmetic alone"
-  open
+  openPayment
 
 nh3Hamiltonian : Row
 nh3Hamiltonian = row
@@ -92,7 +92,7 @@ nh3MonsterLinearLift = row
   "AmmoniaMonster3BRepresentationNativeCorrectionExact + Monster3BRepresentationNativeCurrentMaxCutExact"
   "the phase quotient and finite basis-coordinate compilers are available, but no source-backed physical same-object NH3 assignment into the literal linear W_zeta representation is paid"
   "supply a physical NH3-state -> representation-native state assignment and prove dynamics/action equivariance on the same objects; cardinality, phase and basis charts are insufficient"
-  open
+  openPayment
 
 h3Reaction : Row
 h3Reaction = row
@@ -108,7 +108,7 @@ entropyRow = row
   "MonsterC3Native369ZetaCountingEnsembleExact + ThermodynamicStatisticalLaws"
   "the 65610 basis labels carry an exact normalized 1/65610 mathematical counting measure; this is not a measure on every linear W_zeta vector and is not yet a physical thermal ensemble"
   "identify the physical microstate/ensemble or density matrix, Hamiltonian/regime, entropy functional and physical region/measure"
-  open
+  openPayment
 
 gravityRow : Row
 gravityRow = row
@@ -116,7 +116,7 @@ gravityRow = row
   "EntropyGravityIntertwinerBoundaryExact + KernelGeometryEmergenceObligations"
   "scalar entropy density alone does not determine stress-energy or Einstein dynamics"
   "pay a named same-object causal/area/tensor/Lorentzian route including conservation/Bianchi/Einstein-limit assumptions and empirical validation"
-  open
+  openPayment
 
 monster4DRow : Row
 monster4DRow = row
@@ -124,7 +124,7 @@ monster4DRow = row
   "Monster3Plus1PhysicalSymmetryTargetExact"
   "exact C3 quotient structure, Monster moonshine routes, native-369 basis charts and mathematical entropy counting do not establish a nontrivial Monster action in observed 3+1D physics"
   "derive a same-object physical Monster module/action, controlled 4D EFT and locked novel prediction, then validate independently"
-  open
+  openPayment
 
 rows : List Row
 rows = monsterGlobalLinear ∷ monsterZetaLinear ∷ monsterLiteralOtherPhases ∷ nh3Hamiltonian ∷ nh3ReleasedMatrix ∷ nh3C3Quotient ∷ native369Basis ∷ nh3MonsterLinearLift ∷ h3Reaction ∷ entropyRow ∷ gravityRow ∷ monster4DRow ∷ []
