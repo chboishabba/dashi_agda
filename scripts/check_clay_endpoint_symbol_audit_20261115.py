@@ -43,6 +43,15 @@ def tracked_source(root: Path) -> list[Path]:
         raise RuntimeError(f"Need original checked-out Git tree: {exc}") from exc
     return [root / p.decode() for p in result.stdout.split(b"\0") if p]
 
+def git_blob_sha(root: Path, filename: str) -> str:
+    """Hash exact original file bytes using Git's content-addressed format."""
+    path = root / filename
+    result = subprocess.run(
+        ["git", "-C", str(root), "hash-object", "--", str(path)],
+        capture_output=True, text=True, check=True,
+    )
+    return result.stdout.strip()
+
 def declaration(body: str, name: str) -> bool:
     target = name.split(".")[-1]
     # Agda declarations/record fields and Lean theorem/def/structure names.
@@ -80,6 +89,43 @@ def main() -> int:
         return cache[path]
     counts = Counter()
     problems = []
+    # Audit the actual content-addressed source receipts, not filenames alone.
+    evidence = audit.get("p0_source_evidence", {})
+    original = evidence.get("observed", {})
+    lean_receipts = evidence.get("lean_sources", {})
+    if len(original) != 47 or len(lean_receipts) != 3:
+        problems.append("P0_RECEIPT_TRUNCATED: expected 47 Agda and 3 Lean owners")
+    if audit.get("active_gate_count") != 14 or audit.get("completed_gate_ids") != ["P0"]:
+        problems.append("P0_GATE_COUNT_MISMATCH: expected P0 closed, 14 active")
+    for owner, receipt in original.items():
+        if (ROOT / owner).is_file():
+            actual = git_blob_sha(ROOT, owner)
+            if actual != receipt["blob"]:
+                problems.append(f"P0_AGDA_OWNER_CHANGED {owner}: {actual} != {receipt['blob']}")
+        else:
+            problems.append(f"P0_AGDA_OWNER_MISSING {owner}")
+    if "lean" in roots:
+        for owner, receipt in lean_receipts.items():
+            if (roots["lean"] / owner).is_file():
+                actual = git_blob_sha(roots["lean"], owner)
+                if actual != receipt["blob"]:
+                    problems.append(f"P0_LEAN_OWNER_CHANGED {owner}: {actual} != {receipt['blob']}")
+            else:
+                problems.append(f"P0_LEAN_OWNER_MISSING {owner}")
+    # Every historical donor exact blob identity has an independently fetched
+    # SHA in the ledger; ensure the local Clay copy retains that exact content.
+    p0 = next((g for g in audit["gates"] if g["id"] == "P0"), None)
+    if p0 is None or not p0.get("closed"):
+        problems.append("P0_NOT_CLOSED_OR_MISSING")
+    else:
+        for pair in p0["acceptance_evidence"]["donor_blob_matches"]:
+            filename = pair["path"]
+            if (ROOT / filename).is_file():
+                actual = git_blob_sha(ROOT, filename)
+                if actual != pair["donor_blob"]:
+                    problems.append(f"P0_DONOR_BLOB_CHANGED {filename}")
+            else:
+                problems.append(f"P0_DONOR_BLOB_MISSING {filename}")
     for entry in index:
         name = entry["term"]
         kind = entry["classification"]
