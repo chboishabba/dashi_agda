@@ -2,6 +2,12 @@
 **15 November 2026.** Primary destination: [Agda Clay #1499](https://github.com/chboishabba/dashi_agda/pull/1499); Lean native donor [#108](https://github.com/chboishabba/dashi_lean4/pull/108); TOE front-end [Agda #1393](https://github.com/chboishabba/dashi_agda/pull/1393). No donor PR merged to master. Source Git blobs are retained without changing their original mathematical authorship. No newly solved Millennium problem is asserted.
 
 
+## Current gate decision ledger — 15 November 2026
+
+**4/15 gates decided, 11 active:** P0 source audit closed; C1/C2 closed as **classical real-Fourier mathematical theorems under the user-approved Python/SymPy protocol**; **B1 CLOSED BY REFUTATION**, *not* by proving its proposed unrestricted positive signed four-helicity rate. See [B1 original R820/R823/R824/R825 no-go and executable receipt](ClayB1R820R825UnrestrictedSignedPaymentNoGo20261115.md). The remaining active gates are **A1, A2, B2, D1, D2, E0, E1, E2, F1, F2, F3**. There is still **no positively proved universal B signed-payment bound**, W1 or uniform 3D PDE continuation, and **0/6 original Millennium endpoints** closed.
+
+**Native/kernel status:** Original Agda `Rational.rationalRealField` R408 cannot be instantiated with the real-time physical Fourier witness; globally helical `sqrt(k²)` needs real geometry. The alternative physical classical semantics are mathematically valid but **not** an Agda/Lean native R408 source representation. All old Agda false theorem/implementation status fields remain false; the Agda Golden/kernel and native original-endpoint assertions remain unverified.
+
 ## CANONICAL EXECUTION PLAN — EXACT-SYMBOL RE-AUDIT (15 November 2026)
 
 **Authority and edit rule.** This document and [the exact-gates JSON](ClaySixFrontierABCExactGates20261114.json) are the **single source of truth** for these six endpoints. The [physical execution roadmap](ClaySixFrontierPhysicalMaxCutExecution20261114.md) is a phase entrypoint; [TOE #1393](https://github.com/chboishabba/dashi_agda/pull/1393) and [Lean #108](https://github.com/chboishabba/dashi_lean4/pull/108) consume the Clay original-owner ledger, never establish an independent competing list. Before any new theorem or PR edit, inspect this ledger **and then search the exact symbol and mathematical synonyms on the rollup branch, default branch, and the named donor PR**. Verify the actual proof body or record fields, not a filename, `--safe`, `machineChecked` flag, `refl` status Boolean, old CI, or a summary. Only make new Clay work on **Agda #1499** and native Lean work on **Lean #108**; TOE-only owner imports/manifest on **Agda #1393**. Do not independently develop in older donor PRs or create additional rollup PRs.
@@ -57,6 +63,14 @@
 
 **Required exact B deliverables**: B1 obtain real original R408 cutoff/time/packet helical decomposition; B2 prove or honestly refute an actually *valid* signed R820–R825 rate/reserve estimate (may require different state restrictions and a proof of coverage, never a hidden assumption of global regularity); B3 pay independent original W1; B4 uniform-in-\(N\) critical barrier and continuum/all-data continuation. A finite `decideActualReserve` or `R820` normal form is not B2.
 
+### B1 NEGATIVE DECISION — original unrestricted R820/R821/R823/R824/R825 payment REFUTED
+
+**Result:** the [source-by-source B1 no-go](ClayB1R820R825UnrestrictedSignedPaymentNoGo20261115.md) and `scripts/check_clay_b1_r820_r825_real_signed_payment_nogo_20261115.py` independently reuse the **actual** C1 Galerkin physical real solution and **literal** C2 selected R853 rate, then check the original R820/R823 reserve-demand and R824/R825 original-incidence graded normal forms over unrestricted real symbols. The R820 complete rate is `2*(9Nsep-Qsep)+Dcc+6*d`; R823 reserve-demand is `Dcc+6d-2*(Qsep-9Nsep)`; the R824/R825 graded rate is `6d+(Hcc+18Nsep)-(Lcc+2Qsep)`. Original R823/R853 same-packet algebra connects this exact physical real-Fourier rate to `r=6(12C-P+d)`, **not** the zero enstrophy balance.
+
+The original R854 `T=226189/3938540454339300631433585885184` and actual rate derivative bound from C2 give `r(t)<-19/125` on **all** `0≤t≤T`. Therefore `int_0^h r(t)dt<-(19/125)h<0` for **every positive** `h≤T`. On the **same real-Fourier physical state**, the unrestricted R821 nonnegative complete signed payment is **false**, the R823 integrated reserve falls strictly below its demand, and R825's corresponding low grade strictly exceeds quadratic+high. This is not just R734's earlier countermodel: it is a direct R820/R823/R825 complete-signed-rate failure on the same selected C1/C2 original Fourier solution. No positive B theorem is claimed.
+
+**Decision and downstream route:** the previous B1 all-data positive signed-payment gate is **TERMINALLY REFUTED** on the real-Fourier semantics, counted as a **negative resolution** (not an inhabited Agda `round820CompleteSignedInequalityClosed`). B2 stays **OPEN**, with the old R821 unqualified signed-barrier input now disallowed as a universal premise. Any alternative must establish a *valid* different payment with error control, or non-vacuous physical state restrictions with proved coverage; W1 and uniform continuation remain separate. Original rational-typed R408, real-field formal rebase/kernel and physical global NS claims remain unproven.
+
 ### 2026-11-15 R823 initial-sign continuity cut (new dependency reduction, NOT terminal closure)
 
 **Original source checked:** R850 already has an actual repository R692/R847 instantaneous same-object certificate for the radius-four 3-4-5 rational state; it computes
@@ -74,7 +88,7 @@ Thus a *universal physical R823 reserve-demand inequality demanded for every ter
 
 **Independent fixed-horizon exact check (not an R408 type weld):** existing R828 estimate has \(K=5032512\), \(L=391309593930357307785216\), \(T=226189/3938540454339300631433585885184\). Exact rational arithmetic gives \(LKT=226189/2\) and \(r_0+LKT=-28273663/250<-226189/2<0\). The affine integrated upper bound is negative. The new regression is `scripts/check_ns_r823_initial_rate_continuity_cut_20261115.py`.
 
-**Fail-closed boundary:** R408/R823's global rational `PeriodicHelicalProjectorLaws` cannot be fabricated from a rational 3-4-5 snapshot: the physical norm at (1,1,0) uses \(\sqrt2\). Nor can a nonconstant continuous real-time trajectory be rational-valued on a connected interval. A *real-field finite-sum/source transport* and a native proof/kernel receipt remain owed. The classical real-Fourier negative integral is stronger than a purely scalar R856 certificate but **does not close B1, C1, C2, or any of the six original endpoints**. The terminal and 14/15 gate statuses remain unchanged.
+**Historical pre-C1/C2/B1 status note (now superseded for gate counts):** R408/R823's global rational `PeriodicHelicalProjectorLaws` cannot be fabricated from a rational 3-4-5 snapshot: the physical norm at (1,1,0) uses \(\sqrt2\). Nor can a nonconstant continuous real-time trajectory be rational-valued on a connected interval. A *real-field finite-sum/source transport* and a native proof/kernel receipt remain owed. The classical real-Fourier negative integral is stronger than a purely scalar R856 certificate but **does not close B1, C1, C2, or any of the six original endpoints**. The terminal and 14/15 gate statuses remain unchanged.
 
 ### C1 Python/SymPy mathematical closure — 15 November 2026
 
@@ -247,14 +261,14 @@ reproduced; no pinned Agda 2.9 or Lean 4.28 kernel acceptance in this runtime.
 
 ### Acceptance and phase ledger (canonical, do not silently promote)
 
-**Current Python/SymPy mathematical protocol (15 November):** **3/15 gates closed (P0 + C1 + C2)** and **12 active (A1–A2, B1–B2, D1–D2, E0–E2, F1–F3)**. Both C gates are mathematically discharged in their complete-real finite Fourier semantics, including the actual original selected R853 rate, derivative and fixed R854 integral. **Original Agda/Lean kernel acceptance and the rational-typed R408→real physical packet rebase remain unverified formalization debt**. No claims about global NS regularity or an original official endpoint; **0/6** terminal Millennium endpoints verified.
+**Current Python/SymPy mathematical decision protocol (15 November):** **4/15 gates resolved (P0 + C1 + C2 + B1)** and **11 active (A1–A2, B2, D1–D2, E0–E2, F1–F3)**. **P0** is a source-owner audit; **C1/C2** are mathematically valid complete-real finite Fourier theorems; **B1 IS NEGATIVE — its unrestricted original R820/R823/R825 signed-payment route is REFUTED, not paid**. The new physical R823 negative terminal is exact on the original R854 horizon. **Original Agda/Lean native kernel acceptance, rational-typed R408→real physical packet formal rebase and every all-data original PDE endpoint remain unverified formalization debt**. There is no positive all-data B barrier, W1 or continuation proof and **0/6** original Millennium endpoints.
 
 
 | Gate | Demonstration needed for CLOSE | Current source determination |
 | --- | --- | --- |
 | P0 source-owner preflight | 135 indexed terms across 47 Agda + 3 Lean owner files, 6 original-donor blob equality receipts, zero implemented/flag mismatches; source-specific SymPy negatives | **CLOSED — SOURCE INTEGRITY ONLY**; native kernel requirements retained under E0 and all active A1–F3 theorem gates |
 | A original physical kernel+envelopes+continuation | source-specific A1–A4 true on real Euclidean NSE | **OPEN** |
-| B original signed/helical W1+reserve+uniform continuation | true B1–B4; old universal W2 marked **REFUTED** | **OPEN** |
+| B signed/helical route after two no-gos | unrestricted R734 W2 and unrestricted R820/R825 signed payment **REFUTED**; independent W1/valid different signed bound/continuation required | **B1 NEGATIVELY RESOLVED, B2 OPEN**; no positive signed payment or all-data PDE barrier |
 | C selected real-Fourier R853 finite ODE+rate | user-approved mathematical C1 and C2, original T_R854 and R856 | **CLASSICAL C1/C2 CLOSED under Python/SymPy**; historical Agda rational-R408-to-real/native proof and broader original typed closure still unverified |
 | D original interacting SU(N) YM + same-H OS gap | R320 selected H1 or R445 physical summable control **AND** D2–D4 | **OPEN** |
 | E original physical N21 verifier `PR.InNP` | all real F1–F4 machine/memory/clock, cost fields, local kernel | **OPEN**, finite-source part source-written |
