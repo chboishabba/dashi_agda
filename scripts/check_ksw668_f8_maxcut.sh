@@ -5,6 +5,10 @@ cd "$(dirname "$0")/.."
 mode="--smoke"
 if [ "$#" -gt 0 ]; then mode="$1"; fi
 python3 scripts/test_ksw668_f8_moving_maxcut.py
+python3 scripts/test_ksw668_f8_frozen_oblique_neumann.py
+python3 scripts/ksw668_f8_frozen_oblique_neumann.py
+python3 scripts/test_ksw668_f8_moving_neumann_characteristic.py
+python3 scripts/ksw668_f8_moving_neumann_characteristic.py
 python3 scripts/test_ksw668_f8_non_glancing_source.py
 python3 scripts/test_ksw668_f8_null_convex_lens.py
 python3 scripts/ksw668_f8_null_convex_lens.py
