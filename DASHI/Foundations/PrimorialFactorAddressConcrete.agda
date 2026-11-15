@@ -1,3 +1,4 @@
+{-# OPTIONS -WnoLiteralTooBig #-}
 module DASHI.Foundations.PrimorialFactorAddressConcrete where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
