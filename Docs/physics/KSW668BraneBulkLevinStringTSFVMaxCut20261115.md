@@ -1490,3 +1490,36 @@ with a standard forced Gronwall integral. The lift is **algebraic in the first-o
 **Actual new compact-TT original \(t=12\) normal-order-4 two-grid negative receipt:** \(H_{yy}\) drift **13.28%**, intrinsic 4D electric Weyl drift **157.93%**, projected 5D Weyl drift **31.72%**. Outside-bulk-cone field and both-Weyl controls remain nonzero (medium ratios **2.07%**, **4.38%**, **1.73%**). **Only two grids have run**, and neither the 3-grid original Weyl acceptance nor real physical detection has been established. Machine evidence \`Artifacts/ksw668/ads5_f8_full_coupled_weighted_SBP4_maxcut_20261115.json\`; \`scripts/check_ksw668_f8_maxcut.sh --weighted-two-grid\` deliberately produces a receipt and exits **42**.
 
 **Exact remaining maximum cut** now moves to (1) \`ads5OriginalMovingSBP4SATFullyDiscreteSSPRK3CFLAndTruncationError\`; (2) \`ads5OriginalTTCharacteristicConstraintPropagationUnderWeakSAT\`; (3) \`ads5OriginalMovingCompactTTCharacteristicLiftUniformSobolevSourceBudget\`; (4) \`ads5OriginalMovingH4PlusEpsilonNeumannToBothWeylTrace\`; and (5) \`ads5OriginalMovingTTThreeMultipoleThreeObservableConvergence\`, all **OPEN**. The original \(t=2\) FIO and actual compact-source dual-Weyl existential theorem **still require independent mathematical/referee/Agda acceptance**. F9 generating matter action, all-mode backreaction and separate cylinder; F10 calibrated physical attenuation/detection; F11 pinned continuum kernel/semantic weld; and D1 independent experimental graviton observation remain OPEN. No new physics or empirical early signal is asserted.
+
+
+---
+
+## 15 November 2026 maximum-cut IX — original physical characteristic constraint + sourced coupled energy + finite radial Sobolev hierarchy
+
+**Full canonical new proof/source/negative control:** [KSW668F8PhysicalConstraintRadialSobolevMaxCut20261115.md](KSW668F8PhysicalConstraintRadialSobolevMaxCut20261115.md). Machine acceptance: \`Artifacts/ksw668/ads5_f8_physical_constraint_radial_sobolev_maxcut_ix_20261115.json\`. This continues **PR #1520**, based on merged #1512. The previously requested original \`KSW668F8OriginalT2NeumannFIOProof20261115.md\` stays committed in \`master\`; **independent FIO referee/Agda acceptance remains OPEN**.
+
+**Substantial correction to previous F8 VIII numerical emphasis:** the new physically AdS-weighted normal SBP2 SAT mode \`normal_order=4\` has the exact coupled energy estimate \`E4'<=5E4\` but does **not** exactly preserve the physical tensor characteristic constraint \(C_h=D_yU-(P-M)/2\) on a finite grid. Its exact interior violation is \(a(D_y-D_w)P+c(D_y-D_w)M\). Smooth-state interior defect is second-order in \(\Delta y\), but rough-grid tests can show significant drift. A stable semidiscrete energy theorem alone was NOT proof of physical tensor constraint compatibility.
+
+**Repaired maximum cut:** existing **unweighted** second-order SBP2 SAT \`normal_order=3\` uses the same \(D_y\) in the original characteristic \(P,M\) equations, so for every interior normal node \(\dot C_h=0\) **identically**, and all SSPRK3 stages preserve that interior constraint **exactly** even with the original nonzero Israel datum and time-varying original Poincaré clock. The exact weighted quadratic commutator has diagonal \(-H_iw_i3/(2z_i)\) and edge \((w_i-w_{i+1})/4\); for \(\Delta y\le b/4\), a Gershgorin proof gives \(|\langle f,(D_y-D_w)f\rangle_{Hw}|\le4\|f\|_{Hw}^2/b\). Therefore on original \(t\ge1\) (all \(d=3,7,11\) TT radial modes) **one scheme** now has the full **coupled homogeneous semidiscrete** physical-energy estimate
+\[
+\boxed{E_3'(T)\le(5+16t)\,E_3(T),\quad \Delta y\le1/(4t).}
+\]
+The exact nonzero original compact \(3\)D TT Israel modal source \(\epsilon=.04\) is lifted via \(\Lambda_M=-2G\chi/(1-v)\), with the **correct unweighted** \(D_y\Lambda_M\) residual, giving
+\[
+\boxed{\widetilde E_3'(T)\le(6+16t)\widetilde E_3(T)
++\frac12\|F(T)\|_E^2.}
+\]
+The actual Numba stage and original \(t=1,4/3,2,12\) compact TT cell source were checked; the \(F\)-norm includes **radial derivatives** and the local smooth \(G_T\). On original \(1\le t\le12\), coefficients \(197\) and \(198\) are valid (conservative). **Fully discrete coupled SSPRK3 stability is still OPEN**, despite exactly preserved interior constraints through its stages.
+
+**Boundary SAT cannot be silently promoted:** at the original weak wall and remote normal boundary,
+\[
+\dot C_{h,0}=[(1+v)P_0-(1-v)M_0-2G]/\Delta y,\qquad
+\dot C_{h,N}=(1+v)P_N/\Delta y.
+\]
+The physically constrained initial finite-grid state \(U=y/2,\ P=1,\ M=0,\ G=0\) has **zero C on all nodes**, yet at original \(t=4/3\), boundary \(\dot C=0.4/\Delta y\): **10,20,40** for \(\Delta y=.04,.02,.01\), interior zero. This is a **true source-specific discrete boundary counterexample** to global exact constraint propagation, NOT a physical gravity effect or a failure of smooth continuum Israel theory. \`ads5OriginalWeakIsraelGlobalConstraintBoundaryWeld\` remains OPEN and needs a boundary-compatible SAT or uniform boundary-error estimate.
+
+**New finite high-regularity hierarchy:** because all original moving \(b(T),v(T),3/z\) and weak Israel normal SAT coefficients are independent of the physical radial \(r\), the positive radial FV stiffness \(A_\ell=-L_{3+2\ell}\) commutes with the complete **linear semidiscrete** moving generator, provided actual compact source \(G\) is also transformed. \([A_\ell^k,\mathcal L_h]=0\) for all integer \(k\ge0\); \(E_k=E(A^kU,A^kP,A^kM)\) inherits the **same** coupled energy constants. Actual original compact \(\epsilon=.04\) three-mode sourced stage checked for \(k=0,1,2,3\), both weak-SAT modes 3 and 4, and \(t=1,4/3,2,12\): worst relative commutator \(\sim5.6\times10^{-16}\). New generic Agda all-power induction is **source-only**, pinned Agda kernel unrun. This is **NOT** a complete spatial/normal/time \(H^{4+\epsilon}\) pointwise Weyl trace; high compact source norms and the actual Israel boundary compatibility remain open.
+
+**Source ownership and regression:** \`DASHI/Physics/Gravity/KSW668AdS5OriginalTTCharacteristicConstraintRationalExact.agda\`, \`DASHI/Physics/Gravity/KSW668AdS5OriginalRadialSobolevPowerReuseExact.agda\` (both imported into canonical Agda owner); three new \`scripts/ksw668_f8_*.py\` producers plus tests and one explicit weak-boundary negative control. Local source-equivalent acceptance **326/326 PASS**: prior 284 +24 physical constraint/forced+6 boundary no-go+12 radial Sobolev. Exact connected PR-head tests and pinned Agda kernel still unverified.
+
+**Top exact gates after IX:** (1) \`ads5OriginalWeakIsraelGlobalConstraintBoundaryWeld\`; (2) \`ads5OriginalMovingSBP3FullCoupledSSPRK3CFLAndError\`; (3) \`ads5OriginalCompactTTFullH4PlusEpsilonNeumannBoundarySourceBudget\`; (4) \`ads5OriginalMovingH4PlusEpsilonNeumannToBothWeylTrace\`; (5) \`ads5OriginalMovingTTThreeMultipoleThreeObservableConvergence\`; (6) independently accepted original \(t=2\) FIO compact-source both-Weyl proof; (7) F9 matter-generating action/all-mode stability/cylinder, F10 scale calibration, F11 pinned Agda and semantic observer, D1 controlled physical observation. **All these endpoints remain OPEN; no early gravity observation or free-energy claim is established.**
