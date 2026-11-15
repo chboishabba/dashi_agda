@@ -1,5 +1,18 @@
 # Zelph ↔ trie / ultrametric ↔ indexed hyperfabric ↔ Nat/NORA — exact maximum-cut
 
+## P0-S selected HTTP206 → P1 positive native five-QID root cut (15 November 2026)
+
+**Latest checked Agda and offline reference:** DASHI #1505 at exact `b3134a4bbf1afa62e5d667efbdce3c7c2d4bfa81` **15/15 Agda 2.8.0.2 + 57/57 Python** (M2a constructive loop erasure, M3 finite partial trichotomy, M4a typed normal form now kernel accepted). ITIR #14 `858cfea1dba7f883c8cb5a4404b915c2a3fa7c4c` **302/302 Python plus original-schema native C++**; operator live P0-S original `nodeOfName:0` 22,755,697-byte equality with SHA `0bbfc205a26caeb8a0daf5e1b265cc10a0895d43e5c7828c0c4ad8109efc8508`. Full source binary SHA not paid.
+
+**New same-PR ITIR source (not yet new-head executed):** `verify_zelph_hf_selected_direct_matrix.py` checks arbitrary explicit `section:index` selected physical chunks under one two-sided transfer cap, using the existing strict complete-object ↔ original-range streaming comparator; atomically retains exact source-equal packed bytes for further decoding; only emits a completed-matrix receipt once all selected comparisons have passed. `verify_zelph_direct_native_qid_roots.py` then rechecks all per-chunk receipts and retained shard hashes and runs the actual compiled upstream-schema Cap'n Proto name decoder, requiring an exact positive native QID→node for each user-supplied name-shard hint. Together they avoid a full 87.95 GB download and do not require original-source filtered routing, but **only establish selected packed equality and positive native name-key rows**, not full A1, left/right routing or A2 query closure. Exact commands in the [live original HTTP206 P0-S runbook](https://github.com/chboishabba/ITIR-suite/blob/agent/nat-filtered-route-producer/docs/planning/zelph_original_bin_hf_ranges_maxcut_20261114.md).
+
+**Complementary existing full-name-section route:** ITIR `audit_zelph_hf_name_section_bytes.py` separately supports bounded resumable audits of all 204 `nodeOfName` and 204 `nameOfNode` section chunks; even complete packed-byte cover is not a proof of decoded all-name keys or original collision fibres. Do not treat the targeted five-QID positive route as a global membership/absence theorem.
+
+**Exact remaining integration:** physically route and verify required left/right adjacency and numeric frontier, close the 20 declared finite words, ingest real Wikibase GUID/P14143/P854 primary source bytes and semantic source review, then commit/reload/reopen S29 and link separately attributed NORA observer. M2b–d oracle-free formal reachability/canonical root and M4b/c executable JSON refinement still OPEN.
+
+---
+
+
 ## Live P0-S packed-byte witness and resumable all-name-section expansion — 15 November
 
 **Operator exact-head offline acceptance:** ITIR PR #14 `858cfea1` verified **302/302 Python + native original-schema C++ roundtrip PASS**, following the corrected zero-byte-offset test. At immutable published Zelph dataset SHA `0d4bd670959ebddae72f70d973410fdea8917ec1`, selected `nodeOfName` section chunk 0 was independently compared byte-for-byte against original `.bin` exact HTTP206 source range `79284085471..79306841167` (inclusive), **22,755,697 bytes**, published HF complete-object SHA256 and original HTTP206 range SHA256 both `0bbfc205a26caeb8a0daf5e1b265cc10a0895d43e5c7828c0c4ad8109efc8508`. This is the **first live P0-S selected packed chunk equality witness** (not whole source). Published manifest pin `cedd5cf0e4951ae1aa7c2c5968614b0eb72a4c3b5c8b2dc4ab18c40be8c83f59`, index pin `89f7ccac888e9e7db09b349cef246e725d969f07d4280142c325e96e12a30d77`. P0-H original header/count/geometry witness remains verified.
