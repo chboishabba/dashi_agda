@@ -22,6 +22,34 @@ import DASHI.Algebra.Quantum.QutritWeyl as Weyl
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369MagneticC3PhysicalRealizationExact as AtomicC3
 import DASHI.Environment.DataCentreThermalReuseBalanceExact as Site
 import DASHI.Environment.DataCentreThermalReuseMetricBoundaryExact as Metrics
+import DASHI.Physics.Gravity.KKE6TrinificationDiagonalZThreeQuotientExact as E6Origin
+import DASHI.Physics.Gravity.KKQEDQCDHyperchargeBIDIExact as QEDOrigin
+import DASHI.Core.AttributedSourceCore as Attribution
+
+------------------------------------------------------------------------
+-- EXISTING ORIGINAL DASHI E6 / KK GAUGE OWNER, NOT A NEW RESULT OF THIS MODULE.
+-- Original 27-state U3 quotient and physical charge-congruence checker:
+-- scripts/check_kk_e6_post_e21_u3_photon.py
+-- Docs/physics/KKE6GlobalHiggsChainZ6U3Original27Pareto20261027.md
+-- Johl Brown / DASHI original research integration.
+-- Matthew Reece (JHEP 10 (2023) 116) is a cited independent publication,
+-- NOT the author of the DASHI first-Tits 27 or selected VEV reductions.
+------------------------------------------------------------------------
+
+reuseOriginalE6DiagonalKernel :
+  (a b c : E6Origin.ZThree) →
+  E6Origin.centralTrivialOn27 a b c ≡ E6Origin.diagonalZThree a b c
+reuseOriginalE6DiagonalKernel = E6Origin.centreKernelIffDiagonal
+
+reuseOriginalQEDSameSourceUpCharge :
+  QEDOrigin.upChargeInSixths ≡ QEDOrigin.rightUpChargeInSixths
+reuseOriginalQEDSameSourceUpCharge =
+  QEDOrigin.rightAndLeftUpChargeMatch
+
+reuseReece2023PublishedSource : Attribution.AttributedSource
+reuseReece2023PublishedSource =
+  E6Origin.reece2023AxionGaugeGlobalFormSource
+
 
 ------------------------------------------------------------------------
 -- 300 K is a REFERENCE INPUT, not a new mass independent of temperature.
@@ -148,7 +176,7 @@ sourceWaterNotAlreadyMeasured = refl
 
 
 ------------------------------------------------------------------------
--- Independent source: M. Reece, "Axion-gauge coupling quantization with a
+-- Published source (same original DASHI E6 owner above): M. Reece, "Axion-gauge coupling quantization with a
 -- twist", JHEP 10 (2023) 116, section 2, eqs. (2.2)--(2.4).
 -- DOI https://doi.org/10.1007/JHEP10(2023)116 .
 --
@@ -157,7 +185,10 @@ sourceWaterNotAlreadyMeasured = refl
 -- Colour-singlets: qhat = 0 (mod 3); triplets: qhat = 2 (mod 3);
 -- antitriplets: qhat = 1 (mod 3).
 --
--- Reuses repo's existing residue ring. A matching magnetic C3 carrier is
+-- Presentation-only three-label projection: reuse the repo's existing residue
+-- ring. The stronger original 27-state same-action theorem is already in
+-- the KK/E6 Higgs-chain Python checker and its published source ledger.
+-- A matching magnetic C3 carrier is
 -- NOT YET a physical SU(3) colour representation; that requires an
 -- independent gauge-action realization and original SU(3) generator.
 ------------------------------------------------------------------------
