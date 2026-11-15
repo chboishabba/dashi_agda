@@ -4008,6 +4008,172 @@
               "expected_false": null
             }
           ]
+        },
+        "DASHI/Mathematics/Complexity/Karp21NativeWholeBinaryGraphOriginalExact.agda": {
+          "owner": "DASHI/Mathematics/Complexity/Karp21NativeWholeBinaryGraphOriginalExact.agda",
+          "blob": "e8c68a8e870cc88c0decd348c96be33dc716220d",
+          "terms": [
+            {
+              "name": "nativeWholeBinaryGraphWordSameOriginal",
+              "kind": "SOURCE_TERM_UNCHECKED",
+              "mention": 173,
+              "declaration": 173,
+              "expected_false": null
+            }
+          ]
+        },
+        "DASHI/Mathematics/Complexity/Karp21NativeWholeBinaryPriorityMachineExact.agda": {
+          "owner": "DASHI/Mathematics/Complexity/Karp21NativeWholeBinaryPriorityMachineExact.agda",
+          "blob": "2d7c4f6181cf236341aab12f44c9fd52a737524a",
+          "terms": [
+            {
+              "name": "initialBinaryWholeWordState",
+              "kind": "SOURCE_TERM_UNCHECKED",
+              "mention": 53,
+              "declaration": 53,
+              "expected_false": null
+            },
+            {
+              "name": "karpNativeBinaryFirstEnabledSameVerifierStep",
+              "kind": "SOURCE_TERM_UNCHECKED",
+              "mention": 165,
+              "declaration": 165,
+              "expected_false": null
+            }
+          ]
+        },
+        "DASHI/Mathematics/Complexity/Karp21NativeWholeBinaryTraceRebuildExact.agda": {
+          "owner": "DASHI/Mathematics/Complexity/Karp21NativeWholeBinaryTraceRebuildExact.agda",
+          "blob": "5d3700e204a36126dc2605327f798aec2e60e0fb",
+          "terms": [
+            {
+              "name": "karpFractranTraceRebuildExact",
+              "kind": "SOURCE_TERM_UNCHECKED",
+              "mention": 62,
+              "declaration": 62,
+              "expected_false": null
+            }
+          ]
+        },
+        "DASHI/Mathematics/Complexity/Karp21NativeWholeBinaryTypedAcceptanceExact.agda": {
+          "owner": "DASHI/Mathematics/Complexity/Karp21NativeWholeBinaryTypedAcceptanceExact.agda",
+          "blob": "885d40b1faedf5b7ef8042e51e92b7f3e0be2cbf",
+          "terms": [
+            {
+              "name": "nativeCanonicalTypedSparseVerifierSameWord",
+              "kind": "SOURCE_TERM_UNCHECKED",
+              "mention": 26,
+              "declaration": 26,
+              "expected_false": null
+            }
+          ]
+        },
+        "DASHI/Mathematics/Complexity/Karp21NativeWholeBinaryVerifierOriginalExact.agda": {
+          "owner": "DASHI/Mathematics/Complexity/Karp21NativeWholeBinaryVerifierOriginalExact.agda",
+          "blob": "07e00b4063c056f05f2378b694285b62764d1688",
+          "terms": [
+            {
+              "name": "nativeWholeBinaryVerifierSameOriginalFinFree",
+              "kind": "SOURCE_TERM_UNCHECKED",
+              "mention": 72,
+              "declaration": 72,
+              "expected_false": null
+            }
+          ]
+        },
+        "DASHI/Mathematics/Complexity/Karp21SparseGraphWordNPBoundaryExact.agda": {
+          "owner": "DASHI/Mathematics/Complexity/Karp21SparseGraphWordNPBoundaryExact.agda",
+          "blob": "d158528c720acb25095b3be012a3665a21485c8b",
+          "terms": [
+            {
+              "name": "PR.polynomialTimeVerifier",
+              "kind": "CONDITIONAL_COMPILER",
+              "mention": 134,
+              "declaration": 0,
+              "expected_false": null
+            },
+            {
+              "name": "PR.polynomialCertificateBound",
+              "kind": "CONDITIONAL_COMPILER",
+              "mention": 135,
+              "declaration": 0,
+              "expected_false": null
+            },
+            {
+              "name": "karpWeightedMaxCutInNPFromMachineReceipts",
+              "kind": "CONDITIONAL_COMPILER",
+              "mention": 132,
+              "declaration": 132,
+              "expected_false": null
+            }
+          ]
+        },
+        "DASHI/Mathematics/Complexity/PNotEqualsNPAnchoredCollisionEquivalenceExact.agda": {
+          "owner": "DASHI/Mathematics/Complexity/PNotEqualsNPAnchoredCollisionEquivalenceExact.agda",
+          "blob": "5bc4f3ab8274c1f23eba2d3f3c2a20472cdd89e0",
+          "terms": [
+            {
+              "name": "UniversalAnchoredPolynomialSATDecisionCollision",
+              "kind": "CONDITIONAL_EQUIVALENCE",
+              "mention": 32,
+              "declaration": 0,
+              "expected_false": null
+            }
+          ]
+        },
+        "DASHI/Mathematics/Complexity/PNotEqualsNPCodedLiteralResourceCompilerAnchoredNoGoExact.agda": {
+          "owner": "DASHI/Mathematics/Complexity/PNotEqualsNPCodedLiteralResourceCompilerAnchoredNoGoExact.agda",
+          "blob": "3950b13d5d77c28fd59e5a2e276b8a0fd04b1b27",
+          "terms": [
+            {
+              "name": "anchoredLiteralStructuralResourceImpossible",
+              "kind": "KNOWN_NEGATIVE_CONTROL",
+              "mention": 211,
+              "declaration": 211,
+              "expected_false": null
+            },
+            {
+              "name": "PNotEqualsNPCodedLiteralResourceCompilerAnchoredNoGoExact",
+              "kind": "KNOWN_NEGATIVE_CONTROL",
+              "mention": 1,
+              "declaration": 0,
+              "expected_false": null
+            }
+          ]
+        },
+        "DASHI/Mathematics/Complexity/PNotEqualsNPDirectSATLowerBoundExact.agda": {
+          "owner": "DASHI/Mathematics/Complexity/PNotEqualsNPDirectSATLowerBoundExact.agda",
+          "blob": "a777a87b5cd42b4a6badc9dea58a3f86768987ea",
+          "terms": [
+            {
+              "name": "UniversalPolynomialSATDecisionFailure cost",
+              "kind": "TARGET_TYPE_UNINHABITED",
+              "mention": 0,
+              "declaration": 0,
+              "expected_false": null
+            },
+            {
+              "name": "UniversalPolynomialSATDecisionFailure",
+              "kind": "TARGET_TYPE_UNINHABITED",
+              "mention": 204,
+              "declaration": 204,
+              "expected_false": null
+            },
+            {
+              "name": "universalDecisionFailureGivesSATNotInP",
+              "kind": "CONDITIONAL_COMPILER",
+              "mention": 211,
+              "declaration": 211,
+              "expected_false": null
+            },
+            {
+              "name": "universalDecisionFailureClosesPNotEqualsNP",
+              "kind": "CONDITIONAL_COMPILER",
+              "mention": 230,
+              "declaration": 230,
+              "expected_false": null
+            }
+          ]
         }
       },
       "method": "exact PR-head GitHub fetch_file proof bodies; source-structural not kernel; subsequent audit commits do not modify these original proof owners"
