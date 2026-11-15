@@ -1,5 +1,22 @@
 # Zelph ↔ trie / ultrametric ↔ indexed hyperfabric ↔ Nat/NORA — exact maximum-cut
 
+## 15 November — source-written end-to-end vertical-slice implementation (execution pending)
+
+**Prior exact-head kernel/offline reference remains:** DASHI #1506 `20ef376c` 9/9 Agda 2.9.0; DASHI #1505 `51dcb745` 14/14 Agda 2.8.0.2 and 44/44 Python; ITIR #14 `fb61e629` 165/165 Python plus original-schema native C++; SLR #10 `fc819e6` 24/24 Rust; SensibLaw #514 `8a6605c`/source-identical `f77b28f` 17/17 pytest. These receipts do **NOT** cover subsequent source code additions.
+
+**New ITIR #14 P1/P2/P4 source:** exact-byte bounded `acquire_pinned_source_bytes.py`, persistent original native C++ build, `run_zelph_live_cohort.py` that executes the original .bin→manifest→selected HF equality→native adjacency and 20 declared finite LR words followed by raw full Wikibase snapshot, `verify_p854_document_bytes.py` for actual original reference/document byte identity, and adversarial offline suites. [Operator commands and required original pins](https://github.com/chboishabba/ITIR-suite/blob/agent/nat-filtered-route-producer/docs/planning/zelph_live_original_cohort_operator_runbook_20261115.md). **SOURCE-WRITTEN; original 82 GiB source and HTTP evidence NOT fetched or authenticated here.**
+
+**New SLR #10 P5:** `scripts/s29_source_review_postgres.py` opt-in bridge writes candidate observation, two independently versioned source coordinates, explicit reviewer events and exact reverse dependencies to the *already running PostgreSQL database*, reconnects and reads back committed source/hash coordinates, and emits sparse revision-triggered reopen rows. [Live PostgreSQL acceptance](https://github.com/chboishabba/slr/blob/agent/source-unit-wikimedia-handoff/docs/S29_REAL_SOURCE_REPLAY_20261115.md). It does not retroactively map/modify an unidentified pre-existing legacy S29 table or automatically assert any source payment.
+
+**New SensibLaw #514:** `plan_nora_source_bound_persisted_review` checks NORA source/choice/attribution versus ITIR original QID/GUID/native revision and independently reported SLR DB readback rows/digest. It **does not** independently connect to PostgreSQL and retains NORA export and all edit authority false.
+
+**New DASHI #1505 P3/P6:** source-locked original MediaWiki `oldid/pageid` first-qualified-link audit; file-backed streaming first-link census preserving partial/missing/deadend/positive cycles with historical source-author authentication explicitly false; source-written M2a loop-erasure/M4a typed first-repeat wire model (now **15-target** Agda checker) and M5 full Wikimedia aggregate diagnostic. M2b–d and M4b/c true universal kernel/decoder refinement remain open.
+
+**Critical gate order:** run revised focused checkers, independently acquire original immutable source objects and matching native entity GUID/revision, run actual physical cohort→P854 original docs→S29 real DB commit/readback/reopen, and run separately pinned Wikipedia first-link consumer and source NORA review. A QID alone does not join Wikipedia, Zelph and Wikidata revisions.
+
+---
+
+
 ## New maximum-cut P0: immutable source header ↔ original index ↔ full manifest
 
 **Last locally accepted source checkpoint (operator receipt):** ITIR #14 `fb61e629` passed 165/165 Python plus native C++ Cap'n Proto / original two-pass mini-bin; DASHI #1506 `9512b316` passed 9/9 Agda 2.9.0 modules (proof source unchanged from cf3ba8d); SLR #10 `06bda03d` passed 24/24 Rust; SensibLaw #514 `f77b28f` passed 17/17 Python. The following NEW source additions in ITIR are not covered by the 165/165 receipt.
