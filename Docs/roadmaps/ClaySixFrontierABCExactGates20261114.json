@@ -2950,7 +2950,8 @@
           "source_E2_original_bidi_binary_typed_owners_read": true,
           "Agda_29_exact_kernel_receipts_obtained": false,
           "E0_closed": false
-        }
+        },
+        "closed": false
       },
       {
         "id": "E1",
@@ -2970,7 +2971,8 @@
           "separate_E1_actual_first_enabled_N21_priority_FRACTRAN_full_instruction_clock_proved": false,
           "E1_closed": false,
           "prohibited_conflation": "Independent polynomial verifier of same original language does NOT prove selected original N21/FRACTRAN machine clock"
-        }
+        },
+        "closed": false
       },
       {
         "id": "E2",
