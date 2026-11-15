@@ -58,3 +58,15 @@ For an assumed paired acoustic response, `|a+b exp(iφ)|²=a²+b²+2ab cosφ` ha
 **Acceptances:** local full replay 13/13 pytest with actual 105.7959s MP3; original MP3 is not redistributed. This branch's Agda module is source-authored and **not kernel-checked**; source-specific electrical measurements, full Maxwell plasma solution, and actual net environmental work remain open.
 
 **Milestone order:** P0 (this PR) regime+study proofs and reproducible audio; P1 one-param-set physical four-regime inverse fit and pin-continuity weld; P2 selected full retarded Maxwell/plasma boundary and natural work; D1 pinned kernel check as independent acceptance. Do not claim completion of P1/P2 from a synthetic audio example.
+
+
+## Source-specific forward-operator audit (seven more passing local tests)
+The source-kernel comparison is now executable at `scripts/check_smith_filsinger_study_forward_operators.py`. Original authors' field results are *separate from our synthetic mathematics*.
+
+- **Golkowski et al. 2010** nonlinear magnetospheric echo growth. Conditional unchanged-threshold exponential inverse: a 14 dB reduction of seed amplitude delays onset by approximately one second, yielding **g = ln(10^(14/20)) / 1s ≈ 1.612 s⁻¹** for that chosen toy growth law. It is not a measured actual plasma g, and never a Filsinger coupling coefficient. [DOI](https://doi.org/10.1029/2009JA014610).
+- **Cohen et al. 2011** time/spatial modulation. The **5–7 dB source-reported modeled injected-power improvement** is a 3.16–5.01 power ratio for the stated heater comparison; not a universal efficiency multiplier. [DOI](https://doi.org/10.1029/2010JA016194).
+- **Papadopoulos / ICD 2011** causal F-region→MS wave→E-region Hall current: a two-hop retarded discrete model explicitly distinguishes independently supplied natural Hall current. [Theory](https://doi.org/10.1029/2011GL047368) · [experiment](https://doi.org/10.1029/2011GL049263).
+- **2026 nonlinear acoustics** square-law source shows the acoustic difference-frequency phenomenon under hypothetical low-pass observation; no electromagnetic Earth coupling inferred. [Nature Communications](https://doi.org/10.1038/s41467-026-73604-0).
+- **Foster/Finch 1974** abstract causal thermoelastic pressure from a specified absorbed-heat history; not a free-air microphone or exposure design. [DOI](https://doi.org/10.1126/science.185.4147.256).
+
+Updated local full replay and symbolic/model acceptance: **20/20 tests PASS**, 22 separately attributed source-study/patent/reel records. GitHub-head exact source scripts and Agda kernel are still not independently checked in the pinned toolchain. Open original-world gates A1–D2 above remain unchanged.
