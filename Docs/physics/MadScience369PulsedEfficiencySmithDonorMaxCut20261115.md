@@ -58,3 +58,8 @@ A high switching-energy countermodel *reverses* the efficiency benefit. Low swit
 ## Causal propagation donor — no instantaneous global circuit state
 
 The original Smith/Filsinger `RetardedFlight` and `delayed_wave` logic preserves per-link launch, propagation and receiver times. Physical electromagnetic field changes cannot convey information faster than c in vacuum; actual cables, cores, transmission lines and environments often produce slower responses. The motor's instantaneous mutual-L coupling is a quasistatic *approximation* with a new required validity/error gate; see `MadScience369V2ExactLemmaRoadmap20261115.md` P1.C1–P3.C4. Retarded field/line modelling and gate/measurement timing must precede claims about distributed high-frequency power-recovery efficiency.
+
+
+## 2026-11-15 causal field and periodic solution continuation
+
+See canonical `MadScience369V2ExactLemmaRoadmap20261115.md`, third-round P1.C2/C3 and P2 sections. The Don Smith retarded-flight abstraction is extended with an exact 1D telegrapher energy identity, bidirectional passive reflection/dissipation, a matched-line Lipschitz delay bound, and an exact periodic reluctance-generator state in a source-independent linear class. Neither a full V2 Maxwell field solution nor a physical 369 efficiency optimum has been observed. Agda kernel remains pending.
