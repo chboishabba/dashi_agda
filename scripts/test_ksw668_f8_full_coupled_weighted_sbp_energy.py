@@ -13,7 +13,7 @@ class OriginalFullCoupledWeightedEnergy(unittest.TestCase):
  def test_warp_weight_cancel(self):self.assertIn('P*M',algebra()['original_bulk_warp_weight_cancellation'])
  def test_forced_wall_not_G2(self):self.assertFalse(algebra()['positive_source_only_wall_bound_from_full_symmetrizer'])
  def test_uniform_bound_five(self):
-  for t in np.linspace(1,2,101):
+  for t in np.linspace(1,12,151):
    b,v,vt,a,c=coeff(float(t));alpha=3*abs(v)/(2*b)
    self.assertAlmostEqual(alpha/(2*math.sqrt(a*c)),1.5,places=12)
    self.assertLessEqual(vt/(4*a),1)
@@ -69,7 +69,11 @@ class OriginalFullCoupledWeightedEnergy(unittest.TestCase):
   x=audit()
   self.assertFalse(x['original_full_SSPRK3_closed'])
   self.assertFalse(x['both_Weyl_receiver_converged'])
+ def test_long_baseline_original_t12(self):
+  r=full_energy_derivative(setup(t=12.,ny=15,nr=7,seed=43))
+  self.assertLess(abs(r['exact_identity_residual']),1e-10)
+  self.assertTrue(r['homogeneous_semidiscrete_Eprime_below_5E'])
  def test_invalid_time(self):
-  with self.assertRaises(ValueError):coeff(3)
+  with self.assertRaises(ValueError):coeff(.5)
 
 if __name__=='__main__':unittest.main(verbosity=2)
