@@ -9,6 +9,8 @@ python3 scripts/test_ksw668_f8_non_glancing_source.py
 python3 scripts/test_ksw668_f8_null_convex_lens.py
 python3 scripts/ksw668_f8_null_convex_lens.py
 python3 scripts/test_ksw668_f8_projected_weyl_sms.py
+python3 scripts/test_ksw668_f8_direct_wkb_transport.py
+python3 scripts/ksw668_f8_direct_wkb_transport.py
 python3 scripts/ksw668_f8_projected_weyl_sms.py
 python3 scripts/ksw668_f8_non_glancing_source.py
 if [ "$mode" = "--smoke" ]; then
