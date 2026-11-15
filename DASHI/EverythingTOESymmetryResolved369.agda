@@ -2791,3 +2791,14 @@ toeBalabanRouteSP2R445NoSecondMoment =
 toeBalabanRouteSP2R445CompilerLevel : ProofLevel
 toeBalabanRouteSP2R445CompilerLevel =
   BalabanRGTOE.balabanRouteSP2R445NativeCompilerLevel
+
+
+------------------------------------------------------------------------
+-- 2026-11-16: Walker/Infoton conditional same-original physical acceptance.
+-- Reuse Johl Brown's original KK/E6 27/QED owners and existing physical
+-- metrology, ensemble, gauge, PUE/ERF and typed water adapters.  Reece is an
+-- independent scholarly source; no physical particle/energy claim promoted.
+-- SOURCE WRITTEN on PR #1518; pinned Agda kernel validation still OPEN.
+------------------------------------------------------------------------
+import DASHI.Quantum.Infoton369FermiChargeBoundaryExact
+import DASHI.Quantum.InfotonOriginalPhysicalAdapterWeldExact
