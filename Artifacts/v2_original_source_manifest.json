@@ -1,0 +1,28 @@
+{
+  "schema": "dashi.v2.original.source.manifest.v1",
+  "reel_url": "https://www.instagram.com/reel/DfUzm74S4Hs/",
+  "attributed_to": "Instagram @madscience369; no assumed relation to Slobodian, Holmstrom or Tesla math",
+  "source_date": "2026-11-14 supplied by user",
+  "files": [
+    {
+      "filename": "transcript-2026-11-14 (1).srt",
+      "sha256": "bc77741d52ae742b845be7cf42089945c3aeb57ab88f0688aa9947d38fb4b024",
+      "bytes": 1934,
+      "role": "user-supplied direct source, not replicated/independently measured"
+    },
+    {
+      "filename": "1000019122.png",
+      "sha256": "1f5f3bbc34609d8376582709811c9871d3748c285bec86336f454d6a4e358f85",
+      "bytes": 169116,
+      "role": "user-supplied direct source, not replicated/independently measured"
+    },
+    {
+      "filename": "1000019123.png",
+      "sha256": "20fcbdc2eeced46f287dfd30fb4ee2719b0e3f6500dbdcfaaa5ff330d230d98d",
+      "bytes": 159041,
+      "role": "user-supplied direct source, not replicated/independently measured"
+    }
+  ],
+  "inclusion": "only hashes and names in bundle; original binary screenshots and SRT remain user files",
+  "claim_ceiling": "no physical coil count, pulse timing, circuit topology or output real-power metering established"
+}
