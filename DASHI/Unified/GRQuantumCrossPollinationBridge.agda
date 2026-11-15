@@ -88,7 +88,7 @@ canonicalCrossPollinationSeams =
     false
   ∷ mkCrossPollinationSeam
     phaseDepthWaveLane
-    "DASHI.Foundations.SSPPrimeLane369DepthPhaseBridge"
+    "DASHI.Physics.Closure.SSPPrimeLane369DepthPhaseBridge"
     "WaveLift / CanonicalCommutationClosure"
     "Depth-indexed phase transport supplies a finite precursor for the noncommuting depth/refinement algebra and the unitary wave completion."
     true
