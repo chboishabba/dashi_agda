@@ -8,7 +8,9 @@
     "sympy": "1.14.0",
     "tests": "10/10 PASS",
     "exact_new_GitHub_head_scripts_executed": false,
-    "agda_kernel_executed": false
+    "agda_kernel_executed": false,
+    "hankel_suite": "9/9 PASS",
+    "exact_github_checkout_run": false
   },
   "source_priority": [
     "Caldwell and Langlois 2001 DOI 10.1016/S0370-2693(01)00631-1",
@@ -29,25 +31,42 @@
       "DEC_margin": "rho+p>=1/(6 sqrt 5) on t in [1,2]"
     },
     "B3": {
-      "status": "exact moving PDE/normal plus coercive tangential energy and homogeneous finite-interval uniqueness; inhom retarded Green OPEN",
-      "uniform_coefficient": "1-v^2>=1/2",
-      "physical_moving_Green": false,
-      "flux_sign_definite": false,
-      "homogeneous_uniqueness": true,
-      "tangential_energy": "1/2 int z^-3 [(HT+v Hz)^2+(1-v²)Hz²+|grad_x H|²]",
-      "boundary_flux": "-b^-3*(Hz+v HT)*(HT+v Hz)",
-      "conservative_Gronwall_constant": "(1+3 sqrt(2))/(1-1/sqrt(2))",
-      "inhomogeneous_trace_bound_proved": false,
-      "retarded_Green_existence_proved": false
+      "status": "abstract finite-time retarded Neumann solution operator established by application of Ginoux–Murro theorem 6.8 and proposition 5.1 to original smooth timelike AdS5 strip; explicit kernel and receiver OPEN",
+      "preconditions": [
+        "z>=b(T)>0",
+        "|db/dT|<1",
+        "T slices Cauchy",
+        "normal scalar Neumann is admissible",
+        "smooth compact prescribed TT source vanishing near initial slice",
+        "compact smooth boundary lift",
+        "no incoming infinity flux from compact retarded support"
+      ],
+      "normal": "n·dH=z/sqrt(1-v²)*(d_z+v*d_T)H=-6*pi_TT",
+      "lift": "W=y chi(y) G/(1-v²), chi=exp[-y²/(1-y²)] on 0<=y<1 and zero after",
+      "abstract_operator": "H=W+G_N_ret[-Box_AdS W]",
+      "external_theorem_reference": "Ginoux Murro arXiv:2007.02544 Thm 6.8 Prop 5.1",
+      "retarded_operator_abstract_existence": true,
+      "explicit_moving_integral_kernel": false,
+      "nonzero_receiver": false
     },
     "B4": {
-      "status": "open",
-      "retarded_nonzero_physical_receiver": false
+      "status": "strict null chord in physical moving-brane bulk; retarded same-receiver Weyl still OPEN",
+      "T_interval": 0.8584414617824675,
+      "chord_radial_velocity": -0.582450897655619,
+      "wall_v_initial": -0.7071067811865476,
+      "wall_v_final": -0.4472135954999579,
+      "comoving_bulk_horizon": 0.697797781099381,
+      "brane_photon_horizon": 0.6931471805599453,
+      "physical_chord_strict_interior": true,
+      "nonzero_early_retarded_Weyl": false
     },
     "B5": {
-      "status": "finite-energy static Neumann TT wavepacket positive control",
-      "radial_weight_integral": "1/(2 b^2)",
-      "moving_mode_stability": false
+      "status": "stationary outgoing resolvent and KK normalizable packet completed at model level; original moving coupled stability open",
+      "stationary_resolvent": "-z² K2(qz)/(b² q K1(qb))",
+      "zero_pole": "lim(q→0) q² Z_b=-2/b",
+      "continuum_eigenfunctions": "sqrt(m) z² (Y1(mb)J2(mz)-J1(mb)Y2(mz))/sqrt(J1(mb)²+Y1(mb)²)",
+      "smooth_compact_continuum_packet_finite_energy": true,
+      "original_moving_metric_packet": false
     },
     "C1": {
       "status": "derived local geometric cubic law",
@@ -69,5 +88,46 @@
   },
   "next_critical": "B2 independent matter action + B3 retarded moving-boundary tensor Green + B4 nonzero same-object Weyl receipt",
   "physical_superluminal_5D": false,
-  "empirical_usable_shortcut": false
+  "empirical_usable_shortcut": false,
+  "stage": "2026-11-15 Hankel/KK and original moving Neumann abstract theorem continuation",
+  "new_sources": [
+    {
+      "arxiv": "hep-th/0002091",
+      "authors": "Giddings, Katz and Randall",
+      "scope": "stationary brane propagator"
+    },
+    {
+      "arxiv": "hep-th/0607041",
+      "author": "Mannheim",
+      "scope": "causal Hankel vs incomplete normalized-mode contour"
+    },
+    {
+      "arxiv": "2007.02544",
+      "authors": "Ginoux and Murro",
+      "scope": "theorem 6.8 / proposition 5.1 smooth compatible Neumann retarded operator"
+    },
+    {
+      "arxiv": "gr-qc/0103070",
+      "authors": "Caldwell and Langlois",
+      "scope": "original moving AdS5 geometric shortcut"
+    }
+  ],
+  "exact_remaining": [
+    "ads5CompactTTMatterActionRealization",
+    "ads5MovingBoundaryGreenKernelOrConvergentSolver",
+    "ads5LocalizedTTSourceProducesNonzeroEarlyWeyl",
+    "cylinderDoubledDiscPerturbedBulkAndRetardedGreen",
+    "ads5MovingModeStabilityAndBackreaction",
+    "ads5PhysicalScaleSourceDetectorComparison",
+    "braneBulkOriginalAnalyticAgdaKernel",
+    "physicalGravitonObservation"
+  ],
+  "acceptance": {
+    "source_equivalent_new_hankel_tests": "9/9 PASS",
+    "previous_tt_clock_suite": "10/10 source equivalent as earlier",
+    "exact_branch_runner": "NOT RUN",
+    "pinned_Agda_2_9": "NOT RUN",
+    "physical_observation": false,
+    "CI_is_acceptance": false
+  }
 }
