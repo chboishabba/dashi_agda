@@ -2693,7 +2693,19 @@
           "no use of refuted unrestricted R734 W2"
         ],
         "kernel_acceptance_required_before_full_closure": true,
-        "kernel_acceptance_state": "NOT_OBTAINED_THIS_ROUND"
+        "kernel_acceptance_state": "NOT_OBTAINED_THIS_ROUND",
+        "nonterminal_20261115_continuity_reduction": {
+          "target": "Physical unrestricted every-terminal R823 signed reserve, not the NS global regularity endpoint",
+          "proof": "For continuous real r with r(0)<0, r is negative on a short interval and therefore has a strictly negative integral on every sufficiently short positive terminal time",
+          "pinned_initial_rate": "-28273644/125",
+          "source_owner": "NSTriadKNR650Rational345SnapshotIdentificationRound850Exact.agda",
+          "physical_real_field_bridge": "OPEN (R408/R823 rational coefficients and globally quantified helical laws are not a constructed real trajectory)",
+          "derivative_bound_needed_for_all_terminal_no_go": false,
+          "fixed_horizon_R854_still_required_by_C2": true,
+          "source_regression": "scripts/check_ns_r823_initial_rate_continuity_cut_20261115.py",
+          "kernel_acceptance": false,
+          "gate_closed": false
+        }
       },
       {
         "id": "B2",
@@ -2717,7 +2729,8 @@
           "actual Picard solution on original R854 T"
         ],
         "kernel_acceptance_required_before_full_closure": true,
-        "kernel_acceptance_state": "NOT_OBTAINED_THIS_ROUND"
+        "kernel_acceptance_state": "NOT_OBTAINED_THIS_ROUND",
+        "source_note_20261115": "The independent real finite Galerkin ODE is polynomial and locally well-posed classically, but R71/R74 exact real chart and same R408/R853 physical packet transport still require source-written kernel proofs. Neither rational-time R408 nor a new shorter time substitutes for the unchanged R854 horizon."
       },
       {
         "id": "C2",
