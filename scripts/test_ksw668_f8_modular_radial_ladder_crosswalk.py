@@ -14,6 +14,11 @@ class OriginalAdS5ModularSporadicAudit(unittest.TestCase):
  def test_nontrivial_three_channel_ladder(self):self.assertTrue(self.x['radial_ladder']['all_3_channel_interior_shift_commutes'])
  def test_ladder_not_unitary(self):self.assertTrue(self.x['radial_ladder']['noninvertible_J_squared'])
  def test_actual_source_not_generated_by_ladder(self):self.assertTrue(self.x['radial_ladder']['generic_source_not_ladder_related'])
+ def test_actual_compact_TT_bump_is_not_ladder_related(self):
+  a=self.x['actual_compact_bump_source']
+  self.assertFalse(a['actual_compact_modal_sources_are_ladder_proportional'])
+  self.assertLess(a['dimensionless_eps4_J2_G0_divided_by_G1'][0],0)
+  self.assertGreater(a['dimensionless_eps4_J2_G0_divided_by_G1'][1],0)
  def test_boundary_not_promoted(self):self.assertFalse(self.x['radial_ladder']['finite_FV_boundary_intertwiner_proved'])
  def test_actual_three_d_reception_not_promoted(self):self.assertFalse(self.x['radial_ladder']['original_sourced_Weyl_receiver_symmetry_proved'])
  def test_Z3_actual_Weil_presentation(self):self.assertTrue(self.x['finite_modular_chart']['S4_I_ST_cubed_equals_S_squared_T3_I_verified'])
