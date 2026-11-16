@@ -1,0 +1,23 @@
+{
+  "agda_kernel": "NOT RUN",
+  "donor_module": "DASHI scripts/check_v2_pulse_nonlinear_recovery.py imported by one regression test (local cached donor version; exact remote-head replay pending)",
+  "full_repo_regression": "NOT RUN",
+  "hardware_v2_measurements": "NONE",
+  "notes": "No claim that a 45 W shaft benchmark equals 45 W reel output; waveform instantaneous edges idealized",
+  "original_16_strict_gates": "OPEN",
+  "physical_dynamic_pulse_feasibility": "OPEN",
+  "root": "standalone local staging (not exact checked-out PR head)",
+  "run_date": "2026-11-16",
+  "schema": "dashi.v2.efficiency-steelman-acceptance.v1",
+  "source_sha256": {
+    "Artifacts/v2_source_bounded_efficiency_receipt.json": "e8cfc78cb6afd638fca9f14fd18ea9fa91f3ab51f1a2b4b53937c6eeb4dbef24",
+    "Docs/physics/MadScience369V2SourceBoundedEfficiencySteelmanMaxCut20261116.md": "12babb2cf9cd6f9a1b480ddbf67395ec5bff7c8391803027e68dd6c6e3377a3b",
+    "scripts/check_v2_source_bounded_efficiency_maxcut.sh": "e0a2495c74b60ce42634a557b3add2294ac4035cb2a7227bd78f770de9e469f7",
+    "scripts/v2_source_bounded_efficiency_maxcut.py": "540d7317366c4f26d18b9a8ee7b5ac3664c4bbbfd99504aab473d5b5a75b80c9",
+    "tests/test_v2_source_bounded_efficiency_maxcut.py": "0dec271c8b13ae5643c9561f681fd76a86b65240ce77a315a1112211f4c5bd6d"
+  },
+  "test_command": "OPENBLAS_NUM_THREADS=1 python -m pytest -q tests/test_v2_source_bounded_efficiency_maxcut.py",
+  "test_exit": 0,
+  "test_stdout": ".........................................................                [100%]\n57 passed in 0.78s",
+  "tests_passed": 57
+}

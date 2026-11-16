@@ -284,3 +284,30 @@ New source: `scripts/v2_exact_multirate_periodic_port.py` with `tests/test_v2_ex
 **Acceptance:** 66/66 new tests and 192/192 targeted integrated Python tests passed in local standalone mirror. Full legacy aggregate NOT run this round; Agda 2.9 executable unavailable; no Agda kernel PASS. Command: `bash scripts/check_v2_nonlinear_exact_causal_boundary.sh`.
 
 **Strict gate accounting:** all original 16 P0–P4 gates remain OPEN under their original full criteria, as do continuum Maxwell `v2DistributedLineMaxwellPassivityAndWavefrontBound`, validated short-cable `v2SubNanosecondCableMultiRatePassiveCouplingCertificate`, globally attracting arbitrary hybrid `v2DynamicCoupledMotorLinePeriodicOrbitGlobalAttractor`, and source-specific P3/P4 evidence.
+## 2026-11-16 — Ninth maximum cut: source-bounded electromechanical efficiency (priority correction)
+
+**Primary user goal:** explain potential efficiency changes from nonlinear reluctance, timed pulses, magnetic/capacitor flyback recovery and reduced copper/core/controller losses. Cable geometry / causal propagation remains conditional on measured edge/RF regimes, **not** a mandatory gate before analysing electromechanical work.
+
+**Canonical new owner:** [MadScience369V2SourceBoundedEfficiencySteelmanMaxCut20261116.md](MadScience369V2SourceBoundedEfficiencySteelmanMaxCut20261116.md). Producer: \`scripts/v2_source_bounded_efficiency_maxcut.py\`; tests: \`tests/test_v2_source_bounded_efficiency_maxcut.py\`; runner: \`scripts/check_v2_source_bounded_efficiency_maxcut.sh\`; receipt: \`Artifacts/v2_source_bounded_efficiency_receipt.json\`.
+
+**Controlled 2×2 factorial, all at the SAME hypothetical 45 W generator-shaft extraction** (not the narrator's 45 W electrical load), using a saturating positive-incremental-inductance co-energy, original reel's approximate 2354 RPM only, and invented R/L/material/controller parameters. Ordinary control already **recovers 80% of flyback**. Advanced recovery returns 95% with extra controller overhead and soft-switching expense. Analytic positive/negative coil-port integration and an independent bus/loss calculation agree:
+- ordinary loaded rectification 10.933 W net bus;
+- timed pulses only 11.728 W (+0.796 W);
+- enhanced recovery only 21.592 W (+10.659 W);
+- combined 23.161 W (+12.228 W).
+Model timing×recovery factorial interaction +0.773 W. All four have 45 W shaft input and 0 **ideal winding** endpoint storage; DC bus/capacitor/thermal/hysteretic endpoints and finite slew are NOT certified. These are not physical operating points because instantaneous current edges demand unbounded voltage.
+
+**Strong original-claim discriminator:** If the reel's ~286 W displayed motor electric input really remains constant with no change in auxiliary inputs, displaced outputs or stored energy, 45 W incremental electrical load requires **~45 W lower total dissipative loss** (≈43–47 W for a ±2 W input variation), or some equivalent whole-boundary work flow. The 12.228 W *different, loaded-control* toy comparison neither proves nor sufficiently explains that 45 W loaded/unloaded observation. Four exact conservation counterworlds with indistinguishable coarse displays illustrate non-identification: lower losses, storage depletion, auxiliary input or incomplete meter. Motor electrical input is NOT generator shaft power.
+
+**Acceptance:** 57/57 local Python regressions PASS, direct donor linear-limit test, exact algebraic/symbolic co-energy identities, bidirectional port energy and excess recovery/logic cost negative controls. 18 of 45 sensitivity points make enhanced recovery harmful. The branch's exact GitHub checkout/complete historical suite and pinned Agda kernel were NOT executed; no physical V2 tests.
+
+**New named leaves:**
+- \`v2SameShaftSaturatingPulseCoenergySignedIdentity\`: restricted analytical + Python/SymPy PASS, Agda real-calculus and physical finite slew OPEN.
+- \`v2FourArmCompetentRectifierRecoveryFactorial\`: restricted 2x2 fixed-shaft comparison PASS, actual source-controller and full storage closure OPEN.
+- \`v2RecoveryCannotDoubleCountMagneticStoredEnergy\`: exact signed winding balance PASS at mathematical scope; actual switching diode/C/L gate OPEN.
+- \`v2Original45WLoadedUnloadedLossDisplacement\`: whole-boundary conditional algebra and four counterworlds PASS; source measurement identification OPEN.
+- \`v2FiniteSlewFixedShaftStorageMatchedEfficiencyFrontier\`: OPEN; next decisive mathematical cut to use available nonlinear multi-coil ODE + real switch/thermal energy and matched full state.
+- \`v2OriginalV2ControllerSourceReceipt\`: OPEN; source-selected topology, gate trace, λ(θ,i,T), shaft torque, independent ports.
+- \`v2V2ExperimentLossSuppression45WIdentifiability\`: OPEN; randomised loads + true motor electric and generator shaft and thermal/stored work.
+
+**Strict original status is unchanged:** all 16 strong P0–P4 endpoints remain OPEN. The next high-alpha work is physically finite-slew, same-shaft and storage-closed efficiency optimisation **before** another standalone cable geometry lemma. No claim of free energy or 369 universal phase-count advantage.
