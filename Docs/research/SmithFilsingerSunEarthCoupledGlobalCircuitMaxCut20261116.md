@@ -318,3 +318,88 @@ There is **no time-averaged output increase beyond the fixed source's matched ma
 The anti-phase construction does **not** establish that the actual Filsinger opposed-polarity capacitor configuration behaves as two controlled parallel conductances, nor that the earth/plate supplies this hypothetical DC `V_oc`. Capacitor-branch voltage opposition, current-phase opposition, switching phase, measured environmental source voltage and environmental wave coherence are different observables. The actual conversion would additionally require capacitive/inductive state dynamics, switch driver work and losses, material dispersion, retarded coupling and source backaction. The full source power ceiling must be calibrated to [#1521](https://github.com/chboishabba/dashi_agda/pull/1521)'s physically available terminal V/I and GEC current-density constraints. Those **original P2/R2/R3 gates are OPEN**.
 
 **Acceptance:** exact algebraic nonnegative-square identity and sin(t)+sin(t+pi)=0 checked with SymPy; local **12/12 tests PASS**, including source-off, controller-cost, fixed-source power ceiling, instantaneous conservation, nonnegative physical G and source mismatch. Together with the reciprocal coherent-wave submodel, **29/29 local source-equivalent tests PASS**. No pinned Agda 2.9 check and no exact GitHub-head execution claimed. This is a conditional mathematical source-matching advance, not a field measurement, automatic weather-response amplification, or evidence of excess natural power.
+
+
+## 2026-11-16 dynamic maximum cut: finite replenishment, two timed branches and one source boundary
+
+### The source/sink steelman and regime distinction
+
+**User-origin hypothesis:** a small timed nonlinear electromagnetic controller could maintain complementary source/sink regions with stable internal phase and modify their retarded, material-memory-dependent coupling to an independently powered environment. Source backaction, finite propagation, incoming and outgoing real work, driving and modulation costs, environmental replenishment, and stored-state changes remain indispensable. Filsinger's documented Earth-ground reel, his *proposed* common-midpoint/golden-aspect portable plate, and historical Don Smith diagrams are NOT proven to be electrically equivalent.
+
+Three separate regimes are retained: **W** coherent incident environmental wave and controlled mode interference (requires a demonstrated external phase relation); **B** a DC/slow environmental voltage source loaded by phase-related *internal* branches (requires no external RF phase lock); **N** genuinely nonlinear, retarded Maxwell/plasma/material/environmental coupling (requires an identified physical operator). Neither W nor B proves N. The physical priority remains **source admittance × control-dependent coupling × natural replenishment**.
+
+### New source/receiver dynamic model and exact energy identity
+
+New Python owner: scripts/check_smith_filsinger_dynamic_replenishment.py, with scripts/test_smith_filsinger_dynamic_replenishment.py. For an externally prescribed fixed source voltage Vs behind nonnegative feed conductance g, an explicit finite capacitor C>0 and two nonnegative switched load conductances G1 and G2,
+
+\[
+ C\dot v=g(V_s-v)-(G_1(t)+G_2(t))v,\quad
+ U=\tfrac12 Cv^2.
+\]
+
+The unique signed source/receiver boundary uses
+
+\[
+ P_{\rm upstream}=gV_s(V_s-v),\quad
+ P_{\rm terminal}=gv(V_s-v),\quad
+ P_{\rm feeder\,loss}=g(V_s-v)^2,\quad
+ P_{\rm load}=(G_1+G_2)v^2.
+\]
+
+The resulting exact identities are
+
+\[
+ W_{\rm upstream}=W_{\rm feeder\,loss}+W_{\rm load}+\Delta U,
+ \quad W_{\rm terminal}=W_{\rm load}+\Delta U.
+\]
+
+For this **fixed linear source only**,
+
+\[
+\boxed{\frac{gV_s^2T}{4}-W_{\rm terminal}
+ =g\int_0^T(v(t)-V_s/2)^2\,dt\ge 0.}
+\]
+
+Thus switched loading cannot defeat the fixed linear source's matching ceiling on **terminal work**. Extra load output beyond the cap must be paid by stored energy depletion. The identity is NOT an upper bound on different externally powered wave, solar wind, nonlinear-plasma or weather-feedback sources. Those require their own operator and independent available-power evidence.
+
+The numerical program integrates the differential equation **exactly on each interval of held load conductance**, including exact integrals of v and v²; the smooth sinusoidal conductances are approximated by midpoint-sampled steps. This is not an exact continuous-sine solution or finite-slew semiconductor/Maxwell PDE. Controller overhead is a separate nonnegative input and associated auxiliary loss; the program does not claim actual switch-control energy has been physically determined.
+
+### Five phase conditions on a self-consistent periodic attractor
+
+For the stated **normalized synthetic** parameters Vs=g=C=1, each branch has conductance 0.5+0.35 sin(t+phase), period 2pi, and controller cost rate 0.01. We compute the attracting fixed point of the full affine period map; initial and final capacitor storage match.
+
+| Branch phase | Useful load per cycle | Fixed-source cap | Matching slack | Load after controller |
+|---:|---:|---:|---:|---:|
+| 0° | 1.479286 | 1.570796 | 0.091511 | 1.416454 |
+| 45° | 1.494629 | 1.570796 | 0.076167 | 1.431798 |
+| 90° | 1.528820 | 1.570796 | 0.041976 | 1.465988 |
+| 135° | 1.559234 | 1.570796 | 0.011563 | 1.496402 |
+| 180° | 1.570796 | 1.570796 | ~0 | 1.507964 |
+
+For this dynamic source, complementary 180° loading improves integrated useful work by about **6.2%** against the 0° alternative; the earlier **8.9%** result used a different, instantaneous fixed-source load model. Neither gain generalises to Filsinger or the golden ratio.
+
+**Source-free negative control:** with g=0 and starting U=0.5, a long interval can deliver ~0.5 of load work while stored energy falls by ~0.5; natural replenishment is exactly zero. When initially v>Vs, upstream and natural terminal work can be negative as the capacitor returns energy to the source. These distinguish environmentally supplied real work from passive return and donor depletion.
+
+### Illustrative fair-weather fixed-source crosswalk: NOT an original terminal
+
+The 2026 Borok observed mean fair-weather current density is J=2.36 pA/m² (Anisimov et al., https://doi.org/10.1016/j.asr.2026.01.090). For an **ideal fixed 250-kV full atmospheric column per effective 1 m²** only, let g=JA/Vs. Then g=9.44e-18 S, fixed-source matched ceiling 0.1475 µW and 60-second maximum matched work 8.85 µJ. An assumed sustained 0.4 W requires 2.712 km² of *effective full-column source access* under this particular source model, not 2.712 km² of measured physical aperture. Earth electrodes or a local plate do not have 250 kV automatically.
+
+The independently published global electric circuit time constants of ~7–12 min / ~10 min (Rycroft, Odzimek and Harrison 2024 https://doi.org/10.1016/j.jastp.2024.106267; Rycroft et al. 2025 https://doi.org/10.1016/j.jastp.2025.106545) motivate finite capacitance and memory in the model, **not assigning a local collector capacitance**. The Python C=g*tau example is explicitly hypothetical. Tinsley's global circuit/cloud review https://doi.org/10.1029/2021JD035954 does not show the original Filsinger source or control gain.
+
+### Formal finite-cycle proof consumer and exact status
+
+New Agda owner DASHI/Physics/Motors/SmithFilsingerReplenishedCycleCapExact.agda reuses Circuit36927RecoveryEnergyBoundExact, SmithFilsingerMidpointPhaseWorkExact and SmithFilsingerFiniteReservoirPortExact. Its source-authored proof chain:
+
+- workPaidAfterStorageReturns cancels **all** same-cycle stored energy by deriving Nat addition commutativity, associativity and cancellation; requires complete original boundary balance and explicit full-state return.
+- loadBoundByReplenishmentAndController derives useful work <= natural work + controller work on a repeatable cycle.
+- naturalInputUnderAdmittedCap requires an **independently supplied** source-access cap and explicitly unused capacity.
+- replenishedLoadBelowNaturalCapPlusController combines the two to derive useful work <= admitted natural cap + controller work. This is **conditional mathematics**, not a measured source or Maxwell solution.
+- A toy witness has 3 natural + 1 controller = 2 useful + 2 losses with storage 5 returned; SameOriginalCycleAdmission demands actual pin, port, replenishment, retarded Maxwell, and synchronized V/I evidence but is **not inhabited**.
+
+The existing #1519 multirate periodic-work research is a **methods donor**, not an identified Smith/Filsinger machine. Do not duplicate its motor physical assumptions.
+
+**Acceptance:** new local source-equivalent **37/37** Python tests PASS; combined with the prior phase + DC suites, **66/66** targeted local tests PASS. The new Python producer, test suite and Agda source match the corresponding #1524 GitHub files **byte-for-byte (3/3 blob parity)**. scripts/check_smith_filsinger_dynamic_replenishment.sh runs these tests and has opt-in pinned Agda 2.9 verification with --agda. Agda/Nix are unavailable here, so **D1 pinned kernel is NOT RUN**. The Agda proof source is not yet kernel-certified.
+
+**Physical OPEN gates:** S0 original pin/return source, P1 simultaneous voltage/current/audio, P2 calibrated same-terminal source input and loaded response, R1 joint original nonlinear explanation, R2 actual 3D retarded Earth/atmospheric Maxwell/plasma source operator, R3 repeatably replenished positive independently powered natural work, D1 kernel, D2 same-original proof/evidence source attribution. Atmospheric clouds, rain and local cooling remain a distinct conditional research lane; no control gain or climate outcome has been demonstrated.
+
+**Maximum cut next:** weld this admitted finite source boundary to a physically calibrated retarded field/material operator and source current-access evidence on one selected original apparatus. Neither the phase models nor this source matching calculation substitutes for measurements.
