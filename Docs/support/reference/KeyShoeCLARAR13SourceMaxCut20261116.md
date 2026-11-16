@@ -96,3 +96,44 @@ The Shem data are the **72 indexed** triplets of Exodus 14:19–21 from the pinn
 | `Shem72AndFungalMeaningPreservedHeldout` | OPEN: corpus, controls and independent semantic target required |
 
 **Acceptance available in this PR:** `python3 scripts/check_keyshoe_clara_r13_maxcut.py` is an independent finite simulation. The proof-owner modules contain source-written Agda but no kernel status should be promoted without the pinned Agda check. Attribution and null boundaries must remain intact across downstream consumers.
+
+
+## 7. Language-as-algebra / parser-PNF-world correspondence (source-typed extension)
+
+The producer is the provisional source R13 13-body wheel, not a classical
+Hebrew-letter encoding: 13 ordered Latin bodies hold 26 two-position slots.
+The WLC Exodus Shem72 source remains independently indexed. Any translation
+from WLC Hebrew glyphs to this English R13 chart requires a specified
+transliteration or symbol map, source provenance and consumer adequacy.
+
+New bridge owner: `DASHI/Wikimedia/KeyShoeCLARALanguageWorldCorrespondenceExact.agda`.
+It imports the existing KeyShoe R13 and CLARA types; DASHI's reviewed
+`SensibLawSpacyPredicateNormalFormBridgeExact`; the evidential
+`ExperimentalAssertionPNFImplicationConeExact`; the existing
+`PredicateNormalWorldModelCore`; and `ConsumerDescentMinimalObserverExact`.
+
+The exact finite source view is `LetterSlot = Body13 × Side`: body and
+side reconstruct the full letter slot; body projection forgets the side.
+The bridge proves one concrete negative control: no body-only observer
+can be consumer-sufficient for a query that asks which side of the
+letter-pair was observed (M versus N in the fixed MN body).
+
+For an arbitrary licensed source alphabet and consumer, an R13 body view
+is sound only under the existing consumer-relative fibre-constancy
+obligation: equal body projections imply equal consumer outcomes. The
+Agda record makes this condition explicit rather than treating 13 as
+a universal semantic code. This also covers any proposed Hebrew mapping,
+but NO such Hebrew mapping is asserted or instantiated by this PR.
+
+Separately the bridge's parser→logical-PNF→world-model square requires
+an existing numeric-to-evidential PNF correspondence and an interpretation
+equation linking a reviewed logical assertion to world normalization.
+The equation is a supplied obligation, not a constructed independent
+interpretation checker; no source truth, legal authority, CLARA detector
+or kernel proof is promoted.
+
+SLR PR #78 adds a concrete runtime path: sealed, revision-bound PG parser
+evidence → checked M12 candidate PNF → versioned candidate PNF/world atom
+and unresolved Gap records. That Rust bridge does not itself pay the
+Agda interpretation obligations or certify Lean. Runtime acceptance
+(Cargo+PostgreSQL) and Agda kernel checking remain OPEN.
