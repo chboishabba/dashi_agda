@@ -43,6 +43,12 @@ assert {(1,1),(-1,-1),(1,2),(-1,-2)}.__len__()==4
 # Good odd prime reduction: delta=64, so no odd prime divides it.
 for p in (3,5,7,11,13,17,19,23,29,31,37,41,43,47):
     assert 64%p !=0
+# Exact original-curve map to a right triangle of area one.
+import sympy as s
+x=s.symbols('x')
+assert s.expand((x*x-1)**2+(2*x)**2-(x*x+1)**2)==0
+assert s.cancel(x*(x*x-1)/(x**3-x))==1
+print('PASS exact Fermat area-one triangle map for original E')
 print('PASS exact rational point tests',len(points))
 print('PASS 200 nonzero p-adic valuation cases')
 print('PASS torsion exceptions and 14 good odd-prime controls')
