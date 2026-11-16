@@ -4,7 +4,6 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
-open import Agda.Primitive using (Setω)
 
 import DASHI.Physics.Closure.BothwellYe2022MillimetreRedshiftReceipt as YeRedshift
 
@@ -213,7 +212,7 @@ canonicalEquationPageToMeasuredCloudBridge =
         refl
     }
 
-record WolfPrize2026UltracoldControlBridge : Setω where
+record WolfPrize2026UltracoldControlBridge : Set where
   field
     prizeRows :
       List WolfPrize2026SourceRow
