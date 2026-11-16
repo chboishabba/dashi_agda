@@ -203,7 +203,7 @@
     "new_original_receiver_H_E4_E5_tests_passed": 13,
     "new_signed_error_budget_tests_passed": 7,
     "new_total": 45,
-    "reconstructed_local_full_selection": "371/371 PASS",
+    "reconstructed_local_full_selection": "410/410 PASS (with KSW XI)",
     "exact_connected_PR_head_runner_run": false,
     "pinned_Agda_2_9_kernel_run": false,
     "new_root_unity_square_cases": 5
@@ -233,5 +233,22 @@
     "state": "TIMED OUT in bounded local execution, no complete verified receiver data",
     "third_grid_H_E4_E5_available": false,
     "can_claim_three_grid_convergence": false
+  },
+  "followup_maxcut_xi_20261116": {
+    "current_fine_grid_completed": true,
+    "previous_original_full_box_fine_timeout_retained_as_historical_attempt": true,
+    "new_causally_screened_finite_box": {
+      "r_outer": 3.01,
+      "y_outer": 2.01
+    },
+    "old_coarse_medium_receiver_parity": true,
+    "new_large_fine_box_parity": false,
+    "complete_original_threegrid_dual_weyl_convergence": false,
+    "new_original_fine_E4": -0.0006338411876034484,
+    "new_original_fine_E5": -0.000019319604479653438,
+    "new_native_weighted_full_fv_C3_rotation_is_symmetry": false,
+    "fixed_dt_radial_sensitivity_ell0_E4_fraction": 0.9863664952933835,
+    "full_receipt": "Artifacts/ksw668/ads5_f8_threegrid_per_channel_radial_normal_factorial_maxcut_xi_20261116.json",
+    "local_reconstructed_source_equivalent_tests": "410/410 PASS"
   }
 }
