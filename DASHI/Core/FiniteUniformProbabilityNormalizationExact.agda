@@ -58,8 +58,8 @@ survivalFractionBelowEnvelope :
   (recurrence : CountDecay.BlockSurvivalRecurrence) →
   (q : Nat) →
   SameDenominatorLe
-    (survivalFraction data q)
-    (envelopeFraction data q)
+    (survivalFraction recurrence q)
+    (envelopeFraction recurrence q)
 survivalFractionBelowEnvelope recurrence q =
   sameDenominatorLe refl
     (CountDecay.survivorCountGeometricBound recurrence q)
