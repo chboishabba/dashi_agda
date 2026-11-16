@@ -202,5 +202,20 @@
     "original_fully_discrete_coupled_SSPRK3": "OPEN",
     "original_T2_compact_Neumann_FIO_actual_both_Weyl": "OPEN independent acceptance",
     "matter_action_D1_observation": "OPEN"
+  },
+  "original_fine_grid_attempt": {
+    "parameters": {
+      "dr": 0.006,
+      "dy": 0.009,
+      "dt_requested": 0.0012,
+      "eps": 0.04,
+      "t_receiver": 12,
+      "r_outer": 3.15,
+      "y_outer": 2.6,
+      "normal_order": 3
+    },
+    "state": "TIMED OUT in bounded local execution, no complete verified receiver data",
+    "third_grid_H_E4_E5_available": false,
+    "can_claim_three_grid_convergence": false
   }
 }
