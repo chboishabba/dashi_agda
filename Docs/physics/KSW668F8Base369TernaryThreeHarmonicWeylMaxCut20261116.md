@@ -96,7 +96,7 @@ Machine receipt: \`Artifacts/ksw668/ads5_f8_base369_three_harmonic_signed_weyl_m
 
 ## Verification and highest-value remaining work
 
-New source-equivalent cases **40/40 PASS**: 20 algebra/source/369 codec and C3 no-go; 13 actual original \(t=12\) H/E4/E5 receiver and far-null readout; 7 signed per-channel error acceptance tests. A reconstructed combined earlier F8 replay plus these new suites passed **366/366 local tests**. The exact connected GitHub PR-head full acceptance and pinned Agda 2.9 kernel were **NOT RUN**; source-written Agda lemmas are not kernel certificates.
+New source-equivalent cases **45/45 PASS**: 20 algebra/source/369 codec and C3 no-go; 5 exact root-of-unity full-square/trivial-character no-go; 13 actual original \(t=12\) H/E4/E5 receiver and far-null readout; 7 signed per-channel error acceptance tests. A reconstructed combined earlier F8 replay plus these new suites passed **371/371 local tests**. The exact connected GitHub PR-head full acceptance and pinned Agda 2.9 kernel were **NOT RUN**; source-written Agda lemmas are not kernel certificates.
 
 The **exact next numerical/analytic maximum cut** is now a **per-channel error budget** \(\delta H_q,\delta E^{(4)}_q,\delta E^{(5)}_q\) with independently refined radial/normal/time meshes, source-to-boundary \(\mathcal H^{4+\epsilon}\) regularity and true weak Israel compatibility. Validate the \(\ell=0\) and \(\ell=2\) time derivative and second-derivative stencils first, then apply the triangle sum, rather than overindexing on the \(\ell=4\) d11 CFL alone.
 
@@ -119,3 +119,16 @@ The user-suggested ternary bridge is now an actual **same-physical-object consum
 A third, finer original \`normal_order=3\` compact TT \(t=12\) run was attempted with \((\Delta r,\Delta y,\Delta T)=(.006,.009,.0012)\), \(r_{\max}=3.15\), \(y_{\max}=2.6\), same compact \(\epsilon=.04\) stress, pulse .065 and same original photon-dark receiver. The local execution **TIMED OUT after its bounded execution window**, and **no completed fine-grid receiver output was produced**. The two-grid ternary per-channel receipt remains the only verified new numerical result. Do not infer a third-grid Weyl convergence rate from this attempt.
 
 The next executable maximum cut should add periodic finite-state checkpoints/restart or a rigorously equivalent accelerated solver before another full fine-grid original run. It should then report modewise field, E4, E5 and far-null data at three or more independently refined normal, radial and time resolutions; no mode is promoted from an aggregate cancellation.
+
+
+## XII. Exact cyclotomic commuting square and why the 369 trivial character is not a closed PDE sector
+
+The **full** \(3\times3\) cube-root-of-unity Fourier presentation is a legitimate change of basis. If \(F_{jk}=\omega^{jk}\), \(F^{-1}=F^\dagger/3\), and \(A=\operatorname{diag}(\Delta_3,\Delta_7,\Delta_{11})\), then by construction the **correct** commuting square is
+\[
+\boxed{F A=(FAF^{-1})F.}
+\]
+For any original H/E4/E5 three-mode receiver vector \(u=(u_0,u_1,u_2)\), the first, trivial-character row of the **unnormalised** \(F\) is \(\widehat u_0=u_0+u_1+u_2\), the original observable. But \(FAF^{-1}\) has nonzero inter-character couplings, and the zero sector cannot be evolved on its own.
+
+**Exact original finite radial quadratic counterexample:** \(u=(1,-1,0)\) has initial aggregate/zero character \(0\). On the original effective \(d=3,7,11\) FV radial \(r^2\) test, \(A u=(6,-14,0)\); its aggregate becomes \(\boxed{-8}\). Thus a channel cancellation can feed the observed trivial-character coordinate after radial evolution. This rules out an incorrect 369 optimization that discards nontrivial \(\omega,\omega^2\) sectors. An actual tensor/Weyl error bound still requires **all three** physical channel states.
+
+Source-equivalent SymPy checks verify \(F F^{-1}=I\), the exact transformed-operator commuting square, zero-mode observation identity on independent vectors, and the \(-8\) mixing witness. Five additional local tests PASS. The Agda source owner adds rational cancellation and radial-image statements only; the complex Fourier identity remains a Python/SymPy mathematical result until formally ported and Agda-kernel checked.
