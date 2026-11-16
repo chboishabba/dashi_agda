@@ -320,3 +320,23 @@ This OTHER model charges reverse converter efficiency 0.95→0.99 (ALL reverse t
 **Acceptance:** 6/6 new local regressions PASS, 57/57 earlier tests PASS independently = **63 distinct** targeted local passes; exact tested source Git blob parity recorded on PR. Magnetic state closure is approximate (2% tolerance); capacitor/bus/thermal state not periodic; PWM command is averaged and does **not** resolve individual 20 kHz switching edges; a validated interval ODE/PWM transistor proof and original V2 experiment remain OPEN. No Agda kernel acceptance or full historical suite has been run.
 
 New narrowed leaf \`v2FixedShaftFiniteBusPulseTimingCanHurtEvenIfCopperFalls\` CLOSED at synthetic averaged-PWM scope. \`v2EnhancedRecoveryGrossBidirectionalPortCostsPaid\` CLOSED at this specified reverse-efficiency model. \`v2TrueTransistorPWMAndMatchedWholeStateThermal\` and \`v2V2SourceSelectedPulseLossDisplacement45W\` remain OPEN. **The 16 original strict P0–P4 gates remain OPEN**. Finite causal cable details remain conditional, not a steelman priority.
+
+
+## 2026-11-16 — A–H disjoint efficiency tranches and Ω integration (programme-scale maximum cut)
+
+**Canonical report:** [MadScience369V2DisjointTranchesOmegaMaxCut20261116.md](MadScience369V2DisjointTranchesOmegaMaxCut20261116.md). This *reorders the next work by physical mechanism*, replacing the previous default priority for cable geometry or isolated causality lemmas. Existing finite-flight constraints remain cross-cutting acceptance conditions.
+
+| Owner | Scope | Mathematical implementation / strict outstanding work |
+|---|---|---|
+| A×B | nonlinear coenergy and pulse/phase placement | Existing saturated winding pulse family at common shaft input; requires voltage/slew validated physical map and same-resource polyphase global bound |
+| C×D | LC resonance, recoverable reactive flow and power electronics | Signed running and clamp recovery plus a separately constructed passive LC periodic-energy model; requires source-welded semiconductors, independent controller work and full switch transition losses |
+| E×F | loss redistribution and full motor/shaft/generator response | Explicit motor input-to-shaft conversion and loss allocation; requires original input torque, motor efficiency and state-dependent load response |
+| G | simultaneous constrained optimisation | 162 source-independent ideal-pulse candidates, 68 finite-grid non-dominated candidates, 18 cost/efficiency sensitivity cases (12 combined gains, 6 losses); no physical global optimality certified |
+| H | 45-W observation discrimination | Same-display storage, auxiliary, meter and loss-shift counterworlds; original topology/metrology/interventions unavailable |
+| Ω | one shared complete system | **OPEN** physical identity, fixed material and shaft resources, causal finite-slew controller, exact independent energy accounting, full cycle storage and independently measured loaded/unloaded boundary |
+
+The illustrative **45-W generator shaft input** is an invented comparison condition, not an original V2 shaft measurement. Within this model, ordinary control gives approximately **10.933 W** bus and the best combined finite-grid candidate **23.160 W** (+12.228 W). Conventional rectification already recovers magnetic energy. Another PWM model demonstrates pulse narrowing can *hurt*. A standalone LC model accounts for **joules per cycle**, not additional watts to be silently added to the winding model without a physical shared timing/boundary.
+
+For actual reported motor input near 286 W and added load near 45 W, at matched all-else conditions, an additional 45 W output requires a 45 W reduction in other loss/output, or an independently measured change in input/storage. This is a *discriminator*, not evidence such a loss shift happened. At constant true input, a hypothetical motor efficiency increase from 0.6000 to approximately 0.75734 increases shaft output by 45 W while reducing motor conversion loss by 45 W, demonstrating why the electrical motor meter alone does not identify generator reaction torque.
+
+**New restricted-model target names:** `v2ABFiniteSlewNonlinearPulseOptimalityBound`, `v2CDResonantBidirectionalConverterPortWeld`, `v2EFWholeDrivetrainVariableEfficiencyLoadResponse`, `v2GCommonResourceRobustGlobalPareto`, `v2HOriginal45WIdentifiabilityAndIntervention`. All remain **OPEN at full physical scope**. Existing 16 original strict P0–P4 gates remain OPEN; pinned Agda and original V2 receipts OPEN. The 104/104 reconstructed local Python regression acceptance is not Agda verification or a connected-head CI result. Exact new source and machine-readable data remain in the accompanying local artifact, pending GitHub source upload.
