@@ -125,7 +125,10 @@ record ParserPNFWorldAlgebraCorrespondence
 open ParserPNFWorldAlgebraCorrespondence public
 
 sourceTextSurvivesNumericToLogical :
-  ∀ {source numeric logical world} →
+  ∀ {source : Cone.NaturalLanguageExperimentalAssertion}
+    {numeric : Spacy.SensibLawNumericPNFReceipt source}
+    {logical : Cone.PNFCompilationReceipt source}
+    {world : World.PredicateNormalWorldModelCore} →
   ParserPNFWorldAlgebraCorrespondence numeric logical world →
   Spacy.canonicalText numeric
   ≡ Logical.naturalLanguage (Cone.compiled logical)
@@ -134,7 +137,10 @@ sourceTextSurvivesNumericToLogical bridge =
     (numericLogicalCorrespondence bridge)
 
 reviewedInterpretationCommutesWithWorld :
-  ∀ {source numeric logical world} →
+  ∀ {source : Cone.NaturalLanguageExperimentalAssertion}
+    {numeric : Spacy.SensibLawNumericPNFReceipt source}
+    {logical : Cone.PNFCompilationReceipt source}
+    {world : World.PredicateNormalWorldModelCore} →
   (bridge : ParserPNFWorldAlgebraCorrespondence
     {source} numeric logical world) →
   licensedInterpretation bridge (Cone.compiled logical)
