@@ -188,7 +188,7 @@
     "new_original_receiver_H_E4_E5_tests_passed": 13,
     "new_signed_error_budget_tests_passed": 7,
     "new_total": 40,
-    "reconstructed_local_full_selection": "359/359 PASS",
+    "reconstructed_local_full_selection": "366/366 PASS",
     "exact_connected_PR_head_runner_run": false,
     "pinned_Agda_2_9_kernel_run": false
   },
