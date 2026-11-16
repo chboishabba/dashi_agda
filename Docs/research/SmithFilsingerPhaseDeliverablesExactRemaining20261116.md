@@ -98,3 +98,22 @@ Distinct source regimes:
 **Validation evidence:** independent local exact `Fraction`/SymPy replay **9,112 arithmetic assertions PASS** and receipt at `Artifacts/smith-filsinger/finite_phase_maxcut_exact_receipt_20261116.json`. Code/test entrypoint: `scripts/check_smith_filsinger_phase_maxcut_exact.py`, `scripts/test_smith_filsinger_phase_maxcut_exact.py`. Exact-head Agda 2.9 target: `scripts/check_smith_filsinger_finite_phase_agda29.sh`. The pinned Agda compiler was unavailable in the analysis runtime: **D1 remains OPEN**; do not claim the committed scripts or new Agda were executed at their GitHub head. The independent replay is a separate arithmetic check, not a kernel certificate.
 
 **Updated mathematical-status cut:** F01/F04/F05/F06/F07/F08/F11 have substantially stronger source-authored exact witnesses; F09 reused. They are **not yet pinned Agda accepted**. F02/F03/F10/F12 physical weld/F13/F14/F15/F16 remain as originally scoped. No original-world physical S0/P1/P2/R1/R2/R3/D1/D2 gate is newly closed.
+
+
+### Latest cross-PR reuse: retarded phases and dynamically replenished source
+The finite-Agda proof owner now imports `SmithFilsingerTimeIndexedTransferExact` for two explicitly scheduled paths that arrive at the same clock time after *different launches*. `twoPathsReachSameTime`, `arrivalDoesNotIdentifyLaunchPhase`, `freeRunningDifferentClocksStartAligned`, and `freeRunningDifferentClocksCanSeparate` are finite causal-clock counterexamples for F02/F03. They do **not** establish a physical Maxwell dispersion relation or continuous phase entrainment. This prevents the old error of identifying identical drive-terminal phase with interaction-region phase.
+
+The newly added **#1524** owners `SmithFilsingerReplenishedCycleCapExact.agda` and `scripts/check_smith_filsinger_dynamic_replenishment.py` are independent but directly relevant F12 producers. They were added concurrently; do NOT duplicate their derivation. The continuous model is:
+\[
+C\dot v = g(V_{\rm up}-v)-G(t)v,\quad U=Cv^2/2.
+\]
+For *any selected nonnegative time-dependent G(t)* under a fixed positive linear upstream source and a capacitive state,
+\[
+\underbrace{\int_0^T G(t)v(t)^2\,dt}_{W_{\rm load}}
++\underbrace{U(T)-U(0)}_{\Delta U}
++g\int_0^T(v(t)-V_{\rm up}/2)^2dt
+=\frac{gV_{\rm up}^2T}{4}.
+\]
+The square term is nonnegative; if every store is restored after a periodic cycle, useful load work cannot exceed the fixed linear source's matched terminal cap, and controller costs reduce *net useful* work further. This generalizes the earlier quasi-static source matching bound to the selected finite-memory ODE, **not** to a nonlinear solar/magnetospheric source operator. The new Python method analytically integrates each **piecewise-constant** segment; sampling its sinusoidal branch pattern at segment midpoints is not an exact continuous-sine integration. The `RepeatableSourceCycle` Agda record is a finite Nat conditional source cap, not a proof that the environmental input is naturally replenished. As of this addendum no independent pinned kernel or exact-head Python rerun was obtained.
+
+The physically important remaining contrast: `W_nat` measured at a real terminal must be positive net of reflection and initial donor drawdown, whereas atmospheric solar forcing may change in response to loading. A fixed-voltage Thevenin cap does **not** limit all nonlinear upstream solar source adaptation; it is a falsifiable null model. Full Maxwell/plasma/solar boundary-weld F10/F13/F15 remains OPEN.
