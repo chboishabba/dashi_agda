@@ -8,6 +8,7 @@ module DASHI.Unified.WealthTaxEvidenceNonPromotionTOEExact where
 -- Fagereng et al. and historical sources retain their dated original claims.
 -- Ibrahim 2017 FLN navigation is not a wealth-tax proof or Monster action.
 
+open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; zero; _+_; _*_)
 open import Agda.Builtin.List using (List; []; _∷_)
