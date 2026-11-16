@@ -1,5 +1,10 @@
 # Clay × TOE: recovered original producers, falsified routes and exact remaining maximum cut
 
+
+## Current 16 November 2026 H2 classical special-case closure — expanded 8/28 resolved, 20 open
+
+**H2 now CLASSICALLY MATHEMATICALLY CLOSED:** actual smooth projective CP¹ and CP¹×CP¹ singular/de Rham rational Hodge intersection, normalized Fubini–Study class, genuine algebraic point/divisor cycle representatives, Künneth cup products, degree-map naturality, all codimensions for those **two varieties only**. See [exact physical-geometry proof and native firewall](ClayHodgeH2LiteralCP1GeometryClassicalClosure20261116.md) and [executable exact arithmetic regression](../../scripts/check_clay_h2_cp1_geometric_classical_20261116.py). The original Agda `ProjectiveLineGenericCycleClassWeld` remains supplied/conditional, and the physical CP¹ instance has **NOT** been typechecked natively. **H1 universal background and H3 universal algebraic-cycle producer remain OPEN.** Prior S4 selected BSD classical closure remains valid. **Current expanded 8/28 decisions settled, 20 OPEN; historical A–F 6/15 unchanged; actual Clay prize endpoints 0/6.** Earlier snapshots below are historical only.
+
 ## 16 November 2026 BSD S4 mathematical result — changes the SIX-PROBLEM ledger only
 
 **S4 original selected y²=x³−x analytic L(E,1)>0 is CLASSICALLY MATHEMATICALLY CLOSED** by explicit rational degree-two isogeny to optimal same-level E':y²=x³+4x, modular form η(4z)²η(8z)², genuine Dedekind eta inversion/Fricke, and original Mellin positive integral with rigorous quantitative lower bound **L(E,1)≥(146/85)exp(−2π/√32)>0**. See [the proof and exact accepted owner/dependency firewall](ClayBSDOriginalLevel32S4ClassicalClosure20261116.md) and [independent original curve exact checker](../../scripts/check_clay_s4_original_level32_classical_20261116.py). This is an original **selected-curve** proof through previously established published modularity/eta/isogeny theorems, **not** a new universal BSD theorem or pinned Agda/Lean checked analytic L equality.
