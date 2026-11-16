@@ -126,6 +126,7 @@ record TerminalCapRepeatableCycle : Set where
   constructor terminalCapRepeatableCycle
   field
     naturalSourceAccessCap driverWork modulatorWork : Nat
+    reactiveCirculationQuanta : Nat
     usefulLoadWork lossesAndRadiation unusedNaturalHeadroom : Nat
     selectedSourceAndSameCycleBalance :
       ((naturalSourceAccessCap + driverWork) + modulatorWork)
@@ -149,7 +150,7 @@ loadBelowAdmittedSourcePlusDriveAndModulation r =
 -- This is not an empirical Hall, soil, or Maxwell measurement.
 reactiveTransportWithoutNaturalWork : TerminalCapRepeatableCycle
 reactiveTransportWithoutNaturalWork =
-  terminalCapRepeatableCycle 0 0 0 0 0 0 refl
+  terminalCapRepeatableCycle 0 0 0 1 0 0 0 refl
 
 -- Physical promotion is still absent. The full original source admittance
 -- must be separately calibrated under actual phase and load changes.
