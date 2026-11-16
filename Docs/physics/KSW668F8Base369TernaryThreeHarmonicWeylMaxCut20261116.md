@@ -112,3 +112,10 @@ The **exact next numerical/analytic maximum cut** is now a **per-channel error b
 | F9 source-generating matter action and backreaction/cylinder; F10 scale/detection; F11 pinned kernel and observer semantics; D1 independent experiment | **OPEN** |
 
 The user-suggested ternary bridge is now an actual **same-physical-object consumer** imported into the authoritative gravity and 369/TOE graphs, with a concrete signed-Weyl numerical discriminator and an explicit physical non-equivariance proof.
+
+
+## XI. Fine-grid execution ceiling and evidence boundary
+
+A third, finer original \`normal_order=3\` compact TT \(t=12\) run was attempted with \((\Delta r,\Delta y,\Delta T)=(.006,.009,.0012)\), \(r_{\max}=3.15\), \(y_{\max}=2.6\), same compact \(\epsilon=.04\) stress, pulse .065 and same original photon-dark receiver. The local execution **TIMED OUT after its bounded execution window**, and **no completed fine-grid receiver output was produced**. The two-grid ternary per-channel receipt remains the only verified new numerical result. Do not infer a third-grid Weyl convergence rate from this attempt.
+
+The next executable maximum cut should add periodic finite-state checkpoints/restart or a rigorously equivalent accelerated solver before another full fine-grid original run. It should then report modewise field, E4, E5 and far-null data at three or more independently refined normal, radial and time resolutions; no mode is promoted from an aggregate cancellation.
