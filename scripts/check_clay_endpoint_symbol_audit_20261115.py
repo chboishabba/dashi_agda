@@ -198,17 +198,43 @@ def main() -> int:
     if (scope.get("legacy_gate_total") != 15
             or scope.get("legacy_source_or_math_decisions_settled") != 6
             or scope.get("legacy_active_gates") != 9
-            or scope.get("expanded_portfolio_decisions_settled") != 6
-            or scope.get("expanded_portfolio_active_gates") != 22
+            or scope.get("expanded_portfolio_decisions_settled") != 7
+            or scope.get("expanded_portfolio_active_gates") != 21
+            or scope.get("expanded_portfolio_decision_ids") != completed + ["S4"]
+            or scope.get("expanded_portfolio_active_ids") != active +
+                [g.get("id") for g in added if g.get("settled") is not True]
             or scope.get("legacy_completed_ids") != completed
             or scope.get("legacy_active_ids") != active):
         problems.append("SIX_CLAY_LEGACY_OR_EXPANDED_GATE_COUNTS_MISMATCH")
-    if (any(g.get("settled") is not False or
+    # Only S4 selected-curve analytic L positivity is classical-closed;
+    # this cannot promote S3 arithmetic MW rank or S5/S6 BSD.
+    s4 = next((g for g in added if g.get("id") == "S4"), None)
+    if (s4 is None
+            or s4.get("settled") is not True
+            or s4.get("status") !=
+                "CLOSED_CLASSICAL_ORIGINAL_SELECTED_E32_ISOGENY_ETA_MELLIN_POSITIVE"
+            or s4.get("mathematical_positive_L_E_one") is not True
+            or s4.get("mathematical_all_n_modular_form_coeff_equality") is not True
+            or s4.get("native_kernel_acceptance") is not False
+            or s4.get("native_elliptic_L_to_form_identification_typechecked") is not False
+            or s4.get("original_endpoint_proved") is not False
+            or s4.get("S3_original_MW_rank_zero_proved") is not False
+            or s4.get("S5_original_all_primary_sha_full_coefficient_proved") is not False
+            or not (ROOT / "Docs/roadmaps/ClayBSDOriginalLevel32S4ClassicalClosure20261116.md").is_file()
+            or not (ROOT / "scripts/check_clay_s4_original_level32_classical_20261116.py").is_file()):
+        problems.append("BSD_S4_CLASSICAL_SELECTED_E_NATIVE_OR_UNIVERSAL_FIREWALL_MISSING")
+    if any((g.get("settled") is not False or
             g.get("status") != "OPEN" or
             g.get("native_kernel_acceptance") is not False or
-            g.get("original_endpoint_proved") is not False
-            for g in added)):
-        problems.append("NEW_RH_BSD_HODGE_GATE_FALSELY_PROVED")
+            g.get("original_endpoint_proved") is not False)
+           for g in added if g.get("id") != "S4"):
+        problems.append("OTHER_TWELVE_NEW_RH_BSD_HODGE_GATE_FALSELY_PROVED")
+    if scope.get("newly_added_settled_gate_ids") != ["S4"]:
+        problems.append("BSD_S4_EXPANDED_DECISION_ID_MISMATCH")
+    for leaf in ("S1","S2","S3","S5","S6"):
+        g = next((g for g in added if g.get("id") == leaf), None)
+        if g is None or g.get("settled") is not False:
+            problems.append("BSD_"+leaf+"_FALSELY_PROMOTED_FROM_S4_ANALYTIC_POSITIVITY")
     for endpoint in six:
         owned = endpoint.get("legacy_gates", []) + endpoint.get("new_gates", [])
         if (not endpoint.get("terminal_gate_ids") or
