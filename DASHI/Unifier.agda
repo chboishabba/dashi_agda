@@ -1,4 +1,9 @@
 module DASHI.Unifier where
+
+-- BOM 2026 additive governance export: reuse original proof owner.
+import DASHI.Governance.BOMVersionedSameObjectCorrectionExact as BOMVersioned
+import DASHI.Core.IntersectionalNonFactorability as BOMNonFactor
+
 import DASHI.Unified.AdelicSpectralPaperTOEExact as AdelicSpectralTOE
 
 -- September 2026 source-typed finite spectral closure and fail-closed gates.
@@ -2931,3 +2936,14 @@ unifierBalabanRouteSP2R445NoSecondMoment =
 unifierBalabanRouteSP2R445CompilerLevel : ProofLevel
 unifierBalabanRouteSP2R445CompilerLevel =
   BalabanRGTOE.balabanRouteSP2R445NativeCompilerLevel
+
+------------------------------------------------------------------------
+-- BOM 2026 versioned raw-data correction: narrowly scoped non-promotion.
+-- This is a finite information-loss result, not an estimated climate trend.
+------------------------------------------------------------------------
+
+unifierBOMRawErrorNoTrendPromotion :
+  BOMNonFactor.FactorsThrough
+    BOMVersioned.seenRawError BOMVersioned.downstreamTrendEffect → ⊥
+unifierBOMRawErrorNoTrendPromotion =
+  BOMVersioned.rawErrorCannotByItselfEstablishTrendImpact
