@@ -1,0 +1,127 @@
+{
+  "schema": "dashi.v2.CD.LC-passive-recovery.v1",
+  "source": "Constructed dimensionless normalised LC; not original V2",
+  "physical_reference": {
+    "L_h": 0.04,
+    "C_f": 1e-05,
+    "natural_frequency_hz": 251.6460605224352
+  },
+  "cases": {
+    "ordinary_lossy_clamp": {
+      "params": {
+        "L_h": 0.04,
+        "C_f": 1e-05,
+        "external_kick_j": 0.1,
+        "passive_ring_survival": 0.98,
+        "extraction_fraction": 0.3,
+        "converter_efficiency": 0.8,
+        "controller_per_cycle_j": 0.001
+      },
+      "result": {
+        "steady_state_identifiable": true,
+        "start_energy_j": 0.21847133757961779,
+        "period_multiplier": 0.6859999999999999,
+        "steady": {
+          "start_j": 0.21847133757961779,
+          "external_source_j": 0.1,
+          "stored_final_j": 0.21847133757961784,
+          "stored_delta_j": 5.551115123125783e-17,
+          "line_loss_j": 0.006369426751592362,
+          "converter_loss_j": 0.019726114649681523,
+          "recovered_available_j": 0.09363057324840764,
+          "useful_net_j": 0.07390445859872612,
+          "energy_residual_j": -7.979727989493313e-17,
+          "phase_rad": 0.0
+        },
+        "interpretation": "passive periodic energy partition; physically source driven, no V2 resonance identification"
+      }
+    },
+    "resonant_retention": {
+      "params": {
+        "L_h": 0.04,
+        "C_f": 1e-05,
+        "external_kick_j": 0.1,
+        "passive_ring_survival": 0.995,
+        "extraction_fraction": 0.3,
+        "converter_efficiency": 0.8,
+        "controller_per_cycle_j": 0.001
+      },
+      "result": {
+        "steady_state_identifiable": true,
+        "start_energy_j": 0.2294892915980231,
+        "period_multiplier": 0.6965,
+        "steady": {
+          "start_j": 0.2294892915980231,
+          "external_source_j": 0.1,
+          "stored_final_j": 0.22948929159802312,
+          "stored_delta_j": 2.7755575615628914e-17,
+          "line_loss_j": 0.0016474464579901173,
+          "converter_loss_j": 0.02067051070840198,
+          "recovered_available_j": 0.0983525535420099,
+          "useful_net_j": 0.07768204283360793,
+          "energy_residual_j": -4.5102810375396984e-17,
+          "phase_rad": 0.0
+        },
+        "interpretation": "passive periodic energy partition; physically source driven, no V2 resonance identification"
+      }
+    },
+    "enhanced_extraction": {
+      "params": {
+        "L_h": 0.04,
+        "C_f": 1e-05,
+        "external_kick_j": 0.1,
+        "passive_ring_survival": 0.98,
+        "extraction_fraction": 0.6,
+        "converter_efficiency": 0.95,
+        "controller_per_cycle_j": 0.002
+      },
+      "result": {
+        "steady_state_identifiable": true,
+        "start_energy_j": 0.06447368421052632,
+        "period_multiplier": 0.392,
+        "steady": {
+          "start_j": 0.06447368421052632,
+          "external_source_j": 0.1,
+          "stored_final_j": 0.06447368421052631,
+          "stored_delta_j": -1.3877787807814457e-17,
+          "line_loss_j": 0.0032894736842105287,
+          "converter_loss_j": 0.006835526315789477,
+          "recovered_available_j": 0.09671052631578946,
+          "useful_net_j": 0.08987499999999998,
+          "energy_residual_j": 3.122502256758253e-17,
+          "phase_rad": 0.0
+        },
+        "interpretation": "passive periodic energy partition; physically source driven, no V2 resonance identification"
+      }
+    },
+    "high_overhead": {
+      "params": {
+        "L_h": 0.04,
+        "C_f": 1e-05,
+        "external_kick_j": 0.1,
+        "passive_ring_survival": 0.98,
+        "extraction_fraction": 0.6,
+        "converter_efficiency": 0.95,
+        "controller_per_cycle_j": 0.06
+      },
+      "result": {
+        "steady_state_identifiable": true,
+        "start_energy_j": 0.06447368421052632,
+        "period_multiplier": 0.392,
+        "steady": {
+          "start_j": 0.06447368421052632,
+          "external_source_j": 0.1,
+          "stored_final_j": 0.06447368421052631,
+          "stored_delta_j": -1.3877787807814457e-17,
+          "line_loss_j": 0.0032894736842105287,
+          "converter_loss_j": 0.06483552631578947,
+          "recovered_available_j": 0.09671052631578946,
+          "useful_net_j": 0.03187499999999999,
+          "energy_residual_j": 4.163336342344337e-17,
+          "phase_rad": 0.0
+        },
+        "interpretation": "passive periodic energy partition; physically source driven, no V2 resonance identification"
+      }
+    }
+  }
+}
