@@ -5766,8 +5766,8 @@
       "F3"
     ],
     "expanded_portfolio_gate_total": 28,
-    "expanded_portfolio_decisions_settled": 7,
-    "expanded_portfolio_active_gates": 21,
+    "expanded_portfolio_decisions_settled": 8,
+    "expanded_portfolio_active_gates": 20,
     "expanded_portfolio_scope_warning": "6/28 is count of heterogeneous source/mathematical decisions and open research obligations, not percent of mathematical endpoint completion. One settled B1 gate is refutation of a universal proposed auxiliary.",
     "new_RH_BSD_HODGE_gate_ids": [
       "R1",
@@ -5920,14 +5920,15 @@
           "H2",
           "H3"
         ],
-        "current_roadmap_maxcut": "H1 true rational Hodge intersection/cycle-class carrier; H2 physical P1 special case; H3 actual primitive algebraic lift with Lefschetz assembly and algebraic inverse firewall, ultimately universal",
+        "current_roadmap_maxcut": "H2 physical CP1 and CP1xCP1 rational singular/deRham and literal algebraic point/divisor cycles CLASSICALLY CLOSED; native Agda geometry weld open. H1 actual arbitrary smooth projective rational intersection and cycle-class carrier OPEN; H3 universal primitive algebraic lift and algebraic Lefschetz inverse firewall OPEN",
         "terminal_gate_ids": [
           "H3"
         ],
         "source_owners": [
           "DASHI/Mathematics/AlgebraicGeometry/HodgePrizeBoundaryExact.agda",
           "DASHI/Mathematics/AlgebraicGeometry/HodgeAlgebraicCycleClayCoreExact.agda"
-        ]
+        ],
+        "literal_CP1_CP1xCP1_special_case_classically_proved": true
       },
       {
         "id": "PNP",
@@ -6313,9 +6314,9 @@
           "DASHI/Mathematics/AlgebraicGeometry/ProjectiveLineCycleClassExact.agda",
           "DASHI/Mathematics/AlgebraicGeometry/ProjectiveLineGenericCycleClassWeldExact.agda"
         ],
-        "status": "OPEN",
-        "settled": false,
-        "classification": "ORIGINAL_UNPAID_ANALYTIC_OR_GEOMETRIC_PRODUCER",
+        "status": "CLOSED_CLASSICAL_LITERAL_CP1_CP1xCP1_RATIONAL_CYCLE_CLASS",
+        "settled": true,
+        "classification": "CLASSICAL_GEOMETRIC_SPECIAL_CASE_ACTUAL_PROJECTIVE_VARIETIES",
         "mathematical_deliverable": "Weld finite P¹ rational H11 model to actual CP¹ singular/deRham cycle class; relevant codim-one Lefschetz (1,1) and P¹×P¹ naturality",
         "acceptance_criteria": "True original geometry, not abstract Q-surjectivity; strictly special-case, no universal claim",
         "depends_on": [
@@ -6323,7 +6324,43 @@
         ],
         "native_kernel_acceptance": false,
         "original_endpoint_proved": false,
-        "sources_inspected_at_branch": true
+        "sources_inspected_at_branch": true,
+        "closure_kind": "MATHEMATICAL_CLASSICAL_CP1_SINGULAR_DE_RHAM_HODGE_CYCLE_COMPARISON",
+        "closure_protocol": "USER_AUTHORIZED_CLASSICAL_GEOMETRY_AND_EXACT_PYTHON_NO_AGDA_KERNEL",
+        "literal_geometry": "P1_C smooth projective, P1_C x P1_C smooth projective",
+        "exact_topology": "H*(CP1,Q)=Q[h]/(h²); H*(CP1xCP1,Q)=Q[h1,h2]/(h1²,h2²)",
+        "exact_rational_Hodge_intersection": true,
+        "actual_singular_deRham_comparison_mathematical": true,
+        "actual_point_divisor_Chern_class_mathematical": true,
+        "actual_algebraic_rational_cycle_surjectivity_CP1": true,
+        "actual_algebraic_rational_cycle_surjectivity_CP1xCP1": true,
+        "actual_codim_two_product_point_intersection": true,
+        "actual_projection_naturality": true,
+        "mathematical_all_codimensions_for_these_two_varieties": true,
+        "general_H1_physical_carrier_for_arbitrary_variety_proved": false,
+        "general_H3_universal_Hodge_proved": false,
+        "native_literal_CP1_geometry_weld_typechecked": false,
+        "native_singular_deRham_comparison_typechecked": false,
+        "original_owner_proof_boundary": "ProjectiveLineCycleClassExact has abstract Q coefficient model; ProjectiveLineGenericCycleClassWeldExact requires supplied literal geometry fields; classical proof instantiates these mathematically, NOT natively",
+        "classical_external_theorems_used": [
+          "CW cellular-to-singular cohomology",
+          "CP1 Hodge decomposition",
+          "de Rham and Chern-Weil comparison",
+          "algebraic divisor cycle-class compatibility",
+          "Kunneth formula and cup product",
+          "projective intersection theory and pullback naturality"
+        ],
+        "proof": "Docs/roadmaps/ClayHodgeH2LiteralCP1GeometryClassicalClosure20261116.md",
+        "executed_script": "scripts/check_clay_h2_cp1_geometric_classical_20261116.py",
+        "executed_evidence": {
+          "FS_integral_exact": true,
+          "CP1xCP1_Kunneth_Betti": true,
+          "rational_divisor_cases": 361,
+          "rational_intersection_cases": 343,
+          "degree_naturality_cases": 171,
+          "native_kernel_run": false
+        },
+        "acceptance_note": "Actual CP1 and CP1xCP1 rational Hodge algebraic cycles established via classical geometric theorems. This is a special-case Hodge theorem, not general H1/H3, not an Agda checked weld."
       },
       {
         "id": "H3",
@@ -6481,11 +6518,12 @@
       "negative_result_counts_as_decision_not_positive_theorem": true,
       "native_kernel_receipts_added_in_scope_revision": 0,
       "mathematical_endpoints_added_in_scope_revision": 0,
-      "RH_BSD_HODGE_initial_new_gate_status": "HISTORICAL_20261115_SNAPSHOT_ALL_13_OPEN__S4_CLASSICAL_RESOLVED_20261116",
+      "RH_BSD_HODGE_initial_new_gate_status": "HISTORICAL_20261115_ALL_13_OPEN__S4_AND_H2_CLASSICAL_RESOLVED_20261116",
       "no_silent_upgrade_of_original_15": true
     },
     "newly_added_settled_gate_ids": [
-      "S4"
+      "S4",
+      "H2"
     ],
     "newly_added_active_gate_ids": [
       "R1",
@@ -6498,7 +6536,6 @@
       "S5",
       "S6",
       "H1",
-      "H2",
       "H3"
     ],
     "expanded_portfolio_decision_ids": [
@@ -6508,7 +6545,8 @@
       "C2",
       "E2",
       "F1",
-      "S4"
+      "S4",
+      "H2"
     ],
     "expanded_portfolio_active_ids": [
       "A1",
@@ -6530,7 +6568,6 @@
       "S5",
       "S6",
       "H1",
-      "H2",
       "H3"
     ],
     "current_round_20261116_BSD_S4": {
@@ -6558,6 +6595,20 @@
       "old_15_gates_unchanged": true,
       "remaining_expanded_active_count": 21,
       "resolved_expanded_count": 7
+    },
+    "current_round_20261116_HODGE_H2": {
+      "gate": "H2",
+      "settled": true,
+      "kind": "CLASSICAL_LITERAL_CP1_AND_CP1xCP1_CYCLE_CLASS",
+      "proof": "Docs/roadmaps/ClayHodgeH2LiteralCP1GeometryClassicalClosure20261116.md",
+      "script": "scripts/check_clay_h2_cp1_geometric_classical_20261116.py",
+      "mathematical_actual_rational_cycle_class": true,
+      "native_kernel_check": false,
+      "H1_universal_background_proved": false,
+      "H3_universal_Hodge_proved": false,
+      "old_15_gates_unchanged": true,
+      "remaining_expanded_active_count": 20,
+      "resolved_expanded_count": 8
     }
   }
 }
