@@ -76,7 +76,7 @@
     "interpretation": "genuine compact 3D TT test source constructed; numerical UV/cutoff/convergence fail"
   },
   "acceptance": {
-    "source_equivalent_unit_tests": "366/366 reconstructed local combined source-equivalent replay PASS; 40 new KSW X tests; exact PR-head and pinned Agda UNRUN",
+    "source_equivalent_unit_tests": "371/371 reconstructed local combined replay PASS; 45 new KSW X tests; exact PR-head and pinned Agda UNRUN",
     "full_3d_B4_numerical_convergence": false,
     "external_analytical_Green_operator_previously_claimed_by_external_theorem": true,
     "tensor_matter_generating_action": false,
@@ -594,12 +594,15 @@
       2
     ],
     "third_original_finer_run": "TIMED OUT, no usable receiver data",
-    "verified_local_reconstructed_source_equivalent_tests": "366/366 PASS",
-    "new_tests_passed": 40,
+    "verified_local_reconstructed_source_equivalent_tests": "371/371 PASS",
+    "new_tests_passed": 45,
     "exact_connected_PR_head_test_count_verified": false,
     "pinned_Agda_kernel_run": false,
     "original_pointwise_both_Weyl_continuum_trace_convergence_accepted": false,
     "independent_FIO_referee_gravity_acceptance": false,
-    "matter_action_cylinder_D1_experiment": false
+    "matter_action_cylinder_D1_experiment": false,
+    "full_omega_Fourier_commuting_square": true,
+    "trivial_character_not_a_closed_PDE_sector": true,
+    "zero_receiver_then_nonzero_radial_witness": "-8 from (1,-1,0) -> (6,-14,0)"
   }
 }
