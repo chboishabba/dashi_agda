@@ -1,3 +1,8 @@
+
+
+## 16 November 2026 — S1 CLASSICAL actual Q₂ eight-class Kummer image closure; 11/28 settled, 17 OPEN
+
+The original E:y²=x³−x has all four 2-torsion points over Q₂. Standard local elliptic-group index theorem gives |E(Q₂)/2E(Q₂)|=2·|E(Q₂)[2]|=8. The eight actual original Lean Q₂ Hensel point witnesses at x=28,31,33,39,41,112,1/4,1/16 have **eight distinct complete Q₂ square-class triples** ([x],[x−1],[x+1]), checked by exact valuation parity and odd-unit mod-8 arithmetic. Injectivity of the genuine local Kummer map plus the index upper bound proves **exhaustiveness** of the actual local image, not just eight observed examples. Genuine E[2] Galois H¹ ≅ (Q*/Q*²)², restriction naturality, odd-good-prime unramified support, and original real/dyadic filters are established by standard classical theorems and original-curve calculations. See [proof and source audit](ClayBSDOriginalS1Q2EightImageClassicalClosure20261116.md) and [eight-witness regression](../../scripts/check_clay_s1_original_q2_eight_image_20261116.py). **Native Agda and Lean all-place H¹ instances remain supplied/uncompiled**, not claimed kernel-checked. **S3 global four-class Selmer exhaustion remains OPEN** (the eight Q₂ local image is NOT the four global classes); selected MW rank zero is classically known by Fermat descent. S5/S6 OPEN. Expanded **11/28 resolved, 17 OPEN, 0/6 Clay endpoints**, historical A–F 6/15 unchanged. Earlier 10/28 and 9/28 sections are historical.
 # Six-frontier original-source maximum cut — implementation rounds 9–10
 
 
