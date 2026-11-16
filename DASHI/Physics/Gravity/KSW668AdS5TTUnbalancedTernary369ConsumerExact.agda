@@ -25,7 +25,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Data.Empty using (⊥)
 open import Data.Integer.Base using (+_)
-open import Data.Rational.Base using (ℚ; 1ℚ; _+_; _*_; -_; _/_)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; -_; _/_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 
 import Base369 as Base
@@ -130,3 +130,30 @@ originalCyclicLabelFailsQuadraticRadialAction ()
 -- The original complete source-to-both-Weyl receiver remains a
 -- 3-channel linear map subject to independent per-channel convergence
 -- and real-metric constraint validation; no measured graviton claimed.
+
+
+-- Exact finite cyclotomic receiver discriminator:
+-- the unnormalised 3-point omega transform F has first row [1,1,1].
+-- Thus the aggregate H/E4/E5 is the zero/trivial character.
+-- BUT this trivial character is NOT dynamically closed under the
+-- original diag(Delta_3,Delta_7,Delta_11) radial generator.
+-- For a common finite radial r^2 witness, the source channel vector
+-- u=(1,-1,0) has zero aggregate; the physical radial image is
+-- (6,-14,0) with nonzero aggregate -8.
+-- The full change-of-basis commuting square F L=(F L F^-1) F is valid
+-- over the complex cube-root extension, but discarding the two other
+-- Fourier sectors is disproved by the following rational witness.
+
+originalTrivialCharacterCanInitiallyCancel :
+  1ℚ + - 1ℚ + 0ℚ ≡ 0ℚ
+originalTrivialCharacterCanInitiallyCancel = ℚRing.solve []
+
+originalPhysicalRadialImageDoesNotStayZero :
+  ((+ 6) / 1) * 1ℚ
+    + ((+ 14) / 1) * (- 1ℚ)
+    + ((+ 22) / 1) * 0ℚ
+  ≡ - ((+ 8) / 1)
+originalPhysicalRadialImageDoesNotStayZero = ℚRing.solve []
+
+-- Source-to-two-Weyl linear reconstruction uses ALL THREE harmonics,
+-- not the trivial Fourier coordinate alone. Physical F8 acceptance OPEN.
