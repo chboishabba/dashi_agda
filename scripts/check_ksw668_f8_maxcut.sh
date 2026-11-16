@@ -8,9 +8,22 @@ if [ "$#" -gt 0 ]; then mode="$1"; fi
 export PYTHONPATH="scripts:."
 python3 -m unittest discover -s scripts -p 'test_ksw668_f8_*.py' -v
 if [ "$mode" = "--smoke" ]; then
-  echo "F8 smoke PASS: all dynamically discovered source-equivalent tests (count in unittest output)."
+  echo "F8 smoke PASS: all dynamically discovered local F8 tests (expected 410 after XI; verify actual unittest output)."
   echo "3D tensor/Weyl convergence, Agda, matter action and observation NOT ACCEPTED."
   exit 0
+fi
+if [ "$mode" = "--threegrid-XI-audit" ]; then
+  python3 scripts/ksw668_f8_c3_weighted_operator_no_go.py
+  python3 scripts/ksw668_f8_weak_sat_left_null_obstruction.py
+  python3 scripts/ksw668_f8_threegrid_signed_failclosed.py
+  echo "KSW XI exact finite operator, SBP parity and 3-grid FAIL evidence audited."
+  echo "No original H/E4/E5 convergence, high-order Weyl or physical acceptance."
+  exit 0
+fi
+if [ "$mode" = "--threegrid-XI-fine" ]; then
+  python3 scripts/ksw668_f8_threegrid_signed_failclosed.py --run-grid fine
+  python3 scripts/ksw668_f8_threegrid_signed_failclosed.py --accept
+  exit $?
 fi
 if [ "$mode" = "--ternary-codec" ]; then
   python3 scripts/ksw668_f8_ternary_three_harmonic_consumer.py
@@ -70,5 +83,5 @@ PY
   echo "Provisional numeric thresholds met; analytic/Agda/physical gates separate."
   exit 0
 fi
-echo "Usage: $0 --smoke | --ternary-codec | --ternary-two-grid | --constraint-audit | --weighted-two-grid | --normal-compare | --legacy-full | --multipole-full | --full" >&2
+echo "Usage: $0 --smoke | --threegrid-XI-audit | --threegrid-XI-fine | --ternary-codec | --ternary-two-grid | --constraint-audit | --weighted-two-grid | --normal-compare | --legacy-full | --multipole-full | --full" >&2
 exit 2
