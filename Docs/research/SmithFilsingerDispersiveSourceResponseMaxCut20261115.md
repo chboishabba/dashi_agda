@@ -96,3 +96,55 @@ W_{\mathrm{recharge,needed}}=W_{\mathrm{load}}+W_{\mathrm{distributed\ loss}}+W_
 This equality applies only if the **complete** source, line and material stored-energy state returns to its starting value. More generally the missing recharge is exactly the decrease in total stored energy in the run. In the baseline \(g_s=0.75,R_L=1.6\), required replenishment is **13.49498**, actually provided **0.22882**; the remaining **13.26616** comes from whole-system depletion. At the highest-tested \(g_s=24,R_L=.8\), required replenishment is **17.65259**, actually provided **0.17693**, shortfall **17.47566**—approximately a **100×** replenishment deficit. These are *normalised*, model-specific figures; they must not be read as real Earth watts. The exact differential-source ledger and local source-cycle test now implement this as **M9 source-closure discriminator**, not as a second 'energy conservation discovery'.
 
 For the actual Smith/Filsinger claim, this makes the endpoint precise: demonstrate a causally closed **ongoing** Earth/atmospheric replenishment path supplying the measured complete-cycle load and losses under matched input/driver/phase controls—not merely an initial global Earth capacitor energy reserve or a transient output rise. The 2025–2026 global-circuit literature constrains candidate sources but does not certify local source admittance.
+
+---
+
+## 16 November 2026 follow-on: physically bounded environmental source admittance (P2-PHYS)
+
+**Purpose:** constrain the free feed conductance in M7 without declaring a measured source. Original endpoints S0/P1/P2/R1/R2/R3/D1/D2 stay OPEN. This is a conditional Maxwell-port and atmospheric-access *calibration crosswalk*, not a same-apparatus electromagnetic solution. It reuses:
+- Existing source access / global column: `scripts/check_smith_filsinger_global_source_access.py` and `SmithFilsingerShuntAndSourceAccessExact.agda`.
+- Existing passive real-work source matching: `Docs/research/SmithFilsingerSourcePortShuntMaxCut20261115.md` SP2.
+- Existing causal/energy producers: `SmithFilsingerTimeIndexedTransferExact.agda`, `KSW668MaxwellLocalPoyntingExact.agda`, and this PR's `SmithFilsingerDispersiveMaterialPortExact.agda`.
+- New Python P2-PHYS consumer: `scripts/check_smith_filsinger_earth_admittance_access.py`, its 12-test `scripts/test_smith_filsinger_earth_admittance_access.py`; no parallel circuit ontology.
+
+### Three mutually distinct source ports
+
+**A — Global fair-weather DC column (extreme upper-access model).** Let undisturbed fair-weather downward current density be `J`, *hypothetical* short-circuit current from a selected full-column area `A` be `Isc=JA`, and accessible open-circuit full-column potential be `Voc=250kV`. For a **stationary linear, positive-R Thevenin/Norton model**, `G=JA/Voc`, `R=Voc/(JA)`, and `Pmax=Voc*JA/4`, with equality only at matched `I=Isc/2`. These are not universal environmental capture limits and do not describe a nonlinear field-redirecting receiver. Borok 1998–2024 measurements published 2026 give **mean 2.36 pA/m²**, mode **1.25 pA/m²** (Anisimov et al., https://doi.org/10.1016/j.asr.2026.01.090). At the mean, for each ideal full-column square metre, `G=9.44e-18 S`, `R=1.0593e17 ohm`, and `Pmatched=1.475e-7 W`. A hypothetical 0.4 W demands ~2.712 km² *full-column equivalent*; 6.7 W demands ~45.42 km². The earlier `VJ` throughput numbers 0.59 microW/m² and ~0.68 km² for 0.4 W were **unloaded current-times-potential scale comparisons**, NOT matched-output limits; this adds the missing fixed-source factor four.
+
+**B — Local near-ground vertical collector (separate source/geometry).** Model a *uniform* 2 m span of air with 100 V/m fair-weather field and `J=2.36 pA/m²`, hence `Voc=200 V` and `sigma=J/E=2.36e-14 S/m`. An ideal 1-D flat air slab of area `A` has material admittance `Y(omega)=A/h*(sigma+i omega eps0)`. This is **local** and not a measured collector area or actual Filsinger geometry. The same fixed-source matching assumption yields `Pmatched/A=1.18e-10 W/m²`, requiring ~3389.8 km² equivalent 1-D collection for 0.4 W. At 7800 Hz, `abs(ImY)/ReY≈1.8387e7`: a huge AC displacement-current response can accompany minuscule conductive real work. `V^2 ReY` under *driven* AC excitation is **dissipation supplied by the excitation**, not an independent atmospheric source. The acoustic ~7.8 kHz is still **not** an electrical-clock measurement.
+
+**C — Local galvanic/telluric Earth electrode pair (not an atmosphere short).** In homogeneous soil resistivity `rho`, a single remote-reference hemispherical electrode radius `a` has DC `R=rho/(2*pi*a)`; widely separated opposite-current equal hemispheres approximately give `Rpair=rho/(pi*a)`. Sources: ITU-T K.107 and grounding engineering literature; frequency-dependent electrodes require a more general impedance solution (https://www.mdpi.com/1996-1073/17/13/3206). Illustrative `rho=100 ohm*m`, `a=0.1m` gives `Rpair≈318.3 ohm`; fixed-source matching needs *actual independent geoelectric open-circuit voltage* `Voc>=sqrt(4Rpair P)`: 22.57 V for 0.4 W or 92.36 V for 6.7 W. The reported capacitor `48 V` is **not** a measured Earth-port `Voc`. No local geoelectric gradient or electrode-pair source voltage is identified.
+
+### Passive nonlinear/dispersive source-feed refinement
+
+The existing normalised free-`Gfeed` grid (M7) is not an Earth source impedance estimate. For a **passive linear time-invariant** memory countermodel, take
+
+`Y(s)=G+s C+sum_k g_k*(s*tau_k)/(1+s*tau_k)`, with `G,C,g_k,tau_k>=0`, and state `tau_k*x'_k = V-x_k`. This admittance is positive real for Re(s)>0 and on the nonnegative-frequency imaginary axis; its time-domain energy identity is
+
+`V*I = d/dt [ C V^2/2 + sum(g_k*tau_k*x_k^2/2) ] + G V^2 + sum(g_k*(V-x_k)^2)`.
+
+For a source-to-receiver link, use `V=Vs-Vr`; **source work minus receiver-terminal work** is exactly stored-energy change plus dissipation. Thus resonant/displacement current does not establish positive *natural* replenishment. The new exact-fraction test checks this identity, with positive-real frequency sweeps. This is a passive-source *counterworld*, not an identification of a specific ionospheric relaxation plasma or the nonlinear modulated material in M1. Driven, externally pumped modulation may change energy ports, as explicitly accounted for by M1/M9.
+
+### Finite speed and original Maxwell barrier
+
+The diagnostic `omega*h/c` is ~0.0131 for `7.83 Hz * 80 km`, but ~**13.08** for `7800 Hz * 80 km`. Thus the full vertical-column lumped approximation is not even geometrically quasi-static at the *hypothetical* 7800 Hz clock. A 2 m local span has `omega*h/c ~ 0.000327` at 7800 Hz, but its boundary data, capacitive fringing and local source coupling are unknown. These frequency scales are **not Maxwell error theorems**. The Earth–ionosphere cavity requires lateral propagation, ground conductivity, altitude-dependent (anisotropic) ionospheric tensors, Hall/Pedersen/parallel dissipation, and meteorological/electromagnetic source terms. See [tensor waveguide method](https://angeo.copernicus.org/articles/38/207/2020/index.html), [VLF conductivity profile sensitivity](https://link.springer.com/article/10.1186/BF03352822), and [ELF conductivity-profile/mode work](https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2006RS003500). A scalar near-ground `G+i omega C` is not an R2 closure.
+
+### Stronger Agda contract, without physical promotion
+
+Extends the **existing** `SmithFilsingerDispersiveMaterialPortExact.agda` owner:
+- `AdmittedNaturalAccessCap` / `naturalWorkCannotExceedMeasuredAccessCap`: a calibrated independent source work cap must include inaccessible/uncollected headroom.
+- `TerminalCapRepeatableCycle` / `loadBelowAdmittedSourcePlusDriveAndModulation`: a full-state repeatable cycle cannot exceed independently admitted natural cap plus driver/controller, with all losses.
+- `SameOriginalAdmittanceAdmission`: physically sourced terminal geometry, local E/soil measurements, source operator under load/phase, synchronous signed real/reactive work. **Intentionally uninhabited.**
+
+No raw real-valued Maxwell theorem is claimed from these Nat accounting records. The existing pinned Agda checker already includes the extended owner, but the Agda 2.9 toolchain **has not run** in this runtime.
+
+### Acceptance and exact remaining consumers
+
+- New Python implementation: `check_smith_filsinger_earth_admittance_access.py`; source-equivalent offline **12/12 tests PASS** 2026-11-16, with near-ground reactive/conductive control, exact-fraction Debye passivity, full-column and soil matching, invalid-parameter failure and finite-speed diagnostic. The committed exact GitHub script has **not been independently executed**.
+- **P2-DC-COLUMN / P2-SOIL-LIMIT / P2-PASSIVE-ADM**: conditional formula/model gates advanced, **not same-unit source admission**.
+- **P2-sourceOperatorSameFilsingerCircuit**: measured two-load pair (stationary case) or repeatable causal nonlinear phase/load V–I kernel, **OPEN**.
+- **R2-MaxwellIonosphereSoilHallPedersenSameGeometry**: full retarded source+receiver PDE with actual selected collector/electrodes and calibrated strata, **OPEN**.
+- **R3-PositiveIndependentNaturalWorkSameRepeatableCycle**: independent source replenishment, matched test and calibrated power with no initial energy depletion, **OPEN**.
+- **S0/P1/R1/D1/D2**: unchanged, **OPEN**.
+
+**Experimental discriminator:** the lowest-ambiguity new source measurement is a genuine *two-terminal* calibrated Earth/collector open-circuit gradient and independent loaded V/I pair at the **same selected operating point**, plus synchronous driver/shunt/storage traces; repeating matched phase and load settings distinguishes source backaction from donor depletion. High-voltage handling is only for qualified practitioners. Never equate unrelated reels, a capacitor meter voltage, or a sound-spectrum centroid with such a receipt.
