@@ -47,7 +47,7 @@ NotInImage enumeration predicate =
 
 SurjectiveUpToPredicateEquivalence :
   ∀ {A} → (A → Pred A) → Set₁
-SurjectiveUpToPredicateEquivalence enumeration =
+SurjectiveUpToPredicateEquivalence {A} enumeration =
   ∀ predicate → Σ A λ index → enumeration index ≈ₚ predicate
 
 selfNegatingEquivalenceImpossible :
