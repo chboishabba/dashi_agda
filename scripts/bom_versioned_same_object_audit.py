@@ -50,7 +50,7 @@ def snapshot(spec, root):
            'captured_utc needs a timezone offset')
     raw = path.read_bytes()
     actual = sha256(raw).hexdigest()
-    insist(actual == spec['sha256'], `bytes/hash mismatch: ${rel}`)
+    insist(actual == spec['sha256'], f'bytes/hash mismatch: {rel}')
     try:
         source = io.StringIO(raw.decode('utf-8-sig'), newline='')
     except UnicodeDecodeError as ex:
@@ -60,22 +60,22 @@ def snapshot(spec, root):
     rows = {}
     for line, row in enumerate(reader, 2):
         insist(None not in row and all(v is not None for v in row.values()),
-               `CSV shape error at line ${line}`)
+               f'CSV shape error at line {line}')
         station, day, variable, value, flag = [row[k].strip() for k in FIELDS]
-        insist(bool(station), `empty station at ${line}`)
-        insist(variable in VARIABLES, `unknown variable at ${line}`)
+        insist(bool(station), f'empty station at {line}')
+        insist(variable in VARIABLES, f'unknown variable at {line}')
         try:
             insist(date.fromisoformat(day).isoformat() == day, 'noncanonical ISO date')
         except ValueError as ex:
-            raise AuditError(`invalid date at ${line}`) from ex
+            raise AuditError(f'invalid date at {line}') from ex
         if value != '':
             try:
                 number = Decimal(value)
-                insist(number.is_finite(), `nonfinite observation at ${line}`)
+                insist(number.is_finite(), f'nonfinite observation at {line}')
             except InvalidOperation as ex:
-                raise AuditError(`invalid observation at ${line}`) from ex
+                raise AuditError(f'invalid observation at {line}') from ex
         key = (station, day, variable)
-        insist(key not in rows, `duplicate station/date/variable at line ${line}: ${key}`)
+        insist(key not in rows, f'duplicate station/date/variable at line {line}: {key}')
         rows[key] = {'value': value, 'flag': flag}
     return rows
 
