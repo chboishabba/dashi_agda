@@ -96,7 +96,7 @@ Machine receipt: \`Artifacts/ksw668/ads5_f8_base369_three_harmonic_signed_weyl_m
 
 ## Verification and highest-value remaining work
 
-New source-equivalent cases **40/40 PASS**: 20 algebra/source/369 codec and C3 no-go; 13 actual original \(t=12\) H/E4/E5 receiver and far-null readout; 7 signed per-channel error acceptance tests. A reconstructed combined earlier F8 replay plus these new suites passed **359/359 local tests**. The exact connected GitHub PR-head full acceptance and pinned Agda 2.9 kernel were **NOT RUN**; source-written Agda lemmas are not kernel certificates.
+New source-equivalent cases **40/40 PASS**: 20 algebra/source/369 codec and C3 no-go; 13 actual original \(t=12\) H/E4/E5 receiver and far-null readout; 7 signed per-channel error acceptance tests. A reconstructed combined earlier F8 replay plus these new suites passed **366/366 local tests**. The exact connected GitHub PR-head full acceptance and pinned Agda 2.9 kernel were **NOT RUN**; source-written Agda lemmas are not kernel certificates.
 
 The **exact next numerical/analytic maximum cut** is now a **per-channel error budget** \(\delta H_q,\delta E^{(4)}_q,\delta E^{(5)}_q\) with independently refined radial/normal/time meshes, source-to-boundary \(\mathcal H^{4+\epsilon}\) regularity and true weak Israel compatibility. Validate the \(\ell=0\) and \(\ell=2\) time derivative and second-derivative stencils first, then apply the triangle sum, rather than overindexing on the \(\ell=4\) d11 CFL alone.
 
