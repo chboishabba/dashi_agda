@@ -2931,3 +2931,8 @@ unifierBalabanRouteSP2R445NoSecondMoment =
 unifierBalabanRouteSP2R445CompilerLevel : ProofLevel
 unifierBalabanRouteSP2R445CompilerLevel =
   BalabanRGTOE.balabanRouteSP2R445NativeCompilerLevel
+
+-- Original brane TT yy 0/2/4 spectral consumer: Base369 unsigned
+-- ternary q=0/1/2 with exact angular symbol and radial C3 no-go.
+-- Source-only finite presentation, not a gravity/TOE physical weld.
+import DASHI.Physics.Gravity.KSW668AdS5TTUnbalancedTernary369ConsumerExact
