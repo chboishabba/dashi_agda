@@ -3198,7 +3198,7 @@ policyIdentityIsAdmittedParetoSymmetry =
     (λ _ → refl)
     (λ _ eligible → eligible)
     (λ _ eligible → eligible)
-    (λ _ eligible → eligible)
+    (λ _ _ → refl)
     "identity-map-preserves-the-two-declared-economic-cost-axes"
 
 -- The rejection is not a claim that S3 is false. It means the specific
