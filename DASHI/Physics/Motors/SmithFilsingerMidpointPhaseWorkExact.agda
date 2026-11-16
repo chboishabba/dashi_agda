@@ -106,11 +106,30 @@ phaseReadoutAloneCannotIdentifyNaturalWork :
 phaseReadoutAloneCannotIdentifyNaturalWork f =
   classesAreDifferent (f drivenOnly naturallyDriven refl)
 
+-- Source regime and what is actually phase-referenced are separate types.
+-- A fixed source with naturally supplied DC bias needs no RF-wave phase lock.
+data EnvironmentalSourceRegime : Set where
+  independentCoherentWave independentDCBias nonlinearSlowSource :
+    EnvironmentalSourceRegime
+
+data PhaseReference : Set where
+  controllerBranchToBranch externalSourceToController : PhaseReference
+
+dcBiasIsNotIndependentWave :
+  independentDCBias ≡ independentCoherentWave → Contradiction
+dcBiasIsNotIndependentWave ()
+
+internalTimingIsNotExternalPhaseReference :
+  controllerBranchToBranch ≡ externalSourceToController → Contradiction
+internalTimingIsNotExternalPhaseReference ()
+
 -- All physical witnesses remain uninhabited for the same original object.
 record SameOriginalMidpointPhaseAndSourceWorkAdmission : Set₁ where
   field
     selectedConfiguration : Reflect.Configuration
     environmentalPortClass : Solar.SourcePort
+    environmentalSourceRegime : EnvironmentalSourceRegime
+    selectedPhaseReference : PhaseReference
     selectedFlight : Transfer.RetardedFlight
     actualPortReflection : Reflect.MeasuredReciprocalReflection
     ActualPortablePlateOrEarthPins : Set
