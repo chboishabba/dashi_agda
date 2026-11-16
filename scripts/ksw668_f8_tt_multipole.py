@@ -10,7 +10,7 @@ and full Weyl readout remain separate open acceptance requirements.
 import json, math, functools
 import numpy as np
 import sympy as sp
-from numba import njit
+from numba import njit, prange
 from ksw668_f8_fv_source_flux import exact_cell_averages,total_scaled_moments
 
 @functools.lru_cache(maxsize=1)
@@ -62,11 +62,11 @@ def averaged_sources(eps,rgrid,dr,quad_nodes=48):
             a[q,j]=moment/denominator
     return a
 
-@njit(cache=True)
+@njit(cache=True,parallel=True)
 def stage(U,P,M,outU,outP,outM,dr,dy,b,v,amplitude,sources,cp,cm,normal_order=2):
     nm,ny,nr=U.shape
     d2=dr*dr
-    for q in range(nm):
+    for q in prange(nm):
         d=3+4*q
         for iy in range(ny):
             z=b+iy*dy
@@ -285,11 +285,33 @@ def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
         mode_Hetaeta=[S*S*mode_HTT[j]-mode_HT[j]/(final_t*math.sqrt(1+final_t*final_t)) for j in range(3)]
         mode_E4=[-(mode_Hetaeta[j]+derivxx[j])/(4*final_t**2) for j in range(3)]
         mode_E5=[-(mode_Hetaeta[j]+2*mode_Heta[j]-lapieces[j])/(2*final_t**2) for j in range(3)]
+        # Two independently discretized temporal readouts, per physical q.
+        # These are diagnostics, NOT upper bounds on continuum Weyl error.
+        mode_HT_tangent=list(tdot)
+        mode_HTT_tangent=[(tdotnext[j]-tdotprev[j])/(2*dt) for j in range(3)]
+        Seta=-1/(final_t*math.sqrt(1+final_t*final_t))
+        mode_Hetaeta_tangent=[S*S*mode_HTT_tangent[j]+Seta*mode_HT_tangent[j] for j in range(3)]
+        mode_E4_tangent=[-(mode_Hetaeta_tangent[j]+derivxx[j])/(4*final_t**2) for j in range(3)]
+        mode_E5_tangent=[-(mode_Hetaeta_tangent[j]+2*S*mode_HT_tangent[j]-lapieces[j])/(2*final_t**2) for j in range(3)]
+        if (abs(sum(mode_E4_tangent)-E4_tangent)>1e-10*max(1.,abs(E4_tangent))
+            or abs(sum(mode_E5_tangent)-E5_tangent)>1e-10*max(1.,abs(E5_tangent))):
+            raise ValueError('Original per-channel stage-derivative Weyl sum inconsistent')
+        mode_delta_HT=[mode_HT[j]-mode_HT_tangent[j] for j in range(3)]
+        mode_delta_HTT=[mode_HTT[j]-mode_HTT_tangent[j] for j in range(3)]
+        for j in range(3):
+            assert abs((mode_E4[j]-mode_E4_tangent[j])
+                -(-S*S*mode_delta_HTT[j]-Seta*mode_delta_HT[j])/(4*final_t**2))<1e-10
+            assert abs((mode_E5[j]-mode_E5_tangent[j])
+                -(-S*S*mode_delta_HTT[j]-(Seta+2*S)*mode_delta_HT[j])/(2*final_t**2))<1e-10
         for mode_values,total in ((pieces,H),(mode_E4,E4),(mode_E5,E5)):
             if abs(sum(mode_values)-total)>1e-10*max(1.,abs(total)):
                 raise ValueError('Original ternary-channel linear Weyl reconstruction inconsistent')
         return dict(mode_ternary_digits=[0,1,2],mode_ell=[0,2,4],
            mode_E4=mode_E4,mode_E5=mode_E5,
+           mode_E4_tangent=mode_E4_tangent,mode_E5_tangent=mode_E5_tangent,
+           mode_HT=mode_HT,mode_HT_tangent=mode_HT_tangent,
+           mode_HTT=mode_HTT,mode_HTT_tangent=mode_HTT_tangent,
+           mode_delta_HT=mode_delta_HT,mode_delta_HTT=mode_delta_HTT,
            mode_Hxx=derivxx,mode_Delta3H=lapieces,
            E4_tangent=E4_tangent,E5_tangent=E5_tangent,
            HT_from_tangent=HT_from_tangent,HTT_from_tangent=HTT_from_tangent,
@@ -332,8 +354,14 @@ def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
         unsigned_ternary_codec_not_physical_C3_action=True,
         receiver_mode_intrinsic_4D_electric_Weyl=rec['mode_E4'],
         receiver_mode_projected_5D_electric_Weyl=rec['mode_E5'],
+        receiver_mode_intrinsic_4D_electric_Weyl_tangent=rec['mode_E4_tangent'],
+        receiver_mode_projected_5D_electric_Weyl_tangent=rec['mode_E5_tangent'],
+        receiver_mode_H_T_derivative_readout_disagreement=rec['mode_delta_HT'],
+        receiver_mode_H_TT_derivative_readout_disagreement=rec['mode_delta_HTT'],
         far_mode_intrinsic_4D_electric_Weyl=far['mode_E4'],
         far_mode_projected_5D_electric_Weyl=far['mode_E5'],
+        far_mode_intrinsic_4D_electric_Weyl_tangent=far['mode_E4_tangent'],
+        far_mode_projected_5D_electric_Weyl_tangent=far['mode_E5_tangent'],
         receiver_mode_Hxx=rec['mode_Hxx'],
         receiver_mode_Delta3H=rec['mode_Delta3H'],
         retarded_TT_yy_scaled_by_eps4=yy,
