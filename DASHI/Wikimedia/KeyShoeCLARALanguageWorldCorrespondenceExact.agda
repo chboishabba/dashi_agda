@@ -20,6 +20,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
+import Relation.Binary.PropositionalEquality as Eq
 import DASHI.Wikimedia.KeyShoeCLARAR13DihedralExact as R13
 import DASHI.Wikimedia.KeyShoeCLARAOperatorBoundaryExact as CLARA
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
@@ -151,7 +152,75 @@ reviewedInterpretationCommutesWithWorld bridge =
   interpretationAgreesWithWorldNormalisation bridge
 
 ------------------------------------------------------------------------
--- 4. CLARA's 14 D-stages are typed observer landmarks, not R13 letters
+-- 4. The *joined* diagram: source-typed lexical wheel observation ->
+-- parser/evidential PNF -> world model -> consumer. Equality of a coarse
+-- R13 view implies equality of an actual consumer result ONLY when this
+-- particular source and consumer provide the explicit adequacy witnesses.
+------------------------------------------------------------------------
+
+record R13LanguageWorldWeld
+    {source : Cone.NaturalLanguageExperimentalAssertion}
+    (numeric : Spacy.SensibLawNumericPNFReceipt source)
+    (logical : Cone.PNFCompilationReceipt source)
+    (world : World.PredicateNormalWorldModelCore)
+    (Alphabet Outcome : Set) : Set₁ where
+  constructor r13LanguageWorldWeld
+  field
+    parserWorldCorrespondence :
+      ParserPNFWorldAlgebraCorrespondence numeric logical world
+
+    lexicalEncoding :
+      SourceEncodingForConsumer Alphabet Outcome
+
+    lexicalObservation :
+      World.Observation world → Alphabet
+
+    bodyObservation :
+      World.Observation world → R13.Body13
+
+    bodyObservationAgrees :
+      (observation : World.Observation world) →
+      bodyObservation observation ≡
+      bodyOfLetter
+        (SourceEncodingForConsumer.encode lexicalEncoding
+          (lexicalObservation observation))
+
+    worldConsumer :
+      World.Observation world → Outcome
+
+    worldConsumerAgrees :
+      (observation : World.Observation world) →
+      worldConsumer observation ≡
+      SourceEncodingForConsumer.consumer lexicalEncoding
+        (lexicalObservation observation)
+
+open R13LanguageWorldWeld public
+
+worldConsumerDescendsThroughR13 :
+  ∀ {source : Cone.NaturalLanguageExperimentalAssertion}
+    {numeric : Spacy.SensibLawNumericPNFReceipt source}
+    {logical : Cone.PNFCompilationReceipt source}
+    {world : World.PredicateNormalWorldModelCore}
+    {Alphabet Outcome : Set} →
+  (bridge : R13LanguageWorldWeld
+    numeric logical world Alphabet Outcome) →
+  Descent.ConsumerSufficient
+    (bodyObservation bridge)
+    (worldConsumer bridge)
+worldConsumerDescendsThroughR13 bridge left right same =
+  Eq.trans (worldConsumerAgrees bridge left)
+    (Eq.trans
+      (SourceEncodingForConsumer.bodyAdequateForConsumer
+        (lexicalEncoding bridge)
+        (lexicalObservation bridge left)
+        (lexicalObservation bridge right)
+        (Eq.trans
+          (Eq.sym (bodyObservationAgrees bridge left))
+          (Eq.trans same (bodyObservationAgrees bridge right))))
+      (Eq.sym (worldConsumerAgrees bridge right)))
+
+------------------------------------------------------------------------
+-- 5. CLARA's 14 D-stages are typed observer landmarks, not R13 letters
 -- or automatic legal inference stages. No exported map confuses them.
 ------------------------------------------------------------------------
 
