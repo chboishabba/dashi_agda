@@ -5766,8 +5766,8 @@
       "F3"
     ],
     "expanded_portfolio_gate_total": 28,
-    "expanded_portfolio_decisions_settled": 11,
-    "expanded_portfolio_active_gates": 17,
+    "expanded_portfolio_decisions_settled": 12,
+    "expanded_portfolio_active_gates": 16,
     "expanded_portfolio_scope_warning": "6/28 is count of heterogeneous source/mathematical decisions and open research obligations, not percent of mathematical endpoint completion. One settled B1 gate is refutation of a universal proposed auxiliary.",
     "new_RH_BSD_HODGE_gate_ids": [
       "R1",
@@ -5897,7 +5897,7 @@
           "S5",
           "S6"
         ],
-        "current_roadmap_maxcut": "S1 classical actual E[2] Galois H1 and Q2 local Kummer image exactly 8 via original eight Lean point witnesses + local elliptic group index theorem CLOSED; S2 actual Selmer/Sha short exact sequence CLASSICALLY CLOSED; S3 original MW rank zero classically proved but global four-class Selmer H1 exhaustion OPEN; S4 original L(E,1)>0 CLASSICALLY CLOSED; S5/S6 OPEN. Native Agda/Lean same-object realization OPEN.",
+        "current_roadmap_maxcut": "S1 classical actual original global/local H1 and Q2 eight Kummer classes CLOSED; S2 actual Selmer/Sha exactness CLASSICALLY CLOSED; S3 actual original global Selmer2 four torsion classes, Sha[2]=0, MW rank 0 CLASSICALLY CLOSED; S4 original L(E,1)>0 CLASSICALLY CLOSED. S5 strong selected leading coefficient/odd-primary Sha and S6 universal BSD OPEN. Native Agda/Lean same-object realization OPEN.",
         "terminal_gate_ids": [
           "S6"
         ],
@@ -6181,9 +6181,9 @@
           "DASHI/Mathematics/Arithmetic/EllipticOriginalSelmerCohomologyExhaustionExact.agda",
           "Integration/MillenniumBSDStollMordellWeilAdapter.lean"
         ],
-        "status": "OPEN",
-        "settled": false,
-        "classification": "ORIGINAL_UNPAID_ANALYTIC_OR_GEOMETRIC_PRODUCER",
+        "status": "CLOSED_CLASSICAL_ORIGINAL_SEL2_FOUR_SHA2_ZERO_RANK_ZERO",
+        "settled": true,
+        "classification": "CLASSICAL_ORIGINAL_CURVE_ACTUAL_GLOBAL_H1_SELMER_EXHAUSTION",
         "mathematical_deliverable": "Actual four torsion Selmer classes exhaust all original H¹ and real finite generation gives rank E(Q)=0",
         "acceptance_criteria": "All-place selected cohomology and typed actual elliptic group; Stoll donor version isolated/rechecked",
         "depends_on": [
@@ -6194,11 +6194,19 @@
         "original_endpoint_proved": false,
         "sources_inspected_at_branch": true,
         "original_selected_MW_rank_zero_classically_proved": true,
-        "original_selected_MW_group_classically": "E(Q)={(infinity),(0,0),(1,0),(-1,0)} by Fermat no rational area-1 right triangle",
+        "original_selected_MW_group_classically": "E(Q)={O,(0,0),(1,0),(-1,0)} via Fermat no rational area-one right triangle",
         "original_selected_rank_zero_proof": "Docs/roadmaps/ClayBSDOriginalS1DyadicRealGoodPrimeProducers20261116.md",
-        "actual_all_place_Selmer_H1_exhaustion_proved": false,
-        "selected_Sha2_zero_proved": false,
-        "native_MW_Stoll_adapter_typechecked": false
+        "actual_all_place_Selmer_H1_exhaustion_proved": true,
+        "selected_Sha2_zero_proved": true,
+        "native_MW_Stoll_adapter_typechecked": false,
+        "closure_kind": "CLASSICAL_ACTUAL_ORIGINAL_E_GLOBAL_SELMER_H1_FOUR_TORSION_CLASSES",
+        "actual_global_Selmer_two_cardinality": 4,
+        "actual_global_Selmer_two_dim_F2": 2,
+        "native_actual_original_Selmer_realization_instantiated": false,
+        "proof": "Docs/roadmaps/ClayBSDOriginalS3GlobalSelmerSha2RankZeroClassicalClosure20261116.md",
+        "executed_script": "scripts/check_clay_s3_original_selmer_classical_20261116.py",
+        "S5_odd_primary_Sha_and_leading_coefficient_proved": false,
+        "S6_universal_BSD_proved": false
       },
       {
         "id": "S4",
@@ -6601,6 +6609,7 @@
     "newly_added_settled_gate_ids": [
       "S1",
       "S2",
+      "S3",
       "S4",
       "H1",
       "H2"
@@ -6610,7 +6619,6 @@
       "R2",
       "R3",
       "R4",
-      "S3",
       "S5",
       "S6",
       "H3"
@@ -6624,6 +6632,7 @@
       "F1",
       "S1",
       "S2",
+      "S3",
       "S4",
       "H1",
       "H2"
@@ -6642,7 +6651,6 @@
       "R2",
       "R3",
       "R4",
-      "S3",
       "S5",
       "S6",
       "H3"
@@ -6743,6 +6751,19 @@
       "actual_local_eight_class_exhaustion": true,
       "native_kernel_acceptance": false,
       "S3_open": true
+    },
+    "current_round_20261116_S3_CLASSICAL_CLOSURE": {
+      "gate": "S3",
+      "settled": true,
+      "expanded_decisions_settled": 12,
+      "expanded_gates_open": 16,
+      "original_endpoints_proved": 0,
+      "actual_global_Selmer2_size": 4,
+      "selected_Sha2_zero": true,
+      "original_MW_rank_zero": true,
+      "native_kernel_acceptance": false,
+      "proof": "Docs/roadmaps/ClayBSDOriginalS3GlobalSelmerSha2RankZeroClassicalClosure20261116.md",
+      "script": "scripts/check_clay_s3_original_selmer_classical_20261116.py"
     }
   }
 }
