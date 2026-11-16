@@ -4,7 +4,6 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
-open import Agda.Primitive using (Setω)
 
 import DASHI.Physics.Closure.BothwellYe2022MillimetreRedshiftReceipt as Source
 import DASHI.Physics.Closure.BothwellYe2022PublishedGradientPayloadExact as Payload
@@ -36,7 +35,7 @@ import DASHI.Promotion.SIMetrologyPayloadDependencyDAG as SIDAG
 -- thereby created.
 ------------------------------------------------------------------------
 
-record EmpiricalRedshiftIngestionStatus : Setω where
+record EmpiricalRedshiftIngestionStatus : Set₁ where
   field
     experimentName : String
     sourceReceipt : Source.BothwellYe2022ReceiptBoundary

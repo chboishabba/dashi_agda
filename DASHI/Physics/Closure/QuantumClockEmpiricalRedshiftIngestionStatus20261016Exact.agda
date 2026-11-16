@@ -3,7 +3,6 @@ module DASHI.Physics.Closure.QuantumClockEmpiricalRedshiftIngestionStatus2026101
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Primitive using (Setω)
 
 import DASHI.Physics.Closure.QuantumClockEmpiricalRedshiftIngestionStatusExact as Prior
 import DASHI.Physics.Closure.BothwellYe2022AuthorCorrespondenceReceiptExact as Correspondence
@@ -22,7 +21,7 @@ import DASHI.Physics.Closure.QuantumClockMetricResponseDiscriminatorCompilerExac
 -- remains fail-closed.
 ------------------------------------------------------------------------
 
-record EmpiricalRedshiftCurrentStatus : Setω where
+record EmpiricalRedshiftCurrentStatus : Set₁ where
   field
     priorStatus : Prior.EmpiricalRedshiftIngestionStatus
     priorStatusIsCanonical : priorStatus ≡ Prior.canonicalBothwellYe2022IngestionStatus

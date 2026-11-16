@@ -4,7 +4,6 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
-open import Agda.Primitive using (Setω)
 
 import DASHI.Physics.Closure.QuantumClockProperTimeRedshiftBridge as Redshift
 import DASHI.Physics.Closure.QuantumClockDimensionlessObservableLaw as Dimensionless
@@ -184,7 +183,7 @@ canonicalEquationToMeasurementContact =
         refl
     }
 
-record ExistingMachineryAttachment : Setω where
+record ExistingMachineryAttachment : Set where
   field
     properTimeBridge :
       Redshift.QuantumClockProperTimeRedshiftBridge
@@ -223,7 +222,7 @@ canonicalExistingMachineryAttachment =
         refl
     }
 
-record BothwellYe2022ReceiptBoundary : Setω where
+record BothwellYe2022ReceiptBoundary : Set where
   field
     source :
       BothwellYe2022Source
