@@ -193,8 +193,18 @@ noOtherFundingImpliesSaleProceeds :
   newLoanCash route ≡ 0 →
   grossSaleCash route ≡
     Tax.taxPaidCash (taxExecution route) + executionCashCost route
-noOtherFundingImpliesSaleProceeds route noCash noLoan
-  rewrite noCash | noLoan = fundingBalances route
+noOtherFundingImpliesSaleProceeds route noCash noLoan =
+  subst
+    (λ loan →
+      loan + grossSaleCash route ≡
+        Tax.taxPaidCash (taxExecution route) + executionCashCost route)
+    noLoan
+    (subst
+      (λ cash →
+        cash + newLoanCash route + grossSaleCash route ≡
+          Tax.taxPaidCash (taxExecution route) + executionCashCost route)
+      noCash
+      (fundingBalances route))
 
 taxPaymentForRoute : FundingRoute → Nat
 taxPaymentForRoute route = Tax.taxPaidCash (taxExecution route)
