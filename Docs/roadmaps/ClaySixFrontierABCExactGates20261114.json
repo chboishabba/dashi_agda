@@ -6568,10 +6568,10 @@
       "no_silent_upgrade_of_original_15": true
     },
     "newly_added_settled_gate_ids": [
-      "S4",
-      "H2",
       "S2",
-      "H1"
+      "S4",
+      "H1",
+      "H2"
     ],
     "newly_added_active_gate_ids": [
       "R1",
@@ -6591,10 +6591,10 @@
       "C2",
       "E2",
       "F1",
-      "S4",
-      "H2",
       "S2",
-      "H1"
+      "S4",
+      "H1",
+      "H2"
     ],
     "expanded_portfolio_active_ids": [
       "A1",
