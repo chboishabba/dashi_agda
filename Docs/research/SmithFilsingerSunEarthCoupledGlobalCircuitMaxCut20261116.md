@@ -151,3 +151,40 @@ A local electrical actuator's mW power is a **controller input**, not the energy
 
 ### Precision issue: no frequency conflation
 The 2014 Streltsov et al. HAARP experiment used a megawatt-class HF heater (reported 3.6 MW) whose modulation produced some observed ~7.8 Hz ELF responses. It is NOT evidence of comparable results with mW pumping; nor is Filsinger's acoustic ~7.8 kHz line evidence of the ~7.8 Hz global mode. Use separate Hz/kHz labels throughout.
+
+
+## 2026-11-16 further user-origin hypothesis: **off-phase source/sink maintained by common midpoint and plate**
+
+**User hypothesis (not a Filsinger quotation):** the common-midpoint and 1:1.618 plate may be intended to sustain a reasonably consistent *off-phase* pair of source/sink branches, instead of merely selecting two frequencies or geometries.
+
+**Recovered original provenance, before cross-paper inference:**
+- `Docs/research/FilsingerDonSmithGoldenRectangleLissajousMaxCut20261111.md` says the proposed topology creates a common midpoint, elevated plate, and opposite capacitor-polarity branches; it explicitly distinguishes the actually narrated Earth-ground arrangement from the unbuilt portable arrangement.
+- `Docs/research/SmithFilsingerGoldenFibonacciSingleWaveMaxCut20261112.md` gives Smith compiled PDF pp80–82 Figs 53–55 as opposed/out-of-phase secondaries and rectifier arrangements, not a measured 90-degree circular surface current. It also distinguishes Smith 1:4 winding length and Filsinger golden plate as separate original claims.
+- `Docs/research/SmithFilsingerNonlinearQuadratureMaxCut20261112.md` provides conditional nonlinear 2-mode exchange/energy ledger, not same-original physical couplings.
+- `Docs/research/FilsingerEarthCosmicGoldenTwoModeOptimisation20261111.md` gives physically source-limited two-mode reference, including some phase circularity and loss/extractive damping cases, but has synthetic spectra and no actual Maxwell conductor result.
+
+### Three candidate mechanisms—don't conflate
+1. **Push–pull/opposed branches (180° voltage phase):** write terminal potentials `v_plus=v_common+v_diff/2`, `v_minus=v_common-v_diff/2`, so `v_plus-v_minus=v_diff`. For an ideal between-terminal branch with `i_plus=i`, `i_minus=-i`, instantaneous signed terminal work satisfies `p_plus+p_minus = (v_plus-v_minus)*i = v_diff*i`. Opposed *potentials* alone do not prove one port is producing net natural work, and a physical conductive/capacitive displacement return still must be selected.
+2. **Orthogonal modes (near 90° quadrature):** a single coherent feed can drive two geometric resonances with modal responses `a_j=H_j(omega)s_j`, `H_j=(gamma_j+i(omega_j-omega))^-1`; the phase difference `arg(a_y)-arg(a_x)` is time stationary at fixed source frequency and parameters, even if the modes have different eigenfrequencies. When resonance splitting and damping are appropriately matched the phase can approach quadrature; this yields a rotating *field vector* or polarization but NOT automatically a closed Maxwell conductor-current loop or harvesting.
+3. **Beating / nonlinear phase entrainment:** two independent self-oscillators with `omega_1 != omega_2` have `Delta phi(t)=Delta phi(0)+(omega_2-omega_1)t`, so geometry alone does not maintain a fixed off-phase relation. A common coherent drive or nonlinear injection locking can maintain a stable relative phase within a locking range; the actual coupling coefficient, phase noise and source backaction are OPEN.
+
+The golden ratio may be useful as a geometric detuning or modal density choice, but it does **not by itself encode 90° or 180°**. In prior original-repo synthetic `Q=50`, `f_y/f_x≈1.618` and drive at the x-mode, the y-mode's amplitude is only ~0.03235 of x and the circularity ~0.06463; balanced quadrature requires reactive tuning, changed loading or common-drive design. This synthetic counterexample disallows promoting aspect ratio to a universal phase relation.
+
+### What source/sink should mean physically
+- Alternating *instantaneous* local power, capacitive stored energy and inductive reactive exchange are distinct from positive long-run *natural environmental* work.
+- Under load, the phases of voltage, current and local E/B need separate definitions: `P_real=Re(V I*)/2` for peak phasors, not simply the sign of voltage.
+- The fields may exchange energy internally between modal amplitudes, while both modes are being supplied by the powered ZVS. In a real *receiver*, a source/sink interpretation requires a signed environmental Poynting or electrical port plus sink load, pump and loss.
+- For the Sun/atmosphere extension, the useful hypothesis is coherent, appropriately delayed differential **boundary modulation** that reduces pump cost or changes uptake from a naturally supplied field—not a self-generating opposite-phase source.
+
+### Prior art / attribution
+- S. K. Lee, A. Sambell, E. Korolkiewicz, S. F. Loh, S. F. Ooi and Y. Qin (2005), *A Design Procedure for a Circular Polarized, Nearly Square Patch Antenna*, Microwave Journal, https://www.microwavejournal.com/articles/935-a-design-procedure-for-a-circular-polarized-nearly-square-patch-antenna . Near-degenerate orthogonal modes with equal amplitude and quadrature phase require feed geometry/perturbation; not Filsinger data.
+- *Temporal coupled-mode theory* for two resonators (2021 accepted APS manuscript), https://doi.org/10.1103/PhysRevLett.127.013902 . Detuning, reciprocal mode exchange and dissipation mathematics; this does not claim the Filsinger geometry has specified coefficients.
+- Original Smith/Kelly/Darrer figure, Filsinger narrative and user interpretation are separately attributed above. The differential-port identity and proposed source/sink discriminator are **new DASHI extension**.
+
+### New explicit OPEN gates, subordinate to S3/S5/S8 and original C1/C2/C3
+- `S5b originalMidpointDifferentialPolarity`: reconstruct exact portable candidate ports from reel, keep source vs conjectured wiring separate; two signed capacitor branches, diodes, plate feed, reference and return.
+- `S5c sourceSinkPhaseTransfer`: for the SAME physical configuration, measure/common-driver-reconstruct terminal `v,i`, modal E/B, cross-spectra, relative phase, bandwidth, loading and feedback stability; distinguish 180° differential from 90° polarization and two-tone beating.
+- `S5d phaseLockVsGoldenGeometryCounterexample`: prove a stationary common-drive modal phase in a linear specified model; prove absent specified locking the free-running detuned phases drift; verify fixed phi geometry cannot alone guarantee balanced quadrature.
+- `S8c sameEnvironmentalSourceSinkWork`: identify actual independently powered external field/work and delivered load work after ZVS input, storage, losses, passive reactive exchange. Use matched tuned/control boundary dynamics, not apparent terminal sign.
+
+**Status:** source-checked conditional interpretation and paper provenance; no new Agda kernel certificate, physical phase measurement or claim of verified natural power transfer.
