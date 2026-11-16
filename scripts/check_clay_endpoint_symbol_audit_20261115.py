@@ -198,9 +198,9 @@ def main() -> int:
     if (scope.get("legacy_gate_total") != 15
             or scope.get("legacy_source_or_math_decisions_settled") != 6
             or scope.get("legacy_active_gates") != 9
-            or scope.get("expanded_portfolio_decisions_settled") != 10
-            or scope.get("expanded_portfolio_active_gates") != 18
-            or scope.get("expanded_portfolio_decision_ids") != completed + ["S2", "S4", "H1", "H2"]
+            or scope.get("expanded_portfolio_decisions_settled") != 11
+            or scope.get("expanded_portfolio_active_gates") != 17
+            or scope.get("expanded_portfolio_decision_ids") != completed + ["S1", "S2", "S4", "H1", "H2"]
             or scope.get("expanded_portfolio_active_ids") != active +
                 [g.get("id") for g in added if g.get("settled") is not True]
             or scope.get("legacy_completed_ids") != completed
@@ -227,10 +227,24 @@ def main() -> int:
             g.get("status") != "OPEN" or
             g.get("native_kernel_acceptance") is not False or
             g.get("original_endpoint_proved") is not False)
-           for g in added if g.get("id") not in ("S2", "S4", "H1", "H2")):
-        problems.append("OTHER_NINE_NEW_RH_BSD_HODGE_GATE_FALSELY_PROVED")
-    if scope.get("newly_added_settled_gate_ids") != ["S2", "S4", "H1", "H2"]:
+           for g in added if g.get("id") not in ("S1", "S2", "S4", "H1", "H2")):
+        problems.append("OTHER_EIGHT_NEW_RH_BSD_HODGE_GATE_FALSELY_PROVED")
+    if scope.get("newly_added_settled_gate_ids") != ["S1", "S2", "S4", "H1", "H2"]:
         problems.append("BSD_S4_EXPANDED_DECISION_ID_MISMATCH")
+    s1 = next((g for g in added if g.get("id") == "S1"), None)
+    if (s1 is None
+            or s1.get("settled") is not True
+            or s1.get("status") !=
+                "CLOSED_CLASSICAL_ACTUAL_Q2_EIGHT_KUMMER_IMAGE_AND_GLOBAL_H1"
+            or s1.get("actual_Q2_local_Kummer_image_cardinality") != 8
+            or s1.get("actual_Q2_local_image_all_eight_witnesses_distinct") is not True
+            or s1.get("local_Kummer_image_8class_exhaustion_proved") is not True
+            or s1.get("native_actual_H1_implementation_instantiated") is not False
+            or s1.get("native_kernel_acceptance") is not False
+            or s1.get("original_endpoint_proved") is not False
+            or not (ROOT / "Docs/roadmaps/ClayBSDOriginalS1Q2EightImageClassicalClosure20261116.md").is_file()
+            or not (ROOT / "scripts/check_clay_s1_original_q2_eight_image_20261116.py").is_file()):
+        problems.append("BSD_S1_ORIGINAL_Q2_EIGHT_CLASSICAL_NATIVE_FIREWALL_MISSING")
     h1 = next((g for g in added if g.get("id") == "H1"), None)
     if (h1 is None
             or h1.get("settled") is not True
