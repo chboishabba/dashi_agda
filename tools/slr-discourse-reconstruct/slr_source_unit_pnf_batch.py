@@ -84,6 +84,23 @@ def process_source_unit(row: dict[str, Any], *, base_dir: Path) -> dict[str, Any
             sentence_end=int(sent.end_char),
             sentence_sha256=sha256_text(sent.text),
         ))
+    # Retain the actual trained spaCy NER observations. These are spans,
+    # not people identities or world facts, and leave the PNF ABI intact.
+    named_entities = []
+    for ent in doc.ents:
+        if text[int(ent.start_char):int(ent.end_char)] != ent.text:
+            raise ValueError("spaCy entity span does not match exact source text")
+        named_entities.append({
+            "surface": ent.text,
+            "start_char": int(ent.start_char),
+            "end_char": int(ent.end_char),
+            "label_ref": ent.label_,
+            "source_unit_ref": source_unit_ref,
+            "revision_ref": revision_ref,
+            "candidate_only": True,
+            "semantic_promotion": False,
+            "entity_identity_paid": False,
+        })
     return {
         "schema": "slr-source-unit-pnf-record-v1",
         "source_unit_ref": source_unit_ref,
@@ -105,10 +122,12 @@ def process_source_unit(row: dict[str, Any], *, base_dir: Path) -> dict[str, Any
             "parser_output_is_promotion_authority": False,
         },
         "pnf_candidates": candidates,
+        "named_entities": named_entities,
         "summary": {
             "tokens": len(doc),
             "sentences": len(candidates),
             "pnf_candidates": len(candidates),
+            "named_entities": len(named_entities),
         },
         "source_role_creates_claim_truth": False,
         "parser_output_creates_ontology_truth": False,
