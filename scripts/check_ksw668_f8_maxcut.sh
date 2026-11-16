@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# KSW original a=t AdS5: 326 DISTINCT source-equivalent F8 regression cases.
+# KSW original a=t AdS5: discover all current source-equivalent F8 regression tests.
 # Full 3D numerical acceptance is separate; failures remain explicit.
 set -euo pipefail
 cd "$(dirname "$0")/.."
@@ -8,9 +8,19 @@ if [ "$#" -gt 0 ]; then mode="$1"; fi
 export PYTHONPATH="scripts:."
 python3 -m unittest discover -s scripts -p 'test_ksw668_f8_*.py' -v
 if [ "$mode" = "--smoke" ]; then
-  echo "F8 smoke PASS only: 326 distinct local source-level tests."
+  echo "F8 smoke PASS: all dynamically discovered source-equivalent tests (count in unittest output)."
   echo "3D tensor/Weyl convergence, Agda, matter action and observation NOT ACCEPTED."
   exit 0
+fi
+if [ "$mode" = "--ternary-codec" ]; then
+  python3 scripts/ksw668_f8_ternary_three_harmonic_consumer.py
+  echo "F8 X Base369 unsigned ternary q0/1/2 exact channel codec and C3 physical no-go PASS."
+  echo "Original source-to-both-Weyl and complete experiment still OPEN."
+  exit 0
+fi
+if [ "$mode" = "--ternary-two-grid" ]; then
+  python3 scripts/ksw668_f8_ternary_channel_drift.py --reproduce
+  exit $?
 fi
 if [ "$mode" = "--constraint-audit" ]; then
   python3 scripts/ksw668_f8_characteristic_constraint_maxcut.py
@@ -60,5 +70,5 @@ PY
   echo "Provisional numeric thresholds met; analytic/Agda/physical gates separate."
   exit 0
 fi
-echo "Usage: $0 --smoke | --constraint-audit | --weighted-two-grid | --normal-compare | --legacy-full | --multipole-full | --full" >&2
+echo "Usage: $0 --smoke | --ternary-codec | --ternary-two-grid | --constraint-audit | --weighted-two-grid | --normal-compare | --legacy-full | --multipole-full | --full" >&2
 exit 2
