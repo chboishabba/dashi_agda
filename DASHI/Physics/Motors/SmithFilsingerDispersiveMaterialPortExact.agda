@@ -91,3 +91,78 @@ record OriginalDispersiveSourceWeld : Set₁ where
     phaseTrace : LocalPhaseAndWaveformMeasurements
     fieldSolution : CausalMaxwellSpatialSourceResponse
     replenishmentReceipt : SourceReplenishmentOverRepeatableCycle
+
+
+------------------------------------------------------------------------
+-- 2026-11-16 P2-PHYS: source-ACCESS admission, never source invention.
+--
+-- A positive-real impedance can support large displacement or memory
+-- currents while delivering zero new natural input on a repeatable cycle.
+-- The external atmosphere/soil measurement supplies an INDEPENDENT bound
+-- before the receiving optimisation may claim physical access.
+------------------------------------------------------------------------
+
+record AdmittedNaturalAccessCap : Set where
+  constructor admittedNaturalAccessCap
+  field
+    naturallyDeliveredWork unusedPotentialWork admittedTerminalCap : Nat
+    sameSourcePortBound :
+      naturallyDeliveredWork + unusedPotentialWork ≡ admittedTerminalCap
+
+naturalWorkCannotExceedMeasuredAccessCap :
+  (r : AdmittedNaturalAccessCap) →
+  Bound._≤_ (AdmittedNaturalAccessCap.naturallyDeliveredWork r)
+            (AdmittedNaturalAccessCap.admittedTerminalCap r)
+naturalWorkCannotExceedMeasuredAccessCap r =
+  Bound.transportUpper
+    (AdmittedNaturalAccessCap.sameSourcePortBound r)
+    (Bound.≤-append (AdmittedNaturalAccessCap.naturallyDeliveredWork r)
+      (AdmittedNaturalAccessCap.unusedPotentialWork r))
+
+-- Complete-state periodic return: the admitted source CAP includes any
+-- inaccessible capacity and cannot be enlarged by mere reactive cycles.
+-- This ledger is intentionally stricter than the finite-donor witness.
+record TerminalCapRepeatableCycle : Set where
+  constructor terminalCapRepeatableCycle
+  field
+    naturalSourceAccessCap driverWork modulatorWork : Nat
+    usefulLoadWork lossesAndRadiation unusedNaturalHeadroom : Nat
+    selectedSourceAndSameCycleBalance :
+      ((naturalSourceAccessCap + driverWork) + modulatorWork)
+        ≡ usefulLoadWork + (lossesAndRadiation + unusedNaturalHeadroom)
+
+loadBelowAdmittedSourcePlusDriveAndModulation :
+  (r : TerminalCapRepeatableCycle) →
+  Bound._≤_ (TerminalCapRepeatableCycle.usefulLoadWork r)
+    ((TerminalCapRepeatableCycle.naturalSourceAccessCap r
+        + TerminalCapRepeatableCycle.driverWork r)
+        + TerminalCapRepeatableCycle.modulatorWork r)
+loadBelowAdmittedSourcePlusDriveAndModulation r =
+  Bound.transportUpper
+    (Bound.sym (TerminalCapRepeatableCycle.selectedSourceAndSameCycleBalance r))
+    (Bound.≤-append (TerminalCapRepeatableCycle.usefulLoadWork r)
+      (TerminalCapRepeatableCycle.lossesAndRadiation r
+       + TerminalCapRepeatableCycle.unusedNaturalHeadroom r))
+
+-- Constructive NEGATIVE control: internal reactive traffic may be nonzero
+-- while the admitted natural work and useful work are both zero.
+-- This is not an empirical Hall, soil, or Maxwell measurement.
+reactiveTransportWithoutNaturalWork : TerminalCapRepeatableCycle
+reactiveTransportWithoutNaturalWork =
+  terminalCapRepeatableCycle 0 0 0 0 0 0 refl
+
+-- Physical promotion is still absent. The full original source admittance
+-- must be separately calibrated under actual phase and load changes.
+record SameOriginalAdmittanceAdmission : Set₁ where
+  field
+    originalDispersiveWitness : OriginalDispersiveSourceWeld
+    SelectedElectrodeAndCollectorGeometry : Set
+    MeasuredLocalElectricFieldAndSoilResponse : Set
+    IndependentNaturalSourceTheveninOrRetardedOperator : Set
+    TimedLoadDriveControllerAndStoredState : Set
+    CalibratedRealAndReactivePowers : Set
+    chosenGeometry : SelectedElectrodeAndCollectorGeometry
+    localFields : MeasuredLocalElectricFieldAndSoilResponse
+    sourceOperator : IndependentNaturalSourceTheveninOrRetardedOperator
+    synchronousTrace : TimedLoadDriveControllerAndStoredState
+    realReactiveReceipt : CalibratedRealAndReactivePowers
