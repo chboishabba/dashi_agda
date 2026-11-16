@@ -275,7 +275,23 @@ def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
         # Source-free receiver: SMS projected 5D Weyl=-delta G4 TT.
         E5=-(Hetaeta+2*Heta-sum(lapieces))/(2*final_t**2)
         E5_tangent=-(Hetaeta_tangent+2*S*HT_from_tangent-sum(lapieces))/(2*final_t**2)
-        return dict(E4_tangent=E4_tangent,E5_tangent=E5_tangent,
+        # Physically exact linear receiver attribution across native Base369
+        # unsigned channel slots q=0,1,2 -> ell=2q. The channel values are
+        # real physical amplitudes, NOT ternary digits; cyclic C3 rotation is
+        # NOT an AdS radial PDE symmetry (d=3/7/11 differ).
+        mode_HT=[(tnext[j]-tprev[j])/(2*dt) for j in range(3)]
+        mode_HTT=[(tnext[j]-2*pieces[j]+tprev[j])/(dt*dt) for j in range(3)]
+        mode_Heta=[S*x for x in mode_HT]
+        mode_Hetaeta=[S*S*mode_HTT[j]-mode_HT[j]/(final_t*math.sqrt(1+final_t*final_t)) for j in range(3)]
+        mode_E4=[-(mode_Hetaeta[j]+derivxx[j])/(4*final_t**2) for j in range(3)]
+        mode_E5=[-(mode_Hetaeta[j]+2*mode_Heta[j]-lapieces[j])/(2*final_t**2) for j in range(3)]
+        for mode_values,total in ((pieces,H),(mode_E4,E4),(mode_E5,E5)):
+            if abs(sum(mode_values)-total)>1e-10*max(1.,abs(total)):
+                raise ValueError('Original ternary-channel linear Weyl reconstruction inconsistent')
+        return dict(mode_ternary_digits=[0,1,2],mode_ell=[0,2,4],
+           mode_E4=mode_E4,mode_E5=mode_E5,
+           mode_Hxx=derivxx,mode_Delta3H=lapieces,
+           E4_tangent=E4_tangent,E5_tangent=E5_tangent,
            HT_from_tangent=HT_from_tangent,HTT_from_tangent=HTT_from_tangent,
            r=r,mode_values=pieces,H=H,Hxx=sum(derivxx),
            Delta3H=sum(lapieces),HT=HT,HTT=HTT,
@@ -311,6 +327,15 @@ def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
         full_moving_T_y_r_SSPRK3_stability_certified=False,
         receiver_convergence_not_implied_by_discrete_energy=True,
         raw_mode_values=components,
+        unsigned_ternary_mode_digits=[0,1,2],
+        unsigned_ternary_harmonic_ell=[0,2,4],
+        unsigned_ternary_codec_not_physical_C3_action=True,
+        receiver_mode_intrinsic_4D_electric_Weyl=rec['mode_E4'],
+        receiver_mode_projected_5D_electric_Weyl=rec['mode_E5'],
+        far_mode_intrinsic_4D_electric_Weyl=far['mode_E4'],
+        far_mode_projected_5D_electric_Weyl=far['mode_E5'],
+        receiver_mode_Hxx=rec['mode_Hxx'],
+        receiver_mode_Delta3H=rec['mode_Delta3H'],
         retarded_TT_yy_scaled_by_eps4=yy,
         far_receiver_grid_r=far_r,far_mode_values=fc,
         far_TT_yy_scaled_by_eps4=fy,
