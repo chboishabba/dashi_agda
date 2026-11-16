@@ -73,6 +73,35 @@ sourceMatchSquareGapBelow u gap split =
             := ((con 4 :* x) :+ (y :* y)))
           refl u gap)))
 
+-- F05 strengthened: *all rationally representable* positive source
+-- ratios u=x/y (y>0 for physical interpretation), denominator cleared.
+-- In either branch of the order comparison x=y+d or y=x+d,
+-- (x+y)^2 = 4xy+d^2. This is a cross-multiplied square-gap certificate
+-- over arbitrary Nat x,y,d; no unproved division or subtraction.
+sourceMatchRationalAbove :
+  (denominator gap : Nat) →
+  ((denominator + gap) + denominator) *
+    ((denominator + gap) + denominator)
+    ≡ 4 * ((denominator + gap) * denominator) + gap * gap
+sourceMatchRationalAbove denominator gap =
+  solve 2
+    (λ y d →
+      (((y :+ d) :+ y) :* ((y :+ d) :+ y))
+      := ((con 4 :* ((y :+ d) :* y)) :+ (d :* d)))
+    refl denominator gap
+
+sourceMatchRationalBelow :
+  (numerator gap : Nat) →
+  (numerator + (numerator + gap)) *
+    (numerator + (numerator + gap))
+    ≡ 4 * (numerator * (numerator + gap)) + gap * gap
+sourceMatchRationalBelow numerator gap =
+  solve 2
+    (λ x d →
+      ((x :+ (x :+ d)) :* (x :+ (x :+ d)))
+      := ((con 4 :* (x :* (x :+ d))) :+ (d :* d)))
+    refl numerator gap
+
 -- F06: exact two-slot complementarity is the discrete, nontrigonometric
 -- analogue of g + a sin(t), g + a sin(t+pi). At every slot, an internally
 -- controlled branch goes high exactly when the other goes low.
