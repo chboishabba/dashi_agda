@@ -64,11 +64,8 @@ record SolarGroundCoolingNetwork : Set where
     condenserToPreheat condenserToUsefulHeat condenserLoss : Nat
     condenserOutputPartition :
       condenserHeat selectedWaterCycle ≡
-      condenserToPreheat + (condenserToUsefulHeat + condenserLoss)
+      condenserToPreheat + (condenserToUsefulHeat + (groundSinkHeat + condenserLoss))
 
-    -- Ground-sink heat rejection is separately measured: it is not
-    -- the same energy object as solar input or useful exported heat.
-    groundSinkNetworkAuthority : groundSinkHeat ≡ groundSinkHeat
 
 open SolarGroundCoolingNetwork public
 
@@ -90,7 +87,6 @@ toyGroundAssistedCoolSolar =
     0 0 0 0
     toyCompressionLedger refl
     300 506 0 refl
-    refl
 
 -- No physical conclusion about a real compressor or groundwater loop
 -- follows from the synthetic existence witness.
