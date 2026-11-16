@@ -1,4 +1,8 @@
 module DASHI.Unified.Everything where
+
+-- PV-first 369/optical-conversion spine. Thermal only as an auxiliary.
+-- Source-written draft: physical same-material and Agda acceptance remain open.
+import DASHI.Unified.PVPrimaryTOESpliceExact as PVPrimaryTOE
 import DASHI.Empirical.KozyrevMirrorClaimTesting as KozyrevMirror
 -- Reuse source-typed finite Sonic Warfare witness; no external promotion.
 import DASHI.Culture.GoodmanSonicWarfareExact as GoodmanSonicWarfare
