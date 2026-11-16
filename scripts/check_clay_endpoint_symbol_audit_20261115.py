@@ -198,9 +198,9 @@ def main() -> int:
     if (scope.get("legacy_gate_total") != 15
             or scope.get("legacy_source_or_math_decisions_settled") != 6
             or scope.get("legacy_active_gates") != 9
-            or scope.get("expanded_portfolio_decisions_settled") != 8
-            or scope.get("expanded_portfolio_active_gates") != 20
-            or scope.get("expanded_portfolio_decision_ids") != completed + ["S4", "H2"]
+            or scope.get("expanded_portfolio_decisions_settled") != 9
+            or scope.get("expanded_portfolio_active_gates") != 19
+            or scope.get("expanded_portfolio_decision_ids") != completed + ["S2", "S4", "H2"]
             or scope.get("expanded_portfolio_active_ids") != active +
                 [g.get("id") for g in added if g.get("settled") is not True]
             or scope.get("legacy_completed_ids") != completed
@@ -227,9 +227,9 @@ def main() -> int:
             g.get("status") != "OPEN" or
             g.get("native_kernel_acceptance") is not False or
             g.get("original_endpoint_proved") is not False)
-           for g in added if g.get("id") not in ("S4", "H2")):
-        problems.append("OTHER_ELEVEN_NEW_RH_BSD_HODGE_GATE_FALSELY_PROVED")
-    if scope.get("newly_added_settled_gate_ids") != ["S4", "H2"]:
+           for g in added if g.get("id") not in ("S2", "S4", "H2")):
+        problems.append("OTHER_TEN_NEW_RH_BSD_HODGE_GATE_FALSELY_PROVED")
+    if scope.get("newly_added_settled_gate_ids") != ["S2", "S4", "H2"]:
         problems.append("BSD_S4_EXPANDED_DECISION_ID_MISMATCH")
     h2 = next((g for g in added if g.get("id") == "H2"), None)
     if (h2 is None
@@ -249,7 +249,23 @@ def main() -> int:
         hg = next((g for g in added if g.get("id") == leaf), None)
         if hg is None or hg.get("settled") is not False:
             problems.append("HODGE_"+leaf+"_FALSELY_PROMOTED_FROM_CP1_SPECIAL_CASE")
-    for leaf in ("S1","S2","S3","S5","S6"):
+    s2 = next((g for g in added if g.get("id") == "S2"), None)
+    if (s2 is None
+            or s2.get("settled") is not True
+            or s2.get("status") !=
+                "CLOSED_CLASSICAL_ACTUAL_GLOBAL_LOCAL_KUMMER_SHA_TWO_EXACT_SEQUENCE"
+            or s2.get("mathematical_actual_E_valued_Sha_kernel") is not True
+            or s2.get("mathematical_all_place_local_Kummer_H1_exact") is not True
+            or s2.get("mathematical_Selmer_to_classical_Sha_two_surjective") is not True
+            or s2.get("native_actual_Sha_two_exact_sequence_typechecked") is not False
+            or s2.get("mathematical_original_rank_zero_proved") is not False
+            or s2.get("mathematical_universal_BSD_proved") is not False
+            or s2.get("native_kernel_acceptance") is not False
+            or s2.get("original_endpoint_proved") is not False
+            or not (ROOT / "Docs/roadmaps/ClayBSDOriginalS2ActualKummerShaClassicalClosure20261116.md").is_file()
+            or not (ROOT / "scripts/check_clay_s2_actual_kummer_sha_classical_20261116.py").is_file()):
+        problems.append("BSD_S2_ACTUAL_CLASSICAL_SHA_KUMMER_NATIVE_OR_UNIVERSAL_FIREWALL_MISSING")
+    for leaf in ("S1","S3","S5","S6"):
         g = next((g for g in added if g.get("id") == leaf), None)
         if g is None or g.get("settled") is not False:
             problems.append("BSD_"+leaf+"_FALSELY_PROMOTED_FROM_S4_ANALYTIC_POSITIVITY")
