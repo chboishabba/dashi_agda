@@ -6094,7 +6094,15 @@
         ],
         "native_kernel_acceptance": false,
         "original_endpoint_proved": false,
-        "sources_inspected_at_branch": true
+        "sources_inspected_at_branch": true,
+        "actual_Q2_point_x_valuation_even_classically_proved": true,
+        "actual_real_point_sign_diagonal_classically_proved": true,
+        "good_odd_prime_unramified_Sunit_support_classically_proved": true,
+        "global_H1_square_class_identification_natively_typechecked": false,
+        "local_Kummer_image_8class_exhaustion_proved": false,
+        "source_same_object_real_dyadic_producers_natively_typechecked": false,
+        "progress_proof": "Docs/roadmaps/ClayBSDOriginalS1DyadicRealGoodPrimeProducers20261116.md",
+        "progress_script": "scripts/check_clay_s1_actual_local_valuation_20261116.py"
       },
       {
         "id": "S2",
@@ -6167,7 +6175,13 @@
         ],
         "native_kernel_acceptance": false,
         "original_endpoint_proved": false,
-        "sources_inspected_at_branch": true
+        "sources_inspected_at_branch": true,
+        "original_selected_MW_rank_zero_classically_proved": true,
+        "original_selected_MW_group_classically": "E(Q)={(infinity),(0,0),(1,0),(-1,0)} by Fermat no rational area-1 right triangle",
+        "original_selected_rank_zero_proof": "Docs/roadmaps/ClayBSDOriginalS1DyadicRealGoodPrimeProducers20261116.md",
+        "actual_all_place_Selmer_H1_exhaustion_proved": false,
+        "selected_Sha2_zero_proved": false,
+        "native_MW_Stoll_adapter_typechecked": false
       },
       {
         "id": "S4",
@@ -6682,6 +6696,24 @@
       "old_15_gates_unchanged": true,
       "remaining_expanded_active_count": 18,
       "resolved_expanded_count": 10
+    },
+    "current_round_20261116_S1_S3_partial": {
+      "new_gates_closed": 0,
+      "expanded_decisions_settled": 10,
+      "expanded_gates_open": 18,
+      "original_endpoints_proved": 0,
+      "mathematical_results": [
+        "Original E(Q2) nonzero x valuation even",
+        "Original E(R) Kummer sign diagonal for non-torsion points",
+        "Good odd prime unramified square-class support via classical Kummer theory",
+        "Original E(Q) rank zero via Fermat noncongruent-number-1 theorem"
+      ],
+      "unpaid": [
+        "S1 actual local Kummer H1 and 8-class exhaustion",
+        "S3 all-place Selmer H1 exhaustion and Sha[2]"
+      ],
+      "proof": "Docs/roadmaps/ClayBSDOriginalS1DyadicRealGoodPrimeProducers20261116.md",
+      "regression": "scripts/check_clay_s1_actual_local_valuation_20261116.py"
     }
   }
 }
