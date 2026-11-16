@@ -62,3 +62,24 @@ The source `AtomicPeriodicTable369P2CoulombExecutionExact.agda` produces an actu
 - Independent PV efficiency: Green et al., 2026; Fraunhofer/ESTI certification, DOI above.
 - Optical selection: NIST Atomic Spectroscopy; real NV defect source cited above.
 - Earlier field-assisted QD, Franz–Keldysh, fission, engineered biology and thermal provenance remain in `PV369PrimaryConversionNotThermalMaxCut20261116.md` and original source files; no need to repeat or reattribute those to DASHI.
+
+## P3 first source-spectrum break-even bound for Stark/RF modulation
+
+Against the **actual G173 one-sun global spectrum**, the same radiative-only single-junction diode model gives the following gross idealised electrical output if (counterfactually) a field-induced *optical* gap shift could be treated as a **fully collected electrical absorption-edge** shift:
+
+| Counterfactual effective gap | Baseline ideal W/m² | Shifted ideal W/m² | Most NET actuator + aux work allowable before gain disappears |
+|---|---:|---:|---:|
+| GaAs-like 1.424 -> 1.350 eV | 331.806 | 337.279 | **5.473 W/m²** |
+| GaAs-like 1.424 -> 1.336 eV | 331.806 | 337.853 | **6.047 W/m²** |
+| hypothetical dot 2.000 -> 1.800 eV | 228.845 | 272.119 | **43.274 W/m²** |
+| hypothetical dot 2.000 -> 1.500 eV | 228.845 | 321.567 | **92.721 W/m²** |
+| hypothetical dot 2.000 -> 1.400 eV | 228.845 | 334.988 | **106.142 W/m²** |
+| control 2.000 -> 2.000 eV | 228.845 | 228.845 | **0.000 W/m²** |
+
+These are **optimistic break-even thought experiments**, not real Stark-device predictions, and not a thermodynamic upper bound independent of the stipulated model. An observed THz optical Stark shift does **NOT** establish that a dot has acquired corresponding long-lived electrical states, useful contacts, or a new fully collecting step-absorption edge. Driving at a very large peak field during picosecond pulses does not mean those fields can be sustained with a small mean energy input under natural sunlight. The >0.5 eV observation is Pein et al. 2017, https://doi.org/10.1021/acs.nanolett.7b01837 , and must retain its actual transient optical character.
+
+The useful discriminator is conditional:
+`P_net,drive - P_net,passive = ΔP_radiative_ideal - P_RF,net - P_transport_and_spectral_loss - P_aux`.
+If independently measured `P_RF,net` alone exceeds the optimistic gross `ΔP`, the driven device cannot win under that assumed material-output mapping. In a multijunction tandem, lowering one junction's gap can *steal* photons from another, so a single-junction positive number is **not** an additive tandem gain; recompute the whole transfer+series/4T system.
+
+Reproducible source: `scripts/check_pv_astm_g173_radiative.py` now also emits `hypothetical_stark_gross_break_even` with the same specified ideal model. NIST E1 parity and scalar p²-Coulomb negative controls were separately added to `scripts/check_pv_c3_optical_discriminator.py`. Existing 31 local finite test claims refer to the earlier script; **three new negative-control assertions were exercised in an equivalent standalone local calculation, but the modified GitHub checker was not rerun from a working checkout**. Local proof-kernel acceptance remains open.
