@@ -3,6 +3,7 @@ module DASHI.Physics.Closure.QuantumClockEmpiricalRedshiftIngestionStatus2026101
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Primitive using (Setω)
 
 import DASHI.Physics.Closure.QuantumClockEmpiricalRedshiftIngestionStatus20261016Exact as Prior
 import DASHI.Physics.Closure.ZhengKolkowitz2023TransportAttemptReceiptExact as Transport
@@ -19,7 +20,7 @@ import DASHI.Physics.Closure.QuantumClockEmpiricalDebtRouting20261017Exact as De
 --     empirical-evidence debt, not missing mathematics.
 ------------------------------------------------------------------------
 
-record EmpiricalRedshiftCurrentStatus20261017 : Set₁ where
+record EmpiricalRedshiftCurrentStatus20261017 : Setω where
   field
     priorStatus20261016 : Prior.EmpiricalRedshiftCurrentStatus
     priorStatus20261016IsCanonical :
