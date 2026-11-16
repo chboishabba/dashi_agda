@@ -306,6 +306,50 @@ matchedWorldsCrossBalance tuned control =
       (cong (λ z → z + input tuned)
         (SameBoundaryStep.balance control)))
 
+
+-- F11 concrete source-backaction *possibility witness*. Both worlds begin
+-- with the same 4 storage quanta and have the same controller, modulation,
+-- outgoing loss and final stored energy. The tuned world is assigned one
+-- more natural input quantum, exactly paying one more useful load quantum.
+-- No cause for that extra natural source work is assumed or proved.
+tunedFiniteWorld : SameBoundaryStep 4
+tunedFiniteWorld = record
+  { natural = 3
+  ; controller = 2
+  ; modulator = 0
+  ; load = 6
+  ; loss = 1
+  ; finalStorage = 2
+  ; balance = refl
+  }
+
+controlFiniteWorld : SameBoundaryStep 4
+controlFiniteWorld = record
+  { natural = 2
+  ; controller = 2
+  ; modulator = 0
+  ; load = 5
+  ; loss = 1
+  ; finalStorage = 2
+  ; balance = refl
+  }
+
+matchedSourceDifferenceWitness :
+  SameBoundaryStep.natural tunedFiniteWorld
+    ≡ suc (SameBoundaryStep.natural controlFiniteWorld)
+matchedSourceDifferenceWitness = refl
+
+matchedUsefulDifferenceWitness :
+  SameBoundaryStep.load tunedFiniteWorld
+    ≡ suc (SameBoundaryStep.load controlFiniteWorld)
+matchedUsefulDifferenceWitness = refl
+
+matchedFiniteWorldsPayFullWork :
+  output tunedFiniteWorld + input controlFiniteWorld
+    ≡ output controlFiniteWorld + input tunedFiniteWorld
+matchedFiniteWorldsPayFullWork =
+  matchedWorldsCrossBalance tunedFiniteWorld controlFiniteWorld
+
 -- F09 already belongs to Midpoint.phaseReadoutAloneCannotIdentifyNaturalWork;
 -- no duplicate. F12 belongs to #1521 RepeatableSourceReceiverCycle.
 -- Physical S0/P1/P2/R1/R2/R3 and radiation/cloud endpoints remain open.
