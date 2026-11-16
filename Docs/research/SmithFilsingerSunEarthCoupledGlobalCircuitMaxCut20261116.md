@@ -65,3 +65,77 @@ All results credited to source authors; user-origin proposal and conditional DAS
 - HAARP two-stage F/E current, nonlinear delay, Schumann response and original Smith/Filsinger evidence boundaries retain their individual DOIs and distinctions in `SmithFilsingerHybridStudyExactRemainingLemmas20261115.md`.
 
 **Validation state:** source-authored research and conditional proof, not kernel-accepted or physically admitted. No atmospheric manipulation or discharge implementation specified.
+
+
+## 2026-11-16 addendum: rain-driven **local cooling**, mW control, Filsinger and Infoton attribution
+
+### User-origin correction and hypothesis
+The target was **rain cooling of the local lower atmosphere and surface**, not a claim that condensation in clouds makes the Earth's total energy vanish. Keep three consecutive but *not yet joined* links distinct:
+
+(1) a small, controlled change in local electrical potential/conductivity;
+(2) a potentially nonlinear, source-powered change in natural cloud droplet charge, collision/coalescence, rain rate, and cold-pool formation;
+(3) lower-level air/surface cooling by evaporation, advection of cool downdraft air, surface evaporation, cold rain sensible heat transfer and rainfall-induced wind/circulation.
+
+Natural electric-field effects on cloud particles and rain, and actual rain-induced cold pools, have individual published evidence. **No published source cited here shows mW electrical control producing sustained rain or measurable weather modification.** The difference in energy scales is not a refutation of gain in an open system, but a missing response-transfer function is not proof of it either.
+
+### Local thermodynamic budgets and conditional example
+
+Local atmosphere: evaporation of falling rain absorbs latent heat from subcloud air; downdrafts advect cooler air and create a gust front; evaporation after wetting the ground removes sensible heat from ground and nearby air; rain at lower temperature carries sensible heat from the ground or surface water. Cloud condensation releases latent heat at altitude, and the circulation can transport heat between layers and regions. **Rain can lower near-ground temperature without lowering total global enthalpy**.
+
+For region A=100 km², precipitation equivalent R=1 mm/h: water mass flux rho_w A R = 1e8 kg/h ≈ 27778 kg/s. Using L_v≈2.45 MJ/kg, hypothetical subcloud evaporation of *all* precipitation gives 68.1 GW of latent cooling, BUT in that case the precipitation mass does not reach the ground. If a fraction f=0.1 evaporates before reaching the surface, cooling is ~6.81 GW in the subcloud air, subject to water-vapour saturation, vertical temperature/moisture profiles and transport; cooling is not the power delivered by an electrical controller. 69 GW of **condensation at cloud level** is a separate upper-air heating accounting entry and must never be relabelled as rain's surface cooling. Remaining rain sensible cooling and evaporating wet surfaces are separate terms. These are scaling examples, not achievable interventions.
+
+A basic bulk air-parcel approximation for evaporated mass delta_m is delta_T ≈ - L_v*delta_m /(m_air*c_p) until wet-bulb/saturation constraints intervene. Useful outputs include spatially and temporally indexed:
+- delta_T_surface and delta_T_2m, temperature anomaly duration, cold-pool geometry, moisture and sensible/latent heat changes;
+- rainfall intensity and accumulated amount, evaporated fraction, precipitation redistribution, cloud and albedo response;
+- control/input W and natural atmospheric enthalpy, potential energy and radiative flux changes.
+
+For climatic implications, local cooling alone is a meaningful *local adaptation* response even if global TOA cooling is zero. Separately, any claim of long-run **global-warming reduction** needs net global radiative/heat storage changes, altered GHG emissions or other independently identified sinks. Do not conflate the two acceptance questions.
+
+### Physical and mathematical test for tiny-control/high-gain response
+In the shared open forcing, define controller u(t) and state x=(cloud charges, hydrometeors, q, T, wind, E, Sigma, plasma, fields, sources), with a matched unactuated control. Observable cold-pool response:
+`G_cool = [∫_region∫_time (T_control - T_tuned)_positive rho_air c_p dVdt] / W_ctrl`
+requires dimension correction: the numerator as written has units joule-seconds, hence define a **snapshot** cooling-energy anomaly `Q_cool(t)=∫_V rho_air c_p (T_control - T_tuned) dV`, or a separately specified *heat flux* integral in joules, then `G_snap=Q_cool(t)/W_ctrl`. Report it as a *response ratio*, not COP or an energy-generation efficiency: source-driven atmospheric latent/sensible heat transport is the energy supplier.
+Better signed throughflow: `delta Q_surface(t0,t1)=∫_t∫_A (H_control-H_tuned) dA dt` (W/m² sensible/latent flux as chosen), plus explicit air-mass advection and stored-energy terms.
+For very small electrical control (mW), first establish the field perturbation at the actual clouds, its charge/microphysics effect and an unforced matched comparison. No automatic scale-up of `d rain / d electric field` follows from naturally occurring electric fields or HAARP.
+
+### Recovered Filsinger source boundary
+**Original speaker assertion** (user-supplied reel narrative and repo source ledger) includes: "interacting with the cosmic radiation of the environment", and in a *proposed portable design*, replacing the Earth ground with a common-midpoint connection to a plate/antenna of claimed ~1:1.618 geometry to "harvest cosmic radiation". See existing `Docs/research/FilsingerEarthCosmicGoldenTwoModeOptimisation20261111.md`, `Docs/research/FilsingerLydenEarthPortMaxCut20261110.md`, and primary reel indices in `Docs/research/SmithFilsingerHybridStudyExactRemainingLemmas20261115.md`. Preserve original reel provenance: the narration makes the claim, the experiment has not identified the actual external energy port.
+
+**Candidate interpretation (DASHI cross-paper inference, not speaker-verified):** "cosmic radiation" could mean incident radio waves, solar electromagnetic radiation, solar-wind-coupled geospace fields, atmospheric electric current or actual ionising cosmic-ray particles; these are different source domains. **Do not claim Filsinger explicitly measured solar-wind ionospheric power or that the proposed portable antenna was demonstrated.** To assign the solar coupling hypothesis to his apparatus requires independent, same-object calibrated ports, incident spectral irradiance/field, current and timing. Never deduce an ionospheric source from his ~7.8 kHz acoustic frequency (~7.8 Hz Schumann is different).
+
+### Infoton thermodynamic cross-pollination
+Existing `docs/research/InfotonP30WalkerMaxCut20261115.md` and `DASHI/ComputerScience/InfotonP30FiniteAuditExact.agda` explicitly separate reversible state evolution from irreversible erasure and distinguish `m(T)=k_B T ln 2/c²` as an **energy-equivalent mass expression**, not an experimentally observed Infoton particle. See January N. Walker original-source records in that ledger: https://infoton.ai/infoton-p30 and https://zenodo.org/records/18210355 . These are claims, not physical calibrations of weather. Reuse the useful boundary principle: information about control/phase/resonance changes *which path the physical energy takes*, not its source conservation law. If importing Landauer, count physical entropy generation for actual erasures and distinguish it from reversible modulation, heat, and latent energy transfers. Any thermodynamic-control-to-rain link is a **new conditional DASHI inference** and must not be attributed to Walker.
+
+### Literature: direct cloud-electrification → rain evidence (critical additions)
+- **Electric Field Enlarges Raindrops Beneath Electrified Clouds: Observational Evidence**, *Geophysical Research Letters* (2021), https://doi.org/10.1029/2021GL093577. Natural electric-field and raindrop-size observation and proposed coalescence mechanism; **NOT** demonstration of an artificially applied mW controller or weather control.
+- **Ming Zhang, Zhiwen Yang, Chuan Li, Jiawei Li, Dingchen Li, Qixiong Fu, Kexun Yu** (2025), *Raindrop formation in a thunderstorm mimicking environment under non-uniform electric field*, *Physics of Fluids* 37, 022023, https://doi.org/10.1063/5.0251043. Laboratory storm-like, nonuniform field and charged-droplet regime, not atmospheric-scale intervention.
+- **D. N. Gabyshev** (2025), *Condensational growth of spherical water droplets altered under external electric fields*, *Journal of Aerosol Science*, 106554, https://doi.org/10.1016/j.jaerosci.2025.106554. Theory of droplet growth under electric fields, not a real-world rain gain.
+- **Brian A. Tinsley** (2022), *Uncertainties in Evaluating Global Electric Circuit Interactions With Atmospheric Clouds and Aerosols, and Consequences for Radiation and Dynamics*, *JGR Atmospheres*, https://doi.org/10.1029/2021JD035954. Reports atmospheric correlations and uncertainties, not a proved large control transfer coefficient.
+- **Brian A. Tinsley** (2023), *Solar Activity, Weather and Climate, the Elusive Connection*, *Bulletin of the American Meteorological Society*, https://doi.org/10.1175/BAMS-D-23-0065.1. Review/interpretive source, not mW weather control.
+- **R. G. Harrison and M. Lockwood** (2020), *Rapid indirect solar responses observed in the lower atmosphere*, *Proceedings of the Royal Society A*, https://doi.org/10.1098/rspa.2020.0164. Solar/lower atmosphere observation context.
+
+### Literature: rain → real local cooling and cold-pool dynamics (critical additions)
+- **Bastian Kirsch, Felix Ament and Cathy Hohenegger** (2021), *Convective Cold Pools in Long-Term Boundary Layer Mast Observations*, *Monthly Weather Review* 149, 811–820, https://doi.org/10.1175/MWR-D-20-0197.1. 489 events over 14 summers; median near-surface cooling **−3.3 K**. Humidity saturation deficit is stronger predictor than rain amount; wet-bulb evaporative cooling accounts for 64% of overall variance in simplified model, 92% subset without strong cold-air import. **Observation, not electrically controlled cooling.**
+- **Evaporation and Cold Pools Beneath Trade Cumulus Clouds** (2026), *JGR Atmospheres*, https://doi.org/10.1029/2025JD044917. Isotope/in situ observations support below-cloud rain evaporation and cold-pool formation.
+- **Air-Sea Heat Fluxes Associated With Convective Cold Pools** (2023/24), *JGR Atmospheres*, https://doi.org/10.1029/2023JD039708. 276 observational cold-pool events, threshold near-surface drop −1.5 °C in 10 min and altered air-sea heat flux. This is atmosphere-to-ocean/sea-air redistribution.
+- **An Investigation of Hydrometeor Latent Cooling upon Convective Cold Pool Formation, Sustainment, and Properties** (2019), *Monthly Weather Review*, https://doi.org/10.1175/MWR-D-18-0382.1. Microphysical model; evaporation of lower-level rain helps explain cold-pool expansion, structure and intensity.
+- **Rooney, van Lipzig and Thiery** (2018), *Estimating the effect of rainfall on the surface temperature of a tropical lake*, *Hydrology and Earth System Sciences* 22, 6357–6369, https://doi.org/10.5194/hess-22-6357-2018. Direct heat-flux and near-air cooling; tropical lake rainfall days lowered surface temperature in observational comparison by ~0.3 K at day end.
+- **A Parameterization for Cloud Organization and Propagation by Evaporation-Driven Cold Pool Edges** (2024), *JAMES*, https://doi.org/10.1029/2023MS003982. Cold pool edges may organise further convection; modelled interaction and nontrivial feedback.
+
+### Literature: coupled solar/ionosphere / field resonances / optical interfaces (verified)
+- **Renata Lukianova, Alexander Frank-Kamenetsky, Jeni Victor and Alexander Kozlovsky** (2025), *Solar Wind–Ionosphere–Troposphere Coupling Via the Polar Branch of the Global Electric Circuit*, https://doi.org/10.1007/s10712-025-09914-7. Polar GEC mixed review and Antarctic analysis.
+- **Dong Lin, Michael Hartinger, William Lotko, et al.** (issue 2026; first published Dec 26, 2025), *Efficiency of Electromagnetic Energy Transfer From Solar Wind to Ionosphere Through Magnetospheric Ultra-Low Frequency Waves*, https://doi.org/10.1029/2025GL118532. **Global MHD model**, not source port extraction.
+- **Michel Blanc et al.** (published Oct 28, 2026), *Physical Links Between Weather in Space and Weather in the Lower Atmosphere*, https://doi.org/10.1007/s10712-026-09968-1. Whole-atmosphere coupling review, explicit knowledge gaps.
+- **Nithin Sivadas, David Sibeck, Varsha Subramanyan, et al.** (2026), *Regression to the mean can explain saturation of geomagnetic storms*, *Nature* 655, 1143–1147, https://doi.org/10.1038/s41586-026-10757-4. Statistical correction disputes historical saturation interpretation, **does not bound available receiver power**.
+- **A. V. Streltsov, T. Guido, B. Tulegenov, J. Labenski, C.-L. Chang** (2014), *Artificial excitation of ELF waves with frequency of Schumann resonance*, https://doi.org/10.1016/j.jastp.2014.07.004. HAARP strong resonance peak in **8/46** episodes, facility-scale drive (3.6 MW), **not mW input**.
+- **Jiayu Zhao, Linlin Yuan et al.** (2026), *Laser Plasma Filament-Bounded Terahertz Surface Waves*, *ACS Photonics* 13, 1712–1718, https://doi.org/10.1021/acsphotonics.5c03014. Lab plasma/THz surface modes, **not ionosphere-to-ground conducting filament**.
+- **NASA NISAR** synthetic aperture background: https://science.nasa.gov/mission/nisar/get-to-know-sar/ . Observational virtual aperture vs physically intercepted energy distinguished.
+
+### Newly refined gates (all ORIGINAL-WORLD OPEN)
+- `S4a tinyControlFieldAtCloud`: demonstrate same-original mW-class port creates specified change in actual cloud electric field/charge (or prove an upper bound) under independently recorded natural forcing.
+- `S6a fieldToRainMatchedEffect`: separate natural-field correlation from induced counterfactual rain microphysics, with droplet charge/size, rain-rate and background convection confound controls.
+- `S6b rainToCoolLocalEnergyExact`: calculate evaporated fraction, humidity, downdraft enthalpy, rain sensible flux, surface evaporation, local temperature response and storm feedback; accept observed real cooling even if TOA global balance unchanged.
+- `S6c naturalFeedbackThreshold`: identify nonlinear threshold, sensitivity, saturation, spatial footprint, uncertainty and source-energy payment for any claimed high-gain atmospheric response.
+- `S7a localCoolingVsGlobalClimateDistinct`: local heat relief (allowed without global radiative benefit) vs separate annual global radiative-climate effects; track redistribution and possible warming elsewhere.
+- `S8a filsingerCosmicSolarPortBidi`: original speaker's cosmic claim, actual plate/antenna status and physically measured solar-wind/solar-photon/RF/cosmic particle source discriminator; do not silently promote interpretation into original fact.
+- `S8b infotonThermodynamicBoundary`: energy/entropy/information control port separation, keeping Walker claims/physical validation distinct.
