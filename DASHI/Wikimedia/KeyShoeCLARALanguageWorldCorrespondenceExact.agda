@@ -17,6 +17,7 @@ module DASHI.Wikimedia.KeyShoeCLARALanguageWorldCorrespondenceExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Wikimedia.KeyShoeCLARAR13DihedralExact as R13
