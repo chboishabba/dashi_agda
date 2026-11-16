@@ -188,3 +188,53 @@ The golden ratio may be useful as a geometric detuning or modal density choice, 
 - `S8c sameEnvironmentalSourceSinkWork`: identify actual independently powered external field/work and delivered load work after ZVS input, storage, losses, passive reactive exchange. Use matched tuned/control boundary dynamics, not apparent terminal sign.
 
 **Status:** source-checked conditional interpretation and paper provenance; no new Agda kernel certificate, physical phase measurement or claim of verified natural power transfer.
+
+
+## 2026-11-16 steelman revision: finite propagation, time, nonlinear environmental coupling
+
+**User-origin physical steelman (preserve in summaries and acceptance tests):**
+> Filsinger's proposed common-midpoint, opposed-polarity and golden-aspect plate arrangement may be intended to create two coherently coupled electrical branches with persistent relative phase, producing a controlled differential electromagnetic interaction with the surrounding environment, **where wave propagation and time are critical components**.
+
+The point is NOT a timeless electrostatic divider, a bare rectangle, or two stationary complex voltages. It is a finite-speed, dispersive, open, driven, nonlinear source–receiver system. Its physical roles:
+1. The powered ZVS/switching + passive tuned circuit establishes reference timing and optional slow modulation; opposite terminals may provide a differential push-pull excitation. Geometry, dielectric, loading and mutual coupling affect relative phase and mode overlap but the aspect ratio alone fixes none of them.
+2. The source to field to material to receiver transfer is **causal**: excitation at point x' and time t' changes observables at x and t only through a causal Green kernel G_ret(x,x',t-t'; media, state). Include ionisation/attachment/recombination memories; any electromagnetic paths respect propagation limits and any slower material delays are separate.
+3. At a selected interaction region, phase is *after propagation*: for path transfer H_j(x,omega), arg E_2 - arg E_1 = arg(s_2/s_1) + arg(H_2/H_1), with H_j including the path/delay and material response. In an illustrative pure-delay case arg(H_2/H_1) = -omega(tau_2-tau_1), additional reactive and dispersive phases omitted. The relevant phase is **not** merely the phase measured at the driver.
+4. For coherent common-drive modal steady response, near-stationary relative phase can be real even when resonant eigenfrequencies are split; for undriven/free-running detuned modes it generally drifts; nonlinear entrainment, feedback and field memory alter this. Critical timescales: switching period, driver envelope, group delay, pulse width, plasma lifetime, pole/ringdown decay, charge equilibration, natural-source replenishment and atmospheric/cloud response.
+5. Both true real environmental work and purely reactive return can give apparent phase-sensitive changes and lingering pump-off responses. The energy source hypothesis is **independent natural supply** (Earth/ionosphere/solar wind/atmospheric/radiative port), not phase offset as an energy source. Any useful transfer must satisfy time-integrated boundary Poynting flux and signed v*i port work. Periodic reactive circulation may sum to zero net environmental energy over a cycle.
+6. This extends to the user-origin atmospheric hypothesis: small active phase/time/conductivity control may redistribute a naturally powered flow and (if causal gain is verified) alter charged-cloud rain formation and downstream local evaporative/downdraft cooling. This is not proven to happen in the proposed hardware, and each cause/effect arrow requires distinct experimental admission.
+
+### Mathematical source–receiver contract (DASHI extension, conditional)
+Let physical state X(t) contain two driven resonators, spatial Maxwell E/B, material memory, natural source and receiver/load; input u(t), natural forcing s_nat(t), observation y(t).
+\[
+  y_i(t)=\int_{-\infty}^{t} G^{\mathrm{ret}}_{ij}(t,t';X)\,u_j(t')\,dt' 
+       + y_{i,\mathrm{nat}}(t;X).
+\]
+G_ret is a *linearized causal response representation about X*, NOT a universal fixed linear convolution for nonlinear dynamic media. Full nonlinear PDE/integro-differential coupled evolution must be retained when phase control changes material state. In frequency domain for quasi-stationary selected media:
+\[
+  \Delta\phi(x,\omega)=\arg\!\left[\frac{s_2(\omega)H_2(x,\omega)}
+                                     {s_1(\omega)H_1(x,\omega)}\right].
+\]
+Do not use a single frequency-independent delay for dispersive plasma or conflate group/energy transport with phase velocity. Phase can improve local field overlap or reduce losses; it cannot by itself pay load energy.
+
+For ONE selected boundary:
+\[
+\frac{dU_{\rm included}}{dt} = P_{\rm driven}(t)+P_{\rm natural}(t)
+ - P_{\rm useful}(t)-P_{\rm internal\,loss}(t)-P_{\rm outgoing}(t),
+\]
+where the signs and port crossings define every term and no secondary natural generator is counted twice. Compare matched **tuned and control trajectories with identical initial state and exogenous forcing**, but allow source backaction, natural replenishment, delay-dependent storage and environmental response to evolve differently.
+
+### New explicit gates (all physical OPEN)
+- \`S5e retardedPhaseAtInteraction\`: field/terminal phase at source vs RECEIVER across distance, with correctly separated electromagnetic flight, material group delay, switching, plasma memory; test phase coherence over the control bandwidth and load changes.
+- \`S5f historyDependentNonlinearSourceReceiver\`: distinguish fixed transfer phasor from state- and history-dependent Green/Volterra/nonlinear response and delayed feedback; synthetic opposite-phase signals alone do not discharge this gate.
+- \`S5g delayedReturnVsNewEnvironmentalInput\`: after pump switch-off, distinguish free ringdown, transported/returned old stored energy, independently replenished environmental work, and source- or observation-dependent multi-path delays.
+- \`S8d matchedTimeResolvedPoyntingLedger\`: sign of cumulative natural power and net load work, including incoming/outgoing radiative work, time-resolved storage, ZVS supply and controller costs, not just RMS potential or acoustic carrier.
+
+### Reused evidence and references
+- **K. Papadopoulos et al.** *First demonstration of HF-driven ionospheric currents* (2011), https://doi.org/10.1029/2011GL049263: two causal stages (F-region modulated heating → magnetosonic propagation → E-region Hall currents and virtual radiating antenna), facility-scale source experiment, not Filsinger real power or measured mW gain.
+- **M. B. Cohen et al.**, *Magnetospheric injection of ELF/VLF waves with modulated or steered HF heating of the lower ionosphere* (2011), https://doi.org/10.1029/2010JA016194: source-conditioned 3D heating/cooling, propagation, phase and steering matter; reported 5–7 dB modeled injection advantage for specified comparison, not a Filsinger conversion gain.
+- **M. Gołkowski et al.**, *Amplitude and phase of nonlinear magnetospheric wave growth excited by the HAARP HF heater* (2010), https://doi.org/10.1029/2009JA014610: delayed echo arrival and nonlinear phase/amplitude evolution with source-strength-dependent onset; not a same-object Filsinger delay measurement.
+- **Tong Wu and Philippe Lalanne**, *Exact Maxwell evolution equation of resonator dynamics: temporal coupled-mode theory revisited*, Optics Express 32, 20904–20914 (2024), https://doi.org/10.1364/OE.517237: standard temporal coupled-mode theory can miss full Maxwell terms in short-pulse, off-resonant or extended structures; motivation for not replacing retarded physics with an unconditional two-number phasor.
+- **Thomas Christopoulos, Odysseas Tsilipakos, Emmanouil E. Kriezis**, *Temporal coupled-mode theory in nonlinear resonant photonics*, Journal of Applied Physics 136 (2024), https://doi.org/10.1063/5.0190631: framework for explicitly nonlinear and dissipative resonant dynamics, not source-specific verification.
+- Earlier source-owned Smith/Filsinger reel, Don Smith Kelly/Darrer diagrams and mathematical owner ledgers above remain separate.
+
+**Verification:** documentation-only continuation on draft PR, new gate statements neither Agda kernel proved nor physically admitted. The observed Filsinger ~0.303-s separation of acoustic pump-off envelope peaks is NOT by itself a Maxwell flight-time or environmental echo receipt.
