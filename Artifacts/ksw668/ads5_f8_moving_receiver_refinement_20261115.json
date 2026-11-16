@@ -76,7 +76,7 @@
     "interpretation": "genuine compact 3D TT test source constructed; numerical UV/cutoff/convergence fail"
   },
   "acceptance": {
-    "source_equivalent_unit_tests": "359/359 reconstructed local combined source-equivalent replay PASS; 40 new KSW X tests; exact PR-head and pinned Agda UNRUN",
+    "source_equivalent_unit_tests": "366/366 reconstructed local combined source-equivalent replay PASS; 40 new KSW X tests; exact PR-head and pinned Agda UNRUN",
     "full_3d_B4_numerical_convergence": false,
     "external_analytical_Green_operator_previously_claimed_by_external_theorem": true,
     "tensor_matter_generating_action": false,
@@ -594,7 +594,7 @@
       2
     ],
     "third_original_finer_run": "TIMED OUT, no usable receiver data",
-    "verified_local_reconstructed_source_equivalent_tests": "359/359 PASS",
+    "verified_local_reconstructed_source_equivalent_tests": "366/366 PASS",
     "new_tests_passed": 40,
     "exact_connected_PR_head_test_count_verified": false,
     "pinned_Agda_kernel_run": false,
