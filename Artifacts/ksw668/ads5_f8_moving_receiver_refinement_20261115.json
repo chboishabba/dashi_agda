@@ -76,7 +76,7 @@
     "interpretation": "genuine compact 3D TT test source constructed; numerical UV/cutoff/convergence fail"
   },
   "acceptance": {
-    "source_equivalent_unit_tests": "326/326 local source-equivalent suite PASS; exact GitHub PR head and pinned Agda kernel UNRUN",
+    "source_equivalent_unit_tests": "359/359 reconstructed local combined source-equivalent replay PASS; 40 new KSW X tests; exact PR-head and pinned Agda UNRUN",
     "full_3d_B4_numerical_convergence": false,
     "external_analytical_Green_operator_previously_claimed_by_external_theorem": true,
     "tensor_matter_generating_action": false,
@@ -104,11 +104,11 @@
     "exact_GitHub_PR_head_execution": false
   },
   "next_exact_lemmas": [
+    "ads5OriginalTTPerChannelThreeObservableConvergence",
     "ads5OriginalWeakIsraelGlobalConstraintBoundaryWeld",
     "ads5OriginalMovingSBP3FullCoupledSSPRK3CFLAndError",
     "ads5OriginalCompactTTFullH4PlusEpsilonNeumannBoundarySourceBudget",
     "ads5OriginalMovingH4PlusEpsilonNeumannToBothWeylTrace",
-    "ads5OriginalMovingTTThreeMultipoleThreeObservableConvergence",
     "ads5OriginalT2NeumannToWeylEllipticFIOComposition",
     "ads5OriginalT2ActualCompactTTNonzeroEarlyBothWeyl",
     "ads5CompactTTMatterActionRealization",
@@ -558,5 +558,48 @@
     "source_equivalent_local_tests_passed": "326/326",
     "exact_branch_head_runner_run": false,
     "pinned_Agda_2_9_kernel_run": false
+  },
+  "original_TT_base369_ternary_signed_weyl_maxcut_x_20261116": {
+    "user_origin": "0,2,4 -> 2 * [0,1,2] unbalanced ternary -> Base369 source consumer",
+    "canonical_source": "DASHI/Physics/Gravity/KSW668AdS5TTUnbalancedTernary369ConsumerExact.agda",
+    "report": "Docs/physics/KSW668F8Base369TernaryThreeHarmonicWeylMaxCut20261116.md",
+    "machine": "Artifacts/ksw668/ads5_f8_base369_three_harmonic_signed_weyl_maxcut_x_20261116.json",
+    "same_original_axial_spin2_source": true,
+    "physical_even_harmonics": [
+      0,
+      2,
+      4
+    ],
+    "unsigned_Base369_digits": [
+      0,
+      1,
+      2
+    ],
+    "effective_radial_dimensions": [
+      3,
+      7,
+      11
+    ],
+    "C3_label_is_physical_radial_symmetry": false,
+    "original_first_cell_cycle_commutator_witness": 8,
+    "original_axis_H_and_intrinsic_projected_Weyl_exact_linear_channel_sums": true,
+    "actual_original_physical_constraint_preserving_normal_scheme": 3,
+    "two_grid_signed_channel_cancellation_ratios": {
+      "H": 11.410224665944963,
+      "E4": 2.6840115488958918,
+      "E5": 8.829140133513468
+    },
+    "dominant_original_intrinsic_Weyl_drift_even_harmonics": [
+      0,
+      2
+    ],
+    "third_original_finer_run": "TIMED OUT, no usable receiver data",
+    "verified_local_reconstructed_source_equivalent_tests": "359/359 PASS",
+    "new_tests_passed": 40,
+    "exact_connected_PR_head_test_count_verified": false,
+    "pinned_Agda_kernel_run": false,
+    "original_pointwise_both_Weyl_continuum_trace_convergence_accepted": false,
+    "independent_FIO_referee_gravity_acceptance": false,
+    "matter_action_cylinder_D1_experiment": false
   }
 }
