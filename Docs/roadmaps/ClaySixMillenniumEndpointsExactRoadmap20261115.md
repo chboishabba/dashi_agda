@@ -1,3 +1,7 @@
+## 16 November 2026 — R2 exact quartic sign and 32 actual-zero numerical controls; NO gate closure
+
+The complete quartic source `P=alpha²q²-(alpha⁴+q⁴)/6` is positive precisely when `3-2√2<q²/alpha²<3+2√2` (alpha nonzero), negative in the two tails. The old `q²<=6alpha²` cone is a **conservative debt partition**, not a full-kernel positivity claim; `P(1,0)=-1/6` is an exact adversarial control. Sixth-order coefficients and scaling checked by SymPy; 32 mpmath actual-zeta numerical zeros evaluated at 45-digit precision, with no certified off-line zeros or selected-W `FarExact` computation. See [R2 sign and zero diagnostic](ClayRHR2QuarticSignZeroDiagnostic20261116.md) and [reproducible script](../../scripts/check_rh_r2_quartic_zero_diagnostic_20261116.py). **R2 OPEN**, **15/28 OPEN**, **0/6 Clay endpoints**. Original selected-W Lean kernel, signed far-field sum, interval certificates and uniform cofinal tail remain missing.
+
 
 
 ## 16 November 2026 — RH R1 CLASSICAL original completed ζ and all-term Weil explicit formula; 13/28 settled, 15 OPEN
