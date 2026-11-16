@@ -6,6 +6,7 @@ module DASHI.Statistics.ZipfFamilyFiniteExact where
 -- Johl Brown with OpenAI ChatGPT assistance (2026-10-27).
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
@@ -124,7 +125,8 @@ mandelbrotDenominatorNonZero r shift exponent =
 
 zipfIsZeroShift : ∀ r exponent →
   mandelbrotDenominator r zero exponent ≡ zipfDenominator r exponent
-zipfIsZeroShift r exponent = refl
+zipfIsZeroShift r exponent =
+  cong (λ base → power base exponent) (NatP.+-identityʳ (suc r))
 
 -- Fractions here are unreduced exact numerator/denominator pairs.
 -- Every listed term's mathematical denominator is a positive power of
