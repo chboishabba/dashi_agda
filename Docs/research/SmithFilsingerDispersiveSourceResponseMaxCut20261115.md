@@ -105,7 +105,7 @@ For the actual Smith/Filsinger claim, this makes the endpoint precise: demonstra
 - Existing source access / global column: `scripts/check_smith_filsinger_global_source_access.py` and `SmithFilsingerShuntAndSourceAccessExact.agda`.
 - Existing passive real-work source matching: `Docs/research/SmithFilsingerSourcePortShuntMaxCut20261115.md` SP2.
 - Existing causal/energy producers: `SmithFilsingerTimeIndexedTransferExact.agda`, `KSW668MaxwellLocalPoyntingExact.agda`, and this PR's `SmithFilsingerDispersiveMaterialPortExact.agda`.
-- New Python P2-PHYS consumer: `scripts/check_smith_filsinger_earth_admittance_access.py`, its 12-test `scripts/test_smith_filsinger_earth_admittance_access.py`; no parallel circuit ontology.
+- New Python P2-PHYS consumer: `scripts/check_smith_filsinger_earth_admittance_access.py`, its 14-test `scripts/test_smith_filsinger_earth_admittance_access.py`; no parallel circuit ontology.
 
 ### Three mutually distinct source ports
 
@@ -140,7 +140,7 @@ No raw real-valued Maxwell theorem is claimed from these Nat accounting records.
 
 ### Acceptance and exact remaining consumers
 
-- New Python implementation: `check_smith_filsinger_earth_admittance_access.py`; source-equivalent offline **12/12 tests PASS** 2026-11-16, with near-ground reactive/conductive control, exact-fraction Debye passivity, full-column and soil matching, invalid-parameter failure and finite-speed diagnostic. The committed exact GitHub script has **not been independently executed**.
+- New Python implementation: `check_smith_filsinger_earth_admittance_access.py`; source-equivalent offline **14/14 tests PASS** 2026-11-16, with near-ground reactive/conductive control, exact-fraction Debye passivity, full-column and soil matching, invalid-parameter failure and finite-speed diagnostic, plus two explicit crosswalks to existing `source_r_required` and `column_source` producers. The committed exact GitHub script has **not been independently executed**.
 - **P2-DC-COLUMN / P2-SOIL-LIMIT / P2-PASSIVE-ADM**: conditional formula/model gates advanced, **not same-unit source admission**.
 - **P2-sourceOperatorSameFilsingerCircuit**: measured two-load pair (stationary case) or repeatable causal nonlinear phase/load V–I kernel, **OPEN**.
 - **R2-MaxwellIonosphereSoilHallPedersenSameGeometry**: full retarded source+receiver PDE with actual selected collector/electrodes and calibrated strata, **OPEN**.
