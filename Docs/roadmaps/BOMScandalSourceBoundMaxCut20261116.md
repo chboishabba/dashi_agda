@@ -23,7 +23,7 @@
 | B6 | Documented funding and editorial rights | **PARTIAL** | actual signed commission/payment/right/communication, not ownership, proximity, political benefit or repeated wording alone |
 | B7 | Exposure and measured cognitive effect | **OPEN** | independent exposure and before/after response measures, matched controls and uncertainty |
 | B8 | CCDCOE six-gate same-operation admission | **OPEN** | original intervention, exposure, validated mechanism, causal discrimination, independently sourced intent/targeting, original actor attribution all for SAME case |
-| B9 | Agda / TOE acceptance | **OPEN** | current Agda kernel and preflight run; PR #1251's 13 aliases forward-ported without replacing newer master imports; regression receipt |
+| B9 | Agda / TOE acceptance | **TOE EXPORT SOURCE-WRITTEN; KERNEL OPEN** | current Agda kernel and preflight run; PR #1251's 13 aliases forward-ported without replacing newer master imports; regression receipt |
 
 ## Highest-alpha implementation this round
 
@@ -31,7 +31,7 @@
 - `scripts/bom_versioned_same_object_audit.py`: pure-stdlib manifest/CSV comparison checks source SHA256, canonical dates, variable scope, duplicate keys and path traversal, and distinguishes row/value removals, numeric formatting changes and quality-flag edits. The output unconditionally labels the *unpaid* source-authentication, paper-review, trend and intent gates false.
 - `tests/test_bom_versioned_same_object_audit.py`: eight synthetic unit tests independently executed locally 16 Nov 2026, all passing. Python syntax compiled. **No Agda compiler was available and no kernel certification is claimed.** No real May/Oct BOM source data were fed into this code.
 
-## Next exact empirical cut, in order
+The two current master aggregates, \`DASHI/Unifier.agda\` and \`DASHI/EverythingTOESymmetryResolved369.agda\`, now have additive direct aliases for the non-promotion proof, preserving their preceding content. Their kernels have **not** been checked. PR #1251's separate 13 original governance aliases still need conflict-aware reconciliation.\n\n## Next exact empirical cut, in order
 
 1. Acquire *immutable* original May and late-Oct CDO snapshots and timestamps, not guessed reconstruction from summary counts; check released quality flags.
 2. Run B3 ledger on exact station/date/variable and independently audit Sydney 515 and Charleville 56 alleged removals. Compare original paper archive. Deleted *public digital* values are not necessarily deleted *original* observations.
