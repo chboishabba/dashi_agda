@@ -2791,3 +2791,8 @@ toeBalabanRouteSP2R445NoSecondMoment =
 toeBalabanRouteSP2R445CompilerLevel : ProofLevel
 toeBalabanRouteSP2R445CompilerLevel =
   BalabanRGTOE.balabanRouteSP2R445NativeCompilerLevel
+
+-- Original AdS5 brane compact TT yy: reuse existing Base369 unsigned
+-- q=0/1/2 as a LOSSLESS index for ell=0/2/4 and d=3/7/11.
+-- NOT physical C3 rotation, continuum Weyl or TOE endpoint closure.
+import DASHI.Physics.Gravity.KSW668AdS5TTUnbalancedTernary369ConsumerExact
