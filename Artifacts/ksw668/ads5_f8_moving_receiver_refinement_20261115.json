@@ -76,7 +76,7 @@
     "interpretation": "genuine compact 3D TT test source constructed; numerical UV/cutoff/convergence fail"
   },
   "acceptance": {
-    "source_equivalent_unit_tests": "371/371 reconstructed local combined replay PASS; 45 new KSW X tests; exact PR-head and pinned Agda UNRUN",
+    "source_equivalent_unit_tests": "410/410 reconstructed local source-equivalent tests PASS; exact connected head runner and pinned Agda UNRUN",
     "full_3d_B4_numerical_convergence": false,
     "external_analytical_Green_operator_previously_claimed_by_external_theorem": true,
     "tensor_matter_generating_action": false,
@@ -104,8 +104,9 @@
     "exact_GitHub_PR_head_execution": false
   },
   "next_exact_lemmas": [
+    "ads5OriginalTTCompactSourceVsConservativeRadialPropagationErrorSeparation",
     "ads5OriginalTTPerChannelThreeObservableConvergence",
-    "ads5OriginalWeakIsraelGlobalConstraintBoundaryWeld",
+    "ads5OriginalWeakIsraelJointEnergyConstraintCompatibleSAT",
     "ads5OriginalMovingSBP3FullCoupledSSPRK3CFLAndError",
     "ads5OriginalCompactTTFullH4PlusEpsilonNeumannBoundarySourceBudget",
     "ads5OriginalMovingH4PlusEpsilonNeumannToBothWeylTrace",
@@ -593,8 +594,8 @@
       0,
       2
     ],
-    "third_original_finer_run": "TIMED OUT, no usable receiver data",
-    "verified_local_reconstructed_source_equivalent_tests": "371/371 PASS",
+    "third_original_finer_run": "Historical original full-box attempt TIMED OUT; XI small causally screened box subsequently COMPLETED, with FAILED both-Weyl convergence",
+    "verified_local_reconstructed_source_equivalent_tests": "410/410 PASS",
     "new_tests_passed": 45,
     "exact_connected_PR_head_test_count_verified": false,
     "pinned_Agda_kernel_run": false,
@@ -603,6 +604,55 @@
     "matter_action_cylinder_D1_experiment": false,
     "full_omega_Fourier_commuting_square": true,
     "trivial_character_not_a_closed_PDE_sector": true,
-    "zero_receiver_then_nonzero_radial_witness": "-8 from (1,-1,0) -> (6,-14,0)"
+    "zero_receiver_then_nonzero_radial_witness": "-8 from (1,-1,0) -> (6,-14,0)",
+    "full_threegrid_negative_receipt": "Artifacts/ksw668/ads5_f8_threegrid_per_channel_radial_normal_factorial_maxcut_xi_20261116.json"
+  },
+  "original_threegrid_c3_factorial_maxcut_xi_20261116": {
+    "report": "Docs/physics/KSW668F8FullC3ThreeGridRadialMaxCut20261116.md",
+    "machine_receipt": "Artifacts/ksw668/ads5_f8_threegrid_per_channel_radial_normal_factorial_maxcut_xi_20261116.json",
+    "original_compact_TT_eps": 0.04,
+    "receiver_original_t": 12,
+    "original_constraint_preserving_scheme": 3,
+    "previous_original_fine_full_box_attempt": "historically TIMED OUT, retained as an event",
+    "current_fine_small_causal_box_completed": true,
+    "physical_causal_boundary_exclusion_checked": true,
+    "original_coarse_medium_box_parity_verified": true,
+    "fine_original_large_box_parity_unverified": true,
+    "full_original_threegrid_numerical_data_present": true,
+    "original_threegrid_aggregate": {
+      "H": [
+        -0.000005139787590641485,
+        -0.000006216375468023587,
+        -0.000025448888325464377
+      ],
+      "E4": [
+        -0.00006731686787900883,
+        -0.000028053116167140046,
+        -0.0006338411876034484
+      ],
+      "E5": [
+        -0.0000029302949236909244,
+        -0.000002326215693086726,
+        -0.000019319604479653438
+      ]
+    },
+    "both_Weyl_all_independent_modal_drift_contract": false,
+    "original_far_null_field_E4_E5_zero": false,
+    "fixed_same_poincare_dt_radial_normal_factorial_completed": true,
+    "ell0_E4_signed_radial_refinement_fraction": 0.9863664952933835,
+    "ell2_E4_signed_radial_refinement_fraction": 1.017,
+    "actual_independent_temporal_Weyl_readout_agreement_tested": true,
+    "medium_time_halving_completed": true,
+    "fine_time_halving": "TIMED OUT; NO RECEIPT",
+    "full_weighted_native_FV_C3_commutator_nonzero": true,
+    "original_natural_volume_compensated_C3_symmetry": false,
+    "original_physical_SBP2_Udot_only_boundary_repair_for_arbitrary_SAT": false,
+    "original_SBP2_left_null_compatibility": "(-1)^(n-1)*g_wall+g_far=0",
+    "local_reconstructed_source_equivalent_tests": "410/410 PASS",
+    "new_local_cases": 39,
+    "exact_head_checkout_test_run": false,
+    "pinned_Agda_2_9_kernel_run": false,
+    "independent_t2_FIO_mathematical_acceptance": false,
+    "physical_graviton_observation": false
   }
 }
