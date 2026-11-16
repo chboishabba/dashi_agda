@@ -198,9 +198,9 @@ def main() -> int:
     if (scope.get("legacy_gate_total") != 15
             or scope.get("legacy_source_or_math_decisions_settled") != 6
             or scope.get("legacy_active_gates") != 9
-            or scope.get("expanded_portfolio_decisions_settled") != 12
-            or scope.get("expanded_portfolio_active_gates") != 16
-            or scope.get("expanded_portfolio_decision_ids") != completed + ["S1", "S2", "S3", "S4", "H1", "H2"]
+            or scope.get("expanded_portfolio_decisions_settled") != 13
+            or scope.get("expanded_portfolio_active_gates") != 15
+            or scope.get("expanded_portfolio_decision_ids") != completed + ["R1", "S1", "S2", "S3", "S4", "H1", "H2"]
             or scope.get("expanded_portfolio_active_ids") != active +
                 [g.get("id") for g in added if g.get("settled") is not True]
             or scope.get("legacy_completed_ids") != completed
@@ -227,10 +227,26 @@ def main() -> int:
             g.get("status") != "OPEN" or
             g.get("native_kernel_acceptance") is not False or
             g.get("original_endpoint_proved") is not False)
-           for g in added if g.get("id") not in ("S1", "S2", "S3", "S4", "H1", "H2")):
-        problems.append("OTHER_SEVEN_NEW_RH_BSD_HODGE_GATE_FALSELY_PROVED")
-    if scope.get("newly_added_settled_gate_ids") != ["S1", "S2", "S3", "S4", "H1", "H2"]:
+           for g in added if g.get("id") not in ("R1", "S1", "S2", "S3", "S4", "H1", "H2")):
+        problems.append("OTHER_SIX_NEW_RH_BSD_HODGE_GATE_FALSELY_PROVED")
+    if scope.get("newly_added_settled_gate_ids") != ["R1", "S1", "S2", "S3", "S4", "H1", "H2"]:
         problems.append("BSD_S4_EXPANDED_DECISION_ID_MISMATCH")
+    r1 = next((g for g in added if g.get("id") == "R1"), None)
+    if (r1 is None
+            or r1.get("settled") is not True
+            or r1.get("status") !=
+                "CLOSED_CLASSICAL_ACTUAL_COMPLETED_ZETA_ALL_TERM_WEIL_EXPLICIT_FORMULA"
+            or r1.get("actual_all_term_weil_explicit_formula_classically_established") is not True
+            or r1.get("actual_zeros_not_assumed_on_critical_line") is not True
+            or r1.get("weil_positivity_independently_proved") is not False
+            or r1.get("dashi_weil_quadratic_identification_proved") is not False
+            or r1.get("native_completed_zeta_owner_instantiated") is not False
+            or r1.get("native_weil_explicit_formula_instantiated") is not False
+            or r1.get("native_kernel_acceptance") is not False
+            or r1.get("original_endpoint_proved") is not False
+            or not (ROOT / "Docs/roadmaps/ClayRHR1ActualCompletedZetaWeilExplicitFormulaClassicalClosure20261116.md").is_file()
+            or not (ROOT / "scripts/check_clay_r1_weil_formula_normalization_20261116.py").is_file()):
+        problems.append("RH_R1_ACTUAL_WEIL_FORMULA_CLASSICAL_POSITIVITY_NATIVE_FIREWALL_MISSING")
     s3 = next((g for g in added if g.get("id") == "S3"), None)
     if (s3 is None
             or s3.get("settled") is not True
