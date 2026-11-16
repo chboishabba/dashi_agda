@@ -198,9 +198,9 @@ def main() -> int:
     if (scope.get("legacy_gate_total") != 15
             or scope.get("legacy_source_or_math_decisions_settled") != 6
             or scope.get("legacy_active_gates") != 9
-            or scope.get("expanded_portfolio_decisions_settled") != 11
-            or scope.get("expanded_portfolio_active_gates") != 17
-            or scope.get("expanded_portfolio_decision_ids") != completed + ["S1", "S2", "S4", "H1", "H2"]
+            or scope.get("expanded_portfolio_decisions_settled") != 12
+            or scope.get("expanded_portfolio_active_gates") != 16
+            or scope.get("expanded_portfolio_decision_ids") != completed + ["S1", "S2", "S3", "S4", "H1", "H2"]
             or scope.get("expanded_portfolio_active_ids") != active +
                 [g.get("id") for g in added if g.get("settled") is not True]
             or scope.get("legacy_completed_ids") != completed
@@ -227,10 +227,26 @@ def main() -> int:
             g.get("status") != "OPEN" or
             g.get("native_kernel_acceptance") is not False or
             g.get("original_endpoint_proved") is not False)
-           for g in added if g.get("id") not in ("S1", "S2", "S4", "H1", "H2")):
-        problems.append("OTHER_EIGHT_NEW_RH_BSD_HODGE_GATE_FALSELY_PROVED")
-    if scope.get("newly_added_settled_gate_ids") != ["S1", "S2", "S4", "H1", "H2"]:
+           for g in added if g.get("id") not in ("S1", "S2", "S3", "S4", "H1", "H2")):
+        problems.append("OTHER_SEVEN_NEW_RH_BSD_HODGE_GATE_FALSELY_PROVED")
+    if scope.get("newly_added_settled_gate_ids") != ["S1", "S2", "S3", "S4", "H1", "H2"]:
         problems.append("BSD_S4_EXPANDED_DECISION_ID_MISMATCH")
+    s3 = next((g for g in added if g.get("id") == "S3"), None)
+    if (s3 is None
+            or s3.get("settled") is not True
+            or s3.get("status") !=
+                "CLOSED_CLASSICAL_ORIGINAL_SEL2_FOUR_SHA2_ZERO_RANK_ZERO"
+            or s3.get("actual_global_Selmer_two_cardinality") != 4
+            or s3.get("actual_all_place_Selmer_H1_exhaustion_proved") is not True
+            or s3.get("selected_Sha2_zero_proved") is not True
+            or s3.get("original_selected_MW_rank_zero_classically_proved") is not True
+            or s3.get("native_actual_original_Selmer_realization_instantiated") is not False
+            or s3.get("native_MW_Stoll_adapter_typechecked") is not False
+            or s3.get("native_kernel_acceptance") is not False
+            or s3.get("original_endpoint_proved") is not False
+            or not (ROOT / "Docs/roadmaps/ClayBSDOriginalS3GlobalSelmerSha2RankZeroClassicalClosure20261116.md").is_file()
+            or not (ROOT / "scripts/check_clay_s3_original_selmer_classical_20261116.py").is_file()):
+        problems.append("BSD_S3_ORIGINAL_GLOBAL_SELMER_CLASSICAL_NATIVE_FIREWALL_MISSING")
     s1 = next((g for g in added if g.get("id") == "S1"), None)
     if (s1 is None
             or s1.get("settled") is not True
