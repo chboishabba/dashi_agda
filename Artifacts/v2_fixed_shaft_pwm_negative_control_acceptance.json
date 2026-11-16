@@ -1,0 +1,28 @@
+{
+  "agda": "not run",
+  "baseline_source_bounded_tests_separately_passed": 57,
+  "combined_distinct_tests_passing_separately": 63,
+  "command": "OPENBLAS_NUM_THREADS=1 python -m pytest -q tests/test_v2_fixed_shaft_pwm_negative_control.py",
+  "file_sha256": {
+    "Artifacts/v2_fixed_shaft_pwm_negative_control_receipt.json": "f538078eecf3051ba4b1829c98a85b2aae6766728cb447277ac788dbd3bdc5d7",
+    "Docs/physics/MadScience369V2FixedShaftPWMNegativeControl20261116.md": "cf5df4b6f5b40c91469ea1f922cdc8cd3e7a304a260acf8fb7bd6bb8f4c014f0",
+    "scripts/check_v2_fixed_shaft_pwm_negative_control.sh": "b4deecc4d773ae1e9d22b576de8820bc00f08913180ae0c1724abdfe647a0a1e",
+    "scripts/v2_fixed_shaft_pwm_negative_control.py": "0d03a32f410f5056a930233e775c16b584b14423e34b9163aa4eeea0b92d008c",
+    "tests/test_v2_fixed_shaft_pwm_negative_control.py": "8436f7f2ec9a9c33e87910d1d967b73a485526ef801bc2077b0163f11d3b96b7"
+  },
+  "full_historical_suite": "not run",
+  "model_limitations": [
+    "PWM averaged voltage not transistor time-resolution",
+    "measured magnetic inventory matched at 2 percent not globally exact",
+    "thermal endpoint not periodic",
+    "controller efficiency change applies to all reverse-flow not flyback only",
+    "source-independent invented parameters"
+  ],
+  "new_tests_passed": 6,
+  "old_coupled_machine_reused": "scripts/v2_coupled_pulse_machine_maxcut.py",
+  "run_date": "2026-11-16",
+  "schema": "dashi.v2.fixed-shaft-averaged-pwm-acceptance.v1",
+  "scope": "locally staged source, NOT exact checked-out GitHub branch or original V2 hardware",
+  "source_v2_torque_and_wiring": "not observed",
+  "stdout": "......                                                                   [100%]\n6 passed in 1.61s"
+}
