@@ -42,3 +42,20 @@ The point-level dyadic parity and real sign conditions do not themselves prove t
 ## Regression
 
 \`scripts/check_clay_s1_actual_local_valuation_20261116.py\` checks exact rational points and valuation cases, sign intervals, original torsion exceptions and finite-code bounds; it does not certify all Q₂ points, which are covered by the preceding valuation proof, or all cohomology classes, which remain an open native weld.
+
+## Further original selected-curve theorem: rank zero by classical Fermat infinite descent (S3 component, not S3 closure)
+
+For a non-2-torsion rational point \((x,y)\in E(\mathbb Q)\) with \(y\ne0\), define
+\[
+a=\frac{x^2-1}{y},\qquad b=\frac{2x}{y},\qquad c=\frac{x^2+1}{y}.
+\]
+The exact polynomial identity \((x^2-1)^2+(2x)^2=(x^2+1)^2\) proves \(a^2+b^2=c^2\). Moreover
+\[
+\frac{ab}{2}=\frac{x(x^2-1)}{y^2}=1
+\]
+using the **original** equation \(y^2=x(x^2-1)\). Taking absolute values of the legs gives a positive rational right triangle of area 1. Fermat's classical infinite-descent theorem (no rational right triangle with square area; equivalently 1 is not a congruent number) excludes this. Therefore every rational E point has y=0 or is O, and
+\[
+E(\mathbb Q)=\{O,(0,0),(1,0),(-1,0)\}\cong(\mathbb Z/2)^2,
+\qquad \operatorname{rank}E(\mathbb Q)=0.
+\]
+This is an **actual selected original-curve arithmetic theorem**, assuming the established Fermat descent theorem as external mathematical background; it does NOT use BSD rank equality or infer rank from S4 analytic positivity. It pays the *selected Mordell–Weil rank-zero mathematical component* of S3, but **S3 remains OPEN** because its original acceptance also requires the all-place H¹ Selmer exhaustion and native actual-group Stoll adapter. Even knowing E(Q) exactly does NOT imply Sha(E)[2]=0 or Sel²=E(Q)/2E(Q): S2 shows the independent Sha[2] quotient. This is the exact reason not to promote S3 prematurely.
