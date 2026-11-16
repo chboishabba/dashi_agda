@@ -198,9 +198,9 @@ def main() -> int:
     if (scope.get("legacy_gate_total") != 15
             or scope.get("legacy_source_or_math_decisions_settled") != 6
             or scope.get("legacy_active_gates") != 9
-            or scope.get("expanded_portfolio_decisions_settled") != 7
-            or scope.get("expanded_portfolio_active_gates") != 21
-            or scope.get("expanded_portfolio_decision_ids") != completed + ["S4"]
+            or scope.get("expanded_portfolio_decisions_settled") != 8
+            or scope.get("expanded_portfolio_active_gates") != 20
+            or scope.get("expanded_portfolio_decision_ids") != completed + ["S4", "H2"]
             or scope.get("expanded_portfolio_active_ids") != active +
                 [g.get("id") for g in added if g.get("settled") is not True]
             or scope.get("legacy_completed_ids") != completed
@@ -227,10 +227,28 @@ def main() -> int:
             g.get("status") != "OPEN" or
             g.get("native_kernel_acceptance") is not False or
             g.get("original_endpoint_proved") is not False)
-           for g in added if g.get("id") != "S4"):
-        problems.append("OTHER_TWELVE_NEW_RH_BSD_HODGE_GATE_FALSELY_PROVED")
-    if scope.get("newly_added_settled_gate_ids") != ["S4"]:
+           for g in added if g.get("id") not in ("S4", "H2")):
+        problems.append("OTHER_ELEVEN_NEW_RH_BSD_HODGE_GATE_FALSELY_PROVED")
+    if scope.get("newly_added_settled_gate_ids") != ["S4", "H2"]:
         problems.append("BSD_S4_EXPANDED_DECISION_ID_MISMATCH")
+    h2 = next((g for g in added if g.get("id") == "H2"), None)
+    if (h2 is None
+            or h2.get("settled") is not True
+            or h2.get("status") !=
+                "CLOSED_CLASSICAL_LITERAL_CP1_CP1xCP1_RATIONAL_CYCLE_CLASS"
+            or h2.get("actual_algebraic_rational_cycle_surjectivity_CP1") is not True
+            or h2.get("actual_algebraic_rational_cycle_surjectivity_CP1xCP1") is not True
+            or h2.get("native_literal_CP1_geometry_weld_typechecked") is not False
+            or h2.get("general_H3_universal_Hodge_proved") is not False
+            or h2.get("native_kernel_acceptance") is not False
+            or h2.get("original_endpoint_proved") is not False
+            or not (ROOT / "Docs/roadmaps/ClayHodgeH2LiteralCP1GeometryClassicalClosure20261116.md").is_file()
+            or not (ROOT / "scripts/check_clay_h2_cp1_geometric_classical_20261116.py").is_file()):
+        problems.append("HODGE_H2_CLASSICAL_CP1_GEOMETRY_NATIVE_OR_UNIVERSAL_FIREWALL_MISSING")
+    for leaf in ("H1", "H3"):
+        hg = next((g for g in added if g.get("id") == leaf), None)
+        if hg is None or hg.get("settled") is not False:
+            problems.append("HODGE_"+leaf+"_FALSELY_PROMOTED_FROM_CP1_SPECIAL_CASE")
     for leaf in ("S1","S2","S3","S5","S6"):
         g = next((g for g in added if g.get("id") == leaf), None)
         if g is None or g.get("settled") is not False:
