@@ -92,3 +92,10 @@ import DASHI.Physics.Gravity.KSW668AdS5OriginalTTCharacteristicConstraintRationa
 -- commutator; concrete finite matrices checked independently.
 -- NOT a mesh-uniform 5D H4+epsilon Weyl trace theorem.
 import DASHI.Physics.Gravity.KSW668AdS5OriginalRadialSobolevPowerReuseExact
+
+-- F8 X: ORIGINAL a=t TT angular yy source 0/2/4 is exactly the
+-- Base369.TriTruth unsigned 0/1/2 *index* (ell=2q, radial d=3+4q).
+-- Exact source Legendre weights/receiver axis, source-producer consumer;
+-- explicit C3 label-rotation radial non-intertwiner. Not physical C3,
+-- not 3/6/9 gravity dimensions, not dual-Weyl convergence or Agda kernel.
+import DASHI.Physics.Gravity.KSW668AdS5TTUnbalancedTernary369ConsumerExact
