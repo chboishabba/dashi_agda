@@ -288,3 +288,33 @@ All figures are dimensionless model outputs. `1:1.618` geometry is neither requi
 **Source authors:** Zhao, Guo and Fan (2019), *Physical Review A* 99 033839 (energy conservation, reciprocity and TCMT assumptions), https://cguo.org/pdf/zhao2019a.pdf; Wu and Lalanne (2024), *Optics Express*, https://doi.org/10.1364/OE.517237 (limits of conventional TCMT); Anisimov et al. (2026) https://doi.org/10.1016/j.asr.2026.01.090 and Tinsley (2022) https://doi.org/10.1029/2021JD035954 (real global-circuit sources/uncertainties, **not** proof of this device).
 
 **OPEN:** S0/P1 physical pins and synchronous readings; S5c–S5g phase/coherence/full causal nonlinear response; S8c/S8d signed replenished natural work and matched work; P2 real Earth/atmospheric source operator; R1/R2/R3 full same-device explanation; D1/D2 pinned Agda and empirical proof weld. The environmental source power calibration from PR #1521 remains independent and prerequisite to any watt-level physical promotion.
+
+
+## 2026-11-16 complementary DC source/sink matching: no external RF phase coherence needed
+
+**Important correction to the coherent-wave branch above:** the *user's proposed mechanism* needs stable relative timing between the two **controller-generated branches**, not necessarily phase-locking the controller to an independent RF field. An independently maintained **DC or slowly varying** source can have no meaningful radio-frequency phase and yet supply real work through complementary timed receiving branches. This is a different model from two coherent incident waves, and its success does not imply the original source has a measured V_oc or free atmospheric watts.
+
+New source-equivalent consumer `scripts/check_smith_filsinger_midpoint_dc_source_matching.py` and 12-case test module `scripts/test_smith_filsinger_midpoint_dc_source_matching.py` explicitly reuse the fixed positive-R source matching theorem from [#1521](https://github.com/chboishabba/dashi_agda/pull/1521) and `scripts/check_smith_filsinger_shunt_source_port.py` on master, without duplicating the Earth's actual source operator.
+
+Let a physically separate *hypothetical* fixed Thévenin source have `V_oc>0,R_s>0`. Two **nonnegative controlled load conductances** `G_1(t),G_2(t)` are assumed to share its loaded terminal:
+```math
+G(t)=G_1(t)+G_2(t),\qquad
+I(t)=\frac{V_{oc}G(t)}{1+R_sG(t)},\qquad
+P_L(t)=\frac{V_{oc}^2G(t)}{(1+R_sG(t))^2}.
+```
+The source/matching identity holds instantaneously:
+```math
+P_{\mathrm{src}}=V_{oc}I=P_L+R_sI^2,
+\quad
+\frac{V_{oc}^2}{4R_s}-P_L
+=\frac{V_{oc}^2(R_sG-1)^2}{4R_s(1+R_sG)^2}\ge0.
+```
+There is **no time-averaged output increase beyond the fixed source's matched maximum**; a scheduled controller can merely avoid periods of poor source matching. A separately assumed nonnegative controller-auxiliary power `P_ctrl` is explicitly dissipated outside the useful load: `P_src+P_ctrl=P_L+P_feedloss+P_ctrl_aux_loss`. The ideal conductances are abstractions, not free/no-loss high-voltage switches.
+
+**Conditional anti-phase construction:** use `V_oc=R_s=1`, `G_1=.5+.35sin(omega t)`, `G_2=.5+.35sin(omega t+phi)`. At `phi=pi` the two branches are complementary and `G_total=1/R_s=1` for all t. The time-averaged useful load reaches the fixed-source maximum **0.2500**; in-phase operation `phi=0` produces useful load **0.229623**, an **8.9%** improvement for the specified source and branch ranges. With illustrative controller cost .01 in both cases, net load after control expenditure is .2400 vs .219623. Both cases obey source and cost accounting to ~1e−16.
+
+**Non-universal phase negative control:** with *the same two conductance waveforms* but source resistance changed to `R_s=3`, the best sampled phase is ~0.638 rad (36.56°), **not 180°**. Thus even for this elementary DC-source arrangement, opposed timing is not a golden-ratio law or a source-independent optimum.
+
+The anti-phase construction does **not** establish that the actual Filsinger opposed-polarity capacitor configuration behaves as two controlled parallel conductances, nor that the earth/plate supplies this hypothetical DC `V_oc`. Capacitor-branch voltage opposition, current-phase opposition, switching phase, measured environmental source voltage and environmental wave coherence are different observables. The actual conversion would additionally require capacitive/inductive state dynamics, switch driver work and losses, material dispersion, retarded coupling and source backaction. The full source power ceiling must be calibrated to [#1521](https://github.com/chboishabba/dashi_agda/pull/1521)'s physically available terminal V/I and GEC current-density constraints. Those **original P2/R2/R3 gates are OPEN**.
+
+**Acceptance:** exact algebraic nonnegative-square identity and sin(t)+sin(t+pi)=0 checked with SymPy; local **12/12 tests PASS**, including source-off, controller-cost, fixed-source power ceiling, instantaneous conservation, nonnegative physical G and source mismatch. Together with the reciprocal coherent-wave submodel, **29/29 local source-equivalent tests PASS**. No pinned Agda 2.9 check and no exact GitHub-head execution claimed. This is a conditional mathematical source-matching advance, not a field measurement, automatic weather-response amplification, or evidence of excess natural power.
