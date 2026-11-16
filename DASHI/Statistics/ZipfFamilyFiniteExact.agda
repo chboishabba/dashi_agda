@@ -98,8 +98,7 @@ record AttributedObservation : Set where
 -- an equality-normalized PMF/CDF, and complex Hurwitz continuation
 -- are separate proof obligations. The finite fraction owner is reused.
 power : Nat → Nat → Nat
-power base zero = suc zero
-power base (suc exponent) = base * power base exponent
+power = Nat._^_
 
 -- The private power agrees definitionally with the standard-library
 -- natural exponentiation. NonZero is the *actual* denominator constraint,
