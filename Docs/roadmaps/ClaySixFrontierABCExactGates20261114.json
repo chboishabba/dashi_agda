@@ -5766,8 +5766,8 @@
       "F3"
     ],
     "expanded_portfolio_gate_total": 28,
-    "expanded_portfolio_decisions_settled": 12,
-    "expanded_portfolio_active_gates": 16,
+    "expanded_portfolio_decisions_settled": 13,
+    "expanded_portfolio_active_gates": 15,
     "expanded_portfolio_scope_warning": "6/28 is count of heterogeneous source/mathematical decisions and open research obligations, not percent of mathematical endpoint completion. One settled B1 gate is refutation of a universal proposed auxiliary.",
     "new_RH_BSD_HODGE_gate_ids": [
       "R1",
@@ -5872,7 +5872,7 @@
           "R3",
           "R4"
         ],
-        "current_roadmap_maxcut": "R1 original zeta completed explicit formula / Weil criterion WITHOUT assuming positivity + (R2 signed A2 OR R3 signed fifth Route B OR independently proved original Weil positivity) → R4 all-zero exclusion",
+        "current_roadmap_maxcut": "R1 classical original completed xi, genuine all-nontrivial-zero Guinand-Weil explicit formula including prime powers, gamma and pole CLASSICALLY CLOSED; native analytic carrier/explicit-formula record OPEN. R2 original signed A2, R3 true zeta fifth correlation, R4 universal RH OPEN; no Weil positivity assumed or proved.",
         "terminal_gate_ids": [
           "R4"
         ],
@@ -5977,9 +5977,9 @@
           "DASHI/Analysis/WeilPositivityCore.agda",
           "DASHI/Analysis/RiemannQuarticSignedPoleCompensationExact.agda"
         ],
-        "status": "OPEN",
-        "settled": false,
-        "classification": "ORIGINAL_UNPAID_ANALYTIC_OR_GEOMETRIC_PRODUCER",
+        "status": "CLOSED_CLASSICAL_ACTUAL_COMPLETED_ZETA_ALL_TERM_WEIL_EXPLICIT_FORMULA",
+        "settled": true,
+        "classification": "CLASSICAL_ORIGINAL_ZETA_ANALYTIC_CARRIER_AND_EXPLICIT_FORMULA",
         "mathematical_deliverable": "Original completed ζ analytic carrier, actual zero/prime/gamma/pole explicit formula, test-space and Weil criterion/source identification; DO NOT presume Weil positivity, whose true signed construction remains open",
         "acceptance_criteria": "Original all-term explicit formula and no synthetic zero carrier; WeilPositiveDecomposition and DashiRiemannAssembly are conditional consumers, NOT positive definite spectral premises automatically supplied",
         "depends_on": [
@@ -5987,7 +5987,20 @@
         ],
         "native_kernel_acceptance": false,
         "original_endpoint_proved": false,
-        "sources_inspected_at_branch": true
+        "sources_inspected_at_branch": true,
+        "closure_kind": "CLASSICAL_ACTUAL_XI_ZEROS_AND_GUINAND_WEIL_EXPLICIT_FORMULA",
+        "actual_completed_zeta_analytic_carrier_classically_established": true,
+        "actual_xi_entire_functional_equation_classically_established": true,
+        "actual_all_term_weil_explicit_formula_classically_established": true,
+        "actual_zeros_not_assumed_on_critical_line": true,
+        "actual_prime_power_gamma_pole_terms_included": true,
+        "weil_positivity_independently_proved": false,
+        "dashi_weil_quadratic_identification_proved": false,
+        "native_completed_zeta_owner_instantiated": false,
+        "native_weil_explicit_formula_instantiated": false,
+        "proof": "Docs/roadmaps/ClayRHR1ActualCompletedZetaWeilExplicitFormulaClassicalClosure20261116.md",
+        "normalization_control": "scripts/check_clay_r1_weil_formula_normalization_20261116.py",
+        "external_source": "https://aimath.org/~kaur/publications/58.pdf"
       },
       {
         "id": "R2",
@@ -6607,6 +6620,7 @@
       "no_silent_upgrade_of_original_15": true
     },
     "newly_added_settled_gate_ids": [
+      "R1",
       "S1",
       "S2",
       "S3",
@@ -6615,7 +6629,6 @@
       "H2"
     ],
     "newly_added_active_gate_ids": [
-      "R1",
       "R2",
       "R3",
       "R4",
@@ -6630,6 +6643,7 @@
       "C2",
       "E2",
       "F1",
+      "R1",
       "S1",
       "S2",
       "S3",
@@ -6647,7 +6661,6 @@
       "E1",
       "F2",
       "F3",
-      "R1",
       "R2",
       "R3",
       "R4",
@@ -6764,6 +6777,19 @@
       "native_kernel_acceptance": false,
       "proof": "Docs/roadmaps/ClayBSDOriginalS3GlobalSelmerSha2RankZeroClassicalClosure20261116.md",
       "script": "scripts/check_clay_s3_original_selmer_classical_20261116.py"
+    },
+    "current_round_20261116_R1_CLASSICAL_CLOSURE": {
+      "gate": "R1",
+      "settled": true,
+      "expanded_decisions_settled": 13,
+      "expanded_gates_open": 15,
+      "original_endpoints_proved": 0,
+      "actual_all_term_explicit_formula": true,
+      "actual_zeros_not_assumed_RH": true,
+      "weil_positivity_proved": false,
+      "native_kernel_acceptance": false,
+      "proof": "Docs/roadmaps/ClayRHR1ActualCompletedZetaWeilExplicitFormulaClassicalClosure20261116.md",
+      "normalization_control": "scripts/check_clay_r1_weil_formula_normalization_20261116.py"
     }
   }
 }
