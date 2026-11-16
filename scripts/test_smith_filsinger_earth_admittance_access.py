@@ -70,3 +70,19 @@ def test_bad_parameters_fail_closed():
         vertical_near_surface_admittance(100,2,1,J_BOROK_MEAN,-1)
     with pytest.raises(ValueError):
         debye_port_energy_rate(1,1,[1],1,1,[])
+
+
+# Actual cross-repository producer reuse, rather than an independent source
+# matching primitive or silently treating earlier undisturbed V*J as Pmax.
+def test_canonical_fixed_source_matching_producer():
+    from check_smith_filsinger_shunt_source_port import source_r_required
+    r=soil_pair_far_separated_resistance_ohm(100,.1)
+    voc=required_soil_open_voltage_V(100,.1,.4)
+    assert source_r_required(voc,.4)==pytest.approx(r)
+
+def test_prior_global_column_unloaded_throughput_producer():
+    from check_smith_filsinger_global_source_access import column_source
+    prior=column_source(.4)['area_required_m2']
+    now=scenario()['atmospheric_full_column']['needed_area_0p4W_km2']*1e6
+    # factor 4 matching and J 2pA/m2 (prior) vs 2.36pA/m2 (Borok).
+    assert now/prior==pytest.approx(4*(2e-12/J_BOROK_MEAN))
