@@ -86,6 +86,32 @@ def verify_c3_non_intertwining():
         Fourier_basis_radial_matrix=[[str(v) for v in list(mixed.row(i))] for i in DIGITS],
         Fourier_basis_preserves_original_uncoupled_radial_channels=False)
 
+def verify_fourier_commuting_square_and_zero_sector_no_go():
+    # Unnormalised F is invertible, F^{-1}=F^dagger/3. Its first row
+    # exactly SUMS the original three physical source/receiver channels.
+    # The exact radial stiffness witness is A=diag(6,14,22), from
+    # Delta_d r^2=2d, NOT a 369-symmetric 3x3 operator.
+    omega=(-1+sp.I*sp.sqrt(3))/2
+    F=sp.Matrix([[omega**(j*k) for k in DIGITS] for j in DIGITS])
+    Finv=sp.conjugate(F.T)/3
+    A=sp.diag(6,14,22)
+    Ahat=(F*A*Finv).applyfunc(sp.simplify)
+    u=sp.Matrix([1,-1,0])
+    z=(F*u).applyfunc(sp.simplify)
+    assert z[0]==0 and z[1]!=0 and z[2]!=0
+    assert (F*A*u)[0]==-8  # nontrivial sectors feed aggregate zero mode
+    assert (Ahat*z-F*A*u).applyfunc(sp.simplify)==sp.zeros(3,1)
+    for test in (sp.Matrix([1,3,-2]),sp.Matrix([sp.Rational(1,3),-1,2])):
+        assert (F*test)[0]==sum(test)
+        assert (Ahat*(F*test)-F*(A*test)).applyfunc(sp.simplify)==sp.zeros(3,1)
+    return dict(full_three_sector_Fourier_commuting_square_exact=True,
+        original_receiver_sum_equals_Fourier_trivial_character=True,
+        original_trivial_character_sector_dynamically_closed=False,
+        initially_zero_receiver_witness=[1,-1,0],
+        exact_radial_first_cell_image=[6,-14,0],
+        generated_receiver_trivial_character=-8,
+        discarding_nontrivial_Fourier_sectors_is_unsound=True)
+
 def actual_original_angular_source_profiles():
     from ksw668_f8_tt_multipole import profiles
     source=profiles()
@@ -96,13 +122,14 @@ def actual_original_angular_source_profiles():
 
 def audit():
     angular=verify_angular_exact();c3=verify_c3_non_intertwining()
+    commuting=verify_fourier_commuting_square_and_zero_sector_no_go()
     vals=[sp.Rational(5,3),-sp.Rational(2,7),sp.Rational(13,11)]
     r=sp.Rational(2,3);eps=sp.Rational(1,2)
     reconstructed=receiver_yy_from_radial_V(vals,r,eps)
     independent=sum((r/eps)**ELL[q]*vals[q] for q in DIGITS)
     assert reconstructed==independent
     return dict(kind='KSW668_original_F8_Base369_unbalanced_ternary_index_consumer',
-        angular=angular,non_equivariance=c3,
+        angular=angular,non_equivariance=c3,cyclotomic_commuting_square=commuting,
         independent_radial_amplitudes_retained=3,
         receiver_axis_reconstruction_exact=True,
         original_photon_dark_and_both_Weyl_convergence=False,
