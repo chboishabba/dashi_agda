@@ -53,7 +53,22 @@
       "diagonal": "7",
       "off_diagonal": "-2 +/- (2i sqrt(3))/3; NONZERO"
     },
-    "original_5D_matter_VOA_Monster_C3_physics_claimed": false
+    "original_5D_matter_VOA_Monster_C3_physics_claimed": false,
+    "full_three_sector_Fourier_commuting_square_exact": true,
+    "original_receiver_is_Fourier_trivial_character": true,
+    "trivial_character_is_dynamically_closed": false,
+    "initial_zero_trivial_character_witness": [
+      1,
+      -1,
+      0
+    ],
+    "physical_radial_image_of_zero_character_witness": [
+      6,
+      -14,
+      0
+    ],
+    "generated_trivial_character_after_radial_image": -8,
+    "discarding_nontrivial_Fourier_sectors_is_sound": false
   },
   "original_two_grid": {
     "scheme": "physical interior constraint-preserving unweighted SBP2-SAT, normal_order=3",
@@ -187,10 +202,11 @@
     "new_ternary_algebra_and_source_tests_passed": 20,
     "new_original_receiver_H_E4_E5_tests_passed": 13,
     "new_signed_error_budget_tests_passed": 7,
-    "new_total": 40,
-    "reconstructed_local_full_selection": "366/366 PASS",
+    "new_total": 45,
+    "reconstructed_local_full_selection": "371/371 PASS",
     "exact_connected_PR_head_runner_run": false,
-    "pinned_Agda_2_9_kernel_run": false
+    "pinned_Agda_2_9_kernel_run": false,
+    "new_root_unity_square_cases": 5
   },
   "phase_gates": {
     "unsigned_ternary_even_spin2_harmonic_bidi": "exact finite maths PASS; Agda source written kernel unrun",
