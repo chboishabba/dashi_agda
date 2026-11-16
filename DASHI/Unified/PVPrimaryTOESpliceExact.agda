@@ -16,6 +16,11 @@ import DASHI.Physics.Photovoltaic.BH4StyleMechanismInventoryExact
 import DASHI.Physics.Photovoltaic.BioEnergyBranchingSameStateExact
 import DASHI.Physics.Photovoltaic.PVPrimaryConversionMaxCutExact
 
+-- Actual 369 p-shell selection and two independent optical negative controls.
+import DASHI.Physics.Photovoltaic.Atomic369C3DipoleSelectionExact
+import DASHI.Physics.Photovoltaic.Atomic369P2ScalarCoulombOpticalNoGainExact
+import DASHI.Physics.Photovoltaic.Atomic369PTripletParityE1NoGoExact
+
 -- Signed temperature/heat and ground/ORC co-product consumers only.
 import DASHI.Physics.Photovoltaic.GroundCondensateActiveCoolingExact
 import DASHI.Physics.Photovoltaic.ConditionalStageDispatchExact
