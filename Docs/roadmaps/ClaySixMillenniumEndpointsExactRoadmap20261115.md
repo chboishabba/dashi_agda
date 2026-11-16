@@ -1,3 +1,8 @@
+
+
+## 16 November 2026 — S1/S3 original-curve mathematical producer advance; NO gate promotion
+
+Original E:y²=x³−x: proved v₂(x) even for every actual nonzero x-coordinate of an E(Q₂) point by direct 2-adic valuation case split; proved real Kummer sign diagonal for actual nontorsion real points; established good-odd-prime S={2,∞} support via standard good-reduction/unramified Kummer theory. Additionally the exact right-triangle map `a=(x²−1)/y, b=2x/y, c=(x²+1)/y` yields area exactly 1 for any rational non-torsion point. Classical Fermat infinite descent excludes such a triangle, so **actual E(Q) consists of the four rational 2-torsion points and its MW rank is zero**, independently of BSD analytic rank. See [source-audited original-curve proof](ClayBSDOriginalS1DyadicRealGoodPrimeProducers20261116.md) and [exact regression](../../scripts/check_clay_s1_actual_local_valuation_20261116.py). **Do not infer from rank zero that Sel² has four classes or Sha[2] vanishes.** S1 actual all-place H¹/Kummer identification, eight Q₂ image exhaustion, and S3 original Selmer H¹ exhaustion remain **OPEN**. Native Agda/Lean checks not run. Expanded inventory remains **10/28 settled, 18 OPEN**, original Clay endpoints **0/6**; this is a genuine partial original-object mathematical advance rather than relabeling a gate.
 # Six Clay Millennium problems — canonical exact endpoint and maximum-cut roadmap
 
 
