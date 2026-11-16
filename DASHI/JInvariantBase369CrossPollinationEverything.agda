@@ -542,3 +542,8 @@ import DASHI.Moonshine.OggSSP2BCarnahanHalfTranslationParityExtractionExact
 import DASHI.Moonshine.OggSSPP2InertiaMassVersusDefectSumNoGoExact
 
 import DASHI.Moonshine.MonsterOgg279ProvenanceHubExact
+
+-- KSW668 original a=t tensor 0/2/4 angular consumer of existing Base369
+-- unsigned trit index 0/1/2, with exact physical radial C3 no-go.
+-- Presentation/observer bridge ONLY; not J-invariant or Monster gravity.
+import DASHI.Physics.Gravity.KSW668AdS5TTUnbalancedTernary369ConsumerExact
