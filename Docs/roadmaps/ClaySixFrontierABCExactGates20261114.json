@@ -5766,8 +5766,8 @@
       "F3"
     ],
     "expanded_portfolio_gate_total": 28,
-    "expanded_portfolio_decisions_settled": 10,
-    "expanded_portfolio_active_gates": 18,
+    "expanded_portfolio_decisions_settled": 11,
+    "expanded_portfolio_active_gates": 17,
     "expanded_portfolio_scope_warning": "6/28 is count of heterogeneous source/mathematical decisions and open research obligations, not percent of mathematical endpoint completion. One settled B1 gate is refutation of a universal proposed auxiliary.",
     "new_RH_BSD_HODGE_gate_ids": [
       "R1",
@@ -5897,7 +5897,7 @@
           "S5",
           "S6"
         ],
-        "current_roadmap_maxcut": "S2 classical actual E-valued Sha[2] Kummer short exact sequence CLOSED, S4 selected L(E,1)>0 classical CLOSED. S1 actual original local H1 cohomology/square-class realization OPEN; S3 original all-place Selmer size and rank OPEN; S5 odd-primary Sha/leading coefficient OPEN; S6 universal all-curves BSD OPEN. Native S2/S4 exact source transport unpaid.",
+        "current_roadmap_maxcut": "S1 classical actual E[2] Galois H1 and Q2 local Kummer image exactly 8 via original eight Lean point witnesses + local elliptic group index theorem CLOSED; S2 actual Selmer/Sha short exact sequence CLASSICALLY CLOSED; S3 original MW rank zero classically proved but global four-class Selmer H1 exhaustion OPEN; S4 original L(E,1)>0 CLASSICALLY CLOSED; S5/S6 OPEN. Native Agda/Lean same-object realization OPEN.",
         "terminal_gate_ids": [
           "S6"
         ],
@@ -6084,9 +6084,9 @@
           "DASHI/Mathematics/Arithmetic/EllipticRationalPlaceSelmerExact.agda",
           "Synthesis/MillenniumBSDCMQ2EightLocalPointWitnessesExact.lean"
         ],
-        "status": "OPEN",
-        "settled": false,
-        "classification": "ORIGINAL_UNPAID_ANALYTIC_OR_GEOMETRIC_PRODUCER",
+        "status": "CLOSED_CLASSICAL_ACTUAL_Q2_EIGHT_KUMMER_IMAGE_AND_GLOBAL_H1",
+        "settled": true,
+        "classification": "CLASSICAL_ORIGINAL_CURVE_KUMMER_AND_LOCAL_ELLIPTIC_GROUP_THEOREM",
         "mathematical_deliverable": "Actual Q₂/real/odd place E(K) Kummer image and H¹(E[2]) naturality, S={2,∞} faithful support, total local 8-class exhaustion",
         "acceptance_criteria": "Same original cubic, actual H¹/Galois/local realization; eight witnessed Q₂ classes alone not exhaustive",
         "depends_on": [
@@ -6099,10 +6099,27 @@
         "actual_real_point_sign_diagonal_classically_proved": true,
         "good_odd_prime_unramified_Sunit_support_classically_proved": true,
         "global_H1_square_class_identification_natively_typechecked": false,
-        "local_Kummer_image_8class_exhaustion_proved": false,
+        "local_Kummer_image_8class_exhaustion_proved": true,
         "source_same_object_real_dyadic_producers_natively_typechecked": false,
         "progress_proof": "Docs/roadmaps/ClayBSDOriginalS1DyadicRealGoodPrimeProducers20261116.md",
-        "progress_script": "scripts/check_clay_s1_actual_local_valuation_20261116.py"
+        "progress_script": "scripts/check_clay_s1_actual_local_valuation_20261116.py",
+        "closure_kind": "ACTUAL_ORIGINAL_E_Q2_EIGHT_CLASS_LOCAL_IMAGE_AND_ALL_PLACE_H1_CLASSICAL",
+        "actual_global_H1_E2_square_class_pair_classically_established": true,
+        "actual_local_Kummer_naturality_classically_established": true,
+        "actual_Q2_local_Kummer_image_cardinality": 8,
+        "actual_Q2_local_image_all_eight_witnesses_distinct": true,
+        "global_Sunit_support_and_faithfulness_classically_established": true,
+        "native_actual_H1_implementation_instantiated": false,
+        "native_all_place_Kummer_records_instantiated": false,
+        "proof": "Docs/roadmaps/ClayBSDOriginalS1Q2EightImageClassicalClosure20261116.md",
+        "executed_script": "scripts/check_clay_s1_original_q2_eight_image_20261116.py",
+        "classical_external_theorems_used": [
+          "local elliptic group multiplication index |E(Q2)/2E(Q2)|=2*|E(Q2)[2]|",
+          "full 2-descent Kummer map and rational square-class identification",
+          "unramified local Kummer at good odd primes",
+          "Hensel criterion for Q2 square roots of odd units congruent 1 mod 8"
+        ],
+        "S3_actual_global_Selmer_four_class_exhaustion_proved": false
       },
       {
         "id": "S2",
@@ -6582,6 +6599,7 @@
       "no_silent_upgrade_of_original_15": true
     },
     "newly_added_settled_gate_ids": [
+      "S1",
       "S2",
       "S4",
       "H1",
@@ -6592,7 +6610,6 @@
       "R2",
       "R3",
       "R4",
-      "S1",
       "S3",
       "S5",
       "S6",
@@ -6605,6 +6622,7 @@
       "C2",
       "E2",
       "F1",
+      "S1",
       "S2",
       "S4",
       "H1",
@@ -6624,7 +6642,6 @@
       "R2",
       "R3",
       "R4",
-      "S1",
       "S3",
       "S5",
       "S6",
@@ -6714,6 +6731,18 @@
       ],
       "proof": "Docs/roadmaps/ClayBSDOriginalS1DyadicRealGoodPrimeProducers20261116.md",
       "regression": "scripts/check_clay_s1_actual_local_valuation_20261116.py"
+    },
+    "current_round_20261116_S1_CLASSICAL_CLOSURE": {
+      "gate": "S1",
+      "settled": true,
+      "expanded_decisions_settled": 11,
+      "expanded_gates_open": 17,
+      "original_endpoints_proved": 0,
+      "proof": "Docs/roadmaps/ClayBSDOriginalS1Q2EightImageClassicalClosure20261116.md",
+      "script": "scripts/check_clay_s1_original_q2_eight_image_20261116.py",
+      "actual_local_eight_class_exhaustion": true,
+      "native_kernel_acceptance": false,
+      "S3_open": true
     }
   }
 }
