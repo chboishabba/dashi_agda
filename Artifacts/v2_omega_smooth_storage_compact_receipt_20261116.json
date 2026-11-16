@@ -1,0 +1,32 @@
+{
+  "schema": "dashi.V2.Omega.smooth-storage-identifiability.v1",
+  "date": "2026-11-16",
+  "origin": "constructed source-independent magnetic generator, not V2",
+  "test_count_local": 135,
+  "new_tests": 31,
+  "old_AH_tests": 104,
+  "candidate_count": 30,
+  "same_waveform_base_bus_w": 20.670193,
+  "same_waveform_enhanced_bus_w": 28.014056,
+  "gain_w": 7.343863,
+  "certified_gain_interval_w": [
+    7.135639,
+    7.552087
+  ],
+  "upper_winding_voltage_v": 319.62416,
+  "limit_v": 320,
+  "bus_nominal_v": 340,
+  "cap_f": 0.01,
+  "inertia_minimum_1s_kgm2": 0.07442507484533924,
+  "inertia_minimum_10s_kgm2": 0.7442507484533923,
+  "observation_rank": 1,
+  "observation_nullity": 3,
+  "conditional_loss_suppression_w": [
+    43,
+    47
+  ],
+  "original_16_gates": "OPEN",
+  "agda_kernel": "NOT RUN",
+  "github_head_tests": "NOT RUN",
+  "new_full_source": "conversation verified ZIP only, not committed to repository"
+}
