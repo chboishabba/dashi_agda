@@ -26,17 +26,32 @@ solarWindNotStormGenerator :
   solarWindThroughMagnetosphere ≡ atmosphericStormGenerator → Empty
 solarWindNotStormGenerator ()
 
+-- 2021 electric field/raindrops: doi:10.1029/2021GL093577 (observation)
+-- Kirsch/Ament/Hohenegger 2021: doi:10.1175/MWR-D-20-0197.1 (cold-pool observations)
+-- Tinsley 2023: doi:10.1175/BAMS-D-23-0065.1 (interpretive source review)
+-- Filsinger source: narrated "cosmic radiation", see canonical reel ledger;
+-- NOT a measured solar port, and his portable antenna is only proposed.
+-- Walker Infoton original proposal: https://zenodo.org/records/18210355
+-- and docs/research/InfotonP30WalkerMaxCut20261115.md; no particle validation.
 data SourceStudy : Set where
   lukianovaPolar2025 linULF2026 blancWholeAtmosphere2026 tinsleyCloud2022 : SourceStudy
+  electricFieldRaindrops2021 kirschColdPools2021 tinsleySolarWeather2023 : SourceStudy
+  filsingerCosmicNarration walkerInfotonProposal : SourceStudy
 
 data EvidenceTier : Set where
-  researchReview globalSimulation observationAndTheory : EvidenceTier
+  researchReview globalSimulation observationAndTheory
+    observedNaturalAssociation recordedClaim authorProposal : EvidenceTier
 
 sourceTier : SourceStudy → EvidenceTier
 sourceTier lukianovaPolar2025 = observationAndTheory
 sourceTier linULF2026 = globalSimulation
 sourceTier blancWholeAtmosphere2026 = researchReview
 sourceTier tinsleyCloud2022 = researchReview
+sourceTier electricFieldRaindrops2021 = observedNaturalAssociation
+sourceTier kirschColdPools2021 = observedNaturalAssociation
+sourceTier tinsleySolarWeather2023 = researchReview
+sourceTier filsingerCosmicNarration = recordedClaim
+sourceTier walkerInfotonProposal = authorProposal
 
 -- Energy ports must be disjoint physical crossings of ONE selected boundary.
 -- Counting solar heating and its downstream storm electrical output twice is
