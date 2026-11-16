@@ -195,6 +195,52 @@ resistanceThreeInphaseStrictlyBetter :
   StrictCrossGap (196 * 16) 3025
 resistanceThreeInphaseStrictlyBetter = strictCrossGap 110 refl
 
+
+-- F02/F03 finite *causal* counterexamples. A common transmitter may launch
+-- two path signals at different times that arrive simultaneously with
+-- different phases. Likewise an undriven detuned mode need not preserve the
+-- phase of a slower mode. These are deliberately finite clock examples:
+-- NOT a Maxwell group velocity, spatial Green function or continuous mode
+-- locking theorem.
+import DASHI.Physics.Motors.SmithFilsingerTimeIndexedTransferExact as Time
+
+data BinaryFieldPhase : Set where
+  phasePlus phaseMinus : BinaryFieldPhase
+
+togglePhase : BinaryFieldPhase → BinaryFieldPhase
+togglePhase phasePlus = phaseMinus
+togglePhase phaseMinus = phasePlus
+
+alternatingSourcePhase : Nat → BinaryFieldPhase
+alternatingSourcePhase zero = phasePlus
+alternatingSourcePhase (suc t) = togglePhase (alternatingSourcePhase t)
+
+fastPath : Time.RetardedFlight
+fastPath = Time.scheduled 1 0
+
+slowPath : Time.RetardedFlight
+slowPath = Time.scheduled 0 1
+
+twoPathsReachSameTime :
+  Time.RetardedFlight.arrival fastPath
+    ≡ Time.RetardedFlight.arrival slowPath
+twoPathsReachSameTime = refl
+
+arrivalDoesNotIdentifyLaunchPhase :
+  alternatingSourcePhase (Time.RetardedFlight.launch fastPath)
+    ≡ alternatingSourcePhase (Time.RetardedFlight.launch slowPath)
+      → Midpoint.Contradiction
+arrivalDoesNotIdentifyLaunchPhase ()
+
+freeRunningDifferentClocksStartAligned :
+  alternatingSourcePhase zero ≡ phasePlus
+freeRunningDifferentClocksStartAligned = refl
+
+freeRunningDifferentClocksCanSeparate :
+  alternatingSourcePhase (suc zero) ≡ phasePlus
+    → Midpoint.Contradiction
+freeRunningDifferentClocksCanSeparate ()
+
 -- F08: if there is no incoming naturally powered work, a positive
 -- *net incoming* natural-port classification is impossible even though
 -- driver energy may radiate out of the natural-facing port.
