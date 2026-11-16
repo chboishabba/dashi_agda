@@ -42,3 +42,29 @@ The two current master aggregates, \`DASHI/Unifier.agda\` and \`DASHI/Everything
 7. Seek independent audience data and explicit same-operation causal evidence only if obtainable; otherwise keep B7/B8 OPEN.
 
 **Stop rule:** no new media/person adjacency without a new original claim, exact-source version, contract/payment, documentary instruction, audience response or measured causal consequence. These Australian records are a local stress test, not a worldwide source-concentration estimate. No original empirical gates were closed by code/schema-only work.
+
+## 16 Nov — B1 / B4 / B5 source-bound maximum cut
+
+### New executable owners and receipts
+
+- `scripts/bom_streak_negative_controls.py` and `tests/test_bom_streak_negative_controls.py`: anchored, bounded exact candidate search within a station across dates and between stations on the same dates. Excludes long all-zero rainfall runs, enforces wet-day support, preserves missing-day gaps, recognises numeric-format equivalence, and reports deterministic month-rotation controls. **Nine synthetic tests passed locally.** It cannot yet reproduce Lloyd's 381/402 intermittent matches or statistical false-discovery rate and cannot validate geographic independence; high-multiplicity anchors are reported skipped, so a no-result cannot mean an exhaustive no-anomaly certificate. This is B1 **partial code**, not a whole-network replication.
+- `scripts/bom_panel_trend_sensitivity.py` and its tests: exact rational identity for weighted least-squares differences on *the same derived annual panel*. Requires identical nonmissing years and fixed positive weights. Reports full signed difference and triangle bound; no unreported imputation or altered denominator. **Eight synthetic tests passed locally.** No real paired before/after homogenised annual panels; B4 empirical outcome **OPEN**.
+- `Docs/support/reference/bom_abc_mediawatch_station_excerpts_20261026.json` and `tests/test_bom_abc_source_excerpts.py`: three exact source-typed samples transcribed from Berger's supporting tables hosted by ABC Media Watch on 26 October, not independent CDO archive bytes. **Four locally run tests passed**: Sydney 066062 1910 January 25–31 = February 1–7 (seven numeric matches, below the detector's preregistered 12-day default); June 1943 = June 1944 (30/30); December 1935/1936 shows first 14 matches, 2 missing 1935 days corresponding to populated 1936 days, then 15 matching numeric values including the shared junction on day 17 (accumulation metadata differs). No original paper record authenticated, no copy direction inferred, no trend impact measured.
+
+### New primary-source provenance correction
+
+ABC Media Watch (26 October 2026) publishes **both** original party responses and five attachments attributed to Berger: https://www.abc.net.au/mediawatch/episodes/bom/107310398 . The 26 Oct BOM spokeswoman reply at https://live-production.wcms.abc-cdn.net.au/109ad311a673359cf5652021d85173b8 explicitly:
+
+- **acknowledges** 1943/44 June and 1935/36 December examples and says each is **already included** in its small original duplication count, with affected copies showing no data while original logbooks are consulted. Do **not** cite these as *new* counterexamples to the Bureau's 'no further months beyond the audited cases' statement;
+- **investigates**, but does not yet confirm, the Jan/Feb 1910 seven-day match. It says the week was included in the stated upper count while being checked. This is not equivalent to a confirmed copy cause or a final correction;
+- distinguishes temporary no-data exclusion from the planned later logbook restoration. A 19 October v2.7 update does not by itself certify that every original historical value was reconstructed.
+
+Berger's statement is available at https://live-production.wcms.abc-cdn.net.au/8b73f188d35eefe9c037efc6982be7f7 . The publisher's 25 Oct reply is at https://live-production.wcms.abc-cdn.net.au/f1706e61b630c6095fe4d5931a140c29 . These are source-attributed positions, not independent confirmation of the 39-page report's claimed Monte Carlo probabilities or 'human fingerprints'. The complete 39-page audit is not authenticated/ingested, though Berger states in his reply that he sent it via Andrew Wilkie before publication.
+
+The BOM ACORN-SAT original site catalogue states **Charleville Post Office 044022 supplied 1910–48**, with Aero 044021 taking observations from 1942: https://www.bom.gov.au/climate/data/acorn-sat/documents/ACORN-SAT_Report_No_5_WEB.pdf (printed page 27). The 1914 August/September candidate must be checked against Post Office 044022, not inferred from Aero 044021; overlapping site periods, later moves and composite series require a dated physical station lineage witness.
+
+### Unpaid gates after this cut
+
+B0 May and 29–30 Oct raw CDO archive SHA256/capture receipts; B1 complete network + gapped-match + robust controls and original paper directions; B2 archival pages with independent review; B3 actual paired raw revision events (571 historical removals alleged, not reproduced); B4 actual station and national series sensitivity with homogenisation or published adjustment code; B5 unmodified complete 39-page Berger/Sherrington report, original 2GB recording, other dated media and exact reprint joins; B6 real documentary commissioning/editorial rights; B7 audience exposures and causal study; B8 single-operation six-stage admission; B9 Agda kernel and #1251's separate 13 exports forward-port.
+
+**Acquisition order:** (1) secure original BOM CDO May/Oct byte snapshots or request immutable copies and change log from the Bureau and Patrick Lloyd, (2) original Sydney/Charleville logbooks and metadata, (3) complete Berger/Sherrington audit with actual dataset/method/seed/code, (4) ACORN-SAT 2.6/2.7 release code/panels and separate isolated-raw-correction variant, (5) original media audio and signed finance/editorial sources. Do not rerun pseudo-empirical tests on summaries alone.
