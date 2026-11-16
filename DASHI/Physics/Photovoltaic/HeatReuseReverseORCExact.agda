@@ -6,7 +6,7 @@ module DASHI.Physics.Photovoltaic.HeatReuseReverseORCExact where
 --
 -- Historical experimental prior art (not attributable to DASHI):
 -- Ravindran et al. (2024), DOI 10.1016/j.applthermaleng.2024.124237
--- Dumont et al. (2015), DOI 10.1016/j.ijrefrig.2015.03.020
+-- Dumont et al. (2015), DOI 10.1016/j.ijrefrig.2015.03.008
 -- Treat scroll-expander operation as a different machine mode from compressor
 -- operation; never treat reversing an electric motor as proof of a heat engine.
 
