@@ -1,0 +1,689 @@
+{
+  "donor_reuse": [
+    "check_v2_pulse_nonlinear_recovery.py: falling-L and fixed shaft",
+    "check_reluctance_phase_symmetry_maxcut.py: non-privileged phase count and gross bidirectional port",
+    "v2_coupled_pulse_machine_maxcut.py: source-independent saturating energy & storage ledger",
+    "SmithFilsingerTimeIndexedTransferExact: independent timed modulation work, NOT original V2 architecture"
+  ],
+  "intervention": {
+    "auxiliary_delta_w": 0.0,
+    "important_boundary": "whole motor-generator system; motor electrical input is not generator shaft input",
+    "motor_display_delta_w": 0.0,
+    "other_load_delta_w": 0.0,
+    "output_delta_w": 45.0,
+    "possible_explanations": "loss suppression, additional shaft/input work, reduced other output, stored energy depletion, meter mismatch; cannot distinguish from reel",
+    "required_loss_delta_w": -45.0,
+    "storage_rate_delta_w": 0.0,
+    "unaccounted_input_delta_w": 0.0
+  },
+  "main": {
+    "common_shaft_power_w": 45.0,
+    "difference_from_ordinary_w": {
+      "combined_pulsing_and_recovery": 12.227740445804898,
+      "ordinary_loading": 0.0,
+      "pulse_timing_only": 0.7955140446758726,
+      "recovery_only": 10.658743885880362
+    },
+    "energy_limit_all_arms": "useful_bus <= shaft input if nonnegative losses and zero auxiliary input",
+    "four_way_not_same_as_loaded_unloaded": "yes: all arms are under electrical load and equal shaft extraction",
+    "machine": {
+      "core_loss_w": 0.5,
+      "eta_clamp_basic": 0.8,
+      "eta_clamp_recovered": 0.95,
+      "eta_fwd": 0.98,
+      "eta_running_regen": 0.98,
+      "mean_inductance_h": 0.04,
+      "peak_current_limit_a": 8.0,
+      "pole_harmonic": 4,
+      "pulse_logic_w": 0.2,
+      "recovery_controller_w": 0.4,
+      "resistance_ohm": 1.0,
+      "rpm": 2354.0,
+      "sat_current_a": 5.0,
+      "shaft_power_w": 45.0,
+      "soft_switch_fraction": 0.8,
+      "switch_fixed_j": 0.002,
+      "switch_per_i2_j": 0.00015,
+      "varying_inductance_h": 0.012
+    },
+    "model_limitations": [
+      "instantaneous rectangular transitions require unbounded pulse voltage",
+      "source-netlist unknown; assumes lossless recovery is possible except accounted overhead",
+      "zero winding stored-energy change by construction is not whole-system storage closure",
+      "fixed invented reluctance map and shaft work, no measured V2 torque",
+      "real waveguide delay/FEA not used unless edge/bandwidth physically requires it"
+    ],
+    "results": {
+      "combined_pulsing_and_recovery": {
+        "accounting_residual_w": -5.684341886080802e-14,
+        "admissible_at_assumed_peak_current": true,
+        "clamp_recovery_enabled": true,
+        "duty_fraction": 0.3702699953264157,
+        "losses_w": {
+          "copper_w": 11.420281621987757,
+          "core_w": 0.5,
+          "forward_converter_w": 2.3045242433722684,
+          "off_clamp_dump_w": 4.034542633557049,
+          "pulse_logic_w": 0.2,
+          "recovery_logic_w": 0.4,
+          "running_converter_w": 1.3162110726422496,
+          "switching_w": 1.6638619102449583
+        },
+        "mechanical_input_w": 45.0,
+        "model_limitations": "ideal rectangular current, no real slew/voltage/thermal certificate, source hardware unknown",
+        "off_clamp_available_w": 80.6908526711409,
+        "off_clamp_dump_w": 4.034542633557049,
+        "peak_current_a": 5.553658186626552,
+        "q": 0.3963692943139587,
+        "recovered_clamp_w": 76.65631003758385,
+        "running_regen_available_w": 65.81055363211242,
+        "same_shaft_w": true,
+        "storage_delta_j_per_rev": 0.0,
+        "storage_scope": "Only this ideal winding starts/ends at zero current; no DC-bus, battery, thermal or hysteresis endpoint certificate",
+        "terminal_gross_drive_w": 112.92168792524103,
+        "terminal_gross_recovery_available_w": 146.5014063032533,
+        "timed_control": true,
+        "total_losses_w": 21.83942148180428,
+        "useful_bus_w": 23.160578518195777
+      },
+      "ordinary_loading": {
+        "accounting_residual_w": 3.552713678800501e-14,
+        "admissible_at_assumed_peak_current": true,
+        "clamp_recovery_enabled": false,
+        "duty_fraction": 0.5,
+        "losses_w": {
+          "copper_w": 13.967480708338837,
+          "core_w": 0.5,
+          "forward_converter_w": 2.1373361462572653,
+          "off_clamp_dump_w": 14.226882163352357,
+          "pulse_logic_w": 0.0,
+          "recovery_logic_w": 0.0,
+          "running_converter_w": 1.2925515928301057,
+          "switching_w": 1.9429113168305183
+        },
+        "mechanical_input_w": 45.0,
+        "model_limitations": "ideal rectangular current, no real slew/voltage/thermal certificate, source hardware unknown",
+        "off_clamp_available_w": 71.1344108167618,
+        "off_clamp_dump_w": 14.226882163352357,
+        "peak_current_a": 5.285353480769065,
+        "q": 0.0,
+        "recovered_clamp_w": 56.90752865340944,
+        "running_regen_available_w": 64.62757964150522,
+        "same_shaft_w": true,
+        "storage_delta_j_per_rev": 0.0,
+        "storage_scope": "Only this ideal winding starts/ends at zero current; no DC-bus, battery, thermal or hysteresis endpoint certificate",
+        "terminal_gross_drive_w": 104.72947116660589,
+        "terminal_gross_recovery_available_w": 135.761990458267,
+        "timed_control": false,
+        "total_losses_w": 34.067161927609085,
+        "useful_bus_w": 10.93283807239088
+      },
+      "pulse_timing_only": {
+        "accounting_residual_w": -3.907985046680551e-14,
+        "admissible_at_assumed_peak_current": true,
+        "clamp_recovery_enabled": false,
+        "duty_fraction": 0.4284279520980851,
+        "losses_w": {
+          "copper_w": 12.325586456799758,
+          "core_w": 0.5,
+          "forward_converter_w": 2.1778750320196067,
+          "off_clamp_dump_w": 14.775763396554847,
+          "pulse_logic_w": 0.2,
+          "recovery_logic_w": 0.0,
+          "running_converter_w": 1.3102294625877338,
+          "switching_w": 1.9821935349713447
+        },
+        "mechanical_input_w": 45.00000000000001,
+        "model_limitations": "ideal rectangular current, no real slew/voltage/thermal certificate, source hardware unknown",
+        "off_clamp_available_w": 73.87881698277425,
+        "off_clamp_dump_w": 14.775763396554847,
+        "peak_current_a": 5.363705163869424,
+        "q": 0.2229603548621209,
+        "recovered_clamp_w": 59.1030535862194,
+        "running_regen_available_w": 65.51147312938663,
+        "same_shaft_w": true,
+        "storage_delta_j_per_rev": 0.0,
+        "storage_scope": "Only this ideal winding starts/ends at zero current; no DC-bus, battery, thermal or hysteresis endpoint certificate",
+        "terminal_gross_drive_w": 106.71587656896061,
+        "terminal_gross_recovery_available_w": 139.39029011216087,
+        "timed_control": true,
+        "total_losses_w": 33.271647882933294,
+        "useful_bus_w": 11.728352117066752
+      },
+      "recovery_only": {
+        "accounting_residual_w": 4.263256414560601e-14,
+        "admissible_at_assumed_peak_current": true,
+        "clamp_recovery_enabled": true,
+        "duty_fraction": 0.5,
+        "losses_w": {
+          "copper_w": 13.967480708338837,
+          "core_w": 0.5,
+          "forward_converter_w": 2.1373361462572653,
+          "off_clamp_dump_w": 3.5567205408380933,
+          "pulse_logic_w": 0.0,
+          "recovery_logic_w": 0.4,
+          "running_converter_w": 1.2925515928301057,
+          "switching_w": 1.5543290534644147
+        },
+        "mechanical_input_w": 45.0,
+        "model_limitations": "ideal rectangular current, no real slew/voltage/thermal certificate, source hardware unknown",
+        "off_clamp_available_w": 71.1344108167618,
+        "off_clamp_dump_w": 3.5567205408380933,
+        "peak_current_a": 5.285353480769065,
+        "q": 0.0,
+        "recovered_clamp_w": 67.5776902759237,
+        "running_regen_available_w": 64.62757964150522,
+        "same_shaft_w": true,
+        "storage_delta_j_per_rev": 0.0,
+        "storage_scope": "Only this ideal winding starts/ends at zero current; no DC-bus, battery, thermal or hysteresis endpoint certificate",
+        "terminal_gross_drive_w": 104.72947116660589,
+        "terminal_gross_recovery_available_w": 135.761990458267,
+        "timed_control": false,
+        "total_losses_w": 23.408418041728716,
+        "useful_bus_w": 21.59158195827124
+      }
+    },
+    "scenario": "constructed saturating magnetic winding, not original V2",
+    "source_reported_rpm_only": 2354.0,
+    "timing_recovery_interaction_w": 0.7734825152486628
+  },
+  "nonidentifiability": {
+    "identical_reel_displays_not_identifying_mechanism": true,
+    "warning": "Constructed conservation countermodels; NONE is identified with original V2",
+    "worlds": {
+      "incomplete_motor_meter": {
+        "aux_w": 0.0,
+        "closed_residual_w": 0.0,
+        "load_w": 45.0,
+        "losses_w": 286.0,
+        "reported_input_w": 286.0,
+        "storage_rate_w": 0.0,
+        "true_input_w": 331.0
+      },
+      "independent_auxiliary_source": {
+        "aux_w": 45.0,
+        "closed_residual_w": 0.0,
+        "load_w": 45.0,
+        "losses_w": 286.0,
+        "reported_input_w": 286.0,
+        "storage_rate_w": 0.0,
+        "true_input_w": 286.0
+      },
+      "loss_redistribution": {
+        "aux_w": 0.0,
+        "closed_residual_w": 0.0,
+        "load_w": 45.0,
+        "losses_w": 241.0,
+        "reported_input_w": 286.0,
+        "storage_rate_w": 0.0,
+        "true_input_w": 286.0
+      },
+      "stored_energy_depletion": {
+        "aux_w": 0.0,
+        "closed_residual_w": 0.0,
+        "load_w": 45.0,
+        "losses_w": 286.0,
+        "reported_input_w": 286.0,
+        "storage_rate_w": -45.0,
+        "true_input_w": 286.0
+      }
+    }
+  },
+  "schema": "dashi.v2.source-bounded-efficiency.v1",
+  "sensitivity": {
+    "negative_combined_examples": 18,
+    "negative_recovery_examples": 18,
+    "rows": [
+      {
+        "combined_beats_ordinary": true,
+        "combined_gain_w": 11.23348360973875,
+        "eta": 0.9,
+        "r_ohm": 0.5,
+        "recovery_gain_w": 11.058743885880347,
+        "recovery_hurts": false,
+        "recovery_overhead_w": 0.0,
+        "timing_gain_w": 0.029987976420966067
+      },
+      {
+        "combined_beats_ordinary": true,
+        "combined_gain_w": 10.83348360973875,
+        "eta": 0.9,
+        "r_ohm": 0.5,
+        "recovery_gain_w": 10.658743885880346,
+        "recovery_hurts": false,
+        "recovery_overhead_w": 0.4,
+        "timing_gain_w": 0.029987976420966067
+      },
+      {
+        "combined_beats_ordinary": true,
+        "combined_gain_w": 6.23348360973875,
+        "eta": 0.9,
+        "r_ohm": 0.5,
+        "recovery_gain_w": 6.058743885880347,
+        "recovery_hurts": false,
+        "recovery_overhead_w": 5.0,
+        "timing_gain_w": 0.029987976420966067
+      },
+      {
+        "combined_beats_ordinary": false,
+        "combined_gain_w": -3.7665163902612497,
+        "eta": 0.9,
+        "r_ohm": 0.5,
+        "recovery_gain_w": -3.941256114119653,
+        "recovery_hurts": true,
+        "recovery_overhead_w": 15.0,
+        "timing_gain_w": 0.029987976420966067
+      },
+      {
+        "combined_beats_ordinary": false,
+        "combined_gain_w": -18.7665163902613,
+        "eta": 0.9,
+        "r_ohm": 0.5,
+        "recovery_gain_w": -18.941256114119653,
+        "recovery_hurts": true,
+        "recovery_overhead_w": 30.0,
+        "timing_gain_w": 0.029987976420966067
+      },
+      {
+        "combined_beats_ordinary": true,
+        "combined_gain_w": 11.482671241851705,
+        "eta": 0.98,
+        "r_ohm": 0.5,
+        "recovery_gain_w": 11.05874388588036,
+        "recovery_hurts": false,
+        "recovery_overhead_w": 0.0,
+        "timing_gain_w": 0.10210348542647907
+      },
+      {
+        "combined_beats_ordinary": true,
+        "combined_gain_w": 11.082671241851706,
+        "eta": 0.98,
+        "r_ohm": 0.5,
+        "recovery_gain_w": 10.658743885880362,
+        "recovery_hurts": false,
+        "recovery_overhead_w": 0.4,
+        "timing_gain_w": 0.10210348542647907
+      },
+      {
+        "combined_beats_ordinary": true,
+        "combined_gain_w": 6.482671241851705,
+        "eta": 0.98,
+        "r_ohm": 0.5,
+        "recovery_gain_w": 6.058743885880361,
+        "recovery_hurts": false,
+        "recovery_overhead_w": 5.0,
+        "timing_gain_w": 0.10210348542647907
+      },
+      {
+        "combined_beats_ordinary": false,
+        "combined_gain_w": -3.5173287581482953,
+        "eta": 0.98,
+        "r_ohm": 0.5,
+        "recovery_gain_w": -3.941256114119639,
+        "recovery_hurts": true,
+        "recovery_overhead_w": 15.0,
+        "timing_gain_w": 0.10210348542647907
+      },
+      {
+        "combined_beats_ordinary": false,
+        "combined_gain_w": -18.517328758148295,
+        "eta": 0.98,
+        "r_ohm": 0.5,
+        "recovery_gain_w": -18.94125611411964,
+        "recovery_hurts": true,
+        "recovery_overhead_w": 30.0,
+        "timing_gain_w": 0.10210348542647907
+      },
+      {
+        "combined_beats_ordinary": true,
+        "combined_gain_w": 11.586444081727969,
+        "eta": 1.0,
+        "r_ohm": 0.5,
+        "recovery_gain_w": 11.05874388588036,
+        "recovery_hurts": false,
+        "recovery_overhead_w": 0.0,
+        "timing_gain_w": 0.12602608164043616
+      },
+      {
+        "combined_beats_ordinary": true,
+        "combined_gain_w": 11.18644408172797,
+        "eta": 1.0,
+        "r_ohm": 0.5,
+        "recovery_gain_w": 10.658743885880362,
+        "recovery_hurts": false,
+        "recovery_overhead_w": 0.4,
+        "timing_gain_w": 0.12602608164043616
+      },
+      {
+        "combined_beats_ordinary": true,
+        "combined_gain_w": 6.586444081727969,
+        "eta": 1.0,
+        "r_ohm": 0.5,
+        "recovery_gain_w": 6.058743885880361,
+        "recovery_hurts": false,
+        "recovery_overhead_w": 5.0,
+        "timing_gain_w": 0.12602608164043616
+      },
+      {
+        "combined_beats_ordinary": false,
+        "combined_gain_w": -3.4135559182720314,
+        "eta": 1.0,
+        "r_ohm": 0.5,
+        "recovery_gain_w": -3.941256114119639,
+        "recovery_hurts": true,
+        "recovery_overhead_w": 15.0,
+        "timing_gain_w": 0.12602608164043616
+      },
+      {
+        "combined_beats_ordinary": false,
+        "combined_gain_w": -18.41355591827203,
+        "eta": 1.0,
+        "r_ohm": 0.5,
+        "recovery_gain_w": -18.94125611411964,
+        "recovery_hurts": true,
+        "recovery_overhead_w": 30.0,
+        "timing_gain_w": 0.12602608164043616
+      },
+      {
+        "combined_beats_ordinary": true,
+        "combined_gain_w": 12.060120566402357,
+        "eta": 0.9,
+        "r_ohm": 1.0,
+        "recovery_gain_w": 11.05874388588036,
+        "recovery_hurts": false,
+        "recovery_overhead_w": 0.0,
+        "timing_gain_w": 0.6035315234257479
+      },
+      {
+        "combined_beats_ordinary": true,
+        "combined_gain_w": 11.660120566402357,
+        "eta": 0.9,
+        "r_ohm": 1.0,
+        "recovery_gain_w": 10.65874388588036,
+        "recovery_hurts": false,
+        "recovery_overhead_w": 0.4,
+        "timing_gain_w": 0.6035315234257479
+      },
+      {
+        "combined_beats_ordinary": true,
+        "combined_gain_w": 7.060120566402357,
+        "eta": 0.9,
+        "r_ohm": 1.0,
+        "recovery_gain_w": 6.058743885880361,
+        "recovery_hurts": false,
+        "recovery_overhead_w": 5.0,
+        "timing_gain_w": 0.6035315234257479
+      },
+      {
+        "combined_beats_ordinary": false,
+        "combined_gain_w": -2.939879433597642,
+        "eta": 0.9,
+        "r_ohm": 1.0,
+        "recovery_gain_w": -3.9412561141196387,
+        "recovery_hurts": true,
+        "recovery_overhead_w": 15.0,
+        "timing_gain_w": 0.6035315234257479
+      },
+      {
+        "combined_beats_ordinary": false,
+        "combined_gain_w": -17.93987943359766,
+        "eta": 0.9,
+        "r_ohm": 1.0,
+        "recovery_gain_w": -18.94125611411964,
+        "recovery_hurts": true,
+        "recovery_overhead_w": 30.0,
+        "timing_gain_w": 0.6035315234257479
+      },
+      {
+        "combined_beats_ordinary": true,
+        "combined_gain_w": 12.627740445804896,
+        "eta": 0.98,
+        "r_ohm": 1.0,
+        "recovery_gain_w": 11.05874388588036,
+        "recovery_hurts": false,
+        "recovery_overhead_w": 0.0,
+        "timing_gain_w": 0.7955140446758726
+      },
+      {
+        "combined_beats_ordinary": true,
+        "combined_gain_w": 12.227740445804898,
+        "eta": 0.98,
+        "r_ohm": 1.0,
+        "recovery_gain_w": 10.658743885880362,
+        "recovery_hurts": false,
+        "recovery_overhead_w": 0.4,
+        "timing_gain_w": 0.7955140446758726
+      },
+      {
+        "combined_beats_ordinary": true,
+        "combined_gain_w": 7.627740445804896,
+        "eta": 0.98,
+        "r_ohm": 1.0,
+        "recovery_gain_w": 6.058743885880361,
+        "recovery_hurts": false,
+        "recovery_overhead_w": 5.0,
+        "timing_gain_w": 0.7955140446758726
+      },
+      {
+        "combined_beats_ordinary": false,
+        "combined_gain_w": -2.3722595541951037,
+        "eta": 0.98,
+        "r_ohm": 1.0,
+        "recovery_gain_w": -3.941256114119639,
+        "recovery_hurts": true,
+        "recovery_overhead_w": 15.0,
+        "timing_gain_w": 0.7955140446758726
+      },
+      {
+        "combined_beats_ordinary": false,
+        "combined_gain_w": -17.372259554195104,
+        "eta": 0.98,
+        "r_ohm": 1.0,
+        "recovery_gain_w": -18.94125611411964,
+        "recovery_hurts": true,
+        "recovery_overhead_w": 30.0,
+        "timing_gain_w": 0.7955140446758726
+      },
+      {
+        "combined_beats_ordinary": true,
+        "combined_gain_w": 12.841031901118495,
+        "eta": 1.0,
+        "r_ohm": 1.0,
+        "recovery_gain_w": 11.05874388588036,
+        "recovery_hurts": false,
+        "recovery_overhead_w": 0.0,
+        "timing_gain_w": 0.8575812169420924
+      },
+      {
+        "combined_beats_ordinary": true,
+        "combined_gain_w": 12.441031901118496,
+        "eta": 1.0,
+        "r_ohm": 1.0,
+        "recovery_gain_w": 10.658743885880362,
+        "recovery_hurts": false,
+        "recovery_overhead_w": 0.4,
+        "timing_gain_w": 0.8575812169420924
+      },
+      {
+        "combined_beats_ordinary": true,
+        "combined_gain_w": 7.841031901118495,
+        "eta": 1.0,
+        "r_ohm": 1.0,
+        "recovery_gain_w": 6.058743885880361,
+        "recovery_hurts": false,
+        "recovery_overhead_w": 5.0,
+        "timing_gain_w": 0.8575812169420924
+      },
+      {
+        "combined_beats_ordinary": false,
+        "combined_gain_w": -2.1589680988815054,
+        "eta": 1.0,
+        "r_ohm": 1.0,
+        "recovery_gain_w": -3.941256114119639,
+        "recovery_hurts": true,
+        "recovery_overhead_w": 15.0,
+        "timing_gain_w": 0.8575812169420924
+      },
+      {
+        "combined_beats_ordinary": false,
+        "combined_gain_w": -17.158968098881505,
+        "eta": 1.0,
+        "r_ohm": 1.0,
+        "recovery_gain_w": -18.94125611411964,
+        "recovery_hurts": true,
+        "recovery_overhead_w": 30.0,
+        "timing_gain_w": 0.8575812169420924
+      },
+      {
+        "combined_beats_ordinary": true,
+        "combined_gain_w": 13.144192040623516,
+        "eta": 0.9,
+        "r_ohm": 1.5,
+        "recovery_gain_w": 11.05874388588036,
+        "recovery_hurts": false,
+        "recovery_overhead_w": 0.0,
+        "timing_gain_w": 1.4184160582006804
+      },
+      {
+        "combined_beats_ordinary": true,
+        "combined_gain_w": 12.744192040623515,
+        "eta": 0.9,
+        "r_ohm": 1.5,
+        "recovery_gain_w": 10.65874388588036,
+        "recovery_hurts": false,
+        "recovery_overhead_w": 0.4,
+        "timing_gain_w": 1.4184160582006804
+      },
+      {
+        "combined_beats_ordinary": true,
+        "combined_gain_w": 8.144192040623516,
+        "eta": 0.9,
+        "r_ohm": 1.5,
+        "recovery_gain_w": 6.058743885880361,
+        "recovery_hurts": false,
+        "recovery_overhead_w": 5.0,
+        "timing_gain_w": 1.4184160582006804
+      },
+      {
+        "combined_beats_ordinary": false,
+        "combined_gain_w": -1.855807959376472,
+        "eta": 0.9,
+        "r_ohm": 1.5,
+        "recovery_gain_w": -3.941256114119639,
+        "recovery_hurts": true,
+        "recovery_overhead_w": 15.0,
+        "timing_gain_w": 1.4184160582006804
+      },
+      {
+        "combined_beats_ordinary": false,
+        "combined_gain_w": -16.855807959376484,
+        "eta": 0.9,
+        "r_ohm": 1.5,
+        "recovery_gain_w": -18.94125611411964,
+        "recovery_hurts": true,
+        "recovery_overhead_w": 30.0,
+        "timing_gain_w": 1.4184160582006804
+      },
+      {
+        "combined_beats_ordinary": true,
+        "combined_gain_w": 13.97471882277532,
+        "eta": 0.98,
+        "r_ohm": 1.5,
+        "recovery_gain_w": 11.05874388588036,
+        "recovery_hurts": false,
+        "recovery_overhead_w": 0.0,
+        "timing_gain_w": 1.7185411606064331
+      },
+      {
+        "combined_beats_ordinary": true,
+        "combined_gain_w": 13.57471882277532,
+        "eta": 0.98,
+        "r_ohm": 1.5,
+        "recovery_gain_w": 10.65874388588036,
+        "recovery_hurts": false,
+        "recovery_overhead_w": 0.4,
+        "timing_gain_w": 1.7185411606064331
+      },
+      {
+        "combined_beats_ordinary": true,
+        "combined_gain_w": 8.97471882277532,
+        "eta": 0.98,
+        "r_ohm": 1.5,
+        "recovery_gain_w": 6.058743885880361,
+        "recovery_hurts": false,
+        "recovery_overhead_w": 5.0,
+        "timing_gain_w": 1.7185411606064331
+      },
+      {
+        "combined_beats_ordinary": false,
+        "combined_gain_w": -1.0252811772246808,
+        "eta": 0.98,
+        "r_ohm": 1.5,
+        "recovery_gain_w": -3.941256114119639,
+        "recovery_hurts": true,
+        "recovery_overhead_w": 15.0,
+        "timing_gain_w": 1.7185411606064331
+      },
+      {
+        "combined_beats_ordinary": false,
+        "combined_gain_w": -16.02528117722468,
+        "eta": 0.98,
+        "r_ohm": 1.5,
+        "recovery_gain_w": -18.94125611411964,
+        "recovery_hurts": true,
+        "recovery_overhead_w": 30.0,
+        "timing_gain_w": 1.7185411606064331
+      },
+      {
+        "combined_beats_ordinary": true,
+        "combined_gain_w": 14.271385865764206,
+        "eta": 1.0,
+        "r_ohm": 1.5,
+        "recovery_gain_w": 11.05874388588036,
+        "recovery_hurts": false,
+        "recovery_overhead_w": 0.0,
+        "timing_gain_w": 1.8150110434007836
+      },
+      {
+        "combined_beats_ordinary": true,
+        "combined_gain_w": 13.871385865764207,
+        "eta": 1.0,
+        "r_ohm": 1.5,
+        "recovery_gain_w": 10.658743885880362,
+        "recovery_hurts": false,
+        "recovery_overhead_w": 0.4,
+        "timing_gain_w": 1.8150110434007836
+      },
+      {
+        "combined_beats_ordinary": true,
+        "combined_gain_w": 9.271385865764206,
+        "eta": 1.0,
+        "r_ohm": 1.5,
+        "recovery_gain_w": 6.058743885880361,
+        "recovery_hurts": false,
+        "recovery_overhead_w": 5.0,
+        "timing_gain_w": 1.8150110434007836
+      },
+      {
+        "combined_beats_ordinary": false,
+        "combined_gain_w": -0.7286141342357944,
+        "eta": 1.0,
+        "r_ohm": 1.5,
+        "recovery_gain_w": -3.941256114119639,
+        "recovery_hurts": true,
+        "recovery_overhead_w": 15.0,
+        "timing_gain_w": 1.8150110434007836
+      },
+      {
+        "combined_beats_ordinary": false,
+        "combined_gain_w": -15.728614134235794,
+        "eta": 1.0,
+        "r_ohm": 1.5,
+        "recovery_gain_w": -18.94125611411964,
+        "recovery_hurts": true,
+        "recovery_overhead_w": 30.0,
+        "timing_gain_w": 1.8150110434007836
+      }
+    ]
+  }
+}
