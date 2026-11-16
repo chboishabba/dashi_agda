@@ -137,3 +137,12 @@ evidence → checked M12 candidate PNF → versioned candidate PNF/world atom
 and unresolved Gap records. That Rust bridge does not itself pay the
 Agda interpretation obligations or certify Lean. Runtime acceptance
 (Cargo+PostgreSQL) and Agda kernel checking remain OPEN.
+
+
+The new R13LanguageWorldWeld combines the source-specific lexical
+encoder, the existing numeric->evidential PNF->world correspondence, the
+actual world observation, and the intended consumer query. Its
+worldConsumerDescendsThroughR13 lemma proves the commuting/fibre
+condition by composing the supplied equations. This is a conditional
+theorem, not an instantiated Hebrew interpretation: the required
+consumer-specific witnesses must be independently constructed and checked.
