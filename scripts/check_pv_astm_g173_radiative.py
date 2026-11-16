@@ -123,6 +123,21 @@ def main():
         for n in ((1,3) if a.quick else (1,2,3,4,5)):
             results["runs"][name][str(n)]={"4T":fit(n,spec,conc,4),
                                              "2T":fit(n,spec,conc,2)}
+    # Hypothetical *electrical* step-gap modulation, NOT a prediction that
+    # measured optical Stark shifts become usable electrical bandgap shifts.
+    # Any signed RF net input above this GROSS improvement defeats PV gain.
+    source_gaps=((1.424,1.350),(1.424,1.336),(2.000,1.500),
+                 (2.000,1.800),(2.000,1.400),(2.000,2.000))
+    results["hypothetical_stark_gross_break_even"]=[]
+    for static_gap,shifted_gap in source_gaps:
+        static_w=four(junctions([static_gap],gl,1))
+        shifted_w=four(junctions([shifted_gap],gl,1))
+        results["hypothetical_stark_gross_break_even"].append({
+            "static_gap_eV":static_gap,"shifted_gap_eV":shifted_gap,
+            "static_ideal_W_m2":round(static_w,3),
+            "shifted_ideal_W_m2":round(shifted_w,3),
+            "max_allowable_net_RF_and_aux_W_m2_before_gain_disappears":
+                round(shifted_w-static_w,3)})
     if a.output:Path(a.output).write_text(json.dumps(results,indent=2)+"\n")
     print(json.dumps(results,indent=2))
 
