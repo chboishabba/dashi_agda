@@ -27,6 +27,7 @@
   ],
   "original_16_gates": "OPEN",
   "agda_kernel": "NOT RUN",
-  "github_head_tests": "NOT RUN",
-  "new_full_source": "conversation verified ZIP only, not committed to repository"
+  "github_head_tests": "NOT RUN; exact source blob parity to tested local files",
+  "new_full_source": "source, tests, runner and acceptance receipt committed to PR #1519; extended numerical trace available in conversation ZIP",
+  "source_blob_exact_parity": "4/4 source, test, runner, acceptance"
 }
