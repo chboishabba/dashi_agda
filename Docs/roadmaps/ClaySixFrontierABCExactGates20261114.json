@@ -5766,8 +5766,8 @@
       "F3"
     ],
     "expanded_portfolio_gate_total": 28,
-    "expanded_portfolio_decisions_settled": 8,
-    "expanded_portfolio_active_gates": 20,
+    "expanded_portfolio_decisions_settled": 9,
+    "expanded_portfolio_active_gates": 19,
     "expanded_portfolio_scope_warning": "6/28 is count of heterogeneous source/mathematical decisions and open research obligations, not percent of mathematical endpoint completion. One settled B1 gate is refutation of a universal proposed auxiliary.",
     "new_RH_BSD_HODGE_gate_ids": [
       "R1",
@@ -5897,7 +5897,7 @@
           "S5",
           "S6"
         ],
-        "current_roadmap_maxcut": "S4 selected original E:y²=x³−x central L(E,1)>0 mathematically CLASSICAL CLOSED via explicit isogeny to level-32 eta plus published modularity and Mellin. S1 Q2/real H1, S2 classical Sha exactness, S3 arithmetic MW rank zero, S5 odd-primary Sha/selected strong formula OPEN; S6 universal BSD all E remains OPEN",
+        "current_roadmap_maxcut": "S2 classical actual E-valued Sha[2] Kummer short exact sequence CLOSED, S4 selected L(E,1)>0 classical CLOSED. S1 actual original local H1 cohomology/square-class realization OPEN; S3 original all-place Selmer size and rank OPEN; S5 odd-primary Sha/leading coefficient OPEN; S6 universal all-curves BSD OPEN. Native S2/S4 exact source transport unpaid.",
         "terminal_gate_ids": [
           "S6"
         ],
@@ -5907,7 +5907,8 @@
           "Synthesis/MillenniumBSDMathlibLFunctionWeld.lean"
         ],
         "selected_analytic_rank_zero_mathematically_established": true,
-        "selected_analytic_gate_S4_classical_only": true
+        "selected_analytic_gate_S4_classical_only": true,
+        "actual_classical_Kummer_Selmer_Sha_two_exact_sequence_proved": true
       },
       {
         "id": "HODGE",
@@ -6106,9 +6107,9 @@
           "DASHI/Mathematics/Arithmetic/EllipticTwoDescentRoadExact.agda",
           "DASHI/Mathematics/Arithmetic/BirchSwinnertonDyerBoundary.agda"
         ],
-        "status": "OPEN",
-        "settled": false,
-        "classification": "ORIGINAL_UNPAID_ANALYTIC_OR_GEOMETRIC_PRODUCER",
+        "status": "CLOSED_CLASSICAL_ACTUAL_GLOBAL_LOCAL_KUMMER_SHA_TWO_EXACT_SEQUENCE",
+        "settled": true,
+        "classification": "CLASSICAL_ACTUAL_GALOIS_COHOMOLOGICAL_EXACT_SEQUENCE",
         "mathematical_deliverable": "0→E(Q)/2E(Q)→Sel²(E/Q)→Sha(E/Q)[2]→0, actual E[2] Galois and E(Qbar) local Kummer LES",
         "acceptance_criteria": "Actual cohomological connecting morphism and classical Sha, not a defined abstract cokernel",
         "depends_on": [
@@ -6116,7 +6117,30 @@
         ],
         "native_kernel_acceptance": false,
         "original_endpoint_proved": false,
-        "sources_inspected_at_branch": true
+        "sources_inspected_at_branch": true,
+        "closure_kind": "MATHEMATICAL_CLASSICAL_GALOIS_H1_ACTUAL_E_VALUED_SHA",
+        "closure_protocol": "USER_AUTHORIZED_CLASSICAL_MATH_AND_EXACT_PYTHON_NO_NATIVE_KERNEL",
+        "original_curve": "E:y^2=x^3-x",
+        "mathematical_global_Kummer_H1_exact": true,
+        "mathematical_all_place_local_Kummer_H1_exact": true,
+        "mathematical_actual_E_valued_Sha_kernel": true,
+        "mathematical_naturality_of_localization": true,
+        "mathematical_Selmer_to_classical_Sha_two_surjective": true,
+        "mathematical_kernel_equals_MW_mod_two": true,
+        "mathematical_original_rank_zero_proved": false,
+        "mathematical_Sha_two_vanishing_proved": false,
+        "mathematical_Sha_all_primary_finiteness_proved": false,
+        "mathematical_universal_BSD_proved": false,
+        "native_actual_E_valued_Galois_H1_typechecked": false,
+        "native_actual_Sha_two_exact_sequence_typechecked": false,
+        "external_classical_theorems": [
+          "Kummer long exact sequence for [2] on actual elliptic Galois module",
+          "natural localization and local Kummer exactness for every place",
+          "classical Tate-Shafarevich definition as kernel of H1 localization"
+        ],
+        "proof": "Docs/roadmaps/ClayBSDOriginalS2ActualKummerShaClassicalClosure20261116.md",
+        "executed_script": "scripts/check_clay_s2_actual_kummer_sha_classical_20261116.py",
+        "acceptance_note": "Genuine actual E(Qbar)-valued H1 and classical Sha, not defined Selmer cokernel. Classical proof only; native record remains supplied; S1/S3/S5/S6 not promoted."
       },
       {
         "id": "S3",
@@ -6518,10 +6542,11 @@
       "negative_result_counts_as_decision_not_positive_theorem": true,
       "native_kernel_receipts_added_in_scope_revision": 0,
       "mathematical_endpoints_added_in_scope_revision": 0,
-      "RH_BSD_HODGE_initial_new_gate_status": "HISTORICAL_20261115_ALL_13_OPEN__S4_AND_H2_CLASSICAL_RESOLVED_20261116",
+      "RH_BSD_HODGE_initial_new_gate_status": "HISTORICAL_20261115_ALL_13_OPEN__S2_S4_H2_CLASSICAL_RESOLVED_20261116",
       "no_silent_upgrade_of_original_15": true
     },
     "newly_added_settled_gate_ids": [
+      "S2",
       "S4",
       "H2"
     ],
@@ -6531,7 +6556,6 @@
       "R3",
       "R4",
       "S1",
-      "S2",
       "S3",
       "S5",
       "S6",
@@ -6545,6 +6569,7 @@
       "C2",
       "E2",
       "F1",
+      "S2",
       "S4",
       "H2"
     ],
@@ -6563,7 +6588,6 @@
       "R3",
       "R4",
       "S1",
-      "S2",
       "S3",
       "S5",
       "S6",
@@ -6609,6 +6633,20 @@
       "old_15_gates_unchanged": true,
       "remaining_expanded_active_count": 20,
       "resolved_expanded_count": 8
+    },
+    "current_round_20261116_BSD_S2": {
+      "gate": "S2",
+      "settled": true,
+      "kind": "CLASSICAL_ACTUAL_E_VALUED_SHA_TWO_KUMMER_SHORT_EXACT",
+      "proof": "Docs/roadmaps/ClayBSDOriginalS2ActualKummerShaClassicalClosure20261116.md",
+      "script": "scripts/check_clay_s2_actual_kummer_sha_classical_20261116.py",
+      "native_kernel_acceptance": false,
+      "original_rank_zero_proved": false,
+      "all_primary_Sha_proved": false,
+      "universal_BSD_proved": false,
+      "expanded_resolved": 9,
+      "expanded_open": 19,
+      "original_endpoints": 0
     }
   }
 }
