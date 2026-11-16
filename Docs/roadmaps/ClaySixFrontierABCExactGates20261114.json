@@ -5766,8 +5766,8 @@
       "F3"
     ],
     "expanded_portfolio_gate_total": 28,
-    "expanded_portfolio_decisions_settled": 6,
-    "expanded_portfolio_active_gates": 22,
+    "expanded_portfolio_decisions_settled": 7,
+    "expanded_portfolio_active_gates": 21,
     "expanded_portfolio_scope_warning": "6/28 is count of heterogeneous source/mathematical decisions and open research obligations, not percent of mathematical endpoint completion. One settled B1 gate is refutation of a universal proposed auxiliary.",
     "new_RH_BSD_HODGE_gate_ids": [
       "R1",
@@ -5897,7 +5897,7 @@
           "S5",
           "S6"
         ],
-        "current_roadmap_maxcut": "S1 K1 actual Q2/real cohomological Kummer → S2 Sha exactness → S3 rank; S4 true level32 Mellin L>0; S5 selected strong BSD; S6 universal all curves independent",
+        "current_roadmap_maxcut": "S4 selected original E:y²=x³−x central L(E,1)>0 mathematically CLASSICAL CLOSED via explicit isogeny to level-32 eta plus published modularity and Mellin. S1 Q2/real H1, S2 classical Sha exactness, S3 arithmetic MW rank zero, S5 odd-primary Sha/selected strong formula OPEN; S6 universal BSD all E remains OPEN",
         "terminal_gate_ids": [
           "S6"
         ],
@@ -5905,7 +5905,9 @@
           "DASHI/Mathematics/Arithmetic/BirchSwinnertonDyerBoundary.agda",
           "DASHI/Mathematics/Arithmetic/EllipticOriginalSelmerCohomologyExhaustionExact.agda",
           "Synthesis/MillenniumBSDMathlibLFunctionWeld.lean"
-        ]
+        ],
+        "selected_analytic_rank_zero_mathematically_established": true,
+        "selected_analytic_gate_S4_classical_only": true
       },
       {
         "id": "HODGE",
@@ -6158,9 +6160,9 @@
           "Synthesis/MillenniumBSDMathlibLFunctionWeld.lean",
           "Synthesis/MillenniumBSDCMLevel32ActualEtaInfiniteNonzeroExact.lean"
         ],
-        "status": "OPEN",
-        "settled": false,
-        "classification": "ORIGINAL_UNPAID_ANALYTIC_OR_GEOMETRIC_PRODUCER",
+        "status": "CLOSED_CLASSICAL_ORIGINAL_SELECTED_E32_ISOGENY_ETA_MELLIN_POSITIVE",
+        "settled": true,
+        "classification": "CLASSICAL_SAME_ORIGINAL_SELECTED_CURVE_ANALYTIC_RANK_ZERO_USING_PUBLISHED_MODULARITY_AND_EXACT_ISOGENY",
         "mathematical_deliverable": "Original E L equals η(4z)^2η(8z)^2 normalized newform, Fricke/Mellin actual equality and strictly positive central integral",
         "acceptance_criteria": "Same analytic L carrier and all-n equality, cusp modularity, positive infinite product and integral convergence, not finite q checks",
         "depends_on": [
@@ -6168,7 +6170,58 @@
         ],
         "native_kernel_acceptance": false,
         "original_endpoint_proved": false,
-        "sources_inspected_at_branch": true
+        "sources_inspected_at_branch": true,
+        "closure_kind": "MATHEMATICAL_CLASSICAL_EXTERNALLY_ESTABLISHED_MODULARITY_PLUS_SAME_SOURCE_RATIONAL_ISOGENY_AND_POSITIVE_TAIL",
+        "closure_protocol": "USER_AUTHORIZED_CLASSICAL_MATHEMATICS_WITH_PYTHON_SYMPY_TESTS_NO_AGDA",
+        "original_curve": "E:y^2=x^3-x; LMFDB 32.a3; [0,0,0,-1,0]",
+        "optimal_isogenous_curve": "Eprime:y^2=x^3+4x; LMFDB 32.a4; [0,0,0,4,0]",
+        "actual_two_isogeny": "(x,y)->(x-1/x,y*(1+1/x^2)); extended at O and (0,0), degree 2 over Q",
+        "actual_same_source_euler_L": "L(E,s)=L(Eprime,s)=L(eta(4z)^2*eta(8z)^2,s) for all s under analytic continuation",
+        "analytic_identification_original_L_selected": true,
+        "mathematical_all_n_modular_form_coeff_equality": true,
+        "mathematical_actual_eta_product_and_cusp": true,
+        "mathematical_actual_fricke_identity": true,
+        "mathematical_actual_Mellin_value": true,
+        "mathematical_positive_real_integral": true,
+        "mathematical_positive_L_E_one": true,
+        "mathematical_selected_analytic_rank_zero": true,
+        "explicit_rigorous_lower_bound": "L(E,1)>=(146/85)*exp(-2*pi/sqrt(32))>0",
+        "mathematical_special_value_cross_check": "L(E,1)=Beta(1/2,1/4)/8 = approx 0.6555143885730299526162098974727798534",
+        "external_established_theorems_used": [
+          "modularity theorem for rational elliptic curves",
+          "elliptic isogeny invariance of all local Euler factors",
+          "Newman/Gordon-Hughes eta quotient modularity",
+          "Ligozat cusp order theorem",
+          "genus/dimension formula for S2(Gamma0(32))",
+          "Dedekind eta modular inversion",
+          "standard Mellin transform for normalized modular cuspforms"
+        ],
+        "native_selected_curve_isogeny_proof_typechecked": false,
+        "native_modularity_and_eta_cusp_verified": false,
+        "native_elliptic_L_to_form_identification_typechecked": false,
+        "native_Bishop_Mellin_positive_integral_typechecked": false,
+        "original_all_rational_curves_BSD_proved": false,
+        "S3_original_MW_rank_zero_proved": false,
+        "S5_original_all_primary_sha_full_coefficient_proved": false,
+        "source_document": "Docs/roadmaps/ClayBSDOriginalLevel32S4ClassicalClosure20261116.md",
+        "executed_script": "scripts/check_clay_s4_original_level32_classical_20261116.py",
+        "executed_script_git_blob": "a9d11da2c4606a74e924cdbcdeda607ffe88e1a4",
+        "executed_evidence": {
+          "exact_symbolic_isogeny": true,
+          "independent_good_primes": 61,
+          "rational_eta_product_bound_cases": 70,
+          "high_precision_fricke_samples": 7,
+          "analytic_numerical_mellin_Beta_match": true,
+          "universal_classical_argument_distinct_from_finite_tests": true,
+          "Agda_Lean_native_kernel_run": false
+        },
+        "historical_external_references": [
+          "https://www.lmfdb.org/EllipticCurve/Q/32/a/",
+          "https://www.lmfdb.org/ModularForm/GL2/Q/holomorphic/32/2/a/a/",
+          "https://static1.squarespace.com/static/5aff705c5ffd207cc87a512d/t/5f16591cad96ed6474ca5945/1595300125935/Modular%2BForms.pdf",
+          "https://www.ms.u-tokyo.ac.jp/journal/pdf/jms140104.pdf"
+        ],
+        "analysis_note": "FULL S4 classical theorem is established using named standard published theorems; the selected original curve is NOT literally the optimal eta curve and must pass through explicit 2-isogeny, including bad p=2. Classical L(E,1)>0 for selected E is true; native source typecheck remains open. This selected-curve case does NOT prove S6 universal BSD or S3 arithmetic rank 0."
       },
       {
         "id": "S5",
@@ -6317,7 +6370,8 @@
       "RH_selected_interval_compiler_not_real_zero_bounds": true,
       "YM_finite_TV_not_actual_interacting_OS_mass_gap": true,
       "actual_quantifiers_and_original_carriers_required": true,
-      "native_kernel_or_independent_full_rigorous_proof_at_terminal_required": true
+      "native_kernel_or_independent_full_rigorous_proof_at_terminal_required": true,
+      "S4_selected_L_E_one_positive_does_not_prove_selected_S3_MW_rank_zero_or_S5_full_BSD_or_S6_universal": true
     },
     "cross_programme_edges": [
       {
@@ -6411,7 +6465,6 @@
       "A1",
       "H1",
       "S1",
-      "S4",
       "F2",
       "F3"
     ],
@@ -6428,8 +6481,83 @@
       "negative_result_counts_as_decision_not_positive_theorem": true,
       "native_kernel_receipts_added_in_scope_revision": 0,
       "mathematical_endpoints_added_in_scope_revision": 0,
-      "RH_BSD_HODGE_initial_new_gate_status": "OPEN",
+      "RH_BSD_HODGE_initial_new_gate_status": "HISTORICAL_20261115_SNAPSHOT_ALL_13_OPEN__S4_CLASSICAL_RESOLVED_20261116",
       "no_silent_upgrade_of_original_15": true
+    },
+    "newly_added_settled_gate_ids": [
+      "S4"
+    ],
+    "newly_added_active_gate_ids": [
+      "R1",
+      "R2",
+      "R3",
+      "R4",
+      "S1",
+      "S2",
+      "S3",
+      "S5",
+      "S6",
+      "H1",
+      "H2",
+      "H3"
+    ],
+    "expanded_portfolio_decision_ids": [
+      "P0",
+      "B1",
+      "C1",
+      "C2",
+      "E2",
+      "F1",
+      "S4"
+    ],
+    "expanded_portfolio_active_ids": [
+      "A1",
+      "A2",
+      "B2",
+      "D1",
+      "D2",
+      "E0",
+      "E1",
+      "F2",
+      "F3",
+      "R1",
+      "R2",
+      "R3",
+      "R4",
+      "S1",
+      "S2",
+      "S3",
+      "S5",
+      "S6",
+      "H1",
+      "H2",
+      "H3"
+    ],
+    "current_round_20261116_BSD_S4": {
+      "gate": "S4",
+      "settled": true,
+      "kind": "CLASSICAL_SAME_ORIGINAL_E_LEVEL32_POSITIVE_CENTRAL_L_WITH_PUBLISHED_MODULARITY",
+      "exact_original_curve_isogeny_verified": true,
+      "independent_standard_math_theorem_usage_explicit": true,
+      "rigorous_integral_lower_bound": "(146/85)*exp(-2*pi/sqrt(32))>0",
+      "script": "scripts/check_clay_s4_original_level32_classical_20261116.py",
+      "script_blob": "a9d11da2c4606a74e924cdbcdeda607ffe88e1a4",
+      "proof": "Docs/roadmaps/ClayBSDOriginalLevel32S4ClassicalClosure20261116.md",
+      "tests": {
+        "exact_isogeny": true,
+        "good_primes": 61,
+        "product_cases": 70,
+        "fricke_samples": 7,
+        "original_L_beta_cross_check": true
+      },
+      "native_kernel_check": false,
+      "original_BSD_terminal_proved": false,
+      "S3_MW_rank_zero_closed": false,
+      "S5_sha_leading_coefficient_closed": false,
+      "S6_all_curves_closed": false,
+      "old_15_gates_unchanged": true,
+      "remaining_expanded_active_count": 21,
+      "resolved_expanded_count": 7
     }
   }
 }
