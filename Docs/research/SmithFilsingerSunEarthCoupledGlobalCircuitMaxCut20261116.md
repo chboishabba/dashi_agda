@@ -238,3 +238,53 @@ where the signs and port crossings define every term and no secondary natural ge
 - Earlier source-owned Smith/Filsinger reel, Don Smith Kelly/Darrer diagrams and mathematical owner ledgers above remain separate.
 
 **Verification:** documentation-only continuation on draft PR, new gate statements neither Agda kernel proved nor physically admitted. The observed Filsinger ~0.303-s separation of acoustic pump-off envelope peaks is NOT by itself a Maxwell flight-time or environmental echo receipt.
+
+
+## 2026-11-16 phase ↔ signed natural-work cross-PR acceptance
+
+**Provenance and reuse:** This is a new *consumer* of the existing passive reciprocal reflection producer `scripts/smith_filsinger_reflection_energy_cut.py`, the coherent one-wave/two-mode producer `scripts/smith_filsinger_single_wave_fibonacci_modes.py`, `SmithFilsingerReflectedPortBidiExact.agda`, `SmithFilsingerTimeIndexedTransferExact.agda`, the source separation and work boundary in this PR, and the source-access/replenishment work in [PR #1521](https://github.com/chboishabba/dashi_agda/pull/1521). The proposed portable Filsinger midpoint/plate is separate from the demonstrated Earth reel and historical Smith drawings. The phase/source-sink interpretation originates with the user; the finite model and theorem statement are DASHI extensions. No ESD or TOE promotion surfaces were edited.
+
+### Three coherence notions must not be conflated
+
+- **Coherent single driver:** with fixed component parameters, both driven modes have a stationary *relative* phase. Positive real rescaling of the same driver does not change it. It is not a synchronization of independent natural radiation.
+- **Retarded phase at the receiver:** even if the driver terminals are opposed, the local interaction-region phases depend on the separate retarded material/path responses `H1,H2`; pure sample delay gives `arg(a2/a1) - omega*(tau2-tau1)`. This simple phasor diagnostic is **not** a measured nonlinear Maxwell/plasma Green operator.
+- **Independent natural source coherence:** the controller's relative phase to an independent incoming wave must remain known/stable for coherent interference optimisation. Under an independent uniformly random environmental phase, the phase-dependent quadratic cross terms cancel on averaging in the selected linear fixed-coefficient model. A nonlinear rectifying/memory/entrainment mechanism may differ, but must be separately modelled and sourced.
+
+### Passive reciprocal two-mode/two-port example with actual backaction
+
+The mathematical consumer `scripts/check_smith_filsinger_midpoint_phase_work.py` uses
+```math
+\dot a=(i\Omega-\Gamma_i-\Gamma_L-\tfrac12 KK^\dagger)a+Ks_+,
+\qquad s_-=-s_++K^\dagger a.
+```
+Here `a` contains two energy-normalised modal amplitudes, `K` has **natural** and **controller** external ports, and outgoing waves include physically required backaction. For the steady harmonic, the **net signed** natural power is `|s_nat,in|²-|s_nat,out|²`, which may be negative. With nonnegative intrinsic/load damping the exact stationary ledger is
+```math
+P_{nat,net}+P_{ctrl,net}=P_{load}+P_{internal\ loss}.
+```
+Therefore driver-excited radiation into an otherwise source-free Earth-facing port cannot be misreported as naturally harvested work. The natural incident-wave amplitude **must be independently calibrated**: it is NOT inferred from GEC fair-weather J, 250kV global potential or the reported capacitor 48V reading.
+
+**Selected *normalised* parameters, not Filsinger components:** natural external rate .035, controller external rate .04, intrinsic .02, load .05, modal splitting ±.075, conservative coupling .018, environmental incident amplitude .35, controller amplitude .60. Baseline: natural incident/returned .12250/.08656, hence **net natural +.03594**; controller incident/returned .36000/.10168, hence net controller +.25832; useful load .21018, internal dissipation .08407; residual ~2.8e−17. This demonstrates a possible externally energised receiver **assuming** the externally powered wave. No independent Filsinger source is established.
+
+**Negative controls:** turn off that incoming natural wave with the same drive and load and the natural-port signed net is **−.03703** (outgoing radiation), not a natural generator; useful load drops to .15964. With both sources off, useful load is zero. Branch relative phase remains fixed upon scaling the *sole* common driver, but changes with selected loading and detuning.
+
+**Phase sensitivity:** 72 controller phases against the **hypothetically phase-coherent** independent wave yield net natural work from −.02976 to +.12242 while useful load changes only .20633–.21403. Thus a phase-sensitive change in *signed environmental work* can be large while load power hardly changes. Under **random independent natural phase**, 128 phase samples give controller-phase-independent mean natural work, controller work, load and loss to numerical precision. Do not apply this linear cancellation to unproved nonlinear/active physical systems.
+
+**1,728-case load/detuning/phase optimisation:**
+
+| Maximized objective | Load rate | Split detuning | Controller phase relative to NATURAL wave | Net natural work | Useful load | Circularity |
+|---|---:|---:|---:|---:|---:|---:|
+| Useful load | .075 | 0 | 157.5° | +.09459 | .30757 | −.528 |
+| Net natural real work | .05 | .075 | 262.5° | +.12247 | .21400 | +.718 |
+| Absolute circularity | .025 | .025 | 300° | +.10275 | .23740 | +.998 |
+
+All figures are dimensionless model outputs. `1:1.618` geometry is neither required nor an optimum discovered here. The physically constrained optimum depends on real source access, delay, material coefficients and controller costs, all still OPEN. The relative controller/natural phase is an **unknown** for an independent environmental wave, not a knob the original device has demonstrated controlling.
+
+### Formalization and exact scope
+
+`DASHI/Physics/Motors/SmithFilsingerMidpointPhaseWorkExact.agda` imports pre-existing source, reflection, time-index/flight and energy-bound owners; its `MidpointTwoPortWorkWindow` separates incoming and outgoing quanta of both ports. It defines `usefulNoGreaterThanIncidentAndStorage`, the constructive `driverOnlyCanRadiateIntoEnvironment` negative control, `noBoundaryInputNoUsefulLoad`, and `phaseReadoutAloneCannotIdentifyNaturalWork` (a two-world counterexample). `SameOriginalMidpointPhaseAndSourceWorkAdmission` demands same-original pins, incoming/outgoing real work, independent replenishment, actual interaction-region cross-spectrum and nonlinear causal Maxwell response. This admission is **intentionally not constructed**.
+
+**Acceptance:** source-equivalent local Python **17/17 tests PASS**, including signed two-port passivity, known reflection and two-mode donors, source-off controls, phase rescaling, load-dependent phase, observation delay, incoherent averaging, and optimization criteria. The new `scripts/check_smith_filsinger_midpoint_phase_agda29.sh` uses the existing pinned wrapper but no Agda/Nix is installed here; **no kernel pass or GitHub-head replay is claimed**.
+
+**Source authors:** Zhao, Guo and Fan (2019), *Physical Review A* 99 033839 (energy conservation, reciprocity and TCMT assumptions), https://cguo.org/pdf/zhao2019a.pdf; Wu and Lalanne (2024), *Optics Express*, https://doi.org/10.1364/OE.517237 (limits of conventional TCMT); Anisimov et al. (2026) https://doi.org/10.1016/j.asr.2026.01.090 and Tinsley (2022) https://doi.org/10.1029/2021JD035954 (real global-circuit sources/uncertainties, **not** proof of this device).
+
+**OPEN:** S0/P1 physical pins and synchronous readings; S5c–S5g phase/coherence/full causal nonlinear response; S8c/S8d signed replenished natural work and matched work; P2 real Earth/atmospheric source operator; R1/R2/R3 full same-device explanation; D1/D2 pinned Agda and empirical proof weld. The environmental source power calibration from PR #1521 remains independent and prerequisite to any watt-level physical promotion.
