@@ -56,6 +56,38 @@ def original_radial_ladder():
         'finite_FV_boundary_intertwiner_proved':False,
         'original_sourced_Weyl_receiver_symmetry_proved':False}
 
+def original_compact_bump_not_ladder():
+    """Actual smooth original compact f(r)=exp(1-1/(1-(r/eps)^2)).
+    Compare DIMENSIONLESS normalized q1 TT source against eps^4 J²
+    of normalized q0 TT source. Their ratio varies and even changes
+    sign; no common proportionality or source-covariant symmetry.
+    """
+    import mpmath as mp
+    mp.mp.dps=45
+    eps=mp.mpf('.04')
+    def f(r):
+        return mp.exp(1-1/(1-(r/eps)**2)) if abs(r)<eps else mp.mpf(0)
+    def G0(r):
+        return eps**4*mp.mpf(2)/5*(mp.diff(f,r,4)+4*mp.diff(f,r,3)/r)
+    def G1(r):
+        d1=mp.diff(f,r,1);d2=mp.diff(f,r,2)
+        d3=mp.diff(f,r,3);d4=mp.diff(f,r,4)
+        s2=mp.mpf(4)/7*(d4+d3/r-6*d2/r**2+6*d1/r**3)
+        return eps**4*s2/(r/eps)**2
+    ratios=[]
+    for u in ('.3','.5','.7'):
+        at=mp.mpf(u)*eps
+        jl=eps**4*(mp.diff(G0,at,2)/at**2-mp.diff(G0,at,1)/at**3)
+        actual=G1(at)
+        ratios.append(float(jl/actual))
+    assert ratios[0]<0<ratios[1]
+    assert abs(ratios[1]-ratios[2])>100
+    return {'actual_original_compact_Cinfty_bump_eps':.04,
+       'radius_over_eps':[.3,.5,.7],
+       'dimensionless_eps4_J2_G0_divided_by_G1':ratios,
+       'actual_compact_modal_sources_are_ladder_proportional':False,
+       'original_mathematical_continuum_J2_ladder_remains_exact':True}
+
 def optional_weil_Z3():
     w=(-1+sp.sqrt(3)*sp.I)/2
     U=sp.Matrix([[w**(j*k) for k in range(3)] for j in range(3)])/sp.sqrt(3)
@@ -93,6 +125,7 @@ def audit():
       'physical_even_ell':[0,2,4],
       'effective_spatial_radial_d':[3,7,11],
       'radial_ladder':original_radial_ladder(),
+      'actual_compact_bump_source':original_compact_bump_not_ladder(),
       'finite_modular_chart':optional_weil_Z3(),
       'Monster':{
         'minimum_nontrivial_complex_rep_dimension':196883,
