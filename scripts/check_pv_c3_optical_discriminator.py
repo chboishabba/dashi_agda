@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Synthetic C3 optical dipole / field discriminator; NOT a photovoltaic model.
+"""Synthetic three-site C3 response; NOT isolated parity-pure atomic p-shell E1 or a PV device.
 Numpy finite-matrix test. No material calibration, carrier collection, signed
 drive work, crystalline bulk bandgap or >50% energy result is asserted.
 """
@@ -56,6 +56,23 @@ def test():
     check('C3 orbital eigenvalues',np.allclose(E0,[-.5,.25,.25]))
     check('C3 finite orbital gap',np.isclose(E0[1]-E0[0],.75))
     check('zero dipole cannot absorb',np.isclose(np.linalg.norm(np.zeros((3,3))),0))
+    # The 3-site optical proxy is NOT the parity-pure isolated atomic p shell.
+    # Projecting X/Y onto a definite-odd-parity atomic p-only E1 carrier
+    # gives zero (NIST E1 parity-change condition). Prevent falsely
+    # identifying an allowed C3 charge as an atomic E1 absorption line.
+    inversion_on_atomic_p=-np.eye(3)
+    for label,op in (('X',X),('Y',Y)):
+        odd_E1_projection=(op-inversion_on_atomic_p@op@inversion_on_atomic_p)/2
+        check(f'p-shell parity E1 projection vanishes for {label}',
+              np.allclose(odd_E1_projection,np.zeros((3,3))))
+    # The actual source 2p^2 Coulomb matrix is scalar (21/128)I_3.
+    # That interaction cannot alter internal energy gaps.
+    reference_H=-.25*(P+P.T)
+    coulomb_H=reference_H+(21/128)*np.eye(3)
+    check('selected p2 scalar Coulomb preserves all internal gaps',
+          np.allclose(np.diff(np.linalg.eigvalsh(reference_H)),
+                      np.diff(np.linalg.eigvalsh(coulomb_H))))
+
     check('zero hopping closes gap',np.isclose(ring(0,0)[0][1]-ring(0,0)[0][0],0))
     base=spectral_response(line0)
     results=[]
