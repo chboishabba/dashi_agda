@@ -139,3 +139,15 @@ Existing `docs/research/InfotonP30WalkerMaxCut20261115.md` and `DASHI/ComputerSc
 - `S7a localCoolingVsGlobalClimateDistinct`: local heat relief (allowed without global radiative benefit) vs separate annual global radiative-climate effects; track redistribution and possible warming elsewhere.
 - `S8a filsingerCosmicSolarPortBidi`: original speaker's cosmic claim, actual plate/antenna status and physically measured solar-wind/solar-photon/RF/cosmic particle source discriminator; do not silently promote interpretation into original fact.
 - `S8b infotonThermodynamicBoundary`: energy/entropy/information control port separation, keeping Walker claims/physical validation distinct.
+
+
+### SOTA bridge: Tinsley actually proposes an electrical amplifier driving cloud transducers
+In *Solar Activity, Weather, and Climate: The Elusive Connection* (2023), https://doi.org/10.1175/BAMS-D-23-0065.1, Brian A. Tinsley explicitly characterizes the GEC cloud-microphysics proposal using a **semiconductor-amplifier / cloud-transducer analogy**. The hypothesis: variations in solar-wind-driven ionospheric potential and very weak vertical atmospheric current density change space-charge accumulation at cloud boundaries, modulate charged-particle scavenging, and may influence much larger radiative or latent-heat flows. Tinsley discusses observations, some solar-linked correlations and gaps/alternative explanations. This is **prior art for the physical control-amplification concept**, not a validated mW actuator or direct proof that an engineered receiver can initiate storms. Preserve author credit and distinguish the user's proposed *controlled receiver extension* from Tinsley's earlier naturally forced mechanism.
+
+A useful mechanism graph, with evidence tiers on every arrow:
+solar wind → ionosphere potential (physical established) → atmospheric J_z and charge boundaries (physical established) → cloud aerosol scavenging / droplet effects (theory, lab/natural observational support, uncertain extrapolation) → cloud rain/cold-pool response (natural mechanisms observed; electrically induced effect OPEN) → local surface temperature (natural storm observations established). The full **small-controller-to-cooling** concatenation is OPEN.
+
+A local electrical actuator's mW power is a **controller input**, not the energy supplied to evaporation, cloud motion or solar-wind coupling. No 250–750 MW *global GEC throughput ceiling* constrains the latent heating of naturally driven clouds; conversely, it is false to infer useful actuator gain from the mere difference between those budgets.
+
+### Precision issue: no frequency conflation
+The 2014 Streltsov et al. HAARP experiment used a megawatt-class HF heater (reported 3.6 MW) whose modulation produced some observed ~7.8 Hz ELF responses. It is NOT evidence of comparable results with mW pumping; nor is Filsinger's acoustic ~7.8 kHz line evidence of the ~7.8 Hz global mode. Use separate Hz/kHz labels throughout.
