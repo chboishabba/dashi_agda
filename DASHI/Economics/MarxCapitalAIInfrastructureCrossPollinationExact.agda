@@ -30,7 +30,7 @@ data CapitalAnalysisCoordinate : Set where
   terminalPayer : CapitalAnalysisCoordinate
 
 
-record CapitalAnalysisCoordinateReceipt : Set where
+record CapitalAnalysisCoordinateReceipt : Set₁ where
   constructor capitalAnalysisCoordinateReceipt
   field
     coordinate : CapitalAnalysisCoordinate
