@@ -5766,8 +5766,8 @@
       "F3"
     ],
     "expanded_portfolio_gate_total": 28,
-    "expanded_portfolio_decisions_settled": 9,
-    "expanded_portfolio_active_gates": 19,
+    "expanded_portfolio_decisions_settled": 10,
+    "expanded_portfolio_active_gates": 18,
     "expanded_portfolio_scope_warning": "6/28 is count of heterogeneous source/mathematical decisions and open research obligations, not percent of mathematical endpoint completion. One settled B1 gate is refutation of a universal proposed auxiliary.",
     "new_RH_BSD_HODGE_gate_ids": [
       "R1",
@@ -5921,7 +5921,7 @@
           "H2",
           "H3"
         ],
-        "current_roadmap_maxcut": "H2 physical CP1 and CP1xCP1 rational singular/deRham and literal algebraic point/divisor cycles CLASSICALLY CLOSED; native Agda geometry weld open. H1 actual arbitrary smooth projective rational intersection and cycle-class carrier OPEN; H3 universal primitive algebraic lift and algebraic Lefschetz inverse firewall OPEN",
+        "current_roadmap_maxcut": "H1 general actual smooth projective rational Hodge intersection and algebraic cycle-class inclusion CLASSICALLY ESTABLISHED, but native Agda has Q/C HodgePiece mismatch and supplied fields. H2 CP1 examples classically closed. H3 universal rational Hodge algebraic surjectivity OPEN.",
         "terminal_gate_ids": [
           "H3"
         ],
@@ -5929,7 +5929,8 @@
           "DASHI/Mathematics/AlgebraicGeometry/HodgePrizeBoundaryExact.agda",
           "DASHI/Mathematics/AlgebraicGeometry/HodgeAlgebraicCycleClayCoreExact.agda"
         ],
-        "literal_CP1_CP1xCP1_special_case_classically_proved": true
+        "literal_CP1_CP1xCP1_special_case_classically_proved": true,
+        "all_variety_Hodge_background_classically_established": true
       },
       {
         "id": "PNP",
@@ -6313,9 +6314,9 @@
           "DASHI/Mathematics/AlgebraicGeometry/HodgeRationalClassIntersectionExact.agda",
           "DASHI/Mathematics/AlgebraicGeometry/HodgeAlgebraicCycleClayCoreExact.agda"
         ],
-        "status": "OPEN",
-        "settled": false,
-        "classification": "ORIGINAL_UNPAID_ANALYTIC_OR_GEOMETRIC_PRODUCER",
+        "status": "CLOSED_CLASSICAL_ALL_VARIETY_RATIONAL_HODGE_AND_CYCLE_BACKGROUND",
+        "settled": true,
+        "classification": "CLASSICAL_ESTABLISHED_HODGE_THEORY_BACKGROUND_NOT_NATIVE_AGDA",
         "mathematical_deliverable": "Same actual H^(2p)(X,Q) ∩ H^(p,p) under original deRham/singular comparison and rational algebraic cycle map",
         "acceptance_criteria": "Real geometric carrier and source cycle map on arbitrary smooth projective X; not merely record fields",
         "depends_on": [
@@ -6323,7 +6324,28 @@
         ],
         "native_kernel_acceptance": false,
         "original_endpoint_proved": false,
-        "sources_inspected_at_branch": true
+        "sources_inspected_at_branch": true,
+        "closure_kind": "CLASSICAL_MATHEMATICAL_ACTUAL_SMOOTH_PROJECTIVE_X_ALL_CODIMENSIONS",
+        "closure_protocol": "CLASSICAL_ESTABLISHED_HODGE_DE_RHAM_CYCLE_THEOREMS_WITH_NATIVE_FIREWALL",
+        "mathematical_actual_arbitrary_smooth_projective_X": true,
+        "mathematical_actual_rational_Hodge_intersection": true,
+        "mathematical_actual_cycle_class_map_all_codimensions": true,
+        "mathematical_actual_cycle_class_lands_in_Hodge": true,
+        "mathematical_cycle_class_surjectivity_all_X": false,
+        "native_Q_to_C_extension_of_scalars_implemented": false,
+        "native_HodgePiece_complex_vector_space_correct": false,
+        "native_actual_geometry_and_comparison_typechecked": false,
+        "source_type_mismatch": "HodgeDecompositionCycleClassExact.HodgePiece is RationalVectorSpace, but actual Hodge pieces are complex vector spaces in H^(k)(X,C); deRham complexification and rational intersection need explicit adapter",
+        "proof": "Docs/roadmaps/ClayHodgeH1ActualAllVarietyClassicalBackgroundClosure20261116.md",
+        "executed_script": "scripts/check_clay_h1_rational_complex_hodge_firewall_20261116.py",
+        "classical_external_theorems_used": [
+          "smooth projective complex varieties are compact Kahler",
+          "Hodge decomposition on H*(X,C)",
+          "singular/de Rham comparison",
+          "Poincare duality and algebraic fundamental classes",
+          "algebraic cycles have Hodge type (p,p)"
+        ],
+        "H3_original_universal_cycle_surjectivity_proved": false
       },
       {
         "id": "H2",
@@ -6542,13 +6564,14 @@
       "negative_result_counts_as_decision_not_positive_theorem": true,
       "native_kernel_receipts_added_in_scope_revision": 0,
       "mathematical_endpoints_added_in_scope_revision": 0,
-      "RH_BSD_HODGE_initial_new_gate_status": "HISTORICAL_20261115_ALL_13_OPEN__S2_S4_H2_CLASSICAL_RESOLVED_20261116",
+      "RH_BSD_HODGE_initial_new_gate_status": "HISTORICAL_20261115_ALL_13_OPEN__S4_H2_S2_H1_CLASSICAL_RESOLVED_20261116",
       "no_silent_upgrade_of_original_15": true
     },
     "newly_added_settled_gate_ids": [
-      "S2",
       "S4",
-      "H2"
+      "H2",
+      "S2",
+      "H1"
     ],
     "newly_added_active_gate_ids": [
       "R1",
@@ -6559,7 +6582,6 @@
       "S3",
       "S5",
       "S6",
-      "H1",
       "H3"
     ],
     "expanded_portfolio_decision_ids": [
@@ -6569,9 +6591,10 @@
       "C2",
       "E2",
       "F1",
-      "S2",
       "S4",
-      "H2"
+      "H2",
+      "S2",
+      "H1"
     ],
     "expanded_portfolio_active_ids": [
       "A1",
@@ -6591,7 +6614,6 @@
       "S3",
       "S5",
       "S6",
-      "H1",
       "H3"
     ],
     "current_round_20261116_BSD_S4": {
@@ -6647,6 +6669,19 @@
       "expanded_resolved": 9,
       "expanded_open": 19,
       "original_endpoints": 0
+    },
+    "current_round_20261116_HODGE_H1": {
+      "gate": "H1",
+      "settled": true,
+      "kind": "CLASSICAL_ALL_VARIETY_HODGE_CYCLE_BACKGROUND",
+      "proof": "Docs/roadmaps/ClayHodgeH1ActualAllVarietyClassicalBackgroundClosure20261116.md",
+      "script": "scripts/check_clay_h1_rational_complex_hodge_firewall_20261116.py",
+      "native_kernel_check": false,
+      "native_Q_C_type_mismatch_discovered": true,
+      "H3_universal_surjectivity_proved": false,
+      "old_15_gates_unchanged": true,
+      "remaining_expanded_active_count": 18,
+      "resolved_expanded_count": 10
     }
   }
 }
