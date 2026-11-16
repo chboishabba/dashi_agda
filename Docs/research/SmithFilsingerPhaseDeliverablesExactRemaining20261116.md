@@ -117,3 +117,55 @@ For *any selected nonnegative time-dependent G(t)* under a fixed positive linear
 The square term is nonnegative; if every store is restored after a periodic cycle, useful load work cannot exceed the fixed linear source's matched terminal cap, and controller costs reduce *net useful* work further. This generalizes the earlier quasi-static source matching bound to the selected finite-memory ODE, **not** to a nonlinear solar/magnetospheric source operator. The new Python method analytically integrates each **piecewise-constant** segment; sampling its sinusoidal branch pattern at segment midpoints is not an exact continuous-sine integration. The `RepeatableSourceCycle` Agda record is a finite Nat conditional source cap, not a proof that the environmental input is naturally replenished. As of this addendum no independent pinned kernel or exact-head Python rerun was obtained.
 
 The physically important remaining contrast: `W_nat` measured at a real terminal must be positive net of reflection and initial donor drawdown, whereas atmospheric solar forcing may change in response to loading. A fixed-voltage Thevenin cap does **not** limit all nonlinear upstream solar source adaptation; it is a falsifiable null model. Full Maxwell/plasma/solar boundary-weld F10/F13/F15 remains OPEN.
+
+
+## Maximum-cut continuation 2026-11-16: F11/F12 finite replenishment accepted locally
+
+**Current PR provenance:** #1524 adds the tested dynamic-source producer and finite Nat proof consumer to the pre-existing coherent-wave/phase and fixed-DC source interpretation. #1521 remains the owner of the physically distinct Earth/atmospheric/soil source-access estimates and nonlinear constitutive-port work. #1519 (head observed 41fd0c37f8a8b70b73616f1fb75ee3c2c1d9e625) is an independent multirate exact-energy **method donor only**, not original Smith/Filsinger hardware. Existing source owner, finite reservoir owner, signed reflection owner and retarded flight owner are reused.
+
+### Exact outputs and acceptance hierarchy
+
+| Formal item | Strongest completion supported now | What is NOT closed |
+|---|---|---|
+| F05 fixedSourceMatchGapSquare | Full real algebra identity by square completion; 2026-11-16 passive time integral extends it when the source is fixed | Unrestricted nonlinear/plasma source ceiling; ordered real field Agda theorem |
+| F06 complementaryConductanceFlatAtPi | Exact sine anti-phase identity and a constant matched-load stationary solution; the finite-capacitance program demonstrates it again | Original capacitor/switch transistor implementation |
+| F07 phaseOptimumDependsOnSourceImpedance | Existing counterexample with other Rs and separately chosen optimum; fixed-parameter periodic source benchmark | Same-original physical optimum |
+| F08/F09 signed work/phase nonidentifiability | Earlier Agda source owner, 29/29 locally tested source-equivalent numerical comparisons | Pinned Agda, physical source classification |
+| **F11** wholeSystemMatchedTrajectoryDifference | New exact capacitor ODE energy identity and integrated signed natural source/terminal/driver loss; 37 additional Python tests, same-branch phase controls | Actual nonlinear retarded two-world Green/Maxwell; same-device synchronized work |
+| **F12** replenishedCycleVsTransientDiscriminator | A new finite-Nat source-authored cancellation proof, cyclic natural+controller bound and independently admitted cap; exact segment-integrated finite source/donor negative controls | Kernel acceptance; physically admitted cap/independent replenishment |
+| F13 fullColumnSoilIonosphereAccessWeld | Ideal 1 m² full-column static fixed-source Pmax = 0.1475 µW, 60-s Emax=8.85 µJ | Real plate/earth source operator and geometry/field weld |
+| F10 / F14 / F15 / F16 | Producer interfaces plus conditional source-separated research gates | Actual retarded 3D system, original joint hardware, natural repeatable work, weather effects |
+
+New GitHub files:
+- DASHI/Physics/Motors/SmithFilsingerReplenishedCycleCapExact.agda
+- scripts/check_smith_filsinger_dynamic_replenishment.py
+- scripts/test_smith_filsinger_dynamic_replenishment.py
+- scripts/check_smith_filsinger_dynamic_replenishment.sh
+
+The **3/3 Git blob SHA comparisons** of producer, 37-case test and Agda module match locally tested source files exactly. Source-equivalent local Python acceptance: **37/37 new; 66/66 targeted aggregate** including the earlier coherent-wave and fixed-DC phase controls. No pinned Agda/Nix executable here. Source-authored finite lemmas are not yet kernel checked.
+
+### Mathematical cut theorem: no depletion means no hidden source
+
+Source access is a selected physical port, not an adjustable parameter. For the **passive fixed linear** upstream voltage source V_s with feed conductance g, controlled load G(t) and finite storage C v²/2:
+
+\[
+W_{\rm terminal}=W_{\rm load}+\Delta U,\qquad
+\frac{gV_s^2T}{4}-W_{\rm terminal}
+=g\int_0^T(v-V_s/2)^2dt\ge 0.
+\]
+
+The time integral is independent of how the two internal branch phases are scheduled; **timing can improve matching, not expand the assumed source**. Source-off long-pulse model: Wload ~0.5 and DeltaU ~-0.5, zero natural work. At a genuine periodic full-store return DeltaU=0, useful load <= natural fixed-source matching ceiling. Real device source backaction and changed natural source law (N regime) require a separate physical boundary PDE with correctly attributed external work.
+
+The abstract Nat theorem derives Wload <= admitted Wnat + Wcontroller on repeatable cycles. Its cap receipt is **assumed and explicit**, not inferred from atmospheric fair-weather J or global voltage. The actual Wnat measured for Filsinger remains UNKNOWN.
+
+### Remaining endpoints, ranked by actual original goal (not toy theorem count)
+
+1. **S0/P1 - pinned configuration and simultaneous ports:** original Filsinger Earth circuit vs proposed portable common-midpoint/plate vs Smith patent/editor diagrams remain non-identical. Record source, shunt/rectifier/return pins, real controller current and voltage, capacitor stored-state before/after, acoustic/electrical clocks, load and Earth terminals on ONE selected configuration.
+2. **P2 - the decisive physical source operator:** obtain actual under-load port v(t),i(t), two or more external load conditions, signed incoming/outgoing RF or earth conduction, measured driver-controlled phase and matched natural forcing. The global full-column ideal E/J figures are explicitly NOT this receiver's available watts.
+3. **R2 - replace fixed g/Vs with 3D physical response:** one causal spatial Maxwell/material/plasma/soil boundary; Poynting, Hall/Pedersen, nonlinear memory, return path, finite propagation and source backaction. Reuse PR #1521 constitutive source, #1519 multirate method if applicable; no speed-of-light or acoustic interpretation inferred from a temporal phasor.
+4. **R3 - renewable real work, not depletion:** solve/test matched tuned/control trajectories under same external forcing, with all initial/final local AND source storage, pump, controller, loss, outgoing radiative flux, electrode and chemical potential. A physical same-cycle positive environmental work receipt is mandatory, not merely mathematical source work.
+5. **R1 - original startup/hunting/null/pump-off:** one hardware-selected model explains actual acoustic plus synchronous electrical observables; no cross-reel evidence substitution or chosen normalization.
+6. **D1/D2 - kernel + actual admission:** run shell wrapper with --agda on pinned Agda host, check exact heads and create authentic same-original source-to-proof weld; do not auto-merge/TOE-promote. No ESD editing.
+7. **Q6 - conditional Sun/cloud/rain/local-cooling extension:** requires controller-to-local-electric-field evidence, causal charge-to-droplet-to-rain experiment, local enthalpy/cold pool and separately climate TOA controls. Different goal from positive electrical harvesting and still wholly OPEN as an end-to-end intervention.
+
+**Programme status:** Q1 mathematically advanced and locally tested, pinned kernel still OPEN; Q2 linear finite RC submodel advanced, physical Maxwell remains OPEN; Q3/Q4/Q5 physical apparatus admission remain OPEN; Q6 environmental effects OPEN. The strict original physical gate count remains **0/8**. Reports of conditional models do not change that count.
