@@ -25,7 +25,7 @@ fi
 PYTHONDONTWRITEBYTECODE=1 python -m pytest -q "${python_tests[@]}"
 if [[ "$MODE" == "--agda" ]];then
   scripts/run_agda29_parallel_check.sh "$target" "$phase_owner"
-  echo "PASS pinned Agda dynamic-cycle source-cap owner"
+  echo "PASS pinned Agda replenished-cycle + finite phase source owners"
 else
   echo "Python tests passed; Agda kernel NOT checked. Use --agda on pinned host."
 fi
