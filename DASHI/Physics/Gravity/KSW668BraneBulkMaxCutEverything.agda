@@ -99,3 +99,9 @@ import DASHI.Physics.Gravity.KSW668AdS5OriginalRadialSobolevPowerReuseExact
 -- explicit C3 label-rotation radial non-intertwiner. Not physical C3,
 -- not 3/6/9 gravity dimensions, not dual-Weyl convergence or Agda kernel.
 import DASHI.Physics.Gravity.KSW668AdS5TTUnbalancedTernary369ConsumerExact
+
+-- F8 XI: original weak Israel SAT global C boundary Udot-only repair
+-- has exact SBP2 left-null parity obstruction. Native n3/n4 rational
+-- column certificates; general n symbolic recurrence checked in Python.
+-- Joint P/M/U energy-compatible SAT and continuum Weyl remain OPEN.
+import DASHI.Physics.Gravity.KSW668AdS5TTWeakIsraelSBPLeftNullParityExact
