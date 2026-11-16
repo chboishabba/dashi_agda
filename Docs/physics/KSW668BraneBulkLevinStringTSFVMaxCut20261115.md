@@ -1523,3 +1523,31 @@ The physically constrained initial finite-grid state \(U=y/2,\ P=1,\ M=0,\ G=0\)
 **Source ownership and regression:** \`DASHI/Physics/Gravity/KSW668AdS5OriginalTTCharacteristicConstraintRationalExact.agda\`, \`DASHI/Physics/Gravity/KSW668AdS5OriginalRadialSobolevPowerReuseExact.agda\` (both imported into canonical Agda owner); three new \`scripts/ksw668_f8_*.py\` producers plus tests and one explicit weak-boundary negative control. Local source-equivalent acceptance **326/326 PASS**: prior 284 +24 physical constraint/forced+6 boundary no-go+12 radial Sobolev. Exact connected PR-head tests and pinned Agda kernel still unverified.
 
 **Top exact gates after IX:** (1) \`ads5OriginalWeakIsraelGlobalConstraintBoundaryWeld\`; (2) \`ads5OriginalMovingSBP3FullCoupledSSPRK3CFLAndError\`; (3) \`ads5OriginalCompactTTFullH4PlusEpsilonNeumannBoundarySourceBudget\`; (4) \`ads5OriginalMovingH4PlusEpsilonNeumannToBothWeylTrace\`; (5) \`ads5OriginalMovingTTThreeMultipoleThreeObservableConvergence\`; (6) independently accepted original \(t=2\) FIO compact-source both-Weyl proof; (7) F9 matter-generating action/all-mode stability/cylinder, F10 scale calibration, F11 pinned Agda and semantic observer, D1 controlled physical observation. **All these endpoints remain OPEN; no early gravity observation or free-energy claim is established.**
+
+
+---
+
+## 16 November 2026 F8 maximum-cut X — user-origin 0,2,4 -> 2×[0,1,2] Base369 consumer, actual signed two-Weyl channel error
+
+**Canonical new full report:** [KSW668F8Base369TernaryThreeHarmonicWeylMaxCut20261116.md](KSW668F8Base369TernaryThreeHarmonicWeylMaxCut20261116.md). **Owner:** the existing active KSW PR #1520; merged #1512 and its original \(t=2\) FIO Markdown are untouched. Machine evidence \`Artifacts/ksw668/ads5_f8_base369_three_harmonic_signed_weyl_maxcut_x_20261116.json\`. **Origin of the mapping: user.** The KSW gravity, 369 crosspollination, TOE and Unifier import graphs now consume the exact new \`KSW668AdS5TTUnbalancedTernary369ConsumerExact.agda\` using \`Base369.TriTruth\`; no duplicate ternary foundations constructed.
+
+The original axial spin-2 \(H_{yy}\) compact fourth-order TT source has **exactly** three nonzero Legendre harmonics:
+\[
+(\mu^4+6\mu^2+1)/8=(2/5)P_0(\mu)+(4/7)P_2(\mu)+(1/35)P_4(\mu).
+\]
+The native unbalanced ternary \`Base369.tri-index\` is a bidirectional **index codec** \(q=0,1,2\leftrightarrow \ell=2q=0,2,4\), with corresponding independent effective FV radial dimensions \(d=3+4q=(3,7,11)\). It is **not** a 3-valued physical amplitude or a 3/6/9-dimensional gravity theorem. Exact \`Base369.rotateTri\` label cycling **fails** physical radial operator equivariance: \(\Delta_d(r^2)=2d\) gives \(6\to14\), mismatch **8**. The \(\omega^3=1\) DFT basis is invertible but yields nonzero off-diagonal \(-2\pm 2i\sqrt3/3\) entries after conjugating \(\operatorname{diag}(3,7,11)\), so no C3/Monster/j-invariant/TOE physical symmetry follows.
+
+The actual original \(t=12\), compact \(\epsilon=.04\), pulse .065, constraint-preserving \`normal_order=3\` tensor receiver now returns **separate exact per-channel** \(H_{yy,q},E^{(4)}_{yy,q},E^{(5)}_{yy,q}\) at the original receiver AND outside-bulk-cone control. All three observable sums exactly reproduce the original aggregate. Two-grid signed coarse-to-medium differences:
+\[
+\begin{array}{c|rrr}
+\ell&\Delta H_q&\Delta E4_q&\Delta E5_q\\
+0&+5.604e-6&+7.232e-5&+2.969e-6\\
+2&-6.558e-6&-3.214e-5&-2.290e-6\\
+4&-1.219e-7&-9.156e-7&-7.485e-8
+\end{array}
+\]
+The aggregate signed grid changes conceal larger opposite-signed **channel** errors: \(\sum_q|\Delta O_q|/|\sum_q\Delta O_q|\) = **11.41** for H, **2.684** for E4, **8.829** for E5. **New priority:** certify \(\ell=0\) and \(\ell=2\) temporal and second-derivative curvature estimates per channel first; the highest-stiffness \(\ell=4\) is NOT the leading signed Weyl-drift contributor. Per-channel error sum is an exact *finite two-grid triangle inequality*, NOT continuum convergence.
+
+A third original t12 fine grid \((dr,dy,dt)=(.006,.009,.0012)\) was attempted but **timed out before a usable receiver receipt**. **No three-grid convergence claim** is made. New tracked tests 20 angular/369 +13 actual original two-Weyl receiver +7 signed error control = **40/40 local PASS**. Combined reconstructed F8 replay **359/359 local PASS**; this is NOT an exact connected GitHub-head or pinned Agda 2.9 kernel certificate.
+
+**Exact remaining F8 mathematical cut:** \`ads5OriginalTTPerChannelThreeObservableConvergence\`, physically compatible original weak-Israel boundary constraint, fully discrete time-dependent coupled SSPRK3, mesh-uniform compact TT H^(4+epsilon) normal/time/radial trace and BOTH Weyl receiver errors. Original \(t=2\) FIO independent theorem acceptance, F9 source-generating matter and backreaction/cylinder, F10 calibrated source/receiver, F11 kernel/semantic weld and D1 physical observation remain **OPEN**. The 369 presentation bridge closes a finite exact consumer, **not** the original gravity endpoint.
