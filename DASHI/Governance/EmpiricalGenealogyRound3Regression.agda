@@ -6,6 +6,8 @@ import DASHI.Governance.EvidenceGradedGenealogyCore as Genealogy
 import DASHI.Governance.EvidenceGradedGenealogyCasesExact as Cases
 import DASHI.Governance.TypedGenealogyEdgeExact as Typed
 import DASHI.Governance.ClimateGenealogyTypedCasesExact as Climate
+import DASHI.Core.InstitutionalProximityInfluenceAdequacyExact as Proximity
+import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Governance.JohnPaperClaimPromotionAuditExact as Paper
 import DASHI.Governance.JohnPaperClaimManifestV2Exact as Manifest
 import DASHI.Governance.PalantirProcurementLegibilityAdapterExact as Palantir
@@ -352,3 +354,448 @@ braidedProvenanceDoesNotClaimIndigenousKnowledge :
     Braid.canonicalBraidedEnemyRoleBoundary
   ≡ false
 braidedProvenanceDoesNotClaimIndigenousKnowledge = refl
+
+
+------------------------------------------------------------------------
+-- 2026-10-26: climate-source-producer bridge and selective non-promotion.
+-- Named team contributors / historic funders / later speakers have typed
+-- receipts, but are not thereby joined into an unbroken control hierarchy.
+------------------------------------------------------------------------
+
+exxonAPIPlanParticipantIsExplicitlyNamed :
+  Typed.evidenceStrength Climate.apiNamedContributorRandyRandol ≡ Typed.primary
+exxonAPIPlanParticipantIsExplicitlyNamed = refl
+
+cfactAPIPlanParticipantIsExplicitlyNamed :
+  Typed.evidenceStrength Climate.apiNamedContributorDavidRothbard ≡ Typed.primary
+cfactAPIPlanParticipantIsExplicitlyNamed = refl
+
+historicHancockIPAMoneyIsFundingNotAnEditorialOrder :
+  Typed.relationKind Climate.hancockIPAHistoricalDonations ≡ Typed.funding
+historicHancockIPAMoneyIsFundingNotAnEditorialOrder = refl
+
+shellDepartureIsRecordedHistoricalOrganisationChange :
+  Typed.relationKind Climate.shellGCCDefection1998 ≡ Typed.organisationalContinuity
+shellDepartureIsRecordedHistoricalOrganisationChange = refl
+
+mooreCO2ChairIsAffiliationNotProofOfCommission :
+  Typed.relationKind Climate.mooreCO2Chair ≡ Typed.personnelContinuity
+mooreCO2ChairIsAffiliationNotProofOfCommission = refl
+
+apiPlanParticipationCannotBecomeMethodTransmission :
+  Typed.StrongHistoricalTransfer Climate.apiNamedContributorRandyRandol → ⊥
+apiPlanParticipationCannotBecomeMethodTransmission =
+  Climate.apiContributorNotMethodTransfer
+
+hancockIPAFundingCannotBecomeAutomaticMessageControl :
+  Typed.StrongHistoricalTransfer Climate.hancockIPAHistoricalDonations → ⊥
+hancockIPAFundingCannotBecomeAutomaticMessageControl =
+  Climate.ipaFundingNotEditorialMethod
+
+cfact1998And2026DoNotAutomaticallyProveContinuousPlan :
+  Typed.StrongHistoricalTransfer Climate.cfactAPITo2026Continuity → ⊥
+cfact1998And2026DoNotAutomaticallyProveContinuousPlan =
+  Climate.cfactContinuationNotPlanTransfer
+
+foundationIncomeNotSameAsClimateDenialExpenditure :
+  Climate.ConcentratedSourceAuditBoundary.total900mOrganisationRevenueIsClimateSpecificSpending
+    Climate.canonicalConcentratedSourceAuditBoundary ≡ false
+foundationIncomeNotSameAsClimateDenialExpenditure = refl
+
+industryDefectionsNotErased :
+  Climate.ConcentratedSourceAuditBoundary.shellBPDefectionsPreservedAsCounterExamples
+    Climate.canonicalConcentratedSourceAuditBoundary ≡ true
+industryDefectionsNotErased = refl
+
+
+allAPIContributorsInExampleShareOneOriginalDocument :
+  Typed.receipts Climate.apiNamedContributorAJohnAdams ≡
+  Typed.receipts Climate.apiNamedContributorJosephWalker
+allAPIContributorsInExampleShareOneOriginalDocument = refl
+
+
+milloy1998To2021IsPersonnelNotScriptTransmission :
+  Typed.relationKind Climate.milloy1998ToReefMedia ≡ Typed.personnelContinuity
+milloy1998To2021IsPersonnelNotScriptTransmission = refl
+
+repeatPersonDoesNotProveOriginalAPIPlanStillActive :
+  Typed.StrongHistoricalTransfer Climate.milloy1998ToReefMedia → ⊥
+repeatPersonDoesNotProveOriginalAPIPlanStillActive =
+  Climate.milloyRepeatNotProofOfTwentyThreeYearPlan
+
+
+singerGCCBudgetIsRequestNotPaidGrant :
+  Typed.relationKind Climate.singerGCCSolicitationNotMoneyPaid ≡ Typed.fundingProposal
+singerGCCBudgetIsRequestNotPaidGrant = refl
+
+southernICEBudgetIsCommitmentNotBankTransfer :
+  Typed.relationKind Climate.southernICEPledgeNotDisbursement ≡ Typed.fundingCommitment
+southernICEBudgetIsCommitmentNotBankTransfer = refl
+
+singer1994ProposalCannotEstablishMethodTransfer :
+  Typed.StrongHistoricalTransfer Climate.singerGCCSolicitationNotMoneyPaid → ⊥
+singer1994ProposalCannotEstablishMethodTransfer =
+  Climate.fundingRequestIsNotTransfer
+
+southern1991PledgeCannotEstablishMethodTransfer :
+  Typed.StrongHistoricalTransfer Climate.southernICEPledgeNotDisbursement → ⊥
+southern1991PledgeCannotEstablishMethodTransfer =
+  Climate.fundingPledgeIsNotTransfer
+
+
+gccACSHResearchWasCommissionedAccordingToArchive :
+  Typed.relationKind Climate.gccACSHCommissionedClimateHealth ≡ Typed.commissionedResearch
+gccACSHResearchWasCommissionedAccordingToArchive = refl
+
+gccACSHClientReviewRightsNotProofOfActualEditing :
+  Typed.relationKind Climate.gccACSHDocumentedEditorialReviewRights ≡ Typed.editorialReviewRights
+gccACSHClientReviewRightsNotProofOfActualEditing = refl
+
+gccACSHPublishedSubjectOverlapNotSameFile :
+  Typed.relationKind Climate.gccACSH1997PublicPaperMatch ≡ Typed.topicalPublicationMatch
+gccACSHPublishedSubjectOverlapNotSameFile = refl
+
+exxonLaterCHCFundingIsBoundedHistoricalReporting :
+  Typed.evidenceStrength Climate.exxonToCHCReportedPostAPIGrants ≡ Typed.corroborated
+exxonLaterCHCFundingIsBoundedHistoricalReporting = refl
+
+acshTopicalMatchCannotProveTransfer :
+  Typed.StrongHistoricalTransfer Climate.gccACSH1997PublicPaperMatch → ⊥
+acshTopicalMatchCannotProveTransfer =
+  Climate.gccACSHSharedSubjectNotIdenticalFinalFile
+
+acshEditorialDiscretionDoesNotProveSpecificScientificEdit :
+  Typed.StrongHistoricalTransfer Climate.gccACSHDocumentedEditorialReviewRights → ⊥
+acshEditorialDiscretionDoesNotProveSpecificScientificEdit =
+  Climate.gccACSHContractualRightsNotProofOfSpecificScientificEdit
+
+singerGCCProposalUnacquiredDocumentIsCorroborated :
+  Typed.evidenceStrength Climate.singerGCCSolicitationNotMoneyPaid ≡ Typed.corroborated
+singerGCCProposalUnacquiredDocumentIsCorroborated = refl
+
+
+------------------------------------------------------------------------
+-- Historical climate commissioning consumer: exact source identity,
+-- separately typed exposure, and ALREADY-PROVED proximity inadequacy.
+-- Reuse, not a second independent-influence no-go construction.
+------------------------------------------------------------------------
+
+acshPublicArgumentHasFirstPartySource :
+  Typed.identifier Climate.acsh1997OriginalPublicArgument ≡
+    "https://www.acsh.org/news/1997/10/01/global-climate-change-and-human-health"
+acshPublicArgumentHasFirstPartySource = refl
+
+gcc2001KyotoScriptIsExposureNotVerdict :
+  Typed.relationKind Climate.gcc2001DraftPolicyInputAcknowledgment ≡
+    Typed.recommendationExposure
+gcc2001KyotoScriptIsExposureNotVerdict = refl
+
+gccStateDepartmentReportedAccessDoesNotProveMethodTransfer :
+  Typed.StrongHistoricalTransfer Climate.gcc2001DraftPolicyInputAcknowledgment → ⊥
+gccStateDepartmentReportedAccessDoesNotProveMethodTransfer =
+  Climate.policyAccessIsNotCompletedMethodTransfer
+
+donorActorInstitutionProximityDoesNotEstablishDecisionControl :
+  Proximity.InfluenceThroughProximity → ⊥
+donorActorInstitutionProximityDoesNotEstablishDecisionControl =
+  Proximity.influenceDoesNotFactorThroughProximity
+
+
+------------------------------------------------------------------------
+-- Repeated exact 2026 Australian financial headline is not the number of
+-- underlying independent estimation paths; a 25 percent tax rate does not
+-- disclose whether PRRT is replaced or retained. Ibrahim dependence
+-- barrier reused, not reimplemented.
+------------------------------------------------------------------------
+
+australiaInstitute17BSourceRestatedInSenate :
+  Typed.relationKind Climate.tai17BRestatedByPocock2026 ≡
+    Typed.reportedStatisticRestatement
+australiaInstitute17BSourceRestatedInSenate = refl
+
+arthurDLittle17BSourceRestatedInSenate :
+  Typed.relationKind Climate.futureGroup17BRestatedByPocock2026 ≡
+    Typed.reportedStatisticRestatement
+arthurDLittle17BSourceRestatedInSenate = refl
+
+hancockCreditedOriginalJournalismReuse :
+  Typed.relationKind Climate.nightlyToHancockExplicitReprint2026 ≡
+    Typed.explicitAttributedRepublication
+hancockCreditedOriginalJournalismReuse = refl
+
+aepWoodMacResultNotAScientificReplicate :
+  Typed.relationKind Climate.aepWoodMacStatisticsNotNationalTaxRate ≡
+    Typed.reportedStatisticRestatement
+aepWoodMacResultNotAScientificReplicate = refl
+
+actuReplacementDistinctFromAdditionalLevy :
+  Typed.relationKind Climate.actuReplacementVsAEPAddOnSpecification ≡
+    Typed.parallelEconomicArgument
+actuReplacementDistinctFromAdditionalLevy = refl
+
+same17BHeadlineDoesNotIdentifyNamedModelCount :
+  INF.FactorsThrough Climate.same17BPrinted Climate.namedModelSourceCount → ⊥
+same17BHeadlineDoesNotIdentifyNamedModelCount =
+  Climate.annual17BHeadlineCannotRevealModelAncestry
+
+same25PcHeadlineDoesNotIdentifyTaxDesign :
+  INF.FactorsThrough Climate.taxRateLabel Climate.taxPolicyMeaning → ⊥
+same25PcHeadlineDoesNotIdentifyTaxDesign =
+  Climate.same25PcCannotDetermineInstrument
+
+creditedReprintIsNotDirectHistoricalMethodTransfer :
+  Typed.StrongHistoricalTransfer Climate.nightlyToHancockExplicitReprint2026 → ⊥
+creditedReprintIsNotDirectHistoricalMethodTransfer =
+  Climate.hancockReprintIsNotIndependentMethodTransmission
+
+actuWoodMacPolicyComparisonDoesNotProveSharedScript :
+  Typed.StrongHistoricalTransfer Climate.actuReplacementVsAEPAddOnSpecification → ⊥
+actuWoodMacPolicyComparisonDoesNotProveSharedScript =
+  Climate.taxSchemeSimilarityNotScriptCopy
+
+
+aep2025ForecastTo2026PaidHeadlineHasSameInstitution :
+  Typed.relationKind Climate.aepForecastToPaidStatusRestatement ≡
+    Typed.reportedStatisticRestatement
+aep2025ForecastTo2026PaidHeadlineHasSameInstitution = refl
+
+same21Point9BNumberDoesNotEstablishActualityStatus :
+  INF.FactorsThrough Climate.same21BPrinted Climate.reportedStatusFor21B → ⊥
+same21Point9BNumberDoesNotEstablishActualityStatus =
+  Climate.sameTaxNumberCannotDetermineSourceStatus
+
+
+------------------------------------------------------------------------
+-- 27 October source-acquired Arthur D. Little report, one model and
+-- multiple policy bases. Two existing Ibrahim factorisation obstructions
+-- are consumed here without introducing duplicate evidence machinery.
+------------------------------------------------------------------------
+
+adlFirstPartyConsultantReportCommissioned :
+  Typed.relationKind Climate.adlReportCommissionedAndPublic ≡ Typed.commissionedResearch
+adlFirstPartyConsultantReportCommissioned = refl
+
+adlFirstYearUpperBoundNotTenYearGuarantee :
+  Typed.relationKind Climate.adlSeventeenBFirstYearUpperBoundNotTenYearCash ≡
+    Typed.reportedStatisticRestatement
+adlFirstYearUpperBoundNotTenYearGuarantee = refl
+
+adlReturnsUnitSummaryNotAnotherEconomicModel :
+  Typed.relationKind Climate.adlIRRPointsVersusFutureGroupReturnsPercent ≡
+    Typed.reportedStatisticRestatement
+adlReturnsUnitSummaryNotAnotherEconomicModel = refl
+
+same25NominalRateCannotDetermineADLTenYearRevenue :
+  INF.FactorsThrough Climate.adlHeadlineRate Climate.adlTenYearBand → ⊥
+same25NominalRateCannotDetermineADLTenYearRevenue =
+  Climate.adlSame25RateCannotDetermineDecadeRevenue
+
+bareTwoPercentCannotDetermineIRRChangeUnits :
+  INF.FactorsThrough Climate.returnHeadlineWithoutUnits Climate.returnChangeUnit → ⊥
+bareTwoPercentCannotDetermineIRRChangeUnits =
+  Climate.bareTwoPercentCannotIdentifyReturnUnit
+
+futureGroupRestatementNotDirectMethodTransfer :
+  Typed.StrongHistoricalTransfer Climate.adlIRRPointsVersusFutureGroupReturnsPercent → ⊥
+futureGroupRestatementNotDirectMethodTransfer =
+  Climate.adlFirstPartyScenarioIsNotProofOfEditorialTransfer
+
+
+------------------------------------------------------------------------
+-- Original Wood Mackenzie 16-page study; no promotion of commissioned
+-- hypothesis to national tax paid or equivalence with replacement PRRT.
+------------------------------------------------------------------------
+
+woodMackenzieOriginalConfirmsAEPClientRestatement :
+  Typed.relationKind Climate.woodMackenzieOriginalIsAEPCommission ≡
+    Typed.reportedStatisticRestatement
+woodMackenzieOriginalConfirmsAEPClientRestatement = refl
+
+woodMackenzieAndACTUAreNotSameTaxDesign :
+  Typed.relationKind Climate.woodMackenzieAppendixNotACTUReplacement ≡
+    Typed.parallelEconomicArgument
+woodMackenzieAndACTUAreNotSameTaxDesign = refl
+
+woodMackenzieContractedVsADLSpotSourceModel :
+  Typed.relationKind Climate.woodMackenzieNoSpotVersusADLMarginalSpot ≡
+    Typed.parallelEconomicArgument
+woodMackenzieContractedVsADLSpotSourceModel = refl
+
+woodMackenzieSameRateCannotConcealSpotAssumption :
+  INF.FactorsThrough Climate.sameNominalRateAcrossModels Climate.originalModelContractingAssumption → ⊥
+woodMackenzieSameRateCannotConcealSpotAssumption =
+  Climate.same25RateCannotDetermineModelSpotAssumption
+
+
+------------------------------------------------------------------------
+-- Named government originals, reservation percentage denominators, and
+-- future-tense commencement claims are source-versioned rather than enacted.
+------------------------------------------------------------------------
+
+governmentReservation2025VersusMay2026Base :
+  Typed.relationKind Climate.reservation2025ProductionToMay2026Exports ≡
+    Typed.reportedStatisticRestatement
+governmentReservation2025VersusMay2026Base = refl
+
+governmentReservationDutyDateIsDraftSourceSequence :
+  Typed.relationKind Climate.reservationMayToSeptemberDutyDate ≡
+    Typed.reportedStatisticRestatement
+governmentReservationDutyDateIsDraftSourceSequence = refl
+
+governmentReservationDateDriftDoesNotProveTransfer :
+  Typed.StrongHistoricalTransfer Climate.reservationMayToSeptemberDutyDate → ⊥
+governmentReservationDateDriftDoesNotProveTransfer =
+  Climate.reservationDraftChronologyIsNotMethodTransmission
+
+
+------------------------------------------------------------------------
+-- Introduced gas reservation package: primary original release versus
+-- recorded attributed first-person Hansard; proposed administrative levy
+-- must never absorb ADL's 25%-of-export-sales fiscal counterfactual.
+------------------------------------------------------------------------
+
+octoberBillIsIntroducedNotCertifiedEnacted :
+  Typed.relationKind Climate.octoberGasBillsIntroduced2026 ≡
+    Typed.legislativeIntroduction
+octoberBillIsIntroducedNotCertifiedEnacted = refl
+
+octoberBillIntroductionNotHistoricalDirection :
+  Typed.StrongHistoricalTransfer Climate.octoberGasBillsIntroduced2026 → ⊥
+octoberBillIntroductionNotHistoricalDirection =
+  Climate.octoberBillIntroCannotEstablishHistoricalTransfer
+
+octoberCostRecoveryNotAdValoremTax :
+  Typed.relationKind Climate.octoberCostRecoveryLevyNotRevenueTax ≡
+    Typed.parallelEconomicArgument
+octoberCostRecoveryNotAdValoremTax = refl
+
+octoberAdditionalityDesignOnly :
+  Typed.relationKind Climate.octoberAdditionalityNotObservedDeliveredSupply ≡
+    Typed.legislativeIntroduction
+octoberAdditionalityDesignOnly = refl
+
+octoberBareLevyStringNotInstrumentIdentifier :
+  INF.FactorsThrough Climate.displayedLevyWord Climate.legalBaseOfLevy → ⊥
+octoberBareLevyStringNotInstrumentIdentifier =
+  Climate.bareLevyLabelCannotRecoverTaxBase
+
+
+------------------------------------------------------------------------
+-- Ibrahim/source-dependence original inquiry: one purposively selected
+-- 57-appearance evidence sample can fit differently concentrated national
+-- universes. Population claim needs a representative sampling design.
+------------------------------------------------------------------------
+
+selectedClimateCorpusIsNotNationalSourceCensus :
+  INF.FactorsThrough
+    Climate.whatOurSelectedLedgerSees
+    Climate.whatUnobservedOriginalPopulationContains → ⊥
+selectedClimateCorpusIsNotNationalSourceCensus =
+  Climate.selectedCorpusCannotDetermineNationalOriginConcentration
+
+
+------------------------------------------------------------------------
+-- 15 Oct OIA publisher-original regulatory burden and explicit contradiction
+-- with 14 Oct parliamentary minister's stated intended framework start.
+------------------------------------------------------------------------
+
+officialOIARegulatoryBurdenNotADLRevenueTax :
+  Typed.relationKind Climate.oiaRegulatoryBurdenNotExportTaxModel ≡
+    Typed.parallelEconomicArgument
+officialOIARegulatoryBurdenNotADLRevenueTax = refl
+
+oiaAndKingsCommencementStatementsConflictButAreSourceAttributed :
+  Typed.relationKind Climate.oiaJanuaryVsKingJulyDGRSStart ≡
+    Typed.reportedStatisticRestatement
+oiaAndKingsCommencementStatementsConflictButAreSourceAttributed = refl
+
+oiaVersionMismatchIsNotProofOfHistoricalTransfer :
+  Typed.StrongHistoricalTransfer Climate.oiaJanuaryVsKingJulyDGRSStart → ⊥
+oiaVersionMismatchIsNotProofOfHistoricalTransfer =
+  Climate.oiaTimingConflictDoesNotEstablishCausalScriptTransfer
+
+
+------------------------------------------------------------------------
+-- Worldwide (not Australian) cooling/plant-food claim production:
+-- named original persons, later author correction, independent Academy
+-- disavowal, archival personnel overlap and scientific no-factorisations.
+------------------------------------------------------------------------
+
+globalGwynne1975AuthorCorrectionRelation :
+  Typed.relationKind Climate.globalGwynne1975To2014AuthorCorrection ≡
+    Typed.authorRetrospectiveCorrection
+globalGwynne1975AuthorCorrectionRelation = refl
+
+globalWFA1992To1998FilmFamilyContinuity :
+  Typed.relationKind Climate.globalWFAToGreeningEarthSequel ≡
+    Typed.organisationalContinuity
+globalWFA1992To1998FilmFamilyContinuity = refl
+
+globalNAS1998OriginalInstitutionDisavowal :
+  Typed.relationKind Climate.globalNASDisavowsOISMPetition ≡
+    Typed.institutionalDisavowal
+globalNAS1998OriginalInstitutionDisavowal = refl
+
+globalPartialPlantResponseNotWholeEarthConclusion :
+  Typed.relationKind Climate.globalPlantGrowthIsNotNetClimateBenefit ≡
+    Typed.extrapolationBeyondEvidence
+globalPartialPlantResponseNotWholeEarthConclusion = refl
+
+globalSeitzSamePersonNoPaymentBridge :
+  Typed.relationKind Climate.globalSeitzPBSRoleToOISMPetition ≡
+    Typed.personnelContinuity
+globalSeitzSamePersonNoPaymentBridge = refl
+
+globalBaliunasNamedOverlapNoScriptProof :
+  Typed.relationKind Climate.globalBaliunasTwoDocumentFamilies ≡
+    Typed.personnelContinuity
+globalBaliunasNamedOverlapNoScriptProof = refl
+
+globalPositiveFertilisationIsNotNetClimateHarmEvaluation :
+  INF.FactorsThrough Climate.observedPlantFertilisation Climate.wholeClimateOutcome → ⊥
+globalPositiveFertilisationIsNotNetClimateHarmEvaluation =
+  Climate.positivePlantResponseDoesNotIdentifyGlobalNetImpact
+
+global1975MediaArticleIsNotContemporaryScienceCensus :
+  INF.FactorsThrough
+    Climate.sampledHistoricalMediaPresence Climate.hypotheticalScientificMajority → ⊥
+global1975MediaArticleIsNotContemporaryScienceCensus =
+  Climate.oneCoolingMagazineArticleCannotDetermineScientificConsensus
+
+globalGwynneAuthorCorrectionNotSecretFundingTransfer :
+  Typed.StrongHistoricalTransfer Climate.globalGwynne1975To2014AuthorCorrection → ⊥
+globalGwynneAuthorCorrectionNotSecretFundingTransfer =
+  Climate.globalGwynneCorrectionIsNotScriptTransmission
+
+globalAcademyNegativeProvenanceOriginal :
+  Typed.StrongHistoricalTransfer Climate.globalNASDisavowsOISMPetition → ⊥
+globalAcademyNegativeProvenanceOriginal =
+  Climate.globalNASInstitutionalDisavowalNotClimateMethodTransfer
+
+
+------------------------------------------------------------------------
+-- A single archived original 1998 WFA audiovisual publication co-packages
+-- plant benefits, climate model dismissal, and extreme-weather dismissal.
+-- Same source object, multiple claim families. No 1998→2026 script leap.
+------------------------------------------------------------------------
+
+globalWFA1998ModelsCoPackagedWithPlantClaim :
+  Typed.relationKind Climate.globalWFA1998GreeningAndModelClaimsSameFilm ≡
+    Typed.coPackagedClaims
+globalWFA1998ModelsCoPackagedWithPlantClaim = refl
+
+globalWFA1998WeatherCoPackagedWithPlantClaim :
+  Typed.relationKind Climate.globalWFA1998GreeningAndExtremeWeatherSameFilm ≡
+    Typed.coPackagedClaims
+globalWFA1998WeatherCoPackagedWithPlantClaim = refl
+
+globalOneFilmThreeClaimsNotThreeIndependentModels :
+  INF.FactorsThrough
+    Climate.threeTalkingPointsObserved Climate.originalObjectsForTalkingPoints → ⊥
+globalOneFilmThreeClaimsNotThreeIndependentModels =
+  Climate.threeClaimHeadlinesDoNotIdentifyIndependentOriginals
+
+globalCoPackagedOriginalNotPaidLaterScript :
+  Typed.StrongHistoricalTransfer Climate.globalWFA1998GreeningAndModelClaimsSameFilm → ⊥
+globalCoPackagedOriginalNotPaidLaterScript =
+  Climate.globalCoPackagedClaimsCannotProveLaterScriptTransmission
