@@ -28,7 +28,7 @@ module _
   (zero : Scalar)
   (_add_ : Scalar → Scalar → Scalar)
   (negate : Scalar → Scalar)
-  (addInverseRight : ∀ x → (x add negate x) ≡ zero)
+  (addInverseRight : ∀ x → (x add (negate x)) ≡ zero)
   (addZeroZero : (zero add zero) ≡ zero)
   where
 
@@ -37,7 +37,7 @@ module _
   adjacentOppositeBlockSum : List Scalar → Scalar
   adjacentOppositeBlockSum [] = zero
   adjacentOppositeBlockSum (value ∷ rest) =
-    (value add negate value) add adjacentOppositeBlockSum rest
+    (value add (negate value)) add adjacentOppositeBlockSum rest
 
   adjacentOppositeBlockSumZero :
     ∀ values → adjacentOppositeBlockSum values ≡ zero
@@ -55,7 +55,7 @@ module _
     (Scalar → Scalar) → Scalar
   shiftedBlockSum [] shift = zero
   shiftedBlockSum (value ∷ rest) shift =
-    (value add shift value) add shiftedBlockSum rest shift
+    (value add (shift value)) add shiftedBlockSum rest shift
 
   shiftedBlockSumIfOpposite :
     (values : List Scalar) (shift : Scalar → Scalar) →
