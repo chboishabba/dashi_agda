@@ -36,7 +36,9 @@ REQUIRED={
     "SmithFilsingerIndexedCayleyFaceWeldExact.agda":
       ("IndexedCayleyFace","indexedSourceIDExact","indexedTargetIDExact",
        "indexedGuardedSamePrimitive","indexedFaceFirstMidpoint",
-       "indexedFaceSecondMidpoint","indexedFaceSourceCone"),
+       "indexedFaceSecondMidpoint","indexedFaceSourceCone",
+       "MeshSelectedCayleyFace","selectedReallyOccurs",
+       "meshSelectedFaceMidpointFirst","meshSelectedFaceMidpointSecond"),
 }
 TESTS=[str(ROOT/"scripts/test_smith_filsinger_layered_green_sympy.py"),
        str(ROOT/"scripts/test_smith_filsinger_tangential_maxwell_sympy.py"),
