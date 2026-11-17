@@ -83,28 +83,25 @@ oneStepOutsideZero :
     (Frame.applyPrimitive (GuardedPrimitive.primitive g) s)
     (reachStep (GuardedPrimitive.primitive g) R)
 oneStepOutsideZero z g s R initial k notReach with
-    Indexed.sameID k (Frame.LocalPrimitive.firstID p)
-  | Indexed.sameID k (Frame.LocalPrimitive.secondID p)
+    Indexed.sameID k (Frame.LocalPrimitive.firstID (GuardedPrimitive.primitive g))
+  | Indexed.sameID k (Frame.LocalPrimitive.secondID (GuardedPrimitive.primitive g))
 ... | true | _ =
   trans
-    (cong₂ (Frame.LocalPrimitive.firstValue p)
-      (initial (Frame.LocalPrimitive.firstID p)
+    (cong₂ (Frame.LocalPrimitive.firstValue (GuardedPrimitive.primitive g))
+      (initial (Frame.LocalPrimitive.firstID (GuardedPrimitive.primitive g))
         (λ r → notReach (orLeft r)))
-      (initial (Frame.LocalPrimitive.secondID p)
+      (initial (Frame.LocalPrimitive.secondID (GuardedPrimitive.primitive g))
         (λ r → notReach (orRight r))))
     (ZeroPreserving.firstZero (GuardedPrimitive.preservesZero g))
 ... | false | true =
   trans
-    (cong₂ (Frame.LocalPrimitive.secondValue p)
-      (initial (Frame.LocalPrimitive.firstID p)
+    (cong₂ (Frame.LocalPrimitive.secondValue (GuardedPrimitive.primitive g))
+      (initial (Frame.LocalPrimitive.firstID (GuardedPrimitive.primitive g))
         (λ r → notReach (orLeft r)))
-      (initial (Frame.LocalPrimitive.secondID p)
+      (initial (Frame.LocalPrimitive.secondID (GuardedPrimitive.primitive g))
         (λ r → notReach (orRight r))))
     (ZeroPreserving.secondZero (GuardedPrimitive.preservesZero g))
 ... | false | false = initial k notReach
-  where
-    p = GuardedPrimitive.primitive g
-
 guardedStages :
   ∀ {A : Set} {z : A} →
   List (GuardedPrimitive A z) → Frame.State A → Frame.State A
