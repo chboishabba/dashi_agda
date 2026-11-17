@@ -85,3 +85,50 @@ There is no license to mark YM.REAL closed. Maintain 19/28 expanded open count u
 ## Same-original rational SU2 to Bishop matrix cut
 
 `YMClayOriginalRationalSU2ToBishopTraceExact.agda` now embeds the existing original `BalabanSU2RationalWilsonLargeFieldGapExact.RationalUnitQuaternion` coordinates into the real Bishop quaternion using canonical `Data.Rational.Base.toℚᵘ` and the actual vendor `Real._⋆`. Its normalized 2×2 real trace equals the image of the original `realPart`, using the earlier Bishop trace theorem. `YMClayOriginalRationalSU2BishopUnitaryWeldExact.agda` then uses the existing reduced-to-unnormalized rational +/* homomorphisms, native Bishop +/* homomorphisms and the original rational unit-norm equality to construct a genuine Bishop `UnitQuaternion`, and passes it to the determinant-one and entrywise `U†U=I` theorems. These are source-written and NOT kernel accepted; no compactness, surjectivity, full original SU(N) identity or Haar is implied.
+
+
+## Exact side-one commutator exception now resolved at low order
+
+At periodic L=1 all four original positive-link generators originate at
+the same site. Each of the six original positive-plane plaquettes is a
+commutator \(U_aU_bU_a^{-1}U_b^{-1}\), not a four-distinct-link loop.
+Exact degree-5 rational 24-cell integration gives
+\[
+H(t_{ab})=1/4,\qquad H(t_{ab}^2)=1/3,\qquad
+H(t_{ab}t_{ac})=1/8,\qquad
+H(t_{ab}t_{cd})=1/16
+\]
+for a,b,c,d distinct in the last case. There are 12 different
+shared-generator plane pairs and 3 disjoint pairs among the six.
+Writing \(T=\sum_{a<b}t_{ab}\), this gives
+\[
+H(T)=3/2,\quad H(T^2)=43/8,\quad
+H(6-T)=9/2,\quad H((6-T)^2)=187/8,
+\]
+\[
+\boxed{Z_{L=1}(\beta)=1-\frac92\beta+
+  \frac{187}{16}\beta^2+O(\beta^3).}
+\]
+The direct finite rational quaternion checker
+scripts/check_ym_wilson_L1_commutator_20261117.py passes 1,184/1,184
+exact assertions. The amended original positive-link geometry checker
+passes 44,346/44,346 across L=2,3,4. This verifies the correct
+low-order formulas at the first four original cutoffs and does NOT
+construct the continuous Haar integral or prove the Agda all-L transfer.
+
+## All-degree exact Pochhammer finite producer
+
+A preexisting local finite owner was promoted to the actual branch:
+DASHI/Physics/YangMills/YMClaySU2PochhammerMomentNumeratorsExact.agda.
+It is --safe-source-written and computes exact odd-zero/even rational
+moments using only primitive Nat recursive factorials:
+\[
+H(\prod q_i^{2a_i})=
+\frac{\prod_i(2a_i-1)!!}{2^{\sum_i a_i}(\sum_i a_i+1)!}.
+\]
+It includes reflexivity examples for 1, q0, q0², q0⁴ and q0²q1²,
+and is imported by the canonical safe TOE regression.
+
+This closes a finite computational lemma, not the all-degree
+positive cubature theorem or the Bishop real Haar completion.
+Agda kernel acceptance and transitive trust are pending.
