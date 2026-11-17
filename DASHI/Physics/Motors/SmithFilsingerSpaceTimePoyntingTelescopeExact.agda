@@ -11,7 +11,7 @@ module DASHI.Physics.Motors.SmithFilsingerSpaceTimePoyntingTelescopeExact where
 
 open import Agda.Builtin.Nat using (Nat; zero)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 open import Agda.Primitive using (Level; lsuc)
 import Data.Rational.Base as ℚ
 import DASHI.Physics.YangMills.YangMillsLatticeStressWardSliceConservationExact as Ward
@@ -50,9 +50,9 @@ spaceTimeExteriorEnergyBalance :
       ℚ.+ (materialAndIonLoss w ℚ.+ usefulReceiverWork w))
   ≡ naturalSigned w ℚ.+ controllerSigned w
 spaceTimeExteriorEnergyBalance w
-  rewrite Ward.differencePartialTelescopes
-    (storedEnergy w) (steps w)
-    | Open.finiteOpenBoundaryPoyntingGauss (faces w) =
+  rewrite sym (Ward.differencePartialTelescopes
+    (storedEnergy w) (steps w))
+    | sym (Open.finiteOpenBoundaryPoyntingGauss (faces w)) =
     finiteDifferenceEnergyLaw w
 
 -- The original KSW668 vector jet is a POINTWISE theorem. This
@@ -118,10 +118,10 @@ sameOriginalTimeIntegratedPowerBalance :
       ℚ.+ SameOriginalSpaceTimeMaxwellAdmission.actualSignedController a
 sameOriginalTimeIntegratedPowerBalance jet a
   rewrite
-      SameOriginalSpaceTimeMaxwellAdmission.materialIdentified a
-    | SameOriginalSpaceTimeMaxwellAdmission.loadIdentified a
-    | SameOriginalSpaceTimeMaxwellAdmission.sourceIdentified a
-    | SameOriginalSpaceTimeMaxwellAdmission.controllerIdentified a =
+       sym (SameOriginalSpaceTimeMaxwellAdmission.materialIdentified a)
+    | sym (SameOriginalSpaceTimeMaxwellAdmission.loadIdentified a)
+    | sym (SameOriginalSpaceTimeMaxwellAdmission.sourceIdentified a)
+    | sym (SameOriginalSpaceTimeMaxwellAdmission.controllerIdentified a) =
   spaceTimeExteriorEnergyBalance (SameOriginalSpaceTimeMaxwellAdmission.window a)
 
 -- Remaining OPEN in physical/analytic sense:
