@@ -15,13 +15,15 @@ import DASHI.Interop.SensibLawHealthEvidenceProcessorParityExact as ProcessorPar
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesNarrativeGovernanceWeldExact as FriendlyjordiesNarrative
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesCompetingNarrativeExact as FriendlyjordiesCompeting
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesSourceTotalityExact as FriendlyjordiesSourceTotality
-import DASHI.Cognition.PNF.SensibLawFriendlyjordiesSouthAustraliaGovernanceWeldExact as FriendlyjordiesGovernance
-import DASHI.Cognition.PNF.SensibLawFriendlyjordiesGovernanceMaxCutExact as FriendlyjordiesRooted
-import DASHI.Cognition.PNF.SensibLawFriendlyjordiesWorldEvidenceExact as FriendlyjordiesWorld
-import DASHI.Cognition.PNF.SensibLawFriendlyjordiesCausalIdentificationMaxCutExact as FriendlyjordiesCausal
-import DASHI.Cognition.PNF.SensibLawFriendlyjordiesReviewedWorldEvidenceExact as FriendlyjordiesReview
-import DASHI.Cognition.PNF.SensibLawFriendlyjordiesReviewedCausalIdentificationExact as FriendlyjordiesReviewedCausal
-import DASHI.Cognition.PNF.SensibLawFriendlyjordiesAttributionCausalMaxCutExact as FriendlyjordiesAttribution
+import DASHI.Cognition.PNF.SensibLawFriendlyjordiesSouthAustraliaGovernanceWeldExact as FriendlyjordiesGovernanceMaxCut
+import DASHI.Cognition.PNF.SensibLawFriendlyjordiesGovernanceMaxCutExact as FriendlyjordiesRootedMaxCut
+import DASHI.Cognition.PNF.SensibLawFriendlyjordiesWorldEvidenceExact as FriendlyjordiesWorldEvidence
+
+------------------------------------------------------------------------
+-- Terminal parity surface for the current housing / ITIR / SensibLaw tranche.
+-- Importing this module requires all boundaries to coexist with the existing
+-- Agda-first legal runtime; none replaces another owner.
+------------------------------------------------------------------------
 
 selectedLegalRuntimeContract : LegalRuntime.AgdaFirstLegalRuntimeContract
 selectedLegalRuntimeContract = LegalRuntime.canonicalAgdaFirstLegalRuntimeContract
@@ -90,36 +92,16 @@ selectedFriendlyjordiesResidualAcquisitionClosure =
   FriendlyjordiesSourceTotality.canonicalResidualAcquisitionClosure
 
 selectedFriendlyjordiesSouthAustraliaGovernanceBoundary :
-  FriendlyjordiesGovernance.FriendlyjordiesSouthAustraliaGovernanceBoundary
+  FriendlyjordiesGovernanceMaxCut.FriendlyjordiesSouthAustraliaGovernanceBoundary
 selectedFriendlyjordiesSouthAustraliaGovernanceBoundary =
-  FriendlyjordiesGovernance.canonicalFriendlyjordiesSouthAustraliaGovernanceBoundary
+  FriendlyjordiesGovernanceMaxCut.canonicalFriendlyjordiesSouthAustraliaGovernanceBoundary
 
-selectedFriendlyjordiesRootedGovernanceBoundary :
-  FriendlyjordiesRooted.FriendlyjordiesGovernanceMaxCutBoundary
-selectedFriendlyjordiesRootedGovernanceBoundary =
-  FriendlyjordiesRooted.canonicalFriendlyjordiesGovernanceMaxCutBoundary
+selectedFriendlyjordiesRootedGovernanceMaxCutBoundary :
+  FriendlyjordiesRootedMaxCut.FriendlyjordiesGovernanceMaxCutBoundary
+selectedFriendlyjordiesRootedGovernanceMaxCutBoundary =
+  FriendlyjordiesRootedMaxCut.canonicalFriendlyjordiesGovernanceMaxCutBoundary
 
 selectedFriendlyjordiesWorldEvidenceBoundary :
-  FriendlyjordiesWorld.FriendlyjordiesWorldEvidenceBoundary
+  FriendlyjordiesWorldEvidence.FriendlyjordiesWorldEvidenceBoundary
 selectedFriendlyjordiesWorldEvidenceBoundary =
-  FriendlyjordiesWorld.canonicalFriendlyjordiesWorldEvidenceBoundary
-
-selectedFriendlyjordiesCausalIdentificationBoundary :
-  FriendlyjordiesCausal.FriendlyjordiesCausalIdentificationBoundary
-selectedFriendlyjordiesCausalIdentificationBoundary =
-  FriendlyjordiesCausal.canonicalFriendlyjordiesCausalIdentificationBoundary
-
-selectedFriendlyjordiesReviewedWorldBoundary :
-  FriendlyjordiesReview.FriendlyjordiesReviewedWorldEvidenceBoundary
-selectedFriendlyjordiesReviewedWorldBoundary =
-  FriendlyjordiesReview.canonicalFriendlyjordiesReviewedWorldEvidenceBoundary
-
-selectedFriendlyjordiesReviewedCausalBoundary :
-  FriendlyjordiesReviewedCausal.FriendlyjordiesReviewedCausalIdentificationBoundary
-selectedFriendlyjordiesReviewedCausalBoundary =
-  FriendlyjordiesReviewedCausal.canonicalFriendlyjordiesReviewedCausalIdentificationBoundary
-
-selectedFriendlyjordiesAttributionCausalBoundary :
-  FriendlyjordiesAttribution.FriendlyjordiesAttributionCausalBoundary
-selectedFriendlyjordiesAttributionCausalBoundary =
-  FriendlyjordiesAttribution.canonicalFriendlyjordiesAttributionCausalBoundary
+  FriendlyjordiesWorldEvidence.canonicalFriendlyjordiesWorldEvidenceBoundary
