@@ -16,6 +16,7 @@ module DASHI.Physics.Gravity.KSW668F8SameObjectWeylAuthorityBoundary where
 
 import DASHI.Physics.Closure.ContinuumCurvatureSourceSpinTwo as Curvature
 import DASHI.Physics.Gravity.KSW668F8OriginalAdS5EmbeddingSliceExact as Slice
+import DASHI.Physics.Gravity.KSW668F8LinearElectricWeylPolarizationSliceExact as LinearWeyl
 import DASHI.Physics.Gravity.KSW668F8WeakIsraelSATSliceExact as Wall
 import DASHI.Physics.Gravity.KSW668F8SSPRK3FullStabilityPrerequisiteExact as RK
 import DASHI.Physics.Gravity.KSW668F8DualElectricWeylReadoutAlgebraExact as Weyl
