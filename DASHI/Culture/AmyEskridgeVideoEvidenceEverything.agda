@@ -36,3 +36,7 @@ import DASHI.Culture.MissingDeceasedAttachmentSourcePromotionLedgerExact
 import DASHI.Culture.MissingDeceasedIdentityAttributionAuditExact
 import DASHI.Physics.ExoticGravity.NingLiYBCOGravityConstraintBidiExact
 import DASHI.Physics.ExoticGravity.NingLiNASACooperativeAgreementNCC8124Exact
+
+-- Original edited-video/clip lineage and inspected primary-source refinements.
+import DASHI.Culture.AmyEskridgeVideoOriginalClipLineageExact
+import DASHI.Culture.AmyEskridgeVideoPrimaryInspectionExact
