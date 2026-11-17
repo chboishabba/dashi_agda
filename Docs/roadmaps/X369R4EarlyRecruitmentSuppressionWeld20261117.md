@@ -539,3 +539,86 @@ a claim that GELU is
 overload-decreasing, a clinical
 analogy, or an Agda kernel
 acceptance.**
+
+
+### Matched canonical Nat Agda fixture and full receipt composition
+
+The source-written finite constructive witness now has its
+own reuse-only Agda source:
+`DASHI/Cognition/PNF/X369R4TopKSourceKinkWitnessExact.agda`.
+It imports both **original** `ResponseKink` and the
+earlier source-transport `X369R4EarlyKinkSourceWeldExact`,
+encodes `r4FixtureNatResponse=(0,2,9,0)` over
+the ORIGINAL `DriveStage`, supplies explicit Agda
+natural-order evidence, and transports that record
+through `sameSourceR4RiseAndOverload`.
+This proves the **finite shape for the declared
+fixture data**, not Torch equivalence;
+no Agda kernel acceptance is asserted.
+
+The source-gate script now actually invokes
+BOTH existing consumers:
+`check_x369_r4_source_receipt.certify` for
+strict original coherent topk and orientation,
+and `check_x369_r4_kink_source_receipt.certify`
+for the same-checkpoint/history, ordinal
+four-regime response. Its outputs are
+explicitly labelled conditional and synthetic
+(checkpoint hash is placeholder `0` repeated).
+The analytic response intervals are
+projected to a single strict Nat cell BEFORE
+the latter receipt is constructed.
+
+The elementary numerical constant `e`
+is enclosed analytically by
+`8/3<e<87/32<11/4`:
+the first four exponential-series terms
+sum to `8/3`, and the positive
+tail from `1/4!` is bounded by the
+geometric sum `5/96`. These rational
+bounds, not a floating evaluator's
+approximation alone, justify the
+reported response cells.
+
+An **independent local reproduction** of
+the source relative-logit arithmetic,
+coherent selected IDs, pairwise
+rational error budgets and source Nat
+interval cell tests returned:
+
+| t | Ordered selected | Minimum cross-score gap | Pairwise selected error budget | Admitted response interval | Nat |
+|---|---|---:|---:|---|---:|
+| 0 | (0,1) | 14 | 0.00015259 | [0.006280,0.007399] | 0 |
+| 1 | (0,1) | 9 | 0.00024415 | [0.266606,0.272788] | 2 |
+| 2 | (1,0) | 1 | 0.00033570 | [0.949823,0.954206] | 9 |
+| 3 | (3,2) | 1 | 0.00019837 | [0,0] | 0 |
+
+These local computations instantiate the
+SAME symbolic formulas as the new
+committed scripts. The entire committed
+files were not run from GitHub as files,
+and the synthetic float/source-provenance
+premises have NOT been verified against
+an actual checkpoint or original Torch
+kernel. Device tests and kernel promotion
+remain separate.
+
+### The next true original-source gate
+
+The architecture-level **existence** of
+an R4 early-kink mechanism through
+topk replacement is now settled by a
+specific matched source-shaped witness.
+The open question is **whether an
+actually trained model and a specified
+real response observable exhibit it**.
+Next use the existing native original
+R4 runner/checkpoint hash producer,
+source fixed-state load interventions,
+matched forced-topk replay and
+layer-wise selected-FFN/transition
+observations. A static four-point
+response shape cannot establish
+on-policy hysteresis or physiological
+causation; keep those as separate
+evidence branches.
