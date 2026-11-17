@@ -1544,3 +1544,120 @@ was supplied. This is the next high-alpha
 MAX-CUT link between the user's original
 compression/sufficiency conjecture and
 future inactive-history correctness.
+
+
+## 17 November continuation: original joint history fibres + precision-receipt handoff
+
+See the new focused owner:
+`Docs/roadmaps/X369R4SourceReceiptAndHistoryFibreMaxCut20261117.md`.
+
+The source `HistoryOrbitMoE.step` uses original
+signed expert h in orientation, FFN and
+transition, even when the C2 + directed
+routing logit cannot distinguish those h.
+A source-compatible exact counterexample
+now demonstrates same **entire** ideal R4
+routing consumer for `h+=(1,1,1)` versus
+`h-=(-1,-1,-1)` under a rank2
+zero-sum directed head, yet chosen
+orientation score strictly positive for
+both, and a licensed FFN first layer
+separates their GELU outputs by exactly 1.
+A licensed transition can also retain
+the differing signed h coordinate.
+This is an architecture-existence witness,
+NOT a claim about the original fitted
+checkpoint's actual FFN weights.
+
+The positive condition is sharper than
+'two channels are enough': a history codec
+E must simultaneously factor EVERY
+admitted execution observer and make
+the transition quotient well-defined:
+
+    E(h1)=E(h2) -> O(h1)=O(h2),
+    E(h1)=E(h2) -> E(T(h1))=E(T(h2)).
+
+For linear E=P, the exact tests are
+rowspace(O) subset rowspace(P),
+and `ker(P)` transition-invariant.
+SymPy proves an arbitrary-symbolic
+2D example `P T^n=Tbar^n P`
+for n=1..6, and gives both a
+rank3 FFN history observer obstruction
+and a positive rank2 restricted
+source-compatible observer. The current
+fitted model's actual operator rank is
+not known. Local independent SymPy
+source-fibre tests: **25 checks PASS**
+(including the observer-rank augmentation).
+
+**Source receipt gate implemented:**
+`scripts/check_x369_r4_source_receipt.py`.
+It is read-only, exact-rational, and requires
+explicit original model SHA, externally
+verified source/export/float-error
+provenance fields, original activation,
+ALL expert histories, C2 head weights,
+C3 directed head weights, expert biases,
+q mask, original selected IDs, selected
+orientation head, and coordinate-wise/
+per-pair error budgets. Under these
+admitted numerical inputs it certifies
+source pairwise TopK and slot margins,
+stable mixed q branches, selected
+orientation chart, and a selected
+softmax-L1 upper bound. It explicitly
+reports `source_checkpoint_authenticated_by_this_script=false`
+and `full_recurrent_state_certified=false`.
+The provenance flags themselves are
+untrusted declarations unless a real
+source owner separately authenticates
+the original checkpoint and numerical
+receipt.
+
+**Synthetic fail-closed regression:**
+`scripts/check_x369_r4_source_receipt_selftest.py`.
+Independent local analogous script tests:
+**13/13 PASS** (2 coherent/mixed accepted,
+6 missing-provenance rejections,
+2 selected-ID order rejections,
+2 zero-orientation refusals,
+1 mixed-q mean-tie refusal).
+A standalone source-adapter test with
+the same fixture returned rational
+softmax budget `594441/8388608`.
+These are explicitly SYNTHETIC receipts,
+not actual trained-Leech evidence.
+The precise committed adapter version
+has not separately received a
+GitHub/CI execution receipt.
+
+**Existing original Leech source owners
+recovered and preferred:**
+`scripts/audit_x369_projected_router_score_weld.py`
+and
+`scripts/run_x369_r4_three_arm_source_maxcut.py`,
+both in `chboishabba/LeechTransformer` PR #5.
+The former's float32 comparison
+`atol=2e-4,rtol=3e-5` is a
+test tolerance, NOT an independently
+certified original quantizer error
+guarantee. The latter requires repaired
+C2 source checkpoint hash and native
+R1/SLR development split provenance.
+Do not re-implement these original
+source producers in DASHI; consume
+their receipts when available.
+
+**Current decisive remaining gates:**
+real checkpoint + source export
+authentication, source-independent
+precision/rounding evidence,
+actual learned W1/transition rank or
+consumer-fibre compatibility, repeated
+per-step strict q/topk/orientation
+certification, and independent
+grokking/Sophontic/trialectic semantic
+consumers. No CI/Agda or physical
+GPU run requested or asserted.
