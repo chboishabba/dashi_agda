@@ -95,6 +95,14 @@ def certificate(p5,unc,iv_paths):
     if abs(nominal-sourceNet)>1e-8*max(1,abs(sourceNet)):
         raise ValueError("nominal auxiliary/driver costs changed from original P5")
     sun=number(p5["incident_solar_W_m2"],"incident",1e-12)
+    absorbed=p5.get("per_junction_absorbed_solar_W_m2")
+    if p5.get("passive_mpp_le_absorbed_solar_checked") is not True or (
+        not isinstance(absorbed,list) or len(absorbed)!=len(records)):
+        raise ValueError("P5 original per-junction passive absorbed-energy receipt missing")
+    absorbed=[number(x,"per-junction absorbed solar") for x in absorbed]
+    if sum(absorbed)>sun+1e-7*max(1,sun):
+        raise ValueError("independently contacted junctions double count solar energy")
+
     lower=upper=0.
     per=[]
     for idx,(path,original_sha,p) in enumerate(zip(iv_paths,hashes,records)):
@@ -105,6 +113,9 @@ def certificate(p5,unc,iv_paths):
         cert=bracket(rows,uV,uJ)
         eta=number(p["converter_eta"],"converter eta",0,1)
         originalMPP=number(p["gross_mpp_W_m2"],"source piecewise MPP")
+        if originalMPP>absorbed[idx]+1e-7*max(1,sun):
+            raise ValueError("P5 source gross IV MPP exceeds original solar absorption")
+
         # Piecewise-linear model optimum must lie between sampled-real lower
         # and monotonic upper; otherwise wrong original source/units.
         if not cert["sampled_mpp_lower_W_m2"]-1e-8<=originalMPP<=cert["monotone_mpp_upper_W_m2"]+1e-8:
