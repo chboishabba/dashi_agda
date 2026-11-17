@@ -42,6 +42,7 @@ open import Data.Rational.Base using (ℚ; 1ℚ; _+_; _*_; -_; _/_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 import DASHI.Physics.Gravity.KSW668AdS5TTMultipoleAngularRationalExact as Angular
 import DASHI.Physics.Gravity.KSW668F8TTSymbolDiscreteCompatibilityExact as TT
+import DASHI.Physics.Gravity.KSW668F8OriginalTTSourcePrimitiveJetExact as Primitive
 
 two four six : ℚ
 two = (+ 2) / 1
@@ -164,3 +165,32 @@ originalCartesianTTToG4 :
   r4Mode4 r f1 f2 f3 f4
     ≡ originalProfile4Weighted r f1 f2 f3 f4
 originalCartesianTTToG4 r f1 f2 f3 f4 = solve []
+
+-- SAME original FV source weighted densities, imported from the
+-- ACTUAL original compact source derivative/primitive jet owner.
+-- For the dimensionless r=u, G_l=f_l/u^ell:
+--   weighted_0 = r² G0; weighted_2=r^6 G2; weighted_4=r^10 G4.
+-- Our r⁴*f_l profiles yield division-free weighted links:
+--   r² weighted_0 = r⁴ f_0;
+--      weighted_2 = r⁴ f_2;
+--   r² weighted_4 = r⁴*(r^6 G4).
+-- Because 0*0=0, these DO NOT assert a division/pointwise
+-- extension or derivative regularity at r=0.
+
+originalCartesianToFVSource0OriginSafe :
+  (r f1 f2 f3 f4 : ℚ) →
+  r2 r * Primitive.originalWeightedSource0 r f2 f3 f4
+    ≡ r4Mode0 r f1 f2 f3 f4
+originalCartesianToFVSource0OriginSafe r f1 f2 f3 f4 = solve []
+
+originalCartesianToFVSource2OriginSafe :
+  (r f1 f2 f3 f4 : ℚ) →
+  Primitive.originalWeightedSource2 r f1 f2 f3 f4
+    ≡ r4Mode2 r f1 f2 f3 f4
+originalCartesianToFVSource2OriginSafe r f1 f2 f3 f4 = solve []
+
+originalCartesianToFVSource4OriginSafe :
+  (r f1 f2 f3 f4 : ℚ) →
+  Primitive.originalWeightedSource4 r f1 f2 f3 f4
+    ≡ r2 r * r4Mode4 r f1 f2 f3 f4
+originalCartesianToFVSource4OriginSafe r f1 f2 f3 f4 = solve []
