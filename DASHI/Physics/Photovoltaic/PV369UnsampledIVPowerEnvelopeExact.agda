@@ -18,8 +18,8 @@ module DASHI.Physics.Photovoltaic.PV369UnsampledIVPowerEnvelopeExact where
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
-import Data.Nat as Std using (_≤_; z≤n; s≤s)
-import Data.Nat.Properties as NatP using (*-mono-≤)
+open import Data.Nat as Std using (_≤_; z≤n; s≤s)
+open import Data.Nat.Properties as NatP using (*-mono-≤)
 import DASHI.Physics.Motors.Circuit36927RecoveryEnergyBoundExact as Bound
 import DASHI.Physics.Photovoltaic.PV369IntervalRobustAcceptanceExact as Robust
 import DASHI.Physics.Photovoltaic.PV369FourJunctionOpticsToMeasuredIVExact as P5
