@@ -173,3 +173,56 @@ the *entire admitted code+decoder+state-transition cost*, not raw
 activation dimension or a formally equivalent change of basis.
 No original LILA performance, codec ratio or semantic steering is
 claimed before source-backed evidence.
+
+
+## P0 original Leech router: a *conditional* 3-to-2 directed-channel code
+
+New proposed proof module:
+`DASHI/Cognition/PNF/X369DirectedRouterConditionalCodecExact.agda`.
+
+It uses the ORIGINAL source owner
+`X369OriginalDirectedTriadC3PolynomialCandidate` for
+`originalSelf`, `originalCyclic`, `originalAnticyclic`.
+The three directed channels of x=(a,b,c), h=(A,B,C) obey
+
+    self + forward + reverse
+      = (a+b+c)(A+B+C).
+
+A 6-variable `Data.Integer.Solver` proof is supplied;
+the inverse reconstruction is a 3-variable solver proof.
+Consequently **if the consumer already knows the sourceDC
+product**, two directed scalars plus THAT externally
+supplied side information exactly reconstruct all three.
+The code `encodeDirectedTwo` and decoder
+`decodeDirectedWithKnownDC` form a constructive
+full-channel recovery under that precondition.
+
+The essential counterexample is ALSO ORIGINAL SOURCE, not
+a synthetic arbitrary triple: x=(1,0,0) with h=(0,0,0)
+vs h=(0,0,1) produces directed (0,0,0) vs (0,0,1).
+The retained first two scalars collide, while an original
+consumer observing reverse distinguishes them. The
+`twoDirectedWithoutDCNotSufficient` proof prohibits an
+unqualified 3→2 data-loss claim. Conversely, every
+consumer that factors through the two kept channels is
+exactly sufficient.
+
+This exhibits the real research boundary:
+an already-available shared DC/summary enables a
+relative-channel reduction; paying to COMPUTE or STORE
+one extra side scalar per expert could erase the savings.
+It does NOT certify an original memory/compute/latency
+benefit. Compare exact source tensor reuse, per-expert
+history availability, quantizer precision, provenance,
+decoding arithmetic and future-state admission.
+
+Check this additional new head with pinned Agda:
+
+```sh
+export DASHI_NO_TMUX=1
+scripts/run_agda29_parallel_check.sh \
+  DASHI/Cognition/PNF/X369DirectedRouterConditionalCodecExact.agda
+```
+
+Both new files are unverified proof-source proposals in
+this environment, not kernel-accepted theorems.
