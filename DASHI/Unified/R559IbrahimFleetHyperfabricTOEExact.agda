@@ -104,12 +104,12 @@ fleetFormalGapsAre58 = refl
 fleetEigenPriorityDoesNotCreateProof :
   Fleet.eigenvalueMagnitudeCreatesProofAuthority fleetFormalGapTargetReceipt ≡ false
 fleetEigenPriorityDoesNotCreateProof =
-  Fleet.fleetEigenPriorityDoesNotCreateProof
+  Fleet.fleetEigenPriorityPromotionImpossible
 
 fleetExternalCountDoesNotCreateFormalDischarge :
   Fleet.externalCountCreatesFormalProof fleetFormalGapTargetReceipt ≡ false
 fleetExternalCountDoesNotCreateFormalDischarge =
-  Fleet.fleetExternalCountDoesNotCreateFormalDischarge
+  Fleet.fleetExternalCountPromotionImpossible
 
 fleetDischargedFibresStayOutOfTarget :
   Fleet.dischargedFibresRemainDischarged fleetFormalGapTargetReceipt ≡ true
