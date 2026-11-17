@@ -74,3 +74,22 @@ python3 scripts/check_smith_filsinger_signed_vi_intervals.py ORIGINAL_VI_MANIFES
 ```
 
 The manifest must include `original_id`, `clock_id`, `port_orientation`, `integration_rule` and `ports`. Each port record carries `file`, `sha256`, `clock_id`; each CSV has exactly `time_s,voltage_V,current_A,voltage_error_V,current_error_A`, in SI units. All numerical values are strings parsed as exact decimals or rational fractions. If the original fields lack independent current, time, error radius or source authentication, the input is **not available**; do not fill with guesses or model values.
+
+
+## Continuation — required independent intersample error certificate
+
+The exact signed V/I interval reader previously propagated instantaneous voltage/current calibration radii but **implicitly set all sub-sample energy error to zero**. This is invalid for original high-frequency/switching/tuned apparatus: a narrow sample-level trapezoidal envelope does not necessarily bound the actual continuous waveform integral.
+
+`scripts/check_smith_filsinger_signed_vi_intervals.py` now requires **three extra per-port evidence fields**: `integration_error_bound_J` (exact nonnegative rational string), `integration_error_certificate` (separate, role-distinct file) and `integration_error_certificate_sha256`. The file's hash and path are checked, and re-use of an earlier port's raw/certificate bytes is rejected. The work interval becomes:
+
+```text
+sampled_trapezoidal_work_interval = [L, U]
+independently_certified_integral_remainder_radius = ε ≥ 0
+admitted_original_integrated_work_interval = [L − ε, U + ε]
+```
+
+This is conservative only if the external remainder certificate itself truly bounds the missing integration, inter-channel phase offsets, bandwidth/aliasing and switching transients. A SHA256 match is **not** an assessment of that mathematical/experimental claim. The reader never silently sets the physical remainder to zero: a supplied `0` remains a separately documented, scientifically auditable premise, not a derived physical fact.
+
+Added five new negative-control/exact-radius tests for nonzero remainder propagation, missing certificate, wrong certificate hash, negative remainder and copied certificate. V/I test suite now has **18 authored test cases**, evidence-role suite has **12 authored test cases**. Both are included in the focused GitHub PR workflow. As of this update neither suite nor pinned Agda 2.9 typechecking has an observed accepted CI run; these are **source-authored tests and reviewable code, not kernel receipts**.
+
+F10 physical calibration, actual instrument uncertainty calibration, F15 independent natural replenishment, F16 controlled atmospheric cause, and D1 actual pinned Agda success all remain OPEN. In particular, calling an unverified channel `natural_incident` does not prove its physical source is natural.
