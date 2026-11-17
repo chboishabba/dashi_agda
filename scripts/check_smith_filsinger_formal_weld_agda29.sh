@@ -4,6 +4,7 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 
 owners=(
+  DASHI/Physics/YangMills/YangMillsLatticeStressWardSliceConservationExact.agda
   DASHI/Physics/Plasma/KSW668FullVectorMaxwellJetExact.agda
   DASHI/Physics/Motors/Circuit36927RecoveryEnergyBoundExact.agda
   DASHI/Physics/Motors/SmithFilsingerTimeIndexedTransferExact.agda
