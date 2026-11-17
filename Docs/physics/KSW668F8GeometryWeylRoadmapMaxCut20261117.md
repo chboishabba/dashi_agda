@@ -213,3 +213,18 @@ even though `T(1,2,3)*(1,2,3)=0` and `trace T=0`. Thus source shell-mass coarsen
 **Next formal producer G1:** Construct the actual Cartesian discretization/transfer operators and their commuting diagram to the existing `d=3,7,11` radial FV carriers. Need an explicit map from the full tensor angular decomposition to all componentwise radial discretizations, not just `H_yy`. Then prove or measure discrete divergence/trace defects at the original receiver and source, with boundary and smoothness control. The new finite symbol theorem is a reusable prerequisite, not a replacement for the original simulation.
 
 **Gate accounting:** G1 full original tensor discrete commutation OPEN; G2 original joint weak Israel SAT energy OPEN; G3 coupled SSPRK3 stability OPEN; G4 moving-domain high-Sobolev both-Weyl trace OPEN; G5 independent three-axis convergence OPEN; G6 original matter/FIO/detector OPEN. Original source and paper attributions remain in owners; new mathematics/negative controls remain separately documented. No ESD code changed.
+
+
+### XXXI exact derivative-symbol mismatch defect and next G1 max-cut
+
+For the same original 3-by-3 fourth-order tensor source symbol `T(k)`, and ANY independent rational discrete divergence symbol `q`, the newly source-written Agda owner proves three componentwise polynomial identities
+```
+q_i T_ij(k) = (q_i-k_i) T_ij(k),    j=x,y,z.
+```
+Thus pointwise symbol consistency yields a quantitative norm estimate
+```
+|T(k) q|_2 <= ||T(k)||_F |q-k|_2,
+```
+by ordinary Cauchy--Schwarz (the norm inequality is independently mathematical, NOT new Agda-checked code). This isolates the discrete TT leakage producer `q-k`. At matched symbols `q=k`, the divergence is algebraically zero; at original source `k=(1,2,3)` and mismatched `q=(1,1,2)`, leakage is `(-3/2,-24,33/2)`. Original scalar shell-mass coarsening does not give the requisite matching-symbol property.
+
+**Next priority:** identify and prove the full tensor-to-existing F8 radial FV comparison map, then bound its symbol/commutator defect under nonperiodic origin and wall closures; this cannot be inferred from the periodic/constant-coefficient symbol alone. Only after that pursue a coupled G2/G3 stability estimate plus G4 high-regularity trace to promote these finite identities to G5 convergence. G6 remains physical and evidence-dependent.
