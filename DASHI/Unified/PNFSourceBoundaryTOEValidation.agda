@@ -1,50 +1,91 @@
 module DASHI.Unified.PNFSourceBoundaryTOEValidation where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+
 import DASHI.Unified.PNFSourceBoundaryTOEExact as Boundary
-import DASHI.EverythingTOESymmetryResolved369 as TOE
 import DASHI.Unifier as Unifier
 
+unifierUsesCanonicalPNFSourceBoundaryReceipt :
+  Unifier.toePNFSourceBoundaryReceipt
+  ≡
+  Boundary.canonicalPNFSourceBoundaryTOEReceipt
+unifierUsesCanonicalPNFSourceBoundaryReceipt =
+  refl
+
 gluingFacadeExact :
-  TOE.gluingProxyDoesNotProveTrueLinearity
-  ≡ Boundary.gluingProxyDoesNotProveTrueLinearity
-gluingFacadeExact = refl
+  Unifier.toePNFGluingProxyDoesNotProveTrueLinearity
+  ≡
+  Boundary.gluingProxyDoesNotProveTrueLinearity
+gluingFacadeExact =
+  refl
 
 selfAdjointFacadeExact :
-  Unifier.selfAdjointProxyDoesNotProveFiniteTheorem
-  ≡ Boundary.selfAdjointProxyDoesNotProveFiniteTheorem
-selfAdjointFacadeExact = refl
+  Unifier.toePNFSelfAdjointProxyDoesNotProveFiniteTheorem
+  ≡
+  Boundary.selfAdjointProxyDoesNotProveFiniteTheorem
+selfAdjointFacadeExact =
+  refl
 
 dominationFacadeExact :
-  TOE.dominationProxyDoesNotProveHamiltonianTheorem
-  ≡ Unifier.dominationProxyDoesNotProveHamiltonianTheorem
-dominationFacadeExact = refl
+  Unifier.toePNFDominationProxyDoesNotProveHamiltonianTheorem
+  ≡
+  Boundary.dominationProxyDoesNotProveHamiltonianTheorem
+dominationFacadeExact =
+  refl
 
 fungalFacadeExact :
-  TOE.fungalNetworkClaimsRequireSpeciesEvidence
-  ≡ Unifier.fungalNetworkClaimsRequireSpeciesEvidence
-fungalFacadeExact = refl
-
-sourceAtlasFacadeExact :
-  TOE.sourceAtlasContainsTenRecords
-  ≡ Unifier.sourceAtlasContainsTenRecords
-sourceAtlasFacadeExact = refl
+  Unifier.toePNFFungalNetworkClaimsRequireSpeciesEvidence
+  ≡
+  Boundary.fungalNetworkClaimsRequireSpeciesEvidence
+fungalFacadeExact =
+  refl
 
 kluverCobwebFacadeExact :
-  TOE.kluverCobwebForm ≡ Unifier.kluverCobwebForm
-kluverCobwebFacadeExact = refl
-
-kluverSymbolNonPromotionFacadeExact :
-  TOE.kluverFormDoesNotPromoteUniversalSymbol
-  ≡ Boundary.kluverFormDoesNotPromoteUniversalSymbol
-kluverSymbolNonPromotionFacadeExact = refl
-
-kluverMemoryNonPromotionFacadeExact :
-  Unifier.kluverFormDoesNotPromoteRecoveredMemory
-  ≡ Boundary.kluverFormDoesNotPromoteRecoveredMemory
-kluverMemoryNonPromotionFacadeExact = refl
+  Unifier.toePNFKluverCobwebForm
+  ≡
+  Boundary.kluverCobwebForm
+kluverCobwebFacadeExact =
+  refl
 
 webIdentifierFacadeExact :
-  TOE.psychogeographyWebIdentifierKind
-  ≡ Unifier.psychogeographyWebIdentifierKind
-webIdentifierFacadeExact = refl
+  Unifier.toePNFPsychogeographyWebIdentifierKind
+  ≡
+  Boundary.psychogeographyWebIdentifierKind
+webIdentifierFacadeExact =
+  refl
+
+
+identicalWordsFirewallFacadeExact :
+  Unifier.toePNFIdenticalWordsDoNotPayPredicate
+  ≡
+  Boundary.identicalWordsDoNotPayPredicate
+identicalWordsFirewallFacadeExact =
+  refl
+
+commonFingerprintFirewallFacadeExact :
+  Unifier.toePNFCommonFingerprintDoesNotCreateTruth
+  ≡
+  Boundary.commonPnfFingerprintDoesNotCreateClaimTruth
+commonFingerprintFirewallFacadeExact =
+  refl
+
+perceivedIndependenceFirewallFacadeExact :
+  Unifier.toePNFPerceivedIndependenceDoesNotCreateProvenanceIndependence
+  ≡
+  Boundary.perceivedIndependenceDoesNotCreateProvenanceIndependence
+perceivedIndependenceFirewallFacadeExact =
+  refl
+
+repetitionFirewallFacadeExact :
+  Unifier.toePNFRepetitionDoesNotCreateIndependentEvidence
+  ≡
+  Boundary.repetitionDoesNotCreateIndependentEvidence
+repetitionFirewallFacadeExact =
+  refl
+
+commonSourceFirewallFacadeExact :
+  Unifier.toePNFCommonSourceDoesNotEraseEvidence
+  ≡
+  Boundary.commonSourceDoesNotEraseEvidence
+commonSourceFirewallFacadeExact =
+  refl

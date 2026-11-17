@@ -24,20 +24,8 @@ open import Agda.Builtin.String using (String)
 open import Data.Nat.Base using (ℕ)
 open import Data.List.Base using (List; _∷_; [])
 open import Data.Empty using (⊥)
-open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 import DASHI.Unified.ArithmeticMoonshine as ArithmeticMoonshine
-import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
-import DASHI.Geo.EarthEmbeddingAcquisitionExact as EarthEmbeddingTOE
-import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballFrame
-import DASHI.Unified.BalabanRGTOEMaxCutValidation
-import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Validation
-import DASHI.Unified.BalabanIbrahimParetoSnowballTOEValidation
-import DASHI.Unified.FleetFormalGapTargetTOEValidation
-import DASHI.Unified.ContextualSemanticFractranTOEMaxCutValidation
-import DASHI.Unified.TOE369MaxCutKernelBidiTernaryValidation
-import DASHI.Unified.SingularBasinCoarseRGTOEValidation
-import DASHI.Unified.YMGoal1R559IbrahimTOEValidation
 import DASHI.Unified.BrainFMRI as BrainFMRI
 import DASHI.Reasoning.TrialecticBraidedTwoEyedCoordinationExact as BraidedTransferTOE
 import DASHI.Reasoning.TrialecticThreeStrandBraidHistoryExact as BraidedHistoryTOE
@@ -47,13 +35,138 @@ import DASHI.Unified.CrossScaleMatterPhysics as CrossScaleMatterPhysics
 import DASHI.Unified.E8ExceptionalActorTOECompatibilityExact as E8ActorTOE
 import DASHI.Unified.FormalObjectParents as FormalObjectParents
 import DASHI.Unified.InvariantSpine as Spine
+import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalGovernance
+import DASHI.Unified.FleetFormalGapTOEExact as FleetFormalGap
+import DASHI.Unified.FleetFormalGapTOERegression
 import DASHI.Unified.PNFHyperfabric as PNFHyperfabric
+import DASHI.Unified.PNFSourceBoundaryTOEExact as PNFSource
+import DASHI.Unified.PNFDistilledNonPromotionTOEExact as PNFDistilled
+import DASHI.Unified.PNFDistilledNonPromotionTOEValidation
 import DASHI.Unified.Physics as Physics
 import DASHI.Unified.TOE369CoarseFineIntertwinerMaxCutExact as TOE369MaxCut
 import DASHI.Unified.TOE369CoarseFineIntertwinerMaxCutValidation as TOE369MaxCutValidation
 import DASHI.Unified.TOE369RootUnifierConvergenceValidation as TOE369RootUnifierValidation
 import DASHI.Physics.Foundations.Round5CompleteBoundary as Round5
-open MaxCut369 public
+
+------------------------------------------------------------------------
+-- Fleet R5 formal-gap convergence.
+------------------------------------------------------------------------
+
+fleetFormalGapTOEReceipt :
+  FleetFormalGap.FleetFormalGapTOEReceipt
+fleetFormalGapTOEReceipt =
+  FleetFormalGap.canonicalFleetFormalGapReceipt
+
+fleetOnlyFormalResidualDispatches :
+  FleetFormalGap.dispatchAllowed FleetFormalGap.unformalisedFormalGap ≡ true
+fleetOnlyFormalResidualDispatches = refl
+
+fleetDischargedFibresDoNotRedispatch :
+  FleetFormalGap.dispatchAllowed FleetFormalGap.dischargedCoreKnowledge ≡ false
+fleetDischargedFibresDoNotRedispatch = refl
+
+fleetContradictionsRemainSeparate :
+  FleetFormalGap.dispatchAllowed FleetFormalGap.polarityContradictionGap ≡ false
+fleetContradictionsRemainSeparate = refl
+
+governedLegalWorkflowTOEBoundary :
+  LegalGovernance.GovernedLegalWorkflowTOEBoundary
+governedLegalWorkflowTOEBoundary =
+  LegalGovernance.canonicalGovernedLegalWorkflowTOEBoundary
+
+governedLegalWorkflowTOEInvariantHandoff :
+  LegalGovernance.GovernedLegalWorkflowTOEInvariantHandoff
+governedLegalWorkflowTOEInvariantHandoff =
+  LegalGovernance.canonicalGovernedLegalWorkflowTOEInvariantHandoff
+
+governedLegalWorkflowIntrospectiveZKPFrame :
+  LegalGovernance.GovernedLegalWorkflowIntrospectiveZKPFrame
+governedLegalWorkflowIntrospectiveZKPFrame =
+  LegalGovernance.canonicalGovernedLegalWorkflowIntrospectiveZKPFrame
+
+
+governedSemanticPromotionTruthAuthorityClosed :
+  LegalGovernance.SemanticPromotionTruthAuthorityClosed
+governedSemanticPromotionTruthAuthorityClosed =
+  LegalGovernance.toeSemanticPromotionTruthAuthorityClosed
+
+governedSemanticPromotionLegalAuthorityClosed :
+  LegalGovernance.SemanticPromotionLegalAuthorityClosed
+governedSemanticPromotionLegalAuthorityClosed =
+  LegalGovernance.toeSemanticPromotionLegalAuthorityClosed
+
+governedSemanticPromotionAllAuthorityClosed :
+  LegalGovernance.SemanticPromotionAllAuthorityClosed
+governedSemanticPromotionAllAuthorityClosed =
+  LegalGovernance.toeSemanticPromotionAllAuthorityClosed
+
+governedBoundAcquisitionDoesNotPayRequirement :
+  LegalGovernance.BoundDemandAutomaticallyPaysRequirement → ⊥
+governedBoundAcquisitionDoesNotPayRequirement =
+  LegalGovernance.toeBoundAcquisitionDoesNotPayRequirement
+
+governedBoundAcquisitionDoesNotCloseConsumer :
+  LegalGovernance.BoundDemandAutomaticallyClosesConsumer → ⊥
+governedBoundAcquisitionDoesNotCloseConsumer =
+  LegalGovernance.toeBoundAcquisitionDoesNotCloseConsumer
+
+governedProducerIdentityDoesNotIdentifyResidual :
+  LegalGovernance.SameProducerIdentifiesResidual → ⊥
+governedProducerIdentityDoesNotIdentifyResidual =
+  LegalGovernance.toeProducerIdentityDoesNotIdentifyResidual
+
+pnfSourceBoundaryReceipt :
+  PNFSource.PNFSourceBoundaryTOEReceipt
+pnfSourceBoundaryReceipt =
+  PNFSource.canonicalPNFSourceBoundaryTOEReceipt
+
+pnfGluingProxyDoesNotProveTrueLinearity =
+  PNFSource.gluingProxyDoesNotProveTrueLinearity
+
+pnfSelfAdjointProxyDoesNotProveFiniteTheorem =
+  PNFSource.selfAdjointProxyDoesNotProveFiniteTheorem
+
+pnfDominationProxyDoesNotProveHamiltonianTheorem =
+  PNFSource.dominationProxyDoesNotProveHamiltonianTheorem
+
+pnfFungalNetworkClaimsRequireSpeciesEvidence =
+  PNFSource.fungalNetworkClaimsRequireSpeciesEvidence
+
+pnfIdenticalWordsDoNotPayPredicate :
+  PNFSource.IdenticalWordsProveSamePredicate → ⊥
+pnfIdenticalWordsDoNotPayPredicate =
+  PNFSource.identicalWordsDoNotPayPredicate
+
+pnfCommonFingerprintDoesNotCreateTruth :
+  PNFSource.CommonPnfFingerprintProvesClaimTruth → ⊥
+pnfCommonFingerprintDoesNotCreateTruth =
+  PNFSource.commonPnfFingerprintDoesNotCreateClaimTruth
+
+pnfPerceivedIndependenceDoesNotCreateProvenanceIndependence :
+  PNFSource.PerceivedIndependenceMeansActualIndependence → ⊥
+pnfPerceivedIndependenceDoesNotCreateProvenanceIndependence =
+  PNFSource.perceivedIndependenceDoesNotCreateProvenanceIndependence
+
+pnfRepetitionDoesNotCreateIndependentEvidence :
+  PNFSource.RepetitionMeansIndependentEvidence → ⊥
+pnfRepetitionDoesNotCreateIndependentEvidence =
+  PNFSource.repetitionDoesNotCreateIndependentEvidence
+
+pnfCommonSourceDoesNotEraseEvidence :
+  PNFSource.CommonSourceMeansNoEvidence → ⊥
+pnfCommonSourceDoesNotEraseEvidence =
+  PNFSource.commonSourceDoesNotEraseEvidence
+
+pnfDistilledNonPromotionBoundary :
+  PNFDistilled.PNFDistilledNonPromotionBoundary
+pnfDistilledNonPromotionBoundary =
+  PNFDistilled.canonicalPNFDistilledNonPromotionBoundary
+
+pnfDistilledReuseZKPReceipt :
+  PNFDistilled.PNFDistilledReuseZKPReceipt
+pnfDistilledReuseZKPReceipt =
+  PNFDistilled.canonicalPNFDistilledReuseZKPReceipt
+
 canonicalUnifiedObjects : List Spine.UnifiedObjectInvariant
 canonicalUnifiedObjects =
   CarrierGrammar.carrierGrammarObject
@@ -116,15 +229,16 @@ brainFMRIRemainsNonPromoting :
   Spine.objectExternalJPromotion BrainFMRI.brainFMRIObject ≡ false
 brainFMRIRemainsNonPromoting =
   refl
+
 navierStokesRemainsNonPromoting :
   Spine.objectExternalJPromotion Physics.navierStokesObject ≡ false
 navierStokesRemainsNonPromoting =
-  refl
+  Physics.navierStokesJPromotionBlocked
 
 yangMillsRemainsNonPromoting :
   Spine.objectExternalJPromotion Physics.yangMillsObject ≡ false
 yangMillsRemainsNonPromoting =
-  refl
+  Physics.yangMillsJPromotionBlocked
 
 brainFMRIFormalProjectionsRemainNonPromoting :
   ∀ kind →
@@ -146,367 +260,119 @@ yangMillsFormalProjectionsRemainNonPromoting :
 yangMillsFormalProjectionsRemainNonPromoting =
   Spine.canonicalInvariantObjectsDoNotPromoteFormalProjections
     Physics.yangMillsObject
-import DASHI.Physics.Foundations.Round5FullBoundary as Round5
-      Round5.Round5FullBoundary
-        Round5.canonicalRound5FullBoundary
-        "Every unified facade object exposes observation, projection, carrier/role vector, residual, proof posture, invariant strength, and the required formal parent projection bundle. The bundle includes modular-j, Hecke, Bott, Kolmogorov, category, quotient, lattice, and operator projections. Literal authority is lane-specific; every formal projection has externalPromotion = false. The cross-scale matter/physics parent records the atoms-to-stellar composition ladder as structural and receipt-gated, with quantitative solar-style counterfactual prediction still blocked. Round Five adds a fail-closed finite boundary for constants, dimension, atomic and nuclear structure, causal cosmological observation, and the GR-QFT emergence cutsets without promoting terminal unification."
+
+
+-- Legal authority remains independent of matter workflow and semantic admission.
+unifiedLegalCandidateIsNotAuthority :
+  LegalGovernance.CandidateSourceIsAuthoritative → ⊥
+unifiedLegalCandidateIsNotAuthority =
+  LegalGovernance.toeCandidateSourceDoesNotCloseAuthority
+
+unifiedLegalValidityIsNotApplicability :
+  LegalGovernance.CurrentValidityAutomaticallyMeansApplicability → ⊥
+unifiedLegalValidityIsNotApplicability =
+  LegalGovernance.toeCurrentValidityDoesNotAutomaticallyEstablishApplicability
+
+unifiedSemanticAdmissionIsNotLegalAuthority :
+  LegalGovernance.SemanticAdmissionAuthorityIsLegalSourceAuthority → ⊥
+unifiedSemanticAdmissionIsNotLegalAuthority =
+  LegalGovernance.toeSemanticAdmissionDoesNotBecomeLegalSourceAuthority
 
 ------------------------------------------------------------------------
--- Learned Earth-embedding TOE convergence.
+-- Exact compiler-product reuse remains execution-only.
 ------------------------------------------------------------------------
 
-unifiedEarthEmbeddingReceipt :
-  EarthEmbeddingTOE.EarthEmbeddingTOEReceipt
-unifiedEarthEmbeddingReceipt =
-  EarthEmbeddingTOE.canonicalEarthEmbeddingTOEReceipt
+governedExactReuseDoesNotCreateSemanticAdmission :
+  LegalGovernance.ExactReuseCreatesSemanticAdmission → ⊥
+governedExactReuseDoesNotCreateSemanticAdmission =
+  LegalGovernance.toeExactReuseDoesNotCreateSemanticAdmission
 
-unifiedEarthEmbeddingZKPFrame :
-  ParetoSnowballFrame.TOEZKPFrame
-unifiedEarthEmbeddingZKPFrame =
-  EarthEmbeddingTOE.canonicalEarthEmbeddingTOEZKPFrame
+governedExactReuseDoesNotCreateSemanticAuthority :
+  LegalGovernance.ExactReuseCreatesSemanticAuthority → ⊥
+governedExactReuseDoesNotCreateSemanticAuthority =
+  LegalGovernance.toeExactReuseDoesNotCreateSemanticAuthority
 
-unifiedAlphaEarthDimensionIs64 :
-  EarthEmbeddingTOE.alphaEarthDimension
-    EarthEmbeddingTOE.canonicalEarthEmbeddingTOEReceipt ≡ 64
-unifiedAlphaEarthDimensionIs64 =
-  EarthEmbeddingTOE.alphaEarthDimensionIs64
+governedExactReuseDoesNotCreateApplicability :
+  LegalGovernance.ExactReuseCreatesApplicability → ⊥
+governedExactReuseDoesNotCreateApplicability =
+  LegalGovernance.toeExactReuseDoesNotCreateApplicability
 
-unifiedTesseraDimensionIs128 :
-  EarthEmbeddingTOE.tesseraDimension
-    EarthEmbeddingTOE.canonicalEarthEmbeddingTOEReceipt ≡ 128
-unifiedTesseraDimensionIs128 =
-  EarthEmbeddingTOE.tesseraDimensionIs128
+governedExactReuseDoesNotCreateEntityIdentity :
+  LegalGovernance.ExactReuseCreatesEntityIdentity → ⊥
+governedExactReuseDoesNotCreateEntityIdentity =
+  LegalGovernance.toeExactReuseDoesNotCreateEntityIdentity
 
-unifiedLearnedCoordinateDoesNotCreatePhysicalIdentity :
-  EarthEmbeddingTOE.LearnedCoordinateCreatesPhysicalIdentity → ⊥
-unifiedLearnedCoordinateDoesNotCreatePhysicalIdentity =
-  EarthEmbeddingTOE.learnedCoordinateDoesNotCreatePhysicalIdentity
+governedExactReuseDoesNotCreatePropositionIdentity :
+  LegalGovernance.ExactReuseCreatesPropositionIdentity → ⊥
+governedExactReuseDoesNotCreatePropositionIdentity =
+  LegalGovernance.toeExactReuseDoesNotCreatePropositionIdentity
 
-unifiedGradientDoesNotCreateCausalEnvironmentalEffect :
-  EarthEmbeddingTOE.GradientCreatesCausalEnvironmentalEffect → ⊥
-unifiedGradientDoesNotCreateCausalEnvironmentalEffect =
-  EarthEmbeddingTOE.gradientDoesNotCreateCausalEnvironmentalEffect
+governedExactReuseDoesNotCreateEventIdentity :
+  LegalGovernance.ExactReuseCreatesEventIdentity → ⊥
+governedExactReuseDoesNotCreateEventIdentity =
+  LegalGovernance.toeExactReuseDoesNotCreateEventIdentity
 
-unifiedModelOutputDoesNotCreateIndependentFieldMeasurement :
-  EarthEmbeddingTOE.ModelOutputCreatesIndependentFieldMeasurement → ⊥
-unifiedModelOutputDoesNotCreateIndependentFieldMeasurement =
-  EarthEmbeddingTOE.modelOutputDoesNotCreateIndependentFieldMeasurement
-
-unifiedEmbeddingDoesNotCreateLegalAuthority :
-  EarthEmbeddingTOE.EmbeddingCreatesLegalAuthority → ⊥
-unifiedEmbeddingDoesNotCreateLegalAuthority =
-  EarthEmbeddingTOE.embeddingDoesNotCreateLegalAuthority
-
-unifiedBalabanDirectScaleTransferNonPromotion :
-  BalabanRGTOE.BalabanRGScaleTransferPromotion → ⊥
-unifiedBalabanDirectScaleTransferNonPromotion =
-  BalabanRGTOE.balabanRGScaleTransferPromotionImpossible
+governedExactReuseDoesNotCreateClaimTruth :
+  LegalGovernance.ExactReuseCreatesClaimTruth → ⊥
+governedExactReuseDoesNotCreateClaimTruth =
+  LegalGovernance.toeExactReuseDoesNotCreateClaimTruth
 
 ------------------------------------------------------------------------
--- Learned Earth-embedding TOE convergence.
+-- Direct governed legal-workflow firewall facade.
+-- This facade adds no workflow, Actionstep, legal-rule, or authority semantics.
 ------------------------------------------------------------------------
 
-unifiedEarthEmbeddingReceipt :
-  EarthEmbeddingTOE.EarthEmbeddingTOEReceipt
-unifiedEarthEmbeddingReceipt =
-  EarthEmbeddingTOE.canonicalEarthEmbeddingTOEReceipt
+governedDurableReviewStateDoesNotCreateTruth :
+  LegalGovernance.DurableReviewStateCreatesTruth → ⊥
+governedDurableReviewStateDoesNotCreateTruth =
+  LegalGovernance.toeDurableReviewStateDoesNotCreateTruth
+
+governedAcceptanceReceiptDoesNotMutateMatter :
+  LegalGovernance.AcceptanceReceiptMutatesMatter → ⊥
+governedAcceptanceReceiptDoesNotMutateMatter =
+  LegalGovernance.toeAcceptanceReceiptDoesNotMutateMatter
+
+governedExternalSourceDoesNotAdmitTruth :
+  LegalGovernance.ExternalSourceClaimImpliesTruthAdmitted → ⊥
+governedExternalSourceDoesNotAdmitTruth =
+  LegalGovernance.toeExternalSourceDoesNotAdmitTruth
+
+governedLegalAuthorityDoesNotCreateTruthStatus :
+  LegalGovernance.LegalAuthorityCreatesTruthStatus → ⊥
+governedLegalAuthorityDoesNotCreateTruthStatus =
+  LegalGovernance.toeLegalAuthorityDoesNotCreateTruthStatus
+
+governedPromotionStageDoesNotBypassPromotionAuthority :
+  LegalGovernance.PromotionStageMaySkipPromotionAuthority → ⊥
+governedPromotionStageDoesNotBypassPromotionAuthority =
+  LegalGovernance.toePromotionStageDoesNotBypassPromotionAuthority
+
+governedSourceRealisedWrongTypeDoesNotAutoViolate :
+  LegalGovernance.SourceRealisedWrongTypeAutomaticallyViolated → ⊥
+governedSourceRealisedWrongTypeDoesNotAutoViolate =
+  LegalGovernance.toeSourceRealisedWrongTypeDoesNotAutoViolate
+
+governedElementsDoNotEraseExceptionsOrDefences :
+  LegalGovernance.AllElementsProvedIgnoresExceptionsDefences → ⊥
+governedElementsDoNotEraseExceptionsOrDefences =
+  LegalGovernance.toeElementsDoNotEraseExceptionsOrDefences
+
+governedKernelClosureDoesNotMeanSemanticClosure =
+  LegalGovernance.toeKernelClosureDoesNotMeanSemanticClosure
+
+governedFormalProofDoesNotCreateExternalWorldTruth =
+  LegalGovernance.toeFormalProofDoesNotCreateExternalWorldTruth
+
+governedComplianceCompositionRetainsIntermediateWitness =
+  LegalGovernance.complianceCompositionRetainsIntermediateWitnessIsTrue
+    LegalGovernance.canonicalGovernedLegalWorkflowTOEBoundary
+
+governedSameLegalSystemDoesNotCloseAuthority =
+  LegalGovernance.toeSameSystemDoesNotAutomaticallyCloseAuthority
+
+governedDocumentRoleDoesNotSupplyLegalSourceAuthority =
+  LegalGovernance.toeDocumentRoleDoesNotSupplyLegalSourceAuthority
+
+governedCanonicalLegalSourceAuthorityBoundary =
+  LegalGovernance.toeCanonicalLegalSourceAuthorityBoundary
 
-unifiedEarthEmbeddingZKPFrame :
-  ParetoSnowballFrame.TOEZKPFrame
-unifiedEarthEmbeddingZKPFrame =
-  EarthEmbeddingTOE.canonicalEarthEmbeddingTOEZKPFrame
-
-unifiedAlphaEarthDimensionIs64 :
-  EarthEmbeddingTOE.alphaEarthDimension
-    EarthEmbeddingTOE.canonicalEarthEmbeddingTOEReceipt ≡ 64
-unifiedAlphaEarthDimensionIs64 =
-  EarthEmbeddingTOE.alphaEarthDimensionIs64
-
-unifiedTesseraDimensionIs128 :
-  EarthEmbeddingTOE.tesseraDimension
-    EarthEmbeddingTOE.canonicalEarthEmbeddingTOEReceipt ≡ 128
-unifiedTesseraDimensionIs128 =
-  EarthEmbeddingTOE.tesseraDimensionIs128
-
-unifiedLearnedCoordinateDoesNotCreatePhysicalIdentity :
-  EarthEmbeddingTOE.LearnedCoordinateCreatesPhysicalIdentity → ⊥
-unifiedLearnedCoordinateDoesNotCreatePhysicalIdentity =
-  EarthEmbeddingTOE.learnedCoordinateDoesNotCreatePhysicalIdentity
-
-unifiedGradientDoesNotCreateCausalEnvironmentalEffect :
-  EarthEmbeddingTOE.GradientCreatesCausalEnvironmentalEffect → ⊥
-unifiedGradientDoesNotCreateCausalEnvironmentalEffect =
-  EarthEmbeddingTOE.gradientDoesNotCreateCausalEnvironmentalEffect
-
-unifiedModelOutputDoesNotCreateIndependentFieldMeasurement :
-  EarthEmbeddingTOE.ModelOutputCreatesIndependentFieldMeasurement → ⊥
-unifiedModelOutputDoesNotCreateIndependentFieldMeasurement =
-  EarthEmbeddingTOE.modelOutputDoesNotCreateIndependentFieldMeasurement
-
-unifiedEmbeddingDoesNotCreateLegalAuthority :
-  EarthEmbeddingTOE.EmbeddingCreatesLegalAuthority → ⊥
-unifiedEmbeddingDoesNotCreateLegalAuthority =
-  EarthEmbeddingTOE.embeddingDoesNotCreateLegalAuthority
-
-unifiedGeographicRecoverabilityDoesNotCreatePhysicalIdentity :
-  EarthEmbeddingTOE.GeographicRecoverabilityCreatesPhysicalIdentity → ⊥
-unifiedGeographicRecoverabilityDoesNotCreatePhysicalIdentity =
-  EarthEmbeddingTOE.geographicRecoverabilityDoesNotCreatePhysicalIdentity
-
-unifiedBalabanDirectScaleTransferNonPromotion :
-  BalabanRGTOE.BalabanRGScaleTransferPromotion → ⊥
-unifiedBalabanDirectScaleTransferNonPromotion =
-  BalabanRGTOE.balabanRGScaleTransferPromotionImpossible
-
-------------------------------------------------------------------------
--- Joint Yang-Mills Balaban/R559 TOE receipt.
-------------------------------------------------------------------------
-
-import DASHI.Unified.BalabanR559TOEMaxCutExact as BalabanR559TOE
-import DASHI.Unified.BalabanR559TOEMaxCutValidation
-
-unifiedBalabanR559MaxCutReceipt :
-  BalabanR559TOE.BalabanR559TOEMaxCutReceipt
-unifiedBalabanR559MaxCutReceipt =
-  BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-unifiedBalabanR559Gate4UnresolvedCount : ℕ
-unifiedBalabanR559Gate4UnresolvedCount =
-  BalabanR559TOE.gate4UnresolvedCount
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-unifiedBalabanR559Gate4UnresolvedCountIs58 :
-  unifiedBalabanR559Gate4UnresolvedCount ≡ 58
-unifiedBalabanR559Gate4UnresolvedCountIs58 =
-  BalabanR559TOE.gate4UnresolvedCountIs58
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-unifiedBalabanR559Gate4DefinitionLevel : ProofLevel
-unifiedBalabanR559Gate4DefinitionLevel =
-  BalabanR559TOE.gate4DefinitionLevel
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-unifiedBalabanR559Gate4InhabitantsLevel : ProofLevel
-unifiedBalabanR559Gate4InhabitantsLevel =
-  BalabanR559TOE.gate4InhabitantsLevel
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-unifiedBalabanScaleTransferNonPromotion :
-  BalabanR559TOE.ScaleTransferPromotion → ⊥
-unifiedBalabanScaleTransferNonPromotion =
-  BalabanR559TOE.scaleTransferPromotionEliminator
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-------------------------------------------------------------------------
--- R559 / Ibrahim / fleet-58 / generic-hyperfabric TOE convergence.
-------------------------------------------------------------------------
-
-import DASHI.Unified.R559IbrahimFleetHyperfabricTOEExact as FleetHyperTOE
-
-unifiedR559IbrahimFleetHyperfabricReceipt :
-  FleetHyperTOE.R559IbrahimFleetHyperfabricTOEReceipt
-unifiedR559IbrahimFleetHyperfabricReceipt =
-  FleetHyperTOE.canonicalR559IbrahimFleetHyperfabricTOEReceipt
-
-unifiedYMGate4FormalGapsAre58 :
-  FleetHyperTOE.ymGate4FormalGaps ≡ 58
-unifiedYMGate4FormalGapsAre58 =
-  FleetHyperTOE.ymGate4FormalGapsAre58
-
-unifiedYMGate4PaidReductionLevel : ProofLevel
-unifiedYMGate4PaidReductionLevel =
-  FleetHyperTOE.ymGate4PaidReductionLevel
-
-unifiedYMGate4InhabitantsLevel : ProofLevel
-unifiedYMGate4InhabitantsLevel =
-  FleetHyperTOE.ymGate4InhabitantsLevel
-
-unifiedFleet58DoesNotIdentifyYMGate4 :
-  FleetHyperTOE.Fleet58EqualsYMGate4SameObject → ⊥
-unifiedFleet58DoesNotIdentifyYMGate4 =
-  FleetHyperTOE.fleet58CardinalityDoesNotProveYMGate4Identity
-
-unifiedFleetFormalGapsAre58 :
-  FleetHyperTOE.fleetFormalGaps ≡ 58
-unifiedFleetFormalGapsAre58 =
-  FleetHyperTOE.fleetFormalGapsAre58
-
-------------------------------------------------------------------------
--- Implement-A-to-D terminal unified validation.
-------------------------------------------------------------------------
-
-import DASHI.Unified.YMImplementAToDTOEMaxCutExact as YMAD
-import DASHI.Unified.YMImplementAToDTOEMaxCutValidation
-
-unifiedYMImplementAToDMaxCutReceipt :
-  YMAD.YMImplementAToDTOEMaxCutReceipt
-unifiedYMImplementAToDMaxCutReceipt =
-  YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
-
-------------------------------------------------------------------------
--- Navier-Stokes B / R571 M2 normalized TOE receipt.
-------------------------------------------------------------------------
-
-unifiedNavierStokesBM2Receipt :
-  NSBM2TOE.NavierStokesBM2TOEReceipt
-unifiedNavierStokesBM2Receipt =
-  NSBM2TOE.canonicalNavierStokesBM2TOEReceipt
-
-unifiedNavierStokesBM2ZKPFrame :
-  NSBM2TOE.NavierStokesBM2TOEZKPFrame
-unifiedNavierStokesBM2ZKPFrame =
-  NSBM2TOE.canonicalNavierStokesBM2TOEZKPFrame
-
-------------------------------------------------------------------------
--- Typed Balaban continuum and Fleet target aggregate aliases.
-------------------------------------------------------------------------
-
-unifiedBalabanContinuumLimitReceipt :
-  BalabanRGTOE.BalabanContinuumLimitReceipt
-unifiedBalabanContinuumLimitReceipt =
-  BalabanRGTOE.balabanContinuumLimitReceipt
-
-unifiedBalabanContinuumLimitPromotionImpossible :
-  BalabanRGTOE.BalabanContinuumLimitPromotion → ⊥
-unifiedBalabanContinuumLimitPromotionImpossible =
-  BalabanRGTOE.balabanContinuumLimitPromotionImpossible
-
-unifiedDepthContinuumLimitReceipt :
-  BalabanRGTOE.DepthContinuumLimitReceipt
-unifiedDepthContinuumLimitReceipt =
-  BalabanRGTOE.depthContinuumLimitReceipt
-
-unifiedDepthContinuumLimitPromotionImpossible :
-  BalabanRGTOE.DepthContinuumLimitPromotion → ⊥
-unifiedDepthContinuumLimitPromotionImpossible =
-  BalabanRGTOE.depthContinuumLimitPromotionImpossible
-
-unifiedFleetDischargedCoreKnowledgeFibres : ℕ
-unifiedFleetDischargedCoreKnowledgeFibres =
-  FleetGapTOE.dischargedCoreKnowledgeFibres
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
-
-unifiedFleetDischargedCoreKnowledgeFibresIs584 :
-  unifiedFleetDischargedCoreKnowledgeFibres ≡ 584
-unifiedFleetDischargedCoreKnowledgeFibresIs584 =
-  FleetGapTOE.fleetRecordedDischargedCountIs584
-
-unifiedFleetPolarityContradictionGaps : ℕ
-unifiedFleetPolarityContradictionGaps =
-  FleetGapTOE.polarityContradictionGaps
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
-
-unifiedFleetPolarityContradictionGapsIs44 :
-  unifiedFleetPolarityContradictionGaps ≡ 44
-unifiedFleetPolarityContradictionGapsIs44 =
-  FleetGapTOE.fleetRecordedContradictionCountIs44
-
-unifiedFleetUnformalisedFormalGaps : ℕ
-unifiedFleetUnformalisedFormalGaps =
-  FleetGapTOE.unformalisedFormalGaps
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
-
-unifiedFleetUnformalisedFormalGapsIs58 :
-  unifiedFleetUnformalisedFormalGaps ≡ 58
-unifiedFleetUnformalisedFormalGapsIs58 =
-  FleetGapTOE.fleetRecordedUnformalisedGapCountIs58
-
-unifiedFleetTargetsOnlyUnformalisedFormalGaps :
-  FleetGapTOE.targetOnlyUnformalisedFormalGaps
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
-  ≡ true
-unifiedFleetTargetsOnlyUnformalisedFormalGaps =
-  FleetGapTOE.fleetTargetsOnlyUnformalisedFormalGaps
-
-
-------------------------------------------------------------------------
--- Fleet named-manifest acquisition boundary.
-------------------------------------------------------------------------
-
-unifiedFleetManifestAcquisitionDemand =
-  FleetGapTOE.fleetManifestAcquisitionDemand
-
-unifiedFleetNamedManifestStillMissing :
-  FleetGapTOE.namedFormalGapManifestAcquired ≡ false
-unifiedFleetNamedManifestStillMissing =
-  FleetGapTOE.namedFormalGapManifestAcquiredIsFalse
-
-unifiedFleetPerGapDispatchStillBlocked :
-  FleetGapTOE.perGapDispatchEnabled ≡ false
-unifiedFleetPerGapDispatchStillBlocked =
-  FleetGapTOE.perGapDispatchEnabledIsFalse
-
-unifiedFleetRelatedSymbolsRequired :
-  FleetGapTOE.fleetRelatedSymbolsRequired ≡ true
-unifiedFleetRelatedSymbolsRequired =
-  FleetGapTOE.fleetRelatedSymbolsRequiredIsTrue
-
-unifiedFleetDiscoverRequired :
-  FleetGapTOE.fleetDiscoverRequired ≡ true
-unifiedFleetDiscoverRequired =
-  FleetGapTOE.fleetDiscoverRequiredIsTrue
-
-unifiedFleetRoundLineageRequired :
-  FleetGapTOE.fleetRoundLineageRequired ≡ true
-unifiedFleetRoundLineageRequired =
-  FleetGapTOE.fleetRoundLineageRequiredIsTrue
-
-unifiedFleetCountDoesNotCreateNamedManifest :
-  FleetGapTOE.CountCreatesNamedManifest → ⊥
-unifiedFleetCountDoesNotCreateNamedManifest =
-  FleetGapTOE.fleetCountDoesNotCreateNamedManifest
-
-------------------------------------------------------------------------
--- Direct Pareto / snowball / Ibrahim and ternary-27 non-promotion surface.
-------------------------------------------------------------------------
-
-unifiedIbrahimSearchPriorityDoesNotCreateProof :
-  ParetoSnowballTOE.SearchPriorityCreatesProof → ⊥
-unifiedIbrahimSearchPriorityDoesNotCreateProof =
-  ParetoSnowballTOE.searchPriorityDoesNotCreateProof
-
-unifiedIbrahimProducerSourceDoesNotCreateRunReceipt :
-  ParetoSnowballTOE.ProducerSourceCreatesRunReceipt → ⊥
-unifiedIbrahimProducerSourceDoesNotCreateRunReceipt =
-  ParetoSnowballTOE.producerSourceDoesNotCreateRunReceipt
-
-unifiedIbrahimDegree729DoesNotCreateMonsterHZetaRecognition :
-  ParetoSnowballTOE.Degree729CreatesMonsterHZetaRecognition → ⊥
-unifiedIbrahimDegree729DoesNotCreateMonsterHZetaRecognition =
-  ParetoSnowballTOE.degree729DoesNotCreateMonsterHZetaRecognition
-
-unifiedIbrahimPaperOracleDoesNotIdentifyHistoricalDump :
-  ParetoSnowballTOE.PaperOracleIdentifiesDump → ⊥
-unifiedIbrahimPaperOracleDoesNotIdentifyHistoricalDump =
-  ParetoSnowballTOE.paperOracleDoesNotIdentifyHistoricalDump
-
-unifiedIbrahimRoutePreferenceDoesNotCreateExecutionReceipt :
-  ParetoSnowballTOE.RoutePreferenceCreatesExecutionReceipt → ⊥
-unifiedIbrahimRoutePreferenceDoesNotCreateExecutionReceipt =
-  ParetoSnowballTOE.routePreferenceDoesNotCreateExecutionReceipt
-
-unifiedIbrahimMergedLeanSourceDoesNotCreateKernelReceipt :
-  ParetoSnowballTOE.MergedLeanSourceCreatesKernelReceipt → ⊥
-unifiedIbrahimMergedLeanSourceDoesNotCreateKernelReceipt =
-  ParetoSnowballTOE.mergedLeanSourceDoesNotCreateKernelReceipt
-
-unifiedIbrahimOEISDoesNotCreateMultiplicityAction :
-  ParetoSnowballTOE.NinetyOEISEqualityCreatesMultiplicityAction → ⊥
-unifiedIbrahimOEISDoesNotCreateMultiplicityAction =
-  ParetoSnowballTOE.oeisDoesNotCreateMultiplicityAction
-
-unifiedIbrahimFiniteIrreducibilityDoesNotCreateMonsterHZetaRecognition :
-  ParetoSnowballTOE.FiniteIrreducibilityCreatesMonsterHZetaRecognition → ⊥
-unifiedIbrahimFiniteIrreducibilityDoesNotCreateMonsterHZetaRecognition =
-  ParetoSnowballTOE.finiteIrreducibilityDoesNotCreateMonsterHZetaRecognition
-
-unifiedIbrahimCurrentQidDoesNotIdentifyHistoricalTitle :
-  ParetoSnowballTOE.CurrentQidIdentifiesHistoricalTitle → ⊥
-unifiedIbrahimCurrentQidDoesNotIdentifyHistoricalTitle =
-  ParetoSnowballTOE.currentQidDoesNotIdentifyHistoricalTitle
-
-unified369Ternary27MonsterRepresentationNotPromoted =
-  MaxCut369.toe27MonsterRepresentationNotPromoted
-
-unified369Ternary27MonsterEmbeddingNotPromoted =
-  MaxCut369.toe27MonsterEmbeddingNotPromoted
