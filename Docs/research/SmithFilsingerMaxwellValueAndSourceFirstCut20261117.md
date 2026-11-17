@@ -135,3 +135,15 @@ Committed on PR #1524:
 | **D1/D2** | Pinned Agda and source-evidence audit before import graph promotion | Exact-head kernel plus original source-to-measurement proof admission | OPEN |
 
 **Recommendation:** do not invest in a global nonlinear 3D atmosphere solver now. It becomes worthwhile **after** the measured source port and original geometry indicate that lumped/1D models miss a reproducible, independently powered effect. For the electrical-harvesting goal, F13/P2 → F15/R3 has the highest value of information. For the cloud-control goal, the controller-to-cloud-field transfer is the immediate causal wall. Retain full Maxwell as a *conditional resolution tool*, not a prerequisite or substitute for evidence.
+
+
+## Cross-owner F10/F13 reconciliation (existing producers already in #1524)
+
+This round does **not** replace the concurrently existing source-based bridge [SmithFilsingerF10F13FieldToPortMaxCut20261117.md](SmithFilsingerF10F13FieldToPortMaxCut20261117.md) with its source code scripts/check_smith_filsinger_f10_f13_field_bridge.py. That earlier owner already:
+- establishes exact selected Debye-ADE susceptibility work, instantaneous permittivity modulation, Hall/Pedersen neutral-frame and local Poynting identities;
+- verifies an **ideal homogeneous conductive HALF-SPACE hemispherical electrode** via Laplace potential phi=Va/r and current G=2pi sigma a, as well as a separate exponential-conductivity 1D vertical current tube;
+- distinguishes a circular disk contact spreading conductance G=4 sigma a and does **not** claim these are a local atmospheric free sphere or a Filsinger plate.
+
+**What is genuinely added here:** the *different* Crowley 2011 **elevated free atmospheric sphere**, with isolated-ground and unidirectional-collection preconditions; a dimensional cross-sectional-area source audit; signed time-synchronous V/I metrology uncertainty; a concrete **3-degree source/driver/loss/storage non-identifiability** witness; and two **identical observational cloud-field/rain worlds with different controlled effects**. The vector F10 check explicitly includes beta|P|⁴ polarization energy and signed generator/neutral-wind terms; it is an independent consistency check, not a second fundamental Maxwell theorem. Do not add the 14 reported tests from the existing F10/F13 bridge to this round's **99 locally rerun** tests without separately executing them.
+
+For identical material sigma and geometric radius a, the two *different source geometries* have different conductances: Crowley free sphere diameter d=2a gives G_free=4pi sigma a; grounded hemispherical contact gives G_hemi=2pi sigma a. They must not be silently equated or assigned a shared Voc. Both remain ideal geometry benchmark producers. This crosswalk prevents spurious source amplification via mixing boundary conditions.
