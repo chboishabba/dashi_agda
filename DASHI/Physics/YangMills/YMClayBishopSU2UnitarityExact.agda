@@ -1,4 +1,6 @@
-{-# OPTIONS --safe #-}
+-- NOTE: source reuses transitive non-safe Bishop owners. This module is
+-- intentionally not declared --safe until the source graph is migrated.
+-- Actual Agda kernel check remains pending.
 module DASHI.Physics.YangMills.YMClayBishopSU2UnitarityExact where
 
 -- YM.REAL finite source: U(q)† U(q)=I for Bishop norm-one quaternions.
