@@ -60,6 +60,27 @@ sourceFixtureLoadRechartCannotRecoverHistory rechart =
   NF.rechartingCannotRecoverErasedPhenomenon
     rechart sourceFixtureLoadOnlyNonFactorability
 
+-- MATCHED SOURCE SELECTED-SUBSET INTERVENTION.
+-- The original native selected response at the shared probe is 0 vs 9,
+-- but holding the second-step pair fixed at (0,2) (and recalculating
+-- its weights from each path's original logits, with its own histories)
+-- yields Nat 0 on BOTH paths in the disclosed finite fixture.
+-- This is a mathematically admissible restricted/ablation consumer,
+-- not a theorem about fitted learned parameter values.
+fixedProbePairResponse : R4ProbeHistoryPath → Nat
+fixedProbePairResponse lowerLoadFirst = 0
+fixedProbePairResponse higherLoadFirst = 0
+
+fixedProbePairDoesFactorThroughCurrentLoad :
+  NF.FactorsThrough sameSecondStepLoad fixedProbePairResponse
+fixedProbePairDoesFactorThroughCurrentLoad =
+  NF.factorsThrough (λ _ → 0) (λ _ → refl)
+
+-- The positive fixed-pair factorisation and negative native-response
+-- factorisation coexist on precisely the SAME two situated states.
+-- This distinguishes a selected-set-induced effect in the witness
+-- from a generic statement that every expert FFN must suppress.
+
 -- Reusing the single-axis nonfactorability theorem does NOT
 -- identify actual Leech recurrent-state dimensions or prove that
 -- a fitted model exhibits this fixture. The original source must
