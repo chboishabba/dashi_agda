@@ -225,11 +225,81 @@ def check_primary_inspection_and_clip_lineage() -> None:
         assert not re.search(r"\b" + escape + r"\b", primary + clips)
 
 
+
+def check_surrounding_source_coverage() -> None:
+    """Checks source-index structure only; not a full Agda typecheck."""
+    slides = read("AmyEskridgeVideoHAL5AllSlidesExact.agda")
+    inventory = read("AmyEskridgeVideoDIAFullInventoryExact.agda")
+    atlas = read("AmyEskridgeVideoSurroundingSourceAtlasExact.agda")
+    weld = read("AmyEskridgeVideoSurroundingProducerWeldExact.agda")
+    everything = read("AmyEskridgeVideoEvidenceEverything.agda")
+
+    slide_ids = [int(n) for n in re.findall(
+        r'(?m)^deck(\d{2})\s*=\s*hal5-slide\s', slides)]
+    dird_ids = [int(n) for n in re.findall(
+        r'(?m)^dird(\d{2})\s*=\s*dird-entry\s', inventory)]
+    source_names = re.findall(
+        r'(?m)^([A-Za-z]\w*)\s*=\s*linked-source\s', atlas)
+    weld_ids = [int(n) for n in re.findall(
+        r'(?m)^weld(\d{3})\s*=\s*source-scoped-weld\s', weld)]
+
+    assert slide_ids == list(range(1, 36)), "one or more original HAL5 pages missing/reordered"
+    assert dird_ids == list(range(1, 38)), "one or more original DIA inventory entries missing/reordered"
+    assert len(source_names) == 42 and len(set(source_names)) == 42
+    assert len(weld_ids) == 39 and len(set(weld_ids)) == 39
+    assert "entireOriginalDeckCovered = refl" in slides
+    assert "exactInventoryCount = refl" in inventory
+    assert "exactInventoryListedPageTotal = refl" in inventory
+    assert "onlyFourOriginalReportsInspected = refl" in inventory
+    assert "sourceFamilyCount = refl" in atlas
+    assert "exactSourceScopedWeldCount = refl" in weld
+
+    declared = set(source_names)
+    required = set(re.findall(r'\bAtlas\.([A-Za-z]\w+)\b', weld))
+    assert required <= declared, f"unresolved original-source symbols: {sorted(required - declared)}"
+
+    assert "originalPaper Papers.liTorr1991Atom" in weld
+    for symbol in (
+        "experimentalProducer Constraints.hathawayReplication",
+        "experimentalProducer Constraints.podkletnovNieminen1992ReportedSignal",
+        "texasAudit Texas.texasFY2005LockheedAppearance",
+        "texasAudit Texas.texasFY2006LockheedAppearance",
+        "originalArmy Army.currentArmySourceState",
+    ):
+        assert symbol in weld, symbol
+
+    for module in ("AmyEskridgeVideoDIAFullInventoryExact",
+                   "AmyEskridgeVideoHAL5AllSlidesExact",
+                   "AmyEskridgeVideoSurroundingSourceAtlasExact",
+                   "AmyEskridgeVideoSurroundingProducerWeldExact"):
+        assert f"import DASHI.Culture.{module}" in everything, module
+
+    pages = [30,20,37,32,27,56,29,35,72,27,37,36,33,16,17,32,19,42,44,
+             45,57,38,31,57,55,38,77,57,43,50,46,34,32,31,54,51,36]
+    assert len(pages) == len(dird_ids) == 37
+    assert sp.simplify(sp.Add(*map(sp.Integer, pages)) - 1473) == 0
+    assert sp.Integer(37) - 4 == 33
+
+    # Never allow title-count completeness to be rebranded as full-text inspection.
+    assert "inventoryTitleOnly" in inventory
+    assert "releasedReportInspected" in inventory
+    assert "noFourToFullInspection ()" in inventory
+
+    for name, source in (("slides", slides), ("DIA", inventory),
+                         ("atlas", atlas), ("weld", weld)):
+        assert not re.search(r"\b(?:postulate|trustMe|NON_COVERING|TERMINATING)\b", source), name
+
+    # Strong negative control: deleting one inventor/source identity must fail coverage.
+    assert set(source_names[:-1]) != set(source_names)
+    print("HAL5 35-page / DIA 37-document 1473-page / 42-source / 39-producer-weld static audit: PASS")
+
+
 if __name__ == "__main__":
     check_claim_welds()
     check_original_clip_and_media_roster()
     check_scope()
     check_quantitative_boundary()
     check_primary_inspection_and_clip_lineage()
+    check_surrounding_source_coverage()
     print("Amy Eskridge video 86-row / House-10 / research-20 SymPy audit: PASS")
     print("Includes 7 earlier Zoom locators, 16 edited-clip lineages, 10 primary inspection records, and negative controls")
