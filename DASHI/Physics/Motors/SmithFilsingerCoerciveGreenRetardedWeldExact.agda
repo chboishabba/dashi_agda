@@ -13,7 +13,7 @@ module DASHI.Physics.Motors.SmithFilsingerCoerciveGreenRetardedWeldExact where
 -- proof/measurement obligation. Static elliptic Green != retarded
 -- Maxwell dyadic Green.
 
-open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
@@ -22,6 +22,7 @@ import DASHI.Physics.Motors.SmithFilsingerTimeIndexedTransferExact as Time
 import DASHI.Physics.Motors.Circuit36927RecoveryEnergyBoundExact as Bound
 import DASHI.Physics.Motors.SmithFilsingerSourceMaxwellBoundaryWeldExact as Original
 import DASHI.Physics.Motors.SmithFilsingerMidpointPhaseWorkExact as Port
+import DASHI.Physics.Motors.SmithFilsingerYeeCFLConeGuardExact as Cone
 
 -- Distinctly CALCULATED temporal delay response: no effect before
 -- delay=flight and one original Green application at launch-arrival.
@@ -183,16 +184,40 @@ record OriginalSelectedRetardedGreen
         ≡ Port.MidpointTwoPortWorkWindow.usefulWork
             (Original.FormalFieldToPort.portWindow f)
 
-    sourceAtLaunchIsActualMeasured : Set
-    materialLayeredMaxwellKernelMatchesGreen : Set
-    physicalLightConeBoundMatchesChosenFlight : Set
-    originalTerminalCurrentAndVoltageCalibrated : Set
-    independentlyReplenishedSourceWork : Set
-    measuredSource : sourceAtLaunchIsActualMeasured
-    selectedMaxwellKernel : materialLayeredMaxwellKernelMatchesGreen
-    physicalCone : physicalLightConeBoundMatchesChosenFlight
-    originalReadback : originalTerminalCurrentAndVoltageCalibrated
-    realNaturalWork : independentlyReplenishedSourceWork
+    -- The source and the physical operator are chosen as actual typed
+    -- objects, not unnamed Set witnesses that may be inhabited by Unit.
+    originalMeasuredSourceAtLaunch : Vector
+    sourceHistoryMatchesActualLaunch :
+      sourceHistory zero ≡ originalMeasuredSourceAtLaunch
+
+    originalPhysicalMaxwellSourceResponse : Vector → Vector
+    physicalMaxwellGreenMatchesChosenInverse :
+      ∀ sourceInput →
+      originalPhysicalMaxwellSourceResponse sourceInput
+        ≡ Green.inverse authority sourceInput
+
+    -- A finite strictly physical cone needs sourced distance/speed
+    -- and an actual bound on THIS SAME typed original flight.
+    measuredSourceToCollectorDistance maximumPhysicalFrontSpeed : Nat
+    originalPhysicalCone :
+      Cone.CalibratedPhysicalCone measuredSourceToCollectorDistance
+        maximumPhysicalFrontSpeed
+        (Time.RetardedFlight.flight
+          (Original.FormalFieldToPort.causalFlight f))
+
+    -- Independent NET natural work is not inferable from a field norm.
+    -- It must be the SAME original signed natural incident/outgoing port.
+    independentlyMeasuredNaturalNetWork : Nat
+    naturalSourceIsSameOriginal :
+      Port.MidpointTwoPortWorkWindow.naturalIncident
+        (Original.FormalFieldToPort.portWindow f)
+      ≡ Port.MidpointTwoPortWorkWindow.naturalOutgoing
+          (Original.FormalFieldToPort.portWindow f)
+          + independentlyMeasuredNaturalNetWork
+
+    -- Real evidence/physical inverse identification is still OPEN,
+    -- including Maxwell constitutive law, materials, boundary conditions,
+    -- antenna geometry, full causal support and sensor calibration.
 
 selectedRetardedGreenAtArrival :
   ∀ {Vector Scalar BoundValue : Set}
