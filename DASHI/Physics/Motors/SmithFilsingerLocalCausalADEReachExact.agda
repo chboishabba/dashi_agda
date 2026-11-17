@@ -13,7 +13,7 @@ module DASHI.Physics.Motors.SmithFilsingerLocalCausalADEReachExact where
 --
 -- Pure mathematical support, NOT a physical continuum Maxwell speed.
 
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -229,6 +229,21 @@ noSignalOutsideInterleavedSourceCone z (event ∷ events) s R initially =
   noSignalOutsideInterleavedSourceCone z events
     (runEvent event s) (reachEvent event R)
     (eventOutsideZero z event s R initially)
+
+-- Nonvacuous native Agda fixture: an additive two-coordinate
+-- primitive has an actual (not postulated) zero-preservation receipt.
+-- It is an interface sanity witness, not a Maxwell Cayley discretization.
+additivePrimitive : Frame.LocalPrimitive Nat
+additivePrimitive =
+  Frame.localPrimitive zero (suc zero) _+_ _+_
+
+additiveZeroPreserving : ZeroPreserving zero additivePrimitive
+additiveZeroPreserving =
+  record { firstZero = refl ; secondZero = refl }
+
+additiveGuarded : GuardedPrimitive Nat zero
+additiveGuarded =
+  guardedPrimitive additivePrimitive additiveZeroPreserving
 
 -- This theorem does not claim a physical Maxwell front. In particular,
 -- a macro step containing N sequential edges can cross N edges at
