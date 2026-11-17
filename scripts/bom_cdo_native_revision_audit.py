@@ -144,19 +144,28 @@ def audit(manifest,root):
     historical_products = Counter()
     temperature_losses_all_dates = Counter()
     temperature_losses_2025_2026 = Counter()
+    uncertain_row_losses = Counter()
+    uncertain_row_losses_recent = Counter()
     for event in events:
         if event['variable'] not in ('tmax', 'tmin'):
-            continue  # Lloyd's 571/593 concern TEMPERATURE, never rainfall.
-        loss = (event['before'] is not None and event['before'][0] != 'None' and
-                (event['after'] is None or event['after'][0] == 'None'))
-        if loss:
-            temperature_losses_all_dates[event['station']] += 1
+            continue  # Lloyd's 571/593 concern temperature only.
+        # A blanked value and a calendar row absent from a possibly truncated
+        # export are different states with different evidence requirements.
+        old_present = event['before'] is not None and event['before'][0] != 'None'
+        if not old_present:
+            continue
+        definite_blank = event['after'] is not None and event['after'][0] == 'None'
+        absent_row = event['after'] is None
+        if absent_row:
+            uncertain_row_losses[event['station']] += 1
             if event['date'] >= '2025-01-01':
-                temperature_losses_2025_2026[event['station']] += 1
-        if (event['date'] < '2025-01-01'
-                and event['before'] is not None
-                and event['before'][0] != 'None'
-                and (event['after'] is None or event['after'][0] == 'None')):
+                uncertain_row_losses_recent[event['station']] += 1
+        if not definite_blank:
+            continue
+        temperature_losses_all_dates[event['station']] += 1
+        if event['date'] >= '2025-01-01':
+            temperature_losses_2025_2026[event['station']] += 1
+        else:
             historical_counts[event['station']] += 1
             historical_products[(event['station'], event['variable'])] += 1
     historical = dict(sorted(historical_counts.items()))
@@ -165,7 +174,7 @@ def audit(manifest,root):
     sydney_1865 = [e for e in events if e['station'] == '066062' and
                    e['date'] == '1865-06-25' and e['variable'] == 'tmax' and
                    e['kind'] in ('value_added','calendar_row_added') and
-                   e['after'] is not None and e['after'][0] == '0.0']
+                   e['after'] is not None and Decimal(e['after'][0]) == 0]
     return {'schema':'dashi.bom.cdo.native_revision_result.v1',
             'before_receipts':old,'after_receipts':new,
             'before_rows':len(before),'after_rows':len(after),
@@ -178,16 +187,22 @@ def audit(manifest,root):
             'values_lost_including_disappearing_calendar_rows':
                 {f'{s}:{v}':n for (s,v),n in sorted(lost_values.items())},
             'temperature_values_lost_all_dates':sum(temperature_losses_all_dates.values()),
+            'temperature_possible_losses_from_absent_rows_all_dates':sum(uncertain_row_losses.values()),
+            'temperature_possible_losses_from_absent_rows_before2025':
+                sum(uncertain_row_losses.values())-sum(uncertain_row_losses_recent.values()),
+            'temperature_possible_losses_from_absent_rows_by_station':
+                dict(sorted(uncertain_row_losses.items())),
             'temperature_values_lost_2025_onward':sum(temperature_losses_2025_2026.values()),
             'author_reported_target_only':{'before2025_total':571,'all_dates_total':593,
                                             'from2025_total':22,'066062':515,
                                             '044022_or_044021':56},
-            'before2025_target_numeric_match_only':sum(historical.values())==571
+            'before2025_target_numeric_match_only':sum(uncertain_row_losses.values())==0 and sum(historical.values())==571
                                    and historical.get('066062')==515
                                    and sum(v for s,v in historical.items()
                                            if s in ('044022','044021'))==56,
             'sydney_1865_06_25_zero_max_added_numeric_fingerprint':bool(sydney_1865),
             'original_archive_coverage_verified':False,
+            'row_absence_not_promoted_to_verified_deletion':True,
             'author_target_counts_independently_reproduced':False,
             'source_identification':'BOM CDO-formatted rows with matching SHA256; publisher identity requires independent provenance',
             'original_paper_authenticated':False,
