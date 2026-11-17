@@ -1,15 +1,5 @@
 module DASHI.Unified.Everything where
-import DASHI.Core.SituatedFibreDynamicsEverything as SituatedFibreTOE
-import DASHI.Core.DecimalStageResidualBarrierExact as DecimalStageTOE
-import DASHI.Core.FiniteTypedBranchingReachabilityBridgeExact as BranchReachTOE
-import DASHI.Core.HistoryConditionedChoiceExact as HistoryTOE
-import DASHI.Core.TrajectoryEndpointNonfactorabilityExact as TrajectoryTOE
-import DASHI.Governance.TypedBranchingOptionConeBridgeExact as OptionConeTOE
-import DASHI.Unified.NavierStokesClayFrontierTOEConvergenceExact as NSClayTOE
-import DASHI.Unified.TOEClayRecoveredGateOwners20261115Exact as ClayRecovered20261115
-import DASHI.Analysis.RiemannG21StrictTP2TrancheReceipt as RHFrontier
-import DASHI.Mathematics.CrossPollination.MillenniumResidualDescentClassifierExact as MillenniumResidual
-import DASHI.Mathematics.CrossPollination.MillenniumLeanAssistReceiptExact as MillenniumLean
+import DASHI.Promotion.CrossDomainClaimPromotionBoundary as TechnicalSafety
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
@@ -400,184 +390,59 @@ governedLegalWorkflowIntrospectiveZKPFrame :
 governedLegalWorkflowIntrospectiveZKPFrame =
   LegalGovernance.canonicalGovernedLegalWorkflowIntrospectiveZKPFrame
 
-
-governedSemanticPromotionTruthAuthorityClosed :
-  LegalGovernance.SemanticPromotionTruthAuthorityClosed
-governedSemanticPromotionTruthAuthorityClosed =
-  LegalGovernance.toeSemanticPromotionTruthAuthorityClosed
-
-governedSemanticPromotionLegalAuthorityClosed :
-  LegalGovernance.SemanticPromotionLegalAuthorityClosed
-governedSemanticPromotionLegalAuthorityClosed =
-  LegalGovernance.toeSemanticPromotionLegalAuthorityClosed
-
-governedSemanticPromotionAllAuthorityClosed :
-  LegalGovernance.SemanticPromotionAllAuthorityClosed
-governedSemanticPromotionAllAuthorityClosed =
-  LegalGovernance.toeSemanticPromotionAllAuthorityClosed
-
-governedBoundAcquisitionDoesNotPayRequirement :
-  LegalGovernance.BoundDemandAutomaticallyPaysRequirement → ⊥
-governedBoundAcquisitionDoesNotPayRequirement =
-  LegalGovernance.toeBoundAcquisitionDoesNotPayRequirement
-
-governedBoundAcquisitionDoesNotCloseConsumer :
-  LegalGovernance.BoundDemandAutomaticallyClosesConsumer → ⊥
-governedBoundAcquisitionDoesNotCloseConsumer =
-  LegalGovernance.toeBoundAcquisitionDoesNotCloseConsumer
-
-governedProducerIdentityDoesNotIdentifyResidual :
-  LegalGovernance.SameProducerIdentifiesResidual → ⊥
-governedProducerIdentityDoesNotIdentifyResidual =
-  LegalGovernance.toeProducerIdentityDoesNotIdentifyResidual
-
-pnfSourceBoundaryReceipt :
-  PNFSource.PNFSourceBoundaryTOEReceipt
-pnfSourceBoundaryReceipt =
-  PNFSource.canonicalPNFSourceBoundaryTOEReceipt
-
-pnfGluingProxyDoesNotProveTrueLinearity =
-  PNFSource.gluingProxyDoesNotProveTrueLinearity
-
-pnfSelfAdjointProxyDoesNotProveFiniteTheorem =
-  PNFSource.selfAdjointProxyDoesNotProveFiniteTheorem
-
-pnfDominationProxyDoesNotProveHamiltonianTheorem =
-  PNFSource.dominationProxyDoesNotProveHamiltonianTheorem
-
-pnfFungalNetworkClaimsRequireSpeciesEvidence =
-  PNFSource.fungalNetworkClaimsRequireSpeciesEvidence
-
-pnfIdenticalWordsDoNotPayPredicate :
-  PNFSource.IdenticalWordsProveSamePredicate → ⊥
-pnfIdenticalWordsDoNotPayPredicate =
-  PNFSource.identicalWordsDoNotPayPredicate
-
-pnfCommonFingerprintDoesNotCreateTruth :
-  PNFSource.CommonPnfFingerprintProvesClaimTruth → ⊥
-pnfCommonFingerprintDoesNotCreateTruth =
-  PNFSource.commonPnfFingerprintDoesNotCreateClaimTruth
-
-pnfPerceivedIndependenceDoesNotCreateProvenanceIndependence :
-  PNFSource.PerceivedIndependenceMeansActualIndependence → ⊥
-pnfPerceivedIndependenceDoesNotCreateProvenanceIndependence =
-  PNFSource.perceivedIndependenceDoesNotCreateProvenanceIndependence
-
-pnfRepetitionDoesNotCreateIndependentEvidence :
-  PNFSource.RepetitionMeansIndependentEvidence → ⊥
-pnfRepetitionDoesNotCreateIndependentEvidence =
-  PNFSource.repetitionDoesNotCreateIndependentEvidence
-
-pnfCommonSourceDoesNotEraseEvidence :
-  PNFSource.CommonSourceMeansNoEvidence → ⊥
-pnfCommonSourceDoesNotEraseEvidence =
-  PNFSource.commonSourceDoesNotEraseEvidence
-
-pnfDistilledNonPromotionBoundary :
-  PNFDistilled.PNFDistilledNonPromotionBoundary
-pnfDistilledNonPromotionBoundary =
-  PNFDistilled.canonicalPNFDistilledNonPromotionBoundary
-
-pnfDistilledReuseZKPReceipt :
-  PNFDistilled.PNFDistilledReuseZKPReceipt
-pnfDistilledReuseZKPReceipt =
-  PNFDistilled.canonicalPNFDistilledReuseZKPReceipt
-
-scaleEvidenceReviewTOEReceipt :
-  SCALEReview.SCALEEvidenceReviewTOEReceipt
-scaleEvidenceReviewTOEReceipt =
-  SCALEReview.canonicalSCALEEvidenceReviewTOEReceipt
-
-scaleEvidenceReviewDoesNotPromoteSemanticTruth :
-  SCALEReview.ReplayEconomyReceiptPromotesSemanticTruth → ⊥
-scaleEvidenceReviewDoesNotPromoteSemanticTruth =
-  SCALEReview.scaleReplayDoesNotPromoteSemanticTruth
-
-scaleEvidenceReviewDoesNotAuthorizeFromFrontier :
-  SCALEReview.FrontierRouteMeansAuthorized → ⊥
-scaleEvidenceReviewDoesNotAuthorizeFromFrontier =
-  SCALEReview.frontierRouteDoesNotGrantAuthorization
-
--- Legal authority remains independent of matter workflow and semantic admission.
-unifiedLegalCandidateIsNotAuthority :
-  LegalGovernance.CandidateSourceIsAuthoritative → ⊥
-unifiedLegalCandidateIsNotAuthority =
-  LegalGovernance.toeCandidateSourceDoesNotCloseAuthority
-
-unifiedLegalValidityIsNotApplicability :
-  LegalGovernance.CurrentValidityAutomaticallyMeansApplicability → ⊥
-unifiedLegalValidityIsNotApplicability =
-  LegalGovernance.toeCurrentValidityDoesNotAutomaticallyEstablishApplicability
-
-unifiedSemanticAdmissionIsNotLegalAuthority :
-  LegalGovernance.SemanticAdmissionAuthorityIsLegalSourceAuthority → ⊥
-unifiedSemanticAdmissionIsNotLegalAuthority =
-  LegalGovernance.toeSemanticAdmissionDoesNotBecomeLegalSourceAuthority
+unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
+  FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
+unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
+  FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
 
 
-unifiedGovernedLegalWorkflowAuthorityInvariantHandoff :
-  LegalGovernance.GovernedLegalWorkflowAuthorityInvariantHandoff
-unifiedGovernedLegalWorkflowAuthorityInvariantHandoff =
-  LegalGovernance.canonicalGovernedLegalWorkflowAuthorityInvariantHandoff
-
-unifiedCanonicalLegalSourceAuthorityBoundary :
-  LegalGovernance.LegalSourceAuthorityBoundary
-unifiedCanonicalLegalSourceAuthorityBoundary =
-  LegalGovernance.toeCanonicalLegalSourceAuthorityBoundary
-
-unifiedSameSystemIsNotLegalAuthority :
-  LegalGovernance.SameLegalSystemAutomaticallyMeansAuthority → ⊥
-unifiedSameSystemIsNotLegalAuthority =
-  LegalGovernance.toeSameSystemDoesNotAutomaticallyCloseAuthority
-
-unifiedDocumentRoleIsNotLegalAuthority :
-  LegalGovernance.DocumentRoleSuppliesLegalSourceAuthority → ⊥
-unifiedDocumentRoleIsNotLegalAuthority =
-  LegalGovernance.toeDocumentRoleDoesNotSupplyLegalSourceAuthority
 
 ------------------------------------------------------------------------
--- SCALE evidence genealogy firewalls.
-
+-- Technical-service safety non-promotion.
+-- Re-export the canonical cross-domain owner. No product-specific safety
+-- claim and no Fleet-gap discharge is introduced here.
 ------------------------------------------------------------------------
 
-scaleEvidenceReviewPerceivedIndependenceDoesNotCreateProvenanceIndependence :
-  SCALEReview.PerceivedIndependenceMeansActualIndependence → ⊥
-scaleEvidenceReviewPerceivedIndependenceDoesNotCreateProvenanceIndependence =
-  SCALEReview.perceivedIndependenceDoesNotCreateProvenanceIndependence
+unifiedTechnicalServiceSafetyBoundary :
+  TechnicalSafety.TechnicalServiceSafetyBoundary
+unifiedTechnicalServiceSafetyBoundary =
+  TechnicalSafety.canonicalTechnicalServiceSafetyBoundary
 
-scaleEvidenceReviewRepetitionDoesNotCreateIndependentEvidence :
-  SCALEReview.RepetitionMeansIndependentEvidence → ⊥
-scaleEvidenceReviewRepetitionDoesNotCreateIndependentEvidence =
-  SCALEReview.repetitionDoesNotCreateIndependentEvidence
+unifiedInterfaceCompatibilityDoesNotPromoteContinuousService :
+  TechnicalSafety.InterfaceCompatibilityCreatesContinuousServiceSuitability →
+  ⊥
+unifiedInterfaceCompatibilityDoesNotPromoteContinuousService =
+  TechnicalSafety.interfaceCompatibilityDoesNotPromoteContinuousService
 
-------------------------------------------------------------------------
--- SCALE physical-economy non-promotion firewalls.
+unifiedNominalPressureRatingDoesNotPromoteContinuousService :
+  TechnicalSafety.NominalPressureRatingCreatesContinuousServiceSuitability →
+  ⊥
+unifiedNominalPressureRatingDoesNotPromoteContinuousService =
+  TechnicalSafety.nominalPressureRatingDoesNotPromoteContinuousService
 
-------------------------------------------------------------------------
+unifiedObservedOpenFlowDoesNotPromoteBackflowSafety :
+  TechnicalSafety.ObservedOpenFlowCreatesBackflowSafety →
+  ⊥
+unifiedObservedOpenFlowDoesNotPromoteBackflowSafety =
+  TechnicalSafety.observedOpenFlowDoesNotPromoteBackflowSafety
 
-scaleEvidenceReviewReviewProjectionReuseDoesNotCreateClaimTruth :
-  SCALEReview.ReviewProjectionReuseCreatesClaimTruth → ⊥
-scaleEvidenceReviewReviewProjectionReuseDoesNotCreateClaimTruth =
-  SCALEReview.reviewProjectionReuseDoesNotCreateClaimTruth
+unifiedTechnicalServiceContinuousServiceReceiptRequired :
+  TechnicalSafety.continuousServiceAuthorityReceiptRequired
+    TechnicalSafety.canonicalTechnicalServiceSafetyBoundary
+  ≡ true
+unifiedTechnicalServiceContinuousServiceReceiptRequired =
+  TechnicalSafety.technicalServiceContinuousServiceReceiptRequired
 
-scaleEvidenceReviewCommitCoalescingDoesNotCreateSemanticAuthority :
-  SCALEReview.CommitCoalescingCreatesSemanticAuthority → ⊥
-scaleEvidenceReviewCommitCoalescingDoesNotCreateSemanticAuthority =
-  SCALEReview.commitCoalescingDoesNotCreateSemanticAuthority
+unifiedTechnicalServiceBackflowReceiptRequired :
+  TechnicalSafety.backflowSafetyAuthorityReceiptRequired
+    TechnicalSafety.canonicalTechnicalServiceSafetyBoundary
+  ≡ true
+unifiedTechnicalServiceBackflowReceiptRequired =
+  TechnicalSafety.technicalServiceBackflowReceiptRequired
 
-scaleEvidenceReviewFewCommitBarriersDoNotProveSemanticIndependence :
-  SCALEReview.FewCommitBarriersProveSemanticIndependence → ⊥
-scaleEvidenceReviewFewCommitBarriersDoNotProveSemanticIndependence =
-  SCALEReview.fewCommitBarriersDoNotProveSemanticIndependence
-
-------------------------------------------------------------------------
--- SCALE Evidence Review ZKP frame.
-
-------------------------------------------------------------------------
-
-scaleEvidenceReviewTOEZKPFrame :
-  SCALEReview.SCALEEvidenceReviewTOEZKPFrame
-scaleEvidenceReviewTOEZKPFrame =
-  SCALEReview.canonicalSCALEEvidenceReviewTOEZKPFrame
-
-------------------------------------------------------------------------
+unifiedTechnicalServiceProductSpecificClaimStillBlocked :
+  TechnicalSafety.productSpecificSafetyClaimMade
+    TechnicalSafety.canonicalTechnicalServiceSafetyBoundary
+  ≡ false
+unifiedTechnicalServiceProductSpecificClaimStillBlocked =
+  TechnicalSafety.technicalServiceProductSpecificClaimStillBlocked

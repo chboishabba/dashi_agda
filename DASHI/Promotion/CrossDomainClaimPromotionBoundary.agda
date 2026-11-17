@@ -5,7 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; []; _∷_)
-open import Data.Empty using (⊥)
+import Data.Empty
 import DASHI.Promotion.AuthorityGateCore as AuthorityGateCore
 import DASHI.Core.AdapterCanonicalityCore as AdapterCanon
 import DASHI.Core.AuthorityNonPromotionCore as AuthorityNA
@@ -1577,190 +1577,111 @@ canonicalSpatialPracticeDeniedAuthorityTargetCountIs5 :
 canonicalSpatialPracticeDeniedAuthorityTargetCountIs5 = refl
 
 
+
 ------------------------------------------------------------------------
--- Fermentation control boundary.
+-- Technical-service safety non-promotion.
 --
--- This reuses the finite-observation boundary.
--- It does not create a sourdough-specific ontology.
--- The Source activation recipe remains a source instruction.
--- Microbial ecology and kinetic papers remain external empirical authority.
--- This module owns only the formal non-promotion cuts below.
+-- This is the normalized claim boundary extracted from the indoor hose
+-- splitter discussion. It is deliberately product-neutral.
+--
+-- A thread or interface match does not establish continuous-service
+-- suitability. A nominal pressure rating does not establish continuous-
+-- service suitability. Observed open flow does not establish backflow safety.
+-- Each promotion requires its own domain-authoritative receipt.
+------------------------------------------------------------------------
 
-data ClockElapsedCreatesFeedReadiness : Set where
-
-clockElapsedDoesNotCreateFeedReadiness :
-  ClockElapsedCreatesFeedReadiness → ⊥
-clockElapsedDoesNotCreateFeedReadiness ()
-
-data VisibleVolumeCreatesSubstrateDepletion : Set where
-
-visibleVolumeDoesNotCreateSubstrateDepletion :
-  VisibleVolumeCreatesSubstrateDepletion → ⊥
-visibleVolumeDoesNotCreateSubstrateDepletion ()
-
-data PHCreatesTotalTitratableAcidity : Set where
-
-pHDoesNotCreateTotalTitratableAcidity :
-  PHCreatesTotalTitratableAcidity → ⊥
-pHDoesNotCreateTotalTitratableAcidity ()
-
-data ActivationProtocolCreatesMaintenancePolicy : Set where
-
-activationProtocolDoesNotCreateMaintenancePolicy :
-  ActivationProtocolCreatesMaintenancePolicy → ⊥
-activationProtocolDoesNotCreateMaintenancePolicy ()
-
-data HighHydrationPreferenceCreatesMachineAdmissibility : Set where
-
-highHydrationPreferenceDoesNotCreateMachineAdmissibility :
-  HighHydrationPreferenceCreatesMachineAdmissibility → ⊥
-highHydrationPreferenceDoesNotCreateMachineAdmissibility ()
-
-data SingleTrajectoryCreatesOptimalFeedPolicy : Set where
-
-singleTrajectoryDoesNotCreateOptimalFeedPolicy :
-  SingleTrajectoryCreatesOptimalFeedPolicy → ⊥
-singleTrajectoryDoesNotCreateOptimalFeedPolicy ()
-
-record FermentationControlBoundary : Set where
-  constructor fermentationControlBoundary
+record TechnicalServiceSafetyBoundary : Set where
+  constructor technical-service-safety-boundary
   field
-    domainLabel : String
-    observationBoundary : Observation.ObservationClosureBoundary
+    interfaceCompatibilityAlonePromotesContinuousServiceSuitability : Bool
+    interfaceCompatibilityAlonePromotesContinuousServiceSuitabilityIsFalse :
+      interfaceCompatibilityAlonePromotesContinuousServiceSuitability ≡ false
 
-    clockAloneDeterminesFeedReadiness : Bool
-    clockAloneDeterminesFeedReadinessIsFalse :
-      clockAloneDeterminesFeedReadiness ≡ false
+    nominalPressureRatingAlonePromotesContinuousServiceSuitability : Bool
+    nominalPressureRatingAlonePromotesContinuousServiceSuitabilityIsFalse :
+      nominalPressureRatingAlonePromotesContinuousServiceSuitability ≡ false
 
-    visibleVolumeIdentifiesLatentMetabolicState : Bool
-    visibleVolumeIdentifiesLatentMetabolicStateIsFalse :
-      visibleVolumeIdentifiesLatentMetabolicState ≡ false
+    observedOpenFlowAlonePromotesBackflowSafety : Bool
+    observedOpenFlowAlonePromotesBackflowSafetyIsFalse :
+      observedOpenFlowAlonePromotesBackflowSafety ≡ false
 
-    visibleVolumePeakProvesSubstrateDepletion : Bool
-    visibleVolumePeakProvesSubstrateDepletionIsFalse :
-      visibleVolumePeakProvesSubstrateDepletion ≡ false
+    continuousServiceAuthorityReceiptRequired : Bool
+    continuousServiceAuthorityReceiptRequiredIsTrue :
+      continuousServiceAuthorityReceiptRequired ≡ true
 
-    pHAloneIdentifiesAcidInventory : Bool
-    pHAloneIdentifiesAcidInventoryIsFalse :
-      pHAloneIdentifiesAcidInventory ≡ false
+    backflowSafetyAuthorityReceiptRequired : Bool
+    backflowSafetyAuthorityReceiptRequiredIsTrue :
+      backflowSafetyAuthorityReceiptRequired ≡ true
 
-    activationProtocolIsMaintenancePolicy : Bool
-    activationProtocolIsMaintenancePolicyIsFalse :
-      activationProtocolIsMaintenancePolicy ≡ false
+    productSpecificSafetyClaimMade : Bool
+    productSpecificSafetyClaimMadeIsFalse :
+      productSpecificSafetyClaimMade ≡ false
 
-    highHydrationPreferenceProvesMachineAdmissibility : Bool
-    highHydrationPreferenceProvesMachineAdmissibilityIsFalse :
-      highHydrationPreferenceProvesMachineAdmissibility ≡ false
+open TechnicalServiceSafetyBoundary public
 
-    singleObservedTrajectoryProvesOptimalFeedPolicy : Bool
-    singleObservedTrajectoryProvesOptimalFeedPolicyIsFalse :
-      singleObservedTrajectoryProvesOptimalFeedPolicy ≡ false
+canonicalTechnicalServiceSafetyBoundary :
+  TechnicalServiceSafetyBoundary
+canonicalTechnicalServiceSafetyBoundary =
+  technical-service-safety-boundary
+    false refl
+    false refl
+    false refl
+    true refl
+    true refl
+    false refl
 
-    temperatureIsExplicitInput : Bool
-    temperatureIsExplicitInputIsTrue :
-      temperatureIsExplicitInput ≡ true
+InterfaceCompatibilityCreatesContinuousServiceSuitability : Set
+InterfaceCompatibilityCreatesContinuousServiceSuitability =
+  interfaceCompatibilityAlonePromotesContinuousServiceSuitability
+    canonicalTechnicalServiceSafetyBoundary
+  ≡ true
 
-    flourAndRefreshAreExplicitInputs : Bool
-    flourAndRefreshAreExplicitInputsIsTrue :
-      flourAndRefreshAreExplicitInputs ≡ true
+NominalPressureRatingCreatesContinuousServiceSuitability : Set
+NominalPressureRatingCreatesContinuousServiceSuitability =
+  nominalPressureRatingAlonePromotesContinuousServiceSuitability
+    canonicalTechnicalServiceSafetyBoundary
+  ≡ true
 
-    sourceAndModelAuthorityRemainSeparate : Bool
-    sourceAndModelAuthorityRemainSeparateIsTrue :
-      sourceAndModelAuthorityRemainSeparate ≡ true
+ObservedOpenFlowCreatesBackflowSafety : Set
+ObservedOpenFlowCreatesBackflowSafety =
+  observedOpenFlowAlonePromotesBackflowSafety
+    canonicalTechnicalServiceSafetyBoundary
+  ≡ true
 
-    requiredObservedCoordinates : List String
-    latentStateCoordinates : List String
-    sourceNotes : List String
+interfaceCompatibilityDoesNotPromoteContinuousService :
+  InterfaceCompatibilityCreatesContinuousServiceSuitability →
+  Data.Empty.⊥
+interfaceCompatibilityDoesNotPromoteContinuousService ()
 
-open FermentationControlBoundary public
+nominalPressureRatingDoesNotPromoteContinuousService :
+  NominalPressureRatingCreatesContinuousServiceSuitability →
+  Data.Empty.⊥
+nominalPressureRatingDoesNotPromoteContinuousService ()
 
-canonicalFermentationControlBoundary : FermentationControlBoundary
-canonicalFermentationControlBoundary =
-  fermentationControlBoundary
-    "sourdough starter fermentation control"
-    Observation.canonicalObservationClosureBoundary
-    false
-    refl
-    false
-    refl
-    false
-    refl
-    false
-    refl
-    false
-    refl
-    false
-    refl
-    false
-    refl
-    true
-    refl
-    true
-    refl
-    true
-    refl
-    ( "visible rise / volume trajectory"
-    ∷ "temperature"
-    ∷ "pH when measured"
-    ∷ "TTA when measured"
-    ∷ "refresh ratio and flour identity"
-    ∷ []
-    )
-    ( "yeast population and activity"
-    ∷ "lactic-acid-bacteria population and activity"
-    ∷ "available carbohydrate pools"
-    ∷ "lactic and acetic acid inventory"
-    ∷ "carbon-dioxide production"
-    ∷ "gas-retention / rheological state"
-    ∷ []
-    )
-    ( "The Source Bulk Foods dehydrated-starter instructions are activation provenance, not a universal maintenance theorem."
-    ∷ "Taheri et al. 2025/2026 supplies empirical flour and feeding-schedule microbiome evidence; it does not prove an individual starter state from a clock."
-    ∷ "Gas-formation and dough-structure studies separate carbon-dioxide production from retained volume."
-    ∷ "Wheat-flour fermentation kinetic models separate biomass, substrate consumption, acid production, and hydrolysis."
-    ∷ []
-    )
+observedOpenFlowDoesNotPromoteBackflowSafety :
+  ObservedOpenFlowCreatesBackflowSafety →
+  Data.Empty.⊥
+observedOpenFlowDoesNotPromoteBackflowSafety ()
 
-canonicalFermentationFiniteObservationIsNotFullLatentState :
-  Observation.finiteObservationIsFullLatentState
-    (observationBoundary canonicalFermentationControlBoundary)
+technicalServiceContinuousServiceReceiptRequired :
+  continuousServiceAuthorityReceiptRequired
+    canonicalTechnicalServiceSafetyBoundary
+  ≡ true
+technicalServiceContinuousServiceReceiptRequired =
+  continuousServiceAuthorityReceiptRequiredIsTrue
+    canonicalTechnicalServiceSafetyBoundary
+
+technicalServiceBackflowReceiptRequired :
+  backflowSafetyAuthorityReceiptRequired
+    canonicalTechnicalServiceSafetyBoundary
+  ≡ true
+technicalServiceBackflowReceiptRequired =
+  backflowSafetyAuthorityReceiptRequiredIsTrue
+    canonicalTechnicalServiceSafetyBoundary
+
+technicalServiceProductSpecificClaimStillBlocked :
+  productSpecificSafetyClaimMade canonicalTechnicalServiceSafetyBoundary
   ≡ false
-canonicalFermentationFiniteObservationIsNotFullLatentState =
-  Observation.finiteObservationIsFullLatentStateIsFalse
-    Observation.canonicalObservationClosureBoundary
-
-canonicalFermentationSameObservationDoesNotIdentifyLatentState :
-  Observation.sameObservationImpliesSameLatentState
-    (observationBoundary canonicalFermentationControlBoundary)
-  ≡ false
-canonicalFermentationSameObservationDoesNotIdentifyLatentState =
-  Observation.sameObservationImpliesSameLatentStateIsFalse
-    Observation.canonicalObservationClosureBoundary
-
-record FermentationControlZKPFrame : Set where
-  constructor fermentationControlZKPFrame
-  field
-    objective : String
-    reuse : String
-    construction : String
-    safety : String
-    lane : String
-    preconditions : String
-    invariants : String
-    postconditions : String
-    governance : String
-    verification : String
-
-canonicalFermentationControlZKPFrame : FermentationControlZKPFrame
-canonicalFermentationControlZKPFrame =
-  fermentationControlZKPFrame
-    "Formalise sourdough starter control as a partially observed fermentation process."
-    "Reuse finite-observation closure and the cross-domain promotion boundary."
-    "Add exact non-promotion cuts for clock, volume, pH, activation, hydration, and single-trajectory optimisation."
-    "Do not infer latent microbial, substrate, acid, rheological, machine-safety, or optimal-policy state from one proxy."
-    "One canonical promotion-boundary lane; no new sourdough module and no ESD edit."
-    "A promoted control decision needs explicit observations plus a domain-specific empirical producer."
-    "Observation, model, source instruction, and theorem authority remain separately typed."
-    "TOE consumers can reach the same exact fail-closed fermentation-control owner."
-    "ITIL, ISO 9000/42001/27001/27701/23894/9241, NIST AI RMF, Six Sigma, and C4/PlantUML are process lenses only."
-    "Kernel-check this owner and every aggregate that re-exports it; forbid postulates, unsolved metas, termination escapes, positivity escapes, and ESD edits."
+technicalServiceProductSpecificClaimStillBlocked =
+  productSpecificSafetyClaimMadeIsFalse
+    canonicalTechnicalServiceSafetyBoundary
