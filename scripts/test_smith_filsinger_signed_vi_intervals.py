@@ -33,9 +33,15 @@ class SignedWorkIntervalTests(unittest.TestCase):
             f.write_text(
                 "time_s,voltage_V,current_A,voltage_error_V,current_error_A\n"
                 f"0,{v},{i},0,0\n1,{v},{i},0,0\n", encoding="utf-8")
+            cert = self.root / (role + ".integration-error.txt")
+            cert.write_text("fixture-specific external integration uncertainty: 0 J " + role,
+                            encoding="utf-8")
             self.meta["ports"][role] = {
                 "file": f.name, "sha256": hashlib.sha256(f.read_bytes()).hexdigest(),
-                "clock_id": "scope-clock-a"}
+                "clock_id": "scope-clock-a", "integration_error_bound_J": "0",
+                "integration_error_certificate": cert.name,
+                "integration_error_certificate_sha256":
+                    hashlib.sha256(cert.read_bytes()).hexdigest()}
 
     def assert_reject(self, altered, error_piece):
         with self.assertRaisesRegex(ValueError, error_piece):
@@ -64,6 +70,33 @@ class SignedWorkIntervalTests(unittest.TestCase):
         self.assertEqual(integrate_trapezoid([Fraction(0), Fraction(1)],
                           [(Fraction(0), Fraction(0)), (Fraction(1), Fraction(1))]),
                          (Fraction(1, 2), Fraction(1, 2)))
+
+    def test_nonzero_integration_error_is_not_ignored(self):
+        self.meta["ports"]["natural_incident"]["integration_error_bound_J"] = "1/4"
+        receipt = calculate(self.meta, self.root)
+        self.assertEqual(receipt["net_environmental_work"],
+                         {"lower_J": "11/4", "upper_J": "13/4"})
+        self.assertEqual(receipt["unassigned_loss_or_storage_change"],
+                         {"lower_J": "7/4", "upper_J": "9/4"})
+
+    def test_reject_missing_integration_error_receipt(self):
+        del self.meta["ports"]["natural_incident"]["integration_error_certificate"]
+        self.assert_reject(self.meta, "integration-error bound/certificate")
+
+    def test_reject_wrong_integration_error_receipt_hash(self):
+        self.meta["ports"]["natural_incident"]["integration_error_certificate_sha256"] = "0" * 64
+        self.assert_reject(self.meta, "invalid or reused integration-error certificate")
+
+    def test_reject_negative_integration_error_radius(self):
+        self.meta["ports"]["natural_incident"]["integration_error_bound_J"] = "-1/8"
+        self.assert_reject(self.meta, "negative integration remainder")
+
+    def test_reject_reused_integration_error_certificate(self):
+        self.meta["ports"]["load_output"]["integration_error_certificate"] = (
+            self.meta["ports"]["natural_incident"]["integration_error_certificate"])
+        self.meta["ports"]["load_output"]["integration_error_certificate_sha256"] = (
+            self.meta["ports"]["natural_incident"]["integration_error_certificate_sha256"])
+        self.assert_reject(self.meta, "invalid or reused integration-error certificate")
 
     def test_reject_clock_mismatch(self):
         self.meta["ports"]["load_output"]["clock_id"] = "different-clock"
