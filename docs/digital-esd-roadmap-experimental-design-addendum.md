@@ -4,6 +4,16 @@
 
 **Status:** roadmap refinement. This addendum narrows the current live roadmap around study-level evidentiary discipline. It does not create evidence or alter the requirement to reconcile the feature branch with current `master` before a large integration tranche.
 
+## November 2026 origins, selection and incoming-EfS evidence gates
+
+Canonical orientation: [Digital-ESD research origins and derivation](digital-esd-research-origins-and-derivation.md). The first verified education loom [#341](https://github.com/chboishabba/dashi_agda/pull/341) contained seven **source papers**; the current education register contains nine **papers/items**; the later synthesis contains seven **candidate principles**. Distinguish all three denominators. The seven-row principle mapping is source-written but no independently justified seven-vs-alternative grouping is established. Maintain an alternatives/rejections ledger with reviewer decisions, not just a retrospective rationale.
+
+New [#1448](https://github.com/chboishabba/dashi_agda/pull/1448) EfS intake has 14 newly attributed original sources plus two canonical Tilbury/IUCN donors. Those 16 candidate source-to-principle cases require exact-span review, claim ceilings, source genealogy, local-context transport, contradiction and reviewer permission/admission. Existing 19 manuscript coordinates + separate 16-subcoordinate claim ceiling remain canonical: no EfS-specific duplicate ontology is justified.
+
+**Methodological options:** primary source-governed integrative conceptual review and qualitative interpretive synthesis; a quantitative meta-analysis is only admissible after matching estimand, effect units, independent studies, outcomes, comparator/follow-up, variance and bias diagnostics. No such poolable admitted subset has been verified here.
+
+**Immediate weekly P0/P1:** before 6 November, coauthor-approved research question/200-word abstract/title plus paper type and ownership; by 13 November, author corpus selection rationale, independently coded EfS evidence and recorded alternative principle partitions. Preserve documented ambiguity where archaeology cannot recover who selected a theme or when.
+
 ## Why this changes the roadmap
 
 The paper now has enough conceptual architecture. The main empirical risk is no longer only *which papers are found*, but *what each admitted paper is allowed to prove*.
