@@ -107,7 +107,7 @@ def exact_midpoint_grid(M,k):
 def exact_circle_grid(L,k):
  """sum_j exp(2*pi*i*k*j/L), z^(L/2)=-1."""
  return exact_cyclotomic_character_sum(L//2,
-                                      [(2*k*j,F(1)) for j in range(L)])
+                                      [(k*j,F(1)) for j in range(L)])
 
 def symbolic_proofs():
  a,b,c,d=sp.symbols('a b c d',integer=True,nonnegative=True)
