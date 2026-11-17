@@ -111,3 +111,28 @@ See Docs/physics/PVGaAs111SALCKaneMassCorrection20261117.md for equations, sourc
 Full source citations, exact arithmetic and nonpromotion boundaries: `Docs/physics/PV369GaAsBahder1992MolenkampMaxCut20261117.md`.
 
 **Verification:** 27+35+36=**98 local tests** were run on source-independent equivalent scripts (not the full Agda proof kernel); source scripts committed to PR #1523 and source-checked, **Agda native acceptance OPEN**. Prior 131 local numeric/symbolic checks remain separate. This is not an empirical calibration fit or a >50% PCE theorem.
+
+
+## 17 November P1d quantum-well confinement and P7 strict net-electric >50% closure
+
+**Project goals (unchanged):** >50% **net measured solar-to-electric** aperture-normalized power, with any extra chemical, excitation or thermal product separately conserved and counted. Original 369/triadic input must deliver a *nontrivial, testable physical material/operator prediction* beyond a generic C3v relabeling. Maintain quantum-dot / full 8-band material optics (P1), actual EQE→loaded JV (P2), driven nonlinear/RF with signed power (P3), fission/multipair (P4), photonic thin films (P5), BH4-derived photosystem/redox/fuel engineering (P6). Thermal/ORC/ground remains AUXILIARY. ESD surfaces untouched. Reuse original physical constructors; source attribution preserved.
+
+**New finite QW physical discriminator:** Source [Molenkamp et al., PRB 38 4314(R) 1988](https://doi.org/10.1103/PhysRevB.38.4314) infers *QW* [111] HH mass 0.70m0 by orientation-resolved PLE and 8-band confinement fitting. The nominal **bulk Γ** Luttinger gamma1=6.98, gamma3=2.93 instead gives m_HH[111]/m0=25/28≈0.892857. These are **not interchangeable physical observables**. Original [Eppenga & Schuurmans, Philips Technical Review 44(5) 137-149 (1988)](https://www.worldradiohistory.com/Archive-Company-Publications/Philips-Technical-Review/80s/Philips-Technical-Review-1988.pdf) discusses GaAs/AlGaAs QW 1–10 nm scale and mass-dependent envelope boundary matching. The article's text was accessible and original screenshot blocked (403), so no figure calibration is claimed.
+
+To make the comparison **measurable** without fabricating paper sample geometry, the new \`scripts/check_gaas_111_qw_mass_confinement_cut.py\` solves an **illustrative symmetric finite square well** with BenDaniel–Duke interface matching \`tan(kL/2)=(m_w/m_b)(κ/k)\`. Stipulated barriers V=0.2 eV and m_barrier=0.9m0. The following are calculations, **not a fit to the original specimen or a predicted optical emission line**:
+
+| width | E_hh finite (using QW-inferred 0.70m0) | E_hh finite (nominal bulk Γ 0.892857m0) | mismatch |
+|---|---:|---:|---:|
+| 5 nm | 14.023 meV | 11.949 meV | 2.074 meV |
+| 8 nm | 6.366 meV | 5.279 meV | 1.087 meV |
+| 10 nm | 4.294 meV | 3.525 meV | 0.769 meV |
+
+The **40 local equivalent numerical checks passed**, including positive/finite barrier boundedness, mass dependence, well width, barrier-height monotonicity and explicit negative-input rejection. Exact \`GaAs111QuantumWellConfinementExact.agda\` imports the prior Molenkamp mass discrepancy proof and declares a required **same-specimen** source-backed well thickness, band offsets, interface flux matching, 8-band source, exciton PLE and collected current. No original experimental fit is asserted. Actual 8-band QW/exciton inference is P1d **OPEN**.
+
+**P7 fix: strict conversion threshold.** Original \`MatchedDrivenPVGain\` in \`PVPrimaryConversionMaxCutExact.agda\` incorrectly called weak \`<=\` (allowing zero benefit) "positive." It now requires \`suc(original passive effective output) <= driven effective output\`, a strict +1 smallest-common-unit margin, with passive/driven RF input and recovered RF both signed consistently. No physical witness was inserted.
+
+New \`PV369NetHalfThresholdExact.agda\` imports original motors' inductive natural-number bound, PV energy source, semiconductor continuity and site fibre. A net electrical meter ledger demands \`grossElectric + recoveredDrive = netExport + driveIn + auxDraw\`, then strict \`suc(incidentSolar) <= netExport + netExport\`. Chemical, heat and excitation energy **cannot** be relabelled as electrical output, and equal 50% is rejected by a generic Agda successor-not-less theorem. Entries must share aperture/spectrum/window and power/energy units; independent certification remains a source gate. Source-written; **Agda native kernel check still OPEN**.
+
+**P7 quantified loss tolerance:** previous actual-G173 model optimum for a **3-junction 2-terminal ideal radiative** design 51.741% gives only \`51,741 − 50,000 = 1,741\` per 100,000 solar-power units of headroom before 50%. For a 1000.370656 W/m² AM1.5G input this is **17.416 W/m²**, or **3.3648% of the *ideal output***. The arithmetic is exact for the **model-reported rounded efficiency only**; the gap search was numerical and optical/contact/recombination/temperature losses unmeasured. It is NOT a physical certified multijunction performance claim. The focused formal module explicitly records this distinction and no instance of a real >50% device.
+
+**Highest-alpha remaining gates:** (1) exact kernel verification of all revised import-closure modules and strict Nat inequalities; (2) actual QW specimen data, well thickness, alloy barrier and fitted PLE with exciton/band mixing; (3) full corrected Bahder 1990/1992 common-basis eight-band source, band reference, finite-film screening; (4) same-material measured absorption/EQE/recombination and loaded JV; (5) candidate 369-specific source-predictive operator vs unrelated C3v matched engineering; (6) independently certified >50% **net aperture solar-electric** stack. Continue P3/P4/P5/P6 independently; do not overindex on strained GaAs or heat.
