@@ -16,6 +16,8 @@ module DASHI.Physics.Motors.SmithFilsingerSourceMaxwellBoundaryWeldExact where
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Nat.Solver using (module +-*-Solver)
+open +-*-Solver using (solve; _:+_; _:=_)
 
 import DASHI.Physics.Motors.Circuit36927RecoveryEnergyBoundExact as Bound
 import DASHI.Physics.Motors.SmithFilsingerReplenishedCycleCapExact as Cycle
@@ -186,3 +188,135 @@ complementaryFinitePhasesPreserveTotal :
   ≡ Phase.high base excursion + base
 complementaryFinitePhasesPreserveTotal =
   Phase.complementaryConstantTotal
+
+
+-- The port cancellation weld is not merely an assumed duplicate cycle
+-- receipt. It follows from SAME-PORT signed incoming/outgoing equations,
+-- physical store return and the ORIGINAL two-port conservation equation.
+-- No real-valued Maxwell theorem is implied by this finite Nat cancellation.
+reorderIncidentWork :
+  (nOut nReal cOut cReal stored : Nat) →
+  ((nOut + nReal) + (cOut + cReal)) + stored
+    ≡ ((nReal + cReal) + (nOut + cOut)) + stored
+reorderIncidentWork no nr co cr s =
+  solve 5
+    (λ a b c d e →
+      (((a :+ b) :+ (c :+ d)) :+ e)
+        := (((b :+ d) :+ (a :+ c)) :+ e))
+    refl no nr co cr s
+
+reorderOutgoingWork :
+  (load loss nOut cOut stored : Nat) →
+  load + (loss + (nOut + (cOut + stored)))
+    ≡ ((load + loss) + (nOut + cOut)) + stored
+reorderOutgoingWork load loss no co s =
+  solve 5
+    (λ a b c d e →
+      (a :+ (b :+ (c :+ (d :+ e))))
+        := (((a :+ b) :+ (c :+ d)) :+ e))
+    refl load loss no co s
+
+-- Generic version of the exact port-to-cycle theorem.
+-- This is a genuine derivation from independent port conservation and
+-- signed source/control incident/outgoing identifications.
+signedPortBalanceAfterFullStoreReturn :
+  (nIncident cIncident nOutgoing cOutgoing
+   nNet cNet initial final load loss : Nat) →
+  nIncident ≡ nOutgoing + nNet →
+  cIncident ≡ cOutgoing + cNet →
+  initial ≡ final →
+  (nIncident + cIncident) + initial
+    ≡ load + (loss + (nOutgoing + (cOutgoing + final))) →
+  nNet + cNet ≡ load + loss
+signedPortBalanceAfterFullStoreReturn
+  ni ci no co nn cn initial final load loss
+  naturalLaw controllerLaw storeLaw boundaryLaw =
+  Cycle.+-cancelRight _ _ (no + co)
+    (Cycle.+-cancelRight _ _ final
+      (Cycle.trans
+        (Bound.sym (reorderIncidentWork no nn co cn final))
+        (Cycle.trans
+          (Cycle.cong
+            (λ n → (n + (co + cn)) + final)
+            (Bound.sym naturalLaw))
+          (Cycle.trans
+            (Cycle.cong
+              (λ c → (ni + c) + final)
+              (Bound.sym controllerLaw))
+            (Cycle.trans
+              (Cycle.cong
+                (λ stored → (ni + ci) + stored)
+                (Bound.sym storeLaw))
+              (Cycle.trans boundaryLaw
+                (reorderOutgoingWork load loss no co final)))))))
+
+-- The result is *actually* about the signed two-port window, independent
+-- of separately asserting a RepeatableSourceCycle ledger. This is the
+-- missing formal signed-port → replenishment bookkeeping weld.
+signedNaturalAndControllerWorkPaysSamePortLoad :
+  (b : SelectedBoundary)
+  (f : FormalFieldToPort b)
+  (w : SignedSourceCycleWeld b f) →
+  Cycle.RepeatableSourceCycle.naturalSourceWork
+    (Cycle.AdmittedSourceCapCycle.repeatable
+      (SignedSourceCycleWeld.cycleWithSourceCap w))
+  + Cycle.RepeatableSourceCycle.controllerWork
+    (Cycle.AdmittedSourceCapCycle.repeatable
+      (SignedSourceCycleWeld.cycleWithSourceCap w))
+  ≡ Port.MidpointTwoPortWorkWindow.usefulWork
+      (FormalFieldToPort.portWindow f)
+    + Port.MidpointTwoPortWorkWindow.internalLoss
+        (FormalFieldToPort.portWindow f)
+signedNaturalAndControllerWorkPaysSamePortLoad b f w =
+  signedPortBalanceAfterFullStoreReturn
+    (Port.MidpointTwoPortWorkWindow.naturalIncident
+      (FormalFieldToPort.portWindow f))
+    (Port.MidpointTwoPortWorkWindow.controllerIncident
+      (FormalFieldToPort.portWindow f))
+    (Port.MidpointTwoPortWorkWindow.naturalOutgoing
+      (FormalFieldToPort.portWindow f))
+    (Port.MidpointTwoPortWorkWindow.controllerOutgoing
+      (FormalFieldToPort.portWindow f))
+    (Cycle.RepeatableSourceCycle.naturalSourceWork
+      (Cycle.AdmittedSourceCapCycle.repeatable
+        (SignedSourceCycleWeld.cycleWithSourceCap w)))
+    (Cycle.RepeatableSourceCycle.controllerWork
+      (Cycle.AdmittedSourceCapCycle.repeatable
+        (SignedSourceCycleWeld.cycleWithSourceCap w)))
+    (Port.MidpointTwoPortWorkWindow.initialStored
+      (FormalFieldToPort.portWindow f))
+    (Port.MidpointTwoPortWorkWindow.finalStored
+      (FormalFieldToPort.portWindow f))
+    (Port.MidpointTwoPortWorkWindow.usefulWork
+      (FormalFieldToPort.portWindow f))
+    (Port.MidpointTwoPortWorkWindow.internalLoss
+      (FormalFieldToPort.portWindow f))
+    (SignedSourceCycleWeld.naturalIncidentPaysOutgoingAndSourceWork w)
+    (SignedSourceCycleWeld.controllerIncidentPaysOutgoingAndControllerWork w)
+    (SignedSourceCycleWeld.sameOriginalStoreReturns w)
+    (Port.MidpointTwoPortWorkWindow.completeBoundaryBalance
+      (FormalFieldToPort.portWindow f))
+
+-- Independent proof: useful work cannot exceed the signed net incoming
+-- natural+controller work when all fields/stores return on the same cycle.
+signedPortLoadBoundAfterStoreReturn :
+  (b : SelectedBoundary)
+  (f : FormalFieldToPort b)
+  (w : SignedSourceCycleWeld b f) →
+  Bound._≤_
+    (Port.MidpointTwoPortWorkWindow.usefulWork
+      (FormalFieldToPort.portWindow f))
+    (Cycle.RepeatableSourceCycle.naturalSourceWork
+      (Cycle.AdmittedSourceCapCycle.repeatable
+        (SignedSourceCycleWeld.cycleWithSourceCap w))
+      + Cycle.RepeatableSourceCycle.controllerWork
+        (Cycle.AdmittedSourceCapCycle.repeatable
+          (SignedSourceCycleWeld.cycleWithSourceCap w)))
+signedPortLoadBoundAfterStoreReturn b f w =
+  Bound.transportUpper
+    (Bound.sym (signedNaturalAndControllerWorkPaysSamePortLoad b f w))
+    (Bound.≤-append
+      (Port.MidpointTwoPortWorkWindow.usefulWork
+        (FormalFieldToPort.portWindow f))
+      (Port.MidpointTwoPortWorkWindow.internalLoss
+        (FormalFieldToPort.portWindow f)))
