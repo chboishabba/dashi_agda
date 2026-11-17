@@ -901,827 +901,99 @@ DASHI-Unification-Theorem = DASHIUnificationAxiom
 
 
 ------------------------------------------------------------------------
--- TOE Yang-Mills non-promotion reuse.
-------------------------------------------------------------------------
-
-unifierYangMillsPublishedRGDoesNotPromoteContinuum :
-  YMTOE.toeFlat4DContinuumTransferProvedHere ≡ false
-unifierYangMillsPublishedRGDoesNotPromoteContinuum =
-  YMTOE.toePublishedRGDoesNotPromoteContinuum
-
-unifierYangMillsGeneratedActionDensityDoesNotPromoteContinuum :
-  YMTOE.toeFlat4DContinuumTransferProvedHere ≡ false
-unifierYangMillsGeneratedActionDensityDoesNotPromoteContinuum =
-  YMTOE.toeGeneratedActionDensityDoesNotPromoteContinuum
-
-unifierYangMillsCombinedRGUnifiedActionDoesNotPromoteContinuum :
-  YMTOE.toeFlat4DContinuumTransferProvedHere ≡ false
-unifierYangMillsCombinedRGUnifiedActionDoesNotPromoteContinuum =
-  YMTOE.toeCombinedRGUnifiedActionDoesNotPromoteContinuum
-
-unifierYangMillsContinuumMassGapNotPromoted :
-  YMTOE.toeContinuumMassGapPromoted ≡ false
-unifierYangMillsContinuumMassGapNotPromoted =
-  YMTOE.toeContinuumMassGapPromotedIsFalse
-
-unifierYangMillsClayNotPromoted :
-  YMTOE.toeClayYangMillsPromoted ≡ false
-unifierYangMillsClayNotPromoted =
-  YMTOE.toeClayYangMillsPromotedIsFalse
-
-
-------------------------------------------------------------------------
--- Normalized Yang-Mills TOE research frontier.
+-- 11. TOE 369 exact max-cut facade.
 --
--- These are aliases only.
--- The theorem owners remain in the Yang-Mills source lane.
+-- This section does not use the historical axiom-shaped interfaces above as
+-- proof authority.  It imports the existing theorem owners directly.
+-- Character, dimension, carrier coincidence, and finite charts remain
+-- non-promoting.  No ESD surface is imported or edited.
 ------------------------------------------------------------------------
 
-unifierYangMillsRegularEProjectionCompilerLevel :
-  ProofLevel
-unifierYangMillsRegularEProjectionCompilerLevel =
-  YMTOE.toePublishedFlowToRegularEProjectionCompilerLevel
+import DASHI.Reasoning.Trialectic369Selected3BFullGradeActionMaxCutExact as TOEFullGrade
+import DASHI.Reasoning.Trialectic369Selected3BProjectedActionMaxCutExact as TOEProjected
+import DASHI.Moonshine.MonsterGradedVOAActual3BKernelSameElementBidiExact as TOEKernelSame
+import DASHI.Moonshine.MonsterGradedVOASelected3BSameElementBidiExact as TOESelectedSame
+import DASHI.Moonshine.Base369Monster3BSingleActionProducerBidiExact as TOESingleAction
+import DASHI.Wikimedia.IbrahimMonster3BLinearShortestFrontierCorrectionExact as TOEIbrahim
+import DASHI.Reasoning.Trialectic369SchrodingerHZetaRecognitionMaxCutExact as TOEHZeta
+import DASHI.Wikimedia.IbrahimMonsterTernary27PhasePreservingFiveOrbitReductionExact as TOETernary27
 
-unifierYangMillsRegularELocalizationSourceLevel :
-  ProofLevel
-unifierYangMillsRegularELocalizationSourceLevel =
-  YMTOE.toeCMP119RegularELocalizationSourceLevel
+toe369FullGradeDimensionDoesNotCreateFaithfulness :
+  TOEFullGrade.LinearDimensionCreatesFaithfulness → ⊥
+toe369FullGradeDimensionDoesNotCreateFaithfulness =
+  TOEFullGrade.dimensionDoesNotCreateFaithfulness
 
-unifierYangMillsHardAnalyticLemmaUpperCount : ℕ
-unifierYangMillsHardAnalyticLemmaUpperCount =
-  YMTOE.toeHardAnalyticLemmaUpperCount
+toe369FullGradeCharacterDoesNotCreateActionAgreement :
+  TOEFullGrade.CharacterCreatesFullGradeActionAgreement → ⊥
+toe369FullGradeCharacterDoesNotCreateActionAgreement =
+  TOEFullGrade.characterDoesNotCreateActionAgreement
 
-unifierYangMillsHardAnalyticLemmaUpperCountIsSix :
-  unifierYangMillsHardAnalyticLemmaUpperCount ≡ 6
-unifierYangMillsHardAnalyticLemmaUpperCountIsSix =
-  YMTOE.toeHardAnalyticLemmaUpperCountIsSix
+toe369ProjectedDimensionDoesNotCreateAction :
+  TOEProjected.DirectSumDimensionCreatesProjectedAction → ⊥
+toe369ProjectedDimensionDoesNotCreateAction =
+  TOEProjected.dimensionDoesNotCreateProjectedAction
 
+toe369ProjectedRetractionDoesNotCreateAction :
+  TOEProjected.CoordinateRetractionCreatesProjectedLinearAction → ⊥
+toe369ProjectedRetractionDoesNotCreateAction =
+  TOEProjected.coordinateRetractionDoesNotCreateProjectedAction
 
-------------------------------------------------------------------------
--- Normalized Yang-Mills scale-density-stress convergence.
-------------------------------------------------------------------------
-
-unifierYangMillsBetaDrivenSourceFlowLevel : ProofLevel
-unifierYangMillsBetaDrivenSourceFlowLevel =
-  YMTOE.toeBetaDrivenSourceFlowLevel
-
-unifierYangMillsBetaHistorySameStateCouplingLevel : ProofLevel
-unifierYangMillsBetaHistorySameStateCouplingLevel =
-  YMTOE.toeBetaHistorySameStateCouplingLevel
-
-unifierYangMillsCanonicalCompleteDensityLevel : ProofLevel
-unifierYangMillsCanonicalCompleteDensityLevel =
-  YMTOE.toeBetaHistoryToCanonicalCompleteDensityLevel
-
-unifierYangMillsGeneratedActionDensityCompilerLevel : ProofLevel
-unifierYangMillsGeneratedActionDensityCompilerLevel =
-  YMTOE.toeUnifiedGeneratedActionDensityCompilerLevel
-
-unifierYangMillsCombinedRGUnifiedActionCompilerLevel : ProofLevel
-unifierYangMillsCombinedRGUnifiedActionCompilerLevel =
-  YMTOE.toeCompleteDensityEffectiveActionRealizationCompilerLevel
-
-unifierYangMillsStressScaleCompilerLevel : ProofLevel
-unifierYangMillsStressScaleCompilerLevel =
-  YMTOE.toeUnifiedGeneratedActionStressScaleCompilerLevel
-
-unifierYangMillsStrictCasimirCarrierLevel : ProofLevel
-unifierYangMillsStrictCasimirCarrierLevel =
-  YMTOE.toeStrictCasimirCarrierCompilerLevel
-
-unifierYangMillsOSWightmanContinuumNotConstructed :
-  YMTOE.toeOSWightmanContinuumConstructionProvedHere ≡ false
-unifierYangMillsOSWightmanContinuumNotConstructed =
-  YMTOE.toeOSWightmanContinuumConstructionProvedHereIsFalse
-
-unifierYangMillsTerminalPromotionBlocked :
-  YMTOE.toeTerminalPromotion ≡ false
-unifierYangMillsTerminalPromotionBlocked =
-  YMTOE.toeTerminalPromotionIsFalse
-
-unifierYangMillsUniversalBetaFloorLevel : ProofLevel
-unifierYangMillsUniversalBetaFloorLevel =
-  YMTOE.toeCompactSimpleUniversalBetaFloorLevel
-
-unifierYangMillsLiteralUniformRemainderFloorLevel : ProofLevel
-unifierYangMillsLiteralUniformRemainderFloorLevel =
-  YMTOE.toeLiteralUniformRegularRemainderBelowUniversalFloorLevel
-
-unifierYangMillsStressMarkedShellBoundLevel : ProofLevel
-unifierYangMillsStressMarkedShellBoundLevel =
-  YMTOE.toeStressFirstVariationMarkedShellBoundLevel
-
-unifierYangMillsStressShellEnergyHilbertLevel : ProofLevel
-unifierYangMillsStressShellEnergyHilbertLevel =
-  YMTOE.toeStressShellEnergyToHilbertCompilerLevel
-
-unifierYangMillsLiteralStressActivityEntropyLevel : ProofLevel
-unifierYangMillsLiteralStressActivityEntropyLevel =
-  YMTOE.toeLiteralStressActivityEntropyInstantiationLevel
-
-
-------------------------------------------------------------------------
--- Authoritative Goal-1 R485 maximum cut via normalized R559 owner.
-------------------------------------------------------------------------
-
-unifierYangMillsGoal1FiniteSymmetryAndRPSourceLevel : ProofLevel
-unifierYangMillsGoal1FiniteSymmetryAndRPSourceLevel =
-  YMTOE.toeGoal1FiniteSymmetryAndRPSourceLevel
-
-unifierYangMillsGoal1A1CurrentStepBetaSourceLevel : ProofLevel
-unifierYangMillsGoal1A1CurrentStepBetaSourceLevel =
-  YMTOE.toeGoal1A1CurrentStepBetaSourceLevel
-
-unifierYangMillsGoal1A3SourceNativeContinuumOSLevel : ProofLevel
-unifierYangMillsGoal1A3SourceNativeContinuumOSLevel =
-  YMTOE.toeGoal1A3SourceNativeContinuumOSLevel
-
-unifierYangMillsGoal1A3CountablyAdditiveRepresentationLevel : ProofLevel
-unifierYangMillsGoal1A3CountablyAdditiveRepresentationLevel =
-  YMTOE.toeGoal1A3CountablyAdditiveRepresentationLevel
-
-unifierYangMillsGoal1A4FiniteRegularityLevel : ProofLevel
-unifierYangMillsGoal1A4FiniteRegularityLevel =
-  YMTOE.toeGoal1A4FiniteRegularityLevel
-
-unifierYangMillsGoal1A5FiniteGrowthLevel : ProofLevel
-unifierYangMillsGoal1A5FiniteGrowthLevel =
-  YMTOE.toeGoal1A5FiniteGrowthLevel
-
-unifierYangMillsGoal1BWilsonTwoInsertionConnectedShellLevel : ProofLevel
-unifierYangMillsGoal1BWilsonTwoInsertionConnectedShellLevel =
-  YMTOE.toeGoal1BWilsonTwoInsertionConnectedShellLevel
-
-unifierYangMillsGoal1BGeometricDecayCompilerLevel : ProofLevel
-unifierYangMillsGoal1BGeometricDecayCompilerLevel =
-  YMTOE.toeGoal1BGeometricDecayCompilerLevel
-
-unifierYangMillsGoal1BStandardSpectralTransferLevel : ProofLevel
-unifierYangMillsGoal1BStandardSpectralTransferLevel =
-  YMTOE.toeGoal1BStandardSpectralTransferLevel
-
-unifierYangMillsGoal1CSameFamilySourceInstantiationLevel : ProofLevel
-unifierYangMillsGoal1CSameFamilySourceInstantiationLevel =
-  YMTOE.toeGoal1CSameFamilySourceInstantiationLevel
-
-unifierYangMillsGoal1G1ArbitraryCompactSimpleSourceMapLevel : ProofLevel
-unifierYangMillsGoal1G1ArbitraryCompactSimpleSourceMapLevel =
-  YMTOE.toeGoal1G1ArbitraryCompactSimpleSourceMapLevel
-
-unifierYangMillsGoal1G2SameSystemNontrivialitySemanticsLevel : ProofLevel
-unifierYangMillsGoal1G2SameSystemNontrivialitySemanticsLevel =
-  YMTOE.toeGoal1G2SameSystemNontrivialitySemanticsLevel
-
-unifierYangMillsGoal1MaximumCutCompilerLevel : ProofLevel
-unifierYangMillsGoal1MaximumCutCompilerLevel =
-  YMTOE.toeGoal1MaximumCutCompilerLevel
-
-unifierYangMillsGoal1ProjectiveProkhorovNotMandatory :
-  YMTOE.toeGoal1ProjectiveProkhorovMandatory ≡ false
-unifierYangMillsGoal1ProjectiveProkhorovNotMandatory = refl
-
-unifierYangMillsGoal1CompatibilityBRouteNotMandatory :
-  YMTOE.toeGoal1CompatibilityBRouteMandatory ≡ false
-unifierYangMillsGoal1CompatibilityBRouteNotMandatory = refl
-
-unifierYangMillsGoal1ClayCompletionNotClaimed :
-  YMTOE.toeGoal1ClayCompletionClaimed ≡ false
-unifierYangMillsGoal1ClayCompletionNotClaimed = refl
-
-
-unifierYangMillsGoal1ParetoZKPFrame : YMMaxCut.Goal1ParetoTOEZKPFrame
-unifierYangMillsGoal1ParetoZKPFrame = YMMaxCut.canonicalGoal1ParetoTOEZKPFrame
-
-
-------------------------------------------------------------------------
--- SensibLaw / legal governance TOE normalization.
--- Unifier consumes the theorem owner.  It does not create authority.
-------------------------------------------------------------------------
-
-unifierSensibLawGovernanceSemanticBoundary :
-  Authority.AuthorityNonPromotionBundle
-unifierSensibLawGovernanceSemanticBoundary =
-  GovernanceTOE.governanceSemanticAuthorityBoundary
-
-unifierSensibLawSemanticTruthAuthorityStillClosed :
-  Authority.truthAuthorityFlag unifierSensibLawGovernanceSemanticBoundary ≡ false
-unifierSensibLawSemanticTruthAuthorityStillClosed =
-  GovernanceTOE.governanceSemanticTruthAuthorityStillClosed
-
-unifierSensibLawSemanticLegalAuthorityStillClosed :
-  Authority.legalAuthorityFlag unifierSensibLawGovernanceSemanticBoundary ≡ false
-unifierSensibLawSemanticLegalAuthorityStillClosed =
-  GovernanceTOE.governanceSemanticLegalAuthorityStillClosed
-
-unifierSensibLawSemanticAllAuthorityStillClosed :
-  Authority.promotesAnyAuthority unifierSensibLawGovernanceSemanticBoundary ≡ false
-unifierSensibLawSemanticAllAuthorityStillClosed =
-  GovernanceTOE.governanceSemanticAllAuthorityStillClosed
-
-unifierSensibLawLegalAuthorityBoundaryReceipt :
-  AuthorityBoundary.AuthorityBoundaryReceipt
-unifierSensibLawLegalAuthorityBoundaryReceipt =
-  GovernanceTOE.governanceLegalAuthorityBoundaryReceipt
-
-unifierSensibLawLegalRuntimeContract :
-  LegalRuntime.AgdaFirstLegalRuntimeContract
-unifierSensibLawLegalRuntimeContract =
-  GovernanceTOE.governanceLegalRuntimeContract
-
-unifierSensibLawDomainTransportReceipt :
-  Domain.DomainTransportReceipt
-unifierSensibLawDomainTransportReceipt =
-  GovernanceTOE.governanceDomainTransportReceipt
-
-unifierSensibLawRepresentationEqualityDoesNotCreateLegalAuthority :
-  Domain.DomainTransportReceipt.representationEqualityCreatesLegalAuthority
-    unifierSensibLawDomainTransportReceipt
+toe369KernelTrace53DoesNotIdentify3B :
+  TOEKernelSame.Actual3BKernelSameElementBoundary.trace53AloneIdentifiesMonster3B
+    TOEKernelSame.canonicalActual3BKernelSameElementBoundary
   ≡ false
-unifierSensibLawRepresentationEqualityDoesNotCreateLegalAuthority =
-  GovernanceTOE.governanceRepresentationEqualityDoesNotCreateLegalAuthority
+toe369KernelTrace53DoesNotIdentify3B = refl
 
-unifierSensibLawVendorIdentityDoesNotCreateAuthority :
-  Domain.DomainTransportReceipt.vendorIdentityCreatesAuthority unifierSensibLawDomainTransportReceipt
+toe369KernelCharacterIsotypyDoesNotCreateAction :
+  TOEKernelSame.Actual3BKernelSameElementBoundary.characterIsotypyConstructsActionIntertwiner
+    TOEKernelSame.canonicalActual3BKernelSameElementBoundary
   ≡ false
-unifierSensibLawVendorIdentityDoesNotCreateAuthority =
-  GovernanceTOE.governanceVendorIdentityDoesNotCreateAuthority
+toe369KernelCharacterIsotypyDoesNotCreateAction = refl
 
-unifierSensibLawTargetDomainNeedsOwnAuthorityWitness :
-  Domain.DomainTransportReceipt.targetDomainNeedsOwnAuthorityWitness unifierSensibLawDomainTransportReceipt
-  ≡ true
-unifierSensibLawTargetDomainNeedsOwnAuthorityWitness =
-  GovernanceTOE.governanceTargetDomainNeedsOwnAuthorityWitness
-
-
-------------------------------------------------------------------------
--- Direct constructive Balaban RG scale-transfer non-promotion.
--- The joint receipt is the normalized facade path.
-------------------------------------------------------------------------
-
-unifierBalabanR559Gate4UnresolvedCount : ℕ
-unifierBalabanR559Gate4UnresolvedCount =
-  BalabanR559TOE.gate4UnresolvedCount
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-unifierBalabanR559Gate4UnresolvedCountIs58 :
-  unifierBalabanR559Gate4UnresolvedCount ≡ 58
-unifierBalabanR559Gate4UnresolvedCountIs58 =
-  BalabanR559TOE.gate4UnresolvedCountIs58
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-unifierBalabanR559Gate4DefinitionLevel : ProofLevel
-unifierBalabanR559Gate4DefinitionLevel =
-  BalabanR559TOE.gate4DefinitionLevel
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-unifierBalabanR559Gate4InhabitantsLevel : ProofLevel
-unifierBalabanR559Gate4InhabitantsLevel =
-  BalabanR559TOE.gate4InhabitantsLevel
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-unifierBalabanScaleTransferNonPromotion :
-  BalabanR559TOE.ScaleTransferPromotion → ⊥
-unifierBalabanScaleTransferNonPromotion =
-  BalabanR559TOE.scaleTransferPromotionEliminator
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-------------------------------------------------------------------------
--- SensibLaw / legal governance TOE normalization.
--- Unifier consumes the theorem owner.  It does not create authority.
-------------------------------------------------------------------------
-
-unifierSensibLawGovernanceSemanticBoundary :
-  Authority.AuthorityNonPromotionBundle
-unifierSensibLawGovernanceSemanticBoundary =
-  GovernanceTOE.governanceSemanticAuthorityBoundary
-
-unifierSensibLawSemanticTruthAuthorityStillClosed :
-  Authority.truthAuthorityFlag unifierSensibLawGovernanceSemanticBoundary ≡ false
-unifierSensibLawSemanticTruthAuthorityStillClosed =
-  GovernanceTOE.governanceSemanticTruthAuthorityStillClosed
-
-unifierSensibLawSemanticLegalAuthorityStillClosed :
-  Authority.legalAuthorityFlag unifierSensibLawGovernanceSemanticBoundary ≡ false
-unifierSensibLawSemanticLegalAuthorityStillClosed =
-  GovernanceTOE.governanceSemanticLegalAuthorityStillClosed
-
-unifierSensibLawSemanticAllAuthorityStillClosed :
-  Authority.promotesAnyAuthority unifierSensibLawGovernanceSemanticBoundary ≡ false
-unifierSensibLawSemanticAllAuthorityStillClosed =
-  GovernanceTOE.governanceSemanticAllAuthorityStillClosed
-
-unifierSensibLawLegalAuthorityBoundaryReceipt :
-  AuthorityBoundary.AuthorityBoundaryReceipt
-unifierSensibLawLegalAuthorityBoundaryReceipt =
-  GovernanceTOE.governanceLegalAuthorityBoundaryReceipt
-
-unifierSensibLawLegalRuntimeContract :
-  LegalRuntime.AgdaFirstLegalRuntimeContract
-unifierSensibLawLegalRuntimeContract =
-  GovernanceTOE.governanceLegalRuntimeContract
-
-unifierSensibLawDomainTransportReceipt :
-  Domain.DomainTransportReceipt
-unifierSensibLawDomainTransportReceipt =
-  GovernanceTOE.governanceDomainTransportReceipt
-
-unifierSensibLawRepresentationEqualityDoesNotCreateLegalAuthority :
-  Domain.DomainTransportReceipt.representationEqualityCreatesLegalAuthority
-    unifierSensibLawDomainTransportReceipt
+toe369SelectedSameElementClassRecognitionStillOpen :
+  TOESelectedSame.Selected3BSameElementBoundary.selectedElementProvedMonsterClass3BHere
+    TOESelectedSame.canonicalSelected3BSameElementBoundary
   ≡ false
-unifierSensibLawRepresentationEqualityDoesNotCreateLegalAuthority =
-  GovernanceTOE.governanceRepresentationEqualityDoesNotCreateLegalAuthority
+toe369SelectedSameElementClassRecognitionStillOpen = refl
 
-unifierSensibLawVendorIdentityDoesNotCreateAuthority :
-  Domain.DomainTransportReceipt.vendorIdentityCreatesAuthority unifierSensibLawDomainTransportReceipt
+toe369SingleActionProducerStillOpen :
+  TOESingleAction.SingleActionProducerBoundary.actualSingleProducerInhabitedHere
+    TOESingleAction.canonicalSingleActionProducerBoundary
   ≡ false
-unifierTriadicHostRustBindingStillUnpaid = refl
+toe369SingleActionProducerStillOpen = refl
 
-unifierTriadicHostByteDoesNotCreateDeviceByte :
-  TriadicHost.HostByteImpliesDeviceByte → ⊥
-unifierTriadicHostByteDoesNotCreateDeviceByte =
-  TriadicHost.hostByteDoesNotCreateDeviceByte
+toe369FiniteChartDoesNotCreateLinearMultiplicityAction :
+  TOEIbrahim.FiniteChartCreatesLinearMultiplicityAction → ⊥
+toe369FiniteChartDoesNotCreateLinearMultiplicityAction =
+  TOEIbrahim.finiteChartDoesNotCreateLinearMultiplicityAction
 
-unifierTriadicRuntimeSourceDoesNotCreateKernelCertification :
-  TriadicHost.RuntimeSourceImpliesKernelCertification → ⊥
-unifierTriadicRuntimeSourceDoesNotCreateKernelCertification =
-  TriadicHost.runtimeSourceDoesNotCreateKernelCertification
+toe369NinetySlicesDoNotCreatePermutationRepresentation :
+  TOEIbrahim.NinetySlicesCreatePermutationRepresentation → ⊥
+toe369NinetySlicesDoNotCreatePermutationRepresentation =
+  TOEIbrahim.ninetySlicesDoNotCreatePermutationRepresentation
 
-unifierTriadicFiniteABIImpliesRustImpossible :
-  TriadicABI.BoundedABIImpliesRustImplementation → ⊥
-unifierTriadicFiniteABIImpliesRustImpossible =
-  TriadicABI.abiDoesNotCreateRust
-
-------------------------------------------------------------------------
--- Implement-A-to-D reuse-only TOE facade.
-------------------------------------------------------------------------
-
-import DASHI.Unified.YMImplementAToDTOEMaxCutExact as YMAD
-
-unifierYMImplementAToDMaxCutReceipt :
-  YMAD.YMImplementAToDTOEMaxCutReceipt
-unifierYMImplementAToDMaxCutReceipt =
-  YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
-
-unifierYMImplementAToDZKPFrame : YMAD.YMImplementAToDZKPFrame
-unifierYMImplementAToDZKPFrame =
-  YMAD.canonicalYMImplementAToDZKPFrame
-
-unifierYMImplementAToDPublishedContinuumStillBlocked :
-  YMAD.publishedContinuumPromotion YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+toe369SchrodingerHZetaRecognitionStillOpen :
+  TOEHZeta.Trialectic369SchrodingerHZetaRecognitionMaxCutBoundary.actualHZetaRecognitionInhabitedHere
+    TOEHZeta.canonicalTrialectic369SchrodingerHZetaRecognitionMaxCutBoundary
   ≡ false
-unifierYMImplementAToDPublishedContinuumStillBlocked =
-  YMAD.publishedContinuumPromotionIsFalse
-    YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+toe369SchrodingerHZetaRecognitionStillOpen = refl
 
-unifierYMImplementAToDContinuumMassGapStillBlocked :
-  YMAD.continuumMassGapPromotion YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+toe369SchrodingerActionIntertwinerStillOpen :
+  TOEHZeta.Trialectic369SchrodingerHZetaRecognitionMaxCutBoundary.actualHZetaActionIntertwinerInhabitedHere
+    TOEHZeta.canonicalTrialectic369SchrodingerHZetaRecognitionMaxCutBoundary
   ≡ false
-unifierYMImplementAToDContinuumMassGapStillBlocked =
-  YMAD.continuumMassGapPromotionIsFalse
-    YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+toe369SchrodingerActionIntertwinerStillOpen = refl
 
-unifierYMImplementAToDClayStillBlocked :
-  YMAD.clayPromotion YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+toe369Ternary27PhaseReductionIsNotGlobalInversion :
+  TOETernary27.phasePreservingReductionEqualsFullGlobalInversion
+    TOETernary27.currentTernary27ReductionBoundary
   ≡ false
-unifierYMImplementAToDClayStillBlocked =
-  YMAD.clayPromotionIsFalse YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
-
-unifierYMImplementAToDScaleTransferNonPromotion :
-  BalabanR559TOE.ScaleTransferPromotion → ⊥
-unifierYMImplementAToDScaleTransferNonPromotion =
-  YMAD.scaleTransferPromotionEliminator
-    YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
-
-
-------------------------------------------------------------------------
--- Canonical Balaban RG / R559 same-owner and non-promotion projection.
--- No new physical theorem. The joint owner supplies these proofs.
--- Fleet 584/58 refers to the separate inventory, not a YM same-object proof.
-------------------------------------------------------------------------
-
-unifierBalabanDensityOwnerAgreement :
-  BalabanR559TOE.balabanDensityFlow
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-  ≡ BalabanR559TOE.r559DensityFlow
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-unifierBalabanDensityOwnerAgreement =
-  BalabanR559TOE.densityOwnerAgreement
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-unifierBalabanRegularEOwnerAgreement :
-  BalabanR559TOE.balabanRegularELocalization
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-  ≡ BalabanR559TOE.r559RegularELocalization
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-unifierBalabanRegularEOwnerAgreement =
-  BalabanR559TOE.regularEOwnerAgreement
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-unifierBalabanStressMarkedShellOwnerAgreement :
-  BalabanR559TOE.balabanStressMarkedShell
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-  ≡ BalabanR559TOE.r559StressMarkedShell
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-unifierBalabanStressMarkedShellOwnerAgreement =
-  BalabanR559TOE.stressMarkedShellOwnerAgreement
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-unifierBalabanStressHilbertOwnerAgreement :
-  BalabanR559TOE.balabanStressHilbertCompiler
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-  ≡ BalabanR559TOE.r559StressHilbertCompiler
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-unifierBalabanStressHilbertOwnerAgreement =
-  BalabanR559TOE.stressHilbertOwnerAgreement
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-unifierBalabanBlockSpinStillBlocked :
-  BalabanR559TOE.balabanBlockSpinTransfer
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false
-unifierBalabanBlockSpinStillBlocked =
-  BalabanR559TOE.balabanBlockSpinTransferIsFalse
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-unifierBalabanUniformKPStillBlocked :
-  BalabanR559TOE.balabanUniformKPAbsorption
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false
-unifierBalabanUniformKPStillBlocked =
-  BalabanR559TOE.balabanUniformKPAbsorptionIsFalse
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-unifierBalabanOSWightmanStillBlocked :
-  BalabanR559TOE.balabanOSWightmanConstruction
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false
-unifierBalabanOSWightmanStillBlocked =
-  BalabanR559TOE.balabanOSWightmanConstructionIsFalse
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-
-------------------------------------------------------------------------
--- Direct TOE conjunctive closure: the three missing physical producers
--- remain blocked together. No Boolean flag becomes proof authority.
--- Reuse R559 source-owned proofs without adding a model or an axiom.
-------------------------------------------------------------------------
-
-unifierBalabanPhysicalPromotionCut :
-  (BalabanR559TOE.balabanBlockSpinTransfer
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false)
-  × (BalabanR559TOE.balabanUniformKPAbsorption
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false)
-  × (BalabanR559TOE.balabanOSWightmanConstruction
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false)
-unifierBalabanPhysicalPromotionCut =
-  unifierBalabanBlockSpinStillBlocked ,
-  (unifierBalabanUniformKPStillBlocked ,
-   unifierBalabanOSWightmanStillBlocked)
-
-import DASHI.Unified.NavierStokesBM2TOEConvergenceExact as NSBM2TOE
-
-open NSBM2TOE public using
-  ( LiteralR571DissipationFold
-  ; ExactLiteralR571DissipationFold
-  ; literalR571M2BelowPhysicalDissipation
-  ; exactLiteralR571M2BelowPhysicalDissipation
-  )
-------------------------------------------------------------------------
--- Navier-Stokes B / R571 M2 producer-strategy facade.
-------------------------------------------------------------------------
-
-unifierNavierStokesBM2FiniteFoldClosed : Bool
-unifierNavierStokesBM2FiniteFoldClosed =
-  NSBM2TOE.cardinalityFreeFiniteFoldClosed
-
-unifierNavierStokesBM2SamplewisePaymentStillAnalytic :
-  NSBM2TOE.samplewisePhysicalPaymentStillAnalytic ≡ true
-unifierNavierStokesBM2SamplewisePaymentStillAnalytic =
-  NSBM2TOE.samplewisePhysicalPaymentStillAnalyticIsTrue
-
-unifierNavierStokesBM2GalerkinFoldStillAnalytic :
-  NSBM2TOE.literalFoldIntoGalerkinDissipationStillAnalytic ≡ true
-unifierNavierStokesBM2GalerkinFoldStillAnalytic =
-  NSBM2TOE.literalFoldIntoGalerkinDissipationStillAnalyticIsTrue
-
-unifierNavierStokesBM2OldPDFB1B2B3B4NotMandatory :
-  NSBM2TOE.oldPDFB1B2B3B4Mandatory ≡ false
-unifierNavierStokesBM2OldPDFB1B2B3B4NotMandatory =
-  NSBM2TOE.oldPDFB1B2B3B4MandatoryIsFalse
-
-unifierNavierStokesBM2OldPDFB7NotMandatory :
-  NSBM2TOE.oldPDFB7DirectCovarianceEqualityMandatory ≡ false
-unifierNavierStokesBM2OldPDFB7NotMandatory =
-  NSBM2TOE.oldPDFB7DirectCovarianceEqualityMandatoryIsFalse
-
-unifierNavierStokesBM2ClayPromotion : Bool
-unifierNavierStokesBM2ClayPromotion =
-  NSBM2TOE.modernNSClayPromotion
-
-unifierNavierStokesBM2ClayPromotionStillFalse :
-  unifierNavierStokesBM2ClayPromotion ≡ false
-unifierNavierStokesBM2ClayPromotionStillFalse =
-  NSBM2TOE.modernNSClayPromotionStillFalse
-
-unifierNavierStokesBM2Receipt :
-  NSBM2TOE.NavierStokesBM2TOEReceipt
-unifierNavierStokesBM2Receipt =
-  NSBM2TOE.canonicalNavierStokesBM2TOEReceipt
-
-unifierNavierStokesBM2ZKPFrame :
-  NSBM2TOE.NavierStokesBM2TOEZKPFrame
-unifierNavierStokesBM2ZKPFrame =
-  NSBM2TOE.canonicalNavierStokesBM2TOEZKPFrame
-
-------------------------------------------------------------------------
--- Canonical Navier-Stokes Clay frontier.
--- Unifier consumes theorem-bearing owners through the normalized facade.
-------------------------------------------------------------------------
-
-import DASHI.Unified.NavierStokesClayFrontierTOEConvergenceExact as NSClayTOE
-
-unifierNavierStokesClayPromotion : Bool
-unifierNavierStokesClayPromotion =
-  NSClayTOE.navierStokesABCDClayPromotion
-
-unifierNavierStokesClayPromotionStillFalse :
-  unifierNavierStokesClayPromotion ≡ false
-unifierNavierStokesClayPromotionStillFalse =
-  NSClayTOE.navierStokesABCDClayPromotionStillFalse
-
-unifierNavierStokesGeneralRegularityComplete : Bool
-unifierNavierStokesGeneralRegularityComplete =
-  NSClayTOE.generalNSGlobalRegularityComplete
-
-unifierNavierStokesGeneralRegularityStillOpen :
-  unifierNavierStokesGeneralRegularityComplete ≡ false
-unifierNavierStokesGeneralRegularityStillOpen =
-  NSClayTOE.generalNSGlobalRegularityStillOpen
-
-unifierNavierStokesCarrierToGeneralImplicationProved : Bool
-unifierNavierStokesCarrierToGeneralImplicationProved =
-  NSClayTOE.carrierToGeneralNSImplicationProved
-
-unifierNavierStokesCarrierToGeneralImplicationStillOpen :
-  unifierNavierStokesCarrierToGeneralImplicationProved ≡ false
-unifierNavierStokesCarrierToGeneralImplicationStillOpen =
-  NSClayTOE.carrierToGeneralNSImplicationStillOpen
-
-unifierNavierStokesAuthorityPromotionGuard : Bool
-unifierNavierStokesAuthorityPromotionGuard =
-  NSClayTOE.navierStokesPromotionGuard
-
-unifierNavierStokesAuthorityPromotionGuardStillFalse :
-  unifierNavierStokesAuthorityPromotionGuard ≡ false
-unifierNavierStokesAuthorityPromotionGuardStillFalse =
-  NSClayTOE.navierStokesPromotionGuardStillFalse
-
-unifierNavierStokesClayFrontierZKPFrame :
-  NSClayTOE.NavierStokesClayFrontierTOEZKPFrame
-unifierNavierStokesClayFrontierZKPFrame =
-  NSClayTOE.canonicalNavierStokesClayFrontierTOEZKPFrame
-
-unifierNavierStokesTerminalPromotionImpossible :
-  NSClayTOE.NSClayDistanceFinalPromotion → ⊥
-unifierNavierStokesTerminalPromotionImpossible =
-  NSClayTOE.terminalClayPromotionImpossible
-
-
-------------------------------------------------------------------------
--- Current periodic-B shared weighted wall from R736.
--- Proof ownership remains in R736 through the canonical NS Clay facade.
-------------------------------------------------------------------------
-
-unifierNavierStokesSharedWeightedExactlyTwoLeaves : Bool
-unifierNavierStokesSharedWeightedExactlyTwoLeaves =
-  NSClayTOE.currentSharedWeightedExactlyTwoLeaves
-
-unifierNavierStokesSharedWeightedExactlyTwoLeavesIsTrue :
-  unifierNavierStokesSharedWeightedExactlyTwoLeaves ≡ true
-unifierNavierStokesSharedWeightedExactlyTwoLeavesIsTrue =
-  NSClayTOE.currentSharedWeightedExactlyTwoLeavesIsTrue
-
-unifierNavierStokesSharedWeightedSameCarrier : Bool
-unifierNavierStokesSharedWeightedSameCarrier =
-  NSClayTOE.currentSharedWeightedSameCarrier
-
-unifierNavierStokesSharedWeightedSameCarrierIsTrue :
-  unifierNavierStokesSharedWeightedSameCarrier ≡ true
-unifierNavierStokesSharedWeightedSameCarrierIsTrue =
-  NSClayTOE.currentSharedWeightedSameCarrierIsTrue
-
-unifierNavierStokesSharedWeightedCarrierIsInputLaplacian : Bool
-unifierNavierStokesSharedWeightedCarrierIsInputLaplacian =
-  NSClayTOE.currentSharedWeightedCarrierIsInputLaplacian
-
-unifierNavierStokesWeightedPlusEndpointClosed : Bool
-unifierNavierStokesWeightedPlusEndpointClosed =
-  NSClayTOE.currentWeightedPlusEndpointClosed
-
-unifierNavierStokesWeightedPlusEndpointStillOpen :
-  unifierNavierStokesWeightedPlusEndpointClosed ≡ false
-unifierNavierStokesWeightedPlusEndpointStillOpen =
-  NSClayTOE.currentWeightedPlusEndpointStillOpen
-
-unifierNavierStokesAugmentedCriticalWeightedClosed : Bool
-unifierNavierStokesAugmentedCriticalWeightedClosed =
-  NSClayTOE.currentAugmentedCriticalWeightedClosed
-
-unifierNavierStokesAugmentedCriticalWeightedStillOpen :
-  unifierNavierStokesAugmentedCriticalWeightedClosed ≡ false
-unifierNavierStokesAugmentedCriticalWeightedStillOpen =
-  NSClayTOE.currentAugmentedCriticalWeightedStillOpen
-
-unifierNavierStokesSharedWeightedLeavesBuildBarrier : Bool
-unifierNavierStokesSharedWeightedLeavesBuildBarrier =
-  NSClayTOE.currentSharedWeightedLeavesBuildBarrier
-
-unifierNavierStokesSharedWeightedLeavesBuildBarrierIsTrue :
-  unifierNavierStokesSharedWeightedLeavesBuildBarrier ≡ true
-unifierNavierStokesSharedWeightedLeavesBuildBarrierIsTrue =
-  NSClayTOE.currentSharedWeightedLeavesBuildBarrierIsTrue
-
-unifierNavierStokesR726IndependentLeafRequired : Bool
-unifierNavierStokesR726IndependentLeafRequired =
-  NSClayTOE.legacyR726IndependentLeafRequired
-
-unifierNavierStokesR726IndependentLeafNotRequired :
-  unifierNavierStokesR726IndependentLeafRequired ≡ false
-unifierNavierStokesR726IndependentLeafNotRequired =
-  NSClayTOE.legacyR726IndependentLeafNotRequired
-
-unifierNavierStokesStrictMarginR406IndependentLeafRequired : Bool
-unifierNavierStokesStrictMarginR406IndependentLeafRequired =
-  NSClayTOE.legacyStrictMarginR406IndependentLeafRequired
-
-unifierNavierStokesStrictMarginR406IndependentLeafNotRequired :
-  unifierNavierStokesStrictMarginR406IndependentLeafRequired ≡ false
-unifierNavierStokesStrictMarginR406IndependentLeafNotRequired =
-  NSClayTOE.legacyStrictMarginR406IndependentLeafNotRequired
-
-unifierNavierStokesBarrierDependentQPlusMinusShortcutAdmissible : Bool
-unifierNavierStokesBarrierDependentQPlusMinusShortcutAdmissible =
-  NSClayTOE.barrierDependentQPlusMinusShortcutAdmissible
-
-unifierNavierStokesBarrierDependentQPlusMinusShortcutStillCircular :
-  unifierNavierStokesBarrierDependentQPlusMinusShortcutAdmissible ≡ false
-unifierNavierStokesBarrierDependentQPlusMinusShortcutStillCircular =
-  NSClayTOE.barrierDependentQPlusMinusShortcutStillCircular
-
-unifierNavierStokesSharedWeightedClayPromotion : Bool
-unifierNavierStokesSharedWeightedClayPromotion =
-  NSClayTOE.currentSharedWeightedClayPromotion
-
-unifierNavierStokesSharedWeightedClayPromotionStillFalse :
-  unifierNavierStokesSharedWeightedClayPromotion ≡ false
-unifierNavierStokesSharedWeightedClayPromotionStillFalse =
-  NSClayTOE.currentSharedWeightedClayPromotionStillFalse
-
-unifierNavierStokesContinuumBKMPassageConstructed : Bool
-unifierNavierStokesContinuumBKMPassageConstructed =
-  NSClayTOE.continuumBKMPassageConstructed
-
-unifierNavierStokesContinuumBKMPassageStillOpen :
-  unifierNavierStokesContinuumBKMPassageConstructed ≡ false
-unifierNavierStokesContinuumBKMPassageStillOpen =
-  NSClayTOE.continuumBKMPassageStillOpen
-
-unifierNavierStokesAllDataBridgeConstructed : Bool
-unifierNavierStokesAllDataBridgeConstructed =
-  NSClayTOE.allDataBridgeConstructed
-
-unifierNavierStokesAllDataBridgeStillOpen :
-  unifierNavierStokesAllDataBridgeConstructed ≡ false
-unifierNavierStokesAllDataBridgeStillOpen =
-  NSClayTOE.allDataBridgeStillOpen
-
-unifierNavierStokesSubmissionPacketReady : Bool
-unifierNavierStokesSubmissionPacketReady =
-  NSClayTOE.submissionPacketReady
-
-unifierNavierStokesSubmissionPacketStillNotReady :
-  unifierNavierStokesSubmissionPacketReady ≡ false
-unifierNavierStokesSubmissionPacketStillNotReady =
-  NSClayTOE.submissionPacketStillNotReady
-
-unifierNavierStokesClayEligible : Bool
-unifierNavierStokesClayEligible =
-  NSClayTOE.clayEligible
-
-unifierNavierStokesClayEligibilityStillFalse :
-  unifierNavierStokesClayEligible ≡ false
-unifierNavierStokesClayEligibilityStillFalse =
-  NSClayTOE.clayEligibilityStillFalse
-
-------------------------------------------------------------------------
--- Canonical Pareto / Ibrahim / fleet non-promotion gates.
--- These are direct aliases of proof owners. No new theorem authority.
-------------------------------------------------------------------------
-
-toeParetoSearchPriorityCannotPayProof :
-  ParetoSnowballTOE.SearchPriorityCreatesProof → ⊥
-toeParetoSearchPriorityCannotPayProof =
-  ParetoSnowballTOE.searchPriorityDoesNotCreateProof
-
-toeIbrahimDegree729CannotPayMonsterRecognition :
-  ParetoSnowballTOE.Degree729CreatesMonsterHZetaRecognition → ⊥
-toeIbrahimDegree729CannotPayMonsterRecognition =
-  ParetoSnowballTOE.degree729DoesNotCreateMonsterHZetaRecognition
-
-toeFleetSpectralRankCannotPayAuthority :
-  FleetGapTOE.VectorSpectralAuthorityPromotion → ⊥
-toeFleetSpectralRankCannotPayAuthority =
-  FleetGapTOE.fleetVectorSpectralAuthorityPromotionImpossible
-
-toeFleetNumericABIRequiresIndependentEvidence :
-  FleetGapTOE.SpectralNumericABIPromotion → ⊥
-toeFleetNumericABIRequiresIndependentEvidence =
-  FleetGapTOE.fleetSpectralNumericABIPromotionImpossible
-
-------------------------------------------------------------------------
--- Canonical brain/connectome/fMRI quotient boundary.
--- The observation owners retain authority. This facade adds no empirical proof.
-------------------------------------------------------------------------
-
-toeBrainFirstMissing : BrainObservation.BrainObservationFirstMissing
-toeBrainFirstMissing = BrainFMRI.brainFirstMissing
-
-toeBrainBidirectionalFirstMissing :
-  BrainBidirectional.BidirectionalObservationFirstMissing
-toeBrainBidirectionalFirstMissing = BrainFMRI.bidirectionalFirstMissing
-
-toeBrainObservationNonPromotion :
-  BrainBidirectional.NonPromotionBoundary
-toeBrainObservationNonPromotion = BrainFMRI.brainNonPromotionBoundary
-
-toeBrainJPromotionBlocked :
-  BrainSpine.objectExternalJPromotion BrainFMRI.brainFMRIObject ≡ false
-toeBrainJPromotionBlocked = BrainFMRI.brainFMRIJPromotionBlocked
-
-------------------------------------------------------------------------
--- Live Gate-4 frontier and Fleet target selection.
-------------------------------------------------------------------------
-
-unifierCurrentGate4FrontierLedgerLevel : ProofLevel
-unifierCurrentGate4FrontierLedgerLevel =
-  FleetHyperTOE.currentGate4FrontierLedgerLevel
-
-unifierCurrentGate4ClusteringToTransferGapLevel : ProofLevel
-unifierCurrentGate4ClusteringToTransferGapLevel =
-  FleetHyperTOE.currentGate4ClusteringToTransferGapLevel
-
-unifierFleetFormalGapTargetSelected : Bool
-unifierFleetFormalGapTargetSelected =
-  FleetHyperTOE.fleetFormalGapTargetSelected
-
-unifierHistoricalGate4CountSelectedAsFleetTarget : Bool
-unifierHistoricalGate4CountSelectedAsFleetTarget =
-  FleetHyperTOE.historicalGate4CountSelectedAsFleetTarget
-
-unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
-  FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
-unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
-  FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
-
-
-------------------------------------------------------------------------
--- Fermentation control observation and non-promotion surface.
-------------------------------------------------------------------------
-
-unifierFermentationControlBoundary :
-  CrossDomainBoundary.FermentationControlBoundary
-unifierFermentationControlBoundary =
-  CrossDomainBoundary.canonicalFermentationControlBoundary
-
-unifierFermentationControlZKPFrame :
-  CrossDomainBoundary.FermentationControlZKPFrame
-unifierFermentationControlZKPFrame =
-  CrossDomainBoundary.canonicalFermentationControlZKPFrame
-
-unifierClockElapsedDoesNotCreateFeedReadiness :
-  CrossDomainBoundary.ClockElapsedCreatesFeedReadiness → ⊥
-unifierClockElapsedDoesNotCreateFeedReadiness =
-  CrossDomainBoundary.clockElapsedDoesNotCreateFeedReadiness
-
-unifierVisibleVolumeDoesNotCreateSubstrateDepletion :
-  CrossDomainBoundary.VisibleVolumeCreatesSubstrateDepletion → ⊥
-unifierVisibleVolumeDoesNotCreateSubstrateDepletion =
-  CrossDomainBoundary.visibleVolumeDoesNotCreateSubstrateDepletion
-
-unifierPHDoesNotCreateTotalTitratableAcidity :
-  CrossDomainBoundary.PHCreatesTotalTitratableAcidity → ⊥
-unifierPHDoesNotCreateTotalTitratableAcidity =
-  CrossDomainBoundary.pHDoesNotCreateTotalTitratableAcidity
-
-unifierActivationProtocolDoesNotCreateMaintenancePolicy :
-  CrossDomainBoundary.ActivationProtocolCreatesMaintenancePolicy → ⊥
-unifierActivationProtocolDoesNotCreateMaintenancePolicy =
-  CrossDomainBoundary.activationProtocolDoesNotCreateMaintenancePolicy
-
-unifierHighHydrationPreferenceDoesNotCreateMachineAdmissibility :
-  CrossDomainBoundary.HighHydrationPreferenceCreatesMachineAdmissibility → ⊥
-unifierHighHydrationPreferenceDoesNotCreateMachineAdmissibility =
-  CrossDomainBoundary.highHydrationPreferenceDoesNotCreateMachineAdmissibility
-
-unifierSingleTrajectoryDoesNotCreateOptimalFeedPolicy :
-  CrossDomainBoundary.SingleTrajectoryCreatesOptimalFeedPolicy → ⊥
-unifierSingleTrajectoryDoesNotCreateOptimalFeedPolicy =
-  CrossDomainBoundary.singleTrajectoryDoesNotCreateOptimalFeedPolicy
+toe369Ternary27PhaseReductionIsNotGlobalInversion =
+  TOETernary27.phasePreservingReductionEqualsFullGlobalInversionIsFalse
+
+toe369Ternary27ReductionIsNotMonster42SameObject :
+  TOETernary27.reducedFifteenIsMonster42dSameObject
+    TOETernary27.currentTernary27ReductionBoundary
+  ≡ false
+toe369Ternary27ReductionIsNotMonster42SameObject =
+  TOETernary27.reducedFifteenIsMonster42dSameObjectIsFalse

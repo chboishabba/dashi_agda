@@ -30,8 +30,9 @@ import DASHI.Unified.FormalObjectParents as FormalObjectParents
 import DASHI.Unified.InvariantSpine as Spine
 import DASHI.Unified.PNFHyperfabric as PNFHyperfabric
 import DASHI.Unified.Physics as Physics
-import DASHI.Unified.YMBlockDMaxCutTOEExact as YMBlockD
-import DASHI.Unified.YMCMP119ResidualWeldTOEExact as YMResidualWeld
+import DASHI.Unified.TOE369CoarseFineIntertwinerMaxCutExact as TOE369MaxCut
+import DASHI.Unified.TOE369CoarseFineIntertwinerMaxCutValidation as TOE369MaxCutValidation
+import DASHI.Unified.TOE369RootUnifierConvergenceValidation as TOE369RootUnifierValidation
 import DASHI.Physics.Foundations.Round5CompleteBoundary as Round5
 import DASHI.Physics.Foundations.Round5FullBoundary as Round5Full
 canonicalUnifiedObjects : List Spine.UnifiedObjectInvariant

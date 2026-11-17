@@ -38,41 +38,8 @@ on:
       - 'DASHI/Core/SymmetryResolvedFibreExact.agda'
       - 'DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
-      - 'DASHI/Unified/BalabanRGTOERegression.agda'
-      - 'DASHI/Physics/YangMills/BalabanCMP116CanonicalSelectedBSourceRound435Exact.agda'
-      - 'DASHI/Physics/YangMills/YangMillsClayPinnedCMP119CanonicalASourceRound436Exact.agda'
-      - 'DASHI/Physics/YangMills/YangMillsClayGoal1CanonicalCSourceRound437Exact.agda'
-      - 'DASHI/Physics/YangMills/BalabanCMP116CanonicalLiteralRateSourceRound438Exact.agda'
-      - 'DASHI/Physics/YangMills/YangMillsClayGoal1SameHNontrivialityRound439Exact.agda'
-      - 'DASHI/Physics/YangMills/BalabanCMP116VariableDomainPreferredR415Round440Exact.agda'
-      - 'DASHI/Physics/YangMills/BalabanCMP116R429RootedTraceCountingRound441Exact.agda'
-      - 'DASHI/Physics/YangMills/BalabanCMP116R429TraceEntropyBudgetRound442Exact.agda'
-      - 'DASHI/Physics/YangMills/YangMillsCMP119WilsonGibbsHaarActionRound443Exact.agda'
-      - 'DASHI/Physics/YangMills/YangMillsCMP119PeterWeylWilsonSquareRound444Exact.agda'
-      - 'DASHI/Unified/YMGoal1TOECompatibilityExact.agda'
-      - 'DASHI/Unified/SensibLawGovernanceTOEExact.agda'
-      - 'DASHI/Unified/SensibLawGovernanceTOEValidation.agda'
-      - 'DASHI/Interop/SensibLawSemanticPromotionPolicy.agda'
-      - 'DASHI/Law/SensibLawAgdaFirstLegalRuntimeEverything.agda'
-      - 'DASHI/Law/SensibLawITIRParityEverything.agda'
-      - 'DASHI/Governance/DomainPermeabilityAuthorityTransport.agda'
-      - 'DASHI/Core/AuthorityNonPromotionCore.agda'
-      - 'DASHI/Promotion/AuthorityBoundaryCore.agda'
-      - 'DASHI/Core/SnowballAttributionProvenanceInvariantExact.agda'
-      - 'DASHI/Interop/SensibLawSnowballAttributionLineageAdapterExact.agda'
-      - 'DASHI/Law/SensibLawParetoProofDirectedCorpusSearchEverything.agda'
-      - 'Docs/diagrams/SensibLawGovernanceTOE.puml'
-      - 'DASHI/Unified/YMGoal1TOECompatibilityValidation.agda'
-      - 'DASHI/Unified/BalabanRGTOEMaxCutValidation.agda'
-      - 'DASHI/Unified/Physics.agda'
-      - 'DASHI/Unifier.agda'
-      - 'DASHI/EverythingTOESymmetryResolved369.agda'
-      - 'DASHI/Physics/YangMills/YangMillsClayGoal1MaximumCutRound485Exact.agda'
-      - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda'
-      - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda'
-      - 'DASHI/Unified/Physics.agda'
-      - 'DASHI/Unifier.agda'
-      - 'Docs/diagrams/ym_toe_r559_convergence.puml'
+      - 'DASHI/Reasoning/Trialectic369Selected3BFullGradeActionMaxCutExact.agda'
+      - 'DASHI/Reasoning/Trialectic369Selected3BProjectedActionMaxCutExact.agda'
       - 'DASHI/Physics/Closure/Everything.agda'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
 
@@ -262,25 +229,9 @@ jobs:
             DASHI/Unified/Fleet58ManifestAcquisitionExact.agda
             DASHI/Core/SymmetryResolvedFibreExact.agda
             DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda
-            DASHI/Unified/BalabanRGTOERegression.agda
-            DASHI/Unified/YMGoal1TOECompatibilityExact.agda
-            DASHI/Unified/YMGoal1TOECompatibilityValidation.agda
-            DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
-            DASHI/Unified/SensibLawGovernanceTOEExact.agda
-            DASHI/Unified/SensibLawGovernanceTOEValidation.agda
-            DASHI/Interop/SensibLawSemanticPromotionPolicy.agda
-            DASHI/Law/SensibLawAgdaFirstLegalRuntimeEverything.agda
-            DASHI/Law/SensibLawITIRParityEverything.agda
-            DASHI/Governance/DomainPermeabilityAuthorityTransport.agda
-            DASHI/Core/AuthorityNonPromotionCore.agda
-            DASHI/Promotion/AuthorityBoundaryCore.agda
-            DASHI/Core/SnowballAttributionProvenanceInvariantExact.agda
-            DASHI/Interop/SensibLawSnowballAttributionLineageAdapterExact.agda
-            DASHI/Law/SensibLawParetoProofDirectedCorpusSearchEverything.agda
-            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
-            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
-            DASHI/Unified/Physics.agda
-            DASHI/Unifier.agda
+            DASHI/EverythingTOESymmetryResolved369.agda
+            DASHI/Reasoning/Trialectic369Selected3BFullGradeActionMaxCutExact.agda
+            DASHI/Reasoning/Trialectic369Selected3BProjectedActionMaxCutExact.agda
           )
           for source in "${sources[@]}"; do
             if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|NON_TERMINATING|TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
