@@ -232,3 +232,47 @@ The all-degree mathematical proof uses finite geometric character
 identities; sampled symbolic runs do not establish Agda kernel
 acceptance. No pinned Agda/Nix toolchain was available. The original
 typed YM.REAL/Bishop/SUN/Haar/Wilson source gates remain OPEN.
+
+
+## 17 November later max-cut: dyadic pairing, all-L partition, cylinder discriminator
+
+The new proof cut is documented in
+Docs/physics/YMClayDyadicPairingAllCutoffCylinderMaxCut20261117.md.
+
+The all-d primitive Fourier cancellation can avoid trigonometric
+angles and polynomial inversion entirely: for N=2^s, nontrivial k=2^t u
+with u odd, pair j and j+2^(s-t-1). Their phases are negatives in
+Q[z]/(z^(N/2)+1). The new safe-source finite list theorem proves
+opposite-phase block cancellation structurally; the companion
+exact checker verified 698027 terms through N=1024.
+The remaining source gap is the canonical Fin N reindexing and actual
+ordered Bishop dyadic root/weight producer.
+
+The original periodic positive-six-plane Wilson action has mathematically
+proved cubic moments at EVERY cutoff:
+- L=1: (9/2, 187/8, 6445/48), with commutator geometry.
+- L>=2: (P, P^2+P/4, P^3+3P^2/4), P=6L^4, from the
+  universal no-three-plaquette mod-2 cycle argument. At L=2 the
+  only two-edge overlap graph is C4 and triangle-free.
+
+For every positive integer L and rational beta>=0, an exact
+strict-positive partition enclosure is executable:
+max(4^(-ceil(12 beta L^4)),T3-integral)
+<= Z_L(beta) <= min(1,T2-integral).
+This is a finite mathematical Wilson model theorem, not yet the
+original Agda/Bishop SUN integral.
+
+**Important correction:** A naive original-link selection L2 -> L1
+at fixed beta is NOT a valid consistency theorem. For the selected
+origin-link commutator trace f, the first normalized Gibbs derivative
+is 25/48 in the one-site model and 0 in the selected two-site
+projection; the exact negative-control regression checks all 96
+two-site plaquettes. The positive original cylinder research target
+must specify a gauge-covariant RG/blocking map and its induced
+effective action (plus measure/disintegration laws), not demand
+fixed-beta equality for arbitrary link deletion.
+
+All five formal/kernel gates remain open where they need the genuine
+primitive Bishop dyadic cubature, its quantitative Cauchy witness,
+the full original SUN matrix carrier and an actual RG transfer.
+Do NOT label mathematical checked identities as Agda acceptance.
