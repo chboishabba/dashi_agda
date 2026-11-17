@@ -233,6 +233,85 @@ currentGate4FrontierDoesNotSelfPromote =
   Proof.conditionalDoesNotSelfPromote
 
 
+------------------------------------------------------------------------
+-- Current Gate-4 frontier and Fleet target-selection boundary.
+------------------------------------------------------------------------
+
+historicalGate4GapCount : Nat
+historicalGate4GapCount =
+  YM.gate4UnresolvedCount YM.canonicalBalabanR559TOEMaxCutReceipt
+
+historicalGate4GapCountIs58 : historicalGate4GapCount ≡ 58
+historicalGate4GapCountIs58 =
+  YM.gate4UnresolvedCountIs58 YM.canonicalBalabanR559TOEMaxCutReceipt
+
+fleetFormalGapCountEqualsHistoricalGate4Count :
+  fleetFormalGaps ≡ historicalGate4GapCount
+fleetFormalGapCountEqualsHistoricalGate4Count =
+  trans fleetFormalGapsAre58 (sym historicalGate4GapCountIs58)
+
+fleetGate4EqualCardinalityBoundary :
+  EqualCardinality.EqualCardinalityBoundary
+fleetGate4EqualCardinalityBoundary =
+  EqualCardinality.canonicalEqualCardinalityBoundary
+
+fleetGate4EqualCardinalitySelectsCanonicalMap : Bool
+fleetGate4EqualCardinalitySelectsCanonicalMap =
+  EqualCardinality.equalCardinalitySelectsCanonicalMap
+    fleetGate4EqualCardinalityBoundary
+
+fleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
+  fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
+fleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
+  EqualCardinality.equalCardinalitySelectsCanonicalMapIsFalse
+    fleetGate4EqualCardinalityBoundary
+
+fleetFormalGapTargetSelected : Bool
+fleetFormalGapTargetSelected = true
+
+fleetFormalGapTargetSelectedIsTrue :
+  fleetFormalGapTargetSelected ≡ true
+fleetFormalGapTargetSelectedIsTrue = refl
+
+historicalGate4CountSelectedAsFleetTarget : Bool
+historicalGate4CountSelectedAsFleetTarget = false
+
+historicalGate4CountSelectedAsFleetTargetIsFalse :
+  historicalGate4CountSelectedAsFleetTarget ≡ false
+historicalGate4CountSelectedAsFleetTargetIsFalse = refl
+
+BalabanContinuumPromotion : Set
+BalabanContinuumPromotion =
+  Balaban.BalabanContinuumLimitPromotion
+
+DepthContinuumPromotion : Set
+DepthContinuumPromotion =
+  Balaban.DepthContinuumLimitPromotion
+
+toeBalabanContinuumPromotionImpossible :
+  BalabanContinuumPromotion → ⊥
+toeBalabanContinuumPromotionImpossible =
+  Balaban.balabanContinuumLimitPromotionImpossible
+
+toeDepthContinuumPromotionImpossible :
+  DepthContinuumPromotion → ⊥
+toeDepthContinuumPromotionImpossible =
+  Balaban.depthContinuumLimitPromotionImpossible
+
+currentGate4FrontierLedgerLevel : Proof.ProofLevel
+currentGate4FrontierLedgerLevel =
+  Gate4Current.currentFrontierLedgerTypecheckLevel
+
+currentGate4ClusteringToTransferGapLevel : Proof.ProofLevel
+currentGate4ClusteringToTransferGapLevel =
+  Gate4Current.clusteringToTransferGapReductionTypecheckLevel
+
+currentGate4FrontierDoesNotSelfPromote :
+  Proof.promotable currentGate4FrontierLedgerLevel ≡ false
+currentGate4FrontierDoesNotSelfPromote =
+  Proof.conditionalDoesNotSelfPromote
+
+
 ymGate4FormalGaps : Nat
 ymGate4FormalGaps =
   YM.gate4UnresolvedObligationCount
@@ -406,10 +485,8 @@ record R559IbrahimFleetHyperfabricTOEReceipt : Set₁ where
     equalCardinalitySelectsCanonicalMap : Bool
     equalCardinalitySelectsCanonicalMapIsFalse :
       equalCardinalitySelectsCanonicalMap ≡ false
-    balabanContinuumPromotionBlocked :
-      BalabanContinuumPromotion → ⊥
-    depthContinuumPromotionBlocked :
-      DepthContinuumPromotion → ⊥
+    balabanContinuumPromotionBlocked : BalabanContinuumPromotion → ⊥
+    depthContinuumPromotionBlocked : DepthContinuumPromotion → ⊥
     currentGate4Frontier : Proof.ProofLevel
     currentGate4ClusteringToTransferGap : Proof.ProofLevel
     currentGate4FrontierSelfPromotion :
@@ -443,23 +520,15 @@ canonicalR559IbrahimFleetHyperfabricTOEReceipt = record
   ; historicalGate4CountIs58 = historicalGate4GapCountIs58
   ; fleetTargetSelected = fleetFormalGapTargetSelected
   ; fleetTargetSelectedIsTrue = fleetFormalGapTargetSelectedIsTrue
-  ; historicalGate4SelectedAsFleetTarget =
-      historicalGate4CountSelectedAsFleetTarget
-  ; historicalGate4SelectedAsFleetTargetIsFalse =
-      historicalGate4CountSelectedAsFleetTargetIsFalse
-  ; equalCardinalitySelectsCanonicalMap =
-      fleetGate4EqualCardinalitySelectsCanonicalMap
-  ; equalCardinalitySelectsCanonicalMapIsFalse =
-      fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
-  ; balabanContinuumPromotionBlocked =
-      toeBalabanContinuumPromotionImpossible
-  ; depthContinuumPromotionBlocked =
-      toeDepthContinuumPromotionImpossible
+  ; historicalGate4SelectedAsFleetTarget = historicalGate4CountSelectedAsFleetTarget
+  ; historicalGate4SelectedAsFleetTargetIsFalse = historicalGate4CountSelectedAsFleetTargetIsFalse
+  ; equalCardinalitySelectsCanonicalMap = fleetGate4EqualCardinalitySelectsCanonicalMap
+  ; equalCardinalitySelectsCanonicalMapIsFalse = fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+  ; balabanContinuumPromotionBlocked = toeBalabanContinuumPromotionImpossible
+  ; depthContinuumPromotionBlocked = toeDepthContinuumPromotionImpossible
   ; currentGate4Frontier = currentGate4FrontierLedgerLevel
-  ; currentGate4ClusteringToTransferGap =
-      currentGate4ClusteringToTransferGapLevel
-  ; currentGate4FrontierSelfPromotion =
-      currentGate4FrontierDoesNotSelfPromote
+  ; currentGate4ClusteringToTransferGap = currentGate4ClusteringToTransferGapLevel
+  ; currentGate4FrontierSelfPromotion = currentGate4FrontierDoesNotSelfPromote
   ; scaleTransferBlocked = toeScaleTransferPromotionImpossible
   ; fleetCountDoesNotDischarge = fleetExternalCountDoesNotCreateFormalDischarge
   ; dischargedFibreRetargetBlocked = fleetDischargedFibresStayOutOfTarget

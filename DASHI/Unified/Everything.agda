@@ -507,7 +507,7 @@ unifiedFleetCountDoesNotCreateNamedManifest =
   FleetGapTOE.fleetCountDoesNotCreateNamedManifest
 
 ------------------------------------------------------------------------
--- Pareto / snowball / Ibrahim and ternary-27 non-promotion.
+-- Direct Pareto / snowball / Ibrahim non-promotion exports.
 ------------------------------------------------------------------------
 
 unifiedBalabanScaleTransferPromotionImpossible :
@@ -525,16 +525,6 @@ unifiedIbrahimProducerSourceDoesNotCreateRunReceipt :
 unifiedIbrahimProducerSourceDoesNotCreateRunReceipt =
   ParetoSnowballTOE.producerSourceDoesNotCreateRunReceipt
 
-unifiedIbrahimDegree729DoesNotCreateMonsterHZetaRecognition :
-  ParetoSnowballTOE.Degree729CreatesMonsterHZetaRecognition → ⊥
-unifiedIbrahimDegree729DoesNotCreateMonsterHZetaRecognition =
-  ParetoSnowballTOE.degree729DoesNotCreateMonsterHZetaRecognition
-
-unifiedIbrahimPaperOracleDoesNotIdentifyHistoricalDump :
-  ParetoSnowballTOE.PaperOracleIdentifiesDump → ⊥
-unifiedIbrahimPaperOracleDoesNotIdentifyHistoricalDump =
-  ParetoSnowballTOE.paperOracleDoesNotIdentifyHistoricalDump
-
 unifiedIbrahimRoutePreferenceDoesNotCreateExecutionReceipt :
   ParetoSnowballTOE.RoutePreferenceCreatesExecutionReceipt → ⊥
 unifiedIbrahimRoutePreferenceDoesNotCreateExecutionReceipt =
@@ -544,25 +534,4 @@ unifiedIbrahimMergedLeanSourceDoesNotCreateKernelReceipt :
   ParetoSnowballTOE.MergedLeanSourceCreatesKernelReceipt → ⊥
 unifiedIbrahimMergedLeanSourceDoesNotCreateKernelReceipt =
   ParetoSnowballTOE.mergedLeanSourceDoesNotCreateKernelReceipt
-
-unifiedIbrahimOEISDoesNotCreateMultiplicityAction :
-  ParetoSnowballTOE.NinetyOEISEqualityCreatesMultiplicityAction → ⊥
-unifiedIbrahimOEISDoesNotCreateMultiplicityAction =
-  ParetoSnowballTOE.oeisDoesNotCreateMultiplicityAction
-
-unifiedIbrahimFiniteIrreducibilityDoesNotCreateMonsterHZetaRecognition :
-  ParetoSnowballTOE.FiniteIrreducibilityCreatesMonsterHZetaRecognition → ⊥
-unifiedIbrahimFiniteIrreducibilityDoesNotCreateMonsterHZetaRecognition =
-  ParetoSnowballTOE.finiteIrreducibilityDoesNotCreateMonsterHZetaRecognition
-
-unifiedIbrahimCurrentQidDoesNotIdentifyHistoricalTitle :
-  ParetoSnowballTOE.CurrentQidIdentifiesHistoricalTitle → ⊥
-unifiedIbrahimCurrentQidDoesNotIdentifyHistoricalTitle =
-  ParetoSnowballTOE.currentQidDoesNotIdentifyHistoricalTitle
-
-unified369Ternary27MonsterRepresentationNotPromoted =
-  MaxCut369.toe27MonsterRepresentationNotPromoted
-
-unified369Ternary27MonsterEmbeddingNotPromoted =
-  MaxCut369.toe27MonsterEmbeddingNotPromoted
 
