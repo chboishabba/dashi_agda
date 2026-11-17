@@ -248,3 +248,25 @@ The local uploaded comparator plus tests were executed with `python -m unittest 
 **Original empirical gate still OPEN:** no authenticated independent May/29–30 Oct 2026 native CDO snapshot bytes or complete original Lloyd case manifest have entered the analysis. This advance makes the statistic calculable when a valid source pair arrives; it does NOT report the actual Sydney/Charleville station-month deltas, 571 historical removals, 44 temperature stretches, 1,337 rainfall stretches, or national trend consequences.
 
 **Roadmap priority:** obtain native May/Oct data and release-specific coverage receipts; compute B3 event join; then publish side by side (1) observed available-case publication-mean shifts with n_before/n_after, (2) common-support value changes, (3) composition effects, (4) unknown fixed-calendar restoration effects, and (5) only for complete matched years, station trends. For national ACORN-SAT, require same algorithm and original daily inputs; do not conflate its October v2.7 update (20 changed adjustment locations) with a raw-CDO correction counterfactual.
+
+
+## 17 November 2026 — B4 sharp conditional interval for incomplete raw months
+
+**Target:** user wants concrete consequence quantification of alleged missing/repeated rows, but original May/Oct 2026 CDO releases have not been acquired. Existing B4 has exact available-case means and shared-support/composition decomposition; the original 24 Oct #1251 bound is an *illustrative unconditional count × max-error* toy and is not an actual station/month interval.
+
+**New bounded original-input consumer:** extend existing `scripts/bom_revision_impact_weld.py` with `conditional_month_delta_bounds` for `tmax`/`tmin` only. The caller must explicitly provide BOTH `--temperature-min L` and `--temperature-max U`, in °C, with `L ≤ U`. **No physical/instrument range is provided or inferred by the software.** For each day, a numeric one-day before/after observation is fixed, and any missing, nonnumeric, or multi-day accumulated observation is treated as unknown independently within [L,U]. The fixed-calendar mean difference is therefore bounded exactly by:
+
+```
+lower = (sum_d [ (after_d if known else L) - (before_d if known else U) ])/N
+upper = (sum_d [ (after_d if known else U) - (before_d if known else L) ])/N
+```
+
+where `N` is the actual number of calendar days (28/29/30/31). This is a **sharp interval under the declared independent-unknown-box assumption** and the unchanged known measurements; it is **not a statistical confidence interval**, a claimed climatologically plausible bound, restored original observations, or an ACORN-SAT change. The script rejects a known observed daily reading outside the declared assumed bounds. When the daily data are all present, the interval collapses to the already existing exact `full_month_delta_exact`. When no bound is supplied, **no bounded correction is emitted**; full fixed-calendar delta remains null if any observation is missing.
+
+**Witness:** a constructed 28-day February with 27 readings of 10 °C and one of 20 °C, then deletion of the 20 °C reading, produces an observed available-case mean change `-5/14 °C`; the *unknown fixed-calendar change* under **explicit hypothetical [0,40] °C** lies in `[-5/7, +5/7] °C`. The zero change corresponding to a true deleted observation of 20 °C is included; neither sign can be deduced. For two entirely unobserved series with hypothetical [-10,40] °C, the interval is [-50,+50] °C. This intentionally exposes the lack of empirical constraint rather than inventing it.
+
+**Acceptance:** five new tests were authored in `tests/test_bom_revision_impact_weld.py`: removed-day lower/upper, complete-month collapse, observed-out-of-range fail, invalid-range/rainfall rejection, and all-unknown interval. The same five mathematical cases were run with a locally reproduced exact helper implementation: **5/5 PASS**. The full GitHub-file integration suite and CI/Agda kernel have **not** been executed in this round, and these helper-level checks must not be reported as 42/42 repository tests passing. Previous repository baseline 37/37 is from the prior B4 iteration. Future acceptance requires running the updated exact GitHub source plus existing 37 tests together.
+
+**High-alpha next data acquisition:** original May/October 2026 release-identifiable station product/year CSVs, independent archive coverage receipts, Patrick Lloyd's full 44/1,337 candidate manifests, and paper/independently validated source observations. Only then can B4 publish **actual station-month available-case shifts**, with conditional missing-data bounds transparently separated from measured source-revision effects. A current CDO value or a national gridded climate dataset does not replace those historical release versions.
+
+**Original ownership:** pre-existing original #1251 mean/trend bounds remain credited; #1525 imports the already existing `bom_panel_trend_sensitivity.analyze`. No ESD write, no new theorem-owned duplicate, no Agda pass claimed.
