@@ -19,6 +19,6 @@ assert sp.expand(cos4+1).subs(c,s).factor()==-(2*s*s-1)*(2*s*s+1)
 # On s=c and s^2+c^2=1, s^2=1/2.
 assert sp.expand((cos4+1).subs(c,s).subs(s*s,sp.Rational(1,2)))==0
 # Prove a stronger polynomial identity before quotient reduction:
-assert sp.factor(cos4+1 - (1-(s*s+c*c)**2))==0
+assert sp.expand(cos4 - ((s*s+c*c)**2-8*s*s*c*c))==0
 # Pi Machin arithmetic is an independent source: zeta above concerns trig only.
 print("BISHOP_MACHIN_FOUR_ANGLE_ALGEBRA_PASS=6")
