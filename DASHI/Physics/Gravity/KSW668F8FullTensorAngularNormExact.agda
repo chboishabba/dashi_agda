@@ -93,9 +93,9 @@ originalAverageLegendreExpansion :
 originalAverageLegendreExpansion mu = solve []
 
 -- Integral in dmu over [-1,1], omitting the global 2pi factor:
--- 1/4*(2/9+6*2/3+2)=8/5.
+-- 1/4*(2/5+6*2/3+2)=8/5.
 originalFullTTAzimuthIntegratedNorm :
-  quarter * (((+ 2) / 9) + ((+ 6) / 1) * ((+ 2) / 3)
+  quarter * (((+ 2) / 5) + ((+ 6) / 1) * ((+ 2) / 3)
       + ((+ 2) / 1))
     ≡ (+ 8) / 5
 originalFullTTAzimuthIntegratedNorm = solve []
