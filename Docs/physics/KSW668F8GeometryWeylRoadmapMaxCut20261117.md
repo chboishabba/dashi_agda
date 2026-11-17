@@ -742,3 +742,34 @@ for `-1<v<0,0<dy<=beta`, with the original source target, before adding radial f
 G1 original finite source, origin-augmented radial lift and restricted geometry-to-Weyl weld retained; full tensor-gauge discrete compatibility OPEN. **G2** all-v original moving-Israel normal-source cap locally closed algebraically, but full radial+normal energy OPEN. **G3** normal+warp **mesh-independent** semidiscrete energy precursor established under the solver's mesh/geometry domain; fully coupled moving-radial FV energy, SSPRK3 time-discrete CFL and outer closure OPEN. **G4** moving high-Sobolev both-Weyl trace OPEN. **G5** independent dr/dy/dt convergence and outside-cone control OPEN. **G6** Einstein-matter/retarded physical FIO/calibrated detector OPEN.
 
 **Next max-cut:** include radial first/outer-cell face energy, original `U_T=(1+v)P/2+(1-v)M/2`, moving (v,\Delta_rU\,\Delta_r(P-M)) shift and radial+normal cross terms in a single weight norm. The origin-augmented V0 carrier and actual 3/7/11 shell weights must remain attached. Only then attempt an energy-driven SSPRK3 CFL and higher-Weyl estimates.
+
+
+### XXXIX second high-alpha cut — normal-gradient constraint is SAT-driven, not bulk-generated
+
+Reusing the SAME original `stage(U,P,M,...normal_order=3)` (not an assumed continuum wave system), define `W=(P-M)/2` and the discrete geometric compatibility defect `Q=W-D_y U`. The original stage equations are
+```
+Udot=(1+v)P/2 +(1-v)M/2,
+Pdot=(1+v)D_y P + F +SAT_P,
+Mdot=(v-1)D_y M + F +SAT_M,
+F=L_r U-3(P-M)/(2z).
+```
+Because `v=v(T)` is independent of the normal grid coordinate and the exact **same** centered/endpoint SBP2 `D_y` is used for both characteristic derivatives, `D_y Udot=[(1+v)D_y P+(1-v)D_y M]/2`. The common bulk force `F` cancels from `(Pdot-Mdot)/2`. Therefore
+```
+Qdot=(SAT_P-SAT_M)/2,
+interior: Qdot=0,
+lower boundary: Qdot=-(1-v)(target-M_0)/dy,
+upper boundary: Qdot=-(1+v)P_N/dy.
+```
+This is an **exact pointwise semidiscrete constraint propagation theorem** in original stage algebra. It implies that if `Q=0` initially on interior nodes and the same operator is used throughout the stage, the bulk evolution does not independently generate new `Q` there. It does **not** mean that the SAT boundaries enforce `Q=0`, and it is not a fully discrete nonlinear/time-dependent propagation or Weyl tensor gauge theorem. A nontrivial source can generate boundary constraint residuals which must be controlled by the coupled energy and trace estimate.
+
+The XXXVIII original radial shift term admits the exact decomposition
+```
+v A_face Δ_r U Δ_r(P-M)
+ =2v A_face Δ_r U D_y(Δ_r U)
+  +2v A_face Δ_r U Δ_r Q.
+```
+Here `D_y Δ_r U=Δ_r D_y U` holds for the tensor-product first differences at each four-corner cell (a new rational theorem). The first contribution is an **SBP2-normal weighted radial-gradient face flux/commutator**, not an uncontrolled second radial derivative; the second is precisely the SAT-driven normal-gradient constraint error. This offers a stronger coupled symmetrizer route than a naive inverse-estimate of `Δ_r(P-M)`, which could introduce a divergent `1/dr` constant.
+
+**Implementation:** new `KSW668F8NormalGradientConstraintSATPropagationExact.agda` supplies all three original stage identities, interior and lower/upper SAT production, tensor-product four-corner commutation, and exact shift decomposition; imported by the existing `KSW668F8SameObjectWeylAuthorityBoundary.agda` in the KSW/TOE graph. `scripts/test_ksw668_f8_normal_gradient_constraint.py` validates the native SBP2 full-grid algebra, actual SAT locations, and signed shift decomposition in **2,500/2,500** independent Fraction checks. This arithmetic result is **source-written Agda, pinned Agda kernel NOT RUN**.
+
+**Next highest-alpha coupled G3:** assemble `E_char +E_radial` with the original effective-d shell volumes and `z^-3` normal weight; apply the exact `Q` identity to the radial-shift term and the XXXVIII/XXXIX weighted normal SBP2 results to the derivative of every radial-face gradient. Prove nonpositive/controlled radial-origin and outer-face terms with the unchanged native Dirichlet closure. Derive a trace estimate for SAT-driven `Q` at both normal endpoints without an inverse power of `dr`, then a uniform coupled semidiscrete Gronwall bound. A fully time-discrete SSPRK3 CFL, higher-Sobolev dual-Weyl trace and independent dr/dy/dt convergence remain open; no physical G6 detector witness introduced.
