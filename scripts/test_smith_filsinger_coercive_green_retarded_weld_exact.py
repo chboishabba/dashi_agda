@@ -60,3 +60,23 @@ def test_nonlinear_source_does_not_create_free_electric_power():
     # A Green response is a field/linear operator result, not a work
     # receipt: no load work follows from an amplitude alone.
     assert green_inverse((Q(1000),Q(300)))==(Q(500),Q(100))
+
+def stamped_green(launch,flight,t):
+    assert launch>=0 and flight>=0 and t>=0
+    if t<launch+flight:return ZERO
+    return green_inverse(source(t-(launch+flight)))
+
+@pytest.mark.parametrize("launch",[0,1,4,9])
+@pytest.mark.parametrize("flight",[0,1,3,7])
+def test_actual_original_launch_and_flight_are_both_honoured(launch,flight):
+    for t in range(launch+flight):
+        assert stamped_green(launch,flight,t)==ZERO
+    assert stamped_green(launch,flight,launch+flight)==green_inverse(source(0))
+    for k in range(5):
+        assert stamped_green(launch,flight,launch+flight+k)==green_inverse(source(k))
+
+def test_relative_flight_must_not_be_mistaken_for_absolute_arrival():
+    launch,flight=5,3
+    assert delayed_green(flight,flight)==green_inverse(source(0))
+    assert stamped_green(launch,flight,flight)==ZERO
+    assert stamped_green(launch,flight,launch+flight)==green_inverse(source(0))
