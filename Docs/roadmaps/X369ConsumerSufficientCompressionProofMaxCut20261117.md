@@ -1661,3 +1661,43 @@ certification, and independent
 grokking/Sophontic/trialectic semantic
 consumers. No CI/Agda or physical
 GPU run requested or asserted.
+
+
+### 17 November original precision-plan follow-up
+
+New SymPy stand-in:
+`scripts/check_x369_r4_conditional_roundoff_sympy.py`
+and detailed explanation in
+`Docs/roadmaps/X369R4SourceReceiptAndHistoryFibreMaxCut20261117.md`.
+
+A conditional ideal normal binary32
+arithmetic contract with unit roundoff
+2^-24 was encoded by exact Fraction
+outward intervals, retaining original
+C2 abs-history head and expert bias.
+The disclosed unfused directed correlation
+and shared-head fused scoring plans
+both preserve the synthetic 4-expert
+coherent and mixed selected top2
+under those admitted assumptions.
+
+The precision tradeoff is adversarial:
+the **fused** plan has a *slightly wider*
+conservative selected-pair roundoff
+interval on both fixtures, despite
+fewer scalar arithmetic operations.
+Coherent ~5.96e-6 vs original ~5.84e-6;
+mixed ~7.51e-6 vs original ~7.39e-6.
+Independent local 15-check rational
+interval test PASS. It is NOT an
+actual original Torch/ROCm floating
+kernel receipt: execution graph,
+FMA, subnormals and TF32 mode
+must be authenticated separately.
+
+The next proper source step remains
+precision provenance from Leech's
+existing original scorer/checkpoint
+producer. Do not substitute that
+producer's comparison test tolerances
+for rigorous uniform error bounds.
