@@ -48,3 +48,17 @@ def test_more_conductance_can_reduce_useful_load():
     assert controlled['channel_conductance']>baseline['channel_conductance']
     assert controlled['work']['load']<baseline['work']['load']
     assert controlled['net_useful_after_control_and_ionization']<baseline['net_useful_after_control_and_ionization']
+
+@pytest.mark.parametrize('nodes',[3,5,8])
+def test_series_topology_conserves_energy(nodes):
+    p=replace(Model(),nodes=nodes,plasma_node=nodes//2-1,plasma_mode='series',g_plasma_per_n=2.)
+    r=run(p,duration=5.)
+    assert abs(r['net_balance_residual'])<1e-7
+
+def test_series_path_increase_can_raise_load():
+    p=replace(Model(),plasma_node=2,plasma_mode='series',g_plasma_per_n=2.)
+    baseline=run(p,duration=10.)
+    controlled=run(replace(p,ion_driven=.8,controller_aux=.02),duration=10.)
+    assert controlled['channel_conductance']>baseline['channel_conductance']
+    assert controlled['work']['load']>baseline['work']['load']
+    assert abs(controlled['net_balance_residual'])<1e-7
