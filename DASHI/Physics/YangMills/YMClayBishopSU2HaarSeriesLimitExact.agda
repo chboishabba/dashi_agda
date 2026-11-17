@@ -70,34 +70,45 @@ open EffectiveHaarApproximation public
 -- no separate absolute-series comparison/majorant is required.
 ------------------------------------------------------------------------
 
-record EffectiveHaarCauchyApproximation (Sphere : Set) : Set₁ where
+record EffectiveHaarCauchyApproximation
+    (Sphere : Set)
+    (Admissible : (Sphere → B.ℝ) → Set) : Set₁ where
   field
-    finitePolynomialIntegral : (Sphere → B.ℝ) → Nat → B.ℝ
-    -- Source debt: derived from the *actual* effective b_n modulus and
-    -- polynomial H contractivity, not a fresh limit/measure authority.
-    polynomialIntegralCauchy : ∀ f →
-      Seq._isCauchy (finitePolynomialIntegral f)
+    -- Only the admissible functions specified by the original continuous
+    -- cylinder algebra may be integrated. An arbitrary Agda function
+    -- Sphere -> Bishop Real is not automatically continuous.
+    finitePolynomialIntegral :
+      (f : Sphere → B.ℝ) → Admissible f → Nat → B.ℝ
 
-  completedCauchyIntegral : (Sphere → B.ℝ) → B.ℝ
-  completedCauchyIntegral f =
+    -- Source debt: constructed from finite positive Fejer cubature and
+    -- the explicit b_n uniform approximation error and modulus witness.
+    polynomialIntegralCauchy :
+      ∀ f (admissible : Admissible f) →
+      Seq._isCauchy (finitePolynomialIntegral f admissible)
+
+  completedCauchyIntegral :
+    (f : Sphere → B.ℝ) → Admissible f → B.ℝ
+  completedCauchyIntegral f admissible =
     Seq.lim (Seq.fast-cauchy⇒convergent
-      (polynomialIntegralCauchy f))
+      (polynomialIntegralCauchy f admissible))
 
-  completedCauchyIntegralConverges : ∀ f →
+  completedCauchyIntegralConverges :
+    ∀ f (admissible : Admissible f) →
     Seq._ConvergesTo_
-      (finitePolynomialIntegral f)
-      (completedCauchyIntegral f)
-  completedCauchyIntegralConverges f =
+      (finitePolynomialIntegral f admissible)
+      (completedCauchyIntegral f admissible)
+  completedCauchyIntegralConverges f admissible =
     proj₂ (Seq.fast-cauchy⇒convergent
-      (polynomialIntegralCauchy f))
+      (polynomialIntegralCauchy f admissible))
 
   completedCauchyIntegralUnique :
-    ∀ f {candidate : B.ℝ} →
-    Seq._ConvergesTo_ (finitePolynomialIntegral f) candidate →
-    B._≃_ (completedCauchyIntegral f) candidate
-  completedCauchyIntegralUnique f candidate =
+    ∀ f (admissible : Admissible f) {candidate : B.ℝ} →
+    Seq._ConvergesTo_ (finitePolynomialIntegral f admissible)
+      candidate →
+    B._≃_ (completedCauchyIntegral f admissible) candidate
+  completedCauchyIntegralUnique f admissible candidate =
     Seq.uniqueness-of-limits
-      (completedCauchyIntegralConverges f)
+      (completedCauchyIntegralConverges f admissible)
       candidate
 
 open EffectiveHaarCauchyApproximation public
