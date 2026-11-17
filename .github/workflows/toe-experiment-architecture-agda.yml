@@ -50,7 +50,7 @@ jobs:
         run: nix develop .# --command bash scripts/check_shared_effective_source_recovery.sh
 
 
-  ym-goal1-r474-toe:
+  ym-goal1-toe:
     runs-on: ubuntu-latest
     timeout-minutes: 45
     permissions:
@@ -68,34 +68,32 @@ jobs:
       - name: Install DASHI repository referee
         run: python -m pip install -e './tools/agda_preflight[test,mcp]'
 
-      - name: Referee R485 to R559 normalization
+      - name: Referee Goal-1 TOE reuse
         shell: bash
         run: |
           set -euo pipefail
           dashi-repo index --root .
-          dashi-repo diagnose DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda --root .
-          dashi-repo diagnose DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda --root .
-          dashi-repo diagnose DASHI/EverythingTOESymmetryResolved369.agda --root .
+          dashi-repo diagnose DASHI/Unified/YMGoal1TOECompatibilityExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/YMGoal1TOECompatibilityValidation.agda --root .
           dashi-repo diagnose DASHI/Unified/Physics.agda --root .
+          dashi-repo diagnose DASHI/EverythingTOESymmetryResolved369.agda --root .
           dashi-repo diagnose DASHI/Unifier.agda --root .
-          dashi-repo related DASHI.Physics.YangMills.YangMillsClayGoal1MaximumCutRound485Exact.a1CurrentStepBetaSourceLevel --root . --limit 20
-          dashi-repo related DASHI.Physics.YangMills.YangMillsClayGoal1MaximumCutRound485Exact.bLiteralPublishedSelectedLocalizationLevel --root . --limit 20
-          dashi-repo related DASHI.Physics.YangMills.YangMillsClayGoal1MaximumCutRound485Exact.cExactSameFamilySourceCutLevel --root . --limit 20
-          dashi-repo related DASHI.Physics.YangMills.YangMillsClayGoal1MaximumCutRound485Exact.g2SameSystemClayNontrivialitySemanticsLevel --root . --limit 20
-          dashi-repo discover 'Yang Mills Goal1 R485 R559 TOE maximum cut non-promotion' --root . --limit 40
-          dashi-repo related DASHI.Physics.YangMills.YangMillsClayIrreducibleSourceFamiliesRound546Exact.familyLevel --root . --limit 20
-          dashi-repo related DASHI.Physics.YangMills.YangMillsClayIrreducibleSourceFamiliesRound546Exact.round546IrreducibleSourceFamilyCutCompilerLevel --root . --limit 20
-          dashi-repo related DASHI.Physics.YangMills.YangMillsClayCriticalPathRound558Exact.criticalLevel --root . --limit 20
-          dashi-repo related DASHI.Physics.YangMills.YangMillsClayCriticalPathRound558Exact.round558CriticalPathCompilerLevel --root . --limit 20
+          dashi-repo related literalRound440VariableDomainCMP116SourceLevel --root . --limit 20
+          dashi-repo related literalRound441R429RootedTraceEncodingLevel --root . --limit 20
+          dashi-repo related literalRound442SourceDecayReserveLevel --root . --limit 20
+          dashi-repo related literalRound443FiniteWilsonActionInvarianceLevel --root . --limit 20
+          dashi-repo related literalRound444PeterWeylWilsonIdentificationLevel --root . --limit 20
+          dashi-repo related physicalSameFamilyOPECoefficientOneStepAFIdentificationLevel --root . --limit 20
+          dashi-repo discover 'Yang Mills Goal1 TOE variable domain Peter Weyl compactness stress non-promotion' --root . --limit 40
           dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayGoal1 --root .
-          dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsTOEConvergence --root .
+          dashi-repo lineage --prefix DASHI.Physics.YangMills.BalabanCMP116 --root .
 
       - name: Reject ESD surface changes
         shell: bash
         run: |
           set -euo pipefail
-          git fetch origin agent/ym-toe-convergence-r517-20261027 --depth=1
-          changed="$(git diff --name-only origin/agent/ym-toe-convergence-r517-20261027...HEAD)"
+          git fetch origin master --depth=1
+          changed="$(git diff --name-only origin/master...HEAD)"
           printf '%s\n' "$changed"
           if printf '%s\n' "$changed" | grep -E '(^|/)([^/]*digital_esd[^/]*|[^/]*ESD[^/]*)($|/)'; then
             echo "ESD surface change detected" >&2
@@ -113,10 +111,10 @@ jobs:
         run: |
           set -euo pipefail
           sources=(
-            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
-            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
-            DASHI/EverythingTOESymmetryResolved369.agda
+            DASHI/Unified/YMGoal1TOECompatibilityExact.agda
+            DASHI/Unified/YMGoal1TOECompatibilityValidation.agda
             DASHI/Unified/Physics.agda
+            DASHI/EverythingTOESymmetryResolved369.agda
             DASHI/Unifier.agda
           )
           for source in "${sources[@]}"; do
@@ -126,15 +124,17 @@ jobs:
             fi
           done
 
-      - name: Kernel-check R485 Goal-1 TOE graph
+      - name: Kernel-check Goal-1 TOE graph
         shell: bash
         run: |
           set -euo pipefail
           modules=(
-            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
-            DASHI/EverythingTOESymmetryResolved369.agda
+            DASHI/Unified/YMGoal1TOECompatibilityExact.agda
             DASHI/Unified/Physics.agda
+            DASHI/EverythingTOESymmetryResolved369.agda
             DASHI/Unifier.agda
+            DASHI/Unified/Everything.agda
+            DASHI/Unified/YMGoal1TOECompatibilityValidation.agda
           )
           for module in "${modules[@]}"; do
             agda -i . -l standard-library "$module"
