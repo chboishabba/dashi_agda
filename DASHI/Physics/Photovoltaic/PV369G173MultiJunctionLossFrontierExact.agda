@@ -70,7 +70,7 @@ twoTerminalThreeJModelSafe = record
   ; thermalAndAuxLoss = 140
   ; modeledNetElectric = 50001
   ; sourceEnergyBalance = refl
-  ; strictlyExceedsHalfSolar = Bound.s≤s (Bound.≤-append 50000 1)
+  ; strictlyExceedsHalfSolar = Bound.≤-append 50001 0
   }
 
 -- 4T4J: 56.077% - 6.076% = 50.001% strictly PASS (MODEL ONLY).
@@ -85,7 +85,7 @@ fourTerminalFourJModelSafe = record
   ; thermalAndAuxLoss = 1676
   ; modeledNetElectric = 50001
   ; sourceEnergyBalance = refl
-  ; strictlyExceedsHalfSolar = Bound.s≤s (Bound.≤-append 50000 1)
+  ; strictlyExceedsHalfSolar = Bound.≤-append 50001 0
   }
 
 -- At loss exactly 1.741 or 6.077 percentage points, net is 50.000%;
