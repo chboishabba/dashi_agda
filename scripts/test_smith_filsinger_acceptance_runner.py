@@ -19,7 +19,7 @@ class AcceptanceRunnerControlTests(unittest.TestCase):
         shutil.copyfile(RUNNER, self.root / "scripts" / RUNNER.name)
         for suite in SUITES:
             (self.root / "scripts" / ("test_smith_filsinger_" + suite + ".py")).write_text(
-                "import sys\\nsys.exit(0)\\n".replace("\\\\n", "\\n")
+                "import sys\nsys.exit(0)\n"
             )
         self.git("init", "-q")
         self.git("config", "user.email", "test@example.com")
@@ -48,20 +48,20 @@ class AcceptanceRunnerControlTests(unittest.TestCase):
 
     def test_dirty_tracked_source_deletes_previous_receipt(self):
         self.assertEqual(self.run_acceptance().returncode, 0)
-        (self.root / "scripts/test_smith_filsinger_original_gate_evidence.py").write_text("raise Exception('changed')\\n")
+        (self.root / "scripts/test_smith_filsinger_original_gate_evidence.py").write_text("raise Exception('changed')\n")
         self.assertNotEqual(self.run_acceptance().returncode, 0)
         self.assertFalse(self.receipt.exists())
 
     def test_untracked_agda_source_deletes_previous_receipt(self):
         self.assertEqual(self.run_acceptance().returncode, 0)
         (self.root / "DASHI").mkdir()
-        (self.root / "DASHI/Untracked.agda").write_text("module Untracked where\\n")
+        (self.root / "DASHI/Untracked.agda").write_text("module Untracked where\n")
         self.assertNotEqual(self.run_acceptance().returncode, 0)
         self.assertFalse(self.receipt.exists())
 
     def test_failing_committed_python_script_has_no_receipt(self):
         (self.root / "scripts/test_smith_filsinger_original_gate_evidence.py").write_text(
-            "import sys\\nsys.exit(12)\\n"
+            "import sys\nsys.exit(12)\n"
         )
         self.git("add", ".")
         self.git("commit", "-qm", "synthetic failing suite")
