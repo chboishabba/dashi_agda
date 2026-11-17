@@ -29,7 +29,8 @@ def test_bridge_reuses_existing_scale_review_owners():
         "ITIRInvestigationWorkbenchProjectionExact",
         "SLRReviewedEvidencePaymentExact",
         "MaboReviewedEvidencePaymentExact",
-        "PNFSourceBoundaryTOEExact",
+        "IbrahimSnowballEvidenceSynthesisSourceIndependenceParetoBidiExact",
+        "IbrahimSnowballInformationCascadeEvidenceDependencyHyperfabricBidiExact",
         "SLRLegalRuntimeCapstoneExact",
         "GovernedLegalWorkflowTOEBridgeExact",
     ):
@@ -96,7 +97,8 @@ def test_validation_reopens_canonical_owners():
         "receiptUsesCanonicalWorkbench",
         "receiptUsesCanonicalReviewedEvidence",
         "receiptUsesCanonicalMaboReview",
-        "receiptUsesCanonicalPNFSourceBoundary",
+        "receiptUsesCanonicalIbrahimIndependence",
+        "receiptUsesCanonicalIbrahimDependency",
         "receiptUsesCanonicalLegalRuntime",
         "receiptUsesCanonicalLegalWorkflow",
     ):
@@ -109,7 +111,6 @@ def test_attached_to_all_three_toe_surfaces():
     unified = read(UNIFIED)
     assert "SCALEEvidenceReviewTOEConvergenceExact as SCALEReview" in toe
     assert "toe369SCALEEvidenceReviewTOEReceipt" in toe
-    assert "toe369SCALEEvidenceReviewTOEZKPFrame" in toe
     assert "toe369SCALEReviewDoesNotCreateClaimTruth" in toe
     assert "toe369SCALEReviewProjectionReuseDoesNotCreateClaimTruth" in toe
     assert "toe369SCALECommitCoalescingDoesNotCreateSemanticAuthority" in toe
@@ -117,7 +118,6 @@ def test_attached_to_all_three_toe_surfaces():
     assert "toe369SCALERepetitionDoesNotCreateIndependentEvidence" in toe
     assert "SCALEEvidenceReviewTOEConvergenceExact as SCALEReview" in unifier
     assert "unifierSCALEEvidenceReviewTOEReceipt" in unifier
-    assert "unifierSCALEEvidenceReviewTOEZKPFrame" in unifier
     assert "unifierSCALEFrontierDoesNotGrantAuthorization" in unifier
     assert "unifierSCALEReviewProjectionReuseDoesNotCreateClaimTruth" in unifier
     assert "unifierSCALECommitCoalescingDoesNotCreateSemanticAuthority" in unifier
@@ -125,7 +125,6 @@ def test_attached_to_all_three_toe_surfaces():
     assert "unifierSCALERepetitionDoesNotCreateIndependentEvidence" in unifier
     assert "SCALEEvidenceReviewTOEConvergenceExact as SCALEReview" in unified
     assert "scaleEvidenceReviewTOEReceipt" in unified
-    assert "scaleEvidenceReviewTOEZKPFrame" in unified
     assert "scaleEvidenceReviewReviewProjectionReuseDoesNotCreateClaimTruth" in unified
     assert "scaleEvidenceReviewCommitCoalescingDoesNotCreateSemanticAuthority" in unified
     assert "scaleEvidenceReviewPerceivedIndependenceDoesNotCreateProvenanceIndependence" in unified
@@ -162,14 +161,3 @@ def test_unified_facade_reuses_existing_physics_nonpromotion_owners():
     assert "Spine.canonicalInvariantObjectsDoNotPromoteFormalProjections\n    Physics.navierStokesObject" in text
     assert "Spine.canonicalInvariantObjectsDoNotPromoteFormalProjections\n    Physics.yangMillsObject" in text
     assert "import DASHI.Physics.Foundations.Round5FullBoundary as Round5" not in text
-
-
-def test_source_genealogy_reuses_normalized_pnf_source_boundary():
-    text = read(BRIDGE)
-    assert "import DASHI.Unified.PNFSourceBoundaryTOEExact as PNFSource" in text
-    assert "IbrahimSnowballEvidenceSynthesisSourceIndependenceParetoBidiExact as IbrahimIndependence" not in text
-    assert "IbrahimSnowballInformationCascadeEvidenceDependencyHyperfabricBidiExact as IbrahimDependency" not in text
-    assert "PNFSource.commonPnfFingerprintDoesNotCreateClaimTruth" in text
-    assert "PNFSource.perceivedIndependenceDoesNotCreateProvenanceIndependence" in text
-    assert "PNFSource.repetitionDoesNotCreateIndependentEvidence" in text
-    assert "PNFSource.commonSourceDoesNotEraseEvidence" in text

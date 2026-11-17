@@ -56,7 +56,6 @@ module DASHI.Unified.SCALEEvidenceReviewTOEConvergenceExact where
 -- Reject trust escapes.
 -- Reject ESD-path changes.
 -- Kernel-check exact heads before claiming formal verification.
--- Stable verification base: f739af341145d927507d0c0a83fd9784e95ad5dd.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -75,7 +74,8 @@ import DASHI.Core.ITIRInvestigationAcquisitionParetoExact as Investigation
 import DASHI.Core.ITIRInvestigationWorkbenchProjectionExact as Workbench
 import DASHI.Interop.SLRReviewedEvidencePaymentExact as ReviewedEvidence
 import DASHI.Wikimedia.MaboReviewedEvidencePaymentExact as MaboEvidence
-import DASHI.Unified.PNFSourceBoundaryTOEExact as PNFSource
+import DASHI.Wikimedia.IbrahimSnowballEvidenceSynthesisSourceIndependenceParetoBidiExact as IbrahimIndependence
+import DASHI.Wikimedia.IbrahimSnowballInformationCascadeEvidenceDependencyHyperfabricBidiExact as IbrahimDependency
 import DASHI.Interop.SLRLegalRuntimeCapstoneExact as LegalRuntime
 import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalGovernance
 
@@ -93,7 +93,10 @@ record SCALEEvidenceReviewTOEReceipt : Set₁ where
     workbenchBoundary : Workbench.InvestigationWorkbenchBoundary
     reviewedEvidenceBoundary : ReviewedEvidence.ReviewedEvidencePaymentParity
     maboReviewedCoordinate : MaboEvidence.ReviewedEvidenceCoordinate
-    pnfSourceBoundary : PNFSource.PNFSourceBoundaryTOEReceipt
+    ibrahimSourceIndependenceBoundary :
+      IbrahimIndependence.EvidenceSynthesisSourceIndependenceParetoBoundary
+    ibrahimDependencyBoundary :
+      IbrahimDependency.InformationCascadeEvidenceDependencyHyperfabricBoundary
     legalRuntimeBoundary : LegalRuntime.ReviewedWorldToWrongTypeContract
     legalWorkflowBoundary : LegalGovernance.GovernedLegalWorkflowTOEBoundary
     sourceAttributionRule : String
@@ -111,7 +114,8 @@ canonicalSCALEEvidenceReviewTOEReceipt =
     Workbench.canonicalInvestigationWorkbenchBoundary
     ReviewedEvidence.canonicalReviewedEvidencePaymentParity
     MaboEvidence.maboParticipantIdentityReview
-    PNFSource.canonicalPNFSourceBoundaryTOEReceipt
+    IbrahimIndependence.canonicalEvidenceSynthesisSourceIndependenceParetoBoundary
+    IbrahimDependency.canonicalInformationCascadeEvidenceDependencyHyperfabricBoundary
     LegalRuntime.canonicalReviewedWorldToWrongTypeContract
     LegalGovernance.canonicalGovernedLegalWorkflowTOEBoundary
     LegalGovernance.toeMetaIntrospectorAttributionRule
@@ -142,7 +146,7 @@ canonicalSCALEEvidenceReviewTOEZKPFrame :
 canonicalSCALEEvidenceReviewTOEZKPFrame =
   scale-evidence-review-toe-zkp-frame
     "Converge the SCALE evidence-review surface into the focused DASHI TOE."
-    "Reuse SCALE-1 replay, review-projection economy, DB-native commit economy, production-scale acceptance, REL, normalized PNF source-boundary/Ibrahim genealogy, runtime-witness, GOV, INV, reviewed-evidence, Mabo, legal-runtime, and governed-workflow owners."
+    "Reuse SCALE-1 replay, review-projection economy, DB-native commit economy, production-scale acceptance, REL, runtime-witness, GOV, INV, reviewed-evidence, Mabo, Ibrahim/Snowball source-independence and dependency, legal-runtime, and governed-workflow owners."
     "Expose one canonical receipt and exact aliases through Unified/Everything, Unifier, and EverythingTOESymmetryResolved369."
     "Keep performance, review, similarity, governance, UI, runtime validation, and acquisition non-promoting."
     "Own only SCALE Evidence Review to TOE normalization; edit no ESD or digital_esd surface."
@@ -199,7 +203,7 @@ FewCommitBarriersProveSemanticIndependence =
 
 CommonPnfFingerprintProvesClaimTruth : Set
 CommonPnfFingerprintProvesClaimTruth =
-  PNFSource.CommonPnfFingerprintProvesClaimTruth
+  Relational.CommonPnfFingerprintProvesClaimTruth
 
 EvidenceReviewCreatesClaimTruth : Set
 EvidenceReviewCreatesClaimTruth =
@@ -307,9 +311,9 @@ sharedQidDoesNotProveArticleParity =
   Relational.qidNotParity
 
 commonPnfFingerprintDoesNotCreateClaimTruth :
-  PNFSource.CommonPnfFingerprintProvesClaimTruth → ⊥
+  Relational.CommonPnfFingerprintProvesClaimTruth → ⊥
 commonPnfFingerprintDoesNotCreateClaimTruth =
-  PNFSource.commonPnfFingerprintDoesNotCreateClaimTruth
+  Relational.pnfCandidateNotTruth
 
 negativeReportDoesNotErasePositiveSource :
   Relational.NegativeReportErasesPositiveSource → ⊥
@@ -322,36 +326,35 @@ candidateReviewDoesNotAuthorizeDomainRepair =
   Relational.reviewNotRepairAuthority
 
 ------------------------------------------------------------------------
--- Normalized PNF source-genealogy firewalls.
--- PNFSource owns the Ibrahim/Snowball normalization and attribution.
+-- Ibrahim/Snowball source-independence and dependency firewalls.
 ------------------------------------------------------------------------
 
 PerceivedIndependenceMeansActualIndependence : Set
 PerceivedIndependenceMeansActualIndependence =
-  PNFSource.PerceivedIndependenceMeansActualIndependence
+  IbrahimIndependence.PerceivedIndependenceMeansActualIndependence
 
 RepetitionMeansIndependentEvidence : Set
 RepetitionMeansIndependentEvidence =
-  PNFSource.RepetitionMeansIndependentEvidence
+  IbrahimDependency.RepetitionMeansIndependentEvidence
 
 CommonSourceMeansNoEvidence : Set
 CommonSourceMeansNoEvidence =
-  PNFSource.CommonSourceMeansNoEvidence
+  IbrahimDependency.CommonSourceMeansNoEvidence
 
 perceivedIndependenceDoesNotCreateProvenanceIndependence :
   PerceivedIndependenceMeansActualIndependence → ⊥
 perceivedIndependenceDoesNotCreateProvenanceIndependence =
-  PNFSource.perceivedIndependenceDoesNotCreateProvenanceIndependence
+  IbrahimIndependence.perceivedIndependenceDoesNotCreateActualIndependence
 
 repetitionDoesNotCreateIndependentEvidence :
   RepetitionMeansIndependentEvidence → ⊥
 repetitionDoesNotCreateIndependentEvidence =
-  PNFSource.repetitionDoesNotCreateIndependentEvidence
+  IbrahimDependency.repetitionDoesNotMeanIndependentEvidence
 
 commonSourceDoesNotEraseEvidence :
   CommonSourceMeansNoEvidence → ⊥
 commonSourceDoesNotEraseEvidence =
-  PNFSource.commonSourceDoesNotEraseEvidence
+  IbrahimDependency.commonSourceDoesNotMeanNoEvidence
 
 ------------------------------------------------------------------------
 -- Runtime witness remains distinct from a formal premise.

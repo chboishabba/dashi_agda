@@ -49,14 +49,10 @@ import DASHI.Unified.GovernedLegalWorkflowComplianceTOEExact
 import DASHI.Unified.GovernedLegalWorkflowComplianceTOEValidation
 import DASHI.Physics.Foundations.CMP119CosmologyLatestParetoFrontierExact as CMP119Preferred
 import DASHI.Unified.PNFHyperfabric as PNFHyperfabric
-import DASHI.Unified.Relate369HyperfabricPantsTOEExact as Relate369PantsTOE
-import DASHI.Unified.TOE369CoarseFineIntertwinerMaxCutExact as MaxCutTOE
-import DASHI.Unified.TOE369CoarseFineIntertwinerMaxCutValidation
-import DASHI.Reasoning.Trialectic369Selected3BLinearAcquisitionCompletionExact as AcquisitionCompletion
-import DASHI.Wikimedia.IbrahimMonster3BPhaseResolvedCharacterTwelveSeventyEightWeldExact as PhaseWeld
-import DASHI.Wikimedia.IbrahimMonster3BActualLinearMultiplicityAcquisitionExact as ActualAcquisition
-import DASHI.Wikimedia.IbrahimMonster369A025616RecognitionAcquisitionExact as RecognitionAcquisition
-import DASHI.Wikimedia.IbrahimTernary27OriginTraceless26AlbertShapeBidiExact as Albert27
+import DASHI.Unified.PNFDistilledNonPromotionTOEExact as PNFDistilled
+import DASHI.Unified.PNFDistilledNonPromotionTOEValidation
+import DASHI.Unified.SCALEEvidenceReviewTOEConvergenceExact as SCALEReview
+import DASHI.Unified.SCALEEvidenceReviewTOEConvergenceValidation
 import DASHI.Unified.Physics as Physics
 import DASHI.Unified.NavierStokesBM2TOEConvergenceExact as NSBM2TOE
 import DASHI.Unified.NavierStokesBM2TOEConvergenceValidation
@@ -113,6 +109,21 @@ unifiedCMP119NoSyntheticPhysicalIdentificationAdded =
 
 unifiedCMP119RepresentationOnlySameObjectDebtRemains =
   CMP119Preferred.representationOnlySameObjectDebtRemains
+
+scaleEvidenceReviewTOEReceipt :
+  SCALEReview.SCALEEvidenceReviewTOEReceipt
+scaleEvidenceReviewTOEReceipt =
+  SCALEReview.canonicalSCALEEvidenceReviewTOEReceipt
+
+scaleEvidenceReviewDoesNotPromoteSemanticTruth :
+  SCALEReview.ReplayEconomyReceiptPromotesSemanticTruth → ⊥
+scaleEvidenceReviewDoesNotPromoteSemanticTruth =
+  SCALEReview.scaleReplayDoesNotPromoteSemanticTruth
+
+scaleEvidenceReviewDoesNotAuthorizeFromFrontier :
+  SCALEReview.FrontierRouteMeansAuthorized → ⊥
+scaleEvidenceReviewDoesNotAuthorizeFromFrontier =
+  SCALEReview.frontierRouteDoesNotGrantAuthorization
 
 canonicalUnifiedObjects : List Spine.UnifiedObjectInvariant
 canonicalUnifiedObjects =
@@ -207,10 +218,6 @@ yangMillsFormalProjectionsRemainNonPromoting :
 yangMillsFormalProjectionsRemainNonPromoting =
   Spine.canonicalInvariantObjectsDoNotPromoteFormalProjections
     Physics.yangMillsObject
-import DASHI.Physics.Foundations.Round5FullBoundary as Round5
-      Round5.Round5FullBoundary
-        Round5.canonicalRound5FullBoundary
-        "Every unified facade object exposes observation, projection, carrier/role vector, residual, proof posture, invariant strength, and the required formal parent projection bundle. The bundle includes modular-j, Hecke, Bott, Kolmogorov, category, quotient, lattice, and operator projections. Literal authority is lane-specific; every formal projection has externalPromotion = false. The cross-scale matter/physics parent records the atoms-to-stellar composition ladder as structural and receipt-gated, with quantitative solar-style counterfactual prediction still blocked. Round Five adds a fail-closed finite boundary for constants, dimension, atomic and nuclear structure, causal cosmological observation, and the GR-QFT emergence cutsets without promoting terminal unification."
 
 
 relate369HyperfabricPantsTOEReceipt :
@@ -223,202 +230,41 @@ relate369HyperfabricPantsTOEZKPFrame :
 relate369HyperfabricPantsTOEZKPFrame =
   Relate369PantsTOE.canonicalRelate369HyperfabricPantsTOEZKPFrame
 
+unifiedSemanticAdmissionIsNotLegalAuthority :
+  LegalGovernance.SemanticAdmissionAuthorityIsLegalSourceAuthority → ⊥
+unifiedSemanticAdmissionIsNotLegalAuthority =
+  LegalGovernance.toeSemanticAdmissionDoesNotBecomeLegalSourceAuthority
 
 ------------------------------------------------------------------------
--- Repo state-space formalisation TOE convergence.
+-- SCALE evidence genealogy firewalls.
 ------------------------------------------------------------------------
 
-import DASHI.Unified.RepoStateSpaceTOEConvergenceExact as RepoStateSpaceTOE
-import DASHI.Unified.RepoStateSpaceTOEConvergenceValidation
+scaleEvidenceReviewPerceivedIndependenceDoesNotCreateProvenanceIndependence :
+  SCALEReview.PerceivedIndependenceMeansActualIndependence → ⊥
+scaleEvidenceReviewPerceivedIndependenceDoesNotCreateProvenanceIndependence =
+  SCALEReview.perceivedIndependenceDoesNotCreateProvenanceIndependence
 
-repoStateSpaceTOEZKPFrame :
-  RepoStateSpaceTOE.RepoStateSpaceTOEZKPFrame
-repoStateSpaceTOEZKPFrame =
-  RepoStateSpaceTOE.canonicalRepoStateSpaceTOEZKPFrame
-
-
-------------------------------------------------------------------------
--- Reconciled Max Cut / kernel-BIDI / ternary-27 aggregate.
-------------------------------------------------------------------------
-
-unifiedTOE369MaxCutZKPFrame : MaxCutTOE.TOE369MaxCutZKPFrame
-unifiedTOE369MaxCutZKPFrame =
-  MaxCutTOE.canonicalTOE369MaxCutZKPFrame
-
-unifiedTOE369MaxCutReceipt : MaxCutTOE.TOE369MaxCutReceipt
-unifiedTOE369MaxCutReceipt =
-  MaxCutTOE.canonicalTOE369MaxCutReceipt
-
-
-unifiedSelected3BAcquisitionCompilerPaid :
-  AcquisitionCompletion.Trialectic369Selected3BLinearAcquisitionCompletionBoundary.acquisitionCoreCompilerOwned
-    AcquisitionCompletion.canonicalTrialectic369Selected3BLinearAcquisitionCompletionBoundary
-  ≡ true
-unifiedSelected3BAcquisitionCompilerPaid =
-  MaxCutTOE.toeAcquisitionCoreCompilerAlreadyOwned
-
-unifiedSelected3BOnlyActionIntertwiningRemains :
-  AcquisitionCompletion.Trialectic369Selected3BLinearAcquisitionCompletionBoundary.onlyActionIntertwiningRemainsAfterScaffold
-    AcquisitionCompletion.canonicalTrialectic369Selected3BLinearAcquisitionCompletionBoundary
-  ≡ true
-unifiedSelected3BOnlyActionIntertwiningRemains =
-  MaxCutTOE.toeAcquisitionOnlyActionIntertwiningRemains
-
-unifiedPhaseResolvedTwelveMultiplicityPaid :
-  PhaseWeld.PhaseCharacterWeldFrontier.twelveMultiplicityAtCharacterLevelPaid
-    PhaseWeld.currentPhaseCharacterWeldFrontier
-  ≡ true
-unifiedPhaseResolvedTwelveMultiplicityPaid =
-  MaxCutTOE.toePhaseResolvedTwelveMultiplicityPaid
-
-unifiedPhaseResolvedSeventyEightMultiplicityPaid :
-  PhaseWeld.PhaseCharacterWeldFrontier.seventyEightMultiplicityAtCharacterLevelPaid
-    PhaseWeld.currentPhaseCharacterWeldFrontier
-  ≡ true
-unifiedPhaseResolvedSeventyEightMultiplicityPaid =
-  MaxCutTOE.toePhaseResolvedSeventyEightMultiplicityPaid
-
-unifiedSameActionTwelveSeventyEightIntertwinerStillOpen :
-  ActualAcquisition.ActualLinearMultiplicityAcquisitionFrontier.actualTwelveSeventyEightIntertwinerPaid
-    ActualAcquisition.currentActualLinearMultiplicityAcquisitionFrontier
-  ≡ false
-unifiedSameActionTwelveSeventyEightIntertwinerStillOpen =
-  MaxCutTOE.toeActualSameActionTwelveSeventyEightIntertwinerStillOpen
-
-
-unifiedRecognitionAcquisitionTargetLocalized :
-  RecognitionAcquisition.A025616RecognitionAcquisitionBoundary.exactAcquisitionTargetLocalized
-    RecognitionAcquisition.currentA025616RecognitionAcquisitionBoundary
-  ≡ true
-unifiedRecognitionAcquisitionTargetLocalized =
-  MaxCutTOE.toeRecognitionAcquisitionTargetLocalized
-
-unifiedActualBase369RecognitionCandidateStillOpen :
-  RecognitionAcquisition.A025616RecognitionAcquisitionBoundary.actualBase369RecognitionCandidatePaid
-    RecognitionAcquisition.currentA025616RecognitionAcquisitionBoundary
-  ≡ false
-unifiedActualBase369RecognitionCandidateStillOpen =
-  MaxCutTOE.toeActualBase369RecognitionCandidateStillOpen
-
-
-unifiedTernary27OriginPlus26CarrierPaid :
-  Albert27.Ternary27AlbertShapeFrontier.originPlus26BijectionPaid
-    Albert27.currentTernary27AlbertShapeFrontier
-  ≡ true
-unifiedTernary27OriginPlus26CarrierPaid =
-  MaxCutTOE.toeTernary27OriginPlus26CarrierPaid
-
-unifiedTernary27AlbertShapeSameCarrierPaid :
-  Albert27.Ternary27AlbertShapeFrontier.albert27ShapeInstantiatedOnSameCarrier
-    Albert27.currentTernary27AlbertShapeFrontier
-  ≡ true
-unifiedTernary27AlbertShapeSameCarrierPaid =
-  MaxCutTOE.toeTernary27AlbertShapeSameCarrierPaid
-
-unifiedTernary27JordanProductStillOpen :
-  Albert27.Ternary27AlbertShapeFrontier.jordanProductPaid
-    Albert27.currentTernary27AlbertShapeFrontier
-  ≡ false
-unifiedTernary27JordanProductStillOpen =
-  MaxCutTOE.toeTernary27JordanProductStillOpen
-
-unifiedTernary27F4ActionStillOpen :
-  Albert27.Ternary27AlbertShapeFrontier.f4ActionPaid
-    Albert27.currentTernary27AlbertShapeFrontier
-  ≡ false
-unifiedTernary27F4ActionStillOpen =
-  MaxCutTOE.toeTernary27F4ActionStillOpen
-
-unifiedTernary27E6ActionStillOpen :
-  Albert27.Ternary27AlbertShapeFrontier.e6ActionPaid
-    Albert27.currentTernary27AlbertShapeFrontier
-  ≡ false
-unifiedTernary27E6ActionStillOpen =
-  MaxCutTOE.toeTernary27E6ActionStillOpen
-
-------------------------------------------------------------------------
--- Exact non-factorability: loss cannot be repaired by recharting.
--- Original theorem ownership remains with IntersectionalNonFactorability.
-------------------------------------------------------------------------
-
-open import Data.Empty using (⊥)
-import DASHI.Core.IntersectionalNonFactorability as RepoStateNonFactorUnified
-
-unifiedYMImplementAToDMaxCutReceipt :
-  YMAD.YMImplementAToDTOEMaxCutReceipt
-unifiedYMImplementAToDMaxCutReceipt =
-  YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+scaleEvidenceReviewRepetitionDoesNotCreateIndependentEvidence :
+  SCALEReview.RepetitionMeansIndependentEvidence → ⊥
+scaleEvidenceReviewRepetitionDoesNotCreateIndependentEvidence =
+  SCALEReview.repetitionDoesNotCreateIndependentEvidence
 
 
 ------------------------------------------------------------------------
--- RH transformed-prime / three-tap normalized aggregate reachability.
+-- SCALE physical-economy non-promotion firewalls.
 ------------------------------------------------------------------------
 
-unifiedRHCompletedTraceCrossPollinationBoundary :
-  RHPrimeAudit.CompletedTraceCrossPollinationBoundary
-unifiedRHCompletedTraceCrossPollinationBoundary =
-  RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary
+scaleEvidenceReviewReviewProjectionReuseDoesNotCreateClaimTruth :
+  SCALEReview.ReviewProjectionReuseCreatesClaimTruth → ⊥
+scaleEvidenceReviewReviewProjectionReuseDoesNotCreateClaimTruth =
+  SCALEReview.reviewProjectionReuseDoesNotCreateClaimTruth
 
-unifiedRHPrimeActivationRequiresFirstPrimeSupport :
-  RHPrimeAudit.nonzeroPrimeRequiresFirstPrimeSupportSourceWritten
-    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ true
-unifiedRHPrimeActivationRequiresFirstPrimeSupport =
-  RHPrimeAudit.firstPrimeSupportNecessary
+scaleEvidenceReviewCommitCoalescingDoesNotCreateSemanticAuthority :
+  SCALEReview.CommitCoalescingCreatesSemanticAuthority → ⊥
+scaleEvidenceReviewCommitCoalescingDoesNotCreateSemanticAuthority =
+  SCALEReview.commitCoalescingDoesNotCreateSemanticAuthority
 
-unifiedRHHeisenbergTraceTransportStillBlocked :
-  RHPrimeAudit.actualHeisenbergTraceEqualsSelectedZetaFunctional
-    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
-unifiedRHHeisenbergTraceTransportStillBlocked =
-  RHPrimeAudit.noUnjustifiedAnalyticTransport
-
-
-unifiedRHUnmarkedTerminalStillNotIdentifiedWithMarkedArithmetic :
-  RHPrimeAudit.selectedUnmarkedTerminalEqualsMarkedArithmetic
-    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
-unifiedRHUnmarkedTerminalStillNotIdentifiedWithMarkedArithmetic =
-  RHPrimeAudit.selectedUnmarkedTerminalStillNotIdentifiedWithMarkedArithmetic
-
-unifiedRHIndependentArithmeticDiagonalProducerStillAbsent :
-  RHPrimeAudit.independentArithmeticDiagonalProducer
-    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
-unifiedRHIndependentArithmeticDiagonalProducerStillAbsent =
-  RHPrimeAudit.independentArithmeticDiagonalProducerStillAbsent
-
-unifiedRHTerminalStrictSignedEstimateStillOpen :
-  RHPrimeAudit.terminalStrictSignedEstimatePaid
-    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
-unifiedRHTerminalStrictSignedEstimateStillOpen =
-  RHPrimeAudit.terminalStrictSignedEstimateStillOpen
-unifiedRHThreeTapCurrentLeanFrontier :
-  RHThreeTapFrontier.ThreeTapCurrentLeanFrontier
-unifiedRHThreeTapCurrentLeanFrontier =
-  RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier
-
-unifiedRHThreeTapA2StrictScalarStillOpen :
-  RHThreeTapFrontier.a2StrictScalarPaid
-    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ false
-unifiedRHThreeTapA2StrictScalarStillOpen =
-  RHThreeTapFrontier.a2ScalarIsStillOpen
-
-unifiedRHSignedFifthRouteStillOpen :
-  RHThreeTapFrontier.routeBEventualGapPaid
-    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ false
-unifiedRHSignedFifthRouteStillOpen =
-  RHThreeTapFrontier.routeBIsStillOpen
-
-unifiedRHThreeTapTerminalBoundary :
-  RHTerminal.ThreeTapTerminalCompletionBoundary
-unifiedRHThreeTapTerminalBoundary =
-  RHTerminal.canonicalThreeTapTerminalCompletionBoundary
-
-unifiedRHThreeTapTerminalStrictSignStillOpen :
-  RHTerminal.transformedTerminalStrictSignPaid
-    RHTerminal.canonicalThreeTapTerminalCompletionBoundary ≡ false
-unifiedRHThreeTapTerminalStrictSignStillOpen =
-  RHTerminal.strictTerminalSignStillOpen
-
-unifiedRHThreeTapTerminalDoesNotPromoteRH :
-  RHTerminal.rhDerivedHere
-    RHTerminal.canonicalThreeTapTerminalCompletionBoundary ≡ false
-unifiedRHThreeTapTerminalDoesNotPromoteRH =
-  RHTerminal.rhStillOpen
+scaleEvidenceReviewFewCommitBarriersDoNotProveSemanticIndependence :
+  SCALEReview.FewCommitBarriersProveSemanticIndependence → ⊥
+scaleEvidenceReviewFewCommitBarriersDoNotProveSemanticIndependence =
+  SCALEReview.fewCommitBarriersDoNotProveSemanticIndependence
