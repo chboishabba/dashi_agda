@@ -9,8 +9,10 @@ module DASHI.Physics.Motors.SmithFilsingerFiniteVolumeMaxwellBoundaryWeldExact w
 -- are still independent hypotheses. Pointwise jet != integrated work.
 
 open import Agda.Builtin.Nat using (Nat; _+_)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (sym; trans)
+open import Data.Nat.Solver using (module +-*-Solver)
+open +-*-Solver using (solve; _:+_; _:=_; con)
 
 import DASHI.Physics.Motors.SmithFilsingerFiniteVolumeFaceIncidenceExact as Face
 import DASHI.Physics.Motors.SmithFilsingerSpatialPortChainExact as Spatial
@@ -45,6 +47,47 @@ meshAsCanonicalSpatialChain :
 meshAsCanonicalSpatialChain mesh =
   Spatial.thenCell (meshAsCanonicalSpatialCell mesh)
     (Spatial.empty (Face.totalExtOut (Face.OrientedFaceMesh.cells mesh)))
+
+-- A singleton canonical chain has list-sum tails of zero; preserve
+-- the actual face totals via an explicit semiring normalization, not an
+-- unjustified definitional equality (Nat n+0 is not always definitional).
+meshChainInputNormalization :
+  (mesh : Face.OrientedFaceMesh) →
+  Face.totalExtIn (Face.OrientedFaceMesh.cells mesh)
+    + (Spatial.sumDrive (meshAsCanonicalSpatialChain mesh)
+      + Spatial.sumInitialStorage (meshAsCanonicalSpatialChain mesh))
+  ≡ Face.totalExtIn (Face.OrientedFaceMesh.cells mesh)
+    + (Face.totalDrive (Face.OrientedFaceMesh.cells mesh)
+      + Face.totalInitial (Face.OrientedFaceMesh.cells mesh))
+meshChainInputNormalization mesh =
+  solve 3
+    (λ a d u →
+      a :+ ((d :+ con 0) :+ (u :+ con 0))
+        := a :+ (d :+ u))
+    refl (Face.totalExtIn cs) (Face.totalDrive cs)
+      (Face.totalInitial cs)
+  where
+    cs = Face.OrientedFaceMesh.cells mesh
+
+meshChainOutputNormalization :
+  (mesh : Face.OrientedFaceMesh) →
+  Face.totalExtOut (Face.OrientedFaceMesh.cells mesh)
+    + (Spatial.sumUsefulLoad (meshAsCanonicalSpatialChain mesh)
+      + (Spatial.sumDissipation (meshAsCanonicalSpatialChain mesh)
+      + Spatial.sumFinalStorage (meshAsCanonicalSpatialChain mesh)))
+  ≡ Face.totalExtOut (Face.OrientedFaceMesh.cells mesh)
+    + (Face.totalLoad (Face.OrientedFaceMesh.cells mesh)
+      + (Face.totalLoss (Face.OrientedFaceMesh.cells mesh)
+      + Face.totalFinal (Face.OrientedFaceMesh.cells mesh)))
+meshChainOutputNormalization mesh =
+  solve 4
+    (λ a l q u →
+      a :+ ((l :+ con 0) :+ ((q :+ con 0) :+ (u :+ con 0)))
+        := a :+ (l :+ (q :+ u)))
+    refl (Face.totalExtOut cs) (Face.totalLoad cs)
+      (Face.totalLoss cs) (Face.totalFinal cs)
+  where
+    cs = Face.OrientedFaceMesh.cells mesh
 
 -- The SAME historical Maxwell/port boundary is mandatory; arbitrary mesh
 -- cells do not identify a solar source by themselves. Two measured boundary
@@ -101,9 +144,11 @@ asExistingOriginalSpatialWeld b f m =
     ; exit = Face.totalExtOut (Face.OrientedFaceMesh.cells mesh)
     ; cells = meshAsCanonicalSpatialChain mesh
     ; spatialInputIsSameOriginalPort =
-        OriginalFiniteVolumeAdmission.sameOriginalIncomingWork m
+        trans (meshChainInputNormalization mesh)
+          (OriginalFiniteVolumeAdmission.sameOriginalIncomingWork m)
     ; spatialOutputIsSameOriginalPort =
-        OriginalFiniteVolumeAdmission.sameOriginalOutgoingWork m
+        trans (meshChainOutputNormalization mesh)
+          (OriginalFiniteVolumeAdmission.sameOriginalOutgoingWork m)
     }
   where
     mesh = OriginalFiniteVolumeAdmission.mesh m
