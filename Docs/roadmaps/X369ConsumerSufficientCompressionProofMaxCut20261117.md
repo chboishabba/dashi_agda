@@ -90,6 +90,22 @@ for the future phase consumer. The correct repair is a retained
 history/tag residual, a state-dependent transition codec,
 or a proof the chosen consumer never observes the lost fibre.
 
+## P0 fixed-width quantization is now an exact finite theorem target
+
+The new module also defines `oneBitCannotPreserveThreePhaseConsumer`
+using an exhaustive Agda distinction of all three independently
+observable phases: an encoder into ONE Bool bit must collide on two
+different required output labels and therefore cannot be
+consumer-sufficient. In contrast, `phaseToTwoBits` and
+`twoBitsToPhase` give an exact zero-error roundtrip for all
+three values using TWO Bool bits; `twoBitsSufficientForPhase`
+retains consumer sufficiency on the full six tagged input states
+while `twoBitsDiscardTheIrrelevantTag` demonstrates real
+non-injectivity on the raw carrier. Hence the MINIMUM FIXED
+ZERO-ERROR BIT WIDTH of this finite three-label consumer is 2.
+This is not a universal Shannon-rate theorem, source-bit codec,
+model quantisation benchmark, or 2:1 measured Leech compression.
+
 ## Existing owners to reuse rather than duplicate
 
 - `DASHI/Core/ConsumerDescentMinimalObserverExact.agda`:
