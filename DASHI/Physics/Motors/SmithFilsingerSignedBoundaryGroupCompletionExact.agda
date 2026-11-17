@@ -1,0 +1,190 @@
+module DASHI.Physics.Motors.SmithFilsingerSignedBoundaryGroupCompletionExact where
+
+-- F15 maximum cut: signed work WITHOUT assuming that environmental
+-- incident >= environmental outgoing. A pair of nonnegative quantities
+-- denotes a signed real-work balance by its cross-sum equivalence.
+--
+-- No actual ambient source work or original-device history is inferred.
+-- Reuses exactly the original signed MidpointTwoPortWorkWindow boundary
+-- and the repo Nat order/cancellation owners. This complements the
+-- earlier positive-net-source cap; reverse net flow remains representable.
+--
+-- Attribution: user-origin Smith/Filsinger nonlinear differential
+-- source/sink hypothesis; original MidpointTwoPortWorkExact signed ledger.
+
+open import Agda.Builtin.Nat using (Nat; zero; _+_)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Nat.Solver using (module +-*-Solver)
+open +-*-Solver using (solve; _:+_; _:=_)
+
+import DASHI.Physics.Motors.SmithFilsingerMidpointPhaseWorkExact as Port
+import DASHI.Physics.Motors.SmithFilsingerReplenishedCycleCapExact as Cycle
+import DASHI.Physics.Motors.Circuit36927RecoveryEnergyBoundExact as Bound
+
+-- Group-completion carrier. We assert only the exact properties proved
+-- below, not the stronger claim that a quotient/group was constructed.
+record DirectedSignedWork : Set where
+  constructor directedSignedWork
+  field
+    incoming outgoing : Nat
+
+-- Equality of SIGNED work is cross-multiplied equality, not identity
+-- of arbitrarily selected (incoming,outgoing) representative pairs.
+_signed≈_ : DirectedSignedWork → DirectedSignedWork → Set
+a signed≈ b =
+  DirectedSignedWork.incoming a
+    + DirectedSignedWork.outgoing b
+  ≡ DirectedSignedWork.incoming b
+    + DirectedSignedWork.outgoing a
+  where
+    infix 4 signed≈
+    signed≈ = _signed≈_
+
+-- Explicit alternative, used in types, avoids treating two pairs of
+-- equal net work as literally equal record values.
+sameSignedWork : DirectedSignedWork → DirectedSignedWork → Set
+sameSignedWork a b =
+  DirectedSignedWork.incoming a + DirectedSignedWork.outgoing b
+    ≡ DirectedSignedWork.incoming b + DirectedSignedWork.outgoing a
+
+netNaturalPort : Port.MidpointTwoPortWorkWindow → DirectedSignedWork
+netNaturalPort p =
+  directedSignedWork
+    (Port.MidpointTwoPortWorkWindow.naturalIncident p)
+    (Port.MidpointTwoPortWorkWindow.naturalOutgoing p)
+
+netControllerPort : Port.MidpointTwoPortWorkWindow → DirectedSignedWork
+netControllerPort p =
+  directedSignedWork
+    (Port.MidpointTwoPortWorkWindow.controllerIncident p)
+    (Port.MidpointTwoPortWorkWindow.controllerOutgoing p)
+
+combinedPorts : DirectedSignedWork → DirectedSignedWork → DirectedSignedWork
+combinedPorts a b =
+  directedSignedWork
+    (DirectedSignedWork.incoming a + DirectedSignedWork.incoming b)
+    (DirectedSignedWork.outgoing a + DirectedSignedWork.outgoing b)
+
+paidLoadAndLoss : Port.MidpointTwoPortWorkWindow → DirectedSignedWork
+paidLoadAndLoss p =
+  directedSignedWork
+    (Port.MidpointTwoPortWorkWindow.usefulWork p
+      + Port.MidpointTwoPortWorkWindow.internalLoss p)
+    zero
+
+-- Exact source-independent algebra: both natural and powered ports may
+-- have net reversed flow; still the signed external power equals useful
+-- work + dissipation after every relevant store returns.
+signedRawPortBalance :
+  (ni ci no co initial final load loss : Nat) →
+  initial ≡ final →
+  (ni + ci) + initial
+    ≡ load + (loss + (no + (co + final))) →
+  (ni + ci) + zero ≡ (load + loss) + (no + co)
+signedRawPortBalance ni ci no co initial final load loss
+  restored originalBalance =
+  Cycle.trans
+    (Bound.sym (Cycle.+-zeroRight (ni + ci)))
+    (Cycle.+-cancelRight _ _ final
+      (Cycle.trans
+        (Bound.sym
+          (Cycle.cong (λ z → (ni + ci) + z) restored))
+        (Cycle.trans
+          originalBalance
+          (solve 5
+            (λ l h n c s →
+              (l :+ (h :+ (n :+ (c :+ s))))
+                := (((l :+ h) :+ (n :+ c)) :+ s))
+            refl load loss no co final))))
+
+-- Direct theorem over the canonical two-port ledger. No Nat subtraction
+-- and no nonnegative-natural-net premise is imposed.
+originalTwoPortSignedWorkConservation :
+  (p : Port.MidpointTwoPortWorkWindow) →
+  Port.MidpointTwoPortWorkWindow.initialStored p
+    ≡ Port.MidpointTwoPortWorkWindow.finalStored p →
+  sameSignedWork
+    (combinedPorts (netNaturalPort p) (netControllerPort p))
+    (paidLoadAndLoss p)
+originalTwoPortSignedWorkConservation p restored =
+  signedRawPortBalance
+    (Port.MidpointTwoPortWorkWindow.naturalIncident p)
+    (Port.MidpointTwoPortWorkWindow.controllerIncident p)
+    (Port.MidpointTwoPortWorkWindow.naturalOutgoing p)
+    (Port.MidpointTwoPortWorkWindow.controllerOutgoing p)
+    (Port.MidpointTwoPortWorkWindow.initialStored p)
+    (Port.MidpointTwoPortWorkWindow.finalStored p)
+    (Port.MidpointTwoPortWorkWindow.usefulWork p)
+    (Port.MidpointTwoPortWorkWindow.internalLoss p)
+    restored
+    (Port.MidpointTwoPortWorkWindow.completeBoundaryBalance p)
+
+-- A negative-NET environmental port is legitimate (net environmental
+-- SINK), but cannot become free receiver output. If more environmental
+-- work leaves than enters and the powered controller has nonnegative
+-- net work, the controller must ALSO pay for this return flow.
+--
+-- Derivation uses only same-original boundary conservation and restore.
+reverseEnvironmentalFlowConsumesControllerWork :
+  (p : Port.MidpointTwoPortWorkWindow)
+  (reverseToEnvironment controllerNet : Nat) →
+  Port.MidpointTwoPortWorkWindow.naturalOutgoing p
+    ≡ Port.MidpointTwoPortWorkWindow.naturalIncident p
+       + reverseToEnvironment →
+  Port.MidpointTwoPortWorkWindow.controllerIncident p
+    ≡ Port.MidpointTwoPortWorkWindow.controllerOutgoing p
+       + controllerNet →
+  Port.MidpointTwoPortWorkWindow.initialStored p
+    ≡ Port.MidpointTwoPortWorkWindow.finalStored p →
+  controllerNet ≡
+    (Port.MidpointTwoPortWorkWindow.usefulWork p
+      + Port.MidpointTwoPortWorkWindow.internalLoss p)
+      + reverseToEnvironment
+reverseEnvironmentalFlowConsumesControllerWork p reversed controllerNet
+  netReverse netController restored =
+  Cycle.+-cancelLeft
+    (ni + co) controllerNet ((load + loss) + reversed)
+    (Cycle.trans
+      (Bound.sym
+        (solve 3
+          (λ ni co ctl →
+            ((ni :+ co) :+ ctl)
+              := (ni :+ (co :+ ctl)))
+          refl ni co controllerNet))
+      (Cycle.trans
+        (Cycle.cong (λ z → ni + z) (Bound.sym netController))
+        (Cycle.trans
+          (rawBalanceAfterReturn p restored)
+          (Cycle.trans
+            (Cycle.cong
+              (λ z → (load + loss) + (z + co))
+              netReverse)
+            (solve 5
+              (λ ni co h k rv →
+                ((h :+ k) :+ ((ni :+ rv) :+ co))
+                  := ((ni :+ co) :+ ((h :+ k) :+ rv)))
+              refl ni co load loss reversed)))))
+  where
+    ni : Nat
+    ni = Port.MidpointTwoPortWorkWindow.naturalIncident p
+    co : Nat
+    co = Port.MidpointTwoPortWorkWindow.controllerOutgoing p
+    load : Nat
+    load = Port.MidpointTwoPortWorkWindow.usefulWork p
+    loss : Nat
+    loss = Port.MidpointTwoPortWorkWindow.internalLoss p
+
+    rawBalanceAfterReturn :
+      (x : Port.MidpointTwoPortWorkWindow) →
+      Port.MidpointTwoPortWorkWindow.initialStored x
+        ≡ Port.MidpointTwoPortWorkWindow.finalStored x →
+      Port.MidpointTwoPortWorkWindow.naturalIncident x
+        + Port.MidpointTwoPortWorkWindow.controllerIncident x
+      ≡ (Port.MidpointTwoPortWorkWindow.usefulWork x
+        + Port.MidpointTwoPortWorkWindow.internalLoss x)
+        + (Port.MidpointTwoPortWorkWindow.naturalOutgoing x
+          + Port.MidpointTwoPortWorkWindow.controllerOutgoing x)
+    rawBalanceAfterReturn x store =
+      Cycle.trans
+        (Bound.sym (Cycle.+-zeroRight _))
+        (originalTwoPortSignedWorkConservation x store)
