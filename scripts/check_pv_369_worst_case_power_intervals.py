@@ -46,6 +46,13 @@ def bound_receipt(data,unc):
     per=data.get("four_terminal_per_junction")
     if not isinstance(per,list) or len(per)<2 or len(per)>5:
         raise ValueError("missing actual independently contacted IV curves")
+    absorbed=data.get("per_junction_absorbed_solar_W_m2")
+    if data.get("passive_mpp_le_absorbed_solar_checked") is not True or (
+        not isinstance(absorbed,list) or len(absorbed)!=len(per)):
+        raise ValueError("original P5 passive absorbed-energy certificate missing")
+    absorbed=[number(a,"source absorbed solar per junction",0) for a in absorbed]
+    if sum(absorbed)>solar+1e-7*max(1,solar):
+        raise ValueError("source passive junctions double-count incident solar energy")
     for key in ("solar_rel_bound","voltage_rel_bound","current_rel_bound",
                 "converter_efficiency_abs_bound","auxiliary_abs_bound_W_m2",
                 "drive_abs_bound_W_m2","recovered_abs_bound_W_m2"):
@@ -65,8 +72,10 @@ def bound_receipt(data,unc):
     recovered=number(unc["recovered_nominal_W_m2"],"recnom",0)
     if recovered>drive:raise ValueError("recovered drive greater than input drive")
     lower=0.;upper=0.;gross=0.
-    for p in per:
+    for index,p in enumerate(per):
         v=number(p["gross_mpp_W_m2"],"gross",0)
+        if v>absorbed[index]+1e-7*max(1,solar):
+            raise ValueError("source IV electrical MPP exceeds passive absorbed solar energy")
         eta=number(p["converter_eta"],"converter",0,1)
         delivered=number(p["delivered_mpp_W_m2"],"delivered",0)
         if abs(delivered-v*eta)>1e-8*max(1,delivered,v):
@@ -132,6 +141,8 @@ def selftest():
               "input_sha256":{"spectrum":"a"*64}},
             "incident_solar_W_m2":solar,
             "four_terminal_net_W_m2":net,
+            "passive_mpp_le_absorbed_solar_checked":True,
+            "per_junction_absorbed_solar_W_m2":[solar/4]*4,
             "four_terminal_per_junction":[{"gross_mpp_W_m2":net/4,"converter_eta":1.,"delivered_mpp_W_m2":net/4} for _ in range(4)]}
     def err(rel=0.,aux=0., solar=.0):
         return {"solar_rel_bound":solar,"voltage_rel_bound":rel,
@@ -163,6 +174,12 @@ def selftest():
         return False
     ck("missing source hashes fail",rejected(lambda:bound_receipt({**receipt(),"declared_provenance":{}},err())))
     ck("cannot erase original declared auxiliary cost",rejected(lambda:bound_receipt(receipt(),err(aux=2))))
+    ck("reject missing original passive energy proof flag",rejected(lambda:bound_receipt(
+        {**receipt(),"passive_mpp_le_absorbed_solar_checked":False},err())))
+    ck("reject forged passive MPP above absorbed energy",rejected(lambda:bound_receipt(
+        {**receipt(),"per_junction_absorbed_solar_W_m2":[100.,300.,300.,300.]},err())))
+    ck("reject double counted passive source absorption",rejected(lambda:bound_receipt(
+        {**receipt(),"per_junction_absorbed_solar_W_m2":[300.]*4},err())))
     ck("cannot forge more gross converter delivery",rejected(lambda:bound_receipt(
         {**receipt(),"four_terminal_per_junction":[{"gross_mpp_W_m2":127.5,
            "converter_eta":1.,"delivered_mpp_W_m2":150.} for _ in range(4)]},err())))
