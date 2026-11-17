@@ -5,6 +5,8 @@ on:
   pull_request:
     paths:
       - 'DASHI/Core/SymmetryResolvedFibreExact.agda'
+      - 'DASHI/Core/SituatedFibreDynamicsEverything.agda'
+      - 'DASHI/Cognition/PNF/RationalMarkovLumpingFutureExact.agda'
       - 'DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda'
       - 'DASHI/Physics/YangMills/BalabanCMP116CanonicalSelectedBSourceRound435Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsClayPinnedCMP119CanonicalASourceRound436Exact.agda'
@@ -26,6 +28,7 @@ on:
       - 'Docs/diagrams/contextual_semantic_fractran_toe_maxcut.puml'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
       - 'DASHI/Mathematics/CrossPollination/MillenniumLeanAssistReceiptExact.agda'
+      - 'DASHI/Mathematics/CrossPollination/MillenniumResidualDescentClassifierExact.agda'
       - 'DASHI/Mathematics/CrossPollination/MillenniumThreeLaneContinuationValidation.agda'
       - 'DASHI/Unified/**'
       - 'DASHI/Unifier.agda'
@@ -33,6 +36,8 @@ on:
   push:
     paths:
       - 'DASHI/Core/SymmetryResolvedFibreExact.agda'
+      - 'DASHI/Core/SituatedFibreDynamicsEverything.agda'
+      - 'DASHI/Cognition/PNF/RationalMarkovLumpingFutureExact.agda'
       - 'DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda'
       - 'DASHI/Physics/YangMills/YangMillsClayGoal1MaximumCutRound485Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsClayIrreducibleSourceFamiliesRound546Exact.agda'
@@ -43,6 +48,7 @@ on:
       - 'Docs/diagrams/contextual_semantic_fractran_toe_maxcut.puml'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
       - 'DASHI/Mathematics/CrossPollination/MillenniumLeanAssistReceiptExact.agda'
+      - 'DASHI/Mathematics/CrossPollination/MillenniumResidualDescentClassifierExact.agda'
       - 'DASHI/Mathematics/CrossPollination/MillenniumThreeLaneContinuationValidation.agda'
       - 'DASHI/Unified/BalabanRGTOERegression.agda'
       - 'DASHI/Unified/Everything.agda'
@@ -70,9 +76,29 @@ jobs:
         run: |
           dashi-repo index --root .
           dashi-repo diagnose DASHI/Unified/BalabanRGTOERegression.agda --root .
+          dashi-repo diagnose DASHI/Unified/YMGoal1TOECompatibilityExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/YMGoal1TOECompatibilityValidation.agda --root .
+          dashi-repo diagnose DASHI/Unified/Physics.agda --root .
+          dashi-repo related literalRound440VariableDomainCMP116SourceLevel --root . --limit 20
+          dashi-repo related literalRound443FiniteWilsonActionInvarianceLevel --root . --limit 20
+          dashi-repo related literalRound444PeterWeylWilsonIdentificationLevel --root . --limit 20
+          dashi-repo discover 'Yang Mills Goal1 TOE variable domain Peter Weyl compactness stress non-promotion' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayGoal1 --root .
+          dashi-repo lineage --prefix DASHI.Physics.YangMills.BalabanCMP116 --root .
+          dashi-repo diagnose DASHI/Core/SituatedFibreDynamicsEverything.agda --root .
+          dashi-repo diagnose DASHI/Cognition/PNF/RationalMarkovLumpingFutureExact.agda --root .
+          dashi-repo related oneStepMarkovLumping --root . --limit 30
+          dashi-repo related allFiniteHorizonsRemainCoarseFactored --root . --limit 30
+          dashi-repo related canonicalSituatedFibreTOEZKPFrame --root . --limit 30
+          dashi-repo related refinementDepthPreservesCoarseStage --root . --limit 30
+          dashi-repo related canonicalTypedBranchTrapBarrier --root . --limit 30
+          dashi-repo related canonicalEqualLocalMassDifferentOptionCone --root . --limit 30
+          dashi-repo discover 'coarse fine finite refinement typed branching reachability trajectory residue history future option cone stage barrier' --root . --limit 50
+          dashi-repo lineage --prefix DASHI.Core.SituatedFibre --root .
           dashi-repo diagnose DASHI/EverythingTOESymmetryResolved369.agda --root .
           dashi-repo diagnose DASHI/Unifier.agda --root .
           dashi-repo diagnose DASHI/Mathematics/CrossPollination/MillenniumLeanAssistReceiptExact.agda --root .
+          dashi-repo diagnose DASHI/Mathematics/CrossPollination/MillenniumResidualDescentClassifierExact.agda --root .
           dashi-repo diagnose DASHI/Mathematics/CrossPollination/MillenniumThreeLaneContinuationValidation.agda --root .
           dashi-repo related currentMillenniumExternalAcceptanceReceipt --root . --limit 30
           dashi-repo related leanMillenniumHodgePrizePromotionImpossible --root . --limit 30
@@ -95,19 +121,24 @@ jobs:
           dashi-repo related balabanSameFamilyRecoveryCompilerLevel --root . --limit 20
           dashi-repo related balabanGoal1CSourceCutCompilerLevel --root . --limit 20
           dashi-repo related balabanCPhysicalPackageMaxCutCompilerLevel --root . --limit 20
-          dashi-repo related balabanCriticalPathCompilerLevel --root . --limit 20
-          dashi-repo related round555CriticalPathCompilerLevel --root . --limit 20
           dashi-repo related balabanC4DensityAnchoredStressLaneLevel --root . --limit 20
           dashi-repo related r129ExportsLiteralSchwingerMembership --root . --limit 20
+          dashi-repo related ktbDependentRecoverableProjection --root . --limit 20
+          dashi-repo related ktbDependentCodeSeparating --root . --limit 20
+          dashi-repo discover 'Arabic root pattern undiacritized surface dependent residual exact reopening non-promotion' --root .
+          dashi-repo lineage --prefix DASHI.Culture.ArabicRootPattern --root .
+          dashi-repo diagnose DASHI/Culture/ArabicRootPatternMorphologyProcessingBoundaryExact.agda --root .
           dashi-repo related balabanStressHilbertBoundCompilerLevel --root . --limit 20
           dashi-repo related balabanGeneratedActionStressScaleCompilerLevel --root . --limit 20
           dashi-repo related balabanPublishedRGPhysicalSameObjectLevel --root . --limit 20
+          dashi-repo related balabanSummableRGIncrementCauchyCompilerLevel --root . --limit 20
+          dashi-repo related balabanPhysicalSameFamilyNormalizedCharacteristicIncrementLevel --root . --limit 20
           dashi-repo related balabanContinuumRouteMassGapPromotionStillOpen --root . --limit 20
           dashi-repo related balabanScaleDensityFiniteMeasureWeldLevel --root . --limit 20
           dashi-repo related balabanRegularELocalizationCarrierLevel --root . --limit 20
           dashi-repo related balabanCasimirLowerBoundTransportLevel --root . --limit 20
           dashi-repo related balabanDensityAnchoredStressLaneCompilerLevel --root . --limit 20
-          dashi-repo discover 'Balaban scale density regular-E localization Casimir stress Cauchy telescope Schwinger same-family RG continuum non-promotion' --root .
+          dashi-repo discover 'Balaban scale density regular-E localization Casimir stress Cauchy telescope Schwinger same-family summable increment dyadic RG continuum non-promotion' --root .
           dashi-repo lineage --prefix DASHI.Physics.YangMills.Balaban --root .
           dashi-repo diagnose DASHI/Unified/BalabanRGTOEMaxCutValidation.agda --root .
           dashi-repo diagnose DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda --root .
@@ -155,11 +186,13 @@ jobs:
         run: |
           sources=(
             DASHI/Core/SymmetryResolvedFibreExact.agda
+            DASHI/Core/SituatedFibreDynamicsEverything.agda
+            DASHI/Cognition/PNF/RationalMarkovLumpingFutureExact.agda
             DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda
             DASHI/Unified/BalabanRGTOERegression.agda
             DASHI/Mathematics/CrossPollination/MillenniumLeanAssistReceiptExact.agda
-            DASHI/Mathematics/CrossPollination/MillenniumThreeLaneContinuationValidation.agda
             DASHI/Mathematics/CrossPollination/MillenniumResidualDescentClassifierExact.agda
+            DASHI/Mathematics/CrossPollination/MillenniumThreeLaneContinuationValidation.agda
             DASHI/Unified/R559IbrahimFleetHyperfabricTOEExact.agda
             DASHI/Unified/R559IbrahimFleetHyperfabricTOEValidation.agda
             DASHI/Unified/NavierStokesClayFrontierTOEConvergenceExact.agda
@@ -193,8 +226,8 @@ jobs:
         run: |
           agda --version
           modules=(
-            DASHI/Unified/SensibLawGovernanceTOEExact.agda
-            DASHI/Unified/SensibLawGovernanceTOEValidation.agda
+            DASHI/Core/SituatedFibreDynamicsEverything.agda
+            DASHI/Cognition/PNF/RationalMarkovLumpingFutureExact.agda
             DASHI/Unified/BalabanRGTOERegression.agda
             DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
             DASHI/Unified/BalabanR559TOEMaxCutExact.agda
@@ -207,9 +240,13 @@ jobs:
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
-            DASHI/Unified/ContextualSemanticFractranTOEMaxCutExact.agda
-            DASHI/Unified/ContextualSemanticFractranTOEMaxCutValidation.agda
-            DASHI/Unified/PNFHyperfabric.agda
+            DASHI/Mathematics/CrossPollination/MillenniumLeanAssistReceiptExact.agda
+            DASHI/Mathematics/CrossPollination/MillenniumResidualDescentClassifierExact.agda
+            DASHI/Mathematics/CrossPollination/MillenniumThreeLaneContinuationValidation.agda
+            DASHI/Unified/R559IbrahimFleetHyperfabricTOEExact.agda
+            DASHI/Unified/R559IbrahimFleetHyperfabricTOEValidation.agda
+            DASHI/Unified/NavierStokesClayFrontierTOEConvergenceExact.agda
+            DASHI/Unified/NavierStokesClayFrontierTOEConvergenceValidation.agda
             DASHI/Unified/Physics.agda
             DASHI/EverythingTOESymmetryResolved369.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda

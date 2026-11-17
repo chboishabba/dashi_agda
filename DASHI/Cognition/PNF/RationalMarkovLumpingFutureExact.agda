@@ -3,6 +3,21 @@ module DASHI.Cognition.PNF.RationalMarkovLumpingFutureExact where
 ------------------------------------------------------------------------
 -- STOCHASTIC FUTURE QUOTIENT BY MARKOV LUMPING
 --
+-- SOURCE / VOCABULARY CALIBRATION
+--
+-- John G. Kemeny and J. Laurie Snell,
+-- "Finite Markov Chains", Springer, 1976.
+-- Classical source for finite-chain lumpability.  No DOI is asserted here.
+--
+-- Peter Buchholz,
+-- "Exact and ordinary lumpability in finite Markov chains",
+-- Journal of Applied Probability 31(1), 59--75 (1994).
+-- DOI: 10.2307/3215235.
+--
+-- These sources calibrate the aggregation/lumpability vocabulary.
+-- The constructive operator-factorisation interface below is DASHI-owned.
+-- It does not claim that an arbitrary coarse projection is lumpable.
+--
 -- A stochastic transition kernel acts on observables through its Markov
 -- operator P.  A projection pi is dynamically sufficient when P preserves the
 -- subspace of observables that factor through pi.  Instead of assuming function

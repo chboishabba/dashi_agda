@@ -3,10 +3,12 @@ module DASHI.Culture.ArabicRootPatternMorphologyProcessingBoundaryExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.AttributedSourceCore as Attribution
 import DASHI.Core.SnowballAttributionProvenanceInvariantExact as AttributionSnowball
+import DASHI.Core.DependentRecoverableProjectionExact as Recoverable
 import DASHI.Culture.LinguisticMorphologySourceObservationBridgeExact as Morphology
 import DASHI.Culture.PhonologicalFeatureMatrixContrastExact as Phonology
 
@@ -389,3 +391,109 @@ canonicalReelClaimAudit =
     false
     false
     false
+
+
+------------------------------------------------------------------------
+-- Exact reopening for the undiacritized k-t-b surface.
+--
+-- Reuse the repository-wide dependent recoverable projection.
+-- The coarse orthographic surface intentionally loses the resolved reading.
+-- The residual retains exactly the reading needed for exact reopening.
+------------------------------------------------------------------------
+
+data KTBResolvedReading : Set where
+  katabaReading kutibaReading kutubReading : KTBResolvedReading
+
+data KTBUndiacritizedSurface : Set where
+  ktbSurface : KTBUndiacritizedSurface
+
+ktbResidual : KTBUndiacritizedSurface → Set
+ktbResidual ktbSurface = KTBResolvedReading
+
+ktbProject : KTBResolvedReading → KTBUndiacritizedSurface
+ktbProject _ = ktbSurface
+
+ktbResidualValue :
+  (reading : KTBResolvedReading) →
+  ktbResidual (ktbProject reading)
+ktbResidualValue reading = reading
+
+ktbReopen :
+  (surface : KTBUndiacritizedSurface) →
+  ktbResidual surface →
+  KTBResolvedReading
+ktbReopen ktbSurface reading = reading
+
+ktbReopenExact :
+  (reading : KTBResolvedReading) →
+  ktbReopen (ktbProject reading) (ktbResidualValue reading) ≡ reading
+ktbReopenExact reading = refl
+
+ktbDependentRecoverableProjection :
+  Recoverable.DependentExactRecoverableProjection
+    KTBResolvedReading
+    KTBUndiacritizedSurface
+ktbDependentRecoverableProjection =
+  Recoverable.dependentExactRecoverableProjection
+    ktbResidual
+    ktbProject
+    ktbResidualValue
+    ktbReopen
+    ktbReopenExact
+
+ktbDependentCodeSeparating :
+  Recoverable.DependentCodeSeparating ktbDependentRecoverableProjection
+ktbDependentCodeSeparating =
+  Recoverable.dependentCodeSeparating ktbDependentRecoverableProjection
+
+katabaKutibaShareUndiacritizedSurface :
+  ktbProject katabaReading ≡ ktbProject kutibaReading
+katabaKutibaShareUndiacritizedSurface = refl
+
+katabaIsNotKutiba :
+  katabaReading ≡ kutibaReading → ⊥
+katabaIsNotKutiba ()
+
+data SurfaceAloneDeterminesResolvedKTBReading : Set where
+
+surfaceAloneDoesNotDetermineResolvedKTBReading :
+  SurfaceAloneDeterminesResolvedKTBReading → ⊥
+surfaceAloneDoesNotDetermineResolvedKTBReading ()
+
+------------------------------------------------------------------------
+-- O/R/C/S/L/P/G/F control frame.
+--
+-- This is DASHI control metadata.
+-- It is not attributed to the linguistic or neuroscience sources.
+------------------------------------------------------------------------
+
+record ArabicRootPatternZKPFrame : Set where
+  constructor arabic-root-pattern-zkp-frame
+  field
+    O : String
+    R : String
+    C : String
+    S : String
+    L : String
+    P : String
+    G : String
+    F : String
+    preconditions : String
+    invariants : String
+    postconditions : String
+open ArabicRootPatternZKPFrame public
+
+canonicalArabicRootPatternZKPFrame : ArabicRootPatternZKPFrame
+canonicalArabicRootPatternZKPFrame =
+  arabic-root-pattern-zkp-frame
+    "represent Arabic root-pattern morphology without collapsing linguistic, orthographic, and neural evidence"
+    "reuse canonical morphology and recoverable-projection owners; add exact k-t-b surface-plus-residual reopening"
+    "do not infer exact meaning from vowels alone; do not infer cognitive superiority from neural differences"
+    "Arabic k-t-b reference family and its undiacritized orthographic observation surface"
+    "Ryding; Boudelaa and Marslen-Wilson; Gwilliams and Marantz remain source owners; DASHI owns the formal reconstruction"
+    "generic morphology owner exists; dependent recoverable projection exists; distinct k-t-b readings are declared"
+    "exact reopen must hold; dependent code must separate; unsupported reel promotions remain false"
+    "fail closed on context-free exact reading, Arabic uniqueness, exact dual-track neural architecture, and mental-agility promotion"
+    "source and morphology owners are imported; no ESD surface is edited"
+    "coarse orthography may collide; residual reopening remains exact; attribution does not import proof"
+    "the Arabic owner is ready for direct TOE-root import with exact non-promotion boundaries retained"

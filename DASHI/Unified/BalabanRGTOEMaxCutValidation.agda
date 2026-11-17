@@ -884,107 +884,53 @@ physicsCPackageCountMatchesOwner = refl
 
 
 ------------------------------------------------------------------------
--- Current shortest critical-path agreement.
+-- Source-shaped summable RG increment boundary.
+--
+-- The compiler is machine checked.
+-- The physical source-to-same-family dyadic majorant remains conditional.
 ------------------------------------------------------------------------
 
-toeCriticalPathCompilerMatchesOwner :
-  TOE.toeBalabanCriticalPathCompilerLevel
-  ≡ Balaban.balabanCriticalPathCompilerLevel
-toeCriticalPathCompilerMatchesOwner = refl
+summableRGIncrementCompilerMatchesOwner :
+  TOE.toeBalabanSummableRGIncrementCauchyCompilerLevel
+  ≡ Balaban.balabanSummableRGIncrementCauchyCompilerLevel
+summableRGIncrementCompilerMatchesOwner = refl
 
-unifierCriticalPathCompilerMatchesOwner :
-  Unifier.toeBalabanCriticalPathCompilerLevel
-  ≡ Balaban.balabanCriticalPathCompilerLevel
-unifierCriticalPathCompilerMatchesOwner = refl
+unifierSummableRGIncrementCompilerMatchesOwner :
+  Unifier.toeBalabanSummableRGIncrementCauchyCompilerLevel
+  ≡ Balaban.balabanSummableRGIncrementCauchyCompilerLevel
+unifierSummableRGIncrementCompilerMatchesOwner = refl
 
-physicsCriticalPathCompilerMatchesOwner :
-  Physics.yangMillsBalabanCriticalPathCompilerLevel
-  ≡ Balaban.balabanCriticalPathCompilerLevel
-physicsCriticalPathCompilerMatchesOwner = refl
+physicsSummableRGIncrementCompilerMatchesOwner :
+  Physics.yangMillsBalabanSummableRGIncrementCauchyCompilerLevel
+  ≡ Balaban.balabanSummableRGIncrementCauchyCompilerLevel
+physicsSummableRGIncrementCompilerMatchesOwner = refl
 
-toeCriticalFamilyCountMatchesOwner :
-  TOE.toeBalabanCriticalFamilyCount
-  ≡ Balaban.balabanCriticalFamilyCount
-toeCriticalFamilyCountMatchesOwner = refl
+physicalSameFamilyIncrementStatusMatchesOwner :
+  TOE.toeBalabanPhysicalSameFamilyNormalizedCharacteristicIncrementLevel
+  ≡ Balaban.balabanPhysicalSameFamilyNormalizedCharacteristicIncrementLevel
+physicalSameFamilyIncrementStatusMatchesOwner = refl
 
-unifierCriticalFamilyCountMatchesOwner :
-  Unifier.toeBalabanCriticalFamilyCount
-  ≡ Balaban.balabanCriticalFamilyCount
-unifierCriticalFamilyCountMatchesOwner = refl
+unifierPhysicalSameFamilyIncrementStatusMatchesOwner :
+  Unifier.toeBalabanPhysicalSameFamilyNormalizedCharacteristicIncrementLevel
+  ≡ Balaban.balabanPhysicalSameFamilyNormalizedCharacteristicIncrementLevel
+unifierPhysicalSameFamilyIncrementStatusMatchesOwner = refl
 
-physicsCriticalFamilyCountMatchesOwner :
-  Physics.yangMillsBalabanCriticalFamilyCount
-  ≡ Balaban.balabanCriticalFamilyCount
-physicsCriticalFamilyCountMatchesOwner = refl
+physicsPhysicalSameFamilyIncrementStatusMatchesOwner :
+  Physics.yangMillsBalabanPhysicalSameFamilyNormalizedCharacteristicIncrementLevel
+  ≡ Balaban.balabanPhysicalSameFamilyNormalizedCharacteristicIncrementLevel
+physicsPhysicalSameFamilyIncrementStatusMatchesOwner = refl
 
-toeFullCNotRequiredForMassGapMatchesOwner :
-  TOE.toeBalabanFullCLayerRequiredForMassGapCompiler
-  ≡ Balaban.balabanFullCLayerRequiredForMassGapCompiler
-toeFullCNotRequiredForMassGapMatchesOwner = refl
+toePhysicalSameFamilyIncrementStillConditional :
+  TOE.toeBalabanPhysicalSameFamilyNormalizedCharacteristicIncrementLevel ≡ conditional
+toePhysicalSameFamilyIncrementStillConditional =
+  TOE.toeBalabanPhysicalSameFamilyNormalizedCharacteristicIncrementStillConditional
 
-unifierFullCNotRequiredForMassGapMatchesOwner :
-  Unifier.toeBalabanFullCLayerRequiredForMassGapCompiler
-  ≡ Balaban.balabanFullCLayerRequiredForMassGapCompiler
-unifierFullCNotRequiredForMassGapMatchesOwner = refl
+unifierPhysicalSameFamilyIncrementStillConditional :
+  Unifier.toeBalabanPhysicalSameFamilyNormalizedCharacteristicIncrementLevel ≡ conditional
+unifierPhysicalSameFamilyIncrementStillConditional =
+  Unifier.toeBalabanPhysicalSameFamilyNormalizedCharacteristicIncrementStillConditional
 
-physicsFullCNotRequiredForMassGapMatchesOwner :
-  Physics.yangMillsBalabanFullCLayerRequiredForMassGapCompiler
-  ≡ Balaban.balabanFullCLayerRequiredForMassGapCompiler
-physicsFullCNotRequiredForMassGapMatchesOwner = refl
-
-toeFullCNotRequiredForH6MatchesOwner :
-  TOE.toeBalabanFullCLayerRequiredForMinimalH6Contradiction
-  ≡ Balaban.balabanFullCLayerRequiredForMinimalH6Contradiction
-toeFullCNotRequiredForH6MatchesOwner = refl
-
-unifierFullCNotRequiredForH6MatchesOwner :
-  Unifier.toeBalabanFullCLayerRequiredForMinimalH6Contradiction
-  ≡ Balaban.balabanFullCLayerRequiredForMinimalH6Contradiction
-unifierFullCNotRequiredForH6MatchesOwner = refl
-
-physicsFullCNotRequiredForH6MatchesOwner :
-  Physics.yangMillsBalabanFullCLayerRequiredForMinimalH6Contradiction
-  ≡ Balaban.balabanFullCLayerRequiredForMinimalH6Contradiction
-physicsFullCNotRequiredForH6MatchesOwner = refl
-
-toeFullCRetainedForLocalFieldMatchesOwner :
-  TOE.toeBalabanFullCLayerRetainedForConservativeClayLocalFieldExistence
-  ≡ Balaban.balabanFullCLayerRetainedForConservativeClayLocalFieldExistence
-toeFullCRetainedForLocalFieldMatchesOwner = refl
-
-unifierFullCRetainedForLocalFieldMatchesOwner :
-  Unifier.toeBalabanFullCLayerRetainedForConservativeClayLocalFieldExistence
-  ≡ Balaban.balabanFullCLayerRetainedForConservativeClayLocalFieldExistence
-unifierFullCRetainedForLocalFieldMatchesOwner = refl
-
-physicsFullCRetainedForLocalFieldMatchesOwner :
-  Physics.yangMillsBalabanFullCLayerRetainedForConservativeClayLocalFieldExistence
-  ≡ Balaban.balabanFullCLayerRetainedForConservativeClayLocalFieldExistence
-physicsFullCRetainedForLocalFieldMatchesOwner = refl
-
-
-------------------------------------------------------------------------
--- Joint Balaban/R559 receipt carries the typed continuum firewalls.
-------------------------------------------------------------------------
-
-jointBalabanR559ContinuumLimitPromotionImpossible :
-  Balaban.BalabanContinuumLimitPromotion → ⊥
-jointBalabanR559ContinuumLimitPromotionImpossible =
-  BalabanR559.continuumLimitPromotionEliminator
-    BalabanR559.canonicalBalabanR559TOEMaxCutReceipt
-
-jointBalabanR559DepthContinuumLimitPromotionImpossible :
-  Balaban.DepthContinuumLimitPromotion → ⊥
-jointBalabanR559DepthContinuumLimitPromotionImpossible =
-  BalabanR559.depthContinuumLimitPromotionEliminator
-    BalabanR559.canonicalBalabanR559TOEMaxCutReceipt
-
-toeJointContinuumLimitPromotionMatchesJointOwner :
-  Balaban.BalabanContinuumLimitPromotion → ⊥
-toeJointContinuumLimitPromotionMatchesJointOwner =
-  TOE.toeBalabanR559ContinuumLimitPromotionImpossible
-
-unifierJointContinuumLimitPromotionMatchesJointOwner :
-  Balaban.BalabanContinuumLimitPromotion → ⊥
-unifierJointContinuumLimitPromotionMatchesJointOwner =
-  Unifier.unifierBalabanR559ContinuumLimitPromotionImpossible
+physicsPhysicalSameFamilyIncrementStillConditional :
+  Physics.yangMillsBalabanPhysicalSameFamilyNormalizedCharacteristicIncrementLevel ≡ conditional
+physicsPhysicalSameFamilyIncrementStillConditional =
+  Physics.yangMillsBalabanPhysicalSameFamilyNormalizedCharacteristicIncrementStillConditional
