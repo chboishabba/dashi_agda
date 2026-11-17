@@ -33,8 +33,10 @@ owners=(
   DASHI/Physics/Motors/SmithFilsingerMaxwellTimedSpatialWeldExact.agda
   DASHI/Physics/Motors/SmithFilsingerOpenBoundaryPoyntingGaussExact.agda
   DASHI/Physics/Motors/SmithFilsingerSpaceTimePoyntingTelescopeExact.agda
+  DASHI/Physics/Motors/SmithFilsingerPlaneWaveSpaceTimeWitnessExact.agda
   DASHI/Physics/Motors/SmithFilsingerSelectedSpaceTimePortWeldExact.agda
   DASHI/Physics/Motors/SmithFilsingerSpaceTimePoyntingTelescopeExact.agda
+  DASHI/Physics/Motors/SmithFilsingerPlaneWaveSpaceTimeWitnessExact.agda
   DASHI/Physics/Motors/SmithFilsingerSignedBoundaryGroupCompletionExact.agda
 )
 new_owners=(
@@ -58,8 +60,10 @@ new_owners=(
   DASHI/Physics/Motors/SmithFilsingerMaxwellTimedSpatialWeldExact.agda
   DASHI/Physics/Motors/SmithFilsingerOpenBoundaryPoyntingGaussExact.agda
   DASHI/Physics/Motors/SmithFilsingerSpaceTimePoyntingTelescopeExact.agda
+  DASHI/Physics/Motors/SmithFilsingerPlaneWaveSpaceTimeWitnessExact.agda
   DASHI/Physics/Motors/SmithFilsingerSelectedSpaceTimePortWeldExact.agda
   DASHI/Physics/Motors/SmithFilsingerSpaceTimePoyntingTelescopeExact.agda
+  DASHI/Physics/Motors/SmithFilsingerPlaneWaveSpaceTimeWitnessExact.agda
   DASHI/Physics/Motors/SmithFilsingerSignedBoundaryGroupCompletionExact.agda
 )
 for f in "${owners[@]}"; do test -s "$f"; done
