@@ -20,6 +20,7 @@ IEC 60904-1:2020 and IEC 60904-9:2020 motivate, but do NOT certify, them.
 import argparse, json
 from pathlib import Path
 import math
+from check_pv_369_unsampled_iv_mpp_envelope import certificate as sweep_certificate
 
 def number(x,name,lower=0,upper=None):
     if isinstance(x,bool) or not isinstance(x,(int,float)) or not math.isfinite(x):
@@ -185,8 +186,10 @@ def main():
     p.add_argument("--selftest",action="store_true")
     p.add_argument("--candidate",type=Path)
     p.add_argument("--candidate-uncertainty",type=Path)
+    p.add_argument("--candidate-iv",type=Path,nargs="+")
     p.add_argument("--control",type=Path)
     p.add_argument("--control-uncertainty",type=Path)
+    p.add_argument("--control-iv",type=Path,nargs="+")
     p.add_argument("--output",type=Path)
     x=p.parse_args()
     if x.selftest:r=selftest()
