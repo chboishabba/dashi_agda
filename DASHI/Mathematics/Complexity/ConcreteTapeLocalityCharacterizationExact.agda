@@ -213,24 +213,20 @@ findCenteredAtInteriorHead :
           ∷ suffix))
       afterCells)
 
-findCenteredAtInteriorHead [] suffix [] () legal
-findCenteredAtInteriorHead [] suffix (_ ∷ []) () legal
-findCenteredAtInteriorHead [] suffix (_ ∷ _ ∷ []) () legal
-
-findCenteredAtInteriorHead (_ ∷ []) suffix [] () legal
-findCenteredAtInteriorHead (_ ∷ []) suffix (_ ∷ []) () legal
-findCenteredAtInteriorHead (_ ∷ []) suffix (_ ∷ _ ∷ []) () legal
-
-findCenteredAtInteriorHead (_ ∷ _ ∷ []) suffix [] () legal
-findCenteredAtInteriorHead (_ ∷ _ ∷ []) suffix (_ ∷ []) () legal
-findCenteredAtInteriorHead (_ ∷ _ ∷ []) suffix (_ ∷ _ ∷ []) () legal
-
-findCenteredAtInteriorHead (_ ∷ _ ∷ _ ∷ _) suffix [] () legal
-findCenteredAtInteriorHead (_ ∷ _ ∷ _ ∷ _) suffix (_ ∷ []) () legal
-findCenteredAtInteriorHead (_ ∷ _ ∷ _ ∷ _) suffix (_ ∷ _ ∷ []) () legal
+findCenteredAtInteriorHead
+    [] suffix [] () legal
 
 findCenteredAtInteriorHead
     [] suffix
+    (afterFirst ∷ []) () legal
+
+findCenteredAtInteriorHead
+    [] suffix
+    (afterFirst ∷ afterSecond ∷ []) () legal
+
+findCenteredAtInteriorHead
+    []
+    suffix
     (afterLeft ∷ afterCenter ∷ afterRight ∷ afterRest)
     lengthEqual
     (Whole.allCons firstLegal restLegal)
@@ -239,47 +235,23 @@ findCenteredAtInteriorHead
   Whole.centeredHere configured
 
 findCenteredAtInteriorHead
-    (b1 ∷ []) suffix
-    (afterLeft ∷ afterCenter ∷ afterRight ∷ afterRest)
-    lengthEqual
-    (Whole.allCons firstLegal restLegal) =
-  Whole.centeredThere
-    (findCenteredAtInteriorHead
-      [] suffix (afterCenter ∷ afterRight ∷ afterRest)
-      (NatP.suc-injective lengthEqual)
-      restLegal)
+    (beforeHead ∷ prefix)
+    suffix
+    []
+    ()
+    legal
 
 findCenteredAtInteriorHead
-    (b1 ∷ b2 ∷ []) suffix
-    (afterLeft ∷ afterCenter ∷ afterRight ∷ afterRest)
+    (beforeHead ∷ prefix)
+    suffix
+    (afterHead ∷ afterTail)
     lengthEqual
     (Whole.allCons firstLegal restLegal) =
   Whole.centeredThere
     (findCenteredAtInteriorHead
-      (b2 ∷ []) suffix (afterCenter ∷ afterRight ∷ afterRest)
+      prefix suffix afterTail
       (NatP.suc-injective lengthEqual)
       restLegal)
-
-findCenteredAtInteriorHead
-    (b1 ∷ b2 ∷ b3 ∷ rest) suffix
-    (afterLeft ∷ afterCenter ∷ afterRight ∷ afterRest)
-    lengthEqual
-    (Whole.allCons firstLegal restLegal) =
-  Whole.centeredThere
-    (findCenteredAtInteriorHead
-      (b2 ∷ b3 ∷ rest) suffix (afterCenter ∷ afterRight ∷ afterRest)
-      (NatP.suc-injective lengthEqual)
-      restLegal)
-
-transportScanRow1 :
-  ∀ {machine rule afterCells}
-    {row1 row1' : List (Local.TapeCell (Local.State machine) (Local.Symbol machine))} →
-  row1 ≡ row1' →
-  Whole.All (Pattern.LegalWindowForRule machine rule)
-    (Whole.scanWindowsCells machine row1 afterCells) →
-  Whole.All (Pattern.LegalWindowForRule machine rule)
-    (Whole.scanWindowsCells machine row1' afterCells)
-transportScanRow1 refl h = h
 
 transportLegalityToInteriorShape :
   ∀ {machine rule before after}
@@ -297,8 +269,10 @@ transportLegalityToInteriorShape :
           ∷ Local.plain (rightSymbol interior)
           ∷ suffix interior))
       (Local.cells after))
-transportLegalityToInteriorShape scan interior =
-  transportScanRow1 (rowShape interior) (everyWindowLegal scan)
+transportLegalityToInteriorShape scan interior
+    with rowShape interior
+... | refl =
+  everyWindowLegal scan
 
 interiorShapeLengthMatchesAfter :
   ∀ {machine rule before after}
@@ -319,30 +293,21 @@ interiorShapeLengthMatchesAfter scan interior =
     (sym (cong Coordinate.listLength (rowShape interior)))
     (sameRowLength scan)
 
-transportContainsRow1 :
-  ∀ {machine rule afterCells}
-    {row1 row1' : List (Local.TapeCell (Local.State machine) (Local.Symbol machine))} →
-  row1' ≡ row1 →
-  Whole.ContainsCenteredRuleWindow machine rule
-    (Whole.scanWindowsCells machine row1' afterCells) →
-  Whole.ContainsCenteredRuleWindow machine rule
-    (Whole.scanWindowsCells machine row1 afterCells)
-transportContainsRow1 refl h = h
-
 localityScanDerivesCenteredTransition :
   ∀ {machine rule before after}
     (scan : TransitionLocalityScan machine rule before after) →
   (interior : InteriorHeadConfiguration machine before) →
   Whole.ContainsCenteredRuleWindow machine rule
     (Whole.scanWindows machine before after)
-localityScanDerivesCenteredTransition {after = after} scan interior =
-  transportContainsRow1 (sym (rowShape interior))
-    (findCenteredAtInteriorHead
-      (prefix interior)
-      (suffix interior)
-      (Local.cells after)
-      (interiorShapeLengthMatchesAfter scan interior)
-      (transportLegalityToInteriorShape scan interior))
+localityScanDerivesCenteredTransition {after = after} scan interior
+    with rowShape interior
+... | refl =
+  findCenteredAtInteriorHead
+    (prefix interior)
+    (suffix interior)
+    (Local.cells after)
+    (interiorShapeLengthMatchesAfter scan interior)
+    (transportLegalityToInteriorShape scan interior)
 
 localityScanToGlobalTransitionScan :
   ∀ {machine rule before after}
@@ -350,13 +315,13 @@ localityScanToGlobalTransitionScan :
   InteriorHeadConfiguration machine before →
   Whole.GlobalTransitionScan machine rule before after
 localityScanToGlobalTransitionScan scan interior = record
-  { ruleOccursInMachine =
+  { Whole.ruleOccursInMachine =
       ruleOccursInMachine scan
-  ; sameRowLength =
+  ; Whole.sameRowLength =
       sameRowLength scan
-  ; everyWindowLegal =
+  ; Whole.everyWindowLegal =
       everyWindowLegal scan
-  ; centeredTransitionOccurs =
+  ; Whole.centeredTransitionOccurs =
       localityScanDerivesCenteredTransition scan interior
   }
 

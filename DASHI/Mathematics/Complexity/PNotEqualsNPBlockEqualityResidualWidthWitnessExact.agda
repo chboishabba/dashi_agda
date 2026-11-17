@@ -71,11 +71,11 @@ bitEqualityFormula :
 bitEqualityFormula left right =
   SAT.disjunction
     (SAT.conjunction
-      (SAT.formulaVar left)
-      (SAT.formulaVar right))
+      (SAT.variable left)
+      (SAT.variable right))
     (SAT.conjunction
-      (SAT.negate (SAT.formulaVar left))
-      (SAT.negate (SAT.formulaVar right)))
+      (SAT.negate (SAT.variable left))
+      (SAT.negate (SAT.variable right)))
 
 bitEqualityEvaluation :
   ∀ {variables : Nat}

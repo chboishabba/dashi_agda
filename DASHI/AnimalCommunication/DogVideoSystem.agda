@@ -56,6 +56,8 @@ record DogVideoORCSLPGF : Set₂ where
   F : Claim → Set
   F claim = VerifiedClaim pipeline commitments claim
 
+open DogVideoORCSLPGF public
+
 -- Split trust boundary used by the practical rollout:
 --
 --   mediaAttestation : raw video -> committed pose ribbon
@@ -83,6 +85,8 @@ record SplitTrustBoundary (S : DogVideoORCSLPGF) : Set₁ where
       Σ MotifProgram
         (λ program → residualCost (canonicalize pose) program ≤ budget)
 
+open SplitTrustBoundary public
+
 -- Bounded semantics discipline: cryptographic verification establishes only
 -- that a public predicate holds of the released summary.  It does not turn
 -- that predicate into an ontological claim about what the dog 'really means'.
@@ -95,6 +99,8 @@ record BoundedSemanticProbe (S : DogVideoORCSLPGF) : Set₁ where
     releaseAllowed : Probe → Summary → Set
     bounded : ∀ probe summary → holds probe summary → releaseAllowed probe summary
 
+open BoundedSemanticProbe public
+
 -- Cohort release boundary.  The aggregate itself stays abstract so that
 -- concrete instances may use counts, histograms, transition matrices, or
 -- differential-private statistics.  Every included claim must nevertheless
@@ -106,3 +112,5 @@ record VerifiedCohort (S : DogVideoORCSLPGF) : Set₁ where
     claimAt : Index → Claim
     verifiedAt : ∀ i → F (claimAt i)
     aggregate : Aggregate
+
+open VerifiedCohort public

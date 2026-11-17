@@ -16,7 +16,7 @@ module DASHI.Mathematics.Complexity.ConcreteTapeGlobalTraceDecodeExact where
 -- TapeRow and every selector block becomes a theorem-bearing RuleOccurs choice.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
@@ -72,10 +72,10 @@ decodeSelectorsLength :
   ≡ steps
 decodeSelectorsLength nonempty zero CNF.[]ᵇ =
   refl
-decodeSelectorsLength {machine} nonempty (suc steps) bits
+decodeSelectorsLength nonempty (suc steps) bits
     rewrite decodeSelectorsLength nonempty steps
       (Canonical.dropBits
-        (Selector.RuleWidth machine)
+        (Selector.RuleWidth _)
         bits) =
   refl
 
@@ -100,22 +100,22 @@ decodeRowsAllHaveWidth :
       Canonical.EnumerationCoverage (Local.finiteSymbol machine))
     (rows cols : Nat)
     (bits : CNF.Bits (rows * Decode.RowBitsWidth machine cols)) →
-  AllRowsHaveWidth {machine} cols
-    (Decode.decodeRows {machine}
+  AllRowsHaveWidth cols
+    (Decode.decodeRows
       stateCoverage symbolCoverage rows cols bits)
-decodeRowsAllHaveWidth {machine} stateCoverage symbolCoverage
+decodeRowsAllHaveWidth stateCoverage symbolCoverage
     zero cols CNF.[]ᵇ =
   allRowsWidthNil
 decodeRowsAllHaveWidth {machine}
     stateCoverage symbolCoverage
     (suc rows) cols bits =
   allRowsWidthCons
-    (Decode.decodeCellsLength {machine}
+    (Decode.decodeCellsLength
       stateCoverage symbolCoverage cols
       (Canonical.takeBits
         (Decode.RowBitsWidth machine cols)
         bits))
-    (decodeRowsAllHaveWidth {machine}
+    (decodeRowsAllHaveWidth
       stateCoverage symbolCoverage rows cols
       (Canonical.dropBits
         (Decode.RowBitsWidth machine cols)
@@ -163,14 +163,14 @@ decodeGlobalTrace {machine}
     ; selectors =
         decodedSelectors
     ; rowsLength =
-        Decode.decodeRowsLength {machine}
+        Decode.decodeRowsLength
           stateCoverage symbolCoverage
           (suc steps) cols rowsBits
     ; selectorsLength =
         decodeSelectorsLength
           nonempty steps selectorBits
     ; allRowsFixedWidth =
-        decodeRowsAllHaveWidth {machine}
+        decodeRowsAllHaveWidth
           stateCoverage symbolCoverage
           (suc steps) cols rowsBits
     ; everySelectorInsideMachine =
@@ -188,7 +188,7 @@ decodeGlobalTrace {machine}
         bits
 
     decodedRows =
-      Decode.decodeRows {machine}
+      Decode.decodeRows
         stateCoverage symbolCoverage
         (suc steps) cols rowsBits
 

@@ -88,7 +88,7 @@ localityStatus = localityWitnessRequired
 jacobiStatus : VOAAxiomStatus
 jacobiStatus = jacobiWitnessRequired
 
-record FiniteModeBoundary : Set₁ where
+record FiniteModeBoundary : Set where
   constructor finiteModeBoundary
   field
     gradeArithmeticConstructsStateFieldCorrespondence : Set

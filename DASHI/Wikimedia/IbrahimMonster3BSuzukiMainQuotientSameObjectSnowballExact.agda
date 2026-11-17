@@ -104,7 +104,7 @@ canonicalSameObjectExternalCoordinates =
 -- 2. Receipt shape produced by the executable class-function matcher.
 ------------------------------------------------------------------------
 
-record SuzukiPairFamilyIdentity : Set₁ where
+record SuzukiPairFamilyIdentity : Set where
   constructor suzuki-pair-family-identity
   field
     firstAtlasLabel : String
@@ -115,7 +115,7 @@ record SuzukiPairFamilyIdentity : Set₁ where
 
 open SuzukiPairFamilyIdentity public
 
-record MainTableProductSplit : Set₁ where
+record MainTableProductSplit : Set where
   constructor main-table-product-split
   field
     base1458MainPosition : Nat
@@ -126,7 +126,7 @@ record MainTableProductSplit : Set₁ where
 
 open MainTableProductSplit public
 
-record QuotientDescentMatch : Set₁ where
+record QuotientDescentMatch : Set where
   constructor quotient-descent-match
   field
     productSplit : MainTableProductSplit
@@ -137,7 +137,7 @@ record QuotientDescentMatch : Set₁ where
 
 open QuotientDescentMatch public
 
-record RestrictedMonsterOccurrence : Set₁ where
+record RestrictedMonsterOccurrence : Set where
   constructor restricted-monster-occurrence
   field
     descent : QuotientDescentMatch

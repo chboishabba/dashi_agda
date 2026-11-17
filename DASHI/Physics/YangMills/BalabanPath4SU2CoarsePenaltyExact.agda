@@ -3,7 +3,7 @@ module DASHI.Physics.YangMills.BalabanPath4SU2CoarsePenaltyExact where
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Integer.Base using (+_)
 open import Data.Rational using
-  ( ℚ; 0ℚ; _+_; _-_; _*_; _≤_; _/_
+  ( ℚ; 0ℚ; _-_; _*_; _≤_; _/_
   ; NonNegative; nonNegative )
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
@@ -35,7 +35,6 @@ open import DASHI.Physics.YangMills.BalabanPath4SU2CompleteGaugeFixedHessianExac
   using (physicalTangentInnerNonnegative)
 open import DASHI.Physics.YangMills.BalabanPath4SU2ConcreteCoarseBlockExact
 open import DASHI.Physics.YangMills.BalabanPath4SU2CoarseFineSplittingExact
-  hiding (coarsePenaltyScalarDominationLevel)
 open import DASHI.Physics.YangMills.BalabanSU2GaugeFixedHessianQuadraticExact
   using (gaugeFixedHessianQuadraticForm)
 
@@ -142,20 +141,17 @@ average0123Subtract left right site =
     (axisAverage4RespectsPointwise axis3 (average012Subtract left right) site)
     (axisAverage4Subtract axis3 (average012 left) (average012 right) site)
 
-subSelfZeroRaw : ∀ x → x - x ≡ 0ℚ
-subSelfZeroRaw = ℚRing.solve-∀
-
-average0123ResidualZero : ∀ fld site →
-  average0123 (subtractField fld (average0123 fld)) site ≡ 0ℚ
-average0123ResidualZero fld site =
+average0123ResidualZero : ∀ field site →
+  average0123 (subtractField field (average0123 field)) site ≡ 0ℚ
+average0123ResidualZero field site =
   trans
-    (average0123Subtract fld (average0123 fld) site)
+    (average0123Subtract field (average0123 field) site)
     (trans
       (cong
-        (λ value → average0123 fld site - value)
+        (λ value → average0123 field site - value)
         (average0123OfFixed
-          (average0123 fld) (average0123Fixed fld) site))
-      (subSelfZeroRaw (average0123 fld site)))
+          (average0123 field) (average0123Fixed field) site))
+      (ℚRing.solve-∀))
 
 fineFluctuationAverageZero : ∀ tangent →
   CoarseAverageZero (fineFluctuation tangent)

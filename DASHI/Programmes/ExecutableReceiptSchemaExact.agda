@@ -53,7 +53,7 @@ record CFDSelectedAtomProbeReceipt : Set where
 
 open CFDSelectedAtomProbeReceipt public
 
-record CFDUniformFramePromotionReceipt : Set₁ where
+record CFDUniformFramePromotionReceipt : Set where
   constructor cfdUniformFramePromotionReceipt
   field
     uniformLowerFrameBound : Set
@@ -67,7 +67,7 @@ record CFDUniformFramePromotionReceipt : Set₁ where
 -- the one-step semantic commuting square plus decoder/readout commutation.
 ------------------------------------------------------------------------
 
-record FRACDASHExecutableReceipt : Set₁ where
+record FRACDASHExecutableReceipt : Set where
   constructor fracdashExecutableReceipt
   field
     oneStepCompilerCommutation : Set
@@ -135,5 +135,3 @@ canonicalExecutableReceiptBoundary =
     false refl
     false refl
     true refl
-
-open ExecutableReceiptBoundary public

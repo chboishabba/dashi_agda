@@ -178,95 +178,55 @@ greenPointwiseCauchy source row =
 -- Sum the pointwise estimate and collapse the translated kernel square.
 ------------------------------------------------------------------------
 
-sqMulRaw : ∀ a b → sq (a * b) ≡ sq a * sq b
-sqMulRaw = ℚRing.solve-∀
-
-doubleKernelSquareExact : (source : SiteField side4) →
+doubleKernelSquareExact : ∀ source →
   siteSum4 (λ row →
     siteSum4 (λ column →
       sq (scalarGreenKernel (subtractSite4 row column) * source column)))
   ≡ kernelSquareSum * globalNormSq source
 doubleKernelSquareExact source =
   trans
-    (siteSum4Cong
-      (λ row →
-        siteSum4 (λ column →
-          sq (scalarGreenKernel (subtractSite4 row column) * source column)))
-      (λ row →
-        siteSum4 (λ column →
-          sq (scalarGreenKernel (subtractSite4 row column)) * sq (source column)))
-      (λ row →
-        siteSum4Cong
-          (λ column →
-            sq (scalarGreenKernel (subtractSite4 row column) * source column))
-          (λ column →
-            sq (scalarGreenKernel (subtractSite4 row column)) * sq (source column))
-          (λ column →
-            sqMulRaw
-              (scalarGreenKernel (subtractSite4 row column))
-              (source column))))
+    (siteSum4Cong _ _ (λ row →
+      siteSum4Cong _ _ (λ column → ℚRing.solve-∀)))
     (trans
       (sumSwap (physicalBlockSites side4) (physicalBlockSites side4)
         (λ row column →
           sq (scalarGreenKernel (subtractSite4 row column))
           * sq (source column)))
       (trans
-        (siteSum4Cong
-          (λ column →
-            siteSum4 (λ row →
-              sq (scalarGreenKernel (subtractSite4 row column)) * sq (source column)))
-          (λ column → kernelSquareSum * sq (source column))
-          (λ column →
-            trans
-              (sumRationalRightScale
-                (physicalBlockSites side4)
-                (λ row → sq (scalarGreenKernel (subtractSite4 row column)))
-                (sq (source column)))
-              (cong (λ coefficient → coefficient * sq (source column))
-                (translatedKernelSquareTotal column))))
+        (siteSum4Cong _ _ (λ column →
+          trans
+            (sumRationalRightScale
+              (physicalBlockSites side4)
+              (λ row → sq (scalarGreenKernel (subtractSite4 row column)))
+              (sq (source column)))
+            (cong (λ coefficient → coefficient * sq (source column))
+              (translatedKernelSquareTotal column))))
         (sumRationalScale kernelSquareSum
           (physicalBlockSites side4) (λ column → sq (source column)))))
 
-sumSiteNonnegative : ∀ (values : List (PhysicalBlockL side4)) (term : PhysicalBlockL side4 → ℚ) →
-  (∀ value → 0ℚ ≤ term value) →
-  0ℚ ≤ sumRational values term
-sumSiteNonnegative [] term pointwise = ℚP.≤-refl
-sumSiteNonnegative (value ∷ values) term pointwise =
-  subst
-    (λ left → left ≤ term value + sumRational values term)
-    (ℚP.+-identityˡ 0ℚ)
-    (ℚP.+-mono-≤
-      (pointwise value)
-      (sumSiteNonnegative values term pointwise))
-
-globalNormNonnegative : (source : SiteField side4) → 0ℚ ≤ globalNormSq source
+globalNormNonnegative : ∀ source → 0ℚ ≤ globalNormSq source
 globalNormNonnegative source =
-  sumSiteNonnegative (physicalBlockSites side4) (λ site → sq (source site))
+  sumNonnegative (physicalBlockSites side4) (λ site → sq (source site))
     (λ site → squareNonnegative (source site))
 
-scalarGreenNormFirstBound : (source : SiteField side4) →
+scalarGreenNormFirstBound : ∀ source →
   globalNormSq (scalarGreen source)
   ≤ twoFiftySix * (kernelSquareSum * globalNormSq source)
 scalarGreenNormFirstBound source =
-  subst
-    (λ right → globalNormSq (scalarGreen source) ≤ right)
-    (trans
-      (sumRationalScale twoFiftySix (physicalBlockSites side4)
-        (λ row → siteSum4 (λ column →
-          sq (scalarGreenKernel (subtractSite4 row column) * source column))))
-      (cong (twoFiftySix *_) (doubleKernelSquareExact source)))
+  trans
     (sumRationalMonotone
       (physicalBlockSites side4)
       (λ row → sq (scalarGreen source row))
       (λ row → twoFiftySix * siteSum4 (λ column →
         sq (scalarGreenKernel (subtractSite4 row column) * source column)))
       (greenPointwiseCauchy source))
+    (trans
+      (sumRationalScale twoFiftySix (physicalBlockSites side4)
+        (λ row → siteSum4 (λ column →
+          sq (scalarGreenKernel (subtractSite4 row column) * source column))))
+      (cong (twoFiftySix *_) (doubleKernelSquareExact source)))
 
-twoFiftySixTimesOneSixteenthRaw : ∀ g →
-  twoFiftySix * (oneSixteenth * g) ≡ sixteen * g
-twoFiftySixTimesOneSixteenthRaw = ℚRing.solve-∀
-
-scalarGreenCoefficientBound : (source : SiteField side4) →
+scalarGreenCoefficientBound : ∀ source →
   twoFiftySix * (kernelSquareSum * globalNormSq source)
   ≤ sixteen * globalNormSq source
 scalarGreenCoefficientBound source =
@@ -278,17 +238,16 @@ scalarGreenCoefficientBound source =
       coefficientNonnegative : NonNegative twoFiftySix
       coefficientNonnegative = ℚP.normalize-nonNeg 256 1
   in
-  subst
-    (λ right → twoFiftySix * (kernelSquareSum * globalNormSq source) ≤ right)
-    (twoFiftySixTimesOneSixteenthRaw (globalNormSq source))
+  trans
     (ℚP.*-monoˡ-≤-nonNeg twoFiftySix
       (ℚP.*-monoʳ-≤-nonNeg (globalNormSq source)
         kernelSquareSumBelowOneSixteenth))
+    (ℚRing.solve-∀)
 
-scalarGreenNormBound : (source : SiteField side4) →
+scalarGreenNormBound : ∀ source →
   globalNormSq (scalarGreen source) ≤ sixteen * globalNormSq source
 scalarGreenNormBound source =
-  ℚP.≤-trans (scalarGreenNormFirstBound source) (scalarGreenCoefficientBound source)
+  trans (scalarGreenNormFirstBound source) (scalarGreenCoefficientBound source)
 
 side4GreenKernelSquareBoundLevel : ProofLevel
 side4GreenKernelSquareBoundLevel = machineChecked

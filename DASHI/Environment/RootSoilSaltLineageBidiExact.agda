@@ -131,5 +131,3 @@ record RootSoilSaltBoundary : Set where
 canonicalRootSoilSaltBoundary : RootSoilSaltBoundary
 canonicalRootSoilSaltBoundary =
   rootSoilSaltBoundary false refl false refl false refl false refl true refl
-
-open RootSoilSaltBoundary public

@@ -22,7 +22,7 @@ open import MonsterOntos using (SSP; p3; p5; p7)
 open import Ontology.GodelLattice using (FactorVec)
 
 import DASHI.Quantum.Stone as Stone
-import DASHI.Physics.Closure.QuantumCarrierCore as U
+import DASHI.Unifier as U
 import DASHI.Foundations.RealAnalysisAxioms as RA
 import DASHI.Physics.Closure.BalabanRGMassGapReceiptSurface as MassGap
 import DASHI.Physics.Closure.G2SFGCGaugeFieldSchemaExtension as G2SFGCS

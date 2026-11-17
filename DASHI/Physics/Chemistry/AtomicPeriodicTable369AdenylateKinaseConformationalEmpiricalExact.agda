@@ -2,8 +2,7 @@ module DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseConformation
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (sym; trans)
+open import Agda.Builtin.Equality using (_≡_; refl; sym; trans)
 
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369ProteinBackboneStereochemistryExact as Backbone
 import DASHI.Biology.Protein.ProteinConformationAttractor as Conformation

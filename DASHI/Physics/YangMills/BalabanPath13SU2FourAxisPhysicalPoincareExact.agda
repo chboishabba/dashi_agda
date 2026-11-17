@@ -40,19 +40,19 @@ PhysicalSU2SiteField13 : Set
 PhysicalSU2SiteField13 = SU2.LieCoordinate3 → SiteField Side13.side13
 
 su2SiteNormSq : PhysicalSU2SiteField13 → ℚ
-su2SiteNormSq fld =
+su2SiteNormSq field =
   sumRational SU2.lieCoordinates3
-    (λ coordinate → Norm.globalNormSq (fld coordinate))
+    (λ coordinate → Norm.globalNormSq (field coordinate))
 
 su2DirectionalEnergy : PhysicalSU2SiteField13 → ℚ
-su2DirectionalEnergy fld =
+su2DirectionalEnergy field =
   sumRational SU2.lieCoordinates3
-    (λ coordinate → Poincare13.globalDirectionalEnergy (fld coordinate))
+    (λ coordinate → Poincare13.globalDirectionalEnergy (field coordinate))
 
 SU2GlobalMeanZero : PhysicalSU2SiteField13 → Set
-SU2GlobalMeanZero fld =
+SU2GlobalMeanZero field =
   ∀ coordinate →
-    Martingale.GlobalMeanZero Side13.side13AverageData (fld coordinate)
+    Martingale.GlobalMeanZero Side13.side13AverageData (field coordinate)
 
 sumPointwiseBelow :
   ∀ {A : Set} (values : List A) (left right : A → ℚ) →
@@ -65,39 +65,39 @@ sumPointwiseBelow (value ∷ values) left right pointwise =
     (sumPointwiseBelow values left right pointwise)
 
 componentwisePath13Poincare :
-  ∀ fld → SU2GlobalMeanZero fld →
+  ∀ field → SU2GlobalMeanZero field →
   sumRational SU2.lieCoordinates3
     (λ coordinate →
-      LDL.oneEighteenth * Norm.globalNormSq (fld coordinate))
-  ≤ su2DirectionalEnergy fld
-componentwisePath13Poincare fld meanZero =
+      LDL.oneEighteenth * Norm.globalNormSq (field coordinate))
+  ≤ su2DirectionalEnergy field
+componentwisePath13Poincare field meanZero =
   sumPointwiseBelow SU2.lieCoordinates3
     (λ coordinate →
-      LDL.oneEighteenth * Norm.globalNormSq (fld coordinate))
-    (λ coordinate → Poincare13.globalDirectionalEnergy (fld coordinate))
+      LDL.oneEighteenth * Norm.globalNormSq (field coordinate))
+    (λ coordinate → Poincare13.globalDirectionalEnergy (field coordinate))
     (λ coordinate →
       Poincare13.path13GlobalPoincare
-        (fld coordinate) (meanZero coordinate))
+        (field coordinate) (meanZero coordinate))
 
-scaledSU2NormIsComponentFold : ∀ fld →
-  LDL.oneEighteenth * su2SiteNormSq fld
+scaledSU2NormIsComponentFold : ∀ field →
+  LDL.oneEighteenth * su2SiteNormSq field
   ≡ sumRational SU2.lieCoordinates3
       (λ coordinate →
-        LDL.oneEighteenth * Norm.globalNormSq (fld coordinate))
-scaledSU2NormIsComponentFold fld =
+        LDL.oneEighteenth * Norm.globalNormSq (field coordinate))
+scaledSU2NormIsComponentFold field =
   sym
     (sumRationalScale LDL.oneEighteenth SU2.lieCoordinates3
-      (λ coordinate → Norm.globalNormSq (fld coordinate)))
+      (λ coordinate → Norm.globalNormSq (field coordinate)))
 
 path13SU2FourAxisPhysicalPoincare :
-  ∀ fld → SU2GlobalMeanZero fld →
-  LDL.oneEighteenth * su2SiteNormSq fld
-  ≤ su2DirectionalEnergy fld
-path13SU2FourAxisPhysicalPoincare fld meanZero =
+  ∀ field → SU2GlobalMeanZero field →
+  LDL.oneEighteenth * su2SiteNormSq field
+  ≤ su2DirectionalEnergy field
+path13SU2FourAxisPhysicalPoincare field meanZero =
   subst
-    (λ left → left ≤ su2DirectionalEnergy fld)
-    (scaledSU2NormIsComponentFold fld)
-    (componentwisePath13Poincare fld meanZero)
+    (λ left → left ≤ su2DirectionalEnergy field)
+    (scaledSU2NormIsComponentFold field)
+    (componentwisePath13Poincare field meanZero)
 
 path13SU2FourAxisPhysicalPoincareLevel : ProofLevel
 path13SU2FourAxisPhysicalPoincareLevel = machineChecked

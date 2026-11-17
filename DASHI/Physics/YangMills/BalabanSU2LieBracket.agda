@@ -59,44 +59,44 @@ lieBracket (su2Lie x₁ y₁ z₁) (su2Lie x₂ y₂ z₂) =
 ------------------------------------------------------------------------
 
 zeroR' : ℝ
-zeroR' = zeroR
+zeroR' = interpretCoefficient zeroCoefficient
 
 oneR' : ℝ
-oneR' = oneR
+oneR' = interpretCoefficient oneCoefficient
 
 twoR' : ℝ
-twoR' = twoR
+twoR' = oneR' +R oneR'
 
 bracket1R' : ℝ → ℝ → ℝ → ℝ → ℝ
-bracket1R' y₁ z₁ y₂ z₂ = twoR *R ((y₁ *R z₂) +R (-R (z₁ *R y₂)))
+bracket1R' y₁ z₁ y₂ z₂ = twoR' *R ((y₁ *R z₂) +R (-R (z₁ *R y₂)))
 
 bracket2R' : ℝ → ℝ → ℝ → ℝ → ℝ
-bracket2R' z₁ x₁ z₂ x₂ = twoR *R ((z₁ *R x₂) +R (-R (x₁ *R z₂)))
+bracket2R' z₁ x₁ z₂ x₂ = twoR' *R ((z₁ *R x₂) +R (-R (x₁ *R z₂)))
 
 bracket3R' : ℝ → ℝ → ℝ → ℝ → ℝ
-bracket3R' x₁ y₁ x₂ y₂ = twoR *R ((x₁ *R y₂) +R (-R (y₁ *R x₂)))
+bracket3R' x₁ y₁ x₂ y₂ = twoR' *R ((x₁ *R y₂) +R (-R (y₁ *R x₂)))
 
 lieBracket' : SU2LieAlgebra → SU2LieAlgebra → SU2LieAlgebra
 lieBracket' (su2Lie x₁ y₁ z₁) (su2Lie x₂ y₂ z₂) =
   su2Lie (bracket1R' y₁ z₁ y₂ z₂) (bracket2R' z₁ x₁ z₂ x₂) (bracket3R' x₁ y₁ x₂ y₂)
 
 zeroR-eq : zeroR' ≡ zeroR
-zeroR-eq = refl
+zeroR-eq = zeroCoefficientHomomorphic
 
 oneR-eq : oneR' ≡ oneR
-oneR-eq = refl
+oneR-eq = oneCoefficientHomomorphic
 
 twoR-eq : twoR' ≡ twoR
-twoR-eq = refl
+twoR-eq = cong₂ _+R_ oneR-eq oneR-eq
 
 bracket1R-eq : ∀ {y₁ z₁ y₂ z₂} → bracket1R' y₁ z₁ y₂ z₂ ≡ bracket1R y₁ z₁ y₂ z₂
-bracket1R-eq = refl
+bracket1R-eq rewrite twoR-eq = refl
 
 bracket2R-eq : ∀ {z₁ x₁ z₂ x₂} → bracket2R' z₁ x₁ z₂ x₂ ≡ bracket2R z₁ x₁ z₂ x₂
-bracket2R-eq = refl
+bracket2R-eq rewrite twoR-eq = refl
 
 bracket3R-eq : ∀ {x₁ y₁ x₂ y₂} → bracket3R' x₁ y₁ x₂ y₂ ≡ bracket3R x₁ y₁ x₂ y₂
-bracket3R-eq = refl
+bracket3R-eq rewrite twoR-eq = refl
 
 lieBracket-eq : ∀ {X Y} → lieBracket' X Y ≡ lieBracket X Y
 lieBracket-eq {su2Lie x₁ y₁ z₁} {su2Lie x₂ y₂ z₂}

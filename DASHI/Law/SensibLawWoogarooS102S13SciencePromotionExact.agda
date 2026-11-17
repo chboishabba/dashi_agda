@@ -1,9 +1,9 @@
 module DASHI.Law.SensibLawWoogarooS102S13SciencePromotionExact where
 
-openState import DASHI.Core.Prelude
-openState import Agda.Builtin.Bool using (Bool; false; true)
-openState import Agda.Builtin.String using (String)
-openState import Data.Empty using (⊥)
+open import DASHI.Core.Prelude
+open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
 
 import DASHI.Law.EvidenceProvenanceDependencyDagExact as Provenance
 import DASHI.Law.SensibLawWoogarooKoalaScienceSnowballExact as Science
@@ -39,7 +39,7 @@ data EvidenceRole : Set where
 data PaymentState : Set where
   paid : PaymentState
   partiallyPaid : PaymentState
-  openState : PaymentState
+  open : PaymentState
   conditional : PaymentState
 
 record PromotionGate : Set where
@@ -53,7 +53,7 @@ record PromotionGate : Set where
     sourceDependencyRule : String
     noPromotionBoundary : String
 
-openState PromotionGate public
+open PromotionGate public
 
 s102ThreateningProcessGate : PromotionGate
 s102ThreateningProcessGate = promotion-gate
@@ -68,7 +68,7 @@ s102ThreateningProcessGate = promotion-gate
 s102EffectGate : PromotionGate
 s102EffectGate = promotion-gate
   s102LikelySignificantDetrimentalEffect
-  openState
+  open
   "The science now provides a strong state-of-the-art framework for evaluating magnitude, connectivity loss, fragmentation, induced movement risk, population subdivision, mitigation effectiveness and survey uncertainty."
   "The proponent's own material records about 136 ha direct habitat clearing, about 26 ha indirect impact, habitat score 7, >500 ha connectivity and a significant-impact conclusion under the older federal framework."
   "Obtain a current independent local expert opinion answering likelihood, magnitude, duration, reversibility, cumulative fragmentation, current habitat/population context and whether the approval's mitigation materially changes the likely effect."
@@ -78,7 +78,7 @@ s102EffectGate = promotion-gate
 s13PopulationGate : PromotionGate
 s13PopulationGate = promotion-gate
   s13ViablePopulationIdentity
-  openState
+  open
   "Current science supports defining koala populations in landscape/metapopulation and genetic-connectivity terms, and warns against equating survey non-detection, project boundaries or static maps with population identity."
   "Springview project evidence establishes habitat function, occurrence evidence and landscape connectivity but does not identify the relevant viable population/community."
   "Independently identify the biologically relevant local/regional Koala population using compatible current occurrence, movement, population/genetic, habitat and landscape evidence rather than the development boundary."
@@ -88,7 +88,7 @@ s13PopulationGate = promotion-gate
 s13EssentialityGate : PromotionGate
 s13EssentialityGate = promotion-gate
   s13Essentiality
-  openState
+  open
   "Brunton 2026 supports functional-connectivity validation rather than map-only reasoning; Frère et al. 2023 supports realised gene-flow/mitigation testing; current Commonwealth habitat guidance treats movement ground, corridors and metapopulation processes as habitat attributes."
   "Same-project evidence records Woogaroo/Opossum connectivity, >500 ha connected habitat, food trees/scats, habitat score 7 and expected future fragmentation; adverse SHG recovery-value-0/non-viability reasoning is retained."
   "After identifying the relevant viable population/community, evaluate the without-site counterfactual: whether removal or functional severance materially impairs persistence, dispersal/gene flow, breeding/resource access or resilience, and whether alternative habitat is actually substitutable now."

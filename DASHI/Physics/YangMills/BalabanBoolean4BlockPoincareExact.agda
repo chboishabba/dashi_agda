@@ -7,14 +7,10 @@ open import Data.Rational using
   ( ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; -_; _≤_
   ; NonNegative; Positive; nonNegative; pos )
 import Data.Rational.Properties as ℚP
-import Algebra.Properties.Ring as RingProperties
 open import Data.Sum.Base using (inj₁; inj₂)
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans; refl)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-
-private
-  module ℚRing = RingProperties ℚP.+-*-ring
 
 ------------------------------------------------------------------------
 -- Exact local Poincare certificate on the literal 2 × 2 × 2 × 2 cell.
@@ -131,20 +127,11 @@ walshRemainder f = sumQ (sq (w0011 f) ∷ sq (w0101 f) ∷ sq (w0110 f) ∷ sq (
 
 postulate
   walshSpectralIdentityRaw :
-    ∀ x0000 x0001 x0010 x0011 x0100 x0101 x0110 x0111
-      x1000 x1001 x1010 x1011 x1100 x1101 x1110 x1111 →
-    eightℚ * edgeEnergy
-      (cube16 x0000 x0001 x0010 x0011 x0100 x0101 x0110 x0111
-              x1000 x1001 x1010 x1011 x1100 x1101 x1110 x1111)
-      + sq (blockSum
-        (cube16 x0000 x0001 x0010 x0011 x0100 x0101 x0110 x0111
-                x1000 x1001 x1010 x1011 x1100 x1101 x1110 x1111))
-    ≡ sixteenℚ * normSq
-        (cube16 x0000 x0001 x0010 x0011 x0100 x0101 x0110 x0111
-                x1000 x1001 x1010 x1011 x1100 x1101 x1110 x1111)
-      + walshRemainder
-        (cube16 x0000 x0001 x0010 x0011 x0100 x0101 x0110 x0111
-                x1000 x1001 x1010 x1011 x1100 x1101 x1110 x1111)
+    ∀ x0000 x0001 x0010 x0011 x0100 x0101 x0110 x0111 x1000 x1001 x1010 x1011 x1100 x1101 x1110 x1111 →
+    eightℚ * edgeEnergy (cube16 x0000 x0001 x0010 x0011 x0100 x0101 x0110 x0111 x1000 x1001 x1010 x1011 x1100 x1101 x1110 x1111)
+      + sq (blockSum (cube16 x0000 x0001 x0010 x0011 x0100 x0101 x0110 x0111 x1000 x1001 x1010 x1011 x1100 x1101 x1110 x1111))
+    ≡ sixteenℚ * normSq (cube16 x0000 x0001 x0010 x0011 x0100 x0101 x0110 x0111 x1000 x1001 x1010 x1011 x1100 x1101 x1110 x1111)
+      + walshRemainder (cube16 x0000 x0001 x0010 x0011 x0100 x0101 x0110 x0111 x1000 x1001 x1010 x1011 x1100 x1101 x1110 x1111)
 
 walshSpectralIdentity : ∀ f →
   eightℚ * edgeEnergy f + sq (blockSum f)
@@ -157,10 +144,33 @@ walshSpectralIdentity (cube16 x0000 x0001 x0010 x0011 x0100 x0101 x0110 x0111 x1
 ------------------------------------------------------------------------
 
 negQq : ∀ q → (- q) * q ≡ -( q * q)
-negQq q = sym (ℚRing.-‿distribˡ-* q q)
+negQq q =
+  trans
+    (sym (ℚP.*-distribˡ-+ (- q) q q))
+    (trans
+      (cong (λ v → (- q) * v) (ℚP.+-inverseˡ q))
+      (trans
+        (sym (ℚP.*-zeroʳ (- q)))
+        (sym (ℚP.+-inverseˡ (q * q)))))
 
 negSquare : ∀ q → (- q) * (- q) ≡ q * q
-negSquare q = ℚRing.[-x][-y]≈xy q q
+negSquare q =
+  trans
+    (sym (ℚP.*-distribˡ-+ (- q) (- q) q))
+    (trans
+      (cong (λ v → (- q) * v) (ℚP.+-inverseˡ q))
+      (trans
+        (sym (ℚP.*-zeroʳ (- q)))
+        (sym
+          (trans
+            (ℚP.+-inverseˡ ((- q) * q))
+            (trans
+              (sym (ℚP.*-distribˡ-+ (- q) q q))
+              (trans
+                (cong (λ v → (- q) * v + q * q) (ℚP.+-inverseˡ q))
+                (trans
+                  (cong (_+ q * q) (sym (ℚP.*-zeroˡ q)))
+                  (sym (ℚP.+-inverseˡ (q * q))))))))))
 
 negZero : - 0ℚ ≡ 0ℚ
 negZero = trans (sym (ℚP.+-identityʳ (- 0ℚ))) (ℚP.+-inverseˡ 0ℚ)
@@ -261,7 +271,16 @@ meanZeroScaledGap f meanZero =
       (walshRemainderNonnegative f))
 
 eightTimesTwo : ∀ q → eightℚ * (twoℚ * q) ≡ sixteenℚ * q
-eightTimesTwo q = sym (ℚP.*-assoc eightℚ twoℚ q)
+eightTimesTwo q =
+  trans
+    (sym (ℚP.*-assoc eightℚ twoℚ q))
+    (trans
+      (cong (λ v → v * q) (ℚP.*-comm eightℚ twoℚ))
+      (trans
+        (cong (λ v → v * q) (ℚP.*-comm twoℚ sixteenℚ))
+        (trans
+          (cong (λ v → v * q) (ℚP.*-identityˡ sixteenℚ))
+          refl)))
 
 instance
   onePositive : Positive 1ℚ
@@ -324,10 +343,12 @@ bondEdgeEnergy block =
 twoDistributesFour : ∀ a b c d → twoℚ * (a + (b + (c + d))) ≡ twoℚ * a + (twoℚ * b + (twoℚ * c + twoℚ * d))
 twoDistributesFour a b c d =
   trans
-    (ℚP.*-distribˡ-+ twoℚ a (b + (c + d)))
+    (sym (ℚP.*-distribˡ-+ twoℚ a (b + (c + d))))
     (trans
       (cong (λ v → twoℚ * a + v) (ℚP.*-distribˡ-+ twoℚ b (c + d)))
-      (cong (λ v → twoℚ * a + (twoℚ * b + v)) (ℚP.*-distribˡ-+ twoℚ c d)))
+      (trans
+        (cong (λ v → twoℚ * a + (twoℚ * b + v)) (ℚP.*-distribˡ-+ twoℚ c d))
+        (ℚP.+-assoc (twoℚ * a) (twoℚ * b) (twoℚ * c + twoℚ * d))))
 
 fourComponentBoolean4BlockPoincare :
   ∀ block →

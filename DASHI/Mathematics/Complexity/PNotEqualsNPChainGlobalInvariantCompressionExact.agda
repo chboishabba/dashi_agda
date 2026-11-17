@@ -49,8 +49,8 @@ endpointEqualityFormula :
   Cook.BooleanFormula
 endpointEqualityFormula =
   Shared.equivalenceFormula
-    (Cook.formulaVar zero)
-    (Cook.formulaVar (suc zero))
+    (Cook.variable zero)
+    (Cook.variable (suc zero))
 
 endpointEqualityFormulaNodeCount :
   FormulaSize.formulaNodeCount endpointEqualityFormula

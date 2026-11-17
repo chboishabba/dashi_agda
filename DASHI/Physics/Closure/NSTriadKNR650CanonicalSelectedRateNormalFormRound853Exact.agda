@@ -148,12 +148,12 @@ module CanonicalSelectedRateNormalForm
       sym (Physical.twelveGlobalCommutatorIsCombined cutoff time)
 
     packetSameObject :
-      (margin : ℚ) →
       Packet.physicalPacketStrictSurplusRate D cutoff margin time
       ≡ production - (twoNu - margin) * dissipation
-    packetSameObject margin =
-      sym (Physical.literalStrictSurplusIsPhysicalPacket
-        cutoff S margin time)
+      where
+      margin : ℚ
+      margin = A.coefficient A.dissipation
+    packetSameObject = refl
 
     signedRateNormalForm :
       (margin : ℚ) →

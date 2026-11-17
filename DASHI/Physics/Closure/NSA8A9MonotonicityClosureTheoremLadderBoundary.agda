@@ -20,8 +20,10 @@ import DASHI.Physics.Closure.NSA8FullLocalDefectMonotonicityBoundary as A8
 --
 -- into one standalone ledger surface.
 --
--- The intended upstream theorem names are recorded here explicitly as
--- lightweight consumer strings to keep imports minimal:
+-- The A8 receipt module is imported under a qualified name so this ladder can
+-- gate local A8 promotion on file-local dependency state.  The A9 receipt is
+-- intentionally kept as a reference string here because its current local
+-- import chain still expects the pre-promotion A8 false witness.
 --
 --   * NSA8FullLocalDefectMonotonicityBoundary
 --   * NSA9CKNBKMClosureBoundary
@@ -56,15 +58,43 @@ a9BoundaryReference =
 
 a8BoundaryConsumedRecorded : Bool
 a8BoundaryConsumedRecorded =
-  true
+  A8.NSA8FullLocalDefectMonotonicityBoundaryRecorded
+
+a8BoundaryConsumedRecordedIsTrue :
+  a8BoundaryConsumedRecorded ≡ true
+a8BoundaryConsumedRecordedIsTrue =
+  A8.NSA8FullLocalDefectMonotonicityBoundaryRecordedIsTrue
 
 a9BoundaryConsumedRecorded : Bool
 a9BoundaryConsumedRecorded =
-  true
+  false
+
+a9BoundaryConsumedRecordedIsFalse :
+  a9BoundaryConsumedRecorded ≡ false
+a9BoundaryConsumedRecordedIsFalse =
+  refl
+
+a8DependencyGate : Bool
+a8DependencyGate =
+  A8.A8FullLocalDefectMonotonicityProved
+
+a8DependencyGateIsTrue :
+  a8DependencyGate ≡ true
+a8DependencyGateIsTrue =
+  A8.A8FullLocalDefectMonotonicityProvedIsTrue
+
+a9DependencyGate : Bool
+a9DependencyGate =
+  false
+
+a9DependencyGateIsFalse :
+  a9DependencyGate ≡ false
+a9DependencyGateIsFalse =
+  refl
 
 a8RecursiveClosureTheoremText : String
 a8RecursiveClosureTheoremText =
-  "A8 candidate theorem grammar: after freezing the A7 smallness threshold, localization commutator control and the CKN annulus decomposition produce a scale-monotonicity recursion D_{theta r} <= q(theta,M) D_r + C(R,M) D_r^(1+alpha) with 0 < q(theta,M) < 1; choosing D_r below the recursive threshold makes the nonlinear remainder absorbable and theta-power iteration forces D_{theta^k r} -> 0."
+  "A8 candidate theorem grammar: after freezing the A7 smallness threshold, localization commutator control and the annular CKN decomposition produce the supplied dyadic recursion D(r/2) <= q(M) D(r) + C(M) D(r)^(1+alpha), with q(M) = C0 M0^(2-beta) < 1; choosing D(r) below the A7-compatible recursive threshold makes the nonlinear remainder absorbable and dyadic iteration forces D(2^-k r) -> 0."
 
 a9ClosureTheoremText : String
 a9ClosureTheoremText =
@@ -206,11 +236,11 @@ a8MonotonicityRow =
     ; rungName =
         "A8 full local defect monotonicity"
     ; rungDescription =
-        "Candidate theorem package only: fix the A7 threshold regime, derive the strict-contraction scale recursion D_{theta r} <= q(theta,M) D_r + C(R,M) D_r^(1+alpha) with q(theta,M) < 1, absorb the nonlinear remainder below threshold, and iterate to obtain D_{theta^k r} -> 0."
+        "Candidate theorem package only: fix the A7 threshold regime, derive the supplied annular CKN recursion D(r/2) <= q(M) D(r) + C(M) D(r)^(1+alpha) with q(M) = C0 M0^(2-beta) < 1, absorb the nonlinear remainder below the A7-compatible threshold, and dyadically iterate to obtain D(2^-k r) -> 0."
     ; blocker =
         blocker-a8-local-gate-satisfied
     ; blockerName =
-        "missingA8RecursiveClosureTheorem"
+        "A8LocalMonotonicityGateSatisfied"
     ; blockerNameMatchesToken =
         refl
     ; expectedPromotionAtThisRung =
@@ -353,10 +383,14 @@ downstreamNSA8A9BlockerCountIs6 =
   refl
 
 downstreamNSA8A9BlockerName : DownstreamNSA8A9Blocker → String
-downstreamNSA8A9BlockerName blocker-a8-proof-surface-not-imported-here =
-  "missingImportedA8RecursiveClosureSurface"
-downstreamNSA8A9BlockerName blocker-a9-proof-surface-not-imported-here =
-  "missingImportedA9CKNBKMClosureSurface"
+downstreamNSA8A9BlockerName blocker-a8-theorem-flag-still-false =
+  "A8MonotonicityTheoremFlagStillFalse"
+downstreamNSA8A9BlockerName blocker-a9-theorem-flag-still-false =
+  "A9CKNBKMClosureTheoremFlagStillFalse"
+downstreamNSA8A9BlockerName blocker-a8-imported-dependency-gate-still-false =
+  "importedA8RecursiveClosureGateStillFalse"
+downstreamNSA8A9BlockerName blocker-a9-imported-dependency-gate-still-false =
+  "importedA9CKNBKMClosureGateStillFalse"
 downstreamNSA8A9BlockerName blocker-contradiction-still-receipt-only =
   "missingContradictionTheoremFromA8A9"
 downstreamNSA8A9BlockerName blocker-no-type-i-blowup-still-receipt-only =

@@ -79,136 +79,340 @@ all6True true true true false e f ()
 all6True true true true true false f ()
 all6True true true true true true false ()
 
+recognizeLegalWindow :
+  (machine : Local.ConcreteTapeMachine) →
+  (rule : Local.TapeRule
+    (Local.State machine)
+    (Local.Symbol machine)) →
+  (window : Local.SixCellWindow machine) →
+  LegalWindowRecognition machine rule window
 
-checkUnchanged :
-  ∀ {machine rule a b c a' b' c'} →
-  a ≡ a' → b ≡ b' → c ≡ c' →
-  Pattern.LegalWindowForRule machine rule
+recognizeLegalWindow machine rule
     (Local.six-cell-window
       (Local.plain a) (Local.plain b) (Local.plain c)
       (Local.plain a') (Local.plain b') (Local.plain c'))
-checkUnchanged refl refl refl = Pattern.legal-unchanged
+    with BoolRec.all3
+      (BoolRec.symbolEq machine a a')
+      (BoolRec.symbolEq machine b b')
+      (BoolRec.symbolEq machine c c')
+... | false = rejected
+... | true
+    with all3True
+      (BoolRec.symbolEq machine a a')
+      (BoolRec.symbolEq machine b b')
+      (BoolRec.symbolEq machine c c')
+      refl
+... | ea , (eb , ec)
+    with symbolEqTrue ea | symbolEqTrue eb | symbolEqTrue ec
+... | refl | refl | refl =
+  accepted Pattern.legal-unchanged
 
-checkRealizesLeft :
-  ∀ {machine q a q' b left right oldQ oldA newQ newLeft newB newRight} →
-  oldQ ≡ q → oldA ≡ a → newQ ≡ q' → newLeft ≡ left → newB ≡ b → newRight ≡ right →
-  Pattern.LegalWindowForRule machine
+recognizeLegalWindow machine
     (Local.tape-rule q a q' b Local.moveLeft)
     (Local.six-cell-window
       (Local.plain left) (Local.headed oldQ oldA) (Local.plain right)
       (Local.headed newQ newLeft) (Local.plain newB) (Local.plain newRight))
-checkRealizesLeft refl refl refl refl refl refl =
-  Pattern.legal-centered Local.realizes-left
+    with BoolRec.all6
+      (BoolRec.stateEq machine oldQ q)
+      (BoolRec.symbolEq machine oldA a)
+      (BoolRec.stateEq machine newQ q')
+      (BoolRec.symbolEq machine newLeft left)
+      (BoolRec.symbolEq machine newB b)
+      (BoolRec.symbolEq machine newRight right)
+... | false = rejected
+... | true
+    with all6True
+      (BoolRec.stateEq machine oldQ q)
+      (BoolRec.symbolEq machine oldA a)
+      (BoolRec.stateEq machine newQ q')
+      (BoolRec.symbolEq machine newLeft left)
+      (BoolRec.symbolEq machine newB b)
+      (BoolRec.symbolEq machine newRight right)
+      refl
+... | e1 , (e2 , (e3 , (e4 , (e5 , e6))))
+    with stateEqTrue e1 | symbolEqTrue e2 | stateEqTrue e3
+       | symbolEqTrue e4 | symbolEqTrue e5 | symbolEqTrue e6
+... | refl | refl | refl | refl | refl | refl =
+  accepted (Pattern.legal-centered Local.realizes-left)
 
-checkRealizesStay :
-  ∀ {machine q a q' b left right left' right' oldQ oldA newQ newB} →
-  left ≡ left' → oldQ ≡ q → oldA ≡ a → newQ ≡ q' → newB ≡ b → right ≡ right' →
-  Pattern.LegalWindowForRule machine
+recognizeLegalWindow machine
     (Local.tape-rule q a q' b Local.stayPut)
     (Local.six-cell-window
       (Local.plain left) (Local.headed oldQ oldA) (Local.plain right)
       (Local.plain left') (Local.headed newQ newB) (Local.plain right'))
-checkRealizesStay refl refl refl refl refl refl =
-  Pattern.legal-centered Local.realizes-stay
+    with BoolRec.all6
+      (BoolRec.symbolEq machine left left')
+      (BoolRec.stateEq machine oldQ q)
+      (BoolRec.symbolEq machine oldA a)
+      (BoolRec.stateEq machine newQ q')
+      (BoolRec.symbolEq machine newB b)
+      (BoolRec.symbolEq machine right right')
+... | false = rejected
+... | true
+    with all6True
+      (BoolRec.symbolEq machine left left')
+      (BoolRec.stateEq machine oldQ q)
+      (BoolRec.symbolEq machine oldA a)
+      (BoolRec.stateEq machine newQ q')
+      (BoolRec.symbolEq machine newB b)
+      (BoolRec.symbolEq machine right right')
+      refl
+... | e1 , (e2 , (e3 , (e4 , (e5 , e6))))
+    with symbolEqTrue e1 | stateEqTrue e2 | symbolEqTrue e3
+       | stateEqTrue e4 | symbolEqTrue e5 | symbolEqTrue e6
+... | refl | refl | refl | refl | refl | refl =
+  accepted (Pattern.legal-centered Local.realizes-stay)
 
-checkRealizesRight :
-  ∀ {machine q a q' b left right left' oldQ oldA newQ newRight newB} →
-  left ≡ left' → oldQ ≡ q → oldA ≡ a → newB ≡ b → newQ ≡ q' → newRight ≡ right →
-  Pattern.LegalWindowForRule machine
+recognizeLegalWindow machine
     (Local.tape-rule q a q' b Local.moveRight)
     (Local.six-cell-window
       (Local.plain left) (Local.headed oldQ oldA) (Local.plain right)
       (Local.plain left') (Local.plain newB) (Local.headed newQ newRight))
-checkRealizesRight refl refl refl refl refl refl =
-  Pattern.legal-centered Local.realizes-right
+    with BoolRec.all6
+      (BoolRec.symbolEq machine left left')
+      (BoolRec.stateEq machine oldQ q)
+      (BoolRec.symbolEq machine oldA a)
+      (BoolRec.symbolEq machine newB b)
+      (BoolRec.stateEq machine newQ q')
+      (BoolRec.symbolEq machine newRight right)
+... | false = rejected
+... | true
+    with all6True
+      (BoolRec.symbolEq machine left left')
+      (BoolRec.stateEq machine oldQ q)
+      (BoolRec.symbolEq machine oldA a)
+      (BoolRec.symbolEq machine newB b)
+      (BoolRec.stateEq machine newQ q')
+      (BoolRec.symbolEq machine newRight right)
+      refl
+... | e1 , (e2 , (e3 , (e4 , (e5 , e6))))
+    with symbolEqTrue e1 | stateEqTrue e2 | symbolEqTrue e3
+       | symbolEqTrue e4 | stateEqTrue e5 | symbolEqTrue e6
+... | refl | refl | refl | refl | refl | refl =
+  accepted (Pattern.legal-centered Local.realizes-right)
 
-checkLeftOverlapMinusTwo :
-  ∀ {machine q a q' b first second left first' second' newQ newLeft} →
-  first ≡ first' → second ≡ second' → newQ ≡ q' → newLeft ≡ left →
-  Pattern.LegalWindowForRule machine
+recognizeLegalWindow machine
     (Local.tape-rule q a q' b Local.moveLeft)
     (Local.six-cell-window
       (Local.plain first) (Local.plain second) (Local.plain left)
       (Local.plain first') (Local.plain second') (Local.headed newQ newLeft))
-checkLeftOverlapMinusTwo refl refl refl refl =
-  Pattern.left-overlap-minus-two
+    with BoolRec.all5
+      (BoolRec.symbolEq machine first first')
+      (BoolRec.symbolEq machine second second')
+      (BoolRec.stateEq machine newQ q')
+      (BoolRec.symbolEq machine newLeft left)
+      (BoolRec.symbolEq machine left left)
+... | false = rejected
+... | true
+    with all5True
+      (BoolRec.symbolEq machine first first')
+      (BoolRec.symbolEq machine second second')
+      (BoolRec.stateEq machine newQ q')
+      (BoolRec.symbolEq machine newLeft left)
+      (BoolRec.symbolEq machine left left)
+      refl
+... | e1 , (e2 , (e3 , (e4 , e5)))
+    with symbolEqTrue e1 | symbolEqTrue e2 | stateEqTrue e3
+       | symbolEqTrue e4
+... | refl | refl | refl | refl =
+  accepted Pattern.left-overlap-minus-two
 
-checkLeftOverlapMinusOne :
-  ∀ {machine q a q' b context left oldQ oldA context' newQ newLeft newB} →
-  context ≡ context' → oldQ ≡ q → oldA ≡ a → newQ ≡ q' → newLeft ≡ left → newB ≡ b →
-  Pattern.LegalWindowForRule machine
+recognizeLegalWindow machine
     (Local.tape-rule q a q' b Local.moveLeft)
     (Local.six-cell-window
       (Local.plain context) (Local.plain left) (Local.headed oldQ oldA)
       (Local.plain context') (Local.headed newQ newLeft) (Local.plain newB))
-checkLeftOverlapMinusOne refl refl refl refl refl refl =
-  Pattern.left-overlap-minus-one
+    with BoolRec.all6
+      (BoolRec.symbolEq machine context context')
+      (BoolRec.stateEq machine oldQ q)
+      (BoolRec.symbolEq machine oldA a)
+      (BoolRec.stateEq machine newQ q')
+      (BoolRec.symbolEq machine newLeft left)
+      (BoolRec.symbolEq machine newB b)
+... | false = rejected
+... | true
+    with all6True
+      (BoolRec.symbolEq machine context context')
+      (BoolRec.stateEq machine oldQ q)
+      (BoolRec.symbolEq machine oldA a)
+      (BoolRec.stateEq machine newQ q')
+      (BoolRec.symbolEq machine newLeft left)
+      (BoolRec.symbolEq machine newB b)
+      refl
+... | e1 , (e2 , (e3 , (e4 , (e5 , e6))))
+    with symbolEqTrue e1 | stateEqTrue e2 | symbolEqTrue e3
+       | stateEqTrue e4 | symbolEqTrue e5 | symbolEqTrue e6
+... | refl | refl | refl | refl | refl | refl =
+  accepted Pattern.left-overlap-minus-one
 
-checkLeftOverlapPlusOne :
-  ∀ {machine q a q' b right context right' context' oldQ oldA newB} →
-  oldQ ≡ q → oldA ≡ a → newB ≡ b → right ≡ right' → context ≡ context' →
-  Pattern.LegalWindowForRule machine
+recognizeLegalWindow machine
     (Local.tape-rule q a q' b Local.moveLeft)
     (Local.six-cell-window
       (Local.headed oldQ oldA) (Local.plain right) (Local.plain context)
       (Local.plain newB) (Local.plain right') (Local.plain context'))
-checkLeftOverlapPlusOne refl refl refl refl refl =
-  Pattern.left-overlap-plus-one
+    with BoolRec.all6
+      (BoolRec.stateEq machine oldQ q)
+      (BoolRec.symbolEq machine oldA a)
+      (BoolRec.symbolEq machine newB b)
+      (BoolRec.symbolEq machine right right')
+      (BoolRec.symbolEq machine context context')
+      (BoolRec.symbolEq machine right right)
+... | false = rejected
+... | true
+    with all6True
+      (BoolRec.stateEq machine oldQ q)
+      (BoolRec.symbolEq machine oldA a)
+      (BoolRec.symbolEq machine newB b)
+      (BoolRec.symbolEq machine right right')
+      (BoolRec.symbolEq machine context context')
+      (BoolRec.symbolEq machine right right)
+      refl
+... | e1 , (e2 , (e3 , (e4 , (e5 , e6))))
+    with stateEqTrue e1 | symbolEqTrue e2 | symbolEqTrue e3
+       | symbolEqTrue e4 | symbolEqTrue e5
+... | refl | refl | refl | refl | refl =
+  accepted Pattern.left-overlap-plus-one
 
-checkStayOverlapMinusOne :
-  ∀ {machine q a q' b context left context' left' oldQ oldA newQ newB} →
-  context ≡ context' → left ≡ left' → oldQ ≡ q → oldA ≡ a → newQ ≡ q' → newB ≡ b →
-  Pattern.LegalWindowForRule machine
+recognizeLegalWindow machine
     (Local.tape-rule q a q' b Local.stayPut)
     (Local.six-cell-window
       (Local.plain context) (Local.plain left) (Local.headed oldQ oldA)
       (Local.plain context') (Local.plain left') (Local.headed newQ newB))
-checkStayOverlapMinusOne refl refl refl refl refl refl =
-  Pattern.stay-overlap-minus-one
+    with BoolRec.all6
+      (BoolRec.symbolEq machine context context')
+      (BoolRec.symbolEq machine left left')
+      (BoolRec.stateEq machine oldQ q)
+      (BoolRec.symbolEq machine oldA a)
+      (BoolRec.stateEq machine newQ q')
+      (BoolRec.symbolEq machine newB b)
+... | false = rejected
+... | true
+    with all6True
+      (BoolRec.symbolEq machine context context')
+      (BoolRec.symbolEq machine left left')
+      (BoolRec.stateEq machine oldQ q)
+      (BoolRec.symbolEq machine oldA a)
+      (BoolRec.stateEq machine newQ q')
+      (BoolRec.symbolEq machine newB b)
+      refl
+... | e1 , (e2 , (e3 , (e4 , (e5 , e6))))
+    with symbolEqTrue e1 | symbolEqTrue e2 | stateEqTrue e3
+       | symbolEqTrue e4 | stateEqTrue e5 | symbolEqTrue e6
+... | refl | refl | refl | refl | refl | refl =
+  accepted Pattern.stay-overlap-minus-one
 
-checkStayOverlapPlusOne :
-  ∀ {machine q a q' b right context right' context' oldQ oldA newQ newB} →
-  oldQ ≡ q → oldA ≡ a → newQ ≡ q' → newB ≡ b → right ≡ right' → context ≡ context' →
-  Pattern.LegalWindowForRule machine
+recognizeLegalWindow machine
     (Local.tape-rule q a q' b Local.stayPut)
     (Local.six-cell-window
       (Local.headed oldQ oldA) (Local.plain right) (Local.plain context)
       (Local.headed newQ newB) (Local.plain right') (Local.plain context'))
-checkStayOverlapPlusOne refl refl refl refl refl refl =
-  Pattern.stay-overlap-plus-one
+    with BoolRec.all6
+      (BoolRec.stateEq machine oldQ q)
+      (BoolRec.symbolEq machine oldA a)
+      (BoolRec.stateEq machine newQ q')
+      (BoolRec.symbolEq machine newB b)
+      (BoolRec.symbolEq machine right right')
+      (BoolRec.symbolEq machine context context')
+... | false = rejected
+... | true
+    with all6True
+      (BoolRec.stateEq machine oldQ q)
+      (BoolRec.symbolEq machine oldA a)
+      (BoolRec.stateEq machine newQ q')
+      (BoolRec.symbolEq machine newB b)
+      (BoolRec.symbolEq machine right right')
+      (BoolRec.symbolEq machine context context')
+      refl
+... | e1 , (e2 , (e3 , (e4 , (e5 , e6))))
+    with stateEqTrue e1 | symbolEqTrue e2 | stateEqTrue e3
+       | symbolEqTrue e4 | symbolEqTrue e5 | symbolEqTrue e6
+... | refl | refl | refl | refl | refl | refl =
+  accepted Pattern.stay-overlap-plus-one
 
-checkRightOverlapMinusOne :
-  ∀ {machine q a q' b context left context' left' oldQ oldA newB} →
-  context ≡ context' → left ≡ left' → oldQ ≡ q → oldA ≡ a → newB ≡ b →
-  Pattern.LegalWindowForRule machine
+recognizeLegalWindow machine
     (Local.tape-rule q a q' b Local.moveRight)
     (Local.six-cell-window
       (Local.plain context) (Local.plain left) (Local.headed oldQ oldA)
       (Local.plain context') (Local.plain left') (Local.plain newB))
-checkRightOverlapMinusOne refl refl refl refl refl =
-  Pattern.right-overlap-minus-one
+    with BoolRec.all6
+      (BoolRec.symbolEq machine context context')
+      (BoolRec.symbolEq machine left left')
+      (BoolRec.stateEq machine oldQ q)
+      (BoolRec.symbolEq machine oldA a)
+      (BoolRec.symbolEq machine newB b)
+      (BoolRec.symbolEq machine left left)
+... | false = rejected
+... | true
+    with all6True
+      (BoolRec.symbolEq machine context context')
+      (BoolRec.symbolEq machine left left')
+      (BoolRec.stateEq machine oldQ q)
+      (BoolRec.symbolEq machine oldA a)
+      (BoolRec.symbolEq machine newB b)
+      (BoolRec.symbolEq machine left left)
+      refl
+... | e1 , (e2 , (e3 , (e4 , (e5 , e6))))
+    with symbolEqTrue e1 | symbolEqTrue e2 | stateEqTrue e3
+       | symbolEqTrue e4 | symbolEqTrue e5
+... | refl | refl | refl | refl | refl =
+  accepted Pattern.right-overlap-minus-one
 
-checkRightOverlapPlusOne :
-  ∀ {machine q a q' b right context context' oldQ oldA newB newQ newRight} →
-  oldQ ≡ q → oldA ≡ a → newB ≡ b → newQ ≡ q' → newRight ≡ right → context ≡ context' →
-  Pattern.LegalWindowForRule machine
+recognizeLegalWindow machine
     (Local.tape-rule q a q' b Local.moveRight)
     (Local.six-cell-window
       (Local.headed oldQ oldA) (Local.plain right) (Local.plain context)
       (Local.plain newB) (Local.headed newQ newRight) (Local.plain context'))
-checkRightOverlapPlusOne refl refl refl refl refl refl =
-  Pattern.right-overlap-plus-one
+    with BoolRec.all6
+      (BoolRec.stateEq machine oldQ q)
+      (BoolRec.symbolEq machine oldA a)
+      (BoolRec.symbolEq machine newB b)
+      (BoolRec.stateEq machine newQ q')
+      (BoolRec.symbolEq machine newRight right)
+      (BoolRec.symbolEq machine context context')
+... | false = rejected
+... | true
+    with all6True
+      (BoolRec.stateEq machine oldQ q)
+      (BoolRec.symbolEq machine oldA a)
+      (BoolRec.symbolEq machine newB b)
+      (BoolRec.stateEq machine newQ q')
+      (BoolRec.symbolEq machine newRight right)
+      (BoolRec.symbolEq machine context context')
+      refl
+... | e1 , (e2 , (e3 , (e4 , (e5 , e6))))
+    with stateEqTrue e1 | symbolEqTrue e2 | symbolEqTrue e3
+       | stateEqTrue e4 | symbolEqTrue e5 | symbolEqTrue e6
+... | refl | refl | refl | refl | refl | refl =
+  accepted Pattern.right-overlap-plus-one
 
-checkRightOverlapPlusTwo :
-  ∀ {machine q a q' b right first second first' second' newQ newRight} →
-  newQ ≡ q' → newRight ≡ right → first ≡ first' → second ≡ second' →
-  Pattern.LegalWindowForRule machine
+recognizeLegalWindow machine
     (Local.tape-rule q a q' b Local.moveRight)
     (Local.six-cell-window
       (Local.plain right) (Local.plain first) (Local.plain second)
       (Local.headed newQ newRight) (Local.plain first') (Local.plain second'))
-checkRightOverlapPlusTwo refl refl refl refl =
-  Pattern.right-overlap-plus-two
+    with BoolRec.all5
+      (BoolRec.stateEq machine newQ q')
+      (BoolRec.symbolEq machine newRight right)
+      (BoolRec.symbolEq machine first first')
+      (BoolRec.symbolEq machine second second')
+      (BoolRec.symbolEq machine right right)
+... | false = rejected
+... | true
+    with all5True
+      (BoolRec.stateEq machine newQ q')
+      (BoolRec.symbolEq machine newRight right)
+      (BoolRec.symbolEq machine first first')
+      (BoolRec.symbolEq machine second second')
+      (BoolRec.symbolEq machine right right)
+      refl
+... | e1 , (e2 , (e3 , (e4 , e5)))
+    with stateEqTrue e1 | symbolEqTrue e2
+       | symbolEqTrue e3 | symbolEqTrue e4
+... | refl | refl | refl | refl =
+  accepted Pattern.right-overlap-plus-two
+
+recognizeLegalWindow machine rule window =
+  rejected
 
 reflectedLegalWindowBool :
   (machine : Local.ConcreteTapeMachine) →
@@ -217,406 +421,133 @@ reflectedLegalWindowBool :
     (Local.Symbol machine)) →
   (window : Local.SixCellWindow machine) →
   Bool
-reflectedLegalWindowBool = BoolRec.legalWindowBool
+reflectedLegalWindowBool machine rule window =
+  recognitionBool (recognizeLegalWindow machine rule window)
+
+recognitionAcceptedGivesSemantic :
+  ∀ {machine rule window}
+    (recognition : LegalWindowRecognition machine rule window) →
+  recognitionBool recognition ≡ true →
+  Pattern.LegalWindowForRule machine rule window
+recognitionAcceptedGivesSemantic rejected ()
+recognitionAcceptedGivesSemantic (accepted legal) refl =
+  legal
 
 booleanTrueImpliesSemanticLegal :
   ∀ {machine rule window} →
   reflectedLegalWindowBool machine rule window ≡ true →
   Pattern.LegalWindowForRule machine rule window
-booleanTrueImpliesSemanticLegal {machine} {rule}
-    {Local.six-cell-window
-      (Local.plain a) (Local.plain b) (Local.plain c)
-      (Local.plain a') (Local.plain b') (Local.plain c')} eq
-    with all3True
-      (BoolRec.symbolEq machine a a')
-      (BoolRec.symbolEq machine b b')
-      (BoolRec.symbolEq machine c c')
-      eq
-... | ea , (eb , ec) =
-  checkUnchanged (symbolEqTrue {machine} ea) (symbolEqTrue {machine} eb) (symbolEqTrue {machine} ec)
-
-booleanTrueImpliesSemanticLegal {machine}
-    {Local.tape-rule q a q' b Local.moveLeft}
-    {Local.six-cell-window
-      (Local.plain left) (Local.headed oldQ oldA) (Local.plain right)
-      (Local.headed newQ newLeft) (Local.plain newB) (Local.plain newRight)} eq
-    with all6True
-      (BoolRec.stateEq machine oldQ q)
-      (BoolRec.symbolEq machine oldA a)
-      (BoolRec.stateEq machine newQ q')
-      (BoolRec.symbolEq machine newLeft left)
-      (BoolRec.symbolEq machine newB b)
-      (BoolRec.symbolEq machine newRight right)
-      eq
-... | e1 , (e2 , (e3 , (e4 , (e5 , e6)))) =
-  checkRealizesLeft (stateEqTrue {machine} e1) (symbolEqTrue {machine} e2) (stateEqTrue {machine} e3)
-                    (symbolEqTrue {machine} e4) (symbolEqTrue {machine} e5) (symbolEqTrue {machine} e6)
-
-booleanTrueImpliesSemanticLegal {machine}
-    {Local.tape-rule q a q' b Local.moveLeft}
-    {Local.six-cell-window
-      (Local.plain first) (Local.plain second) (Local.plain left)
-      (Local.plain first') (Local.plain second') (Local.headed newQ newLeft)} eq
-    with all5True
-      (BoolRec.symbolEq machine first first')
-      (BoolRec.symbolEq machine second second')
-      (BoolRec.stateEq machine newQ q')
-      (BoolRec.symbolEq machine newLeft left)
-      (BoolRec.symbolEq machine left left)
-      eq
-... | e1 , (e2 , (e3 , (e4 , e5))) =
-  checkLeftOverlapMinusTwo (symbolEqTrue {machine} e1) (symbolEqTrue {machine} e2) (stateEqTrue {machine} e3)
-                           (symbolEqTrue {machine} e4)
-
-booleanTrueImpliesSemanticLegal {machine}
-    {Local.tape-rule q a q' b Local.moveLeft}
-    {Local.six-cell-window
-      (Local.plain context) (Local.plain left) (Local.headed oldQ oldA)
-      (Local.plain context') (Local.headed newQ newLeft) (Local.plain newB)} eq
-    with all6True
-      (BoolRec.symbolEq machine context context')
-      (BoolRec.stateEq machine oldQ q)
-      (BoolRec.symbolEq machine oldA a)
-      (BoolRec.stateEq machine newQ q')
-      (BoolRec.symbolEq machine newLeft left)
-      (BoolRec.symbolEq machine newB b)
-      eq
-... | e1 , (e2 , (e3 , (e4 , (e5 , e6)))) =
-  checkLeftOverlapMinusOne (symbolEqTrue {machine} e1) (stateEqTrue {machine} e2) (symbolEqTrue {machine} e3)
-                           (stateEqTrue {machine} e4) (symbolEqTrue {machine} e5) (symbolEqTrue {machine} e6)
-
-booleanTrueImpliesSemanticLegal {machine}
-    {Local.tape-rule q a q' b Local.moveLeft}
-    {Local.six-cell-window
-      (Local.headed oldQ oldA) (Local.plain right) (Local.plain context)
-      (Local.plain newB) (Local.plain right') (Local.plain context')} eq
-    with all6True
-      (BoolRec.stateEq machine oldQ q)
-      (BoolRec.symbolEq machine oldA a)
-      (BoolRec.symbolEq machine newB b)
-      (BoolRec.symbolEq machine right right')
-      (BoolRec.symbolEq machine context context')
-      (BoolRec.symbolEq machine right right)
-      eq
-... | e1 , (e2 , (e3 , (e4 , (e5 , e6)))) =
-  checkLeftOverlapPlusOne (stateEqTrue {machine} e1) (symbolEqTrue {machine} e2) (symbolEqTrue {machine} e3)
-                          (symbolEqTrue {machine} e4) (symbolEqTrue {machine} e5)
-
-booleanTrueImpliesSemanticLegal {machine}
-    {Local.tape-rule q a q' b Local.stayPut}
-    {Local.six-cell-window
-      (Local.plain left) (Local.headed oldQ oldA) (Local.plain right)
-      (Local.plain left') (Local.headed newQ newB) (Local.plain right')} eq
-    with all6True
-      (BoolRec.symbolEq machine left left')
-      (BoolRec.stateEq machine oldQ q)
-      (BoolRec.symbolEq machine oldA a)
-      (BoolRec.stateEq machine newQ q')
-      (BoolRec.symbolEq machine newB b)
-      (BoolRec.symbolEq machine right right')
-      eq
-... | e1 , (e2 , (e3 , (e4 , (e5 , e6)))) =
-  checkRealizesStay (symbolEqTrue {machine} e1) (stateEqTrue {machine} e2) (symbolEqTrue {machine} e3)
-                    (stateEqTrue {machine} e4) (symbolEqTrue {machine} e5) (symbolEqTrue {machine} e6)
-
-booleanTrueImpliesSemanticLegal {machine}
-    {Local.tape-rule q a q' b Local.stayPut}
-    {Local.six-cell-window
-      (Local.plain context) (Local.plain left) (Local.headed oldQ oldA)
-      (Local.plain context') (Local.plain left') (Local.headed newQ newB)} eq
-    with all6True
-      (BoolRec.symbolEq machine context context')
-      (BoolRec.symbolEq machine left left')
-      (BoolRec.stateEq machine oldQ q)
-      (BoolRec.symbolEq machine oldA a)
-      (BoolRec.stateEq machine newQ q')
-      (BoolRec.symbolEq machine newB b)
-      eq
-... | e1 , (e2 , (e3 , (e4 , (e5 , e6)))) =
-  checkStayOverlapMinusOne (symbolEqTrue {machine} e1) (symbolEqTrue {machine} e2) (stateEqTrue {machine} e3)
-                           (symbolEqTrue {machine} e4) (stateEqTrue {machine} e5) (symbolEqTrue {machine} e6)
-
-booleanTrueImpliesSemanticLegal {machine}
-    {Local.tape-rule q a q' b Local.stayPut}
-    {Local.six-cell-window
-      (Local.headed oldQ oldA) (Local.plain right) (Local.plain context)
-      (Local.headed newQ newB) (Local.plain right') (Local.plain context')} eq
-    with all6True
-      (BoolRec.stateEq machine oldQ q)
-      (BoolRec.symbolEq machine oldA a)
-      (BoolRec.stateEq machine newQ q')
-      (BoolRec.symbolEq machine newB b)
-      (BoolRec.symbolEq machine right right')
-      (BoolRec.symbolEq machine context context')
-      eq
-... | e1 , (e2 , (e3 , (e4 , (e5 , e6)))) =
-  checkStayOverlapPlusOne (stateEqTrue {machine} e1) (symbolEqTrue {machine} e2) (stateEqTrue {machine} e3)
-                          (symbolEqTrue {machine} e4) (symbolEqTrue {machine} e5) (symbolEqTrue {machine} e6)
-
-booleanTrueImpliesSemanticLegal {machine}
-    {Local.tape-rule q a q' b Local.moveRight}
-    {Local.six-cell-window
-      (Local.plain left) (Local.headed oldQ oldA) (Local.plain right)
-      (Local.plain left') (Local.plain newB) (Local.headed newQ newRight)} eq
-    with all6True
-      (BoolRec.symbolEq machine left left')
-      (BoolRec.stateEq machine oldQ q)
-      (BoolRec.symbolEq machine oldA a)
-      (BoolRec.symbolEq machine newB b)
-      (BoolRec.stateEq machine newQ q')
-      (BoolRec.symbolEq machine newRight right)
-      eq
-... | e1 , (e2 , (e3 , (e4 , (e5 , e6)))) =
-  checkRealizesRight (symbolEqTrue {machine} e1) (stateEqTrue {machine} e2) (symbolEqTrue {machine} e3)
-                     (symbolEqTrue {machine} e4) (stateEqTrue {machine} e5) (symbolEqTrue {machine} e6)
-
-booleanTrueImpliesSemanticLegal {machine}
-    {Local.tape-rule q a q' b Local.moveRight}
-    {Local.six-cell-window
-      (Local.plain context) (Local.plain left) (Local.headed oldQ oldA)
-      (Local.plain context') (Local.plain left') (Local.plain newB)} eq
-    with all6True
-      (BoolRec.symbolEq machine context context')
-      (BoolRec.symbolEq machine left left')
-      (BoolRec.stateEq machine oldQ q)
-      (BoolRec.symbolEq machine oldA a)
-      (BoolRec.symbolEq machine newB b)
-      (BoolRec.symbolEq machine left left)
-      eq
-... | e1 , (e2 , (e3 , (e4 , (e5 , e6)))) =
-  checkRightOverlapMinusOne (symbolEqTrue {machine} e1) (symbolEqTrue {machine} e2) (stateEqTrue {machine} e3)
-                            (symbolEqTrue {machine} e4) (symbolEqTrue {machine} e5)
-
-booleanTrueImpliesSemanticLegal {machine}
-    {Local.tape-rule q a q' b Local.moveRight}
-    {Local.six-cell-window
-      (Local.headed oldQ oldA) (Local.plain right) (Local.plain context)
-      (Local.plain newB) (Local.headed newQ newRight) (Local.plain context')} eq
-    with all6True
-      (BoolRec.stateEq machine oldQ q)
-      (BoolRec.symbolEq machine oldA a)
-      (BoolRec.symbolEq machine newB b)
-      (BoolRec.stateEq machine newQ q')
-      (BoolRec.symbolEq machine newRight right)
-      (BoolRec.symbolEq machine context context')
-      eq
-... | e1 , (e2 , (e3 , (e4 , (e5 , e6)))) =
-  checkRightOverlapPlusOne (stateEqTrue {machine} e1) (symbolEqTrue {machine} e2) (symbolEqTrue {machine} e3)
-                           (stateEqTrue {machine} e4) (symbolEqTrue {machine} e5) (symbolEqTrue {machine} e6)
-
-booleanTrueImpliesSemanticLegal {machine}
-    {Local.tape-rule q a q' b Local.moveRight}
-    {Local.six-cell-window
-      (Local.plain right) (Local.plain first) (Local.plain second)
-      (Local.headed newQ newRight) (Local.plain first') (Local.plain second')} eq
-    with all5True
-      (BoolRec.stateEq machine newQ q')
-      (BoolRec.symbolEq machine newRight right)
-      (BoolRec.symbolEq machine first first')
-      (BoolRec.symbolEq machine second second')
-      (BoolRec.symbolEq machine right right)
-      eq
-... | e1 , (e2 , (e3 , (e4 , e5))) =
-  checkRightOverlapPlusTwo (stateEqTrue {machine} e1) (symbolEqTrue {machine} e2)
-                           (symbolEqTrue {machine} e3) (symbolEqTrue {machine} e4)
-
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.plain _) (Local.plain _) (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.plain _) (Local.plain _) (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.plain _) (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.plain _) (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.plain _) (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.plain _) (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.plain _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.plain _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.plain _) (Local.plain _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.plain _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.plain _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveLeft} {Local.six-cell-window (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.plain _) (Local.plain _) (Local.plain _) (Local.plain _) (Local.plain _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.plain _) (Local.plain _) (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.plain _) (Local.plain _) (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.plain _) (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.plain _) (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.plain _) (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.plain _) (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.plain _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.plain _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.plain _) (Local.plain _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.plain _) (Local.plain _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.plain _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.plain _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.stayPut} {Local.six-cell-window (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.plain _) (Local.plain _) (Local.plain _) (Local.plain _) (Local.plain _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.plain _) (Local.plain _) (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.plain _) (Local.plain _) (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.plain _) (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.plain _) (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.plain _) (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.plain _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.plain _) (Local.plain _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.plain _) (Local.plain _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.plain _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.plain _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.headed _ _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.plain _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.plain _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.headed _ _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.plain _) (Local.headed _ _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.plain _)} ()
-booleanTrueImpliesSemanticLegal {machine} {Local.tape-rule _ _ _ _ Local.moveRight} {Local.six-cell-window (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _) (Local.headed _ _)} ()
+booleanTrueImpliesSemanticLegal {machine} {rule} {window} =
+  recognitionAcceptedGivesSemantic
+    (recognizeLegalWindow machine rule window)
 
 semanticLegalImpliesReflectedBooleanTrue :
   ∀ {machine rule window} →
   Pattern.LegalWindowForRule machine rule window →
   reflectedLegalWindowBool machine rule window ≡ true
-semanticLegalImpliesReflectedBooleanTrue =
-  BoolRec.semanticLegalImpliesBooleanTrue
-
-recognizeLegalWindow :
-  (machine : Local.ConcreteTapeMachine) →
-  (rule : Local.TapeRule
-    (Local.State machine)
-    (Local.Symbol machine)) →
-  (window : Local.SixCellWindow machine) →
-  LegalWindowRecognition machine rule window
-recognizeLegalWindow machine rule window
-  with reflectedLegalWindowBool machine rule window in eq
-... | false = rejected
-... | true = accepted (booleanTrueImpliesSemanticLegal eq)
+semanticLegalImpliesReflectedBooleanTrue
+    {machine} Pattern.legal-unchanged
+    rewrite Local.decideEqualRefl (Local.finiteSymbol machine) _
+          | Local.decideEqualRefl (Local.finiteSymbol machine) _
+          | Local.decideEqualRefl (Local.finiteSymbol machine) _ =
+  refl
+semanticLegalImpliesReflectedBooleanTrue
+    {machine} (Pattern.legal-centered Local.realizes-left)
+    rewrite Local.decideEqualRefl (Local.finiteState machine) _
+          | Local.decideEqualRefl (Local.finiteSymbol machine) _
+          | Local.decideEqualRefl (Local.finiteState machine) _
+          | Local.decideEqualRefl (Local.finiteSymbol machine) _
+          | Local.decideEqualRefl (Local.finiteSymbol machine) _
+          | Local.decideEqualRefl (Local.finiteSymbol machine) _ =
+  refl
+semanticLegalImpliesReflectedBooleanTrue
+    {machine} (Pattern.legal-centered Local.realizes-stay)
+    rewrite Local.decideEqualRefl (Local.finiteSymbol machine) _
+          | Local.decideEqualRefl (Local.finiteState machine) _
+          | Local.decideEqualRefl (Local.finiteSymbol machine) _
+          | Local.decideEqualRefl (Local.finiteState machine) _
+          | Local.decideEqualRefl (Local.finiteSymbol machine) _
+          | Local.decideEqualRefl (Local.finiteSymbol machine) _ =
+  refl
+semanticLegalImpliesReflectedBooleanTrue
+    {machine} (Pattern.legal-centered Local.realizes-right)
+    rewrite Local.decideEqualRefl (Local.finiteSymbol machine) _
+          | Local.decideEqualRefl (Local.finiteState machine) _
+          | Local.decideEqualRefl (Local.finiteSymbol machine) _
+          | Local.decideEqualRefl (Local.finiteSymbol machine) _
+          | Local.decideEqualRefl (Local.finiteState machine) _
+          | Local.decideEqualRefl (Local.finiteSymbol machine) _ =
+  refl
+semanticLegalImpliesReflectedBooleanTrue
+    {machine} Pattern.left-overlap-minus-two
+    rewrite Local.decideEqualRefl (Local.finiteSymbol machine) _
+          | Local.decideEqualRefl (Local.finiteSymbol machine) _
+          | Local.decideEqualRefl (Local.finiteState machine) _
+          | Local.decideEqualRefl (Local.finiteSymbol machine) _
+          | Local.decideEqualRefl (Local.finiteSymbol machine) _ =
+  refl
+semanticLegalImpliesReflectedBooleanTrue
+    {machine} Pattern.left-overlap-minus-one
+    rewrite Local.decideEqualRefl (Local.finiteSymbol machine) _
+          | Local.decideEqualRefl (Local.finiteState machine) _
+          | Local.decideEqualRefl (Local.finiteSymbol machine) _
+          | Local.decideEqualRefl (Local.finiteState machine) _
+          | Local.decideEqualRefl (Local.finiteSymbol machine) _
+          | Local.decideEqualRefl (Local.finiteSymbol machine) _ =
+  refl
+semanticLegalImpliesReflectedBooleanTrue
+    {machine} Pattern.left-overlap-plus-one
+    rewrite Local.decideEqualRefl (Local.finiteState machine) _
+          | Local.decideEqualRefl (Local.finiteSymbol machine) _
+          | Local.decideEqualRefl (Local.finiteSymbol machine) _
+          | Local.decideEqualRefl (Local.finiteSymbol machine) _
+          | Local.decideEqualRefl (Local.finiteSymbol machine) _
+          | Local.decideEqualRefl (Local.finiteSymbol machine) _ =
+  refl
+semanticLegalImpliesReflectedBooleanTrue
+    {machine} Pattern.stay-overlap-minus-one
+    rewrite Local.decideEqualRefl (Local.finiteSymbol machine) _
+          | Local.decideEqualRefl (Local.finiteSymbol machine) _
+          | Local.decideEqualRefl (Local.finiteState machine) _
+          | Local.decideEqualRefl (Local.finiteSymbol machine) _
+          | Local.decideEqualRefl (Local.finiteState machine) _
+          | Local.decideEqualRefl (Local.finiteSymbol machine) _ =
+  refl
+semanticLegalImpliesReflectedBooleanTrue
+    {machine} Pattern.stay-overlap-plus-one
+    rewrite Local.decideEqualRefl (Local.finiteState machine) _
+          | Local.decideEqualRefl (Local.finiteSymbol machine) _
+          | Local.decideEqualRefl (Local.finiteState machine) _
+          | Local.decideEqualRefl (Local.finiteSymbol machine) _
+          | Local.decideEqualRefl (Local.finiteSymbol machine) _
+          | Local.decideEqualRefl (Local.finiteSymbol machine) _ =
+  refl
+semanticLegalImpliesReflectedBooleanTrue
+    {machine} Pattern.right-overlap-minus-one
+    rewrite Local.decideEqualRefl (Local.finiteSymbol machine) _
+          | Local.decideEqualRefl (Local.finiteSymbol machine) _
+          | Local.decideEqualRefl (Local.finiteState machine) _
+          | Local.decideEqualRefl (Local.finiteSymbol machine) _
+          | Local.decideEqualRefl (Local.finiteSymbol machine) _
+          | Local.decideEqualRefl (Local.finiteSymbol machine) _ =
+  refl
+semanticLegalImpliesReflectedBooleanTrue
+    {machine} Pattern.right-overlap-plus-one
+    rewrite Local.decideEqualRefl (Local.finiteState machine) _
+          | Local.decideEqualRefl (Local.finiteSymbol machine) _
+          | Local.decideEqualRefl (Local.finiteSymbol machine) _
+          | Local.decideEqualRefl (Local.finiteState machine) _
+          | Local.decideEqualRefl (Local.finiteSymbol machine) _
+          | Local.decideEqualRefl (Local.finiteSymbol machine) _ =
+  refl
+semanticLegalImpliesReflectedBooleanTrue
+    {machine} Pattern.right-overlap-plus-two
+    rewrite Local.decideEqualRefl (Local.finiteState machine) _
+          | Local.decideEqualRefl (Local.finiteSymbol machine) _
+          | Local.decideEqualRefl (Local.finiteSymbol machine) _
+          | Local.decideEqualRefl (Local.finiteSymbol machine) _
+          | Local.decideEqualRefl (Local.finiteSymbol machine) _ =
+  refl
 
 record LegalWindowBooleanReflection
     (machine : Local.ConcreteTapeMachine)

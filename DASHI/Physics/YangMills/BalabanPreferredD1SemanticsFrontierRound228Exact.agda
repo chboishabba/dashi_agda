@@ -33,20 +33,20 @@ data PreferredD1Leaf228 : Set where
   finiteLocalizedD1Assembly : PreferredD1Leaf228
 
 data LeafState228 : Set where
-  leafClosed leafOpen leafBlocked : LeafState228
+  closed open blocked : LeafState228
 
 preferredD1LeafState228 : PreferredD1Leaf228 → LeafState228
-preferredD1LeafState228 physicalBC2FirstVariationSemantics = leafOpen
-preferredD1LeafState228 literalCMP116SubstitutionTangentIdentification = leafOpen
-preferredD1LeafState228 ordinarySubstitutedFirstVariationChainRule = leafClosed
-preferredD1LeafState228 finiteLocalizedD1Assembly = leafClosed
+preferredD1LeafState228 physicalBC2FirstVariationSemantics = open
+preferredD1LeafState228 literalCMP116SubstitutionTangentIdentification = open
+preferredD1LeafState228 ordinarySubstitutedFirstVariationChainRule = closed
+preferredD1LeafState228 finiteLocalizedD1Assembly = closed
 
 ordinaryD1ChainRuleClosed :
-  preferredD1LeafState228 ordinarySubstitutedFirstVariationChainRule ≡ leafClosed
+  preferredD1LeafState228 ordinarySubstitutedFirstVariationChainRule ≡ closed
 ordinaryD1ChainRuleClosed = refl
 
 finiteD1AssemblyClosed :
-  preferredD1LeafState228 finiteLocalizedD1Assembly ≡ leafClosed
+  preferredD1LeafState228 finiteLocalizedD1Assembly ≡ closed
 finiteD1AssemblyClosed = refl
 
 physicalBC2FirstVariationSemanticsLevel : ProofLevel

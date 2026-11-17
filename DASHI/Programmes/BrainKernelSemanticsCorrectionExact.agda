@@ -37,8 +37,8 @@ zeroDefectClosesKernel :
     (state : State) →
   defect semantics state ≡ 0 →
   KernelClosed semantics state
-zeroDefectClosesKernel semantics state d≡0 =
-  zeroDefectImpliesFixed semantics state d≡0
+zeroDefectClosesKernel semantics state zero =
+  zeroDefectImpliesFixed semantics state zero
 
 record BrainKernelOptionalStrengthening (State : Set)
     (semantics : BrainKernelSemantics State) : Set₁ where
@@ -84,5 +84,3 @@ canonicalBrainKernelCorrectionBoundary =
     false refl
     false refl
     true refl
-
-open BrainKernelCorrectionBoundary public

@@ -304,5 +304,3 @@ canonicalChlorAlkaliBoundary =
     false refl
     false refl
     true refl
-
-open ChlorAlkaliBoundary public

@@ -55,5 +55,3 @@ import DASHI.Cognition.PNF.DirectDeltaCompilerActivationExact
 
 -- Roadmap composition.
 import DASHI.Cognition.PNF.DirectStreamingRoadmapSynthesisExact
-import DASHI.Cognition.PNF.SensibLawGWBv01RuntimeCertificationExact
-import DASHI.Cognition.PNF.SensibLawGWBv01PostCertificationRoadmapExact

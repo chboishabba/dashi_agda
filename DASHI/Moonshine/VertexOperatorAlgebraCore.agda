@@ -155,8 +155,6 @@ record MoonshineVOABridge
     hauptmodulProperty : Set
     genusZeroProperty : Set
 
-open MoonshineVOABridge public
-
 ------------------------------------------------------------------------
 -- Honest promotion boundary.
 

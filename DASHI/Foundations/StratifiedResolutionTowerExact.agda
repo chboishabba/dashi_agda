@@ -90,9 +90,9 @@ record MiddleLevelRole
   constructor middleLevelRole
   field
     middle : Carrier tower (suc r)
-    middleCoarseShadow : Carrier tower r
+    coarseShadow : Carrier tower r
     finerWitness : Carrier tower (suc (suc r))
-    middleIsFineOverCoarse : project tower middle ≡ middleCoarseShadow
+    middleIsFineOverCoarse : project tower middle ≡ coarseShadow
     middleIsCoarseUnderFiner : project tower finerWitness ≡ middle
 
 open MiddleLevelRole public
@@ -337,9 +337,9 @@ pullbackConstantOnFibre :
     (observable : ObservableAt tower r Value)
     {left right : Carrier tower (suc r)} →
   project tower left ≡ project tower right →
-  pullbackObservable {tower} {r} observable left
-  ≡ pullbackObservable {tower} {r} observable right
-pullbackConstantOnFibre {tower} {r} observable eq = cong observable eq
+  pullbackObservable observable left
+  ≡ pullbackObservable observable right
+pullbackConstantOnFibre observable refl = refl
 
 ------------------------------------------------------------------------
 -- Coarse aggregation is additional structure, not supplied by a quotient
@@ -363,8 +363,8 @@ coarseThenStretch :
   FibreAggregator tower r Value →
   ObservableAt tower (suc r) Value →
   ObservableAt tower (suc r) Value
-coarseThenStretch {tower} {r} aggregator fineObservable =
-  pullbackObservable {tower} {r} (aggregate aggregator fineObservable)
+coarseThenStretch aggregator fineObservable =
+  pullbackObservable (aggregate aggregator fineObservable)
 
 ------------------------------------------------------------------------
 -- Claim boundary.

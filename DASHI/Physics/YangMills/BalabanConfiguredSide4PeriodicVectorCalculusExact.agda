@@ -3,14 +3,14 @@ module DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicVectorCalculusExact
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; -_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
 open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier using
   (PhysicalBlockL; physicalBlockSites)
 open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact using
-  (SiteField; sumRational; sumRationalCong; sumRationalScale; sumRationalNegate)
+  (SiteField; sumRational; sumRationalCong; sumRationalScale)
 open import DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact using
   (sumRationalAdd; sumSwap)
 open import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact using (side4)
@@ -76,35 +76,14 @@ shiftForwardBackwardCommutes (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
   (pair (pair x0 x1) (pair x2 x3))
   rewrite nextPrevious4 x3 | previousNext4 x3 = refl
 
-diffCommuteRaw : ∀ a b c d → (a - b) - (c - d) ≡ (a - c) - (b - d)
-diffCommuteRaw = ℚRing.solve-∀
-
-mulNegCommRaw : ∀ a b → a * (- b) ≡ - (b * a)
-mulNegCommRaw = ℚRing.solve-∀
-
-mulCommRaw : ∀ a b → a * b ≡ b * a
-mulCommRaw = ℚRing.solve-∀
-
-doubleNegRaw : ∀ x → - (- x) ≡ x
-doubleNegRaw = ℚRing.solve-∀
-
-backwardForwardDifferenceCommutes : ∀ backwardAxis forwardAxis fld site →
+backwardForwardDifferenceCommutes : ∀ backwardAxis forwardAxis field site →
   backwardDifference4 backwardAxis
-    (forwardDifference4 forwardAxis fld) site
+    (forwardDifference4 forwardAxis field) site
   ≡ forwardDifference4 forwardAxis
-      (backwardDifference4 backwardAxis fld) site
-backwardForwardDifferenceCommutes backwardAxis forwardAxis fld site =
-  trans
-    (cong
-      (λ shiftedSite →
-        (fld (shiftForward4 forwardAxis site) - fld site)
-        - (fld shiftedSite - fld (shiftBackward4 backwardAxis site)))
-      (shiftForwardBackwardCommutes forwardAxis backwardAxis site))
-    (diffCommuteRaw
-      (fld (shiftForward4 forwardAxis site))
-      (fld site)
-      (fld (shiftBackward4 backwardAxis (shiftForward4 forwardAxis site)))
-      (fld (shiftBackward4 backwardAxis site)))
+      (backwardDifference4 backwardAxis field) site
+backwardForwardDifferenceCommutes backwardAxis forwardAxis field site
+  rewrite shiftForwardBackwardCommutes forwardAxis backwardAxis site =
+  ℚRing.solve-∀
 
 ------------------------------------------------------------------------
 -- Useful finite-fold algebra on the configured site carrier.
@@ -135,9 +114,9 @@ ScalarBondField4 : Set
 ScalarBondField4 = Axis4 → SiteField side4
 
 literalPeriodicDivergenceScalar : ScalarBondField4 → SiteField side4
-literalPeriodicDivergenceScalar fld site =
+literalPeriodicDivergenceScalar field site =
   sumRational (allCyclicIndices four)
-    (λ axis → backwardDifference4 axis (fld axis) site)
+    (λ axis → backwardDifference4 axis (field axis) site)
 
 literalNegativeForwardGradientScalar : SiteField side4 → ScalarBondField4
 literalNegativeForwardGradientScalar gauge axis site =
@@ -151,82 +130,68 @@ scalarBondInner left right =
 scalarSiteInner : SiteField side4 → SiteField side4 → ℚ
 scalarSiteInner left right = siteSum4 (λ site → left site * right site)
 
-axisNegativeGradientAdjoint : ∀ axis fld gauge →
-  siteSum4 (λ site → fld site *
+axisNegativeGradientAdjoint : ∀ axis field gauge →
+  siteSum4 (λ site → field site *
     (- forwardDifference4 axis gauge site))
-  ≡ siteSum4 (λ site → backwardDifference4 axis fld site * gauge site)
-axisNegativeGradientAdjoint axis fld gauge =
+  ≡ siteSum4 (λ site → backwardDifference4 axis field site * gauge site)
+axisNegativeGradientAdjoint axis field gauge =
   trans
-    (siteSum4Cong
-      (λ site → fld site * (- forwardDifference4 axis gauge site))
-      (λ site → - (forwardDifference4 axis gauge site * fld site))
-      (λ site → mulNegCommRaw (fld site) (forwardDifference4 axis gauge site)))
+    (siteSum4Cong _ _ (λ site → ℚRing.solve-∀))
     (trans
-      (sumRationalNegate (physicalBlockSites side4)
-        (λ site → forwardDifference4 axis gauge site * fld site))
+      (siteSum4Scale (- 1ℚ)
+        (λ site → forwardDifference4 axis gauge site * field site))
       (trans
-        (cong (-_)
-          (periodicForwardBackwardSummationByParts axis gauge fld))
+        (ℚRing.solve-∀)
         (trans
-          (doubleNegRaw
-            (siteSum4 (λ site → gauge site * backwardDifference4 axis fld site)))
-          (siteSum4Cong
-            (λ site → gauge site * backwardDifference4 axis fld site)
-            (λ site → backwardDifference4 axis fld site * gauge site)
-            (λ site → mulCommRaw (gauge site) (backwardDifference4 axis fld site))))))
+          (cong (λ value → - value)
+            (periodicForwardBackwardSummationByParts axis gauge field))
+          (trans
+            (ℚRing.solve-∀)
+            (siteSum4Cong _ _ (λ site → ℚRing.solve-∀))))))
 
-axisFoldTimesRight :
-  (fld : ScalarBondField4) (gauge : SiteField side4)
-  (site : PhysicalBlockL side4) →
+axisFoldTimesRight : ∀ field gauge site →
   sumRational (allCyclicIndices four)
-    (λ axis → backwardDifference4 axis (fld axis) site * gauge site)
-  ≡ literalPeriodicDivergenceScalar fld site * gauge site
-axisFoldTimesRight fld gauge site =
+    (λ axis → backwardDifference4 axis (field axis) site * gauge site)
+  ≡ literalPeriodicDivergenceScalar field site * gauge site
+axisFoldTimesRight field gauge site =
   trans
-    (sumRationalCong (allCyclicIndices four)
-      (λ axis → backwardDifference4 axis (fld axis) site * gauge site)
-      (λ axis → gauge site * backwardDifference4 axis (fld axis) site)
-      (λ axis → mulCommRaw (backwardDifference4 axis (fld axis) site) (gauge site)))
+    (sumRationalCong (allCyclicIndices four) _ _
+      (λ axis → ℚRing.solve-∀))
     (trans
       (sumRationalScale (gauge site) (allCyclicIndices four)
-        (λ axis → backwardDifference4 axis (fld axis) site))
-      (mulCommRaw (gauge site) (literalPeriodicDivergenceScalar fld site)))
+        (λ axis → backwardDifference4 axis (field axis) site))
+      (ℚRing.solve-∀))
 
-periodicDivergenceGradientAdjoint : ∀ fld gauge →
-  scalarBondInner fld (literalNegativeForwardGradientScalar gauge)
-  ≡ scalarSiteInner (literalPeriodicDivergenceScalar fld) gauge
-periodicDivergenceGradientAdjoint fld gauge =
+periodicDivergenceGradientAdjoint : ∀ field gauge →
+  scalarBondInner field (literalNegativeForwardGradientScalar gauge)
+  ≡ scalarSiteInner (literalPeriodicDivergenceScalar field) gauge
+periodicDivergenceGradientAdjoint field gauge =
   trans
-    (sumRationalCong (allCyclicIndices four)
-      (λ axis → siteSum4 (λ site → fld axis site * (- forwardDifference4 axis gauge site)))
-      (λ axis → siteSum4 (λ site → backwardDifference4 axis (fld axis) site * gauge site))
-      (λ axis → axisNegativeGradientAdjoint axis (fld axis) gauge))
+    (sumRationalCong (allCyclicIndices four) _ _
+      (λ axis → axisNegativeGradientAdjoint axis (field axis) gauge))
     (trans
       (sumSwap (allCyclicIndices four) (physicalBlockSites side4)
-        (λ axis site → backwardDifference4 axis (fld axis) site * gauge site))
-      (sumRationalCong (physicalBlockSites side4)
-        (λ site → sumRational (allCyclicIndices four)
-          (λ axis → backwardDifference4 axis (fld axis) site * gauge site))
-        (λ site → literalPeriodicDivergenceScalar fld site * gauge site)
-        (axisFoldTimesRight fld gauge)))
+        (λ axis site → backwardDifference4 axis (field axis) site * gauge site))
+      (sumRationalCong (physicalBlockSites side4) _ _
+        (axisFoldTimesRight field gauge)))
 
-literalCodifferentialEqualsPeriodicDivergence : ∀ fld site →
-  literalPeriodicDivergenceScalar fld site
-  ≡ literalPeriodicDivergenceScalar fld site
-literalCodifferentialEqualsPeriodicDivergence fld site = refl
+literalCodifferentialEqualsPeriodicDivergence : ∀ field site →
+  literalPeriodicDivergenceScalar field site
+  ≡ literalPeriodicDivergenceScalar field site
+literalCodifferentialEqualsPeriodicDivergence field site = refl
 
 literalGaugeFixingEnergyScalar : ScalarBondField4 → ℚ
-literalGaugeFixingEnergyScalar fld =
+literalGaugeFixingEnergyScalar field =
   scalarSiteInner
-    (literalPeriodicDivergenceScalar fld)
-    (literalPeriodicDivergenceScalar fld)
+    (literalPeriodicDivergenceScalar field)
+    (literalPeriodicDivergenceScalar field)
 
-literalGaugeFixingFoldEqualsDivergenceFold : ∀ fld →
-  literalGaugeFixingEnergyScalar fld
+literalGaugeFixingFoldEqualsDivergenceFold : ∀ field →
+  literalGaugeFixingEnergyScalar field
   ≡ siteSum4 (λ site →
-      literalPeriodicDivergenceScalar fld site
-      * literalPeriodicDivergenceScalar fld site)
-literalGaugeFixingFoldEqualsDivergenceFold fld = refl
+      literalPeriodicDivergenceScalar field site
+      * literalPeriodicDivergenceScalar field site)
+literalGaugeFixingFoldEqualsDivergenceFold field = refl
 
 ------------------------------------------------------------------------
 -- The mixed term in the discrete Hodge identity.
@@ -255,23 +220,19 @@ curlCrossTermEqualsDivergenceCrossTerm firstAxis secondAxis hFirst hSecond =
     (mixedForwardDifferenceSummationByParts
       firstAxis secondAxis hSecond hFirst)
     (trans
-      (cong (-_)
-        (siteSum4Cong
-          (λ site → hSecond site * backwardDifference4 firstAxis (forwardDifference4 secondAxis hFirst) site)
-          (λ site → forwardDifference4 secondAxis (backwardDifference4 firstAxis hFirst) site * hSecond site)
-          (λ site → trans
-            (cong (λ value → hSecond site * value)
-              (backwardForwardDifferenceCommutes firstAxis secondAxis hFirst site))
-            (mulCommRaw (hSecond site)
-              (forwardDifference4 secondAxis (backwardDifference4 firstAxis hFirst) site)))))
+      (cong (λ value → - value)
+        (siteSum4Cong _ _ (λ site →
+          cong (λ value → hSecond site * value)
+            (backwardForwardDifferenceCommutes
+              firstAxis secondAxis hFirst site))))
       (trans
-        (cong (-_)
-          (periodicForwardBackwardSummationByParts
-            secondAxis (backwardDifference4 firstAxis hFirst) hSecond))
-        (doubleNegRaw
-          (siteSum4 (λ site →
-            backwardDifference4 firstAxis hFirst site
-            * backwardDifference4 secondAxis hSecond site)))))
+        (cong (λ value → - value)
+          (siteSum4Cong _ _ (λ site → ℚRing.solve-∀)))
+        (trans
+          (cong (λ value → - value)
+            (periodicForwardBackwardSummationByParts
+              secondAxis (backwardDifference4 firstAxis hFirst) hSecond))
+          (ℚRing.solve-∀))))
 
 configuredSide4ShiftCommutationLevel : ProofLevel
 configuredSide4ShiftCommutationLevel = machineChecked

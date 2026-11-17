@@ -5,8 +5,7 @@ module DASHI.Computation.PathfindingFibreCoreExact where
 -- consumer does not observe.  Quotienting is lawful only when observation
 -- invariance under the declared residual action is proved.
 
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
+open import Agda.Builtin.Equality using (_≡_; refl; cong; trans; sym)
 open import Agda.Builtin.Bool using (Bool; false; true)
 
 record PathfindingFibreSystem : Set₁ where

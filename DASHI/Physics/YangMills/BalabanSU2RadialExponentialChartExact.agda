@@ -1,14 +1,13 @@
 module DASHI.Physics.YangMills.BalabanSU2RadialExponentialChartExact where
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Relation.Binary.PropositionalEquality using (subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (trans)
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier using
   (_+R_; _*R_; oneR)
 open import DASHI.Physics.YangMills.BalabanSU2AdjointTransportExact
-open import DASHI.Physics.YangMills.BalabanSU2AdjointOrderedReduction
 open import DASHI.Physics.YangMills.BalabanSU2AdjointPointwiseRadiusSquared
 open import DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver using
   (module RealPolynomialSolver)
@@ -124,16 +123,13 @@ radialExponentialImaginarySqBelowRadiusSq :
       (radialExpJ dataSet parameter)
       (radialExpK dataSet parameter))
     (squareR radius)
-radialExponentialImaginarySqBelowRadiusSq {radius} dataSet parameter inBall =
-  subst
-    (λ v → LessEqual (orderedSquares (radialOrderLaws dataSet)) v (squareR radius))
-    (sym
-      (radialImaginaryNormExact
-        (radialScale dataSet parameter)
-        (radialParameterX dataSet parameter)
-        (radialParameterY dataSet parameter)
-        (radialParameterZ dataSet parameter)))
-    (radialImaginarySqBelowRadiusSq dataSet parameter inBall)
+radialExponentialImaginarySqBelowRadiusSq dataSet parameter inBall
+  rewrite radialImaginaryNormExact
+    (radialScale dataSet parameter)
+    (radialParameterX dataSet parameter)
+    (radialParameterY dataSet parameter)
+    (radialParameterZ dataSet parameter) =
+  radialImaginarySqBelowRadiusSq dataSet parameter inBall
 
 radialDataToPointwiseExponentialMatch :
   ∀ {radius} (dataSet : SU2RadialExponentialChartData radius) →

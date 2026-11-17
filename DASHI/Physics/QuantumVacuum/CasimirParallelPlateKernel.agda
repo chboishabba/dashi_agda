@@ -1,7 +1,7 @@
 module DASHI.Physics.QuantumVacuum.CasimirParallelPlateKernel where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; suc)
+open import Agda.Builtin.Nat using (Nat; suc; _+_; _*_)
 
 import DASHI.Physics.QuantumVacuum.PhysicalQuantities as Q
 
@@ -46,8 +46,6 @@ record CasimirScalarModel : Set₁ where
         negate
           (((pi * pi) * (hbar * lightSpeed)) *
            inverse (fromNat 240 * power4 (lengthValue d)))
-
-open CasimirScalarModel public
 
 ------------------------------------------------------------------------
 -- Finite stroke accounting derived from endpoint work receipts.

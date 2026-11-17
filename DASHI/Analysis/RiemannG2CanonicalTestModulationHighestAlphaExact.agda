@@ -1,8 +1,7 @@
 module DASHI.Analysis.RiemannG2CanonicalTestModulationHighestAlphaExact where
 
 open import DASHI.Core.Prelude
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (trans)
+open import Agda.Builtin.Equality using (_≡_; refl; trans)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.String using (String)
 

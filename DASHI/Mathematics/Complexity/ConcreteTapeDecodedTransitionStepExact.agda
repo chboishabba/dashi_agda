@@ -129,16 +129,10 @@ decodedAdjacentRowsFormMachineStep :
       Character.InteriorHeadConfiguration machine
         (decodedBeforeRow
           stateCoverage symbolCoverage timeSlot globalBits)) →
-  (semantics :
-    Scan.AllRawWindowsSemantic
-      stateCoverage symbolCoverage nonempty
-      timeSlot globalBits
-      (Transition.allWindowStarts cols)) →
-  AfterUnique.NoGhostContextBoundaries
-    (decodedTimeLocalityScan
-      stateCoverage symbolCoverage nonempty
-      timeSlot globalBits semantics)
-    interior →
+  Scan.AllRawWindowsSemantic
+    stateCoverage symbolCoverage nonempty
+    timeSlot globalBits
+    (Transition.allWindowStarts cols) →
   WF.WellFormedMachineStep machine
     (decodedBeforeRow
       stateCoverage symbolCoverage timeSlot globalBits)
@@ -146,12 +140,12 @@ decodedAdjacentRowsFormMachineStep :
       stateCoverage symbolCoverage timeSlot globalBits)
 decodedAdjacentRowsFormMachineStep
     stateCoverage symbolCoverage nonempty
-    timeSlot globalBits interior semantics noGhost =
+    timeSlot globalBits interior semantics =
   AfterUnique.localityScanWithInteriorGivesWellFormedStep
     (decodedTimeLocalityScan
       stateCoverage symbolCoverage nonempty
       timeSlot globalBits semantics)
-    interior noGhost
+    interior
 
 decodedStepAfterUnique :
   ∀ {machine steps cols timeIndex}
@@ -171,22 +165,17 @@ decodedStepAfterUnique :
         stateCoverage symbolCoverage nonempty
         timeSlot globalBits
         (Transition.allWindowStarts cols)) →
-  AfterUnique.NoGhostContextBoundaries
-    (decodedTimeLocalityScan
-      stateCoverage symbolCoverage nonempty
-      timeSlot globalBits semantics)
-    interior →
   WF.ExactlyOneHead
     (Local.cells
       (decodedAfterRow
         stateCoverage symbolCoverage timeSlot globalBits))
 decodedStepAfterUnique
     stateCoverage symbolCoverage nonempty
-    timeSlot globalBits interior semantics noGhost =
+    timeSlot globalBits interior semantics =
   WF.afterExactlyOneHead
     (decodedAdjacentRowsFormMachineStep
       stateCoverage symbolCoverage nonempty
-      timeSlot globalBits interior semantics noGhost)
+      timeSlot globalBits interior semantics)
 
 record DecodedTransitionStepReceipt
     (machine : Local.ConcreteTapeMachine) : Set₁ where
@@ -204,6 +193,6 @@ decodedTransitionStepReceipt machine = record
   { decodedRowsSameLengthPaid = true
   ; decodedSelectorOccursPaid = true
   ; decodedAllWindowsLegalPaid = true
-  ; localityAfterUniqueDerivedPaid = false
-  ; oneSATTimeSliceToMachineStepPaid = false
+  ; localityAfterUniqueDerivedPaid = true
+  ; oneSATTimeSliceToMachineStepPaid = true
   }

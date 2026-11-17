@@ -281,5 +281,5 @@ canonicalIbrahimDeweyHighestAlphaFrontier =
     "Ibrahim/Dewey/QID navigation chooses where to inspect next; only typed dependency and same-object/source receipts pay conclusions"
 
 -- Thin import witness so the attribution owner remains the identifier authority.
-attributionOwner : Set
+attributionOwner : Set₁
 attributionOwner = Attribution.AttributionReceipt

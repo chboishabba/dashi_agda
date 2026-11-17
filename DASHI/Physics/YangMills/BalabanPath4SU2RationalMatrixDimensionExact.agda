@@ -4,7 +4,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Data.List.Base using (length)
-open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
+open import Relation.Binary.PropositionalEquality using (cong)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
@@ -41,45 +41,37 @@ lengthCartesianExact (value ∷ values) right
         | lengthMapExact (λ item → pair value item) right
         | lengthCartesianExact values right = refl
 
-lengthProductFiniteExact :
-  ∀ {A B : Set} (finiteA : FiniteEnumeration A) (finiteB : FiniteEnumeration B) →
-  length (elements (productFinite finiteA finiteB))
-  ≡ length (elements finiteA) * length (elements finiteB)
-lengthProductFiniteExact finiteA finiteB =
-  lengthCartesianExact (elements finiteA) (elements finiteB)
-
 componentCountExact : length componentElements ≡ 3
 componentCountExact = refl
 
 axisCountExact : length (allCyclicIndices four) ≡ 4
 axisCountExact = lengthAllCyclicIndices four
 
-pair2CountExact : length (elements pair2FourFinite) ≡ 16
-pair2CountExact =
-  trans
-    (lengthProductFiniteExact (cyclicIndexFinite four) (cyclicIndexFinite four))
-    (cong₂ _*_ axisCountExact axisCountExact)
-
 siteCountExact :
   length (elements (periodicTorus4Finite four)) ≡ 256
-siteCountExact =
-  trans
-    (lengthProductFiniteExact pair2FourFinite pair2FourFinite)
-    (cong₂ _*_ pair2CountExact pair2CountExact)
+siteCountExact
+  rewrite lengthCartesianExact
+      (cartesian (allCyclicIndices four) (allCyclicIndices four))
+      (cartesian (allCyclicIndices four) (allCyclicIndices four))
+        | lengthCartesianExact
+            (allCyclicIndices four) (allCyclicIndices four)
+        | lengthAllCyclicIndices four = refl
 
 positiveBondCountExact :
   length (elements positiveBondFinite) ≡ 1024
-positiveBondCountExact =
-  trans
-    (lengthProductFiniteExact (periodicTorus4Finite four) (cyclicIndexFinite four))
-    (cong₂ _*_ siteCountExact axisCountExact)
+positiveBondCountExact
+  rewrite lengthCartesianExact
+      (elements (periodicTorus4Finite four))
+      (allCyclicIndices four)
+        | siteCountExact
+        | lengthAllCyclicIndices four = refl
 
 physicalCoordinateCountExact :
   length (elements physicalCoordinateFinite) ≡ 3072
-physicalCoordinateCountExact =
-  trans
-    (lengthProductFiniteExact componentFinite positiveBondFinite)
-    (cong₂ _*_ componentCountExact positiveBondCountExact)
+physicalCoordinateCountExact
+  rewrite lengthCartesianExact componentElements (elements positiveBondFinite)
+        | componentCountExact
+        | positiveBondCountExact = refl
 
 configuredMatrixDimension : Nat
 configuredMatrixDimension = length (elements physicalCoordinateFinite)

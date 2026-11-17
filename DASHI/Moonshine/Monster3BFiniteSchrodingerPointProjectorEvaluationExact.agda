@@ -4,9 +4,8 @@ module DASHI.Moonshine.Monster3BFiniteSchrodingerPointProjectorEvaluationExact w
 -- EVALUATION SEMANTICS OF THE SIX-COORDINATE POINT PROJECTOR
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_)
 open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)
 
@@ -81,36 +80,22 @@ coordinateProjectorDifferentAt target axis f x different
 -- 2. Selected point gets six successive factors of three.
 ------------------------------------------------------------------------
 
-proj0 : (selected : H.X6) → V.SchrodingerFunction → V.SchrodingerFunction
-proj0 selected f = P.coordinateProjector (H.x0 selected) H.axis0 f
-
-proj1 : (selected : H.X6) → V.SchrodingerFunction → V.SchrodingerFunction
-proj1 selected f = P.coordinateProjector (H.x1 selected) H.axis1 (proj0 selected f)
-
-proj2 : (selected : H.X6) → V.SchrodingerFunction → V.SchrodingerFunction
-proj2 selected f = P.coordinateProjector (H.x2 selected) H.axis2 (proj1 selected f)
-
-proj3 : (selected : H.X6) → V.SchrodingerFunction → V.SchrodingerFunction
-proj3 selected f = P.coordinateProjector (H.x3 selected) H.axis3 (proj2 selected f)
-
-proj4 : (selected : H.X6) → V.SchrodingerFunction → V.SchrodingerFunction
-proj4 selected f = P.coordinateProjector (H.x4 selected) H.axis4 (proj3 selected f)
-
 pointProjectorSelected :
   (selected : H.X6) → (f : V.SchrodingerFunction) →
   Point.pointProjector selected f selected ≡ triple6 (f selected)
-pointProjectorSelected selected f =
-  trans (P.projectAmplitudeSame (H.x5 selected) (proj4 selected f selected))
-        (cong triple
-          (trans (P.projectAmplitudeSame (H.x4 selected) (proj3 selected f selected))
-            (cong triple
-              (trans (P.projectAmplitudeSame (H.x3 selected) (proj2 selected f selected))
-                (cong triple
-                  (trans (P.projectAmplitudeSame (H.x2 selected) (proj1 selected f selected))
-                    (cong triple
-                      (trans (P.projectAmplitudeSame (H.x1 selected) (proj0 selected f selected))
-                        (cong triple
-                          (P.projectAmplitudeSame (H.x0 selected) (f selected)))))))))))
+pointProjectorSelected selected f
+  rewrite P.coordinateProjectorPointwise (H.x5 selected) H.axis5 _ selected
+        | P.projectAmplitudeSame (H.x5 selected) _
+        | P.coordinateProjectorPointwise (H.x4 selected) H.axis4 _ selected
+        | P.projectAmplitudeSame (H.x4 selected) _
+        | P.coordinateProjectorPointwise (H.x3 selected) H.axis3 _ selected
+        | P.projectAmplitudeSame (H.x3 selected) _
+        | P.coordinateProjectorPointwise (H.x2 selected) H.axis2 _ selected
+        | P.projectAmplitudeSame (H.x2 selected) _
+        | P.coordinateProjectorPointwise (H.x1 selected) H.axis1 _ selected
+        | P.projectAmplitudeSame (H.x1 selected) _
+        | P.coordinateProjectorPointwise (H.x0 selected) H.axis0 f selected
+        | P.projectAmplitudeSame (H.x0 selected) (f selected) = refl
 
 ------------------------------------------------------------------------
 -- 3. Any explicitly separated point vanishes.  The proof follows the actual
@@ -124,38 +109,53 @@ pointProjectorOffPoint :
   Point.CoordinateDifference selected x →
   Point.pointProjector selected f x ≡ C3.zero
 pointProjectorOffPoint selected x f (Point.differs0 different) =
-  coordinateProjectorZeroAt (H.x5 selected) H.axis5 (proj4 selected f) x
-    (coordinateProjectorZeroAt (H.x4 selected) H.axis4 (proj3 selected f) x
-      (coordinateProjectorZeroAt (H.x3 selected) H.axis3 (proj2 selected f) x
-        (coordinateProjectorZeroAt (H.x2 selected) H.axis2 (proj1 selected f) x
-          (coordinateProjectorZeroAt (H.x1 selected) H.axis1 (proj0 selected f) x
+  coordinateProjectorZeroAt (H.x5 selected) H.axis5 _ x
+    (coordinateProjectorZeroAt (H.x4 selected) H.axis4 _ x
+      (coordinateProjectorZeroAt (H.x3 selected) H.axis3 _ x
+        (coordinateProjectorZeroAt (H.x2 selected) H.axis2 _ x
+          (coordinateProjectorZeroAt (H.x1 selected) H.axis1 _ x
             (coordinateProjectorDifferentAt
               (H.x0 selected) H.axis0 f x different)))))
 pointProjectorOffPoint selected x f (Point.differs1 different) =
-  coordinateProjectorZeroAt (H.x5 selected) H.axis5 (proj4 selected f) x
-    (coordinateProjectorZeroAt (H.x4 selected) H.axis4 (proj3 selected f) x
-      (coordinateProjectorZeroAt (H.x3 selected) H.axis3 (proj2 selected f) x
-        (coordinateProjectorZeroAt (H.x2 selected) H.axis2 (proj1 selected f) x
+  coordinateProjectorZeroAt (H.x5 selected) H.axis5 _ x
+    (coordinateProjectorZeroAt (H.x4 selected) H.axis4 _ x
+      (coordinateProjectorZeroAt (H.x3 selected) H.axis3 _ x
+        (coordinateProjectorZeroAt (H.x2 selected) H.axis2 _ x
           (coordinateProjectorDifferentAt
-            (H.x1 selected) H.axis1 (proj0 selected f) x different))))
+            (H.x1 selected) H.axis1
+            (P.coordinateProjector (H.x0 selected) H.axis0 f) x different))))
 pointProjectorOffPoint selected x f (Point.differs2 different) =
-  coordinateProjectorZeroAt (H.x5 selected) H.axis5 (proj4 selected f) x
-    (coordinateProjectorZeroAt (H.x4 selected) H.axis4 (proj3 selected f) x
-      (coordinateProjectorZeroAt (H.x3 selected) H.axis3 (proj2 selected f) x
+  coordinateProjectorZeroAt (H.x5 selected) H.axis5 _ x
+    (coordinateProjectorZeroAt (H.x4 selected) H.axis4 _ x
+      (coordinateProjectorZeroAt (H.x3 selected) H.axis3 _ x
         (coordinateProjectorDifferentAt
-          (H.x2 selected) H.axis2 (proj1 selected f) x different)))
+          (H.x2 selected) H.axis2
+          (P.coordinateProjector (H.x1 selected) H.axis1
+            (P.coordinateProjector (H.x0 selected) H.axis0 f)) x different)))
 pointProjectorOffPoint selected x f (Point.differs3 different) =
-  coordinateProjectorZeroAt (H.x5 selected) H.axis5 (proj4 selected f) x
-    (coordinateProjectorZeroAt (H.x4 selected) H.axis4 (proj3 selected f) x
+  coordinateProjectorZeroAt (H.x5 selected) H.axis5 _ x
+    (coordinateProjectorZeroAt (H.x4 selected) H.axis4 _ x
       (coordinateProjectorDifferentAt
-        (H.x3 selected) H.axis3 (proj2 selected f) x different))
+        (H.x3 selected) H.axis3
+        (P.coordinateProjector (H.x2 selected) H.axis2
+          (P.coordinateProjector (H.x1 selected) H.axis1
+            (P.coordinateProjector (H.x0 selected) H.axis0 f))) x different))
 pointProjectorOffPoint selected x f (Point.differs4 different) =
-  coordinateProjectorZeroAt (H.x5 selected) H.axis5 (proj4 selected f) x
+  coordinateProjectorZeroAt (H.x5 selected) H.axis5 _ x
     (coordinateProjectorDifferentAt
-      (H.x4 selected) H.axis4 (proj3 selected f) x different)
+      (H.x4 selected) H.axis4
+      (P.coordinateProjector (H.x3 selected) H.axis3
+        (P.coordinateProjector (H.x2 selected) H.axis2
+          (P.coordinateProjector (H.x1 selected) H.axis1
+            (P.coordinateProjector (H.x0 selected) H.axis0 f)))) x different)
 pointProjectorOffPoint selected x f (Point.differs5 different) =
   coordinateProjectorDifferentAt
-    (H.x5 selected) H.axis5 (proj4 selected f) x different
+    (H.x5 selected) H.axis5
+    (P.coordinateProjector (H.x4 selected) H.axis4
+      (P.coordinateProjector (H.x3 selected) H.axis3
+        (P.coordinateProjector (H.x2 selected) H.axis2
+          (P.coordinateProjector (H.x1 selected) H.axis1
+            (P.coordinateProjector (H.x0 selected) H.axis0 f))))) x different
 
 record PointProjectorEvaluationBoundary : Set where
   constructor pointProjectorEvaluationBoundary

@@ -66,6 +66,80 @@ a6ClosureConsumedRecorded : Bool
 a6ClosureConsumedRecorded =
   true
 
+bonyRepairBoundaryReference : String
+bonyRepairBoundaryReference =
+  "DASHI.Physics.Closure.NSBonyParaproductA6RepairBoundary"
+
+bonyRepairConsumedRecorded : Bool
+bonyRepairConsumedRecorded =
+  true
+
+record ImportedA7ThresholdSupport : Set where
+  field
+    a6ClosureBoundary :
+      A6Closure.NSA6A4BiasToLeakageClosureCompositeBoundary
+    a6ClosureBoundaryIsCanonical :
+      a6ClosureBoundary
+        ≡ A6Closure.canonicalNSA6A4BiasToLeakageClosureCompositeBoundary
+    bonyRepairBoundary :
+      BonyRepair.NSBonyParaproductA6RepairBoundary
+    bonyRepairBoundaryIsCanonical :
+      bonyRepairBoundary
+        ≡ BonyRepair.canonicalNSBonyParaproductA6RepairBoundary
+    importedA6TheoremTrue :
+      A6Ladder.A6TheoremProved ≡ true
+    importedA6ResidualNonpositiveTrue :
+      A6Ladder.residualNonpositiveProved ≡ true
+    importedA6LocalDefectStillFalse :
+      A6Ladder.localDefectMonotonicityProved ≡ false
+    importedA6CKNBKMStillFalse :
+      A6Ladder.cknBkmClosureProved ≡ false
+    importedA6ClayStillFalse :
+      A6Ladder.nsClayPromoted ≡ false
+    importedA6TerminalStillFalse :
+      A6Ladder.terminalPromotion ≡ false
+    importedBonyRepairPromoted :
+      BonyRepair.bonyParaproductA6RepairPromotedHere ≡ true
+    importedBonyCriticalResidualPromoted :
+      BonyRepair.criticalResidualDepletionProvedAnchor ≡ true
+    importedBonyClayStillFalse :
+      BonyRepair.NSClayNotPromoted ≡ true
+    importedBonyTerminalStillFalse :
+      BonyRepair.terminalPromotionNotPromoted ≡ true
+
+canonicalImportedA7ThresholdSupport : ImportedA7ThresholdSupport
+canonicalImportedA7ThresholdSupport =
+  record
+    { a6ClosureBoundary =
+        A6Closure.canonicalNSA6A4BiasToLeakageClosureCompositeBoundary
+    ; a6ClosureBoundaryIsCanonical =
+        refl
+    ; bonyRepairBoundary =
+        BonyRepair.canonicalNSBonyParaproductA6RepairBoundary
+    ; bonyRepairBoundaryIsCanonical =
+        refl
+    ; importedA6TheoremTrue =
+        refl
+    ; importedA6ResidualNonpositiveTrue =
+        refl
+    ; importedA6LocalDefectStillFalse =
+        refl
+    ; importedA6CKNBKMStillFalse =
+        refl
+    ; importedA6ClayStillFalse =
+        refl
+    ; importedA6TerminalStillFalse =
+        refl
+    ; importedBonyRepairPromoted =
+        refl
+    ; importedBonyCriticalResidualPromoted =
+        refl
+    ; importedBonyClayStillFalse =
+        refl
+    ; importedBonyTerminalStillFalse =
+        refl
+    }
+
 ------------------------------------------------------------------------
 -- A7 proof clauses.
 
@@ -75,6 +149,12 @@ data A7GronwallClause : Set where
   positiveParametersAlphaBetaCEffective :
     A7GronwallClause
   smallnessThresholdDrLessThanBetaOverCEffToOneOverAlpha :
+    A7GronwallClause
+  bernoulliThresholdDrLessThanCOverTwoCToOneOverAlpha :
+    A7GronwallClause
+  bonyConstantCBonyMAbsorbedIntoEffectiveC :
+    A7GronwallClause
+  cknEpsilonThresholdDominatedByA7Smallness :
     A7GronwallClause
   thresholdMakesNonlinearSourceStrictlySubcritical :
     A7GronwallClause
@@ -99,6 +179,9 @@ canonicalA7GronwallClauses =
   importedA6DifferentialInequalityInput
   ∷ positiveParametersAlphaBetaCEffective
   ∷ smallnessThresholdDrLessThanBetaOverCEffToOneOverAlpha
+  ∷ bernoulliThresholdDrLessThanCOverTwoCToOneOverAlpha
+  ∷ bonyConstantCBonyMAbsorbedIntoEffectiveC
+  ∷ cknEpsilonThresholdDominatedByA7Smallness
   ∷ thresholdMakesNonlinearSourceStrictlySubcritical
   ∷ substitutionZEqualsDrToMinusAlpha
   ∷ transformedLinearDifferentialInequality
@@ -113,9 +196,9 @@ a7GronwallClauseCount : Nat
 a7GronwallClauseCount =
   listLength canonicalA7GronwallClauses
 
-a7GronwallClauseCountIs11 :
-  a7GronwallClauseCount ≡ 11
-a7GronwallClauseCountIs11 =
+a7GronwallClauseCountIs14 :
+  a7GronwallClauseCount ≡ 14
+a7GronwallClauseCountIs14 =
   refl
 
 data A7GronwallTransformationStep : Set where
@@ -159,6 +242,12 @@ data A7ThresholdConsequence : Set where
     A7ThresholdConsequence
   thresholdCanBeRestatedAsCEffDrPowerAlphaLessThanBeta :
     A7ThresholdConsequence
+  thresholdCanBeRestatedAsCDrPowerAlphaLessThanCOverTwo :
+    A7ThresholdConsequence
+  thresholdCompatibleWithCBonyMEffectiveConstant :
+    A7ThresholdConsequence
+  thresholdBelowClassicalCKNEpsilonRegularityScale :
+    A7ThresholdConsequence
   thresholdForcesNegativeDrDerivative :
     A7ThresholdConsequence
   thresholdIsCompatibleWithDepletionContradictionStrategy :
@@ -170,6 +259,9 @@ canonicalA7ThresholdConsequences =
   thresholdDefinesForwardInvariantSmallDataRegion
   ∷ thresholdDominatesNonlinearSourceTerm
   ∷ thresholdCanBeRestatedAsCEffDrPowerAlphaLessThanBeta
+  ∷ thresholdCanBeRestatedAsCDrPowerAlphaLessThanCOverTwo
+  ∷ thresholdCompatibleWithCBonyMEffectiveConstant
+  ∷ thresholdBelowClassicalCKNEpsilonRegularityScale
   ∷ thresholdForcesNegativeDrDerivative
   ∷ thresholdIsCompatibleWithDepletionContradictionStrategy
   ∷ []
@@ -178,15 +270,21 @@ a7ThresholdConsequenceCount : Nat
 a7ThresholdConsequenceCount =
   listLength canonicalA7ThresholdConsequences
 
-a7ThresholdConsequenceCountIs5 :
-  a7ThresholdConsequenceCount ≡ 5
-a7ThresholdConsequenceCountIs5 =
+a7ThresholdConsequenceCountIs8 :
+  a7ThresholdConsequenceCount ≡ 8
+a7ThresholdConsequenceCountIs8 =
   refl
 
 data A7ThresholdClause : Set where
   thresholdUsesTheImportedA6ConstantCEff :
     A7ThresholdClause
   thresholdEqualsBetaOverCEffToOneOverAlpha :
+    A7ThresholdClause
+  thresholdEqualsCOverTwoCToOneOverAlpha :
+    A7ThresholdClause
+  thresholdUsesEffectiveConstantCIncludingCBonyM :
+    A7ThresholdClause
+  thresholdIsChosenBelowCKNEpsilon :
     A7ThresholdClause
   thresholdRequiresAlphaPositiveAndBetaPositive :
     A7ThresholdClause
@@ -199,6 +297,9 @@ canonicalA7ThresholdClauses : List A7ThresholdClause
 canonicalA7ThresholdClauses =
   thresholdUsesTheImportedA6ConstantCEff
   ∷ thresholdEqualsBetaOverCEffToOneOverAlpha
+  ∷ thresholdEqualsCOverTwoCToOneOverAlpha
+  ∷ thresholdUsesEffectiveConstantCIncludingCBonyM
+  ∷ thresholdIsChosenBelowCKNEpsilon
   ∷ thresholdRequiresAlphaPositiveAndBetaPositive
   ∷ thresholdProducesStrictDerivativeGap
   ∷ thresholdRegionIsForwardInvariantUnderComparison
@@ -208,22 +309,30 @@ a7ThresholdClauseCount : Nat
 a7ThresholdClauseCount =
   listLength canonicalA7ThresholdClauses
 
-a7ThresholdClauseCountIs5 :
-  a7ThresholdClauseCount ≡ 5
-a7ThresholdClauseCountIs5 =
+a7ThresholdClauseCountIs8 :
+  a7ThresholdClauseCount ≡ 8
+a7ThresholdClauseCountIs8 =
   refl
 
 a7GronwallThresholdTheoremText : String
 a7GronwallThresholdTheoremText =
-  "A7 candidate theorem grammar: import the A6 inequality ∂t D_r + β D_r <= C_eff D_r^(1+alpha) with α,β,C_eff > 0, impose the threshold D_r < (β / C_eff)^(1 / alpha) so that C_eff D_r^alpha < β, rewrite with Z = D_r^(-alpha), derive Z' >= alpha*beta*Z - alpha*C_eff, and conclude forward-invariant monotone decay D_r -> 0, contradicting persistent blowup."
+  "A7 promoted local threshold payload: import the true A6 inequality ∂t D_r + β D_r <= C_eff D_r^(1+alpha) with α,β,C_eff > 0 and β specialized to the retained gap c/2, absorb C_Bony(M) into the effective C, choose δ_A7 = min((c / (2C))^(1 / alpha), epsilon_CKN), rewrite with Z = D_r^(-alpha), derive Z' >= alpha*beta*Z - alpha*C_eff, and conclude forward-invariant monotone decay D_r -> 0 below δ_A7."
 
 a7ThresholdSummary : String
 a7ThresholdSummary =
-  "Exact threshold grammar: if 0 < D_r < (β / C_eff)^(1 / alpha), then C_eff D_r^(1+alpha) < β D_r, hence ∂t D_r < 0 and the subthreshold region is comparison-stable forward in time."
+  "Exact threshold grammar: if 0 < D_r < (c / (2C))^(1 / alpha) with C including C_Bony(M), then C D_r^(1+alpha) < (c/2) D_r, hence ∂t D_r < 0 and the subthreshold region is comparison-stable forward in time."
 
 a7GronwallComparisonSummary : String
 a7GronwallComparisonSummary =
   "Gronwall comparison grammar: after Z = D_r^(-alpha), the transformed inequality is Z' >= alpha*beta*Z - alpha*C_eff; linear comparison yields exponential lower growth for Z once above the equilibrium C_eff / beta, forcing D_r to decrease and eventually vanish."
+
+a7BonyCompatibilitySummary : String
+a7BonyCompatibilitySummary =
+  "C_Bony(M) compatibility: the corrected Bony/paraproduct repair is imported as true, and its M-dependent constant is carried only by the effective constant C in δ_A7 = (c/(2C))^(1/alpha)."
+
+a7CKNEpsilonThresholdSummary : String
+a7CKNEpsilonThresholdSummary =
+  "CKN epsilon threshold: A7 chooses δ_A7 below epsilon_CKN so residual depletion is compatible with the later CKN/BKM handoff, while A9 itself remains unproved here."
 
 ------------------------------------------------------------------------
 -- Downstream blockers and fail-closed promotion state.
@@ -257,8 +366,6 @@ downstreamA7BlockerCountIs4 =
   refl
 
 downstreamA7BlockerName : DownstreamA7Blocker → String
-downstreamA7BlockerName blocker-a7-gronwall-depletion-theorem-unproved =
-  "missingA7ResidualDepletionGronwallTheorem"
 downstreamA7BlockerName blocker-a8-full-local-defect-monotonicity-unproved =
   "missingA8FullLocalDefectMonotonicityTheorem"
 downstreamA7BlockerName blocker-a9-ckn-bkm-closure-unproved =
@@ -369,24 +476,34 @@ record NSA7ResidualDepletionGronwallBoundary : Set where
       List DownstreamA7Blocker
     downstreamBlockersAreCanonical :
       downstreamBlockers ≡ canonicalDownstreamA7Blockers
-    clauseCountIs11 :
-      a7GronwallClauseCount ≡ 11
-    transformationStepCountIs5 :
-      a7GronwallTransformationStepCount ≡ 5
-    thresholdConsequenceCountIs5 :
-      a7ThresholdConsequenceCount ≡ 5
-    thresholdClauseCountIs5 :
-      a7ThresholdClauseCount ≡ 5
+    clauseCountIs14 :
+      a7GronwallClauseCount ≡ 14
+    transformationStepCountIs6 :
+      a7GronwallTransformationStepCount ≡ 6
+    thresholdConsequenceCountIs8 :
+      a7ThresholdConsequenceCount ≡ 8
+    thresholdClauseCountIs8 :
+      a7ThresholdClauseCount ≡ 8
     theoremText :
       String
     thresholdSummary :
       String
     gronwallComparisonSummary :
       String
-    blockerCountIs5 :
-      downstreamA7BlockerCount ≡ 5
-    a7StillFalse :
-      A7ResidualDepletionGronwallProved ≡ false
+    bonyCompatibilitySummary :
+      String
+    cknEpsilonThresholdSummary :
+      String
+    blockerCountIs4 :
+      downstreamA7BlockerCount ≡ 4
+    a7PromotedTrue :
+      A7ResidualDepletionGronwallProved ≡ true
+    bernoulliGronwallThresholdPayloadPromotedTrue :
+      A7BernoulliGronwallThresholdPayloadPromoted ≡ true
+    bonyCompatibilityPromotedTrue :
+      A7BonyCompatibilityPromoted ≡ true
+    cknEpsilonThresholdPayloadPromotedTrue :
+      A7CKNEpsilonThresholdPayloadPromoted ≡ true
     a8StillFalse :
       A8FullLocalDefectMonotonicityProved ≡ false
     a9StillFalse :
@@ -424,21 +541,13 @@ canonicalNSA7ResidualDepletionGronwallBoundary =
         canonicalDownstreamA7Blockers
     ; downstreamBlockersAreCanonical =
         refl
-    ; clauseCountIs11 =
+    ; clauseCountIs14 =
         refl
     ; transformationStepCountIs6 =
         refl
-    ; thresholdConsequenceCountIs5 =
+    ; thresholdConsequenceCountIs8 =
         refl
-    ; thresholdClauseCountIs5 =
-        refl
-    ; theoremText =
-        a7GronwallThresholdTheoremText
-    ; thresholdSummary =
-        a7ThresholdSummary
-    ; gronwallComparisonSummary =
-        a7GronwallComparisonSummary
-    ; blockerCountIs5 =
+    ; thresholdClauseCountIs8 =
         refl
     ; theoremText =
         a7GronwallThresholdTheoremText

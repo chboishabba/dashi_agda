@@ -32,7 +32,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Data.List.Base using (length)
 open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_)
 import Data.Rational.Properties as ℚP
-import DASHI.Physics.YangMills.BalabanOpaqueGlobalAlgebraExact as OpaqueAlgebra
+import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using
   (cong; sym; trans)
 
@@ -82,10 +82,9 @@ normalizedAverageOfConstant {L} dataSet value =
     (cong (weight dataSet *_)
       (sumRationalConstant (allCyclicIndices L) value))
     (trans
-      (sym
-        (ℚP.*-assoc
-          (weight dataSet)
-          (natAsRational (length (allCyclicIndices L))) value))
+      (ℚP.*-assoc
+        (weight dataSet)
+        (natAsRational (length (allCyclicIndices L))) value)
       (trans
         (cong (_* value) (normalized dataSet))
         (ℚP.*-identityˡ value)))
@@ -232,22 +231,13 @@ axisAverageCommutes {L} dataSet (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
 axisAverageCommutes {L} dataSet (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
   (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) siteF site = refl
 
-private
-  sumRationalSubtractBase : 0ℚ ≡ 0ℚ - 0ℚ
-  sumRationalSubtractBase = sym (ℚP.+-inverseʳ 0ℚ)
-
-  sumRationalSubtractStep : ∀ a b c d → (a - b) + (c - d) ≡ (a + c) - (b + d)
-  sumRationalSubtractStep = ℚRing.solve-∀
-
 sumRationalSubtract :
   ∀ {A : Set} values (left right : A → ℚ) →
   sumRational values (λ value → left value - right value)
   ≡ sumRational values left - sumRational values right
-sumRationalSubtract [] left right = sumRationalSubtractBase
+sumRationalSubtract [] left right = ℚRing.solve-∀
 sumRationalSubtract (value ∷ values) left right
-  rewrite sumRationalSubtract values left right =
-    sumRationalSubtractStep (left value) (right value)
-      (sumRational values left) (sumRational values right)
+  rewrite sumRationalSubtract values left right = ℚRing.solve-∀
 
 axisCenteringFibreSumZero :
   ∀ {L} (dataSet : NormalizedAxisAverageData L)
@@ -293,7 +283,7 @@ axisCenteringFibreSumZero {L} dataSet siteF axis transverse =
       (trans
         (cong (λ averagedTotal → total - averagedTotal)
           (sumOfAverageConstant dataSet total))
-        (ℚP.+-inverseʳ total)))
+        (ℚRing.solve-∀)))
 
 ------------------------------------------------------------------------
 -- Self-adjointness in the literal global block inner product.

@@ -407,7 +407,7 @@ canonicalAttributionSnowballFrontier =
 -- Thin cross-owner witnesses: these imports make the chronology/provenance
 -- owners part of this attribution surface without rewriting their states.
 
-chronologyOwner : Set
+chronologyOwner : Set₁
 chronologyOwner = Chronology.ChronologyReceipt
 
 provenanceOwner : Set

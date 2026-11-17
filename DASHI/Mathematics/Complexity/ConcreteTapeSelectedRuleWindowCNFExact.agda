@@ -17,7 +17,7 @@ module DASHI.Mathematics.Complexity.ConcreteTapeSelectedRuleWindowCNFExact where
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _+_)
-open import Relation.Binary.PropositionalEquality using (trans; sym; cong)
+open import Relation.Binary.PropositionalEquality using (trans; sym)
 import Data.Fin.Base as Fin
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
@@ -156,8 +156,7 @@ semanticSelectedRuleWindowImpliesBoolean
 ------------------------------------------------------------------------
 
 encodeTransitionAssignment :
-  ∀ {machine}
-    (before after : Local.TapeRow machine)
+  ∀ {machine before after}
     (stateCoverage :
       Canonical.EnumerationCoverage (Local.finiteState machine))
     (symbolCoverage :
@@ -168,10 +167,10 @@ encodeTransitionAssignment :
   Local.RuleOccurs rule (Local.rules machine) →
   CNF.Bits (TransitionGlobalWidth before after)
 encodeTransitionAssignment
-    before after stateCoverage symbolCoverage occurrence =
+    stateCoverage symbolCoverage occurrence =
   Canonical.appendBits
     (Selector.encodeRuleOccurs occurrence)
-    (Flat.encodeRowPair stateCoverage symbolCoverage before after)
+    (Flat.encodeRowPair stateCoverage symbolCoverage _ _)
 
 selectedIndexedWindowPlacement :
   ∀ {machine before after}
@@ -190,14 +189,14 @@ selectedIndexedWindowPlacement :
       stateCoverage symbolCoverage ruleOccurrence
       (Indexed.forgetIndex windowOccurrence))
     (encodeTransitionAssignment
-      before after stateCoverage symbolCoverage ruleOccurrence)
-selectedIndexedWindowPlacement {machine} {before} {after}
+      stateCoverage symbolCoverage ruleOccurrence)
+selectedIndexedWindowPlacement
     stateCoverage symbolCoverage ruleOccurrence windowOccurrence =
   Placement.appendPlacement selectorPlaced windowPlacedGlobal
   where
     selectorBits = Selector.encodeRuleOccurs ruleOccurrence
     rowPairBits =
-      Flat.encodeRowPair stateCoverage symbolCoverage before after
+      Flat.encodeRowPair stateCoverage symbolCoverage _ _
 
     selectorPlaced =
       Placement.placementLeft selectorBits rowPairBits
@@ -250,7 +249,7 @@ selectedIndexedWindowPullback :
     (selectedIndexedWindowRename
       stateCoverage symbolCoverage ruleOccurrence windowOccurrence)
     (encodeTransitionAssignment
-      before after stateCoverage symbolCoverage ruleOccurrence)
+      stateCoverage symbolCoverage ruleOccurrence)
   ≡ encodeSelectedRuleWindow
       stateCoverage symbolCoverage ruleOccurrence
       (Indexed.forgetIndex windowOccurrence)
@@ -310,20 +309,16 @@ selectedPlacedPredicate_true_of_semantic :
           stateCoverage symbolCoverage nonempty
           ruleOccurrence windowOccurrence))
       (encodeTransitionAssignment
-        before after stateCoverage symbolCoverage ruleOccurrence))
+        stateCoverage symbolCoverage ruleOccurrence))
   ≡ true
 selectedPlacedPredicate_true_of_semantic
     stateCoverage symbolCoverage nonempty
-    ruleOccurrence windowOccurrence legal =
-  trans
-    (cong
-      (selectedRuleWindowPredicateWithCoverage
-        stateCoverage symbolCoverage nonempty)
-      (selectedIndexedWindowPullback
-        stateCoverage symbolCoverage ruleOccurrence windowOccurrence))
-    (semanticSelectedRuleWindowImpliesBoolean
-      stateCoverage symbolCoverage nonempty
-      ruleOccurrence (Indexed.forgetIndex windowOccurrence) legal)
+    ruleOccurrence windowOccurrence legal
+    rewrite selectedIndexedWindowPullback
+      stateCoverage symbolCoverage ruleOccurrence windowOccurrence =
+  semanticSelectedRuleWindowImpliesBoolean
+    stateCoverage symbolCoverage nonempty
+    ruleOccurrence (Indexed.forgetIndex windowOccurrence) legal
 
 record SharedRuleWindowPlacementReceipt
     (machine : Local.ConcreteTapeMachine) : Set₁ where

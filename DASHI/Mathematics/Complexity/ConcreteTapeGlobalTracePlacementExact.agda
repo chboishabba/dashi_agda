@@ -20,12 +20,8 @@ module DASHI.Mathematics.Complexity.ConcreteTapeGlobalTracePlacementExact where
 -- as a pullback from the single global assignment.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Equality using (_≡_; refl)
-
-private
-  cong : ∀ {A B : Set} (f : A → B) {x y : A} → x ≡ y → f x ≡ f y
-  cong f refl = refl
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 import Data.Fin.Base as Fin
 
@@ -75,28 +71,28 @@ blockRename :
   Slot index count →
   Fin.Fin width →
   Fin.Fin (count * width)
-blockRename {width = width} (here {remaining}) =
-  Placement.finLeft {m = width} {n = remaining * width}
-blockRename {width = width} (there {remaining = remaining} slot) =
+blockRename {width = width} here =
+  Placement.finLeft
+blockRename {width = width} (there slot) =
   λ i →
-    Placement.finRight width {n = remaining * width}
-      (blockRename {width = width} slot i)
+    Placement.finRight width
+      (blockRename slot i)
 
 rowBlockRename :
   ∀ {machine steps cols index} →
   Slot index (suc steps) →
   Fin.Fin (Decode.RowBitsWidth machine cols) →
   Fin.Fin (Trace.RowsTraceWidth machine steps cols)
-rowBlockRename {machine} {steps} {cols} =
-  blockRename {width = Decode.RowBitsWidth machine cols}
+rowBlockRename =
+  blockRename
 
 selectorBlockRename :
   ∀ {machine steps index} →
   Slot index steps →
   Fin.Fin (Selector.RuleWidth machine) →
   Fin.Fin (Trace.SelectorsTraceWidth machine steps)
-selectorBlockRename {machine} {steps} =
-  blockRename {width = Selector.RuleWidth machine}
+selectorBlockRename =
+  blockRename
 
 ------------------------------------------------------------------------
 -- Lift row / selector blocks into the whole global trace vector
@@ -107,11 +103,9 @@ globalRowRename :
   Slot index (suc steps) →
   Fin.Fin (Decode.RowBitsWidth machine cols) →
   Fin.Fin (Trace.GlobalTraceWidth machine steps cols)
-globalRowRename {machine} {steps} {cols} slot i =
+globalRowRename slot i =
   Placement.finLeft
-    {m = Trace.RowsTraceWidth machine steps cols}
-    {n = Trace.SelectorsTraceWidth machine steps}
-    (rowBlockRename {machine} {steps} {cols} slot i)
+    (rowBlockRename slot i)
 
 globalSelectorRename :
   ∀ {machine steps cols index} →
@@ -121,8 +115,7 @@ globalSelectorRename :
 globalSelectorRename {machine} {steps} {cols} slot i =
   Placement.finRight
     (Trace.RowsTraceWidth machine steps cols)
-    {n = Trace.SelectorsTraceWidth machine steps}
-    (selectorBlockRename {machine} {steps} slot i)
+    (selectorBlockRename slot i)
 
 ------------------------------------------------------------------------
 -- One time step sees selector_t || row_t || row_{t+1}
@@ -144,35 +137,29 @@ transitionRowPairRename :
     (Decode.RowBitsWidth machine cols +
      Decode.RowBitsWidth machine cols) →
   Fin.Fin (Trace.GlobalTraceWidth machine steps cols)
-transitionRowPairRename {machine} {steps} {cols} slot =
+transitionRowPairRename slot =
   Placement.finSumCases
-    {m = Decode.RowBitsWidth machine cols}
-    {n = Decode.RowBitsWidth machine cols}
-    {global = Trace.GlobalTraceWidth machine steps cols}
-    (globalRowRename {machine} {steps} {cols} (sameSlotInSucc slot))
-    (globalRowRename {machine} {steps} {cols} (nextSlotInSucc slot))
+    (globalRowRename (sameSlotInSucc slot))
+    (globalRowRename (nextSlotInSucc slot))
 
 transitionSliceRename :
   ∀ {machine steps cols index} →
   Slot index steps →
   Fin.Fin (TransitionSliceWidth machine cols) →
   Fin.Fin (Trace.GlobalTraceWidth machine steps cols)
-transitionSliceRename {machine} {steps} {cols} slot =
+transitionSliceRename slot =
   Placement.finSumCases
-    {m = Selector.RuleWidth machine}
-    {n = Decode.RowBitsWidth machine cols + Decode.RowBitsWidth machine cols}
-    {global = Trace.GlobalTraceWidth machine steps cols}
-    (globalSelectorRename {machine} {steps} {cols} slot)
-    (transitionRowPairRename {machine} {steps} {cols} slot)
+    (globalSelectorRename slot)
+    (transitionRowPairRename slot)
 
 transitionSliceBits :
   ∀ {machine steps cols index} →
   Slot index steps →
   CNF.Bits (Trace.GlobalTraceWidth machine steps cols) →
   CNF.Bits (TransitionSliceWidth machine cols)
-transitionSliceBits {machine} {steps} {cols} slot globalBits =
+transitionSliceBits slot globalBits =
   Rename.pullbackBits
-    (transitionSliceRename {machine} {steps} {cols} slot)
+    (transitionSliceRename slot)
     globalBits
 
 rowSliceBits :
@@ -180,9 +167,9 @@ rowSliceBits :
   Slot index (suc steps) →
   CNF.Bits (Trace.GlobalTraceWidth machine steps cols) →
   CNF.Bits (Decode.RowBitsWidth machine cols)
-rowSliceBits {machine} {steps} {cols} slot globalBits =
+rowSliceBits slot globalBits =
   Rename.pullbackBits
-    (globalRowRename {machine} {steps} {cols} slot)
+    (globalRowRename slot)
     globalBits
 
 selectorSliceBits :
@@ -190,9 +177,9 @@ selectorSliceBits :
   Slot index steps →
   CNF.Bits (Trace.GlobalTraceWidth machine steps cols) →
   CNF.Bits (Selector.RuleWidth machine)
-selectorSliceBits {machine} {steps} {cols} slot globalBits =
+selectorSliceBits slot globalBits =
   Rename.pullbackBits
-    (globalSelectorRename {machine} {steps} {cols} slot)
+    (globalSelectorRename slot)
     globalBits
 
 ------------------------------------------------------------------------
@@ -205,35 +192,19 @@ transitionSlice_selector_lookup :
     (globalBits : CNF.Bits (Trace.GlobalTraceWidth machine steps cols))
     (i : Fin.Fin (Selector.RuleWidth machine)) →
   CNF.lookupBit
-    (transitionSliceBits {machine} {steps} {cols} slot globalBits)
-    (Placement.finLeft
-      {m = Selector.RuleWidth machine}
-      {n = Decode.RowBitsWidth machine cols + Decode.RowBitsWidth machine cols}
-      i)
+    (transitionSliceBits slot globalBits)
+    (Placement.finLeft i)
   ≡ CNF.lookupBit
-      (selectorSliceBits {machine} {steps} {cols} slot globalBits)
+      (selectorSliceBits slot globalBits)
       i
-transitionSlice_selector_lookup {machine} {steps} {cols} slot globalBits i =
+transitionSlice_selector_lookup slot globalBits i =
   trans
     (Rename.pullbackLookup
-      {local = TransitionSliceWidth machine cols}
-      {global = Trace.GlobalTraceWidth machine steps cols}
-      (transitionSliceRename {machine} {steps} {cols} slot) globalBits
-      (Placement.finLeft {m = Selector.RuleWidth machine} {n = Decode.RowBitsWidth machine cols + Decode.RowBitsWidth machine cols} i))
-    (trans
-      (cong (CNF.lookupBit globalBits)
-        (Placement.finSumCases_left
-          {m = Selector.RuleWidth machine}
-          {n = Decode.RowBitsWidth machine cols + Decode.RowBitsWidth machine cols}
-          {global = Trace.GlobalTraceWidth machine steps cols}
-          (globalSelectorRename {machine} {steps} {cols} slot)
-          (transitionRowPairRename {machine} {steps} {cols} slot)
-          i))
-      (sym
-        (Rename.pullbackLookup
-          {local = Selector.RuleWidth machine}
-          {global = Trace.GlobalTraceWidth machine steps cols}
-          (globalSelectorRename {machine} {steps} {cols} slot) globalBits i)))
+      (transitionSliceRename slot) globalBits
+      (Placement.finLeft i))
+    (sym
+      (Rename.pullbackLookup
+        (globalSelectorRename slot) globalBits i))
   where
     trans :
       ∀ {A : Set} {x y z : A} →
@@ -251,51 +222,22 @@ transitionSlice_before_lookup :
     (globalBits : CNF.Bits (Trace.GlobalTraceWidth machine steps cols))
     (i : Fin.Fin (Decode.RowBitsWidth machine cols)) →
   CNF.lookupBit
-    (transitionSliceBits {machine} {steps} {cols} slot globalBits)
+    (transitionSliceBits slot globalBits)
     (Placement.finRight
       (Selector.RuleWidth machine)
-      {n = Decode.RowBitsWidth machine cols + Decode.RowBitsWidth machine cols}
-      (Placement.finLeft
-        {m = Decode.RowBitsWidth machine cols}
-        {n = Decode.RowBitsWidth machine cols}
-        i))
+      (Placement.finLeft i))
   ≡ CNF.lookupBit
-      (rowSliceBits {machine} {steps} {cols} (sameSlotInSucc slot) globalBits)
+      (rowSliceBits (sameSlotInSucc slot) globalBits)
       i
-transitionSlice_before_lookup {machine} {steps} {cols} slot globalBits i =
+transitionSlice_before_lookup slot globalBits i =
   trans
     (Rename.pullbackLookup
-      {local = TransitionSliceWidth machine cols}
-      {global = Trace.GlobalTraceWidth machine steps cols}
-      (transitionSliceRename {machine} {steps} {cols} slot) globalBits
-      (Placement.finRight
-        (Selector.RuleWidth machine)
-        {n = Decode.RowBitsWidth machine cols + Decode.RowBitsWidth machine cols}
-        (Placement.finLeft {m = Decode.RowBitsWidth machine cols} {n = Decode.RowBitsWidth machine cols} i)))
-    (trans
-      (cong (CNF.lookupBit globalBits)
-        (Placement.finSumCases_right
-          {m = Selector.RuleWidth machine}
-          {n = Decode.RowBitsWidth machine cols + Decode.RowBitsWidth machine cols}
-          {global = Trace.GlobalTraceWidth machine steps cols}
-          (globalSelectorRename {machine} {steps} {cols} slot)
-          (transitionRowPairRename {machine} {steps} {cols} slot)
-          (Placement.finLeft {m = Decode.RowBitsWidth machine cols} {n = Decode.RowBitsWidth machine cols} i)))
-      (trans
-        (cong (CNF.lookupBit globalBits)
-          (Placement.finSumCases_left
-            {m = Decode.RowBitsWidth machine cols}
-            {n = Decode.RowBitsWidth machine cols}
-            {global = Trace.GlobalTraceWidth machine steps cols}
-            (globalRowRename {machine} {steps} {cols} (sameSlotInSucc slot))
-            (globalRowRename {machine} {steps} {cols} (nextSlotInSucc slot))
-            i))
-        (sym
-          (Rename.pullbackLookup
-            {local = Decode.RowBitsWidth machine cols}
-            {global = Trace.GlobalTraceWidth machine steps cols}
-            (globalRowRename {machine} {steps} {cols} (sameSlotInSucc slot))
-            globalBits i))))
+      (transitionSliceRename slot) globalBits
+      (Placement.finRight _ (Placement.finLeft i)))
+    (sym
+      (Rename.pullbackLookup
+        (globalRowRename (sameSlotInSucc slot))
+        globalBits i))
   where
     trans :
       ∀ {A : Set} {x y z : A} →
@@ -313,57 +255,24 @@ transitionSlice_after_lookup :
     (globalBits : CNF.Bits (Trace.GlobalTraceWidth machine steps cols))
     (i : Fin.Fin (Decode.RowBitsWidth machine cols)) →
   CNF.lookupBit
-    (transitionSliceBits {machine} {steps} {cols} slot globalBits)
+    (transitionSliceBits slot globalBits)
     (Placement.finRight
       (Selector.RuleWidth machine)
-      {n = Decode.RowBitsWidth machine cols + Decode.RowBitsWidth machine cols}
       (Placement.finRight
         (Decode.RowBitsWidth machine cols)
-        {n = Decode.RowBitsWidth machine cols}
         i))
   ≡ CNF.lookupBit
-      (rowSliceBits {machine} {steps} {cols} (nextSlotInSucc slot) globalBits)
+      (rowSliceBits (nextSlotInSucc slot) globalBits)
       i
-transitionSlice_after_lookup {machine} {steps} {cols} slot globalBits i =
+transitionSlice_after_lookup slot globalBits i =
   trans
     (Rename.pullbackLookup
-      {local = TransitionSliceWidth machine cols}
-      {global = Trace.GlobalTraceWidth machine steps cols}
-      (transitionSliceRename {machine} {steps} {cols} slot) globalBits
-      (Placement.finRight
-        (Selector.RuleWidth machine)
-        {n = Decode.RowBitsWidth machine cols + Decode.RowBitsWidth machine cols}
-        (Placement.finRight
-          (Decode.RowBitsWidth machine cols)
-          {n = Decode.RowBitsWidth machine cols}
-          i)))
-    (trans
-      (cong (CNF.lookupBit globalBits)
-        (Placement.finSumCases_right
-          {m = Selector.RuleWidth machine}
-          {n = Decode.RowBitsWidth machine cols + Decode.RowBitsWidth machine cols}
-          {global = Trace.GlobalTraceWidth machine steps cols}
-          (globalSelectorRename {machine} {steps} {cols} slot)
-          (transitionRowPairRename {machine} {steps} {cols} slot)
-          (Placement.finRight
-            (Decode.RowBitsWidth machine cols)
-            {n = Decode.RowBitsWidth machine cols}
-            i)))
-      (trans
-        (cong (CNF.lookupBit globalBits)
-          (Placement.finSumCases_right
-            {m = Decode.RowBitsWidth machine cols}
-            {n = Decode.RowBitsWidth machine cols}
-            {global = Trace.GlobalTraceWidth machine steps cols}
-            (globalRowRename {machine} {steps} {cols} (sameSlotInSucc slot))
-            (globalRowRename {machine} {steps} {cols} (nextSlotInSucc slot))
-            i))
-        (sym
-          (Rename.pullbackLookup
-            {local = Decode.RowBitsWidth machine cols}
-            {global = Trace.GlobalTraceWidth machine steps cols}
-            (globalRowRename {machine} {steps} {cols} (nextSlotInSucc slot))
-            globalBits i))))
+      (transitionSliceRename slot) globalBits
+      (Placement.finRight _ (Placement.finRight _ i)))
+    (sym
+      (Rename.pullbackLookup
+        (globalRowRename (nextSlotInSucc slot))
+        globalBits i))
   where
     trans :
       ∀ {A : Set} {x y z : A} →

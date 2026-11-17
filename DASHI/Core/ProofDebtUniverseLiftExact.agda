@@ -1,7 +1,6 @@
 module DASHI.Core.ProofDebtUniverseLiftExact where
 
 open import Agda.Primitive using (Level; _⊔_)
-open import Agda.Builtin.Bool using (Bool; false; true)
 
 import DASHI.Core.ProofDebtRouterExact as Debt
 
@@ -93,5 +92,3 @@ canonicalProofDebtUniverseLiftBoundary : ProofDebtUniverseLiftBoundary
 canonicalProofDebtUniverseLiftBoundary =
   proof-debt-universe-lift-boundary
     true true true false false false
-
-open ProofDebtUniverseLiftBoundary public

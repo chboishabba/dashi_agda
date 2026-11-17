@@ -2,10 +2,9 @@ module DASHI.Physics.YangMills.BalabanPath4SU2RationalMatrixCoordinatesExact whe
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Empty using (⊥-elim)
 open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_)
-import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; sym; trans)
+import Data.Rational.Tactic.RingSolver as ℚRing
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
@@ -40,21 +39,9 @@ kroneckerSelf decide value with decide value value
 kroneckerDifferent :
   ∀ {A : Set} (decide : DecidableEquality A) {left right} →
   left ≢ right → kroneckerDelta decide left right ≡ 0ℚ
-kroneckerDifferent decide {left} {right} different with decide left right
+kroneckerDifferent decide different with decide _ _
 ... | yes equality = emptyElim (different equality)
 ... | no inequality = refl
-
-zeroMulPlusZeroRaw : ∀ x → 0ℚ * x + 0ℚ ≡ 0ℚ
-zeroMulPlusZeroRaw x =
-  trans (cong (_+ 0ℚ) (ℚP.*-zeroˡ x)) (ℚP.+-identityʳ 0ℚ)
-
-oneMulPlusZeroRaw : ∀ x → 1ℚ * x + 0ℚ ≡ x
-oneMulPlusZeroRaw x =
-  trans (cong (_+ 0ℚ) (ℚP.*-identityˡ x)) (ℚP.+-identityʳ x)
-
-zeroMulPlusRightRaw : ∀ x y → 0ℚ * x + y ≡ y
-zeroMulPlusRightRaw x y =
-  trans (cong (_+ y) (ℚP.*-zeroˡ x)) (ℚP.+-identityˡ y)
 
 deltaSumAbsent :
   ∀ {A : Set}
@@ -66,48 +53,38 @@ deltaSumAbsent :
     (λ column → kroneckerDelta decide row column * vector column)
   ≡ 0ℚ
 deltaSumAbsent decide [] row notMember vector = refl
-deltaSumAbsent decide (value ∷ values) row notMember vector =
-  trans
-    (cong₂ _+_
-      (cong (_* vector value)
-        (kroneckerDifferent decide
-          (λ equality →
-            ⊥-elim
-              (notMember
-                (subst (λ candidate → candidate ∈ value ∷ values)
-                  (sym equality) here)))))
-      (deltaSumAbsent decide values row
-        (λ membership → notMember (there membership)) vector))
-    (zeroMulPlusZeroRaw (vector value))
+deltaSumAbsent decide (value ∷ values) row notMember vector
+  rewrite kroneckerDifferent decide
+    (λ equality →
+      notMember
+        (subst (λ candidate → candidate ∈ value ∷ values)
+          (sym equality) here))
+        | deltaSumAbsent decide values row
+            (λ membership → notMember (there membership)) vector =
+  ℚRing.solve-∀
 
 deltaSumIdentity :
   ∀ {A : Set}
     (decide : DecidableEquality A)
     {values : List A} →
-  ∀ row → row ∈ values →
   DuplicateFree values →
+  ∀ row → row ∈ values →
   (vector : A → ℚ) →
   sumRational values
     (λ column → kroneckerDelta decide row column * vector column)
   ≡ vector row
-deltaSumIdentity decide {values = .row ∷ values}
-    row here (notTail ∷-free tailFree) vector =
-  trans
-    (cong₂ _+_
-      (cong (_* vector row) (kroneckerSelf decide row))
-      (deltaSumAbsent decide values row notTail vector))
-    (oneMulPlusZeroRaw (vector row))
+deltaSumIdentity decide []-free row () vector
+deltaSumIdentity decide (notTail ∷-free tailFree) row here vector
+  rewrite kroneckerSelf decide row
+        | deltaSumAbsent decide _ row notTail vector =
+  ℚRing.solve-∀
 deltaSumIdentity decide {values = value ∷ values}
-    row (there membership) (notTail ∷-free tailFree) vector =
-  trans
-    (cong₂ _+_
-      (cong (_* vector value)
-        (kroneckerDifferent decide
-          (λ equality →
-            ⊥-elim
-              (notTail (subst (λ candidate → candidate ∈ values) equality membership)))))
-      (deltaSumIdentity decide row membership tailFree vector))
-    (zeroMulPlusRightRaw (vector value) (vector row))
+    (notTail ∷-free tailFree) row (there membership) vector
+  rewrite kroneckerDifferent decide
+    (λ equality →
+      notTail (subst (λ candidate → candidate ∈ values) equality membership))
+        | deltaSumIdentity decide tailFree row membership vector =
+  ℚRing.solve-∀
 
 ------------------------------------------------------------------------
 -- Literal three-colour tangent component enumeration.
@@ -158,72 +135,37 @@ componentElementsDuplicateFree =
 PhysicalSU2Coordinate4 : Set
 PhysicalSU2Coordinate4 = Product SU2Component (PositiveBond four)
 
-productFiniteDuplicateFree :
-  ∀ {A B : Set}
-    (finiteA : FiniteEnumeration A)
-    (finiteB : FiniteEnumeration B) →
-  DuplicateFree (elements finiteA) →
-  DuplicateFree (elements finiteB) →
-  DuplicateFree (elements (productFinite finiteA finiteB))
-productFiniteDuplicateFree finiteA finiteB freeA freeB =
+siteElementsDuplicateFree :
+  DuplicateFree (elements (periodicTorus4Finite four))
+siteElementsDuplicateFree =
   cartesianDuplicateFree
-    {left = elements finiteA}
-    {right = elements finiteB}
-    freeA freeB
-
-cyclicFourDuplicateFree :
-  DuplicateFree (elements (cyclicIndexFinite four))
-cyclicFourDuplicateFree = allCyclicIndicesDuplicateFree four
-
-pair2FourFinite : FiniteEnumeration (Pair2 (CyclicIndex four))
-pair2FourFinite = productFinite (cyclicIndexFinite four) (cyclicIndexFinite four)
+    (cartesianDuplicateFree
+      (allCyclicIndicesDuplicateFree four)
+      (allCyclicIndicesDuplicateFree four))
+    (cartesianDuplicateFree
+      (allCyclicIndicesDuplicateFree four)
+      (allCyclicIndicesDuplicateFree four))
 
 positiveBondFinite : FiniteEnumeration (PositiveBond four)
 positiveBondFinite =
   productFinite (periodicTorus4Finite four) (cyclicIndexFinite four)
 
+positiveBondElementsDuplicateFree :
+  DuplicateFree (elements positiveBondFinite)
+positiveBondElementsDuplicateFree =
+  cartesianDuplicateFree
+    siteElementsDuplicateFree
+    (allCyclicIndicesDuplicateFree four)
+
 physicalCoordinateFinite : FiniteEnumeration PhysicalSU2Coordinate4
 physicalCoordinateFinite = productFinite componentFinite positiveBondFinite
 
-abstract
-  pair2FourDuplicateFree :
-    DuplicateFree (elements pair2FourFinite)
-  pair2FourDuplicateFree =
-    productFiniteDuplicateFree
-      (cyclicIndexFinite four)
-      (cyclicIndexFinite four)
-      cyclicFourDuplicateFree
-      cyclicFourDuplicateFree
-
-abstract
-  siteElementsDuplicateFree :
-    DuplicateFree (elements (periodicTorus4Finite four))
-  siteElementsDuplicateFree =
-    productFiniteDuplicateFree
-      pair2FourFinite
-      pair2FourFinite
-      pair2FourDuplicateFree
-      pair2FourDuplicateFree
-
-abstract
-  positiveBondElementsDuplicateFree :
-    DuplicateFree (elements positiveBondFinite)
-  positiveBondElementsDuplicateFree =
-    productFiniteDuplicateFree
-      (periodicTorus4Finite four)
-      (cyclicIndexFinite four)
-      siteElementsDuplicateFree
-      cyclicFourDuplicateFree
-
-abstract
-  physicalCoordinateElementsDuplicateFree :
-    DuplicateFree (elements physicalCoordinateFinite)
-  physicalCoordinateElementsDuplicateFree =
-    productFiniteDuplicateFree
-      componentFinite
-      positiveBondFinite
-      componentElementsDuplicateFree
-      positiveBondElementsDuplicateFree
+physicalCoordinateElementsDuplicateFree :
+  DuplicateFree (elements physicalCoordinateFinite)
+physicalCoordinateElementsDuplicateFree =
+  cartesianDuplicateFree
+    componentElementsDuplicateFree
+    positiveBondElementsDuplicateFree
 
 physicalCoordinateDecidableEquality :
   DecidableEquality PhysicalSU2Coordinate4
@@ -239,30 +181,18 @@ physicalCoordinateDelta :
 physicalCoordinateDelta =
   kroneckerDelta physicalCoordinateDecidableEquality
 
-abstract
-  physicalCoordinateElements : List PhysicalSU2Coordinate4
-  physicalCoordinateElements = elements physicalCoordinateFinite
-
-  physicalCoordinateDeltaActsAsIdentity :
-    ∀ (vector : PhysicalSU2Coordinate4 → ℚ) (row : PhysicalSU2Coordinate4) →
-    sumRational physicalCoordinateElements
-      (λ column → physicalCoordinateDelta row column * vector column)
-    ≡ vector row
-  physicalCoordinateDeltaActsAsIdentity vector row =
-    deltaSumIdentity
-      physicalCoordinateDecidableEquality
-      {values = elements physicalCoordinateFinite}
-      row
-      (complete physicalCoordinateFinite row)
-      physicalCoordinateElementsDuplicateFree
-      vector
-
 physicalFiniteRationalCoordinates :
   FiniteRationalCoordinates PhysicalSU2Coordinate4
 physicalFiniteRationalCoordinates = record
-  { coordinates = physicalCoordinateElements
+  { coordinates = elements physicalCoordinateFinite
   ; delta = physicalCoordinateDelta
-  ; deltaActsAsIdentity = physicalCoordinateDeltaActsAsIdentity
+  ; deltaActsAsIdentity = λ vector row →
+      deltaSumIdentity
+        physicalCoordinateDecidableEquality
+        physicalCoordinateElementsDuplicateFree
+        row
+        (complete physicalCoordinateFinite row)
+        vector
   }
 
 ------------------------------------------------------------------------

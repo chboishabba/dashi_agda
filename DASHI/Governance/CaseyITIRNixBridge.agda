@@ -1,6 +1,6 @@
 module DASHI.Governance.CaseyITIRNixBridge where
 
-open import Agda.Primitive using (Level; lsuc) renaming (_⊔_ to _⊔ℓ_)
+open import Agda.Primitive using (Level; _⊔_; lsuc)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 cong :
@@ -30,19 +30,19 @@ record JoinSemilattice
   (A : Set ℓ)
   : Set ℓ where
   field
-    join : A → A → A
+    _⊔_ : A → A → A
 
-    join-associative :
+    ⊔-associative :
       ∀ x y z →
-      join (join x y) z ≡ join x (join y z)
+      (x ⊔ y) ⊔ z ≡ x ⊔ (y ⊔ z)
 
-    join-commutative :
+    ⊔-commutative :
       ∀ x y →
-      join x y ≡ join y x
+      x ⊔ y ≡ y ⊔ x
 
-    join-idempotent :
+    ⊔-idempotent :
       ∀ x →
-      join x x ≡ x
+      x ⊔ x ≡ x
 
 open JoinSemilattice public
 
@@ -60,26 +60,25 @@ module Replication
   (K : CaseySubstrate {sℓ})
   where
 
-  private
-    semilattice = stateJoin K
+  open JoinSemilattice (stateJoin K)
 
   merge : State K → State K → State K
-  merge = JoinSemilattice.join semilattice
+  merge = _⊔_
 
   merge-associative :
     ∀ x y z →
     merge (merge x y) z ≡ merge x (merge y z)
-  merge-associative = JoinSemilattice.join-associative semilattice
+  merge-associative = ⊔-associative
 
   merge-commutative :
     ∀ x y →
     merge x y ≡ merge y x
-  merge-commutative = JoinSemilattice.join-commutative semilattice
+  merge-commutative = ⊔-commutative
 
   merge-idempotent :
     ∀ x →
     merge x x ≡ x
-  merge-idempotent = JoinSemilattice.join-idempotent semilattice
+  merge-idempotent = ⊔-idempotent
 
 ------------------------------------------------------------------------
 -- Receipt-based governance.
@@ -87,7 +86,7 @@ module Replication
 record GovernanceLayer
   {sℓ rℓ vℓ pℓ : Level}
   (K : CaseySubstrate {sℓ})
-  : Set (lsuc (sℓ ⊔ℓ rℓ ⊔ℓ vℓ ⊔ℓ pℓ)) where
+  : Set (lsuc (sℓ ⊔ rℓ ⊔ vℓ ⊔ pℓ)) where
   field
     ReceiptState : Set rℓ
     receiptJoin : JoinSemilattice ReceiptState
@@ -108,7 +107,7 @@ record BuildBoundary
   {sℓ rℓ vℓ pℓ bℓ aℓ : Level}
   (K : CaseySubstrate {sℓ})
   (G : GovernanceLayer {rℓ = rℓ} {vℓ = vℓ} {pℓ = pℓ} K)
-  : Set (lsuc (sℓ ⊔ℓ rℓ ⊔ℓ vℓ ⊔ℓ pℓ ⊔ℓ bℓ ⊔ℓ aℓ)) where
+  : Set (lsuc (sℓ ⊔ rℓ ⊔ vℓ ⊔ pℓ ⊔ bℓ ⊔ aℓ)) where
   field
     BuildView : Set bℓ
     Artifact : Set aℓ
@@ -155,7 +154,7 @@ module Materialization
 
 record InstitutionalModel
   {oℓ qℓ sℓ rℓ vℓ pℓ fℓ bℓ aℓ : Level}
-  : Set (lsuc (oℓ ⊔ℓ qℓ ⊔ℓ sℓ ⊔ℓ rℓ ⊔ℓ vℓ ⊔ℓ pℓ ⊔ℓ fℓ ⊔ℓ bℓ ⊔ℓ aℓ)) where
+  : Set (lsuc (oℓ ⊔ qℓ ⊔ sℓ ⊔ rℓ ⊔ vℓ ⊔ pℓ ⊔ fℓ ⊔ bℓ ⊔ aℓ)) where
   field
     O-Organization : Set oℓ
     R-Requirement : Set qℓ
@@ -188,7 +187,7 @@ record GovernanceCycle
   {oℓ qℓ sℓ rℓ vℓ pℓ fℓ bℓ aℓ : Level}
   (M : InstitutionalModel
     {oℓ} {qℓ} {sℓ} {rℓ} {vℓ} {pℓ} {fℓ} {bℓ} {aℓ})
-  : Set (oℓ ⊔ℓ qℓ ⊔ℓ sℓ ⊔ℓ rℓ ⊔ℓ vℓ ⊔ℓ pℓ ⊔ℓ fℓ) where
+  : Set (oℓ ⊔ qℓ ⊔ sℓ ⊔ rℓ ⊔ vℓ ⊔ pℓ ⊔ fℓ) where
   field
     organization : O-Organization M
     requirement : R-Requirement M
@@ -227,7 +226,7 @@ record ContractionWitness
   {oℓ qℓ sℓ rℓ vℓ pℓ fℓ bℓ aℓ : Level}
   (M : InstitutionalModel
     {oℓ} {qℓ} {sℓ} {rℓ} {vℓ} {pℓ} {fℓ} {bℓ} {aℓ})
-  : Set (lsuc (oℓ ⊔ℓ qℓ ⊔ℓ sℓ ⊔ℓ rℓ ⊔ℓ vℓ ⊔ℓ pℓ ⊔ℓ fℓ)) where
+  : Set (lsuc (oℓ ⊔ qℓ ⊔ sℓ ⊔ rℓ ⊔ vℓ ⊔ pℓ ⊔ fℓ)) where
   field
     Unresolved :
       State (casey M) →
@@ -252,7 +251,7 @@ record ObserverBoundary
   {sℓ rℓ vℓ pℓ refℓ : Level}
   (K : CaseySubstrate {sℓ})
   (G : GovernanceLayer {rℓ = rℓ} {vℓ = vℓ} {pℓ = pℓ} K)
-  : Set (lsuc (sℓ ⊔ℓ rℓ ⊔ℓ vℓ ⊔ℓ pℓ ⊔ℓ refℓ)) where
+  : Set (lsuc (sℓ ⊔ rℓ ⊔ vℓ ⊔ pℓ ⊔ refℓ)) where
   field
     ImmutableReference : Set refℓ
 

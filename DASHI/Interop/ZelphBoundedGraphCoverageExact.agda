@@ -15,6 +15,7 @@ data QueryCoverageStatus : Set where
   queryCoverageIncomplete : QueryCoverageStatus
   queryCoverageUninspected : QueryCoverageStatus
   queryCoverageInvalid : QueryCoverageStatus
+  : QueryCoverageStatus
 
 record ZelphTransportReceipt : Set where
   constructor zelph-transport-receipt

@@ -72,8 +72,8 @@ rsaLinearAlgebraRun = Stage.rsa260LinearAlgebraRun
 rsaLinearAlgebraParameters : Params.RunParameterReceipt
 rsaLinearAlgebraParameters = Params.rsa260LinearAlgebraParameters
 
-compiledScalarCodecReceipt : Scalar.CompiledScalarExecutionReceipt
-compiledScalarCodecReceipt = Scalar.triadicCompiledScalarExecution
+compiledScalarCodecReceipt : Scalar.CompiledScalarRuntimeReceipt
+compiledScalarCodecReceipt = Scalar.triadicCompiledScalarU8Runtime
 
 supportSWARReceipt : SupportSWAR.SWARExecutionReceipt
 supportSWARReceipt = SupportSWAR.triadicSupportMaskSWARExecution

@@ -4,7 +4,7 @@ module DASHI.Mathematics.Complexity.CNFPlacedConstraintConjunctionExact where
 -- FINITE CONJUNCTION OF PLACED LOCAL CNF CONSTRAINTS
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
@@ -12,33 +12,6 @@ import Data.Fin.Base as Fin
 
 import DASHI.Mathematics.Complexity.FixedWidthTruthTableCNFExact as CNF
 import DASHI.Mathematics.Complexity.CNFVariableRenamingExact as Rename
-
-private
-  trans : ∀ {A : Set} {x y z : A} → x ≡ y → y ≡ z → x ≡ z
-  trans refl refl = refl
-
-  sym : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
-  sym refl = refl
-
-  cong : ∀ {A B : Set} (f : A → B) {x y : A} → x ≡ y → f x ≡ f y
-  cong f refl = refl
-
-  andBoolAssociative :
-    ∀ (a b c : Bool) →
-    CNF.andBool a (CNF.andBool b c) ≡ CNF.andBool (CNF.andBool a b) c
-  andBoolAssociative true b c = refl
-  andBoolAssociative false b c = refl
-
-  andBoolLeftTrue : ∀ (a b : Bool) → CNF.andBool a b ≡ true → a ≡ true
-  andBoolLeftTrue false b ()
-  andBoolLeftTrue true b refl = refl
-
-  andBoolRightTrue : ∀ (a b : Bool) → CNF.andBool a b ≡ true → b ≡ true
-  andBoolRightTrue false b ()
-  andBoolRightTrue true b proof = proof
-
-  andBoolBothTrue : ∀ {a b : Bool} → a ≡ true → b ≡ true → CNF.andBool a b ≡ true
-  andBoolBothTrue refl refl = refl
 
 append :
   ∀ {A : Set} →
@@ -58,14 +31,20 @@ evaluateCNFAppend :
       (CNF.evaluateCNF left assignment)
       (CNF.evaluateCNF right assignment)
 evaluateCNFAppend [] right assignment = refl
-evaluateCNFAppend (clause ∷ clauses) right assignment =
-  trans
-    (cong (CNF.andBool (CNF.evaluateClause clause assignment))
-      (evaluateCNFAppend clauses right assignment))
-    (andBoolAssociative
-      (CNF.evaluateClause clause assignment)
-      (CNF.evaluateCNF clauses assignment)
-      (CNF.evaluateCNF right assignment))
+evaluateCNFAppend (clause ∷ clauses) right assignment
+    with evaluateCNFAppend clauses right assignment
+... | refl
+    with CNF.evaluateClause clause assignment
+       | CNF.evaluateCNF clauses assignment
+       | CNF.evaluateCNF right assignment
+... | true | true | true = refl
+... | true | true | false = refl
+... | true | false | true = refl
+... | true | false | false = refl
+... | false | true | true = refl
+... | false | true | false = refl
+... | false | false | true = refl
+... | false | false | false = refl
 
 record PlacedPredicate
     (local global : Nat) : Set₁ where
@@ -102,7 +81,7 @@ data AllPlacedSatisfied
     {local global : Nat}
     (assignment : CNF.Bits global) :
     List (PlacedPredicate local global) →
-    Set₁ where
+    Set where
   allPlacedDone :
     AllPlacedSatisfied assignment []
   allPlacedStep :
@@ -147,35 +126,48 @@ compilePlacedAllSound (placed ∷ rest) assignment accepted =
           (compilePlacedAll rest)
           assignment)
       ≡ true
-    split =
-      trans
-        (sym (evaluateCNFAppend
-          (compilePlaced placed)
-          (compilePlacedAll rest)
-          assignment))
-        accepted
+    split
+      with evaluateCNFAppend
+        (compilePlaced placed)
+        (compilePlacedAll rest)
+        assignment
+    ... | refl = accepted
 
     leftAccepted :
       CNF.evaluateCNF
         (compilePlaced placed)
         assignment
       ≡ true
-    leftAccepted =
-      andBoolLeftTrue
-        (CNF.evaluateCNF (compilePlaced placed) assignment)
-        (CNF.evaluateCNF (compilePlacedAll rest) assignment)
-        split
+    leftAccepted
+      with CNF.evaluateCNF
+        (compilePlaced placed)
+        assignment
+       | CNF.evaluateCNF
+        (compilePlacedAll rest)
+        assignment
+       | split
+    ... | true | true | proof = refl
+    ... | true | false | ()
+    ... | false | true | ()
+    ... | false | false | ()
 
     rightAccepted :
       CNF.evaluateCNF
         (compilePlacedAll rest)
         assignment
       ≡ true
-    rightAccepted =
-      andBoolRightTrue
-        (CNF.evaluateCNF (compilePlaced placed) assignment)
-        (CNF.evaluateCNF (compilePlacedAll rest) assignment)
-        split
+    rightAccepted
+      with CNF.evaluateCNF
+        (compilePlaced placed)
+        assignment
+       | CNF.evaluateCNF
+        (compilePlacedAll rest)
+        assignment
+       | split
+    ... | true | true | proof = refl
+    ... | true | false | ()
+    ... | false | true | ()
+    ... | false | false | ()
 
 compilePlacedAllComplete :
   ∀ {local global}
@@ -189,15 +181,45 @@ compilePlacedAllComplete :
 compilePlacedAllComplete [] assignment allPlacedDone = refl
 compilePlacedAllComplete (placed ∷ rest) assignment
     (allPlacedStep current remainder) =
-  trans
-    (evaluateCNFAppend
-      (compilePlaced placed)
-      (compilePlacedAll rest)
-      assignment)
-    (andBoolBothTrue
-      (Rename.placedTruthTableCNFComplete
+  transport
+    localAccepted
+    (compilePlacedAllComplete rest assignment remainder)
+  where
+    localAccepted :
+      CNF.evaluateCNF
+        (compilePlaced placed)
+        assignment
+      ≡ true
+    localAccepted =
+      Rename.placedTruthTableCNFComplete
         (rename placed)
         (predicate placed)
         assignment
-        current)
-      (compilePlacedAllComplete rest assignment remainder))
+        current
+
+    transport :
+      CNF.evaluateCNF
+        (compilePlaced placed)
+        assignment
+      ≡ true →
+      CNF.evaluateCNF
+        (compilePlacedAll rest)
+        assignment
+      ≡ true →
+      CNF.evaluateCNF
+        (compilePlacedAll (placed ∷ rest))
+        assignment
+      ≡ true
+    transport leftProof rightProof
+      with evaluateCNFAppend
+        (compilePlaced placed)
+        (compilePlacedAll rest)
+        assignment
+    ... | equality
+      with CNF.evaluateCNF (compilePlaced placed) assignment
+         | CNF.evaluateCNF (compilePlacedAll rest) assignment
+         | leftProof
+         | rightProof
+    ... | true | true | refl | refl
+      with equality
+    ... | refl = refl

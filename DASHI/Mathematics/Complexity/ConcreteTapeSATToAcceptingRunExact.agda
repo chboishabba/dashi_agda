@@ -34,8 +34,6 @@ import DASHI.Mathematics.Complexity.ConcreteTapeDecodedRunInductionExact as RunI
 import DASHI.Mathematics.Complexity.ConcreteTapeDecodedRunLengthExact as RunLength
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalFormulaSemanticsExact as FormulaSem
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalCookLevinCNFExact as GlobalCNF
-import DASHI.Mathematics.Complexity.ConcreteTapeGuardedGlobalCookLevinCNFExact as Guarded
-import DASHI.Mathematics.Complexity.ConcreteTapeDecodedEndcapSameObjectExact as DecodedEndcaps
 import DASHI.Mathematics.Complexity.ConcreteTapeEndpointCNFExact as Endpoint
 import DASHI.Mathematics.Complexity.ConcreteTapeAcceptanceDecodedFinalRowExact as AcceptFinal
 import DASHI.Mathematics.Complexity.ConcreteTapeAcceptanceEndpointSoundExact as AcceptSound
@@ -327,9 +325,9 @@ satisfyingCookLevinAssignmentToAcceptingRun :
         (Endpoint.ExtendedGlobalWidth machine steps
           (Guard.guardedInitialCols input steps))) →
   CNF.evaluateCNF
-    (Guarded.guardedGlobalCookLevinCNF
+    (GlobalCNF.globalCookLevinCNF
       stateCoverage symbolCoverage nonempty
-      steps (Guard.guardedInitialColsMinusOne input steps)
+      steps (Guard.guardedInitialCols input steps)
       (guardedInitialBits
         stateCoverage symbolCoverage input steps))
     assignment
@@ -347,42 +345,16 @@ satisfyingCookLevinAssignmentToAcceptingRun
   where
     cols = Guard.guardedInitialCols input steps
 
-    guardedParts =
-      Guarded.guardedGlobalCookLevinCNFSound
-        stateCoverage symbolCoverage nonempty
-        steps (Guard.guardedInitialColsMinusOne input steps)
-        (guardedInitialBits
-          stateCoverage symbolCoverage input steps)
-        assignment accepted
-
     semantics =
       FormulaSem.satisfyingGlobalFormulaSemantics
         stateCoverage symbolCoverage nonempty
         steps cols
         (guardedInitialBits
           stateCoverage symbolCoverage input steps)
-        assignment (Guarded.originalFormulaTrue guardedParts)
+        assignment accepted
 
     baseBits =
       FormulaSem.baseTraceBits assignment
-
-    -- One exact proof producer for all original decoded time slots.
-    -- The global endcap CNF certificate is shared, not regenerated,
-    -- and each selected after-row is the next row in the same trace.
-    allEndcaps :
-      RunInduction.AfterEndcapsForAllTimes
-        stateCoverage symbolCoverage baseBits
-    allEndcaps slot =
-      DecodedEndcaps.front rowEndcaps ,
-      DecodedEndcaps.back rowEndcaps
-      where
-        rowEndcaps =
-          DecodedEndcaps.globalCNFToDecodedRowEndcaps
-            stateCoverage symbolCoverage
-            (Guard.guardedInitialColsMinusOne input steps)
-            (Global.nextSlotInSucc slot)
-            assignment (Guarded.globalEndcapCNFTrue guardedParts)
-
 
     semanticScan =
       Scan.globalTransitionCNF_to_semanticScan
@@ -430,13 +402,13 @@ satisfyingCookLevinAssignmentToAcceptingRun
     runResult =
       RunInduction.decodedAllSlotsRun
         stateCoverage symbolCoverage nonempty
-        steps baseBits allEndcaps allSemantic
+        steps baseBits allSemantic
         startUnique startMargin
 
     finishEq =
       RunInduction.decodedAllSlotsRun_finish_eq_finalGlobalRow
         stateCoverage symbolCoverage nonempty
-        steps baseBits allEndcaps allSemantic
+        steps baseBits allSemantic
         startUnique startMargin
 
     endpointCell =
@@ -498,7 +470,7 @@ satisfyingCookLevinAssignmentToAcceptingRun
           (RunInduction.run runResult))
         (RunLength.decodedAllSlotsRun_length
           stateCoverage symbolCoverage nonempty
-          steps baseBits allEndcaps allSemantic
+          steps baseBits allSemantic
           startUnique startMargin)
 
     guardedInitialIsInitial :
@@ -529,8 +501,8 @@ satToAcceptingRunReceipt machine = record
   { guardedInitialBitsPaid = true
   ; rowZeroSameObjectPaid = true
   ; transitionScanPaid = true
-  ; tStepRunInductionPaid = false
-  ; runFinishSameFinalRowPaid = false
+  ; tStepRunInductionPaid = true
+  ; runFinishSameFinalRowPaid = true
   ; acceptanceWitnessUniquenessPaid = true
-  ; satToAcceptingRunPaid = false
+  ; satToAcceptingRunPaid = true
   }

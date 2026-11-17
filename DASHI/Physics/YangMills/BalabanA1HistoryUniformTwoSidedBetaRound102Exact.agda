@@ -131,10 +131,10 @@ interactionUpperAtGamma :
 interactionUpperAtGamma dataSet history =
   let
     data = AbsFive.lowerData (interaction dataSet history)
-    coefficient = Five.coefficientTotal dat
-    coupling = Five.coupling dat
+    coefficient = Five.coefficientTotal data
+    coupling = Five.coupling data
     gammaH = gamma dataSet history
-    coefficientNN = Five.coefficientTotalNN dat
+    coefficientNN = Five.coefficientTotalNN data
     fourthBelow = Beta.power4Monotone
       coupling gammaH
       (couplingNonnegative dataSet history)

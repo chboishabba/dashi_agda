@@ -45,7 +45,7 @@ graphColouringCoordinate = graph-colouring-source-coordinate
 record F2PairCovarianceReceipt : Set where
   constructor f2-pair-covariance-receipt
   field
-    scalarField : String
+    field : String
     pairDimension : Nat
     stateCount : Nat
     nonzeroStateCount : Nat
@@ -102,12 +102,6 @@ currentGraphColouringRSAProjectionBoundary = graph-colouring-rsa-projection-boun
   true true true true true
   false false false false
   true
-
-RSA260GraphColouringF2PairBoundary : Set
-RSA260GraphColouringF2PairBoundary = GraphColouringRSAProjectionBoundary
-
-currentRSA260GraphColouringF2PairBoundary : RSA260GraphColouringF2PairBoundary
-currentRSA260GraphColouringF2PairBoundary = currentGraphColouringRSAProjectionBoundary
 
 ------------------------------------------------------------------------
 -- WrongType firewalls.

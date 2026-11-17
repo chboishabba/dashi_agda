@@ -9,7 +9,6 @@ module DASHI.Mathematics.Complexity.ConcreteTapeRunCNFWeldExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 
@@ -25,7 +24,7 @@ data WellFormedTapeRun
     Local.TapeRow machine →
     List (Local.TapeRow machine) →
     Local.TapeRow machine →
-    Set₁ where
+    Set where
 
   runDone :
     ∀ {row} →
@@ -75,16 +74,16 @@ stepToEncodedCharacterization :
     (Local.rule (WF.step step))
     current next
 stepToEncodedCharacterization codec step = record
-  { beforeInterior =
+  { RowCNF.beforeInterior =
       Locality.wellFormedStepBeforeInterior step
-  ; afterUnique =
+  ; RowCNF.afterUnique =
       WF.afterExactlyOneHead step
-  ; ruleOccursInMachine =
+  ; RowCNF.ruleOccursInMachine =
       Local.ruleOccursInMachine (WF.step step)
-  ; sameRowLength =
+  ; RowCNF.sameRowLength =
       Whole.rewriteOccurrencePreservesLength
         (WF.occurrence (WF.wellFormedOccurrence step))
-  ; allLocalCNFsSatisfied =
+  ; RowCNF.allLocalCNFsSatisfied =
       RowCNF.stepImpliesWholeRowCNF codec step
   }
 

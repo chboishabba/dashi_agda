@@ -13,7 +13,7 @@ module DASHI.Mathematics.Complexity.ConcreteTapeCookLevinPrizeFacingExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; suc; _+_; _*_; _^_)
 open import Data.Nat using (_∸_)
 open import Data.Product using (Σ)
@@ -27,8 +27,7 @@ import DASHI.Mathematics.Complexity.ConcreteTapeSATToAcceptingRunExact as Sound
 import DASHI.Mathematics.Complexity.ConcreteTapeCookLevinExactBudgetIff as Exact
 import DASHI.Mathematics.Complexity.ConcreteTapeCookLevinSizeExact as Size
 import DASHI.Mathematics.Complexity.ConcreteTapeCookLevinSizeClosedExact as Closed
-import DASHI.Mathematics.Complexity.ConcreteTapeGuardedGlobalCookLevinCNFExact as GuardedCNF
-import DASHI.Mathematics.Complexity.ConcreteTapeGuardedClauseCountExact as GuardedCount
+import DASHI.Mathematics.Complexity.ConcreteTapeGlobalCookLevinCNFExact as GlobalCNF
 import DASHI.Mathematics.Complexity.ConcreteTapeEndpointCNFExact as Endpoint
 import DASHI.Mathematics.Complexity.ConcreteTapeFixedDimensionDecodeExact as Decode
 import DASHI.Mathematics.Complexity.ConcreteTapeSelectedRuleWindowCNFExact as Selected
@@ -63,9 +62,9 @@ record PrizeFacingCookLevinCertificate
     closedClauseBound :
       Σ Nat (λ slack →
         Size.listLength
-          (GuardedCNF.guardedGlobalCookLevinCNF
+          (GlobalCNF.globalCookLevinCNF
             stateCoverage symbolCoverage nonempty
-            steps (Guard.guardedInitialColsMinusOne input steps)
+            steps (Guard.guardedInitialCols input steps)
             (Sound.guardedInitialBits
               stateCoverage symbolCoverage input steps))
         + slack
@@ -78,8 +77,7 @@ record PrizeFacingCookLevinCertificate
           +
           suc
             (Guard.guardedInitialCols input steps *
-              (2 ^ Endpoint.AcceptanceLocalWidth machine))
-          + ((suc steps) * GuardedCount.twoEndcapsPerRow machine))
+              (2 ^ Endpoint.AcceptanceLocalWidth machine)))
 
 open PrizeFacingCookLevinCertificate public
 
@@ -95,9 +93,7 @@ prizeFacingCookLevinCertificate :
   PrizeFacingCookLevinCertificate
     stateCoverage symbolCoverage nonempty input steps
 prizeFacingCookLevinCertificate
-    stateCoverage symbolCoverage nonempty input steps
-    with Guard.guardedInitialColsSuccessor input steps
-... | refl = record
+    stateCoverage symbolCoverage nonempty input steps = record
   { exactBudgetSemantics =
       Exact.cookLevinExactBudgetIff
         stateCoverage symbolCoverage nonempty input steps
@@ -105,9 +101,9 @@ prizeFacingCookLevinCertificate
       Size.extendedGlobalWidth_exact
         machine steps (Guard.guardedInitialCols input steps)
   ; closedClauseBound =
-      GuardedCount.guardedGlobalClauseBound
+      Closed.globalCookLevinClause_bound
         stateCoverage symbolCoverage nonempty
-        steps (Guard.guardedInitialColsMinusOne input steps)
+        steps (Guard.guardedInitialCols input steps)
         (Sound.guardedInitialBits
           stateCoverage symbolCoverage input steps)
   }

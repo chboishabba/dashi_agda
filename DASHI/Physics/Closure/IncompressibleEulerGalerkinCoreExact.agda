@@ -111,18 +111,6 @@ forcedEulerExtensionIsNewCoordinateNotNewNonlinearOntology = true
 specificExternalBlowupConstructionInhabitedHere : Bool
 specificExternalBlowupConstructionInhabitedHere = false
 
-historicalDashiEulerGalerkinCarrierPredatesThisAdapterIsTrue :
-  historicalDashiEulerGalerkinCarrierPredatesThisAdapter ≡ true
-historicalDashiEulerGalerkinCarrierPredatesThisAdapterIsTrue = refl
-
-thisAdapterOriginatesEulerGalerkinCarrierIsFalse :
-  thisAdapterOriginatesEulerGalerkinCarrier ≡ false
-thisAdapterOriginatesEulerGalerkinCarrierIsFalse = refl
-
-historicalProjectedNonlinearityReusedWithoutReplacementIsTrue :
-  historicalProjectedNonlinearityReusedWithoutReplacement ≡ true
-historicalProjectedNonlinearityReusedWithoutReplacementIsTrue = refl
-
 thisAdapterGetsEulerOriginPriorityCreditIsFalse :
   thisAdapterGetsEulerOriginPriorityCredit ≡ false
 thisAdapterGetsEulerOriginPriorityCreditIsFalse = refl

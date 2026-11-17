@@ -1,7 +1,7 @@
 module DASHI.Quantum.AgreementDepth where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import DASHI.Physics.Closure.QuantumCarrierCore using (Tower; WaveLift; HilbertSpace)
+open import DASHI.Unifier using (Tower; WaveLift; HilbertSpace)
 open import DASHI.Algebra.Quantum.UVFinitenessHolographyTests using (UVFinitenessAxioms; AreaBound; UVFinitenessTheorem)
 open import DASHI.Algebra.Quantum.UVFiniteness using (UVBounded; UVFinite; uvFiniteness)
 

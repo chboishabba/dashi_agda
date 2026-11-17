@@ -40,33 +40,33 @@ data PreferredSourceLeaf225 : Set where
   literalPhysicalCompositeD1ChainRule : PreferredSourceLeaf225
 
 data LeafState225 : Set where
-  leafClosed leafOpen leafBlocked : LeafState225
+  closed open blocked : LeafState225
 
 preferredLeafState225 : PreferredSourceLeaf225 → LeafState225
-preferredLeafState225 literalCMP119RegularESourceProjection = leafOpen
-preferredLeafState225 literalCMP119RegularEPointwiseLocalization = leafBlocked
-preferredLeafState225 regularEToCMP109116Continuation = leafClosed
-preferredLeafState225 literalSecondVariationCalculus = leafBlocked
-preferredLeafState225 literalCMP109Equation51Binding = leafBlocked
-preferredLeafState225 literalCMP116NormalizedAnalyticDemands = leafBlocked
-preferredLeafState225 regularEToBC1PotentialSameObject = leafClosed
-preferredLeafState225 literalCMP109GeneratedHistoryResponseProducer = leafOpen
-preferredLeafState225 literalCMP109BetaDifferenceDecomposition = leafBlocked
-preferredLeafState225 literalPhysicalCompositeD1ChainRule = leafBlocked
+preferredLeafState225 literalCMP119RegularESourceProjection = open
+preferredLeafState225 literalCMP119RegularEPointwiseLocalization = blocked
+preferredLeafState225 regularEToCMP109116Continuation = closed
+preferredLeafState225 literalSecondVariationCalculus = blocked
+preferredLeafState225 literalCMP109Equation51Binding = blocked
+preferredLeafState225 literalCMP116NormalizedAnalyticDemands = blocked
+preferredLeafState225 regularEToBC1PotentialSameObject = closed
+preferredLeafState225 literalCMP109GeneratedHistoryResponseProducer = open
+preferredLeafState225 literalCMP109BetaDifferenceDecomposition = blocked
+preferredLeafState225 literalPhysicalCompositeD1ChainRule = blocked
 
 preferredFirstMissingCoordinate225 : PreferredSourceLeaf225
 preferredFirstMissingCoordinate225 = literalCMP119RegularESourceProjection
 
 preferredFirstMissingCoordinate225IsOpen :
-  preferredLeafState225 preferredFirstMissingCoordinate225 ≡ leafOpen
+  preferredLeafState225 preferredFirstMissingCoordinate225 ≡ open
 preferredFirstMissingCoordinate225IsOpen = refl
 
 regularEContinuationCompilerClosed :
-  preferredLeafState225 regularEToCMP109116Continuation ≡ leafClosed
+  preferredLeafState225 regularEToCMP109116Continuation ≡ closed
 regularEContinuationCompilerClosed = refl
 
 regularEBC1SameObjectClosed :
-  preferredLeafState225 regularEToBC1PotentialSameObject ≡ leafClosed
+  preferredLeafState225 regularEToBC1PotentialSameObject ≡ closed
 regularEBC1SameObjectClosed = refl
 
 regularESourceProjectionLevel : ProofLevel

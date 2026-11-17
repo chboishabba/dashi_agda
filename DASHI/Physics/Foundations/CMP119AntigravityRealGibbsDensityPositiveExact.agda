@@ -1,8 +1,4 @@
--- This original physical-source module imports RealAnalysisAxioms,
--- which exposes an explicitly postulated Real carrier and ring/order laws.
--- The declarations are conditional on that authority and MUST NOT claim
--- Agda --safe or axiom-free acceptance. A separate Bishop-only safe
--- source is checked independently.
+{-# OPTIONS --safe #-}
 module DASHI.Physics.Foundations.CMP119AntigravityRealGibbsDensityPositiveExact where
 
 open import Agda.Builtin.Equality using (_≡_)

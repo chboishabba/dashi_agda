@@ -35,7 +35,11 @@ inverse witness =
 multiplyScaleRight :
   (a : C3.Cyclotomic3) → (r : ℚ) → (b : C3.Cyclotomic3) →
   C3.multiply a (L.scale r b) ≡ L.scale r (C3.multiply a b)
-multiplyScaleRight a r b = L.multiplyScaleRight r a b
+multiplyScaleRight
+  (C3.cyclotomic3 a b) r (C3.cyclotomic3 c d) =
+  C3.cyclotomic3Ext
+    (solve (a ∷ b ∷ c ∷ d ∷ r ∷ []))
+    (solve (a ∷ b ∷ c ∷ d ∷ r ∷ []))
 
 scaleEmbeddedNormToOne : (witness : NonzeroCyclotomicAmplitude) →
   L.scale (normInverse witness)
@@ -50,7 +54,7 @@ scaleEmbeddedNormToOne witness =
   in
   C3.cyclotomic3Ext
     (trans (ℚP.*-comm (1/ n) n) inverseRight)
-    (ℚP.*-zeroʳ (1/ n))
+    refl
 
 rightInverse : (witness : NonzeroCyclotomicAmplitude) →
   C3.multiply (amplitude witness) (inverse witness) ≡ C3.one

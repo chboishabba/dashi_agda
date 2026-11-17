@@ -58,10 +58,10 @@ decodedSelectedWindow {machine}
       (Selector.RuleWidth machine)
       bits)
 
-------------------------------------------------------------------------
--- The local truth-table predicate is semantically sound for arbitrary bits,
--- not merely for encodings produced from a known machine run.
-------------------------------------------------------------------------
+/--
+The local truth-table predicate is semantically sound for arbitrary bits,
+not merely for encodings produced from a known machine run.
+-/
 selectedPredicateTrueImpliesDecodedSemanticLegal :
   ∀ {machine}
     (stateCoverage :
@@ -83,11 +83,11 @@ selectedPredicateTrueImpliesDecodedSemanticLegal
   Reflect.booleanTrueImpliesSemanticLegal accepted
 
 
-------------------------------------------------------------------------
--- The converse reflection is equally literal: if the actual decoded rule/window
--- pair is semantically legal, the selected Boolean predicate is true even for an
--- arbitrary bit vector.
-------------------------------------------------------------------------
+/--
+The converse reflection is equally literal: if the actual decoded rule/window
+pair is semantically legal, the selected Boolean predicate is true even for an
+arbitrary bit vector.
+-/
 decodedSemanticLegalImpliesSelectedPredicateTrue :
   ∀ {machine}
     (stateCoverage :
@@ -132,23 +132,23 @@ record RawDecodedWindowSemantic
 
     ruleExact :
       rule ≡
-        decodedSelectedRule {machine = machine} nonempty
-          (Raw.rawSelectedWindowBits {machine} {steps} {cols} timeSlot start globalBits)
+        decodedSelectedRule nonempty
+          (Raw.rawSelectedWindowBits timeSlot start globalBits)
 
     windowExact :
       window ≡
-        decodedSelectedWindow {machine = machine} stateCoverage symbolCoverage
-          (Raw.rawSelectedWindowBits {machine} {steps} {cols} timeSlot start globalBits)
+        decodedSelectedWindow stateCoverage symbolCoverage
+          (Raw.rawSelectedWindowBits timeSlot start globalBits)
 
     legal :
       Pattern.LegalWindowForRule machine rule window
 
 open RawDecodedWindowSemantic public
 
-------------------------------------------------------------------------
--- Truth of one raw fixed-coordinate predicate now yields an actual semantic
--- legal six-cell transition window under the actual decoded shared rule.
-------------------------------------------------------------------------
+/--
+Truth of one raw fixed-coordinate predicate now yields an actual semantic
+legal six-cell transition window under the actual decoded shared rule.
+-/
 rawSelectedPredicateTrueImpliesSemantic :
   ∀ {machine steps cols timeIndex columnIndex}
     (stateCoverage :
@@ -162,32 +162,32 @@ rawSelectedPredicateTrueImpliesSemantic :
       CNF.Bits
         (Trace.GlobalTraceWidth
           machine steps cols)) →
-  Selected.selectedRuleWindowPredicateWithCoverage {machine = machine}
+  Selected.selectedRuleWindowPredicateWithCoverage
     stateCoverage symbolCoverage nonempty
-    (Raw.rawSelectedWindowBits {machine} {steps} {cols} timeSlot start globalBits)
+    (Raw.rawSelectedWindowBits timeSlot start globalBits)
   ≡ true →
-  RawDecodedWindowSemantic {machine} {steps} {cols}
+  RawDecodedWindowSemantic
     stateCoverage symbolCoverage nonempty
     timeSlot start globalBits
-rawSelectedPredicateTrueImpliesSemantic {machine} {steps} {cols}
+rawSelectedPredicateTrueImpliesSemantic
     stateCoverage symbolCoverage nonempty
     timeSlot start globalBits accepted =
   record
     { rule =
-        decodedSelectedRule {machine = machine} nonempty localBits
+        decodedSelectedRule nonempty localBits
     ; window =
-        decodedSelectedWindow {machine = machine}
+        decodedSelectedWindow
           stateCoverage symbolCoverage localBits
     ; ruleExact = refl
     ; windowExact = refl
     ; legal =
-        selectedPredicateTrueImpliesDecodedSemanticLegal {machine = machine}
+        selectedPredicateTrueImpliesDecodedSemanticLegal
           stateCoverage symbolCoverage nonempty
           localBits accepted
     }
   where
     localBits =
-      Raw.rawSelectedWindowBits {machine} {steps} {cols} timeSlot start globalBits
+      Raw.rawSelectedWindowBits timeSlot start globalBits
 
 record ArbitrarySelectedWindowSemanticReceipt
     (machine : Local.ConcreteTapeMachine) : Set₁ where

@@ -1,7 +1,6 @@
 module DASHI.ComputerScience.TekumParsedExponentInjectiveExact where
 
-open import Agda.Builtin.Equality using (_≡_)
-open import Relation.Binary.PropositionalEquality using (sym)
+open import Agda.Builtin.Equality using (_≡_; sym)
 open import Agda.Builtin.Nat using (suc)
 open import Data.Empty using (⊥; ⊥-elim)
 open import Data.Integer.Base as ℤ using (ℤ; _<_)

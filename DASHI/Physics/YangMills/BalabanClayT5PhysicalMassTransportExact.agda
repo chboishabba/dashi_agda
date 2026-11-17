@@ -54,12 +54,6 @@ open PhysicalMassInterlacing public
 partialDefect : PhysicalMassInterlacing → Nat → ℚ
 partialDefect dataSet = partialFrom (defect dataSet)
 
-addZeroRightRaw : ∀ (g : ℚ) → g ≡ g + 0ℚ
-addZeroRightRaw = ℚRing.solve-∀
-
-addAssocRightRaw : ∀ (g p d : ℚ) → (g + p) + d ≡ g + (p + d)
-addAssocRightRaw = ℚRing.solve-∀
-
 gapAtDepthBelowInitialPlusDefects :
   (dataSet : PhysicalMassInterlacing) → ∀ depth →
   physicalGap dataSet depth
@@ -67,15 +61,12 @@ gapAtDepthBelowInitialPlusDefects :
 gapAtDepthBelowInitialPlusDefects dataSet zero =
   subst
     (λ right → physicalGap dataSet zero ≤ right)
-    (addZeroRightRaw (physicalGap dataSet zero))
+    (ℚRing.solve-∀)
     (reflexive dataSet (physicalGap dataSet zero))
 gapAtDepthBelowInitialPlusDefects dataSet (suc depth) =
   subst
     (λ right → physicalGap dataSet (suc depth) ≤ right)
-    (addAssocRightRaw
-      (physicalGap dataSet zero)
-      (partialDefect dataSet depth)
-      (defect dataSet depth))
+    (ℚRing.solve-∀)
     (transitive dataSet
       (oneStepInterlacing dataSet depth)
       (addMonotone dataSet

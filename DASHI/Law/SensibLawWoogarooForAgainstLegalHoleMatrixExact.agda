@@ -1,8 +1,8 @@
 module DASHI.Law.SensibLawWoogarooForAgainstLegalHoleMatrixExact where
 
-openStatus import DASHI.Core.Prelude
-openStatus import Agda.Builtin.Bool using (Bool; false; true)
-openStatus import Agda.Builtin.String using (String)
+open import DASHI.Core.Prelude
+open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.String using (String)
 
 ------------------------------------------------------------------------
 -- WOOGAROO FOR / AGAINST LEGAL-HOLE MATRIX
@@ -15,7 +15,7 @@ openStatus import Agda.Builtin.String using (String)
 data HoleStatus : Set where
   closed : HoleStatus
   partiallyClosed : HoleStatus
-  openStatus : HoleStatus
+  open : HoleStatus
 
 data LegalLane : Set where
   epbc8575ApprovalRefusal : LegalLane
@@ -37,7 +37,7 @@ record ForAgainstHole : Set where
     missingPayment : String
     conclusionAlreadyProved : Bool
 
-openStatus ForAgainstHole public
+open ForAgainstHole public
 
 epbc8575Hole : ForAgainstHole
 epbc8575Hole = for-against-hole
@@ -98,7 +98,7 @@ planningExemptionHole = for-against-hole
   planningGrandfatheringExemption
   "Council material expressly records mapped koala habitat and an approved/exempted development outcome, proving that the exemption/history coordinate is legally material."
   "The exact statutory/planning instrument, temporal scope, parcel/stage scope and effect of later amendments have not yet been recovered. Without that instrument we cannot prove either that the exemption defeats the current case or that it has ceased to apply."
-  openStatus
+  open
   "Primary exemption/grandfathering instrument + approval history + current project/stage comparison."
   false
 
@@ -107,7 +107,7 @@ corridorHole = for-against-hole
   cumulativeCorridorFragmentation
   "Official Queensland Statewide Biodiversity Corridor mapping and the campaign aerial outline create a strong same-landscape hypothesis for connectivity/fragmentation across Springview, Scenic and Peninsular; this can be legally relevant to EPBC protected-matter impacts and factually relevant to NCA s 13 essentiality."
   "The screenshots are not georeferenced to each other, project boundaries belong to distinct referrals, and corridor designation is not itself a statutory conclusion of significant impact or critical habitat."
-  openStatus
+  open
   "Exact polygons for each project x official machine-readable corridor geometry x expert ecological function/severance evidence, kept project-indexed before any cumulative inference."
   false
 

@@ -15,11 +15,11 @@ record FiniteCriticalContraction
     distance : State → State → Distance
     StrictlySmaller : Distance → Distance → Set
     strictIrreflexive : ∀ value → StrictlySmaller value value → ⊥
-    distinctOrEqual : (left right : State) → left ≡ right ⊎ left ≢ right
+    distinctOrEqual : ∀ left right → left ≡ right ⊎ left ≢ right
     fixedPoint : State
     fixed : step fixedPoint ≡ fixedPoint
     contractiveOnDistinct :
-      ∀ {left right : State} → left ≢ right →
+      ∀ {left right} → left ≢ right →
       StrictlySmaller
         (distance (step left) (step right))
         (distance left right)

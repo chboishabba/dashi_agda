@@ -9,7 +9,6 @@ open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans
 import DASHI.Physics.YangMills.BalabanOpaqueGlobalAlgebraExact as OpaqueAlgebra
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
 open import DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact using (sq)
 open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier
 open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact
@@ -72,7 +71,7 @@ axisZeroMeanGlobalPoincare :
 axisZeroMeanGlobalPoincare axis fieldValue zeroMean =
   subst
     (λ leftValue → leftValue ≤ axisDirectionalEnergy axis fieldValue)
-    (sym (scaledGlobalNormIsFibreFold axis fieldValue))
+    (scaledGlobalNormIsFibreFold axis fieldValue)
     (sumZeroMeanFibrePoincare axis fieldValue
       (physicalTransverseCoordinates side4)
       (λ transverse membership → zeroMean transverse))
@@ -166,7 +165,7 @@ path4MartingalePoincareBeforeEnergyContraction :
 path4MartingalePoincareBeforeEnergyContraction fieldValue meanZero =
   subst
     (λ leftValue → leftValue ≤ martingaleDirectionalEnergySum fieldValue)
-    (sym (scaledVarianceDecomposition fieldValue meanZero))
+    (scaledVarianceDecomposition fieldValue meanZero)
     (ℚP.+-mono-≤
       (martingale0Poincare fieldValue)
       (ℚP.+-mono-≤

@@ -107,12 +107,12 @@ countryCounterfactualCurrentlyUnderidentified = RepairCF.counterfactual-repair-u
 
 currentLandCountryControlStillOpen :
   Continuity.currentCoordinateState Continuity.landCountryControl
-  ≡ Continuity.openState
+  ≡ Continuity.open
 currentLandCountryControlStillOpen = refl
 
 currentCommunityAuthorityStillOpen :
   Continuity.currentCoordinateState Continuity.communityAuthorityBearing
-  ≡ Continuity.openState
+  ≡ Continuity.open
 currentCommunityAuthorityStillOpen = refl
 
 doctrinalRejectionCanCoexistWithStructuralContinuityRisk :

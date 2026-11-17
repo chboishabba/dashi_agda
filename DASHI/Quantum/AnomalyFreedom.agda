@@ -2,7 +2,7 @@
 module DASHI.Quantum.AnomalyFreedom where
 
 open import Agda.Builtin.Equality using (_≡_)
-open import DASHI.Physics.Closure.QuantumCarrierCore using (Tower; HilbertSpace)
+open import DASHI.Unifier using (Tower; HilbertSpace)
 open import DASHI.Quantum.Stone using (StoneBundle; StoneConsequences; Stone-theorem)
 open import DASHI.Quantum.AgreementDepth using (AgreementDepthBundle; AgreementDepth-theorem)
 open import DASHI.Algebra.ConstraintAlgebraClosure

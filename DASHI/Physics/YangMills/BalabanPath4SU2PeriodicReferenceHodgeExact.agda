@@ -4,7 +4,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational using (ℚ; 0ℚ; _+_; _-_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong₂; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using
@@ -46,37 +46,37 @@ sumRationalNonnegative (value ∷ values) term pointwise =
       (pointwise value)
       (sumRationalNonnegative values term pointwise))
 
-periodicWrapFibreEnergyNonnegative : ∀ fld axis transverse →
-  0ℚ ≤ periodicWrapFibreEnergy fld axis transverse
-periodicWrapFibreEnergyNonnegative fld axis transverse =
+periodicWrapFibreEnergyNonnegative : ∀ field axis transverse →
+  0ℚ ≤ periodicWrapFibreEnergy field axis transverse
+periodicWrapFibreEnergyNonnegative field axis transverse =
   squareNonnegative
-    (fld (insertAxis axis zeroᵢ transverse)
-      - fld (insertAxis axis last4 transverse))
+    (field (insertAxis axis zeroᵢ transverse)
+      - field (insertAxis axis last4 transverse))
 
-periodicWrapEnergyNonnegative : ∀ axis fld →
-  0ℚ ≤ periodicWrapEnergy axis fld
-periodicWrapEnergyNonnegative axis fld =
+periodicWrapEnergyNonnegative : ∀ axis field →
+  0ℚ ≤ periodicWrapEnergy axis field
+periodicWrapEnergyNonnegative axis field =
   sumRationalNonnegative
     (physicalTransverseCoordinates side4)
-    (periodicWrapFibreEnergy fld axis)
-    (periodicWrapFibreEnergyNonnegative fld axis)
+    (periodicWrapFibreEnergy field axis)
+    (periodicWrapFibreEnergyNonnegative field axis)
 
-componentPeriodicWrapEnergyNonnegative : ∀ fld →
-  0ℚ ≤ componentPeriodicWrapEnergy fld
-componentPeriodicWrapEnergyNonnegative fld =
+componentPeriodicWrapEnergyNonnegative : ∀ field →
+  0ℚ ≤ componentPeriodicWrapEnergy field
+componentPeriodicWrapEnergyNonnegative field =
   sumRationalNonnegative
     (allCyclicIndices four)
     (λ componentAxis →
       sumRational (allCyclicIndices four) (λ derivativeAxis →
-        periodicWrapEnergy derivativeAxis (fld componentAxis)))
+        periodicWrapEnergy derivativeAxis (field componentAxis)))
     (λ componentAxis →
       sumRationalNonnegative
         (allCyclicIndices four)
         (λ derivativeAxis →
-          periodicWrapEnergy derivativeAxis (fld componentAxis))
+          periodicWrapEnergy derivativeAxis (field componentAxis))
         (λ derivativeAxis →
           periodicWrapEnergyNonnegative derivativeAxis
-            (fld componentAxis)))
+            (field componentAxis)))
 
 physicalPeriodicWrapEnergyNonnegative : ∀ tangent →
   0ℚ ≤ physicalPeriodicWrapEnergy tangent
@@ -104,8 +104,9 @@ literalWilsonGaugeEqualsPeriodicDifferenceEnergy : ∀ tangent →
   ≡ physicalPeriodicReferenceDifferenceEnergy tangent
 literalWilsonGaugeEqualsPeriodicDifferenceEnergy tangent =
   trans
-    (cong (_+ literalGaugeFixingEnergy tangent)
-      (literalWilsonHessianEqualsCurlEnergy tangent))
+    (cong₂ _+_
+      (literalWilsonHessianEqualsCurlEnergy tangent)
+      refl)
     (discreteCurlDivergenceHodgeIdentity tangent)
 
 physicalReferenceDifferenceBelowPeriodic : ∀ tangent →
@@ -156,7 +157,7 @@ literalPeriodicReferenceHodgeWithBlockPenalty tangent blockPenalty blockZero
   ℚP.≤-trans
     (literalPeriodicReferenceHodgeCoercivity tangent blockZero)
     (ℚP.+-mono-≤
-      (ℚP.≤-refl {x = literalWilsonHessianPositivePlaneFold tangent})
+      ℚP.≤-refl
       (baseBelowBasePlusRemainder
         (literalGaugeFixingEnergy tangent)
         blockPenalty

@@ -1,6 +1,6 @@
 module DASHI.GameTheory.FiniteMixedStrategyExpectedUtilityExact where
 
-open import DASHI.Core.Prelude hiding (_+_; _*_; _≤_)
+open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
@@ -88,25 +88,15 @@ jointDeviationMass (profileAtom ∷ profiles) alternatives =
   profileMass profileAtom * mixedStrategyMass alternatives
   + jointDeviationMass profiles alternatives
 
-zeroTimesRational : ∀ q → 0ℚ ≡ 0ℚ * q
-zeroTimesRational = solve-∀
-
-distribRational : ∀ a b c → a * c + b * c ≡ (a + b) * c
-distribRational = solve-∀
-
-oneTimesOneRational : 1ℚ * 1ℚ ≡ 1ℚ
-oneTimesOneRational = solve-∀
-
 jointDeviationMassFactors :
   ∀ {G player}
     (profiles : List (WeightedProfile G))
     (alternatives : List (WeightedStrategy G player)) →
   jointDeviationMass profiles alternatives
   ≡ mixedProfileMass profiles * mixedStrategyMass alternatives
-jointDeviationMassFactors [] alternatives = zeroTimesRational (mixedStrategyMass alternatives)
+jointDeviationMassFactors [] alternatives = solve-∀
 jointDeviationMassFactors (profileAtom ∷ profiles) alternatives
-  rewrite jointDeviationMassFactors profiles alternatives =
-    distribRational (profileMass profileAtom) (mixedProfileMass profiles) (mixedStrategyMass alternatives)
+  rewrite jointDeviationMassFactors profiles alternatives = solve-∀
 
 normalizedJointDeviationMass :
   ∀ {G player}
@@ -121,7 +111,7 @@ normalizedJointDeviationMass profileLaw alternative
     (FiniteMixedProfileLaw.atoms profileLaw)
     (FiniteMixedStrategy.atoms alternative)
     | FiniteMixedProfileLaw.normalized profileLaw
-    | FiniteMixedStrategy.normalized alternative = oneTimesOneRational
+    | FiniteMixedStrategy.normalized alternative = solve-∀
 
 ------------------------------------------------------------------------
 -- Cardinal expected-utility gate.

@@ -152,30 +152,6 @@ record YMClayTrueBlockerReceipt : Setω where
     transferConsumerRecordedIsTrue :
       transferConsumerRecorded ≡ true
 
-    reflectionPositivityConsumerRecorded :
-      Bool
-
-    reflectionPositivityConsumerRecordedIsTrue :
-      reflectionPositivityConsumerRecorded ≡ true
-
-    osterwalderSchraderConsumerRecorded :
-      Bool
-
-    osterwalderSchraderConsumerRecordedIsTrue :
-      osterwalderSchraderConsumerRecorded ≡ true
-
-    wightmanConsumerRecorded :
-      Bool
-
-    wightmanConsumerRecordedIsTrue :
-      wightmanConsumerRecorded ≡ true
-
-    transferConsumerRecorded :
-      Bool
-
-    transferConsumerRecordedIsTrue :
-      transferConsumerRecorded ≡ true
-
     ymClayPromotion :
       Bool
 

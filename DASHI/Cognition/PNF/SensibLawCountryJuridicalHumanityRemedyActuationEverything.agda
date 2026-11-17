@@ -207,7 +207,7 @@ data AxisState : Set where
   paid : AxisState
   presentButConditional : AxisState
   absentByDefault : AxisState
-  openState : AxisState
+  open : AxisState
   sourceOutcomeRequired : AxisState
 
 
@@ -217,11 +217,11 @@ billyCurrentActuationState remedySpecification = paid
 billyCurrentActuationState directDomesticCompulsion = absentByDefault
 billyCurrentActuationState domesticImplementationCapacity = paid
 billyCurrentActuationState politicalActuation = presentButConditional
-billyCurrentActuationState communityAuthority = openState
-billyCurrentActuationState communityDefinedOutcome = openState
+billyCurrentActuationState communityAuthority = open
+billyCurrentActuationState communityDefinedOutcome = open
 billyCurrentActuationState independentMonitoring = presentButConditional
 billyCurrentActuationState correctiveRevision = sourceOutcomeRequired
-billyCurrentActuationState terminalRealisedRepair = openState
+billyCurrentActuationState terminalRealisedRepair = open
 
 record RemedyRealisationBoundary : Set where
   constructor remedy-realisation-boundary

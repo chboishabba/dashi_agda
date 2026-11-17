@@ -221,5 +221,5 @@ currentModernKernelVerificationFrontier = modern-kernel-verification-frontier
 historicalFrontier : Historical.PrimarySupplementKernelFrontier
 historicalFrontier = Historical.currentPrimarySupplementKernelFrontier
 
-gaugeFrontier : Gauge.DiagonalKernelGaugeFrontier
-gaugeFrontier = Gauge.currentDiagonalKernelGaugeFrontier
+gaugeFrontier : Gauge.DiagonalKernelGaugeCorrectionFrontier
+gaugeFrontier = Gauge.currentDiagonalKernelGaugeCorrectionFrontier

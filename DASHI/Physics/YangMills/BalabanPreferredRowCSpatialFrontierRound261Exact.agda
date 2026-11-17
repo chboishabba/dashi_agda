@@ -33,12 +33,12 @@ data PreferredRowCSpatialLeaf261 : Set where
 
 
 data LeafState261 : Set where
-  leafOpen leafClosed : LeafState261
+  open closed : LeafState261
 
 preferredRowCSpatialLeafState261 : PreferredRowCSpatialLeaf261 → LeafState261
-preferredRowCSpatialLeafState261 literalCMP109LangevinDifferentiation = leafOpen
-preferredRowCSpatialLeafState261 literalSameObjectMarkedComparisonAndReferenceAnchor = leafOpen
-preferredRowCSpatialLeafState261 literalWeightedAnchoredDebtRow = leafOpen
+preferredRowCSpatialLeafState261 literalCMP109LangevinDifferentiation = open
+preferredRowCSpatialLeafState261 literalSameObjectMarkedComparisonAndReferenceAnchor = open
+preferredRowCSpatialLeafState261 literalWeightedAnchoredDebtRow = open
 
 literalCMP109LangevinDifferentiationLevel : ProofLevel
 literalCMP109LangevinDifferentiationLevel =

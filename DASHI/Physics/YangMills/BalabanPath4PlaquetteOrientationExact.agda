@@ -8,7 +8,7 @@ import Data.Rational.Tactic.RingSolver as ℚRing
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
 open import DASHI.Physics.YangMills.BalabanFiniteEnumerationDistinctExact using
-  (_∉_; DuplicateFree; []-free; _∷-free_)
+  (DuplicateFree; []-free; _∷-free_)
 
 ------------------------------------------------------------------------
 -- Literal positive orientation convention for four dimensions.
@@ -55,24 +55,24 @@ positivePlaquettePlanes4Complete plane23 =
   there (there (there (there (there here))))
 
 plane01NotInTail :
-  plane01 ∉ (plane02 ∷ plane03 ∷ plane12 ∷ plane13 ∷ plane23 ∷ [])
-plane01NotInTail (there (there (there (there (there ())))))
+  Not (plane01 ∈ (plane02 ∷ plane03 ∷ plane12 ∷ plane13 ∷ plane23 ∷ []))
+plane01NotInTail ()
 
 plane02NotInTail :
-  plane02 ∉ (plane03 ∷ plane12 ∷ plane13 ∷ plane23 ∷ [])
-plane02NotInTail (there (there (there (there ()))))
+  Not (plane02 ∈ (plane03 ∷ plane12 ∷ plane13 ∷ plane23 ∷ []))
+plane02NotInTail ()
 
 plane03NotInTail :
-  plane03 ∉ (plane12 ∷ plane13 ∷ plane23 ∷ [])
-plane03NotInTail (there (there (there ())))
+  Not (plane03 ∈ (plane12 ∷ plane13 ∷ plane23 ∷ []))
+plane03NotInTail ()
 
-plane12NotInTail : plane12 ∉ (plane13 ∷ plane23 ∷ [])
-plane12NotInTail (there (there ()))
+plane12NotInTail : Not (plane12 ∈ (plane13 ∷ plane23 ∷ []))
+plane12NotInTail ()
 
-plane13NotInTail : plane13 ∉ (plane23 ∷ [])
-plane13NotInTail (there ())
+plane13NotInTail : Not (plane13 ∈ (plane23 ∷ []))
+plane13NotInTail ()
 
-plane23NotInTail : plane23 ∉ []
+plane23NotInTail : Not (plane23 ∈ [])
 plane23NotInTail ()
 
 positivePlaquettePlanes4DuplicateFree :
@@ -100,13 +100,10 @@ wilsonPlaquetteEnumerationMatchesPositivePairs = refl
 square : ℚ → ℚ
 square value = value * value
 
-negateSquareRaw : ∀ forward → (0ℚ - forward) * (0ℚ - forward) ≡ forward * forward
-negateSquareRaw = ℚRing.solve-∀
-
 reversePlaquetteCurlSqExact : ∀ forward reverse →
   reverse ≡ (0ℚ - forward) → square reverse ≡ square forward
 reversePlaquetteCurlSqExact forward .(0ℚ - forward) refl =
-  negateSquareRaw forward
+  ℚRing.solve-∀
 
 positivePlaquetteMultiplicity : ℚ
 positivePlaquetteMultiplicity = 1ℚ

@@ -2,8 +2,7 @@ module DASHI.Physics.Chemistry.AtomicPeriodicTable369AlanineChiralEmpiricalExact
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (sym; trans)
+open import Agda.Builtin.Equality using (_≡_; refl; sym; trans)
 
 ------------------------------------------------------------------------
 -- EMPIRICAL SAME-COARSE CHIRAL SEPARATING PAIR: D/L ALANINE

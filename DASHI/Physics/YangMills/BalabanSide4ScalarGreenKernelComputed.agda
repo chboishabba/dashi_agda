@@ -4,7 +4,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Integer.Base using (+_)
-open import Data.Nat.Base using () renaming (_+_ to _+ℕ_)
+open import Data.Nat.Base using (_+_)
 open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _/_; -_)
 import Data.Rational.Properties as ℚP
 import Relation.Nullary.Decidable.Core as StdDec
@@ -79,8 +79,8 @@ coordinateHalfEigen (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) = 1
 
 momentumHalfEigen : PhysicalBlockL side4 → Nat
 momentumHalfEigen (pair (pair k0 k1) (pair k2 k3)) =
-  coordinateHalfEigen k0 +ℕ coordinateHalfEigen k1
-  +ℕ coordinateHalfEigen k2 +ℕ coordinateHalfEigen k3
+  coordinateHalfEigen k0 + coordinateHalfEigen k1
+  + coordinateHalfEigen k2 + coordinateHalfEigen k3
 
 inverseConfiguredEigen : Nat → ℚ
 inverseConfiguredEigen zero = 1ℚ

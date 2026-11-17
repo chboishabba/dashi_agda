@@ -26,198 +26,135 @@ oneTwoFiftySix = + 1 / 256
 
 sum0 : SiteField side4 →
   CyclicIndex four → CyclicIndex four → CyclicIndex four → ℚ
-sum0 fld x1 x2 x3 =
+sum0 field x1 x2 x3 =
   sumRational (allCyclicIndices four) (λ x0 →
-    fld (pair (pair x0 x1) (pair x2 x3)))
+    field (pair (pair x0 x1) (pair x2 x3)))
 
 sum10 : SiteField side4 → CyclicIndex four → CyclicIndex four → ℚ
-sum10 fld x2 x3 =
-  sumRational (allCyclicIndices four) (λ x1 → sum0 fld x1 x2 x3)
+sum10 field x2 x3 =
+  sumRational (allCyclicIndices four) (λ x1 → sum0 field x1 x2 x3)
 
 sum210 : SiteField side4 → CyclicIndex four → ℚ
-sum210 fld x3 =
-  sumRational (allCyclicIndices four) (λ x2 → sum10 fld x2 x3)
+sum210 field x3 =
+  sumRational (allCyclicIndices four) (λ x2 → sum10 field x2 x3)
 
 reverseSiteSum : SiteField side4 → ℚ
-reverseSiteSum fld =
-  sumRational (allCyclicIndices four) (sum210 fld)
+reverseSiteSum field =
+  sumRational (allCyclicIndices four) (sum210 field)
 
-mulAssocRaw : ∀ a b c → a * (b * c) ≡ (a * b) * c
-mulAssocRaw = ℚRing.solve-∀
+average0Explicit : ∀ field x0 x1 x2 x3 →
+  average0 field (pair (pair x0 x1) (pair x2 x3))
+  ≡ quarter * sum0 field x1 x2 x3
+average0Explicit field x0 x1 x2 x3 = refl
 
-average0Explicit : (fld : SiteField side4) (x0 x1 x2 x3 : CyclicIndex four) →
-  average0 fld (pair (pair x0 x1) (pair x2 x3))
-  ≡ quarter * sum0 fld x1 x2 x3
-average0Explicit fld x0 x1 x2 x3 = refl
-
-average01Explicit : (fld : SiteField side4) (x0 x1 x2 x3 : CyclicIndex four) →
-  average01 fld (pair (pair x0 x1) (pair x2 x3))
-  ≡ quarter2 * sum10 fld x2 x3
-average01Explicit fld x0 x1 x2 x3 =
+average01Explicit : ∀ field x0 x1 x2 x3 →
+  average01 field (pair (pair x0 x1) (pair x2 x3))
+  ≡ quarter2 * sum10 field x2 x3
+average01Explicit field x0 x1 x2 x3 =
   trans
     (cong (quarter *_)
-      (sumRationalCong (allCyclicIndices four)
-        (λ coordinate → average0 fld (pair (pair x0 coordinate) (pair x2 x3)))
-        (λ coordinate → quarter * sum0 fld coordinate x2 x3)
+      (sumRationalCong (allCyclicIndices four) _ _
         (λ coordinate →
-          average0Explicit fld x0 coordinate x2 x3)))
+          average0Explicit field x0 coordinate x2 x3)))
     (trans
       (cong (quarter *_)
         (sumRationalScale quarter (allCyclicIndices four)
-          (λ coordinate → sum0 fld coordinate x2 x3)))
-      (mulAssocRaw quarter quarter (sum10 fld x2 x3)))
+          (λ coordinate → sum0 field coordinate x2 x3)))
+      (ℚRing.solve-∀))
 
-average012Explicit : (fld : SiteField side4) (x0 x1 x2 x3 : CyclicIndex four) →
-  average012 fld (pair (pair x0 x1) (pair x2 x3))
-  ≡ quarter3 * sum210 fld x3
-average012Explicit fld x0 x1 x2 x3 =
+average012Explicit : ∀ field x0 x1 x2 x3 →
+  average012 field (pair (pair x0 x1) (pair x2 x3))
+  ≡ quarter3 * sum210 field x3
+average012Explicit field x0 x1 x2 x3 =
   trans
     (cong (quarter *_)
-      (sumRationalCong (allCyclicIndices four)
-        (λ coordinate → average01 fld (pair (pair x0 x1) (pair coordinate x3)))
-        (λ coordinate → quarter2 * sum10 fld coordinate x3)
+      (sumRationalCong (allCyclicIndices four) _ _
         (λ coordinate →
-          average01Explicit fld x0 x1 coordinate x3)))
+          average01Explicit field x0 x1 coordinate x3)))
     (trans
       (cong (quarter *_)
         (sumRationalScale quarter2 (allCyclicIndices four)
-          (λ coordinate → sum10 fld coordinate x3)))
-      (mulAssocRaw quarter quarter2 (sum210 fld x3)))
+          (λ coordinate → sum10 field coordinate x3)))
+      (ℚRing.solve-∀))
 
-average0123Explicit : (fld : SiteField side4) (x0 x1 x2 x3 : CyclicIndex four) →
-  average0123 fld (pair (pair x0 x1) (pair x2 x3))
-  ≡ quarter4 * reverseSiteSum fld
-average0123Explicit fld x0 x1 x2 x3 =
+average0123Explicit : ∀ field x0 x1 x2 x3 →
+  average0123 field (pair (pair x0 x1) (pair x2 x3))
+  ≡ quarter4 * reverseSiteSum field
+average0123Explicit field x0 x1 x2 x3 =
   trans
     (cong (quarter *_)
-      (sumRationalCong (allCyclicIndices four)
-        (λ coordinate → average012 fld (pair (pair x0 x1) (pair x2 coordinate)))
-        (λ coordinate → quarter3 * sum210 fld coordinate)
+      (sumRationalCong (allCyclicIndices four) _ _
         (λ coordinate →
-          average012Explicit fld x0 x1 x2 coordinate)))
+          average012Explicit field x0 x1 x2 coordinate)))
     (trans
       (cong (quarter *_)
         (sumRationalScale quarter3 (allCyclicIndices four)
-          (sum210 fld)))
-      (mulAssocRaw quarter quarter3 (reverseSiteSum fld)))
+          (sum210 field)))
+      (ℚRing.solve-∀))
 
 ------------------------------------------------------------------------
 -- Reverse the four finite sums by six adjacent Fubini swaps.
 ------------------------------------------------------------------------
 
-reverseSiteSumEqualsCoordinateSum : (fld : SiteField side4) →
-  reverseSiteSum fld
+reverseSiteSumEqualsCoordinateSum : ∀ field →
+  reverseSiteSum field
   ≡ sumRational (allCyclicIndices four) (λ x0 →
       sumRational (allCyclicIndices four) (λ x1 →
         sumRational (allCyclicIndices four) (λ x2 →
           sumRational (allCyclicIndices four) (λ x3 →
-            fld (pair (pair x0 x1) (pair x2 x3))))))
-reverseSiteSumEqualsCoordinateSum fld =
+            field (pair (pair x0 x1) (pair x2 x3))))))
+reverseSiteSumEqualsCoordinateSum field =
   trans
-    (sumRationalCong (allCyclicIndices four)
-      (sum210 fld)
-      (λ x3 → sumRational (allCyclicIndices four) (λ x2 →
-        sumRational (allCyclicIndices four) (λ x0 →
-          sumRational (allCyclicIndices four) (λ x1 →
-            fld (pair (pair x0 x1) (pair x2 x3))))))
-      (λ x3 →
-        sumRationalCong (allCyclicIndices four)
-          (λ x2 → sum10 fld x2 x3)
-          (λ x2 → sumRational (allCyclicIndices four) (λ x0 →
-            sumRational (allCyclicIndices four) (λ x1 →
-              fld (pair (pair x0 x1) (pair x2 x3)))))
-          (λ x2 →
-            sumSwap (allCyclicIndices four) (allCyclicIndices four)
-              (λ x1 x0 → fld (pair (pair x0 x1) (pair x2 x3))))))
+    (sumRationalCong (allCyclicIndices four) _ _ (λ x3 →
+      sumRationalCong (allCyclicIndices four) _ _ (λ x2 →
+        sumSwap (allCyclicIndices four) (allCyclicIndices four)
+          (λ x1 x0 → field (pair (pair x0 x1) (pair x2 x3))))))
     (trans
-      (sumRationalCong (allCyclicIndices four)
-        (λ x3 → sumRational (allCyclicIndices four) (λ x2 →
-          sumRational (allCyclicIndices four) (λ x0 →
+      (sumRationalCong (allCyclicIndices four) _ _ (λ x3 →
+        sumSwap (allCyclicIndices four) (allCyclicIndices four)
+          (λ x2 x0 →
             sumRational (allCyclicIndices four) (λ x1 →
-              fld (pair (pair x0 x1) (pair x2 x3))))))
-        (λ x3 → sumRational (allCyclicIndices four) (λ x0 →
-          sumRational (allCyclicIndices four) (λ x2 →
-            sumRational (allCyclicIndices four) (λ x1 →
-              fld (pair (pair x0 x1) (pair x2 x3))))))
-        (λ x3 →
-          sumSwap (allCyclicIndices four) (allCyclicIndices four)
-            (λ x2 x0 →
-              sumRational (allCyclicIndices four) (λ x1 →
-                fld (pair (pair x0 x1) (pair x2 x3))))))
+              field (pair (pair x0 x1) (pair x2 x3))))))
       (trans
         (sumSwap (allCyclicIndices four) (allCyclicIndices four)
           (λ x3 x0 →
             sumRational (allCyclicIndices four) (λ x2 →
               sumRational (allCyclicIndices four) (λ x1 →
-                fld (pair (pair x0 x1) (pair x2 x3))))))
+                field (pair (pair x0 x1) (pair x2 x3))))))
         (trans
-          (sumRationalCong (allCyclicIndices four)
-            (λ x0 → sumRational (allCyclicIndices four) (λ x3 →
-              sumRational (allCyclicIndices four) (λ x2 →
+          (sumRationalCong (allCyclicIndices four) _ _ (λ x0 →
+            sumSwap (allCyclicIndices four) (allCyclicIndices four)
+              (λ x3 x2 →
                 sumRational (allCyclicIndices four) (λ x1 →
-                  fld (pair (pair x0 x1) (pair x2 x3))))))
-            (λ x0 → sumRational (allCyclicIndices four) (λ x2 →
-              sumRational (allCyclicIndices four) (λ x3 →
-                sumRational (allCyclicIndices four) (λ x1 →
-                  fld (pair (pair x0 x1) (pair x2 x3))))))
-            (λ x0 →
-              sumSwap (allCyclicIndices four) (allCyclicIndices four)
-                (λ x3 x2 →
-                  sumRational (allCyclicIndices four) (λ x1 →
-                    fld (pair (pair x0 x1) (pair x2 x3))))))
+                  field (pair (pair x0 x1) (pair x2 x3))))))
           (trans
-            (sumRationalCong (allCyclicIndices four)
-              (λ x0 → sumRational (allCyclicIndices four) (λ x2 →
-                sumRational (allCyclicIndices four) (λ x3 →
-                  sumRational (allCyclicIndices four) (λ x1 →
-                    fld (pair (pair x0 x1) (pair x2 x3))))))
-              (λ x0 → sumRational (allCyclicIndices four) (λ x2 →
-                sumRational (allCyclicIndices four) (λ x1 →
-                  sumRational (allCyclicIndices four) (λ x3 →
-                    fld (pair (pair x0 x1) (pair x2 x3))))))
-              (λ x0 →
-                sumRationalCong (allCyclicIndices four)
-                  (λ x2 → sumRational (allCyclicIndices four) (λ x3 →
-                    sumRational (allCyclicIndices four) (λ x1 →
-                      fld (pair (pair x0 x1) (pair x2 x3)))))
-                  (λ x2 → sumRational (allCyclicIndices four) (λ x1 →
-                    sumRational (allCyclicIndices four) (λ x3 →
-                      fld (pair (pair x0 x1) (pair x2 x3)))))
-                  (λ x2 →
-                    sumSwap (allCyclicIndices four) (allCyclicIndices four)
-                      (λ x3 x1 →
-                        fld (pair (pair x0 x1) (pair x2 x3))))))
-            (sumRationalCong (allCyclicIndices four)
-              (λ x0 → sumRational (allCyclicIndices four) (λ x2 →
-                sumRational (allCyclicIndices four) (λ x1 →
-                  sumRational (allCyclicIndices four) (λ x3 →
-                    fld (pair (pair x0 x1) (pair x2 x3))))))
-              (λ x0 → sumRational (allCyclicIndices four) (λ x1 →
-                sumRational (allCyclicIndices four) (λ x2 →
-                  sumRational (allCyclicIndices four) (λ x3 →
-                    fld (pair (pair x0 x1) (pair x2 x3))))))
-              (λ x0 →
+            (sumRationalCong (allCyclicIndices four) _ _ (λ x0 →
+              sumRationalCong (allCyclicIndices four) _ _ (λ x2 →
                 sumSwap (allCyclicIndices four) (allCyclicIndices four)
-                  (λ x2 x1 →
-                    sumRational (allCyclicIndices four) (λ x3 →
-                      fld (pair (pair x0 x1) (pair x2 x3))))))))))
+                  (λ x3 x1 →
+                    field (pair (pair x0 x1) (pair x2 x3))))))
+            (sumRationalCong (allCyclicIndices four) _ _ (λ x0 →
+              sumSwap (allCyclicIndices four) (allCyclicIndices four)
+                (λ x2 x1 →
+                  sumRational (allCyclicIndices four) (λ x3 →
+                    field (pair (pair x0 x1) (pair x2 x3))))))))))
 
-reverseSiteSumEqualsSiteSum : (fld : SiteField side4) →
-  reverseSiteSum fld ≡ siteSum4 fld
-reverseSiteSumEqualsSiteSum fld =
-  trans (reverseSiteSumEqualsCoordinateSum fld) (sym (siteSumAsCoordinates fld))
+reverseSiteSumEqualsSiteSum : ∀ field →
+  reverseSiteSum field ≡ siteSum4 field
+reverseSiteSumEqualsSiteSum field =
+  trans (reverseSiteSumEqualsCoordinateSum field) (sym (siteSumAsCoordinates field))
 
 quarter4IsOneTwoFiftySix : quarter4 ≡ oneTwoFiftySix
 quarter4IsOneTwoFiftySix = ℚRing.solve-∀
 
-average0123EqualsGlobalMean : (fld : SiteField side4) (site : PhysicalBlockL side4) →
-  average0123 fld site ≡ oneTwoFiftySix * siteSum4 fld
-average0123EqualsGlobalMean fld (pair (pair x0 x1) (pair x2 x3)) =
+average0123EqualsGlobalMean : ∀ field site →
+  average0123 field site ≡ oneTwoFiftySix * siteSum4 field
+average0123EqualsGlobalMean field (pair (pair x0 x1) (pair x2 x3)) =
   trans
-    (average0123Explicit fld x0 x1 x2 x3)
+    (average0123Explicit field x0 x1 x2 x3)
     (trans
-      (cong (quarter4 *_) (reverseSiteSumEqualsSiteSum fld))
-      (cong (λ coefficient → coefficient * siteSum4 fld)
+      (cong (quarter4 *_) (reverseSiteSumEqualsSiteSum field))
+      (cong (λ coefficient → coefficient * siteSum4 field)
         quarter4IsOneTwoFiftySix))
 
 fourAxisAverageGlobalMeanLevel : ProofLevel

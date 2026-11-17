@@ -308,35 +308,35 @@ outputStateDefectSquareBound13
       (ℚRing.solve-∀ Relaxed.fourRhoSquare (sq gx) (sq gy) (sq gz))
       scaledComponents)
 
-shiftedSquareFibreSum13 : ∀ fld axis transverse →
+shiftedSquareFibreSum13 : ∀ field axis transverse →
   sumRational (allCyclicIndices Side13.side13)
-    (λ coordinate → sq (fld
+    (λ coordinate → sq (field
       (insertAxis axis (Flat.cyclicNext coordinate) transverse)))
   ≡ sumRational (allCyclicIndices Side13.side13)
-    (λ coordinate → sq (fld (insertAxis axis coordinate transverse)))
-shiftedSquareFibreSum13 fld axis transverse =
+    (λ coordinate → sq (field (insertAxis axis coordinate transverse)))
+shiftedSquareFibreSum13 field axis transverse =
   ℚRing.solve-∀
-    (fld (insertAxis axis Match.index0 transverse))
-    (fld (insertAxis axis Match.index1 transverse))
-    (fld (insertAxis axis Match.index2 transverse))
-    (fld (insertAxis axis Match.index3 transverse))
-    (fld (insertAxis axis Match.index4 transverse))
-    (fld (insertAxis axis Match.index5 transverse))
-    (fld (insertAxis axis Match.index6 transverse))
-    (fld (insertAxis axis Match.index7 transverse))
-    (fld (insertAxis axis Match.index8 transverse))
-    (fld (insertAxis axis Match.index9 transverse))
-    (fld (insertAxis axis Match.index10 transverse))
-    (fld (insertAxis axis Match.index11 transverse))
-    (fld (insertAxis axis Match.index12 transverse))
+    (field (insertAxis axis Match.index0 transverse))
+    (field (insertAxis axis Match.index1 transverse))
+    (field (insertAxis axis Match.index2 transverse))
+    (field (insertAxis axis Match.index3 transverse))
+    (field (insertAxis axis Match.index4 transverse))
+    (field (insertAxis axis Match.index5 transverse))
+    (field (insertAxis axis Match.index6 transverse))
+    (field (insertAxis axis Match.index7 transverse))
+    (field (insertAxis axis Match.index8 transverse))
+    (field (insertAxis axis Match.index9 transverse))
+    (field (insertAxis axis Match.index10 transverse))
+    (field (insertAxis axis Match.index11 transverse))
+    (field (insertAxis axis Match.index12 transverse))
 
-shiftedSquareGlobalSum13 : ∀ fld axis →
-  globalSiteSum (λ site → sq (fld (Flat.shiftForward13 axis site)))
-  ≡ globalSiteSum (λ site → sq (fld site))
-shiftedSquareGlobalSum13 fld axis =
+shiftedSquareGlobalSum13 : ∀ field axis →
+  globalSiteSum (λ site → sq (field (Flat.shiftForward13 axis site)))
+  ≡ globalSiteSum (λ site → sq (field site))
+shiftedSquareGlobalSum13 field axis =
   trans
     (sym (axisPartitionSumMatchesGlobal axis
-      (λ site → sq (fld (Flat.shiftForward13 axis site)))))
+      (λ site → sq (field (Flat.shiftForward13 axis site)))))
     (trans
       (sumRationalCong
         (physicalTransverseCoordinates Side13.side13) _ _
@@ -344,10 +344,10 @@ shiftedSquareGlobalSum13 fld axis =
           trans
             (sumRationalCong
               (allCyclicIndices Side13.side13) _ _
-              (λ coordinate → cong sq (cong fld
+              (λ coordinate → cong sq (cong field
                 (shiftForwardInsertAxis13 axis coordinate transverse))))
-            (shiftedSquareFibreSum13 fld axis transverse)))
-      (axisPartitionSumMatchesGlobal axis (λ site → sq (fld site))))
+            (shiftedSquareFibreSum13 field axis transverse)))
+      (axisPartitionSumMatchesGlobal axis (λ site → sq (field site))))
   where
   shiftForwardInsertAxis13 :
     ∀ currentAxis coordinate transverse →

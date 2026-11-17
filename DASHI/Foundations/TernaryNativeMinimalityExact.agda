@@ -54,13 +54,13 @@ noOneBitInjection :
   Injective f →
   ⊥
 noOneBitInjection f injective
-  with f SSP.sspNegOne in eq-neg | f SSP.sspZero in eq-zer | f SSP.sspPosOne in eq-pos
-... | false | false | p = negativeNotZero (injective (trans eq-neg (sym eq-zer)))
-... | false | true  | false = negativeNotPositive (injective (trans eq-neg (sym eq-pos)))
-... | false | true  | true = zeroNotPositive (injective (trans eq-zer (sym eq-pos)))
-... | true  | false | false = zeroNotPositive (injective (trans eq-zer (sym eq-pos)))
-... | true  | false | true = negativeNotPositive (injective (trans eq-neg (sym eq-pos)))
-... | true  | true  | p = negativeNotZero (injective (trans eq-neg (sym eq-zer)))
+  with f SSP.sspNegOne | f SSP.sspZero | f SSP.sspPosOne
+... | false | false | p = negativeNotZero (injective refl)
+... | false | true  | false = negativeNotPositive (injective refl)
+... | false | true  | true = zeroNotPositive (injective refl)
+... | true  | false | false = zeroNotPositive (injective refl)
+... | true  | false | true = negativeNotPositive (injective refl)
+... | true  | true  | p = negativeNotZero (injective refl)
 
 ------------------------------------------------------------------------
 -- The James-style positive-membership projection: `not true` is not inverse.

@@ -114,20 +114,14 @@ fabricHeisenbergRoundTrip :
   (p : Geometry.TernaryHyperformalPoint) →
   interactionHeisenbergToFabric (fabricToInteractionHeisenberg p) ≡ p
 fabricHeisenbergRoundTrip
-  (Geometry.ternaryHyperformalPoint
-    base
-    (Geometry.ternary27Point a0 a1 a2)
-    (Geometry.ternary27Point b0 b1 b2))
-  rewrite sspTritRoundTrip a0 | sspTritRoundTrip a1 | sspTritRoundTrip a2
-        | sspTritRoundTrip b0 | sspTritRoundTrip b1 | sspTritRoundTrip b2 = refl
+  (Geometry.ternaryHyperformalPoint base a b)
+  rewrite appraisalFibreRoundTrip (Geometry.appraisalFibrePoint a b) = refl
 
 heisenbergFabricRoundTrip :
   (p : InteractionHeisenbergPoint) →
   fabricToInteractionHeisenberg (interactionHeisenbergToFabric p) ≡ p
-heisenbergFabricRoundTrip
-  (interactionHeisenbergPoint base (Heisenberg.x6 a0 a1 a2 b0 b1 b2))
-  rewrite tritSSPRoundTrip a0 | tritSSPRoundTrip a1 | tritSSPRoundTrip a2
-        | tritSSPRoundTrip b0 | tritSSPRoundTrip b1 | tritSSPRoundTrip b2 = refl
+heisenbergFabricRoundTrip (interactionHeisenbergPoint base fibre)
+  rewrite x6RoundTrip fibre = refl
 
 ------------------------------------------------------------------------
 -- 4. Exact cardinal factorisation used by both geometric and Heisenberg lanes.

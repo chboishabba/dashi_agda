@@ -49,40 +49,40 @@ data PreferredRawSourceLeaf216 : Set where
   literalPhysicalCompositeD1ChainRule : PreferredRawSourceLeaf216
 
 data LeafState216 : Set where
-  leafClosed leafOpen leafBlocked : LeafState216
+  closed open blocked : LeafState216
 
 preferredLeafState216 : PreferredRawSourceLeaf216 → LeafState216
-preferredLeafState216 literalBetaDrivenCMP119RawSourceFamily = leafOpen
-preferredLeafState216 rawRunningCouplingSameBetaHistory = leafClosed
-preferredLeafState216 activeSection2PredicatesFromCMP122 = leafClosed
-preferredLeafState216 literalCMP119RegularESectorRealization = leafBlocked
-preferredLeafState216 cmp119RegularEToCMP109116Continuation = leafClosed
-preferredLeafState216 cmp119RegularEToBC1Potential = leafClosed
-preferredLeafState216 literalCMP109GeneratedHistoryResponseProducer = leafOpen
-preferredLeafState216 literalCMP109BetaDifferenceDecomposition = leafBlocked
-preferredLeafState216 literalPhysicalCompositeD1ChainRule = leafBlocked
+preferredLeafState216 literalBetaDrivenCMP119RawSourceFamily = open
+preferredLeafState216 rawRunningCouplingSameBetaHistory = closed
+preferredLeafState216 activeSection2PredicatesFromCMP122 = closed
+preferredLeafState216 literalCMP119RegularESectorRealization = blocked
+preferredLeafState216 cmp119RegularEToCMP109116Continuation = closed
+preferredLeafState216 cmp119RegularEToBC1Potential = closed
+preferredLeafState216 literalCMP109GeneratedHistoryResponseProducer = open
+preferredLeafState216 literalCMP109BetaDifferenceDecomposition = blocked
+preferredLeafState216 literalPhysicalCompositeD1ChainRule = blocked
 
 preferredFirstMissingCoordinate216 : PreferredRawSourceLeaf216
 preferredFirstMissingCoordinate216 = literalBetaDrivenCMP119RawSourceFamily
 
 preferredFirstMissingCoordinate216IsOpen :
-  preferredLeafState216 preferredFirstMissingCoordinate216 ≡ leafOpen
+  preferredLeafState216 preferredFirstMissingCoordinate216 ≡ open
 preferredFirstMissingCoordinate216IsOpen = refl
 
 rawCouplingSameObjectClosed :
-  preferredLeafState216 rawRunningCouplingSameBetaHistory ≡ leafClosed
+  preferredLeafState216 rawRunningCouplingSameBetaHistory ≡ closed
 rawCouplingSameObjectClosed = refl
 
 activeSection2CompilerClosed :
-  preferredLeafState216 activeSection2PredicatesFromCMP122 ≡ leafClosed
+  preferredLeafState216 activeSection2PredicatesFromCMP122 ≡ closed
 activeSection2CompilerClosed = refl
 
 regularContinuationSameObjectClosed :
-  preferredLeafState216 cmp119RegularEToCMP109116Continuation ≡ leafClosed
+  preferredLeafState216 cmp119RegularEToCMP109116Continuation ≡ closed
 regularContinuationSameObjectClosed = refl
 
 bc1RegularPotentialSameObjectClosed :
-  preferredLeafState216 cmp119RegularEToBC1Potential ≡ leafClosed
+  preferredLeafState216 cmp119RegularEToBC1Potential ≡ closed
 bc1RegularPotentialSameObjectClosed = refl
 
 rawStateFiniteHistoryCouplingLevel : ProofLevel

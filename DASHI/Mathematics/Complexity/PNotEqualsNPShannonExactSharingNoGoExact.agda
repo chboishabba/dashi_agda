@@ -44,7 +44,7 @@ signatureFormula zero =
   SAT.constant false
 signatureFormula (suc variables) =
   SAT.conjunction
-    (SAT.formulaVar Fin.zero)
+    (SAT.variable Fin.zero)
     (Weaken.weakenFormula
       (signatureFormula variables))
 

@@ -46,7 +46,7 @@ observerEquivalentRefl :
   {system : TransportSystem} →
   (observer : Observer system) →
   (state : State system) →
-  _≈[_]_ {system} state observer state
+  state ≈[ observer ] state
 observerEquivalentRefl observer state = refl
 
 ------------------------------------------------------------------------

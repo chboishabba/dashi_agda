@@ -76,7 +76,7 @@ landCountryControlStatusV02 : CalibrationState
 landCountryControlStatusV02 = sourceMappedPartial
 
 landCountryControlNotClosedByDeterminationCoverage :
-  Continuity.currentCoordinateState Continuity.landCountryControl ≡ Continuity.openState
+  Continuity.currentCoordinateState Continuity.landCountryControl ≡ Continuity.open
 landCountryControlNotClosedByDeterminationCoverage = refl
 
 ------------------------------------------------------------------------

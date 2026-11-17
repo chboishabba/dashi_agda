@@ -142,4 +142,4 @@ colouringSourceDoesNotCreateRSAReduction : ColouringSourceImpliesRSAReduction �
 colouringSourceDoesNotCreateRSAReduction ()
 
 implementationAuthorshipDoesNotCreateTheoremAuthorship : ImplementationAuthorImpliesTheoremAuthor → ⊥
-implementationAuthorshipDoesNotCreateTheoremAuthorship ()
+implementationAuthorshipDoesNotCreateTheoremAuthor ()

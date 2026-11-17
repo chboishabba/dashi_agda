@@ -26,11 +26,11 @@ data PreferredCommonRadiusLeaf232 : Set where
   firstSecondDerivativeUseSameRadius : PreferredCommonRadiusLeaf232
 
 data LeafState232 : Set where
-  leafClosed leafOpen leafBlocked : LeafState232
+  closed open blocked : LeafState232
 
 preferredCommonRadiusLeafState232 : PreferredCommonRadiusLeaf232 → LeafState232
-preferredCommonRadiusLeafState232 literalUniformCMP116CommonRadius = leafOpen
-preferredCommonRadiusLeafState232 firstSecondDerivativeUseSameRadius = leafBlocked
+preferredCommonRadiusLeafState232 literalUniformCMP116CommonRadius = open
+preferredCommonRadiusLeafState232 firstSecondDerivativeUseSameRadius = blocked
 
 preferredFirstCommonRadiusCoordinate232 : PreferredCommonRadiusLeaf232
 preferredFirstCommonRadiusCoordinate232 = literalUniformCMP116CommonRadius

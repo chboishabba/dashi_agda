@@ -48,22 +48,22 @@ data PreferredSourceLeaf212 : Set where
   rowAScalarSensitivityCompiler : PreferredSourceLeaf212
 
 data LeafState212 : Set where
-  leafClosed leafOpen leafBlocked : LeafState212
+  closed open blocked : LeafState212
 
 preferredLeafState212 : PreferredSourceLeaf212 → LeafState212
-preferredLeafState212 r108SelectedPotentialSameObject = leafClosed
-preferredLeafState212 literalR108BackedPresentCutInputs = leafOpen
-preferredLeafState212 literalCMP109GeneratedHistoryResponseProducer = leafOpen
-preferredLeafState212 literalCMP109BetaDifferenceDecomposition = leafOpen
-preferredLeafState212 literalPhysicalCompositeD1ChainRule = leafOpen
-preferredLeafState212 rowAScalarSensitivityCompiler = leafClosed
+preferredLeafState212 r108SelectedPotentialSameObject = closed
+preferredLeafState212 literalR108BackedPresentCutInputs = open
+preferredLeafState212 literalCMP109GeneratedHistoryResponseProducer = open
+preferredLeafState212 literalCMP109BetaDifferenceDecomposition = open
+preferredLeafState212 literalPhysicalCompositeD1ChainRule = open
+preferredLeafState212 rowAScalarSensitivityCompiler = closed
 
 r108SelectedPotentialSameObjectClosed :
-  preferredLeafState212 r108SelectedPotentialSameObject ≡ leafClosed
+  preferredLeafState212 r108SelectedPotentialSameObject ≡ closed
 r108SelectedPotentialSameObjectClosed = refl
 
 rowAScalarSensitivityCompilerClosed :
-  preferredLeafState212 rowAScalarSensitivityCompiler ≡ leafClosed
+  preferredLeafState212 rowAScalarSensitivityCompiler ≡ closed
 rowAScalarSensitivityCompilerClosed = refl
 
 ------------------------------------------------------------------------
@@ -90,7 +90,7 @@ preferredFirstOpenSourceLeaf212 : PreferredSourceLeaf212
 preferredFirstOpenSourceLeaf212 = literalR108BackedPresentCutInputs
 
 preferredFirstOpenSourceLeaf212IsOpen :
-  preferredLeafState212 preferredFirstOpenSourceLeaf212 ≡ leafOpen
+  preferredLeafState212 preferredFirstOpenSourceLeaf212 ≡ open
 preferredFirstOpenSourceLeaf212IsOpen = refl
 
 ------------------------------------------------------------------------

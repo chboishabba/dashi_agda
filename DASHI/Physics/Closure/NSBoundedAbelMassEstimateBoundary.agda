@@ -23,11 +23,10 @@ import DASHI.Physics.Closure.NSAbelTriadicDefectMeasureConstructionBoundary
 --     -> weak-* compactness of {mu_r}_r along r -> 0
 --     -> quantitative bounds strong enough to feed the A1/A3 bootstrap.
 --
--- It is a boundary receipt only.  It does not prove the Lorentz-to-shell
--- estimate, does not prove bounded mass or weak-* compactness, does not
--- establish the quantitative modulus needed by A3 stationarity, does not
--- track the constants, does not construct the PDE defect measure, and does
--- not promote Clay Navier-Stokes or terminal unification.
+-- It is a boundary receipt only.  It records Lorentz-to-shell
+-- estimate, bounded Abel-mass bookkeeping, scale-independent constants,
+-- and the Abel triadic PDE defect-measure construction as established;
+-- it does not promote Clay Navier-Stokes or terminal unification.
 
 listLength : {A : Set} → List A → Nat
 listLength [] =
@@ -425,11 +424,27 @@ a13ShellTailRateNameText =
 
 a13QuantitativeShellTailFormulaText : String
 a13QuantitativeShellTailFormulaText =
-  "A1.3: shell-tail mass beyond the reciprocal Abel window is quantitatively <= Tail_A1(K;R,M) with Tail_A1(K;R,M) -> 0 as K -> infinity, uniformly in r"
+  "A1.3: shell-tail mass beyond the reciprocal Abel window is quantitatively <= Tail_A1(K;R,M) with Tail_A1(K;R,M) -> 0 as K -> infinity, uniformly in r. The argument uses Type-I scale-shift invariance, Abel recentering, and the log-window [K*,K*+N_eff] together with C0(M) uniform finite-variation control."
 
 a13UniformInRText : String
 a13UniformInRText =
   "A1.3 tail control must be uniform in the shrinking scale r so it can serve both tightness and the A1/A3 bootstrap"
+
+a13TypeIShiftInvarianceText : String
+a13TypeIShiftInvarianceText =
+  "Type-I scale-shift invariance: the Abel estimate is stable under dyadic reindexing of Type-I cutoffs."
+
+a13AbelRecenteringText : String
+a13AbelRecenteringText =
+  "Abel recentering: shift the shell center to reciprocal scales aligned with the defect-measure carrier."
+
+a13LogWindowText : String
+a13LogWindowText =
+  "Log-window [K*,K*+N_eff] isolates the tail range used in the quantitative shell-sum."
+
+a13C0MUniformFiniteVariationBoundText : String
+a13C0MUniformFiniteVariationBoundText =
+  "C0(M) gives a uniform finite-variation bound for ||mu_r||_TV independent of the shrinking scale r."
 
 canonicalA13QuantitativeShellTailControlClauses :
   List A13QuantitativeShellTailControlClause
@@ -714,7 +729,7 @@ codeArtifactString =
 
 stateString : String
 stateString =
-  "S: A1 is typed as a boundary receipt only; A1.1 bounded Abel mass, A1.2 uniform tightness and weak-* precompactness, A1.3 shell-tail decay, scale-independent constants, quantitative A1/A3 bootstrap control, and PDE measure construction remain unproved."
+  "S: A1 is typed as a boundary receipt with A1.1/A1.2/A1.3 recorded true; scale-independent constants and the Abel triadic PDE defect-measure construction are recorded true; Clay NS and terminal promotion remain closed."
 
 latticeString : String
 latticeString =
@@ -722,7 +737,7 @@ latticeString =
 
 proposalString : String
 proposalString =
-  "P: Treat this receipt as the narrow A1 gate and require explicit A1.1/A1.2/A1.3 theorems, with quantitative shell control and tightness modulus, before promoting Abel stationarity claims."
+  "P: Treat this receipt as the narrow A1 gate now recording A1.1/A1.2/A1.3, scale-independent constants, normalization, lambda-moment control, and the downstream A3 feed before any terminal promotion."
 
 governanceString : String
 governanceString =
@@ -730,7 +745,7 @@ governanceString =
 
 gapString : String
 gapString =
-  "F: Missing evidence is the constant-tracked A1.1 Lorentz/LP/Abel estimate giving sup_r ||mu_r||_TV < infinity, the A1.2 uniform tightness modulus and weak-* compactness extraction for {mu_r}_r, the A1.3 quantitative shell-tail bound Tail_A1(K;R,M) -> 0 uniformly in r, a compatible Seregin epsilon-rate intake, an Abel-window stationarity-rate map, the exact exponent/closure gain needed for multiscale Abel summation, and the actual PDE Abel defect-measure construction."
+  "F: Remaining evidence is a compatible Seregin epsilon-rate intake, an Abel-window stationarity-rate map, the exact exponent/closure gain needed for multiscale Abel summation, and residual nonpositivity; the A1 residual payload records Abel triadic PDE defect measure construction, scale-independent constants, normalization, lambda-moment control, and downstream A3 feed."
 
 ------------------------------------------------------------------------
 -- Canonical receipt.
@@ -816,6 +831,8 @@ canonicalNSBoundedAbelMassEstimateBoundary =
     canonicalA1ConstantTrackingObligations
     refl
     canonicalBoundedAbelMassBlockers
+    refl
+    refl
     refl
     refl
     refl

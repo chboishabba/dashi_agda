@@ -91,7 +91,7 @@ form11SupportTritPositive :
 form11SupportTritPositive = refl
 
 form11AuthorityStillOpen :
-  Verify.authorityState form11Admission ≡ Ternary.openState
+  Verify.authorityState form11Admission ≡ Ternary.open
 form11AuthorityStillOpen = refl
 
 ------------------------------------------------------------------------

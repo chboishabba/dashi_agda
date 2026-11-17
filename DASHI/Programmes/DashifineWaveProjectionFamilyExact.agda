@@ -40,7 +40,7 @@ waveProjectionReceiptYieldsFamilyDominance :
     {dashifineModel baseline : Model} →
   WaveProjectionFamilyReceipt comparison dashifineModel baseline →
   Benchmark.FamilyDominanceReceipt comparison dashifineModel baseline
-waveProjectionReceiptYieldsFamilyDominance {comparison = comparison} {dashifineModel = dashifineModel} {baseline = baseline} receipt =
+waveProjectionReceiptYieldsFamilyDominance receipt =
   Benchmark.familyDominanceReceipt all
   where
     all :
@@ -71,5 +71,3 @@ canonicalDashifineWaveProjectionBoundary =
     true refl
     false refl
     true refl
-
-open DashifineWaveProjectionBoundary public

@@ -245,20 +245,20 @@ record PhysicalP1BackgroundCertificate
     fiveTermHessian : FiveTermBackgroundHessianData Background State Bound
     rationalCoercivityBudget : BackgroundCoercivityBudget Background State
 
-  relativeFormBound : ∀ background state →
-    LessEqual fiveTermHessian
-      (perturbationMagnitude fiveTermHessian background state)
-      (scale fiveTermHessian
-        (backgroundConstant fiveTermHessian)
-        (normSq fiveTermHessian state))
-  relativeFormBound = backgroundRelativeFormSmallness fiveTermHessian
+    relativeFormBound : ∀ background state →
+      LessEqual fiveTermHessian
+        (perturbationMagnitude fiveTermHessian background state)
+        (scale fiveTermHessian
+          (backgroundConstant fiveTermHessian)
+          (normSq fiveTermHessian state))
+    relativeFormBound = backgroundRelativeFormSmallness fiveTermHessian
 
-  oneThirtySecondCoercivity : ∀ background state →
-    oneThirtySecond * BackgroundCoercivityBudget.normSq
-      rationalCoercivityBudget state
-    ≤ fullEnergy rationalCoercivityBudget background state
-  oneThirtySecondCoercivity =
-    smallBackgroundOneThirtySecondCoercivity rationalCoercivityBudget
+    oneThirtySecondCoercivity : ∀ background state →
+      oneThirtySecond * BackgroundCoercivityBudget.normSq
+        rationalCoercivityBudget state
+      ≤ fullEnergy rationalCoercivityBudget background state
+    oneThirtySecondCoercivity =
+      smallBackgroundOneThirtySecondCoercivity rationalCoercivityBudget
 
 open PhysicalP1BackgroundCertificate public
 

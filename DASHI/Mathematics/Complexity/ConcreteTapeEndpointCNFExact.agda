@@ -27,7 +27,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
-open import Relation.Binary.PropositionalEquality using (cong; cong₂)
+open import Relation.Binary.PropositionalEquality using (cong)
 import Data.Fin.Base as Fin
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
@@ -100,7 +100,7 @@ unitClausesForTarget_complete rename CNF.[]ᵇ assignment proof =
   refl
 unitClausesForTarget_complete
     rename (false CNF.∷ᵇ target) assignment proof
-    with cong (λ bits → CNF.lookupBit bits Fin.zero) proof
+    with congr (λ bits → CNF.lookupBit bits Fin.zero) proof
 ... | headEq
     with Rename.pullbackLookup rename assignment Fin.zero
 ... | lookupEq
@@ -119,7 +119,7 @@ unitClausesForTarget_complete
     tailEq refl = refl
 unitClausesForTarget_complete
     rename (true CNF.∷ᵇ target) assignment proof
-    with cong (λ bits → CNF.lookupBit bits Fin.zero) proof
+    with congr (λ bits → CNF.lookupBit bits Fin.zero) proof
 ... | headEq
     with Rename.pullbackLookup rename assignment Fin.zero
 ... | lookupEq
@@ -141,16 +141,16 @@ initialRowExtendedRename :
   ∀ {machine steps cols} →
   Fin.Fin (Decode.RowBitsWidth machine cols) →
   Fin.Fin (ExtendedGlobalWidth machine steps cols)
-initialRowExtendedRename {machine} {steps} {cols} i =
-  liftBaseIndex {machine} {steps} {cols}
-    (Global.globalRowRename {machine} {steps} {cols} Global.here i)
+initialRowExtendedRename i =
+  liftBaseIndex
+    (Global.globalRowRename Global.here i)
 
 initialEndpointCNF :
   ∀ {machine steps cols} →
   CNF.Bits (Decode.RowBitsWidth machine cols) →
   CNF.CNF (ExtendedGlobalWidth machine steps cols)
-initialEndpointCNF {machine} {steps} {cols} target =
-  unitClausesForTarget (initialRowExtendedRename {machine} {steps} {cols}) target
+initialEndpointCNF target =
+  unitClausesForTarget initialRowExtendedRename target
 
 
 andTrueLeft :
@@ -167,19 +167,12 @@ andTrueRight :
 andTrueRight false right ()
 andTrueRight true right proof = proof
 
-unitFalseClauseImpliesFalse :
+unitFalseTrueImpliesFalse :
   ∀ bit →
-  CNF.orBool (CNF.notBool bit) false ≡ true →
+  CNF.notBool bit ≡ true →
   bit ≡ false
-unitFalseClauseImpliesFalse false proof = refl
-unitFalseClauseImpliesFalse true ()
-
-unitTrueClauseImpliesTrue :
-  ∀ bit →
-  CNF.orBool bit false ≡ true →
-  bit ≡ true
-unitTrueClauseImpliesTrue false ()
-unitTrueClauseImpliesTrue true proof = refl
+unitFalseTrueImpliesFalse false proof = refl
+unitFalseTrueImpliesFalse true ()
 
 unitClausesForTarget_sound :
   ∀ {local global}
@@ -196,8 +189,8 @@ unitClausesForTarget_sound {zero}
   refl
 unitClausesForTarget_sound {suc local}
     rename (false CNF.∷ᵇ target) assignment accepted =
-  cong₂ CNF._∷ᵇ_
-    headLookup
+  prependFalse
+    headFalse
     (unitClausesForTarget_sound
       (λ i → rename (Fin.suc i))
       target assignment restTrue)
@@ -225,14 +218,42 @@ unitClausesForTarget_sound {suc local}
     headLookup :
       CNF.lookupBit assignment (rename Fin.zero) ≡ false
     headLookup =
-      unitFalseClauseImpliesFalse
+      unitFalseTrueImpliesFalse
         (CNF.lookupBit assignment (rename Fin.zero))
         headClauseTrue
 
+    headFalse :
+      CNF.lookupBit
+        (Rename.pullbackBits rename assignment)
+        Fin.zero
+      ≡ false
+    headFalse =
+      trans
+        (Rename.pullbackLookup rename assignment Fin.zero)
+        headLookup
+      where
+        trans :
+          ∀ {A : Set} {x y z : A} →
+          x ≡ y → y ≡ z → x ≡ z
+        trans refl refl = refl
+
+    prependFalse :
+      CNF.lookupBit
+        (Rename.pullbackBits rename assignment)
+        Fin.zero
+      ≡ false →
+      Rename.pullbackBits
+        (λ i → rename (Fin.suc i))
+        assignment
+      ≡ target →
+      Rename.pullbackBits rename assignment
+      ≡ false CNF.∷ᵇ target
+    prependFalse refl refl = refl
+
 unitClausesForTarget_sound {suc local}
     rename (true CNF.∷ᵇ target) assignment accepted =
-  cong₂ CNF._∷ᵇ_
-    headLookup
+  prependTrue
+    headTrue
     (unitClausesForTarget_sound
       (λ i → rename (Fin.suc i))
       target assignment restTrue)
@@ -257,20 +278,33 @@ unitClausesForTarget_sound {suc local}
     restTrue =
       andTrueRight clauseValue restValue accepted
 
-    headLookup :
-      CNF.lookupBit assignment (rename Fin.zero) ≡ true
-    headLookup =
-      unitTrueClauseImpliesTrue
-        (CNF.lookupBit assignment (rename Fin.zero))
+    headTrue :
+      CNF.lookupBit
+        (Rename.pullbackBits rename assignment)
+        Fin.zero
+      ≡ true
+    headTrue =
+      trans
+        (Rename.pullbackLookup rename assignment Fin.zero)
         headClauseTrue
+      where
+        trans :
+          ∀ {A : Set} {x y z : A} →
+          x ≡ y → y ≡ z → x ≡ z
+        trans refl refl = refl
 
-infix 3 _↔_
-record _↔_ (A B : Set) : Set where
-  field
-    to : A → B
-    from : B → A
-
-open _↔_ public
+    prependTrue :
+      CNF.lookupBit
+        (Rename.pullbackBits rename assignment)
+        Fin.zero
+      ≡ true →
+      Rename.pullbackBits
+        (λ i → rename (Fin.suc i))
+        assignment
+      ≡ target →
+      Rename.pullbackBits rename assignment
+      ≡ true CNF.∷ᵇ target
+    prependTrue refl refl = refl
 
 initialEndpointCNF_iff :
   ∀ {machine steps cols}
@@ -278,21 +312,21 @@ initialEndpointCNF_iff :
     (assignment :
       CNF.Bits (ExtendedGlobalWidth machine steps cols)) →
   CNF.evaluateCNF
-    (initialEndpointCNF {machine} {steps} {cols} target)
+    (initialEndpointCNF target)
     assignment
   ≡ true
   ↔
   Rename.pullbackBits
-    (initialRowExtendedRename {machine} {steps} {cols})
+    initialRowExtendedRename
     assignment
   ≡ target
-initialEndpointCNF_iff {machine} {steps} {cols} target assignment = record
+initialEndpointCNF_iff target assignment = record
   { to =
       unitClausesForTarget_sound
-        (initialRowExtendedRename {machine} {steps} {cols}) target assignment
+        initialRowExtendedRename target assignment
   ; from =
       unitClausesForTarget_complete
-        (initialRowExtendedRename {machine} {steps} {cols}) target assignment
+        initialRowExtendedRename target assignment
   }
 
 ------------------------------------------------------------------------
@@ -300,10 +334,10 @@ initialEndpointCNF_iff {machine} {steps} {cols} target assignment = record
 ------------------------------------------------------------------------
 
 allWitnessPositiveLiterals :
-  ∀ {cols width : Nat} →
-  (Fin.Fin cols → CNF.Literal width) →
+  ∀ {machine steps cols} →
+  (Fin.Fin cols → CNF.Literal (ExtendedGlobalWidth machine steps cols)) →
   List (Fin.Fin cols) →
-  CNF.Clause width
+  CNF.Clause (ExtendedGlobalWidth machine steps cols)
 allWitnessPositiveLiterals literal [] = []
 allWitnessPositiveLiterals literal (i ∷ rest) =
   literal i ∷ allWitnessPositiveLiterals literal rest
@@ -325,7 +359,7 @@ someAcceptanceWitnessClause :
   CNF.Clause (ExtendedGlobalWidth machine steps cols)
 someAcceptanceWitnessClause {machine} {steps} {cols} =
   allWitnessPositiveLiterals
-    (λ i → CNF.positive (witnessIndex {machine} {steps} {cols} i))
+    (λ i → CNF.positive (witnessIndex i))
     (finList cols)
 
 ------------------------------------------------------------------------
@@ -337,15 +371,6 @@ AcceptanceLocalWidth :
 AcceptanceLocalWidth machine =
   suc (Canonical.CellWidth machine)
 
-cellDecodedAcceptingCell :
-  ∀ {machine} →
-  Local.TapeCell (Local.State machine) (Local.Symbol machine) →
-  Bool
-cellDecodedAcceptingCell (Local.plain _) = false
-cellDecodedAcceptingCell {machine} (Local.headed state _) =
-  Local.decideEqual (Local.finiteState machine)
-    state (Local.acceptingState machine)
-
 cellDecodedAccepting :
   ∀ {machine}
     (stateCoverage :
@@ -354,9 +379,12 @@ cellDecodedAccepting :
       Canonical.EnumerationCoverage (Local.finiteSymbol machine)) →
   CNF.Bits (Canonical.CellWidth machine) →
   Bool
-cellDecodedAccepting {machine} stateCoverage symbolCoverage bits =
-  cellDecodedAcceptingCell {machine}
-    (Canonical.decodeCell {machine = machine} stateCoverage symbolCoverage bits)
+cellDecodedAccepting {machine} stateCoverage symbolCoverage bits
+    with Canonical.decodeCell stateCoverage symbolCoverage bits
+... | Local.plain symbol = false
+... | Local.headed state symbol =
+  Local.decideEqual (Local.finiteState machine)
+    state (Local.acceptingState machine)
 
 witnessAcceptingPredicate :
   ∀ {machine}
@@ -366,12 +394,12 @@ witnessAcceptingPredicate :
       Canonical.EnumerationCoverage (Local.finiteSymbol machine)) →
   CNF.Bits (AcceptanceLocalWidth machine) →
   Bool
-witnessAcceptingPredicate {machine} stateCoverage symbolCoverage
+witnessAcceptingPredicate stateCoverage symbolCoverage
     (false CNF.∷ᵇ cellBits) =
   true
-witnessAcceptingPredicate {machine} stateCoverage symbolCoverage
+witnessAcceptingPredicate stateCoverage symbolCoverage
     (true CNF.∷ᵇ cellBits) =
-  cellDecodedAccepting {machine} stateCoverage symbolCoverage cellBits
+  cellDecodedAccepting stateCoverage symbolCoverage cellBits
 
 finalRowSlot :
   ∀ (steps : Nat) →
@@ -380,21 +408,21 @@ finalRowSlot zero = Global.here
 finalRowSlot (suc steps) =
   Global.there (finalRowSlot steps)
 
-slotToFin :
-  ∀ {i n} → Global.Slot i n → Fin.Fin n
-slotToFin Global.here = Fin.zero
-slotToFin (Global.there s) = Fin.suc (slotToFin s)
-
 acceptanceLocalRename :
   ∀ {machine steps cols cellIndex} →
   Global.Slot cellIndex cols →
   Fin.Fin (AcceptanceLocalWidth machine) →
   Fin.Fin (ExtendedGlobalWidth machine steps cols)
 acceptanceLocalRename {machine} {steps} {cols} cellSlot Fin.zero =
-  witnessIndex {machine} {steps} {cols} (slotToFin cellSlot)
+  witnessIndex (slotToFin cellSlot)
+  where
+    slotToFin :
+      ∀ {i n} → Global.Slot i n → Fin.Fin n
+    slotToFin Global.here = Fin.zero
+    slotToFin (Global.there s) = Fin.suc (slotToFin s)
 acceptanceLocalRename {machine} {steps} {cols} cellSlot (Fin.suc i) =
-  liftBaseIndex {machine} {steps} {cols}
-    (Global.globalRowRename {machine} {steps} {cols}
+  liftBaseIndex
+    (Global.globalRowRename
       (finalRowSlot steps)
       (Global.blockRename cellSlot i))
 
@@ -408,11 +436,11 @@ acceptancePlacedPredicate :
   Placed.PlacedPredicate
     (AcceptanceLocalWidth machine)
     (ExtendedGlobalWidth machine steps cols)
-acceptancePlacedPredicate {machine} {steps} {cols}
+acceptancePlacedPredicate
     stateCoverage symbolCoverage cellSlot =
   Placed.placed-predicate
-    (acceptanceLocalRename {machine} {steps} {cols} cellSlot)
-    (witnessAcceptingPredicate {machine}
+    (acceptanceLocalRename cellSlot)
+    (witnessAcceptingPredicate
       stateCoverage symbolCoverage)
 
 finToSlot :
@@ -422,19 +450,6 @@ finToSlot {suc n} Fin.zero =
   Global.here
 finToSlot {suc n} (Fin.suc i) =
   Global.there (finToSlot i)
-
-slotToFin_finToSlot :
-  ∀ {n} (i : Fin.Fin n) →
-  slotToFin (finToSlot i) ≡ i
-slotToFin_finToSlot Fin.zero = refl
-slotToFin_finToSlot (Fin.suc i) = cong Fin.suc (slotToFin_finToSlot i)
-
-acceptanceLocalRename_zero_eq_witnessIndex :
-  ∀ {machine steps cols} (i : Fin.Fin cols) →
-  acceptanceLocalRename {machine} {steps} {cols} (finToSlot i) Fin.zero
-  ≡ witnessIndex {machine} {steps} {cols} i
-acceptanceLocalRename_zero_eq_witnessIndex {machine} {steps} {cols} i =
-  cong (witnessIndex {machine} {steps} {cols}) (slotToFin_finToSlot i)
 
 acceptanceImplicationPredicatesFin :
   ∀ {machine steps cols}
@@ -448,11 +463,11 @@ acceptanceImplicationPredicatesFin :
       (AcceptanceLocalWidth machine)
       (ExtendedGlobalWidth machine steps cols))
 acceptanceImplicationPredicatesFin stateCoverage symbolCoverage [] = []
-acceptanceImplicationPredicatesFin {machine} {steps} {cols} stateCoverage symbolCoverage
+acceptanceImplicationPredicatesFin stateCoverage symbolCoverage
     (i ∷ rest) =
-  acceptancePlacedPredicate {machine} {steps} {cols}
+  acceptancePlacedPredicate
     stateCoverage symbolCoverage (finToSlot i)
-  ∷ acceptanceImplicationPredicatesFin {machine} {steps} {cols}
+  ∷ acceptanceImplicationPredicatesFin
       stateCoverage symbolCoverage rest
 
 
@@ -467,13 +482,13 @@ acceptingEndpointCNF :
     (symbolCoverage :
       Canonical.EnumerationCoverage (Local.finiteSymbol machine)) →
   CNF.CNF (ExtendedGlobalWidth machine steps cols)
-acceptingEndpointCNF {machine} {steps} {cols} stateCoverage symbolCoverage =
-  someAcceptanceWitnessClause {machine} {steps} {cols}
+acceptingEndpointCNF stateCoverage symbolCoverage =
+  someAcceptanceWitnessClause
   ∷
   Placed.compilePlacedAll
-    (acceptanceImplicationPredicatesFin {machine} {steps} {cols}
+    (acceptanceImplicationPredicatesFin
       stateCoverage symbolCoverage
-      (finList cols))
+      (finList _))
 
 record EndpointCNFReceipt
     (machine : Local.ConcreteTapeMachine) : Set₁ where

@@ -43,7 +43,7 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteTapeProgramCodeExact as 
 ------------------------------------------------------------------------
 
 formulaNodeCount : Cook.BooleanFormula → Nat
-formulaNodeCount (Cook.formulaVar index) =
+formulaNodeCount (Cook.variable index) =
   suc zero
 formulaNodeCount (Cook.constant value) =
   suc zero

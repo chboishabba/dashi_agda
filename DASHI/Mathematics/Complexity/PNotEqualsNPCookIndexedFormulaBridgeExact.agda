@@ -49,7 +49,7 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPClayCoreExact as Clay
 formulaVariableBound :
   Cook.BooleanFormula →
   Nat
-formulaVariableBound (Cook.formulaVar index) =
+formulaVariableBound (Cook.variable index) =
   suc index
 formulaVariableBound (Cook.constant value) =
   zero
@@ -78,7 +78,7 @@ data VariablesBelow
     index < bound →
     VariablesBelow
       bound
-      (Cook.formulaVar index)
+      (Cook.variable index)
 
   constantBelow :
     ∀ {value : Bool} →
@@ -140,7 +140,7 @@ canonicalVariablesBelow :
   VariablesBelow
     (formulaVariableBound formula)
     formula
-canonicalVariablesBelow (Cook.formulaVar index) =
+canonicalVariablesBelow (Cook.variable index) =
   variableBelow
     (NatP.n<1+n index)
 canonicalVariablesBelow (Cook.constant value) =
@@ -185,9 +185,9 @@ cookToIndexedWithBound :
   VariablesBelow bound formula →
   SAT.BooleanFormula bound
 cookToIndexedWithBound
-    (Cook.formulaVar index)
+    (Cook.variable index)
     (variableBelow indexBelow) =
-  SAT.formulaVar
+  SAT.variable
     (Fin.fromℕ< indexBelow)
 cookToIndexedWithBound
     (Cook.constant value)
@@ -228,8 +228,8 @@ indexedToCook :
   ∀ {variables : Nat} →
   SAT.BooleanFormula variables →
   Cook.BooleanFormula
-indexedToCook (SAT.formulaVar index) =
-  Cook.formulaVar (Fin.toℕ index)
+indexedToCook (SAT.variable index) =
+  Cook.variable (Fin.toℕ index)
 indexedToCook (SAT.constant value) =
   Cook.constant value
 indexedToCook (SAT.negate formula) =
@@ -256,7 +256,7 @@ indexedAfterCookWithBound :
     (cookToIndexedWithBound formula below)
   ≡ formula
 indexedAfterCookWithBound
-    (Cook.formulaVar index)
+    (Cook.variable index)
     (variableBelow indexBelow)
     rewrite FinP.toℕ-fromℕ< indexBelow =
   refl
@@ -338,7 +338,7 @@ cookToIndexedEvaluation :
   ≡
   Cook.evaluate formula assignment
 cookToIndexedEvaluation
-    (Cook.formulaVar index)
+    (Cook.variable index)
     (variableBelow indexBelow)
     assignment
     rewrite FinP.toℕ-fromℕ< indexBelow =
@@ -486,7 +486,7 @@ indexedToCookEvaluation :
   ≡
   SAT.evaluate formula assignment
 indexedToCookEvaluation
-    (SAT.formulaVar index)
+    (SAT.variable index)
     assignment =
   cookAssignmentFromFiniteAgrees
     assignment
@@ -547,7 +547,7 @@ indexedToCookEvaluationFromCook :
     formula
     (finiteAssignmentFromCook assignment)
 indexedToCookEvaluationFromCook
-    (SAT.formulaVar index)
+    (SAT.variable index)
     assignment =
   refl
 indexedToCookEvaluationFromCook

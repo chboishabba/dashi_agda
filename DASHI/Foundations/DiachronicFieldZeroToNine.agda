@@ -248,12 +248,12 @@ DiffractionPattern : Set → Set
 DiffractionPattern Axis = Axis → Trit
 
 pointwiseMirror : {Axis : Set} → DiffractionPattern Axis → DiffractionPattern Axis
-pointwiseMirror pat axis = inv (pat axis)
+pointwiseMirror pattern axis = inv (pattern axis)
 
 pointwiseMirror-involutive :
-  {Axis : Set} (pat : DiffractionPattern Axis) (axis : Axis) →
-  pointwiseMirror (pointwiseMirror pat) axis ≡ pat axis
-pointwiseMirror-involutive pat axis = inv-invol (pat axis)
+  {Axis : Set} (pattern : DiffractionPattern Axis) (axis : Axis) →
+  pointwiseMirror (pointwiseMirror pattern) axis ≡ pattern axis
+pointwiseMirror-involutive pattern axis = inv-invol (pattern axis)
 
 record DiffractionPromotion (LowAxis HighAxis : Set) : Set₁ where
   field

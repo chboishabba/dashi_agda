@@ -46,30 +46,22 @@ path4CoordinatesFromPhysicalFibre fieldValue axis transverse =
     (physicalFibre4Coordinate fieldValue axis transverse index1)
     (physicalFibre4Coordinate fieldValue axis transverse index2)
 
-isolateFourthHelper : ∀ a b c d →
-  d ≡ (a + (b + (c + (d + 0ℚ)))) - (a + (b + c))
-isolateFourthHelper = ℚRing.solve-∀
-
-zeroSubtractHelper : ∀ a b c →
-  0ℚ - (a + (b + c)) ≡ - (a + (b + c))
-zeroSubtractHelper = ℚRing.solve-∀
-
-dropTrailingZero4 : ∀ u v w t →
-  u + (v + (w + (t + 0ℚ))) ≡ u + (v + (w + t))
-dropTrailingZero4 = ℚRing.solve-∀
-
-dropTrailingZero3 : ∀ u v w →
-  u + (v + (w + 0ℚ)) ≡ u + (v + w)
-dropTrailingZero3 = ℚRing.solve-∀
-
 isolateFourthFromZero : ∀ a b c d →
   a + (b + (c + (d + 0ℚ))) ≡ 0ℚ →
   d ≡ - (a + (b + c))
 isolateFourthFromZero a b c d total =
-  trans (isolateFourthHelper a b c d)
+  let
+    isolate : d ≡ (a + (b + (c + (d + 0ℚ)))) - (a + (b + c))
+    isolate = ℚRing.solve-∀
+
+    zeroReduction :
+      0ℚ - (a + (b + c)) ≡ - (a + (b + c))
+    zeroReduction = ℚRing.solve-∀
+  in
+  trans isolate
     (trans
       (cong (λ value → value - (a + (b + c))) total)
-      (zeroSubtractHelper a b c))
+      zeroReduction)
 
 physicalFourthCoordinateIsGeneratedLast :
   ∀ fieldValue axis transverse →
@@ -114,19 +106,15 @@ physicalFibre4NormMatchesGenerated :
 physicalFibre4NormMatchesGenerated fieldValue axis transverse =
   trans
     (physicalFibre4NormExpansion fieldValue axis transverse)
-    (trans
-      (cong
-        (λ fourth →
-          sq (physicalFibre4Coordinate fieldValue axis transverse index0)
-          + (sq (physicalFibre4Coordinate fieldValue axis transverse index1)
-          + (sq (physicalFibre4Coordinate fieldValue axis transverse index2)
-          + (sq fourth + 0ℚ))))
-        (physicalFourthCoordinateIsGeneratedLast fieldValue axis transverse))
-      (dropTrailingZero4
-        (sq (physicalFibre4Coordinate fieldValue axis transverse index0))
-        (sq (physicalFibre4Coordinate fieldValue axis transverse index1))
-        (sq (physicalFibre4Coordinate fieldValue axis transverse index2))
-        (sq (lastCoordinate (path4CoordinatesFromPhysicalFibre fieldValue axis transverse)))))
+    (subst
+      (λ fourth →
+        sq (physicalFibre4Coordinate fieldValue axis transverse index0)
+        + (sq (physicalFibre4Coordinate fieldValue axis transverse index1)
+        + (sq (physicalFibre4Coordinate fieldValue axis transverse index2)
+        + (sq fourth + 0ℚ)))
+        ≡ path4NormSq (path4CoordinatesFromPhysicalFibre fieldValue axis transverse))
+      (physicalFourthCoordinateIsGeneratedLast fieldValue axis transverse)
+      (ℚRing.solve-∀))
 
 physicalFibre4EnergyMatchesGenerated :
   ∀ fieldValue axis transverse →
@@ -135,30 +123,21 @@ physicalFibre4EnergyMatchesGenerated :
 physicalFibre4EnergyMatchesGenerated fieldValue axis transverse =
   trans
     (physicalFibre4EnergyExpansion fieldValue axis transverse)
-    (trans
-      (cong
-        (λ fourth →
-          sq
-            (physicalFibre4Coordinate fieldValue axis transverse index1
-            - physicalFibre4Coordinate fieldValue axis transverse index0)
-          + (sq
-              (physicalFibre4Coordinate fieldValue axis transverse index2
-              - physicalFibre4Coordinate fieldValue axis transverse index1)
-          + (sq
-              (fourth
-              - physicalFibre4Coordinate fieldValue axis transverse index2)
-            + 0ℚ)))
-        (physicalFourthCoordinateIsGeneratedLast fieldValue axis transverse))
-      (dropTrailingZero3
-        (sq
+    (subst
+      (λ fourth →
+        sq
           (physicalFibre4Coordinate fieldValue axis transverse index1
-          - physicalFibre4Coordinate fieldValue axis transverse index0))
-        (sq
-          (physicalFibre4Coordinate fieldValue axis transverse index2
-          - physicalFibre4Coordinate fieldValue axis transverse index1))
-        (sq
-          (lastCoordinate (path4CoordinatesFromPhysicalFibre fieldValue axis transverse)
-          - physicalFibre4Coordinate fieldValue axis transverse index2))))
+          - physicalFibre4Coordinate fieldValue axis transverse index0)
+        + (sq
+            (physicalFibre4Coordinate fieldValue axis transverse index2
+            - physicalFibre4Coordinate fieldValue axis transverse index1)
+        + (sq
+            (fourth
+            - physicalFibre4Coordinate fieldValue axis transverse index2)
+          + 0ℚ))
+        ≡ path4Energy (path4CoordinatesFromPhysicalFibre fieldValue axis transverse))
+      (physicalFourthCoordinateIsGeneratedLast fieldValue axis transverse)
+      (ℚRing.solve-∀))
 
 physicalSide4FibrePoincare :
   ∀ fieldValue axis transverse →

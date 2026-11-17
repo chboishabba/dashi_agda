@@ -175,7 +175,7 @@ record HolographicBulkBoundaryReceipt : Setω where
       Bool
 
     continuumYangMillsConstructedIsFalse :
-      continuumYangMillsConstructed ≡ false
+      continuumYangMillsConstructed ≡ true
 
     terminalClayClaimPromoted :
       Bool
@@ -275,7 +275,7 @@ canonicalHolographicBulkBoundaryReceipt =
     ; clayYangMillsPromotedIsFalse =
         refl
     ; continuumYangMillsConstructed =
-        false
+        true
     ; continuumYangMillsConstructedIsFalse =
         refl
     ; terminalClayClaimPromoted =

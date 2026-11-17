@@ -239,8 +239,6 @@ record TernaryComparisonSynthesisBoundary : Set where
     counterpositionIdentifiedWithStrictInverseIsFalse :
       counterpositionIdentifiedWithStrictInverse ≡ false
 
-open TernaryComparisonSynthesisBoundary public
-
 canonicalTernaryComparisonSynthesisBoundary :
   TernaryComparisonSynthesisBoundary
 canonicalTernaryComparisonSynthesisBoundary =

@@ -1,9 +1,9 @@
 module DASHI.Policy.ABC730C029EvidenceRoadmapExact where
 
-openStatus import DASHI.Core.Prelude
-openStatus import Agda.Builtin.Bool using (Bool; true; false)
-openStatus import Agda.Builtin.Equality using (_≡_; refl)
-openStatus import Agda.Builtin.String using (String)
+open import DASHI.Core.Prelude
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.String using (String)
 
 import DASHI.Core.AdmissibleTransitionHyperfabricExact as Admissible
 import DASHI.Policy.ABC730IbrahimSnowballAttributionExact as Attribution
@@ -22,13 +22,13 @@ import DASHI.Policy.ABC730C029LegalMachineryHyperfabricExact as LegalFabric
 --
 -- The legal-machinery hyperfabric is a structural interpretation layer, not a
 -- new evidence source. `paid` below therefore means the representation/gate
--- machinery exists and is wired, not that its openStatus empirical gates are paid.
+-- machinery exists and is wired, not that its open empirical gates are paid.
 ------------------------------------------------------------------------
 
 data RoadmapStatus : Set where
   paid : RoadmapStatus
   partial : RoadmapStatus
-  openStatus : RoadmapStatus
+  open : RoadmapStatus
   blockedByMeasurement : RoadmapStatus
   downstream : RoadmapStatus
 
@@ -65,7 +65,7 @@ record RoadmapEntry : Set where
     status : RoadmapStatus
     ownerReference : String
     nextPayment : String
-openStatus RoadmapEntry public
+open RoadmapEntry public
 
 transcriptIdentityEntry : RoadmapEntry
 transcriptIdentityEntry = roadmapEntry transcriptObjectIdentity paid
@@ -123,12 +123,12 @@ originBaselineEntry = roadmapEntry australianOriginComplianceBaseline paid
   "country-level import declarations/origin advice/food origin labelling are established baseline capabilities"
 
 settlementClassifierEntry : RoadmapEntry
-settlementClassifierEntry = roadmapEntry settlementSubcountryClassifier openStatus
+settlementClassifierEntry = roadmapEntry settlementSubcountryClassifier open
   "DASHI.Policy.ABC730C029LegalMachineryHyperfabricExact"
   "first cutset residual: pay the settlement-place legal test, production-location evidence, declaration field/process, exemptions, importer/customs burden and error/evasion semantics"
 
 adviceLineageEntry : RoadmapEntry
-adviceLineageEntry = roadmapEntry adviceDecisionLineage openStatus
+adviceLineageEntry = roadmapEntry adviceDecisionLineage open
   "DASHI.Policy.ABC730C029LegalMachineryHyperfabricExact"
   "after acquiring DFAT/ABF/Treasury advice, atomise exact propositions and close same-object transports departmental analysis -> ministerial brief -> public rationale -> decision"
 
@@ -153,32 +153,32 @@ tradeMagnitudeEntry = roadmapEntry settlementTradeMagnitude blockedByMeasurement
   "origin-level customs data, firm/product reconstruction, or transparent model with uncertainty"
 
 australianImplementationCostEntry : RoadmapEntry
-australianImplementationCostEntry = roadmapEntry australianBlanketImplementationCost openStatus
+australianImplementationCostEntry = roadmapEntry australianBlanketImplementationCost open
   "DASHI.Policy.ABC730AustralianImplementationSnowballExact"
   "DFAT/ABF/Treasury/Attorney-General advice or released impact assessment specifying incremental settlement-specific costs"
 
 australianBusinessEntry : RoadmapEntry
-australianBusinessEntry = roadmapEntry australianBusinessMateriality openStatus
+australianBusinessEntry = roadmapEntry australianBusinessMateriality open
   "DASHI.Policy.ABC730AustralianImplementationSnowballExact"
   "importer/product exposure, incremental due-diligence cost, customs classification burden and materiality"
 
 workerDestinationEntry : RoadmapEntry
-workerDestinationEntry = roadmapEntry palestinianDestinationWorkerLinkage openStatus
+workerDestinationEntry = roadmapEntry palestinianDestinationWorkerLinkage open
   "DASHI.Policy.ABC730FirmDestinationExposureSnowballExact"
   "firm -> site -> product -> destination -> Palestinian worker -> output/revenue dependence"
 
 palestinianNetEntry : RoadmapEntry
-palestinianNetEntry = roadmapEntry palestinianNetIncidence openStatus
+palestinianNetEntry = roadmapEntry palestinianNetIncidence open
   "DASHI.Policy.ABC730C029LegalMachineryHyperfabricExact"
   "do not factor through flat affected-class label; pay worker loss/reallocation, Palestinian producer substitution and household-income counterfactual"
 
 israeliNetEntry : RoadmapEntry
-israeliNetEntry = roadmapEntry israeliNetIncidence openStatus
+israeliNetEntry = roadmapEntry israeliNetIncidence open
   "DASHI.Policy.ABC730UnintendedConsequencesEvidenceObligationExact"
   "identify which Israelis are claimed to be harmed, mechanism, sign, and whether settlers/green-line producers/consumers are conflated"
 
 counterfactualEntry : RoadmapEntry
-counterfactualEntry = roadmapEntry targetedVsBlanketCounterfactual openStatus
+counterfactualEntry = roadmapEntry targetedVsBlanketCounterfactual open
   "DASHI.Policy.ABC730C029LegalMachineryHyperfabricExact"
   "only compare incremental compliance cost, coverage, evasion, substitution and expected settlement-support reduction once the representation is admissible and consumer-adequate"
 

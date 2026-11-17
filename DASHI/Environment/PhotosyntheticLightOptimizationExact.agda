@@ -22,9 +22,9 @@ record PhotosyntheticObjective
     {LeafPoint Wavelength PhotonFlux ObjectiveValue : Set}
     {leaf : Plant.LeafGasExchangeReceipt}
     {calibration : Calibration.LeafCarbonWaterCalibration leaf}
-    {photonField : Photo.PhotosyntheticPhotonField LeafPoint Wavelength PhotonFlux}
-    {interception : Photo.LeafLightInterceptionReceipt photonField}
-    (weld : Photo.PhotosyntheticOpticsPlantWeld leaf calibration photonField interception) : Set₁ where
+    {field : Photo.PhotosyntheticPhotonField LeafPoint Wavelength PhotonFlux}
+    {interception : Photo.LeafLightInterceptionReceipt field}
+    (weld : Photo.PhotosyntheticOpticsPlantWeld leaf calibration field interception) : Set₁ where
   constructor photosynthetic-objective
   field
     objective : Photo.CoupledState weld → ObjectiveValue
@@ -57,16 +57,16 @@ record PhotosyntheticLightOptimisationCandidate
     {LeafPoint Wavelength PhotonFlux ObjectiveValue : Set}
     {leaf : Plant.LeafGasExchangeReceipt}
     {calibration : Calibration.LeafCarbonWaterCalibration leaf}
-    {photonField : Photo.PhotosyntheticPhotonField LeafPoint Wavelength PhotonFlux}
-    {interception : Photo.LeafLightInterceptionReceipt photonField}
-    {weld : Photo.PhotosyntheticOpticsPlantWeld leaf calibration photonField interception}
-    (objective : PhotosyntheticObjective {ObjectiveValue = ObjectiveValue} weld) : Set₁ where
+    {field : Photo.PhotosyntheticPhotonField LeafPoint Wavelength PhotonFlux}
+    {interception : Photo.LeafLightInterceptionReceipt field}
+    {weld : Photo.PhotosyntheticOpticsPlantWeld leaf calibration field interception}
+    (objective : PhotosyntheticObjective weld) : Set₁ where
   constructor photosynthetic-light-optimisation-candidate
   field
     candidateDescription : String
     opticalDesignArtifact : String
     opticalArtifactDigest : String
-    retainedPlantOpticsWeld : Photo.PhotosyntheticOpticsPlantWeld leaf calibration photonField interception
+    retainedPlantOpticsWeld : Photo.PhotosyntheticOpticsPlantWeld leaf calibration field interception
     retainedPlantOpticsWeldIsSameObject : retainedPlantOpticsWeld ≡ weld
     predictedObjective : ObjectiveValue
     optimisationMethod : String
@@ -78,11 +78,11 @@ record PhotosyntheticLightOptimisationAdmission
     {LeafPoint Wavelength PhotonFlux ObjectiveValue : Set}
     {leaf : Plant.LeafGasExchangeReceipt}
     {calibration : Calibration.LeafCarbonWaterCalibration leaf}
-    {photonField : Photo.PhotosyntheticPhotonField LeafPoint Wavelength PhotonFlux}
-    {interception : Photo.LeafLightInterceptionReceipt photonField}
-    {weld : Photo.PhotosyntheticOpticsPlantWeld leaf calibration photonField interception}
-    {objective : PhotosyntheticObjective {ObjectiveValue = ObjectiveValue} weld}
-    (candidate : PhotosyntheticLightOptimisationCandidate {ObjectiveValue = ObjectiveValue} objective) : Set₁ where
+    {field : Photo.PhotosyntheticPhotonField LeafPoint Wavelength PhotonFlux}
+    {interception : Photo.LeafLightInterceptionReceipt field}
+    {weld : Photo.PhotosyntheticOpticsPlantWeld leaf calibration field interception}
+    {objective : PhotosyntheticObjective weld}
+    (candidate : PhotosyntheticLightOptimisationCandidate objective) : Set₁ where
   constructor photosynthetic-light-optimisation-admission
   field
     farquharCalibrationEvidence : String
@@ -105,11 +105,11 @@ record CanopyOptimisationWeld
     {LeafPoint Wavelength Direction PhotonFlux : Set}
     {leaf : Plant.LeafGasExchangeReceipt}
     {calibration : Calibration.LeafCarbonWaterCalibration leaf}
-    {photonField : Photo.PhotosyntheticPhotonField LeafPoint Wavelength PhotonFlux}
-    {interception : Photo.LeafLightInterceptionReceipt photonField}
-    {weld : Photo.PhotosyntheticOpticsPlantWeld leaf calibration photonField interception}
+    {field : Photo.PhotosyntheticPhotonField LeafPoint Wavelength PhotonFlux}
+    {interception : Photo.LeafLightInterceptionReceipt field}
+    {weld : Photo.PhotosyntheticOpticsPlantWeld leaf calibration field interception}
     (canopy : Canopy.SpectralCanopyRadiationModel Wavelength Direction LeafPoint PhotonFlux)
-    (canopyWeld : Canopy.CanopyToPhotosyntheticPhotonFieldWeld canopy photonField interception) : Set₁ where
+    (canopyWeld : Canopy.CanopyToPhotosyntheticPhotonFieldWeld canopy field interception) : Set₁ where
   constructor canopy-optimisation-weld
   field
     samePhotonFieldReference : String

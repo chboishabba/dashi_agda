@@ -69,12 +69,12 @@ physicalSU2Coordinates : (L : Nat) → List (PhysicalSU2Coordinate L)
 physicalSU2Coordinates L = cartesian lieCoordinates3 (physicalBondCells L)
 
 bondCellValue : ∀ {L} → BondField L ℚ → PhysicalBondCell L → ℚ
-bondCellValue fld (pair axis site) = fld (pair site axis)
+bondCellValue field (pair axis site) = field (pair site axis)
 
 encodePhysicalSU2 :
   ∀ {L} → PhysicalSU2BondField L → PhysicalSU2Coordinate L → ℚ
-encodePhysicalSU2 fld (pair coordinate cell) =
-  bondCellValue (fld coordinate) cell
+encodePhysicalSU2 field (pair coordinate cell) =
+  bondCellValue (field coordinate) cell
 
 decodePhysicalSU2 :
   ∀ {L} → (PhysicalSU2Coordinate L → ℚ) → PhysicalSU2BondField L
@@ -82,10 +82,10 @@ decodePhysicalSU2 coordinates coordinate (pair site axis) =
   coordinates (pair coordinate (pair axis site))
 
 decodeAfterEncodePointwise :
-  ∀ {L} (fld : PhysicalSU2BondField L) coordinate bond →
-  decodePhysicalSU2 (encodePhysicalSU2 fld) coordinate bond
-  ≡ fld coordinate bond
-decodeAfterEncodePointwise fld coordinate (pair site axis) = refl
+  ∀ {L} (field : PhysicalSU2BondField L) coordinate bond →
+  decodePhysicalSU2 (encodePhysicalSU2 field) coordinate bond
+  ≡ field coordinate bond
+decodeAfterEncodePointwise field coordinate (pair site axis) = refl
 
 encodeAfterDecodePointwise :
   ∀ {L} coordinates (physicalCoordinate : PhysicalSU2Coordinate L) →
@@ -98,14 +98,14 @@ encodeAfterDecodePointwise coordinates (pair coordinate (pair axis site)) = refl
 ------------------------------------------------------------------------
 
 bondNormSq : ∀ {L} → BondField L ℚ → ℚ
-bondNormSq {L} fld =
+bondNormSq {L} field =
   sumRational (physicalBondCells L)
-    (λ cell → sq (bondCellValue fld cell))
+    (λ cell → sq (bondCellValue field cell))
 
 physicalSU2BondNormSq : ∀ {L} → PhysicalSU2BondField L → ℚ
-physicalSU2BondNormSq fld =
+physicalSU2BondNormSq field =
   sumRational lieCoordinates3
-    (λ coordinate → bondNormSq (fld coordinate))
+    (λ coordinate → bondNormSq (field coordinate))
 
 physicalSU2CoordinateNormSq :
   ∀ {L} → (PhysicalSU2Coordinate L → ℚ) → ℚ
@@ -114,13 +114,13 @@ physicalSU2CoordinateNormSq {L} coordinates =
     (λ coordinate → sq (coordinates coordinate))
 
 encodePhysicalSU2NormSqExact :
-  ∀ {L} (fld : PhysicalSU2BondField L) →
-  physicalSU2CoordinateNormSq (encodePhysicalSU2 fld)
-  ≡ physicalSU2BondNormSq fld
-encodePhysicalSU2NormSqExact {L} fld =
+  ∀ {L} (field : PhysicalSU2BondField L) →
+  physicalSU2CoordinateNormSq (encodePhysicalSU2 field)
+  ≡ physicalSU2BondNormSq field
+encodePhysicalSU2NormSqExact {L} field =
   trans
     (sumCartesian lieCoordinates3 (physicalBondCells L)
-      (λ coordinate → sq (encodePhysicalSU2 fld coordinate)))
+      (λ coordinate → sq (encodePhysicalSU2 field coordinate)))
     refl
 
 ------------------------------------------------------------------------
@@ -154,8 +154,8 @@ physicalMatrixQuadratic matrix vector =
 physicalOperatorFromMatrix :
   ∀ {L} → PhysicalSU2Matrix L →
   PhysicalSU2BondField L → PhysicalSU2BondField L
-physicalOperatorFromMatrix matrix fld =
-  decodePhysicalSU2 (physicalMatrixApply matrix (encodePhysicalSU2 fld))
+physicalOperatorFromMatrix matrix field =
+  decodePhysicalSU2 (physicalMatrixApply matrix (encodePhysicalSU2 field))
 
 physicalSU2CoordinateRoundTripLevel : ProofLevel
 physicalSU2CoordinateRoundTripLevel = machineChecked

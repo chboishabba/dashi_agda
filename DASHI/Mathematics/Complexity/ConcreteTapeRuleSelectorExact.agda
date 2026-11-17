@@ -16,7 +16,6 @@ module DASHI.Mathematics.Complexity.ConcreteTapeRuleSelectorExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Maybe using (Maybe; nothing; just)
 open import Agda.Builtin.Sigma using (Σ; _,_)
 
@@ -24,15 +23,15 @@ import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalCellBitsExact as Canonical
 import DASHI.Mathematics.Complexity.FixedWidthTruthTableCNFExact as CNF
 
-RuleWidth : Local.ConcreteTapeMachine → Nat
+RuleWidth : Local.ConcreteTapeMachine → Agda.Builtin.Nat.Nat
 RuleWidth machine =
   Canonical.listLength (Local.rules machine)
 
 zeros :
-  ∀ (n : Nat) →
+  ∀ (n : Agda.Builtin.Nat.Nat) →
   CNF.Bits n
-zeros zero = CNF.[]ᵇ
-zeros (suc n) =
+zeros Agda.Builtin.Nat.zero = CNF.[]ᵇ
+zeros (Agda.Builtin.Nat.suc n) =
   false CNF.∷ᵇ zeros n
 
 encodeRuleOccurs :
@@ -165,7 +164,7 @@ record RuleSelectorReceipt
     (machine : Local.ConcreteTapeMachine) : Set₁ where
   field
     nonemptyRuleTable : NonemptyRuleTable machine
-    fixedWidth : Nat
+    fixedWidth : Agda.Builtin.Nat.Nat
     widthExact : fixedWidth ≡ RuleWidth machine
     everyCanonicalWidthDecodedRuleOccurs :
       (bits : CNF.Bits (RuleWidth machine)) →

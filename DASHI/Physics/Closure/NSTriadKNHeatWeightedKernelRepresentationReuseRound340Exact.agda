@@ -52,16 +52,16 @@ data RepresentationLeaf : Set where
   weightedCertificates : RepresentationLeaf
   factorizedCrossShellEvidence : RepresentationLeaf
 
-data LeafState : Set where leafClosed leafOpen leafBlocked : LeafState
+data LeafState : Set where closed open blocked : LeafState
 
 leafState : RepresentationLeaf → LeafState
-leafState literalFsKernelEntries = leafOpen
-leafState exactKernelAction = leafBlocked
-leafState kernelIdentityMatch = leafBlocked
-leafState physicalK01Representation = leafBlocked
-leafState physicalK10Representation = leafBlocked
-leafState weightedCertificates = leafBlocked
-leafState factorizedCrossShellEvidence = leafBlocked
+leafState literalFsKernelEntries = open
+leafState exactKernelAction = blocked
+leafState kernelIdentityMatch = blocked
+leafState physicalK01Representation = blocked
+leafState physicalK10Representation = blocked
+leafState weightedCertificates = blocked
+leafState factorizedCrossShellEvidence = blocked
 
 weightedKernelInfrastructureDisposition : Admission.RouteDisposition
 weightedKernelInfrastructureDisposition = Admission.redirectedReuse

@@ -33,7 +33,6 @@ import DASHI.ComputerScience.TekumParsedExactRationalCoordinatesExact
 import DASHI.ComputerScience.TekumFractionRangeExact
 import DASHI.ComputerScience.TekumFractionRationalRangeExact
 import DASHI.ComputerScience.TekumFractionInjectiveExact
-import DASHI.ComputerScience.TekumFractionOrderExact
 import DASHI.ComputerScience.TekumSignificandRangeExact
 import DASHI.ComputerScience.TekumTriadicScaleExact
 import DASHI.ComputerScience.TekumExponentBandExact
@@ -57,26 +56,10 @@ import DASHI.ComputerScience.TekumUniquenessExact
 import DASHI.ComputerScience.TekumMonotoneMagnitudeExact
 import DASHI.ComputerScience.TekumPositiveSourceSuccessorAnchorExact
 import DASHI.ComputerScience.TekumSourceOrderExact
-import DASHI.ComputerScience.TekumParsedAnchorCodeExact
-import DASHI.ComputerScience.TekumParsedAnchorBlockOrderExact
-import DASHI.ComputerScience.TekumParsedPayloadOrderExact
-import DASHI.ComputerScience.TekumParsedAnchorStrictOrderExact
-import DASHI.ComputerScience.TekumProposition4PositiveGlobalExact
-import DASHI.ComputerScience.TekumProposition4NegativeGlobalExact
-import DASHI.ComputerScience.TekumSpecialIntegerOrderExact
-import DASHI.ComputerScience.TekumOrderedSourceValueExact
-import DASHI.ComputerScience.TekumRawAnchorRegimeBandExact
-import DASHI.ComputerScience.TekumSourceAnchorRegimeBandExact
-import DASHI.ComputerScience.TekumSourceParserTotalityExact
-import DASHI.ComputerScience.TekumProposition4GlobalExact
-import DASHI.ComputerScience.TekumProposition4PaperExact
 import DASHI.ComputerScience.TekumMonotonicityExact
 import DASHI.ComputerScience.TekumTruncationRoundingExact
 import DASHI.ComputerScience.TekumProposition5CounterexampleExact
-import DASHI.ComputerScience.TekumProposition5NoGoExact
-import DASHI.ComputerScience.TekumProposition5FiniteNearestNoGoExact
 import DASHI.ComputerScience.TekumPrecisionCompositionExact
-import DASHI.ComputerScience.TekumRoundingMaxCutBoundaryExact
 import DASHI.ComputerScience.TekumFloatingPointStructuralBridgeExact
 import DASHI.ComputerScience.TekumTriadicPAdicKernelBridgeExact
 import DASHI.ComputerScience.TekumPadicOrientationBoundaryExact
@@ -177,7 +160,7 @@ canonicalTekumVerifiedAssemblyBoundary =
     true true true true true true true true true
     true true true true true true true true false
     true
-    true true true false false true
+    true true false false false true
     true true true true
     true true true true false true true true true false
     true true true true

@@ -21,7 +21,7 @@ module DASHI.Physics.YangMills.BalabanPath13FourAxisPhysicalPoincareExact where
 -- The exact Path13 LDL floor is applied to each zero-mean martingale fibre;
 -- the arbitrary-side conditional-expectation Pythagoras theorem reconstructs
 -- the full global norm; and distinct-axis averaging contracts the corresponding
--- directional edge energies.  Hence, for every literal side-13 block siteField
+-- directional edge energies.  Hence, for every literal side-13 block field
 -- whose terminal four-axis average vanishes,
 --
 --       (1/18) ||h||_2^2 <= sum_{axis,fibre} E_axis(h).
@@ -33,10 +33,9 @@ module DASHI.Physics.YangMills.BalabanPath13FourAxisPhysicalPoincareExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational using (ℚ; _+_; _-_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
+import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using
   (cong; subst; sym; trans)
-
-
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact using (sq)
@@ -44,7 +43,6 @@ open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
 open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier
 open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact
 open import DASHI.Physics.YangMills.BalabanPhysicalAxisPartitionExact
-import DASHI.Physics.YangMills.BalabanOpaqueGlobalAlgebraExact as OpaqueAlgebra
 import DASHI.Physics.YangMills.BalabanNormalizedAxisAverageExact as Average
 import DASHI.Physics.YangMills.BalabanNormalizedAxisAverageNormContractionExact as Norm
 import DASHI.Physics.YangMills.BalabanNormalizedFourAxisMartingaleExact as Martingale
@@ -55,297 +53,307 @@ import DASHI.Physics.YangMills.BalabanPath13ZeroMeanFibrePoincareLiftExact as Fi
 import DASHI.Physics.YangMills.BalabanPath13DirectionalEnergyContractionExact as Direction
 
 axisFibreNormSum : Axis4 → SiteField Side13.side13 → ℚ
-axisFibreNormSum axis siteField =
+axisFibreNormSum axis field =
   sumRational (physicalTransverseCoordinates Side13.side13)
-    (physicalFibreNormSq siteField axis)
+    (physicalFibreNormSq field axis)
 
-axisFibreNormSumMatchesGlobal : ∀ axis siteField →
-  axisFibreNormSum axis siteField ≡ Norm.globalNormSq siteField
-axisFibreNormSumMatchesGlobal axis siteField =
-  axisPartitionSumMatchesGlobal axis (λ site → sq (siteField site))
+axisFibreNormSumMatchesGlobal : ∀ axis field →
+  axisFibreNormSum axis field ≡ Norm.globalNormSq field
+axisFibreNormSumMatchesGlobal axis field =
+  axisPartitionSumMatchesGlobal axis (λ site → sq (field site))
 
 axisZeroMeanGlobalPoincare :
-  ∀ axis siteField →
-  (∀ transverse → physicalFibreSum siteField axis transverse ≡ Data.Rational.0ℚ) →
-  LDL.oneEighteenth * Norm.globalNormSq siteField
-  ≤ Direction.axisDirectionalEnergy axis siteField
-axisZeroMeanGlobalPoincare axis siteField zeroMean =
+  ∀ axis field →
+  (∀ transverse → physicalFibreSum field axis transverse ≡ Data.Rational.0ℚ) →
+  LDL.oneEighteenth * Norm.globalNormSq field
+  ≤ Direction.axisDirectionalEnergy axis field
+axisZeroMeanGlobalPoincare axis field zeroMean =
   let
     transverses = physicalTransverseCoordinates Side13.side13
     folded = FibreLift13.sumZeroMeanFibrePoincareViaFibre
-      axis siteField transverses zeroMean
+      axis field transverses zeroMean
     scaledGlobal :
-      LDL.oneEighteenth * Norm.globalNormSq siteField
+      LDL.oneEighteenth * Norm.globalNormSq field
       ≡ sumRational transverses
           (λ transverse →
-            LDL.oneEighteenth * physicalFibreNormSq siteField axis transverse)
+            LDL.oneEighteenth * physicalFibreNormSq field axis transverse)
     scaledGlobal =
       trans
         (cong (LDL.oneEighteenth *_)
-          (sym (axisFibreNormSumMatchesGlobal axis siteField)))
+          (sym (axisFibreNormSumMatchesGlobal axis field)))
         (sym
           (sumRationalScale LDL.oneEighteenth transverses
-            (physicalFibreNormSq siteField axis)))
+            (physicalFibreNormSq field axis)))
   in
   subst
-    (λ left → left ≤ Direction.axisDirectionalEnergy axis siteField)
+    (λ left → left ≤ Direction.axisDirectionalEnergy axis field)
     scaledGlobal folded
 
-martingale0FibreMeanZero : ∀ siteField transverse →
+martingale0FibreMeanZero : ∀ field transverse →
   physicalFibreSum
-    (Martingale.martingale0 Side13.side13AverageData siteField)
+    (Martingale.martingale0 Side13.side13AverageData field)
     zeroᵢ transverse ≡ Data.Rational.0ℚ
-martingale0FibreMeanZero siteField transverse =
+martingale0FibreMeanZero field transverse =
   Average.axisCenteringFibreSumZero Side13.side13AverageData
-    siteField zeroᵢ transverse
+    field zeroᵢ transverse
 
-martingale1FibreMeanZero : ∀ siteField transverse →
+martingale1FibreMeanZero : ∀ field transverse →
   physicalFibreSum
-    (Martingale.martingale1 Side13.side13AverageData siteField)
+    (Martingale.martingale1 Side13.side13AverageData field)
     (sucᵢ zeroᵢ) transverse ≡ Data.Rational.0ℚ
-martingale1FibreMeanZero siteField transverse =
+martingale1FibreMeanZero field transverse =
   Average.axisCenteringFibreSumZero Side13.side13AverageData
-    (Martingale.average0 Side13.side13AverageData siteField)
+    (Martingale.average0 Side13.side13AverageData field)
     (sucᵢ zeroᵢ) transverse
 
-martingale2FibreMeanZero : ∀ siteField transverse →
+martingale2FibreMeanZero : ∀ field transverse →
   physicalFibreSum
-    (Martingale.martingale2 Side13.side13AverageData siteField)
+    (Martingale.martingale2 Side13.side13AverageData field)
     (sucᵢ (sucᵢ zeroᵢ)) transverse ≡ Data.Rational.0ℚ
-martingale2FibreMeanZero siteField transverse =
+martingale2FibreMeanZero field transverse =
   Average.axisCenteringFibreSumZero Side13.side13AverageData
-    (Martingale.average01 Side13.side13AverageData siteField)
+    (Martingale.average01 Side13.side13AverageData field)
     (sucᵢ (sucᵢ zeroᵢ)) transverse
 
-martingale3FibreMeanZero : ∀ siteField transverse →
+martingale3FibreMeanZero : ∀ field transverse →
   physicalFibreSum
-    (Martingale.martingale3 Side13.side13AverageData siteField)
+    (Martingale.martingale3 Side13.side13AverageData field)
     (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) transverse ≡ Data.Rational.0ℚ
-martingale3FibreMeanZero siteField transverse =
+martingale3FibreMeanZero field transverse =
   Average.axisCenteringFibreSumZero Side13.side13AverageData
-    (Martingale.average012 Side13.side13AverageData siteField)
+    (Martingale.average012 Side13.side13AverageData field)
     (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) transverse
 
-martingale0Poincare : ∀ siteField →
+martingale0Poincare : ∀ field →
   LDL.oneEighteenth
-    * Norm.globalNormSq (Martingale.martingale0 Side13.side13AverageData siteField)
+    * Norm.globalNormSq (Martingale.martingale0 Side13.side13AverageData field)
   ≤ Direction.axisDirectionalEnergy zeroᵢ
-      (Martingale.martingale0 Side13.side13AverageData siteField)
-martingale0Poincare siteField =
+      (Martingale.martingale0 Side13.side13AverageData field)
+martingale0Poincare field =
   axisZeroMeanGlobalPoincare zeroᵢ
-    (Martingale.martingale0 Side13.side13AverageData siteField)
-    (martingale0FibreMeanZero siteField)
+    (Martingale.martingale0 Side13.side13AverageData field)
+    (martingale0FibreMeanZero field)
 
-martingale1Poincare : ∀ siteField →
+martingale1Poincare : ∀ field →
   LDL.oneEighteenth
-    * Norm.globalNormSq (Martingale.martingale1 Side13.side13AverageData siteField)
+    * Norm.globalNormSq (Martingale.martingale1 Side13.side13AverageData field)
   ≤ Direction.axisDirectionalEnergy (sucᵢ zeroᵢ)
-      (Martingale.martingale1 Side13.side13AverageData siteField)
-martingale1Poincare siteField =
+      (Martingale.martingale1 Side13.side13AverageData field)
+martingale1Poincare field =
   axisZeroMeanGlobalPoincare (sucᵢ zeroᵢ)
-    (Martingale.martingale1 Side13.side13AverageData siteField)
-    (martingale1FibreMeanZero siteField)
+    (Martingale.martingale1 Side13.side13AverageData field)
+    (martingale1FibreMeanZero field)
 
-martingale2Poincare : ∀ siteField →
+martingale2Poincare : ∀ field →
   LDL.oneEighteenth
-    * Norm.globalNormSq (Martingale.martingale2 Side13.side13AverageData siteField)
+    * Norm.globalNormSq (Martingale.martingale2 Side13.side13AverageData field)
   ≤ Direction.axisDirectionalEnergy (sucᵢ (sucᵢ zeroᵢ))
-      (Martingale.martingale2 Side13.side13AverageData siteField)
-martingale2Poincare siteField =
+      (Martingale.martingale2 Side13.side13AverageData field)
+martingale2Poincare field =
   axisZeroMeanGlobalPoincare (sucᵢ (sucᵢ zeroᵢ))
-    (Martingale.martingale2 Side13.side13AverageData siteField)
-    (martingale2FibreMeanZero siteField)
+    (Martingale.martingale2 Side13.side13AverageData field)
+    (martingale2FibreMeanZero field)
 
-martingale3Poincare : ∀ siteField →
+martingale3Poincare : ∀ field →
   LDL.oneEighteenth
-    * Norm.globalNormSq (Martingale.martingale3 Side13.side13AverageData siteField)
+    * Norm.globalNormSq (Martingale.martingale3 Side13.side13AverageData field)
   ≤ Direction.axisDirectionalEnergy (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
-      (Martingale.martingale3 Side13.side13AverageData siteField)
-martingale3Poincare siteField =
+      (Martingale.martingale3 Side13.side13AverageData field)
+martingale3Poincare field =
   axisZeroMeanGlobalPoincare (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
-    (Martingale.martingale3 Side13.side13AverageData siteField)
-    (martingale3FibreMeanZero siteField)
+    (Martingale.martingale3 Side13.side13AverageData field)
+    (martingale3FibreMeanZero field)
 
 martingaleDirectionalEnergySum : SiteField Side13.side13 → ℚ
-martingaleDirectionalEnergySum siteField =
+martingaleDirectionalEnergySum field =
   Direction.axisDirectionalEnergy zeroᵢ
-    (Martingale.martingale0 Side13.side13AverageData siteField)
+    (Martingale.martingale0 Side13.side13AverageData field)
   + (Direction.axisDirectionalEnergy (sucᵢ zeroᵢ)
-      (Martingale.martingale1 Side13.side13AverageData siteField)
+      (Martingale.martingale1 Side13.side13AverageData field)
   + (Direction.axisDirectionalEnergy (sucᵢ (sucᵢ zeroᵢ))
-      (Martingale.martingale2 Side13.side13AverageData siteField)
+      (Martingale.martingale2 Side13.side13AverageData field)
   + Direction.axisDirectionalEnergy (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
-      (Martingale.martingale3 Side13.side13AverageData siteField)))
+      (Martingale.martingale3 Side13.side13AverageData field)))
 
 martingalePoincareBeforeEnergyContraction :
-  ∀ siteField → Martingale.GlobalMeanZero Side13.side13AverageData siteField →
-  LDL.oneEighteenth * Norm.globalNormSq siteField
-  ≤ martingaleDirectionalEnergySum siteField
-martingalePoincareBeforeEnergyContraction siteField meanZero =
+  ∀ field → Martingale.GlobalMeanZero Side13.side13AverageData field →
+  LDL.oneEighteenth * Norm.globalNormSq field
+  ≤ martingaleDirectionalEnergySum field
+martingalePoincareBeforeEnergyContraction field meanZero =
   let
     scaledVariance :
-      LDL.oneEighteenth * Norm.globalNormSq siteField
+      LDL.oneEighteenth * Norm.globalNormSq field
       ≡ LDL.oneEighteenth
-          * Norm.globalNormSq (Martingale.martingale0 Side13.side13AverageData siteField)
+          * Norm.globalNormSq (Martingale.martingale0 Side13.side13AverageData field)
         + (LDL.oneEighteenth
-          * Norm.globalNormSq (Martingale.martingale1 Side13.side13AverageData siteField)
+          * Norm.globalNormSq (Martingale.martingale1 Side13.side13AverageData field)
         + (LDL.oneEighteenth
-          * Norm.globalNormSq (Martingale.martingale2 Side13.side13AverageData siteField)
+          * Norm.globalNormSq (Martingale.martingale2 Side13.side13AverageData field)
         + LDL.oneEighteenth
-          * Norm.globalNormSq (Martingale.martingale3 Side13.side13AverageData siteField)))
+          * Norm.globalNormSq (Martingale.martingale3 Side13.side13AverageData field)))
     scaledVariance =
       trans
         (cong (LDL.oneEighteenth *_)
           (Martingale.fourAxisVarianceDecomposition
-            Side13.side13AverageData siteField meanZero))
+            Side13.side13AverageData field meanZero))
         (OpaqueAlgebra.scaleFourSum
           LDL.oneEighteenth
           (Norm.globalNormSq
-            (Martingale.martingale0 Side13.side13AverageData siteField))
+            (Martingale.martingale0 Side13.side13AverageData field))
           (Norm.globalNormSq
-            (Martingale.martingale1 Side13.side13AverageData siteField))
+            (Martingale.martingale1 Side13.side13AverageData field))
           (Norm.globalNormSq
-            (Martingale.martingale2 Side13.side13AverageData siteField))
+            (Martingale.martingale2 Side13.side13AverageData field))
           (Norm.globalNormSq
-            (Martingale.martingale3 Side13.side13AverageData siteField)))
+            (Martingale.martingale3 Side13.side13AverageData field)))
   in
   subst
-    (λ left → left ≤ martingaleDirectionalEnergySum siteField)
+    (λ left → left ≤ martingaleDirectionalEnergySum field)
     scaledVariance
     (ℚP.+-mono-≤
-      (martingale0Poincare siteField)
+      (martingale0Poincare field)
       (ℚP.+-mono-≤
-        (martingale1Poincare siteField)
+        (martingale1Poincare field)
         (ℚP.+-mono-≤
-          (martingale2Poincare siteField)
-          (martingale3Poincare siteField))))
+          (martingale2Poincare field)
+          (martingale3Poincare field))))
 
 axisCenteringEdgeDifferenceExact :
-  ∀ siteField axis transverse predecessor →
-  Average.axisCentering Side13.side13AverageData siteField axis
+  ∀ field axis transverse predecessor →
+  Average.axisCentering Side13.side13AverageData field axis
       (insertAxis axis (sucᵢ predecessor) transverse)
-  - Average.axisCentering Side13.side13AverageData siteField axis
+  - Average.axisCentering Side13.side13AverageData field axis
       (insertAxis axis (weakenIndex predecessor) transverse)
-  ≡ siteField (insertAxis axis (sucᵢ predecessor) transverse)
-    - siteField (insertAxis axis (weakenIndex predecessor) transverse)
-axisCenteringEdgeDifferenceExact siteField axis transverse predecessor
+  ≡ field (insertAxis axis (sucᵢ predecessor) transverse)
+    - field (insertAxis axis (weakenIndex predecessor) transverse)
+axisCenteringEdgeDifferenceExact field axis transverse predecessor
   rewrite Average.axisAverageConstantOnFibre Side13.side13AverageData
-      siteField axis transverse (sucᵢ predecessor)
+      field axis transverse (sucᵢ predecessor)
         | Average.axisAverageConstantOnFibre Side13.side13AverageData
-      siteField axis transverse (weakenIndex predecessor) =
+      field axis transverse (weakenIndex predecessor) =
   ℚRing.solve-∀
 
-axisCenteringFibreEnergyExact : ∀ siteField axis transverse →
+axisCenteringFibreEnergyExact : ∀ field axis transverse →
   physicalFibreEdgeEnergy
-    (Average.axisCentering Side13.side13AverageData siteField axis) axis transverse
-  ≡ physicalFibreEdgeEnergy siteField axis transverse
-axisCenteringFibreEnergyExact siteField axis transverse =
+    (Average.axisCentering Side13.side13AverageData field axis) axis transverse
+  ≡ physicalFibreEdgeEnergy field axis transverse
+axisCenteringFibreEnergyExact field axis transverse =
   sumRationalCong
     (allCyclicIndices Direction.side12)
     _ _
     (λ predecessor →
       cong sq (axisCenteringEdgeDifferenceExact
-        siteField axis transverse predecessor))
+        field axis transverse predecessor))
 
-axisCenteringDirectionalEnergyExact : ∀ siteField axis →
+axisCenteringDirectionalEnergyExact : ∀ field axis →
   Direction.axisDirectionalEnergy axis
-    (Average.axisCentering Side13.side13AverageData siteField axis)
-  ≡ Direction.axisDirectionalEnergy axis siteField
-axisCenteringDirectionalEnergyExact siteField axis =
+    (Average.axisCentering Side13.side13AverageData field axis)
+  ≡ Direction.axisDirectionalEnergy axis field
+axisCenteringDirectionalEnergyExact field axis =
   sumRationalCong
     (physicalTransverseCoordinates Side13.side13)
     _ _
-    (axisCenteringFibreEnergyExact siteField axis)
+    (axisCenteringFibreEnergyExact field axis)
 
-axis0≢axis1 : _≢_ {A = Axis4} zeroᵢ (sucᵢ zeroᵢ)
-axis0≢axis1 = zeroNotSuc
+axis0≢axis1 : zeroᵢ ≢ sucᵢ zeroᵢ
+axis0≢axis1 ()
+axis0≢axis2 : zeroᵢ ≢ sucᵢ (sucᵢ zeroᵢ)
+axis0≢axis2 ()
+axis1≢axis2 : sucᵢ zeroᵢ ≢ sucᵢ (sucᵢ zeroᵢ)
+axis1≢axis2 ()
+axis0≢axis3 : zeroᵢ ≢ sucᵢ (sucᵢ (sucᵢ zeroᵢ))
+axis0≢axis3 ()
+axis1≢axis3 : sucᵢ zeroᵢ ≢ sucᵢ (sucᵢ (sucᵢ zeroᵢ))
+axis1≢axis3 ()
+axis2≢axis3 : sucᵢ (sucᵢ zeroᵢ) ≢ sucᵢ (sucᵢ (sucᵢ zeroᵢ))
+axis2≢axis3 ()
 
-martingale0DirectionalEnergyExact : ∀ siteField →
+martingale0DirectionalEnergyExact : ∀ field →
   Direction.axisDirectionalEnergy zeroᵢ
-    (Martingale.martingale0 Side13.side13AverageData siteField)
-  ≡ Direction.axisDirectionalEnergy zeroᵢ siteField
-martingale0DirectionalEnergyExact siteField =
-  axisCenteringDirectionalEnergyExact siteField zeroᵢ
+    (Martingale.martingale0 Side13.side13AverageData field)
+  ≡ Direction.axisDirectionalEnergy zeroᵢ field
+martingale0DirectionalEnergyExact field =
+  axisCenteringDirectionalEnergyExact field zeroᵢ
 
-martingale1DirectionalEnergyBelow : ∀ siteField →
+martingale1DirectionalEnergyBelow : ∀ field →
   Direction.axisDirectionalEnergy (sucᵢ zeroᵢ)
-    (Martingale.martingale1 Side13.side13AverageData siteField)
-  ≤ Direction.axisDirectionalEnergy (sucᵢ zeroᵢ) siteField
-martingale1DirectionalEnergyBelow siteField =
+    (Martingale.martingale1 Side13.side13AverageData field)
+  ≤ Direction.axisDirectionalEnergy (sucᵢ zeroᵢ) field
+martingale1DirectionalEnergyBelow field =
   subst
-    (λ left → left ≤ Direction.axisDirectionalEnergy (sucᵢ zeroᵢ) siteField)
+    (λ left → left ≤ Direction.axisDirectionalEnergy (sucᵢ zeroᵢ) field)
     (sym (axisCenteringDirectionalEnergyExact
-      (Martingale.average0 Side13.side13AverageData siteField) (sucᵢ zeroᵢ)))
+      (Martingale.average0 Side13.side13AverageData field) (sucᵢ zeroᵢ)))
     (Direction.distinctAxisDirectionalEnergyContraction
-      zeroᵢ (sucᵢ zeroᵢ) siteField axis0≢axis1)
+      zeroᵢ (sucᵢ zeroᵢ) field axis0≢axis1)
 
-martingale2DirectionalEnergyBelow : ∀ siteField →
+martingale2DirectionalEnergyBelow : ∀ field →
   Direction.axisDirectionalEnergy (sucᵢ (sucᵢ zeroᵢ))
-    (Martingale.martingale2 Side13.side13AverageData siteField)
-  ≤ Direction.axisDirectionalEnergy (sucᵢ (sucᵢ zeroᵢ)) siteField
-martingale2DirectionalEnergyBelow siteField =
+    (Martingale.martingale2 Side13.side13AverageData field)
+  ≤ Direction.axisDirectionalEnergy (sucᵢ (sucᵢ zeroᵢ)) field
+martingale2DirectionalEnergyBelow field =
   subst
-    (λ left → left ≤ Direction.axisDirectionalEnergy (sucᵢ (sucᵢ zeroᵢ)) siteField)
+    (λ left → left ≤ Direction.axisDirectionalEnergy (sucᵢ (sucᵢ zeroᵢ)) field)
     (sym (axisCenteringDirectionalEnergyExact
-      (Martingale.average01 Side13.side13AverageData siteField)
+      (Martingale.average01 Side13.side13AverageData field)
       (sucᵢ (sucᵢ zeroᵢ))))
     (ℚP.≤-trans
       (Direction.distinctAxisDirectionalEnergyContraction
         (sucᵢ zeroᵢ) (sucᵢ (sucᵢ zeroᵢ))
-        (Martingale.average0 Side13.side13AverageData siteField) axis1≢axis2)
+        (Martingale.average0 Side13.side13AverageData field) axis1≢axis2)
       (Direction.distinctAxisDirectionalEnergyContraction
-        zeroᵢ (sucᵢ (sucᵢ zeroᵢ)) siteField axis0≢axis2))
+        zeroᵢ (sucᵢ (sucᵢ zeroᵢ)) field axis0≢axis2))
 
-martingale3DirectionalEnergyBelow : ∀ siteField →
+martingale3DirectionalEnergyBelow : ∀ field →
   Direction.axisDirectionalEnergy (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
-    (Martingale.martingale3 Side13.side13AverageData siteField)
-  ≤ Direction.axisDirectionalEnergy (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) siteField
-martingale3DirectionalEnergyBelow siteField =
+    (Martingale.martingale3 Side13.side13AverageData field)
+  ≤ Direction.axisDirectionalEnergy (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) field
+martingale3DirectionalEnergyBelow field =
   subst
     (λ left →
-      left ≤ Direction.axisDirectionalEnergy (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) siteField)
+      left ≤ Direction.axisDirectionalEnergy (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) field)
     (sym (axisCenteringDirectionalEnergyExact
-      (Martingale.average012 Side13.side13AverageData siteField)
+      (Martingale.average012 Side13.side13AverageData field)
       (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))))
     (ℚP.≤-trans
       (Direction.distinctAxisDirectionalEnergyContraction
         (sucᵢ (sucᵢ zeroᵢ)) (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
-        (Martingale.average01 Side13.side13AverageData siteField) axis2≢axis3)
+        (Martingale.average01 Side13.side13AverageData field) axis2≢axis3)
       (ℚP.≤-trans
         (Direction.distinctAxisDirectionalEnergyContraction
           (sucᵢ zeroᵢ) (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
-          (Martingale.average0 Side13.side13AverageData siteField) axis1≢axis3)
+          (Martingale.average0 Side13.side13AverageData field) axis1≢axis3)
         (Direction.distinctAxisDirectionalEnergyContraction
-          zeroᵢ (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) siteField axis0≢axis3)))
+          zeroᵢ (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) field axis0≢axis3)))
 
 globalDirectionalEnergy : SiteField Side13.side13 → ℚ
-globalDirectionalEnergy siteField =
-  Direction.axisDirectionalEnergy zeroᵢ siteField
-  + (Direction.axisDirectionalEnergy (sucᵢ zeroᵢ) siteField
-  + (Direction.axisDirectionalEnergy (sucᵢ (sucᵢ zeroᵢ)) siteField
-  + Direction.axisDirectionalEnergy (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) siteField))
+globalDirectionalEnergy field =
+  Direction.axisDirectionalEnergy zeroᵢ field
+  + (Direction.axisDirectionalEnergy (sucᵢ zeroᵢ) field
+  + (Direction.axisDirectionalEnergy (sucᵢ (sucᵢ zeroᵢ)) field
+  + Direction.axisDirectionalEnergy (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) field))
 
-martingaleDirectionalEnergyContraction : ∀ siteField →
-  martingaleDirectionalEnergySum siteField ≤ globalDirectionalEnergy siteField
-martingaleDirectionalEnergyContraction siteField =
+martingaleDirectionalEnergyContraction : ∀ field →
+  martingaleDirectionalEnergySum field ≤ globalDirectionalEnergy field
+martingaleDirectionalEnergyContraction field =
   ℚP.+-mono-≤
     (subst
-      (λ value → value ≤ Direction.axisDirectionalEnergy zeroᵢ siteField)
-      (sym (martingale0DirectionalEnergyExact siteField)) ℚP.≤-refl)
+      (λ value → value ≤ Direction.axisDirectionalEnergy zeroᵢ field)
+      (sym (martingale0DirectionalEnergyExact field)) ℚP.≤-refl)
     (ℚP.+-mono-≤
-      (martingale1DirectionalEnergyBelow siteField)
+      (martingale1DirectionalEnergyBelow field)
       (ℚP.+-mono-≤
-        (martingale2DirectionalEnergyBelow siteField)
-        (martingale3DirectionalEnergyBelow siteField)))
+        (martingale2DirectionalEnergyBelow field)
+        (martingale3DirectionalEnergyBelow field)))
 
 path13GlobalPoincare :
-  ∀ siteField → Martingale.GlobalMeanZero Side13.side13AverageData siteField →
-  LDL.oneEighteenth * Norm.globalNormSq siteField
-  ≤ globalDirectionalEnergy siteField
-path13GlobalPoincare siteField meanZero =
+  ∀ field → Martingale.GlobalMeanZero Side13.side13AverageData field →
+  LDL.oneEighteenth * Norm.globalNormSq field
+  ≤ globalDirectionalEnergy field
+path13GlobalPoincare field meanZero =
   ℚP.≤-trans
-    (martingalePoincareBeforeEnergyContraction siteField meanZero)
-    (martingaleDirectionalEnergyContraction siteField)
+    (martingalePoincareBeforeEnergyContraction field meanZero)
+    (martingaleDirectionalEnergyContraction field)
 
 path13FourAxisPhysicalPoincareLevel : ProofLevel
 path13FourAxisPhysicalPoincareLevel = machineChecked

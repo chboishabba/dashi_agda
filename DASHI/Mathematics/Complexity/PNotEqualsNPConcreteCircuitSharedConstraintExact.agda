@@ -88,10 +88,10 @@ chainGateConstraint :
   Cook.BooleanFormula
 chainGateConstraint gate =
   equivalenceFormula
-    (Cook.formulaVar (gateOutputIndex gate))
+    (Cook.variable (gateOutputIndex gate))
     (Cook.conjunction
-      (Cook.formulaVar (gateSourceIndex gate))
-      (Cook.formulaVar (gateSourceIndex gate)))
+      (Cook.variable (gateSourceIndex gate))
+      (Cook.variable (gateSourceIndex gate)))
 
 ------------------------------------------------------------------------
 -- Each gate constraint has constant syntax size 13.
@@ -197,9 +197,9 @@ literalFor :
   Bool →
   Cook.BooleanFormula
 literalFor index true =
-  Cook.formulaVar index
+  Cook.variable index
 literalFor index false =
-  Cook.negate (Cook.formulaVar index)
+  Cook.negate (Cook.variable index)
 
 chainOutputIndex : Nat → Nat
 chainOutputIndex zero =

@@ -42,7 +42,7 @@ open FiniteVacuumPolarization public
 
 PolarizationCoefficientExtractor :
   ∀ {Background Direction Scalar Momentum} →
-  FiniteVacuumPolarization Background Direction Scalar Momentum → Set
+  FiniteVacuumPolarization Background Direction Scalar Momentum → Set₁
 PolarizationCoefficientExtractor {Direction = Direction} {Scalar = Scalar} tensor =
   (Direction → Direction → Scalar) → Scalar
 

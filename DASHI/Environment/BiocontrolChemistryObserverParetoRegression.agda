@@ -1,7 +1,5 @@
 module DASHI.Environment.BiocontrolChemistryObserverParetoRegression where
 
-open import DASHI.Core.Prelude
-
 import DASHI.Core.AdmissibleConsumerMDLHyperfabricExact as MDL
 import DASHI.Core.IntersectionalNonFactorability as NonFactor
 import DASHI.Environment.BiocontrolChemistry369IndexExact as ChemistryIndex

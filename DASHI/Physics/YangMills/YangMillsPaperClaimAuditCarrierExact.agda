@@ -107,6 +107,14 @@ open PaperClaimAudit public
 -- Fail-closed promotion rules.
 ------------------------------------------------------------------------
 
+bibliographicStatusIsNotEvidence :
+  VenueStatus ≡ EvidenceKind → ⊥
+bibliographicStatusIsNotEvidence ()
+
+theorySignatureIsNotOperatorSignature :
+  TheorySignature ≡ OperatorSignature → ⊥
+theorySignatureIsNotOperatorSignature ()
+
 numericalEvidenceIsNotFormalProof :
   numericalResidual ≡ formalKernelProof → ⊥
 numericalEvidenceIsNotFormalProof ()

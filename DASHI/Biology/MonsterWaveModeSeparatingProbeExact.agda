@@ -27,8 +27,7 @@ module DASHI.Biology.MonsterWaveModeSeparatingProbeExact where
 -- a physical geometry probe; period-three arithmetic is not enough.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong)
+open import Agda.Builtin.Equality using (_≡_; refl; cong)
 open import Data.Empty using (⊥)
 
 import DASHI.Biology.MonsterSubgroupBranchingBenchmarksExact as Monster

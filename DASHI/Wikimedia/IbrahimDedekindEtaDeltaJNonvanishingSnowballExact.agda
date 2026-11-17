@@ -212,7 +212,7 @@ redirectDoesNotCreateEntityIdentity : RedirectCreatesQidIdentity → ⊥
 redirectDoesNotCreateEntityIdentity ()
 
 conditionalDoesNotMeanConcreteComplete : ConditionalQuotientInvariantMeansConcreteJComplete → ⊥
-conditionalDoesNotMeanConcreteComplete ()
+conditionalDoesNotMeanConcreteJComplete ()
 
 ------------------------------------------------------------------------
 -- Snowball consequences.

@@ -118,8 +118,6 @@ record ContextualDialecticRoleBoundary : Set where
     roleMayChangeWithComparisonFrameIsTrue :
       roleMayChangeWithComparisonFrame ≡ true
 
-open ContextualDialecticRoleBoundary public
-
 canonicalContextualDialecticRoleBoundary : ContextualDialecticRoleBoundary
 canonicalContextualDialecticRoleBoundary =
   contextual-dialectic-role-boundary

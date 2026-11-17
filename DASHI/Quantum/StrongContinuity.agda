@@ -5,7 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; _∷_; [])
 
-open import DASHI.Physics.Closure.QuantumCarrierCore using (WaveLift)
+open import DASHI.Unifier using (WaveLift)
 open import DASHI.Quantum.GNSUniversalProperty using
   (GNSUniversalPropertyWitness; canonicalGNSUniversalPropertyWitness)
 open import DASHI.Quantum.SelfAdjointColimitGenerator using

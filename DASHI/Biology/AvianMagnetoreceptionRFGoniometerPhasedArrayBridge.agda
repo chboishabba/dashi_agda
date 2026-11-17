@@ -68,7 +68,7 @@ canonicalApparatusBiologyBoundaries =
   ∷ noApparatusChoiceIdentifiesReceptorMechanism
   ∷ []
 
-record AvianMagnetoreceptionRFGoniometerPhasedArrayBridge : Set₁ where
+record AvianMagnetoreceptionRFGoniometerPhasedArrayBridge : Set where
   field
     perturbationReceipt :
       Bio.AvianMagneticFieldPerturbationReceipt

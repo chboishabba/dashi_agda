@@ -11,8 +11,7 @@ open import DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact using (sq)
 open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier
 open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact
 open import DASHI.Physics.YangMills.BalabanPath4PhysicalFibreMatchExact using
-  (fourSide; index0; index1; index2; index3; isolateFourthFromZero;
-   dropTrailingZero4; dropTrailingZero3)
+  (fourSide; index0; index1; index2; index3; isolateFourthFromZero)
 open import DASHI.Physics.YangMills.BalabanPath4GeneratedLDLCertificate
 
 ------------------------------------------------------------------------
@@ -93,12 +92,8 @@ zeroMeanPhysicalNormMatchesGenerated fieldValue axis transverse meanZero =
         + (sq (fieldValue (insertAxis axis index2 transverse))
         + (sq fourth + 0ℚ)))
         ≡ path4NormSq (zeroMeanPath4Coordinates fieldValue axis transverse))
-      (sym (zeroMeanFourthCoordinate fieldValue axis transverse meanZero))
-      (dropTrailingZero4
-        (sq (fieldValue (insertAxis axis index0 transverse)))
-        (sq (fieldValue (insertAxis axis index1 transverse)))
-        (sq (fieldValue (insertAxis axis index2 transverse)))
-        (sq (lastCoordinate (zeroMeanPath4Coordinates fieldValue axis transverse)))))
+      (zeroMeanFourthCoordinate fieldValue axis transverse meanZero)
+      (ℚRing.solve-∀))
 
 zeroMeanPhysicalEnergyMatchesGenerated :
   ∀ fieldValue axis transverse →
@@ -120,17 +115,8 @@ zeroMeanPhysicalEnergyMatchesGenerated fieldValue axis transverse meanZero =
             (fourth - fieldValue (insertAxis axis index2 transverse))
           + 0ℚ))
         ≡ path4Energy (zeroMeanPath4Coordinates fieldValue axis transverse))
-      (sym (zeroMeanFourthCoordinate fieldValue axis transverse meanZero))
-      (dropTrailingZero3
-        (sq
-          (fieldValue (insertAxis axis index1 transverse)
-          - fieldValue (insertAxis axis index0 transverse)))
-        (sq
-          (fieldValue (insertAxis axis index2 transverse)
-          - fieldValue (insertAxis axis index1 transverse)))
-        (sq
-          (lastCoordinate (zeroMeanPath4Coordinates fieldValue axis transverse)
-          - fieldValue (insertAxis axis index2 transverse)))))
+      (zeroMeanFourthCoordinate fieldValue axis transverse meanZero)
+      (ℚRing.solve-∀))
 
 zeroMeanPhysicalFibrePoincare :
   ∀ fieldValue axis transverse →

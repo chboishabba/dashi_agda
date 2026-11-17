@@ -56,7 +56,7 @@ record AcceptingWellFormedRun
     (machine : Local.ConcreteTapeMachine)
     (start : Local.TapeRow machine)
     (rows : List (Local.TapeRow machine))
-    (finish : Local.TapeRow machine) : Set₁ where
+    (finish : Local.TapeRow machine) : Set where
   field
     initial :
       InitialInteriorRow machine start

@@ -42,31 +42,31 @@ import DASHI.Wikimedia.IbrahimMonster3BMathlibCharacterDeterminationInteropExact
 ------------------------------------------------------------------------
 
 correctedLeafState : Frontier.StoneVonNeumannProofLeaf → Frontier.LeafState
-correctedLeafState Frontier.constructCentralExtensionCarrier = Frontier.leafClosed
-correctedLeafState Frontier.proveFiniteHeisenbergGroupLaws = Frontier.leafClosed
-correctedLeafState Frontier.proveGlobalCommutatorNondegeneracy = Frontier.leafClosed
-correctedLeafState Frontier.constructSchrodingerFunctionModule = Frontier.leafClosed
-correctedLeafState Frontier.deriveModulationPointProjectors = Frontier.leafClosed
-correctedLeafState Frontier.proveProjector729AndOffPointSemantics = Frontier.leafClosed
-correctedLeafState Frontier.constructNonzeroCyclotomicInverse = Frontier.leafClosed
-correctedLeafState Frontier.extractDeltaLineFromNonzeroInvariantSubspace = Frontier.leafClosed
-correctedLeafState Frontier.proveTranslationOrbitReachesEveryDeltaLine = Frontier.leafClosed
-correctedLeafState Frontier.proveDeltaBasisSpansCarrier = Frontier.leafClosed
-correctedLeafState Frontier.proveTranslatedDeltaOrbitSpansCarrier = Frontier.leafClosed
-correctedLeafState Frontier.proveWitnessedIrreducibility = Frontier.leafClosed
-correctedLeafState Frontier.extractNonzeroCoordinateFromNonzeroVector = Frontier.leafClosed
-correctedLeafState Frontier.proveSchrodingerIrreducible = Frontier.leafClosed
-correctedLeafState Frontier.proveFixedCentralCharacterUniqueness = Frontier.leafOpen
-correctedLeafState Frontier.identifyCertifiedMonster729Constituent = Frontier.leafBlocked
+correctedLeafState Frontier.constructCentralExtensionCarrier = Frontier.closed
+correctedLeafState Frontier.proveFiniteHeisenbergGroupLaws = Frontier.closed
+correctedLeafState Frontier.proveGlobalCommutatorNondegeneracy = Frontier.closed
+correctedLeafState Frontier.constructSchrodingerFunctionModule = Frontier.closed
+correctedLeafState Frontier.deriveModulationPointProjectors = Frontier.closed
+correctedLeafState Frontier.proveProjector729AndOffPointSemantics = Frontier.closed
+correctedLeafState Frontier.constructNonzeroCyclotomicInverse = Frontier.closed
+correctedLeafState Frontier.extractDeltaLineFromNonzeroInvariantSubspace = Frontier.closed
+correctedLeafState Frontier.proveTranslationOrbitReachesEveryDeltaLine = Frontier.closed
+correctedLeafState Frontier.proveDeltaBasisSpansCarrier = Frontier.closed
+correctedLeafState Frontier.proveTranslatedDeltaOrbitSpansCarrier = Frontier.closed
+correctedLeafState Frontier.proveWitnessedIrreducibility = Frontier.closed
+correctedLeafState Frontier.extractNonzeroCoordinateFromNonzeroVector = Frontier.closed
+correctedLeafState Frontier.proveSchrodingerIrreducible = Frontier.closed
+correctedLeafState Frontier.proveFixedCentralCharacterUniqueness = Frontier.open
+correctedLeafState Frontier.identifyCertifiedMonster729Constituent = Frontier.blocked
 
 nonzeroCoordinateLeafClosed :
   correctedLeafState Frontier.extractNonzeroCoordinateFromNonzeroVector
-  ≡ Frontier.leafClosed
+  ≡ Frontier.closed
 nonzeroCoordinateLeafClosed = refl
 
 schrodingerIrreducibilityLeafClosed :
   correctedLeafState Frontier.proveSchrodingerIrreducible
-  ≡ Frontier.leafClosed
+  ≡ Frontier.closed
 schrodingerIrreducibilityLeafClosed = refl
 
 ------------------------------------------------------------------------
@@ -84,12 +84,12 @@ highestImpactStructuralLeafAfterWitness =
   Frontier.proveFixedCentralCharacterUniqueness
 
 highestImpactStructuralLeafAfterWitnessIsOpen :
-  correctedLeafState highestImpactStructuralLeafAfterWitness ≡ Frontier.leafOpen
+  correctedLeafState highestImpactStructuralLeafAfterWitness ≡ Frontier.open
 highestImpactStructuralLeafAfterWitnessIsOpen = refl
 
 certifiedMonster729IdentificationStillBlocked :
   correctedLeafState Frontier.identifyCertifiedMonster729Constituent
-  ≡ Frontier.leafBlocked
+  ≡ Frontier.blocked
 certifiedMonster729IdentificationStillBlocked = refl
 
 characterInteropFrontier :

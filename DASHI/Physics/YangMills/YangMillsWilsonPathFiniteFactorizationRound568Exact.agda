@@ -12,8 +12,7 @@ module DASHI.Physics.YangMills.YangMillsWilsonPathFiniteFactorizationRound568Exa
 -- This is generic lattice-gauge algebra, not a new YM analytic estimate.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong)
+open import Agda.Builtin.Equality using (_≡_; refl; cong)
 open import Relation.Binary.PropositionalEquality using (sym)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel

@@ -295,11 +295,14 @@ decimalPullbackConstantOnFibre :
     {left right : DecimalAddress (suc r)} →
   prefix left ≡ prefix right →
   Tower.pullbackObservable
-    {tower = decimalResolutionTower} {r} observable left
+    {tower = decimalResolutionTower} observable left
   ≡ Tower.pullbackObservable
-      {tower = decimalResolutionTower} {r} observable right
-decimalPullbackConstantOnFibre {r} observable proof =
-  cong observable proof
+      {tower = decimalResolutionTower} observable right
+decimalPullbackConstantOnFibre observable proof =
+  Tower.pullbackConstantOnFibre
+    {tower = decimalResolutionTower}
+    observable
+    proof
 
 ------------------------------------------------------------------------
 -- Boundary: keep numeric sequence, state cardinality, and typed J semantics

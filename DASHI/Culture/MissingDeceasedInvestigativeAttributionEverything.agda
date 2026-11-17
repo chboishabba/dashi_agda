@@ -21,6 +21,3 @@ import DASHI.Physics.ExoticGravity.LiTorrPRB1992AttributedSourceExact
 import DASHI.Physics.ExoticGravity.LiTorrTheorySourceDiligenceProofSearchExact
 import DASHI.Physics.ExoticGravity.NingLiYBCOGravityConstraintBidiExact
 import DASHI.Physics.ExoticGravity.NingLiNASACooperativeAgreementNCC8124Exact
-
--- Source-scoped 2026-11-17 video aggregator; no roster/source promotion.
-import DASHI.Culture.AmyEskridgeVideoEvidenceEverything

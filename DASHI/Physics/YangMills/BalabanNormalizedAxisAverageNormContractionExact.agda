@@ -33,6 +33,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
+import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using
   (cong; cong₂; subst; sym; trans)
 
@@ -42,7 +43,6 @@ import DASHI.Physics.YangMills.BalabanOpaqueGlobalAlgebraExact as OpaqueAlgebra
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact using
   (sq; squareNonnegative; baseBelowBasePlusRemainder)
-open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (Axis4)
 open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier
 open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact
 open import DASHI.Physics.YangMills.BalabanPhysicalAxisPartitionExact
@@ -78,15 +78,15 @@ sumRationalNonnegative (value ∷ values) term pointwise =
       (sumRationalNonnegative values term pointwise))
 
 globalNormSq : ∀ {L} → SiteField L → ℚ
-globalNormSq siteField = globalBlockInner siteField siteField
+globalNormSq field = globalBlockInner field field
 
-globalNormSqNonnegative : ∀ {L} (siteField : SiteField L) →
-  0ℚ ≤ globalNormSq siteField
-globalNormSqNonnegative {L} siteField =
+globalNormSqNonnegative : ∀ {L} (field : SiteField L) →
+  0ℚ ≤ globalNormSq field
+globalNormSqNonnegative {L} field =
   sumRationalNonnegative
     (physicalBlockSites L)
-    (λ site → sq (siteField site))
-    (λ site → squareNonnegative (siteField site))
+    (λ site → sq (field site))
+    (λ site → squareNonnegative (field site))
 
 ------------------------------------------------------------------------
 -- The finite L2 norm is literally a fibre observer.  Its concrete physical
@@ -114,15 +114,13 @@ globalNormRespectsPointwise :
 globalNormRespectsPointwise equality =
   FibreLift.atomicFamilyToGlobal globalNormObserverLift equality
 
-private
-  distribSubMult : ∀ a b c → (a - b) * c ≡ a * c - b * c
-  distribSubMult = ℚRing.solve-∀
-
 sumRationalSubtractLocal :
   ∀ {A : Set} (values : List A) (f g : A → ℚ) →
   sumRational values (λ value → f value - g value)
   ≡ sumRational values f - sumRational values g
-sumRationalSubtractLocal = Average.sumRationalSubtract
+sumRationalSubtractLocal [] f g = ℚRing.solve-∀
+sumRationalSubtractLocal (value ∷ values) f g
+  rewrite sumRationalSubtractLocal values f g = ℚRing.solve-∀
 
 innerSubtractLeft :
   ∀ {L} (left right test : SiteField L) →
@@ -134,7 +132,7 @@ innerSubtractLeft {L} left right test =
       (physicalBlockSites L)
       (λ site → (left site - right site) * test site)
       (λ site → left site * test site - right site * test site)
-      (λ site → distribSubMult (left site) (right site) (test site)))
+      (λ site → ℚRing.solve-∀))
     (sumRationalSubtractLocal
       (physicalBlockSites L)
       (λ site → left site * test site)
@@ -153,47 +151,43 @@ innerRespectsRightPointwise {L} left {right} {right′} equality =
 
 axisAverageFixedPointwise :
   ∀ {L} (dataSet : Average.NormalizedAxisAverageData L)
-    axis siteField →
+    axis field →
   FieldEqual
     (Average.axisAverage dataSet
-      (Average.axisAverage dataSet siteField axis) axis)
-    (Average.axisAverage dataSet siteField axis)
-axisAverageFixedPointwise dataSet axis siteField site =
-  Average.axisAverageIdempotent dataSet siteField axis site
+      (Average.axisAverage dataSet field axis) axis)
+    (Average.axisAverage dataSet field axis)
+axisAverageFixedPointwise dataSet axis field site =
+  Average.axisAverageIdempotent dataSet field axis site
 
 residualOrthogonalToAverage :
   ∀ {L} (dataSet : Average.NormalizedAxisAverageData L)
-    siteField axis →
+    field axis →
   globalBlockInner
-    (axisResidual dataSet siteField axis)
-    (Average.axisAverage dataSet siteField axis)
+    (axisResidual dataSet field axis)
+    (Average.axisAverage dataSet field axis)
   ≡ 0ℚ
-residualOrthogonalToAverage dataSet siteField axis =
+residualOrthogonalToAverage dataSet field axis =
   trans
     (innerSubtractLeft
-      siteField (Average.axisAverage dataSet siteField axis)
-      (Average.axisAverage dataSet siteField axis))
+      field (Average.axisAverage dataSet field axis)
+      (Average.axisAverage dataSet field axis))
     (trans
       (cong
         (λ value →
-          globalBlockInner siteField (Average.axisAverage dataSet siteField axis)
+          globalBlockInner field (Average.axisAverage dataSet field axis)
           - value)
-        (Average.axisAverageSelfAdjoint dataSet axis siteField
-          (Average.axisAverage dataSet siteField axis)))
+        (Average.axisAverageSelfAdjoint dataSet axis field
+          (Average.axisAverage dataSet field axis)))
       (trans
         (cong
           (λ value →
-            globalBlockInner siteField (Average.axisAverage dataSet siteField axis)
+            globalBlockInner field (Average.axisAverage dataSet field axis)
             - value)
-          (innerRespectsRightPointwise siteField
-            (axisAverageFixedPointwise dataSet axis siteField)))
+          (innerRespectsRightPointwise field
+            (axisAverageFixedPointwise dataSet axis field)))
         (OpaqueAlgebra.subtractSelfZero
-          (globalBlockInner siteField
-            (Average.axisAverage dataSet siteField axis)))))
-
-private
-  sqBinomial : ∀ a b → sq (a + b) ≡ sq a + (sq b + (1ℚ + 1ℚ) * (a * b))
-  sqBinomial = ℚRing.solve-∀
+          (globalBlockInner field
+            (Average.axisAverage dataSet field axis)))))
 
 twoFieldSquareExpansion :
   ∀ {L} (left right : SiteField L) →
@@ -206,97 +200,98 @@ twoFieldSquareExpansion {L} left right =
       (physicalBlockSites L)
       (λ site → sq (left site + right site))
       (λ site →
-        sq (left site) + (sq (right site)
-        + (1ℚ + 1ℚ) * (left site * right site)))
-      (λ site → sqBinomial (left site) (right site)))
+        sq (left site) + sq (right site)
+        + (1ℚ + 1ℚ) * (left site * right site))
+      (λ site → ℚRing.solve-∀))
     (trans
       (sumRationalAdd
         (physicalBlockSites L)
         (λ site → sq (left site))
         (λ site → sq (right site)
           + (1ℚ + 1ℚ) * (left site * right site)))
+      (trans
+        (cong₂ _+_ refl
+          (sumRationalAdd
+            (physicalBlockSites L)
+            (λ site → sq (right site))
+            (λ site → (1ℚ + 1ℚ) * (left site * right site))))
         (trans
-          (cong (λ rest → globalNormSq left + rest)
-            (sumRationalAdd
-              (physicalBlockSites L)
-              (λ site → sq (right site))
-              (λ site → (1ℚ + 1ℚ) * (left site * right site))))
-          (trans
-            (cong (λ rest → globalNormSq left + (globalNormSq right + rest))
+          (cong₂ _+_ refl
+            (cong₂ _+_ refl
               (sumRationalScale
                 (1ℚ + 1ℚ)
                 (physicalBlockSites L)
-                (λ site → left site * right site)))
-            (sym (ℚP.+-assoc
-              (globalNormSq left)
-              (globalNormSq right)
-              ((1ℚ + 1ℚ) * globalBlockInner left right))))))
+                (λ site → left site * right site))))
+          (ℚRing.solve-∀
+            (globalNormSq left)
+            (globalNormSq right)
+            (globalBlockInner left right)))))
 
 residualPlusAveragePointwise :
   ∀ {L} (dataSet : Average.NormalizedAxisAverageData L)
-    siteField axis →
+    field axis →
   FieldEqual
     (addField
-      (axisResidual dataSet siteField axis)
-      (Average.axisAverage dataSet siteField axis))
-    siteField
-residualPlusAveragePointwise dataSet siteField axis site =
+      (axisResidual dataSet field axis)
+      (Average.axisAverage dataSet field axis))
+    field
+residualPlusAveragePointwise dataSet field axis site =
   OpaqueAlgebra.subtractAddCancel
-    (siteField site)
-    (Average.axisAverage dataSet siteField axis site)
+    (field site)
+    (Average.axisAverage dataSet field axis site)
 
 axisAveragePythagoras :
   ∀ {L} (dataSet : Average.NormalizedAxisAverageData L)
-    siteField axis →
-  globalNormSq siteField
-  ≡ globalNormSq (axisResidual dataSet siteField axis)
-    + globalNormSq (Average.axisAverage dataSet siteField axis)
-axisAveragePythagoras dataSet siteField axis =
+    field axis →
+  globalNormSq field
+  ≡ globalNormSq (axisResidual dataSet field axis)
+    + globalNormSq (Average.axisAverage dataSet field axis)
+axisAveragePythagoras dataSet field axis =
   trans
     (sym (globalNormRespectsPointwise
-      (residualPlusAveragePointwise dataSet siteField axis)))
+      (residualPlusAveragePointwise dataSet field axis)))
     (trans
       (twoFieldSquareExpansion
-        (axisResidual dataSet siteField axis)
-        (Average.axisAverage dataSet siteField axis))
+        (axisResidual dataSet field axis)
+        (Average.axisAverage dataSet field axis))
       (trans
         (cong
           (λ cross →
-            globalNormSq (axisResidual dataSet siteField axis)
-            + globalNormSq (Average.axisAverage dataSet siteField axis)
+            globalNormSq (axisResidual dataSet field axis)
+            + globalNormSq (Average.axisAverage dataSet field axis)
             + (1ℚ + 1ℚ) * cross)
-          (residualOrthogonalToAverage dataSet siteField axis))
+          (residualOrthogonalToAverage dataSet field axis))
         (OpaqueAlgebra.dropScaledZero
-          (globalNormSq (axisResidual dataSet siteField axis)
-            + globalNormSq (Average.axisAverage dataSet siteField axis))
+          (globalNormSq (axisResidual dataSet field axis)
+            + globalNormSq (Average.axisAverage dataSet field axis))
           (1ℚ + 1ℚ))))
 
 axisAverageNormContraction :
   ∀ {L} (dataSet : Average.NormalizedAxisAverageData L)
-    siteField axis →
-  globalNormSq (Average.axisAverage dataSet siteField axis)
-  ≤ globalNormSq siteField
-axisAverageNormContraction dataSet siteField axis =
+    field axis →
+  globalNormSq (Average.axisAverage dataSet field axis)
+  ≤ globalNormSq field
+axisAverageNormContraction dataSet field axis =
   let
     pythagorasAverageFirst :
-      globalNormSq siteField
-      ≡ globalNormSq (Average.axisAverage dataSet siteField axis)
-        + globalNormSq (axisResidual dataSet siteField axis)
+      globalNormSq field
+      ≡ globalNormSq (Average.axisAverage dataSet field axis)
+        + globalNormSq (axisResidual dataSet field axis)
     pythagorasAverageFirst =
       trans
-        (axisAveragePythagoras dataSet siteField axis)
+        (axisAveragePythagoras dataSet field axis)
         (OpaqueAlgebra.swapSum
-          (globalNormSq (axisResidual dataSet siteField axis))
-          (globalNormSq (Average.axisAverage dataSet siteField axis)))
+          (globalNormSq (axisResidual dataSet field axis))
+          (globalNormSq (Average.axisAverage dataSet field axis)))
   in
   subst
     (λ upper →
-      globalNormSq (Average.axisAverage dataSet siteField axis) ≤ upper)
+      globalNormSq (Average.axisAverage dataSet field axis) ≤ upper)
     (sym pythagorasAverageFirst)
     (baseBelowBasePlusRemainder
-      (globalNormSq (Average.axisAverage dataSet siteField axis))
-      (globalNormSq (axisResidual dataSet siteField axis))
-      (globalNormSqNonnegative (axisResidual dataSet siteField axis)))
+      (globalNormSq (Average.axisAverage dataSet field axis))
+      (globalNormSq (axisResidual dataSet field axis))
+      (globalNormSqNonnegative (axisResidual dataSet field axis)))
 
 normalizedAxisAveragePythagorasLevel : ProofLevel
 normalizedAxisAveragePythagorasLevel = machineChecked

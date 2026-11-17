@@ -30,7 +30,7 @@ _∘_ :
 RightInverse :
   ∀ {f c}
   {Fine : Set f} {Coarse : Set c} →
-  (Fine → Coarse) → (Coarse → Fine) → Set c
+  (Fine → Coarse) → (Coarse → Fine) → Set (f ⊔ c)
 RightInverse Q S = ∀ coarse → Q (S coarse) ≡ coarse
 
 Surjective :

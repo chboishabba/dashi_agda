@@ -1,7 +1,6 @@
 module DASHI.ComputerScience.HelloWorldEncodedWordMachineExact where
 
 open import DASHI.Core.Prelude
-open import Agda.Builtin.Nat using (_==_)
 
 import DASHI.ComputerScience.HelloWorldFibreExact as Hello
 
@@ -251,17 +250,12 @@ canonicalFetchTraceExact = refl
 -- Explicit refinement back to semantic Hello World.
 ------------------------------------------------------------------------
 
-listEqual : List Nat → List Nat → Bool
-listEqual [] [] = true
-listEqual (x ∷ xs) (y ∷ ys) with x == y
-... | true = listEqual xs ys
-... | false = false
-listEqual _ _ = false
-
 recogniseHelloWorldCodes : OutputTape → Hello.Output
-recogniseHelloWorldCodes codes with listEqual codes helloWorldCodes
-... | true = Hello.helloWorld ∷ []
-... | false = []
+recogniseHelloWorldCodes
+  (72 ∷ 101 ∷ 108 ∷ 108 ∷ 111 ∷ 44 ∷ 32 ∷
+   87 ∷ 111 ∷ 114 ∷ 108 ∷ 100 ∷ 33 ∷ []) =
+  Hello.helloWorld ∷ []
+recogniseHelloWorldCodes codes = []
 
 encodedWordMachineRefinesSemanticHelloWorld :
   recogniseHelloWorldCodes (outputTape canonicalFinalState)
@@ -313,5 +307,3 @@ canonicalEncodedWordMachineBoundary : EncodedWordMachineBoundary
 canonicalEncodedWordMachineBoundary =
   encodedWordMachineBoundary
     true true true true true false false false false
-
-open EncodedWordMachineBoundary public

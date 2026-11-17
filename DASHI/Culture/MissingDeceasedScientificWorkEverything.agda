@@ -171,6 +171,3 @@ import DASHI.Physics.Materials.FangDainingActiveMechanicalMetamaterialBidiExact
 import DASHI.Physics.Materials.RezaFangAlloyMetamaterialDiscriminationExact
 import DASHI.Physics.Materials.FusionPropulsionMaterialSurvivabilityCrossPollinationExact
 import DASHI.GameTheory.FengYangheMilitaryAIGameStatisticsBidiExact
-
--- Source-scoped 2026-11-17 video aggregator; no roster/source promotion.
-import DASHI.Culture.AmyEskridgeVideoEvidenceEverything

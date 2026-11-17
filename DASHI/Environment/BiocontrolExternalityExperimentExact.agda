@@ -335,7 +335,7 @@ record OxygenCollisionReceipt : Set where
 canonicalOxygenCollision : OxygenCollisionReceipt
 canonicalOxygenCollision = oxygenCollisionReceipt refl (λ ())
 
-record OxygenDiscriminatorReceipt : Set₁ where
+record OxygenDiscriminatorReceipt : Set where
   constructor oxygenDiscriminatorReceipt
   field
     separates :
@@ -364,7 +364,7 @@ record RestorationCollisionReceipt : Set where
 canonicalRestorationCollision : RestorationCollisionReceipt
 canonicalRestorationCollision = restorationCollisionReceipt refl (λ ())
 
-record RestorationDiscriminatorReceipt : Set₁ where
+record RestorationDiscriminatorReceipt : Set where
   constructor restorationDiscriminatorReceipt
   field
     separates :
@@ -391,7 +391,7 @@ record ReboundCollisionReceipt : Set where
 canonicalReboundCollision : ReboundCollisionReceipt
 canonicalReboundCollision = reboundCollisionReceipt refl (λ ())
 
-record ReboundDiscriminatorReceipt : Set₁ where
+record ReboundDiscriminatorReceipt : Set where
   constructor reboundDiscriminatorReceipt
   field
     separates :
@@ -420,7 +420,7 @@ record AgentInteractionCollisionReceipt : Set where
 canonicalAgentInteractionCollision : AgentInteractionCollisionReceipt
 canonicalAgentInteractionCollision = agentInteractionCollisionReceipt refl (λ ())
 
-record AgentInteractionDiscriminatorReceipt : Set₁ where
+record AgentInteractionDiscriminatorReceipt : Set where
   constructor agentInteractionDiscriminatorReceipt
   field
     separates :

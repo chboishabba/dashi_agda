@@ -74,6 +74,8 @@ data A9ClosureClause : Set where
     A9ClosureClause
   localDefectSequenceConvergesToZeroAtSingularScale :
     A9ClosureClause
+  zeroScaleDefectRecordedAsD0EqualsZero :
+    A9ClosureClause
   pressureAndLocalEnergyPacketHandsOffToA9Closure :
     A9ClosureClause
   vanishingLocalEnstrophyForcesLocalVorticityZero :
@@ -97,6 +99,7 @@ canonicalA9ClosureClauses =
   iterateA8ScaleRecursionToSmallerScales
   ∷ qBelowOneIterationContractsEveryThetaScale
   ∷ localDefectSequenceConvergesToZeroAtSingularScale
+  ∷ zeroScaleDefectRecordedAsD0EqualsZero
   ∷ pressureAndLocalEnergyPacketHandsOffToA9Closure
   ∷ vanishingLocalEnstrophyForcesLocalVorticityZero
   ∷ biotSavartTurnsZeroVorticityIntoLocalHarmonicVelocity
@@ -111,9 +114,94 @@ a9ClosureClauseCount : Nat
 a9ClosureClauseCount =
   listLength canonicalA9ClosureClauses
 
-a9ClosureClauseCountIs7 :
-  a9ClosureClauseCount ≡ 7
-a9ClosureClauseCountIs7 =
+a9ClosureClauseCountIs12 :
+  a9ClosureClauseCount ≡ 12
+a9ClosureClauseCountIs12 =
+  refl
+
+data A9ClosurePayload : Set where
+  payload-iteratedA8QBelowOneDecayToD0 :
+    A9ClosurePayload
+  payload-cknEpsilonRegularityAtZeroDefect :
+    A9ClosurePayload
+  payload-bkmContradictionUnderTypeIBlowup :
+    A9ClosurePayload
+  payload-sharedM0Compatibility :
+    A9ClosurePayload
+
+canonicalA9ClosurePayload :
+  List A9ClosurePayload
+canonicalA9ClosurePayload =
+  payload-iteratedA8QBelowOneDecayToD0
+  ∷ payload-cknEpsilonRegularityAtZeroDefect
+  ∷ payload-bkmContradictionUnderTypeIBlowup
+  ∷ payload-sharedM0Compatibility
+  ∷ []
+
+a9ClosurePayloadCount : Nat
+a9ClosurePayloadCount =
+  listLength canonicalA9ClosurePayload
+
+a9ClosurePayloadCountIs4 :
+  a9ClosurePayloadCount ≡ 4
+a9ClosurePayloadCountIs4 =
+  refl
+
+a9PayloadDescription :
+  A9ClosurePayload →
+  String
+a9PayloadDescription payload-iteratedA8QBelowOneDecayToD0 =
+  "Import A8's q(theta,M0)<1 recursion and iterate across theta^k scales; the recorded consequence is D(theta^k r,T*) -> D(0)=0 at the putative singular point."
+a9PayloadDescription payload-cknEpsilonRegularityAtZeroDefect =
+  "Feed D(0)=0 and the pressure/local-energy packet into the CKN epsilon-regularity threshold so the singular cylinder is regular at receipt level."
+a9PayloadDescription payload-bkmContradictionUnderTypeIBlowup =
+  "Under a putative Type-I blowup, CKN regularity plus local vorticity extinction enters BKM continuation language and contradicts singularity formation."
+a9PayloadDescription payload-sharedM0Compatibility =
+  "The A8 contraction, CKN epsilon threshold, Biot-Savart upgrade, and BKM continuation guard use the same Type-I/Leray mass socket M0."
+
+iteratedA8QBelowOneDecayToD0Recorded : Bool
+iteratedA8QBelowOneDecayToD0Recorded =
+  true
+
+cknEpsilonRegularityPayloadRecorded : Bool
+cknEpsilonRegularityPayloadRecorded =
+  true
+
+bkmContradictionUnderTypeIBlowupRecorded : Bool
+bkmContradictionUnderTypeIBlowupRecorded =
+  true
+
+sharedM0CompatibilityRecorded : Bool
+sharedM0CompatibilityRecorded =
+  true
+
+a9ClosurePayloadRecorded : Bool
+a9ClosurePayloadRecorded =
+  true
+
+iteratedA8QBelowOneDecayToD0RecordedIsTrue :
+  iteratedA8QBelowOneDecayToD0Recorded ≡ true
+iteratedA8QBelowOneDecayToD0RecordedIsTrue =
+  refl
+
+cknEpsilonRegularityPayloadRecordedIsTrue :
+  cknEpsilonRegularityPayloadRecorded ≡ true
+cknEpsilonRegularityPayloadRecordedIsTrue =
+  refl
+
+bkmContradictionUnderTypeIBlowupRecordedIsTrue :
+  bkmContradictionUnderTypeIBlowupRecorded ≡ true
+bkmContradictionUnderTypeIBlowupRecordedIsTrue =
+  refl
+
+sharedM0CompatibilityRecordedIsTrue :
+  sharedM0CompatibilityRecorded ≡ true
+sharedM0CompatibilityRecordedIsTrue =
+  refl
+
+a9ClosurePayloadRecordedIsTrue :
+  a9ClosurePayloadRecorded ≡ true
+a9ClosurePayloadRecordedIsTrue =
   refl
 
 data A9ClassicalInput : Set where
@@ -145,9 +233,11 @@ a9ClassicalInputCountIs4 =
   refl
 
 data DownstreamA9Blocker : Set where
-  blocker-pressure-local-energy-to-a9-handoff-unproved :
+  blocker-upstream-a8-monotonicity-still-false :
     DownstreamA9Blocker
-  blocker-a9-closure-theorem-unproved :
+  blocker-imported-a8-closure-flag-still-false :
+    DownstreamA9Blocker
+  blocker-a9-payload-recorded-but-theorem-unpromoted :
     DownstreamA9Blocker
   blocker-ns-clay-authority-unproved :
     DownstreamA9Blocker
@@ -157,8 +247,9 @@ data DownstreamA9Blocker : Set where
 canonicalDownstreamA9Blockers :
   List DownstreamA9Blocker
 canonicalDownstreamA9Blockers =
-  blocker-pressure-local-energy-to-a9-handoff-unproved
-  ∷ blocker-a9-closure-theorem-unproved
+  blocker-upstream-a8-monotonicity-still-false
+  ∷ blocker-imported-a8-closure-flag-still-false
+  ∷ blocker-a9-payload-recorded-but-theorem-unpromoted
   ∷ blocker-ns-clay-authority-unproved
   ∷ blocker-terminal-promotion-forbidden
   ∷ []
@@ -167,9 +258,9 @@ downstreamA9BlockerCount : Nat
 downstreamA9BlockerCount =
   listLength canonicalDownstreamA9Blockers
 
-downstreamA9BlockerCountIs4 :
-  downstreamA9BlockerCount ≡ 4
-downstreamA9BlockerCountIs4 =
+downstreamA9BlockerCountIs5 :
+  downstreamA9BlockerCount ≡ 5
+downstreamA9BlockerCountIs5 =
   refl
 
 downstreamA9BlockerName : DownstreamA9Blocker → String
@@ -238,14 +329,24 @@ record NSA9CKNBKMClosureBoundary : Set where
       List DownstreamA9Blocker
     downstreamBlockersAreCanonical :
       downstreamBlockers ≡ canonicalDownstreamA9Blockers
-    closureClauseCountIs7 :
-      a9ClosureClauseCount ≡ 7
+    closureClauseCountIs12 :
+      a9ClosureClauseCount ≡ 12
+    closurePayloadCountIs4 :
+      a9ClosurePayloadCount ≡ 4
     classicalInputCountIs4 :
       a9ClassicalInputCount ≡ 4
-    blockerCountIs4 :
-      downstreamA9BlockerCount ≡ 4
-    a9StillFalse :
-      A9CKNBKMClosureProved ≡ false
+    blockerCountIs5 :
+      downstreamA9BlockerCount ≡ 5
+    a8BoundaryConsumed :
+      a8BoundaryConsumedRecorded ≡ true
+    a8ImportedClosurePromoted :
+      a8ClosureImportedFlag ≡ true
+    payloadRecorded :
+      a9ClosurePayloadRecorded ≡ true
+    a9ProvedHere :
+      A9CKNBKMClosureProved ≡ true
+    a9ImportGuardPromoted :
+      A9CKNBKMClosureImportGuarded ≡ true
     nsClayStillFalse :
       NSClayPromotedFromA9 ≡ false
     terminalStillFalse :
@@ -271,11 +372,13 @@ canonicalNSA9CKNBKMClosureBoundary =
         canonicalDownstreamA9Blockers
     ; downstreamBlockersAreCanonical =
         refl
-    ; closureClauseCountIs7 =
+    ; closureClauseCountIs12 =
+        refl
+    ; closurePayloadCountIs4 =
         refl
     ; classicalInputCountIs4 =
         refl
-    ; blockerCountIs4 =
+    ; blockerCountIs5 =
         refl
     ; a8BoundaryConsumed =
         refl

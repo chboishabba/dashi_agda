@@ -260,25 +260,25 @@ data StoneVonNeumannProofLeaf : Set where
   proveFixedCentralCharacterUniqueness : StoneVonNeumannProofLeaf
   identifyCertifiedMonster729Constituent : StoneVonNeumannProofLeaf
 
-data LeafState : Set where leafClosed leafOpen leafBlocked : LeafState
+data LeafState : Set where closed open blocked : LeafState
 
 leafState : StoneVonNeumannProofLeaf → LeafState
-leafState constructCentralExtensionCarrier = leafClosed
-leafState proveFiniteHeisenbergGroupLaws = leafClosed
-leafState proveGlobalCommutatorNondegeneracy = leafClosed
-leafState constructSchrodingerFunctionModule = leafClosed
-leafState deriveModulationPointProjectors = leafClosed
-leafState proveProjector729AndOffPointSemantics = leafClosed
-leafState constructNonzeroCyclotomicInverse = leafClosed
-leafState extractDeltaLineFromNonzeroInvariantSubspace = leafClosed
-leafState proveTranslationOrbitReachesEveryDeltaLine = leafClosed
-leafState proveDeltaBasisSpansCarrier = leafClosed
-leafState proveTranslatedDeltaOrbitSpansCarrier = leafClosed
-leafState proveWitnessedIrreducibility = leafClosed
-leafState extractNonzeroCoordinateFromNonzeroVector = leafOpen
-leafState proveSchrodingerIrreducible = leafBlocked
-leafState proveFixedCentralCharacterUniqueness = leafBlocked
-leafState identifyCertifiedMonster729Constituent = leafBlocked
+leafState constructCentralExtensionCarrier = closed
+leafState proveFiniteHeisenbergGroupLaws = closed
+leafState proveGlobalCommutatorNondegeneracy = closed
+leafState constructSchrodingerFunctionModule = closed
+leafState deriveModulationPointProjectors = closed
+leafState proveProjector729AndOffPointSemantics = closed
+leafState constructNonzeroCyclotomicInverse = closed
+leafState extractDeltaLineFromNonzeroInvariantSubspace = closed
+leafState proveTranslationOrbitReachesEveryDeltaLine = closed
+leafState proveDeltaBasisSpansCarrier = closed
+leafState proveTranslatedDeltaOrbitSpansCarrier = closed
+leafState proveWitnessedIrreducibility = closed
+leafState extractNonzeroCoordinateFromNonzeroVector = open
+leafState proveSchrodingerIrreducible = blocked
+leafState proveFixedCentralCharacterUniqueness = blocked
+leafState identifyCertifiedMonster729Constituent = blocked
 
 data Requires : StoneVonNeumannProofLeaf → StoneVonNeumannProofLeaf → Set where
   orbitNeedsExtraction :
@@ -306,5 +306,5 @@ highestImpactStructuralLeaf : StoneVonNeumannProofLeaf
 highestImpactStructuralLeaf = extractNonzeroCoordinateFromNonzeroVector
 
 highestImpactStructuralLeafIsOpen :
-  leafState highestImpactStructuralLeaf ≡ leafOpen
+  leafState highestImpactStructuralLeaf ≡ open
 highestImpactStructuralLeafIsOpen = refl

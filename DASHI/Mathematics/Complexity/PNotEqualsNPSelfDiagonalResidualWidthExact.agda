@@ -32,8 +32,7 @@ module DASHI.Mathematics.Complexity.PNotEqualsNPSelfDiagonalResidualWidthExact w
 -- on that path the literal sum of the per-layer widths is a valid lower bound.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (_≢_)
+open import Agda.Builtin.Equality using (_≡_; _≢_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Data.Empty using (⊥; ⊥-elim)
 open import Data.Fin.Base using (Fin)

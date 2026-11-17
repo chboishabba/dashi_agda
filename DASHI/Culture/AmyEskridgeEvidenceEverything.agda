@@ -57,6 +57,3 @@ import DASHI.Culture.AmyEskridgeOSINTChronologyCorroborationExact
 import DASHI.Culture.AmyEskridgeCorporateInstitutionalChronologySnowballExact
 import DASHI.Culture.AmyEskridgePostDeathTransitionSnowballWeldExact
 import DASHI.Culture.RocketdyneAmyMissingScientistsQualificationCrossPollinationExact
-
--- Source-scoped 2026-11-17 video aggregator; no roster/source promotion.
-import DASHI.Culture.AmyEskridgeVideoEvidenceEverything

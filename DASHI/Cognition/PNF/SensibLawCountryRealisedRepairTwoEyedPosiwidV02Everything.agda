@@ -49,11 +49,11 @@ terraNulliusJuridicalNonHumanityIsNotMerelyMetaphor =
 ------------------------------------------------------------------------
 
 historicalLandControlWasOpen :
-  Continuity.currentCoordinateState Continuity.landCountryControl ≡ Continuity.openState
+  Continuity.currentCoordinateState Continuity.landCountryControl ≡ Continuity.open
 historicalLandControlWasOpen = refl
 
 historicalCommunityAuthorityWasOpen :
-  Continuity.currentCoordinateState Continuity.communityAuthorityBearing ≡ Continuity.openState
+  Continuity.currentCoordinateState Continuity.communityAuthorityBearing ≡ Continuity.open
 historicalCommunityAuthorityWasOpen = refl
 
 v02DoesNotRewriteHistoricalState :

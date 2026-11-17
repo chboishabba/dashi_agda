@@ -148,10 +148,10 @@ certifyDeferred receipt proof backendUsed status =
   certified-known-theorem receipt proof backendUsed status
 
 data AlignmentResidual : Set where
-  missingSourceStatement     : AlignmentResidual
+  missingSourceStatement : AlignmentResidual
   missingHypothesisAlignment : AlignmentResidual
   missingQuantifierAlignment : AlignmentResidual
-  missingDomainAlignment     : AlignmentResidual
+  missingDomainAlignment : AlignmentResidual
   missingUniformityAlignment : AlignmentResidual
   missingConclusionAlignment : AlignmentResidual
 
@@ -198,13 +198,13 @@ data ProofWorkload : Set where
   tinyGlue moderateReplay heavyReplay : ProofWorkload
 
 data SchedulerAction : Set where
-  researchMathematics     : SchedulerAction
-  auditTranscription      : SchedulerAction
+  researchMathematics : SchedulerAction
+  auditTranscription : SchedulerAction
   verifyEmpiricalEvidence : SchedulerAction
-  runLocalAgda            : SchedulerAction
-  sendExternalLean        : SchedulerAction
-  sendAristotleLean       : SchedulerAction
-  alreadyClosed           : SchedulerAction
+  runLocalAgda : SchedulerAction
+  sendExternalLean : SchedulerAction
+  sendAristotleLean : SchedulerAction
+  alreadyClosed : SchedulerAction
 
 scheduleAction :
   DebtClass -> StatementStatus -> LocalResourceClass -> ProofWorkload -> SchedulerAction

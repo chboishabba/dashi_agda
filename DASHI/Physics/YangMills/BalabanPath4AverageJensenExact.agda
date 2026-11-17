@@ -4,7 +4,7 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Integer.Base using (+_)
 open import Data.Rational using
-  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; -_; _≤_; _/_; NonNegative; nonNegative)
+  (ℚ; 0ℚ; 1ℚ; _+_; _*_; _≤_; _/_; NonNegative; nonNegative)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (subst; sym)
@@ -50,22 +50,11 @@ sixPairDifferenceSquares a b c d =
   + (sqDiff b c
   + (sqDiff b d + sqDiff c d))))
 
-fourPointJensenIdentityRaw : ∀ a b c d →
-  (a * a) + ((b * b) + ((c * c) + (d * d)))
-  ≡ fourℚ * ((quarter * (a + (b + (c + d)))) * (quarter * (a + (b + (c + d)))))
-    + quarter *
-      (((a - b) * (a - b))
-      + (((a - c) * (a - c))
-      + (((a - d) * (a - d))
-      + (((b - c) * (b - c))
-      + (((b - d) * (b - d)) + ((c - d) * (c - d)))))))
-fourPointJensenIdentityRaw = ℚRing.solve-∀
-
 fourPointJensenIdentity : ∀ a b c d →
   fourPointSquareEnergy a b c d
   ≡ fourℚ * sq (fourPointAverage a b c d)
     + quarter * sixPairDifferenceSquares a b c d
-fourPointJensenIdentity = fourPointJensenIdentityRaw
+fourPointJensenIdentity = ℚRing.solve-∀
 
 sixPairDifferenceSquaresNonnegative : ∀ a b c d →
   0ℚ ≤ sixPairDifferenceSquares a b c d
@@ -137,13 +126,11 @@ record FourValues : Set where
 
 open FourValues public
 
-groupAverageEnergy : FourValues → ℚ
 groupAverageEnergy group =
   fourℚ * sq
     (fourPointAverage
       (value0 group) (value1 group) (value2 group) (value3 group))
 
-groupOriginalEnergy : FourValues → ℚ
 groupOriginalEnergy group =
   fourPointSquareEnergy
     (value0 group) (value1 group) (value2 group) (value3 group)

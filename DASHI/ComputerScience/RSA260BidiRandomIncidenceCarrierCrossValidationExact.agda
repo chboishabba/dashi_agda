@@ -29,8 +29,8 @@ import DASHI.ComputerScience.RSA260BidiCarrierPreparationCrossValidationExact as
 -- proof that the consumer is impossible.
 ------------------------------------------------------------------------
 
-priorCarrierPreparationBoundary : Prior.CarrierPreparationInterpretationBoundary
-priorCarrierPreparationBoundary = Prior.canonicalCarrierPreparationInterpretationBoundary
+priorCarrierPreparationBoundary : Prior.CarrierPreparationCrossBoundary
+priorCarrierPreparationBoundary = Prior.canonicalCarrierPreparationCrossBoundary
 
 ------------------------------------------------------------------------
 -- Snowball attribution: identity/provenance coordinates, not proof.

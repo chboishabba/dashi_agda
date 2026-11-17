@@ -1,6 +1,6 @@
 module DASHI.GameTheory.Nash1950CorrectedExistenceAlignmentExact where
 
-open import DASHI.Core.Prelude hiding (_⊔_)
+open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 open import Agda.Primitive using (Level; lzero; lsuc; _⊔_)
 

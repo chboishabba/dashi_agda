@@ -1,77 +1,4 @@
-
-
-## AO Fleet max-cut convergence — 2026-10-29
-
-Golden Agda is authoritative.
-
-- [x] Normalize donor PR #1415 world/macro/sub-eigen/fibre types onto current master.
-- [x] Extend the hierarchy to exact eigenspace / primary topic / subtopic / fibre / goal levels.
-- [x] Represent only K = 50 or K = 100 as supported spectral truncation choices.
-- [x] Require an MP basis witness to carry covariance/eigenvalue/bulk-edge/orthonormality evidence without hidden floating-point assumptions.
-- [x] Reject hex literals, pointer-like memory addresses, raw UI tokens, and raw DOM tokens before topic admission.
-- [x] Normalize donor PR #1416 threshold/Pareto/noTypedMeet machinery onto current master.
-- [x] Normalize donor PR #1417 conductor width machinery onto current master.
-- [x] Add a total Fin 20 schedule with all slots occupied.
-- [x] Require every scheduled goal to be unblocked and Pareto eligible.
-- [x] Require pairwise noTypedMeet evidence for every two distinct worker slots.
-- [x] Add a finite combinatorial Max Cut owner with vertex partition, crossing-edge, discrete Laplacian, and GW/SDP receipt surfaces.
-- [x] Reuse existing YM gauge/Hodge commutator and NS exact commutator owners through explicit non-promoting adapters.
-- [x] Wire new owners through Interop and Fleet TOE aggregates.
-- [x] Mirror the golden public contract in dashi_lean4.
-- [x] Implement executable discriminator tests in dashiBRAIN.
-- [ ] Verify zero postulates, zero holes, zero TERMINATING/NON_TERMINATING, zero NO_POSITIVITY_CHECK, and zero ESD edits.
-- [ ] Append changelogs only after code and tests are in place.
-## 2026-11-08 V0 paired orbifold correction
-
-- [x] Original tagged state `Fixed ⊎ Twisted` has an exact normalization/idempotence and injectivity criterion but **cannot** be the linear FLM direct sum: old disjoint embeddings cannot both preserve the VOA zero (proved in source).
-- [x] Existing `SelectedPairedGradedModule` constructs the correct `Fixed × Twisted` graded carrier using original fixed-point VOA operations and native twisted-even inputs.
-- [x] `VNaturalOriginalPairedFourSectorModesExact` constructs the canonical original paired-mode expansion, fixes **FF** from the original fixed VOA, and requires **FT** agreement with the original twisted-module mode.
-- [ ] Original twisted-even source linear/grade operations and closure; source-specific **TF/TT** intertwiners; cross-sector Jacobi/locality/translation/conformal laws; genuine original Griess mode-one; FLM same-object theorem and Y443 action equality.
-- [ ] Do not report old tagged `OriginalIdentificationInjective` alone as full linear V0 completion.
-
----
-
 # FOR TODO GO TO '# TODO'
-
-
-- [x] P2 Pareto: reuse the existing rational SU(2) literal path-holonomy pointwise algebra owner to construct `RationalSU2TraceGramBoundSource`, eliminating separate loop-specific Gram-boundedness inputs after one explicit trace-to-Gram interpretation.
-- [x] Reuse same canonical S2 carrier via `rationalSU2TraceBuildsCanonicalS2` so existing P2 selected-expectation-limit compilers consume the rational-trace producer directly.
-- [ ] Supply the physical `traceIsLiteralWilson` exact same-object equality on the selected physical Wilson family; a rational group trace alone cannot stand in for a separately selected observable.
-- [ ] Supply the *physical* same-family trace→Gram boundedness interpretation for the actual Wilson/Haar carrier; prove bounded product closure and literal-identity same-object equality, selected time-distance, and actual continuum-measure convergence. Rational quaternion traces alone do not instantiate that theory.
-
-
-
-- [x] Search physical rational SU(2) Wilson path owners and **reuse** `BalabanLiteralRationalSU2WilsonBoundedAlgebraExact` instead of a synthetic fixed-holonomy or duplicate trace proof.
-- [x] Derive canonical S2 literal loop and identity boundedness from the owned configuration-dependent path/one pointwise theorems under one exact same-object physical observable interpretation.
-- [ ] Extend pointwise product closure across the *actual* selected Gram bounded-observable algebra, or narrow the target to the literal Wilson image in a proof-preserving way; do not assume generic closure from a rational-image-only bound.
-
-
-
-### 2026-10-30 continuation: canonical native-P2 and P3 source archaeology
-- [x] Search native source and compiler files beyond PR descriptions; identify preexisting `BalabanLiteralWilsonNativePhysicalMeasureExact` and `YMClayLiteralWilsonP2NativeMeasureExact` as stronger owners.
-- [x] Compile native bounded loop/unit/product fields into the historical S2 record from the *same* native physical measure; the generic trace-to-Gram adapter is not mandatory.
-- [x] Keep P2 finite expectation limits separate from support-distance: the native P2 proof is valid without the P1 spatial/time-distance witness.
-- [x] Correct the canonical normalized rational-SU(2) cylinder `groupRank` to 1 rather than misidentifying it with defining representation dimension 2.
-- [x] Search P3 existing reconstructed-spectrum owners before new constructions: `YangMillsDirectSourceOSReconstructedSpectrumH3Exact`, `YangMillsClayCMP119RealSameOSH3Exact`.
-- [ ] Physically construct `NativeWilsonPreferredPhysicalMeasureInputs` (actual normalization/limit/tail inputs); prove the selected family and current CMP119 physical Wilson carrier agree.
-- [ ] Physically instantiate P3's R281 spectrum as **the** actual H2 reconstructed Hamiltonian's spectrum; the current H3 records are exact typing and conditional construction compilers.
-
-
-
-- [x] Reuse the R444/R445 marked moment source via `nativeWilsonPreferredFromMarked` and `nativeWilsonP2FromMarkedSource` to construct all three P2 limits without reselecting moments, on the same native T5 family.
-- [ ] Discharge the *actual* R445 `boundedObservableTail` / `momentRealization` source conditions for the selected four-dimensional CMP119 Wilson theory and identify its probability/measure carrier with the native rational-Wilson implementation.
-- [ ] Prove the physical equality to the selected real CMP119 H2/H3 OS family; QID/DOI or source similarity is not an equality proof.
-
-
-## 2026-10-30 YM direct-route R320/R313/R333 max-cut
-
-- [x] Search golden Agda and Lean owner files as well as live PRs before choosing route; prefer existing `YMClayRouteSH1DirectSelectedMarkedDecayExact`, R313 and R333.
-- [x] Reduce Route-S H1-to-gap compiler graph by a **typed direct composition** without manufacturing selected-source inequalities.
-- [ ] Physically inhabit `R320.DirectSelectedT5MarkedDecayPayment` on the selected literal CMP116 Wilson family (P1); retain Bałaban source attribution.
-- [ ] Physically construct R333 literal time/Wilson and finite-to-continuum expectation-limit inputs (P2), then the same reconstructed H_OS spectral pairing (P3).
-- [ ] Compare Route-S versus F1/F3/F4 strong path as separate Pareto alternatives; do not double-count P_a/E_a, dense-L2 norm calibration or Delta*a_k when Route-S is selected.
-- [ ] Prove local-QFT/nontriviality and all-compact-simple-group Clay endpoint separately; never promote receipt flags or imported analytic statements to kernel proof authority.
-- [ ] Exact-head Agda kernel check for the new direct bridge, and Lean semantic parity against the existing literal-Wilson source/OS proof. CI intentionally not required for this iteration.
 
 Current NS Gate 1 / Gate 2 roadmap note for `2026-07-02`:
 - Gate 1 finite-shell scouting is no longer the bottleneck. The live helical
@@ -1597,6 +1524,57 @@ Current reconciled NS status for `2026-06-15`:
 
 
 # P0 BLOCKERS
+
+• Six-lane weak-coupling polymer convergence tranche is implemented.
+
+  Status:
+
+  - adds
+    `DASHI.Physics.Closure.YMLatticeAnimalCountingBoundReceipt`,
+    `DASHI.Physics.Closure.YMWeakCouplingRatioBoundReceipt`,
+    `DASHI.Physics.Closure.YMGeometricTailHalfBoundReceipt`,
+    `DASHI.Physics.Closure.YMPolymerWeakCouplingSumBoundReceipt`,
+    `DASHI.Physics.Closure.YMP7WeakCouplingPolymerConvergenceReceipt`,
+    and `scripts/ym_weak_coupling_polymer_sum_bound.py`;
+  - threads the weak-coupling package into
+    `DASHI.Physics.Closure.YMActualP7WilsonPolymerActivityReceipt`;
+  - records the `d=4` lattice-animal count surface `N_n <= (8e)^n`, the
+    tuned ratio surface `a = c_K / (4 g^2)` plus the corrected p=7
+    threshold `c_K >= (4/3) log(24e)`, the
+    geometric-tail `<= 1/2` surface, the grouped weighted origin-containing
+    polymer sum surface, and the bridge back into the same-prime `p=7`
+    Wilson activity lane;
+  - now closes the exact lane-local `p=7` local KP surface in
+    `DASHI.Physics.Closure.YMActualP7WilsonPolymerActivityReceipt` with
+    target `rho = 1/2`, while keeping continuum YM, mass gap, Clay YM, and
+    terminal promotion false/open;
+  - next YM action: keep pushing downstream from the now-closed p=7 local KP
+    surface into the real continuum H3a/H3b intake chain instead of widening
+    support-only weak-coupling surfaces.
+
+• Six-lane Balaban YM boundary tranche is implemented.
+
+  Status:
+
+  - adds
+    `DASHI.Physics.Closure.YMActualPolymerActivityCandidateReceipt`,
+    `DASHI.Physics.Closure.YMPolymerActivityStrictAbsorptionBridgeReceipt`,
+    `DASHI.Physics.Closure.YMKPUniformVolumeInductionBoundaryReceipt`,
+    `DASHI.Physics.Closure.YMBalabanRGInductionCandidateReceipt`,
+    `DASHI.Physics.Closure.YMH3bVacuumProjectorNoSpectralPollutionBoundaryReceipt`,
+    and
+    `DASHI.Physics.Closure.YMThermodynamicOSWightmanOperatorBoundaryReceipt`;
+  - extends `DASHI.Physics.Closure.Paper3YMDependencyGraphReceipt` and
+    `DASHI.Physics.Closure.YMFinalStateReceipt` with those fail-closed YM/Balaban
+    surfaces;
+  - now records lane-local closure for the strict-absorption bridge, the
+    uniform-volume KP lane, and the Balaban RG transfer lane, while keeping
+    H3a/H3b continuum transfer, thermodynamic limit, OS/Wightman/operator
+    convergence, uniform mass gap, continuum uniqueness, Clay YM, and terminal
+    promotion false/open;
+  - next Balaban action: spend the next six lanes on the true H3a/H3b,
+    thermodynamic-limit, and OS/reflection-positivity gates instead of adding
+    more receipt-only Balaban packaging.
 
 • Candidate-receipt / probe-hygiene tranche is implemented.
 
@@ -17303,26 +17281,3 @@ Cleanup
 - [ ] Next adapter/generalization lane: lift the same shared Stage12 contract
   beyond the p13 closure row without breaking the candidate-only/fail-closed
   boundary.
-# NS R588 continuation — 2026-09-10
-
-- [x] Split literal R545 spectator forcing rows with the physical deep-FL mask;
-  do not identify the doubly weighted R440 aggregate with that row.
-- [ ] Bound R590's literal deep forcing half uniformly, retaining spectator
-  summation and its resolvent dependence; bound the complementary signed term.
-
-- [x] Construct R588's signed-cross record from R589's literal masses and
-  explicit payment inequalities, deriving the decomposition equality internally.
-
-- [x] Implement complementary physical shell masks and exact signed
-  deep/shoulder recombination for R589 FL and HH.
-
-- [x] Construct the literal R440 outer three-class signed-cross split, retaining
-  the complete amplitude aggregate in each class contribution.
-- [x] Statically review the finite-fold proof without running Agda. Local import
-  paths resolve and `git diff --check` passes; typechecking remains deferred.
-- [x] Refine the actual R589 outer FL/HH contributions into deep and shoulder
-  contributions; draft `literalCriticalConeDecomposition589` recombines them.
-- [ ] Establish the physical payment theorem on these precise masks (including
-  the conservative HH minimum-shell convention), then construct R588's record.
-- [ ] Prove physical deep-FL/deep-HH/core payments and their cutoff-uniform
-  transport; the finite split alone does not close R588 or Clay.

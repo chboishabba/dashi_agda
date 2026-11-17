@@ -1,6 +1,6 @@
 module DASHI.GameTheory.FiniteTwoStrategyReplicatorExact where
 
-open import DASHI.Core.Prelude hiding (_+_; _*_; _≤_; _<_)
+open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)

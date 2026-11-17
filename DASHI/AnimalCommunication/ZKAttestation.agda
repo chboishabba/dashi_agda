@@ -12,13 +12,15 @@ open import DASHI.AnimalCommunication.PoseMDL
 -- must prove.  It does not postulate cryptographic hiding, binding, soundness,
 -- or zero knowledge: those belong to a concrete proof-system instance.
 record CommitmentFamily
-  (V T P M S Digest : Set) : Set₁ where
+  (Video DogTrack PoseRibbon MotifProgram Summary Digest : Set) : Set₁ where
   field
-    commitVideo   : V → Digest
-    commitTrack   : T → Digest
-    commitPose    : P → Digest
-    commitProgram : M → Digest
-    commitSummary : S → Digest
+    commitVideo   : Video → Digest
+    commitTrack   : DogTrack → Digest
+    commitPose    : PoseRibbon → Digest
+    commitProgram : MotifProgram → Digest
+    commitSummary : Summary → Digest
+
+open CommitmentFamily public
 
 record PipelineVersions : Set where
   field
@@ -27,6 +29,8 @@ record PipelineVersions : Set where
     compilerVersion   : Nat
     dictionaryVersion : Nat
     publisherVersion  : Nat
+
+open PipelineVersions public
 
 record DogVideoPipeline (M : PoseMDLSpec) : Set₁ where
   open PoseMDLSpec M
@@ -43,6 +47,8 @@ record DogVideoPipeline (M : PoseMDLSpec) : Set₁ where
     quality : PoseRibbon → Nat
     threshold : Nat
 
+open DogVideoPipeline public
+
 record PrivateTrace (M : PoseMDLSpec) (E : DogVideoPipeline M) : Set where
   open PoseMDLSpec M
   open DogVideoPipeline E
@@ -53,6 +59,8 @@ record PrivateTrace (M : PoseMDLSpec) (E : DogVideoPipeline M) : Set where
     dictionary : Dictionary
     program    : MotifProgram
     summary    : Summary
+
+open PrivateTrace public
 
 record StageCommitments
   {M : PoseMDLSpec}
@@ -67,6 +75,8 @@ record StageCommitments
     programCommitment : Digest
     summaryCommitment : Digest
 
+open StageCommitments public
+
 record PublicClaim
   {M : PoseMDLSpec}
   (E : DogVideoPipeline M)
@@ -77,6 +87,8 @@ record PublicClaim
     versions    : PipelineVersions
     releasedSummary : Summary
     residualBudget  : Nat
+
+open PublicClaim public
 
 -- The complete staged relation:
 -- C0 video -> C1 dog track -> C2 pose ribbon -> C3 motif program -> C4 summary.
@@ -122,6 +134,8 @@ record Attests
     residual-gate :
       residualCost (canonicalize poseRibbon) program ≤ residualBudget
     public-output : summary ≡ releasedSummary
+
+open Attests public
 
 -- The public verifier's mathematical statement is existential: there is a
 -- private trace satisfying the fixed relation.  The witness itself need not

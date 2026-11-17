@@ -25,15 +25,10 @@ import DASHI.Quantum.ExhaustiveEverything
 import DASHI.Geometry.Everything
 import DASHI.Foundations.Everything
 import DASHI.Analysis.Everything
-import DASHI.GameTheory.Everything
 
 -- Natural / physical / applied domains.
-import DASHI.AnimalCommunication.Everything
-import DASHI.Astronomy.Everything
 import DASHI.Biology.DomainEverything
 import DASHI.Chemistry.Everything
-import DASHI.Environment.Everything
-import DASHI.Geology.Everything
 import DASHI.Physics.ExhaustiveEverything
 import DASHI.Papers.Everything
 import DASHI.Applied.Everything
@@ -42,15 +37,11 @@ import DASHI.Perception.Everything
 
 -- Social / cultural / governance domains.
 import DASHI.Culture.Everything
-import DASHI.Economics.Everything
-import DASHI.Finance.Everything
-import DASHI.Law.Everything
 import DASHI.Social.Everything
 import DASHI.Governance.Everything
 import DASHI.Regulation.Everything
 import DASHI.Philosophy.Everything
 import DASHI.Music.Everything
-import DASHI.Trading.Everything
 
 -- Knowledge-source / Wikimedia domain.
 import DASHI.Wikimedia.Everything
@@ -58,7 +49,6 @@ import DASHI.Wikimedia.Everything
 -- Systems / tooling / cross-domain domains.
 import DASHI.Context.Everything
 import DASHI.Interop.Everything
-import DASHI.Programmes.Everything
 import DASHI.Promotion.Everything
 import DASHI.Codec.Everything
 import DASHI.Compression.Everything

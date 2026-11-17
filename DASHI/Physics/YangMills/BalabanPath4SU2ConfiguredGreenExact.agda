@@ -100,35 +100,20 @@ literalConfiguredPhysicalGreenCertificate = record
 -- Rational linearity and exact matrix action of the Green operator.
 ------------------------------------------------------------------------
 
-mulCommAssocRaw : ∀ c k s → k * (c * s) ≡ c * (k * s)
-mulCommAssocRaw = ℚRing.solve-∀
-
-zeroMulLeftRaw : ∀ x → 0ℚ * x ≡ 0ℚ
-zeroMulLeftRaw = ℚRing.solve-∀
-
-mulCommRaw : ∀ a b → a * b ≡ b * a
-mulCommRaw = ℚRing.solve-∀
-
-scalarGreenScale : ∀ coefficient (source : DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact.SiteField side4) row →
+scalarGreenScale : ∀ coefficient source row →
   scalarGreen (λ site → coefficient * source site) row
   ≡ coefficient * scalarGreen source row
 scalarGreenScale coefficient source row =
   trans
-    (siteSum4Cong
-      (λ column →
-        scalarGreenKernel (subtractSite4 row column) * (coefficient * source column))
-      (λ column →
-        coefficient * (scalarGreenKernel (subtractSite4 row column) * source column))
-      (λ column →
-        mulCommAssocRaw
-          coefficient
-          (scalarGreenKernel (subtractSite4 row column))
-          (source column)))
+    (siteSum4Cong _ _ (λ column → ℚRing.solve-∀
+      coefficient
+      (scalarGreenKernel (subtractSite4 row column))
+      (source column)))
     (sumRationalScale coefficient (physicalBlockSites side4)
       (λ column →
         scalarGreenKernel (subtractSite4 row column) * source column))
 
-configuredPhysicalGreenAdd : ∀ (left right : PhysicalSU2Tangent4) component bond →
+configuredPhysicalGreenAdd : ∀ left right component bond →
   configuredPhysicalGreen (addPhysical left right) component bond
   ≡ configuredPhysicalGreen left component bond
     + configuredPhysicalGreen right component bond
@@ -138,7 +123,7 @@ configuredPhysicalGreenAdd left right component (pair site bondAxis) =
     (componentScalarBondField right component bondAxis)
     site
 
-configuredPhysicalGreenScale : ∀ coefficient (source : PhysicalSU2Tangent4) component bond →
+configuredPhysicalGreenScale : ∀ coefficient source component bond →
   configuredPhysicalGreen (scalePhysical coefficient source) component bond
   ≡ coefficient * configuredPhysicalGreen source component bond
 configuredPhysicalGreenScale coefficient source component (pair site bondAxis) =
@@ -146,7 +131,7 @@ configuredPhysicalGreenScale coefficient source component (pair site bondAxis) =
     (componentScalarBondField source component bondAxis) site
 
 configuredPhysicalGreenRespectsPointwise :
-  ∀ {left right : PhysicalSU2Tangent4} →
+  ∀ {left right} →
   (∀ component bond → left component bond ≡ right component bond) →
   ∀ component bond →
   configuredPhysicalGreen left component bond
@@ -161,7 +146,7 @@ configuredPhysicalGreenZero : ∀ component bond →
 configuredPhysicalGreenZero component bond =
   trans
     (configuredPhysicalGreenScale 0ℚ zeroPhysical component bond)
-    (zeroMulLeftRaw (configuredPhysicalGreen zeroPhysical component bond))
+    (ℚRing.solve-∀)
 
 configuredPhysicalGreenSum :
   ∀ {Index : Set} (values : List Index)
@@ -183,7 +168,7 @@ configuredGreenOperatorMatrix row column =
   tangentToCoordinateVector
     (configuredPhysicalGreen (coordinateBasisTangent column)) row
 
-configuredGreenMatrixActsExactly : ∀ (tangent : PhysicalSU2Tangent4) (row : PhysicalSU2Coordinate4) →
+configuredGreenMatrixActsExactly : ∀ tangent row →
   applyMatrix
     physicalFiniteRationalCoordinates
     configuredGreenOperatorMatrix
@@ -200,10 +185,7 @@ configuredGreenMatrixActsExactly tangent (pair component bond) =
       (λ column →
         tangentToCoordinateVector tangent column
         * configuredPhysicalGreen (coordinateBasisTangent column) component bond)
-      (λ column →
-        mulCommRaw
-          (configuredPhysicalGreen (coordinateBasisTangent column) component bond)
-          (tangentToCoordinateVector tangent column)))
+      (λ column → ℚRing.solve-∀))
     (trans
       (sumRationalCong
         (coordinates physicalFiniteRationalCoordinates)
@@ -231,14 +213,6 @@ configuredGreenMatrixActsExactly tangent (pair component bond) =
                 (coordinateBasisTangent column))
             component bond))
         (configuredPhysicalGreenRespectsPointwise
-          {left =
-            sumPhysical
-              (coordinates physicalFiniteRationalCoordinates)
-              (λ column →
-                scalePhysical
-                  (tangentToCoordinateVector tangent column)
-                  (coordinateBasisTangent column))}
-          {right = tangent}
           (basisExpansionPointwise tangent)
           component bond)))
 

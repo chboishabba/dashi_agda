@@ -41,8 +41,8 @@ liftAboveGuard :
   ∀ {variables : Nat} →
   SAT.BooleanFormula variables →
   SAT.BooleanFormula (suc variables)
-liftAboveGuard (SAT.formulaVar index) =
-  SAT.formulaVar (Fin.suc index)
+liftAboveGuard (SAT.variable index) =
+  SAT.variable (Fin.suc index)
 liftAboveGuard (SAT.constant value) =
   SAT.constant value
 liftAboveGuard (SAT.negate formula) =
@@ -66,7 +66,7 @@ restrictLiftAboveGuard :
     (formula : SAT.BooleanFormula variables) →
   SAT.restrictHead bit (liftAboveGuard formula)
   ≡ formula
-restrictLiftAboveGuard bit (SAT.formulaVar index) =
+restrictLiftAboveGuard bit (SAT.variable index) =
   refl
 restrictLiftAboveGuard bit (SAT.constant value) =
   refl
@@ -96,7 +96,7 @@ rejectGuardRoot :
   SAT.BooleanFormula (suc variables)
 rejectGuardRoot payload =
   SAT.disjunction
-    (SAT.formulaVar Fin.zero)
+    (SAT.variable Fin.zero)
     (liftAboveGuard payload)
 
 falseWrapped :

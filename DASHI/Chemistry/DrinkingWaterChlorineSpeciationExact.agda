@@ -205,5 +205,3 @@ canonicalDrinkingWaterChlorineSpeciationBoundary : DrinkingWaterChlorineSpeciati
 canonicalDrinkingWaterChlorineSpeciationBoundary =
   drinkingWaterChlorineSpeciationBoundary
     false refl false refl false refl false refl false refl true refl
-
-open DrinkingWaterChlorineSpeciationBoundary public

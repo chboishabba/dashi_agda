@@ -6,8 +6,6 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
-open import Data.Rational as R using (ℚ; _/_)
-open import Data.Integer using (ℤ; +_)
 
 import DASHI.Core.AttributedSourceCore as Attribution
 import DASHI.Core.SnowballAttributionProvenanceInvariantExact as AttributionSnowball
@@ -52,18 +50,15 @@ regularC3PhaseCycleCancels :
   CycloLA.add C3.one (CycloLA.add C3.zeta C3.zetaSquared) ≡ C3.zero
 regularC3PhaseCycleCancels = CycloLA.zetaSumZero
 
-q65610 : ℚ
-q65610 = (+ 65610) R./ 1
-
 regularC3CancellationAt65610 :
   CycloLA.add
-    (C3.multiply C3.one (C3.embedRational q65610))
+    (C3.multiply C3.one (C3.embedRational 65610))
     (CycloLA.add
-      (C3.multiply C3.zeta (C3.embedRational q65610))
-      (C3.multiply C3.zetaSquared (C3.embedRational q65610)))
+      (C3.multiply C3.zeta (C3.embedRational 65610))
+      (C3.multiply C3.zetaSquared (C3.embedRational 65610)))
   ≡ C3.zero
 regularC3CancellationAt65610 =
-  CycloLA.phaseCycleSumTimes (C3.embedRational q65610)
+  CycloLA.phaseCycleSumTimes (C3.embedRational 65610)
 
 representationRegularMultiplicityIs65610 :
   Rep.regularBlockMultiplicity ≡ 65610

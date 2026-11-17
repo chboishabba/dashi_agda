@@ -12,9 +12,8 @@ module DASHI.Mathematics.Complexity.ConcreteTapeFixedDimensionDecodeExact where
 -- identically.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Data.Product using (_×_; _,_)
@@ -41,16 +40,16 @@ decodeCells :
     (Local.TapeCell
       (Local.State machine)
       (Local.Symbol machine))
-decodeCells {machine} stateCoverage symbolCoverage zero _ =
+decodeCells stateCoverage symbolCoverage zero CNF.[]ᵇ =
   []
 decodeCells {machine} stateCoverage symbolCoverage
     (suc count) bits =
-  Canonical.decodeCell {machine} stateCoverage symbolCoverage
+  Canonical.decodeCell stateCoverage symbolCoverage
       (Canonical.takeBits
         (Canonical.CellWidth machine)
         bits)
   ∷
-  decodeCells {machine} stateCoverage symbolCoverage count
+  decodeCells stateCoverage symbolCoverage count
     (Canonical.dropBits
       (Canonical.CellWidth machine)
       bits)
@@ -64,14 +63,18 @@ decodeCellsLength :
     (count : Nat)
     (bits : CNF.Bits (RowBitsWidth machine count)) →
   Canonical.listLength
-    (decodeCells {machine} stateCoverage symbolCoverage count bits)
+    (decodeCells stateCoverage symbolCoverage count bits)
   ≡ count
-decodeCellsLength {machine} stateCoverage symbolCoverage zero CNF.[]ᵇ =
+decodeCellsLength stateCoverage symbolCoverage zero CNF.[]ᵇ =
   refl
-decodeCellsLength {machine} stateCoverage symbolCoverage
-    (suc count) bits =
-  cong suc (decodeCellsLength {machine} stateCoverage symbolCoverage count
-    (Canonical.dropBits (Canonical.CellWidth machine) bits))
+decodeCellsLength stateCoverage symbolCoverage
+    (suc count) bits
+    rewrite decodeCellsLength
+      stateCoverage symbolCoverage count
+      (Canonical.dropBits
+        (Canonical.CellWidth _)
+        bits) =
+  refl
 
 decodeRow :
   ∀ {machine}
@@ -82,9 +85,9 @@ decodeRow :
     (count : Nat) →
   CNF.Bits (RowBitsWidth machine count) →
   Local.TapeRow machine
-decodeRow {machine} stateCoverage symbolCoverage count bits =
+decodeRow stateCoverage symbolCoverage count bits =
   Local.tape-row
-    (decodeCells {machine}
+    (decodeCells
       stateCoverage symbolCoverage count bits)
 
 record FixedTableauShape : Set where
@@ -110,16 +113,16 @@ decodeRows :
     (rows cols : Nat) →
   CNF.Bits (rows * RowBitsWidth machine cols) →
   List (Local.TapeRow machine)
-decodeRows {machine} stateCoverage symbolCoverage zero cols CNF.[]ᵇ =
+decodeRows stateCoverage symbolCoverage zero cols CNF.[]ᵇ =
   []
 decodeRows {machine} stateCoverage symbolCoverage
     (suc rows) cols bits =
-  decodeRow {machine} stateCoverage symbolCoverage cols
+  decodeRow stateCoverage symbolCoverage cols
       (Canonical.takeBits
         (RowBitsWidth machine cols)
         bits)
   ∷
-  decodeRows {machine} stateCoverage symbolCoverage rows cols
+  decodeRows stateCoverage symbolCoverage rows cols
     (Canonical.dropBits
       (RowBitsWidth machine cols)
       bits)
@@ -133,16 +136,20 @@ decodeRowsLength :
     (rows cols : Nat)
     (bits : CNF.Bits (rows * RowBitsWidth machine cols)) →
   Canonical.listLength
-    (decodeRows {machine}
+    (decodeRows
       stateCoverage symbolCoverage rows cols bits)
   ≡ rows
-decodeRowsLength {machine} stateCoverage symbolCoverage
+decodeRowsLength stateCoverage symbolCoverage
     zero cols CNF.[]ᵇ =
   refl
-decodeRowsLength {machine} stateCoverage symbolCoverage
-    (suc rows) cols bits =
-  cong suc (decodeRowsLength {machine} stateCoverage symbolCoverage rows cols
-    (Canonical.dropBits (RowBitsWidth machine cols) bits))
+decodeRowsLength stateCoverage symbolCoverage
+    (suc rows) cols bits
+    rewrite decodeRowsLength
+      stateCoverage symbolCoverage rows cols
+      (Canonical.dropBits
+        (RowBitsWidth _ cols)
+        bits) =
+  refl
 
 record FixedTransitionShape
     (machine : Local.ConcreteTapeMachine) : Set where
@@ -198,17 +205,17 @@ decodeTransition {machine}
     ; ruleOccurs =
         Selector.decodeRuleOccurs nonempty selectorBits
     ; before =
-        decodeRow {machine} stateCoverage symbolCoverage
+        decodeRow stateCoverage symbolCoverage
           (columnCount shape) beforeBits
     ; after =
-        decodeRow {machine} stateCoverage symbolCoverage
+        decodeRow stateCoverage symbolCoverage
           (columnCount shape) afterBits
     ; beforeWidth =
-        decodeCellsLength {machine}
+        decodeCellsLength
           stateCoverage symbolCoverage
           (columnCount shape) beforeBits
     ; afterWidth =
-        decodeCellsLength {machine}
+        decodeCellsLength
           stateCoverage symbolCoverage
           (columnCount shape) afterBits
     }

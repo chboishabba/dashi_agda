@@ -30,7 +30,6 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; _+_)
-open import Data.Product using (_,_; _×_)
 
 import Base369 as Base
 import DASHI.Cognition.RecursiveFibreTower as Tower
@@ -396,5 +395,3 @@ canonicalTernaryConjugacyBoundary =
     ; sevenMeansIrreducibleRepresentations = false
     ; sevenMeansIrreducibleRepresentationsIsFalse = refl
     }
-
-open TernaryConjugacyBoundary public

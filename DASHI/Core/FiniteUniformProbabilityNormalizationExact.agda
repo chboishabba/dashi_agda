@@ -35,34 +35,34 @@ open SameDenominatorLe public
 
 survivalDenominator :
   CountDecay.BlockSurvivalRecurrence → Nat → Nat
-survivalDenominator recurrence q =
-  CountDecay.powNat (CountDecay.branchFactor recurrence) q
-  * CountDecay.survivors recurrence 0
+survivalDenominator data q =
+  CountDecay.powNat (CountDecay.branchFactor data) q
+  * CountDecay.survivors data 0
 
 survivalFraction :
   CountDecay.BlockSurvivalRecurrence → Nat → FiniteFraction
-survivalFraction recurrence q =
+survivalFraction data q =
   finiteFraction
-    (CountDecay.survivors recurrence q)
-    (survivalDenominator recurrence q)
+    (CountDecay.survivors data q)
+    (survivalDenominator data q)
 
 envelopeFraction :
   CountDecay.BlockSurvivalRecurrence → Nat → FiniteFraction
-envelopeFraction recurrence q =
+envelopeFraction data q =
   finiteFraction
-    (CountDecay.powNat (CountDecay.contractionCount recurrence) q
-      * CountDecay.survivors recurrence 0)
-    (survivalDenominator recurrence q)
+    (CountDecay.powNat (CountDecay.contractionCount data) q
+      * CountDecay.survivors data 0)
+    (survivalDenominator data q)
 
 survivalFractionBelowEnvelope :
-  (recurrence : CountDecay.BlockSurvivalRecurrence) →
+  (data : CountDecay.BlockSurvivalRecurrence) →
   (q : Nat) →
   SameDenominatorLe
-    (survivalFraction recurrence q)
-    (envelopeFraction recurrence q)
-survivalFractionBelowEnvelope recurrence q =
+    (survivalFraction data q)
+    (envelopeFraction data q)
+survivalFractionBelowEnvelope data q =
   sameDenominatorLe refl
-    (CountDecay.survivorCountGeometricBound recurrence q)
+    (CountDecay.survivorCountGeometricBound data q)
 
 ------------------------------------------------------------------------
 -- For a binary hitting block of length m:

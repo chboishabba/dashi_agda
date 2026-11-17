@@ -51,10 +51,10 @@ pathRemainder : Path3 → ℚ
 pathRemainder path = sq (pathHighMode path)
 
 path3SpectralIdentityRaw : ∀ x0 x1 x2 →
-  ((1ℚ + 1ℚ) + 1ℚ) * (((x1 - x0) * (x1 - x0)) + ((x2 - x1) * (x2 - x1)))
-    + ((x0 + (x1 + x2)) * (x0 + (x1 + x2)))
-  ≡ ((1ℚ + 1ℚ) + 1ℚ) * ((x0 * x0) + ((x1 * x1) + (x2 * x2)))
-    + (((x0 - ((1ℚ + 1ℚ) * x1)) + x2) * ((x0 - ((1ℚ + 1ℚ) * x1)) + x2))
+  threeℚ * pathEdgeEnergy (path3 x0 x1 x2)
+    + sq (pathSum (path3 x0 x1 x2))
+  ≡ threeℚ * pathNormSq (path3 x0 x1 x2)
+    + pathRemainder (path3 x0 x1 x2)
 path3SpectralIdentityRaw = ℚRing.solve-∀
 
 path3SpectralIdentity : ∀ path →

@@ -194,12 +194,12 @@ coarseScalarAdjoint coarse (pair site bondAxis) =
   coarseField (coarse bondAxis) site
 
 scalarBlockProjection : RationalBondField4 → RationalBondField4
-scalarBlockProjection fld (pair site bondAxis) =
-  average0123 (bondComponent fld bondAxis) site
+scalarBlockProjection field (pair site bondAxis) =
+  average0123 (bondComponent field bondAxis) site
 
-scalarBlockAverageAdjointExact : (fine : RationalBondField4) (coarse : Axis4 → CoarseScalar4) →
-  scalarBondInner (bondComponent fine) (bondComponent (coarseScalarAdjoint coarse))
-  ≡ scalarBondInner (bondComponent (scalarBlockProjection fine)) (bondComponent (coarseScalarAdjoint coarse))
+scalarBlockAverageAdjointExact : ∀ fine coarse →
+  scalarBondInner fine (coarseScalarAdjoint coarse)
+  ≡ scalarBondInner (scalarBlockProjection fine) (coarseScalarAdjoint coarse)
 scalarBlockAverageAdjointExact fine coarse =
   sumRationalCong
     (allCyclicIndices four)
@@ -221,7 +221,7 @@ concreteCoarseInner left right =
     (literalBlockAverageAdjointQStar left)
     (literalBlockAverageAdjointQStar right)
 
-blockAverageAdjointExact : (fine : PhysicalSU2Tangent4) (coarse : CoarseSU2Bond4) →
+blockAverageAdjointExact : ∀ fine coarse →
   physicalTangentInner fine (literalBlockAverageAdjointQStar coarse)
   ≡ concreteCoarseInner (literalBlockAverageQ fine) coarse
 blockAverageAdjointExact fine coarse =
@@ -246,15 +246,12 @@ fineFluctuation : PhysicalSU2Tangent4 → PhysicalSU2Tangent4
 fineFluctuation tangent component bond =
   tangent component bond - fineProjection tangent component bond
 
-subAddCancelRaw : ∀ x y → (x - y) + y ≡ x
-subAddCancelRaw = ℚRing.solve-∀
-
 fineProjectionReconstruction : ∀ tangent component bond →
   fineFluctuation tangent component bond
     + fineProjection tangent component bond
   ≡ tangent component bond
 fineProjectionReconstruction tangent component bond =
-  subAddCancelRaw (tangent component bond) (fineProjection tangent component bond)
+  ℚRing.solve-∀
 
 average0123ResidualOrthogonal : ∀ siteField fixedField →
   (∀ axis site → axisAverage4 fixedField axis site ≡ fixedField site) →
@@ -272,10 +269,10 @@ average0123ResidualOrthogonal siteField fixedField fixed =
         (sym (average0123PairingExact siteField fixedField fixed)))
       (ℚP.+-inverseʳ (globalBlockInner siteField fixedField)))
 
-scalarBlockKernelOrthogonal : (fine : RationalBondField4) (coarse : Axis4 → CoarseScalar4) →
+scalarBlockKernelOrthogonal : ∀ fine coarse →
   scalarBondInner
-    (bondComponent (λ bond → fine bond - scalarBlockProjection fine bond))
-    (bondComponent (coarseScalarAdjoint coarse))
+    (λ bond → fine bond - scalarBlockProjection fine bond)
+    (coarseScalarAdjoint coarse)
   ≡ 0ℚ
 scalarBlockKernelOrthogonal fine coarse =
   trans
@@ -309,7 +306,7 @@ blockAverageKernelOrthogonal fine coarse =
           (fine component2) (coarse component2))
         (scalarBlockKernelOrthogonal
           (fine component3) (coarse component3))))
-    refl
+    (ℚRing.solve-∀)
 
 ------------------------------------------------------------------------
 -- Concrete zero, LiteralCoarseBlockData instance, and C1 coercivity on ker Q.
@@ -324,7 +321,7 @@ axisAverage4Zero axis site =
   trans
     (cong (quarter *_)
       (sumRationalZero (allCyclicIndices side4)))
-    refl
+    (ℚRing.solve-∀)
 
 zeroCoarseSU2Bond4 : CoarseSU2Bond4
 zeroCoarseSU2Bond4 component bondAxis =

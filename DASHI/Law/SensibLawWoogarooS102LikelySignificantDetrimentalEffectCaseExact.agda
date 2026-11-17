@@ -1,9 +1,9 @@
 module DASHI.Law.SensibLawWoogarooS102LikelySignificantDetrimentalEffectCaseExact where
 
-openStatus import DASHI.Core.Prelude
-openStatus import Agda.Builtin.Bool using (Bool; false; true)
-openStatus import Agda.Builtin.String using (String)
-openStatus import Data.Empty using (⊥)
+open import DASHI.Core.Prelude
+open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
 
 import DASHI.Core.AttributedSourceCore as Source
 import DASHI.Law.SensibLawWoogarooS102StatutorySpatialRelationExact as S102
@@ -34,7 +34,7 @@ data PropositionStatus : Set where
   sourcePaid : PropositionStatus
   stronglySupported : PropositionStatus
   partiallyPaid : PropositionStatus
-  openStatus : PropositionStatus
+  open : PropositionStatus
   adverseEvidence : PropositionStatus
 
 record S102CaseProposition : Set where
@@ -47,7 +47,7 @@ record S102CaseProposition : Set where
     legalUse : String
     boundary : String
 
-openStatus S102CaseProposition public
+open S102CaseProposition public
 
 koalaQualifyingWildlife : S102CaseProposition
 koalaQualifyingWildlife = s102-case-proposition
@@ -97,7 +97,7 @@ fragmentationPathway = s102-case-proposition
 currentExecutionUnknown : S102CaseProposition
 currentExecutionUnknown = s102-case-proposition
   executionState
-  openStatus
+  open
   "Condition 6(a) satisfaction, prestart records, current fauna/arborist execution records and actual commencement are not in the present corpus."
   "Current corpus/public-surface audit"
   "These facts affect urgency, imminence and evidentiary preservation but are not textual prerequisites to identifying the approved process or ecological risk."
@@ -124,7 +124,7 @@ recoveryValueAdverseCase = s102-case-proposition
 ministerialEffectInference : S102CaseProposition
 ministerialEffectInference = s102-case-proposition
   ministerialInference
-  openStatus
+  open
   "The remaining legal/ecological question is whether the approved vegetation-clearing/earthworks process is likely to have significant detrimental effect on qualifying threatened wildlife or other qualifying habitat/area."
   "cross-source legal/ecological inference for Ministerial opinion"
   "This is the live s 102 merits question."

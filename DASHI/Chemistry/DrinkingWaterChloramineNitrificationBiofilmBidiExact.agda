@@ -111,5 +111,3 @@ canonicalChloramineNitrificationBiofilmBoundary : ChloramineNitrificationBiofilm
 canonicalChloramineNitrificationBiofilmBoundary =
   chloramineNitrificationBiofilmBoundary
     false refl false refl false refl false refl false refl true refl
-
-open ChloramineNitrificationBiofilmBoundary public

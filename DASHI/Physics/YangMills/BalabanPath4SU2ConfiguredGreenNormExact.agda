@@ -32,11 +32,7 @@ configuredGreenBondNormBound : ∀ source component →
   bondNormSq (configuredPhysicalGreen source component)
   ≤ sixteen * bondNormSq (source component)
 configuredGreenBondNormBound source component =
-  subst
-    (λ upper →
-      bondNormSq (configuredPhysicalGreen source component) ≤ upper)
-    (sumRationalScale sixteen (allCyclicIndices four)
-      (λ axis → globalNormSq (bondComponent (source component) axis)))
+  trans
     (SumLift.sumRationalMonotoneViaFibre
       (allCyclicIndices four)
       (λ axis → globalNormSq
@@ -45,6 +41,8 @@ configuredGreenBondNormBound source component =
         (bondComponent (source component) axis))
       (λ axis → scalarGreenNormBound
         (bondComponent (source component) axis)))
+    (sumRationalScale sixteen (allCyclicIndices four)
+      (λ axis → globalNormSq (bondComponent (source component) axis)))
 
 configuredPhysicalGreenNormBound : ∀ source →
   physicalUnweightedNormSq (configuredPhysicalGreen source)

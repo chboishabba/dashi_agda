@@ -3,7 +3,6 @@ module DASHI.Physics.YangMills.BalabanPeriodicTorus4Fourier where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
-open import Relation.Binary.PropositionalEquality using (cong)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
@@ -137,26 +136,26 @@ finiteFourierTransformDefinition :
   ∀ {L Scalar Bound} →
   PeriodicTorus4FourierAuthority L Scalar Bound →
   SiteField L Scalar → MomentumField L Scalar
-finiteFourierTransformDefinition authority fld momentum =
+finiteFourierTransformDefinition authority field momentum =
   sumSites authority
     (λ site →
       multiplyScalar (operations authority)
         (conjugateScalar (operations authority)
           (momentumCharacterDefinition authority momentum site))
-        (fld site))
+        (field site))
 
 finiteInverseFourierTransformDefinition :
   ∀ {L Scalar Bound} →
   PeriodicTorus4FourierAuthority L Scalar Bound →
   MomentumField L Scalar → SiteField L Scalar
-finiteInverseFourierTransformDefinition authority fld site =
+finiteInverseFourierTransformDefinition authority field site =
   multiplyScalar (operations authority)
     (normalizationScalar (operations authority))
     (sumMomenta authority
       (λ momentum →
         multiplyScalar (operations authority)
           (momentumCharacterDefinition authority momentum site)
-          (fld momentum)))
+          (field momentum)))
 
 ------------------------------------------------------------------------
 -- Standard theorem package, matched to the literal definitions above.
@@ -196,22 +195,22 @@ record PeriodicTorus4FourierTheorems
             (oneScalar (operations authority))
             x y)
 
-    sourceFiniteFourierInversionLeft : ∀ fld site →
+    sourceFiniteFourierInversionLeft : ∀ field site →
       finiteInverseFourierTransformDefinition authority
-        (finiteFourierTransformDefinition authority fld)
+        (finiteFourierTransformDefinition authority field)
         site
-      ≡ fld site
+      ≡ field site
 
-    sourceFiniteFourierInversionRight : ∀ fld momentum →
+    sourceFiniteFourierInversionRight : ∀ field momentum →
       finiteFourierTransformDefinition authority
-        (finiteInverseFourierTransformDefinition authority fld)
+        (finiteInverseFourierTransformDefinition authority field)
         momentum
-      ≡ fld momentum
+      ≡ field momentum
 
-    sourceScalarFourierParseval : ∀ fld →
-      scalarSiteNormSq authority fld ≡
+    sourceScalarFourierParseval : ∀ field →
+      scalarSiteNormSq authority field ≡
       scalarMomentumNormSq authority
-        (finiteFourierTransformDefinition authority fld)
+        (finiteFourierTransformDefinition authority field)
 
 open PeriodicTorus4FourierTheorems public
 
@@ -256,30 +255,30 @@ characterCompleteness = sourceCharacterCompleteness
 finiteFourierInversionLeft :
   ∀ {L Scalar Bound}
     {authority : PeriodicTorus4FourierAuthority L Scalar Bound} →
-  PeriodicTorus4FourierTheorems authority → ∀ fld site →
+  PeriodicTorus4FourierTheorems authority → ∀ field site →
   finiteInverseFourierTransformDefinition authority
-    (finiteFourierTransformDefinition authority fld)
+    (finiteFourierTransformDefinition authority field)
     site
-  ≡ fld site
+  ≡ field site
 finiteFourierInversionLeft = sourceFiniteFourierInversionLeft
 
 finiteFourierInversionRight :
   ∀ {L Scalar Bound}
     {authority : PeriodicTorus4FourierAuthority L Scalar Bound} →
-  PeriodicTorus4FourierTheorems authority → ∀ fld momentum →
+  PeriodicTorus4FourierTheorems authority → ∀ field momentum →
   finiteFourierTransformDefinition authority
-    (finiteInverseFourierTransformDefinition authority fld)
+    (finiteInverseFourierTransformDefinition authority field)
     momentum
-  ≡ fld momentum
+  ≡ field momentum
 finiteFourierInversionRight = sourceFiniteFourierInversionRight
 
 scalarFourierParseval :
   ∀ {L Scalar Bound}
     {authority : PeriodicTorus4FourierAuthority L Scalar Bound} →
-  PeriodicTorus4FourierTheorems authority → ∀ fld →
-  scalarSiteNormSq authority fld ≡
+  PeriodicTorus4FourierTheorems authority → ∀ field →
+  scalarSiteNormSq authority field ≡
   scalarMomentumNormSq authority
-    (finiteFourierTransformDefinition authority fld)
+    (finiteFourierTransformDefinition authority field)
 scalarFourierParseval = sourceScalarFourierParseval
 
 ------------------------------------------------------------------------
@@ -296,146 +295,146 @@ bondFourierTransform :
   ∀ {L Scalar Bound} →
   PeriodicTorus4FourierAuthority L Scalar Bound →
   AxisSiteField L Scalar → AxisMomentumField L Scalar
-bondFourierTransform authority fld axis =
-  finiteFourierTransformDefinition authority (fld axis)
+bondFourierTransform authority field axis =
+  finiteFourierTransformDefinition authority (field axis)
 
 bondInverseFourierTransform :
   ∀ {L Scalar Bound} →
   PeriodicTorus4FourierAuthority L Scalar Bound →
   AxisMomentumField L Scalar → AxisSiteField L Scalar
-bondInverseFourierTransform authority fld axis =
-  finiteInverseFourierTransformDefinition authority (fld axis)
+bondInverseFourierTransform authority field axis =
+  finiteInverseFourierTransformDefinition authority (field axis)
 
 bondFourierTransformComponentwise :
   ∀ {L Scalar Bound}
     (authority : PeriodicTorus4FourierAuthority L Scalar Bound) →
-  ∀ fld axis momentum →
-  bondFourierTransform authority fld axis momentum ≡
-  finiteFourierTransformDefinition authority (fld axis) momentum
-bondFourierTransformComponentwise authority fld axis momentum = refl
+  ∀ field axis momentum →
+  bondFourierTransform authority field axis momentum ≡
+  finiteFourierTransformDefinition authority (field axis) momentum
+bondFourierTransformComponentwise authority field axis momentum = refl
 
 bondInverseFourierTransformComponentwise :
   ∀ {L Scalar Bound}
     (authority : PeriodicTorus4FourierAuthority L Scalar Bound) →
-  ∀ fld axis site →
-  bondInverseFourierTransform authority fld axis site ≡
-  finiteInverseFourierTransformDefinition authority (fld axis) site
-bondInverseFourierTransformComponentwise authority fld axis site = refl
+  ∀ field axis site →
+  bondInverseFourierTransform authority field axis site ≡
+  finiteInverseFourierTransformDefinition authority (field axis) site
+bondInverseFourierTransformComponentwise authority field axis site = refl
 
 bondFourierInversion :
   ∀ {L Scalar Bound}
     {authority : PeriodicTorus4FourierAuthority L Scalar Bound} →
   PeriodicTorus4FourierTheorems authority →
-  ∀ fld axis site →
+  ∀ field axis site →
   bondInverseFourierTransform authority
-    (bondFourierTransform authority fld)
+    (bondFourierTransform authority field)
     axis site
-  ≡ fld axis site
-bondFourierInversion theorems fld axis site =
-  finiteFourierInversionLeft theorems (fld axis) site
+  ≡ field axis site
+bondFourierInversion theorems field axis site =
+  finiteFourierInversionLeft theorems (field axis) site
 
 axisComponentFourierParseval :
   ∀ {L Scalar Bound}
     {authority : PeriodicTorus4FourierAuthority L Scalar Bound} →
   PeriodicTorus4FourierTheorems authority →
-  ∀ fld axis →
-  scalarSiteNormSq authority (fld axis) ≡
+  ∀ field axis →
+  scalarSiteNormSq authority (field axis) ≡
   scalarMomentumNormSq authority
-    (bondFourierTransform authority fld axis)
-axisComponentFourierParseval theorems fld axis =
-  scalarFourierParseval theorems (fld axis)
+    (bondFourierTransform authority field axis)
+axisComponentFourierParseval theorems field axis =
+  scalarFourierParseval theorems (field axis)
 
 bondSiteNormSq :
   ∀ {L Scalar Bound} →
   PeriodicTorus4FourierAuthority L Scalar Bound →
   AxisSiteField L Scalar → Bound
-bondSiteNormSq authority fld =
+bondSiteNormSq authority field =
   sumBoundList (operations authority)
-    (λ axis → scalarSiteNormSq authority (fld axis))
+    (λ axis → scalarSiteNormSq authority (field axis))
     (elements (cyclicIndexFinite four))
 
 bondMomentumNormSq :
   ∀ {L Scalar Bound} →
   PeriodicTorus4FourierAuthority L Scalar Bound →
   AxisMomentumField L Scalar → Bound
-bondMomentumNormSq authority fld =
+bondMomentumNormSq authority field =
   sumBoundList (operations authority)
-    (λ axis → scalarMomentumNormSq authority (fld axis))
+    (λ axis → scalarMomentumNormSq authority (field axis))
     (elements (cyclicIndexFinite four))
 
 finiteAxisSumCommutesWithFourierSum :
   ∀ {L Scalar Bound}
     {authority : PeriodicTorus4FourierAuthority L Scalar Bound} →
   PeriodicTorus4FourierTheorems authority →
-  ∀ fld axes →
+  ∀ field axes →
   sumBoundList (operations authority)
-    (λ axis → scalarSiteNormSq authority (fld axis)) axes
+    (λ axis → scalarSiteNormSq authority (field axis)) axes
   ≡ sumBoundList (operations authority)
       (λ axis →
         scalarMomentumNormSq authority
-          (bondFourierTransform authority fld axis)) axes
-finiteAxisSumCommutesWithFourierSum theorems fld [] = refl
+          (bondFourierTransform authority field axis)) axes
+finiteAxisSumCommutesWithFourierSum theorems field [] = refl
 finiteAxisSumCommutesWithFourierSum {authority = authority}
-  theorems fld (axis ∷ axes)
-  rewrite axisComponentFourierParseval theorems fld axis
-        | finiteAxisSumCommutesWithFourierSum theorems fld axes = refl
+  theorems field (axis ∷ axes)
+  rewrite axisComponentFourierParseval theorems field axis
+        | finiteAxisSumCommutesWithFourierSum theorems field axes = refl
 
 bondFieldFourierParseval :
   ∀ {L Scalar Bound}
     {authority : PeriodicTorus4FourierAuthority L Scalar Bound} →
-  PeriodicTorus4FourierTheorems authority → ∀ fld →
-  bondSiteNormSq authority fld ≡
-  bondMomentumNormSq authority (bondFourierTransform authority fld)
-bondFieldFourierParseval theorems fld =
-  finiteAxisSumCommutesWithFourierSum theorems fld
+  PeriodicTorus4FourierTheorems authority → ∀ field →
+  bondSiteNormSq authority field ≡
+  bondMomentumNormSq authority (bondFourierTransform authority field)
+bondFieldFourierParseval theorems field =
+  finiteAxisSumCommutesWithFourierSum theorems field
     (elements (cyclicIndexFinite four))
 
 fourierParsevalForBondFields :
   ∀ {L Scalar Bound}
     {authority : PeriodicTorus4FourierAuthority L Scalar Bound} →
-  PeriodicTorus4FourierTheorems authority → ∀ fld →
-  bondSiteNormSq authority fld ≡
-  bondMomentumNormSq authority (bondFourierTransform authority fld)
+  PeriodicTorus4FourierTheorems authority → ∀ field →
+  bondSiteNormSq authority field ≡
+  bondMomentumNormSq authority (bondFourierTransform authority field)
 fourierParsevalForBondFields = bondFieldFourierParseval
 
 scaledScalarParseval :
   ∀ {L Scalar Bound}
     {authority : PeriodicTorus4FourierAuthority L Scalar Bound} →
   PeriodicTorus4FourierTheorems authority →
-  ∀ scalar fld →
+  ∀ scalar field →
   scaleBound (operations authority) scalar
-    (scalarSiteNormSq authority fld)
+    (scalarSiteNormSq authority field)
   ≡ scaleBound (operations authority) scalar
       (scalarMomentumNormSq authority
-        (finiteFourierTransformDefinition authority fld))
-scaledScalarParseval {authority = authority} theorems scalar fld =
+        (finiteFourierTransformDefinition authority field))
+scaledScalarParseval {authority = authority} theorems scalar field =
   cong (scaleBound (operations authority) scalar)
-    (scalarFourierParseval theorems fld)
+    (scalarFourierParseval theorems field)
 
 scaledBondParseval :
   ∀ {L Scalar Bound}
     {authority : PeriodicTorus4FourierAuthority L Scalar Bound} →
   PeriodicTorus4FourierTheorems authority →
-  ∀ scalar fld →
+  ∀ scalar field →
   scaleBound (operations authority) scalar
-    (bondSiteNormSq authority fld)
+    (bondSiteNormSq authority field)
   ≡ scaleBound (operations authority) scalar
       (bondMomentumNormSq authority
-        (bondFourierTransform authority fld))
-scaledBondParseval {authority = authority} theorems scalar fld =
+        (bondFourierTransform authority field))
+scaledBondParseval {authority = authority} theorems scalar field =
   cong (scaleBound (operations authority) scalar)
-    (bondFieldFourierParseval theorems fld)
+    (bondFieldFourierParseval theorems field)
 
 latticeSpacingNormalizationParseval :
   ∀ {L Scalar Bound}
     {authority : PeriodicTorus4FourierAuthority L Scalar Bound} →
   PeriodicTorus4FourierTheorems authority →
-  ∀ latticeNormalization fld →
+  ∀ latticeNormalization field →
   scaleBound (operations authority) latticeNormalization
-    (bondSiteNormSq authority fld)
+    (bondSiteNormSq authority field)
   ≡ scaleBound (operations authority) latticeNormalization
       (bondMomentumNormSq authority
-        (bondFourierTransform authority fld))
+        (bondFourierTransform authority field))
 latticeSpacingNormalizationParseval = scaledBondParseval
 
 periodicTorus4FourierDefinitionsLevel : ProofLevel

@@ -14,10 +14,9 @@ module DASHI.Mathematics.Complexity.ConcreteTapeGlobalCookLevinCNFExact where
 -- a separate theorem above endpoint soundness and decoded-transition soundness.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Relation.Binary.PropositionalEquality using (sym; trans; cong; cong₂; subst)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalCellBitsExact as Canonical
@@ -39,10 +38,10 @@ liftTransitionCNF :
     (nonempty : Selector.NonemptyRuleTable machine)
     (steps cols : Nat) →
   CNF.CNF (Endpoint.ExtendedGlobalWidth machine steps cols)
-liftTransitionCNF {machine}
+liftTransitionCNF
     stateCoverage symbolCoverage nonempty steps cols =
   Rename.renameCNF
-    (Endpoint.liftBaseIndex {machine} {steps} {cols})
+    Endpoint.liftBaseIndex
     (Transition.globalTransitionCNF
       stateCoverage symbolCoverage nonempty steps cols)
 
@@ -56,15 +55,15 @@ globalCookLevinCNF :
     (steps cols : Nat) →
   CNF.Bits (Decode.RowBitsWidth machine cols) →
   CNF.CNF (Endpoint.ExtendedGlobalWidth machine steps cols)
-globalCookLevinCNF {machine}
+globalCookLevinCNF
     stateCoverage symbolCoverage nonempty
     steps cols initialTarget =
   Placed.append
-    (liftTransitionCNF {machine}
+    (liftTransitionCNF
       stateCoverage symbolCoverage nonempty steps cols)
     (Placed.append
-      (Endpoint.initialEndpointCNF {machine} {steps} {cols} initialTarget)
-      (Endpoint.acceptingEndpointCNF {machine} {steps} {cols}
+      (Endpoint.initialEndpointCNF initialTarget)
+      (Endpoint.acceptingEndpointCNF
         stateCoverage symbolCoverage))
 
 record GlobalFormulaPartsTrue
@@ -81,20 +80,20 @@ record GlobalFormulaPartsTrue
   field
     transitionTrue :
       CNF.evaluateCNF
-        (liftTransitionCNF {machine}
+        (liftTransitionCNF
           stateCoverage symbolCoverage nonempty steps cols)
         assignment
       ≡ true
 
     initialTrue :
       CNF.evaluateCNF
-        (Endpoint.initialEndpointCNF {machine} {steps} {cols} initialTarget)
+        (Endpoint.initialEndpointCNF initialTarget)
         assignment
       ≡ true
 
     acceptingTrue :
       CNF.evaluateCNF
-        (Endpoint.acceptingEndpointCNF {machine} {steps} {cols}
+        (Endpoint.acceptingEndpointCNF
           stateCoverage symbolCoverage)
         assignment
       ≡ true
@@ -135,7 +134,7 @@ globalCookLevinCNFSoundParts :
   GlobalFormulaPartsTrue
     stateCoverage symbolCoverage nonempty
     steps cols initialTarget assignment
-globalCookLevinCNFSoundParts {machine}
+globalCookLevinCNFSoundParts
     stateCoverage symbolCoverage nonempty
     steps cols initialTarget assignment accepted =
   record
@@ -148,14 +147,14 @@ globalCookLevinCNFSoundParts {machine}
     }
   where
     transitionFormula =
-      liftTransitionCNF {machine}
+      liftTransitionCNF
         stateCoverage symbolCoverage nonempty steps cols
 
     initialFormula =
-      Endpoint.initialEndpointCNF {machine} {steps} {cols} initialTarget
+      Endpoint.initialEndpointCNF initialTarget
 
     acceptingFormula =
-      Endpoint.acceptingEndpointCNF {machine} {steps} {cols}
+      Endpoint.acceptingEndpointCNF
         stateCoverage symbolCoverage
 
     transitionValue =
@@ -172,17 +171,15 @@ globalCookLevinCNFSoundParts {machine}
 
     outer :
       CNF.andBool transitionValue endpointsValue ≡ true
-    outer =
-      subst (_≡ true)
-        (trans
-          (Placed.evaluateCNFAppend
-            transitionFormula
-            (Placed.append initialFormula acceptingFormula)
-            assignment)
-          (cong (CNF.andBool transitionValue)
-            (Placed.evaluateCNFAppend
-              initialFormula acceptingFormula assignment)))
-        accepted
+    outer
+      with Placed.evaluateCNFAppend
+        transitionFormula
+        (Placed.append initialFormula acceptingFormula)
+        assignment
+    ... | refl
+      with Placed.evaluateCNFAppend
+        initialFormula acceptingFormula assignment
+    ... | refl = accepted
 
     inner :
       CNF.andBool initialValue acceptingValue ≡ true
@@ -204,33 +201,35 @@ globalCookLevinCNFCompleteParts :
     stateCoverage symbolCoverage nonempty
     steps cols initialTarget assignment →
   CNF.evaluateCNF
-    (globalCookLevinCNF {machine}
+    (globalCookLevinCNF
       stateCoverage symbolCoverage nonempty
       steps cols initialTarget)
     assignment
   ≡ true
-globalCookLevinCNFCompleteParts {machine}
+globalCookLevinCNFCompleteParts
     stateCoverage symbolCoverage nonempty
-    steps cols initialTarget assignment parts =
-  trans
-    (Placed.evaluateCNFAppend
-      (liftTransitionCNF {machine}
+    steps cols initialTarget assignment parts
+    with Placed.evaluateCNFAppend
+      (liftTransitionCNF
         stateCoverage symbolCoverage nonempty steps cols)
       (Placed.append
-        (Endpoint.initialEndpointCNF {machine} {steps} {cols} initialTarget)
-        (Endpoint.acceptingEndpointCNF {machine} {steps} {cols}
+        (Endpoint.initialEndpointCNF initialTarget)
+        (Endpoint.acceptingEndpointCNF
           stateCoverage symbolCoverage))
-      assignment)
-    (trans
-      (cong₂ CNF.andBool
-        (transitionTrue parts)
-        (Placed.evaluateCNFAppend
-          (Endpoint.initialEndpointCNF {machine} {steps} {cols} initialTarget)
-          (Endpoint.acceptingEndpointCNF {machine} {steps} {cols}
-            stateCoverage symbolCoverage)
-          assignment))
-      (cong (CNF.andBool true)
-        (cong₂ CNF.andBool (initialTrue parts) (acceptingTrue parts))))
+      assignment
+... | outerEq
+    with Placed.evaluateCNFAppend
+      (Endpoint.initialEndpointCNF initialTarget)
+      (Endpoint.acceptingEndpointCNF
+        stateCoverage symbolCoverage)
+      assignment
+... | innerEq
+    rewrite transitionTrue parts
+          | initialTrue parts
+          | acceptingTrue parts
+          | innerEq
+          | outerEq =
+  refl
 
 record GlobalCookLevinCNFReceipt
     (machine : Local.ConcreteTapeMachine) : Set₁ where

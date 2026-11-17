@@ -4,7 +4,7 @@ module DASHI.Mathematics.Complexity.ConcreteTapeGlobalTransitionConjunctionExact
 -- ENUMERATE ALL FIXED (time,column) WINDOWS -> ONE GLOBAL TRANSITION CNF
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
@@ -100,13 +100,13 @@ predicatesForOneTime :
 predicatesForOneTime
     stateCoverage symbolCoverage nonempty timeSlot [] =
   []
-predicatesForOneTime {machine} {steps} {cols}
+predicatesForOneTime
     stateCoverage symbolCoverage nonempty timeSlot
     (some-window-start columnIndex start ∷ rest) =
-  Raw.rawSelectedWindowPlacedPredicate {machine} {steps} {cols}
+  Raw.rawSelectedWindowPlacedPredicate
     stateCoverage symbolCoverage nonempty timeSlot start
   ∷
-  predicatesForOneTime {machine} {steps} {cols}
+  predicatesForOneTime
     stateCoverage symbolCoverage nonempty timeSlot rest
 
 appendPredicates :
@@ -133,14 +133,14 @@ predicatesForAllTimes :
 predicatesForAllTimes
     stateCoverage symbolCoverage nonempty [] =
   []
-predicatesForAllTimes {machine} {steps} {cols}
+predicatesForAllTimes
     stateCoverage symbolCoverage nonempty
     (some-slot timeIndex timeSlot ∷ rest) =
   appendPredicates
-    (predicatesForOneTime {machine} {steps} {cols}
+    (predicatesForOneTime
       stateCoverage symbolCoverage nonempty timeSlot
-      (allWindowStarts cols))
-    (predicatesForAllTimes {machine} {steps} {cols}
+      (allWindowStarts _))
+    (predicatesForAllTimes
       stateCoverage symbolCoverage nonempty rest)
 
 allGlobalTransitionPredicates :
@@ -155,9 +155,9 @@ allGlobalTransitionPredicates :
     (Placed.PlacedPredicate
       (Selected.TransitionLocalWidth machine)
       (Trace.GlobalTraceWidth machine steps cols))
-allGlobalTransitionPredicates {machine}
+allGlobalTransitionPredicates
     stateCoverage symbolCoverage nonempty steps cols =
-  predicatesForAllTimes {machine} {steps} {cols}
+  predicatesForAllTimes
     stateCoverage symbolCoverage nonempty
     (allSlots steps)
 

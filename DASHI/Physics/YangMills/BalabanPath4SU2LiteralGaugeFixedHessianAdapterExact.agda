@@ -15,15 +15,12 @@ open import DASHI.Physics.YangMills.BalabanPath4SU2PhysicalTangentExact
 open import DASHI.Physics.YangMills.BalabanSU2GaugeFixedHessian
 open import DASHI.Physics.YangMills.BalabanSU2GaugeFixedHessianQuadraticExact
 open import DASHI.Physics.YangMills.BalabanPath4SU2LiteralPlaquetteLiftExact using
-  (literalWilsonHessianPositivePlaneFold; literalWilsonHessianEqualsCurlEnergy)
-open import DASHI.Physics.YangMills.BalabanPath4SU2LiteralWilsonOperatorRieszExact using
-  (literalWilsonOperator; physicalWilsonOperatorPairingExact)
+  (literalWilsonHessianPositivePlaneFold)
 open import DASHI.Physics.YangMills.BalabanPath4SU2PeriodicHodgeProducerExact using
-  (Lie3SiteField; physicalTangentInner; literalGaugeFixingEnergy; physicalPeriodicReferenceDifferenceEnergy)
+  (Lie3SiteField; literalGaugeFixingEnergy; physicalPeriodicReferenceDifferenceEnergy)
 open import DASHI.Physics.YangMills.BalabanPath4SU2LiteralDivergenceHessianInstanceExact
   using
     ( LiteralNonDivergenceHessianData
-    ; wilsonOperator
     ; literalGaugeFixedHessianQuadraticData
     ; literalGaugeFixingNormSqExact
     )
@@ -78,9 +75,6 @@ literalAdapterNestedAddition dataSet left middle right =
     (cong (λ value → left + value)
       (addScalarMatchesRationalAddition dataSet middle right))
 
-addAssocLeftRaw : ∀ a b c → a + (b + c) ≡ (a + b) + c
-addAssocLeftRaw = ℚRing.solve-∀
-
 literalGaugeFixedHessianPeriodicDecompositionExact :
   ∀ {Gauge Coarse}
     (dataSet : Path4SU2LiteralGaugeFixedHessianData Gauge Coarse)
@@ -98,16 +92,14 @@ literalGaugeFixedHessianPeriodicDecompositionExact dataSet tangent =
         (gaugeFixingNormSq (quadraticData dataSet) tangent)
         (blockAverageNormSq (quadraticData dataSet) tangent))
       (trans
-        (addAssocLeftRaw
-          (wilsonHessianQuadraticForm (quadraticData dataSet) tangent)
-          (gaugeFixingNormSq (quadraticData dataSet) tangent)
-          (blockAverageNormSq (quadraticData dataSet) tangent))
-        (cong (_+ blockAverageNormSq (quadraticData dataSet) tangent)
+        (ℚRing.solve-∀)
+        (cong₂ _+_
           (trans
             (cong₂ _+_
               (wilsonHessianMatchesLiteral dataSet tangent)
               (gaugeFixingMatchesLiteral dataSet tangent))
-            (literalWilsonGaugeEqualsPeriodicDifferenceEnergy tangent)))))
+            (literalWilsonGaugeEqualsPeriodicDifferenceEnergy tangent))
+          refl)))
 
 physicalDifferenceBelowLiteralGaugeFixedHessian :
   ∀ {Gauge Coarse}
@@ -154,20 +146,6 @@ record Path4SU2LiteralWilsonOperatorMatch (Coarse : Set) : Set₁ where
       ≡ literalWilsonHessianPositivePlaneFold tangent
 
 open Path4SU2LiteralWilsonOperatorMatch public
-
-literalWilsonOperatorMatchExact :
-  ∀ {Coarse} (dataSet : LiteralNonDivergenceHessianData Coarse) →
-  (wilsonOperator dataSet ≡ literalWilsonOperator) →
-  Path4SU2LiteralWilsonOperatorMatch Coarse
-literalWilsonOperatorMatchExact dataSet eq = record
-  { nonDivergenceData = dataSet
-  ; wilsonOperatorQuadraticMatchesLiteral = λ tangent →
-      trans
-        (cong (λ op → physicalTangentInner tangent (op tangent)) eq)
-        (trans
-          (physicalWilsonOperatorPairingExact tangent)
-          (sym (literalWilsonHessianEqualsCurlEnergy tangent)))
-  }
 
 literalConcreteDivergenceAdapter :
   ∀ {Coarse} → Path4SU2LiteralWilsonOperatorMatch Coarse →

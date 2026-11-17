@@ -23,7 +23,7 @@ data RelationalPatch : Set where
   patchBC : RelationalPatch
   patchCA : RelationalPatch
 
-record TypedTransport (State : Set) : Set where
+record TypedTransport (State : Set) : Set₁ where
   constructor typed-transport
   field
     sourcePatch targetPatch : RelationalPatch
@@ -61,7 +61,7 @@ data HolonomyResidual : Set where
   cycleCloses : HolonomyResidual
   cycleResidualRetained : HolonomyResidual
 
-record RelationalDescentState (State : Set) : Set where
+record RelationalDescentState (State : Set) : Set₁ where
   constructor relational-descent-state
   field
     localSections : TriadicLocalSections State

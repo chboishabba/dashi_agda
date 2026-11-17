@@ -81,74 +81,74 @@ latticeGradient :
   ∀ {L Scalar Bound} →
   PeriodicDifferencePrimitives L Scalar Bound →
   SiteField L Scalar → AxisSiteField L Scalar
-latticeGradient primitives fld axis =
-  forwardDifference primitives axis fld
+latticeGradient primitives field axis =
+  forwardDifference primitives axis field
 
 latticeDivergence :
   ∀ {L Scalar Bound} →
   PeriodicDifferencePrimitives L Scalar Bound →
   AxisSiteField L Scalar → SiteField L Scalar
-latticeDivergence primitives fld site =
+latticeDivergence primitives field site =
   sumAxesScalar primitives
-    (λ axis → backwardDifference primitives axis (fld axis) site)
+    (λ axis → backwardDifference primitives axis (field axis) site)
 
 latticeCurl :
   ∀ {L Scalar Bound} →
   PeriodicDifferencePrimitives L Scalar Bound →
   AxisSiteField L Scalar → PlaquetteSiteField L Scalar
-latticeCurl primitives fld (pair mu nu) site =
+latticeCurl primitives field (pair mu nu) site =
   addScalar (operations (fourierAuthority primitives))
-    (forwardDifference primitives mu (fld nu) site)
+    (forwardDifference primitives mu (field nu) site)
     (negateScalar (operations (fourierAuthority primitives))
-      (forwardDifference primitives nu (fld mu) site))
+      (forwardDifference primitives nu (field mu) site))
 
 latticeCodifferential :
   ∀ {L Scalar Bound} →
   PeriodicDifferencePrimitives L Scalar Bound →
   PlaquetteSiteField L Scalar → AxisSiteField L Scalar
-latticeCodifferential primitives fld axis site =
+latticeCodifferential primitives field axis site =
   sumAxesScalar primitives
-    (λ nu → backwardDifference primitives nu (fld (pair nu axis)) site)
+    (λ nu → backwardDifference primitives nu (field (pair nu axis)) site)
 
 gaugeFixingOperator :
   ∀ {L Scalar Bound} →
   PeriodicDifferencePrimitives L Scalar Bound →
   AxisSiteField L Scalar → AxisSiteField L Scalar
-gaugeFixingOperator primitives fld =
-  latticeGradient primitives (latticeDivergence primitives fld)
+gaugeFixingOperator primitives field =
+  latticeGradient primitives (latticeDivergence primitives field)
 
 curlCodifferentialOperator :
   ∀ {L Scalar Bound} →
   PeriodicDifferencePrimitives L Scalar Bound →
   AxisSiteField L Scalar → AxisSiteField L Scalar
-curlCodifferentialOperator primitives fld =
-  latticeCodifferential primitives (latticeCurl primitives fld)
+curlCodifferentialOperator primitives field =
+  latticeCodifferential primitives (latticeCurl primitives field)
 
 scalarLaplacian :
   ∀ {L Scalar Bound} →
   PeriodicDifferencePrimitives L Scalar Bound →
   SiteField L Scalar → SiteField L Scalar
-scalarLaplacian primitives fld site =
+scalarLaplacian primitives field site =
   sumAxesScalar primitives
     (λ axis →
       backwardDifference primitives axis
-        (forwardDifference primitives axis fld) site)
+        (forwardDifference primitives axis field) site)
 
 bondLaplacian :
   ∀ {L Scalar Bound} →
   PeriodicDifferencePrimitives L Scalar Bound →
   AxisSiteField L Scalar → AxisSiteField L Scalar
-bondLaplacian primitives fld axis =
-  scalarLaplacian primitives (fld axis)
+bondLaplacian primitives field axis =
+  scalarLaplacian primitives (field axis)
 
 latticeHodgeOperator :
   ∀ {L Scalar Bound} →
   PeriodicDifferencePrimitives L Scalar Bound →
   AxisSiteField L Scalar → AxisSiteField L Scalar
-latticeHodgeOperator primitives fld axis site =
+latticeHodgeOperator primitives field axis site =
   addScalar (operations (fourierAuthority primitives))
-    (curlCodifferentialOperator primitives fld axis site)
-    (gaugeFixingOperator primitives fld axis site)
+    (curlCodifferentialOperator primitives field axis site)
+    (gaugeFixingOperator primitives field axis site)
 
 blockConstraintOperator :
   ∀ {L Scalar Bound} →
@@ -160,10 +160,10 @@ referenceHessian :
   ∀ {L Scalar Bound} →
   PeriodicDifferencePrimitives L Scalar Bound →
   AxisSiteField L Scalar → AxisSiteField L Scalar
-referenceHessian primitives fld axis site =
+referenceHessian primitives field axis site =
   addScalar (operations (fourierAuthority primitives))
-    (latticeHodgeOperator primitives fld axis site)
-    (blockConstraintOperator primitives fld axis site)
+    (latticeHodgeOperator primitives field axis site)
+    (blockConstraintOperator primitives field axis site)
 
 ------------------------------------------------------------------------
 -- Fourier-domain formulas.
@@ -173,107 +173,107 @@ forwardDifferenceSymbolAction :
   ∀ {L Scalar Bound} →
   PeriodicDifferencePrimitives L Scalar Bound →
   Axis4 → MomentumField L Scalar → MomentumField L Scalar
-forwardDifferenceSymbolAction primitives axis fld momentum =
+forwardDifferenceSymbolAction primitives axis field momentum =
   multiplyScalar (operations (fourierAuthority primitives))
     (forwardDifferenceSymbol primitives axis momentum)
-    (fld momentum)
+    (field momentum)
 
 backwardDifferenceSymbolAction :
   ∀ {L Scalar Bound} →
   PeriodicDifferencePrimitives L Scalar Bound →
   Axis4 → MomentumField L Scalar → MomentumField L Scalar
-backwardDifferenceSymbolAction primitives axis fld momentum =
+backwardDifferenceSymbolAction primitives axis field momentum =
   multiplyScalar (operations (fourierAuthority primitives))
     (backwardDifferenceSymbol primitives axis momentum)
-    (fld momentum)
+    (field momentum)
 
 latticeGradientSymbolAction :
   ∀ {L Scalar Bound} →
   PeriodicDifferencePrimitives L Scalar Bound →
   MomentumField L Scalar → AxisMomentumField L Scalar
-latticeGradientSymbolAction primitives fld axis =
-  forwardDifferenceSymbolAction primitives axis fld
+latticeGradientSymbolAction primitives field axis =
+  forwardDifferenceSymbolAction primitives axis field
 
 latticeDivergenceSymbolAction :
   ∀ {L Scalar Bound} →
   PeriodicDifferencePrimitives L Scalar Bound →
   AxisMomentumField L Scalar → MomentumField L Scalar
-latticeDivergenceSymbolAction primitives fld momentum =
+latticeDivergenceSymbolAction primitives field momentum =
   sumAxesScalar primitives
     (λ axis →
       multiplyScalar (operations (fourierAuthority primitives))
         (backwardDifferenceSymbol primitives axis momentum)
-        (fld axis momentum))
+        (field axis momentum))
 
 latticeCurlSymbolAction :
   ∀ {L Scalar Bound} →
   PeriodicDifferencePrimitives L Scalar Bound →
   AxisMomentumField L Scalar → PlaquetteMomentumField L Scalar
-latticeCurlSymbolAction primitives fld (pair mu nu) momentum =
+latticeCurlSymbolAction primitives field (pair mu nu) momentum =
   addScalar (operations (fourierAuthority primitives))
     (multiplyScalar (operations (fourierAuthority primitives))
       (forwardDifferenceSymbol primitives mu momentum)
-      (fld nu momentum))
+      (field nu momentum))
     (negateScalar (operations (fourierAuthority primitives))
       (multiplyScalar (operations (fourierAuthority primitives))
         (forwardDifferenceSymbol primitives nu momentum)
-        (fld mu momentum)))
+        (field mu momentum)))
 
 latticeCodifferentialSymbolAction :
   ∀ {L Scalar Bound} →
   PeriodicDifferencePrimitives L Scalar Bound →
   PlaquetteMomentumField L Scalar → AxisMomentumField L Scalar
-latticeCodifferentialSymbolAction primitives fld axis momentum =
+latticeCodifferentialSymbolAction primitives field axis momentum =
   sumAxesScalar primitives
     (λ nu →
       multiplyScalar (operations (fourierAuthority primitives))
         (backwardDifferenceSymbol primitives nu momentum)
-        (fld (pair nu axis) momentum))
+        (field (pair nu axis) momentum))
 
 gaugeFixingSymbolAction :
   ∀ {L Scalar Bound} →
   PeriodicDifferencePrimitives L Scalar Bound →
   AxisMomentumField L Scalar → AxisMomentumField L Scalar
-gaugeFixingSymbolAction primitives fld =
+gaugeFixingSymbolAction primitives field =
   latticeGradientSymbolAction primitives
-    (latticeDivergenceSymbolAction primitives fld)
+    (latticeDivergenceSymbolAction primitives field)
 
 curlCodifferentialSymbolAction :
   ∀ {L Scalar Bound} →
   PeriodicDifferencePrimitives L Scalar Bound →
   AxisMomentumField L Scalar → AxisMomentumField L Scalar
-curlCodifferentialSymbolAction primitives fld =
+curlCodifferentialSymbolAction primitives field =
   latticeCodifferentialSymbolAction primitives
-    (latticeCurlSymbolAction primitives fld)
+    (latticeCurlSymbolAction primitives field)
 
 scalarLaplacianSymbolAction :
   ∀ {L Scalar Bound} →
   PeriodicDifferencePrimitives L Scalar Bound →
   MomentumField L Scalar → MomentumField L Scalar
-scalarLaplacianSymbolAction primitives fld momentum =
+scalarLaplacianSymbolAction primitives field momentum =
   sumAxesScalar primitives
     (λ axis →
       multiplyScalar (operations (fourierAuthority primitives))
         (backwardDifferenceSymbol primitives axis momentum)
         (multiplyScalar (operations (fourierAuthority primitives))
           (forwardDifferenceSymbol primitives axis momentum)
-          (fld momentum)))
+          (field momentum)))
 
 bondLaplacianSymbolAction :
   ∀ {L Scalar Bound} →
   PeriodicDifferencePrimitives L Scalar Bound →
   AxisMomentumField L Scalar → AxisMomentumField L Scalar
-bondLaplacianSymbolAction primitives fld axis =
-  scalarLaplacianSymbolAction primitives (fld axis)
+bondLaplacianSymbolAction primitives field axis =
+  scalarLaplacianSymbolAction primitives (field axis)
 
 latticeHodgeSymbolAction :
   ∀ {L Scalar Bound} →
   PeriodicDifferencePrimitives L Scalar Bound →
   AxisMomentumField L Scalar → AxisMomentumField L Scalar
-latticeHodgeSymbolAction primitives fld axis momentum =
+latticeHodgeSymbolAction primitives field axis momentum =
   addScalar (operations (fourierAuthority primitives))
-    (curlCodifferentialSymbolAction primitives fld axis momentum)
-    (gaugeFixingSymbolAction primitives fld axis momentum)
+    (curlCodifferentialSymbolAction primitives field axis momentum)
+    (gaugeFixingSymbolAction primitives field axis momentum)
 
 blockConstraintSymbolAction :
   ∀ {L Scalar Bound} →
@@ -285,20 +285,20 @@ referenceSymbolAction :
   ∀ {L Scalar Bound} →
   PeriodicDifferencePrimitives L Scalar Bound →
   AxisMomentumField L Scalar → AxisMomentumField L Scalar
-referenceSymbolAction primitives fld axis momentum =
+referenceSymbolAction primitives field axis momentum =
   addScalar (operations (fourierAuthority primitives))
-    (latticeHodgeSymbolAction primitives fld axis momentum)
-    (blockConstraintSymbolAction primitives fld axis momentum)
+    (latticeHodgeSymbolAction primitives field axis momentum)
+    (blockConstraintSymbolAction primitives field axis momentum)
 
 referenceSymbolFormula :
   ∀ {L Scalar Bound}
     (primitives : PeriodicDifferencePrimitives L Scalar Bound) →
-  ∀ fld axis momentum →
-  referenceSymbolAction primitives fld axis momentum ≡
+  ∀ field axis momentum →
+  referenceSymbolAction primitives field axis momentum ≡
   addScalar (operations (fourierAuthority primitives))
-    (latticeHodgeSymbolAction primitives fld axis momentum)
-    (blockConstraintSymbolAction primitives fld axis momentum)
-referenceSymbolFormula primitives fld axis momentum = refl
+    (latticeHodgeSymbolAction primitives field axis momentum)
+    (blockConstraintSymbolAction primitives field axis momentum)
+referenceSymbolFormula primitives field axis momentum = refl
 
 ------------------------------------------------------------------------
 -- Exact standard Fourier intertwining theorem for these definitions.
@@ -308,103 +308,103 @@ record PeriodicDifferenceFourierTheorems
     {L : Nat} {Scalar Bound : Set}
     (primitives : PeriodicDifferencePrimitives L Scalar Bound) : Set₁ where
   field
-    forwardDifferenceFourierSymbol : ∀ axis fld momentum →
+    forwardDifferenceFourierSymbol : ∀ axis field momentum →
       finiteFourierTransformDefinition (fourierAuthority primitives)
-        (forwardDifference primitives axis fld) momentum
+        (forwardDifference primitives axis field) momentum
       ≡ forwardDifferenceSymbolAction primitives axis
           (finiteFourierTransformDefinition
-            (fourierAuthority primitives) fld) momentum
+            (fourierAuthority primitives) field) momentum
 
-    backwardDifferenceFourierSymbol : ∀ axis fld momentum →
+    backwardDifferenceFourierSymbol : ∀ axis field momentum →
       finiteFourierTransformDefinition (fourierAuthority primitives)
-        (backwardDifference primitives axis fld) momentum
+        (backwardDifference primitives axis field) momentum
       ≡ backwardDifferenceSymbolAction primitives axis
           (finiteFourierTransformDefinition
-            (fourierAuthority primitives) fld) momentum
+            (fourierAuthority primitives) field) momentum
 
-    latticeGradientFourierSymbol : ∀ fld axis momentum →
+    latticeGradientFourierSymbol : ∀ field axis momentum →
       bondFourierTransform (fourierAuthority primitives)
-        (latticeGradient primitives fld) axis momentum
+        (latticeGradient primitives field) axis momentum
       ≡ latticeGradientSymbolAction primitives
           (finiteFourierTransformDefinition
-            (fourierAuthority primitives) fld) axis momentum
+            (fourierAuthority primitives) field) axis momentum
 
-    latticeDivergenceFourierSymbol : ∀ fld momentum →
+    latticeDivergenceFourierSymbol : ∀ field momentum →
       finiteFourierTransformDefinition (fourierAuthority primitives)
-        (latticeDivergence primitives fld) momentum
+        (latticeDivergence primitives field) momentum
       ≡ latticeDivergenceSymbolAction primitives
-          (bondFourierTransform (fourierAuthority primitives) fld) momentum
+          (bondFourierTransform (fourierAuthority primitives) field) momentum
 
-    latticeCurlFourierSymbol : ∀ fld pairIndex momentum →
+    latticeCurlFourierSymbol : ∀ field pairIndex momentum →
       finiteFourierTransformDefinition (fourierAuthority primitives)
-        (latticeCurl primitives fld pairIndex) momentum
+        (latticeCurl primitives field pairIndex) momentum
       ≡ latticeCurlSymbolAction primitives
-          (bondFourierTransform (fourierAuthority primitives) fld)
+          (bondFourierTransform (fourierAuthority primitives) field)
           pairIndex momentum
 
-    latticeCodifferentialFourierSymbol : ∀ fld axis momentum →
+    latticeCodifferentialFourierSymbol : ∀ field axis momentum →
       bondFourierTransform (fourierAuthority primitives)
-        (latticeCodifferential primitives fld) axis momentum
+        (latticeCodifferential primitives field) axis momentum
       ≡ latticeCodifferentialSymbolAction primitives
           (λ pairIndex →
             finiteFourierTransformDefinition (fourierAuthority primitives)
-              (fld pairIndex))
+              (field pairIndex))
           axis momentum
 
-    gaugeFixingOperatorFourierSymbol : ∀ fld axis momentum →
+    gaugeFixingOperatorFourierSymbol : ∀ field axis momentum →
       bondFourierTransform (fourierAuthority primitives)
-        (gaugeFixingOperator primitives fld) axis momentum
+        (gaugeFixingOperator primitives field) axis momentum
       ≡ gaugeFixingSymbolAction primitives
-          (bondFourierTransform (fourierAuthority primitives) fld)
+          (bondFourierTransform (fourierAuthority primitives) field)
           axis momentum
 
-    blockConstraintOperatorFourierSymbol : ∀ fld axis momentum →
+    blockConstraintOperatorFourierSymbol : ∀ field axis momentum →
       bondFourierTransform (fourierAuthority primitives)
-        (blockConstraintOperator primitives fld) axis momentum
+        (blockConstraintOperator primitives field) axis momentum
       ≡ blockConstraintSymbolAction primitives
-          (bondFourierTransform (fourierAuthority primitives) fld)
+          (bondFourierTransform (fourierAuthority primitives) field)
           axis momentum
 
-    referenceHessianFourierSymbol : ∀ fld axis momentum →
+    referenceHessianFourierSymbol : ∀ field axis momentum →
       bondFourierTransform (fourierAuthority primitives)
-        (referenceHessian primitives fld) axis momentum
+        (referenceHessian primitives field) axis momentum
       ≡ referenceSymbolAction primitives
-          (bondFourierTransform (fourierAuthority primitives) fld)
+          (bondFourierTransform (fourierAuthority primitives) field)
           axis momentum
 
-    finiteFourierDiagonalizesScalarLaplacian : ∀ fld momentum →
+    finiteFourierDiagonalizesScalarLaplacian : ∀ field momentum →
       finiteFourierTransformDefinition (fourierAuthority primitives)
-        (scalarLaplacian primitives fld) momentum
+        (scalarLaplacian primitives field) momentum
       ≡ scalarLaplacianSymbolAction primitives
           (finiteFourierTransformDefinition
-            (fourierAuthority primitives) fld) momentum
+            (fourierAuthority primitives) field) momentum
 
-    finiteFourierDiagonalizesBondLaplacian : ∀ fld axis momentum →
+    finiteFourierDiagonalizesBondLaplacian : ∀ field axis momentum →
       bondFourierTransform (fourierAuthority primitives)
-        (bondLaplacian primitives fld) axis momentum
+        (bondLaplacian primitives field) axis momentum
       ≡ bondLaplacianSymbolAction primitives
-          (bondFourierTransform (fourierAuthority primitives) fld)
+          (bondFourierTransform (fourierAuthority primitives) field)
           axis momentum
 
-    finiteFourierDiagonalizesGaugeFixingTerm : ∀ fld axis momentum →
+    finiteFourierDiagonalizesGaugeFixingTerm : ∀ field axis momentum →
       bondFourierTransform (fourierAuthority primitives)
-        (gaugeFixingOperator primitives fld) axis momentum
+        (gaugeFixingOperator primitives field) axis momentum
       ≡ gaugeFixingSymbolAction primitives
-          (bondFourierTransform (fourierAuthority primitives) fld)
+          (bondFourierTransform (fourierAuthority primitives) field)
           axis momentum
 
-    finiteFourierDiagonalizesBlockConstraintTerm : ∀ fld axis momentum →
+    finiteFourierDiagonalizesBlockConstraintTerm : ∀ field axis momentum →
       bondFourierTransform (fourierAuthority primitives)
-        (blockConstraintOperator primitives fld) axis momentum
+        (blockConstraintOperator primitives field) axis momentum
       ≡ blockConstraintSymbolAction primitives
-          (bondFourierTransform (fourierAuthority primitives) fld)
+          (bondFourierTransform (fourierAuthority primitives) field)
           axis momentum
 
-    finiteFourierDiagonalizesReferenceLaplacian : ∀ fld axis momentum →
+    finiteFourierDiagonalizesReferenceLaplacian : ∀ field axis momentum →
       bondFourierTransform (fourierAuthority primitives)
-        (referenceHessian primitives fld) axis momentum
+        (referenceHessian primitives field) axis momentum
       ≡ referenceSymbolAction primitives
-          (bondFourierTransform (fourierAuthority primitives) fld)
+          (bondFourierTransform (fourierAuthority primitives) field)
           axis momentum
 
 open PeriodicDifferenceFourierTheorems public

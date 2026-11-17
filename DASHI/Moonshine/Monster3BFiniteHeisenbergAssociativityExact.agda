@@ -68,14 +68,13 @@ composeAssociative
             (H.translationPart u) (H.translationPart v) (H.translationPart w)
         | Cocycle.addX6Assoc
             (H.modulationPart u) (H.modulationPart v) (H.modulationPart w)
-  = cong (H.heisenberg6 _)
-      (phaseAssociativityFromCocycle
-        c d e
-        (Cocycle.cocycle u v)
-        (Cocycle.cocycle (Cocycle.addSymplectic u v) w)
-        (Cocycle.cocycle v w)
-        (Cocycle.cocycle u (Cocycle.addSymplectic v w))
-        (Cocycle.cocycleIdentity u v w))
+  = phaseAssociativityFromCocycle
+      c d e
+      (Cocycle.cocycle u v)
+      (Cocycle.cocycle (Cocycle.addSymplectic u v) w)
+      (Cocycle.cocycle v w)
+      (Cocycle.cocycle u (Cocycle.addSymplectic v w))
+      (Cocycle.cocycleIdentity u v w)
 
 record HeisenbergAssociativityBoundary : Set where
   constructor heisenbergAssociativityBoundary

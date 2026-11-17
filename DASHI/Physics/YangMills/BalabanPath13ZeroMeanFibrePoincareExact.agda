@@ -27,7 +27,7 @@ module DASHI.Physics.YangMills.BalabanPath13ZeroMeanFibrePoincareExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Integer.Base using (+_)
-open import Data.Rational using (ℚ; 0ℚ; _*_; _-_; _≤_; _/_; Positive)
+open import Data.Rational using (ℚ; 0ℚ; _*_; _≤_; _/_; Positive)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
@@ -47,84 +47,78 @@ oneHundredSixtyNine : ℚ
 oneHundredSixtyNine = + 169 / 1
 
 scale13SquareExact : sq (natAsRational side13) ≡ oneHundredSixtyNine
-scale13SquareExact = refl
+scale13SquareExact = ℚRing.solve []
 
 instance
   oneHundredSixtyNinePositive : Positive oneHundredSixtyNine
   oneHundredSixtyNinePositive = ℚP.normalize-pos 169 1
 
-subZeroLemma : ∀ (c x : ℚ) → c * x - (+ 13 / 1 * (0ℚ * 0ℚ)) ≡ c * x
-subZeroLemma = ℚRing.solve-∀
-
-mulCommAssoc3 : ∀ (c₁ c₂ x : ℚ) → c₁ * (c₂ * x) ≡ c₂ * (c₁ * x)
-mulCommAssoc3 = ℚRing.solve-∀
-
 zeroMeanScaledNormExact :
-  ∀ (fld : SiteField side13) (axis : Axis4) (transverse : Triple (CyclicIndex side13)) →
-  physicalFibreSum fld axis transverse ≡ 0ℚ →
-  scaledCenteredFibreNormSq fld axis transverse
-  ≡ oneHundredSixtyNine * physicalFibreNormSq fld axis transverse
-zeroMeanScaledNormExact fld axis transverse meanZero =
+  ∀ field axis transverse →
+  physicalFibreSum field axis transverse ≡ 0ℚ →
+  scaledCenteredFibreNormSq field axis transverse
+  ≡ oneHundredSixtyNine * physicalFibreNormSq field axis transverse
+zeroMeanScaledNormExact field axis transverse meanZero =
   trans
-    (scaledCenteredFibreNormExact fld axis transverse)
+    (scaledCenteredFibreNormExact field axis transverse)
     (trans
       (cong
         (λ total →
-          sq (natAsRational side13) * physicalFibreNormSq fld axis transverse
+          sq (natAsRational side13) * physicalFibreNormSq field axis transverse
           - natAsRational side13 * sq total)
         meanZero)
       (trans
         (cong
           (λ coefficient →
-            coefficient * physicalFibreNormSq fld axis transverse
+            coefficient * physicalFibreNormSq field axis transverse
             - natAsRational side13 * sq 0ℚ)
           scale13SquareExact)
-        (subZeroLemma oneHundredSixtyNine
-          (physicalFibreNormSq fld axis transverse))))
+        (ℚRing.solve-∀
+          (physicalFibreNormSq field axis transverse))))
 
 scaledEnergy169Exact :
-  ∀ (fld : SiteField side13) (axis : Axis4) (transverse : Triple (CyclicIndex side13)) →
-  scaledCenteredFibreEdgeEnergy fld axis transverse
-  ≡ oneHundredSixtyNine * physicalFibreEdgeEnergy fld axis transverse
-scaledEnergy169Exact fld axis transverse =
+  ∀ field axis transverse →
+  scaledCenteredFibreEdgeEnergy field axis transverse
+  ≡ oneHundredSixtyNine * physicalFibreEdgeEnergy field axis transverse
+scaledEnergy169Exact field axis transverse =
   trans
-    (scaledCenteredFibreEnergyExact fld axis transverse)
+    (scaledCenteredFibreEnergyExact field axis transverse)
     (cong
-      (λ coefficient → coefficient * physicalFibreEdgeEnergy fld axis transverse)
+      (λ coefficient → coefficient * physicalFibreEdgeEnergy field axis transverse)
       scale13SquareExact)
 
 zeroMeanPhysicalFibrePoincare13 :
-  ∀ (fld : SiteField side13) (axis : Axis4) (transverse : Triple (CyclicIndex side13)) →
-  physicalFibreSum fld axis transverse ≡ 0ℚ →
-  Generated.oneEighteenth * physicalFibreNormSq fld axis transverse
-  ≤ physicalFibreEdgeEnergy fld axis transverse
-zeroMeanPhysicalFibrePoincare13 fld axis transverse meanZero =
+  ∀ field axis transverse →
+  physicalFibreSum field axis transverse ≡ 0ℚ →
+  Generated.oneEighteenth * physicalFibreNormSq field axis transverse
+  ≤ physicalFibreEdgeEnergy field axis transverse
+zeroMeanPhysicalFibrePoincare13 field axis transverse meanZero =
   let
-    scaled = Physical13.physicalSide13FibrePoincare fld axis transverse
+    scaled = Physical13.physicalSide13FibrePoincare field axis transverse
 
     scaledRewritten :
       oneHundredSixtyNine
-        * (Generated.oneEighteenth * physicalFibreNormSq fld axis transverse)
-      ≤ oneHundredSixtyNine * physicalFibreEdgeEnergy fld axis transverse
+        * (Generated.oneEighteenth * physicalFibreNormSq field axis transverse)
+      ≤ oneHundredSixtyNine * physicalFibreEdgeEnergy field axis transverse
     scaledRewritten =
       subst
         (λ left →
-          left ≤ oneHundredSixtyNine * physicalFibreEdgeEnergy fld axis transverse)
-        (mulCommAssoc3
+          left ≤ oneHundredSixtyNine * physicalFibreEdgeEnergy field axis transverse)
+        (ℚRing.solve-∀
           Generated.oneEighteenth
-          oneHundredSixtyNine
-          (physicalFibreNormSq fld axis transverse))
+          (physicalFibreNormSq field axis transverse)
+          oneHundredSixtyNine)
         (subst
           (λ normValue →
             Generated.oneEighteenth * normValue
-            ≤ oneHundredSixtyNine * physicalFibreEdgeEnergy fld axis transverse)
-          (zeroMeanScaledNormExact fld axis transverse meanZero)
+            ≤ oneHundredSixtyNine * physicalFibreEdgeEnergy field axis transverse)
+          (sym (zeroMeanScaledNormExact field axis transverse meanZero))
           (subst
             (λ energyValue →
               Generated.oneEighteenth
-                * scaledCenteredFibreNormSq fld axis transverse
+                * scaledCenteredFibreNormSq field axis transverse
               ≤ energyValue)
-            (scaledEnergy169Exact fld axis transverse)
+            (sym (scaledEnergy169Exact field axis transverse))
             scaled))
   in
   ℚP.*-cancelˡ-≤-pos oneHundredSixtyNine scaledRewritten

@@ -29,7 +29,7 @@ cadoBWCReadmeMirror =
     "CADO-NFS source-tree implementation documentation (public GitHub mirror)"
     "snapshot 2021; README update notes through 2016"
     "https://github.com/MichaelBell/cado-nfs/blob/792169c33c26d05a4f7c90e91584285133ea5c55/linalg/bwc/README"
-    (Source.namedSourceKind "software repository documentation")
+    Source.softwareSource
     "implementation-schema evidence for BWC inputs, files, parameters, balancing/permutation and step ownership; README explicitly warns it may be stale"
     Source.publicAttribution
 

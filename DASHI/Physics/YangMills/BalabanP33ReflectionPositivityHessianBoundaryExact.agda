@@ -32,8 +32,7 @@ module DASHI.Physics.YangMills.BalabanP33ReflectionPositivityHessianBoundaryExac
 -- moment data alone do not determine a positive Hessian or mass gap.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong)
+open import Agda.Builtin.Equality using (_≡_; refl; cong)
 open import Data.Empty using (⊥)
 
 data ObservableUniformity : Set where

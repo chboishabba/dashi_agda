@@ -10,7 +10,7 @@ module DASHI.Physics.YangMills.BalabanOpaqueGlobalAlgebraExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve-∀)
 
 sixTermSumZero :
@@ -26,37 +26,37 @@ sixTermSumZero {a} {b} {c} {d} {e} {f}
 dropScaledZero :
   ∀ (x scale : ℚ) →
   x + scale * 0ℚ ≡ x
-dropScaledZero = solve-∀
+dropScaledZero x scale = solve-∀
 
 scaleThreeSum :
   ∀ (scale a b c : ℚ) →
   scale * (a + (b + c))
   ≡ scale * a + (scale * b + scale * c)
-scaleThreeSum = solve-∀
+scaleThreeSum scale a b c = solve-∀
 
 scaleFourSum :
   ∀ (scale a b c d : ℚ) →
   scale * (a + (b + (c + d)))
   ≡ scale * a + (scale * b + (scale * c + scale * d))
-scaleFourSum = solve-∀
+scaleFourSum scale a b c d = solve-∀
 
 subtractSelfZero :
   ∀ (x : ℚ) →
   x - x ≡ 0ℚ
-subtractSelfZero = solve-∀
+subtractSelfZero x = solve-∀
 
 subtractAddCancel :
   ∀ (x y : ℚ) →
   (x - y) + y ≡ x
-subtractAddCancel = solve-∀
+subtractAddCancel x y = solve-∀
 
 swapSum :
   ∀ (x y : ℚ) →
   x + y ≡ y + x
-swapSum = solve-∀
+swapSum x y = solve-∀
 
 dropTerminalZero4 :
   ∀ (a b c d : ℚ) →
   a + (b + (c + (d + 0ℚ)))
   ≡ a + (b + (c + d))
-dropTerminalZero4 = solve-∀
+dropTerminalZero4 a b c d = solve-∀

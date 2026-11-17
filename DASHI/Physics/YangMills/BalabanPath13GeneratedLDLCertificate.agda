@@ -6,4 +6,4 @@ module DASHI.Physics.YangMills.BalabanPath13GeneratedLDLCertificate where
 -- physical-gap/LDL coefficients rowwise.  No twelve-variable quadratic and no
 -- huge-denominator closed rational expression is sent to ring reflection.
 
-open import DASHI.Physics.YangMills.BalabanPath13NativeIntegerPoincareBridgeExact public
+open import DASHI.Physics.YangMills.BalabanPath13GeneratedLDLCoefficientProofExact public

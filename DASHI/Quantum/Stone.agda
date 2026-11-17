@@ -11,7 +11,7 @@ open import Data.List.Base using (List; _∷_; [])
 open import Data.Nat using (z≤n; s≤s)
 open import Data.Product using (Σ; _,_; _×_)
 
-open import DASHI.Physics.Closure.QuantumCarrierCore using (ℝ; HilbertSpace; Tower; WaveLift; _+ℝ_; _-ℝ_ ; _≤ℝ_; _<ℝ_; maxℝ; toℝ)
+open import DASHI.Unifier using (ℝ; HilbertSpace; Tower; WaveLift; _+ℝ_; _-ℝ_ ; _≤ℝ_; _<ℝ_; maxℝ; toℝ)
 import DASHI.Physics.Closure.BalabanRGMassGapReceiptSurface as YMGap
 import DASHI.Physics.QFT.AQFTCarrierAlgebraQuotientSurface as L5
 import DASHI.Quantum.GNSUniversalProperty as StoneGNS

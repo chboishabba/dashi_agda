@@ -66,18 +66,12 @@ scaledConfiguredPoincareRaw spacing tangent blockZero =
     (spacingSquared spacing)
     (physicalBlockConstrainedDifferencePoincare tangent blockZero)
 
-scaleSwapRaw : ∀ a b c → a * (b * c) ≡ b * a * c
-scaleSwapRaw = ℚRing.solve-∀
-
 physicalCoerciveTermScaleExact : ∀ spacing tangent →
   spacingSquared spacing
     * (configuredPathCoercivityConstant * physicalUnweightedNormSq tangent)
   ≡ physicalCoerciveTermAtSpacing spacing tangent
 physicalCoerciveTermScaleExact spacing tangent =
-  scaleSwapRaw
-    (spacingSquared spacing)
-    configuredPathCoercivityConstant
-    (physicalUnweightedNormSq tangent)
+  ℚRing.solve-∀
 
 physicalLatticeSpacingCoercivity :
   ∀ spacing tangent →
@@ -107,12 +101,6 @@ physicalCoercivityCoefficient :
 physicalCoercivityCoefficient inverseData =
   configuredPathCoercivityConstant * inverseSpacingSquared inverseData
 
-coeffNormExpandRaw : ∀ c i s n → (c * i) * ((s * s) * n) ≡ c * (i * s) * s * n
-coeffNormExpandRaw = ℚRing.solve-∀
-
-coeffNormCancelOneRaw : ∀ c s n → c * 1ℚ * s * n ≡ c * s * n
-coeffNormCancelOneRaw = ℚRing.solve-∀
-
 coefficientTimesPhysicalNormExact :
   ∀ {spacing} (inverseData : LatticeSpacingInverseData spacing) tangent →
   physicalCoercivityCoefficient inverseData
@@ -120,11 +108,7 @@ coefficientTimesPhysicalNormExact :
   ≡ physicalCoerciveTermAtSpacing spacing tangent
 coefficientTimesPhysicalNormExact {spacing} inverseData tangent =
   trans
-    (coeffNormExpandRaw
-      configuredPathCoercivityConstant
-      (inverseSpacingSquared inverseData)
-      (spacingSquared spacing)
-      (physicalUnweightedNormSq tangent))
+    (ℚRing.solve-∀)
     (trans
       (cong
         (λ inverseProduct →
@@ -133,10 +117,7 @@ coefficientTimesPhysicalNormExact {spacing} inverseData tangent =
           * spacingSquared spacing
           * physicalUnweightedNormSq tangent)
         (inverseSpacingSquaredLaw inverseData))
-      (coeffNormCancelOneRaw
-        configuredPathCoercivityConstant
-        (spacingSquared spacing)
-        (physicalUnweightedNormSq tangent)))
+      (ℚRing.solve-∀))
 
 physicalInverseSquareLatticeSpacingCoercivity :
   ∀ {spacing} (inverseData : LatticeSpacingInverseData spacing) tangent →

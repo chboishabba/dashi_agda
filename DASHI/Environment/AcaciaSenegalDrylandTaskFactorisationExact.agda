@@ -100,5 +100,5 @@ canonicalTaskFactorisationBridgeBoundary : TaskFactorisationBridgeBoundary
 canonicalTaskFactorisationBridgeBoundary =
   task-factorisation-bridge-boundary false true false false false true true
 
-reusedStudyPattern : Acacia.AcaciaStudyPattern
-reusedStudyPattern = Acacia.canonicalStudyPattern
+studyPatternReused : Acacia.AcaciaStudyPattern
+studyPatternReused = Acacia.canonicalStudyPattern

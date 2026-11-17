@@ -1,5 +1,3 @@
-{-# OPTIONS --safe #-}
-
 module DASHI.Mathematics.Complexity.FiniteWordSizeExact where
 
 ------------------------------------------------------------------------

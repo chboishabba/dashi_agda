@@ -1144,13 +1144,13 @@ xorRoot =
   SAT.disjunction
     (SAT.conjunction
       (SAT.negate
-        (SAT.formulaVar Fin.zero))
-      (SAT.formulaVar
+        (SAT.variable Fin.zero))
+      (SAT.variable
         (Fin.suc Fin.zero)))
     (SAT.conjunction
-      (SAT.formulaVar Fin.zero)
+      (SAT.variable Fin.zero)
       (SAT.negate
-        (SAT.formulaVar
+        (SAT.variable
           (Fin.suc Fin.zero))))
 
 xorFalseNode : Family.RestrictionNode xorRoot

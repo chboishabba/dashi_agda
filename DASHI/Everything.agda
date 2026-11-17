@@ -113,13 +113,6 @@ import DASHI.Biology.AvianCompassSurface
 import DASHI.Biology.AvianCompassExamples
 import DASHI.Biology.MagnetoreceptionSurface
 import DASHI.Biology.AvianCryptochromeMagnetoreceptionInhabitant
-import DASHI.Biology.AvianMagnetoreceptionStreamFiniteCore
-import DASHI.Biology.AvianMagnetoreceptionThoughtEmporiumEvidenceExact
-import DASHI.Codec.GenBankLocationFiniteCore
-import DASHI.Codec.GenBankFeatureGeometrySymmetryExact
-import DASHI.Codec.GenBankComponentOntologyFiniteCore
-import DASHI.Biology.GenBankInterpretationInteropExact
-import DASHI.Biology.GenBankCanonicalDNAFibreIndexExact
 import DASHI.Biology.AvianHepaticMacrophageMagnetoreception
 import DASHI.Biology.AvianMagnetoreceptionSourceRegistry
 import DASHI.Biology.AvianMagneticFieldPerturbationReceipt
@@ -266,9 +259,3 @@ import DASHI.Visual.ColourPerceptionDASHI
 import DASHI.Visual.RepositoryEvolutionEverything
 import DASHI.Physics.Closure.BothwellYe2022MillimetreRedshiftReceipt
 import DASHI.Physics.Closure.WolfPrize2026UltracoldControlBridge
-
--- Economic source/phenomenon non-promotion using existing proof owners.
-import DASHI.Unified.WealthTaxEvidenceNonPromotionTOEExact
--- Zipf / Hurwitz / rank-family exact finite methods and empirical authority gates.
--- Import graph ownership only; no analytic RH, NS, fractal or empirical promotion.
-import DASHI.Statistics.ZipfFamilyEverything

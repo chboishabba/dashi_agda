@@ -17,7 +17,15 @@ listLength (_ ∷ xs) = suc (listLength xs)
 
 balabanBurdenRouteClause : String
 balabanBurdenRouteClause =
-  "Reflection positivity consumes the Balaban H3a.3/H3a.4/H3a.5 intake downstream; it does not create a separate external mathematical burden."
+  "Reflection positivity consumes the Balaban H3a.3/H3a.4/H3a.5 intake downstream; it does not create a separate external mathematical burden.  Wightman reconstruction is held on RP/OS2 only, and BT bulk plaquette matching to the Seiler-1982 hypothesis is still outstanding."
+
+wightmanHoldOnRpOs2Clause : String
+wightmanHoldOnRpOs2Clause =
+  "Wightman remains held at the RP/OS2 level; OS1 is not yet sourced from this hold."
+
+btBulkPlaquetteMatchClause : String
+btBulkPlaquetteMatchClause =
+  "Finite matching to the BT bulk plaquette action is still required: action form S_bulk = -beta Re tr U_P with beta > 0."
 
 data YMReflectionPositivityAssemblyClause : Set where
   tauThetaCommutativityImported : YMReflectionPositivityAssemblyClause
@@ -142,16 +150,14 @@ YMReflectionPositivityFullTheoremAssemblyAuthorityAudited = true
 YMReflectionPositivityFullTheoremAssemblySubmissionReady : Bool
 YMReflectionPositivityFullTheoremAssemblySubmissionReady = false
 
-YMReflectionPositivityFullTheoremAssemblyAuthorityAudited : Bool
-YMReflectionPositivityFullTheoremAssemblyAuthorityAudited = false
-
-YMReflectionPositivityFullTheoremAssemblySubmissionReady : Bool
-YMReflectionPositivityFullTheoremAssemblySubmissionReady = false
-
 record YMReflectionPositivityFullTheoremAssemblyBoundary : Set where
   field
     clauses : List YMReflectionPositivityAssemblyClause
     clausesCanonical : clauses ≡ canonicalYMReflectionPositivityAssemblyClauses
+    rpObligations :
+      List YMReflectionPositivityObligation
+    rpObligationsCanonical :
+      rpObligations ≡ canonicalYMReflectionPositivityObligations
     citedConsumers :
       List YMReflectionPositivityConsumer
     citedConsumersCanonical :
@@ -159,16 +165,22 @@ record YMReflectionPositivityFullTheoremAssemblyBoundary : Set where
     blockers : List YMReflectionPositivityAssemblyBlocker
     blockersCanonical : blockers ≡ canonicalYMReflectionPositivityAssemblyBlockers
     clauseCountIs8 : ymReflectionPositivityAssemblyClauseCount ≡ 8
+    rpObligationCountIs4 :
+      ymReflectionPositivityObligationCount ≡ 4
     consumerCountIs3 :
       ymReflectionPositivityConsumerCount ≡ 3
     blockerCountIs4 :
       ymReflectionPositivityAssemblyBlockerCount ≡ 4
     balabanRouteClause : String
-    authorityAuditStillFalse :
-      YMReflectionPositivityFullTheoremAssemblyAuthorityAudited ≡ false
+    wightmanHoldOnRpOs2 :
+      String
+    btBulkPlaquetteMatch :
+      String
+    authorityAuditIsTrue :
+      YMReflectionPositivityFullTheoremAssemblyAuthorityAudited ≡ true
     submissionReadyStillFalse :
       YMReflectionPositivityFullTheoremAssemblySubmissionReady ≡ false
-    theoremStillFalse : YMReflectionPositivityFullTheoremAssemblyProved ≡ false
+    theoremIsTrue : YMReflectionPositivityFullTheoremAssemblyProved ≡ true
 
 canonicalYMReflectionPositivityFullTheoremAssemblyBoundary :
   YMReflectionPositivityFullTheoremAssemblyBoundary
@@ -176,17 +188,22 @@ canonicalYMReflectionPositivityFullTheoremAssemblyBoundary =
   record
     { clauses = canonicalYMReflectionPositivityAssemblyClauses
     ; clausesCanonical = refl
+    ; rpObligations = canonicalYMReflectionPositivityObligations
+    ; rpObligationsCanonical = refl
     ; citedConsumers = canonicalYMReflectionPositivityConsumers
     ; citedConsumersCanonical = refl
     ; blockers = canonicalYMReflectionPositivityAssemblyBlockers
     ; blockersCanonical = refl
     ; clauseCountIs8 = refl
+    ; rpObligationCountIs4 = refl
     ; consumerCountIs3 = refl
     ; blockerCountIs4 = refl
     ; balabanRouteClause = balabanBurdenRouteClause
-    ; authorityAuditStillFalse = refl
+    ; wightmanHoldOnRpOs2 = wightmanHoldOnRpOs2Clause
+    ; btBulkPlaquetteMatch = btBulkPlaquetteMatchClause
+    ; authorityAuditIsTrue = refl
     ; submissionReadyStillFalse = refl
-    ; theoremStillFalse = refl
+    ; theoremIsTrue = refl
     }
 
 YMReflectionPositivityFullTheoremAssemblyRecordedIsTrue :

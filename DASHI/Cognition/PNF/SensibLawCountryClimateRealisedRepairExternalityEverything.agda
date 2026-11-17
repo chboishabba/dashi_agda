@@ -65,15 +65,15 @@ terraNulliusClassificationIsNotBiologicalTaxonomy = refl
 
 doctrineRejectedButLandControlStillOpen :
   Continuity.currentCoordinateState Continuity.doctrineRejected ≡ Continuity.paid
-  × Continuity.currentCoordinateState Continuity.landCountryControl ≡ Continuity.openState
+  × Continuity.currentCoordinateState Continuity.landCountryControl ≡ Continuity.open
 doctrineRejectedButLandControlStillOpen = refl , refl
 
 communityAuthorityStillOpen :
-  Continuity.currentCoordinateState Continuity.communityAuthorityBearing ≡ Continuity.openState
+  Continuity.currentCoordinateState Continuity.communityAuthorityBearing ≡ Continuity.open
 communityAuthorityStillOpen = refl
 
 compensationReparationStillOpen :
-  Continuity.currentCoordinateState Continuity.compensationAndReparationRealised ≡ Continuity.openState
+  Continuity.currentCoordinateState Continuity.compensationAndReparationRealised ≡ Continuity.open
 compensationReparationStillOpen = refl
 
 ------------------------------------------------------------------------
@@ -220,15 +220,15 @@ data RealisedJusticeTerminalCoordinate : Set where
 data CurrentTerminalState : Set where
   paid : CurrentTerminalState
   partial : CurrentTerminalState
-  openState : CurrentTerminalState
+  open : CurrentTerminalState
   sourceOutcomeRequired : CurrentTerminalState
 
 
 currentTerminalState : RealisedJusticeTerminalCoordinate → CurrentTerminalState
-currentTerminalState equalSovereignStanding = openState
-currentTerminalState landCountryControl = openState
-currentTerminalState communityAuthority = openState
-currentTerminalState compensationReparation = openState
+currentTerminalState equalSovereignStanding = open
+currentTerminalState landCountryControl = open
+currentTerminalState communityAuthority = open
+currentTerminalState compensationReparation = open
 currentTerminalState materialSafety = sourceOutcomeRequired
 currentTerminalState culturalContinuity = sourceOutcomeRequired
 currentTerminalState ecologicalClimateIntegrity = sourceOutcomeRequired

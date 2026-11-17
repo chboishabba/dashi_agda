@@ -137,8 +137,6 @@ acousticOnlyHeartRateLagDefect :
   Query.QueryAdequacyDefect acousticOnly multimodalSemantics heartRateLeadsTempo
 acousticOnlyHeartRateLagDefect =
   Query.queryAdequacyDefect
-    {semantics = multimodalSemantics}
-    {query = heartRateLeadsTempo}
     acousticMatchLowCardiacDance
     acousticMatchHighCardiacDance
     refl
@@ -148,8 +146,6 @@ acousticOnlyDanceEnergyDefect :
   Query.QueryAdequacyDefect acousticOnly multimodalSemantics danceAddsEnergeticLoadGivenSong
 acousticOnlyDanceEnergyDefect =
   Query.queryAdequacyDefect
-    {semantics = multimodalSemantics}
-    {query = danceAddsEnergeticLoadGivenSong}
     acousticMatchLowCardiacDance
     acousticMatchHighCardiacDance
     refl
@@ -158,18 +154,12 @@ acousticOnlyDanceEnergyDefect =
 acousticOnlyCannotAnswerHeartRateLag :
   Query.AdequateFor acousticOnly multimodalSemantics heartRateLeadsTempo → ⊥
 acousticOnlyCannotAnswerHeartRateLag =
-  Query.queryAdequacyDefectBlocksFactorisation
-    {semantics = multimodalSemantics}
-    {query = heartRateLeadsTempo}
-    acousticOnlyHeartRateLagDefect
+  Query.queryAdequacyDefectBlocksFactorisation acousticOnlyHeartRateLagDefect
 
 acousticOnlyCannotAnswerDanceEnergy :
   Query.AdequateFor acousticOnly multimodalSemantics danceAddsEnergeticLoadGivenSong → ⊥
 acousticOnlyCannotAnswerDanceEnergy =
-  Query.queryAdequacyDefectBlocksFactorisation
-    {semantics = multimodalSemantics}
-    {query = danceAddsEnergeticLoadGivenSong}
-    acousticOnlyDanceEnergyDefect
+  Query.queryAdequacyDefectBlocksFactorisation acousticOnlyDanceEnergyDefect
 
 fullEpisodeObservation : DemoEpisodeState → DemoEpisodeState
 fullEpisodeObservation state = state
@@ -179,9 +169,7 @@ fullEpisodeAdequateFor :
   Query.AdequateFor fullEpisodeObservation multimodalSemantics query
 fullEpisodeAdequateFor query =
   Query.factorsForQuery
-    {semantics = multimodalSemantics}
-    {query = query}
-    (queryAnswer query)
+    (Query.answer multimodalSemantics query)
     (λ state → refl)
 
 queryIndexedBoundaryReused : Query.QueryIndexedProjectionAdequacyBoundary

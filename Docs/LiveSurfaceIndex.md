@@ -22,6 +22,10 @@ These are the only active manuscript homes in the current paper corpus:
 - `Docs/papers/live/Paper3YangMillsClayDraft.md`
 - `Docs/papers/live/Paper8UnificationDraft.md`
 
+Publication sequencing and satellite status are routed through:
+
+- `Docs/papers/PublicationRoadmap.md`
+
 These are the shared live support surfaces for that corpus:
 
 - `Docs/support/live/SupportCompendium.md`

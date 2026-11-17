@@ -1,7 +1,7 @@
 module DASHI.Law.SensibLawWoogarooLegalConsumerAtomCompletionExact where
 
-openState import DASHI.Core.Prelude
-openState import Agda.Builtin.String using (String)
+open import DASHI.Core.Prelude
+open import Agda.Builtin.String using (String)
 
 import DASHI.Law.SensibLawWoogarooAdmissibleFactorsWrongTypeAtomBridgeExact as AFW
 import DASHI.Cognition.PNF.SensibLawWrongTypeLegalElementAlgebraExact as Wrong
@@ -63,7 +63,7 @@ record ExistingAtomReuse : Set where
     activeFederalDecisionWindow : AFW.WoogarooAtom
     authorisedEPBCDelegate : AFW.WoogarooAtom
 
-openState ExistingAtomReuse public
+open ExistingAtomReuse public
 
 canonicalExistingAtomReuse : ExistingAtomReuse
 canonicalExistingAtomReuse = existing-atom-reuse
@@ -123,7 +123,7 @@ data LegalAtomAdmissibleFor : LegalExecutionAtom → LegalExecutionConsumer → 
 data AtomPaymentState : Set where
   sourcePaid : AtomPaymentState
   partiallyPaid : AtomPaymentState
-  openState : AtomPaymentState
+  open : AtomPaymentState
   conditional : AtomPaymentState
 
 record LegalAtomPayment : Set where
@@ -135,13 +135,13 @@ record LegalAtomPayment : Set where
     currentReceipt : String
     residual : String
 
-openState LegalAtomPayment public
+open LegalAtomPayment public
 
 finalPDSubstantiveRecordPayment : LegalAtomPayment
 finalPDSubstantiveRecordPayment = legal-atom-payment
   finalPDSubstantiveRecordAtom
   epbc8575MeritsConsumer
-  openState
+  open
   "The uploaded carrier named 2019-8575-Final-PD.pdf is a one-page s 95B(2) publication/information notice. It proves publication timing and that 1,786 comments were received, but it is not the substantive four-volume Preliminary Documentation record."
   "Acquire the substantive 2026 Preliminary Documentation volumes/attachments and the public-comment summary/response material. Do not let a filename collapse notice identity into substantive-record identity."
 
@@ -189,7 +189,7 @@ s102TimingPayment : LegalAtomPayment
 s102TimingPayment = legal-atom-payment
   worksCommencementTimingAtom
   nca102InterimOrderConsumer
-  openState
+  open
   "Approval exists, but approval is not commencement."
   "Acquire dated commencement notices, works program, site evidence or other same-object timing receipt."
 
@@ -221,7 +221,7 @@ offsetRiskPayment : LegalAtomPayment
 offsetRiskPayment = legal-atom-payment
   offsetBaselineRiskOfLossAtom
   epbc8575OffsetAdequacyConsumer
-  openState
+  open
   "Regional development/conservation context exists but does not determine parcel-specific without-offset loss risk."
   "Determine lawful development/clearing pathways, existing constraints and realistic counterfactual loss for each exact offset parcel."
 
@@ -348,7 +348,7 @@ record ConsumerAtomResidual : Set where
     missingAtoms : String
     principalWrongType : String
 
-openState ConsumerAtomResidual public
+open ConsumerAtomResidual public
 
 federalResidual : ConsumerAtomResidual
 federalResidual = consumer-atom-residual

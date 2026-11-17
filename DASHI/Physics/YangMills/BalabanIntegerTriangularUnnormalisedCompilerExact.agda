@@ -20,27 +20,11 @@ import Data.Rational.Unnormalised.Tactic.RingSolver as URing
 
 import DASHI.Physics.YangMills.BalabanIntegerTriangularQuadraticCertificateExact as QuadZ
 
-open import Relation.Binary.PropositionalEquality as PropEq using (sym; cong₂)
-open PropEq.≡-Reasoning
-import Data.Integer.Base as ℤB
-import Data.Integer.Properties as ℤP
-
 embedZ : ℤ → ℚᵘ
 embedZ z = z /ᵘ 1
 
-embedZ-+ : ∀ a b → embedZ (a + b) ≃ embedZ a +ᵘ embedZ b
-embedZ-+ a b = U.*≡* eq
-  where
-    eq : (a + b) * ℤB.1ℤ ≡ (a * ℤB.1ℤ + b * ℤB.1ℤ) * ℤB.1ℤ
-    eq = begin
-      (a + b) * ℤB.1ℤ
-        ≡⟨ ℤP.*-identityʳ (a + b) ⟩
-      a + b
-        ≡⟨ sym (cong₂ _+_ (ℤP.*-identityʳ a) (ℤP.*-identityʳ b)) ⟩
-      a * ℤB.1ℤ + b * ℤB.1ℤ
-        ≡⟨ sym (ℤP.*-identityʳ (a * ℤB.1ℤ + b * ℤB.1ℤ)) ⟩
-      (a * ℤB.1ℤ + b * ℤB.1ℤ) * ℤB.1ℤ
-        ∎
+embedZ-+ : ∀ a b → embedZ (a + b) ≡ embedZ a +ᵘ embedZ b
+embedZ-+ a b = refl
 
 embedZ-* : ∀ a b → embedZ (a * b) ≡ embedZ a *ᵘ embedZ b
 embedZ-* a b = refl
@@ -59,15 +43,10 @@ dotZU [] ys = 0ℚᵘ
 dotZU xs [] = 0ℚᵘ
 dotZU (a ∷ as) (x ∷ xs) = embedZ a *ᵘ x +ᵘ dotZU as xs
 
-scaleDotStep-raw : ∀ s a x d →
-  (s *ᵘ a) *ᵘ x +ᵘ s *ᵘ d
-  ≃ s *ᵘ (a *ᵘ x +ᵘ d)
-scaleDotStep-raw = URing.solve-∀
-
 scaleDotStep : ∀ s a x d →
   (embedZ s *ᵘ embedZ a) *ᵘ x +ᵘ embedZ s *ᵘ d
   ≃ embedZ s *ᵘ (embedZ a *ᵘ x +ᵘ d)
-scaleDotStep s a x d = scaleDotStep-raw (embedZ s) (embedZ a) x d
+scaleDotStep = URing.solve-∀
 
 dotScaleZU : ∀ scalar coefficients coordinates →
   dotZU (QuadZ.scaleListZ scalar coefficients) coordinates
@@ -79,19 +58,14 @@ dotScaleZU scalar (a ∷ as) (x ∷ xs) =
     (UP.+-cong
       (UP.*-cong
         (UP.≃-reflexive (embedZ-* scalar a))
-        (UP.≃-refl {x}))
+        UP.≃-refl)
       (dotScaleZU scalar as xs))
     (scaleDotStep scalar a x (dotZU as xs))
-
-addDotStep-raw : ∀ a b x da db →
-  (a +ᵘ b) *ᵘ x +ᵘ (da +ᵘ db)
-  ≃ (a *ᵘ x +ᵘ da) +ᵘ (b *ᵘ x +ᵘ db)
-addDotStep-raw = URing.solve-∀
 
 addDotStep : ∀ a b x da db →
   (embedZ a +ᵘ embedZ b) *ᵘ x +ᵘ (da +ᵘ db)
   ≃ (embedZ a *ᵘ x +ᵘ da) +ᵘ (embedZ b *ᵘ x +ᵘ db)
-addDotStep a b x da db = addDotStep-raw (embedZ a) (embedZ b) x da db
+addDotStep = URing.solve-∀
 
 dotAddZU : ∀ left right coordinates →
   dotZU (QuadZ.addListZ left right) coordinates
@@ -103,8 +77,8 @@ dotAddZU (a ∷ as) (b ∷ bs) (x ∷ xs) =
   UP.≃-trans
     (UP.+-cong
       (UP.*-cong
-        (embedZ-+ a b)
-        (UP.≃-refl {x}))
+        (UP.≃-reflexive (embedZ-+ a b))
+        UP.≃-refl)
       (dotAddZU as bs xs))
     (addDotStep a b x (dotZU as xs) (dotZU bs xs))
 
@@ -116,19 +90,12 @@ evalTriZU (QuadZ.qconsZ diagonal row tail) (x ∷ xs) =
   +ᵘ x *ᵘ dotZU row xs
   +ᵘ evalTriZU tail xs
 
-evalScaleStep-raw : ∀ s d x r t →
-  (s *ᵘ d) *ᵘ x *ᵘ x
-  +ᵘ x *ᵘ (s *ᵘ r)
-  +ᵘ s *ᵘ t
-  ≃ s *ᵘ (d *ᵘ x *ᵘ x +ᵘ x *ᵘ r +ᵘ t)
-evalScaleStep-raw = URing.solve-∀
-
 evalScaleStep : ∀ s d x r t →
   (embedZ s *ᵘ embedZ d) *ᵘ x *ᵘ x
   +ᵘ x *ᵘ (embedZ s *ᵘ r)
   +ᵘ embedZ s *ᵘ t
   ≃ embedZ s *ᵘ (embedZ d *ᵘ x *ᵘ x +ᵘ x *ᵘ r +ᵘ t)
-evalScaleStep s d x r t = evalScaleStep-raw (embedZ s) (embedZ d) x r t
+evalScaleStep = URing.solve-∀
 
 evalScaleZU : ∀ scalar quadratic coordinates →
   evalTriZU (QuadZ.scaleTriZ scalar quadratic) coordinates
@@ -143,19 +110,11 @@ evalScaleZU scalar (QuadZ.qconsZ diagonal row tail) (x ∷ xs) =
         (UP.*-cong
           (UP.*-cong
             (UP.≃-reflexive (embedZ-* scalar diagonal))
-            (UP.≃-refl {x}))
-          (UP.≃-refl {x}))
-        (UP.*-cong (UP.≃-refl {x}) (dotScaleZU scalar row xs)))
+            UP.≃-refl)
+          UP.≃-refl)
+        (UP.*-cong UP.≃-refl (dotScaleZU scalar row xs)))
       (evalScaleZU scalar tail xs))
     (evalScaleStep scalar diagonal x (dotZU row xs) (evalTriZU tail xs))
-
-evalAddStep-raw : ∀ dl dr x rl rr tl tr →
-  (dl +ᵘ dr) *ᵘ x *ᵘ x
-  +ᵘ x *ᵘ (rl +ᵘ rr)
-  +ᵘ (tl +ᵘ tr)
-  ≃ (dl *ᵘ x *ᵘ x +ᵘ x *ᵘ rl +ᵘ tl)
-    +ᵘ (dr *ᵘ x *ᵘ x +ᵘ x *ᵘ rr +ᵘ tr)
-evalAddStep-raw = URing.solve-∀
 
 evalAddStep : ∀ dl dr x rl rr tl tr →
   (embedZ dl +ᵘ embedZ dr) *ᵘ x *ᵘ x
@@ -163,8 +122,7 @@ evalAddStep : ∀ dl dr x rl rr tl tr →
   +ᵘ (tl +ᵘ tr)
   ≃ (embedZ dl *ᵘ x *ᵘ x +ᵘ x *ᵘ rl +ᵘ tl)
     +ᵘ (embedZ dr *ᵘ x *ᵘ x +ᵘ x *ᵘ rr +ᵘ tr)
-evalAddStep dl dr x rl rr tl tr =
-  evalAddStep-raw (embedZ dl) (embedZ dr) x rl rr tl tr
+evalAddStep = URing.solve-∀
 
 evalAddZU : ∀ left right coordinates →
   evalTriZU (QuadZ.addTriZ left right) coordinates
@@ -180,27 +138,20 @@ evalAddZU (QuadZ.qconsZ dl rl tl) (QuadZ.qconsZ dr rr tr) (x ∷ xs) =
       (UP.+-cong
         (UP.*-cong
           (UP.*-cong
-            (embedZ-+ dl dr)
-            (UP.≃-refl {x}))
-          (UP.≃-refl {x}))
-        (UP.*-cong (UP.≃-refl {x}) (dotAddZU rl rr xs)))
+            (UP.≃-reflexive (embedZ-+ dl dr))
+            UP.≃-refl)
+          UP.≃-refl)
+        (UP.*-cong UP.≃-refl (dotAddZU rl rr xs)))
       (evalAddZU tl tr xs))
     (evalAddStep dl dr x (dotZU rl xs) (dotZU rr xs)
       (evalTriZU tl xs) (evalTriZU tr xs))
-
-squareStep-raw : ∀ a x d →
-  (a *ᵘ x +ᵘ d) *ᵘ (a *ᵘ x +ᵘ d)
-  ≃ a *ᵘ a *ᵘ x *ᵘ x
-    +ᵘ x *ᵘ ((a +ᵘ a) *ᵘ d)
-    +ᵘ d *ᵘ d
-squareStep-raw = URing.solve-∀
 
 squareStep : ∀ a x d →
   (embedZ a *ᵘ x +ᵘ d) *ᵘ (embedZ a *ᵘ x +ᵘ d)
   ≃ embedZ a *ᵘ embedZ a *ᵘ x *ᵘ x
     +ᵘ x *ᵘ ((embedZ a +ᵘ embedZ a) *ᵘ d)
     +ᵘ d *ᵘ d
-squareStep a x d = squareStep-raw (embedZ a) x d
+squareStep = URing.solve-∀
 
 squareDotZU : ∀ coefficients coordinates →
   dotZU coefficients coordinates *ᵘ dotZU coefficients coordinates
@@ -216,15 +167,15 @@ squareDotZU (a ∷ as) (x ∷ xs) =
           (UP.*-cong
             (UP.*-cong
               (UP.≃-reflexive (embedZ-* a a))
-              (UP.≃-refl {x}))
-            (UP.≃-refl {x}))
-          (UP.*-cong (UP.≃-refl {x})
+              UP.≃-refl)
+            UP.≃-refl)
+          (UP.*-cong UP.≃-refl
             (UP.≃-trans
-              (dotScaleZU (a + a) as xs)
               (UP.*-cong
-                (embedZ-+ a a)
-                (UP.≃-refl {dotZU as xs})))))
-        (UP.≃-sym (squareDotZU as xs))))
+                (UP.≃-reflexive (embedZ-+ a a))
+                UP.≃-refl)
+              (dotScaleZU (a + a) as xs))))
+        (squareDotZU as xs)))
 
 sumSquareValuesZU : List (List ℤ) → List ℚᵘ → ℚᵘ
 sumSquareValuesZU [] coordinates = 0ℚᵘ
@@ -258,7 +209,7 @@ weightedSquareCompilerZU : ∀ weight coefficients coordinates →
 weightedSquareCompilerZU weight coefficients coordinates =
   UP.≃-trans
     (evalScaleZU weight (QuadZ.squareLinearZ coefficients) coordinates)
-    (UP.*-cong (UP.≃-refl {embedZ weight}) (UP.≃-sym (squareDotZU coefficients coordinates)))
+    (UP.*-cong UP.≃-refl (UP.≃-sym (squareDotZU coefficients coordinates)))
 
 sumWeightedSquareCompilerZU : ∀ families coordinates →
   evalTriZU (QuadZ.sumWeightedSquareTriZ families) coordinates

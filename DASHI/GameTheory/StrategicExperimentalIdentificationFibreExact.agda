@@ -53,7 +53,7 @@ IdentifiedForQuery S query =
 
 StrategicIdentificationDefect :
   (S : StrategicIdentificationSurface) →
-  Query S → Set₁
+  Query S → Set
 StrategicIdentificationDefect S query =
   Fibre.ConsumerAdequacyDefect (asConsumerIndexedFibreSystem S) query
 
@@ -75,9 +75,7 @@ observationCollisionCreatesIdentificationDefect :
   StrategicIdentificationDefect S query
 observationCollisionCreatesIdentificationDefect {S} {query} witness =
   Fibre.sameObservationDifferentAnswerGivesDefect
-    (Fibre.sameObservationDifferentConsumerAnswer
-      {system = asConsumerIndexedFibreSystem S}
-      {consumer = query}
+    (Fibre.same-observation-different-consumer-answer
       (leftModel witness)
       (rightModel witness)
       (sameObservation witness)
@@ -88,11 +86,7 @@ identificationDefectBlocksIdentification :
   StrategicIdentificationDefect S query →
   IdentifiedForQuery S query →
   ⊥
-identificationDefectBlocksIdentification {S} {query} defect adequate =
-  Fibre.consumerAdequacyDefectBlocksAdequacy
-    {system = asConsumerIndexedFibreSystem S}
-    {consumer = query}
-    defect adequate
+identificationDefectBlocksIdentification = Fibre.consumerAdequacyDefectBlocksAdequacy
 
 ------------------------------------------------------------------------
 -- Experiment/refinement receipt.
@@ -138,7 +132,7 @@ refinedConstancyReceipt :
     (refinedSystem experiment)
     query
 refinedConstancyReceipt experiment =
-  Fibre.fibreConstantForConsumer
+  Fibre.fibre-constant-for-consumer
     (Fibre.refinedAnswer (refinement experiment))
     (Fibre.targetDescendsAfterRefinement (refinement experiment))
 
@@ -213,5 +207,3 @@ canonicalStrategicExperimentalIdentificationBoundary :
 canonicalStrategicExperimentalIdentificationBoundary =
   strategic-experimental-identification-boundary
     true true true true false false
-
-open StrategicExperimentalIdentificationBoundary public

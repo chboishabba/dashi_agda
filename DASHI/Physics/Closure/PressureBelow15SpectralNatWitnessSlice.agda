@@ -22,7 +22,7 @@ import Ontology.GodelLattice as GL
 import Ontology.Hecke.FactorVecInstances as FVI
 
 import DASHI.Quantum.Stone as Stone
-import DASHI.Physics.Closure.QuantumCarrierCore as U
+import DASHI.Unifier as U
 import DASHI.Physics.Closure.BalancedTritRestEnergyReceipt as Dispersion
 import DASHI.Physics.Closure.PressureBelow15SpectralProbe as Probe
 import DASHI.Physics.Closure.PressureBelow15SpectralTheoremObstruction as S8

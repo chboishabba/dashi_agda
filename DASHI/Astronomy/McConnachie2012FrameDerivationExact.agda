@@ -189,7 +189,7 @@ candidateMappingImpliesExactFirstLightIdentityIsFalse = refl
 ------------------------------------------------------------------------
 
 record KKH86DiagnosisDemand : Set where
-  constructor mkKKH86DiagnosisDemand
+  constructor kkh86DiagnosisDemand
   field
     exactSourceRowRequired : Bool
     exactPrintedDerivedValueRequired : Bool
@@ -201,7 +201,7 @@ record KKH86DiagnosisDemand : Set where
 
 kkh86DiagnosisDemand : KKH86DiagnosisDemand
 kkh86DiagnosisDemand =
-  mkKKH86DiagnosisDemand
+  kkh86DiagnosisDemand
     true true true true true true true
 
 aggregateRMSMayEraseKKH86 : Bool

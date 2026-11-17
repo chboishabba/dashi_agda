@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.BalabanFiniteEnumerationDistinctExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)

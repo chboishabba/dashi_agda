@@ -93,34 +93,34 @@ Field : Set → Set
 Field State = CompletedTorusChannel → State
 
 pullbackFirst : ∀ {State : Set} → Field State → Field State
-pullbackFirst fld channel = fld (completedTranslateFirst channel)
+pullbackFirst field channel = field (completedTranslateFirst channel)
 
 pullbackSecond : ∀ {State : Set} → Field State → Field State
-pullbackSecond fld channel = fld (completedTranslateSecond channel)
+pullbackSecond field channel = field (completedTranslateSecond channel)
 
 pullbackFirstCubedAt :
-  ∀ {State : Set} (fld : Field State) channel →
-  pullbackFirst (pullbackFirst (pullbackFirst fld)) channel ≡ fld channel
-pullbackFirstCubedAt fld (ordinaryTorusChannel point) =
-  cong fld (cong ordinaryTorusChannel (translateFirstCubed point))
-pullbackFirstCubedAt fld completionChannel = refl
+  ∀ {State : Set} (field : Field State) channel →
+  pullbackFirst (pullbackFirst (pullbackFirst field)) channel ≡ field channel
+pullbackFirstCubedAt field (ordinaryTorusChannel point) =
+  cong field (cong ordinaryTorusChannel (translateFirstCubed point))
+pullbackFirstCubedAt field completionChannel = refl
 
 pullbackSecondCubedAt :
-  ∀ {State : Set} (fld : Field State) channel →
-  pullbackSecond (pullbackSecond (pullbackSecond fld)) channel ≡ fld channel
-pullbackSecondCubedAt fld (ordinaryTorusChannel point) =
-  cong fld (cong ordinaryTorusChannel (translateSecondCubed point))
-pullbackSecondCubedAt fld completionChannel = refl
+  ∀ {State : Set} (field : Field State) channel →
+  pullbackSecond (pullbackSecond (pullbackSecond field)) channel ≡ field channel
+pullbackSecondCubedAt field (ordinaryTorusChannel point) =
+  cong field (cong ordinaryTorusChannel (translateSecondCubed point))
+pullbackSecondCubedAt field completionChannel = refl
 
 pullbacksCommuteAt :
-  ∀ {State : Set} (fld : Field State) channel →
-  pullbackFirst (pullbackSecond fld) channel
-  ≡ pullbackSecond (pullbackFirst fld) channel
-pullbacksCommuteAt fld (ordinaryTorusChannel point) =
-  cong fld (cong ordinaryTorusChannel (translationsCommute point))
-pullbacksCommuteAt fld completionChannel = refl
+  ∀ {State : Set} (field : Field State) channel →
+  pullbackFirst (pullbackSecond field) channel
+  ≡ pullbackSecond (pullbackFirst field) channel
+pullbacksCommuteAt field (ordinaryTorusChannel point) =
+  cong field (cong ordinaryTorusChannel (translationsCommute point))
+pullbacksCommuteAt field completionChannel = refl
 
-record FiniteTorusBoundary : Set₁ where
+record FiniteTorusBoundary : Set where
   constructor finiteTorusBoundary
   field
     completedTorusIsContinuousTorus : Set

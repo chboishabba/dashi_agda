@@ -3,7 +3,6 @@ module DASHI.Foundations.Base369NestedUnitCompletionMonsterAssemblyExact where
 open import DASHI.Core.Prelude
 open import Data.Fin using (Fin)
 
-import DASHI.Core.CoarseFineDepthDecompositionExact as Core
 import DASHI.Foundations.Base369FiveModePhaseQuotientExact as Five
 import DASHI.Foundations.Base369StableAlgebraicIdentityTowerExact as Stable
 import DASHI.Foundations.Base369MonsterNamedIdentityRegistryExact as Registry
@@ -252,19 +251,19 @@ modeBoundary54Is53PlusInvariant =
 ------------------------------------------------------------------------
 
 stageTenPlusFreshUnitIsEleven :
-  Core.coarseComponent
+  DASHI.Core.CoarseFineDepthDecompositionExact.coarseComponent
     Depth11.stage11BundlePlusFreshUnit
   ≡ 10
 stageTenPlusFreshUnitIsEleven = refl
 
 stageFreshUnitIsOne :
-  Core.relativeFineComponent
+  DASHI.Core.CoarseFineDepthDecompositionExact.relativeFineComponent
     Depth11.stage11BundlePlusFreshUnit
   ≡ 1
 stageFreshUnitIsOne = refl
 
 stageJoinedDepthIsEleven :
-  Core.absoluteComponent
+  DASHI.Core.CoarseFineDepthDecompositionExact.absoluteComponent
     Depth11.stage11BundlePlusFreshUnit
   ≡ 11
 stageJoinedDepthIsEleven = refl

@@ -17,11 +17,11 @@ module DASHI.Mathematics.Complexity.ConcreteTapeCanonicalWindowPlacementExact wh
 -- compiler.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
-open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans; sym)
+open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 import Data.Fin.Base as Fin
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
@@ -126,10 +126,11 @@ bitsExt {zero} {CNF.[]ᵇ} {CNF.[]ᵇ} pointwise = refl
 bitsExt {suc n}
     {leftHead CNF.∷ᵇ leftTail}
     {rightHead CNF.∷ᵇ rightTail}
-    pointwise =
-  cong₂ CNF._∷ᵇ_
-    (pointwise Fin.zero)
-    (bitsExt (λ i → pointwise (Fin.suc i)))
+    pointwise
+    with pointwise Fin.zero
+       | bitsExt
+          (λ i → pointwise (Fin.suc i))
+... | refl | refl = refl
 
 ------------------------------------------------------------------------
 -- Generic placement of one local bit vector inside one global bit vector
@@ -163,7 +164,7 @@ placementRight :
     (left : CNF.Bits m)
     (right : CNF.Bits n) →
   BitsPlacement right (Canonical.appendBits left right)
-placementRight {m = m} left right = record
+placementRight left right = record
   { rename = finRight m
   ; lookupCorrect = lookupAppendRight left right
   }
@@ -184,39 +185,6 @@ composePlacement first second = record
         (lookupCorrect first i)
   }
 
-tailBits :
-  ∀ {k} → CNF.Bits (suc k) → CNF.Bits k
-tailBits (b CNF.∷ᵇ bs) = bs
-
-appendTailCorrect :
-  ∀ {k n g}
-    {b : Bool} {bs : CNF.Bits k}
-    {r : CNF.Bits n}
-    {G : CNF.Bits g}
-    (leftPlaced : BitsPlacement (b CNF.∷ᵇ bs) G)
-    (rightPlaced : BitsPlacement r G)
-    (j : Fin.Fin (k + n)) →
-  CNF.lookupBit G
-    (finSumCases
-      (λ t → rename leftPlaced (Fin.suc t))
-      (rename rightPlaced)
-      j)
-  ≡ CNF.lookupBit
-      (Canonical.appendBits bs r)
-      j
-appendTailCorrect {zero} {bs = CNF.[]ᵇ} lp rp j =
-  lookupCorrect rp j
-appendTailCorrect {suc k} {bs = b' CNF.∷ᵇ bs'} lp rp Fin.zero =
-  lookupCorrect lp (Fin.suc Fin.zero)
-appendTailCorrect {suc k} {bs = b' CNF.∷ᵇ bs'} lp rp (Fin.suc j) =
-  appendTailCorrect
-    {k}
-    (record
-      { rename = λ t → rename lp (Fin.suc t)
-      ; lookupCorrect = λ t → lookupCorrect lp (Fin.suc t)
-      })
-    rp j
-
 appendPlacement :
   ∀ {m n global : Nat}
     {left : CNF.Bits m}
@@ -227,11 +195,7 @@ appendPlacement :
   BitsPlacement
     (Canonical.appendBits left right)
     globalBits
-appendPlacement {zero} {n = n} {global = global} {left = CNF.[]ᵇ} {right = right} {globalBits = globalBits} leftPlaced rightPlaced = record
-  { rename = finSumCases (rename leftPlaced) (rename rightPlaced)
-  ; lookupCorrect = lookupCorrect rightPlaced
-  }
-appendPlacement {suc m} {n = n} {global = global} {left = b CNF.∷ᵇ bs} {right = right} {globalBits = globalBits} leftPlaced rightPlaced = record
+appendPlacement leftPlaced rightPlaced = record
   { rename =
       finSumCases
         (rename leftPlaced)
@@ -241,19 +205,70 @@ appendPlacement {suc m} {n = n} {global = global} {left = b CNF.∷ᵇ bs} {righ
   }
   where
     pointwise :
-      (i : Fin.Fin (suc m + n)) →
-      CNF.lookupBit globalBits
+      (i : Fin.Fin _) →
+      CNF.lookupBit _
         (finSumCases
           (rename leftPlaced)
           (rename rightPlaced)
           i)
       ≡ CNF.lookupBit
-          (Canonical.appendBits (b CNF.∷ᵇ bs) right)
+          (Canonical.appendBits _ _)
           i
-    pointwise Fin.zero =
+    pointwise {m = zero} i =
+      lookupCorrect rightPlaced i
+    pointwise {m = suc m} Fin.zero =
       lookupCorrect leftPlaced Fin.zero
-    pointwise (Fin.suc i) =
-      appendTailCorrect leftPlaced rightPlaced i
+    pointwise {m = suc m} (Fin.suc i)
+      with i
+    ... | i' =
+      pointwiseTail i'
+      where
+        pointwiseTail :
+          (j : Fin.Fin (m + _)) →
+          CNF.lookupBit _
+            (finSumCases
+              (λ k → rename leftPlaced (Fin.suc k))
+              (rename rightPlaced)
+              j)
+          ≡ CNF.lookupBit
+              (Canonical.appendBits
+                (tailBits _)
+                _)
+              j
+        pointwiseTail = appendTailCorrect leftPlaced rightPlaced
+
+        tailBits :
+          ∀ {k} → CNF.Bits (suc k) → CNF.Bits k
+        tailBits (b CNF.∷ᵇ bs) = bs
+
+        appendTailCorrect :
+          ∀ {k n g}
+            {l : CNF.Bits (suc k)}
+            {r : CNF.Bits n}
+            {G : CNF.Bits g} →
+          BitsPlacement l G →
+          BitsPlacement r G →
+          (j : Fin.Fin (k + n)) →
+          CNF.lookupBit G
+            (finSumCases
+              (λ t → rename leftPlaced (Fin.suc t))
+              (rename rightPlaced)
+              j)
+          ≡ CNF.lookupBit
+              (Canonical.appendBits (tailBits l) r)
+              j
+        appendTailCorrect {zero} lp rp j =
+          lookupCorrect rp j
+        appendTailCorrect {suc k} lp rp Fin.zero =
+          lookupCorrect lp (Fin.suc Fin.zero)
+        appendTailCorrect {suc k} lp rp (Fin.suc j) =
+          appendTailCorrect
+            {k}
+            (record
+              { rename = λ t → rename lp (Fin.suc t)
+              ; lookupCorrect = λ t → lookupCorrect lp (Fin.suc t)
+              })
+            rp j
 
 pullbackPlacement :
   ∀ {local global}
@@ -262,11 +277,11 @@ pullbackPlacement :
     (placement : BitsPlacement localBits globalBits) →
   Rename.pullbackBits (rename placement) globalBits
   ≡ localBits
-pullbackPlacement {globalBits = globalBits} placement =
+pullbackPlacement placement =
   bitsExt λ i →
     trans
       (Rename.pullbackLookup
-        (rename placement) globalBits i)
+        (rename placement) _ i)
       (lookupCorrect placement i)
 
 ------------------------------------------------------------------------
@@ -281,19 +296,19 @@ cellPlacementAt :
       Canonical.EnumerationCoverage (Local.finiteSymbol machine)) →
   Indexed.At index cell cells →
   BitsPlacement
-    (Canonical.encodeCell {machine} stateCoverage symbolCoverage cell)
-    (Flat.encodeCells {machine} stateCoverage symbolCoverage cells)
-cellPlacementAt {machine} stateCoverage symbolCoverage (Indexed.here {x = cell} {xs = rest}) =
+    (Canonical.encodeCell stateCoverage symbolCoverage cell)
+    (Flat.encodeCells stateCoverage symbolCoverage cells)
+cellPlacementAt stateCoverage symbolCoverage Indexed.here =
   placementLeft
-    (Canonical.encodeCell {machine} stateCoverage symbolCoverage cell)
-    (Flat.encodeCells {machine} stateCoverage symbolCoverage rest)
-cellPlacementAt {machine} stateCoverage symbolCoverage
-    (Indexed.there {y = other} {xs = rest} membership) =
+    (Canonical.encodeCell stateCoverage symbolCoverage _)
+    (Flat.encodeCells stateCoverage symbolCoverage _)
+cellPlacementAt stateCoverage symbolCoverage
+    (Indexed.there membership) =
   composePlacement
-    (cellPlacementAt {machine} stateCoverage symbolCoverage membership)
+    (cellPlacementAt stateCoverage symbolCoverage membership)
     (placementRight
-      (Canonical.encodeCell {machine} stateCoverage symbolCoverage other)
-      (Flat.encodeCells {machine} stateCoverage symbolCoverage rest))
+      (Canonical.encodeCell stateCoverage symbolCoverage _)
+      (Flat.encodeCells stateCoverage symbolCoverage _))
 
 ------------------------------------------------------------------------
 -- Lift cell placements into the whole before/after row-pair assignment
@@ -307,14 +322,14 @@ beforeCellPlacement :
       Canonical.EnumerationCoverage (Local.finiteSymbol machine)) →
   Indexed.At index cell (Local.cells before) →
   BitsPlacement
-    (Canonical.encodeCell {machine} stateCoverage symbolCoverage cell)
-    (Flat.encodeRowPair {machine} stateCoverage symbolCoverage before after)
-beforeCellPlacement {machine} {before} {after} stateCoverage symbolCoverage membership =
+    (Canonical.encodeCell stateCoverage symbolCoverage cell)
+    (Flat.encodeRowPair stateCoverage symbolCoverage before after)
+beforeCellPlacement stateCoverage symbolCoverage membership =
   composePlacement
-    (cellPlacementAt {machine} stateCoverage symbolCoverage membership)
+    (cellPlacementAt stateCoverage symbolCoverage membership)
     (placementLeft
-      (Flat.encodeRow {machine} stateCoverage symbolCoverage before)
-      (Flat.encodeRow {machine} stateCoverage symbolCoverage after))
+      (Flat.encodeRow stateCoverage symbolCoverage _)
+      (Flat.encodeRow stateCoverage symbolCoverage _))
 
 afterCellPlacement :
   ∀ {machine before after index cell}
@@ -324,14 +339,14 @@ afterCellPlacement :
       Canonical.EnumerationCoverage (Local.finiteSymbol machine)) →
   Indexed.At index cell (Local.cells after) →
   BitsPlacement
-    (Canonical.encodeCell {machine} stateCoverage symbolCoverage cell)
-    (Flat.encodeRowPair {machine} stateCoverage symbolCoverage before after)
-afterCellPlacement {machine} {before} {after} stateCoverage symbolCoverage membership =
+    (Canonical.encodeCell stateCoverage symbolCoverage cell)
+    (Flat.encodeRowPair stateCoverage symbolCoverage before after)
+afterCellPlacement stateCoverage symbolCoverage membership =
   composePlacement
-    (cellPlacementAt {machine} stateCoverage symbolCoverage membership)
+    (cellPlacementAt stateCoverage symbolCoverage membership)
     (placementRight
-      (Flat.encodeRow {machine} stateCoverage symbolCoverage before)
-      (Flat.encodeRow {machine} stateCoverage symbolCoverage after))
+      (Flat.encodeRow stateCoverage symbolCoverage _)
+      (Flat.encodeRow stateCoverage symbolCoverage _))
 
 ------------------------------------------------------------------------
 -- Exact six-cell placement for an IndexedSixCellWindow
@@ -342,13 +357,13 @@ indexedWindowBitsPlacement :
     (stateCoverage :
       Canonical.EnumerationCoverage (Local.finiteState machine))
     (symbolCoverage :
-      Canonical.EnumerationCoverage (Local.finiteSymbol machine)) →
-  (occurrence : Indexed.IndexedSixCellWindow machine before after) →
+      Canonical.EnumerationCoverage (Local.finiteSymbol machine))
+    (occurrence : Indexed.IndexedSixCellWindow machine before after) →
   BitsPlacement
-    (Flat.encodeSixCells {machine} stateCoverage symbolCoverage
+    (Flat.encodeSixCells stateCoverage symbolCoverage
       (Indexed.forgetIndex occurrence))
-    (Flat.encodeRowPair {machine} stateCoverage symbolCoverage before after)
-indexedWindowBitsPlacement {machine} {before} {after}
+    (Flat.encodeRowPair stateCoverage symbolCoverage before after)
+indexedWindowBitsPlacement
     stateCoverage symbolCoverage occurrence =
   appendPlacement oldLeftPlaced
     (appendPlacement oldCenterPlaced
@@ -360,23 +375,23 @@ indexedWindowBitsPlacement {machine} {before} {after}
     newTriple = Indexed.newTriple occurrence
 
     oldLeftPlaced =
-      beforeCellPlacement {machine} {before} {after} stateCoverage symbolCoverage
+      beforeCellPlacement stateCoverage symbolCoverage
         (Indexed.leftAt oldTriple)
     oldCenterPlaced =
-      beforeCellPlacement {machine} {before} {after} stateCoverage symbolCoverage
+      beforeCellPlacement stateCoverage symbolCoverage
         (Indexed.centerAt oldTriple)
     oldRightPlaced =
-      beforeCellPlacement {machine} {before} {after} stateCoverage symbolCoverage
+      beforeCellPlacement stateCoverage symbolCoverage
         (Indexed.rightAt oldTriple)
 
     newLeftPlaced =
-      afterCellPlacement {machine} {before} {after} stateCoverage symbolCoverage
+      afterCellPlacement stateCoverage symbolCoverage
         (Indexed.leftAt newTriple)
     newCenterPlaced =
-      afterCellPlacement {machine} {before} {after} stateCoverage symbolCoverage
+      afterCellPlacement stateCoverage symbolCoverage
         (Indexed.centerAt newTriple)
     newRightPlaced =
-      afterCellPlacement {machine} {before} {after} stateCoverage symbolCoverage
+      afterCellPlacement stateCoverage symbolCoverage
         (Indexed.rightAt newTriple)
 
 indexedWindowRename :

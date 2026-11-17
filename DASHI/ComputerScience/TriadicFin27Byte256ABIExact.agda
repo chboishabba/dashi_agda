@@ -4,7 +4,6 @@ open import DASHI.Core.Prelude
 open import Data.Empty using (⊥)
 open import Data.Fin.Base using (Fin; zero; suc; inject+)
 
-import DASHI.Codec.TriadicMaskSignFactorization as MaskSign
 import DASHI.ComputerScience.TriadicScalarCompactCodecReferenceExact as Ref
 
 ------------------------------------------------------------------------
@@ -31,32 +30,32 @@ Byte256 = Fin 256
 
 stateCode : Ref.Encoded3 → State27
 stateCode Ref.enc000 = zero
-stateCode (Ref.enc001 MaskSign.negative) = suc zero
-stateCode (Ref.enc001 MaskSign.positive) = suc (suc zero)
-stateCode (Ref.enc010 MaskSign.negative) = suc (suc (suc zero))
-stateCode (Ref.enc010 MaskSign.positive) = suc (suc (suc (suc zero)))
-stateCode (Ref.enc011 MaskSign.negative MaskSign.negative) = suc (suc (suc (suc (suc zero))))
-stateCode (Ref.enc011 MaskSign.negative MaskSign.positive) = suc (suc (suc (suc (suc (suc zero)))))
-stateCode (Ref.enc011 MaskSign.positive MaskSign.negative) = suc (suc (suc (suc (suc (suc (suc zero))))))
-stateCode (Ref.enc011 MaskSign.positive MaskSign.positive) = suc (suc (suc (suc (suc (suc (suc (suc zero)))))))
-stateCode (Ref.enc100 MaskSign.negative) = suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))
-stateCode (Ref.enc100 MaskSign.positive) = suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))
-stateCode (Ref.enc101 MaskSign.negative MaskSign.negative) = suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))
-stateCode (Ref.enc101 MaskSign.negative MaskSign.positive) = suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))
-stateCode (Ref.enc101 MaskSign.positive MaskSign.negative) = suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))
-stateCode (Ref.enc101 MaskSign.positive MaskSign.positive) = suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))
-stateCode (Ref.enc110 MaskSign.negative MaskSign.negative) = suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))))
-stateCode (Ref.enc110 MaskSign.negative MaskSign.positive) = suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))))
-stateCode (Ref.enc110 MaskSign.positive MaskSign.negative) = suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))))))
-stateCode (Ref.enc110 MaskSign.positive MaskSign.positive) = suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))))))
-stateCode (Ref.enc111 MaskSign.negative MaskSign.negative MaskSign.negative) = suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))))))))
-stateCode (Ref.enc111 MaskSign.negative MaskSign.negative MaskSign.positive) = suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))))))))
-stateCode (Ref.enc111 MaskSign.negative MaskSign.positive MaskSign.negative) = suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))))))))))
-stateCode (Ref.enc111 MaskSign.negative MaskSign.positive MaskSign.positive) = suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))))))))))
-stateCode (Ref.enc111 MaskSign.positive MaskSign.negative MaskSign.negative) = suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))))))))))))
-stateCode (Ref.enc111 MaskSign.positive MaskSign.negative MaskSign.positive) = suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))))))))))))
-stateCode (Ref.enc111 MaskSign.positive MaskSign.positive MaskSign.negative) = suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))))))))))))))
-stateCode (Ref.enc111 MaskSign.positive MaskSign.positive MaskSign.positive) = suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))))))))))))))
+stateCode (Ref.enc001 Ref.MaskSign.negative) = suc zero
+stateCode (Ref.enc001 Ref.MaskSign.positive) = suc (suc zero)
+stateCode (Ref.enc010 Ref.MaskSign.negative) = suc (suc (suc zero))
+stateCode (Ref.enc010 Ref.MaskSign.positive) = suc (suc (suc (suc zero)))
+stateCode (Ref.enc011 Ref.MaskSign.negative Ref.MaskSign.negative) = suc (suc (suc (suc (suc zero))))
+stateCode (Ref.enc011 Ref.MaskSign.negative Ref.MaskSign.positive) = suc (suc (suc (suc (suc (suc zero)))))
+stateCode (Ref.enc011 Ref.MaskSign.positive Ref.MaskSign.negative) = suc (suc (suc (suc (suc (suc (suc zero))))))
+stateCode (Ref.enc011 Ref.MaskSign.positive Ref.MaskSign.positive) = suc (suc (suc (suc (suc (suc (suc (suc zero)))))))
+stateCode (Ref.enc100 Ref.MaskSign.negative) = suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))
+stateCode (Ref.enc100 Ref.MaskSign.positive) = suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))
+stateCode (Ref.enc101 Ref.MaskSign.negative Ref.MaskSign.negative) = suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))
+stateCode (Ref.enc101 Ref.MaskSign.negative Ref.MaskSign.positive) = suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))
+stateCode (Ref.enc101 Ref.MaskSign.positive Ref.MaskSign.negative) = suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))
+stateCode (Ref.enc101 Ref.MaskSign.positive Ref.MaskSign.positive) = suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))
+stateCode (Ref.enc110 Ref.MaskSign.negative Ref.MaskSign.negative) = suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))))
+stateCode (Ref.enc110 Ref.MaskSign.negative Ref.MaskSign.positive) = suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))))
+stateCode (Ref.enc110 Ref.MaskSign.positive Ref.MaskSign.negative) = suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))))))
+stateCode (Ref.enc110 Ref.MaskSign.positive Ref.MaskSign.positive) = suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))))))
+stateCode (Ref.enc111 Ref.MaskSign.negative Ref.MaskSign.negative Ref.MaskSign.negative) = suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))))))))
+stateCode (Ref.enc111 Ref.MaskSign.negative Ref.MaskSign.negative Ref.MaskSign.positive) = suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))))))))
+stateCode (Ref.enc111 Ref.MaskSign.negative Ref.MaskSign.positive Ref.MaskSign.negative) = suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))))))))))
+stateCode (Ref.enc111 Ref.MaskSign.negative Ref.MaskSign.positive Ref.MaskSign.positive) = suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))))))))))
+stateCode (Ref.enc111 Ref.MaskSign.positive Ref.MaskSign.negative Ref.MaskSign.negative) = suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))))))))))))
+stateCode (Ref.enc111 Ref.MaskSign.positive Ref.MaskSign.negative Ref.MaskSign.positive) = suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))))))))))))
+stateCode (Ref.enc111 Ref.MaskSign.positive Ref.MaskSign.positive Ref.MaskSign.negative) = suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))))))))))))))
+stateCode (Ref.enc111 Ref.MaskSign.positive Ref.MaskSign.positive Ref.MaskSign.positive) = suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))))))))))))))
 
 ------------------------------------------------------------------------
 -- Decode the dense finite state index.
@@ -64,61 +63,61 @@ stateCode (Ref.enc111 MaskSign.positive MaskSign.positive MaskSign.positive) = s
 
 stateDecode : State27 → Ref.Encoded3
 stateDecode zero = Ref.enc000
-stateDecode (suc zero) = Ref.enc001 MaskSign.negative
-stateDecode (suc (suc zero)) = Ref.enc001 MaskSign.positive
-stateDecode (suc (suc (suc zero))) = Ref.enc010 MaskSign.negative
-stateDecode (suc (suc (suc (suc zero)))) = Ref.enc010 MaskSign.positive
-stateDecode (suc (suc (suc (suc (suc zero))))) = Ref.enc011 MaskSign.negative MaskSign.negative
-stateDecode (suc (suc (suc (suc (suc (suc zero)))))) = Ref.enc011 MaskSign.negative MaskSign.positive
-stateDecode (suc (suc (suc (suc (suc (suc (suc zero))))))) = Ref.enc011 MaskSign.positive MaskSign.negative
-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))) = Ref.enc011 MaskSign.positive MaskSign.positive
-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))) = Ref.enc100 MaskSign.negative
-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))) = Ref.enc100 MaskSign.positive
-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))) = Ref.enc101 MaskSign.negative MaskSign.negative
-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))) = Ref.enc101 MaskSign.negative MaskSign.positive
-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))) = Ref.enc101 MaskSign.positive MaskSign.negative
-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))) = Ref.enc101 MaskSign.positive MaskSign.positive
-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))))) = Ref.enc110 MaskSign.negative MaskSign.negative
-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))))) = Ref.enc110 MaskSign.negative MaskSign.positive
-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))))))) = Ref.enc110 MaskSign.positive MaskSign.negative
-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))))))) = Ref.enc110 MaskSign.positive MaskSign.positive
-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))))))))) = Ref.enc111 MaskSign.negative MaskSign.negative MaskSign.negative
-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))))))))) = Ref.enc111 MaskSign.negative MaskSign.negative MaskSign.positive
-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))))))))))) = Ref.enc111 MaskSign.negative MaskSign.positive MaskSign.negative
-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))))))))))) = Ref.enc111 MaskSign.negative MaskSign.positive MaskSign.positive
-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))))))))))))) = Ref.enc111 MaskSign.positive MaskSign.negative MaskSign.negative
-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))))))))))))) = Ref.enc111 MaskSign.positive MaskSign.negative MaskSign.positive
-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))))))))))))))) = Ref.enc111 MaskSign.positive MaskSign.positive MaskSign.negative
-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))))))))))))))) = Ref.enc111 MaskSign.positive MaskSign.positive MaskSign.positive
+stateDecode (suc zero) = Ref.enc001 Ref.MaskSign.negative
+stateDecode (suc (suc zero)) = Ref.enc001 Ref.MaskSign.positive
+stateDecode (suc (suc (suc zero))) = Ref.enc010 Ref.MaskSign.negative
+stateDecode (suc (suc (suc (suc zero)))) = Ref.enc010 Ref.MaskSign.positive
+stateDecode (suc (suc (suc (suc (suc zero))))) = Ref.enc011 Ref.MaskSign.negative Ref.MaskSign.negative
+stateDecode (suc (suc (suc (suc (suc (suc zero)))))) = Ref.enc011 Ref.MaskSign.negative Ref.MaskSign.positive
+stateDecode (suc (suc (suc (suc (suc (suc (suc zero))))))) = Ref.enc011 Ref.MaskSign.positive Ref.MaskSign.negative
+stateDecode (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))) = Ref.enc011 Ref.MaskSign.positive Ref.MaskSign.positive
+stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))) = Ref.enc100 Ref.MaskSign.negative
+stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))) = Ref.enc100 Ref.MaskSign.positive
+stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))) = Ref.enc101 Ref.MaskSign.negative Ref.MaskSign.negative
+stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))) = Ref.enc101 Ref.MaskSign.negative Ref.MaskSign.positive
+stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))) = Ref.enc101 Ref.MaskSign.positive Ref.MaskSign.negative
+stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))) = Ref.enc101 Ref.MaskSign.positive Ref.MaskSign.positive
+stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))))) = Ref.enc110 Ref.MaskSign.negative Ref.MaskSign.negative
+stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))))) = Ref.enc110 Ref.MaskSign.negative Ref.MaskSign.positive
+stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))))))) = Ref.enc110 Ref.MaskSign.positive Ref.MaskSign.negative
+stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))))))) = Ref.enc110 Ref.MaskSign.positive Ref.MaskSign.positive
+stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))))))))) = Ref.enc111 Ref.MaskSign.negative Ref.MaskSign.negative Ref.MaskSign.negative
+stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))))))))) = Ref.enc111 Ref.MaskSign.negative Ref.MaskSign.negative Ref.MaskSign.positive
+stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))))))))))) = Ref.enc111 Ref.MaskSign.negative Ref.MaskSign.positive Ref.MaskSign.negative
+stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))))))))))) = Ref.enc111 Ref.MaskSign.negative Ref.MaskSign.positive Ref.MaskSign.positive
+stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))))))))))))) = Ref.enc111 Ref.MaskSign.positive Ref.MaskSign.negative Ref.MaskSign.negative
+stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))))))))))))) = Ref.enc111 Ref.MaskSign.positive Ref.MaskSign.negative Ref.MaskSign.positive
+stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))))))))))))))) = Ref.enc111 Ref.MaskSign.positive Ref.MaskSign.positive Ref.MaskSign.negative
+stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))))))))))))))) = Ref.enc111 Ref.MaskSign.positive Ref.MaskSign.positive Ref.MaskSign.positive
 
 stateDecode-stateCode : (e : Ref.Encoded3) → stateDecode (stateCode e) ≡ e
 stateDecode-stateCode Ref.enc000 = refl
-stateDecode-stateCode (Ref.enc001 MaskSign.negative) = refl
-stateDecode-stateCode (Ref.enc001 MaskSign.positive) = refl
-stateDecode-stateCode (Ref.enc010 MaskSign.negative) = refl
-stateDecode-stateCode (Ref.enc010 MaskSign.positive) = refl
-stateDecode-stateCode (Ref.enc011 MaskSign.negative MaskSign.negative) = refl
-stateDecode-stateCode (Ref.enc011 MaskSign.negative MaskSign.positive) = refl
-stateDecode-stateCode (Ref.enc011 MaskSign.positive MaskSign.negative) = refl
-stateDecode-stateCode (Ref.enc011 MaskSign.positive MaskSign.positive) = refl
-stateDecode-stateCode (Ref.enc100 MaskSign.negative) = refl
-stateDecode-stateCode (Ref.enc100 MaskSign.positive) = refl
-stateDecode-stateCode (Ref.enc101 MaskSign.negative MaskSign.negative) = refl
-stateDecode-stateCode (Ref.enc101 MaskSign.negative MaskSign.positive) = refl
-stateDecode-stateCode (Ref.enc101 MaskSign.positive MaskSign.negative) = refl
-stateDecode-stateCode (Ref.enc101 MaskSign.positive MaskSign.positive) = refl
-stateDecode-stateCode (Ref.enc110 MaskSign.negative MaskSign.negative) = refl
-stateDecode-stateCode (Ref.enc110 MaskSign.negative MaskSign.positive) = refl
-stateDecode-stateCode (Ref.enc110 MaskSign.positive MaskSign.negative) = refl
-stateDecode-stateCode (Ref.enc110 MaskSign.positive MaskSign.positive) = refl
-stateDecode-stateCode (Ref.enc111 MaskSign.negative MaskSign.negative MaskSign.negative) = refl
-stateDecode-stateCode (Ref.enc111 MaskSign.negative MaskSign.negative MaskSign.positive) = refl
-stateDecode-stateCode (Ref.enc111 MaskSign.negative MaskSign.positive MaskSign.negative) = refl
-stateDecode-stateCode (Ref.enc111 MaskSign.negative MaskSign.positive MaskSign.positive) = refl
-stateDecode-stateCode (Ref.enc111 MaskSign.positive MaskSign.negative MaskSign.negative) = refl
-stateDecode-stateCode (Ref.enc111 MaskSign.positive MaskSign.negative MaskSign.positive) = refl
-stateDecode-stateCode (Ref.enc111 MaskSign.positive MaskSign.positive MaskSign.negative) = refl
-stateDecode-stateCode (Ref.enc111 MaskSign.positive MaskSign.positive MaskSign.positive) = refl
+stateDecode-stateCode (Ref.enc001 Ref.MaskSign.negative) = refl
+stateDecode-stateCode (Ref.enc001 Ref.MaskSign.positive) = refl
+stateDecode-stateCode (Ref.enc010 Ref.MaskSign.negative) = refl
+stateDecode-stateCode (Ref.enc010 Ref.MaskSign.positive) = refl
+stateDecode-stateCode (Ref.enc011 Ref.MaskSign.negative Ref.MaskSign.negative) = refl
+stateDecode-stateCode (Ref.enc011 Ref.MaskSign.negative Ref.MaskSign.positive) = refl
+stateDecode-stateCode (Ref.enc011 Ref.MaskSign.positive Ref.MaskSign.negative) = refl
+stateDecode-stateCode (Ref.enc011 Ref.MaskSign.positive Ref.MaskSign.positive) = refl
+stateDecode-stateCode (Ref.enc100 Ref.MaskSign.negative) = refl
+stateDecode-stateCode (Ref.enc100 Ref.MaskSign.positive) = refl
+stateDecode-stateCode (Ref.enc101 Ref.MaskSign.negative Ref.MaskSign.negative) = refl
+stateDecode-stateCode (Ref.enc101 Ref.MaskSign.negative Ref.MaskSign.positive) = refl
+stateDecode-stateCode (Ref.enc101 Ref.MaskSign.positive Ref.MaskSign.negative) = refl
+stateDecode-stateCode (Ref.enc101 Ref.MaskSign.positive Ref.MaskSign.positive) = refl
+stateDecode-stateCode (Ref.enc110 Ref.MaskSign.negative Ref.MaskSign.negative) = refl
+stateDecode-stateCode (Ref.enc110 Ref.MaskSign.negative Ref.MaskSign.positive) = refl
+stateDecode-stateCode (Ref.enc110 Ref.MaskSign.positive Ref.MaskSign.negative) = refl
+stateDecode-stateCode (Ref.enc110 Ref.MaskSign.positive Ref.MaskSign.positive) = refl
+stateDecode-stateCode (Ref.enc111 Ref.MaskSign.negative Ref.MaskSign.negative Ref.MaskSign.negative) = refl
+stateDecode-stateCode (Ref.enc111 Ref.MaskSign.negative Ref.MaskSign.negative Ref.MaskSign.positive) = refl
+stateDecode-stateCode (Ref.enc111 Ref.MaskSign.negative Ref.MaskSign.positive Ref.MaskSign.negative) = refl
+stateDecode-stateCode (Ref.enc111 Ref.MaskSign.negative Ref.MaskSign.positive Ref.MaskSign.positive) = refl
+stateDecode-stateCode (Ref.enc111 Ref.MaskSign.positive Ref.MaskSign.negative Ref.MaskSign.negative) = refl
+stateDecode-stateCode (Ref.enc111 Ref.MaskSign.positive Ref.MaskSign.negative Ref.MaskSign.positive) = refl
+stateDecode-stateCode (Ref.enc111 Ref.MaskSign.positive Ref.MaskSign.positive Ref.MaskSign.negative) = refl
+stateDecode-stateCode (Ref.enc111 Ref.MaskSign.positive Ref.MaskSign.positive Ref.MaskSign.positive) = refl
 
 ------------------------------------------------------------------------
 -- Byte-sized embedding.  The 229 upper values are intentionally reserved.
@@ -128,7 +127,7 @@ stateToByte : State27 → Byte256
 stateToByte = inject+ 229
 
 encodeByte3 : Ref.Encoded3 → Byte256
-encodeByte3 s = stateToByte (stateCode s)
+encodeByte3 = stateToByte ∘ stateCode
 
 record TriadicByteABIBoundary : Set where
   constructor triadic-byte-abi-boundary

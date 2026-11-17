@@ -53,7 +53,7 @@ data OffsetWorld : Set where
   degree66At512x65 : OffsetWorld
 
 data DynamicObserver : Set where
-  observedR80_512H80_d65 : DynamicObserver
+  observedR80_512H80_65 : DynamicObserver
 
 data OffsetConsumer : Set where
   explainFiniteHorizonOffset : OffsetConsumer
@@ -63,7 +63,7 @@ data GeneratorDegreeAnswer : Set where
   generatorDegree66 : GeneratorDegreeAnswer
 
 offsetObserve : OffsetWorld → DynamicObserver
-offsetObserve _ = observedR80_512H80_d65
+offsetObserve _ = observedR80_512H80_65
 
 offsetAnswer : OffsetConsumer → OffsetWorld → GeneratorDegreeAnswer
 offsetAnswer explainFiniteHorizonOffset degree65At512x65 = generatorDegree65

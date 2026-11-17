@@ -7,10 +7,9 @@ open import Data.Rational using
   (ℚ; 0ℚ; _+_; _*_; _-_; -_; _≤_; _/_; NonNegative)
 import Data.Rational.Properties as ℚP
 
+open import DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact using
+  (sq; sqDiff)
 open import DASHI.Physics.YangMills.BalabanRationalLDLCertificate
-
-sqDiff : ℚ → ℚ → ℚ
-sqDiff x y = sq (x - y)
 
 ------------------------------------------------------------------------
 -- Exact Path-13 LDL data for the mean-zero open path at coercivity 1/18.

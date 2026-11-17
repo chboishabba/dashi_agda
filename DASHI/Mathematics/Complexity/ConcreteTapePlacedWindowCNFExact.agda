@@ -9,10 +9,9 @@ module DASHI.Mathematics.Complexity.ConcreteTapePlacedWindowCNFExact where
 -- compiler can now be instantiated on the actual concrete tape representation.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List; []; _∷_)
-open import Relation.Binary.PropositionalEquality using (cong; trans; subst; sym)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.ConcreteTapeIndexedWindowExact as Indexed
@@ -39,14 +38,14 @@ indexedWindowPlacedPredicate :
   Placed.PlacedPredicate
     (Canonical.WindowWidth machine)
     (Flat.RowPairWidth before after)
-indexedWindowPlacedPredicate {machine}
+indexedWindowPlacedPredicate
     stateCoverage symbolCoverage rule occurrence =
   Placed.placed-predicate
     (Placement.indexedWindowRename
       stateCoverage symbolCoverage occurrence)
     (Window.encodedWindowPredicate
       (Canonical.canonicalWindowCodec
-        machine stateCoverage symbolCoverage)
+        _ stateCoverage symbolCoverage)
       rule)
 
 indexedWindowPulledPredicate_is_reflectedWindow :
@@ -72,18 +71,10 @@ indexedWindowPulledPredicate_is_reflectedWindow :
       machine rule (Indexed.forgetIndex occurrence)
 indexedWindowPulledPredicate_is_reflectedWindow
     {machine} {before} {after}
-    stateCoverage symbolCoverage rule occurrence =
-  trans
-    (cong (Window.encodedWindowPredicate codec rule)
-      (Placement.indexedWindowPullback_is_canonicalWindowEncoding
-        stateCoverage symbolCoverage occurrence))
-    (cong (Reflect.reflectedLegalWindowBool machine rule)
-      (Window.FixedWidthWindowCodec.decodeEncode codec
-        (Indexed.forgetIndex occurrence)))
-  where
-    codec =
-      Canonical.canonicalWindowCodec
-        machine stateCoverage symbolCoverage
+    stateCoverage symbolCoverage rule occurrence
+    with Placement.indexedWindowPullback_is_canonicalWindowEncoding
+      stateCoverage symbolCoverage occurrence
+... | refl = refl
 
 semanticLegalIndexedWindowImpliesPlacedPredicate :
   ∀ {machine before after}
@@ -108,11 +99,11 @@ semanticLegalIndexedWindowImpliesPlacedPredicate :
         stateCoverage symbolCoverage before after))
   ≡ true
 semanticLegalIndexedWindowImpliesPlacedPredicate
-    stateCoverage symbolCoverage rule occurrence legal =
-  trans
-    (indexedWindowPulledPredicate_is_reflectedWindow
-      stateCoverage symbolCoverage rule occurrence)
-    (Reflect.semanticLegalImpliesReflectedBooleanTrue legal)
+    stateCoverage symbolCoverage rule occurrence legal
+    with indexedWindowPulledPredicate_is_reflectedWindow
+      stateCoverage symbolCoverage rule occurrence
+... | refl =
+  Reflect.semanticLegalImpliesReflectedBooleanTrue legal
 
 placedPredicateImpliesSemanticLegalIndexedWindow :
   ∀ {machine before after}
@@ -137,13 +128,11 @@ placedPredicateImpliesSemanticLegalIndexedWindow :
   Pattern.LegalWindowForRule
     machine rule (Indexed.forgetIndex occurrence)
 placedPredicateImpliesSemanticLegalIndexedWindow
-    stateCoverage symbolCoverage rule occurrence accepted =
-  Reflect.booleanTrueImpliesSemanticLegal
-    (trans
-      (sym
-        (indexedWindowPulledPredicate_is_reflectedWindow
-          stateCoverage symbolCoverage rule occurrence))
-      accepted)
+    stateCoverage symbolCoverage rule occurrence accepted
+    with indexedWindowPulledPredicate_is_reflectedWindow
+      stateCoverage symbolCoverage rule occurrence
+... | refl =
+  Reflect.booleanTrueImpliesSemanticLegal accepted
 
 indexedWindowPlacedCNF :
   ∀ {machine before after}
@@ -178,16 +167,16 @@ semanticLegalIndexedWindowImpliesPlacedCNF :
       stateCoverage symbolCoverage rule occurrence)
     (Flat.encodeRowPair stateCoverage symbolCoverage before after)
   ≡ true
-semanticLegalIndexedWindowImpliesPlacedCNF {before = before} {after = after}
+semanticLegalIndexedWindowImpliesPlacedCNF
     stateCoverage symbolCoverage rule occurrence legal =
-  Rename.placedTruthTableCNFComplete
-    (Placed.rename
-      (indexedWindowPlacedPredicate stateCoverage symbolCoverage rule occurrence))
-    (Placed.predicate
-      (indexedWindowPlacedPredicate stateCoverage symbolCoverage rule occurrence))
-    (Flat.encodeRowPair stateCoverage symbolCoverage before after)
-    (semanticLegalIndexedWindowImpliesPlacedPredicate
-      stateCoverage symbolCoverage rule occurrence legal)
+  Placed.compilePlacedAllComplete
+    (indexedWindowPlacedPredicate
+      stateCoverage symbolCoverage rule occurrence ∷ [])
+    (Flat.encodeRowPair stateCoverage symbolCoverage _ _)
+    (Placed.allPlacedStep
+      (semanticLegalIndexedWindowImpliesPlacedPredicate
+        stateCoverage symbolCoverage rule occurrence legal)
+      Placed.allPlacedDone)
 
 placedCNFImpliesSemanticLegalIndexedWindow :
   ∀ {machine before after}
@@ -206,17 +195,33 @@ placedCNFImpliesSemanticLegalIndexedWindow :
   ≡ true →
   Pattern.LegalWindowForRule
     machine rule (Indexed.forgetIndex occurrence)
-placedCNFImpliesSemanticLegalIndexedWindow {before = before} {after = after}
+placedCNFImpliesSemanticLegalIndexedWindow
     stateCoverage symbolCoverage rule occurrence accepted =
   placedPredicateImpliesSemanticLegalIndexedWindow
     stateCoverage symbolCoverage rule occurrence
-    (Rename.placedTruthTableCNFSound
-      (Placed.rename
-        (indexedWindowPlacedPredicate stateCoverage symbolCoverage rule occurrence))
-      (Placed.predicate
-        (indexedWindowPlacedPredicate stateCoverage symbolCoverage rule occurrence))
-      (Flat.encodeRowPair stateCoverage symbolCoverage before after)
-      accepted)
+    localAccepted
+  where
+    allAccepted =
+      Placed.compilePlacedAllSound
+        (indexedWindowPlacedPredicate
+          stateCoverage symbolCoverage rule occurrence ∷ [])
+        (Flat.encodeRowPair stateCoverage symbolCoverage _ _)
+        accepted
+
+    localAccepted :
+      Placed.predicate
+        (indexedWindowPlacedPredicate
+          stateCoverage symbolCoverage rule occurrence)
+        (Rename.pullbackBits
+          (Placed.rename
+            (indexedWindowPlacedPredicate
+              stateCoverage symbolCoverage rule occurrence))
+          (Flat.encodeRowPair
+            stateCoverage symbolCoverage _ _))
+      ≡ true
+    localAccepted
+      with allAccepted
+    ... | Placed.allPlacedStep proof Placed.allPlacedDone = proof
 
 record PlacedConcreteWindowCNFReceipt
     (machine : Local.ConcreteTapeMachine) : Set₁ where

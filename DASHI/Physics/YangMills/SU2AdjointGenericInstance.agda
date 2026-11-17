@@ -1,11 +1,14 @@
 module DASHI.Physics.YangMills.SU2AdjointGenericInstance where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.List.Base using ([]; _∷_)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
+
+import Tactic.RingSolver as Solver
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.BalabanRealPolynomialRing using
-  (_+R_; _*R_; -R_; zeroR; oneR)
+  (_+R_; _*R_; -R_; zeroR; oneR; realSolverRing)
 open import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier using
   ( Quaternion
   ; quat
@@ -43,12 +46,6 @@ open import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier using
   ; quaternionMultiplyScaleRight
   ; adjointQuaternion
   ; su2Adjoint
-  ; su2IdentityConjugate
-  ; quaternionConjugateMultiply
-  ; adjointQuaternionPureImaginary
-  )
-open import DASHI.Physics.YangMills.BalabanSU2LieBracket using
-  ( lieBracketQuaternionCommutator
   )
 open import DASHI.Physics.YangMills.CompactLieLinearAlgebra
 open import DASHI.Physics.YangMills.SU2CompactLieAlgebraInstance
@@ -59,11 +56,23 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 ------------------------------------------------------------------------
 
 conjugateOneQ : conjugateQ oneQ ≡ oneQ
-conjugateOneQ = su2IdentityConjugate
+conjugateOneQ =
+  quaternionExt
+    (Solver.solve [] realSolverRing)
+    (Solver.solve [] realSolverRing)
+    (Solver.solve [] realSolverRing)
+    (Solver.solve [] realSolverRing)
 
 quaternionConjugateProduct :
   ∀ a b → conjugateQ (a *q b) ≡ conjugateQ b *q conjugateQ a
-quaternionConjugateProduct = quaternionConjugateMultiply
+quaternionConjugateProduct
+  (quat a₀ a₁ a₂ a₃)
+  (quat b₀ b₁ b₂ b₃) =
+  quaternionExt
+    (Solver.solve (a₀ ∷ a₁ ∷ a₂ ∷ a₃ ∷ b₀ ∷ b₁ ∷ b₂ ∷ b₃ ∷ []) realSolverRing)
+    (Solver.solve (a₀ ∷ a₁ ∷ a₂ ∷ a₃ ∷ b₀ ∷ b₁ ∷ b₂ ∷ b₃ ∷ []) realSolverRing)
+    (Solver.solve (a₀ ∷ a₁ ∷ a₂ ∷ a₃ ∷ b₀ ∷ b₁ ∷ b₂ ∷ b₃ ∷ []) realSolverRing)
+    (Solver.solve (a₀ ∷ a₁ ∷ a₂ ∷ a₃ ∷ b₀ ∷ b₁ ∷ b₂ ∷ b₃ ∷ []) realSolverRing)
 
 adjointQ : SU2Quaternion → Quaternion → Quaternion
 adjointQ u q =
@@ -192,11 +201,21 @@ lieQuaternionBracket :
   ∀ X Y →
   lieQuaternion (su2Bracket X Y)
   ≡ quaternionCommutator (lieQuaternion X) (lieQuaternion Y)
-lieQuaternionBracket = lieBracketQuaternionCommutator
+lieQuaternionBracket
+  (su2Lie x y z)
+  (su2Lie u v w) =
+  quaternionExt
+    (Solver.solve (x ∷ y ∷ z ∷ u ∷ v ∷ w ∷ []) realSolverRing)
+    (Solver.solve (x ∷ y ∷ z ∷ u ∷ v ∷ w ∷ []) realSolverRing)
+    (Solver.solve (x ∷ y ∷ z ∷ u ∷ v ∷ w ∷ []) realSolverRing)
+    (Solver.solve (x ∷ y ∷ z ∷ u ∷ v ∷ w ∷ []) realSolverRing)
 
 adjointQuaternionPure :
   ∀ u X → q0 (adjointQuaternion u X) ≡ zeroR
-adjointQuaternionPure = adjointQuaternionPureImaginary
+adjointQuaternionPure
+  (su2q (quat a b c d) unit)
+  (su2Lie x y z) =
+  Solver.solve (a ∷ b ∷ c ∷ d ∷ x ∷ y ∷ z ∷ []) realSolverRing
 
 lieQuaternionLieFromPure :
   ∀ q → q0 q ≡ zeroR → lieQuaternion (lieFromQuaternion q) ≡ q

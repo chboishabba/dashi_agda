@@ -2,8 +2,7 @@ module DASHI.Biology.Protein.TRPA1SingleResidueThermalAdaptationExact where
 
 open import DASHI.Core.Prelude using (⊥)
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (sym; trans)
+open import Agda.Builtin.Equality using (_≡_; refl; sym; trans)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Biology.Protein.ProteinFunctionProjection as Function

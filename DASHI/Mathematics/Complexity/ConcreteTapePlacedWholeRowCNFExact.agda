@@ -9,8 +9,7 @@ module DASHI.Mathematics.Complexity.ConcreteTapePlacedWholeRowCNFExact where
 -- theorem into the common flat row-pair variable space.
 ------------------------------------------------------------------------
 
-open import Agda.Primitive using (Level; _⊔_)
-open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
@@ -43,9 +42,9 @@ shiftTriple :
   Indexed.TripleAt
     (suc n) left center right (head ∷ xs)
 shiftTriple triple = record
-  { leftAt = shiftAt (Indexed.leftAt triple)
-  ; centerAt = shiftAt (Indexed.centerAt triple)
-  ; rightAt = shiftAt (Indexed.rightAt triple)
+  { Indexed.leftAt = shiftAt (Indexed.leftAt triple)
+  ; Indexed.centerAt = shiftAt (Indexed.centerAt triple)
+  ; Indexed.rightAt = shiftAt (Indexed.rightAt triple)
   }
 
 shiftIndexedWindow :
@@ -67,15 +66,15 @@ shiftIndexedWindow :
     (Local.tape-row (beforeHead ∷ beforeTail))
     (Local.tape-row (afterHead ∷ afterTail))
 shiftIndexedWindow beforeHead afterHead occurrence = record
-  { index = suc (Indexed.index occurrence)
-  ; oldLeft = Indexed.oldLeft occurrence
-  ; oldCenter = Indexed.oldCenter occurrence
-  ; oldRight = Indexed.oldRight occurrence
-  ; newLeft = Indexed.newLeft occurrence
-  ; newCenter = Indexed.newCenter occurrence
-  ; newRight = Indexed.newRight occurrence
-  ; oldTriple = shiftTriple (Indexed.oldTriple occurrence)
-  ; newTriple = shiftTriple (Indexed.newTriple occurrence)
+  { Indexed.index = suc (Indexed.index occurrence)
+  ; Indexed.oldLeft = Indexed.oldLeft occurrence
+  ; Indexed.oldCenter = Indexed.oldCenter occurrence
+  ; Indexed.oldRight = Indexed.oldRight occurrence
+  ; Indexed.newLeft = Indexed.newLeft occurrence
+  ; Indexed.newCenter = Indexed.newCenter occurrence
+  ; Indexed.newRight = Indexed.newRight occurrence
+  ; Indexed.oldTriple = shiftTriple (Indexed.oldTriple occurrence)
+  ; Indexed.newTriple = shiftTriple (Indexed.newTriple occurrence)
   }
 
 headIndexedWindow :
@@ -103,53 +102,28 @@ headIndexedWindow :
 headIndexedWindow
     oldLeft oldCenter oldRight oldRest
     newLeft newCenter newRight newRest = record
-  { index = zero
-  ; oldLeft = oldLeft
-  ; oldCenter = oldCenter
-  ; oldRight = oldRight
-  ; newLeft = newLeft
-  ; newCenter = newCenter
-  ; newRight = newRight
-  ; oldTriple = record
-      { leftAt = Indexed.here
-      ; centerAt = Indexed.there Indexed.here
-      ; rightAt = Indexed.there (Indexed.there Indexed.here)
+  { Indexed.index = zero
+  ; Indexed.oldLeft = oldLeft
+  ; Indexed.oldCenter = oldCenter
+  ; Indexed.oldRight = oldRight
+  ; Indexed.newLeft = newLeft
+  ; Indexed.newCenter = newCenter
+  ; Indexed.newRight = newRight
+  ; Indexed.oldTriple = record
+      { Indexed.leftAt = Indexed.here
+      ; Indexed.centerAt = Indexed.there Indexed.here
+      ; Indexed.rightAt = Indexed.there (Indexed.there Indexed.here)
       }
-  ; newTriple = record
-      { leftAt = Indexed.here
-      ; centerAt = Indexed.there Indexed.here
-      ; rightAt = Indexed.there (Indexed.there Indexed.here)
+  ; Indexed.newTriple = record
+      { Indexed.leftAt = Indexed.here
+      ; Indexed.centerAt = Indexed.there Indexed.here
+      ; Indexed.rightAt = Indexed.there (Indexed.there Indexed.here)
       }
   }
 
 ------------------------------------------------------------------------
 -- Indexed recursive scan
 ------------------------------------------------------------------------
-
-mapShiftIndexedWindows :
-  ∀ {machine}
-    {beforeTail afterTail :
-      List (Local.TapeCell
-        (Local.State machine)
-        (Local.Symbol machine))}
-    (beforeHead afterHead :
-      Local.TapeCell
-        (Local.State machine)
-        (Local.Symbol machine)) →
-  List
-    (Indexed.IndexedSixCellWindow
-      machine
-      (Local.tape-row beforeTail)
-      (Local.tape-row afterTail)) →
-  List
-    (Indexed.IndexedSixCellWindow
-      machine
-      (Local.tape-row (beforeHead ∷ beforeTail))
-      (Local.tape-row (afterHead ∷ afterTail)))
-mapShiftIndexedWindows beforeHead afterHead [] = []
-mapShiftIndexedWindows beforeHead afterHead (occurrence ∷ rest) =
-  shiftIndexedWindow beforeHead afterHead occurrence
-  ∷ mapShiftIndexedWindows beforeHead afterHead rest
 
 scanIndexedWindowsCells :
   (machine : Local.ConcreteTapeMachine) →
@@ -168,10 +142,26 @@ scanIndexedWindowsCells machine
   headIndexedWindow
       oldLeft oldCenter oldRight oldRest
       newLeft newCenter newRight newRest
-  ∷ mapShiftIndexedWindows oldLeft newLeft
+  ∷ mapShift
       (scanIndexedWindowsCells machine
         (oldCenter ∷ oldRight ∷ oldRest)
         (newCenter ∷ newRight ∷ newRest))
+  where
+    mapShift :
+      List
+        (Indexed.IndexedSixCellWindow
+          machine
+          (Local.tape-row (oldCenter ∷ oldRight ∷ oldRest))
+          (Local.tape-row (newCenter ∷ newRight ∷ newRest))) →
+      List
+        (Indexed.IndexedSixCellWindow
+          machine
+          (Local.tape-row (oldLeft ∷ oldCenter ∷ oldRight ∷ oldRest))
+          (Local.tape-row (newLeft ∷ newCenter ∷ newRight ∷ newRest)))
+    mapShift [] = []
+    mapShift (occurrence ∷ rest) =
+      shiftIndexedWindow oldLeft newLeft occurrence
+      ∷ mapShift rest
 scanIndexedWindowsCells machine _ _ = []
 
 scanIndexedWindows :
@@ -194,29 +184,6 @@ mapForgetIndexed :
 mapForgetIndexed [] = []
 mapForgetIndexed (occurrence ∷ rest) =
   Indexed.forgetIndex occurrence ∷ mapForgetIndexed rest
-
-mapForget_mapShift :
-  ∀ {machine}
-    {beforeTail afterTail :
-      List (Local.TapeCell
-        (Local.State machine)
-        (Local.Symbol machine))}
-    (beforeHead afterHead :
-      Local.TapeCell
-        (Local.State machine)
-        (Local.Symbol machine))
-    (xs :
-      List
-        (Indexed.IndexedSixCellWindow
-          machine
-          (Local.tape-row beforeTail)
-          (Local.tape-row afterTail))) →
-  mapForgetIndexed (mapShiftIndexedWindows beforeHead afterHead xs)
-  ≡ mapForgetIndexed xs
-mapForget_mapShift beforeHead afterHead [] = refl
-mapForget_mapShift beforeHead afterHead (occurrence ∷ rest) =
-  cong (Indexed.forgetIndex occurrence ∷_)
-    (mapForget_mapShift beforeHead afterHead rest)
 
 scanIndexed_forget :
   ∀ (machine : Local.ConcreteTapeMachine)
@@ -249,40 +216,15 @@ scanIndexed_forget machine
   refl
 scanIndexed_forget machine
     (Local.tape-row (oldLeft ∷ oldCenter ∷ oldRight ∷ oldRest))
-    (Local.tape-row (newLeft ∷ newCenter ∷ newRight ∷ newRest)) =
-  cong (Local.six-cell-window oldLeft oldCenter oldRight newLeft newCenter newRight ∷_)
-    (trans
-      (mapForget_mapShift oldLeft newLeft
-        (scanIndexedWindowsCells machine
-          (oldCenter ∷ oldRight ∷ oldRest)
-          (newCenter ∷ newRight ∷ newRest)))
-      (scanIndexed_forget machine
-        (Local.tape-row (oldCenter ∷ oldRight ∷ oldRest))
-        (Local.tape-row (newCenter ∷ newRight ∷ newRest))))
+    (Local.tape-row (newLeft ∷ newCenter ∷ newRight ∷ newRest))
+    rewrite scanIndexed_forget machine
+      (Local.tape-row (oldCenter ∷ oldRight ∷ oldRest))
+      (Local.tape-row (newCenter ∷ newRight ∷ newRest)) =
+  refl
 
 ------------------------------------------------------------------------
 -- Compile every indexed window into the common global row-pair variable space
 ------------------------------------------------------------------------
-
-compileIndexedWindows :
-  ∀ {machine before after}
-    (stateCoverage :
-      Canonical.EnumerationCoverage (Local.finiteState machine))
-    (symbolCoverage :
-      Canonical.EnumerationCoverage (Local.finiteSymbol machine))
-    (rule : Local.TapeRule
-      (Local.State machine)
-      (Local.Symbol machine)) →
-  List (Indexed.IndexedSixCellWindow machine before after) →
-  List
-    (Placed.PlacedPredicate
-      (Canonical.WindowWidth machine)
-      (Flat.RowPairWidth before after))
-compileIndexedWindows stateCoverage symbolCoverage rule [] = []
-compileIndexedWindows stateCoverage symbolCoverage rule (occurrence ∷ rest) =
-  PlacedWindow.indexedWindowPlacedPredicate
-    stateCoverage symbolCoverage rule occurrence
-  ∷ compileIndexedWindows stateCoverage symbolCoverage rule rest
 
 placedPredicatesForIndexedScan :
   ∀ {machine}
@@ -300,8 +242,19 @@ placedPredicatesForIndexedScan :
       (Flat.RowPairWidth before after))
 placedPredicatesForIndexedScan
     stateCoverage symbolCoverage rule before after =
-  compileIndexedWindows stateCoverage symbolCoverage rule
-    (scanIndexedWindows _ before after)
+  go (scanIndexedWindows _ before after)
+  where
+    go :
+      List (Indexed.IndexedSixCellWindow _ before after) →
+      List
+        (Placed.PlacedPredicate
+          (Canonical.WindowWidth _)
+          (Flat.RowPairWidth before after))
+    go [] = []
+    go (occurrence ∷ rest) =
+      PlacedWindow.indexedWindowPlacedPredicate
+        stateCoverage symbolCoverage rule occurrence
+      ∷ go rest
 
 wholeRowPlacedCNF :
   ∀ {machine}
@@ -326,7 +279,7 @@ data AllIndexedLegal
       (Local.State machine)
       (Local.Symbol machine))
     {before after : Local.TapeRow machine} :
-    List (Indexed.IndexedSixCellWindow machine before after) → Set₁ where
+    List (Indexed.IndexedSixCellWindow machine before after) → Set where
   allIndexedNil :
     AllIndexedLegal rule []
   allIndexedCons :
@@ -345,21 +298,33 @@ allIndexedLegalImpliesPlacedPredicates :
     (occurrences :
       List (Indexed.IndexedSixCellWindow machine before after)) →
   AllIndexedLegal rule occurrences →
-  Placed.AllPlacedSatisfied
+  Placed.AllPlacedPredicatesHold
+    (compile occurrences)
     (Flat.encodeRowPair stateCoverage symbolCoverage before after)
-    (compileIndexedWindows stateCoverage symbolCoverage rule occurrences)
-allIndexedLegalImpliesPlacedPredicates {machine} {before} {after} {rule}
+  where
+    compile :
+      List (Indexed.IndexedSixCellWindow machine before after) →
+      List
+        (Placed.PlacedPredicate
+          (Canonical.WindowWidth machine)
+          (Flat.RowPairWidth before after))
+    compile [] = []
+    compile (occurrence ∷ rest) =
+      PlacedWindow.indexedWindowPlacedPredicate
+        stateCoverage symbolCoverage rule occurrence
+      ∷ compile rest
+allIndexedLegalImpliesPlacedPredicates
     stateCoverage symbolCoverage
     [] allIndexedNil =
   Placed.allPlacedDone
-allIndexedLegalImpliesPlacedPredicates {machine} {before} {after} {rule}
+allIndexedLegalImpliesPlacedPredicates
     stateCoverage symbolCoverage
     (occurrence ∷ rest)
     (allIndexedCons legal restLegal) =
   Placed.allPlacedStep
     (PlacedWindow.semanticLegalIndexedWindowImpliesPlacedPredicate
-      stateCoverage symbolCoverage rule occurrence legal)
-    (allIndexedLegalImpliesPlacedPredicates {machine} {before} {after} {rule}
+      stateCoverage symbolCoverage _ occurrence legal)
+    (allIndexedLegalImpliesPlacedPredicates
       stateCoverage symbolCoverage rest restLegal)
 
 allIndexedLegalImpliesWholeRowPlacedCNF :
@@ -375,15 +340,15 @@ allIndexedLegalImpliesWholeRowPlacedCNF :
       stateCoverage symbolCoverage rule before after)
     (Flat.encodeRowPair stateCoverage symbolCoverage before after)
   ≡ true
-allIndexedLegalImpliesWholeRowPlacedCNF {machine} {before} {after} {rule}
+allIndexedLegalImpliesWholeRowPlacedCNF
     stateCoverage symbolCoverage legal =
   Placed.compilePlacedAllComplete
     (placedPredicatesForIndexedScan
-      stateCoverage symbolCoverage rule before after)
-    (Flat.encodeRowPair stateCoverage symbolCoverage before after)
-    (allIndexedLegalImpliesPlacedPredicates {machine} {before} {after} {rule}
+      stateCoverage symbolCoverage _ _ _)
+    (Flat.encodeRowPair stateCoverage symbolCoverage _ _)
+    (allIndexedLegalImpliesPlacedPredicates
       stateCoverage symbolCoverage
-      (scanIndexedWindows machine before after) legal)
+      (scanIndexedWindows _ _ _) legal)
 
 
 placedPredicatesImpliesAllIndexedLegal :
@@ -394,22 +359,34 @@ placedPredicatesImpliesAllIndexedLegal :
       Canonical.EnumerationCoverage (Local.finiteSymbol machine))
     (occurrences :
       List (Indexed.IndexedSixCellWindow machine before after)) →
-  Placed.AllPlacedSatisfied
-    (Flat.encodeRowPair stateCoverage symbolCoverage before after)
-    (compileIndexedWindows stateCoverage symbolCoverage rule occurrences) →
+  Placed.AllPlacedPredicatesHold
+    (compile occurrences)
+    (Flat.encodeRowPair stateCoverage symbolCoverage before after) →
   AllIndexedLegal rule occurrences
+  where
+    compile :
+      List (Indexed.IndexedSixCellWindow machine before after) →
+      List
+        (Placed.PlacedPredicate
+          (Canonical.WindowWidth machine)
+          (Flat.RowPairWidth before after))
+    compile [] = []
+    compile (occurrence ∷ rest) =
+      PlacedWindow.indexedWindowPlacedPredicate
+        stateCoverage symbolCoverage rule occurrence
+      ∷ compile rest
 placedPredicatesImpliesAllIndexedLegal
     stateCoverage symbolCoverage
     [] Placed.allPlacedDone =
   allIndexedNil
-placedPredicatesImpliesAllIndexedLegal {machine} {before} {after} {rule}
+placedPredicatesImpliesAllIndexedLegal
     stateCoverage symbolCoverage
     (occurrence ∷ rest)
     (Placed.allPlacedStep accepted restAccepted) =
   allIndexedCons
     (PlacedWindow.placedPredicateImpliesSemanticLegalIndexedWindow
-      stateCoverage symbolCoverage rule occurrence accepted)
-    (placedPredicatesImpliesAllIndexedLegal {machine} {before} {after} {rule}
+      stateCoverage symbolCoverage _ occurrence accepted)
+    (placedPredicatesImpliesAllIndexedLegal
       stateCoverage symbolCoverage rest restAccepted)
 
 wholeRowPlacedCNFImpliesAllIndexedLegal :
@@ -425,21 +402,16 @@ wholeRowPlacedCNFImpliesAllIndexedLegal :
   ≡ true →
   AllIndexedLegal rule
     (scanIndexedWindows machine before after)
-wholeRowPlacedCNFImpliesAllIndexedLegal {machine} {before} {after} {rule}
+wholeRowPlacedCNFImpliesAllIndexedLegal
     stateCoverage symbolCoverage accepted =
-  placedPredicatesImpliesAllIndexedLegal {machine} {before} {after} {rule}
+  placedPredicatesImpliesAllIndexedLegal
     stateCoverage symbolCoverage
-    (scanIndexedWindows machine before after)
+    (scanIndexedWindows _ _ _)
     (Placed.compilePlacedAllSound
       (placedPredicatesForIndexedScan
-        stateCoverage symbolCoverage rule before after)
-      (Flat.encodeRowPair stateCoverage symbolCoverage before after)
+        stateCoverage symbolCoverage _ _ _)
+      (Flat.encodeRowPair stateCoverage symbolCoverage _ _)
       accepted)
-
-record _↔_ {ℓ₁ ℓ₂ : Level} (A : Set ℓ₁) (B : Set ℓ₂) : Set (ℓ₁ ⊔ ℓ₂) where
-  field
-    to : A → B
-    from : B → A
 
 wholeRowPlacedCNF_iff_allIndexedLegal :
   ∀ {machine before after rule}

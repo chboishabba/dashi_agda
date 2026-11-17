@@ -26,8 +26,7 @@ module DASHI.Physics.Common.GradedLocalCompatibilitySystemExact where
 -- of locality in those three domains.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong)
+open import Agda.Builtin.Equality using (_≡_; refl; cong)
 
 record GradedLocalCompatibilitySystem : Set₁ where
   constructor gradedLocalCompatibilitySystem

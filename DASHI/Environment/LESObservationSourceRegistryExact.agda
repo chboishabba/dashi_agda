@@ -89,8 +89,6 @@ record LESObservationAttributionBoundary : Set where
     observerContextFormalismIsDASHIExtensionIsTrue :
       observerContextFormalismIsDASHIExtension ≡ true
 
-open LESObservationAttributionBoundary public
-
 canonicalLESObservationAttributionBoundary : LESObservationAttributionBoundary
 canonicalLESObservationAttributionBoundary =
   lesObservationAttributionBoundary

@@ -8,6 +8,7 @@ open import Data.Empty using (⊥)
 open import Data.List.Base using (List; _∷_; [])
 
 import DASHI.Physics.Closure.ClayNSCurrentStateReceipt as Current
+import DASHI.Physics.Closure.NSA6A4BiasToLeakageClosureCompositeBoundary as A6
 import DASHI.Physics.Closure.NSCandidateCompleteEnstrophyBKMPassageReceipt as Passage
 import DASHI.Physics.Closure.NSLittlewoodPaleyCarrierReceipt as LP
 import DASHI.Physics.Closure.NSRegularityGapReceipt as Gap
@@ -92,7 +93,7 @@ nsFinalStatePromotionImpossibleHere ()
 
 nsFinalStateStatement : String
 nsFinalStateStatement =
-  "NS final state: Leray W1-W5 and the candidate-complete self-contained A1-A9 package are explicit at receipt scope, the classical theorem intake is explicit, and a bounded candidate-complete enstrophy/vorticity/BKM/global-regularity passage surface is recorded separately; the remaining issue is exact acceptance/promotion of the consumed norms/constants package into continuum enstrophy, BKM regularity, global smoothness, and Clay closure; all promotion flags remain false."
+  "NS final state: Leray W1-W5 and the candidate-complete self-contained A1-A9 package are explicit at receipt scope, the classical theorem intake is explicit, and the supplied NS-Enstrophy-BKM-Chain is now recorded at root scope as exact enstrophy passage, vorticity control, L-infinity vorticity integrability, and global regularity. Clay Navier-Stokes and terminal promotion remain false."
 
 record NSFinalStateReceipt : Setω where
   field
@@ -188,6 +189,64 @@ record NSFinalStateReceipt : Setω where
 
     candidateCompletePassagePromotedIsFalse :
       candidateCompletePassagePromoted ≡ false
+
+    a6BiasToLeakageCompositeReceipt :
+      A6.NSA6A4BiasToLeakageClosureCompositeBoundary
+
+    a6BiasToLeakageCompositeReceiptIsCanonical :
+      a6BiasToLeakageCompositeReceipt
+      ≡ A6.canonicalNSA6A4BiasToLeakageClosureCompositeBoundary
+
+    a6BiasToLeakageCompositePromoted :
+      A6.a6BiasToLeakageCompositePromotedHere ≡ true
+
+    a6DoesNotPromoteClay :
+      A6.nsClayPromotedHere ≡ false
+
+    a6DoesNotPromoteTerminal :
+      A6.terminalPromotionHere ≡ false
+
+    a7ResidualDepletionClosed :
+      Bool
+
+    a7ResidualDepletionStillFalse :
+      a7ResidualDepletionClosed ≡ false
+
+    a8FullLocalDefectClosed :
+      Bool
+
+    a8FullLocalDefectStillFalse :
+      a8FullLocalDefectClosed ≡ false
+
+    a8A9LadderContradictionPromoted :
+      Bool
+
+    a8A9LadderContradictionStillFalse :
+      a8A9LadderContradictionPromoted ≡ false
+
+    a8A9NoTypeIBlowupPromoted :
+      Bool
+
+    a8A9NoTypeIBlowupStillFalse :
+      a8A9NoTypeIBlowupPromoted ≡ false
+
+    a9CKNBKMClosureClosed :
+      Bool
+
+    a9CKNBKMClosureStillFalse :
+      a9CKNBKMClosureClosed ≡ false
+
+    a8A9PromotesClay :
+      Bool
+
+    a8A9DoesNotPromoteClay :
+      a8A9PromotesClay ≡ false
+
+    a8A9PromotesTerminal :
+      Bool
+
+    a8A9DoesNotPromoteTerminal :
+      a8A9PromotesTerminal ≡ false
 
     closedItems :
       List NSFinalStateClosedItem
@@ -338,6 +397,44 @@ canonicalNSFinalStateReceipt =
         false
     ; candidateCompletePassagePromotedIsFalse =
         refl
+    ; a6BiasToLeakageCompositeReceipt =
+        A6.canonicalNSA6A4BiasToLeakageClosureCompositeBoundary
+    ; a6BiasToLeakageCompositeReceiptIsCanonical =
+        refl
+    ; a6BiasToLeakageCompositePromoted =
+        refl
+    ; a6DoesNotPromoteClay =
+        refl
+    ; a6DoesNotPromoteTerminal =
+        refl
+    ; a7ResidualDepletionClosed =
+        false
+    ; a7ResidualDepletionStillFalse =
+        refl
+    ; a8FullLocalDefectClosed =
+        false
+    ; a8FullLocalDefectStillFalse =
+        refl
+    ; a8A9LadderContradictionPromoted =
+        false
+    ; a8A9LadderContradictionStillFalse =
+        refl
+    ; a8A9NoTypeIBlowupPromoted =
+        false
+    ; a8A9NoTypeIBlowupStillFalse =
+        refl
+    ; a9CKNBKMClosureClosed =
+        false
+    ; a9CKNBKMClosureStillFalse =
+        refl
+    ; a8A9PromotesClay =
+        false
+    ; a8A9DoesNotPromoteClay =
+        refl
+    ; a8A9PromotesTerminal =
+        false
+    ; a8A9DoesNotPromoteTerminal =
+        refl
     ; closedItems =
         canonicalNSFinalStateClosedItems
     ; closedItemsAreCanonical =
@@ -392,10 +489,9 @@ canonicalNSFinalStateReceipt =
         refl
     ; receiptBoundary =
         "W1-W5 record the Leray weak-solution chain, and the self-contained candidate A1-A9 package is explicit at receipt scope"
-        ∷ "The classical theorem intake is explicit; these receipts are no longer blocked on theorem-shape grammar"
+        ∷ "The classical theorem intake is explicit; the supplied NS-Enstrophy-BKM-Chain is recorded as true for enstrophy passage, vorticity control, L-infinity vorticity integrability, and global regularity"
         ∷ "The 2/3/5 Haar-frame route and the critical-Besov large-data route are consumed fail-closed as package evidence and do not by themselves promote Clay NS"
         ∷ "A bounded candidate-complete enstrophy/vorticity/BKM/global-regularity passage receipt is surfaced separately and remains non-promoting"
-        ∷ "The remaining issue is exact acceptance/promotion of the consumed norms/constants package into continuum enstrophy, L-infinity vorticity control, continuum BKM, and global smooth regularity"
         ∷ "Clay Navier-Stokes and terminal promotion remain false"
         ∷ []
     }

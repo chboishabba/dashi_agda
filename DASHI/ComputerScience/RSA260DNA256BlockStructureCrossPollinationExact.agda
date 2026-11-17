@@ -69,8 +69,8 @@ open ReconstructionDiscipline public
 
 canonicalReconstructionDiscipline : ReconstructionDiscipline
 canonicalReconstructionDiscipline = reconstruction-discipline
-  (DNATransform.sourceSymbols DNATransform.criticalSamplingReceipt)
-  (DNATransform.coefficientSymbols DNATransform.criticalSamplingReceipt)
+  DNATransform.sourceSymbols DNATransform.criticalSamplingReceipt
+  DNATransform.coefficientSymbols DNATransform.criticalSamplingReceipt
   true true
   true true
   false false

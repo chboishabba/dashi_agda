@@ -17,11 +17,10 @@ module DASHI.Mathematics.Complexity.ConcreteTapeInputInitialRowExact where
 -- padded-tableau convention.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
-open import Relation.Binary.PropositionalEquality using (cong)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.ConcreteTapeWellFormedConfigurationExact as WF
@@ -41,18 +40,18 @@ plainSymbols :
     (Local.TapeCell
       (Local.State machine)
       (Local.Symbol machine))
-plainSymbols {machine} [] = []
-plainSymbols {machine} (symbol ∷ rest) =
-  Local.plain {State = Local.State machine} symbol ∷ plainSymbols {machine} rest
+plainSymbols [] = []
+plainSymbols (symbol ∷ rest) =
+  Local.plain symbol ∷ plainSymbols rest
 
 plainSymbolsArePlain :
   ∀ {machine}
     (symbols : List (Local.Symbol machine)) →
   WF.PlainCells (plainSymbols {machine} symbols)
-plainSymbolsArePlain {machine} [] =
+plainSymbolsArePlain [] =
   WF.plainNil
-plainSymbolsArePlain {machine} (symbol ∷ rest) =
-  WF.plainCons (plainSymbolsArePlain {machine} rest)
+plainSymbolsArePlain (symbol ∷ rest) =
+  WF.plainCons (plainSymbolsArePlain rest)
 
 appendPlainBlank :
   ∀ {machine} →
@@ -63,17 +62,17 @@ appendPlainBlank :
       (Local.Symbol machine))
 appendPlainBlank {machine} symbols =
   Local.append
-    (plainSymbols {machine} symbols)
-    (Local.plain {State = Local.State machine} (Local.blank machine) ∷ [])
+    (plainSymbols symbols)
+    (Local.plain (Local.blank machine) ∷ [])
 
 appendPlainBlankArePlain :
   ∀ {machine}
     (symbols : List (Local.Symbol machine)) →
   WF.PlainCells (appendPlainBlank {machine} symbols)
-appendPlainBlankArePlain {machine} [] =
+appendPlainBlankArePlain [] =
   WF.plainCons WF.plainNil
-appendPlainBlankArePlain {machine} (symbol ∷ rest) =
-  WF.plainCons (appendPlainBlankArePlain {machine} rest)
+appendPlainBlankArePlain (symbol ∷ rest) =
+  WF.plainCons (appendPlainBlankArePlain rest)
 
 inputHeadSymbol :
   ∀ {machine} →
@@ -99,14 +98,14 @@ initialInputCells :
       (Local.State machine)
       (Local.Symbol machine))
 initialInputCells {machine} input =
-  Local.plain {State = Local.State machine} (Local.blank machine)
+  Local.plain (Local.blank machine)
   ∷ Local.headed
       (Local.initialState machine)
-      (inputHeadSymbol {machine} input)
-  ∷ Local.plain {State = Local.State machine} rightSymbol
+      (inputHeadSymbol input)
+  ∷ Local.plain rightSymbol
   ∷ suffix
   where
-    tail = inputTail {machine} input
+    tail = inputTail input
 
     rightSymbol : Local.Symbol machine
     rightSymbol with tail
@@ -121,54 +120,54 @@ initialInputCells {machine} input =
     suffix with tail
     ... | [] = []
     ... | symbol ∷ rest =
-      appendPlainBlank {machine} rest
+      appendPlainBlank rest
 
 initialInputRow :
   ∀ {machine} →
   InputWord machine →
   Local.TapeRow machine
-initialInputRow {machine} input =
-  Local.tape-row (initialInputCells {machine} input)
+initialInputRow input =
+  Local.tape-row (initialInputCells input)
 
 initialInputInterior :
   ∀ {machine}
     (input : InputWord machine) →
   Locality.InteriorHeadConfiguration
     machine
-    (initialInputRow {machine} input)
+    (initialInputRow input)
 initialInputInterior {machine} [] = record
-  { prefix = []
-  ; suffix = []
-  ; leftSymbol = Local.blank machine
-  ; readSymbol = Local.blank machine
-  ; rightSymbol = Local.blank machine
-  ; headState = Local.initialState machine
-  ; prefixPlain = WF.plainNil
-  ; suffixPlain = WF.plainNil
-  ; rowShape = refl
+  { Locality.prefix = []
+  ; Locality.suffix = []
+  ; Locality.leftSymbol = Local.blank machine
+  ; Locality.readSymbol = Local.blank machine
+  ; Locality.rightSymbol = Local.blank machine
+  ; Locality.headState = Local.initialState machine
+  ; Locality.prefixPlain = WF.plainNil
+  ; Locality.suffixPlain = WF.plainNil
+  ; Locality.rowShape = refl
   }
 initialInputInterior {machine} (symbol ∷ []) = record
-  { prefix = []
-  ; suffix = []
-  ; leftSymbol = Local.blank machine
-  ; readSymbol = symbol
-  ; rightSymbol = Local.blank machine
-  ; headState = Local.initialState machine
-  ; prefixPlain = WF.plainNil
-  ; suffixPlain = WF.plainNil
-  ; rowShape = refl
+  { Locality.prefix = []
+  ; Locality.suffix = []
+  ; Locality.leftSymbol = Local.blank machine
+  ; Locality.readSymbol = symbol
+  ; Locality.rightSymbol = Local.blank machine
+  ; Locality.headState = Local.initialState machine
+  ; Locality.prefixPlain = WF.plainNil
+  ; Locality.suffixPlain = WF.plainNil
+  ; Locality.rowShape = refl
   }
 initialInputInterior {machine}
     (symbol ∷ next ∷ rest) = record
-  { prefix = []
-  ; suffix = appendPlainBlank {machine} rest
-  ; leftSymbol = Local.blank machine
-  ; readSymbol = symbol
-  ; rightSymbol = next
-  ; headState = Local.initialState machine
-  ; prefixPlain = WF.plainNil
-  ; suffixPlain = appendPlainBlankArePlain {machine} rest
-  ; rowShape = refl
+  { Locality.prefix = []
+  ; Locality.suffix = appendPlainBlank rest
+  ; Locality.leftSymbol = Local.blank machine
+  ; Locality.readSymbol = symbol
+  ; Locality.rightSymbol = next
+  ; Locality.headState = Local.initialState machine
+  ; Locality.prefixPlain = WF.plainNil
+  ; Locality.suffixPlain = appendPlainBlankArePlain rest
+  ; Locality.rowShape = refl
   }
 
 initialInputIsInitialInterior :
@@ -177,17 +176,9 @@ initialInputIsInitialInterior :
   Accepting.InitialInteriorRow
     machine
     (initialInputRow input)
-initialInputIsInitialInterior [] = record
-  { interior = initialInputInterior []
-  ; headIsInitial = refl
-  }
-initialInputIsInitialInterior (symbol ∷ []) = record
-  { interior = initialInputInterior (_ ∷ [])
-  ; headIsInitial = refl
-  }
-initialInputIsInitialInterior (symbol ∷ next ∷ rest) = record
-  { interior = initialInputInterior (_ ∷ _ ∷ rest)
-  ; headIsInitial = refl
+initialInputIsInitialInterior input = record
+  { Accepting.interior = initialInputInterior input
+  ; Accepting.headIsInitial = refl
   }
 
 inputPayloadLength :
@@ -201,25 +192,17 @@ initialInputCellCount :
   ∀ {machine}
     (input : InputWord machine) →
   Nat
-initialInputCellCount {machine} input =
-  Canonical.listLength (initialInputCells {machine} input)
-
-appendPlainBlank_length :
-  ∀ {machine} (xs : List (Local.Symbol machine)) →
-  Canonical.listLength (appendPlainBlank {machine} xs)
-  ≡ suc (Canonical.listLength xs)
-appendPlainBlank_length {machine} [] = refl
-appendPlainBlank_length {machine} (x ∷ xs) = cong suc (appendPlainBlank_length {machine} xs)
+initialInputCellCount input =
+  Canonical.listLength (initialInputCells input)
 
 initialInputCellCount_nonempty :
   ∀ {machine}
     (symbol : Local.Symbol machine)
     (rest : List (Local.Symbol machine)) →
-  initialInputCellCount {machine} (symbol ∷ rest)
-  ≡ suc (suc (suc (Canonical.listLength rest)))
-initialInputCellCount_nonempty {machine} symbol [] = refl
-initialInputCellCount_nonempty {machine} symbol (next ∷ rest) =
-  cong (λ k → suc (suc (suc k))) (appendPlainBlank_length {machine} rest)
+  initialInputCellCount (symbol ∷ rest)
+  ≡ suc (suc (Canonical.listLength rest))
+initialInputCellCount_nonempty symbol [] = refl
+initialInputCellCount_nonempty symbol (next ∷ rest) = refl
 
 record InputInitialRowReceipt
     (machine : Local.ConcreteTapeMachine) : Set₁ where

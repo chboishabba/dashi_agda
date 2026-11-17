@@ -55,13 +55,10 @@ encodeBit3To27 : Block.Bit3 → Orbit.TritTriple
 encodeBit3To27 bits = canonicalLift (Block.encode3to2 bits)
 
 decodeBit3From27Payload : Orbit.TritTriple → Block.Bit3
-decodeBit3From27Payload t = Block.decode2to3 (projectPayload t)
+decodeBit3From27Payload triple = Block.decode2to3 (projectPayload triple)
 
-bit3LiftRoundTrip :
-  (bits : Block.Bit3) →
-  decodeBit3From27Payload (encodeBit3To27 bits) ≡ bits
-bit3LiftRoundTrip bits rewrite canonicalPayloadRoundTrip (Block.encode3to2 bits) =
-  Block.blockRoundTrip bits
+bit3LiftRoundTrip : (bits : Block.Bit3) → decodeBit3From27Payload (encodeBit3To27 bits) ≡ bits
+bit3LiftRoundTrip bits = Block.blockRoundTrip bits
 
 bitComplementBecomes27Antipode :
   (bits : Block.Bit3) → encodeBit3To27 (Block.complementBit3 bits) ≡ antipodeTriple (encodeBit3To27 bits)

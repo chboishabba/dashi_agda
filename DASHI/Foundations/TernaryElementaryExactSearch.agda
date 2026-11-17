@@ -1,7 +1,6 @@
 module DASHI.Foundations.TernaryElementaryExactSearch where
 
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong)
+open import Agda.Builtin.Equality using (_≡_; refl; cong)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Agda.Builtin.Sigma using (Σ; _,_)
 open import Data.List.Base using (List; []; _∷_)

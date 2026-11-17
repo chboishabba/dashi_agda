@@ -23,9 +23,9 @@ module DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchExact where
 --   -> only then consider larger Monster-level promotion.
 ------------------------------------------------------------------------
 
-leafOpen import Agda.Builtin.Bool using (Bool; false; true)
-leafOpen import Agda.Builtin.Equality using (_≡_; refl)
-leafOpen import Agda.Builtin.Nat using (Nat; _+_; _*_)
+open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 
 import DASHI.Moonshine.Monster3BNormalizerBridge as Normalizer
 import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as Heisenberg
@@ -103,12 +103,12 @@ data Monster3BProofLeaf : Set where
 
 data LeafState : Set where
   closed : LeafState
-  leafOpen : LeafState
+  open : LeafState
   blocked : LeafState
 
 leafState : Monster3BProofLeaf → LeafState
 leafState restrictionAlgorithmImplemented = closed
-leafState exactHeadRestrictionReplay = leafOpen
+leafState exactHeadRestrictionReplay = open
 leafState heisenbergUniquenessOrActionIdentification = blocked
 leafState actualTensorConstituentIdentification = blocked
 leafState base369PeriodicIntertwiner = blocked
@@ -148,7 +148,7 @@ data Requires : Monster3BProofLeaf → Monster3BProofLeaf → Set where
 highestImpactLiveLeaf : Monster3BProofLeaf
 highestImpactLiveLeaf = exactHeadRestrictionReplay
 
-highestImpactLeafIsOpen : leafState highestImpactLiveLeaf ≡ leafOpen
+highestImpactLeafIsOpen : leafState highestImpactLiveLeaf ≡ open
 highestImpactLeafIsOpen = refl
 
 nextMathematicalLeafAfterReplay : Monster3BProofLeaf
@@ -168,7 +168,7 @@ record RestrictionReplayReceipt : Set where
     central3BTrace53Checked : Bool
     pairedPhaseTwelveAndSeventyEightChecked : Bool
     generatedAgdaCertificateKernelChecked : Bool
-leafOpen RestrictionReplayReceipt public
+open RestrictionReplayReceipt public
 
 record HeisenbergRepresentationAuthorityReceipt : Set where
   constructor heisenbergRepresentationAuthorityReceipt
@@ -178,7 +178,7 @@ record HeisenbergRepresentationAuthorityReceipt : Set where
     extraspecialCarrierIdentified : Bool
     finiteStoneVonNeumannUniquenessProvedOrExplicitMatricesImported : Bool
     certified729RepresentationIdentifiedWithX6SchrodingerModel : Bool
-leafOpen HeisenbergRepresentationAuthorityReceipt public
+open HeisenbergRepresentationAuthorityReceipt public
 
 record HeisenbergTensorFactorisationReceipt : Set where
   constructor heisenbergTensorFactorisationReceipt
@@ -187,7 +187,7 @@ record HeisenbergTensorFactorisationReceipt : Set where
     multiplicityCarrierReallyActs : Bool
     twelvePlusSeventyEightConstituentsIdentified : Bool
     tensorActionIntertwinesRestriction : Bool
-leafOpen HeisenbergTensorFactorisationReceipt public
+open HeisenbergTensorFactorisationReceipt public
 
 record Base369NormalizerIntertwinerReceipt : Set where
   constructor base369NormalizerIntertwinerReceipt
@@ -196,7 +196,7 @@ record Base369NormalizerIntertwinerReceipt : Set where
     periodicFibreChartUsed : Bool
     normalizerGeneratorsIntertwine : Bool
     pathRestrictionResidualTracked : Bool
-leafOpen Base369NormalizerIntertwinerReceipt public
+open Base369NormalizerIntertwinerReceipt public
 
 record FiftyThreeExcessReceipt : Set where
   constructor fiftyThreeExcessReceipt
@@ -206,7 +206,7 @@ record FiftyThreeExcessReceipt : Set where
     zeta54CarrierUsed : Bool
     invariantLineLocated : Bool
     fiftyThreeExcessRecoveredAsActionStableResidual : Bool
-leafOpen FiftyThreeExcessReceipt public
+open FiftyThreeExcessReceipt public
 
 ------------------------------------------------------------------------
 -- 7. The 54 carrier is a discriminator, not authority by itself.
@@ -244,7 +244,7 @@ record Monster3BRepresentationSearchBoundary : Set where
     fullMonsterRepresentationProvedHere : Bool
     fiftyThreeCountAloneClosesResidualLeaf : Bool
     shared729CountAloneClosesHeisenbergAuthorityLeaf : Bool
-leafOpen Monster3BRepresentationSearchBoundary public
+open Monster3BRepresentationSearchBoundary public
 
 canonicalMonster3BRepresentationSearchBoundary : Monster3BRepresentationSearchBoundary
 canonicalMonster3BRepresentationSearchBoundary =

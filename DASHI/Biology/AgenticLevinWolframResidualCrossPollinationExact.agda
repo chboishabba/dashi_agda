@@ -47,8 +47,8 @@ targetIndexedBoundary = TargetAction.canonicalTargetIndexedActionBoundary
 pathResidualBoundary : PathAction.PathResidualActionBoundary
 pathResidualBoundary = PathAction.canonicalPathResidualActionBoundary
 
-revisionBoundary : Revision.AppendOnlyEvidenceRevisionBoundary
-revisionBoundary = Revision.canonicalAppendOnlyEvidenceRevisionBoundary
+revisionBoundary : Revision.AppendOnlyEvidenceResidualRevisionBoundary
+revisionBoundary = Revision.canonicalAppendOnlyEvidenceResidualRevisionBoundary
 
 salienceBoundary : Salience.ResidualActionSalienceBoundary
 salienceBoundary = Salience.canonicalResidualActionSalienceBoundary

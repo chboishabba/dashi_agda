@@ -30,7 +30,6 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Integer using (ℤ; +_; -_; _+_; _-_; _*_)
 open import Data.List.Base using (List; []; _∷_)
-open import Data.Product using (Σ; _,_; _×_)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import Data.Integer.Tactic.RingSolver as IntRS
@@ -91,18 +90,18 @@ constantField : ℤ → TriangleField
 constantField value = triangleField value value value
 
 scaleField : ℤ → TriangleField → TriangleField
-scaleField scalar fld =
+scaleField scalar field =
   triangleField
-    (scalar * value0 fld)
-    (scalar * value1 fld)
-    (scalar * value2 fld)
+    (scalar * value0 field)
+    (scalar * value1 field)
+    (scalar * value2 field)
 
 cycleLaplacian : TriangleField → TriangleField
-cycleLaplacian fld =
+cycleLaplacian field =
   triangleField
-    (((+ 2) * value0 fld) - value1 fld - value2 fld)
-    (((+ 2) * value1 fld) - value2 fld - value0 fld)
-    (((+ 2) * value2 fld) - value0 fld - value1 fld)
+    (((+ 2) * value0 field) - value1 field - value2 field)
+    (((+ 2) * value1 field) - value2 field - value0 field)
+    (((+ 2) * value2 field) - value0 field - value1 field)
 
 fieldExtensional :
   (left right : TriangleField) →
@@ -150,7 +149,7 @@ zeroSumField u v =
     (- v)
 
 fieldSum : TriangleField → ℤ
-fieldSum fld = value0 fld + value1 fld + value2 fld
+fieldSum field = value0 field + value1 field + value2 field
 
 zeroSumFieldReallySumsToZero :
   (u v : ℤ) →
@@ -172,17 +171,17 @@ zeroSumFieldEigenvalueThree u v =
     (scaleField (+ 3) (zeroSumField u v))
     (RingZ.solve 2
       (λ u v →
-        ( (((Κ (+ 2) ⊗ (u ⊕ v)) ⊕ (⊝ (⊝ u))) ⊕ (⊝ (⊝ v)))
+        ( ((Κ (+ 2) ⊗ (u ⊕ v)) ⊕ u) ⊕ v
         , Κ (+ 3) ⊗ (u ⊕ v)))
       refl u v)
     (RingZ.solve 2
       (λ u v →
-        ( (((Κ (+ 2) ⊗ (⊝ u)) ⊕ (⊝ (⊝ v))) ⊕ (⊝ (u ⊕ v)))
+        ( ((Κ (+ 2) ⊗ (⊝ u)) ⊕ v) ⊕ (⊝ (u ⊕ v))
         , Κ (+ 3) ⊗ (⊝ u)))
       refl u v)
     (RingZ.solve 2
       (λ u v →
-        ( (((Κ (+ 2) ⊗ (⊝ v)) ⊕ (⊝ (u ⊕ v))) ⊕ (⊝ (⊝ u)))
+        ( ((Κ (+ 2) ⊗ (⊝ v)) ⊕ (⊝ (u ⊕ v))) ⊕ u
         , Κ (+ 3) ⊗ (⊝ v)))
       refl u v)
 
@@ -206,10 +205,10 @@ firstCoordinateFromZeroSum a b c sumIsZero =
         refl b c))
 
 zeroSumRepresentation :
-  (fld : TriangleField) →
-  fieldSum fld ≡ + 0 →
-  fld
-  ≡ zeroSumField (- value1 fld) (- value2 fld)
+  (field : TriangleField) →
+  fieldSum field ≡ + 0 →
+  field
+  ≡ zeroSumField (- value1 field) (- value2 field)
 zeroSumRepresentation (triangleField a b c) sumIsZero =
   fieldExtensional
     (triangleField a b c)
@@ -223,14 +222,14 @@ zeroSumRepresentation (triangleField a b c) sumIsZero =
       refl c)
 
 zeroSumSectorEigenvalueThree :
-  (fld : TriangleField) →
-  fieldSum fld ≡ + 0 →
-  cycleLaplacian fld ≡ scaleField (+ 3) fld
-zeroSumSectorEigenvalueThree fld sumIsZero
-  rewrite zeroSumRepresentation fld sumIsZero =
+  (field : TriangleField) →
+  fieldSum field ≡ + 0 →
+  cycleLaplacian field ≡ scaleField (+ 3) field
+zeroSumSectorEigenvalueThree field sumIsZero
+  rewrite zeroSumRepresentation field sumIsZero =
   zeroSumFieldEigenvalueThree
-    (- value1 fld)
-    (- value2 fld)
+    (- value1 field)
+    (- value2 field)
 
 ------------------------------------------------------------------------
 -- The existing finite Z/3 cycle-gap receipt carries the same gap value.

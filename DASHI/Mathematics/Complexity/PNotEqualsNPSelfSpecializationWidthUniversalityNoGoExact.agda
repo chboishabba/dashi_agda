@@ -582,8 +582,8 @@ simpleGuardPolarityForcingErasesPayload
 shiftCookFormula :
   Cook.BooleanFormula →
   Cook.BooleanFormula
-shiftCookFormula (Cook.formulaVar index) =
-  Cook.formulaVar (suc index)
+shiftCookFormula (Cook.variable index) =
+  Cook.variable (suc index)
 shiftCookFormula (Cook.constant value) =
   Cook.constant value
 shiftCookFormula (Cook.negate formula) =
@@ -614,7 +614,7 @@ shiftCookEvaluation :
   Cook.evaluate
       payload
       (tailCookAssignment assignment)
-shiftCookEvaluation (Cook.formulaVar index) assignment =
+shiftCookEvaluation (Cook.variable index) assignment =
   refl
 shiftCookEvaluation (Cook.constant value) assignment =
   refl
@@ -646,7 +646,7 @@ rejectWidthGadget :
   Cook.BooleanFormula
 rejectWidthGadget payload =
   Cook.disjunction
-    (Cook.formulaVar zero)
+    (Cook.variable zero)
     (shiftCookFormula payload)
 
 acceptCollapseGadget :
@@ -790,13 +790,13 @@ asymmetricAcceptBranchForcesUNSAT =
 payloadVariable0 :
   Cook.BooleanFormula
 payloadVariable0 =
-  Cook.formulaVar zero
+  Cook.variable zero
 
 payloadNotVariable0 :
   Cook.BooleanFormula
 payloadNotVariable0 =
   Cook.negate
-    (Cook.formulaVar zero)
+    (Cook.variable zero)
 
 payloadDistinguishingAssignment :
   Cook.Assignment

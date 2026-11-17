@@ -1,7 +1,5 @@
 module DASHI.Environment.BiocontrolChemistry369IndexRegression where
 
-open import DASHI.Core.Prelude
-
 import DASHI.Environment.BiocontrolChemistry369IndexExact as Chemistry
 
 chemistryIndex : Chemistry.BiocontrolChemistry369Index

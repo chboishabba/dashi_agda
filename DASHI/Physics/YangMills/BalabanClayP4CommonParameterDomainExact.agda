@@ -60,20 +60,20 @@ canonicalContractionRatio = refl
 
 canonicalEtaGap :
   kpEta canonicalClayParameters + half ≡ 1ℚ
-canonicalEtaGap = refl
+canonicalEtaGap = ℚRing.solve-∀
 
 canonicalContractionGap :
   contractionRatio canonicalClayParameters + half ≡ 1ℚ
-canonicalContractionGap = refl
+canonicalContractionGap = ℚRing.solve-∀
 
 canonicalBackgroundBudgetIdentity :
   (+ 32 / 1) * backgroundRadius canonicalClayParameters
   ≡ oneThirtySecond
-canonicalBackgroundBudgetIdentity = refl
+canonicalBackgroundBudgetIdentity = ℚRing.solve-∀
 
 canonicalCoercivityReserveIdentity :
   oneSixtyFourth + oneSixtyFourth ≡ oneThirtySecond
-canonicalCoercivityReserveIdentity = refl
+canonicalCoercivityReserveIdentity = ℚRing.solve-∀
 
 canonicalRadiusPositive :
   0ℚ < backgroundRadius canonicalClayParameters

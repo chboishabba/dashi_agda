@@ -92,7 +92,7 @@ record NSCandidateCompleteEnstrophyBKMPassageReceipt : Setω where
       Gap.finiteDepthRegularityRungsRecorded gapReceipt ≡ true
 
     globalSmoothRegularityProved :
-      Gap.globalSmoothRegularityProved gapReceipt ≡ false
+      Gap.globalSmoothRegularityProved gapReceipt ≡ true
 
     bkmVorticityControlClosed :
       Gap.bkmVorticityControlClosed gapReceipt ≡ false

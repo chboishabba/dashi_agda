@@ -145,7 +145,7 @@ moonshineCharacterMatchesNormalizedJPrefix exponentOne =
 moonshineCharacterMatchesNormalizedJPrefix exponentTwo =
   sym jCoefficientTwoExact
 
-record ModularFormAuthorityBoundary : Set₁ where
+record ModularFormAuthorityBoundary : Set where
   constructor modularFormAuthorityBoundary
   field
     finiteCoefficientConvolutionProvesSL2ZModularity : Set

@@ -130,5 +130,3 @@ canonicalDistributionResidualCorrosionBoundary : DistributionResidualCorrosionBo
 canonicalDistributionResidualCorrosionBoundary =
   distributionResidualCorrosionBoundary
     false refl false refl false refl false refl false refl false refl true refl
-
-open DistributionResidualCorrosionBoundary public

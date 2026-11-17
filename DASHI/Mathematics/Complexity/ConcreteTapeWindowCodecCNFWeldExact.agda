@@ -65,25 +65,6 @@ encodedWindowCNF codec rule =
   CNF.truthTableCNF
     (encodedWindowPredicate codec rule)
 
-transportWindow :
-  ∀ {machine : Local.ConcreteTapeMachine} {rule : Local.TapeRule (Local.State machine) (Local.Symbol machine)}
-    {w1 w2 : Local.SixCellWindow machine} →
-  w1 ≡ w2 →
-  Pattern.LegalWindowForRule machine rule w1 →
-  Pattern.LegalWindowForRule machine rule w2
-transportWindow refl p = p
-
-transportBool :
-  ∀ {machine : Local.ConcreteTapeMachine} {rule : Local.TapeRule (Local.State machine) (Local.Symbol machine)}
-    {w1 w2 : Local.SixCellWindow machine} →
-  w1 ≡ w2 →
-  Reflect.reflectedLegalWindowBool machine rule w1 ≡ true →
-  Reflect.reflectedLegalWindowBool machine rule w2 ≡ true
-transportBool refl p = p
-
-symEq : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
-symEq refl = refl
-
 semanticLegalImpliesEncodedCNF :
   ∀ {machine width rule window}
     (codec : FixedWidthWindowCodec machine width) →
@@ -92,11 +73,15 @@ semanticLegalImpliesEncodedCNF :
     (encodedWindowCNF codec rule)
     (encode codec window)
   ≡ true
-semanticLegalImpliesEncodedCNF {machine} {width} {rule} {window} codec legal =
+semanticLegalImpliesEncodedCNF
+    {rule = rule} {window = window}
+    codec legal
+    with decodeEncode codec window
+... | refl =
   CNF.truthTableCNFComplete
     (encodedWindowPredicate codec rule)
     (encode codec window)
-    (transportBool (symEq (decodeEncode codec window)) (Reflect.semanticLegalImpliesReflectedBooleanTrue legal))
+    (Reflect.semanticLegalImpliesReflectedBooleanTrue legal)
 
 encodedCNFImpliesSemanticLegal :
   ∀ {machine width rule window}
@@ -106,13 +91,16 @@ encodedCNFImpliesSemanticLegal :
     (encode codec window)
   ≡ true →
   Pattern.LegalWindowForRule machine rule window
-encodedCNFImpliesSemanticLegal {machine} {width} {rule} {window} codec cnfTrue =
-  transportWindow (decodeEncode codec window)
-    (Reflect.booleanTrueImpliesSemanticLegal
-      (CNF.truthTableCNFSound
-        (encodedWindowPredicate codec rule)
-        (encode codec window)
-        cnfTrue))
+encodedCNFImpliesSemanticLegal
+    {rule = rule} {window = window}
+    codec cnfTrue
+    with decodeEncode codec window
+... | refl =
+  Reflect.booleanTrueImpliesSemanticLegal
+    (CNF.truthTableCNFSound
+      (encodedWindowPredicate codec rule)
+      (encode codec window)
+      cnfTrue)
 
 record EncodedWindowCNFSemanticEquivalence
     {machine : Local.ConcreteTapeMachine}

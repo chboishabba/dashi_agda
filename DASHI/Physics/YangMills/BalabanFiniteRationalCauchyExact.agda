@@ -26,51 +26,27 @@ pairDifferenceEnergy [] = 0ℚ
 pairDifferenceEnergy (value ∷ values) =
   pairDifferenceFrom value values + pairDifferenceEnergy values
 
-diffSqEmptyRaw : ∀ v → 0ℚ ≡ 0ℚ * sq v - (1ℚ + 1ℚ) * v * 0ℚ + 0ℚ
-diffSqEmptyRaw = ℚRing.solve-∀
-
-diffSqStepRaw : ∀ v o n s ss →
-  sq (v - o) + (n * sq v - (1ℚ + 1ℚ) * v * s + ss)
-  ≡ (1ℚ + n) * sq v - (1ℚ + 1ℚ) * v * (o + s) + (sq o + ss)
-diffSqStepRaw = ℚRing.solve-∀
-
 sumDifferenceSquaresFormula : ∀ value values →
   pairDifferenceFrom value values
   ≡ natAsRational (length values) * sq value
     - (1ℚ + 1ℚ) * value * sumRational values (λ item → item)
     + sumSquares values
-sumDifferenceSquaresFormula value [] = diffSqEmptyRaw value
+sumDifferenceSquaresFormula value [] = ℚRing.solve-∀
 sumDifferenceSquaresFormula value (other ∷ values)
   rewrite sumDifferenceSquaresFormula value values =
-  diffSqStepRaw
-    value other
-    (natAsRational (length values))
-    (sumRational values (λ item → item))
-    (sumSquares values)
-
-pairIdEmptyRaw : 0ℚ * 0ℚ - sq 0ℚ ≡ 0ℚ
-pairIdEmptyRaw = ℚRing.solve-∀
-
-pairIdStepRaw : ∀ n v ss s →
-  (1ℚ + n) * (sq v + ss) - sq (v + s)
-  ≡ (n * sq v - (1ℚ + 1ℚ) * v * s + ss) + (n * ss - sq s)
-pairIdStepRaw = ℚRing.solve-∀
+  ℚRing.solve-∀
 
 pairDifferenceIdentity : ∀ values →
   natAsRational (length values) * sumSquares values
     - sq (sumRational values (λ item → item))
   ≡ pairDifferenceEnergy values
-pairDifferenceIdentity [] = pairIdEmptyRaw
+pairDifferenceIdentity [] = ℚRing.solve-∀
 pairDifferenceIdentity (value ∷ values)
   rewrite sumDifferenceSquaresFormula value values
         | pairDifferenceIdentity values =
-  pairIdStepRaw
-    (natAsRational (length values))
-    value
-    (sumSquares values)
-    (sumRational values (λ item → item))
+  ℚRing.solve-∀
 
-sumNonnegative : (values : List ℚ) (term : ℚ → ℚ) →
+sumNonnegative : ∀ values term →
   (∀ value → 0ℚ ≤ term value) →
   0ℚ ≤ sumRational values term
 sumNonnegative [] term pointwise = ℚP.≤-refl
@@ -100,9 +76,6 @@ pairDifferenceEnergyNonnegative (value ∷ values) =
       (pairDifferenceFromNonnegative value values)
       (pairDifferenceEnergyNonnegative values))
 
-addSubCancelRightRaw : ∀ a b → a + (b - a) ≡ b
-addSubCancelRightRaw = ℚRing.solve-∀
-
 finiteCauchyRemainderExact : ∀ values →
   sq (sumRational values (λ item → item))
     + pairDifferenceEnergy values
@@ -113,9 +86,7 @@ finiteCauchyRemainderExact values =
       (λ remainder →
         sq (sumRational values (λ item → item)) + remainder)
       (sym (pairDifferenceIdentity values)))
-    (addSubCancelRightRaw
-      (sq (sumRational values (λ item → item)))
-      (natAsRational (length values) * sumSquares values))
+    (ℚRing.solve-∀)
 
 finiteRationalCauchy : ∀ values →
   sq (sumRational values (λ item → item))

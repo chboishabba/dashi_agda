@@ -2,7 +2,6 @@ module DASHI.Combinatorics.ProofFabricCompilerExact where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
-open import Data.List using (_++_)
 open import Data.Maybe using (Maybe; just; nothing)
 
 open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)

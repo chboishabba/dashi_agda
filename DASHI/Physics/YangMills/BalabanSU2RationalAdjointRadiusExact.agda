@@ -1,7 +1,6 @@
 module DASHI.Physics.YangMills.BalabanSU2RationalAdjointRadiusExact where
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.List using (_∷_; [])
 open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _≤_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
@@ -84,42 +83,18 @@ adjointMain q v =
 -- Exact polynomial identities, including the off-unit defect term.
 ------------------------------------------------------------------------
 
-adjointDisplacementRaw : ∀ qr qi qj qk vx vy vz →
-  (((qr * qr + qi * qi - qj * qj - qk * qk) * vx + (1ℚ + 1ℚ) * (qi * qj - qr * qk) * vy + (1ℚ + 1ℚ) * (qi * qk + qr * qj) * vz - vx)
-   * ((qr * qr + qi * qi - qj * qj - qk * qk) * vx + (1ℚ + 1ℚ) * (qi * qj - qr * qk) * vy + (1ℚ + 1ℚ) * (qi * qk + qr * qj) * vz - vx))
-  + (((1ℚ + 1ℚ) * (qi * qj + qr * qk) * vx + (qr * qr - qi * qi + qj * qj - qk * qk) * vy + (1ℚ + 1ℚ) * (qj * qk - qr * qi) * vz - vy)
-     * ((1ℚ + 1ℚ) * (qi * qj + qr * qk) * vx + (qr * qr - qi * qi + qj * qj - qk * qk) * vy + (1ℚ + 1ℚ) * (qj * qk - qr * qi) * vz - vy))
-  + (((1ℚ + 1ℚ) * (qi * qk - qr * qj) * vx + (1ℚ + 1ℚ) * (qj * qk + qr * qi) * vy + (qr * qr - qi * qi - qj * qj + qk * qk) * vz - vz)
-     * ((1ℚ + 1ℚ) * (qi * qk - qr * qj) * vx + (1ℚ + 1ℚ) * (qj * qk + qr * qi) * vy + (qr * qr - qi * qi - qj * qj + qk * qk) * vz - vz))
-  ≡ ((1ℚ + 1ℚ) * (1ℚ + 1ℚ)) * ((qi * qi + qj * qj + qk * qk) * (vx * vx + vy * vy + vz * vz) - (qi * vx + qj * vy + qk * vz) * (qi * vx + qj * vy + qk * vz))
-    + ((qr * qr + qi * qi + qj * qj + qk * qk) - 1ℚ) * ((qr * qr + qi * qi + qj * qj + qk * qk) - 1ℚ) * (vx * vx + vy * vy + vz * vz)
-adjointDisplacementRaw = ℚRing.solve-∀
-
-subOneSelfRaw : 1ℚ - 1ℚ ≡ 0ℚ
-subOneSelfRaw = ℚRing.solve-∀
-
-addZeroDefectRaw : ∀ m v → m + (0ℚ * 0ℚ) * v ≡ m
-addZeroDefectRaw = ℚRing.solve-∀
-
-mainPlusDiscardedRaw : ∀ iNorm vNorm dotSq →
-  fourℚ * (iNorm * vNorm - dotSq) + fourℚ * dotSq
-  ≡ fourℚ * (iNorm * vNorm)
-mainPlusDiscardedRaw = ℚRing.solve-∀
-
 adjointDisplacementWithUnitDefectExact : ∀ q v →
   adjointDisplacementSq q v
   ≡ adjointMain q v
     + squareℚ (unitDefect q) * vectorNormSq v
 adjointDisplacementWithUnitDefectExact q v =
-  adjointDisplacementRaw
-    (realPart q) (imagI q) (imagJ q) (imagK q)
-    (x v) (y v) (z v)
+  ℚRing.solve-∀
 
 unitDefectVanishes : ∀ q → unitDefect q ≡ 0ℚ
 unitDefectVanishes q =
   trans
     (cong (λ normValue → normValue - 1ℚ) (unitNormExact q))
-    subOneSelfRaw
+    (ℚRing.solve-∀)
 
 adjointDisplacementUnitExact : ∀ q v →
   adjointDisplacementSq q v ≡ adjointMain q v
@@ -130,16 +105,13 @@ adjointDisplacementUnitExact q v =
       (cong
         (λ defect → adjointMain q v + squareℚ defect * vectorNormSq v)
         (unitDefectVanishes q))
-      (addZeroDefectRaw (adjointMain q v) (vectorNormSq v)))
+      (ℚRing.solve-∀))
 
 adjointMainPlusDiscardedSquareExact : ∀ q v →
   adjointMain q v + fourℚ * squareℚ (imaginaryDot q v)
   ≡ fourℚ * (imaginaryNormSq q * vectorNormSq v)
 adjointMainPlusDiscardedSquareExact q v =
-  mainPlusDiscardedRaw
-    (imaginaryNormSq q)
-    (vectorNormSq v)
-    (squareℚ (imaginaryDot q v))
+  ℚRing.solve-∀
 
 adjointDisplacementPlusDiscardedSquareExact : ∀ q v →
   adjointDisplacementSq q v

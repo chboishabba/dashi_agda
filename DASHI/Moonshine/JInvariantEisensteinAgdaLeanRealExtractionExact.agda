@@ -25,8 +25,7 @@ module DASHI.Moonshine.JInvariantEisensteinAgdaLeanRealExtractionExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Agda.Builtin.Equality using (_≡_; refl; cong; trans)
 open import Agda.Builtin.Nat using (Nat)
 
 import DASHI.Analysis.ConstructiveRealSpine as Real

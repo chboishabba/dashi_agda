@@ -1,3 +1,4 @@
+{-# OPTIONS --safe #-}
 module DASHI.Core.ClayProofDebtFrontierAtlasExact where
 
 ------------------------------------------------------------------------
@@ -190,11 +191,11 @@ coordinateRoute exactHeadAgdaValidation =
 ------------------------------------------------------------------------
 
 data CanonicalCutClass : Set where
-  mathematicallyOpen         : CanonicalCutClass
-  sourceAlignmentOpen        : CanonicalCutClass
-  externalCertificationOpen  : CanonicalCutClass
+  mathematicallyOpen : CanonicalCutClass
+  sourceAlignmentOpen : CanonicalCutClass
+  externalCertificationOpen : CanonicalCutClass
   localAgdaCertificationOpen : CanonicalCutClass
-  closed                     : CanonicalCutClass
+  closed : CanonicalCutClass
 
 cutClass : ClayCoordinate → CanonicalCutClass
 cutClass rhFinalNearLiteralPhaseRealisation = sourceAlignmentOpen
@@ -221,22 +222,22 @@ constrainedAction coordinate =
     (routedDebt (coordinateRoute coordinate))
     (statementStatus (coordinateRoute coordinate))
     constrained32GB
-    (targetWorkload coordinate)
+    (workload coordinate)
   where
-  targetWorkload : ClayCoordinate → ProofWorkload
-  targetWorkload rhFinalNearLiteralPhaseRealisation = tinyGlue
-  targetWorkload rhUniformHighJointComplementMargin = heavyReplay
-  targetWorkload rhLowPublishedHeightCarrierTransport = tinyGlue
-  targetWorkload rhCriticalLinePredicateRefinement = tinyGlue
-  targetWorkload nsUniformDyadicHOneHalfEquivalence = moderateReplay
-  targetWorkload nsUniformDyadicHThreeHalfEquivalence = moderateReplay
-  targetWorkload nsLiteralR406SignedCrossEstimate = heavyReplay
-  targetWorkload nsExternalCrossTriadSignedForcing = heavyReplay
-  targetWorkload ymSelectedExpectationProbabilitySemantics = tinyGlue
-  targetWorkload ymStandardOSReconstruction = heavyReplay
-  targetWorkload ymSelectedPhysicalCoerciveCompactContainment = heavyReplay
-  targetWorkload ymContinuumClustering = heavyReplay
-  targetWorkload exactHeadAgdaValidation = tinyGlue
+  workload : ClayCoordinate → ProofWorkload
+  workload rhFinalNearLiteralPhaseRealisation = tinyGlue
+  workload rhUniformHighJointComplementMargin = heavyReplay
+  workload rhLowPublishedHeightCarrierTransport = tinyGlue
+  workload rhCriticalLinePredicateRefinement = tinyGlue
+  workload nsUniformDyadicHOneHalfEquivalence = moderateReplay
+  workload nsUniformDyadicHThreeHalfEquivalence = moderateReplay
+  workload nsLiteralR406SignedCrossEstimate = heavyReplay
+  workload nsExternalCrossTriadSignedForcing = heavyReplay
+  workload ymSelectedExpectationProbabilitySemantics = tinyGlue
+  workload ymStandardOSReconstruction = heavyReplay
+  workload ymSelectedPhysicalCoerciveCompactContainment = heavyReplay
+  workload ymContinuumClustering = heavyReplay
+  workload exactHeadAgdaValidation = tinyGlue
 
 ------------------------------------------------------------------------
 -- Regression pins: these coordinates must not drift back into the wrong queue.

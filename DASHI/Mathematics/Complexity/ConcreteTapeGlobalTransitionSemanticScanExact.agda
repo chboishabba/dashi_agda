@@ -7,7 +7,7 @@ module DASHI.Mathematics.Complexity.ConcreteTapeGlobalTransitionSemanticScanExac
 -- recursive lists used by the global conjunction compiler.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (sym)
 open import Agda.Builtin.List using (List; []; _∷_)
@@ -104,17 +104,17 @@ oneTimePlacedToSemantic
     stateCoverage symbolCoverage nonempty
     timeSlot [] globalBits Placed.allPlacedDone =
   semanticWindowsDone
-oneTimePlacedToSemantic {machine} {steps} {cols}
+oneTimePlacedToSemantic
     stateCoverage symbolCoverage nonempty
     timeSlot
     (Transition.some-window-start columnIndex start ∷ rest)
     globalBits
     (Placed.allPlacedStep current remainder) =
   semanticWindowsStep
-    (Semantic.rawSelectedPredicateTrueImpliesSemantic {machine} {steps} {cols}
+    (Semantic.rawSelectedPredicateTrueImpliesSemantic
       stateCoverage symbolCoverage nonempty
       timeSlot start globalBits current)
-    (oneTimePlacedToSemantic {machine} {steps} {cols}
+    (oneTimePlacedToSemantic
       stateCoverage symbolCoverage nonempty
       timeSlot rest globalBits remainder)
 
@@ -141,13 +141,13 @@ data AllTimesSemantic
     ∀ {timeIndex}
       {timeSlot : Global.Slot timeIndex steps}
       {rest : List (Transition.SomeSlot steps)} →
-    AllRawWindowsSemantic {machine} {steps} {cols}
+    AllRawWindowsSemantic
       stateCoverage symbolCoverage nonempty
       timeSlot globalBits
       (Transition.allWindowStarts cols) →
-    AllTimesSemantic {machine} {steps} {cols}
+    AllTimesSemantic
       stateCoverage symbolCoverage nonempty globalBits rest →
-    AllTimesSemantic {machine} {steps} {cols}
+    AllTimesSemantic
       stateCoverage symbolCoverage nonempty globalBits
       (Transition.some-slot timeIndex timeSlot ∷ rest)
 
@@ -161,32 +161,32 @@ allTimesPlacedToSemantic :
     (times : List (Transition.SomeSlot steps))
     (globalBits : CNF.Bits (Trace.GlobalTraceWidth machine steps cols)) →
   Placed.AllPlacedSatisfied globalBits
-    (Transition.predicatesForAllTimes {machine} {steps} {cols}
+    (Transition.predicatesForAllTimes
       stateCoverage symbolCoverage nonempty times) →
-  AllTimesSemantic {machine} {steps} {cols}
+  AllTimesSemantic
     stateCoverage symbolCoverage nonempty globalBits times
-allTimesPlacedToSemantic {machine} {steps} {cols}
+allTimesPlacedToSemantic
     stateCoverage symbolCoverage nonempty
     [] globalBits Placed.allPlacedDone =
   semanticTimesDone
-allTimesPlacedToSemantic {machine} {steps} {cols}
+allTimesPlacedToSemantic
     stateCoverage symbolCoverage nonempty
     (Transition.some-slot timeIndex timeSlot ∷ rest)
     globalBits allSatisfied
     with splitAllPlacedAppend
-      (Transition.predicatesForOneTime {machine} {steps} {cols}
+      (Transition.predicatesForOneTime
         stateCoverage symbolCoverage nonempty timeSlot
-        (Transition.allWindowStarts cols))
-      (Transition.predicatesForAllTimes {machine} {steps} {cols}
+        (Transition.allWindowStarts _))
+      (Transition.predicatesForAllTimes
         stateCoverage symbolCoverage nonempty rest)
       allSatisfied
 ... | currentTime , remainingTimes =
   semanticTimesStep
-    (oneTimePlacedToSemantic {machine} {steps} {cols}
+    (oneTimePlacedToSemantic
       stateCoverage symbolCoverage nonempty
-      timeSlot (Transition.allWindowStarts cols)
+      timeSlot (Transition.allWindowStarts _)
       globalBits currentTime)
-    (allTimesPlacedToSemantic {machine} {steps} {cols}
+    (allTimesPlacedToSemantic
       stateCoverage symbolCoverage nonempty
       rest globalBits remainingTimes)
 
@@ -201,7 +201,7 @@ record GlobalTransitionSemanticScan
     (globalBits : CNF.Bits (Trace.GlobalTraceWidth machine steps cols)) : Set where
   field
     everyTimeEveryWindowSemantic :
-      AllTimesSemantic {machine} {steps} {cols}
+      AllTimesSemantic
         stateCoverage symbolCoverage nonempty globalBits
         (Transition.allSlots steps)
 
@@ -217,23 +217,23 @@ globalTransitionCNF_to_semanticScan :
     (steps cols : Nat)
     (globalBits : CNF.Bits (Trace.GlobalTraceWidth machine steps cols)) →
   CNF.evaluateCNF
-    (Transition.globalTransitionCNF {machine}
+    (Transition.globalTransitionCNF
       stateCoverage symbolCoverage nonempty steps cols)
     globalBits
   ≡ true →
   GlobalTransitionSemanticScan
     stateCoverage symbolCoverage nonempty
     steps cols globalBits
-globalTransitionCNF_to_semanticScan {machine}
+globalTransitionCNF_to_semanticScan
     stateCoverage symbolCoverage nonempty
     steps cols globalBits accepted =
   record
     { everyTimeEveryWindowSemantic =
-        allTimesPlacedToSemantic {machine} {steps} {cols}
+        allTimesPlacedToSemantic
           stateCoverage symbolCoverage nonempty
           (Transition.allSlots steps)
           globalBits
-          (Transition.globalTransitionCNF_sound {machine}
+          (Transition.globalTransitionCNF_sound
             stateCoverage symbolCoverage nonempty
             steps cols globalBits accepted)
     }
@@ -263,25 +263,25 @@ oneTimeSemanticToPlaced
     stateCoverage symbolCoverage nonempty
     timeSlot [] globalBits semanticWindowsDone =
   Placed.allPlacedDone
-oneTimeSemanticToPlaced {machine} {steps} {cols}
+oneTimeSemanticToPlaced
     stateCoverage symbolCoverage nonempty
     timeSlot
     (Transition.some-window-start columnIndex start ∷ rest)
     globalBits
     (semanticWindowsStep current remaining) =
   Placed.allPlacedStep currentTrue
-    (oneTimeSemanticToPlaced {machine} {steps} {cols}
+    (oneTimeSemanticToPlaced
       stateCoverage symbolCoverage nonempty
       timeSlot rest globalBits remaining)
   where
     decodedLegal :
       Pattern.LegalWindowForRule
         machine
-        (Semantic.decodedSelectedRule {machine = machine} nonempty
-          (Raw.rawSelectedWindowBits {machine} {steps} {cols} timeSlot start globalBits))
-        (Semantic.decodedSelectedWindow {machine = machine}
+        (Semantic.decodedSelectedRule nonempty
+          (Raw.rawSelectedWindowBits timeSlot start globalBits))
+        (Semantic.decodedSelectedWindow
           stateCoverage symbolCoverage
-          (Raw.rawSelectedWindowBits {machine} {steps} {cols} timeSlot start globalBits))
+          (Raw.rawSelectedWindowBits timeSlot start globalBits))
     decodedLegal
       rewrite sym (Semantic.ruleExact current)
             | sym (Semantic.windowExact current) =
@@ -289,18 +289,18 @@ oneTimeSemanticToPlaced {machine} {steps} {cols}
 
     currentTrue :
       Placed.predicate
-        (Raw.rawSelectedWindowPlacedPredicate {machine} {steps} {cols}
+        (Raw.rawSelectedWindowPlacedPredicate
           stateCoverage symbolCoverage nonempty timeSlot start)
         (Rename.pullbackBits
           (Placed.rename
-            (Raw.rawSelectedWindowPlacedPredicate {machine} {steps} {cols}
+            (Raw.rawSelectedWindowPlacedPredicate
               stateCoverage symbolCoverage nonempty timeSlot start))
           globalBits)
       ≡ true
     currentTrue =
-      Semantic.decodedSemanticLegalImpliesSelectedPredicateTrue {machine = machine}
+      Semantic.decodedSemanticLegalImpliesSelectedPredicateTrue
         stateCoverage symbolCoverage nonempty
-        (Raw.rawSelectedWindowBits {machine} {steps} {cols} timeSlot start globalBits)
+        (Raw.rawSelectedWindowBits timeSlot start globalBits)
         decodedLegal
 
 allTimesSemanticToPlaced :
@@ -312,26 +312,26 @@ allTimesSemanticToPlaced :
     (nonempty : Selector.NonemptyRuleTable machine)
     (times : List (Transition.SomeSlot steps))
     (globalBits : CNF.Bits (Trace.GlobalTraceWidth machine steps cols)) →
-  AllTimesSemantic {machine} {steps} {cols}
+  AllTimesSemantic
     stateCoverage symbolCoverage nonempty globalBits times →
   Placed.AllPlacedSatisfied globalBits
-    (Transition.predicatesForAllTimes {machine} {steps} {cols}
+    (Transition.predicatesForAllTimes
       stateCoverage symbolCoverage nonempty times)
-allTimesSemanticToPlaced {machine} {steps} {cols}
+allTimesSemanticToPlaced
     stateCoverage symbolCoverage nonempty
     [] globalBits semanticTimesDone =
   Placed.allPlacedDone
-allTimesSemanticToPlaced {machine} {steps} {cols}
+allTimesSemanticToPlaced
     stateCoverage symbolCoverage nonempty
     (Transition.some-slot timeIndex timeSlot ∷ rest)
     globalBits
     (semanticTimesStep current remaining) =
   merge
-    (oneTimeSemanticToPlaced {machine} {steps} {cols}
+    (oneTimeSemanticToPlaced
       stateCoverage symbolCoverage nonempty
-      timeSlot (Transition.allWindowStarts cols)
+      timeSlot (Transition.allWindowStarts _)
       globalBits current)
-    (allTimesSemanticToPlaced {machine} {steps} {cols}
+    (allTimesSemanticToPlaced
       stateCoverage symbolCoverage nonempty
       rest globalBits remaining)
   where
@@ -365,13 +365,13 @@ semanticScan_to_globalTransitionCNF :
       stateCoverage symbolCoverage nonempty steps cols)
     globalBits
   ≡ true
-semanticScan_to_globalTransitionCNF {machine}
+semanticScan_to_globalTransitionCNF
     stateCoverage symbolCoverage nonempty
     steps cols globalBits semantic =
   Transition.globalTransitionCNF_complete
     stateCoverage symbolCoverage nonempty
     steps cols globalBits
-    (allTimesSemanticToPlaced {machine} {steps} {cols}
+    (allTimesSemanticToPlaced
       stateCoverage symbolCoverage nonempty
       (Transition.allSlots steps)
       globalBits

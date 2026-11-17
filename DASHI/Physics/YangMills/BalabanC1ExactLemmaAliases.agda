@@ -10,24 +10,24 @@ import DASHI.Physics.YangMills.BalabanConfiguredSide4PeriodicOpenEnergySeamExact
 import DASHI.Physics.YangMills.BalabanPath4BondHodgeCoercivityExact as Bond
 
 -- Requested audit name for the four-axis divergence-square expansion.
-divergenceSquareExpansion : ∀ (fld : ScalarBondField4) →
-  Hodge.componentDivergenceEnergy fld
-  ≡ Hodge.componentDivergenceExpanded fld
+divergenceSquareExpansion : ∀ (field : ScalarBondField4) →
+  Hodge.componentDivergenceEnergy field
+  ≡ Hodge.componentDivergenceExpanded field
 divergenceSquareExpansion = Hodge.componentDivergenceEnergyExpansion
 
 -- Requested audit name for expansion of the literal axis/site difference fold.
-componentDifferenceEnergyAxisSiteFold : ∀ (fld : ScalarBondField4) →
-  Hodge.componentPeriodicDifferenceEnergy fld
-  ≡ Hodge.componentPeriodicDifferenceExpanded fld
+componentDifferenceEnergyAxisSiteFold : ∀ (field : ScalarBondField4) →
+  Hodge.componentPeriodicDifferenceEnergy field
+  ≡ Hodge.componentPeriodicDifferenceExpanded field
 componentDifferenceEnergyAxisSiteFold =
   Hodge.componentPeriodicDifferenceEnergyExpansion
 
 -- The repository reference energy is the open-edge component fold.  The exact
 -- periodic fold differs by the separately exposed wrap remainder.
 componentDifferenceEnergyMatchesBondReferenceDifferenceEnergy :
-  ∀ (fld : Bond.RationalBondField4) →
-  Seam.componentOpenDifferenceEnergy (Bond.bondComponent fld)
-  ≡ Bond.bondReferenceDifferenceEnergy fld
+  ∀ (field : ScalarBondField4) →
+  Seam.componentOpenDifferenceEnergy field
+  ≡ Bond.bondReferenceDifferenceEnergy field
 componentDifferenceEnergyMatchesBondReferenceDifferenceEnergy =
   Seam.componentOpenDifferenceEnergyMatchesBondReferenceDifferenceEnergy
 

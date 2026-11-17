@@ -85,7 +85,7 @@ FiniteMixedNashExistenceConsumer = StandardFiniteMixedNashEquilibrium
 
 record FiniteMixedNashExistenceSourceDemand
     (G : Game.StrategicGame)
-    (U : Mixed.FiniteExpectedUtilitySurface G) : Set₂ where
+    (U : Mixed.FiniteExpectedUtilitySurface G) : Set₁ where
   constructor finite-mixed-nash-existence-source-demand
   field
     finiteNormalForm : FiniteNormalFormReceipt G

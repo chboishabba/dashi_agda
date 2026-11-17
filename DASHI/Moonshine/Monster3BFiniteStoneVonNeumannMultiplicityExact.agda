@@ -26,7 +26,6 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; suc; _+_; _*_)
 open import Relation.Binary.PropositionalEquality using (sym; trans)
-open import Data.Nat.Base using (NonZero; nonZero)
 import Data.Nat.Properties as NatP
 
 ------------------------------------------------------------------------
@@ -76,7 +75,7 @@ multiplicityForcedToNinety :
   729 * multiplicity ≡ 65610 →
   multiplicity ≡ 90
 multiplicityForcedToNinety multiplicity degreeEquation =
-  NatP.*-cancelˡ-≡ multiplicity 90 729 {{nonZero}}
+  NatP.*-cancelˡ-≡ multiplicity 90 729
     (trans degreeEquation (sym ninetyHeisenbergDegree))
 
 actualZetaSectorHasNinetyConstituents :

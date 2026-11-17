@@ -35,6 +35,5 @@ record GradedRepresentation (G K : Set) (group : Group G) : Setω where
     gradedTrace : G → Nat → K
     traceIsGradeTrace : ∀ (g : G) (n : Nat) → Set
 
-open Group public
 open FiniteDimensionalRepresentation public
 open GradedRepresentation public

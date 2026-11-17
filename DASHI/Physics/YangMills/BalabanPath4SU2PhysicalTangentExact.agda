@@ -108,12 +108,6 @@ physicalTangentNormMatchesBondNorm : ∀ latticeWeight tangent →
   ≡ latticeWeight * encodedBondNormSq (encodeTangent tangent)
 physicalTangentNormMatchesBondNorm latticeWeight tangent = refl
 
-scaleThreeSumFirstRaw : ∀ w a b c → w * (a + (b + c)) ≡ w * a + w * (b + c)
-scaleThreeSumFirstRaw = ℚRing.solve-∀
-
-scaleThreeSumFullRaw : ∀ w a b c → w * (a + (b + c)) ≡ w * a + (w * b + w * c)
-scaleThreeSumFullRaw = ℚRing.solve-∀
-
 physicalTangentNormComponentExpansionExact : ∀ latticeWeight tangent →
   physicalNormSq latticeWeight tangent
   ≡ latticeWeight * bondNormSq (encodeTangent tangent component1)
@@ -121,11 +115,7 @@ physicalTangentNormComponentExpansionExact : ∀ latticeWeight tangent →
       (bondNormSq (encodeTangent tangent component2)
       + bondNormSq (encodeTangent tangent component3))
 physicalTangentNormComponentExpansionExact latticeWeight tangent =
-  scaleThreeSumFirstRaw
-    latticeWeight
-    (bondNormSq (encodeTangent tangent component1))
-    (bondNormSq (encodeTangent tangent component2))
-    (bondNormSq (encodeTangent tangent component3))
+  ℚRing.solve-∀
 
 ------------------------------------------------------------------------
 -- The literal configured-side block map is the normalized four-axis average
@@ -156,11 +146,7 @@ scaledPhysicalNormIsComponentFold : ∀ tangent →
     + (configuredPathCoercivityConstant * bondNormSq (tangent component2)
     + configuredPathCoercivityConstant * bondNormSq (tangent component3))
 scaledPhysicalNormIsComponentFold tangent =
-  scaleThreeSumFullRaw
-    configuredPathCoercivityConstant
-    (bondNormSq (tangent component1))
-    (bondNormSq (tangent component2))
-    (bondNormSq (tangent component3))
+  ℚRing.solve-∀
 
 physicalBlockConstrainedDifferencePoincare :
   ∀ tangent → PhysicalBlockAverageZero tangent →

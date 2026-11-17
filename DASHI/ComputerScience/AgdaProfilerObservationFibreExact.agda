@@ -1,3 +1,4 @@
+{-# OPTIONS --safe #-}
 module DASHI.ComputerScience.AgdaProfilerObservationFibreExact where
 
 ------------------------------------------------------------------------
@@ -28,7 +29,6 @@ data AgdaCounterProfile : Set where
   metaProfile : AgdaCounterProfile
   interactiveProfile : AgdaCounterProfile
   conversionProfile : AgdaCounterProfile
-
 
 record AgdaProfilerConfiguration : Set where
   constructor agdaProfilerConfiguration

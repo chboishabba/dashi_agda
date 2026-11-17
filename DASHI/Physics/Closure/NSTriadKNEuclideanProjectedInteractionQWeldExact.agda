@@ -14,8 +14,7 @@ module DASHI.Physics.Closure.NSTriadKNEuclideanProjectedInteractionQWeldExact wh
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (sym; subst)
+open import Agda.Builtin.Equality using (_≡_; refl; sym; subst)
 
 import Real as BishopReal
 

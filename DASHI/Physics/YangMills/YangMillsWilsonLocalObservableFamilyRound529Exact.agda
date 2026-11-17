@@ -14,8 +14,7 @@ module DASHI.Physics.YangMills.YangMillsWilsonLocalObservableFamilyRound529Exact
 -- position, the required observable family is compiler-owned.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong)
+open import Agda.Builtin.Equality using (_≡_; refl; cong)
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel

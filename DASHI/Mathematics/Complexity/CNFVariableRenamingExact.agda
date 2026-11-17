@@ -159,15 +159,6 @@ renamedCNFEvaluation rename (clause ∷ clauses) globalBits =
     (renamedClauseEvaluation rename clause globalBits)
     (renamedCNFEvaluation rename clauses globalBits)
 
-transEq : ∀ {A : Set} {x y z : A} → x ≡ y → y ≡ z → x ≡ z
-transEq refl second = second
-
-symEq : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
-symEq refl = refl
-
-transportTrue : ∀ {b1 b2 : Bool} → b1 ≡ b2 → b1 ≡ true → b2 ≡ true
-transportTrue refl p = p
-
 placedTruthTableCNFSound :
   ∀ {local global}
     (rename : Fin.Fin local → Fin.Fin global)
@@ -183,9 +174,23 @@ placedTruthTableCNFSound rename predicate globalBits accepted =
   CNF.truthTableCNFSound
     predicate
     (pullbackBits rename globalBits)
-    (transportTrue
-      (renamedCNFEvaluation rename (CNF.truthTableCNF predicate) globalBits)
-      accepted)
+    (transport accepted)
+  where
+    transport :
+      CNF.evaluateCNF
+        (renameCNF rename (CNF.truthTableCNF predicate))
+        globalBits
+      ≡ true →
+      CNF.evaluateCNF
+        (CNF.truthTableCNF predicate)
+        (pullbackBits rename globalBits)
+      ≡ true
+    transport proof
+      with renamedCNFEvaluation
+        rename
+        (CNF.truthTableCNF predicate)
+        globalBits
+    ... | refl = proof
 
 placedTruthTableCNFComplete :
   ∀ {local global}
@@ -198,10 +203,13 @@ placedTruthTableCNFComplete :
     (renameCNF rename (CNF.truthTableCNF predicate))
     globalBits
   ≡ true
-placedTruthTableCNFComplete rename predicate globalBits accepted =
-  transportTrue
-    (symEq (renamedCNFEvaluation rename (CNF.truthTableCNF predicate) globalBits))
-    (CNF.truthTableCNFComplete
-      predicate
-      (pullbackBits rename globalBits)
-      accepted)
+placedTruthTableCNFComplete rename predicate globalBits accepted
+    with renamedCNFEvaluation
+      rename
+      (CNF.truthTableCNF predicate)
+      globalBits
+... | refl =
+  CNF.truthTableCNFComplete
+    predicate
+    (pullbackBits rename globalBits)
+    accepted

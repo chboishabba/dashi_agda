@@ -1,11 +1,6 @@
 module DASHI.Physics.YangMills.BalabanSU2GaugeFixedHessian where
 
-open import Agda.Primitive using (Level; _⊔_; lsuc)
-
-record GaugeFixedHessianData
-    {f g c : Level}
-    (Fine : Set f) (Gauge : Set g) (Coarse : Set c)
-    : Set (lsuc (f ⊔ g ⊔ c)) where
+record GaugeFixedHessianData (Fine Gauge Coarse : Set) : Set₁ where
   field
     wilsonHessian : Fine → Fine
     divergence : Fine → Gauge
@@ -17,17 +12,17 @@ record GaugeFixedHessianData
 open GaugeFixedHessianData public
 
 gaugePenalty :
-  ∀ {f g c} {Fine : Set f} {Gauge : Set g} {Coarse : Set c} →
+  ∀ {Fine Gauge Coarse} →
   GaugeFixedHessianData Fine Gauge Coarse → Fine → Fine
 gaugePenalty bundle fine = divergenceStar bundle (divergence bundle fine)
 
 averagePenalty :
-  ∀ {f g c} {Fine : Set f} {Gauge : Set g} {Coarse : Set c} →
+  ∀ {Fine Gauge Coarse} →
   GaugeFixedHessianData Fine Gauge Coarse → Fine → Fine
 averagePenalty bundle fine = averageStar bundle (average bundle fine)
 
 gaugeFixedHessian :
-  ∀ {f g c} {Fine : Set f} {Gauge : Set g} {Coarse : Set c} →
+  ∀ {Fine Gauge Coarse} →
   GaugeFixedHessianData Fine Gauge Coarse → Fine → Fine
 gaugeFixedHessian bundle fine =
   addFine bundle (wilsonHessian bundle fine)

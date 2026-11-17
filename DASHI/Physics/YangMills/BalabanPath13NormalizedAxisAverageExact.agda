@@ -23,7 +23,7 @@ open import Data.Integer.Base using (+_)
 open import Data.List.Base using (length)
 open import Data.Rational using (ℚ; 1ℚ; _*_; _/_)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (_≡_; refl; cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
@@ -41,12 +41,12 @@ oneThirteenth = + 1 / 13
 side13NormalizationExact :
   oneThirteenth * natAsRational (length (allCyclicIndices side13)) ≡ 1ℚ
 side13NormalizationExact
-  rewrite lengthAllCyclicIndices side13 = refl
+  rewrite lengthAllCyclicIndices side13 = ℚRing.solve []
 
 side13AverageData : Average.NormalizedAxisAverageData side13
 side13AverageData = record
-  { weight = oneThirteenth
-  ; normalized = side13NormalizationExact
+  { Average.NormalizedAxisAverageData.weight = oneThirteenth
+  ; Average.NormalizedAxisAverageData.normalized = side13NormalizationExact
   }
 
 path13NormalizedAxisAverageLevel : ProofLevel

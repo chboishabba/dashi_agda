@@ -73,7 +73,7 @@ data GriessProductDomain : Set where
 literatureGriessProductDomain : GriessProductDomain
 literatureGriessProductDomain = fullWeightTwoSpace
 
-record GriessProductBoundary : Set₁ where
+record GriessProductBoundary : Set where
   constructor griessProductBoundary
   field
     constituentOnlyIsDeclaredFullGriessAlgebra : Set

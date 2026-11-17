@@ -58,18 +58,6 @@ import DASHI.Wikimedia.MaboConsumerResidualDiagnosisValidation
 import DASHI.Wikimedia.Mabo100HopReviewedCampaignValidation
 import DASHI.Wikimedia.MaboCampaignScopedNoveltyValidation
 import DASHI.Wikimedia.MaboAdaptiveHeterogeneousTrajectoryValidation
--- Consumer-first source interpretation: these EXISTING golden owners define
--- query-indexed sufficiency, live-reading closure/collision, typed SLRC v2
--- residual needs, and the GWB reviewed temporal/event trace frontier.
--- Merely importing them does NOT pay a runtime semantic licence or assert
--- that parser token labels identify people/events in the world.
-import DASHI.Core.ConsumerDescentMinimalObserverExact
-import DASHI.Reasoning.SemanticConsumerRelativeClosureExact
-import DASHI.Reasoning.AdaptiveSemanticReasoningLoopExact
-import DASHI.Interop.SLRConsumerRequirementV2Exact
-import DASHI.Interop.SLRConsumerResidualCompilerParityExact
-import DASHI.Interop.SLRGWBHeterogeneousChronologyCapstoneExact
-
 import DASHI.Wikimedia.SLRWikimediaHandoffABIExact
 import DASHI.Wikimedia.MaboResidualDrivenProducerAdaptersExact
 import DASHI.Wikimedia.MaboResidualDrivenWorldExpansionStepExact

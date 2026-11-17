@@ -2,6 +2,7 @@ module DASHI.Biology.AgenticMaterialsControlCore where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Primitive using (Set; Set₁)
 
 ------------------------------------------------------------------------
 -- Agentic materials: minimal control-theoretic core.

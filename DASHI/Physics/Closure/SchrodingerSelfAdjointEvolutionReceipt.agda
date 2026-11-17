@@ -15,7 +15,7 @@ open import Data.Product using (_,_)
 
 import DASHI.Foundations.QuotientSetoidSurface as QS
 import DASHI.Quantum.Stone as Stone
-import DASHI.Physics.Closure.QuantumCarrierCore as U
+import DASHI.Unifier as U
 import DASHI.Physics.Closure.SchrodingerQuotientDescentReceipt as SQD
 import DASHI.Physics.Closure.ShiftObservableSignaturePressureTestInstance as SPTI
 

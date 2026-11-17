@@ -2,8 +2,7 @@
 
 module DASHI.Geometry.UniversalCanonicalQuotient where
 
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (sym; trans)
+open import Agda.Builtin.Equality using (_≡_; refl; sym; trans)
 
 ------------------------------------------------------------------------
 -- A quotient presentation is deliberately independent of a particular

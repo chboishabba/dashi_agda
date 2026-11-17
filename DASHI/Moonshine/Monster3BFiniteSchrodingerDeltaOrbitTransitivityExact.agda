@@ -251,8 +251,6 @@ record DeltaOrbitTransitivityBoundary : Set where
     linearSpanOfAllFunctionsProvedHere : Bool
     fullIrreducibilityProvedHere : Bool
 
-open DeltaOrbitTransitivityBoundary public
-
 canonicalDeltaOrbitTransitivityBoundary : DeltaOrbitTransitivityBoundary
 canonicalDeltaOrbitTransitivityBoundary =
   delta-orbit-transitivity-boundary

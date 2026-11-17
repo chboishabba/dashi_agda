@@ -79,7 +79,7 @@ iterateForward4Commutes iterateAxis (sucᵢ offset) forwardAxis site =
       (shiftForward4 iterateAxis site))
 
 iterateForward4SumInvariant :
-  ∀ {n} axis (offset : CyclicIndex n) (term : PhysicalBlockL side4 → ℚ) →
+  ∀ {n} axis (offset : CyclicIndex n) term →
   siteSum4 (λ site → term (iterateForward4 axis offset site))
   ≡ siteSum4 term
 iterateForward4SumInvariant axis zeroᵢ term = refl
@@ -129,7 +129,7 @@ translateSite4ForwardCommutes
   axis2 = sucᵢ (sucᵢ zeroᵢ)
   axis3 = sucᵢ (sucᵢ (sucᵢ zeroᵢ))
 
-siteSumTranslationInvariant : ∀ origin (term : PhysicalBlockL side4 → ℚ) →
+siteSumTranslationInvariant : ∀ origin term →
   siteSum4 (λ site → term (translateSite4 origin site))
   ≡ siteSum4 term
 siteSumTranslationInvariant
@@ -257,17 +257,12 @@ translatedWilsonPositivePlaneSiteFoldExact : ∀ origin tangent →
     (translatedBondRestriction origin tangent)
   ≡ literalWilsonHessianPositivePlaneFold tangent
 translatedWilsonPositivePlaneSiteFoldExact origin tangent =
-  sumRationalCong positivePlaquettePlanes4
-    (λ plane → siteSum4 (literalPlaquetteWilsonSecondVariation (translatedBondRestriction origin tangent) plane))
-    (λ plane → siteSum4 (literalPlaquetteWilsonSecondVariation tangent plane))
-    (λ plane →
-      trans
-        (sumRationalCong (physicalBlockSites side4)
-          (literalPlaquetteWilsonSecondVariation (translatedBondRestriction origin tangent) plane)
-          (λ site → literalPlaquetteWilsonSecondVariation tangent plane (translateSite4 origin site))
-          (translatedWilsonPlaquetteHessianReindexing origin tangent plane))
-        (siteSumTranslationInvariant origin
-          (literalPlaquetteWilsonSecondVariation tangent plane)))
+  sumRationalCong positivePlaquettePlanes4 _ _ (λ plane →
+    trans
+      (sumRationalCong (physicalBlockSites side4) _ _
+        (translatedWilsonPlaquetteHessianReindexing origin tangent plane))
+      (siteSumTranslationInvariant origin
+        (literalPlaquetteWilsonSecondVariation tangent plane)))
 
 globalWilsonToLocalTranslatedBlock : ∀ origin tangent →
   literalWilsonHessianPositivePlaneFold

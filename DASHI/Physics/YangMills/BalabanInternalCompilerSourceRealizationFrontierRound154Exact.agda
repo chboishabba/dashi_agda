@@ -28,15 +28,15 @@ data SourceRealizationLeaf : Set where
   diagnosticPlanner : SourceRealizationLeaf
   physicalSourceClosure : SourceRealizationLeaf
 
-data LeafState : Set where leafClosed leafOpen leafBlocked : LeafState
+data LeafState : Set where closed open blocked : LeafState
 
 leafState : SourceRealizationLeaf → LeafState
-leafState round108DirectCompiler = leafClosed
-leafState literalRound108DensityPotentialRealization = leafOpen
-leafState componentD1ReductionCompiler = leafClosed
-leafState literalPhysicalCompositeChainRule = leafOpen
-leafState diagnosticPlanner = leafClosed
-leafState physicalSourceClosure = leafBlocked
+leafState round108DirectCompiler = closed
+leafState literalRound108DensityPotentialRealization = open
+leafState componentD1ReductionCompiler = closed
+leafState literalPhysicalCompositeChainRule = open
+leafState diagnosticPlanner = closed
+leafState physicalSourceClosure = blocked
 
 data Requires : SourceRealizationLeaf → SourceRealizationLeaf → Set where
   sourceNeedsLiteralDensityRealization :
@@ -44,22 +44,22 @@ data Requires : SourceRealizationLeaf → SourceRealizationLeaf → Set where
   sourceNeedsLiteralD1ChainRule :
     Requires physicalSourceClosure literalPhysicalCompositeChainRule
 
-round151InternalCompilerClosed : leafState round108DirectCompiler ≡ leafClosed
+round151InternalCompilerClosed : leafState round108DirectCompiler ≡ closed
 round151InternalCompilerClosed = refl
 
 round151LiteralRealizationStillLive :
-  leafState literalRound108DensityPotentialRealization ≡ leafOpen
+  leafState literalRound108DensityPotentialRealization ≡ open
 round151LiteralRealizationStillLive = refl
 
-round152InternalCompilerClosed : leafState componentD1ReductionCompiler ≡ leafClosed
+round152InternalCompilerClosed : leafState componentD1ReductionCompiler ≡ closed
 round152InternalCompilerClosed = refl
 
 round152LiteralChainRuleStillLive :
-  leafState literalPhysicalCompositeChainRule ≡ leafOpen
+  leafState literalPhysicalCompositeChainRule ≡ open
 round152LiteralChainRuleStillLive = refl
 
 internalCompilerClosureDoesNotCloseSource :
-  leafState physicalSourceClosure ≡ leafBlocked
+  leafState physicalSourceClosure ≡ blocked
 internalCompilerClosureDoesNotCloseSource = refl
 
 highestImpactRealizationLeaf : SourceRealizationLeaf

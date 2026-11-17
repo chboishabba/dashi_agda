@@ -65,7 +65,7 @@ guardedShiftBoundExact :
       (Universal.shiftCookFormula payload)
   ≡
   suc (Bridge.formulaVariableBound payload)
-guardedShiftBoundExact (Cook.formulaVar index) =
+guardedShiftBoundExact (Cook.variable index) =
   refl
 guardedShiftBoundExact (Cook.constant value) =
   refl
@@ -119,7 +119,7 @@ indexedToCookLiftAboveGuard :
   ≡
   Universal.shiftCookFormula
       (Bridge.indexedToCook formula)
-indexedToCookLiftAboveGuard (SAT.formulaVar index) =
+indexedToCookLiftAboveGuard (SAT.variable index) =
   refl
 indexedToCookLiftAboveGuard (SAT.constant value) =
   refl
@@ -162,7 +162,7 @@ indexedRejectGuardDecodesToCookRejectGadget payload
 
 cookVariableInjective :
   ∀ {left right : Nat} →
-  Cook.formulaVar left ≡ Cook.formulaVar right →
+  Cook.variable left ≡ Cook.variable right →
   left ≡ right
 cookVariableInjective refl = refl
 
@@ -218,31 +218,31 @@ indexedToCookInjective :
   Bridge.indexedToCook right →
   left ≡ right
 indexedToCookInjective
-    (SAT.formulaVar left)
-    (SAT.formulaVar right)
+    (SAT.variable left)
+    (SAT.variable right)
     equality =
-  cong SAT.formulaVar
+  cong SAT.variable
     (FinP.toℕ-injective
       (cookVariableInjective equality))
 indexedToCookInjective
-    (SAT.formulaVar left)
+    (SAT.variable left)
     (SAT.constant right)
     ()
 indexedToCookInjective
-    (SAT.formulaVar left)
+    (SAT.variable left)
     (SAT.negate right)
     ()
 indexedToCookInjective
-    (SAT.formulaVar left)
+    (SAT.variable left)
     (SAT.conjunction rightA rightB)
     ()
 indexedToCookInjective
-    (SAT.formulaVar left)
+    (SAT.variable left)
     (SAT.disjunction rightA rightB)
     ()
 indexedToCookInjective
     (SAT.constant left)
-    (SAT.formulaVar right)
+    (SAT.variable right)
     ()
 indexedToCookInjective
     (SAT.constant left)
@@ -264,7 +264,7 @@ indexedToCookInjective
     ()
 indexedToCookInjective
     (SAT.negate left)
-    (SAT.formulaVar right)
+    (SAT.variable right)
     ()
 indexedToCookInjective
     (SAT.negate left)
@@ -289,7 +289,7 @@ indexedToCookInjective
     ()
 indexedToCookInjective
     (SAT.conjunction leftA leftB)
-    (SAT.formulaVar right)
+    (SAT.variable right)
     ()
 indexedToCookInjective
     (SAT.conjunction leftA leftB)
@@ -318,7 +318,7 @@ indexedToCookInjective
     ()
 indexedToCookInjective
     (SAT.disjunction leftA leftB)
-    (SAT.formulaVar right)
+    (SAT.variable right)
     ()
 indexedToCookInjective
     (SAT.disjunction leftA leftB)

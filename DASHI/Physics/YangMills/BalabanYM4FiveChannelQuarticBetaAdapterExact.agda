@@ -91,55 +91,55 @@ open FiveChannelQuarticBetaData public
 channelRemainder :
   ∀ {Cell} → FiveChannelQuarticBetaData Cell →
   Cell → PhysicalBetaChannel → ℚ
-channelRemainder dat cell determinant = determinantRemainder dat cell
-channelRemainder dat cell interaction = interactionRemainder dat cell
-channelRemainder dat cell chart = chartRemainder dat cell
-channelRemainder dat cell gauge = gaugeRemainder dat cell
-channelRemainder dat cell localization = localizationRemainder dat cell
+channelRemainder data cell determinant = determinantRemainder data cell
+channelRemainder data cell interaction = interactionRemainder data cell
+channelRemainder data cell chart = chartRemainder data cell
+channelRemainder data cell gauge = gaugeRemainder data cell
+channelRemainder data cell localization = localizationRemainder data cell
 
 channelCoefficient :
   ∀ {Cell} → FiveChannelQuarticBetaData Cell →
   Cell → PhysicalBetaChannel → ℚ
-channelCoefficient dat cell determinant = determinantCoefficient dat cell
-channelCoefficient dat cell interaction = interactionCoefficient dat cell
-channelCoefficient dat cell chart = chartCoefficient dat cell
-channelCoefficient dat cell gauge = gaugeCoefficient dat cell
-channelCoefficient dat cell localization = localizationCoefficient dat cell
+channelCoefficient data cell determinant = determinantCoefficient data cell
+channelCoefficient data cell interaction = interactionCoefficient data cell
+channelCoefficient data cell chart = chartCoefficient data cell
+channelCoefficient data cell gauge = gaugeCoefficient data cell
+channelCoefficient data cell localization = localizationCoefficient data cell
 
 channelCoefficientNN :
-  ∀ {Cell} (dat : FiveChannelQuarticBetaData Cell) cell channel →
-  0ℚ ≤ channelCoefficient dat cell channel
-channelCoefficientNN dat cell determinant = determinantCoefficientNN dat cell
-channelCoefficientNN dat cell interaction = interactionCoefficientNN dat cell
-channelCoefficientNN dat cell chart = chartCoefficientNN dat cell
-channelCoefficientNN dat cell gauge = gaugeCoefficientNN dat cell
-channelCoefficientNN dat cell localization = localizationCoefficientNN dat cell
+  ∀ {Cell} (data : FiveChannelQuarticBetaData Cell) cell channel →
+  0ℚ ≤ channelCoefficient data cell channel
+channelCoefficientNN data cell determinant = determinantCoefficientNN data cell
+channelCoefficientNN data cell interaction = interactionCoefficientNN data cell
+channelCoefficientNN data cell chart = chartCoefficientNN data cell
+channelCoefficientNN data cell gauge = gaugeCoefficientNN data cell
+channelCoefficientNN data cell localization = localizationCoefficientNN data cell
 
 channelLower :
-  ∀ {Cell} (dat : FiveChannelQuarticBetaData Cell) cell channel →
-  - (channelCoefficient dat cell channel * Beta.power4 (coupling dat))
-  ≤ channelRemainder dat cell channel
-channelLower dat cell determinant = determinantLower dat cell
-channelLower dat cell interaction = interactionLower dat cell
-channelLower dat cell chart = chartLower dat cell
-channelLower dat cell gauge = gaugeLower dat cell
-channelLower dat cell localization = localizationLower dat cell
+  ∀ {Cell} (data : FiveChannelQuarticBetaData Cell) cell channel →
+  - (channelCoefficient data cell channel * Beta.power4 (coupling data))
+  ≤ channelRemainder data cell channel
+channelLower data cell determinant = determinantLower data cell
+channelLower data cell interaction = interactionLower data cell
+channelLower data cell chart = chartLower data cell
+channelLower data cell gauge = gaugeLower data cell
+channelLower data cell localization = localizationLower data cell
 
 localRemainder :
   ∀ {Cell} → FiveChannelQuarticBetaData Cell → Cell → ℚ
-localRemainder dat cell =
-  Sums.sumRational channels (channelRemainder dat cell)
+localRemainder data cell =
+  Sums.sumRational channels (channelRemainder data cell)
 
 localCoefficient :
   ∀ {Cell} → FiveChannelQuarticBetaData Cell → Cell → ℚ
-localCoefficient dat cell =
-  Sums.sumRational channels (channelCoefficient dat cell)
+localCoefficient data cell =
+  Sums.sumRational channels (channelCoefficient data cell)
 
 betaInt : ∀ {Cell} → FiveChannelQuarticBetaData Cell → ℚ
-betaInt dat = Sums.sumRational (cells dat) (localRemainder dat)
+betaInt data = Sums.sumRational (cells data) (localRemainder data)
 
 coefficientTotal : ∀ {Cell} → FiveChannelQuarticBetaData Cell → ℚ
-coefficientTotal dat = Sums.sumRational (cells dat) (localCoefficient dat)
+coefficientTotal data = Sums.sumRational (cells data) (localCoefficient data)
 
 sumNonnegative :
   ∀ {A : Set} (indices : List A) (value : A → ℚ) →
@@ -150,107 +150,107 @@ sumNonnegative (x ∷ xs) value pointwise =
   ℚP.+-mono-≤ (pointwise x) (sumNonnegative xs value pointwise)
 
 localCoefficientNN :
-  ∀ {Cell} (dat : FiveChannelQuarticBetaData Cell) cell →
-  0ℚ ≤ localCoefficient dat cell
-localCoefficientNN dat cell =
-  sumNonnegative channels (channelCoefficient dat cell)
-    (channelCoefficientNN dat cell)
+  ∀ {Cell} (data : FiveChannelQuarticBetaData Cell) cell →
+  0ℚ ≤ localCoefficient data cell
+localCoefficientNN data cell =
+  sumNonnegative channels (channelCoefficient data cell)
+    (channelCoefficientNN data cell)
 
 coefficientTotalNN :
-  ∀ {Cell} (dat : FiveChannelQuarticBetaData Cell) →
-  0ℚ ≤ coefficientTotal dat
-coefficientTotalNN dat =
-  sumNonnegative (cells dat) (localCoefficient dat)
-    (localCoefficientNN dat)
+  ∀ {Cell} (data : FiveChannelQuarticBetaData Cell) →
+  0ℚ ≤ coefficientTotal data
+coefficientTotalNN data =
+  sumNonnegative (cells data) (localCoefficient data)
+    (localCoefficientNN data)
 
 localQuarticLower :
-  ∀ {Cell} (dat : FiveChannelQuarticBetaData Cell) cell →
-  - (localCoefficient dat cell * Beta.power4 (coupling dat))
-  ≤ localRemainder dat cell
-localQuarticLower dat cell =
+  ∀ {Cell} (data : FiveChannelQuarticBetaData Cell) cell →
+  - (localCoefficient data cell * Beta.power4 (coupling data))
+  ≤ localRemainder data cell
+localQuarticLower data cell =
   let
-    fourth = Beta.power4 (coupling dat)
+    fourth = Beta.power4 (coupling data)
     pointwiseSum :
       Sums.sumRational channels
-        (λ channel → - (channelCoefficient dat cell channel * fourth))
-      ≤ localRemainder dat cell
+        (λ channel → - (channelCoefficient data cell channel * fourth))
+      ≤ localRemainder data cell
     pointwiseSum = Beta.sumMonotone
       channels
-      (λ channel → - (channelCoefficient dat cell channel * fourth))
-      (channelRemainder dat cell)
-      (channelLower dat cell)
+      (λ channel → - (channelCoefficient data cell channel * fourth))
+      (channelRemainder data cell)
+      (channelLower data cell)
 
     identify :
       Sums.sumRational channels
-        (λ channel → - (channelCoefficient dat cell channel * fourth))
-      ≡ - (localCoefficient dat cell * fourth)
+        (λ channel → - (channelCoefficient data cell channel * fourth))
+      ≡ - (localCoefficient data cell * fourth)
     identify = trans
       (Sums.sumRationalNegate channels
-        (λ channel → channelCoefficient dat cell channel * fourth))
+        (λ channel → channelCoefficient data cell channel * fourth))
       (cong -_
         (trans
           (Sums.sumRationalCong channels
-            (λ channel → channelCoefficient dat cell channel * fourth)
-            (λ channel → fourth * channelCoefficient dat cell channel)
+            (λ channel → channelCoefficient data cell channel * fourth)
+            (λ channel → fourth * channelCoefficient data cell channel)
             (λ channel → ℚRing.solve-∀
-              (channelCoefficient dat cell channel) fourth))
+              (channelCoefficient data cell channel) fourth))
           (trans
             (Sums.sumRationalScale fourth channels
-              (channelCoefficient dat cell))
-            (ℚRing.solve-∀ fourth (localCoefficient dat cell)))))
+              (channelCoefficient data cell))
+            (ℚRing.solve-∀ fourth (localCoefficient data cell)))))
   in
-  subst (λ lower → lower ≤ localRemainder dat cell)
+  subst (λ lower → lower ≤ localRemainder data cell)
     identify pointwiseSum
 
 globalQuarticLower :
-  ∀ {Cell} (dat : FiveChannelQuarticBetaData Cell) →
-  - (coefficientTotal dat * Beta.power4 (coupling dat))
-  ≤ betaInt dat
-globalQuarticLower dat =
+  ∀ {Cell} (data : FiveChannelQuarticBetaData Cell) →
+  - (coefficientTotal data * Beta.power4 (coupling data))
+  ≤ betaInt data
+globalQuarticLower data =
   let
-    fourth = Beta.power4 (coupling dat)
+    fourth = Beta.power4 (coupling data)
     pointwiseSum :
-      Sums.sumRational (cells dat)
-        (λ cell → - (localCoefficient dat cell * fourth))
-      ≤ betaInt dat
+      Sums.sumRational (cells data)
+        (λ cell → - (localCoefficient data cell * fourth))
+      ≤ betaInt data
     pointwiseSum = Beta.sumMonotone
-      (cells dat)
-      (λ cell → - (localCoefficient dat cell * fourth))
-      (localRemainder dat)
-      (localQuarticLower dat)
+      (cells data)
+      (λ cell → - (localCoefficient data cell * fourth))
+      (localRemainder data)
+      (localQuarticLower data)
 
     identify :
-      Sums.sumRational (cells dat)
-        (λ cell → - (localCoefficient dat cell * fourth))
-      ≡ - (coefficientTotal dat * fourth)
+      Sums.sumRational (cells data)
+        (λ cell → - (localCoefficient data cell * fourth))
+      ≡ - (coefficientTotal data * fourth)
     identify = trans
-      (Sums.sumRationalNegate (cells dat)
-        (λ cell → localCoefficient dat cell * fourth))
+      (Sums.sumRationalNegate (cells data)
+        (λ cell → localCoefficient data cell * fourth))
       (cong -_
         (trans
-          (Sums.sumRationalCong (cells dat)
-            (λ cell → localCoefficient dat cell * fourth)
-            (λ cell → fourth * localCoefficient dat cell)
-            (λ cell → ℚRing.solve-∀ (localCoefficient dat cell) fourth))
+          (Sums.sumRationalCong (cells data)
+            (λ cell → localCoefficient data cell * fourth)
+            (λ cell → fourth * localCoefficient data cell)
+            (λ cell → ℚRing.solve-∀ (localCoefficient data cell) fourth))
           (trans
-            (Sums.sumRationalScale fourth (cells dat) (localCoefficient dat))
-            (ℚRing.solve-∀ fourth (coefficientTotal dat)))))
+            (Sums.sumRationalScale fourth (cells data) (localCoefficient data))
+            (ℚRing.solve-∀ fourth (coefficientTotal data)))))
   in
-  subst (λ lower → lower ≤ betaInt dat)
+  subst (λ lower → lower ≤ betaInt data)
     identify pointwiseSum
 
 asFiniteInteractionAtomEnclosure :
-  ∀ {Cell} (dat : FiveChannelQuarticBetaData Cell) →
+  ∀ {Cell} (data : FiveChannelQuarticBetaData Cell) →
   Beta.FiniteInteractionAtomEnclosure Cell
-asFiniteInteractionAtomEnclosure dat = record
-  { Beta.FiniteInteractionAtomEnclosure.atoms = cells dat
-  ; Beta.FiniteInteractionAtomEnclosure.coupling = coupling dat
-  ; Beta.FiniteInteractionAtomEnclosure.betaInt = betaInt dat
-  ; Beta.FiniteInteractionAtomEnclosure.interactionAtom = localRemainder dat
-  ; Beta.FiniteInteractionAtomEnclosure.coefficient = localCoefficient dat
+asFiniteInteractionAtomEnclosure data = record
+  { Beta.FiniteInteractionAtomEnclosure.atoms = cells data
+  ; Beta.FiniteInteractionAtomEnclosure.coupling = coupling data
+  ; Beta.FiniteInteractionAtomEnclosure.betaInt = betaInt data
+  ; Beta.FiniteInteractionAtomEnclosure.interactionAtom = localRemainder data
+  ; Beta.FiniteInteractionAtomEnclosure.coefficient = localCoefficient data
   ; Beta.FiniteInteractionAtomEnclosure.betaIntExact = refl
-  ; Beta.FiniteInteractionAtomEnclosure.coefficientNonnegative = localCoefficientNN dat
-  ; Beta.FiniteInteractionAtomEnclosure.atomLower = localQuarticLower dat
+  ; Beta.FiniteInteractionAtomEnclosure.coefficientNonnegative = localCoefficientNN data
+  ; Beta.FiniteInteractionAtomEnclosure.atomLower = localQuarticLower data
   }
 
 yM4FiveChannelQuarticBetaAdapterLevel : ProofLevel

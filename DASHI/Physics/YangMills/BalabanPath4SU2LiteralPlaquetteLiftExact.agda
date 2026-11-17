@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanPath4SU2LiteralPlaquetteLiftExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational using (ℚ; _+_; -_)
+open import Data.Rational using (ℚ)
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
@@ -81,8 +81,8 @@ literalPlaquetteLinearCurl tangent plane site =
 
 forwardDifferenceLie3 :
   Axis4 → (PhysicalBlockL side4 → Lie3) → PhysicalBlockL side4 → Lie3
-forwardDifferenceLie3 axis fld site =
-  fld (shiftForward4 axis site) +v negV (fld site)
+forwardDifferenceLie3 axis field site =
+  field (shiftForward4 axis site) +v negV (field site)
 
 literalForwardDifferenceCurl :
   PhysicalSU2Tangent4 → PositivePlaquettePlane4 →
@@ -98,25 +98,17 @@ literalForwardDifferenceCurl tangent plane site =
       (physicalTangentAtSiteAxisAsLie3 tangent (positivePlaneFirst plane))
       site)
 
-curlComponentRearrangeRaw : ∀ a b c d →
-  (a + b) + (- c + - d) ≡ (b + - d) + - (c + - a)
-curlComponentRearrangeRaw = ℚRing.solve-∀
-
 literalPlaquetteLinearCurlEqualsForwardDifferenceCurl :
   ∀ tangent plane site →
   literalPlaquetteLinearCurl tangent plane site
   ≡ literalForwardDifferenceCurl tangent plane site
 literalPlaquetteLinearCurlEqualsForwardDifferenceCurl tangent plane site =
   lie3Ext
-    (curlComponentRearrangeRaw (x a) (x b) (x c) (x d))
-    (curlComponentRearrangeRaw (y a) (y b) (y c) (y d))
-    (curlComponentRearrangeRaw (z a) (z b) (z c) (z d))
+    (ℚRing.solve-∀)
+    (ℚRing.solve-∀)
+    (ℚRing.solve-∀)
   where
   links = literalPlaquetteFourLinks tangent plane site
-  a = firstLink links
-  b = secondLink links
-  c = thirdLink links
-  d = fourthLink links
 
 ------------------------------------------------------------------------
 -- Lift the exact one-plaquette Wilson theorem through sites and six planes.
@@ -162,13 +154,9 @@ literalWilsonHessianPositivePlaneFoldExact : ∀ tangent →
   literalWilsonHessianPositivePlaneFold tangent
   ≡ literalDiscreteCurlEnergy tangent
 literalWilsonHessianPositivePlaneFoldExact tangent =
-  sumRationalCong positivePlaquettePlanes4
-    (λ plane → siteSum4 (literalPlaquetteWilsonSecondVariation tangent plane))
-    (λ plane → siteSum4 (literalPlaquetteCurlNormSq tangent plane))
+  sumRationalCong positivePlaquettePlanes4 _ _
     (λ plane →
-      sumRationalCong (physicalBlockSites side4)
-        (literalPlaquetteWilsonSecondVariation tangent plane)
-        (literalPlaquetteCurlNormSq tangent plane)
+      sumRationalCong (physicalBlockSites side4) _ _
         (literalPlaquetteWilsonSecondVariationExact tangent plane))
 
 literalWilsonHessianEqualsCurlEnergy : ∀ tangent →

@@ -1,5 +1,6 @@
 module DASHI.Physics.Closure.QuantumClockDimensionlessObservableLaw where
 
+open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
@@ -413,8 +414,11 @@ canonicalDimensionlessLawFailClosedGuards =
     ; externalCalibrationStillRequiredIsTrue = refl
     }
 
-record QuantumClockDimensionlessObservableLaw : Set where
+record QuantumClockDimensionlessObservableLaw : Setω where
   field
+    atomicClockBridge :
+      Atomic.AtomicClockSISecondCalibrationBridge
+
     atomicClockBridgeImportedFromCanonicalSurface :
       Bool
 
@@ -504,7 +508,9 @@ canonicalQuantumClockDimensionlessObservableLaw :
   QuantumClockDimensionlessObservableLaw
 canonicalQuantumClockDimensionlessObservableLaw =
   record
-    { atomicClockBridgeImportedFromCanonicalSurface =
+    { atomicClockBridge =
+        Atomic.canonicalAtomicClockSISecondCalibrationBridge
+    ; atomicClockBridgeImportedFromCanonicalSurface =
         true
     ; atomicClockBridgeImportedFromCanonicalSurfaceIsTrue =
         refl

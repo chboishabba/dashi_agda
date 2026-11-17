@@ -43,9 +43,9 @@ restrictHeadPreservesCookNodeCount :
   ≡
   Size.formulaNodeCount
       (Bridge.indexedToCook formula)
-restrictHeadPreservesCookNodeCount bit (SAT.formulaVar FinBase.zero) =
+restrictHeadPreservesCookNodeCount bit (SAT.variable FinBase.zero) =
   refl
-restrictHeadPreservesCookNodeCount bit (SAT.formulaVar (FinBase.suc index)) =
+restrictHeadPreservesCookNodeCount bit (SAT.variable (FinBase.suc index)) =
   refl
 restrictHeadPreservesCookNodeCount bit (SAT.constant value) =
   refl

@@ -66,7 +66,7 @@ record GradedDimensionData (K : Set)
     (voa : GradedVertexOperatorAlgebra K) : Set₁ where
   field
     finiteDimension : Nat → Nat
-    dimensionCertified : ∀ (grade : Nat) → Set
+    dimensionCertified : ∀ grade → Set
 
 record VOACharacterData (K : Set)
     (voa : GradedVertexOperatorAlgebra K) : Set₁ where
@@ -74,14 +74,14 @@ record VOACharacterData (K : Set)
     centralCharge : K
     coefficient : Nat → K
     characterSeriesCarrier : Set
-    coefficientIsShiftedGradeDimension : ∀ (grade : Nat) → Set
+    coefficientIsShiftedGradeDimension : ∀ grade → Set
 
 record VOAWithGroupAction (G K : Set) : Setω where
   field
     group : GR.Group G
     voa : GradedVertexOperatorAlgebra K
     gradedRepresentation : GR.GradedRepresentation G K group
-    homogeneousCarrierAgreement : ∀ (grade : Nat) → Set
+    homogeneousCarrierAgreement : ∀ grade → Set
     groupActionPreservesVacuum : Set
     groupActionPreservesConformalVector : Set
     groupActionIntertwinesVertexModes : Set

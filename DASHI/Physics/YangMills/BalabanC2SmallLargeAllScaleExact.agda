@@ -15,7 +15,7 @@ import DASHI.Physics.YangMills.BalabanOneStepPolymerEstimate as Polymer
 
 record SmallFieldConfiguration (Field Bound : Set) : Set₁ where
   field
-    fld : Field
+    field : Field
     curvatureSize : Bound
     admissibleRadius : Bound
     LessEqual : Bound → Bound → Set
@@ -73,6 +73,13 @@ record CoercivityRGData (State : Set) : Set₁ where
       CoerciveAt (suc scale) (renormalize scale state)
 
 open CoercivityRGData public
+
+oneStepRGCoercivityTransfer :
+  ∀ {State} (dataSet : CoercivityRGData State) scale state →
+  CoerciveAt dataSet scale state →
+  CoerciveAt dataSet (suc scale) (renormalize dataSet scale state)
+oneStepRGCoercivityTransfer =
+  CoercivityRGData.oneStepRGCoercivityTransfer
 
 rgTrajectory :
   ∀ {State} → CoercivityRGData State → State → Nat → State

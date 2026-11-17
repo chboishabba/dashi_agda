@@ -53,8 +53,7 @@ module DASHI.Physics.YangMills.BalabanOPECoefficientRGRecurrenceUniquenessExact 
 -- No second all-depth coefficient comparison is needed afterward.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Agda.Builtin.Equality using (_≡_; refl; cong; sym; trans)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel

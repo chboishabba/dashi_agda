@@ -114,8 +114,10 @@ speciesCollisionWitness = ChemistryIndex.nutrientSpeciesNonFactorabilityWitness
 bulkSpeciesCounterexample :
   MDL.ConsumerCounterexample speciesProblem bulkOnly
 bulkSpeciesCounterexample = MDL.consumerCounterexample
-  ⊤
-  tt
+  (NonFactor.NonFactorabilityWitness
+    ChemistryIndex.bulkNutrientObserver
+    ChemistryIndex.nitrogenSpeciesConsumer)
+  speciesCollisionWitness
   (λ inadequate → inadequate)
   "bulk-only chemistry erases the species distinction exhibited by the retained equal-bulk-mass collision"
   "BiocontrolChemistry369IndexExact.nutrientSpeciesNonFactorabilityWitness"

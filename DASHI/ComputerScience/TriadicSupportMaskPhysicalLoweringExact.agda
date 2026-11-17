@@ -42,7 +42,7 @@ maskFromSupportBits (MaskSign.triple on on off) = MaskSign.mask110
 maskFromSupportBits (MaskSign.triple on on on) = MaskSign.mask111
 
 supportMask : MaskSign.Triple Trit → MaskSign.Mask3
-supportMask t = maskFromSupportBits (supportTriple t)
+supportMask = maskFromSupportBits ∘ supportTriple
 
 supportMask-agrees-with-existing-codec :
   (t : MaskSign.Triple Trit) →

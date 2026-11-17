@@ -7,7 +7,7 @@ import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-open import DASHI.Physics.YangMills.CompactLieGroupCore using (Group; multiply; inverse)
+open import DASHI.Physics.YangMills.CompactLieGroupCore
 open import DASHI.Physics.YangMills.CompactLieGroupDerived using
   (conjugate; rightInverseAction)
 open import DASHI.Physics.YangMills.SUNWilsonClassFunction
@@ -34,56 +34,25 @@ jetExt : ∀ {left right : SU2SecondJet} →
   left ≡ right
 jetExt {jet leftSecond leftFirst} {jet .leftSecond .leftFirst} refl refl = refl
 
+open import Data.List.Base using (_∷_; [])
+
+jetMultiplyAssociativeScalar : ∀ ar ax ay az br bx by bz cr cx cy cz →
+  ((ar + br + (- (ax * bx + (ay * by + az * bz)))) + cr + (- ((ax + bx) * cx + ((ay + by) * cy + (az + bz) * cz)))) ≡
+  (ar + (br + cr + (- (bx * cx + (by * cy + bz * cz)))) + (- (ax * (bx + cx) + (ay * (by + cy) + az * (bz + cz)))))
+jetMultiplyAssociativeScalar ar ax ay az br bx by bz cr cx cy cz =
+  ℚRing.solve (ar ∷ ax ∷ ay ∷ az ∷ br ∷ bx ∷ by ∷ bz ∷ cr ∷ cx ∷ cy ∷ cz ∷ [])
+
+jetMultiplyCommutativeScalar : ∀ ar ax ay az br bx by bz →
+  (ar + br + (- (ax * bx + (ay * by + az * bz)))) ≡
+  (br + ar + (- (bx * ax + (by * ay + bz * az))))
+jetMultiplyCommutativeScalar ar ax ay az br bx by bz =
+  ℚRing.solve (ar ∷ ax ∷ ay ∷ az ∷ br ∷ bx ∷ by ∷ bz ∷ [])
+
 assocQ : ∀ a b c → (a + b) + c ≡ a + (b + c)
 assocQ = ℚRing.solve-∀
 
 commQ : ∀ a b → a + b ≡ b + a
 commQ = ℚRing.solve-∀
-
-twoScaleAddRaw : ∀ lq rq → twoR * (lq + rq) ≡ twoR * lq + twoR * rq
-twoScaleAddRaw = ℚRing.solve-∀
-
-pairSum2 : ∀ a b c d → (a + b) + (c + d) ≡ (a + c) + (b + d)
-pairSum2 = ℚRing.solve-∀
-
-pairSum3 : ∀ x1 y1 z1 x2 y2 z2 →
-  (x1 + (y1 + z1)) + (x2 + (y2 + z2)) ≡ (x1 + x2) + ((y1 + y2) + (z1 + z2))
-pairSum3 x1 y1 z1 x2 y2 z2 =
-  trans
-    (pairSum2 x1 (y1 + z1) x2 (y2 + z2))
-    (cong (λ r → (x1 + x2) + r) (pairSum2 y1 z1 y2 z2))
-
-dotAssoc1D : ∀ a b c → a * b + (a + b) * c ≡ b * c + a * (b + c)
-dotAssoc1D = ℚRing.solve-∀
-
-dotAssocV : ∀ (a b c : Lie3) →
-  (a ·v b) + ((a +v b) ·v c) ≡ (b ·v c) + (a ·v (b +v c))
-dotAssocV (lie3 ax ay az) (lie3 bx by bz) (lie3 cx cy cz) =
-  trans
-    (pairSum3 (ax * bx) (ay * by) (az * bz) ((ax + bx) * cx) ((ay + by) * cy) ((az + bz) * cz))
-    (trans
-      (cong₂ _+_
-        (dotAssoc1D ax bx cx)
-        (cong₂ _+_ (dotAssoc1D ay by cy) (dotAssoc1D az bz cz)))
-      (sym (pairSum3 (bx * cx) (by * cy) (bz * cz) (ax * (bx + cx)) (ay * (by + cy)) (az * (bz + cz)))))
-
-realAssocStepL : ∀ ar br cr u v →
-  ((ar + br + (- u)) + cr + (- v)) ≡ (ar + br + cr) + (- (u + v))
-realAssocStepL = ℚRing.solve-∀
-
-realAssocStepR : ∀ ar br cr w t →
-  (ar + br + cr) + (- (w + t)) ≡ (ar + (br + cr + (- w)) + (- t))
-realAssocStepR = ℚRing.solve-∀
-
-dotComm1D : ∀ a b → a * b ≡ b * a
-dotComm1D = ℚRing.solve-∀
-
-dotCommV : ∀ (a b : Lie3) → (a ·v b) ≡ (b ·v a)
-dotCommV (lie3 ax ay az) (lie3 bx by bz) =
-  cong₂ _+_ (dotComm1D ax bx) (cong₂ _+_ (dotComm1D ay by) (dotComm1D az bz))
-
-realCommStep : ∀ ar br d → ar + br + (- d) ≡ br + ar + (- d)
-realCommStep = ℚRing.solve-∀
 
 jetMultiplyAssociative : ∀ first second third →
   (first *j second) *j third ≡ first *j (second *j third)
@@ -91,17 +60,8 @@ jetMultiplyAssociative
   (jet ar (lie3 ax ay az))
   (jet br (lie3 bx by bz))
   (jet cr (lie3 cx cy cz)) =
-  let
-    a = lie3 ax ay az
-    b = lie3 bx by bz
-    c = lie3 cx cy cz
-  in
   jetExt
-    (trans
-      (realAssocStepL ar br cr (a ·v b) ((a +v b) ·v c))
-      (trans
-        (cong (λ d → (ar + br + cr) + (- d)) (dotAssocV a b c))
-        (realAssocStepR ar br cr (b ·v c) (a ·v (b +v c)))))
+    (jetMultiplyAssociativeScalar ar ax ay az br bx by bz cr cx cy cz)
     (lie3Ext
       (assocQ ax bx cx)
       (assocQ ay by cy)
@@ -111,14 +71,8 @@ jetMultiplyCommutative : ∀ first second → first *j second ≡ second *j firs
 jetMultiplyCommutative
   (jet ar (lie3 ax ay az))
   (jet br (lie3 bx by bz)) =
-  let
-    a = lie3 ax ay az
-    b = lie3 bx by bz
-  in
   jetExt
-    (trans
-      (realCommStep ar br (a ·v b))
-      (cong (λ d → br + ar + (- d)) (dotCommV a b)))
+    (jetMultiplyCommutativeScalar ar ax ay az br bx by bz)
     (lie3Ext
       (commQ ax bx)
       (commQ ay by)
@@ -141,58 +95,42 @@ invR = ℚRing.solve-∀
 
 jetIdentityLeftRealScalar : ∀ r vx vy vz →
   0ℚ + r + (- (0ℚ * vx + (0ℚ * vy + 0ℚ * vz))) ≡ r
-jetIdentityLeftRealScalar = ℚRing.solve-∀
+jetIdentityLeftRealScalar r vx vy vz =
+  ℚRing.solve (r ∷ vx ∷ vy ∷ vz ∷ [])
 
 jetIdentityRightRealScalar : ∀ r vx vy vz →
   r + 0ℚ + (- (vx * 0ℚ + (vy * 0ℚ + vz * 0ℚ))) ≡ r
-jetIdentityRightRealScalar = ℚRing.solve-∀
+jetIdentityRightRealScalar r vx vy vz =
+  ℚRing.solve (r ∷ vx ∷ vy ∷ vz ∷ [])
 
-normSqAdd1D : ∀ a b → (a + b) * (a + b) ≡ (a * a + b * b) + twoR * (a * b)
-normSqAdd1D = ℚRing.solve-∀
-
-normSqAddV : ∀ (a b : Lie3) →
-  normSqV (a +v b) ≡ (normSqV a + normSqV b) + twoR * (a ·v b)
-normSqAddV (lie3 ax ay az) (lie3 bx by bz) =
-  trans
-    (cong₂ _+_ (normSqAdd1D ax bx)
-      (trans
-        (cong₂ _+_ (normSqAdd1D ay by) (normSqAdd1D az bz))
-        (trans
-          (pairSum2 (ay * ay + by * by) (twoR * (ay * by)) (az * az + bz * bz) (twoR * (az * bz)))
-          (cong₂ _+_
-            (pairSum2 (ay * ay) (by * by) (az * az) (bz * bz))
-            (sym (twoScaleAddRaw (ay * by) (az * bz)))))))
-    (trans
-      (pairSum2 (ax * ax + bx * bx) (twoR * (ax * bx))
-        ((ay * ay + az * az) + (by * by + bz * bz))
-        (twoR * (ay * by + az * bz)))
-      (cong₂ _+_
-        (pairSum2 (ax * ax) (bx * bx) (ay * ay + az * az) (by * by + bz * bz))
-        (sym (twoScaleAddRaw (ax * bx) (ay * by + az * bz)))))
-
-unitDefectFromNormSqAdd : ∀ ar br na nb d →
-  twoR * (ar + br + (- d)) + ((na + nb) + twoR * d)
-  ≡ (twoR * ar + na) + (twoR * br + nb)
-unitDefectFromNormSqAdd = ℚRing.solve-∀
+unitDefectMultiplyScalar : ∀ ar ax ay az br bx by bz →
+  ((1ℚ + 1ℚ) * (ar + br + (- (ax * bx + (ay * by + az * bz)))) + ((ax + bx) * (ax + bx) + ((ay + by) * (ay + by) + (az + bz) * (az + bz)))) ≡
+  (((1ℚ + 1ℚ) * ar + (ax * ax + (ay * ay + az * az))) + ((1ℚ + 1ℚ) * br + (bx * bx + (by * by + bz * bz))))
+unitDefectMultiplyScalar ar ax ay az br bx by bz =
+  ℚRing.solve (ar ∷ ax ∷ ay ∷ az ∷ br ∷ bx ∷ by ∷ bz ∷ [])
 
 unitDefectInverseScalar : ∀ r vx vy vz →
   ((1ℚ + 1ℚ) * r + ((- vx) * (- vx) + ((- vy) * (- vy) + (- vz) * (- vz)))) ≡
   ((1ℚ + 1ℚ) * r + (vx * vx + (vy * vy + vz * vz)))
-unitDefectInverseScalar = ℚRing.solve-∀
+unitDefectInverseScalar r vx vy vz =
+  ℚRing.solve (r ∷ vx ∷ vy ∷ vz ∷ [])
 
 expDefectZeroScalar : ∀ vx vy vz →
   ((1ℚ + 1ℚ) * (- (half * (vx * vx + (vy * vy + vz * vz)))) + (vx * vx + (vy * vy + vz * vz))) ≡ 0ℚ
-expDefectZeroScalar = ℚRing.solve-∀
+expDefectZeroScalar vx vy vz =
+  ℚRing.solve (vx ∷ vy ∷ vz ∷ [])
 
 inverseLeftRealScalar : ∀ r vx vy vz →
   (r + r + (- ((- vx) * vx + ((- vy) * vy + (- vz) * vz)))) ≡
   ((1ℚ + 1ℚ) * r + (vx * vx + (vy * vy + vz * vz)))
-inverseLeftRealScalar = ℚRing.solve-∀
+inverseLeftRealScalar r vx vy vz =
+  ℚRing.solve (r ∷ vx ∷ vy ∷ vz ∷ [])
 
 inverseRightRealScalar : ∀ r vx vy vz →
   (r + r + (- (vx * (- vx) + (vy * (- vy) + vz * (- vz))))) ≡
   ((1ℚ + 1ℚ) * r + (vx * vx + (vy * vy + vz * vz)))
-inverseRightRealScalar = ℚRing.solve-∀
+inverseRightRealScalar r vx vy vz =
+  ℚRing.solve (r ∷ vx ∷ vy ∷ vz ∷ [])
 
 jetIdentityLeft : ∀ path → identityJet *j path ≡ path
 jetIdentityLeft (jet r (lie3 vx vy vz)) =
@@ -217,11 +155,9 @@ unitDefectIdentity = refl
 unitDefectMultiply : ∀ first second →
   unitDefect (first *j second) ≡ unitDefect first + unitDefect second
 unitDefectMultiply
-  (jet ar a)
-  (jet br b) =
-  trans
-    (cong (λ n → twoR * (ar + br + (- (a ·v b))) + n) (normSqAddV a b))
-    (unitDefectFromNormSqAdd ar br (normSqV a) (normSqV b) (a ·v b))
+  (jet ar (lie3 ax ay az))
+  (jet br (lie3 bx by bz)) =
+  unitDefectMultiplyScalar ar ax ay az br bx by bz
 
 unitDefectInverse : ∀ path → unitDefect (inverseJet path) ≡ unitDefect path
 unitDefectInverse (jet r (lie3 vx vy vz)) =
@@ -252,7 +188,7 @@ jetMatrixOperations = record
   { identityM = identityJet
   ; multiplyM = _*j_
   ; daggerM = inverseJet
-  ; determinant = unitDefect
+  ; determinantM = unitDefect
   ; oneC = 0ℚ
   }
 
@@ -265,7 +201,7 @@ jetSpecialFromDefect path defectZero = record
   }
 
 twoN : Nat
-twoN = suc (suc zero)
+twoN = suc (suc Nat.zero)
 
 jetSUNTheory : CertifiedSUNMatrixTheory twoN SU2SecondJet ℚ
 jetSUNTheory = record
@@ -278,9 +214,11 @@ jetSUNTheory = record
   ; multiplySpecial = λ {A} {B} specialA specialB →
       let defectAB = trans
             (unitDefectMultiply A B)
-            (cong₂ _+_
-              (IsUnitDeterminant.determinantOne (IsSpecialUnitary.specialDeterminant specialA))
-              (IsUnitDeterminant.determinantOne (IsSpecialUnitary.specialDeterminant specialB)))
+            (trans
+              (cong₂ _+_
+                (IsUnitDeterminant.determinantOne (IsSpecialUnitary.specialDeterminant specialA))
+                (IsUnitDeterminant.determinantOne (IsSpecialUnitary.specialDeterminant specialB)))
+              (ℚRing.solve-∀))
       in jetSpecialFromDefect (A *j B) defectAB
   ; daggerSpecial = λ {A} specialA →
       jetSpecialFromDefect (inverseJet A)
@@ -299,18 +237,8 @@ sunExponentialJet value =
     (jetSpecialFromDefect (exponentialJet value)
       (exponentialJetDefectZero value))
 
-inverseExponentialJetDefectZero : ∀ value →
-  unitDefect (inverseExponentialJet value) ≡ 0ℚ
-inverseExponentialJetDefectZero (lie3 vx vy vz) =
-  trans
-    (unitDefectInverseScalar (- (half * (vx * vx + (vy * vy + vz * vz)))) vx vy vz)
-    (expDefectZeroScalar vx vy vz)
-
 sunInverseExponentialJet : Lie3 → JetSUN
-sunInverseExponentialJet value =
-  sunMatrix (inverseExponentialJet value)
-    (jetSpecialFromDefect (inverseExponentialJet value)
-      (inverseExponentialJetDefectZero value))
+sunInverseExponentialJet value = sunExponentialJet (negV value)
 
 sunJetMultiplyCommutative : ∀ first second →
   multiply jetSUNGroup first second ≡ multiply jetSUNGroup second first
@@ -359,10 +287,10 @@ normalizedRealTraceSecondJet element =
   scalarJet 1ℚ (realSecond (matrix element))
 
 jetSUNTraceAuthority :
-  SUNWilsonTraceAuthority {Scalar = ScalarSecondJet} jetSUNTheory
+  SUNWilsonTraceAuthority jetSUNTheory scalarSecondJetOperations
 jetSUNTraceAuthority = record
   { normalizedRealTrace = normalizedRealTraceSecondJet
-  ; traceConjugationInvariant = λ frame value →
+  ; normalizedRealTraceConjugationInvariant = λ frame value →
       cong normalizedRealTraceSecondJet
         (sunJetConjugateTrivial frame value)
   }
@@ -371,13 +299,13 @@ scalarSecondDerivative : ScalarSecondJet → ℚ
 scalarSecondDerivative path = twoR * scalarSecond path
 
 scalarSecondDerivativeZero : scalarSecondDerivative zeroScalarJet ≡ 0ℚ
-scalarSecondDerivativeZero = refl
+scalarSecondDerivativeZero = ℚRing.solve-∀
 
 scalarSecondDerivativeAdd : ∀ left right →
   scalarSecondDerivative (addScalarJet left right)
   ≡ scalarSecondDerivative left + scalarSecondDerivative right
 scalarSecondDerivativeAdd (scalarJet lc lq) (scalarJet rc rq) =
-  twoScaleAddRaw lq rq
+  ℚRing.solve-∀
 
 su2SecondJetSUNTheoryLevel : ProofLevel
 su2SecondJetSUNTheoryLevel = machineChecked
