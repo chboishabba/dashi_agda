@@ -216,3 +216,82 @@ calibration was produced in this no-run phase.
 
 No Agda kernel, GPU or trained semantic
 result is claimed here.
+
+
+## 6. Conditional original arithmetic rounding frontier
+
+New executable exact-rational interval owner:
+`scripts/check_x369_r4_conditional_roundoff_sympy.py`.
+
+Unlike reusing source audit tolerances as if they
+were certified `float32` error margins, this
+script supplies an **explicit conditional
+floating-operation contract**:
+
+    fl(a op b) = exact(a op b)*(1+δ),
+    |δ| <= 2^-24,
+
+for each independently specified addition
+and multiplication, with finite normal
+results, no under/overflow and no
+unverified extra rounding mode. The script
+propagates outward rational interval
+enclosures through TWO explicitly
+disclosed source-equivalent expression
+plans: original per-expert directed
+correlations followed by learned head,
+and shared-head fused K(x) then
+expert-history dot. Baseline C2
+`v·abs(h)` and expert biases are
+retained in both plans. It is NOT
+a proof that the actual Torch/ROCm
+source kernel takes either operation
+order; FMA, TF32, reduction trees,
+reassociation and GPU architecture
+still require a source execution
+semantics receipt.
+
+The original two-triad, E=4 exact
+rational source fixtures have the
+same certified ordered TopK in both
+plans. In this conservative interval
+evaluation, however, fusion is
+**not uniformly superior in precision**:
+
+| Source R4 arm | Original-plan selected-pair roundoff upper bound | Fused-plan upper bound |
+| --- | ---: | ---: |
+| Coherent C3 | 5.84126e-6 | 5.96047e-6 |
+| Mixed q C3 | 7.39098e-6 | 7.51019e-6 |
+
+The two arms' source logits are,
+respectively, (3,4,13,11) and
+(5,2,9,17), with original
+selected pairs (2,3) and (3,2).
+All numbers above are bounds under
+the stated **ideal binary32
+arithmetic-plan assumptions**, not
+hardware results.
+
+Direct local rational interval audit:
+**15 grouped checks passed**.
+The proof demonstrates a meaningful
+resource/precision Pareto distinction:
+fused scoring reduces scalar
+multiplication/addition sites in
+the disclosed E>1 arithmetic plan,
+but reassociation may widen a
+conservative floating-error envelope.
+Physical source runtime, actual
+float kernels and optimizer
+gradient parity remain OPEN.
+
+For the next original source
+checkpoint receipt, keep
+`differential_floating_eval`
+as an independent pairwise
+error term unless the original
+kernel's precision and operation
+graph are actually certified.
+Do not inject ideal-plan bounds
+as if they were measured source
+error receipts.
