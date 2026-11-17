@@ -19,6 +19,7 @@ ROOTS = (
     "DASHI.Physics.YangMills.YMClayBishopSU2QuaternionTraceWeldExact",
     "DASHI.Physics.YangMills.YMClayBishopFiniteWeightedIntegralLawsExact",
     "DASHI.Physics.YangMills.YMClayBishopSU2DeterminantExact",
+    "DASHI.Physics.YangMills.YMClayBishopSU2UnitarityExact",
     "DASHI.Physics.YangMills.YMClayNativeFiniteGaugeVectorNaturalitySafeExact",
     "DASHI.Physics.YangMills.YMClaySUNConstructedPeriodicGaugeCodecExact",
     "DASHI.Physics.YangMills.YMClaySUNVariablePhysicalCutoffFamilyExact",
