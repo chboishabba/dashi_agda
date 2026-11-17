@@ -95,8 +95,8 @@ clip05 = clip-lineage
   "Dan Burisch; Project Camelot"
   "Stargate Secrets"
   "2007"
-  "https://projectcamelot.org/dan_burisch.html"
-  "Looking Glass / timeline fragments; time offsets require video comparison"
+  "https://projectavalon.net/lang/en/dan_burisch_stargate_secrets_interview_transcript_1_en.html"
+  "Part 1 lines 284-289: Cube circulated among national elites; timeline segment exact offset open"
   clipFamilyIdentified
   "Two-timeline/yellow cube interviews; 2007 interview source only"
 
@@ -150,8 +150,8 @@ clip10 = clip-lineage
   "Dan Burisch; Project Camelot"
   "Stargate Secrets"
   "2007"
-  "https://projectcamelot.org/dan_burisch.html"
-  "Yellow cube/YB looking-glass section ~10min original video; verify exact"
+  "https://projectavalon.net/lang/en/dan_burisch_stargate_secrets_interview_transcript_1_en.html"
+  "Part 1 lines 164-186: Yellow Cube/Book and user's emotions"
   clipFamilyIdentified
   "Claim of cube operator emotion effect; no independent device evidence"
 
@@ -161,8 +161,8 @@ clip11 = clip-lineage
   "Dan Burisch; Project Camelot"
   "Stargate Secrets"
   "2007"
-  "https://projectcamelot.org/dan_burisch.html"
-  "Rings/barrel/kaleidoscopes ~40–43min original video; verify exact"
+  "https://projectavalon.net/lang/en/dan_burisch_stargate_secrets_interview_transcript_1_en.html"
+  "Part 1 lines 537-579: rings, frequency and kaleidoscopes"
   clipFamilyIdentified
   "Technical-sounding apparatus descriptions remain unverified oral reports"
 
@@ -172,8 +172,8 @@ clip12 = clip-lineage
   "Dan Burisch; Project Camelot"
   "Stargate Secrets"
   "2007"
-  "https://projectcamelot.org/dan_burisch.html"
-  "back-engineered Stargate/cylinder-seal section; exact offset open"
+  "https://projectavalon.net/lang/en/dan_burisch_stargate_secrets_interview_transcript_1_en.html"
+  "Part 1 lines 91-109: Stargate and cylinder-seal genealogy"
   clipFamilyIdentified
   "Cylinder seal ancestry is speaker testimony, not archaeology/engineering proof"
 
@@ -183,8 +183,8 @@ clip13 = clip-lineage
   "Dan Burisch; Project Camelot"
   "Stargate Secrets"
   "2007"
-  "https://projectcamelot.org/dan_burisch.html"
-  "Frenchman Mountain electromagnetic nodes, original offset open"
+  "https://projectavalon.net/lang/en/dan_burisch_stargate_secrets_interview_transcript_2_en.html"
+  "Part 2 lines 431-465: Frenchman Mountain and natural portals; exact segment offset open"
   clipFamilyIdentified
   "Geophysical anomaly does not establish a portal"
 
@@ -194,8 +194,8 @@ clip14 = clip-lineage
   "Dan Burisch; Project Camelot"
   "Stargate Secrets"
   "2007"
-  "https://projectcamelot.org/dan_burisch.html"
-  "more than 50 access devices ~4min original video; exact offset open"
+  "https://projectavalon.net/lang/en/dan_burisch_stargate_secrets_interview_transcript_1_en.html"
+  "Part 1 lines 50-76: over fifty devices, ERB"
   clipFamilyIdentified
   "Number over fifty is speaker report without inventory"
 
@@ -205,8 +205,8 @@ clip15 = clip-lineage
   "Dan Burisch; Project Camelot"
   "Stargate Secrets"
   "2007"
-  "https://projectcamelot.org/dan_burisch.html"
-  "retirement/reactivation ~48–50min original video; exact offset open"
+  "https://projectavalon.net/lang/en/dan_burisch_stargate_secrets_interview_transcript_1_en.html"
+  "Part 1 lines 630-663: non-use and predicted 2016/2017 restoration"
   clipFamilyIdentified
   "2016/2017 reactivation prediction is stated without evidence of occurrence"
 
@@ -216,8 +216,8 @@ clip16 = clip-lineage
   "Dan Burisch; Project Camelot"
   "Stargate Secrets"
   "2007"
-  "https://projectcamelot.org/dan_burisch.html"
-  "decommissioned components; EU/UN/NATO ~49–50min"
+  "https://projectavalon.net/lang/en/dan_burisch_stargate_secrets_interview_transcript_1_en.html"
+  "Part 1 lines 664-671: three components allegedly separated EU/UN/NATO"
   clipFamilyIdentified
   "Claimed distribution of three components has no custody or procurement receipt"
 
