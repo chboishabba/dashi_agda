@@ -246,13 +246,25 @@ by this inference/forward certificate.
 
 For a source-admitted selected set, q gate, FFN matrices,
 transition and precision budgets, the older
-`LeechLayerErrorTransportExact.traceErrorBound` can use a
-pointwise source discrepancy term that INCLUDES the
-bounded chart-even jump. It need not reject every
-orientation sign flip outright. However F07 is still a
-generic conditional majorant; the actual PyTorch
-network requires these per-layer numerical premises,
-and the sign metadata is not automatically identical.
+`LeechLayerErrorTransportExact.traceErrorBound` is the
+right **compositional target**. Its `ErrorLayer.lipBound`
+is UNIVERSAL on its chosen `State` carrier, however.
+A locally bounded chart flip does NOT on its own satisfy
+that premise. To reuse F07 soundly, either restrict
+the state carrier to a proved chart/route-admissible
+domain with a genuine Lipschitz witness, or introduce
+a distinct guarded one-step error interface with
+an explicit chart-jump residual `eta_chart`.
+The latter can be summed as an additive per-step
+majorant only after proving its replacement
+one-step transport law; it cannot be silently
+inserted as a global Lipschitz constant.
+
+The approximate numeric output/history consumer may
+tolerate chart changes even though the actual source
+`signs` metadata differ. Per-step q/topk contracts,
+full inactive histories and source FP receipts remain
+independent.
 
 ## 7. Strong next Pareto/max-cut
 
