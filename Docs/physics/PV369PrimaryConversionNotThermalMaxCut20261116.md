@@ -52,3 +52,25 @@ P7: independent >50% demonstration with material, standard source, aperture, aux
 T: pre-existing thermal conditional stage dispatch and useful heat service, **secondary**.
 
 **Acceptance:** Local 31/31 finite numerical optical tests PASS. All new Agda source, root imports and physical gates are unverified by Agda compiler in this environment. Nothing here proves solar >50% and no empirical optical absorption improvement has been established.
+
+
+## Progress update — 17 November 2026: P1 Bir-Pikus [111] maximum cut
+
+**Do not erase P0/P2–P7:** the programme remains PV-first with separate carrier multiplication, optical routing, active Stark/Floquet, BH4 photosystem engineering and only secondary heat recovery.
+
+| P1 dependency | Latest completion status | Exact owner / fail-closed residue |
+|---|---|---|
+| P1a. Original p-shell ternary/charge-vs-spatial C3 | **Existing source owner already present**; representation-level | AtomicPeriodicTable369MagneticC3PhysicalRealizationExact; Atomic369GaAs111TrigonalCharacterExact |
+| P1b. Cartesian [111] orbital Bir-Pikus axial matrix, E/A1 split, [001] negative control | **94 local finite/numerical checks** plus new Agda source-written entry-covariance proof | GaAs111BirPikusC3vFiniteExact; scripts/check_gaas_111_kane_birpikus_maxcut.py |
+| P1c. Six spinful valence states with L·S, Kramers, C3v spin rotation, valence dipole polarization | **Model constructed and locally tested**; ∑ oscillator weights exactly conserved, strain redistributes line energies | same Python owner; full Bahder/atomistic source fitting OPEN |
+| P1d. Actual 8-band strained GaAs device with measured spectral response | **OPEN** — present model omits valence LK dispersion, strain×k, strain relaxation, confinement and absorption strength vs energy | Bahder 1990 DOI 10.1103/PhysRevB.41.11992; Vurgaftman 2001 DOI 10.1063/1.1368156 |
+| P1e. Real 369-derived advantage over unrelated C3v engineering | **OPEN** — same-character decomposition alone is generic group theory | unchanged original ternary→Bloch same-material gate |
+| P2. Actual terminal PV gain | **OPEN** — transition weights cannot be identified with EQE or power without measurement | matched AM1.5G reflectance, thickness, transport, recombination, JV MPP |
+| P3–P6. Driven quantum, multiplication, photonic and bioengineering branches | **OPEN / retained** — do NOT let strain/HV modelling absorb their scope | original owners/source and BH4-specific rate provenance |
+| T. Thermal stage dispatch and heat co-products | **Previously documented; secondary** | existing conditional stage/ORC files |
+
+**Numerical correction:** for the prescribed +0.5% [111] axial strain (transverse strain=0), the model gives 1.378, 1.405 and 1.734 eV interband edge transitions with transverse Kane strengths (Ep-normalized) 1.000, 0.391, 0.609 per two-spin multiplet. These do **not** establish added usable solar energy; full spectral strength is conserved. The fourfold zero-strain Γ8 degeneracy must be counted with a combined projector; pairing arbitrary eigenvectors gives spurious polarization anisotropy.
+
+**Research max-cut next:** (1) same material measured strain/polarization/linewidth data, (2) source-consistent spinful finite-k Kane–Bir–Pikus including missing Bahder terms and geometry, (3) spectral absorptance and actual two-terminal power vs same irradiance and [001]/unstrained controls, (4) compare actual 369 prediction to a conventional no-369 model. Avoid advancing synthetic spectral outputs to device claims. Formal Agda Golden checker still unavailable; import graph alone is not acceptance.
+
+See Docs/physics/PVGaAs111SALCKaneMassCorrection20261117.md for equations, source conventions and the 94-check result.
