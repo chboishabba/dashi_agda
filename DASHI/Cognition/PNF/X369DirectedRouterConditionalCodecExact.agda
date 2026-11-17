@@ -258,3 +258,56 @@ zeroDCWeightedScoreNeedsOnlyTwo a b c A B C ws wf wr zeroDC =
 -- A finite quantizer changes arithmetic identities unless exact
 -- rounding laws and decision margins are provided. This module
 -- proves ℤ source semantics only and makes no float equality claim.
+
+
+------------------------------------------------------------------------
+-- P0 adversarial scope: the original feature map itself reaches
+-- every integer triple (choose x=(1,0,0), history=(A,B,C)).
+-- Thus the missing third directed coordinate is not a hidden
+-- universal algebraic identity on unrestricted original states.
+-- This is NOT a no-injection theorem for arbitrary ℤ³ -> ℤ²
+-- encoders, since such non-linear set-theoretic encodings exist.
+------------------------------------------------------------------------
+
+originalFeatureRealizesEveryDirectedTriple :
+  (s f r : ℤ) →
+  originalDirected (+ 1) (+ 0) (+ 0) s f r
+  ≡ directed s f r
+originalFeatureRealizesEveryDirectedTriple s f r = refl
+
+------------------------------------------------------------------------
+-- P0 quantisation / approximation algebra:
+-- if a quantizer perturbs each retained coordinate by es, ef and
+-- the supplied DC total by eD, then the learned two-channel
+-- score error is EXACTLY
+--   (ws-wr)*es + (wf-wr)*ef + wr*eD.
+--
+-- This is an error-IDENTITY, not a bound on rounding error or a
+-- TopK decision guarantee. The latter requires independently
+-- verified quantizer tolerances and strict source router margins.
+------------------------------------------------------------------------
+
+rawTwoChannelQuantizationError :
+  (ws wf wr total s f eD es ef : ℤ) →
+  (twoDirectedWeightedScoreWithTotal
+      ws wf wr (total + eD) ((s + es) , (f + ef))
+    - twoDirectedWeightedScoreWithTotal
+      ws wf wr total (s , f))
+  ≡ (((ws - wr) * es) + ((wf - wr) * ef)) + (wr * eD)
+rawTwoChannelQuantizationError ws wf wr total s f eD es ef =
+  solve 9
+    (λ ws wf wr total s f eD es ef →
+      ((((((ws :- wr) :* (s :+ es))
+          :+ ((wf :- wr) :* (f :+ ef)))
+          :+ (wr :* (total :+ eD)))
+        :- ((((ws :- wr) :* s)
+          :+ ((wf :- wr) :* f))
+          :+ (wr :* total)))
+       := (((((ws :- wr) :* es)
+          :+ ((wf :- wr) :* ef))
+          :+ (wr :* eD))))
+    refl ws wf wr total s f eD es ef
+
+-- Equal exact scores do not establish the same routed experts if
+-- quantized scores perturb near a top-k tie, nor do equal expert
+-- sets imply identical softmax mixture weights or future histories.
