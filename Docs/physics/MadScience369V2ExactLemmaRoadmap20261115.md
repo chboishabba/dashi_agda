@@ -432,3 +432,23 @@ The internal shaft S **cancels** and must not be counted as an independent input
 **Model-level result:** 25 new tests PASS; **267/267 selected A–H/Ω Python tests PASS** locally. The blank 32-row original-machine measurement template has no fabricated values. These tested executable files and extended receipts remain local in a downloadable bundle and are NOT yet committed to this PR. The new GitHub proof note is an admission/acceptance roadmap, not original-V2 measurement evidence.
 
 **Open strong gates:** `v2HOriginalSourceSelectedAllPortExperimentalReceipt`, `v2HCalibratedInstrumentErrorAndCarryoverCertificate`, `v2EFSeparatedMotorAndGeneratorStorageWeld`, `v2CDRealRecoveryTopologySwitchingLossReceipt`, `v2GIdentifiedRobustPhysicalPareto`, pinned Agda kernel, plus all **16 original strict P0–P4 gates**. No original V2 data or connected-head CI were tested.
+
+
+## 2026-11-17 — Ω two-sided storage / stationary identification correction (H × E × F)
+
+**Critical correction to the previous factorial measurement design:** the split motor equation previously assumed the entire stored-energy rate was on the generator side. That split was too strong for a motor whose own capacitor, magnetic, thermal or rotor state can change. The complete measured boundary instead requires **two independently inventoried storage ledgers**:
+
+\[
+P_{\mathrm{motor}}=P_{\mathrm{shaft}}+P_{\mathrm{motor\,loss}}+\dot E_{\mathrm{motor}},
+\qquad
+P_{\mathrm{shaft}}+P_{\mathrm{aux}}=
+P_{\mathrm{load}}+P_{\mathrm{other}}+P_{\mathrm{generator\,loss}}+\dot E_{\mathrm{generator}}.
+\]
+
+Adding cancels shaft work once and gives the full-system identity with **both** energy-store rates. The previous no-motor-storage split is valid only after independently establishing \(\dot E_{\mathrm{motor}}=0\) within uncertainty.
+
+**New executable model-level cut:** scripts/v2_omega_split_storage_protocol.py, tests/test_v2_omega_split_storage_protocol.py, scripts/check_v2_omega_split_storage_protocol.sh, with proof MadScience369V2OmegaSplitMotorGeneratorStorageMaxCut20261117.md and a *blank* 32-run CSV experiment sheet. A deliberately constructed 1 J motor-store depletion satisfies whole-system conservation but fails the proposed stationary acceptance check; a separately metered nonstationary option retains rather than deletes the storage contribution. Negative controls cover missing motor/generator inventories, missing independently measured losses, bad clock ordering, independent motor/generator residuals and error intervals. No source-selected physical V2 data were added.
+
+**Local acceptance:** **86/86** combined load-intervention/protocol/split-storage tests PASS; expanded reconstructed A–H/Ω suite **287/287 PASS** over ten available test modules. The legacy PWM donor module was not part of the expanded suite. Pinning an Agda kernel, a full connected-head CI acceptance run, real V2 metrology and calibrated instrument/carryover control remain **OPEN**. This is a necessary measurement contract, not proof that an uninstrumented original apparatus has no additional power or energy stores. The executable source and complete receipts are in the conversation artifact bundle; **do not claim their GitHub commit unless individually verified there**.
+
+**Named new restricted subgates:** v2OmegaMotorGeneratorTwoStorageExactPortCancellation, v2OmegaMotorStoreDepletionRejectsFalseStationarity, v2OmegaFactorialTwoStorageErrorEnvelope, v2OmegaPhysicalMeasurementTemplateUnfilled — closed at arithmetic / synthetic protocol scope; original-machine and real switch/converter/thermal/generator gates unchanged. The **16 original strict P0–P4 gates remain OPEN**. Cable geometry remains a conditional cross-cutting refinement, not the efficiency-first steelman's main line.
