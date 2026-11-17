@@ -95,6 +95,94 @@ import DASHI.Wikimedia.IbrahimMonsterTernary27PhasePreservingFiveOrbitReductionE
 -- Do not replace this import with DASHI.Unifier placeholder axioms.
 import DASHI.Unified.GRQuantumProofTermRegression
 
+import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
+
+-- Reuse the strict Balaban RG normalization and its fail-closed continuum boundary.
+import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
+import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as YMMaxCut
+
+-- Current-master R485/R546/R558 Goal-1/Pareto normalization.
+-- The imported source owners remain theorem authority.
+open YMMaxCut public
+
+open BalabanRGTOE public using
+  ( sourceCouplingIsBetaHistoryCoupling
+  ; sourceSmallnessIsDerivedFromBetaHistory
+  ; betaHistoryGivesRepositoryCouplingCap
+  ; canonicalStateRunningCouplingIsBetaHistory
+  ; betaHistoryAndSourceTheoremGiveLiteralInvariantRegion
+  ; selectedDensityRepresentsExactBC1Potential
+  ; selectedDensityRepresentsBC2InitialPotential
+  ; stressSelectedDensityIndexIsUnifiedActionIndex
+  ; sourceDerivativeBelowExistingMarkedShell
+  ; stressCoefficientEnergyUniformBound
+  ; stressPairingSquaredCauchyFromShellEnergy
+  ; selectedRegularEIsLocalizedCompositeSum
+  ; universalCompactSimpleCasimirFloor
+  ; universalCompactSimpleBetaFloor
+  ; classificationAdjointCasimirAtLeastTwo
+  ; classificationGroupUniversalCoefficientAtLeastElevenTwelfths
+  ; uniformRemainderBelowEveryCompactSimpleCoefficient
+  ; r129ExportsLiteralContinuumLimit
+  ; r129ExportsLiteralSchwingerMembership
+  ; r129ExportsLiteralStressDerivative
+  ; r129ExportsCompositeMarkedSourceData
+  )
+
+toeBalabanRGBlockSpinTransferStillOpen :
+  BalabanRGTOE.balabanRGBlockSpinTransferOpenFlag ≡ false
+toeBalabanRGBlockSpinTransferStillOpen =
+  BalabanRGTOE.balabanRGBlockSpinTransferStillOpen
+
+toeBalabanRGUniformKPAbsorptionStillOpen :
+  BalabanRGTOE.balabanRGUniformKPAbsorptionOpenFlag
+  ≡ false
+toeBalabanRGUniformKPAbsorptionStillOpen =
+  BalabanRGTOE.balabanRGUniformKPAbsorptionStillOpen
+
+toeBalabanRGContinuumConstructionStillOpen :
+  BalabanRGTOE.balabanRGContinuumConstructionOpenFlag ≡ false
+toeBalabanRGContinuumConstructionStillOpen =
+  BalabanRGTOE.balabanRGContinuumConstructionStillOpen
+
+toeBalabanRGContinuumMassGapStillOpen :
+  BalabanRGTOE.balabanRGContinuumMassGapOpenFlag
+  ≡ false
+toeBalabanRGContinuumMassGapStillOpen =
+  BalabanRGTOE.balabanRGContinuumMassGapStillOpen
+
+toeBalabanRGClayPromotionStillFalse :
+  BalabanRGTOE.balabanRGClayPromotionFlag ≡ false
+toeBalabanRGClayPromotionStillFalse =
+  BalabanRGTOE.balabanRGClayPromotionStillFalse
+
+toeBalabanContinuumLimitReceipt :
+  BalabanRGTOE.BalabanContinuumLimitReceipt
+toeBalabanContinuumLimitReceipt =
+  BalabanRGTOE.balabanContinuumLimitReceipt
+
+toeBalabanContinuumLimitPromotionImpossible :
+  BalabanRGTOE.BalabanContinuumLimitPromotion → ⊥
+toeBalabanContinuumLimitPromotionImpossible =
+  BalabanRGTOE.balabanContinuumLimitPromotionImpossible
+
+toeDepthContinuumLimitReceipt :
+  BalabanRGTOE.DepthContinuumLimitReceipt
+toeDepthContinuumLimitReceipt =
+  BalabanRGTOE.depthContinuumLimitReceipt
+
+toeDepthContinuumLimitPromotionImpossible :
+  BalabanRGTOE.DepthContinuumLimitPromotion → ⊥
+toeDepthContinuumLimitPromotionImpossible =
+  BalabanRGTOE.depthContinuumLimitPromotionImpossible
+
+toeBalabanRGZKPFrame : BalabanRGTOE.BalabanTOEZKPFrame
+toeBalabanRGZKPFrame =
+  BalabanRGTOE.canonicalBalabanTOEZKPFrame
+
+toeBalabanRGReceipt : BalabanRGTOE.BalabanRGTOEReceipt
+toeBalabanRGReceipt =
+  BalabanRGTOE.canonicalBalabanRGTOEReceipt
 
 ------------------------------------------------------------------------
 -- Focused TOE 369 theorem surface.
@@ -199,6 +287,34 @@ toeBalabanGoal1CMetricPairingCompilerLevel =
 toeBalabanGoal1CLiteralSourceInstantiationLevel : ProofLevel
 toeBalabanGoal1CLiteralSourceInstantiationLevel =
   BalabanRGTOE.balabanGoal1CLiteralSourceInstantiationLevel
+
+toeBalabanCPhysicalPackageMaxCutCompilerLevel : ProofLevel
+toeBalabanCPhysicalPackageMaxCutCompilerLevel =
+  BalabanRGTOE.balabanCPhysicalPackageMaxCutCompilerLevel
+
+toeBalabanC0LiteralGaugeInvariantLocalObservableFamilyLevel : ProofLevel
+toeBalabanC0LiteralGaugeInvariantLocalObservableFamilyLevel =
+  BalabanRGTOE.balabanC0LiteralGaugeInvariantLocalObservableFamilyLevel
+
+toeBalabanC1MarkedCurvatureFamilyLevel : ProofLevel
+toeBalabanC1MarkedCurvatureFamilyLevel =
+  BalabanRGTOE.balabanC1MarkedCurvatureFamilyLevel
+
+toeBalabanC2PhysicalRemainderSharedTailLevel : ProofLevel
+toeBalabanC2PhysicalRemainderSharedTailLevel =
+  BalabanRGTOE.balabanC2PhysicalRemainderSharedTailLevel
+
+toeBalabanC3OneStepAFRecurrenceIdentificationLevel : ProofLevel
+toeBalabanC3OneStepAFRecurrenceIdentificationLevel =
+  BalabanRGTOE.balabanC3OneStepAFRecurrenceIdentificationLevel
+
+toeBalabanC4DensityAnchoredStressLaneLevel : ProofLevel
+toeBalabanC4DensityAnchoredStressLaneLevel =
+  BalabanRGTOE.balabanC4DensityAnchoredStressLaneLevel
+
+toeBalabanCPhysicalPackageCount : ℕ
+toeBalabanCPhysicalPackageCount =
+  BalabanRGTOE.balabanCPhysicalPackageCount
 
 toeBalabanLevel2ClayPromotionStillFalse :
   BalabanRGTOE.balabanLevel2ClayPromotionFlag ≡ false
