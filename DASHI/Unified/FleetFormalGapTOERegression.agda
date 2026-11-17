@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Unified.FleetFormalGapTOERegression where
 
 open import Agda.Builtin.Bool using (false; true)

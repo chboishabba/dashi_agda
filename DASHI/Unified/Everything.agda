@@ -37,6 +37,8 @@ import DASHI.Unified.FormalObjectParents as FormalObjectParents
 import DASHI.Unified.InvariantSpine as Spine
 import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalGovernance
 import DASHI.Unified.GovernedLegalWorkflowTOEBridgeRegression
+import DASHI.Unified.FleetFormalGapTOEExact as FleetFormalGap
+import DASHI.Unified.FleetFormalGapTOERegression
 import DASHI.Unified.PNFHyperfabric as PNFHyperfabric
 import DASHI.Unified.PNFSourceBoundaryTOEExact as PNFSource
 import DASHI.Unified.PNFDistilledNonPromotionTOEExact as PNFDistilled
@@ -48,7 +50,7 @@ import DASHI.Unified.TOE369RootUnifierConvergenceValidation as TOE369RootUnifier
 import DASHI.Physics.Foundations.Round5CompleteBoundary as Round5
 
 ------------------------------------------------------------------------
--- Governed legal-workflow convergence.
+-- Governed legal-workflow and Fleet residual convergence.
 ------------------------------------------------------------------------
 
 governedLegalWorkflowTOEInvariantHandoff :
@@ -70,6 +72,28 @@ governedExactReuseDoesNotCreateSemanticAuthority :
   LegalGovernance.ExactReuseCreatesSemanticAuthority → ⊥
 governedExactReuseDoesNotCreateSemanticAuthority =
   LegalGovernance.toeExactReuseDoesNotCreateSemanticAuthority
+
+fleetFormalGapTOEReceipt :
+  FleetFormalGap.FleetFormalGapTOEReceipt
+fleetFormalGapTOEReceipt =
+  FleetFormalGap.canonicalFleetFormalGapReceipt
+
+fleetFormalGapMaxCut :
+  FleetFormalGap.FleetFormalGapMaxCut
+fleetFormalGapMaxCut =
+  FleetFormalGap.canonicalFleetFormalGapMaxCut
+
+fleetOnlyFormalResidualDispatches :
+  FleetFormalGap.dispatchAllowed FleetFormalGap.unformalisedFormalGap ≡ true
+fleetOnlyFormalResidualDispatches = refl
+
+fleetDischargedFibresDoNotRedispatch :
+  FleetFormalGap.dispatchAllowed FleetFormalGap.dischargedCoreKnowledge ≡ false
+fleetDischargedFibresDoNotRedispatch = refl
+
+fleetContradictionsRemainSeparate :
+  FleetFormalGap.dispatchAllowed FleetFormalGap.polarityContradictionGap ≡ false
+fleetContradictionsRemainSeparate = refl
 
 canonicalUnifiedObjects : List Spine.UnifiedObjectInvariant
 canonicalUnifiedObjects =
