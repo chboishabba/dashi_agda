@@ -59,3 +59,26 @@ Synthetic checks are included in `--selftest`, but a positive synthetic outcome 
 **Same-ledger hardening (9ca007b):** The P7 uncertainty tool now MUST recover the original P5 nominal 4T net electric output from unchanged per-junction gross MPP and per-channel delivered MPP, plus the signed auxiliary, drive and recovery terms. It rejects changing the nominal metered costs in the uncertainty JSON and rejects a delivered power inconsistent with its gross MPP × converter efficiency. Two adversarial selftests are in the source. These are ledger-integrity conditions, not independent instrument authentication. Exact committed Python selftest remains unexecuted from a fresh checkout; 11 independent envelope arithmetic checks previously executed, without claiming full-script acceptance.
 
 **Source identity hardening (406825e):** The original P5 measured-data producer now exposes `incident_spectrum_sha256` explicitly alongside path-keyed hashes. The conservative P7 checker requires this to be a 64-character lowercase SHA-256 that occurs in the exact original input manifest; it checks equality between conventional and proposed devices, declares distinct specimen IDs, same source reference, exactly same finite-positive specimen temperature and overlapping source irradiance bounds. A control with absent spectrum hash or different temperature must fail before evaluating any 369 advantage. Additional source-integrity and ledger adversarial cases are present in the committed `--selftest` but remain unexecuted at exact GitHub head; the original independent 11/11 arithmetic checks should not be inflated.
+
+## Reproduce locally after fetching PR #1523
+
+```bash
+# First, independently run the source-conditional synthetic negative controls.
+python scripts/check_pv_g173_same_sample_optics_eqe_iv_weld.py --selftest
+python scripts/check_pv_369_worst_case_power_intervals.py --selftest
+
+# Then, ONLY with raw source-measured optics/EQE/IV inputs and calibrated
+# simultaneous uncertainty records from two truly matched independent DUTs:
+python scripts/check_pv_369_worst_case_power_intervals.py \\
+  --candidate candidate_p5_measured_receipt.json \\
+  --candidate-uncertainty candidate_absolute_bounds.json \\
+  --control conventional_p5_measured_receipt.json \\
+  --control-uncertainty conventional_absolute_bounds.json \\
+  --output p7_conditional_robust_gate.json
+
+# Golden Agda acceptance is separately required before promoting any proof.
+agda -i . DASHI/Physics/Photovoltaic/PV369IntervalRobustAcceptanceExact.agda
+agda -i . DASHI/Unified/PVPrimaryTOESpliceExact.agda
+```
+
+**Do not treat passing synthetic tests, source-file hashes or conditional gates as an IEC certificate, a physical 369 mechanism or a >50% cell.**
