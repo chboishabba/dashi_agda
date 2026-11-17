@@ -1,3 +1,88 @@
+
+
+## 17 November strict-topk correction and executable closure route
+
+**Mandatory correction to EARLIER historical paragraphs in this
+roadmap:** the previous e3 configuration `s3=10, b3=-13`
+produced a **TIE** at the second-step history probe after the
+low-load prefix: `(8,3,7,7)`. Because the original source
+uses `torch.topk`, expert 2 vs expert 3 could be chosen
+for the second selected slot; source deterministic selection
+was NOT established for that earlier fixture.
+This is an actual logical error in the old history claim,
+not a cosmetic numerical refinement.
+
+**Repaired original source-shaped fixture** changes ONLY e3 to
+`s3=11, b3=-16`. The corrected four original
+reset-state score vectors at loads 0,1,2,3 are:
+
+    (8,3,-11,-16), (8,7,-2,-5),
+    (8,11,7,6), (8,15,16,17).
+
+They retain the strict source topk sequence
+`(0,1),(0,1),(1,0),(3,2)`, the same selected
+scalar responses
+`1/(1+e^5),1/(1+e),1/(1+e^-3),0`, and
+canonical old `ResponseKink` Nat `(0,2,9,0)`.
+The forced pair (0,1) still has the strictly
+monotone source response `sigmoid(4t-5)`.
+
+The corrected two original step histories share
+probe load 2 and clock index 1:
+- prefix load0 -> second-step logits `(8,3,7,6)`;
+  unique top2 `(0,2)`, Nat0;
+- prefix load3 -> second-step logits
+  `(8,11,-11,-16)`; unique top2 `(1,0)`, Nat9.
+
+An independent LOCAL six-case Python source-formula
+audit checked all four reset-state and both
+same-clock cases with strictly positive
+selected-slot and selected/outside gaps:
+**6/6 PASS**. The old tied witness must NOT
+be promoted by relying on Python's sorting
+order or CPU/GPU `torch.topk` tie behaviour.
+
+**Executable implementation advances in original
+LeechTransformer PR #5:**
+- The existing reset-state checkpoint source producer
+  now uses the shared `strict_source_order_margin`
+  function to fail closed on source topk ties and
+  record the minimum observed original score gaps.
+- The same-clock history probe REUSES that same
+  source margin helper at both prefix and
+  probe steps, instead of duplicating the logic.
+- The actual source-native synthetic regression
+  now creates the repaired source-valid module
+  weights, checks native `step`/
+  `execute_selected` parity and source history,
+  emits a genuine synthetic state_dict, then
+  **runs BOTH original checkpoint and history CLI
+  producers via subprocess**, reopens their
+  JSON outputs and checks checkpoint SHA256,
+  Nat `(0,2,9,0)`, same-clock Nat `(0,9)`,
+  strict prefix/probe score margins and explicit
+  non-certification of trained-model/float/
+  general hysteresis conclusions.
+- The previous JSON numeric-string parser fix,
+  required original nonpersistent `history_cap`,
+  controlled `dtype` and integer scale, and
+  same-Nat forced-route comparison remain.
+
+**Still-open acceptance:** these original
+GitHub-native Torch scripts have been
+source-written/committed but the complete
+committed original source bundle has NOT
+been run locally in this session because
+the original repository checkout was
+not accessible in this container.
+The independent six-case exact-formula
+audit is NOT a substitute for running
+the actual source Torch model.
+Agda kernel acceptance, real trained
+checkpoint/source-history provenance,
+independent numeric source error margins,
+heldout semantic tests and general
+hysteresis remain OPEN.
 # X369 P0 — C3 gauge versus consumer-sufficient compression (17 Nov 2026)
 
 **Owner:** DASHI finite formalism. **Companion:** LeechTransformer PR #5.
