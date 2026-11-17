@@ -107,3 +107,22 @@ Eelectric = E_SMS = -9 A/68 + 225 B/1088 - 177 E/272.
 This particular same-object G1 *mathematical identification for the local source-free Cartesian polarization* is now closed symbolically. An Agda rational-slice source owner `KSW668F8SourceFreeElectricWeylSMSSliceWeldExact.agda` proves the finite wave, differentiated wall and electric/SMS arithmetic, with pinned Agda kernel **not yet run**. The full three angular multipoles, 5D perturbed Einstein–Israel gauge and independent curvature variation proof in Agda remain OPEN; do not promote the restricted equality to full G1.
 
 The prior text calling the source-free normal/SMS identification wholly OPEN applies to the full original solver and general Agda proof, not to this newly verified restricted source-free polarisation computation.
+
+
+### XXIX G2/G4 further precise cuts
+
+**G2 arbitrary rational source transport:** `KSW668F8WeakIsraelSATGeneralPolynomialTransportExact.agda` reuses the actual original moving wall target relation `(v-1)target=2 amp S-(1+v)P`. It proves, without dividing by `v-1` or `dy`, the polynomial identity
+```
+dy * SAT_M = 2(1-v)(target-M)
+           = -4 amp S +2(1+v)P -2(1-v)M.
+```
+This is genuinely general in rational v and physical amplitude, with the original target equation supplied as a hypothesis. It is not the fully coupled (U,P,M) moving-wall energy estimate or a strong boundary enforcement result. Pinned kernel open.
+
+**G4 fixed-time whole-space Sobolev trace precursor:** Independent exact SymPy integration gives, in spatial dimension four,
+```
+int_{R4} |k|^4/(1+|k|²)^5 d^4k = pi²/4,
+sup_x |partial_i partial_j H(x)| <= ||H||_{H^5(R4)}/(8pi),
+```
+with Fourier convention `Hhat(k)=int exp(-ikx)H(x)dx` and Plancherel-normalized inhomogeneous `H^5`. Derivation: polar volume `2pi²` times radial beta integral `int_0^infty r^7/(1+r²)^5 dr=1/8`. This gives an explicit second-derivative **whole-space at fixed time** continuity constant, not the original moving AdS5 boundary trace: the variable warp, half-space extension, time derivatives, compatible Israel boundary and **uniform source-to-H5 evolution estimate** remain entirely OPEN. No assertion that a smooth compact source automatically bounds the solution in the required norm.
+
+**No full-G1..G6 promotion:** The source-free polarized G1 geometric-to-SMS identity and G2 finite SAT lemma close actual mathematical subgates. G3 whole-coupled SSPRK3, G4 time-dependent boundary high-energy, G5 joint mesh convergence, and G6 physical source/receiver are not solved. Existing GR geometry sources are reused with attribution. The PR remains draft for pinned Agda kernel acceptance.
