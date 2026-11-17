@@ -21,6 +21,19 @@ currentBH4Phase : BH4Phase
 currentBH4Phase = systemStateQuantitativePhase
 
 data BH4Phase4Residual : Set where
+  completeKitzerowOriginalChartSourceVerification : BH4Phase4Residual
+  validateNativeSensibLawOntologyBridge : BH4Phase4Residual
+  executeCreatorSelectedRheaAcquisition : BH4Phase4Residual
+  adjudicateCreatorSourceRheaToCuratedPathway : BH4Phase4Residual
+  pinKitzerowPrimaryPathwayEdges : BH4Phase4Residual
+  auditKitzerowPathwayAgainstFinitePanel : BH4Phase4Residual
+  acquireVersionedPathwayOntologyCrossReferences : BH4Phase4Residual
+  payCompartmentContextForInteroperableModel : BH4Phase4Residual
+  validateSBMLBioPAXGOCAMExports : BH4Phase4Residual
+  reconcileKitzerowBranchStack : BH4Phase4Residual
+  supplySourceReopenableReviewEvidence : BH4Phase4Residual
+  persistReviewedBH4ConsumerIntoSLR : BH4Phase4Residual
+  exposeProgressiveBH4ReviewInDioxus : BH4Phase4Residual
   resolveNonFiniteMTORProteinReactionRepresentation : BH4Phase4Residual
   executeFluxPaymentPreparation : BH4Phase4Residual
   executeProteinAbundanceContextAcquisition : BH4Phase4Residual
@@ -37,13 +50,27 @@ data BH4Phase4Residual : Set where
   payCompartmentSpecificBH4BH2RedoxState : BH4Phase4Residual
   paySimultaneousConsumerDemand : BH4Phase4Residual
   payTransportOxidationExchangeVector : BH4Phase4Residual
+  constrainFreeExchangeAndTestDemand : BH4Phase4Residual
   payIsoformSpecificNOSCouplingTransitions : BH4Phase4Residual
   payUpstreamToTSC2SameObjectTransport : BH4Phase4Residual
   discriminateAlternativeMechanisms : BH4Phase4Residual
 
 livePhase4Residuals : List BH4Phase4Residual
 livePhase4Residuals =
-  resolveNonFiniteMTORProteinReactionRepresentation
+  completeKitzerowOriginalChartSourceVerification
+  ∷ validateNativeSensibLawOntologyBridge
+  ∷ executeCreatorSelectedRheaAcquisition
+  ∷ adjudicateCreatorSourceRheaToCuratedPathway
+  ∷ pinKitzerowPrimaryPathwayEdges
+  ∷ auditKitzerowPathwayAgainstFinitePanel
+  ∷ acquireVersionedPathwayOntologyCrossReferences
+  ∷ payCompartmentContextForInteroperableModel
+  ∷ validateSBMLBioPAXGOCAMExports
+  ∷ reconcileKitzerowBranchStack
+  ∷ supplySourceReopenableReviewEvidence
+  ∷ persistReviewedBH4ConsumerIntoSLR
+  ∷ exposeProgressiveBH4ReviewInDioxus
+  ∷ resolveNonFiniteMTORProteinReactionRepresentation
   ∷ executeFluxPaymentPreparation
   ∷ executeProteinAbundanceContextAcquisition
   ∷ executeExchangeContextAcquisition
@@ -59,6 +86,7 @@ livePhase4Residuals =
   ∷ payCompartmentSpecificBH4BH2RedoxState
   ∷ paySimultaneousConsumerDemand
   ∷ payTransportOxidationExchangeVector
+  ∷ constrainFreeExchangeAndTestDemand
   ∷ payIsoformSpecificNOSCouplingTransitions
   ∷ payUpstreamToTSC2SameObjectTransport
   ∷ discriminateAlternativeMechanisms
@@ -81,6 +109,51 @@ exchangeContextAcquisitionToolReady = true
 
 jointPaymentLedgerToolReady : Bool
 jointPaymentLedgerToolReady = true
+
+structuralPathwayOntologyExportToolReady : Bool
+structuralPathwayOntologyExportToolReady = true
+
+sourceReopenableReviewWorklistToolReady : Bool
+sourceReopenableReviewWorklistToolReady = true
+
+nativeSLRReviewPersistenceReady : Bool
+nativeSLRReviewPersistenceReady = false
+
+nativeDioxusPathwayReaderReady : Bool
+nativeDioxusPathwayReaderReady = false
+
+compartmentAndKineticSBMLExportReady : Bool
+compartmentAndKineticSBMLExportReady = false
+
+authorPathwayPrimaryTextFullyVerified : Bool
+authorPathwayPrimaryTextFullyVerified = false
+
+originalCreatorChartRheaIndexPresent : Bool
+originalCreatorChartRheaIndexPresent = true
+
+creatorSelectedRheaAcquisitionToolReady : Bool
+creatorSelectedRheaAcquisitionToolReady = true
+
+creatorSelectedRheaAcquisitionExecutedOnThisPRHead : Bool
+creatorSelectedRheaAcquisitionExecutedOnThisPRHead = false
+
+creatorSelectedReactionSetSharesCompartmentWithPanel : Bool
+creatorSelectedReactionSetSharesCompartmentWithPanel = false
+
+originalCreatorFullNetworkObtained : Bool
+originalCreatorFullNetworkObtained = false
+
+nativeSensibLawExternalGraphBridgeRefereeVerified : Bool
+nativeSensibLawExternalGraphBridgeRefereeVerified = false
+
+unrestrictedExchangeNonidentifiabilityTheoremSourceWritten : Bool
+unrestrictedExchangeNonidentifiabilityTheoremSourceWritten = true
+
+unrestrictedExchangeNonidentifiabilityKernelChecked : Bool
+unrestrictedExchangeNonidentifiabilityKernelChecked = false
+
+biologicallyConstrainedJointBH4DemandTestExecuted : Bool
+biologicallyConstrainedJointBH4DemandTestExecuted = false
 
 sabioKineticParameterCount : Nat
 sabioKineticParameterCount = SABIO.executedSABIOKineticParameterCount
