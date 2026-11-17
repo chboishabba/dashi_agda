@@ -186,3 +186,21 @@ DASHI_NO_TMUX=1 scripts/run_agda29_parallel_check.sh DASHI/Culture/AmyEskridgeVi
 ```
 
 Retain **draft** until the checker and full transitive Agda typecheck pass at the exact PR head. No claim about a death, government conspiracy or gravity mechanism is upgraded merely by adding a link.
+
+
+### Additional exact historical-source controls
+
+- **Podkletnov–Nieminen 1992 original full paper inspected**, publisher *Physica C* 203, 441–444, DOI 10.1016/0921-4534(92)90055-H, document copy: https://robertfrancisjr.com/pdfs/A%20Possibility%20of%20Gravitational%20Force%20Shielding%20by%20Bulk%20Superconductor.pdf . Experimental apparatus: 145 mm by 6 mm YBCO disc, liquid helium, sample 5.47834 g about 15 mm above disc, plastic film and electro-optical balance, rotating field coils. Authors report initial 0.05% apparent weight decrease and 0.3% in stable rotating regime; report fluctuations from -2.5% to +5.4% at other speeds. Their paper states controls for air/static electricity and tests with the disk absent, which should not be silently deleted from an adversarial analysis. Their source still does not supply open raw time-series/covariance, instrument-response or later 2% replication.
+- **Mansfield Amendment original government documentation**: U.S. GAO, B-167034, *Implementation of 1970 Defense Procurement Authorization Act Requiring Relationship Of Research To Specific Military Functions*, published **23 June 1970** https://www.gao.gov/products/b-167034 ; Section 203, **Public Law 91-121 (signed November 19, 1969)**, required FY1970 Defense-funded research to relate directly and apparently to military functions. The video asserts "passed in 1973" and jumps to classified black budgets; neither follows from this source. The 1973 version/funding context remains an exact statute-comparison gate.
+- **Boeing GRASP contemporary independent reporting**, Nick Cook, *Jane's Defence Weekly*, 29 July 2002, archival original article https://archive.md/lG1GW . Article names Boeing's Phantom Works GRASP effort and a briefing conditional on gravity modification being real. Correct the video's claim of first 2014 acknowledgement, while not promoting the reported *interest* to completed technology.
+
+The new typed module is `DASHI/Culture/AmyEskridgeVideoHistoricalPrimaryControlsExact.agda`. A journal report is attributed to its authors; a government-law summary is attributed to GAO and Congress; the Boeing investigation remains Nick Cook's reporting rather than an authenticated Boeing engineering acceptance document.
+
+### Burisch original transcript passage-level anchors
+
+Project Camelot/Avalon preserve transcripts for separate July 2006 *Out From Under Majestic* and June 2007 *Stargate Secrets*:
+- June 2007 *Stargate Secrets* **Part 1**: https://projectavalon.net/lang/en/dan_burisch_stargate_secrets_interview_transcript_1_en.html . Direct passage anchors: over 50 devices/ERB (lines 50–76), Stargate/cylinder-seal story (91–109), Yellow Cube (164–186), country elites (284–289), rings/kaleidoscope (537–579), 2017 reassembly prediction (630–663), claimed EU/UN/NATO components (664–671).
+- June 2007 **Part 2**: https://projectavalon.net/lang/en/dan_burisch_stargate_secrets_interview_transcript_2_en.html . Frenchman Mountain/portal speculation (431–465).
+- July 2006 **Part 2**: https://projectavalon.net/lang/en/dan_burisch_interview_transcript_2_en.html . *2012: Two Timelines* yields P-45 45,000-year original passage.
+
+These locators are now recorded directly in `AmyEskridgeVideoOriginalClipLineageExact.agda`. They pay original oral-source attribution, not any secret agency/machine/custody claim.
