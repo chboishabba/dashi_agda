@@ -113,6 +113,21 @@ def run(source,alpha0=4e6):
         m=(a+b)/2
         if radiative_jv(source,lines,d,alpha0,m)["Pmax_W_m2"]<base:a=m
         else:b=m
+    # SOURCE-DISCIPLINED sensitivity, NOT a rigorous spectral error bar:
+    # keeping oscillator weights fixed, perturb ALL strained optical edge
+    # positions by the same small energy. The actual Bahder spin-strain
+    # matrix can rotate/mix eigenvectors as well as shift eigenvalues.
+    # The 17.82meV shift is a WRONG cross-convention hydrostatic sign
+    # diagnostic, not measured uncertainty in a properly calibrated device.
+    strained_base=radiative_jv(source,lines,d,alpha0)["Pmax_W_m2"]
+    edge_shifts=(-.01782,-.001281594083057,0.,.001281594083057,.01782)
+    edge_only_strained_sensitivity=[]
+    for shift in edge_shifts:
+        changed=[(eg+shift,w) for eg,w in lines]
+        p=radiative_jv(source,changed,d,alpha0)["Pmax_W_m2"]
+        edge_only_strained_sensitivity.append({
+            "same_shift_all_edges_meV":1000*shift,
+            "pmax_W_m2":p,"delta_from_strained_W_m2":p-strained_base})
     return {"G173_source_global_W_m2":global_solar,
         "assumptions":{"alpha0_m_inverse_sqrt_eV":alpha0,
             "thicknesses_micron":[.2,2,20],
@@ -121,6 +136,7 @@ def run(source,alpha0=4e6):
             "alpha":"weighted sqrt(E-Eg) from gamma-point Kane transitions; NOT measured/fitted"},
         "scenarios":outputs,
         "at_2_micron_111_tensile_collection_break_even_fraction":(a+b)/2,
+        "edge_only_strained_sensitivity":edge_only_strained_sensitivity,
         "original_spectrum":"NLR ASTM G173-03, 2002 point four-column reference",
         "no_experimental_pce_claim":True}
 
