@@ -143,7 +143,7 @@ def audit(manifest,root):
     historical_counts = Counter()
     historical_products = Counter()
     for event in events:
-        if (event['date'] < '2000-01-01'
+        if (event['date'] < '2025-01-01'
                 and event['before'] is not None
                 and event['before'][0] != 'None'
                 and (event['after'] is None or event['after'][0] == 'None')):
@@ -156,14 +156,14 @@ def audit(manifest,root):
             'counts':dict(sorted(counts.items())),
             'field_change_counts':dict(sorted(field_counts.items())),
             'value_removals_by_station_product':{f'{s}:{v}':n for (s,v),n in sorted(removals.items())},
-            'pre2000_observed_values_lost_by_station':historical,
-            'pre2000_observed_values_lost_by_station_product':
+            'before2025_observed_values_lost_by_station':historical,
+            'before2025_observed_values_lost_by_station_product':
                 {f'{s}:{v}':n for (s,v),n in sorted(historical_products.items())},
             'values_lost_including_disappearing_calendar_rows':
                 {f'{s}:{v}':n for (s,v),n in sorted(lost_values.items())},
             'author_reported_target_only':{'pre2000_total':571,'066062':515,
                                             '044022_or_044021':56},
-            'pre2000_target_matched':sum(historical.values())==571
+            'before2025_target_numeric_match_only':sum(historical.values())==571
                                    and historical.get('066062')==515
                                    and sum(v for s,v in historical.items()
                                            if s in ('044022','044021'))==56,
