@@ -1,0 +1,51 @@
+{
+  "title": "Smith Filsinger distributed LC/plasma selected-source maxcut",
+  "date": "2026-11-17",
+  "scope": "finite N-node LC/telegrapher analogue, controlled dissipative plasma shunt, independently stipulated delayed exogenous source; NOT full 3D Maxwell / solar energy proof",
+  "verification": {
+    "local_tests": "12/12 PASS",
+    "symbolic_telescoping_selected_N": [
+      3,
+      5,
+      8
+    ],
+    "full_branch_exact_head": false,
+    "agda_kernel": false,
+    "original_physical_gates_closed": 0
+  },
+  "scenario": {
+    "N": 5,
+    "T_normalized": 10,
+    "source_dc": 2,
+    "source_ac": 0.3,
+    "source_delay": 0.4,
+    "plasma_topology": "shunt node 2"
+  },
+  "baseline": {
+    "conductance": 0.006329371666467393,
+    "load_work": 0.036742189133407946,
+    "ion_creation_work": 1,
+    "controller_aux_work": 0,
+    "upstream_work": 8.03964565351685,
+    "final_minus_initial_stored": 1.4108245512384994,
+    "ledger_residual": 7.392975120978917e-12,
+    "restored": false
+  },
+  "controlled": {
+    "conductance": 0.02717360444146299,
+    "load_work": 0.035915232369439117,
+    "ion_creation_work": 5,
+    "controller_aux_work": 0.2,
+    "upstream_work": 8.041259084834035,
+    "final_minus_initial_stored": 1.9210662242926504,
+    "ledger_residual": 7.325251516476783e-12,
+    "restored": false
+  },
+  "finding": "Conductance increase can reduce useful load when created as lossy shunt. Not evidence against source-connected conductive bridge.",
+  "independent_measurements": null,
+  "original_hardware_pins": null,
+  "independent_source_replenishment_receipt": null,
+  "strict_continuum_lightcone_receipt": null,
+  "physical_source_maxwell_weld": null,
+  "notes": "Independent local numerical and symbolic replay performed before GitHub commit; source-only GitHub commit and integration do not constitute same-head acceptance. No actual solar source measured."
+}
