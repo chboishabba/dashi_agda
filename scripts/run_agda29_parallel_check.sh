@@ -1,100 +1,20 @@
 #!/usr/bin/env bash
 set -euo pipefail
-JOBS="${AGDA_JOBS:-0}"
-AGDA_FLAKE="${AGDA_FLAKE:-/home/c/Documents/code/agda#debug.bin}"
-# Protect ordinary direct checks too.  A pathological elaboration should stop
-# before it can drive a 32 GiB workstation into swap thrash.  Callers may
-# override this explicitly for exceptional runs.
-DASHI_AGDA_RSS_LIMIT_MB="${DASHI_AGDA_RSS_LIMIT_MB:-8192}"
-export DASHI_AGDA_RSS_LIMIT_MB
 
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="${DASHI_REPO_ROOT:-$(cd "$SCRIPT_DIR/.." && pwd)}"
+DASHI_CACHE_HOME="${DASHI_AGDA29_CACHE_ROOT:-${XDG_CACHE_HOME:-$HOME/.cache}/dashi-agda29}"
 
-SESSION_NAME="${DASHI_TMUX_SESSION:-dashi_agda_check_$$}"
-WAIT_CHANNEL="dashi_wait_$$"
-STATUS_DIR="${DASHI_STATUS_DIR:-${XDG_CACHE_HOME:-/home/c/.cache}/dashi-agda29/status}"
-mkdir -p "$STATUS_DIR"
-STATUS_FILE="$(mktemp "$STATUS_DIR/status_XXXXXX.txt")"
-
-if [ "${NO_TMUX:-0}" = "1" ]; then
-  DASHI_NO_TMUX=1
-fi
-
-if [ -z "${TMUX:-}" ] && [ "${DASHI_NO_TMUX:-0}" != "1" ] && [ -t 0 ] && command -v tmux >/dev/null 2>&1; then
-  rm -f "$STATUS_FILE"
-  tmux kill-session -t "${SESSION_NAME}" 2>/dev/null || true
-
-  echo "Launching execution inside detached tmux session '${SESSION_NAME}' (waiting on channel ${WAIT_CHANNEL})..."
-
-  if ! tmux new-session -d -s "${SESSION_NAME}" \
-    "bash -lc '
-      set +e
-            export DASHI_AGDA29_CACHE_ROOT=\"${DASHI_AGDA29_CACHE_ROOT:-}\"
-            DASHI_NO_TMUX=1 AGDA_JOBS=\"${JOBS}\" \
-              AGDA_PROFILE=\"${AGDA_PROFILE:-}\" \
-              AGDA_PROFILE_VERBOSITY=\"${AGDA_PROFILE_VERBOSITY:-}\" \
-              AGDA_RTS_HEAP=\"${AGDA_RTS_HEAP:-}\" \
-              AGDA_RTS_STATS=\"${AGDA_RTS_STATS:-0}\" \
-              AGDA_TARGETS_FILE=\"${AGDA_TARGETS_FILE:-}\" \
-              DASHI_AGDA_RSS_LIMIT_MB=\"${DASHI_AGDA_RSS_LIMIT_MB}\" \
-              DASHI_SKIP_RSYNC=\"${DASHI_SKIP_RSYNC:-0}\" \
-              DASHI_SYNC_ONLY=\"${DASHI_SYNC_ONLY:-0}\" \
-              \"$0\" ${@+\"$@\"}
-      rc=\$?
-      printf \"%s\\n\" \"\$rc\" > \"$STATUS_FILE\"
-      tmux wait-for -S \"${WAIT_CHANNEL}\"
-      if [ \"\$rc\" -ne 0 ] && [ \"\${DASHI_TMUX_KEEP_FAILED:-0}\" = \"1\" ]; then
-        echo
-        echo \"Agda check failed with status \$rc. Session retained for inspection: tmux attach -t ${SESSION_NAME}\"
-        exec bash
-      fi
-      exit \"\$rc\"
-    '"; then
-    printf '%s\n' "125" > "$STATUS_FILE"
-    rm -f "$STATUS_FILE"
-    echo "failed to launch tmux worker session '${SESSION_NAME}'" >&2
-    exit 125
-  fi
-
-  # Background sentinel: if the tmux session disappears (OOM kill, crash)
-  # before the worker signals, unblock the wait channel so we don't hang.
-  (
-    while tmux has-session -t "${SESSION_NAME}" 2>/dev/null; do
-      sleep 2
-    done
-    # Session is gone — give the worker a brief chance to publish its real
-    # status before recording the crash/disappearance sentinel.
-    for _ in 1 2 3 4 5; do
-      [ -s "$STATUS_FILE" ] && break
-      sleep 0.2
-    done
-    if [ ! -s "$STATUS_FILE" ]; then
-      STATUS_TMP="${STATUS_FILE}.tmp"
-      printf '%s\n' "137" > "$STATUS_TMP"
-      mv -f "$STATUS_TMP" "$STATUS_FILE"
-      tmux wait-for -S "${WAIT_CHANNEL}" 2>/dev/null || true
-    fi
-  ) &
-  SENTINEL_PID=$!
-
-  tmux wait-for "${WAIT_CHANNEL}" 2>/dev/null || true
-
-  # Clean up sentinel
-  kill "$SENTINEL_PID" 2>/dev/null || true
-  wait "$SENTINEL_PID" 2>/dev/null || true
-
-  rc="$(cat "$STATUS_FILE" 2>/dev/null || printf '137')"
-  rm -f "$STATUS_FILE"
-  exit "$rc"
-fi
-REPO_ROOT="${DASHI_REPO_ROOT:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
+JOBS="${AGDA_JOBS:-8}"
+AGDA_FLAKE="${AGDA_FLAKE:-$REPO_ROOT/../agda#debug.bin}"
 STDLIB_SRC="${AGDA_STDLIB_SRC_29:-${AGDA_STDLIB_SRC:-}}"
 STDLIB_REPO="${AGDA_STDLIB_REPO:-https://github.com/agda/agda-stdlib.git}"
 STDLIB_REF="${AGDA_STDLIB_REF:-experimental}"
-DASHI_CACHE_HOME="${DASHI_AGDA29_CACHE_ROOT:-${XDG_CACHE_HOME:-$HOME/.cache}/dashi-agda29}"
+STDLIB_PINNED_COMMIT="${AGDA_STDLIB_PINNED_COMMIT:-}"
 DASHI_EPHEMERAL="${DASHI_AGDA29_EPHEMERAL:-0}"
 DASHI_CLEAN="${DASHI_AGDA29_CLEAN:-0}"
 STDLIB_UPDATE="${AGDA_STDLIB_UPDATE:-0}"
-AGDA_LOG_PATH="${AGDA_LOG_PATH:-/home/c/.gemini/antigravity/scratch/dashi-agda29-parallel-check.log}"
+AGDA_LOG_PATH="${AGDA_LOG_PATH:-$DASHI_CACHE_HOME/logs/agda29-check.log}"
 AGDA_LOG_KEEP_COUNT="${AGDA_LOG_KEEP_COUNT:-10}"
 AGDA_LOG_BASE_PATH="$AGDA_LOG_PATH"
 
@@ -103,46 +23,21 @@ if [ -z "${XDG_CACHE_HOME:-}" ]; then
   mkdir -p "$XDG_CACHE_HOME"
 fi
 
-CLI_AGDA_ARGS=()
-RAW_TARGETS=()
-
-while [ "$#" -gt 0 ]; do
-  case "$1" in
-    --)
-      shift
-      while [ "$#" -gt 0 ]; do
-        RAW_TARGETS+=("$1")
-        shift
-      done
-      break
-      ;;
-    -i|--include-path|-l|--library|--library-file|--compile-dir)
-      if [ "$#" -ge 2 ]; then
-        CLI_AGDA_ARGS+=("$1" "$2")
-        shift 2
-      else
-        CLI_AGDA_ARGS+=("$1")
-        shift
-      fi
-      ;;
-    -*)
-      CLI_AGDA_ARGS+=("$1")
-      shift
-      ;;
-    *)
-      RAW_TARGETS+=("$1")
-      shift
-      ;;
-  esac
-done
-
-if [ -n "${AGDA_TARGETS_FILE:-}" ] && [ -f "$AGDA_TARGETS_FILE" ]; then
-  mapfile -t TARGETS < "$AGDA_TARGETS_FILE"
-elif [ "${#RAW_TARGETS[@]}" -eq 0 ]; then
+if [ "$#" -eq 0 ]; then
+  # Default: do-everything check.
   TARGETS=("DASHI/Everything.agda")
 else
   TARGETS=("${RAW_TARGETS[@]}")
 fi
+
+# Focused Bishop-to-Stage-3 compile ladder (for debugging):
+#   vendor/bishop/ExtraProperties.agda
+#   vendor/bishop/Real.agda
+#   vendor/bishop/RealProperties.agda
+#   vendor/bishop/Sequence.agda
+#   DASHI/Analysis/MurrayBishopSetoidBackend.agda
+#   DASHI/Physics/Closure/NSTriadKNMurrayBishopDirectCanonicalCarrier.agda
+#   DASHI/Physics/Closure/NSTriadKNStage3MurrayBishopConcreteBackendIntegration.agda
 
 log_target_slug() {
   local slug="$1"
@@ -293,6 +188,12 @@ else
     git -C "$STDLIB_WORK" checkout -q "$STDLIB_REF"
     git -C "$STDLIB_WORK" reset --hard -q "origin/$STDLIB_REF"
   fi
+  if [ -n "$STDLIB_PINNED_COMMIT" ]; then
+    if ! git -C "$STDLIB_WORK" cat-file -e "$STDLIB_PINNED_COMMIT" 2>/dev/null; then
+      git -C "$STDLIB_WORK" fetch --depth=1 origin "$STDLIB_REF"
+    fi
+    git -C "$STDLIB_WORK" checkout -q "$STDLIB_PINNED_COMMIT"
+  fi
   STDLIB_INCLUDE="$STDLIB_WORK/src"
 fi
 chmod -R u+w "$STDLIB_WORK"
@@ -358,11 +259,9 @@ fi
 
 AGDA_RUN=("$AGDA_BIN" "${AGDA_RTS_ARGS[@]}" \
   --no-libraries --no-default-libraries \
-  "${PARALLEL_OPT[@]}" \
-  -i . -i DCHoTT-Agda -i vendor/bishop -i cubical -i "$STDLIB_INCLUDE" \
-  -WnoUnsupportedIndexedMatch \
-  "${AGDA_PROFILE_ARGS[@]}" \
-  "${CLI_AGDA_ARGS[@]}")
+  "-j$JOBS" \
+  -i . -i bishop -i DCHoTT-Agda -i cubical -i "$STDLIB_INCLUDE" \
+  -WnoUnsupportedIndexedMatch)
 
 if command -v stdbuf >/dev/null 2>&1; then
   AGDA_RUN=(stdbuf -oL -eL "${AGDA_RUN[@]}")
