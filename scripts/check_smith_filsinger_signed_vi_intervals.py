@@ -152,12 +152,19 @@ def calculate(manifest: dict[str, Any], root: Path) -> dict[str, Any]:
             raise ValueError(f"{role}: nonidentical original time grid")
         trap = integrate_trapezoid(t, p)
         bounds[role] = (trap[0] - remainder, trap[1] + remainder)
+    # Consume the canonical sign/role map, rather than rebuilding a second
+    # ledger by manually spelling out each term. Every role contributes once.
+    net = (Fraction(0), Fraction(0))
+    for role in PORTS:
+        part = bounds[role]
+        net = add_interval(net, part if ROLE_SIGNS[role] == 1
+                           else (-part[1], -part[0]))
     natural = minus_interval(bounds["natural_incident"], bounds["natural_outgoing"])
     controller = minus_interval(bounds["controller_incident"], bounds["controller_outgoing"])
     receiver = bounds["load_output"]
-    # Positive remaining energy can be legitimate heat/storage or missing
-    # sinks; negative remaining energy rejects a *fully accounted* balance.
-    unassigned = minus_interval(add_interval(natural, controller), receiver)
+    # Positive remaining energy can be heat, missing stores, or other sinks;
+    # negative remaining energy exposes missing source/restoration evidence.
+    unassigned = net
     def serialize(interval):
         return {"lower_J": exact_str(interval[0]), "upper_J": exact_str(interval[1])}
     return {
@@ -170,6 +177,8 @@ def calculate(manifest: dict[str, Any], root: Path) -> dict[str, Any]:
         "useful_load_work": serialize(receiver),
         "unassigned_loss_or_storage_change": serialize(unassigned),
         "conditional_positive_environment_interval": natural[0] > 0,
+        "conditional_environmental_sink_interval": natural[1] < 0,
+        "signed_balance_from_named_port_role_map": True,
         "conditional_balance_compatible_with_nonnegative_missing_sinks": unassigned[1] >= 0,
         "physical_claim_closed": False, "f15_closed": False,
         "reasons_not_acceptance": [
