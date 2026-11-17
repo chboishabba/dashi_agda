@@ -258,3 +258,38 @@ Agda interface requires a true
 `Nat` source response and its same-source
 provenance equality before transporting
 the old qualitative theorem.
+
+
+## Receipt tightened to the canonical Nat type
+
+The source adapter now refuses a generic real-valued
+response record masquerading as the Agda
+`ResponseKink` owner. It explicitly requires
+`response_codomain="Nat"`,
+`nat_observation_source_verified=true`, and
+a nonnegative integer `response_nat`
+for every source stage, **enclosed by its
+corresponding authenticated error interval**.
+A real source observable must be quantised
+to Nat by a separately sourced observation
+map whose cell margins are checked.
+
+The companion test now contains
+**18 synthetic test cases** (one accepted,
+17 adversarial rejections), with a
+Nat response `(1,4,6,4)`.
+New negative cases reject an unverified
+Nat projection, an incorrect Real codomain,
+a string where the response must be Nat,
+or a reported Nat value outside its
+declared interval. This is a SOURCE WRITTEN
+test suite without a separate full-file
+execution receipt; the 19 local SymPy
+constructive-shape checks are distinct.
+
+The source checkpoint and provenance flags
+are **declarations**, not independent
+cryptographic or FP authentication.
+Source measurements and a verified projection
+are still required to instantiate the
+original Agda profile on a trained model.
