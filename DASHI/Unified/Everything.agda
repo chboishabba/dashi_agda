@@ -281,7 +281,6 @@ unifiedYMImplementAToDMaxCutReceipt :
 unifiedYMImplementAToDMaxCutReceipt =
   YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
 
-
 ------------------------------------------------------------------------
 -- Current-master SensibLaw governance / fleet target normalization.
 ------------------------------------------------------------------------

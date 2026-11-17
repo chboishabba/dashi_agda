@@ -965,6 +965,36 @@ unifierSensibLawCurrentValidityDoesNotCreateApplicability =
 unifierSensibLawRuntimeDoesNotInventLegalSemantics =
   GovernanceFleet.governanceRuntimeCannotInventLegalSemantics
 
+unifierBalabanOSWightmanStillBlocked :
+  BalabanR559TOE.balabanOSWightmanConstruction
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false
+unifierBalabanOSWightmanStillBlocked =
+  BalabanR559TOE.balabanOSWightmanConstructionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+------------------------------------------------------------------------
+-- Current-master SensibLaw governance / fleet target normalization.
+------------------------------------------------------------------------
+
+import DASHI.Unified.SensibLawGovernanceFleetTOEExact as GovernanceFleet
+
+unifierSensibLawGovernanceFleetReceipt :
+  GovernanceFleet.SensibLawGovernanceFleetTOEReceipt
+unifierSensibLawGovernanceFleetReceipt =
+  GovernanceFleet.canonicalSensibLawGovernanceFleetTOEReceipt
+
+unifierSensibLawSemanticAuthorityRemainsClosed =
+  GovernanceFleet.governanceSemanticAllAuthorityStillClosed
+
+unifierSensibLawCandidateSourceDoesNotCreateAuthority =
+  GovernanceFleet.governanceCandidateSourceDoesNotCloseAuthority
+
+unifierSensibLawCurrentValidityDoesNotCreateApplicability =
+  GovernanceFleet.governanceCurrentValidityDoesNotEstablishApplicability
+
+unifierSensibLawRuntimeDoesNotInventLegalSemantics =
+  GovernanceFleet.governanceRuntimeCannotInventLegalSemantics
+
 unifierSensibLawRepresentationDoesNotCreateLegalAuthority =
   GovernanceFleet.governanceRepresentationEqualityDoesNotCreateLegalAuthority
 
