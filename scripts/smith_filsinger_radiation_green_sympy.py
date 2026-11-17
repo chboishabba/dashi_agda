@@ -65,3 +65,22 @@ def fixtures(kx=S.Rational(0),hall=S.Rational(0)):
     gens=[tangential_generator(w,kx,mu,ex,ey,ex,S.I*hall,-S.I*hall)
           for mu,ex,ey in layers]
     return gens,[S.Rational(1,7),S.Rational(1,9),S.Rational(1,11)]
+
+def evanescent_outgoing_admittance(omega,kx,mu,epsilon):
+    """Selected decaying branch q_z=+i*kappa, kappa>0 in lossless media.
+    No absorbing-medium complex spectral branch certification.
+    A pure evanescent wave has reactive field but zero average real power.
+    """
+    w,k,m,e=map(S.sympify,(omega,kx,mu,epsilon))
+    if any(a.is_positive is not True for a in (w,m,e)):
+        raise ValueError("positive real frequency and lossless exterior required")
+    kappa2=S.simplify(k*k-w*w*m*e)
+    if kappa2.is_positive is not True:
+        raise ValueError("strict evanescent branch needs k2>w2mu epsilon")
+    q=S.I*S.sqrt(kappa2)
+    return S.Matrix([[0,-q/(w*m)],[w*e/q,0]])
+
+def evanescent_sheet_green_zero_thickness(omega,kx,mu=1,epsilon=1):
+    """Exact source sheet between two identical evanescent halfspaces."""
+    Y=evanescent_outgoing_admittance(omega,kx,mu,epsilon)
+    return S.simplify((-2*R*Y).inv()),Y
