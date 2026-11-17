@@ -22,6 +22,7 @@ import DASHI.Physics.Photovoltaic.Atomic369P2ScalarCoulombOpticalNoGainExact
 import DASHI.Physics.Photovoltaic.Atomic369PTripletParityE1NoGoExact
 
 -- First source-qualified real GaAs s/p Kane control; same 369 material weld OPEN.
+import DASHI.Physics.Photovoltaic.Atomic369GaAs111TrigonalCharacterExact
 import DASHI.Physics.Photovoltaic.GaAsKane369MaterialDiscriminatorExact
 
 -- Signed temperature/heat and ground/ORC co-product consumers only.
