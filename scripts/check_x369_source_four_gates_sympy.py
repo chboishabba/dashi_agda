@@ -251,6 +251,44 @@ check("rational top2 slot order certified",
 check("rational top2 slot order actually preserved",
       sorted_ids(quant_scores)[:2]==ordered)
 
+# R4 mixed-null SOURCE q-gate is q_j > sample_mean(q), not a
+# smooth fixed rotation. Certify q/threshold stability before treating
+# source/input quantization as staying in one rotation branch.
+xa,xb,xc,ea,eb,ec=sp.symbols("xa xb xc ea eb ec",real=True)
+q3=lambda a,b,c:sp.Rational(1,2)*(
+    (a-b)**2+(b-c)**2+(c-a)**2)
+delta_q=sp.expand(q3(xa+ea,xb+eb,xc+ec)-q3(xa,xb,xc))
+delta_q_expanded=sp.expand(
+    (xa-xb)*(ea-eb)+(xb-xc)*(eb-ec)+(xc-xa)*(ec-ea)
+    +sp.Rational(1,2)*(
+       (ea-eb)**2+(eb-ec)**2+(ec-ea)**2))
+check("exact q-gate energy perturbation identity",
+      sp.expand(delta_q-delta_q_expanded)==0)
+# If |delta q_j|<=Q_j, then
+# |delta (q_j - mean(q))|<=Q_j + mean(Q).
+# Thus |q_j - mean(q)|>Q_j+mean(Q) certifies the > comparison
+# cannot change branch. Equality and boundary are NOT certified.
+def q_gate(v):
+    en=[q3(*z) for z in v]
+    mean=sum(en)/len(en)
+    return tuple(bool(q>mean) for q in en)
+eta=sp.Rational(1,4096)
+base=[(sp.Integer(1),sp.Integer(0),sp.Integer(0)),
+      (sp.Integer(0),sp.Integer(1),sp.Integer(0))]
+near=[(sp.Integer(1)+eta,sp.Integer(0),sp.Integer(0)),
+      base[1]]
+check("tiny quantization can flip source q gate at mean tie",
+      q_gate(base)==(False,False) and q_gate(near)==(True,False))
+# The original directed feature of chosen source triad/h
+# changes discontinuously under gate switching. This is a
+# branch-choice effect; naive local Lipschitz calculus misses it.
+def rot_plus(v):return (v[1],v[2],v[0])
+def rot_minus(v):return (v[2],v[0],v[1])
+def source_self(v,h):return sum(aa*bb for aa,bb in zip(v,h))
+check("q-gate branch switch changes directed self consumer by O(1)",
+      source_self(rot_minus(base[0]),(0,1,0))==1 and
+      source_self(rot_plus(near[0]),(0,1,0))==0)
+
 print("X369_SOURCE_FOUR_GATES_SYMPY_PASS",len(checks),
       "grouped checks; strict_top2=",top2_certificates,
       "same_order=",top2_ordered)
