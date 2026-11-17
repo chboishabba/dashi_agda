@@ -225,3 +225,49 @@ donorOriginalLoadIsPaid b f s w x =
         (Cycle.cong (λ t → (Cut.FieldMaterialEnergyWeld.naturalInput w
               + Cut.FieldMaterialEnergyWeld.driverInput w) + t)
           (CanonicalDispersiveSameObject.donorMaterialModulationMatches x))
+
+
+-- A genuine cross-owner result: take the ORIGINAL #1521 material full
+-- balance with both stores returned, identify exactly the SAME original
+-- source/controller/load via the #1524 field weld, and then promote the
+-- independent natural access cap. Modulator cost remains a paid input.
+donorOriginalLoadBelowAdmittedNaturalCap :
+  (b : Weld.SelectedBoundary)
+  (f : Weld.FormalFieldToPort b)
+  (s : Weld.SignedSourceCycleWeld b f)
+  (w : Cut.FieldMaterialEnergyWeld b f s)
+  (x : CanonicalDispersiveSameObject b f s w) →
+  Bound._≤_
+    (Port.MidpointTwoPortWorkWindow.usefulWork
+      (Weld.FormalFieldToPort.portWindow f))
+    ((Cycle.AdmittedSourceCapCycle.independentlyAdmittedNaturalCap
+       (Weld.SignedSourceCycleWeld.cycleWithSourceCap s)
+       + Cycle.RepeatableSourceCycle.controllerWork
+          (Cycle.AdmittedSourceCapCycle.repeatable
+            (Weld.SignedSourceCycleWeld.cycleWithSourceCap s)))
+      + Cut.FieldMaterialEnergyWeld.modulationInput w)
+donorOriginalLoadBelowAdmittedNaturalCap b f s w x =
+  Cycle.≤-trans
+    (donorOriginalLoadIsPaid b f s w x)
+    (Bound.transportUpper
+      driverAndControllerMatch
+      (Cycle.+-monotoneRight (Cut.FieldMaterialEnergyWeld.modulationInput w)
+        (Cycle.+-monotoneRight (Cut.FieldMaterialEnergyWeld.driverInput w)
+          (Cut.netNaturalUnderExistingAdmittedCap b f s w))))
+  where
+    sourceCap : Nat
+    sourceCap =
+      Cycle.AdmittedSourceCapCycle.independentlyAdmittedNaturalCap
+        (Weld.SignedSourceCycleWeld.cycleWithSourceCap s)
+    driverAndControllerMatch :
+      ((sourceCap + Cut.FieldMaterialEnergyWeld.driverInput w)
+        + Cut.FieldMaterialEnergyWeld.modulationInput w)
+      ≡ ((sourceCap
+        + Cycle.RepeatableSourceCycle.controllerWork
+          (Cycle.AdmittedSourceCapCycle.repeatable
+            (Weld.SignedSourceCycleWeld.cycleWithSourceCap s)))
+         + Cut.FieldMaterialEnergyWeld.modulationInput w)
+    driverAndControllerMatch =
+      Cycle.cong
+        (λ z → (sourceCap + z) + Cut.FieldMaterialEnergyWeld.modulationInput w)
+        (Cut.FieldMaterialEnergyWeld.sameNetPoweredWork w)
