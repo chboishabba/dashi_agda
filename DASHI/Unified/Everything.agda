@@ -44,6 +44,7 @@ import DASHI.Reasoning.TrialecticThreeStrandBraidHistoryExact as BraidedHistoryT
 import DASHI.Unified.CarrierGrammar as CarrierGrammar
 import DASHI.Unified.ChemistrySupervoxel as ChemistrySupervoxel
 import DASHI.Unified.CrossScaleMatterPhysics as CrossScaleMatterPhysics
+import DASHI.Unified.E8ExceptionalActorTOECompatibilityExact as E8ActorTOE
 import DASHI.Unified.FormalObjectParents as FormalObjectParents
 import DASHI.Unified.InvariantSpine as Spine
 import DASHI.Unified.PNFHyperfabric as PNFHyperfabric
@@ -150,205 +151,17 @@ import DASHI.Physics.Foundations.Round5FullBoundary as Round5
         Round5.canonicalRound5FullBoundary
         "Every unified facade object exposes observation, projection, carrier/role vector, residual, proof posture, invariant strength, and the required formal parent projection bundle. The bundle includes modular-j, Hecke, Bott, Kolmogorov, category, quotient, lattice, and operator projections. Literal authority is lane-specific; every formal projection has externalPromotion = false. The cross-scale matter/physics parent records the atoms-to-stellar composition ladder as structural and receipt-gated, with quantitative solar-style counterfactual prediction still blocked. Round Five adds a fail-closed finite boundary for constants, dimension, atomic and nuclear structure, causal cosmological observation, and the GR-QFT emergence cutsets without promoting terminal unification."
 
-
 ------------------------------------------------------------------------
--- Joint Yang-Mills Balaban/R559 TOE receipt.
-------------------------------------------------------------------------
-
-import DASHI.Unified.BalabanR559TOEMaxCutExact as BalabanR559TOE
-import DASHI.Unified.BalabanR559TOEMaxCutValidation
-
-unifiedBalabanR559MaxCutReceipt :
-  BalabanR559TOE.BalabanR559TOEMaxCutReceipt
-unifiedBalabanR559MaxCutReceipt =
-  BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-unifiedBalabanR559Gate4UnresolvedCount : ℕ
-unifiedBalabanR559Gate4UnresolvedCount =
-  BalabanR559TOE.gate4UnresolvedCount
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-unifiedBalabanR559Gate4UnresolvedCountIs58 :
-  unifiedBalabanR559Gate4UnresolvedCount ≡ 58
-unifiedBalabanR559Gate4UnresolvedCountIs58 =
-  BalabanR559TOE.gate4UnresolvedCountIs58
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-unifiedBalabanR559Gate4DefinitionLevel : ProofLevel
-unifiedBalabanR559Gate4DefinitionLevel =
-  BalabanR559TOE.gate4DefinitionLevel
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-unifiedBalabanR559Gate4InhabitantsLevel : ProofLevel
-unifiedBalabanR559Gate4InhabitantsLevel =
-  BalabanR559TOE.gate4InhabitantsLevel
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-unifiedBalabanR559Gate4PaidReductionLedgerLevel : ProofLevel
-unifiedBalabanR559Gate4PaidReductionLedgerLevel =
-  BalabanR559TOE.gate4PaidReductionLevel
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-unifiedBalabanScaleTransferNonPromotion :
-  BalabanR559TOE.ScaleTransferPromotion → ⊥
-unifiedBalabanScaleTransferNonPromotion =
-  BalabanR559TOE.scaleTransferPromotionEliminator
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-
-------------------------------------------------------------------------
--- Current-master governance x fleet x Balaban/R559 x Ibrahim max-cut.
+-- Exceptional finite boundary reuse.
 ------------------------------------------------------------------------
 
-import DASHI.Unified.TOECurrentMaxCutGovernanceFleetExact as CurrentMaxCut
-import DASHI.Unified.TOECurrentMaxCutGovernanceFleetRegression
-
-unifiedCurrentMaxCutGovernanceFleetReceipt :
-  CurrentMaxCut.TOECurrentMaxCutGovernanceFleetReceipt
-unifiedCurrentMaxCutGovernanceFleetReceipt =
-  CurrentMaxCut.canonicalTOECurrentMaxCutGovernanceFleetReceipt
-
-unifiedCurrentFormalGapTarget : ℕ
-unifiedCurrentFormalGapTarget =
-  CurrentMaxCut.gate4FormalGapCount
-
-unifiedCurrentFormalGapTargetIs58 :
-  unifiedCurrentFormalGapTarget ≡ 58
-unifiedCurrentFormalGapTargetIs58 =
-  CurrentMaxCut.gate4FormalGapCountIs58
-
-unifiedCurrentFleetReportedFormalGapTarget : ℕ
-unifiedCurrentFleetReportedFormalGapTarget =
-  CurrentMaxCut.fleetReportedFormalGapCount
-
-unifiedCurrentFleetReportedFormalGapTargetIs58 :
-  unifiedCurrentFleetReportedFormalGapTarget ≡ 58
-unifiedCurrentFleetReportedFormalGapTargetIs58 =
-  CurrentMaxCut.fleetReportedFormalGapCountIs58
-
-
-unifiedCurrentFleetDischargedFibresExcluded :
-  CurrentMaxCut.dischargedFleetFibresExcluded ≡ true
-unifiedCurrentFleetDischargedFibresExcluded = refl
-
-unifiedCurrentFiniteRGStillDoesNotPromoteContinuum :
-  CurrentMaxCut.finiteRGCreatesContinuumPromotion ≡ false
-unifiedCurrentFiniteRGStillDoesNotPromoteContinuum =
-  CurrentMaxCut.finiteRGCreatesContinuumPromotionIsFalse
-
-unifiedCurrentCandidateLegalSourceStillDoesNotCreateAuthority :
-  CurrentMaxCut.candidateLegalSourceCreatesAuthority ≡ false
-unifiedCurrentCandidateLegalSourceStillDoesNotCreateAuthority =
-  CurrentMaxCut.candidateLegalSourceCreatesAuthorityIsFalse
-
-unifiedCurrentFormalGovernanceStillDoesNotCreatePoliticalLegitimacy :
-  CurrentMaxCut.formalGovernanceCreatesPoliticalLegitimacy ≡ false
-unifiedCurrentFormalGovernanceStillDoesNotCreatePoliticalLegitimacy =
-  CurrentMaxCut.formalGovernanceCreatesPoliticalLegitimacyIsFalse
-
-
-------------------------------------------------------------------------
--- Direct legal-governance semantic non-promotion at the TOE consumer.
--- The theorem owner remains TOECurrentMaxCutGovernanceFleetExact.
-------------------------------------------------------------------------
-
-unifiedCurrentLegalAuthorityDoesNotEstablishApplicability :
-  CurrentMaxCut.legalAuthorityCreatesApplicability ≡ false
-unifiedCurrentLegalAuthorityDoesNotEstablishApplicability =
-  CurrentMaxCut.legalAuthorityCreatesApplicabilityIsFalse
-
-
-
-unifiedCurrentSemanticAdmissionCannotCreateLegalAuthority :
-  CurrentMaxCut.SemanticAdmissionIsLegalSourceAuthority → ⊥
-unifiedCurrentSemanticAdmissionCannotCreateLegalAuthority =
-  CurrentMaxCut.semanticAdmissionAuthorityNonPromotion
-
-unifiedCurrentDocumentRoleCannotCreateLegalAuthority :
-  CurrentMaxCut.DocumentRoleIsLegalSourceAuthority → ⊥
-unifiedCurrentDocumentRoleCannotCreateLegalAuthority =
-  CurrentMaxCut.documentRoleAuthorityNonPromotion
-
-------------------------------------------------------------------------
--- Numeric equality is not same-object identification.
--- Reuse current master's existing theorem owner without a new carrier.
-------------------------------------------------------------------------
-
-unifiedCurrentFleet58CannotPromoteToGate4SameObject :
-  CurrentMaxCut.Fleet58IsGate4SameObject → ⊥
-unifiedCurrentFleet58CannotPromoteToGate4SameObject =
-  CurrentMaxCut.fleet58DoesNotBecomeGate4SameObject
-
-------------------------------------------------------------------------
--- Direct governed workflow and observer future-safety firewalls.
-------------------------------------------------------------------------
-
-unifiedCurrentTaskCompletionDoesNotCreateTruth :
-  CurrentMaxCut.TaskCompletionCreatesTruth → ⊥
-unifiedCurrentTaskCompletionDoesNotCreateTruth =
-  CurrentMaxCut.taskCompletionCannotCreateTruth
-
-unifiedCurrentAcceptedReviewDoesNotPayApplicability :
-  CurrentMaxCut.AcceptedStatusPaysApplicability → ⊥
-unifiedCurrentAcceptedReviewDoesNotPayApplicability =
-  CurrentMaxCut.acceptedReviewCannotPayApplicability
-
-unifiedCurrentCitationDoesNotRealiseLegalRule :
-  CurrentMaxCut.CitationAloneRealisesLegalRule → ⊥
-unifiedCurrentCitationDoesNotRealiseLegalRule =
-  CurrentMaxCut.citationCannotRealiseLegalRule
-
-unifiedCurrentStaticRefinementDoesNotCreateDynamicSafety :
-  CurrentMaxCut.StaticSeparationCreatesDynamicSafetyPermission → ⊥
-unifiedCurrentStaticRefinementDoesNotCreateDynamicSafety =
-  CurrentMaxCut.staticObserverSeparationStillDoesNotCreateDynamicSafety
-
-unifiedCurrentProvenanceDoesNotCreateTruth :
-  CurrentMaxCut.ProvenanceAxisCreatesTruthPermission → ⊥
-unifiedCurrentProvenanceDoesNotCreateTruth =
-  CurrentMaxCut.provenanceAxisStillDoesNotCreateTruth
-
-
-------------------------------------------------------------------------
--- Context-indexed 369 sheet/cube/appraisal-fibre Unified handoff.
-------------------------------------------------------------------------
-
-unifiedCurrent369ContextualFibreWeldReceipt :
-  CurrentMaxCut.TOE369ContextualFibreWeldReceipt
-unifiedCurrent369ContextualFibreWeldReceipt =
-  CurrentMaxCut.canonicalTOE369ContextualFibreWeldReceipt
-
-unified369Ternary27MonsterEmbeddingNotPromoted =
-  MaxCut369.toe27MonsterEmbeddingNotPromoted
-
-
-------------------------------------------------------------------------
--- E6 / F3^5 quadratic and E8 / E6 x A2 comparison max-cut.
--- Owner modules retain theorem authority.
-------------------------------------------------------------------------
-
-unifiedE6F3FiveQuadraticBoundary :
-  E6F3Five.E6F3FiveQuadraticBoundary
-unifiedE6F3FiveQuadraticBoundary =
-  E6F3Five.canonicalE6F3FiveQuadraticBoundary
-
-unifiedE6F3FivePartition =
-  E6F3Five.fiveTritQuadraticPartition
-
-unifiedE6F3FiveCardinalityDoesNotCreateRecognition :
-  E6F3Five.F3FiveCardinalityCreatesE6RootRecognition → ⊥
-unifiedE6F3FiveCardinalityDoesNotCreateRecognition =
-  E6F3Five.f3FiveCardinalityDoesNotCreateE6RootRecognition
-
-unifiedE8E6A2RootArithmeticBoundary :
-  E8E6A2.E8E6A2RootArithmeticBoundary
-unifiedE8E6A2RootArithmeticBoundary =
-  E8E6A2.canonicalE8E6A2RootArithmeticBoundary
-
-unifiedE8RootArithmeticAsE6PlusA2Orbits =
-  E8E6A2.eEightRootCountAsE6PlusA2Orbits
-
-unifiedE8E6A2ArithmeticDoesNotCreateF3FiveRecognition :
-  E8E6A2.E6A2ArithmeticCreatesF3FiveE8Recognition → ⊥
-unifiedE8E6A2ArithmeticDoesNotCreateF3FiveRecognition =
-  E8E6A2.e6A2ArithmeticDoesNotCreateF3FiveE8Recognition
+open E8ActorTOE public using
+  ( toeE8RootEnumerationPromotionBoundary
+  ; toeE8UpstreamCompleteReceiptPromotionAudit
+  ; toeE8UpstreamPromotionStillFalse
+  ; toeMonster53ActorFrontier
+  ; toeArithmetic143DoesNotCreateSuzukiSubmodule
+  ; toeCentralC3ResidualDoesNotCreateNormalizerResidual
+  ; toeCarrier53DoesNotCreateNormalizerAction
+  ; toeExceptional53ArithmeticDoesNotCreateMonsterIntertwiner
+  )
