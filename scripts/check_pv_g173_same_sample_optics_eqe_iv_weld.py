@@ -20,11 +20,15 @@ supplied per-channel converter efficiency and net auxiliary cost is applied.
 import argparse
 import csv
 import json
+import hashlib
 from pathlib import Path
 
 import numpy as np
 
 H=6.62607015e-34; C=299792458.; Q=1.602176634e-19
+
+def sha256_file(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 def table(path):
     with open(path,encoding="utf-8-sig",newline="") as f:
@@ -184,6 +188,9 @@ def selftest():
 def main():
     p=argparse.ArgumentParser()
     p.add_argument("--selftest",action="store_true")
+    p.add_argument("--sample-id",type=str)
+    p.add_argument("--temperature-k",type=float)
+    p.add_argument("--source-provenance",type=str)
     p.add_argument("--spectrum",type=Path);p.add_argument("--optics",type=Path)
     p.add_argument("--eqe",type=Path);p.add_argument("--iv",type=Path,nargs="+")
     p.add_argument("--converter-efficiency",type=float,nargs="+")
@@ -194,12 +201,22 @@ def main():
     a=p.parse_args()
     if a.selftest:out=selftest()
     else:
-        if not all([a.spectrum,a.optics,a.eqe,a.iv,a.converter_efficiency]):
-            p.error("real-data evaluation requires all 5 input families")
+        if not all([a.spectrum,a.optics,a.eqe,a.iv,a.converter_efficiency,
+                    a.sample_id,a.temperature_k,a.source_provenance]):
+            p.error("real-data evaluation requires all 5 input families plus sample ID, temperature and source provenance")
+        if a.temperature_k<=0 or not np.isfinite(a.temperature_k):
+            p.error("temperature must be finite and >0 K")
         _,s=table(a.spectrum);_,o=table(a.optics);_,e=table(a.eqe)
         iv=[table(x)[1] for x in a.iv]
         out=weld(s,o,e,iv,a.converter_efficiency,
                  a.auxiliary_w_m2,a.drive_w_m2,a.recovered_w_m2)
+        all_files=[a.spectrum,a.optics,a.eqe]+a.iv
+        out['declared_provenance']={
+            'sample_id':a.sample_id,'temperature_K':a.temperature_k,
+            'source_document':a.source_provenance,
+            'input_sha256':{str(path):sha256_file(path) for path in all_files},
+            'data_authenticity_independently_verified':False}
+
     if a.output:a.output.write_text(json.dumps(out,indent=2)+"\n")
     print(json.dumps(out,indent=2))
 if __name__=="__main__":main()
