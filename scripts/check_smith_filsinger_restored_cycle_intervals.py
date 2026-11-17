@@ -108,15 +108,41 @@ def analyze(work, independent):
     }
 
 
+# The high-assurance CLI must re-open original raw port CSV/certificate files.
+# Recomputing net from five *claimed* intervals does not verify those
+# intervals came from the original signed V/I source files.
+UPSTREAM_KEYS = (
+    'original_id', 'clock_id', 'integration_remainder_certificate_required',
+    'signed_balance_from_named_port_role_map', 'conditional_port_work',
+    'net_environmental_work', 'net_controller_work', 'useful_load_work',
+    'unassigned_loss_or_storage_change',
+)
+
+
+def analyze_from_original_files(work, independent, vi_manifest, vi_root):
+    from check_smith_filsinger_signed_vi_intervals import calculate
+    rebuilt = calculate(vi_manifest, vi_root)
+    for key in UPSTREAM_KEYS:
+        if work.get(key) != rebuilt.get(key):
+            raise ValueError('work receipt diverges from original raw V/I files: ' + key)
+    return analyze(rebuilt, independent)
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('work_receipt', type=Path)
     p.add_argument('independent_loss_storage_receipt', type=Path)
     p.add_argument('--out', type=Path)
+    p.add_argument('--vi-manifest', type=Path, required=True,
+                   help='Original same-apparatus signed V/I acquisition manifest')
+    p.add_argument('--vi-root', type=Path, required=True,
+                   help='Directory containing the five raw CSVs and integration-error certificates')
     args = p.parse_args()
     try:
-        result = analyze(json.loads(args.work_receipt.read_text()),
-                         json.loads(args.independent_loss_storage_receipt.read_text()))
+        result = analyze_from_original_files(
+            json.loads(args.work_receipt.read_text()),
+            json.loads(args.independent_loss_storage_receipt.read_text()),
+            json.loads(args.vi_manifest.read_text()), args.vi_root)
     except (OSError, ValueError, KeyError, TypeError, ZeroDivisionError) as e:
         print(json.dumps({'error': str(e), 'f15_closed': False}))
         return 2
