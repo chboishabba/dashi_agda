@@ -460,9 +460,13 @@ yangMillsBalabanClayPromotionStillFalse =
   BalabanRGTOE.balabanRGClayPromotionStillFalse
 
 
+yangMillsGoal1ParetoZKPFrame : YMMaxCut.Goal1ParetoTOEZKPFrame
+yangMillsGoal1ParetoZKPFrame = YMMaxCut.canonicalGoal1ParetoTOEZKPFrame
+
+
 ------------------------------------------------------------------------
 -- Cross-domain governance facade.
--- This facade exposes legal-governance non-promotion beside physics.
+-- This exposes governance non-promotion beside physics.
 -- It does not turn governance evidence into physics or legal authority.
 ------------------------------------------------------------------------
 
@@ -502,20 +506,20 @@ governanceSensibLawDomainTransportReceipt =
   GovernanceTOE.governanceDomainTransportReceipt
 
 governanceSensibLawRepresentationEqualityDoesNotCreateLegalAuthority :
-  Domain.representationEqualityCreatesLegalAuthority
+  Domain.DomainTransportReceipt.representationEqualityCreatesLegalAuthority
     governanceSensibLawDomainTransportReceipt
   ≡ false
 governanceSensibLawRepresentationEqualityDoesNotCreateLegalAuthority =
   GovernanceTOE.governanceRepresentationEqualityDoesNotCreateLegalAuthority
 
 governanceSensibLawVendorIdentityDoesNotCreateAuthority :
-  Domain.vendorIdentityCreatesAuthority governanceSensibLawDomainTransportReceipt
+  Domain.DomainTransportReceipt.vendorIdentityCreatesAuthority governanceSensibLawDomainTransportReceipt
   ≡ false
 governanceSensibLawVendorIdentityDoesNotCreateAuthority =
   GovernanceTOE.governanceVendorIdentityDoesNotCreateAuthority
 
 governanceSensibLawTargetDomainNeedsOwnAuthorityWitness :
-  Domain.targetDomainNeedsOwnAuthorityWitness governanceSensibLawDomainTransportReceipt
+  Domain.DomainTransportReceipt.targetDomainNeedsOwnAuthorityWitness governanceSensibLawDomainTransportReceipt
   ≡ true
 governanceSensibLawTargetDomainNeedsOwnAuthorityWitness =
   GovernanceTOE.governanceTargetDomainNeedsOwnAuthorityWitness

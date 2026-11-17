@@ -11,6 +11,7 @@ module DASHI.Unified.SensibLawGovernanceTOEValidation where
 
 open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥)
 
 import DASHI.Unified.SensibLawGovernanceTOEExact as Governance
 import DASHI.EverythingTOESymmetryResolved369 as TOE
@@ -18,6 +19,10 @@ import DASHI.Unifier as Unifier
 import DASHI.Unified.Physics as UnifiedPhysics
 import DASHI.Core.AuthorityNonPromotionCore as Authority
 import DASHI.Governance.DomainPermeabilityAuthorityTransport as Domain
+import DASHI.Law.SensibLawAgdaFirstLegalRuntimeEverything as LegalRuntime
+import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Snowball
+import DASHI.Interop.SensibLawSnowballAttributionLineageAdapterExact as SnowballLineage
+import DASHI.Law.SensibLawParetoProofDirectedCorpusSearchEverything as ParetoSearch
 
 ------------------------------------------------------------------------
 -- Root agreement.
@@ -62,14 +67,14 @@ toeAllAuthorityStillClosed =
   TOE.toeSensibLawSemanticAllAuthorityStillClosed
 
 toeRepresentationEqualityDoesNotCreateLegalAuthority :
-  Domain.representationEqualityCreatesLegalAuthority
+  Domain.DomainTransportReceipt.representationEqualityCreatesLegalAuthority
     TOE.toeSensibLawDomainTransportReceipt
   ≡ false
 toeRepresentationEqualityDoesNotCreateLegalAuthority =
   TOE.toeSensibLawRepresentationEqualityDoesNotCreateLegalAuthority
 
 toeTargetDomainNeedsOwnAuthorityWitness :
-  Domain.targetDomainNeedsOwnAuthorityWitness
+  Domain.DomainTransportReceipt.targetDomainNeedsOwnAuthorityWitness
     TOE.toeSensibLawDomainTransportReceipt
   ≡ true
 toeTargetDomainNeedsOwnAuthorityWitness =
@@ -118,7 +123,7 @@ unifierAllAuthorityStillClosed =
   Unifier.unifierSensibLawSemanticAllAuthorityStillClosed
 
 unifierVendorIdentityDoesNotCreateAuthority :
-  Domain.vendorIdentityCreatesAuthority
+  Domain.DomainTransportReceipt.vendorIdentityCreatesAuthority
     Unifier.unifierSensibLawDomainTransportReceipt
   ≡ false
 unifierVendorIdentityDoesNotCreateAuthority =
@@ -167,7 +172,7 @@ unifiedAllAuthorityStillClosed =
   UnifiedPhysics.governanceSensibLawSemanticAllAuthorityStillClosed
 
 unifiedRepresentationEqualityDoesNotCreateLegalAuthority :
-  Domain.representationEqualityCreatesLegalAuthority
+  Domain.DomainTransportReceipt.representationEqualityCreatesLegalAuthority
     UnifiedPhysics.governanceSensibLawDomainTransportReceipt
   ≡ false
 unifiedRepresentationEqualityDoesNotCreateLegalAuthority =
@@ -185,14 +190,45 @@ semanticPromotionCannotGrantLegalAuthority =
   Governance.governanceSemanticLegalAuthorityStillClosed
 
 runtimeTransportCannotPromoteTruth :
-  Governance.governanceParserCandidateCannotBecomeTruthByTransport
-  ≡ Governance.governanceParserCandidateCannotBecomeTruthByTransport
+  LegalRuntime.AgdaFirstLegalRuntimeContract.parserCandidateMayBecomeTruthByTransport
+    Governance.governanceLegalRuntimeContract
+  ≡ false
 runtimeTransportCannotPromoteTruth =
-  refl
+  Governance.governanceParserCandidateCannotBecomeTruthByTransport
 
 caseManagementReuseRequiresTargetAuthority :
-  Domain.targetDomainNeedsOwnAuthorityWitness
+  Domain.DomainTransportReceipt.targetDomainNeedsOwnAuthorityWitness
     Governance.governanceDomainTransportReceipt
   ≡ true
 caseManagementReuseRequiresTargetAuthority =
   Governance.governanceTargetDomainNeedsOwnAuthorityWitness
+
+
+snowballCitationDoesNotCreateAuthority :
+  Snowball.citationMayCreateAuthority
+    Governance.governanceAttributionSnowballBoundary
+  ≡ false
+snowballCitationDoesNotCreateAuthority =
+  Governance.governanceSnowballCitationDoesNotCreateAuthority
+
+snowballCitationDoesNotCreateLegalAuthority :
+  SnowballLineage.SensibLawSnowballLineageBoundary.citationCreatesLegalAuthority
+    Governance.governanceSensibLawSnowballLineageBoundary
+  ≡ false
+snowballCitationDoesNotCreateLegalAuthority =
+  Governance.governanceSnowballCitationDoesNotCreateLegalAuthority
+
+paretoDirectiveIsNotLegalAuthority :
+  ParetoSearch.SearchDirectiveIsLegalAuthority → ⊥
+paretoDirectiveIsNotLegalAuthority =
+  Governance.governanceParetoDirectiveIsNotLegalAuthority
+
+paretoFrontierDoesNotPrejudgeRetrieval :
+  ParetoSearch.FrontierCertificateMakesRetrievedSourceTrue → ⊥
+paretoFrontierDoesNotPrejudgeRetrieval =
+  Governance.governanceParetoFrontierDoesNotPrejudgeRetrieval
+
+paretoFeedbackClosureStillNeedsActionAuthority :
+  ParetoSearch.FeedbackClosureAutomaticallyAuthorisesAction → ⊥
+paretoFeedbackClosureStillNeedsActionAuthority =
+  Governance.governanceParetoFeedbackClosureStillNeedsActionAuthority

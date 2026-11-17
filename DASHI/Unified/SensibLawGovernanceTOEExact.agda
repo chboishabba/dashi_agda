@@ -28,6 +28,9 @@ import DASHI.Interop.SensibLawSemanticPromotionPolicy as Semantic
 import DASHI.Law.SensibLawAgdaFirstLegalRuntimeEverything as LegalRuntime
 import DASHI.Law.SensibLawITIRParityEverything as Parity
 import DASHI.Governance.DomainPermeabilityAuthorityTransport as Domain
+import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Snowball
+import DASHI.Interop.SensibLawSnowballAttributionLineageAdapterExact as SnowballLineage
+import DASHI.Law.SensibLawParetoProofDirectedCorpusSearchEverything as ParetoSearch
 
 ------------------------------------------------------------------------
 -- Reused canonical owners.
@@ -72,43 +75,43 @@ governanceLegalRuntimeContract =
   LegalRuntime.canonicalAgdaFirstLegalRuntimeContract
 
 governanceRuntimeCannotInventLegalSemantics :
-  LegalRuntime.runtimeMayInventMissingFormalLegalSemantics
+  LegalRuntime.AgdaFirstLegalRuntimeContract.runtimeMayInventMissingFormalLegalSemantics
     governanceLegalRuntimeContract
   ≡ false
 governanceRuntimeCannotInventLegalSemantics =
-  LegalRuntime.runtimeMayInventMissingFormalLegalSemanticsIsFalse
+  LegalRuntime.AgdaFirstLegalRuntimeContract.runtimeMayInventMissingFormalLegalSemanticsIsFalse
     governanceLegalRuntimeContract
 
 governanceParserCandidateCannotBecomeTruthByTransport :
-  LegalRuntime.parserCandidateMayBecomeTruthByTransport
+  LegalRuntime.AgdaFirstLegalRuntimeContract.parserCandidateMayBecomeTruthByTransport
     governanceLegalRuntimeContract
   ≡ false
 governanceParserCandidateCannotBecomeTruthByTransport =
-  LegalRuntime.parserCandidateMayBecomeTruthByTransportIsFalse
+  LegalRuntime.AgdaFirstLegalRuntimeContract.parserCandidateMayBecomeTruthByTransportIsFalse
     governanceLegalRuntimeContract
 
 governanceSourceFollowCannotBecomeAuthorityByTransport :
-  LegalRuntime.sourceFollowMayBecomeAuthorityByTransport
+  LegalRuntime.AgdaFirstLegalRuntimeContract.sourceFollowMayBecomeAuthorityByTransport
     governanceLegalRuntimeContract
   ≡ false
 governanceSourceFollowCannotBecomeAuthorityByTransport =
-  LegalRuntime.sourceFollowMayBecomeAuthorityByTransportIsFalse
+  LegalRuntime.AgdaFirstLegalRuntimeContract.sourceFollowMayBecomeAuthorityByTransportIsFalse
     governanceLegalRuntimeContract
 
 governanceTypedMeetCannotBecomeViolationByTransport :
-  LegalRuntime.typedMeetMayBecomeViolationByTransport
+  LegalRuntime.AgdaFirstLegalRuntimeContract.typedMeetMayBecomeViolationByTransport
     governanceLegalRuntimeContract
   ≡ false
 governanceTypedMeetCannotBecomeViolationByTransport =
-  LegalRuntime.typedMeetMayBecomeViolationByTransportIsFalse
+  LegalRuntime.AgdaFirstLegalRuntimeContract.typedMeetMayBecomeViolationByTransportIsFalse
     governanceLegalRuntimeContract
 
 governanceElementPaymentCannotBecomeLiabilityByTransport :
-  LegalRuntime.wrongTypeElementPaymentMayBecomeLiabilityByTransport
+  LegalRuntime.AgdaFirstLegalRuntimeContract.wrongTypeElementPaymentMayBecomeLiabilityByTransport
     governanceLegalRuntimeContract
   ≡ false
 governanceElementPaymentCannotBecomeLiabilityByTransport =
-  LegalRuntime.wrongTypeElementPaymentMayBecomeLiabilityByTransportIsFalse
+  LegalRuntime.AgdaFirstLegalRuntimeContract.wrongTypeElementPaymentMayBecomeLiabilityByTransportIsFalse
     governanceLegalRuntimeContract
 
 governanceITIRParityLegalRuntimeContract :
@@ -135,31 +138,31 @@ governanceDomainTransportReceipt =
   Domain.canonicalDomainTransportReceipt
 
 governanceSameTechnicalGrammarDoesNotImplySameMandate :
-  Domain.sameTechnicalGrammarImpliesSameMandate governanceDomainTransportReceipt
+  Domain.DomainTransportReceipt.sameTechnicalGrammarImpliesSameMandate governanceDomainTransportReceipt
   ≡ false
 governanceSameTechnicalGrammarDoesNotImplySameMandate =
   refl
 
 governanceTargetDomainNeedsOwnAuthorityWitness :
-  Domain.targetDomainNeedsOwnAuthorityWitness governanceDomainTransportReceipt
+  Domain.DomainTransportReceipt.targetDomainNeedsOwnAuthorityWitness governanceDomainTransportReceipt
   ≡ true
 governanceTargetDomainNeedsOwnAuthorityWitness =
   refl
 
 governanceRepresentationEqualityDoesNotCreateLegalAuthority :
-  Domain.representationEqualityCreatesLegalAuthority governanceDomainTransportReceipt
+  Domain.DomainTransportReceipt.representationEqualityCreatesLegalAuthority governanceDomainTransportReceipt
   ≡ false
 governanceRepresentationEqualityDoesNotCreateLegalAuthority =
   refl
 
 governanceVendorIdentityDoesNotCreateAuthority :
-  Domain.vendorIdentityCreatesAuthority governanceDomainTransportReceipt
+  Domain.DomainTransportReceipt.vendorIdentityCreatesAuthority governanceDomainTransportReceipt
   ≡ false
 governanceVendorIdentityDoesNotCreateAuthority =
   refl
 
 governanceDomainPermeabilityRequiresReview :
-  Domain.domainPermeabilityRequiresGovernanceReview governanceDomainTransportReceipt
+  Domain.DomainTransportReceipt.domainPermeabilityRequiresGovernanceReview governanceDomainTransportReceipt
   ≡ true
 governanceDomainPermeabilityRequiresReview =
   refl
@@ -168,13 +171,71 @@ governanceSameMachineryDoesNotTransportAuthority :
   (Domain.represent Domain.exampleMachinery Domain.sourceDomain Domain.subject
     ≡
    Domain.represent Domain.exampleMachinery Domain.targetDomain Domain.subject →
-   Domain.DomainAuthority.authorised
+   Domain.authorised
      Domain.exampleAuthority Domain.sourceDomain Domain.subject →
-   Domain.DomainAuthority.authorised
+   Domain.authorised
      Domain.exampleAuthority Domain.targetDomain Domain.subject) →
   ⊥
 governanceSameMachineryDoesNotTransportAuthority =
   Domain.sameMachineryDoesNotTransportAuthority
+
+------------------------------------------------------------------------
+-- Pareto / snowball governance reuse.
+--
+-- These owners are already used across SensibLaw and Ibrahim snowball lanes.
+-- This normalization keeps attribution and legal authority separate.
+------------------------------------------------------------------------
+
+governanceAttributionSnowballBoundary :
+  Snowball.AttributionSnowballBoundary
+governanceAttributionSnowballBoundary =
+  Snowball.canonicalAttributionSnowballBoundary
+
+governanceSnowballCitationDoesNotPromoteProof :
+  Snowball.citationMayPromoteProof governanceAttributionSnowballBoundary
+  ≡ false
+governanceSnowballCitationDoesNotPromoteProof =
+  refl
+
+governanceSnowballCitationDoesNotCreateAuthority :
+  Snowball.citationMayCreateAuthority governanceAttributionSnowballBoundary
+  ≡ false
+governanceSnowballCitationDoesNotCreateAuthority =
+  refl
+
+governanceSensibLawSnowballLineageBoundary :
+  SnowballLineage.SensibLawSnowballLineageBoundary
+governanceSensibLawSnowballLineageBoundary =
+  SnowballLineage.canonicalSensibLawSnowballLineageBoundary
+
+governanceSnowballCitationDoesNotCreateLegalAuthority :
+  SnowballLineage.SensibLawSnowballLineageBoundary.citationCreatesLegalAuthority
+    governanceSensibLawSnowballLineageBoundary
+  ≡ false
+governanceSnowballCitationDoesNotCreateLegalAuthority =
+  refl
+
+governanceSnowballSameSourceIdentityDoesNotDetermineClaimStage :
+  SnowballLineage.SensibLawSnowballLineageBoundary.sameSourceIdentityDeterminesClaimStage
+    governanceSensibLawSnowballLineageBoundary
+  ≡ false
+governanceSnowballSameSourceIdentityDoesNotDetermineClaimStage =
+  refl
+
+governanceParetoDirectiveIsNotLegalAuthority :
+  ParetoSearch.SearchDirectiveIsLegalAuthority → ⊥
+governanceParetoDirectiveIsNotLegalAuthority =
+  ParetoSearch.directiveIsNotAuthority
+
+governanceParetoFrontierDoesNotPrejudgeRetrieval :
+  ParetoSearch.FrontierCertificateMakesRetrievedSourceTrue → ⊥
+governanceParetoFrontierDoesNotPrejudgeRetrieval =
+  ParetoSearch.frontierCertificateDoesNotPrejudgeRetrieval
+
+governanceParetoFeedbackClosureStillNeedsActionAuthority :
+  ParetoSearch.FeedbackClosureAutomaticallyAuthorisesAction → ⊥
+governanceParetoFeedbackClosureStillNeedsActionAuthority =
+  ParetoSearch.feedbackClosureStillNeedsActionAuthority
 
 ------------------------------------------------------------------------
 -- ZKP O/R/C/S/L/P/G/F control frame.
@@ -207,6 +268,14 @@ record SensibLawGovernanceTOEZKPFrame : Set where
     invariantCaseManagementReuseDoesNotTransportAuthorityIsTrue :
       invariantCaseManagementReuseDoesNotTransportAuthority ≡ true
 
+    invariantSnowballCitationDoesNotCreateAuthority : Bool
+    invariantSnowballCitationDoesNotCreateAuthorityIsTrue :
+      invariantSnowballCitationDoesNotCreateAuthority ≡ true
+
+    invariantParetoSchedulingDoesNotCreateLegalAuthority : Bool
+    invariantParetoSchedulingDoesNotCreateLegalAuthorityIsTrue :
+      invariantParetoSchedulingDoesNotCreateLegalAuthority ≡ true
+
     postconditionTOENormalizationOnly : Bool
     postconditionTOENormalizationOnlyIsTrue :
       postconditionTOENormalizationOnly ≡ true
@@ -218,7 +287,7 @@ canonicalSensibLawGovernanceTOEZKPFrame =
     { O-objective =
         "Normalize existing SensibLaw, legal-runtime, parity, and authority non-promotion proofs into the DASHI TOE graph."
     ; R-reuse =
-        "Reuse AuthorityNonPromotionCore, AuthorityBoundaryCore, SensibLawSemanticPromotionPolicy, SensibLawAgdaFirstLegalRuntimeEverything, SensibLawITIRParityEverything, and DomainPermeabilityAuthorityTransport."
+        "Reuse AuthorityNonPromotionCore, AuthorityBoundaryCore, SensibLawSemanticPromotionPolicy, SensibLawAgdaFirstLegalRuntimeEverything, SensibLawITIRParityEverything, DomainPermeabilityAuthorityTransport, SnowballAttributionProvenanceInvariantExact, SensibLawSnowballAttributionLineageAdapterExact, and SensibLawParetoProofDirectedCorpusSearchEverything."
     ; C-construction =
         "Add only a theorem-thin normalization owner and facade agreement. Do not duplicate semantic or legal proofs."
     ; S-safety =
@@ -239,6 +308,10 @@ canonicalSensibLawGovernanceTOEZKPFrame =
     ; invariantRuntimeTransportDoesNotCreateLegalTruthIsTrue = refl
     ; invariantCaseManagementReuseDoesNotTransportAuthority = true
     ; invariantCaseManagementReuseDoesNotTransportAuthorityIsTrue = refl
+    ; invariantSnowballCitationDoesNotCreateAuthority = true
+    ; invariantSnowballCitationDoesNotCreateAuthorityIsTrue = refl
+    ; invariantParetoSchedulingDoesNotCreateLegalAuthority = true
+    ; invariantParetoSchedulingDoesNotCreateLegalAuthorityIsTrue = refl
     ; postconditionTOENormalizationOnly = true
     ; postconditionTOENormalizationOnlyIsTrue = refl
     }
