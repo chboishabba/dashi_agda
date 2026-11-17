@@ -196,7 +196,7 @@ rawWeightedScoreFactorization s f r ws wf wr =
     (λ s f r ws wf wr →
       ((((ws :* s) :+ (wf :* f)) :+ (wr :* r))
       := (((((ws :- wr) :* s) :+ ((wf :- wr) :* f))
-            :+ (wr :* ((s :+ f) :+ r)))))
+            :+ (wr :* ((s :+ f) :+ r))))))
     refl s f r ws wf wr
 
 weightedScoreFactorsThroughTwoPlusTotal :
@@ -305,7 +305,7 @@ rawTwoChannelQuantizationError ws wf wr total s f eD es ef =
           :+ (wr :* total)))
        := (((((ws :- wr) :* es)
           :+ ((wf :- wr) :* ef))
-          :+ (wr :* eD))))
+          :+ (wr :* eD)))))
     refl ws wf wr total s f eD es ef
 
 -- Equal exact scores do not establish the same routed experts if
