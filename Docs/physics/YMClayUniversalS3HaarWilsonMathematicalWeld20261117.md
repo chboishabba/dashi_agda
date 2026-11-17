@@ -199,3 +199,36 @@ cutoffs is an additional theorem, and is not implied by normalization.
 
 None of the above claims an Agda kernel receipt, transitive
 postulate-freedom, continuum interacting 4D YM or Clay mass gap.
+
+
+## Final independent local receipts, 17 November 2026
+
+All checks below were actually executed in the working container, rather
+than inferred from the source text. The scripts are also committed.
+
+- Arbitrary-degree rational Pochhammer/Fejer/Chebyshev/circle evaluator
+  through degree 11: **4,510/4,510** exact checks.
+- Primitive character cancellation in exact cyclotomic quotients,
+  Q[z]/(z^N+1), all dyadic orders through degree 11: **496/496**
+  checks. The checker computes quotient coefficients explicitly.
+- O4 pairing-tensor exact sphere moments and nontrivial rational
+  orthogonal rotation: **1,212/1,212** checks.
+- Finite Fourier/Cauchy rational and symbolic schedule: **1,510/1,510**
+  checks.
+- Literal original L=1 cylinder: 4 links and 6 positive plaquettes,
+  115 monomials in the deficit, 4,028 in its square,
+  H[D]=9/2 and H[D²]=187/8.
+- Literal original L=2 cylinder: 64 links and 96 positive plaquettes,
+  6,145 deficit monomials, H[D]=96.
+
+Executable repository paths:
+scripts/check_ym_universal_cubature_producer_20261117.py;
+scripts/check_ym_su2_o4_invariance_20261117.py;
+scripts/check_ym_effective_cauchy_general_20261117.py;
+scripts/check_ym_original_wilson_polynomial_cylinder_20261117.py.
+
+All are wired to scripts/check_ym_p0_real_carrier_local.sh.
+The all-degree mathematical proof uses finite geometric character
+identities; sampled symbolic runs do not establish Agda kernel
+acceptance. No pinned Agda/Nix toolchain was available. The original
+typed YM.REAL/Bishop/SUN/Haar/Wilson source gates remain OPEN.
