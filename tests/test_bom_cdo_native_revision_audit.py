@@ -131,6 +131,20 @@ class NativeTest(unittest.TestCase):
             self.assertFalse(result['before2025_target_numeric_match_only'])
             self.assertFalse(result['original_archive_coverage_verified'])
 
+    def test_1865_sydney_reported_zero_addition_is_source_derived(self):
+        base='IDCJAC0010,66062,1865,6,24,18.7,1,Y\n'
+        added='IDCJAC0010,66062,1865,6,25,0.0,1,Y\n'
+        result=self.run_native(base,base+added)
+        self.assertTrue(result['sydney_1865_06_25_zero_max_added_numeric_fingerprint'])
+        self.assertEqual(result['counts'],{'calendar_row_added':1})
+        self.assertFalse(result['author_target_counts_independently_reproduced'])
+
+    def test_other_zero_day_cannot_fake_1865_fingerprint(self):
+        base='IDCJAC0010,66062,1865,6,24,18.7,1,Y\n'
+        added='IDCJAC0010,66062,1865,6,26,0.0,1,Y\n'
+        result=self.run_native(base,base+added)
+        self.assertFalse(result['sydney_1865_06_25_zero_max_added_numeric_fingerprint'])
+
     def test_accumulation_change(self):
         self.assertEqual(self.run_native(line(),line(accum='2'))['counts'],{'accumulation_changed':1})
 
