@@ -1,0 +1,131 @@
+module DASHI.Chemistry.LineageAttributionEvidenceMaxCutValidation where
+
+open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Product using (_×_; _,_)
+
+import DASHI.Chemistry.LineageAttributionEvidenceSourceAtlasExact as Sources
+import DASHI.Chemistry.LineageAttributionEvidencePaymentExact as Payment
+import DASHI.Chemistry.AttributedGoldReactionReplayExact as Replay
+import DASHI.Chemistry.LineageQuantitativeCalibrationLedgerExact as Calibration
+import DASHI.Chemistry.LineageAttributionAcquisitionFrontierExact as Pareto
+import DASHI.Chemistry.LineageAcquiredPrimaryEvidenceExact as AcquiredSources
+import DASHI.Chemistry.LineageAcquiredQuantitativePaymentsExact as Acquired
+import DASHI.Chemistry.LineageEvidenceAcquisitionStatusExact as Status
+import DASHI.Biology.KitzerowAttributionEvidenceLineageExact as KitLineage
+import DASHI.Biology.KitzerowAttributionAcquisitionStatusExact as KitStatus
+import DASHI.Biology.KitzerowAttributionProvenanceSOTAExact as KitSOTA
+
+sourceAtlasDoesNotCreateAuthority :
+  Sources.atlasCreatesAuthority Sources.canonicalLineageCalibrationSourceAtlas ≡ false
+sourceAtlasDoesNotCreateAuthority = refl
+
+acquiredSourceAtlasDoesNotCreateAuthority :
+  AcquiredSources.atlasCreatesAuthority AcquiredSources.canonicalAcquiredPrimarySourceAtlas ≡ false
+acquiredSourceAtlasDoesNotCreateAuthority = refl
+
+externalAndDASHISynthesisRemainDistinct :
+  Payment.externalResultEqualsDASHISynthesis Payment.canonicalLineageAttributionBoundary ≡ false
+  × Payment.dashiCompositionTransfersToSource Payment.canonicalLineageAttributionBoundary ≡ false
+externalAndDASHISynthesisRemainDistinct = refl , refl
+
+citationDoesNotPromoteCalibration :
+  Payment.citationAlonePaysCalibration Payment.canonicalLineageAttributionBoundary ≡ false
+citationDoesNotPromoteCalibration = refl
+
+primarySecondaryAndDatabaseRolesStayTyped :
+  Payment.sourceRoleCollapsed Payment.canonicalLineageAttributionBoundary ≡ false
+primarySecondaryAndDatabaseRolesStayTyped = refl
+
+unpaidCoordinatesRemainUnpaid :
+  Payment.missingCoordinatePromotedByNearbyCitation Payment.canonicalLineageAttributionBoundary ≡ false
+unpaidCoordinatesRemainUnpaid = refl
+
+attributedReplayKeepsExternalAndDASHIOwnershipSeparate :
+  Replay.sourceOwnsReplayComposition Replay.canonicalAttributedGoldReplayBoundary ≡ false
+  × Replay.replayCompositionErasesSourceIdentity Replay.canonicalAttributedGoldReplayBoundary ≡ false
+attributedReplayKeepsExternalAndDASHIOwnershipSeparate = refl , refl
+
+numericPromotionNeedsExactLocatorAndContext :
+  Calibration.numberWithoutExactLocatorPromoted Calibration.canonicalQuantitativeCalibrationBoundary ≡ false
+  × Calibration.numberWithoutContextPromoted Calibration.canonicalQuantitativeCalibrationBoundary ≡ false
+numericPromotionNeedsExactLocatorAndContext = refl , refl
+
+unpaidNumericCellsAreNotZeroes :
+  Calibration.unpaidCoordinateInterpretedAsZero Calibration.canonicalQuantitativeCalibrationBoundary ≡ false
+unpaidNumericCellsAreNotZeroes = refl
+
+partialAcquiredAtomMapStaysPartial :
+  Acquired.partialAtomMapPromotedToCompleteAtomMap Acquired.canonicalAcquiredEvidenceBoundary ≡ false
+partialAcquiredAtomMapStaysPartial = refl
+
+inVitroKineticsDoNotBecomeInVivoFlux :
+  Acquired.inVitroKineticsPromotedToInVivoFlux Acquired.canonicalAcquiredEvidenceBoundary ≡ false
+inVitroKineticsDoNotBecomeInVivoFlux = refl
+
+pbCaTargetPaymentDoesNotBecomeUniversal :
+  Acquired.oneTargetPbCaResultPromotedToUniversalSubstitution Acquired.canonicalAcquiredEvidenceBoundary ≡ false
+pbCaTargetPaymentDoesNotBecomeUniversal = refl
+
+siliconBiocatalysisDoesNotProveSiliconLife :
+  Acquired.biologicalCSiBondFormationProvesSiliconLifeViability Acquired.canonicalAcquiredEvidenceBoundary ≡ false
+siliconBiocatalysisDoesNotProveSiliconLife = refl
+
+publicArtifactLinkIsNotAuthenticatedContent :
+  Acquired.publicArtifactLinkCountsAsAuthenticatedContents Acquired.canonicalAcquiredEvidenceBoundary ≡ false
+publicArtifactLinkIsNotAuthenticatedContent = refl
+
+acquiredEvidenceDoesNotCreatePriority :
+  Acquired.acquiredPaymentCreatesPriority Acquired.canonicalAcquiredEvidenceBoundary ≡ false
+acquiredEvidenceDoesNotCreatePriority = refl
+
+partialPaymentDoesNotCloseWholeAcquisitionTarget :
+  Status.partialPaymentClosesWholeTarget Status.canonicalEvidenceAcquisitionStatusBoundary ≡ false
+partialPaymentDoesNotCloseWholeAcquisitionTarget = refl
+
+publicLinkStillDoesNotEqualAuthenticatedArtifact :
+  Status.publicLinkEqualsAuthenticatedArtifact Status.canonicalEvidenceAcquisitionStatusBoundary ≡ false
+publicLinkStillDoesNotEqualAuthenticatedArtifact = refl
+
+nearbyMechanismDoesNotSubstituteForBH4Flux :
+  Status.nearbyEvidenceSubstitutesForSameObjectFlux Status.canonicalEvidenceAcquisitionStatusBoundary ≡ false
+nearbyMechanismDoesNotSubstituteForBH4Flux = refl
+
+paretoAcquisitionIsNotTruthRanking :
+  Pareto.frontierRankIsTruthRank Pareto.canonicalLineageAttributionAcquisitionFrontier ≡ false
+  × Pareto.acquisitionCreatesAuthority Pareto.canonicalLineageAttributionAcquisitionFrontier ≡ false
+paretoAcquisitionIsNotTruthRanking = refl , refl
+
+provenanceQueueIsDirectionAndIndependenceAware :
+  Pareto.publicationMultiplicitySeparateFromEvidenceIndependence Pareto.canonicalLineageAttributionAcquisitionFrontier ≡ true
+  × Pareto.postPublicationContactCannotPayEarlierExposure Pareto.canonicalLineageAttributionAcquisitionFrontier ≡ true
+  × Pareto.directUseRequiresTraceableArtifactOrManifestation Pareto.canonicalLineageAttributionAcquisitionFrontier ≡ true
+provenanceQueueIsDirectionAndIndependenceAware = refl , (refl , refl)
+
+kitzerowContactReportsDoNotInflateIndependentEvidence :
+  KitLineage.contactReportMultiplicityInflatesIndependence KitLineage.canonicalKitzerowContactIndependenceReceipt ≡ false
+  × KitLineage.downstreamPublicationMultiplicityCreatesIndependentEvidence KitLineage.canonicalKitzerowAttributionLineageBoundary ≡ false
+kitzerowContactReportsDoNotInflateIndependentEvidence = refl , refl
+
+kitzerowExposureStillDoesNotCollapseIntoDerivationOrPlagiarism :
+  KitLineage.contactOrExposureAloneProvesDerivation KitLineage.canonicalKitzerowAttributionLineageBoundary ≡ false
+  × KitLineage.authenticatedPrePublicationExposureAloneProvesDerivation KitLineage.canonicalKitzerowAttributionLineageBoundary ≡ false
+  × KitLineage.citationAbsenceAloneProvesPlagiarism KitLineage.canonicalKitzerowAttributionLineageBoundary ≡ false
+  × KitLineage.structuralSimilarityAloneProvesPlagiarism KitLineage.canonicalKitzerowAttributionLineageBoundary ≡ false
+kitzerowExposureStillDoesNotCollapseIntoDerivationOrPlagiarism =
+  refl , (refl , (refl , refl))
+
+brazilLaterContactDoesNotPayEarlierExposure :
+  KitStatus.laterCorrespondenceCanEstablishEarlierExposure KitStatus.canonicalKitzerowAttributionAcquisitionBoundary ≡ false
+  × KitLineage.brazilNeedsEarlierExposureOrManuscriptHistory KitLineage.canonicalBrazilDirectionalProvenance ≡ true
+brazilLaterContactDoesNotPayEarlierExposure = refl , refl
+
+traceableDerivationCanUpgradeWithoutAdjudicatingPlagiarism :
+  KitStatus.exactVersionedTraceCanUpgradeDerivationCoordinate KitStatus.canonicalKitzerowAttributionAcquisitionBoundary ≡ true
+  × KitStatus.derivationUpgradeAutomaticallyProvesPlagiarismOrLegalInfringement KitStatus.canonicalKitzerowAttributionAcquisitionBoundary ≡ false
+traceableDerivationCanUpgradeWithoutAdjudicatingPlagiarism = refl , refl
+
+sotaGuidanceDoesNotAdjudicateTheCase :
+  KitSOTA.guidanceAutomaticallyAdjudicatesKitzerowClaim KitSOTA.canonicalAttributionProvenanceSOTABoundary ≡ false
+  × KitSOTA.institutionalGuidanceCreatesLegalConclusion KitSOTA.canonicalAttributionProvenanceSOTABoundary ≡ false
+sotaGuidanceDoesNotAdjudicateTheCase = refl , refl
