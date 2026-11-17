@@ -81,3 +81,24 @@ G5 369 **open**: a mathematically explicit same-material nontrivial morphism bey
 G6 DELIVERY **open**: >50% aperture-normalised net electric PCE with independent confirmation; heat and biofuel outputs separately accounted, not counted as electrical power.
 
 **Research conclusion:** the finite Fourier/SALC bridge can be closed and is a valid source of selection rules. It does not close GaAsAtomic369ToKaneWeld as a *physical* 369 derivation. The highest-value material next experiment is strain/polarization-resolved [111] optical spectroscopy plus measured PV I–V against matched [001] and unstrained controls, not claiming >50% from the orbital relabeling alone.
+
+## Added symbolic 8×8 spinful Schur-complement verification (17 Nov)
+
+A second standalone checker `scripts/check_gaas_8band_spinful_schur.py` constructs an explicit near-Γ **eight-state** truncated Kane Hamiltonian:
+
+- two spin states of the s-like conduction orbital;
+- six states from Cartesian `X,Y,Z` valence orbitals ⊗ spin 1/2;
+- `H_v=(2 Δ_so/3) L·S-(Δ_so/3)I_6`, with an exact fourfold eigenvalue 0 and twofold eigenvalue `-Δ_so`;
+- `H_c=[E_g+(1+2F) ε]I_2`, where `ε=ħ²k²/(2m_0)`;
+- interband block `H_cv = sqrt(E_P) sum_i k_tilde_i <S,σ|i,σ>`, with `sum k_tilde_i²=ε`.
+
+Computing the exact Schur complement of the six valence states (not merely substituting the already-known inverse-mass formula) yields
+
+```
+H_cv (Eg I6 - Hv)^(-1) H_vc
+ = Ep * [2/(3 Eg) + 1/(3(Eg+Delta)] * epsilon I2 .
+```
+
+Consequently `m0/m*=1+2F+(Ep/3)[2/Eg+1/(Eg+Delta)]`, for all momentum directions in this isotropic truncation. An independent numerical 8×8 eigenspectrum check for [100], [010], [001], [111] at both 0K and 300K fixed-F inputs confirms the analytical curvature. **15/15 local checks PASS**; no Agda kernel proof of this complex-spinful matrix yet.
+
+This is a **near-Γ 8-state curvature model**, not a full finite-k fitted 8-band material device model. It omits the full valence Luttinger k² terms, real heterointerface boundary conditions, Bir–Pikus strain, conduction/valence field-driven confinement, screening, doping, recombination and measured PV efficiency; and the parameter F summarizes remote bands rather than resolving them as physical states. These are physical producer gates, not proofs to fabricate by selecting scalar data.
