@@ -93,6 +93,34 @@ def powers_and_derivative(t,y,p):
     derivative=np.concatenate(([source_dv],dv,di,[dn]))
     return derivative,powers
 
+def symbolic_telescoping_check(nodes=5):
+    """Exact polynomial conservation for arbitrary finite chosen N.
+
+    Source and ionization work are paid and losses are positive terms under
+    nonnegative rates. This is a discrete chain, NOT a Maxwell PDE theorem.
+    """
+    import sympy as sp
+    vs, ve, nn = sp.symbols("vs ve nn", real=True)
+    vv=sp.symbols("v0:"+str(nodes), real=True)
+    ii=sp.symbols("i0:"+str(nodes-1), real=True)
+    cs, cn, ll, gr, gf, gl, rr, gp, pump, loss, aux=sp.symbols(
+        "Cs Cn L gr gf gl R gp pump loss aux", real=True)
+    recharge=gr*(ve-vs); feed=gf*(vs-vv[0])
+    dvs=(recharge-feed)/cs
+    dv=[]
+    for k in range(nodes):
+        incoming=feed if k==0 else ii[k-1]
+        outgoing=0 if k==nodes-1 else ii[k]
+        shunt=(gl*vv[k] if k==nodes-1 else 0)
+        if k==nodes//2:shunt+=gp*nn*vv[k]
+        dv.append((incoming-outgoing-shunt)/cn)
+    di=[(vv[k]-vv[k+1]-rr*ii[k])/ll for k in range(nodes-1)]
+    energy_rate=cs*vs*dvs+cn*sum(vv[k]*dv[k] for k in range(nodes))+ll*sum(ii[k]*di[k] for k in range(nodes-1))+pump-loss
+    p_in=ve*recharge+pump+aux
+    p_out=(gr*(ve-vs)**2+gf*(vs-vv[0])**2+rr*sum(x*x for x in ii)
+          +gl*vv[-1]**2+gp*nn*vv[nodes//2]**2+loss+aux)
+    return sp.expand(p_in-p_out-energy_rate)==0
+
 def energy(y,p):
     vs,v,i,n=unpack(y,p)
     return (p.c_source*vs*vs/2+p.c_node*np.dot(v,v)/2+
@@ -129,7 +157,7 @@ def run(p=Model(),duration=10.,sampling=200):
         max_pointwise_residual=point_residual,
         natural_energy_at_upstream=all_work['upstream_input'],
         net_useful_after_control_and_ionization=all_work['load']-all_work['ion_creation_paid']-all_work['controller_input'],
-        storage_restored=abs(u1-u0)<1e-6,
+        storage_restored=bool(abs(u1-u0)<1e-6),
         physical_gate='P2/R2/R3 OPEN',
         final_density=float(end[2*p.nodes]),
         channel_conductance=float(p.g_plasma_per_n*end[2*p.nodes]))
