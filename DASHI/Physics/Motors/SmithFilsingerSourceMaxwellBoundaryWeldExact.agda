@@ -335,3 +335,21 @@ signedPortLoadBoundAfterStoreReturn b f w =
         (FormalFieldToPort.portWindow f))
       (Port.MidpointTwoPortWorkWindow.internalLoss
         (FormalFieldToPort.portWindow f)))
+
+
+-- Exact no-confusion result: a certificate for the filmed Earth device
+-- cannot be re-labelled with the proposed portable source owner.
+earthReelCannotHavePortableProvenance :
+  SourceOwner Bidi.filsingerEarthNarration Time.filsingerPortable →
+  Port.Contradiction
+earthReelCannotHavePortableProvenance ()
+
+portableProposalCannotHaveEarthReelProvenance :
+  SourceOwner Bidi.filsingerPortableProposal Time.filsingerEarth →
+  Port.Contradiction
+portableProposalCannotHaveEarthReelProvenance ()
+
+smithFigureCannotHaveFilsingerEarthProvenance :
+  SourceOwner Bidi.smithSuitcaseFigureTen Time.filsingerEarth →
+  Port.Contradiction
+smithFigureCannotHaveFilsingerEarthProvenance ()
