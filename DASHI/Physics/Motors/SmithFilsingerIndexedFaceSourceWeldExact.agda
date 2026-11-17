@@ -61,7 +61,7 @@ indexedFaceExteriorConservation :
   ≡ Face.totalExtOut (Indexed.eraseCells (Indexed.IndexedMesh.cells mesh))
     + (Face.totalLoad (Indexed.eraseCells (Indexed.IndexedMesh.cells mesh))
       + (Face.totalLoss (Indexed.eraseCells (Indexed.IndexedMesh.cells mesh))
-      + Face.totalFinal (Indexed.eraseCells (Indexed.IndexedMesh.cells mesh)))
+      + Face.totalFinal (Indexed.eraseCells (Indexed.IndexedMesh.cells mesh))))
 indexedFaceExteriorConservation = Indexed.indexedFaceExteriorEnergyBalance
 
 -- F10-STOKES remains distinct: signed real Poynting face-work quadrature
