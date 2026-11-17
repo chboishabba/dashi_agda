@@ -12,6 +12,7 @@ owners=(
   DASHI/Physics/Motors/SmithFilsingerMidpointPhaseWorkExact.agda
   DASHI/Physics/Motors/SmithFilsingerFinitePhaseMatchingExact.agda
   DASHI/Physics/Motors/SmithFilsingerReplenishedCycleCapExact.agda
+  DASHI/Physics/Motors/SmithFilsingerHundredfoldSourceFundingExact.agda
   DASHI/Promotion/MaxwellExteriorCalculusAdapter.agda
   DASHI/Physics/Motors/SmithFilsingerSpatialPortChainExact.agda
   DASHI/Physics/Motors/SmithFilsingerYeeCFLConeGuardExact.agda
