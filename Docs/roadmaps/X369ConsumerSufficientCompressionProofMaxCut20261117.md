@@ -1038,3 +1038,275 @@ further dependent; d is an upper
 bound on the effective active first-order
 linear coefficients, not a confirmed
 rank or a measured training result.
+
+
+## 17 November — R4 full decision-envelope maximum cut (SymPy stand-in)
+
+**Implementation:** `scripts/check_x369_r4_end_to_end_envelope_sympy.py`.
+Read against authoritative source
+`LeechTransformer/models/history_orbit_moe.py` and
+`models/trialectic_wave_prior.py` on the existing R4 branch.
+This audit does NOT substitute SymPy for a Torch/Agda/ROCm runtime,
+and does not implement a new surrogate model.
+
+### Exact routing-source decomposition
+
+On source `c2_c3_residual` or
+`c2_c3_mixed_null_residual`, per expert
+
+    logit_e = U(x) + sum_i v_i |h_ei|
+              + sum_j <K_(w_j) phase_j(x), h_ej>
+              + expert_bias_e.
+
+Here U(x) includes the source baseline x-half,
+the source learned router bias, and the C3 unary
+residual `trialectic_router_invariants(phase_x)`.
+These are SHARED across all candidate experts and
+cancel from exact score comparisons/ideal selected
+softmax (NOT necessarily from different floating-point
+evaluation paths). The weights v on abs(h)
+are the pre-existing original C2 router h-half,
+and the directed w are the original C3 residual h-half;
+the expert_bias is an independent learned vector.
+Do not drop v, expert_bias, or the original
+source route-probe/geometry branch.
+
+The C2 control `c2_c2_residual` has a distinct
+expert-dependent term `sum_i (v_i+z_i)|h_ei|`
+plus expert_bias: no directed bilinear K.
+
+### Joint source quantization envelope
+
+Take admitted coordinate bounds
+
+    |delta x_i|<=epsx_i, |delta h_ei|<=epsh_ei,
+    |delta v_i|<=epsv_i, |delta w_i|<=epsw_i,
+    |delta expert_bias_e|<=epsbias_e.
+
+For a fixed coherent/mixed C3 branch,
+`phase_x` is a coordinate permutation.
+Permute the x-error envelope in the SAME branch.
+For each source triad j, K contains three
+weighted linear combinations; define
+
+    Uk = sum_(i,l in K_k)
+         [|w_i| epsx_phase_l
+           + epsw_i |phase_x_l|
+           + epsw_i epsx_phase_l].
+
+This encloses every coefficient perturbation
+under independent x/head coordinate errors.
+Then
+
+    B_e^directed =
+       sum_k [ Uk |h_e,k|
+              + (|K_k|+Uk) epsh_e,k ].
+
+For the unquantized C2 history route,
+
+    B_e^C2 =
+       sum_i [ |v_i| epsh_ei
+             + epsv_i (|h_ei|+epsh_ei) ].
+
+The per-expert total relative-logit budget is
+
+    B_e = B_e^C2 + B_e^directed
+          + epsbias_e + B_e^floating_evaluation.
+
+The last term is an independently needed
+source/hardware computation envelope; no
+hardware value has been invented. The common
+unary x contribution is excluded only from
+the *ideal* differences. If fused/unfused
+floating arithmetic has expert-dependent
+rounding around that common contribution,
+it is covered by the extra evaluation error
+budget, not silently treated as exact.
+
+For the matched C2 residual control, use
+v+z and combined epsilon_v+epsilon_z in
+the abs(h) formula, plus expert_bias.
+The coherent and mixed R4 arms use the
+same base history and bias model but
+distinct phase_x, so their topk scores
+and margins differ even with the same
+residual numeric weight vector.
+
+### Separate mixed-null q gate certificate
+
+The original mixed route computes
+`q_j>.mean(q)`, XORed with seed-owned
+base mask. For each triad error bound
+`Q_j` from the existing pair-difference
+perturbation identity, require
+
+    |q_j - mean(q)| > Q_j + mean(Q).
+
+This conservative strict certificate ensures
+the source's `>` branch and hence
+the rotation permutation is unchanged.
+Without it, arbitrarily small input
+perturbation may produce a different
+C3 orientation and invalidates the
+fixed-branch score envelope.
+A more permissive one-sided interval
+acceptance is possible: positive branch
+requires a strictly positive lower
+bound on q_j-mean(q); false branch
+can accept an upper bound <= 0, respecting
+the source strict `>` semantics.
+
+### Decision and downstream consumer ladder
+
+Given the actual unquantized ordered
+selected `S`, certify
+
+    min_(i in S)(logit_i-B_i)
+      > max_(j not in S)(logit_j+B_j)
+
+for the selected SET. Additionally
+certify adjacent within-S ordering
+`logit_(slot k)-B_(slot k) >
+ logit_(slot k+1)+B_(slot k+1)`
+for identical original ordered slot IDs.
+This bypasses unspecified source
+`torch.topk` tie behaviour only by
+certifying **no relevant ties**.
+Weights can differ despite identical IDs:
+with each selected real logit perturbation
+at most `B=max_(i in S) B_i`,
+
+    ||softmax(s')-softmax(s)||_1 <= B.
+
+Proof: along interpolation, softmax
+Jacobian applied to perturbation v has
+L1 norm `E_p |v-E_p v|` at most
+`sqrt(Var_p(v))<=||v||inf`.
+If source expert outputs satisfy
+`||y_e||<=M` and changed outputs
+`||y'_e-y_e||<=Y`, the one-step
+mixture discrepancy is bounded by
+
+    ||o'-o|| <= M*B+Y
+
+conditional on the same selected set and
+aligned expert IDs. For score-only
+intervention with unchanged selected
+expert computations, Y=0. The inequality
+is real arithmetic; finite-precision
+softmax and output accumulation need
+a separate execution budget. Slot
+parity is necessary if comparing the
+returned slot-aligned arrays verbatim.
+
+**Orientation/history gate:** the source
+selected expert sign uses
+`2*F.linear(cat(x,h),orientation.weight,None)`
+with first-nonzero-component fallback
+when its score is exactly zero.
+For z=(x,h), parameter v_ori and
+absolute envelopes eps_z, eps_ori,
+certify
+
+    O = 2*sum_i v_ori_i z_i
+    B_ori = 2*sum_i [
+              |v_ori_i| eps_z_i
+              + eps_ori_i (|z_i|+eps_z_i) ].
+    |O|>B_ori.
+
+Only then is the selected orientation
+sign guaranteed unchanged under
+the perturbation. At O=0, source's
+fallback is nontrivial and requires
+a separate exact tie/fibre law:
+do not presume continuity through
+the sign boundary.
+
+With the same selected set, source
+`step` uses expert FFN output and
+the history transition independent
+of the selected mixture weight;
+changing only softmax weights
+leaves the *one-step selected history
+update* exact, while changing
+mixture o. If x/h themselves change,
+require a separately admitted
+selected expert transition
+Lipschitz/error certificate, including
+orientation and cap branches.
+For a combined state discrepancy
+`D_(t+1)<=L_t D_t + eta_t`,
+future errors can be bounded by
+the unrolled product/sum if all
+router and orientation margins are
+re-certified along the trace.
+For a uniform L, eta and D0=0:
+
+    D_t <= eta * sum_(j=0)^(t-1) L^j.
+
+When L=1 this is t*eta.
+This is a **conditional recurrence**,
+not an original learned-Leech future
+guarantee: the source has discontinuous
+topk and orientation gates.
+
+### Exact rational witnesses (source formulas, not fitted tolerances)
+
+The executable audit instantiates
+d=6 (two original triads), E=4,
+topk=2; shared x=(2,0,0,0,0,0),
+C2 history coefficients
+v=(0,1,1,0,0,0), directed weights
+w=(2,-1,1,1,0,2), original expert
+biases (0,1,5,10), and the four
+independently owned histories
+(0,1,0,0,0,0), (1,0,1,0,0,0),
+(0,1,1,0,0,0), (1,1,0,0,0,0).
+Input/history/baseline-head/C3-head
+errors are independently bounded by
+1/256 per coordinate, and expert
+bias errors by 1/256.
+
+- **Coherent:** original scores
+  (3,4,13,11); exact score-error budgets
+  (594441,824201,824201,824201)/8388608;
+  both top2 membership AND ordered slots
+  are certified as (2,3).
+- **Mixed q gate:** original scores
+  (5,2,9,17); same certified budgets;
+  top2 membership/order is (3,2);
+  independently certified q gate
+  stays in the same original branch.
+- **Matched C2 residual:** original scores
+  (0,5,8,11) with independent
+  residual weights z=(1,-1,2,0,1,-2);
+  C2-specific coordinate intervals
+  certify ordered top2 (3,2).
+
+SymPy checks the exact perturbed scores
+against those enclosing budgets, exact
+ordered/membership separation, selected
+softmax/mixed-output numerical inequalities,
+joint input/head/history error polynomial,
+orientation signed-score margin and its
+adversarial sign-tie witness, and finite
+recurrent geometric-series algebra.
+All source-numeric budgets here are
+*rational examples*, NOT independently
+measured training or hardware tolerances.
+
+**Status/next:** End-to-end **conditional**
+mathematical R4 envelope is specified
+and encoded in SymPy stand-in. The
+highest-alpha remaining weld is to
+establish interval/error provenance
+from an actual precision/quantizer
+for the original weights and activation
+histories, including floating-point
+fusion versus unfused evaluation,
+then instantiate layer-wise source
+transition/FFN Lipschitz bounds
+and recheck margins along full traces.
+Independent Sophontic/grokking/
+trialectic semantic consumers remain
+outside a router-output-only proof.
