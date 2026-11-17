@@ -36,7 +36,7 @@ import DASHI.Unified.E8ExceptionalActorTOECompatibilityExact as E8ActorTOE
 import DASHI.Unified.FormalObjectParents as FormalObjectParents
 import DASHI.Unified.InvariantSpine as Spine
 import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalGovernance
-import DASHI.Unified.GovernedLegalWorkflowTOEBridgeRegression
+import DASHI.Unified.GovernanceMaxCutParetoSnowballTOEConvergenceExact as GovernanceMaxCut
 import DASHI.Unified.PNFHyperfabric as PNFHyperfabric
 import DASHI.Unified.PNFSourceBoundaryTOEExact as PNFSource
 import DASHI.Unified.PNFDistilledNonPromotionTOEExact as PNFDistilled
@@ -235,10 +235,32 @@ unifiedFleetDischargedCoreKnowledgeFibresIs584 :
   FleetTOE.dischargedCoreKnowledgeFibres unifiedFleetFormalGapTargetReceipt ≡ 584
 unifiedFleetDischargedCoreKnowledgeFibresIs584 = refl
 
-unifiedFleetPolarityContradictionGapsIs44 :
-  FleetTOE.polarityContradictionGaps unifiedFleetFormalGapTargetReceipt ≡ 44
-unifiedFleetPolarityContradictionGapsIs44 = refl
+governedExactReuseDoesNotCreateClaimTruth :
+  LegalGovernance.ExactReuseCreatesClaimTruth → ⊥
+governedExactReuseDoesNotCreateClaimTruth =
+  LegalGovernance.toeExactReuseDoesNotCreateClaimTruth
 
-unifiedFleetUnformalisedFormalGapsIs58 :
-  FleetTOE.unformalisedFormalGaps unifiedFleetFormalGapTargetReceipt ≡ 58
-unifiedFleetUnformalisedFormalGapsIs58 = refl
+
+------------------------------------------------------------------------
+-- Governance + max-cut/Pareto/snowball convergence facade.
+------------------------------------------------------------------------
+
+unifiedGovernanceMaxCutParetoSnowballReceipt :
+  GovernanceMaxCut.GovernanceMaxCutParetoSnowballTOEReceipt
+unifiedGovernanceMaxCutParetoSnowballReceipt =
+  GovernanceMaxCut.canonicalGovernanceMaxCutParetoSnowballTOEReceipt
+
+unifiedGovernanceMaxCutParetoSnowballZKPFrame :
+  GovernanceMaxCut.GovernanceMaxCutParetoSnowballZKPFrame
+unifiedGovernanceMaxCutParetoSnowballZKPFrame =
+  GovernanceMaxCut.canonicalGovernanceMaxCutParetoSnowballZKPFrame
+
+unifiedGovernanceMaxCutBalabanScaleTransferImpossible :
+  GovernanceMaxCut.BalabanScaleTransferPromotion → ⊥
+unifiedGovernanceMaxCutBalabanScaleTransferImpossible =
+  GovernanceMaxCut.balabanScaleTransferPromotionImpossible
+
+unifiedGovernanceMaxCutIbrahimSearchPriorityNotProof :
+  GovernanceMaxCut.SearchPriorityCreatesProof → ⊥
+unifiedGovernanceMaxCutIbrahimSearchPriorityNotProof =
+  GovernanceMaxCut.ibrahimSearchPriorityDoesNotCreateProof

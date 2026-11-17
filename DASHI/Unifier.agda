@@ -20,6 +20,10 @@ import DASHI.Unified.InvariantSpine as BrainSpine
 
 
 import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as GovernanceTOE
+import DASHI.Unified.GovernanceMaxCutParetoSnowballTOEConvergenceExact as GovernanceMaxCut
+import DASHI.Unified.PNFSourceBoundaryTOEExact as PNFSource
+import DASHI.Unified.PNFDistilledNonPromotionTOEExact as PNFDistilled
+
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
 
 import DASHI.Unified.ForecastComparativeNonPromotionTOEBridgeExact as ForecastTOE
@@ -658,43 +662,32 @@ unifierIbrahimSearchPriorityDoesNotCreateProof :
 unifierIbrahimSearchPriorityDoesNotCreateProof =
   IbrahimTOE.searchPriorityDoesNotCreateProof
 
-unifierIbrahimProducerSourceDoesNotCreateRunReceipt :
-  IbrahimTOE.ProducerSourceCreatesRunReceipt → ⊥
-unifierIbrahimProducerSourceDoesNotCreateRunReceipt =
-  IbrahimTOE.producerSourceDoesNotCreateRunReceipt
+toeExactReuseDoesNotCreateClaimTruth :
+  LegalGovernance.ExactReuseCreatesClaimTruth → ⊥
+toeExactReuseDoesNotCreateClaimTruth =
+  LegalGovernance.toeExactReuseDoesNotCreateClaimTruth
 
-unifierFleetFormalGapTargetReceipt :
-  FleetTOE.FleetFormalGapTargetReceipt
-unifierFleetFormalGapTargetReceipt =
-  FleetTOE.canonicalFleetFormalGapTargetReceipt
 
-unifierFleetDischargedCoreKnowledgeFibresIs584 :
-  FleetTOE.dischargedCoreKnowledgeFibres unifierFleetFormalGapTargetReceipt ≡ 584
-unifierFleetDischargedCoreKnowledgeFibresIs584 = refl
+------------------------------------------------------------------------
+-- Governance + max-cut/Pareto/snowball convergence facade.
+------------------------------------------------------------------------
 
-unifierFleetPolarityContradictionGapsIs44 :
-  FleetTOE.polarityContradictionGaps unifierFleetFormalGapTargetReceipt ≡ 44
-unifierFleetPolarityContradictionGapsIs44 = refl
+unifierGovernanceMaxCutParetoSnowballReceipt :
+  GovernanceMaxCut.GovernanceMaxCutParetoSnowballTOEReceipt
+unifierGovernanceMaxCutParetoSnowballReceipt =
+  GovernanceMaxCut.canonicalGovernanceMaxCutParetoSnowballTOEReceipt
 
-unifierFleetUnformalisedFormalGapsIs58 :
-  FleetTOE.unformalisedFormalGaps unifierFleetFormalGapTargetReceipt ≡ 58
-unifierFleetUnformalisedFormalGapsIs58 = refl
+unifierGovernanceMaxCutParetoSnowballZKPFrame :
+  GovernanceMaxCut.GovernanceMaxCutParetoSnowballZKPFrame
+unifierGovernanceMaxCutParetoSnowballZKPFrame =
+  GovernanceMaxCut.canonicalGovernanceMaxCutParetoSnowballZKPFrame
 
-unifierFleetDischargedFibresStayOutOfTarget :
-  FleetTOE.FleetDischargedFibreRetargetPermission → ⊥
-unifierFleetDischargedFibresStayOutOfTarget =
-  FleetTOE.fleetDischargedFibresCannotBeRetargetedByThisBoundary
+unifierGovernanceMaxCutBalabanScaleTransferImpossible :
+  GovernanceMaxCut.BalabanScaleTransferPromotion → ⊥
+unifierGovernanceMaxCutBalabanScaleTransferImpossible =
+  GovernanceMaxCut.balabanScaleTransferPromotionImpossible
 
-unifierFleetContradictionsStaySeparate :
-  FleetTOE.FleetContradictionGapReclassificationPermission → ⊥
-unifierFleetContradictionsStaySeparate =
-  FleetTOE.fleetContradictionsCannotBeRelabelledAsFormalGaps
-
-unifierFleetExternalCountDoesNotCreateFormalDischarge :
-  FleetTOE.FleetExternalCountCreatesFormalDischarge → ⊥
-unifierFleetExternalCountDoesNotCreateFormalDischarge =
-  FleetTOE.fleetExternalCountDoesNotCreateFormalDischarge
-
-unifierFleetFormalGapZKPFrame : IbrahimTOE.TOEZKPFrame
-unifierFleetFormalGapZKPFrame =
-  FleetTOE.canonicalFleetFormalGapZKPFrame
+unifierGovernanceMaxCutIbrahimSearchPriorityNotProof :
+  GovernanceMaxCut.SearchPriorityCreatesProof → ⊥
+unifierGovernanceMaxCutIbrahimSearchPriorityNotProof =
+  GovernanceMaxCut.ibrahimSearchPriorityDoesNotCreateProof

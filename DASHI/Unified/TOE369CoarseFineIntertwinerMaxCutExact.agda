@@ -16,12 +16,12 @@ module DASHI.Unified.TOE369CoarseFineIntertwinerMaxCutExact where
 -- Reuse the existing validation modules for non-promotion theorems.
 --
 -- C. Construction.
--- Add one exact chart between the concrete legacy Unifier trit and SSPTrit.
--- No Unifier axiom-shaped theorem is used as proof authority.
+-- Normalize the existing theorem owners without importing legacy Unifier.
+-- This keeps the theorem-bearing core acyclic for all TOE facades.
 --
 -- S. Safety.
 -- Preconditions: canonical donor modules exist on the selected branch.
--- Preconditions: legacy Unifier.T is used only as a carrier chart.
+-- Preconditions: no legacy Unifier axiom-shaped surface is proof authority.
 -- Invariants: proof ownership remains in donor modules.
 -- Invariants: ESD and digital_esd surfaces remain read-only.
 -- The 27-state cube is not a free C3 torsor because the origin is fixed.
@@ -43,20 +43,19 @@ module DASHI.Unified.TOE369CoarseFineIntertwinerMaxCutExact where
 --
 -- G. Governance.
 -- Original theorem owners retain proof ownership.
--- The legacy Unifier carrier is treated as a carrier only.
+-- Legacy Unifier stays a consumer facade and is not imported here.
 --
 -- F. Verification.
 -- Source read-back checks exact imports and theorem names.
 -- Kernel certification requires an exact-head Agda or CI receipt.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (true; false)
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
-import DASHI.Unifier as Legacy
 import DASHI.Foundations.SSPTritCarrier as SSP
-import DASHI.Foundations.InvolutiveTernaryExistingSpineBridge as Involutive
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geometry
 import DASHI.Foundations.Base369CoarseFineFabricAdapterExact as Fabric
 import DASHI.Core.CoarseFineRelativeFibreExact as Fibre
@@ -77,48 +76,17 @@ import DASHI.Moonshine.Base369Monster3BSingleActionProducerBidiExact as SingleAc
 import DASHI.Wikimedia.IbrahimMonster3BLinearShortestFrontierCorrectionExact as Ibrahim
 import DASHI.Reasoning.Trialectic369SchrodingerHZetaRecognitionMaxCutExact as HZetaMaxCut
 import DASHI.Wikimedia.IbrahimMonsterTernary27PhasePreservingFiveOrbitReductionExact as TernaryReduction
+import DASHI.Wikimedia.IbrahimMonster3BWholeCharacterIsotypicBypassExact as WholeCharacter
+import DASHI.Wikimedia.IbrahimMonster3BPrimarySupplementKernelClass20SnowballExact as KernelClass20
+import DASHI.Wikimedia.IbrahimMonster3BDiagonalKernelPaidSignGaugeCorrectionExact as KernelGauge
+import DASHI.Wikimedia.IbrahimMonster3BFDRepGroupAlgebraAdapterReceiptExact as FDRepReceipt
+import DASHI.Wikimedia.IbrahimMonster3BWholeCharacterSimpleSubobjectClassificationExact as SimpleClassifier
+import DASHI.Wikimedia.IbrahimMonsterCharacterToTwoIsotypicBlocksMathlibSnowballExact as TwoIsotypic
+import DASHI.Reasoning.Trialectic369CanonicalSelected3BLinearCoreExact as LinearCore
+import DASHI.Reasoning.Trialectic369OutgoingLinearAcquisitionBridgeExact as LinearAcquisition
 
 ------------------------------------------------------------------------
--- 1. Legacy Unifier ternary carrier <-> canonical SSP trit.
---
--- This is a carrier chart only.
--- It does not import any Unifier theorem axiom as authority.
-------------------------------------------------------------------------
-
-legacyToSSP : Legacy.T → SSP.SSPTrit
-legacyToSSP Legacy.neg = SSP.sspNegOne
-legacyToSSP Legacy.zer = SSP.sspZero
-legacyToSSP Legacy.pos = SSP.sspPosOne
-
-sspToLegacy : SSP.SSPTrit → Legacy.T
-sspToLegacy SSP.sspNegOne = Legacy.neg
-sspToLegacy SSP.sspZero = Legacy.zer
-sspToLegacy SSP.sspPosOne = Legacy.pos
-
-legacySSPRoundTrip :
-  (value : Legacy.T) →
-  sspToLegacy (legacyToSSP value) ≡ value
-legacySSPRoundTrip Legacy.neg = refl
-legacySSPRoundTrip Legacy.zer = refl
-legacySSPRoundTrip Legacy.pos = refl
-
-sspLegacyRoundTrip :
-  (value : SSP.SSPTrit) →
-  legacyToSSP (sspToLegacy value) ≡ value
-sspLegacyRoundTrip SSP.sspNegOne = refl
-sspLegacyRoundTrip SSP.sspZero = refl
-sspLegacyRoundTrip SSP.sspPosOne = refl
-
-legacyInvolutionIntertwines :
-  (value : Legacy.T) →
-  legacyToSSP (Legacy.ι value)
-  ≡ Involutive.sspι (legacyToSSP value)
-legacyInvolutionIntertwines Legacy.neg = refl
-legacyInvolutionIntertwines Legacy.zer = refl
-legacyInvolutionIntertwines Legacy.pos = refl
-
-------------------------------------------------------------------------
--- 2. Canonical coarse/fine reopening.
+-- 1. Canonical coarse/fine reopening.
 ------------------------------------------------------------------------
 
 toeCoarseFineReopening :
@@ -422,3 +390,253 @@ toeTernary27ReductionIsNotMonster42SameObject :
   ≡ false
 toeTernary27ReductionIsNotMonster42SameObject =
   TernaryReduction.reducedFifteenIsMonster42dSameObjectIsFalse
+
+
+------------------------------------------------------------------------
+-- 10. Pareto / Snowball / Ibrahim current source frontier.
+------------------------------------------------------------------------
+
+toeWholeCharacterEqualityDoesNotCreateWholeIso :
+  WholeCharacter.CharacterEqualityAloneCreatesWholeRepresentationIso → ⊥
+toeWholeCharacterEqualityDoesNotCreateWholeIso =
+  WholeCharacter.characterEqualityAloneDoesNotCreateWholeIso
+
+toeWholeIsoDoesNotCreateConcreteActionRecognition :
+  WholeCharacter.WholeRepresentationIsoCreatesConcreteActionRecognition → ⊥
+toeWholeIsoDoesNotCreateConcreteActionRecognition =
+  WholeCharacter.wholeIsoDoesNotCreateConcreteActionRecognition
+
+toeWholeCharacterDirectIsotypicBridgeStillOpen :
+  WholeCharacter.WholeCharacterIsotypicBypassBoundary.directWholeCharacterToIsotypicBridgeLocated
+    WholeCharacter.canonicalWholeCharacterIsotypicBypassBoundary
+  ≡ false
+toeWholeCharacterDirectIsotypicBridgeStillOpen = refl
+
+toeWholeCharacterActualKernelReplayStillOpen :
+  WholeCharacter.WholeCharacterIsotypicBypassBoundary.actualKernelReplayReceiptObserved
+    WholeCharacter.canonicalWholeCharacterIsotypicBypassBoundary
+  ≡ false
+toeWholeCharacterActualKernelReplayStillOpen = refl
+
+toePrimarySupplementKernelClassTwentyPaid :
+  KernelClass20.PrimarySupplementKernelFrontier.mainClassTwentyCoordinatePaid
+    KernelClass20.currentPrimarySupplementKernelFrontier
+  ≡ true
+toePrimarySupplementKernelClassTwentyPaid = refl
+
+toeInvariantDiagonalKernelSubgroupPaid :
+  KernelGauge.DiagonalKernelGaugeFrontier.invariantDiagonalKernelSubgroupPaid
+    KernelGauge.currentDiagonalKernelGaugeFrontier
+  ≡ true
+toeInvariantDiagonalKernelSubgroupPaid = refl
+
+toePaidKernelDoesNotRequireAbsoluteSignName :
+  KernelGauge.PaidKernelRequiresAbsoluteSignName → ⊥
+toePaidKernelDoesNotRequireAbsoluteSignName =
+  KernelGauge.paidKernelDoesNotRequireSignName
+
+toeTwelveSeventyEightCharacterAlreadyPaid :
+  Ibrahim.CorrectedShortestFrontierBoundary.twelveSeventyEightCharacterAlreadyPaid
+    Ibrahim.canonicalCorrectedShortestFrontierBoundary
+  ≡ true
+toeTwelveSeventyEightCharacterAlreadyPaid = refl
+
+toeGenericCharacterMultiplicitySourceWritten :
+  Ibrahim.CorrectedShortestFrontierBoundary.genericCharacterMultiplicitySourceWritten
+    Ibrahim.canonicalCorrectedShortestFrontierBoundary
+  ≡ true
+toeGenericCharacterMultiplicitySourceWritten = refl
+
+toeActualTwelveSeventyEightLinearIntertwinerStillOpen :
+  Ibrahim.CorrectedShortestFrontierBoundary.actualTwelveSeventyEightLinearIntertwinerPaid
+    Ibrahim.canonicalCorrectedShortestFrontierBoundary
+  ≡ false
+toeActualTwelveSeventyEightLinearIntertwinerStillOpen = refl
+
+------------------------------------------------------------------------
+-- 11. Cross-prover generic representation receipts.
+------------------------------------------------------------------------
+
+toeLeanFDRepAdapterSourceWritten :
+  FDRepReceipt.FDRepGroupAlgebraAdapterBoundary.leanAdapterSourceWritten
+    FDRepReceipt.canonicalFDRepGroupAlgebraAdapterBoundary
+  ≡ true
+toeLeanFDRepAdapterSourceWritten = refl
+
+toeLeanFDRepSubmoduleAdapterSourceWritten :
+  FDRepReceipt.FDRepGroupAlgebraAdapterBoundary.submoduleStabilityAdapterSourceWritten
+    FDRepReceipt.canonicalFDRepGroupAlgebraAdapterBoundary
+  ≡ true
+toeLeanFDRepSubmoduleAdapterSourceWritten = refl
+
+toeLeanFDRepAdapterKernelReceiptStillUnobserved :
+  FDRepReceipt.FDRepGroupAlgebraAdapterBoundary.leanKernelReceiptObserved
+    FDRepReceipt.canonicalFDRepGroupAlgebraAdapterBoundary
+  ≡ false
+toeLeanFDRepAdapterKernelReceiptStillUnobserved = refl
+
+toeLeanFDRepAdapterAgdaTransportStillUnobserved :
+  FDRepReceipt.FDRepGroupAlgebraAdapterBoundary.agdaTransportObserved
+    FDRepReceipt.canonicalFDRepGroupAlgebraAdapterBoundary
+  ≡ false
+toeLeanFDRepAdapterAgdaTransportStillUnobserved = refl
+
+toeSimpleSourceClassifierSourceWritten :
+  SimpleClassifier.SimpleSubobjectClassificationBoundary.leanSourceWritten
+    SimpleClassifier.canonicalSimpleSubobjectClassificationBoundary
+  ≡ true
+toeSimpleSourceClassifierSourceWritten = refl
+
+toeSimpleSourceClassifierKernelStillUnobserved :
+  SimpleClassifier.SimpleSubobjectClassificationBoundary.leanKernelReceiptObserved
+    SimpleClassifier.canonicalSimpleSubobjectClassificationBoundary
+  ≡ false
+toeSimpleSourceClassifierKernelStillUnobserved = refl
+
+toeCharacterMultiplicityLemmasSourceWritten :
+  TwoIsotypic.TwoIsotypicCompilerFrontier.multiplicityLemmasSourceWritten
+    TwoIsotypic.currentTwoIsotypicCompilerFrontier
+  ≡ true
+toeCharacterMultiplicityLemmasSourceWritten = refl
+
+toeCharacterMultiplicityKernelStillUnobserved :
+  TwoIsotypic.TwoIsotypicCompilerFrontier.multiplicityLemmasLeanKernelChecked
+    TwoIsotypic.currentTwoIsotypicCompilerFrontier
+  ≡ false
+toeCharacterMultiplicityKernelStillUnobserved = refl
+
+toeTwoIsotypicAgdaTransportStillOpen :
+  TwoIsotypic.TwoIsotypicCompilerFrontier.fullTwoSimpleCompilerTransportedToAgda
+    TwoIsotypic.currentTwoIsotypicCompilerFrontier
+  ≡ false
+toeTwoIsotypicAgdaTransportStillOpen = refl
+
+toeActualMonsterFin90SameActionAttachmentStillOpen :
+  TwoIsotypic.TwoIsotypicCompilerFrontier.actualMonsterFin90SameActionAttachmentPaid
+    TwoIsotypic.currentTwoIsotypicCompilerFrontier
+  ≡ false
+toeActualMonsterFin90SameActionAttachmentStillOpen = refl
+
+------------------------------------------------------------------------
+-- 12. Canonical selected-3B linear same-object max cut.
+------------------------------------------------------------------------
+
+toeCanonicalSelected3BLinearRouteCompilerOutput :
+  LinearCore.Trialectic369CanonicalSelected3BLinearCoreBoundary.canonicalLinearRouteCompilerOutput
+    LinearCore.canonicalTrialectic369CanonicalSelected3BLinearCoreBoundary
+  ≡ true
+toeCanonicalSelected3BLinearRouteCompilerOutput = refl
+
+toeNormalizerMonsterCarrierBidiCompilerOutput :
+  LinearCore.Trialectic369CanonicalSelected3BLinearCoreBoundary.normalizerMonsterCarrierBidiCompilerOutput
+    LinearCore.canonicalTrialectic369CanonicalSelected3BLinearCoreBoundary
+  ≡ true
+toeNormalizerMonsterCarrierBidiCompilerOutput = refl
+
+toeOnlyOneSelected3BActionEquationRemainsAfterCore :
+  LinearCore.Trialectic369CanonicalSelected3BLinearCoreBoundary.onlyOneActionEquationRemainsAfterCore
+    LinearCore.canonicalTrialectic369CanonicalSelected3BLinearCoreBoundary
+  ≡ true
+toeOnlyOneSelected3BActionEquationRemainsAfterCore = refl
+
+toeCanonicalSelected3BLinearCoreStillUninhabited :
+  LinearCore.Trialectic369CanonicalSelected3BLinearCoreBoundary.canonicalCoreInhabitedHere
+    LinearCore.canonicalTrialectic369CanonicalSelected3BLinearCoreBoundary
+  ≡ false
+toeCanonicalSelected3BLinearCoreStillUninhabited = refl
+
+toeSelected3BActionIntertwiningStillUninhabited :
+  LinearCore.Trialectic369CanonicalSelected3BLinearCoreBoundary.actionIntertwiningInhabitedHere
+    LinearCore.canonicalTrialectic369CanonicalSelected3BLinearCoreBoundary
+  ≡ false
+toeSelected3BActionIntertwiningStillUninhabited = refl
+
+toeSelected3BLinearCompletionStillUninhabited :
+  LinearCore.Trialectic369CanonicalSelected3BLinearCoreBoundary.completionInhabitedHere
+    LinearCore.canonicalTrialectic369CanonicalSelected3BLinearCoreBoundary
+  ≡ false
+toeSelected3BLinearCompletionStillUninhabited = refl
+
+toeOutgoingLinearAcquisitionStillUninhabited :
+  LinearAcquisition.Trialectic369OutgoingLinearAcquisitionBridgeBoundary.acquisitionInhabitedHere
+    LinearAcquisition.canonicalTrialectic369OutgoingLinearAcquisitionBridgeBoundary
+  ≡ false
+toeOutgoingLinearAcquisitionStillUninhabited = refl
+
+toeOutgoingActualLinearActionStillOpen :
+  LinearAcquisition.Trialectic369OutgoingLinearAcquisitionBridgeBoundary.actualLinearActionPaid
+    LinearAcquisition.canonicalTrialectic369OutgoingLinearAcquisitionBridgeBoundary
+  ≡ false
+toeOutgoingActualLinearActionStillOpen = refl
+
+toeOutgoingSourceNativeInertiaSameActionStillOpen :
+  LinearAcquisition.Trialectic369OutgoingLinearAcquisitionBridgeBoundary.sourceNativeInertiaSameActionPaid
+    LinearAcquisition.canonicalTrialectic369OutgoingLinearAcquisitionBridgeBoundary
+  ≡ false
+toeOutgoingSourceNativeInertiaSameActionStillOpen = refl
+
+toeOutgoingTwelveSeventyEightIntertwinerStillOpen :
+  LinearAcquisition.Trialectic369OutgoingLinearAcquisitionBridgeBoundary.actualTwelveSeventyEightIntertwinerPaid
+    LinearAcquisition.canonicalTrialectic369OutgoingLinearAcquisitionBridgeBoundary
+  ≡ false
+toeOutgoingTwelveSeventyEightIntertwinerStillOpen = refl
+
+------------------------------------------------------------------------
+-- 13. Typed ZKP O/R/C/S/L/P/G/F convergence receipt.
+------------------------------------------------------------------------
+
+record TOE369MaxCutZKPFrame : Set where
+  constructor toe369-max-cut-zkp-frame
+  field
+    O-objective : String
+    R-reuse : String
+    C-construction : String
+    S-safety : String
+    L-lane : String
+    P-preconditions : String
+    P-invariants : String
+    P-postconditions : String
+    G-governance : String
+    F-verification : String
+
+canonicalTOE369MaxCutZKPFrame : TOE369MaxCutZKPFrame
+canonicalTOE369MaxCutZKPFrame =
+  toe369-max-cut-zkp-frame
+    "Converge Base369 coarse/fine, ternary-27, selected-3B max-cut, kernel-BIDI, Pareto, Snowball, and Ibrahim theorem owners onto one acyclic TOE surface."
+    "Reuse the existing coarse/fine reopening, C3 symmetry, signed phase intertwiner, selected-3B max-cut, same-element BIDI, single-action producer, H-zeta recognition, whole-character Pareto, class-20 kernel Snowball, and Ibrahim reduction owners."
+    "Expose aliases only. Remove the legacy Unifier import from the theorem-bearing core so every TOE facade can consume the same owner without an import cycle."
+    "Keep dimension, character, carrier equality, phase reduction, and finite indexing non-promoting. Do not invent a CFFI theorem. Do not edit ESD or digital_esd surfaces."
+    "This lane owns only TOE normalization of the existing Max Cut and kernel-BIDI surfaces."
+    "All donor owners exist. The requested CFFI label has no literal repository theorem owner, so the exact existing kernel-BIDI owners are the only admissible proof authority."
+    "One result keeps one canonical owner. A character does not create an action. A finite chart does not create a representation. A phase-preserving reduction is not global inversion. Same dimension is not same object."
+    "The focused TOE root, Unifier, and Unified aggregate reach the same exact non-promotion and open-frontier terms with no legacy import cycle."
+    "Original mathematical authors and repository theorem owners retain attribution. Meta-introspector repositories remain source context and do not gain DASHI theorem ownership."
+    "Run related-symbol, discover, lineage, preflight, trust-escape, ESD-diff, validation, and focused Agda checks. Claim kernel success only from an observed exact-head receipt."
+
+record TOE369MaxCutReceipt : Set where
+  constructor toe369-max-cut-receipt
+  field
+    coarseFineExact : Bool
+    ternary27Exact : Bool
+    kernelBidiReused : Bool
+    selected3BMaxCutReused : Bool
+    paretoIbrahimReused : Bool
+    literalCFFITheoremInvented : Bool
+    esdEdited : Bool
+
+canonicalTOE369MaxCutReceipt : TOE369MaxCutReceipt
+canonicalTOE369MaxCutReceipt =
+  toe369-max-cut-receipt
+    true true true true true false false
+
+literalCFFITheoremWasNotInvented :
+  TOE369MaxCutReceipt.literalCFFITheoremInvented
+    canonicalTOE369MaxCutReceipt
+  ≡ false
+literalCFFITheoremWasNotInvented = refl
+
+esdSurfaceWasNotEdited :
+  TOE369MaxCutReceipt.esdEdited
+    canonicalTOE369MaxCutReceipt
+  ≡ false
+esdSurfaceWasNotEdited = refl
