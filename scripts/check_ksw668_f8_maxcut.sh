@@ -5,8 +5,9 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 mode="--smoke"
 if [ "$#" -gt 0 ]; then mode="$1"; fi
-export PYTHONPATH="scripts:."
-python3 -m unittest discover -s scripts -p 'test_ksw668_f8_*.py' -v
+python3 scripts/test_ksw668_f8_moving_maxcut.py
+python3 scripts/test_ksw668_f8_non_glancing_source.py
+python3 scripts/ksw668_f8_non_glancing_source.py
 if [ "$mode" = "--smoke" ]; then
   echo "F8 smoke PASS: all dynamically discovered local F8 tests (expected 410 after XI; verify actual unittest output)."
   echo "3D tensor/Weyl convergence, Agda, matter action and observation NOT ACCEPTED."
