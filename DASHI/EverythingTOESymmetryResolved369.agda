@@ -1634,182 +1634,68 @@ toeFleetNumericABIRequiresIndependentEvidence :
 toeFleetNumericABIRequiresIndependentEvidence =
   FleetGapTOE.fleetSpectralNumericABIPromotionImpossible
 
-------------------------------------------------------------------------
--- SensibLaw / governance direct non-promotion handoff.
---
--- Reuse canonical owners. No Actionstep-specific ontology is introduced.
-------------------------------------------------------------------------
+import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalGovernance
+import DASHI.Unified.PNFSourceBoundaryTOEExact as PNFSource
+import DASHI.Unified.PNFDistilledNonPromotionTOEExact as PNFDistilled
+import DASHI.Unified.SCALEEvidenceReviewTOEConvergenceExact as SCALEReview
+import DASHI.Unified.GovernedFleetResidualTOEHandoffExact as GovernedFleet
 
-open import DASHI.Governance.PromotionSpineTests public using
-  ( candidateExampleQuarantines
-  ; candidateExampleAbstains
-  ; citationExampleCannotCloseIdentity
-  ; citationExampleQuarantines
-  ; artifactExamplePromotesWhenAllFiveClose
-  ; artifactExampleAuthorizesGovernedPromotion
-  )
-
-open import DASHI.Law.SensibLawITIRParityEverything public using
-  ( selectedLegalRuntimeContract
-  ; selectedITIRNormalizedParity
-  ; selectedStageParityWitness
-  ; selectedOwnerParityWitness
-  ; SemanticPromotionPolicySurface
-  ; semanticPromotionPolicySurface
-  ; heuristic-only-abstains
-  ; promotion-ignores-heuristic-bits
-  ; semantic-promotion-truth-authority-closed
-  ; semantic-promotion-legal-authority-closed
-  ; semantic-promotion-all-authority-closed
-  ; LegalCitationBoundary
-  ; canonicalLegalCitationBoundary
-  ; CompositeCompliance
-  ; composeCertifiedStages
-  )
 
 ------------------------------------------------------------------------
--- Fleet formal-gap cut.
---
--- These values come from FleetFormalGapTargetTOEExact. The eigen labels are
--- planning metadata. They do not identify theorem owners.
+-- Governed legal / PNF / SCALE / Fleet residual convergence.
 ------------------------------------------------------------------------
 
-toeFleetRecordedDischargedCountIs584 :
-  FleetGapTOE.dischargedCoreKnowledgeFibres
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 584
-toeFleetRecordedDischargedCountIs584 =
-  FleetGapTOE.fleetRecordedDischargedCountIs584
+toePNFSourceBoundaryReceipt :
+  PNFSource.PNFSourceBoundaryTOEReceipt
+toePNFSourceBoundaryReceipt =
+  PNFSource.canonicalPNFSourceBoundaryTOEReceipt
 
-toeFleetRecordedUnformalisedGapCountIs58 :
-  FleetGapTOE.unformalisedFormalGaps
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 58
-toeFleetRecordedUnformalisedGapCountIs58 =
-  FleetGapTOE.fleetRecordedUnformalisedGapCountIs58
+toePNFDistilledNonPromotionBoundary :
+  PNFDistilled.PNFDistilledNonPromotionBoundary
+toePNFDistilledNonPromotionBoundary =
+  PNFDistilled.canonicalPNFDistilledNonPromotionBoundary
 
-toeFleetRecordedContradictionCountIs44 :
-  FleetGapTOE.polarityContradictionGaps
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 44
-toeFleetRecordedContradictionCountIs44 =
-  FleetGapTOE.fleetRecordedContradictionCountIs44
+toe369SCALEEvidenceReviewTOEReceipt :
+  SCALEReview.SCALEEvidenceReviewTOEReceipt
+toe369SCALEEvidenceReviewTOEReceipt =
+  SCALEReview.canonicalSCALEEvidenceReviewTOEReceipt
 
-toeFleetRecordedMacroscopicMotifCountIs3 :
-  FleetGapTOE.macroscopicEigenMotifCount
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 3
-toeFleetRecordedMacroscopicMotifCountIs3 =
-  FleetGapTOE.fleetRecordedMacroscopicMotifCountIs3
+toeGovernedLegalWorkflowInvariantHandoff :
+  LegalGovernance.GovernedLegalWorkflowTOEInvariantHandoff
+toeGovernedLegalWorkflowInvariantHandoff =
+  LegalGovernance.canonicalGovernedLegalWorkflowTOEInvariantHandoff
 
-toeFleetTargetsOnlyUnformalisedFormalGaps :
-  FleetGapTOE.targetOnlyUnformalisedFormalGaps
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
-toeFleetTargetsOnlyUnformalisedFormalGaps =
-  FleetGapTOE.fleetTargetsOnlyUnformalisedFormalGaps
+toeGovernedLegalCandidateDoesNotCreateAuthority :
+  LegalGovernance.CandidateSourceIsAuthoritative → ⊥
+toeGovernedLegalCandidateDoesNotCreateAuthority =
+  LegalGovernance.toeCandidateSourceDoesNotCloseAuthority
 
-toeFleetSpectralLabelsDoNotIdentifyTheoremOwners :
-  FleetGapTOE.spectralLabelsIdentifyTheoremOwners
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
-toeFleetSpectralLabelsDoNotIdentifyTheoremOwners =
-  FleetGapTOE.fleetSpectralLabelDoesNotIdentifyTheoremOwner
+toeGovernedCurrentValidityDoesNotCreateApplicability :
+  LegalGovernance.CurrentValidityAutomaticallyMeansApplicability → ⊥
+toeGovernedCurrentValidityDoesNotCreateApplicability =
+  LegalGovernance.toeCurrentValidityDoesNotAutomaticallyEstablishApplicability
 
-toeFleetMetaIntrospectorAttributionPreserved :
-  FleetGapTOE.metaIntrospectorAttributionPreserved
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
-toeFleetMetaIntrospectorAttributionPreserved = refl
+toeGovernedSemanticAdmissionDoesNotCreateLegalAuthority :
+  LegalGovernance.SemanticAdmissionAuthorityIsLegalSourceAuthority → ⊥
+toeGovernedSemanticAdmissionDoesNotCreateLegalAuthority =
+  LegalGovernance.toeSemanticAdmissionDoesNotBecomeLegalSourceAuthority
 
-toeFleetMetaIntrospectorProofNotBorrowed :
-  FleetGapTOE.metaIntrospectorProofBorrowed
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
-toeFleetMetaIntrospectorProofNotBorrowed = refl
+toeGovernedDocumentRoleDoesNotCreateLegalAuthority :
+  LegalGovernance.DocumentRoleSuppliesLegalSourceAuthority → ⊥
+toeGovernedDocumentRoleDoesNotCreateLegalAuthority =
+  LegalGovernance.toeDocumentRoleDoesNotSupplyLegalSourceAuthority
 
-------------------------------------------------------------------------
--- Source-owned SLR evidence non-promotion; reused from PR #1343.
--- No Digital ESD implementation is modified.
-------------------------------------------------------------------------
+toeGovernedFleetResidualTOEHandoff :
+  GovernedFleet.GovernedFleetResidualTOEHandoff
+toeGovernedFleetResidualTOEHandoff =
+  GovernedFleet.canonicalGovernedFleetResidualTOEHandoff
 
-import DASHI.Interop.SLRCanonicalEvidenceSubstrateExact as SLREvidence
+toeFleetNamedManifestStillMissing :
+  FleetManifestTOE.named58ManifestAcquired ≡ false
+toeFleetNamedManifestStillMissing =
+  GovernedFleet.namedManifestStillMissing
 
-toeEvidenceManifestationDoesNotCreateSemanticAuthority :
-  SLREvidence.ManifestationCreatesSemanticAuthority → ⊥
-toeEvidenceManifestationDoesNotCreateSemanticAuthority =
-  SLREvidence.manifestationDoesNotCreateSemanticAuthority
-
-toeEvidenceObservationDoesNotCreateClaimTruth :
-  SLREvidence.ObservationCreatesClaimTruth → ⊥
-toeEvidenceObservationDoesNotCreateClaimTruth =
-  SLREvidence.observationDoesNotCreateClaimTruth
-
-toeEvidenceObservationDoesNotPromoteApplicability :
-  SLREvidence.ObservationPromotesApplicability → ⊥
-toeEvidenceObservationDoesNotPromoteApplicability =
-  SLREvidence.observationDoesNotPromoteApplicability
-
-toeEvidenceDoesNotCreateDigitalESDAdmission :
-  SLREvidence.CanonicalEvidenceCreatesDigitalESDAdmission → ⊥
-toeEvidenceDoesNotCreateDigitalESDAdmission =
-  SLREvidence.canonicalEvidenceDoesNotCreateDigitalESDAdmission
-
-------------------------------------------------------------------------
--- Source-owned SensibLaw governance firewalls.
--- Re-export one existing parity surface. Do not duplicate theorem owners.
-------------------------------------------------------------------------
-
-open import DASHI.Law.SensibLawITIRParityEverything public using
-  ( selectedLegalSourceAuthorityBoundary
-  ; selectedDomainTransportReceipt
-  ; selectedAttributionSnowballBoundary
-  ; selectedSnowballLineageBoundary
-  ; selectedNativeLegalFollowBoundary
-  ; selectedProviderFailureCalibration
-  ; selectedExpertProductionBoundary
-  ; selectedCanonicalEvidenceBoundary
-  ; selectedFrozenProvenanceDynamicBoundary
-  ; governanceCandidateSourceDoesNotCloseAuthority
-  ; governanceSameSystemDoesNotCloseAuthority
-  ; governanceCurrentValidityDoesNotEstablishApplicability
-  ; governanceSemanticAdmissionDoesNotCreateLegalAuthority
-  ; governanceDocumentRoleDoesNotCreateLegalAuthority
-  ; governanceRuntimeCannotInventLegalSemantics
-  ; governanceSourceFollowCannotBecomeAuthorityByTransport
-  ; governanceRepresentationEqualityDoesNotCreateLegalAuthority
-  ; governanceVendorIdentityDoesNotCreateAuthority
-  ; governanceTargetDomainNeedsOwnAuthorityWitness
-  ; governanceSnowballCitationDoesNotCreateAuthority
-  ; governanceSnowballCitationDoesNotCreateLegalAuthority
-  ; governanceParetoDirectiveIsNotLegalAuthority
-  ; governanceParetoFrontierDoesNotPrejudgeRetrieval
-  ; governanceNativeCliDoesNotCreateLegalAuthority
-  ; governanceProviderFailureDoesNotMakePropositionFalse
-  ; governanceExpertProductionPromotesNoAuthority
-  ; governanceMultipleReportsDoNotCreateIndependence
-  ; governanceManifestationDoesNotCreateSemanticAuthority
-  ; governanceObservationDoesNotCreateClaimTruth
-  ; governanceObservationDoesNotPromoteApplicability
-  ; governanceCanonicalEvidenceDoesNotCreateDigitalESDAdmission
-  ; governanceStaticSeparationDoesNotCreateDynamicSafety
-  ; governanceFrozenSelectionDoesNotCreateDynamicSafety
-  ; governanceProvenanceAxisDoesNotCreateTruth
-  ; governanceCrossPollinationDoesNotTransferAuthorship
-  )
-
-------------------------------------------------------------------------
--- Institutional normativity direct TOE handoff.
--- Source theorem ownership remains in the canonical SensibLaw/Core modules.
-------------------------------------------------------------------------
-
-open import DASHI.Law.SensibLawITIRParityEverything public using
-  ( selectedInstitutionalNormProductionBoundary
-  ; selectedStatusSignalBoundary
-  ; selectedProximityInfluenceBoundary
-  ; selectedLegalReasonablenessNormativityBoundary
-  ; selectedOperationalLegalityBoundary
-  ; selectedInstitutionalResponsibilityBoundary
-  ; selectedEpistemicConsequenceBoundary
-  ; governanceBaselineDoesNotRecoverProductionHistory
-  ; governanceStatusDoesNotRecoverSubstantiveAdequacy
-  ; governanceProximityDoesNotCreateInfluence
-  ; governanceLegalValidityDoesNotCreatePoliticalNeutrality
-  ; governanceStatusSignalDoesNotCreateSubstantiveAdequacy
-  ; governanceLawfulRangeDoesNotCreatePoliticalNeutrality
-  ; governanceFormalProhibitionDoesNotCreateEffectivePrevention
-  ; governanceAuthorisationDoesNotCreateJustification
-  ; governanceHighUncertaintyDoesNotAutomaticallyEstablishIllegality
-  )
+toeFleetPerGapDispatchStillDisabled :
+  FleetManifestTOE.perGapDispatchEnabled ≡ false
+toeFleetPerGapDispatchStillDisabled =
+  GovernedFleet.perGapDispatchStillDisabled
