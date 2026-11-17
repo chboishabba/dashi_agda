@@ -129,3 +129,34 @@ D. Separately prove the -163 class polynomial same-original j identity.
 E. Connect finite hypergeometric and Pell accelerators to the
    existing Bishop reals through exact prefix + setoid uniqueness.
 No part of YM.REAL R2-R6 is claimed closed by this work.
+
+
+## 18 Nov max-cut continuation: CM -163 short integer certificate
+
+New source work after the first ledger:
+- scripts/check_cm163_dyadic_j_integer_certificate.py:
+  exact outward dyadic q-series enclosure at 128/160/256 bits and
+  full reduced-form enumeration. At 128 bits j is enclosed to a
+  half-integer interval around -640320^3; at 256 bits width is
+  approximately 1.45e-31. The acceptance path uses NO floats.
+- DASHI/Moonshine/JInvariantCM163DyadicHalfIntegerExact.agda:
+  --safe integer endpoint inequalities, NO analytic-producer promotion.
+- Docs/proofs/JInvariantCM163CertifiedIntegerMaxCut20261118.md:
+  complete reduced-form a<=7 proof and exact tail bounds.
+- DASHI/Moonshine/JInvariantEllipticProofRelevantKleinWeldExact.agda:
+  uses JInvariantProofRelevantKleinJExact's actual proof-relevant
+  quotient. CertifiedPoint includes a same-source normalized-Delta
+  nonzero witness; the original standardJ equivalence is definitional.
+  In particular, no totalized quotient without point-level safety
+  enters the public special-value consumer.
+
+This changes the preferred -163 proof path: compute h(-163)=1
+from reduced forms, appeal to the classical CM *integrality* theorem,
+and combine with a rigorously bounded q-series interval smaller than
+one integer. No explicit enormous class-polynomial coefficient
+calculation is required to establish the classical result.
+
+The CM theorem, same-carrier q/Delta/E4/E6 identification, actual
+Bishop pi period and all newly source-written Agda modules are
+still formal Agda validation/proof obligations. Numeric source
+passes do not automatically discharge these.
