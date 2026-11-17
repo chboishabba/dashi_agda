@@ -91,7 +91,7 @@ rawOriginalScoreFuses a b c A B C ws wf wr =
        :=
        ((((((ws :* a) :+ (wf :* c)) :+ (wr :* b)) :* A)
         :+ (((((ws :* b) :+ (wf :* a)) :+ (wr :* c)) :* B))
-        :+ (((((ws :* c) :+ (wf :* b)) :+ (wr :* a)) :* C))))
+        :+ (((((ws :* c) :+ (wf :* b)) :+ (wr :* a)) :* C))))))
     refl a b c A B C ws wf wr
 
 sourceScoreEqualsFusedConsumer :
