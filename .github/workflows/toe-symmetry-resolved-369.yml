@@ -23,6 +23,8 @@ on:
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda'
       - 'DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayGate4CurrentFrontierReceipt.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayGate4CurrentFrontierCompletionLedger.agda'
       - 'DASHI/Physics/YangMills/YangMillsSubmissionObligationCardinalityExact.agda'
       - 'Docs/diagrams/ym_toe_r559_current_master_convergence.puml'
       - 'DASHI/Law/SensibLawITIRParityEverything.agda'
@@ -64,6 +66,8 @@ on:
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda'
       - 'DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayGate4CurrentFrontierReceipt.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayGate4CurrentFrontierCompletionLedger.agda'
       - 'DASHI/Physics/YangMills/YangMillsSubmissionObligationCardinalityExact.agda'
       - 'Docs/diagrams/ym_toe_r559_current_master_convergence.puml'
       - 'DASHI/Law/SensibLawITIRParityEverything.agda'
@@ -237,36 +241,26 @@ jobs:
           dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayGoal1 --root .
           dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayIrreducibleSourceFamilies --root .
           dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayCriticalPath --root .
-          dashi-repo diagnose DASHI/Unified/SensibLawGovernanceFleetTOEExact.agda --root .
-          dashi-repo related canonicalSensibLawGovernanceFleetTOEReceipt --root . --limit 20
-          dashi-repo related canonicalFleetFormalGapTargetReceipt --root . --limit 20
-          dashi-repo related fleetEigenPriorityDoesNotCreateProof --root . --limit 20
-          dashi-repo discover 'fleet formal gap target spectral numeric ABI discharged fibres contradiction gaps non-promotion' --root . --limit 40
-          dashi-repo diagnose DASHI/Unified/TOE369MaxCutKernelBidiTernaryExact.agda --root .
-          dashi-repo diagnose DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda --root .
-          dashi-repo diagnose DASHI/Unified/SingularBasinCoarseRGTOEExact.agda --root .
-          dashi-repo diagnose DASHI/Unified/SingularBasinCoarseRGTOEValidation.agda --root .
-          dashi-repo diagnose DASHI/Unified/SensibLawGovernanceTOEExact.agda --root .
-          dashi-repo diagnose DASHI/Unified/SensibLawGovernanceTOEValidation.agda --root .
-          dashi-repo related semantic-promotion-legal-authority-closed --root . --limit 20
-          dashi-repo related qualificationDoesNotAutomaticallyProveForensicCompliance --root . --limit 20
-          dashi-repo related parserCandidateAloneCannotAuthorizeAdmission --root . --limit 20
-          dashi-repo related officialSurfaceCannotRecoverFineLegalState --root . --limit 20
-          dashi-repo discover 'SensibLaw semantic promotion legal authority expert compliance review admission Pareto snowball governance non-promotion' --root . --limit 40
-          dashi-repo lineage --prefix DASHI.Interop.SensibLaw --root .
-          dashi-repo lineage --prefix DASHI.Law.SensibLaw --root .
-          dashi-repo related finiteReductionNotBasinPreserving --root . --limit 20
-          dashi-repo related selectedProjectionNotResolutionAdequate --root . --limit 20
-          dashi-repo discover 'singular basin coarse RG projection basin preservation resolution robustness non-promotion' --root . --limit 40
-          dashi-repo lineage --prefix DASHI.Physics.Dynamics.SingularBasin --root .
-          dashi-repo related monsterAxisReflectionIntertwines --root . --limit 20
-          dashi-repo related dimensionDoesNotCreateFaithfulness --root . --limit 20
-          dashi-repo related dimensionDoesNotCreateProjectedAction --root . --limit 20
-          dashi-repo related canonicalActual3BKernelSameElementBoundary --root . --limit 20
-          dashi-repo related phasePreservingReductionEqualsFullGlobalInversionIsFalse --root . --limit 20
-          dashi-repo discover 'ternary 27 selected 3B max cut kernel BIDI phase intertwiner non-promotion' --root . --limit 40
-          dashi-repo lineage --prefix DASHI.Moonshine.Base369Ternary27 --root .
-          dashi-repo lineage --prefix DASHI.Reasoning.Trialectic369Selected3B --root .
+          dashi-repo diagnose DASHI/Unified/BalabanR559TOEMaxCutExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/BalabanR559TOEMaxCutValidation.agda --root .
+          dashi-repo diagnose DASHI/Unified/BalabanR559TOEUnifiedEverythingValidation.agda --root .
+          dashi-repo diagnose DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda --root .
+          dashi-repo diagnose DASHI/Physics/YangMills/YangMillsSubmissionObligationCardinalityExact.agda --root .
+          dashi-repo related physicalClosureRound6CutsetInhabitantsLevel --root . --limit 20
+          dashi-repo related gate4ObligationCount --root . --limit 20
+          dashi-repo diagnose DASHI/Physics/YangMills/BalabanClayGate4CurrentFrontierReceipt.agda --root .
+          dashi-repo diagnose DASHI/Physics/YangMills/BalabanClayGate4CurrentFrontierCompletionLedger.agda --root .
+          dashi-repo related currentFrontierLedgerTypecheckLevel --root . --limit 20
+          dashi-repo related currentSurfacePostulateFreeLevel --root . --limit 20
+          dashi-repo discover 'Balaban Gate4 current frontier completion ledger physical analytic residual' --root . --limit 50
+          dashi-repo discover 'Yang Mills Gate 4 58 unresolved cutset CMP109 Bishop Federbush background gauge Hessian polymer' --root . --limit 50
+          dashi-repo related scaleTransferPromotionEliminator --root . --limit 20
+          dashi-repo related balabanRGScaleTransferPromotionImpossibleHere --root . --limit 20
+          dashi-repo discover 'Balaban R559 same owner direct scale transfer non-promotion TOE max cut' --root . --limit 50
+          dashi-repo lineage --prefix DASHI.Unified.BalabanR559 --root .
+          dashi-repo diagnose DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/BalabanIbrahimParetoSnowballTOEValidation.agda --root .
+          dashi-repo diagnose DASHI/Unified/YMGoal1R559IbrahimTOEValidation.agda --root .
           dashi-repo related balabanRGScaleTransferPromotionImpossibleHere --root . --limit 20
           dashi-repo related canonicalRecognitionRouteParetoBoundary --root . --limit 20
           dashi-repo related currentMonster3BCharacterExecutionFrontier --root . --limit 20
@@ -339,25 +333,17 @@ jobs:
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
             DASHI/Unified/YMGoal1TOECompatibilityValidation.agda
             DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
-            DASHI/Unified/SensibLawGovernanceTOEExact.agda
-            DASHI/Unified/SensibLawGovernanceTOEValidation.agda
-            DASHI/Unified/SensibLawGovernanceComplianceTOEExact.agda
-            DASHI/Unified/SensibLawGovernanceComplianceTOEValidation.agda
-            DASHI/Law/SensibLawExpertEvidenceProductionIntegrityExact.agda
-            DASHI/Law/SensibLawRealMatterReviewDecisionExact.agda
-            DASHI/Cognition/PNF/SensibLawLegalSemanticAdmissionFrontierExact.agda
-            DASHI/Governance/PromotionSpine.agda
-            DASHI/Governance/LegalDecisionDoubleProjectionExact.agda
-            DASHI/Governance/LegitimacyEvidenceSeparationExact.agda
-            DASHI/Interop/SensibLawSemanticPromotionPolicy.agda
-            DASHI/Law/SensibLawAgdaFirstLegalRuntimeEverything.agda
-            DASHI/Law/SensibLawITIRParityEverything.agda
-            DASHI/Governance/DomainPermeabilityAuthorityTransport.agda
-            DASHI/Core/AuthorityNonPromotionCore.agda
-            DASHI/Promotion/AuthorityBoundaryCore.agda
-            DASHI/Core/SnowballAttributionProvenanceInvariantExact.agda
-            DASHI/Interop/SensibLawSnowballAttributionLineageAdapterExact.agda
-            DASHI/Law/SensibLawParetoProofDirectedCorpusSearchEverything.agda
+            DASHI/Unified/BalabanR559TOEMaxCutExact.agda
+            DASHI/Unified/BalabanR559TOEMaxCutValidation.agda
+            DASHI/Unified/BalabanR559TOEUnifiedEverythingValidation.agda
+            DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda
+            DASHI/Physics/YangMills/BalabanClayGate4CurrentFrontierReceipt.agda
+            DASHI/Physics/YangMills/BalabanClayGate4CurrentFrontierCompletionLedger.agda
+            DASHI/Physics/YangMills/YangMillsSubmissionObligationCardinalityExact.agda
+            DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda
+            DASHI/Unified/BalabanIbrahimParetoSnowballTOEValidation.agda
+            DASHI/Unified/YMGoal1R559IbrahimTOEValidation.agda
+            DASHI/Physics/Closure/BalabanRGScaleTransferFrontierReceipt.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
             DASHI/Unified/SensibLawGovernanceFleetTOEExact.agda
@@ -394,12 +380,18 @@ jobs:
             DASHI/Unified/SensibLawGovernanceComplianceTOEExact.agda
             DASHI/Unified/SensibLawGovernanceComplianceTOEValidation.agda
             DASHI/Unified/BalabanRGTOERegression.agda
-            DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda
-            DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda
-            DASHI/Unified/PNFDistilledNonPromotionTOEExact.agda
-            DASHI/Unified/PNFDistilledNonPromotionTOEValidation.agda
-            DASHI/Unified/SCALEEvidenceReviewTOEConvergenceExact.agda
-            DASHI/Unified/SCALEEvidenceReviewTOEConvergenceValidation.agda
+            DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
+            DASHI/Unified/BalabanR559TOEMaxCutExact.agda
+            DASHI/Unified/BalabanR559TOEMaxCutValidation.agda
+            DASHI/Unified/BalabanR559TOEUnifiedEverythingValidation.agda
+            DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda
+            DASHI/Physics/YangMills/BalabanClayGate4CurrentFrontierReceipt.agda
+            DASHI/Physics/YangMills/BalabanClayGate4CurrentFrontierCompletionLedger.agda
+            DASHI/Physics/YangMills/YangMillsSubmissionObligationCardinalityExact.agda
+            DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda
+            DASHI/Unified/BalabanIbrahimParetoSnowballTOEValidation.agda
+            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
+            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
             DASHI/Unified/SensibLawGovernanceFleetTOEExact.agda
             DASHI/Unified/Physics.agda
