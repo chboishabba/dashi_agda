@@ -1,0 +1,53 @@
+{
+  "date": "2026-11-17",
+  "pr_number": 1524,
+  "scope": "F13 causal Lorentz ADE Maxwell finite-material Green; F15 source/load full-state return audit; D1 independent exact SymPy regression",
+  "reused_owners": [
+    "DASHI/Physics/Motors/SmithFilsingerDispersiveMaterialPortExact.agda",
+    "DASHI/Physics/Motors/SmithFilsingerDispersiveMaterialWeldExact.agda",
+    "DASHI/Physics/Motors/SmithFilsingerSpaceTimePoyntingTelescopeExact.agda",
+    "scripts/smith_filsinger_oblique_maxwell_sympy.py",
+    "scripts/smith_filsinger_passive_radiation_sympy.py",
+    "DASHI/Physics/Motors/SmithFilsingerCoerciveGreenRetardedWeldExact.agda"
+  ],
+  "added": [
+    "scripts/smith_filsinger_lorentz_ade_sympy.py",
+    "scripts/test_smith_filsinger_lorentz_ade_sympy.py",
+    "scripts/smith_filsinger_lorentz_maxwell_weld_sympy.py",
+    "scripts/test_smith_filsinger_lorentz_maxwell_weld_sympy.py",
+    "Docs/research/SmithFilsingerLorentzADEMaxwellGreenMaxCut20261117.md"
+  ],
+  "exact_math": {
+    "equations": [
+      "eps_inf*Eprime=C*H-sigma*E-V+J_nat+J_ctrl-g_load*E",
+      "mu*Hprime=-transpose(C)*E",
+      "Pprime=V;Vprime=alpha*E-gamma*V-omega0sq*P",
+      "U=(eps_inf|E|²+mu|H|²+(|V|²+omega0sq|P|²)/alpha)/2",
+      "deltaU+useful_load+ohmic+polarization_relaxation=natural+controller",
+      "chi(s)=alpha/(s²+gamma*s+omega0sq)",
+      "epsilon_eff(s)=eps_inf+sigma/s+chi(s)",
+      "omega*Im epsilon_eff=sigma+(gamma/alpha)*omega²*abs(chi)²"
+    ],
+    "causal_material_impulse": "zero before t=0; underdamped t>=0 equals alpha/omega_d exp(-gamma t/2) sin(omega_d t)",
+    "pole_status": "strictly left s half plane for gamma>0 and underdamping",
+    "synthetic_nontrivial_full_state_cycle": "five-step exactly solved forcing restores all E/H/P/V and pays positive useful load and losses, but is NOT measured natural source"
+  },
+  "local_verification": {
+    "sympy": "1.14.0",
+    "pytest": "9.0.2",
+    "old_suites": 68,
+    "new_suites": 44,
+    "total": "112/112 PASS",
+    "replay": "local source-equivalent exact arithmetic; not PR exact-head CI"
+  },
+  "flags": {
+    "independent_original_natural_meter": false,
+    "original_terminal_calibration": false,
+    "physical_environment_replenishment": false,
+    "physical_F13_3D_retarded_dyadic": "OPEN",
+    "physical_F15": "OPEN",
+    "agda_kernel_D1": "OPEN",
+    "exact_head_ci_run": "NOT OBSERVED"
+  },
+  "attribution": "Existing original DASHI source/material and Maxwell/Green owners reused. User-origin Sun-Earth/Filsinger steelman conditional. No ESD edits."
+}
