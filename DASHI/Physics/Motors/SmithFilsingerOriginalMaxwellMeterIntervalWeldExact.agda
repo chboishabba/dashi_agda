@@ -144,3 +144,29 @@ originalCalibratedPortUpperFromSignedMeter jet b f a =
     (Original.SelectedOriginalSpaceTimePort.loadIsSameOriginal
       (originalPort a))
     (originalMaxwellReceiverUpperFromSignedMeter jet b f a)
+
+
+-- The matching LOWER endpoint on the exact same named calibrated port.
+-- This completes the two-sided physical-receiver -> original b/f port
+-- transport, using only the existing loadIsSameOriginal witness.
+originalCalibratedPortLowerFromSignedMeter :
+  ∀ {r} {F : C3.RealField r}
+  (jet : Vector.FullVectorMaxwellJet F)
+  (b : Boundary.SelectedBoundary)
+  (f : Boundary.FormalFieldToPort b)
+  (a : OriginalMaxwellMeterIntervalWeld jet b f) →
+  let bound = meterCertificate a in
+  ℚ._≤_
+    (Meter.SelectedOriginalCertifiedMeter.observedNetTerminalWork
+       (Bounds.TwoSidedMeterCertificate.original bound)
+     ℚ.+ (ℚ.- Cert.ProofCarryingFiniteSumUpperEnclosure.certifiedUpper
+       (Bounds.TwoSidedMeterCertificate.negativeUpper bound)))
+    (Original.SelectedOriginalSpaceTimePort.calibratedWork
+      (originalPort a)
+      (Port.MidpointTwoPortWorkWindow.usefulWork
+        (Boundary.FormalFieldToPort.portWindow f)))
+originalCalibratedPortLowerFromSignedMeter jet b f a =
+  transportRight _
+    (Original.SelectedOriginalSpaceTimePort.loadIsSameOriginal
+      (originalPort a))
+    (originalMaxwellReceiverLowerFromSignedMeter jet b f a)
