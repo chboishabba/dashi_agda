@@ -69,3 +69,6 @@ import DASHI.Physics.Photovoltaic.PV369NREL2017ThreeJunctionTwoGroupTopologyExac
 
 -- P5 passive same-source absorbed-solar energy ceiling on EACH MPP; original energy ledger and strict non-overproduction theorem.
 import DASHI.Physics.Photovoltaic.PV369PassiveAbsorbedEnergyCeilingExact
+
+-- M3 exact [111] source Bir-Pikus symmetric A1 row output plus scalar-only negative control.
+import DASHI.Physics.Photovoltaic.PV369BirPikusA1RowSumExact
