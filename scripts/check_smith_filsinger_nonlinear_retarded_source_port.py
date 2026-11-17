@@ -261,7 +261,8 @@ def run():
     return dict(signed_ledger='Wnatural+Wion_creation+Wcontroller = Wload+Wchannel+Wexterior+Wion_loss+Wcontroller_aux+DeltaU',
        passive_foster='Debye g*s/(s+w), Lorentz alpha*s/(s²+gamma*s+Omega²): positive real for positive coefficients on real frequency; *not fitted waveguide*',
        source_condition='active source voltage explicitly specified, may be solar driven but NOT measured; delayed feedback is not automatically passive',
-       no_added_ionization=simulate(base), controlled_ionization=simulate(controlled),\n       finite_source_backaction=simulate_backreacting_source(base),
+       no_added_ionization=simulate(base), controlled_ionization=simulate(controlled),
+       finite_source_backaction=simulate_backreacting_source(base),
        hard_gates=['source_first P1/P2 R2/R3 still null','F10 full Maxwell PDE open',
                    'F13 actual multilayer waveguide and nonlinear plasma parameters open',
                    'F15 positive source-derived net over restored cycles open'])
