@@ -567,3 +567,53 @@ A separate arbitrary-interior ratio theorem gives the exact defect as two face-w
 - **G6:** Actual Einstein–matter source/retarded FIO/calibrated detector evidence OPEN.
 
 **Next highest-alpha step:** use the *actual original* `(V0,U,P,M)` augmented radial state, the conserved finite-volume shell/Green form, and the moving SAT stage operator to prove a **coupled weighted semidiscrete radial/normal energy bound including the origin trace**, then a quantitative high-derivative receiver estimate. Do not substitute unrelated geometric metrics or a source-changing FV reinterpretation. Preserve original DASHI/Caldwell–Langlois/Thorne attribution and user-directed research distinction. No ESD edits, no Monster/369 physical equivalence, no graviton detection claim.
+
+
+## Maximum-cut XXXVIII — actual normal_order=3 SBP2 moving weak-Israel boundary energy (2026-11-17)
+
+**Original owner inspected:** `scripts/ksw668_f8_tt_multipole.py:stage()`. For `normal_order=3`, the normal derivative of both `P,M` is forward one-sided at lower y, backward one-sided at upper y, centered interior. The characteristic normal principal equations have coefficients `a=1+v`, `-b=v-1` where `b=1-v`. The lower M SAT is `+2b(target-M0)/dy`; upper P SAT is `-2a PN/dy`. The exact diagonal SBP2 quadrature is `H_y=dy diag(1/2,1,...,1,1/2)` (for at least two y nodes).
+
+### G2: genuinely exact finite normal-energy boundary result
+
+For the `normal-only` characteristic energy `E_char=1/2 Σ_i H_i(P_i²+M_i²)`, the original SBP2 derivative and both original SATs give precisely the following **boundary contribution** to its time derivative, for arbitrary rational `v,P0,M0,PN,MN,target`:
+```
+B = -a/2*(P0²+PN²)
+    -b/2*(MN²+(M0-target)²)
+    +b/2*target².
+```
+This is an exact sum-of-squares identity. If `-1<v<1`, then `a,b>0` and the first two terms dissipate, while the final term supplies the boundary source injection. The inequality follows from the square signs; it is **not an Agda order theorem**. No continuum or infinite-grid limit is assumed for this finite SBP2 algebra.
+
+At the ORIGINAL `t=4/3` rational slice, `v=-3/5`, `target=P0/4-5S/4` with `S=amp*source`, an exact second square-completion gives
+```
+B = -(4/5)(M0-target)²
+    -(3/20)(P0+5S/3)²
+    +(5/3)S²
+    -(1/5)PN² -(4/5)MN².
+```
+In particular **`B <= (5/3) S²`** at this slice. This cap uses the actual weak-Israel source coefficient, not a source-free or strongly enforced wall. The general real moving-wall `v(t)` source cap, once `v<0` and the exact Israel `target=((1+v)P0-2S)/(1-v)` is supplied, has the formal completed-square form
+```
+B = [v(1+v)/(1-v)]*(P0-S/v)²
+    -(1-v)/2*(M0-target)² - S²/v
+    -(1+v)/2*PN² -(1-v)/2*MN².
+```
+An Agda real/rational order proof with bounded v(t), nonzero denominators and normalization of source to the actual geometry is STILL OPEN. In particular the factor `-1/v` requires a lower bound for `|v|` over the simulation time range. The formula has been derived algebraically but is NOT a new Agda theorem.
+
+The finite SBP2 face sum telescope and general boundary algebra are implemented in `KSW668F8MovingSBP2SATBoundaryEnergyExact.agda`, reusing the original moving Neumann/SBP owners. The slice source cap has separate exact rational proofs there.
+
+### G3: actual bulk terms that prevent premature global energy closure
+
+The original radial FV Green identity cancels the radial force against the radial gradient energy only when the **moving shift** is accounted for. Since `Udot=(P+M)/2+v(P-M)/2`, the residual per radial face is exactly
+```
+A_face * v * delta_r U * delta_r(P-M).
+```
+The original warp force `F_warp=-3(P-M)/(2z)` also has nonzero characteristic-power contribution in conventional `(P²+M²)/4` energy:
+```
+(P+M)/2 * F_warp = -(3/4) z^-1 (P²-M²).
+```
+Both are source-written Agda exact polynomial identities in the same module and **cannot be discarded**. The first suggests a mixed/shifted moving-energy symmetrizer; the second requires the actual `z^-3` bulk norm and its time/space-varying Jacobian, rather than freezing the warp factor. Additional original outer radial Dirichlet/normal closure and stagewise geometric coefficient changes require inclusion. Hence the present finite normal boundary SOS **does not close G3 or the joint radial-normal G2 stability**.
+
+### Verification and provenance
+
+Exact-Fraction regression `scripts/test_ksw668_f8_moving_sbp2_sat_energy.py` checks original one-sided/centered SBP2 operators with 2,3,4,6,12 normal nodes at arbitrary dy/v, lower/upper exact SATs, source square completion, radial shift and warp identities. **1,500/1,500 independent exact-rational checks PASS**. New module imported through `KSW668F8SameObjectWeylAuthorityBoundary.agda` into the original KSW/TOE graph. **Pinned Agda kernel NOT RUN; source-written proofs still require typechecking.**
+
+**Updated gate priorities:** G2 original SBP2/SAT normal boundary source cap is **closed as finite algebra**, but full coupled moving radial/normal boundary energy still OPEN. G3 **next cut**: construct the time-dependent `z^-3` weighted radial+normal symmetrizer including the origin-augmented V0 state, shift, warp, SAT source and time-varying geometry; then prove a mesh-uniform semidiscrete bound before any SSPRK3 CFL acceptance. G4 higher Sobolev dual Weyl trace, G5 independent three-axis convergence and G6 physical matter/FIO/detector remain OPEN. Original sources, Caldwell–Langlois/Thorne and relevant SBP prior art retain attribution; no ESD edits, no unrelated physics identification or graviton detection.
