@@ -84,4 +84,33 @@ check('consumer row lies in retained observer dual',
       Ogood[:,2]==s.zeros(2,1))
 check('consumer row detects lost history kernel',
       Obad[:,2]!=s.zeros(1,1))
+# Fixed-orthant local observability join. The source C2
+# history term v*abs(h) has linear row v*sign(h) on a fixed
+# sign chart. The selected expert first Linear layer sees
+# signed h directly. Its actual history block may have full
+# rank, making any 3->2 LINEAR history codec inadequate
+# for preserving every first-layer preactivation.
+sg=s.diag(1,1,1)
+V=s.Matrix([[1,0,0]])*sg
+Ori=s.Matrix([[1,1,0]])
+FFNwide=s.eye(3)
+obs_all=V.col_join(Ori).col_join(FFNwide)
+check('source-compatible FFN rank3 history obstruction',
+      obs_all.rank()==3)
+check('no 2D linear history code preserves full-rank FFN preactivations',
+      len(obs_all.rowspace())>2)
+# Positive restricted network: all relevant observer rows lie
+# in the retained h0,h1 row space and the transition kernel
+# is invariant. This is an EXPLICIT admissible subclass, not
+# an assertion about fitted original Leech FFN matrices.
+FFNnarrow=s.Matrix([[1,0,0],[0,1,0],[1,1,0]])
+obs_pos=V.col_join(Ori).col_join(FFNnarrow)
+check('restricted observer rows factor through original h0,h1',
+      obs_pos[:,2]==s.zeros(obs_pos.rows,1))
+check('restricted joint history-observer rank is exactly2',
+      obs_pos.rank()==2)
+check('bad source transition reactivates forgotten history coordinate',
+      P[:2,:]*Tbad*s.Matrix([0,0,1])
+      !=P[:2,:]*Tbad*s.zeros(3,1))
+
 print('X369_JOINT_HISTORY_SYMPY_PASS',len(checks))
