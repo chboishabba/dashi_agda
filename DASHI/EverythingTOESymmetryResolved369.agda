@@ -13,6 +13,10 @@ import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 import DASHI.Unified.SingularBasinCoarseRGTOEExact as SingularBasinTOE
 import DASHI.Geo.EarthEmbeddingAcquisitionExact as EarthEmbeddingTOE
+import DASHI.Unified.BrainFMRI as BrainFMRI
+import DASHI.Physics.Closure.BrainConnectomeFMRIObservationQuotient as BrainObservation
+import DASHI.Physics.Closure.BidirectionalBrainObservationQuotient as BrainBidirectional
+import DASHI.Unified.InvariantSpine as BrainSpine
 
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -118,6 +122,57 @@ toeBalabanRGReceipt =
 --
 -- Reuse the canonical acquisition/interpretability owner. This facade does
 -- not assign physical meaning to individual learned coordinates.
+------------------------------------------------------------------------
+
+toeEarthEmbeddingReceipt :
+  EarthEmbeddingTOE.EarthEmbeddingTOEReceipt
+toeEarthEmbeddingReceipt =
+  EarthEmbeddingTOE.canonicalEarthEmbeddingTOEReceipt
+
+toeEarthEmbeddingZKPFrame :
+  ParetoSnowballTOE.TOEZKPFrame
+toeEarthEmbeddingZKPFrame =
+  EarthEmbeddingTOE.canonicalEarthEmbeddingTOEZKPFrame
+
+toeAlphaEarthDimensionIs64 :
+  EarthEmbeddingTOE.alphaEarthDimension
+    EarthEmbeddingTOE.canonicalEarthEmbeddingTOEReceipt ≡ 64
+toeAlphaEarthDimensionIs64 =
+  EarthEmbeddingTOE.alphaEarthDimensionIs64
+
+toeTesseraDimensionIs128 :
+  EarthEmbeddingTOE.tesseraDimension
+    EarthEmbeddingTOE.canonicalEarthEmbeddingTOEReceipt ≡ 128
+toeTesseraDimensionIs128 =
+  EarthEmbeddingTOE.tesseraDimensionIs128
+
+toeLearnedCoordinateDoesNotCreatePhysicalIdentity :
+  EarthEmbeddingTOE.LearnedCoordinateCreatesPhysicalIdentity → ⊥
+toeLearnedCoordinateDoesNotCreatePhysicalIdentity =
+  EarthEmbeddingTOE.learnedCoordinateDoesNotCreatePhysicalIdentity
+
+toeGradientDoesNotCreateCausalEnvironmentalEffect :
+  EarthEmbeddingTOE.GradientCreatesCausalEnvironmentalEffect → ⊥
+toeGradientDoesNotCreateCausalEnvironmentalEffect =
+  EarthEmbeddingTOE.gradientDoesNotCreateCausalEnvironmentalEffect
+
+toeModelOutputDoesNotCreateIndependentFieldMeasurement :
+  EarthEmbeddingTOE.ModelOutputCreatesIndependentFieldMeasurement → ⊥
+toeModelOutputDoesNotCreateIndependentFieldMeasurement =
+  EarthEmbeddingTOE.modelOutputDoesNotCreateIndependentFieldMeasurement
+
+toeEmbeddingDoesNotCreateLegalAuthority :
+  EarthEmbeddingTOE.EmbeddingCreatesLegalAuthority → ⊥
+toeEmbeddingDoesNotCreateLegalAuthority =
+  EarthEmbeddingTOE.embeddingDoesNotCreateLegalAuthority
+
+toeGeographicRecoverabilityDoesNotCreatePhysicalIdentity :
+  EarthEmbeddingTOE.GeographicRecoverabilityCreatesPhysicalIdentity → ⊥
+toeGeographicRecoverabilityDoesNotCreatePhysicalIdentity =
+  EarthEmbeddingTOE.geographicRecoverabilityDoesNotCreatePhysicalIdentity
+
+------------------------------------------------------------------------
+-- Normalized Balaban density, regular-E, stress, and continuum surfaces.
 ------------------------------------------------------------------------
 
 toeEarthEmbeddingReceipt :
@@ -1447,3 +1502,23 @@ toeFleetNumericABIRequiresIndependentEvidence :
   FleetGapTOE.SpectralNumericABIPromotion → ⊥
 toeFleetNumericABIRequiresIndependentEvidence =
   FleetGapTOE.fleetSpectralNumericABIPromotionImpossible
+
+------------------------------------------------------------------------
+-- Canonical brain/connectome/fMRI quotient boundary.
+-- The observation owners retain authority. This facade adds no empirical proof.
+------------------------------------------------------------------------
+
+toeBrainFirstMissing : BrainObservation.BrainObservationFirstMissing
+toeBrainFirstMissing = BrainFMRI.brainFirstMissing
+
+toeBrainBidirectionalFirstMissing :
+  BrainBidirectional.BidirectionalObservationFirstMissing
+toeBrainBidirectionalFirstMissing = BrainFMRI.bidirectionalFirstMissing
+
+toeBrainObservationNonPromotion :
+  BrainBidirectional.NonPromotionBoundary
+toeBrainObservationNonPromotion = BrainFMRI.brainNonPromotionBoundary
+
+toeBrainJPromotionBlocked :
+  BrainSpine.objectExternalJPromotion BrainFMRI.brainFMRIObject ≡ false
+toeBrainJPromotionBlocked = BrainFMRI.brainFMRIJPromotionBlocked

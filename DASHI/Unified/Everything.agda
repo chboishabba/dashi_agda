@@ -13,8 +13,6 @@ import DASHI.Mathematics.CrossPollination.MillenniumLeanAssistReceiptExact as Mi
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
-import DASHI.Moonshine.Base369Monster3BSeventyEightExceptionalE6BidiExact as E6F3Five
-import DASHI.Moonshine.MonsterThreeLocalE8LeechBridgeExact as E8E6A2
 
 import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
 import DASHI.ComputerScience.TriadicFin27Byte256ABIExact as TriadicABI
@@ -205,6 +203,62 @@ unifiedBalabanDirectScaleTransferNonPromotion =
   BalabanRGTOE.balabanRGScaleTransferPromotionImpossible
 
 ------------------------------------------------------------------------
+-- Learned Earth-embedding TOE convergence.
+------------------------------------------------------------------------
+
+unifiedEarthEmbeddingReceipt :
+  EarthEmbeddingTOE.EarthEmbeddingTOEReceipt
+unifiedEarthEmbeddingReceipt =
+  EarthEmbeddingTOE.canonicalEarthEmbeddingTOEReceipt
+
+unifiedEarthEmbeddingZKPFrame :
+  ParetoSnowballFrame.TOEZKPFrame
+unifiedEarthEmbeddingZKPFrame =
+  EarthEmbeddingTOE.canonicalEarthEmbeddingTOEZKPFrame
+
+unifiedAlphaEarthDimensionIs64 :
+  EarthEmbeddingTOE.alphaEarthDimension
+    EarthEmbeddingTOE.canonicalEarthEmbeddingTOEReceipt ≡ 64
+unifiedAlphaEarthDimensionIs64 =
+  EarthEmbeddingTOE.alphaEarthDimensionIs64
+
+unifiedTesseraDimensionIs128 :
+  EarthEmbeddingTOE.tesseraDimension
+    EarthEmbeddingTOE.canonicalEarthEmbeddingTOEReceipt ≡ 128
+unifiedTesseraDimensionIs128 =
+  EarthEmbeddingTOE.tesseraDimensionIs128
+
+unifiedLearnedCoordinateDoesNotCreatePhysicalIdentity :
+  EarthEmbeddingTOE.LearnedCoordinateCreatesPhysicalIdentity → ⊥
+unifiedLearnedCoordinateDoesNotCreatePhysicalIdentity =
+  EarthEmbeddingTOE.learnedCoordinateDoesNotCreatePhysicalIdentity
+
+unifiedGradientDoesNotCreateCausalEnvironmentalEffect :
+  EarthEmbeddingTOE.GradientCreatesCausalEnvironmentalEffect → ⊥
+unifiedGradientDoesNotCreateCausalEnvironmentalEffect =
+  EarthEmbeddingTOE.gradientDoesNotCreateCausalEnvironmentalEffect
+
+unifiedModelOutputDoesNotCreateIndependentFieldMeasurement :
+  EarthEmbeddingTOE.ModelOutputCreatesIndependentFieldMeasurement → ⊥
+unifiedModelOutputDoesNotCreateIndependentFieldMeasurement =
+  EarthEmbeddingTOE.modelOutputDoesNotCreateIndependentFieldMeasurement
+
+unifiedEmbeddingDoesNotCreateLegalAuthority :
+  EarthEmbeddingTOE.EmbeddingCreatesLegalAuthority → ⊥
+unifiedEmbeddingDoesNotCreateLegalAuthority =
+  EarthEmbeddingTOE.embeddingDoesNotCreateLegalAuthority
+
+unifiedGeographicRecoverabilityDoesNotCreatePhysicalIdentity :
+  EarthEmbeddingTOE.GeographicRecoverabilityCreatesPhysicalIdentity → ⊥
+unifiedGeographicRecoverabilityDoesNotCreatePhysicalIdentity =
+  EarthEmbeddingTOE.geographicRecoverabilityDoesNotCreatePhysicalIdentity
+
+unifiedBalabanDirectScaleTransferNonPromotion :
+  BalabanRGTOE.BalabanRGScaleTransferPromotion → ⊥
+unifiedBalabanDirectScaleTransferNonPromotion =
+  BalabanRGTOE.balabanRGScaleTransferPromotionImpossible
+
+------------------------------------------------------------------------
 -- Joint Yang-Mills Balaban/R559 TOE receipt.
 ------------------------------------------------------------------------
 
@@ -363,3 +417,96 @@ unifiedFleetTargetsOnlyUnformalisedFormalGaps :
   ≡ true
 unifiedFleetTargetsOnlyUnformalisedFormalGaps =
   FleetGapTOE.fleetTargetsOnlyUnformalisedFormalGaps
+
+
+------------------------------------------------------------------------
+-- Fleet named-manifest acquisition boundary.
+------------------------------------------------------------------------
+
+unifiedFleetManifestAcquisitionDemand =
+  FleetGapTOE.fleetManifestAcquisitionDemand
+
+unifiedFleetNamedManifestStillMissing :
+  FleetGapTOE.namedFormalGapManifestAcquired ≡ false
+unifiedFleetNamedManifestStillMissing =
+  FleetGapTOE.namedFormalGapManifestAcquiredIsFalse
+
+unifiedFleetPerGapDispatchStillBlocked :
+  FleetGapTOE.perGapDispatchEnabled ≡ false
+unifiedFleetPerGapDispatchStillBlocked =
+  FleetGapTOE.perGapDispatchEnabledIsFalse
+
+unifiedFleetRelatedSymbolsRequired :
+  FleetGapTOE.fleetRelatedSymbolsRequired ≡ true
+unifiedFleetRelatedSymbolsRequired =
+  FleetGapTOE.fleetRelatedSymbolsRequiredIsTrue
+
+unifiedFleetDiscoverRequired :
+  FleetGapTOE.fleetDiscoverRequired ≡ true
+unifiedFleetDiscoverRequired =
+  FleetGapTOE.fleetDiscoverRequiredIsTrue
+
+unifiedFleetRoundLineageRequired :
+  FleetGapTOE.fleetRoundLineageRequired ≡ true
+unifiedFleetRoundLineageRequired =
+  FleetGapTOE.fleetRoundLineageRequiredIsTrue
+
+unifiedFleetCountDoesNotCreateNamedManifest :
+  FleetGapTOE.CountCreatesNamedManifest → ⊥
+unifiedFleetCountDoesNotCreateNamedManifest =
+  FleetGapTOE.fleetCountDoesNotCreateNamedManifest
+
+------------------------------------------------------------------------
+-- Direct Pareto / snowball / Ibrahim and ternary-27 non-promotion surface.
+------------------------------------------------------------------------
+
+unifiedIbrahimSearchPriorityDoesNotCreateProof :
+  ParetoSnowballTOE.SearchPriorityCreatesProof → ⊥
+unifiedIbrahimSearchPriorityDoesNotCreateProof =
+  ParetoSnowballTOE.searchPriorityDoesNotCreateProof
+
+unifiedIbrahimProducerSourceDoesNotCreateRunReceipt :
+  ParetoSnowballTOE.ProducerSourceCreatesRunReceipt → ⊥
+unifiedIbrahimProducerSourceDoesNotCreateRunReceipt =
+  ParetoSnowballTOE.producerSourceDoesNotCreateRunReceipt
+
+unifiedIbrahimDegree729DoesNotCreateMonsterHZetaRecognition :
+  ParetoSnowballTOE.Degree729CreatesMonsterHZetaRecognition → ⊥
+unifiedIbrahimDegree729DoesNotCreateMonsterHZetaRecognition =
+  ParetoSnowballTOE.degree729DoesNotCreateMonsterHZetaRecognition
+
+unifiedIbrahimPaperOracleDoesNotIdentifyHistoricalDump :
+  ParetoSnowballTOE.PaperOracleIdentifiesDump → ⊥
+unifiedIbrahimPaperOracleDoesNotIdentifyHistoricalDump =
+  ParetoSnowballTOE.paperOracleDoesNotIdentifyHistoricalDump
+
+unifiedIbrahimRoutePreferenceDoesNotCreateExecutionReceipt :
+  ParetoSnowballTOE.RoutePreferenceCreatesExecutionReceipt → ⊥
+unifiedIbrahimRoutePreferenceDoesNotCreateExecutionReceipt =
+  ParetoSnowballTOE.routePreferenceDoesNotCreateExecutionReceipt
+
+unifiedIbrahimMergedLeanSourceDoesNotCreateKernelReceipt :
+  ParetoSnowballTOE.MergedLeanSourceCreatesKernelReceipt → ⊥
+unifiedIbrahimMergedLeanSourceDoesNotCreateKernelReceipt =
+  ParetoSnowballTOE.mergedLeanSourceDoesNotCreateKernelReceipt
+
+unifiedIbrahimOEISDoesNotCreateMultiplicityAction :
+  ParetoSnowballTOE.NinetyOEISEqualityCreatesMultiplicityAction → ⊥
+unifiedIbrahimOEISDoesNotCreateMultiplicityAction =
+  ParetoSnowballTOE.oeisDoesNotCreateMultiplicityAction
+
+unifiedIbrahimFiniteIrreducibilityDoesNotCreateMonsterHZetaRecognition :
+  ParetoSnowballTOE.FiniteIrreducibilityCreatesMonsterHZetaRecognition → ⊥
+unifiedIbrahimFiniteIrreducibilityDoesNotCreateMonsterHZetaRecognition =
+  ParetoSnowballTOE.finiteIrreducibilityDoesNotCreateMonsterHZetaRecognition
+
+unifiedIbrahimCurrentQidDoesNotIdentifyHistoricalTitle :
+  ParetoSnowballTOE.CurrentQidIdentifiesHistoricalTitle → ⊥
+unifiedIbrahimCurrentQidDoesNotIdentifyHistoricalTitle =
+  ParetoSnowballTOE.currentQidDoesNotIdentifyHistoricalTitle
+
+unified369Ternary27MonsterRepresentationNotPromoted =
+  MaxCut369.toe27MonsterRepresentationNotPromoted
+
+unified369Ternary27MonsterEmbeddingNotPromoted =
+  MaxCut369.toe27MonsterEmbeddingNotPromoted
