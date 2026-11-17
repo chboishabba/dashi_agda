@@ -8,6 +8,7 @@ on:
       - 'DASHI/Cognition/PNF/X369DirectedRouterConditionalCodecExact.agda'
       - 'DASHI/Cognition/PNF/X369CenteredDirectedConsumerMDLExact.agda'
       - 'DASHI/Cognition/PNF/X369QuantizedRouterDecisionMarginExact.agda'
+      - 'DASHI/Cognition/PNF/X369SharedHeadFusedScoreExact.agda'
       - 'scripts/check_x369_p0_sympy_standin.sh'
       - '.github/workflows/x369-p0-sympy-standin.yml'
   pull_request:
@@ -16,6 +17,7 @@ on:
       - 'DASHI/Cognition/PNF/X369DirectedRouterConditionalCodecExact.agda'
       - 'DASHI/Cognition/PNF/X369CenteredDirectedConsumerMDLExact.agda'
       - 'DASHI/Cognition/PNF/X369QuantizedRouterDecisionMarginExact.agda'
+      - 'DASHI/Cognition/PNF/X369SharedHeadFusedScoreExact.agda'
       - 'scripts/check_x369_p0_sympy_standin.sh'
       - '.github/workflows/x369-p0-sympy-standin.yml'
   workflow_dispatch:
