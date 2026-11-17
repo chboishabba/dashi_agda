@@ -36,6 +36,10 @@ import DASHI.Reasoning.TrialecticDyadicCoverNerveExact as Nerve
 import DASHI.Reasoning.Trialectic369HypervoxelUltrametricExact as Hyper369
 import DASHI.Reasoning.TypedHyperfabricFiniteBraidEquivarianceExact as BraidFabric
 import DASHI.Combinatorics.TextileBraidRewriteGroupoidExact as Textile
+import DASHI.Core.GovernanceTrajectoryRealisationExact as Governance
+import DASHI.Core.RelationalRoleGrammarExact as RoleGrammar
+import DASHI.Reasoning.StructuralTransferBreakdownExact as StructuralTransfer
+import DASHI.Reasoning.MetaphorTransferResidualExact as TransferResidual
 
 ------------------------------------------------------------------------
 -- 1. Three strand identities remain first-class.
@@ -312,3 +316,203 @@ canonicalTrialecticBraidedTwoEyedBoundary =
     true true false
     true false false true false
     false false true true false
+
+
+------------------------------------------------------------------------
+-- 11. Conversation braid calibration uses existing transfer machinery.
+--
+-- The conversation claim is narrow.
+-- Stories calibrate which braid relations a declared consumer should retain.
+-- A coarse multiplicity reading may miss reciprocity and held relation.
+-- A universal braid reading may spuriously import recoverability after rupture.
+-- The source authors do not own the DASHI transfer or ZKP mathematics.
+------------------------------------------------------------------------
+
+conversationCalibrationNonDescent =
+  Kimmerer.calibratedMeaningDoesNotDescendThroughInitialReading
+
+conversationUnderTransferProfile :
+  TransferResidual.TransferResidualProfile
+conversationUnderTransferProfile =
+  TransferResidual.missingReciprocityProfile
+
+conversationOverTransferProfile :
+  TransferResidual.TransferResidualProfile
+conversationOverTransferProfile =
+  TransferResidual.spuriousRecoverabilityProfile
+
+conversationStructuralTransferBoundary :
+  StructuralTransfer.StructuralTransferBreakdownBoundary
+conversationStructuralTransferBoundary =
+  StructuralTransfer.canonicalStructuralTransferBreakdownBoundary
+
+conversationRoleGrammarBoundary :
+  RoleGrammar.RelationalRoleGrammarBoundary
+conversationRoleGrammarBoundary =
+  RoleGrammar.canonicalRelationalRoleGrammarBoundary
+
+------------------------------------------------------------------------
+-- 12. ZKP O/R/C/S/L/P/G/F normalization.
+--
+-- O: braid-calibration programme.
+-- R: preserve consumer-relevant relation without fusion or forced recovery.
+-- C: reuse canonical DASHI braid, transfer, residual, and provenance owners.
+-- S: coarse, calibrated, or ruptured target state.
+-- L: under-fit, fitted, or over-fit transfer lattice.
+-- P: calibrate the reading or withdraw the frame.
+-- G: calibration succeeds on the calibrated state; withdrawal succeeds on rupture.
+-- F: live gap class: missing relation, no gap, or spurious recoverability.
+------------------------------------------------------------------------
+
+data BraidObjective : Set where
+  braidCalibrationProgramme : BraidObjective
+
+data BraidRequirement : Set where
+  boundedRelationalTransfer : BraidRequirement
+
+data BraidCode : Set where
+  canonicalBraidingOwners : BraidCode
+
+data BraidTransferState : Set where
+  coarseMultiplicityState
+  calibratedRelationalState
+  rupturedRelationState
+  : BraidTransferState
+
+data BraidTransferLattice : Set where
+  underFitLattice fittedLattice overFitLattice : BraidTransferLattice
+
+data BraidTransferProposal : Set where
+  calibrateReading withdrawFrame : BraidTransferProposal
+
+data BraidTransferGap : Set where
+  missingRelationGap noTransferGap spuriousRecoverabilityGap : BraidTransferGap
+
+braidTransferGoal :
+  BraidTransferProposal -> BraidTransferState -> Bool
+braidTransferGoal calibrateReading calibratedRelationalState = true
+braidTransferGoal withdrawFrame rupturedRelationState = true
+braidTransferGoal _ _ = false
+
+braidTransferGap :
+  BraidObjective ->
+  BraidRequirement ->
+  BraidCode ->
+  BraidTransferState ->
+  BraidTransferLattice ->
+  BraidTransferGap
+braidTransferGap _ _ _ coarseMultiplicityState _ = missingRelationGap
+braidTransferGap _ _ _ calibratedRelationalState _ = noTransferGap
+braidTransferGap _ _ _ rupturedRelationState _ = spuriousRecoverabilityGap
+
+BraidTransferZKPFrame : Set₁
+BraidTransferZKPFrame =
+  Governance.ZKPGovernanceModel
+    BraidObjective
+    BraidRequirement
+    BraidCode
+    BraidTransferState
+    BraidTransferLattice
+    BraidTransferProposal
+    BraidTransferGap
+
+conversationBraidZKP : BraidTransferZKPFrame
+conversationBraidZKP =
+  Governance.zkp-governance-model
+    braidCalibrationProgramme
+    boundedRelationalTransfer
+    canonicalBraidingOwners
+    coarseMultiplicityState
+    underFitLattice
+    calibrateReading
+    braidTransferGoal
+    braidTransferGap
+
+coarseReadingHasMissingRelationGap :
+  braidTransferGap
+    braidCalibrationProgramme
+    boundedRelationalTransfer
+    canonicalBraidingOwners
+    coarseMultiplicityState
+    underFitLattice
+  ≡ missingRelationGap
+coarseReadingHasMissingRelationGap = refl
+
+calibratedReadingClosesTransferGap :
+  braidTransferGap
+    braidCalibrationProgramme
+    boundedRelationalTransfer
+    canonicalBraidingOwners
+    calibratedRelationalState
+    fittedLattice
+  ≡ noTransferGap
+calibratedReadingClosesTransferGap = refl
+
+calibrationGoalHoldsOnCalibratedState :
+  braidTransferGoal calibrateReading calibratedRelationalState ≡ true
+calibrationGoalHoldsOnCalibratedState = refl
+
+ruptureHasSpuriousRecoverabilityGap :
+  braidTransferGap
+    braidCalibrationProgramme
+    boundedRelationalTransfer
+    canonicalBraidingOwners
+    rupturedRelationState
+    overFitLattice
+  ≡ spuriousRecoverabilityGap
+ruptureHasSpuriousRecoverabilityGap = refl
+
+withdrawalGoalHoldsOnRupture :
+  braidTransferGoal withdrawFrame rupturedRelationState ≡ true
+withdrawalGoalHoldsOnRupture = refl
+
+------------------------------------------------------------------------
+-- 13. Explicit preconditions, invariants, and postconditions.
+------------------------------------------------------------------------
+
+record BraidTransferContract : Set where
+  constructor braid-transfer-contract
+  field
+    sourceBoundaryDeclared : Bool
+    sourceBoundaryDeclaredIsTrue : sourceBoundaryDeclared ≡ true
+
+    consumerDeclared : Bool
+    consumerDeclaredIsTrue : consumerDeclared ≡ true
+
+    strandDifferenceInvariant : Bool
+    strandDifferenceInvariantIsTrue : strandDifferenceInvariant ≡ true
+
+    provenanceInvariant : Bool
+    provenanceInvariantIsTrue : provenanceInvariant ≡ true
+
+    relationDoesNotTransferAuthorityInvariant : Bool
+    relationDoesNotTransferAuthorityInvariantIsTrue :
+      relationDoesNotTransferAuthorityInvariant ≡ true
+
+    ruptureCheckInvariant : Bool
+    ruptureCheckInvariantIsTrue : ruptureCheckInvariant ≡ true
+
+    calibratedReadingMayCloseMissingRelationGap : Bool
+    calibratedReadingMayCloseMissingRelationGapIsTrue :
+      calibratedReadingMayCloseMissingRelationGap ≡ true
+
+    ruptureRequiresPossibleFrameWithdrawal : Bool
+    ruptureRequiresPossibleFrameWithdrawalIsTrue :
+      ruptureRequiresPossibleFrameWithdrawal ≡ true
+
+    universalRecoverabilityClaim : Bool
+    universalRecoverabilityClaimIsFalse :
+      universalRecoverabilityClaim ≡ false
+
+canonicalBraidTransferContract : BraidTransferContract
+canonicalBraidTransferContract =
+  braid-transfer-contract
+    true refl
+    true refl
+    true refl
+    true refl
+    true refl
+    true refl
+    true refl
+    true refl
+    false refl

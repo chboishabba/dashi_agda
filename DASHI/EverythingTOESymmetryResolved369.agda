@@ -12,6 +12,8 @@ import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 import DASHI.Unified.SingularBasinCoarseRGTOEExact as SingularBasinTOE
 import DASHI.Unified.BrainFMRI as BrainFMRI
+import DASHI.Reasoning.TrialecticBraidedTwoEyedCoordinationExact as BraidedTransferTOE
+import DASHI.Reasoning.TrialecticThreeStrandBraidHistoryExact as BraidedHistoryTOE
 import DASHI.Physics.Closure.BrainConnectomeFMRIObservationQuotient as BrainObservation
 import DASHI.Physics.Closure.BidirectionalBrainObservationQuotient as BrainBidirectional
 import DASHI.Unified.InvariantSpine as BrainSpine
@@ -1473,22 +1475,62 @@ toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
 toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
   FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
 
-
 ------------------------------------------------------------------------
--- Grounded agent authority trajectory security surface.
+-- Braided transfer / narrative calibration TOE normalization.
+--
+-- Reuse the canonical reasoning owners.
+-- This aggregate adds no new Kimmerer, Two-Eyed Seeing, or topology claim.
 ------------------------------------------------------------------------
 
-toeAgentAuthorityZKPFrame :
-  AgentAuthority.AgentAuthorityZKPFrame
-toeAgentAuthorityZKPFrame =
-  AgentAuthority.canonicalAgentAuthorityZKPFrame
+toeBraidedTransferZKPFrame :
+  BraidedTransferTOE.BraidTransferZKPFrame
+toeBraidedTransferZKPFrame =
+  BraidedTransferTOE.conversationBraidZKP
 
-toePublicSwarmExactMedicareTraceNotGrounded :
-  AgentIncident.exactMedicareTraceGrounded AgentIncident.publicSwarmProposal ≡ false
-toePublicSwarmExactMedicareTraceNotGrounded =
-  AgentIncident.publicSwarmExactMedicareTraceNotGrounded
+toeBraidedTransferContract :
+  BraidedTransferTOE.BraidTransferContract
+toeBraidedTransferContract =
+  BraidedTransferTOE.canonicalBraidTransferContract
 
-toeMedicarePublicReportExactTraceNotGrounded :
-  AgentIncident.exactMedicareTraceGrounded AgentIncident.medicarePublicReportProposal ≡ false
-toeMedicarePublicReportExactTraceNotGrounded =
-  AgentIncident.medicarePublicReportExactTraceNotGrounded
+toeBraidedCoarseReadingHasMissingRelationGap :
+  BraidedTransferTOE.braidTransferGap
+    BraidedTransferTOE.braidCalibrationProgramme
+    BraidedTransferTOE.boundedRelationalTransfer
+    BraidedTransferTOE.canonicalBraidingOwners
+    BraidedTransferTOE.coarseMultiplicityState
+    BraidedTransferTOE.underFitLattice
+  ≡ BraidedTransferTOE.missingRelationGap
+toeBraidedCoarseReadingHasMissingRelationGap =
+  BraidedTransferTOE.coarseReadingHasMissingRelationGap
+
+toeBraidedCalibratedReadingClosesGap :
+  BraidedTransferTOE.braidTransferGap
+    BraidedTransferTOE.braidCalibrationProgramme
+    BraidedTransferTOE.boundedRelationalTransfer
+    BraidedTransferTOE.canonicalBraidingOwners
+    BraidedTransferTOE.calibratedRelationalState
+    BraidedTransferTOE.fittedLattice
+  ≡ BraidedTransferTOE.noTransferGap
+toeBraidedCalibratedReadingClosesGap =
+  BraidedTransferTOE.calibratedReadingClosesTransferGap
+
+toeBraidedRuptureHasSpuriousRecoverabilityGap :
+  BraidedTransferTOE.braidTransferGap
+    BraidedTransferTOE.braidCalibrationProgramme
+    BraidedTransferTOE.boundedRelationalTransfer
+    BraidedTransferTOE.canonicalBraidingOwners
+    BraidedTransferTOE.rupturedRelationState
+    BraidedTransferTOE.overFitLattice
+  ≡ BraidedTransferTOE.spuriousRecoverabilityGap
+toeBraidedRuptureHasSpuriousRecoverabilityGap =
+  BraidedTransferTOE.ruptureHasSpuriousRecoverabilityGap
+
+toeBraidDoesNotGuaranteeRecoverabilityAfterRupture :
+  BraidedTransferTOE.BraidGuaranteesRecoverabilityAfterRupture -> ⊥
+toeBraidDoesNotGuaranteeRecoverabilityAfterRupture =
+  BraidedTransferTOE.braidDoesNotGuaranteeRecoverabilityAfterRupture
+
+toeAttachedFaceDoesNotRecoverBraidHistory :
+  BraidedHistoryTOE.SameAttachedFaceMeansSameProcessRoute -> ⊥
+toeAttachedFaceDoesNotRecoverBraidHistory =
+  BraidedHistoryTOE.sameAttachedFaceDoesNotMeanSameProcessRoute
