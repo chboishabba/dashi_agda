@@ -36,6 +36,7 @@ targets=(
   DASHI/Physics/YangMills/YMClaySU2PochhammerMomentNumeratorsExact.agda
   DASHI/Physics/YangMills/YMClayDyadicCharacterPairCancellationExact.agda
   DASHI/Physics/YangMills/YMClayRationalS3StereographicNodeExact.agda
+  DASHI/Physics/YangMills/YMClayRationalS3DegreeSevenOrbitMomentsExact.agda
   DASHI/Physics/YangMills/YMClayRationalS3StereographicConcreteExact.agda
   DASHI/Physics/YangMills/YMClayRationalS3PositiveWeightedNodesExact.agda
   DASHI/Physics/YangMills/YMClayNativeSixPlaneGaugeSameSourceExact.agda
