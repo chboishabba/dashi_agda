@@ -14,7 +14,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Rational.Base using (ℚ; 0ℚ)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; _*_)
 
 import DASHI.Physics.Motors.SmithFilsingerIndexedFaceIncidenceExact as Indexed
 import DASHI.Physics.Motors.SmithFilsingerLocalCausalADEFrameExact as Frame
@@ -74,22 +74,22 @@ indexedCayleyEvent e =
 indexedFaceFirstMidpoint :
   (e : IndexedCayleyFace) (x y : ℚ) →
   Cayley.sameCayleyFirst (Midpoint.CertifiedHalfStep.cayley (halfStep e)) x y
-    Data.Rational.Base.- Midpoint.CertifiedHalfStep.p (halfStep e)
-      Data.Rational.Base.* Cayley.sameCayleySecond
+    - Midpoint.CertifiedHalfStep.p (halfStep e)
+      * Cayley.sameCayleySecond
         (Midpoint.CertifiedHalfStep.cayley (halfStep e)) x y
-    ≡ x Data.Rational.Base.+ Midpoint.CertifiedHalfStep.p (halfStep e)
-        Data.Rational.Base.* y
+    ≡ x + Midpoint.CertifiedHalfStep.p (halfStep e)
+        * y
 indexedFaceFirstMidpoint e x y =
   Midpoint.sameCayleyFirstMidpoint (halfStep e) x y
 
 indexedFaceSecondMidpoint :
   (e : IndexedCayleyFace) (x y : ℚ) →
   Cayley.sameCayleySecond (Midpoint.CertifiedHalfStep.cayley (halfStep e)) x y
-    Data.Rational.Base.- Midpoint.CertifiedHalfStep.r (halfStep e)
-      Data.Rational.Base.* Cayley.sameCayleyFirst
+    - Midpoint.CertifiedHalfStep.r (halfStep e)
+      * Cayley.sameCayleyFirst
         (Midpoint.CertifiedHalfStep.cayley (halfStep e)) x y
-    ≡ y Data.Rational.Base.+ Midpoint.CertifiedHalfStep.r (halfStep e)
-        Data.Rational.Base.* x
+    ≡ y + Midpoint.CertifiedHalfStep.r (halfStep e)
+        * x
 indexedFaceSecondMidpoint e x y =
   Midpoint.sameCayleySecondMidpoint (halfStep e) x y
 
