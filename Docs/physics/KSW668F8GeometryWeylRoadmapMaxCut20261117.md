@@ -617,3 +617,37 @@ Both are source-written Agda exact polynomial identities in the same module and 
 Exact-Fraction regression `scripts/test_ksw668_f8_moving_sbp2_sat_energy.py` checks original one-sided/centered SBP2 operators with 2,3,4,6,12 normal nodes at arbitrary dy/v, lower/upper exact SATs, source square completion, radial shift and warp identities. **1,500/1,500 independent exact-rational checks PASS**. New module imported through `KSW668F8SameObjectWeylAuthorityBoundary.agda` into the original KSW/TOE graph. **Pinned Agda kernel NOT RUN; source-written proofs still require typechecking.**
 
 **Updated gate priorities:** G2 original SBP2/SAT normal boundary source cap is **closed as finite algebra**, but full coupled moving radial/normal boundary energy still OPEN. G3 **next cut**: construct the time-dependent `z^-3` weighted radial+normal symmetrizer including the origin-augmented V0 state, shift, warp, SAT source and time-varying geometry; then prove a mesh-uniform semidiscrete bound before any SSPRK3 CFL acceptance. G4 higher Sobolev dual Weyl trace, G5 independent three-axis convergence and G6 physical matter/FIO/detector remain OPEN. Original sources, Caldwell–Langlois/Thorne and relevant SBP prior art retain attribution; no ESD edits, no unrelated physics identification or graviton detection.
+
+
+### XXXVIII continued — ACTUAL z^-3 weighted SBP2 + source SAT composed identity
+
+The earlier XXXVIII normal energy identity used the unweighted diagonal SBP2 norm. This is a correct discrete principal-boundary identity but **not** the full original AdS5 energy, whose spatial normal measure includes the changing original warp weight `w_i=(b+i*dy)^(-3)`. Directly deriving the weighted original endpoint/centered stencil yields, for every finite node list,
+```
+Σ_i H_i w_i x_i (D_y x)_i
+ = [w_N x_N² -w_0 x_0²]/2
+   + (1/2) Σ_{i=0}^{N-1}(w_i-w_(i+1)) x_i x_(i+1).
+```
+The last term is an exact **bulk weight commutator**; no assumption of constant w is permitted. Even with descending positive weights, it is sign-indefinite (two exact examples +1/2 and -1/2).
+
+For the original P/M characteristic speeds `a=1+v`, `v-1`, define
+```
+C_P=(1/2)Σ_faces (w_i-w_(i+1)) P_i P_(i+1),
+C_M=(1/2)Σ_faces (w_i-w_(i+1)) M_i M_(i+1).
+```
+The exact **warp-weighted normal principal+SAT** balance is
+```
+B_w = w0[-a/2 P0² -b/2(M0-target)²+b/2 target²]
+      +wN[-a/2 PN² -b/2 MN²]
+      +a C_P +(v-1) C_M,     b=1-v.
+```
+At original `v=-3/5`, `target=P0/4-5S/4`, this becomes
+```
+B_w = w0[-4(M0-target)²/5 -3(P0+5S/3)²/20 +5S²/3]
+      +wN[-PN²/5 -4MN²/5]
+      +(2/5) C_P -(8/5) C_M.
+```
+**This is the correct G2/G3 seam for the weighted NORMAL operator.** The signed source cap by itself has an interior weight-commutator remainder; controlling it requires an estimate on weight variation, original radial/normal energy, the moving z^-3 Jacobian/time derivative, and warp/shift power. No uniform all-grid SSPRK3 energy or both-Weyl estimate has been established.
+
+New `DASHI/Physics/Gravity/KSW668F8WarpWeightedSBP2CommutatorExact.agda` contains the exact face formula, arbitrary finite-list telescope, signed negative control, composed full weighted SAT completed square and original t=4/3 source slice. It imports and reuses the prior XXXVIII boundary-energy owner, and is attached through the existing F8/KSW/TOE authority. Independent `scripts/test_ksw668_f8_warp_weighted_sbp2_commutator.py` verifies the actual rational warp weights for multiple normal-grid lengths and arbitrary original b,dy. **320/320 full-grid exact-Fraction checks and 300/300 additional weighted-source-composition checks passed locally**, plus sign controls. Pinned Agda kernel still not run.
+
+**Immediate next mathematical priority G3:** establish a mesh-independent bound on `C_P,C_M` in terms of weighted bulk energy, including the first/last half-weights; explicitly account for `w_T` when b(T) moves and the original `-3(P-M)/(2z)` force and `v Δ_r U Δ_r(P-M)` transport. The current result is an exact signed ledger, not unconditional dissipation. G4–G6 remain unchanged OPEN. Source and mathematical attributions preserved.
