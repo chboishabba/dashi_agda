@@ -207,3 +207,54 @@ Source Agda file:
 which imports existing canonical `ResponseKink`
 without copying the profile owner. Kernel
 acceptance remains unclaimed.
+
+
+## Nat-response type boundary closed for the constructive fixtures
+
+The original `Kink.RecruitmentSuppressionProfile`
+requires `response : Input → Nat`, not a rational or
+real response. The continuous candidate inequalities
+alone therefore cannot directly instantiate that type.
+
+Updated `scripts/check_x369_r4_early_kink_sympy.py`
+checks an explicitly chosen **monotone scalar-to-Nat
+observation** and its POST-QUANTISATION margins:
+
+    floor(rational(t))    = (1,4,6,4),
+    floor(10*GELU(t)A(t)) = (0,7,13,11),
+
+for original ordered loads t=(0,1,2,3).
+Both have strict `low<prePeak<peak`
+and `overload<peak`, as the canonical
+Agda shape requires.
+
+The same `floor` with scale 1 on the
+GELU envelope erases the rise and FAILS
+the shape. This is the necessary negative
+control: a monotone codec can destroy strict
+ordinal inequalities if its precision is too
+coarse. A future source-bound Nat consumer
+needs separately calibrated strict cell
+margins, not just real-valued profile shape.
+
+A stronger rational bound `Phi(2)>15/16`
+follows from `phi(2)/2<1/16`;
+it yields `GELU(2)*16/24>5/4`,
+while the overload response is at most
+`48/43`. Therefore under scale-10
+floor quantisation, the peak code is
+at least 12 while overload code is
+at most 11, with strict order guaranteed.
+The actual finite evaluation gives
+peak code 13 and overload code 11.
+The independent local SymPy reconstruction
+now passes **19 grouped checks** including
+this Nat bridge and the erasure control.
+
+These are finite mathematical witnesses,
+not real checkpoint source observations.
+The `OriginalR4FourRegimeEvidence`
+Agda interface requires a true
+`Nat` source response and its same-source
+provenance equality before transporting
+the old qualitative theorem.
