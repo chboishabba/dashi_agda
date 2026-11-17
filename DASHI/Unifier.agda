@@ -18,6 +18,7 @@ import DASHI.Physics.Closure.BrainConnectomeFMRIObservationQuotient as BrainObse
 import DASHI.Physics.Closure.BidirectionalBrainObservationQuotient as BrainBidirectional
 import DASHI.Unified.InvariantSpine as BrainSpine
 
+
 import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as GovernanceTOE
 import DASHI.Unified.FleetFormalGapTOEExact as FleetFormalGap
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
@@ -993,36 +994,95 @@ unifierBalabanScaleTransferNonPromotion =
     BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
 ------------------------------------------------------------------------
--- Fleet discharged-motif owner aliases.
--- The spectral labels remain planning context only.
+-- Governed legal-workflow and Fleet residual convergence.
 ------------------------------------------------------------------------
 
-unifierFleetBalabanDischargedOwnerReceipt :
-  FleetGapTOE.BalabanDischargedOwnerReceipt
-unifierFleetBalabanDischargedOwnerReceipt =
-  FleetGapTOE.fleetBalabanDischargedOwnerReceipt
+unifierGovernedLegalWorkflowInvariantHandoff :
+  GovernanceTOE.GovernedLegalWorkflowTOEInvariantHandoff
+unifierGovernedLegalWorkflowInvariantHandoff =
+  GovernanceTOE.canonicalGovernedLegalWorkflowTOEInvariantHandoff
 
-unifierFleetNSPhysicalM2SummationCompilerStatus :
-  Bool
-unifierFleetNSPhysicalM2SummationCompilerStatus =
-  FleetGapTOE.fleetNSPhysicalM2SummationCompilerStatus
+unifierTaskCompletionDoesNotCreateTruth :
+  GovernanceTOE.TaskCompletionCreatesTruth → ⊥
+unifierTaskCompletionDoesNotCreateTruth =
+  GovernanceTOE.toeTaskCompletionDoesNotCreateTruth
 
-unifierFleetNSM2ToR568CompilerStatus :
-  Bool
-unifierFleetNSM2ToR568CompilerStatus =
-  FleetGapTOE.fleetNSM2ToR568CompilerStatus
+unifierDatabaseCommitDoesNotCreateSemanticAuthority :
+  GovernanceTOE.DatabaseCommitCreatesSemanticAuthority → ⊥
+unifierDatabaseCommitDoesNotCreateSemanticAuthority =
+  GovernanceTOE.toeDatabaseCommitDoesNotCreateSemanticAuthority
 
-unifierFleetQuantumMereologyBoundary :
-  FleetGapTOE.QuantumMereologyDischargedBoundary
-unifierFleetQuantumMereologyBoundary =
-  FleetGapTOE.fleetQuantumMereologyBoundary
+unifierAcceptedReviewDoesNotPayApplicability :
+  GovernanceTOE.AcceptedStatusPaysApplicability → ⊥
+unifierAcceptedReviewDoesNotPayApplicability =
+  GovernanceTOE.toeAcceptedReviewDoesNotPayApplicability
 
-unifierFleetQuantumMereologyAttributionBoundary :
-  FleetGapTOE.QuantumMereologyAttributionBoundary
-unifierFleetQuantumMereologyAttributionBoundary =
-  FleetGapTOE.fleetQuantumMereologyAttributionBoundary
+unifierSemanticPromotionTruthAuthorityClosed :
+  GovernanceTOE.SemanticPromotionTruthAuthorityClosed
+unifierSemanticPromotionTruthAuthorityClosed =
+  GovernanceTOE.toeSemanticPromotionTruthAuthorityClosed
 
-unifierFleetSpectralLabelDoesNotIdentifyTheoremOwner :
-  FleetGapTOE.FleetSpectralLabelIdentifiesTheoremOwner → ⊥
-unifierFleetSpectralLabelDoesNotIdentifyTheoremOwner =
-  FleetGapTOE.fleetSpectralLabelDoesNotIdentifyTheoremOwner
+unifierLegalCandidateSourceDoesNotCloseAuthority :
+  GovernanceTOE.CandidateSourceIsAuthoritative → ⊥
+unifierLegalCandidateSourceDoesNotCloseAuthority =
+  GovernanceTOE.toeCandidateSourceDoesNotCloseAuthority
+
+unifierExactReuseDoesNotCreateSemanticAuthority :
+  GovernanceTOE.ExactReuseCreatesSemanticAuthority → ⊥
+unifierExactReuseDoesNotCreateSemanticAuthority =
+  GovernanceTOE.toeExactReuseDoesNotCreateSemanticAuthority
+
+unifierFleetFormalGapReceipt :
+  FleetFormalGap.FleetFormalGapTOEReceipt
+unifierFleetFormalGapReceipt =
+  FleetFormalGap.canonicalFleetFormalGapReceipt
+
+unifierFleetFormalGapMaxCut :
+  FleetFormalGap.FleetFormalGapMaxCut
+unifierFleetFormalGapMaxCut =
+  FleetFormalGap.canonicalFleetFormalGapMaxCut
+
+unifierFleetOnlyFormalResidualDispatches :
+  FleetFormalGap.dispatchAllowed FleetFormalGap.unformalisedFormalGap ≡ true
+unifierFleetOnlyFormalResidualDispatches = refl
+
+unifierFleetDischargedFibresDoNotRedispatch :
+  FleetFormalGap.dispatchAllowed FleetFormalGap.dischargedCoreKnowledge ≡ false
+unifierFleetDischargedFibresDoNotRedispatch = refl
+
+unifierFleetContradictionsRemainSeparate :
+  FleetFormalGap.dispatchAllowed FleetFormalGap.polarityContradictionGap ≡ false
+unifierFleetContradictionsRemainSeparate = refl
+
+unifierFleetGapCountDoesNotDetermineIdentity :
+  FleetFormalGap.GapCountDeterminesGapIdentity → ⊥
+unifierFleetGapCountDoesNotDetermineIdentity =
+  FleetFormalGap.gapCountDoesNotDetermineGapIdentity
+
+
+------------------------------------------------------------------------
+-- Fleet 58 named-manifest acquisition gate.
+------------------------------------------------------------------------
+
+import DASHI.Unified.Fleet58ManifestAcquisitionExact as Fleet58Manifest
+import DASHI.Unified.Fleet58ManifestAcquisitionRegression
+
+unifierFleet58ManifestAcquisitionReceipt :
+  Fleet58Manifest.Fleet58ManifestAcquisitionReceipt
+unifierFleet58ManifestAcquisitionReceipt =
+  Fleet58Manifest.canonicalFleet58ManifestAcquisitionReceipt
+
+unifierFleet58ManifestStillMissing :
+  Fleet58Manifest.named58ManifestAcquired ≡ false
+unifierFleet58ManifestStillMissing =
+  Fleet58Manifest.named58ManifestAcquiredIsFalse
+
+unifierFleet58PerGapDispatchStillBlocked :
+  Fleet58Manifest.perGapDispatchEnabled ≡ false
+unifierFleet58PerGapDispatchStillBlocked =
+  Fleet58Manifest.perGapDispatchEnabledIsFalse
+
+unifierFleet58SearchPriorityDoesNotCreateProof :
+  Fleet58Manifest.SearchPriorityCreatesProof → ⊥
+unifierFleet58SearchPriorityDoesNotCreateProof =
+  Fleet58Manifest.searchPriorityDoesNotCreateProof
