@@ -442,3 +442,30 @@ centre-evaluated u_center^ell * mean_eff G_ell = 0 (ell>0).
 The original code does **NOT** perform that naive centre reconstruction as its source integration. Thus this is a guardrail for future tensor/real-space source transfer, not a detected bug. The finite source-cell weighted masses are additive over arbitrary subdivisions; a local exact-Fraction randomized partition audit found **63/63** passing controls. The committed combined regression `scripts/test_ksw668_f8_source_shell_projection_transfer.py` additionally checks the angular tensor/mass multiplier for both yy and zz.
 
 **Next max-cut G1:** a **nontrivial tensor-mode-to-source FV map** must compare the projected full 3D Cartesian TT differential source before radial averaging with the original exact `G_l` primitives under proper `r^{2+2l}` measure, prove the requisite differential projection/integration commutators and handle r=0 plus moving characteristic SAT. The existing algebraic angular/mass commutation only covers multiplying a precomputed shell mass by an angle-independent tensor multiplier. Do not claim all-dimensional tensor evolution or electric-Weyl convergence from this. G2 joint SAT energy, G3 moving SSPRK3, G4 moving high-Sobolev both-Weyl trace, G5 independent three-axis convergence, G6 physical FIO/matter/detector remain OPEN. Pinned Agda 2.9 kernel NOT RUN. No ESD edits, no false Monster/369 geometry promotion.
+
+
+### XXXV second source weld — original fourth-order TT profiles vs original finite-volume primitives
+
+This round additionally verified the **actual differential identities** in `scripts/ksw668_f8_fv_source_flux.py` against the original fourth-order profiles of `scripts/ksw668_f8_tt_multipole.py`. Let `f_n=d^n f/du^n` and `G_ell=S_ell/u^ell`, `d=3+2ell`. The original weighted source densities are
+```
+u² G0   = (2/5)(u² f4 +4u f3)
+u^6 G2  = (4/7)(u⁴ f4+u³ f3-6u² f2+6u f1)
+u^10 G4 = (u⁶ f4-6u⁵ f3+15u⁴ f2-15u³ f1)/35.
+```
+The unchanged original primitive formulas are
+```
+P0=(2/5)(u² f3+2u f2-2f1)
+P2=(4/7)(u⁴ f3-3u³ f2+3u² f1)
+P4=(u⁶ f3-12u⁵ f2+75u⁴ f1-315u³ f0)/35.
+```
+Direct exact symbolic differentiation proves **for arbitrary smooth f**, not only the compact exponential bump:
+```
+dP0/du=u² G0;
+dP2/du=u^6 G2;
+dP4/du+27u²f=u^10 G4.
+```
+The **l4 residual is essential**. Removing its `27 integral u² f(u) du` term from original FV would be a source-changing error, not a cleaner zero-mean TT construction.
+
+New `KSW668F8OriginalTTSourcePrimitiveJetExact.agda` contains explicit original-product-rule formal-jet identities for all three channels (source-written, pinned kernel pending); new `scripts/test_ksw668_f8_original_tt_source_primitive_jet.py` proves the calculus identities independently with SymPy for a symbolic differentiable function (3/3 PASS). The Agda formal-jet ring proof is **not** a separately kernel-checked theorem about actual smooth-function differentiation; retaining that distinction is required.
+
+**Progress:** XXXIV exact full-tensor rational axial projector -> XXXV exact commutation with a scalar source shell mass -> actual three original TT source weighted primitive differentiation -> conserved effective-d source cell averages. This closes the algebra of the existing source handoff locally but does **not** commute angular tensor differential operators with independent radial FV evolution or prove tensor TT conservation for discrete source/receiver. The full G1 Cartesian tensor differential/source-to-effective-FV diagram with origin closure, G2 stage SAT, G3 coupled SSPRK3, G4 higher-Sobolev moving-brane trace, G5 independent mesh limit and G6 calibrated physical action/FIO/detector remain OPEN.
