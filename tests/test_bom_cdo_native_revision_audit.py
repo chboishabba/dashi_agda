@@ -145,6 +145,25 @@ class NativeTest(unittest.TestCase):
         result=self.run_native(base,base+added)
         self.assertFalse(result['sydney_1865_06_25_zero_max_added_numeric_fingerprint'])
 
+    def test_missing_calendar_row_is_uncertain_not_confirmed_deletion(self):
+        old=line(day=1)+line(day=2,value='12.6')
+        new=line(day=1)
+        result=self.run_native(old,new)
+        self.assertEqual(result['counts'], {'calendar_row_removed':1})
+        self.assertEqual(result['before2025_observed_values_lost_by_station'], {})
+        self.assertEqual(result['temperature_possible_losses_from_absent_rows_all_dates'], 1)
+        self.assertFalse(result['before2025_target_numeric_match_only'])
+
+    def test_1865_zero_fingerprint_accepts_numeric_equivalent_format(self):
+        base=line(year=1865,month=6,day=24)
+        new=base+line(year=1865,month=6,day=25,value='0.00')
+        self.assertTrue(self.run_native(base,new)['sydney_1865_06_25_zero_max_added_numeric_fingerprint'])
+
+    def test_paired_blank_not_confused_with_missing_calendar_row(self):
+        result=self.run_native(line(),line(value=''))
+        self.assertEqual(result['before2025_observed_values_lost_by_station'], {'066062':1})
+        self.assertEqual(result['temperature_possible_losses_from_absent_rows_all_dates'], 0)
+
     def test_accumulation_change(self):
         self.assertEqual(self.run_native(line(),line(accum='2'))['counts'],{'accumulation_changed':1})
 
