@@ -167,3 +167,64 @@ allSourceTriadBlocksExactlyPreserved (block ∷ rest)
 -- It does not assert bitwise floating-point reassociation parity,
 -- equal runtime, equal GPU kernel, identical optimizer gradients,
 -- or reconstruction of the original three-channel feature tensor.
+
+
+------------------------------------------------------------------------
+-- CONSUMER-SUFFICIENCY WELD: not only individual numeric scores,
+-- but any declared deterministic consumer that observes the full
+-- ordered expert-score LIST is exactly unchanged. This includes
+-- abstract sorting/rank/top-k consumers whose ONLY inputs are the
+-- score list (and fixed original tie policy), but not consumers
+-- requiring the three intermediate T coordinates.
+------------------------------------------------------------------------
+
+everyScoreListConsumerExactlyPreserved :
+  ∀ {Outcome : Set}
+  (consumer : List ℤ → Outcome)
+  (source : SourceAndHead)
+  (histories : List ExpertHistoryTriad) →
+  consumer (originalExpertScores source histories)
+  ≡ consumer (fusedExpertScores
+      (precomputeSharedSource source) histories)
+everyScoreListConsumerExactlyPreserved
+  consumer source histories =
+  cong consumer (allExpertScoresExactlyPreserved source histories)
+  where
+    cong : ∀ {A B : Set} {x y : A} →
+      (fn : A → B) → x ≡ y → fn x ≡ fn y
+    cong fn refl = refl
+
+-- Per-triad shared-head coefficient computations multiply 3 x inputs
+-- by 3 source head weights once (9 products) and then each expert's
+-- 3 history values by 3 coefficients (3 products per expert).
+-- The unfused direct source calculates 3 separate 3-term products
+-- and then 3 head products PER expert (12 per expert).
+-- Count ONLY scalar multiplication sites in this disclosed
+-- arithmetic plan; additions/memory/load/store/precision/FP order/
+-- register pressure/derivatives are NOT included.
+
+open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Nat using (_+_; _*_)
+
+sourceNaiveMultiplications : Nat → Nat
+sourceNaiveMultiplications experts = 12 * experts
+
+sharedFusedMultiplications : Nat → Nat
+sharedFusedMultiplications experts = 9 + 3 * experts
+
+oneExpertArithmeticParity :
+  sourceNaiveMultiplications 1 ≡ sharedFusedMultiplications 1
+oneExpertArithmeticParity = refl
+
+fourExpertArithmeticSource :
+  sourceNaiveMultiplications 4 ≡ 48
+fourExpertArithmeticSource = refl
+
+fourExpertArithmeticFused :
+  sharedFusedMultiplications 4 ≡ 21
+fourExpertArithmeticFused = refl
+
+-- The score-consumer theorem does not imply the actual Leech
+-- implementation uses 12E multiplies after compiler optimisation:
+-- a compiler may already exploit equivalent fusions. Actual
+-- throughput/energy/VRAM changes remain physically unmeasured.
