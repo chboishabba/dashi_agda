@@ -13,6 +13,7 @@ import Data.Rational.Base as ℚ
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Plasma.KSW668FullVectorMaxwellJetExact as Vector
 import DASHI.Physics.Motors.SmithFilsingerSpaceTimePoyntingTelescopeExact as TimeSpace
+import DASHI.Physics.Motors.SmithFilsingerOpenBoundaryPoyntingGaussExact as Open
 import DASHI.Physics.Motors.SmithFilsingerSourceMaxwellBoundaryWeldExact as Weld
 import DASHI.Physics.Motors.SmithFilsingerMidpointPhaseWorkExact as Port
 
@@ -94,7 +95,7 @@ selectedOriginalSpaceTimeEnergyCloses :
             (SelectedOriginalSpaceTimePort.physicalTrace a) in
   (((TimeSpace.storedEnergy w (TimeSpace.steps w)
        ℚ.- TimeSpace.storedEnergy w zero)
-      ℚ.+ TimeSpace.Open.exteriorOrientedPoyntingFlux
+      ℚ.+ Open.exteriorOrientedPoyntingFlux
         (TimeSpace.faces w))
       ℚ.+ (TimeSpace.SameOriginalSpaceTimeMaxwellAdmission.actualMaterialAndIonLoss
               (SelectedOriginalSpaceTimePort.physicalTrace a)
