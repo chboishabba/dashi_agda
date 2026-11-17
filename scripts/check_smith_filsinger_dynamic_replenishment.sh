@@ -32,6 +32,7 @@ python_tests=(
   scripts/test_smith_filsinger_periodic_fourier_green_sympy.py
   scripts/test_smith_filsinger_lorentz_ade_sympy.py
   scripts/test_smith_filsinger_lorentz_maxwell_weld_sympy.py
+  scripts/test_smith_filsinger_local_causal_ade_sympy.py
   scripts/test_smith_filsinger_plane_wave_spacetime_exact.py
 )
 test -s "$target"
