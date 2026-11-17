@@ -32,6 +32,16 @@ chooseField :
 chooseField F true w = w
 chooseField F false w = C3.zero F
 
+-- The impossible positive-incidence / zero-count branch is
+-- rejected by the natural-number constructors, with no postulate.
+data Void : Set where
+
+voidElim : ∀ {A : Set} → Void → A
+voidElim ()
+
+succCannotBeZero : ∀ {n : Nat} → suc n ≡ zero → Void
+succCannotBeZero ()
+
 -- The mark-count criterion is a genuine exactly-one incidence condition:
 -- if a face has a zero signed flux it still must have a source and target.
 markedZeroImpliesFieldZero :
@@ -42,13 +52,7 @@ markedZeroImpliesFieldZero :
     ≡ C3.zero F
 markedZeroImpliesFieldZero F [] flag w p = refl
 markedZeroImpliesFieldZero F (x ∷ xs) flag w p with flag x
-... | true = impossible
-  where
-    impossible : Signed.sumField F
-      (λ x' → chooseField F (flag x') w) (x ∷ xs)
-      ≡ C3.zero F
-    impossible with p
-    ... | ()
+... | true = voidElim (succCannotBeZero p)
 ... | false =
   trans
     (C3.addZeroLeft F
