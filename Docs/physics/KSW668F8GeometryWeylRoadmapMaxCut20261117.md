@@ -651,3 +651,94 @@ B_w = w0[-4(M0-target)²/5 -3(P0+5S/3)²/20 +5S²/3]
 New `DASHI/Physics/Gravity/KSW668F8WarpWeightedSBP2CommutatorExact.agda` contains the exact face formula, arbitrary finite-list telescope, signed negative control, composed full weighted SAT completed square and original t=4/3 source slice. It imports and reuses the prior XXXVIII boundary-energy owner, and is attached through the existing F8/KSW/TOE authority. Independent `scripts/test_ksw668_f8_warp_weighted_sbp2_commutator.py` verifies the actual rational warp weights for multiple normal-grid lengths and arbitrary original b,dy. **320/320 full-grid exact-Fraction checks and 300/300 additional weighted-source-composition checks passed locally**, plus sign controls. Pinned Agda kernel still not run.
 
 **Immediate next mathematical priority G3:** establish a mesh-independent bound on `C_P,C_M` in terms of weighted bulk energy, including the first/last half-weights; explicitly account for `w_T` when b(T) moves and the original `-3(P-M)/(2z)` force and `v Δ_r U Δ_r(P-M)` transport. The current result is an exact signed ledger, not unconditional dissipation. G4–G6 remain unchanged OPEN. Source and mathematical attributions preserved.
+
+
+## Maximum-cut XXXIX — true moving-weight/warp cancellation and mesh-independent normal-energy precursor (2026-11-17)
+
+**Reuse and correction:** Inspected the original `scripts/ksw668_f8_tt_multipole.py:stage()`, the actual warp `-3(P-M)/(2z)`, the centered/endpoint `normal_order=3` SBP2, the existing XXXVIII `z^-3` commutator, and the moving brane `b(T)=1/t, v=b_T=-1/sqrt(1+t²)`. **Keep one energy normalization throughout:** `E_char=(1/2)sum_i H_i w_i(P_i²+M_i²)` with `w_i=(b+i*dy)^(-3)`. An earlier local warp-power formula `-3(P²-M²)/(4z)` was for a **quarter-normalized energy**. For THIS half-normalized energy used in XXXVIII, its actual power is **`-3(P²-M²)/(2z)`**; using the quarter coefficient in the coupled energy ledger would be an erroneous factor of two. The correction does not change the previous finite normal SBP boundary/SAT squares.
+
+### Exact cancellation: geometry determines the symmetrizer
+With `a=1+v, c=1-v`, the continuous-weight bulk-normal terms are
+```
+normal weight gradient:  +(3/(2z)) [a P²-c M²]
+warp forcing power:    -(3/(2z)) [P²-M²]
+moving weight d/dT:    -(3v/(2z)) [P²+M²]
+SUM:                    0.
+```
+The cancellation is **exact for arbitrary rational P,M,v,1/z**, provided the original moving-geometry derivative `b_T=v` and the formal `w_T=-3v w/z` chain rule hold. The existing original slice `t=4/3` has `db/dt=-9/16`, `dT/dt=15/16`, `v=-3/5`, verifying `db/dt=v(dT/dt)` in exact rationals. The full all-t smooth calculus equality `b_T=v` is independently elementary from `T'(t)=sqrt(1+t²)/t²`, and is not a newly Agda-kernel-checked analytic derivative theorem.
+
+### Exact original DISCRETE remaining defect
+
+Define `C_X=(1/2)sum_faces (w_i-w_(i+1)) X_i X_(i+1)` and `J_X=dy sum_nodes nu_i w_i/z_i X_i²`, with endpoint SBP weights `nu_0=nu_N=1/2`, `nu_i=1` interior. The actual original weighted normal principal + original SAT + warp forcing + moving weight power satisfies the exact semidiscrete ledger
+```
+E_char' |_(normal+warp+moving weight)
+ = B_source_diss
+   + (1+v)*(C_P-(3/2)J_P)
+   -(1-v)*(C_M-(3/2)J_M).
+```
+`B_source_diss` is the XXXVIII original weighted completed-square boundary expression. Hence **all smooth bulk warp terms cancel**, leaving only a precisely named discrete normal product-rule/quadrature defect. A finite face identity proves
+```
+(1/2)(w_i-w_(i+1)) X_i X_(i+1)
+ =(1/4)(w_i-w_(i+1))(X_i²+X_(i+1)²)
+  -(1/4)(w_i-w_(i+1))(X_(i+1)-X_i)².
+```
+This isolates the derivative-square term (sign depends on characteristic speed) and quadrature mismatch.
+
+### New mesh-independent estimate (conditional; analytic/order proof not yet in Agda)
+
+Let `beta=b(T)>0`, `h=dy`, and `0<h<=beta`. The actual solver enforces `dy<=.03`, `final_t<=20`, and `beta=1/t>=.05` throughout its original interval, so this geometric mesh condition holds. Exact rational polynomial certificate for `s=h/z_i in [0,1]`:
+```
+9(1+s)^3-(3+3s+s²)^2
+ =s(9+12s+2s²+s²(1-s)) >= 0.
+```
+Consequently for the actual descending warp weights `w_i=z_i^-3`,
+```
+(w_i-w_(i+1))² beta² <= 9h² w_i w_(i+1).
+```
+By `2|ab|<=a²+b²`, summing edges against the SBP half-weight endpoints yields
+```
+|C_X| <= (3/beta) E_X,
+E_X=(h/2)sum_i nu_i w_i X_i².
+```
+Also `0<=J_X<= (2/beta) E_X`. Thus for `-1<v<0`,
+```
+|(1+v)(C_P-3J_P/2)-(1-v)(C_M-3J_M/2)|
+ <= (12/beta)(E_P+E_M).
+```
+This is an **actual mesh-independent semidiscrete estimate for the normal + warp subsystem**, but it does not control the retained original **radial FV force, moving radial shift, radial outer closure, source-to-trace higher derivatives or SSPRK3 amplification**. It is deliberately a conservative bound; the exact defect offers a possible sharper smooth-field/truncation route.
+
+### General original Israel source cap, not restricted to t=4/3
+
+For any rational `v`, let `a=1+v, c=1-v`, `S=amp*source`, and `target` obey the exact original source equation `c*target=a*P0-2S`. The new **division-free polynomial** identity in `KSW668F8MovingWarpEnergyCancellationDefectExact.agda` factors the general lower-wall source:
+```
+c*v*B_lower
+ =a(v P0-S)²-c S²-(c² v/2)(M0-target)²
+ +(v/2)(c target-a P0+2S)(c target+a P0-2S).
+```
+The last term vanishes for the original target. When `-1<v<0`, this is equivalent to the signed completed square
+```
+B_lower = a*v/c*(P0-S/v)²
+          -c/2*(M0-target)² -S²/v
+       <= -S²/v.
+```
+The weighted lower-wall source cap is therefore `w0*(-S²/v)`; with the original `v=-1/sqrt(1+t²)` and `w0=t³`, this is `t³ sqrt(1+t²) S²`. An Agda rational **order** proof of the inequality and an analytic all-t smooth brane-parameter proof are still OPEN, although the unconditional polynomial certificate is source-written.
+
+Combining these ingredients gives the finite normal/warp **conditional** differential inequality
+```
+dE_char/dT |_(normal+warp) <= 12 E_char/beta + w0*(-S²/v)
+```
+for `-1<v<0,0<dy<=beta`, with the original source target, before adding radial forcing and stage stepping.
+
+### New source/code acceptance
+
+- New `DASHI/Physics/Gravity/KSW668F8MovingWarpEnergyCancellationDefectExact.agda`: exact original continuum-term cancellation, true half-energy normalization, discrete residual factorization, face product-rule defect, envelope polynomial, all-v source SOS polynomial, and rational `b_T=v` slice check. Reuses XXXVIII weighted SBP2/SAT owners and is imported through `KSW668F8SameObjectWeylAuthorityBoundary.agda` into the canonical KSW/TOE graph.
+- `scripts/test_ksw668_f8_moving_warp_energy_defect.py`: **3,124/3,124** exact Fraction checks across 2,3,4,7,13 normal nodes, original `z=b+i dy`, true warp/time/source SAT, operator residual, mesh-independent commutator bound and face polynomial envelope.
+- `scripts/test_ksw668_f8_moving_israel_source_cap.py`: **1,500/1,500** exact Fraction general-v source certificate and completed-square inequality checks.
+
+**Pinned Agda kernel NOT RUN** (the model environment has no pinned Agda executable); arithmetic proof source and mathematical order bounds must not be conflated with kernel acceptance. Existing original source, DASHI and external Caldwell–Langlois/Thorne/SBP attributions retained. No ESD edits or spurious physical equivalence.
+
+### Updated G1–G6 blockers
+
+G1 original finite source, origin-augmented radial lift and restricted geometry-to-Weyl weld retained; full tensor-gauge discrete compatibility OPEN. **G2** all-v original moving-Israel normal-source cap locally closed algebraically, but full radial+normal energy OPEN. **G3** normal+warp **mesh-independent** semidiscrete energy precursor established under the solver's mesh/geometry domain; fully coupled moving-radial FV energy, SSPRK3 time-discrete CFL and outer closure OPEN. **G4** moving high-Sobolev both-Weyl trace OPEN. **G5** independent dr/dy/dt convergence and outside-cone control OPEN. **G6** Einstein-matter/retarded physical FIO/calibrated detector OPEN.
+
+**Next max-cut:** include radial first/outer-cell face energy, original `U_T=(1+v)P/2+(1-v)M/2`, moving (v,\Delta_rU\,\Delta_r(P-M)) shift and radial+normal cross terms in a single weight norm. The origin-augmented V0 carrier and actual 3/7/11 shell weights must remain attached. Only then attempt an energy-driven SSPRK3 CFL and higher-Weyl estimates.
