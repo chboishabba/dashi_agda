@@ -16,9 +16,6 @@ import DASHI.Physics.Motors.SmithFilsingerOriginalMaxwellMeterIntervalWeldExact 
 import DASHI.Physics.Motors.SmithFilsingerSpaceTimePoyntingTelescopeExact as SpaceTime
 import DASHI.Physics.Motors.SmithFilsingerMidpointPhaseWorkExact as Port
 import DASHI.Physics.Motors.SmithFilsingerReplenishedCycleCapExact as Cycle
-import DASHI.Physics.Motors.SmithFilsingerCertifiedSignedMeterResidualExact as Meter
-import DASHI.Physics.Motors.SmithFilsingerCertifiedSignedMeterTwoSidedExact as Bounds
-import DASHI.Core.ProofCarryingFiniteSumEnclosureExact as Cert
 
 -- Source.SignedSourceCycleWeld b f and MeterWeld ... jet b f refer to the
 -- SAME original boundary and field-port pair, not two compatible-looking
@@ -74,25 +71,3 @@ restoredSourceFundsSameOriginalMaxwellReceiver jet b f a w
     c = Cycle.AdmittedSourceCapCycle.repeatable
           (Source.SignedSourceCycleWeld.cycleWithSourceCap w)
 
--- The canonical meter's two-sided observed-work interval is inherited
--- without constructing a fresh measurement or a replacement error solver.
-restoredOriginalReceiverStillRequiresCertifiedLower :
-  ∀ {r} {F : C3.RealField r}
-  (jet : Vector.FullVectorMaxwellJet F)
-  (b : Source.SelectedBoundary)
-  (f : Source.FormalFieldToPort b)
-  (a : MeterWeld.OriginalMaxwellMeterIntervalWeld jet b f)
-  (w : Source.SignedSourceCycleWeld b f) →
-  let physical = Original.SelectedOriginalSpaceTimePort.physicalTrace
-                   (MeterWeld.originalPort a)
-      cert = MeterWeld.meterCertificate a
-  in
-  ℚ._≤_
-    (Meter.SelectedOriginalCertifiedMeter.observedNetTerminalWork
-      (Bounds.TwoSidedMeterCertificate.original cert)
-    ℚ.+ (ℚ.- Cert.ProofCarryingFiniteSumUpperEnclosure.certifiedUpper
-      (Bounds.TwoSidedMeterCertificate.negativeUpper cert)))
-    (SpaceTime.SameOriginalSpaceTimeMaxwellAdmission.actualUsefulReceiverWork
-      physical)
-restoredOriginalReceiverStillRequiresCertifiedLower jet b f a w =
-  MeterWeld.originalMaxwellReceiverLowerFromSignedMeter jet b f a
