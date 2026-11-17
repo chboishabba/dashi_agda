@@ -124,7 +124,7 @@ def main():
         result["exact_checked_out_python_passed"] and result["native_agda_status"]=="PASS")
     if args.output:args.output.write_text(json.dumps(result,indent=2)+"\n")
     print(json.dumps(result,indent=2))
-    if not agda and args.require_agda:return 2
-    return 1 if result["errors"] else 0
+    if not agda:return 2
+    return 0 if result["all_formal_gates_passed"] and not result["errors"] else 1
 
 if __name__=="__main__":sys.exit(main())
