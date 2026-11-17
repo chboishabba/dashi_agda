@@ -19,6 +19,9 @@ import DASHI.Biology.PMDDHistamineInterventionIdentificationBoundaryExact as PMD
 import DASHI.Culture.ArabicRootPatternMorphologyProcessingBoundaryExact as ArabicMorphology
 import DASHI.Core.DependentRecoverableProjectionExact as Recoverable
 
+import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
+import DASHI.ComputerScience.TriadicFin27Byte256ABIExact as TriadicABI
+import DASHI.ComputerScience.TriadicU8RuntimeOracleCrossRepoExact as U8Runtime
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -500,367 +503,197 @@ unified369Ternary27MonsterRepresentationNotPromoted =
 unified369Ternary27MonsterEmbeddingNotPromoted =
   MaxCut369.toe27MonsterEmbeddingNotPromoted
 
+unifiedFleetRecordedDischargedCountIs584 :
+  FleetGapTOE.dischargedCoreKnowledgeFibres
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 584
+unifiedFleetRecordedDischargedCountIs584 =
+  FleetGapTOE.fleetRecordedDischargedCountIs584
+
+unifiedFleetRecordedUnformalisedGapCountIs58 :
+  FleetGapTOE.unformalisedFormalGaps
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 58
+unifiedFleetRecordedUnformalisedGapCountIs58 =
+  FleetGapTOE.fleetRecordedUnformalisedGapCountIs58
+
+unifiedFleetRecordedContradictionCountIs44 :
+  FleetGapTOE.polarityContradictionGaps
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 44
+unifiedFleetRecordedContradictionCountIs44 =
+  FleetGapTOE.fleetRecordedContradictionCountIs44
+
+unifiedFleetRecordedMacroscopicMotifCountIs3 :
+  FleetGapTOE.macroscopicEigenMotifCount
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 3
+unifiedFleetRecordedMacroscopicMotifCountIs3 =
+  FleetGapTOE.fleetRecordedMacroscopicMotifCountIs3
+
+unifiedFleetMetaIntrospectorAttributionPreserved :
+  FleetGapTOE.metaIntrospectorAttributionPreserved
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
+unifiedFleetMetaIntrospectorAttributionPreserved = refl
+
+unifiedFleetMetaIntrospectorProofNotBorrowed :
+  FleetGapTOE.metaIntrospectorProofBorrowed
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+unifiedFleetMetaIntrospectorProofNotBorrowed = refl
 
 ------------------------------------------------------------------------
--- Joint Balaban/R559 typed continuum non-promotion.
+-- Joint Yang-Mills Balaban/R559 TOE receipt.
 ------------------------------------------------------------------------
 
-unifiedBalabanR559ContinuumLimitPromotionImpossible :
-  BalabanRGTOE.BalabanContinuumLimitPromotion → ⊥
-unifiedBalabanR559ContinuumLimitPromotionImpossible =
-  BalabanR559TOE.continuumLimitPromotionEliminator
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+import DASHI.Unified.BalabanR559TOEMaxCutExact as BalabanR559TOE
+import DASHI.Unified.BalabanR559TOEMaxCutValidation
 
-unifiedBalabanR559DepthContinuumLimitPromotionImpossible :
-  BalabanRGTOE.DepthContinuumLimitPromotion → ⊥
-unifiedBalabanR559DepthContinuumLimitPromotionImpossible =
-  BalabanR559TOE.depthContinuumLimitPromotionEliminator
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+unifiedTriadicBoundedABIDoesNotCreateRust :
+  TriadicABI.BoundedABIImpliesRustImplementation → ⊥
+unifiedTriadicBoundedABIDoesNotCreateRust =
+  TriadicABI.abiDoesNotCreateRust
 
-
-------------------------------------------------------------------------
--- PMDD / histamine canonical biology handoff.
-------------------------------------------------------------------------
-
-unifiedPMDDHistamineAmplificationCandidate :
-  PMDDHistamine.HistamineAmplifiedPMDDCandidate
-unifiedPMDDHistamineAmplificationCandidate =
-  PMDDHistamine.canonicalHistamineAmplifiedPMDDCandidate
-
-unifiedPMDDHistamineMolecularCandidate :
-  PMDDMolecular.MolecularlyInstantiatedPMDDHistamineCandidate
-unifiedPMDDHistamineMolecularCandidate =
-  PMDDMolecular.canonicalMolecularlyInstantiatedPMDDHistamineCandidate
-
-unifiedPMDDHistamineInterventionBoundary :
-  PMDDIntervention.HistamineInterventionIdentificationBoundary
-unifiedPMDDHistamineInterventionBoundary =
-  PMDDIntervention.canonicalHistamineInterventionIdentificationBoundary
-
-unifiedPMDDHistamineUniversalCauseImpossible :
-  PMDDHistamine.HistamineCausesAllPMDD → ⊥
-unifiedPMDDHistamineUniversalCauseImpossible =
-  PMDDHistamine.histamineDoesNotBecomeUniversalCause
-
-unifiedPMDDAntihistamineResponseDiagnosticImpossible :
-  PMDDHistamine.AntihistamineResponseDiagnosesHistaminePMDD → ⊥
-unifiedPMDDAntihistamineResponseDiagnosticImpossible =
-  PMDDHistamine.antihistamineResponseIsNotDiagnosticProof
-
-unifiedPMDDGutRootCausePromotionImpossible :
-  PMDDHistamine.GutDysfunctionIsThePMDDRootCause → ⊥
-unifiedPMDDGutRootCausePromotionImpossible =
-  PMDDHistamine.gutRootCauseNotPromoted
-
-unifiedPMDDH1H2TargetPairEfficacyPromotionImpossible :
-  PMDDMolecular.H1H2TargetPairProvesPMDDEfficacy → ⊥
-unifiedPMDDH1H2TargetPairEfficacyPromotionImpossible =
-  PMDDMolecular.h1h2TargetPairDoesNotProvePMDDEfficacy
-
-unifiedPMDDSymptomResponseMechanismIdentificationImpossible :
-  PMDDIntervention.SymptomResponseDeterminesMechanism → ⊥
-unifiedPMDDSymptomResponseMechanismIdentificationImpossible =
-  PMDDIntervention.symptomResponseDoesNotDetermineMechanism
-
+unifiedTriadicRuntimeSourceDoesNotCreateKernelCertification :
+  U8Runtime.RuntimeSourceImpliesKernelCertification → ⊥
+unifiedTriadicRuntimeSourceDoesNotCreateKernelCertification =
+  U8Runtime.runtimeSourceDoesNotCreateKernelCertification
 
 ------------------------------------------------------------------------
--- Culture-to-Unified attachment for Arabic root-pattern exact reopening.
+-- Compiled scalar byte-runtime non-promotion.
 ------------------------------------------------------------------------
 
-unifiedArabicRootPatternIntegrationBoundary :
-  ArabicMorphology.ArabicRootPatternIntegrationBoundary
-unifiedArabicRootPatternIntegrationBoundary =
-  ArabicMorphology.canonicalArabicRootPatternIntegrationBoundary
+import DASHI.ComputerScience.TriadicCompiledScalarU8RuntimeExact as CompiledU8
 
-unifiedArabicKTBRecoverableProjection :
-  Recoverable.DependentExactRecoverableProjection
-    ArabicMorphology.KTBResolvedReading
-    ArabicMorphology.KTBUndiacritizedSurface
-unifiedArabicKTBRecoverableProjection =
-  ArabicMorphology.ktbDependentRecoverableProjection
+unifiedCompiledScalarDoesNotCreateRust :
+  CompiledU8.CUint8ImpliesRustU8 → ⊥
+unifiedCompiledScalarDoesNotCreateRust =
+  CompiledU8.cUint8DoesNotCreateRustBinding
 
-unifiedArabicKTBDependentCodeSeparating :
-  Recoverable.DependentCodeSeparating
-    ArabicMorphology.ktbDependentRecoverableProjection
-unifiedArabicKTBDependentCodeSeparating =
-  ArabicMorphology.ktbDependentCodeSeparating
+unifiedCompiledScalarDoesNotCreateBackendEquivalence :
+  CompiledU8.ExhaustiveScalarImpliesBackendEquivalence → ⊥
+unifiedCompiledScalarDoesNotCreateBackendEquivalence =
+  CompiledU8.scalarExhaustionDoesNotCreateBackendEquivalence
 
-unifiedArabicRootPatternZKPFrame :
-  ArabicMorphology.ArabicRootPatternZKPFrame
-unifiedArabicRootPatternZKPFrame =
-  ArabicMorphology.canonicalArabicRootPatternZKPFrame
+unifiedCompilerSuccessDoesNotCreateAgdaKernelSuccess :
+  CompiledU8.CompilerSuccessImpliesAgdaKernelSuccess → ⊥
+unifiedCompilerSuccessDoesNotCreateAgdaKernelSuccess =
+  CompiledU8.compilerSuccessDoesNotCreateKernelSuccess
 
 
 ------------------------------------------------------------------------
--- Lean Millennium external-target reconciliation.
+-- Fleet 58 named-manifest acquisition boundary.
+-- The recorded count does not identify the 58 rows.
 ------------------------------------------------------------------------
 
-unifiedLeanMillenniumExternalAcceptanceReceipt :
-  MillenniumLean.MillenniumExternalAcceptanceReceipt
-unifiedLeanMillenniumExternalAcceptanceReceipt =
-  MillenniumLean.currentMillenniumExternalAcceptanceReceipt
+unifiedFleet58ManifestAcquisitionReceipt :
+  FleetManifestTOE.Fleet58ManifestAcquisitionReceipt
+unifiedFleet58ManifestAcquisitionReceipt =
+  FleetManifestTOE.canonicalFleet58ManifestAcquisitionReceipt
 
-unifiedLeanMillenniumRHExactStatementWeldSourceWritten :
-  MillenniumLean.leanMillenniumRHExactStatementWeldSourceWritten ≡ true
-unifiedLeanMillenniumRHExactStatementWeldSourceWritten =
-  MillenniumLean.leanMillenniumRHExactStatementWeldSourceWrittenIsTrue
+unifiedFleet58ManifestPresent :
+  Bool
+unifiedFleet58ManifestPresent =
+  FleetManifestTOE.named58ManifestAcquired
 
-unifiedLeanMillenniumNSFeffermanCExactTermSourceWritten :
-  MillenniumLean.leanMillenniumNSFeffermanCExactTermSourceWritten ≡ true
-unifiedLeanMillenniumNSFeffermanCExactTermSourceWritten =
-  MillenniumLean.leanMillenniumNSFeffermanCExactTermSourceWrittenIsTrue
+unifiedFleet58CountIdentifiesNamedRows :
+  Bool
+unifiedFleet58CountIdentifiesNamedRows =
+  FleetManifestTOE.countIdentifiesNamedRows
 
-unifiedLeanMillenniumNSFeffermanDExactTermSourceWritten :
-  MillenniumLean.leanMillenniumNSFeffermanDExactTermSourceWritten ≡ true
-unifiedLeanMillenniumNSFeffermanDExactTermSourceWritten =
-  MillenniumLean.leanMillenniumNSFeffermanDExactTermSourceWrittenIsTrue
+unifiedFleet58PerGapDispatchEnabled :
+  Bool
+unifiedFleet58PerGapDispatchEnabled =
+  FleetManifestTOE.perGapDispatchEnabled
 
-unifiedLeanMillenniumNSAdapterRequiresNoNewMathematics :
-  MillenniumLean.leanMillenniumNSAdapterRequiresNewMathematics ≡ false
-unifiedLeanMillenniumNSAdapterRequiresNoNewMathematics =
-  MillenniumLean.leanMillenniumNSAdapterRequiresNoNewMathematics
+unifiedFleet58ManifestZKPFrame :
+  ParetoSnowballTOE.TOEZKPFrame
+unifiedFleet58ManifestZKPFrame =
+  FleetManifestTOE.canonicalFleet58ManifestZKPFrame
 
-unifiedLeanMillenniumBSDProjectiveAffineRankWeldSourceWritten :
-  MillenniumLean.leanMillenniumBSDProjectiveAffineRankWeldSourceWritten ≡ true
-unifiedLeanMillenniumBSDProjectiveAffineRankWeldSourceWritten =
-  MillenniumLean.leanMillenniumBSDProjectiveAffineRankWeldSourceWrittenIsTrue
+unifiedFleet58AcquisitionDoesNotPayRequirement :
+  FleetManifestTOE.BoundDemandAutomaticallyPaysRequirement → ⊥
+unifiedFleet58AcquisitionDoesNotPayRequirement =
+  FleetManifestTOE.acquisitionDoesNotPayRequirement
 
-unifiedLeanMillenniumPNPTerminalFailureBidiAgdaOwned :
-  MillenniumLean.leanMillenniumPNPTerminalFailureBidiAgdaOwned ≡ true
-unifiedLeanMillenniumPNPTerminalFailureBidiAgdaOwned =
-  MillenniumLean.leanMillenniumPNPTerminalFailureBidiAgdaOwnedIsTrue
-
-unifiedLeanMillenniumHodgePrizePromotionImpossible :
-  MillenniumLean.LeanMillenniumHodgePrizePromotion → ⊥
-unifiedLeanMillenniumHodgePrizePromotionImpossible =
-  MillenniumLean.leanMillenniumHodgePrizePromotionImpossible
-
-unifiedLeanMillenniumYangMillsPrizePromotionImpossible :
-  MillenniumLean.LeanMillenniumYangMillsPrizePromotion → ⊥
-unifiedLeanMillenniumYangMillsPrizePromotionImpossible =
-  MillenniumLean.leanMillenniumYangMillsPrizePromotionImpossible
-
-unifiedLeanMillenniumSourceWrittenKernelPromotionImpossible :
-  MillenniumLean.LeanMillenniumSourceWrittenKernelPromotion → ⊥
-unifiedLeanMillenniumSourceWrittenKernelPromotionImpossible =
-  MillenniumLean.leanMillenniumSourceWrittenKernelPromotionImpossible
-
+unifiedFleet58SearchPriorityDoesNotCreateProof :
+  FleetManifestTOE.SearchPriorityCreatesProof → ⊥
+unifiedFleet58SearchPriorityDoesNotCreateProof =
+  FleetManifestTOE.searchPriorityDoesNotCreateProof
 
 ------------------------------------------------------------------------
--- Millennium residual-classifier non-promotion.
+-- Fleet max-cut promotion and manifest firewalls.
 ------------------------------------------------------------------------
 
-unifiedMillenniumResidualClassifierBoundary :
-  MillenniumResidual.MillenniumResidualClassifierBoundary
-unifiedMillenniumResidualClassifierBoundary =
-  MillenniumResidual.canonicalMillenniumResidualClassifierBoundary
+unifiedFleetSpectralLabelsDoNotIdentifyTheoremOwners :
+  FleetGapTOE.spectralLabelsIdentifyTheoremOwners
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+unifiedFleetSpectralLabelsDoNotIdentifyTheoremOwners =
+  FleetGapTOE.fleetSpectralLabelDoesNotIdentifyTheoremOwner
 
-unifiedMillenniumHodgeAlgebraicLiftStillNotConstructed :
-  MillenniumResidual.hodgeAlgebraicLiftConstructed
-    MillenniumResidual.canonicalMillenniumResidualClassifierBoundary ≡ false
-unifiedMillenniumHodgeAlgebraicLiftStillNotConstructed =
-  MillenniumResidual.millenniumHodgeAlgebraicLiftStillNotConstructed
+unifiedFleetESDSurfaceUnedited :
+  FleetGapTOE.esdSurfaceEdited
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+unifiedFleetESDSurfaceUnedited = refl
 
-unifiedMillenniumBSDRankWeldStillNotUnconditional :
-  MillenniumResidual.bsdRankWeldConstructedUnconditionally
-    MillenniumResidual.canonicalMillenniumResidualClassifierBoundary ≡ false
-unifiedMillenniumBSDRankWeldStillNotUnconditional =
-  MillenniumResidual.millenniumBSDRankWeldStillNotUnconditional
+unifiedFleetEigenPriorityPromotionImpossible :
+  FleetGapTOE.FleetEigenPriorityCreatesProof → ⊥
+unifiedFleetEigenPriorityPromotionImpossible =
+  FleetGapTOE.fleetEigenPriorityPromotionImpossible
 
-unifiedMillenniumPolynomialAlgorithmCoverageStillNotConstructed :
-  MillenniumResidual.polynomialAlgorithmFamilyExhaustionConstructed
-    MillenniumResidual.canonicalMillenniumResidualClassifierBoundary ≡ false
-unifiedMillenniumPolynomialAlgorithmCoverageStillNotConstructed =
-  MillenniumResidual.millenniumPolynomialAlgorithmCoverageStillNotConstructed
+unifiedFleetExternalCountPromotionImpossible :
+  FleetGapTOE.FleetExternalCountCreatesFormalDischarge → ⊥
+unifiedFleetExternalCountPromotionImpossible =
+  FleetGapTOE.fleetExternalCountPromotionImpossible
 
-unifiedMillenniumResidualClassifierDoesNotSolveAnyProblem :
-  MillenniumResidual.anyOfThreeMillenniumProblemsSolvedHere
-    MillenniumResidual.canonicalMillenniumResidualClassifierBoundary ≡ false
-unifiedMillenniumResidualClassifierDoesNotSolveAnyProblem =
-  MillenniumResidual.millenniumResidualClassifierDoesNotSolveAnyProblem
+unifiedFleetDischargedFibreRetargetImpossible :
+  FleetGapTOE.FleetDischargedFibreRetargetPermission → ⊥
+unifiedFleetDischargedFibreRetargetImpossible =
+  FleetGapTOE.fleetDischargedFibresCannotBeRetargetedByThisBoundary
 
-unifiedMillenniumPvsNPNotDerivedFromNonDescentGrammar :
-  MillenniumResidual.pNotEqualsNPDerived
-    MillenniumResidual.canonicalPvsNPUniformNonDescentResearchBoundary ≡ false
-unifiedMillenniumPvsNPNotDerivedFromNonDescentGrammar =
-  MillenniumResidual.millenniumPvsNPNotDerivedFromNonDescentGrammar
+unifiedFleetContradictionGapReclassificationImpossible :
+  FleetGapTOE.FleetContradictionGapReclassificationPermission → ⊥
+unifiedFleetContradictionGapReclassificationImpossible =
+  FleetGapTOE.fleetContradictionsCannotBeRelabelledAsFormalGaps
 
+unifiedFleet58ManifestAbsent :
+  FleetManifestTOE.named58ManifestAcquired ≡ false
+unifiedFleet58ManifestAbsent =
+  FleetManifestTOE.named58ManifestAcquiredIsFalse
 
-------------------------------------------------------------------------
--- Riemann G21 canonical non-promotion.
-------------------------------------------------------------------------
+unifiedFleet58CountDoesNotNameRows :
+  FleetManifestTOE.countIdentifiesNamedRows ≡ false
+unifiedFleet58CountDoesNotNameRows =
+  FleetManifestTOE.countIdentifiesNamedRowsIsFalse
 
-unifiedRHStrictTP2Receipt : RHFrontier.StrictTP2TrancheReceipt
-unifiedRHStrictTP2Receipt = RHFrontier.canonicalStrictTP2TrancheReceipt
+unifiedFleet58PerGapDispatchDisabled :
+  FleetManifestTOE.perGapDispatchEnabled ≡ false
+unifiedFleet58PerGapDispatchDisabled =
+  FleetManifestTOE.perGapDispatchEnabledIsFalse
 
-unifiedRHActualSinhTP2StillOpen :
-  RHFrontier.StrictTP2TrancheReceipt.actualSinhTP2Derived
-    unifiedRHStrictTP2Receipt ≡ false
-unifiedRHActualSinhTP2StillOpen =
-  RHFrontier.StrictTP2TrancheReceipt.actualSinhTP2DerivedIsFalse
-    unifiedRHStrictTP2Receipt
+unifiedFleet58RelatedSymbolsRequired :
+  FleetManifestTOE.relatedSymbolsRequired ≡ true
+unifiedFleet58RelatedSymbolsRequired =
+  FleetManifestTOE.relatedSymbolsRequiredIsTrue
 
-unifiedRHContinuumMomentSignStillOpen :
-  RHFrontier.StrictTP2TrancheReceipt.actualOddContinuumSignDerived
-    unifiedRHStrictTP2Receipt ≡ false
-unifiedRHContinuumMomentSignStillOpen =
-  RHFrontier.StrictTP2TrancheReceipt.actualOddContinuumSignDerivedIsFalse
-    unifiedRHStrictTP2Receipt
+unifiedFleet58DiscoverRequired :
+  FleetManifestTOE.discoverRequired ≡ true
+unifiedFleet58DiscoverRequired =
+  FleetManifestTOE.discoverRequiredIsTrue
 
-unifiedRHDeterminantRemainderStillOpen :
-  RHFrontier.StrictTP2TrancheReceipt.actualStructuredRemainderBoundDerived
-    unifiedRHStrictTP2Receipt ≡ false
-unifiedRHDeterminantRemainderStillOpen =
-  RHFrontier.StrictTP2TrancheReceipt.actualStructuredRemainderBoundDerivedIsFalse
-    unifiedRHStrictTP2Receipt
+unifiedFleet58RoundLineageRequired :
+  FleetManifestTOE.roundLineageRequired ≡ true
+unifiedFleet58RoundLineageRequired =
+  FleetManifestTOE.roundLineageRequiredIsTrue
 
-unifiedRHFiniteRadiusStillOpen :
-  RHFrontier.StrictTP2TrancheReceipt.actualFiniteRadiusSignDerived
-    unifiedRHStrictTP2Receipt ≡ false
-unifiedRHFiniteRadiusStillOpen =
-  RHFrontier.StrictTP2TrancheReceipt.actualFiniteRadiusSignDerivedIsFalse
-    unifiedRHStrictTP2Receipt
+unifiedFleet58AcquisitionDoesNotCloseConsumer :
+  FleetManifestTOE.BoundDemandAutomaticallyClosesConsumer → ⊥
+unifiedFleet58AcquisitionDoesNotCloseConsumer =
+  FleetManifestTOE.acquisitionDoesNotCloseConsumer
 
-unifiedRHPrimeIdentityStillOpen :
-  RHFrontier.StrictTP2TrancheReceipt.g22LiteralPrimeIdentityDerived
-    unifiedRHStrictTP2Receipt ≡ false
-unifiedRHPrimeIdentityStillOpen =
-  RHFrontier.StrictTP2TrancheReceipt.g22LiteralPrimeIdentityDerivedIsFalse
-    unifiedRHStrictTP2Receipt
-
-unifiedRHClayNotPromoted :
-  RHFrontier.StrictTP2TrancheReceipt.riemannHypothesisDerived
-    unifiedRHStrictTP2Receipt ≡ false
-unifiedRHClayNotPromoted =
-  RHFrontier.StrictTP2TrancheReceipt.riemannHypothesisDerivedIsFalse
-    unifiedRHStrictTP2Receipt
+unifiedFleet58ProducerDoesNotIdentifyResidual :
+  FleetManifestTOE.SameProducerIdentifiesResidual → ⊥
+unifiedFleet58ProducerDoesNotIdentifyResidual =
+  FleetManifestTOE.producerDoesNotIdentifyResidual
 
 
-------------------------------------------------------------------------
--- Live Gate-4 frontier and Fleet target selection.
-------------------------------------------------------------------------
 
-unifiedCurrentGate4FrontierLedgerLevel : ProofLevel
-unifiedCurrentGate4FrontierLedgerLevel =
-  FleetHyperTOE.currentGate4FrontierLedgerLevel
-
-unifiedCurrentGate4ClusteringToTransferGapLevel : ProofLevel
-unifiedCurrentGate4ClusteringToTransferGapLevel =
-  FleetHyperTOE.currentGate4ClusteringToTransferGapLevel
-
-unifiedFleetFormalGapTargetSelected : Bool
-unifiedFleetFormalGapTargetSelected =
-  FleetHyperTOE.fleetFormalGapTargetSelected
-
-unifiedHistoricalGate4CountSelectedAsFleetTarget : Bool
-unifiedHistoricalGate4CountSelectedAsFleetTarget =
-  FleetHyperTOE.historicalGate4CountSelectedAsFleetTarget
-
-unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
-  FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
-unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
-  FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
-
-
-------------------------------------------------------------------------
--- Navier-Stokes R829-vector instantaneous snapshot boundary.
-------------------------------------------------------------------------
-
-unifiedNavierStokesInstantaneousVectorSnapshotClosed : Bool
-unifiedNavierStokesInstantaneousVectorSnapshotClosed =
-  NSClayTOE.instantaneousVectorSnapshotClosed
-
-unifiedNavierStokesInstantaneousVectorSnapshotClosedIsTrue :
-  unifiedNavierStokesInstantaneousVectorSnapshotClosed ≡ true
-unifiedNavierStokesInstantaneousVectorSnapshotClosedIsTrue =
-  NSClayTOE.instantaneousVectorSnapshotClosedIsTrue
-
-unifiedNavierStokesInstantaneousRepositoryRateStrictlyNegative : Bool
-unifiedNavierStokesInstantaneousRepositoryRateStrictlyNegative =
-  NSClayTOE.instantaneousRepositoryRateStrictlyNegative
-
-unifiedNavierStokesInstantaneousRepositoryRateStrictlyNegativeIsTrue :
-  unifiedNavierStokesInstantaneousRepositoryRateStrictlyNegative ≡ true
-unifiedNavierStokesInstantaneousRepositoryRateStrictlyNegativeIsTrue =
-  NSClayTOE.instantaneousRepositoryRateStrictlyNegativeIsTrue
-
-unifiedNavierStokesRealFiniteODETransportClosed : Bool
-unifiedNavierStokesRealFiniteODETransportClosed =
-  NSClayTOE.realFiniteODETransportClosed
-
-unifiedNavierStokesRealFiniteODETransportStillOpen :
-  unifiedNavierStokesRealFiniteODETransportClosed ≡ false
-unifiedNavierStokesRealFiniteODETransportStillOpen =
-  NSClayTOE.realFiniteODETransportStillOpen
-
-unifiedNavierStokesUniversalR823IntegratedReserveRefuted : Bool
-unifiedNavierStokesUniversalR823IntegratedReserveRefuted =
-  NSClayTOE.universalR823IntegratedReserveRefuted
-
-unifiedNavierStokesUniversalR823IntegratedReserveStillUnrefuted :
-  unifiedNavierStokesUniversalR823IntegratedReserveRefuted ≡ false
-unifiedNavierStokesUniversalR823IntegratedReserveStillUnrefuted =
-  NSClayTOE.universalR823IntegratedReserveStillUnrefuted
-
-unifiedNavierStokesInstantaneousSnapshotClayPromotion : Bool
-unifiedNavierStokesInstantaneousSnapshotClayPromotion =
-  NSClayTOE.instantaneousSnapshotClayPromotion
-
-unifiedNavierStokesInstantaneousSnapshotClayPromotionStillFalse :
-  unifiedNavierStokesInstantaneousSnapshotClayPromotion ≡ false
-unifiedNavierStokesInstantaneousSnapshotClayPromotionStillFalse =
-  NSClayTOE.instantaneousSnapshotClayPromotionStillFalse
-
-
-------------------------------------------------------------------------
--- Current coarse/fine, branch, history, and option-cone TOE convergence.
---
--- Golden source: Agda owners imported above.
--- Lean mirrors and external receipts are correspondence evidence only.
--- No ESD surface participates in this theorem path.
-------------------------------------------------------------------------
-
-unifiedSituatedFibreZKPFrame =
-  SituatedFibreTOE.canonicalSituatedFibreTOEZKPFrame
-
-unifiedDecimalRefinementPreservesCoarseStage =
-  DecimalStageTOE.refinementDepthPreservesCoarseStage
-
-unifiedNonNineFiniteRefinementRetainsResidual =
-  DecimalStageTOE.nonNineRefinementRetainsResidualAtEveryFiniteDepth
-
-unifiedStage9SelfLoop =
-  DecimalStageTOE.stage9HasCanonicalSelfLoop
-
-unifiedStage9ExternalCoordinateEdge =
-  DecimalStageTOE.stage9To10RequiresCanonicalExternalCoordinateEdge
-
-unifiedEqualLocalBranchMass =
-  BranchReachTOE.sameStartRowMass
-
-unifiedEqualLocalBranchRegime =
-  BranchReachTOE.sameStartRowRegime
-
-unifiedEscapeStartReachesGoal =
-  BranchReachTOE.escapeStartReachesGoal
-
-unifiedTrapStartCannotReachGoal =
-  BranchReachTOE.trapStartCannotReachGoal
-
-unifiedTypedBranchTrapBarrier =
-  BranchReachTOE.canonicalTypedBranchTrapBarrier
-
-unifiedTrajectoryEndpointNonfactorability =
-  TrajectoryTOE.demoTrajectoryDoesNotFactorThroughEndpoints
-
-unifiedHistoryConditionedChoiceBoundary =
-  HistoryTOE.canonicalHistoryConditionedChoiceBoundary
-
-unifiedHistoryFutureConeWitness =
-  HistoryTOE.canonicalToyFutureConeWitness
-
-unifiedEqualLocalMassDifferentOptionCone =
-  OptionConeTOE.canonicalEqualLocalMassDifferentOptionCone
-
-unifiedTypedBranchingOptionConeBoundary =
-  OptionConeTOE.canonicalTypedBranchingOptionConeBoundary
+unified369MaxCutZKPFrame :
+  ParetoSnowballTOE.TOEZKPFrame
+unified369MaxCutZKPFrame =
+  MaxCut369.canonicalTOE369MaxCutZKPFrame

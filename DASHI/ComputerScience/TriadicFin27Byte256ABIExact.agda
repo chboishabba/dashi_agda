@@ -170,3 +170,36 @@ abiDoesNotCreateRust ()
 sameNumericByteDoesNotFixDeviceRepresentation :
   SameNumericByteImpliesSameDeviceRepresentation → ⊥
 sameNumericByteDoesNotFixDeviceRepresentation ()
+
+stateCode-stateDecode : (i : State27) → stateCode (stateDecode i) ≡ i
+stateCode-stateDecode (zero) = refl
+stateCode-stateDecode (suc zero) = refl
+stateCode-stateDecode (suc (suc zero)) = refl
+stateCode-stateDecode (suc (suc (suc zero))) = refl
+stateCode-stateDecode (suc (suc (suc (suc zero)))) = refl
+stateCode-stateDecode (suc (suc (suc (suc (suc zero))))) = refl
+stateCode-stateDecode (suc (suc (suc (suc (suc (suc zero)))))) = refl
+stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc zero))))))) = refl
+stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))) = refl
+stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))) = refl
+stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))) = refl
+stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))) = refl
+stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))) = refl
+stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))) = refl
+stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))) = refl
+stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))))) = refl
+stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))))) = refl
+stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))))))) = refl
+stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))))))) = refl
+stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))))))))) = refl
+stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))))))))) = refl
+stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))))))))))) = refl
+stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))))))))))) = refl
+stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))))))))))))) = refl
+stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))))))))))))) = refl
+stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))))))))))))))) = refl
+stateCode-stateDecode (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))))))))))))))) = refl
+
+------------------------------------------------------------------------
+-- Byte-sized embedding.  The 229 upper values are intentionally reserved.
+------------------------------------------------------------------------

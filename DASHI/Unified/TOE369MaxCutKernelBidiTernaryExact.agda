@@ -1,5 +1,9 @@
 module DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact where
 
+import DASHI.ComputerScience.TriadicFin27Byte256ABIExact as ABI
+import DASHI.ComputerScience.TriadicU8RuntimeOracleCrossRepoExact as HostU8
+import DASHI.ComputerScience.TriadicCompiledScalarU8RuntimeExact as CompiledU8
+import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
@@ -34,6 +38,20 @@ import DASHI.Wikimedia.IbrahimMonster3BLinearShortestFrontierCorrectionExact as 
 -- G. Original authors and source repositories retain attribution.
 -- F. Exact-head Agda validation is required before kernel certification.
 ------------------------------------------------------------------------
+
+canonicalTOE369MaxCutZKPFrame : ParetoSnowballTOE.TOEZKPFrame
+canonicalTOE369MaxCutZKPFrame =
+  ParetoSnowballTOE.toe-zkp-frame
+    "converge existing max-cut, kernel-BIDI, ternary-27, byte-ABI, Fleet and Ibrahim boundaries into the DASHI TOE"
+    "reuse canonical theorem owners before any extension"
+    "export exact aliases, bidirectional finite-state equalities, and non-promotion eliminators only"
+    "584 discharged fibres stay discharged; 44 contradiction gaps stay separate; 58 formal gaps stay count-only until the named manifest is acquired"
+    "one disjoint TOE normalization lane"
+    "donor owners exist; attribution remains unchanged; ESD surfaces are read-only; the named 58-row manifest is not synthesized"
+    "ITIL, ISO 9000/42001/27001/27701/23894/9241, NIST AI RMF, Six Sigma and C4/PlantUML are process lenses only"
+    "EverythingTOESymmetryResolved369, Unifier, and Unified.Everything reach the same exact owners and firewalls"
+    "related-symbols, discover, lineage, trust-escape scan, ESD diff audit, and Agda kernel typecheck"
+    false false false false
 
 ------------------------------------------------------------------------
 -- Ternary-27 exact symmetry.
@@ -209,3 +227,76 @@ toePermutationNoGoDoesNotCreateLinearAction :
   Ibrahim.NonPermutationNoGoCreatesLinearAction → ⊥
 toePermutationNoGoDoesNotCreateLinearAction =
   Ibrahim.noGoDoesNotCreateLinearAction
+
+TernaryEncodedState : Set
+TernaryEncodedState = CodecRef.Encoded3
+
+TernaryState27 : Set
+TernaryState27 = ABI.State27
+
+toe27StateCode : TernaryEncodedState → TernaryState27
+toe27StateCode = ABI.stateCode
+
+toe27StateDecode : TernaryState27 → TernaryEncodedState
+toe27StateDecode = ABI.stateDecode
+
+toe27StateDecodeStateCode :
+  (e : TernaryEncodedState) →
+  toe27StateDecode (toe27StateCode e) ≡ e
+toe27StateDecodeStateCode = ABI.stateDecode-stateCode
+
+toe27StateCodeStateDecode :
+  (i : TernaryState27) →
+  toe27StateCode (toe27StateDecode i) ≡ i
+toe27StateCodeStateDecode = ABI.stateCode-stateDecode
+
+------------------------------------------------------------------------
+-- Ternary-27 byte ABI / compiled host boundary.
+--
+-- Reuse the existing ABI and runtime owners. The finite codec and compiled
+-- host byte are paid. Rust, CUDA, ROCm, device equivalence, and Agda-kernel
+-- promotion remain unpaid. This is the normalized CFFI/kernel-BIDI boundary.
+------------------------------------------------------------------------
+
+toe27FiniteStateABIExact :
+  ABI.finite27StateIndexPaid ABI.canonicalTriadicByteABIBoundary ≡ true
+toe27FiniteStateABIExact = refl
+
+toe27ByteCarrierABIExact :
+  ABI.byteSizedFiniteCarrierPaid ABI.canonicalTriadicByteABIBoundary ≡ true
+toe27ByteCarrierABIExact = refl
+
+toe27CompiledHostU8Exact :
+  CompiledU8.compiledHostU8Oracle CompiledU8.currentRuntimeRoadmapAdvance ≡ true
+toe27CompiledHostU8Exact = refl
+
+toe27RustBindingStillUnpaid :
+  ABI.rustU8BindingPaid ABI.canonicalTriadicByteABIBoundary ≡ false
+toe27RustBindingStillUnpaid = refl
+
+toe27CUDABindingStillUnpaid :
+  ABI.cudaUint8BindingPaid ABI.canonicalTriadicByteABIBoundary ≡ false
+toe27CUDABindingStillUnpaid = refl
+
+toe27ROCmBindingStillUnpaid :
+  ABI.rocmUint8BindingPaid ABI.canonicalTriadicByteABIBoundary ≡ false
+toe27ROCmBindingStillUnpaid = refl
+
+toe27HostByteDoesNotCreateDeviceByte :
+  HostU8.HostByteImpliesDeviceByte → ⊥
+toe27HostByteDoesNotCreateDeviceByte =
+  HostU8.hostByteDoesNotCreateDeviceByte
+
+toe27RuntimeSourceDoesNotCreateKernelCertification :
+  HostU8.RuntimeSourceImpliesKernelCertification → ⊥
+toe27RuntimeSourceDoesNotCreateKernelCertification =
+  HostU8.runtimeSourceDoesNotCreateKernelCertification
+
+toe27CompilerSuccessDoesNotCreateAgdaKernelSuccess :
+  CompiledU8.CompilerSuccessImpliesAgdaKernelSuccess → ⊥
+toe27CompilerSuccessDoesNotCreateAgdaKernelSuccess =
+  CompiledU8.compilerSuccessDoesNotCreateKernelSuccess
+
+------------------------------------------------------------------------
+-- Ibrahim non-promotion partitions.
+------------------------------------------------------------------------

@@ -9,6 +9,9 @@ import DASHI.Unifier as Unifier
 import DASHI.Unified.Everything as Unified
 import DASHI.Unified.R559IbrahimFleetHyperfabricTOEExact as Owner
 import DASHI.Unified.FleetFormalGapTargetTOEExact as Fleet
+import DASHI.ComputerScience.TriadicFin27Byte256ABIExact as TriadicABI
+import DASHI.ComputerScience.TriadicU8RuntimeOracleCrossRepoExact as U8Runtime
+import DASHI.ComputerScience.TriadicCompiledScalarU8RuntimeExact as CompiledU8
 
 toeReceiptMatchesOwner :
   TOE.toeR559IbrahimFleetHyperfabricReceipt
@@ -75,15 +78,106 @@ unifierStreamLossStillExact :
 unifierStreamLossStillExact =
   Unifier.unifierTwoDigitStreamCannotRecoverThird
 
+fleetEigenPriorityStillHasNoProofAuthority :
+  Fleet.eigenvalueMagnitudeCreatesProofAuthority
+    Owner.fleetFormalGapTargetReceipt ≡ false
+fleetEigenPriorityStillHasNoProofAuthority =
+  Owner.fleetEigenPriorityDoesNotCreateProof
+
 fleetCountStillDoesNotCreateFormalDischarge :
-  Fleet.FleetExternalCountCreatesFormalDischarge → ⊥
+  Fleet.externalCountCreatesFormalProof
+    Owner.fleetFormalGapTargetReceipt ≡ false
 fleetCountStillDoesNotCreateFormalDischarge =
   Owner.fleetExternalCountDoesNotCreateFormalDischarge
 
 fleetDischargedFibresStillCannotBeRetargeted :
-  Fleet.FleetDischargedFibreRetargetPermission → ⊥
+  Fleet.dischargedFibresRemainDischarged
+    Owner.fleetFormalGapTargetReceipt ≡ true
 fleetDischargedFibresStillCannotBeRetargeted =
   Owner.fleetDischargedFibresStayOutOfTarget
+
+------------------------------------------------------------------------
+-- Canonical byte-ABI/runtime non-promotion reaches every TOE facade.
+------------------------------------------------------------------------
+
+toeTriadicBoundedABIDoesNotCreateRust :
+  TriadicABI.BoundedABIImpliesRustImplementation → ⊥
+toeTriadicBoundedABIDoesNotCreateRust =
+  TOE.toeTriadicBoundedABIDoesNotCreateRust
+
+unifierTriadicBoundedABIDoesNotCreateRust :
+  TriadicABI.BoundedABIImpliesRustImplementation → ⊥
+unifierTriadicBoundedABIDoesNotCreateRust =
+  Unifier.unifierTriadicBoundedABIDoesNotCreateRust
+
+unifiedTriadicBoundedABIDoesNotCreateRust :
+  TriadicABI.BoundedABIImpliesRustImplementation → ⊥
+unifiedTriadicBoundedABIDoesNotCreateRust =
+  Unified.unifiedTriadicBoundedABIDoesNotCreateRust
+
+toeRuntimeSourceDoesNotCreateKernelCertification :
+  U8Runtime.RuntimeSourceImpliesKernelCertification → ⊥
+toeRuntimeSourceDoesNotCreateKernelCertification =
+  TOE.toeTriadicRuntimeSourceDoesNotCreateKernelCertification
+
+unifierRuntimeSourceDoesNotCreateKernelCertification :
+  U8Runtime.RuntimeSourceImpliesKernelCertification → ⊥
+unifierRuntimeSourceDoesNotCreateKernelCertification =
+  Unifier.unifierTriadicRuntimeSourceDoesNotCreateKernelCertification
+
+unifiedRuntimeSourceDoesNotCreateKernelCertification :
+  U8Runtime.RuntimeSourceImpliesKernelCertification → ⊥
+unifiedRuntimeSourceDoesNotCreateKernelCertification =
+  Unified.unifiedTriadicRuntimeSourceDoesNotCreateKernelCertification
+
+------------------------------------------------------------------------
+-- Compiled scalar runtime firewalls.
+------------------------------------------------------------------------
+
+toeCompiledScalarDoesNotCreateRust :
+  CompiledU8.CUint8ImpliesRustU8 → ⊥
+toeCompiledScalarDoesNotCreateRust =
+  TOE.toeCompiledScalarDoesNotCreateRust
+
+unifierCompiledScalarDoesNotCreateRust :
+  CompiledU8.CUint8ImpliesRustU8 → ⊥
+unifierCompiledScalarDoesNotCreateRust =
+  Unifier.unifierCompiledScalarDoesNotCreateRust
+
+unifiedCompiledScalarDoesNotCreateRust :
+  CompiledU8.CUint8ImpliesRustU8 → ⊥
+unifiedCompiledScalarDoesNotCreateRust =
+  Unified.unifiedCompiledScalarDoesNotCreateRust
+
+toeCompiledScalarDoesNotCreateBackendEquivalence :
+  CompiledU8.ExhaustiveScalarImpliesBackendEquivalence → ⊥
+toeCompiledScalarDoesNotCreateBackendEquivalence =
+  TOE.toeCompiledScalarDoesNotCreateBackendEquivalence
+
+unifierCompiledScalarDoesNotCreateBackendEquivalence :
+  CompiledU8.ExhaustiveScalarImpliesBackendEquivalence → ⊥
+unifierCompiledScalarDoesNotCreateBackendEquivalence =
+  Unifier.unifierCompiledScalarDoesNotCreateBackendEquivalence
+
+unifiedCompiledScalarDoesNotCreateBackendEquivalence :
+  CompiledU8.ExhaustiveScalarImpliesBackendEquivalence → ⊥
+unifiedCompiledScalarDoesNotCreateBackendEquivalence =
+  Unified.unifiedCompiledScalarDoesNotCreateBackendEquivalence
+
+toeCompilerSuccessDoesNotCreateAgdaKernelSuccess :
+  CompiledU8.CompilerSuccessImpliesAgdaKernelSuccess → ⊥
+toeCompilerSuccessDoesNotCreateAgdaKernelSuccess =
+  TOE.toeCompilerSuccessDoesNotCreateAgdaKernelSuccess
+
+unifierCompilerSuccessDoesNotCreateAgdaKernelSuccess :
+  CompiledU8.CompilerSuccessImpliesAgdaKernelSuccess → ⊥
+unifierCompilerSuccessDoesNotCreateAgdaKernelSuccess =
+  Unifier.unifierCompilerSuccessDoesNotCreateAgdaKernelSuccess
+
+unifiedCompilerSuccessDoesNotCreateAgdaKernelSuccess :
+  CompiledU8.CompilerSuccessImpliesAgdaKernelSuccess → ⊥
+unifiedCompilerSuccessDoesNotCreateAgdaKernelSuccess =
+  Unified.unifiedCompilerSuccessDoesNotCreateAgdaKernelSuccess
 
 toeYMGate4CountIs58 :
   TOE.toeYMGate4FormalGapsAre58
