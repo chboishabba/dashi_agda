@@ -15,6 +15,10 @@ owners=(
   DASHI/Physics/Motors/SmithFilsingerYeeCFLConeGuardExact.agda
   DASHI/Physics/Motors/SmithFilsingerFiniteVolumeMaxwellBoundaryWeldExact.agda
   DASHI/Physics/Motors/SmithFilsingerFiniteVolumeFaceIncidenceExact.agda
+  DASHI/Physics/Motors/SmithFilsingerFullVectorIndexedFaceSampleExact.agda
+  DASHI/Physics/Motors/SmithFilsingerSignedIndexedFaceFluxExact.agda
+  DASHI/Physics/Motors/SmithFilsingerIndexedFaceSourceWeldExact.agda
+  DASHI/Physics/Motors/SmithFilsingerIndexedFaceIncidenceExact.agda
   DASHI/Physics/Motors/SmithFilsingerTimedSpatialPortChainExact.agda
   DASHI/Physics/Motors/SmithFilsingerSpatialSourceBoundaryWeldExact.agda
   DASHI/Physics/Motors/SmithFilsingerSourceMaxwellBoundaryWeldExact.agda
@@ -32,6 +36,10 @@ new_owners=(
   DASHI/Physics/Motors/SmithFilsingerYeeCFLConeGuardExact.agda
   DASHI/Physics/Motors/SmithFilsingerFiniteVolumeMaxwellBoundaryWeldExact.agda
   DASHI/Physics/Motors/SmithFilsingerFiniteVolumeFaceIncidenceExact.agda
+  DASHI/Physics/Motors/SmithFilsingerFullVectorIndexedFaceSampleExact.agda
+  DASHI/Physics/Motors/SmithFilsingerSignedIndexedFaceFluxExact.agda
+  DASHI/Physics/Motors/SmithFilsingerIndexedFaceSourceWeldExact.agda
+  DASHI/Physics/Motors/SmithFilsingerIndexedFaceIncidenceExact.agda
   DASHI/Physics/Motors/SmithFilsingerTimedSpatialPortChainExact.agda
   DASHI/Physics/Motors/SmithFilsingerSpatialSourceBoundaryWeldExact.agda
   DASHI/Physics/Motors/SmithFilsingerSourceMaxwellBoundaryWeldExact.agda
