@@ -564,3 +564,14 @@ The clean-head acceptance runner was refined after source review: it now rejects
 ### CI run-observability qualification
 
 The available GitHub commit-workflow-run connector filters its output to **pull-request-triggered** workflow runs. Accordingly a reported count of zero means **no PR-triggered runs were observed through this endpoint**; it does NOT establish that the newly added `push` trigger was skipped or that no push workflow ran. An exact-head full acceptance PASS still requires a positive run/job/log/receipt, or a local run of `scripts/run_smith_filsinger_acceptance.sh --full`. Repository commit-status checks alone are not equivalent to a successful Agda kernel receipt.
+
+
+## Acceptance blocker found and repaired — malformed shell runner
+
+**Concrete D1 blocker, not theoretical roadmap movement:** source inspection of the committed `scripts/run_smith_filsinger_acceptance.sh` found the source file **corrupted by a duplicated script body and an unterminated `grep -E` quoted expression**. This invalidated the executable D1/Python acceptance path; earlier statements that it was "implemented" were insufficient and must not be interpreted as evidence it could run. Replaced it with one clean fail-closed script (no duplicate body), confirmed `bash -n` on its locally reconstructed exact text, and retained the full four Python-suites -> actual pinned Agda execution chain.
+
+A second genuine flaw was also repaired: the previous pass marker was not invalidated before the clean-tree guard. Now `.filsinger-acceptance/acceptance-pass.txt` is deleted *before* checking the current source commit and rejecting dirty tracked/untracked project files. An old marker therefore cannot remain after a new failed attempt at an early guard. The checker still distinguishes `PYTHON_ONLY_NO_AGDA_ACCEPTANCE` from `ACCEPTED_PYTHON_AND_PINNED_AGDA` and never certifies original physical measurements.
+
+Added `scripts/test_smith_filsinger_acceptance_runner.py` with six temporary-Git-repository failure/control cases; a locally built equivalent harness executed **6/6 PASS** including the stale marker and second-run cache cases. The committed CI also invokes the actual six test methods, but **the latest committed test source itself has not been executed in a clean branch checkout here**, and the real Agda compiler remains unavailable. The pinned workflow now explicitly runs `bash -n` on the three acceptance/Agda entrypoint scripts before testing.
+
+**Result:** acceptance script syntax defect and stale-receipt failure mode source-fixed, not D1 kernel closure. Original F10 physical calibration, actual source measurements and waveform errors, F15 sustained natural replenishment/all-store return, and F16 weather causality remain OPEN. Exact-head Agda proof ownership still needs a real pinned kernel check and positive log receipt. No ESD edits.
