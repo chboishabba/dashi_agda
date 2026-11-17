@@ -1527,3 +1527,6 @@ import DASHI.Physics.YangMills.YMClayBishopFiniteWeightedIntegralLawsExact as Bi
 
 -- Original 4D Wilson finite second-order Nat arithmetic, not a Haar closure.
 import DASHI.Physics.YangMills.YMClayOriginalWilsonSecondOrderCombinatoricsExact as WilsonSecondOrder
+
+-- Exact all-degree finite SU2 moments; analytic Haar/positivity still OPEN.
+import DASHI.Physics.YangMills.YMClaySU2PochhammerMomentNumeratorsExact as SU2ExactMoments
