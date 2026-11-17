@@ -41,6 +41,8 @@ import DASHI.Unified.PNFHyperfabric as PNFHyperfabric
 import DASHI.Unified.PNFSourceBoundaryTOEExact as PNFSource
 import DASHI.Unified.PNFDistilledNonPromotionTOEExact as PNFDistilled
 import DASHI.Unified.PNFDistilledNonPromotionTOEValidation
+import DASHI.Unified.SCALEEvidenceReviewTOEConvergenceExact as SCALEReview
+import DASHI.Unified.SCALEEvidenceReviewTOEConvergenceValidation
 import DASHI.Unified.Physics as Physics
 import DASHI.Unified.TOE369CoarseFineIntertwinerMaxCutExact as TOE369MaxCut
 import DASHI.Unified.TOE369CoarseFineIntertwinerMaxCutValidation as TOE369MaxCutValidation
@@ -491,6 +493,79 @@ scaleEvidenceReviewDoesNotAuthorizeFromFrontier :
 scaleEvidenceReviewDoesNotAuthorizeFromFrontier =
   SCALEReview.frontierRouteDoesNotGrantAuthorization
 
+canonicalUnifiedObjects : List Spine.UnifiedObjectInvariant
+canonicalUnifiedObjects =
+  CarrierGrammar.carrierGrammarObject
+  ∷ ChemistrySupervoxel.chemistryObject
+  ∷ ChemistrySupervoxel.supervoxelChemistryObject
+  ∷ PNFHyperfabric.pnfHyperfabricObject
+  ∷ BrainFMRI.brainFMRIObject
+  ∷ ArithmeticMoonshine.arithmeticMoonshineObject
+  ∷ Physics.navierStokesObject
+  ∷ Physics.yangMillsObject
+  ∷ CrossScaleMatterPhysics.crossScaleMatterPhysicsObject
+  ∷ []
+record UnifiedObjectTable : Setω where
+  field
+    objects :
+      List Spine.UnifiedObjectInvariant
+    objectsAreCanonical :
+      objects ≡ canonicalUnifiedObjects
+    allJProjectionExternalPromotion :
+      Spine.UnifiedObjectInvariant → Bool
+    allJProjectionExternalPromotionIsFalse :
+      ∀ object → allJProjectionExternalPromotion object ≡ false
+    allFormalProjectionExternalPromotion :
+      Spine.UnifiedObjectInvariant → Spine.UniversalProjectionKind → Bool
+    allFormalProjectionExternalPromotionIsFalse :
+      ∀ object kind → allFormalProjectionExternalPromotion object kind ≡ false
+    formalObjectParentSurface :
+      FormalObjectParents.FormalObjectParentSurface
+    crossScaleMatterPhysicsSurface :
+      CrossScaleMatterPhysics.CrossScaleMatterPhysicsSurface
+    round5FoundationsBoundary :
+      Round5.Round5CompleteBoundary
+    plainPolicy :
+      String
+canonicalUnifiedObjectTable : UnifiedObjectTable
+canonicalUnifiedObjectTable =
+  record
+    { objects =
+        canonicalUnifiedObjects
+    ; objectsAreCanonical =
+        refl
+    ; allJProjectionExternalPromotion =
+        Spine.objectExternalJPromotion
+    ; allJProjectionExternalPromotionIsFalse =
+        Spine.objectExternalJPromotionIsFalse
+    ; allFormalProjectionExternalPromotion =
+        Spine.objectProjectionPromotion
+    ; allFormalProjectionExternalPromotionIsFalse =
+        Spine.canonicalInvariantObjectsDoNotPromoteFormalProjections
+    ; formalObjectParentSurface =
+        FormalObjectParents.canonicalFormalObjectParentSurface
+    ; crossScaleMatterPhysicsSurface =
+        CrossScaleMatterPhysics.canonicalCrossScaleMatterPhysicsSurface
+    ; round5FoundationsBoundary =
+        Round5.canonicalRound5CompleteBoundary
+    ; plainPolicy =
+        "Every unified facade object exposes observation, projection, carrier/role vector, residual, proof posture, invariant strength, and the required formal parent projection bundle. The bundle includes modular-j, Hecke, Bott, Kolmogorov, category, quotient, lattice, and operator projections. Literal authority is lane-specific; every formal projection has externalPromotion = false. The cross-scale matter/physics parent records the atoms-to-stellar composition ladder as structural and receipt-gated, with quantitative solar-style counterfactual prediction still blocked. The complete Round Five imports the PR 399 ternary/Yijing/natural-system theorem surface and adds fail-closed constants, dimension, atomic, nuclear, cosmological-observation, GR-QFT, hidden-sector collider, connected tri-to-bi junction, affine-slice, renderer-parity, low-precision search, and graph-to-field boundaries without promoting terminal unification or visual geometry to source ontology."
+    }
+brainFMRIRemainsNonPromoting :
+  Spine.objectExternalJPromotion BrainFMRI.brainFMRIObject ≡ false
+brainFMRIRemainsNonPromoting =
+  refl
+
+scaleEvidenceReviewDoesNotPromoteSemanticTruth :
+  SCALEReview.ReplayEconomyReceiptPromotesSemanticTruth → ⊥
+scaleEvidenceReviewDoesNotPromoteSemanticTruth =
+  SCALEReview.scaleReplayDoesNotPromoteSemanticTruth
+
+scaleEvidenceReviewDoesNotAuthorizeFromFrontier :
+  SCALEReview.FrontierRouteMeansAuthorized → ⊥
+scaleEvidenceReviewDoesNotAuthorizeFromFrontier =
+  SCALEReview.frontierRouteDoesNotGrantAuthorization
+
 -- Legal authority remains independent of matter workflow and semantic admission.
 unifiedLegalCandidateIsNotAuthority :
   LegalGovernance.CandidateSourceIsAuthoritative → ⊥
@@ -530,7 +605,6 @@ unifiedDocumentRoleIsNotLegalAuthority =
 
 ------------------------------------------------------------------------
 -- SCALE evidence genealogy firewalls.
-
 ------------------------------------------------------------------------
 
 scaleEvidenceReviewPerceivedIndependenceDoesNotCreateProvenanceIndependence :
@@ -543,9 +617,9 @@ scaleEvidenceReviewRepetitionDoesNotCreateIndependentEvidence :
 scaleEvidenceReviewRepetitionDoesNotCreateIndependentEvidence =
   SCALEReview.repetitionDoesNotCreateIndependentEvidence
 
+
 ------------------------------------------------------------------------
 -- SCALE physical-economy non-promotion firewalls.
-
 ------------------------------------------------------------------------
 
 scaleEvidenceReviewReviewProjectionReuseDoesNotCreateClaimTruth :
@@ -563,9 +637,9 @@ scaleEvidenceReviewFewCommitBarriersDoNotProveSemanticIndependence :
 scaleEvidenceReviewFewCommitBarriersDoNotProveSemanticIndependence =
   SCALEReview.fewCommitBarriersDoNotProveSemanticIndependence
 
+
 ------------------------------------------------------------------------
 -- SCALE Evidence Review ZKP frame.
-
 ------------------------------------------------------------------------
 
 scaleEvidenceReviewTOEZKPFrame :
@@ -573,4 +647,20 @@ scaleEvidenceReviewTOEZKPFrame :
 scaleEvidenceReviewTOEZKPFrame =
   SCALEReview.canonicalSCALEEvidenceReviewTOEZKPFrame
 
+
 ------------------------------------------------------------------------
+-- Governance + exact 58-gap + Balaban/Ibrahim TOE convergence.
+------------------------------------------------------------------------
+
+import DASHI.Unified.GovernanceBalabanIbrahim58GapTOEExact as GBI58
+import DASHI.Unified.GovernanceBalabanIbrahim58GapTOEValidation
+
+unifiedGovernanceBalabanIbrahim58GapReceipt :
+  GBI58.GovernanceBalabanIbrahim58GapTOEReceipt
+unifiedGovernanceBalabanIbrahim58GapReceipt =
+  GBI58.canonicalGovernanceBalabanIbrahim58GapTOEReceipt
+
+unifiedGovernanceBalabanIbrahim58GapZKPFrame :
+  GBI58.GovernanceBalabanIbrahim58GapZKPFrame
+unifiedGovernanceBalabanIbrahim58GapZKPFrame =
+  GBI58.canonicalGovernanceBalabanIbrahim58GapZKPFrame

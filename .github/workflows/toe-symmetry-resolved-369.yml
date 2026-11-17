@@ -26,20 +26,29 @@ on:
       - 'DASHI/Unified/PNFDistilledNonPromotionTOEValidation.agda'
       - 'DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda'
       - 'DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda'
+      - 'DASHI/Governance/FormalisationGovernanceCapstoneExact.agda'
+      - 'DASHI/Core/KernelSemanticClosureBoundaryExact.agda'
+      - 'DASHI/Interop/SLRReviewPromoteAbstainConsumerExact.agda'
+      - 'DASHI/Interop/SLRRuntimeValidationHandoffExact.agda'
+      - 'DASHI/Interop/SLRValidationRoadmapPromotionExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawLegalSemanticAdmissionFrontierExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawLegalSourceAuthorityEvidenceExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawSemanticExpansionSoftwareValidationExact.agda'
+      - 'DASHI/Interop/IntrospectiveProofLoopExact.agda'
+      - 'tests/test_governed_legal_workflow_toe_convergence.py'
       - 'DASHI/Unified/SCALEEvidenceReviewTOEConvergenceExact.agda'
       - 'DASHI/Unified/SCALEEvidenceReviewTOEConvergenceValidation.agda'
-      - 'DASHI/Unified/GovernedFleetResidualTOEHandoffExact.agda'
-      - 'DASHI/Unified/GovernedFleetResidualTOEHandoffValidation.agda'
-      - 'DASHI/Unified/R559IbrahimFleetHyperfabricTOEExact.agda'
-      - 'DASHI/Unified/R559IbrahimFleetHyperfabricTOEValidation.agda'
-      - 'Docs/bridges/GovernedLegalWorkflowTOEHandoff20261027.md'
-      - 'Docs/diagrams/governed_legal_source_authority_toe.puml'
-      - 'Docs/diagrams/pnf_distilled_nonpromotion_toe.puml'
-      - 'Docs/architecture/GovernedFleetResidualTOE.puml'
-      - 'tests/test_governed_legal_workflow_toe_convergence.py'
-      - 'tests/test_pnf_distilled_nonpromotion_toe.py'
       - 'tests/test_scale_evidence_review_toe_convergence.py'
-      - 'tests/test_governed_fleet_residual_toe.py'
+      - 'DASHI/Unified/GovernanceBalabanIbrahim58GapTOEExact.agda'
+      - 'DASHI/Unified/GovernanceBalabanIbrahim58GapTOEValidation.agda'
+      - 'DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda'
+      - 'tests/test_governance_balaban_ibrahim_58gap_toe.py'
+      - 'Docs/diagrams/governance_balaban_ibrahim_58gap_toe.puml'
+      - 'DASHI/Unified/GovernanceBalabanIbrahim58GapTOEExact.agda'
+      - 'DASHI/Unified/GovernanceBalabanIbrahim58GapTOEValidation.agda'
+      - 'DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda'
+      - 'tests/test_governance_balaban_ibrahim_58gap_toe.py'
+      - 'Docs/diagrams/governance_balaban_ibrahim_58gap_toe.puml'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
   push:
     paths:
@@ -87,20 +96,20 @@ on:
       - 'DASHI/Unified/PNFDistilledNonPromotionTOEValidation.agda'
       - 'DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda'
       - 'DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda'
+      - 'DASHI/Governance/FormalisationGovernanceCapstoneExact.agda'
+      - 'DASHI/Core/KernelSemanticClosureBoundaryExact.agda'
+      - 'DASHI/Interop/SLRReviewPromoteAbstainConsumerExact.agda'
+      - 'DASHI/Interop/SLRRuntimeValidationHandoffExact.agda'
+      - 'DASHI/Interop/SLRValidationRoadmapPromotionExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawLegalSemanticAdmissionFrontierExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawLegalSourceAuthorityEvidenceExact.agda'
+      - 'DASHI/Cognition/PNF/SensibLawSemanticExpansionSoftwareValidationExact.agda'
+      - 'DASHI/Interop/IntrospectiveProofLoopExact.agda'
+      - 'tests/test_governed_legal_workflow_toe_convergence.py'
       - 'DASHI/Unified/SCALEEvidenceReviewTOEConvergenceExact.agda'
       - 'DASHI/Unified/SCALEEvidenceReviewTOEConvergenceValidation.agda'
-      - 'DASHI/Unified/GovernedFleetResidualTOEHandoffExact.agda'
-      - 'DASHI/Unified/GovernedFleetResidualTOEHandoffValidation.agda'
-      - 'DASHI/Unified/R559IbrahimFleetHyperfabricTOEExact.agda'
-      - 'DASHI/Unified/R559IbrahimFleetHyperfabricTOEValidation.agda'
-      - 'Docs/bridges/GovernedLegalWorkflowTOEHandoff20261027.md'
-      - 'Docs/diagrams/governed_legal_source_authority_toe.puml'
-      - 'Docs/diagrams/pnf_distilled_nonpromotion_toe.puml'
-      - 'Docs/architecture/GovernedFleetResidualTOE.puml'
-      - 'tests/test_governed_legal_workflow_toe_convergence.py'
-      - 'tests/test_pnf_distilled_nonpromotion_toe.py'
       - 'tests/test_scale_evidence_review_toe_convergence.py'
-      - 'tests/test_governed_fleet_residual_toe.py'
+      - 'DASHI/Physics/Closure/Everything.agda'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
 
 concurrency:
@@ -150,23 +159,36 @@ jobs:
           dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayIrreducibleSourceFamilies --root .
           dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayCriticalPath --root .
           dashi-repo diagnose DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda --root .
+          dashi-repo related canonicalGovernedLegalWorkflowTOEBoundary --root . --limit 20
+          dashi-repo related canonicalGovernedLegalWorkflowTOEInvariantHandoff --root . --limit 20
+          dashi-repo related canonicalGovernedLegalWorkflowAuthorityInvariantHandoff --root . --limit 20
+          dashi-repo related canonicalLegalSourceAuthorityBoundary --root . --limit 20
+          dashi-repo related canonicalGovernedLegalWorkflowIntrospectiveZKPFrame --root . --limit 20
+          dashi-repo discover 'SensibLaw governance legal workflow non promotion TOE' --root . --limit 40
+          dashi-repo discover 'IntrospectiveProofLoop ZKPFrame governed legal workflow TOE Unified Everything' --root . --limit 40
+          dashi-repo discover 'Actionstep matter workflow review admission legal applicability' --root . --limit 40
+          dashi-repo discover 'SensibLaw legal source authority current validity document role applicability non promotion' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Cognition.PNF.SensibLaw --root .
+          dashi-repo lineage --prefix DASHI.Unified.GovernedLegalWorkflowTOE --root .
           dashi-repo diagnose DASHI/Unified/PNFSourceBoundaryTOEExact.agda --root .
           dashi-repo diagnose DASHI/Unified/PNFDistilledNonPromotionTOEExact.agda --root .
+          dashi-repo related canonicalPNFDistilledNonPromotionBoundary --root . --limit 20
+          dashi-repo related canonicalPNFDistilledReuseZKPReceipt --root . --limit 20
+          dashi-repo discover 'PNF distilled diagnostic check cobweb fungal web publication identifier non promotion' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Unified.PNFDistilledNonPromotionTOE --root .
           dashi-repo diagnose DASHI/Unified/SCALEEvidenceReviewTOEConvergenceExact.agda --root .
-          dashi-repo diagnose DASHI/Unified/R559IbrahimFleetHyperfabricTOEExact.agda --root .
-          dashi-repo diagnose DASHI/Unified/Fleet58ManifestAcquisitionExact.agda --root .
-          dashi-repo diagnose DASHI/Unified/NavierStokesBM2TOEConvergenceExact.agda --root .
-          dashi-repo diagnose DASHI/Unified/GovernedFleetResidualTOEHandoffExact.agda --root .
-          dashi-repo related canonicalGovernedLegalWorkflowTOEInvariantHandoff --root . --limit 20
-          dashi-repo related canonicalFleetFormalGapTargetReceipt --root . --limit 20
-          dashi-repo related canonicalFleet58ManifestAcquisitionReceipt --root . --limit 20
-          dashi-repo related canonicalR559IbrahimFleetHyperfabricTOEReceipt --root . --limit 20
-          dashi-repo related canonicalNavierStokesBM2TOEReceipt --root . --limit 20
-          dashi-repo related canonicalGovernedFleetResidualTOEHandoff --root . --limit 20
-          dashi-repo discover 'SensibLaw legal source authority SCALE PNF Fleet 584 44 58 R559 Ibrahim Pareto snowball NS BM2 governed residual TOE' --root . --limit 60
-          dashi-repo lineage --prefix DASHI.Cognition.PNF.SensibLaw --root .
-          dashi-repo lineage --prefix DASHI.Unified.R559IbrahimFleetHyperfabric --root .
-          dashi-repo lineage --prefix DASHI.Unified.Fleet58ManifestAcquisition --root .
+          dashi-repo related canonicalSCALEEvidenceReviewTOEReceipt --root . --limit 20
+          dashi-repo related scaleReplayDoesNotPromoteSemanticTruth --root . --limit 20
+          dashi-repo related repetitionDoesNotCreateIndependentEvidence --root . --limit 20
+          dashi-repo discover 'SCALE evidence review replay projection commit economy REL INV GOV Mabo Ibrahim source independence non promotion TOE' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Cognition.PNF.SensibLawScale1 --root .
+          dashi-repo lineage --prefix DASHI.Unified.SCALEEvidenceReviewTOE --root .
+          dashi-repo diagnose DASHI/Unified/GovernanceBalabanIbrahim58GapTOEExact.agda --root .
+          dashi-repo related canonicalGovernanceBalabanIbrahim58GapTOEReceipt --root . --limit 20
+          dashi-repo related gate4ObligationCount --root . --limit 20
+          dashi-repo discover 'Gate 4 58 cutset Balaban Ibrahim Pareto snowball legal governance non promotion TOE' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Physics.YangMills.BalabanClayGate4 --root .
+          dashi-repo lineage --prefix DASHI.Wikimedia.Ibrahim --root .
 
       - name: Verify governed legal-workflow convergence
         run: python -m pytest -q tests/test_governed_legal_workflow_toe_convergence.py
@@ -177,8 +199,52 @@ jobs:
       - name: Verify SCALE evidence-review convergence
         run: python -m pytest -q tests/test_scale_evidence_review_toe_convergence.py
 
-      - name: Verify governed Fleet residual convergence
-        run: python -m pytest -q tests/test_governed_fleet_residual_toe.py
+      - name: Verify governance Balaban Ibrahim 58-gap convergence
+        run: python -m pytest -q tests/test_governance_balaban_ibrahim_58gap_toe.py
+
+      - name: Install Agda and standard library
+        uses: wenkokke/setup-agda@v2
+        with:
+          agda-version: '2.6.4.3'
+          agda-stdlib-version: '2.1'
+
+      - name: Preflight governed legal-workflow TOE path
+        run: |
+          dashi-agda-preflight --root . --closure --agda-auto-refine=typecheck \
+            --agda-extra-args='-i . -l standard-library' \
+            DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda
+          dashi-agda-preflight --root . --closure --agda-auto-refine=typecheck \
+            --agda-extra-args='-i . -l standard-library' \
+            DASHI/Unified/PNFSourceBoundaryTOEExact.agda
+          dashi-agda-preflight --root . --agda-auto-refine=typecheck \
+            --agda-extra-args='-i . -l standard-library' \
+            DASHI/Unified/PNFSourceBoundaryTOEValidation.agda
+          dashi-agda-preflight --root . --closure --agda-auto-refine=typecheck \
+            --agda-extra-args='-i . -l standard-library' \
+            DASHI/Unified/PNFDistilledNonPromotionTOEExact.agda
+          dashi-agda-preflight --root . --agda-auto-refine=typecheck \
+            --agda-extra-args='-i . -l standard-library' \
+            DASHI/Unified/PNFDistilledNonPromotionTOEValidation.agda
+            DASHI/Unified/SCALEEvidenceReviewTOEConvergenceExact.agda
+            DASHI/Unified/SCALEEvidenceReviewTOEConvergenceValidation.agda
+            DASHI/Unified/GovernanceBalabanIbrahim58GapTOEExact.agda
+            DASHI/Unified/GovernanceBalabanIbrahim58GapTOEValidation.agda
+            DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda
+          dashi-agda-preflight --root . --agda-auto-refine=typecheck \
+            --agda-extra-args='-i . -l standard-library' \
+            DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda
+          dashi-agda-preflight --root . --closure --agda-auto-refine=typecheck \
+            --agda-extra-args='-i . -l standard-library' \
+            DASHI/Unified/SCALEEvidenceReviewTOEConvergenceExact.agda
+          dashi-agda-preflight --root . --agda-auto-refine=typecheck \
+            --agda-extra-args='-i . -l standard-library' \
+            DASHI/Unified/SCALEEvidenceReviewTOEConvergenceValidation.agda
+          dashi-agda-preflight --root . --closure --agda-auto-refine=typecheck \
+            --agda-extra-args='-i . -l standard-library' \
+            DASHI/Unified/GovernanceBalabanIbrahim58GapTOEExact.agda
+          dashi-agda-preflight --root . --agda-auto-refine=typecheck \
+            --agda-extra-args='-i . -l standard-library' \
+            DASHI/Unified/GovernanceBalabanIbrahim58GapTOEValidation.agda
 
       - name: Reject ESD surface changes
         shell: bash
@@ -274,6 +340,8 @@ jobs:
             DASHI/Unified/FleetFormalGapTOERegression.agda
             DASHI/Unified/PNFDistilledNonPromotionTOEExact.agda
             DASHI/Unified/PNFDistilledNonPromotionTOEValidation.agda
+            DASHI/Unified/SCALEEvidenceReviewTOEConvergenceExact.agda
+            DASHI/Unified/SCALEEvidenceReviewTOEConvergenceValidation.agda
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
             DASHI/Unified/Physics.agda
             DASHI/EverythingTOESymmetryResolved369.agda

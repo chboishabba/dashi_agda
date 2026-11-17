@@ -23,6 +23,7 @@ import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as GovernanceTOE
 import DASHI.Unified.GovernanceMaxCutParetoSnowballTOEConvergenceExact as GovernanceMaxCut
 import DASHI.Unified.PNFSourceBoundaryTOEExact as PNFSource
 import DASHI.Unified.PNFDistilledNonPromotionTOEExact as PNFDistilled
+import DASHI.Unified.SCALEEvidenceReviewTOEConvergenceExact as SCALEReview
 
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
 
@@ -1036,7 +1037,6 @@ unifierDocumentRoleIsNotLegalAuthority =
 ------------------------------------------------------------------------
 -- SCALE Evidence Review exact facade.
 -- Proof authority remains in the normalized bridge and original donors.
-
 ------------------------------------------------------------------------
 
 unifierSCALEEvidenceReviewTOEReceipt :
@@ -1079,9 +1079,9 @@ unifierSCALEUICannotGeneratePresentSource :
 unifierSCALEUICannotGeneratePresentSource =
   SCALEReview.uiCannotGeneratePresentSource
 
+
 ------------------------------------------------------------------------
 -- SCALE evidence genealogy firewalls.
-
 ------------------------------------------------------------------------
 
 unifierSCALEPerceivedIndependenceDoesNotCreateProvenanceIndependence :
@@ -1094,9 +1094,9 @@ unifierSCALERepetitionDoesNotCreateIndependentEvidence :
 unifierSCALERepetitionDoesNotCreateIndependentEvidence =
   SCALEReview.repetitionDoesNotCreateIndependentEvidence
 
+
 ------------------------------------------------------------------------
 -- SCALE physical-economy non-promotion firewalls.
-
 ------------------------------------------------------------------------
 
 unifierSCALEReviewProjectionReuseDoesNotCreateClaimTruth :
@@ -1114,9 +1114,9 @@ unifierSCALEFewCommitBarriersDoNotProveSemanticIndependence :
 unifierSCALEFewCommitBarriersDoNotProveSemanticIndependence =
   SCALEReview.fewCommitBarriersDoNotProveSemanticIndependence
 
+
 ------------------------------------------------------------------------
 -- SCALE Evidence Review ZKP frame.
-
 ------------------------------------------------------------------------
 
 unifierSCALEEvidenceReviewTOEZKPFrame :
@@ -1126,20 +1126,52 @@ unifierSCALEEvidenceReviewTOEZKPFrame =
 
 
 ------------------------------------------------------------------------
--- Governed Fleet residual handoff.
+-- Governance + exact 58-gap + Balaban/Ibrahim normalized facade.
 ------------------------------------------------------------------------
 
-unifierGovernedFleetResidualTOEHandoff :
-  GovernedFleet.GovernedFleetResidualTOEHandoff
-unifierGovernedFleetResidualTOEHandoff =
-  GovernedFleet.canonicalGovernedFleetResidualTOEHandoff
+import DASHI.Unified.GovernanceBalabanIbrahim58GapTOEExact as GBI58
 
-unifierFleetNamedManifestStillMissing :
-  FleetManifest.named58ManifestAcquired ≡ false
-unifierFleetNamedManifestStillMissing =
-  GovernedFleet.namedManifestStillMissing
+unifierGovernanceBalabanIbrahim58GapReceipt :
+  GBI58.GovernanceBalabanIbrahim58GapTOEReceipt
+unifierGovernanceBalabanIbrahim58GapReceipt =
+  GBI58.canonicalGovernanceBalabanIbrahim58GapTOEReceipt
 
-unifierFleetPerGapDispatchStillDisabled :
-  FleetManifest.perGapDispatchEnabled ≡ false
-unifierFleetPerGapDispatchStillDisabled =
-  GovernedFleet.perGapDispatchStillDisabled
+unifierGovernanceBalabanIbrahim58GapZKPFrame :
+  GBI58.GovernanceBalabanIbrahim58GapZKPFrame
+unifierGovernanceBalabanIbrahim58GapZKPFrame =
+  GBI58.canonicalGovernanceBalabanIbrahim58GapZKPFrame
+
+unifierExactGate4GapCountIs58 :
+  GBI58.gate4GapCount GBI58.canonicalGovernanceBalabanIbrahim58GapTOEReceipt ≡ 58
+unifierExactGate4GapCountIs58 =
+  GBI58.gate4CountIsExactly58
+
+unifierGate4ConditionalDoesNotSelfPromote =
+  GBI58.gate4StillConditional
+
+unifierLegalCandidateDoesNotCreateAuthority =
+  GBI58.legalCandidateDoesNotCreateAuthority
+
+unifierLegalSystemMatchDoesNotCreateAuthority =
+  GBI58.legalSystemMatchDoesNotCreateAuthority
+
+unifierCurrentValidityDoesNotCreateApplicability =
+  GBI58.currentValidityDoesNotCreateApplicability
+
+unifierSemanticAdmissionDoesNotCreateLegalSourceAuthority =
+  GBI58.semanticAdmissionDoesNotCreateLegalSourceAuthority
+
+unifierDocumentRoleDoesNotCreateLegalSourceAuthority =
+  GBI58.documentRoleDoesNotCreateLegalSourceAuthority
+
+unifierBalaban58GapScaleTransferPromotionImpossible =
+  GBI58.balabanScaleTransferPromotionImpossible
+    GBI58.canonicalGovernanceBalabanIbrahim58GapTOEReceipt
+
+unifierIbrahim58GapSearchPriorityDoesNotCreateProof =
+  GBI58.ibrahimSearchPriorityDoesNotCreateProof
+    GBI58.canonicalGovernanceBalabanIbrahim58GapTOEReceipt
+
+unifierIbrahim58GapProducerSourceDoesNotCreateRun =
+  GBI58.ibrahimProducerSourceDoesNotCreateRun
+    GBI58.canonicalGovernanceBalabanIbrahim58GapTOEReceipt
