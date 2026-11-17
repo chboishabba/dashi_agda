@@ -1571,3 +1571,61 @@ all-degree constructive Agda producer, actual native Bishop
 completion, original SUN matrix equivalence, and typed original
 Wilson/RG cylinder weld still require kernel acceptance.
 New source ledger: Docs/physics/YMClayRationalS3HaarNoRootsMaxCut20261117.md.
+
+
+### 2026-11-17 continuation: compressed degree-13 source certificate and new degree-15 rational Wilson endpoint
+
+**New exact mathematical/algorithmic result:** signed-coordinate and
+permutation invariance reduces every polynomial of degree <=13 on S3
+to nine elementary symmetric constraints in yi=qi²:
+1, e2, e3, e4, e2², e2e3, e2³, e3², e2e4, using e1=1.
+The independent exact SymPy checker
+scripts/check_ym_s3_degree13_nine_invariants_20261117.py
+checks all nine weighted rational moments of the nine existing
+rational-orbit representatives and all symmetrized monomial orbits
+through y-degree 6. The full 2380-monomial checker remains an
+independent control. The new safe-source Agda
+YMClayRationalS3DegreeThirteenInvariantCertificateExact
+uses nine ACTUAL original RationalUnitQuaternion constructors and
+rational masses, with nine closed invariant arithmetic equations.
+This is NOT an Agda theorem formalizing the Reynolds
+sign/permutation symmetrization and basis spanning step.
+No pinned Agda kernel was available.
+
+**New degree-15 positive rational cubature:** a rational linear LP
+search over 20 low-denominator rational signed/permutation orbits
+found eleven positive orbit masses. They were reconstructed with an
+exact rational linear solve; the static certificate itself uses no
+LP, floats, roots, angles, pi, or square roots.
+scripts/check_ym_s3_exact_rational_orbit_degree15_20261117.py
+independently verified **3876/3876** full monomials, strict positive
+masses, exact unit norm and mass-one normalization.
+The fully expanded signed/permutation cubature has **1464 nodes**.
+The first 11 invariant constraints in yi of weighted degree <=7
+are 1, e2, e3, e4, e2², e2e3, e3², e2e4, e2³,
+e3e4, e2²e3. Numerical discovery is not proof;
+the committed rational certificate is the exact proof witness.
+
+**Concrete original Wilson finite-volume consequence.**
+A positive exact degree-15 rule in EACH original link integrates
+the actual polynomial Taylor series through degree 15 at all
+original periodic sides L>=2, since each elementary plaquette
+contains any one original positive bond at most once. The L=1
+commutator reuses each of two bonds twice, so degree 15
+integrates through Taylor order 7. In both cases the alternating
+Taylor bounds are genuinely valid for ALL beta>=0.
+At beta=1/(96 L⁴), the guaranteed interval width is
+1/10569646080 at L=1 (T7/T6), and
+1/46009701534740225458176000 at L>=2 (T15/T14).
+scripts/check_ym_original_wilson_rational_degree15_taylor_budget_20261117.py
+checks exact original edge incidence through L=4 and these
+factorial interval bounds. **The high-order endpoint integrals
+have not been expanded or evaluated**; the interval-width result
+does not claim an actual numerical partition value.
+
+**Trust:** these exact rational cubature witnesses substantially
+advance the physical polynomial cylinder, but do not inhabit
+the Bishop all-degree cubature/Cauchy/continuous-Haar source,
+the original full SUN matrix equivalence, or the selected RG
+disintegration bridge. No transitive Agda acceptance receipt,
+no mass-gap/continuum claim. Maintain YM.REAL OPEN.
