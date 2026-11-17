@@ -84,6 +84,12 @@ class NativeTest(unittest.TestCase):
             self.assertEqual(out['pre2000_observed_values_lost_by_station'],{'066062':2})
             self.assertEqual(out['pre2000_observed_values_lost_by_station_product'],
                              {'066062:tmax':1,'066062:tmin':1})
+    def test_blank_accumulation_is_one_day_for_present_temperature(self):
+        self.assertEqual(self.run_native(line(accum=''),line(accum='1'))['counts'],{})
+
+    def test_missing_value_with_blank_accumulation_stays_missing(self):
+        self.assertEqual(self.run_native(line(value='',accum=''),line(value='',accum=''))['counts'],{})
+
     def test_accumulation_change(self):
         self.assertEqual(self.run_native(line(),line(accum='2'))['counts'],{'accumulation_changed':1})
 
