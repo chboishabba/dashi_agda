@@ -19,6 +19,8 @@ import DASHI.Physics.Gravity.KSW668F8OriginalAdS5EmbeddingSliceExact as Slice
 import DASHI.Physics.Gravity.KSW668F8LinearElectricWeylPolarizationSliceExact as LinearWeyl
 import DASHI.Physics.Gravity.KSW668F8SourceFreeElectricWeylSMSSliceWeldExact as SourceFreeWeyl
 import DASHI.Physics.Gravity.KSW668F8OriginalElectricWeylDefectSliceExact as WeylDefect
+import DASHI.Physics.Gravity.KSW668F8OriginalThreeMultipoleRadialJetWeldExact as RadialJets
+import DASHI.Physics.Gravity.KSW668F8ThreeChannelElectricWeylDefectTransportExact as TripleWeyl
 import DASHI.Physics.Gravity.KSW668F8WeakIsraelSATSliceExact as Wall
 import DASHI.Physics.Gravity.KSW668F8WeakIsraelSATGeneralPolynomialTransportExact as GeneralSAT
 import DASHI.Physics.Gravity.KSW668F8SSPRK3FullStabilityPrerequisiteExact as RK
