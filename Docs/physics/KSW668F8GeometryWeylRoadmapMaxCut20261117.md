@@ -469,3 +469,52 @@ The **l4 residual is essential**. Removing its `27 integral u² f(u) du` term fr
 New `KSW668F8OriginalTTSourcePrimitiveJetExact.agda` contains explicit original-product-rule formal-jet identities for all three channels (source-written, pinned kernel pending); new `scripts/test_ksw668_f8_original_tt_source_primitive_jet.py` proves the calculus identities independently with SymPy for a symbolic differentiable function (3/3 PASS). The Agda formal-jet ring proof is **not** a separately kernel-checked theorem about actual smooth-function differentiation; retaining that distinction is required.
 
 **Progress:** XXXIV exact full-tensor rational axial projector -> XXXV exact commutation with a scalar source shell mass -> actual three original TT source weighted primitive differentiation -> conserved effective-d source cell averages. This closes the algebra of the existing source handoff locally but does **not** commute angular tensor differential operators with independent radial FV evolution or prove tensor TT conservation for discrete source/receiver. The full G1 Cartesian tensor differential/source-to-effective-FV diagram with origin closure, G2 stage SAT, G3 coupled SSPRK3, G4 higher-Sobolev moving-brane trace, G5 independent mesh limit and G6 calibrated physical action/FIO/detector remain OPEN.
+
+
+## Maximum-cut XXXVI — original fourth-order Cartesian TT → exact three radial source profiles (2026-11-17)
+
+### Reuse and scope
+Reuse the existing same original 5D tensor generator `T(k)=P(k)Q P(k)-P(k)tr(P(k)Q)/2`, `Q=diag(0,1,-1)`, the XXIV–XXXV original full tensor angular atlas and exact axial azimuth projector, and **unchanged** source owners `scripts/ksw668_f8_tt_multipole.py:profiles()` and `scripts/ksw668_f8_fv_source_flux.py:primitives()`. This round does not introduce another geometry implementation, scalar source or incompatible radial FV definition.
+
+### New nontrivial differential source weld (G1)
+
+From the **actual** fourth-order Cartesian operator (the yy symbol written as `kx⁴+(1/2)kx²ky²+(3/2)kx²kz²-(1/2)ky²kz²+(1/2)kz⁴`) and a smooth radial prepotential `f(r)`, let `D=(1/r)∂r`. The fourth-derivative tensor chain rule and the original azimuthal moments yield, for `r>0`,
+```
+< T_yy(∂) f >_phi
+ = 6 D² f + (2+6μ²) r² D³ f
+   + [(μ⁴+6μ²+1)/8] r⁴ D⁴ f.
+```
+Because `2+6μ²=4P0+4P2` and `(μ⁴+6μ²+1)/8=(2/5)P0+(4/7)P2+(1/35)P4`, the three original projected source modes are EXACTLY
+```
+f_0 = 6 D² f +4r²D³ f +(2/5)r⁴D⁴ f
+f_2 = 4r²D³ f +(4/7)r⁴D⁴ f
+f_4 = (1/35)r⁴D⁴ f.
+```
+With formal derivative jets `f1=f',f2=f'',f3=f''',f4=f''''`, multiply by `r⁴` to avoid any division at the axis:
+```
+J2=r⁴D²f = r² f2-r f1
+J3=r⁶D³f = r³ f3-3r² f2+3r f1
+J4=r⁸D⁴f = r⁴ f4-6r³ f3+15r² f2-15r f1.
+```
+Then `r⁴ f_0=6J2+4J3+(2/5)J4`, `r⁴ f_2=4J3+(4/7)J4`, `r⁴ f_4=(1/35)J4`. The polynomial identities simplify EXACTLY to the **actual original `profiles()` source formulas**:
+```
+r⁴ f_0=(2/5)(r⁴ f4+4r³ f3)
+r⁴ f_2=(4/7)(r⁴ f4+r³ f3-6r² f2+6r f1)
+r⁴ f_4=(1/35)(r⁴ f4-6r³ f3+15r² f2-15r f1).
+```
+
+### Exact interface to the EXISTING conservative source primitives
+Reuse `KSW668F8OriginalTTSourcePrimitiveJetExact.agda` (source-written earlier) and the primitive identities already checked in XXXV. With `G_l=f_l/r^ell`, the actual weighted source densities are `W_0=r²G0`, `W_2=r^6G2`, `W_4=r^10G4`. The new origin-safe finite algebra proves
+```
+r² W_0=r⁴ f_0,       W_2=r⁴ f_2,       W_4=r²(r⁴ f_4).
+```
+The original primitive integration identities are `P0'=W0`, `P2'=W2`, and **`P4'+27r²f=W4`**. Together, these give a concrete source-level chain from original Cartesian TT differentiations to the original finite-volume source integral, including the indispensable ell4 rest term. They DO NOT assert that radial multiplication commutes with a separately chosen finite-difference tensor derivative, nor license division by r at r=0 without smoothness/limit witnesses.
+
+### Implementation, verification and interpretation
+New `DASHI/Physics/Gravity/KSW668F8CartesianTTToOriginalRadialSourceJetsExact.agda` implements the original Cartesian yy tensor polynomial, second angular chain-rule factor, Legendre decomposition, regularity-safe polynomial jet identities, comparison to all three unchanged source profiles, and direct weighted-source identities importing the original primitive owner. Imported into existing `KSW668F8SameObjectWeylAuthorityBoundary.agda` and thus original KSW/TOE graph.
+
+`scripts/test_ksw668_f8_cartesian_tt_radial_differential_weld.py` independently differentiates an arbitrary symbolic radial `F((x²+y²+z²)/2)` four times using the true Cartesian TT polynomial, azimuthally averages, derives all three profiles, crosschecks actual original source primitive derivatives (including ell4 remainder) and confirms all three no-division weighted transfers. **16/16** independent local symbolic checks PASS; additionally two negative controls confirm that omitting the `D²`/`D³` terms falsely changes ell0/ell2.
+
+**G1 status:** the original smooth Fourier/real-space **source handoff** from the fourth-order TT yy generator to exact effective-shell FV source inputs is now verified at the symbolic differential/algebra level for radial smooth f. The Agda theorem is finite rational jet algebra, **not** a pinned-kernel smooth-calculus theorem. The actual full Cartesian tensor-to-scalar-FV **evolution** commuting diagram, discrete TT preservation through radial shell projection/axis closures, weak-Israel `P,M,U` wall/gauge and electric-Weyl pointwise error estimate remain OPEN.
+
+**G2–G6:** G2 joint SAT boundary energy OPEN; G3 moving warp/normal/radial SSPRK3 + uniform CFL OPEN; G4 moving-domain high Sobolev to both-Weyl trace OPEN; G5 independently convergent dr,dy,dt full receiver and outside-cone controls OPEN; G6 same original matter source, retarded tensor FIO and physically calibrated detector OPEN. Keep source authorship, Caldwell–Langlois/Thorne prior art and user-directed max-cut distinct. No ESD edits or Monster/369 gravity theorem claims.
