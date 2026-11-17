@@ -1053,11 +1053,412 @@ toe369YangMillsGoal1C4CommonMetricCompilerLevel =
   YMGoal1TOE.goal1C4CommonMetricCompilerLevel
 
 ------------------------------------------------------------------------
--- Direct constructive non-promotion theorem from the existing RG owner.
--- Preconditions: a proposed scale-transfer promotion token.
--- Invariant: the current Balaban frontier supplies no such token.
--- Postcondition: any proposed token yields a contradiction.
--- This does not assert that continuum RG construction is impossible.
+-- Direct RG non-promotion and Pareto/snowball/Ibrahim TOE convergence.
+------------------------------------------------------------------------
+
+toeBalabanScaleTransferPromotionImpossible :
+  ParetoSnowballTOE.BalabanScaleTransferPromotion → ⊥
+toeBalabanScaleTransferPromotionImpossible =
+  ParetoSnowballTOE.balabanScaleTransferPromotionImpossible
+
+toeIbrahimRecognitionParetoBoundary :
+  ParetoSnowballTOE.RecognitionRouteParetoBoundary
+toeIbrahimRecognitionParetoBoundary =
+  ParetoSnowballTOE.ibrahimRecognitionParetoBoundary
+
+toeIbrahimCharacterExecutionFrontier :
+  ParetoSnowballTOE.Monster3BCharacterExecutionFrontier
+toeIbrahimCharacterExecutionFrontier =
+  ParetoSnowballTOE.ibrahimCharacterExecutionFrontier
+
+toeIbrahimSchrodingerHZetaMaxCutBoundary :
+  ParetoSnowballTOE.SchrodingerHZetaRecognitionMaxCutBoundary
+toeIbrahimSchrodingerHZetaMaxCutBoundary =
+  ParetoSnowballTOE.ibrahimSchrodingerHZetaMaxCutBoundary
+
+toeBalabanIbrahimParetoSnowballZKPFrame :
+  ParetoSnowballTOE.TOEZKPFrame
+toeBalabanIbrahimParetoSnowballZKPFrame =
+  ParetoSnowballTOE.canonicalTOEZKPFrame
+
+
+toeIbrahimPhaseResolutionFrontier :
+  ParetoSnowballTOE.InertiaPhaseResolutionFrontier
+toeIbrahimPhaseResolutionFrontier =
+  ParetoSnowballTOE.ibrahimPhaseResolutionFrontier
+
+toeIbrahimHistoricalDiscriminatorBoundary :
+  ParetoSnowballTOE.HistoricalDiscriminatorBoundary
+toeIbrahimHistoricalDiscriminatorBoundary =
+  ParetoSnowballTOE.ibrahimHistoricalDiscriminatorBoundary
+
+toeIbrahimSearchPriorityDoesNotCreateProof :
+  ParetoSnowballTOE.SearchPriorityCreatesProof → ⊥
+toeIbrahimSearchPriorityDoesNotCreateProof =
+  ParetoSnowballTOE.searchPriorityDoesNotCreateProof
+
+toeIbrahimProducerSourceDoesNotCreateRunReceipt :
+  ParetoSnowballTOE.ProducerSourceCreatesRunReceipt → ⊥
+toeIbrahimProducerSourceDoesNotCreateRunReceipt =
+  ParetoSnowballTOE.producerSourceDoesNotCreateRunReceipt
+
+toeIbrahimDegree729DoesNotCreateMonsterHZetaRecognition :
+  ParetoSnowballTOE.Degree729CreatesMonsterHZetaRecognition → ⊥
+toeIbrahimDegree729DoesNotCreateMonsterHZetaRecognition =
+  ParetoSnowballTOE.degree729DoesNotCreateMonsterHZetaRecognition
+
+toeIbrahimPaperOracleDoesNotIdentifyHistoricalDump :
+  ParetoSnowballTOE.PaperOracleIdentifiesDump → ⊥
+toeIbrahimPaperOracleDoesNotIdentifyHistoricalDump =
+  ParetoSnowballTOE.paperOracleDoesNotIdentifyHistoricalDump
+
+------------------------------------------------------------------------
+-- Joint non-promotion: two independent blocked proof routes.
+-- Do not infer either proof from a search score, a source alias, or
+-- the other's conditional result. Reuse both canonical owner proofs.
+------------------------------------------------------------------------
+
+toeRGAndIbrahimJointPromotionImpossible :
+  ParetoSnowballTOE.BalabanScaleTransferPromotion →
+  ParetoSnowballTOE.SearchPriorityCreatesProof → ⊥
+toeRGAndIbrahimJointPromotionImpossible rg sourcePriority =
+  toeBalabanScaleTransferPromotionImpossible rg
+
+toeRGAndIbrahimSearchPromotionImpossible :
+  ParetoSnowballTOE.SearchPriorityCreatesProof →
+  ParetoSnowballTOE.BalabanScaleTransferPromotion → ⊥
+toeRGAndIbrahimSearchPromotionImpossible sourcePriority rg =
+  toeIbrahimSearchPriorityDoesNotCreateProof sourcePriority
+
+
+------------------------------------------------------------------------
+-- Complete direct Balaban/Ibrahim Pareto-snowball exports.
+------------------------------------------------------------------------
+
+toeBalabanScaleTransferFrontier :
+  ParetoSnowballTOE.BalabanScaleTransferFrontierReceipt
+toeBalabanScaleTransferFrontier =
+  ParetoSnowballTOE.balabanScaleTransferFrontier
+
+toeIbrahimRoutePreferenceDoesNotCreateExecutionReceipt :
+  ParetoSnowballTOE.RoutePreferenceCreatesExecutionReceipt → ⊥
+toeIbrahimRoutePreferenceDoesNotCreateExecutionReceipt =
+  ParetoSnowballTOE.routePreferenceDoesNotCreateExecutionReceipt
+
+toeIbrahimMergedLeanSourceDoesNotCreateKernelReceipt :
+  ParetoSnowballTOE.MergedLeanSourceCreatesKernelReceipt → ⊥
+toeIbrahimMergedLeanSourceDoesNotCreateKernelReceipt =
+  ParetoSnowballTOE.mergedLeanSourceDoesNotCreateKernelReceipt
+
+toeIbrahimOEISDoesNotCreateMultiplicityAction :
+  ParetoSnowballTOE.NinetyOEISEqualityCreatesMultiplicityAction → ⊥
+toeIbrahimOEISDoesNotCreateMultiplicityAction =
+  ParetoSnowballTOE.oeisDoesNotCreateMultiplicityAction
+
+toeIbrahimFiniteIrreducibilityDoesNotCreateMonsterHZetaRecognition :
+  ParetoSnowballTOE.FiniteIrreducibilityCreatesMonsterHZetaRecognition → ⊥
+toeIbrahimFiniteIrreducibilityDoesNotCreateMonsterHZetaRecognition =
+  ParetoSnowballTOE.finiteIrreducibilityDoesNotCreateMonsterHZetaRecognition
+
+toeIbrahimCurrentQidDoesNotIdentifyHistoricalTitle :
+  ParetoSnowballTOE.CurrentQidIdentifiesHistoricalTitle → ⊥
+toeIbrahimCurrentQidDoesNotIdentifyHistoricalTitle =
+  ParetoSnowballTOE.currentQidDoesNotIdentifyHistoricalTitle
+
+
+------------------------------------------------------------------------
+-- 369 max-cut / kernel-BIDI / ternary-27 convergence.
+------------------------------------------------------------------------
+
+toe369Ternary27RotationOrderThree =
+  MaxCut369.toe27RotationOrderThree
+
+toe369Ternary27OriginFixed =
+  MaxCut369.toe27OriginFixed
+
+toe369FullCubeRotationNotFree :
+  MaxCut369.FullCubeRotationFree → ⊥
+toe369FullCubeRotationNotFree =
+  MaxCut369.toe27FullCubeRotationNotFree
+
+toe369MonsterPhaseConjugationIntertwiner =
+  MaxCut369.toe27MonsterPhaseConjugationIntertwiner
+
+-- Source-owned signed ternary/Monster non-promotion (no new action proof).
+-- Original Ibrahim 3B ownership and the existing Signed theorem remain distinct.
+toe369MonsterRepresentationNotPromoted =
+  MaxCut369.toe27MonsterRepresentationNotPromoted
+
+toe369MonsterEmbeddingNotPromoted =
+  MaxCut369.toe27MonsterEmbeddingNotPromoted
+
+toe369Ternary27PhaseReductionNotGlobalInversion =
+  MaxCut369.toe27PhaseReductionNotGlobalInversion
+
+toe369Ternary27OrbitIndexingNotSemanticIdentity =
+  MaxCut369.toe27OrbitIndexingNotSemanticIdentity
+
+toe369Ternary27ReductionNotMonster42SameObject =
+  MaxCut369.toe27ReductionNotMonster42SameObject
+
+toe369FullGradeDimensionDoesNotCreateFaithfulness =
+  MaxCut369.toeFullGradeDimensionDoesNotCreateFaithfulness
+
+toe369FullGradeSameCarrierDoesNotCreateActionAgreement =
+  MaxCut369.toeFullGradeSameCarrierDoesNotCreateActionAgreement
+
+toe369FullGradeCharacterDoesNotCreateActionAgreement =
+  MaxCut369.toeFullGradeCharacterDoesNotCreateActionAgreement
+
+toe369ProjectedDimensionDoesNotCreateAction =
+  MaxCut369.toeProjectedDimensionDoesNotCreateAction
+
+toe369CoordinateRetractionDoesNotCreateProjectedAction =
+  MaxCut369.toeCoordinateRetractionDoesNotCreateProjectedAction
+
+toe369ProjectedCharacterDoesNotCreateAction =
+  MaxCut369.toeProjectedCharacterDoesNotCreateAction
+
+toe369KernelTrace53DoesNotIdentify3B =
+  MaxCut369.toeKernelTrace53DoesNotIdentify3B
+
+toe369KernelCharacterIsotypyDoesNotConstructActionIntertwiner =
+  MaxCut369.toeKernelCharacterIsotypyDoesNotConstructActionIntertwiner
+
+toe369KernelActualZetaRecognitionStillOpen =
+  MaxCut369.toeKernelActualZetaRecognitionStillOpen
+
+toe369KernelFullHyperformalActionStillOpen =
+  MaxCut369.toeKernelFullHyperformalActionStillOpen
+
+toe369SelectedSameElementClass3BStillOpen =
+  MaxCut369.toeSelectedSameElementClass3BStillOpen
+
+toe369SingleActionProducerStillOpen =
+  MaxCut369.toeSingleActionProducerStillOpen
+
+toe369FiniteChartDoesNotCreateLinearMultiplicityAction =
+  MaxCut369.toeFiniteChartDoesNotCreateLinearMultiplicityAction
+
+toe369NinetySlicesDoNotCreatePermutationRepresentation =
+  MaxCut369.toeNinetySlicesDoNotCreatePermutationRepresentation
+
+toe369CharacterDoesNotCreateHomEvaluation =
+  MaxCut369.toeCharacterDoesNotCreateHomEvaluation
+
+toe369PermutationNoGoDoesNotCreateLinearAction =
+  MaxCut369.toePermutationNoGoDoesNotCreateLinearAction
+
+
+------------------------------------------------------------------------
+-- Singular-basin / coarse-RG obstruction convergence.
+------------------------------------------------------------------------
+
+toeSingularBasinFiniteReduction =
+  SingularBasinTOE.finiteReduction
+
+toeSingularBasinFiniteReductionNotBasinPreserving =
+  SingularBasinTOE.finiteReductionNotBasinPreserving
+
+toeSingularBasinFiniteFullBasinDoesNotFactor =
+  SingularBasinTOE.finiteFullBasinDoesNotFactorThroughReduction
+
+toeSingularBasinSelectedResolutionNotRobust =
+  SingularBasinTOE.selectedResolutionNotRobust
+
+toeSingularBasinSelectedProjectionNotResolutionAdequate =
+  SingularBasinTOE.selectedProjectionNotResolutionAdequate
+
+toeSingularBasinSelectedResolutionRefutesGlobalFactorisation =
+  SingularBasinTOE.selectedResolutionAlsoRefutesGlobalFactorisation
+
+toeYanchukIntervalODECheckerStillMissing =
+  SingularBasinTOE.intervalODECheckerStillMissing
+
+toeYanchukCheckerSoundStillMissing =
+  SingularBasinTOE.checkerSoundToBasinCertificateStillMissing
+
+toeYanchukAnalyticGlobalWidthLawStillMissing =
+  SingularBasinTOE.analyticGlobalWidthLawStillMissing
+
+toeYanchukIntervalStableManifoldTubeStillMissing =
+  SingularBasinTOE.intervalStableManifoldTubeStillMissing
+
+toeYanchukBasinSeparationTheoremStillMissing =
+  SingularBasinTOE.basinSeparationTheoremStillMissing
+
+toeSingularBasinZKPFrame :
+  SingularBasinTOE.SingularBasinTOEZKPFrame
+toeSingularBasinZKPFrame =
+  SingularBasinTOE.canonicalSingularBasinTOEZKPFrame
+
+
+------------------------------------------------------------------------
+-- Fleet R4/R5 formal-gap selection boundary.
+-- External spectral priority is planning context only.
+------------------------------------------------------------------------
+
+toeFleetFormalGapTargetReceipt :
+  FleetGapTOE.FleetFormalGapTargetReceipt
+toeFleetFormalGapTargetReceipt =
+  FleetGapTOE.canonicalFleetFormalGapTargetReceipt
+
+toeFleetCoordinateRebuildabilityReceipt =
+  FleetGapTOE.fleetCoordinateRebuildabilityReceipt
+
+toeFleetNumericABIReceipt =
+  FleetGapTOE.fleetNumericABIReceipt
+
+toeFleetResidualInvariantReceipt =
+  FleetGapTOE.fleetResidualInvariantReceipt
+
+toeFleetPromotionObligationIndex =
+  FleetGapTOE.fleetPromotionObligationIndex
+
+toeFleetFormalGapZKPFrame :
+  ParetoSnowballTOE.TOEZKPFrame
+toeFleetFormalGapZKPFrame =
+  FleetGapTOE.canonicalFleetFormalGapZKPFrame
+
+toeFleetEigenPriorityDoesNotCreateProof :
+  FleetGapTOE.eigenvalueMagnitudeCreatesProofAuthority
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+toeFleetEigenPriorityDoesNotCreateProof =
+  FleetGapTOE.fleetEigenPriorityDoesNotCreateProof
+
+toeFleetExternalCountDoesNotCreateFormalDischarge :
+  FleetGapTOE.externalCountCreatesFormalProof
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+toeFleetExternalCountDoesNotCreateFormalDischarge =
+  FleetGapTOE.fleetExternalCountDoesNotCreateFormalDischarge
+
+toeFleetDischargedFibresRemainOutOfTarget :
+  FleetGapTOE.dischargedFibresRemainDischarged
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
+toeFleetDischargedFibresRemainOutOfTarget =
+  FleetGapTOE.fleetDischargedFibresRemainOutOfTarget
+
+toeFleetContradictionGapsRemainSeparate :
+  FleetGapTOE.contradictionGapsRemainSeparate
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
+toeFleetContradictionGapsRemainSeparate =
+  FleetGapTOE.fleetContradictionGapsRemainSeparate
+
+toeFleetPlanningTextDoesNotCreateFormalResidual :
+  FleetGapTOE.externalPlanningTextCreatesFormalResidual
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+toeFleetPlanningTextDoesNotCreateFormalResidual =
+  FleetGapTOE.fleetExternalPlanningTextDoesNotCreateFormalResidual
+
+
+toeFleetBalabanDischargedOwnerReceipt :
+  FleetGapTOE.BalabanDischargedOwnerReceipt
+toeFleetBalabanDischargedOwnerReceipt =
+  FleetGapTOE.fleetBalabanDischargedOwnerReceipt
+
+toeFleetNSPhysicalM2SummationCompilerStatus :
+  Bool
+toeFleetNSPhysicalM2SummationCompilerStatus =
+  FleetGapTOE.fleetNSPhysicalM2SummationCompilerStatus
+
+toeFleetNSM2ToR568CompilerStatus :
+  Bool
+toeFleetNSM2ToR568CompilerStatus =
+  FleetGapTOE.fleetNSM2ToR568CompilerStatus
+
+toeFleetQuantumMereologyBoundary :
+  FleetGapTOE.QuantumMereologyDischargedBoundary
+toeFleetQuantumMereologyBoundary =
+  FleetGapTOE.fleetQuantumMereologyBoundary
+
+toeFleetQuantumMereologyAttributionBoundary :
+  FleetGapTOE.QuantumMereologyAttributionBoundary
+toeFleetQuantumMereologyAttributionBoundary =
+  FleetGapTOE.fleetQuantumMereologyAttributionBoundary
+
+toeFleetSpectralLabelDoesNotIdentifyTheoremOwner :
+  FleetGapTOE.spectralLabelsIdentifyTheoremOwners
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+toeFleetSpectralLabelDoesNotIdentifyTheoremOwner =
+  FleetGapTOE.fleetSpectralLabelDoesNotIdentifyTheoremOwner
+
+
+------------------------------------------------------------------------
+-- Direct canonical PNF firewalls for fleet R4/R5 selection.
+------------------------------------------------------------------------
+
+toeFleetNonRebuildableCoordinatePromotionImpossible :
+  FleetGapTOE.NonRebuildableCoordinatePromotion → ⊥
+toeFleetNonRebuildableCoordinatePromotionImpossible =
+  FleetGapTOE.fleetNonRebuildableCoordinatePromotionImpossible
+
+toeFleetVectorSpectralAuthorityPromotionImpossible :
+  FleetGapTOE.VectorSpectralAuthorityPromotion → ⊥
+toeFleetVectorSpectralAuthorityPromotionImpossible =
+  FleetGapTOE.fleetVectorSpectralAuthorityPromotionImpossible
+
+toeFleetSpectralNumericABIPromotionImpossible :
+  FleetGapTOE.SpectralNumericABIPromotion → ⊥
+toeFleetSpectralNumericABIPromotionImpossible =
+  FleetGapTOE.fleetSpectralNumericABIPromotionImpossible
+
+toeFleetResidualFieldPromotionImpossible :
+  FleetGapTOE.ResidualFieldPromotion → ⊥
+toeFleetResidualFieldPromotionImpossible =
+  FleetGapTOE.fleetResidualFieldPromotionImpossible
+
+toeFleetVectorCoordinateTruthStillFalse =
+  FleetGapTOE.fleetVectorCoordinateTruthStillFalse
+
+toeFleetVectorCoordinateSupportStillFalse =
+  FleetGapTOE.fleetVectorCoordinateSupportStillFalse
+
+toeFleetVectorCoordinateAdmissibilityStillFalse =
+  FleetGapTOE.fleetVectorCoordinateAdmissibilityStillFalse
+
+toeFleetTextFallbackAuthorityStillFalse =
+  FleetGapTOE.fleetTextFallbackAuthorityStillFalse
+
+------------------------------------------------------------------------
+-- Joint Balaban RG + R559 same-owner max-cut receipt.
+------------------------------------------------------------------------
+
+import DASHI.Unified.BalabanR559TOEMaxCutExact as BalabanR559TOE
+
+toeBalabanR559MaxCutReceipt :
+  BalabanR559TOE.BalabanR559TOEMaxCutReceipt
+toeBalabanR559MaxCutReceipt =
+  BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+toeBalabanR559PublishedContinuumStillOpen :
+  BalabanR559TOE.publishedContinuumPromotion
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ false
+toeBalabanR559PublishedContinuumStillOpen =
+  BalabanR559TOE.publishedContinuumPromotionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+toeBalabanR559ContinuumMassGapStillBlocked :
+  BalabanR559TOE.continuumMassGapPromotion
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ false
+toeBalabanR559ContinuumMassGapStillBlocked =
+  BalabanR559TOE.continuumMassGapPromotionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+toeBalabanR559ClayPromotionStillBlocked :
+  BalabanR559TOE.clayPromotion
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ false
+toeBalabanR559ClayPromotionStillBlocked =
+  BalabanR559TOE.clayPromotionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+
+------------------------------------------------------------------------
+-- Direct constructive Balaban RG scale-transfer non-promotion.
+-- The theorem owner remains the scale-transfer frontier.
+-- The joint receipt is the normalized TOE path.
 ------------------------------------------------------------------------
 
 import DASHI.Physics.Closure.BalabanRGScaleTransferFrontierReceipt as RGNonPromotion
