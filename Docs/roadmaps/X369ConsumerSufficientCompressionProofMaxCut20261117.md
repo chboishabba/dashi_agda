@@ -620,3 +620,227 @@ scripts/run_agda29_parallel_check.sh \
 scripts/run_agda29_parallel_check.sh \
   DASHI/Cognition/PNF/X369SharedHeadFusedScoreExact.agda
 ```
+
+
+## 17 Nov Round 2 — four-gate source-specific SymPy maximum cut
+
+**User instruction:** continue formal/symbolic work without needing Agda
+or CI execution. Do not confuse a source algebra theorem with
+bitwise torch parity, trained behaviour or device benchmark.
+
+**Source inspection:** `LeechTransformer/models/history_orbit_moe.py`
+at branch `experiment/x369-r4-fair-c2c3-residual-20261115`;
+`models/trialectic_wave_prior.py`.
+`select_source_experts` forms `features=(x,h_e)`,
+the C2 residual base route is `abs(features)`, while C3 residual
+features are
+`cat(trialectic_router_invariants(phase_x),
+ directed_trialectic_invariants(phase_x,routed_h))`
+with one shared residual head and `expert_bias[e]`.
+The source selects via `torch.topk` (or explicitly opted-in
+`torch.sort`) and uses softmax over the selected ordered values.
+`step` loops over selected expert IDs and changes only selected
+histories. `execute_selected` receives authenticated-by-caller
+`x`, ordered selected IDs, selected histories, and selected
+weights; it does NOT independently re-route or own inactive state.
+The actual implementation does not have an arbitrary quantizer
+whose error tolerance can be asserted without its encoding contract.
+
+### Gate 2: Quantizer-to-top-k with source-bound envelopes
+
+For the fused **DIRECTED** residual, let
+`u=K_w x`, with a, b, c from the shared (possibly q-gated)
+activation and `h_e` from expert history. For elementwise
+quantization errors `|dw_i|<=epsw_i`,
+`|dx_i|<=epsx_i`, `|dh_ei|<=epsh_ei`,
+define each coefficient bound
+
+    U0 = Σ_(widx,xidx)=(0,0),(1,2),(2,1)
+       (|widx| epsx_xidx + epsw_widx |x_xidx|
+        + epsw_widx epsx_xidx).
+    U1 = same cyclic source pairs (0,1),(1,0),(2,2).
+    U2 = same cyclic source pairs (0,2),(1,1),(2,0).
+
+In exact real/rational arithmetic,
+
+    |quantized_dot(u+du,h_e+dh_e)-dot(u,h_e)|
+      <= B_e
+       = Σ_i [U_i |h_ei| + (|u_i|+U_i) epsh_ei].
+
+Add separately calibrated rounding/accumulation and any
+source C2 history-feature, expert-bias or nonlinear unary
+error budgets for the FULL R4 score. The formula alone
+does NOT enclose float32, BF16, FP16 or any hardware kernel:
+it needs a quantizer error certificate and a separately
+bounded floating-point evaluation order, including underflow,
+overflow and subnormals as applicable.
+
+For source selected set S, exact order/membership is
+preserved under this interval budget if
+
+    min_(i in S) (score_i - B_i)
+      > max_(j notin S) (score_j + B_j).
+
+This certifies a TOP-K **SET**, not ranked selected
+slots. To certify ordered IDs as returned by the
+original source, also require every adjacent chosen
+score gap (or all relevant internal chosen pairs)
+to strictly exceed their error-budget sum. At an
+actual TIE, `torch.topk` and opt-in `torch.sort`
+are not assumed to use identical tie policies.
+If exact logits differ by a shared real constant,
+ideal top-k and selected softmax are equal; neither
+floating-point bitwise parity nor identical
+tie-ordering across different kernels follows.
+
+The local SymPy/rational demonstration used
+`w=(2,-1,1)`, `x=(1,2,-1)`,
+`epsw=1/64`, `epsx=1/32`,
+`epsh=1/16` per coordinate, and four expert
+histories `(1,0,1),(-1,2,0),(0,1,-1),(3,0,0)`.
+Exact original scores were `[2,-1,5,15]`.
+Quantized scores were
+`[62109,-31027,170749,497389]/32768`;
+certified absolute rational error budgets
+`[34025,40217,34025,40217]/32768`.
+These prove both ordered selected IDs `[3,2]`
+and top-2 membership for THAT fixture under the
+declared deterministic numeric comparison.
+No claim that those tolerances came from the
+original checkpoint.
+
+### Gate 3: One-step selected sufficiency versus future routing
+
+In `HistoryOrbitMoE.step`, routing depends on
+**all E current histories**. The remote
+`execute_selected` consumer can evaluate one
+admitted selected route with only:
+(a) shared raw activation x,
+(b) authenticated ordered selected IDs,
+(c) exact source-selected weights,
+(d) selected histories,
+(e) the correct expert/orientation/transition parameters
+and history-cap settings.
+
+Unselected histories remain *unchanged at their
+source owner*. They are not globally redundant.
+A two-expert finite source-model witness is:
+at `x0=(0,0,0)`, both h configurations
+`[(0,0,0),(0,0,0)]` and
+`[(0,0,0),(2,0,0)]` have equal current
+directed logits and admit selected expert 0 under
+a declared lowest-ID deterministic tie rule.
+At the NEXT `x1=(1,0,0)`, with a self-channel
+routing head, their selected experts differ:
+one ties and chooses 0; the other chooses expert 1.
+This is a *counterexample to deleting inactive
+histories on the basis of selected-packet equality*;
+it is not a claim about torch's internal tie policy.
+The correct positive future theorem is a
+time-indexed commuting reduced transition, or
+reopening/retention of inactive histories with
+the original owner and consistency receipts.
+
+### Gate 4: Original R4 effective rank and arithmetic costs
+
+**New research-critical source observation.**
+The R4 `c3_residual_weight` has nominal 2d
+entries, but its first d entries multiply
+`trialectic_router_invariants(phase_x)`, a unary
+function of the same shared x for every expert.
+Their contribution is a common scalar to
+all expert logits and cancels in exact
+ranking and softmax. The C2 base router's first
+d x-half and C2 residual control's first d
+x-half also have this shared-unary null direction.
+Thus `2d nominal` is not `2d effective
+routing degrees`: only up to d directed/history
+coordinates of the added R4 residual can
+change the routing consumer through this path.
+This is not a complete effective-rank theorem,
+because directed features may have additional
+dependencies and tasks/auxiliary losses may
+observe different variables.
+
+The **unconditional** original directed
+bilinear score fusion remains correct for every
+triad and all expert histories:
+`K_w x` once per source x and shared head,
+then a 3-term dot product per expert.
+For N=d/3 triads and E experts, the transparent
+multiplication-site plans count
+`N*12E` versus `N*(9+3E)`:
+at d=384 (128 triads), E=4:
+`6,144` vs `2,688`, saving
+`3,456` scalar multiplication sites for
+the **directed score calculation only**.
+At float32, a materialized directed channel
+buffer `[batch,E,d]` has `B*E*d*4`
+bytes (6 KiB per sample for E=4,d=384);
+a materialized shared K vector `[B,d]`
+is `B*d*4` bytes (1.5 KiB per sample).
+These are upper-level illustrative buffer
+sizes, not observed GPU peak-memory savings.
+R4 also has C2 features, expert histories,
+orientation scores, FFNs, transitions, caches,
+other intermediates and possible kernel fusion.
+There is NO measured runtime/energy/speedup.
+
+**Backward algebra:** because the full directed
+weighted score and fused bilinear score are the
+SAME polynomial, derivatives with respect to
+all nine source/history/head input coordinates
+are symbolically identical wherever the route
+is differentiable. This does not certify
+bitwise autograd equivalence for different
+floating-point operation orders, discrete
+top-k selection or q-gate threshold surfaces.
+
+### Gate 5: Semantic consumers remain independently typed
+
+The exact score-list equality proves only
+consumer sufficiency for a function of the
+SAME logits. The original
+`GrokkingEquivarianceDefectGeometryExact`
+compares a task action (algorithm defect 0;
+held-out memorizer defect 2). It does not
+identify trained Leech logits with task labels.
+The original
+`TrialecticBoundaryFaceNonfactorabilityExact`
+constructs identical three-edge boundaries
+with DIFFERENT reciprocal/coercive face labels:
+no boundary-only or router-score-only
+factorisation of that face consumer is warranted.
+Sophontic argument-response opposites are
+independently typed and must not be silently
+identified with C2 sign or geometric C3 rotation.
+
+### Source-of-truth outcome and follow-up
+
+**Reusable executable SymPy stand-in:**
+`scripts/check_x369_source_four_gates_sympy.py`.
+The tool is algebraic/finite source validation,
+not a model simulation, physical proof or
+Agda kernel acceptance. An independent local
+SymPy check of the same underlying polynomials
+returned 14 grouped passes and exhaustive
+8,484 finite four-expert top2 margin
+certificates (6,588 preserved *ordered* slots);
+the latter distinction proves why set parity
+does not entail slot parity. The complete
+new committed script has not received a
+reported GitHub run. Do not label it green CI.
+
+**Next highest alpha:** formal error budget for
+the R4 C2 `abs(h_e)` head and residual fused
+directed score simultaneously; full original
+`topk`/selected softmax acceptance using
+ordered score intervals; explicit future
+transition-fibre preservation theorem on the
+actual model parameters; and proof that
+`c3_residual_weight[:d]` has identically
+zero decision loss gradient under
+the admitted score-only consumer.
+All must preserve the difference between
+source exact reals and floating-point kernel
+reassociation. No hardware runs requested.
