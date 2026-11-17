@@ -24,7 +24,9 @@ REQUIRED={
 TESTS=[str(ROOT/"scripts/test_smith_filsinger_layered_green_sympy.py"),
        str(ROOT/"scripts/test_smith_filsinger_tangential_maxwell_sympy.py"),
        str(ROOT/"scripts/test_smith_filsinger_radiation_green_sympy.py"),
-       str(ROOT/"scripts/test_smith_filsinger_oblique_maxwell_sympy.py")]
+       str(ROOT/"scripts/test_smith_filsinger_oblique_maxwell_sympy.py"),
+       str(ROOT/"scripts/test_smith_filsinger_passive_radiation_sympy.py"),
+       str(ROOT/"scripts/test_smith_filsinger_periodic_fourier_green_sympy.py")]
 
 def audit():
     errors=[]
