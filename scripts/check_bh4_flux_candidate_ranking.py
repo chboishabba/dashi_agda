@@ -39,7 +39,7 @@ for token in [
     "sabio_flux_ranking",
 ]:
     assert token in run_text, f"missing runner ranking token: {token}"
-assert any(f"dashi.bh4-phase4-maxcut-run.v{v}" in run_text for v in (5, 6, 7)), "missing runner schema token"
+assert "dashi.bh4-phase4-maxcut-run.v5" in run_text or "dashi.bh4-phase4-maxcut-run.v6" in run_text, "missing runner schema v5/v6 token"
 
 for token in [
     "sabioKineticParameterCount",
