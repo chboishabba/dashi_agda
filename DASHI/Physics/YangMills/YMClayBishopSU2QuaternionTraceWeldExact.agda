@@ -14,6 +14,8 @@ module DASHI.Physics.YangMills.YMClayBishopSU2QuaternionTraceWeldExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (zero; suc)
+open import Data.Integer.Base using (+_)
+open import Data.Rational.Unnormalised using (_/_; 0ℚᵘ)
 open import Agda.Builtin.Equality using (_≡_; refl)
 import Data.Fin.Base as Fin
 import Real as B
@@ -76,3 +78,31 @@ quaternionTraceAdjoint :
     (Trace.bishopRealMatrixTrace 2 (quaternionMatrix q))
 quaternionTraceAdjoint q =
   Trace.bishopRealMatrixAdjointTrace 2 (quaternionMatrix q)
+
+
+-- The rational half is the *actual* imported Bishop embedding.
+-- Unlike normalizedTraceIsQuaternionRealPart above, this theorem has no
+-- caller-provided half-cancellation proof.
+bishopHalf : B.ℝ
+bishopHalf = B._⋆ (+ 1 / 2)
+
+bishopHalfDoubleCancellation :
+  ∀ x →
+  B._≃_
+    (B._*_ bishopHalf (B._+_ x (B._+_ x B.0ℝ)))
+    x
+bishopHalfDoubleCancellation x =
+  let open BP.ℝ-Solver in
+  solve 1
+    (λ a →
+      ((Κ (+ 1 / 2)) ⊗ (a ⊕ (a ⊕ Κ 0ℚᵘ))) ⊜ a)
+    BP.≃-refl x
+
+bishopQuaternionNormalizedTrace :
+  ∀ q →
+  B._≃_
+    (Trace.bishopNormalizedRealTrace 2 bishopHalf (quaternionMatrix q))
+    (q0 q)
+bishopQuaternionNormalizedTrace =
+  normalizedTraceIsQuaternionRealPart
+    bishopHalf bishopHalfDoubleCancellation
