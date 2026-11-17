@@ -13,6 +13,7 @@ module DASHI.Physics.Motors.SmithFilsingerFullVectorPoyntingPortWeldExact where
 -- Maxwell jet and Maxwell-material finite ledger are reused unchanged.
 
 open import Agda.Builtin.Nat using (Nat; _+_)
+open import Agda.Primitive using (Level; _⊔_; lsuc; lzero)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Nat.Solver using (module +-*-Solver)
 open +-*-Solver using (solve; _:+_; _:=_)
@@ -104,19 +105,60 @@ fullVectorMaxwellToMaterialCompleteLedger
 -- This is intentionally an obligation, not a theorem assigning a measured
 -- Maxwell field to historical Filsinger electrode pins. The association
 -- with original geometry can NEVER be inferred from choosing a jet.
+-- Unlike a record of freely chosen Set tokens, this physical
+-- admission contains actual dependent conservation EQUALITIES for
+-- the SAME selected original and its actual full-vector Maxwell jet.
+-- The source-to-port implication is STILL independent physical evidence:
+-- the pointwise jet alone does not prove boundary integration.
 record SameOriginalPhysicalFieldBoundary
+  {r : Level} {F : C3.RealField r}
+  (jet : Vector.FullVectorMaxwellJet F)
   (b : Weld.SelectedBoundary)
   (f : Weld.FormalFieldToPort b)
-  (s : Weld.SignedSourceCycleWeld b f) : Set₂ where
+  (s : Weld.SignedSourceCycleWeld b f)
+  : Set (lsuc
+      (r ⊔
+        (lsuc (lsuc lzero))))
+  where
   field
-    ActualSpatialDomainWithOrientedBoundary : Set
-    RealConstitutiveAndChargeCurrent : Set
-    TimeIntegratedDivergenceAndBoundaryFlux : Set
-    TimeSynchronousSourceAndReceiverVI : Set
-    originalDomain : ActualSpatialDomainWithOrientedBoundary
-    material : RealConstitutiveAndChargeCurrent
-    poyntingIntegration : TimeIntegratedDivergenceAndBoundaryFlux
-    measuredPort : TimeSynchronousSourceAndReceiverVI
+    initialFieldEnergy sharedFieldMaterialWork
+      fieldDissipation finalFieldEnergy : Nat
+    paidMaterialModulation initialMaterialEnergy
+      usefulLoad materialDissipation recoveredMaterialModulation
+      finalMaterialEnergy : Nat
+
+    -- Independent original spatial/time integral of J.E and surface S;
+    -- the exact existing Maxwell source current is a CURL-JET only.
+    MaxwellIntegrationIntoSelectedTerminal :
+      MaxwellJetToSelectedFieldWork jet
+        (Cycle.RepeatableSourceCycle.naturalSourceWork
+          (Cycle.AdmittedSourceCapCycle.repeatable
+            (Weld.SignedSourceCycleWeld.cycleWithSourceCap s)))
+        (Cycle.RepeatableSourceCycle.controllerWork
+          (Cycle.AdmittedSourceCapCycle.repeatable
+            (Weld.SignedSourceCycleWeld.cycleWithSourceCap s)))
+        initialFieldEnergy sharedFieldMaterialWork
+        fieldDissipation finalFieldEnergy
+
+    -- Must be the physically derived constitutive law with all paid
+    -- modulation, recovered modulation and material relaxation heat.
+    materialWorkLaw :
+      sharedFieldMaterialWork
+        + (paidMaterialModulation + initialMaterialEnergy)
+      ≡ usefulLoad
+        + (materialDissipation
+          + (recoveredMaterialModulation + finalMaterialEnergy))
+
+    -- No hidden donor depletion or charged capacitor shortcut.
+    allFieldAndMaterialStatesRestored :
+      initialFieldEnergy + initialMaterialEnergy
+      ≡ finalFieldEnergy + finalMaterialEnergy
+
+    -- Actual same original useful receiver, not an arbitrarily chosen
+    -- receiver from another source family, phase or schematic.
+    originalUsefulPortIdentity :
+      usefulLoad ≡ Port.MidpointTwoPortWorkWindow.usefulWork
+        (Weld.FormalFieldToPort.portWindow f)
 
 -- The bridge ends here: original full-vector differential conservation
 -- is mathematically available; the physical integrated-port equality
@@ -244,3 +286,40 @@ selectedSourceFullVectorMaxwellCap
 
     unused : Nat
     unused = Cycle.AdmittedSourceCapCycle.unspentNaturalBudget capCycle
+
+-- Consume actual contentful Maxwell-to-terminal, material law and
+-- independent full-restoration equalities on the SAME original source.
+-- No arbitrary "Set := Unit" witness can fill the four equations.
+selectedFullVectorPhysicalAdmissionCap :
+  ∀ {r} {F : C3.RealField r} →
+  (jet : Vector.FullVectorMaxwellJet F) →
+  (b : Weld.SelectedBoundary)
+  (f : Weld.FormalFieldToPort b)
+  (s : Weld.SignedSourceCycleWeld b f) →
+  (a : SameOriginalPhysicalFieldBoundary jet b f s) →
+  Bound._≤_
+    (Port.MidpointTwoPortWorkWindow.usefulWork
+      (Weld.FormalFieldToPort.portWindow f))
+    ((Cycle.AdmittedSourceCapCycle.independentlyAdmittedNaturalCap
+        (Weld.SignedSourceCycleWeld.cycleWithSourceCap s)
+      + Cycle.RepeatableSourceCycle.controllerWork
+          (Cycle.AdmittedSourceCapCycle.repeatable
+            (Weld.SignedSourceCycleWeld.cycleWithSourceCap s)))
+      + SameOriginalPhysicalFieldBoundary.paidMaterialModulation a)
+selectedFullVectorPhysicalAdmissionCap jet b f s a =
+  selectedSourceFullVectorMaxwellCap
+    jet b f s
+    (SameOriginalPhysicalFieldBoundary.initialFieldEnergy a)
+    (SameOriginalPhysicalFieldBoundary.sharedFieldMaterialWork a)
+    (SameOriginalPhysicalFieldBoundary.fieldDissipation a)
+    (SameOriginalPhysicalFieldBoundary.finalFieldEnergy a)
+    (SameOriginalPhysicalFieldBoundary.paidMaterialModulation a)
+    (SameOriginalPhysicalFieldBoundary.initialMaterialEnergy a)
+    (SameOriginalPhysicalFieldBoundary.usefulLoad a)
+    (SameOriginalPhysicalFieldBoundary.materialDissipation a)
+    (SameOriginalPhysicalFieldBoundary.recoveredMaterialModulation a)
+    (SameOriginalPhysicalFieldBoundary.finalMaterialEnergy a)
+    (SameOriginalPhysicalFieldBoundary.MaxwellIntegrationIntoSelectedTerminal a)
+    (SameOriginalPhysicalFieldBoundary.materialWorkLaw a)
+    (SameOriginalPhysicalFieldBoundary.allFieldAndMaterialStatesRestored a)
+    (SameOriginalPhysicalFieldBoundary.originalUsefulPortIdentity a)
