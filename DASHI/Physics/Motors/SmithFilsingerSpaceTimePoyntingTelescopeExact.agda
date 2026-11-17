@@ -124,6 +124,52 @@ sameOriginalTimeIntegratedPowerBalance jet a
     | sym (SameOriginalSpaceTimeMaxwellAdmission.controllerIdentified a) =
   spaceTimeExteriorEnergyBalance (SameOriginalSpaceTimeMaxwellAdmission.window a)
 
+-- Preserve source/receiver/control/material ledgers at one time window.
+-- In an actual plasma, modulation, ion creation and neutral-wind power
+-- may have either sign. Rational signed values are deliberately retained
+-- until physical positive-loss and same-source claims can be justified.
+record DecomposedSpaceTimeWork
+  (w : FiniteSpaceTimeWindow) : Set where
+  field
+    ohmicHeat ADEHeat ionAndChemicalHeat : ℚ.ℚ
+    electricDriver parametricMaterialPump
+      ionCreationPump neutralWindMechanical : ℚ.ℚ
+
+    -- The loss budget must list ALL dissipative components once.
+    actualDissipationSplit :
+      materialAndIonLoss w
+        ≡ ohmicHeat ℚ.+ (ADEHeat ℚ.+ ionAndChemicalHeat)
+
+    -- The signed controller port must explicitly pay modulation and
+    -- charge-creation work. Neutral-wind mechanical transfer is a
+    -- separately named port, not implicitly free solar electricity.
+    actualControlSplit :
+      controllerSigned w
+        ≡ electricDriver ℚ.+ (parametricMaterialPump ℚ.+
+             (ionCreationPump ℚ.+ neutralWindMechanical))
+
+-- Pure substitution transports the original four-direction theorem:
+-- no extra source is introduced and no loss can disappear through
+-- a tacit change of what "controller" means.
+decomposedSpaceTimeExteriorBudget :
+  (w : FiniteSpaceTimeWindow)
+  (d : DecomposedSpaceTimeWork w) →
+  (((storedEnergy w (steps w) ℚ.- storedEnergy w zero)
+     ℚ.+ Open.exteriorOrientedPoyntingFlux (faces w))
+     ℚ.+ ((DecomposedSpaceTimeWork.ohmicHeat d ℚ.+
+           (DecomposedSpaceTimeWork.ADEHeat d ℚ.+
+             DecomposedSpaceTimeWork.ionAndChemicalHeat d))
+        ℚ.+ usefulReceiverWork w))
+  ≡ naturalSigned w ℚ.+
+      (DecomposedSpaceTimeWork.electricDriver d ℚ.+
+       (DecomposedSpaceTimeWork.parametricMaterialPump d ℚ.+
+        (DecomposedSpaceTimeWork.ionCreationPump d ℚ.+
+          DecomposedSpaceTimeWork.neutralWindMechanical d)))
+decomposedSpaceTimeExteriorBudget w d
+  rewrite sym (DecomposedSpaceTimeWork.actualDissipationSplit d)
+        | sym (DecomposedSpaceTimeWork.actualControlSplit d) =
+  spaceTimeExteriorEnergyBalance w
+
 -- Remaining OPEN in physical/analytic sense:
 -- 1. Global C¹ / weak Maxwell distribution and actual signed quadrature
 --    proving finiteDifferenceEnergyLaw from real E,H,J and materials.
