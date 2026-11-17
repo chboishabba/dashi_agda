@@ -37,6 +37,12 @@ rotated=sp.Matrix([s,f,r]).subs({a:b,b:c,c:a}, simultaneous=True)
 check('directed channel C3 permutation from original x', all(sp.expand(u-v)==0 for u,v in zip(rotated,P*t)))
 check('C3 permutes back after three rotations',P**3==sp.eye(3))
 check('unrestricted head gauge transport',sp.expand((w.T*(P*t)-(P.T*w).T*t)[0])==0)
+M2=sp.Matrix([[-1,-1],[1,0]])
+check('centered two-channel C3 is order three',M2**3==sp.eye(2))
+centered_h={C:-A-B}
+check('original centered source action intertwines two-channel C3',
+    all(sp.expand(z.subs(centered_h))==0 for z in list(
+        sp.Matrix([r,s])-M2*sp.Matrix([s,f]))))
 
 # Finite carrier exhaustive control: two independent tags per phase.
 inputs=list(itertools.product(range(3),[False,True]))
