@@ -61,3 +61,20 @@ def test_wrong_source_boundary_jump_sign_rejected():
     j=S.Matrix([1,0])
     assert R*(g["upper_H"]*j-g["inside_H"]*j)!=j
     assert R*(g["inside_H"]*j-g["upper_H"]*j)==j
+
+def test_no_sheet_current_gives_no_green_power():
+    gens,widths=fixtures(S.Rational(1,2),S.Rational(1,4))
+    g=outgoing_sheet_green(three_layer_tangential_transfer(gens,widths),
+                           2,S.Rational(1,2))
+    j=S.zeros(2,1)
+    work=sheet_power_identity(g,j)
+    assert work["source"]==work["exterior"]==work["absorption"]==work["residual"]==0
+    assert g["upper_E"]*j==S.zeros(2,1)
+
+def test_lossless_source_sheet_cannot_pay_positive_load_without_source():
+    g=outgoing_sheet_green(S.eye(4),2,0)
+    j=S.zeros(2,1)
+    work=sheet_power_identity(g,j)
+    assert work["source"]==0
+    hypothetical_positive_load=S.Rational(100)
+    assert work["source"] != hypothetical_positive_load
