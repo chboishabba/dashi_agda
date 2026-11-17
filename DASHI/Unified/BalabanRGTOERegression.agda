@@ -1523,3 +1523,6 @@ import DASHI.Physics.YangMills.YMClayBishopSU2DeterminantExact as BishopSU2Deter
 
 -- YM.REAL: Bishop SU2 unitary matrix identities, original Wilson Haar OPEN.
 import DASHI.Physics.YangMills.YMClayBishopSU2UnitarityExact as BishopSU2Unitarity
+
+-- YM.REAL: concrete Bishop series-limit consumer; source dyadic bound OPEN.
+import DASHI.Physics.YangMills.YMClayBishopSU2HaarSeriesLimitExact as BishopSU2HaarSeriesLimit
