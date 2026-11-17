@@ -240,3 +240,20 @@ This cuts the dependency chain in a materially stronger way:
 **Numerical tests are not proof acceptance**. New source terms have no added postulate, but neither code-scan nor Git blob parity substitutes for pinned kernel checking; conditional field-operator and original-apparatus premises remain OPEN.
 
 **Maximum-cut priority after this:** (a) pinned Agda compile/fix of six consumers; (b) physically valid spacetime/surface Poynting integration from KSW jet + real material field response into the same original electrode/receiver port; (c) source-selected fully replenished net work; (d) if original cloud-control interpretation is pursued, independent causal atmospheric interventions. Do NOT solve a new full 3D Maxwell PDE just to rederive an already-proven pointwise vector identity. No ESD edits, attribution to the original KSW vector producer and Smith/Filsinger source owners, no premature TOE promotion.
+
+
+## Consistency gate: old signed cycle versus material-modulation work
+
+The previous F15 signed-cycle ledger already asserted the ORIGINAL SAME selected load and net external controller+natural work, but the later field/material decomposition introduces a separately **paid material modulation input** and **recovered modulation output**. Absent explicit reconciliation, one might misstate both ledgers as simultaneous and hide or double-count material work.
+
+New actual Agda theorem **materialModulationReconcilesOriginalCycleLoss** in SmithFilsingerMaxwellMaterialEnergyCutExact.agda imports the previously derived **signedNaturalAndControllerWorkPaysSamePortLoad** (from original incident/outgoing work + all-store return), imports **fieldMaterialRepeatableWork** (from independent Maxwell/material conservation with combined field/material store return), transports the SAME selected natural/controller/load port equalities, and cancels useful load. It derives exactly:
+
+  W_original_signed_cycle_internal_loss + W_paid_material_modulator
+    = W_field_radiative_loss + W_material_relaxation_loss
+      + W_recovered_modulation.
+
+This exposes a **new conditional consistency requirement** between #1521 and #1524 physical accounting partitions: externally paid modulator input cannot be renamed solar/Earth natural work, and recovered modulation cannot be silently dropped. A physically contradictory set of ledger receipts cannot both be inhabited unless their separate losses and modulation terms reconcile.
+
+Further, the timed all-N spatial consumer **allTimedSelectedOriginalCellsBelowNaturalCap** now imports the existing TimedSpatialPortChainExact owner, erases its timing index into the existing all-N spatial conservation theorem without modifying the work data, and transports the same-original natural-source cap while **allTimedSelectedOriginalArrivalIsCausal** imports the exact finite launch<=arrival result. This is NOT a relativistic Maxwell signal-front result, and does not licence identifying an observed acoustic clock with the electrical controller.
+
+**Remaining maximum cut:** the admitted Maxwell-jet pointwise-to-integral *physical* transport, original source+material constitutive identity and source-current/pin equality, and Agda 2.9 kernel acceptance; no more numerical simulation or duplicate algebraic power bounds is called for. The mathematical pointwise curl-jet and all-N spatial cancellation owners now exist and are consumed, not reinvented.
