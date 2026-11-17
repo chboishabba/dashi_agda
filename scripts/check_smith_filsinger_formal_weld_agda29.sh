@@ -13,11 +13,14 @@ owners=(
   DASHI/Physics/Motors/SmithFilsingerSourceMaxwellBoundaryWeldExact.agda
   DASHI/Physics/Motors/SmithFilsingerCloudCausalWeldExact.agda
   DASHI/Physics/Motors/SmithFilsingerMaxwellMaterialEnergyCutExact.agda
+  DASHI/Physics/Motors/SmithFilsingerDispersiveMaterialPortExact.agda
+  DASHI/Physics/Motors/SmithFilsingerDispersiveMaterialWeldExact.agda
 )
 new_owners=(
   DASHI/Physics/Motors/SmithFilsingerSourceMaxwellBoundaryWeldExact.agda
   DASHI/Physics/Motors/SmithFilsingerCloudCausalWeldExact.agda
   DASHI/Physics/Motors/SmithFilsingerMaxwellMaterialEnergyCutExact.agda
+  DASHI/Physics/Motors/SmithFilsingerDispersiveMaterialWeldExact.agda
 )
 for f in "${owners[@]}"; do test -s "$f"; done
 if grep -nE '^[[:space:]]*postulate([[:space:]]|$)|\\{!!\\}' "${new_owners[@]}"; then
@@ -26,4 +29,4 @@ if grep -nE '^[[:space:]]*postulate([[:space:]]|$)|\\{!!\\}' "${new_owners[@]}";
 fi
 # No Python surrogate or simulation: require actual pinned Agda type-check.
 scripts/run_agda29_parallel_check.sh "${new_owners[@]}"
-echo "PASS pinned Agda 2.9 source-Maxwell, causal cloud and material-cut formal welds"
+echo "PASS pinned Agda 2.9 four source/Maxwell/material/cloud formal welds"
