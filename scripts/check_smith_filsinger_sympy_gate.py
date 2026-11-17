@@ -37,7 +37,8 @@ TESTS=[str(ROOT/"scripts/test_smith_filsinger_layered_green_sympy.py"),
        str(ROOT/"scripts/test_smith_filsinger_periodic_fourier_green_sympy.py"),
        str(ROOT/"scripts/test_smith_filsinger_lorentz_ade_sympy.py"),
        str(ROOT/"scripts/test_smith_filsinger_lorentz_maxwell_weld_sympy.py"),
-       str(ROOT/"scripts/test_smith_filsinger_local_causal_ade_sympy.py")]
+       str(ROOT/"scripts/test_smith_filsinger_local_causal_ade_sympy.py"),
+       str(ROOT/"scripts/test_smith_filsinger_cayley_coefficients_sympy.py")]
 
 def audit():
     errors=[]
