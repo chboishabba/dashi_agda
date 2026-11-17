@@ -75,6 +75,18 @@ check("original constant expert output source-compatible",
 # Lower Taylor sum to degree 3 is 8/3>5/2.
 check("elementary exponential lower rational witness",
       sum(Q(1,S.factorial(j)) for j in range(4))==Q(8,3))
+# Proof-by-rational-envelope for the number e:
+# 1+1+1/2!+1/3!=8/3 < e, and
+# tail from n=4 is strictly less than
+# (1/4!)*sum_{k>=0}(1/5)^k = 5/96.
+# Hence 8/3 < e < 8/3+5/96 = 87/32 < 11/4.
+# This proves Nat cell separation without trusting evalf.
+e_lower=Q(8,3)
+e_series_upper=e_lower+Q(5,96)
+check("rational Taylor lower and geometric upper for e",
+      sum(Q(1,int(S.factorial(j))) for j in range(4))==e_lower
+      and e_series_upper==Q(87,32)
+      and e_lower<e_series_upper<Q(11,4))
 check("elementary e interval used in comparisons",
       2.5<float(S.E.evalf(50))<3)
 # Exact selected output:
