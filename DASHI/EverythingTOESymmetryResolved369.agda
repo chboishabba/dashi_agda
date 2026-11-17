@@ -976,39 +976,34 @@ toeCurrent369ContextualFibreWeldReceipt :
 toeCurrent369ContextualFibreWeldReceipt =
   CurrentMaxCut.canonicalTOE369ContextualFibreWeldReceipt
 
-toeCurrent369DecisionSheetStatesIsNine :
-  CurrentMaxCut.decisionSheetStateCount ≡ 9
-toeCurrent369DecisionSheetStatesIsNine =
-  CurrentMaxCut.decisionSheetStateCountIsNine
+toeFleetNumericABIRequiresIndependentEvidence :
+  FleetGapTOE.SpectralNumericABIPromotion → ⊥
+toeFleetNumericABIRequiresIndependentEvidence =
+  FleetGapTOE.fleetSpectralNumericABIPromotionImpossible
 
-toeCurrent369InteractionCubeStatesIsTwentySeven :
-  CurrentMaxCut.interactionCubeStateCount ≡ 27
-toeCurrent369InteractionCubeStatesIsTwentySeven =
-  CurrentMaxCut.interactionCubeStateCountIsTwentySeven
+------------------------------------------------------------------------
+-- Quantum-mereology selected-atlas / g-TPS terminal boundary.
+------------------------------------------------------------------------
 
-toeCurrent369AppraisalFibreStatesIsSevenHundredTwentyNine :
-  CurrentMaxCut.appraisalFibreStateCount ≡ 729
-toeCurrent369AppraisalFibreStatesIsSevenHundredTwentyNine =
-  CurrentMaxCut.appraisalFibreStateCountIsSevenHundredTwentyNine
+import DASHI.Unified.QuantumMereologyTOEConvergenceExact as QMT
 
-toeCurrent369SupportIsPositive :
-  CurrentMaxCut.relativeOrientationTrit CurrentTrajectory.supports
-  ≡ CurrentSSP.sspPosOne
-toeCurrent369SupportIsPositive =
-  CurrentMaxCut.supportOrientationIsPositive
+open QMT public using
+  ( physicalSourceGTPSStillOpen
+  ; physicalHamiltonianAttachmentStillOpen
+  ; physicalPointerWeldStillOpen
+  ; minimizerPullbackStillOpen
+  ; algebraSusceptibilityStillOpen
+  ; thermodynamicMQPTStillOpen
+  ; sameStateHolographicWeldStillOpen
+  ; lorentzianEinsteinPromotionStillOpen
+  ; fleetEigenPriorityStillNonPromoting
+  ; fleetSpectralLabelStillDoesNotIdentifyOwner
+  )
 
-toeCurrent369CounterIsNegative :
-  CurrentMaxCut.relativeOrientationTrit CurrentTrajectory.counters
-  ≡ CurrentSSP.sspNegOne
-toeCurrent369CounterIsNegative =
-  CurrentMaxCut.counterOrientationIsNegative
+toeQuantumMereologyTOEReceipt : QMT.QuantumMereologyTOEReceipt
+toeQuantumMereologyTOEReceipt =
+  QMT.canonicalQuantumMereologyTOEReceipt
 
-toeCurrent369SynthesisDoesNotEraseComparator :
-  CurrentMaxCut.synthesisErasesComparator ≡ false
-toeCurrent369SynthesisDoesNotEraseComparator =
-  CurrentMaxCut.synthesisErasesComparatorIsFalse
-
-toeCurrentFiniteRGStillDoesNotPromoteContinuum :
-  CurrentMaxCut.finiteRGCreatesContinuumPromotion ≡ false
-toeCurrentFiniteRGStillDoesNotPromoteContinuum =
-  CurrentMaxCut.finiteRGCreatesContinuumPromotionIsFalse
+toeQuantumMereologyTOEReceiptZKPFrame : ParetoSnowballTOE.TOEZKPFrame
+toeQuantumMereologyTOEReceiptZKPFrame =
+  QMT.canonicalQuantumMereologyTOEZKPFrame

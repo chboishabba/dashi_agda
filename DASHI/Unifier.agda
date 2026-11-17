@@ -797,39 +797,34 @@ unifierCurrent369ContextualFibreWeldReceipt :
 unifierCurrent369ContextualFibreWeldReceipt =
   CurrentMaxCut.canonicalTOE369ContextualFibreWeldReceipt
 
-unifierCurrent369DecisionSheetStatesIsNine :
-  CurrentMaxCut.decisionSheetStateCount ≡ 9
-unifierCurrent369DecisionSheetStatesIsNine =
-  CurrentMaxCut.decisionSheetStateCountIsNine
+toeFleetNumericABIRequiresIndependentEvidence :
+  FleetGapTOE.SpectralNumericABIPromotion → ⊥
+toeFleetNumericABIRequiresIndependentEvidence =
+  FleetGapTOE.fleetSpectralNumericABIPromotionImpossible
 
-unifierCurrent369InteractionCubeStatesIsTwentySeven :
-  CurrentMaxCut.interactionCubeStateCount ≡ 27
-unifierCurrent369InteractionCubeStatesIsTwentySeven =
-  CurrentMaxCut.interactionCubeStateCountIsTwentySeven
+------------------------------------------------------------------------
+-- Quantum-mereology selected-atlas / g-TPS terminal boundary.
+------------------------------------------------------------------------
 
-unifierCurrent369AppraisalFibreStatesIsSevenHundredTwentyNine :
-  CurrentMaxCut.appraisalFibreStateCount ≡ 729
-unifierCurrent369AppraisalFibreStatesIsSevenHundredTwentyNine =
-  CurrentMaxCut.appraisalFibreStateCountIsSevenHundredTwentyNine
+import DASHI.Unified.QuantumMereologyTOEConvergenceExact as QMT
 
-unifierCurrent369SupportIsPositive :
-  CurrentMaxCut.relativeOrientationTrit CurrentTrajectory.supports
-  ≡ CurrentSSP.sspPosOne
-unifierCurrent369SupportIsPositive =
-  CurrentMaxCut.supportOrientationIsPositive
+open QMT public using
+  ( physicalSourceGTPSStillOpen
+  ; physicalHamiltonianAttachmentStillOpen
+  ; physicalPointerWeldStillOpen
+  ; minimizerPullbackStillOpen
+  ; algebraSusceptibilityStillOpen
+  ; thermodynamicMQPTStillOpen
+  ; sameStateHolographicWeldStillOpen
+  ; lorentzianEinsteinPromotionStillOpen
+  ; fleetEigenPriorityStillNonPromoting
+  ; fleetSpectralLabelStillDoesNotIdentifyOwner
+  )
 
-unifierCurrent369CounterIsNegative :
-  CurrentMaxCut.relativeOrientationTrit CurrentTrajectory.counters
-  ≡ CurrentSSP.sspNegOne
-unifierCurrent369CounterIsNegative =
-  CurrentMaxCut.counterOrientationIsNegative
+unifierQuantumMereologyTOEReceipt : QMT.QuantumMereologyTOEReceipt
+unifierQuantumMereologyTOEReceipt =
+  QMT.canonicalQuantumMereologyTOEReceipt
 
-unifierCurrent369SynthesisDoesNotEraseComparator :
-  CurrentMaxCut.synthesisErasesComparator ≡ false
-unifierCurrent369SynthesisDoesNotEraseComparator =
-  CurrentMaxCut.synthesisErasesComparatorIsFalse
-
-unifierCurrentFiniteRGStillDoesNotPromoteContinuum :
-  CurrentMaxCut.finiteRGCreatesContinuumPromotion ≡ false
-unifierCurrentFiniteRGStillDoesNotPromoteContinuum =
-  CurrentMaxCut.finiteRGCreatesContinuumPromotionIsFalse
+unifierQuantumMereologyTOEReceiptZKPFrame : ParetoSnowballTOE.TOEZKPFrame
+unifierQuantumMereologyTOEReceiptZKPFrame =
+  QMT.canonicalQuantumMereologyTOEZKPFrame
