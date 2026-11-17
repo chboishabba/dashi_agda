@@ -156,6 +156,66 @@ check("task algorithm action defect zero",
 check("heldout memorizer action defect two",
       action_defect(phase_wrong)==2)
 
+# Real arithmetic error certification for explicit fixed-point/rational
+# quantizer tolerances. This is an INDEPENDENT bounded source fixture,
+# not an inference about torch's float kernels or calibrated checkpoint.
+from fractions import Fraction as F
+w_exact=(F(2),F(-1),F(1))
+x_exact=(F(1),F(2),F(-1))
+histories_exact=[
+    (F(1),F(0),F(1)),(F(-1),F(2),F(0)),
+    (F(0),F(1),F(-1)),(F(3),F(0),F(0))]
+def dot(a,b): return sum(aa*bb for aa,bb in zip(a,b))
+def exact_fuse(weight,xx):
+    return (weight[0]*xx[0]+weight[1]*xx[2]+weight[2]*xx[1],
+            weight[0]*xx[1]+weight[1]*xx[0]+weight[2]*xx[2],
+            weight[0]*xx[2]+weight[1]*xx[1]+weight[2]*xx[0])
+epsw=(F(1,64),)*3
+epsx=(F(1,32),)*3
+epsh=(F(1,16),)*3
+couplings=(((0,0),(1,2),(2,1)),
+           ((0,1),(1,0),(2,2)),
+           ((0,2),(1,1),(2,0)))
+du_max=[
+    sum(abs(w_exact[k])*epsx[l] +
+        epsw[k]*abs(x_exact[l]) + epsw[k]*epsx[l]
+        for k,l in couplings[j])
+    for j in range(3)]
+u_exact=exact_fuse(w_exact,x_exact)
+dw=(epsw[0],-epsw[1],epsw[2])
+dx=(-epsx[0],epsx[1],-epsx[2])
+dh=(epsh[0],-epsh[1],epsh[2])
+w_q=tuple(aa+bb for aa,bb in zip(w_exact,dw))
+x_q=tuple(aa+bb for aa,bb in zip(x_exact,dx))
+source_scores=[]
+quant_scores=[]
+certified_budget=[]
+for h in histories_exact:
+    h_q=tuple(aa+bb for aa,bb in zip(h,dh))
+    exact_score=dot(u_exact,h)
+    q_score=dot(exact_fuse(w_q,x_q),h_q)
+    bound=sum(du_max[j]*abs(h[j]) +
+              (abs(u_exact[j])+du_max[j])*epsh[j]
+              for j in range(3))
+    if abs(q_score-exact_score)>bound:
+        raise AssertionError("quantized source score exceeds admitted bound")
+    source_scores.append(exact_score)
+    quant_scores.append(q_score)
+    certified_budget.append(bound)
+check("rational four-expert source/input/head/history budget enclosure",True)
+selected_set=set(sorted_ids(source_scores)[:2])
+margin_safe=all(
+    source_scores[i]-certified_budget[i] >
+    source_scores[j]+certified_budget[j]
+    for i in selected_set for j in range(4) if j not in selected_set)
+check("rational four-expert top2 decision certified by budget",margin_safe)
+check("rational four-expert selection actually preserved",
+      set(sorted_ids(quant_scores)[:2])==selected_set)
+# If score budgets are not strict enough, no safety claim is made
+# even if a particular observed quantized route happens to agree.
+check("strict budget is sufficient, not necessary",
+      source_scores[3]>source_scores[2])
+
 print("X369_SOURCE_FOUR_GATES_SYMPY_PASS",len(checks),
       "grouped checks; strict_top2=",top2_certificates,
       "same_order=",top2_ordered)
