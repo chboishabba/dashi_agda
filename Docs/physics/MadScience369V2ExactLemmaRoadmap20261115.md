@@ -423,3 +423,12 @@ The internal shaft S **cancels** and must not be counted as an independent input
 **Acceptance:** 41 new tests, **242/242 selected integrated local tests PASS** with previous 201 modules; exact Git blob staging and PR commit `f0a9d67f969b391f73516b59b8243fd21e1ef4c7` for 21 prior and current source, tests and compact receipts. The old *legacy PWM* historical donor module is not part of this selected run. Agda pinned kernel and connected-head GitHub Actions: **NOT RUN**.
 
 **Remaining highest-alpha acceptance:** `v2HOriginal45WIdentifiabilityAndIntervention` and `v2EFWholeDrivetrainVariableEfficiencyLoadResponse` demand simultaneous real shaft torque, speed, motor and auxiliary electrical power, other outputs and storage state; `v2CDRealSwitchingEnergyMapAndThermalFlow` demands original converter topology and measured switching losses. `v2GSourceBoundedGloballyRobustPhysicalPareto`, full Ω source-qualified calibration, and all **16 original strict P0–P4 gates remain OPEN**. Cable geometry remains conditional, not a primary steelman tranche.
+
+
+## 2026-11-17 — Ω factorial measurement pre-registration (efficiency-first H/E×F maximum cut)
+
+**New proof note:** [MadScience369V2OmegaFactorialMeasurementProtocolMaxCut20261117.md](MadScience369V2OmegaFactorialMeasurementProtocolMaxCut20261117.md). Defined load×recovery four-arm signed interaction and balanced eight-run palindrome; independent motor/shaft/generator and whole-system energy checks; per-run matched storage endpoints; deterministic worst-case port and interaction error; missing-measurement, inconsistent-ledger, nonlinear-carryover and drift limitations.
+
+**Model-level result:** 25 new tests PASS; **267/267 selected A–H/Ω Python tests PASS** locally. The blank 32-row original-machine measurement template has no fabricated values. These tested executable files and extended receipts remain local in a downloadable bundle and are NOT yet committed to this PR. The new GitHub proof note is an admission/acceptance roadmap, not original-V2 measurement evidence.
+
+**Open strong gates:** `v2HOriginalSourceSelectedAllPortExperimentalReceipt`, `v2HCalibratedInstrumentErrorAndCarryoverCertificate`, `v2EFSeparatedMotorAndGeneratorStorageWeld`, `v2CDRealRecoveryTopologySwitchingLossReceipt`, `v2GIdentifiedRobustPhysicalPareto`, pinned Agda kernel, plus all **16 original strict P0–P4 gates**. No original V2 data or connected-head CI were tested.
