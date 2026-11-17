@@ -6,26 +6,31 @@ Maxwell light-cone support or independent environmental work.
 import sympy as S
 from smith_filsinger_lorentz_ade_sympy import LorentzMaterial,curl_matrix,energy
 
-def local_spec(n=3, material=None, load=0, curl=None):
+def local_spec(n=3, material=None, load=0, curl=None, layers=None):
     if not isinstance(n,int) or n<1:raise ValueError('n positive integer')
     m=(material or LorentzMaterial()).validated()
+    layer_materials=tuple(LorentzMaterial(**q).validated() if isinstance(q,dict) else q.validated() for q in layers) if layers is not None else (m,)*n
+    if len(layer_materials)!=n:raise ValueError('one material per cell required')
     load=S.sympify(load)
     if load.is_nonnegative is not True:raise ValueError('nonnegative receiver load')
     C=curl_matrix(n) if curl is None else S.Matrix(curl)
     if C.shape!=(n,n):raise ValueError('curl shape')
-    M=S.diag(*([m.eps]*n+[m.mu]*n+
-               [m.omega0sq/m.alpha]*n+[S.Integer(1)/m.alpha]*n))
-    return dict(n=n,material=m,load=load,curl=C,mass=M)
+    M=S.diag(*([q.eps for q in layer_materials]+[q.mu for q in layer_materials]+
+               [q.omega0sq/q.alpha for q in layer_materials]+
+               [S.Integer(1)/q.alpha for q in layer_materials]))
+    return dict(n=n,material=m,materials=layer_materials,load=load,curl=C,mass=M)
 
 def edge_updates(spec):
-    n,m,C=spec['n'],spec['material'],spec['curl']
+    n,C=spec['n'],spec['curl']
+    materials=spec['materials']
     edges=[]
     for i in range(n):
         for j in range(n):
             if C[i,j]!=0:
-                edges.append(('curl',i,n+j,S.cancel(C[i,j]/m.eps),
-                              S.cancel(-C[i,j]/m.mu)))
+                edges.append(('curl',i,n+j,S.cancel(C[i,j]/materials[i].eps),
+                              S.cancel(-C[i,j]/materials[j].mu)))
     for i in range(n):
+        m=materials[i]
         edges.append(('polar_E_V',i,3*n+i,-1/m.eps,m.alpha))
         edges.append(('polar_P_V',2*n+i,3*n+i,S.Integer(1),-m.omega0sq))
         if m.sigma>0:edges.append(('ohmic',i,i,-m.sigma/m.eps,S.Integer(0)))
@@ -69,11 +74,11 @@ def cayley_edge_step(spec,z,edge,dt=S.Rational(1,4)):
                 work=predicted,support=tuple(support))
 
 def source_kick(spec,z,cell,current,dt=S.Rational(1,4),origin='natural'):
-    n,m=spec['n'],spec['material'];dt=S.sympify(dt);j=S.sympify(current)
+    n=spec['n'];dt=S.sympify(dt);j=S.sympify(current)
     if not 0<=cell<n:raise ValueError('local source cell')
     if dt.is_positive is not True:raise ValueError('dt>0')
     if origin not in ('natural','controller'):raise ValueError('source ownership')
-    after=z.copy();after[cell]=S.factor(z[cell]+dt*j/m.eps)
+    after=z.copy();after[cell]=S.factor(z[cell]+dt*j/spec['materials'][cell].eps)
     change=S.factor(energy(after,spec['mass'])-energy(z,spec['mass']))
     supplied=S.factor(dt*j*(z[cell]+after[cell])/2)
     assert S.factor(change-supplied)==0
