@@ -133,7 +133,7 @@ observationalCloudRainAssociationDoesNotWeld infer =
 record OriginalElectricalRegimeWeld
   (b : Weld.SelectedBoundary)
   (f : Weld.FormalFieldToPort b)
-  (w : Weld.SignedSourceCycleWeld b f) : Set₁ where
+  (w : Weld.SignedSourceCycleWeld b f) : Set₂ where
   field
     ActualPinCompleteCircuit : Set
     TimeAlignedElectricalSwitchAndVITrace : Set
