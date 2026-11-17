@@ -44,6 +44,10 @@ def theorem():
     ck("E2 exact eigenstate",BASE*E2==(D-S)*E2)
     ck("E degeneracy source",sp.simplify((BASE*E1)[0]+(BASE*E1)[1])==0)
     ck("selected source p2 Coulomb scalar",SOURCE_SCALAR_COULOMB==sp.diag(*([sp.Rational(21,128)]*3)))
+    # The BP + scalar computation is ONLY an abstract 3x3 identity; P2
+    # hydrogenic common-spin antisymmetric and GaAs XYZ Bloch sectors are
+    # different physical Hilbert spaces and cannot be added as a GaAs
+    # material Hamiltonian without a separately verified same-object weld.
     ck("scalar p2 preserves A1", (BASE+SOURCE_SCALAR_COULOMB)*A1==(D+2*S+sp.Rational(21,128))*A1)
     ck("scalar p2 preserves E1", (BASE+SOURCE_SCALAR_COULOMB)*E1==(D-S+sp.Rational(21,128))*E1)
     ck("scalar p2 preserves E2", (BASE+SOURCE_SCALAR_COULOMB)*E2==(D-S+sp.Rational(21,128))*E2)
@@ -61,7 +65,8 @@ def theorem():
        "source":"Original DASHI GaAs111BirPikusC3vFiniteExact, Atom P2 Coulomb (21/128)I3",
        "exact_A1_eigenvalue":"D + 2*S",
        "exact_E_eigenvalue":"D - S (double)",
-       "selected_p2_scalar_shift":"21/128 common",
+       "selected_p2_scalar_shift":"21/128 common abstract scalar illustration ONLY; physically different Hilbert sector",
+       "forbid_importing_p2_scalar_as_measured_GaAs_BirPikus_energy":True,
        "source_C3v_BirPikus_and_scalar_p2_alone_369_specific_advantage":False,
        "new_physical_anisotropy_must_be_source_backed":True,
        "GaAs_full_spinful_8band_or_optical_response_certified":False,
