@@ -12,7 +12,7 @@ module DASHI.Physics.Motors.SmithFilsingerIndexedCayleyFaceWeldExact where
 
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Bool using (false)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _-_; _*_)
 
@@ -53,6 +53,28 @@ indexedCayleyPrimitive e =
     (Indexed.DirectedFace.source (originalFace e))
     (Indexed.DirectedFace.target (originalFace e))
     (Midpoint.CertifiedHalfStep.cayley (halfStep e))
+
+-- The selected old primitive carries exactly the same source and
+-- target IDs as the original DirectedFace. This is the essential
+-- source-object identity, not a separate nominal face reference.
+indexedSourceIDExact :
+  (e : IndexedCayleyFace) →
+  Frame.LocalPrimitive.firstID (indexedCayleyPrimitive e)
+    ≡ Indexed.DirectedFace.source (originalFace e)
+indexedSourceIDExact e = refl
+
+indexedTargetIDExact :
+  (e : IndexedCayleyFace) →
+  Frame.LocalPrimitive.secondID (indexedCayleyPrimitive e)
+    ≡ Indexed.DirectedFace.target (originalFace e)
+indexedTargetIDExact e = refl
+
+indexedGuardedSamePrimitive :
+  (e : IndexedCayleyFace) →
+  Reach.GuardedPrimitive.primitive
+    (Cayley.guardedDistinctCayleyEdge (indexedCayleyEdge e))
+      ≡ indexedCayleyPrimitive e
+indexedGuardedSamePrimitive e = refl
 
 indexedCayleyZero :
   (e : IndexedCayleyFace) →
