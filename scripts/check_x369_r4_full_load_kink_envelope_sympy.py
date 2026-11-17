@@ -78,16 +78,18 @@ for (left,right,pair),y,z in zip(regions,responses,expected):
 # positive up to 19/9, negative from 19/9 until 14/5,
 # and identically zero after the selection collapse.
 for n,z in enumerate(expected):
-    dz=S.simplify(S.diff(z,t))
+    # Keep derivative unreduced: sympy.simplify may rewrite logistic
+    # derivatives to cosh forms that a later simplify cannot cancel.
+    dz=S.diff(z,t)
     if n<2:
         chk(f"strict initial facilitation derivative {n}",
-            S.simplify(dz-4*z*(1-z))==0)
+            S.cancel(S.together(dz-4*z*(1-z)))==0)
     elif n<3:
         chk(f"first decline derivative {n}",
-            S.simplify(dz+5*z*(1-z))==0)
+            S.cancel(S.together(dz+5*z*(1-z)))==0)
     elif n<5:
         chk(f"overload competition decline derivative {n}",
-            S.simplify(dz+7*z*(1-z))==0)
+            S.cancel(S.together(dz+7*z*(1-z)))==0)
     else:
         chk("collapsed source output is zero after final cutoff",dz==0)
 # Cusp at first replacement has matching response but opposite
@@ -141,7 +143,7 @@ for q,ids,nat in [(0,(0,1),0),(1,(0,1),2),
 forced=chosen_response((0,1))
 chk("fixed-route source output monotone all nonnegative loads",
     S.simplify(forced-logistic(4*t-5))==0
-    and S.simplify(S.diff(forced,t)-4*forced*(1-forced))==0)
+    and S.cancel(S.together(S.diff(forced,t)-4*forced*(1-forced)))==0)
 print("X369_R4_FULL_LOAD_ENVELOPE_SYMPY_PASS",len(checks))
 print("FULL_LOAD_STRICT_REGIMES")
 for left,right,pair in regions:
