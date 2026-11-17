@@ -723,42 +723,11 @@ record DASHIUnificationAxiom : Set₁ where
 DASHI-Unification-Theorem : Set₁
 DASHI-Unification-Theorem = DASHIUnificationAxiom
 
+-- Reuse the proved IIT/ternary-cube owners. These imports add no physical
+-- promotion and do not depend on any ESD surface.
+import DASHI.Biology.IITFullStructureHigherFaceNonDescentExact
+import DASHI.Biology.IITCubeTrinificationSymmetryBreakingExact
+import DASHI.Biology.IITHigherOrderGluingDiscriminationExact
+import DASHI.Biology.IITParityGluingConjectureMaxCutExact
 
-------------------------------------------------------------------------
--- TOE Yang-Mills non-promotion reuse.
-------------------------------------------------------------------------
-
-unifierYangMillsPublishedRGDoesNotPromoteContinuum :
-  YMTOE.toeFlat4DContinuumTransferProvedHere ≡ false
-unifierYangMillsPublishedRGDoesNotPromoteContinuum =
-  YMTOE.toePublishedRGDoesNotPromoteContinuum
-
-unifierYangMillsContinuumMassGapNotPromoted :
-  YMTOE.toeContinuumMassGapPromoted ≡ false
-unifierYangMillsContinuumMassGapNotPromoted =
-  YMTOE.toeContinuumMassGapPromotedIsFalse
-
-unifierYangMillsClayNotPromoted :
-  YMTOE.toeClayYangMillsPromoted ≡ false
-unifierYangMillsClayNotPromoted =
-  YMTOE.toeClayYangMillsPromotedIsFalse
-
-------------------------------------------------------------------------
--- Antigravity S4 / P3G TOE reuse.
-------------------------------------------------------------------------
-
-unifierYangMillsAntigravityS4CompilerLevel : ProofLevel
-unifierYangMillsAntigravityS4CompilerLevel =
-  YMTOE.toeAntigravityS4PhysicalMinCutCompilerLevel
-
-unifierYangMillsAntigravityP3GCompilerLevel : ProofLevel
-unifierYangMillsAntigravityP3GCompilerLevel =
-  YMTOE.toeAntigravityP3GPhysicalProducerCompilerLevel
-
-unifierYangMillsAntigravityInitialSharedCouplingLevel : ProofLevel
-unifierYangMillsAntigravityInitialSharedCouplingLevel =
-  YMTOE.toeAntigravityP3GInitialSharedCouplingLevel
-
-unifierYangMillsAntigravityLocalRemainderLevel : ProofLevel
-unifierYangMillsAntigravityLocalRemainderLevel =
-  YMTOE.toeAntigravityP3GLocalRemainderLevel
+import DASHI.Unified.IITExactNonPromotion
