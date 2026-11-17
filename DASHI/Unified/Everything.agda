@@ -1,7 +1,5 @@
 module DASHI.Unified.Everything where
-import DASHI.Analysis.RiemannMarkedCompletedTraceArithmeticAuditExact as RHPrimeAudit
-import DASHI.Analysis.RiemannThreeTapCurrentLeanFrontierExact as RHThreeTapFrontier
-import DASHI.Analysis.RiemannThreeTapTerminalCompletionLeanDonorExact as RHTerminal
+import DASHI.Finance.SolarBatteryArbitrageFeasibilityExact as BatteryArbitrageTOE
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Physics.Closure.NSABCDConcentratedCompletionCutExact as NSCut
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
@@ -306,7 +304,212 @@ unifiedEvidenceObservationDoesNotPromoteApplicability :
 unifiedEvidenceObservationDoesNotPromoteApplicability =
   SLREvidence.observationDoesNotPromoteApplicability
 
-unifiedEvidenceDoesNotCreateDigitalESDAdmission :
-  SLREvidence.CanonicalEvidenceCreatesDigitalESDAdmission → ⊥
-unifiedEvidenceDoesNotCreateDigitalESDAdmission =
-  SLREvidence.canonicalEvidenceDoesNotCreateDigitalESDAdmission
+unifiedFleetDischargedCoreKnowledgeFibres : ℕ
+unifiedFleetDischargedCoreKnowledgeFibres =
+  FleetGapTOE.dischargedCoreKnowledgeFibres
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
+
+unifiedFleetDischargedCoreKnowledgeFibresIs584 :
+  unifiedFleetDischargedCoreKnowledgeFibres ≡ 584
+unifiedFleetDischargedCoreKnowledgeFibresIs584 =
+  FleetGapTOE.fleetRecordedDischargedCountIs584
+
+unifiedFleetPolarityContradictionGaps : ℕ
+unifiedFleetPolarityContradictionGaps =
+  FleetGapTOE.polarityContradictionGaps
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
+
+unifiedFleetPolarityContradictionGapsIs44 :
+  unifiedFleetPolarityContradictionGaps ≡ 44
+unifiedFleetPolarityContradictionGapsIs44 =
+  FleetGapTOE.fleetRecordedContradictionCountIs44
+
+unifiedFleetUnformalisedFormalGaps : ℕ
+unifiedFleetUnformalisedFormalGaps =
+  FleetGapTOE.unformalisedFormalGaps
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
+
+unifiedFleetUnformalisedFormalGapsIs58 :
+  unifiedFleetUnformalisedFormalGaps ≡ 58
+unifiedFleetUnformalisedFormalGapsIs58 =
+  FleetGapTOE.fleetRecordedUnformalisedGapCountIs58
+
+unifiedFleetTargetsOnlyUnformalisedFormalGaps :
+  FleetGapTOE.targetOnlyUnformalisedFormalGaps
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
+  ≡ true
+unifiedFleetTargetsOnlyUnformalisedFormalGaps =
+  FleetGapTOE.fleetTargetsOnlyUnformalisedFormalGaps
+
+
+------------------------------------------------------------------------
+-- Fleet named-manifest acquisition boundary.
+------------------------------------------------------------------------
+
+unifiedFleetManifestAcquisitionDemand =
+  FleetGapTOE.fleetManifestAcquisitionDemand
+
+unifiedFleetNamedManifestStillMissing :
+  FleetGapTOE.namedFormalGapManifestAcquired ≡ false
+unifiedFleetNamedManifestStillMissing =
+  FleetGapTOE.namedFormalGapManifestAcquiredIsFalse
+
+unifiedFleetPerGapDispatchStillBlocked :
+  FleetGapTOE.perGapDispatchEnabled ≡ false
+unifiedFleetPerGapDispatchStillBlocked =
+  FleetGapTOE.perGapDispatchEnabledIsFalse
+
+unifiedFleetRelatedSymbolsRequired :
+  FleetGapTOE.fleetRelatedSymbolsRequired ≡ true
+unifiedFleetRelatedSymbolsRequired =
+  FleetGapTOE.fleetRelatedSymbolsRequiredIsTrue
+
+unifiedFleetDiscoverRequired :
+  FleetGapTOE.fleetDiscoverRequired ≡ true
+unifiedFleetDiscoverRequired =
+  FleetGapTOE.fleetDiscoverRequiredIsTrue
+
+unifiedFleetRoundLineageRequired :
+  FleetGapTOE.fleetRoundLineageRequired ≡ true
+unifiedFleetRoundLineageRequired =
+  FleetGapTOE.fleetRoundLineageRequiredIsTrue
+
+unifiedFleetCountDoesNotCreateNamedManifest :
+  FleetGapTOE.CountCreatesNamedManifest → ⊥
+unifiedFleetCountDoesNotCreateNamedManifest =
+  FleetGapTOE.fleetCountDoesNotCreateNamedManifest
+
+------------------------------------------------------------------------
+-- Direct Pareto / snowball / Ibrahim and ternary-27 non-promotion surface.
+------------------------------------------------------------------------
+
+unifiedIbrahimSearchPriorityDoesNotCreateProof :
+  ParetoSnowballTOE.SearchPriorityCreatesProof → ⊥
+unifiedIbrahimSearchPriorityDoesNotCreateProof =
+  ParetoSnowballTOE.searchPriorityDoesNotCreateProof
+
+unifiedIbrahimProducerSourceDoesNotCreateRunReceipt :
+  ParetoSnowballTOE.ProducerSourceCreatesRunReceipt → ⊥
+unifiedIbrahimProducerSourceDoesNotCreateRunReceipt =
+  ParetoSnowballTOE.producerSourceDoesNotCreateRunReceipt
+
+unifiedIbrahimDegree729DoesNotCreateMonsterHZetaRecognition :
+  ParetoSnowballTOE.Degree729CreatesMonsterHZetaRecognition → ⊥
+unifiedIbrahimDegree729DoesNotCreateMonsterHZetaRecognition =
+  ParetoSnowballTOE.degree729DoesNotCreateMonsterHZetaRecognition
+
+unifiedIbrahimPaperOracleDoesNotIdentifyHistoricalDump :
+  ParetoSnowballTOE.PaperOracleIdentifiesDump → ⊥
+unifiedIbrahimPaperOracleDoesNotIdentifyHistoricalDump =
+  ParetoSnowballTOE.paperOracleDoesNotIdentifyHistoricalDump
+
+unifiedIbrahimRoutePreferenceDoesNotCreateExecutionReceipt :
+  ParetoSnowballTOE.RoutePreferenceCreatesExecutionReceipt → ⊥
+unifiedIbrahimRoutePreferenceDoesNotCreateExecutionReceipt =
+  ParetoSnowballTOE.routePreferenceDoesNotCreateExecutionReceipt
+
+unifiedIbrahimMergedLeanSourceDoesNotCreateKernelReceipt :
+  ParetoSnowballTOE.MergedLeanSourceCreatesKernelReceipt → ⊥
+unifiedIbrahimMergedLeanSourceDoesNotCreateKernelReceipt =
+  ParetoSnowballTOE.mergedLeanSourceDoesNotCreateKernelReceipt
+
+unifiedIbrahimOEISDoesNotCreateMultiplicityAction :
+  ParetoSnowballTOE.NinetyOEISEqualityCreatesMultiplicityAction → ⊥
+unifiedIbrahimOEISDoesNotCreateMultiplicityAction =
+  ParetoSnowballTOE.oeisDoesNotCreateMultiplicityAction
+
+unifiedIbrahimFiniteIrreducibilityDoesNotCreateMonsterHZetaRecognition :
+  ParetoSnowballTOE.FiniteIrreducibilityCreatesMonsterHZetaRecognition → ⊥
+unifiedIbrahimFiniteIrreducibilityDoesNotCreateMonsterHZetaRecognition =
+  ParetoSnowballTOE.finiteIrreducibilityDoesNotCreateMonsterHZetaRecognition
+
+unifiedIbrahimCurrentQidDoesNotIdentifyHistoricalTitle :
+  ParetoSnowballTOE.CurrentQidIdentifiesHistoricalTitle → ⊥
+unifiedIbrahimCurrentQidDoesNotIdentifyHistoricalTitle =
+  ParetoSnowballTOE.currentQidDoesNotIdentifyHistoricalTitle
+
+unified369Ternary27MonsterRepresentationNotPromoted =
+  MaxCut369.toe27MonsterRepresentationNotPromoted
+
+unified369Ternary27MonsterEmbeddingNotPromoted =
+  MaxCut369.toe27MonsterEmbeddingNotPromoted
+
+------------------------------------------------------------------------
+-- Live Gate-4 frontier and Fleet target selection.
+------------------------------------------------------------------------
+
+unifiedCurrentGate4FrontierLedgerLevel : ProofLevel
+unifiedCurrentGate4FrontierLedgerLevel =
+  FleetHyperTOE.currentGate4FrontierLedgerLevel
+
+unifiedCurrentGate4ClusteringToTransferGapLevel : ProofLevel
+unifiedCurrentGate4ClusteringToTransferGapLevel =
+  FleetHyperTOE.currentGate4ClusteringToTransferGapLevel
+
+unifiedFleetFormalGapTargetSelected : Bool
+unifiedFleetFormalGapTargetSelected =
+  FleetHyperTOE.fleetFormalGapTargetSelected
+
+unifiedHistoricalGate4CountSelectedAsFleetTarget : Bool
+unifiedHistoricalGate4CountSelectedAsFleetTarget =
+  FleetHyperTOE.historicalGate4CountSelectedAsFleetTarget
+
+unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
+  FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
+unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
+  FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+
+------------------------------------------------------------------------
+-- Solar / battery / grid arbitrage feasibility boundary.
+------------------------------------------------------------------------
+
+toeBatteryArbitrageZKPFrame :
+  BatteryArbitrageTOE.BatteryArbitrageZKPFrame
+toeBatteryArbitrageZKPFrame =
+  BatteryArbitrageTOE.canonicalBatteryArbitrageZKPFrame
+
+toeBatteryGrossSpreadDoesNotCreateNetProfit :
+  BatteryArbitrageTOE.GrossSpreadCreatesNetProfit → ⊥
+toeBatteryGrossSpreadDoesNotCreateNetProfit =
+  BatteryArbitrageTOE.grossSpreadDoesNotCreateNetProfit
+
+toeBatteryLowHouseholdLoadDoesNotCapTradableThroughput :
+  BatteryArbitrageTOE.LowHouseholdLoadCapsTradableThroughput → ⊥
+toeBatteryLowHouseholdLoadDoesNotCapTradableThroughput =
+  BatteryArbitrageTOE.lowHouseholdLoadDoesNotCapTradableThroughput
+
+toeBatteryTariffSnapshotDoesNotCreateFutureTariff :
+  BatteryArbitrageTOE.TariffSnapshotCreatesFutureTariff → ⊥
+toeBatteryTariffSnapshotDoesNotCreateFutureTariff =
+  BatteryArbitrageTOE.tariffSnapshotDoesNotCreateFutureTariff
+
+toeBatterySmartMeterDoesNotCreateSavings :
+  BatteryArbitrageTOE.SmartMeterCreatesSavings → ⊥
+toeBatterySmartMeterDoesNotCreateSavings =
+  BatteryArbitrageTOE.smartMeterDoesNotCreateSavings
+
+toeBatterySeparateEVNMIDoesNotCreateApartmentTariffEligibility :
+  BatteryArbitrageTOE.SeparateEVNMICreatesApartmentTariffEligibility → ⊥
+toeBatterySeparateEVNMIDoesNotCreateApartmentTariffEligibility =
+  BatteryArbitrageTOE.separateEVNMIDoesNotCreateApartmentTariffEligibility
+
+toeBatteryCommonPropertySolarDoesNotCreateApartmentAccess :
+  BatteryArbitrageTOE.CommonPropertySolarCreatesApartmentAccess → ⊥
+toeBatteryCommonPropertySolarDoesNotCreateApartmentAccess =
+  BatteryArbitrageTOE.commonPropertySolarDoesNotCreateApartmentAccess
+
+toeBatteryExistingConduitDoesNotCreateElectricalCompatibility :
+  BatteryArbitrageTOE.ExistingConduitCreatesElectricalCompatibility → ⊥
+toeBatteryExistingConduitDoesNotCreateElectricalCompatibility =
+  BatteryArbitrageTOE.existingConduitDoesNotCreateElectricalCompatibility
+
+toeBatteryRetailerIncentiveDoesNotCreateGuaranteedPayback :
+  BatteryArbitrageTOE.RetailerIncentiveCreatesGuaranteedPayback → ⊥
+toeBatteryRetailerIncentiveDoesNotCreateGuaranteedPayback =
+  BatteryArbitrageTOE.retailerIncentiveDoesNotCreateGuaranteedPayback
+
+toeBatterySourceExampleDoesNotCreateUniversalOptimalBatterySize :
+  BatteryArbitrageTOE.SourceExampleCreatesUniversalOptimalBatterySize → ⊥
+toeBatterySourceExampleDoesNotCreateUniversalOptimalBatterySize =
+  BatteryArbitrageTOE.sourceExampleDoesNotCreateUniversalOptimalBatterySize
+

@@ -1,5 +1,15 @@
 import DASHI.Unified.GovernedLegalWorkflowComplianceTOEExact as LegalCompliance
 module DASHI.EverythingTOESymmetryResolved369 where
+import DASHI.Finance.SolarBatteryArbitrageFeasibilityExact as BatteryArbitrageTOE
+import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
+import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
+import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
+import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
+import DASHI.Unified.SingularBasinCoarseRGTOEExact as SingularBasinTOE
+import DASHI.Unified.BrainFMRI as BrainFMRI
+import DASHI.Physics.Closure.BrainConnectomeFMRIObservationQuotient as BrainObservation
+import DASHI.Physics.Closure.BidirectionalBrainObservationQuotient as BrainBidirectional
+import DASHI.Unified.InvariantSpine as BrainSpine
 
 import DASHI.Unified.SensibLawGovernanceTOEExact as GovernanceTOE
 import DASHI.Unified.SensibLawGovernanceComplianceTOEExact as ComplianceTOE
@@ -1155,24 +1165,378 @@ toeBalabanOSWightmanStillBlocked =
 -- This is the evidence layer, not an Actionstep or law applicability proof.
 ------------------------------------------------------------------------
 
-import DASHI.Interop.SLRCanonicalEvidenceSubstrateExact as SLREvidence
+toeBalabanPhysicalPromotionCut :
+  (BalabanR559TOE.balabanBlockSpinTransfer
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false)
+  × (BalabanR559TOE.balabanUniformKPAbsorption
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false)
+  × (BalabanR559TOE.balabanOSWightmanConstruction
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false)
+toeBalabanPhysicalPromotionCut =
+  toeBalabanBlockSpinStillBlocked ,
+  (toeBalabanUniformKPStillBlocked ,
+   toeBalabanOSWightmanStillBlocked)
 
-toeEvidenceManifestationDoesNotCreateSemanticAuthority :
-  SLREvidence.ManifestationCreatesSemanticAuthority → ⊥
-toeEvidenceManifestationDoesNotCreateSemanticAuthority =
-  SLREvidence.manifestationDoesNotCreateSemanticAuthority
+import DASHI.Unified.NavierStokesBM2TOEConvergenceExact as NSBM2TOE
 
-toeEvidenceObservationDoesNotCreateClaimTruth :
-  SLREvidence.ObservationCreatesClaimTruth → ⊥
-toeEvidenceObservationDoesNotCreateClaimTruth =
-  SLREvidence.observationDoesNotCreateClaimTruth
+open NSBM2TOE public using
+  ( LiteralR571DissipationFold
+  ; ExactLiteralR571DissipationFold
+  ; literalR571M2BelowPhysicalDissipation
+  ; exactLiteralR571M2BelowPhysicalDissipation
+  )
+------------------------------------------------------------------------
+-- Navier-Stokes B / R571 M2 producer-strategy TOE surface.
+------------------------------------------------------------------------
 
-toeEvidenceObservationDoesNotPromoteApplicability :
-  SLREvidence.ObservationPromotesApplicability → ⊥
-toeEvidenceObservationDoesNotPromoteApplicability =
-  SLREvidence.observationDoesNotPromoteApplicability
+toeNavierStokesBM2FiniteFoldClosed : Bool
+toeNavierStokesBM2FiniteFoldClosed =
+  NSBM2TOE.cardinalityFreeFiniteFoldClosed
 
-toeEvidenceDoesNotCreateDigitalESDAdmission :
-  SLREvidence.CanonicalEvidenceCreatesDigitalESDAdmission → ⊥
-toeEvidenceDoesNotCreateDigitalESDAdmission =
-  SLREvidence.canonicalEvidenceDoesNotCreateDigitalESDAdmission
+toeNavierStokesBM2FiniteFoldClosedIsTrue :
+  toeNavierStokesBM2FiniteFoldClosed ≡ true
+toeNavierStokesBM2FiniteFoldClosedIsTrue =
+  NSBM2TOE.cardinalityFreeFiniteFoldClosedIsTrue
+
+toeNavierStokesBM2SamplewisePaymentStillAnalytic :
+  NSBM2TOE.samplewisePhysicalPaymentStillAnalytic ≡ true
+toeNavierStokesBM2SamplewisePaymentStillAnalytic =
+  NSBM2TOE.samplewisePhysicalPaymentStillAnalyticIsTrue
+
+toeNavierStokesBM2GalerkinFoldStillAnalytic :
+  NSBM2TOE.literalFoldIntoGalerkinDissipationStillAnalytic ≡ true
+toeNavierStokesBM2GalerkinFoldStillAnalytic =
+  NSBM2TOE.literalFoldIntoGalerkinDissipationStillAnalyticIsTrue
+
+toeNavierStokesBM2OldPDFB1B2B3B4NotMandatory :
+  NSBM2TOE.oldPDFB1B2B3B4Mandatory ≡ false
+toeNavierStokesBM2OldPDFB1B2B3B4NotMandatory =
+  NSBM2TOE.oldPDFB1B2B3B4MandatoryIsFalse
+
+toeNavierStokesBM2OldPDFB7NotMandatory :
+  NSBM2TOE.oldPDFB7DirectCovarianceEqualityMandatory ≡ false
+toeNavierStokesBM2OldPDFB7NotMandatory =
+  NSBM2TOE.oldPDFB7DirectCovarianceEqualityMandatoryIsFalse
+
+toeNavierStokesBM2ClayPromotion : Bool
+toeNavierStokesBM2ClayPromotion =
+  NSBM2TOE.modernNSClayPromotion
+
+toeNavierStokesBM2ClayPromotionStillFalse :
+  toeNavierStokesBM2ClayPromotion ≡ false
+toeNavierStokesBM2ClayPromotionStillFalse =
+  NSBM2TOE.modernNSClayPromotionStillFalse
+
+toeNavierStokesBM2Receipt :
+  NSBM2TOE.NavierStokesBM2TOEReceipt
+toeNavierStokesBM2Receipt =
+  NSBM2TOE.canonicalNavierStokesBM2TOEReceipt
+
+toeNavierStokesBM2ZKPFrame :
+  NSBM2TOE.NavierStokesBM2TOEZKPFrame
+toeNavierStokesBM2ZKPFrame =
+  NSBM2TOE.canonicalNavierStokesBM2TOEZKPFrame
+
+------------------------------------------------------------------------
+-- Canonical Navier-Stokes Clay frontier and direct non-promotion exports.
+------------------------------------------------------------------------
+
+import DASHI.Unified.NavierStokesClayFrontierTOEConvergenceExact as NSClayTOE
+
+toeNavierStokesClayPromotion : Bool
+toeNavierStokesClayPromotion =
+  NSClayTOE.navierStokesABCDClayPromotion
+
+toeNavierStokesClayPromotionStillFalse :
+  toeNavierStokesClayPromotion ≡ false
+toeNavierStokesClayPromotionStillFalse =
+  NSClayTOE.navierStokesABCDClayPromotionStillFalse
+
+toeNavierStokesGeneralRegularityComplete : Bool
+toeNavierStokesGeneralRegularityComplete =
+  NSClayTOE.generalNSGlobalRegularityComplete
+
+toeNavierStokesGeneralRegularityStillOpen :
+  toeNavierStokesGeneralRegularityComplete ≡ false
+toeNavierStokesGeneralRegularityStillOpen =
+  NSClayTOE.generalNSGlobalRegularityStillOpen
+
+toeNavierStokesCarrierToGeneralImplicationProved : Bool
+toeNavierStokesCarrierToGeneralImplicationProved =
+  NSClayTOE.carrierToGeneralNSImplicationProved
+
+toeNavierStokesCarrierToGeneralImplicationStillOpen :
+  toeNavierStokesCarrierToGeneralImplicationProved ≡ false
+toeNavierStokesCarrierToGeneralImplicationStillOpen =
+  NSClayTOE.carrierToGeneralNSImplicationStillOpen
+
+toeNavierStokesAuthorityPromotionGuard : Bool
+toeNavierStokesAuthorityPromotionGuard =
+  NSClayTOE.navierStokesPromotionGuard
+
+toeNavierStokesAuthorityPromotionGuardStillFalse :
+  toeNavierStokesAuthorityPromotionGuard ≡ false
+toeNavierStokesAuthorityPromotionGuardStillFalse =
+  NSClayTOE.navierStokesPromotionGuardStillFalse
+
+toeNavierStokesClayFrontierZKPFrame :
+  NSClayTOE.NavierStokesClayFrontierTOEZKPFrame
+toeNavierStokesClayFrontierZKPFrame =
+  NSClayTOE.canonicalNavierStokesClayFrontierTOEZKPFrame
+
+toeNavierStokesTerminalPromotionImpossible :
+  NSClayTOE.NSClayDistanceFinalPromotion → ⊥
+toeNavierStokesTerminalPromotionImpossible =
+  NSClayTOE.terminalClayPromotionImpossible
+
+
+------------------------------------------------------------------------
+-- Current periodic-B shared weighted wall from R736.
+-- Proof ownership remains in R736 through the canonical NS Clay facade.
+------------------------------------------------------------------------
+
+toeNavierStokesSharedWeightedExactlyTwoLeaves : Bool
+toeNavierStokesSharedWeightedExactlyTwoLeaves =
+  NSClayTOE.currentSharedWeightedExactlyTwoLeaves
+
+toeNavierStokesSharedWeightedExactlyTwoLeavesIsTrue :
+  toeNavierStokesSharedWeightedExactlyTwoLeaves ≡ true
+toeNavierStokesSharedWeightedExactlyTwoLeavesIsTrue =
+  NSClayTOE.currentSharedWeightedExactlyTwoLeavesIsTrue
+
+toeNavierStokesSharedWeightedSameCarrier : Bool
+toeNavierStokesSharedWeightedSameCarrier =
+  NSClayTOE.currentSharedWeightedSameCarrier
+
+toeNavierStokesSharedWeightedSameCarrierIsTrue :
+  toeNavierStokesSharedWeightedSameCarrier ≡ true
+toeNavierStokesSharedWeightedSameCarrierIsTrue =
+  NSClayTOE.currentSharedWeightedSameCarrierIsTrue
+
+toeNavierStokesSharedWeightedCarrierIsInputLaplacian : Bool
+toeNavierStokesSharedWeightedCarrierIsInputLaplacian =
+  NSClayTOE.currentSharedWeightedCarrierIsInputLaplacian
+
+toeNavierStokesWeightedPlusEndpointClosed : Bool
+toeNavierStokesWeightedPlusEndpointClosed =
+  NSClayTOE.currentWeightedPlusEndpointClosed
+
+toeNavierStokesWeightedPlusEndpointStillOpen :
+  toeNavierStokesWeightedPlusEndpointClosed ≡ false
+toeNavierStokesWeightedPlusEndpointStillOpen =
+  NSClayTOE.currentWeightedPlusEndpointStillOpen
+
+toeNavierStokesAugmentedCriticalWeightedClosed : Bool
+toeNavierStokesAugmentedCriticalWeightedClosed =
+  NSClayTOE.currentAugmentedCriticalWeightedClosed
+
+toeNavierStokesAugmentedCriticalWeightedStillOpen :
+  toeNavierStokesAugmentedCriticalWeightedClosed ≡ false
+toeNavierStokesAugmentedCriticalWeightedStillOpen =
+  NSClayTOE.currentAugmentedCriticalWeightedStillOpen
+
+toeNavierStokesSharedWeightedLeavesBuildBarrier : Bool
+toeNavierStokesSharedWeightedLeavesBuildBarrier =
+  NSClayTOE.currentSharedWeightedLeavesBuildBarrier
+
+toeNavierStokesSharedWeightedLeavesBuildBarrierIsTrue :
+  toeNavierStokesSharedWeightedLeavesBuildBarrier ≡ true
+toeNavierStokesSharedWeightedLeavesBuildBarrierIsTrue =
+  NSClayTOE.currentSharedWeightedLeavesBuildBarrierIsTrue
+
+toeNavierStokesR726IndependentLeafRequired : Bool
+toeNavierStokesR726IndependentLeafRequired =
+  NSClayTOE.legacyR726IndependentLeafRequired
+
+toeNavierStokesR726IndependentLeafNotRequired :
+  toeNavierStokesR726IndependentLeafRequired ≡ false
+toeNavierStokesR726IndependentLeafNotRequired =
+  NSClayTOE.legacyR726IndependentLeafNotRequired
+
+toeNavierStokesStrictMarginR406IndependentLeafRequired : Bool
+toeNavierStokesStrictMarginR406IndependentLeafRequired =
+  NSClayTOE.legacyStrictMarginR406IndependentLeafRequired
+
+toeNavierStokesStrictMarginR406IndependentLeafNotRequired :
+  toeNavierStokesStrictMarginR406IndependentLeafRequired ≡ false
+toeNavierStokesStrictMarginR406IndependentLeafNotRequired =
+  NSClayTOE.legacyStrictMarginR406IndependentLeafNotRequired
+
+toeNavierStokesBarrierDependentQPlusMinusShortcutAdmissible : Bool
+toeNavierStokesBarrierDependentQPlusMinusShortcutAdmissible =
+  NSClayTOE.barrierDependentQPlusMinusShortcutAdmissible
+
+toeNavierStokesBarrierDependentQPlusMinusShortcutStillCircular :
+  toeNavierStokesBarrierDependentQPlusMinusShortcutAdmissible ≡ false
+toeNavierStokesBarrierDependentQPlusMinusShortcutStillCircular =
+  NSClayTOE.barrierDependentQPlusMinusShortcutStillCircular
+
+toeNavierStokesSharedWeightedClayPromotion : Bool
+toeNavierStokesSharedWeightedClayPromotion =
+  NSClayTOE.currentSharedWeightedClayPromotion
+
+toeNavierStokesSharedWeightedClayPromotionStillFalse :
+  toeNavierStokesSharedWeightedClayPromotion ≡ false
+toeNavierStokesSharedWeightedClayPromotionStillFalse =
+  NSClayTOE.currentSharedWeightedClayPromotionStillFalse
+
+toeNavierStokesContinuumBKMPassageConstructed : Bool
+toeNavierStokesContinuumBKMPassageConstructed =
+  NSClayTOE.continuumBKMPassageConstructed
+
+toeNavierStokesContinuumBKMPassageStillOpen :
+  toeNavierStokesContinuumBKMPassageConstructed ≡ false
+toeNavierStokesContinuumBKMPassageStillOpen =
+  NSClayTOE.continuumBKMPassageStillOpen
+
+toeNavierStokesAllDataBridgeConstructed : Bool
+toeNavierStokesAllDataBridgeConstructed =
+  NSClayTOE.allDataBridgeConstructed
+
+toeNavierStokesAllDataBridgeStillOpen :
+  toeNavierStokesAllDataBridgeConstructed ≡ false
+toeNavierStokesAllDataBridgeStillOpen =
+  NSClayTOE.allDataBridgeStillOpen
+
+toeNavierStokesSubmissionPacketReady : Bool
+toeNavierStokesSubmissionPacketReady =
+  NSClayTOE.submissionPacketReady
+
+toeNavierStokesSubmissionPacketStillNotReady :
+  toeNavierStokesSubmissionPacketReady ≡ false
+toeNavierStokesSubmissionPacketStillNotReady =
+  NSClayTOE.submissionPacketStillNotReady
+
+toeNavierStokesClayEligible : Bool
+toeNavierStokesClayEligible =
+  NSClayTOE.clayEligible
+
+toeNavierStokesClayEligibilityStillFalse :
+  toeNavierStokesClayEligible ≡ false
+toeNavierStokesClayEligibilityStillFalse =
+  NSClayTOE.clayEligibilityStillFalse
+
+------------------------------------------------------------------------
+-- Canonical Pareto / Ibrahim / fleet non-promotion gates.
+-- These are direct aliases of proof owners. No new theorem authority.
+------------------------------------------------------------------------
+
+toeParetoSearchPriorityCannotPayProof :
+  ParetoSnowballTOE.SearchPriorityCreatesProof → ⊥
+toeParetoSearchPriorityCannotPayProof =
+  ParetoSnowballTOE.searchPriorityDoesNotCreateProof
+
+toeIbrahimDegree729CannotPayMonsterRecognition :
+  ParetoSnowballTOE.Degree729CreatesMonsterHZetaRecognition → ⊥
+toeIbrahimDegree729CannotPayMonsterRecognition =
+  ParetoSnowballTOE.degree729DoesNotCreateMonsterHZetaRecognition
+
+toeFleetSpectralRankCannotPayAuthority :
+  FleetGapTOE.VectorSpectralAuthorityPromotion → ⊥
+toeFleetSpectralRankCannotPayAuthority =
+  FleetGapTOE.fleetVectorSpectralAuthorityPromotionImpossible
+
+toeFleetNumericABIRequiresIndependentEvidence :
+  FleetGapTOE.SpectralNumericABIPromotion → ⊥
+toeFleetNumericABIRequiresIndependentEvidence =
+  FleetGapTOE.fleetSpectralNumericABIPromotionImpossible
+
+------------------------------------------------------------------------
+-- Canonical brain/connectome/fMRI quotient boundary.
+-- The observation owners retain authority. This facade adds no empirical proof.
+------------------------------------------------------------------------
+
+toeBrainFirstMissing : BrainObservation.BrainObservationFirstMissing
+toeBrainFirstMissing = BrainFMRI.brainFirstMissing
+
+toeBrainBidirectionalFirstMissing :
+  BrainBidirectional.BidirectionalObservationFirstMissing
+toeBrainBidirectionalFirstMissing = BrainFMRI.bidirectionalFirstMissing
+
+toeBrainObservationNonPromotion :
+  BrainBidirectional.NonPromotionBoundary
+toeBrainObservationNonPromotion = BrainFMRI.brainNonPromotionBoundary
+
+toeBrainJPromotionBlocked :
+  BrainSpine.objectExternalJPromotion BrainFMRI.brainFMRIObject ≡ false
+toeBrainJPromotionBlocked = BrainFMRI.brainFMRIJPromotionBlocked
+
+------------------------------------------------------------------------
+-- Live Gate-4 frontier and Fleet target selection.
+------------------------------------------------------------------------
+
+toeCurrentGate4FrontierLedgerLevel : ProofLevel
+toeCurrentGate4FrontierLedgerLevel =
+  FleetHyperTOE.currentGate4FrontierLedgerLevel
+
+toeCurrentGate4ClusteringToTransferGapLevel : ProofLevel
+toeCurrentGate4ClusteringToTransferGapLevel =
+  FleetHyperTOE.currentGate4ClusteringToTransferGapLevel
+
+toeFleetFormalGapTargetSelected : Bool
+toeFleetFormalGapTargetSelected =
+  FleetHyperTOE.fleetFormalGapTargetSelected
+
+toeHistoricalGate4CountSelectedAsFleetTarget : Bool
+toeHistoricalGate4CountSelectedAsFleetTarget =
+  FleetHyperTOE.historicalGate4CountSelectedAsFleetTarget
+
+toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
+  FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
+toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
+  FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+
+------------------------------------------------------------------------
+-- Solar / battery / grid arbitrage feasibility boundary.
+------------------------------------------------------------------------
+
+toeBatteryArbitrageZKPFrame :
+  BatteryArbitrageTOE.BatteryArbitrageZKPFrame
+toeBatteryArbitrageZKPFrame =
+  BatteryArbitrageTOE.canonicalBatteryArbitrageZKPFrame
+
+toeBatteryGrossSpreadDoesNotCreateNetProfit :
+  BatteryArbitrageTOE.GrossSpreadCreatesNetProfit → ⊥
+toeBatteryGrossSpreadDoesNotCreateNetProfit =
+  BatteryArbitrageTOE.grossSpreadDoesNotCreateNetProfit
+
+toeBatteryLowHouseholdLoadDoesNotCapTradableThroughput :
+  BatteryArbitrageTOE.LowHouseholdLoadCapsTradableThroughput → ⊥
+toeBatteryLowHouseholdLoadDoesNotCapTradableThroughput =
+  BatteryArbitrageTOE.lowHouseholdLoadDoesNotCapTradableThroughput
+
+toeBatteryTariffSnapshotDoesNotCreateFutureTariff :
+  BatteryArbitrageTOE.TariffSnapshotCreatesFutureTariff → ⊥
+toeBatteryTariffSnapshotDoesNotCreateFutureTariff =
+  BatteryArbitrageTOE.tariffSnapshotDoesNotCreateFutureTariff
+
+toeBatterySmartMeterDoesNotCreateSavings :
+  BatteryArbitrageTOE.SmartMeterCreatesSavings → ⊥
+toeBatterySmartMeterDoesNotCreateSavings =
+  BatteryArbitrageTOE.smartMeterDoesNotCreateSavings
+
+toeBatterySeparateEVNMIDoesNotCreateApartmentTariffEligibility :
+  BatteryArbitrageTOE.SeparateEVNMICreatesApartmentTariffEligibility → ⊥
+toeBatterySeparateEVNMIDoesNotCreateApartmentTariffEligibility =
+  BatteryArbitrageTOE.separateEVNMIDoesNotCreateApartmentTariffEligibility
+
+toeBatteryCommonPropertySolarDoesNotCreateApartmentAccess :
+  BatteryArbitrageTOE.CommonPropertySolarCreatesApartmentAccess → ⊥
+toeBatteryCommonPropertySolarDoesNotCreateApartmentAccess =
+  BatteryArbitrageTOE.commonPropertySolarDoesNotCreateApartmentAccess
+
+toeBatteryExistingConduitDoesNotCreateElectricalCompatibility :
+  BatteryArbitrageTOE.ExistingConduitCreatesElectricalCompatibility → ⊥
+toeBatteryExistingConduitDoesNotCreateElectricalCompatibility =
+  BatteryArbitrageTOE.existingConduitDoesNotCreateElectricalCompatibility
+
+toeBatteryRetailerIncentiveDoesNotCreateGuaranteedPayback :
+  BatteryArbitrageTOE.RetailerIncentiveCreatesGuaranteedPayback → ⊥
+toeBatteryRetailerIncentiveDoesNotCreateGuaranteedPayback =
+  BatteryArbitrageTOE.retailerIncentiveDoesNotCreateGuaranteedPayback
+
+toeBatterySourceExampleDoesNotCreateUniversalOptimalBatterySize :
+  BatteryArbitrageTOE.SourceExampleCreatesUniversalOptimalBatterySize → ⊥
+toeBatterySourceExampleDoesNotCreateUniversalOptimalBatterySize =
+  BatteryArbitrageTOE.sourceExampleDoesNotCreateUniversalOptimalBatterySize
+
