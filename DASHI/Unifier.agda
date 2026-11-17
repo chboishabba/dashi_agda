@@ -1762,6 +1762,64 @@ toeBraidedRuptureHasSpuriousRecoverabilityGap :
 toeBraidedRuptureHasSpuriousRecoverabilityGap =
   BraidedTransferTOE.ruptureHasSpuriousRecoverabilityGap
 
+unifierYMA1CompletionDoesNotSelfPromote :
+  Proof.promotable
+    (YMA1Frontier.rowACompletion
+      YMA1Frontier.canonicalYMA1SourceFrontierReceipt)
+  ≡ false
+unifierYMA1CompletionDoesNotSelfPromote =
+  YMA1Frontier.rowACompletionDoesNotSelfPromote
+
+------------------------------------------------------------------------
+-- Braided transfer / narrative calibration TOE normalization.
+--
+-- Reuse the canonical reasoning owners.
+-- This aggregate adds no new Kimmerer, Two-Eyed Seeing, or topology claim.
+------------------------------------------------------------------------
+
+toeBraidedTransferZKPFrame :
+  BraidedTransferTOE.BraidTransferZKPFrame
+toeBraidedTransferZKPFrame =
+  BraidedTransferTOE.conversationBraidZKP
+
+toeBraidedTransferContract :
+  BraidedTransferTOE.BraidTransferContract
+toeBraidedTransferContract =
+  BraidedTransferTOE.canonicalBraidTransferContract
+
+toeBraidedCoarseReadingHasMissingRelationGap :
+  BraidedTransferTOE.braidTransferGap
+    BraidedTransferTOE.braidCalibrationProgramme
+    BraidedTransferTOE.boundedRelationalTransfer
+    BraidedTransferTOE.canonicalBraidingOwners
+    BraidedTransferTOE.coarseMultiplicityState
+    BraidedTransferTOE.underFitLattice
+  ≡ BraidedTransferTOE.missingRelationGap
+toeBraidedCoarseReadingHasMissingRelationGap =
+  BraidedTransferTOE.coarseReadingHasMissingRelationGap
+
+toeBraidedCalibratedReadingClosesGap :
+  BraidedTransferTOE.braidTransferGap
+    BraidedTransferTOE.braidCalibrationProgramme
+    BraidedTransferTOE.boundedRelationalTransfer
+    BraidedTransferTOE.canonicalBraidingOwners
+    BraidedTransferTOE.calibratedRelationalState
+    BraidedTransferTOE.fittedLattice
+  ≡ BraidedTransferTOE.noTransferGap
+toeBraidedCalibratedReadingClosesGap =
+  BraidedTransferTOE.calibratedReadingClosesTransferGap
+
+toeBraidedRuptureHasSpuriousRecoverabilityGap :
+  BraidedTransferTOE.braidTransferGap
+    BraidedTransferTOE.braidCalibrationProgramme
+    BraidedTransferTOE.boundedRelationalTransfer
+    BraidedTransferTOE.canonicalBraidingOwners
+    BraidedTransferTOE.rupturedRelationState
+    BraidedTransferTOE.overFitLattice
+  ≡ BraidedTransferTOE.spuriousRecoverabilityGap
+toeBraidedRuptureHasSpuriousRecoverabilityGap =
+  BraidedTransferTOE.ruptureHasSpuriousRecoverabilityGap
+
 toeBraidDoesNotGuaranteeRecoverabilityAfterRupture :
   BraidedTransferTOE.BraidGuaranteesRecoverabilityAfterRupture -> ⊥
 toeBraidDoesNotGuaranteeRecoverabilityAfterRupture =
