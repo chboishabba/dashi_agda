@@ -1,5 +1,62 @@
 
 
+## 17 Nov exact original full nonnegative-load routing envelope
+
+The latest mathematical implementation moves beyond only four
+test loads and closes the strict **ideal-real source-formula**
+piecewise route/response map for the corrected e3=(11,-16)
+synthetic fixture:
+`scripts/check_x369_r4_full_load_kink_envelope_sympy.py`.
+
+Original four learned affine logits:
+`(8,3+4t,-11+9t,-16+11t)`.
+Five positive exact rational critical loads:
+`5/4,19/9,5/2,19/7,14/5`.
+Across their six open intervals, the uniquely ordered
+source top2 are:
+`(0,1),(1,0),(1,2),(1,3),(3,1),(3,2)`.
+Only expert1 emits a nonzero scalar, so the
+exact source response is piecewise:
+
+    sigmoid(4t-5), sigmoid(4t-5),
+    sigmoid(14-5t),
+    sigmoid(19-7t), sigmoid(19-7t), 0.
+
+The first derivative is positive until the
+continuous apex at t=19/9 with exact response
+`sigmoid(31/9)≈0.969065`; strictly negative
+until t=14/5. At t=14/5 the second-slot
+original topk cutoff ties a positive-output
+expert with a zero-output expert, so the
+scalar selected output is genuinely
+**source tie-ambiguous** at that exact
+point. Left response ≈0.354344, right=0.
+Do NOT infer a unique tie-time output.
+
+A source-level matched fixed pair (0,1)
+retains strictly increasing
+`sigmoid(4t-5)` across the full ray,
+providing a global architectural
+negative control for overload decline
+without expert replacement.
+No ordinary scalar GELU nonmonotonicity,
+new attenuation gate, learning-result or
+biology is asserted by this fixture.
+
+Independent local symbolic
+endpoint/source-response audit:
+**27 PASS**; 10 extra near-boundary
+±10^-4 original affine-score checks PASS.
+The original native Leech CPU fixture
+now contains corresponding **ten**
+source `torch.topk` strict-margin
+probes, but their exact committed
+native execution remains OPEN.
+This exact all-load source-algebra
+extension is NOT a continuous
+Agda real analytic/cdf theorem.
+
+
 ## 17 Nov topk strict-margin remediation + matched history routing ablation
 
 This section supersedes any earlier **second-step** claim made
