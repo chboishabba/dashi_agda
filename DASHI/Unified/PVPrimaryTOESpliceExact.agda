@@ -63,3 +63,6 @@ import DASHI.Physics.Photovoltaic.PVGreen68FourTerminalPublishedSourceExact
 
 -- M3 original hydrogenic p² Coulomb scalar operator cannot be promoted into 369-specific PV splitting.
 import DASHI.Physics.Photovoltaic.PV369P2CoulombSolarNonPromotionExact
+
+-- M2 NREL 4T = three true optical absorbers but TWO independent electrical outputs (top series III-V + separate Si).
+import DASHI.Physics.Photovoltaic.PV369NREL2017ThreeJunctionTwoGroupTopologyExact
