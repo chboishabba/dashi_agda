@@ -158,3 +158,40 @@ For the [001] comparator at +0.5% prescribed axial strain, energies are 1.381950
 3. **OPEN as optical experiment:** measured [111] vs [001] reflectance/absorptance/EQE at specified spectral flux and controlled strain, resolved Γ-valence polarization and extraction at the same two-terminal MPP.
 4. **OPEN as 369-specific claim:** evidence that the original ternary/369 construction restricts or predicts a measurable material parameter or operation *beyond* conventional Td→C3v group theory. A group representation equivalence is not evidence of net extra harvested energy.
 5. **OPEN as benchmark:** actual AM1.5G/G173 photovoltaic efficiency, standard aperture normalization, stability/controls, and >50% independent confirmation. Heat remains a separate auxiliary coproduct.
+
+
+## Further maximum cut: exact spinful closed-form spectrum and polarization (17 Nov)
+
+**Independent symbolic result**: \`scripts/check_gaas_111_birpikus_closed_form.py\` verifies the exact six-state spinful characteristic polynomial, derives the optical polarization weights analytically, and checks them against independently diagonalized 8-state near-Γ numerical operators at six nonzero signed [111] strain values. **37/37 local symbolic and cross-validation checks PASS**, in addition to the earlier **94/94 physical-model consistency checks**.
+
+Set \`A = a_v,eff Tr ε\`, \`u=d(ε_parallel-ε_perp)/sqrt(3)\`, and spin–orbit energy \`Δ=Δ_so\`. For the *specified uniform axial* [111] strain model,
+
+\`\`\`
+E_pure = A-u                         (a Kramers doublet)
+c      = A+u/2-Δ/2
+h      = 3u/2+Δ/6
+r      = sqrt(h²+2Δ²/9)
+E_mixed,± = c ± r                    (two Kramers doublets).
+\`\`\`
+
+The full spinful valence characteristic polynomial is **exactly**
+
+\`\`\`
+det(λI6 - Hv) = (λ-E_pure)^2 [ (λ-c)^2-r^2 ]^2 .
+\`\`\`
+
+At zero strain (\`u=0\`) its six states recover fourfold energy \`A\` and the split-off doublet \`A-Δ\`. This closes the **analytic, source-convention-specific near-Γ spectral reduction** without a numerical eigensolver. It is not an analytic result for an atomistic crystal with strain gradients or all missing 8-band terms.
+
+For each mixed Kramers doublet, its \`A1\` orbital fraction is
+
+\`\`\`
+w_± = (1 ± h/r)/2 .
+longitudinal Kane weight / Ep = 2 w_±
+each normalized transverse Kane weight / Ep = 1-w_±
+\`\`\`
+
+The unmixed \`E\` Kramers pair has longitudinal 0 and each transverse 1 (same dimensionless Ep units). As a result \`sum_all_pairs longitudinal=2\` and \`sum_all_pairs transverse=2\` **exactly for every prescribed signed strain**. Under the explicitly stated threefold and time-reversal symmetry these are projector/oscillator sum rules, not equivalent to integrated *solar absorptance* or additional useful power.
+
+At +0.5% prescribed axial strain, the exact symbolic formulas reproduce the 94-test numerical values: \`E_pure≈0.0080564eV\`, \`E_mixed,-≈-0.3479696eV\`, \`E_mixed,+≈-0.0184868eV\`, \`w_+≈0.6094100\`. The optical thresholds include a separate conduction hydrostatic shift and are **1.37809, 1.40464, 1.73412 eV**, as reported above.
+
+**Physical acceptance remains OPEN:** actual GaAs [111] strain field and orientation, temperature/coherence, full Bahder terms, valence k², measured electric-dipole spectra vs frequency/linewidth, photon-extraction boundary conditions, terminal JV at the MPP, and anything uniquely predicted by the original 369 construction rather than standard C3v group theory. Agda source remains uncompiled in this environment.
