@@ -44,22 +44,14 @@ on:
       - 'DASHI/Unified/Everything.agda'
       - 'DASHI/Unifier.agda'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
-      - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda'
-      - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda'
-      - 'DASHI/Physics/YangMills/YangMillsClayPinnedCMP119ConcreteOS1SystemExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanCMP116SelectedMarkedExpansionRound415Exact.agda'
-      - 'DASHI/Physics/YangMills/YangMillsClayPinnedCMP119StressCommonCoreExact.agda'
-      - 'DASHI/Physics/YangMills/YangMillsClayPinnedCMP119ConcreteLocalCExact.agda'
-      - 'DASHI/Physics/YangMills/YangMillsClayPinnedCMP119GRQFTStressExportExact.agda'
-      - 'DASHI/Physics/YangMills/YangMillsClayPinnedCMP119LiteralStressAttachmentExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanClayT5WeakMeasureSemanticsRound437Exact.agda'
-      - 'DASHI/Physics/YangMills/BalabanClayT5PreferredSameFamilyMeasureRecoveryRound428Exact.agda'
-      - 'DASHI/Physics/YangMills/BalabanClayT5SameFamilyContinuumRecoveryRound425Exact.agda'
-      - 'DASHI/Physics/YangMills/YangMillsClayPinnedCMP119RealR415ClusteringExact.agda'
-      - 'DASHI/Physics/YangMills/YangMillsClayPinnedCMP119RealBMinCutExact.agda'
-      - 'DASHI/Unified/Physics.agda'
-      - 'DASHI/Unifier.agda'
-      - 'Docs/diagrams/ym_toe_r559_convergence.puml'
+      - 'DASHI/Moonshine/OggSSPP2F4CurveShearReflectionExact.agda'
+      - 'DASHI/Unified/ArithmeticMoonshine.agda'
+      - 'DASHI/Reasoning/ClaimAuditManifestExact.agda'
+      - 'DASHI/Law/SensibLawGovernedLegalNetworkStrategyExact.agda'
+      - 'DASHI/Law/SensibLawITIRParityEverything.agda'
+      - 'DASHI/Interop/SensibLawSemanticPromotionPolicy.agda'
+      - 'DASHI/Unified/TOELegalGovernanceHandoffExact.agda'
+      - 'DASHI/Unified/TOE369InvariantRegressionExact.agda'
       - 'DASHI/Physics/Closure/Everything.agda'
       - 'DASHI/Physics/YangMills/YangMillsClayCriticalPathRound578Validation.agda'
       - 'DASHI/Physics/YangMills/YangMillsClayCriticalPathRound578Exact.agda'
@@ -201,7 +193,9 @@ jobs:
             DASHI/Cognition/PNF/SensibLawOperationalSemanticBoundaryExact.agda
             DASHI/Core/ITIRGovernanceControlCaseExact.agda
             DASHI/EverythingTOESymmetryResolved369.agda
-            DASHI/Unifier.agda
+            DASHI/Moonshine/OggSSPP2F4CurveShearReflectionExact.agda
+            DASHI/Unified/TOELegalGovernanceHandoffExact.agda
+            DASHI/Unified/TOE369InvariantRegressionExact.agda
           )
           for source in "${sources[@]}"; do
             if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|\{!!\}|allow-unsolved-metas|NON_TERMINATING|(^|[^A-Z_])TERMINATING([^A-Z_]|$)|NO_POSITIVITY_CHECK' "$source"; then

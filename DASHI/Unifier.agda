@@ -669,6 +669,7 @@ import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as YMTOE
 import DASHI.Physics.YangMills.YangMillsClayCriticalPathRound578Exact as YMCritical
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 
+import DASHI.Unified.TOELegalGovernanceHandoffExact as TOELegalGovernance
 open import Agda.Primitive using (Level; lzero; lsuc)
 open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)

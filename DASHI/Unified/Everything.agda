@@ -630,6 +630,7 @@ import DASHI.ComputerScience.Ternary27ResidualProgramDecisionBridgeExact as Reco
 import DASHI.Reasoning.TrialecticBoundaryFaceNonfactorabilityExact as Face27TOE
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 
+import DASHI.Unified.TOELegalGovernanceHandoffExact as TOELegalGovernance
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Nat using (_+_; _*_)
