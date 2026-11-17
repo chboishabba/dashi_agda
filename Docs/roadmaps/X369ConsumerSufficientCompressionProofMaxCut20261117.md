@@ -226,3 +226,107 @@ scripts/run_agda29_parallel_check.sh \
 
 Both new files are unverified proof-source proposals in
 this environment, not kernel-accepted theorems.
+
+
+## 17 Nov continuation: executable SymPy CI stand-in and original-source score/MDL cuts
+
+`scripts/check_x369_p0_sympy_standin.sh` now verifies the
+**actual integer polynomial identities**, original-source
+counterexamples and finite quotient properties under SymPy
+1.14.0. The only Python introduced is this symbolic/finite
+validation harness: the proof owners and source semantics remain
+Agda, not a Python model implementation. CI owner:
+`.github/workflows/x369-p0-sympy-standin.yml`.
+The local identical symbolic suite returned
+`X369_SYMPY_STANDIN_PASS 27 symbolic/finite checks`;
+the GitHub workflow's own execution remains independent and must
+be observed before reporting cloud CI green.
+
+The source-directed codec now also supplies:
+- `originalFeatureRealizesEveryDirectedTriple`:
+  the actual feature (T((1,0,0),(A,B,C))=(A,B,C))
+  reaches all integer triples; a universal arbitrary-source
+  three-to-two **coordinate-drop** theorem is false.
+- `rawWeightedScoreFactorization` /
+  `originalWeightedScoreTwoPlusSourceDC`:
+  the ACTUAL learned linear head with weights
+  `ws,wf,wr` can be evaluated as
+  `(ws-wr)*self+(wf-wr)*forward+wr*sourceDC`.
+  No third directed feature needs to be materialised if
+  source DC is already admitted.
+- `zeroDCWeightedScoreNeedsOnlyTwo`:
+  with an independently certified sourceDC=0,
+  a two-channel weighted original head is exact.
+- `rawTwoChannelQuantizationError`: for quantization
+  residuals `es,ef,eD`, the exact score error is
+  `(ws-wr)*es+(wf-wr)*ef+wr*eD`.
+  This is NOT a magnitude/decision bound until actual
+  quantizer tolerances and top-k margins are supplied.
+
+A new finite **costed consumer-MDL** source adapter is
+`DASHI/Cognition/PNF/X369CenteredDirectedConsumerMDLExact.agda`.
+It reuses `AdmissibleConsumerMDLHyperfabricExact` rather
+than creating a new MDL algebra. It restricts the original
+source to certified zero-DC triads, and compares ONLY
+the explicitly declared portfolio of original-coordinate
+projections: first alone (cost=1), first+forward (cost=2),
+full three channels (cost=3). The first-only candidate
+has an actual centered-source collision:
+`x=(1,0,0)`, `h0=(0,0,0)`,
+`h1=(0,1,-1)`; reverse differs.
+The two-channel decoder reconstructs reverse exactly
+for all certified zero-DC states. The resulting
+`centeredTwoIsMinimalInDeclaredPortfolio` theorem
+is *portfolio-relative*, in number of retained original
+fixed-width feature scalars. It is NOT minimum storage
+bits over arbitrary nonlinear encodings, total runtime
+or full recurrent future-state sufficiency.
+
+**Important further no-go:** for the unrestricted original
+feature map, two-channel coding without the DC
+or a source restriction cannot reconstruct every
+reverse-sensitive consumer, even though all three
+integer channels are attainable. Do not promote centered
+subspace results to unconstrained original checkpoint data.
+
+### Next proof/release gates, ordered
+
+1. **Agda kernel:** validate the THREE new Agda modules
+   and their selected import closures with pinned Agda 2.9,
+   inspect actual errors and preserve exact head logs.
+   A static parentheses audit fixed two provisional
+   `Data.Integer.Solver` lambda-grouping errors; only
+   the Agda kernel can certify elaboration.
+2. **Quantizer-to-router margin:** reuse the existing
+   `ConsumerRelativeApproximateFidelityBridgeExact`
+   and source top-k proof gate; instantiate certified
+   `|delta s_e| <= |ws-wr|*eps_s + |wf-wr|*eps_f +
+   |wr|*eps_D` with real original precision/readout
+   and a strict gap certificate. The existing source
+   contribution is only an EXACT error identity.
+3. **Source DC availability:** audit whether DC(x) and
+   DC(h_e) are available/reusable before scoring, the
+   cost of recomputation/transport and whether input
+   or expert histories are *actually* centered.
+4. **Future-state:** obtain a source-bound commuting
+   compressed-history transition (or exhibit collision)
+   for all selected and reactivated histories.
+5. **Scientific release:** only compare actual
+   total code+metadata+decoder+transition cost against
+   an equally admitted full feature implementation,
+   with independently held-out task and semantic consumers.
+6. **TOE:** avoid injecting unverified candidate import
+   dependencies into Golden `Unifier`/`EverythingTOE`.
+   New-head Agda acceptance is still OPEN.
+
+Reproducible symbolic stand-in:
+```bash
+bash scripts/check_x369_p0_sympy_standin.sh
+```
+Agda proof gates (NOT run here):
+```bash
+export DASHI_NO_TMUX=1
+scripts/run_agda29_parallel_check.sh DASHI/Cognition/PNF/X369ConsumerSufficientCompressionNoGoExact.agda
+scripts/run_agda29_parallel_check.sh DASHI/Cognition/PNF/X369DirectedRouterConditionalCodecExact.agda
+scripts/run_agda29_parallel_check.sh DASHI/Cognition/PNF/X369CenteredDirectedConsumerMDLExact.agda
+```
