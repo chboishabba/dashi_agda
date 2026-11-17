@@ -30,17 +30,7 @@ record DirectedSignedWork : Set where
 
 -- Equality of SIGNED work is cross-multiplied equality, not identity
 -- of arbitrarily selected (incoming,outgoing) representative pairs.
-_signed≈_ : DirectedSignedWork → DirectedSignedWork → Set
-a signed≈ b =
-  DirectedSignedWork.incoming a
-    + DirectedSignedWork.outgoing b
-  ≡ DirectedSignedWork.incoming b
-    + DirectedSignedWork.outgoing a
-  where
-    infix 4 signed≈
-    signed≈ = _signed≈_
-
--- Explicit alternative, used in types, avoids treating two pairs of
+-- Signed-work equivalence, used in types, avoids treating two pairs of
 -- equal net work as literally equal record values.
 sameSignedWork : DirectedSignedWork → DirectedSignedWork → Set
 sameSignedWork a b =
@@ -145,12 +135,11 @@ reverseEnvironmentalFlowConsumesControllerWork p reversed controllerNet
   Cycle.+-cancelLeft
     (ni + co) controllerNet ((load + loss) + reversed)
     (Cycle.trans
-      (Bound.sym
-        (solve 3
-          (λ ni co ctl →
-            ((ni :+ co) :+ ctl)
-              := (ni :+ (co :+ ctl)))
-          refl ni co controllerNet))
+      (solve 3
+        (λ ni co ctl →
+          ((ni :+ co) :+ ctl)
+            := (ni :+ (co :+ ctl)))
+        refl ni co controllerNet)
       (Cycle.trans
         (Cycle.cong (λ z → ni + z) (Bound.sym netController))
         (Cycle.trans
