@@ -582,51 +582,58 @@ record DASHIUnificationAxiom : Set₁ where
 DASHI-Unification-Theorem : Set₁
 DASHI-Unification-Theorem = DASHIUnificationAxiom
 
-
 ------------------------------------------------------------------------
--- Monster 2B TOE facade.
--- The original Moonshine/runtime owners retain theorem authority.
+-- SensibLaw / Actionstep governed legal-runtime TOE handoff.
 ------------------------------------------------------------------------
 
-unifier2BResidualCountIsThree :
-  TwoBTOE.normalizedTwoBResidualCount ≡ 3
-unifier2BResidualCountIsThree =
-  TwoBTOE.normalizedTwoBResidualCountIsThree
+import DASHI.Unified.SensibLawActionstepGovernanceTOEExact as SensibLawActionstep
 
-unifier2BFormalSourceActionStillOpen :
-  TwoBTOE.formalSourceActionPaidFlag ≡ false
-unifier2BFormalSourceActionStillOpen =
-  TwoBTOE.formalSourceActionPaidFlagIsFalse
+SensibLawActionstepGovernanceTOEReceipt : Set₁
+SensibLawActionstepGovernanceTOEReceipt =
+  SensibLawActionstep.SensibLawActionstepGovernanceTOEReceipt
 
-unifier2BWeldEquivarianceStillOpen :
-  TwoBTOE.weldEquivariancePaidFlag ≡ false
-unifier2BWeldEquivarianceStillOpen =
-  TwoBTOE.weldEquivariancePaidFlagIsFalse
+sensibLawActionstepGovernanceTOEReceipt :
+  SensibLawActionstepGovernanceTOEReceipt
+sensibLawActionstepGovernanceTOEReceipt =
+  SensibLawActionstep.canonicalSensibLawActionstepGovernanceTOEReceipt
 
-unifier2BTerminalQ10RecognitionStillOpen :
-  TwoBTOE.terminalQ10RecognitionPaidFlag ≡ false
-unifier2BTerminalQ10RecognitionStillOpen =
-  TwoBTOE.terminalQ10RecognitionPaidFlagIsFalse
+sensibLawSemanticPromotionDoesNotCreateLegalAuthority :
+  SensibLawActionstep.SemanticPromotionLegalAuthorityClosed
+sensibLawSemanticPromotionDoesNotCreateLegalAuthority =
+  SensibLawActionstep.semanticPromotionDoesNotCreateLegalAuthority
 
-unifier2BTerminalDefectSourceStillOpen :
-  TwoBTOE.terminalDefectSourcePaidFlag ≡ false
-unifier2BTerminalDefectSourceStillOpen =
-  TwoBTOE.terminalDefectSourcePaidFlagIsFalse
+actionstepWorkflowDoesNotCreateLegalApplicability :
+  SensibLawActionstep.ActionstepWorkflowCreatesLegalApplicability → ⊥
+actionstepWorkflowDoesNotCreateLegalApplicability =
+  SensibLawActionstep.actionstepWorkflowDoesNotCreateLegalApplicability
 
-unifier2BP31SameObjectPromotionStillBlocked :
-  TwoBTOE.p31SameObjectPromotionPaidFlag ≡ false
-unifier2BP31SameObjectPromotionStillBlocked =
-  TwoBTOE.p31SameObjectPromotionPaidFlagIsFalse
+actionstepVendorClaimDoesNotProveFirmCompliance :
+  SensibLawActionstep.ActionstepVendorComplianceClaimProvesFirmCompliance → ⊥
+actionstepVendorClaimDoesNotProveFirmCompliance =
+  SensibLawActionstep.actionstepVendorClaimDoesNotProveFirmCompliance
 
-unifier2B279SameObjectPromotionStillBlocked :
-  TwoBTOE.twoSevenNineSameObjectPromotionPaidFlag ≡ false
-unifier2B279SameObjectPromotionStillBlocked =
-  TwoBTOE.twoSevenNineSameObjectPromotionPaidFlagIsFalse
+------------------------------------------------------------------------
+-- Missing/deceased scientist Ibrahim/Dewey investigative Pareto TOE handoff.
+------------------------------------------------------------------------
 
-unifier2BZKPFrame : TwoBTOE.OggSSP2BTOEZKPFrame
-unifier2BZKPFrame =
-  TwoBTOE.canonicalOggSSP2BTOEZKPFrame
+import DASHI.Unified.MissingDeceasedIbrahimDeweyParetoTOEExact as MissingDeceasedIbrahimDewey
 
-unifier2BReceipt : TwoBTOE.OggSSP2BTOEReceipt
-unifier2BReceipt =
-  TwoBTOE.canonicalOggSSP2BTOEReceipt
+missingDeceasedIbrahimDeweyBoundary :
+  MissingDeceasedIbrahimDewey.IbrahimDeweyConvergenceBoundary
+missingDeceasedIbrahimDeweyBoundary =
+  MissingDeceasedIbrahimDewey.canonicalIbrahimDeweyConvergenceBoundary
+
+missingDeceasedAmyIbrahimDeweyConvergence :
+  MissingDeceasedIbrahimDewey.IbrahimDeweyConvergenceReceipt
+missingDeceasedAmyIbrahimDeweyConvergence =
+  MissingDeceasedIbrahimDewey.amyConvergence
+
+missingDeceasedMaiwaldIbrahimDeweyConvergence :
+  MissingDeceasedIbrahimDewey.IbrahimDeweyConvergenceReceipt
+missingDeceasedMaiwaldIbrahimDeweyConvergence =
+  MissingDeceasedIbrahimDewey.maiwaldConvergence
+
+missingDeceasedDualRouteCreatesAuthorityFalse :
+  MissingDeceasedIbrahimDewey.dualRouteAgreementCreatesAuthority ≡ false
+missingDeceasedDualRouteCreatesAuthorityFalse =
+  MissingDeceasedIbrahimDewey.dualRouteAgreementCreatesAuthorityIsFalse

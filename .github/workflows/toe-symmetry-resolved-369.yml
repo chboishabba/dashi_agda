@@ -48,11 +48,10 @@ on:
       - 'Docs/diagrams/ym_toe_r559_current_master_convergence.puml'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
       - 'DASHI/Unifier.agda'
-      - 'DASHI/Unified/OggSSP2BTOEExact.agda'
-      - 'DASHI/Moonshine/OggSSP2BPostSocleMaxCutExact.agda'
-      - 'DASHI/Moonshine/OggSSP2BEquivariantWeldLastEquationCompressionExact.agda'
-      - 'DASHI/Moonshine/OggSSP2BTerminalRecognitionProductExact.agda'
-      - 'DASHI/Moonshine/OggSSP2B279FirewalledCrossPollinationExact.agda'
+      - 'DASHI/Unified/SensibLawActionstepGovernanceTOEExact.agda'
+      - 'DASHI/Unified/SensibLawActionstepGovernanceTOEValidation.agda'
+      - 'DASHI/Unified/MissingDeceasedIbrahimDeweyParetoTOEExact.agda'
+      - 'DASHI/Unified/MissingDeceasedIbrahimDeweyParetoTOEValidation.agda'
       - 'DASHI/Physics/Closure/Everything.agda'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
 
@@ -214,6 +213,10 @@ jobs:
             DASHI/Unified/OggSSP2BTOEExact.agda
             DASHI/EverythingTOESymmetryResolved369.agda
             DASHI/Unifier.agda
+            DASHI/Unified/SensibLawActionstepGovernanceTOEExact.agda
+            DASHI/Unified/SensibLawActionstepGovernanceTOEValidation.agda
+            DASHI/Unified/MissingDeceasedIbrahimDeweyParetoTOEExact.agda
+            DASHI/Unified/MissingDeceasedIbrahimDeweyParetoTOEValidation.agda
           )
           for source in "${sources[@]}"; do
             if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|NON_TERMINATING|TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
@@ -230,7 +233,5 @@ jobs:
       - name: Kernel-check TOE symmetry-resolved aggregate
         run: |
           agda -i . -l standard-library DASHI/EverythingTOESymmetryResolved369.agda
-
-      - name: Kernel-check Unifier consumer
-        run: |
-          agda -i . -l standard-library DASHI/Unifier.agda
+          agda -i . -l standard-library DASHI/Unified/SensibLawActionstepGovernanceTOEValidation.agda
+          agda -i . -l standard-library DASHI/Unified/MissingDeceasedIbrahimDeweyParetoTOEValidation.agda

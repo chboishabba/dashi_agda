@@ -27,6 +27,10 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Unified.OggSSP2BTOEExact as TwoBTOE
 
+open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Bool using (false)
+import Data.Empty
+
 ------------------------------------------------------------------------
 -- Focused TOE aggregate: generic symmetry-resolved fibre calculus plus the
 -- existing SSP/369 representation-reduction and physics instances.
@@ -36,56 +40,54 @@ import DASHI.Core.SymmetryResolvedFibreExact
 import DASHI.EverythingSSPRepresentationReductionRound9
 import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
 
+import DASHI.Unified.SensibLawActionstepGovernanceTOEExact as SensibLawActionstep
+
+SensibLawActionstepGovernanceTOEReceipt : Set₁
+SensibLawActionstepGovernanceTOEReceipt =
+  SensibLawActionstep.SensibLawActionstepGovernanceTOEReceipt
+
+sensibLawActionstepGovernanceTOEReceipt :
+  SensibLawActionstepGovernanceTOEReceipt
+sensibLawActionstepGovernanceTOEReceipt =
+  SensibLawActionstep.canonicalSensibLawActionstepGovernanceTOEReceipt
+
+sensibLawSemanticPromotionDoesNotCreateLegalAuthority :
+  SensibLawActionstep.SemanticPromotionLegalAuthorityClosed
+sensibLawSemanticPromotionDoesNotCreateLegalAuthority =
+  SensibLawActionstep.semanticPromotionDoesNotCreateLegalAuthority
+
+actionstepWorkflowDoesNotCreateLegalApplicability :
+  SensibLawActionstep.ActionstepWorkflowCreatesLegalApplicability → Data.Empty.⊥
+actionstepWorkflowDoesNotCreateLegalApplicability =
+  SensibLawActionstep.actionstepWorkflowDoesNotCreateLegalApplicability
+
+actionstepVendorClaimDoesNotProveFirmCompliance :
+  SensibLawActionstep.ActionstepVendorComplianceClaimProvesFirmCompliance → Data.Empty.⊥
+actionstepVendorClaimDoesNotProveFirmCompliance =
+  SensibLawActionstep.actionstepVendorClaimDoesNotProveFirmCompliance
 
 ------------------------------------------------------------------------
--- Monster 2B normalized max-cut and non-promotion surface.
+-- Missing/deceased scientist Ibrahim/Dewey investigative Pareto TOE handoff.
 ------------------------------------------------------------------------
 
-toe2BResidualCountIsThree :
-  TwoBTOE.normalizedTwoBResidualCount ≡ 3
-toe2BResidualCountIsThree =
-  TwoBTOE.normalizedTwoBResidualCountIsThree
+import DASHI.Unified.MissingDeceasedIbrahimDeweyParetoTOEExact as MissingDeceasedIbrahimDewey
 
-toe2BRepresentationDiscoveryClosed :
-  TwoBTOE.OggSSP2BTOEReceipt.representationDiscoveryLeaves
-    TwoBTOE.canonicalOggSSP2BTOEReceipt
-  ≡ 0
-toe2BRepresentationDiscoveryClosed = refl
+missingDeceasedIbrahimDeweyBoundary :
+  MissingDeceasedIbrahimDewey.IbrahimDeweyConvergenceBoundary
+missingDeceasedIbrahimDeweyBoundary =
+  MissingDeceasedIbrahimDewey.canonicalIbrahimDeweyConvergenceBoundary
 
-toe2BFormalSourceActionStillOpen :
-  TwoBTOE.formalSourceActionPaidFlag ≡ false
-toe2BFormalSourceActionStillOpen =
-  TwoBTOE.formalSourceActionPaidFlagIsFalse
+missingDeceasedAmyIbrahimDeweyConvergence :
+  MissingDeceasedIbrahimDewey.IbrahimDeweyConvergenceReceipt
+missingDeceasedAmyIbrahimDeweyConvergence =
+  MissingDeceasedIbrahimDewey.amyConvergence
 
-toe2BWeldEquivarianceStillOpen :
-  TwoBTOE.weldEquivariancePaidFlag ≡ false
-toe2BWeldEquivarianceStillOpen =
-  TwoBTOE.weldEquivariancePaidFlagIsFalse
+missingDeceasedMaiwaldIbrahimDeweyConvergence :
+  MissingDeceasedIbrahimDewey.IbrahimDeweyConvergenceReceipt
+missingDeceasedMaiwaldIbrahimDeweyConvergence =
+  MissingDeceasedIbrahimDewey.maiwaldConvergence
 
-toe2BTerminalQ10RecognitionStillOpen :
-  TwoBTOE.terminalQ10RecognitionPaidFlag ≡ false
-toe2BTerminalQ10RecognitionStillOpen =
-  TwoBTOE.terminalQ10RecognitionPaidFlagIsFalse
-
-toe2BTerminalDefectSourceStillOpen :
-  TwoBTOE.terminalDefectSourcePaidFlag ≡ false
-toe2BTerminalDefectSourceStillOpen =
-  TwoBTOE.terminalDefectSourcePaidFlagIsFalse
-
-toe2BP31SameObjectPromotionStillBlocked :
-  TwoBTOE.p31SameObjectPromotionPaidFlag ≡ false
-toe2BP31SameObjectPromotionStillBlocked =
-  TwoBTOE.p31SameObjectPromotionPaidFlagIsFalse
-
-toe2B279SameObjectPromotionStillBlocked :
-  TwoBTOE.twoSevenNineSameObjectPromotionPaidFlag ≡ false
-toe2B279SameObjectPromotionStillBlocked =
-  TwoBTOE.twoSevenNineSameObjectPromotionPaidFlagIsFalse
-
-toe2BZKPFrame : TwoBTOE.OggSSP2BTOEZKPFrame
-toe2BZKPFrame =
-  TwoBTOE.canonicalOggSSP2BTOEZKPFrame
-
-toe2BReceipt : TwoBTOE.OggSSP2BTOEReceipt
-toe2BReceipt =
-  TwoBTOE.canonicalOggSSP2BTOEReceipt
+missingDeceasedDualRouteCreatesAuthorityFalse :
+  MissingDeceasedIbrahimDewey.dualRouteAgreementCreatesAuthority ≡ false
+missingDeceasedDualRouteCreatesAuthorityFalse =
+  MissingDeceasedIbrahimDewey.dualRouteAgreementCreatesAuthorityIsFalse
