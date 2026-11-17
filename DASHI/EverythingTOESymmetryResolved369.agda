@@ -87,6 +87,51 @@ toeSensibLawParentBudgetZKPFrame =
     false
     false
 
+
+------------------------------------------------------------------------
+-- SensibLaw parent exact-work admission and durable relation reconciliation.
+------------------------------------------------------------------------
+
+toeSensibLawParentBudgetAdmission :
+  SensibLawRuntime.RuntimeExactBudgetAdmission
+toeSensibLawParentBudgetAdmission =
+  SensibLawRuntime.canonical8206Over8192BudgetRejection
+
+toeSensibLawParentBudgetCannotCertify :
+  SensibLawRuntime.DeltaReconciliationRuntimeCertification
+    toeSensibLawParentBudgetAdmission →
+  ⊥
+toeSensibLawParentBudgetCannotCertify =
+  SensibLawRuntime.canonical8206Over8192CannotCertify
+
+toeSensibLawRuntimeAuthorityBoundary :
+  SensibLawRuntime.RuntimeBudgetAuthorityBoundary
+toeSensibLawRuntimeAuthorityBoundary =
+  SensibLawRuntime.runtimeBudgetAuthorityBoundary
+
+toeSensibLawPersistedNoOpReceipt :
+  ℕ → SensibLawReconcile.PersistedRelationDeltaReceipt
+toeSensibLawPersistedNoOpReceipt =
+  SensibLawReconcile.persistedNoOpRelationDeltaReceipt
+
+toeSensibLawParentBudgetZKPFrame :
+  ParetoSnowballTOE.TOEZKPFrame
+toeSensibLawParentBudgetZKPFrame =
+  ParetoSnowballTOE.toe-zkp-frame
+    "certify the active SensibLaw parent reducer only after exact key-budget admission and durable relation-delta reconciliation"
+    "reuse BoundedInterfaceSketch, DeltaNativeParentRuntimeBridgeExact, RelationDeltaReconciliationExact, and AuthorityNonPromotionCore"
+    "bind the observed parent key count to the configured exact-work capacity; reject 8206 under 8192; require a persisted reconciliation receipt"
+    "fail closed without key truncation; budget expansion changes execution policy only; rollback cannot create certification or semantic authority"
+    "one nonblocking parent-budget admission lane; relation reconciliation remains the sole candidate mutation authority"
+    "migration 209 wiring is structurally live; exact key demand and configured capacity are explicit; durable receipt persistence is required"
+    "ITIL, ISO 9000/42001/27001/27701/23894/9241, NIST AI RMF, Six Sigma, and C4/PlantUML are process lenses only and do not create proof or certification"
+    "admitted exact execution plus a persisted conservation receipt may certify the runtime path; rejected or rolled-back execution cannot"
+    "run dashi-agda-preflight related_symbols/discover/round_lineage, trust-escape scan, ESD diff scan, Agda kernel check, then the controlled PostgreSQL replay"
+    false
+    false
+    false
+    false
+
 ------------------------------------------------------------------------
 -- Focused TOE aggregate: generic symmetry-resolved fibre calculus plus the
 -- existing SSP/369 representation-reduction and physics instances.

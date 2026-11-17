@@ -82,8 +82,7 @@ desiredMustCompareCurrent ()
 -- Durable runtime certification.
 --
 -- A transaction-local reconciliation observation is not a surviving runtime
--- receipt.  Runtime certification requires a persisted receipt after commit.
--- This keeps rollback evidence separate from durable execution evidence.
+-- receipt. Runtime certification requires a persisted receipt after commit.
 ------------------------------------------------------------------------
 
 record PersistedRelationDeltaReceipt : Set where
@@ -103,10 +102,6 @@ rolledBackReconciliationCannotCertify ()
 
 ------------------------------------------------------------------------
 -- Fixed-point replay witness.
---
--- When desired and current rows are identical, reconciliation still examines
--- the logical relation but emits no physical mutation.  This is the exact
--- second-replay certificate required by the active SensibLaw reducer.
 ------------------------------------------------------------------------
 
 noOpRelationDeltaReceipt : Nat → RelationDeltaReceipt

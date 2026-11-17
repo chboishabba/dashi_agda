@@ -113,8 +113,8 @@ open RuntimeInterfaceKeyBudget public
 ------------------------------------------------------------------------
 -- Exact-work budget admission.
 --
--- The parent-key count is semantic state.  The configured capacity is an
--- execution-policy bound.  Exceeding the bound rejects this execution lane.
+-- The parent-key count is semantic state. The configured capacity is an
+-- execution-policy bound. Exceeding the bound rejects this execution lane.
 -- It never authorizes key truncation and it does not change semantic truth.
 ------------------------------------------------------------------------
 

@@ -69,10 +69,6 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 
 ------------------------------------------------------------------------
 -- SensibLaw parent exact-work admission and durable relation reconciliation.
---
--- Agda remains the golden owner.  SensibLaw migration 209 is structurally live,
--- but runtime certification requires both exact budget admission and a receipt
--- that survives transaction commit.
 ------------------------------------------------------------------------
 
 unifierSensibLawParentBudgetAdmission :

@@ -244,23 +244,21 @@ positive excess         = 14
 disposition             = rejected
 ```
 
-The proof uses the existing exact-sketch capacity owner. It does not turn 8,192
-into a semantic constant. It also does not authorize key truncation.
+The proof reuses the existing exact-sketch capacity owner. It does not turn
+8,192 into a semantic constant. It does not authorize key truncation.
 
-`RelationDeltaReconciliationExact` now separates a transaction-local
-reconciliation from a persisted reconciliation receipt. A rolled-back
-reconciliation cannot certify the runtime path. A persisted no-op replay has
-logical rows but zero physical mutations. This is the fixed-point receipt needed
-for the second replay after migration 209.
+`RelationDeltaReconciliationExact` separates a transaction-local reconciliation
+from a persisted reconciliation receipt. A rolled-back reconciliation cannot
+certify the runtime path. A persisted no-op replay still has logical rows but
+has zero physical mutations.
 
-Runtime certification therefore requires both conditions:
+Runtime certification requires both conditions:
 
-1. the exact parent-key execution is admitted under the declared execution
-   budget; and
+1. exact parent-key execution is admitted under the declared execution budget;
 2. the relation-delta receipt survives commit.
 
-The current 8,206/8,192 replay fails the first condition. The previous rolled-back
-run also fails the second condition. The correct status is therefore:
+The current 8,206/8,192 replay fails the first condition. The rolled-back run
+also fails the second condition. The current status is:
 **migration 209 structurally live; runtime certification still pending**.
 
 ### ZKP O/R/C/S/L/P/G/F
@@ -289,6 +287,5 @@ run also fails the second condition. The correct status is therefore:
   run cannot. The controlled second replay should preserve logical inspection
   while physical mutations fall to zero when state is unchanged.
 
-No new C4 or PlantUML topology is required for this formalisation. The runtime
-topology did not change. Only the admission and certification contract became
-explicit.
+No new C4 or PlantUML topology is required. The runtime topology did not change.
+Only the admission and certification contract became explicit.
