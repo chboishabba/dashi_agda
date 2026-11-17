@@ -1,13 +1,22 @@
 module DASHI.Cognition.Teleodynamics.VerifiedArtifactTransitionExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
+open import Data.Product using (_×_; _,_)
 
 import DASHI.Cognition.Teleodynamics.ScopedVerifierArchitectureExact as Verify
 import DASHI.Cognition.PNF.LLMContextWindowTerminalisationExact
 import DASHI.Cognition.PNF.LLMResidualHierarchyExact
 import DASHI.Cognition.PNF.NeuralBottleneckResidualFutureSafetyExact
+
+------------------------------------------------------------------------
+-- VERIFIED ARTIFACT TRANSITION
+--
+-- Editing is modelled as a transition of one explicit artifact state, not as
+-- unconstrained regeneration.  Identity, declared edit, retained/reopened
+-- residual and post-edit validation are independent obligations.
+------------------------------------------------------------------------
 
 record ArtifactState (Identity Body Residual : Set) : Set where
   constructor artifact-state
@@ -17,7 +26,9 @@ record ArtifactState (Identity Body Residual : Set) : Set where
     residual : Residual
 open ArtifactState public
 
-record DeclaredEdit {Identity Body Residual : Set} (before after : ArtifactState Identity Body Residual) : Set₁ where
+record DeclaredEdit
+    {Identity Body Residual : Set}
+    (before after : ArtifactState Identity Body Residual) : Set₁ where
   constructor declared-edit
   field
     Delta : Set
@@ -27,7 +38,9 @@ record DeclaredEdit {Identity Body Residual : Set} (before after : ArtifactState
     editSemanticsPaid : EditSemantics (body before) delta (body after)
 open DeclaredEdit public
 
-record ResidualReopening {Identity Body Residual : Set} (before after : ArtifactState Identity Body Residual) : Set₁ where
+record ResidualReopening
+    {Identity Body Residual : Set}
+    (before after : ArtifactState Identity Body Residual) : Set₁ where
   constructor residual-reopening
   field
     FutureConsumer : Set
@@ -35,7 +48,8 @@ record ResidualReopening {Identity Body Residual : Set} (before after : Artifact
     retainedOrReopened : (q : FutureConsumer) → distinguishesFuture q (residual after)
 open ResidualReopening public
 
-record VerifiedArtifactTransition {Identity Body Residual : Set}
+record VerifiedArtifactTransition
+    {Identity Body Residual : Set}
     (V : Verify.ScopedValidator (ArtifactState Identity Body Residual))
     (before after : ArtifactState Identity Body Residual) : Set₁ where
   constructor verified-artifact-transition
@@ -46,21 +60,42 @@ record VerifiedArtifactTransition {Identity Body Residual : Set}
     afterReceipt : Verify.ValidationReceipt V after
 open VerifiedArtifactTransition public
 
-sameArtifactIdentity : ∀ {Identity Body Residual : Set} {V : Verify.ScopedValidator (ArtifactState Identity Body Residual)} {before after : ArtifactState Identity Body Residual} → VerifiedArtifactTransition V before after → identity before ≡ identity after
+sameArtifactIdentity :
+  ∀ {Identity Body Residual : Set}
+    {V : Verify.ScopedValidator (ArtifactState Identity Body Residual)}
+    {before after : ArtifactState Identity Body Residual} →
+  VerifiedArtifactTransition V before after →
+  identity before ≡ identity after
 sameArtifactIdentity t = identityPreserved (edit t)
 
-postEditClaimPaid : ∀ {Identity Body Residual : Set} {V : Verify.ScopedValidator (ArtifactState Identity Body Residual)} {before after : ArtifactState Identity Body Residual} → VerifiedArtifactTransition V before after → Verify.Claim V after
+postEditClaimPaid :
+  ∀ {Identity Body Residual : Set}
+    {V : Verify.ScopedValidator (ArtifactState Identity Body Residual)}
+    {before after : ArtifactState Identity Body Residual} →
+  VerifiedArtifactTransition V before after →
+  Verify.Claim V after
 postEditClaimPaid t = Verify.claimPaid (afterReceipt t)
 
+------------------------------------------------------------------------
+-- A same-artifact transition does not follow merely from repeatable decoding.
+------------------------------------------------------------------------
+
 data DeterministicReplayCreatesArtifactIdentity : Set where
+
 data IdentityPreservationCreatesValidatorPass : Set where
+
 data ValidatorPassCreatesFutureSufficiency : Set where
 
-noArtifactIdentityFromDeterministicReplay : DeterministicReplayCreatesArtifactIdentity → ⊥
+noArtifactIdentityFromDeterministicReplay :
+  DeterministicReplayCreatesArtifactIdentity → ⊥
 noArtifactIdentityFromDeterministicReplay ()
-identityDoesNotCreateValidatorPass : IdentityPreservationCreatesValidatorPass → ⊥
+
+identityDoesNotCreateValidatorPass :
+  IdentityPreservationCreatesValidatorPass → ⊥
 identityDoesNotCreateValidatorPass ()
-validatorPassDoesNotCreateFutureSufficiency : ValidatorPassCreatesFutureSufficiency → ⊥
+
+validatorPassDoesNotCreateFutureSufficiency :
+  ValidatorPassCreatesFutureSufficiency → ⊥
 validatorPassDoesNotCreateFutureSufficiency ()
 
 record VerifiedArtifactBoundary : Set where
@@ -75,4 +110,5 @@ record VerifiedArtifactBoundary : Set where
     deterministicReplaySufficient : Bool
 
 canonicalVerifiedArtifactBoundary : VerifiedArtifactBoundary
-canonicalVerifiedArtifactBoundary = verified-artifact-boundary true true true true true false false
+canonicalVerifiedArtifactBoundary =
+  verified-artifact-boundary true true true true true false false

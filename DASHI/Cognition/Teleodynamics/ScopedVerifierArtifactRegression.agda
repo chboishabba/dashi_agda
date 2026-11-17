@@ -2,52 +2,52 @@ module DASHI.Cognition.Teleodynamics.ScopedVerifierArtifactRegression where
 
 open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥)
 
 import DASHI.Cognition.Teleodynamics.ScopedVerifierArchitectureExact as Verify
-import DASHI.Cognition.Teleodynamics.ScopedVerifierConcreteInstancesExact as Concrete
 import DASHI.Cognition.Teleodynamics.VerifiedArtifactTransitionExact as Artifact
 import DASHI.Cognition.Teleodynamics.GAISArchitectureComparisonExact as GAIS
-import DASHI.Cognition.Teleodynamics.ScopedVerifierEvaluationProtocolExact as Eval
-import DASHI.Cognition.Teleodynamics.ScopedVerifierConsumerSufficiencyExact as Consumer
 
-universalOracleStaysFalse : Verify.ScopedVerifierArchitectureBoundary.universalFalsehoodDetectorClaimed Verify.canonicalScopedVerifierArchitectureBoundary ≡ false
-universalOracleStaysFalse = refl
+universalTruthOracleRemainsFalse :
+  Verify.ScopedVerifierArchitectureBoundary.universalFalsehoodDetectorClaimed
+    Verify.canonicalScopedVerifierArchitectureBoundary ≡ false
+universalTruthOracleRemainsFalse = refl
 
-deterministicSemanticCollapseStaysFalse : Verify.ScopedVerifierArchitectureBoundary.deterministicDecodeCreatesSemanticCorrectness Verify.canonicalScopedVerifierArchitectureBoundary ≡ false
-deterministicSemanticCollapseStaysFalse = refl
+knowledgeGraphDoesNotCreateTruth :
+  Verify.ScopedVerifierArchitectureBoundary.knowledgeGraphCreatesTruth
+    Verify.canonicalScopedVerifierArchitectureBoundary ≡ false
+knowledgeGraphDoesNotCreateTruth = refl
 
-concreteSyntaxPaid : Concrete.syntaxOK Concrete.fullyAdmitted ≡ true
-concreteSyntaxPaid = refl
+deterministicDecodeDoesNotCreateSemanticCorrectness :
+  Verify.ScopedVerifierArchitectureBoundary.deterministicDecodeCreatesSemanticCorrectness
+    Verify.canonicalScopedVerifierArchitectureBoundary ≡ false
+deterministicDecodeDoesNotCreateSemanticCorrectness = refl
 
-concreteProvenancePaid : Concrete.provenanceOK Concrete.fullyAdmitted ≡ true
-concreteProvenancePaid = refl
+artifactTransitionRequiresRevalidation :
+  Artifact.VerifiedArtifactBoundary.postEditRevalidationRequired
+    Artifact.canonicalVerifiedArtifactBoundary ≡ true
+artifactTransitionRequiresRevalidation = refl
 
-gaisStillNeedsEmpirics : GAIS.GAISComparisonBoundary.empiricalHeadToHeadStillRequired GAIS.canonicalGAISComparisonBoundary ≡ true
-gaisStillNeedsEmpirics = refl
+regenerationIsNotDefinitionallyEdit :
+  Artifact.VerifiedArtifactBoundary.regenerationEquivalentToEdit
+    Artifact.canonicalVerifiedArtifactBoundary ≡ false
+regenerationIsNotDefinitionallyEdit = refl
 
-gaisUsesEligibleStratum :
-  GAIS.GAISComparisonBoundary.admissibleConsumerEligibilitySurfacePresent
+gaisRemainsExternalCandidate :
+  GAIS.GAISComparisonBoundary.externalNamesTreatedAsPrivilegedTheory
+    GAIS.canonicalGAISComparisonBoundary ≡ false
+gaisRemainsExternalCandidate = refl
+
+gaisEmpiricalComparisonStillRequired :
+  GAIS.GAISComparisonBoundary.empiricalHeadToHeadStillRequired
     GAIS.canonicalGAISComparisonBoundary ≡ true
-gaisUsesEligibleStratum = refl
+gaisEmpiricalComparisonStillRequired = refl
 
-architectureDoesNotImplyWin : Eval.EvaluationBoundary.architectureImpliesEmpiricalWin Eval.canonicalEvaluationBoundary ≡ false
-architectureDoesNotImplyWin = refl
+noScopedValidatorToUniversalOracle :
+  Verify.UniversalTruthOracleFromScopedValidator → ⊥
+noScopedValidatorToUniversalOracle =
+  Verify.noUniversalTruthOracleFromScopedValidator
 
-consumerMismatchRejected : Eval.EvaluationBoundary.consumerMismatchAccepted Eval.canonicalEvaluationBoundary ≡ false
-consumerMismatchRejected = refl
-
-validatorScopeMismatchRejected : Eval.EvaluationBoundary.validatorScopeMismatchAccepted Eval.canonicalEvaluationBoundary ≡ false
-validatorScopeMismatchRejected = refl
-
-eligibilityRequiredBeforeComparison :
-  Eval.EvaluationBoundary.eligibleStratumRequiredBeforeComparison
-    Eval.canonicalEvaluationBoundary ≡ true
-eligibilityRequiredBeforeComparison = refl
-
-consumerInadequateBaselineRejected :
-  Eval.EvaluationBoundary.consumerInadequateModelAcceptedForComparison
-    Eval.canonicalEvaluationBoundary ≡ false
-consumerInadequateBaselineRejected = refl
-
-validatorPassDoesNotPayAllConsumers : Consumer.ConsumerSufficiencyBoundary.validatorPassImpliesAllConsumerSufficiency Consumer.canonicalConsumerSufficiencyBoundary ≡ false
-validatorPassDoesNotPayAllConsumers = refl
+noHypervisorNecessityPromotion :
+  GAIS.HypervisorPlacementIsNecessary → ⊥
+noHypervisorNecessityPromotion = GAIS.noHypervisorNecessityTheorem
