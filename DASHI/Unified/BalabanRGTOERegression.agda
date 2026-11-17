@@ -1545,3 +1545,6 @@ import DASHI.Physics.YangMills.YMClayRationalS3DegreeThirteenInvariantCertificat
 
 -- Exact eleven-invariant rational S3 degree-15 source certificate.
 import DASHI.Physics.YangMills.YMClayRationalS3DegreeFifteenInvariantCertificateExact as RationalS3Degree15
+
+-- Exact original L1 24cell induced rational Wilson T2 coarse density.
+import DASHI.Physics.YangMills.YMClayOriginalL1Rational24CellEffectiveRGExact as Rational24CellEffectiveRG
