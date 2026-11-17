@@ -2,8 +2,7 @@ module DASHI.Mathematics.CrossPollination.MillenniumThreeLaneContinuationValidat
 
 open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.String using (String)
-open import Agda.Builtin.Nat using (Nat)
+open import Data.Empty using (⊥)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as PNP
 import DASHI.Mathematics.AlgebraicGeometry.ProjectiveSpaceHomogeneousCoordinatesExact as Hodge
@@ -825,196 +824,60 @@ hodgeCellularPointGeneratorWeldPaid =
 
 
 ------------------------------------------------------------------------
--- GOLDEN THREE-LANE TOE CONTRACT.
---
--- Reuse the canonical introspective O/R/C/S/L/P/G/F frame.
--- The frame records execution context only. The theorem fields below carry
--- the mathematical authority.
+-- CURRENT EXTERNAL MILLENNIUM ACCEPTANCE REGRESSION
 ------------------------------------------------------------------------
 
-import DASHI.Interop.IntrospectiveProofLoopExact as Introspection
-import DASHI.Mathematics.CrossPollination.MillenniumSubstantiveCrossPollinationGateExact as Gate
-import DASHI.Mathematics.AlgebraicGeometry.ProjectiveSpaceLinearCycleClassExact as HodgeLinear
-import DASHI.Mathematics.AlgebraicGeometry.ProjectiveSpaceHodgeBasisExact as HodgeBasis
-import DASHI.Mathematics.Complexity.PNotEqualsNPConcreteTapeProgramCookLevinSameObjectWeldExact as PNPSame
-import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalCellBitsExact as PNPCanonical
-import DASHI.Mathematics.Complexity.ConcreteTapeRuleSelectorExact as PNPSelector
-import DASHI.Mathematics.Complexity.ConcreteTapeInputInitialRowExact as PNPInput
-import DASHI.Mathematics.Arithmetic.EllipticCurveFiniteTwoDescentSeedExact as BSDFiniteKummer
-import DASHI.Mathematics.Arithmetic.EllipticCurveTwoTorsionAndBadPrimeExact as BSDTwoTorsion
+leanMillenniumExactRHStatementWeldPaid :
+  LeanAssist.leanMillenniumRHExactStatementWeldSourceWritten ≡ true
+leanMillenniumExactRHStatementWeldPaid =
+  LeanAssist.leanMillenniumRHExactStatementWeldSourceWrittenIsTrue
 
-millenniumThreeLaneZKPFrame : Introspection.ZKPFrame
-millenniumThreeLaneZKPFrame =
-  Introspection.zkp-frame
-    "O: chboishabba/dashi_agda is the golden proof owner; chboishabba/dashi_lean4 is a sibling producer only"
-    "R: close standard formalisation debt for P versus NP, Hodge, and BSD without promoting any Clay conjecture"
-    "C: reuse canonical Cook-Levin, projective-cycle, Selmer/Sha, and sibling-Lean custody owners before extending"
-    "S: P has same-machine exact-budget Cook-Levin closure and waits on standard-machine simulation or a universal complexity obstruction; Hodge waits on literal singular/de Rham same-object geometry; BSD waits on Kummer and global-completion same-object theorems"
-    "L: observe only theorem-backed branch state, exact source custody, and fail-closed open-problem boundaries"
-    "P: extend existing canonical owners; attach results to TOE aggregates; keep docs and verification receipts synchronized"
-    "G: eliminate remaining known-math seams while preserving exact non-promotion of P=NP, general Hodge, and BSD"
-    "F: count only theorem content gaps; CI, source presence, visual similarity, and cross-prover source presence do not pay a theorem gap"
+leanMillenniumNSFeffermanCExactSourcePaid :
+  LeanAssist.leanMillenniumNSFeffermanCExactTermSourceWritten ≡ true
+leanMillenniumNSFeffermanCExactSourcePaid =
+  LeanAssist.leanMillenniumNSFeffermanCExactTermSourceWrittenIsTrue
 
-record MillenniumThreeLaneTOEContract : Set where
-  field
-    frame :
-      Introspection.ZKPFrame
+leanMillenniumNSFeffermanDExactSourcePaid :
+  LeanAssist.leanMillenniumNSFeffermanDExactTermSourceWritten ≡ true
+leanMillenniumNSFeffermanDExactSourcePaid =
+  LeanAssist.leanMillenniumNSFeffermanDExactTermSourceWrittenIsTrue
 
-    -- Preconditions.
-    pWholeRowLocalityPrecondition :
-      PNPIff.semanticWholeRowLocalityIffPaid
-        PNPIff.canonicalConcreteTapeLocalityCharacterizationBoundary
-      ≡ true
+leanMillenniumNSExternalAdapterNeedsNoNewMathematics :
+  LeanAssist.leanMillenniumNSAdapterRequiresNewMathematics ≡ false
+leanMillenniumNSExternalAdapterNeedsNoNewMathematics =
+  LeanAssist.leanMillenniumNSAdapterRequiresNoNewMathematics
 
-    pBooleanReflectionPrecondition :
-      PNPReflect.fullLegalWindowBooleanIffPaid
-        PNPReflect.canonicalConcreteTapeLegalWindowReflectionBoundary
-      ≡ true
+leanMillenniumBSDProjectiveAffineRankWeldPaid :
+  LeanAssist.leanMillenniumBSDProjectiveAffineRankWeldSourceWritten ≡ true
+leanMillenniumBSDProjectiveAffineRankWeldPaid =
+  LeanAssist.leanMillenniumBSDProjectiveAffineRankWeldSourceWrittenIsTrue
 
-    hodgeFiniteLinearCyclePrecondition :
-      ∀ {n} (power : HodgeBasis.ProjectiveSpaceHodgeBasis n)
-        (h : HodgeLinear.CPnRationalHodgeClass n power) →
-      HodgeLinear.AlgebraicRepresentative power h
+leanMillenniumPNPTerminalFailureBidiOwned :
+  LeanAssist.leanMillenniumPNPTerminalFailureBidiAgdaOwned ≡ true
+leanMillenniumPNPTerminalFailureBidiOwned =
+  LeanAssist.leanMillenniumPNPTerminalFailureBidiAgdaOwnedIsTrue
 
-    bsdRationalPlacePrecondition :
-      BSDPlaces.rationalPlaceSplitPaid
-        BSDPlaces.canonicalEllipticRationalPlaceSelmerBoundary
-      ≡ true
+leanMillenniumHodgePrizeTargetStillIncomplete :
+  LeanAssist.leanMillenniumHodgeFaithfulPrizeTarget ≡ false
+leanMillenniumHodgePrizeTargetStillIncomplete =
+  LeanAssist.leanMillenniumHodgeFaithfulPrizeTargetIsFalse
 
-    bsdSelmerCompilerPrecondition :
-      BSDSeed.finiteSeedToSelmerCompilerPaid
-        BSDSeed.canonicalEllipticFiniteSeedToSelmerBoundary
-      ≡ true
+leanMillenniumHodgePrizePromotionBlocked :
+  LeanAssist.LeanMillenniumHodgePrizePromotion → ⊥
+leanMillenniumHodgePrizePromotionBlocked =
+  LeanAssist.leanMillenniumHodgePrizePromotionImpossible
 
-    -- Invariants.
-    leanKernelAuthorityRemainsExternal :
-      LeanAssist.leanKernelReceiptObserved
-        LeanAssist.currentMillenniumLeanAssistReceipt
-      ≡ false
+leanMillenniumYangMillsPrizeTargetStillIncomplete :
+  LeanAssist.leanMillenniumYangMillsFaithfulPrizeTarget ≡ false
+leanMillenniumYangMillsPrizeTargetStillIncomplete =
+  LeanAssist.leanMillenniumYangMillsFaithfulPrizeTargetIsFalse
 
-    agdaLeanSameObjectAuthorityRemainsExternal :
-      LeanAssist.agdaSameObjectImportPaid
-        LeanAssist.currentMillenniumLeanAssistReceipt
-      ≡ false
+leanMillenniumYangMillsPrizePromotionBlocked :
+  LeanAssist.LeanMillenniumYangMillsPrizePromotion → ⊥
+leanMillenniumYangMillsPrizePromotionBlocked =
+  LeanAssist.leanMillenniumYangMillsPrizePromotionImpossible
 
-    pConcreteCookLevinSameObjectPrecondition :
-      ∀ (machine : PNP.ConcreteTapeMachine)
-        (stateCoverage :
-          PNPCanonical.EnumerationCoverage (PNP.finiteState machine))
-        (symbolCoverage :
-          PNPCanonical.EnumerationCoverage (PNP.finiteSymbol machine))
-        (nonempty : PNPSelector.NonemptyRuleTable machine)
-        (input : PNPInput.InputWord machine)
-        (steps : Nat) →
-      PNPSame.SameMachineProgramCookLevinCertificate
-        machine stateCoverage symbolCoverage nonempty input steps
-
-    -- Postconditions / current min-cuts.
-    hodgeLiteralComparisonStillOpen :
-      Hodge.singularDeRhamComparisonPaid
-        Hodge.canonicalProjectiveSpaceGeometryComparisonBoundary
-      ≡ false
-
-    bsdGlobalExactSequenceStillOpen :
-      BSDArithmetic.globalExactSequencePaid
-        BSDArithmetic.canonicalEllipticTwoDescentRoadBoundary
-      ≡ false
-
-    pFinalClosureRemainsBoundary :
-      Gate.finalClosureStatus Gate.pVersusNPStatus
-      ≡ Gate.analyticOrGeometricBoundary
-
-    hodgeFinalClosureRemainsBoundary :
-      Gate.finalClosureStatus Gate.hodgeStatus
-      ≡ Gate.analyticOrGeometricBoundary
-
-    bsdFinalClosureRemainsBoundary :
-      Gate.finalClosureStatus Gate.bsdStatus
-      ≡ Gate.analyticOrGeometricBoundary
-
-open MillenniumThreeLaneTOEContract public
-
-canonicalMillenniumThreeLaneTOEContract :
-  MillenniumThreeLaneTOEContract
-canonicalMillenniumThreeLaneTOEContract = record
-  { frame =
-      millenniumThreeLaneZKPFrame
-  ; pWholeRowLocalityPrecondition =
-      pnpWholeRowLocalityIffPaid
-  ; pBooleanReflectionPrecondition =
-      pnpFullLegalWindowReflectionPaid
-  ; hodgeFiniteLinearCyclePrecondition =
-      HodgeLinear.everyFiniteCPnHodgeBasisClassIsAlgebraic
-  ; bsdRationalPlacePrecondition =
-      bsdRationalPlaceSplitPaid
-  ; bsdSelmerCompilerPrecondition =
-      bsdFiniteSeedSelmerCompilerPaid
-  ; leanKernelAuthorityRemainsExternal =
-      leanKernelReceiptStillUnobserved
-  ; agdaLeanSameObjectAuthorityRemainsExternal =
-      agdaLeanSameObjectImportStillOpen
-  ; pConcreteCookLevinSameObjectPrecondition =
-      PNPSame.sameMachineProgramCookLevinCertificate
-  ; hodgeLiteralComparisonStillOpen =
-      hodgeComparisonStillOpen
-  ; bsdGlobalExactSequenceStillOpen =
-      bsdGlobalDescentStillOpen
-  ; pFinalClosureRemainsBoundary =
-      refl
-  ; hodgeFinalClosureRemainsBoundary =
-      refl
-  ; bsdFinalClosureRemainsBoundary =
-      refl
-  }
-
-threeLanePNonPromotion :
-  Gate.finalClosureStatus Gate.pVersusNPStatus
-  ≡ Gate.analyticOrGeometricBoundary
-threeLanePNonPromotion = refl
-
-threeLaneHodgeNonPromotion :
-  Gate.finalClosureStatus Gate.hodgeStatus
-  ≡ Gate.analyticOrGeometricBoundary
-threeLaneHodgeNonPromotion = refl
-
-threeLaneBSDNonPromotion :
-  Gate.finalClosureStatus Gate.bsdStatus
-  ≡ Gate.analyticOrGeometricBoundary
-threeLaneBSDNonPromotion = refl
-
-
-------------------------------------------------------------------------
--- CURRENT P MAX-CUT: canonical concrete Cook--Levin same-object closure.
-------------------------------------------------------------------------
-
-pnpConcreteCookLevinSameObjectPaid :
-  ∀ (machine : PNP.ConcreteTapeMachine)
-    (stateCoverage :
-      PNPCanonical.EnumerationCoverage (PNP.finiteState machine))
-    (symbolCoverage :
-      PNPCanonical.EnumerationCoverage (PNP.finiteSymbol machine))
-    (nonempty : PNPSelector.NonemptyRuleTable machine)
-    (input : PNPInput.InputWord machine)
-    (steps : Nat) →
-  PNPSame.SameMachineProgramCookLevinCertificate
-    machine stateCoverage symbolCoverage nonempty input steps
-pnpConcreteCookLevinSameObjectPaid =
-  PNPSame.sameMachineProgramCookLevinCertificate
-
-
-bsdFiniteTorsionKummerHomomorphismIsGolden :
-  ∀ left right →
-  BSDFiniteKummer.finiteKummerMap
-    (BSDTwoTorsion.addTorsion left right)
-  ≡
-  BSDFiniteKummer.addSquareClass
-    (BSDFiniteKummer.finiteKummerMap left)
-    (BSDFiniteKummer.finiteKummerMap right)
-bsdFiniteTorsionKummerHomomorphismIsGolden =
-  BSDFiniteKummer.finiteKummerHomomorphism
-
-leanBSDExceptionalTorsionTranslationSourcePresent :
-  LeanAssist.bsdLocalKummerTorsionTranslationSourcePresent
-    LeanAssist.currentMillenniumLeanAssistReceipt
-  ≡ true
-leanBSDExceptionalTorsionTranslationSourcePresent = refl
+leanMillenniumKernelPromotionStillBlocked :
+  LeanAssist.LeanMillenniumSourceWrittenKernelPromotion → ⊥
+leanMillenniumKernelPromotionStillBlocked =
+  LeanAssist.leanMillenniumSourceWrittenKernelPromotionImpossible

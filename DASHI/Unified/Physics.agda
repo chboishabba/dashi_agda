@@ -459,6 +459,27 @@ yangMillsBalabanCPhysicalPackageCount : ℕ
 yangMillsBalabanCPhysicalPackageCount =
   BalabanRGTOE.balabanCPhysicalPackageCount
 
+
+yangMillsBalabanCriticalPathCompilerLevel : ProofLevel
+yangMillsBalabanCriticalPathCompilerLevel =
+  BalabanRGTOE.balabanCriticalPathCompilerLevel
+
+yangMillsBalabanCriticalFamilyCount : ℕ
+yangMillsBalabanCriticalFamilyCount =
+  BalabanRGTOE.balabanCriticalFamilyCount
+
+yangMillsBalabanFullCLayerRequiredForMassGapCompiler : Bool
+yangMillsBalabanFullCLayerRequiredForMassGapCompiler =
+  BalabanRGTOE.balabanFullCLayerRequiredForMassGapCompiler
+
+yangMillsBalabanFullCLayerRequiredForMinimalH6Contradiction : Bool
+yangMillsBalabanFullCLayerRequiredForMinimalH6Contradiction =
+  BalabanRGTOE.balabanFullCLayerRequiredForMinimalH6Contradiction
+
+yangMillsBalabanFullCLayerRetainedForConservativeClayLocalFieldExistence : Bool
+yangMillsBalabanFullCLayerRetainedForConservativeClayLocalFieldExistence =
+  BalabanRGTOE.balabanFullCLayerRetainedForConservativeClayLocalFieldExistence
+
 yangMillsBalabanLevel2ClayPromotionStillFalse :
   BalabanRGTOE.balabanLevel2ClayPromotionFlag ≡ false
 yangMillsBalabanLevel2ClayPromotionStillFalse =
@@ -659,3 +680,303 @@ yangMillsImplementAToDScaleTransferNonPromotion =
   YMAD.scaleTransferPromotionEliminator
     YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
 
+import DASHI.Unified.NavierStokesBM2TOEConvergenceExact as NSBM2TOE
+
+open NSBM2TOE public using
+  ( LiteralR571DissipationFold
+  ; ExactLiteralR571DissipationFold
+  ; literalR571M2BelowPhysicalDissipation
+  ; exactLiteralR571M2BelowPhysicalDissipation
+  )
+------------------------------------------------------------------------
+-- Navier-Stokes B / R571 M2 producer-strategy physics facade.
+------------------------------------------------------------------------
+
+navierStokesBM2FiniteFoldClosed : Bool
+navierStokesBM2FiniteFoldClosed =
+  NSBM2TOE.cardinalityFreeFiniteFoldClosed
+
+navierStokesBM2SamplewisePaymentStillAnalytic :
+  NSBM2TOE.samplewisePhysicalPaymentStillAnalytic ≡ true
+navierStokesBM2SamplewisePaymentStillAnalytic =
+  NSBM2TOE.samplewisePhysicalPaymentStillAnalyticIsTrue
+
+navierStokesBM2GalerkinFoldStillAnalytic :
+  NSBM2TOE.literalFoldIntoGalerkinDissipationStillAnalytic ≡ true
+navierStokesBM2GalerkinFoldStillAnalytic =
+  NSBM2TOE.literalFoldIntoGalerkinDissipationStillAnalyticIsTrue
+
+navierStokesBM2OldPDFB1B2B3B4NotMandatory :
+  NSBM2TOE.oldPDFB1B2B3B4Mandatory ≡ false
+navierStokesBM2OldPDFB1B2B3B4NotMandatory =
+  NSBM2TOE.oldPDFB1B2B3B4MandatoryIsFalse
+
+navierStokesBM2OldPDFB7NotMandatory :
+  NSBM2TOE.oldPDFB7DirectCovarianceEqualityMandatory ≡ false
+navierStokesBM2OldPDFB7NotMandatory =
+  NSBM2TOE.oldPDFB7DirectCovarianceEqualityMandatoryIsFalse
+
+navierStokesBM2ClayPromotion : Bool
+navierStokesBM2ClayPromotion =
+  NSBM2TOE.modernNSClayPromotion
+
+navierStokesBM2ClayPromotionStillFalse :
+  navierStokesBM2ClayPromotion ≡ false
+navierStokesBM2ClayPromotionStillFalse =
+  NSBM2TOE.modernNSClayPromotionStillFalse
+
+navierStokesBM2Receipt :
+  NSBM2TOE.NavierStokesBM2TOEReceipt
+navierStokesBM2Receipt =
+  NSBM2TOE.canonicalNavierStokesBM2TOEReceipt
+
+navierStokesBM2ZKPFrame :
+  NSBM2TOE.NavierStokesBM2TOEZKPFrame
+navierStokesBM2ZKPFrame =
+  NSBM2TOE.canonicalNavierStokesBM2TOEZKPFrame
+
+------------------------------------------------------------------------
+-- Canonical Navier-Stokes Clay frontier facade.
+------------------------------------------------------------------------
+
+import DASHI.Unified.NavierStokesClayFrontierTOEConvergenceExact as NSClayTOE
+
+navierStokesClayPromotion : Bool
+navierStokesClayPromotion =
+  NSClayTOE.navierStokesABCDClayPromotion
+
+navierStokesClayPromotionStillFalse :
+  navierStokesClayPromotion ≡ false
+navierStokesClayPromotionStillFalse =
+  NSClayTOE.navierStokesABCDClayPromotionStillFalse
+
+navierStokesGeneralRegularityComplete : Bool
+navierStokesGeneralRegularityComplete =
+  NSClayTOE.generalNSGlobalRegularityComplete
+
+navierStokesGeneralRegularityStillOpen :
+  navierStokesGeneralRegularityComplete ≡ false
+navierStokesGeneralRegularityStillOpen =
+  NSClayTOE.generalNSGlobalRegularityStillOpen
+
+navierStokesCarrierToGeneralImplicationProved : Bool
+navierStokesCarrierToGeneralImplicationProved =
+  NSClayTOE.carrierToGeneralNSImplicationProved
+
+navierStokesCarrierToGeneralImplicationStillOpen :
+  navierStokesCarrierToGeneralImplicationProved ≡ false
+navierStokesCarrierToGeneralImplicationStillOpen =
+  NSClayTOE.carrierToGeneralNSImplicationStillOpen
+
+navierStokesAuthorityPromotionGuard : Bool
+navierStokesAuthorityPromotionGuard =
+  NSClayTOE.navierStokesPromotionGuard
+
+navierStokesAuthorityPromotionGuardStillFalse :
+  navierStokesAuthorityPromotionGuard ≡ false
+navierStokesAuthorityPromotionGuardStillFalse =
+  NSClayTOE.navierStokesPromotionGuardStillFalse
+
+navierStokesClayFrontierZKPFrame :
+  NSClayTOE.NavierStokesClayFrontierTOEZKPFrame
+navierStokesClayFrontierZKPFrame =
+  NSClayTOE.canonicalNavierStokesClayFrontierTOEZKPFrame
+
+navierStokesTerminalPromotionImpossible :
+  NSClayTOE.NSClayDistanceFinalPromotion → Data.Empty.⊥
+navierStokesTerminalPromotionImpossible =
+  NSClayTOE.terminalClayPromotionImpossible
+
+
+------------------------------------------------------------------------
+-- Current periodic-B shared weighted wall from R736.
+-- Proof ownership remains in R736 through the canonical NS Clay facade.
+------------------------------------------------------------------------
+
+navierStokesSharedWeightedExactlyTwoLeaves : Bool
+navierStokesSharedWeightedExactlyTwoLeaves =
+  NSClayTOE.currentSharedWeightedExactlyTwoLeaves
+
+navierStokesSharedWeightedExactlyTwoLeavesIsTrue :
+  navierStokesSharedWeightedExactlyTwoLeaves ≡ true
+navierStokesSharedWeightedExactlyTwoLeavesIsTrue =
+  NSClayTOE.currentSharedWeightedExactlyTwoLeavesIsTrue
+
+navierStokesSharedWeightedSameCarrier : Bool
+navierStokesSharedWeightedSameCarrier =
+  NSClayTOE.currentSharedWeightedSameCarrier
+
+navierStokesSharedWeightedSameCarrierIsTrue :
+  navierStokesSharedWeightedSameCarrier ≡ true
+navierStokesSharedWeightedSameCarrierIsTrue =
+  NSClayTOE.currentSharedWeightedSameCarrierIsTrue
+
+navierStokesSharedWeightedCarrierIsInputLaplacian : Bool
+navierStokesSharedWeightedCarrierIsInputLaplacian =
+  NSClayTOE.currentSharedWeightedCarrierIsInputLaplacian
+
+navierStokesWeightedPlusEndpointClosed : Bool
+navierStokesWeightedPlusEndpointClosed =
+  NSClayTOE.currentWeightedPlusEndpointClosed
+
+navierStokesWeightedPlusEndpointStillOpen :
+  navierStokesWeightedPlusEndpointClosed ≡ false
+navierStokesWeightedPlusEndpointStillOpen =
+  NSClayTOE.currentWeightedPlusEndpointStillOpen
+
+navierStokesAugmentedCriticalWeightedClosed : Bool
+navierStokesAugmentedCriticalWeightedClosed =
+  NSClayTOE.currentAugmentedCriticalWeightedClosed
+
+navierStokesAugmentedCriticalWeightedStillOpen :
+  navierStokesAugmentedCriticalWeightedClosed ≡ false
+navierStokesAugmentedCriticalWeightedStillOpen =
+  NSClayTOE.currentAugmentedCriticalWeightedStillOpen
+
+navierStokesSharedWeightedLeavesBuildBarrier : Bool
+navierStokesSharedWeightedLeavesBuildBarrier =
+  NSClayTOE.currentSharedWeightedLeavesBuildBarrier
+
+navierStokesSharedWeightedLeavesBuildBarrierIsTrue :
+  navierStokesSharedWeightedLeavesBuildBarrier ≡ true
+navierStokesSharedWeightedLeavesBuildBarrierIsTrue =
+  NSClayTOE.currentSharedWeightedLeavesBuildBarrierIsTrue
+
+navierStokesR726IndependentLeafRequired : Bool
+navierStokesR726IndependentLeafRequired =
+  NSClayTOE.legacyR726IndependentLeafRequired
+
+navierStokesR726IndependentLeafNotRequired :
+  navierStokesR726IndependentLeafRequired ≡ false
+navierStokesR726IndependentLeafNotRequired =
+  NSClayTOE.legacyR726IndependentLeafNotRequired
+
+navierStokesStrictMarginR406IndependentLeafRequired : Bool
+navierStokesStrictMarginR406IndependentLeafRequired =
+  NSClayTOE.legacyStrictMarginR406IndependentLeafRequired
+
+navierStokesStrictMarginR406IndependentLeafNotRequired :
+  navierStokesStrictMarginR406IndependentLeafRequired ≡ false
+navierStokesStrictMarginR406IndependentLeafNotRequired =
+  NSClayTOE.legacyStrictMarginR406IndependentLeafNotRequired
+
+navierStokesBarrierDependentQPlusMinusShortcutAdmissible : Bool
+navierStokesBarrierDependentQPlusMinusShortcutAdmissible =
+  NSClayTOE.barrierDependentQPlusMinusShortcutAdmissible
+
+navierStokesBarrierDependentQPlusMinusShortcutStillCircular :
+  navierStokesBarrierDependentQPlusMinusShortcutAdmissible ≡ false
+navierStokesBarrierDependentQPlusMinusShortcutStillCircular =
+  NSClayTOE.barrierDependentQPlusMinusShortcutStillCircular
+
+navierStokesSharedWeightedClayPromotion : Bool
+navierStokesSharedWeightedClayPromotion =
+  NSClayTOE.currentSharedWeightedClayPromotion
+
+navierStokesSharedWeightedClayPromotionStillFalse :
+  navierStokesSharedWeightedClayPromotion ≡ false
+navierStokesSharedWeightedClayPromotionStillFalse =
+  NSClayTOE.currentSharedWeightedClayPromotionStillFalse
+
+navierStokesContinuumBKMPassageConstructed : Bool
+navierStokesContinuumBKMPassageConstructed =
+  NSClayTOE.continuumBKMPassageConstructed
+
+navierStokesContinuumBKMPassageStillOpen :
+  navierStokesContinuumBKMPassageConstructed ≡ false
+navierStokesContinuumBKMPassageStillOpen =
+  NSClayTOE.continuumBKMPassageStillOpen
+
+navierStokesAllDataBridgeConstructed : Bool
+navierStokesAllDataBridgeConstructed =
+  NSClayTOE.allDataBridgeConstructed
+
+navierStokesAllDataBridgeStillOpen :
+  navierStokesAllDataBridgeConstructed ≡ false
+navierStokesAllDataBridgeStillOpen =
+  NSClayTOE.allDataBridgeStillOpen
+
+navierStokesSubmissionPacketReady : Bool
+navierStokesSubmissionPacketReady =
+  NSClayTOE.submissionPacketReady
+
+navierStokesSubmissionPacketStillNotReady :
+  navierStokesSubmissionPacketReady ≡ false
+navierStokesSubmissionPacketStillNotReady =
+  NSClayTOE.submissionPacketStillNotReady
+
+navierStokesClayEligible : Bool
+navierStokesClayEligible =
+  NSClayTOE.clayEligible
+
+navierStokesClayEligibilityStillFalse :
+  navierStokesClayEligible ≡ false
+navierStokesClayEligibilityStillFalse =
+  NSClayTOE.clayEligibilityStillFalse
+
+
+------------------------------------------------------------------------
+-- Joint Balaban/R559 typed continuum non-promotion.
+------------------------------------------------------------------------
+
+physicsBalabanR559ContinuumLimitPromotionImpossible :
+  BalabanRGTOE.BalabanContinuumLimitPromotion → ⊥
+physicsBalabanR559ContinuumLimitPromotionImpossible =
+  BalabanR559TOE.continuumLimitPromotionEliminator
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+physicsBalabanR559DepthContinuumLimitPromotionImpossible :
+  BalabanRGTOE.DepthContinuumLimitPromotion → ⊥
+physicsBalabanR559DepthContinuumLimitPromotionImpossible =
+  BalabanR559TOE.depthContinuumLimitPromotionEliminator
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+
+------------------------------------------------------------------------
+-- R829-vector instantaneous snapshot and exact non-promotion boundary.
+------------------------------------------------------------------------
+
+navierStokesInstantaneousVectorSnapshotClosed : Bool
+navierStokesInstantaneousVectorSnapshotClosed =
+  NSClayTOE.instantaneousVectorSnapshotClosed
+
+navierStokesInstantaneousVectorSnapshotClosedIsTrue :
+  navierStokesInstantaneousVectorSnapshotClosed ≡ true
+navierStokesInstantaneousVectorSnapshotClosedIsTrue =
+  NSClayTOE.instantaneousVectorSnapshotClosedIsTrue
+
+navierStokesInstantaneousRepositoryRateStrictlyNegative : Bool
+navierStokesInstantaneousRepositoryRateStrictlyNegative =
+  NSClayTOE.instantaneousRepositoryRateStrictlyNegative
+
+navierStokesInstantaneousRepositoryRateStrictlyNegativeIsTrue :
+  navierStokesInstantaneousRepositoryRateStrictlyNegative ≡ true
+navierStokesInstantaneousRepositoryRateStrictlyNegativeIsTrue =
+  NSClayTOE.instantaneousRepositoryRateStrictlyNegativeIsTrue
+
+navierStokesRealFiniteODETransportClosed : Bool
+navierStokesRealFiniteODETransportClosed =
+  NSClayTOE.realFiniteODETransportClosed
+
+navierStokesRealFiniteODETransportStillOpen :
+  navierStokesRealFiniteODETransportClosed ≡ false
+navierStokesRealFiniteODETransportStillOpen =
+  NSClayTOE.realFiniteODETransportStillOpen
+
+navierStokesUniversalR823IntegratedReserveRefuted : Bool
+navierStokesUniversalR823IntegratedReserveRefuted =
+  NSClayTOE.universalR823IntegratedReserveRefuted
+
+navierStokesUniversalR823IntegratedReserveStillUnrefuted :
+  navierStokesUniversalR823IntegratedReserveRefuted ≡ false
+navierStokesUniversalR823IntegratedReserveStillUnrefuted =
+  NSClayTOE.universalR823IntegratedReserveStillUnrefuted
+
+navierStokesInstantaneousSnapshotClayPromotion : Bool
+navierStokesInstantaneousSnapshotClayPromotion =
+  NSClayTOE.instantaneousSnapshotClayPromotion
+
+navierStokesInstantaneousSnapshotClayPromotionStillFalse :
+  navierStokesInstantaneousSnapshotClayPromotion ≡ false
+navierStokesInstantaneousSnapshotClayPromotionStillFalse =
+  NSClayTOE.instantaneousSnapshotClayPromotionStillFalse

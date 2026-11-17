@@ -8,6 +8,7 @@ open import Data.Empty using (⊥)
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 
 import DASHI.Unified.BalabanRGTOERegression as Balaban
+import DASHI.Unified.BalabanR559TOEMaxCutExact as BalabanR559
 import DASHI.EverythingTOESymmetryResolved369 as TOE
 import DASHI.Unifier as Unifier
 import DASHI.Unified.Physics as Physics
@@ -722,6 +723,7 @@ validationZKPFrame : Balaban.BalabanTOEZKPFrame
 validationZKPFrame =
   Balaban.canonicalBalabanTOEZKPFrame
 
+
 ------------------------------------------------------------------------
 -- Same-family Cauchy / Schwinger stress recovery agreement.
 ------------------------------------------------------------------------
@@ -879,3 +881,110 @@ physicsCPackageCountMatchesOwner :
   Physics.yangMillsBalabanCPhysicalPackageCount
   ≡ Balaban.balabanCPhysicalPackageCount
 physicsCPackageCountMatchesOwner = refl
+
+
+------------------------------------------------------------------------
+-- Current shortest critical-path agreement.
+------------------------------------------------------------------------
+
+toeCriticalPathCompilerMatchesOwner :
+  TOE.toeBalabanCriticalPathCompilerLevel
+  ≡ Balaban.balabanCriticalPathCompilerLevel
+toeCriticalPathCompilerMatchesOwner = refl
+
+unifierCriticalPathCompilerMatchesOwner :
+  Unifier.toeBalabanCriticalPathCompilerLevel
+  ≡ Balaban.balabanCriticalPathCompilerLevel
+unifierCriticalPathCompilerMatchesOwner = refl
+
+physicsCriticalPathCompilerMatchesOwner :
+  Physics.yangMillsBalabanCriticalPathCompilerLevel
+  ≡ Balaban.balabanCriticalPathCompilerLevel
+physicsCriticalPathCompilerMatchesOwner = refl
+
+toeCriticalFamilyCountMatchesOwner :
+  TOE.toeBalabanCriticalFamilyCount
+  ≡ Balaban.balabanCriticalFamilyCount
+toeCriticalFamilyCountMatchesOwner = refl
+
+unifierCriticalFamilyCountMatchesOwner :
+  Unifier.toeBalabanCriticalFamilyCount
+  ≡ Balaban.balabanCriticalFamilyCount
+unifierCriticalFamilyCountMatchesOwner = refl
+
+physicsCriticalFamilyCountMatchesOwner :
+  Physics.yangMillsBalabanCriticalFamilyCount
+  ≡ Balaban.balabanCriticalFamilyCount
+physicsCriticalFamilyCountMatchesOwner = refl
+
+toeFullCNotRequiredForMassGapMatchesOwner :
+  TOE.toeBalabanFullCLayerRequiredForMassGapCompiler
+  ≡ Balaban.balabanFullCLayerRequiredForMassGapCompiler
+toeFullCNotRequiredForMassGapMatchesOwner = refl
+
+unifierFullCNotRequiredForMassGapMatchesOwner :
+  Unifier.toeBalabanFullCLayerRequiredForMassGapCompiler
+  ≡ Balaban.balabanFullCLayerRequiredForMassGapCompiler
+unifierFullCNotRequiredForMassGapMatchesOwner = refl
+
+physicsFullCNotRequiredForMassGapMatchesOwner :
+  Physics.yangMillsBalabanFullCLayerRequiredForMassGapCompiler
+  ≡ Balaban.balabanFullCLayerRequiredForMassGapCompiler
+physicsFullCNotRequiredForMassGapMatchesOwner = refl
+
+toeFullCNotRequiredForH6MatchesOwner :
+  TOE.toeBalabanFullCLayerRequiredForMinimalH6Contradiction
+  ≡ Balaban.balabanFullCLayerRequiredForMinimalH6Contradiction
+toeFullCNotRequiredForH6MatchesOwner = refl
+
+unifierFullCNotRequiredForH6MatchesOwner :
+  Unifier.toeBalabanFullCLayerRequiredForMinimalH6Contradiction
+  ≡ Balaban.balabanFullCLayerRequiredForMinimalH6Contradiction
+unifierFullCNotRequiredForH6MatchesOwner = refl
+
+physicsFullCNotRequiredForH6MatchesOwner :
+  Physics.yangMillsBalabanFullCLayerRequiredForMinimalH6Contradiction
+  ≡ Balaban.balabanFullCLayerRequiredForMinimalH6Contradiction
+physicsFullCNotRequiredForH6MatchesOwner = refl
+
+toeFullCRetainedForLocalFieldMatchesOwner :
+  TOE.toeBalabanFullCLayerRetainedForConservativeClayLocalFieldExistence
+  ≡ Balaban.balabanFullCLayerRetainedForConservativeClayLocalFieldExistence
+toeFullCRetainedForLocalFieldMatchesOwner = refl
+
+unifierFullCRetainedForLocalFieldMatchesOwner :
+  Unifier.toeBalabanFullCLayerRetainedForConservativeClayLocalFieldExistence
+  ≡ Balaban.balabanFullCLayerRetainedForConservativeClayLocalFieldExistence
+unifierFullCRetainedForLocalFieldMatchesOwner = refl
+
+physicsFullCRetainedForLocalFieldMatchesOwner :
+  Physics.yangMillsBalabanFullCLayerRetainedForConservativeClayLocalFieldExistence
+  ≡ Balaban.balabanFullCLayerRetainedForConservativeClayLocalFieldExistence
+physicsFullCRetainedForLocalFieldMatchesOwner = refl
+
+
+------------------------------------------------------------------------
+-- Joint Balaban/R559 receipt carries the typed continuum firewalls.
+------------------------------------------------------------------------
+
+jointBalabanR559ContinuumLimitPromotionImpossible :
+  Balaban.BalabanContinuumLimitPromotion → ⊥
+jointBalabanR559ContinuumLimitPromotionImpossible =
+  BalabanR559.continuumLimitPromotionEliminator
+    BalabanR559.canonicalBalabanR559TOEMaxCutReceipt
+
+jointBalabanR559DepthContinuumLimitPromotionImpossible :
+  Balaban.DepthContinuumLimitPromotion → ⊥
+jointBalabanR559DepthContinuumLimitPromotionImpossible =
+  BalabanR559.depthContinuumLimitPromotionEliminator
+    BalabanR559.canonicalBalabanR559TOEMaxCutReceipt
+
+toeJointContinuumLimitPromotionMatchesJointOwner :
+  Balaban.BalabanContinuumLimitPromotion → ⊥
+toeJointContinuumLimitPromotionMatchesJointOwner =
+  TOE.toeBalabanR559ContinuumLimitPromotionImpossible
+
+unifierJointContinuumLimitPromotionMatchesJointOwner :
+  Balaban.BalabanContinuumLimitPromotion → ⊥
+unifierJointContinuumLimitPromotionMatchesJointOwner =
+  Unifier.unifierBalabanR559ContinuumLimitPromotionImpossible

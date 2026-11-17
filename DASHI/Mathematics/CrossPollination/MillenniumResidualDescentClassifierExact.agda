@@ -297,3 +297,28 @@ canonicalMillenniumResidualClassifierBoundary =
   millennium-residual-classifier-boundary
     true true true true
     false false false false
+
+
+------------------------------------------------------------------------
+-- Exact fail-closed theorem surface for TOE consumers.
+------------------------------------------------------------------------
+
+millenniumHodgeAlgebraicLiftStillNotConstructed :
+  hodgeAlgebraicLiftConstructed canonicalMillenniumResidualClassifierBoundary ≡ false
+millenniumHodgeAlgebraicLiftStillNotConstructed = refl
+
+millenniumBSDRankWeldStillNotUnconditional :
+  bsdRankWeldConstructedUnconditionally canonicalMillenniumResidualClassifierBoundary ≡ false
+millenniumBSDRankWeldStillNotUnconditional = refl
+
+millenniumPolynomialAlgorithmCoverageStillNotConstructed :
+  polynomialAlgorithmFamilyExhaustionConstructed canonicalMillenniumResidualClassifierBoundary ≡ false
+millenniumPolynomialAlgorithmCoverageStillNotConstructed = refl
+
+millenniumResidualClassifierDoesNotSolveAnyProblem :
+  anyOfThreeMillenniumProblemsSolvedHere canonicalMillenniumResidualClassifierBoundary ≡ false
+millenniumResidualClassifierDoesNotSolveAnyProblem = refl
+
+millenniumPvsNPNotDerivedFromNonDescentGrammar :
+  pNotEqualsNPDerived canonicalPvsNPUniformNonDescentResearchBoundary ≡ false
+millenniumPvsNPNotDerivedFromNonDescentGrammar = refl
