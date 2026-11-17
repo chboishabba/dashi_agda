@@ -92,6 +92,65 @@ class WeldTest(unittest.TestCase):
         self.assertTrue(m['complete_same_day_month'])
         self.assertFalse(m['true_original_observation_verified'])
 
+    def test_conditional_interval_for_removed_observation(self):
+        from fractions import Fraction
+        before=replace_day(month_rows(1910,2),1910,2,1,'20')
+        after=replace_day(before,1910,2,1,'')
+        with TemporaryDirectory() as tmp:
+            root=Path(tmp)
+            # reuse the already tested native-CSV fixture, with explicit source bytes
+            from hashlib import sha256
+            manifest={'schema':'dashi.bom.cdo.native_revision.v1'}
+            for side,body in [('before',before),('after',after)]:
+                buf=body.encode()
+                (root/(side+'.csv')).write_bytes(buf)
+                manifest[side]=[{'path':side+'.csv','sha256':sha256(buf).hexdigest(),
+                    'capture_utc': '2026-05-01T10:00:00+10:00' if side=='before'
+                                  else '2026-10-30T10:00:00+10:00'}]
+            m=weld.summarize(manifest,root,'0','40')['months'][0]
+        interval=m['conditional_fixed_calendar_delta_interval']
+        self.assertEqual(Fraction(interval['lower_fixed_calendar_delta_C']),Fraction(-5,7))
+        self.assertEqual(Fraction(interval['upper_fixed_calendar_delta_C']),Fraction(5,7))
+        self.assertEqual(interval['unknown_after_days'],1)
+        self.assertEqual(interval['unknown_before_days'],0)
+        self.assertIsNone(m['full_month_delta_exact'])
+        self.assertTrue(interval['bounds_are_conditional_not_measured'])
+
+    def test_conditional_bounds_collapse_with_complete_known_days(self):
+        old=month_rows(1910,2)
+        new=replace_day(old,1910,2,1,'17')
+        def rows(text):
+            result={}
+            for line in text.splitlines()[1:]:
+                fields=line.split(',')
+                key=('066062',f'{fields[2]}-{int(fields[3]):02d}-{int(fields[4]):02d}','tmax')
+                from decimal import Decimal
+                result[key]=(Decimal(fields[5]),Decimal(fields[6]),fields[7])
+            return result
+        interval=weld.conditional_month_delta_bounds(rows(old),rows(new),'066062','tmax','1910-02',0,40)
+        self.assertEqual(interval['lower_fixed_calendar_delta_C'],'1/4')
+        self.assertEqual(interval['upper_fixed_calendar_delta_C'],'1/4')
+
+    def test_conditional_bounds_fail_closed_when_observed_outside_range(self):
+        from decimal import Decimal
+        key=('066062','1910-02-01','tmax')
+        old={key:(Decimal(60),Decimal(1),'Y')}
+        with self.assertRaises(ValueError):
+            weld.conditional_month_delta_bounds(old,old,'066062','tmax','1910-02',0,40)
+
+    def test_conditional_bounds_reject_invalid_range_and_rain(self):
+        with self.assertRaises(ValueError):
+            weld.conditional_month_delta_bounds({}, {}, '066062','tmax','1910-02',40,0)
+        with self.assertRaises(ValueError):
+            weld.conditional_month_delta_bounds({}, {}, '066062','rain','1910-02',0,40)
+
+    def test_fully_unavailable_days_remain_interval_not_imputed(self):
+        interval=weld.conditional_month_delta_bounds({}, {}, '066062','tmin','1910-02',-10,40)
+        self.assertEqual(interval['lower_fixed_calendar_delta_C'],'-50')
+        self.assertEqual(interval['upper_fixed_calendar_delta_C'],'50')
+        self.assertEqual(interval['unknown_before_days'],28)
+        self.assertEqual(interval['unknown_after_days'],28)
+
     def test_complete_month_changed_one_day_mean(self):
         a=month_rows(1910,2)
         b=replace_day(a,1910,2,1,'17.0')
