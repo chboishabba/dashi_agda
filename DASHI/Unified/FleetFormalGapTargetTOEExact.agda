@@ -257,9 +257,8 @@ fleetExternalPlanningTextDoesNotCreateFormalResidual = refl
 ------------------------------------------------------------------------
 -- Typed non-promotion gates for the fleet planning frontier.
 --
--- The Boolean receipt fields remain useful audit facts.
--- These empty types add constructive fail-closed gates for consumers.
--- They do not validate the external producer run.
+-- The Boolean receipt fields remain audit facts.
+-- These constructorless types give consumers exact fail-closed gates.
 ------------------------------------------------------------------------
 
 data FleetEigenPriorityCreatesProof : Set where
