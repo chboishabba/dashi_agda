@@ -1514,3 +1514,6 @@ import DASHI.Physics.YangMills.YMClaySU2FejerProductFiniteExact as SU2RootFreeFe
 
 -- YM.REAL finite quaternion/Bishop matrix trace weld; Haar and unitary gates OPEN.
 import DASHI.Physics.YangMills.YMClayBishopSU2QuaternionTraceWeldExact as BishopSU2QuaternionTrace
+
+-- YM.REAL: actual finite weighted integration laws; analytic Haar still open.
+import DASHI.Physics.YangMills.YMClayBishopFiniteWeightedIntegralLawsExact as BishopFiniteWeightedIntegral
