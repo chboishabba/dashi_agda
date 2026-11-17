@@ -18,6 +18,8 @@ targets=(
   DASHI/Physics/YangMills/YMClayP0BishopRealCarrierInstancesExact.agda
   DASHI/Physics/YangMills/YMClayP0BishopToOriginalWilsonRealWeldExact.agda
   DASHI/Physics/YangMills/BalabanSU2RationalWilsonTraceBoundExact.agda
+  DASHI/Physics/YangMills/YMClaySU2FejerProductFiniteExact.agda
+  DASHI/Physics/YangMills/YMClayBishopSU2QuaternionTraceWeldExact.agda
 )
 
 for target in "${targets[@]}"; do
@@ -26,6 +28,8 @@ for target in "${targets[@]}"; do
     exit 2
   fi
 done
+
+python3 scripts/check_ym_su2_fejer_rootfree_20261117.py
 
 if ! command -v nix >/dev/null 2>&1; then
   echo 'Nix unavailable: local P0 Agda acceptance NOT performed' >&2
@@ -40,5 +44,5 @@ for target in "${targets[@]}"; do
     bash scripts/run_agda29_parallel_check.sh "$target"
 done
 
-echo 'PASS: all three isolated P0 scalar/SU2 Agda module checks completed.'
+echo 'PASS: all five isolated P0 scalar/SU2 Agda module checks completed.'
 echo 'NOTE: OriginalWilsonToBishopScalarWeld is not thereby inhabited.'
