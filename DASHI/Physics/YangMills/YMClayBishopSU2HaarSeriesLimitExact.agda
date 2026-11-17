@@ -14,7 +14,10 @@ module DASHI.Physics.YangMills.YMClayBishopSU2HaarSeriesLimitExact where
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 import Real as B
 import Sequence as Seq
-import DASHI.Foundations.BishopConstructiveRealBridgeExact as Bridge
+open import Data.Product.Base using (proj₂)
+-- Direct pinned Bishop Sequence backend: intentionally bypasses the
+-- legacy-real-axiom-importing BishopConstructiveRealBridgeExact.
+
 
 record EffectiveHaarApproximation (Sphere : Set) : Set₁ where
   field
@@ -33,32 +36,28 @@ record EffectiveHaarApproximation (Sphere : Set) : Set₁ where
     -- prove the dyadic series of successive differences absolutely
     -- converges. This must NOT be treated as a free Haar integral law.
     absoluteDyadicTelescope : ∀ f →
-      Bridge.BishopAbsoluteSeriesConvergent (difference f)
+      Seq.SeriesOf_ConvergesAbsolutely (difference f)
 
   completedIntegral : (Sphere → B.ℝ) → B.ℝ
   completedIntegral f =
-    Bridge.bishopSeriesLimit
-      (difference f)
-      (absoluteDyadicTelescope f)
+    Seq.lim
+      (Seq.absolute⇒isConvergent (absoluteDyadicTelescope f))
 
 
   completedIntegralConvergence : ∀ f →
-    Bridge.BishopConvergesTo
+    Seq._ConvergesTo_
       (Seq.SeriesOf (difference f))
       (completedIntegral f)
   completedIntegralConvergence f =
-    Bridge.bishopSeriesLimitConvergence
-      (difference f)
-      (absoluteDyadicTelescope f)
+    proj₂ (Seq.absolute⇒isConvergent (absoluteDyadicTelescope f))
 
   completedIntegralUnique : ∀ f {candidate : B.ℝ} →
     Bridge.BishopConvergesTo
       (Seq.SeriesOf (difference f)) candidate →
-    Bridge.BishopEquivalent (completedIntegral f) candidate
+    B._≃_ (completedIntegral f) candidate
   completedIntegralUnique f candidateConverges =
-    Bridge.bishopSeriesLimitUnique
-      (difference f)
-      (absoluteDyadicTelescope f)
+    Seq.uniqueness-of-limits
+      (completedIntegralConvergence f)
       candidateConverges
 
 open EffectiveHaarApproximation public
