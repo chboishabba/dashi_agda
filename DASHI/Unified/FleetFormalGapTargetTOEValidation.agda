@@ -264,47 +264,57 @@ toeResidualFieldStillNotPromoted :
 toeResidualFieldStillNotPromoted =
   TOE.toeFleetResidualFieldPromotionImpossible
 
-
 ------------------------------------------------------------------------
--- Exact R5 ordinal-cut regression.
+-- Named-manifest acquisition remains fail-closed at both TOE facades.
 ------------------------------------------------------------------------
 
-fleetOrdinalCutTargetsExactly58 :
-  Fleet.fleetFormalGapOrdinalCount ≡ 58
-fleetOrdinalCutTargetsExactly58 =
-  Fleet.fleetFormalGapOrdinalCountIs58
+toeFleetNamedManifestStillMissingMatches :
+  Fleet.namedFormalGapManifestAcquired ≡ false
+toeFleetNamedManifestStillMissingMatches =
+  TOE.toeFleetNamedManifestStillMissing
 
-fleetOrdinalCutExcludesExactly584Discharged :
-  Fleet.fleetDischargedOrdinalCount ≡ 584
-fleetOrdinalCutExcludesExactly584Discharged =
-  Fleet.fleetDischargedOrdinalCountIs584
+unifierFleetNamedManifestStillMissingMatches :
+  Fleet.namedFormalGapManifestAcquired ≡ false
+unifierFleetNamedManifestStillMissingMatches =
+  Unifier.unifierFleetNamedManifestStillMissing
 
-fleetOrdinalCutSeparatesExactly44Contradictions :
-  Fleet.fleetContradictionOrdinalCount ≡ 44
-fleetOrdinalCutSeparatesExactly44Contradictions =
-  Fleet.fleetContradictionOrdinalCountIs44
+toeFleetPerGapDispatchStillBlockedMatches :
+  Fleet.perGapDispatchEnabled ≡ false
+toeFleetPerGapDispatchStillBlockedMatches =
+  TOE.toeFleetPerGapDispatchStillBlocked
 
-fleetOrdinalCutDoesNotClaimPersistedRowIdentity :
-  Fleet.fleetOrdinalCarriesPersistedRowIdentity ≡ false
-fleetOrdinalCutDoesNotClaimPersistedRowIdentity =
-  Fleet.fleetOrdinalCarriesPersistedRowIdentityIsFalse
+unifierFleetPerGapDispatchStillBlockedMatches :
+  Fleet.perGapDispatchEnabled ≡ false
+unifierFleetPerGapDispatchStillBlockedMatches =
+  Unifier.unifierFleetPerGapDispatchStillBlocked
 
-toeFleetOrdinalCutMatchesOwner :
-  TOE.toeFleetR5OrdinalCutReceipt
-  ≡ Fleet.canonicalFleetR5OrdinalCutReceipt
-toeFleetOrdinalCutMatchesOwner = refl
+toeFleetRelatedSymbolsRequiredMatches :
+  Fleet.fleetRelatedSymbolsRequired ≡ true
+toeFleetRelatedSymbolsRequiredMatches =
+  TOE.toeFleetRelatedSymbolsRequired
 
-unifierFleetOrdinalCutMatchesOwner :
-  Unifier.unifierFleetR5OrdinalCutReceipt
-  ≡ Fleet.canonicalFleetR5OrdinalCutReceipt
-unifierFleetOrdinalCutMatchesOwner = refl
+unifierFleetRelatedSymbolsRequiredMatches :
+  Fleet.fleetRelatedSymbolsRequired ≡ true
+unifierFleetRelatedSymbolsRequiredMatches =
+  Unifier.unifierFleetRelatedSymbolsRequired
 
-toeFleetSharedCardinalityStillDoesNotCreateIdentity :
-  Fleet.FleetSharedCardinalityCreatesIdentity → ⊥
-toeFleetSharedCardinalityStillDoesNotCreateIdentity =
-  TOE.toeFleetSharedCardinalityDoesNotCreateIdentity
+toeFleetDiscoverRequiredMatches :
+  Fleet.fleetDiscoverRequired ≡ true
+toeFleetDiscoverRequiredMatches =
+  TOE.toeFleetDiscoverRequired
 
-unifierFleetSharedCardinalityStillDoesNotCreateIdentity :
-  Fleet.FleetSharedCardinalityCreatesIdentity → ⊥
-unifierFleetSharedCardinalityStillDoesNotCreateIdentity =
-  Unifier.unifierFleetSharedCardinalityDoesNotCreateIdentity
+unifierFleetDiscoverRequiredMatches :
+  Fleet.fleetDiscoverRequired ≡ true
+unifierFleetDiscoverRequiredMatches =
+  Unifier.unifierFleetDiscoverRequired
+
+toeFleetRoundLineageRequiredMatches :
+  Fleet.fleetRoundLineageRequired ≡ true
+toeFleetRoundLineageRequiredMatches =
+  TOE.toeFleetRoundLineageRequired
+
+unifierFleetRoundLineageRequiredMatches :
+  Fleet.fleetRoundLineageRequired ≡ true
+unifierFleetRoundLineageRequiredMatches =
+  Unifier.unifierFleetRoundLineageRequired
+

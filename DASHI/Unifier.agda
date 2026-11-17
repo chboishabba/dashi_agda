@@ -876,27 +876,65 @@ unifierGovernedLegalWorkflowSourceSemanticHandoff =
 unifierGovernedSharedLexemeDoesNotCreateSemanticIdentity =
   LegalSourceSemantic.toeSharedLexemeDoesNotCreateSemanticIdentity
 
-unifierGovernedDiagnosticCheckDoesNotCreateTheoremPromotion =
-  LegalSourceSemantic.toeDiagnosticCheckDoesNotCreateTheoremPromotion
+toeBrainJPromotionBlocked :
+  BrainSpine.objectExternalJPromotion BrainFMRI.brainFMRIObject ≡ false
+toeBrainJPromotionBlocked = BrainFMRI.brainFMRIJPromotionBlocked
 
-unifierGovernedSourceIdentifierDoesNotCreateProofAuthority =
-  LegalSourceSemantic.toeSourceIdentifierDoesNotCreateProofAuthority
+------------------------------------------------------------------------
+-- Current Gate-4 frontier, Fleet target split, and manifest boundary.
+------------------------------------------------------------------------
 
-unifierGovernedESDSurfaceMutationRemainsForbidden =
-  LegalSourceSemantic.toeESDSurfaceMutationRemainsForbidden
+unifierCurrentGate4FrontierLedgerLevel : ProofLevel
+unifierCurrentGate4FrontierLedgerLevel =
+  FleetHyperTOE.currentGate4FrontierLedgerLevel
 
+unifierCurrentGate4ClusteringToTransferGapLevel : ProofLevel
+unifierCurrentGate4ClusteringToTransferGapLevel =
+  FleetHyperTOE.currentGate4ClusteringToTransferGapLevel
 
-unifierGovernedRuntimeCannotInventLegalSemantics =
-  LegalSourceSemantic.toeRuntimeCannotInventLegalSemantics
+unifierFleetFormalGapTargetSelected : Bool
+unifierFleetFormalGapTargetSelected =
+  FleetHyperTOE.fleetFormalGapTargetSelected
 
-unifierGovernedSourceFollowCannotCreateAuthorityByTransport =
-  LegalSourceSemantic.toeSourceFollowCannotCreateAuthorityByTransport
+unifierHistoricalGate4CountSelectedAsFleetTarget : Bool
+unifierHistoricalGate4CountSelectedAsFleetTarget =
+  FleetHyperTOE.historicalGate4CountSelectedAsFleetTarget
 
-unifierGovernedTargetDomainNeedsOwnAuthorityWitness =
-  LegalSourceSemantic.toeTargetDomainNeedsOwnAuthorityWitness
+unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
+  FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
+unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
+  FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
 
-unifierGovernedRepresentationEqualityDoesNotCreateLegalAuthority =
-  LegalSourceSemantic.toeRepresentationEqualityDoesNotCreateLegalAuthority
+unifierFleetManifestAcquisitionDemand =
+  FleetGapTOE.fleetManifestAcquisitionDemand
 
-unifierGovernedVendorIdentityDoesNotCreateAuthority =
-  LegalSourceSemantic.toeVendorIdentityDoesNotCreateAuthority
+unifierFleetNamedManifestStillMissing :
+  FleetGapTOE.namedFormalGapManifestAcquired ≡ false
+unifierFleetNamedManifestStillMissing =
+  FleetGapTOE.namedFormalGapManifestAcquiredIsFalse
+
+unifierFleetPerGapDispatchStillBlocked :
+  FleetGapTOE.perGapDispatchEnabled ≡ false
+unifierFleetPerGapDispatchStillBlocked =
+  FleetGapTOE.perGapDispatchEnabledIsFalse
+
+unifierFleetRelatedSymbolsRequired :
+  FleetGapTOE.fleetRelatedSymbolsRequired ≡ true
+unifierFleetRelatedSymbolsRequired =
+  FleetGapTOE.fleetRelatedSymbolsRequiredIsTrue
+
+unifierFleetDiscoverRequired :
+  FleetGapTOE.fleetDiscoverRequired ≡ true
+unifierFleetDiscoverRequired =
+  FleetGapTOE.fleetDiscoverRequiredIsTrue
+
+unifierFleetRoundLineageRequired :
+  FleetGapTOE.fleetRoundLineageRequired ≡ true
+unifierFleetRoundLineageRequired =
+  FleetGapTOE.fleetRoundLineageRequiredIsTrue
+
+unifierFleetCountDoesNotCreateNamedManifest :
+  FleetGapTOE.CountCreatesNamedManifest → ⊥
+unifierFleetCountDoesNotCreateNamedManifest =
+  FleetGapTOE.fleetCountDoesNotCreateNamedManifest
+

@@ -202,7 +202,7 @@ unifierFleet58DoesNotIdentifyYMGate4 =
   Unifier.unifierFleet58DoesNotIdentifyYMGate4
 
 ------------------------------------------------------------------------
--- Live frontier, target split, and typed continuum no-go validation.
+-- Live frontier, target split, and canonical continuum no-go validation.
 ------------------------------------------------------------------------
 
 toeCurrentGate4FrontierMatchesOwner :
@@ -264,3 +264,4 @@ unifiedDepthContinuumNoGoReachable :
   Owner.DepthContinuumPromotion → ⊥
 unifiedDepthContinuumNoGoReachable =
   Unified.unifiedDepthContinuumLimitPromotionImpossible
+

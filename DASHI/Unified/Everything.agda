@@ -630,54 +630,31 @@ governedGenealogyAdmissionDoesNotBecomeLegalSourceAuthority =
   LegalSourceGenealogy.toeGenealogyAdmissionDoesNotBecomeLegalSourceAuthority
 
 
-governedGenealogyCandidateSourceDoesNotCreateLegalAuthority =
-  LegalSourceGenealogy.toeGenealogyCandidateSourceDoesNotCreateLegalAuthority
-
-governedGenealogySameLegalSystemDoesNotCreateLegalAuthority =
-  LegalSourceGenealogy.toeGenealogySameLegalSystemDoesNotCreateLegalAuthority
-
-governedGenealogyCurrentValidityDoesNotCreateApplicability =
-  LegalSourceGenealogy.toeGenealogyCurrentValidityDoesNotCreateApplicability
-
-governedGenealogyDocumentRoleDoesNotCreateLegalAuthority =
-  LegalSourceGenealogy.toeGenealogyDocumentRoleDoesNotCreateLegalAuthority
+unified369Ternary27MonsterEmbeddingNotPromoted =
+  MaxCut369.toe27MonsterEmbeddingNotPromoted
 
 ------------------------------------------------------------------------
--- Governed legal/source/semantic non-promotion handoff.
+-- Live Gate-4 frontier and Fleet target selection.
 ------------------------------------------------------------------------
 
-import DASHI.Unified.GovernedLegalWorkflowSourceSemanticTOEExact as LegalSourceSemantic
-import DASHI.Unified.GovernedLegalWorkflowSourceSemanticTOERegression
+unifiedCurrentGate4FrontierLedgerLevel : ProofLevel
+unifiedCurrentGate4FrontierLedgerLevel =
+  FleetHyperTOE.currentGate4FrontierLedgerLevel
 
-governedLegalWorkflowSourceSemanticHandoff :
-  LegalSourceSemantic.GovernedLegalWorkflowSourceSemanticHandoff
-governedLegalWorkflowSourceSemanticHandoff =
-  LegalSourceSemantic.canonicalGovernedLegalWorkflowSourceSemanticHandoff
+unifiedCurrentGate4ClusteringToTransferGapLevel : ProofLevel
+unifiedCurrentGate4ClusteringToTransferGapLevel =
+  FleetHyperTOE.currentGate4ClusteringToTransferGapLevel
 
-governedSharedLexemeDoesNotCreateSemanticIdentity =
-  LegalSourceSemantic.toeSharedLexemeDoesNotCreateSemanticIdentity
+unifiedFleetFormalGapTargetSelected : Bool
+unifiedFleetFormalGapTargetSelected =
+  FleetHyperTOE.fleetFormalGapTargetSelected
 
-governedDiagnosticCheckDoesNotCreateTheoremPromotion =
-  LegalSourceSemantic.toeDiagnosticCheckDoesNotCreateTheoremPromotion
+unifiedHistoricalGate4CountSelectedAsFleetTarget : Bool
+unifiedHistoricalGate4CountSelectedAsFleetTarget =
+  FleetHyperTOE.historicalGate4CountSelectedAsFleetTarget
 
-governedSourceIdentifierDoesNotCreateProofAuthority =
-  LegalSourceSemantic.toeSourceIdentifierDoesNotCreateProofAuthority
+unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
+  FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
+unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
+  FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
 
-governedESDSurfaceMutationRemainsForbidden =
-  LegalSourceSemantic.toeESDSurfaceMutationRemainsForbidden
-
-
-governedRuntimeCannotInventLegalSemantics =
-  LegalSourceSemantic.toeRuntimeCannotInventLegalSemantics
-
-governedSourceFollowCannotCreateAuthorityByTransport =
-  LegalSourceSemantic.toeSourceFollowCannotCreateAuthorityByTransport
-
-governedTargetDomainNeedsOwnAuthorityWitness =
-  LegalSourceSemantic.toeTargetDomainNeedsOwnAuthorityWitness
-
-governedRepresentationEqualityDoesNotCreateLegalAuthority =
-  LegalSourceSemantic.toeRepresentationEqualityDoesNotCreateLegalAuthority
-
-governedVendorIdentityDoesNotCreateAuthority =
-  LegalSourceSemantic.toeVendorIdentityDoesNotCreateAuthority
