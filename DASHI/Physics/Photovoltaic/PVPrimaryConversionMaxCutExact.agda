@@ -4,7 +4,7 @@ module DASHI.Physics.Photovoltaic.PVPrimaryConversionMaxCutExact where
 -- Thermal is an auxiliary port. This source is not Agda-kernel accepted,
 -- is not measured material physics and does not prove >50% efficiency.
 
-open import Agda.Builtin.Nat using (Nat; _+_)
+open import Agda.Builtin.Nat using (Nat; suc; _+_)
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.String using (String)
 
@@ -93,9 +93,11 @@ record MatchedDrivenPVGain : Set where
     sameInitialStore : initialStored passive ≡ initialStored driven
     sameFinalStore : finalStored passive ≡ finalStored driven
     sameApertureAndSpectrum sameCellAndTimeWindow : String
+    -- Strict benefit, not merely a tie. The previous weak <= proof
+    -- erroneously admitted equal-output/equal-drive controls.
     positiveNetElectricalGain :
       Bound._≤_
-        (exportedElectrical passive +
-         (recoveredRFDrive passive + suppliedRFDrive driven))
+        (suc (exportedElectrical passive +
+         (recoveredRFDrive passive + suppliedRFDrive driven)))
         (exportedElectrical driven +
          (recoveredRFDrive driven + suppliedRFDrive passive))
