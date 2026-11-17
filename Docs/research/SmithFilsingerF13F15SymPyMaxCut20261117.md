@@ -1,7 +1,7 @@
 # F13 / F15 / D1 exact SymPy maximum cut — 17 November 2026
 
 ## What was actually completed
-A new exact 3-layer (soil, air, ionosphere), 2-polarization-per-layer *reduced transverse* finite-volume Maxwell-wave resolvent, plus a signed full-cycle work audit and uncertainty certificate. **25/25 separately run SymPy exact rational/symbolic tests PASS.** This is not a full 3D dyadic Green solution, measured solar-source transfer or Agda-kernel proof.
+A new exact 3-layer (soil, air, ionosphere), 2-polarization-per-layer *reduced transverse* finite-volume Maxwell-wave resolvent, plus a signed full-cycle work audit and uncertainty certificate. **32/32 separately run SymPy exact rational/symbolic tests PASS.** This is not a full 3D dyadic Green solution, measured solar-source transfer or Agda-kernel proof.
 
 ### Source-first reuse
 Existing canonical owners: BalabanFiniteCoerciveGreen (finite inverse/norm), BalabanSide4ScalarGreenConvolutionExact (real periodic elliptic inverse), SmithFilsingerCoerciveGreenRetardedWeldExact (delayed original source and launch clock), SmithFilsingerReplenishedCycleCapExact (repeatable work law), SmithFilsingerSpaceTimePoyntingTelescopeExact (signed source and outgoing flux), and KSW668FullVectorMaxwellJetExact (pointwise full-vector Poynting). No duplicate Green theorem was constructed.
@@ -39,3 +39,14 @@ F15: independently measured and replenished **same-original** solar-attributed s
 D1: actual pinned Agda 2.9 typecheck on exact branch head remains OPEN. SymPy exact tests are a useful independent oracle, NOT replacement.
 
 Attribution: classical Maxwell/Green and Hall/Pedersen background reused; user-origin Smith/Filsinger nonlinear Sun–Earth source hypothesis remains conditional. No ESD edits or premature TOE promotion.
+
+
+### Additional planar Maxwell full tangential 4×4 transfer
+
+New scripts/smith_filsinger_tangential_maxwell_sympy.py and scripts/test_smith_filsinger_tangential_maxwell_sympy.py construct a Fourier-domain first-order Maxwell generator for four tangential components [E_x,E_y,H_x,H_y], Fourier dependence exp(i k_x x - i omega t), scalar mu and tensor eps with eps_xz=eps_yz=0. Maxwell's curl equations determine the eliminated longitudinal components H_z=(k_x/(omega mu)) E_y and E_z=-(k_x/(omega eps_zz)) H_y. Cross-coupling eps_xy and eps_yx is retained. The exact layer transfer is the **spatial implicit-midpoint/Cayley approximation** T(d)=(I-dM/2)^(-1)(I+dM/2), NOT the continuum exp(M d). Three independent layer transfers are multiplied in physical order without changing tangential state at each interface.
+
+**7/7 additional SymPy exact tests PASS**: symbolic four-component Maxwell differential equations and trace zero; reversibility T(d)T(-d)=I and det(T)=1 at three k_x values; exact 3-layer interface composition; Hall cross-polarization; degenerate eps_zz rejection. **32/32 total exact mathematical tests pass** on the locally executed mathematical implementation. These tests do not establish causal radiation boundary selection, a physical dyadic Green kernel or any source work.
+
+Source evidence: https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2007JA012911 treats Maxwell in stratified ionospheric media with a tensor permittivity and layered boundary conditions. The exact fixture matrices here are a math control and not that paper's calibrated field solution.
+
+This additional 4x4 operator is closer to the actual F13 Maxwell operator than the reduced six-state stiffness model, but both remain limited spectral/finite approximations, not a physical 3D Maxwell retarded dyadic with original electrode boundary readback.
