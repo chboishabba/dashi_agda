@@ -45,13 +45,19 @@ secondNumeratorExact : weightedSecond ≡ (+ 1273207 / 10616832)
 secondNumeratorExact = refl
 
 -- Explicit normalized values, using the already certified strictly
--- positive partition. Denominator / is the rational field operation;
+-- positive partition. The reciprocal is an explicit exact rational;
 -- no real-limit witness is hidden in the normalization.
+reciprocalPartition : ℚ
+reciprocalPartition = + 147456 / 140731
+
+partitionReciprocalExact : RG.coarseTotal * reciprocalPartition ≡ 1ℚ
+partitionReciprocalExact = refl
+
 meanT : ℚ
-meanT = weightedFirst / RG.coarseTotal
+meanT = weightedFirst * reciprocalPartition
 
 secondT : ℚ
-secondT = weightedSecond / RG.coarseTotal
+secondT = weightedSecond * reciprocalPartition
 
 varianceT : ℚ
 varianceT = secondT - meanT * meanT
