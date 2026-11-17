@@ -18,6 +18,7 @@ module DASHI.Cognition.PNF.X369ConsumerSufficientCompressionNoGoExact where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Product using (_×_; _,_)
 open import Data.Empty using (⊥)
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 import DASHI.Cognition.PNF.ModularFourierGrokkingC3Exact as Grok
@@ -353,3 +354,98 @@ compressedTransitionPreservesEveryFutureConsumer
 -- Converse caution: equal current consumer observations do not
 -- construct stepCode. The tagSensitiveStep witness above exhibits
 -- the obstruction: two equal codes have different next codes.
+
+
+------------------------------------------------------------------------
+-- P0h: CONCRETE exact fixed-width quantization bound.
+-- For the selected phase consumer (3 distinct values):
+--   1 Bool bit cannot encode all consumer outcomes;
+--   2 Bool bits can, although the independent fine tag is lost.
+-- This is fixed-width / zero-error phase coding, not an estimate of
+-- neural weight precision, Shannon entropy, hardware or byte savings.
+------------------------------------------------------------------------
+
+tag0 tag1 tag2 : TaggedPhase
+tag0 = tagged Wheel.phase-0 false
+tag1 = tagged Wheel.phase-1 false
+tag2 = tagged Wheel.phase-2 false
+
+phase01Distinct : Wheel.phase-0 ≡ Wheel.phase-1 → ⊥
+phase01Distinct ()
+
+phase02Distinct : Wheel.phase-0 ≡ Wheel.phase-2 → ⊥
+phase02Distinct ()
+
+phase12Distinct : Wheel.phase-1 ≡ Wheel.phase-2 → ⊥
+phase12Distinct ()
+
+oneBitCannotPreserveThreePhaseConsumer :
+  (encode : TaggedPhase → Bool) →
+  Descent.ConsumerSufficient encode phaseConsumer → ⊥
+oneBitCannotPreserveThreePhaseConsumer encode sufficient
+  with encode tag0 | encode tag1 | encode tag2
+... | false | false | false =
+  phase01Distinct (sufficient tag0 tag1 refl)
+... | false | false | true =
+  phase01Distinct (sufficient tag0 tag1 refl)
+... | false | true | false =
+  phase02Distinct (sufficient tag0 tag2 refl)
+... | false | true | true =
+  phase12Distinct (sufficient tag1 tag2 refl)
+... | true | false | false =
+  phase12Distinct (sufficient tag1 tag2 refl)
+... | true | false | true =
+  phase02Distinct (sufficient tag0 tag2 refl)
+... | true | true | false =
+  phase01Distinct (sufficient tag0 tag1 refl)
+... | true | true | true =
+  phase01Distinct (sufficient tag0 tag1 refl)
+
+TwoBits : Set
+TwoBits = Bool × Bool
+
+phaseToTwoBits : Phase → TwoBits
+phaseToTwoBits Wheel.phase-0 = false , false
+phaseToTwoBits Wheel.phase-1 = false , true
+phaseToTwoBits Wheel.phase-2 = true , false
+
+twoBitsToPhase : TwoBits → Phase
+twoBitsToPhase (false , false) = Wheel.phase-0
+twoBitsToPhase (false , true) = Wheel.phase-1
+twoBitsToPhase (true , false) = Wheel.phase-2
+twoBitsToPhase (true , true) = Wheel.phase-0
+
+phaseTwoBitRoundTrip : (p : Phase) →
+  twoBitsToPhase (phaseToTwoBits p) ≡ p
+phaseTwoBitRoundTrip Wheel.phase-0 = refl
+phaseTwoBitRoundTrip Wheel.phase-1 = refl
+phaseTwoBitRoundTrip Wheel.phase-2 = refl
+
+taggedTwoBitEncode : TaggedPhase → TwoBits
+taggedTwoBitEncode x = phaseToTwoBits (consumerPhase x)
+
+taggedTwoBitPreservesConsumer :
+  (x : TaggedPhase) →
+  twoBitsToPhase (taggedTwoBitEncode x) ≡ phaseConsumer x
+taggedTwoBitPreservesConsumer (tagged Wheel.phase-0 b) = refl
+taggedTwoBitPreservesConsumer (tagged Wheel.phase-1 b) = refl
+taggedTwoBitPreservesConsumer (tagged Wheel.phase-2 b) = refl
+
+twoBitsSufficientForPhase :
+  Descent.ConsumerSufficient taggedTwoBitEncode phaseConsumer
+twoBitsSufficientForPhase x y sameCode =
+  trans
+    (sym (taggedTwoBitPreservesConsumer x))
+    (trans
+      (cong twoBitsToPhase sameCode)
+      (taggedTwoBitPreservesConsumer y))
+
+twoBitsDiscardTheIrrelevantTag :
+  taggedTwoBitEncode (tagged Wheel.phase-1 true)
+  ≡ taggedTwoBitEncode (tagged Wheel.phase-1 false)
+twoBitsDiscardTheIrrelevantTag = refl
+
+-- The 1-bit impossibility and 2-bit construction establish a
+-- minimum fixed width for THIS exact three-outcome consumer.
+-- Cost optimality for actual source model execution still needs
+-- the existing admissible-consumer MDL / Pareto resource owner.
