@@ -1,0 +1,9 @@
+{
+  "schema": "DASHI.V2.magnetic-current-tracking-acceptance.v2",
+  "test_pass": 74,
+  "new_tests": 16,
+  "scope": "magnetic submodules only, local execution",
+  "agda_kernel": "NOT RUN",
+  "github_ci": "NOT RUN",
+  "physical_v2": "UNVERIFIED"
+}
