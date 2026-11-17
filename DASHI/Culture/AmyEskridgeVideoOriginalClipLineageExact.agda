@@ -19,7 +19,10 @@ module DASHI.Culture.AmyEskridgeVideoOriginalClipLineageExact where
 -- https://www.youtube.com/watch?v=DQbYiXyRZjM
 -- NOTE: not every Burisch edit comes from the SAME original interview.
 -- Preserve distinction between 2006 Part 2 and 2007 Stargate Secrets.
--- Deutsch video and presentiment interview remain original-recording gaps.
+-- Deutsch 1995 Noorderlicht interview identified by original video ID and
+-- independent scholarly bibliography. Presentiment audiovisual clip still open;
+-- Cornell 2010 Bem source quotation and Radin physiological studies remain
+-- separate evidence objects.
 
 open import Agda.Builtin.String using (String)
 open import Agda.Builtin.List using (List; []; _∷_)
@@ -115,12 +118,12 @@ clip07 : ClipLineage
 clip07 = clip-lineage
   "17:13–17:40"
   "David Deutsch"
-  "Unresolved interview original; quantum many-worlds discussion"
-  "unresolved"
-  "https://www.daviddeutsch.org.uk/"
-  "Original video clip unresolved"
-  voiceAttributedOriginalUnlocated
-  "Many-worlds cosmological account is not corroboration of Burisch's device"
+  "Noorderlicht - The Multiverse (David Deutsch interview)"
+  "1995"
+  "https://www.youtube.com/watch?v=SDZ454K_lBY"
+  "original public video ~20:10 onward; independent 2017 scholarly bibliography cites 1995 Noorderlicht recording"
+  exactWordingLocated
+  "Recorded Deutsch multiverse explanation, NOT operational proof of timeline modification; source publication independently cited in scholarly literature"
 
 clip08 : ClipLineage
 clip08 = clip-lineage
@@ -137,12 +140,12 @@ clip09 : ClipLineage
 clip09 = clip-lineage
   "18:35–19:10"
   "Unidentified interview speaker; narrator invokes Daryl Bem"
-  "Presentiment physiology interview clip; exact source unresolved"
-  "unresolved"
-  "https://pubmed.ncbi.nlm.nih.gov/21280961/"
-  "Original footage unresolved; Bem 2011 paper is different protocol"
+  "Daryl Bem paraphrase / unidentified original speaker; Radin is a separate experimental primary"
+  "2010–2011"
+  "https://news.cornell.edu/stories/2010/12/study-looks-brains-ability-see-future"
+  "Cornell News 2010 reproduces near-identical Bem physiology explanation; exact audiovisual voice still NOT identified"
   voiceAttributedOriginalUnlocated
-  "Arousal preceding randomized pictures is presentiment literature, not necessarily a Bem experiment"
+  "Do not silently label this as an actual Bem physiological trial; psychophysiological presentiment experiment by Radin is independent (not video speaker established)"
 
 clip10 : ClipLineage
 clip10 = clip-lineage
