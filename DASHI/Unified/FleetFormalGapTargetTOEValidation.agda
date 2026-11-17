@@ -266,57 +266,55 @@ toeResidualFieldStillNotPromoted =
 
 
 ------------------------------------------------------------------------
--- Fleet R5 ordinal-cut root regression.
+-- Named-manifest acquisition remains fail-closed at both TOE facades.
 ------------------------------------------------------------------------
 
-toeFleetOrdinalCutMatchesOwner :
-  TOE.toeFleetR5OrdinalCutReceipt
-  ≡ Fleet.canonicalFleetR5OrdinalCutReceipt
-toeFleetOrdinalCutMatchesOwner = refl
+toeFleetNamedManifestStillMissingMatches :
+  Fleet.namedFormalGapManifestAcquired ≡ false
+toeFleetNamedManifestStillMissingMatches =
+  TOE.toeFleetNamedManifestStillMissing
 
-unifierFleetOrdinalCutMatchesOwner :
-  Unifier.unifierFleetR5OrdinalCutReceipt
-  ≡ Fleet.canonicalFleetR5OrdinalCutReceipt
-unifierFleetOrdinalCutMatchesOwner = refl
+unifierFleetNamedManifestStillMissingMatches :
+  Fleet.namedFormalGapManifestAcquired ≡ false
+unifierFleetNamedManifestStillMissingMatches =
+  Unifier.unifierFleetNamedManifestStillMissing
 
-toeFleetFormalGapOrdinalCountStill58 :
-  Fleet.fleetFormalGapOrdinalCount ≡ 58
-toeFleetFormalGapOrdinalCountStill58 =
-  TOE.toeFleetFormalGapOrdinalCountIs58
+toeFleetPerGapDispatchStillBlockedMatches :
+  Fleet.perGapDispatchEnabled ≡ false
+toeFleetPerGapDispatchStillBlockedMatches =
+  TOE.toeFleetPerGapDispatchStillBlocked
 
-unifierFleetFormalGapOrdinalCountStill58 :
-  Fleet.fleetFormalGapOrdinalCount ≡ 58
-unifierFleetFormalGapOrdinalCountStill58 =
-  Unifier.unifierFleetFormalGapOrdinalCountIs58
+unifierFleetPerGapDispatchStillBlockedMatches :
+  Fleet.perGapDispatchEnabled ≡ false
+unifierFleetPerGapDispatchStillBlockedMatches =
+  Unifier.unifierFleetPerGapDispatchStillBlocked
 
-toeFleetOrdinalStillCarriesNoPersistedIdentity :
-  Fleet.fleetOrdinalCarriesPersistedRowIdentity ≡ false
-toeFleetOrdinalStillCarriesNoPersistedIdentity =
-  TOE.toeFleetOrdinalRowIdentityStillUnattached
+toeFleetRelatedSymbolsRequiredMatches :
+  Fleet.fleetRelatedSymbolsRequired ≡ true
+toeFleetRelatedSymbolsRequiredMatches =
+  TOE.toeFleetRelatedSymbolsRequired
 
-unifierFleetOrdinalStillCarriesNoPersistedIdentity :
-  Fleet.fleetOrdinalCarriesPersistedRowIdentity ≡ false
-unifierFleetOrdinalStillCarriesNoPersistedIdentity =
-  Unifier.unifierFleetOrdinalRowIdentityStillUnattached
+unifierFleetRelatedSymbolsRequiredMatches :
+  Fleet.fleetRelatedSymbolsRequired ≡ true
+unifierFleetRelatedSymbolsRequiredMatches =
+  Unifier.unifierFleetRelatedSymbolsRequired
 
-toeFleetSharedCardinalityStillDoesNotCreateIdentity :
-  Fleet.FleetSharedCardinalityCreatesIdentity → ⊥
-toeFleetSharedCardinalityStillDoesNotCreateIdentity =
-  TOE.toeFleetSharedCardinalityDoesNotCreateIdentity
+toeFleetDiscoverRequiredMatches :
+  Fleet.fleetDiscoverRequired ≡ true
+toeFleetDiscoverRequiredMatches =
+  TOE.toeFleetDiscoverRequired
 
-unifierFleetSharedCardinalityStillDoesNotCreateIdentity :
-  Fleet.FleetSharedCardinalityCreatesIdentity → ⊥
-unifierFleetSharedCardinalityStillDoesNotCreateIdentity =
-  Unifier.unifierFleetSharedCardinalityDoesNotCreateIdentity
+unifierFleetDiscoverRequiredMatches :
+  Fleet.fleetDiscoverRequired ≡ true
+unifierFleetDiscoverRequiredMatches =
+  Unifier.unifierFleetDiscoverRequired
 
-toeFleetPlanningTextStillNotFormalResidual :
-  Fleet.externalPlanningTextCreatesFormalResidual
-    Fleet.canonicalFleetFormalGapTargetReceipt ≡ false
-toeFleetPlanningTextStillNotFormalResidual =
-  TOE.toeFleetPlanningTextDoesNotCreateFormalResidual
+toeFleetRoundLineageRequiredMatches :
+  Fleet.fleetRoundLineageRequired ≡ true
+toeFleetRoundLineageRequiredMatches =
+  TOE.toeFleetRoundLineageRequired
 
-unifierFleetPlanningTextStillNotFormalResidual :
-  Fleet.externalPlanningTextCreatesFormalResidual
-    Fleet.canonicalFleetFormalGapTargetReceipt ≡ false
-unifierFleetPlanningTextStillNotFormalResidual =
-  Unifier.unifierFleetPlanningTextDoesNotCreateFormalResidual
+unifierFleetRoundLineageRequiredMatches :
+  Fleet.fleetRoundLineageRequired ≡ true
+unifierFleetRoundLineageRequiredMatches =
+  Unifier.unifierFleetRoundLineageRequired

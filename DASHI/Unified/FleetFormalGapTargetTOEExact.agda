@@ -14,6 +14,7 @@ import DASHI.Interop.PNFResidualFieldInvariants as Residual
 import DASHI.Planning.PlanningPNFClaimBoundaryExact as Planning
 import DASHI.Promotion.ObligationIndex as Obligation
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowball
+import DASHI.Core.BoundAcquisitionDemandExact as Bound
 import DASHI.Unified.BalabanRGTOERegression as BalabanRG
 import DASHI.Physics.Closure.NSABCDConcentratedCompletionCutExact as NS
 import DASHI.Quantum.QuantumMereologyExact as QM
@@ -340,98 +341,105 @@ fleetTextFallbackAuthorityStillFalse =
 
 
 ------------------------------------------------------------------------
--- Exact Fleet R5 ordinal cut.
+-- Named Fleet-gap manifest acquisition boundary.
 --
--- The carrier ranges over exactly the 58 reported unformalised gaps.
--- It carries no persisted row name or theorem authority.
--- The discharged 584 and contradiction 44 remain separate carriers.
+-- The external receipt gives the count 58. It does not give 58 named rows.
+-- Per-gap search and dispatch stay blocked until that artifact is acquired.
+-- This section reuses the generic acquisition carrier. It creates no gap row.
 ------------------------------------------------------------------------
 
-FleetDischargedOrdinal : Set
-FleetDischargedOrdinal = Fin 584
+data FleetManifestRequirement : Set where
+  namedFormalGapManifest : FleetManifestRequirement
 
-FleetContradictionOrdinal : Set
-FleetContradictionOrdinal = Fin 44
+data FleetManifestResidual : Set where
+  unnamedFormalGapIdentities : FleetManifestResidual
 
-FleetFormalGapOrdinal : Set
-FleetFormalGapOrdinal = Fin 58
+data FleetManifestProducer : Set where
+  externalFleetSourceStore : FleetManifestProducer
 
-fleetFormalGapOrdinalCount : Nat
-fleetFormalGapOrdinalCount =
-  unformalisedFormalGaps canonicalFleetFormalGapTargetReceipt
+data FleetManifestAcquisition : Set where
+  acquireNamedFormalGapManifest : FleetManifestAcquisition
 
-fleetFormalGapOrdinalCountIs58 :
-  fleetFormalGapOrdinalCount ≡ 58
-fleetFormalGapOrdinalCountIs58 =
-  fleetRecordedUnformalisedGapCountIs58
+fleetManifestAlignment :
+  Bound.AcquisitionAlignment
+    FleetManifestRequirement
+    FleetManifestResidual
+    FleetManifestProducer
+    FleetManifestAcquisition
+fleetManifestAlignment =
+  Bound.acquisition-alignment
+    (λ _ → unnamedFormalGapIdentities)
+    (λ _ → externalFleetSourceStore)
+    (λ _ → unnamedFormalGapIdentities)
+    (λ _ → externalFleetSourceStore)
 
-fleetDischargedOrdinalCount : Nat
-fleetDischargedOrdinalCount =
-  dischargedCoreKnowledgeFibres canonicalFleetFormalGapTargetReceipt
+fleetManifestAcquisitionDemand :
+  Bound.BoundAcquisitionDemand
+    fleetManifestAlignment
+    namedFormalGapManifest
+    unnamedFormalGapIdentities
+fleetManifestAcquisitionDemand =
+  Bound.bound-acquisition-demand
+    acquireNamedFormalGapManifest
+    refl
+    refl
+    refl
 
-fleetDischargedOrdinalCountIs584 :
-  fleetDischargedOrdinalCount ≡ 584
-fleetDischargedOrdinalCountIs584 =
-  fleetRecordedDischargedCountIs584
+namedFormalGapManifestAcquired : Bool
+namedFormalGapManifestAcquired = false
 
-fleetContradictionOrdinalCount : Nat
-fleetContradictionOrdinalCount =
-  polarityContradictionGaps canonicalFleetFormalGapTargetReceipt
+namedFormalGapManifestAcquiredIsFalse :
+  namedFormalGapManifestAcquired ≡ false
+namedFormalGapManifestAcquiredIsFalse = refl
 
-fleetContradictionOrdinalCountIs44 :
-  fleetContradictionOrdinalCount ≡ 44
-fleetContradictionOrdinalCountIs44 =
-  fleetRecordedContradictionCountIs44
+perGapDispatchEnabled : Bool
+perGapDispatchEnabled = false
 
-fleetOrdinalCarriesPersistedRowIdentity : Bool
-fleetOrdinalCarriesPersistedRowIdentity = false
+perGapDispatchEnabledIsFalse :
+  perGapDispatchEnabled ≡ false
+perGapDispatchEnabledIsFalse = refl
 
-fleetOrdinalCarriesPersistedRowIdentityIsFalse :
-  fleetOrdinalCarriesPersistedRowIdentity ≡ false
-fleetOrdinalCarriesPersistedRowIdentityIsFalse = refl
+fleetRelatedSymbolsRequired : Bool
+fleetRelatedSymbolsRequired = true
 
-FleetSharedCardinalityCreatesIdentity : Set
-FleetSharedCardinalityCreatesIdentity =
-  Disambiguation.SharedCardinalityCreatesIdentity
+fleetRelatedSymbolsRequiredIsTrue :
+  fleetRelatedSymbolsRequired ≡ true
+fleetRelatedSymbolsRequiredIsTrue = refl
 
-fleetSharedCardinalityDoesNotCreateIdentity :
-  FleetSharedCardinalityCreatesIdentity → ⊥
-fleetSharedCardinalityDoesNotCreateIdentity =
-  Disambiguation.sharedCardinalityDoesNotCreateIdentity
+fleetDiscoverRequired : Bool
+fleetDiscoverRequired = true
 
-record FleetR5OrdinalCutReceipt : Set₁ where
-  constructor fleet-r5-ordinal-cut-receipt
-  field
-    targetOrdinal : Set
-    targetOrdinalIsCanonical : targetOrdinal ≡ FleetFormalGapOrdinal
-    targetCount : Nat
-    targetCountIs58 : targetCount ≡ 58
-    dischargedCount : Nat
-    dischargedCountIs584 : dischargedCount ≡ 584
-    contradictionCount : Nat
-    contradictionCountIs44 : contradictionCount ≡ 44
-    ordinalCarriesPersistedIdentity : Bool
-    ordinalCarriesPersistedIdentityIsFalse :
-      ordinalCarriesPersistedIdentity ≡ false
-    sharedCardinalityIdentityFirewall :
-      FleetSharedCardinalityCreatesIdentity → ⊥
+fleetDiscoverRequiredIsTrue :
+  fleetDiscoverRequired ≡ true
+fleetDiscoverRequiredIsTrue = refl
 
-open FleetR5OrdinalCutReceipt public
+fleetRoundLineageRequired : Bool
+fleetRoundLineageRequired = true
 
-canonicalFleetR5OrdinalCutReceipt : FleetR5OrdinalCutReceipt
-canonicalFleetR5OrdinalCutReceipt = record
-  { targetOrdinal = FleetFormalGapOrdinal
-  ; targetOrdinalIsCanonical = refl
-  ; targetCount = fleetFormalGapOrdinalCount
-  ; targetCountIs58 = fleetFormalGapOrdinalCountIs58
-  ; dischargedCount = fleetDischargedOrdinalCount
-  ; dischargedCountIs584 = fleetDischargedOrdinalCountIs584
-  ; contradictionCount = fleetContradictionOrdinalCount
-  ; contradictionCountIs44 = fleetContradictionOrdinalCountIs44
-  ; ordinalCarriesPersistedIdentity =
-      fleetOrdinalCarriesPersistedRowIdentity
-  ; ordinalCarriesPersistedIdentityIsFalse =
-      fleetOrdinalCarriesPersistedRowIdentityIsFalse
-  ; sharedCardinalityIdentityFirewall =
-      fleetSharedCardinalityDoesNotCreateIdentity
-  }
+fleetRoundLineageRequiredIsTrue :
+  fleetRoundLineageRequired ≡ true
+fleetRoundLineageRequiredIsTrue = refl
+
+CountCreatesNamedManifest : Set
+CountCreatesNamedManifest =
+  Bound.BoundDemandAutomaticallyPaysRequirement
+
+fleetCountDoesNotCreateNamedManifest :
+  CountCreatesNamedManifest → ⊥
+fleetCountDoesNotCreateNamedManifest =
+  Bound.bindingDoesNotPayRequirement
+
+fleetManifestAcquisitionDoesNotCloseConsumer :
+  Bound.BoundDemandAutomaticallyClosesConsumer → ⊥
+fleetManifestAcquisitionDoesNotCloseConsumer =
+  Bound.bindingDoesNotCloseConsumer
+
+fleetManifestProducerDoesNotIdentifyResidual :
+  Bound.SameProducerIdentifiesResidual → ⊥
+fleetManifestProducerDoesNotIdentifyResidual =
+  Bound.producerIdentityDoesNotIdentifyResidual
+
+fleetManifestSearchPriorityDoesNotCreateProof :
+  ParetoSnowball.SearchPriorityCreatesProof → ⊥
+fleetManifestSearchPriorityDoesNotCreateProof =
+  ParetoSnowball.searchPriorityDoesNotCreateProof

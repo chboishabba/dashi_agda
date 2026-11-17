@@ -1145,18 +1145,28 @@ unifierBalabanScaleTransferPromotionImpossible :
 unifierBalabanScaleTransferPromotionImpossible =
   BalabanRGTOE.balabanScaleTransferPromotionImpossible
 
+unifierIbrahimRecognitionParetoBoundary :
+  ParetoSnowballTOE.RecognitionRouteParetoBoundary
 unifierIbrahimRecognitionParetoBoundary =
   ParetoSnowballTOE.ibrahimRecognitionParetoBoundary
 
+unifierIbrahimCharacterExecutionFrontier :
+  ParetoSnowballTOE.Monster3BCharacterExecutionFrontier
 unifierIbrahimCharacterExecutionFrontier =
   ParetoSnowballTOE.ibrahimCharacterExecutionFrontier
 
+unifierIbrahimPhaseResolutionFrontier :
+  ParetoSnowballTOE.InertiaPhaseResolutionFrontier
 unifierIbrahimPhaseResolutionFrontier =
   ParetoSnowballTOE.ibrahimPhaseResolutionFrontier
 
+unifierIbrahimSchrodingerHZetaMaxCutBoundary :
+  ParetoSnowballTOE.SchrodingerHZetaRecognitionMaxCutBoundary
 unifierIbrahimSchrodingerHZetaMaxCutBoundary =
   ParetoSnowballTOE.ibrahimSchrodingerHZetaMaxCutBoundary
 
+unifierIbrahimHistoricalDiscriminatorBoundary :
+  ParetoSnowballTOE.HistoricalDiscriminatorBoundary
 unifierIbrahimHistoricalDiscriminatorBoundary =
   ParetoSnowballTOE.ibrahimHistoricalDiscriminatorBoundary
 
@@ -1744,405 +1754,40 @@ unifierBalabanPhysicalPromotionCut =
   (unifierBalabanUniformKPStillBlocked ,
    unifierBalabanOSWightmanStillBlocked)
 
-import DASHI.Unified.NavierStokesBM2TOEConvergenceExact as NSBM2TOE
-
-open NSBM2TOE public using
-  ( LiteralR571DissipationFold
-  ; ExactLiteralR571DissipationFold
-  ; literalR571M2BelowPhysicalDissipation
-  ; exactLiteralR571M2BelowPhysicalDissipation
-  )
-------------------------------------------------------------------------
--- Navier-Stokes B / R571 M2 producer-strategy facade.
-------------------------------------------------------------------------
-
-unifierNavierStokesBM2FiniteFoldClosed : Bool
-unifierNavierStokesBM2FiniteFoldClosed =
-  NSBM2TOE.cardinalityFreeFiniteFoldClosed
-
-unifierNavierStokesBM2SamplewisePaymentStillAnalytic :
-  NSBM2TOE.samplewisePhysicalPaymentStillAnalytic ≡ true
-unifierNavierStokesBM2SamplewisePaymentStillAnalytic =
-  NSBM2TOE.samplewisePhysicalPaymentStillAnalyticIsTrue
-
-unifierNavierStokesBM2GalerkinFoldStillAnalytic :
-  NSBM2TOE.literalFoldIntoGalerkinDissipationStillAnalytic ≡ true
-unifierNavierStokesBM2GalerkinFoldStillAnalytic =
-  NSBM2TOE.literalFoldIntoGalerkinDissipationStillAnalyticIsTrue
-
-unifierNavierStokesBM2OldPDFB1B2B3B4NotMandatory :
-  NSBM2TOE.oldPDFB1B2B3B4Mandatory ≡ false
-unifierNavierStokesBM2OldPDFB1B2B3B4NotMandatory =
-  NSBM2TOE.oldPDFB1B2B3B4MandatoryIsFalse
-
-unifierNavierStokesBM2OldPDFB7NotMandatory :
-  NSBM2TOE.oldPDFB7DirectCovarianceEqualityMandatory ≡ false
-unifierNavierStokesBM2OldPDFB7NotMandatory =
-  NSBM2TOE.oldPDFB7DirectCovarianceEqualityMandatoryIsFalse
-
-unifierNavierStokesBM2ClayPromotion : Bool
-unifierNavierStokesBM2ClayPromotion =
-  NSBM2TOE.modernNSClayPromotion
-
-unifierNavierStokesBM2ClayPromotionStillFalse :
-  unifierNavierStokesBM2ClayPromotion ≡ false
-unifierNavierStokesBM2ClayPromotionStillFalse =
-  NSBM2TOE.modernNSClayPromotionStillFalse
-
-unifierNavierStokesBM2Receipt :
-  NSBM2TOE.NavierStokesBM2TOEReceipt
-unifierNavierStokesBM2Receipt =
-  NSBM2TOE.canonicalNavierStokesBM2TOEReceipt
-
-unifierNavierStokesBM2ZKPFrame :
-  NSBM2TOE.NavierStokesBM2TOEZKPFrame
-unifierNavierStokesBM2ZKPFrame =
-  NSBM2TOE.canonicalNavierStokesBM2TOEZKPFrame
 
 ------------------------------------------------------------------------
--- Canonical Navier-Stokes Clay frontier.
--- Unifier consumes theorem-bearing owners through the normalized facade.
+-- Fleet named-manifest acquisition boundary.
 ------------------------------------------------------------------------
 
-import DASHI.Unified.NavierStokesClayFrontierTOEConvergenceExact as NSClayTOE
-
-unifierNavierStokesClayPromotion : Bool
-unifierNavierStokesClayPromotion =
-  NSClayTOE.navierStokesABCDClayPromotion
-
-unifierNavierStokesClayPromotionStillFalse :
-  unifierNavierStokesClayPromotion ≡ false
-unifierNavierStokesClayPromotionStillFalse =
-  NSClayTOE.navierStokesABCDClayPromotionStillFalse
-
-unifierNavierStokesGeneralRegularityComplete : Bool
-unifierNavierStokesGeneralRegularityComplete =
-  NSClayTOE.generalNSGlobalRegularityComplete
-
-unifierNavierStokesGeneralRegularityStillOpen :
-  unifierNavierStokesGeneralRegularityComplete ≡ false
-unifierNavierStokesGeneralRegularityStillOpen =
-  NSClayTOE.generalNSGlobalRegularityStillOpen
-
-unifierNavierStokesCarrierToGeneralImplicationProved : Bool
-unifierNavierStokesCarrierToGeneralImplicationProved =
-  NSClayTOE.carrierToGeneralNSImplicationProved
-
-unifierNavierStokesCarrierToGeneralImplicationStillOpen :
-  unifierNavierStokesCarrierToGeneralImplicationProved ≡ false
-unifierNavierStokesCarrierToGeneralImplicationStillOpen =
-  NSClayTOE.carrierToGeneralNSImplicationStillOpen
-
-unifierNavierStokesAuthorityPromotionGuard : Bool
-unifierNavierStokesAuthorityPromotionGuard =
-  NSClayTOE.navierStokesPromotionGuard
-
-unifierNavierStokesAuthorityPromotionGuardStillFalse :
-  unifierNavierStokesAuthorityPromotionGuard ≡ false
-unifierNavierStokesAuthorityPromotionGuardStillFalse =
-  NSClayTOE.navierStokesPromotionGuardStillFalse
-
-unifierNavierStokesClayFrontierZKPFrame :
-  NSClayTOE.NavierStokesClayFrontierTOEZKPFrame
-unifierNavierStokesClayFrontierZKPFrame =
-  NSClayTOE.canonicalNavierStokesClayFrontierTOEZKPFrame
-
-unifierNavierStokesTerminalPromotionImpossible :
-  NSClayTOE.NSClayDistanceFinalPromotion → ⊥
-unifierNavierStokesTerminalPromotionImpossible =
-  NSClayTOE.terminalClayPromotionImpossible
-
-
-------------------------------------------------------------------------
--- Current periodic-B shared weighted wall from R736.
--- Proof ownership remains in R736 through the canonical NS Clay facade.
-------------------------------------------------------------------------
-
-unifierNavierStokesSharedWeightedExactlyTwoLeaves : Bool
-unifierNavierStokesSharedWeightedExactlyTwoLeaves =
-  NSClayTOE.currentSharedWeightedExactlyTwoLeaves
-
-unifierNavierStokesSharedWeightedExactlyTwoLeavesIsTrue :
-  unifierNavierStokesSharedWeightedExactlyTwoLeaves ≡ true
-unifierNavierStokesSharedWeightedExactlyTwoLeavesIsTrue =
-  NSClayTOE.currentSharedWeightedExactlyTwoLeavesIsTrue
-
-unifierNavierStokesSharedWeightedSameCarrier : Bool
-unifierNavierStokesSharedWeightedSameCarrier =
-  NSClayTOE.currentSharedWeightedSameCarrier
-
-unifierNavierStokesSharedWeightedSameCarrierIsTrue :
-  unifierNavierStokesSharedWeightedSameCarrier ≡ true
-unifierNavierStokesSharedWeightedSameCarrierIsTrue =
-  NSClayTOE.currentSharedWeightedSameCarrierIsTrue
-
-unifierNavierStokesSharedWeightedCarrierIsInputLaplacian : Bool
-unifierNavierStokesSharedWeightedCarrierIsInputLaplacian =
-  NSClayTOE.currentSharedWeightedCarrierIsInputLaplacian
-
-unifierNavierStokesWeightedPlusEndpointClosed : Bool
-unifierNavierStokesWeightedPlusEndpointClosed =
-  NSClayTOE.currentWeightedPlusEndpointClosed
-
-unifierNavierStokesWeightedPlusEndpointStillOpen :
-  unifierNavierStokesWeightedPlusEndpointClosed ≡ false
-unifierNavierStokesWeightedPlusEndpointStillOpen =
-  NSClayTOE.currentWeightedPlusEndpointStillOpen
-
-unifierNavierStokesAugmentedCriticalWeightedClosed : Bool
-unifierNavierStokesAugmentedCriticalWeightedClosed =
-  NSClayTOE.currentAugmentedCriticalWeightedClosed
-
-unifierNavierStokesAugmentedCriticalWeightedStillOpen :
-  unifierNavierStokesAugmentedCriticalWeightedClosed ≡ false
-unifierNavierStokesAugmentedCriticalWeightedStillOpen =
-  NSClayTOE.currentAugmentedCriticalWeightedStillOpen
-
-unifierNavierStokesSharedWeightedLeavesBuildBarrier : Bool
-unifierNavierStokesSharedWeightedLeavesBuildBarrier =
-  NSClayTOE.currentSharedWeightedLeavesBuildBarrier
-
-unifierNavierStokesSharedWeightedLeavesBuildBarrierIsTrue :
-  unifierNavierStokesSharedWeightedLeavesBuildBarrier ≡ true
-unifierNavierStokesSharedWeightedLeavesBuildBarrierIsTrue =
-  NSClayTOE.currentSharedWeightedLeavesBuildBarrierIsTrue
-
-unifierNavierStokesR726IndependentLeafRequired : Bool
-unifierNavierStokesR726IndependentLeafRequired =
-  NSClayTOE.legacyR726IndependentLeafRequired
-
-unifierNavierStokesR726IndependentLeafNotRequired :
-  unifierNavierStokesR726IndependentLeafRequired ≡ false
-unifierNavierStokesR726IndependentLeafNotRequired =
-  NSClayTOE.legacyR726IndependentLeafNotRequired
-
-unifierNavierStokesStrictMarginR406IndependentLeafRequired : Bool
-unifierNavierStokesStrictMarginR406IndependentLeafRequired =
-  NSClayTOE.legacyStrictMarginR406IndependentLeafRequired
-
-unifierNavierStokesStrictMarginR406IndependentLeafNotRequired :
-  unifierNavierStokesStrictMarginR406IndependentLeafRequired ≡ false
-unifierNavierStokesStrictMarginR406IndependentLeafNotRequired =
-  NSClayTOE.legacyStrictMarginR406IndependentLeafNotRequired
-
-unifierNavierStokesBarrierDependentQPlusMinusShortcutAdmissible : Bool
-unifierNavierStokesBarrierDependentQPlusMinusShortcutAdmissible =
-  NSClayTOE.barrierDependentQPlusMinusShortcutAdmissible
-
-unifierNavierStokesBarrierDependentQPlusMinusShortcutStillCircular :
-  unifierNavierStokesBarrierDependentQPlusMinusShortcutAdmissible ≡ false
-unifierNavierStokesBarrierDependentQPlusMinusShortcutStillCircular =
-  NSClayTOE.barrierDependentQPlusMinusShortcutStillCircular
-
-unifierNavierStokesSharedWeightedClayPromotion : Bool
-unifierNavierStokesSharedWeightedClayPromotion =
-  NSClayTOE.currentSharedWeightedClayPromotion
-
-unifierNavierStokesSharedWeightedClayPromotionStillFalse :
-  unifierNavierStokesSharedWeightedClayPromotion ≡ false
-unifierNavierStokesSharedWeightedClayPromotionStillFalse =
-  NSClayTOE.currentSharedWeightedClayPromotionStillFalse
-
-unifierNavierStokesContinuumBKMPassageConstructed : Bool
-unifierNavierStokesContinuumBKMPassageConstructed =
-  NSClayTOE.continuumBKMPassageConstructed
-
-unifierNavierStokesContinuumBKMPassageStillOpen :
-  unifierNavierStokesContinuumBKMPassageConstructed ≡ false
-unifierNavierStokesContinuumBKMPassageStillOpen =
-  NSClayTOE.continuumBKMPassageStillOpen
-
-unifierNavierStokesAllDataBridgeConstructed : Bool
-unifierNavierStokesAllDataBridgeConstructed =
-  NSClayTOE.allDataBridgeConstructed
-
-unifierNavierStokesAllDataBridgeStillOpen :
-  unifierNavierStokesAllDataBridgeConstructed ≡ false
-unifierNavierStokesAllDataBridgeStillOpen =
-  NSClayTOE.allDataBridgeStillOpen
-
-unifierNavierStokesSubmissionPacketReady : Bool
-unifierNavierStokesSubmissionPacketReady =
-  NSClayTOE.submissionPacketReady
-
-unifierNavierStokesSubmissionPacketStillNotReady :
-  unifierNavierStokesSubmissionPacketReady ≡ false
-unifierNavierStokesSubmissionPacketStillNotReady =
-  NSClayTOE.submissionPacketStillNotReady
-
-unifierNavierStokesClayEligible : Bool
-unifierNavierStokesClayEligible =
-  NSClayTOE.clayEligible
-
-unifierNavierStokesClayEligibilityStillFalse :
-  unifierNavierStokesClayEligible ≡ false
-unifierNavierStokesClayEligibilityStillFalse =
-  NSClayTOE.clayEligibilityStillFalse
-
-------------------------------------------------------------------------
--- Canonical Pareto / Ibrahim / fleet non-promotion gates.
--- These are direct aliases of proof owners. No new theorem authority.
-------------------------------------------------------------------------
-
-toeParetoSearchPriorityCannotPayProof :
-  ParetoSnowballTOE.SearchPriorityCreatesProof → ⊥
-toeParetoSearchPriorityCannotPayProof =
-  ParetoSnowballTOE.searchPriorityDoesNotCreateProof
-
-toeIbrahimDegree729CannotPayMonsterRecognition :
-  ParetoSnowballTOE.Degree729CreatesMonsterHZetaRecognition → ⊥
-toeIbrahimDegree729CannotPayMonsterRecognition =
-  ParetoSnowballTOE.degree729DoesNotCreateMonsterHZetaRecognition
-
-toeFleetSpectralRankCannotPayAuthority :
-  FleetGapTOE.VectorSpectralAuthorityPromotion → ⊥
-toeFleetSpectralRankCannotPayAuthority =
-  FleetGapTOE.fleetVectorSpectralAuthorityPromotionImpossible
-
-toeFleetNumericABIRequiresIndependentEvidence :
-  FleetGapTOE.SpectralNumericABIPromotion → ⊥
-toeFleetNumericABIRequiresIndependentEvidence =
-  FleetGapTOE.fleetSpectralNumericABIPromotionImpossible
-
-------------------------------------------------------------------------
--- Canonical brain/connectome/fMRI quotient boundary.
--- The observation owners retain authority. This facade adds no empirical proof.
-------------------------------------------------------------------------
-
-toeBrainFirstMissing : BrainObservation.BrainObservationFirstMissing
-toeBrainFirstMissing = BrainFMRI.brainFirstMissing
-
-toeBrainBidirectionalFirstMissing :
-  BrainBidirectional.BidirectionalObservationFirstMissing
-toeBrainBidirectionalFirstMissing = BrainFMRI.bidirectionalFirstMissing
-
-toeBrainObservationNonPromotion :
-  BrainBidirectional.NonPromotionBoundary
-toeBrainObservationNonPromotion = BrainFMRI.brainNonPromotionBoundary
-
-toeBrainJPromotionBlocked :
-  BrainSpine.objectExternalJPromotion BrainFMRI.brainFMRIObject ≡ false
-toeBrainJPromotionBlocked = BrainFMRI.brainFMRIJPromotionBlocked
-
-------------------------------------------------------------------------
--- Live Gate-4 frontier and Fleet target selection.
-------------------------------------------------------------------------
-
-unifierCurrentGate4FrontierLedgerLevel : ProofLevel
-unifierCurrentGate4FrontierLedgerLevel =
-  FleetHyperTOE.currentGate4FrontierLedgerLevel
-
-unifierCurrentGate4ClusteringToTransferGapLevel : ProofLevel
-unifierCurrentGate4ClusteringToTransferGapLevel =
-  FleetHyperTOE.currentGate4ClusteringToTransferGapLevel
-
-unifierFleetFormalGapTargetSelected : Bool
-unifierFleetFormalGapTargetSelected =
-  FleetHyperTOE.fleetFormalGapTargetSelected
-
-unifierHistoricalGate4CountSelectedAsFleetTarget : Bool
-unifierHistoricalGate4CountSelectedAsFleetTarget =
-  FleetHyperTOE.historicalGate4CountSelectedAsFleetTarget
-
-unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
-  FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
-unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
-  FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
-
-
-------------------------------------------------------------------------
--- RH marked-trace exact non-promotion surface.
--- The Analysis owner retains theorem and provenance authority.
-------------------------------------------------------------------------
-
-unifierRHCompletedTraceCrossPollinationBoundary :
-  RHPrimeAudit.CompletedTraceCrossPollinationBoundary
-unifierRHCompletedTraceCrossPollinationBoundary =
-  RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary
-
-unifierRHPrimeActivationRequiresFirstPrimeSupport :
-  RHPrimeAudit.CompletedTraceCrossPollinationBoundary.nonzeroPrimeRequiresFirstPrimeSupportSourceWritten
-    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ true
-unifierRHPrimeActivationRequiresFirstPrimeSupport =
-  RHPrimeAudit.firstPrimeSupportNecessary
-
-unifierRHUnmarkedTerminalStillNotIdentifiedWithMarkedArithmetic :
-  RHPrimeAudit.CompletedTraceCrossPollinationBoundary.selectedUnmarkedTerminalEqualsMarkedArithmetic
-    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
-unifierRHUnmarkedTerminalStillNotIdentifiedWithMarkedArithmetic =
-  RHPrimeAudit.selectedUnmarkedTerminalStillNotIdentifiedWithMarkedArithmetic
-
-unifierRHIndependentArithmeticDiagonalProducerStillAbsent :
-  RHPrimeAudit.CompletedTraceCrossPollinationBoundary.independentArithmeticDiagonalProducer
-    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
-unifierRHIndependentArithmeticDiagonalProducerStillAbsent =
-  RHPrimeAudit.independentArithmeticDiagonalProducerStillAbsent
-
-unifierRHHeisenbergTraceTransportStillBlocked :
-  RHPrimeAudit.CompletedTraceCrossPollinationBoundary.actualHeisenbergTraceEqualsSelectedZetaFunctional
-    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
-unifierRHHeisenbergTraceTransportStillBlocked =
-  RHPrimeAudit.noUnjustifiedAnalyticTransport
-
-unifierRHTerminalStrictSignedEstimateStillOpen :
-  RHPrimeAudit.CompletedTraceCrossPollinationBoundary.terminalStrictSignedEstimatePaid
-    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
-unifierRHTerminalStrictSignedEstimateStillOpen =
-  RHPrimeAudit.terminalStrictSignedEstimateStillOpen
-
-unifierRHPrimeAuditDoesNotPromoteRH :
-  RHPrimeAudit.CompletedTraceCrossPollinationBoundary.rhDerived
-    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
-unifierRHPrimeAuditDoesNotPromoteRH =
-  RHPrimeAudit.noUnjustifiedRH
-
-
-------------------------------------------------------------------------
--- Riemann G21 direct non-promotion proof terms.
--- The source receipt remains the theorem owner.
-------------------------------------------------------------------------
-
-unifierRHG21StrictTP2Receipt : RHG21.StrictTP2TrancheReceipt
-unifierRHG21StrictTP2Receipt = RHG21.canonicalStrictTP2TrancheReceipt
-
-unifierRHG21ActualSinhTP2StillOpen :
-  RHG21.StrictTP2TrancheReceipt.actualSinhTP2Derived
-    unifierRHG21StrictTP2Receipt ≡ false
-unifierRHG21ActualSinhTP2StillOpen =
-  RHG21.StrictTP2TrancheReceipt.actualSinhTP2DerivedIsFalse
-    unifierRHG21StrictTP2Receipt
-
-unifierRHG21ContinuumMomentSignStillOpen :
-  RHG21.StrictTP2TrancheReceipt.actualOddContinuumSignDerived
-    unifierRHG21StrictTP2Receipt ≡ false
-unifierRHG21ContinuumMomentSignStillOpen =
-  RHG21.StrictTP2TrancheReceipt.actualOddContinuumSignDerivedIsFalse
-    unifierRHG21StrictTP2Receipt
-
-unifierRHG21DeterminantRemainderStillOpen :
-  RHG21.StrictTP2TrancheReceipt.actualStructuredRemainderBoundDerived
-    unifierRHG21StrictTP2Receipt ≡ false
-unifierRHG21DeterminantRemainderStillOpen =
-  RHG21.StrictTP2TrancheReceipt.actualStructuredRemainderBoundDerivedIsFalse
-    unifierRHG21StrictTP2Receipt
-
-unifierRHG21FiniteRadiusStillOpen :
-  RHG21.StrictTP2TrancheReceipt.actualFiniteRadiusSignDerived
-    unifierRHG21StrictTP2Receipt ≡ false
-unifierRHG21FiniteRadiusStillOpen =
-  RHG21.StrictTP2TrancheReceipt.actualFiniteRadiusSignDerivedIsFalse
-    unifierRHG21StrictTP2Receipt
-
-unifierRHG21PrimeIdentityStillOpen :
-  RHG21.StrictTP2TrancheReceipt.g22LiteralPrimeIdentityDerived
-    unifierRHG21StrictTP2Receipt ≡ false
-unifierRHG21PrimeIdentityStillOpen =
-  RHG21.StrictTP2TrancheReceipt.g22LiteralPrimeIdentityDerivedIsFalse
-    unifierRHG21StrictTP2Receipt
-
-unifierRHG21RHNotPromoted :
-  RHG21.StrictTP2TrancheReceipt.riemannHypothesisDerived
-    unifierRHG21StrictTP2Receipt ≡ false
-unifierRHG21RHNotPromoted =
-  RHG21.StrictTP2TrancheReceipt.riemannHypothesisDerivedIsFalse
-    unifierRHG21StrictTP2Receipt
+unifierFleetManifestAcquisitionDemand =
+  FleetGapTOE.fleetManifestAcquisitionDemand
+
+unifierFleetNamedManifestStillMissing :
+  FleetGapTOE.namedFormalGapManifestAcquired ≡ false
+unifierFleetNamedManifestStillMissing =
+  FleetGapTOE.namedFormalGapManifestAcquiredIsFalse
+
+unifierFleetPerGapDispatchStillBlocked :
+  FleetGapTOE.perGapDispatchEnabled ≡ false
+unifierFleetPerGapDispatchStillBlocked =
+  FleetGapTOE.perGapDispatchEnabledIsFalse
+
+unifierFleetRelatedSymbolsRequired :
+  FleetGapTOE.fleetRelatedSymbolsRequired ≡ true
+unifierFleetRelatedSymbolsRequired =
+  FleetGapTOE.fleetRelatedSymbolsRequiredIsTrue
+
+unifierFleetDiscoverRequired :
+  FleetGapTOE.fleetDiscoverRequired ≡ true
+unifierFleetDiscoverRequired =
+  FleetGapTOE.fleetDiscoverRequiredIsTrue
+
+unifierFleetRoundLineageRequired :
+  FleetGapTOE.fleetRoundLineageRequired ≡ true
+unifierFleetRoundLineageRequired =
+  FleetGapTOE.fleetRoundLineageRequiredIsTrue
+
+unifierFleetCountDoesNotCreateNamedManifest :
+  FleetGapTOE.CountCreatesNamedManifest → ⊥
+unifierFleetCountDoesNotCreateNamedManifest =
+  FleetGapTOE.fleetCountDoesNotCreateNamedManifest

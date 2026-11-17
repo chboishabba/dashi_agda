@@ -2,64 +2,7 @@ module DASHI.Unified.Everything where
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Analysis.RiemannG2AdaptiveCutoffCrossingCompatibilityLeanDonorExact as RHAdaptiveCutoff
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
-import DASHI.Analysis.RiemannG21StrictTP2TrancheReceipt as RHG21
-import DASHI.Analysis.RiemannMarkedCompletedTraceArithmeticAuditExact as RHPrimeAudit
-import DASHI.Analysis.RiemannThreeTapCurrentLeanFrontierExact as RiemannFrontier
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
-import DASHI.Unified.RiemannRHMaxCutTOEExact as RiemannRHTOE
-
-
-------------------------------------------------------------------------
--- Current Lean RH max-cut status mirror.
--- Keep the analytic theorem owner in dashi_lean4.
-------------------------------------------------------------------------
-
-unifiedRiemannThreeTapCurrentLeanFrontier :
-  RiemannFrontier.ThreeTapCurrentLeanFrontier
-unifiedRiemannThreeTapCurrentLeanFrontier =
-  RiemannFrontier.currentThreeTapCurrentLeanFrontier
-
-unifiedRiemannA1CarrierSummationStillOpen :
-  RiemannFrontier.ThreeTapCurrentLeanFrontier.a1CarrierSummationPaid
-    unifiedRiemannThreeTapCurrentLeanFrontier ≡ false
-unifiedRiemannA1CarrierSummationStillOpen =
-  RiemannFrontier.a1CarrierIsStillOpen
-
-unifiedRiemannA1UniformCurvatureStillOpen :
-  RiemannFrontier.ThreeTapCurrentLeanFrontier.a1UniformCurvaturePaid
-    unifiedRiemannThreeTapCurrentLeanFrontier ≡ false
-unifiedRiemannA1UniformCurvatureStillOpen =
-  RiemannFrontier.a1UniformCurvatureIsStillOpen
-
-unifiedRiemannA1CompensationStillOpen :
-  RiemannFrontier.ThreeTapCurrentLeanFrontier.a1CompensationPaid
-    unifiedRiemannThreeTapCurrentLeanFrontier ≡ false
-unifiedRiemannA1CompensationStillOpen =
-  RiemannFrontier.a1CompensationIsStillOpen
-
-unifiedRiemannA2ScalarStillOpen :
-  RiemannFrontier.ThreeTapCurrentLeanFrontier.a2StrictScalarPaid
-    unifiedRiemannThreeTapCurrentLeanFrontier ≡ false
-unifiedRiemannA2ScalarStillOpen =
-  RiemannFrontier.a2ScalarIsStillOpen
-
-unifiedRiemannRouteBStillOpen :
-  RiemannFrontier.ThreeTapCurrentLeanFrontier.routeBEventualGapPaid
-    unifiedRiemannThreeTapCurrentLeanFrontier ≡ false
-unifiedRiemannRouteBStillOpen =
-  RiemannFrontier.routeBIsStillOpen
-
-unifiedRiemannExactHeadLeanKernelReceiptStillOpen :
-  RiemannFrontier.ThreeTapCurrentLeanFrontier.exactHeadLeanKernelReceipt
-    unifiedRiemannThreeTapCurrentLeanFrontier ≡ false
-unifiedRiemannExactHeadLeanKernelReceiptStillOpen =
-  RiemannFrontier.exactHeadLeanKernelReceiptIsStillOpen
-
-unifiedRiemannRHStillOpen :
-  RiemannFrontier.ThreeTapCurrentLeanFrontier.rhDerivedHere
-    unifiedRiemannThreeTapCurrentLeanFrontier ≡ false
-unifiedRiemannRHStillOpen =
-  RiemannFrontier.rhNotClaimedByAgdaStatusMirror
 
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -183,37 +126,29 @@ yangMillsFormalProjectionsRemainNonPromoting =
     Physics.yangMillsObject
 
 ------------------------------------------------------------------------
--- Canonical Balaban RG / localization / stress / non-promotion surface.
+-- Typed Balaban continuum non-promotion.
+-- Reuse the constructorless owners already normalized by BalabanRGTOERegression.
 ------------------------------------------------------------------------
 
-unifiedBalabanScaleDensityFiniteMeasureWeldLevel : ProofLevel
-unifiedBalabanScaleDensityFiniteMeasureWeldLevel =
-  BalabanRGTOE.balabanScaleDensityFiniteMeasureWeldLevel
+unifiedBalabanContinuumLimitReceipt :
+  BalabanRGTOE.BalabanContinuumLimitReceipt
+unifiedBalabanContinuumLimitReceipt =
+  BalabanRGTOE.balabanContinuumLimitReceipt
 
-unifiedBalabanRegularELocalizationCarrierLevel : ProofLevel
-unifiedBalabanRegularELocalizationCarrierLevel =
-  BalabanRGTOE.balabanRegularELocalizationCarrierLevel
+unifiedBalabanContinuumLimitPromotionImpossible :
+  BalabanRGTOE.BalabanContinuumLimitPromotion → ⊥
+unifiedBalabanContinuumLimitPromotionImpossible =
+  BalabanRGTOE.balabanContinuumLimitPromotionImpossible
 
-unifiedBalabanCasimirLowerBoundTransportLevel : ProofLevel
-unifiedBalabanCasimirLowerBoundTransportLevel =
-  BalabanRGTOE.balabanCasimirLowerBoundTransportLevel
+unifiedDepthContinuumLimitReceipt :
+  BalabanRGTOE.DepthContinuumLimitReceipt
+unifiedDepthContinuumLimitReceipt =
+  BalabanRGTOE.depthContinuumLimitReceipt
 
-unifiedBalabanDensityAnchoredStressLaneCompilerLevel : ProofLevel
-unifiedBalabanDensityAnchoredStressLaneCompilerLevel =
-  BalabanRGTOE.balabanDensityAnchoredStressLaneCompilerLevel
-
-unifiedBalabanSameFamilyRecoveryCompilerLevel : ProofLevel
-unifiedBalabanSameFamilyRecoveryCompilerLevel =
-  BalabanRGTOE.balabanSameFamilyRecoveryCompilerLevel
-
-unifiedBalabanGoal1CSourceCutCompilerLevel : ProofLevel
-unifiedBalabanGoal1CSourceCutCompilerLevel =
-  BalabanRGTOE.balabanGoal1CSourceCutCompilerLevel
-
-unifiedBalabanScaleTransferPromotionImpossible :
-  BalabanRGTOE.BalabanScaleTransferPromotion → ⊥
-unifiedBalabanScaleTransferPromotionImpossible =
-  BalabanRGTOE.balabanScaleTransferPromotionImpossible
+unifiedDepthContinuumLimitPromotionImpossible :
+  BalabanRGTOE.DepthContinuumLimitPromotion → ⊥
+unifiedDepthContinuumLimitPromotionImpossible =
+  BalabanRGTOE.depthContinuumLimitPromotionImpossible
 
 ------------------------------------------------------------------------
 -- Joint Yang-Mills Balaban/R559 TOE receipt.
@@ -281,8 +216,55 @@ unifiedFleetPlanningTextDoesNotCreateFormalResidual =
   FleetGapTOE.fleetExternalPlanningTextDoesNotCreateFormalResidual
 
 
+unifiedFleetDischargedCoreKnowledgeFibres : ℕ
+unifiedFleetDischargedCoreKnowledgeFibres =
+  FleetGapTOE.dischargedCoreKnowledgeFibres
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
+
+unifiedFleetDischargedCoreKnowledgeFibresIs584 :
+  unifiedFleetDischargedCoreKnowledgeFibres ≡ 584
+unifiedFleetDischargedCoreKnowledgeFibresIs584 = refl
+
+unifiedFleetPolarityContradictionGaps : ℕ
+unifiedFleetPolarityContradictionGaps =
+  FleetGapTOE.polarityContradictionGaps
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
+
+unifiedFleetPolarityContradictionGapsIs44 :
+  unifiedFleetPolarityContradictionGaps ≡ 44
+unifiedFleetPolarityContradictionGapsIs44 = refl
+
+unifiedFleetUnformalisedFormalGaps : ℕ
+unifiedFleetUnformalisedFormalGaps =
+  FleetGapTOE.unformalisedFormalGaps
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
+
+unifiedFleetUnformalisedFormalGapsIs58 :
+  unifiedFleetUnformalisedFormalGaps ≡ 58
+unifiedFleetUnformalisedFormalGapsIs58 = refl
+
+unifiedFleetTargetsOnlyUnformalisedFormalGaps :
+  FleetGapTOE.targetOnlyUnformalisedFormalGaps
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
+  ≡ true
+unifiedFleetTargetsOnlyUnformalisedFormalGaps =
+  FleetGapTOE.fleetTargetsOnlyUnformalisedFormalGaps
+
 ------------------------------------------------------------------------
 -- Golden Millennium three-lane aggregate consumer.
+------------------------------------------------------------------------
+
+unifiedFleetManifestAcquisitionDemand =
+  FleetGapTOE.fleetManifestAcquisitionDemand
+
+unifiedYMImplementAToDMaxCutReceipt :
+  YMAD.YMImplementAToDTOEMaxCutReceipt
+unifiedYMImplementAToDMaxCutReceipt =
+  YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+
+------------------------------------------------------------------------
+-- Fleet named-manifest acquisition boundary.
 ------------------------------------------------------------------------
 
 unifiedFleetManifestAcquisitionDemand =
@@ -318,9 +300,17 @@ unifiedFleetCountDoesNotCreateNamedManifest :
 unifiedFleetCountDoesNotCreateNamedManifest =
   FleetGapTOE.fleetCountDoesNotCreateNamedManifest
 
+
 ------------------------------------------------------------------------
 -- Direct Pareto / snowball / Ibrahim and ternary-27 non-promotion surface.
+-- Canonical owners retain theorem authority.
 ------------------------------------------------------------------------
+
+unifiedBalabanScaleTransferPromotionImpossible :
+  ParetoSnowballTOE.BalabanScaleTransferPromotion → ⊥
+unifiedBalabanScaleTransferPromotionImpossible =
+  ParetoSnowballTOE.balabanScaleTransferPromotionImpossible
+
 
 unifiedIbrahimSearchPriorityDoesNotCreateProof :
   ParetoSnowballTOE.SearchPriorityCreatesProof → ⊥
@@ -372,126 +362,3 @@ unified369Ternary27MonsterRepresentationNotPromoted =
 
 unified369Ternary27MonsterEmbeddingNotPromoted =
   MaxCut369.toe27MonsterEmbeddingNotPromoted
-
-------------------------------------------------------------------------
--- Live Gate-4 frontier and Fleet target selection.
-------------------------------------------------------------------------
-
-unifiedCurrentGate4FrontierLedgerLevel : ProofLevel
-unifiedCurrentGate4FrontierLedgerLevel =
-  FleetHyperTOE.currentGate4FrontierLedgerLevel
-
-unifiedCurrentGate4ClusteringToTransferGapLevel : ProofLevel
-unifiedCurrentGate4ClusteringToTransferGapLevel =
-  FleetHyperTOE.currentGate4ClusteringToTransferGapLevel
-
-unifiedFleetFormalGapTargetSelected : Bool
-unifiedFleetFormalGapTargetSelected =
-  FleetHyperTOE.fleetFormalGapTargetSelected
-
-unifiedHistoricalGate4CountSelectedAsFleetTarget : Bool
-unifiedHistoricalGate4CountSelectedAsFleetTarget =
-  FleetHyperTOE.historicalGate4CountSelectedAsFleetTarget
-
-unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
-  FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
-unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
-  FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
-
-
-------------------------------------------------------------------------
--- RH marked-trace exact non-promotion surface.
--- The Analysis owner retains theorem and provenance authority.
-------------------------------------------------------------------------
-
-unifiedRHCompletedTraceCrossPollinationBoundary :
-  RHPrimeAudit.CompletedTraceCrossPollinationBoundary
-unifiedRHCompletedTraceCrossPollinationBoundary =
-  RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary
-
-unifiedRHPrimeActivationRequiresFirstPrimeSupport :
-  RHPrimeAudit.CompletedTraceCrossPollinationBoundary.nonzeroPrimeRequiresFirstPrimeSupportSourceWritten
-    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ true
-unifiedRHPrimeActivationRequiresFirstPrimeSupport =
-  RHPrimeAudit.firstPrimeSupportNecessary
-
-unifiedRHUnmarkedTerminalStillNotIdentifiedWithMarkedArithmetic :
-  RHPrimeAudit.CompletedTraceCrossPollinationBoundary.selectedUnmarkedTerminalEqualsMarkedArithmetic
-    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
-unifiedRHUnmarkedTerminalStillNotIdentifiedWithMarkedArithmetic =
-  RHPrimeAudit.selectedUnmarkedTerminalStillNotIdentifiedWithMarkedArithmetic
-
-unifiedRHIndependentArithmeticDiagonalProducerStillAbsent :
-  RHPrimeAudit.CompletedTraceCrossPollinationBoundary.independentArithmeticDiagonalProducer
-    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
-unifiedRHIndependentArithmeticDiagonalProducerStillAbsent =
-  RHPrimeAudit.independentArithmeticDiagonalProducerStillAbsent
-
-unifiedRHHeisenbergTraceTransportStillBlocked :
-  RHPrimeAudit.CompletedTraceCrossPollinationBoundary.actualHeisenbergTraceEqualsSelectedZetaFunctional
-    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
-unifiedRHHeisenbergTraceTransportStillBlocked =
-  RHPrimeAudit.noUnjustifiedAnalyticTransport
-
-unifiedRHTerminalStrictSignedEstimateStillOpen :
-  RHPrimeAudit.CompletedTraceCrossPollinationBoundary.terminalStrictSignedEstimatePaid
-    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
-unifiedRHTerminalStrictSignedEstimateStillOpen =
-  RHPrimeAudit.terminalStrictSignedEstimateStillOpen
-
-unifiedRHPrimeAuditDoesNotPromoteRH :
-  RHPrimeAudit.CompletedTraceCrossPollinationBoundary.rhDerived
-    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
-unifiedRHPrimeAuditDoesNotPromoteRH =
-  RHPrimeAudit.noUnjustifiedRH
-
-
-------------------------------------------------------------------------
--- Riemann G21 direct non-promotion proof terms.
--- The source receipt remains the theorem owner.
-------------------------------------------------------------------------
-
-unifiedRHG21StrictTP2Receipt : RHG21.StrictTP2TrancheReceipt
-unifiedRHG21StrictTP2Receipt = RHG21.canonicalStrictTP2TrancheReceipt
-
-unifiedRHG21ActualSinhTP2StillOpen :
-  RHG21.StrictTP2TrancheReceipt.actualSinhTP2Derived
-    unifiedRHG21StrictTP2Receipt ≡ false
-unifiedRHG21ActualSinhTP2StillOpen =
-  RHG21.StrictTP2TrancheReceipt.actualSinhTP2DerivedIsFalse
-    unifiedRHG21StrictTP2Receipt
-
-unifiedRHG21ContinuumMomentSignStillOpen :
-  RHG21.StrictTP2TrancheReceipt.actualOddContinuumSignDerived
-    unifiedRHG21StrictTP2Receipt ≡ false
-unifiedRHG21ContinuumMomentSignStillOpen =
-  RHG21.StrictTP2TrancheReceipt.actualOddContinuumSignDerivedIsFalse
-    unifiedRHG21StrictTP2Receipt
-
-unifiedRHG21DeterminantRemainderStillOpen :
-  RHG21.StrictTP2TrancheReceipt.actualStructuredRemainderBoundDerived
-    unifiedRHG21StrictTP2Receipt ≡ false
-unifiedRHG21DeterminantRemainderStillOpen =
-  RHG21.StrictTP2TrancheReceipt.actualStructuredRemainderBoundDerivedIsFalse
-    unifiedRHG21StrictTP2Receipt
-
-unifiedRHG21FiniteRadiusStillOpen :
-  RHG21.StrictTP2TrancheReceipt.actualFiniteRadiusSignDerived
-    unifiedRHG21StrictTP2Receipt ≡ false
-unifiedRHG21FiniteRadiusStillOpen =
-  RHG21.StrictTP2TrancheReceipt.actualFiniteRadiusSignDerivedIsFalse
-    unifiedRHG21StrictTP2Receipt
-
-unifiedRHG21PrimeIdentityStillOpen :
-  RHG21.StrictTP2TrancheReceipt.g22LiteralPrimeIdentityDerived
-    unifiedRHG21StrictTP2Receipt ≡ false
-unifiedRHG21PrimeIdentityStillOpen =
-  RHG21.StrictTP2TrancheReceipt.g22LiteralPrimeIdentityDerivedIsFalse
-    unifiedRHG21StrictTP2Receipt
-
-unifiedRHG21RHNotPromoted :
-  RHG21.StrictTP2TrancheReceipt.riemannHypothesisDerived
-    unifiedRHG21StrictTP2Receipt ≡ false
-unifiedRHG21RHNotPromoted =
-  RHG21.StrictTP2TrancheReceipt.riemannHypothesisDerivedIsFalse
-    unifiedRHG21StrictTP2Receipt
