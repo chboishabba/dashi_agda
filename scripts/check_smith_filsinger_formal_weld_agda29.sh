@@ -33,6 +33,8 @@ owners=(
   DASHI/Physics/Motors/SmithFilsingerSpatialSourceCapWeldExact.agda
   DASHI/Physics/Motors/SmithFilsingerMaxwellTimedSpatialWeldExact.agda
   DASHI/Physics/Motors/SmithFilsingerOpenBoundaryPoyntingGaussExact.agda
+  DASHI/Physics/Motors/SmithFilsingerPeriodicGreenDelayReuseExact.agda
+  DASHI/Physics/Motors/SmithFilsingerCoerciveGreenRetardedWeldExact.agda
   DASHI/Physics/Motors/SmithFilsingerSpaceTimePoyntingTelescopeExact.agda
   DASHI/Physics/Motors/SmithFilsingerPlaneWaveSpaceTimeWitnessExact.agda
   DASHI/Physics/Motors/SmithFilsingerSelectedSpaceTimePortWeldExact.agda
@@ -63,6 +65,8 @@ new_owners=(
   DASHI/Physics/Motors/SmithFilsingerSpatialSourceCapWeldExact.agda
   DASHI/Physics/Motors/SmithFilsingerMaxwellTimedSpatialWeldExact.agda
   DASHI/Physics/Motors/SmithFilsingerOpenBoundaryPoyntingGaussExact.agda
+  DASHI/Physics/Motors/SmithFilsingerPeriodicGreenDelayReuseExact.agda
+  DASHI/Physics/Motors/SmithFilsingerCoerciveGreenRetardedWeldExact.agda
   DASHI/Physics/Motors/SmithFilsingerSpaceTimePoyntingTelescopeExact.agda
   DASHI/Physics/Motors/SmithFilsingerPlaneWaveSpaceTimeWitnessExact.agda
   DASHI/Physics/Motors/SmithFilsingerSelectedSpaceTimePortWeldExact.agda
