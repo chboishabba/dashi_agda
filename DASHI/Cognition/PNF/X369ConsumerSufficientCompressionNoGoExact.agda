@@ -17,8 +17,8 @@ module DASHI.Cognition.PNF.X369ConsumerSufficientCompressionNoGoExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Unit using (⊤; tt)
-open import Agda.Builtin.Empty using (⊥)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Empty using (⊥)
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 import DASHI.Cognition.PNF.ModularFourierGrokkingC3Exact as Grok
 import DASHI.Cognition.PNF.GrokkingEquivarianceDefectGeometryExact as Task
@@ -226,3 +226,48 @@ fullReconstructionImpliesConsumerSufficiency
 -- Its cardinality or bit cost is a SEPARATE theorem: neither a
 -- head gauge nor a consumer factorization establishes a byte,
 -- Shannon, runtime, or finite-precision compression ratio.
+
+
+------------------------------------------------------------------------
+-- P0e: exact FUTURE-consumer sufficiency. This is the structural
+-- condition a memory/codec must preserve, beyond a one-step readout.
+-- transitionStability is an explicit hypothesis, not inferred from
+-- one-step consumer fibre-constancy.
+------------------------------------------------------------------------
+
+iterate : ∀ {X : Set} → Nat → (X → X) → X → X
+iterate zero step x = x
+iterate (suc n) step x = iterate n step (step x)
+
+iteratePreservesCodeEquality :
+  ∀ {X Code : Set}
+  (step : X → X) (encode : X → Code) →
+  ((x y : X) → encode x ≡ encode y →
+    encode (step x) ≡ encode (step y)) →
+  (n : Nat) (x y : X) →
+  encode x ≡ encode y →
+  encode (iterate n step x) ≡ encode (iterate n step y)
+iteratePreservesCodeEquality step encode stable zero x y equality = equality
+iteratePreservesCodeEquality step encode stable (suc n) x y equality =
+  iteratePreservesCodeEquality step encode stable n
+    (step x) (step y) (stable x y equality)
+
+futureConsumerSufficiency :
+  ∀ {X Code Outcome : Set}
+  (step : X → X) (encode : X → Code)
+  (consumer : X → Outcome) →
+  Descent.ConsumerSufficient encode consumer →
+  ((x y : X) → encode x ≡ encode y →
+    encode (step x) ≡ encode (step y)) →
+  (n : Nat) →
+  Descent.ConsumerSufficient encode (λ x → consumer (iterate n step x))
+futureConsumerSufficiency step encode consumer sufficient stable n
+  x y sameCode =
+  sufficient
+    (iterate n step x)
+    (iterate n step y)
+    (iteratePreservesCodeEquality step encode stable n x y sameCode)
+
+-- The converse claim is deliberately not made: a compression that
+-- preserves one observed target but NOT its transition-stable fibres
+-- can still lose information needed by a later target.
