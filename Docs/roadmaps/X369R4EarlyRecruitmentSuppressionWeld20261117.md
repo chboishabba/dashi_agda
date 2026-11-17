@@ -1,5 +1,92 @@
 
 
+## 17 November continuous-load exact original R4 envelope — all strict topk regions
+
+New implementation:
+`scripts/check_x369_r4_full_load_kink_envelope_sympy.py`.
+This extends the four-load `ResponseKink` source fixture
+to ALL **strict-selection nonnegative real activation loads**,
+using the repaired exact original source parameters:
+`L_0=8`, `L_1=3+4t`, `L_2=-11+9t`,
+`L_3=-16+11t`, output vector `(0,1,0,0)`.
+No synthetic attenuator or alternate GELU was added.
+
+Every selected-slot and selected/outside gap is
+an affine polynomial. Exact rational endpoint
+checks imply positivity throughout each OPEN
+source regime:
+
+| Strict open-load regime | Original ordered top2 | Exact weighted source response |
+| --- | --- | --- |
+| 0 to 5/4 | (0,1) | sigmoid(4t-5) |
+| 5/4 to 19/9 | (1,0) | sigmoid(4t-5) |
+| 19/9 to 5/2 | (1,2) | sigmoid(14-5t) |
+| 5/2 to 19/7 | (1,3) | sigmoid(19-7t) |
+| 19/7 to 14/5 | (3,1) | sigmoid(19-7t) |
+| greater than 14/5 | (3,2) | 0 |
+
+The unique source output maximum (among strict
+regions, with its continuous extension across
+the harmless second-slot tie) occurs at
+
+    t*=19/9, y*=sigmoid(31/9)≈0.969065029508.
+
+The first two intervals have strictly positive
+derivative `4*y*(1-y)`; the next one has
+negative derivative `-5*y*(1-y)`, and the
+two following intervals `-7*y*(1-y)`.
+After the final cutoff the weighted
+output is identically zero.
+
+**Critical tie semantics:**
+- At t=5/4 and t=19/7 the same selected pair
+  changes SLOT ordering; the output is invariant.
+- At t=19/9 and t=5/2 the second-slot
+  competitor ties with another **zero-output**
+  expert: the actual selected ID is
+  unspecified by `torch.topk`, but the
+  scalar source output is the same for
+  either tied choice in this fixture.
+- At **t=14/5**, expert 1 and expert 2 TIE
+  for the second selected slot behind e3;
+  those experts have different output,
+  so the weighted scalar itself is
+  **not well-defined under unspecified
+  torch.topk tie semantics**. The left
+  limit is `sigmoid(-3/5)≈0.354343693774`;
+  the right limit is exactly 0.
+  The proof excludes the tie point itself
+  and does not silently use stable sorting.
+
+The original learned-FFN parameter choices still
+make expert 1's emitted output constant,
+so the observed whole-router rise and decline
+is explicitly **not non-monotone GELU**.
+It is caused by changing selection and
+selected-score relative growth.
+
+**Verification**: an independent exact-rational/
+SymPy reconstruction of 18 interval inequalities,
+6 per-region output formulas and 3 peak/cutoff
+claims passed **27 checks**. Separately, 10
+near-threshold original affine route calculations
+passed for ±0.0001 at the five critical loads.
+Those are independent local proof-development
+calculations, not a claim that the entire
+committed SymPy file or native Torch code
+was executed as a GitHub checkout.
+
+**Native original source route added to PR #5**:
+the original synthetic CPU fixture now checks
+both sides of each exact breakpoint through
+the REAL `HistoryOrbitMoE.select_source_experts`
+and `step` APIs with strict original margins,
+and refuses promotion at the exact
+output-changing cutoff tie.
+Kernel, fitted-checkpoint, float-precision and
+continuous neural task-quality gates remain open.
+
+
 ## 17 Nov topk strict-margin remediation + matched history routing ablation
 
 This section supersedes any earlier **second-step** claim made
