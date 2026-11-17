@@ -8,6 +8,10 @@ module DASHI.Culture.AmyEskridgeVideoTypedObligationWeldExact where
 -- Primary sources: HAL5 Amy Eskridge 2018; House Oversight 2026-04-20;
 -- source-specific DOI/patent objects in AmyEskridgeVideoClaimProducerWeldExact.
 -- Typed obligations are our research criteria, not the speakers' claims.
+-- Original Zoom clip provenance is now supplied for claim001-003,
+-- claim005-007 and claim010, and secondary Fox media list is identified
+-- for claim004. Those source-identity gates have been narrowed here;
+-- independent event/physics/causality gates remain OPEN.
 -- Explicit lack of a constructor for these receipts records an OPEN leaf;
 -- it does not mean the underlying event has been disproved.
 
@@ -47,37 +51,37 @@ open TypedClaimGate public
 
 gate001 : TypedClaimGate
 gate001 = typed-claim-gate Weld.claimJoin001
-  (sourceClipProvenance ∷ independentRecordingIntegrity ∷ [])
+  (independentRecordingIntegrity ∷ independentEventFile ∷ [])
   "Unpaid independent witness; citation identity and transcript statement are not promotion permissions"
 
 gate002 : TypedClaimGate
 gate002 = typed-claim-gate Weld.claimJoin002
-  (rosterIdentity ∷ denominatorAndControls ∷ commonProgrammeLink ∷ [])
+  (officialProgrammeObject ∷ independentEventFile ∷ [])
   "Unpaid independent witness; citation identity and transcript statement are not promotion permissions"
 
 gate003 : TypedClaimGate
 gate003 = typed-claim-gate Weld.claimJoin003
-  (physicalApparatus ∷ independentlyObservableEffect ∷ [])
+  (originalExperimentData ∷ causalSequence ∷ [])
   "Unpaid independent witness; citation identity and transcript statement are not promotion permissions"
 
 gate004 : TypedClaimGate
 gate004 = typed-claim-gate Weld.claimJoin004
-  (rosterIdentity ∷ denominatorAndControls ∷ commonProgrammeLink ∷ [])
+  (sourceClipProvenance ∷ denominatorAndControls ∷ commonProgrammeLink ∷ [])
   "Unpaid independent witness; citation identity and transcript statement are not promotion permissions"
 
 gate005 : TypedClaimGate
 gate005 = typed-claim-gate Weld.claimJoin005
-  (sourceClipProvenance ∷ independentRecordingIntegrity ∷ [])
+  (independentRecordingIntegrity ∷ independentEventFile ∷ [])
   "Unpaid independent witness; citation identity and transcript statement are not promotion permissions"
 
 gate006 : TypedClaimGate
 gate006 = typed-claim-gate Weld.claimJoin006
-  (sourceClipProvenance ∷ independentRecordingIntegrity ∷ [])
+  (independentRecordingIntegrity ∷ independentEventFile ∷ [])
   "Unpaid independent witness; citation identity and transcript statement are not promotion permissions"
 
 gate007 : TypedClaimGate
 gate007 = typed-claim-gate Weld.claimJoin007
-  (sourceClipProvenance ∷ independentRecordingIntegrity ∷ [])
+  (independentRecordingIntegrity ∷ independentEventFile ∷ [])
   "Unpaid independent witness; citation identity and transcript statement are not promotion permissions"
 
 gate008 : TypedClaimGate
@@ -92,7 +96,7 @@ gate009 = typed-claim-gate Weld.claimJoin009
 
 gate010 : TypedClaimGate
 gate010 = typed-claim-gate Weld.claimJoin010
-  (sourceClipProvenance ∷ independentRecordingIntegrity ∷ [])
+  (physicalApparatus ∷ independentlyObservableEffect ∷ [])
   "Unpaid independent witness; citation identity and transcript statement are not promotion permissions"
 
 gate011 : TypedClaimGate
