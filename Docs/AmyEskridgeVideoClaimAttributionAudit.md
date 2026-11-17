@@ -48,7 +48,7 @@ Reuse existing controls: `Docs/SourceAttributionPolicy.md`, `DASHI/Biology/Attri
 
 ## Outstanding max-cut / acquisition plan
 
-1. Recover original video URL/upload metadata and identify **every source clip** including the opening speaker, Amy Eskridge interview, Deutsch footage and Bem/presentiment interview.
+1. The original Amy Zoom clip-source and time offsets have now been located for seven claims; acquire original edited-video URL/upload metadata and identify remaining Deutsch/Bem and Burisch original cuts, plus uncut source checks.
 2. Acquire HAL5 slide PDF and exact primary research bibliography referenced on each slide; maintain a two-way `transcript time -> slide number -> original reference` table.
 3. Reuse the Fox 2026-04-17 *eleven-person media list* (Morgan Phillips and Michael Dorgan; existing OSINT source producers) and `AmyEskridgeVideoEleventhMediaRosterWeldExact.agda`; test whether the video actually uses that source, then inspect member-specific official roles/events, baseline population, control explanations and the still-unlocated alleged NSA list.
 4. Recover original primary patents/papers/contracts for Brown, Wallace, Dean, Li/Torr, Podkletnov, Poher, Woodward and Boeing; determine which predicted observables were independently tested.
@@ -77,4 +77,39 @@ The original **secondary** source is now located in the existing repo producer `
 Phillips' named report lists **Eskridge plus Hicks, Reza, McCasland, Maiwald, Grillmair, Loureiro, Chavez, Thomas, Casias and Garcia**. This matches the repo-reconstructed ten-person reporting/House-context set plus Amy. This explicit source closes the **secondary-media attribution and named-list identity** gate that was previously open; `AmyEskridgeVideoEleventhMediaRosterWeldExact.agda` makes the eleven-name typed comparison with the earlier House ten, proves its finite list normalization with `refl`, and retains role distinctions. It **does not** establish the video narrator's actual source, case inclusion endorsed by a primary government agency, all-scientist status, government targeting or common-cause evidence.
 
 Both Fox articles are the **same outlet's reporting**, not two independent forensic witnesses. The April 20 House primary letter (which is later) calls its underlying news reports **unconfirmed** and does not itself add Amy or assert an eleven-person official roster. Fox explicitly reports no publicly available evidence linking Eskridge's death to the others, and no authority-established tie from her research to her death.
+
+
+
+## Exact uncut Zoom clip weld (2024 archive; original recording year not independently established)
+
+The existing `AmyEskridgeOSINTSnowballExact.archivedAmyInterviewSource` points to
+the [archived Amy Eskridge Zoom transcript](https://blockedepistemology.substack.com/p/archive-amy-eskridge-zoom)
+by Blocked Epistemology (published **2024-01-27**), identifying original YouTube recording
+[video l0O4cEIkUZc](https://www.youtube.com/watch?v=l0O4cEIkUZc), an extended
+Zoom conversation among **Amy Eskridge, Jeremy Rys and Mark Sokol**.
+The archive explicitly says its automated transcript is not endorsed in entirety.
+
+The new `AmyEskridgeVideoZoomClipSourceWeldExact.agda` binds seven video claim objects
+directly to the named **existing** OSINT source owner, including:
+| Edited video clip | Original recording time | Source and scope |
+|---|---|---|
+| 00:00–00:06 | 35:40–35:53 | Amy's reported threat quotation, original speaker testimony, not actor proof |
+| 00:05–00:11 | 30:44–31:22 | Amy attributes the purported NSA list of five to a secret-space-program contact, not an NSA document |
+| 00:11–00:21 | 34:18–34:38 | Amy quotes the same informant alleging four suppressed discoveries |
+| 00:31–01:23 | 2:53:41–2:56:11 | Amy's reported physical surveillance and Lexus licence-plate account |
+| 01:41–01:53 | 52:22–52:59 | Amy reports P47/P52 alleged future-human beliefs |
+
+**Exact editing distinction:** the first 21 seconds of the supplied video
+are cut as **35:40 → 31:02 → 34:18** from the same original,
+instead of the source's chronological **31:02 → 34:18 → 35:40**.
+The published uncut recording also provides the alleged informant's attribution
+context. The narrated montage therefore rearranges chronology; multiple clips
+from the same Amy interview do not represent independent evidence.
+This check is a new DASHI editorial-order observation, not a historical claim by Amy.
+
+The Zoom origin is now **source-located** for video rows 001–003, 005–007 and 010.
+The respective typed obligation packets no longer charge an unlocated
+clip; they retain the independent event, source authenticity,
+government-list and physical-proof gates. Source-located dialogue
+is NOT proof that the associated physical or intelligence events occurred.
 
