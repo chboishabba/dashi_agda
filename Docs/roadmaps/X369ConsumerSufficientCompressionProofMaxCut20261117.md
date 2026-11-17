@@ -1996,3 +1996,118 @@ between the early cognition
 shape contract, the source
 router, and arbitrary GELU
 parity or biology.
+
+
+## 17 November source-execution max-cut — original Leech producer now implemented
+
+Original repository: `chboishabba/LeechTransformer`, existing PR #5,
+branch `experiment/x369-r4-fair-c2c3-residual-20261115`.
+
+**No surrogate router was introduced.** Existing
+`models/history_orbit_moe.py` now accepts optional
+`select_source_experts(x,history,return_logits=True)`,
+returning `(ids,weights,logits)` from the SAME original
+route/score computation. Its default
+`return_logits=False` preserves the original
+2-tuple API and ordinary training/inference semantics.
+
+New original-source consumers:
+- `scripts/check_x369_r4_native_topk_kink.py`:
+  CPU smoke test of the ACTUAL HistoryOrbitMoE class
+  with source-valid synthetic d=6 coherent R4
+  weights and histories. Checks source logits,
+  native topk slots, signed expert FFN output,
+  source `step` versus `execute_selected`
+  replay and full selected histories;
+  asserts the strict Nat response `0,2,9,0`.
+  The *matched* fixed pair [0,1] has
+  strictly increasing response and
+  no overload limb.
+  Optional `--emit-probe-dir` creates a
+  genuine native **synthetic** state_dict
+  and matching four-load JSON for
+  the checkpoint probe.
+- `scripts/probe_x369_r4_kink_checkpoint.py`:
+  exact original-source same-checkpoint
+  CPU probe. Uses weights_only
+  `torch.load` and `strict=True` state
+  dictionary admission (an explicit
+  `--state-prefix` handles module
+  embedding), computes real checkpoint
+  byte SHA256, source input and history
+  byte SHA256, retains original all-E
+  inactive histories, and independently
+  resets the SAME history for four
+  increasing activation loads.
+  Evaluates original `select_source_experts`,
+  `step`, and `execute_selected`,
+  rejects same-source selected/sign/history
+  replay mismatch, and computes an
+  actual-source-logit/softmax-based
+  forced-route selected-only ablation.
+  Its response type is explicit
+  coordinate or L2 norm; Nat
+  projection uses an explicit scale.
+  The return JSON separates native
+  `nat_kink_observed` from
+  `fixed_route_continuous_kink_observed`,
+  and **explicitly** marks
+  `certified_float_error_intervals=false`,
+  `recurrent_hysteresis_certified=false`
+  and heldout quality uncertified.
+- `docs/x369_r4_native_kink_probe.md`:
+  usage instructions and source
+  promotion/non-promotion boundaries.
+
+To run from the original Leech
+repository root with installed
+source dependencies:
+
+```bash
+python scripts/check_x369_r4_native_topk_kink.py \
+  --emit-probe-dir .leech-r4-kink
+python scripts/probe_x369_r4_kink_checkpoint.py \
+  --checkpoint .leech-r4-kink/synthetic_history_orbit_moe_state_dict.pt \
+  --input .leech-r4-kink/synthetic_original_load_input.json \
+  --output .leech-r4-kink/synthetic_probe_result.json
+```
+
+**Independent LOCAL exact-rational verification COMPLETED**
+in this conversation of the source formula and its
+correlated paired-error/response Nat cells,
+for each load t=0,1,2,3:
+- logits `(8,3,-11,-13)`,
+  `(8,7,-2,-3)`, `(8,11,7,7)`,
+  `(8,15,16,17)`;
+- strict ordered top2 `(0,1)`,
+  `(0,1)`, `(1,0)`, `(3,2)`;
+- exact Nat `(0,2,9,0)`;
+- synthetic pairwise score errors and source
+  Nat interval margins remain admitted.
+
+That local rational audit reproduced
+the corresponding symbolic mathematics.
+**The exact committed original Torch scripts,
+the fitted checkpoint and the new Agda
+modules have NOT been executed or kernel
+accepted** in this chat.
+
+Both TOE entry points now import the
+canonical finite R4 kink witness with
+the unique `r4FiniteKinkSourceShape`
+public projection:
+`DASHI/EverythingTOESymmetryResolved369.agda`
+and `DASHI/Unified/Everything.agda`.
+No change to the core early
+`ResponseKink.agda` owner or ESD modules.
+
+**Remaining decisive physical/source gates:**
+real owned R4 source checkpoint + actual
+history revision, four-load choice with
+measured source response, actual counterfactual
+replay, independently certified floating
+interval/Nat-cell errors, original R1/SLR
+development/heldout provenance, and true
+on-policy recurrent hysteresis (not a
+reset-history comparison). No
+clinical/endocrine claims.
