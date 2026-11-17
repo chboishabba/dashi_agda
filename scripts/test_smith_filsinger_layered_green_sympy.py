@@ -109,3 +109,26 @@ def test_unrestored_or_missing_source_fails_closed():
     assert uncertainty_gain_certificate(**d)['status']=='OPEN'
     d=interval_fixture();d['independent_source']=False
     assert uncertainty_gain_certificate(**d)['status']=='OPEN'
+
+@pytest.mark.parametrize("k2",[S.Rational(0),S.Rational(1,3),S.Rational(2),S.Rational(7,2)])
+def test_four_nonzero_transverse_fourier_modes_exact(k2):
+    model=matrices(k_parallel_squared=k2)
+    C,P,H,K=model
+    s=S.Rational(3,2)
+    A=admittance(s,*model)
+    G=green_laplace(s,*model)
+    assert A*G==S.eye(6) and G*A==S.eye(6)
+    assert H.T==-H
+    assert terminal_transfer(G)!=0
+    B=(A+A.T)/2
+    assert all(B[:j,:j].det()>0 for j in range(1,7))
+
+def test_transverse_mode_response_changes_with_k_squared():
+    s=S.Rational(2)
+    g0=green_laplace(s,*matrices(k_parallel_squared=0))
+    g2=green_laplace(s,*matrices(k_parallel_squared=2))
+    assert g0!=g2
+    assert terminal_transfer(g0)!=terminal_transfer(g2)
+
+def test_negative_transverse_spectral_mode_rejected():
+    with pytest.raises(ValueError):matrices(k_parallel_squared=-1)
