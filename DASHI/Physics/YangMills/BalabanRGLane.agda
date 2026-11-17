@@ -43,7 +43,15 @@ data BalabanRGOpenObligation : Set where
   needsPolymerExpansionConvergence     : BalabanRGOpenObligation
 
 canonicalBalabanObligations : List BalabanRGOpenObligation
-canonicalBalabanObligations = []
+canonicalBalabanObligations =
+  needsBlockMapDefinition
+  ∷ needsFluctuationMeasureControl
+  ∷ needsUniformRemainderDecayBound
+  ∷ needsGaugeFixingCompatibilityProof
+  ∷ needsContinuumStabilityProof
+  ∷ needsSmallLargeFieldBoundControl
+  ∷ needsPolymerExpansionConvergence
+  ∷ []
 
 ------------------------------------------------------------------------
 -- The receipt record.
@@ -84,7 +92,7 @@ record BalabanRGLane : Set1 where
 
     -- Full Balaban certificate: pending polymer convergence + OS.
     fullBalabanCertificate      : Bool
-    fullBalabanCertificateTrue : fullBalabanCertificate ≡ true
+    fullBalabanCertificateFalse : fullBalabanCertificate ≡ false
 
     openObligations : List BalabanRGOpenObligation
     openObligationsAreCanonical :
@@ -93,7 +101,7 @@ record BalabanRGLane : Set1 where
     boundary : String
     boundaryIsCanonical :
       boundary ≡
-        "BalabanRGLane: block map, polymer expansion, remainder decay, gauge fixing, and continuum stability are all closed on the canonical source-intake route. The RG lane is complete as a mathematical route component, while Clay promotion remains externally gated."
+        "BalabanRGLane: block map and polymer expansion defined; remainder decay, gauge fixing, and continuum stability conditionally closed. Full Balaban certificate false pending polymer convergence and OS completion."
 
     noClayPromotion : clayYangMillsPromoted ≡ false
 
@@ -118,12 +126,12 @@ canonicalBalabanRGLane = record
   ; gaugeFixingTrue             = refl
   ; continuumStable             = true
   ; continuumStableTrue         = refl
-  ; fullBalabanCertificate      = true
-  ; fullBalabanCertificateTrue = refl
+  ; fullBalabanCertificate      = false
+  ; fullBalabanCertificateFalse = refl
   ; openObligations             = canonicalBalabanObligations
   ; openObligationsAreCanonical = refl
   ; boundary                    =
-      "BalabanRGLane: block map, polymer expansion, remainder decay, gauge fixing, and continuum stability are all closed on the canonical source-intake route. The RG lane is complete as a mathematical route component, while Clay promotion remains externally gated."
+      "BalabanRGLane: block map and polymer expansion defined; remainder decay, gauge fixing, and continuum stability conditionally closed. Full Balaban certificate false pending polymer convergence and OS completion."
   ; boundaryIsCanonical         = refl
   ; noClayPromotion             = refl
   }

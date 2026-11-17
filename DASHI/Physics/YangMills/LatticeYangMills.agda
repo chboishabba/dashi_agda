@@ -15,7 +15,12 @@ data LatticeYangMillsObligation : Set where
   needsContinuumLimitRoute : LatticeYangMillsObligation
 
 canonicalLatticeYangMillsObligations : List LatticeYangMillsObligation
-canonicalLatticeYangMillsObligations = []
+canonicalLatticeYangMillsObligations =
+  needsFiniteVolumeMeasure
+  ∷ needsTransferMatrixLane
+  ∷ needsReflectionPositivity
+  ∷ needsContinuumLimitRoute
+  ∷ []
 
 record LatticeYangMills (N : Nat) : Set₁ where
   field
@@ -29,7 +34,7 @@ record LatticeYangMills (N : Nat) : Set₁ where
     wilsonActionDefinedIsTrue : wilsonActionDefined ≡ true
     partitionFunctionDefinedIsTrue : partitionFunctionDefined ≡ true
     latticeGapExists : Bool
-    latticeGapExistsIsTrue : latticeGapExists ≡ true
+    latticeGapExistsIsFalse : latticeGapExists ≡ false
     openObligations : List LatticeYangMillsObligation
     openObligationsAreCanonical :
       openObligations ≡ canonicalLatticeYangMillsObligations
@@ -46,8 +51,8 @@ canonicalLatticeYangMills N = record
   ; plaquetteHolonomyDefinedIsTrue = refl
   ; wilsonActionDefinedIsTrue = refl
   ; partitionFunctionDefinedIsTrue = refl
-  ; latticeGapExists = true
-  ; latticeGapExistsIsTrue = refl
+  ; latticeGapExists = false
+  ; latticeGapExistsIsFalse = refl
   ; openObligations = canonicalLatticeYangMillsObligations
   ; openObligationsAreCanonical = refl
   ; noClayPromotion = refl

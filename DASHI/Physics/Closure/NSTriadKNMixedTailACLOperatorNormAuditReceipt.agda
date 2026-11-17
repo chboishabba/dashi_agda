@@ -24,7 +24,7 @@ canonicalSampledFiniteShellSchurTestWitnessText =
 
 canonicalProfileIndependentSchurTestKernelSumBoundText : String
 canonicalProfileIndependentSchurTestKernelSumBoundText =
-  "profile-independent weighted Schur product bound: open"
+  "profile-independent kernel-sum bound: open"
 
 record NSTriadKNMixedTailSampledFiniteShellSchurTestWitness : Set where
   field
@@ -81,22 +81,20 @@ record NSTriadKNMixedTailProfileIndependentSchurTestKernelSumBound : Set where
     targetText :
       String
     targetTextIsCanonical :
-      targetText ≡ "weighted Schur target: choose w so that R_N(w) * C_N(w) <= C^2 / N^2, hence ||L_FT^+||_op <= C / N for all NS-compatible profiles"
+      targetText ≡ "||L_FT^+||_op <= C / N for all NS-compatible profiles"
     missingText :
       String
     missingTextIsCanonical :
-      missingText ≡ "direct positive-sector magnitude/counting theorem and a profile-uniform weighted Schur product bound"
+      missingText ≡ "direct positive-sector magnitude/counting theorem and profile-independent column bound"
 
 canonicalProfileIndependentSchurTestKernelSumBound :
   NSTriadKNMixedTailProfileIndependentSchurTestKernelSumBound
 canonicalProfileIndependentSchurTestKernelSumBound = record
   { statusText = canonicalProfileIndependentSchurTestKernelSumBoundText
   ; statusTextIsCanonical = refl
-  ; targetText =
-      "weighted Schur target: choose w so that R_N(w) * C_N(w) <= C^2 / N^2, hence ||L_FT^+||_op <= C / N for all NS-compatible profiles"
+  ; targetText = "||L_FT^+||_op <= C / N for all NS-compatible profiles"
   ; targetTextIsCanonical = refl
-  ; missingText =
-      "direct positive-sector magnitude/counting theorem and a profile-uniform weighted Schur product bound"
+  ; missingText = "direct positive-sector magnitude/counting theorem and profile-independent column bound"
   ; missingTextIsCanonical = refl
   }
 
@@ -210,7 +208,7 @@ canonicalReceiptText =
 
 canonicalReadoutText : String
 canonicalReadoutText =
-  "The sampled finite-shell witness records the checked N=6,8,10,12 mixed-tail rows and N^-1 block scale, but the direct ACL kernel match now fails for the current positive-sector L_FT^+ because the exact entry carries profile amplitudes and max(cos(closure),0); the corrected signed half-sum test also leaves S_+ = S_abs/2, so the live open gate is a profile-uniform weighted Schur product bound on the direct positive-sector route."
+  "The sampled finite-shell witness records the checked N=6,8,10,12 mixed-tail rows and N^-1 block scale, but the direct ACL kernel match now fails for the current positive-sector L_FT^+ because the exact entry carries profile amplitudes and max(cos(closure),0); the corrected signed half-sum test also leaves S_+ = S_abs/2, so the profile-independent Schur-test bound remains open on a direct positive-sector route."
 
 canonicalSourceFieldsReceiptText : String
 canonicalSourceFieldsReceiptText =
@@ -258,7 +256,7 @@ canonicalLText =
 
 canonicalPText : String
 canonicalPText =
-  "P: keep the sampled N^-1 witness, but prove the direct positive-sector magnitude/counting theorem and then a weighted Schur product bound R_N(w) * C_N(w) <= C^2 / N^2 before attempting theorem promotion."
+  "P: keep the sampled N^-1 witness, but prove the direct positive-sector magnitude/counting theorem before attempting a uniform operator theorem."
 
 canonicalGText : String
 canonicalGText =

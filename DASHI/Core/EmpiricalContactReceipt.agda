@@ -5,11 +5,9 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.String using (_++_)
 
-import DASHI.Core.ContactGateCore as Gate
 import DASHI.Core.ContactHamiltonian as Hamiltonian
-import DASHI.Core.FibreRestrictionCore as Restriction
 import DASHI.Core.ObservableContactGeometry as Geometry
-import DASHI.Core.ReplayArtifactCore as Replay
+import DASHI.Core.FibreRestrictionCore as Restriction
 
 ------------------------------------------------------------------------
 -- Bool conjunction
@@ -36,11 +34,12 @@ record SourceBinding : Set where
     sourceKind    : String
     sourceLocator : String
 
-ReplayArtifact : Set
-ReplayArtifact = Replay.ReplayArtifactCore
-
-replayArtifact : String → String → String → ReplayArtifact
-replayArtifact = Replay.canonicalReplayArtifact
+record ReplayArtifact : Set where
+  constructor replayArtifact
+  field
+    artifactLabel      : String
+    artifactLocator    : String
+    validationCommand  : String
 
 record EmpiricalContactReceipt : Set₁ where
   constructor empiricalContactReceipt
@@ -85,18 +84,6 @@ record EmpiricalContactReceipt : Set₁ where
     ++ "promotion remains blocked until an external authority chain closes."
 
 open EmpiricalContactReceipt public
-
-contactGateCore : EmpiricalContactReceipt → Gate.ContactGateCore
-contactGateCore receipt =
-  Gate.contactGateCore
-    (diagnosticOnly receipt)
-    (externalAuthorityRequired receipt)
-    (authorityGateClosed receipt)
-    false
-    (promotesTruth receipt)
-
-replayArtifactCore : EmpiricalContactReceipt → Replay.ReplayArtifactCore
-replayArtifactCore = replay
 
 canonicalNonPromotingEmpiricalContactReceipt :
   Geometry.ObservableContactGeometry →
@@ -154,14 +141,3 @@ canonicalNonPromotionBoundaryClosed :
     (canonicalNonPromotingEmpiricalContactReceipt geometry hamiltonian source replay)
     ≡ true
 canonicalNonPromotionBoundaryClosed geometry hamiltonian source replay = refl
-
-canonicalContactGateIsFailClosed :
-  (geometry : Geometry.ObservableContactGeometry) →
-  (hamiltonian : Hamiltonian.ContactHamiltonian) →
-  (source : SourceBinding) →
-  (replay : ReplayArtifact) →
-  Gate.promotesTruth
-    (contactGateCore
-      (canonicalNonPromotingEmpiricalContactReceipt geometry hamiltonian source replay))
-    ≡ false
-canonicalContactGateIsFailClosed geometry hamiltonian source replay = refl

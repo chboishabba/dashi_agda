@@ -1,6 +1,6 @@
 module DASHI.Core.ObservableContactGeometry where
 
-open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Bool using (Bool)
 
 import DASHI.Core.ComparisonLawCore as Comparison
 import DASHI.Core.FibreRestrictionCore as Restriction
@@ -52,7 +52,6 @@ comparisonCore geometry =
     (TraceProjection geometry)
     (Residual geometry)
     (ComparisonLaw geometry)
-    true
 
 fibreRestrictionCore :
   (geometry : ObservableContactGeometry) →

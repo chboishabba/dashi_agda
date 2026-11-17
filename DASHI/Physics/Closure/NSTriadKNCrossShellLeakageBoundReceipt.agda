@@ -75,14 +75,6 @@ data NSTriadKNCrossShellLeakageBoundSampledEvidence : Set where
     NSTriadKNCrossShellLeakageBoundSampledEvidence
   leakageBoundBelowOneTwentiethSampled :
     NSTriadKNCrossShellLeakageBoundSampledEvidence
-  qHelicalLiftAuditInstalled :
-    NSTriadKNCrossShellLeakageBoundSampledEvidence
-  qHelicalBasisRelevantObserved :
-    NSTriadKNCrossShellLeakageBoundSampledEvidence
-  qHelicalCouplingBoundObservedN12 :
-    NSTriadKNCrossShellLeakageBoundSampledEvidence
-  qHelicalDPlusEDecompositionObservedN12 :
-    NSTriadKNCrossShellLeakageBoundSampledEvidence
 
 canonicalNSTriadKNCrossShellLeakageBoundSampledEvidence :
   List NSTriadKNCrossShellLeakageBoundSampledEvidence
@@ -96,19 +88,15 @@ canonicalNSTriadKNCrossShellLeakageBoundSampledEvidence =
   ∷ deltaCollapseObservedAtN12
   ∷ weakBlockFloorPsdVerified
   ∷ leakageBoundBelowOneTwentiethSampled
-  ∷ qHelicalLiftAuditInstalled
-  ∷ qHelicalBasisRelevantObserved
-  ∷ qHelicalCouplingBoundObservedN12
-  ∷ qHelicalDPlusEDecompositionObservedN12
   ∷ []
 
 nSTriadKNCrossShellLeakageBoundSampledEvidenceCount : Nat
 nSTriadKNCrossShellLeakageBoundSampledEvidenceCount =
   listLength canonicalNSTriadKNCrossShellLeakageBoundSampledEvidence
 
-nSTriadKNCrossShellLeakageBoundSampledEvidenceCountIs13 :
-  nSTriadKNCrossShellLeakageBoundSampledEvidenceCount ≡ 13
-nSTriadKNCrossShellLeakageBoundSampledEvidenceCountIs13 = refl
+nSTriadKNCrossShellLeakageBoundSampledEvidenceCountIs9 :
+  nSTriadKNCrossShellLeakageBoundSampledEvidenceCount ≡ 9
+nSTriadKNCrossShellLeakageBoundSampledEvidenceCountIs9 = refl
 
 data NSTriadKNCrossShellLeakageBoundOpenObligation : Set where
   crossShellBlockFloorProved :
@@ -125,10 +113,6 @@ data NSTriadKNCrossShellLeakageBoundOpenObligation : Set where
     NSTriadKNCrossShellLeakageBoundOpenObligation
   mCCPsdProved :
     NSTriadKNCrossShellLeakageBoundOpenObligation
-  qHelicalCouplingUniformlyBounded :
-    NSTriadKNCrossShellLeakageBoundOpenObligation
-  qHelicalBlockFloorUniformlyProved :
-    NSTriadKNCrossShellLeakageBoundOpenObligation
   gate1ConditionalTheoremProved :
     NSTriadKNCrossShellLeakageBoundOpenObligation
 
@@ -142,8 +126,6 @@ canonicalNSTriadKNCrossShellLeakageBoundOpenObligations =
   ∷ normalizedToResidueTransferProved
   ∷ deltaCollapseProved
   ∷ mCCPsdProved
-  ∷ qHelicalCouplingUniformlyBounded
-  ∷ qHelicalBlockFloorUniformlyProved
   ∷ gate1ConditionalTheoremProved
   ∷ []
 
@@ -151,9 +133,9 @@ nSTriadKNCrossShellLeakageBoundOpenObligationCount : Nat
 nSTriadKNCrossShellLeakageBoundOpenObligationCount =
   listLength canonicalNSTriadKNCrossShellLeakageBoundOpenObligations
 
-nSTriadKNCrossShellLeakageBoundOpenObligationCountIs10 :
-  nSTriadKNCrossShellLeakageBoundOpenObligationCount ≡ 10
-nSTriadKNCrossShellLeakageBoundOpenObligationCountIs10 = refl
+nSTriadKNCrossShellLeakageBoundOpenObligationCountIs8 :
+  nSTriadKNCrossShellLeakageBoundOpenObligationCount ≡ 8
+nSTriadKNCrossShellLeakageBoundOpenObligationCountIs8 = refl
 
 data NSTriadKNCrossShellLeakageBoundStructuralResult : Set where
   bCrossZeroStructuralProof :
@@ -216,7 +198,7 @@ canonicalEvidenceTableText =
 
 canonicalBlockFloorText : String
 canonicalBlockFloorText =
-  "Cross-shell block floor: conditional analytic bound c0 = 1/9; sharp sampled bound c0 ≈ 0.158–0.175 verified at N=6,8,10,12. DASHI weight convention is phase-based: γ_e = cos(φ_ℓ+φ_r−φ_o), w_neg = w_e |γ_e| 1_{γ_e<0}, w_pos = w_e |γ_e| 1_{γ_e>0}, w_abs = w_e |γ_e|. The live Gate 1 route is signed Schur domination, not ordinary nonnegative-edge Kron reduction: M = L_neg,cross − (1/9) L_abs,cross satisfies M 1 = 0, M_GG ≻ 0 on sampled seams, S_C = M_CC − M_CG M_GG⁻¹ M_GC satisfies S_C 1_C = 0 analytically, and the target is 3 L_bad <= 2 L_good on 1_C^perp. Positive off-diagonal Schur entries are observed abundantly, so the ordinary Kron-Laplacian route is closed."
+  "Cross-shell block floor: conditional analytic bound c0 = 1/9; sharp sampled bound c0 ≈ 0.158–0.175 verified at N=6,8,10,12. DASHI weight convention: γ_e = cos(φ_ℓ+φ_r−φ_o), w_neg = max(−γ_e,0), w_abs = |γ_e|. Phase-admissibility architecture (docs/ns_triad_kn_gate1_phase_admissibility.md): Level 0 (exact PSD); Level 1a (Schur/Kron PSD: M_GG ≻ 0 and S_C = M_CC − M_CG M_GG⁻¹ M_GC with S_C 1_C = 0 analytically); Level 1b (cut domination demoted); Level 2 (Waleffe helical — motivation). Schur audit: M_GG PSD rank 26/26 λ_min ~ 1e-4; ‖M_GC‖ ≈ 4.3e-3 stable; S_C nullity one observed with constant-on-C gauge mode and machine-zero row sums at sampled shells. Open gates: nonnegative Kron-reduced edge weights and Kron-reduced graph connectivity under NS-compatible phases."
 
 canonicalLeakageSmallText : String
 canonicalLeakageSmallText =
@@ -229,10 +211,6 @@ canonicalBCrossZeroText =
 canonicalDeltaSmallAtN12Text : String
 canonicalDeltaSmallAtN12Text =
   "Δ_N = 2.2e-5 at N=12 (0.014% of block λ), but trend is not monotone (N=6,8,10 sit at 2.8-4.4%)."
-
-canonicalQHelicalCouplingText : String
-canonicalQHelicalCouplingText =
-  "Helical coupling route: candidate Q_N = D_N + E_N decomposition is viable at N=12 only. Telemetry: lambda_min(D_12|1_C^perp) approx 4.375958e-6, lambda_min(Q_12|1_C^perp) approx 4.320716e-6, ||E_12||op approx 1.083606e-2, and ||D_12^-1/2 E_12 D_12^-1/2|| approx 0.595611 < 1. Uniform-in-N coupling and block-floor proofs remain open."
 
 canonicalAllRowsLeakageSmallText : String
 canonicalAllRowsLeakageSmallText =
@@ -252,7 +230,7 @@ canonicalSourceArtifactMarkdown =
 
 canonicalLeakageBoundDoc : String
 canonicalLeakageBoundDoc =
-  "docs/ns_triad_kn_cross_shell_leakage_bound.md (includes B-Cross Separation Lemma, §B-Cross Separation Lemma (Proved)), docs/ns_triad_kn_cross_shell_block_floor.md (cross-shell block floor and Schur audit), docs/ns_triad_kn_gate1_phase_admissibility.md (phase-based Gate 1 architecture), docs/ns_triad_kn_cross_shell_schur_nullmode.md (constant-on-C Schur null mode), scripts/ns_triad_kn_cross_shell_schur_symbolic_audit.py (Schur audit)"
+  "docs/ns_triad_kn_cross_shell_leakage_bound.md (includes B-Cross Separation Lemma, §B-Cross Separation Lemma (Proved)), docs/ns_triad_kn_cross_shell_block_floor.md (Kron-reduced PSD certificate §Computational Certificate), docs/ns_triad_kn_gate1_phase_admissibility.md (three-level phase-admissibility architecture), docs/ns_triad_kn_cross_shell_schur_nullmode.md (Kron gauge-mode target), scripts/ns_triad_kn_cross_shell_schur_symbolic_audit.py (Schur/Kron audit)"
 
 canonicalOText : String
 canonicalOText =
@@ -284,7 +262,7 @@ canonicalGText =
 
 canonicalFText : String
 canonicalFText =
-  "F: Gate 1 is now recorded closed through the signed Schur route: dominationRatioUniformlyBoundedProved, schurSignedFactorizationProved, schurComplementPsdProved, gate1ConditionalTheoremProved, leakageBoundUniformInN, and normalizedGramToResidueTransferProved are all true on the Gate 1 receipt. Remaining work here is downstream only: admissible profile extension, any optional uniform helical-coupling alternative, and Gram coercivity closure across Gates 2-5. Schur audit: M_GG PSD full rank (λ_min ~ 1e-4), ‖M_GC‖ ≈ 4.3e-3 stable, S_C 1_C = 0 analytically and at machine precision numerically, nullity one observed, constant-on-C gauge mode observed, and the signed factorization carrier S_C = L_good − L_bad is recorded as proved. Ordinary Kron-Laplacian, balanced signed-graph, cut-domination, and per-source routes are not the live proof path."
+  "F: missing proofs: (1) kronEdgeWeightsNonnegativeProved — prove all off-diagonals of the Schur complement satisfy −S_C[i,j] ≥ 0 under NS-compatible phases; (2) kronReducedGraphConnectedProved — prove the Kron-reduced seam graph on C = shells N-1,N is connected; (3) gate1ConditionalTheoremProved: block floor ≥ 1/9 conditional on those Kron gates; (4) leakage bound analytic uniform in N; (5) admissible profile extension; (6) Gram coercivity closure (Gates 2–5). Schur/Kron audit: M_GG PSD full rank (λ_min ~ 1e-4), ‖M_GC‖ ≈ 4.3e-3 stable, S_C 1_C = 0 analytically and at machine precision numerically, nullity one observed, constant-on-C gauge mode observed. Cut domination demoted (does not imply Loewner). Waleffe/helical is motivation only."
 
 record NSTriadKNCrossShellLeakageBoundORCSLPGF : Set where
   constructor mkNSTriadKNCrossShellLeakageBoundORCSLPGF

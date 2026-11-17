@@ -14,9 +14,8 @@ STDLIB_PINNED_COMMIT="${AGDA_STDLIB_PINNED_COMMIT:-}"
 DASHI_EPHEMERAL="${DASHI_AGDA29_EPHEMERAL:-0}"
 DASHI_CLEAN="${DASHI_AGDA29_CLEAN:-0}"
 STDLIB_UPDATE="${AGDA_STDLIB_UPDATE:-0}"
-AGDA_LOG_PATH="${AGDA_LOG_PATH:-$DASHI_CACHE_HOME/logs/agda29-check.log}"
-AGDA_LOG_KEEP_COUNT="${AGDA_LOG_KEEP_COUNT:-10}"
-AGDA_LOG_BASE_PATH="$AGDA_LOG_PATH"
+AGDA_LOG_PATH="${AGDA_LOG_PATH:-/home/c/.gemini/antigravity/scratch/dashi-agda29-parallel-check.log}"
+AGDA_LOG_PREV="${AGDA_LOG_PATH}.1"
 
 if [ -z "${XDG_CACHE_HOME:-}" ]; then
   export XDG_CACHE_HOME="$REPO_ROOT/.cache"
@@ -198,19 +197,35 @@ else
 fi
 chmod -R u+w "$STDLIB_WORK"
 
-if [ "${DASHI_SYNC_ONLY:-0}" = "1" ]; then
-  echo "Shadow tree synchronized: $DASHI_WORK"
-  exit 0
+cd "$DASHI_WORK"
+if [ -f "$AGDA_LOG_PATH" ]; then
+  mv -f "$AGDA_LOG_PATH" "$AGDA_LOG_PREV"
+fi
+: >"$AGDA_LOG_PATH"
+echo "Logging Agda output to: $AGDA_LOG_PATH"
+if [ -f "$AGDA_LOG_PREV" ]; then
+  echo "Previous log rotated to: $AGDA_LOG_PREV"
 fi
 
-NORMALIZED_TARGETS=()
+AGDA_RUN=("$AGDA_BIN" \
+  --no-libraries --no-default-libraries \
+  "-j$JOBS" \
+  -i . -i DCHoTT-Agda -i cubical -i "$STDLIB_INCLUDE" \
+  -WnoUnsupportedIndexedMatch)
+
+if command -v stdbuf >/dev/null 2>&1; then
+  AGDA_RUN=(stdbuf -oL -eL "${AGDA_RUN[@]}")
+fi
+
 for target in "${TARGETS[@]}"; do
-  if [[ "$target" == "$REPO_ROOT/"* ]]; then
-    NORMALIZED_TARGETS+=("${target#$REPO_ROOT/}")
-  elif [[ "$target" == "$DASHI_WORK/"* ]]; then
-    NORMALIZED_TARGETS+=("${target#$DASHI_WORK/}")
-  else
-    NORMALIZED_TARGETS+=("$target")
+  echo "Checking: $target"
+  set +e
+  "${AGDA_RUN[@]}" "$target" 2>&1 | tee -a "$AGDA_LOG_PATH"
+  status="${PIPESTATUS[0]}"
+  set -e
+  if [ "$status" -ne 0 ]; then
+    echo "Agda failed for: $target" >&2
+    exit "$status"
   fi
 done
 TARGETS=("${NORMALIZED_TARGETS[@]}")

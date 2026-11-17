@@ -247,11 +247,11 @@ effectiveGraphConnectedObserved        = true
 schurSignedPsdRequired                 = true
 signedDominationProbeInstalled         = true
 signedDominationRatioBelowOneObserved  = true
-schurComplementPsdProved               = true
-schurSignedFactorizationProved         = true
+schurComplementPsdProved               = false
+schurSignedFactorizationProved         = false
 schurNullModeFactorizationProved       = false
-signedDominationRatioUniformlyBounded  = true
-gate1ConditionalTheoremProved          = true
+signedDominationRatioUniformlyBounded  = false
+gate1ConditionalTheoremProved          = false
 ordinaryKronLaplacianRoute             = false
 balancedSignedGraphRoute               = false
 ```
