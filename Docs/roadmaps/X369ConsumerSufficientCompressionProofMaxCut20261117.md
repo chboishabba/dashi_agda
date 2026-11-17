@@ -844,3 +844,125 @@ the admitted score-only consumer.
 All must preserve the difference between
 source exact reals and floating-point kernel
 reassociation. No hardware runs requested.
+
+
+### Round 2b: mixed-null q-gate and one-step history independence
+
+Source `LeechTransformer/models/trialectic_wave_prior.py`
+defines `q_gated_mixed_c3_mask` as
+`flip_j = q(x_j) > mean_j(q(x_j))`, XORed with
+the fixed seed-owned sign mask. This is **piecewise
+constant** as a function of x, not a single fixed
+rotation and not a smooth global input operator.
+
+For q(a,b,c)=1/2[(a-b)^2+(b-c)^2+(c-a)^2] and
+input errors (ea,eb,ec), its exact perturbation is
+
+    delta_q = (a-b)(ea-eb)+(b-c)(eb-ec)+(c-a)(ec-ea)
+            +1/2[(ea-eb)^2+(eb-ec)^2+(ec-ea)^2].
+
+Given coordinate envelopes `|ea|<=eps_a`, etc.,
+an admitted q-error envelope is
+
+    Q_j = Σ_(pairs i,k)
+          |x_i-x_k|(eps_i+eps_k)
+          + (1/2)Σ_(pairs i,k)(eps_i+eps_k)^2.
+
+Since the threshold is the sample mean of all triadic
+q values, its own possible error is bounded by
+`mean(Q)`. A sufficient **gate stability**
+certificate per triad is
+
+    |q_j - mean(q)| > Q_j + mean(Q).
+
+Only after this gate certificate can one reuse
+the fixed-rotation input quantization budget
+for the mixed-null score; otherwise infinitesimal
+perturbations near a q mean tie can flip the
++120/-120 branch. The local exact rational
+negative control uses two equal-q=1 triads;
+perturbing one coordinate by 1/4096 flips
+`q > mean(q)`. With a suitable expert
+history and self-channel head, the changed
+phase branch changes its directed score
+by order-one even as the input error tends
+to zero. Thus **Lipschitz quantization in x
+alone is NOT a source-valid mixed-null
+certificate across gate boundaries.**
+
+The positive fixture has triads
+`(2,0,0)` and `(0,0,0)` with each input
+coordinate error <=1/100; it satisfies
+the strict q-margin bound, and all 64
+sign-corner rational perturbations keep the
+same gate. The stand-in script checks both
+positive and adversarial cases, not only
+anecdotal examples.
+
+**One-step history/mixture refinement.**
+Source `HistoryOrbitMoE.step` computes each
+selected expert's `y_c` and next history
+from x, old selected h and its expert/orientation
+parameters, *before* multiplying y by the
+selected softmax weight. Consequently under
+an identical selected EXPERT SET, identical
+x/current selected histories/parameters,
+the original per-expert **one-step history
+updates** do not depend on changed mixture
+weights, even when the emitted mixture
+output differs. The returned `signs` and
+`weights` arrays remain indexed by selected
+SLOTS, and their order still matters for
+packet/API parity. The weighted mixture
+output is softmax-dependent, so its change
+can change the NEXT layer's shared activation
+and downstream future histories; do not
+infer global recurrence parity from
+one-step selected-history parity.
+
+The refined source consumer ladder is:
+(1) TopK SET,
+(2) ordered selected IDs,
+(3) selected weights/mixture output,
+(4) selected expert history updates,
+(5) all inactive source histories,
+(6) future full-model traces, and separately
+(7) typed semantic task/argument/face consumers.
+Proving one level does not silently close
+the others.
+
+For the full original R4 SCORE, the
+quantizer budget must ADD the C2
+expert-history `abs(h_e)` path and
+`expert_bias[e]` to the fused directed
+budget. For v_h the learned C2 history
+weights and eps_v the admitted weight
+errors, use `||h+dh|-|h||<=eps_h`:
+
+    B_e^(C2-history) <= Σ_i [
+        |v_hi| eps_hi
+        + eps_vhi (|h_i|+eps_hi)
+    ].
+
+Then
+`B_e^(total) <= B_e^(C2-history)+
+ B_e^(directed-fused)+eps_bias_e+
+ B_e^(actual-floating-evaluation)`.
+Shared unary x terms may be omitted from
+*relative ideal logits* if evaluated identically
+for every candidate. The q gate requires
+its independent stability premise. No
+actual source dtype/rounding calibration or
+kernel reassociation receipt has been
+supplied in this no-run phase.
+
+The conditional real-weight softmax bound
+`||softmax(s+delta)-softmax(s)||_1 <=
+ ||delta||_infinity` for a fixed selected
+set (and corresponding slot order) can
+bound one-step mixture outputs via bounded
+expert-output norms. This DOES NOT show
+bitwise equal output weights or any
+finite-precision source contract; it is
+a downstream analytical theorem contingent
+on the admitted envelopes.
