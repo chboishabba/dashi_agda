@@ -36,8 +36,7 @@ import DASHI.Unified.E8ExceptionalActorTOECompatibilityExact as E8ActorTOE
 import DASHI.Unified.FormalObjectParents as FormalObjectParents
 import DASHI.Unified.InvariantSpine as Spine
 import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalGovernance
-import DASHI.Unified.FleetFormalGapTOEExact as FleetFormalGap
-import DASHI.Unified.FleetFormalGapTOERegression
+import DASHI.Unified.GovernedLegalWorkflowTOEBridgeRegression
 import DASHI.Unified.PNFHyperfabric as PNFHyperfabric
 import DASHI.Unified.PNFSourceBoundaryTOEExact as PNFSource
 import DASHI.Unified.PNFDistilledNonPromotionTOEExact as PNFDistilled
@@ -49,123 +48,28 @@ import DASHI.Unified.TOE369RootUnifierConvergenceValidation as TOE369RootUnifier
 import DASHI.Physics.Foundations.Round5CompleteBoundary as Round5
 
 ------------------------------------------------------------------------
--- Fleet R5 formal-gap convergence.
+-- Governed legal-workflow convergence.
 ------------------------------------------------------------------------
-
-fleetFormalGapTOEReceipt :
-  FleetFormalGap.FleetFormalGapTOEReceipt
-fleetFormalGapTOEReceipt =
-  FleetFormalGap.canonicalFleetFormalGapReceipt
-
-fleetOnlyFormalResidualDispatches :
-  FleetFormalGap.dispatchAllowed FleetFormalGap.unformalisedFormalGap ≡ true
-fleetOnlyFormalResidualDispatches = refl
-
-fleetDischargedFibresDoNotRedispatch :
-  FleetFormalGap.dispatchAllowed FleetFormalGap.dischargedCoreKnowledge ≡ false
-fleetDischargedFibresDoNotRedispatch = refl
-
-fleetContradictionsRemainSeparate :
-  FleetFormalGap.dispatchAllowed FleetFormalGap.polarityContradictionGap ≡ false
-fleetContradictionsRemainSeparate = refl
-
-governedLegalWorkflowTOEBoundary :
-  LegalGovernance.GovernedLegalWorkflowTOEBoundary
-governedLegalWorkflowTOEBoundary =
-  LegalGovernance.canonicalGovernedLegalWorkflowTOEBoundary
 
 governedLegalWorkflowTOEInvariantHandoff :
   LegalGovernance.GovernedLegalWorkflowTOEInvariantHandoff
 governedLegalWorkflowTOEInvariantHandoff =
   LegalGovernance.canonicalGovernedLegalWorkflowTOEInvariantHandoff
 
-governedLegalWorkflowIntrospectiveZKPFrame :
-  LegalGovernance.GovernedLegalWorkflowIntrospectiveZKPFrame
-governedLegalWorkflowIntrospectiveZKPFrame =
-  LegalGovernance.canonicalGovernedLegalWorkflowIntrospectiveZKPFrame
-
-
 governedSemanticPromotionTruthAuthorityClosed :
   LegalGovernance.SemanticPromotionTruthAuthorityClosed
 governedSemanticPromotionTruthAuthorityClosed =
   LegalGovernance.toeSemanticPromotionTruthAuthorityClosed
 
-governedSemanticPromotionLegalAuthorityClosed :
-  LegalGovernance.SemanticPromotionLegalAuthorityClosed
-governedSemanticPromotionLegalAuthorityClosed =
-  LegalGovernance.toeSemanticPromotionLegalAuthorityClosed
+governedLegalCandidateSourceDoesNotCloseAuthority :
+  LegalGovernance.CandidateSourceIsAuthoritative → ⊥
+governedLegalCandidateSourceDoesNotCloseAuthority =
+  LegalGovernance.toeCandidateSourceDoesNotCloseAuthority
 
-governedSemanticPromotionAllAuthorityClosed :
-  LegalGovernance.SemanticPromotionAllAuthorityClosed
-governedSemanticPromotionAllAuthorityClosed =
-  LegalGovernance.toeSemanticPromotionAllAuthorityClosed
-
-governedBoundAcquisitionDoesNotPayRequirement :
-  LegalGovernance.BoundDemandAutomaticallyPaysRequirement → ⊥
-governedBoundAcquisitionDoesNotPayRequirement =
-  LegalGovernance.toeBoundAcquisitionDoesNotPayRequirement
-
-governedBoundAcquisitionDoesNotCloseConsumer :
-  LegalGovernance.BoundDemandAutomaticallyClosesConsumer → ⊥
-governedBoundAcquisitionDoesNotCloseConsumer =
-  LegalGovernance.toeBoundAcquisitionDoesNotCloseConsumer
-
-governedProducerIdentityDoesNotIdentifyResidual :
-  LegalGovernance.SameProducerIdentifiesResidual → ⊥
-governedProducerIdentityDoesNotIdentifyResidual =
-  LegalGovernance.toeProducerIdentityDoesNotIdentifyResidual
-
-pnfSourceBoundaryReceipt :
-  PNFSource.PNFSourceBoundaryTOEReceipt
-pnfSourceBoundaryReceipt =
-  PNFSource.canonicalPNFSourceBoundaryTOEReceipt
-
-pnfGluingProxyDoesNotProveTrueLinearity =
-  PNFSource.gluingProxyDoesNotProveTrueLinearity
-
-pnfSelfAdjointProxyDoesNotProveFiniteTheorem =
-  PNFSource.selfAdjointProxyDoesNotProveFiniteTheorem
-
-pnfDominationProxyDoesNotProveHamiltonianTheorem =
-  PNFSource.dominationProxyDoesNotProveHamiltonianTheorem
-
-pnfFungalNetworkClaimsRequireSpeciesEvidence =
-  PNFSource.fungalNetworkClaimsRequireSpeciesEvidence
-
-pnfIdenticalWordsDoNotPayPredicate :
-  PNFSource.IdenticalWordsProveSamePredicate → ⊥
-pnfIdenticalWordsDoNotPayPredicate =
-  PNFSource.identicalWordsDoNotPayPredicate
-
-pnfCommonFingerprintDoesNotCreateTruth :
-  PNFSource.CommonPnfFingerprintProvesClaimTruth → ⊥
-pnfCommonFingerprintDoesNotCreateTruth =
-  PNFSource.commonPnfFingerprintDoesNotCreateClaimTruth
-
-pnfPerceivedIndependenceDoesNotCreateProvenanceIndependence :
-  PNFSource.PerceivedIndependenceMeansActualIndependence → ⊥
-pnfPerceivedIndependenceDoesNotCreateProvenanceIndependence =
-  PNFSource.perceivedIndependenceDoesNotCreateProvenanceIndependence
-
-pnfRepetitionDoesNotCreateIndependentEvidence :
-  PNFSource.RepetitionMeansIndependentEvidence → ⊥
-pnfRepetitionDoesNotCreateIndependentEvidence =
-  PNFSource.repetitionDoesNotCreateIndependentEvidence
-
-pnfCommonSourceDoesNotEraseEvidence :
-  PNFSource.CommonSourceMeansNoEvidence → ⊥
-pnfCommonSourceDoesNotEraseEvidence =
-  PNFSource.commonSourceDoesNotEraseEvidence
-
-pnfDistilledNonPromotionBoundary :
-  PNFDistilled.PNFDistilledNonPromotionBoundary
-pnfDistilledNonPromotionBoundary =
-  PNFDistilled.canonicalPNFDistilledNonPromotionBoundary
-
-pnfDistilledReuseZKPReceipt :
-  PNFDistilled.PNFDistilledReuseZKPReceipt
-pnfDistilledReuseZKPReceipt =
-  PNFDistilled.canonicalPNFDistilledReuseZKPReceipt
+governedExactReuseDoesNotCreateSemanticAuthority :
+  LegalGovernance.ExactReuseCreatesSemanticAuthority → ⊥
+governedExactReuseDoesNotCreateSemanticAuthority =
+  LegalGovernance.toeExactReuseDoesNotCreateSemanticAuthority
 
 canonicalUnifiedObjects : List Spine.UnifiedObjectInvariant
 canonicalUnifiedObjects =
