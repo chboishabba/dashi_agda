@@ -589,30 +589,112 @@ unifierSemanticMeetDoesNotPayApplicability :
 unifierSemanticMeetDoesNotPayApplicability =
   unifierApplicability.semanticMeetDoesNotAloneProveLegalApplicability
 
-unifierPassingControlDoesNotCreateCertification :
-  unifierControl.PassingControlMeansCertified → ⊥
-unifierPassingControlDoesNotCreateCertification =
-  unifierControl.passingDoesNotMeanCertified
+unifierYangMillsGoal1ParetoZKPFrame : YMMaxCut.Goal1ParetoTOEZKPFrame
+unifierYangMillsGoal1ParetoZKPFrame = YMMaxCut.canonicalGoal1ParetoTOEZKPFrame
 
-unifierKernelClosureDoesNotCreateSemanticClosure :
-  unifierFormalisation.ThreeStoreyBoundary.kernelClosureEqualsSemanticClosure
-    unifierFormalisation.canonicalThreeStoreyBoundary
-  ≡ false
-unifierKernelClosureDoesNotCreateSemanticClosure =
-  unifierFormalisation.ThreeStoreyBoundary.kernelClosureEqualsSemanticClosureIsFalse
-    unifierFormalisation.canonicalThreeStoreyBoundary
 
-unifierStaticRefinementDoesNotCreateDynamicSafety :
-  unifierFrozen.StaticSeparationCreatesDynamicSafetyPermission → ⊥
-unifierStaticRefinementDoesNotCreateDynamicSafety =
-  unifierFrozen.staticSeparationDoesNotCreateDynamicSafety
+------------------------------------------------------------------------
+-- Governed legal workflow + Ibrahim Pareto/snowball + fleet-gap facade.
+--
+-- Proof authority remains in the imported exact owners.
+------------------------------------------------------------------------
 
-unifierFrozenSelectionDoesNotCreateDynamicSafety :
-  unifierFrozen.FrozenSelectionCreatesDynamicSafetyPermission → ⊥
-unifierFrozenSelectionDoesNotCreateDynamicSafety =
-  unifierFrozen.frozenSelectionDoesNotCreateDynamicSafety
+import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as GovernanceTOE
+import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as IbrahimTOE
+import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetTOE
 
-unifierProvenanceDoesNotCreateTruth :
-  unifierFrozen.ProvenanceAxisCreatesTruthPermission → ⊥
-unifierProvenanceDoesNotCreateTruth =
-  unifierFrozen.provenanceAxisDoesNotCreateTruth
+unifierGovernedLegalWorkflowAuthorityInvariantHandoff :
+  GovernanceTOE.GovernedLegalWorkflowAuthorityInvariantHandoff
+unifierGovernedLegalWorkflowAuthorityInvariantHandoff =
+  GovernanceTOE.canonicalGovernedLegalWorkflowAuthorityInvariantHandoff
+
+unifierCanonicalLegalSourceAuthorityBoundary :
+  GovernanceTOE.LegalSourceAuthorityBoundary
+unifierCanonicalLegalSourceAuthorityBoundary =
+  GovernanceTOE.toeCanonicalLegalSourceAuthorityBoundary
+
+unifierCandidateSourceIsNotLegalAuthority :
+  GovernanceTOE.CandidateSourceIsAuthoritative → ⊥
+unifierCandidateSourceIsNotLegalAuthority =
+  GovernanceTOE.toeCandidateSourceDoesNotCloseAuthority
+
+unifierSameLegalSystemIsNotLegalAuthority :
+  GovernanceTOE.SameLegalSystemAutomaticallyMeansAuthority → ⊥
+unifierSameLegalSystemIsNotLegalAuthority =
+  GovernanceTOE.toeSameSystemDoesNotAutomaticallyCloseAuthority
+
+unifierCurrentValidityIsNotApplicability :
+  GovernanceTOE.CurrentValidityAutomaticallyMeansApplicability → ⊥
+unifierCurrentValidityIsNotApplicability =
+  GovernanceTOE.toeCurrentValidityDoesNotAutomaticallyEstablishApplicability
+
+unifierSemanticAdmissionIsNotLegalAuthority :
+  GovernanceTOE.SemanticAdmissionAuthorityIsLegalSourceAuthority → ⊥
+unifierSemanticAdmissionIsNotLegalAuthority =
+  GovernanceTOE.toeSemanticAdmissionDoesNotBecomeLegalSourceAuthority
+
+unifierDocumentRoleIsNotLegalAuthority :
+  GovernanceTOE.DocumentRoleSuppliesLegalSourceAuthority → ⊥
+unifierDocumentRoleIsNotLegalAuthority =
+  GovernanceTOE.toeDocumentRoleDoesNotSupplyLegalSourceAuthority
+
+unifierIbrahimRecognitionParetoBoundary =
+  IbrahimTOE.ibrahimRecognitionParetoBoundary
+
+unifierIbrahimCharacterExecutionFrontier =
+  IbrahimTOE.ibrahimCharacterExecutionFrontier
+
+unifierIbrahimPhaseResolutionFrontier =
+  IbrahimTOE.ibrahimPhaseResolutionFrontier
+
+unifierIbrahimSchrodingerHZetaMaxCutBoundary =
+  IbrahimTOE.ibrahimSchrodingerHZetaMaxCutBoundary
+
+unifierIbrahimHistoricalDiscriminatorBoundary =
+  IbrahimTOE.ibrahimHistoricalDiscriminatorBoundary
+
+unifierIbrahimSearchPriorityDoesNotCreateProof :
+  IbrahimTOE.SearchPriorityCreatesProof → ⊥
+unifierIbrahimSearchPriorityDoesNotCreateProof =
+  IbrahimTOE.searchPriorityDoesNotCreateProof
+
+unifierIbrahimProducerSourceDoesNotCreateRunReceipt :
+  IbrahimTOE.ProducerSourceCreatesRunReceipt → ⊥
+unifierIbrahimProducerSourceDoesNotCreateRunReceipt =
+  IbrahimTOE.producerSourceDoesNotCreateRunReceipt
+
+unifierFleetFormalGapTargetReceipt :
+  FleetTOE.FleetFormalGapTargetReceipt
+unifierFleetFormalGapTargetReceipt =
+  FleetTOE.canonicalFleetFormalGapTargetReceipt
+
+unifierFleetDischargedCoreKnowledgeFibresIs584 :
+  FleetTOE.dischargedCoreKnowledgeFibres unifierFleetFormalGapTargetReceipt ≡ 584
+unifierFleetDischargedCoreKnowledgeFibresIs584 = refl
+
+unifierFleetPolarityContradictionGapsIs44 :
+  FleetTOE.polarityContradictionGaps unifierFleetFormalGapTargetReceipt ≡ 44
+unifierFleetPolarityContradictionGapsIs44 = refl
+
+unifierFleetUnformalisedFormalGapsIs58 :
+  FleetTOE.unformalisedFormalGaps unifierFleetFormalGapTargetReceipt ≡ 58
+unifierFleetUnformalisedFormalGapsIs58 = refl
+
+unifierFleetDischargedFibresStayOutOfTarget :
+  FleetTOE.FleetDischargedFibreRetargetPermission → ⊥
+unifierFleetDischargedFibresStayOutOfTarget =
+  FleetTOE.fleetDischargedFibresCannotBeRetargetedByThisBoundary
+
+unifierFleetContradictionsStaySeparate :
+  FleetTOE.FleetContradictionGapReclassificationPermission → ⊥
+unifierFleetContradictionsStaySeparate =
+  FleetTOE.fleetContradictionsCannotBeRelabelledAsFormalGaps
+
+unifierFleetExternalCountDoesNotCreateFormalDischarge :
+  FleetTOE.FleetExternalCountCreatesFormalDischarge → ⊥
+unifierFleetExternalCountDoesNotCreateFormalDischarge =
+  FleetTOE.fleetExternalCountDoesNotCreateFormalDischarge
+
+unifierFleetFormalGapZKPFrame : IbrahimTOE.TOEZKPFrame
+unifierFleetFormalGapZKPFrame =
+  FleetTOE.canonicalFleetFormalGapZKPFrame

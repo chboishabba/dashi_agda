@@ -164,205 +164,81 @@ yangMillsFormalProjectionsRemainNonPromoting :
 yangMillsFormalProjectionsRemainNonPromoting =
   Spine.canonicalInvariantObjectsDoNotPromoteFormalProjections
     Physics.yangMillsObject
+import DASHI.Physics.Foundations.Round5FullBoundary as Round5
+      Round5.Round5FullBoundary
+        Round5.canonicalRound5FullBoundary
+        "Every unified facade object exposes observation, projection, carrier/role vector, residual, proof posture, invariant strength, and the required formal parent projection bundle. The bundle includes modular-j, Hecke, Bott, Kolmogorov, category, quotient, lattice, and operator projections. Literal authority is lane-specific; every formal projection has externalPromotion = false. The cross-scale matter/physics parent records the atoms-to-stellar composition ladder as structural and receipt-gated, with quantitative solar-style counterfactual prediction still blocked. Round Five adds a fail-closed finite boundary for constants, dimension, atomic and nuclear structure, causal cosmological observation, and the GR-QFT emergence cutsets without promoting terminal unification."
 
 
--- Legal authority remains independent of matter workflow and semantic admission.
-unifiedLegalCandidateIsNotAuthority :
-  LegalGovernance.CandidateSourceIsAuthoritative → ⊥
-unifiedLegalCandidateIsNotAuthority =
-  LegalGovernance.toeCandidateSourceDoesNotCloseAuthority
+------------------------------------------------------------------------
+-- Governed legal workflow + Ibrahim Pareto/snowball + fleet-gap facade.
+------------------------------------------------------------------------
 
-unifiedLegalValidityIsNotApplicability :
-  LegalGovernance.CurrentValidityAutomaticallyMeansApplicability → ⊥
-unifiedLegalValidityIsNotApplicability =
-  LegalGovernance.toeCurrentValidityDoesNotAutomaticallyEstablishApplicability
+import Data.Empty as UnifiedEmpty
+import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalGovernanceTOE
+import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as IbrahimTOE
+import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetTOE
+
+unifiedGovernedLegalWorkflowAuthorityInvariantHandoff :
+  LegalGovernanceTOE.GovernedLegalWorkflowAuthorityInvariantHandoff
+unifiedGovernedLegalWorkflowAuthorityInvariantHandoff =
+  LegalGovernanceTOE.canonicalGovernedLegalWorkflowAuthorityInvariantHandoff
+
+unifiedCanonicalLegalSourceAuthorityBoundary :
+  LegalGovernanceTOE.LegalSourceAuthorityBoundary
+unifiedCanonicalLegalSourceAuthorityBoundary =
+  LegalGovernanceTOE.toeCanonicalLegalSourceAuthorityBoundary
+
+unifiedCandidateSourceIsNotLegalAuthority :
+  LegalGovernanceTOE.CandidateSourceIsAuthoritative → UnifiedEmpty.⊥
+unifiedCandidateSourceIsNotLegalAuthority =
+  LegalGovernanceTOE.toeCandidateSourceDoesNotCloseAuthority
+
+unifiedSameLegalSystemIsNotLegalAuthority :
+  LegalGovernanceTOE.SameLegalSystemAutomaticallyMeansAuthority → UnifiedEmpty.⊥
+unifiedSameLegalSystemIsNotLegalAuthority =
+  LegalGovernanceTOE.toeSameSystemDoesNotAutomaticallyCloseAuthority
+
+unifiedCurrentValidityIsNotApplicability :
+  LegalGovernanceTOE.CurrentValidityAutomaticallyMeansApplicability → UnifiedEmpty.⊥
+unifiedCurrentValidityIsNotApplicability =
+  LegalGovernanceTOE.toeCurrentValidityDoesNotAutomaticallyEstablishApplicability
 
 unifiedSemanticAdmissionIsNotLegalAuthority :
-  LegalGovernance.SemanticAdmissionAuthorityIsLegalSourceAuthority → ⊥
+  LegalGovernanceTOE.SemanticAdmissionAuthorityIsLegalSourceAuthority → UnifiedEmpty.⊥
 unifiedSemanticAdmissionIsNotLegalAuthority =
-  LegalGovernance.toeSemanticAdmissionDoesNotBecomeLegalSourceAuthority
+  LegalGovernanceTOE.toeSemanticAdmissionDoesNotBecomeLegalSourceAuthority
 
-------------------------------------------------------------------------
--- Exact compiler-product reuse remains execution-only.
-------------------------------------------------------------------------
+unifiedDocumentRoleIsNotLegalAuthority :
+  LegalGovernanceTOE.DocumentRoleSuppliesLegalSourceAuthority → UnifiedEmpty.⊥
+unifiedDocumentRoleIsNotLegalAuthority =
+  LegalGovernanceTOE.toeDocumentRoleDoesNotSupplyLegalSourceAuthority
 
-governedExactReuseDoesNotCreateSemanticAdmission :
-  LegalGovernance.ExactReuseCreatesSemanticAdmission → ⊥
-governedExactReuseDoesNotCreateSemanticAdmission =
-  LegalGovernance.toeExactReuseDoesNotCreateSemanticAdmission
+unifiedIbrahimRecognitionParetoBoundary =
+  IbrahimTOE.ibrahimRecognitionParetoBoundary
 
-governedExactReuseDoesNotCreateSemanticAuthority :
-  LegalGovernance.ExactReuseCreatesSemanticAuthority → ⊥
-governedExactReuseDoesNotCreateSemanticAuthority =
-  LegalGovernance.toeExactReuseDoesNotCreateSemanticAuthority
+unifiedIbrahimCharacterExecutionFrontier =
+  IbrahimTOE.ibrahimCharacterExecutionFrontier
 
-governedExactReuseDoesNotCreateApplicability :
-  LegalGovernance.ExactReuseCreatesApplicability → ⊥
-governedExactReuseDoesNotCreateApplicability =
-  LegalGovernance.toeExactReuseDoesNotCreateApplicability
+unifiedIbrahimPhaseResolutionFrontier =
+  IbrahimTOE.ibrahimPhaseResolutionFrontier
 
-governedExactReuseDoesNotCreateEntityIdentity :
-  LegalGovernance.ExactReuseCreatesEntityIdentity → ⊥
-governedExactReuseDoesNotCreateEntityIdentity =
-  LegalGovernance.toeExactReuseDoesNotCreateEntityIdentity
+unifiedIbrahimHistoricalDiscriminatorBoundary =
+  IbrahimTOE.ibrahimHistoricalDiscriminatorBoundary
 
-governedExactReuseDoesNotCreatePropositionIdentity :
-  LegalGovernance.ExactReuseCreatesPropositionIdentity → ⊥
-governedExactReuseDoesNotCreatePropositionIdentity =
-  LegalGovernance.toeExactReuseDoesNotCreatePropositionIdentity
+unifiedFleetFormalGapTargetReceipt :
+  FleetTOE.FleetFormalGapTargetReceipt
+unifiedFleetFormalGapTargetReceipt =
+  FleetTOE.canonicalFleetFormalGapTargetReceipt
 
-governedExactReuseDoesNotCreateEventIdentity :
-  LegalGovernance.ExactReuseCreatesEventIdentity → ⊥
-governedExactReuseDoesNotCreateEventIdentity =
-  LegalGovernance.toeExactReuseDoesNotCreateEventIdentity
+unifiedFleetDischargedCoreKnowledgeFibresIs584 :
+  FleetTOE.dischargedCoreKnowledgeFibres unifiedFleetFormalGapTargetReceipt ≡ 584
+unifiedFleetDischargedCoreKnowledgeFibresIs584 = refl
 
-governedExactReuseDoesNotCreateClaimTruth :
-  LegalGovernance.ExactReuseCreatesClaimTruth → ⊥
-governedExactReuseDoesNotCreateClaimTruth =
-  LegalGovernance.toeExactReuseDoesNotCreateClaimTruth
+unifiedFleetPolarityContradictionGapsIs44 :
+  FleetTOE.polarityContradictionGaps unifiedFleetFormalGapTargetReceipt ≡ 44
+unifiedFleetPolarityContradictionGapsIs44 = refl
 
-
-unifiedFleetEigenPriorityPromotionImpossible :
-  FleetGapTOE.FleetEigenPriorityCreatesProof → ⊥
-unifiedFleetEigenPriorityPromotionImpossible =
-  FleetGapTOE.fleetEigenPriorityPromotionImpossible
-
-unifiedFleetExternalCountPromotionImpossible :
-  FleetGapTOE.FleetExternalCountCreatesFormalDischarge → ⊥
-unifiedFleetExternalCountPromotionImpossible =
-  FleetGapTOE.fleetExternalCountPromotionImpossible
-
-unifiedFleetDischargedFibreRetargetImpossible :
-  FleetGapTOE.FleetDischargedFibreRetargetPermission → ⊥
-unifiedFleetDischargedFibreRetargetImpossible =
-  FleetGapTOE.fleetDischargedFibresCannotBeRetargetedByThisBoundary
-
-unifiedFleetContradictionGapReclassificationImpossible :
-  FleetGapTOE.FleetContradictionGapReclassificationPermission → ⊥
-unifiedFleetContradictionGapReclassificationImpossible =
-  FleetGapTOE.fleetContradictionsCannotBeRelabelledAsFormalGaps
-
-------------------------------------------------------------------------
--- Direct governed legal-workflow firewall facade.
--- This facade adds no workflow, Actionstep, legal-rule, or authority semantics.
-------------------------------------------------------------------------
-
-governedDurableReviewStateDoesNotCreateTruth :
-  LegalGovernance.DurableReviewStateCreatesTruth → ⊥
-governedDurableReviewStateDoesNotCreateTruth =
-  LegalGovernance.toeDurableReviewStateDoesNotCreateTruth
-
-governedAcceptanceReceiptDoesNotMutateMatter :
-  LegalGovernance.AcceptanceReceiptMutatesMatter → ⊥
-governedAcceptanceReceiptDoesNotMutateMatter =
-  LegalGovernance.toeAcceptanceReceiptDoesNotMutateMatter
-
-governedExternalSourceDoesNotAdmitTruth :
-  LegalGovernance.ExternalSourceClaimImpliesTruthAdmitted → ⊥
-governedExternalSourceDoesNotAdmitTruth =
-  LegalGovernance.toeExternalSourceDoesNotAdmitTruth
-
-governedLegalAuthorityDoesNotCreateTruthStatus :
-  LegalGovernance.LegalAuthorityCreatesTruthStatus → ⊥
-governedLegalAuthorityDoesNotCreateTruthStatus =
-  LegalGovernance.toeLegalAuthorityDoesNotCreateTruthStatus
-
-governedPromotionStageDoesNotBypassPromotionAuthority :
-  LegalGovernance.PromotionStageMaySkipPromotionAuthority → ⊥
-governedPromotionStageDoesNotBypassPromotionAuthority =
-  LegalGovernance.toePromotionStageDoesNotBypassPromotionAuthority
-
-governedSourceRealisedWrongTypeDoesNotAutoViolate :
-  LegalGovernance.SourceRealisedWrongTypeAutomaticallyViolated → ⊥
-governedSourceRealisedWrongTypeDoesNotAutoViolate =
-  LegalGovernance.toeSourceRealisedWrongTypeDoesNotAutoViolate
-
-governedElementsDoNotEraseExceptionsOrDefences :
-  LegalGovernance.AllElementsProvedIgnoresExceptionsDefences → ⊥
-governedElementsDoNotEraseExceptionsOrDefences =
-  LegalGovernance.toeElementsDoNotEraseExceptionsOrDefences
-
-governedKernelClosureDoesNotMeanSemanticClosure =
-  LegalGovernance.toeKernelClosureDoesNotMeanSemanticClosure
-
-governedFormalProofDoesNotCreateExternalWorldTruth =
-  LegalGovernance.toeFormalProofDoesNotCreateExternalWorldTruth
-
-governedComplianceCompositionRetainsIntermediateWitness =
-  LegalGovernance.complianceCompositionRetainsIntermediateWitnessIsTrue
-    LegalGovernance.canonicalGovernedLegalWorkflowTOEBoundary
-
-governedSameLegalSystemDoesNotCloseAuthority =
-  LegalGovernance.toeSameSystemDoesNotAutomaticallyCloseAuthority
-
-governedDocumentRoleDoesNotSupplyLegalSourceAuthority =
-  LegalGovernance.toeDocumentRoleDoesNotSupplyLegalSourceAuthority
-
-governedCanonicalLegalSourceAuthorityBoundary =
-  LegalGovernance.toeCanonicalLegalSourceAuthorityBoundary
-
-unifiedYMImplementAToDMaxCutReceipt :
-  YMAD.YMImplementAToDTOEMaxCutReceipt
-unifiedYMImplementAToDMaxCutReceipt =
-  YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
-
-------------------------------------------------------------------------
--- Governed legal workflow x provenance-aware future-safety convergence.
--- Reuse existing theorem owners. No Actionstep-specific ontology is added.
-------------------------------------------------------------------------
-
-import DASHI.Cognition.PNF.SensibLawOperationalSemanticBoundaryExact as unifiedOperational
-import DASHI.Cognition.PNF.SensibLawLiveReviewMutationExact as unifiedReview
-import DASHI.Cognition.PNF.SensibLawSourceRealisedLegalRuleExact as unifiedSourceRule
-import DASHI.Cognition.PNF.SensibLawSourceConditionedApplicabilityViolationExact as unifiedApplicability
-import DASHI.Core.ITIRGovernanceControlCaseExact as unifiedControl
-import DASHI.Governance.FormalisationGovernanceCapstoneExact as unifiedFormalisation
-import DASHI.Core.FrozenProvenanceDynamicRefinementExact as unifiedFrozen
-
-unifiedTaskCompletionDoesNotCreateTruth :
-  unifiedOperational.TaskCompletionCreatesTruth → ⊥
-unifiedTaskCompletionDoesNotCreateTruth =
-  unifiedOperational.taskCompletionDoesNotCreateTruth
-
-unifiedAcceptedReviewDoesNotPayApplicability :
-  unifiedReview.AcceptedStatusPaysApplicability → ⊥
-unifiedAcceptedReviewDoesNotPayApplicability =
-  unifiedReview.acceptedStatusDoesNotPayApplicability
-
-unifiedCitationDoesNotRealiseLegalRule :
-  unifiedSourceRule.CitationAloneRealisesLegalRule → ⊥
-unifiedCitationDoesNotRealiseLegalRule =
-  unifiedSourceRule.citationAloneDoesNotRealiseLegalRule
-
-unifiedSemanticMeetDoesNotPayApplicability :
-  unifiedApplicability.SemanticMeetAloneProvesLegalApplicability → ⊥
-unifiedSemanticMeetDoesNotPayApplicability =
-  unifiedApplicability.semanticMeetDoesNotAloneProveLegalApplicability
-
-unifiedPassingControlDoesNotCreateCertification :
-  unifiedControl.PassingControlMeansCertified → ⊥
-unifiedPassingControlDoesNotCreateCertification =
-  unifiedControl.passingDoesNotMeanCertified
-
-unifiedKernelClosureDoesNotCreateSemanticClosure :
-  unifiedFormalisation.ThreeStoreyBoundary.kernelClosureEqualsSemanticClosure
-    unifiedFormalisation.canonicalThreeStoreyBoundary
-  ≡ false
-unifiedKernelClosureDoesNotCreateSemanticClosure =
-  unifiedFormalisation.ThreeStoreyBoundary.kernelClosureEqualsSemanticClosureIsFalse
-    unifiedFormalisation.canonicalThreeStoreyBoundary
-
-unifiedStaticRefinementDoesNotCreateDynamicSafety :
-  unifiedFrozen.StaticSeparationCreatesDynamicSafetyPermission → ⊥
-unifiedStaticRefinementDoesNotCreateDynamicSafety =
-  unifiedFrozen.staticSeparationDoesNotCreateDynamicSafety
-
-unifiedFrozenSelectionDoesNotCreateDynamicSafety :
-  unifiedFrozen.FrozenSelectionCreatesDynamicSafetyPermission → ⊥
-unifiedFrozenSelectionDoesNotCreateDynamicSafety =
-  unifiedFrozen.frozenSelectionDoesNotCreateDynamicSafety
-
-unifiedProvenanceDoesNotCreateTruth :
-  unifiedFrozen.ProvenanceAxisCreatesTruthPermission → ⊥
-unifiedProvenanceDoesNotCreateTruth =
-  unifiedFrozen.provenanceAxisDoesNotCreateTruth
+unifiedFleetUnformalisedFormalGapsIs58 :
+  FleetTOE.unformalisedFormalGaps unifiedFleetFormalGapTargetReceipt ≡ 58
+unifiedFleetUnformalisedFormalGapsIs58 = refl

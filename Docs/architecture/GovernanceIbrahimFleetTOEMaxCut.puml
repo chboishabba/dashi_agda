@@ -1,0 +1,87 @@
+@startuml
+title DASHI TOE governance, Ibrahim, and fleet max-cut
+
+package "Existing proof owners" {
+  [SensibLaw workflow and review owners] as Workflow
+  [Legal source authority owner] as LegalAuthority
+  [ITIR GOV-1 / compliance owners] as Governance
+  [Balaban scale-transfer frontier] as Balaban
+  [Ibrahim recognition Pareto] as Pareto
+  [Character execution snowball] as Execution
+  [Phase resolution snowball] as Phase
+  [Historical discriminator] as Historical
+  [PNF spectral / residual owners] as PNF
+}
+
+package "Normalized DASHI.Unified owners" {
+  [GovernedLegalWorkflowTOEBridgeExact] as LegalBridge
+  [BalabanIbrahimParetoSnowballTOEExact] as IbrahimBridge
+  [FleetFormalGapTargetTOEExact] as Fleet
+  [GovernedLegalFleetIbrahimTOEValidation] as Validation
+}
+
+package "TOE facades" {
+  [EverythingTOESymmetryResolved369] as Root
+  [DASHI.Unifier] as Unifier
+  [DASHI.Unified.Everything] as Unified
+}
+
+Workflow --> LegalBridge
+LegalAuthority --> LegalBridge
+Governance --> LegalBridge
+
+Balaban --> IbrahimBridge
+Pareto --> IbrahimBridge
+Execution --> IbrahimBridge
+Phase --> IbrahimBridge
+Historical --> IbrahimBridge
+
+PNF --> Fleet
+IbrahimBridge --> Fleet : process frame reuse
+
+LegalBridge --> Root
+LegalBridge --> Unifier
+LegalBridge --> Unified
+
+IbrahimBridge --> Root
+IbrahimBridge --> Unifier
+IbrahimBridge --> Unified
+
+Fleet --> Root
+Fleet --> Unifier
+Fleet --> Unified
+
+Root --> Validation
+Unifier --> Validation
+Unified --> Validation
+
+note right of LegalBridge
+Review != truth.
+Admission != legal authority.
+Validity != applicability.
+Document role != authority.
+end note
+
+note right of IbrahimBridge
+Search priority != proof.
+Source != execution receipt.
+Arithmetic coincidence != Monster action.
+Historical identity stays source-gated.
+end note
+
+note right of Fleet
+External Stage R5 receipt:
+584 discharged fibres remain discharged.
+44 contradiction gaps remain separate.
+58 unformalised formal gaps are the target.
+3 spectral labels do not create proof authority.
+end note
+
+note bottom of Validation
+Preconditions: canonical owners exist.
+Invariants: no promotion, no ESD mutation, attribution preserved.
+Postconditions: all three facades reach the same owners.
+Verification: referee, static contract, trust scan, Agda kernel.
+Standards are process/design lenses, not certifications.
+end note
+@enduml

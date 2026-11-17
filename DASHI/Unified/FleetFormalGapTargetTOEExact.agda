@@ -6,7 +6,6 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
-open import Data.Fin.Base using (Fin)
 
 import DASHI.Interop.PNFSpectralCoordinateRebuildability as Rebuild
 import DASHI.Interop.PNFSpectralNumericABICore as Numeric
@@ -18,7 +17,6 @@ import DASHI.Unified.BalabanRGTOERegression as BalabanRG
 import DASHI.Physics.Closure.NSABCDConcentratedCompletionCutExact as NS
 import DASHI.Quantum.QuantumMereologyExact as QM
 import DASHI.Quantum.QuantumMereologySourceAtlasExact as QMSources
-import DASHI.Core.RelationalTrialecticDisambiguationExact as Disambiguation
 
 ------------------------------------------------------------------------
 -- Fleet R4/R5 selection boundary.
@@ -53,11 +51,8 @@ record FleetFormalGapTargetReceipt : Set where
     dischargedFibresRemainDischarged : Bool
     contradictionGapsRemainSeparate : Bool
     eigenvalueMagnitudeCreatesProofAuthority : Bool
-    spectralLabelsIdentifyTheoremOwners : Bool
     externalCountCreatesFormalProof : Bool
     externalPlanningTextCreatesFormalResidual : Bool
-    metaIntrospectorReferenceRepos : String
-    metaIntrospectorProofBorrowed : Bool
     metaIntrospectorAttributionPreserved : Bool
     esdSurfaceEdited : Bool
 
@@ -83,9 +78,6 @@ canonicalFleetFormalGapTargetReceipt =
     true
     false
     false
-    false
-    false
-    "meta-introspector/zkperf; meta-introspector/zos-server; meta-introspector/erdfa-py; meta-introspector/aristotle-cli-rs"
     false
     true
     false
@@ -223,63 +215,27 @@ fleetPlanningTextDoesNotCreateFormalResidual =
 
 ------------------------------------------------------------------------
 -- Exact non-promotion gates for the external fleet selection.
---
--- These are facts about the canonical receipt fields. They are not vacuous
--- empty-type eliminators and they do not convert external planning data into
--- theorem authority.
-------------------------------------------------------------------------
-
-fleetEigenPriorityDoesNotCreateProof :
-  eigenvalueMagnitudeCreatesProofAuthority canonicalFleetFormalGapTargetReceipt
-  ≡ false
-fleetEigenPriorityDoesNotCreateProof = refl
-
-fleetExternalCountDoesNotCreateFormalDischarge :
-  externalCountCreatesFormalProof canonicalFleetFormalGapTargetReceipt
-  ≡ false
-fleetExternalCountDoesNotCreateFormalDischarge = refl
-
-fleetDischargedFibresRemainOutOfTarget :
-  dischargedFibresRemainDischarged canonicalFleetFormalGapTargetReceipt
-  ≡ true
-fleetDischargedFibresRemainOutOfTarget = refl
-
-fleetContradictionGapsRemainSeparate :
-  contradictionGapsRemainSeparate canonicalFleetFormalGapTargetReceipt
-  ≡ true
-fleetContradictionGapsRemainSeparate = refl
-
-fleetExternalPlanningTextDoesNotCreateFormalResidual :
-  externalPlanningTextCreatesFormalResidual canonicalFleetFormalGapTargetReceipt
-  ≡ false
-fleetExternalPlanningTextDoesNotCreateFormalResidual = refl
-
-------------------------------------------------------------------------
--- Typed non-promotion gates for the fleet planning frontier.
---
--- The Boolean receipt fields remain audit facts.
--- These constructorless types give consumers exact fail-closed gates.
 ------------------------------------------------------------------------
 
 data FleetEigenPriorityCreatesProof : Set where
 
+fleetEigenPriorityDoesNotCreateProof :
+  FleetEigenPriorityCreatesProof → ⊥
+fleetEigenPriorityDoesNotCreateProof ()
+
 data FleetExternalCountCreatesFormalDischarge : Set where
 
-data FleetDischargedFibreRetargetPermission : Set where
-
-data FleetContradictionGapReclassificationPermission : Set where
-
-fleetEigenPriorityPromotionImpossible :
-  FleetEigenPriorityCreatesProof → ⊥
-fleetEigenPriorityPromotionImpossible ()
-
-fleetExternalCountPromotionImpossible :
+fleetExternalCountDoesNotCreateFormalDischarge :
   FleetExternalCountCreatesFormalDischarge → ⊥
-fleetExternalCountPromotionImpossible ()
+fleetExternalCountDoesNotCreateFormalDischarge ()
+
+data FleetDischargedFibreRetargetPermission : Set where
 
 fleetDischargedFibresCannotBeRetargetedByThisBoundary :
   FleetDischargedFibreRetargetPermission → ⊥
 fleetDischargedFibresCannotBeRetargetedByThisBoundary ()
+
+data FleetContradictionGapReclassificationPermission : Set where
 
 fleetContradictionsCannotBeRelabelledAsFormalGaps :
   FleetContradictionGapReclassificationPermission → ⊥
@@ -305,198 +261,3 @@ canonicalFleetFormalGapZKPFrame =
     false
     false
     false
-
-
-------------------------------------------------------------------------
--- Direct source-owned PNF non-promotion gates.
---
--- The fleet receipt is external planning context. These theorem gates come
--- from the canonical DASHI PNF owners and remain the proof authority.
-------------------------------------------------------------------------
-
-NonRebuildableCoordinatePromotion : Set
-NonRebuildableCoordinatePromotion =
-  Rebuild.NonRebuildablePromotion
-
-VectorSpectralAuthorityPromotion : Set
-VectorSpectralAuthorityPromotion =
-  Rebuild.VectorAuthorityPromotion
-
-SpectralNumericABIPromotion : Set
-SpectralNumericABIPromotion =
-  Numeric.PNFSpectralNumericABIPromotion
-
-ResidualFieldPromotion : Set
-ResidualFieldPromotion =
-  Residual.PNFResidualFieldInvariantPromotion
-
-fleetNonRebuildableCoordinatePromotionImpossible :
-  NonRebuildableCoordinatePromotion → ⊥
-fleetNonRebuildableCoordinatePromotionImpossible =
-  Rebuild.nonRebuildablePromotionImpossible
-
-fleetVectorSpectralAuthorityPromotionImpossible :
-  VectorSpectralAuthorityPromotion → ⊥
-fleetVectorSpectralAuthorityPromotionImpossible =
-  Rebuild.vectorAuthorityPromotionImpossible
-
-fleetSpectralNumericABIPromotionImpossible :
-  SpectralNumericABIPromotion → ⊥
-fleetSpectralNumericABIPromotionImpossible =
-  Numeric.pnfSpectralNumericABIPromotionImpossible
-
-fleetResidualFieldPromotionImpossible :
-  ResidualFieldPromotion → ⊥
-fleetResidualFieldPromotionImpossible =
-  Residual.pnfResidualFieldInvariantPromotionImpossible
-
-fleetVectorCoordinateTruthStillFalse :
-  Rebuild.vectorCoordinateIsTruth ≡ false
-fleetVectorCoordinateTruthStillFalse =
-  Rebuild.vectorCoordinateTruthFalse
-
-fleetVectorCoordinateSupportStillFalse :
-  Rebuild.vectorCoordinateIsCommittedSupport ≡ false
-fleetVectorCoordinateSupportStillFalse =
-  Rebuild.vectorCoordinateCommittedSupportFalse
-
-fleetVectorCoordinateAdmissibilityStillFalse :
-  Rebuild.vectorCoordinateIsAdmissibility ≡ false
-fleetVectorCoordinateAdmissibilityStillFalse =
-  Rebuild.vectorCoordinateAdmissibilityFalse
-
-fleetTextFallbackAuthorityStillFalse :
-  Rebuild.textFallbackIsCoordinateAuthority ≡ false
-fleetTextFallbackAuthorityStillFalse =
-  Rebuild.textFallbackCoordinateAuthorityFalse
-
-
-------------------------------------------------------------------------
--- Exact ordinal cut for the recorded R5 partition.
---
--- These Fin carriers encode only the three recorded cardinalities.
--- They do not identify persisted PostgreSQL rows.
--- They do not manufacture names for the 58 formal-gap rows.
--- They let downstream proof work range over exactly 58 target slots while
--- keeping the 584 discharged slots and 44 contradiction slots disjoint.
-------------------------------------------------------------------------
-
-FleetDischargedOrdinal : Set
-FleetDischargedOrdinal = Fin 584
-
-FleetContradictionOrdinal : Set
-FleetContradictionOrdinal = Fin 44
-
-FleetFormalGapOrdinal : Set
-FleetFormalGapOrdinal = Fin 58
-
-fleetFormalGapOrdinalCount : Nat
-fleetFormalGapOrdinalCount =
-  unformalisedFormalGaps canonicalFleetFormalGapTargetReceipt
-
-fleetFormalGapOrdinalCountIs58 :
-  fleetFormalGapOrdinalCount ≡ 58
-fleetFormalGapOrdinalCountIs58 =
-  fleetRecordedUnformalisedGapCountIs58
-
-fleetDischargedOrdinalCount : Nat
-fleetDischargedOrdinalCount =
-  dischargedCoreKnowledgeFibres canonicalFleetFormalGapTargetReceipt
-
-fleetDischargedOrdinalCountIs584 :
-  fleetDischargedOrdinalCount ≡ 584
-fleetDischargedOrdinalCountIs584 =
-  fleetRecordedDischargedCountIs584
-
-fleetContradictionOrdinalCount : Nat
-fleetContradictionOrdinalCount =
-  polarityContradictionGaps canonicalFleetFormalGapTargetReceipt
-
-fleetContradictionOrdinalCountIs44 :
-  fleetContradictionOrdinalCount ≡ 44
-fleetContradictionOrdinalCountIs44 =
-  fleetRecordedContradictionCountIs44
-
-fleetOrdinalCarriesPersistedRowIdentity : Bool
-fleetOrdinalCarriesPersistedRowIdentity = false
-
-fleetOrdinalCarriesPersistedRowIdentityIsFalse :
-  fleetOrdinalCarriesPersistedRowIdentity ≡ false
-fleetOrdinalCarriesPersistedRowIdentityIsFalse = refl
-
-FleetSharedCardinalityCreatesIdentity : Set
-FleetSharedCardinalityCreatesIdentity =
-  Disambiguation.SharedCardinalityCreatesIdentity
-
-fleetSharedCardinalityDoesNotCreateIdentity :
-  FleetSharedCardinalityCreatesIdentity → ⊥
-fleetSharedCardinalityDoesNotCreateIdentity =
-  Disambiguation.sharedCardinalityDoesNotCreateIdentity
-
-------------------------------------------------------------------------
--- ZKP cut receipt.
---
--- O: Fleet R5 target partition.
--- R: Reuse the recorded 584/44/58 receipt and generic identity firewall.
--- C: Add exact ordinal carriers only.
--- S: Names, row identity, theorem authority, and discharge do not follow.
--- L: Fleet receipt -> ordinal cut -> TOE consumers.
--- P: The recorded partition is the precondition.
--- G: Attribution and ESD boundaries stay unchanged.
--- F: Per-row dispatch still requires a checked row-identity attachment.
-------------------------------------------------------------------------
-
-record FleetR5OrdinalCutReceipt : Set₁ where
-  constructor fleet-r5-ordinal-cut-receipt
-  field
-    dischargedOrdinal : Set
-    dischargedOrdinalIsCanonical :
-      dischargedOrdinal ≡ FleetDischargedOrdinal
-
-    contradictionOrdinal : Set
-    contradictionOrdinalIsCanonical :
-      contradictionOrdinal ≡ FleetContradictionOrdinal
-
-    formalGapOrdinal : Set
-    formalGapOrdinalIsCanonical :
-      formalGapOrdinal ≡ FleetFormalGapOrdinal
-
-    targetCount : Nat
-    targetCountIs58 : targetCount ≡ 58
-
-    dischargedCount : Nat
-    dischargedCountIs584 : dischargedCount ≡ 584
-
-    contradictionCount : Nat
-    contradictionCountIs44 : contradictionCount ≡ 44
-
-    ordinalCarriesPersistedIdentity : Bool
-    ordinalCarriesPersistedIdentityIsFalse :
-      ordinalCarriesPersistedIdentity ≡ false
-
-    sharedCardinalityIdentityFirewall :
-      FleetSharedCardinalityCreatesIdentity → ⊥
-
-open FleetR5OrdinalCutReceipt public
-
-canonicalFleetR5OrdinalCutReceipt : FleetR5OrdinalCutReceipt
-canonicalFleetR5OrdinalCutReceipt = record
-  { dischargedOrdinal = FleetDischargedOrdinal
-  ; dischargedOrdinalIsCanonical = refl
-  ; contradictionOrdinal = FleetContradictionOrdinal
-  ; contradictionOrdinalIsCanonical = refl
-  ; formalGapOrdinal = FleetFormalGapOrdinal
-  ; formalGapOrdinalIsCanonical = refl
-  ; targetCount = fleetFormalGapOrdinalCount
-  ; targetCountIs58 = fleetFormalGapOrdinalCountIs58
-  ; dischargedCount = fleetDischargedOrdinalCount
-  ; dischargedCountIs584 = fleetDischargedOrdinalCountIs584
-  ; contradictionCount = fleetContradictionOrdinalCount
-  ; contradictionCountIs44 = fleetContradictionOrdinalCountIs44
-  ; ordinalCarriesPersistedIdentity =
-      fleetOrdinalCarriesPersistedRowIdentity
-  ; ordinalCarriesPersistedIdentityIsFalse =
-      fleetOrdinalCarriesPersistedRowIdentityIsFalse
-  ; sharedCardinalityIdentityFirewall =
-      fleetSharedCardinalityDoesNotCreateIdentity
-  }
