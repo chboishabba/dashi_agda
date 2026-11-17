@@ -29,6 +29,15 @@ import DASHI.Reasoning.Trialectic369Selected3BProjectionChoiceIndependenceExact
 import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface
 import DASHI.Physics.Closure.SupersingularPrimeLaneBridge
 
+-- Jack Daniel's natural-recognition / exceptional-geometry tranche.
+import DASHI.Moonshine.JackDanielsNaturalMonsterRecognitionMaxCutExact
+import DASHI.Moonshine.JackDanielsJCoarseFineNaturalRecognitionExact
+import DASHI.Moonshine.JackDanielsCoarseJFrickeSensitivityNoGoExact
+import DASHI.Moonshine.JackDanielsSmallPrimeJCoarseFineTerminalMaxCutExact
+import DASHI.Moonshine.MonsterAlbertFiftyThreeProofRelevantWeldExact
+import DASHI.Moonshine.MonsterAlbertF4ProofRelevantRecognitionExact
+import DASHI.Moonshine.MonsterExceptionalActorScopedMaxCutExact
+
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369ChemistryHyperfibreBridgeExact
 import DASHI.Physics.Chemistry.Atomic369Kernel6HeisenbergBridgeExact
 import DASHI.Physics.Chemistry.Atomic369Kernel6HeisenbergBridgeValidation
@@ -89,7 +98,7 @@ import DASHI.Physics.Closure.Monster3Plus1PhysicalSymmetryTargetExact
 import DASHI.Physics.Closure.MonsterC3EntropyGravityMaxCutExact
 import DASHI.Physics.Closure.MonsterC3EntropyGravityValidation
 
--- Current authoritative terminal recut.
-import DASHI.Physics.Closure.MonsterC3RepresentationNativeCorrectionValidation
-import DASHI.Physics.Closure.MonsterC3RepresentationNativeTerminalMaxCutExact
-import DASHI.Physics.Closure.MonsterC3RepresentationNativeTerminalValidation
+-- Same-object exceptional -> entropy/stress -> CMP119 cosmology compiler.
+import DASHI.Physics.Closure.MonsterExceptionalEntropyGravityCompilerExact
+import DASHI.Physics.Closure.JackDanielsExceptionalGravityTerminalMaxCutExact
+import DASHI.Physics.Closure.JackDanielsExceptionalGravityValidation
