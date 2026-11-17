@@ -1,0 +1,54 @@
+{
+  "date": "2026-11-17",
+  "pr": 1524,
+  "goal": "F13/D1: actual rational two-coordinate Cayley implicit-midpoint pair proven in Agda source using same inverse coefficient",
+  "source_first": [
+    "SmithFilsingerLocalCayleyZeroWeldExact.CertifiedCayley",
+    "SmithFilsingerLocalCausalADEReachExact.noSignalOutsideInterleavedSourceCone",
+    "Data.Rational.Tactic.RingSolver.solve-∀"
+  ],
+  "modified": [
+    "DASHI/Physics/Motors/SmithFilsingerLocalCayleyZeroWeldExact.agda",
+    "scripts/check_smith_filsinger_formal_weld_agda29.sh",
+    "scripts/check_smith_filsinger_sympy_gate.py",
+    "scripts/check_smith_filsinger_dynamic_replenishment.sh",
+    "Docs/research/SmithFilsingerPhaseDeliverablesExactRemaining20261116.md"
+  ],
+  "added": [
+    "DASHI/Physics/Motors/SmithFilsingerLocalCayleyMidpointExact.agda",
+    "scripts/test_smith_filsinger_cayley_midpoint_sympy.py",
+    "Docs/research/SmithFilsingerCayleyMidpointAgdaMaxCut20261117.md"
+  ],
+  "agda_source_theorems": [
+    "CertifiedHalfStep",
+    "sameFirstIsReduced",
+    "sameSecondIsReduced",
+    "halfStepInverseLaw",
+    "firstMidpointPolynomial",
+    "secondMidpointPolynomial",
+    "sameCayleyFirstMidpoint",
+    "sameCayleySecondMidpoint"
+  ],
+  "equations": [
+    "p+p=h*a; r+r=h*b; p*r=quarter*h*h*a*b",
+    "(1-p*r)*q=1 from original inverseLaw",
+    "u-p*v=x+p*y",
+    "v-r*u=y+r*x"
+  ],
+  "tests": {
+    "previous": 154,
+    "new": 10,
+    "total": "164/164 PASS",
+    "run": "python -m pytest -q /mnt/data/sf_cayley_work/test_smith_filsinger_*sympy.py",
+    "verified_locally": true,
+    "agda_kernel": "NOT RUN",
+    "exact_git_head_ci": "NOT OBSERVED"
+  },
+  "remaining": {
+    "D1": "OPEN — Agda pinned 2.9 acceptance unavailable",
+    "F13": "OPEN — full physical retarded layered 3D dyadic",
+    "F15": "OPEN — independently metered source and restored original cycle",
+    "physical_source_meter": false
+  },
+  "attribution": "Actual DASHI rational Cayley and dynamic reach owners reused. No ESD edits."
+}

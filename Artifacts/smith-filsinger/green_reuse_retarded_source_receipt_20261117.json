@@ -1,0 +1,57 @@
+{
+  "date": "2026-11-17",
+  "pr": 1524,
+  "status": "SOURCE_AUTHORED_GREEN_REUSE_KERNEL_AND_PHYSICS_OPEN",
+  "owners": [
+    "DASHI/Physics/YangMills/BalabanFiniteCoerciveGreen.agda",
+    "DASHI/Physics/YangMills/BalabanSide4ScalarGreenConvolutionExact.agda",
+    "DASHI/Physics/Motors/SmithFilsingerTimeIndexedTransferExact.agda",
+    "DASHI/Physics/Motors/SmithFilsingerYeeCFLConeGuardExact.agda",
+    "DASHI/Physics/Motors/SmithFilsingerSourceMaxwellBoundaryWeldExact.agda"
+  ],
+  "new_files": [
+    "DASHI/Physics/Motors/SmithFilsingerCoerciveGreenRetardedWeldExact.agda",
+    "DASHI/Physics/Motors/SmithFilsingerPeriodicGreenDelayReuseExact.agda",
+    "scripts/test_smith_filsinger_coercive_green_retarded_weld_exact.py",
+    "Docs/research/SmithFilsingerGreenOwnerReuseMaxCut20261117.md"
+  ],
+  "proof_obligations_closed_at_source_candidate": [
+    "zero before stipulated delayed Green response",
+    "exact inverse of source at first delay",
+    "inherits original coercive inverse norm bound",
+    "nonzero launch stamped t=launch+flight arrival identity",
+    "same-original work sensor zero before absolute original arrival",
+    "source/physical operator/calibration equality transports at original arrival",
+    "separately admitted original physical-distance/front inequality",
+    "actual periodic side4 scalarGreen Laplacian mean-corrected identity preserved at delayed arrival"
+  ],
+  "independent_fraction_replay": {
+    "checks": 327,
+    "passed": 327,
+    "tested_positive_2x2_diagonal_matrix": true,
+    "stamped_nonzero_launch": true,
+    "original_full_branch_pytest": false
+  },
+  "static_source_audit": {
+    "new_agda_files": 2,
+    "balanced_delimiters": 2,
+    "explicit_postulates": 0,
+    "proof_holes": 0
+  },
+  "kernel": {
+    "agda29": "not available",
+    "nix": "not available",
+    "compiler_receipt": false
+  },
+  "critical_mathematical_boundary": "Balaban exact finite Green and periodic scalar Green are static elliptic/gauge operators; externally imposed time delay is not a Maxwell hyperbolic dyadic retarded Green, not a physical light-cone theorem, not measured Sun–Earth power.",
+  "original_evidence": {
+    "soil_air_ionosphere_maxwell_operator": null,
+    "source_backaction": null,
+    "measured_electrode_voltage_current": null,
+    "independently_metered_solar_work": null,
+    "restored_cycle_net_work": null,
+    "physical_F13": "OPEN",
+    "physical_F15": "OPEN"
+  },
+  "provenance": "Existing Balaban/Yang–Mills Green reused; existing Smith/Filsinger typed original boundary and flight reused; user's direct Sun–Earth coupling hypothesis remains conditional; no ESD edits."
+}

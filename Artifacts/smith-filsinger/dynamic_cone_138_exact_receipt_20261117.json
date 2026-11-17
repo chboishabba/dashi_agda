@@ -1,0 +1,51 @@
+{
+  "date": "2026-11-17",
+  "pr": 1524,
+  "purpose": "Strong all-N dynamic finite reachability with arbitrary later natural/controller injections, plus original hetero Lorentz/Maxwell local stage validation",
+  "reused": [
+    "SmithFilsingerIndexedFaceIncidenceExact.sameID",
+    "SmithFilsingerLocalCausalADEFrameExact.LocalPrimitive",
+    "smith_filsinger_local_causal_ade_sympy.py original local Cayley",
+    "SmithFilsingerYeeCFLConeGuardExact"
+  ],
+  "new_agda": "DASHI/Physics/Motors/SmithFilsingerLocalCausalADEReachExact.agda",
+  "new_lemmas": [
+    "oneStepOutsideZero",
+    "noSignalOutsideDynamicCone",
+    "injectionOutsideZero",
+    "noSignalOutsideInterleavedSourceCone",
+    "additiveZeroPreserving"
+  ],
+  "source_bug_fixed": "older dependency_cone did not make later independent natural/controller injection at a disconnected cell a new root; could underapproximate actual support",
+  "py_producer": "scripts/smith_filsinger_local_causal_ade_sympy.py",
+  "py_tests": "scripts/test_smith_filsinger_local_causal_ade_sympy.py",
+  "independent_local_math": {
+    "previous": 131,
+    "new": 7,
+    "total": "138/138 PASS",
+    "sympy": "1.14.0",
+    "pytest": "9.0.2",
+    "full_command": "python -m pytest -q test_smith_filsinger_*sympy.py",
+    "test_scope": [
+      "new late disjoint source roots",
+      "stagewise exact zero outside cone",
+      "forged edge support",
+      "forged source ownership",
+      "source modifies another active coordinate",
+      "bad untyped step",
+      "delayed propagation only on selected edge"
+    ],
+    "github_head_full_ci": "NOT OBSERVED",
+    "agda_kernel": "NOT RUN"
+  },
+  "physical_constraints": {
+    "graph_cone_vs_physical_lightcone": "Independent physical Maxwell front theorem remains OPEN",
+    "coeff_to_agda_real_cayley": "OPEN; generic ZeroPreserving evidence has not been constructed for actual rational Cayley update",
+    "real_soil_air_ionosphere_geometry": "OPEN",
+    "real_same_original_source_meter": "OPEN",
+    "sustained_replenished_gain": "OPEN",
+    "D1": "OPEN"
+  },
+  "no_esd_edits": true,
+  "original_user_origin": "Smith/Filsinger Sun-Earth coupling remains a conditional hypothesis"
+}

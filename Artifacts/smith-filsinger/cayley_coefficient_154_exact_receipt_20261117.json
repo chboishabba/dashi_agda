@@ -1,0 +1,45 @@
+{
+  "date": "2026-11-17",
+  "pr": 1524,
+  "scope": "Actual rational two-coordinate Cayley coefficient → original Agda dynamic reachability zero-preservation",
+  "existing_owners": [
+    "SmithFilsingerLocalCausalADEFrameExact.LocalPrimitive",
+    "SmithFilsingerLocalCausalADEReachExact.ZeroPreserving",
+    "SmithFilsingerLocalCausalADEReachExact.noSignalOutsideInterleavedSourceCone",
+    "smith_filsinger_local_causal_ade_sympy.py.cayley_edge_step",
+    "SmithFilsingerIndexedFaceIncidenceExact.sameID"
+  ],
+  "new_source": [
+    "DASHI/Physics/Motors/SmithFilsingerLocalCayleyZeroWeldExact.agda",
+    "scripts/test_smith_filsinger_cayley_coefficients_sympy.py",
+    "Docs/research/SmithFilsingerCayleyCoefficientAgdaMaxCut20261117.md"
+  ],
+  "mathematical_endpoints": [
+    "CertifiedCayley with (1-h²ab/4)q=1 and quarterIsQuarter",
+    "sameCayleyFirst/Second exact 2x2 coefficients",
+    "sameCayleyFirstZero and sameCayleySecondZero rational ring-solver proof candidates",
+    "sameCayleyZeroPreserving consumes original Reach.ZeroPreserving",
+    "DistinctCayleyEdge ensures two endpoints differ",
+    "CertifiedDiagonalCayley passive 1x1 midpoint and zero proof",
+    "singleCayleyWithSourceNoSignalOutsideReach consumes the previous all-N source-reach theorem"
+  ],
+  "checks": {
+    "local_exact": "154/154 PASS",
+    "previous": 138,
+    "new": 16,
+    "sympy": "1.14.0",
+    "pytest": "9.0.2",
+    "source": "locally mounted previous 138-suite plus new 16-test file",
+    "archive": "smith_filsinger_cayley_agda_154_exact_tests.zip",
+    "archive_integrity": "PASS",
+    "pinned_agda29_kernel": "NOT RUN",
+    "github_exact_head_full_suite": "NOT OBSERVED"
+  },
+  "unclosed": {
+    "D1": "OPEN; only source-authored Agda, not kernel accepted",
+    "Cayley2x2MidpointEqualityInAgda": "OPEN; equality verified with SymPy matrix algebra, not inside Agda",
+    "F13Physical3DRetardedDyadic": "OPEN",
+    "F15IndependentlyReplenishedNaturalWork": "OPEN"
+  },
+  "no_esd_edits": true
+}

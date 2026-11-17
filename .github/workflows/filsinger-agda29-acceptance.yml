@@ -1,0 +1,119 @@
+name: Smith-Filsinger pinned Agda proof acceptance
+
+# Separate from historical manual-only Agda 2.6.4.3 workflow.
+# This is a REAL kernel check, not a Python proof surrogate.
+# A draft PR must not be described as passed until this run succeeds.
+on:
+  push:
+    branches:
+      - "research/sun-earth-coupled-source-20261116"
+    paths:
+      - "DASHI/Physics/Motors/SmithFilsinger*.agda"
+      - "scripts/check_smith_filsinger_*.py"
+      - "scripts/test_smith_filsinger_*.py"
+      - "scripts/check_smith_filsinger_formal_weld_agda29.sh"
+      - ".github/workflows/filsinger-agda29-acceptance.yml"
+  pull_request:
+    paths:
+      - "DASHI/Physics/Motors/SmithFilsinger*.agda"
+      - "DASHI/Core/ProofCarryingFiniteSumEnclosureExact.agda"
+      - "DASHI/Physics/Plasma/KSW668FullVectorMaxwellJetExact.agda"
+      - "scripts/check_smith_filsinger_formal_weld_agda29.sh"
+      - "scripts/run_agda29_parallel_check.sh"
+      - "flake.nix"
+      - "flake.lock"
+      - ".github/workflows/filsinger-agda29-acceptance.yml"
+      - "scripts/check_smith_filsinger_original_gate_evidence.py"
+      - "scripts/test_smith_filsinger_original_gate_evidence.py"
+      - "scripts/check_smith_filsinger_signed_vi_intervals.py"
+      - "scripts/test_smith_filsinger_signed_vi_intervals.py"
+      - "scripts/check_smith_filsinger_restored_cycle_intervals.py"
+      - "scripts/test_smith_filsinger_restored_cycle_intervals.py"
+      - "scripts/test_smith_filsinger_restored_cycle_raw_replay.py"
+      - "scripts/run_smith_filsinger_acceptance.sh"
+      - "scripts/test_smith_filsinger_acceptance_runner.py"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: filsinger-agda29-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pinned-agda29:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          persist-credentials: false
+      - name: Shell syntax for acceptance runner and Agda dispatcher
+        run: |
+          bash -n scripts/run_smith_filsinger_acceptance.sh
+          bash -n scripts/check_smith_filsinger_formal_weld_agda29.sh
+          bash -n scripts/run_agda29_parallel_check.sh
+      - name: Adversarial acceptance-runner control-flow checks
+        run: python3 scripts/test_smith_filsinger_acceptance_runner.py
+      - name: Fail-closed original-source evidence checker tests
+        run: python3 scripts/test_smith_filsinger_original_gate_evidence.py
+      - name: Exact signed V/I interval arithmetic tests
+        run: python3 scripts/test_smith_filsinger_signed_vi_intervals.py
+      - name: Exact F15 restored-cycle first-law interval tests
+        run: python3 scripts/test_smith_filsinger_restored_cycle_intervals.py
+      - name: Original-file F15 raw evidence replay adversarial tests
+        run: python3 scripts/test_smith_filsinger_restored_cycle_raw_replay.py
+      - uses: cachix/install-nix-action@v31
+        with:
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+            accept-flake-config = false
+      - name: Pin Agda experimental standard library to exact upstream commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          REF=008f12c2908479567a3ae3c873f9cf0b8fe5987e
+          mkdir -p pinned-agda-stdlib
+          git -C pinned-agda-stdlib init --quiet
+          git -C pinned-agda-stdlib remote add origin https://github.com/agda/agda-stdlib.git
+          git -C pinned-agda-stdlib fetch --depth=1 origin "$REF"
+          git -C pinned-agda-stdlib checkout --quiet FETCH_HEAD
+          test "$(git -C pinned-agda-stdlib rev-parse HEAD)" = "$REF"
+          test -d pinned-agda-stdlib/src
+          printf 'agda-stdlib %s\n' "$REF" | tee agda29-stdlib.txt
+          echo "AGDA_STDLIB_SRC_29=$GITHUB_WORKSPACE/pinned-agda-stdlib/src" >> "$GITHUB_ENV"
+      - name: Resolve exact repository-pinned Agda derivation
+        shell: bash
+        run: |
+          set -euo pipefail
+          nix build --no-link -L .#agda29-parallel
+          AGDA_BIN="$(nix build --no-link --print-out-paths .#agda29-parallel)/bin/agda"
+          test -x "$AGDA_BIN"
+          echo "AGDA_BIN=$AGDA_BIN" >> "$GITHUB_ENV"
+          "$AGDA_BIN" --version | tee agda29-version.txt
+          grep -Eq '2[.]9[.]' agda29-version.txt
+      - name: Pinned Agda proof checks (no source-level surrogate)
+        shell: bash
+        env:
+          DASHI_NO_TMUX: "1"
+          AGDA_FLAKE: ".#agda29-parallel"
+          AGDA_LOG_PATH: "${{ github.workspace }}/filsinger-agda29.log"
+          AGDA_JOBS: "2"
+          DASHI_AGDA_RSS_LIMIT_MB: "8192"
+        run: |
+          set -euo pipefail
+          bash scripts/run_smith_filsinger_acceptance.sh --full
+      - name: Upload proof and toolchain logs even on failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: filsinger-agda29-kernel-receipt
+          path: |
+            agda29-version.txt
+            agda29-stdlib.txt
+            filsinger-agda29*.log
+            .filsinger-acceptance/acceptance.log
+            .filsinger-acceptance/acceptance-pass.txt
+          if-no-files-found: warn

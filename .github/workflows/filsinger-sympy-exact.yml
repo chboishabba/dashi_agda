@@ -1,0 +1,43 @@
+name: Smith-Filsinger exact SymPy independent oracle
+
+# A mathematical cross-check alongside, NOT instead of, the pinned Agda
+# kernel in filsinger-agda29-acceptance.yml. Neither result authenticates
+# environmental forcing or independently replenished original source work.
+on:
+  pull_request:
+    paths:
+      - "scripts/smith_filsinger_*sympy.py"
+      - "scripts/test_smith_filsinger_*sympy.py"
+      - "scripts/check_smith_filsinger_sympy_gate.py"
+      - "DASHI/Physics/Motors/SmithFilsinger*.agda"
+      - ".github/workflows/filsinger-sympy-exact.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  independent-exact-sympy:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install reproducible exact arithmetic/test dependencies
+        run: python -m pip install 'sympy==1.14.0' 'pytest==9.0.2'
+      - name: Verify exact symbolic F13/F15 mathematical identities and source markers
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/check_smith_filsinger_sympy_gate.py | tee filsinger-sympy-exact.json
+          grep -q '"agda_kernel": "NOT_RUN"' filsinger-sympy-exact.json
+          grep -q '"D1_kernel_gate": "OPEN"' filsinger-sympy-exact.json
+      - name: Upload independent mathematical receipt (NOT kernel/physics)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: filsinger-sympy-math-not-agda
+          path: filsinger-sympy-exact.json
+          if-no-files-found: warn

@@ -1,0 +1,52 @@
+{
+  "date": "2026-11-17",
+  "pr": 1524,
+  "mathematical_scope": "Exact 3-layer 6-state reduced transverse Hall/Pedersen wave Green + 4-state planar tangential Maxwell transfer + 100-fold restored-cycle conditional math",
+  "equations": [
+    "G(s,k2)=(s² C+s(P+H)+K(k2))^-1",
+    "delta U=h*v_mid^T*J_env+h*v_mid^T*J_ctrl-h*v_mid^T*P*v_mid",
+    "v_mid^T*H*v_mid=0",
+    "T_layer(d)=(I-dM/2)^-1*(I+dM/2)",
+    "restored N+C=load+loss",
+    "robust_100x requires load_lower>=100*controller_upper"
+  ],
+  "tests": {
+    "independent_locally_executed_pytest": "32/32 PASS",
+    "reduced_six_state_cases": 25,
+    "planar_four_state_maxwell_cases": 7,
+    "exact_git_branch_full_pytest": "NOT_RUN",
+    "agda_kernel": "NOT_RUN"
+  },
+  "source_files": [
+    "scripts/smith_filsinger_layered_green_sympy.py",
+    "scripts/test_smith_filsinger_layered_green_sympy.py",
+    "scripts/smith_filsinger_tangential_maxwell_sympy.py",
+    "scripts/test_smith_filsinger_tangential_maxwell_sympy.py",
+    "scripts/check_smith_filsinger_sympy_gate.py",
+    "DASHI/Physics/Motors/SmithFilsingerHundredfoldSourceFundingExact.agda"
+  ],
+  "guards": [
+    "rational fixture values not physical conductivity",
+    "Laplace positive-real reduced operator not fully retarded dyadic",
+    "tangential transfer uses Cayley rather than continuum matrix exponential",
+    "source-to-terminal measurement and return current still absent",
+    "independent solar source meter absent",
+    "full state restored cycle meter absent",
+    "SymPy mathematical identity cannot prove Agda typecheck"
+  ],
+  "gates": {
+    "F13_reduced_math": "exact symbolic/rational independent test PASS",
+    "F13_actual_full_3D_dyadic": "OPEN",
+    "F15_conditional_source_work": "formal Agda candidate and exact SymPy work audit",
+    "F15_original_independent_solar_gain": "OPEN",
+    "D1_SymPy": "PASS independent math",
+    "D1_Agda_kernel": "OPEN"
+  },
+  "existing_sources": [
+    "BalabanFiniteCoerciveGreen",
+    "BalabanSide4ScalarGreenConvolutionExact",
+    "SmithFilsingerReplenishedCycleCapExact",
+    "SmithFilsingerSpaceTimePoyntingTelescopeExact"
+  ],
+  "provenance": "Existing DASHI Green/Maxwell/energy owner reuse; user-origin nonlinear Sun-Earth coupling steelman; no ESD edits"
+}
