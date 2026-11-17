@@ -1548,3 +1548,6 @@ import DASHI.Physics.YangMills.YMClayRationalS3DegreeFifteenInvariantCertificate
 
 -- Exact original L1 24cell induced rational Wilson T2 coarse density.
 import DASHI.Physics.YangMills.YMClayOriginalL1Rational24CellEffectiveRGExact as Rational24CellEffectiveRG
+
+-- Original rational SU2 B4 sign/permutation norm and orbit-invariant generators.
+import DASHI.Physics.YangMills.YMClayOriginalRationalS3HyperoctahedralGeneratorsExact as OriginalRationalS3B4
