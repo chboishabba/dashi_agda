@@ -49,17 +49,17 @@ realMultiplyOneRight F a =
     (C3.multiplyOneLeft F a)
 
 realDistributeRight :
-  ∀ {r} (F : C3.RealField r) (x y z : C3.Carrier F) →
-  C3.multiply F (C3.add F y z) x
-  ≡ C3.add F (C3.multiply F y x) (C3.multiply F z x)
-realDistributeRight F x y z =
+  ∀ {r} (F : C3.RealField r) (a b c : C3.Carrier F) →
+  C3.multiply F (C3.add F b c) a
+  ≡ C3.add F (C3.multiply F b a) (C3.multiply F c a)
+realDistributeRight F a b c =
   trans
-    (C3.multiplyCommutative F (C3.add F y z) x)
+    (C3.multiplyCommutative F (C3.add F b c) a)
     (trans
-      (C3.distributeLeft F x y z)
+      (C3.distributeLeft F a b c)
       (cong₂ (C3.add F)
-        (C3.multiplyCommutative F x y)
-        (C3.multiplyCommutative F x z)))
+        (C3.multiplyCommutative F a b)
+        (C3.multiplyCommutative F a c)))
 
 realCommutativeRing :
   ∀ {r} (F : C3.RealField r) → CommutativeRing r r
@@ -116,12 +116,22 @@ module Polynomial {r : Level} (F : C3.RealField r) where
   Expr = R.Expr Carrier
 
   multiplyReal :
-    ∀ {n} → Expr n → Expr n → Expr n → Expr n → Expr n
+    ∀ {n} →
+    R.Expr (C3.Carrier F) n →
+    R.Expr (C3.Carrier F) n →
+    R.Expr (C3.Carrier F) n →
+    R.Expr (C3.Carrier F) n →
+    R.Expr (C3.Carrier F) n
   multiplyReal ar ai br bi =
     (ar R.⊗ br) R.⊕ (R.⊝ (ai R.⊗ bi))
 
   multiplyImaginary :
-    ∀ {n} → Expr n → Expr n → Expr n → Expr n → Expr n
+    ∀ {n} →
+    R.Expr (C3.Carrier F) n →
+    R.Expr (C3.Carrier F) n →
+    R.Expr (C3.Carrier F) n →
+    R.Expr (C3.Carrier F) n →
+    R.Expr (C3.Carrier F) n
   multiplyImaginary ar ai br bi =
     (ar R.⊗ bi) R.⊕ (ai R.⊗ br)
 
@@ -440,7 +450,69 @@ hermitianAddLeft :
   ≡ C3.complexAdd
       (C3.hermitianPairing3 u w)
       (C3.hermitianPairing3 v w)
-hermitianAddLeft = Additive.hermitianPairingAddLeft
+hermitianAddLeft {F = F} u v w =
+  trans
+    conjugateAddStep
+    dotAddStep
+  where
+  conjugateVectorAdd :
+    (a b : C3.Complex3 F) →
+    C3.complex3Conjugate (C3.complex3Add a b)
+    ≡ C3.complex3Add (C3.complex3Conjugate a) (C3.complex3Conjugate b)
+  conjugateVectorAdd
+    (C3.complex3 (C3.complex axr axi) (C3.complex ayr ayi)
+      (C3.complex azr azi))
+    (C3.complex3 (C3.complex bxr bxi) (C3.complex byr byi)
+      (C3.complex bzr bzi)) =
+    complex3Ext
+      (complexExt refl
+        (P.R.solve 2
+          (λ a b → P.R.⊝ (a P.R.⊕ b) P.R.⊜
+                    ((P.R.⊝ a) P.R.⊕ (P.R.⊝ b))) refl axi bxi))
+      (complexExt refl
+        (P.R.solve 2
+          (λ a b → P.R.⊝ (a P.R.⊕ b) P.R.⊜
+                    ((P.R.⊝ a) P.R.⊕ (P.R.⊝ b))) refl ayi byi))
+      (complexExt refl
+        (P.R.solve 2
+          (λ a b → P.R.⊝ (a P.R.⊕ b) P.R.⊜
+                    ((P.R.⊝ a) P.R.⊕ (P.R.⊝ b))) refl azi bzi))
+    where module P = Polynomial F
+
+  conjugateAddStep :
+    C3.hermitianPairing3 (C3.complex3Add u v) w
+    ≡ C3.bilinearDot3
+        (C3.complex3Add
+          (C3.complex3Conjugate u)
+          (C3.complex3Conjugate v))
+        w
+  conjugateAddStep =
+    cong (λ x → C3.bilinearDot3 x w) (conjugateVectorAdd u v)
+
+  dotAddStep :
+    C3.bilinearDot3
+      (C3.complex3Add
+        (C3.complex3Conjugate u)
+        (C3.complex3Conjugate v))
+      w
+    ≡ C3.complexAdd
+        (C3.hermitianPairing3 u w)
+        (C3.hermitianPairing3 v w)
+  dotAddStep =
+    trans
+      (bilinearDotCommutative
+        (C3.complex3Add
+          (C3.complex3Conjugate u)
+          (C3.complex3Conjugate v))
+        w)
+      (trans
+        (bilinearDotAddRight
+          w
+          (C3.complex3Conjugate u)
+          (C3.complex3Conjugate v))
+        (cong₂ C3.complexAdd
+          (bilinearDotCommutative w (C3.complex3Conjugate u))
+          (bilinearDotCommutative w (C3.complex3Conjugate v))))
 
 hermitianScaleLeft :
   ∀ {r} {F : C3.RealField r}
