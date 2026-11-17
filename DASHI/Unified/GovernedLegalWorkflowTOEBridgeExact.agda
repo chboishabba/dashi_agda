@@ -82,6 +82,9 @@ import DASHI.Cognition.PNF.SensibLawLegalSourceAuthorityEvidenceExact as LegalAu
 import DASHI.Cognition.PNF.SensibLawSemanticExpansionSoftwareValidationExact as SoftwareValidation
 import DASHI.Interop.SensibLawSemanticPromotionPolicy as SemanticPromotion
 import DASHI.Interop.IntrospectiveProofLoopExact as Introspection
+import DASHI.Law.SensibLawNativeLegalFollowCLIExact as NativeLegalFollow
+import DASHI.Law.SensibLawPreferredAustralianAuthorityAcquisitionExact as ProviderAcquisition
+import DASHI.Law.SensibLawExpertEvidenceProductionIntegrityExact as ExpertProduction
 
 ------------------------------------------------------------------------
 -- Type aliases keep Unifier thin.
@@ -743,6 +746,10 @@ canonicalGovernedLegalWorkflowZKPReceipt =
     ∷ "DASHI.Cognition.PNF.SensibLawSemanticExpansionSoftwareValidationExact"
     ∷ "DASHI.Interop.SensibLawSemanticPromotionPolicy"
     ∷ "DASHI.Core.BoundAcquisitionDemandExact"
+    ∷ "DASHI.Cognition.PNF.SensibLawDbNativeCorpusCompilerExact"
+    ∷ "DASHI.Law.SensibLawNativeLegalFollowCLIExact"
+    ∷ "DASHI.Law.SensibLawPreferredAustralianAuthorityAcquisitionExact"
+    ∷ "DASHI.Law.SensibLawExpertEvidenceProductionIntegrityExact"
     ∷ [] )
     ( "Normalize exact theorem aliases only."
     ∷ "Retain the intermediate compliance witness."
@@ -772,11 +779,10 @@ canonicalGovernedLegalWorkflowZKPReceipt =
     ∷ "Semantic promotion creates no truth authority, legal authority, or generic authority."
     ∷ "Bound acquisition does not pay the requirement or close the consumer."
     ∷ "Producer identity does not identify the residual."
-    ∷ "A candidate source does not create legal-source authority."
-    ∷ "A legal-system match does not create legal-source authority."
-    ∷ "Current source validity does not prove case-specific applicability."
-    ∷ "Semantic admission does not create legal-source authority."
-    ∷ "Document role does not supply legal-source authority."
+    ∷ "Exact compiler-product reuse does not create semantic admission, authority, applicability, entity identity, proposition identity, event identity, or claim truth."
+    ∷ "Native legal-follow orchestration does not create legal authority."
+    ∷ "Provider failure is not negative legal evidence."
+    ∷ "Expert production does not create truth, legal, admissibility, empirical, clinical, or other authority."
     ∷ [] )
     ( "dashi_agda is the formal reference lane."
     ∷ "SensibLaw/SLR owns review, admission, semantic construction, and legal consumer projection."
@@ -800,8 +806,9 @@ canonicalGovernedLegalWorkflowZKPReceipt =
     ∷ "The TOE root reaches legal semantic admission and software-validation firewalls."
     ∷ "The TOE root reaches canonical semantic-authority non-promotion."
     ∷ "The TOE root reaches exact-live bound-acquisition non-promotion."
-    ∷ "The TOE root reaches the canonical legal-source authority boundary."
-    ∷ "The TOE root reaches all five legal-source authority non-promotion proofs."
+    ∷ "The TOE root reaches exact compiler-product reuse non-promotion."
+    ∷ "The TOE root reaches native legal-follow orchestration non-promotion."
+    ∷ "The TOE root reaches provider-access non-evidence and expert-production non-promotion."
     ∷ [] )
     ( "ITIL change and service-management lens."
     ∷ "ISO 9000 family quality-management lens."
@@ -830,6 +837,340 @@ canonicalGovernedLegalWorkflowZKPReceipt =
     false refl
     false refl
 
+
+------------------------------------------------------------------------
+-- Exact compiler-product reuse remains below semantic and legal promotion.
+--
+-- Reuse the existing SCALE-1 owner.
+-- Exact replay is an execution optimisation.
+-- It does not create admission, authority, applicability, semantic identity,
+-- event identity, proposition identity, or claim truth.
+------------------------------------------------------------------------
+
+ExactReuseCreatesSemanticAdmission : Set
+ExactReuseCreatesSemanticAdmission =
+  DbNative.ExactReuseCreatesSemanticAdmission
+
+ExactReuseCreatesSemanticAuthority : Set
+ExactReuseCreatesSemanticAuthority =
+  DbNative.ExactReuseCreatesSemanticAuthority
+
+ExactReuseCreatesApplicability : Set
+ExactReuseCreatesApplicability =
+  DbNative.ExactReuseCreatesApplicability
+
+ExactReuseCreatesEntityIdentity : Set
+ExactReuseCreatesEntityIdentity =
+  DbNative.ExactReuseCreatesEntityIdentity
+
+ExactReuseCreatesPropositionIdentity : Set
+ExactReuseCreatesPropositionIdentity =
+  DbNative.ExactReuseCreatesPropositionIdentity
+
+ExactReuseCreatesEventIdentity : Set
+ExactReuseCreatesEventIdentity =
+  DbNative.ExactReuseCreatesEventIdentity
+
+ExactReuseCreatesClaimTruth : Set
+ExactReuseCreatesClaimTruth =
+  DbNative.ExactReuseCreatesClaimTruth
+
+toeExactReuseDoesNotCreateSemanticAdmission :
+  ExactReuseCreatesSemanticAdmission → ⊥
+toeExactReuseDoesNotCreateSemanticAdmission =
+  DbNative.exactReuseDoesNotCreateSemanticAdmission
+
+toeExactReuseDoesNotCreateSemanticAuthority :
+  ExactReuseCreatesSemanticAuthority → ⊥
+toeExactReuseDoesNotCreateSemanticAuthority =
+  DbNative.exactReuseDoesNotCreateSemanticAuthority
+
+toeExactReuseDoesNotCreateApplicability :
+  ExactReuseCreatesApplicability → ⊥
+toeExactReuseDoesNotCreateApplicability =
+  DbNative.exactReuseDoesNotCreateApplicability
+
+toeExactReuseDoesNotCreateEntityIdentity :
+  ExactReuseCreatesEntityIdentity → ⊥
+toeExactReuseDoesNotCreateEntityIdentity =
+  DbNative.exactReuseDoesNotCreateEntityIdentity
+
+toeExactReuseDoesNotCreatePropositionIdentity :
+  ExactReuseCreatesPropositionIdentity → ⊥
+toeExactReuseDoesNotCreatePropositionIdentity =
+  DbNative.exactReuseDoesNotCreatePropositionIdentity
+
+toeExactReuseDoesNotCreateEventIdentity :
+  ExactReuseCreatesEventIdentity → ⊥
+toeExactReuseDoesNotCreateEventIdentity =
+  DbNative.exactReuseDoesNotCreateEventIdentity
+
+toeExactReuseDoesNotCreateClaimTruth :
+  ExactReuseCreatesClaimTruth → ⊥
+toeExactReuseDoesNotCreateClaimTruth =
+  DbNative.exactReuseDoesNotCreateClaimTruth
+
+
+
+------------------------------------------------------------------------
+-- Native legal-follow, provider-access, and expert-production firewalls.
+--
+-- Reuse exact theorem owners.
+-- Orchestration does not create legal authority.
+-- Provider failure is not negative legal evidence.
+-- Expert production does not create authority.
+------------------------------------------------------------------------
+
+NativeCliAutomaticallyLegalAuthority : Set
+NativeCliAutomaticallyLegalAuthority =
+  NativeLegalFollow.NativeCliAutomaticallyLegalAuthority
+
+ProviderFailureAutomaticallyPropositionFalse : Set
+ProviderFailureAutomaticallyPropositionFalse =
+  ProviderAcquisition.ProviderFailureAutomaticallyPropositionFalse
+
+toeNativeLegalFollowDoesNotCreateLegalAuthority :
+  NativeCliAutomaticallyLegalAuthority → ⊥
+toeNativeLegalFollowDoesNotCreateLegalAuthority =
+  NativeLegalFollow.nativeCliDoesNotCreateAuthority
+
+toeProviderFailureDoesNotMakePropositionFalse :
+  ProviderFailureAutomaticallyPropositionFalse → ⊥
+toeProviderFailureDoesNotMakePropositionFalse =
+  ProviderAcquisition.providerFailureDoesNotMakePropositionFalse
+
+toeExpertProductionPromotesAnyAuthority :
+  Bool
+toeExpertProductionPromotesAnyAuthority =
+  ExpertProduction.expertProductionPromotesAnyAuthority
+
+toeExpertProductionPromotesAnyAuthorityIsFalse :
+  toeExpertProductionPromotesAnyAuthority ≡ false
+toeExpertProductionPromotesAnyAuthorityIsFalse =
+  ExpertProduction.expertProductionPromotesAnyAuthorityIsFalse
+
+toeNativeLegalFollowCliBoundary :
+  NativeLegalFollow.NativeLegalFollowCliBoundary
+toeNativeLegalFollowCliBoundary =
+  NativeLegalFollow.canonicalNativeLegalFollowCliBoundary
+
+toeProviderFailureCalibration :
+  ProviderAcquisition.ProviderFailureCalibration
+toeProviderFailureCalibration =
+  ProviderAcquisition.canonicalProviderFailureCalibration
+
+toeExpertProductionBoundary :
+  ExpertProduction.ExpertProductionBoundary
+toeExpertProductionBoundary =
+  ExpertProduction.canonicalExpertProductionBoundary
+
+
+SpacyParserAutomaticallyLegalAuthority : Set
+SpacyParserAutomaticallyLegalAuthority =
+  NativeLegalFollow.SpacyParserAutomaticallyLegalAuthority
+
+SpacyParserAutomaticallyLegalConstruction : Set
+SpacyParserAutomaticallyLegalConstruction =
+  NativeLegalFollow.SpacyParserAutomaticallyLegalConstruction
+
+SectionSliceAutomaticallyHistoricalLaw : Set
+SectionSliceAutomaticallyHistoricalLaw =
+  NativeLegalFollow.SectionSliceAutomaticallyHistoricalLaw
+
+PythonWrapperOwnsLegalSemantics : Set
+PythonWrapperOwnsLegalSemantics =
+  NativeLegalFollow.PythonWrapperOwnsLegalSemantics
+
+JsonArtifactIsSemanticCommandAbi : Set
+JsonArtifactIsSemanticCommandAbi =
+  NativeLegalFollow.JsonArtifactIsSemanticCommandAbi
+
+JsonReviewFileAutomaticallyReviewerDecision : Set
+JsonReviewFileAutomaticallyReviewerDecision =
+  NativeLegalFollow.JsonReviewFileAutomaticallyReviewerDecision
+
+JsonReceiptAutomaticallyClaimTruth : Set
+JsonReceiptAutomaticallyClaimTruth =
+  NativeLegalFollow.JsonReceiptAutomaticallyClaimTruth
+
+CliSequenceAutomaticallyPaysOpenResidual : Set
+CliSequenceAutomaticallyPaysOpenResidual =
+  NativeLegalFollow.CliSequenceAutomaticallyPaysOpenResidual
+
+PinnedOalcStreamingAutomaticallyLegalTruth : Set
+PinnedOalcStreamingAutomaticallyLegalTruth =
+  NativeLegalFollow.PinnedOalcStreamingAutomaticallyLegalTruth
+
+ReviewedHopJsonBecomesCanonicalSemanticTransport : Set
+ReviewedHopJsonBecomesCanonicalSemanticTransport =
+  NativeLegalFollow.ReviewedHopJsonBecomesCanonicalSemanticTransport
+
+OalcHitAutomaticallyBindingAuthority : Set
+OalcHitAutomaticallyBindingAuthority =
+  ProviderAcquisition.OalcHitAutomaticallyBindingAuthority
+
+OfficialCourtBytesAutomaticallyPropositionCorrespondence : Set
+OfficialCourtBytesAutomaticallyPropositionCorrespondence =
+  ProviderAcquisition.OfficialCourtBytesAutomaticallyPropositionCorrespondence
+
+SameMncAutomaticallySameSourceRevision : Set
+SameMncAutomaticallySameSourceRevision =
+  ProviderAcquisition.SameMncAutomaticallySameSourceRevision
+
+SuccessfulOfficialFetchAutomaticallyProductionReady : Set
+SuccessfulOfficialFetchAutomaticallyProductionReady =
+  ProviderAcquisition.SuccessfulOfficialFetchAutomaticallyProductionReady
+
+MultipleReportsAutomaticallyIndependent : Set
+MultipleReportsAutomaticallyIndependent =
+  ExpertProduction.MultipleReportsAutomaticallyIndependent
+
+AgreementAutomaticallyIndependentCorroboration : Set
+AgreementAutomaticallyIndependentCorroboration =
+  ExpertProduction.AgreementAutomaticallyIndependentCorroboration
+
+DependenceMeansNoEvidence : Set
+DependenceMeansNoEvidence =
+  ExpertProduction.DependenceMeansNoEvidence
+
+ExpertStatusAutomaticallyTruth : Set
+ExpertStatusAutomaticallyTruth =
+  ExpertProduction.ExpertStatusAutomaticallyTruth
+
+ReportAdmissionRepairsMissingInput : Set
+ReportAdmissionRepairsMissingInput =
+  ExpertProduction.ReportAdmissionRepairsMissingInput
+
+CrossExaminationAddsUnobservedInput : Set
+CrossExaminationAddsUnobservedInput =
+  ExpertProduction.CrossExaminationAddsUnobservedInput
+
+DisputedRiskIsIrrelevant : Set
+DisputedRiskIsIrrelevant =
+  ExpertProduction.DisputedRiskIsIrrelevant
+
+ObserverDefectMakesOpinionFalse : Set
+ObserverDefectMakesOpinionFalse =
+  ExpertProduction.ObserverDefectMakesOpinionFalse
+
+QualificationAutomaticallyForensicCompliance : Set
+QualificationAutomaticallyForensicCompliance =
+  ExpertProduction.QualificationAutomaticallyForensicCompliance
+
+toeSpacyDoesNotCreateLegalAuthority :
+  SpacyParserAutomaticallyLegalAuthority → ⊥
+toeSpacyDoesNotCreateLegalAuthority =
+  NativeLegalFollow.spacyDoesNotCreateLegalAuthority
+
+toeSpacyDoesNotCreateLegalConstruction :
+  SpacyParserAutomaticallyLegalConstruction → ⊥
+toeSpacyDoesNotCreateLegalConstruction =
+  NativeLegalFollow.spacyDoesNotCreateLegalConstruction
+
+toeLatestKnownSectionDoesNotBecomeHistoricalLaw :
+  SectionSliceAutomaticallyHistoricalLaw → ⊥
+toeLatestKnownSectionDoesNotBecomeHistoricalLaw =
+  NativeLegalFollow.latestKnownSectionDoesNotBecomeHistoricalLaw
+
+toePythonWrapperDoesNotOwnLegalSemantics :
+  PythonWrapperOwnsLegalSemantics → ⊥
+toePythonWrapperDoesNotOwnLegalSemantics =
+  NativeLegalFollow.pythonWrapperDoesNotOwnLegalSemantics
+
+toeJsonIsNotSemanticCommandAbi :
+  JsonArtifactIsSemanticCommandAbi → ⊥
+toeJsonIsNotSemanticCommandAbi =
+  NativeLegalFollow.jsonIsNotSemanticCommandAbi
+
+toeJsonReviewDoesNotCreateDecision :
+  JsonReviewFileAutomaticallyReviewerDecision → ⊥
+toeJsonReviewDoesNotCreateDecision =
+  NativeLegalFollow.jsonReviewDoesNotCreateDecision
+
+toeJsonReceiptDoesNotCreateTruth :
+  JsonReceiptAutomaticallyClaimTruth → ⊥
+toeJsonReceiptDoesNotCreateTruth =
+  NativeLegalFollow.jsonReceiptDoesNotCreateTruth
+
+toeCliSequenceDoesNotPayResidual :
+  CliSequenceAutomaticallyPaysOpenResidual → ⊥
+toeCliSequenceDoesNotPayResidual =
+  NativeLegalFollow.cliSequenceDoesNotPayResidual
+
+toePinnedStreamDoesNotCreateLegalTruth :
+  PinnedOalcStreamingAutomaticallyLegalTruth → ⊥
+toePinnedStreamDoesNotCreateLegalTruth =
+  NativeLegalFollow.pinnedStreamDoesNotCreateLegalTruth
+
+toeReviewedHopJsonDoesNotBecomeCanonicalSemanticTransport :
+  ReviewedHopJsonBecomesCanonicalSemanticTransport → ⊥
+toeReviewedHopJsonDoesNotBecomeCanonicalSemanticTransport =
+  NativeLegalFollow.reviewedHopJsonDoesNotBecomeCanonicalSemanticTransport
+
+toeOalcHitDoesNotBecomeBindingAuthority :
+  OalcHitAutomaticallyBindingAuthority → ⊥
+toeOalcHitDoesNotBecomeBindingAuthority =
+  ProviderAcquisition.oalcHitDoesNotBecomeBindingAuthority
+
+toeOfficialCourtBytesDoNotBecomePropositionCorrespondence :
+  OfficialCourtBytesAutomaticallyPropositionCorrespondence → ⊥
+toeOfficialCourtBytesDoNotBecomePropositionCorrespondence =
+  ProviderAcquisition.officialCourtBytesDoNotBecomePropositionCorrespondence
+
+toeSameMncDoesNotCollapseSourceRevisions :
+  SameMncAutomaticallySameSourceRevision → ⊥
+toeSameMncDoesNotCollapseSourceRevisions =
+  ProviderAcquisition.sameMncDoesNotCollapseSourceRevisions
+
+toeSuccessfulOfficialFetchDoesNotBecomeProductionReady :
+  SuccessfulOfficialFetchAutomaticallyProductionReady → ⊥
+toeSuccessfulOfficialFetchDoesNotBecomeProductionReady =
+  ProviderAcquisition.successfulOfficialFetchDoesNotBecomeProductionReady
+
+toeMultipleReportsDoNotAutomaticallyCreateIndependence :
+  MultipleReportsAutomaticallyIndependent → ⊥
+toeMultipleReportsDoNotAutomaticallyCreateIndependence =
+  ExpertProduction.multipleReportsDoNotAutomaticallyCreateIndependence
+
+toeAgreementDoesNotAutomaticallyCreateIndependentCorroboration :
+  AgreementAutomaticallyIndependentCorroboration → ⊥
+toeAgreementDoesNotAutomaticallyCreateIndependentCorroboration =
+  ExpertProduction.agreementDoesNotAutomaticallyCreateIndependentCorroboration
+
+toeDependenceDoesNotMeanNoEvidence :
+  DependenceMeansNoEvidence → ⊥
+toeDependenceDoesNotMeanNoEvidence =
+  ExpertProduction.dependenceDoesNotMeanNoEvidence
+
+toeExpertStatusDoesNotAutomaticallyCreateTruth :
+  ExpertStatusAutomaticallyTruth → ⊥
+toeExpertStatusDoesNotAutomaticallyCreateTruth =
+  ExpertProduction.expertStatusDoesNotAutomaticallyCreateTruth
+
+toeReportAdmissionDoesNotRepairMissingInput :
+  ReportAdmissionRepairsMissingInput → ⊥
+toeReportAdmissionDoesNotRepairMissingInput =
+  ExpertProduction.reportAdmissionDoesNotRepairMissingInput
+
+toeCrossExaminationDoesNotAddUnobservedInput :
+  CrossExaminationAddsUnobservedInput → ⊥
+toeCrossExaminationDoesNotAddUnobservedInput =
+  ExpertProduction.crossExaminationDoesNotAddUnobservedInput
+
+toeDisputedRiskDoesNotBecomeIrrelevant :
+  DisputedRiskIsIrrelevant → ⊥
+toeDisputedRiskDoesNotBecomeIrrelevant =
+  ExpertProduction.disputedRiskDoesNotBecomeIrrelevant
+
+toeObserverDefectDoesNotProveOpinionFalse :
+  ObserverDefectMakesOpinionFalse → ⊥
+toeObserverDefectDoesNotProveOpinionFalse =
+  ExpertProduction.observerDefectDoesNotProveOpinionFalse
+
+toeQualificationDoesNotAutomaticallyProveForensicCompliance :
+  QualificationAutomaticallyForensicCompliance → ⊥
+toeQualificationDoesNotAutomaticallyProveForensicCompliance =
+  ExpertProduction.qualificationDoesNotAutomaticallyProveForensicCompliance
 
 ------------------------------------------------------------------------
 -- Canonical governance invariant handoff.
@@ -943,6 +1284,114 @@ record GovernedLegalWorkflowTOEInvariantHandoff : Set₁ where
       KnowledgeIsAuthority →
       ⊥
 
+    nativeLegalFollowAuthorityFirewall :
+      NativeCliAutomaticallyLegalAuthority →
+      ⊥
+
+    providerFailureNegativeEvidenceFirewall :
+      ProviderFailureAutomaticallyPropositionFalse →
+      ⊥
+
+    expertProductionAuthorityClosed :
+      toeExpertProductionPromotesAnyAuthority ≡ false
+
+    spacyLegalAuthorityFirewall :
+      SpacyParserAutomaticallyLegalAuthority → ⊥
+
+    spacyLegalConstructionFirewall :
+      SpacyParserAutomaticallyLegalConstruction → ⊥
+
+    latestSectionHistoricalLawFirewall :
+      SectionSliceAutomaticallyHistoricalLaw → ⊥
+
+    pythonLegalSemanticsFirewall :
+      PythonWrapperOwnsLegalSemantics → ⊥
+
+    jsonSemanticCommandFirewall :
+      JsonArtifactIsSemanticCommandAbi → ⊥
+
+    jsonReviewDecisionFirewall :
+      JsonReviewFileAutomaticallyReviewerDecision → ⊥
+
+    jsonClaimTruthFirewall :
+      JsonReceiptAutomaticallyClaimTruth → ⊥
+
+    cliResidualPaymentFirewall :
+      CliSequenceAutomaticallyPaysOpenResidual → ⊥
+
+    pinnedStreamLegalTruthFirewall :
+      PinnedOalcStreamingAutomaticallyLegalTruth → ⊥
+
+    reviewedHopJsonSemanticTransportFirewall :
+      ReviewedHopJsonBecomesCanonicalSemanticTransport → ⊥
+
+    oalcBindingAuthorityFirewall :
+      OalcHitAutomaticallyBindingAuthority → ⊥
+
+    officialBytesCorrespondenceFirewall :
+      OfficialCourtBytesAutomaticallyPropositionCorrespondence → ⊥
+
+    sourceRevisionCollapseFirewall :
+      SameMncAutomaticallySameSourceRevision → ⊥
+
+    officialFetchProductionReadinessFirewall :
+      SuccessfulOfficialFetchAutomaticallyProductionReady → ⊥
+
+    reportMultiplicityIndependenceFirewall :
+      MultipleReportsAutomaticallyIndependent → ⊥
+
+    agreementIndependentCorroborationFirewall :
+      AgreementAutomaticallyIndependentCorroboration → ⊥
+
+    dependenceNoEvidenceFirewall :
+      DependenceMeansNoEvidence → ⊥
+
+    expertStatusTruthFirewall :
+      ExpertStatusAutomaticallyTruth → ⊥
+
+    reportAdmissionRepairFirewall :
+      ReportAdmissionRepairsMissingInput → ⊥
+
+    crossExaminationObservationFirewall :
+      CrossExaminationAddsUnobservedInput → ⊥
+
+    disputedRiskRelevanceFirewall :
+      DisputedRiskIsIrrelevant → ⊥
+
+    observerDefectTruthFirewall :
+      ObserverDefectMakesOpinionFalse → ⊥
+
+    qualificationForensicComplianceFirewall :
+      QualificationAutomaticallyForensicCompliance → ⊥
+
+    exactReuseAdmissionFirewall :
+      ExactReuseCreatesSemanticAdmission →
+      ⊥
+
+    exactReuseAuthorityFirewall :
+      ExactReuseCreatesSemanticAuthority →
+      ⊥
+
+    exactReuseApplicabilityFirewall :
+      ExactReuseCreatesApplicability →
+      ⊥
+
+    exactReuseEntityIdentityFirewall :
+      ExactReuseCreatesEntityIdentity →
+      ⊥
+
+    exactReusePropositionIdentityFirewall :
+      ExactReuseCreatesPropositionIdentity →
+      ⊥
+
+    exactReuseEventIdentityFirewall :
+      ExactReuseCreatesEventIdentity →
+      ⊥
+
+    exactReuseClaimTruthFirewall :
+      ExactReuseCreatesClaimTruth →
+      ⊥
+
 open GovernedLegalWorkflowTOEInvariantHandoff public
 
 canonicalGovernedLegalWorkflowTOEInvariantHandoff :
@@ -973,6 +1422,39 @@ canonicalGovernedLegalWorkflowTOEInvariantHandoff =
     toeCaseySelectionDoesNotCreateWorldTruth
     toeFormalProofDoesNotCreateExternalWorldTruth
     toeKnowledgeDoesNotCreateExecutionAuthority
+    toeNativeLegalFollowDoesNotCreateLegalAuthority
+    toeProviderFailureDoesNotMakePropositionFalse
+    toeExpertProductionPromotesAnyAuthorityIsFalse
+    toeSpacyDoesNotCreateLegalAuthority
+    toeSpacyDoesNotCreateLegalConstruction
+    toeLatestKnownSectionDoesNotBecomeHistoricalLaw
+    toePythonWrapperDoesNotOwnLegalSemantics
+    toeJsonIsNotSemanticCommandAbi
+    toeJsonReviewDoesNotCreateDecision
+    toeJsonReceiptDoesNotCreateTruth
+    toeCliSequenceDoesNotPayResidual
+    toePinnedStreamDoesNotCreateLegalTruth
+    toeReviewedHopJsonDoesNotBecomeCanonicalSemanticTransport
+    toeOalcHitDoesNotBecomeBindingAuthority
+    toeOfficialCourtBytesDoNotBecomePropositionCorrespondence
+    toeSameMncDoesNotCollapseSourceRevisions
+    toeSuccessfulOfficialFetchDoesNotBecomeProductionReady
+    toeMultipleReportsDoNotAutomaticallyCreateIndependence
+    toeAgreementDoesNotAutomaticallyCreateIndependentCorroboration
+    toeDependenceDoesNotMeanNoEvidence
+    toeExpertStatusDoesNotAutomaticallyCreateTruth
+    toeReportAdmissionDoesNotRepairMissingInput
+    toeCrossExaminationDoesNotAddUnobservedInput
+    toeDisputedRiskDoesNotBecomeIrrelevant
+    toeObserverDefectDoesNotProveOpinionFalse
+    toeQualificationDoesNotAutomaticallyProveForensicCompliance
+    toeExactReuseDoesNotCreateSemanticAdmission
+    toeExactReuseDoesNotCreateSemanticAuthority
+    toeExactReuseDoesNotCreateApplicability
+    toeExactReuseDoesNotCreateEntityIdentity
+    toeExactReuseDoesNotCreatePropositionIdentity
+    toeExactReuseDoesNotCreateEventIdentity
+    toeExactReuseDoesNotCreateClaimTruth
 
 toeProcessContextRefs : List String
 toeProcessContextRefs =
