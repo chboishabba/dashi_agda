@@ -10,7 +10,7 @@ module DASHI.Physics.Motors.SmithFilsingerLocalCausalADEFrameExact where
 -- cone, not a Cayley energy theorem, and not a calibrated atmosphere.
 
 open import Agda.Builtin.Nat using (Nat)
-open import Agda.Builtin.Bool using (false)
+open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (trans)
