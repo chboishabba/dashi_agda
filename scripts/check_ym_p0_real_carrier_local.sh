@@ -41,6 +41,7 @@ targets=(
   DASHI/Physics/YangMills/YMClayRationalS3DegreeFifteenInvariantCertificateExact.agda
   DASHI/Physics/YangMills/YMClayOriginalL1Rational24CellEffectiveRGExact.agda
   DASHI/Physics/YangMills/YMClayOriginalRationalS3HyperoctahedralGeneratorsExact.agda
+  DASHI/Physics/YangMills/YMClayRationalS3OddSignOrbitCancellationExact.agda
   DASHI/Physics/YangMills/YMClayRationalS3StereographicConcreteExact.agda
   DASHI/Physics/YangMills/YMClayRationalS3PositiveWeightedNodesExact.agda
   DASHI/Physics/YangMills/YMClayOriginalRationalWilsonTaylor2PositiveExact.agda
@@ -74,6 +75,7 @@ python3 scripts/check_ym_s3_degree15_eleven_invariants_20261117.py
 python3 scripts/check_ym_original_L1_24cell_group_rg_20261117.py
 python3 scripts/check_ym_original_L1_24cell_induced_rg_20261117.py
 python3 scripts/check_ym_original_rational_s3_b4_invariants_20261117.py
+python3 scripts/check_ym_s3_sign_orbit_universal_parity_20261118.py
 python3 scripts/check_ym_s3_degree13_nine_invariants_20261117.py
 python3 scripts/check_ym_original_L1_rational_design_weld_20261117.py
 python3 scripts/check_ym_wilson_all_cutoffs_interval_20261117.py
