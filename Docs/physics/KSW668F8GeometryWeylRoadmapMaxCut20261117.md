@@ -228,3 +228,7 @@ Thus pointwise symbol consistency yields a quantitative norm estimate
 by ordinary Cauchy--Schwarz (the norm inequality is independently mathematical, NOT new Agda-checked code). This isolates the discrete TT leakage producer `q-k`. At matched symbols `q=k`, the divergence is algebraically zero; at original source `k=(1,2,3)` and mismatched `q=(1,1,2)`, leakage is `(-3/2,-24,33/2)`. Original scalar shell-mass coarsening does not give the requisite matching-symbol property.
 
 **Next priority:** identify and prove the full tensor-to-existing F8 radial FV comparison map, then bound its symbol/commutator defect under nonperiodic origin and wall closures; this cannot be inferred from the periodic/constant-coefficient symbol alone. Only after that pursue a coupled G2/G3 stability estimate plus G4 high-regularity trace to promote these finite identities to G5 convergence. G6 remains physical and evidence-dependent.
+
+
+### XXXI manufactured centered-difference symbol diagnostic (nonphysical)
+For fixed `k=(1,2,3)` and mismatched centered-derivative symbol `q_i(h)=sin(k_i h)/h`, exact Taylor algebra gives `T(k)q(h)=(-105,21,21)h²+O(h⁴)` as `h→0`. The independent audit found Euclidean norm `4.2638967157, 1.0848419878, 0.2724004105, 0.0681746399` at `h=.2,.1,.05,.025`. This illustrates the quantitative symbol-defect criterion, **not** the nonuniform radial FV/SAT scheme or a physical Weyl convergence rate. The actual original operator's boundary-compatible symbol/commutator still requires proof.
