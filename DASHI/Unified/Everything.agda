@@ -322,6 +322,143 @@ governedLegalWorkflowSourceSemanticHandoff :
 governedLegalWorkflowSourceSemanticHandoff =
   LegalSourceSemantic.canonicalGovernedLegalWorkflowSourceSemanticHandoff
 
+governedJsonIsNotSemanticCommandAbi :
+  LegalGovernance.JsonArtifactIsSemanticCommandAbi → ⊥
+governedJsonIsNotSemanticCommandAbi =
+  LegalGovernance.toeJsonIsNotSemanticCommandAbi
+
+governedJsonReviewDoesNotCreateDecision :
+  LegalGovernance.JsonReviewFileAutomaticallyReviewerDecision → ⊥
+governedJsonReviewDoesNotCreateDecision =
+  LegalGovernance.toeJsonReviewDoesNotCreateDecision
+
+governedJsonReceiptDoesNotCreateTruth :
+  LegalGovernance.JsonReceiptAutomaticallyClaimTruth → ⊥
+governedJsonReceiptDoesNotCreateTruth =
+  LegalGovernance.toeJsonReceiptDoesNotCreateTruth
+
+governedCliSequenceDoesNotPayResidual :
+  LegalGovernance.CliSequenceAutomaticallyPaysOpenResidual → ⊥
+governedCliSequenceDoesNotPayResidual =
+  LegalGovernance.toeCliSequenceDoesNotPayResidual
+
+governedPinnedStreamDoesNotCreateLegalTruth :
+  LegalGovernance.PinnedOalcStreamingAutomaticallyLegalTruth → ⊥
+governedPinnedStreamDoesNotCreateLegalTruth =
+  LegalGovernance.toePinnedStreamDoesNotCreateLegalTruth
+
+governedReviewedHopJsonDoesNotBecomeCanonicalSemanticTransport :
+  LegalGovernance.ReviewedHopJsonBecomesCanonicalSemanticTransport → ⊥
+governedReviewedHopJsonDoesNotBecomeCanonicalSemanticTransport =
+  LegalGovernance.toeReviewedHopJsonDoesNotBecomeCanonicalSemanticTransport
+
+governedOalcHitDoesNotBecomeBindingAuthority :
+  LegalGovernance.OalcHitAutomaticallyBindingAuthority → ⊥
+governedOalcHitDoesNotBecomeBindingAuthority =
+  LegalGovernance.toeOalcHitDoesNotBecomeBindingAuthority
+
+governedOfficialCourtBytesDoNotBecomePropositionCorrespondence :
+  LegalGovernance.OfficialCourtBytesAutomaticallyPropositionCorrespondence → ⊥
+governedOfficialCourtBytesDoNotBecomePropositionCorrespondence =
+  LegalGovernance.toeOfficialCourtBytesDoNotBecomePropositionCorrespondence
+
+governedSameMncDoesNotCollapseSourceRevisions :
+  LegalGovernance.SameMncAutomaticallySameSourceRevision → ⊥
+governedSameMncDoesNotCollapseSourceRevisions =
+  LegalGovernance.toeSameMncDoesNotCollapseSourceRevisions
+
+governedSuccessfulOfficialFetchDoesNotBecomeProductionReady :
+  LegalGovernance.SuccessfulOfficialFetchAutomaticallyProductionReady → ⊥
+governedSuccessfulOfficialFetchDoesNotBecomeProductionReady =
+  LegalGovernance.toeSuccessfulOfficialFetchDoesNotBecomeProductionReady
+
+governedMultipleReportsDoNotAutomaticallyCreateIndependence :
+  LegalGovernance.MultipleReportsAutomaticallyIndependent → ⊥
+governedMultipleReportsDoNotAutomaticallyCreateIndependence =
+  LegalGovernance.toeMultipleReportsDoNotAutomaticallyCreateIndependence
+
+governedAgreementDoesNotAutomaticallyCreateIndependentCorroboration :
+  LegalGovernance.AgreementAutomaticallyIndependentCorroboration → ⊥
+governedAgreementDoesNotAutomaticallyCreateIndependentCorroboration =
+  LegalGovernance.toeAgreementDoesNotAutomaticallyCreateIndependentCorroboration
+
+governedDependenceDoesNotMeanNoEvidence :
+  LegalGovernance.DependenceMeansNoEvidence → ⊥
+governedDependenceDoesNotMeanNoEvidence =
+  LegalGovernance.toeDependenceDoesNotMeanNoEvidence
+
+governedExpertStatusDoesNotAutomaticallyCreateTruth :
+  LegalGovernance.ExpertStatusAutomaticallyTruth → ⊥
+governedExpertStatusDoesNotAutomaticallyCreateTruth =
+  LegalGovernance.toeExpertStatusDoesNotAutomaticallyCreateTruth
+
+governedReportAdmissionDoesNotRepairMissingInput :
+  LegalGovernance.ReportAdmissionRepairsMissingInput → ⊥
+governedReportAdmissionDoesNotRepairMissingInput =
+  LegalGovernance.toeReportAdmissionDoesNotRepairMissingInput
+
+governedCrossExaminationDoesNotAddUnobservedInput :
+  LegalGovernance.CrossExaminationAddsUnobservedInput → ⊥
+governedCrossExaminationDoesNotAddUnobservedInput =
+  LegalGovernance.toeCrossExaminationDoesNotAddUnobservedInput
+
+governedDisputedRiskDoesNotBecomeIrrelevant :
+  LegalGovernance.DisputedRiskIsIrrelevant → ⊥
+governedDisputedRiskDoesNotBecomeIrrelevant =
+  LegalGovernance.toeDisputedRiskDoesNotBecomeIrrelevant
+
+governedObserverDefectDoesNotProveOpinionFalse :
+  LegalGovernance.ObserverDefectMakesOpinionFalse → ⊥
+governedObserverDefectDoesNotProveOpinionFalse =
+  LegalGovernance.toeObserverDefectDoesNotProveOpinionFalse
+
+governedQualificationDoesNotAutomaticallyProveForensicCompliance :
+  LegalGovernance.QualificationAutomaticallyForensicCompliance → ⊥
+governedQualificationDoesNotAutomaticallyProveForensicCompliance =
+  LegalGovernance.toeQualificationDoesNotAutomaticallyProveForensicCompliance
+
+------------------------------------------------------------------------
+-- Governed legal workflow / source-genealogy and semantic handoffs.
+------------------------------------------------------------------------
+
+import DASHI.Unified.GovernedLegalWorkflowSourceGenealogyTOEExact as LegalSourceGenealogy
+import DASHI.Unified.GovernedLegalWorkflowSourceGenealogyTOERegression
+import DASHI.Unified.GovernedLegalWorkflowSourceSemanticTOEExact as LegalSourceSemantic
+import DASHI.Unified.GovernedLegalWorkflowSourceSemanticTOERegression
+
+governedLegalWorkflowSourceGenealogyHandoff :
+  LegalSourceGenealogy.GovernedLegalWorkflowSourceGenealogyHandoff
+governedLegalWorkflowSourceGenealogyHandoff =
+  LegalSourceGenealogy.canonicalGovernedLegalWorkflowSourceGenealogyHandoff
+
+governedLegalPerceivedIndependenceDoesNotCreateProvenanceIndependence =
+  LegalSourceGenealogy.toePerceivedIndependenceDoesNotCreateLegalProvenanceIndependence
+governedLegalRepetitionDoesNotCreateIndependentEvidence =
+  LegalSourceGenealogy.toeRepetitionDoesNotCreateIndependentLegalEvidence
+governedLegalCommonSourceDoesNotEraseEvidence =
+  LegalSourceGenealogy.toeCommonSourceDependenceDoesNotEraseLegalEvidence
+governedSourceMultiplicityDoesNotAdmitTruth =
+  LegalSourceGenealogy.toeExternalSourceMultiplicityDoesNotAdmitTruth
+governedGenealogyDoesNotPromoteLegalAuthorityTruth =
+  LegalSourceGenealogy.toeLegalAuthorityStillDoesNotCreateTruthAfterGenealogy
+governedReviewedGenealogyDoesNotPayApplicability =
+  LegalSourceGenealogy.toeReviewedGenealogyDoesNotPayApplicability
+governedGenealogyAdmissionDoesNotBecomeLegalSourceAuthority =
+  LegalSourceGenealogy.toeGenealogyAdmissionDoesNotBecomeLegalSourceAuthority
+governedGenealogyCandidateSourceDoesNotCreateLegalAuthority =
+  LegalSourceGenealogy.toeGenealogyCandidateSourceDoesNotCreateLegalAuthority
+governedGenealogySameLegalSystemDoesNotCreateLegalAuthority =
+  LegalSourceGenealogy.toeGenealogySameLegalSystemDoesNotCreateLegalAuthority
+governedGenealogyCurrentValidityDoesNotCreateApplicability =
+  LegalSourceGenealogy.toeGenealogyCurrentValidityDoesNotCreateApplicability
+governedGenealogyDocumentRoleDoesNotCreateLegalAuthority =
+  LegalSourceGenealogy.toeGenealogyDocumentRoleDoesNotCreateLegalAuthority
+
+governedLegalWorkflowSourceSemanticHandoff :
+  LegalSourceSemantic.GovernedLegalWorkflowSourceSemanticHandoff
+governedLegalWorkflowSourceSemanticHandoff =
+  LegalSourceSemantic.canonicalGovernedLegalWorkflowSourceSemanticHandoff
+
 governedSharedLexemeDoesNotCreateSemanticIdentity =
   LegalSourceSemantic.toeSharedLexemeDoesNotCreateSemanticIdentity
 governedDiagnosticCheckDoesNotCreateTheoremPromotion =
