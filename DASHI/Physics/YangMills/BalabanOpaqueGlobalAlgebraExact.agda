@@ -60,9 +60,3 @@ dropTerminalZero4 :
   a + (b + (c + (d + 0ℚ)))
   ≡ a + (b + (c + d))
 dropTerminalZero4 = solve-∀
-
-subtractShiftCancel :
-  ∀ (a b c : ℚ) →
-  (a - c) - (b - c) ≡ a - b
-subtractShiftCancel = solve-∀
-

@@ -1,6 +1,6 @@
 module DASHI.ComputerScience.TinyRadixNeutralRegisterMachineExact where
 
-open import DASHI.Core.Prelude
+open import DASHI.Core.Prelude hiding (NonZero; _%_)
 open import DASHI.Foundations.Base369Nat using (NonZero; _%_)
 
 data Register : Set where
@@ -139,6 +139,15 @@ stepInstr (addRegister target source) state =
     (output state)
     false
     (suc (cycles state))
+stepInstr (addImmediate target value) state =
+  machineState
+    (suc (pc state))
+    (program state)
+    (memory state)
+    (writeRegister (registers state) target (readRegister (registers state) target + value))
+    (output state)
+    false
+    (suc (cycles state))
 stepInstr (subRegister target source) state =
   machineState
     (suc (pc state))
@@ -151,6 +160,33 @@ stepInstr (subRegister target source) state =
     (output state)
     false
     (suc (cycles state))
+stepInstr (subImmediate target value) state =
+  machineState
+    (suc (pc state))
+    (program state)
+    (memory state)
+    (writeRegister (registers state) target (minus (readRegister (registers state) target) value))
+    (output state)
+    false
+    (suc (cycles state))
+stepInstr (multiplyRegister target source) state =
+  machineState
+    (suc (pc state))
+    (program state)
+    (memory state)
+    (writeRegister (registers state) target (readRegister (registers state) target * readRegister (registers state) source))
+    (output state)
+    false
+    (suc (cycles state))
+stepInstr (multiplyModulo target source modulus modulusNonZero) state =
+  machineState
+    (suc (pc state))
+    (program state)
+    (memory state)
+    (writeRegister (registers state) target (_%_ (readRegister (registers state) target * readRegister (registers state) source) modulus {{modulusNonZero}}))
+    (output state)
+    false
+    (suc (cycles state))
 stepInstr (jumpIfZero reg target) state with readRegister (registers state) reg
 ... | zero =
   machineState target (program state) (memory state) (registers state)
@@ -159,6 +195,13 @@ stepInstr (jumpIfZero reg target) state with readRegister (registers state) reg
   machineState (suc (pc state)) (program state) (memory state) (registers state)
     (output state) false (suc (cycles state))
 stepInstr (jumpIfEqual left right target) state with equalNat (readRegister (registers state) left) (readRegister (registers state) right)
+... | true =
+  machineState target (program state) (memory state) (registers state)
+    (output state) false (suc (cycles state))
+... | false =
+  machineState (suc (pc state)) (program state) (memory state) (registers state)
+    (output state) false (suc (cycles state))
+stepInstr (jumpIfEqualImmediate reg value target) state with equalNat (readRegister (registers state) reg) value
 ... | true =
   machineState target (program state) (memory state) (registers state)
     (output state) false (suc (cycles state))
