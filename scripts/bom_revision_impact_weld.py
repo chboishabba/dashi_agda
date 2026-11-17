@@ -70,6 +70,77 @@ def conditional_month_delta_bounds(before_rows, after_rows, station, variable, m
     }
 
 
+def conditional_annual_trend_bounds(months):
+    """Lift complete calendar-year temperature intervals through exact OLS.
+
+    Uses the same day-count weights and centred-year denominator as the
+    existing bom_panel_trend_sensitivity owner; selects interval endpoints
+    based on the signed regression leverage. No missing year is imputed.
+    Conditional independent-box bounds only, NOT a national ACORN-SAT trend.
+    """
+    grouped = defaultdict(dict)
+    for m in months:
+        interval = m.get('conditional_fixed_calendar_delta_interval')
+        if interval is None or m['variable'] not in ('tmax', 'tmin'):
+            continue
+        yy, mm = map(int, m['month'].split('-'))
+        key = (m['station'], m['variable'], yy)
+        if mm in grouped[key]:
+            raise ValueError('duplicate month interval receipt')
+        lower = Fraction(interval['lower_fixed_calendar_delta_C'])
+        upper = Fraction(interval['upper_fixed_calendar_delta_C'])
+        days = int(m['expected_calendar_days'])
+        if lower > upper or days != monthrange(yy, mm)[1]:
+            raise ValueError('invalid conditional month interval or calendar')
+        grouped[key][mm] = (lower, upper, days)
+    annual = []
+    for (station, variable, year), months_by_number in sorted(grouped.items()):
+        if set(months_by_number) != set(range(1, 13)):
+            continue
+        days = sum(d for lo, hi, d in months_by_number.values())
+        if days != (366 if isleap(year) else 365):
+            raise ValueError('inconsistent annual calendar')
+        lower = sum((lo*d for lo, hi, d in months_by_number.values()), Fraction()) / days
+        upper = sum((hi*d for lo, hi, d in months_by_number.values()), Fraction()) / days
+        annual.append({
+            'station': station, 'variable': variable, 'year': year, 'days': days,
+            'lower_exact_C': fraction_text(lower),
+            'upper_exact_C': fraction_text(upper),
+            'conditional_not_measured': True,
+        })
+    station_years = defaultdict(list)
+    for row in annual:
+        station_years[(row['station'], row['variable'])].append(row)
+    trends = []
+    for (station, variable), rows in sorted(station_years.items()):
+        if len(rows) < 2:
+            continue
+        weight_total = sum((Fraction(y['days']) for y in rows), Fraction())
+        center = sum((Fraction(y['days'] * y['year']) for y in rows), Fraction()) / weight_total
+        denominator = sum((Fraction(y['days']) * (y['year']-center)**2
+                           for y in rows), Fraction())
+        if denominator <= 0:
+            raise ValueError('zero centred year variance')
+        lower = upper = Fraction()
+        for y in rows:
+            leverage = Fraction(10*y['days']) * (y['year']-center) / denominator
+            lo = Fraction(y['lower_exact_C'])
+            hi = Fraction(y['upper_exact_C'])
+            lower += leverage * (lo if leverage >= 0 else hi)
+            upper += leverage * (hi if leverage >= 0 else lo)
+        trends.append({
+            'station': station, 'variable': variable, 'years': len(rows),
+            'first_year': min(y['year'] for y in rows),
+            'last_year': max(y['year'] for y in rows),
+            'lower_exact_C_per_decade': fraction_text(lower),
+            'upper_exact_C_per_decade': fraction_text(upper),
+            'interval_conditional_not_measured': True,
+            'selected_years_only_missing_years_not_imputed': True,
+            'national_trend_authorised': False,
+        })
+    return annual, trends
+
+
 def summarize(manifest, root, temperature_min=None, temperature_max=None):
     if (temperature_min is None) != (temperature_max is None):
         raise ValueError('supply both explicit temperature bounds or neither')
@@ -188,6 +259,7 @@ def summarize(manifest, root, temperature_min=None, temperature_max=None):
                 before, after, station, variable, month,
                 temperature_min, temperature_max)
         months.append(record)
+    conditional_annual, conditional_trends = conditional_annual_trend_bounds(months)
     years = []
     for (station, variable, year), monthly in sorted(annual_groups.items()):
         if set(monthly) != set(range(1, 13)):
@@ -239,6 +311,8 @@ def summarize(manifest, root, temperature_min=None, temperature_max=None):
             'complete_station_years': len(years),
         },
         'months': months, 'years': years, 'station_trends': station_trends,
+        'conditional_complete_calendar_station_year_intervals': conditional_annual,
+        'conditional_selected_year_station_trend_intervals': conditional_trends,
         'native_revision_counts': ledger['counts'],
     }
 
