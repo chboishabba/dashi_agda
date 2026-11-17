@@ -100,4 +100,20 @@ check("exact q-gated phase has explicit inverse on rational fixture",
 check("q-gated map commutes with diagonal C3 action on fixture",
       F(tuple(plus(t) for t in original),base)
       ==tuple(plus(t) for t in F(original,base)))
+# Stronger ALL-ROUTER counterexample at a rank-two zero-sum head.
+# Even joining the C2 abs(history) route with directed T need not
+# restore the lost DC sign: h=+t*(1,1,1) vs -t*(1,1,1).
+# For EVERY x, directed-score difference is zero and |h| agrees
+# coordinatewise. Nevertheless the source expert FFN or orientation
+# transition can still inspect signed h, so future-sufficiency fails.
+tp=S.symbols("t",positive=True)
+Hp=tp*S.ones(3,1);Hm=-tp*S.ones(3,1)
+v0,v1,v2=S.symbols("v0 v1 v2",real=True)
+vv=S.Matrix((v0,v1,v2))
+R2=M.subs(wr,-ws-wf)
+check("full C2 plus rank2 directed score cannot recover DC sign",
+      R2.T*(Hp-Hm)==S.zeros(3,1)
+      and all(S.Abs(Hp[i])==S.Abs(Hm[i]) for i in range(3)))
+check("original signed expert history still distinguishes routing fibre",
+      Hp!=Hm)
 print("X369_CIRCULANT_SUFFICIENCY_SYMPY_PASS",len(checks),"checks")
