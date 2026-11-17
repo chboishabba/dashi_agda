@@ -263,3 +263,23 @@ The new Agda proofs derive originalDispersiveRepeatableWork from the existing Me
 **F10 remaining:** Formal all-N induction, real Maxwell 3D space/matter/Hall/Pedersen/neutral-wind and complete plasma chemistry, plus physical effective moving channel interface. **F13 remaining:** measured conductor/collector topology and effective source-connected input admittance; actual causal soil/atmosphere/ionosphere Green operator (not fitted from our synthetic source); nonlinear return path and replenishment. **F15/R3 remaining:** independently verified net natural source work over source-restored matched repeated cycles after all bridge/ion/thermal/controller costs; 100× benchmark assessed only then. F14 original integrated regime and F16 cloud/cold-pool causal link remain distinct OPEN.
  
 **Next high-alpha tranche:** (1) promote finite spatial telescoping energy and source ownership into the pre-existing Agda Maxwell/source port graph, with pinned kernel check; (2) construct selected field-to-port operator subject to actual source/geometry data, nonlinear series-vs-shunt interpretation and causal time-phase transfer; (3) source-backed same-original sustained-cycle acceptance; (4) conditional atmospheric branch. No amount of symbolic algebra can supply missing original P1/P2 measurement.
+
+
+## 17 November — all-N spatial work plus retarded-time Agda weld (latest)
+
+**Source and exact proof surface:** [SmithFilsingerSpatialRetardedAllNFormalMaxCut20261117.md](SmithFilsingerSpatialRetardedAllNFormalMaxCut20261117.md). New canonical consumers:
+
+- `SmithFilsingerSpatialPortChainExact.agda`: `SpatialCell`, dependent `SpatialChain`, `spliceSharedWork`, `spatialChainWorkBalance` **for all finite N**, `spatialLoadBoundedByAdmittedInputs`, `sourceFreeSpatialChainHasZeroLoad`; concrete two-cell witness. No duplicate Maxwell source.
+- `SmithFilsingerTimedSpatialPortChainExact.agda`: reuse canonical `RetardedFlight`, all-N `allTimedPathsArriveAfterLaunch`, `timedSpatialEnergyConservation`, two-flight 1→3→7 witness. Finite causal clock ≠ Maxwell light-cone proof.
+- `SmithFilsingerSpatialSourceBoundaryWeldExact.agda`: SOURCE-INDEXED `SpatialToOriginalSourcePort` uses original `SelectedBoundary` / `FormalFieldToPort`, requires original physical field-to-port input AND output work identifications; derives matching selected original-port law from all-N cells. Missing measurements remain explicit, not silently constructed.
+
+**Execution:** local **900/900 independent exact integer finite-chain checks PASS** (N up to 64); earlier local **16/16 distributed LC/plasma tests PASS**. Added `scripts/test_smith_filsinger_spatial_chain_exact.py` to existing `check_smith_filsinger_dynamic_replenishment.sh`, and the three new Agda owners to existing `check_smith_filsinger_formal_weld_agda29.sh`. **No exact-head GitHub combined run or pinned Agda 2.9 verification**; D1 OPEN. The reported 900 checks are an independent arithmetic replay, not compiler-proven.
+
+**Gate movement:**
+- F10 *finite spatial algebra*: all-N Agda proof candidate source authored, no pinned kernel. **F10 actual nonlinear 3D Maxwell/material/Hall–Pedersen R2 OPEN.**
+- F02 finite causal time: source-authored all-N ordered flight. **Physical phase at interaction region and retarded Green operator OPEN.**
+- F13 original source: stricter same-source indexed boundary work interface; **actual solar/soil/ionospheric impedance, geometry, full wave Maxwell solution P2 OPEN.**
+- F15/R3: existing finite-source matching/replenishment gating intact; **independently measured source work over fully restored cycles OPEN**.
+- User's steelman retains arbitrary source size and possibility of large pump expense where independently measured source work dominates; the source-free and finite-donor counterexamples stay in acceptance.
+
+**Next highest-alpha physical route:** pinned kernel first, then selected actual source/geometry/terminal waveform identification, causal Maxwell material port with independent natural-source boundary and full return. Avoid using random finite-chain receipts to stand in for original astrophysical power access. No ESD edit or unverified TOE promotion.
