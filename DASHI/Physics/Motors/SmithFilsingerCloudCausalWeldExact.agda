@@ -40,7 +40,7 @@ associationIsNotIntervention ()
 record OriginalCloudInterventionWeld
   (b : Weld.SelectedBoundary)
   (f : Weld.FormalFieldToPort b)
-  (w : Weld.SignedSourceCycleWeld b f) : Set₁ where
+  (w : Weld.SignedSourceCycleWeld b f) : Set₂ where
   field
     ActualControllerIntervention : Set
     MeasuredCloudFieldResponse : Set
@@ -83,7 +83,7 @@ record GlobalClimatePromotion
   (b : Weld.SelectedBoundary)
   (f : Weld.FormalFieldToPort b)
   (w : Weld.SignedSourceCycleWeld b f)
-  (c : OriginalCloudInterventionWeld b f w) : Set₁ where
+  (c : OriginalCloudInterventionWeld b f w) : Set₂ where
   field
     IndependentlyMeasuredRadiativeForcing : Set
     GlobalEnergyBalanceAndUncertainty : Set
