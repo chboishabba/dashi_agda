@@ -1,9 +1,8 @@
 module DASHI.Unifier where
-import DASHI.Interop.ITIRMCPFullRegistryCoverageExact
-import DASHI.Interop.SLRFullWorkspaceCrateCoverageExact
-import DASHI.Interop.SLRPNFToAgdaPreflightProofJoinPipelineExact
-import DASHI.Interop.SLRStructuralReceiptFirewallExact
-import DASHI.Interop.SLRNoPathFirewallExact
+import DASHI.Trading.DashiTradeDreamOptionConeExact as DashiTradeDream
+import DASHI.Finance.DashiTradeFibreBridgeExact as DashiTradeFibre
+import DASHI.Law.SensibLawDashiTradeComparativeAdapterExact as DashiTradeLaw
+import DASHI.Law.SensibLawAgdaFirstLegalRuntimeEverything as AgdaFirstLegalRuntime
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Security.AgentAuthorityTrajectoryExact as AgentAuthority
 import DASHI.Security.OpenAIAustraliaAgentIncidentAttributionExact as AgentIncident
@@ -1752,42 +1751,30 @@ unifierYMA1CompletionDoesNotSelfPromote :
   ≡ false
 unifierYMA1CompletionDoesNotSelfPromote =
   YMA1Frontier.rowACompletionDoesNotSelfPromote
+
+
 ------------------------------------------------------------------------
--- SensibLaw reviewed legal-follow convergence.
--- This is an alias-only weld to the golden Law owner.
+-- Golden dashiTRADE/legal convergence.
 ------------------------------------------------------------------------
 
-import DASHI.Law.AustralianContractsReviewedHopCompilerExact as ContractsHop
+unifierDashiTradeZKPFrame : DashiTradeDream.DashiTradeZKPFrame
+unifierDashiTradeZKPFrame = DashiTradeDream.canonicalDashiTradeZKPFrame
 
-unifierReviewedContractsMaxCut :
-  ContractsHop.ReviewedContractsMaxCutBoundary
-unifierReviewedContractsMaxCut =
-  ContractsHop.canonicalReviewedContractsMaxCutBoundary
+unifierDashiTradeDecisionInvariants : DashiTradeDream.DashiTradeDecisionInvariants
+unifierDashiTradeDecisionInvariants =
+  DashiTradeDream.canonicalDashiTradeDecisionInvariants
 
-unifierReviewedContractsAuthorityStillClosed :
-  ContractsHop.reviewedContractsPromotesAnyAuthority
-  ≡ false
-unifierReviewedContractsAuthorityStillClosed =
-  ContractsHop.reviewedContractsAuthorityStillClosed
+unifierDashiTradeFinanceAuthorityBoundary :
+  DashiTradeFibre.ResidualToTradeAuthorityBoundary
+unifierDashiTradeFinanceAuthorityBoundary =
+  DashiTradeFibre.canonicalResidualToTradeAuthorityBoundary
 
-unifierReviewedContractsCreatesNoCurrentLaw :
-  ContractsHop.ReviewedContractsMaxCutBoundary.createsCurrentLawConclusion
-    ContractsHop.canonicalReviewedContractsMaxCutBoundary
-  ≡ false
-unifierReviewedContractsCreatesNoCurrentLaw =
-  ContractsHop.ReviewedContractsMaxCutBoundary.createsCurrentLawConclusionIsFalse
-    ContractsHop.canonicalReviewedContractsMaxCutBoundary
+unifierDashiTradeComparativeBoundary :
+  DashiTradeLaw.DashiTradeComparativeBoundary
+unifierDashiTradeComparativeBoundary =
+  DashiTradeLaw.canonicalDashiTradeComparativeBoundary
 
-
-unifierReviewedContractsRuntimeParity :
-  ContractsHop.ReviewedContractsRuntimeParityBoundary
-unifierReviewedContractsRuntimeParity =
-  ContractsHop.canonicalReviewedContractsRuntimeParityBoundary
-
-unifierReviewedContractsRuntimeCoverageNotFactorsThrough :
-  ContractsHop.ReviewedContractsRuntimeParityBoundary.runtimeCoverageIsFormalFactorsThroughProof
-    ContractsHop.canonicalReviewedContractsRuntimeParityBoundary
-  ≡ false
-unifierReviewedContractsRuntimeCoverageNotFactorsThrough =
-  ContractsHop.ReviewedContractsRuntimeParityBoundary.runtimeCoverageIsFormalFactorsThroughProofIsFalse
-    ContractsHop.canonicalReviewedContractsRuntimeParityBoundary
+unifierAgdaFirstLegalRuntimeContract :
+  AgdaFirstLegalRuntime.AgdaFirstLegalRuntimeContract
+unifierAgdaFirstLegalRuntimeContract =
+  AgdaFirstLegalRuntime.canonicalAgdaFirstLegalRuntimeContract

@@ -1,9 +1,8 @@
 module DASHI.Unified.Everything where
-import DASHI.Interop.ITIRMCPFullRegistryCoverageExact
-import DASHI.Interop.SLRFullWorkspaceCrateCoverageExact
-import DASHI.Interop.SLRPNFToAgdaPreflightProofJoinPipelineExact
-import DASHI.Interop.SLRStructuralReceiptFirewallExact
-import DASHI.Interop.SLRNoPathFirewallExact
+import DASHI.Trading.DashiTradeDreamOptionConeExact as DashiTradeDream
+import DASHI.Finance.DashiTradeFibreBridgeExact as DashiTradeFibre
+import DASHI.Law.SensibLawDashiTradeComparativeAdapterExact as DashiTradeLaw
+import DASHI.Law.SensibLawAgdaFirstLegalRuntimeEverything as AgdaFirstLegalRuntime
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Security.AgentAuthorityTrajectoryExact as AgentAuthority
 import DASHI.Security.OpenAIAustraliaAgentIncidentAttributionExact as AgentIncident
@@ -415,42 +414,27 @@ unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
 
 
 ------------------------------------------------------------------------
--- SensibLaw reviewed legal-follow unified facade.
+-- Golden dashiTRADE/legal convergence.
 ------------------------------------------------------------------------
 
-import DASHI.Law.AustralianContractsReviewedHopCompilerExact as ContractsHop
+unifiedDashiTradeZKPFrame : DashiTradeDream.DashiTradeZKPFrame
+unifiedDashiTradeZKPFrame = DashiTradeDream.canonicalDashiTradeZKPFrame
 
-unifiedReviewedContractsMaxCut :
-  ContractsHop.ReviewedContractsMaxCutBoundary
-unifiedReviewedContractsMaxCut =
-  ContractsHop.canonicalReviewedContractsMaxCutBoundary
+unifiedDashiTradeDecisionInvariants : DashiTradeDream.DashiTradeDecisionInvariants
+unifiedDashiTradeDecisionInvariants =
+  DashiTradeDream.canonicalDashiTradeDecisionInvariants
 
-unifiedReviewedContractsResidualsPreserved :
-  ContractsHop.ReviewedContractsMaxCutBoundary.reviewedResidualsSurviveTrajectory
-    ContractsHop.canonicalReviewedContractsMaxCutBoundary
-  ≡ true
-unifiedReviewedContractsResidualsPreserved =
-  ContractsHop.ReviewedContractsMaxCutBoundary.reviewedResidualsSurviveTrajectoryIsTrue
-    ContractsHop.canonicalReviewedContractsMaxCutBoundary
+unifiedDashiTradeFinanceAuthorityBoundary :
+  DashiTradeFibre.ResidualToTradeAuthorityBoundary
+unifiedDashiTradeFinanceAuthorityBoundary =
+  DashiTradeFibre.canonicalResidualToTradeAuthorityBoundary
 
-unifiedReviewedContractsNoLegalAuthority :
-  ContractsHop.ReviewedContractsMaxCutBoundary.createsLegalAuthority
-    ContractsHop.canonicalReviewedContractsMaxCutBoundary
-  ≡ false
-unifiedReviewedContractsNoLegalAuthority =
-  ContractsHop.ReviewedContractsMaxCutBoundary.createsLegalAuthorityIsFalse
-    ContractsHop.canonicalReviewedContractsMaxCutBoundary
+unifiedDashiTradeComparativeBoundary :
+  DashiTradeLaw.DashiTradeComparativeBoundary
+unifiedDashiTradeComparativeBoundary =
+  DashiTradeLaw.canonicalDashiTradeComparativeBoundary
 
-
-unifiedReviewedContractsRuntimeParity :
-  ContractsHop.ReviewedContractsRuntimeParityBoundary
-unifiedReviewedContractsRuntimeParity =
-  ContractsHop.canonicalReviewedContractsRuntimeParityBoundary
-
-unifiedReviewedContractsKernelAcceptsReviewedDeltaOnly :
-  ContractsHop.ReviewedContractsRuntimeParityBoundary.genericKernelAcceptsOnlyReviewedDelta
-    ContractsHop.canonicalReviewedContractsRuntimeParityBoundary
-  ≡ true
-unifiedReviewedContractsKernelAcceptsReviewedDeltaOnly =
-  ContractsHop.ReviewedContractsRuntimeParityBoundary.genericKernelAcceptsOnlyReviewedDeltaIsTrue
-    ContractsHop.canonicalReviewedContractsRuntimeParityBoundary
+unifiedAgdaFirstLegalRuntimeContract :
+  AgdaFirstLegalRuntime.AgdaFirstLegalRuntimeContract
+unifiedAgdaFirstLegalRuntimeContract =
+  AgdaFirstLegalRuntime.canonicalAgdaFirstLegalRuntimeContract

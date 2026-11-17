@@ -1,9 +1,8 @@
 module DASHI.EverythingTOESymmetryResolved369 where
-import DASHI.Interop.ITIRMCPFullRegistryCoverageExact
-import DASHI.Interop.SLRFullWorkspaceCrateCoverageExact
-import DASHI.Interop.SLRPNFToAgdaPreflightProofJoinPipelineExact
-import DASHI.Interop.SLRStructuralReceiptFirewallExact
-import DASHI.Interop.SLRNoPathFirewallExact
+import DASHI.Trading.DashiTradeDreamOptionConeExact as DashiTradeDream
+import DASHI.Finance.DashiTradeFibreBridgeExact as DashiTradeFibre
+import DASHI.Law.SensibLawDashiTradeComparativeAdapterExact as DashiTradeLaw
+import DASHI.Law.SensibLawAgdaFirstLegalRuntimeEverything as AgdaFirstLegalRuntime
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Security.AgentAuthorityTrajectoryExact as AgentAuthority
 import DASHI.Security.OpenAIAustraliaAgentIncidentAttributionExact as AgentIncident
@@ -1518,53 +1517,54 @@ toeYMA1CompletionDoesNotSelfPromote :
   ≡ false
 toeYMA1CompletionDoesNotSelfPromote =
   YMA1Frontier.rowACompletionDoesNotSelfPromote
+
+
 ------------------------------------------------------------------------
--- SensibLaw Australian-contracts reviewed-hop TOE convergence.
--- Proof ownership remains in the Law module.
+-- dashiTRADE and Agda-first legal governance convergence.
 ------------------------------------------------------------------------
 
-import DASHI.Law.AustralianContractsReviewedHopCompilerExact as ContractsHop
+toeDashiTradeZKPFrame : DashiTradeDream.DashiTradeZKPFrame
+toeDashiTradeZKPFrame = DashiTradeDream.canonicalDashiTradeZKPFrame
 
-toeReviewedContractsMaxCut :
-  ContractsHop.ReviewedContractsMaxCutBoundary
-toeReviewedContractsMaxCut =
-  ContractsHop.canonicalReviewedContractsMaxCutBoundary
+toeDashiTradeDecisionInvariants : DashiTradeDream.DashiTradeDecisionInvariants
+toeDashiTradeDecisionInvariants =
+  DashiTradeDream.canonicalDashiTradeDecisionInvariants
 
-toeReviewedContractsZKPFrame :
-  ContractsHop.ReviewedContractsTOEZKPFrame
-toeReviewedContractsZKPFrame =
-  ContractsHop.reviewedContractsZKPFrame
+toeDashiTradeDecisionPostconditions : DashiTradeDream.DashiTradeDecisionPostconditions
+toeDashiTradeDecisionPostconditions =
+  DashiTradeDream.canonicalDashiTradeDecisionPostconditions
 
-toeReviewedContractsAuthorityStillClosed :
-  ContractsHop.reviewedContractsPromotesAnyAuthority
-  ≡ false
-toeReviewedContractsAuthorityStillClosed =
-  ContractsHop.reviewedContractsAuthorityStillClosed
+toeDashiTradeFinanceAuthorityBoundary :
+  DashiTradeFibre.ResidualToTradeAuthorityBoundary
+toeDashiTradeFinanceAuthorityBoundary =
+  DashiTradeFibre.canonicalResidualToTradeAuthorityBoundary
 
-toeReviewedContractsFleetFormalGapBudget :
-  ContractsHop.reviewedContractsFormalGapCount
-  ≡ 58
-toeReviewedContractsFleetFormalGapBudget =
-  ContractsHop.reviewedContractsFormalGapBudgetIs58
+toeDashiTradeComparativeBoundary :
+  DashiTradeLaw.DashiTradeComparativeBoundary
+toeDashiTradeComparativeBoundary =
+  DashiTradeLaw.canonicalDashiTradeComparativeBoundary
 
+toeAgdaFirstLegalRuntimeContract :
+  AgdaFirstLegalRuntime.AgdaFirstLegalRuntimeContract
+toeAgdaFirstLegalRuntimeContract =
+  AgdaFirstLegalRuntime.canonicalAgdaFirstLegalRuntimeContract
 
-toeReviewedContractsRuntimeParity :
-  ContractsHop.ReviewedContractsRuntimeParityBoundary
-toeReviewedContractsRuntimeParity =
-  ContractsHop.canonicalReviewedContractsRuntimeParityBoundary
+toeDashiTradeRuntimeConformanceCannotAutoPromote :
+  DashiTradeDream.RuntimeConformancePromotion → ⊥
+toeDashiTradeRuntimeConformanceCannotAutoPromote =
+  DashiTradeDream.runtimeConformanceCannotBePromotedWithoutReceipt
 
-toeReviewedContractsPaidTreatmentDoesNotResurrect :
-  ContractsHop.ReviewedContractsRuntimeParityBoundary.paidTreatmentWorkMayResurrectAsFreshTreatmentWork
-    ContractsHop.canonicalReviewedContractsRuntimeParityBoundary
-  ≡ false
-toeReviewedContractsPaidTreatmentDoesNotResurrect =
-  ContractsHop.ReviewedContractsRuntimeParityBoundary.paidTreatmentWorkMayResurrectAsFreshTreatmentWorkIsFalse
-    ContractsHop.canonicalReviewedContractsRuntimeParityBoundary
+toeDashiTradeJustificationDoesNotProveMarketCausation :
+  DashiTradeLaw.JustificationChainProvesMarketCausation → ⊥
+toeDashiTradeJustificationDoesNotProveMarketCausation =
+  DashiTradeLaw.justificationChainDoesNotProveMarketCausation
 
-toeReviewedContractsClosedDoesNotMeanAdequate :
-  ContractsHop.ReviewedContractsRuntimeParityBoundary.frontierClosureMeansFormalConsumerAdequacy
-    ContractsHop.canonicalReviewedContractsRuntimeParityBoundary
-  ≡ false
-toeReviewedContractsClosedDoesNotMeanAdequate =
-  ContractsHop.ReviewedContractsRuntimeParityBoundary.frontierClosureMeansFormalConsumerAdequacyIsFalse
-    ContractsHop.canonicalReviewedContractsRuntimeParityBoundary
+toeDashiTradeProfitDoesNotProveGlobalTheory :
+  DashiTradeLaw.ProfitableTrajectoryProvesGlobalTheory → ⊥
+toeDashiTradeProfitDoesNotProveGlobalTheory =
+  DashiTradeLaw.profitableTrajectoryDoesNotProveGlobalTheory
+
+toeReferenceLegalRuntimeCannotOverrideAgda :
+  AgdaFirstLegalRuntime.ReferenceImplementationMayOverrideAgdaContract → ⊥
+toeReferenceLegalRuntimeCannotOverrideAgda =
+  AgdaFirstLegalRuntime.referenceImplementationDoesNotOverrideFormalContract

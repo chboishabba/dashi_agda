@@ -59,3 +59,22 @@ sameProposalDifferentResidualWitness :
   ⊥
 sameProposalDifferentResidualWitness =
   DeclaredRealized.sameProposalDifferentResidual
+
+
+goldenZKPFrameRetained : Dream.DashiTradeZKPFrame
+goldenZKPFrameRetained = Dream.canonicalDashiTradeZKPFrame
+
+goldenDecisionInvariantsRetained : Dream.DashiTradeDecisionInvariants
+goldenDecisionInvariantsRetained = Dream.canonicalDashiTradeDecisionInvariants
+
+goldenDecisionPostconditionsRetained : Dream.DashiTradeDecisionPostconditions
+goldenDecisionPostconditionsRetained = Dream.canonicalDashiTradeDecisionPostconditions
+
+runtimeParityStillOpen :
+  Dream.currentRuntimeParityReceiptSupplied ≡ false
+runtimeParityStillOpen = Dream.currentRuntimeConformanceStillOpen
+
+runtimeConformanceStillCannotAutoPromote :
+  Dream.RuntimeConformancePromotion → ⊥
+runtimeConformanceStillCannotAutoPromote =
+  Dream.runtimeConformanceCannotBePromotedWithoutReceipt

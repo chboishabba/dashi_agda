@@ -34,6 +34,7 @@ module DASHI.Trading.DashiTradeDreamOptionConeExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _+_)
+open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.IntersectionalNonFactorability as INF
@@ -308,3 +309,124 @@ canonicalDashiTradeDreamBoundary =
     true
     true
     true
+
+
+------------------------------------------------------------------------
+-- Golden decision contract.
+------------------------------------------------------------------------
+
+record ActionDecisionReceipt
+    (state : TradingFabricState)
+    (action : TradeAction)
+    (RobustlyDominatesHold : TradingFabricState → TradeAction → Set) : Set where
+  constructor action-decision-receipt
+  field
+    selectedActionIsAvailable : Available state action
+    selectedActionRobustlyDominatesHold : RobustlyDominatesHold state action
+
+record DashiTradeDecisionPreconditions : Set₁ where
+  constructor dashi-trade-decision-preconditions
+  field
+    UnitNormalizationReceipt : Set
+    unitNormalizationReceipt : UnitNormalizationReceipt
+    RuntimeParityReceipt : Set
+    runtimeParityReceipt : RuntimeParityReceipt
+    CandidateState : TradingFabricState
+    CandidateAction : TradeAction
+    candidateActionAvailable : Available CandidateState CandidateAction
+
+record DashiTradeDecisionInvariants : Set where
+  constructor dashi-trade-decision-invariants
+  field
+    proposalIsNotAuthorization : Bool
+    proposalIsNotAuthorizationIsTrue : proposalIsNotAuthorization ≡ true
+    predictedWeightIsNotAccessibility : Bool
+    predictedWeightIsNotAccessibilityIsTrue :
+      predictedWeightIsNotAccessibility ≡ true
+    accessibilityIsNotActionability : Bool
+    accessibilityIsNotActionabilityIsTrue :
+      accessibilityIsNotActionability ≡ true
+    holdRemainsFirstClass : Bool
+    holdRemainsFirstClassIsTrue : holdRemainsFirstClass ≡ true
+    marginalSuccessDoesNotPromoteJointViability : Bool
+    marginalSuccessDoesNotPromoteJointViabilityIsTrue :
+      marginalSuccessDoesNotPromoteJointViability ≡ true
+    runtimeDoesNotOverrideAgda : Bool
+    runtimeDoesNotOverrideAgdaIsTrue : runtimeDoesNotOverrideAgda ≡ true
+
+canonicalDashiTradeDecisionInvariants : DashiTradeDecisionInvariants
+canonicalDashiTradeDecisionInvariants =
+  dashi-trade-decision-invariants
+    true refl
+    true refl
+    true refl
+    true refl
+    true refl
+    true refl
+
+record DashiTradeDecisionPostconditions : Set where
+  constructor dashi-trade-decision-postconditions
+  field
+    chosenActionHasAvailabilityReceipt : Bool
+    chosenActionHasAvailabilityReceiptIsTrue :
+      chosenActionHasAvailabilityReceipt ≡ true
+    robustDominanceRequiredForRiskIncrease : Bool
+    robustDominanceRequiredForRiskIncreaseIsTrue :
+      robustDominanceRequiredForRiskIncrease ≡ true
+    realizedOutcomeRemainsSeparate : Bool
+    realizedOutcomeRemainsSeparateIsTrue :
+      realizedOutcomeRemainsSeparate ≡ true
+    conformanceRequiresImplementationReceipt : Bool
+    conformanceRequiresImplementationReceiptIsTrue :
+      conformanceRequiresImplementationReceipt ≡ true
+
+canonicalDashiTradeDecisionPostconditions : DashiTradeDecisionPostconditions
+canonicalDashiTradeDecisionPostconditions =
+  dashi-trade-decision-postconditions
+    true refl
+    true refl
+    true refl
+    true refl
+
+data RuntimeConformancePromotion : Set where
+
+runtimeConformanceCannotBePromotedWithoutReceipt :
+  RuntimeConformancePromotion → ⊥
+runtimeConformanceCannotBePromotedWithoutReceipt ()
+
+record DashiTradeZKPFrame : Set where
+  constructor dashi-trade-zkp-frame
+  field
+    O-objective : String
+    R-reuse : String
+    C-construction : String
+    S-safety : String
+    L-lane : String
+    P-preconditionsInvariantsPostconditions : String
+    G-governance : String
+    F-verification : String
+
+canonicalDashiTradeZKPFrame : DashiTradeZKPFrame
+canonicalDashiTradeZKPFrame =
+  dashi-trade-zkp-frame
+    "O: choose only an available action that carries an explicit robust-dominance receipt over HOLD"
+    "R: reuse PermissionKernel, IntersectionalNonFactorability, finance fibres, declared-realized viability, and SensibLaw comparative adapters"
+    "C: keep proposal, prediction, accessibility, barrier, actionability, trajectory cost, execution, and realized outcome as separate typed stages"
+    "S: fail closed on erased consumer distinctions, unit ambiguity, missing runtime parity, and missing robust-dominance evidence"
+    "L: one trading normalization lane; Agda is golden; Lean and runtime are consumers"
+    "P: require normalized units, runtime parity, action availability, retained joint state, and robust dominance before risk-increasing execution"
+    "G: governance standards are process lenses only; they do not create trading truth, legal authority, or certification"
+    "F: zero-trust Agda proof terms plus implementation parity receipts are required before runtime conformance is claimed"
+
+currentRuntimeUnitNormalizationComplete : Bool
+currentRuntimeUnitNormalizationComplete = false
+
+currentRuntimeParityReceiptSupplied : Bool
+currentRuntimeParityReceiptSupplied = false
+
+currentRuntimeRobustDominanceReceiptSupplied : Bool
+currentRuntimeRobustDominanceReceiptSupplied = false
+
+currentRuntimeConformanceStillOpen :
+  currentRuntimeParityReceiptSupplied ≡ false
+currentRuntimeConformanceStillOpen = refl
