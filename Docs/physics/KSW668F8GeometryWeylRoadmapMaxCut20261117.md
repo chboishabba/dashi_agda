@@ -151,3 +151,39 @@ E_electric-E_SMS
 At a **source-free receiver** the `amp*S` term vanishes. A pointwise triangle estimate follows with coefficients 123/160 for the characteristic SAT mismatch and 3/16 for the bulk PDE residual. To apply to the computed receiver, however, one still needs a rigorous identification of discrete characteristic variables with the original Cartesian normal jets, plus high-Sobolev/pointwise trace control. Prior XXVI wall residuals were time-integrated shell-weighted L2 and **cannot** be inserted directly into this pointwise identity.
 
 The full arbitrary-positive-t source-jet identity was checked in independent SymPy without imposing the field equations; the t=4/3 contraction/reconstruction is source-written Agda with kernel acceptance pending. The remaining G1 full angular multipoles/TT gauge/covariant linearization and G2 joint energy are **OPEN** despite this much stronger local weld.
+
+
+## Maximum-cut XXX — original three-channel radial-geometry transport (2026-11-17)
+
+**Goal:** avoid dead-reckoning geometry. Transport the existing XXIX geometric curvature/SMS defect to the ACTUAL original F8 \(H_{\ell}=(r/\epsilon)^\ell V_\ell\) angular decomposition, not an invented extra dimension or independent source.
+
+**New exact rational Agda source** `KSW668F8OriginalThreeMultipoleRadialJetWeldExact.agda`: for ell=0,2,4, write \(c_\ell=\epsilon^{-\ell}\). The angular Laplacian term cancels exactly in
+```
+r² Delta3 (c_l r^ell V_l Y_l)
+  = c_l r^ell [r² V_l'' +(2ell+2)r V_l'] Y_l .
+```
+The cancellation is encoded in polynomial r² jets, avoiding division by r and using the existing native `KSW668AdS5TTMultipoleAngularRationalExact.agda` owner for d_eff=3,7,11. The exact radial part of the E5-2E4 combination, \(r²(Delta3 H + H_{rr})\), equals
+```
+ell=2: c2 [2r⁴ V2''+10r³ V2'+2r² V2]
+ell=4: c4 [2r⁶ V4''+18r⁵ V4'+12r⁴ V4].
+```
+These identities are algebraic for the analytic tensor decomposition and for the **same interpolated radial V** under analytic product differentiation; they do NOT imply exact discrete tensor transversality or continuum convergence.
+
+**New guarded three-channel transport** `KSW668F8ThreeChannelElectricWeylDefectTransportExact.agda`: if each corresponding TT *tensor* component satisfies the original t=4/3 same-object electric-vs-SMS residual identity, the common receiver sum obeys
+```
+Sum_l(Eelectric_l)-Sum_l(ESMS_l)
+ = -(41/40) Sum_l(RN_l) -(3/16) Sum_l(Rbulk_l).
+```
+The record **requires** the channelwise tensor/gauge hypothesis; the three scalar multipoles of a single `yy` component are not independently TT tensors. This is the exact missing hypothesis for the full G1 formal promotion, not evidence it has been fulfilled.
+
+**Independent local verification:** `scripts/test_ksw668_f8_three_harmonic_weyl_transport.py` verifies all three ell radial identities, the original arbitrary-jet electric-Weyl/SMS residual, the actual fourth-order tensor-TT projector and the three-way linear sum (6 mathematical checks). The existing XXVI saved `h=.004` forward wall state was independently inspected, using the original four-node cubic interpolation and its derivatives: **15/15 checks** of Hrr, Lap3H, r² polynomial bridge, and E5-2E4 by channel PASS. Max absolute radial bridge residual 1.11e-16; dual readout residual 2.17e-19. NO new wave evolution or numerical convergence was claimed.
+
+**Updated remaining maximum cut:**
+- G1: show the *full original* `PQP-(1/2)P tr(PQ)` source, bulk tensor field, and three angular `H_l` reconstruction commute with discrete TT divergence, trace, gauge and normal projection at the receiver; extend rational polarization slice to all-t Agda geometry. **OPEN**.
+- G2: use the defect theorem to define stage-resolved original Neumann/SAT and bulk residuals, and prove a meaningful pointwise boundary trace from a norm measured by the solver. **OPEN**.
+- G3: coupled moving `(U,P,M)` energy and SSPRK3 CFL with outer-wall flux. **OPEN**.
+- G4: uniform source-to-H5/higher Sobolev estimate on the moving warped half-space to bound both pointwise Weyl readouts. **OPEN**.
+- G5: independent `dr,dy,dt` convergence for H, E4, E5 and outside-cone null; no convergence claim from r² jet identities. **OPEN**.
+- G6: same-object matter action, retarded tensor FIO, detector calibration/observation. **OPEN**.
+
+**Acceptance/attribution firewall:** source-written Agda; pinned Agda kernel NOT RUN. Original KSW model/TT source, Caldwell–Langlois, Thorne and other cited mathematics retain credit. The user-directed maximum-cut and newly derived conditional algebra are recorded separately; no ESD edits, no unrelated Monster/369 physical correspondence.
