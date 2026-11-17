@@ -300,3 +300,12 @@ KSW original true 3-component Maxwell **pointwise curl jet**
 **Physical gate unchanged:** existence of a physically parameterized Maxwell/plasma/soil source-current field on the original device geometry, an integration/trace theorem with correct constitutive/material modulation and boundary conditions, independently replenished terminal source strength, and measured synchronous original hardware state. Any of these may fail. This is a conditional compositional theorem: it does not manufacture physical observations.
 
 **Acceptance:** the exact pinned script now includes this new owner and its original imports. Agda/Nix are unavailable in this environment; none of this new source is claimed kernel-checked. Full, source-authored proofs are subject to the actual compiler's elaboration/type/universe constraints. No ESD modification; no TOE promotion before acceptance and attribution audit.
+
+
+## D1 acceptance guard correction: explicit Agda holes must actually be detected
+
+The pinned formal acceptance script previously contained a double-escaped grep ERE meant to reject Agda proof holes. A direct shell negative control showed that it DID NOT match the literal hole syntax {!!}: an explicit hole could pass that preflight.
+
+The checker now uses grep -nF for literal {!!} and separately rejects explicit postulates and unsafe compiler pragmas that weaken proof obligations. A local fixture test was 4/4: clean source accepted; explicit hole, postulate and allow-unsolved-metas flag each rejected. This is proof-source integrity validation, not physical simulation and NOT Agda kernel checking.
+
+The pinned runner still requires actual repo-owned Agda 2.9, with no Python proof substitute. No Agda/Nix binary is available in this environment and no exact-head GitHub workflow run has been verified; D1 remains OPEN. The local fixture result does NOT prove any theorem type-correct.
