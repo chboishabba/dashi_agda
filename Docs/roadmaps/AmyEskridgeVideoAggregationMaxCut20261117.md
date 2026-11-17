@@ -128,3 +128,61 @@ is NOT proof that the associated physical or intelligence events occurred.
 
 ### Attribution rules (mandatory)
 Each joined item must retain **original speaker**, **original source author**, **medium**, **date**, **DOI/patent/canonical link**, **exact bounded result**, **DASHI extension ownership**, **inspection depth**, **negative control** and **unpaid promotion**. A missing DOI is not permission to omit a citation. An original paper's tested regime must not be promoted to a device's observed success. A House request does not certify its referenced journalistic allegations. An unexplained death does not establish targeting. No synthetic witness or derived numerical check may be back-attributed to original authors.
+
+
+## Source-inspection continuation — original publication and primary documents (2026-11-17)
+
+### Original edited video recovered
+
+- Publisher: **Be Inspired**, YouTube handle `@beinspiredchannel`, video ID `acw16d6CCnY`:
+  https://www.youtube.com/watch?v=acw16d6CCnY
+- Channel-indexed publication date: **12 May 2026**; full video duration **32:47**. User's timecoded transcript ends at 32:44.
+- Independent channel index: https://asknaveen.com/channel/%40beinspiredchannel (12 May 2026, 32:47); a third-party mirror may display 13 May by its timezone. Do not assert an exact timezone of upload without YouTube metadata.
+- Original editor/video author **does not become** the author of underlying first-person interview or scientific study. This is a video claim/source aggregator.
+- Previous repo notes saying "video URL not supplied" applied **before** this recovery; they are now superseded by the canonical registry and this dated entry.
+
+### Original interview cuts recovered
+
+The new `DASHI/Culture/AmyEskridgeVideoOriginalClipLineageExact.agda` identifies 16 source-clip segments, with exact versus family-only status. These source links remain discoverable:
+
+1. **Amy Eskridge / Jeremy Rys / Mark Sokol, 2020 Zoom**, original https://www.youtube.com/watch?v=l0O4cEIkUZc ; archived full transcript https://blockedepistemology.substack.com/p/archive-amy-eskridge-zoom (archived January 27, 2024). Video 00:00–00:21 combines **out-of-order** quotations from ~30–35 minutes of the Zoom: the source mention of an alleged NSA list is reported hearsay, **not** an inspected NSA document. Video 00:31–01:23 Lexus story draws from ~2:53–2:57 in original. Video 01:41–01:53 P-52 from ~0:52–0:53.
+2. **Dan Burisch / Project Camelot 2006**, `Out From Under Majestic`, https://projectcamelot.org/dan_burisch_interview_transcript_2.html ; the video 02:04–02:35 P-45 / 45,000 years exchange matches the section **"2012: Two Timelines"**. This is distinct from:
+3. **Dan Burisch / Project Camelot 2007**, `Stargate Secrets`, https://projectcamelot.org/dan_burisch.html ; video 16:02–16:49, 19:15–20:23, 21:22–23:00, 24:00–24:43, 26:39–27:15, 28:41–30:21, 31:26–32:04. Many snippets are now original-interview-family located, but frame-exact source offsets still require original video/audio comparison. Kerry Cassidy and Bill Ryan conducted the interview. Recurrence of one Burisch witness does not create multiple independent sources.
+4. **Philip K Dick, 1977 Metz address**, `If You Find This World Bad, You Should See Some of the Others` on video https://www.youtube.com/watch?v=DQbYiXyRZjM ; 16:49–17:13, conceptual/speculative testimony only.
+5. **David Deutsch, 17:13–17:40**: voice/theory attributed, **exact original documentary footage not located**. Many-worlds interference is an interpretation of quantum theory; it is not evidence of Looking Glass operations.
+6. **18:35–19:10 anticipatory-physiology clip**: original speaker/recording unresolved. Daryl J. Bem, `Feeling the Future` (2011) DOI 10.1037/a0021524 describes nine retroactive psychology tasks; the film's arousal-before-random-images scenario resembles a distinct physiological **presentiment** paradigm associated with Dean Radin and others. Do not attribute this particular clip/experiment to Bem without the source.
+
+### Primary scientific and government source inspections
+
+`DASHI/Culture/AmyEskridgeVideoPrimaryInspectionExact.agda` retains **10 bounded document readings** with documentary locators, exact reported assertions and unpaid stronger claims. It joins the existing 86-row ledger but does not claim physical or forensic validation.
+
+- **NASA cooperative agreement NCC8-124**: Original final report https://ntrs.nasa.gov/api/citations/20000038203/downloads/20000038203.pdf ; Dr Ning Li, dated 4 December 1996–3 December 2000. PDF p.2: two 12-inch YBCO 1-2-3 disks produced; all-up gravitational test apparatus/measurements **not completed** during this agreement. This is direct project documentation, not proof of later Army outcomes. Earlier source owners already cited NTRS 20000038203; this weld adds exact inspected pages.
+- **Li, Noever, Robertson, Koczor, Brantley 1997 static YBCO test**: https://ntrs.nasa.gov/citations/19990039542 DOI 10.1016/S0921-4534(97)01462-7, *Physica C* 281, 260–267. Abstract reports detected changes in acceleration **less than 2×10^-8 of g** in its tested static regime. This is a constrained null observation, not a universal disproof of all rotating setups.
+- **Noever, Koczor, Roberson rotating-field study (1998)**: NASA NTRS 19990019627 https://ntrs.nasa.gov/citations/19990019627 . The report describes 15 cm YBCO disk, AC rotating field up to 12,000 rpm, and **no noted gravimeter effect** within the tested precision. Exact setup differs from Podkletnov's.
+- **Podkletnov & Nieminen (1992)**: DOI 10.1016/0921-4534(92)90055-H, *Physica C* 203, 441–444. Published abstract reports **0.05–0.3% apparent weight** change. Later published accounts (e.g. the Li et al. 1997 introduction) cite reports **0.05–2.1%**. These are *different report lineages*, not a mathematical contradiction or independent replication. Earlier numerical 2% / 0.3% = 20/3 is only a cross-source comparison.
+- **DIA FOIA letter** (FOIA-00159-2018): https://documents2.theblackvault.com/documents/dia/AAWSAP-DIRDs/FOIA%2000159-2018.pdf ; issued **25 March 2022**, explicitly enumerates **37 responsive documents / 1,473 pages** and inventory entries #13 (warp), #15 (vacuum metric), #18 (wormholes), #19 (antigravity). A previously circulated **38-title** list is a *different inventory/release stage*, not the number of full 2022 documents. Whether a 38th title was later obtained remains unpaid.
+- **Four full DIA Defense Intelligence Reference Documents** are directly inspected in released PDF form, as follows:
+  - #13, *Warp Drive, Dark Energy, and the Manipulation of Extra Dimensions* (2 Apr 2010; DIA-08-1004-001), https://documents2.theblackvault.com/documents/dia/AAWSAP-DIRDs/DIRD_13-DIRD_Warp_Drive_Dark_energy_and_the_Manipulation_of_Extra_Dimensions.pdf . Section 8 (report p.24) discusses a proposed future extra-dimensional propulsion approach. Does not document demonstrated warp control.
+  - #15, *Advanced Space Propulsion Based on Vacuum (Spacetime Metric) Engineering* (29 Mar 2010; DIA-08-1003-015), https://documents2.theblackvault.com/documents/dia/AAWSAP-DIRDs/DIRD_15-DIRD_Advanced_Space_Propulsion_Based_on_Vacuum_Spacetime_Metric_Engineer.pdf . Preface/IV explicit: assumes a hypothetical source capable of modifying metric; required energy densities many orders above engineering feasibility. **A theoretical metric-choice exercise, not a working device**.
+  - #18, *Traversable Wormholes, Stargates, and Negative Energy* (6 Apr 2010; DIA-08-1004-004), https://documents2.theblackvault.com/documents/dia/AAWSAP-DIRDs/DIRD_18-DIRD_Traversible_Wormholes_Stargates_and_Negative_Energy.pdf . Section V (report p.26) outlines steps required for a **future laboratory demonstration**. A diagram or the word 'Stargate' does not establish Burisch's claimed 50 devices.
+  - #19, *Antigravity for Aerospace Applications* (30 Mar 2010; DIA-08-1003-018), https://documents2.theblackvault.com/documents/dia/AAWSAP-DIRDs/DIRD_19-DIRD_Antigravity_for_Aerospace_Applications.pdf . Section V (report p.24) explicitly identifies extreme physical scales and **daunting technical challenges**. Does not document a successful antigravity generator.
+
+### Critical open gates after this source welding
+
+- **V1**: Original clip exact-offset receipts for all segments, especially the unidentified Deutsch and physiological-pre-stimulus interview footage.
+- **S1**: Primary programme award/statement of work/closeout for Ning Li's post-NASA Army/AC Gravity phase.
+- **S2**: Full original experimental datasets/methods for Podkletnov's later 2% tests; independent replications with environmental, electrostatic, temperature, vibration, magnetic and buoyancy controls.
+- **S3**: Exact first 38-title DIA inventory vs the 2022 37-document FOIA response; determine missing/unreleased title and custody.
+- **S4**: Independent forensic identity/cause evidence for all video roster entries; programme-coincidence and event-time matched controls; no promotion from news selection to harm cause.
+- **S5**: Claimed NSA list, Project Camelot device artefacts and EU/UN/NATO custody records: no authenticated primary government/engineering carrier located. Document absence of evidence **is not** proof of concealment.
+
+### Acceptance and epistemic status
+
+The current source checks are **human/automated inspection notes**, **not kernel acceptance**. The SymPy/static checker now additionally asserts: ten explicit inspected-primary records, sixteen original clip records, video publication ID, and the existing 86-claim coverage theorem surface. Run:
+
+```bash
+python scripts/check_amy_eskridge_video_claim_weld_sympy.py
+DASHI_NO_TMUX=1 scripts/run_agda29_parallel_check.sh DASHI/Culture/AmyEskridgeVideoEvidenceEverything.agda
+```
+
+Retain **draft** until the checker and full transitive Agda typecheck pass at the exact PR head. No claim about a death, government conspiracy or gravity mechanism is upgraded merely by adding a link.
