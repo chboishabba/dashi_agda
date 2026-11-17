@@ -99,3 +99,28 @@ originalFullTTAzimuthIntegratedNorm :
       + ((+ 2) / 1))
     ≡ (+ 8) / 5
 originalFullTTAzimuthIntegratedNorm = solve []
+
+-- Nonaxisymmetry is a genuine tensor feature, even at fixed mu=kx=0.
+-- Both examples are rational unit vectors. The second is (0,3/5,4/5).
+fullTensorNormAtAxisY :
+  ttFrobeniusSquared ((+ 0) / 1) ((+ 1) / 1) ((+ 0) / 1)
+    ≡ (+ 1) / 2
+fullTensorNormAtAxisY = solve []
+
+fullTensorNormAtThreeFourFive :
+  ttFrobeniusSquared ((+ 0) / 1) ((+ 3) / 5) ((+ 4) / 5)
+    ≡ (+ 49) / 1250
+fullTensorNormAtThreeFourFive = solve []
+
+-- This is an azimuthal m=4 harmonic in the squared norm.
+-- On |k|=1, s=1-mu², zeta=cos(4phi):
+-- ||T||_F² = avg(mu) + (1-mu²)² * cos(4phi)/4.
+-- The theorem is purely the polynomial separation; geometric
+-- identification of zeta as cos(4phi) is not kernel-proved here.
+fullTensorNormAzimuthalFourfoldSeparation :
+  (mu zeta : ℚ) →
+  azimuthAveragedFullTTNorm mu
+    + quarter * sq (1ℚ + - sq mu) * zeta
+  ≡ quarter * (sq (sq mu) + ((+ 6) / 1) * sq mu + 1ℚ
+               + sq (1ℚ + - sq mu) * zeta)
+fullTensorNormAzimuthalFourfoldSeparation mu zeta = solve []
