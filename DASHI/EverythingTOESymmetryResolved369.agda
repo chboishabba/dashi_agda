@@ -646,8 +646,9 @@ import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 import DASHI.Unified.SingularBasinCoarseRGTOEExact as SingularBasinTOE
-import DASHI.Reasoning.Trialectic369Selected3BFullGradeActionMaxCutExact as FullGradeCut
-import DASHI.Wikimedia.IbrahimMonster3BLinearShortestFrontierCorrectionExact as IbrahimCut
+import DASHI.Analysis.RiemannMarkedCompletedTraceArithmeticAuditExact as RHPrimeAudit
+import DASHI.Analysis.RiemannThreeTapCurrentLeanFrontierExact as RHThreeTapFrontier
+import DASHI.Analysis.RiemannThreeTapTerminalCompletionLeanDonorExact as RHTerminal
 
 import DASHI.Unified.SensibLawGovernanceTOEExact as GovernanceTOE
 import DASHI.Unified.SensibLawGovernanceComplianceTOEExact as ComplianceTOE
@@ -1719,28 +1720,453 @@ toeSelected3BSingleActionProducerStillUninhabited =
 -- No 27-state coincidence is promoted to Monster representation.
 ------------------------------------------------------------------------
 
-toeMaxCut27RotationNotFree :
-  MaxCut369.FullCubeRotationFree → ⊥
-toeMaxCut27RotationNotFree =
-  MaxCut369.toe27FullCubeRotationNotFree
+toeBalabanDensityOwnerAgreement :
+  BalabanR559TOE.balabanDensityFlow
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ BalabanR559TOE.r559DensityFlow
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+toeBalabanDensityOwnerAgreement =
+  BalabanR559TOE.densityOwnerAgreement
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
-toeMaxCutFullGradeDimensionNotFaithfulness :
-  FullGradeCut.LinearDimensionCreatesFaithfulness → ⊥
-toeMaxCutFullGradeDimensionNotFaithfulness =
-  MaxCut369.toeFullGradeDimensionDoesNotCreateFaithfulness
+toeBalabanRegularEOwnerAgreement :
+  BalabanR559TOE.balabanRegularELocalization
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ BalabanR559TOE.r559RegularELocalization
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+toeBalabanRegularEOwnerAgreement =
+  BalabanR559TOE.regularEOwnerAgreement
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
-toeMaxCutIbrahimChartNotAction :
-  IbrahimCut.FiniteChartCreatesLinearMultiplicityAction → ⊥
-toeMaxCutIbrahimChartNotAction =
-  MaxCut369.toeFiniteChartDoesNotCreateLinearMultiplicityAction
+toeBalabanStressMarkedShellOwnerAgreement :
+  BalabanR559TOE.balabanStressMarkedShell
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ BalabanR559TOE.r559StressMarkedShell
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+toeBalabanStressMarkedShellOwnerAgreement =
+  BalabanR559TOE.stressMarkedShellOwnerAgreement
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
-toeMaxCutBalabanScaleTransferNotPromoted :
-  ParetoSnowballTOE.BalabanScaleTransferPromotion → ⊥
-toeMaxCutBalabanScaleTransferNotPromoted =
-  ParetoSnowballTOE.balabanScaleTransferPromotionImpossible
+toeBalabanStressHilbertOwnerAgreement :
+  BalabanR559TOE.balabanStressHilbertCompiler
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ BalabanR559TOE.r559StressHilbertCompiler
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+toeBalabanStressHilbertOwnerAgreement =
+  BalabanR559TOE.stressHilbertOwnerAgreement
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
-toeMaxCutFleet58PlanningDoesNotProve :
-  FleetGapTOE.externalCountCreatesFormalProof
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
-toeMaxCutFleet58PlanningDoesNotProve =
-  FleetGapTOE.fleetExternalCountDoesNotCreateFormalDischarge
+toeBalabanBlockSpinStillBlocked :
+  BalabanR559TOE.balabanBlockSpinTransfer
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false
+toeBalabanBlockSpinStillBlocked =
+  BalabanR559TOE.balabanBlockSpinTransferIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+toeBalabanUniformKPStillBlocked :
+  BalabanR559TOE.balabanUniformKPAbsorption
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false
+toeBalabanUniformKPStillBlocked =
+  BalabanR559TOE.balabanUniformKPAbsorptionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+toeBalabanOSWightmanStillBlocked :
+  BalabanR559TOE.balabanOSWightmanConstruction
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false
+toeBalabanOSWightmanStillBlocked =
+  BalabanR559TOE.balabanOSWightmanConstructionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+
+------------------------------------------------------------------------
+-- Direct TOE conjunctive closure: the three missing physical producers
+-- remain blocked together. No Boolean flag becomes proof authority.
+-- Reuse R559 source-owned proofs without adding a model or an axiom.
+------------------------------------------------------------------------
+
+toeBalabanPhysicalPromotionCut :
+  (BalabanR559TOE.balabanBlockSpinTransfer
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false)
+  × (BalabanR559TOE.balabanUniformKPAbsorption
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false)
+  × (BalabanR559TOE.balabanOSWightmanConstruction
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false)
+toeBalabanPhysicalPromotionCut =
+  toeBalabanBlockSpinStillBlocked ,
+  (toeBalabanUniformKPStillBlocked ,
+   toeBalabanOSWightmanStillBlocked)
+
+import DASHI.Unified.NavierStokesBM2TOEConvergenceExact as NSBM2TOE
+
+open NSBM2TOE public using
+  ( LiteralR571DissipationFold
+  ; ExactLiteralR571DissipationFold
+  ; literalR571M2BelowPhysicalDissipation
+  ; exactLiteralR571M2BelowPhysicalDissipation
+  )
+------------------------------------------------------------------------
+-- Navier-Stokes B / R571 M2 producer-strategy TOE surface.
+------------------------------------------------------------------------
+
+toeNavierStokesBM2FiniteFoldClosed : Bool
+toeNavierStokesBM2FiniteFoldClosed =
+  NSBM2TOE.cardinalityFreeFiniteFoldClosed
+
+toeNavierStokesBM2FiniteFoldClosedIsTrue :
+  toeNavierStokesBM2FiniteFoldClosed ≡ true
+toeNavierStokesBM2FiniteFoldClosedIsTrue =
+  NSBM2TOE.cardinalityFreeFiniteFoldClosedIsTrue
+
+toeNavierStokesBM2SamplewisePaymentStillAnalytic :
+  NSBM2TOE.samplewisePhysicalPaymentStillAnalytic ≡ true
+toeNavierStokesBM2SamplewisePaymentStillAnalytic =
+  NSBM2TOE.samplewisePhysicalPaymentStillAnalyticIsTrue
+
+toeNavierStokesBM2GalerkinFoldStillAnalytic :
+  NSBM2TOE.literalFoldIntoGalerkinDissipationStillAnalytic ≡ true
+toeNavierStokesBM2GalerkinFoldStillAnalytic =
+  NSBM2TOE.literalFoldIntoGalerkinDissipationStillAnalyticIsTrue
+
+toeNavierStokesBM2OldPDFB1B2B3B4NotMandatory :
+  NSBM2TOE.oldPDFB1B2B3B4Mandatory ≡ false
+toeNavierStokesBM2OldPDFB1B2B3B4NotMandatory =
+  NSBM2TOE.oldPDFB1B2B3B4MandatoryIsFalse
+
+toeNavierStokesBM2OldPDFB7NotMandatory :
+  NSBM2TOE.oldPDFB7DirectCovarianceEqualityMandatory ≡ false
+toeNavierStokesBM2OldPDFB7NotMandatory =
+  NSBM2TOE.oldPDFB7DirectCovarianceEqualityMandatoryIsFalse
+
+toeNavierStokesBM2ClayPromotion : Bool
+toeNavierStokesBM2ClayPromotion =
+  NSBM2TOE.modernNSClayPromotion
+
+toeNavierStokesBM2ClayPromotionStillFalse :
+  toeNavierStokesBM2ClayPromotion ≡ false
+toeNavierStokesBM2ClayPromotionStillFalse =
+  NSBM2TOE.modernNSClayPromotionStillFalse
+
+toeNavierStokesBM2Receipt :
+  NSBM2TOE.NavierStokesBM2TOEReceipt
+toeNavierStokesBM2Receipt =
+  NSBM2TOE.canonicalNavierStokesBM2TOEReceipt
+
+toeNavierStokesBM2ZKPFrame :
+  NSBM2TOE.NavierStokesBM2TOEZKPFrame
+toeNavierStokesBM2ZKPFrame =
+  NSBM2TOE.canonicalNavierStokesBM2TOEZKPFrame
+
+------------------------------------------------------------------------
+-- Canonical Navier-Stokes Clay frontier and direct non-promotion exports.
+------------------------------------------------------------------------
+
+import DASHI.Unified.NavierStokesClayFrontierTOEConvergenceExact as NSClayTOE
+
+toeNavierStokesClayPromotion : Bool
+toeNavierStokesClayPromotion =
+  NSClayTOE.navierStokesABCDClayPromotion
+
+toeNavierStokesClayPromotionStillFalse :
+  toeNavierStokesClayPromotion ≡ false
+toeNavierStokesClayPromotionStillFalse =
+  NSClayTOE.navierStokesABCDClayPromotionStillFalse
+
+toeNavierStokesGeneralRegularityComplete : Bool
+toeNavierStokesGeneralRegularityComplete =
+  NSClayTOE.generalNSGlobalRegularityComplete
+
+toeNavierStokesGeneralRegularityStillOpen :
+  toeNavierStokesGeneralRegularityComplete ≡ false
+toeNavierStokesGeneralRegularityStillOpen =
+  NSClayTOE.generalNSGlobalRegularityStillOpen
+
+toeNavierStokesCarrierToGeneralImplicationProved : Bool
+toeNavierStokesCarrierToGeneralImplicationProved =
+  NSClayTOE.carrierToGeneralNSImplicationProved
+
+toeNavierStokesCarrierToGeneralImplicationStillOpen :
+  toeNavierStokesCarrierToGeneralImplicationProved ≡ false
+toeNavierStokesCarrierToGeneralImplicationStillOpen =
+  NSClayTOE.carrierToGeneralNSImplicationStillOpen
+
+toeNavierStokesAuthorityPromotionGuard : Bool
+toeNavierStokesAuthorityPromotionGuard =
+  NSClayTOE.navierStokesPromotionGuard
+
+toeNavierStokesAuthorityPromotionGuardStillFalse :
+  toeNavierStokesAuthorityPromotionGuard ≡ false
+toeNavierStokesAuthorityPromotionGuardStillFalse =
+  NSClayTOE.navierStokesPromotionGuardStillFalse
+
+toeNavierStokesClayFrontierZKPFrame :
+  NSClayTOE.NavierStokesClayFrontierTOEZKPFrame
+toeNavierStokesClayFrontierZKPFrame =
+  NSClayTOE.canonicalNavierStokesClayFrontierTOEZKPFrame
+
+toeNavierStokesTerminalPromotionImpossible :
+  NSClayTOE.NSClayDistanceFinalPromotion → ⊥
+toeNavierStokesTerminalPromotionImpossible =
+  NSClayTOE.terminalClayPromotionImpossible
+
+
+------------------------------------------------------------------------
+-- Current periodic-B shared weighted wall from R736.
+-- Proof ownership remains in R736 through the canonical NS Clay facade.
+------------------------------------------------------------------------
+
+toeNavierStokesSharedWeightedExactlyTwoLeaves : Bool
+toeNavierStokesSharedWeightedExactlyTwoLeaves =
+  NSClayTOE.currentSharedWeightedExactlyTwoLeaves
+
+toeNavierStokesSharedWeightedExactlyTwoLeavesIsTrue :
+  toeNavierStokesSharedWeightedExactlyTwoLeaves ≡ true
+toeNavierStokesSharedWeightedExactlyTwoLeavesIsTrue =
+  NSClayTOE.currentSharedWeightedExactlyTwoLeavesIsTrue
+
+toeNavierStokesSharedWeightedSameCarrier : Bool
+toeNavierStokesSharedWeightedSameCarrier =
+  NSClayTOE.currentSharedWeightedSameCarrier
+
+toeNavierStokesSharedWeightedSameCarrierIsTrue :
+  toeNavierStokesSharedWeightedSameCarrier ≡ true
+toeNavierStokesSharedWeightedSameCarrierIsTrue =
+  NSClayTOE.currentSharedWeightedSameCarrierIsTrue
+
+toeNavierStokesSharedWeightedCarrierIsInputLaplacian : Bool
+toeNavierStokesSharedWeightedCarrierIsInputLaplacian =
+  NSClayTOE.currentSharedWeightedCarrierIsInputLaplacian
+
+toeNavierStokesWeightedPlusEndpointClosed : Bool
+toeNavierStokesWeightedPlusEndpointClosed =
+  NSClayTOE.currentWeightedPlusEndpointClosed
+
+toeNavierStokesWeightedPlusEndpointStillOpen :
+  toeNavierStokesWeightedPlusEndpointClosed ≡ false
+toeNavierStokesWeightedPlusEndpointStillOpen =
+  NSClayTOE.currentWeightedPlusEndpointStillOpen
+
+toeNavierStokesAugmentedCriticalWeightedClosed : Bool
+toeNavierStokesAugmentedCriticalWeightedClosed =
+  NSClayTOE.currentAugmentedCriticalWeightedClosed
+
+toeNavierStokesAugmentedCriticalWeightedStillOpen :
+  toeNavierStokesAugmentedCriticalWeightedClosed ≡ false
+toeNavierStokesAugmentedCriticalWeightedStillOpen =
+  NSClayTOE.currentAugmentedCriticalWeightedStillOpen
+
+toeNavierStokesSharedWeightedLeavesBuildBarrier : Bool
+toeNavierStokesSharedWeightedLeavesBuildBarrier =
+  NSClayTOE.currentSharedWeightedLeavesBuildBarrier
+
+toeNavierStokesSharedWeightedLeavesBuildBarrierIsTrue :
+  toeNavierStokesSharedWeightedLeavesBuildBarrier ≡ true
+toeNavierStokesSharedWeightedLeavesBuildBarrierIsTrue =
+  NSClayTOE.currentSharedWeightedLeavesBuildBarrierIsTrue
+
+toeNavierStokesR726IndependentLeafRequired : Bool
+toeNavierStokesR726IndependentLeafRequired =
+  NSClayTOE.legacyR726IndependentLeafRequired
+
+toeNavierStokesR726IndependentLeafNotRequired :
+  toeNavierStokesR726IndependentLeafRequired ≡ false
+toeNavierStokesR726IndependentLeafNotRequired =
+  NSClayTOE.legacyR726IndependentLeafNotRequired
+
+toeNavierStokesStrictMarginR406IndependentLeafRequired : Bool
+toeNavierStokesStrictMarginR406IndependentLeafRequired =
+  NSClayTOE.legacyStrictMarginR406IndependentLeafRequired
+
+toeNavierStokesStrictMarginR406IndependentLeafNotRequired :
+  toeNavierStokesStrictMarginR406IndependentLeafRequired ≡ false
+toeNavierStokesStrictMarginR406IndependentLeafNotRequired =
+  NSClayTOE.legacyStrictMarginR406IndependentLeafNotRequired
+
+toeNavierStokesBarrierDependentQPlusMinusShortcutAdmissible : Bool
+toeNavierStokesBarrierDependentQPlusMinusShortcutAdmissible =
+  NSClayTOE.barrierDependentQPlusMinusShortcutAdmissible
+
+toeNavierStokesBarrierDependentQPlusMinusShortcutStillCircular :
+  toeNavierStokesBarrierDependentQPlusMinusShortcutAdmissible ≡ false
+toeNavierStokesBarrierDependentQPlusMinusShortcutStillCircular =
+  NSClayTOE.barrierDependentQPlusMinusShortcutStillCircular
+
+toeNavierStokesSharedWeightedClayPromotion : Bool
+toeNavierStokesSharedWeightedClayPromotion =
+  NSClayTOE.currentSharedWeightedClayPromotion
+
+toeNavierStokesSharedWeightedClayPromotionStillFalse :
+  toeNavierStokesSharedWeightedClayPromotion ≡ false
+toeNavierStokesSharedWeightedClayPromotionStillFalse =
+  NSClayTOE.currentSharedWeightedClayPromotionStillFalse
+
+toeNavierStokesContinuumBKMPassageConstructed : Bool
+toeNavierStokesContinuumBKMPassageConstructed =
+  NSClayTOE.continuumBKMPassageConstructed
+
+toeNavierStokesContinuumBKMPassageStillOpen :
+  toeNavierStokesContinuumBKMPassageConstructed ≡ false
+toeNavierStokesContinuumBKMPassageStillOpen =
+  NSClayTOE.continuumBKMPassageStillOpen
+
+toeNavierStokesAllDataBridgeConstructed : Bool
+toeNavierStokesAllDataBridgeConstructed =
+  NSClayTOE.allDataBridgeConstructed
+
+toeNavierStokesAllDataBridgeStillOpen :
+  toeNavierStokesAllDataBridgeConstructed ≡ false
+toeNavierStokesAllDataBridgeStillOpen =
+  NSClayTOE.allDataBridgeStillOpen
+
+toeNavierStokesSubmissionPacketReady : Bool
+toeNavierStokesSubmissionPacketReady =
+  NSClayTOE.submissionPacketReady
+
+toeNavierStokesSubmissionPacketStillNotReady :
+  toeNavierStokesSubmissionPacketReady ≡ false
+toeNavierStokesSubmissionPacketStillNotReady =
+  NSClayTOE.submissionPacketStillNotReady
+
+toeNavierStokesClayEligible : Bool
+toeNavierStokesClayEligible =
+  NSClayTOE.clayEligible
+
+toeNavierStokesClayEligibilityStillFalse :
+  toeNavierStokesClayEligible ≡ false
+toeNavierStokesClayEligibilityStillFalse =
+  NSClayTOE.clayEligibilityStillFalse
+
+------------------------------------------------------------------------
+-- Canonical Pareto / Ibrahim / fleet non-promotion gates.
+-- These are direct aliases of proof owners. No new theorem authority.
+------------------------------------------------------------------------
+
+toeParetoSearchPriorityCannotPayProof :
+  ParetoSnowballTOE.SearchPriorityCreatesProof → ⊥
+toeParetoSearchPriorityCannotPayProof =
+  ParetoSnowballTOE.searchPriorityDoesNotCreateProof
+
+toeIbrahimDegree729CannotPayMonsterRecognition :
+  ParetoSnowballTOE.Degree729CreatesMonsterHZetaRecognition → ⊥
+toeIbrahimDegree729CannotPayMonsterRecognition =
+  ParetoSnowballTOE.degree729DoesNotCreateMonsterHZetaRecognition
+
+toeFleetSpectralRankCannotPayAuthority :
+  FleetGapTOE.VectorSpectralAuthorityPromotion → ⊥
+toeFleetSpectralRankCannotPayAuthority =
+  FleetGapTOE.fleetVectorSpectralAuthorityPromotionImpossible
+
+toeFleetNumericABIRequiresIndependentEvidence :
+  FleetGapTOE.SpectralNumericABIPromotion → ⊥
+toeFleetNumericABIRequiresIndependentEvidence =
+  FleetGapTOE.fleetSpectralNumericABIPromotionImpossible
+
+
+------------------------------------------------------------------------
+-- RH transformed-prime and current Route-A/Route-B max-cut convergence.
+-- Analysis modules remain the theorem and provenance owners.
+------------------------------------------------------------------------
+
+toeRHCompletedTraceCrossPollinationBoundary :
+  RHPrimeAudit.CompletedTraceCrossPollinationBoundary
+toeRHCompletedTraceCrossPollinationBoundary =
+  RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary
+
+toeRHPrimeActivationRequiresFirstPrimeSupport :
+  RHPrimeAudit.nonzeroPrimeRequiresFirstPrimeSupportSourceWritten
+    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ true
+toeRHPrimeActivationRequiresFirstPrimeSupport =
+  RHPrimeAudit.firstPrimeSupportNecessary
+
+toeRHUnmarkedTerminalStillNotIdentifiedWithMarkedArithmetic :
+  RHPrimeAudit.selectedUnmarkedTerminalEqualsMarkedArithmetic
+    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
+toeRHUnmarkedTerminalStillNotIdentifiedWithMarkedArithmetic =
+  RHPrimeAudit.selectedUnmarkedTerminalStillNotIdentifiedWithMarkedArithmetic
+
+toeRHIndependentArithmeticDiagonalProducerStillAbsent :
+  RHPrimeAudit.independentArithmeticDiagonalProducer
+    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
+toeRHIndependentArithmeticDiagonalProducerStillAbsent =
+  RHPrimeAudit.independentArithmeticDiagonalProducerStillAbsent
+
+toeRHHeisenbergTraceTransportStillBlocked :
+  RHPrimeAudit.actualHeisenbergTraceEqualsSelectedZetaFunctional
+    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
+toeRHHeisenbergTraceTransportStillBlocked =
+  RHPrimeAudit.noUnjustifiedAnalyticTransport
+
+toeRHPrimeAuditDoesNotPromoteRH :
+  RHPrimeAudit.rhDerived
+    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
+toeRHPrimeAuditDoesNotPromoteRH =
+  RHPrimeAudit.noUnjustifiedRH
+
+toeRHThreeTapCurrentLeanFrontier :
+  RHThreeTapFrontier.ThreeTapCurrentLeanFrontier
+toeRHThreeTapCurrentLeanFrontier =
+  RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier
+
+toeRHThreeTapA1FiniteAndDecayPaid :
+  RHThreeTapFrontier.a1FiniteAndDecaySourceWritten
+    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ true
+toeRHThreeTapA1FiniteAndDecayPaid =
+  RHThreeTapFrontier.a1FiniteAndDecayPaid
+
+toeRHThreeTapA1InverseSquareWindowsPaid :
+  RHThreeTapFrontier.a1LiteralWindowMachinerySourceWritten
+    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ true
+toeRHThreeTapA1InverseSquareWindowsPaid =
+  RHThreeTapFrontier.a1LiteralWindowsPaid
+
+toeRHThreeTapA1DyadicSeriesPaid :
+  RHThreeTapFrontier.a1DyadicSeriesSourceWritten
+    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ true
+toeRHThreeTapA1DyadicSeriesPaid =
+  RHThreeTapFrontier.a1SeriesPaid
+
+toeRHThreeTapA1CarrierToTailCompilerPaid :
+  RHThreeTapFrontier.a1CarrierToTailCompilerSourceWritten
+    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ true
+toeRHThreeTapA1CarrierToTailCompilerPaid =
+  RHThreeTapFrontier.a1ConditionalTailCompilerPaid
+
+toeRHThreeTapA1CarrierSummationStillOpen :
+  RHThreeTapFrontier.a1CarrierSummationPaid
+    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ false
+toeRHThreeTapA1CarrierSummationStillOpen =
+  RHThreeTapFrontier.a1CarrierIsStillOpen
+
+toeRHThreeTapA1UniformCurvatureStillOpen :
+  RHThreeTapFrontier.a1UniformCurvaturePaid
+    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ false
+toeRHThreeTapA1UniformCurvatureStillOpen =
+  RHThreeTapFrontier.a1CurvatureStillOpen
+
+toeRHThreeTapA1CompensationStillOpen :
+  RHThreeTapFrontier.a1CompensationPaid
+    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ false
+toeRHThreeTapA1CompensationStillOpen =
+  RHThreeTapFrontier.a1CompensationStillOpen
+
+toeRHThreeTapA2StrictScalarStillOpen :
+  RHThreeTapFrontier.a2StrictScalarPaid
+    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ false
+toeRHThreeTapA2StrictScalarStillOpen =
+  RHThreeTapFrontier.a2ScalarIsStillOpen
+
+toeRHSignedFifthRouteStillOpen :
+  RHThreeTapFrontier.routeBEventualGapPaid
+    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ false
+toeRHSignedFifthRouteStillOpen =
+  RHThreeTapFrontier.routeBIsStillOpen
+
+toeRHThreeTapFrontierDoesNotPromoteRH :
+  RHThreeTapFrontier.rhDerivedHere
+    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ false
+toeRHThreeTapFrontierDoesNotPromoteRH =
+  RHThreeTapFrontier.rhNotClaimedByAgdaStatusMirror
+
+toeRHThreeTapTerminalBoundary :
+  RHTerminal.ThreeTapTerminalCompletionBoundary
+toeRHThreeTapTerminalBoundary =
+  RHTerminal.canonicalThreeTapTerminalCompletionBoundary

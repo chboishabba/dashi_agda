@@ -624,8 +624,9 @@ import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 import DASHI.Unified.SingularBasinCoarseRGTOEExact as SingularBasinTOE
-import DASHI.Reasoning.Trialectic369Selected3BFullGradeActionMaxCutExact as FullGradeCut
-import DASHI.Wikimedia.IbrahimMonster3BLinearShortestFrontierCorrectionExact as IbrahimCut
+import DASHI.Analysis.RiemannMarkedCompletedTraceArithmeticAuditExact as RHPrimeAudit
+import DASHI.Analysis.RiemannThreeTapCurrentLeanFrontierExact as RHThreeTapFrontier
+import DASHI.Analysis.RiemannThreeTapTerminalCompletionLeanDonorExact as RHTerminal
 
 import DASHI.Unified.SensibLawGovernanceTOEExact as GovernanceTOE
 import DASHI.Unified.SensibLawGovernanceComplianceTOEExact as ComplianceTOE
@@ -1953,28 +1954,449 @@ unifierYMImplementAToDScaleTransferNonPromotion =
 -- No 27-state coincidence is promoted to Monster representation.
 ------------------------------------------------------------------------
 
-toeMaxCut27RotationNotFree :
-  MaxCut369.FullCubeRotationFree → ⊥
-toeMaxCut27RotationNotFree =
-  MaxCut369.toe27FullCubeRotationNotFree
+unifierBalabanDensityOwnerAgreement :
+  BalabanR559TOE.balabanDensityFlow
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ BalabanR559TOE.r559DensityFlow
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+unifierBalabanDensityOwnerAgreement =
+  BalabanR559TOE.densityOwnerAgreement
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
-toeMaxCutFullGradeDimensionNotFaithfulness :
-  FullGradeCut.LinearDimensionCreatesFaithfulness → ⊥
-toeMaxCutFullGradeDimensionNotFaithfulness =
-  MaxCut369.toeFullGradeDimensionDoesNotCreateFaithfulness
+unifierBalabanRegularEOwnerAgreement :
+  BalabanR559TOE.balabanRegularELocalization
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ BalabanR559TOE.r559RegularELocalization
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+unifierBalabanRegularEOwnerAgreement =
+  BalabanR559TOE.regularEOwnerAgreement
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
-toeMaxCutIbrahimChartNotAction :
-  IbrahimCut.FiniteChartCreatesLinearMultiplicityAction → ⊥
-toeMaxCutIbrahimChartNotAction =
-  MaxCut369.toeFiniteChartDoesNotCreateLinearMultiplicityAction
+unifierBalabanStressMarkedShellOwnerAgreement :
+  BalabanR559TOE.balabanStressMarkedShell
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ BalabanR559TOE.r559StressMarkedShell
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+unifierBalabanStressMarkedShellOwnerAgreement =
+  BalabanR559TOE.stressMarkedShellOwnerAgreement
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
-toeMaxCutBalabanScaleTransferNotPromoted :
-  ParetoSnowballTOE.BalabanScaleTransferPromotion → ⊥
-toeMaxCutBalabanScaleTransferNotPromoted =
-  ParetoSnowballTOE.balabanScaleTransferPromotionImpossible
+unifierBalabanStressHilbertOwnerAgreement :
+  BalabanR559TOE.balabanStressHilbertCompiler
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ BalabanR559TOE.r559StressHilbertCompiler
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+unifierBalabanStressHilbertOwnerAgreement =
+  BalabanR559TOE.stressHilbertOwnerAgreement
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
-toeMaxCutFleet58PlanningDoesNotProve :
-  FleetGapTOE.externalCountCreatesFormalProof
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
-toeMaxCutFleet58PlanningDoesNotProve =
-  FleetGapTOE.fleetExternalCountDoesNotCreateFormalDischarge
+unifierBalabanBlockSpinStillBlocked :
+  BalabanR559TOE.balabanBlockSpinTransfer
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false
+unifierBalabanBlockSpinStillBlocked =
+  BalabanR559TOE.balabanBlockSpinTransferIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifierBalabanUniformKPStillBlocked :
+  BalabanR559TOE.balabanUniformKPAbsorption
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false
+unifierBalabanUniformKPStillBlocked =
+  BalabanR559TOE.balabanUniformKPAbsorptionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifierBalabanOSWightmanStillBlocked :
+  BalabanR559TOE.balabanOSWightmanConstruction
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false
+unifierBalabanOSWightmanStillBlocked =
+  BalabanR559TOE.balabanOSWightmanConstructionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+
+------------------------------------------------------------------------
+-- Direct TOE conjunctive closure: the three missing physical producers
+-- remain blocked together. No Boolean flag becomes proof authority.
+-- Reuse R559 source-owned proofs without adding a model or an axiom.
+------------------------------------------------------------------------
+
+unifierBalabanPhysicalPromotionCut :
+  (BalabanR559TOE.balabanBlockSpinTransfer
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false)
+  × (BalabanR559TOE.balabanUniformKPAbsorption
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false)
+  × (BalabanR559TOE.balabanOSWightmanConstruction
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false)
+unifierBalabanPhysicalPromotionCut =
+  unifierBalabanBlockSpinStillBlocked ,
+  (unifierBalabanUniformKPStillBlocked ,
+   unifierBalabanOSWightmanStillBlocked)
+
+import DASHI.Unified.NavierStokesBM2TOEConvergenceExact as NSBM2TOE
+
+open NSBM2TOE public using
+  ( LiteralR571DissipationFold
+  ; ExactLiteralR571DissipationFold
+  ; literalR571M2BelowPhysicalDissipation
+  ; exactLiteralR571M2BelowPhysicalDissipation
+  )
+------------------------------------------------------------------------
+-- Navier-Stokes B / R571 M2 producer-strategy facade.
+------------------------------------------------------------------------
+
+unifierNavierStokesBM2FiniteFoldClosed : Bool
+unifierNavierStokesBM2FiniteFoldClosed =
+  NSBM2TOE.cardinalityFreeFiniteFoldClosed
+
+unifierNavierStokesBM2SamplewisePaymentStillAnalytic :
+  NSBM2TOE.samplewisePhysicalPaymentStillAnalytic ≡ true
+unifierNavierStokesBM2SamplewisePaymentStillAnalytic =
+  NSBM2TOE.samplewisePhysicalPaymentStillAnalyticIsTrue
+
+unifierNavierStokesBM2GalerkinFoldStillAnalytic :
+  NSBM2TOE.literalFoldIntoGalerkinDissipationStillAnalytic ≡ true
+unifierNavierStokesBM2GalerkinFoldStillAnalytic =
+  NSBM2TOE.literalFoldIntoGalerkinDissipationStillAnalyticIsTrue
+
+unifierNavierStokesBM2OldPDFB1B2B3B4NotMandatory :
+  NSBM2TOE.oldPDFB1B2B3B4Mandatory ≡ false
+unifierNavierStokesBM2OldPDFB1B2B3B4NotMandatory =
+  NSBM2TOE.oldPDFB1B2B3B4MandatoryIsFalse
+
+unifierNavierStokesBM2OldPDFB7NotMandatory :
+  NSBM2TOE.oldPDFB7DirectCovarianceEqualityMandatory ≡ false
+unifierNavierStokesBM2OldPDFB7NotMandatory =
+  NSBM2TOE.oldPDFB7DirectCovarianceEqualityMandatoryIsFalse
+
+unifierNavierStokesBM2ClayPromotion : Bool
+unifierNavierStokesBM2ClayPromotion =
+  NSBM2TOE.modernNSClayPromotion
+
+unifierNavierStokesBM2ClayPromotionStillFalse :
+  unifierNavierStokesBM2ClayPromotion ≡ false
+unifierNavierStokesBM2ClayPromotionStillFalse =
+  NSBM2TOE.modernNSClayPromotionStillFalse
+
+unifierNavierStokesBM2Receipt :
+  NSBM2TOE.NavierStokesBM2TOEReceipt
+unifierNavierStokesBM2Receipt =
+  NSBM2TOE.canonicalNavierStokesBM2TOEReceipt
+
+unifierNavierStokesBM2ZKPFrame :
+  NSBM2TOE.NavierStokesBM2TOEZKPFrame
+unifierNavierStokesBM2ZKPFrame =
+  NSBM2TOE.canonicalNavierStokesBM2TOEZKPFrame
+
+------------------------------------------------------------------------
+-- Canonical Navier-Stokes Clay frontier.
+-- Unifier consumes theorem-bearing owners through the normalized facade.
+------------------------------------------------------------------------
+
+import DASHI.Unified.NavierStokesClayFrontierTOEConvergenceExact as NSClayTOE
+
+unifierNavierStokesClayPromotion : Bool
+unifierNavierStokesClayPromotion =
+  NSClayTOE.navierStokesABCDClayPromotion
+
+unifierNavierStokesClayPromotionStillFalse :
+  unifierNavierStokesClayPromotion ≡ false
+unifierNavierStokesClayPromotionStillFalse =
+  NSClayTOE.navierStokesABCDClayPromotionStillFalse
+
+unifierNavierStokesGeneralRegularityComplete : Bool
+unifierNavierStokesGeneralRegularityComplete =
+  NSClayTOE.generalNSGlobalRegularityComplete
+
+unifierNavierStokesGeneralRegularityStillOpen :
+  unifierNavierStokesGeneralRegularityComplete ≡ false
+unifierNavierStokesGeneralRegularityStillOpen =
+  NSClayTOE.generalNSGlobalRegularityStillOpen
+
+unifierNavierStokesCarrierToGeneralImplicationProved : Bool
+unifierNavierStokesCarrierToGeneralImplicationProved =
+  NSClayTOE.carrierToGeneralNSImplicationProved
+
+unifierNavierStokesCarrierToGeneralImplicationStillOpen :
+  unifierNavierStokesCarrierToGeneralImplicationProved ≡ false
+unifierNavierStokesCarrierToGeneralImplicationStillOpen =
+  NSClayTOE.carrierToGeneralNSImplicationStillOpen
+
+unifierNavierStokesAuthorityPromotionGuard : Bool
+unifierNavierStokesAuthorityPromotionGuard =
+  NSClayTOE.navierStokesPromotionGuard
+
+unifierNavierStokesAuthorityPromotionGuardStillFalse :
+  unifierNavierStokesAuthorityPromotionGuard ≡ false
+unifierNavierStokesAuthorityPromotionGuardStillFalse =
+  NSClayTOE.navierStokesPromotionGuardStillFalse
+
+unifierNavierStokesClayFrontierZKPFrame :
+  NSClayTOE.NavierStokesClayFrontierTOEZKPFrame
+unifierNavierStokesClayFrontierZKPFrame =
+  NSClayTOE.canonicalNavierStokesClayFrontierTOEZKPFrame
+
+unifierNavierStokesTerminalPromotionImpossible :
+  NSClayTOE.NSClayDistanceFinalPromotion → ⊥
+unifierNavierStokesTerminalPromotionImpossible =
+  NSClayTOE.terminalClayPromotionImpossible
+
+
+------------------------------------------------------------------------
+-- Current periodic-B shared weighted wall from R736.
+-- Proof ownership remains in R736 through the canonical NS Clay facade.
+------------------------------------------------------------------------
+
+unifierNavierStokesSharedWeightedExactlyTwoLeaves : Bool
+unifierNavierStokesSharedWeightedExactlyTwoLeaves =
+  NSClayTOE.currentSharedWeightedExactlyTwoLeaves
+
+unifierNavierStokesSharedWeightedExactlyTwoLeavesIsTrue :
+  unifierNavierStokesSharedWeightedExactlyTwoLeaves ≡ true
+unifierNavierStokesSharedWeightedExactlyTwoLeavesIsTrue =
+  NSClayTOE.currentSharedWeightedExactlyTwoLeavesIsTrue
+
+unifierNavierStokesSharedWeightedSameCarrier : Bool
+unifierNavierStokesSharedWeightedSameCarrier =
+  NSClayTOE.currentSharedWeightedSameCarrier
+
+unifierNavierStokesSharedWeightedSameCarrierIsTrue :
+  unifierNavierStokesSharedWeightedSameCarrier ≡ true
+unifierNavierStokesSharedWeightedSameCarrierIsTrue =
+  NSClayTOE.currentSharedWeightedSameCarrierIsTrue
+
+unifierNavierStokesSharedWeightedCarrierIsInputLaplacian : Bool
+unifierNavierStokesSharedWeightedCarrierIsInputLaplacian =
+  NSClayTOE.currentSharedWeightedCarrierIsInputLaplacian
+
+unifierNavierStokesWeightedPlusEndpointClosed : Bool
+unifierNavierStokesWeightedPlusEndpointClosed =
+  NSClayTOE.currentWeightedPlusEndpointClosed
+
+unifierNavierStokesWeightedPlusEndpointStillOpen :
+  unifierNavierStokesWeightedPlusEndpointClosed ≡ false
+unifierNavierStokesWeightedPlusEndpointStillOpen =
+  NSClayTOE.currentWeightedPlusEndpointStillOpen
+
+unifierNavierStokesAugmentedCriticalWeightedClosed : Bool
+unifierNavierStokesAugmentedCriticalWeightedClosed =
+  NSClayTOE.currentAugmentedCriticalWeightedClosed
+
+unifierNavierStokesAugmentedCriticalWeightedStillOpen :
+  unifierNavierStokesAugmentedCriticalWeightedClosed ≡ false
+unifierNavierStokesAugmentedCriticalWeightedStillOpen =
+  NSClayTOE.currentAugmentedCriticalWeightedStillOpen
+
+unifierNavierStokesSharedWeightedLeavesBuildBarrier : Bool
+unifierNavierStokesSharedWeightedLeavesBuildBarrier =
+  NSClayTOE.currentSharedWeightedLeavesBuildBarrier
+
+unifierNavierStokesSharedWeightedLeavesBuildBarrierIsTrue :
+  unifierNavierStokesSharedWeightedLeavesBuildBarrier ≡ true
+unifierNavierStokesSharedWeightedLeavesBuildBarrierIsTrue =
+  NSClayTOE.currentSharedWeightedLeavesBuildBarrierIsTrue
+
+unifierNavierStokesR726IndependentLeafRequired : Bool
+unifierNavierStokesR726IndependentLeafRequired =
+  NSClayTOE.legacyR726IndependentLeafRequired
+
+unifierNavierStokesR726IndependentLeafNotRequired :
+  unifierNavierStokesR726IndependentLeafRequired ≡ false
+unifierNavierStokesR726IndependentLeafNotRequired =
+  NSClayTOE.legacyR726IndependentLeafNotRequired
+
+unifierNavierStokesStrictMarginR406IndependentLeafRequired : Bool
+unifierNavierStokesStrictMarginR406IndependentLeafRequired =
+  NSClayTOE.legacyStrictMarginR406IndependentLeafRequired
+
+unifierNavierStokesStrictMarginR406IndependentLeafNotRequired :
+  unifierNavierStokesStrictMarginR406IndependentLeafRequired ≡ false
+unifierNavierStokesStrictMarginR406IndependentLeafNotRequired =
+  NSClayTOE.legacyStrictMarginR406IndependentLeafNotRequired
+
+unifierNavierStokesBarrierDependentQPlusMinusShortcutAdmissible : Bool
+unifierNavierStokesBarrierDependentQPlusMinusShortcutAdmissible =
+  NSClayTOE.barrierDependentQPlusMinusShortcutAdmissible
+
+unifierNavierStokesBarrierDependentQPlusMinusShortcutStillCircular :
+  unifierNavierStokesBarrierDependentQPlusMinusShortcutAdmissible ≡ false
+unifierNavierStokesBarrierDependentQPlusMinusShortcutStillCircular =
+  NSClayTOE.barrierDependentQPlusMinusShortcutStillCircular
+
+unifierNavierStokesSharedWeightedClayPromotion : Bool
+unifierNavierStokesSharedWeightedClayPromotion =
+  NSClayTOE.currentSharedWeightedClayPromotion
+
+unifierNavierStokesSharedWeightedClayPromotionStillFalse :
+  unifierNavierStokesSharedWeightedClayPromotion ≡ false
+unifierNavierStokesSharedWeightedClayPromotionStillFalse =
+  NSClayTOE.currentSharedWeightedClayPromotionStillFalse
+
+unifierNavierStokesContinuumBKMPassageConstructed : Bool
+unifierNavierStokesContinuumBKMPassageConstructed =
+  NSClayTOE.continuumBKMPassageConstructed
+
+unifierNavierStokesContinuumBKMPassageStillOpen :
+  unifierNavierStokesContinuumBKMPassageConstructed ≡ false
+unifierNavierStokesContinuumBKMPassageStillOpen =
+  NSClayTOE.continuumBKMPassageStillOpen
+
+unifierNavierStokesAllDataBridgeConstructed : Bool
+unifierNavierStokesAllDataBridgeConstructed =
+  NSClayTOE.allDataBridgeConstructed
+
+unifierNavierStokesAllDataBridgeStillOpen :
+  unifierNavierStokesAllDataBridgeConstructed ≡ false
+unifierNavierStokesAllDataBridgeStillOpen =
+  NSClayTOE.allDataBridgeStillOpen
+
+unifierNavierStokesSubmissionPacketReady : Bool
+unifierNavierStokesSubmissionPacketReady =
+  NSClayTOE.submissionPacketReady
+
+unifierNavierStokesSubmissionPacketStillNotReady :
+  unifierNavierStokesSubmissionPacketReady ≡ false
+unifierNavierStokesSubmissionPacketStillNotReady =
+  NSClayTOE.submissionPacketStillNotReady
+
+unifierNavierStokesClayEligible : Bool
+unifierNavierStokesClayEligible =
+  NSClayTOE.clayEligible
+
+unifierNavierStokesClayEligibilityStillFalse :
+  unifierNavierStokesClayEligible ≡ false
+unifierNavierStokesClayEligibilityStillFalse =
+  NSClayTOE.clayEligibilityStillFalse
+
+------------------------------------------------------------------------
+-- Canonical Pareto / Ibrahim / fleet non-promotion gates.
+-- These are direct aliases of proof owners. No new theorem authority.
+------------------------------------------------------------------------
+
+toeParetoSearchPriorityCannotPayProof :
+  ParetoSnowballTOE.SearchPriorityCreatesProof → ⊥
+toeParetoSearchPriorityCannotPayProof =
+  ParetoSnowballTOE.searchPriorityDoesNotCreateProof
+
+toeIbrahimDegree729CannotPayMonsterRecognition :
+  ParetoSnowballTOE.Degree729CreatesMonsterHZetaRecognition → ⊥
+toeIbrahimDegree729CannotPayMonsterRecognition =
+  ParetoSnowballTOE.degree729DoesNotCreateMonsterHZetaRecognition
+
+toeFleetSpectralRankCannotPayAuthority :
+  FleetGapTOE.VectorSpectralAuthorityPromotion → ⊥
+toeFleetSpectralRankCannotPayAuthority =
+  FleetGapTOE.fleetVectorSpectralAuthorityPromotionImpossible
+
+toeFleetNumericABIRequiresIndependentEvidence :
+  FleetGapTOE.SpectralNumericABIPromotion → ⊥
+toeFleetNumericABIRequiresIndependentEvidence =
+  FleetGapTOE.fleetSpectralNumericABIPromotionImpossible
+
+
+------------------------------------------------------------------------
+-- RH transformed-prime and current Route-A/Route-B facade.
+-- Analysis modules remain the theorem and provenance owners.
+------------------------------------------------------------------------
+
+unifierRHCompletedTraceCrossPollinationBoundary :
+  RHPrimeAudit.CompletedTraceCrossPollinationBoundary
+unifierRHCompletedTraceCrossPollinationBoundary =
+  RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary
+
+unifierRHPrimeActivationRequiresFirstPrimeSupport :
+  RHPrimeAudit.nonzeroPrimeRequiresFirstPrimeSupportSourceWritten
+    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ true
+unifierRHPrimeActivationRequiresFirstPrimeSupport =
+  RHPrimeAudit.firstPrimeSupportNecessary
+
+unifierRHUnmarkedTerminalStillNotIdentifiedWithMarkedArithmetic :
+  RHPrimeAudit.selectedUnmarkedTerminalEqualsMarkedArithmetic
+    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
+unifierRHUnmarkedTerminalStillNotIdentifiedWithMarkedArithmetic =
+  RHPrimeAudit.selectedUnmarkedTerminalStillNotIdentifiedWithMarkedArithmetic
+
+unifierRHIndependentArithmeticDiagonalProducerStillAbsent :
+  RHPrimeAudit.independentArithmeticDiagonalProducer
+    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
+unifierRHIndependentArithmeticDiagonalProducerStillAbsent =
+  RHPrimeAudit.independentArithmeticDiagonalProducerStillAbsent
+
+unifierRHHeisenbergTraceTransportStillBlocked :
+  RHPrimeAudit.actualHeisenbergTraceEqualsSelectedZetaFunctional
+    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
+unifierRHHeisenbergTraceTransportStillBlocked =
+  RHPrimeAudit.noUnjustifiedAnalyticTransport
+
+unifierRHPrimeAuditDoesNotPromoteRH :
+  RHPrimeAudit.rhDerived
+    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
+unifierRHPrimeAuditDoesNotPromoteRH =
+  RHPrimeAudit.noUnjustifiedRH
+
+unifierRHThreeTapCurrentLeanFrontier :
+  RHThreeTapFrontier.ThreeTapCurrentLeanFrontier
+unifierRHThreeTapCurrentLeanFrontier =
+  RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier
+
+unifierRHThreeTapA1FiniteAndDecayPaid :
+  RHThreeTapFrontier.a1FiniteAndDecaySourceWritten
+    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ true
+unifierRHThreeTapA1FiniteAndDecayPaid =
+  RHThreeTapFrontier.a1FiniteAndDecayPaid
+
+unifierRHThreeTapA1InverseSquareWindowsPaid :
+  RHThreeTapFrontier.a1LiteralWindowMachinerySourceWritten
+    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ true
+unifierRHThreeTapA1InverseSquareWindowsPaid =
+  RHThreeTapFrontier.a1LiteralWindowsPaid
+
+unifierRHThreeTapA1DyadicSeriesPaid :
+  RHThreeTapFrontier.a1DyadicSeriesSourceWritten
+    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ true
+unifierRHThreeTapA1DyadicSeriesPaid =
+  RHThreeTapFrontier.a1SeriesPaid
+
+unifierRHThreeTapA1CarrierToTailCompilerPaid :
+  RHThreeTapFrontier.a1CarrierToTailCompilerSourceWritten
+    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ true
+unifierRHThreeTapA1CarrierToTailCompilerPaid =
+  RHThreeTapFrontier.a1ConditionalTailCompilerPaid
+
+unifierRHThreeTapA1CarrierSummationStillOpen :
+  RHThreeTapFrontier.a1CarrierSummationPaid
+    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ false
+unifierRHThreeTapA1CarrierSummationStillOpen =
+  RHThreeTapFrontier.a1CarrierIsStillOpen
+
+unifierRHThreeTapA1UniformCurvatureStillOpen :
+  RHThreeTapFrontier.a1UniformCurvaturePaid
+    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ false
+unifierRHThreeTapA1UniformCurvatureStillOpen =
+  RHThreeTapFrontier.a1CurvatureStillOpen
+
+unifierRHThreeTapA1CompensationStillOpen :
+  RHThreeTapFrontier.a1CompensationPaid
+    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ false
+unifierRHThreeTapA1CompensationStillOpen =
+  RHThreeTapFrontier.a1CompensationStillOpen
+
+unifierRHThreeTapA2StrictScalarStillOpen :
+  RHThreeTapFrontier.a2StrictScalarPaid
+    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ false
+unifierRHThreeTapA2StrictScalarStillOpen =
+  RHThreeTapFrontier.a2ScalarIsStillOpen
+
+unifierRHSignedFifthRouteStillOpen :
+  RHThreeTapFrontier.routeBEventualGapPaid
+    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ false
+unifierRHSignedFifthRouteStillOpen =
+  RHThreeTapFrontier.routeBIsStillOpen
+
+unifierRHThreeTapFrontierDoesNotPromoteRH :
+  RHThreeTapFrontier.rhDerivedHere
+    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ false
+unifierRHThreeTapFrontierDoesNotPromoteRH =
+  RHThreeTapFrontier.rhNotClaimedByAgdaStatusMirror
+
+unifierRHThreeTapTerminalBoundary :
+  RHTerminal.ThreeTapTerminalCompletionBoundary
+unifierRHThreeTapTerminalBoundary =
+  RHTerminal.canonicalThreeTapTerminalCompletionBoundary
