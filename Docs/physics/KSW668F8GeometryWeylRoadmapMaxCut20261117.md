@@ -126,3 +126,28 @@ sup_x |partial_i partial_j H(x)| <= ||H||_{H^5(R4)}/(8pi),
 with Fourier convention `Hhat(k)=int exp(-ikx)H(x)dx` and Plancherel-normalized inhomogeneous `H^5`. Derivation: polar volume `2pi²` times radial beta integral `int_0^infty r^7/(1+r²)^5 dr=1/8`. This gives an explicit second-derivative **whole-space at fixed time** continuity constant, not the original moving AdS5 boundary trace: the variable warp, half-space extension, time derivatives, compatible Israel boundary and **uniform source-to-H5 evolution estimate** remain entirely OPEN. No assertion that a smooth compact source automatically bounds the solution in the required norm.
 
 **No full-G1..G6 promotion:** The source-free polarized G1 geometric-to-SMS identity and G2 finite SAT lemma close actual mathematical subgates. G3 whole-coupled SSPRK3, G4 time-dependent boundary high-energy, G5 joint mesh convergence, and G6 physical source/receiver are not solved. Existing GR geometry sources are reused with attribution. The PR remains draft for pinned Agda kernel acceptance.
+
+
+### XXIX central same-object defect theorem (G1/G2 weld)
+
+For the original Poincare AdS5 moving a=t brane, one Cartesian TT polarization, and **arbitrary first/second perturbation jets**, the independent symbolic 5D-curvature calculation and the implemented on-brane SMS readout obey the exact identity
+```
+E_electric - E_SMS
+  = -[(2t²+1)/(2t sqrt(1+t²))] R_N - R_bulk/(3t²),
+R_N = (-H_T+sqrt(1+t²) H_z)/t²,
+R_bulk = -H_TT + H_xx + H_zz - 3t H_z .
+```
+Unlike the earlier source-free theorem, this does **not** assume the boundary or bulk equations hold: the two residual terms quantify precisely why the two curvature expressions can differ for an approximate field. The earlier source-free equality is its R_N=R_bulk=0 corollary. These are *continuum geometric differential-jet identities*, not a discrete uniform convergence theorem.
+
+At the original t=4/3 rational slice, an explicit Agda rational-source theorem in `KSW668F8OriginalElectricWeylDefectSliceExact.agda` proves
+```
+E_electric-E_SMS = -41/40 R_N -3/16 R_bulk .
+```
+Use original characteristic variables `P=H_T+H_z, M=H_T-H_z` and the actual weak-Israel target `M_target=-5 amp S/4 + P/4`. The exact rational identity becomes
+```
+E_electric-E_SMS
+  = -123/128 amp*S +123/160 (M-M_target) -3/16 R_bulk .
+```
+At a **source-free receiver** the `amp*S` term vanishes. A pointwise triangle estimate follows with coefficients 123/160 for the characteristic SAT mismatch and 3/16 for the bulk PDE residual. To apply to the computed receiver, however, one still needs a rigorous identification of discrete characteristic variables with the original Cartesian normal jets, plus high-Sobolev/pointwise trace control. Prior XXVI wall residuals were time-integrated shell-weighted L2 and **cannot** be inserted directly into this pointwise identity.
+
+The full arbitrary-positive-t source-jet identity was checked in independent SymPy without imposing the field equations; the t=4/3 contraction/reconstruction is source-written Agda with kernel acceptance pending. The remaining G1 full angular multipoles/TT gauge/covariant linearization and G2 joint energy are **OPEN** despite this much stronger local weld.
