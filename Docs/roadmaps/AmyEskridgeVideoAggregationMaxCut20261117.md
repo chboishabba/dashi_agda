@@ -8,7 +8,7 @@ This PR is a **new video-source aggregator over existing producers**, not a new 
 - `DASHI/Culture/MissingDeceasedScientificWorkEverything.agda`
 - `DASHI/Culture/MissingDeceasedInvestigativeAttributionEverything.agda`
 
-The transcript provided by the user is titled *She Researched Something THEY DON'T ALLOW. Then She Died* and ends at 32:44. **Original video URL, narrator name, upload date and exact clip timestamps in the original constituent recordings are unresolved.** Do not fabricate them. The 86 itemized claims are source-content paraphrases with timestamp pointers; they are not 86 independently verified findings or 86 source documents.
+The transcript provided by the user is titled *She Researched Something THEY DON'T ALLOW. Then She Died* and ends at 32:44. **Original edited video identified:** Be Inspired / `@beinspiredchannel`, 12 May 2026 in channel indexes, `https://www.youtube.com/watch?v=acw16d6CCnY` (video ~32:47). The narrator's personal name, upload timezone and some original clip offsets are still unresolved; do not fabricate them. The 86 itemized claims are source-content paraphrases with timestamp pointers; they are not 86 independently verified findings or 86 source documents.
 
 ## Existing owner graph (located in repo)
 
@@ -31,7 +31,7 @@ Michael David Hicks; Monica Jacinto / Monica Reza; William Neil McCasland; Frank
 
 **Source**: House Oversight and Government Reform, *Comer & Burlison Seek Information on Missing Nuclear and Rocket Scientists*, 20 April 2026, https://oversight.house.gov/release/comer-burlison-seek-information-on-missing-nuclear-and-rocket-scientists/ and original FBI letter https://oversight.house.gov/wp-content/uploads/2026/04/FBI-Missing-Scientists-Letter_4.20.26.pdf. The **primary committee text expressly calls the underlying reports unconfirmed**, alleges **at least ten**, and describes the sequence as beginning in **2023** with Hicks. It specifically names Hicks, Reza and McCasland, while the repo's other seven names are resolved through downstream reporting/context, **not** falsely attributed as explicitly enumerated in the letter.
 
-Amy's family-obituary date is **2022-06-11** according to `AmyEskridgeDemiseCircumstancesSnowballExact`, so it is impossible to quietly count her as part of the House's described *2023-onward* sequence. The video may be using a different expanded roster, but its exact eleven member identities and membership rule are not supplied.
+Amy's family-obituary date is **2022-06-11** according to `AmyEskridgeDemiseCircumstancesSnowballExact`, so it is impossible to quietly count her as part of the House's described *2023-onward* sequence. The edited video does not itself enumerate eleven members; the separately attributed 17 April Fox eleven-person list supplies a close chronological and numerical candidate provenance. The narrator's direct sourcing from that article is not independently established.
 
 ## Full source-to-claim weld
 
@@ -204,3 +204,53 @@ Project Camelot/Avalon preserve transcripts for separate July 2006 *Out From Und
 - July 2006 **Part 2**: https://projectavalon.net/lang/en/dan_burisch_interview_transcript_2_en.html . *2012: Two Timelines* yields P-45 45,000-year original passage.
 
 These locators are now recorded directly in `AmyEskridgeVideoOriginalClipLineageExact.agda`. They pay original oral-source attribution, not any secret agency/machine/custody claim.
+
+
+## All surrounding primary-source families — original-slide and later-source acquisition (17 November continuation)
+
+This continuation extends the video beyond its 86 explicitly selected claims to all 35 original HAL5 PDF pages and the surrounding source/ref genealogy. It **does not** call a paper or patent a successful experiment merely because it was found. The provenance key for each new file is embedded in the Agda module header, with source-level author/DOI or recoverable URL adjacent to the claim.
+
+### New kernel-facing source owners (this PR)
+
+| Module | New typed scope and strongest exact proof | Status |
+|---|---|---|
+| `AmyEskridgeVideoHAL5AllSlidesExact` | All **35 one-based original PDF pages**, with source-author identity, video-claim referents, and `entireOriginalDeckCovered = refl` | Metadata/deck coverage, not real device test |
+| `AmyEskridgeVideoDIAFullInventoryExact` | All **37 DIA FOIA report titles** with individual printed page counts; `exactInventoryCount = refl`, `exactInventoryListedPageTotal = refl` for **1,473** pages | Four original bodies read; 33 inventory titles only |
+| `AmyEskridgeVideoSurroundingSourceAtlasExact` | **42 DOI/canonical-URL source-family entries** from patent, original article, government, documentary, and institutional sources; `sourceFamilyCount = refl` | Inspection depth varies per original |
+| `AmyEskridgeVideoSurroundingProducerWeldExact` | **39 high-alpha video claim routes** to exact existing Agda original-paper, lab-constraint, Army administrative, Texas audit, HAL5 slide and DIA inventory objects; `exactSourceScopedWeldCount = refl` | Additional typed provenance, not replacement for all 86 joins |
+| `AmyEskridgeVideoOmittedOriginalResearchWeldExact` | **Eight additional original paper/report/abstract atoms** overlooked in edited video; `allAdditionalSourcesIndexed = refl` | Participant claims, conference abstracts or source locators, independent scientific proof open |
+| `AmyEskridgeVideoEvidenceEverything` | Imports all new modules into the existing video → Eskridge → missing/deceased investigation, without forking a separate scientific lane | Structural aggregator |
+
+Previous explicit 86 claim-to-source joins and 86 independent typed open-obligation packets remain in force. The new surrounding *source* atlas does not imply that 42 independent empirical studies reported positive results; it is a heterogeneous bibliography with multiple source classes and inspection depths.
+
+### Sources omitted in the edited video, with direct original document owners
+
+1. **John Searl / Sandberg:** S. Gunnar Sandberg, *The Searl Effect & The Searl-Effect Generator*, 17 June **1987**, original archived report https://toba60.com/wp-content/uploads/2020/07/John-Searl-The-Searl-Effect-The-Searl-Effect-Generator.pdf ; author states reconstruction comes from Searl interviews beginning in 1982 and says the original 1946–52 experimental documents were reportedly destroyed in a 1983 fire. This is reported source-history, not independent confirmation of a levitating generator. `Slides.deck16`.
+2. **Hutchison primary participant:** G. Hathaway, *Hutchison Effect Metal Samples: Description and Analysis*, *Materials Science & Technology 2009* pp.667–678, author full paper http-independent archive copy https://ia902306.us.archive.org/1/items/g-hathaway-hutchison-metal-analysis/G.%20Hathaway%20Hutchison%20Metal%20Analysis%20-%20cp2009mst0667%20ASM%20int.%20-%20Enrico.pdf . Hathaway describes the apparatus, first-person witnesses and inability to make effects repeatable/controllable, despite sample analyses and photographs. Source archive https://hutchisonfiles.com/sources/ distinguishes involved witness from outside-lab replication. Also earlier involved Hathaway, *The Hutchison Effect — A Lift and Disruption System* (1990) at https://gbppr.net/hutchinson/The-Hutchison-File.pdf . `Slides.deck22`.
+3. **Torr, Vargas and Datta:** Timir Datta, Ming Yin and José Vargas, *A Gravitational Experiment Involving Inhomogeneous Electric Fields*, **STAIF-2004 abstract p.240** inside a publicly accessible NASA-GSFC-hosted proceedings volume, https://science.gsfc.nasa.gov/attic/ants/documents/staif2004spacepower.pdf ; discusses authors' **preliminary correlation** between applied inhomogeneous E field and measured force, claimed mass scaling. This is NOT an inspected complete experimental paper nor an endorsed NASA test. Direct prior art US6891712B2 and US7327548B2 belongs to **Douglas Torr and José Vargas**, not Timir Datta (who is a different coauthor on the abstract). `Slides.deck27`.
+4. **Morningstar:** P. A. Murad and J. E. Brandenburg, *A Nonlinear Electromagnetic Device and Potential Explanations*, *Journal of Multidisciplinary Engineering Science Studies* **6(12), December 2020**, original article https://www.jmess.org/wp-content/uploads/2020/12/JMESSP13420694.pdf . Authors report an approximately **190-pound Energy Box**, **7%** apparent steady-state weight loss and **20%** transients, and expressly admit **self-acceleration was NOT achieved**. The percentages are **authors' observations**, not independently calibrated gravity effects. Prior AIAA-2012-0998, *The Morningstar Energy Box*, 2012, identified by Murad's later proposal bibliography https://kepleraerospace.com/wp-content/uploads/2023/03/NASA-NSPIRES-DraftProposal.pdf ; original full AIAA paper remains acquisition. The earlier paper's author list must not be falsely substituted for the 2020 Murad/Brandenburg article. `Slides.deck30`.
+5. **Giovanni Modanese independent research identity:** Giovanni Modanese and Giorgio Fontana, *Effect of the Vacuum Energy Density on Gravitation Propagation*, **STAIF-2004 abstract p.239** in the same NASA-GSFC hosted volume. The original abstract is an explicitly conditional theoretical discussion and cannot be used as proof that the video narrator's Wikipedia-page deletion claim is accurate. `Slides.deck28`.
+6. **Woodward independent presentation:** Paul March, *Woodward Effect Experimental Verifications*, **STAIF-2004 abstract p.241**, same NASA-GSFC hosted volume. It announces initial tests and future presentation of results, but the abstract is **not** a complete independently verified propulsion measurement; this distinct author/source object must not be back-attributed to Woodward's original 1992 theoretical paper. `Slides.deck23`.
+
+### Full DIA inventory and specific source limitation
+
+The March 25, 2022 DIA response https://documents2.theblackvault.com/documents/dia/AAWSAP-DIRDs/FOIA%2000159-2018.pdf supplies 37 numbered DIRDs totalling 1473 pages. We transcribed **all 37 titles** and *all* listed page counts. Reports **#13, #15, #18, #19** are marked full-body inspected in the existing primary-inspection module. The other **33 remain inventory metadata**. Additional scientific-seeming titles in the inventory — **#14 Role of Superconductors in Gravity Research; #24 Concepts for Extracting Energy from the Quantum Vacuum; #29 Negative Mass Propulsion; #36 Quantum Tomography of Negative Energy States in the Vacuum** — are explicitly indexed but not upgraded to inspected full-text reports. Exact 38-title variant provenance remains open.
+
+### Current exact proof / experimental boundary
+
+- The original Podkletnov/Nieminen **1992** 0.05–0.3% observation and the later Podkletnov **1997** 1.9–2.1% report are two different original-source claims. The **2003 Hathaway/Cleveland/Bao null to 0.001%** tested a different rpm regime; it is relevant evidence but not a universal same-apparatus falsification.
+- NASA's Ning Li 1997 static null, NASA 1998 rotating-field null, 2000 NCC8-124 report of incomplete all-up test, and 2001 uninspected FY01RPT archive are separate empirical/administrative objects. The exact **DAAH01-01-9-R001** identifier also appears in Texas 2005/2006 Lockheed pass-through accounts, but the repository's source owner explicitly marks its **same-object identification false/unpaid**. Do not infer Lockheed/AC Gravity collaboration from the matching digits.
+- Deleted Wikipedia entries, P-45/P-52, TR-3B craft, Morningstar physics, YouTube narrative, and 2015 NASA testing of Poher apparatus all retain distinct unverified proof leaves. The 2004 conference proceedings as **NASA-hosted** does **not** mean **NASA-sponsored, tested or approved** its published claims.
+
+### SymPy and structural acceptance
+
+Executed exact SymPy arithmetic in the current work environment (SymPy 1.14): **37 DIA items, exactly 1,473 pages, four original report bodies, 33 titles only**; verified the original/later Podkletnov result intervals and independent Hathaway 0.001% sensitivity distinction (without asserting equal experimental geometries). Additional branch-source static checks in the GitHub-accessible source confirmed **86 claims, 86 original joins, 35 slides, 37 DIRDs, 42 source entries, 39 additional claim-producer welds and eight omitted-source report entries**; all symbol references to the existing source and experiment owner modules were verified. These are source-structure checks, **not Agda 2.9 kernel acceptance**. Running committed Python against an actual repository checkout remains pending because the model runtime has no GitHub network checkout and no Agda compiler.
+
+The extended `scripts/check_amy_eskridge_video_claim_weld_sympy.py` now incorporates these exact expected counts, original producer presence, no-unjustified-promotion controls and source-reference regression. Validate on exact PR head locally:
+
+```bash
+python scripts/check_amy_eskridge_video_claim_weld_sympy.py
+DASHI_NO_TMUX=1 scripts/run_agda29_parallel_check.sh DASHI/Culture/AmyEskridgeVideoEvidenceEverything.agda
+```
+
+**High-alpha remaining:** original full FY01RPT.doc row and Army closeout, Morningstar 2012 AIAA complete experiment/logs, Datta/Yin/Vargas full results and independent controls, Searl surviving contemporaneous production documents, Hutchison independently blinded apparatus tests, original Deutsch/presentiment *frame-exact* audio comparison, original B-167034/1973 variant precise statute coverage, and the video eleven-person same-cause discriminator. No promotion from citations to confirmed gravity engineering, classified programmes or event causation.
