@@ -132,12 +132,15 @@ foxElevenCanonicalKeys =
   nunoKey ∷ chavezKey ∷ thomasKey ∷ casiasKey ∷ garciaKey ∷
   amyKey ∷ []
 
--- A finite, source-bounded roster identity *at news-claim level*.
+-- Repo-native list append, so this identity is proven against the
+-- pre-existing ten-case normalized enumeration rather than a hand-copied
+-- 11-person right-hand side.
+append : {A : Set} → List A → List A → List A
+append [] ys = ys
+append (x ∷ xs) ys = x ∷ append xs ys
+
 foxElevenEqualsHouseTenPlusAmyKeys :
-  foxElevenCanonicalKeys ≡
-  (hicksKey ∷ rezaKey ∷ mccaslandKey ∷ maiwaldKey ∷ grillmairKey ∷
-  nunoKey ∷ chavezKey ∷ thomasKey ∷ casiasKey ∷ garciaKey ∷
-  amyKey ∷ [])
+  foxElevenCanonicalKeys ≡ append houseTenCanonicalKeys (amyKey ∷ [])
 foxElevenEqualsHouseTenPlusAmyKeys = refl
 
 length : {A : Set} → List A → Nat
