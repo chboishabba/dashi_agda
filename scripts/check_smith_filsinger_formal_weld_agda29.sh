@@ -23,6 +23,7 @@ owners=(
   DASHI/Physics/Motors/SmithFilsingerIndexedFaceSourceWeldExact.agda
   DASHI/Physics/Motors/SmithFilsingerIndexedFaceIncidenceExact.agda
   DASHI/Physics/Motors/SmithFilsingerLocalCausalADEFrameExact.agda
+  DASHI/Physics/Motors/SmithFilsingerLocalCausalADEReachExact.agda
   DASHI/Physics/Motors/SmithFilsingerIndexedSignedCellStokesExact.agda
   DASHI/Physics/Motors/SmithFilsingerTimedSpatialPortChainExact.agda
   DASHI/Physics/Motors/SmithFilsingerSpatialSourceBoundaryWeldExact.agda
@@ -57,6 +58,7 @@ new_owners=(
   DASHI/Physics/Motors/SmithFilsingerIndexedFaceSourceWeldExact.agda
   DASHI/Physics/Motors/SmithFilsingerIndexedFaceIncidenceExact.agda
   DASHI/Physics/Motors/SmithFilsingerLocalCausalADEFrameExact.agda
+  DASHI/Physics/Motors/SmithFilsingerLocalCausalADEReachExact.agda
   DASHI/Physics/Motors/SmithFilsingerIndexedSignedCellStokesExact.agda
   DASHI/Physics/Motors/SmithFilsingerTimedSpatialPortChainExact.agda
   DASHI/Physics/Motors/SmithFilsingerSpatialSourceBoundaryWeldExact.agda
