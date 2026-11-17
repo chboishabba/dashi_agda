@@ -282,52 +282,31 @@ unifiedYMImplementAToDMaxCutReceipt :
 unifiedYMImplementAToDMaxCutReceipt =
   YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
 
+
 ------------------------------------------------------------------------
--- Current-master SensibLaw governance / fleet target normalization.
+-- Canonical SensibLaw evidence non-promotion.
+-- Reuse the SLR source owner. No legal authority follows from transport.
+-- This is the evidence layer, not an Actionstep or law applicability proof.
 ------------------------------------------------------------------------
 
-import DASHI.Unified.SensibLawGovernanceFleetTOEExact as GovernanceFleet
+import DASHI.Interop.SLRCanonicalEvidenceSubstrateExact as SLREvidence
 
-unifiedSensibLawGovernanceFleetReceipt :
-  GovernanceFleet.SensibLawGovernanceFleetTOEReceipt
-unifiedSensibLawGovernanceFleetReceipt =
-  GovernanceFleet.canonicalSensibLawGovernanceFleetTOEReceipt
+unifiedEvidenceManifestationDoesNotCreateSemanticAuthority :
+  SLREvidence.ManifestationCreatesSemanticAuthority → ⊥
+unifiedEvidenceManifestationDoesNotCreateSemanticAuthority =
+  SLREvidence.manifestationDoesNotCreateSemanticAuthority
 
-unifiedSensibLawSemanticAuthorityRemainsClosed =
-  GovernanceFleet.governanceSemanticAllAuthorityStillClosed
+unifiedEvidenceObservationDoesNotCreateClaimTruth :
+  SLREvidence.ObservationCreatesClaimTruth → ⊥
+unifiedEvidenceObservationDoesNotCreateClaimTruth =
+  SLREvidence.observationDoesNotCreateClaimTruth
 
-unifiedSensibLawCandidateSourceDoesNotCreateAuthority =
-  GovernanceFleet.governanceCandidateSourceDoesNotCloseAuthority
+unifiedEvidenceObservationDoesNotPromoteApplicability :
+  SLREvidence.ObservationPromotesApplicability → ⊥
+unifiedEvidenceObservationDoesNotPromoteApplicability =
+  SLREvidence.observationDoesNotPromoteApplicability
 
-unifiedSensibLawCurrentValidityDoesNotCreateApplicability =
-  GovernanceFleet.governanceCurrentValidityDoesNotEstablishApplicability
-
-unifiedSensibLawRuntimeDoesNotInventLegalSemantics =
-  GovernanceFleet.governanceRuntimeCannotInventLegalSemantics
-
-unifiedSensibLawRepresentationDoesNotCreateLegalAuthority =
-  GovernanceFleet.governanceRepresentationEqualityDoesNotCreateLegalAuthority
-
-unifiedSensibLawSnowballCitationDoesNotCreateAuthority =
-  GovernanceFleet.governanceSnowballCitationDoesNotCreateAuthority
-
-unifiedSensibLawParetoDirectiveIsNotLegalAuthority =
-  GovernanceFleet.governanceParetoDirectiveIsNotLegalAuthority
-
-unifiedSensibLawProviderFailureDoesNotCreateNegativeEvidence =
-  GovernanceFleet.governanceProviderFailureDoesNotMakePropositionFalse
-
-unifiedSensibLawExpertProductionPromotesNoAuthority =
-  GovernanceFleet.governanceExpertProductionPromotesNoAuthority
-
-unifiedGovernanceFleetDischargedFibresAre584 =
-  GovernanceFleet.governanceFleetDischargedFibresAre584
-
-unifiedGovernanceFleetContradictionGapsAre44 =
-  GovernanceFleet.governanceFleetContradictionGapsAre44
-
-unifiedGovernanceFleetFormalGapsAre58 =
-  GovernanceFleet.governanceFleetFormalGapsAre58
-
-unifiedGovernanceFleetSpectralLabelsDoNotIdentifyTheoremOwners =
-  GovernanceFleet.governanceFleetSpectralLabelsDoNotIdentifyTheoremOwners
+unifiedEvidenceDoesNotCreateDigitalESDAdmission :
+  SLREvidence.CanonicalEvidenceCreatesDigitalESDAdmission → ⊥
+unifiedEvidenceDoesNotCreateDigitalESDAdmission =
+  SLREvidence.canonicalEvidenceDoesNotCreateDigitalESDAdmission

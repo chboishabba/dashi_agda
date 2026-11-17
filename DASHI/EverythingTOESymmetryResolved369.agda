@@ -1141,42 +1141,38 @@ toeSensibLawGovernanceZKPFrame :
 toeSensibLawGovernanceZKPFrame =
   SensibLawGovTOE.canonicalSensibLawGovernanceZKPFrame
 
-toeSensibLawSemanticPromotionLegalAuthorityClosed :
-  SensibLawGovTOE.sensibLawSemanticPromotionLegalAuthorityFlag ≡ false
-toeSensibLawSemanticPromotionLegalAuthorityClosed =
-  SensibLawGovTOE.sensibLawSemanticPromotionLegalAuthorityClosed
+toeBalabanOSWightmanStillBlocked :
+  BalabanR559TOE.balabanOSWightmanConstruction
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false
+toeBalabanOSWightmanStillBlocked =
+  BalabanR559TOE.balabanOSWightmanConstructionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
-toeSensibLawExpertProductionAuthorityClosed :
-  SensibLawGovTOE.sensibLawExpertProductionPromotesAnyAuthority ≡ false
-toeSensibLawExpertProductionAuthorityClosed =
-  SensibLawGovTOE.sensibLawExpertProductionAuthorityClosed
 
-toeSensibLawReviewDoesNotCreateClaimTruth :
-  SensibLawGovTOE.LegalReviewDecisionCreatesClaimTruth → ⊥
-toeSensibLawReviewDoesNotCreateClaimTruth =
-  SensibLawGovTOE.sensibLawReviewDoesNotCreateClaimTruth
+------------------------------------------------------------------------
+-- Canonical SensibLaw evidence non-promotion.
+-- Reuse the SLR source owner. No legal authority follows from transport.
+-- This is the evidence layer, not an Actionstep or law applicability proof.
+------------------------------------------------------------------------
 
-toeSensibLawParserCandidateCannotAuthorizeAdmission :
-  SensibLawGovTOE.ParserCandidateAloneAuthorizesAdmission → ⊥
-toeSensibLawParserCandidateCannotAuthorizeAdmission =
-  SensibLawGovTOE.sensibLawParserCandidateCannotAuthorizeAdmission
+import DASHI.Interop.SLRCanonicalEvidenceSubstrateExact as SLREvidence
 
-toeSensibLawQualificationDoesNotProveForensicCompliance :
-  SensibLawGovTOE.QualificationAutomaticallyForensicCompliance → ⊥
-toeSensibLawQualificationDoesNotProveForensicCompliance =
-  SensibLawGovTOE.sensibLawQualificationDoesNotProveForensicCompliance
+toeEvidenceManifestationDoesNotCreateSemanticAuthority :
+  SLREvidence.ManifestationCreatesSemanticAuthority → ⊥
+toeEvidenceManifestationDoesNotCreateSemanticAuthority =
+  SLREvidence.manifestationDoesNotCreateSemanticAuthority
 
-toeSensibLawOfficialLegalSurfaceCannotRecoverFineState :
-  SensibLawGovTOE.OfficialLegalSurfaceRecoversFineState → ⊥
-toeSensibLawOfficialLegalSurfaceCannotRecoverFineState =
-  SensibLawGovTOE.sensibLawOfficialLegalSurfaceCannotRecoverFineState
+toeEvidenceObservationDoesNotCreateClaimTruth :
+  SLREvidence.ObservationCreatesClaimTruth → ⊥
+toeEvidenceObservationDoesNotCreateClaimTruth =
+  SLREvidence.observationDoesNotCreateClaimTruth
 
-toeSensibLawLegalOnlyDoesNotCreateLegitimacy :
-  SensibLawGovTOE.LegalOnlyCreatesLegitimacy → ⊥
-toeSensibLawLegalOnlyDoesNotCreateLegitimacy =
-  SensibLawGovTOE.sensibLawLegalOnlyDoesNotCreateLegitimacy
+toeEvidenceObservationDoesNotPromoteApplicability :
+  SLREvidence.ObservationPromotesApplicability → ⊥
+toeEvidenceObservationDoesNotPromoteApplicability =
+  SLREvidence.observationDoesNotPromoteApplicability
 
-toeSensibLawLegalLaneDoesNotRetargetDischargedFleetFibres :
-  SensibLawGovTOE.legalGovernanceLaneRetargetsDischargedFleetFibres ≡ false
-toeSensibLawLegalLaneDoesNotRetargetDischargedFleetFibres =
-  SensibLawGovTOE.sensibLawLegalLaneDoesNotRetargetDischargedFleetFibres
+toeEvidenceDoesNotCreateDigitalESDAdmission :
+  SLREvidence.CanonicalEvidenceCreatesDigitalESDAdmission → ⊥
+toeEvidenceDoesNotCreateDigitalESDAdmission =
+  SLREvidence.canonicalEvidenceDoesNotCreateDigitalESDAdmission

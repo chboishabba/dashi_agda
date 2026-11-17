@@ -912,42 +912,38 @@ unifierSensibLawGovernanceZKPFrame :
 unifierSensibLawGovernanceZKPFrame =
   SensibLawGovTOE.canonicalSensibLawGovernanceZKPFrame
 
-unifierSensibLawSemanticPromotionLegalAuthorityClosed :
-  SensibLawGovTOE.sensibLawSemanticPromotionLegalAuthorityFlag ≡ false
-unifierSensibLawSemanticPromotionLegalAuthorityClosed =
-  SensibLawGovTOE.sensibLawSemanticPromotionLegalAuthorityClosed
+unifierBalabanOSWightmanStillBlocked :
+  BalabanR559TOE.balabanOSWightmanConstruction
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false
+unifierBalabanOSWightmanStillBlocked =
+  BalabanR559TOE.balabanOSWightmanConstructionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
-unifierSensibLawExpertProductionAuthorityClosed :
-  SensibLawGovTOE.sensibLawExpertProductionPromotesAnyAuthority ≡ false
-unifierSensibLawExpertProductionAuthorityClosed =
-  SensibLawGovTOE.sensibLawExpertProductionAuthorityClosed
 
-unifierSensibLawReviewDoesNotCreateClaimTruth :
-  SensibLawGovTOE.LegalReviewDecisionCreatesClaimTruth → ⊥
-unifierSensibLawReviewDoesNotCreateClaimTruth =
-  SensibLawGovTOE.sensibLawReviewDoesNotCreateClaimTruth
+------------------------------------------------------------------------
+-- Canonical SensibLaw evidence non-promotion.
+-- Reuse the SLR source owner. No legal authority follows from transport.
+-- This is the evidence layer, not an Actionstep or law applicability proof.
+------------------------------------------------------------------------
 
-unifierSensibLawParserCandidateCannotAuthorizeAdmission :
-  SensibLawGovTOE.ParserCandidateAloneAuthorizesAdmission → ⊥
-unifierSensibLawParserCandidateCannotAuthorizeAdmission =
-  SensibLawGovTOE.sensibLawParserCandidateCannotAuthorizeAdmission
+import DASHI.Interop.SLRCanonicalEvidenceSubstrateExact as SLREvidence
 
-unifierSensibLawQualificationDoesNotProveForensicCompliance :
-  SensibLawGovTOE.QualificationAutomaticallyForensicCompliance → ⊥
-unifierSensibLawQualificationDoesNotProveForensicCompliance =
-  SensibLawGovTOE.sensibLawQualificationDoesNotProveForensicCompliance
+unifierEvidenceManifestationDoesNotCreateSemanticAuthority :
+  SLREvidence.ManifestationCreatesSemanticAuthority → ⊥
+unifierEvidenceManifestationDoesNotCreateSemanticAuthority =
+  SLREvidence.manifestationDoesNotCreateSemanticAuthority
 
-unifierSensibLawOfficialLegalSurfaceCannotRecoverFineState :
-  SensibLawGovTOE.OfficialLegalSurfaceRecoversFineState → ⊥
-unifierSensibLawOfficialLegalSurfaceCannotRecoverFineState =
-  SensibLawGovTOE.sensibLawOfficialLegalSurfaceCannotRecoverFineState
+unifierEvidenceObservationDoesNotCreateClaimTruth :
+  SLREvidence.ObservationCreatesClaimTruth → ⊥
+unifierEvidenceObservationDoesNotCreateClaimTruth =
+  SLREvidence.observationDoesNotCreateClaimTruth
 
-unifierSensibLawLegalOnlyDoesNotCreateLegitimacy :
-  SensibLawGovTOE.LegalOnlyCreatesLegitimacy → ⊥
-unifierSensibLawLegalOnlyDoesNotCreateLegitimacy =
-  SensibLawGovTOE.sensibLawLegalOnlyDoesNotCreateLegitimacy
+unifierEvidenceObservationDoesNotPromoteApplicability :
+  SLREvidence.ObservationPromotesApplicability → ⊥
+unifierEvidenceObservationDoesNotPromoteApplicability =
+  SLREvidence.observationDoesNotPromoteApplicability
 
-unifierSensibLawLegalLaneDoesNotRetargetDischargedFleetFibres :
-  SensibLawGovTOE.legalGovernanceLaneRetargetsDischargedFleetFibres ≡ false
-unifierSensibLawLegalLaneDoesNotRetargetDischargedFleetFibres =
-  SensibLawGovTOE.sensibLawLegalLaneDoesNotRetargetDischargedFleetFibres
+unifierEvidenceDoesNotCreateDigitalESDAdmission :
+  SLREvidence.CanonicalEvidenceCreatesDigitalESDAdmission → ⊥
+unifierEvidenceDoesNotCreateDigitalESDAdmission =
+  SLREvidence.canonicalEvidenceDoesNotCreateDigitalESDAdmission
