@@ -31,6 +31,7 @@ on:
       - "scripts/test_smith_filsinger_restored_cycle_intervals.py"
       - "scripts/test_smith_filsinger_restored_cycle_raw_replay.py"
       - "scripts/run_smith_filsinger_acceptance.sh"
+      - "scripts/test_smith_filsinger_acceptance_runner.py"
   workflow_dispatch:
 
 permissions:
@@ -54,6 +55,8 @@ jobs:
           bash -n scripts/run_smith_filsinger_acceptance.sh
           bash -n scripts/check_smith_filsinger_formal_weld_agda29.sh
           bash -n scripts/run_agda29_parallel_check.sh
+      - name: Adversarial acceptance-runner control-flow checks
+        run: python3 scripts/test_smith_filsinger_acceptance_runner.py
       - name: Fail-closed original-source evidence checker tests
         run: python3 scripts/test_smith_filsinger_original_gate_evidence.py
       - name: Exact signed V/I interval arithmetic tests
