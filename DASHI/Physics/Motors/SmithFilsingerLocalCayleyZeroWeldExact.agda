@@ -11,7 +11,7 @@ module DASHI.Physics.Motors.SmithFilsingerLocalCayleyZeroWeldExact where
 -- Physical Maxwell light cone and actual material measurements OPEN.
 
 open import Agda.Builtin.Nat using (Nat)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 import DASHI.Physics.Motors.SmithFilsingerLocalCausalADEFrameExact as Frame
