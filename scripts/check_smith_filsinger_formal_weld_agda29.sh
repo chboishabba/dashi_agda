@@ -39,8 +39,6 @@ owners=(
   DASHI/Physics/Motors/SmithFilsingerSpaceTimePoyntingTelescopeExact.agda
   DASHI/Physics/Motors/SmithFilsingerPlaneWaveSpaceTimeWitnessExact.agda
   DASHI/Physics/Motors/SmithFilsingerSelectedSpaceTimePortWeldExact.agda
-  DASHI/Physics/Motors/SmithFilsingerSpaceTimePoyntingTelescopeExact.agda
-  DASHI/Physics/Motors/SmithFilsingerPlaneWaveSpaceTimeWitnessExact.agda
   DASHI/Physics/Motors/SmithFilsingerSignedBoundaryGroupCompletionExact.agda
   DASHI/Physics/Motors/SmithFilsingerSignedMeterQuantisationNoGoExact.agda
   DASHI/Physics/Motors/SmithFilsingerCertifiedSignedMeterResidualExact.agda
@@ -71,8 +69,6 @@ new_owners=(
   DASHI/Physics/Motors/SmithFilsingerSpaceTimePoyntingTelescopeExact.agda
   DASHI/Physics/Motors/SmithFilsingerPlaneWaveSpaceTimeWitnessExact.agda
   DASHI/Physics/Motors/SmithFilsingerSelectedSpaceTimePortWeldExact.agda
-  DASHI/Physics/Motors/SmithFilsingerSpaceTimePoyntingTelescopeExact.agda
-  DASHI/Physics/Motors/SmithFilsingerPlaneWaveSpaceTimeWitnessExact.agda
   DASHI/Physics/Motors/SmithFilsingerSignedBoundaryGroupCompletionExact.agda
   DASHI/Physics/Motors/SmithFilsingerSignedMeterQuantisationNoGoExact.agda
   DASHI/Physics/Motors/SmithFilsingerCertifiedSignedMeterResidualExact.agda
