@@ -175,6 +175,25 @@ fleet58AndGate458CardinalityDoesNotCreateSameGapIdentity :
 fleet58AndGate458CardinalityDoesNotCreateSameGapIdentity =
   fleet58CardinalityDoesNotProveYMGate4Identity
 
+
+Fleet58EqualsYMGate4SameObject : Set
+Fleet58EqualsYMGate4SameObject =
+  IdentityFirewall.SharedCardinalityCreatesIdentity
+
+fleet58CardinalityDoesNotProveYMGate4Identity :
+  Fleet58EqualsYMGate4SameObject → ⊥
+fleet58CardinalityDoesNotProveYMGate4Identity =
+  IdentityFirewall.sharedCardinalityDoesNotCreateIdentity
+
+Fleet58Gate458SameIdentityFromCount : Set
+Fleet58Gate458SameIdentityFromCount =
+  Fleet58EqualsYMGate4SameObject
+
+fleet58AndGate458CardinalityDoesNotCreateSameGapIdentity :
+  Fleet58Gate458SameIdentityFromCount → ⊥
+fleet58AndGate458CardinalityDoesNotCreateSameGapIdentity =
+  fleet58CardinalityDoesNotProveYMGate4Identity
+
 ------------------------------------------------------------------------
 -- Existing hyperfabric / 369 / p-adic / wave exact surfaces.
 ------------------------------------------------------------------------
