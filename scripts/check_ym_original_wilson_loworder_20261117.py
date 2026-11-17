@@ -21,7 +21,7 @@ def edges(x,a,b,L):
  def step(s,k):
   v=list(s);v[k]=(v[k]+1)%L;return tuple(v)
  return frozenset(((x,a),(step(x,a),b),(step(x,b),a),(x,b)))
-for L in (3,4):
+for L in (2,3,4):
  sites=product(range(L),repeat=4)
  ps={(x,a,b):edges(x,a,b,L) for x in sites
      for a,b in combinations(range(4),2)}
