@@ -686,6 +686,47 @@ navierStokesClayEligibilityStillFalse =
 -- BALABAN CATEGORICAL FIBRE NORMALIZATION
 ------------------------------------------------------------------------
 
+yangMillsYMA1SourceFrontierReceipt :
+  YMA1Frontier.YMA1SourceFrontierReceipt
+yangMillsYMA1SourceFrontierReceipt =
+  YMA1Frontier.canonicalYMA1SourceFrontierReceipt
+
+yangMillsYMA1ZKPFrame :
+  YMA1Frontier.YMA1ZKPFrame
+yangMillsYMA1ZKPFrame =
+  YMA1Frontier.canonicalYMA1ZKPFrame
+
+yangMillsYMA1FrozenResearchCount :
+  Agda.Builtin.Nat.Nat
+yangMillsYMA1FrozenResearchCount =
+  YMA1Frontier.frozenResearchCount
+    YMA1Frontier.canonicalYMA1SourceFrontierReceipt
+
+yangMillsYMA1FrozenResearchCountIsFour :
+  yangMillsYMA1FrozenResearchCount ≡ 4
+yangMillsYMA1FrozenResearchCountIsFour =
+  YMA1Frontier.frozenResearchCountStillFour
+
+yangMillsYMA1RowAStillNotPromoted :
+  YMA1Frontier.rowAPromoted
+    YMA1Frontier.canonicalYMA1SourceFrontierReceipt
+  ≡ false
+yangMillsYMA1RowAStillNotPromoted =
+  YMA1Frontier.rowAStillNotPromoted
+
+yangMillsYMA1CompletionDoesNotSelfPromote :
+  DASHI.Physics.YangMills.CompactLieProofLevel.promotable
+    (YMA1Frontier.rowACompletion
+      YMA1Frontier.canonicalYMA1SourceFrontierReceipt)
+  ≡ false
+yangMillsYMA1CompletionDoesNotSelfPromote =
+  YMA1Frontier.rowACompletionDoesNotSelfPromote
+
+
+------------------------------------------------------------------------
+-- BALABAN CATEGORICAL FIBRE NORMALIZATION
+------------------------------------------------------------------------
+
 open BalabanRGTOE public using
   ( BalabanCategoricalFibreTOEReceipt
   ; canonicalBalabanCategoricalFibreTOEReceipt

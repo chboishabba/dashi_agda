@@ -1717,6 +1717,47 @@ unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
 -- BALABAN CATEGORICAL FIBRE NORMALIZATION
 ------------------------------------------------------------------------
 
+unifierYMA1SourceFrontierReceipt :
+  YMA1Frontier.YMA1SourceFrontierReceipt
+unifierYMA1SourceFrontierReceipt =
+  YMA1Frontier.canonicalYMA1SourceFrontierReceipt
+
+unifierYMA1ZKPFrame :
+  YMA1Frontier.YMA1ZKPFrame
+unifierYMA1ZKPFrame =
+  YMA1Frontier.canonicalYMA1ZKPFrame
+
+unifierYMA1FrozenResearchCount :
+  Agda.Builtin.Nat.Nat
+unifierYMA1FrozenResearchCount =
+  YMA1Frontier.frozenResearchCount
+    YMA1Frontier.canonicalYMA1SourceFrontierReceipt
+
+unifierYMA1FrozenResearchCountIsFour :
+  unifierYMA1FrozenResearchCount ≡ 4
+unifierYMA1FrozenResearchCountIsFour =
+  YMA1Frontier.frozenResearchCountStillFour
+
+unifierYMA1RowAStillNotPromoted :
+  YMA1Frontier.rowAPromoted
+    YMA1Frontier.canonicalYMA1SourceFrontierReceipt
+  ≡ false
+unifierYMA1RowAStillNotPromoted =
+  YMA1Frontier.rowAStillNotPromoted
+
+unifierYMA1CompletionDoesNotSelfPromote :
+  DASHI.Physics.YangMills.CompactLieProofLevel.promotable
+    (YMA1Frontier.rowACompletion
+      YMA1Frontier.canonicalYMA1SourceFrontierReceipt)
+  ≡ false
+unifierYMA1CompletionDoesNotSelfPromote =
+  YMA1Frontier.rowACompletionDoesNotSelfPromote
+
+
+------------------------------------------------------------------------
+-- BALABAN CATEGORICAL FIBRE NORMALIZATION
+------------------------------------------------------------------------
+
 open BalabanRGTOE public using
   ( BalabanCategoricalFibreTOEReceipt
   ; canonicalBalabanCategoricalFibreTOEReceipt
