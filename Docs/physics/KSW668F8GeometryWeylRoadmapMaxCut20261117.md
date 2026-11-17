@@ -187,3 +187,29 @@ The record **requires** the channelwise tensor/gauge hypothesis; the three scala
 - G6: same-object matter action, retarded tensor FIO, detector calibration/observation. **OPEN**.
 
 **Acceptance/attribution firewall:** source-written Agda; pinned Agda kernel NOT RUN. Original KSW model/TT source, Caldwell–Langlois, Thorne and other cited mathematics retain credit. The user-directed maximum-cut and newly derived conditional algebra are recorded separately; no ESD edits, no unrelated Monster/369 physical correspondence.
+
+
+## Maximum-cut XXXI — full original tensor TT symbol versus discrete derivative mismatch
+
+The original TT differential operator is NOT merely the scalar yy channel. For every 3-vector frequency `k=(a,b,c)`, `P_ij=|k|² delta_ij-k_i k_j`, and `Q=diag(0,1,-1)`, the **original** fourth-order generator is
+```
+T_ij(k) = (P Q P)_ij -(1/2) P_ij trace(P Q).
+```
+With precisely the **same derivative symbol** in both `P` and the divergence, exact rational polynomial identities prove:
+```
+k_i T_ij(k) = 0 (all three components), trace(T)=0,
+T_ij=T_ji, P(k)k=0, P(k)^2=|k|² P(k).
+```
+These remain algebraically true if the same `k` is replaced by a common discrete Fourier derivative symbol, such as a compatible central difference `sin(k_i h)/h`. This does NOT show that the existing radial finite-volume scalar reduction has this exact tensor-compatible symbol.
+
+**Crucial exact negative control:** Construct `T` with original symbol `k=(1,2,3)` and test divergence with a distinct symbol `k_tilde=(1,1,2)`. The resulting exact divergence is
+```
+T(1,2,3)*(1,1,2) = (-3/2, -24, 33/2),
+```
+even though `T(1,2,3)*(1,2,3)=0` and `trace T=0`. Thus source shell-mass coarsening, a noncommuting interpolation, or a mismatched radial operator **cannot be promoted automatically to discrete tensor TT conservation**. The earlier six-grid common source-mass additivity does not establish this claim.
+
+**New source-owner:** `DASHI/Physics/Gravity/KSW668F8TTSymbolDiscreteCompatibilityExact.agda` proves the six polynomial statements for exact rational symbols, with four general identities (all transverse components and trace) and three specific incompatible-symbol counterexample values. New Python test `scripts/test_ksw668_f8_tt_symbol_discrete_compatibility.py` independently checks the full original 3x3 Fourier projector, all three constraints and the exact negative control (7/7 pass). All work is source-written, with Agda kernel **not run**.
+
+**Next formal producer G1:** Construct the actual Cartesian discretization/transfer operators and their commuting diagram to the existing `d=3,7,11` radial FV carriers. Need an explicit map from the full tensor angular decomposition to all componentwise radial discretizations, not just `H_yy`. Then prove or measure discrete divergence/trace defects at the original receiver and source, with boundary and smoothness control. The new finite symbol theorem is a reusable prerequisite, not a replacement for the original simulation.
+
+**Gate accounting:** G1 full original tensor discrete commutation OPEN; G2 original joint weak Israel SAT energy OPEN; G3 coupled SSPRK3 stability OPEN; G4 moving-domain high-Sobolev both-Weyl trace OPEN; G5 independent three-axis convergence OPEN; G6 original matter/FIO/detector OPEN. Original source and paper attributions remain in owners; new mathematics/negative controls remain separately documented. No ESD code changed.
