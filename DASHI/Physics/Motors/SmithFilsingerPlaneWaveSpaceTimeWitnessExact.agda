@@ -153,7 +153,7 @@ planeWaveExactSpaceTimeCell a b x t h =
 -- a general physical volume integral for nonlinear dispersive material.
 import DASHI.Physics.Motors.SmithFilsingerSpaceTimePoyntingTelescopeExact as SpaceTime
 import DASHI.Physics.Motors.SmithFilsingerOpenBoundaryPoyntingGaussExact as Open
-open import Agda.Builtin.Nat using (zero; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 
 planeFaceWindow :
   (a b x t h : ℚ) → Open.OpenRectangularPoyntingFaces
@@ -169,7 +169,7 @@ planeFaceWindow a b x t h =
     }
 
 planeStoredSamples :
-  (a b x t h : ℚ) → (Agda.Builtin.Nat.Nat → ℚ)
+  (a b x t h : ℚ) → (Nat → ℚ)
 planeStoredSamples a b x t h =
   λ { zero → planeEnergy a b x t
     ; (suc _) → planeEnergy a b x (t + h) }
@@ -200,13 +200,18 @@ planeWaveSpaceTimeExteriorConserves :
 planeWaveSpaceTimeExteriorConserves a b x t h =
   planeWaveExactSpaceTimeCell a b x t h
 
+-- Unlike a proof-of-itself refl, this genuinely CONSUMES the
+-- new four-direction source theorem on a nonconstant Maxwell witness.
 planeWaveSamplesMeetFourDirectionOwner :
   (a b x t h : ℚ) →
+  (((planeStoredSamples a b x t h (suc zero)
+      - planeStoredSamples a b x t h zero)
+      + Open.exteriorOrientedPoyntingFlux
+        (planeFaceWindow a b x t h))
+      + (0ℚ + 0ℚ)) ≡ (0ℚ + 0ℚ)
+planeWaveSamplesMeetFourDirectionOwner a b x t h =
   SpaceTime.spaceTimeExteriorEnergyBalance
     (planeWaveFiniteSpaceTimeWindow a b x t h)
-    ≡ SpaceTime.spaceTimeExteriorEnergyBalance
-      (planeWaveFiniteSpaceTimeWindow a b x t h)
-planeWaveSamplesMeetFourDirectionOwner a b x t h = refl
 
 -- The actual 3-vector Poynting normal samples at the source and target
 -- are EXACTLY the two finite x-axis boundary samples used above.
