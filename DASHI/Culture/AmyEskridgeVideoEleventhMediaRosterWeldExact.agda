@@ -132,6 +132,27 @@ foxElevenCanonicalKeys =
   nunoKey ∷ chavezKey ∷ thomasKey ∷ casiasKey ∷ garciaKey ∷
   amyKey ∷ []
 
+-- Source-object identity with the actual Round44 existing producer list.
+-- This checks that the ten case objects selected for the Fox comparison
+-- are definitionally the same records in the prior House/reporting owner.
+houseTenProducers : List House.OfficialInquiryPerson
+houseTenProducers =
+  House.hicks ∷ House.reza ∷ House.mccasland ∷ House.maiwald ∷
+  House.grillmair ∷ House.nuno ∷ House.chavez ∷ House.thomas ∷
+  House.casias ∷ House.garcia ∷ []
+
+houseProducerListIsOriginal :
+  houseTenProducers ≡ House.officialReportingTen
+houseProducerListIsOriginal = refl
+
+mediaKeys : List SecondaryReportedRosterMember → List PersonKey
+mediaKeys [] = []
+mediaKeys (x ∷ xs) = personKey x ∷ mediaKeys xs
+
+elevenArticleKeysMatchNormalizedEnumeration :
+  mediaKeys foxPublishedNamesNormalized ≡ foxElevenCanonicalKeys
+elevenArticleKeysMatchNormalizedEnumeration = refl
+
 -- Repo-native list append, so this identity is proven against the
 -- pre-existing ten-case normalized enumeration rather than a hand-copied
 -- 11-person right-hand side.
