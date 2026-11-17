@@ -54,7 +54,7 @@ hundredfoldNeedsBudget :
 hundredfoldNeedsBudget r =
   Cycle.≤-trans
     (Bound.transportUpper
-      (ConditionalHundredfold.hundredfoldDelivered r)
+      (Bound.sym (ConditionalHundredfold.hundredfoldDelivered r))
       (Bound.≤-append
         (100 * Cycle.RepeatableSourceCycle.controllerWork
           (ConditionalHundredfold.restored r))
