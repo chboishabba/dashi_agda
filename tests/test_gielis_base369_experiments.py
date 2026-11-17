@@ -1,0 +1,906 @@
+"""Regression tests for the Gielis/Base369 finite and numerical cut.
+
+Run: python -m pytest -q tests/test_gielis_base369_experiments.py
+"""
+import importlib.util
+from pathlib import Path
+import sys
+from fractions import Fraction
+
+import numpy as np
+import pytest
+
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT / "scripts") not in sys.path:
+    sys.path.insert(0,str(ROOT / "scripts"))
+SPEC = importlib.util.spec_from_file_location(
+    "gielis_base369_experiments", ROOT / "scripts" / "gielis_base369_experiments.py"
+)
+g = importlib.util.module_from_spec(SPEC)
+sys.modules[SPEC.name] = g
+SPEC.loader.exec_module(g)
+
+
+def test_exact_gram_and_projector_laws():
+    result = g.exact_receipt()
+    assert result["gram"]["3x6"] == 0
+    assert result["gram"]["3x9"] == 0
+    assert result["gram"]["6x9"] == 0
+    assert result["checked_basis_vectors"] == 18
+
+
+@pytest.mark.parametrize("m", (3, 6, 9))
+def test_continuous_symmetric_radius_and_exact_sampling(m):
+    theta = np.linspace(-3.2, 3.2, 97)
+    np.testing.assert_allclose(g.gielis_radius(theta + 2*np.pi/m, m),
+                               g.gielis_radius(theta, m), rtol=0, atol=1e-13)
+    np.testing.assert_allclose(g.gielis_radius(-theta, m),
+                               g.gielis_radius(theta, m), rtol=0, atol=1e-13)
+    grid = np.arange(18) * (2*np.pi/18)
+    # 8*(r^(-2)-3/4) = 2*cos(m*theta), i.e. exact integral sampler.
+    np.testing.assert_allclose(
+        8*(g.gielis_radius(grid,m)**(-2) - .75),
+        np.array(g.signature(m)), rtol=0, atol=5e-14)
+
+
+def test_projector_on_rational_basis():
+    e = tuple(Fraction(int(j == 7)) for j in range(18))
+    assert g.projector(g.projector(e, 6), 9) == g.projector(e, 18)
+    assert g.projector(g.projector(e, 3), 9) == g.projector(e, 9)
+    assert g.projector(g.projector(e, 3), 6) == g.projector(e, 6)
+
+
+@pytest.mark.parametrize("m", (3, 6, 9))
+def test_ellipse_free_dirichlet_spectrum_positive(m):
+    vals = g.laplacian_eigenvalues(m, 25, k=3)
+    assert len(vals) == 3
+    assert all(v > 0 for v in vals)
+    assert vals == sorted(vals)
+
+
+@pytest.mark.parametrize("m", (3, 6, 9))
+@pytest.mark.parametrize("epsilon", (0., .12, .24))
+def test_reflector_endpoint_lock_and_finite_segments(m, epsilon):
+    vertices = g.spiral_vertices(m, epsilon, 192)
+    assert vertices.shape == (193, 2)
+    assert np.linalg.norm(vertices[0]) == pytest.approx(.75)
+    assert np.linalg.norm(vertices[-1]) == pytest.approx(1.55)
+    assert np.isfinite(vertices).all()
+
+
+def test_baseline_independent_of_m_when_epsilon_zero():
+    np.testing.assert_allclose(g.spiral_vertices(3, 0, 256),
+                               g.spiral_vertices(9, 0, 256), rtol=0, atol=1e-15)
+
+
+def test_specular_reflection_and_single_ray_export():
+    boundary = g.spiral_vertices(3, .12, 384)
+    trace = g.trace_ray(.37*np.pi, boundary, max_bounces=5, record=True)
+    assert trace["exit_reason"] in {
+        "absorbed_at_target", "outer_gate", "escaped_open_reflector",
+        "reflection_limit"
+    }
+    assert trace["path"] and len(trace["path"][0]) == 2
+    assert len(trace["collisions"]) <= 6
+    assert trace["absolute_torque"] >= abs(trace["signed_torque"]) - 1e-12
+
+
+def test_small_pareto_sweep_and_determinism():
+    runs1 = g.optical_sweep(rays=24, segments=128, bounces=3)
+    runs2 = g.optical_sweep(rays=24, segments=128, bounces=3)
+    assert runs1 == runs2 and len(runs1) == 7
+    assert g.pareto(runs1)
+    assert all(0 <= row["focus_fraction"] <= 1 for row in runs1)
+
+
+def test_exact_18_to_36_nyquist_phase_resolution():
+    r = g.nyquist36_receipt()
+    assert r["coarse_sine_samples_zero"] == 18
+    assert r["fine_sine9_j1"] == 1
+    assert r["fine_sine27_j1"] == -1
+    assert r["cos_sin9_gram"] == 0
+
+
+def test_zero_reflection_budget_is_strict():
+    scene = g.spiral_vertices(3, 0.12, 192)
+    for angle in (.1,.6,1.1,2.8,4.8):
+        row = g.trace_ray(angle, scene, max_bounces=0, record=True)
+        assert row["reflections"] == 0
+        assert len(row["collisions"]) == 0
+
+
+def test_bounce_budget_never_exceeded():
+    scene = g.spiral_vertices(6, 0.24, 192)
+    for angle in np.linspace(0, 2*np.pi, 31,endpoint=False):
+        row = g.trace_ray(float(angle), scene, max_bounces=3, record=True)
+        assert row["reflections"] <= 3
+        assert row["reflections"] == len(row["collisions"])
+
+
+def test_pareto_both_legal_torque_objectives():
+    designs = [
+        {"name":"A", "focus_fraction":.60, "mean_abs_torque":1.},
+        {"name":"B", "focus_fraction":.40, "mean_abs_torque":2.},
+        {"name":"C", "focus_fraction":.20, "mean_abs_torque":.25},
+    ]
+    assert [x["name"] for x in g.pareto(designs, "min")] == ["A","C"]
+    assert [x["name"] for x in g.pareto(designs, "max")] == ["A","B"]
+    with pytest.raises(ValueError):
+        g.pareto(designs, "unspecified")
+
+
+def test_non369_controls_are_not_silently_excluded():
+    controls = g.optical_sweep(rays=16,segments=128,bounces=2,
+                               include_controls=True)
+    assert len(controls)==13
+    assert {item["m"] for item in controls} == {3,4,5,6,7,9}
+    assert all(item["total_reflections"] <= 16*2 for item in controls)
+
+
+def test_roadmap_has_complete_exact_leaves_and_deliverables():
+    import re
+    roadmap = (ROOT / "Docs/support/reference/GielisBase369Roadmap.md").read_text()
+    ids = re.findall(r"^\| (G\d\d) \|",roadmap,flags=re.MULTILINE)
+    assert ids == [f"G{i:02d}" for i in range(1,22)]
+    for phase in range(6):
+        assert f"P{phase} " in roadmap or f"P{phase} —" in roadmap
+    for deliverable in range(8):
+        assert f"D{deliverable}" in roadmap
+    for owner in (
+        "Base369CirclePhase.agda",
+        "DNAHelixDihedralExact.agda",
+        "TorqueTrialectic369Exact.agda",
+        "AnalyticLogPolarSpiralCompilerExact.agda",
+        "ShannonInformationEntropyBoundary.agda",
+        "GielisBase369NyquistPhase36Exact.agda",
+    ):
+        assert owner in roadmap
+    assert "OPEN" in roadmap and "kernel" in roadmap
+
+
+def test_roadmap_named_new_sources_exist():
+    for relpath in (
+        "DASHI/Geometry/GielisBase369FiniteExact.agda",
+        "DASHI/Geometry/GielisBase369NyquistPhase36Exact.agda",
+        "DASHI/Geometry/GielisBase369ExistingOwnersWeldExact.agda",
+        "Docs/support/reference/GielisBase369Roadmap.md",
+    ):
+        assert (ROOT / relpath).is_file()
+
+
+def test_model_code_is_reversible_and_baseline_canonical():
+    assert g.model_encode(3,0.) == g.model_encode(9,0.) == "0"
+    assert g.model_decode("0") == (0,0.)
+    codes = set()
+    for m in range(1,10):
+        for q in range(1,451):
+            epsilon=q/1000
+            bits=g.model_encode(m,epsilon)
+            assert g.model_decode(bits) == (m,epsilon)
+            codes.add(bits)
+    assert len(codes)==9*450
+    # In sorted order a strict prefix would precede its extensions.
+    ordered=sorted(codes)
+    assert all(not b.startswith(a) for a,b in zip(ordered,ordered[1:]))
+    with pytest.raises(ValueError):
+        g.model_decode("101")
+
+
+def test_model_code_is_distinct_from_information_optimality():
+    result=g.optical_sweep(rays=12,segments=128,bounces=1)
+    assert all(row["model_code_bits"]>=1 for row in result)
+    assert result[0]["model_code_bits"]==1
+    assert all(row["comparison_to_legacy"]=="not_same_apparatus" for row in result)
+
+
+@pytest.mark.parametrize("m,epsilon", ((3,.12),(6,.24),(9,.12)))
+def test_wall_angular_impulse_conserves_ray_angular_momentum(m,epsilon):
+    """The wall receives the negative of the ray's angular impulse."""
+    scene = g.spiral_vertices(m,epsilon,256)
+    for angle in np.linspace(.05, 2*np.pi-.05, 37):
+        row = g.trace_ray(float(angle), scene, max_bounces=5, record=True)
+        assert row["reflections"] == len(row["collisions"])
+        total_wall_impulse = 0.0
+        for hit in row["collisions"]:
+            pin = np.array(hit["incoming_unit_momentum"])
+            pout = np.array(hit["outgoing_unit_momentum"])
+            normal = np.array(hit["normal"])
+            point = np.array(hit["point"])
+            np.testing.assert_allclose(pout, pin-2*np.dot(pin,normal)*normal,
+                                       rtol=0,atol=3e-13)
+            np.testing.assert_allclose(hit["wall_unit_impulse"],pin-pout,
+                                       rtol=0,atol=3e-13)
+            assert abs(hit["angular_momentum_balance_residual"]) < 1e-13
+            assert hit["wall_angular_impulse"] == pytest.approx(
+                g.cross(point,pin-pout),abs=3e-13)
+            total_wall_impulse += hit["wall_angular_impulse"]
+        assert row["signed_torque"] == pytest.approx(total_wall_impulse,abs=3e-13)
+        assert row["absolute_torque"]+1e-12 >= abs(total_wall_impulse)
+
+
+def test_ideal_specular_power_torque_is_dimensionally_scaled():
+    import math
+    assert g.SPEED_OF_LIGHT_M_S == 299792458
+    for watts in (0., .5, 25., 1000.):
+        for angular_m in (-3.5, 0., 1.25):
+            result = g.ideal_specular_wall_torque_nm(angular_m, watts)
+            assert result == pytest.approx(watts*angular_m/299792458,abs=1e-18)
+    with pytest.raises(ValueError):
+        g.ideal_specular_wall_torque_nm(1., -1.)
+    with pytest.raises(ValueError):
+        g.ideal_specular_wall_torque_nm(1., math.inf)
+
+
+def test_symbolic_gielis_certificates_if_sympy_available():
+    pytest.importorskip("sympy")
+    spec = importlib.util.spec_from_file_location(
+        "gielis_base369_symbolic_certificates",
+        ROOT / "scripts/gielis_base369_symbolic_certificates.py"
+    )
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    receipt=module.prove()
+    assert receipt["status"] == "exact_symbolic_identities_passed"
+    assert receipt["area"] == "sqrt(2)*pi"
+    assert receipt["wall_ray_angular_impulse_balance"]
+    assert not receipt["agda_kernel_accepted"]
+    assert not receipt["physical_optics_validated"]
+
+
+def test_exact_agda_tables_source_audit():
+    spec = importlib.util.spec_from_file_location(
+        "gielis_base369_source_audit",
+        ROOT / "scripts/gielis_base369_source_audit.py"
+    )
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    receipt=module.source_audit(ROOT)
+    assert receipt["finite_checks"] == 648
+    assert receipt["complete_18_case_theorems"] == 19
+    assert receipt["gram_369"] == [[36,0,0],[0,36,0],[0,0,72]]
+    assert not receipt["agda_kernel_accepted"]
+
+
+def test_exact_q_zeta36_character_orthogonality_and_reconstruction():
+    spec=importlib.util.spec_from_file_location(
+        "gielis_cyclotomic36_exact",
+        ROOT/"scripts/gielis_cyclotomic36_exact.py")
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    r=module.receipt()
+    assert r["full_character_orthogonality_pairs"] == 1296
+    assert r["recovered_coefficients"] == 7
+    assert r["all_36_sample_reconstruction"]
+    assert not r["float_computation"]
+    assert not r["agda_kernel_accepted"]
+
+
+def test_exact_rational_sector_spectral_convergence_certificate():
+    spec=importlib.util.spec_from_file_location(
+        "gielis_sector_spectral_certificate",
+        ROOT/"scripts/gielis_sector_spectral_certificate.py")
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    r=module.certificate(9,2048)
+    from fractions import Fraction
+    assert Fraction(r["relative_eigenvalue_error_upper"]) < Fraction(1,100)
+    assert r["rigorous_radial_relative_error_upper"] == "495/100352"
+    assert r["all_dirichlet_eigenvalues_continuum_sector_domain"]
+    assert not r["certified_cartesian_fd_eigensolver_error"]
+    for m in (3,6,9):
+        errors=[
+            Fraction(module.certificate(m,n)["relative_eigenvalue_error_upper"])
+            for n in (64,128,256,512)
+        ]
+        assert all(x>y for x,y in zip(errors,errors[1:]))
+        assert module.minimal_sector_count(m,Fraction(1,100)) > 0
+
+
+def test_independent_analytic_spiral_first_hit_parity_smoke():
+    pytest.importorskip("scipy")
+    spec=importlib.util.spec_from_file_location(
+        "gielis_reflection_parity",
+        ROOT/"scripts/gielis_reflection_parity.py")
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    r=module.parity(m=3,epsilon=.12,rays=12,segments=384,brackets=3072)
+    assert r["rays"] == 12
+    assert r["paired"] >= 1
+    assert not r["same_as_original_Kozyrev_HTML_SDF"]
+    assert not r["grazing_and_tangency_completeness_proved"]
+
+
+def test_random_angle_hoeffding_optical_receipt_is_explicitly_simulated():
+    spec=importlib.util.spec_from_file_location(
+        "gielis_optical_statistics",
+        ROOT/"scripts/gielis_optical_statistics.py")
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    r=module.matched_random_sweep(rays=24,segments=128,bounces=2,
+                                  seed=369,include_controls=False)
+    assert r["familywise_simultaneous_coverage_at_least"] == .95
+    assert len(r["results"]) == 7
+    assert r["no_inference_for_deterministic_grid"]
+    for design in r["results"]:
+        lo,hi=design["focus_hoeffding_interval"]
+        assert lo <= design["focus_fraction"] <= hi
+        lo,hi=design["mean_abs_impulse_hoeffding_interval"]
+        assert lo <= design["mean_abs_torque"] <= hi
+        assert not design["physical_calibration"]
+
+
+
+def test_exact_radial_rayleigh_ritz_bound():
+    pytest.importorskip("sympy")
+    spec=importlib.util.spec_from_file_location(
+        "gielis_rayleigh_spectral_bound",
+        ROOT/"scripts/gielis_rayleigh_spectral_bound.py")
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    proof=module.theorem()
+    assert proof["m3_continuum_lambda1_upper_rational_strict"]=="1273/264"
+    assert proof["m3_upper_decimal"]<4.822
+    assert not proof["certified_numeric_FD_error"]
+
+
+def test_new_smooth_spiral_first_hit_refinement():
+    pytest.importorskip("scipy")
+    spec=importlib.util.spec_from_file_location(
+        "gielis_reflection_parity_convergence",
+        ROOT/"scripts/gielis_reflection_parity.py")
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    coarse=module.parity(m=3,epsilon=.12,rays=20,segments=384,brackets=6144)
+    fine=module.parity(m=3,epsilon=.12,rays=20,segments=1536,brackets=6144)
+    assert coarse["paired"]>=1 and fine["paired"]>=1
+    assert coarse["unpaired"]==0 and fine["unpaired"]==0
+    assert fine["max_first_hit_error_m"]<coarse["max_first_hit_error_m"]
+    assert not fine["same_as_original_Kozyrev_HTML_SDF"]
+
+
+def test_original_pr1404_kozyrev_bridge_fails_closed_without_sources(tmp_path):
+    spec=importlib.util.spec_from_file_location(
+        "gielis_kozyrev_pr1404_bridge",
+        ROOT/"scripts/gielis_kozyrev_pr1404_bridge.py")
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    receipt=module.match_original_owners(tmp_path,segments=128,
+                                         first_hit_rays=12)
+    assert receipt["status"]=="NOT_CHECKED"
+    assert receipt["original_pr"]==1404
+    assert not receipt["original_HTML_SDF_parity"]
+    assert set(receipt["missing_original_files"]) == set(module.ORIGINAL_FILES)
+
+
+def test_kozyrev_legacy_pr1404_baseline_mathematical_centerline_identity():
+    import math
+    t=np.linspace(0.,3*math.pi,257)
+    geom= g.spiral_vertices(3,0.,segments=256)
+    theta=t
+    r=.75*np.exp(math.log(1.55/.75)*theta/(3*math.pi))
+    independent=np.column_stack((r*np.cos(theta),r*np.sin(theta)))
+    np.testing.assert_allclose(geom,independent,rtol=0,atol=1e-14)
+
+
+def test_kozyrev_bridge_real_sources_if_checked_out():
+    spec=importlib.util.spec_from_file_location(
+        "gielis_kozyrev_pr1404_bridge",
+        ROOT/"scripts/gielis_kozyrev_pr1404_bridge.py")
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    receipt=module.match_original_owners(segments=256,first_hit_rays=24)
+    if receipt["status"]=="NOT_CHECKED":
+        pytest.skip("PR1404 original owners are in a different open Git ref")
+    assert receipt["status"]=="CENTRELINE_PARITY_CHECKED"
+    assert receipt["matched_centreline_max_position_error_m"]<1e-12
+    assert receipt["first_hit_comparison_skipped"]==0
+    assert receipt["first_hit_max_difference_m"]<1e-11
+    assert receipt["power_ledger_event_count"]>=1
+    assert receipt["max_angular_residual_Nm"]<1e-12
+    assert not receipt["original_HTML_SDF_parity"]
+
+
+def test_hoeffding_paired_random_angle_baseline_controls():
+    spec=importlib.util.spec_from_file_location(
+        "gielis_optical_statistics_paired",
+        ROOT/"scripts/gielis_optical_statistics.py")
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    receipt=module.matched_random_sweep(rays=36,segments=128,bounces=2,
+                                        seed=369,include_controls=True)
+    assert len(receipt["paired_baseline_intervals"]) == 12
+    assert receipt["paired_familywise_coverage_at_least"] == .95
+    for row in receipt["paired_baseline_intervals"]:
+        lo,hi=row["focus_difference_simultaneous_interval"]
+        assert lo <= row["focus_difference_from_baseline"] <= hi
+        lo,hi=row["impulse_difference_simultaneous_interval"]
+        assert lo <= row["absolute_impulse_difference_from_baseline"] <= hi
+        assert row["interpretation"].endswith("only")
+
+
+@pytest.mark.parametrize("m,n",((3,25),(3,41),(6,41),(9,41),(3,61)))
+def test_original_raster_fd_discrete_eigenvalue_rational_pf_enclosure(m,n):
+    spec=importlib.util.spec_from_file_location(
+        "gielis_raster_fd_positivity_certificate",
+        ROOT/"scripts/gielis_raster_fd_positivity_certificate.py")
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    r=module.certify(m,n)
+    from fractions import Fraction
+    low=Fraction(r["rational_lower"])
+    high=Fraction(r["rational_upper"])
+    assert 0 < low <= high
+    assert float(low)-1e-8 <= r["original_fd_eigsh_estimate"] <= float(high)+1e-8
+    assert r["certified_interval_width"] < 1e-6
+    assert r["adjacency_connected"]
+    assert r["all_integer_test_vector_entries_positive"]
+    assert not r["continuum_dirichlet_mesh_convergence_proved"]
+
+
+def test_referee_offset_wall_parity_if_exact_pr1404_sources_available():
+    spec=importlib.util.spec_from_file_location(
+        "gielis_kozyrev_pr1404_offset_bridge",
+        ROOT/"scripts/gielis_kozyrev_pr1404_bridge.py")
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    source,_=module.locate_modules()
+    if source is None:
+        pytest.skip("original PR1404 source blobs not present at this checkout")
+    row=module.match_original_owners(segments=384,first_hit_rays=48,
+                                     thickness=.156)
+    assert row["status"]=="OFFSET_WALL_REFEREE_PARITY_CHECKED"
+    assert row["matched_normal_offset_wall_max_position_error_m"]<1e-12
+    assert row["first_hit_comparison_skipped"]==0
+    assert row["first_hit_max_difference_m"]<1e-10
+    assert not row["original_HTML_SDF_parity"]
+
+
+def test_first_hit_minimum_forward_threshold():
+    poly=np.array([[-1.,-.2],[1.,.2],[2.,.1]])
+    origin=np.array([-2.,0.])
+    direction=np.array([1.,0.])
+    first=g.nearest_hit(origin,direction,poly)
+    if first is not None:
+        assert first[0]>0
+    assert g.nearest_hit(origin,direction,poly,min_t=10.) is None
+    with pytest.raises(ValueError):
+        g.nearest_hit(origin,direction,poly,min_t=-.1)
+
+
+def test_exact_radiation_pressure_torque_envelope():
+    spec=importlib.util.spec_from_file_location(
+        "gielis_optical_force_envelope",
+        ROOT/"scripts/gielis_optical_force_envelope.py")
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    from fractions import Fraction
+    for power in ("0","100","9000"):
+        for eta in ("0","1/2","19/20","1"):
+            row=module.envelope(power,"17/10",8,eta)
+            bound=Fraction(row["exact_absolute_wall_torque_bound_Nm"])
+            ideal=Fraction(row["perfect_reflector_bound_Nm"])
+            assert 0 <= bound <= ideal
+            if eta=="1":
+                assert bound==ideal
+    row=module.envelope("9000","17/10",0,"1")
+    assert Fraction(row["exact_absolute_wall_torque_bound_Nm"])==0
+    with pytest.raises(ValueError):
+        module.envelope("9000","17/10",8,"11/10")
+    with pytest.raises(ValueError):
+        module.envelope("-1","17/10",8,"1")
+
+
+def test_canonical_si_existing_owner_and_nominal_torque_role():
+    from gielis_si_owner_adapter import canonical_speed_of_light_si, owner_receipt
+    r=owner_receipt()
+    assert canonical_speed_of_light_si()==299792458
+    assert g.SPEED_OF_LIGHT_M_S == r["speed_of_light_m_per_s"]
+    assert r["si_power_exponents_MLT"] == (1,2,-3)
+    assert r["si_force_exponents_MLT"] == (1,1,-2)
+    assert r["si_wall_torque_exponents_MLT"] == (1,2,-2)
+    assert r["si_angular_impulse_exponents_MLT"] == (1,2,-1)
+    assert r["torque_is_nominally_not_energy"]
+    assert not r["apparatus_calibrated"]
+    from gielis_optical_force_envelope import C as envelope_c
+    assert envelope_c==r["speed_of_light_m_per_s"]
+
+
+def test_gielis_si_perron_native_weld_declares_exact_owner_reuse():
+    src=(ROOT/"DASHI/Geometry/GielisSIPerronOwnerWeldExact.agda").read_text()
+    assert "DASHI.Physics.Units.SI" in src
+    assert "DASHI.Physics.Units.SIMetrologyBridge" in src
+    assert "DASHI.Promotion.SIExactConstantParsedCarrierRequest" in src
+    assert "DASHI.Physics.YangMills.BalabanFiniteInfluenceRowMassPowerExact" in src
+    assert "MechanicalSI.mechanicalEnergyToSI" in src
+    assert "speedOfLightIsExactSIInteger" in src
+    assert "mechanicalOpticalTorqueIsSI" in src
+    assert "finiteInfluenceRowPowerBoundReuse" in src
+    assert "EmpiricalOpticalCalibration" in src
+
+
+def test_native_mechanical_to_si_torque_magnitude_owner():
+    source=(ROOT/"DASHI/Geometry/GielisSIPerronOwnerWeldExact.agda").read_text()
+    for theorem in (
+        "modelOpticalForce",
+        "modelOpticalTorqueRaw",
+        "modelOpticalTorqueHasActualMagnitude",
+        "modelOpticalTorqueInExistingSI",
+        "modelOpticalTorqueSIMagnitude",
+        "modelOpticalTorqueWithDeflectionMagnitude",
+        "modelOpticalTorqueWithDeflectionInSI",
+    ):
+        assert theorem in source
+    assert "Mechanical.multiplyQuantity _*_" in source
+    assert "MechanicalSI.mechanicalQuantityToSI" in source
+    assert "sourcePower : OpticalSIObservable" in source
+
+
+def test_native_si_laplacian_physical_dimension_owner():
+    source=(ROOT/"DASHI/Geometry/GielisSpectralSIScaleExact.agda").read_text()
+    assert "nativeSpectralDimensionMatchesSI" in source
+    assert "inverseAreaTimesAreaDimensionless" in source
+    assert "scaleEigenvalueSIScalar" in source
+    assert "DASHI.Physics.Units.MechanicalDimensionExact" in source
+    assert "DASHI.Physics.YangMills.YangMillsSIScalingEndpointExact" in source
+
+
+def test_exact_continuum_gielis_m3_physical_scale_interval():
+    from gielis_physical_spectral_si import (
+        gielis_m3_physical_continuum_enclosure,
+        physical_scale_discrete_lambda_interval,
+    )
+    r=gielis_m3_physical_continuum_enclosure("99/100","101/100")
+    assert Fraction(r["first_dirichlet_eigenvalue_lower_m^-2_open"]) == Fraction(448000,112211)
+    assert Fraction(r["first_dirichlet_eigenvalue_upper_m^-2_open"]) == Fraction(1591250,323433)
+    assert r["lambda_dimension_MLT"] == (0,-2,0)
+    assert not r["scale_interval_is_measured"]
+    assert not r["physical_resonant_frequency_inferred"]
+    scaled=physical_scale_discrete_lambda_interval("4","5","2","3")
+    assert Fraction(scaled["first_eigenvalue_lower_m^-2"])==Fraction(4,9)
+    assert Fraction(scaled["first_eigenvalue_upper_m^-2"])==Fraction(5,4)
+    assert not scaled["continuum_fd_convergence_proved"]
+    with pytest.raises(ValueError):
+        gielis_m3_physical_continuum_enclosure("2","1")
+
+
+def test_si_optical_interval_uses_canonical_c_and_zero_lower_bound():
+    from gielis_si_optical_interval import si_torque_uncertainty_enclosure
+    r=si_torque_uncertainty_enclosure("8500","9500","3/2","17/10",
+                                    "9/10","19/20",8)
+    assert r["source_c_SI_m_per_s"]==g.SPEED_OF_LIGHT_M_S
+    assert Fraction(r["absolute_torque_lower_Nm"])==0
+    upper=Fraction(r["absolute_torque_upper_Nm"])
+    assert upper>0
+    assert tuple(map(Fraction,r["signed_torque_interval_Nm"]))==(-upper,upper)
+    assert upper <= Fraction(r["perfect_reflector_upper_Nm"])
+    assert r["lower_bound_cannot_be_promoted_above_zero"]
+    assert not r["calibration_receipt_present"]
+    assert not r["non_optical_forces_bounded"]
+    lossless=si_torque_uncertainty_enclosure("100","100","1","1","1","1",3)
+    assert Fraction(lossless["absolute_torque_upper_Nm"])==Fraction(600,299792458)
+    zero=si_torque_uncertainty_enclosure("0","0","1","2","0","1",8)
+    assert Fraction(zero["absolute_torque_upper_Nm"])==0
+    with pytest.raises(ValueError):
+        si_torque_uncertainty_enclosure("100","80","1","2","0","1",8)
+
+
+def test_new_native_bishop_conditional_369_trig_compiler_and_edge_identity():
+    bishop=(ROOT/"DASHI/Geometry/GielisBishopPolynomialExact.agda").read_text()
+    assert "bishopUnityCorrection" in bishop
+    assert "bishopCorrectedQuarticFromPythagorean" in bishop
+    assert "bishopGielisConfiguredTrigIdentity" in bishop
+    assert "BishopP.≃-trans" in bishop
+    edges=(ROOT/"DASHI/Geometry/GielisFiniteGroundStateEdgeExact.agda").read_text()
+    for theorem in ("edgeGroundStateIdentity","edgeSquareNonnegative",
+                    "finiteGroundStateEdgeIdentity","finiteEdgeSquareSumNonnegative"):
+        assert theorem in edges
+    assert "Fubini.sumRationalAdd" in edges
+    assert "Sums.sumRationalCong" in edges
+    assert "Ring.solve-∀" in edges
+    assert "postulate" not in edges.split("open import")[1]
+
+
+def test_finite_ground_state_transform_identity_exact_rational_probes():
+    from gielis_raster_fd_positivity_certificate import ground_state_identity_exact
+    from fractions import Fraction as F
+    edges=[[1],[0,2],[1]]
+    q=[2,3,5]
+    for x in ([0,0,0],[2,-3,7],[2,3,5],[-2,7,-9],
+              [F(3,7),F(13,17),F(-11,5)]):
+        proof=ground_state_identity_exact(q,edges,x)
+        assert proof["energy"] == proof["diagonal_potential"]+proof["edge_squares"]
+        assert proof["edge_squares"]>=0
+
+
+def test_vanishing_fd_mask_tolerance_preserves_legacy_grids_and_limit():
+    assert g.raster_boundary_tolerance(3/40) == 1e-12
+    assert g.raster_boundary_tolerance(3/60) == 1e-12
+    assert g.raster_boundary_tolerance(1e-9) == pytest.approx(1e-18)
+    assert g.raster_boundary_tolerance(1e-7) == pytest.approx(1e-14)
+    assert g.raster_boundary_tolerance(1e-12) == pytest.approx(1e-24)
+    with pytest.raises(ValueError):
+        g.raster_boundary_tolerance(0)
+
+
+@pytest.mark.parametrize("m,n",((3,41),(6,41),(9,41),(3,61)))
+def test_exact_original_fd_zero_extension_energy_identity(m,n):
+    from gielis_fd_energy_mosco import receipt
+    r=receipt(m,n)
+    assert r["status"]=="exact_discrete_energy_identity_passed"
+    assert r["legacy_1e_minus_12_mask_equal_at_selected_n"]
+    assert r["boundary_tolerance_limit_zero"]
+    assert r["exact_test_vectors"]==4
+    assert r["all_difference_squares_nonnegative"]
+    assert not r["liminf_compactness_proof_in_python"]
+    for c in r["checks"]:
+        assert c["exact_identity"]
+        assert c["operator_energy_integer"]==c["finite_difference_energy_integer"]
+
+
+def test_exact_selected_m9_quarter_wave_fourier_vs_original_zeta36():
+    from gielis_nine_quarter_fourier_exact import receipt
+    r=receipt()
+    assert r["status"]=="exact_quarter_wave_fourier_passed"
+    assert r["exact_rational_roundtrips"]==625
+    assert r["same_original_zeta36_characters"]
+    assert not r["full_C36_native_fourier_accepted"]
+    assert not r["agda_kernel_accepted"]
+
+
+def test_native_selected_fourier_and_bishop_double_angle_reuse():
+    src=(ROOT/"DASHI/Geometry/GielisNineModeFourierExact.agda").read_text()
+    for theorem in ("fourierFourRoundTrip","fourierFourCoefficientRoundTrip",
+                    "cosineNineIsPureFourierMode","sineNineIsPureFourierMode",
+                    "reconstructNineQuarterSamples"):
+        assert theorem in src
+    assert "DASHI.Geometry.GielisBase369NyquistPhase36Exact" in src
+    bishop=(ROOT/"DASHI/Geometry/GielisBishopPolynomialExact.agda").read_text()
+    assert "BishopConcreteDoubleAngleInputs" in bishop
+    assert "bishopCosineQuadrupleFromTwoDoubleAngles" in bishop
+    assert "bishopGielisFromPythagoreanAndTwoDoubleAngles" in bishop
+
+
+def test_selected_six_phase_CRT_Fourier_reuses_native_C3():
+    from gielis_six_phase_cyclotomic_exact import receipt
+    r=receipt()
+    assert r["status"]=="exact_C6_CRT_cyclotomic_Fourier_reuse_passed"
+    assert r["sample_vectors_exact"]==729
+    assert r["site_index_even"]==[0,4,2]
+    assert r["site_index_odd"]==[3,1,5]
+    assert r["mode_indices"]==[0,2,4,3,5,1]
+    assert r["componentwise_full_C6_roundtrip"]
+    assert r["crosscheck_with_direct_Q_zeta36_DFT"]
+    assert not r["full_C36_DFT_accepted"]
+
+
+def test_selected_C6_native_source_imports_original_C3_cyclotomic_inversion():
+    source=(ROOT/"DASHI/Geometry/GielisSixPhaseCyclotomicFourierExact.agda").read_text()
+    assert "DASHI.Biology.Physical.C3CubeCyclotomicFourierExact" in source
+    for term in ("C3.oneDimensionalFourierInversion",
+                 "C3.oneDimensionalFourierForwardInverse",
+                 "sixFourierInversion","sixFourierForwardInverse",
+                 "reconstructSelectedSixSamples"):
+        assert term in source
+    assert "Phase.p18-4" in source and "Phase.p18-5" in source
+
+
+@pytest.mark.parametrize("m,n,inside_count",((3,41,792),(6,41,779),
+                                            (9,41,792),(3,61,1788)))
+def test_exact_rational_unshrunken_Gielis_raster_membership(m,n,inside_count):
+    from gielis_exact_rational_raster_geometry import receipt,exact_mask
+    r=receipt(m,n)
+    assert r["status"]=="exact_unshrunken_Gielis_raster_classification"
+    assert r["integer_fraction_only_for_membership"]
+    assert r["fixed_binary64_boundary_error_in_membership"] is False
+    assert r["legacy_float_mask_disagreements"] == 0
+    assert r["interior_nodes"] == inside_count
+    assert int(exact_mask(m,n).sum()) == inside_count
+    assert not r["Agda_native_rational_predicate_kernel_accepted"]
+
+
+def test_exact_rational_gielis_odd_sign_decisions_and_boundary():
+    from gielis_exact_rational_raster_geometry import (
+        exact_inside_gielis,complex_integer_power_real,grid_coordinate
+    )
+    from fractions import Fraction as F
+    for m in (3,6,9):
+        assert exact_inside_gielis(F(0),F(0),m)
+        assert not exact_inside_gielis(F(1),F(0),m)
+        assert exact_inside_gielis(F(1,2),F(0),m)
+    assert complex_integer_power_real(F(3,5),F(4,5),2)==F(-7,25)
+    assert grid_coordinate(41,0)==F(-3,2)
+    assert grid_coordinate(41,40)==F(3,2)
+    assert grid_coordinate(41,20)==F(0)
+    with pytest.raises(ValueError):
+        exact_inside_gielis(F(0),F(0),0)
+
+
+def test_native_selected_exact_rational_gielis_classifier_source():
+    source=(ROOT/"DASHI/Geometry/GielisExactRationalGridPredicateExact.agda").read_text()
+    assert "Data.Rational.Properties" in source
+    assert "oddRootLessThanZero" in source
+    assert "insideEvenMode" in source and "insideOddMode" in source
+    for symbol in ("insideGielis3","insideGielis6","insideGielis9",
+                   "positiveAxisBoundary3","positiveAxisBoundary6",
+                   "positiveAxisBoundary9"):
+        assert symbol in source
+    assert "postulate" not in source.split("open import")[1]
+
+
+def test_exact_signed_photon_wall_torque_in_SI():
+    from gielis_exact_signed_optical_torque import receipt,torque_event
+    r=receipt()
+    assert r["status"]=="exact_SI_signed_angular_impulse_event_passed"
+    assert r["rotation_pi_invariant"]
+    assert r["interchange_in_out_negative_when_reflectivity_one"]
+    assert not r["actual_power_or_hit_measurement"]
+    from fractions import Fraction as F
+    assert F(r["positive_torque"]["exact_signed_torque_Nm"]) == F(18000,299792458)
+    assert F(r["negative_torque"]["exact_signed_torque_Nm"]) == -F(18000,299792458)
+    assert F(r["zero_torque"]["exact_signed_torque_Nm"]) == 0
+    with pytest.raises(ValueError):
+        torque_event(100,1,0,0,1,0,-1,"2")
+
+
+def test_native_original_cross_to_SI_torque_weld():
+    source=(ROOT/"DASHI/Geometry/GielisOpticalTorqueCrossSIExact.agda").read_text()
+    assert "DASHI.Physics.Foundations.R3HodgeCrossExact" in source
+    for theorem in ("wallLeverIsCrossZ","crossAntisymmetry",
+                    "noDeflectionNoImpulse",
+                    "swapIncomingOutgoingReversesSignedLever",
+                    "rotatePositionAndRayPiPreservesSignedLever",
+                    "modelWallTorqueSIMagnitude",
+                    "existingHodgeCrossConvention"):
+        assert theorem in source
+    assert "SIWeld.modelOpticalTorqueHasActualMagnitude" in source
+    assert "ExistingSI.mechanicalQuantityToSI" in source
+
+
+def test_native_Bishop_one_complex_imaginary_exp_law_replaces_trig_assumptions():
+    source=(ROOT/"DASHI/Geometry/GielisBishopImaginaryExponentialReducerExact.agda").read_text()
+    for theorem in (
+       "ImaginaryAxisSameSourceExponentialDoubling",
+       "cosineDoubleFromImaginaryExponential",
+       "sineDoubleFromImaginaryExponential",
+       "fourIsTwiceTwice",
+       "concreteDoubleAngleInputsFromImaginaryExp",
+       "gielisRound11FromOneImaginaryExponentialLaw",
+       "realBishopExpAddAlreadyProved",
+    ):
+        assert theorem in source
+    assert "DASHI.Analysis.BishopSetoidComplexExact" in source
+    assert "DASHI.Foundations.BishopExponentialCauchyProductExact" in source
+    assert "TrigCong.bishopCosCongruent" in source
+    assert "Round11.termIdentification" in source
+    assert "Complex.reEquivalent" in source
+    assert "Complex.imEquivalent" in source
+
+
+def test_native_bishop_complex_ring_laws_for_cauchy_product():
+    source=(ROOT/"DASHI/Geometry/GielisBishopComplexCauchyAlgebraExact.agda").read_text()
+    for name in ("complexAddCommutative","complexAddAssociative",
+                 "complexMulCommutative","complexMulAssociative",
+                 "complexMulDistributiveLeft","complexMulDistributiveRight"):
+        assert name in source
+    assert "DASHI.Analysis.BishopSetoidComplexExact" in source
+    assert "BishopP.ℝ-Solver" in source
+    assert "Complex.≈C-trans" in source
+    assert "postulate" not in source.split("import Real")[1]
+
+
+def test_exact_all_mode_faber_krahn_continuum_first_eigenvalue_bound():
+    from gielis_continuum_faber_krahn_bound import certificate
+    from fractions import Fraction as F
+    c=certificate()
+    assert c["status"]=="exact_rational_Faber_Krahn_Gielis_continuum_lower"
+    assert c["applies_to_all_positive_integer_modes"]
+    assert F(c["J0_first_zero_strictly_greater_than"])==F(12,5)
+    assert F(c["J0_alternating_S5_strict_lower_rational"])==F(608149,244140625)
+    assert F(c["J1_inner_uniform_positive_lower_on_0_to_12_over_5"])==F(7,25)
+    assert F(c["first_continuum_dirichlet_eigenvalue_strict_lower"])==F(224,55)
+    assert F(c["sqrt2_strict_rational_upper"])**2>2
+    assert not c["native_Agda_Bessel_FaberKrahn_closed"]
+
+
+def test_native_rational_bessel_J0_FaberKrahn_lower_certificate():
+    source=(ROOT/"DASHI/Geometry/GielisBesselFaberKrahnRationalExact.agda").read_text()
+    for theorem in ("j0S5Exact","j0S5StrictPositive",
+                    "j1FirstRatioBelowOne","j1UniformLowerExact",
+                    "sqrtTwoUpperSquareAboveTwo","eigenvalueLowerArithmeticExact",
+                    "eigenvalueRationalLowerAboveFour"):
+        assert theorem in source
+    assert "608149" in source and "244140625" in source
+    assert "224" in source and "55" in source
+
+
+def test_full_C36_all_character_resolution_and_unrestricted_basis():
+    from gielis_cyclotomic36_unrestricted_exact import receipt
+    r=receipt()
+    assert r["status"]=="full_arbitrary_36_signal_C36_inversion_exact"
+    assert r["full_character_resolution_entries"]==36*36
+    assert r["forward_inverse_basis_vectors"]==36
+    assert r["inverse_forward_basis_vectors"]==36
+    assert r["universal_arbitrary_signal_by_linearity_and_basis"]
+    assert r["no_selected_mode_restriction"]
+    assert not r["native_Agda_C36_instantiation_accepted"]
+
+
+def test_P0_native_Bishop_existing_series_complex_records_same_object():
+    source=(ROOT/"DASHI/Geometry/GielisBishopComplexSeriesSameCarrierExact.agda").read_text()
+    for token in ("seriesRoundTrip","setoidRoundTrip",
+                  "setoidPlusSameSeriesAlgebra","setoidMultiplySameSeriesAlgebra",
+                  "setoidComplexSeriesLimitConverges","setoidComplexSeriesLimitUnique"):
+        assert token in source
+    assert "Series.complexSeriesLimitConvergence" in source
+    assert "Series.complexSeriesLimitUnique" in source
+    assert "postulate" not in source.split("import DASHI.Analysis")[1]
+
+
+def test_P2_rational_a_posteriori_error_enclosure_is_rigorous_but_not_rate():
+    from gielis_certified_continuum_fd_error import exact_error_enclosure
+    from fractions import Fraction as F
+    c=exact_error_enclosure(F(4),F(9,2))
+    # cl=224/55 and cu=1273/264
+    expected=max(F(1273,264)-F(4),F(9,2)-F(224,55))
+    assert F(c["absolute_error_rational_strict_upper"])==expected
+    assert c["finite_to_continuum_error_quantitatively_bounded"]
+    assert not c["mesh_order_rate_Oh_power_certified"]
+    assert c["absolute_error_rational_lower"]=="0"
+    with pytest.raises(ValueError):
+        exact_error_enclosure(F(5),F(4))
+
+
+def test_P3_two_hit_exact_photon_angular_momentum_budget():
+    from gielis_kozyrev_same_event_original_owner import (
+        synthetic_two_hit_fixture,exact_ray_ledger)
+    from fractions import Fraction as F
+    s=synthetic_two_hit_fixture()
+    p=exact_ray_ledger(s["source"],s["hits"],s["terminal"],s["axis_origin"])
+    assert p["event_count"]==2
+    assert p["wall_torque_Nm"]==F(1080,149896229)
+    assert p["wall_absorption_W"]==F(2160)
+    assert p["output_W"]==F(6840)
+    assert p["energy_residual_W"]==0
+    assert p["angular_residual_Nm"]==0
+    assert p["momentum_residual_N"]==(0,0)
+
+
+def test_P3_original_Kozyrev_owner_same_event_if_checked_out():
+    import os
+    from pathlib import Path
+    owner=os.environ.get("KOZYREV_RAY_LEDGER_PATH")
+    if owner is None and os.environ.get("KOZYREV_PR1404_DIR"):
+        owner=str(Path(os.environ["KOZYREV_PR1404_DIR"])/"kozyrev_optical_event_ledger.py")
+    if not owner:
+        pytest.skip("PR1404 original source worktree not present; same-event parity NOT CHECKED")
+    from gielis_kozyrev_same_event_original_owner import (
+        compare_with_original,synthetic_two_hit_fixture)
+    receipt=compare_with_original(owner,synthetic_two_hit_fixture())
+    assert receipt["original_event_parity"]
+    assert receipt["original_owner_git_blob_verified"]
+    assert not receipt["same_physical_apparatus_calibrated"]
+
+
+def test_P0_original_Round11_expC_imaginary_axis_is_literal_trig_pair():
+    source=(ROOT/"DASHI/Geometry/GielisRound11ActualComplexExponentialExact.agda").read_text()
+    for theorem in ("actualRound11ComplexTranscendentals",
+                    "actualImaginaryAxisArgument",
+                    "actualRound11ExpCIsTrigPair","actualSelectedPi"):
+        assert theorem in source
+    assert "ExpZero.bishopExpZero" in source
+    assert "Complex.expC" in source
+    assert "Round11.termIdentification" in source
+    assert "Machin.bishopMachinPi" in source
+    assert "postulate" not in source.split("import Real")[1]
