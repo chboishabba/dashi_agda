@@ -905,6 +905,45 @@ unifiedBalabanScaleTransferNonPromotion =
     BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
 ------------------------------------------------------------------------
+-- Canonical Balaban RG same-family stress recovery.
+-- Historical round identifiers stay inside the source owners.
+------------------------------------------------------------------------
+
+unifiedBalabanSameFamilyRecoveryCompilerLevel : ProofLevel
+unifiedBalabanSameFamilyRecoveryCompilerLevel =
+  BalabanRGTOE.balabanSameFamilyRecoveryCompilerLevel
+
+unifiedBalabanSameFamilyRecoveryPhysicalLevel : ProofLevel
+unifiedBalabanSameFamilyRecoveryPhysicalLevel =
+  BalabanRGTOE.balabanSameFamilyRecoveryPhysicalLevel
+
+unifiedBalabanGoal1CSourceCutCompilerLevel : ProofLevel
+unifiedBalabanGoal1CSourceCutCompilerLevel =
+  BalabanRGTOE.balabanGoal1CSourceCutCompilerLevel
+
+unifiedBalabanGoal1CContinuumStressRecoveryCompilerLevel : ProofLevel
+unifiedBalabanGoal1CContinuumStressRecoveryCompilerLevel =
+  BalabanRGTOE.balabanGoal1CContinuumStressRecoveryCompilerLevel
+
+unifiedBalabanGoal1CMetricPairingCompilerLevel : ProofLevel
+unifiedBalabanGoal1CMetricPairingCompilerLevel =
+  BalabanRGTOE.balabanGoal1CMetricPairingCompilerLevel
+
+unifiedBalabanGoal1CLiteralSourceInstantiationLevel : ProofLevel
+unifiedBalabanGoal1CLiteralSourceInstantiationLevel =
+  BalabanRGTOE.balabanGoal1CLiteralSourceInstantiationLevel
+
+unifiedBalabanLevel2ClayPromotionStillFalse :
+  BalabanRGTOE.balabanLevel2ClayPromotionFlag ≡ false
+unifiedBalabanLevel2ClayPromotionStillFalse =
+  BalabanRGTOE.balabanLevel2ClayPromotionStillFalse
+
+unifiedBalabanDirectScaleTransferPromotionImpossible :
+  BalabanRGTOE.BalabanScaleTransferPromotion → ⊥
+unifiedBalabanDirectScaleTransferPromotionImpossible =
+  BalabanRGTOE.balabanScaleTransferPromotionImpossible
+
+------------------------------------------------------------------------
 -- R559 / Ibrahim / fleet-58 / generic-hyperfabric TOE convergence.
 ------------------------------------------------------------------------
 
@@ -1176,5 +1215,127 @@ unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
 unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
   FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
 
--- Prime-gap SOTA: exact shift-two BIDI; larger published bounds remain distinct.
-import DASHI.Arithmetic.TwinPrimeSOTABoundedGapBidiExact as PrimeGapSOTABidi
+unifiedFleetRecordedContradictionCountIs44 :
+  FleetGapTOE.polarityContradictionGaps
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 44
+unifiedFleetRecordedContradictionCountIs44 =
+  FleetGapTOE.fleetRecordedContradictionCountIs44
+
+unifiedFleetRecordedMacroscopicMotifCountIs3 :
+  FleetGapTOE.macroscopicEigenMotifCount
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 3
+unifiedFleetRecordedMacroscopicMotifCountIs3 =
+  FleetGapTOE.fleetRecordedMacroscopicMotifCountIs3
+
+unifiedFleetTargetsOnlyUnformalisedFormalGaps :
+  FleetGapTOE.targetOnlyUnformalisedFormalGaps
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
+unifiedFleetTargetsOnlyUnformalisedFormalGaps =
+  FleetGapTOE.fleetTargetsOnlyUnformalisedFormalGaps
+
+unifiedFleetDischargedFibresRemainOutOfTarget :
+  FleetGapTOE.dischargedFibresRemainDischarged
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
+unifiedFleetDischargedFibresRemainOutOfTarget =
+  FleetGapTOE.fleetDischargedFibresRemainOutOfTarget
+
+unifiedFleetSpectralLabelsDoNotIdentifyTheoremOwners :
+  FleetGapTOE.spectralLabelsIdentifyTheoremOwners
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+unifiedFleetSpectralLabelsDoNotIdentifyTheoremOwners =
+  FleetGapTOE.fleetSpectralLabelDoesNotIdentifyTheoremOwner
+
+unifiedFleetMetaIntrospectorAttributionPreserved :
+  FleetGapTOE.metaIntrospectorAttributionPreserved
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
+unifiedFleetMetaIntrospectorAttributionPreserved = refl
+
+unifiedFleetMetaIntrospectorProofNotBorrowed :
+  FleetGapTOE.metaIntrospectorProofBorrowed
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+unifiedFleetMetaIntrospectorProofNotBorrowed = refl
+
+------------------------------------------------------------------------
+-- Recognition-objective rechart -> Unified aggregate.
+--
+-- Reuse existing Lacan/Irigaray and feminist recognition owners.
+-- This aggregate preserves separation from legal authority and compliance.
+-- A changed approval objective can change selected conduct.
+-- It does not erase sanctions, desire, symbolic structure, or proof duties.
+------------------------------------------------------------------------
+
+import DASHI.Core.GenderedApprovalObjectiveRechartExact as ApprovalRechart
+import DASHI.Governance.FeministRecognitionAuthorityCrossPollinationExact as FeministRecognition
+
+unifiedApprovalObjectiveRechartBoundary :
+  ApprovalRechart.ApprovalObjectiveRechartBoundary
+unifiedApprovalObjectiveRechartBoundary =
+  ApprovalRechart.canonicalApprovalObjectiveRechartBoundary
+
+unifiedApprovalObjectiveRechartChangesSelectedConduct :
+  ApprovalRechart.chooseByObjective ApprovalRechart.approvalIndexedObjective
+    ≡ ApprovalRechart.chooseByObjective ApprovalRechart.declaredCriterionObjective
+    → ⊥
+unifiedApprovalObjectiveRechartChangesSelectedConduct =
+  ApprovalRechart.objectiveRechartChangesSelectedConduct
+
+unifiedApprovalSupposedAuthorityIsNotVerifiedAuthority =
+  ApprovalRechart.supposedApprovalAuthorityIsNotVerifiedAuthority
+
+unifiedApprovalDesireNeedNotTerminateAtApproval =
+  ApprovalRechart.desireNeedNotTerminateAtApproval
+
+unifiedApprovalBigOtherIsNotLiteralOmniscientApprover =
+  ApprovalRechart.bigOtherIsNotLiteralOmniscientApprover
+
+unifiedApprovalReciprocalContactDoesNotDetermineUniqueHierarchy =
+  ApprovalRechart.reciprocalContactDoesNotDetermineUniqueHierarchy
+
+unifiedFeministRecognitionCrossPollinationBoundary :
+  FeministRecognition.FeministRecognitionCrossPollinationBoundary
+unifiedFeministRecognitionCrossPollinationBoundary =
+  FeministRecognition.canonicalFeministRecognitionCrossPollinationBoundary
+
+------------------------------------------------------------------------
+-- Governed legal workflow -> Unified invariant handoff.
+--
+-- Reuse the canonical owner used by the TOE root and Unifier.
+-- Actionstep-style workflow state does not create legal authority.
+------------------------------------------------------------------------
+
+import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalGovernanceTOE
+
+unifiedGovernedLegalWorkflowInvariantHandoff :
+  LegalGovernanceTOE.GovernedLegalWorkflowTOEInvariantHandoff
+unifiedGovernedLegalWorkflowInvariantHandoff =
+  LegalGovernanceTOE.canonicalGovernedLegalWorkflowTOEInvariantHandoff
+
+unifiedQualificationDoesNotAutomaticallyProveForensicCompliance :
+  LegalGovernanceTOE.QualificationAutomaticallyForensicCompliance → ⊥
+unifiedQualificationDoesNotAutomaticallyProveForensicCompliance =
+  LegalGovernanceTOE.toeQualificationDoesNotAutomaticallyProveForensicCompliance
+
+unifiedLegalReviewDoesNotCreateClaimTruth :
+  LegalGovernanceTOE.LegalReviewDecisionCreatesClaimTruth → ⊥
+unifiedLegalReviewDoesNotCreateClaimTruth =
+  LegalGovernanceTOE.toeLegalReviewDoesNotCreateClaimTruth
+
+unifiedOfficialLegalSurfaceDoesNotRecoverFineState :
+  LegalGovernanceTOE.OfficialLegalSurfaceRecoversFineState → ⊥
+unifiedOfficialLegalSurfaceDoesNotRecoverFineState =
+  LegalGovernanceTOE.toeOfficialLegalSurfaceDoesNotRecoverFineState
+
+unifiedLegalityAloneDoesNotCreateLegitimacy :
+  LegalGovernanceTOE.LegalOnlyCreatesLegitimacy → ⊥
+unifiedLegalityAloneDoesNotCreateLegitimacy =
+  LegalGovernanceTOE.toeLegalityAloneDoesNotCreateLegitimacy
+
+unifiedActionstepStyleVendorIdentityDoesNotCreateAuthority :
+  LegalGovernanceTOE.actionstepStyleVendorIdentityCreatesAuthority ≡ false
+unifiedActionstepStyleVendorIdentityDoesNotCreateAuthority =
+  LegalGovernanceTOE.toeActionstepStyleVendorIdentityCreatesAuthority
+
+unifiedActionstepStyleTargetNeedsOwnAuthorityWitness :
+  LegalGovernanceTOE.actionstepStyleTargetNeedsOwnAuthorityWitness ≡ true
+unifiedActionstepStyleTargetNeedsOwnAuthorityWitness =
+  LegalGovernanceTOE.toeActionstepStyleTargetNeedsOwnAuthorityWitness

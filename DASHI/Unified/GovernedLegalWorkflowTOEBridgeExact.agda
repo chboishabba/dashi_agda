@@ -86,6 +86,14 @@ import DASHI.Interop.IntrospectiveProofLoopExact as Introspection
 import DASHI.Law.SensibLawNativeLegalFollowCLIExact as NativeLegalFollow
 import DASHI.Law.SensibLawPreferredAustralianAuthorityAcquisitionExact as ProviderAcquisition
 import DASHI.Law.SensibLawExpertEvidenceProductionIntegrityExact as ExpertProduction
+import DASHI.Law.SensibLawRealMatterReviewDecisionExact as RealMatterReview
+import DASHI.Governance.LegalDecisionDoubleProjectionExact as LegalDecision
+import DASHI.Governance.LegitimacyEvidenceSeparationExact as Legitimacy
+import DASHI.Core.IntersectionalNonFactorability as NF
+import DASHI.Governance.DomainPermeabilityAuthorityTransport as Domain
+import DASHI.Governance.PromotionSpine as Promotion
+import DASHI.Foundations.CanonicalProvenancePromotion as Canonical
+import DASHI.Governance.GovernedArtifactCore as Governed
 
 ------------------------------------------------------------------------
 -- Type aliases keep Unifier thin.
@@ -144,6 +152,38 @@ ControlEvidenceCreatesTruth = Control.ControlEvidenceCreatesTruth
 
 PassingControlMeansCertified : Set
 PassingControlMeansCertified = Control.PassingControlMeansCertified
+
+LegalReviewDecisionCreatesClaimTruth : Set
+LegalReviewDecisionCreatesClaimTruth =
+  RealMatterReview.LegalReviewDecisionCreatesClaimTruth
+
+OfficialLegalSurfaceRecoversFineState : Set
+OfficialLegalSurfaceRecoversFineState =
+  NF.FactorsThrough
+    LegalDecision.officialSurface
+    LegalDecision.fineLegalStateOf
+
+OfficialActionRecoversAutonomyAndAuthority : Set
+OfficialActionRecoversAutonomyAndAuthority =
+  NF.FactorsThrough
+    LegalDecision.autonomyOfficialSurface
+    LegalDecision.fineAutonomyLegalStateOf
+
+actionstepStyleVendorIdentityCreatesAuthority : Bool
+actionstepStyleVendorIdentityCreatesAuthority =
+  Domain.DomainTransportReceipt.vendorIdentityCreatesAuthority
+    Domain.canonicalDomainTransportReceipt
+
+actionstepStyleTargetNeedsOwnAuthorityWitness : Bool
+actionstepStyleTargetNeedsOwnAuthorityWitness =
+  Domain.DomainTransportReceipt.targetDomainNeedsOwnAuthorityWitness
+    Domain.canonicalDomainTransportReceipt
+
+LegalOnlyCreatesLegitimacy : Set₁
+LegalOnlyCreatesLegitimacy =
+  Legitimacy.AdmittedLegitimacy
+    Legitimacy.demoEvidence
+    Legitimacy.legalOnly
 
 ------------------------------------------------------------------------
 -- Exact theorem aliases.
@@ -1173,6 +1213,48 @@ toeQualificationDoesNotAutomaticallyProveForensicCompliance :
 toeQualificationDoesNotAutomaticallyProveForensicCompliance =
   ExpertProduction.qualificationDoesNotAutomaticallyProveForensicCompliance
 
+toeLegalReviewDoesNotCreateClaimTruth :
+  LegalReviewDecisionCreatesClaimTruth → ⊥
+toeLegalReviewDoesNotCreateClaimTruth =
+  RealMatterReview.legalReviewDecisionDoesNotCreateClaimTruth
+
+toeOfficialLegalSurfaceDoesNotRecoverFineState :
+  OfficialLegalSurfaceRecoversFineState → ⊥
+toeOfficialLegalSurfaceDoesNotRecoverFineState =
+  LegalDecision.officialSurfaceCannotRecoverFineLegalState
+
+toeOfficialActionDoesNotRecoverAutonomyAndAuthority :
+  OfficialActionRecoversAutonomyAndAuthority → ⊥
+toeOfficialActionDoesNotRecoverAutonomyAndAuthority =
+  LegalDecision.officialActionCannotRecoverAutonomyAndAuthority
+
+toeLegalityAloneDoesNotCreateLegitimacy :
+  LegalOnlyCreatesLegitimacy → ⊥
+toeLegalityAloneDoesNotCreateLegitimacy =
+  Legitimacy.legalOnlyIsNotAdmittedLegitimacy
+
+toeMissingAdmissibilityStillAbstains :
+  Promotion.authorizationFromObligations
+    (Canonical.promotionObligations true false true true true)
+  ≡ Governed.abstain
+toeMissingAdmissibilityStillAbstains =
+  Promotion.missingAdmissibilityAbstains
+
+toeMissingValidationStillAbstains :
+  Promotion.authorizationFromObligations
+    (Canonical.promotionObligations true true true true false)
+  ≡ Governed.abstain
+toeMissingValidationStillAbstains =
+  Promotion.missingValidationAbstains
+
+toeActionstepStyleVendorIdentityCreatesAuthority :
+  actionstepStyleVendorIdentityCreatesAuthority ≡ false
+toeActionstepStyleVendorIdentityCreatesAuthority = refl
+
+toeActionstepStyleTargetNeedsOwnAuthorityWitness :
+  actionstepStyleTargetNeedsOwnAuthorityWitness ≡ true
+toeActionstepStyleTargetNeedsOwnAuthorityWitness = refl
+
 ------------------------------------------------------------------------
 -- Canonical governance invariant handoff.
 --
@@ -1365,6 +1447,34 @@ record GovernedLegalWorkflowTOEInvariantHandoff : Set₁ where
     qualificationForensicComplianceFirewall :
       QualificationAutomaticallyForensicCompliance → ⊥
 
+    legalReviewTruthFirewall :
+      LegalReviewDecisionCreatesClaimTruth → ⊥
+
+    officialSurfaceFineStateFirewall :
+      OfficialLegalSurfaceRecoversFineState → ⊥
+
+    officialActionAutonomyAuthorityFirewall :
+      OfficialActionRecoversAutonomyAndAuthority → ⊥
+
+    legalityLegitimacyFirewall :
+      LegalOnlyCreatesLegitimacy → ⊥
+
+    missingAdmissibilityAbstention :
+      Promotion.authorizationFromObligations
+        (Canonical.promotionObligations true false true true true)
+      ≡ Governed.abstain
+
+    missingValidationAbstention :
+      Promotion.authorizationFromObligations
+        (Canonical.promotionObligations true true true true false)
+      ≡ Governed.abstain
+
+    actionstepStyleVendorAuthorityFirewall :
+      actionstepStyleVendorIdentityCreatesAuthority ≡ false
+
+    actionstepStyleTargetAuthorityWitnessRequired :
+      actionstepStyleTargetNeedsOwnAuthorityWitness ≡ true
+
     exactReuseAdmissionFirewall :
       ExactReuseCreatesSemanticAdmission →
       ⊥
@@ -1449,6 +1559,14 @@ canonicalGovernedLegalWorkflowTOEInvariantHandoff =
     toeDisputedRiskDoesNotBecomeIrrelevant
     toeObserverDefectDoesNotProveOpinionFalse
     toeQualificationDoesNotAutomaticallyProveForensicCompliance
+    toeLegalReviewDoesNotCreateClaimTruth
+    toeOfficialLegalSurfaceDoesNotRecoverFineState
+    toeOfficialActionDoesNotRecoverAutonomyAndAuthority
+    toeLegalityAloneDoesNotCreateLegitimacy
+    toeMissingAdmissibilityStillAbstains
+    toeMissingValidationStillAbstains
+    toeActionstepStyleVendorIdentityCreatesAuthority
+    toeActionstepStyleTargetNeedsOwnAuthorityWitness
     toeExactReuseDoesNotCreateSemanticAdmission
     toeExactReuseDoesNotCreateSemanticAuthority
     toeExactReuseDoesNotCreateApplicability

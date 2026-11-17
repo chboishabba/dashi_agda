@@ -74,7 +74,6 @@ import DASHI.Physics.YangMills.BalabanStressShellEnergyToHilbertRound112Exact as
 import DASHI.Physics.YangMills.YMClayLevel2SameFamilyStressRecoveryExact as SameFamilyRecovery
 import DASHI.Physics.YangMills.YangMillsClayGoal1CSourceCutRound475Exact as Goal1C
 import DASHI.Physics.YangMills.YangMillsClayCPhysicalPackageMaxCutRound527Exact as CMaxCut
-import DASHI.Physics.YangMills.YangMillsClayCriticalPathRound555Exact as CriticalPath
 import DASHI.Physics.Closure.BalabanRGScaleTransferFrontierReceipt as RGFrontier
 import DASHI.Physics.Closure.YMBalabanContinuumLimitReceipt as ContinuumLimit
 import DASHI.Physics.Closure.YMDepthAsContinuumLimitReceipt as DepthContinuum
@@ -292,6 +291,7 @@ open SameFamilyRecovery public using
   ( r129ExportsLiteralContinuumLimit
   ; r129ExportsLiteralSchwingerMembership
   ; r129ExportsLiteralStressDerivative
+  ; r129ExportsCompositeMarkedSourceData
   )
 
 balabanSameFamilyRecoveryCompilerLevel : ProofLevel
@@ -354,10 +354,8 @@ balabanGoal1CLiteralSourceInstantiationLevel =
   Goal1C.literalRound475CSourceInstantiationLevel
 
 ------------------------------------------------------------------------
--- Current C physical max-cut.
---
--- Five physical source packages are the authoritative C research cut.
--- Historical round numbers remain provenance only.
+-- Canonical five-package C max-cut.
+-- Historical round labels remain provenance only.
 ------------------------------------------------------------------------
 
 balabanCPhysicalPackageMaxCutCompilerLevel : ProofLevel
@@ -387,35 +385,6 @@ balabanC4DensityAnchoredStressLaneLevel =
 balabanCPhysicalPackageCount : Nat
 balabanCPhysicalPackageCount =
   CMaxCut.cPhysicalPackageCount
-
-
-------------------------------------------------------------------------
--- Current shortest Yang--Mills critical path.
---
--- Reuse the existing critical-path owner.
--- Full C remains required for conservative local-field existence.
--- Full C is not required for the mass-gap compiler or minimal H6 reductio.
-------------------------------------------------------------------------
-
-balabanCriticalPathCompilerLevel : ProofLevel
-balabanCriticalPathCompilerLevel =
-  CriticalPath.round555CriticalPathCompilerLevel
-
-balabanCriticalFamilyCount : Nat
-balabanCriticalFamilyCount =
-  CriticalPath.criticalFamilyCount
-
-balabanFullCLayerRequiredForMassGapCompiler : Bool
-balabanFullCLayerRequiredForMassGapCompiler =
-  CriticalPath.fullCLayerRequiredForMassGapCompiler
-
-balabanFullCLayerRequiredForMinimalH6Contradiction : Bool
-balabanFullCLayerRequiredForMinimalH6Contradiction =
-  CriticalPath.fullCLayerRequiredForMinimalH6Contradiction
-
-balabanFullCLayerRetainedForConservativeClayLocalFieldExistence : Bool
-balabanFullCLayerRetainedForConservativeClayLocalFieldExistence =
-  CriticalPath.fullCLayerRetainedForConservativeClayLocalFieldExistence
 
 balabanLevel2ClayPromotionFlag : Bool
 balabanLevel2ClayPromotionFlag =
@@ -527,6 +496,15 @@ balabanRGClayPromotionStillFalse :
   balabanRGClayPromotionFlag ≡ false
 balabanRGClayPromotionStillFalse =
   RGFrontier.canonicalBalabanRGScaleTransferNoClayPromotion
+
+BalabanScaleTransferPromotion : Set
+BalabanScaleTransferPromotion =
+  RGFrontier.BalabanRGScaleTransferPromotion
+
+balabanScaleTransferPromotionImpossible :
+  BalabanScaleTransferPromotion → ⊥
+balabanScaleTransferPromotionImpossible =
+  RGFrontier.balabanRGScaleTransferPromotionImpossibleHere
 
 legacyBalabanLaneAlsoDeclaresNoClayPromotion :
   SUN.clayYangMillsPromoted ≡ false
