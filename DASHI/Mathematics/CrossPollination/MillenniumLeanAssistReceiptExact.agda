@@ -424,7 +424,7 @@ currentMillenniumLeanAssistReceipt =
 -- CURRENT LEAN MILLENNIUM EXTERNAL-ACCEPTANCE CUSTODY
 --
 -- This receipt updates external target custody without replacing the older
--- theorem-source receipt above.  It records the exact independent target pin,
+-- theorem-source receipt above. It records the exact independent target pin,
 -- the existing DASHI same-object weld reuse rule, and the fail-closed status
 -- of targets that LeanDojo marks as incomplete.
 --
