@@ -26,37 +26,37 @@ sixTermSumZero {a} {b} {c} {d} {e} {f}
 dropScaledZero :
   ∀ (x scale : ℚ) →
   x + scale * 0ℚ ≡ x
-dropScaledZero x scale = solve-∀
+dropScaledZero = solve-∀
 
 scaleThreeSum :
   ∀ (scale a b c : ℚ) →
   scale * (a + (b + c))
   ≡ scale * a + (scale * b + scale * c)
-scaleThreeSum scale a b c = solve-∀
+scaleThreeSum = solve-∀
 
 scaleFourSum :
   ∀ (scale a b c d : ℚ) →
   scale * (a + (b + (c + d)))
   ≡ scale * a + (scale * b + (scale * c + scale * d))
-scaleFourSum scale a b c d = solve-∀
+scaleFourSum = solve-∀
 
 subtractSelfZero :
   ∀ (x : ℚ) →
   x - x ≡ 0ℚ
-subtractSelfZero x = solve-∀
+subtractSelfZero = solve-∀
 
 subtractAddCancel :
   ∀ (x y : ℚ) →
   (x - y) + y ≡ x
-subtractAddCancel x y = solve-∀
+subtractAddCancel = solve-∀
 
 swapSum :
   ∀ (x y : ℚ) →
   x + y ≡ y + x
-swapSum x y = solve-∀
+swapSum = solve-∀
 
 dropTerminalZero4 :
   ∀ (a b c d : ℚ) →
   a + (b + (c + (d + 0ℚ)))
   ≡ a + (b + (c + d))
-dropTerminalZero4 a b c d = solve-∀
+dropTerminalZero4 = solve-∀

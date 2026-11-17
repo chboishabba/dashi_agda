@@ -11,7 +11,7 @@ open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
 open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier using
   (physicalBlockSites)
 open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact
-  using (sumRational; sumRationalCong; sumRationalScale)
+  using (SiteField; sumRational; sumRationalCong; sumRationalScale)
 open import DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact
   using (sumRationalAdd)
 open import DASHI.Physics.YangMills.BalabanPath4AxisAverageExact
@@ -37,7 +37,11 @@ open import DASHI.Physics.YangMills.BalabanPath4SU2ConcreteCoarseBlockExact
 twoℚ : ℚ
 twoℚ = 1ℚ + 1ℚ
 
-globalNormAddExpansion : ∀ left right →
+squareAddExpandRaw : ∀ a b →
+  (a + b) * (a + b) ≡ a * a + (twoℚ * (a * b) + b * b)
+squareAddExpandRaw = ℚRing.solve-∀
+
+globalNormAddExpansion : (left right : SiteField side4) →
   globalNormSq (addField left right)
   ≡ globalNormSq left
     + (twoℚ * globalBlockInner left right + globalNormSq right)
@@ -50,81 +54,97 @@ globalNormAddExpansion left right =
       (λ site →
         left site * left site
         + (twoℚ * (left site * right site) + right site * right site))
-      (λ site → ℚRing.solve-∀))
+      (λ site → squareAddExpandRaw (left site) (right site)))
     (trans
       (sumRationalAdd
         (physicalBlockSites side4)
         (λ site → left site * left site)
         (λ site →
           twoℚ * (left site * right site) + right site * right site))
-      (cong₂ _+_ refl
+      (cong
+        (_+_ (globalNormSq left))
         (trans
           (sumRationalAdd
             (physicalBlockSites side4)
             (λ site → twoℚ * (left site * right site))
             (λ site → right site * right site))
-          (cong₂ _+_
+          (cong
+            (λ u → u + globalNormSq right)
             (sumRationalScale twoℚ (physicalBlockSites side4)
-              (λ site → left site * right site))
-            refl))))
+              (λ site → left site * right site))))))
 
-scalarProjectionReconstruction : ∀ field →
+scalarProjectionReconstruction : (fld : SiteField side4) →
   FieldEqual
     (addField
-      (subtractField field (average0123 field))
-      (average0123 field))
-    field
-scalarProjectionReconstruction field site =
-  ℚRing.solve-∀
+      (subtractField fld (average0123 fld))
+      (average0123 fld))
+    fld
+scalarProjectionReconstruction fld site =
+  subAddCancelRaw (fld site) (average0123 fld site)
 
-scalarProjectionPythagoras : ∀ field →
-  globalNormSq field
-  ≡ globalNormSq (subtractField field (average0123 field))
-    + globalNormSq (average0123 field)
-scalarProjectionPythagoras field =
+dropTwoZeroCrossRaw : ∀ a b → a + (twoℚ * 0ℚ + b) ≡ a + b
+dropTwoZeroCrossRaw = ℚRing.solve-∀
+
+scalarProjectionPythagoras : (fld : SiteField side4) →
+  globalNormSq fld
+  ≡ globalNormSq (subtractField fld (average0123 fld))
+    + globalNormSq (average0123 fld)
+scalarProjectionPythagoras fld =
   trans
-    (sym (globalNormRespectsPointwise (scalarProjectionReconstruction field)))
+    (sym (globalNormRespectsPointwise (scalarProjectionReconstruction fld)))
     (trans
       (globalNormAddExpansion
-        (subtractField field (average0123 field))
-        (average0123 field))
+        (subtractField fld (average0123 fld))
+        (average0123 fld))
       (trans
         (cong
           (λ cross →
-            globalNormSq (subtractField field (average0123 field))
-            + (twoℚ * cross + globalNormSq (average0123 field)))
+            globalNormSq (subtractField fld (average0123 fld))
+            + (twoℚ * cross + globalNormSq (average0123 fld)))
           (average0123ResidualOrthogonal
-            field (average0123 field) (average0123Fixed field)))
-        (ℚRing.solve-∀)))
+            fld (average0123 fld) (average0123Fixed fld)))
+        (dropTwoZeroCrossRaw
+          (globalNormSq (subtractField fld (average0123 fld)))
+          (globalNormSq (average0123 fld)))))
 
 bondProjection : RationalBondField4 → RationalBondField4
 bondProjection = scalarBlockProjection
 
 bondFluctuation : RationalBondField4 → RationalBondField4
-bondFluctuation field bond = field bond - bondProjection field bond
+bondFluctuation fld bond = fld bond - bondProjection fld bond
 
-bondProjectionPythagoras : ∀ field →
-  bondNormSq field
-  ≡ bondNormSq (bondFluctuation field) + bondNormSq (bondProjection field)
-bondProjectionPythagoras field =
+bondProjectionPythagoras : (fld : RationalBondField4) →
+  bondNormSq fld
+  ≡ bondNormSq (bondFluctuation fld) + bondNormSq (bondProjection fld)
+bondProjectionPythagoras fld =
   trans
     (sumRationalCong
       (allCyclicIndices four)
-      (λ bondAxis → globalNormSq (bondComponent field bondAxis))
+      (λ bondAxis → globalNormSq (bondComponent fld bondAxis))
       (λ bondAxis →
         globalNormSq
-          (subtractField (bondComponent field bondAxis)
-            (average0123 (bondComponent field bondAxis)))
-        + globalNormSq (average0123 (bondComponent field bondAxis)))
-      (λ bondAxis → scalarProjectionPythagoras (bondComponent field bondAxis)))
+          (subtractField (bondComponent fld bondAxis)
+            (average0123 (bondComponent fld bondAxis)))
+        + globalNormSq (average0123 (bondComponent fld bondAxis)))
+      (λ bondAxis → scalarProjectionPythagoras (bondComponent fld bondAxis)))
     (sumRationalAdd
       (allCyclicIndices four)
       (λ bondAxis →
         globalNormSq
-          (subtractField (bondComponent field bondAxis)
-            (average0123 (bondComponent field bondAxis))))
+          (subtractField (bondComponent fld bondAxis)
+            (average0123 (bondComponent fld bondAxis))))
       (λ bondAxis →
-        globalNormSq (average0123 (bondComponent field bondAxis))))
+        globalNormSq (average0123 (bondComponent fld bondAxis))))
+
+threePairRearrangeRaw : ∀ a1 b1 a2 b2 a3 b3 →
+  (a1 + b1) + ((a2 + b2) + (a3 + b3)) ≡ (a1 + (a2 + a3)) + (b1 + (b2 + b3))
+threePairRearrangeRaw = ℚRing.solve-∀
+
+addCommRaw : ∀ a b → a + b ≡ b + a
+addCommRaw = ℚRing.solve-∀
+
+scaleAddRaw : ∀ c a b → c * (a + b) ≡ c * a + c * b
+scaleAddRaw = ℚRing.solve-∀
 
 physicalNormProjectionPythagoras : ∀ tangent →
   physicalUnweightedNormSq tangent
@@ -137,7 +157,13 @@ physicalNormProjectionPythagoras tangent =
       (cong₂ _+_
         (bondProjectionPythagoras (tangent component2))
         (bondProjectionPythagoras (tangent component3))))
-    (ℚRing.solve-∀)
+    (threePairRearrangeRaw
+      (bondNormSq (bondFluctuation (tangent component1)))
+      (bondNormSq (bondProjection (tangent component1)))
+      (bondNormSq (bondFluctuation (tangent component2)))
+      (bondNormSq (bondProjection (tangent component2)))
+      (bondNormSq (bondFluctuation (tangent component3)))
+      (bondNormSq (bondProjection (tangent component3))))
 
 coarseFineNormSqExact : ∀ tangent →
   physicalUnweightedNormSq tangent
@@ -146,7 +172,9 @@ coarseFineNormSqExact : ∀ tangent →
 coarseFineNormSqExact tangent =
   trans
     (physicalNormProjectionPythagoras tangent)
-    (ℚRing.solve-∀)
+    (addCommRaw
+      (physicalUnweightedNormSq (fineFluctuation tangent))
+      (physicalUnweightedNormSq (fineProjection tangent)))
 
 physicalNormMatchesInner : ∀ tangent →
   physicalUnweightedNormSq tangent ≡ physicalTangentInner tangent tangent
@@ -184,7 +212,7 @@ coarsePenalizedCoercivity tangent fluctuationEnergy fineLower coarseLower =
       left ≤ fluctuationEnergy
         + concreteCoarseInner
             (literalBlockAverageQ tangent) (literalBlockAverageQ tangent))
-    (scaleSplitting tangent)
+    (sym (scaleSplitting tangent))
     (ℚP.+-mono-≤ fineLower coarseLower)
   where
   scaleSplitting : ∀ current →
@@ -193,9 +221,14 @@ coarsePenalizedCoercivity tangent fluctuationEnergy fineLower coarseLower =
         * physicalUnweightedNormSq (fineFluctuation current)
       + configuredPathCoercivityConstant
         * physicalUnweightedNormSq (fineProjection current)
-  scaleSplitting current
-    rewrite physicalNormProjectionPythagoras current =
-    ℚRing.solve-∀
+  scaleSplitting current =
+    trans
+      (cong (_*_ configuredPathCoercivityConstant)
+        (physicalNormProjectionPythagoras current))
+      (scaleAddRaw
+        configuredPathCoercivityConstant
+        (physicalUnweightedNormSq (fineFluctuation current))
+        (physicalUnweightedNormSq (fineProjection current)))
 
 concreteCoarseFineNormSplittingLevel : ProofLevel
 concreteCoarseFineNormSplittingLevel = machineChecked

@@ -1,6 +1,5 @@
 module DASHI.Physics.Closure.QuantumClockEmpiricalRedshiftReceiptRequest where
 
-open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
@@ -426,7 +425,7 @@ canonicalEmpiricalRedshiftFailClosedGuards =
         refl
     }
 
-record QuantumClockEmpiricalRedshiftReceiptRequest : Setω where
+record QuantumClockEmpiricalRedshiftReceiptRequest : Set where
   field
     dimensionlessLawSurface :
       Dimensionless.QuantumClockDimensionlessObservableLaw

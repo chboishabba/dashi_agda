@@ -87,16 +87,6 @@ symbolGapImpliesBulkHodgePoincare dataSet index state tangent
     (fourier dataSet state)
     (constraintsRemoveReferenceSymbolKernel dataSet index state tangent)
 
-bulkGaugeFixedHodgePoincare :
-  ∀ {Index State Frequency Bound}
-  (dataSet : FiniteFourierHodgeData Index State Frequency Bound) →
-  ∀ index state →
-  GaugeFixedTangent dataSet index state →
-  LessEqual dataSet
-    (scale dataSet (cBulk dataSet) (normSq dataSet state))
-    (referenceEnergy dataSet index state)
-bulkGaugeFixedHodgePoincare = symbolGapImpliesBulkHodgePoincare
-
 record UniformBulkHodgeCertificate
     (Index State Bound : Set) : Set₁ where
   field
@@ -126,7 +116,15 @@ record UniformBulkHodgeCertificate
     cBulkUniformOverAdmissibleBackgrounds :
       CBulkUniformOverAdmissibleBackgrounds
 
-open UniformBulkHodgeCertificate public
+bulkGaugeFixedHodgePoincare :
+  ∀ {Index State Frequency Bound}
+  (dataSet : FiniteFourierHodgeData Index State Frequency Bound) →
+  ∀ index state →
+  GaugeFixedTangent dataSet index state →
+  LessEqual dataSet
+    (scale dataSet (cBulk dataSet) (normSq dataSet state))
+    (referenceEnergy dataSet index state)
+bulkGaugeFixedHodgePoincare = symbolGapImpliesBulkHodgePoincare
 
 finiteFourierHodgeCertificate :
   ∀ {Index State Frequency Bound} →

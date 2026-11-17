@@ -67,19 +67,30 @@ rawSumNonnegative : ∀ n shift exponent →
 rawSumNonnegative zero shift exponent =
   R.nonNegative ℚP.≤-refl
 rawSumNonnegative (suc n) shift exponent =
+  let
+    instance
+      termNonnegative : R.NonNegative (rawTerm n shift exponent)
+      termNonnegative =
+        ℚP.pos⇒nonNeg (rawTerm n shift exponent)
+          {{rawTermPositive n shift exponent}}
+      restNonnegative : R.NonNegative (rawSum n shift exponent)
+      restNonnegative = rawSumNonnegative n shift exponent
+  in
   ℚP.nonNeg+nonNeg⇒nonNeg
     (rawTerm n shift exponent) (rawSum n shift exponent)
-    {{ℚP.pos⇒nonNeg (rawTerm n shift exponent)
-        {{rawTermPositive n shift exponent}}}}
-    {{rawSumNonnegative n shift exponent}}
 
 rawSumPositive : ∀ n shift exponent →
   R.Positive (rawSum (suc n) shift exponent)
 rawSumPositive n shift exponent =
+  let
+    instance
+      termPositive : R.Positive (rawTerm n shift exponent)
+      termPositive = rawTermPositive n shift exponent
+      restNonnegative : R.NonNegative (rawSum n shift exponent)
+      restNonnegative = rawSumNonnegative n shift exponent
+  in
   ℚP.pos+nonNeg⇒pos
     (rawTerm n shift exponent) (rawSum n shift exponent)
-    {{rawTermPositive n shift exponent}}
-    {{rawSumNonnegative n shift exponent}}
 
 -- A proof of strict positivity constructs the actual reciprocal.
 -- The implicit NonZero witness is derived, never passed as a Bool.

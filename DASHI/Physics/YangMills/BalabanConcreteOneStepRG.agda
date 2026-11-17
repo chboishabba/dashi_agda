@@ -100,28 +100,28 @@ record FluctuationCoordinatesBijective
     (reconstruct : Background → Fluctuation → Field)
     (jacobianOf : Background → Fluctuation → Jacobian) : Set₁ where
   field
-    coordinates : ∀ field → SmallFieldDomain field →
+    coordinates : ∀ f → SmallFieldDomain f →
       FluctuationCoordinateWitness Background Fluctuation Jacobian
 
-    reconstructs : ∀ field small →
+    reconstructs : ∀ f small →
       reconstruct
-        (background (coordinates field small))
-        (fluctuation (coordinates field small))
-      ≡ field
+        (background (coordinates f small))
+        (fluctuation (coordinates f small))
+      ≡ f
 
-    jacobianCorrect : ∀ field small →
+    jacobianCorrect : ∀ f small →
       jacobianOf
-        (background (coordinates field small))
-        (fluctuation (coordinates field small))
-      ≡ coordinateJacobian (coordinates field small)
+        (background (coordinates f small))
+        (fluctuation (coordinates f small))
+      ≡ coordinateJacobian (coordinates f small)
 
-    backgroundUnique : ∀ field small background′ fluctuation′ →
-      reconstruct background′ fluctuation′ ≡ field →
-      background′ ≡ background (coordinates field small)
+    backgroundUnique : ∀ f small background′ fluctuation′ →
+      reconstruct background′ fluctuation′ ≡ f →
+      background′ ≡ background (coordinates f small)
 
-    fluctuationUnique : ∀ field small background′ fluctuation′ →
-      reconstruct background′ fluctuation′ ≡ field →
-      fluctuation′ ≡ fluctuation (coordinates field small)
+    fluctuationUnique : ∀ f small background′ fluctuation′ →
+      reconstruct background′ fluctuation′ ≡ f →
+      fluctuation′ ≡ fluctuation (coordinates f small)
 
 open FluctuationCoordinatesBijective public
 

@@ -44,25 +44,25 @@ finiteHessian :
   ∀ {Fine Coordinate Scalar} →
   FiniteConstrainedHessian Fine Coordinate Scalar →
   Coordinate → Coordinate
-finiteHessian data =
+finiteHessian h =
   restrictedCoordinateHessian
-    (kernelEmbeddingMap data)
-    (actionHessian data)
-    (kernelEmbeddingStar data)
+    (kernelEmbeddingMap h)
+    (actionHessian h)
+    (kernelEmbeddingStar h)
 
 finiteHessianSymmetric :
   ∀ {Fine Coordinate Scalar}
-  (data : FiniteConstrainedHessian Fine Coordinate Scalar) →
+  (h : FiniteConstrainedHessian Fine Coordinate Scalar) →
   ∀ X Y →
-  coordinateInner data X (finiteHessian data Y)
-    ≡ coordinateInner data (finiteHessian data X) Y
+  coordinateInner h X (finiteHessian h Y)
+    ≡ coordinateInner h (finiteHessian h X) Y
 finiteHessianSymmetric = restrictedSymmetric
 
 finiteHessianCoercive :
   ∀ {Fine Coordinate Scalar}
-  (data : FiniteConstrainedHessian Fine Coordinate Scalar) →
+  (h : FiniteConstrainedHessian Fine Coordinate Scalar) →
   ∀ X →
-  scalarOrder data
-    (coordinateInner data X (finiteHessian data X))
-    (coordinateInner data X X)
+  scalarOrder h
+    (coordinateInner h X (finiteHessian h X))
+    (coordinateInner h X X)
 finiteHessianCoercive = coerciveOnKernelCoordinates

@@ -42,6 +42,9 @@ scalarSchurDefectIdentity : ∀ coarseHessian mixed fluctuationHessian
       * (inverseFluctuation * mixed * mixed * coarse * coarse)
 scalarSchurDefectIdentity = ℚRing.solve-∀
 
+schurUnitDefectRaw : ∀ (s r : ℚ) → s + (1ℚ - 1ℚ) * r ≡ s
+schurUnitDefectRaw = ℚRing.solve-∀
+
 scalarSchurEnergyExact : ∀ coarseHessian mixed fluctuationHessian
     inverseFluctuation coarse →
   fluctuationHessian * inverseFluctuation ≡ 1ℚ →
@@ -60,7 +63,9 @@ scalarSchurEnergyExact coarseHessian mixed fluctuationHessian
           * (inverseFluctuation * mixed * mixed * coarse * coarse)
         ≡ scalarSchurHessian coarseHessian mixed inverseFluctuation * coarse * coarse)
       (sym inverseProduct)
-      (ℚRing.solve-∀))
+      (schurUnitDefectRaw
+        (scalarSchurHessian coarseHessian mixed inverseFluctuation * coarse * coarse)
+        (inverseFluctuation * mixed * mixed * coarse * coarse)))
 
 ------------------------------------------------------------------------
 -- T3B/T4A: gauge invariance is produced from exact reindexing of the actual
@@ -76,14 +81,14 @@ record ExactGaugeReindexedIntegral
 
     reindexGauge : ∀ gauge weight coarse →
       constrainedIntegral weight (transformCoarse gauge coarse)
-      ≡ constrainedIntegral (λ field → weight (transformFine gauge field)) coarse
+      ≡ constrainedIntegral (λ fld → weight (transformFine gauge fld)) coarse
 
     boltzmannWeight : Fine → Weight
-    boltzmannGaugeInvariant : ∀ gauge field →
-      boltzmannWeight (transformFine gauge field) ≡ boltzmannWeight field
+    boltzmannGaugeInvariant : ∀ gauge fld →
+      boltzmannWeight (transformFine gauge fld) ≡ boltzmannWeight fld
 
     integralCongruent : ∀ left right coarse →
-      (∀ field → left field ≡ right field) →
+      (∀ fld → left fld ≡ right fld) →
       constrainedIntegral left coarse ≡ constrainedIntegral right coarse
 
 open ExactGaugeReindexedIntegral public
@@ -99,7 +104,7 @@ fluctuationIntegralGaugeInvariant dataSet gauge coarse =
   trans
     (reindexGauge dataSet gauge (boltzmannWeight dataSet) coarse)
     (integralCongruent dataSet
-      (λ field → boltzmannWeight dataSet (transformFine dataSet gauge field))
+      (λ fld → boltzmannWeight dataSet (transformFine dataSet gauge fld))
       (boltzmannWeight dataSet)
       coarse
       (boltzmannGaugeInvariant dataSet gauge))
@@ -140,15 +145,23 @@ couplingFourthEnvelope : Nat → ℚ
 couplingFourthEnvelope depth =
   couplingSqEnvelope depth * couplingSqEnvelope depth
 
+couplingFourthStepRaw : ∀ (x : ℚ) →
+  (half * x) * (half * x) ≡ quarter * (x * x)
+couplingFourthStepRaw = ℚRing.solve-∀
+
 couplingFourthStep : ∀ depth →
   couplingFourthEnvelope (suc depth)
   ≡ quarter * couplingFourthEnvelope depth
-couplingFourthStep depth = ℚRing.solve-∀
+couplingFourthStep depth = couplingFourthStepRaw (couplingSqEnvelope depth)
 
 quarticPartialSum : Nat → ℚ
 quarticPartialSum zero = 0ℚ
 quarticPartialSum (suc depth) =
   quarticPartialSum depth + couplingFourthEnvelope depth
+
+quarticGeometricStepRaw : ∀ (s c : ℚ) →
+  (s + c) + fourThirds * (quarter * c) ≡ s + fourThirds * c
+quarticGeometricStepRaw = ℚRing.solve-∀
 
 quarticGeometricIdentity : ∀ depth →
   quarticPartialSum depth
@@ -163,7 +176,9 @@ quarticGeometricIdentity (suc depth) =
           + fourThirds * nextPower)
       (couplingFourthStep depth))
     (trans
-      (ℚRing.solve-∀)
+      (quarticGeometricStepRaw
+        (quarticPartialSum depth)
+        (couplingFourthEnvelope depth))
       (quarticGeometricIdentity depth))
 
 couplingSqNonnegative : ∀ depth → 0ℚ ≤ couplingSqEnvelope depth
@@ -255,6 +270,9 @@ record QuarticRemainderBound : Set₁ where
 
 open QuarticRemainderBound public
 
+distribCoefficientRaw : ∀ (k s c : ℚ) → k * s + k * c ≡ k * (s + c)
+distribCoefficientRaw = ℚRing.solve-∀
+
 quarticRemainderPartialBound :
   (dataSet : QuarticRemainderBound) → ∀ depth →
   partialAbsoluteRemainder dataSet depth
@@ -274,7 +292,10 @@ quarticRemainderPartialBound dataSet (suc depth) =
         partialAbsoluteRemainder dataSet depth
           + absoluteRemainder dataSet depth
         ≤ upper)
-      (ℚRing.solve-∀)
+      (distribCoefficientRaw
+        (coefficient dataSet)
+        (quarticPartialSum depth)
+        (couplingFourthEnvelope depth))
       (addMonotone dataSet
         (quarticRemainderPartialBound dataSet depth)
         (remainderControlled dataSet depth)))

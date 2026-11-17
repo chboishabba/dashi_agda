@@ -81,37 +81,51 @@ average0123ShiftInvariant fld axis =
   axisFixedImpliesShiftInvariant axis (average0123 fld)
     (average0123Fixed fld axis)
 
+subDiffCancelRaw : ∀ a b c → (a - c) - (b - c) ≡ a - b
+subDiffCancelRaw = ℚRing.solve-∀
+
 average0123ForwardDifferenceZero : ∀ fld axis site →
   forwardDifference4 axis (average0123 fld) site ≡ 0ℚ
-average0123ForwardDifferenceZero fld axis site
-  rewrite average0123ShiftInvariant fld axis site =
-  ℚRing.solve-∀
+average0123ForwardDifferenceZero fld axis site =
+  trans
+    (cong (λ u → u - average0123 fld site)
+      (average0123ShiftInvariant fld axis site))
+    (subSelfZeroRaw (average0123 fld site))
 
 forwardDifferenceResidualExact : ∀ fld axis site →
   forwardDifference4 axis
     (subtractField fld (average0123 fld)) site
   ≡ forwardDifference4 axis fld site
-forwardDifferenceResidualExact fld axis site
-  rewrite average0123ShiftInvariant fld axis site =
-  ℚRing.solve-∀
+forwardDifferenceResidualExact fld axis site =
+  trans
+    (cong
+      (λ u → (fld (shiftForward4 axis site) - u) - (fld site - average0123 fld site))
+      (average0123ShiftInvariant fld axis site))
+    (subDiffCancelRaw (fld (shiftForward4 axis site)) (fld site) (average0123 fld site))
 
 forwardDerivativeEnergyResidualExact : ∀ fld axis →
   forwardDerivativeEnergy axis
     (subtractField fld (average0123 fld))
   ≡ forwardDerivativeEnergy axis fld
 forwardDerivativeEnergyResidualExact fld axis =
-  siteSum4Cong _ _ (λ site →
-    cong₂ _*_
-      (forwardDifferenceResidualExact fld axis site)
-      (forwardDifferenceResidualExact fld axis site))
+  siteSum4Cong
+    (λ site →
+      forwardDifference4 axis (subtractField fld (average0123 fld)) site
+      * forwardDifference4 axis (subtractField fld (average0123 fld)) site)
+    (λ site →
+      forwardDifference4 axis fld site * forwardDifference4 axis fld site)
+    (λ site →
+      cong₂ _*_
+        (forwardDifferenceResidualExact fld axis site)
+        (forwardDifferenceResidualExact fld axis site))
 
 scalarResidualBondField : RationalBondField4 → RationalBondField4
 scalarResidualBondField fld (pair site axis) =
   fld (pair site axis) - average0123 (bondComponent fld axis) site
 
-componentPeriodicDifferenceResidualExact : ∀ fld →
-  componentPeriodicDifferenceEnergy (scalarResidualBondField fld)
-  ≡ componentPeriodicDifferenceEnergy fld
+componentPeriodicDifferenceResidualExact : (fld : RationalBondField4) →
+  componentPeriodicDifferenceEnergy (bondComponent (scalarResidualBondField fld))
+  ≡ componentPeriodicDifferenceEnergy (bondComponent fld)
 componentPeriodicDifferenceResidualExact fld =
   sumRationalCong
     (allCyclicIndices four)
@@ -135,7 +149,7 @@ componentPeriodicDifferenceResidualExact fld =
           forwardDerivativeEnergyResidualExact
             (bondComponent fld componentAxis) derivativeAxis))
 
-physicalPeriodicDifferenceResidualExact : ∀ tangent →
+physicalPeriodicDifferenceResidualExact : (tangent : PhysicalSU2Tangent4) →
   physicalPeriodicReferenceDifferenceEnergy (fineFluctuation tangent)
   ≡ physicalPeriodicReferenceDifferenceEnergy tangent
 physicalPeriodicDifferenceResidualExact tangent =
@@ -150,12 +164,12 @@ physicalPeriodicDifferenceResidualExact tangent =
 -- coarse penalty vanishes as a literal finite fold.
 ------------------------------------------------------------------------
 
-fineProjectionResidualPointwiseZero : ∀ tangent component site axis →
+fineProjectionResidualPointwiseZero : ∀ (tangent : PhysicalSU2Tangent4) (component : SU2Component) site axis →
   fineProjection (fineFluctuation tangent) component (pair site axis) ≡ 0ℚ
 fineProjectionResidualPointwiseZero tangent component site axis =
   fineFluctuationAverageZero tangent component axis site
 
-globalNormPointwiseZero : ∀ fld →
+globalNormPointwiseZero : (fld : SiteField side4) →
   (∀ site → fld site ≡ 0ℚ) → globalNormSq fld ≡ 0ℚ
 globalNormPointwiseZero fld fieldZero =
   trans
@@ -166,10 +180,10 @@ globalNormPointwiseZero fld fieldZero =
       (λ site →
         trans
           (cong₂ _*_ (fieldZero site) (fieldZero site))
-          (ℚRing.solve-∀)))
+          refl))
     (sumRationalZero (physicalBlockSites side4))
 
-bondNormPointwiseZero : ∀ fld →
+bondNormPointwiseZero : (fld : RationalBondField4) →
   (∀ axis site → fld (pair site axis) ≡ 0ℚ) → bondNormSq fld ≡ 0ℚ
 bondNormPointwiseZero fld fieldZero =
   trans
@@ -181,7 +195,7 @@ bondNormPointwiseZero fld fieldZero =
         (bondComponent fld axis) (fieldZero axis)))
     (sumRationalZero (allCyclicIndices four))
 
-physicalNormPointwiseZero : ∀ tangent →
+physicalNormPointwiseZero : (tangent : PhysicalSU2Tangent4) →
   (∀ component site axis → tangent component (pair site axis) ≡ 0ℚ) →
   physicalUnweightedNormSq tangent ≡ 0ℚ
 physicalNormPointwiseZero tangent tangentZero =
@@ -194,7 +208,7 @@ physicalNormPointwiseZero tangent tangentZero =
           (λ axis site → tangentZero component2 site axis))
         (bondNormPointwiseZero (tangent component3)
           (λ axis site → tangentZero component3 site axis))))
-    (ℚRing.solve-∀)
+    refl
 
 fineProjectionResidualNormZero : ∀ tangent →
   physicalUnweightedNormSq (fineProjection (fineFluctuation tangent)) ≡ 0ℚ
@@ -222,6 +236,9 @@ blockPenaltyMatchesConcreteCoarseNorm tangent = refl
 -- penalty, so the configured 1/16 coercivity is unconditional on all fields.
 ------------------------------------------------------------------------
 
+addZeroRightRaw : ∀ x → x + 0ℚ ≡ x
+addZeroRightRaw = ℚRing.solve-∀
+
 residualGaugeFixedEqualsPeriodicDifference : ∀ tangent →
   gaugeFixedHessianQuadraticForm concreteGaugeFixedHessianData
       (fineFluctuation tangent)
@@ -231,8 +248,9 @@ residualGaugeFixedEqualsPeriodicDifference tangent =
     (completeLiteralGaugeFixedHessianPeriodicDecompositionExact
       concreteLiteralCoarseBlockData (fineFluctuation tangent))
     (trans
-      (cong₂ _+_ refl (residualBlockPenaltyZero tangent))
-      (ℚRing.solve-∀))
+      (cong (_+_ (physicalPeriodicReferenceDifferenceEnergy (fineFluctuation tangent)))
+        (residualBlockPenaltyZero tangent))
+      (addZeroRightRaw (physicalPeriodicReferenceDifferenceEnergy (fineFluctuation tangent))))
 
 fullGaugeFixedResidualDecompositionExact : ∀ tangent →
   gaugeFixedHessianQuadraticForm concreteGaugeFixedHessianData tangent
@@ -248,9 +266,9 @@ fullGaugeFixedResidualDecompositionExact tangent =
       (cong₂ _+_
         (sym (physicalPeriodicDifferenceResidualExact tangent))
         (blockPenaltyMatchesConcreteCoarseNorm tangent))
-      (cong₂ _+_
-        (sym (residualGaugeFixedEqualsPeriodicDifference tangent))
-        refl))
+      (cong
+        (λ u → u + concreteCoarseInner (literalBlockAverageQ tangent) (literalBlockAverageQ tangent))
+        (sym (residualGaugeFixedEqualsPeriodicDifference tangent))))
 
 fullGaugeFixedCoercivity : ∀ tangent →
   configuredPathCoercivityConstant * physicalUnweightedNormSq tangent

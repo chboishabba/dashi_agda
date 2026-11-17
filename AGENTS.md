@@ -1,5 +1,13 @@
 # Agent Notes
 
+## Project-directory working rule
+
+Always work from the active project/repository directory and keep generated
+outputs there. Do not copy or clone the project into `/tmp/`, and do not use
+`/tmp/` for source trees, worktrees, builds, or artifacts unless it is strictly
+necessary for the task or the user explicitly requests it. If a temporary
+location is unavoidable, state why and clean it up when finished.
+
 ## Source attribution is mandatory repository style
 
 For any source-derived module, theorem surface, empirical claim, calibration,

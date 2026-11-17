@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanPath4SU2ReferenceHodgePhysicalExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational using (ℚ; 0ℚ; _+_; _≤_; _<_)
+open import Data.Rational using (ℚ; 0ℚ; _+_; _*_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; sym; trans)
@@ -84,6 +84,9 @@ nestedScalarAdditionExact dataSet left middle right =
     (cong (λ value → left + value)
       (addScalarMatchesRationalAddition dataSet middle right))
 
+addAssocLeftRaw : ∀ a b c → a + (b + c) ≡ (a + b) + c
+addAssocLeftRaw = ℚRing.solve-∀
+
 gaugeFixedHessianPhysicalDecompositionExact :
   ∀ {Gauge Coarse}
     (dataSet : Path4SU2ReferenceHodgeData Gauge Coarse)
@@ -101,10 +104,12 @@ gaugeFixedHessianPhysicalDecompositionExact dataSet tangent =
         (gaugeFixingNormSq (quadraticData dataSet) tangent)
         (blockAverageNormSq (quadraticData dataSet) tangent))
       (trans
-        (ℚRing.solve-∀)
-        (cong₂ _+_
-          (referenceWilsonGaugeEnergyMatchesDifferenceEnergy dataSet tangent)
-          refl)))
+        (addAssocLeftRaw
+          (wilsonHessianQuadraticForm (quadraticData dataSet) tangent)
+          (gaugeFixingNormSq (quadraticData dataSet) tangent)
+          (blockAverageNormSq (quadraticData dataSet) tangent))
+        (cong (_+ blockAverageNormSq (quadraticData dataSet) tangent)
+          (referenceWilsonGaugeEnergyMatchesDifferenceEnergy dataSet tangent))))
 
 referenceDifferenceBelowPhysicalHessian :
   ∀ {Gauge Coarse}

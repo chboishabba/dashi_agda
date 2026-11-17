@@ -1,6 +1,7 @@
 module DASHI.Physics.YangMills.BalabanSU2KernelCoordinates where
 
 open import Agda.Builtin.Equality using (_≡_)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 -- A finite coordinate realization is kept fully constructive: it contains the
 -- two embeddings and the projections together with the exact reconstruction
@@ -62,6 +63,12 @@ fineCoordinateDecomposition :
     (coarseEmbedding coordinates (Q coordinates fine))
     (kernelEmbedding coordinates (kernelProjection coordinates fine))
   ≡ fine
-fineCoordinateDecomposition coordinates fine
-  rewrite coarseProjectionCorrect coordinates fine =
-  reconstruction coordinates fine
+fineCoordinateDecomposition coordinates fine =
+  trans
+    (cong
+      (λ c →
+        combine coordinates
+          (coarseEmbedding coordinates c)
+          (kernelEmbedding coordinates (kernelProjection coordinates fine)))
+      (sym (coarseProjectionCorrect coordinates fine)))
+    (reconstruction coordinates fine)

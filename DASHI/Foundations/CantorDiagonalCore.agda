@@ -47,7 +47,7 @@ NotInImage enumeration predicate =
 
 SurjectiveUpToPredicateEquivalence :
   ∀ {A} → (A → Pred A) → Set₁
-SurjectiveUpToPredicateEquivalence enumeration =
+SurjectiveUpToPredicateEquivalence {A} enumeration =
   ∀ predicate → Σ A λ index → enumeration index ≈ₚ predicate
 
 selfNegatingEquivalenceImpossible :
@@ -55,7 +55,7 @@ selfNegatingEquivalenceImpossible :
   (P → ¬ P) →
   (¬ P → P) →
   ⊥
-selfNegatingEquivalenceImpossible forward backward =
+selfNegatingEquivalenceImpossible {P} forward backward =
   notP p
   where
   notP : ¬ P
@@ -75,7 +75,7 @@ diagonalNotInImage enumeration index equivalence =
 cantorNotSurjective :
   ∀ {A} (enumeration : A → Pred A) →
   Not₁ (SurjectiveUpToPredicateEquivalence enumeration)
-cantorNotSurjective enumeration surjective =
+cantorNotSurjective {A} enumeration surjective =
   diagonalNotInImage enumeration
     (fst diagonalPreimage)
     (snd diagonalPreimage)

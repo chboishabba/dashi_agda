@@ -45,41 +45,41 @@ import DASHI.Physics.YangMills.BalabanNormalizedAxisAverageNormContractionExact 
 
 average0 :
   ∀ {L} → Average.NormalizedAxisAverageData L → SiteField L → SiteField L
-average0 dataSet field = Average.axisAverage dataSet field zeroᵢ
+average0 dataSet fld = Average.axisAverage dataSet fld zeroᵢ
 
 average01 :
   ∀ {L} → Average.NormalizedAxisAverageData L → SiteField L → SiteField L
-average01 dataSet field =
-  Average.axisAverage dataSet (average0 dataSet field) (sucᵢ zeroᵢ)
+average01 dataSet fld =
+  Average.axisAverage dataSet (average0 dataSet fld) (sucᵢ zeroᵢ)
 
 average012 :
   ∀ {L} → Average.NormalizedAxisAverageData L → SiteField L → SiteField L
-average012 dataSet field =
-  Average.axisAverage dataSet (average01 dataSet field)
+average012 dataSet fld =
+  Average.axisAverage dataSet (average01 dataSet fld)
     (sucᵢ (sucᵢ zeroᵢ))
 
 average0123 :
   ∀ {L} → Average.NormalizedAxisAverageData L → SiteField L → SiteField L
-average0123 dataSet field =
-  Average.axisAverage dataSet (average012 dataSet field)
+average0123 dataSet fld =
+  Average.axisAverage dataSet (average012 dataSet fld)
     (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
 
 martingale0 martingale1 martingale2 martingale3 :
   ∀ {L} → Average.NormalizedAxisAverageData L → SiteField L → SiteField L
-martingale0 dataSet field =
-  Norm.axisResidual dataSet field zeroᵢ
-martingale1 dataSet field =
-  Norm.axisResidual dataSet (average0 dataSet field) (sucᵢ zeroᵢ)
-martingale2 dataSet field =
-  Norm.axisResidual dataSet (average01 dataSet field)
+martingale0 dataSet fld =
+  Norm.axisResidual dataSet fld zeroᵢ
+martingale1 dataSet fld =
+  Norm.axisResidual dataSet (average0 dataSet fld) (sucᵢ zeroᵢ)
+martingale2 dataSet fld =
+  Norm.axisResidual dataSet (average01 dataSet fld)
     (sucᵢ (sucᵢ zeroᵢ))
-martingale3 dataSet field =
-  Norm.axisResidual dataSet (average012 dataSet field)
+martingale3 dataSet fld =
+  Norm.axisResidual dataSet (average012 dataSet fld)
     (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
 
 GlobalMeanZero :
   ∀ {L} → Average.NormalizedAxisAverageData L → SiteField L → Set
-GlobalMeanZero dataSet field = ∀ site → average0123 dataSet field site ≡ 0ℚ
+GlobalMeanZero dataSet fld = ∀ site → average0123 dataSet fld site ≡ 0ℚ
 
 sumZero : ∀ {A : Set} (values : List A) →
   sumRational values (λ _ → 0ℚ) ≡ 0ℚ
@@ -88,13 +88,13 @@ sumZero (value ∷ values) rewrite sumZero values = refl
 
 terminalNormZero :
   ∀ {L} (dataSet : Average.NormalizedAxisAverageData L)
-    (field : SiteField L) → GlobalMeanZero dataSet field →
-  Norm.globalNormSq (average0123 dataSet field) ≡ 0ℚ
-terminalNormZero {L} dataSet field meanZero =
+    (fld : SiteField L) → GlobalMeanZero dataSet fld →
+  Norm.globalNormSq (average0123 dataSet fld) ≡ 0ℚ
+terminalNormZero {L} dataSet fld meanZero =
   trans
     (sumRationalCong
       (physicalBlockSites L)
-      (λ site → average0123 dataSet field site * average0123 dataSet field site)
+      (λ site → average0123 dataSet fld site * average0123 dataSet fld site)
       (λ _ → 0ℚ)
       (λ site →
         trans
@@ -104,67 +104,67 @@ terminalNormZero {L} dataSet field meanZero =
 
 fourAxisVarianceWithTerminal :
   ∀ {L} (dataSet : Average.NormalizedAxisAverageData L)
-    (field : SiteField L) →
-  Norm.globalNormSq field
-  ≡ Norm.globalNormSq (martingale0 dataSet field)
-    + (Norm.globalNormSq (martingale1 dataSet field)
-    + (Norm.globalNormSq (martingale2 dataSet field)
-    + (Norm.globalNormSq (martingale3 dataSet field)
-    + Norm.globalNormSq (average0123 dataSet field))))
-fourAxisVarianceWithTerminal dataSet field =
+    (fld : SiteField L) →
+  Norm.globalNormSq fld
+  ≡ Norm.globalNormSq (martingale0 dataSet fld)
+    + (Norm.globalNormSq (martingale1 dataSet fld)
+    + (Norm.globalNormSq (martingale2 dataSet fld)
+    + (Norm.globalNormSq (martingale3 dataSet fld)
+    + Norm.globalNormSq (average0123 dataSet fld))))
+fourAxisVarianceWithTerminal dataSet fld =
   let
-    p0 = Norm.axisAveragePythagoras dataSet field zeroᵢ
-    p1 = Norm.axisAveragePythagoras dataSet (average0 dataSet field)
+    p0 = Norm.axisAveragePythagoras dataSet fld zeroᵢ
+    p1 = Norm.axisAveragePythagoras dataSet (average0 dataSet fld)
       (sucᵢ zeroᵢ)
-    p2 = Norm.axisAveragePythagoras dataSet (average01 dataSet field)
+    p2 = Norm.axisAveragePythagoras dataSet (average01 dataSet fld)
       (sucᵢ (sucᵢ zeroᵢ))
-    p3 = Norm.axisAveragePythagoras dataSet (average012 dataSet field)
+    p3 = Norm.axisAveragePythagoras dataSet (average012 dataSet fld)
       (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
   in
   trans p0
     (trans
-      (cong (Norm.globalNormSq (martingale0 dataSet field) +_) p1)
+      (cong (Norm.globalNormSq (martingale0 dataSet fld) +_) p1)
       (trans
         (cong
-          (λ value → Norm.globalNormSq (martingale0 dataSet field) + value)
-          (cong (Norm.globalNormSq (martingale1 dataSet field) +_) p2))
+          (λ value → Norm.globalNormSq (martingale0 dataSet fld) + value)
+          (cong (Norm.globalNormSq (martingale1 dataSet fld) +_) p2))
         (trans
           (cong
             (λ value →
-              Norm.globalNormSq (martingale0 dataSet field)
-              + (Norm.globalNormSq (martingale1 dataSet field) + value))
-            (cong (Norm.globalNormSq (martingale2 dataSet field) +_) p3))
+              Norm.globalNormSq (martingale0 dataSet fld)
+              + (Norm.globalNormSq (martingale1 dataSet fld) + value))
+            (cong (Norm.globalNormSq (martingale2 dataSet fld) +_) p3))
           (ℚRing.solve-∀
-            (Norm.globalNormSq (martingale0 dataSet field))
-            (Norm.globalNormSq (martingale1 dataSet field))
-            (Norm.globalNormSq (martingale2 dataSet field))
-            (Norm.globalNormSq (martingale3 dataSet field))
-            (Norm.globalNormSq (average0123 dataSet field))))))
+            (Norm.globalNormSq (martingale0 dataSet fld))
+            (Norm.globalNormSq (martingale1 dataSet fld))
+            (Norm.globalNormSq (martingale2 dataSet fld))
+            (Norm.globalNormSq (martingale3 dataSet fld))
+            (Norm.globalNormSq (average0123 dataSet fld))))))
 
 fourAxisVarianceDecomposition :
   ∀ {L} (dataSet : Average.NormalizedAxisAverageData L)
-    (field : SiteField L) → GlobalMeanZero dataSet field →
-  Norm.globalNormSq field
-  ≡ Norm.globalNormSq (martingale0 dataSet field)
-    + (Norm.globalNormSq (martingale1 dataSet field)
-    + (Norm.globalNormSq (martingale2 dataSet field)
-    + Norm.globalNormSq (martingale3 dataSet field)))
-fourAxisVarianceDecomposition dataSet field meanZero =
+    (fld : SiteField L) → GlobalMeanZero dataSet fld →
+  Norm.globalNormSq fld
+  ≡ Norm.globalNormSq (martingale0 dataSet fld)
+    + (Norm.globalNormSq (martingale1 dataSet fld)
+    + (Norm.globalNormSq (martingale2 dataSet fld)
+    + Norm.globalNormSq (martingale3 dataSet fld)))
+fourAxisVarianceDecomposition dataSet fld meanZero =
   trans
-    (fourAxisVarianceWithTerminal dataSet field)
+    (fourAxisVarianceWithTerminal dataSet fld)
     (trans
       (cong
         (λ terminal →
-          Norm.globalNormSq (martingale0 dataSet field)
-          + (Norm.globalNormSq (martingale1 dataSet field)
-          + (Norm.globalNormSq (martingale2 dataSet field)
-          + (Norm.globalNormSq (martingale3 dataSet field) + terminal))))
-        (terminalNormZero dataSet field meanZero))
+          Norm.globalNormSq (martingale0 dataSet fld)
+          + (Norm.globalNormSq (martingale1 dataSet fld)
+          + (Norm.globalNormSq (martingale2 dataSet fld)
+          + (Norm.globalNormSq (martingale3 dataSet fld) + terminal))))
+        (terminalNormZero dataSet fld meanZero))
       (OpaqueAlgebra.dropTerminalZero4
-        (Norm.globalNormSq (martingale0 dataSet field))
-        (Norm.globalNormSq (martingale1 dataSet field))
-        (Norm.globalNormSq (martingale2 dataSet field))
-        (Norm.globalNormSq (martingale3 dataSet field))))
+        (Norm.globalNormSq (martingale0 dataSet fld))
+        (Norm.globalNormSq (martingale1 dataSet fld))
+        (Norm.globalNormSq (martingale2 dataSet fld))
+        (Norm.globalNormSq (martingale3 dataSet fld))))
 
 normalizedFourAxisMartingaleVarianceLevel : ProofLevel
 normalizedFourAxisMartingaleVarianceLevel = machineChecked
