@@ -276,3 +276,69 @@ All five formal/kernel gates remain open where they need the genuine
 primitive Bishop dyadic cubature, its quantitative Cauchy witness,
 the full original SUN matrix carrier and an actual RG transfer.
 Do NOT label mathematical checked identities as Agda acceptance.
+
+
+### 2026-11-17 YM.REAL rational S3 maximum cut: root/pi-free original source
+
+SOURCE-FIRST: original rational SU2 carrier, finite positive-bond
+enumerator, positive reciprocal, original finite RG pushforward/
+disintegration and side-four blocked Gibbs pushforward are already
+in repo. Do not duplicate these theorem owners.
+
+The earlier concern about unavailable arbitrary Bishop square roots
+or identifying Machin pi with the classical trigonometric period is
+NOT a prerequisite for exact positive rational S3 cubature:
+- YMClayRationalS3StereographicNodeExact constructs the Pythagorean
+  identity for q(t)=((1-|t|²)/d,2t/d), d=1+|t|².
+- YMClayRationalS3StereographicConcreteExact proves d>0, inverts
+  it using the existing rational reciprocal and constructs the
+  ORIGINAL RationalUnitQuaternion (no assumed norm witness).
+- YMClayRationalS3PositiveWeightedNodesExact constructs strictly
+  positive rational J(t)=(1+|t|²)^-3 weights, nonempty positive
+  total, exact normalized mass one and original-to-Bishop SU2
+  unitary source reuse (transitive kernel acceptance pending).
+
+Four fully rational positive exact orbit cubatures are certified:
+  d=7  : 120 original rational sphere nodes, 330/330 monomials;
+  d=9  : 360 nodes, 715/715 monomials;
+  d=11 : 696 nodes, 1365/1365 monomials;
+  d=13 : 1000 nodes, 2380/2380 monomials.
+Total 4840 exact rational assertions; no pi, roots, floating-point
+or numerical optimizer in the committed certificate. The degree-7
+rule uses positive orbit masses 167/960, 1/15, 243/320.
+Its tensor product integrates the actual L=1 Wilson six-commutator
+cubic 20,502-term polynomial and confirms H(D³)=6445/48
+independently of the original Pochhammer-moment calculator.
+
+All-degree MATHEMATICAL proof route: positive full-support
+stereographic rational area J=8/(1+|t|²)^3; exact rational
+divergence-free SO4 generator identities and integration by
+parts derive all Pochhammer moments. Finite-dimensional rational
+moment vector is interior to convex hull of rational sphere
+evaluations; rational convex feasibility proves existence of
+positive exact rational cubature at each degree. Effective
+finite-dimensional Gram coercivity can certify a search margin:
+lambda >= det(G_d)/tr(G_d)^(dimension-1). Rational LDL examples
+through degree 3 are verified. This is NOT yet an inhabited Agda
+termination/search proof for arbitrary d.
+
+A second completely root-free Bishop route uses rational
+stereographic MIDPOINT sums. For |f|<=B and L-Lipschitz on
+the S3 chord, choose C=ceil(1+B+L), R_k=2^(k+16) C,
+h_k=R_k^-5; exact rational midpoint and tail bounds give
+normalized error <=2^(-k-3). This supplies an explicit
+fast-Cauchy precision schedule, but native Bishop order,
+multivariate midpoint integration and the vendor Sequence Cauchy
+inhabitant are still unproved in Agda.
+
+Existing original FiniteRG pushforward/disintegration is reused.
+Naive same-beta L2-to-L1 link selection is false; the correct
+RG blocking/induced effective action must be instantiated with the
+original rational-design Wilson Gibbs source.
+
+**Do not close YM.REAL:** exact mathematical all-degree rational
+existence and finite certificates are much stronger, but the
+all-degree constructive Agda producer, actual native Bishop
+completion, original SUN matrix equivalence, and typed original
+Wilson/RG cylinder weld still require kernel acceptance.
+New source ledger: Docs/physics/YMClayRationalS3HaarNoRootsMaxCut20261117.md.
