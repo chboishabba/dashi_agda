@@ -240,7 +240,7 @@ gateExpressionCorrect :
   ∀ {inputs gates : Nat}
     {program : Circuit.GateProgram inputs gates}
     {assignment : Cook.Assignment} →
-  ProgramAssignmentRealizes program assignment →
+  (realization : ProgramAssignmentRealizes program assignment) →
   (gate : Circuit.Gate inputs gates) →
   Cook.evaluate
     (Compiler.gateExpressionFormula gate)
