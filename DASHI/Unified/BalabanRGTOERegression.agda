@@ -1533,3 +1533,6 @@ import DASHI.Physics.YangMills.YMClaySU2PochhammerMomentNumeratorsExact as SU2Ex
 
 -- Original Fejer/SU2 all-degree finite character block cancellation.
 import DASHI.Physics.YangMills.YMClayDyadicCharacterPairCancellationExact as SU2DyadicFourierPairs
+
+-- Source-safe algebraic norm of rational S3 stereographic coordinates.
+import DASHI.Physics.YangMills.YMClayRationalS3StereographicNodeExact as S3RationalStereoPolynomial
