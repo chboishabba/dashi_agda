@@ -127,3 +127,43 @@ warpFaceEnvelopePolynomial :
             + ((+ 2) / 1) * t * t
             + t * t * (1ℚ + - t))
 warpFaceEnvelopePolynomial t = solve []
+
+-- General moving-Israel boundary source algebra, for ANY rational v.
+-- a=1+v, b=1-v, original target relation
+-- b*target=a*P-2*S (where S=amp*source).
+-- This polynomial identity deliberately does NOT DIVIDE by v or b.
+-- Under b*target=a*P-2S the last term is zero. For -1<v<0
+-- the remaining squares give B_lower <= -S²/v.
+-- The Agda rational ring theorem proves the certificate only;
+-- positivity/order and inverse-v require separate acceptance.
+lowerOriginalBoundary : ℚ → ℚ → ℚ → ℚ → ℚ
+lowerOriginalBoundary v p m target =
+  - (half * (1ℚ + v) * sq p)
+  + - (half * (1ℚ + - v) * sq (m + - target))
+  + half * (1ℚ + - v) * sq target
+
+originalMovingSourcePolynomialCertificate :
+  (v p m src target : ℚ) →
+  let a = 1ℚ + v
+      b = 1ℚ + - v
+      targetDefect = b * target + - (a * p + - (((+ 2) / 1) * src))
+      targetSum = b * target + (a * p + - (((+ 2) / 1) * src))
+  in
+  b * v * lowerOriginalBoundary v p m target
+  ≡ a * sq (v * p + - src)
+    + - (b * sq src)
+    + - (half * b * b * v * sq (m + - target))
+    + half * v * targetDefect * targetSum
+originalMovingSourcePolynomialCertificate v p m src target = solve []
+
+-- Same ORIGINAL moving brane at rational t=4/3: db/dt=-9/16,
+-- dT/dt=15/16, v=-3/5, hence db/dt=v*(dT/dt).
+-- General analytic identity requires the source calculus witnesses.
+originalMovingBdotEqualsVelocityAtSlice :
+  - ((+ 9) / 16)
+  ≡ (- ((+ 3) / 5)) * ((+ 15) / 16)
+originalMovingBdotEqualsVelocityAtSlice = solve []
+
+-- For w=z^-3, z_T=v, the formal chain rule is
+-- w_T=-3 v z^-4=-3 v w/z. Its incorporation into the
+-- characteristic half-energy is exactly movingWeightPower above.
