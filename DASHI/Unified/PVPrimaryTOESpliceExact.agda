@@ -24,6 +24,8 @@ import DASHI.Physics.Photovoltaic.Atomic369PTripletParityE1NoGoExact
 -- First source-qualified real GaAs s/p Kane control; same 369 material weld OPEN.
 import DASHI.Physics.Photovoltaic.Atomic369GaAs111TrigonalCharacterExact
 import DASHI.Physics.Photovoltaic.GaAsKane369MaterialDiscriminatorExact
+-- Original [111] spinless strain entry covariance, [001] negative control.
+import DASHI.Physics.Photovoltaic.GaAs111BirPikusC3vFiniteExact
 
 -- Signed temperature/heat and ground/ORC co-product consumers only.
 import DASHI.Physics.Photovoltaic.GroundCondensateActiveCoolingExact
