@@ -120,7 +120,7 @@ if __name__=="__main__":
  ap=argparse.ArgumentParser()
  ap.add_argument("--degree",type=int,default=9)
  args=ap.parse_args()
- assert 0<=args.degree<=100
+ assert args.degree>=0
  symbolic_proofs()
  for d in range(args.degree+1):check_degree(d)
  print("SYM3_UNIVERSAL_DEGREE_PRODUCER_PASS",checks)
