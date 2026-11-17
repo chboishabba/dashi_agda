@@ -61,6 +61,16 @@ assert sorted(map(len, classes)) == [1, 1, 4, 4, 4, 4, 6]
 assert len({next(iter(c))[0] for c in classes}) == 5
 assert len(set().union(*classes)) == 24
 
+# Burnside counts simultaneous-conjugation orbits of 2T^4:
+# each g fixes the fourth power of its centralizer size.
+centralizers = [sum(conjugate(g, q) == q for q in nodes) for g in nodes]
+assert Counter(centralizers) == {24: 2, 6: 16, 4: 6}
+fine_orbits = sum(c**4 for c in centralizers) // 24
+assert fine_orbits == 28576
+# 7^4 independent conjugacy representatives are NOT a valid
+# generic reduction for relative pairwise orientations.
+
+
 checks = 0
 for g in nodes:
     for q in nodes:
@@ -86,4 +96,5 @@ assert all(
 
 print("PASS: 2T 24-node closure/inverses, 7 conjugacy classes (5 trace values),")
 print(f"      {checks} diagonal-conjugation pair-deficit checks,")
+print(f"      {fine_orbits} diagonal-conjugation fine orbits (Burnside),")
 print("      conjugation-invariant blocked trace and left-action counterexample 0 -> 6")
