@@ -1,0 +1,50 @@
+{
+  "date": "2026-11-17",
+  "pr": 1524,
+  "scope": "Local finite heterogeneous Maxwell–Lorentz ADE energy and graph dependency, Agda finite-frame companion",
+  "reuse": [
+    "SmithFilsingerIndexedFaceIncidenceExact.sameID",
+    "smith_filsinger_lorentz_ade_sympy.LorentzMaterial",
+    "smith_filsinger_lorentz_ade_sympy.curl_matrix",
+    "smith_filsinger_lorentz_ade_sympy.energy",
+    "SmithFilsingerYeeCFLConeGuardExact physical-front firewall"
+  ],
+  "files": [
+    "scripts/smith_filsinger_local_causal_ade_sympy.py",
+    "scripts/test_smith_filsinger_local_causal_ade_sympy.py",
+    "DASHI/Physics/Motors/SmithFilsingerLocalCausalADEFrameExact.agda",
+    "Docs/research/SmithFilsingerLocalCausalADEMaxCut20261117.md"
+  ],
+  "math": [
+    "Each Cayley edge changes no more than two state coordinates",
+    "ΔU=h/2 midpoint^T(Ae^T M+M Ae)midpoint per primitive",
+    "Exact separated source/controller/useful load/Ohmic/Lorentz ledger",
+    "Heterogeneous eps_i,mu_j curl transport weighted-energy cancellation",
+    "Boolean dependency cone exact zero outside reachable actual stage supports",
+    "Global spatial implicit-midpoint four-cell countercontrol: nonzero remote numerical resolvent tail",
+    "Agda source-level neverTouchedRetainsOriginal finite list induction"
+  ],
+  "tests": {
+    "previous": 112,
+    "new_local_uniform": 15,
+    "new_heterogeneous": 4,
+    "total": "131/131 local exact pytest PASS",
+    "sympy": "1.14.0",
+    "pytest": "9.0.2",
+    "exact_git_head_ci": "NOT OBSERVED",
+    "agda_kernel": "NOT RUN"
+  },
+  "physical": {
+    "F13_3D_retarded_maxwell": "OPEN",
+    "F13_real_soil_air_ionosphere": "OPEN",
+    "F15_original_replenished_natural_work": "OPEN",
+    "D1_pinned_agda_kernel": "OPEN",
+    "numerical_support_is_physical_light_cone": false
+  },
+  "evidence": {
+    "actual_source_meter": false,
+    "full_original_cycle": false,
+    "real_electrode_return_vi": false
+  },
+  "attribution": "Smith/Filsinger user-origin Sun-Earth coupling steelman, existing DASHI Green/Maxwell/field material owners, no ESD edits"
+}
