@@ -139,3 +139,45 @@ GitHub Actions or Agda kernel pass is claimed.
 
 Research attribution: Leech-LILA original by Anatolii Kornienko.
 DASHI reuse-first policy; no ESD modifications.
+
+
+## Stronger P0 joint-router non-descent witness
+
+For a nonzero zero-sum directed head,
+`w_s+w_f+w_r=0`, consider two original
+expert histories
+
+    h+ = t*(1,1,1),   h- = -t*(1,1,1),   t>0.
+
+For EVERY source input x, the original
+directed score agrees:
+
+    <M_w x,h+> = <M_w x,h-> = 0.
+
+The **full C2 history vector** also agrees
+exactly, not merely after scoring:
+
+    abs(h+) = abs(h-) = t*(1,1,1).
+
+Consequently the entire R4 ROUTING logit
+contribution (shared unary x + v·abs(h)
++ directed residual + same expert bias)
+is identical on these two histories
+for all source x, including source
+coherent or bijective mixed q-gated phase.
+This is an exact non-injective joint
+C2+directed routing quotient.
+
+But the original expert FFN,
+orientation sign and transition consume
+SIGNED histories; the two states are
+not definitionally equal and are not
+certified equivalent for those consumers
+or future traces. This proves the
+need to JOIN selected-execution and
+transition fibres even after combining
+the two R4 router feature families.
+The updated SymPy source checks this
+adversarial witness, without claiming
+the original learned FFN parameters
+actually separate the specific pair.
