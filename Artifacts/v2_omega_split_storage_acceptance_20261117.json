@@ -1,0 +1,35 @@
+{
+  "agda_kernel": "not run",
+  "expanded_result": "287 passed in 3.67 s",
+  "expanded_test_command": "cd v2_highalpha_round10 && python -m pytest -q tests/test_v2_lc_recovery_tranche.py tests/test_v2_omega_converter_observability_cut.py tests/test_v2_omega_intervention_protocol.py tests/test_v2_omega_load_intervention_weld.py tests/test_v2_omega_robust_pulse_recovery.py tests/test_v2_omega_semiconductor_loss_and_identification.py tests/test_v2_omega_smooth_storage_metrology_maxcut.py tests/test_v2_source_bounded_efficiency_maxcut.py tests/test_v2_tranche_maxcut.py tests/test_v2_omega_split_storage_protocol.py",
+  "limitations": [
+    "real apparatus port completeness not demonstrated",
+    "no thermal/calibration certificate",
+    "no full previous 267-test aggregate in this round"
+  ],
+  "negative_controls": [
+    "whole balance passes during 1 J motor storage depletion; stationary acceptance rejects it",
+    "split motor/generator balance checked individually",
+    "missing loss or energy sensor rejected",
+    "linear-drift counterbalancing required",
+    "significance blocked by large load power error",
+    "no original V2 data in template"
+  ],
+  "original_measurements": 0,
+  "purpose": "two-store independent load/recovery instrument contract",
+  "pytest_command": "python -m pytest -q tests/test_v2_omega_split_storage_protocol.py tests/test_v2_omega_intervention_protocol.py tests/test_v2_omega_load_intervention_weld.py",
+  "pytest_result": "86 passed in 0.55 s; subsequent runner 86 passed in 0.46 s",
+  "schema": "DASHI.V2.Omega.split-storage.acceptance.v1",
+  "source_sha256": {
+    "Artifacts/v2_omega_original_v2_split_storage_empty_template_20261117.csv": "5176478a471421286784d72944b9125682896c136924be3c12f5f47777f258d7",
+    "Docs/physics/MadScience369V2OmegaSplitMotorGeneratorStorageMaxCut20261117.md": "73752ba52cfdd0b5f097f023eb321bb6f091ee28b42600df6375409d0307aca9",
+    "scripts/check_v2_omega_split_storage_protocol.sh": "af5e386caafea17127d9046450a4dc698fa509d7174b2a311e4c09e29d5c578b",
+    "scripts/v2_omega_split_storage_protocol.py": "11af0c1ba3d46bc23cf068893a6c704cd3324211c42715085bce2a211602743c",
+    "tests/test_v2_omega_split_storage_protocol.py": "e519647ca499e9e8bcdffd7673c30b05412fc80c6b9db0c7435d504fae87caf7"
+  },
+  "verified_subset": [
+    "25 original protocol tests",
+    "41 original load intervention tests",
+    "20 new split-storage tests"
+  ]
+}

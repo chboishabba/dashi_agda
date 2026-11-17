@@ -1,0 +1,11 @@
+{
+  "schema": "DASHI.V2.coupled-magnetic-torque.acceptance.v1",
+  "date": "2026-11-17",
+  "tests_run": 19,
+  "tests_passed": 19,
+  "test_scope": "local Python unittest; no Agda kernel or repository CI",
+  "geometry_counterfactual": true,
+  "same_geometry_control_comparison": true,
+  "full_hardware_gate": "OPEN",
+  "original_v2_measurements": "ABSENT"
+}

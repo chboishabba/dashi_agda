@@ -1,0 +1,12 @@
+{
+  "schema": "DASHI.V2.Omega.measurement-protocol-acceptance.v1",
+  "local_command": "bash scripts/check_v2_omega_intervention_protocol.sh",
+  "local_total_passed": 267,
+  "new_protocol_tests": 25,
+  "original_v2_observations": 0,
+  "real_measurement_template_rows": 32,
+  "agda_kernel": "NOT RUN",
+  "physical_H_Omega_gate": "OPEN",
+  "one_shot_original_V2_discriminator": "NOT TESTED",
+  "generated_at": "2026-11-17"
+}

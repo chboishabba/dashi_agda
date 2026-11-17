@@ -1,0 +1,12 @@
+{
+  "schema": "dashi.V2.Omega.converter-observability-acceptance.v1",
+  "date": "2026-11-17",
+  "new_module_tests": 30,
+  "new_module_status": "PASS",
+  "source_matched_integrated_subset_tests": 159,
+  "source_matched_integrated_subset_status": "PASS",
+  "excluded_older_pwm_module": "missing original v2_coupled_pulse_machine_maxcut.py in reconstructed local tree; not rerun",
+  "agda_kernel": "NOT_RUN",
+  "original_device_identified": false,
+  "committed_head_acceptance": "NOT_RUN"
+}

@@ -1,0 +1,174 @@
+{
+  "schema": "DASHI.V2.Omega.robust-smooth-recovery.v1",
+  "source_identified": false,
+  "measured_V2_efficiency": false,
+  "candidates": 30,
+  "robust_certified_count": 5,
+  "winner": {
+    "q": 0.0,
+    "lead_rad": -0.05,
+    "uncertainty": {
+      "resistance_increase_ohm": 0.03,
+      "voltage_derating_v": 2.0,
+      "unmodelled_voltage_demand_v": 1.0,
+      "enhanced_eta_min": 0.985,
+      "ordinary_eta_max": 0.955,
+      "added_controller_overhead_max_w": 0.7
+    },
+    "corner_robust_winding_bus_certified": true,
+    "minimum_voltage_headroom_v": 0.2428129836839048,
+    "worst_enhanced_net_bus_w": 26.4654456147048,
+    "worst_ordinary_net_bus_w": 21.403576165219103,
+    "minimum_correlated_recovery_gain_lower_w": 4.905682348000466,
+    "corners": [
+      {
+        "resistance_increase_ohm": 0.0,
+        "derating_v": 0.0,
+        "enhanced_net_bus_w": 26.778180547403053,
+        "ordinary_net_bus_w": 21.711002582796166,
+        "required_voltage_upper_v": 317.67272864959125,
+        "continuous_voltage_headroom_v": 2.3272713504087505,
+        "recovery_gain_lower_w": 4.911017289150561,
+        "shaft_w": 45.000000000002,
+        "full_cycle_storage_by_manufactured_waveform": true,
+        "continuous_bus_enclosure_certified": true,
+        "current_upper_a": 7.454995837656469,
+        "slew_upper_a_s": 14701.866295337602
+      },
+      {
+        "resistance_increase_ohm": 0.0,
+        "derating_v": 2.0,
+        "enhanced_net_bus_w": 26.778180547403053,
+        "ordinary_net_bus_w": 21.711002582796166,
+        "required_voltage_upper_v": 317.67272864959125,
+        "continuous_voltage_headroom_v": 0.32727135040875055,
+        "recovery_gain_lower_w": 4.911017289150561,
+        "shaft_w": 45.000000000002,
+        "full_cycle_storage_by_manufactured_waveform": true,
+        "continuous_bus_enclosure_certified": true,
+        "current_upper_a": 7.454995837656469,
+        "slew_upper_a_s": 14701.866295337602
+      },
+      {
+        "resistance_increase_ohm": 0.03,
+        "derating_v": 0.0,
+        "enhanced_net_bus_w": 26.4654456147048,
+        "ordinary_net_bus_w": 21.403576165219103,
+        "required_voltage_upper_v": 317.7571870163161,
+        "continuous_voltage_headroom_v": 2.242812983683905,
+        "recovery_gain_lower_w": 4.905682348000466,
+        "shaft_w": 45.000000000002,
+        "full_cycle_storage_by_manufactured_waveform": true,
+        "continuous_bus_enclosure_certified": true,
+        "current_upper_a": 7.454995837656469,
+        "slew_upper_a_s": 14701.866295337602
+      },
+      {
+        "resistance_increase_ohm": 0.03,
+        "derating_v": 2.0,
+        "enhanced_net_bus_w": 26.4654456147048,
+        "ordinary_net_bus_w": 21.403576165219103,
+        "required_voltage_upper_v": 317.7571870163161,
+        "continuous_voltage_headroom_v": 0.2428129836839048,
+        "recovery_gain_lower_w": 4.905682348000466,
+        "shaft_w": 45.000000000002,
+        "full_cycle_storage_by_manufactured_waveform": true,
+        "continuous_bus_enclosure_certified": true,
+        "current_upper_a": 7.454995837656469,
+        "slew_upper_a_s": 14701.866295337602
+      }
+    ],
+    "scope": "Fixed waveform, passive averaged converter, interval-box corner search; no silicon or thermal verification"
+  },
+  "nominal_q0_lead0": {
+    "q": 0.0,
+    "lead_rad": 0.0,
+    "uncertainty": {
+      "resistance_increase_ohm": 0.03,
+      "voltage_derating_v": 2.0,
+      "unmodelled_voltage_demand_v": 1.0,
+      "enhanced_eta_min": 0.985,
+      "ordinary_eta_max": 0.955,
+      "added_controller_overhead_max_w": 0.7
+    },
+    "corner_robust_winding_bus_certified": false,
+    "minimum_voltage_headroom_v": -2.708835798435132,
+    "worst_enhanced_net_bus_w": 26.433803590561915,
+    "worst_ordinary_net_bus_w": 21.33120366944152,
+    "minimum_correlated_recovery_gain_lower_w": 4.946405701773671,
+    "corners": [
+      {
+        "resistance_increase_ohm": 0.0,
+        "derating_v": 0.0,
+        "enhanced_net_bus_w": 26.746073187288196,
+        "ordinary_net_bus_w": 21.63817596650719,
+        "required_voltage_upper_v": 320.62415992376646,
+        "continuous_voltage_headroom_v": -0.6241599237664559,
+        "recovery_gain_lower_w": 4.951729411891215,
+        "shaft_w": 45.000000000002046,
+        "full_cycle_storage_by_manufactured_waveform": true,
+        "continuous_bus_enclosure_certified": true,
+        "current_upper_a": 7.449401643176844,
+        "slew_upper_a_s": 14690.834082703208
+      },
+      {
+        "resistance_increase_ohm": 0.0,
+        "derating_v": 2.0,
+        "enhanced_net_bus_w": 26.746073187288196,
+        "ordinary_net_bus_w": 21.63817596650719,
+        "required_voltage_upper_v": 320.62415992376646,
+        "continuous_voltage_headroom_v": -2.624159923766456,
+        "recovery_gain_lower_w": 4.951729411891215,
+        "shaft_w": 45.000000000002046,
+        "full_cycle_storage_by_manufactured_waveform": true,
+        "continuous_bus_enclosure_certified": true,
+        "current_upper_a": 7.449401643176844,
+        "slew_upper_a_s": 14690.834082703208
+      },
+      {
+        "resistance_increase_ohm": 0.03,
+        "derating_v": 0.0,
+        "enhanced_net_bus_w": 26.433803590561915,
+        "ordinary_net_bus_w": 21.33120366944152,
+        "required_voltage_upper_v": 320.70883579843513,
+        "continuous_voltage_headroom_v": -0.7088357984351319,
+        "recovery_gain_lower_w": 4.946405701773671,
+        "shaft_w": 45.000000000002046,
+        "full_cycle_storage_by_manufactured_waveform": true,
+        "continuous_bus_enclosure_certified": true,
+        "current_upper_a": 7.449401643176844,
+        "slew_upper_a_s": 14690.834082703208
+      },
+      {
+        "resistance_increase_ohm": 0.03,
+        "derating_v": 2.0,
+        "enhanced_net_bus_w": 26.433803590561915,
+        "ordinary_net_bus_w": 21.33120366944152,
+        "required_voltage_upper_v": 320.70883579843513,
+        "continuous_voltage_headroom_v": -2.708835798435132,
+        "recovery_gain_lower_w": 4.946405701773671,
+        "shaft_w": 45.000000000002046,
+        "full_cycle_storage_by_manufactured_waveform": true,
+        "continuous_bus_enclosure_certified": true,
+        "current_upper_a": 7.449401643176844,
+        "slew_upper_a_s": 14690.834082703208
+      }
+    ],
+    "scope": "Fixed waveform, passive averaged converter, interval-box corner search; no silicon or thermal verification"
+  },
+  "conditions": [
+    "Same hypothetical 45 W shaft work at every candidate",
+    "All magnetic properties fixed except specified R interval",
+    "Closed magnetic winding waveform and constructed bus capacitor cycle",
+    "Same current and shaft waveform in ordinary and enhanced arms",
+    "Continuous bounds are conservative sufficient conditions, not necessity",
+    "No pointwise switching/deadtime/thermal or source-selected hardware model"
+  ],
+  "open_gates": [
+    "physical converter efficiency map over forward/reverse current/voltage/temperature",
+    "actual switching ripple and DC bus under closed-loop current tracking",
+    "global continuous-control optimisation and material uncertainty",
+    "measured V2 motor efficiency, actual generator torque and all-port sources",
+    "Agda kernel and full original P0-P4 strict gates"
+  ]
+}

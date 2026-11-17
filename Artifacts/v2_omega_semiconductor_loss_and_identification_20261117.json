@@ -1,0 +1,112 @@
+{
+  "nominal": {
+    "schema": "DASHI.V2.Omega.semiconductor-loss-and-identification.v1",
+    "source_selected": false,
+    "bridge_assumptions": {
+      "pwm_hz": 20000.0,
+      "active_devices": 2,
+      "r_path_ohm": 0.015,
+      "switch_e0_j": 3e-06,
+      "switch_e_per_a_j": 3e-07,
+      "gate_charge_c": 3.5e-08,
+      "gate_drive_v": 12.0,
+      "deadtime_s": 1.5e-07,
+      "diode_drop_v": 0.8,
+      "controller_extra_w": 0.4,
+      "ambient_c": 35.0,
+      "thermal_resistance_c_per_w": 7.0,
+      "thermal_limit_c": 110.0
+    },
+    "scope": "Invented reverse-path averaged PWM cost model on a manufactured smooth winding waveform",
+    "q": 0.0,
+    "lead_rad": -0.15,
+    "shaft_w": 45.00000000000158,
+    "gross_reverse_w": 191.02237709213375,
+    "reverse_on_fraction": 0.262451171875,
+    "reverse_i2_mean_a2": 5.9716109329683515,
+    "reverse_abs_i_mean_a": 1.0307716740806898,
+    "ordinary_reverse_loss_w": 9.551118854606695,
+    "conduction_loss_w": 0.08957416399452527,
+    "switching_loss_w": 0.04386340071396827,
+    "gate_driver_w": 0.016800000000000002,
+    "deadtime_diode_w": 0.0049477040355873116,
+    "semiconductor_heat_w": 0.13838526874408086,
+    "controller_extra_w": 0.4,
+    "enhanced_reverse_loss_w": 0.15518526874408087,
+    "implied_enhanced_reverse_eta": 0.9991876068599584,
+    "recovery_gain_over_ordinary_w": 8.995933585862614,
+    "ordinary_bus_w": 20.706405456439644,
+    "enhanced_bus_w": 29.702339042302256,
+    "signed_gain_ledger_residual_w": 0.0,
+    "junction_temperature_c_lumped_upper": 35.968696881208565,
+    "thermal_bound_pass": true,
+    "conservative_winding_voltage_headroom_v": 2.5387882969579323,
+    "voltage_bound_pass": true,
+    "sampled_bus_v_min": 338.73881638976343,
+    "sampled_bus_v_max": 340.1171407691338,
+    "sampled_bus_energy_endpoint_residual_j": 0.0,
+    "sampled_bus_range_pass": true,
+    "net_gain_positive": true,
+    "conditional_design_budget_pass": true,
+    "missing": [
+      "switch-node voltage/current overlap waveforms and device datasheets",
+      "actual PWM tracking at hard/soft switches and deadtime, time-resolved bus current",
+      "electrothermal junction dynamics, magnetic memory and capacitor ESR",
+      "measured V2 topology, motor shaft torque and all input/output ports"
+    ]
+  },
+  "sensitivity": {
+    "reference": {
+      "recovery_gain_over_ordinary_w": 8.995933585862614,
+      "implied_enhanced_reverse_eta": 0.9991876068599584,
+      "junction_temperature_c_lumped_upper": 35.968696881208565,
+      "thermal_bound_pass": true,
+      "conditional_design_budget_pass": true
+    },
+    "switch_energy_x4": {
+      "recovery_gain_over_ordinary_w": 8.86434338372071,
+      "implied_enhanced_reverse_eta": 0.9984987336287431,
+      "junction_temperature_c_lumped_upper": 36.8898282962019,
+      "thermal_bound_pass": true,
+      "conditional_design_budget_pass": true
+    },
+    "conduction_x8": {
+      "recovery_gain_over_ordinary_w": 8.368914437900937,
+      "implied_enhanced_reverse_eta": 0.9959051686581804,
+      "junction_temperature_c_lumped_upper": 40.3578309169403,
+      "thermal_bound_pass": true,
+      "conditional_design_budget_pass": true
+    },
+    "controller_10W": {
+      "recovery_gain_over_ordinary_w": -0.6040664141373853,
+      "implied_enhanced_reverse_eta": 0.9991876068599584,
+      "junction_temperature_c_lumped_upper": 35.968696881208565,
+      "thermal_bound_pass": true,
+      "conditional_design_budget_pass": false
+    },
+    "hard_switch_1mJ": {
+      "recovery_gain_over_ordinary_w": -1.4706191485123856,
+      "implied_enhanced_reverse_eta": 0.9443953207744032,
+      "junction_temperature_c_lumped_upper": 109.23456602183356,
+      "thermal_bound_pass": true,
+      "conditional_design_budget_pass": false
+    },
+    "thermal_x5": {
+      "recovery_gain_over_ordinary_w": 8.995933585862614,
+      "implied_enhanced_reverse_eta": 0.9991876068599584,
+      "junction_temperature_c_lumped_upper": 39.84348440604283,
+      "thermal_bound_pass": true,
+      "conditional_design_budget_pass": true
+    },
+    "gate_charge_x12": {
+      "recovery_gain_over_ordinary_w": 8.811133585862615,
+      "implied_enhanced_reverse_eta": 0.9982201809341944,
+      "junction_temperature_c_lumped_upper": 35.968696881208565,
+      "thermal_bound_pass": true,
+      "conditional_design_budget_pass": true
+    }
+  },
+  "critical_naming": "Loss-parameter assumptions are illustrative, not identified power semiconductor devices",
+  "original_v2_verification": "OPEN",
+  "agda_kernel": "NOT RUN"
+}
