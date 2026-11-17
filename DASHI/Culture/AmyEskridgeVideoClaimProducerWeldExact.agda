@@ -32,6 +32,8 @@ import DASHI.Culture.AmyEskridgeHAL5AntigravitySourceEntitlementExact as Hal5
 import DASHI.Culture.AmyEskridgeHAL5PrimaryLiteratureSnowballExact as Papers
 import DASHI.Culture.MissingDeceasedInvestigativeAttributedSourceAtlasExact as Atlas
 import DASHI.Culture.MissingDeceasedRosterExtensionNingLiNickPopeExact as Extension
+import DASHI.Culture.AmyEskridgeOSINTSnowballExact as OSINT
+import DASHI.Culture.AmyEskridgeDemiseCircumstancesSnowballExact as Demise
 
 data EvidentiaryCarrier : Set where
   unpaidCarrier : String → EvidentiaryCarrier
@@ -40,6 +42,8 @@ data EvidentiaryCarrier : Set where
   researchAbstract : Papers.AmyPrimaryLiteratureSnowballAtom → EvidentiaryCarrier
   atlasSource : A.AttributedSource → EvidentiaryCarrier
   historicalRoster : Extension.RosterExtensionReceipt → EvidentiaryCarrier
+  obituaryRecord : Demise.DemiseSnowballAtom → EvidentiaryCarrier
+  pairedCarriers : EvidentiaryCarrier → EvidentiaryCarrier → EvidentiaryCarrier
 
 record VideoClaimJoin : Set where
   constructor video-claim-join
@@ -75,8 +79,8 @@ claimJoin003 = video-claim-join
 claimJoin004 : VideoClaimJoin
 claimJoin004 = video-claim-join
   Video.claim004
-  (documentSource Source.houseApril2026)
-  "The House primary letter reports at least ten UNCONFIRMED media cases from 2023, not the video eleven"
+  (pairedCarriers (atlasSource OSINT.foxDeathCharacterizationSource) (documentSource Source.houseApril2026))
+  "Morgan Phillips/Fox 2026-04-17 explicitly lists a media eleven including Amy plus the same ten reconstructed in the House source owner; House 2026-04-20 calls its underlying ten-case reports unconfirmed. The specific video narrator source is not independently identified"
   "Claim 004 at 00:21 remains subject to exact provenance/independent-evidence gate"
 
 claimJoin005 : VideoClaimJoin
@@ -110,8 +114,8 @@ claimJoin008 = video-claim-join
 claimJoin009 : VideoClaimJoin
 claimJoin009 = video-claim-join
   Video.claim009
-  (hal5Talk Hal5.canonicalHAL5TalkSourceReceipt)
-  "HAL5 documents an Eskridge research presentation, not the 2022 death circumstance"
+  (pairedCarriers (hal5Talk Hal5.canonicalHAL5TalkSourceReceipt) (obituaryRecord Demise.familyObituaryDateAtom))
+  "HAL5 documents Amy’s 2018 historical research talk; family obituary separately dates her death 2022-06-11; neither validates a cause"
   "Claim 009 at 01:32 remains subject to exact provenance/independent-evidence gate"
 
 claimJoin010 : VideoClaimJoin
@@ -159,8 +163,8 @@ claimJoin015 = video-claim-join
 claimJoin016 : VideoClaimJoin
 claimJoin016 = video-claim-join
   Video.claim016
-  (documentSource Source.houseApril2026)
-  "The House asked about an unconfirmed pattern; it did not conclude causal suppression"
+  (pairedCarriers (atlasSource OSINT.foxReviewSource) (documentSource Source.houseApril2026))
+  "Fox explicitly reports no publicly established link among Amy and the other cases; House asked about an unconfirmed pattern, without concluding suppression"
   "Claim 016 at 03:14 remains subject to exact provenance/independent-evidence gate"
 
 claimJoin017 : VideoClaimJoin
@@ -488,8 +492,8 @@ claimJoin062 = video-claim-join
 claimJoin063 : VideoClaimJoin
 claimJoin063 = video-claim-join
   Video.claim063
-  (documentSource Source.houseApril2026)
-  "Official concern over unconfirmed reports does not establish universal suppression"
+  (pairedCarriers (atlasSource OSINT.foxReviewSource) (documentSource Source.houseApril2026))
+  "Fox reports no public evidence linking deaths; official concern over unconfirmed cases does not establish systematic suppression"
   "Claim 063 at 15:40 remains subject to exact provenance/independent-evidence gate"
 
 claimJoin064 : VideoClaimJoin
