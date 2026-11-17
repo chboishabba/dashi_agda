@@ -1890,3 +1890,109 @@ Its 18-case synthetic selftest is source
 written but not directly run as the exact
 committed file. No real trained Leech
 overload-shape source evidence exists here.
+
+
+## 17 Nov highest-alpha early-kink continuation: ORIGINAL R4 topk competition witness
+
+New source-shaped SymPy work:
+`scripts/check_x369_r4_topk_kink_sympy.py`
+and `scripts/check_x369_r4_topk_kink_source_gate_sympy.py`.
+Full construction and limitations:
+`Docs/roadmaps/X369R4EarlyRecruitmentSuppressionWeld20261117.md`.
+
+Unlike the earlier proposed GELU-times-attenuation
+example, this uses the ACTUAL
+`HistoryOrbitMoE.select_source_experts`
+coherent C2+C3 residual score family,
+learned expert biases, topk and
+selected-score softmax. The learned
+baseline C2 head is zero for the
+explicit fixture, as permitted by
+the original parameter space.
+Activation varies as `x=t*x0`,
+all four expert histories are held
+at the SAME authoritative reset
+state per counterfactual, and
+the source-compatible orientation
+score is strictly positive
+for every selected expert.
+The selected FFN output can be
+made constant by W2=0 and
+an appropriate output bias.
+No new numerical gate or
+learned attenuation is inserted.
+
+With expert relative logits
+
+    L(t)=(8, 3+4t, -11+9t, -13+10t),
+
+topk2 produces at t=0,1,2,3:
+`(0,1),(0,1),(1,0),(3,2)`.
+The selected output of only expert 1
+is respectively
+
+    1/(1+e^5), 1/(1+e), 1/(1+e^-3), 0.
+
+The original canonical Nat response
+after floor(scale10) is `(0,2,9,0)`,
+strictly satisfying the original
+`ResponseKink.profile-shape`.
+All selected/outside and
+within-selected routing margins
+are strictly positive; minimum
+cross-margin 1.
+
+**Matched causal/structural ablation:**
+fix the selected pair at (0,1)
+with the same logits and source
+softmax. The response is then
+`sigmoid(4t-5)`, strictly increasing
+and has NO overload fall.
+This isolates selected-set
+replacement as a sufficient
+architectural mechanism for the
+early four-stage kink on the
+disclosed R4 parameter family.
+It does NOT infer actual trained
+Leech mechanism, FFN/GELU
+overload suppression or on-policy
+recurrent behavior.
+
+The joint script composes the
+existing source-relative pairwise
+quantization/mixed-q/orientation
+receipt gate rather than inventing
+another proof. Under synthetic
+rational 1/65536 input/parameter/
+history bounds, it checks
+original coherent selected IDs
+and strict chart margins at every
+load, and certifies a Nat cell
+via rational exponential brackets
+plus the selected-softmax error
+envelope. It explicitly refuses
+forcing the overload source IDs
+to the fixed-route control and
+refuses to promote the coherent
+zero-load fixture to the mixed
+q arm whose gate is undecidable
+under positive error. All
+SHA/provenance/precision flags in
+this fixture are declarations,
+not original checkpoint receipts.
+
+**Core new mathematical boundary:**
+on any fixed selected pair and
+fixed history input ray, affine
+source relative logits combined
+with constant scalar expert
+outputs produce a monotonic
+two-point logistic interpolation.
+The overload limb needs a selected
+set change or a genuinely changing
+expert output/other consumer.
+This is the correct separation
+between the early cognition
+shape contract, the source
+router, and arbitrary GELU
+parity or biology.
