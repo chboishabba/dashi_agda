@@ -162,3 +162,99 @@ anyTwoChannelConsumerSufficient head x y same =
 -- 3 original directed scalars ↔ 2 directed scalars + supplied total.
 -- A total/DC value computed and stored per expert would restore the
 -- third scalar's cost; no universal physical compression is asserted.
+
+
+------------------------------------------------------------------------
+-- P0 SCORE SUFFICIENCY: a THREE-weight original directed readout
+-- can be evaluated from TWO directed coordinates and known DC,
+-- with a deterministic transported weight triple.
+--
+-- This goes beyond reconstructing r: it shows the actual weighted
+-- router logit can be computed directly without materialising r.
+-- In particular with sourceDC=0 the two-channel consumer needs
+-- NO side scalar, although source representation/precision cost
+-- must still be established independently.
+------------------------------------------------------------------------
+
+directedWeightedScore : ℤ → ℤ → ℤ → Directed → ℤ
+directedWeightedScore ws wf wr d =
+  ((ws * sourceSelf d) + (wf * sourceForward d))
+  + (wr * sourceReverse d)
+
+twoDirectedWeightedScoreWithTotal :
+  ℤ → ℤ → ℤ → ℤ → (ℤ × ℤ) → ℤ
+twoDirectedWeightedScoreWithTotal ws wf wr total (s , f) =
+  (((ws - wr) * s) + ((wf - wr) * f)) + (wr * total)
+
+rawWeightedScoreFactorization :
+  (s f r ws wf wr : ℤ) →
+  (((ws * s) + (wf * f)) + (wr * r))
+  ≡ ((((ws - wr) * s) + ((wf - wr) * f))
+      + (wr * ((s + f) + r)))
+rawWeightedScoreFactorization s f r ws wf wr =
+  solve 6
+    (λ s f r ws wf wr →
+      ((((ws :* s) :+ (wf :* f)) :+ (wr :* r))
+      := (((((ws :- wr) :* s) :+ ((wf :- wr) :* f))
+            :+ (wr :* ((s :+ f) :+ r)))))
+    refl s f r ws wf wr
+
+weightedScoreFactorsThroughTwoPlusTotal :
+  (ws wf wr : ℤ) (d : Directed) →
+  directedWeightedScore ws wf wr d
+  ≡ twoDirectedWeightedScoreWithTotal
+      ws wf wr (originalDirectedTotal d) (encodeDirectedTwo d)
+weightedScoreFactorsThroughTwoPlusTotal ws wf wr (directed s f r) =
+  rawWeightedScoreFactorization s f r ws wf wr
+
+originalWeightedScoreTwoPlusSourceDC :
+  (a b c A B C ws wf wr : ℤ) →
+  directedWeightedScore ws wf wr (originalDirected a b c A B C)
+  ≡ twoDirectedWeightedScoreWithTotal ws wf wr
+      (sourceDC a b c A B C)
+      (encodeDirectedTwo (originalDirected a b c A B C))
+originalWeightedScoreTwoPlusSourceDC a b c A B C ws wf wr =
+  trans
+    (weightedScoreFactorsThroughTwoPlusTotal
+      ws wf wr (originalDirected a b c A B C))
+    (cong
+      (λ total → twoDirectedWeightedScoreWithTotal
+         ws wf wr total
+         (encodeDirectedTwo (originalDirected a b c A B C)))
+      (originalDirectedTotalEqualsSourceDC a b c A B C))
+  where
+    trans : ∀ {X : Set}{x y z : X} → x ≡ y → y ≡ z → x ≡ z
+    trans refl eq = eq
+    cong : ∀ {X Y : Set}{x y : X} →
+      (fn : X → Y) → x ≡ y → fn x ≡ fn y
+    cong fn refl = refl
+
+-- In the DC-zero source subspace, the original all-three channel
+-- head is exactly a TWO-channel head with transported weights.
+-- This is a conditional representational reduction, not an
+-- unconditional data-free reduction of arbitrary source inputs.
+zeroDCWeightedScoreNeedsOnlyTwo :
+  (a b c A B C ws wf wr : ℤ) →
+  sourceDC a b c A B C ≡ (+ 0) →
+  directedWeightedScore ws wf wr (originalDirected a b c A B C)
+  ≡ twoDirectedWeightedScoreWithTotal ws wf wr (+ 0)
+      (encodeDirectedTwo (originalDirected a b c A B C))
+zeroDCWeightedScoreNeedsOnlyTwo a b c A B C ws wf wr zeroDC =
+  trans
+    (originalWeightedScoreTwoPlusSourceDC
+      a b c A B C ws wf wr)
+    (cong
+      (λ total → twoDirectedWeightedScoreWithTotal
+        ws wf wr total
+        (encodeDirectedTwo (originalDirected a b c A B C)))
+      zeroDC)
+  where
+    trans : ∀ {X : Set}{x y z : X} → x ≡ y → y ≡ z → x ≡ z
+    trans refl eq = eq
+    cong : ∀ {X Y : Set}{x y : X} →
+      (fn : X → Y) → x ≡ y → fn x ≡ fn y
+    cong fn refl = refl
+
+-- A finite quantizer changes arithmetic identities unless exact
+-- rounding laws and decision margins are provided. This module
+-- proves ℤ source semantics only and makes no float equality claim.
