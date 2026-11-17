@@ -98,6 +98,25 @@ class SignedWorkIntervalTests(unittest.TestCase):
             self.meta["ports"]["natural_incident"]["integration_error_certificate_sha256"])
         self.assert_reject(self.meta, "invalid or reused integration-error certificate")
 
+    def test_reverse_natural_port_is_a_sink_not_independent_supply(self):
+        # A labelled "natural" port can export MORE than it receives.
+        # The signed balance must retain this as environmental SINK.
+        record = self.meta["ports"]["natural_outgoing"]
+        path = self.root / record["file"]
+        path.write_text(
+            "time_s,voltage_V,current_A,voltage_error_V,current_error_A\\n"
+            "0,7,1,0,0\\n1,7,1,0,0\\n", encoding="utf-8"
+        )
+        record["sha256"] = hashlib.sha256(path.read_bytes()).hexdigest()
+        receipt = calculate(self.meta, self.root)
+        self.assertEqual(receipt["net_environmental_work"],
+                         {"lower_J": "-2", "upper_J": "-2"})
+        self.assertTrue(receipt["conditional_environmental_sink_interval"])
+        self.assertFalse(receipt["conditional_positive_environment_interval"])
+        self.assertEqual(receipt["unassigned_loss_or_storage_change"],
+                         {"lower_J": "-3", "upper_J": "-3"})
+        self.assertFalse(receipt["f15_closed"])
+
     def test_reject_clock_mismatch(self):
         self.meta["ports"]["load_output"]["clock_id"] = "different-clock"
         self.assert_reject(self.meta, "clock mismatch")
