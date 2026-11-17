@@ -18,6 +18,8 @@ on:
       - "scripts/test_smith_filsinger_original_gate_evidence.py"
       - "scripts/check_smith_filsinger_signed_vi_intervals.py"
       - "scripts/test_smith_filsinger_signed_vi_intervals.py"
+      - "scripts/check_smith_filsinger_restored_cycle_intervals.py"
+      - "scripts/test_smith_filsinger_restored_cycle_intervals.py"
   workflow_dispatch:
 
 permissions:
@@ -40,6 +42,8 @@ jobs:
         run: python3 scripts/test_smith_filsinger_original_gate_evidence.py
       - name: Exact signed V/I interval arithmetic tests
         run: python3 scripts/test_smith_filsinger_signed_vi_intervals.py
+      - name: Exact F15 restored-cycle first-law interval tests
+        run: python3 scripts/test_smith_filsinger_restored_cycle_intervals.py
       - uses: cachix/install-nix-action@v31
         with:
           extra_nix_config: |
