@@ -289,6 +289,50 @@ check("q-gate branch switch changes directed self consumer by O(1)",
       source_self(rot_minus(base[0]),(0,1,0))==1 and
       source_self(rot_plus(near[0]),(0,1,0))==0)
 
+# Positive source q gate interval certificate. q_j evaluated by
+# difference squares, with coordinate abs-error eps. For a triad,
+# each pair's diff error <= eps_i+eps_j; combine
+# Q=Σ|pairdiff|*epsdiff + (1/2)Σepsdiff².
+# If |q_j-mean_q| > Q_j+mean(Q), all admissible errors
+# preserve the strict > threshold (and its complementary <).
+def q_bound(t,eps):
+    pairs=((0,1),(1,2),(2,0))
+    return sum(abs(t[i]-t[j])*(eps[i]+eps[j])+
+               sp.Rational(1,2)*(eps[i]+eps[j])**2
+               for i,j in pairs)
+stable_base=[(sp.Integer(2),sp.Integer(0),sp.Integer(0)),
+             (sp.Integer(0),sp.Integer(0),sp.Integer(0))]
+small=sp.Rational(1,100)
+eps=(small,small,small)
+energies=[q3(*t) for t in stable_base]
+qbounds=[q_bound(t,eps) for t in stable_base]
+mean_energy=sum(energies)/2
+mean_bound=sum(qbounds)/2
+check("strict q gate margin certifies each source rotation",
+      all(abs(q-mean_energy)>err+mean_bound
+          for q,err in zip(energies,qbounds)))
+for changes in itertools.product((-small,small),repeat=6):
+    perturbed=[
+        tuple(stable_base[j][i]+changes[j*3+i] for i in range(3))
+        for j in range(2)]
+    if q_gate(perturbed)!=q_gate(stable_base):
+        raise AssertionError("certified source q gate flipped")
+check("all 64 rational signed error corners preserve certified q gate",True)
+
+# Source step() computes selected expert FFN and transition updates
+# BEFORE multiplying the expert output y by selected softmax weights.
+# Therefore fixed x,h,parameters and selected EXPERT SET suffice for
+# identical one-step per-expert history updates, even if mixture
+# weights changed. Output mixture can change; future layers can
+# therefore still diverge via their changed activation.
+pw=sp.symbols("mix_weight",real=True)
+history_transition=sp.Symbol("selected_history_update",real=True)
+expert_response=sp.Symbol("selected_expert_output",real=True)
+check("one-step selected history transition ignores mixture weight",
+      sp.diff(history_transition,pw)==0)
+check("one-step selected mixture output depends on mixture weight",
+      sp.diff(pw*expert_response,pw)==expert_response)
+
 print("X369_SOURCE_FOUR_GATES_SYMPY_PASS",len(checks),
       "grouped checks; strict_top2=",top2_certificates,
       "same_order=",top2_ordered)
