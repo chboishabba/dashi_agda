@@ -193,7 +193,7 @@ donorOriginalLoadIsPaid b f s w x =
       (CanonicalDispersiveSameObject.donorUsefulLoadIsOriginal x)
       (Cut.FieldMaterialEnergyWeld.sameOriginalLoad w)))
     (Bound.transportUpper
-      (Bound.sym totalInputEqual)
+      totalInputEqual
       (originalDispersiveLoadBound donor
         (CanonicalDispersiveSameObject.donorEnvironmentalStorageReturns x)
         (CanonicalDispersiveSameObject.donorMaterialStorageReturns x)))
@@ -215,9 +215,13 @@ donorOriginalLoadIsPaid b f s w x =
     totalInputEqual =
       Cycle.trans
         (Cycle.cong (λ t → t + Mat.MemoryMaterialPortLedger.materialModulatorInput donor)
-          (Cycle.cong₂ _+_
-            (CanonicalDispersiveSameObject.donorNaturalIsNetOriginal x)
-            (CanonicalDispersiveSameObject.donorDriverIsNetOriginal x)))
+          (Cycle.trans
+            (Cycle.cong
+              (λ z → z + Mat.MemoryMaterialPortLedger.driverWork donor)
+              (CanonicalDispersiveSameObject.donorNaturalIsNetOriginal x))
+            (Cycle.cong
+              (λ z → Cut.FieldMaterialEnergyWeld.naturalInput w + z)
+              (CanonicalDispersiveSameObject.donorDriverIsNetOriginal x))))
         (Cycle.cong (λ t → (Cut.FieldMaterialEnergyWeld.naturalInput w
               + Cut.FieldMaterialEnergyWeld.driverInput w) + t)
           (CanonicalDispersiveSameObject.donorMaterialModulationMatches x))
