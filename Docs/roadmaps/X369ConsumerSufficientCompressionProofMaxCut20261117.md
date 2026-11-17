@@ -330,3 +330,40 @@ scripts/run_agda29_parallel_check.sh DASHI/Cognition/PNF/X369ConsumerSufficientC
 scripts/run_agda29_parallel_check.sh DASHI/Cognition/PNF/X369DirectedRouterConditionalCodecExact.agda
 scripts/run_agda29_parallel_check.sh DASHI/Cognition/PNF/X369CenteredDirectedConsumerMDLExact.agda
 ```
+
+
+### P0 refinement: exact 2D C3 action survives compression
+
+The original three directed channels satisfy the rotation
+`(s,f,r) -> (r,s,f)`. On certified `s+f+r=0`, the compact
+two-channel code `(s,f)` has the **exact** action
+
+    M(s,f) = (-s-f, s),
+    M = [[-1,-1],[1,0]],
+    M^3 = I.
+
+This is not an invariant-only phase erasure: the small code
+retains the FULL nontrivial C3 transformation. Agda now
+supplies `rotateCenteredTwoSquared`,
+`rotateCenteredTwoCubed`,
+`sourceCenteredC3TwoChannelIntertwines`, and
+`centeredTwoCodeIntertwinesOriginalC3` on the typed
+certified-zero-DC original-source domain. The source
+full-three action, costed two-coordinate model, and
+C3 action form a commuting square.
+
+SymPy 1.14.0 local stand-in now returns
+`X369_SYMPY_STANDIN_PASS 29 symbolic/finite checks`,
+including matrix-cubed identity and source algebraic
+semiconjugacy. It checks the POLYNOMIALS and finite
+fixtures only, not the Agda proof terms or actual
+source checkpoint centeredness.
+
+This advances the original research interpretation:
+**we are seeking a smaller consumer-sufficient
+EQUIVARIANT realization**, not an expanded unrestricted
+three-channel hypothesis class. The phase action
+survives exactly on the admitted subspace; whether
+the trained model's histories live there remains open.
+No bit/compute savings or neural-semantic C3 theorem
+is implied by this structural result.
