@@ -120,3 +120,55 @@ The six requests are NOT closed. The following new proof transformations are sou
 No Agda compiler or Nix environment was available; all new modules are source-written and not kernel typechecked. YM.REAL OPEN; expanded ledger 19/28 OPEN.
 
 Attribution: Wilson/Balaban; Fejer/Stroud; Pizzetti/Folland; Bishop/Bridges/Murray/Csimma; prior DASHI original quaternion and real proof owners.
+
+
+## 17 Nov additional high-alpha alternative: independent DYADIC factor orders
+
+This removes the prior assumption that the constructed Bishop Machin real is
+classical pi (explicitly still open in BishopRound11MachinSetoidComplexInstanceExact).
+The three quadrature factors **do not need to use the same m**.
+
+For target polynomial degree d choose powers of two \(A=2^r\), \(M=2^s\),
+\(L=2^t\) with \(2(A-1)-1\ge d\), \(M>d\), \(L>d\).
+Use \(A-1\) Chebyshev-II nodes, \(M\) Fejer-I midpoint nodes, and \(L\)
+circle nodes. The total node budget is **\((A-1)ML\)**.
+The usual Chebyshev-II exactness degree \(2(A-1)-1\) and independent
+Fejer/circle filters prove the same Pochhammer moments for all degree-d
+sphere monomials. The positive Fejer bound is
+\[
+w_b^\mathrm{FI}\ge\frac{1}{M(2\lfloor(M-1)/2\rfloor+1)}>0.
+\]
+
+There is a constructively algebraic representation of all nodes avoiding
+any numerical angle or \(\pi\). Start with \(z_4=i\) and recursively select
+the positive-coordinate half-angle root
+\[
+c'=\sqrt{\frac{1+c}{2}},\qquad
+s'=\sqrt{\frac{1-c}{2}},\qquad z_{2^{k+1}}=c'+is'
+\]
+when \(z_{2^k}=c+is\), \(c\ge0,s\ge0\).
+The three factors then use powers of
+\(z_{2A}\), \(z_{4M}\) and \(z_L\) respectively, with \(z_1=1,z_2=-1\)
+as initial cases. Every node has unit quaternion norm because
+\((c')^2+(s')^2=1\). Finite Fourier cancellation follows from the
+primitive dyadic root property and geometric summation.
+
+This is **a mathematical alternative, not yet an Agda root tower**. In
+the pinned repo, BishopNatSquareRootSemanticSquareExact constructs a
+natural radicand square root only; to inhabit this route one must
+construct order-positive square roots for the nested Bishop
+half-angle radicands, primitive dyadic periodicity, and the
+sampled-harmonic identity. It does NOT count as a finished
+all-degree Agda cubature producer.
+
+Reference code: scripts/check_ym_su2_dyadic_rootfree_20261117.py
+(full exact rational reductions for degrees 0,1,2,3,5,7,9).
+Additional locally run mpmath sqrt-only validation of explicit S3
+nodes for degrees 0,1,3,5 produced 1,508/1,508 checks total;
+that local execution is neither a formal certificate nor a claim
+that square roots are already implemented in the Agda source.
+
+This route improves the dependency graph (removes Machin-pi
+same-object identification), but **the finite Fejer weights,
+all-order Fourier theorem, Bishop quantitative b_n Cauchy
+construction and original physical Wilson source still remain open**.
