@@ -71,3 +71,19 @@ This round **did not close G1--G6 as physical/continuum theorems**. It added and
 **Reused authority seam:** `KSW668F8SameObjectWeylAuthorityBoundary.agda` imports the existing `ContinuumCurvatureSourceSpinTwo.DiscreteCurvatureApproximation` type and concrete original KSW algebra owners; its G1--G6 proof fields are **not instantiated**. This is typed accounting, not a completed physical theorem.
 
 **Acceptance:** independent local SymPy passes all 625 AdS curvature component equalities, 25 Ricci equations, 625 vanishing background Weyl equations, proper-time embedding, SAT identity, readout cancellation and SSPRK3 negative control. New Agda owners are source-written; pinned Agda kernel **OPEN**. The local verification is saved in an XXIX reproducibility bundle. No ESD surfaces edited, and no claim of 369/Monster gravity equivalence.
+
+
+### XXIX G1 high-alpha addendum — actual *linearized* electric-Weyl slice
+
+Using the ORIGINAL Poincare AdS5 metric, exploit the conformal covariance of the 5D Weyl tensor and examine one local transverse traceless Cartesian polarization of the conformal metric `h_yy=H(T,x,z), h_ww=-H(T,x,z)`. An independent exact SymPy derivation gives `boxFlat H=-H_TT+H_xx+H_zz` and flat linearized curvature
+```
+delta C_yTyT = -H_TT/2 - boxFlat H/6
+delta C_yzyz = -H_zz/2 + boxFlat H/6
+delta C_yTyz = -H_Tz/2
+```
+The actual original moving brane at t=4/3 has orthonormal unit normal `(n^T,n^z)=(-9/16,15/16)` (in 5D Poincare coordinate basis), with `g(n,n)=1`. After the spatial orthonormal factor cancels the conformal lower-index Weyl factor, the resulting normal electric projection is
+```
+(delta E5_y y)_orthonormal =
+  -129/512 H_TT + 3/32 H_xx - 177/512 H_zz + 135/256 H_Tz .
+```
+This has been verified exactly as a SymPy linearized Weyl / frame-projection identity and as an Agda rational contraction **source** in `KSW668F8LinearElectricWeylPolarizationSliceExact.agda` (kernel pending). It is a **single TT Cartesian polarization at the rational slice**, not yet the original three-harmonic fully moving tensor and not automatically the solver's SMS `E5`. The missing, sharply identifiable G1 weld is: original bulk linearized wave + original moving Neumann/Israel source + gauge and brane tangential/normal derivatives -> equality of this curvature projection to the original on-brane SMS readout `-(H_etaeta+2H_eta-Delta3 H)/(2t²)` in the source-free receiver region. **This equality is OPEN and cannot be inferred from background Weyl=0.**
