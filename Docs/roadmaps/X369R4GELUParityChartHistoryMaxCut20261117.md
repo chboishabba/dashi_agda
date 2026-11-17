@@ -379,3 +379,30 @@ finite-dimensional Euclidean F02b and
 source-specific chart residual are new
 SymPy exact-real bridges, not purported
 Agda kernel promotions.
+
+
+## 9. Source matrix lift — no diagonal/bias-free shortcut
+
+The most recent SymPy source adds a finite arbitrary-symbolic
+matrix check matching the original R4 selected expert's
+layer structure rather than only its scalar GELU gate.
+For `d=2`, hidden width 3, arbitrary learned
+`W2:2x3`, full output bias `b2`, independent symbolic
+`GELU(W1 z+b1)` and `GELU(-W1 z+b1)` hidden vectors,
+the exact `y_σ=O_F+σE_F` identity and
+`y_+-y_-=2E_F` hold coordinatewise.
+
+For arbitrary affine transition matrices
+`T_h,T_x,T_y` and transition bias `b_T`,
+the source pre-cap history chart jump
+`H_+-H_-=2(T_y E_F+b_T)` also holds
+coordinatewise. The real Euclidean F02b
+odd-only pair MSE floor survives arbitrary
+learned `W2` mixing. These are matrix
+algebra / finite Euclidean checks:
+they do NOT identify actual fitted
+weights or prove PyTorch float identity.
+An independent local SymPy recreation
+passed all five matrix/transition/MSE
+checks. No Golden Agda/kernel receipt
+is asserted.
