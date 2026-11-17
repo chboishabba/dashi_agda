@@ -1,3 +1,107 @@
+## 17 November — latest source-integrity restoration, exact execution and fitted-source producer
+
+**This section SUPERSEDES earlier proposed direct modification of the
+original `HistoryOrbitMoE.select_source_experts` return signature.**
+The original `models/history_orbit_moe.py` bytes are now restored to
+Git blob `a2a250462ce8e663591cd8a8f784fad9bde1b15d`,
+because the preexisting `r4_geometry_source_fingerprint()`
+includes those exact bytes and already-issued original R4
+trained residual delta payloads are source-hash-bound.
+The transient opt-in three-value return interface would
+have invalidated their producer identity. The ACTUAL original
+two-value source API remains unchanged.
+
+**Source observation without changing model or training assets:**
+LeechTransformer PR #5 now owns
+`scripts/observe_x369_r4_original_topk.py`.
+A scoped `TorchDispatchMode` intercepts the existing
+original `aten.topk` input and records its actual
+full E learned logits while the unchanged original
+`select_source_experts` executes. It does not compute
+a replacement router. It rejects missing/duplicate
+topk calls, mismatched native softmax, and opt-in
+sort fallback. Local CPU PyTorch 2.10 isolated
+observer positive/negative controls: **3/3 PASS**.
+
+**Original fitted weights/source state route:**
+`scripts/export_x369_r4_restored_moe_layer.py`
+reuses existing original
+`verify_trained_federated_moe.checkpoint_parts`/
+`infer_config` and
+`x369_fair_c3_residual.restore_residual_delta`
+to bind the repaired R64 guarded C2 source checkpoint,
+repair receipt, native R1/SLR JSONL hash, and saved
+fitted R4 source-bound residual delta; then it exports
+a strictly restored selected `HistoryOrbitMoE`
+module and nonpersistent history-cap receipt.
+
+Optional `scripts/capture_x369_r4_original_slr_state.py`
+uses the ORIGINAL
+`validated_r1_summary`, `load_docs`,
+`validate_source_docs` and full `LeechGPT`
+student-only forward on a chosen original
+DEVELOPMENT document/token; it observes
+the exact pre-step activation and entire
+all-E history of one selected MoE layer,
+without replacing the source computation.
+An independently strictly reloaded
+module must replay the original full-model
+step BITWISE before the checkpoint +
+probe-input JSON are emitted.
+The activation input is actually observed
+at multiplier `1`; other four-load
+multipliers are controlled COUNTERFACTUAL
+interventions, not corpus observations.
+
+Both Leech source CPU probes now import
+`verify_x369_r4_source_probe_authority.py`
+to bind a genuine native source trace by
+actual module checkpoint bytes, source probe
+JSON bytes, original C2/delta/SLR identity,
+selected document, model config/dtype,
+nonpersistent history cap, and reconstituted
+full all-E history SHA. A native R1/SLR
+source trace without its matching exporter
+receipt is REFUSED. The synthetic
+architectural fixture is explicitly
+unauthenticated, not silently promoted.
+
+**Directly executed this round:** the
+full source mathematical script
+`check_x369_r4_full_load_kink_envelope_sympy.py`
+failed when first attempted due to a
+fragile premature `simplify(diff)` leading
+to unsimplified cosh forms; fixed,
+committed, independently rerun under
+SymPy 1.14, **53/53 PASS**, with
+`t_crest=19/9`, response
+`0.969065029508046`,
+source cutoff-tie `t=14/5`,
+left response `0.354343693774205`,
+right response 0.
+The earlier partial **27-check** figure
+must not be used as the executed file
+total. Native source JSON float32/float64
+roundtrips: **2/2 PASS**; isolated
+original-shape TorchDispatch
+observer: **3/3 CPU checks PASS**.
+
+**Remaining separate OPEN proof gates:**
+full original Leech native fixture execution
+with exact source checkout; real source
+repaired C2+R4 delta restoration and
+development trace with owned bytes;
+calibrated true original Torch floating
+error intervals/Nat-cell stability;
+real fitted-model shape and matched
+counterfactual; nontrivial task-quality
+and heldout semantic acceptance;
+on-policy hysteresis and independent
+original Agda kernel acceptance. These
+have NOT been passed or inferred.
+
+---
+
 ## 17 November — direct executable full-load SymPy acceptance correction
 
 The exact committed `scripts/check_x369_r4_full_load_kink_envelope_sympy.py`
