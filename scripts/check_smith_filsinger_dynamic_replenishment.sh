@@ -16,6 +16,7 @@ python_tests=(
   scripts/test_smith_filsinger_phase_maxcut_exact.py
   scripts/test_smith_filsinger_f10_f13_field_bridge.py
   scripts/test_smith_filsinger_nonlinear_retarded_source_port.py
+  scripts/test_smith_filsinger_distributed_causal_energy.py
 )
 test -s "$target"
 test -s "$phase_owner"
