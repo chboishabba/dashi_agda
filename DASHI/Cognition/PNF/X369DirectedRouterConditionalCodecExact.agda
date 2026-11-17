@@ -452,7 +452,7 @@ rawCommonDCCancels ws wf wr common si fi sj fj =
        :- (((((ws :- wr) :* sj) :+ ((wf :- wr) :* fj))
         :+ (wr :* common)))
       := (((((ws :- wr) :* si) :+ ((wf :- wr) :* fi))
-        :- (((ws :- wr) :* sj) :+ ((wf :- wr) :* fj)))))
+        :- (((ws :- wr) :* sj) :+ ((wf :- wr) :* fj)))))))
     refl ws wf wr common si fi sj fj
 
 originalSameDCRelativeScoreFactors :
