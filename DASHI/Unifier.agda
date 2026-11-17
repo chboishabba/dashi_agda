@@ -249,6 +249,7 @@ unifierDepthContinuumLimitPromotionImpossible :
 unifierDepthContinuumLimitPromotionImpossible =
   BalabanRGTOE.depthContinuumLimitPromotionImpossible
 
+
 balabanRGTOEReceipt : BalabanRGTOE.BalabanRGTOEReceipt
 balabanRGTOEReceipt =
   BalabanRGTOE.canonicalBalabanRGTOEReceipt

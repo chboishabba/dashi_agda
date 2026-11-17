@@ -483,7 +483,8 @@ legacyBalabanLaneAlsoDeclaresNoClayPromotion =
 ------------------------------------------------------------------------
 -- Reused typed continuum and RG-flow non-promotion owners.
 --
--- The constructorless promotion types remain owned by their source receipts.
+-- These are distinct from Boolean status flags.
+-- The constructorless promotion types remain owned by the original receipts.
 ------------------------------------------------------------------------
 
 BalabanContinuumLimitReceipt : Setω
