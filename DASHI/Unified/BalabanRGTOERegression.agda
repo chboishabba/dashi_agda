@@ -1511,3 +1511,6 @@ import DASHI.Physics.YangMills.YangMillsCMP119LiteralWilsonSpanAdditiveExact as 
 
 -- YM.REAL: root-free Fejer finite product positivity ONLY; continuous Haar remains OPEN.
 import DASHI.Physics.YangMills.YMClaySU2FejerProductFiniteExact as SU2RootFreeFejerFinite
+
+-- YM.REAL finite quaternion/Bishop matrix trace weld; Haar and unitary gates OPEN.
+import DASHI.Physics.YangMills.YMClayBishopSU2QuaternionTraceWeldExact as BishopSU2QuaternionTrace
