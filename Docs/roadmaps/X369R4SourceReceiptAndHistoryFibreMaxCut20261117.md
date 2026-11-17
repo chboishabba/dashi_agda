@@ -295,3 +295,93 @@ graph are actually certified.
 Do not inject ideal-plan bounds
 as if they were measured source
 error receipts.
+
+
+## 17 November GELU parity source-donor reuse and recurrent chart max-cut
+
+**Priority owner:** `Docs/roadmaps/X369R4GELUParityChartHistoryMaxCut20261117.md`.
+**Executable SymPy:** `scripts/check_x369_r4_gelu_parity_history_sympy.py`;
+its source-specific bounds are also welded into
+`scripts/check_x369_r4_end_to_end_envelope_sympy.py`.
+
+Recovered and **reused**, not cloned, the early 31 October
+`Docs/LeechGELUParityHistoricalSafetySteelman20261031.md`,
+`LeechSignedHistoryExpertBidiExact.agda`,
+`LeechOddOnlyApproximationObstructionExact.agda` (F02a),
+`LeechLayerErrorTransportExact.agda` (F07),
+`PhysicalInvolutionParityExact.agda`, and existing
+`QuantisedSearchBoundsExact.agda`. The early scalar real
+GELU `g(-z)=g(z)-z`, odd half `z/2` and even
+`z erf(z/sqrt2)/2` were ALREADY documented;
+the new proof-development specialises them to the
+ORIGINAL learned signed expert with biases and history.
+
+For the real source FFN
+`F(z)=W2 GELU(W1z+b1)+b2`, let
+`O_F=(F(z)-F(-z))/2` and
+`E_F=(F(z)+F(-z))/2`. Then for
+original **nonzero** oriented charts ±,
+
+    y_sigma(z) = sigma F(sigma z)
+               = O_F(z) + sigma E_F(z),
+
+and the exact chart jump is
+`y_+(z)-y_-(z)=2E_F(z)`.
+The source affine signed history transition
+has pre-cap chart jump
+`H_+-H_- = 2(T_y E_F(z)+b_T)`;
+the real radial history cap is nonexpansive.
+This does not assert learned `F` is odd and
+does not omit original `b1,b2,b_T` biases.
+
+A **new guarded approximate consumer** is available:
+with identical selected expert set and admitted q
+branch, an orientation sign flip need NOT be rejected
+when the consumer only requires a bounded numeric
+mixture/history discrepancy. It contributes an
+explicit `2||E_F||` selected-output residual and
+`2||T_yE_F+b_T||` pre-cap history residual, which
+can feed the existing F07 layer-error transport.
+To preserve the actual returned `signs` metadata,
+strict chart parity remains necessary.
+The source's `sigma=0` unique fixed point is
+handled separately: its output/history are zero
+even with internal learned biases.
+
+**Sharp real GELU Lipschitz constant:** exactly
+
+    Lg = (1+erf(1))/2 + exp(-1)/sqrt(pi)
+       = 1.128904145185...,
+
+improving the older loose bound
+`1+1/sqrt(2*pi*e)=1.2419707245...`.
+The biased FFN even component has centred
+Lipschitz coefficient `Lg-1/2` and
+a **quadratic curvature** majorant
+`||E_F(z)-F(0)|| <=
+ ||W2||*||W1 z||²/sqrt(2*pi)`.
+This means small preactivations have a small
+chart-even residual ONLY if the learned
+`F(0)=W2 GELU(b1)+b2` is also small.
+
+**Early F02a quantitative cross-pollination:**
+for real Euclidean mirrored output pair `F+,F-`,
+an odd student S obeys the exact identity
+
+    (||F+-S||²+||F-+S||²)/2
+      = ||E_F||²+||O_F-S||².
+
+The minimum odd-only pair MSE floor is
+`||E_F||²`; the exact output chart-jump
+squared is `4||E_F||²`. The scalar/finite
+Euclidean proof is checked with SymPy
+(1,2,3,4 output coordinates), NOT falsely
+promoted to an Agda-kernel accepted
+inner-product F02b theorem.
+
+**Gate status:** Source math / SymPy parity identities
+and real bounds advanced; original fitted
+`W1,b1,W2,b2,T_y,b_T` spectral norms, original
+float GELU rounding, source chart/softmax precision,
+and full future-history/semantic acceptance remain OPEN.
+No model timing, GPU, Agda or CI run claimed.
