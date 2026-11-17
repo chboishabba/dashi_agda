@@ -1536,3 +1536,6 @@ import DASHI.Physics.YangMills.YMClayDyadicCharacterPairCancellationExact as SU2
 
 -- Source-safe algebraic norm of rational S3 stereographic coordinates.
 import DASHI.Physics.YangMills.YMClayRationalS3StereographicNodeExact as S3RationalStereoPolynomial
+
+-- Exact positive rational degree-seven S3 orbit moment certificate.
+import DASHI.Physics.YangMills.YMClayRationalS3DegreeSevenOrbitMomentsExact as S3RationalDegreeSeven
