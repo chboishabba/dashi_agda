@@ -301,3 +301,51 @@ Sum_l 2/(2l+1) eps^(-2l)
 This explains precisely why the solver evolves modes in effective scalar radial measures `d=3+2l=3,7,11`, rather than inventing new physical bulk dimensions. New owner `KSW668F8ThreeAngularGramRadialMeasureExact.agda` proves all six distinct exact rational Gram entries. `scripts/test_ksw668_f8_angular_gram_effective_radial.py` independently checked all 9 Gram entries and 3 radial-measure identities (12/12 PASS). **Important scope:** this is the yy scalar angular norm, not the full TT Cartesian 3-by-3 tensor norm (which requires other angular tensor components and their contractions). The actual FV shell quadrature also requires a separate angular-to-cell-average norm/isometry or stability map. This owner is attached to existing F8 authority / KSW/TOE import graph; pinned Agda kernel NOT RUN.
 
 This newly proven Gram relation plus the exact radial-shell Green telescope is a legitimate *positive scalar operator* reuse path for G1 and G3. The explicit noncommutation counterexample means the positive scalar result still does not establish the full tensor-TT commuting diagram. Prioritize full tensor angular Gram + discrete projection matching and origin/SAT boundary as the next original-object weld.
+
+
+## Maximum-cut XXXIII — ORIGINAL full tensor TT Fourier angular norm and fourfold mode
+
+**Direct source provenance:** Reused `KSW668F8TTSymbolDiscreteCompatibilityExact.agda`, `KSW668AdS5TTMultipoleAngularRationalExact.agda`, `KSW668F8ThreeAngularGramRadialMeasureExact.agda` and `scripts/ksw668_f8_prepotential_commutation.py`. These define the original fourth-order Fourier polynomial
+```
+P(k)=|k|² I-kkᵀ, Q=diag(0,1,-1),
+T(k)=PQP-(1/2)P tr(PQ).
+```
+A new original full tensor norm owner, `KSW668F8FullTensorAngularNormExact.agda`, proves for **arbitrary rational** Cartesian k=(x,y,z) the exact six-component Frobenius identity
+```
+||T(k)||_F² =
+  (|k|⁴/2) * [(2x²+y²+z²)² - 4y²z²].
+```
+This is a **tensor**, not the original `yy` component. Consequently it is not axisymmetric pointwise even when the yy scalar axisymmetric readout uses only P0/P2/P4.
+
+On the unit wavevector sphere parameterize x=mu, y=sqrt(1-mu²) cos(phi), z=sqrt(1-mu²) sin(phi). Independently symbolically checked:
+```
+||T||_F² = (mu⁴+6mu²+1)/4
+            + (1-mu²)² cos(4phi)/4 .
+```
+Therefore azimuthal averaging (uniform dphi/(2pi)) removes an **m=4** term and gives
+```
+<||T||_F²>_phi = (mu⁴+6mu²+1)/4
+               = 2 originalTTYYAngular(mu)
+               = (4/5) P0(mu)+(8/7) P2(mu)+(2/35) P4(mu).
+int_-1^1 <||T||_F²>_phi dmu = 8/5
+```
+(with the 2pi azimuth factor omitted). The equality `<||T||²> = 2 T_yy,average` compares the **squared full tensor** and **linear yy component** for this specially chosen Q; do not misread it as a norm equality for arbitrary yy scalar fields or as a tensor isometry. It is an exact Fourier angular identity for the ORIGINAL generator.
+
+**Sharp nonaxisymmetry negative control:** Two rational unit vectors have the same mu=kx=0:
+```
+k=(0,1,0): ||T||²=1/2
+k=(0,3/5,4/5): ||T||²=49/1250.
+```
+Thus the axisymmetric yy `l=0,2,4` information alone cannot specify the full tensor's pointwise angular energy. A concrete m=4 azimuthal sector survives in the full norm, although its phi integral is zero. The negative control does **not** show that original radial yy observables are wrong: they only represent the selected component and observation axis.
+
+**Implementation / validation:** new original `KSW668F8FullTensorAngularNormExact.agda` rational polynomial norm factorization, normalized angular average, Legendre expansion, integrated moment, exact azimuth-difference control; and `scripts/test_ksw668_f8_full_tensor_angular_norm.py` independently checks 12 full symbolic conditions. Code attached to existing G1--G6 authority, canonical KSW/TOE import graph. Pinned Agda kernel **not run**, and its rational azimuth-moment assumptions need a separately formalized actual integral carrier.
+
+**Updated Pareto gates:**
+- G1 next: construct the **complete original tensor spherical-harmonic/angular component reconstruction**, retaining m!=0 and index/polarization structure, and identify precisely which part is needed for the yy receiver vs tensor energy. Prove angular projection/commutator with the ORIGINAL effective radial FV and origin/outer closures. Full tensor-to-radial FV energy isometry remains OPEN.
+- G2: joint moving original Israel/SAT boundary energy and trace OPEN.
+- G3: full coupled moving weighted SSPRK3 stability OPEN.
+- G4: actual 5D-to-brane higher-Sobolev source-to-both-Weyl trace OPEN.
+- G5: independently certified dr/dy/dt convergence OPEN.
+- G6: same matter, retarded FIO and calibrated detector OPEN.
+
+Original KSW/Thorne/Caldwell--Langlois source attribution and user-directed research programme preserved. No ESD edit, no unrelated Monster/369 geometric equivalence, no physical detector claim.
