@@ -1,4 +1,12 @@
+> **4 November 2026 source/semantic correction:** the current live [66-producer ledger](../../roadmaps/YMClayCurrentExactLemmaLedger20261103.md) includes three new SEM.P01–P03 proof-relevance and external-meaning gates. The exact 219 field inventory remains 219 **type-valued `Set` declarations** (not 219 proof terms). The previously mentioned 43-producer count is historical. The top-down five-input T78 compiler is sufficient **only relative to the chosen selected physical semantics**; its arbitrary vocabulary can be trivially inhabited and is not automatically an official Clay solution. New [steelman and bidirectional lemma atlas](../../roadmaps/YMClaySteelmanBidirectionalExactRemainingMaxCut20261104.md) and [219 source-audit](../../roadmaps/YMClay219ProofRelevantBidirectionalAudit20261104.json) are the current audit authority. All analytic Clay gates still OPEN; kernel acceptance PENDING.
+
+> **3 November 2026 exact-status update:** This document explains endpoint/decomposition distinctions. For the live PR #1444 theorem-by-theorem statuses and current max-cut, use [YMClayCurrentExactLemmaLedger20261103.md](../../roadmaps/YMClayCurrentExactLemmaLedger20261103.md). Canonical full submission count remains 219, frozen research count remains four physically open families. R443.F06 now reduces the all-vector C3 adjacent-swap proof to one original 1024-label Vec certificate (still not inhabited). GitHub source written is not Agda kernel acceptance. The #1460 TSFV/KK time-arrow work is downstream and does not prove YM OS positivity or the same-Hamiltonian mass gap.
+
 # Yang–Mills Clay Endpoint / Decomposition / Producer Map
+
+**Current exact field coordinates (3 November 2026):** [Full 219-field source inventory](../../roadmaps/YMClaySubmission219FieldInventory20261103.json) (all individual statuses NOT_AUDITED, no false closure) and [43-entry producer-leaf exact lemma ledger](../../roadmaps/YMClayCurrentExactLemmaLedger20261103.md) are companions to this decomposition reference.
+
+
 
 Status: repository navigation and proof-search reference, not theorem authority.
 
