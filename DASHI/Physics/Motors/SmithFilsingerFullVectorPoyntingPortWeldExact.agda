@@ -120,3 +120,66 @@ record SameOriginalPhysicalFieldBoundary
 -- The bridge ends here: original full-vector differential conservation
 -- is mathematically available; the physical integrated-port equality
 -- cannot be manufactured from the symbolic Maxwell exterior adapter.
+
+
+-- F10/F13/F15 all the way to the original selected output, with NO
+-- synthetic FieldMaterialEnergyWeld balance supplied by the caller.
+-- The Maxwell jet gives pointwise Poynting. The only admitted PDE-to-port
+-- step is the explicitly typed integrated boundary implication.
+-- Material conservation, full storage restoration and source cap are
+-- independent real-world physical obligations.
+sameOriginalFullVectorPoyntingNaturalCap :
+  ∀ {r} {F : C3.RealField r} →
+  (jet : Vector.FullVectorMaxwellJet F) →
+  (b : Weld.SelectedBoundary)
+  (f : Weld.FormalFieldToPort b) →
+  (n d fi i fl ff m mi load ml rec mf cap unused : Nat) →
+  MaxwellJetToSelectedFieldWork jet n d fi i fl ff →
+  i + (m + mi) ≡ load + (ml + (rec + mf)) →
+  fi + mi ≡ ff + mf →
+  n + unused ≡ cap →
+  load ≡
+    DASHI.Physics.Motors.SmithFilsingerMidpointPhaseWorkExact.MidpointTwoPortWorkWindow.usefulWork
+      (Weld.FormalFieldToPort.portWindow f) →
+  Bound._≤_
+    (DASHI.Physics.Motors.SmithFilsingerMidpointPhaseWorkExact.MidpointTwoPortWorkWindow.usefulWork
+      (Weld.FormalFieldToPort.portWindow f))
+    ((cap + d) + m)
+sameOriginalFullVectorPoyntingNaturalCap
+  jet b f n d fi i fl ff m mi load ml rec mf cap unused
+  integrated material storedReturn capReceipt actualLoad =
+  substLower (Bound.sym actualLoad)
+    (Cycle.≤-trans
+      (Bound.transportUpper
+        (Bound.sym netPaid)
+        (Bound.≤-append load (fl + (ml + rec))))
+      (Cycle.+-monotoneRight m
+        (Cycle.+-monotoneRight d naturalBound)))
+  where
+    substLower : {a b c : Nat} → a ≡ b → Bound._≤_ b c → Bound._≤_ a c
+    substLower refl proof = proof
+
+    naturalBound : Bound._≤_ n cap
+    naturalBound =
+      Bound.transportUpper capReceipt (Bound.≤-append n unused)
+
+    fullBalance :
+      ((n + d) + m) + (fi + mi)
+        ≡ load + (fl + (ml + (rec + (ff + mf))))
+    fullBalance =
+      fullVectorMaxwellToMaterialCompleteLedger
+        jet n d fi i fl ff m mi load ml rec mf integrated material
+
+    netPaid :
+      (n + d) + m ≡ load + (fl + (ml + rec))
+    netPaid =
+      Cycle.+-cancelRight _ _ (ff + mf)
+        (Cycle.trans
+          (Bound.sym
+            (Cycle.cong (λ z → ((n + d) + m) + z) storedReturn))
+          (Cycle.trans fullBalance
+            (solve 6
+              (λ l fml mml r fs ms →
+                (l :+ (fml :+ (mml :+ (r :+ (fs :+ ms)))))
+                := ((l :+ (fml :+ (mml :+ r))) :+ (fs :+ ms)))
+              refl load fl ml rec ff mf)))
