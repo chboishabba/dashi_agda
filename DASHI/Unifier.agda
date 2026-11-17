@@ -9,6 +9,9 @@ import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 import DASHI.Unified.SingularBasinCoarseRGTOEExact as SingularBasinTOE
 
 
+-- Reuse source-owned legal governance non-promotion proofs.
+import DASHI.Unified.LegalGovernanceNonPromotionTOEExact
+
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
 
 open import Agda.Primitive using (Level; lzero; lsuc)
