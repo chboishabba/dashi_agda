@@ -712,6 +712,29 @@ toePNFGluingProxyDoesNotProveTrueLinearity =
 toePNFSelfAdjointProxyDoesNotProveFiniteTheorem =
   PNFSource.selfAdjointProxyDoesNotProveFiniteTheorem
 
+toeBrainJPromotionBlocked :
+  BrainSpine.objectExternalJPromotion BrainFMRI.brainFMRIObject ≡ false
+toeBrainJPromotionBlocked = BrainFMRI.brainFMRIJPromotionBlocked
+
+import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as GovernanceTOE
+import DASHI.Unified.PNFSourceBoundaryTOEExact as PNFSource
+import DASHI.Unified.PNFDistilledNonPromotionTOEExact as PNFDistilled
+import DASHI.Unified.SCALEEvidenceReviewTOEConvergenceExact as SCALEReview
+import DASHI.Unified.GovernedFleetResidualTOEHandoffExact as GovernedFleet
+
+------------------------------------------------------------------------
+
+toePNFSourceBoundaryReceipt :
+  PNFSource.PNFSourceBoundaryTOEReceipt
+toePNFSourceBoundaryReceipt =
+  PNFSource.canonicalPNFSourceBoundaryTOEReceipt
+
+toePNFGluingProxyDoesNotProveTrueLinearity =
+  PNFSource.gluingProxyDoesNotProveTrueLinearity
+
+toePNFSelfAdjointProxyDoesNotProveFiniteTheorem =
+  PNFSource.selfAdjointProxyDoesNotProveFiniteTheorem
+
 toePNFDominationProxyDoesNotProveHamiltonianTheorem =
   PNFSource.dominationProxyDoesNotProveHamiltonianTheorem
 

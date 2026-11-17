@@ -337,19 +337,6 @@ unified369Ternary27MonsterRepresentationNotPromoted =
 unified369Ternary27MonsterEmbeddingNotPromoted =
   MaxCut369.toe27MonsterEmbeddingNotPromoted
 
-------------------------------------------------------------------------
--- Live Gate-4 frontier and Fleet target selection.
-------------------------------------------------------------------------
-
-unifiedCurrentGate4FrontierLedgerLevel : ProofLevel
-unifiedCurrentGate4FrontierLedgerLevel =
-  FleetHyperTOE.currentGate4FrontierLedgerLevel
-
-unifiedNavierStokesBM2ZKPFrame :
-  NSBM2TOE.NavierStokesBM2TOEZKPFrame
-unifiedNavierStokesBM2ZKPFrame =
-  NSBM2TOE.canonicalNavierStokesBM2TOEZKPFrame
-
 
 import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalGovernance
 import DASHI.Unified.PNFSourceBoundaryTOEExact as PNFSource
@@ -367,17 +354,6 @@ unifiedGovernedFleetResidualTOEHandoff :
   GovernedFleet.GovernedFleetResidualTOEHandoff
 unifiedGovernedFleetResidualTOEHandoff =
   GovernedFleet.canonicalGovernedFleetResidualTOEHandoff
-
-unifiedFleetNamedManifestStillMissing :
-  FleetManifest.named58ManifestAcquired ≡ false
-unifiedFleetNamedManifestStillMissing =
-  GovernedFleet.namedManifestStillMissing
-
-unifiedFleetPerGapDispatchStillDisabled :
-  FleetManifest.perGapDispatchEnabled ≡ false
-unifiedFleetPerGapDispatchStillDisabled =
-  GovernedFleet.perGapDispatchStillDisabled
-
 
 governedLegalWorkflowTOEBoundary :
   LegalGovernance.GovernedLegalWorkflowTOEBoundary

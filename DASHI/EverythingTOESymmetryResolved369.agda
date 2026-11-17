@@ -1660,6 +1660,35 @@ toe369SCALEEvidenceReviewTOEReceipt :
 toe369SCALEEvidenceReviewTOEReceipt =
   SCALEReview.canonicalSCALEEvidenceReviewTOEReceipt
 
+toeBrainJPromotionBlocked :
+  BrainSpine.objectExternalJPromotion BrainFMRI.brainFMRIObject ≡ false
+toeBrainJPromotionBlocked = BrainFMRI.brainFMRIJPromotionBlocked
+
+import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalGovernance
+import DASHI.Unified.PNFSourceBoundaryTOEExact as PNFSource
+import DASHI.Unified.PNFDistilledNonPromotionTOEExact as PNFDistilled
+import DASHI.Unified.SCALEEvidenceReviewTOEConvergenceExact as SCALEReview
+import DASHI.Unified.GovernedFleetResidualTOEHandoffExact as GovernedFleet
+
+------------------------------------------------------------------------
+-- Governed legal / PNF / SCALE / Fleet residual convergence.
+------------------------------------------------------------------------
+
+toePNFSourceBoundaryReceipt :
+  PNFSource.PNFSourceBoundaryTOEReceipt
+toePNFSourceBoundaryReceipt =
+  PNFSource.canonicalPNFSourceBoundaryTOEReceipt
+
+toePNFDistilledNonPromotionBoundary :
+  PNFDistilled.PNFDistilledNonPromotionBoundary
+toePNFDistilledNonPromotionBoundary =
+  PNFDistilled.canonicalPNFDistilledNonPromotionBoundary
+
+toe369SCALEEvidenceReviewTOEReceipt :
+  SCALEReview.SCALEEvidenceReviewTOEReceipt
+toe369SCALEEvidenceReviewTOEReceipt =
+  SCALEReview.canonicalSCALEEvidenceReviewTOEReceipt
+
 toeGovernedLegalWorkflowInvariantHandoff :
   LegalGovernance.GovernedLegalWorkflowTOEInvariantHandoff
 toeGovernedLegalWorkflowInvariantHandoff =
