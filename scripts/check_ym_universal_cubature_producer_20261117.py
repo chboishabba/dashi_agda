@@ -82,6 +82,33 @@ def fejer_power(k):
   total+=coef*moment
  return total
 
+
+def exact_cyclotomic_character_sum(order,exponents):
+ """Evaluate a sum of z^k in Q[z]/(z^order+1) exactly."""
+ poly={}
+ for exponent,coeff in exponents:
+  quotient,remainder=divmod(exponent,order)
+  poly[remainder]=poly.get(remainder,F(0)) + (
+    -coeff if quotient%2 else coeff)
+ return {k:v for k,v in poly.items() if v}
+
+def exact_cheb_grid(A,k):
+ """cos(k*j*pi/A), j=1..A-1, with z^A=-1."""
+ terms=[(sign*k*j,F(1,2))
+        for j in range(1,A) for sign in (-1,1)]
+ return exact_cyclotomic_character_sum(A,terms)
+
+def exact_midpoint_grid(M,k):
+ """cos(k*(2b-1)*pi/(2M)), b=1..M; z^(2M)=-1."""
+ terms=[(sign*k*(2*b-1),F(1,2))
+        for b in range(1,M+1) for sign in (-1,1)]
+ return exact_cyclotomic_character_sum(2*M,terms)
+
+def exact_circle_grid(L,k):
+ """sum_j exp(2*pi*i*k*j/L), z^(L/2)=-1."""
+ return exact_cyclotomic_character_sum(L//2,
+                                      [(2*k*j,F(1)) for j in range(L)])
+
 def symbolic_proofs():
  a,b,c,d=sp.symbols('a b c d',integer=True,nonnegative=True)
  u=c+d;v=b+u;k=a+v
@@ -103,6 +130,22 @@ def symbolic_proofs():
 
 def check_degree(degree):
  A,M,L=orders(degree)
+ for k in range(2*A):
+  observed=exact_cheb_grid(A,k)
+  expect={0:F(cheb_grid(A,k))} if cheb_grid(A,k) else {}
+  assert observed==expect,("Exact primitive Cheb grid",degree,k,observed,expect)
+  global checks
+  checks+=1
+ for k in range(2*M):
+  observed=exact_midpoint_grid(M,k)
+  expect={0:F(M)} if k==0 else {}
+  assert observed==expect,("Exact primitive midpoint grid",degree,k,observed,expect)
+  checks+=1
+ for k in range(-degree,degree+1):
+  observed=exact_circle_grid(L,k)
+  expect={0:F(L)} if k%L==0 else {}
+  assert observed==expect,("Exact primitive circle grid",degree,k,observed,expect)
+  checks+=1
  for k in range(2*A-2):
   eq(cheb2_U(A,k),F(int(k==0)),("ChebII",degree,k))
  for k in range(M):
