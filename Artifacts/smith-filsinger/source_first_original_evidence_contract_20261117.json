@@ -1,0 +1,93 @@
+{
+  "title": "Smith/Filsinger original-world F10-F16 source-first acceptance contract",
+  "date": "2026-11-17",
+  "status": "NO ORIGINAL MEASUREMENTS ATTACHED: zero original-world gates closed",
+  "source_identity": {
+    "select_exactly_one": [
+      "filsinger_earth_reel",
+      "filsinger_proposed_portable_plate",
+      "smith_patent_or_compilation",
+      "laboratory_replica_nonoriginal"
+    ],
+    "selected": null,
+    "raw_reel_or_original_reference": null,
+    "complete_pin_graph": null,
+    "physical_plate_or_earth_dimensions_m": null,
+    "ground_return_graph": null
+  },
+  "source_operator_P2": {
+    "source_category": [
+      "local_fair_weather_air_dc",
+      "soil_galvanic_or_geoelectric",
+      "ambient_RF",
+      "magnetosphere_ionosphere",
+      "unknown_or_other"
+    ],
+    "selected": null,
+    "original_terminal_open_circuit_voltage_V": null,
+    "original_terminal_loaded_VI_trials": null,
+    "source_perturbation_response": null,
+    "physical_ambient_field_and_conductivity": null,
+    "uncertainty_calibration": null
+  },
+  "synchronous_power_P1": {
+    "clock_alignment": null,
+    "probe_bandwidth_and_phase_delay": null,
+    "time_resolved_natural_source_v_i": null,
+    "time_resolved_driver_v_i": null,
+    "time_resolved_controller_modulator_v_i": null,
+    "time_resolved_load_v_i": null,
+    "all_return_currents": null,
+    "external_radiative_flux_or_bound": null,
+    "electrode_chemical_or_thermal_energy": null,
+    "capacitor_inductor_initial_final_energy": null,
+    "negative_controls": null,
+    "uncertainty_interval_rule": "sum min/max of v*i interval products (not separately averaged RMS)"
+  },
+  "full_cycle_R3": {
+    "repeated_cycles": null,
+    "independent_exogenous_forcing_record": null,
+    "initial_final_receiver_storage": null,
+    "initial_final_source_storage": null,
+    "replenishment_boundary_and_upstream_generators": null,
+    "positive_net_natural_work_lower_bound_J": null,
+    "same_device_matched_tuned_and_control_trials": null,
+    "requirement": "source identity + full boundary closure + positive signed natural work + no donor drawdown"
+  },
+  "field_model_R2": {
+    "full_3d_maxwell_required": null,
+    "trigger": "measured spatial propagation, radiative modes, nonlocal field or hysteretic feedback not captured by calibrated terminal/1D operator",
+    "field_geometry_material_coefficients": null,
+    "retarded_green_or_maxwell_solution": null,
+    "poynting_surface_integral": null,
+    "neutral_wind_hall_pedersen_and_modulator_work": null,
+    "all_scales_validated": null
+  },
+  "same_original_R1_F14": {
+    "on_hot_null_off_acoustic_and_electrical": null,
+    "selected_parameter_set": null,
+    "independent_replication": null
+  },
+  "cloud_causal_F16": {
+    "controller_to_cloud_field_transfer": null,
+    "cloud_field_to_droplet_response_with_controls": null,
+    "raindrop_rainrate_causal_change": null,
+    "cold_pool_temperature_hydrological_energy_budget": null,
+    "global_TOA_climate_effect_separate": null,
+    "counterfactual_randomisation_and_uncertainty": null,
+    "status": "OBSERVATIONAL E-FIELD/RAIN CORRELATION IS NOT EVIDENCE OF MANIPULATION"
+  },
+  "formal_D1_D2": {
+    "agda_kernel_version": "2.9 (pinned; execution missing)",
+    "exact_pr_head_acceptance": null,
+    "same_original_provenance_receipt": null
+  },
+  "safety": "Observation and passive modelling only. No atmospheric plasma, cloud discharge or high-voltage intervention prescription.",
+  "source_references": [
+    "https://doi.org/10.1016/j.asr.2026.01.090",
+    "https://electrostatic.com/research/c11theatmos/c11atmo.html",
+    "https://doi.org/10.1029/2021GL093577",
+    "https://doi.org/10.1029/2021JD035954"
+  ],
+  "evidence_tier": "machine-readable schema, not claimed actual experimental data"
+}
