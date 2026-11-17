@@ -1,0 +1,10 @@
+{
+  "schema": "DASHI.V2.Omega.semiconductor-loss-acceptance.v1",
+  "tests_new": 33,
+  "tests_integrated": 201,
+  "execution": "local pytest with single-thread BLAS",
+  "original_device_evidence": false,
+  "agda_kernel": "NOT RUN",
+  "legacy_pwm_donor": "NOT INCLUDED",
+  "scope": "hypothetical averaged reverse-path loss budget, not source-selected physical converter"
+}

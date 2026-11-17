@@ -1,0 +1,220 @@
+{
+  "schema": "DASHI.V2.Omega.load-intervention.v1",
+  "four_arm": {
+    "arms": {
+      "load0_recovery0": {
+        "motor_input": "286",
+        "auxiliary_input": "0",
+        "shaft_to_generator": "200",
+        "electric_load": "0",
+        "other_output": "120",
+        "motor_loss": "86",
+        "generator_loss": "80",
+        "motor_storage_rate": "0",
+        "generator_storage_rate": "0",
+        "rotor_storage_rate": "0"
+      },
+      "load0_recovery1": {
+        "motor_input": "286",
+        "auxiliary_input": "2/5",
+        "shaft_to_generator": "200",
+        "electric_load": "0",
+        "other_output": "120",
+        "motor_loss": "86",
+        "generator_loss": "402/5",
+        "motor_storage_rate": "0",
+        "generator_storage_rate": "0",
+        "rotor_storage_rate": "0"
+      },
+      "load1_recovery0": {
+        "motor_input": "286",
+        "auxiliary_input": "0",
+        "shaft_to_generator": "245",
+        "electric_load": "45",
+        "other_output": "120",
+        "motor_loss": "41",
+        "generator_loss": "80",
+        "motor_storage_rate": "0",
+        "generator_storage_rate": "0",
+        "rotor_storage_rate": "0"
+      },
+      "load1_recovery1": {
+        "motor_input": "286",
+        "auxiliary_input": "2/5",
+        "shaft_to_generator": "245",
+        "electric_load": "52",
+        "other_output": "120",
+        "motor_loss": "41",
+        "generator_loss": "367/5",
+        "motor_storage_rate": "0",
+        "generator_storage_rate": "0",
+        "rotor_storage_rate": "0"
+      }
+    },
+    "interaction_w": {
+      "motor_input": "0",
+      "auxiliary_input": "0",
+      "electric_load": "7",
+      "other_output": "0",
+      "motor_loss": "0",
+      "generator_loss": "-7",
+      "motor_storage_rate": "0",
+      "generator_storage_rate": "0",
+      "rotor_storage_rate": "0",
+      "shaft_to_generator": "0"
+    },
+    "whole_interaction_residual_w": "0",
+    "interpretation": "synthetic 7 W interaction from displaced generator heat, not 7 W new energy",
+    "actual_v2_evidence": false
+  },
+  "rival_worlds": {
+    "baseline": {
+      "motor_input": "286",
+      "auxiliary_input": "0",
+      "shaft_to_generator": "200",
+      "electric_load": "0",
+      "other_output": "120",
+      "motor_loss": "86",
+      "generator_loss": "80",
+      "motor_storage_rate": "0",
+      "generator_storage_rate": "0",
+      "rotor_storage_rate": "0"
+    },
+    "alternatives": {
+      "reduced_generator_loss": {
+        "motor_input": "286",
+        "auxiliary_input": "0",
+        "shaft_to_generator": "200",
+        "electric_load": "45",
+        "other_output": "120",
+        "motor_loss": "86",
+        "generator_loss": "35",
+        "motor_storage_rate": "0",
+        "generator_storage_rate": "0",
+        "rotor_storage_rate": "0"
+      },
+      "increased_shaft_at_constant_motor_input": {
+        "motor_input": "286",
+        "auxiliary_input": "0",
+        "shaft_to_generator": "245",
+        "electric_load": "45",
+        "other_output": "120",
+        "motor_loss": "41",
+        "generator_loss": "80",
+        "motor_storage_rate": "0",
+        "generator_storage_rate": "0",
+        "rotor_storage_rate": "0"
+      },
+      "unmeasured_auxiliary": {
+        "motor_input": "286",
+        "auxiliary_input": "45",
+        "shaft_to_generator": "200",
+        "electric_load": "45",
+        "other_output": "120",
+        "motor_loss": "86",
+        "generator_loss": "80",
+        "motor_storage_rate": "0",
+        "generator_storage_rate": "0",
+        "rotor_storage_rate": "0"
+      },
+      "depleting_rotor_or_other_storage": {
+        "motor_input": "286",
+        "auxiliary_input": "0",
+        "shaft_to_generator": "200",
+        "electric_load": "45",
+        "other_output": "120",
+        "motor_loss": "86",
+        "generator_loss": "80",
+        "motor_storage_rate": "0",
+        "generator_storage_rate": "0",
+        "rotor_storage_rate": "-45"
+      },
+      "displaced_other_output": {
+        "motor_input": "286",
+        "auxiliary_input": "0",
+        "shaft_to_generator": "200",
+        "electric_load": "45",
+        "other_output": "75",
+        "motor_loss": "86",
+        "generator_loss": "80",
+        "motor_storage_rate": "0",
+        "generator_storage_rate": "0",
+        "rotor_storage_rate": "0"
+      }
+    },
+    "physical_note": "constructed counterworlds; losses, auxiliary and hidden other outputs not measured on V2"
+  },
+  "loaded_signature": {
+    "motor_electrical_change_w": 0.0,
+    "shaft_change_w": 45.0,
+    "shaft_torque_change_nm": 0.1825481505302113,
+    "motor_loss_change_w": -45.0,
+    "generator_loss_change_w": 0.0,
+    "load_change_w": 45.0,
+    "shaft_independent_meter_required": true
+  },
+  "measurement_rank": {
+    "unknown_deltas": [
+      "auxiliary",
+      "dissipation",
+      "storage_rate",
+      "other_output",
+      "shaft_transfer"
+    ],
+    "basic_rank": 1,
+    "basic_nullity": 4,
+    "full_rank": 5,
+    "full_nullity": 0,
+    "shaft_unidentifiable_from_electrical_meters": true,
+    "sensor_rows": {
+      "auxiliary_port": [
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "storage_endpoints": [
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "other_outputs": [
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "torque_times_speed": [
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "duplicate_electrical_meter": [
+        1,
+        -1,
+        -1,
+        -1,
+        0
+      ]
+    },
+    "caveat": "calibrated shaft measurement is an independent mechanical observable; unknown total loss is inferred, not separately calorimetrically proven"
+  },
+  "interaction_error": {
+    "absolute_bound_w": "4",
+    "nominal_interaction_w": "7",
+    "interval_w": [
+      "3",
+      "11"
+    ],
+    "sign_certified": true,
+    "confidence": null
+  },
+  "status": "restricted exact toy construction; V2 apparatus not measured",
+  "agda_kernel": "NOT RUN"
+}
