@@ -91,6 +91,78 @@ record MillenniumLeanAssistReceipt : Set where
     hodgeCP1CellularH2Source :
       String
 
+    hodgeCP1SingularTransportSource :
+      String
+
+    bsdLocalPolynomialSameObjectSource :
+      String
+
+    bsdLocalEulerFactorSameObjectSource :
+      String
+
+    bsdActualLocalPointGroupSource :
+      String
+
+    bsdLocalKummerBoundaryCasesSource :
+      String
+
+    bsdLocalKummerSecantSource :
+      String
+
+    bsdLocalKummerTangentSource :
+      String
+
+    bsdLocalKummerSecantDispatchSource :
+      String
+
+    bsdLocalKummerTangentDispatchSource :
+      String
+
+    bsdGlobalPrimePlaceWeldSource :
+      String
+
+    bsdLocalKummerTorsionTranslationSource :
+      String
+
+    bsdLocalKummerHomomorphismSource :
+      String
+
+    bsdExplicitSelmerSubgroupSource :
+      String
+
+    bsdGlobalKummerQuotientToSelmerSource :
+      String
+
+    bsdGlobalKummerKernelExactSource :
+      String
+
+    bsdExplicitSelmerCokernelExactSource :
+      String
+
+    bsdSelmerShaCohomologicalBoundarySource :
+      String
+
+    bsdGlobalLocalFactorSameObjectSource :
+      String
+
+    bsdGlobalEulerPrimePowerSource :
+      String
+
+    bsdHasseEulerDirichletAgreementSource :
+      String
+
+    bsdEtaToActualLTransferSource :
+      String
+
+    hodgeTetrahedralNativeH2Source :
+      String
+
+    hodgeTetrahedralNormalizedToSingularSource :
+      String
+
+    hodgeCP1PrizeFacingClosureSource :
+      String
+
     hodgeCP1QuotientSourcePresent :
       Bool
 
@@ -157,6 +229,78 @@ record MillenniumLeanAssistReceipt : Set where
     hodgePointCellularGeneratorSourcePresent :
       Bool
 
+    hodgeCP1SingularTransportSourcePresent :
+      Bool
+
+    bsdLocalPolynomialSameObjectSourcePresent :
+      Bool
+
+    bsdLocalEulerFactorSameObjectSourcePresent :
+      Bool
+
+    bsdActualLocalPointGroupSourcePresent :
+      Bool
+
+    bsdLocalKummerBoundaryCasesSourcePresent :
+      Bool
+
+    bsdLocalKummerSecantSourcePresent :
+      Bool
+
+    bsdLocalKummerTangentSourcePresent :
+      Bool
+
+    bsdLocalKummerSecantDispatchSourcePresent :
+      Bool
+
+    bsdLocalKummerTangentDispatchSourcePresent :
+      Bool
+
+    bsdGlobalPrimePlaceWeldSourcePresent :
+      Bool
+
+    bsdLocalKummerTorsionTranslationSourcePresent :
+      Bool
+
+    bsdLocalKummerHomomorphismSourcePresent :
+      Bool
+
+    bsdExplicitSelmerSubgroupSourcePresent :
+      Bool
+
+    bsdGlobalKummerQuotientToSelmerSourcePresent :
+      Bool
+
+    bsdGlobalKummerKernelExactSourcePresent :
+      Bool
+
+    bsdExplicitSelmerCokernelExactSourcePresent :
+      Bool
+
+    bsdSelmerShaCohomologicalBoundarySourcePresent :
+      Bool
+
+    bsdGlobalLocalFactorSameObjectSourcePresent :
+      Bool
+
+    bsdGlobalEulerPrimePowerSourcePresent :
+      Bool
+
+    bsdHasseEulerDirichletAgreementSourcePresent :
+      Bool
+
+    bsdEtaToActualLTransferSourcePresent :
+      Bool
+
+    hodgeTetrahedralNativeH2SourcePresent :
+      Bool
+
+    hodgeTetrahedralNormalizedToSingularSourcePresent :
+      Bool
+
+    hodgeCP1PrizeFacingClosureSourcePresent :
+      Bool
+
     sourcesRootedInSynthesis :
       Bool
 
@@ -178,7 +322,7 @@ currentMillenniumLeanAssistReceipt =
     "chboishabba/dashi_lean4"
     "agent/millennium-three-lane-lean-assist"
     "#10"
-    "196c1041eea4f5a62c4d99d8f6d0fd149a6c86b5"
+    "c0bec1fd85751a4db719afddc472e548896613c3"
     "leanprover/lean4:v4.28.0"
     "mathlib v4.28.0"
     "Synthesis/MillenniumHodgeCP1Quotient.lean"
@@ -195,6 +339,54 @@ currentMillenniumLeanAssistReceipt =
     "Synthesis/MillenniumBSDTotalLocalKummer.lean"
     "Synthesis/MillenniumBSDMathlibLFunctionWeld.lean"
     "Synthesis/MillenniumHodgeCP1CellularH2.lean"
+    "Synthesis/MillenniumHodgeCP1SingularTransport.lean"
+    "Synthesis/MillenniumBSDLocalPolynomialSameObject.lean"
+    "Synthesis/MillenniumBSDLocalEulerFactorSameObject.lean"
+    "Synthesis/MillenniumBSDActualLocalPointGroup.lean"
+    "Synthesis/MillenniumBSDLocalKummerBoundaryCases.lean"
+    "Synthesis/MillenniumBSDLocalKummerSecant.lean"
+    "Synthesis/MillenniumBSDLocalKummerTangent.lean"
+    "Synthesis/MillenniumBSDLocalKummerSecantDispatch.lean"
+    "Synthesis/MillenniumBSDLocalKummerTangentDispatch.lean"
+    "Synthesis/MillenniumBSDGlobalPrimePlaceWeld.lean"
+    "Synthesis/MillenniumBSDLocalKummerTorsionTranslation.lean"
+    "Synthesis/MillenniumBSDLocalKummerHomomorphism.lean"
+    "Synthesis/MillenniumBSDExplicitSelmerSubgroup.lean"
+    "Synthesis/MillenniumBSDGlobalKummerQuotientToSelmer.lean"
+    "Synthesis/MillenniumBSDGlobalKummerKernelExact.lean"
+    "Synthesis/MillenniumBSDExplicitSelmerCokernelExact.lean"
+    "Synthesis/MillenniumBSDSelmerShaCohomologicalBoundary.lean"
+    "Synthesis/MillenniumBSDGlobalLocalFactorSameObject.lean"
+    "Synthesis/MillenniumBSDGlobalEulerPrimePower.lean"
+    "Synthesis/MillenniumBSDHasseEulerDirichletAgreement.lean"
+    "Synthesis/MillenniumBSDEtaToActualLTransfer.lean"
+    "Synthesis/MillenniumHodgeTetrahedralNativeH2.lean"
+    "Synthesis/MillenniumHodgeTetrahedralNormalizedToSingular.lean"
+    "Synthesis/MillenniumHodgeCP1PrizeFacingClosure.lean"
+    true
+    true
+    true
+    true
+    true
+    true
+    true
+    true
+    true
+    true
+    true
+    true
+    true
+    true
+    true
+    true
+    true
+    true
+    true
+    true
+    true
+    true
+    true
+    true
     true
     true
     true
