@@ -334,6 +334,66 @@ selectedOriginalGreenAtPhysicalArrival authority b f a
           (Original.FormalFieldToPort.causalFlight f))))
     (OriginalSelectedRetardedGreen.sameOriginalTerminalWork a)
 
+-- Once the physical operator and calibrated source are identified,
+-- the ACTUAL original arrival field must agree with that operator.
+-- This does not prove the identification; it forces its content to be
+-- the very same field and original launch rather than an arbitrary Set.
+selectedGreenArrivalMatchesPhysicalMaxwellResponse :
+  ∀ {Vector Scalar BoundValue : Set}
+    {coercive : Green.CoerciveFiniteOperator Vector Scalar BoundValue}
+    (authority : Green.FiniteCoerciveInverseAuthority coercive)
+    (b : Original.SelectedBoundary)
+    (f : Original.FormalFieldToPort b)
+    (a : OriginalSelectedRetardedGreen coercive authority b f) →
+  let flight = Original.FormalFieldToPort.causalFlight f in
+  stampedGreen authority
+    (OriginalSelectedRetardedGreen.zeroVector a)
+    (OriginalSelectedRetardedGreen.sourceHistory a)
+    (Time.RetardedFlight.launch flight)
+    (Time.RetardedFlight.flight flight)
+    (Time.RetardedFlight.arrival flight)
+  ≡ OriginalSelectedRetardedGreen.originalPhysicalMaxwellSourceResponse a
+      (OriginalSelectedRetardedGreen.originalMeasuredSourceAtLaunch a)
+selectedGreenArrivalMatchesPhysicalMaxwellResponse authority b f a
+  rewrite sym (Time.RetardedFlight.travelLaw
+    (Original.FormalFieldToPort.causalFlight f)) =
+  trans
+    (stampedGreenAtActualArrival authority
+      (OriginalSelectedRetardedGreen.zeroVector a)
+      (OriginalSelectedRetardedGreen.sourceHistory a)
+      (Time.RetardedFlight.launch
+        (Original.FormalFieldToPort.causalFlight f))
+      (Time.RetardedFlight.flight
+        (Original.FormalFieldToPort.causalFlight f)))
+    (trans
+      (cong (Green.inverse authority)
+        (OriginalSelectedRetardedGreen.sourceHistoryMatchesActualLaunch a))
+      (sym
+        (OriginalSelectedRetardedGreen.physicalMaxwellGreenMatchesChosenInverse
+          a (OriginalSelectedRetardedGreen.originalMeasuredSourceAtLaunch a))))
+
+-- A physical flight-distance bound can be transported only by
+-- CONSUMING the explicit calibrated cone admission, not numerical CFL.
+selectedPhysicalFrontDistanceBound :
+  ∀ {Vector Scalar BoundValue : Set}
+    {coercive : Green.CoerciveFiniteOperator Vector Scalar BoundValue}
+    (authority : Green.FiniteCoerciveInverseAuthority coercive)
+    (b : Original.SelectedBoundary)
+    (f : Original.FormalFieldToPort b)
+    (a : OriginalSelectedRetardedGreen coercive authority b f) →
+  Bound._≤_
+    (OriginalSelectedRetardedGreen.measuredSourceToCollectorDistance a)
+    ((OriginalSelectedRetardedGreen.maximumPhysicalFrontSpeed a)
+     * Time.RetardedFlight.flight
+        (Original.FormalFieldToPort.causalFlight f))
+selectedPhysicalFrontDistanceBound authority b f a =
+  Cone.physicalFrontBoundRequiresAdmission
+    (OriginalSelectedRetardedGreen.measuredSourceToCollectorDistance a)
+    (OriginalSelectedRetardedGreen.maximumPhysicalFrontSpeed a)
+    (Time.RetardedFlight.flight
+      (Original.FormalFieldToPort.causalFlight f))
+    (OriginalSelectedRetardedGreen.originalPhysicalCone a)
+
 -- F02/ F13 high-alpha physical remainder: real Maxwell dyadic Green,
 -- causal support and dispersive memory, exact exterior boundary/return,
 -- E/H/J fields, source history and source backaction, measured terminal
