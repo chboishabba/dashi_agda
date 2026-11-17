@@ -12,7 +12,7 @@ module DASHI.Physics.Motors.SmithFilsingerSignedBoundaryGroupCompletionExact whe
 -- Attribution: user-origin Smith/Filsinger nonlinear differential
 -- source/sink hypothesis; original MidpointTwoPortWorkExact signed ledger.
 
-open import Agda.Builtin.Nat using (Nat; zero; _+_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Nat.Solver using (module +-*-Solver)
 open +-*-Solver using (solve; _:+_; con; _:=_)
@@ -84,6 +84,49 @@ sameSignedTransitive a b c ab bc =
     C = DirectedSignedWork.incoming c
     cOut : Nat
     cOut = DirectedSignedWork.outgoing c
+
+
+-- Exact quantisation obstruction: one integer energy quantum has NO
+-- two equal signed-Nat-pair halves. A nontrivial universal lossless
+-- rational/real-field -> integer-meter additive map must not be assumed.
+--
+-- This is an original mathematical negative control on quantisation,
+-- NOT a claim about real meter resolution or laboratory power.
+doubleNat : Nat → Nat
+doubleNat zero = zero
+doubleNat (suc n) = suc (suc (doubleNat n))
+
+doubleNatNormalization : (n : Nat) → n + n ≡ doubleNat n
+doubleNatNormalization zero = refl
+doubleNatNormalization (suc n)
+  rewrite Cycle.+-sucRight n n
+        | doubleNatNormalization n = refl
+
+doubleCannotBeOdd :
+  (a b : Nat) → doubleNat a ≡ suc (doubleNat b) → Port.Contradiction
+doubleCannotBeOdd zero zero ()
+doubleCannotBeOdd zero (suc b) ()
+doubleCannotBeOdd (suc a) zero ()
+doubleCannotBeOdd (suc a) (suc b) eq =
+  doubleCannotBeOdd a b
+    (Cycle.sucInjective (Cycle.sucInjective eq))
+
+-- Signed work equality is the CROSS-SUM relation, not literal equality
+-- of Nat pairs. The contradiction works for ANY putative half-work pair.
+oneWorkQuantumHasNoExactSignedHalf :
+  (a b : Nat) →
+  sameSignedWork
+    (combinedPorts (directedSignedWork a b) (directedSignedWork a b))
+    (directedSignedWork (suc zero) zero) →
+  Port.Contradiction
+oneWorkQuantumHasNoExactSignedHalf a b claimed =
+  doubleCannotBeOdd a b
+    (Cycle.trans
+      (Bound.sym (doubleNatNormalization a))
+      (Cycle.trans
+        (Bound.sym (Cycle.+-zeroRight (a + a)))
+        (Cycle.trans claimed
+          (Cycle.cong suc (doubleNatNormalization b)))))
 
 netNaturalPort : Port.MidpointTwoPortWorkWindow → DirectedSignedWork
 netNaturalPort p =
