@@ -251,3 +251,57 @@ unifierVectorSpectralAuthorityStillNotPromoted :
   Fleet.VectorSpectralAuthorityPromotion → ⊥
 unifierVectorSpectralAuthorityStillNotPromoted =
   Unifier.unifierFleetVectorSpectralAuthorityPromotionImpossible
+
+
+toeNumericABIStillNotPromoted :
+  Fleet.SpectralNumericABIPromotion → ⊥
+toeNumericABIStillNotPromoted =
+  TOE.toeFleetSpectralNumericABIPromotionImpossible
+
+
+toeResidualFieldStillNotPromoted :
+  Fleet.ResidualFieldPromotion → ⊥
+toeResidualFieldStillNotPromoted =
+  TOE.toeFleetResidualFieldPromotionImpossible
+
+------------------------------------------------------------------------
+-- Fleet R5 ordinal max-cut regression.
+------------------------------------------------------------------------
+
+fleetFormalGapOrdinalCountIsExactly58 :
+  Fleet.fleetFormalGapOrdinalCount ≡ 58
+fleetFormalGapOrdinalCountIsExactly58 =
+  Fleet.fleetFormalGapOrdinalCountIs58
+
+fleetDischargedOrdinalCountIsExactly584 :
+  Fleet.fleetDischargedOrdinalCount ≡ 584
+fleetDischargedOrdinalCountIsExactly584 =
+  Fleet.fleetDischargedOrdinalCountIs584
+
+fleetContradictionOrdinalCountIsExactly44 :
+  Fleet.fleetContradictionOrdinalCount ≡ 44
+fleetContradictionOrdinalCountIsExactly44 =
+  Fleet.fleetContradictionOrdinalCountIs44
+
+fleetOrdinalDoesNotClaimPersistedRowIdentity :
+  Fleet.fleetOrdinalCarriesPersistedRowIdentity ≡ false
+fleetOrdinalDoesNotClaimPersistedRowIdentity =
+  Fleet.fleetOrdinalCarriesPersistedRowIdentityIsFalse
+
+toeFleetOrdinalCutMatchesOwner :
+  TOE.toeFleetR5OrdinalCutReceipt ≡ Fleet.canonicalFleetR5OrdinalCutReceipt
+toeFleetOrdinalCutMatchesOwner = refl
+
+unifierFleetOrdinalCutMatchesOwner :
+  Unifier.unifierFleetR5OrdinalCutReceipt ≡ Fleet.canonicalFleetR5OrdinalCutReceipt
+unifierFleetOrdinalCutMatchesOwner = refl
+
+toeSharedCardinalityStillDoesNotCreateIdentity :
+  Fleet.FleetSharedCardinalityCreatesIdentity → ⊥
+toeSharedCardinalityStillDoesNotCreateIdentity =
+  TOE.toeFleetSharedCardinalityDoesNotCreateIdentity
+
+unifierSharedCardinalityStillDoesNotCreateIdentity :
+  Fleet.FleetSharedCardinalityCreatesIdentity → ⊥
+unifierSharedCardinalityStillDoesNotCreateIdentity =
+  Unifier.unifierFleetSharedCardinalityDoesNotCreateIdentity

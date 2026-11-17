@@ -149,28 +149,43 @@ historicalGate4CountSelectedAsFleetTargetIsFalse :
 historicalGate4CountSelectedAsFleetTargetIsFalse = refl
 
 fleetEigenPriorityDoesNotCreateProof :
-  Fleet.eigenvalueMagnitudeCreatesProofAuthority fleetFormalGapTargetReceipt
-  ≡ false
+  Fleet.eigenvalueMagnitudeCreatesProofAuthority fleetFormalGapTargetReceipt ≡ false
 fleetEigenPriorityDoesNotCreateProof =
   Fleet.fleetEigenPriorityPromotionImpossible
 
 fleetExternalCountDoesNotCreateFormalDischarge :
-  Fleet.externalCountCreatesFormalProof fleetFormalGapTargetReceipt
-  ≡ false
+  Fleet.externalCountCreatesFormalProof fleetFormalGapTargetReceipt ≡ false
 fleetExternalCountDoesNotCreateFormalDischarge =
   Fleet.fleetExternalCountPromotionImpossible
 
 fleetDischargedFibresStayOutOfTarget :
-  Fleet.dischargedFibresRemainDischarged fleetFormalGapTargetReceipt
-  ≡ true
+  Fleet.dischargedFibresRemainDischarged fleetFormalGapTargetReceipt ≡ true
 fleetDischargedFibresStayOutOfTarget =
   Fleet.fleetDischargedFibresRemainOutOfTarget
 
 fleetContradictionGapsStaySeparate :
-  Fleet.contradictionGapsRemainSeparate fleetFormalGapTargetReceipt
-  ≡ true
+  Fleet.contradictionGapsRemainSeparate fleetFormalGapTargetReceipt ≡ true
 fleetContradictionGapsStaySeparate =
   Fleet.fleetContradictionGapsRemainSeparate
+
+
+Fleet58EqualsYMGate4SameObject : Set
+Fleet58EqualsYMGate4SameObject =
+  IdentityFirewall.SharedCardinalityCreatesIdentity
+
+fleet58CardinalityDoesNotProveYMGate4Identity :
+  Fleet58EqualsYMGate4SameObject → ⊥
+fleet58CardinalityDoesNotProveYMGate4Identity =
+  IdentityFirewall.sharedCardinalityDoesNotCreateIdentity
+
+Fleet58Gate458SameIdentityFromCount : Set
+Fleet58Gate458SameIdentityFromCount =
+  Fleet58EqualsYMGate4SameObject
+
+fleet58AndGate458CardinalityDoesNotCreateSameGapIdentity :
+  Fleet58Gate458SameIdentityFromCount → ⊥
+fleet58AndGate458CardinalityDoesNotCreateSameGapIdentity =
+  fleet58CardinalityDoesNotProveYMGate4Identity
 
 ------------------------------------------------------------------------
 -- Existing hyperfabric / 369 / p-adic / wave exact surfaces.

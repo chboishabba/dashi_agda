@@ -2,6 +2,7 @@
 module DASHI.Unified.R559IbrahimFleetHyperfabricTOEValidation where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Bool using (false; true)
 open import Data.Empty using (⊥)
 
 import DASHI.EverythingTOESymmetryResolved369 as TOE
@@ -78,26 +79,49 @@ unifierStreamLossStillExact :
 unifierStreamLossStillExact =
   Unifier.unifierTwoDigitStreamCannotRecoverThird
 
-fleetEigenPriorityStillHasNoProofAuthority :
+fleetEigenPriorityStillDoesNotCreateProof :
   Fleet.eigenvalueMagnitudeCreatesProofAuthority
     Owner.fleetFormalGapTargetReceipt ≡ false
-fleetEigenPriorityStillHasNoProofAuthority =
+fleetEigenPriorityStillDoesNotCreateProof =
   Owner.fleetEigenPriorityDoesNotCreateProof
 
 fleetCountStillDoesNotCreateFormalDischarge :
   Fleet.externalCountCreatesFormalProof
-    Fleet.canonicalFleetFormalGapTargetReceipt
-  ≡ false
+    Owner.fleetFormalGapTargetReceipt ≡ false
 fleetCountStillDoesNotCreateFormalDischarge =
   Owner.fleetExternalCountDoesNotCreateFormalDischarge
 
 fleetDischargedFibresStillCannotBeRetargeted :
   Fleet.dischargedFibresRemainDischarged
-    Fleet.canonicalFleetFormalGapTargetReceipt
-  ≡ true
+    Owner.fleetFormalGapTargetReceipt ≡ true
 fleetDischargedFibresStillCannotBeRetargeted =
   Owner.fleetDischargedFibresStayOutOfTarget
 
+fleetContradictionGapsStillStaySeparate :
+  Fleet.contradictionGapsRemainSeparate
+    Owner.fleetFormalGapTargetReceipt ≡ true
+fleetContradictionGapsStillStaySeparate =
+  Owner.fleetContradictionGapsStaySeparate
+
+toeYMGate4CountIs58 :
+  TOE.toeYMGate4FormalGapsAre58
+  ≡ Owner.ymGate4FormalGapsAre58
+toeYMGate4CountIs58 = refl
+
+unifierYMGate4CountIs58 :
+  Unifier.unifierYMGate4FormalGapsAre58
+  ≡ Owner.ymGate4FormalGapsAre58
+unifierYMGate4CountIs58 = refl
+
+toeFleet58DoesNotIdentifyYMGate4 :
+  Owner.Fleet58EqualsYMGate4SameObject → ⊥
+toeFleet58DoesNotIdentifyYMGate4 =
+  TOE.toeFleet58DoesNotIdentifyYMGate4
+
+unifierFleet58DoesNotIdentifyYMGate4 :
+  Owner.Fleet58EqualsYMGate4SameObject → ⊥
+unifierFleet58DoesNotIdentifyYMGate4 =
+  Unifier.unifierFleet58DoesNotIdentifyYMGate4
 
 ------------------------------------------------------------------------
 -- Live frontier, target split, and canonical continuum no-go validation.

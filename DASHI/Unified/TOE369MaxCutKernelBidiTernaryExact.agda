@@ -1,6 +1,10 @@
 module DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact where
 
-open import Agda.Builtin.Bool using (false)
+import DASHI.ComputerScience.TriadicScalarCompactCodecReferenceExact as CodecRef
+import DASHI.ComputerScience.TriadicFin27Byte256ABIExact as ABI
+import DASHI.ComputerScience.TriadicU8RuntimeOracleCrossRepoExact as HostU8
+import DASHI.ComputerScience.TriadicCompiledScalarU8RuntimeExact as CompiledU8
+open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
@@ -209,3 +213,76 @@ toePermutationNoGoDoesNotCreateLinearAction :
   Ibrahim.NonPermutationNoGoCreatesLinearAction → ⊥
 toePermutationNoGoDoesNotCreateLinearAction =
   Ibrahim.noGoDoesNotCreateLinearAction
+
+TernaryEncodedState : Set
+TernaryEncodedState = CodecRef.Encoded3
+
+TernaryState27 : Set
+TernaryState27 = ABI.State27
+
+toe27StateCode : TernaryEncodedState → TernaryState27
+toe27StateCode = ABI.stateCode
+
+toe27StateDecode : TernaryState27 → TernaryEncodedState
+toe27StateDecode = ABI.stateDecode
+
+toe27StateDecodeStateCode :
+  (e : TernaryEncodedState) →
+  toe27StateDecode (toe27StateCode e) ≡ e
+toe27StateDecodeStateCode = ABI.stateDecode-stateCode
+
+toe27StateCodeStateDecode :
+  (i : TernaryState27) →
+  toe27StateCode (toe27StateDecode i) ≡ i
+toe27StateCodeStateDecode = ABI.stateCode-stateDecode
+
+------------------------------------------------------------------------
+-- Ternary-27 byte ABI / compiled host boundary.
+--
+-- Reuse the existing ABI and runtime owners. The finite codec and compiled
+-- host byte are paid. Rust, CUDA, ROCm, device equivalence, and Agda-kernel
+-- promotion remain unpaid. This is the normalized CFFI/kernel-BIDI boundary.
+------------------------------------------------------------------------
+
+toe27FiniteStateABIExact :
+  ABI.finite27StateIndexPaid ABI.canonicalTriadicByteABIBoundary ≡ true
+toe27FiniteStateABIExact = refl
+
+toe27ByteCarrierABIExact :
+  ABI.byteSizedFiniteCarrierPaid ABI.canonicalTriadicByteABIBoundary ≡ true
+toe27ByteCarrierABIExact = refl
+
+toe27CompiledHostU8Exact :
+  CompiledU8.compiledHostU8Oracle CompiledU8.currentRuntimeRoadmapAdvance ≡ true
+toe27CompiledHostU8Exact = refl
+
+toe27RustBindingStillUnpaid :
+  ABI.rustU8BindingPaid ABI.canonicalTriadicByteABIBoundary ≡ false
+toe27RustBindingStillUnpaid = refl
+
+toe27CUDABindingStillUnpaid :
+  ABI.cudaUint8BindingPaid ABI.canonicalTriadicByteABIBoundary ≡ false
+toe27CUDABindingStillUnpaid = refl
+
+toe27ROCmBindingStillUnpaid :
+  ABI.rocmUint8BindingPaid ABI.canonicalTriadicByteABIBoundary ≡ false
+toe27ROCmBindingStillUnpaid = refl
+
+toe27HostByteDoesNotCreateDeviceByte :
+  HostU8.HostByteImpliesDeviceByte → ⊥
+toe27HostByteDoesNotCreateDeviceByte =
+  HostU8.hostByteDoesNotCreateDeviceByte
+
+toe27RuntimeSourceDoesNotCreateKernelCertification :
+  HostU8.RuntimeSourceImpliesKernelCertification → ⊥
+toe27RuntimeSourceDoesNotCreateKernelCertification =
+  HostU8.runtimeSourceDoesNotCreateKernelCertification
+
+toe27CompilerSuccessDoesNotCreateAgdaKernelSuccess :
+  CompiledU8.CompilerSuccessImpliesAgdaKernelSuccess → ⊥
+toe27CompilerSuccessDoesNotCreateAgdaKernelSuccess =
+  CompiledU8.compilerSuccessDoesNotCreateKernelSuccess
+
+------------------------------------------------------------------------
+-- Ibrahim non-promotion partitions.
+------------------------------------------------------------------------

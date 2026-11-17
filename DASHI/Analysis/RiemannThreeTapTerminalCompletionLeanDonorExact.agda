@@ -304,11 +304,11 @@ currentA1CarrierSummationStillOpen = Current.a1CarrierIsStillOpen
 
 currentA1UniformCurvatureStillOpen :
   Current.a1UniformCurvaturePaid Current.currentThreeTapCurrentLeanFrontier ≡ false
-currentA1UniformCurvatureStillOpen = Current.a1UniformCurvatureIsStillOpen
+currentA1UniformCurvatureStillOpen = Current.a1CurvatureStillOpen
 
 currentA1CompensationStillOpen :
   Current.a1CompensationPaid Current.currentThreeTapCurrentLeanFrontier ≡ false
-currentA1CompensationStillOpen = Current.a1CompensationIsStillOpen
+currentA1CompensationStillOpen = Current.a1CompensationStillOpen
 
 currentA2StrictScalarStillOpen :
   Current.a2StrictScalarPaid Current.currentThreeTapCurrentLeanFrontier ≡ false
