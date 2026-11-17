@@ -1,0 +1,69 @@
+module DASHI.Physics.Gravity.KSW668F8SameObjectWeylAuthorityBoundary where
+
+------------------------------------------------------------------------
+-- Max-cut XXIX: original a=t AdS5 same-object G1--G6 acceptance seam.
+-- This is an uninstantiated authority RECORD, not a theorem claiming
+-- that witnesses exist. Its required curvature type is reused, not rebuilt.
+--
+-- Existing original model:
+--  DASHI.Physics.Gravity.KSW668AdS5IsraelOriginalRationalSliceExact
+--  DASHI.Physics.Gravity.KSW668AdS5TensorPrepotentialCommutationExact
+--  DASHI.Physics.Gravity.KSW668AdS5MovingNormalFiniteSBPTelescopeExact
+-- Existing generic curvature convergence:
+--  DASHI.Physics.Closure.ContinuumCurvatureSourceSpinTwo
+-- No promotion from unrelated 369, Monster, Weyl RESCALING, or ESD.
+------------------------------------------------------------------------
+
+import DASHI.Physics.Closure.ContinuumCurvatureSourceSpinTwo as Curvature
+import DASHI.Physics.Gravity.KSW668F8OriginalAdS5EmbeddingSliceExact as Slice
+import DASHI.Physics.Gravity.KSW668F8WeakIsraelSATSliceExact as Wall
+import DASHI.Physics.Gravity.KSW668F8SSPRK3FullStabilityPrerequisiteExact as RK
+import DASHI.Physics.Gravity.KSW668F8DualElectricWeylReadoutAlgebraExact as Weyl
+
+record OriginalF8SameObjectPhysicalAuthority : Set₁ where
+  field
+    -- G1: the ORIGINAL five-dimensional bulk, not the generic flat
+    -- Riemann zero-table staging model.
+    curvatureApproximation :
+      Curvature.DiscreteCurvatureApproximation
+
+    originalPoincareBulkToNonflatCurvature : Set
+    originalPoincareBulkToNonflatCurvatureProof :
+      originalPoincareBulkToNonflatCurvature
+
+    perturbationToLinearisedElectricWeyl : Set
+    perturbationToLinearisedElectricWeylProof :
+      perturbationToLinearisedElectricWeyl
+
+    braneTTGaugeAndReadoutIdentification : Set
+    braneTTGaugeAndReadoutIdentificationProof :
+      braneTTGaugeAndReadoutIdentification
+
+    -- G2: joint P/M/U SAT and same original Israel source.
+    jointMovingIsraelSATCompatible : Set
+    jointMovingIsraelSATCompatibleProof :
+      jointMovingIsraelSATCompatible
+
+    -- G3: fully discrete SSPRK3 stable under a stated uniform CFL.
+    fullMovingRadialNormalSSPRK3Stable : Set
+    fullMovingRadialNormalSSPRK3StableProof :
+      fullMovingRadialNormalSSPRK3Stable
+
+    -- G4: sufficiently regular original-source-to-observer bounds.
+    highSobolevBothWeylTrace : Set
+    highSobolevBothWeylTraceProof :
+      highSobolevBothWeylTrace
+
+    -- G5: coupled radial/normal/time and outside-cone convergence.
+    independentThreeAxisWeylConvergence : Set
+    independentThreeAxisWeylConvergenceProof :
+      independentThreeAxisWeylConvergence
+
+    -- G6: original FIO and same physical emitter/detector witness.
+    originalRetardedFIOAndMatterDetector : Set
+    originalRetardedFIOAndMatterDetectorProof :
+      originalRetardedFIOAndMatterDetector
+
+-- Existing concrete finite rational lemmas (Slice/Wall/RK/Weyl) are
+-- imported as separate established local precursors. NO inhabitant of
+-- OriginalF8SameObjectPhysicalAuthority is constructed here.
