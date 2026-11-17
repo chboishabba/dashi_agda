@@ -16,6 +16,13 @@ open import Data.List.Base using (List; _∷_; [])
 open import Data.Empty using (⊥)
 import DASHI.Unified.ArithmeticMoonshine as ArithmeticMoonshine
 import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
+import DASHI.Unified.BalabanRGTOEMaxCutValidation
+import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Validation
+import DASHI.Unified.BalabanIbrahimParetoSnowballTOEValidation
+import DASHI.Unified.FleetFormalGapTargetTOEValidation
+import DASHI.Unified.TOE369MaxCutKernelBidiTernaryValidation
+import DASHI.Unified.SingularBasinCoarseRGTOEValidation
+import DASHI.Unified.YMGoal1R559IbrahimTOEValidation
 import DASHI.Unified.BrainFMRI as BrainFMRI
 import DASHI.Reasoning.TrialecticBraidedTwoEyedCoordinationExact as BraidedTransferTOE
 import DASHI.Reasoning.TrialecticThreeStrandBraidHistoryExact as BraidedHistoryTOE
@@ -37,9 +44,6 @@ import DASHI.Unified.PNFDistilledNonPromotionTOEValidation
 import DASHI.Unified.SCALEEvidenceReviewTOEConvergenceExact as SCALEReview
 import DASHI.Unified.SCALEEvidenceReviewTOEConvergenceValidation
 import DASHI.Unified.Physics as Physics
-import DASHI.Unified.TOE369CoarseFineIntertwinerMaxCutExact as TOE369MaxCut
-import DASHI.Unified.TOE369CoarseFineIntertwinerMaxCutValidation as TOE369MaxCutValidation
-import DASHI.Unified.TOE369RootUnifierConvergenceValidation as TOE369RootUnifierValidation
 import DASHI.Physics.Foundations.Round5CompleteBoundary as Round5
 
 ------------------------------------------------------------------------
@@ -417,224 +421,9 @@ governedQualificationDoesNotAutomaticallyProveForensicCompliance :
 governedQualificationDoesNotAutomaticallyProveForensicCompliance =
   LegalGovernance.toeQualificationDoesNotAutomaticallyProveForensicCompliance
 
-------------------------------------------------------------------------
--- Governed legal workflow / source-genealogy and semantic handoffs.
-------------------------------------------------------------------------
-
-import DASHI.Unified.GovernedLegalWorkflowSourceGenealogyTOEExact as LegalSourceGenealogy
-import DASHI.Unified.GovernedLegalWorkflowSourceGenealogyTOERegression
-import DASHI.Unified.GovernedLegalWorkflowSourceSemanticTOEExact as LegalSourceSemantic
-import DASHI.Unified.GovernedLegalWorkflowSourceSemanticTOERegression
-
-governedLegalWorkflowSourceGenealogyHandoff :
-  LegalSourceGenealogy.GovernedLegalWorkflowSourceGenealogyHandoff
-governedLegalWorkflowSourceGenealogyHandoff =
-  LegalSourceGenealogy.canonicalGovernedLegalWorkflowSourceGenealogyHandoff
-
-governedLegalPerceivedIndependenceDoesNotCreateProvenanceIndependence =
-  LegalSourceGenealogy.toePerceivedIndependenceDoesNotCreateLegalProvenanceIndependence
-governedLegalRepetitionDoesNotCreateIndependentEvidence =
-  LegalSourceGenealogy.toeRepetitionDoesNotCreateIndependentLegalEvidence
-governedLegalCommonSourceDoesNotEraseEvidence =
-  LegalSourceGenealogy.toeCommonSourceDependenceDoesNotEraseLegalEvidence
-governedSourceMultiplicityDoesNotAdmitTruth =
-  LegalSourceGenealogy.toeExternalSourceMultiplicityDoesNotAdmitTruth
-governedGenealogyDoesNotPromoteLegalAuthorityTruth =
-  LegalSourceGenealogy.toeLegalAuthorityStillDoesNotCreateTruthAfterGenealogy
-governedReviewedGenealogyDoesNotPayApplicability =
-  LegalSourceGenealogy.toeReviewedGenealogyDoesNotPayApplicability
-governedGenealogyAdmissionDoesNotBecomeLegalSourceAuthority =
-  LegalSourceGenealogy.toeGenealogyAdmissionDoesNotBecomeLegalSourceAuthority
-governedGenealogyCandidateSourceDoesNotCreateLegalAuthority =
-  LegalSourceGenealogy.toeGenealogyCandidateSourceDoesNotCreateLegalAuthority
-governedGenealogySameLegalSystemDoesNotCreateLegalAuthority =
-  LegalSourceGenealogy.toeGenealogySameLegalSystemDoesNotCreateLegalAuthority
-governedGenealogyCurrentValidityDoesNotCreateApplicability =
-  LegalSourceGenealogy.toeGenealogyCurrentValidityDoesNotCreateApplicability
-governedGenealogyDocumentRoleDoesNotCreateLegalAuthority =
-  LegalSourceGenealogy.toeGenealogyDocumentRoleDoesNotCreateLegalAuthority
-
-governedLegalWorkflowSourceSemanticHandoff :
-  LegalSourceSemantic.GovernedLegalWorkflowSourceSemanticHandoff
-governedLegalWorkflowSourceSemanticHandoff =
-  LegalSourceSemantic.canonicalGovernedLegalWorkflowSourceSemanticHandoff
-
-
-
-governedNativeLegalFollowDoesNotCreateLegalAuthority :
-  LegalGovernance.NativeCliAutomaticallyLegalAuthority → ⊥
-governedNativeLegalFollowDoesNotCreateLegalAuthority =
-  LegalGovernance.toeNativeLegalFollowDoesNotCreateLegalAuthority
-
-governedProviderFailureDoesNotMakePropositionFalse :
-  LegalGovernance.ProviderFailureAutomaticallyPropositionFalse → ⊥
-governedProviderFailureDoesNotMakePropositionFalse =
-  LegalGovernance.toeProviderFailureDoesNotMakePropositionFalse
-
-governedExpertProductionPromotesAnyAuthorityIsFalse :
-  LegalGovernance.toeExpertProductionPromotesAnyAuthority ≡ false
-governedExpertProductionPromotesAnyAuthorityIsFalse =
-  LegalGovernance.toeExpertProductionPromotesAnyAuthorityIsFalse
-
 
 ------------------------------------------------------------------------
--- Direct legal execution and expert-evidence non-promotion aliases.
-------------------------------------------------------------------------
-
-governedSpacyDoesNotCreateLegalAuthority :
-  LegalGovernance.SpacyParserAutomaticallyLegalAuthority → ⊥
-governedSpacyDoesNotCreateLegalAuthority =
-  LegalGovernance.toeSpacyDoesNotCreateLegalAuthority
-
-governedSpacyDoesNotCreateLegalConstruction :
-  LegalGovernance.SpacyParserAutomaticallyLegalConstruction → ⊥
-governedSpacyDoesNotCreateLegalConstruction =
-  LegalGovernance.toeSpacyDoesNotCreateLegalConstruction
-
-governedLatestKnownSectionDoesNotBecomeHistoricalLaw :
-  LegalGovernance.SectionSliceAutomaticallyHistoricalLaw → ⊥
-governedLatestKnownSectionDoesNotBecomeHistoricalLaw =
-  LegalGovernance.toeLatestKnownSectionDoesNotBecomeHistoricalLaw
-
-governedPythonWrapperDoesNotOwnLegalSemantics :
-  LegalGovernance.PythonWrapperOwnsLegalSemantics → ⊥
-governedPythonWrapperDoesNotOwnLegalSemantics =
-  LegalGovernance.toePythonWrapperDoesNotOwnLegalSemantics
-
-governedJsonIsNotSemanticCommandAbi :
-  LegalGovernance.JsonArtifactIsSemanticCommandAbi → ⊥
-governedJsonIsNotSemanticCommandAbi =
-  LegalGovernance.toeJsonIsNotSemanticCommandAbi
-
-governedJsonReviewDoesNotCreateDecision :
-  LegalGovernance.JsonReviewFileAutomaticallyReviewerDecision → ⊥
-governedJsonReviewDoesNotCreateDecision =
-  LegalGovernance.toeJsonReviewDoesNotCreateDecision
-
-governedJsonReceiptDoesNotCreateTruth :
-  LegalGovernance.JsonReceiptAutomaticallyClaimTruth → ⊥
-governedJsonReceiptDoesNotCreateTruth =
-  LegalGovernance.toeJsonReceiptDoesNotCreateTruth
-
-governedCliSequenceDoesNotPayResidual :
-  LegalGovernance.CliSequenceAutomaticallyPaysOpenResidual → ⊥
-governedCliSequenceDoesNotPayResidual =
-  LegalGovernance.toeCliSequenceDoesNotPayResidual
-
-governedPinnedStreamDoesNotCreateLegalTruth :
-  LegalGovernance.PinnedOalcStreamingAutomaticallyLegalTruth → ⊥
-governedPinnedStreamDoesNotCreateLegalTruth =
-  LegalGovernance.toePinnedStreamDoesNotCreateLegalTruth
-
-governedReviewedHopJsonDoesNotBecomeCanonicalSemanticTransport :
-  LegalGovernance.ReviewedHopJsonBecomesCanonicalSemanticTransport → ⊥
-governedReviewedHopJsonDoesNotBecomeCanonicalSemanticTransport =
-  LegalGovernance.toeReviewedHopJsonDoesNotBecomeCanonicalSemanticTransport
-
-governedOalcHitDoesNotBecomeBindingAuthority :
-  LegalGovernance.OalcHitAutomaticallyBindingAuthority → ⊥
-governedOalcHitDoesNotBecomeBindingAuthority =
-  LegalGovernance.toeOalcHitDoesNotBecomeBindingAuthority
-
-governedOfficialCourtBytesDoNotBecomePropositionCorrespondence :
-  LegalGovernance.OfficialCourtBytesAutomaticallyPropositionCorrespondence → ⊥
-governedOfficialCourtBytesDoNotBecomePropositionCorrespondence =
-  LegalGovernance.toeOfficialCourtBytesDoNotBecomePropositionCorrespondence
-
-governedSameMncDoesNotCollapseSourceRevisions :
-  LegalGovernance.SameMncAutomaticallySameSourceRevision → ⊥
-governedSameMncDoesNotCollapseSourceRevisions =
-  LegalGovernance.toeSameMncDoesNotCollapseSourceRevisions
-
-governedSuccessfulOfficialFetchDoesNotBecomeProductionReady :
-  LegalGovernance.SuccessfulOfficialFetchAutomaticallyProductionReady → ⊥
-governedSuccessfulOfficialFetchDoesNotBecomeProductionReady =
-  LegalGovernance.toeSuccessfulOfficialFetchDoesNotBecomeProductionReady
-
-governedMultipleReportsDoNotAutomaticallyCreateIndependence :
-  LegalGovernance.MultipleReportsAutomaticallyIndependent → ⊥
-governedMultipleReportsDoNotAutomaticallyCreateIndependence =
-  LegalGovernance.toeMultipleReportsDoNotAutomaticallyCreateIndependence
-
-governedAgreementDoesNotAutomaticallyCreateIndependentCorroboration :
-  LegalGovernance.AgreementAutomaticallyIndependentCorroboration → ⊥
-governedAgreementDoesNotAutomaticallyCreateIndependentCorroboration =
-  LegalGovernance.toeAgreementDoesNotAutomaticallyCreateIndependentCorroboration
-
-governedDependenceDoesNotMeanNoEvidence :
-  LegalGovernance.DependenceMeansNoEvidence → ⊥
-governedDependenceDoesNotMeanNoEvidence =
-  LegalGovernance.toeDependenceDoesNotMeanNoEvidence
-
-governedExpertStatusDoesNotAutomaticallyCreateTruth :
-  LegalGovernance.ExpertStatusAutomaticallyTruth → ⊥
-governedExpertStatusDoesNotAutomaticallyCreateTruth =
-  LegalGovernance.toeExpertStatusDoesNotAutomaticallyCreateTruth
-
-governedReportAdmissionDoesNotRepairMissingInput :
-  LegalGovernance.ReportAdmissionRepairsMissingInput → ⊥
-governedReportAdmissionDoesNotRepairMissingInput =
-  LegalGovernance.toeReportAdmissionDoesNotRepairMissingInput
-
-governedCrossExaminationDoesNotAddUnobservedInput :
-  LegalGovernance.CrossExaminationAddsUnobservedInput → ⊥
-governedCrossExaminationDoesNotAddUnobservedInput =
-  LegalGovernance.toeCrossExaminationDoesNotAddUnobservedInput
-
-governedDisputedRiskDoesNotBecomeIrrelevant :
-  LegalGovernance.DisputedRiskIsIrrelevant → ⊥
-governedDisputedRiskDoesNotBecomeIrrelevant =
-  LegalGovernance.toeDisputedRiskDoesNotBecomeIrrelevant
-
-governedObserverDefectDoesNotProveOpinionFalse :
-  LegalGovernance.ObserverDefectMakesOpinionFalse → ⊥
-governedObserverDefectDoesNotProveOpinionFalse =
-  LegalGovernance.toeObserverDefectDoesNotProveOpinionFalse
-
-governedQualificationDoesNotAutomaticallyProveForensicCompliance :
-  LegalGovernance.QualificationAutomaticallyForensicCompliance → ⊥
-governedQualificationDoesNotAutomaticallyProveForensicCompliance =
-  LegalGovernance.toeQualificationDoesNotAutomaticallyProveForensicCompliance
-
-------------------------------------------------------------------------
--- Governed legal workflow / source-genealogy normalized facade.
-------------------------------------------------------------------------
-
-import DASHI.Unified.GovernedLegalWorkflowSourceGenealogyTOEExact as LegalSourceGenealogy
-import DASHI.Unified.GovernedLegalWorkflowSourceGenealogyTOERegression
-
-governedLegalWorkflowSourceGenealogyHandoff :
-  LegalSourceGenealogy.GovernedLegalWorkflowSourceGenealogyHandoff
-governedLegalWorkflowSourceGenealogyHandoff =
-  LegalSourceGenealogy.canonicalGovernedLegalWorkflowSourceGenealogyHandoff
-
-governedLegalPerceivedIndependenceDoesNotCreateProvenanceIndependence =
-  LegalSourceGenealogy.toePerceivedIndependenceDoesNotCreateLegalProvenanceIndependence
-
-governedLegalRepetitionDoesNotCreateIndependentEvidence =
-  LegalSourceGenealogy.toeRepetitionDoesNotCreateIndependentLegalEvidence
-
-governedLegalCommonSourceDoesNotEraseEvidence =
-  LegalSourceGenealogy.toeCommonSourceDependenceDoesNotEraseLegalEvidence
-
-governedSourceMultiplicityDoesNotAdmitTruth =
-  LegalSourceGenealogy.toeExternalSourceMultiplicityDoesNotAdmitTruth
-
-governedGenealogyDoesNotPromoteLegalAuthorityTruth =
-  LegalSourceGenealogy.toeLegalAuthorityStillDoesNotCreateTruthAfterGenealogy
-
-governedReviewedGenealogyDoesNotPayApplicability =
-  LegalSourceGenealogy.toeReviewedGenealogyDoesNotPayApplicability
-
-governedGenealogyAdmissionDoesNotBecomeLegalSourceAuthority =
-  LegalSourceGenealogy.toeGenealogyAdmissionDoesNotBecomeLegalSourceAuthority
-
-
-unified369Ternary27MonsterEmbeddingNotPromoted =
-  MaxCut369.toe27MonsterEmbeddingNotPromoted
-
-------------------------------------------------------------------------
--- Live Gate-4 frontier and Fleet target selection.
+-- Live Gate-4 frontier and fleet-target selection.
 ------------------------------------------------------------------------
 
 unifiedCurrentGate4FrontierLedgerLevel : ProofLevel
@@ -658,3 +447,16 @@ unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
 unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
   FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
 
+------------------------------------------------------------------------
+-- Typed continuum no-go is reused from BalabanRGTOERegression.
+------------------------------------------------------------------------
+
+governedSpacyDoesNotCreateLegalConstruction :
+  LegalGovernance.SpacyParserAutomaticallyLegalConstruction → ⊥
+governedSpacyDoesNotCreateLegalConstruction =
+  LegalGovernance.toeSpacyDoesNotCreateLegalConstruction
+
+unifiedDepthContinuumLimitPromotionImpossible :
+  BalabanRGTOE.DepthContinuumLimitPromotion → ⊥
+unifiedDepthContinuumLimitPromotionImpossible =
+  BalabanRGTOE.depthContinuumLimitPromotionImpossible

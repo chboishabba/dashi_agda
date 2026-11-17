@@ -66,7 +66,6 @@ import DASHI.Unified.BalabanRGTOERegression as Balaban
 import DASHI.Biology.EqualCardinalityStructureBoundaryExact as EqualCardinality
 import DASHI.Physics.YangMills.BalabanClayGate4CurrentFrontierReceipt as Gate4Current
 import DASHI.Physics.YangMills.CompactLieProofLevel as Proof
-import DASHI.Core.RelationalTrialecticDisambiguationExact as IdentityFirewall
 
 ------------------------------------------------------------------------
 -- Exact existing owners.
@@ -105,11 +104,6 @@ fleetContradictionGapsAre44 = refl
 
 fleetFormalGapsAre58 : fleetFormalGaps ≡ 58
 fleetFormalGapsAre58 = refl
-
-
-------------------------------------------------------------------------
--- Current Gate-4 frontier and Fleet target-selection boundary.
-------------------------------------------------------------------------
 
 historicalGate4GapCount : Nat
 historicalGate4GapCount =
@@ -154,52 +148,6 @@ historicalGate4CountSelectedAsFleetTargetIsFalse :
   historicalGate4CountSelectedAsFleetTarget ≡ false
 historicalGate4CountSelectedAsFleetTargetIsFalse = refl
 
-BalabanContinuumPromotion : Set
-BalabanContinuumPromotion =
-  Balaban.BalabanContinuumLimitPromotion
-
-DepthContinuumPromotion : Set
-DepthContinuumPromotion =
-  Balaban.DepthContinuumLimitPromotion
-
-toeBalabanContinuumPromotionImpossible :
-  BalabanContinuumPromotion → ⊥
-toeBalabanContinuumPromotionImpossible =
-  Balaban.balabanContinuumLimitPromotionImpossible
-
-toeDepthContinuumPromotionImpossible :
-  DepthContinuumPromotion → ⊥
-toeDepthContinuumPromotionImpossible =
-  Balaban.depthContinuumLimitPromotionImpossible
-
-currentGate4FrontierLedgerLevel : Proof.ProofLevel
-currentGate4FrontierLedgerLevel =
-  Gate4Current.currentFrontierLedgerTypecheckLevel
-
-currentGate4ClusteringToTransferGapLevel : Proof.ProofLevel
-currentGate4ClusteringToTransferGapLevel =
-  Gate4Current.clusteringToTransferGapReductionTypecheckLevel
-
-currentGate4FrontierDoesNotSelfPromote :
-  Proof.promotable currentGate4FrontierLedgerLevel ≡ false
-currentGate4FrontierDoesNotSelfPromote =
-  Proof.conditionalDoesNotSelfPromote
-
-
-ymGate4FormalGaps : Nat
-ymGate4FormalGaps =
-  YM.gate4UnresolvedObligationCount
-
-ymGate4FormalGapsAre58 : ymGate4FormalGaps ≡ 58
-ymGate4FormalGapsAre58 =
-  YM.gate4UnresolvedObligationCountIs58
-
-ymGate4PaidReductionLevel =
-  YM.gate4PaidReductionLedgerLevel
-
-ymGate4InhabitantsLevel =
-  YM.gate4CutsetInhabitantsLevel
-
 fleetEigenPriorityDoesNotCreateProof :
   Fleet.eigenvalueMagnitudeCreatesProofAuthority fleetFormalGapTargetReceipt
   ≡ false
@@ -223,25 +171,6 @@ fleetContradictionGapsStaySeparate :
   ≡ true
 fleetContradictionGapsStaySeparate =
   Fleet.fleetContradictionGapsRemainSeparate
-
-
-Fleet58EqualsYMGate4SameObject : Set
-Fleet58EqualsYMGate4SameObject =
-  IdentityFirewall.SharedCardinalityCreatesIdentity
-
-fleet58CardinalityDoesNotProveYMGate4Identity :
-  Fleet58EqualsYMGate4SameObject → ⊥
-fleet58CardinalityDoesNotProveYMGate4Identity =
-  IdentityFirewall.sharedCardinalityDoesNotCreateIdentity
-
-Fleet58Gate458SameIdentityFromCount : Set
-Fleet58Gate458SameIdentityFromCount =
-  Fleet58EqualsYMGate4SameObject
-
-fleet58AndGate458CardinalityDoesNotCreateSameGapIdentity :
-  Fleet58Gate458SameIdentityFromCount → ⊥
-fleet58AndGate458CardinalityDoesNotCreateSameGapIdentity =
-  fleet58CardinalityDoesNotProveYMGate4Identity
 
 ------------------------------------------------------------------------
 -- Existing hyperfabric / 369 / p-adic / wave exact surfaces.
@@ -363,8 +292,10 @@ record R559IbrahimFleetHyperfabricTOEReceipt : Set₁ where
     equalCardinalitySelectsCanonicalMap : Bool
     equalCardinalitySelectsCanonicalMapIsFalse :
       equalCardinalitySelectsCanonicalMap ≡ false
-    balabanContinuumPromotionBlocked : BalabanContinuumPromotion → ⊥
-    depthContinuumPromotionBlocked : DepthContinuumPromotion → ⊥
+    balabanContinuumPromotionBlocked :
+      BalabanContinuumPromotion → ⊥
+    depthContinuumPromotionBlocked :
+      DepthContinuumPromotion → ⊥
     currentGate4Frontier : Proof.ProofLevel
     currentGate4ClusteringToTransferGap : Proof.ProofLevel
     currentGate4FrontierSelfPromotion :
@@ -400,15 +331,23 @@ canonicalR559IbrahimFleetHyperfabricTOEReceipt = record
   ; historicalGate4CountIs58 = historicalGate4GapCountIs58
   ; fleetTargetSelected = fleetFormalGapTargetSelected
   ; fleetTargetSelectedIsTrue = fleetFormalGapTargetSelectedIsTrue
-  ; historicalGate4SelectedAsFleetTarget = historicalGate4CountSelectedAsFleetTarget
-  ; historicalGate4SelectedAsFleetTargetIsFalse = historicalGate4CountSelectedAsFleetTargetIsFalse
-  ; equalCardinalitySelectsCanonicalMap = fleetGate4EqualCardinalitySelectsCanonicalMap
-  ; equalCardinalitySelectsCanonicalMapIsFalse = fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
-  ; balabanContinuumPromotionBlocked = toeBalabanContinuumPromotionImpossible
-  ; depthContinuumPromotionBlocked = toeDepthContinuumPromotionImpossible
+  ; historicalGate4SelectedAsFleetTarget =
+      historicalGate4CountSelectedAsFleetTarget
+  ; historicalGate4SelectedAsFleetTargetIsFalse =
+      historicalGate4CountSelectedAsFleetTargetIsFalse
+  ; equalCardinalitySelectsCanonicalMap =
+      fleetGate4EqualCardinalitySelectsCanonicalMap
+  ; equalCardinalitySelectsCanonicalMapIsFalse =
+      fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+  ; balabanContinuumPromotionBlocked =
+      toeBalabanContinuumPromotionImpossible
+  ; depthContinuumPromotionBlocked =
+      toeDepthContinuumPromotionImpossible
   ; currentGate4Frontier = currentGate4FrontierLedgerLevel
-  ; currentGate4ClusteringToTransferGap = currentGate4ClusteringToTransferGapLevel
-  ; currentGate4FrontierSelfPromotion = currentGate4FrontierDoesNotSelfPromote
+  ; currentGate4ClusteringToTransferGap =
+      currentGate4ClusteringToTransferGapLevel
+  ; currentGate4FrontierSelfPromotion =
+      currentGate4FrontierDoesNotSelfPromote
   ; scaleTransferBlocked = toeScaleTransferPromotionImpossible
   ; eigenPriorityNoProof = fleetEigenPriorityDoesNotCreateProof
   ; fleetCountDoesNotDischarge = fleetExternalCountDoesNotCreateFormalDischarge

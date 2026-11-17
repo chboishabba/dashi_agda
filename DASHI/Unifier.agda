@@ -20,7 +20,7 @@ import DASHI.Law.SensibLawDashiTradeComparativeAdapterExact as ForecastTrade
 open import Agda.Primitive using (Level; lzero; lsuc)
 open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Bool using (Bool)
 open import Data.Empty using (⊥)
 open import Data.Nat as Nat using (ℕ; _*_; _≤_; _<_; _⊔_; _∸_)
 open import Data.Integer using (ℤ)
@@ -457,9 +457,469 @@ DASHI-Unification-Theorem = DASHIUnificationAxiom
 -- They do not use the axiom-shaped interfaces above as proof authority.
 ------------------------------------------------------------------------
 
-toeForecastProbabilityIsNotWorldState :
-  ForecastKernel.ForecastVerificationKernelBoundary.probabilityIsWorldState
-    ForecastTOE.forecastKernelBoundary
+unifierYangMillsGoal1FiniteA1WilsonActionInvarianceLevel : ProofLevel
+unifierYangMillsGoal1FiniteA1WilsonActionInvarianceLevel =
+  YMGoal1TOE.goal1FiniteA1WilsonActionInvarianceLevel
+
+unifierYangMillsGoal1FiniteA1ProductHaarInvarianceLevel : ProofLevel
+unifierYangMillsGoal1FiniteA1ProductHaarInvarianceLevel =
+  YMGoal1TOE.goal1FiniteA1ProductHaarInvarianceLevel
+
+unifierYangMillsGoal1FiniteA1DensityInvariantCompilerLevel : ProofLevel
+unifierYangMillsGoal1FiniteA1DensityInvariantCompilerLevel =
+  YMGoal1TOE.goal1FiniteA1DensityInvariantCompilerLevel
+
+unifierYangMillsGoal1FiniteA2PeterWeylWilsonIdentificationLevel : ProofLevel
+unifierYangMillsGoal1FiniteA2PeterWeylWilsonIdentificationLevel =
+  YMGoal1TOE.goal1FiniteA2PeterWeylWilsonIdentificationLevel
+
+unifierYangMillsGoal1FiniteA2SquareCompilerLevel : ProofLevel
+unifierYangMillsGoal1FiniteA2SquareCompilerLevel =
+  YMGoal1TOE.goal1FiniteA2SquareCompilerLevel
+
+unifierYangMillsGoal1PreferredVariableDomainBSourceLevel : ProofLevel
+unifierYangMillsGoal1PreferredVariableDomainBSourceLevel =
+  YMGoal1TOE.goal1PreferredVariableDomainBSourceLevel
+
+unifierYangMillsGoal1R429RootedTraceEncodingLevel : ProofLevel
+unifierYangMillsGoal1R429RootedTraceEncodingLevel =
+  YMGoal1TOE.goal1R429RootedTraceEncodingLevel
+
+unifierYangMillsGoal1R429RootedTraceCountCompilerLevel : ProofLevel
+unifierYangMillsGoal1R429RootedTraceCountCompilerLevel =
+  YMGoal1TOE.goal1R429RootedTraceCountCompilerLevel
+
+unifierYangMillsGoal1R429SourceDecayReserveLevel : ProofLevel
+unifierYangMillsGoal1R429SourceDecayReserveLevel =
+  YMGoal1TOE.goal1R429SourceDecayReserveLevel
+
+unifierYangMillsGoal1R429EntropyBudgetCompilerLevel : ProofLevel
+unifierYangMillsGoal1R429EntropyBudgetCompilerLevel =
+  YMGoal1TOE.goal1R429EntropyBudgetCompilerLevel
+
+unifierYangMillsGoal1LegacyGlobalTreeMetricNotPreferred :
+  YMGoal1TOE.legacyGlobalTreeMetricPreferred ≡ false
+unifierYangMillsGoal1LegacyGlobalTreeMetricNotPreferred =
+  YMGoal1TOE.legacyGlobalTreeMetricPreferredIsFalse
+
+
+------------------------------------------------------------------------
+-- Reused A3/A4/A5 and C3/C4 canonical owner exports.
+------------------------------------------------------------------------
+
+unifierYangMillsGoal1A3UniformCompactContainmentLevel : ProofLevel
+unifierYangMillsGoal1A3UniformCompactContainmentLevel =
+  YMGoal1TOE.goal1A3UniformCompactContainmentLevel
+
+unifierYangMillsGoal1A3ExtractedClusterCylinderAgreementLevel : ProofLevel
+unifierYangMillsGoal1A3ExtractedClusterCylinderAgreementLevel =
+  YMGoal1TOE.goal1A3ExtractedClusterCylinderAgreementLevel
+
+unifierYangMillsGoal1A3TightnessSubsequenceCompilerLevel : ProofLevel
+unifierYangMillsGoal1A3TightnessSubsequenceCompilerLevel =
+  YMGoal1TOE.goal1A3TightnessSubsequenceCompilerLevel
+
+unifierYangMillsGoal1A4FiniteRegularityLevel : ProofLevel
+unifierYangMillsGoal1A4FiniteRegularityLevel =
+  YMGoal1TOE.goal1A4FiniteRegularityLevel
+
+unifierYangMillsGoal1A5FiniteGrowthControlLevel : ProofLevel
+unifierYangMillsGoal1A5FiniteGrowthControlLevel =
+  YMGoal1TOE.goal1A5FiniteGrowthControlLevel
+
+unifierYangMillsGoal1A45OSLimitCompilerLevel : ProofLevel
+unifierYangMillsGoal1A45OSLimitCompilerLevel =
+  YMGoal1TOE.goal1A45OSLimitCompilerLevel
+
+unifierYangMillsGoal1C3OneStepAFIdentificationLevel : ProofLevel
+unifierYangMillsGoal1C3OneStepAFIdentificationLevel =
+  YMGoal1TOE.goal1C3OneStepAFIdentificationLevel
+
+unifierYangMillsGoal1C3AllDepthCoefficientCompilerLevel : ProofLevel
+unifierYangMillsGoal1C3AllDepthCoefficientCompilerLevel =
+  YMGoal1TOE.goal1C3AllDepthCoefficientCompilerLevel
+
+unifierYangMillsGoal1C4DensityAnchoredStressInstantiationLevel : ProofLevel
+unifierYangMillsGoal1C4DensityAnchoredStressInstantiationLevel =
+  YMGoal1TOE.goal1C4DensityAnchoredStressInstantiationLevel
+
+unifierYangMillsGoal1C4SectorRecoveryCompilerLevel : ProofLevel
+unifierYangMillsGoal1C4SectorRecoveryCompilerLevel =
+  YMGoal1TOE.goal1C4SectorRecoveryCompilerLevel
+
+unifierYangMillsGoal1C4LiteralSectorRecoveryLevel : ProofLevel
+unifierYangMillsGoal1C4LiteralSectorRecoveryLevel =
+  YMGoal1TOE.goal1C4LiteralSectorRecoveryLevel
+
+unifierYangMillsGoal1C4CommonMetricCompilerLevel : ProofLevel
+unifierYangMillsGoal1C4CommonMetricCompilerLevel =
+  YMGoal1TOE.goal1C4CommonMetricCompilerLevel
+
+
+unifierYangMillsGoal1ParetoZKPFrame : YMMaxCut.Goal1ParetoTOEZKPFrame
+unifierYangMillsGoal1ParetoZKPFrame = YMMaxCut.canonicalGoal1ParetoTOEZKPFrame
+
+------------------------------------------------------------------------
+-- Direct RG non-promotion and Pareto/snowball/Ibrahim facade.
+------------------------------------------------------------------------
+
+unifierBalabanScaleTransferPromotionImpossible :
+  ParetoSnowballTOE.BalabanScaleTransferPromotion → ⊥
+unifierBalabanScaleTransferPromotionImpossible =
+  ParetoSnowballTOE.balabanScaleTransferPromotionImpossible
+
+unifierIbrahimRecognitionParetoBoundary =
+  ParetoSnowballTOE.ibrahimRecognitionParetoBoundary
+
+unifierIbrahimCharacterExecutionFrontier =
+  ParetoSnowballTOE.ibrahimCharacterExecutionFrontier
+
+unifierIbrahimPhaseResolutionFrontier =
+  ParetoSnowballTOE.ibrahimPhaseResolutionFrontier
+
+unifierIbrahimSchrodingerHZetaMaxCutBoundary =
+  ParetoSnowballTOE.ibrahimSchrodingerHZetaMaxCutBoundary
+
+unifierIbrahimHistoricalDiscriminatorBoundary =
+  ParetoSnowballTOE.ibrahimHistoricalDiscriminatorBoundary
+
+unifierBalabanIbrahimParetoSnowballZKPFrame =
+  ParetoSnowballTOE.canonicalTOEZKPFrame
+
+
+unifierIbrahimSearchPriorityDoesNotCreateProof :
+  ParetoSnowballTOE.SearchPriorityCreatesProof → ⊥
+unifierIbrahimSearchPriorityDoesNotCreateProof =
+  ParetoSnowballTOE.searchPriorityDoesNotCreateProof
+
+unifierIbrahimProducerSourceDoesNotCreateRunReceipt :
+  ParetoSnowballTOE.ProducerSourceCreatesRunReceipt → ⊥
+unifierIbrahimProducerSourceDoesNotCreateRunReceipt =
+  ParetoSnowballTOE.producerSourceDoesNotCreateRunReceipt
+
+unifierIbrahimDegree729DoesNotCreateMonsterHZetaRecognition :
+  ParetoSnowballTOE.Degree729CreatesMonsterHZetaRecognition → ⊥
+unifierIbrahimDegree729DoesNotCreateMonsterHZetaRecognition =
+  ParetoSnowballTOE.degree729DoesNotCreateMonsterHZetaRecognition
+
+unifierIbrahimPaperOracleDoesNotIdentifyHistoricalDump :
+  ParetoSnowballTOE.PaperOracleIdentifiesDump → ⊥
+unifierIbrahimPaperOracleDoesNotIdentifyHistoricalDump =
+  ParetoSnowballTOE.paperOracleDoesNotIdentifyHistoricalDump
+
+------------------------------------------------------------------------
+-- Joint non-promotion: two independent blocked proof routes.
+-- Do not infer either proof from a search score, a source alias, or
+-- the other's conditional result. Reuse both canonical owner proofs.
+------------------------------------------------------------------------
+
+unifierRGAndIbrahimJointPromotionImpossible :
+  ParetoSnowballTOE.BalabanScaleTransferPromotion →
+  ParetoSnowballTOE.SearchPriorityCreatesProof → ⊥
+unifierRGAndIbrahimJointPromotionImpossible rg sourcePriority =
+  unifierBalabanScaleTransferPromotionImpossible rg
+
+unifierRGAndIbrahimSearchPromotionImpossible :
+  ParetoSnowballTOE.SearchPriorityCreatesProof →
+  ParetoSnowballTOE.BalabanScaleTransferPromotion → ⊥
+unifierRGAndIbrahimSearchPromotionImpossible sourcePriority rg =
+  unifierIbrahimSearchPriorityDoesNotCreateProof sourcePriority
+
+
+------------------------------------------------------------------------
+-- Complete direct Balaban/Ibrahim Pareto-snowball exports.
+------------------------------------------------------------------------
+
+unifierBalabanScaleTransferFrontier :
+  ParetoSnowballTOE.BalabanScaleTransferFrontierReceipt
+unifierBalabanScaleTransferFrontier =
+  ParetoSnowballTOE.balabanScaleTransferFrontier
+
+unifierIbrahimRoutePreferenceDoesNotCreateExecutionReceipt :
+  ParetoSnowballTOE.RoutePreferenceCreatesExecutionReceipt → ⊥
+unifierIbrahimRoutePreferenceDoesNotCreateExecutionReceipt =
+  ParetoSnowballTOE.routePreferenceDoesNotCreateExecutionReceipt
+
+unifierIbrahimMergedLeanSourceDoesNotCreateKernelReceipt :
+  ParetoSnowballTOE.MergedLeanSourceCreatesKernelReceipt → ⊥
+unifierIbrahimMergedLeanSourceDoesNotCreateKernelReceipt =
+  ParetoSnowballTOE.mergedLeanSourceDoesNotCreateKernelReceipt
+
+unifierIbrahimOEISDoesNotCreateMultiplicityAction :
+  ParetoSnowballTOE.NinetyOEISEqualityCreatesMultiplicityAction → ⊥
+unifierIbrahimOEISDoesNotCreateMultiplicityAction =
+  ParetoSnowballTOE.oeisDoesNotCreateMultiplicityAction
+
+unifierIbrahimFiniteIrreducibilityDoesNotCreateMonsterHZetaRecognition :
+  ParetoSnowballTOE.FiniteIrreducibilityCreatesMonsterHZetaRecognition → ⊥
+unifierIbrahimFiniteIrreducibilityDoesNotCreateMonsterHZetaRecognition =
+  ParetoSnowballTOE.finiteIrreducibilityDoesNotCreateMonsterHZetaRecognition
+
+unifierIbrahimCurrentQidDoesNotIdentifyHistoricalTitle :
+  ParetoSnowballTOE.CurrentQidIdentifiesHistoricalTitle → ⊥
+unifierIbrahimCurrentQidDoesNotIdentifyHistoricalTitle =
+  ParetoSnowballTOE.currentQidDoesNotIdentifyHistoricalTitle
+
+
+------------------------------------------------------------------------
+-- 369 max-cut / kernel-BIDI / ternary-27 consumer facade.
+------------------------------------------------------------------------
+
+unifier369Ternary27RotationOrderThree =
+  MaxCut369.toe27RotationOrderThree
+
+unifier369Ternary27OriginFixed =
+  MaxCut369.toe27OriginFixed
+
+unifier369FullCubeRotationNotFree :
+  MaxCut369.FullCubeRotationFree → ⊥
+unifier369FullCubeRotationNotFree =
+  MaxCut369.toe27FullCubeRotationNotFree
+
+unifier369MonsterPhaseConjugationIntertwiner =
+  MaxCut369.toe27MonsterPhaseConjugationIntertwiner
+
+unifier369Ternary27PhaseReductionNotGlobalInversion =
+  MaxCut369.toe27PhaseReductionNotGlobalInversion
+
+unifier369Ternary27OrbitIndexingNotSemanticIdentity =
+  MaxCut369.toe27OrbitIndexingNotSemanticIdentity
+
+unifier369Ternary27ReductionNotMonster42SameObject =
+  MaxCut369.toe27ReductionNotMonster42SameObject
+
+unifier369FullGradeDimensionDoesNotCreateFaithfulness =
+  MaxCut369.toeFullGradeDimensionDoesNotCreateFaithfulness
+
+unifier369FullGradeSameCarrierDoesNotCreateActionAgreement =
+  MaxCut369.toeFullGradeSameCarrierDoesNotCreateActionAgreement
+
+unifier369FullGradeCharacterDoesNotCreateActionAgreement =
+  MaxCut369.toeFullGradeCharacterDoesNotCreateActionAgreement
+
+unifier369ProjectedDimensionDoesNotCreateAction =
+  MaxCut369.toeProjectedDimensionDoesNotCreateAction
+
+unifier369CoordinateRetractionDoesNotCreateProjectedAction =
+  MaxCut369.toeCoordinateRetractionDoesNotCreateProjectedAction
+
+unifier369ProjectedCharacterDoesNotCreateAction =
+  MaxCut369.toeProjectedCharacterDoesNotCreateAction
+
+unifier369KernelTrace53DoesNotIdentify3B =
+  MaxCut369.toeKernelTrace53DoesNotIdentify3B
+
+unifier369KernelCharacterIsotypyDoesNotConstructActionIntertwiner =
+  MaxCut369.toeKernelCharacterIsotypyDoesNotConstructActionIntertwiner
+
+unifier369KernelActualZetaRecognitionStillOpen =
+  MaxCut369.toeKernelActualZetaRecognitionStillOpen
+
+unifier369KernelFullHyperformalActionStillOpen =
+  MaxCut369.toeKernelFullHyperformalActionStillOpen
+
+unifier369SelectedSameElementClass3BStillOpen =
+  MaxCut369.toeSelectedSameElementClass3BStillOpen
+
+unifier369SingleActionProducerStillOpen =
+  MaxCut369.toeSingleActionProducerStillOpen
+
+unifier369FiniteChartDoesNotCreateLinearMultiplicityAction =
+  MaxCut369.toeFiniteChartDoesNotCreateLinearMultiplicityAction
+
+unifier369NinetySlicesDoNotCreatePermutationRepresentation =
+  MaxCut369.toeNinetySlicesDoNotCreatePermutationRepresentation
+
+unifier369CharacterDoesNotCreateHomEvaluation =
+  MaxCut369.toeCharacterDoesNotCreateHomEvaluation
+
+unifier369PermutationNoGoDoesNotCreateLinearAction =
+  MaxCut369.toePermutationNoGoDoesNotCreateLinearAction
+
+
+------------------------------------------------------------------------
+-- Singular-basin / coarse-RG obstruction consumer facade.
+------------------------------------------------------------------------
+
+unifierSingularBasinFiniteReduction =
+  SingularBasinTOE.finiteReduction
+
+unifierSingularBasinFiniteReductionNotBasinPreserving =
+  SingularBasinTOE.finiteReductionNotBasinPreserving
+
+unifierSingularBasinFiniteFullBasinDoesNotFactor =
+  SingularBasinTOE.finiteFullBasinDoesNotFactorThroughReduction
+
+unifierSingularBasinSelectedResolutionNotRobust =
+  SingularBasinTOE.selectedResolutionNotRobust
+
+unifierSingularBasinSelectedProjectionNotResolutionAdequate =
+  SingularBasinTOE.selectedProjectionNotResolutionAdequate
+
+unifierSingularBasinSelectedResolutionRefutesGlobalFactorisation =
+  SingularBasinTOE.selectedResolutionAlsoRefutesGlobalFactorisation
+
+unifierYanchukIntervalODECheckerStillMissing =
+  SingularBasinTOE.intervalODECheckerStillMissing
+
+unifierYanchukCheckerSoundStillMissing =
+  SingularBasinTOE.checkerSoundToBasinCertificateStillMissing
+
+unifierYanchukAnalyticGlobalWidthLawStillMissing =
+  SingularBasinTOE.analyticGlobalWidthLawStillMissing
+
+unifierYanchukIntervalStableManifoldTubeStillMissing =
+  SingularBasinTOE.intervalStableManifoldTubeStillMissing
+
+unifierYanchukBasinSeparationTheoremStillMissing =
+  SingularBasinTOE.basinSeparationTheoremStillMissing
+
+unifierSingularBasinZKPFrame :
+  SingularBasinTOE.SingularBasinTOEZKPFrame
+unifierSingularBasinZKPFrame =
+  SingularBasinTOE.canonicalSingularBasinTOEZKPFrame
+
+
+------------------------------------------------------------------------
+-- Fleet R4/R5 formal-gap selection boundary.
+-- Unifier consumes the normalized owner. It does not own fleet evidence.
+------------------------------------------------------------------------
+
+unifierFleetFormalGapTargetReceipt :
+  FleetGapTOE.FleetFormalGapTargetReceipt
+unifierFleetFormalGapTargetReceipt =
+  FleetGapTOE.canonicalFleetFormalGapTargetReceipt
+
+unifierFleetCoordinateRebuildabilityReceipt =
+  FleetGapTOE.fleetCoordinateRebuildabilityReceipt
+
+unifierFleetNumericABIReceipt =
+  FleetGapTOE.fleetNumericABIReceipt
+
+unifierFleetResidualInvariantReceipt =
+  FleetGapTOE.fleetResidualInvariantReceipt
+
+unifierFleetPromotionObligationIndex =
+  FleetGapTOE.fleetPromotionObligationIndex
+
+unifierFleetFormalGapZKPFrame :
+  ParetoSnowballTOE.TOEZKPFrame
+unifierFleetFormalGapZKPFrame =
+  FleetGapTOE.canonicalFleetFormalGapZKPFrame
+
+unifierFleetEigenPriorityDoesNotCreateProof :
+  FleetGapTOE.eigenvalueMagnitudeCreatesProofAuthority
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+unifierFleetEigenPriorityDoesNotCreateProof =
+  FleetGapTOE.fleetEigenPriorityDoesNotCreateProof
+
+unifierFleetExternalCountDoesNotCreateFormalDischarge :
+  FleetGapTOE.externalCountCreatesFormalProof
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+unifierFleetExternalCountDoesNotCreateFormalDischarge =
+  FleetGapTOE.fleetExternalCountDoesNotCreateFormalDischarge
+
+unifierFleetDischargedFibresRemainOutOfTarget :
+  FleetGapTOE.dischargedFibresRemainDischarged
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
+unifierFleetDischargedFibresRemainOutOfTarget =
+  FleetGapTOE.fleetDischargedFibresRemainOutOfTarget
+
+unifierFleetContradictionGapsRemainSeparate :
+  FleetGapTOE.contradictionGapsRemainSeparate
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
+unifierFleetContradictionGapsRemainSeparate =
+  FleetGapTOE.fleetContradictionGapsRemainSeparate
+
+unifierFleetPlanningTextDoesNotCreateFormalResidual :
+  FleetGapTOE.externalPlanningTextCreatesFormalResidual
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+unifierFleetPlanningTextDoesNotCreateFormalResidual =
+  FleetGapTOE.fleetExternalPlanningTextDoesNotCreateFormalResidual
+
+unifierFleetSpectralLabelDoesNotIdentifyTheoremOwner :
+  FleetGapTOE.spectralLabelsIdentifyTheoremOwners
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+unifierFleetSpectralLabelDoesNotIdentifyTheoremOwner =
+  FleetGapTOE.fleetSpectralLabelDoesNotIdentifyTheoremOwner
+
+
+------------------------------------------------------------------------
+-- Direct canonical PNF firewalls for fleet R4/R5 selection.
+------------------------------------------------------------------------
+
+unifierFleetNonRebuildableCoordinatePromotionImpossible :
+  FleetGapTOE.NonRebuildableCoordinatePromotion → ⊥
+unifierFleetNonRebuildableCoordinatePromotionImpossible =
+  FleetGapTOE.fleetNonRebuildableCoordinatePromotionImpossible
+
+unifierFleetVectorSpectralAuthorityPromotionImpossible :
+  FleetGapTOE.VectorSpectralAuthorityPromotion → ⊥
+unifierFleetVectorSpectralAuthorityPromotionImpossible =
+  FleetGapTOE.fleetVectorSpectralAuthorityPromotionImpossible
+
+unifierFleetSpectralNumericABIPromotionImpossible :
+  FleetGapTOE.SpectralNumericABIPromotion → ⊥
+unifierFleetSpectralNumericABIPromotionImpossible =
+  FleetGapTOE.fleetSpectralNumericABIPromotionImpossible
+
+unifierFleetResidualFieldPromotionImpossible :
+  FleetGapTOE.ResidualFieldPromotion → ⊥
+unifierFleetResidualFieldPromotionImpossible =
+  FleetGapTOE.fleetResidualFieldPromotionImpossible
+
+unifierFleetVectorCoordinateTruthStillFalse =
+  FleetGapTOE.fleetVectorCoordinateTruthStillFalse
+
+unifierFleetVectorCoordinateSupportStillFalse =
+  FleetGapTOE.fleetVectorCoordinateSupportStillFalse
+
+unifierFleetVectorCoordinateAdmissibilityStillFalse =
+  FleetGapTOE.fleetVectorCoordinateAdmissibilityStillFalse
+
+unifierFleetTextFallbackAuthorityStillFalse =
+  FleetGapTOE.fleetTextFallbackAuthorityStillFalse
+
+
+unifierFleetBalabanDischargedOwnerReceipt :
+  FleetGapTOE.BalabanDischargedOwnerReceipt
+unifierFleetBalabanDischargedOwnerReceipt =
+  FleetGapTOE.fleetBalabanDischargedOwnerReceipt
+
+unifierFleetNSPhysicalM2SummationCompilerStatus :
+  Bool
+unifierFleetNSPhysicalM2SummationCompilerStatus =
+  FleetGapTOE.fleetNSPhysicalM2SummationCompilerStatus
+
+unifierFleetNSM2ToR568CompilerStatus :
+  Bool
+unifierFleetNSM2ToR568CompilerStatus =
+  FleetGapTOE.fleetNSM2ToR568CompilerStatus
+
+unifierFleetQuantumMereologyBoundary :
+  FleetGapTOE.QuantumMereologyDischargedBoundary
+unifierFleetQuantumMereologyBoundary =
+  FleetGapTOE.fleetQuantumMereologyBoundary
+
+unifierFleetQuantumMereologyAttributionBoundary :
+  FleetGapTOE.QuantumMereologyAttributionBoundary
+unifierFleetQuantumMereologyAttributionBoundary =
+  FleetGapTOE.fleetQuantumMereologyAttributionBoundary
+
+------------------------------------------------------------------------
+-- Joint Balaban RG + R559 same-owner max-cut facade.
+------------------------------------------------------------------------
+
+import DASHI.Unified.BalabanR559TOEMaxCutExact as BalabanR559TOE
+
+unifierBalabanR559MaxCutReceipt :
+  BalabanR559TOE.BalabanR559TOEMaxCutReceipt
+unifierBalabanR559MaxCutReceipt =
+  BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifierBalabanR559PublishedContinuumStillOpen :
+  BalabanR559TOE.publishedContinuumPromotion
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
   ≡ false
 toeForecastProbabilityIsNotWorldState =
   ForecastTOE.toeProbabilityIsNotWorldState
@@ -554,334 +1014,8 @@ unifierGovernedLegalWorkflowInvariantHandoff :
 unifierGovernedLegalWorkflowInvariantHandoff =
   GovernanceTOE.canonicalGovernedLegalWorkflowTOEInvariantHandoff
 
-unifierTaskCompletionDoesNotCreateTruth :
-  GovernanceTOE.TaskCompletionCreatesTruth → ⊥
-unifierTaskCompletionDoesNotCreateTruth =
-  GovernanceTOE.toeTaskCompletionDoesNotCreateTruth
-
-unifierDatabaseCommitDoesNotCreateSemanticAuthority :
-  GovernanceTOE.DatabaseCommitCreatesSemanticAuthority → ⊥
-unifierDatabaseCommitDoesNotCreateSemanticAuthority =
-  GovernanceTOE.toeDatabaseCommitDoesNotCreateSemanticAuthority
-
-unifierAcceptedReviewDoesNotPayApplicability :
-  GovernanceTOE.AcceptedStatusPaysApplicability → ⊥
-unifierAcceptedReviewDoesNotPayApplicability =
-  GovernanceTOE.toeAcceptedReviewDoesNotPayApplicability
-
-unifierSemanticPromotionTruthAuthorityClosed :
-  GovernanceTOE.SemanticPromotionTruthAuthorityClosed
-unifierSemanticPromotionTruthAuthorityClosed =
-  GovernanceTOE.toeSemanticPromotionTruthAuthorityClosed
-
-unifierLegalCandidateSourceDoesNotCloseAuthority :
-  GovernanceTOE.CandidateSourceIsAuthoritative → ⊥
-unifierLegalCandidateSourceDoesNotCloseAuthority =
-  GovernanceTOE.toeCandidateSourceDoesNotCloseAuthority
-
-unifierExactReuseDoesNotCreateSemanticAuthority :
-  GovernanceTOE.ExactReuseCreatesSemanticAuthority → ⊥
-unifierExactReuseDoesNotCreateSemanticAuthority =
-  GovernanceTOE.toeExactReuseDoesNotCreateSemanticAuthority
-
-
-unifierGovernedLegalWorkflowComplianceReceipt :
-  LegalCompliance.GovernedLegalWorkflowComplianceTOEReceipt
-unifierGovernedLegalWorkflowComplianceReceipt =
-  LegalCompliance.canonicalGovernedLegalWorkflowComplianceReceipt
-
-unifierExpertQualificationDoesNotCreateForensicCompliance :
-  LegalCompliance.QualificationAutomaticallyForensicCompliance → ⊥
-unifierExpertQualificationDoesNotCreateForensicCompliance =
-  LegalCompliance.expertQualificationDoesNotCreateForensicCompliance
-
-unifierLegalReviewDoesNotCreateClaimTruth :
-  LegalCompliance.LegalReviewDecisionCreatesClaimTruth → ⊥
-unifierLegalReviewDoesNotCreateClaimTruth =
-  LegalCompliance.legalReviewDoesNotCreateClaimTruth
-
-unifierOfficialLegalSurfaceDoesNotRecoverFineState :
-  LegalCompliance.OfficialLegalSurfaceRecoversFineState → ⊥
-unifierOfficialLegalSurfaceDoesNotRecoverFineState =
-  LegalCompliance.officialLegalSurfaceDoesNotRecoverFineState
-
-unifierLegalityAloneDoesNotCreateLegitimacy :
-  LegalCompliance.LegalOnlyCreatesLegitimacy → ⊥
-unifierLegalityAloneDoesNotCreateLegitimacy =
-  LegalCompliance.legalityAloneDoesNotCreateLegitimacy
-
-
-unifierGovernedLegalWorkflowComplianceZKPFrame :
-  ParetoSnowballTOE.TOEZKPFrame
-unifierGovernedLegalWorkflowComplianceZKPFrame =
-  LegalCompliance.canonicalGovernedLegalWorkflowComplianceZKPFrame
-
-unifierReportAdmissionDoesNotRepairMissingInput :
-  LegalCompliance.ReportAdmissionRepairsMissingInput → ⊥
-unifierReportAdmissionDoesNotRepairMissingInput =
-  LegalCompliance.reportAdmissionDoesNotRepairMissingInput
-
-unifierActionstepStyleVendorIdentityCreatesAuthorityIsFalse =
-  LegalCompliance.actionstepStyleVendorIdentityCreatesAuthorityIsFalse
-    LegalCompliance.canonicalGovernedLegalWorkflowComplianceReceipt
-
-unifierActionstepStyleTargetNeedsOwnAuthorityWitnessIsTrue =
-  LegalCompliance.actionstepStyleTargetNeedsOwnAuthorityWitnessIsTrue
-    LegalCompliance.canonicalGovernedLegalWorkflowComplianceReceipt
-
 ------------------------------------------------------------------------
--- Current CMP119 preferred source frontier.
-------------------------------------------------------------------------
-
-unifierQualificationDoesNotAutomaticallyProveForensicCompliance :
-  GovernanceTOE.QualificationAutomaticallyForensicCompliance → ⊥
-unifierQualificationDoesNotAutomaticallyProveForensicCompliance =
-  GovernanceTOE.toeQualificationDoesNotAutomaticallyProveForensicCompliance
-
-------------------------------------------------------------------------
--- Governed legal workflow / source-genealogy handoff.
-------------------------------------------------------------------------
-
-import DASHI.Unified.GovernedLegalWorkflowSourceGenealogyTOEExact as LegalSourceGenealogy
-
-unifierGovernedLegalWorkflowSourceGenealogyHandoff :
-  LegalSourceGenealogy.GovernedLegalWorkflowSourceGenealogyHandoff
-unifierGovernedLegalWorkflowSourceGenealogyHandoff =
-  LegalSourceGenealogy.canonicalGovernedLegalWorkflowSourceGenealogyHandoff
-
-unifierLegalPerceivedIndependenceDoesNotCreateProvenanceIndependence =
-  LegalSourceGenealogy.toePerceivedIndependenceDoesNotCreateLegalProvenanceIndependence
-unifierLegalRepetitionDoesNotCreateIndependentEvidence =
-  LegalSourceGenealogy.toeRepetitionDoesNotCreateIndependentLegalEvidence
-unifierLegalCommonSourceDoesNotEraseEvidence =
-  LegalSourceGenealogy.toeCommonSourceDependenceDoesNotEraseLegalEvidence
-unifierSourceMultiplicityDoesNotAdmitTruth =
-  LegalSourceGenealogy.toeExternalSourceMultiplicityDoesNotAdmitTruth
-unifierGenealogyDoesNotPromoteLegalAuthorityTruth =
-  LegalSourceGenealogy.toeLegalAuthorityStillDoesNotCreateTruthAfterGenealogy
-unifierReviewedGenealogyDoesNotPayApplicability =
-  LegalSourceGenealogy.toeReviewedGenealogyDoesNotPayApplicability
-unifierGenealogyAdmissionDoesNotBecomeLegalSourceAuthority =
-  LegalSourceGenealogy.toeGenealogyAdmissionDoesNotBecomeLegalSourceAuthority
-unifierGenealogyCandidateSourceDoesNotCreateLegalAuthority =
-  LegalSourceGenealogy.toeGenealogyCandidateSourceDoesNotCreateLegalAuthority
-unifierGenealogySameLegalSystemDoesNotCreateLegalAuthority =
-  LegalSourceGenealogy.toeGenealogySameLegalSystemDoesNotCreateLegalAuthority
-unifierGenealogyCurrentValidityDoesNotCreateApplicability =
-  LegalSourceGenealogy.toeGenealogyCurrentValidityDoesNotCreateApplicability
-unifierGenealogyDocumentRoleDoesNotCreateLegalAuthority =
-  LegalSourceGenealogy.toeGenealogyDocumentRoleDoesNotCreateLegalAuthority
-
-import DASHI.Unified.GovernedLegalWorkflowSourceSemanticTOEExact as LegalSourceSemantic
-
-unifierGovernedLegalWorkflowSourceSemanticHandoff :
-  LegalSourceSemantic.GovernedLegalWorkflowSourceSemanticHandoff
-unifierGovernedLegalWorkflowSourceSemanticHandoff =
-  LegalSourceSemantic.canonicalGovernedLegalWorkflowSourceSemanticHandoff
-
-
-
-unifierNativeLegalFollowDoesNotCreateLegalAuthority :
-  GovernanceTOE.NativeCliAutomaticallyLegalAuthority → ⊥
-unifierNativeLegalFollowDoesNotCreateLegalAuthority =
-  GovernanceTOE.toeNativeLegalFollowDoesNotCreateLegalAuthority
-
-unifierProviderFailureDoesNotMakePropositionFalse :
-  GovernanceTOE.ProviderFailureAutomaticallyPropositionFalse → ⊥
-unifierProviderFailureDoesNotMakePropositionFalse =
-  GovernanceTOE.toeProviderFailureDoesNotMakePropositionFalse
-
-unifierExpertProductionPromotesAnyAuthorityIsFalse :
-  GovernanceTOE.toeExpertProductionPromotesAnyAuthority ≡ false
-unifierExpertProductionPromotesAnyAuthorityIsFalse =
-  GovernanceTOE.toeExpertProductionPromotesAnyAuthorityIsFalse
-
-
-------------------------------------------------------------------------
--- Direct legal execution and expert-evidence non-promotion aliases.
-------------------------------------------------------------------------
-
-unifierSpacyDoesNotCreateLegalAuthority :
-  GovernanceTOE.SpacyParserAutomaticallyLegalAuthority → ⊥
-unifierSpacyDoesNotCreateLegalAuthority =
-  GovernanceTOE.toeSpacyDoesNotCreateLegalAuthority
-
-unifierSpacyDoesNotCreateLegalConstruction :
-  GovernanceTOE.SpacyParserAutomaticallyLegalConstruction → ⊥
-unifierSpacyDoesNotCreateLegalConstruction =
-  GovernanceTOE.toeSpacyDoesNotCreateLegalConstruction
-
-unifierLatestKnownSectionDoesNotBecomeHistoricalLaw :
-  GovernanceTOE.SectionSliceAutomaticallyHistoricalLaw → ⊥
-unifierLatestKnownSectionDoesNotBecomeHistoricalLaw =
-  GovernanceTOE.toeLatestKnownSectionDoesNotBecomeHistoricalLaw
-
-unifierPythonWrapperDoesNotOwnLegalSemantics :
-  GovernanceTOE.PythonWrapperOwnsLegalSemantics → ⊥
-unifierPythonWrapperDoesNotOwnLegalSemantics =
-  GovernanceTOE.toePythonWrapperDoesNotOwnLegalSemantics
-
-unifierJsonIsNotSemanticCommandAbi :
-  GovernanceTOE.JsonArtifactIsSemanticCommandAbi → ⊥
-unifierJsonIsNotSemanticCommandAbi =
-  GovernanceTOE.toeJsonIsNotSemanticCommandAbi
-
-unifierJsonReviewDoesNotCreateDecision :
-  GovernanceTOE.JsonReviewFileAutomaticallyReviewerDecision → ⊥
-unifierJsonReviewDoesNotCreateDecision =
-  GovernanceTOE.toeJsonReviewDoesNotCreateDecision
-
-unifierJsonReceiptDoesNotCreateTruth :
-  GovernanceTOE.JsonReceiptAutomaticallyClaimTruth → ⊥
-unifierJsonReceiptDoesNotCreateTruth =
-  GovernanceTOE.toeJsonReceiptDoesNotCreateTruth
-
-unifierCliSequenceDoesNotPayResidual :
-  GovernanceTOE.CliSequenceAutomaticallyPaysOpenResidual → ⊥
-unifierCliSequenceDoesNotPayResidual =
-  GovernanceTOE.toeCliSequenceDoesNotPayResidual
-
-unifierPinnedStreamDoesNotCreateLegalTruth :
-  GovernanceTOE.PinnedOalcStreamingAutomaticallyLegalTruth → ⊥
-unifierPinnedStreamDoesNotCreateLegalTruth =
-  GovernanceTOE.toePinnedStreamDoesNotCreateLegalTruth
-
-unifierReviewedHopJsonDoesNotBecomeCanonicalSemanticTransport :
-  GovernanceTOE.ReviewedHopJsonBecomesCanonicalSemanticTransport → ⊥
-unifierReviewedHopJsonDoesNotBecomeCanonicalSemanticTransport =
-  GovernanceTOE.toeReviewedHopJsonDoesNotBecomeCanonicalSemanticTransport
-
-unifierOalcHitDoesNotBecomeBindingAuthority :
-  GovernanceTOE.OalcHitAutomaticallyBindingAuthority → ⊥
-unifierOalcHitDoesNotBecomeBindingAuthority =
-  GovernanceTOE.toeOalcHitDoesNotBecomeBindingAuthority
-
-unifierOfficialCourtBytesDoNotBecomePropositionCorrespondence :
-  GovernanceTOE.OfficialCourtBytesAutomaticallyPropositionCorrespondence → ⊥
-unifierOfficialCourtBytesDoNotBecomePropositionCorrespondence =
-  GovernanceTOE.toeOfficialCourtBytesDoNotBecomePropositionCorrespondence
-
-unifierSameMncDoesNotCollapseSourceRevisions :
-  GovernanceTOE.SameMncAutomaticallySameSourceRevision → ⊥
-unifierSameMncDoesNotCollapseSourceRevisions =
-  GovernanceTOE.toeSameMncDoesNotCollapseSourceRevisions
-
-unifierSuccessfulOfficialFetchDoesNotBecomeProductionReady :
-  GovernanceTOE.SuccessfulOfficialFetchAutomaticallyProductionReady → ⊥
-unifierSuccessfulOfficialFetchDoesNotBecomeProductionReady =
-  GovernanceTOE.toeSuccessfulOfficialFetchDoesNotBecomeProductionReady
-
-unifierMultipleReportsDoNotAutomaticallyCreateIndependence :
-  GovernanceTOE.MultipleReportsAutomaticallyIndependent → ⊥
-unifierMultipleReportsDoNotAutomaticallyCreateIndependence =
-  GovernanceTOE.toeMultipleReportsDoNotAutomaticallyCreateIndependence
-
-unifierAgreementDoesNotAutomaticallyCreateIndependentCorroboration :
-  GovernanceTOE.AgreementAutomaticallyIndependentCorroboration → ⊥
-unifierAgreementDoesNotAutomaticallyCreateIndependentCorroboration =
-  GovernanceTOE.toeAgreementDoesNotAutomaticallyCreateIndependentCorroboration
-
-unifierDependenceDoesNotMeanNoEvidence :
-  GovernanceTOE.DependenceMeansNoEvidence → ⊥
-unifierDependenceDoesNotMeanNoEvidence =
-  GovernanceTOE.toeDependenceDoesNotMeanNoEvidence
-
-unifierExpertStatusDoesNotAutomaticallyCreateTruth :
-  GovernanceTOE.ExpertStatusAutomaticallyTruth → ⊥
-unifierExpertStatusDoesNotAutomaticallyCreateTruth =
-  GovernanceTOE.toeExpertStatusDoesNotAutomaticallyCreateTruth
-
-unifierReportAdmissionDoesNotRepairMissingInput :
-  GovernanceTOE.ReportAdmissionRepairsMissingInput → ⊥
-unifierReportAdmissionDoesNotRepairMissingInput =
-  GovernanceTOE.toeReportAdmissionDoesNotRepairMissingInput
-
-unifierCrossExaminationDoesNotAddUnobservedInput :
-  GovernanceTOE.CrossExaminationAddsUnobservedInput → ⊥
-unifierCrossExaminationDoesNotAddUnobservedInput =
-  GovernanceTOE.toeCrossExaminationDoesNotAddUnobservedInput
-
-unifierDisputedRiskDoesNotBecomeIrrelevant :
-  GovernanceTOE.DisputedRiskIsIrrelevant → ⊥
-unifierDisputedRiskDoesNotBecomeIrrelevant =
-  GovernanceTOE.toeDisputedRiskDoesNotBecomeIrrelevant
-
-unifierObserverDefectDoesNotProveOpinionFalse :
-  GovernanceTOE.ObserverDefectMakesOpinionFalse → ⊥
-unifierObserverDefectDoesNotProveOpinionFalse =
-  GovernanceTOE.toeObserverDefectDoesNotProveOpinionFalse
-
-unifierQualificationDoesNotAutomaticallyProveForensicCompliance :
-  GovernanceTOE.QualificationAutomaticallyForensicCompliance → ⊥
-unifierQualificationDoesNotAutomaticallyProveForensicCompliance =
-  GovernanceTOE.toeQualificationDoesNotAutomaticallyProveForensicCompliance
-
-------------------------------------------------------------------------
--- Governed legal workflow / source-genealogy handoff.
--- This is a theorem facade.  Unifier does not become proof authority.
-------------------------------------------------------------------------
-
-import DASHI.Unified.GovernedLegalWorkflowSourceGenealogyTOEExact as LegalSourceGenealogy
-
-unifierGovernedLegalWorkflowSourceGenealogyHandoff :
-  LegalSourceGenealogy.GovernedLegalWorkflowSourceGenealogyHandoff
-unifierGovernedLegalWorkflowSourceGenealogyHandoff =
-  LegalSourceGenealogy.canonicalGovernedLegalWorkflowSourceGenealogyHandoff
-
-unifierLegalPerceivedIndependenceDoesNotCreateProvenanceIndependence =
-  LegalSourceGenealogy.toePerceivedIndependenceDoesNotCreateLegalProvenanceIndependence
-
-unifierLegalRepetitionDoesNotCreateIndependentEvidence =
-  LegalSourceGenealogy.toeRepetitionDoesNotCreateIndependentLegalEvidence
-
-unifierLegalCommonSourceDoesNotEraseEvidence =
-  LegalSourceGenealogy.toeCommonSourceDependenceDoesNotEraseLegalEvidence
-
-unifierSourceMultiplicityDoesNotAdmitTruth =
-  LegalSourceGenealogy.toeExternalSourceMultiplicityDoesNotAdmitTruth
-
-unifierGenealogyDoesNotPromoteLegalAuthorityTruth =
-  LegalSourceGenealogy.toeLegalAuthorityStillDoesNotCreateTruthAfterGenealogy
-
-unifierReviewedGenealogyDoesNotPayApplicability =
-  LegalSourceGenealogy.toeReviewedGenealogyDoesNotPayApplicability
-
-unifierGenealogyAdmissionDoesNotBecomeLegalSourceAuthority =
-  LegalSourceGenealogy.toeGenealogyAdmissionDoesNotBecomeLegalSourceAuthority
-
-
-unifierGenealogyCandidateSourceDoesNotCreateLegalAuthority =
-  LegalSourceGenealogy.toeGenealogyCandidateSourceDoesNotCreateLegalAuthority
-
-unifierGenealogySameLegalSystemDoesNotCreateLegalAuthority =
-  LegalSourceGenealogy.toeGenealogySameLegalSystemDoesNotCreateLegalAuthority
-
-unifierGenealogyCurrentValidityDoesNotCreateApplicability =
-  LegalSourceGenealogy.toeGenealogyCurrentValidityDoesNotCreateApplicability
-
-unifierGenealogyDocumentRoleDoesNotCreateLegalAuthority =
-  LegalSourceGenealogy.toeGenealogyDocumentRoleDoesNotCreateLegalAuthority
-
-------------------------------------------------------------------------
--- Governed legal/source/semantic non-promotion handoff.
-------------------------------------------------------------------------
-
-import DASHI.Unified.GovernedLegalWorkflowSourceSemanticTOEExact as LegalSourceSemantic
-
-unifierGovernedLegalWorkflowSourceSemanticHandoff :
-  LegalSourceSemantic.GovernedLegalWorkflowSourceSemanticHandoff
-unifierGovernedLegalWorkflowSourceSemanticHandoff =
-  LegalSourceSemantic.canonicalGovernedLegalWorkflowSourceSemanticHandoff
-
-unifierGovernedSharedLexemeDoesNotCreateSemanticIdentity =
-  LegalSourceSemantic.toeSharedLexemeDoesNotCreateSemanticIdentity
-
-toeBrainJPromotionBlocked :
-  BrainSpine.objectExternalJPromotion BrainFMRI.brainFMRIObject ≡ false
-toeBrainJPromotionBlocked = BrainFMRI.brainFMRIJPromotionBlocked
-
-------------------------------------------------------------------------
--- Current Gate-4 frontier, Fleet target split, and manifest boundary.
+-- Live Gate-4 frontier and fleet-target selection.
 ------------------------------------------------------------------------
 
 unifierCurrentGate4FrontierLedgerLevel : ProofLevel
@@ -904,37 +1038,3 @@ unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
   FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
 unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
   FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
-
-unifierFleetManifestAcquisitionDemand =
-  FleetGapTOE.fleetManifestAcquisitionDemand
-
-unifierFleetNamedManifestStillMissing :
-  FleetGapTOE.namedFormalGapManifestAcquired ≡ false
-unifierFleetNamedManifestStillMissing =
-  FleetGapTOE.namedFormalGapManifestAcquiredIsFalse
-
-unifierFleetPerGapDispatchStillBlocked :
-  FleetGapTOE.perGapDispatchEnabled ≡ false
-unifierFleetPerGapDispatchStillBlocked =
-  FleetGapTOE.perGapDispatchEnabledIsFalse
-
-unifierFleetRelatedSymbolsRequired :
-  FleetGapTOE.fleetRelatedSymbolsRequired ≡ true
-unifierFleetRelatedSymbolsRequired =
-  FleetGapTOE.fleetRelatedSymbolsRequiredIsTrue
-
-unifierFleetDiscoverRequired :
-  FleetGapTOE.fleetDiscoverRequired ≡ true
-unifierFleetDiscoverRequired =
-  FleetGapTOE.fleetDiscoverRequiredIsTrue
-
-unifierFleetRoundLineageRequired :
-  FleetGapTOE.fleetRoundLineageRequired ≡ true
-unifierFleetRoundLineageRequired =
-  FleetGapTOE.fleetRoundLineageRequiredIsTrue
-
-unifierFleetCountDoesNotCreateNamedManifest :
-  FleetGapTOE.CountCreatesNamedManifest → ⊥
-unifierFleetCountDoesNotCreateNamedManifest =
-  FleetGapTOE.fleetCountDoesNotCreateNamedManifest
-
