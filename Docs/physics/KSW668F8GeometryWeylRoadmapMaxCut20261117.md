@@ -284,3 +284,20 @@ New `KSW668F8RadialConjugationNoncommutationExact.agda` contains both exact rati
 `scripts/test_ksw668_f8_radial_fv_green_and_conjugation.py` evaluates exact Fractions, 47/47 tests (three dimensions × [quadratic, quartic, face mass, 12 random Green vectors], plus two mismatch controls). All pass in independent local equivalent. The new Agda owner contains a generic finite-face Green telescope but **pinned Agda kernel NOT RUN**; all analytic, physical and higher-Sobolev kernel gates remain open.
 
 **Priority ordering:** G1 full tensor-to-original-scalar-radial-FV compatible projection (including origin and normal SAT); G2 joint Israel/SAT/wall residual trace; G3 coupled moving-domain and SSPRK3 stability; G4 original boundary high-Sobolev both-Weyl trace; G5 independent three-axis convergence; G6 same source/retarded FIO/matter/detector. Continue reuse before construction and attach via existing KSW authority + TOE graph. Preserve attribution and no ESD edits.
+
+
+### XXXII second positive G1 bridge: original angular Gram explains d=3,7,11
+
+The original scalar yy multipole fields use `H_l(r,mu)= (r/eps)^l V_l(r) P_l(mu)` with only `l=0,2,4`. Reuse the existing exact Legendre owner; integrate against the actual angular measure `dmu` on `[-1,1]`. An exact rational even-moment calculation `int mu^(2n)dmu=2/(2n+1)` yields the entire 3-by-3 Gram matrix
+```
+G_(l,m) = int_-1^1 P_l(mu)P_m(mu)dmu
+        = diag(2, 2/5, 2/9)_(l,m).
+```
+Thus the **original yy scalar** angular L2 norm with ordinary physical 3D radial measure `r² dr dmu` is
+```
+Sum_l 2/(2l+1) eps^(-2l)
+    int_0^R r^(2+2l) |V_l(r)|² dr.
+```
+This explains precisely why the solver evolves modes in effective scalar radial measures `d=3+2l=3,7,11`, rather than inventing new physical bulk dimensions. New owner `KSW668F8ThreeAngularGramRadialMeasureExact.agda` proves all six distinct exact rational Gram entries. `scripts/test_ksw668_f8_angular_gram_effective_radial.py` independently checked all 9 Gram entries and 3 radial-measure identities (12/12 PASS). **Important scope:** this is the yy scalar angular norm, not the full TT Cartesian 3-by-3 tensor norm (which requires other angular tensor components and their contractions). The actual FV shell quadrature also requires a separate angular-to-cell-average norm/isometry or stability map. This owner is attached to existing F8 authority / KSW/TOE import graph; pinned Agda kernel NOT RUN.
+
+This newly proven Gram relation plus the exact radial-shell Green telescope is a legitimate *positive scalar operator* reuse path for G1 and G3. The explicit noncommutation counterexample means the positive scalar result still does not establish the full tensor-TT commuting diagram. Prioritize full tensor angular Gram + discrete projection matching and origin/SAT boundary as the next original-object weld.
