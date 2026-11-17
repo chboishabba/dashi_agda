@@ -14,6 +14,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 import DASHI.Physics.Motors.SmithFilsingerFiniteVolumeFaceIncidenceExact as Face
+import DASHI.Physics.Motors.Circuit36927RecoveryEnergyBoundExact as Bound
 
 -- This is deliberately independent of source amplitudes and numeric
 -- geometry. A zero-work face still requires exactly-once incidence.
@@ -232,6 +233,28 @@ indexedFaceExteriorEnergyBalance :
       + Face.totalFinal (eraseCells (IndexedMesh.cells m)))
 indexedFaceExteriorEnergyBalance m =
   Face.finiteVolumeExteriorEnergyBalance (asExistingMesh m)
+
+-- Transfer the existing exact upper bound to a mesh with checked
+-- individual face IDs. Does not introduce a new arbitrary source cap.
+indexedFaceUsefulLoadBound :
+  (m : IndexedMesh) →
+  Bound._≤_
+    (Face.totalLoad (eraseCells (IndexedMesh.cells m)))
+    (Face.totalExtIn (eraseCells (IndexedMesh.cells m))
+      + (Face.totalDrive (eraseCells (IndexedMesh.cells m))
+      + Face.totalInitial (eraseCells (IndexedMesh.cells m))))
+indexedFaceUsefulLoadBound m =
+  Face.finiteVolumeUsefulBelowAllSuppliedWork (asExistingMesh m)
+
+indexedFaceSourceOffNoLoad :
+  (m : IndexedMesh) →
+  Face.totalExtIn (eraseCells (IndexedMesh.cells m)) ≡ zero →
+  Face.totalDrive (eraseCells (IndexedMesh.cells m)) ≡ zero →
+  Face.totalInitial (eraseCells (IndexedMesh.cells m)) ≡ zero →
+  Face.totalLoad (eraseCells (IndexedMesh.cells m)) ≡ zero
+indexedFaceSourceOffNoLoad m extOff driveOff storageOff =
+  Face.finiteVolumeSourceFreeHasZeroLoad
+    (asExistingMesh m) extOff driveOff storageOff
 
 -- Nontrivial 2-cell physical adjacency: 0 -> 1, face ID 7, work 3.
 -- Every actual per-cell / per-face identity is checked by reduction.
