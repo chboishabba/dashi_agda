@@ -28,6 +28,7 @@ import DASHI.Physics.Gravity.KSW668F8ThreeAngularGramRadialMeasureExact as Angul
 import DASHI.Physics.Gravity.KSW668F8FullTensorAngularNormExact as FullTensorNorm
 import DASHI.Physics.Gravity.KSW668F8FullTensorSolidHarmonicAtlasExact as FullAngularAtlas
 import DASHI.Physics.Gravity.KSW668F8RationalAxialTTCubatureExact as AxialCubature
+import DASHI.Physics.Gravity.KSW668F8AxialProjectionSourceShellTransferExact as SourceShellTransfer
 import DASHI.Physics.Gravity.KSW668F8WeakIsraelSATSliceExact as Wall
 import DASHI.Physics.Gravity.KSW668F8WeakIsraelSATGeneralPolynomialTransportExact as GeneralSAT
 import DASHI.Physics.Gravity.KSW668F8SSPRK3FullStabilityPrerequisiteExact as RK
