@@ -64,7 +64,7 @@ fourJunctionSyntheticPhotonFixture = record
 
 -- The same incident flux cannot be counted four times. The source
 -- partition is *not* implied by 4 independently normalized IV curves.
-record OpticalToTerminalSourceWeld : Set₁ where
+record OpticalToTerminalSourceWeld : Set₂ where
   field
     SiteId Spectrum Direction Temperature Shading Soiling Wind Humidity : Set
 
