@@ -18,6 +18,8 @@ module DASHI.Cognition.PNF.X369CenteredDirectedConsumerMDLExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer using (ℤ; +_; _-_)
+open import Data.Integer.Solver using (module +-*-Solver)
+open +-*-Solver using (solve; _:+_; _:-_; _:*_; con; _:=_)
 import DASHI.Cognition.PNF.X369DirectedRouterConditionalCodecExact as Original
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 import DASHI.Core.AdmissibleConsumerMDLHyperfabricExact as MDL
@@ -170,6 +172,41 @@ centeredTwoIsMinimalInDeclaredPortfolio =
       s≤s (s≤s z≤n)
     proof rawThree admitted adequate =
       s≤s (s≤s z≤n)
+
+
+------------------------------------------------------------------------
+-- Typed original-source C3 action on the admitted centered MDL carrier.
+-- This makes the smaller sufficient feature code action-preserving,
+-- not just a one-time readout construction.
+------------------------------------------------------------------------
+
+rotatedTotalEqualsOriginal :
+  (d : Original.Directed) →
+  Original.originalDirectedTotal (Original.rotateFullDirected d)
+  ≡ Original.originalDirectedTotal d
+rotatedTotalEqualsOriginal (Original.directed s f r) =
+  solve 3
+    (λ s f r →
+      (((r :+ s) :+ f) := ((s :+ f) :+ r)))
+    refl s f r
+
+rotateCenteredSource : CenteredDirected → CenteredDirected
+rotateCenteredSource (centeredDirected d zero) =
+  centeredDirected
+    (Original.rotateFullDirected d)
+    (trans (rotatedTotalEqualsOriginal d) zero)
+
+centeredTwoCodeIntertwinesOriginalC3 :
+  (z : CenteredDirected) →
+  twoCode (rotateCenteredSource z)
+  ≡ Original.rotateCenteredTwo (twoCode z)
+centeredTwoCodeIntertwinesOriginalC3
+  (centeredDirected d zero) =
+  Original.sourceCenteredC3TwoChannelIntertwines d zero
+
+-- These are SOURCE directed-channel actions. They do not
+-- identify a semantic argument rotation, trialectic face or
+-- neural hidden-space intertwiner.
 
 -- This witness does not authorize compression of arbitrary non-centred
 -- source states or semantic/face/future consumers not shown sufficient.
