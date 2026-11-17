@@ -309,3 +309,78 @@ sameOriginalMaterialCapWithControllerAndModulator b f sourceCycle w restored =
         (Weld.SignedSourceCycleWeld.cycleWithSourceCap sourceCycle)
     materialModulation : Nat
     materialModulation = FieldMaterialEnergyWeld.modulationInput w
+
+
+-- HIGHEST-ALPHA CONSISTENCY CUT. The old original signed natural+driver
+-- cycle and the new field/material ledger describe the SAME selected
+-- useful port. If all field/material stores return, their two conservation
+-- laws cannot count modulator work inconsistently:
+--
+--   OLD internalLoss + separately PAID modulation
+--       = fieldOutgoingLoss + materialLoss + recoveredModulation.
+--
+-- This is derived from BOTH existing independently specified equations,
+-- not assumed as a new ledger. If the physical receiver is restored and
+-- the old loss account is independently fixed, arbitrary positive material
+-- modulation cannot disappear into a fictitious natural source.
+materialModulationReconcilesOriginalCycleLoss :
+  (b : Weld.SelectedBoundary)
+  (f : Weld.FormalFieldToPort b)
+  (sourceCycle : Weld.SignedSourceCycleWeld b f)
+  (w : FieldMaterialEnergyWeld b f sourceCycle) →
+  FieldMaterialEnergyWeld.fieldStoredInitially w
+    + FieldMaterialEnergyWeld.materialStoredInitially w
+  ≡ FieldMaterialEnergyWeld.fieldStoredFinally w
+    + FieldMaterialEnergyWeld.materialStoredFinally w →
+  Port.MidpointTwoPortWorkWindow.internalLoss
+    (Weld.FormalFieldToPort.portWindow f)
+    + FieldMaterialEnergyWeld.modulationInput w
+  ≡ FieldMaterialEnergyWeld.fieldDissipationAndOutgoing w
+      + (FieldMaterialEnergyWeld.materialDissipation w
+        + FieldMaterialEnergyWeld.modulationRecovery w)
+materialModulationReconcilesOriginalCycleLoss b f sourceCycle w restored =
+  Cycle.+-cancelLeft
+    (FieldMaterialEnergyWeld.usefulLoad w)
+    (oldLoss + FieldMaterialEnergyWeld.modulationInput w)
+    (FieldMaterialEnergyWeld.fieldDissipationAndOutgoing w
+      + (FieldMaterialEnergyWeld.materialDissipation w
+        + FieldMaterialEnergyWeld.modulationRecovery w))
+    (Cycle.trans
+      (Bound.sym (Cycle.+-assoc
+        (FieldMaterialEnergyWeld.usefulLoad w)
+        oldLoss
+        (FieldMaterialEnergyWeld.modulationInput w)))
+      (Cycle.trans
+        (Bound.sym
+          (Cycle.cong
+            (λ z → z + FieldMaterialEnergyWeld.modulationInput w)
+            selectedOldBalance))
+        (fieldMaterialRepeatableWork b f sourceCycle w restored)))
+  where
+    oldLoss : Nat
+    oldLoss =
+      Port.MidpointTwoPortWorkWindow.internalLoss
+        (Weld.FormalFieldToPort.portWindow f)
+
+    selectedOldBalance :
+      FieldMaterialEnergyWeld.naturalInput w
+        + FieldMaterialEnergyWeld.driverInput w
+      ≡ FieldMaterialEnergyWeld.usefulLoad w + oldLoss
+    selectedOldBalance =
+      Cycle.trans
+        (Cycle.cong
+          (λ z → z + FieldMaterialEnergyWeld.driverInput w)
+          (FieldMaterialEnergyWeld.sameNetNaturalWork w))
+        (Cycle.trans
+          (Cycle.cong
+            (λ z →
+              Cycle.RepeatableSourceCycle.naturalSourceWork
+                (Cycle.AdmittedSourceCapCycle.repeatable
+                  (Weld.SignedSourceCycleWeld.cycleWithSourceCap sourceCycle))
+                + z)
+            (FieldMaterialEnergyWeld.sameNetPoweredWork w))
+          (Cycle.trans
+            (Weld.signedNaturalAndControllerWorkPaysSamePortLoad
+              b f sourceCycle)
+            (Cycle.cong (λ z → z + oldLoss)
+              (Bound.sym (FieldMaterialEnergyWeld.sameOriginalLoad w)))))
