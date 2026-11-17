@@ -1,5 +1,87 @@
 
 
+## 17 Nov topk strict-margin remediation + matched history routing ablation
+
+This section supersedes any earlier **second-step** claim made
+with expert-3 history slope 10 and bias -13. That source
+parameter pair led to a topk cutoff TIE and was NOT an
+authenticated ordered selected pair at the common probe.
+Current only repaired expert3: `(s3,b3)=(11,-16)`.
+All six tested original score states (four independent
+reset loads plus two distinct first-step prefixes at the
+same second-step load) now have uniquely determined
+ordered topk2 and strictly positive score margins.
+Independent local six-case source-formula test: **6 PASS**.
+
+There is also a NEW paired causal-discriminator
+fixture, using the ORIGINAL source `execute_selected`
+intervention at the common load/clock:
+- Path A prefix load0 -> source selected (0,2),
+  original selected output Nat0;
+- Path B prefix load3 -> source selected (1,0),
+  original selected output Nat9;
+- Force the original second-step pair (0,2) in
+  BOTH paths, with each path's original source
+  logits, selected-history values, and softmax
+  recomputed for that pair -> Nat (0,0).
+
+Independent local same-source algebra checked the
+two fixed-pair outcomes: **2 PASS**. This
+identifies selected-set replacement as sufficient
+for the discrepancy in the disclosed architecture
+fixture, while making NO claim that all fitted
+history dependence must be caused by topk or
+that holding IDs fixed always removes FFN effects.
+
+The EXISTING mathematical abstraction
+`DASHI.Core.IntersectionalNonFactorability`
+is reused in
+`DASHI/Cognition/PNF/X369R4HistoryLoadNonFactorabilityExact.agda`:
+`sourceFixtureResponseCannotFactorThroughLoad`
+is the negative load-only theorem, while
+`fixedProbePairDoesFactorThroughCurrentLoad`
+is the positive forced-selection control.
+Both are imported into the same two TOE entry
+points. No duplicate non-factorability carrier
+or new broad hysteresis theory is invented.
+
+**Leech original source implementation:**
+`scripts/probe_x369_r4_kink_checkpoint.py` now
+owns the COMMON `strict_source_order_margin`
+function for prefix/probe and reset four-load
+checks; no source native claim is accepted
+at ties. Its code is reused by
+`scripts/probe_x369_r4_history_path_dependence.py`.
+The latter now executes a fixed expert pair
+at the SECOND step through the real
+`HistoryOrbitMoE.execute_selected`, records
+both original and forced scores and histories,
+and labels the counterfactual as a source
+intervention rather than fitted causal proof.
+The native fixture:
+1. reconstructs the OLD tied source configuration
+   and REQUIRES rejection;
+2. checks the new strict positive margins;
+3. emits a source-valid synthetic checkpoint;
+4. launches BOTH original CLI producers as
+   subprocesses; and
+5. reloads their JSON receipts, verifying
+   SHA identity, original Nat0-2-9-0, same-clock
+   native Nat0/9 and fixed-pair Nat0/0.
+
+**Acceptance honesty:** independent local
+exact source-formula checks PASS
+(6 strict reset/history cases and
+2 fixed-pair discriminators). The exact
+native original PyTorch GitHub scripts,
+the fitted checkpoint and all new Agda/TOE
+kernel imports remain UNEXECUTED in this
+container session. Consequently the
+source-native execution acceptance
+and real-model behavioral/hysteresis
+gates are OPEN.
+
+
 ## 17 November strict-topk correction and executable closure route
 
 **Mandatory correction to EARLIER historical paragraphs in this
