@@ -230,3 +230,14 @@ Read [the new F10/F13 dedicated report](https://github.com/chboishabba/dashi_agd
 **R2/R3/F15 physical frontier remains OPEN:** exact 3D soil/air/ionosphere Maxwell, fitted electron/ion kinetics, independently measured real source work under source backaction, controller+bridge losses and fully restored repeatable cycles. No original-world gate passed. The full committed test suite has no exact-head replay/kernel receipt in this runtime; selected SymPy identities were independently verified.
 
 **Caution:** Externally sourced solar power could be orders of magnitude above fair-weather local-collector power, but only a causal interface with a source-supported phase/current/aperture and measured reservoir replenishment can establish that for the actual device.
+
+
+## 17 November second Agda cut: internal Maxwell/material work-port cancellation
+
+The current formal maximum cut is **not a simulation**. New owner DASHI/Physics/Motors/SmithFilsingerMaxwellMaterialEnergyCutExact.agda proves a generic shared-interface cancellation and composes two independently witnessed, same-original field-source and material-receiver work laws. It explicitly retains net natural-source input (not gross incoming waves), net driver work, paid material modulation, recovered modulation, electromagnetic/radiative loss, dissipative material loss, field storage and material storage.
+
+The Agda source provides cancelSharedInterface, fieldMaterialCombinedWork, fieldMaterialRepeatableWork, fieldMaterialLoadBoundOnRepeatableCycle, netNaturalUnderExistingAdmittedCap, and sameOriginalMaterialCapWithControllerAndModulator. The resulting *conditional* selected-load inequality is: useful original load <= independently admitted net natural cap + net powered controller work + explicitly paid material modulation. This cannot hide material work in a purported external source or count field/material interface flux twice.
+
+Original physical Poynting/current and nonlinear material conservation identities are still uninhabited physical hypotheses. The separate #1521 DispersiveMaterialPortExact donor is not present on #1524's branch; avoid a fake import and perform exact cross-branch join after the source trees converge. Full F10/R2 Maxwell, F13/P2 source operator, F14/R1 original history, F15/R3 replenished natural work, F16 actual cloud intervention remain OPEN.
+
+Pinned Agda acceptance script scripts/check_smith_filsinger_formal_weld_agda29.sh now targets **three** formal modules; **Agda/Nix unavailable here**, so none of the new source-authored proofs is claimed kernel-checked. Full detailed signature/proof dependency in SmithFilsingerFormalWeldMaxCut20261117.md.
