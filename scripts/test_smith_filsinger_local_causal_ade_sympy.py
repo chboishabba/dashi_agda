@@ -135,3 +135,63 @@ def test_missing_layer_or_negative_layer_damping_fail_closed():
     with pytest.raises(ValueError):
         local_spec(3,layers=[LorentzMaterial(),LorentzMaterial(),
           replace(LorentzMaterial(),gamma=-1)])
+
+
+@pytest.mark.parametrize('second_cell',[0,1,2])
+def test_later_disjoint_natural_source_is_new_dynamic_root(second_cell):
+    from smith_filsinger_local_causal_ade_sympy import verified_dependency_trace
+    spec=local_spec(3)
+    z=S.zeros(12,1)
+    first=source_kick(spec,z,2,1,origin='natural')
+    second=source_kick(spec,first['z'],second_cell,1,origin='controller')
+    trace=verified_dependency_trace(z,[first,second])
+    assert trace['cone']=={2,second_cell}
+    assert trace['stages'][0]==frozenset({2})
+    assert trace['stages'][1]==frozenset({2,second_cell})
+    assert dependency_cone(None,[first,second])=={2,second_cell}
+
+
+def test_disconnected_stage_cannot_seed_an_unpaid_field():
+    from smith_filsinger_local_causal_ade_sympy import verified_dependency_trace
+    spec=local_spec(3)
+    z=S.zeros(12,1)
+    first=source_kick(spec,z,2,1)
+    forged={'initial_state':first['z'], 'z':first['z'].copy(),
+            'support':(0,3)}
+    forged['z'][7]=S.Rational(1,2)
+    with pytest.raises(ValueError,match='declared local support'):
+        verified_dependency_trace(z,[first,forged])
+
+
+def test_forged_source_ownership_or_untyped_step_rejected():
+    from smith_filsinger_local_causal_ade_sympy import verified_dependency_trace
+    spec=local_spec(2);z=S.zeros(8,1)
+    with pytest.raises(ValueError,match='unknown source owner'):
+        verified_dependency_trace(z,[{'initial_state':z,'z':z,
+                                      'kind':'solar-certified','cell':0}])
+    with pytest.raises(ValueError,match='untyped'):
+        dependency_cone(None,[{'cell':1}])
+
+
+def test_cone_expands_only_after_actual_scheduled_edge():
+    from smith_filsinger_local_causal_ade_sympy import verified_dependency_trace
+    spec=local_spec(3);z=S.zeros(12,1)
+    first=source_kick(spec,z,2,1)
+    edges=[e for e in edge_updates(spec) if e[0]=='curl']
+    remote=next(e for e in edges if e[1]==0)
+    stage=cayley_edge_step(spec,first['z'],remote)
+    result=verified_dependency_trace(z,[first,stage])
+    assert result['cone']=={2}
+    assert all(stage['z'][k]==0 for k in range(12) if k!=2)
+
+
+def test_forged_source_kick_cannot_modify_other_active_coordinate():
+    from smith_filsinger_local_causal_ade_sympy import verified_dependency_trace
+    spec=local_spec(3);z=S.zeros(12,1)
+    first=source_kick(spec,z,2,1)
+    second=source_kick(spec,first['z'],0,1,origin='controller')
+    fake=dict(second)
+    fake['z']=second['z'].copy()
+    fake['z'][2]+=1
+    with pytest.raises(ValueError,match='source kick violates local'):
+        verified_dependency_trace(z,[first,fake])
