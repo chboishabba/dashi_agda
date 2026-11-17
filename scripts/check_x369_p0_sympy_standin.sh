@@ -99,5 +99,48 @@ check('declared original-coordinate MDL minimal sufficient candidate is 2',
     min(cost for name,cost,sufficient in
         [('first',1,False),('two-centered',2,True),('raw',3,True)]
         if sufficient)==2)
+# Exact source-head quantization safety needs BOTH a bound and a
+# strict selected-vs-unselected margin. This is finite stand-in for
+# the Agda interval certificate, not a source quantizer validation.
+positive=0
+for si,sj,ei,ej in itertools.product(range(-2,4), repeat=4):
+    if si <= sj:
+        continue
+    bound_i=abs(ei); bound_j=abs(ej)
+    if si-bound_i>sj+bound_j:
+        positive+=1
+        if not si+ei>sj+ej:
+            raise AssertionError('quantized strict 2-expert margin failed')
+check('all 2-expert strict error-envelopes preserve order',positive>0)
+# Demonstrate strict separation is sufficient but not necessary:
+# conservative bounds can overlap with zero actual perturbation.
+check('strict margin not necessary',not (1-2>0+2) and (1+0>0+0))
+# For THREE experts, every source top-1 is preserved whenever
+# its lower envelope outranks every competitor's upper envelope.
+certified=0
+for scores in itertools.product((0,1,3),repeat=3):
+    winner=max(range(3),key=lambda i:scores[i])
+    if any(scores[winner]<=scores[j] for j in range(3) if j!=winner):
+        continue
+    for errors in itertools.product((-1,0,1),repeat=3):
+        if all(scores[winner]-abs(errors[winner])>
+               scores[j]+abs(errors[j])
+               for j in range(3) if j!=winner):
+            certified+=1
+            if max(range(3),key=lambda i:scores[i]+errors[i])!=winner:
+                raise AssertionError('quantized 3-expert top1 changed')
+check('all certified 3-expert top1 sets preserved',certified>0)
+# Exact two-channel quantizer-score error also obeys the absolute
+# coefficient envelope (triangle inequality). Quantizers themselves
+# must provide actual error tolerances.
+for W in itertools.product((-2,-1,0,1,2),repeat=3):
+    w0,w1,w2=W
+    for residuals in itertools.product((-1,0,1),repeat=3):
+        ds,df,dD=residuals
+        err=(w0-w2)*ds+(w1-w2)*df+w2*dD
+        budget=abs(w0-w2)*abs(ds)+abs(w1-w2)*abs(df)+abs(w2)*abs(dD)
+        if abs(err)>budget:
+            raise AssertionError('quantized error exceeds triangle envelope')
+check('source coefficient-weighted quantizer error envelope',True)
 print('X369_SYMPY_STANDIN_PASS',len(checks),'symbolic/finite checks')
 PY
