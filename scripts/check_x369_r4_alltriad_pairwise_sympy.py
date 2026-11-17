@@ -98,6 +98,29 @@ for arm,expected in (("coherent",(2,3)),("mixed",(3,2))):
       original[ids[0]]-original[ids[1]]>
        relative_budget(h[ids[0]],h[ids[1]],x,v,w,
           eps,eps,eps,eps,eps,eb,eb,bits))
+    # Pairwise certificate controls the OSCILLATION of selected logit
+    # perturbations without separately bounding a common unary offset.
+    # For k=2, osc(delta)=|delta_selected0-delta_selected1|,
+    # so L1 softmax change <= B_ij/2 by source softmax gauge invariance.
+    def softmax(logits):
+        zz=[S.exp(v) for v in logits]
+        return [v/sum(zz) for v in zz]
+    before=softmax([original[i] for i in ids])
+    after=softmax([perturbed[i] for i in ids])
+    l1=S.N(sum(abs(a-b) for a,b in zip(before,after)),40)
+    pair_selected=relative_budget(
+      h[ids[0]],h[ids[1]],x,v,w,eps,eps,eps,eps,eps,
+      eb,eb,bits)
+    check(arm+" selected softmax from pairwise score bound",
+          l1<=pair_selected/2)
+    # If selected expert vector outputs have norm <=M, the mixture
+    # error from score-only perturbation is bounded by M*pairB/2.
+    M=R(3)
+    outputs=(R(3),R(-2))
+    err=S.N(abs(sum((after[t]-before[t])*outputs[t]
+                    for t in range(2))),40)
+    check(arm+" source mixture bound from pairwise score bound",
+          err<=M*pair_selected/2)
     observed=sorted(range(4),key=lambda i:(-perturbed[i],i))[:2]
     check(arm+" perturbed selected order",observed==ids)
     print("R4_ALLTRIAD_PAIR",arm,"source",original,
