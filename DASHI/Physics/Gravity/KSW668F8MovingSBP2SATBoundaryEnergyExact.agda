@@ -76,7 +76,7 @@ centeredSBP2FiniteTelescope :
   (xs : List ℚ) →
   centeredEnergySum xs
     ≡ half * (lastSquare xs + - firstSquare xs)
-centeredSBP2FiniteTelescope [] = refl
+centeredSBP2FiniteTelescope [] = solve []
 centeredSBP2FiniteTelescope (x ∷ []) = solve []
 centeredSBP2FiniteTelescope (x ∷ y ∷ xs)
   rewrite centeredSBP2FiniteTelescope (y ∷ xs)
@@ -146,3 +146,34 @@ originalFullNormalSourceBudgetAtSlice :
     + upperBoundaryAtSlice pN mN
 originalFullNormalSourceBudgetAtSlice p0 m0 pN mN s
   = solve []
+
+-- The original U stage includes the moving shift:
+-- U_T=(P+M)/2, Udot=(P+M)/2 +v*(P-M)/2.
+-- Under the exact scalar FV face Green formula, the radial force
+-- cancels the derivative of radial-gradient energy only up to the
+-- moving-coordinate shift. This explicit residual must be retained
+-- in the full coupled energy budget, not called numerical leakage.
+
+originalRadialGradientMovingShift :
+  (conductance uLeft uRight pLeft pRight mLeft mRight v : ℚ) →
+  (conductance * (uRight + - uLeft) *
+    ((1ℚ + v) * (pRight + - pLeft)
+       + (1ℚ + - v) * (mRight + - mLeft)))
+  + - (conductance * (uRight + - uLeft) *
+    ((pRight + - pLeft) + (mRight + - mLeft)))
+  ≡ conductance * v * (uRight + - uLeft)
+      * ((pRight + - pLeft) + - (mRight + - mLeft))
+originalRadialGradientMovingShift
+  conductance uLeft uRight pLeft pRight mLeft mRight v = solve []
+
+-- Warp force remains nonzero in the bulk:
+-- F_warp=-(3/2) invz*(P-M). Its contribution to the conventional
+-- (P²+M²)/4 energy is -(3/4) invz*(P²-M²).
+-- A z^-3 weighted energy and time-dependent Jacobian are required
+-- to absorb/control it. This finite identity keeps the term visible.
+originalWarpPowerInCharacteristicEnergy :
+  (p m invz : ℚ) →
+  half * (p + m)
+    * (- (((+ 3) / 2) * invz * (p + - m)))
+  ≡ - (((+ 3) / 4) * invz * (square p + - square m))
+originalWarpPowerInCharacteristicEnergy p m invz = solve []
