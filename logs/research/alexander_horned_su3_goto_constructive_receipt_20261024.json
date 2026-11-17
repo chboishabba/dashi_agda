@@ -1,0 +1,105 @@
+{
+  "schema": "dashi.horned-su3-constructive-commutator-maxcut/v1",
+  "date": "2026-10-24",
+  "owner_branch": "alexander-horned-c3-equivariant-20261024",
+  "original_authority": [
+    {
+      "author": "J. W. Alexander",
+      "year": 1924,
+      "role": "original horned sphere"
+    },
+    {
+      "author": "Allen Hatcher",
+      "work": "Algebraic Topology, Example 2B.2",
+      "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+      "role": "injective commutator free-group tower and direct-limit topology"
+    },
+    {
+      "author": "Morikuni Gotô",
+      "year": 1949,
+      "work": "A Theorem on compact semi-simple groups",
+      "doi": "10.2969/jmsj/00130270",
+      "role": "every compact connected semisimple group element is a commutator"
+    },
+    {
+      "author": "Cecilia Jarlskog",
+      "year": 1985,
+      "doi": "10.1103/PhysRevLett.55.1039",
+      "role": "CP-odd invariant underlying chosen neutrino root"
+    }
+  ],
+  "repo_owners": {
+    "horn_stage": "DASHI/Mathematics/Topology/AlexanderHornedC3FiniteStageExact.agda",
+    "horn_positive_su3": "DASHI/Mathematics/Topology/AlexanderHornedC3CompactCommutatorRepresentationExact.agda",
+    "numerical_constructive_probe": "scripts/alexander_horned_c3_su3_constructive_probe.py",
+    "neutrino_cp_sibling": "DASHI/Physics/QFT/NeutrinoExistingCPSectorLeptonBridgeExact.agda (sibling PR #1247)",
+    "lepton_su3_target_sibling": "DASHI/Physics/QFT/NeutrinoHornedSU3RootExact.agda (sibling PR #1247)"
+  },
+  "source_blobs": {
+    "horn_positive_su3": "59d05550ce2ab3fae21373fb4ad0414da095e6a7",
+    "numerical_probe": "a2afad5b7c1733149990d0d070a5793c24562f4d",
+    "lepton_su3": "f20d3497a71476c09d749d737be47db58c1dcd04",
+    "lepton_cp": "8837b0a9394ea4b4ca531f4d85fbeb13e8537d70"
+  },
+  "explicit_su3_commutator_construction": {
+    "given": "A=V diag(lambda0,lambda1,lambda2)V†; |lambda_j|=1; lambda0*lambda1*lambda2=1",
+    "P": "e_j ↦ e_(j+1 modulo 3); det P=+1",
+    "D": "diag(1,1/lambda1,lambda0) times common unit phase chosen for det=1",
+    "identity": "[P,D]=diag(lambda0,lambda1,lambda2); [V P V†,V D V†]=A",
+    "citation_grade": "specialization of Gotô 1949; constructive formula independently algebraically checked",
+    "recursive_construction": "Every binary source generator x_w→A_w with A_w=[A_w0,A_w1]; universal group-colimit property gives rho_A:G_A→SU(3)",
+    "three_arm": "rho_i(g)=T^i rho_A(g)T^{-i}, T^3=I, thereby rho(r(g))=T rho(g)T^-1; R(g,i)=rho(g)T^i on semidirect G⋊C3",
+    "scope": "abstract groups; no geometric pi1 kernel, continuous source geometry, VOA same-object map, physical lepton dynamics or fit"
+  },
+  "verified_independently": {
+    "runtime": "Python 3.11 NumPy 2.3.5 SciPy 1.17.0, independent local script /tmp/horn_su3.py and longer-depth variant",
+    "five_level": {
+      "parent_commutator_checks": 31,
+      "leaves": 32,
+      "max_commutator_residual": 4.9850145806131525e-15,
+      "max_unitarity_defect": 4.5978515173820066e-15,
+      "max_determinant_defect": 2.5631488888267375e-15
+    },
+    "eight_level": {
+      "parent_commutator_checks": 255,
+      "leaves": 256,
+      "max_commutator_residual": 7.836612150722834e-15,
+      "max_unitarity_defect": 5.705031062431451e-15,
+      "max_determinant_defect": 2.9981161145699657e-15
+    },
+    "three_arm": [
+      4.43365866059833e-15,
+      4.540505173883902e-15,
+      4.755853591381347e-15
+    ],
+    "A_unitary_defect": 3.1769186570587013e-16,
+    "A_det_approx": [
+      1,
+      -8.326672684688676e-16
+    ],
+    "norm_A_fifth_minus_identity": 1.9895790689882642,
+    "exact_fraction_target": {
+      "U_unitary": true,
+      "S1_hermitian": true,
+      "S1_involutive": true,
+      "det_S1_exact_one": true,
+      "A_unitary": true,
+      "det_A_exact_one": true,
+      "A_fifth_nonidentity": true,
+      "relative_galois_trace": "442358853598/216225930001"
+    }
+  },
+  "status": {
+    "mathematical_existence": "PROVED_ON_PAPER_from classical Gotô and universal property with explicit spectral construction",
+    "Agda_stage_compatibility": "SOURCE_WRITTEN_NOT_TYPECHECKED",
+    "infinite_colimit_in_Agda": "NOT_FORMALIZED",
+    "SU3_analytic_Goto_in_Agda": "NOT_FORMALIZED",
+    "committed_python_probe_exact_head_run": "NOT_RUN",
+    "independent_local_numeric_algorithm": "PASS",
+    "independent_exact_fraction_target": "PASS",
+    "three_copy_geometric_pi1_isomorphism": "OPEN",
+    "physical_leptonic_intertwiner": "OPEN",
+    "parameter_free_prediction": "ABSENT; existence applies to arbitrary A∈SU(3)",
+    "source_infinite_image": "FOLLOWS from nonintegral exact Galois trace and homomorphism construction; algebraic integer theorem external"
+  }
+}

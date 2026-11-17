@@ -1,0 +1,1917 @@
+# Alexander horned C3 — original inquiry, max-cut phases, deliverables and acceptance (2026-10-27)
+
+**Current implementation:** [PR #1244](https://github.com/chboishabba/dashi_agda/pull/1244), draft, on `alexander-horned-c3-equivariant-20261024`.
+**Stacked geometry/end-space comparison:** [PR #1254](https://github.com/chboishabba/dashi_agda/pull/1254), draft, **BASE = PR #1244's branch**, not an independent master merge.
+**Independent analytic/cyclotomic inquiry:** [PR #1260](https://github.com/chboishabba/dashi_agda/pull/1260), draft, base master.
+**Scope:** source-authored mathematics, formal proof interfaces, explicit geometric choices, finite executable tests, and separately scoped experimental proposals. Nothing in this document certifies exact-head Lean/Agda compilation or a physical discovery.
+
+## 1. Return to the original question
+
+The foundational geometric inquiry is whether three chosen, supported copies of the CLASSICAL Alexander–Hatcher horned wild solid, joined by an ordinary star of tubes in Euclidean three-space, yield a genuine (C_3)-invariant embedded topological ball with
+
+```text
+ E := S³ \ B;
+ π₁(E,x₀) ≅ G_A * G_A * G_A;
+ [R_*] ∈ Out(π₁(E,x₀)) has exact order 3.
+```
+
+Here `G_A` is the nontrivial perfect one-sector Hatcher exterior group, not an arbitrary perfect finite quotient. The research needs three distinct answers: **(i)** a valid source-supported classical/PAPER construction, **(ii)** a fully specified same-object ambient proof with exact-homeomorphism/collar witnesses, and **(iii)** a kernel-checked formalization. A finite simulation does not pay (ii) or (iii).
+
+The nearby SECOND inquiry asks whether a finite, programmable nonabelian flat gauge emulator can show a robust **relative** SU2 `-I` Wilson signal and recursive commutator compatibility. The signal is a design/emulation test, not a manufactured wild topology or spontaneous spin holonomy.
+
+The #1260 `π,e^i,9999!` / Pickover inquiry is a THIRD, **independent** signed real-angle problem. Reused C3 roots and CRT residues are representation-level cross-pollination, not a route from the wild exterior to `sign(sin(99^(9999!)))` without a new analytic attachment.
+
+## 2. Source roots and non-promotion boundaries
+
+| Root / owner | What it actually proves / implements | Not automatically established |
+|---|---|---|
+| J. W. Alexander, *An Example of a Simply Connected Surface Bounding a Region Which Is Not Simply Connected*, PNAS (1924) | Original wild embedded sphere | OUR rational C3 placement |
+| A. Hatcher, *Algebraic Topology*, Example 2B.2, author-PDF pages 179–180 / printed pages 171–172, https://pi.math.cornell.edu/~hatcher/AT/AT.pdf | Decreasing X_n handlebodies, increasing exterior Y_n, π₁(Y_n)=F_(2^n), injective commutator maps, compactness and direct limit | A kernel witness for OUR three-sector relative collar |
+| F. Lippert, *The Alexander Horned Sphere and Bing's Hooked Rug*, §§2.1–2.3 | Source-supported shrinking horn stages and undisturbed patches | Coordinate-by-coordinate infinite-stage Lean embedding |
+| Classical van Kampen, Schoenflies, tame tree-neighbourhood and based-path transport | Group gluing for certified geometric covers | A proof that the chosen source covers/homotopies exist |
+| Deicyde/hatcher-at (pinned `fb20d71`), Mathlib | Existing `coprodIEquiv`, homotopy/pointed transport, `IsPathConnected.union`, van Kampen consumer | A checked DASHI exact-head import or new geometric maps |
+| DASHI #1244 pre-existing code | C3 scaffold, source-side Agda meridian algebra, 2I recursion, clopen finite tests, conditional Lean cover/group adapters | Exterior group of a fabricated finite tame ball |
+| DASHI #1254 recent source branch | Chronological cylinder orientation, PL ancestry, bounded genus-zero surface caps, Richards-end interfaces | Wild Hatcher X_n handlebodies or a Richards infinite realization |
+| Machin (1706); Lindemann (1882), Weierstrass (1885); Manuel Eberl AFP (2021) | Original arctangent identity, analytic transcendence, actual Isabelle formal theorem | Signed Pickover phase, or an imported Lean/Agda theorem |
+| Sugawa et al. (2021), Liang et al. (2024) | External NONABELIAN synthetic-gauge experiments in their selected systems | Experiment on our wild solid or automatic physical flatness |
+
+Original roots, reprints, independent measurements, theorem statements, source code, finite tests, toolchain receipts and empirical observations must be distinguishable in every claim.
+
+## 3. Phase ledger: actual closures and missing acceptance
+
+| Phase | Mathematical / deliverable target | Status and source | Exact remaining acceptance |
+|---|---|---|---|
+| A. Historical one-sector mathematical source | Hatcher's F_(2^n) commutator tower; G_A perfect nontrivial | ORIGINAL classical construction; prior DASHI word/group probes and formal interfaces | No reinvention; retain original pages/coordinates and the source-vs-printer distinction |
+| B. Three-sector explicit finite scaffold | c_i=9e_i, radii 15/4 and 17/4, spokes, separator sphere disks, C3 orbit | Rational geometric construction and executable checks in #1244 | Actual chosen wild satellite maps must fit their reference envelopes and preserve stationary caps |
+| C. Intrinsic end cylinders / clopen balls | Three binary Cantor address copies, mass, C3 orbit, chronological append correction | Existing Agda sources; tame Euclidean comparator; #1254 owns generic orientation theorem | NEVER substitute the tame Cantor image for a wild ambient embedding |
+| D. Point-set cover and overlap | The relative OPEN cover U_i=C∪S_i, pair/triple overlap C; pierced-shell interval×disk chart | Actual formulas and Lean **source-written** radius adapter | Pinned Lean compile; instantiate metric inclusion E→R³ |
+| E. Connectedness reduction (THIS CUT) | Avoid assuming each U_i path-connected separately | New `ThreeArmRadiusConnectedAssembly.lean` composes Mathlib `IsPathConnected.union` with literal p_i∈C∩S_i; `scripts/alexander_horned_c3_radius_overlap_witness.py` reuses original geometry. Independent exact rational p_i/c_i audit PASS | Show C and S_i individually path-connected in the **actual** wild exterior; actual Lean `p_i:X` with membership, not merely ambient coordinates; exact-head kernel check |
+| F. Central π1 | `π₁(C,x₀)=1`, although `H₂(C)=Z` in R³ | Classical tame-tree/Schoenflies argument; `ThreeArmCentralPi1Reduction` consumer | Explicit tame-tree ambient equivalence or suitable existing formal theorem and kernel witness |
+| G. Hatcher relative satellite → member | Genuine source space W_i, homotopy equivalence W_i≃ₕU_i, based path to x₀, induced meridian map | Real conditional interfaces in `ThreeArmHatcherPathTransport.lean`; source Hatcher construction | **PRINCIPAL OPEN GEOMETRIC GATE**: map actual linked handlebody/exterior tower through preserved cap and collar, all finite stages and limit |
+| H. Ambient group and outer C3 | `π₁(E) ≅ G_A*G_A*G_A`; rotation noninner order3 | Classical paper-level gluing and algebraic factor argument | G/F + actual C3 naturality + Lean source typecheck. Do not report this as a fully internal theorem earlier |
+| I. Flat gauge finite emulator | 2I=120 commutator section; q³=-I, Q8 negative control; U6 three channels; synthetic noise/shot model | Runnable bounded finite implementation with protocols; no lab observation | Actual independent physical plaquette flatness, calibration, hardware controls if an empirical claim is desired |
+| J. Analytic Pickover cross-project | `sign(sin(99^(9999!)))`; exact e^i seeded complex power, Machin pi enclosure | #1260 moderate-exponent signed regressions and CRT non-descent; phase sign UNKNOWN | Effective certified terminal real-angle separation, with both producer and verifier resource cost |
+
+### The three indispensable finite / ideal objects (do not collapse them)
+
+1. The finite **tame expanding ball** `B_n`: smooth/tame boundary, simply-connected exterior by tame Schoenflies.
+2. The finite **enclosing handlebody** `X_n`: genus `2^n`; exterior `Y_n=R³\X_n` has `π₁=F_(2^n)`. Its three-sector analogue has rank `3*2^n`.
+3. The **wild limit** `B=⋂X_n`: source exterior `E=⋃Y_n` has nontrivial PERFECT `π₁` but trivial `H₁`, via commutator bonding. In R³ the exterior has `H₂=Z`; in S³ the complement has trivial reduced homology.
+
+A finite genus-zero capped PL sphere from #1254 is not the source Hatcher handlebody `X_n`, even if its boundary is a combinatorial sphere and its ends use the same tree.
+
+## 4. Current exact residual after the new connectivity reduction
+
+```text
+OWNERS / ALREADY PAID
+  [source]   Alexander + Hatcher supported wild one-sector geometry
+  [finite]   C3 centres, radius inequalities, p_i = 13 e_i,
+             distinct satellite balls, pierced-shell atlas, basepoint paths
+  [Lean-src] literal metric radius-core / radius-arm sets, open cover,
+             disjointness, coverage, central-to-overlap pi1 reduction,
+             IsPathConnected(C union S_i) from C, S_i and C∩S_i≠∅,
+             source W_i homotopy+basepoint-path -> ambient pi1
+  [Agda-src] finite word/address and abelian-character blindness
+  [Python]   2I source recursion and finite Wilson synthetic controls
+
+OPEN ACCEPTANCE LEAVES (minimal consumer-shaped input)
+  G1  specified same-object supported Hatcher wild ball B_A with
+      explicit stationary inward cap and linked stage X_n maps
+  G2  actual π1(C)=1 + IsPathConnected(C) (tame star complement)
+  G3  IsPathConnected(S_i) and actual X-valued overlap p_i
+  G4  source W_i ≃_h U_i and meridian-map naturality for all sectors
+  G5  geometric C3 transport of G4 and exact-head Lean/Agda kernel build
+
+PRIORITY: G1/G4 are the bottleneck; G2/G3 can be handled separately,
+using prior Mathlib/topology modules without another free-product engine.
+```
+
+Do not invent `G1/G4` by asserting a group equivalence that is merely
+isomorphic on finite labels. The user-supplied "assume already in repo"
+means exhaust donor archaeology, including the **source** handlebody
+and supported cap modules, before introducing a new existence premise.
+
+## 5. Pareto/snowball/Ibrahim implementation sequence
+
+**Cut P0.1 — paid finite geometry:** maintain one canonical actual-cover test import path. The new test directly imports the existing `alexander_horned_c3_explicit_open_cover` and `equivariant_basing_paths`, rather than copying formulas. It certifies `|p_i-c_i|²=16`, `|p_i-c_j|²=250 (j≠i)`, `|x₀-c_i|²=921`, true overlap, support-envelope exclusion, rotation, and deliberately invalid `12e_i` and `14e_i` controls. Coordinate witnesses by themselves do not prove path-connectivity or wildness.
+
+**Cut P0.2 — exact topology:** use the pinned Hatcher-at `StrongDeformationRetract.fundamentalGroupMulEquivOfEq`/homotopy and standard based-path APIs to formalize a relative satellite cap-slide and central tame complement. Compare directly with Hatcher Example 2B.2's *annular/punctured-torus* patch; treat a sphere-minus-disk as a different cut in the later threefold gluing. Complete the actual chosen stage geometry and meridian mapping, not a fresh group presentation.
+
+**Cut P0.3 — proof kernel:** run `lake build HornedC3` under pinned versions. Run the focused Agda modules via `scripts/check_alexander_horned_c3_exact_head.sh`. Record actual commit SHA/toolchain/log and every error; no release-ready status without an affirmative receipt. If a source theorem fails, repair it first without weakening the geometric hypotheses or adding an axiom.
+
+**Cut P1 — physical feasibility:** publish the finite emulator's depth/noise/shot protocol and actual independent controls. If a device is ever chosen, require verified flatness and relative interference. A graph gauge demonstration and a sculpted wild-looking solid are categorically different experiments.
+
+**Cut P1b — Pickover resource certificate:** #1260's repaired fixed-point `e^i` source and signed-`99^k` controls are genuine finite analytic progress. Its exact new budget audit
+`scripts/check_pickover_factorial_pi_interval_width_budget.py`
+checks `E=9999!` (35,656 decimal digits; 118,445 bits).
+Since `99^10>10^19`, `N=99^E>10^(19E/10)`.
+For ordinary full-width `π` brackets `[L,U]⊂(3,4)`
+with `U-L=10^(-P)` and
+`P≤19E/10-2`, `N/L-N/U>100/16>1`.
+Thus this CERTAIN NAIVE interval method cannot isolate a single winding
+bin at that P. This is not an information-theoretic lower bound for every
+algorithm and does not give the terminal sine sign.
+
+**Cut P2 — write-up and experiment boundary:** one original-source math
+paper separates the classical threefold gluing proof from fully
+machine-checked claims. A second finite-gauge methods report specifies
+U6 controls and noise statistics; any empirical paper requires data.
+The Pickover problem remains a separate analytic manuscript/proof target,
+not a purported consequence of wild topology.
+
+## 6. Completion / deliverable sign-off matrix
+
+- **D1 Mathematical note:** explicit chosen `B`, source citations,
+  untouched cap charts, a detailed argument for relative collars,
+  actual threefold cover, and C3 outer-action naturality.
+  **Paper-level only until every cited existence map is specified.**
+- **D2 Formal Lean root:** `HornedC3.lean` importing the exact
+  metric cover, connectedness reduction, central π1, group/homotopy
+  transports. **SOURCE-WRITTEN; exact-head receipt outstanding.**
+- **D3 Agda group/end sources:** original Horn word, compatible 2I,
+  chronological Cantor-cylinder orientation and mass, abelian BIDI,
+  with original source roots. **Do not claim intrinsic end homeomorphism
+  implies exterior homeomorphism.**
+- **D4 Reproducible finite tests:** current cover, basing, overlap, 2I,
+  Wilson noise/shot and destructive controls in focused Python workflow;
+  exact source run + log should be attached before claiming a green
+  head.
+- **D5 Analytic Pickover certificate:** terminal real phase bound and
+  signed verifier. **OPEN**, notwithstanding exact CRT and selected
+  six moderate-`k` signs. Resource audit documents why ordinary brute
+  π enclosures are not a solution strategy.
+- **D6 Applied/prototype evidence:** no hardware measured; realistic
+  null/positive experimental comparisons remain planned.
+
+## 7. Exit and attribution rules
+
+The programme is **not fully complete** until the specific wild
+embedding and source member retractions are constructed and proof-checked.
+No amount of finite images, repeated web reporting, modular phase labels,
+coinciding scalar traces, or additional unmerged sibling PRs discharges
+those maps. Do not call a topological model physically measured.
+
+Provenance tiers to track by deliverable: original root → independent
+source/exposition → repository-specific derivation → source-written
+code → locally executed finite test → exact-blob/CI receipt →
+kernel-verified formal theorem → independent experimental measurement.
+A result may remain valid at an earlier tier without inheriting later
+tiers. Do not overwrite earlier owners or present external results as
+new DASHI inventions.
+
+## Final 2026-10-27 union/homotopy connector update
+
+The parent library now imports BOTH
+`ThreeArmRadiusConnectedAssembly.lean` and
+`ThreeArmRadiusConnectedHatcherTransport.lean`.
+The latter calls the ALREADY EXISTING
+`radiusCutSourceGroupsEquivPi1` with
+`radiusCover_member_pathConnected`: it takes
+`IsPathConnected(C)`, `IsPathConnected(S_i)`,
+actual `p_i:X` in `C∩S_i`, `π₁(C)=1` and
+the source-member meridian group equivalences, and obtains
+`*_(i:Fin3)G_i ≃* π₁(X,x₀)`.
+It **does not** need a separately assumed
+`IsPathConnected(C∪S_i)`.
+
+The independent exact rational spot audit confirms
+`|13e_i-9e_i|²=16`,
+`|13e_i-9e_j|²=250` for `j≠i`,
+and `|(20,20,20)-9e_i|²=921`.
+The executable
+`scripts/alexander_horned_c3_radius_overlap_witness.py`
+imports the ORIGINAL cover/basing constructors and
+includes two deliberately failing cut-membership
+controls (12e_i and 14e_i); the PR workflow now targets it.
+Mathlib `IsPathConnected.union` and scoped `ContinuousMap`
+syntax were inspected against current Mathlib source; a
+missing scoped notation declaration was fixed before final
+head verification. This remains SOURCE-WRITTEN Lean, not
+an exact-head kernel receipt.
+
+The focused PR Actions lookup at the newly written
+head returned **zero PR-triggered workflow runs** on the
+queried first page. No CI success or build failure can
+be inferred from that empty result.
+
+This shrinks G3 in the phase ledger to the two real
+geometric tasks `IsPathConnected(S_i)` and actual
+`p_i` membership; **G1/G4** (the supported wild
+relative collar and its meridian maps) remains P0.
+
+
+## 2026-10-27 Hatcher compact-stage absorption max-cut
+
+**Original source verified directly from the author's PDF**, Example 2B.2,
+printed pp. 171-172, https://pi.math.cornell.edu/~hatcher/AT/AT.pdf.
+Hatcher writes `B=intersection X_n` (decreasing linked
+handlebodies), `E=R³\\B=union Y_n` with `Y_n=R³\\X_n`
+increasing. He specifically invokes **compactness of loop images
+AND loop-homotopy images** to factor them into finite Y_n.
+He separately proves finite-stage `π₁(Y_n)=F_(2^n)` and the
+injectivity/commutator replacement of stage meridians.
+Neither theorem is attributed to this new repository adaptation.
+
+**New concrete theorem source**, imported by `HornedC3.lean`:
+`HatcherOpenExhaustionCompactAbsorption.lean`.
+It reuses exact current Mathlib
+`IsCompact.elim_directed_cover`
+(no new compactness axiom) to prove:
+
+```text
+  increasing OPEN sets Y_n, K compact, K subset union_n Y_n
+           ⇒ exists N, K subset Y_N
+
+  T compact, f : C(T,X), X = union_n Y_n
+           ⇒ exists N, g : C(T,Y_N), forall t, g(t) = f(t) in X
+```
+
+This closes the continuous-factorization **compactness component**
+of Hatcher's argument at the SOURCE level, including the
+`I` loop and `I×I` homotopy domains once their ordinary
+compactness and boundary conditions are supplied. It does **not**
+construct `X_n`, certify `Y_n` from the actual selected wild
+B, prove finite-stage meridian injectivity or formally establish
+`π₁(E)=colim π₁(Y_n)`.
+
+**Severe assumptions controls:** standalone
+`scripts/alexander_horned_c3_open_exhaustion_severe_controls.py`
+was committed and added to the focused Python job.
+A compact `K={0}∪{1/k:k>=1}` with closed, increasing
+`F_n={0}∪{1/k:1<=k<=n}` satisfies union K but has
+no stage covering K (explicit witness `1/(n+1)`).
+Each F_n is non-open in real topology. In the discrete
+compact set `{0,1}`, the open sets `{0}` and `{1}`
+cover K but neither alone suffices when no directedness
+hypothesis is imposed. An independent local Python
+replay checked 256 levels and these exact counterexamples
+and PASSED. Finite checks are not Lean kernel receipts;
+the mathematical counterexamples are given by
+universal formulas.
+
+**Donor/claim ceiling:** Mathlib owns the directed-compact
+cover theorem; Hatcher owns its use for the wild exterior;
+Alexander (1924) owns the original wild-sphere example.
+The DASHI contribution is a narrowly shaped, reusable
+Lean-source adapter and assumption falsifiers. The local
+container lacks Lean/Lake and GitHub was inaccessible for
+local cloning; no exact-head Lean build can be asserted.
+The missing **geometric P0** is still the actual linked
+handlebody tower and the supported relative-satellite
+homotopy map; the stagewise maps and subgroup injections
+must be wired to prove the full direct limit.
+
+**Latest adjacent source audit:** #1254 has merged prior
+#1244 parent source into its stacked branch and supplies
+surface-PL, Richards-end and original-source finiteness
+comparators. Its genus-zero reverse triangle caps and
+Power (3,6)-tightness controls are NOT 3D Hatcher linked
+`X_n`. #1273's BCH source-fidelity audit reinforces
+separating an original text claim, source proof object and
+kernel receipt; it supplies no direct wild-ball geometry.
+Do not copy newer unrelated PRs for coincident terms.
+
+
+## 2026-10-27 relative-ambient Hatcher compactness correction
+
+**Issue diagnosed in the source (not an inferred theorem):** the original
+`compactMapFactorsThroughOpenStage` API asked for
+`Set.univ ⊆ ⋃ n, Y n`. With Hatcher's actual spatial ambient
+`X = ℝ³`, this is FALSE: the union is `E = ℝ³ \ B`,
+not all of `ℝ³`. It could be made true by changing the ambient
+type to `E`, but that makes the spatial embedding/collar interface
+harder and is not necessary.
+
+**New source-written, conditional Lean proof adapter**
+`HatcherOpenExhaustionCompactAbsorption.lean` now includes:
+
+- `compactMapAbsorbedByOpenStagesRelative`: only
+  `range(f) ⊆ ⋃ n, Y n` is required.
+- `compactMapFactorsThroughOpenStageRelative`: constructs a
+  continuous map into a particular stage, still based in the
+  actual spatial ambient.
+- `compactMapFactorsThroughNestedClosedExteriors`: accepts
+  actual decreasing CLOSED sets `H_n` and a continuous map
+  `f : C(T,X)` from compact `T` avoiding `⋂ n, H_n`,
+  and produces `g : C(T,(H_N)ᶜ)` with ambient equality.
+
+`Set.compl_iInter` provides the precise complement-of-intersection
+identity; `IsCompact.elim_directed_cover` remains Mathlib's compactness
+engine. Original wild-group and stage claims remain Hatcher's, not
+new discoveries. New declarations are **SOURCE-WRITTEN ONLY**:
+exact-head Lean typecheck has not been performed in this environment.
+The original stronger library interfaces remain intact for consumers.
+
+**New severe rational regression**
+`scripts/alexander_horned_c3_relative_exterior_absorption.py`.
+The MODEL `H_n=[-1/(n+1),1/(n+1)] ⊂ ℝ`
+decreases to `B={0}`, so its exteriors never cover the ambient R.
+Nevertheless the compact affine image `[1/3,1/2]` is contained
+in `H_3ᶜ`, but not `H_2ᶜ`. It also exhibits two counterexamples:
+a noncompact discrete source `f(k)=1/(k+1)` escaping every single
+stage, and an image meeting the limit at `0` that never lies in
+any exterior stage. This is an EXACT MODEL control in one dimension,
+NOT an Alexander three-dimensional linked-handlebody instantiation.
+Independent local rational replay PASS (1, 10, 256 and 1024 levels);
+the exact pushed Python blob still needs checked execution in CI.
+The focused workflow now calls it.
+
+**Remaining max-cut after this correction:**
+G1 geometry instantiate ACTUAL nested closed Hatcher handlebodies
+`X_n ⊂ ℝ³` with meridian/annular collar controls;
+G2 central π1/triviality and connectedness in actual selected E;
+G3 star/satellite connectedness and valid actual overlap points;
+G4 actual satellite relative homotopy equivalence and meridian
+naturality;
+G5 exact-head Lean/Agda kernel build; for group colimit also establish
+finite-stage π1 identification and injection. The new lemma pays
+only loop/homotopy compactness, NOT these other obligations.
+Do not import #1254's finite genus-zero surface cap as `X_n`.
+
+**Adjacent PR checks:** #1254 owns exotic topology and has merged
+this parent compactness work; #1273 studies formalization source
+fidelity; #1260's Pickover analytic sign remains an independent
+resource/real-angle gate. #1275's Zipf-family work is a useful
+falsification/acceptance methodological comparator, not a topology
+proof. No Monster 3B or finite SU2 character equality is offered
+as a map from an actual 3D wild exterior.
+
+**Credit:** Alexander (1924) original wild sphere; Hatcher
+AT Example 2B.2 printed pp.171–172 original nested-handlebody
+fundamental-group proof; Mathlib original compactness/De Morgan;
+DASHI #1244 current relative-ambient adapter and finite tests.
+Prior Ibrahim Monster 3B proof ownership untouched. Kernel/physical
+claims remain fail-closed.
+
+
+## 2026-10-28 full steelman, balanced ternary, zeta commuting squares and orbifold reuse
+
+**User-authorized full-scope roadmap consolidation.** This section is a
+consumer-first restatement of the full 10-part steelman and of the
+additional balanced-ternary, 13/27–5/9, completed-zeta/RH, and existing
+orbifold requirements. Canonical earlier sections and their original
+ownership are RETAINED rather than replaced. This update reuses the
+existing #1244 / #1254 / #1260 / #1414 and master proof owners. It does
+not merge stacked PRs, change ESD surfaces, claim Monster 3B same-object
+identity, or upgrade source-written modules to Agda/Lean kernel receipts.
+
+### A. Source object, topology and exact algebra
+
+Retain Hatcher's decreasing linked handlebodies `X_n`, increasing
+open exteriors `Y_n=R³\\X_n`, and injected
+`π₁(Y_n)=F_(2^n)` with child commutator meridian map.
+Distinguish finite tame `B_n` from linked `X_n` and the wild
+`B=intersection(X_n)`. Our direct-limit three-root algebra is
+
+```text
+G_n = F< x_(c,w) | c in C3, w in {0,1}^n >, rank 3*2^n
+x_(c,w) -> [ x_(c,w0), x_(c,w1) ]
+G_infty = colim(G_n) ≅ G_A * G_A * G_A
+G_infty != 1, G_infty^ab = 1, rot(x_(c,w)) = x_(c+1,w)
+C3 -> Out(G_infty) is injective (free-factor retraction).
+```
+
+These are the SOURCE-SIDE algebra and original Hatcher prior art.
+The assertion `π₁(E)=G_infty` for the particular chosen three-arm
+wild (B) is CONDITIONAL on a genuine same-object relative
+collar and meridian equivalence and exact-head verification.
+
+### B. Selected geometric cover and homotopy transport
+
+Use `c_i=9e_i`, `r_-=15/4`, `r_+=17/4`,
+`x0=(20,20,20)`, `p_i=13e_i`, and the actual exterior
+`E=R³\\B`. The relative open sets
+`C=E∩⋂_i{d(x,c_i)>r_-}`,
+`S_i=E∩{d(x,c_i)<r_+}`,
+`U_i=C∪S_i` cover E, have `U_i∩U_j=C`,
+and source-specific pierced-shell overlap
+`C∩S_i ≅ (15/4,17/4)×D²_open` in the prescribed
+straight-tube scaffold.
+Use the EXISTING `ThreeArmRadiusConnectedHatcherTransport`,
+`ThreeArmCentralPi1Reduction`,
+`ThreeArmHatcherPathTransport` and
+`HatcherOpenExhaustionCompactAbsorption` rather than constructing
+yet another van Kampen theorem. Required source geometrical data:
+`IsPathConnected C`, `π₁(C)=1`, `IsPathConnected S_i`,
+actual X-valued overlap witness `p_i`,
+`W_i ≃_h U_i`, meridian naturality, and fixed-point C3 action.
+The concrete relative source maps `W_i→U_i` remain the P0 wall.
+Hatcher's compact-open exhaustion does not automatically instantiate
+the chosen `X_n` or a relative cap slide.
+
+### C. Binary Hatcher topology versus NEW balanced ternary observers
+
+**Existing owners (DO NOT REIMPLEMENT):**
+
+- Parent `AlexanderHornedBinaryTernaryExistingCodecWeldExact`
+  already embeds the true horn two-child alphabet into nonzero
+  balanced trits, has a two-bit all-trit code, rejects the zero
+  trit as a literal geometric horn child, and reuses the
+  `Base369BinaryTernaryRefinement` square:
+  binary-then-ternary = ternary-then-binary on RESOLUTION counts.
+- Stacked #1254 `ExoticBalancedTernaryPantsWeldExact`,
+  `ExoticBinaryTernaryPantsCodecExact`, and
+  `TernaryCylinderPantsGeometryExact` own literal balanced
+  3/6/9 address, prefix-ultrametric, variable-length prefix-free
+  code 3->0,6->10,9->11, and two-pants 1->3 surface layout.
+  The ordinary Hatcher horn stays TWO-child: 1->3 is a
+  DIFFERENT geometric consumer requiring its own surface maps.
+- Existing `BalancedTernaryUltrametricExact` owns the depth
+  3^-n prefix observer, not a false topological-group isomorphism
+  `Z_2 ≅ Z_3`. The same Cantor *topological-space type*
+  does not establish isomorphism of the 2-adic/3-adic ADDITIVE
+  topological groups or equal ambient 3D linking.
+
+**NEW parent proof** `AlexanderHornedBalancedTernaryRiemannSquareExact.agda`:
+a literal trit observer `{-1,0,+1}` over the existing
+Horn.Bit, injective `left→-1,right→+1` with a
+surjective collapse `-1,0→left; +1→right`.
+It proves the one-sided retract on digits, words and
+sector addresses, plus the external C3 commuting square.
+The zero digit remains a REAL third observer state: the
+collapse is explicitly noninjective, not a branch-isomorphism.
+It keeps newest-first Horn words and does not silently
+replace them by chronological streams.
+
+At finite depth n there are `3*2^n` actual horn
+meridian labels but `3*3^n` three-sector balanced-trit
+OBSERVATION labels. For independent UNIFORM trits,
+the collapse pushes the measure to binary Bernoulli
+`P(left)=2/3, P(right)=1/3`, NOT the original
+uniform Hatcher binary cylinder law. To recover
+uniform binary measure requires a chosen nonuniform
+trit law or an alternative code; that is extra
+measure data, not topology.
+
+**NEW 13/27 and 5/9 severe symmetry discriminator**:
+the involution on `Trit^2` fixes one zero word and
+has four negative-positive pairs, hence exactly FIVE
+orbits on NINE words. On `Trit^3` it fixes one word,
+has THIRTEEN pairs, hence FOURTEEN orbits on 27
+words. But `C3_sector × Trit^2` also has 27
+words and *three* zero-fibre fixed points under
+FIBREWISE balanced sign reversal; it has TWELVE
+pairs and FIFTEEN orbits. Thus even an exact 27
+cardinality match does not supply an equivariant
+bijection. This is a precise receiver for earlier
+13-in-27, 5-in-9, 3^5-versus-5^3, 369 and trialectic
+work. It is **not** an identification with a
+physical 27-dimensional spin, cube, Monster carrier
+or new third Hatcher child.
+
+### D. Zeta commuting square and RH (properly typed)
+
+Reuse EXISTING:
+`RiemannXiSymmetryExact` (rational coordinate involutions
+and the zero-quartet criterion),
+`C3RiemannConjugationBridgeExact` (critical-line
+reflection/conjugation coincidence),
+`RiemannReflectionOrbitDefectExact` (reflection-even
+alpha²), `RiemannReflectionC3OrbitShapeBridgeExact`
+(shared fixed-plus-pair orbit SHAPE), and the
+`RiemannCompletedZetaBoundary` / analytic programme.
+
+For `s=σ+it`, the classical completed xi satisfies
+`xi(s)=xi(1-s)` (Riemann 1859, DLMF §25.4).
+The rational coordinate transformations are
+```text
+F(s)=1-s,       K(s)=conjugate(s),
+R(s)=1-conjugate(s) = K(F(s)) = F(K(s)).
+R(s)=s iff Re(s)=1/2.
+```
+This is a TRUE commuting square, but it is not RH:
+symmetric entire functions may have OFF-LINE zeros.
+For example `f(s)=(s-1/4)(s-3/4)`
+satisfies `f(1-s)=f(s)`, is conjugation
+compatible, and has two off-critical zeros.
+`RiemannXiSymmetryExact` already distinguishes
+zero-quartet symmetry from locating all zeros.
+The NEW ternary-Xi state proves commuting external
+sector rotation with the **product** of sign
+reversal and critical reflection, plus the
+balanced-zero/critical-line fixed locus. No
+analytic zero or Monster action is thereby
+identified with an indexed trit.
+
+Further #1260 Pickover `exp(i99^(9999!))` is a
+real-angle, non-torsion phase. CRT/μ9999
+projections, `C3` roots and SU2 central -I are
+NOT substitutes for the unknown sine sign.
+
+### E. Already-owned orbifold/outer-semiproduct theorem
+
+**DO NOT INTRODUCE A NEW SEMIDIRECT PRODUCT as a novelty.**
+The original #1244 geometry/roadmap already states that
+for a connected C3-invariant exterior E with a rotation-fixed
+basepoint, the global-quotient orbifold group is the
+SPLIT extension `π₁^orb([E/C3]) ≅ π₁(E) ⋊ C3`.
+After the CONDITIONAL geometric identification, this is
+`(G_A*G_A*G_A) ⋊ C3`. Independently,
+the abstract free-factor rotation is already known to
+give `C3 → Out(G_infty)` injectively.
+The source of C3 orbifold isotropy is EXTERNAL;
+there is no hidden order-three torsion of G_A.
+An exact-head internal orbifold-fundamental-group
+homotopy quotient proof/instance is NOT confirmed:
+retain the classical theorem vs implemented abstract
+action distinction. Monster 3B/Z3 VOA orbifold
+constructions share selected C3 scalar roots but
+are NOT the same geometric orbifold.
+
+### F. Homology, spin and scalar/nonabelian holonomy
+
+Conditional on the SAME E, `H1(E;Z)=0` and
+all FLAT abelian U1 characters vanish, even though
+the source fundamental group is nontrivial.
+For the R3 complement `H2(E;Z)=Z` by Alexander
+duality, while the S3 complement is reduced-acyclic.
+The orientable open R3 exterior has trivial tangent
+bundle and unique spin structure from `H1(E;Z2)=0`.
+Its inherited Euclidean spin connection is flat and
+trivial; the chosen (2I⊂SU2) holonomy is an
+AUXILIARY gauge connection, not spontaneous
+720-degree holonomy. A nonflat U1 bundle/curvature
+is a different observable from flat U1 characters.
+
+Existing `AlexanderHornedAbelianHolonomyBIDIExact`
+proves the source-meridian abelian blindness
+conditional on those relations. The 120-element
+binary-icosahedral commutator section constructs
+compatible nonabelian target values and
+`q=(1+i+j+k)/2`, `q³=-1`, `q⁶=1`.
+The orbifold-compatible FINITE actor
+`(2I)^3 ⋊ C3 → U6` is faithful in its selected
+three-two-dimensional-channel implementation;
+the chosen root-cube first-channel trace is -1
+but six-dimensional normalized trace is 1/3.
+Reuse #1414's 720-degree SU2/SO3 quaternion
+lift AS A SEPARATE proof owner; 3^5=243 vs
+5^3=125 and the 27-cell Fourier counts are
+distinct typed carriers, not additional
+wild-group representations by coincidence.
+
+### G. Finite experiment, uncertainty and physical boundary
+
+The selected ideal depth-n root-cube loop uses
+`L_n=3*4^n` physical gates. Under independent
+isotropic Gaussian angle errors of variance
+σ² per gate, the finite model predicts
+`E[W_n]=-exp(-3*4^n*σ²/8)`.
+It requires separate coherent/correlated-noise,
+identity, commuting U1, Q8, noncentral 2I,
+scrambled-child, plaquette-flatness, readout
+and gauge-conjugation controls. A simulated
+Wilson sign is NOT a measured wild-exterior
+flat connection, a Dirac spectrum, Casimir
+shift, Maxwell anomaly or new propulsion.
+Finite tame horned balls `B_n`, handlebody
+exteriors `Y_n` and the ideal wild limit B
+remain three distinct experimental carriers.
+A valid Maxwell/Dirac self-adjoint operator
+and falsifiable spectral prediction need a
+specified domain and boundary conditions.
+
+### H. Precise remaining cutset, test and attribution
+
+P0: Source-faithful Hatcher X_n maps, stationary
+cap/collar relative homeomorphism into our chosen
+satellite S_i, induced generators, and compact
+direct-limit identification. Then the existing
+Lean central `π₁(C)=1`, cover-connectedness
+and based homotopy transport are applied.
+P0: Exact-head Lean/Agda compiler receipts
+are missing, but **CI is not an obstacle to
+source-writing**; never label these proofs
+kernel-checked without compiler logs.
+P1: Carry the ternary observer as a faithful
+distinct data type across the existing
+binary/ternary and zeta commuting squares;
+the middle zero fibre must remain visible,
+and finite frequencies/measures must
+not be interchanged across encodings.
+P1: Test generic involution/role analogy against
+the explicit off-line symmetric polynomial
+and 27-cardinality/fixed-point counterexamples.
+P1: Preserve independently authored
+Monster/Ibrahim 3B same-object and VOA ownership:
+identical zeta glyph or orbit fingerprints
+cannot promote a same-object representation.
+P2: Finite gate emulator and laboratory protocol
+must retain physical calibration and flatness
+receipts; analytical Pickover real-angle sign,
+RH location and physical operator tests remain
+independent P0 scientific questions.
+
+New finite negative-control script:
+`scripts/alexander_horned_balanced_ternary_xi_severe_controls.py`.
+Original source authorship, inherited repo owners,
+source-written code, locally run checks, exact
+compiler receipts, and real experimental
+measurements are separate status types.
+
+**New code status this cut:** two files added,
+no postulates or escape hatches; Agda is
+source-written, not kernel typechecked.
+The integer/rational finite script is
+a test of exact finite consequences only.
+
+
+### I. Separate true ternary commutator tower: optional algebraic research lane
+
+The previous balanced trit code is an observer/retraction on Hatcher's
+**binary** horned source; it does not change geometry. To honour the
+stronger user question ("what IF balanced ternary is an actual
+refinement?"), we now also build a distinct three-child group tower:
+
+```text
+T_n = F< y_(c,w) | c in C3, w in {-1,0,+1}^n >
+rank(T_n) = 3 * 3^n
+psi_n(y_(c,w)) =
+    [y_(c,w-), y_(c,w0)] [y_(c,w0), y_(c,w+)]
+          = a b A c B C           (free reduced word)
+```
+
+The word length of the image of a generator is exactly SIX.
+For each distinct source letter, the three descendant generators
+occupy a disjoint F3 free-product block. A reduced source word
+cannot acquire cancellation at block boundaries: different
+parent blocks have disjoint letters; consecutive same-sign
+occurrences in the same block end/start in different children;
+inverse adjacent occurrences were excluded by source reduction.
+Thus the expansion of a reduced word of length L has length
+**6L**. This supplies an all-depth PAPER NORMAL-FORM proof
+that every `psi_n` is injective. Because all images lie in
+the commutator subgroup, `colim T_n` has trivial abelianisation;
+injectivity preserves nontriviality. The three external sector
+permutations commute with the ternary substitution.
+The existing free-factor argument gives an outer C3 on this
+**new abstract tower**, conditional only on its algebraic
+factor-group construction.
+
+NEW source:
+`AlexanderHornedBalancedTernaryCommutatorTowerExact.agda`
+constructs this syntax/sector action and rotation/refinement
+commuting square. Its finite normal-form consumer
+`scripts/alexander_horned_balanced_ternary_commutator_tower.py`
+was independently replayed locally: 7000 reduced-word test
+cases across stages 0..3, no cancellation, sixfold length,
+C3 equivariance and zero abelianisation, PASS. Exact root word
+lengths at stage 0..5 are `1,6,36,216,1296,7776`.
+These are tests of a theorem supported by the above direct
+normal-form proof, NOT Agda kernel or ambient topology receipts.
+
+The physical fully expanded selected root-cube circuit would
+have `3*6^n` word gates under this alternative, rather than
+the original binary `3*4^n`. One must not reuse the
+binary per-gate noise-depth curve without replacing its
+gate-count and validating any physical compilation.
+
+**P0 gap remains:** a three-child geometric 3D
+wild-handlebody tower with actual van Kampen inclusions
+realizing the selected commutator word. The #1254
+1->3 two-pants surface is a **2D cobordism**, not
+a proof of this specific 3D meridian relation.
+The new ternary tower is therefore an alternative
+mathematical research object, not a new proof of
+Hatcher's original `G_A` or a geometric realization
+of the same (B).
+
+### J. New source and proof receivers
+
+The canonical `DASHI/EverythingTOESymmetryResolved369.agda`
+now IMPORTS (without copying proof bodies) the two new
+horn-balanced-ternary modules. No protected ESD
+module, `DASHI/Unifier.agda` placeholder surface,
+VOA same-object receiver or Ibrahim Monster 3B
+proof ownership is changed. In particular, the
+actual signed fibre, sector C3 and rational xi
+involutions meet only through the proved PRODUCT
+commuting square, not through a representation
+isomorphism between Riemann zeros, Monster phases,
+Z3 orbifold inertia and Hatcher meridians.
+
+**Non-promotion acceptance:** there are TWO valid
+binary/ternary paths with different semantic types:
+
+1. `Hatcher binary source -> embedded nonzero trits ->
+   balanced full observer (with zero fibre)`, a chosen
+   symbolic encoding with left-inverse.
+2. `new ternary free tower -> C3 action / six-letter
+   commutator substitution`, its own distinct
+   algebraic group and as-yet UNSUPPLIED 3D geometry.
+
+Do not collapse these, or identify two abstract
+semidirect products merely because both have an
+external C3. For genuine orbifold completion, retain
+the original split exact sequence plus geometric
+homotopy quotient instance as a separately audited
+target; the paper formula already exists.
+
+
+### K. Existing 2I target for ternary tower and physical Pareto discriminator
+
+The third branch is not merely a choice of a 3-adic/ultrametric
+observer: the new algebraic ternary commutator tower has a genuine
+compatible FINITE target, obtained by directly reusing the
+original source-owned 120-element `2I` construction in
+`scripts/alexander_horned_c3_finite_SU2_gauge_simulator.py`.
+New consumer:
+`scripts/alexander_horned_balanced_ternary_2i_target_comparison.py`.
+
+Let the original commutator section choose
+`(a_g,b_g)` with `[a_g,b_g]=g` in `2I`. For the
+three-child ternary bonding word
+`[a,b][b,c]`, choose `a=a_g,b=b_g,c=b_g`.
+Then
+```text
+[a,b][b,c] = [a_g,b_g][b_g,b_g] = g * 1 = g.
+```
+At the root choose the EXISTING source-owned generating pair
+`rootpair` with `[a,b]=q` and `<a,b>=2I`.
+The first two child values already generate all 120
+elements. Thus the 2I quotient survives the new
+abstract ternary substitution. However the third
+child is represented by exactly the SAME value as
+the middle child at each refinement; **the extra
+geometric branch is not independently detected**
+by this particular finite representation. This is
+a severe non-promotion and a positive finite
+representation at the same time.
+
+Independent local source-equivalent Python check:
+all 120 icosians, all 120 commutator-section
+witnesses and 121 ternary parent assignments
+at depth 0..4 PASS; `q³=-1,q⁶=1` and
+rootpair generates the whole group. Current
+source was committed by GitHub connector; no
+exact-blob checkout, kernel or hardware execution
+is represented by this local reproduction.
+
+For depth n, a fully expanded ternary meridian
+word has length `6^n`; its root-cube protocol
+requires `3*6^n` elementary word gates,
+against `3*4^n` for actual binary Hatcher
+refinement. Under ONLY the pre-existing
+independent isotropic Gaussian SU2 angle model
+with per-gate `σ=1.5°`, the model expectation
+is `-exp(-L*σ²/8)` with L the actual compiled
+word length. The compared values:
+
+| Depth | Binary gates | Ternary gates | E[W] binary | E[W] ternary |
+| --- | ---: | ---: | ---: | ---: |
+| 0 | 3 | 3 | -0.999743 | -0.999743 |
+| 1 | 12 | 18 | -0.998972 | -0.998459 |
+| 2 | 48 | 108 | -0.995896 | -0.990790 |
+| 3 | 192 | 648 | -0.983685 | -0.945996 |
+| 4 | 768 | 3888 | -0.936321 | -0.716699 |
+| 5 | 3072 | 23328 | -0.768596 | -0.135526 |
+
+The stage-five word-count factor is EXACTLY
+`6^5/4^5=243/32`, a legitimate typed appearance
+of `3^5=243`; this says nothing about
+the DISTINCT `5^3=125` carrier from PR #1414.
+It is a modelled RAW-WORD noise/cost tradeoff, not a numerical
+identification with Riemann, Monster, 13/27
+or measured gauge phenomena. Because this particular finite
+2I representation sets c=b, a representation-aware compiler
+may delete the ideal [b,b]=1 branch and recover a binary-like
+shorter circuit. Therefore 3*6^n is the UNOPTIMISED
+SYMBOLIC-EXPANSION count, not an intrinsic hardware lower bound
+or proof that ternary encodings are less robust under optimal
+compilation. A fair device comparison must specify both
+source-word compilation and whether redundant gates are removed.
+
+**Decision:** retain binary Hatcher geometry and
+its conditional three-sector orbifold as the
+primary SAME-OBJECT programme; use balanced
+ternary as a full observer, an optional distinct
+three-child abstract group, and a falsifiable
+finite-target/cost comparator. The P0 source
+wild-satellite collar has not been bypassed.
+
+
+### L. CORRECTED PRIMARY USER INTENT — native ternary infinite ends and tetration
+
+**Correction to the previous balanced-ternary interpretation.**
+The user's intended change is NOT limited to adding a trit
+label to each original binary Hatcher node. It is to allow
+the **entire intrinsic infinite end address** to take
+three native values at every depth:
+
+```text
+K2 = C3_sector × {left,right}^N
+K3 = C3_sector × {-1,0,+1}^N .
+K2[n] = C3 × Bit^n,       |K2[n]| = 3·2^n
+K3[n] = C3 × Trit^n,      |K3[n]| = 3·3^n = 3^(n+1)
+p[n] : K3[n+1] → K3[n],  erase the last chronological trit.
+K3 = lim_{←n} (K3[n],p[n]).
+```
+
+This is a REAL full-ternary inverse-limit end-address space,
+not a lossy observer. The earlier module
+`AlexanderHornedBalancedTernaryRiemannSquareExact`
+still provides a valid but DIFFERENT observer/retraction
+and must no longer be described as exhausting the user's
+ternary proposal.
+
+NEW `AlexanderHornedNativeBalancedTernaryEndTowerExact.agda`
+reuses `DASHI.Cognition.RecursiveFibreTower.FibreTower`
+and `InverseLimitPoint`: chronologically ordered
+`Vec Trit n`, explicit drop-last projections, snoc
+section identity, coherent all-zero end in each sector,
+external sector C3 commutation with every projection
+and order-three rotation. It also explicitly constructs
+the **independent INTERNAL order-three trit cycle**
+`-→0→+→-` and trit sign involution
+`-↔+, 0 fixed`, with
+`reflection·internalC3·reflection = internalC3^{-1}`.
+The internal action is the FINITE S3/dihedral pattern
+studied by #1414, but is NOT the external geometric
+sector rotation or a proved polynomial braid action.
+The two C3 factors commute by acting on separate
+coordinates. All proof sources are source-written and
+unverified by Agda kernel this cut.
+
+**Actual abstract topology, with the strongest #1254 reuse:**
+the existing complete prefix-free variable-length code
+
+```text
+- → 0,   0 → 10,   + → 11
+```
+
+extends to a C3-sector-preserving homeomorphism
+`K3 ≅ K2` of COMPACT ZERO-DIMENSIONAL SPACES:
+every infinite binary sequence parses uniquely into
+infinitely many codewords because every codeword has
+length one or two, and decoding the first n trits
+requires at most 2n bits. Encoding n trits determines
+at least n binary bits. Both maps are continuous
+for prefix topologies. THIS DOES NOT preserve
+single-level prefix length, the natural ultrametric,
+uniform product measures, the binary-shift dynamics,
+the internal trit 3-cycle at fixed binary depths,
+the 2-adic vs 3-adic ADDITIVE GROUP LAW, or the
+wild embedding/complement fundamental group.
+The identity on intrinsic end spaces alone cannot
+replace Hatcher's two-child linked 3D stages by
+a three-child handlebody recursion.
+
+**Native ternary clopen balls:** each ternary word
+`w` selects an actual clopen cylinder `[c,w]`
+at depth n with natural uniform mass
+`1/(3·3^n)`. The native prefix-ultrametric
+scale is `3^(-n)`, against binary `2^(-n)`.
+Under fair binary input, the prefix code induces
+iid trit weights `(1/2,1/4,1/4)`;
+under uniform trits, its first binary bit has
+probability `P(0)=1/3`, NOT the fair-binary
+law. The symbolic observer-collapse from earlier
+work is a separate mapping with probabilities
+`(2/3,1/3)`. These two different maps cannot be
+mixed in a "measure-preserving" commuting square.
+
+**Spatial control, explicitly TAME**:
+`scripts/alexander_horned_native_ternary_end_tetration.py`
+constructs base-seven round nested Euclidean balls
+with three disjoint children and positive gaps,
+within the same small root chart around
+`(1/3,1/2,0)`; their limit points are
+three rotated/transplanted tame ternary Cantor
+sets. This is an actual mathematical embedding of
+K3, but NOT the sought wild point-set from a
+three-child linked-handlebody Alexander sphere.
+Independent local exact Fraction audit PASS:
+3280 prefixes through depth 7, 9840 sector-prefix
+balls, 8191 binary code-prefix tests; code
+parsing and genuine gap/nesting all pass.
+
+**Tetration receiver, using EXISTING source**:
+`DASHI.Cognition.RecursiveFibreTower`
+already proves the base-three function-space
+recurrence `h0=1, h(n+1)=3^h(n)`:
+`h1=3,h2=27,h3=3^27`.
+This is NOT the same as address refinement:
+the three-root depth-n NATIVE ternary prefix
+partition has `3^(n+1)` CELLS:
+`3,9,27,81,243,729,...`.
+At depth TWO there are exactly 27 cells,
+so the space of functions assigning ONE trit
+to EACH cell has `3^27=7,625,597,484,987`
+labelled configurations, matching `h3`.
+At depth THREE there are 81 cells, so ternary
+function-table configurations number `3^81`.
+One-sector depth-three gives 27 cells and
+the same `3^27` configuration count;
+these are DIFFERENT indexing bases.
+The exact count coincidence is typed as
+"27 sites × trit-valued functions", not as
+27 extra horn levels, a 27th-order physical
+rotation, a Monster representation, or RH.
+
+**Pareto P0**: If the intended geometric wild
+object must itself have three geometric
+children per horn, the alternative ternary
+commutator tower already source-written in this
+PR needs its OWN specific 3D linking/punctured
+surface/collar embedding and induced meridian map.
+The native trit end space plus its tame embedding
+cannot supply that same-object wild proof.
+The earlier binary Hatcher/3-sector orbifold
+`(G_A*G_A*G_A)⋊C3` is already established as
+the algebraic conditional target; it is NOT
+a newly discovered ternary orbifold.
+
+### M. PR #1414 theta, prefix !n and original Pickover target
+
+PR #1414's user-video/finite-monodromy owner explicitly
+distinguishes standard `n!` FACTORIAL,
+prefix `!n` SUBFACTORIAL (derangement count),
+and `θ` as an ANGLE in `exp(iθ)`.
+The video transcript available through its
+roadmap does not substantiate the exact quotation
+"theta is the factorial function". If a source
+defines a local map `θ(n)=n!`, that definition
+is valid *within that source* but does not
+replace standard Gamma notation
+`Γ(n+1)=n!` or general Jacobi theta functions
+(DLMF §§5.1–5.2, 20.2).
+
+A typed index `ThetaIndex` was added to
+`#1414 PolynomialPickoverFactorialGammaDegreeExact.agda`
+without copying that UNMERGED producer to this branch:
+```text
+thetaFactorial(n)   = 99^(n!)     radians
+thetaSubfactorial(n)= 99^(!n)    radians
+thetaFactorial(9999)=99^(9999!), original #1260 target
+```
+The two exact different exponents are both
+astronomical; they are not tetration or
+factorials of the number `99^9999`.
+The #1414 Python source was repaired where it
+printed an UNDEFINED `sub_residues` name.
+Independent exact arithmetic:
+```text
+bitlen(9999!) = 118445
+bitlen(!9999) = 118444
+99^(9999!) mod 9999 = 4950
+99^(!9999) mod 9999 = 3861
+both mod 360 = 81
+```
+Thus degree-angle coarse periodicity does not
+separate the expressions; radians require
+a certified `π` period/remainder enclosure
+or actual sine-sign computation. Neither the
+factorial, subfactorial, nor tetration recurrence
+decides `sign(sin(99^(9999!)))`.
+This remains independently owned by PR #1260
+and its original number-theory primary sources.
+
+**Original credit:** Alexander 1924; Hatcher
+AT Ex.2B.2 for BINARY horned geometry;
+Euler/Legendre for Gamma; traditional derangement
+subfactorial counting (Montmort/Whitworth history);
+classical complete prefix/Kraft coding and
+Cantor-space topology; prior DASHI
+RecursiveFibreTower, BalancedTernary,
+#1254 variable-length codec, #1414
+S3/C3/quaternion and subfactorial ownership,
+#1260 Pickover/Machin/CRT analytics.
+No Ibrahim Monster 3B or VOA same-object
+theorem is inferred from any shared C3, 27,
+theta, q-phase, or cubic-root notation.
+
+
+### N. Native ternary local fibre-action group and refinement system
+
+**User-selected interpretation:** the 27 native depth-two cells
+are not merely passive function input sites: each carries a
+local 3-state phase action. With the existing
+`K3[n]=C3_sector×Trit^n`, define
+
+```text
+A_n = Map(K3[n], C3_phase),  |A_n| = 3^(3*3^n).
+(g * f)(x) = g(x)+f(x) (mod 3).
+p[n] : K3[n+1] -> K3[n]
+p[n]^* g = g ∘ p[n] : A_n -> A_(n+1).
+```
+
+At n=2 there are 27 address cells and
+`|A_2|=3^27=3↑↑3=7,625,597,484,987`.
+Pointwise (C_3) addition makes (A_n) an
+ABELIAN group acting FREELY and TRANSITIVELY
+on all phase configurations over those cells.
+This is the accurate extra structure behind
+the earlier tetration *count*. The count is
+`3^27` at n=2, whereas the native address
+space still has only 27 cells.
+
+**New Agda reuse-first implementation:**
+`AlexanderHornedNativeTernaryFibreActionExact.agda`
+imports existing `NativeBalancedTernaryEndTowerExact`
+and `FiniteC3OrbitStabilizerExact` group law.
+It gives pointwise group law/action equations,
+a constructive difference sending one phase
+configuration to another, free action, pullback,
+multiplication/inverse preservation, injectivity
+of every pullback via the canonical snoc-zero
+section, C3 sector rotation/refinement
+commuting square, and coherent evaluation of
+finite-depth phase actions on genuine
+`InverseLimitPoint balancedEndTower` ends.
+This module is imported by the existing TOE
+symmetry receiver; no duplicate C3 group
+or generic inverse-limit object is created.
+
+**Local exact audit** in
+`scripts/alexander_horned_native_ternary_fibre_action_audit.py`
+covers depths 0..6, including 2187 coarse and
+6561 refined cells at depth six. It tests
+the pointwise group law, free/transitive
+difference, every projection section,
+pointwise injective pullback logic,
+rotation/pullback commutation, and order
+three sector rotation. Local Python passed.
+It does not enumerate all 3^27 phase fields,
+which is unnecessary to check these exact
+finite-algebraic laws.
+
+**Correct infinite-level group target:**
+the pullback diagram yields a directed
+system of groups `A_0 -> A_1 -> ...`.
+Its direct limit should be identified with
+`C_loc(K3,C3)`, the C3-valued CONTINUOUS
+(or equivalently locally constant, since
+target is finite discrete) functions on the
+native ternary compact Cantor end space.
+The Agda source implements the finite-depth
+representatives and their compatible
+evaluation on infinite ends, but does NOT
+yet implement an explicit quotient
+identifying different representatives at
+a common later depth nor a topological
+compactness/factorization certificate.
+Those are a precisely bounded P1 kernel
+obligation, rather than hidden assumptions.
+
+**External sector C3** acts on A_n by
+pullback of the address permutation.
+The resulting finite abstract group
+`A_n ⋊ C3_sector` is a permutational
+semidirect product, distinct from the
+previous ORIGINAL geometric orbifold
+`(G_A*G_A*G_A) ⋊ C3_sector`.
+These are not interchangeable:
+one is a group of locally varying
+C3 phases over end addresses; the other
+records the fundamental group of the
+conditional wild exterior orbifold.
+Relating them requires an explicit
+same-object action/representation,
+not a coincident C3 factor.
+
+**Tetration update:** (3^{27}) is
+precisely the size of the finite depth-two
+phase group. The unbounded iteration
+`F_(k+1)=Map(F_k,C3)` is a DIFFERENT
+recursive fibre hierarchy whose cardinalities
+obey `h_(k+1)=3^{h_k}`; this recurrence
+is already owned by `RecursiveFibreTower`.
+The depthwise local group sizes instead
+are `3^{3^{n+1}}`, and only match
+selected tetration values at special n.
+Do not silently identify both towers.
+
+**Pareto cutset:** finish a quotient by
+eventual equality in A_n with exact
+well-defined group law and C3 action.
+Then give a compactness proof that every
+continuous `K3->C3` field factors
+through a finite prefix. Only then seek
+a fibre-action interaction with the
+Hatcher wild exterior or its auxiliary
+(SU2) representation, retaining source
+and spin/gauge distinctions.
+
+Attribution: Cantor-space compactness
+and local constancy are classical, the
+generic `FibreTower` and C3 group
+are earlier DASHI owners, and #1244
+owns this source-specific fibre-action
+composition. No Agda typecheck or
+physical measurement is claimed in
+this update.
+
+
+## 2026-10-28 native end local-C3 fibres: semidirect group / derived-series max-cut
+
+**Attachment-consistent scope:** the external sector carries C3; the native three-symbol internal end address uses Trit^N. The original classical Hatcher horn tree remains BINARY. The previously owned NativeBalancedTernaryEndTowerExact constructs actual finite levels X_n=C3×Trit^n, chronological projections and inverse-limit end points. The previously owned NativeTernaryFibreActionExact ALREADY proved pointwise local C3 group operations, free/transitive translations, injective pullback homomorphisms, sector-rotation refinement square and coherent-end evaluation. No duplicate core was retained. A stray closing parenthesis in that pre-existing owner's transitivity proof was repaired.
+
+**Genuinely new theorem adapter**: DASHI/Mathematics/Topology/AlexanderHornedNativeTernarySemidirectActionExact.agda. It imports and reuses that existing owner. It constructs the external sector action on local fields by *inverse* pullback (rather than confusing it with the source module's forward precomposition), proves its C3 composition and pointwise group-law compatibility, defines the finite semidirect action and multiplication, and proves multiplication/field-action associativity pointwise. It then proves that refinement preserves semidirect multiplication, commutes with the sector-twisted field action, and is faithful by reusing the original pullback-injectivity theorem. Its new theorem names include sectorActionComposition, sectorActionPullbackSquare, semidirectActionComposition, semidirectGaugeAssociativity, refineSymmetryPreservesMultiplication, refineSymmetryPreservesAction, and refineSymmetryFaithful. Exact-head Agda kernel check remains **PENDING**; these are SOURCE-WRITTEN proof terms.
+
+**New structural negative-control adapter**: DASHI/Mathematics/Topology/AlexanderHornedTernaryFibreDerivedCutExact.agda. It establishes at depth zero an explicit gauge delta whose external rotation changes it, proving the FULL semidirect group is NONABELIAN. It reuses the C3 source for a pointwise ABELIAN local gauge subgroup and a commutative sector projection. The full group is mathematically a metabelian extension and is not the perfect horn-exterior or binary-icosahedral source group. The full formal commutator-subgroup cardinality/cokernel theorem in Agda remains to be completed; the precise equations below have an exhaustive depth-zero computational receipt and symbolic orbitwise proof in the accompanying script/roadmap.
+
+For n>=0 let k=3^n, X_n=C3×Trit^n (3k cells), A_n=Map(X_n,C3) and H_n=A_n⋊C3, where the second C3 permutes sectors. The group law is (g,r)(h,s)=(g+(r·h),r+s) with (r·h)(c,w)=h(c-r,w). Thus:
+
+| n | Cells 3k | |A_n|=3^(3k) | |H_n|=3^(3k+1) | |H_n'|=3^(2k) | |H_n^ab|=3^(k+1) |
+|---|---:|---:|---:|---:|---:|
+| 0 | 3 | 27 | 81 | 9 | 9 |
+| 1 | 9 | 19683 | 59049 | 729 | 81 |
+| 2 | 27 | 7625597484987 | 22876792454961 | 387420489 | 59049 |
+
+The derived subgroup H_n' consists of those field translations whose three sector components sum to zero for EACH fixed internal word w. Its independent generators can be chosen as e_(1,w)-e_(0,w) and e_(2,w)-e_(0,w), giving rank 2k over F3. Thus H_n''=1, while H_n itself is nonabelian already at n=0. This is an actual group-structural result, not just matching counts.
+
+**Decisive no-go:** any group homomorphism from a nontrivial perfect group into any solvable group has trivial image. In particular the ABSTRACT perfect source G_A*G_A*G_A (if instantiated with the earlier genuine perfect-group theorem) cannot have a nontrivial finite quotient through H_n. The same is true of perfect A5 and perfect 2I. Therefore the locally independent end-fibre phase actors DO NOT by themselves detect the nonabelian Hatcher loops, and they cannot replace the separately owned binary-icosahedral SU2 representation. One may build an external *product* representation and retain different observers, but must state the additional homomorphism(s), source object and observational action explicitly. This is a source-level proof/math theorem with standard group-theoretic provenance (solvable extension of abelian groups), and NOT a formal kernel-verified general result merely from the 81-element calculation.
+
+**Numerology with actual typed objects:** At n=2, |X_2|=27 while |A_2|=3^27=7,625,597,484,987, equal to the existing height-three triadic tetration count for a separate function-space construction. |H_2|=3^28. The two AXES remain independent: spatial address refinement n↦n+1 versus fibre-domain exponentiation F↦Map(F,C3). The binary geometric meridian tower rank remains 3·2^n, distinct from native ternary address cell count 3·3^n. The 13/27 versus 5/9 antipodal-orbit counts from the earlier balanced-ternary zeta work refer to different involutions and do not supply a canonical intertwiner. The existing #1414 polynomial-root S3/C3 and quaternion q³=-1, q⁶=1 are reusable LABEL ACTIONS only, not automatic physical/analytic same-object transports.
+
+**Actual independent checks (Python exact integers):** all depth-zero 81 group elements were enumerated. The set of their commutator values contains exactly nine field translations (sector zero, component sum zero). Every commutator of two such values is identity. A noncommuting pair exists. At n=0..3, independent bounded local checks of group-action composition, projection section, field-pullback equivariance and sector-rotation compatibility passed. For n>0 the symbolic per-word difference basis yields derived rank 2k; complete enumeration of all 3^27 field configurations is NOT claimed. The committed source script scripts/alexander_horned_native_ternary_local_fibre_actor.py is an exact-replay producer and must be run from its GitHub blob for an exact-head execution receipt; Agda and Lean were NOT run.
+
+**Remaining high-alpha cut:**
+1. Complete a first-class finite-table/pointwise group isomorphism presentation of H_n, then an Agda proof of the derived augmentation kernel and the perfect-to-metabelian no-go, instead of only paper+Python.
+2. Formalize the directed colimit of injective A_n and its identification with C_loc(K3,C3): the inverse-limit end set and finite-depth cylinder evaluations ALREADY exist, but topological compactness of K3 and finite-level factorization of ALL continuous maps remain unproved in this branch.
+3. If expanding the local action to full S3 at each address, distinguish independent reflection gauges from the global value reflection, and prove the C3 embedding. This remains a separate solvable extension, NOT automatically an A5/2I detector.
+4. Preserve the already existing exterior orbifold semidirect product (G_A*G_A*G_A)⋊C3 as another group. To compare it with H_n one must supply a concrete representation with source G_A, not a count or C3 label coincidence.
+5. Most important original topological proof cut unchanged: an actual supported wild-satellite relative cap/collar, meridian-map naturality, central pi1 and exact kernel verification for the SAME ambient wild exterior. No finite end-actor calculation pays that geometric gate.
+
+Original geometric attribution: Alexander (1924), Hatcher AT 2B.2. The permutation-semidir​ect and finite vector-space calculations are ordinary classical mathematics, with new DASHI implementation ownership attached only to the new source. Existing #1244 and independent #1414/#1260/#1254 and Ibrahim/Monster owners remain unchanged.
+
+
+### 2026-10-28 completed finite chart cut: 27 end cells, C3^27 group and local S3 reflections
+
+**New theorem owner** DASHI/Mathematics/Topology/AlexanderHornedNativeTernaryTrialectic27ChartExact.agda constructs the CHOSEN bijection
+
+  C3_sector × Trit × Trit  <->  TriTruth × TriTruth × TriTruth
+                              = SynthesisChoice27.
+
+It proves both inverse compositions, checks external sector rotation moves ONLY the first trialectic coordinate, and checks the internal trit cycle rotates the final TWO coordinates. These are commuting C3 actions, but not the same source operation. It also transports every 27-address C3-valued local phase function to the original trialectic 27-cell carrier and proves two pointwise inverse round trips and exact preservation of pointwise C3 multiplication. This is a genuine finite SET/GROUP-LAW chart, not a philosophical or geometric identification of the cells.
+
+**New S3 extension** DASHI/Mathematics/Topology/AlexanderHornedNativeTernaryS3LocalValuesExact.agda reuses the old TernaryPermutationS3LawsExact, TernaryPermutationCyclicSubgroupsExact and the native end owner. It defines local S3^X value permutations, proves pointwise group-action composition/identity, distinguishes a global reflection from an independently chosen reflection at one address, and proves the chosen horn-C3 value subgroup law transports into the exact cyclic C3<S3 embedding. Its depth-two field-transformation count is 6^27, different from the original translation group 3^27. It remains SOLVABLE (direct product of solvable S3 groups, and a possible further extension by external C3 remains solvable), hence does not inherit the perfect A5/2I/Hatcher source-group properties. A braid PERMUTATION image at one fibre is not an actual analytic polynomial-monodromy loop.
+
+The earlier semidirect adapter was extended to prove all pointwise inverse and identity laws, as well as sector and gauge product associativity, action composition, and refinement naturality. No global function-extensionality assumption or postulate was inserted. A truly first-class group-object instance can still package these extensional pointwise equalities via canonical finite table encoding. The derived augmentation subgroup size formula retains the separate computational / paper proof tier until an Agda normal-subgroup and quotient constructor is implemented.
+
+**Independent exact local finite replay:** sector/field pullback and action compatibility checked at depths 0–3; all 81 semidirect elements and their nine commutator subgroup values checked at depth zero; local/global S3 reflection distinction and actual S3>C3 embedding checked independently. The source includes the new Python regression script, but the exact remote blob was not run locally because this environment cannot download private/remote source from the connector into its execution runtime. These checks do not replace exact-head Agda certification.
+
+**Pareto stopping point:** the entire FINITE-LEVEL input required by the attached proposal is now represented as source-written Agda, including the nested 27 chart, local fibre group, twisted semidirect action, explicit local S3 extension, and refinement. The next genuine theorem is the compact-clopen factorization C_loc(K3,C3) and first-class colimit quotient; do not build a parallel incompatible end tower. The classical actual supported wild-satellite collar and relative exterior homotopy map remain the principal GEOMETRIC gate, unchanged by end-fibre algebra. Historical, prior repo, source-written, locally computed and kernel-verified statuses remain distinct.
+
+
+## 28 October 2026: additive semidirect and cylinder-setoid extension (reuse-first correction)
+
+The canonical original `AlexanderHornedNativeTernaryFibreActionExact.agda` remains the owner of `FibreAction=Map(X_n,C3)`, pointwise group, torsor/free/transitive action, injective pullback, sector rotation, and original inverse-limit evaluation. The companion `AlexanderHornedNativeTernaryLocalPhaseActionExact.agda` is **only an extension**, not a new group/probability carrier. It imports those original source terms and proves a signed Trit↔C3 chart, full external-sector-twisted multiplication `(f,a)(g,b)=(f+a·g,a+b)`, pointwise associativity, units and both inverses, twisted refinement homomorphism, pointwise `SameOnEnds` equivalence of original `LocalFibreAction` representatives, and rotation congruence on coherent ends. The earlier original full-gauge transitivity gives a further no-go: every pointwise-extensional observable invariant under ALL local translations is constant. Hence #1275's Heaps value-label invariance under global S3/C3 is **not** invariance under the full local gauge group; exact root-sector witness `(0,0,0)→(0,1,0)` changes the observed novelty curve.
+
+Independent local Python exact group oracle: 531441 exhaustive semidirect associativity cases for 81 root-stage elements, 1200 deterministic sampled depth-0-to-3 action/inverse/pullback checks, 1080 address shift cases, and 729 root-field transitivity pairs. New source and regression committed in this branch, TOE original import updated; the actual full GitHub checkout and Agda kernel were **not** run. The exact ledger is `Docs/topology/AlexanderHornedNativeTernaryLocalPhaseFibreMaxCut20261028.md`.
+
+Unpaid finite/topological gate: compatible Agda typecheck, eventual-equality common-refinement quotient and operation congruence, cylinder setoid↔quotient equivalence, compact Cantor end topology and all-continuous-C3-map factorization theorem. Original Alexander–Hatcher BINARY wild embedding/geometric relative collar, meridian relations and physical/Monster/Spin representation remain independent and unproved by this finite gauge action. Original #1244 owner and #1414 quaternion/polynomial and Ibrahim Monster 3B authorship retained.
+
+
+### 2026-10-28 duplicate-owner consolidation and the stronger gauge-invariant no-go
+
+A subsequent same-head audit found an additional contemporaneous **original owner**, AlexanderHornedNativeTernaryLocalPhaseActionExact.agda. It ALREADY constructs the native semidirect multiplication, inverse-sector shift, all group identity/associativity/inverse components, rotation-compatible refinement, cylinder setoid/congruence, inverse-limit sector action, and a theorem that every gauge-invariant observer of the free/transitive local C3 phase torsor is constant (when the observer respects pointwise field equality). That existing source is retained as CANONICAL.
+
+Therefore the new AlexanderHornedNativeTernarySemidirectActionExact was **refactored** into a small adapter: it now imports that owner and contains ONLY the previously missing action of the full twisted semidirect group on fibre fields, composition of successive twisted actions, its equivariance under refinement and the inherited faithful pullback result. It aliases original-owner group operations; it does not reimplement a second multiplication, inversion, cylinder quotient or action algebra. The independent derived/no-go module and full native-trialectic/S3 chart consume this one canonical path.
+
+**Stronger no-go:** since the local C3 translation group acts freely and transitively on the space of phase assignments, every observer invariant under ALL independent local translations and respecting the existing pointwise equality must be constant. Thus a local phase value alone cannot produce a nontrivial gauge-invariant observable. Nontrivial Wilson holonomy requires edge/connection/transport data, not only C3-valued functions at addresses. This is a mathematical theorem about the phase-field torsor, distinct from the other no-go (a nontrivial perfect source has no nontrivial homomorphism into the metabelian field actor). Neither result disproves the independent perfect-to-2I representation programme.
+
+**Receipt:** source-written Agda, GitHub file readback and local independent finite action checks; exact-head Agda kernel still not run. No new unsafe escape, protected ESD change, synthetic Monster representation or actual wild-exterior group identification.
+
+
+### O. Exact 27 -> 9 -> 5 invariant fibre quotient and independent 729
+
+At depth two the NATIVE end-address partition is
+`X2=C3_sector × Trit²`, with 27 points.
+The external 3-cycle and simultaneous balanced sign reversal
+generate the commuting group `H=C3_sector × C2_sign`.
+Successive address quotients give
+```text
+  |X2|=27 -> |X2/C3|=9 -> |X2/H|=5
+```
+where the five sign classes of `Trit²` are
+`(0,0)`, `{(-,0),(+,0)}`,
+`{(0,-),(0,+)}`, `{(-,-),(+,+)}`
+and `{(-,+),(+,-)}`.
+Their full 27-point orbit sizes are `(3,6,6,6,6)`.
+
+**Formal group-level content.** Existing phase-field owner
+`A2=Map(X2,C3_phase)` is of cardinality `3^27`.
+The H-invariant subgroup has canonical pointwise encoding
+`A2^H ≅ Map(X2/H,C3) ≅ C3^5`,
+so its cardinality is **3^5=243**, not 729.
+New source `AlexanderHornedDepthTwoFiveOrbitFibreExact.agda`
+defines the five representative shapes and total classifier,
+proves the sign-orbit and inflation invariance,
+both pointwise round trips for invariant fields, and
+pointwise preservation of C3 multiplication.
+It does not introduce unneeded quotient-set axioms:
+the explicit five constructors provide the finite quotient.
+
+**729 belongs to an additional independent coordinate.**
+`SixPhaseState = FiveField × C3` has
+`3^5 × 3 = 3^6 = 729` elements.
+The sixth phase is EXTRA DATA. It cannot be double-counted
+if it was already encoded in one of the five invariant fields.
+After sector reduction the sector C3 acts trivially on the
+invariant fields, so reintroducing one C3 factor is a direct
+product until a nontrivial action is specified. This is not
+the original wild orbifold group, a 729-dimensional SU2
+module, or a Monster 3B receipt.
+
+**Executed finite severe controls:** the new
+`scripts/alexander_horned_depth_two_five_orbit_fibre_audit.py`
+enumerates all 243 five-trit fields; verifies field inflation
+to the 27-site carrier, invariance under both generators,
+extraction of the five values, and all 3 choices of the
+optional independent sixth phase. Local exact integer control
+PASS. No Agda/Lean kernel receipt is claimed.
+
+**Generalization across depths:** on `X_n=C3×Trit^n`,
+simultaneous balanced sign has exactly one fixed trit-word
+(the all-zero word). The quotient after external C3 has
+`(3^n+1)/2` orbits and its invariant field group has
+`3^((3^n+1)/2)` elements. In particular n=2 gives
+5 and 243, n=3 gives 14 and 3^14.
+This count is not the original independent 13/27
+antipodal PAIRS (13 pairs + one fixed = 14 orbits),
+nor the 3-sector fibrewise 15 sign-only orbits.
+The general count belongs to classical Burnside
+fixed-point/orbit-counting theory and needs its own
+Agda all-depth group-indexed quotient proof if a
+kernel-level infinite invariant colimit is desired.
+
+**All-depth invariance refinement now source-written:** `AlexanderHornedNativeTernaryFibreActionExact.agda` now additionally defines `SectorSignInvariant` at every n and proves that pullback preserves both sector-rotation and simultaneous balanced-sign invariance. The sign/refinement square is proved using the original native vector drop-last/map commuting lemma. This supplies the all-depth closure previously described as P1. Pointwise source proofs are NOT Agda-kernel-verified, and the eventual-equality colimit and compactness universal property remain open.
+
+**Important noncommutation:** taking invariants before
+pullback along native ternary projections preserves
+sector and sign invariance, provided the refinement
+map commutes with both actions. This is the next honest
+P1 square to prove for all n, alongside the explicit
+finite-depth eventual-equality direct limit
+`colim A_n ≅ C_loc(K3,C3)`.
+Only AFTER these group-theoretic constructions should
+we seek an action on a particular embedded wild exterior
+or transport into nonabelian SU2: perfect source groups
+have no nontrivial characters into these abelian
+ternary fibre groups.
+
+Source credit stays with classical orbit counting,
+original DASHI #1407 5/9 and 13/27 symmetry,
+#1414 S3/C3 and 3^5 versus 5^3 discrimination,
+#1244 native address/fibre projective tower, and
+Alexander/Hatcher for the DISTINCT horned geometry.
+
+
+### P. Sonic Warfare T15/T16 five-orbit heterogeneous wave bridge
+
+Cross-PR donor audit: sonic #1405 already contains the
+**homogeneous** three-channel T15 equivariance theorem AND the
+stronger T16 **heterogeneous** operator/field naturality
+square, plus explicit fixed-heterogeneous counterexample.
+Those theorems belong to the earlier Goodman/finite wave
+authors and PR #1405. They are NOT rewritten as novel horned
+wave results. T16 operator triple's universe annotation was
+corrected in its OWN #1405 branch: a record of
+`DiscreteWave -> DiscreteWave` functions belongs to
+`Set`, not `Set₁`. It remains source-written until
+an exact Agda typechecking receipt.
+
+The independently valuable #1244 bridge is
+`AlexanderHornedFiveOrbitWaveOperatorExact.agda`,
+which uses existing #1244 `FiveOrbit`, classifier
+`C3×Trit² -> FiveOrbit` and
+`DASHI.Physics.ShiftDiscreteWaveStep.DiscreteWave`.
+For ANY five possibly distinct endomorphisms
+`O:FiveOrbit -> (DiscreteWave -> DiscreteWave)`,
+the 27-cell inflated operator/field is
+`O(orbit(x))`, `f(orbit(x))`, yielding
+
+```text
+evolve(inflateOp(O), inflateWave(f))
+    =pointwise= inflateWave(evolveFive(O,f))
+```
+
+Because the five-orbit classifier is invariant
+under both EXTERNAL sector C3 and simultaneous
+balanced sign, this five-*heterogeneous*-operator
+step commutes with BOTH symmetries. No requirement
+that all five orbit operators equal the same
+wave operator. A truly arbitrary 27-site operator
+triple instead requires the T16-style simultaneous
+operator-and-field relabelling:
+`evolve(r*O,r*f) = r*(evolve(O,f))`.
+With operators held fixed, heterogeneous
+equivariance generally FAILS, demonstrated by
+an explicit finite counterexample.
+
+The new exact integer wave-proxy regression
+`scripts/alexander_horned_five_orbit_wave_operator_audit.py`
+has local source-equivalent PASS on the 27 sites,
+five differing operators, external rotation,
+balanced sign and fixed-operator failure.
+The new Agda source imports the canonical
+TOE symmetry root. It does NOT import the
+UNMERGED #1405 module, nor claim the mathematical
+proof is an observation of physical acoustics.
+
+**Important information no-go:** at 27 sites
+this bridge depends on five orbit classes, not
+five wave eigenmodes or the physical five-word
+harmonic spectrum. The 243 five-class C3 phase
+fields and 729 with a sixth independent phase
+are FINITE FIBRE ACTIONS; the wave state here is
+a distinct `DiscreteWave` type. To claim an
+intertwiner `C3_phase -> DiscreteWave` with
+physical meaning requires explicit map,
+coefficient action, energy/flux invariant,
+calibration and medium geometry. Neither
+Riemann Xi reflection, Dirac holonomy, Monster
+3B nor Sonic Warfare literary interpretation
+supplies this map by shared C3 cardinalities.
+
+**Next geometric cut:** specify actual wave
+operator coefficients as functions of
+the native clopen end addresses and show
+they descend to the FIVE orbit quotient,
+or supply controlled covariance when they
+do not. A true acoustic device then requires
+a source-produced medium, measurable field
+and validated numerical discretization.
+The stationary wild satellite collar remains
+an independent and higher-priority P0
+topological same-object gap.
+
+Attribution: original Goodman source and
+historical wave operator theory, original
+DASHI/Physics wave-step owners, #1405
+T15/T16 proof authorship, #1407 five/nine
+orbit analysis, #1244 five-orbit fibre source,
+and distinct experimental/gauge receipts
+are recorded separately. All new Agda
+source remains kernel-pending.
+
+
+## 2026-10-28 source-grounded video/monodromy/369 additional max-cut
+
+The corresponding detailed source and evidence ledger is [Native local fibre action cross-pollination](AlexanderHornedNativeTernaryLocalPhaseFibreMaxCut20261028.md). The **existing** native trialectic27 and five-orbit owners now also implement: a two-sided map from the actual 27-sector-depth-two phase functions to third-level ternary predicate tables; a REAL 3^5-vs-5^3 functional-domain swap with evaluation section and complete C3² nine-field kernel normal form; and a global-S3-versus-local-S3 Heaps/equality counterexample. They are SOURCE-WRITTEN, not kernel certified.
+
+Three NEW lemma owners supply: (i) the full existing S3→C3→1 derived series as a concrete instance of the previously proved Hatcher solvable-target non-observation theorem; (ii) a constructive no-equivariant-injection theorem separating 13-pair/1-fixed and 12-pair/3-fixed involutions on the SAME 27 elements; (iii) six intrinsic S3=dihedral sector-label actions commuting with every native finite-depth projection and a reflection conjugating the external C3 rotation to its inverse. Cross-PR [#1414](https://github.com/chboishabba/dashi_agda/pull/1414) separately owns a C7 winding observer distinguishing the B3 full twist from its trivial S3 root endpoint.
+
+**Preserved walls:** Actual Hatcher BINARY wild geometry (3×2^n) is not the native ternary end (3×3^n); end-space homeomorphisms are not ambient wild embeddings; finite wreath/local gauge fields cannot yield nontrivial Hatcher perfect-source representations through a solvable target; B3 infinite central twist is not SU2 ±1 spin kernel; numeric 243/125 or 27 matches do not identify source objects, RH zeros, physical Dirac/Wilson data or original Ibrahim Monster 3B representations. Independent exact integer/permutation Python checks passed; exact committed script was not executed from the GitHub blob; Agda/Lean kernel and actual geometric same-object proof are still open. CI was not run.
+
+
+## 2026-10-28 invariant-cylinder algebraic direct-limit closure (new max-cut)
+
+The native five-orbit/all-depth invariant proof owner already exists in #1244: `DepthTwoFiveOrbitFibreExact` has the 27→9→5 orbit classifier and exact 3^5=243 invariant phases; `NativeTernaryFibreActionExact.SectorSignInvariant` and `invariantsPullback` transport H=C3_sector×C2_sign invariance across **every depth**. This update DOES NOT recreate either owner.
+
+New `AlexanderHornedInvariantCylinderDirectLimitExact.agda` adds the missing source-written **algebraic filtered direct-limit setoid**:
+- `Lift`, `liftField`, `liftInvariant`, `liftEval` and constructive `commonDepth` give actual explicit finite-depth refinement witnesses for any two cylinder representatives.
+- `InvariantCylinder` uses the original source-owned invariant proof and finite phase field. `combineCylinder`, `unitCylinder`, `inverseCylinder` and full congruence/associativity/two-sided identity/inverse lemmas supply a group object **modulo equality on the actual inverse-limit end set**. No unproved Agda function extensionality.
+- `overlay`, `overlayDropLast`, `extendEnd`, `extendEndAt` construct a genuinely coherent infinite end extending EVERY finite prefix. Both `eventualImpliesSameOnEnds` and `sameOnEndsImpliesEventual` identify eventual common-depth equality precisely with agreement of evaluation on all coherent ends. This is the algebraic colimit equivalence, not merely a convergence analogy.
+- `restrictToZeroChild`, `zeroChildSignSquare`, `restrictInvariantToZeroChild`, `restrictPullbackIsIdentityAt` make the already-owned pullback an explicit **split injection** on H-invariant fields. Its retraction reads phase values on the genuine ZERO-trit child, and preserves BOTH original sector and sign constraints.
+- Elementary Burnside: `r_n=(3^n+1)/2` and increment `r_(n+1)-r_n=3^n`; `|A_n^H|=3^(r_n)`; index of each split invariant-field refinement is `3^(3^n)`. This gives `r_0..r_6=1,2,5,14,41,122,365`. The all-n closed-form count has a finite Python proof/replay, but no Agda kernel certificate yet.
+- Source and independent mathematical Python checks: 255 exhaustive invariant field tables n≤2, 2000 common-depth relation/group checks, ranks n≤6. New executable and tests committed and TOE root import updated, **not run byte-identically from a complete GitHub checkout**. No Agda kernel/CI claim.
+- The actual **remaining** mathematical topological cutset is: formal compact zero-dimensional topology on `K3=C3×Trit^N`; continuity of finite cylinder fields; finite-stage factorization for all continuous C3-discrete maps (Stacks Project 08ZW and Speyer 2010 finite subcover argument). A quotient *type* can be constructed later, but is NOT required to define the presently source-written group setoid.
+- The original Alexander/Hatcher wild 3D embedding, same-object meridian/relative collar and perfect-group representation into a nonabelian target remain independent and kernel-pending; finite local phase groups do not solve them. PR #1414 polynomial monodromy and quaternion, #1407 27/729 Fourier, #1275 Zipf/Heaps and original Ibrahim Monster 3B retain distinct authorship. No ESD changes or speculative welds.
+
+Canonical detailed ledger: `Docs/topology/AlexanderHornedInvariantCylinderDirectLimitMaxCut20261028.md`.
+
+
+### Q. Three-legged pants as actual three-child source: boundary-word obstruction and genus-two repair
+
+User specifically identified the existing **three-legged pants gluing** as
+the candidate geometric supplier for the F06 `ternaryThreeChildHandlebody`
+obligation. Reuse-first audit found that stacked #1254
+`DASHI/Topology/TernaryCylinderPantsGeometryExact.agda` already
+constructs exact ternary child slots, the 1→3 *combinatorial*
+pants channels and matching prefix refinements. Its ORIGINAL
+`TernaryPantsGeometryBoundary` explicitly says
+`smoothEmbeddedPantsThickeningConstructed=false`.
+Original `RelationalBranchCobordismGeometry` owns its
+phase/capacity/wave/interface gluing. These are real existing
+results, **not** actual surface/3D-handlebody embeddings.
+
+**Essential geometric distinction:** the orientable genus-zero
+four-holed sphere `Σ_(0,4)` (one input, three outputs)
+has peripheral boundary relation `d·a·b·c=1`
+(up to orientation, conjugation and basepoint paths).
+Thus the input peripheral loop reads `(abc)^(-1)`,
+or `abc` with reversed chosen input orientation.
+By contrast the proposed ternary Alexander/Hatcher
+meridian bonding map is
+```text
+x_w -> [a,b][b,c] = a b a^-1 c b^-1 c^-1 .
+```
+The abelianisation of the first is nonzero for
+independent child meridians, while that of the
+second is identically zero. Their equality
+is therefore **impossible** under a free-group
+identification sending the three output
+peripherals to (a,b,c). In particular no
+direct promotion of the combinatorial 1→3
+pants relation into the horn meridian is
+mathematically valid. Classical source:
+four-holed sphere presentation
+`π₁ Σ_(0,4)=<a,b,c,d|abcd=1>`;
+Calegari's surface-boundary commutator
+presentation also supplies the repair.
+
+**Constructive repair on a different surface type:**
+a genus TWO, one-boundary surface `Σ_(2,1)`
+has source boundary word
+`[A,B][C,D]`. A homomorphism of its rank-four
+free group sending
+`(A,B,C,D)→(a,b,b,c)`
+maps that exact boundary word to
+`[a,b][b,c]`, with the proper order.
+This is an ACTUAL continuous surface map
+at the homotopy-class/surface-group level
+since the source surface retracts to a
+four-petal graph. It does **not** assert
+the map is an embedding or π₁-injective:
+indeed B and C share an image, creating
+a kernel already on the source free group.
+The natural next geometry is a genuinely
+embedded genus-two surface with one specified
+boundary curve in a 3D handlebody exterior,
+or another source-faithful 3D linking
+construction inducing the same word.
+One must explicitly prove its gluing to
+the existing **three** child solid pieces,
+the complement inclusion and the induced
+meridian naturality.
+
+**New source owner**:
+`AlexanderHornedTernaryPantsMeridianBoundaryExact.agda`
+reuses original #1244 three-child `TernaryWord`
+and original `Pants.composedOneToThree`.
+It constructs a C3-valued character that sends
+first child to 1 and other children to 0,
+proves peripheral pants boundary has nonzero
+character and ternary commutator word has zero,
+and gives a contradiction to their identification.
+It also defines the genus-two boundary word
+and proves its specific image under shared
+middle-handle assignment is exactly the
+selected ternary refinement word.
+This is source-written, Agda kernel pending.
+
+**Updated exact remaining lemma chain** (F06-F09):
+1. `ternaryPantsOutputSlots` [prior #1254]
+2. `fourHoledSpherePeripheralPresentation` [classical]
+3. `pantsBoundaryNotHornBonding` [new source]
+4. `genusTwoBoundaryWord` [classical]
+5. `ternaryBoundaryFactorsThroughGenusTwo` [new source]
+6. `genusTwoEmbeddedSurfaceRealisation` [OPEN]
+7. `embeddedSurfaceBoundaryMeridian` [OPEN]
+8. `threeChild3DHandlebodyCarrier` [OPEN]
+9. `threeChildLinkedSatelliteStage` [OPEN]
+10. `threeChildStageInclusionInjective` [OPEN]
+11. `threeChildComplementMeridianNaturality` [OPEN]
+12. `ternaryInfiniteCompactExhaustion` [OPEN]
+13. `ternaryWildLimitAndRelativeCollars` [OPEN]
+14. `ternaryExteriorPi1DirectLimit` [OPEN]
+15. `ternaryExternalC3EquivariantAmbientAction` [OPEN]
+
+There is no legitimate route from the existing
+combinatorial 1→3 seam receipt ALONE to (6)-(15).
+All three sectors and native balanced end
+addresses remain available as *separate*
+data. The existing binary Hatcher wild
+group remains its own source, with its
+own supported stationary-cap geometric wall.
+
+**Attribution**: classical oriented surface
+group and cobordism presentations, original
+Alexander 1924/Hatcher AT 2B.2 binary
+geometry; original DASHI `Pants` and
+`TernaryCylinderPantsGeometryExact` owners,
+original distinct #1244 ternary commutator
+tower authoring. No ownership of #1254,
+Ibrahim Monster 3B, zeta/RH, 2I, or acoustic
+lab data is reassigned. This source proof
+is NOT an Agda kernel, smooth embedding
+or physical verification receipt.
+
+
+## 2026-10-28 new exact source transport: ALL n-sign-orbits = (n+1)-word S3 equality classes
+
+A genuinely productive reuse across #1244 and #1275 removes the earlier numerical-coincidence interpretation of ranks `1,2,5,14,41,122,365,...`. The new #1244 `AlexanderHornedS3WordSignOrbitTransportExact.agda` fixes the FIRST label of a named `n+1`-letter word as an anchor and maps its remaining n labels to differences modulo 3. A simultaneous global **C3** relabel of all named values is annihilated by this relative-coordinate map, while global value reflection induces the simultaneous **C2 sign** inversion of those relative coordinates. Conversely, agreement of two normalized words up to C2 sign yields an explicit global affine-S3 transformation (translation or translated reflection) carrying one word to the other. Source terms `signedOrbitToGlobalS3` and `globalS3ToSignedOrbit` establish both relations. This gives the ACTUAL orbit-set equivalence `T^(n+1)/S3_value ≅ T^n/C2_sign`, not a same-cardinality weld.
+
+The standard combinatorial result is therefore `r_n = Σ_{k=1}^{min(3,n+1)} S(n+1,k) = (3^n+1)/2`. The #1275 original restricted-growth string/equality-pattern orbit owner is the receiver; the #1244 `H=C3_sector×C2_sign` reduced address orbit is the source of the signed n-trit carrier. The normalization requires a CHOSEN first-token anchor, and it transports **orbit sets**, not the full raw S3 action onto the existing raw address sector/sign action, uniform measures, IID nonuniform Zipf probabilities, topology, or spin. The extra sixth C3 field still must be independent for 729.
+
+Independent local exhaustive Python replay covered all 9,840 words through n=7 and all 59,040 affine S3 moves, plus one explicit inverse affine witness from each named word to its chosen sign-orbit representative. Formal Agda source/TOE root/tests were committed on #1244; **Agda kernel and checked-out exact GitHub suite remain pending**. Original #1275, #1407, #1414, SSSP and Ibrahim/Monster 3B proof owners retain credit. Source explanation: `Docs/topology/AlexanderHornedInvariantCylinderDirectLimitMaxCut20261028.md`.
+
+
+### R. Stronger minimal-source theorem: theta ribbon genus one, not genus two
+
+**Correction and strictly stronger mathematical result.** The
+genus-two boundary-word map from earlier section Q is a valid
+(noninjective) source but is NOT MINIMAL. The selected three-child
+commutator product is actually conjugate to ONE commutator
+in the free group F(a,b,c), with a six-letter exact reduction:
+
+```text
+w  = [a,b][b,c] = a b A c B C
+q  = [B,Ca]    = B C a b A c
+p  = a b A c
+p^-1 w p = q             (free reduction)
+```
+
+Here capitals denote inverses. This is a precise based
+conjugacy, so the source loop is equivalent to the boundary
+of a GENUS-ONE once-punctured torus up to a specified
+change of peripheral basepoint. This genus is minimal:
+the word is nontrivial and has trivial abelianisation,
+so a genus-zero ONE-boundary disk cannot supply it
+and a genus-one surface does.
+
+The six sides of the cyclic word `a b A c B C`
+pair to give **two vertices, three edges and one
+face**. The resulting closed ribbon polygon has
+Euler characteristic `2-3+1=0`, hence genus one.
+Removing the face gives an orientable one-boundary
+surface of genus one. Its embedded ribbon graph
+spine is a THETA graph (three edges connecting
+two vertices), with free fundamental rank
+`E-V+1=2`. This is a legitimate abstract
+surface/thickening candidate at the SURFACE level.
+An unknotted theta graph CAN be smoothly embedded
+in R³ and have a regular ribbon neighbourhood.
+But proving that its peripheral boundary in the
+actual **THREE CHILD HORN COMPLEMENT** represents
+the separately labelled source word `[a,b][b,c]`,
+with all satellite clearance/linking/collar data,
+is an additional geometric theorem, not paid by
+abstract surface polygon gluing or a simple
+unknotted theta graph.
+
+The previous genus-two map with B and C identified
+is strictly less economical and is retained as a
+SECONDARY nonminimal source, not erased. The
+COMBINATORIAL #1254 1→3 pants carrier
+remains a different FOUR-boundary genus-zero
+topology: its peripheral word abelianises to
+a+b+c and cannot equal the new horn meridian
+under the natural independent-meridian identification.
+
+**Exact severe check:**
+`scripts/alexander_horned_ternary_theta_ribbon_boundary_audit.py`
+tests literal free reduction, the conjugator,
+abelianisation obstruction, ribbon polygon
+vertex/edge/face/gluing identifications,
+Euler characteristic and genus. Independently
+reproduced with local integer tuples: PASS.
+The source-written Agda module
+`AlexanderHornedTernaryPantsMeridianBoundaryExact`
+now also contains `singleCommutatorCyclicWord`
+with the correct literal expression; the
+normal-form/conjugacy equality has not been
+claimed as Agda kernel proof.
+
+**Adjusted Pareto geometric chain (replacing the
+earlier preferred genus-two *geometry*, not
+removing its correct algebraic map):**
+1. `ternaryWordSixLetterReduction` [finite proof]
+2. `ternaryWordSingleCommutatorConjugacy` [exact word calculation; Agda kernel pending]
+3. `thetaRibbonTwoVerticesThreeEdges` [classical polygon + exact check]
+4. `thetaRibbonGenusOneOneBoundary` [classical polygon + exact check]
+5. `thetaRibbonSmoothAmbientEmbedding` [classical unknotted model; specific parametrisation OPEN]
+6. `thetaRibbonPeripheralMeridianRealisation` [OPEN: actual 3D exterior child meridian map]
+7. `threeChildLinkedHandlebodyStage` [OPEN]
+8. `ternaryMeridianStageInjectivity` [abstract normal-form argument, geometric π1 instance OPEN]
+9. `nestedThreeChildWildSatellite` [OPEN]
+10. `ternaryStationaryCapAndAmbientC3` [OPEN]
+11. `ternaryExteriorPi1DirectLimit` [OPEN]
+
+**Nonpromotion:** A genus-one ribbon thickening
+does NOT imply an Alexander horned three-ball,
+and the source-word commutator length is not a
+proof of physical sound propagation, zeta zeros,
+Monster 3B identity or nonabelian SU2 coupling.
+Classical polygon/surface presentations and
+Hatcher/Alexander original ownership retained.
+The 27/5 orbit fibre and existing three-legged
+pants work remain distinct typed consumers.
+
+
+### S. Explicit rank-three Nielsen basis: ternary word as Hatcher-style commutator
+
+The genus-one identification has a further very strong reuse:
+inside the rank-3 child free group `F(a,b,c)` define
+```text
+u = b^-1,  v = c^-1 a,  z = c.
+inverse substitution:
+  a = z v, b = u^-1, c = z.
+```
+These mutually inverse free-group substitutions are
+an explicit **Nielsen free basis**. It is not merely
+that the word happens to look like a commutator:
+`[a,b][b,c]` is freely conjugate to
+`[u,v]`, where u and v are part of a
+primitive basis and z is a spare free generator.
+The exact relation with `p=a b a^-1 c` is
+```text
+p^-1 [a,b][b,c] p = [b^-1,c^-1 a].
+```
+Thus the **classical Hatcher punctured-torus
+commutator source** can be reused at the
+algebraic stage after a specifically described
+rank-three basis change and basepoint-path
+conjugation. No genus-two replacement is
+necessary. This represents a constructive
+Pareto simplification of the previous
+ternary handlebody geometry frontier.
+
+An ambient handlebody homeomorphism induces
+Nielsen automorphisms of its free
+fundamental group, but this abstract
+basis change does not by itself prove the
+specific THREE-child, relative-boundary,
+wild-satellite/linked complement
+homeomorphism or preserved stationary collar.
+Those are the remaining same-object gates:
+(1) embed/label the 3-child target handlebody
+so its 3 independent meridians are a,b,c;
+(2) construct relative handle-slide
+homeomorphisms that send those labels
+to the chosen primitive u,v,z basis;
+(3) place the classical source
+once-punctured-torus commutator loop and
+conjugating basepoint path in the actual
+complement; (4) prove the image is the
+parent meridian; (5) exhibit the nested
+3-child satellite with distance, wild-limit
+and equivariant collar control; (6) prove
+the true inclusion maps on π1.
+
+NEW exact executable
+`scripts/alexander_horned_ternary_nielsen_handle_slide_audit.py`
+tests the free-basis map and inverse
+on all generator words of length at most
+5 and verifies the actual conjugator,
+with no floating point. Its mathematical
+assertions follow directly from the
+displayed inverse substitution.
+The script is committed but not presented
+as a runtime execution receipt of its exact
+GitHub blob. No Agda kernel or actual
+ambient isotopy/homotopy certificate
+is asserted.
+
+Source credit: Nielsen free-group
+transformations and classical regular
+neighbourhood/handle-slide theory;
+Hatcher AT Example 2B.2 owns the
+original binary geometric commutator,
+the existing DASHI #1244 three-child
+word remains its own owner, #1254
+pants seam work is a separate
+four-boundary interface, and
+Ibrahim Monster 3B retains its
+independent representation ownership.
+
+
+## 2026-10-28 actual five-orbit wave-operator named-word receiver
+
+With the source-backed global-S3 word orbit ↔ simultaneous-C2 sign orbit chart in `AlexanderHornedS3WordSignOrbitTransportExact`, the original #1244 `AlexanderHornedFiveOrbitWaveOperatorExact` five-slot heterogeneous operators can now be evaluated on ANY named three-label word without inventing an operator carrier. New `AlexanderHornedFiveOrbitNamedWordWaveTransportExact` proves the explicit five-class map AAA→origin, AAB→axisSecond, ABA→axisFirst, ABB→diagonal, ABC→antiDiagonal, and operator-evolution compatibility and invariance under all six global value S3 transformations. Independent local exact integer audit covered **243 five-field assignments × 27 named three-label words × 6 S3 actions = 39,366** valid heterogeneous operator evaluations. Source terms were committed and imported by canonical TOE receiver but not Agda-kernel typechecked; the exact committed GitHub checkout regression did not run. The original finite wave source `ShiftDiscreteWaveStep` and #1405 sound-wave transport authors retain ownership. This is a genuine orbit-INDEXING transport only; it does not claim Zipf measures, time-series Heaps behaviour, an ambient Alexander wild embedding, physical acoustics, #1407 complex Fourier convolution, #1414 spin or Ibrahim/Monster same-object identity.
+
+
+### T. Tetralemma relative handle-slide: cap fixation versus full-boundary obstruction
+
+**Tetralemma source owner audited:** `DASHI.Algebra.TetralemmaBridge`
+already implements `affirmation,negation,both,neither`, with a
+non-promotion firewall distinguishing this logic carrier from
+physical/semantic objects. `DisagreementFourViewBoundary`
+makes support for P and ¬P explicit. These FOUR positions
+are useful as proof-status/contradiction qualifications
+but are NOT a fourth geometric direction or a new
+3D gluing theorem. No false C3×Trit cubical witness
+is fabricated from this classification.
+
+**New mathematically decisive relative-wall correction:**
+a homeomorphism of an orientable genus-3 handlebody
+H3 which fixes its ENTIRE boundary pointwise
+induces the identity on π1(H3), since the boundary
+inclusion `π1(∂H3)→π1(H3)=F3` is onto and
+every boundary loop is fixed. Thus a nontrivial
+Nielsen automorphism `a↦c^-1a,b↦b^-1,c↦c`
+cannot be realised by a full-boundary-pointwise
+homeomorphism. The earlier short phrase
+"relative handle-slide" needs the precise
+weaker condition: a specifically SELECTED
+stationary disk/cap and its collar can be
+fixed while slides move the complementary
+handlebody boundary. Support away from that
+cap must be explicitly constructed. This
+full-boundary no-go is a direct fundamental
+group consequence, not a failed numerical test.
+
+Classical reference: Sebastian Hensel,
+*A Primer on Handlebody Groups*, §2–3,
+https://www.math.lmu.de/~hensel/papers/hno4.pdf,
+for cut systems, handlebody mapping class
+group and boundary-restriction facts.
+This source supports standard handlebody
+topology; it does not supply our specific
+Alexander wild-satellite cap-relative
+embedding automatically.
+
+**Current true theorem dependencies** after
+the already solved algebraic primitive basis
+`u=b^-1,v=c^-1a,z=c`:
+
+1. `selectedCapDisjointFromSlides` [P0, OPEN].
+   Choose actual embedded handle cores and
+   disjoint slide-support disks outside the
+   selected cap/collar.
+2. `relativeHandleSlideHomeomorphism` [P0, OPEN].
+   Construct an orientation-preserving
+   PL/smooth genus-3 handlebody homeomorphism
+   fixed on the selected cap neighbourhood
+   (NOT on all of ∂H3), with inverse and
+   exact induced Nielsen automorphism.
+3. `relativePeripheralBasepointPath` [OPEN].
+   Realise `p=a b a^-1 c` as an actual
+   complement path and verify the
+   conjugation equality on based loops.
+4. `thetaRibbonBoundaryEmbedded` [OPEN].
+   Embed a once-punctured-torus surface
+   whose based boundary represents
+   `[b^-1,c^-1a]` and is disjoint
+   from the stationary collar.
+5. `childMeridianFunctoriality` [OPEN].
+   Prove the identification of actual
+   chosen geometrical child meridians
+   with F(a,b,c) free basis under
+   these handle slides.
+6. `threeChildStageInclusion` [OPEN].
+   Compare true complement inclusions
+   with the abstract `[a,b][b,c]`
+   bonding map; prove injection.
+7. `nestedThreeChildWildLimit` [OPEN].
+   Bound nested stages, clearance, wildness,
+   preservation of cap and ambient C3.
+8. `ternaryExteriorSameObjectPi1` [OPEN].
+   Invoke the existing open-exhaustion /
+   van Kampen adapters on the SAME
+   actual three-dimensional exterior.
+
+**Proof-status qualification**:
+`AlexanderHornedTetralemmaRelativeHandleSlideGateExact.agda`
+imports the existing tetralemma and source
+meridian owners. It records affirmative
+algebraic evidence, negates the impossible
+full-boundary-pointwise claim, and leaves
+actual selected-cap preservation, geometric
+meridian naturality and wild-limit theorem
+as unproved source obligations.
+Its `RelativeHandleSlideSupplier` is only
+a weak abstract record of inverse maps
+and a cap predicate. IT IS NOT an inhabited
+concrete 3D topology model, and even an
+inhabitant would not prove a handlebody
+homeomorphism without additional
+topological structure. No kernel receipt
+or real geometric homeomorphism is claimed.
+
+This narrows and corrects the original
+F/G geometric cut while retaining original
+Alexander/Hatcher (1924 / AT 2B.2)
+source ownership, prior original
+Nielsen/pants owners, #1414 finite
+C3/S3/quaternion, sonic #1405,
+and original Ibrahim Monster 3B
+independence.
+
+
+### U. G1–G6 six-obligation cap-relative 3D gate and exact elementary Nielsen audit
+
+The full detailed acceptance ledger now has its canonical source in
+`Docs/topology/AlexanderHornedRelativeThreeChildHandlebodyProofCut20261029.md`.
+No new parallel pants/handlebody geometry or group construction is
+invented. New exact executed producer
+`scripts/alexander_horned_relative_nielsen_stage_audit.py`
+reduces the selected basis map to THREE elementary moves:
+```text
+(a,b,c) → (a,b^-1,c)
+        → (c^-1 a,b^-1,c)
+        → (b^-1,c^-1 a,c) = (u,v,z).
+```
+Its inverse is `a=zv, b=u^-1, c=z`.
+The original meridian has explicitly based
+`p^-1[a,b][b,c]p=[u,v]` with `p=aba^-1c`.
+A locally run exact Python equivalent exhaustively
+checked all 9,331 signed words of lengths 0..5,
+both substitutions, the conjugation and the nonidentity
+of b reversal: PASS. The file was committed and
+readback still needed for exact-blob execution status.
+These checks do not prove an ambient homeomorphism.
+
+**G1** standard tame genus-three handlebody
+`D³∪3(D¹×D²)` and unused stationary cap are
+classically available abstractly, but the
+selected PL coordinates and verified disjoint
+feet/cores/collar are not yet committed.
+**G2** a cap-disjoint ambient Nielsen handle slide
+requires explicit cut disks/supports/isotopies
+and induced based pi1 action. A map fixed
+on the ENTIRE boundary is impossible.
+**G3** genus-one theta ribbon and peripheral
+word are solved abstractly, not embedded
+in the intended actual three-child complement
+with based p path.
+**G4** true inclusion/meridian naturality
+commuting square is open.
+**G5** nested wild satellite, injectivity,
+wildness, cap collars and ambient root C3
+are open.
+**G6** genuine exterior-group colimit/
+orbifold identification is open because
+G4/G5 are missing. This is the exact
+same-object wall, not another finite
+3/6/9 lemma.
+
+Independent #1414 polynomial
+double-commutator derived-series no-go
+is pertinent only as the separate
+perfect-to-solvable representation
+boundary, never as a source of the
+3D embedding. Keep mathematical
+prior source, source-written code,
+locally executed tests and kernel
+verification statuses distinct.
+
+
+### V. Exact tame G1 handlebody and dual-meridian I3 linking chart
+
+The six-obligation current frontier is explicitly
+tracked in `Docs/topology/AlexanderHornedRelativeThreeChildHandlebodyProofCut20261029.md`.
+To avoid merely repeating classical existence, the new
+G1 rational witnesses `scripts/alexander_horned_three_loop_pl_spine_g1.py`
+and `scripts/alexander_horned_three_child_dual_meridian_g1.py`
+supply an actual 7-vertex, 9-edge embedded graph with THREE
+labelled planar loops, genus-three regular-neighborhood
+homeomorphism type, central unused south-pole stationary
+cap and exterior dual polygonal meridians.
+The meridian linking matrix against the three
+labelled spine cycles is EXACTLY I3 after choice
+of orientations (independently executed exact
+rational determinant regression). No arbitrary
+finite 3/6/9 orbit counting or invented
+three-dimensional cubical gluing is involved.
+
+**Important object check:** these are complementary
+meridian loops of the TAME chosen G1 carrier.
+The parent horned meridian map must still be
+verified from an actual three-child linked
+satellite under a cap-relative PL homeomorphism.
+An identity linking matrix does not by itself
+prove the nonabelian commutator word, nor any
+infinite wild limit. G2–G6 remain open as
+stated in the proof cut. Source/author status:
+Alexander/Hatcher and classical regular-neighborhood
+topology prior art; source-specific coordinate
+and exact arithmetic check here; no Agda kernel
+or physical provenance promotion. Polynomial
+#1414's S5 derived-series no-go is an
+independent proof lane, not a 3D embedding.
+
+
+## 2026-10-30 ABC/S3 six-permutation continuation and revised G4 gate
+
+Canonical source: [ABC six-permutation meridian orbit](AlexanderHornedABCSixPermutationOrbit20261030.md)
+and updated [G1–G6 relative proof cut](AlexanderHornedRelativeThreeChildHandlebodyProofCut20261029.md).
+Existing S3 owners were READ, not cloned. The original ternary
+parent word has six distinct oriented free-group conjugacy classes
+under ABC relabelling, only three classes after orientation reversal,
+and a 36-case source-written S3-covariant **family** of boundary
+words. This does not make a SINGLE selected parent peripheral
+class invariant under the full local child S3.
+
+The roadmap therefore retains a strict G4 alternative:
+\`singlePeripheral + stabilizer + basedPath\` OR
+\`orbitIndexedPeripheralFamily + geometricS3Map + basedPaths\`.
+Neither actual complement-side geometric supplier is constructed.
+G2–G3 and G5–G6 still open. External root-sector C3/S3 is a
+different action, and #1414 polynomial, #1438 trialectics and
+Ibrahim Monster 3B are not borrowed as embedded geometry.
+No Agda/Lean kernel, CI or physical same-object certification.
+
+
+## 2026-10-30 order-three relative cap G2/G4 obstruction (update)
+
+Read [primary cyclic basing and Newman theorem cut](AlexanderHornedPeriodicCapCocycleMaxCut20261030.md).
+The original abstract three-child word \`w=[a,b][b,c]\`
+and selected local Nielsen \`phi\` have
+\`phi²(q)phi(q)q=w^-1\`, so no conjugator \`q w^k\`
+can produce an exactly order-three **based** peripheral
+normalization. Classical cyclic centralizers exclude every other
+conjugator. Independently, Newman's 1931 periodic action theorem
+forbids nontrivial finite-order handlebody Nielsen actions
+fixing an open boundary cap **pointwise**. These are two distinct
+no-go results, not new wild-geometry constructions.
+
+Replace old ambiguous G2 "finite-order cap-fixed Nielsen"
+target by cap-fixed **non-periodic** supported relative slides,
+while permitting an independent SETWISE-cap/external root
+C3 symmetry. G3 actual embedded torus, G4 actual based inclusion,
+G5 nested ternary satellite and G6 exterior pi1 stay open;
+the alternative six-boundary family is a still-algebraic S3-set.
+No change to Monster 3B, #1414 polynomial or ESD surfaces.
