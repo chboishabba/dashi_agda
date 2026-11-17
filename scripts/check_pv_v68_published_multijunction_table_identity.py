@@ -27,7 +27,7 @@ import json
 SOURCE="https://doi.org/10.1016/j.joule.2026.102494"
 # One-sun printed TABLE values (V; mA/cm²; FF percent; PCE percent).
 ROWS=[
-    {"id":"2026_E​​STI_LONGi_perovskite_Si_2T","class":"2T",
+    {"id":"2026_ESTI_LONGi_perovskite_Si_2T","class":"2T",
      "voc":"1.998","jsc":"20.55","ff":"85.2","pce":"35.2","quoted_uncertainty_pp":"1.1",
      "area_cm2":"0.9994","area_class":"designated illumination area",
      "site":"ESTI (02/2026)","material":"perovskite/Si"},
