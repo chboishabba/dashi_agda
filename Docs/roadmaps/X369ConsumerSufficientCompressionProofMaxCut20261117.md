@@ -1310,3 +1310,140 @@ and recheck margins along full traces.
 Independent Sophontic/grokking/
 trialectic semantic consumers remain
 outside a router-output-only proof.
+
+
+### R4 completed conditional envelope — formal consumer refinement (17 Nov)
+
+New Agda **proof-source** weld
+`DASHI/Cognition/PNF/X369R4SharedScoreConsumerWeldExact.agda`
+imports the existing fused score formalism rather than
+defining a new original directed feature owner. It
+represents the source's common unary logit term,
+the separately supplied exact C2 absolute-history
+head contribution, each independent expert bias,
+and the existing original directed residual score.
+`originalR4ScoreFactorsThroughFusedHead` and
+`everyExpertScorePreserved` give exact integer
+factorisation per expert and over arbitrary expert
+lists; `everyOrderedScoreListConsumerPreserved`
+transports arbitrary deterministic consumers of
+the full ordered score list. The separate
+`commonUnaryCancelsRelativeScores` is an
+integer ring-solver proof. **No Agda kernel receipt
+is claimed**, and the actual source float/c2
+history calculation must be admitted separately.
+
+The revised `scripts/check_x369_r4_end_to_end_envelope_sympy.py`
+now includes source-dependent rational examples for
+ALL THREE R4 arms:
+`c2_c3_residual`, `c2_c3_mixed_null_residual`,
+and `c2_c2_residual`; the two C3 arms certify
+softmax and mixture output discrepancies given
+fixed expert output values. A separate strict
+orientation score interval confirms that
+`sign(2*orientation(z))` does not cross zero.
+A near-zero witness refutes unconditional sign
+stability; a q-mean tie witness refutes
+unconditional mixed-mask stability. The
+source's fallback orientation sign at exactly
+zero is left as a separate equality case, not
+mislabelled continuous.
+
+**Exact GELU/source recurrence structure.**
+The source uses `nn.GELU()` in each expert FFN.
+For exact Gaussian GELU,
+
+    GELU'(t) = Phi(t) + t*phi(t),
+
+with a valid global (loose) Lipschitz bound
+`Lg = 1 + 1/sqrt(2*pi*e)`. The script checks the
+derivative identity and Gaussian extremum by
+SymPy; the global bound follows analytically
+from 0<=Phi<=1 and
+`|t*phi(t)|<=1/sqrt(2*pi*e)`.
+It is NOT a numerical Torch/GELU evaluation
+error certificate. For admitted spectral norms
+of original checkpoint FFN matrices W1/W2
+and expert transition matrix T, after
+certifying unchanged selected IDs, q branches
+and orientation signs:
+
+    Y_e <= ||W2||2 * Lg * ||W1||2
+          * sqrt(Dx^2+Dh_e^2) + eta_FFN_e,
+
+    H_e' <= ||T||2
+          * sqrt(Dx^2+Dh_e^2+Y_e^2)
+          + eta_transition_e.
+
+The source `cap_history` is a radial Euclidean
+projection; its exact mathematical operation
+is nonexpansive in the Euclidean norm. Actual
+float64 norm evaluation and later dtype cast
+remain additional evaluation-error terms.
+For low-rank transition, replace ||T|| by
+the product of the two transition matrix
+spectral norms (or a verified composite
+operator norm). Where `train_sign=True`,
+the straight-through tanh gradient is a
+DIFFERENT contract: this analysis covers
+hard-sign forward/inference, not training
+optimizer parity.
+
+For identical ordered selected experts,
+the script now symbolically checks the
+softmax Jacobian `J=diag(p)-pp^T`, its
+common-shift null, variance expansion,
+and the exact output decomposition
+
+    o'-o = Σ_e (p'_e-p_e)y_e
+           + Σ_e p'_e (y'_e-y_e).
+
+This supports the conditional
+`||o'-o||<=M*B+Y` formula for certified
+source score/error and expert-output
+envelopes. The same source transition is
+independent of p_e within the *current*
+selected-expert update, but altered o can
+change the next layer's activation.
+
+For an admitted uniform step Lipschitz
+coefficient L and step noise eta,
+`D_t <= eta Σ_(j=0)^(t-1) L^j`
+when initial divergence is zero. The
+updated script verifies the symbolic
+geometric sum and a 4-step **variable
+L_t/eta_t** expansion. Such a recurrence
+does NOT prove a source trace unless
+topk, mixed q mask and orientation
+certificates are valid on EVERY required
+step and the actual network parameter
+norms/precision budgets are supplied.
+
+**Source-specific next high-alpha:**
+establish actual original dtype, tensor
+quantizer, elementwise error provenance
+and runtime evaluation slack; compute
+spectral-norm receipts from the original
+checkpoint (when run capacity returns);
+certify topk, orientation and q thresholds
+for every targeted activation/history
+trace; retain source inactive histories
+for future reactivation. Grokking,
+Sophontic and trialectic face outcomes
+remain separate typed consumer gates.
+
+No user GPU, CI or Agda run is asserted
+for this continuation. The local
+independent SymPy reproduction verified
+coherent (3,4,13,11)->[2,3],
+mixed (5,2,9,17)->[3,2], and matched
+C2 (0,5,8,11)->[3,2] rational fixture
+margin conditions; coherent/mixed
+selected softmax L1 discrepancies and
+mixture discrepancies were within
+the certified score envelopes. The
+additional softmax/recurrence polynomial
+identities were also checked locally.
+The complete committed script's direct
+execution is not independently
+recorded in this environment.
