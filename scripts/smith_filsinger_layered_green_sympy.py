@@ -20,10 +20,12 @@ def exact_layers():
             Layer(S.Rational(1),S.Rational(1,4),S.Rational(0),S.Rational(1,3)),
             Layer(S.Rational(5,4),S.Rational(3,5),S.Rational(-2,7),S.Rational(2,5)))
 
-def matrices(layers=None, couplings=None):
+def matrices(layers=None, couplings=None, k_parallel_squared=0):
     layers=exact_layers() if layers is None else layers
     couplings=(S.Rational(2,5),S.Rational(3,7)) if couplings is None else couplings
     if len(layers)!=3 or len(couplings)!=2:raise ValueError("expected 3 layers")
+    k_parallel_squared=S.Rational(k_parallel_squared)
+    if k_parallel_squared<0:raise ValueError("nonnegative transverse squared wavenumber required")
     C,P,H,K=(S.zeros(6) for _ in range(4))
     for i,l in enumerate(layers):
         for j in range(2):
@@ -38,6 +40,7 @@ def matrices(layers=None, couplings=None):
             a=2*i+j;b=2*(i+1)+j
             K[a,a]+=w;K[b,b]+=w
             K[a,b]-=w;K[b,a]-=w
+    K += k_parallel_squared*S.eye(6)
     return C,P,H,K
 
 def admittance(s,C,P,H,K):
