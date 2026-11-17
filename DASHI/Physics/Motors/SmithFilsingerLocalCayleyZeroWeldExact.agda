@@ -15,6 +15,8 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 import DASHI.Physics.Motors.SmithFilsingerLocalCausalADEFrameExact as Frame
+import DASHI.Physics.Motors.SmithFilsingerIndexedFaceIncidenceExact as Indexed
+open import Agda.Builtin.Bool using (false)
 import DASHI.Physics.Motors.SmithFilsingerLocalCausalADEReachExact as Reach
 
 -- The SOURCE-OWNED inverse denominator is explicitly certified.
@@ -60,6 +62,16 @@ sameCayleySecondZero c =
     (step c) (firstCoupling c) (secondCoupling c)
     (inverseDenominator c) (quarter c)
 
+-- Distinct IDs are required for the two-output matrix interpretation.
+-- Coincident IDs invoke the earlier priority rule and lose output two.
+record DistinctCayleyEdge : Set where
+  field
+    firstID secondID : Nat
+    distinct : Indexed.sameID firstID secondID ≡ false
+    coefficients : CertifiedCayley
+
+open DistinctCayleyEdge
+
 sameCayleyPrimitive :
   Nat → Nat → CertifiedCayley → Frame.LocalPrimitive ℚ
 sameCayleyPrimitive firstID secondID c =
@@ -87,6 +99,32 @@ sameCayleyReachEvent :
   Reach.LocalEvent ℚ 0ℚ
 sameCayleyReachEvent i j c =
   Reach.propagate (sameCayleyGuarded i j c)
+
+-- Ohmic/relaxation/load steps are diagonal Cayley updates.
+-- Their one-coordinate zero-preserving law is separately verified.
+record CertifiedDiagonalCayley : Set where
+  field
+    dampingStep generator inverseDiagonal half : ℚ
+    inverseDiagonalLaw :
+      (1ℚ - half * (dampingStep * generator)) *
+        inverseDiagonal ≡ 1ℚ
+    halfIsHalf : half + half ≡ 1ℚ
+
+diagonalCayley : CertifiedDiagonalCayley → ℚ → ℚ
+diagonalCayley d x =
+  CertifiedDiagonalCayley.inverseDiagonal d *
+    ((1ℚ + CertifiedDiagonalCayley.half d *
+      (CertifiedDiagonalCayley.dampingStep d *
+       CertifiedDiagonalCayley.generator d)) * x)
+
+diagonalCayleyZero : (d : CertifiedDiagonalCayley) →
+  diagonalCayley d 0ℚ ≡ 0ℚ
+diagonalCayleyZero d =
+  ℚRing.solve-∀
+    (CertifiedDiagonalCayley.inverseDiagonal d)
+    (CertifiedDiagonalCayley.half d)
+    (CertifiedDiagonalCayley.dampingStep d)
+    (CertifiedDiagonalCayley.generator d)
 
 -- Explicit SAME-object dependent consumer of the prior all-N theorem.
 -- An arbitrary finite list may interleave actual two-coordinate Cayley
