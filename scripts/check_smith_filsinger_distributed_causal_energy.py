@@ -135,8 +135,8 @@ def symbolic_telescoping_check(nodes=5):
     Rc=sp.symbols('Rc',real=True)
     di_series=list(di)
     di_series[j]-=Rc*ii[j]/ll
-    rate_series=energy_rate+ll*ii[j]*(di_series[j]-di[j])
-    out_series=p_out+Rc*ii[j]**2
+    rate_series=(energy_rate+ll*ii[j]*(di_series[j]-di[j])).subs(gp,0)
+    out_series=(p_out+Rc*ii[j]**2).subs(gp,0)
     return sp.expand(p_in-out_series-rate_series)==0
 
 def energy(y,p):
