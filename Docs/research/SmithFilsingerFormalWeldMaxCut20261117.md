@@ -559,3 +559,8 @@ The runner rejects uncommitted relevant source/test changes, records `git rev-pa
 ### D1 rerunnable source-identity refinement
 
 The clean-head acceptance runner was refined after source review: it now rejects **all modified tracked project inputs** by `git diff --quiet HEAD` and rejects **new untracked project source files** under `DASHI`, `scripts` and the focused workflow; it deliberately ignores untracked `.agdai` caches so a second run can succeed and ignores the third-party `pinned-agda-stdlib` checkout installed by CI. Without this restriction, the workflow's own pinned stdlib checkout could falsely trigger dirty-source rejection. All results remain pending actual full execution; source-level repair is not a PASS receipt.
+
+
+### CI run-observability qualification
+
+The available GitHub commit-workflow-run connector filters its output to **pull-request-triggered** workflow runs. Accordingly a reported count of zero means **no PR-triggered runs were observed through this endpoint**; it does NOT establish that the newly added `push` trigger was skipped or that no push workflow ran. An exact-head full acceptance PASS still requires a positive run/job/log/receipt, or a local run of `scripts/run_smith_filsinger_acceptance.sh --full`. Repository commit-status checks alone are not equivalent to a successful Agda kernel receipt.
