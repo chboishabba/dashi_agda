@@ -214,6 +214,7 @@ def main():
         out['declared_provenance']={
             'sample_id':a.sample_id,'temperature_K':a.temperature_k,
             'source_document':a.source_provenance,
+            'incident_spectrum_sha256':sha256_file(a.spectrum),
             'input_sha256':{str(path):sha256_file(path) for path in all_files},
             'data_authenticity_independently_verified':False}
 
