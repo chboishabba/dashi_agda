@@ -30,6 +30,7 @@ targets=(
   DASHI/Physics/YangMills/YMClayBishopWilsonGibbsPositiveExact.agda
   DASHI/Physics/YangMills/YMClayBishopSU2WilsonDeficitPositiveExact.agda
   DASHI/Physics/YangMills/YMClayBishopSU2FiniteGibbsPartitionExact.agda
+  DASHI/Physics/YangMills/YMClayOriginalWilsonSecondOrderCombinatoricsExact.agda
 )
 
 for target in "${targets[@]}"; do
@@ -43,6 +44,8 @@ python3 scripts/check_ym_su2_fejer_rootfree_20261117.py
 python3 scripts/check_ym_su2_bishop_matrix_20261117.py
 python3 scripts/check_bishop_machin_four_angle_algebra_20261117.py
 python3 scripts/check_ym_su2_gibbs_positive_20261117.py
+python3 scripts/check_ym_original_wilson_loworder_20261117.py
+python3 scripts/check_ym_bn_cauchy_schedule_20261117.py
 
 if ! command -v nix >/dev/null 2>&1; then
   echo 'Nix unavailable: local P0 Agda acceptance NOT performed' >&2
@@ -57,5 +60,5 @@ for target in "${targets[@]}"; do
     bash scripts/run_agda29_parallel_check.sh "$target"
 done
 
-echo 'PASS: all fifteen isolated P0 scalar/SU2 Agda module checks completed.'
+echo 'PASS: all sixteen isolated P0 scalar/SU2 Agda module checks completed.'
 echo 'NOTE: OriginalWilsonToBishopScalarWeld is not thereby inhabited.'
