@@ -524,6 +524,93 @@ governanceSensibLawTargetDomainNeedsOwnAuthorityWitness :
 governanceSensibLawTargetDomainNeedsOwnAuthorityWitness =
   GovernanceTOE.governanceTargetDomainNeedsOwnAuthorityWitness
 
+yangMillsBalabanR559Gate4UnresolvedCount : ℕ
+yangMillsBalabanR559Gate4UnresolvedCount =
+  BalabanR559TOE.gate4UnresolvedCount
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+yangMillsBalabanR559Gate4UnresolvedCountIs58 :
+  yangMillsBalabanR559Gate4UnresolvedCount ≡ 58
+yangMillsBalabanR559Gate4UnresolvedCountIs58 =
+  BalabanR559TOE.gate4UnresolvedCountIs58
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+yangMillsBalabanR559Gate4DefinitionLevel : ProofLevel
+yangMillsBalabanR559Gate4DefinitionLevel =
+  BalabanR559TOE.gate4DefinitionLevel
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+yangMillsBalabanR559Gate4InhabitantsLevel : ProofLevel
+yangMillsBalabanR559Gate4InhabitantsLevel =
+  BalabanR559TOE.gate4InhabitantsLevel
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+yangMillsBalabanScaleTransferNonPromotion :
+  BalabanR559TOE.ScaleTransferPromotion → ⊥
+yangMillsBalabanScaleTransferNonPromotion =
+  BalabanR559TOE.scaleTransferPromotionEliminator
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+------------------------------------------------------------------------
+-- Cross-domain governance facade.
+-- This exposes governance non-promotion beside physics.
+-- It does not turn governance evidence into physics or legal authority.
+------------------------------------------------------------------------
+
+governanceSensibLawSemanticBoundary :
+  Authority.AuthorityNonPromotionBundle
+governanceSensibLawSemanticBoundary =
+  GovernanceTOE.governanceSemanticAuthorityBoundary
+
+governanceSensibLawSemanticTruthAuthorityStillClosed :
+  Authority.truthAuthorityFlag governanceSensibLawSemanticBoundary ≡ false
+governanceSensibLawSemanticTruthAuthorityStillClosed =
+  GovernanceTOE.governanceSemanticTruthAuthorityStillClosed
+
+governanceSensibLawSemanticLegalAuthorityStillClosed :
+  Authority.legalAuthorityFlag governanceSensibLawSemanticBoundary ≡ false
+governanceSensibLawSemanticLegalAuthorityStillClosed =
+  GovernanceTOE.governanceSemanticLegalAuthorityStillClosed
+
+governanceSensibLawSemanticAllAuthorityStillClosed :
+  Authority.promotesAnyAuthority governanceSensibLawSemanticBoundary ≡ false
+governanceSensibLawSemanticAllAuthorityStillClosed =
+  GovernanceTOE.governanceSemanticAllAuthorityStillClosed
+
+governanceSensibLawLegalAuthorityBoundaryReceipt :
+  AuthorityBoundary.AuthorityBoundaryReceipt
+governanceSensibLawLegalAuthorityBoundaryReceipt =
+  GovernanceTOE.governanceLegalAuthorityBoundaryReceipt
+
+governanceSensibLawLegalRuntimeContract :
+  LegalRuntime.AgdaFirstLegalRuntimeContract
+governanceSensibLawLegalRuntimeContract =
+  GovernanceTOE.governanceLegalRuntimeContract
+
+governanceSensibLawDomainTransportReceipt :
+  Domain.DomainTransportReceipt
+governanceSensibLawDomainTransportReceipt =
+  GovernanceTOE.governanceDomainTransportReceipt
+
+governanceSensibLawRepresentationEqualityDoesNotCreateLegalAuthority :
+  Domain.DomainTransportReceipt.representationEqualityCreatesLegalAuthority
+    governanceSensibLawDomainTransportReceipt
+  ≡ false
+governanceSensibLawRepresentationEqualityDoesNotCreateLegalAuthority =
+  GovernanceTOE.governanceRepresentationEqualityDoesNotCreateLegalAuthority
+
+governanceSensibLawVendorIdentityDoesNotCreateAuthority :
+  Domain.DomainTransportReceipt.vendorIdentityCreatesAuthority governanceSensibLawDomainTransportReceipt
+  ≡ false
+governanceSensibLawVendorIdentityDoesNotCreateAuthority =
+  GovernanceTOE.governanceVendorIdentityDoesNotCreateAuthority
+
+governanceSensibLawTargetDomainNeedsOwnAuthorityWitness :
+  Domain.DomainTransportReceipt.targetDomainNeedsOwnAuthorityWitness governanceSensibLawDomainTransportReceipt
+  ≡ true
+governanceSensibLawTargetDomainNeedsOwnAuthorityWitness =
+  GovernanceTOE.governanceTargetDomainNeedsOwnAuthorityWitness
+
 governanceSensibLawZKPFrame :
   GovernanceTOE.SensibLawGovernanceTOEZKPFrame
 governanceSensibLawZKPFrame =

@@ -1,7 +1,12 @@
 module DASHI.Unifier where
-import DASHI.Mathematics.CrossPollination.MillenniumThreeLaneContinuationValidation as MillenniumThreeLane
 
-import DASHI.Physics.Foundations.PhasedArrayDirectionFindingExact as PlasmaAperture
+import DASHI.Unified.SensibLawGovernanceTOEExact as GovernanceTOE
+import DASHI.Core.AuthorityNonPromotionCore as Authority
+import DASHI.Promotion.AuthorityBoundaryCore as AuthorityBoundary
+import DASHI.Law.SensibLawAgdaFirstLegalRuntimeEverything as LegalRuntime
+import DASHI.Governance.DomainPermeabilityAuthorityTransport as Domain
+
+open import Agda.Builtin.Bool using (false; true)
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Analysis.RiemannG2AdaptiveCutoffCrossingCompatibilityLeanDonorExact as RHAdaptiveCutoff
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
@@ -1038,6 +1043,98 @@ unifierYangMillsGoal1ClayCompletionNotClaimed = refl
 unifierYangMillsGoal1ParetoZKPFrame : YMMaxCut.Goal1ParetoTOEZKPFrame
 unifierYangMillsGoal1ParetoZKPFrame = YMMaxCut.canonicalGoal1ParetoTOEZKPFrame
 
+
+------------------------------------------------------------------------
+-- SensibLaw / legal governance TOE normalization.
+-- Unifier consumes the theorem owner.  It does not create authority.
+------------------------------------------------------------------------
+
+unifierSensibLawGovernanceSemanticBoundary :
+  Authority.AuthorityNonPromotionBundle
+unifierSensibLawGovernanceSemanticBoundary =
+  GovernanceTOE.governanceSemanticAuthorityBoundary
+
+unifierSensibLawSemanticTruthAuthorityStillClosed :
+  Authority.truthAuthorityFlag unifierSensibLawGovernanceSemanticBoundary ≡ false
+unifierSensibLawSemanticTruthAuthorityStillClosed =
+  GovernanceTOE.governanceSemanticTruthAuthorityStillClosed
+
+unifierSensibLawSemanticLegalAuthorityStillClosed :
+  Authority.legalAuthorityFlag unifierSensibLawGovernanceSemanticBoundary ≡ false
+unifierSensibLawSemanticLegalAuthorityStillClosed =
+  GovernanceTOE.governanceSemanticLegalAuthorityStillClosed
+
+unifierSensibLawSemanticAllAuthorityStillClosed :
+  Authority.promotesAnyAuthority unifierSensibLawGovernanceSemanticBoundary ≡ false
+unifierSensibLawSemanticAllAuthorityStillClosed =
+  GovernanceTOE.governanceSemanticAllAuthorityStillClosed
+
+unifierSensibLawLegalAuthorityBoundaryReceipt :
+  AuthorityBoundary.AuthorityBoundaryReceipt
+unifierSensibLawLegalAuthorityBoundaryReceipt =
+  GovernanceTOE.governanceLegalAuthorityBoundaryReceipt
+
+unifierSensibLawLegalRuntimeContract :
+  LegalRuntime.AgdaFirstLegalRuntimeContract
+unifierSensibLawLegalRuntimeContract =
+  GovernanceTOE.governanceLegalRuntimeContract
+
+unifierSensibLawDomainTransportReceipt :
+  Domain.DomainTransportReceipt
+unifierSensibLawDomainTransportReceipt =
+  GovernanceTOE.governanceDomainTransportReceipt
+
+unifierSensibLawRepresentationEqualityDoesNotCreateLegalAuthority :
+  Domain.DomainTransportReceipt.representationEqualityCreatesLegalAuthority
+    unifierSensibLawDomainTransportReceipt
+  ≡ false
+unifierSensibLawRepresentationEqualityDoesNotCreateLegalAuthority =
+  GovernanceTOE.governanceRepresentationEqualityDoesNotCreateLegalAuthority
+
+unifierSensibLawVendorIdentityDoesNotCreateAuthority :
+  Domain.DomainTransportReceipt.vendorIdentityCreatesAuthority unifierSensibLawDomainTransportReceipt
+  ≡ false
+unifierSensibLawVendorIdentityDoesNotCreateAuthority =
+  GovernanceTOE.governanceVendorIdentityDoesNotCreateAuthority
+
+unifierSensibLawTargetDomainNeedsOwnAuthorityWitness :
+  Domain.DomainTransportReceipt.targetDomainNeedsOwnAuthorityWitness unifierSensibLawDomainTransportReceipt
+  ≡ true
+unifierSensibLawTargetDomainNeedsOwnAuthorityWitness =
+  GovernanceTOE.governanceTargetDomainNeedsOwnAuthorityWitness
+
+
+------------------------------------------------------------------------
+-- Direct constructive Balaban RG scale-transfer non-promotion.
+-- The joint receipt is the normalized facade path.
+------------------------------------------------------------------------
+
+unifierBalabanR559Gate4UnresolvedCount : ℕ
+unifierBalabanR559Gate4UnresolvedCount =
+  BalabanR559TOE.gate4UnresolvedCount
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifierBalabanR559Gate4UnresolvedCountIs58 :
+  unifierBalabanR559Gate4UnresolvedCount ≡ 58
+unifierBalabanR559Gate4UnresolvedCountIs58 =
+  BalabanR559TOE.gate4UnresolvedCountIs58
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifierBalabanR559Gate4DefinitionLevel : ProofLevel
+unifierBalabanR559Gate4DefinitionLevel =
+  BalabanR559TOE.gate4DefinitionLevel
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifierBalabanR559Gate4InhabitantsLevel : ProofLevel
+unifierBalabanR559Gate4InhabitantsLevel =
+  BalabanR559TOE.gate4InhabitantsLevel
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifierBalabanScaleTransferNonPromotion :
+  BalabanR559TOE.ScaleTransferPromotion → ⊥
+unifierBalabanScaleTransferNonPromotion =
+  BalabanR559TOE.scaleTransferPromotionEliminator
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
 ------------------------------------------------------------------------
 -- SensibLaw / legal governance TOE normalization.
