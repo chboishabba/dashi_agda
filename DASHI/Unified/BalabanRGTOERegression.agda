@@ -1526,3 +1526,6 @@ import DASHI.Physics.YangMills.YMClayBishopSU2UnitarityExact as BishopSU2Unitari
 
 -- YM.REAL: concrete Bishop series-limit consumer; source dyadic bound OPEN.
 import DASHI.Physics.YangMills.YMClayBishopSU2HaarSeriesLimitExact as BishopSU2HaarSeriesLimit
+
+-- YM.REAL: Bishop finite normalized Wilson algebra; original source weld OPEN.
+import DASHI.Physics.YangMills.YMClayBishopFiniteWilsonNormalizedExact as BishopFiniteWilsonNormalized
