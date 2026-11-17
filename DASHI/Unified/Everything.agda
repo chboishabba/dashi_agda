@@ -1,6 +1,7 @@
 module DASHI.Unified.Everything where
 import DASHI.Interop.SLRSemanticWorldClosureExact as LegalSemanticClosure
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
+import DASHI.Physics.Closure.NSABCDConcentratedCompletionCutExact as NSCut
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Mathematics.CrossPollination.MillenniumLeanAssistReceiptExact as MillenniumExternal
 import DASHI.Mathematics.CrossPollination.MillenniumResidualDescentClassifierExact as MillenniumResidual
@@ -481,43 +482,76 @@ unified369Ternary27MonsterEmbeddingNotPromoted =
   MaxCut369.toe27MonsterEmbeddingNotPromoted
 
 ------------------------------------------------------------------------
--- Live Gate-4 frontier and Fleet target selection.
+-- Navier-Stokes A/B/C/D native-proof max-cut.
 ------------------------------------------------------------------------
 
-unifiedCurrentGate4FrontierLedgerLevel : ProofLevel
-unifiedCurrentGate4FrontierLedgerLevel =
-  FleetHyperTOE.currentGate4FrontierLedgerLevel
+unifiedNSABCDMaxCutReceipt : NSCut.NSABCDTOEMaxCutReceipt
+unifiedNSABCDMaxCutReceipt = NSCut.canonicalNSABCDTOEMaxCutReceipt
 
-unifiedCurrentGate4ClusteringToTransferGapLevel : ProofLevel
-unifiedCurrentGate4ClusteringToTransferGapLevel =
-  FleetHyperTOE.currentGate4ClusteringToTransferGapLevel
+unifiedNSABCDZKPFrame : NSCut.NSABCDTOEZKPFrame
+unifiedNSABCDZKPFrame = NSCut.canonicalNSABCDTOEZKPFrame
 
-unifiedFleetFormalGapTargetSelected : Bool
-unifiedFleetFormalGapTargetSelected =
-  FleetHyperTOE.fleetFormalGapTargetSelected
+unifiedNSLiteralFixedOutputCovarianceM2PaymentClosed :
+  NSCut.bLiteralFixedOutputCovarianceM2PaymentClosed ≡ true
+unifiedNSLiteralFixedOutputCovarianceM2PaymentClosed =
+  NSCut.bLiteralFixedOutputCovarianceM2PaymentClosedIsTrue
 
-unifiedHistoricalGate4CountSelectedAsFleetTarget : Bool
-unifiedHistoricalGate4CountSelectedAsFleetTarget =
-  FleetHyperTOE.historicalGate4CountSelectedAsFleetTarget
+unifiedNSLiveResidualWeightedWorkIdentityClosed :
+  NSCut.bLiveResidualWeightedWorkIdentityClosed ≡ true
+unifiedNSLiveResidualWeightedWorkIdentityClosed =
+  NSCut.bLiveResidualWeightedWorkIdentityClosedIsTrue
 
-unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
-  FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
-unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
-  FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+unifiedNSSelfRateNotIndependentAnalyticLeaf :
+  NSCut.bSelfRateIsIndependentAnalyticLeaf ≡ false
+unifiedNSSelfRateNotIndependentAnalyticLeaf =
+  NSCut.bSelfRateIsIndependentAnalyticLeafIsFalse
 
+unifiedNSCanonicalRouteDoesNotRequireM2Majorant :
+  NSCut.bCanonicalRouteRequiresM2Majorant ≡ false
+unifiedNSCanonicalRouteDoesNotRequireM2Majorant =
+  NSCut.bCanonicalRouteRequiresM2MajorantIsFalse
 
-------------------------------------------------------------------------
--- Canonical current Navier-Stokes four-lane problem receipt.
-------------------------------------------------------------------------
+unifiedNSLiveResidualCrossGradientNormalFormClosed :
+  NSCut.bLiveResidualCrossGradientNormalFormClosed ≡ true
+unifiedNSLiveResidualCrossGradientNormalFormClosed =
+  NSCut.bLiveResidualCrossGradientNormalFormClosedIsTrue
 
-import DASHI.Unified.NavierStokesClayFrontierTOEConvergenceExact as NSClayCurrent
+unifiedNSRemainingCoordinateUsesLiteralPDotQ :
+  NSCut.bRemainingCoordinateUsesLiteralPDotQ ≡ true
+unifiedNSRemainingCoordinateUsesLiteralPDotQ =
+  NSCut.bRemainingCoordinateUsesLiteralPDotQIsTrue
 
-unifiedNavierStokesCurrentProblemReceipt :
-  NSClayCurrent.NavierStokesCurrentProblemReceipt
-unifiedNavierStokesCurrentProblemReceipt =
-  NSClayCurrent.canonicalNavierStokesCurrentProblemReceipt
+unifiedNSCrossGradientQuantitativePaymentStillOpen :
+  NSCut.bCrossGradientQuantitativePaymentClosed ≡ false
+unifiedNSCrossGradientQuantitativePaymentStillOpen =
+  NSCut.bCrossGradientQuantitativePaymentClosedIsFalse
 
-unifiedNavierStokesCurrentProblemClayStillFalse :
-  NSClayCurrent.terminalClayPromotion unifiedNavierStokesCurrentProblemReceipt ≡ false
-unifiedNavierStokesCurrentProblemClayStillFalse =
-  NSClayCurrent.terminalClayPromotionIsFalse unifiedNavierStokesCurrentProblemReceipt
+unifiedNSCrossGradientCutoffUniformAggregationStillOpen :
+  NSCut.bCrossGradientCutoffUniformAggregationClosed ≡ false
+unifiedNSCrossGradientCutoffUniformAggregationStillOpen =
+  NSCut.bCrossGradientCutoffUniformAggregationClosedIsFalse
+
+unifiedNSM2ToR568CompilerClosed :
+  NSCut.bM2ToR568CompilerClosed ≡ true
+unifiedNSM2ToR568CompilerClosed =
+  NSCut.bM2ToR568CompilerClosedIsTrue
+
+unifiedNSR567FullSquareNotCanonicalM2Consumer :
+  NSCut.bR567FullSquarePointwiseM2IsCanonicalConsumer ≡ false
+unifiedNSR567FullSquareNotCanonicalM2Consumer =
+  NSCut.bR567FullSquarePointwiseM2IsCanonicalConsumerIsFalse
+
+unifiedNSLiteralAlternativeStillOpen :
+  NSCut.anyLiteralAlternativeClosedInAgdaHere ≡ false
+unifiedNSLiteralAlternativeStillOpen =
+  NSCut.anyLiteralAlternativeClosedInAgdaHereIsFalse
+
+unifiedNSExternalReceiptNotPromoted :
+  NSCut.externalReceiptPromotedToAgdaProof ≡ false
+unifiedNSExternalReceiptNotPromoted =
+  NSCut.externalReceiptPromotedToAgdaProofIsFalse
+
+unifiedNSWholeSpaceNotDerivedFromPeriodic :
+  NSCut.aDerivedFromB ≡ false
+unifiedNSWholeSpaceNotDerivedFromPeriodic =
+  NSCut.aDerivedFromBIsFalse

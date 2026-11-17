@@ -1,5 +1,6 @@
 module DASHI.Unifier where
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
+import DASHI.Physics.Closure.NSABCDConcentratedCompletionCutExact as NSCut
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 import DASHI.Analysis.RiemannMarkedCompletedTraceArithmeticAuditExact as RHPrimeAudit
@@ -1622,98 +1623,76 @@ toeBrainJPromotionBlocked :
 toeBrainJPromotionBlocked = BrainFMRI.brainFMRIJPromotionBlocked
 
 ------------------------------------------------------------------------
--- Live Gate-4 frontier and Fleet target selection.
+-- Navier-Stokes native-proof max-cut consumer facade.
 ------------------------------------------------------------------------
 
-unifierCurrentGate4FrontierLedgerLevel : ProofLevel
-unifierCurrentGate4FrontierLedgerLevel =
-  FleetHyperTOE.currentGate4FrontierLedgerLevel
+unifierNSABCDMaxCutReceipt : NSCut.NSABCDTOEMaxCutReceipt
+unifierNSABCDMaxCutReceipt = NSCut.canonicalNSABCDTOEMaxCutReceipt
 
-unifierCurrentGate4ClusteringToTransferGapLevel : ProofLevel
-unifierCurrentGate4ClusteringToTransferGapLevel =
-  FleetHyperTOE.currentGate4ClusteringToTransferGapLevel
+unifierNSABCDZKPFrame : NSCut.NSABCDTOEZKPFrame
+unifierNSABCDZKPFrame = NSCut.canonicalNSABCDTOEZKPFrame
 
-unifierFleetFormalGapTargetSelected : Bool
-unifierFleetFormalGapTargetSelected =
-  FleetHyperTOE.fleetFormalGapTargetSelected
+unifierNSLiteralFixedOutputCovarianceM2PaymentClosed :
+  NSCut.bLiteralFixedOutputCovarianceM2PaymentClosed ≡ true
+unifierNSLiteralFixedOutputCovarianceM2PaymentClosed =
+  NSCut.bLiteralFixedOutputCovarianceM2PaymentClosedIsTrue
 
-unifierHistoricalGate4CountSelectedAsFleetTarget : Bool
-unifierHistoricalGate4CountSelectedAsFleetTarget =
-  FleetHyperTOE.historicalGate4CountSelectedAsFleetTarget
+unifierNSLiveResidualWeightedWorkIdentityClosed :
+  NSCut.bLiveResidualWeightedWorkIdentityClosed ≡ true
+unifierNSLiveResidualWeightedWorkIdentityClosed =
+  NSCut.bLiveResidualWeightedWorkIdentityClosedIsTrue
 
-unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
-  FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
-unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
-  FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+unifierNSSelfRateNotIndependentAnalyticLeaf :
+  NSCut.bSelfRateIsIndependentAnalyticLeaf ≡ false
+unifierNSSelfRateNotIndependentAnalyticLeaf =
+  NSCut.bSelfRateIsIndependentAnalyticLeafIsFalse
 
+unifierNSCanonicalRouteDoesNotRequireM2Majorant :
+  NSCut.bCanonicalRouteRequiresM2Majorant ≡ false
+unifierNSCanonicalRouteDoesNotRequireM2Majorant =
+  NSCut.bCanonicalRouteRequiresM2MajorantIsFalse
 
-------------------------------------------------------------------------
--- Canonical Row-A1 source frontier.
--- Agda remains theorem authority. Lean cross-prover progress does not promote.
-------------------------------------------------------------------------
+unifierNSLiveResidualCrossGradientNormalFormClosed :
+  NSCut.bLiveResidualCrossGradientNormalFormClosed ≡ true
+unifierNSLiveResidualCrossGradientNormalFormClosed =
+  NSCut.bLiveResidualCrossGradientNormalFormClosedIsTrue
 
-unifierYMA1SourceFrontierReceipt :
-  YMA1Frontier.YMA1SourceFrontierReceipt
-unifierYMA1SourceFrontierReceipt =
-  YMA1Frontier.canonicalYMA1SourceFrontierReceipt
+unifierNSRemainingCoordinateUsesLiteralPDotQ :
+  NSCut.bRemainingCoordinateUsesLiteralPDotQ ≡ true
+unifierNSRemainingCoordinateUsesLiteralPDotQ =
+  NSCut.bRemainingCoordinateUsesLiteralPDotQIsTrue
 
-unifierYMA1ZKPFrame :
-  YMA1Frontier.YMA1ZKPFrame
-unifierYMA1ZKPFrame =
-  YMA1Frontier.canonicalYMA1ZKPFrame
+unifierNSCrossGradientQuantitativePaymentStillOpen :
+  NSCut.bCrossGradientQuantitativePaymentClosed ≡ false
+unifierNSCrossGradientQuantitativePaymentStillOpen =
+  NSCut.bCrossGradientQuantitativePaymentClosedIsFalse
 
-unifierYMA1FrozenResearchCount :
-  ℕ
-unifierYMA1FrozenResearchCount =
-  YMA1Frontier.frozenResearchCount
-    YMA1Frontier.canonicalYMA1SourceFrontierReceipt
+unifierNSCrossGradientCutoffUniformAggregationStillOpen :
+  NSCut.bCrossGradientCutoffUniformAggregationClosed ≡ false
+unifierNSCrossGradientCutoffUniformAggregationStillOpen =
+  NSCut.bCrossGradientCutoffUniformAggregationClosedIsFalse
 
-unifierYMA1FrozenResearchCountIsFour :
-  unifierYMA1FrozenResearchCount ≡ 4
-unifierYMA1FrozenResearchCountIsFour =
-  YMA1Frontier.frozenResearchCountStillFour
+unifierNSM2ToR568CompilerClosed :
+  NSCut.bM2ToR568CompilerClosed ≡ true
+unifierNSM2ToR568CompilerClosed =
+  NSCut.bM2ToR568CompilerClosedIsTrue
 
-unifierYMA1RowAStillNotPromoted :
-  YMA1Frontier.rowAPromoted
-    YMA1Frontier.canonicalYMA1SourceFrontierReceipt
-  ≡ false
-unifierYMA1RowAStillNotPromoted =
-  YMA1Frontier.rowAStillNotPromoted
+unifierNSR567FullSquareNotCanonicalM2Consumer :
+  NSCut.bR567FullSquarePointwiseM2IsCanonicalConsumer ≡ false
+unifierNSR567FullSquareNotCanonicalM2Consumer =
+  NSCut.bR567FullSquarePointwiseM2IsCanonicalConsumerIsFalse
 
-unifierYMA1CompletionDoesNotSelfPromote :
-  Proof.promotable
-    (YMA1Frontier.rowACompletion
-      YMA1Frontier.canonicalYMA1SourceFrontierReceipt)
-  ≡ false
-unifierYMA1CompletionDoesNotSelfPromote =
-  YMA1Frontier.rowACompletionDoesNotSelfPromote
+unifierNSLiteralAlternativeStillOpen :
+  NSCut.anyLiteralAlternativeClosedInAgdaHere ≡ false
+unifierNSLiteralAlternativeStillOpen =
+  NSCut.anyLiteralAlternativeClosedInAgdaHereIsFalse
 
-------------------------------------------------------------------------
--- Canonical current Navier-Stokes four-lane problem receipt.
-------------------------------------------------------------------------
+unifierNSExternalReceiptNotPromoted :
+  NSCut.externalReceiptPromotedToAgdaProof ≡ false
+unifierNSExternalReceiptNotPromoted =
+  NSCut.externalReceiptPromotedToAgdaProofIsFalse
 
-unifierNavierStokesCurrentProblemReceipt :
-  NSClayTOE.NavierStokesCurrentProblemReceipt
-unifierNavierStokesCurrentProblemReceipt =
-  NSClayTOE.canonicalNavierStokesCurrentProblemReceipt
-
-unifierNavierStokesCurrentProblemBM2FiniteFoldClosed :
-  NSClayTOE.laneBM2FiniteFoldClosed unifierNavierStokesCurrentProblemReceipt ≡ true
-unifierNavierStokesCurrentProblemBM2FiniteFoldClosed =
-  NSClayTOE.currentProblemBM2FiniteFoldClosed
-
-unifierNavierStokesCurrentProblemBWeightedPlusStillOpen :
-  NSClayTOE.laneBWeightedPlusEndpointClosed unifierNavierStokesCurrentProblemReceipt ≡ false
-unifierNavierStokesCurrentProblemBWeightedPlusStillOpen =
-  NSClayTOE.currentProblemBWeightedPlusEndpointStillOpen
-
-
-unifierNavierStokesCurrentProblemBR829VectorClosed :
-  NSClayTOE.laneBR829VectorClosed unifierNavierStokesCurrentProblemReceipt ≡ true
-unifierNavierStokesCurrentProblemBR829VectorClosed =
-  NSClayTOE.currentProblemBR829VectorClosed
-
-unifierNavierStokesCurrentProblemBR829RealODEStillOpen :
-  NSClayTOE.laneBR829RealFiniteODETransportClosed unifierNavierStokesCurrentProblemReceipt ≡ false
-unifierNavierStokesCurrentProblemBR829RealODEStillOpen =
-  NSClayTOE.currentProblemBR829RealFiniteODETransportStillOpen
+unifierNSWholeSpaceNotDerivedFromPeriodic :
+  NSCut.aDerivedFromB ≡ false
+unifierNSWholeSpaceNotDerivedFromPeriodic =
+  NSCut.aDerivedFromBIsFalse
