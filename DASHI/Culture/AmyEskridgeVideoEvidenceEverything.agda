@@ -1,0 +1,34 @@
+module DASHI.Culture.AmyEskridgeVideoEvidenceEverything where
+
+-- Video-specific evidence aggregator. This is now the single entrypoint for
+-- the 2026-11-17 supplied clip, layered over the existing scientific-roster
+-- and Amy Eskridge investigation producers; no duplication of their authority.
+--
+-- Provenance: video transcript supplied by user, 32:44;
+-- House Oversight & Government Reform, 20 April 2026:
+-- https://oversight.house.gov/release/comer-burlison-seek-information-on-missing-nuclear-and-rocket-scientists/
+-- Amy Eskridge, HAL5 talk, 6 December 2018:
+-- https://www.hal5.org/PDF/HAL5-Dec2018-Talk-AntiGravity.pdf
+-- See Docs/SourceAttributionPolicy.md.
+
+import DASHI.Culture.AmyEskridgeVideoClaimAttributionLedgerExact
+import DASHI.Culture.AmyEskridgeVideoSourceRegistryExact
+import DASHI.Culture.AmyEskridgeVideoClaimProducerWeldExact
+import DASHI.Culture.AmyEskridgeVideoRosterScopeWeldExact
+
+-- Existing independent producer authorities:
+import DASHI.Culture.AmyEskridgeHAL5AntigravitySourceEntitlementExact
+import DASHI.Culture.AmyEskridgeHAL5PrimaryLiteratureSnowballExact
+import DASHI.Culture.AmyEskridgeFirstPersonClaimCarrierExact
+import DASHI.Culture.AmyEskridgeDemiseCircumstancesSnowballExact
+import DASHI.Culture.AmyEskridgeMechanismAssociationProvenanceExact
+import DASHI.Culture.MissingDeceasedRosterScopeReconciliationExact
+import DASHI.Culture.MissingDeceasedRosterExtensionNingLiNickPopeExact
+import DASHI.Culture.MissingDeceasedTwentyScientistRound44OfficialInquiryCohortExact
+import DASHI.Culture.MissingDeceasedTwentyScientistRound11SourceReplayParetoExact
+import DASHI.Culture.MissingDeceasedRosterRoleAndCommitteeWeldAuditExact
+import DASHI.Culture.MissingDeceasedInvestigativeAttributedSourceAtlasExact
+import DASHI.Culture.MissingDeceasedAttachmentSourcePromotionLedgerExact
+import DASHI.Culture.MissingDeceasedIdentityAttributionAuditExact
+import DASHI.Physics.ExoticGravity.NingLiYBCOGravityConstraintBidiExact
+import DASHI.Physics.ExoticGravity.NingLiNASACooperativeAgreementNCC8124Exact
