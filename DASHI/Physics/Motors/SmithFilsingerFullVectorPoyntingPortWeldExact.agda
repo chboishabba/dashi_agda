@@ -23,6 +23,7 @@ import DASHI.Physics.Motors.SmithFilsingerMaxwellMaterialEnergyCutExact as Cut
 import DASHI.Physics.Motors.SmithFilsingerSourceMaxwellBoundaryWeldExact as Weld
 import DASHI.Physics.Motors.SmithFilsingerReplenishedCycleCapExact as Cycle
 import DASHI.Physics.Motors.Circuit36927RecoveryEnergyBoundExact as Bound
+import DASHI.Physics.Motors.SmithFilsingerMidpointPhaseWorkExact as Port
 
 -- Direct exact proof delegation to original three-component Maxwell owner.
 -- This genuinely consumes curl E, curl B, temporal E/B and J dot E.
@@ -139,10 +140,10 @@ sameOriginalFullVectorPoyntingNaturalCap :
   fi + mi ≡ ff + mf →
   n + unused ≡ cap →
   load ≡
-    DASHI.Physics.Motors.SmithFilsingerMidpointPhaseWorkExact.MidpointTwoPortWorkWindow.usefulWork
+    Port.MidpointTwoPortWorkWindow.usefulWork
       (Weld.FormalFieldToPort.portWindow f) →
   Bound._≤_
-    (DASHI.Physics.Motors.SmithFilsingerMidpointPhaseWorkExact.MidpointTwoPortWorkWindow.usefulWork
+    (Port.MidpointTwoPortWorkWindow.usefulWork
       (Weld.FormalFieldToPort.portWindow f))
     ((cap + d) + m)
 sameOriginalFullVectorPoyntingNaturalCap
@@ -183,3 +184,63 @@ sameOriginalFullVectorPoyntingNaturalCap
                 (l :+ (fml :+ (mml :+ (r :+ (fs :+ ms)))))
                 := ((l :+ (fml :+ (mml :+ r))) :+ (fs :+ ms)))
               refl load fl ml rec ff mf)))
+
+
+-- The actual SAME-ORIGINAL endpoint: no freely selected environmental
+-- cap or free natural-work number. Take the existing SignedSourceCycleWeld
+-- cap, natural NET work and controller NET work as the selected ports.
+-- The Maxwell pointwise->integrated transport remains a separate physical
+-- proof obligation, as does material constitutive work and full store return.
+selectedSourceFullVectorMaxwellCap :
+  ∀ {r} {F : C3.RealField r} →
+  (jet : Vector.FullVectorMaxwellJet F) →
+  (b : Weld.SelectedBoundary)
+  (f : Weld.FormalFieldToPort b)
+  (s : Weld.SignedSourceCycleWeld b f) →
+  (fi i fl ff m mi load ml rec mf : Nat) →
+  MaxwellJetToSelectedFieldWork jet
+    (Cycle.RepeatableSourceCycle.naturalSourceWork
+      (Cycle.AdmittedSourceCapCycle.repeatable
+        (Weld.SignedSourceCycleWeld.cycleWithSourceCap s)))
+    (Cycle.RepeatableSourceCycle.controllerWork
+      (Cycle.AdmittedSourceCapCycle.repeatable
+        (Weld.SignedSourceCycleWeld.cycleWithSourceCap s)))
+    fi i fl ff →
+  i + (m + mi) ≡ load + (ml + (rec + mf)) →
+  fi + mi ≡ ff + mf →
+  load ≡ Port.MidpointTwoPortWorkWindow.usefulWork
+      (Weld.FormalFieldToPort.portWindow f) →
+  Bound._≤_
+    (Port.MidpointTwoPortWorkWindow.usefulWork
+      (Weld.FormalFieldToPort.portWindow f))
+    ((Cycle.AdmittedSourceCapCycle.independentlyAdmittedNaturalCap
+        (Weld.SignedSourceCycleWeld.cycleWithSourceCap s)
+      + Cycle.RepeatableSourceCycle.controllerWork
+          (Cycle.AdmittedSourceCapCycle.repeatable
+            (Weld.SignedSourceCycleWeld.cycleWithSourceCap s)))
+      + m)
+selectedSourceFullVectorMaxwellCap
+  jet b f s fi i fl ff m mi load ml rec mf
+  integrated material restored originalLoad =
+  sameOriginalFullVectorPoyntingNaturalCap
+    jet b f natural controller fi i fl ff m mi load ml rec mf
+    sourceCap unused integrated material restored
+    (Cycle.AdmittedSourceCapCycle.capReceipt capCycle)
+    originalLoad
+  where
+    capCycle : Cycle.AdmittedSourceCapCycle
+    capCycle = Weld.SignedSourceCycleWeld.cycleWithSourceCap s
+
+    natural : Nat
+    natural = Cycle.RepeatableSourceCycle.naturalSourceWork
+      (Cycle.AdmittedSourceCapCycle.repeatable capCycle)
+
+    controller : Nat
+    controller = Cycle.RepeatableSourceCycle.controllerWork
+      (Cycle.AdmittedSourceCapCycle.repeatable capCycle)
+
+    sourceCap : Nat
+    sourceCap = Cycle.AdmittedSourceCapCycle.independentlyAdmittedNaturalCap capCycle
+
+    unused : Nat
+    unused = Cycle.AdmittedSourceCapCycle.unspentNaturalBudget capCycle
