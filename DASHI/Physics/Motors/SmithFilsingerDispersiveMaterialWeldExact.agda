@@ -283,3 +283,68 @@ donorOriginalLoadBelowAdmittedNaturalCap b f s w x =
       Cycle.cong
         (λ z → (sourceCap + z) + Cut.FieldMaterialEnergyWeld.modulationInput w)
         (Cut.FieldMaterialEnergyWeld.sameNetPoweredWork w)
+
+
+-- Original #1521 proof that BOTH environmental and local material stores
+-- return now transports through exactly matching #1524 Maxwell/material
+-- inventories. This is a true same-object bridge: no independently
+-- invented "split storage returns" witness is needed.
+donorStorageReturnTransfersToSplit :
+  (b : Weld.SelectedBoundary)
+  (f : Weld.FormalFieldToPort b)
+  (s : Weld.SignedSourceCycleWeld b f)
+  (w : Cut.FieldMaterialEnergyWeld b f s)
+  (x : CanonicalDispersiveSameObject b f s w) →
+  Cut.FieldMaterialEnergyWeld.fieldStoredInitially w
+    + Cut.FieldMaterialEnergyWeld.materialStoredInitially w
+  ≡ Cut.FieldMaterialEnergyWeld.fieldStoredFinally w
+    + Cut.FieldMaterialEnergyWeld.materialStoredFinally w
+donorStorageReturnTransfersToSplit b f s w x =
+  Cycle.trans
+    (Cycle.cong
+      (λ z → z + Cut.FieldMaterialEnergyWeld.materialStoredInitially w)
+      fieldStoreReturns)
+    (Cycle.cong
+      (λ z → Cut.FieldMaterialEnergyWeld.fieldStoredFinally w + z)
+      materialStoreReturns)
+  where
+    fieldStoreReturns :
+      Cut.FieldMaterialEnergyWeld.fieldStoredInitially w
+        ≡ Cut.FieldMaterialEnergyWeld.fieldStoredFinally w
+    fieldStoreReturns =
+      Cycle.trans
+        (Bound.sym (CanonicalDispersiveSameObject.donorInitialEnvironmentMatchesField x))
+        (Cycle.trans
+          (CanonicalDispersiveSameObject.donorEnvironmentalStorageReturns x)
+          (CanonicalDispersiveSameObject.donorFinalEnvironmentMatchesField x))
+
+    materialStoreReturns :
+      Cut.FieldMaterialEnergyWeld.materialStoredInitially w
+        ≡ Cut.FieldMaterialEnergyWeld.materialStoredFinally w
+    materialStoreReturns =
+      Cycle.trans
+        (Bound.sym (CanonicalDispersiveSameObject.donorInitialLocalMatchesMaterial x))
+        (Cycle.trans
+          (CanonicalDispersiveSameObject.donorMaterialStorageReturns x)
+          (CanonicalDispersiveSameObject.donorFinalLocalMatchesMaterial x))
+
+-- Direct #1521 donor -> #1524 two-law Maxwell/material cap theorem,
+-- with NO second independent restoration assumption.
+canonicalDispersiveFieldLoadBelowNaturalCap :
+  (b : Weld.SelectedBoundary)
+  (f : Weld.FormalFieldToPort b)
+  (s : Weld.SignedSourceCycleWeld b f)
+  (w : Cut.FieldMaterialEnergyWeld b f s)
+  (x : CanonicalDispersiveSameObject b f s w) →
+  Bound._≤_
+    (Port.MidpointTwoPortWorkWindow.usefulWork
+      (Weld.FormalFieldToPort.portWindow f))
+    ((Cycle.AdmittedSourceCapCycle.independentlyAdmittedNaturalCap
+       (Weld.SignedSourceCycleWeld.cycleWithSourceCap s)
+       + Cycle.RepeatableSourceCycle.controllerWork
+          (Cycle.AdmittedSourceCapCycle.repeatable
+            (Weld.SignedSourceCycleWeld.cycleWithSourceCap s)))
+       + Cut.FieldMaterialEnergyWeld.modulationInput w)
+canonicalDispersiveFieldLoadBelowNaturalCap b f s w x =
+  Cut.sameOriginalMaterialCapWithControllerAndModulator b f s w
+    (donorStorageReturnTransfersToSplit b f s w x)
