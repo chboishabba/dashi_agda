@@ -3,7 +3,7 @@ module DASHI.Physics.YangMills.BalabanSU2TransportPathNormBound where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanSU2TransportTelescopingExact
@@ -67,17 +67,21 @@ transportRemainderNormBound :
   LessEqual authority
     (norm authority (transportRemainder path vector))
     (pathBudget authority path vector)
-transportRemainderNormBound authority [] vector
-  rewrite normZero authority =
-  reflexive authority
-transportRemainderNormBound authority (q ∷ path) vector
-  rewrite rotationIsometry authority q (transportRemainder path vector) =
+transportRemainderNormBound authority [] vector =
+  subst
+    (λ n → LessEqual authority n (zeroBound authority))
+    (sym (normZero authority))
+    (reflexive authority)
+transportRemainderNormBound authority (q ∷ path) vector =
   transitive authority
     (normTriangle authority
       (rotate q (transportRemainder path vector))
       (subV (rotate q vector) vector))
     (addMonotone authority
-      (transportRemainderNormBound authority path vector)
+      (subst
+        (λ n → LessEqual authority n (pathBudget authority path vector))
+        (sym (rotationIsometry authority q (transportRemainder path vector)))
+        (transportRemainderNormBound authority path vector))
       (oneLinkSmallRadiusBound authority q vector))
 
 transportDisplacementNormBound :
@@ -85,9 +89,11 @@ transportDisplacementNormBound :
   LessEqual authority
     (norm authority (subV (transport path vector) vector))
     (pathBudget authority path vector)
-transportDisplacementNormBound authority path vector
-  rewrite sym (transportRemainderExact path vector) =
-  transportRemainderNormBound authority path vector
+transportDisplacementNormBound authority path vector =
+  subst
+    (λ v → LessEqual authority (norm authority v) (pathBudget authority path vector))
+    (transportRemainderExact path vector)
+    (transportRemainderNormBound authority path vector)
 
 pathBudgetEqualsLengthScale :
   ∀ {Bound} (authority : SU2TransportNormAuthority Bound) path vector →
@@ -111,20 +117,10 @@ transportPathLengthNormBound :
     (norm authority (subV (transport path vector) vector))
     (natScale authority (pathLength path) (oneLinkBudget authority vector))
 transportPathLengthNormBound authority path vector =
-  let
-    raw = transportDisplacementNormBound authority path vector
-  in
-  substRight raw
-  where
-    substRight :
-      LessEqual authority
-        (norm authority (subV (transport path vector) vector))
-        (pathBudget authority path vector) →
-      LessEqual authority
-        (norm authority (subV (transport path vector) vector))
-        (natScale authority (pathLength path) (oneLinkBudget authority vector))
-    substRight proof
-      rewrite pathBudgetEqualsLengthScale authority path vector = proof
+  subst
+    (LessEqual authority (norm authority (subV (transport path vector) vector)))
+    (pathBudgetEqualsLengthScale authority path vector)
+    (transportDisplacementNormBound authority path vector)
 
 su2TransportPathNormAssemblyLevel : ProofLevel
 su2TransportPathNormAssemblyLevel = machineChecked

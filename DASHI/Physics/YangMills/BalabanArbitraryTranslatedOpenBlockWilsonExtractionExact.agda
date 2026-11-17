@@ -4,7 +4,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Rational using (ℚ)
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
@@ -111,12 +111,12 @@ openPlaquetteBaseSite plane23 first second transverse0 transverse1 =
     (pair (weakenIndex first) (weakenIndex second))
 
 translatedOpenPlaquetteFirstShift :
-  ∀ {n} origin plane first second transverse0 transverse1 →
-  translateLocalSiteToGlobal origin
+  ∀ {n} (origin : GlobalSite4 n) plane first second transverse0 transverse1 →
+  translateLocalSiteToGlobal {n} origin
     (shiftForward4 (positivePlaneFirst plane)
       (openPlaquetteBaseSite plane first second transverse0 transverse1))
-  ≡ globalShiftForward4 (positivePlaneFirst plane)
-      (translateLocalSiteToGlobal origin
+  ≡ globalShiftForward4 {n} (positivePlaneFirst plane)
+      (translateLocalSiteToGlobal {n} origin
         (openPlaquetteBaseSite plane first second transverse0 transverse1))
 translatedOpenPlaquetteFirstShift
   (pair (pair o0 o1) (pair o2 o3)) plane01 first second t0 t1
@@ -138,12 +138,12 @@ translatedOpenPlaquetteFirstShift
   rewrite next4WeakenIndex first | iterateWeakenIndex first o2 = refl
 
 translatedOpenPlaquetteSecondShift :
-  ∀ {n} origin plane first second transverse0 transverse1 →
-  translateLocalSiteToGlobal origin
+  ∀ {n} (origin : GlobalSite4 n) plane first second transverse0 transverse1 →
+  translateLocalSiteToGlobal {n} origin
     (shiftForward4 (positivePlaneSecond plane)
       (openPlaquetteBaseSite plane first second transverse0 transverse1))
-  ≡ globalShiftForward4 (positivePlaneSecond plane)
-      (translateLocalSiteToGlobal origin
+  ≡ globalShiftForward4 {n} (positivePlaneSecond plane)
+      (translateLocalSiteToGlobal {n} origin
         (openPlaquetteBaseSite plane first second transverse0 transverse1))
 translatedOpenPlaquetteSecondShift
   (pair (pair o0 o1) (pair o2 o3)) plane01 first second t0 t1
@@ -166,13 +166,13 @@ translatedOpenPlaquetteSecondShift
 
 restrictGlobalTangentToTranslatedOpenBlock :
   ∀ {n} → GlobalSite4 n → GlobalSU2Tangent4 n → PhysicalSU2Tangent4
-restrictGlobalTangentToTranslatedOpenBlock origin tangent component
+restrictGlobalTangentToTranslatedOpenBlock {n} origin tangent component
   (pair localSite axis) =
-  tangent component axis (translateLocalSiteToGlobal origin localSite)
+  tangent component axis (translateLocalSiteToGlobal {n} origin localSite)
 
 globalTangentAtSiteAxisAsLie3 :
   ∀ {n} → GlobalSU2Tangent4 n → Axis4 → GlobalSite4 n → Lie3
-globalTangentAtSiteAxisAsLie3 tangent axis site =
+globalTangentAtSiteAxisAsLie3 {n} tangent axis site =
   lie3
     (tangent component1 axis site)
     (tangent component2 axis site)
@@ -180,20 +180,20 @@ globalTangentAtSiteAxisAsLie3 tangent axis site =
 
 globalForwardDifferenceLie3 :
   ∀ {n} → Axis4 → (GlobalSite4 n → Lie3) → GlobalSite4 n → Lie3
-globalForwardDifferenceLie3 axis field site =
-  field (globalShiftForward4 axis site) +v negV (field site)
+globalForwardDifferenceLie3 {n} axis fld site =
+  fld (globalShiftForward4 {n} axis site) +v negV (fld site)
 
 globalForwardDifferenceCurl :
   ∀ {n} → GlobalSU2Tangent4 n → PositivePlaquettePlane4 →
   GlobalSite4 n → Lie3
-globalForwardDifferenceCurl tangent plane site =
-  globalForwardDifferenceLie3
+globalForwardDifferenceCurl {n} tangent plane site =
+  globalForwardDifferenceLie3 {n}
     (positivePlaneFirst plane)
-    (globalTangentAtSiteAxisAsLie3 tangent (positivePlaneSecond plane)) site
+    (globalTangentAtSiteAxisAsLie3 {n} tangent (positivePlaneSecond plane)) site
   +v negV
-    (globalForwardDifferenceLie3
+    (globalForwardDifferenceLie3 {n}
       (positivePlaneSecond plane)
-      (globalTangentAtSiteAxisAsLie3 tangent (positivePlaneFirst plane)) site)
+      (globalTangentAtSiteAxisAsLie3 {n} tangent (positivePlaneFirst plane)) site)
 
 lie3Component : SU2Component → Lie3 → ℚ
 lie3Component component1 value = x value
@@ -201,102 +201,95 @@ lie3Component component2 value = y value
 lie3Component component3 value = z value
 
 translatedOpenPlaquetteCurlExact :
-  ∀ {n} origin tangent plane first second transverse0 transverse1 →
+  ∀ {n} (origin : GlobalSite4 n) (tangent : GlobalSU2Tangent4 n)
+    plane first second transverse0 transverse1 →
   literalForwardDifferenceCurl
-    (restrictGlobalTangentToTranslatedOpenBlock origin tangent)
+    (restrictGlobalTangentToTranslatedOpenBlock {n} origin tangent)
     plane (openPlaquetteBaseSite plane first second transverse0 transverse1)
-  ≡ globalForwardDifferenceCurl tangent plane
-      (translateLocalSiteToGlobal origin
+  ≡ globalForwardDifferenceCurl {n} tangent plane
+      (translateLocalSiteToGlobal {n} origin
         (openPlaquetteBaseSite plane first second transverse0 transverse1))
-translatedOpenPlaquetteCurlExact origin tangent plane first second t0 t1 =
-  lie3Ext
-    (componentProof component1)
-    (componentProof component2)
-    (componentProof component3)
-  where
-  base = openPlaquetteBaseSite plane first second t0 t1
-
-  componentProof : ∀ component →
-    lie3Component component
-      (literalForwardDifferenceCurl
-        (restrictGlobalTangentToTranslatedOpenBlock origin tangent) plane base)
-    ≡ lie3Component component
-      (globalForwardDifferenceCurl tangent plane
-        (translateLocalSiteToGlobal origin base))
-  componentProof component1
-    rewrite translatedOpenPlaquetteFirstShift
-      origin plane first second t0 t1
-          | translatedOpenPlaquetteSecondShift
-      origin plane first second t0 t1 = refl
-  componentProof component2
-    rewrite translatedOpenPlaquetteFirstShift
-      origin plane first second t0 t1
-          | translatedOpenPlaquetteSecondShift
-      origin plane first second t0 t1 = refl
-  componentProof component3
-    rewrite translatedOpenPlaquetteFirstShift
-      origin plane first second t0 t1
-          | translatedOpenPlaquetteSecondShift
-      origin plane first second t0 t1 = refl
+translatedOpenPlaquetteCurlExact {n} origin tangent plane first second t0 t1 =
+  let base = openPlaquetteBaseSite plane first second t0 t1
+  in
+  cong₂ _+v_
+    (cong
+      (λ shifted →
+        globalTangentAtSiteAxisAsLie3 {n} tangent (positivePlaneSecond plane) shifted
+        +v negV (globalTangentAtSiteAxisAsLie3 {n} tangent (positivePlaneSecond plane)
+                   (translateLocalSiteToGlobal {n} origin base)))
+      (translatedOpenPlaquetteFirstShift {n} origin plane first second t0 t1))
+    (cong
+      (λ shifted →
+        negV
+          (globalTangentAtSiteAxisAsLie3 {n} tangent (positivePlaneFirst plane) shifted
+           +v negV (globalTangentAtSiteAxisAsLie3 {n} tangent (positivePlaneFirst plane)
+                      (translateLocalSiteToGlobal {n} origin base))))
+      (translatedOpenPlaquetteSecondShift {n} origin plane first second t0 t1))
 
 globalPlaquetteFourLinks :
   ∀ {n} → GlobalSU2Tangent4 n → PositivePlaquettePlane4 →
   GlobalSite4 n → LiteralPlaquetteFourLinks
-globalPlaquetteFourLinks tangent plane site =
+globalPlaquetteFourLinks {n} tangent plane site =
   fourLinks
-    (globalTangentAtSiteAxisAsLie3 tangent (positivePlaneFirst plane) site)
-    (globalTangentAtSiteAxisAsLie3 tangent (positivePlaneSecond plane)
-      (globalShiftForward4 (positivePlaneFirst plane) site))
-    (globalTangentAtSiteAxisAsLie3 tangent (positivePlaneFirst plane)
-      (globalShiftForward4 (positivePlaneSecond plane) site))
-    (globalTangentAtSiteAxisAsLie3 tangent (positivePlaneSecond plane) site)
+    (globalTangentAtSiteAxisAsLie3 {n} tangent (positivePlaneFirst plane) site)
+    (globalTangentAtSiteAxisAsLie3 {n} tangent (positivePlaneSecond plane)
+      (globalShiftForward4 {n} (positivePlaneFirst plane) site))
+    (globalTangentAtSiteAxisAsLie3 {n} tangent (positivePlaneFirst plane)
+      (globalShiftForward4 {n} (positivePlaneSecond plane) site))
+    (globalTangentAtSiteAxisAsLie3 {n} tangent (positivePlaneSecond plane) site)
 
 globalPlaquetteWilsonSecondVariation :
   ∀ {n} → GlobalSU2Tangent4 n → PositivePlaquettePlane4 →
   GlobalSite4 n → ℚ
-globalPlaquetteWilsonSecondVariation tangent plane site =
+globalPlaquetteWilsonSecondVariation {n} tangent plane site =
   wilsonPlaquetteSecondVariation
     (plaquetteJet
       (firstLink links) (secondLink links) (thirdLink links) (fourthLink links))
   where
-  links = globalPlaquetteFourLinks tangent plane site
+  links = globalPlaquetteFourLinks {n} tangent plane site
 
 globalPlaquetteWilsonSecondVariationExact :
-  ∀ {n} tangent plane site →
-  globalPlaquetteWilsonSecondVariation tangent plane site
-  ≡ normSqV (globalForwardDifferenceCurl tangent plane site)
-globalPlaquetteWilsonSecondVariationExact tangent plane site =
+  ∀ {n} (tangent : GlobalSU2Tangent4 n) (plane : PositivePlaquettePlane4) (site : GlobalSite4 n) →
+  globalPlaquetteWilsonSecondVariation {n} tangent plane site
+  ≡ normSqV (globalForwardDifferenceCurl {n} tangent plane site)
+globalPlaquetteWilsonSecondVariationExact {n} tangent plane site =
   trans
     (singlePlaquetteWilsonSecondVariationEqualsCurlNormSq
       (firstLink links) (secondLink links) (thirdLink links) (fourthLink links))
     (cong normSqV
       (lie3Ext
-        (ℚRing.solve-∀)
-        (ℚRing.solve-∀)
-        (ℚRing.solve-∀)))
+        (curlComponentRearrangeRaw (x a) (x b) (x c) (x d))
+        (curlComponentRearrangeRaw (y a) (y b) (y c) (y d))
+        (curlComponentRearrangeRaw (z a) (z b) (z c) (z d))))
   where
-  links = globalPlaquetteFourLinks tangent plane site
+  links = globalPlaquetteFourLinks {n} tangent plane site
+  a = firstLink links
+  b = secondLink links
+  c = thirdLink links
+  d = fourthLink links
 
 translatedOpenPlaquetteWilsonHessianExact :
-  ∀ {n} origin tangent plane first second transverse0 transverse1 →
+  ∀ {n} (origin : GlobalSite4 n) (tangent : GlobalSU2Tangent4 n)
+    plane first second transverse0 transverse1 →
   literalPlaquetteWilsonSecondVariation
-    (restrictGlobalTangentToTranslatedOpenBlock origin tangent)
+    (restrictGlobalTangentToTranslatedOpenBlock {n} origin tangent)
     plane (openPlaquetteBaseSite plane first second transverse0 transverse1)
-  ≡ globalPlaquetteWilsonSecondVariation tangent plane
-      (translateLocalSiteToGlobal origin
+  ≡ globalPlaquetteWilsonSecondVariation {n} tangent plane
+      (translateLocalSiteToGlobal {n} origin
         (openPlaquetteBaseSite plane first second transverse0 transverse1))
-translatedOpenPlaquetteWilsonHessianExact
+translatedOpenPlaquetteWilsonHessianExact {n}
   origin tangent plane first second t0 t1 =
   trans
     (literalPlaquetteWilsonSecondVariationExact
-      (restrictGlobalTangentToTranslatedOpenBlock origin tangent)
+      (restrictGlobalTangentToTranslatedOpenBlock {n} origin tangent)
       plane base)
     (trans
       (cong normSqV
-        (translatedOpenPlaquetteCurlExact
+        (translatedOpenPlaquetteCurlExact {n}
           origin tangent plane first second t0 t1))
-      (sym (globalPlaquetteWilsonSecondVariationExact tangent plane
-        (translateLocalSiteToGlobal origin base))))
+      (sym (globalPlaquetteWilsonSecondVariationExact {n} tangent plane
+        (translateLocalSiteToGlobal {n} origin base))))
   where
   base = openPlaquetteBaseSite plane first second t0 t1
 
@@ -312,40 +305,60 @@ openPlaquetteFold term =
               (openPlaquetteBaseSite plane first second
                 transverse0 transverse1))))))
 
-openPlaquetteFoldCong : ∀ left right →
+openPlaquetteFoldCong : (left right : PositivePlaquettePlane4 → PhysicalBlockL side4 → ℚ) →
   (∀ plane first second transverse0 transverse1 →
     left plane (openPlaquetteBaseSite plane first second transverse0 transverse1)
     ≡ right plane (openPlaquetteBaseSite plane first second transverse0 transverse1)) →
   openPlaquetteFold left ≡ openPlaquetteFold right
 openPlaquetteFoldCong left right pointwise =
-  sumRationalCong positivePlaquettePlanes4 _ _ (λ plane →
-    sumRationalCong (allCyclicIndices three) _ _ (λ first →
-      sumRationalCong (allCyclicIndices three) _ _ (λ second →
-        sumRationalCong (allCyclicIndices side4) _ _ (λ transverse0 →
-          sumRationalCong (allCyclicIndices side4) _ _ (λ transverse1 →
-            pointwise plane first second transverse0 transverse1)))))
+  sumRationalCong positivePlaquettePlanes4
+    (λ plane → sumRational (allCyclicIndices three) (λ first → sumRational (allCyclicIndices three) (λ second → sumRational (allCyclicIndices side4) (λ transverse0 → sumRational (allCyclicIndices side4) (λ transverse1 → left plane (openPlaquetteBaseSite plane first second transverse0 transverse1))))))
+    (λ plane → sumRational (allCyclicIndices three) (λ first → sumRational (allCyclicIndices three) (λ second → sumRational (allCyclicIndices side4) (λ transverse0 → sumRational (allCyclicIndices side4) (λ transverse1 → right plane (openPlaquetteBaseSite plane first second transverse0 transverse1))))))
+    (λ plane →
+      sumRationalCong (allCyclicIndices three)
+        (λ first → sumRational (allCyclicIndices three) (λ second → sumRational (allCyclicIndices side4) (λ transverse0 → sumRational (allCyclicIndices side4) (λ transverse1 → left plane (openPlaquetteBaseSite plane first second transverse0 transverse1)))))
+        (λ first → sumRational (allCyclicIndices three) (λ second → sumRational (allCyclicIndices side4) (λ transverse0 → sumRational (allCyclicIndices side4) (λ transverse1 → right plane (openPlaquetteBaseSite plane first second transverse0 transverse1)))))
+        (λ first →
+          sumRationalCong (allCyclicIndices three)
+            (λ second → sumRational (allCyclicIndices side4) (λ transverse0 → sumRational (allCyclicIndices side4) (λ transverse1 → left plane (openPlaquetteBaseSite plane first second transverse0 transverse1))))
+            (λ second → sumRational (allCyclicIndices side4) (λ transverse0 → sumRational (allCyclicIndices side4) (λ transverse1 → right plane (openPlaquetteBaseSite plane first second transverse0 transverse1))))
+            (λ second →
+              sumRationalCong (allCyclicIndices side4)
+                (λ transverse0 → sumRational (allCyclicIndices side4) (λ transverse1 → left plane (openPlaquetteBaseSite plane first second transverse0 transverse1)))
+                (λ transverse0 → sumRational (allCyclicIndices side4) (λ transverse1 → right plane (openPlaquetteBaseSite plane first second transverse0 transverse1)))
+                (λ transverse0 →
+                  sumRationalCong (allCyclicIndices side4)
+                    (λ transverse1 → left plane (openPlaquetteBaseSite plane first second transverse0 transverse1))
+                    (λ transverse1 → right plane (openPlaquetteBaseSite plane first second transverse0 transverse1))
+                    (λ transverse1 →
+                      pointwise plane first second transverse0 transverse1)))))
 
 localTranslatedOpenWilsonHessian :
   ∀ {n} → GlobalSite4 n → GlobalSU2Tangent4 n → ℚ
-localTranslatedOpenWilsonHessian origin tangent =
+localTranslatedOpenWilsonHessian {n} origin tangent =
   openPlaquetteFold
     (literalPlaquetteWilsonSecondVariation
-      (restrictGlobalTangentToTranslatedOpenBlock origin tangent))
+      (restrictGlobalTangentToTranslatedOpenBlock {n} origin tangent))
 
 globalRestrictedOpenWilsonHessian :
   ∀ {n} → GlobalSite4 n → GlobalSU2Tangent4 n → ℚ
-globalRestrictedOpenWilsonHessian origin tangent =
+globalRestrictedOpenWilsonHessian {n} origin tangent =
   openPlaquetteFold (λ plane localSite →
-    globalPlaquetteWilsonSecondVariation tangent plane
-      (translateLocalSiteToGlobal origin localSite))
+    globalPlaquetteWilsonSecondVariation {n} tangent plane
+      (translateLocalSiteToGlobal {n} origin localSite))
 
 globalWilsonToLocalTranslatedOpenBlock :
-  ∀ {n} (origin : GlobalSite4 n) tangent →
-  localTranslatedOpenWilsonHessian origin tangent
-  ≡ globalRestrictedOpenWilsonHessian origin tangent
-globalWilsonToLocalTranslatedOpenBlock origin tangent =
-  openPlaquetteFoldCong _ _
-    (translatedOpenPlaquetteWilsonHessianExact origin tangent)
+  ∀ {n} (origin : GlobalSite4 n) (tangent : GlobalSU2Tangent4 n) →
+  localTranslatedOpenWilsonHessian {n} origin tangent
+  ≡ globalRestrictedOpenWilsonHessian {n} origin tangent
+globalWilsonToLocalTranslatedOpenBlock {n} origin tangent =
+  openPlaquetteFoldCong
+    (literalPlaquetteWilsonSecondVariation
+      (restrictGlobalTangentToTranslatedOpenBlock {n} origin tangent))
+    (λ plane localSite →
+      globalPlaquetteWilsonSecondVariation {n} tangent plane
+        (translateLocalSiteToGlobal {n} origin localSite))
+    (translatedOpenPlaquetteWilsonHessianExact {n} origin tangent)
 
 arbitraryTranslatedOpenBlockCarrierLevel : ProofLevel
 arbitraryTranslatedOpenBlockCarrierLevel = machineChecked

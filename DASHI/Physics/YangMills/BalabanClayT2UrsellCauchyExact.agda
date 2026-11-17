@@ -27,11 +27,7 @@ zeroNonnegative =
   in ℚP.nonNegative⁻¹ 0ℚ
 
 rationalReflexive : ∀ value → value ≤ value
-rationalReflexive value =
-  subst
-    (λ upper → value ≤ upper)
-    (ℚRing.solve-∀)
-    (baseBelowBasePlusRemainder value 0ℚ zeroNonnegative)
+rationalReflexive value = ℚP.≤-refl
 
 geometricTailPartial : Nat → Nat → ℚ
 geometricTailPartial start zero = 0ℚ
@@ -59,6 +55,10 @@ halfTimesPowerNonnegative depth =
       powerNonnegative = nonNegative (halfPowerNonnegative depth)
   in ℚP.nonNegative⁻¹ (half * halfPower depth)
 
+quarterPlusHalfHalfRaw : ∀ (p : ℚ) →
+  half * p ≡ quarter * p + half * (half * p)
+quarterPlusHalfHalfRaw = ℚRing.solve-∀
+
 geometricTailBelow : ∀ start count →
   geometricTailPartial start count ≤ half * halfPower start
 geometricTailBelow start zero =
@@ -66,7 +66,7 @@ geometricTailBelow start zero =
     (half * halfPower start)
     (halfTimesPowerNonnegative start)
 geometricTailBelow start (suc count) =
-  trans
+  ℚP.≤-trans
     (ℚP.+-mono-≤
       (rationalReflexive (quarter * halfPower start))
       (geometricTailBelow (suc start) count))
@@ -75,7 +75,7 @@ geometricTailBelow start (suc count) =
         quarter * halfPower start
           + half * halfPower (suc start)
         ≤ right)
-      (ℚRing.solve-∀)
+      (ℚP.sym (quarterPlusHalfHalfRaw (halfPower start)))
       (rationalReflexive (half * halfPower start)))
 
 record UrsellDepthMajorant : Set₁ where
@@ -108,7 +108,7 @@ ursellCauchyTail :
   ursellTailPartial dataSet start count
   ≤ half * halfPower start
 ursellCauchyTail dataSet start count =
-  trans
+  ℚP.≤-trans
     (ursellTailBelowGeometric dataSet start count)
     (geometricTailBelow start count)
 
@@ -142,7 +142,7 @@ connectedCorrelationExponentialDecay :
 connectedCorrelationExponentialDecay dataSet left right =
   limitBoundClosed dataSet left right
     (λ cutoff →
-      trans
+      ℚP.≤-trans
         (finiteCrossingBound dataSet left right cutoff)
         (ursellCauchyTail (majorant dataSet)
           (separationDepth dataSet left right) cutoff))

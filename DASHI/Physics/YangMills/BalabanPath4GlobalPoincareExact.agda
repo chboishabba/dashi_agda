@@ -4,7 +4,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational using (ℚ; _+_; _-_; _*_; _≤_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact using (sq)
@@ -27,6 +27,9 @@ open import DASHI.Physics.YangMills.BalabanPath4DirectionalEnergyContractionExac
 -- bounds closes the global side-four Poincare estimate.
 ------------------------------------------------------------------------
 
+subtractCommonShift : ∀ a b m → (a - m) - (b - m) ≡ a - b
+subtractCommonShift = ℚRing.solve-∀
+
 axisCenteringEdgeDifferenceExact :
   ∀ fieldValue axis transverse predecessor →
   axisCentering4 fieldValue axis
@@ -35,10 +38,15 @@ axisCenteringEdgeDifferenceExact :
       (insertAxis axis (weakenIndex predecessor) transverse)
   ≡ fieldValue (insertAxis axis (sucᵢ predecessor) transverse)
     - fieldValue (insertAxis axis (weakenIndex predecessor) transverse)
-axisCenteringEdgeDifferenceExact fieldValue axis transverse predecessor
-  rewrite axisCentering4OnFibre fieldValue axis transverse (sucᵢ predecessor)
-        | axisCentering4OnFibre fieldValue axis transverse (weakenIndex predecessor) =
-  ℚRing.solve-∀
+axisCenteringEdgeDifferenceExact fieldValue axis transverse predecessor =
+  trans
+    (cong₂ _-_
+      (axisCentering4OnFibre fieldValue axis transverse (sucᵢ predecessor))
+      (axisCentering4OnFibre fieldValue axis transverse (weakenIndex predecessor)))
+    (subtractCommonShift
+      (fieldValue (insertAxis axis (sucᵢ predecessor) transverse))
+      (fieldValue (insertAxis axis (weakenIndex predecessor) transverse))
+      (quarter * physicalFibreSum fieldValue axis transverse))
 
 axisCenteringFibreEnergyExact : ∀ fieldValue axis transverse →
   physicalFibreEdgeEnergy (axisCentering4 fieldValue axis) axis transverse
@@ -70,22 +78,28 @@ axisCenteringDirectionalEnergyExact fieldValue axis =
     (physicalFibreEdgeEnergy fieldValue axis)
     (axisCenteringFibreEnergyExact fieldValue axis)
 
-axis0≢axis1 : zeroᵢ ≢ sucᵢ zeroᵢ
+axis0 axis1 axis2 axis3 : Axis4
+axis0 = zeroᵢ
+axis1 = sucᵢ zeroᵢ
+axis2 = sucᵢ (sucᵢ zeroᵢ)
+axis3 = sucᵢ (sucᵢ (sucᵢ zeroᵢ))
+
+axis0≢axis1 : axis0 ≢ axis1
 axis0≢axis1 ()
 
-axis0≢axis2 : zeroᵢ ≢ sucᵢ (sucᵢ zeroᵢ)
+axis0≢axis2 : axis0 ≢ axis2
 axis0≢axis2 ()
 
-axis1≢axis2 : sucᵢ zeroᵢ ≢ sucᵢ (sucᵢ zeroᵢ)
+axis1≢axis2 : axis1 ≢ axis2
 axis1≢axis2 ()
 
-axis0≢axis3 : zeroᵢ ≢ sucᵢ (sucᵢ (sucᵢ zeroᵢ))
+axis0≢axis3 : axis0 ≢ axis3
 axis0≢axis3 ()
 
-axis1≢axis3 : sucᵢ zeroᵢ ≢ sucᵢ (sucᵢ (sucᵢ zeroᵢ))
+axis1≢axis3 : axis1 ≢ axis3
 axis1≢axis3 ()
 
-axis2≢axis3 : sucᵢ (sucᵢ zeroᵢ) ≢ sucᵢ (sucᵢ (sucᵢ zeroᵢ))
+axis2≢axis3 : axis2 ≢ axis3
 axis2≢axis3 ()
 
 martingale0DirectionalEnergyExact : ∀ fieldValue →

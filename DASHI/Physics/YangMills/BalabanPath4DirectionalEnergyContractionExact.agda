@@ -69,6 +69,57 @@ edgeDifferenceField siteField axis predecessor site =
   siteField (replaceAxis axis (sucᵢ predecessor) site)
   - siteField (replaceAxis axis (weakenIndex predecessor) site)
 
+quarterDiffDistributes : ∀ a0 a1 a2 a3 b0 b1 b2 b3 →
+  quarter * (a0 + (a1 + (a2 + (a3 + 0ℚ))))
+  - quarter * (b0 + (b1 + (b2 + (b3 + 0ℚ))))
+  ≡ quarter * ((a0 - b0) + ((a1 - b1) + ((a2 - b2) + ((a3 - b3) + 0ℚ))))
+quarterDiffDistributes = ℚRing.solve-∀
+
+quarterDiffOnFibre :
+  ∀ averageAxis differenceAxis siteField predecessor site →
+  let sucSite = replaceAxis differenceAxis (sucᵢ predecessor) site
+      weakSite = replaceAxis differenceAxis (weakenIndex predecessor) site
+      tSuc = axisTransverse averageAxis sucSite
+      tWeak = axisTransverse averageAxis weakSite
+      idx0 = zeroᵢ
+      idx1 = sucᵢ zeroᵢ
+      idx2 = sucᵢ (sucᵢ zeroᵢ)
+      idx3 = sucᵢ (sucᵢ (sucᵢ zeroᵢ))
+  in
+  edgeDifferenceField (axisAverage4 siteField averageAxis)
+    differenceAxis predecessor site
+  ≡ quarter *
+      ((siteField (insertAxis averageAxis idx0 tSuc)
+        - siteField (insertAxis averageAxis idx0 tWeak))
+      + ((siteField (insertAxis averageAxis idx1 tSuc)
+        - siteField (insertAxis averageAxis idx1 tWeak))
+      + ((siteField (insertAxis averageAxis idx2 tSuc)
+        - siteField (insertAxis averageAxis idx2 tWeak))
+      + ((siteField (insertAxis averageAxis idx3 tSuc)
+        - siteField (insertAxis averageAxis idx3 tWeak)) + 0ℚ))))
+quarterDiffOnFibre averageAxis differenceAxis siteField predecessor site =
+  let sucSite = replaceAxis differenceAxis (sucᵢ predecessor) site
+      weakSite = replaceAxis differenceAxis (weakenIndex predecessor) site
+      tSuc = axisTransverse averageAxis sucSite
+      tWeak = axisTransverse averageAxis weakSite
+      idx0 = zeroᵢ
+      idx1 = sucᵢ zeroᵢ
+      idx2 = sucᵢ (sucᵢ zeroᵢ)
+      idx3 = sucᵢ (sucᵢ (sucᵢ zeroᵢ))
+  in
+  quarterDiffDistributes
+    (siteField (insertAxis averageAxis idx0 tSuc))
+    (siteField (insertAxis averageAxis idx1 tSuc))
+    (siteField (insertAxis averageAxis idx2 tSuc))
+    (siteField (insertAxis averageAxis idx3 tSuc))
+    (siteField (insertAxis averageAxis idx0 tWeak))
+    (siteField (insertAxis averageAxis idx1 tWeak))
+    (siteField (insertAxis averageAxis idx2 tWeak))
+    (siteField (insertAxis averageAxis idx3 tWeak))
+
+natFourIsFourℚ : ∀ x → natAsRational (suc (suc (suc (suc zero)))) * x ≡ fourℚ * x
+natFourIsFourℚ = ℚRing.solve-∀
+
 axisAverageCommutesWithDistinctEdgeDifference :
   ∀ averageAxis differenceAxis siteField predecessor site →
   averageAxis ≢ differenceAxis →
@@ -80,50 +131,70 @@ axisAverageCommutesWithDistinctEdgeDifference
   zeroᵢ zeroᵢ siteField predecessor site distinct = emptyElim (distinct refl)
 axisAverageCommutesWithDistinctEdgeDifference
   zeroᵢ (sucᵢ zeroᵢ) siteField predecessor
-  (pair (pair x0 x1) (pair x2 x3)) distinct = ℚRing.solve-∀
+  (pair (pair x0 x1) (pair x2 x3)) distinct =
+  quarterDiffOnFibre zeroᵢ (sucᵢ zeroᵢ) siteField predecessor
+    (pair (pair x0 x1) (pair x2 x3))
 axisAverageCommutesWithDistinctEdgeDifference
   zeroᵢ (sucᵢ (sucᵢ zeroᵢ)) siteField predecessor
-  (pair (pair x0 x1) (pair x2 x3)) distinct = ℚRing.solve-∀
+  (pair (pair x0 x1) (pair x2 x3)) distinct =
+  quarterDiffOnFibre zeroᵢ (sucᵢ (sucᵢ zeroᵢ)) siteField predecessor
+    (pair (pair x0 x1) (pair x2 x3))
 axisAverageCommutesWithDistinctEdgeDifference
   zeroᵢ (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) siteField predecessor
-  (pair (pair x0 x1) (pair x2 x3)) distinct = ℚRing.solve-∀
+  (pair (pair x0 x1) (pair x2 x3)) distinct =
+  quarterDiffOnFibre zeroᵢ (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) siteField predecessor
+    (pair (pair x0 x1) (pair x2 x3))
 axisAverageCommutesWithDistinctEdgeDifference
   (sucᵢ zeroᵢ) zeroᵢ siteField predecessor
-  (pair (pair x0 x1) (pair x2 x3)) distinct = ℚRing.solve-∀
+  (pair (pair x0 x1) (pair x2 x3)) distinct =
+  quarterDiffOnFibre (sucᵢ zeroᵢ) zeroᵢ siteField predecessor
+    (pair (pair x0 x1) (pair x2 x3))
 axisAverageCommutesWithDistinctEdgeDifference
   (sucᵢ zeroᵢ) (sucᵢ zeroᵢ) siteField predecessor site distinct =
   emptyElim (distinct refl)
 axisAverageCommutesWithDistinctEdgeDifference
   (sucᵢ zeroᵢ) (sucᵢ (sucᵢ zeroᵢ)) siteField predecessor
-  (pair (pair x0 x1) (pair x2 x3)) distinct = ℚRing.solve-∀
+  (pair (pair x0 x1) (pair x2 x3)) distinct =
+  quarterDiffOnFibre (sucᵢ zeroᵢ) (sucᵢ (sucᵢ zeroᵢ)) siteField predecessor
+    (pair (pair x0 x1) (pair x2 x3))
 axisAverageCommutesWithDistinctEdgeDifference
   (sucᵢ zeroᵢ) (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) siteField predecessor
-  (pair (pair x0 x1) (pair x2 x3)) distinct = ℚRing.solve-∀
+  (pair (pair x0 x1) (pair x2 x3)) distinct =
+  quarterDiffOnFibre (sucᵢ zeroᵢ) (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) siteField predecessor
+    (pair (pair x0 x1) (pair x2 x3))
 axisAverageCommutesWithDistinctEdgeDifference
   (sucᵢ (sucᵢ zeroᵢ)) zeroᵢ siteField predecessor
-  (pair (pair x0 x1) (pair x2 x3)) distinct = ℚRing.solve-∀
+  (pair (pair x0 x1) (pair x2 x3)) distinct =
+  quarterDiffOnFibre (sucᵢ (sucᵢ zeroᵢ)) zeroᵢ siteField predecessor
+    (pair (pair x0 x1) (pair x2 x3))
 axisAverageCommutesWithDistinctEdgeDifference
   (sucᵢ (sucᵢ zeroᵢ)) (sucᵢ zeroᵢ) siteField predecessor
-  (pair (pair x0 x1) (pair x2 x3)) distinct = ℚRing.solve-∀
+  (pair (pair x0 x1) (pair x2 x3)) distinct =
+  quarterDiffOnFibre (sucᵢ (sucᵢ zeroᵢ)) (sucᵢ zeroᵢ) siteField predecessor
+    (pair (pair x0 x1) (pair x2 x3))
 axisAverageCommutesWithDistinctEdgeDifference
   (sucᵢ (sucᵢ zeroᵢ)) (sucᵢ (sucᵢ zeroᵢ))
   siteField predecessor site distinct = emptyElim (distinct refl)
 axisAverageCommutesWithDistinctEdgeDifference
   (sucᵢ (sucᵢ zeroᵢ)) (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
   siteField predecessor (pair (pair x0 x1) (pair x2 x3)) distinct =
-  ℚRing.solve-∀
+  quarterDiffOnFibre (sucᵢ (sucᵢ zeroᵢ)) (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) siteField predecessor
+    (pair (pair x0 x1) (pair x2 x3))
 axisAverageCommutesWithDistinctEdgeDifference
   (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) zeroᵢ
   siteField predecessor (pair (pair x0 x1) (pair x2 x3)) distinct =
-  ℚRing.solve-∀
+  quarterDiffOnFibre (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) zeroᵢ siteField predecessor
+    (pair (pair x0 x1) (pair x2 x3))
 axisAverageCommutesWithDistinctEdgeDifference
   (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) (sucᵢ zeroᵢ)
   siteField predecessor (pair (pair x0 x1) (pair x2 x3)) distinct =
-  ℚRing.solve-∀
+  quarterDiffOnFibre (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) (sucᵢ zeroᵢ) siteField predecessor
+    (pair (pair x0 x1) (pair x2 x3))
 axisAverageCommutesWithDistinctEdgeDifference
   (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) (sucᵢ (sucᵢ zeroᵢ))
   siteField predecessor (pair (pair x0 x1) (pair x2 x3)) distinct =
-  ℚRing.solve-∀
+  quarterDiffOnFibre (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) (sucᵢ (sucᵢ zeroᵢ)) siteField predecessor
+    (pair (pair x0 x1) (pair x2 x3))
 axisAverageCommutesWithDistinctEdgeDifference
   (sucᵢ (sucᵢ (sucᵢ zeroᵢ)))
   (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) siteField predecessor site distinct =
@@ -211,8 +282,10 @@ fibreMultiplicityFour siteField axis predecessor transverse =
           current currentAxis currentPredecessor currentTransverse)
     ≡ fourℚ * sq (edgeDifferenceAtTransverse
           current currentAxis currentPredecessor currentTransverse)
-  lengthFour current currentAxis currentPredecessor currentTransverse
-    rewrite lengthAllCyclicIndices side4 = ℚRing.solve-∀
+  lengthFour current currentAxis currentPredecessor currentTransverse =
+    natFourIsFourℚ
+      (sq (edgeDifferenceAtTransverse
+        current currentAxis currentPredecessor currentTransverse))
 
 globalEdgeDifferenceNormFourfold : ∀ siteField axis predecessor →
   globalNormSq (edgeDifferenceField siteField axis predecessor)

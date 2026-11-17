@@ -1,7 +1,7 @@
 module DASHI.Physics.YangMills.BalabanSU2AdjointOrderedReduction where
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Relation.Binary.PropositionalEquality using (sym)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -66,12 +66,14 @@ unitAdjointMainUpper :
   LessEqual ordered
     (unitAdjointDisplacementMainR b c d x y z)
     (fourImaginaryTimesVectorR b c d x y z)
-unitAdjointMainUpper ordered b c d x y z
-  rewrite sym (unitMainPlusDotSquareExact b c d x y z) =
-  baseBelowBasePlusNonnegative ordered
-    (unitAdjointDisplacementMainR b c d x y z)
-    (fourDotSquareR b c d x y z)
-    (fourDotSquareNonnegative ordered b c d x y z)
+unitAdjointMainUpper ordered b c d x y z =
+  subst
+    (LessEqual ordered (unitAdjointDisplacementMainR b c d x y z))
+    (unitMainPlusDotSquareExact b c d x y z)
+    (baseBelowBasePlusNonnegative ordered
+      (unitAdjointDisplacementMainR b c d x y z)
+      (fourDotSquareR b c d x y z)
+      (fourDotSquareNonnegative ordered b c d x y z))
 
 unitQuaternionAdjointDisplacementUpper :
   (ordered : SU2AdjointSquareOrder) →
@@ -80,9 +82,11 @@ unitQuaternionAdjointDisplacementUpper :
   LessEqual ordered
     (adjointDisplacementSqR a b c d x y z)
     (fourImaginaryTimesVectorR b c d x y z)
-unitQuaternionAdjointDisplacementUpper ordered a b c d x y z unit
-  rewrite adjointDisplacementOnUnitQuaternion a b c d x y z unit =
-  unitAdjointMainUpper ordered b c d x y z
+unitQuaternionAdjointDisplacementUpper ordered a b c d x y z unit =
+  subst
+    (λ v → LessEqual ordered v (fourImaginaryTimesVectorR b c d x y z))
+    (sym (adjointDisplacementOnUnitQuaternion a b c d x y z unit))
+    (unitAdjointMainUpper ordered b c d x y z)
 
 su2AdjointDiscardedSquareIdentityLevel : ProofLevel
 su2AdjointDiscardedSquareIdentityLevel = computed

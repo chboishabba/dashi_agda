@@ -154,8 +154,8 @@ multiplierField13 multiplier coordinate site =
 forwardDifference13 :
   Axis4 → (PhysicalBlockL Side13.side13 → ℚ) →
   PhysicalBlockL Side13.side13 → ℚ
-forwardDifference13 axis field site =
-  field (shiftForward13 axis site) - field site
+forwardDifference13 axis fld site =
+  fld (shiftForward13 axis site) - fld site
 
 flatGaugeAdjointPointwiseExact :
   ∀ multiplier coordinate axis site →

@@ -68,9 +68,9 @@ equation38RemainderLittleOEpsilon :
   Equation38QuadraticRemainder inputMagnitude remainderMagnitude →
   sourceQuadraticConstant * inputMagnitude ≤ epsilon →
   remainderMagnitude ≤ epsilon * inputMagnitude
-equation38RemainderLittleOEpsilon inputMagnitude remainderMagnitude epsilon data small =
+equation38RemainderLittleOEpsilon inputMagnitude remainderMagnitude epsilon dat small =
   ℚP.≤-trans
-    (sourceQuadraticBound data)
+    (sourceQuadraticBound dat)
     (ℚP.*-monoʳ-≤-nonNeg inputMagnitude small)
 
 -- A useful exact threshold specialization: if |X| <= epsilon/24, the source

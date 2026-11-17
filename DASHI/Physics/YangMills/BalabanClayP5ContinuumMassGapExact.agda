@@ -235,18 +235,23 @@ record PhysicalP5MassGapCertificate
         (schwingerFunctions osLimit (ContinuumLimit.continuumMeasure continuumLimit))
         (physicalMass physicalClustering)
 
-    positivePhysicalSpectralGap :
-      Positive spectralReconstruction
-        (energyGap spectralReconstruction
-          (schwingerFunctions osLimit
-            (ContinuumLimit.continuumMeasure continuumLimit)))
-    positivePhysicalSpectralGap =
-      exponentialClusteringImpliesGap spectralReconstruction
+    clusteringPositiveImpliesSpectralPositive : ∀ {b} →
+      PhysicalClusteringSurvival.Positive physicalClustering b →
+      OSSpectralReconstruction.Positive spectralReconstruction b
+
+  positivePhysicalSpectralGap :
+    Positive spectralReconstruction
+      (energyGap spectralReconstruction
         (schwingerFunctions osLimit
-          (ContinuumLimit.continuumMeasure continuumLimit))
-        (physicalMass physicalClustering)
-        continuumExponentialClustering
-        (physicalMassPositive physicalClustering)
+          (ContinuumLimit.continuumMeasure continuumLimit)))
+  positivePhysicalSpectralGap =
+    exponentialClusteringImpliesGap spectralReconstruction
+      (schwingerFunctions osLimit
+        (ContinuumLimit.continuumMeasure continuumLimit))
+      (physicalMass physicalClustering)
+      continuumExponentialClustering
+      (clusteringPositiveImpliesSpectralPositive
+        (physicalMassPositive physicalClustering))
 
 open PhysicalP5MassGapCertificate public
 

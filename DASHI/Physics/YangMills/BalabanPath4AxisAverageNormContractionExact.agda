@@ -11,7 +11,7 @@ open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; s
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (Axis4)
 open import DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact using
-  (sq; squareNonnegative; baseBelowBasePlusRemainder)
+  (twoℚ; sq; squareNonnegative; baseBelowBasePlusRemainder)
 open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier
 open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact
 open import DASHI.Physics.YangMills.BalabanFiniteSumFubiniExact
@@ -47,13 +47,13 @@ globalNormSqNonnegative siteField =
     (λ site → squareNonnegative (siteField site))
 
 squareAddExact : ∀ a b →
-  (a + b) * (a + b) ≡ a * a + (b * b + 2 * (a * b))
+  (a + b) * (a + b) ≡ a * a + (b * b + twoℚ * (a * b))
 squareAddExact = ℚRing.solve-∀
 
 subtractAddCancel : ∀ a b → (a + - b) + b ≡ a
 subtractAddCancel = ℚRing.solve-∀
 
-addZeroCrossCancel : ∀ a b → a + (b + 2 * 0ℚ) ≡ a + b
+addZeroCrossCancel : ∀ a b → a + (b + twoℚ * 0ℚ) ≡ a + b
 addZeroCrossCancel = ℚRing.solve-∀
 
 addCommute : ∀ a b → a + b ≡ b + a
@@ -62,7 +62,7 @@ addCommute = ℚRing.solve-∀
 twoFieldSquareExpansion : ∀ left right →
   globalNormSq (addField left right)
   ≡ globalNormSq left
-    + (globalNormSq right + 2 * globalBlockInner left right)
+    + (globalNormSq right + twoℚ * globalBlockInner left right)
 twoFieldSquareExpansion left right =
   trans
     (sumRationalCong
@@ -71,23 +71,23 @@ twoFieldSquareExpansion left right =
       (λ site →
         left site * left site
         + (right site * right site
-          + 2 * (left site * right site)))
+          + twoℚ * (left site * right site)))
       (λ site → squareAddExact (left site) (right site)))
     (trans
       (sumRationalAdd
         (physicalBlockSites side4)
         (λ site → left site * left site)
         (λ site → right site * right site
-          + 2 * (left site * right site)))
+          + twoℚ * (left site * right site)))
       (cong (globalNormSq left +_)
         (trans
           (sumRationalAdd
             (physicalBlockSites side4)
             (λ site → right site * right site)
-            (λ site → 2 * (left site * right site)))
+            (λ site → twoℚ * (left site * right site)))
           (cong (globalNormSq right +_)
             (sumRationalScale
-              2
+              twoℚ
               (physicalBlockSites side4)
               (λ site → left site * right site))))))
 
@@ -118,19 +118,25 @@ axisAveragePythagoras siteField axis =
   dropCross : ∀ current currentAxis →
     globalNormSq (axisResidual current currentAxis)
       + (globalNormSq (axisAverage4 current currentAxis)
-      + 2 * globalBlockInner
+      + twoℚ * globalBlockInner
           (axisResidual current currentAxis)
           (axisAverage4 current currentAxis))
     ≡ globalNormSq (axisResidual current currentAxis)
       + globalNormSq (axisAverage4 current currentAxis)
-  dropCross current currentAxis
-    rewrite residualOrthogonalToFixedPointwise
-      currentAxis current
-      (axisAverage4 current currentAxis)
-      (projectedFixedPointwise currentAxis current) =
-    addZeroCrossCancel
-      (globalNormSq (axisResidual current currentAxis))
-      (globalNormSq (axisAverage4 current currentAxis))
+  dropCross current currentAxis =
+    trans
+      (cong
+        (λ inner →
+          globalNormSq (axisResidual current currentAxis)
+            + (globalNormSq (axisAverage4 current currentAxis)
+              + twoℚ * inner))
+        (residualOrthogonalToFixedPointwise
+          currentAxis current
+          (axisAverage4 current currentAxis)
+          (projectedFixedPointwise currentAxis current)))
+      (addZeroCrossCancel
+        (globalNormSq (axisResidual current currentAxis))
+        (globalNormSq (axisAverage4 current currentAxis)))
 
 axisAverageNormContraction : ∀ siteField axis →
   globalNormSq (axisAverage4 siteField axis) ≤ globalNormSq siteField

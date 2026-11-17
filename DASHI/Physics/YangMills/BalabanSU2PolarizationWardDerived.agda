@@ -5,7 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
-  ( ℝ; 0ℝ; _+ℝ_; _-ℝ_; subSelf; +-identityˡ )
+  ( ℝ; 0ℝ; _+ℝ_; _-ℝ_; subSelf; +-identityˡ; +-comm; subAddDistributes )
 
 finitePolarization :
   ∀ {b d : Level}
@@ -69,28 +69,43 @@ polarizationSymmetric :
   (addDirection : Direction → Direction → Direction)
   (zeroBackground : Background) →
   (∀ left right → addDirection left right ≡ addDirection right left) →
-  (∀ left right →
-    (effectiveAction (shift zeroBackground left)
-      -ℝ effectiveAction (shift zeroBackground right))
-    ≡
-    (effectiveAction (shift zeroBackground right)
-      -ℝ effectiveAction (shift zeroBackground left))) →
   ∀ left right →
   finitePolarization effectiveAction shift addDirection zeroBackground left right
     ≡
   finitePolarization effectiveAction shift addDirection zeroBackground right left
 polarizationSymmetric
   effectiveAction shift addDirection zeroBackground
-  addCommutative differenceSymmetric left right =
-  cong₂ _+ℝ_
+  addCommutative left right =
+  trans
+    (cong
+      (λ background →
+        (effectiveAction (shift zeroBackground background)
+          -ℝ effectiveAction (shift zeroBackground left))
+        +ℝ
+        (effectiveAction zeroBackground
+          -ℝ effectiveAction (shift zeroBackground right)))
+      (addCommutative left right))
     (trans
-      (cong
-        (λ background →
-          effectiveAction (shift zeroBackground background)
-            -ℝ effectiveAction (shift zeroBackground left))
-        (addCommutative left right))
-      (differenceSymmetric right left))
-    (differenceSymmetric left right)
+      (Relation.Binary.PropositionalEquality.sym
+        (subAddDistributes
+          (effectiveAction (shift zeroBackground (addDirection right left)))
+          (effectiveAction zeroBackground)
+          (effectiveAction (shift zeroBackground left))
+          (effectiveAction (shift zeroBackground right))))
+      (trans
+        (cong
+          (λ sum →
+            (effectiveAction (shift zeroBackground (addDirection right left))
+              +ℝ effectiveAction zeroBackground)
+            -ℝ sum)
+          (+-comm
+            (effectiveAction (shift zeroBackground left))
+            (effectiveAction (shift zeroBackground right))))
+        (subAddDistributes
+          (effectiveAction (shift zeroBackground (addDirection right left)))
+          (effectiveAction zeroBackground)
+          (effectiveAction (shift zeroBackground right))
+          (effectiveAction (shift zeroBackground left)))))
 
 polarizationWardLeftFromSymmetry :
   ∀ {d : Level} {Direction : Set d}

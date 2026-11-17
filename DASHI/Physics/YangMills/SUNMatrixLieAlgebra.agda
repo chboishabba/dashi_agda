@@ -47,7 +47,7 @@ record IsSUNLieElement
     antiHermitian : daggerM matrixOps X ≡ negateM lieOps X
     traceZero : traceM lieOps X ≡ zeroC lieOps
 
-open IsSUNLieElement
+open IsSUNLieElement public
 
 private
   proofIrrelevant : ∀ {a} {A : Set a} {x y : A} (p1 p2 : x ≡ y) → p1 ≡ p2
@@ -116,7 +116,7 @@ record CertifiedSUNMatrixLieTheory
           (commutator lieOperations Y (commutator lieOperations Z X))
           (commutator lieOperations Z (commutator lieOperations X Y))) ≡ zeroM lieOperations
 
-open CertifiedSUNMatrixLieTheory
+open CertifiedSUNMatrixLieTheory public
 
 record SUNMatrixLieElement
     {m c : Level} {N : Nat}

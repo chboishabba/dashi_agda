@@ -214,16 +214,20 @@ siteDelta4 left right with periodicTorus4DecidableEquality four left right
 ... | yes equality = 1ℚ
 ... | no inequality = 0ℚ
 
+emptyElim : ∀ {A : Set} → Empty → A
+emptyElim ()
+
 scalarDeltaAtZeroSubtract : ∀ left right →
   scalarDeltaAtZero (subtractSite4 left right) ≡ siteDelta4 left right
 scalarDeltaAtZeroSubtract left right
   with periodicTorus4DecidableEquality four left right
-... | yes equality
-  rewrite equality | subtractSiteSelfZero right = refl
+... | yes equality =
+  trans (cong (λ x → scalarDeltaAtZero (subtractSite4 x right)) equality)
+    (cong scalarDeltaAtZero (subtractSiteSelfZero right))
 ... | no inequality
   with periodicTorus4DecidableEquality four (subtractSite4 left right) zeroSite4
-... | yes differenceZero with inequality (subtractSiteZeroImpliesEqual differenceZero)
-... | ()
+... | yes differenceZero =
+  emptyElim (inequality (subtractSiteZeroImpliesEqual differenceZero))
 ... | no differenceNonzero = refl
 
 ------------------------------------------------------------------------
@@ -243,35 +247,37 @@ sumAdd4Invariant (sucᵢ (sucᵢ (sucᵢ zeroᵢ))) term =
 
 siteSumTranslateInvariant : ∀ amount term →
   siteSum4 (λ site → term (translateSite4 amount site)) ≡ siteSum4 term
-siteSumTranslateInvariant (pair (pair a0 a1) (pair a2 a3)) term
-  rewrite siteSumAsCoordinates (λ site →
-            term (translateSite4 (pair (pair a0 a1) (pair a2 a3)) site))
-        | siteSumAsCoordinates term =
+siteSumTranslateInvariant (pair (pair a0 a1) (pair a2 a3)) term =
   trans
-    (sumAdd4Invariant a0 (λ x0 →
-      sumRational (allCyclicIndices four) (λ x1 →
-        sumRational (allCyclicIndices four) (λ x2 →
-          sumRational (allCyclicIndices four) (λ x3 →
-            term (pair (pair x0 (add4 a1 x1))
-              (pair (add4 a2 x2) (add4 a3 x3))))))))
+    (siteSumAsCoordinates (λ site →
+      term (translateSite4 (pair (pair a0 a1) (pair a2 a3)) site)))
     (trans
-      (sumRationalCong (allCyclicIndices four) _ _ (λ x0 →
-        sumAdd4Invariant a1 (λ x1 →
-          sumRational (allCyclicIndices four) (λ x2 →
-            sumRational (allCyclicIndices four) (λ x3 →
-              term (pair (pair x0 x1)
-                (pair (add4 a2 x2) (add4 a3 x3))))))))
       (trans
-        (sumRationalCong (allCyclicIndices four) _ _ (λ x0 →
-          sumRationalCong (allCyclicIndices four) _ _ (λ x1 →
-            sumAdd4Invariant a2 (λ x2 →
+        (sumAdd4Invariant a0 (λ x0 →
+          sumRational (allCyclicIndices four) (λ x1 →
+            sumRational (allCyclicIndices four) (λ x2 →
               sumRational (allCyclicIndices four) (λ x3 →
-                term (pair (pair x0 x1) (pair x2 (add4 a3 x3))))))))
-        (sumRationalCong (allCyclicIndices four) _ _ (λ x0 →
-          sumRationalCong (allCyclicIndices four) _ _ (λ x1 →
-            sumRationalCong (allCyclicIndices four) _ _ (λ x2 →
-              sumAdd4Invariant a3 (λ x3 →
-                term (pair (pair x0 x1) (pair x2 x3)))))))))
+                term (pair (pair x0 (add4 a1 x1))
+                  (pair (add4 a2 x2) (add4 a3 x3))))))))
+        (trans
+          (sumRationalCong (allCyclicIndices four) _ _ (λ x0 →
+            sumAdd4Invariant a1 (λ x1 →
+              sumRational (allCyclicIndices four) (λ x2 →
+                sumRational (allCyclicIndices four) (λ x3 →
+                  term (pair (pair x0 x1)
+                    (pair (add4 a2 x2) (add4 a3 x3))))))))
+          (trans
+            (sumRationalCong (allCyclicIndices four) _ _ (λ x0 →
+              sumRationalCong (allCyclicIndices four) _ _ (λ x1 →
+                sumAdd4Invariant a2 (λ x2 →
+                  sumRational (allCyclicIndices four) (λ x3 →
+                    term (pair (pair x0 x1) (pair x2 (add4 a3 x3))))))))
+            (sumRationalCong (allCyclicIndices four) _ _ (λ x0 →
+              sumRationalCong (allCyclicIndices four) _ _ (λ x1 →
+                sumRationalCong (allCyclicIndices four) _ _ (λ x2 →
+                  sumAdd4Invariant a3 (λ x3 →
+                    term (pair (pair x0 x1) (pair x2 x3))))))))))
+      (sym (siteSumAsCoordinates term)))
 
 siteSumSubtractInvariant : ∀ center term →
   siteSum4 (λ site → term (subtractSite4 site center)) ≡ siteSum4 term

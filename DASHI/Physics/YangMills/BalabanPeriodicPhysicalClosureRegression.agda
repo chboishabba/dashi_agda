@@ -40,10 +40,10 @@ normalizationMatch = record
   ; Normalization.transformCardinalityMatchesTorusCardinality = refl
   ; Normalization.latticeSpacingFourthPowerDefinition = refl
   ; Normalization.physicalWeightDefinition = refl
-  ; Normalization.physicalBondSiteNorm = λ field → Base.one
-  ; Normalization.physicalBondMomentumNorm = λ field → Base.one
-  ; Normalization.physicalBondSiteNormDefinition = λ field → refl
-  ; Normalization.physicalBondMomentumNormDefinition = λ field → refl
+  ; Normalization.physicalBondSiteNorm = λ fld → Base.one
+  ; Normalization.physicalBondMomentumNorm = λ fld → Base.one
+  ; Normalization.physicalBondSiteNormDefinition = λ fld → refl
+  ; Normalization.physicalBondMomentumNormDefinition = λ fld → refl
   }
 
 physicalParsevalRegression : Base.one ≡ Base.one

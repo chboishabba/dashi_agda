@@ -9,7 +9,8 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
 open import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreCarrier using
   (weakenIndex)
-open import DASHI.Physics.YangMills.BalabanFourDimensionalHaloOverlapExact
+open import DASHI.Physics.YangMills.BalabanFourDimensionalHaloOverlapExact hiding
+  (physicalBlockOriginOffsetBijectionLevel)
 
 ------------------------------------------------------------------------
 -- Literal translated halo origins.
