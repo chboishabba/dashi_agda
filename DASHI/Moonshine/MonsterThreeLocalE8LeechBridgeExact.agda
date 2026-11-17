@@ -48,6 +48,7 @@ module DASHI.Moonshine.MonsterThreeLocalE8LeechBridgeExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
+open import Data.Empty using (⊥)
 
 import DASHI.Biology.ExceptionalLatticeGrokkingProtocolExact as Existing
 
@@ -157,3 +158,58 @@ canonicalThreeLocalObjectBoundary =
     true refl
     true refl
     false refl
+
+
+------------------------------------------------------------------------
+-- E8 ROOT / E6 x A2 ORDER-THREE ARITHMETIC.
+--
+-- This is the exact finite cut used by the comparison lane:
+--
+--   240 = 72 + 56 * 3.
+--
+-- It records the fixed-root / order-three orbit count only.
+-- It does not identify a five-trit carrier with the E8 root system.
+------------------------------------------------------------------------
+
+eSixFixedRootCount : Nat
+eSixFixedRootCount = 72
+
+eEightNonE6RootCount : Nat
+eEightNonE6RootCount = 168
+
+aTwoOrderThreeOrbitCount : Nat
+aTwoOrderThreeOrbitCount = 56
+
+eEightRootCountAsE6PlusA2Orbits :
+  e8RootCount ≡ eSixFixedRootCount + aTwoOrderThreeOrbitCount * 3
+eEightRootCountAsE6PlusA2Orbits = refl
+
+nonE6RootCountAsOrderThreeOrbits :
+  eEightNonE6RootCount ≡ aTwoOrderThreeOrbitCount * 3
+nonE6RootCountAsOrderThreeOrbits = refl
+
+eEightRootCountAsThreeTimesEighty :
+  e8RootCount ≡ 3 * 80
+eEightRootCountAsThreeTimesEighty = refl
+
+data E6A2ArithmeticCreatesF3FiveE8Recognition : Set where
+
+e6A2ArithmeticDoesNotCreateF3FiveE8Recognition :
+  E6A2ArithmeticCreatesF3FiveE8Recognition → ⊥
+e6A2ArithmeticDoesNotCreateF3FiveE8Recognition ()
+
+record E8E6A2RootArithmeticBoundary : Set where
+  constructor e8E6A2RootArithmeticBoundary
+  field
+    e8RootCount240Recorded : Bool
+    e6FixedRootCount72Recorded : Bool
+    remaining168Recorded : Bool
+    fiftySixOrderThreeOrbitsRecorded : Bool
+    arithmeticDecompositionExact : Bool
+    arithmeticIdentifiesF3FiveWithE8Roots : Bool
+    orderThreeCountAloneCreatesActionIntertwiner : Bool
+
+canonicalE8E6A2RootArithmeticBoundary : E8E6A2RootArithmeticBoundary
+canonicalE8E6A2RootArithmeticBoundary =
+  e8E6A2RootArithmeticBoundary
+    true true true true true false false
