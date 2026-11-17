@@ -72,3 +72,15 @@ import DASHI.Physics.Gravity.KSW668AdS5RadialSSPRK3ImaginaryPolynomialExact
 -- formulae. This is NOT an AdS5 covariant electric-Weyl identification;
 -- G1 metric/gauge/linearized-curvature and higher-trace gates remain OPEN.
 import DASHI.Physics.Gravity.KSW668F8DualElectricWeylReadoutAlgebraExact
+
+-- XXIX ORIGINAL-GEOMETRY / SAT / CFL concrete precursor lemmas.
+-- G1: proper-time induced metric at original t=4/3 slice; complete
+-- 5D curved Riemann + linearised Weyl Agda proof remains OPEN.
+import DASHI.Physics.Gravity.KSW668F8OriginalAdS5EmbeddingSliceExact
+-- G2: actual weak-Israel SAT injection rational algebra, NOT full energy.
+import DASHI.Physics.Gravity.KSW668F8WeakIsraelSATSliceExact
+-- G3: SSPRK3 damping instability at dt*k=3, NOT coupled stability.
+import DASHI.Physics.Gravity.KSW668F8SSPRK3FullStabilityPrerequisiteExact
+-- G1--G6 cross-programme non-promotion authority using existing
+-- ContinuumCurvatureSourceSpinTwo approximation and explicit witnesses.
+import DASHI.Physics.Gravity.KSW668F8SameObjectWeylAuthorityBoundary
