@@ -318,3 +318,55 @@ the Bishop all-degree cubature/Cauchy/continuous-Haar source,
 the original full SUN matrix equivalence, or the selected RG
 disintegration bridge. No transitive Agda acceptance receipt,
 no mass-gap/continuum claim. Maintain YM.REAL OPEN.
+
+
+### 17 November 2026 — next implementation: degree-15 11-invariant source weld
+
+New finite original-SU2 source proof candidates, committed to PR #1444:
+
+- DASHI/Physics/YangMills/YMClayRationalS3DegreeFifteenInvariantCertificateExact.agda
+  reuses the original rational quaternion constructor and the prior
+  degree-13 invariant functions. Its 11 rational representatives
+  have norm-one closed polynomial witnesses, and it writes the exact
+  11 invariant moment equations as definitional rational arithmetic.
+  Tagged --safe but no pinned Agda/CI kernel result exists.
+- scripts/check_ym_s3_degree15_eleven_invariants_20261117.py
+  checks each invariant by independent exact methods: evaluate positive
+  rational orbit masses and expand into Pochhammer coordinate moments.
+  It verifies all 38 distinct signed-permutation orbit-sum monomials of
+  squared-coordinate degree <=7 reduce (using e1=1 on S3) into
+  the explicitly listed 11-dimensional invariant span.
+  Locally 11/11 moments and 38/38 orbit classes passed.
+- The independent scripts/check_ym_s3_exact_rational_orbit_degree15_20261117.py
+  passes 3876/3876 monomials on the 1464-node rational rule.
+  The original Wilson T15/T7 degree budget remains a bound, not
+  evaluated high-order Taylor partition coefficients.
+
+Exact source moment targets:
+1=1; e2=1/4; e3=1/48; e4=1/1920;
+e2^2=11/160; e2*e3=1/160; e3^2=3/4480;
+e2*e4=3/17920; e2^3=89/4480;
+e3*e4=3/143360; e2^2*e3=69/35840.
+
+NEXT KERNEL CUT: formalize in Agda the actual signed/permutation orbit
+averaging and its action on every coordinate monomial through degree
+15, then the invariant-basis reduction and the uniform positive
+finite orbit weights. A sum over one representative per orbit is
+NOT the actual full signed-permutation orbit measure.
+
+ORIGINAL WILSON/RG: reuse existing
+YMClayFiniteRGExistingPushPullReopeningWeldExact and
+BalabanFiniteProbabilityPartitionDisintegrationExact, rather than
+rebuilding finite disintegration. Instantiate them on the actual
+rational-design original SU2 link product Gibbs measure and the
+original selected block map, verify positive selected coarse fibres
+or remove zero-mass fibres, then bridge to the actual Bishop limit
+and original SUN matrix carrier. The RealAnalysisAxioms.ℝ legacy
+carrier remains different from Bishop Real.ℝ.
+
+Remaining YM.REAL formal obligations OPEN: universal constructive
+positive rational design search termination, native Bishop
+multivariate order/Cauchy proof, completed actual SU2 Haar
+bilateral invariance, pinned original SU(N) carrier mapping,
+original Wilson finite product and selected physical RG transfer.
+No pinned Agda kernel acceptance is claimed.
