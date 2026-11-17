@@ -43,10 +43,23 @@ def summarize(manifest, root):
         accum_mismatch = []
         comparable = []
         changed = 0
+        available_before, available_after = [], []
+        quality_before, quality_after = defaultdict(int), defaultdict(int)
         for d in range(1, expected + 1):
             day = f'{month}-{d:02d}'
             key = (station, day, variable)
             b, a = before.get(key), after.get(key)
+            # Available-case statistics have their OWN denominator. A blanked
+            # day is not imputed, and a missing later row is not a verified
+            # physical deletion from the original instrument book.
+            if b is not None:
+                quality_before[b[2] or '<blank>'] += 1
+                if b[0] is not None and b[1] == 1:
+                    available_before.append(exact(b[0]))
+            if a is not None:
+                quality_after[a[2] or '<blank>'] += 1
+                if a[0] is not None and a[1] == 1:
+                    available_after.append(exact(a[0]))
             if b is None or a is None:
                 missing_days.append(day)
             elif b[0] is None or a[0] is None:
@@ -68,12 +81,46 @@ def summarize(manifest, root):
             'multi_day_or_unknown_accumulations': len(accum_mismatch),
             'complete_same_day_month': complete,
             'true_original_observation_verified': False,
+            'before_available_numeric_days': len(available_before),
+            'after_available_numeric_days': len(available_after),
+            'before_quality_flag_counts': dict(sorted(quality_before.items())),
+            'after_quality_flag_counts': dict(sorted(quality_after.items())),
         }
         if comparable:
             pairdelta = sum((a - b for b, a in comparable), Fraction())
             record['paired_day_delta_sum_exact'] = fraction_text(pairdelta)
             record['paired_day_delta_average_exact'] = fraction_text(pairdelta/len(comparable))
             record['paired_day_summary_is_full_month'] = complete
+        # Incomplete publications may still have an observed-only mean.
+        # It answers a question about *available reported readings*, not
+        # the fixed-calendar climate statistic or a paper-ledger correction.
+        if variable in ('tmax', 'tmin'):
+            if available_before:
+                mean_before = sum(available_before, Fraction()) / len(available_before)
+                record['available_case_before_mean_exact'] = fraction_text(mean_before)
+            if available_after:
+                mean_after = sum(available_after, Fraction()) / len(available_after)
+                record['available_case_after_mean_exact'] = fraction_text(mean_after)
+            if available_before and available_after:
+                delta = mean_after - mean_before
+                record['available_case_mean_change_exact'] = fraction_text(delta)
+                record['available_case_mean_denominator_changed'] = len(available_before) != len(available_after)
+                record['available_case_is_fixed_calendar_climate_mean'] = complete
+                if comparable:
+                    shared_b = sum((b for b, _ in comparable), Fraction()) / len(comparable)
+                    shared_a = sum((a for _, a in comparable), Fraction()) / len(comparable)
+                    within = shared_a - shared_b
+                    composition = delta - within
+                    assert within + composition == delta
+                    record['common_support_mean_change_exact'] = fraction_text(within)
+                    record['composition_change_exact'] = fraction_text(composition)
+                    record['composition_includes_missingness_or_unpaired_days'] = not complete
+        else:
+            record['available_case_before_rain_subtotal_exact'] = fraction_text(
+                sum(available_before, Fraction()))
+            record['available_case_after_rain_subtotal_exact'] = fraction_text(
+                sum(available_after, Fraction()))
+            record['available_case_subtotals_are_full_month'] = complete
         if complete:
             assert len(comparable) == expected
             total_before = sum((b for b, _ in comparable), Fraction())
