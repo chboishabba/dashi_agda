@@ -48,6 +48,8 @@ python3 scripts/check_bishop_machin_four_angle_algebra_20261117.py
 python3 scripts/check_ym_su2_gibbs_positive_20261117.py
 python3 scripts/check_ym_original_wilson_loworder_20261117.py
 python3 scripts/check_ym_bn_cauchy_schedule_20261117.py
+python3 scripts/check_ym_dyadic_cyclotomic_full_20261117.py
+python3 scripts/check_ym_wilson_L1_commutator_20261117.py
 
 if ! command -v nix >/dev/null 2>&1; then
   echo 'Nix unavailable: local P0 Agda acceptance NOT performed' >&2
