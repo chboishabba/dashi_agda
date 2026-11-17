@@ -87,11 +87,22 @@ def test_CFL_stability_does_not_prove_strict_physical_cone():
     assert physical_speed*dt<=dx  # stable 1D Courant form
     assert dx>physical_speed*dt   # one-neighbor stencil has wider support
 
-def test_zero_source_zero_driver_storage_forbids_positive_load():
-    rng=Random(9)
-    cells,faces=mesh_faces_and_cells(5,[(0,1,1),(1,2,1),(2,3,1)],rng)
-    assert validate_mesh(cells,faces)
-    # A separate source-off global witness only uses the algebraic theorem.
-    assert all(not (c.exterior_in==0 and c.driver==0 and c.initial==0
-                    and c.load>0 and c.internal_in==0) for c in
-               [Cell(0,0,0,0,0,0,0,0,0)])
+def test_source_free_internal_circulation_cannot_supply_load():
+    # Two branches carry internal traffic with zero external, drive and
+    # initial energy. This is not useful source work.
+    cells=[Cell(0,5,0,0,0,5,0,0,0),
+           Cell(0,5,0,0,0,5,0,0,0)]
+    assert validate_mesh(cells,[5,5])
+    assert sum(c.load for c in cells)==0
+
+def test_aggregate_totals_not_a_per_cell_face_id_certificate():
+    # A declared graph with edges 0->1 (3) and 1->2 (4) has actual
+    # incoming per-cell [0,3,4]. Our aggregate-only mesh can instead
+    # carry [4,0,3] with the same sum. The current theorem accepts both:
+    # F10-INC must verify per-face/per-cell endpoint identity.
+    cells=[Cell(2,4,0,0,0,3,3,0,0),
+           Cell(4,0,0,0,0,4,0,0,0),
+           Cell(0,3,0,0,3,0,0,0,0)]
+    assert validate_mesh(cells,[3,4])
+    actual_incoming=[0,3,4]
+    assert [c.internal_in for c in cells]!=actual_incoming
