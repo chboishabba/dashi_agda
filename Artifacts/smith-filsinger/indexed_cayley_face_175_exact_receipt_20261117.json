@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-17",
+  "pr": 1524,
+  "scope": "Canonical original IndexedMesh face membership + directed source/target to actual rational heterogeneous Cayley stage and dynamic source cone",
+  "reused_originals": [
+    "SmithFilsingerIndexedFaceIncidenceExact.DirectedFace",
+    "SmithFilsingerIndexedFaceIncidenceExact.IndexedMesh.faces",
+    "SmithFilsingerLocalCayleyZeroWeldExact.CertifiedCayley",
+    "SmithFilsingerLocalCayleyMidpointExact.CertifiedHalfStep",
+    "SmithFilsingerLocalCausalADEReachExact.noSignalOutsideInterleavedSourceCone",
+    "scripts/smith_filsinger_local_causal_ade_sympy.py.edge_updates"
+  ],
+  "added": [
+    "DASHI/Physics/Motors/SmithFilsingerIndexedCayleyFaceWeldExact.agda",
+    "scripts/test_smith_filsinger_indexed_cayley_face_sympy.py",
+    "Docs/research/SmithFilsingerIndexedCayleyFaceMaxCut20261117.md"
+  ],
+  "theorems_source_authored": [
+    "indexedSourceIDExact",
+    "indexedTargetIDExact",
+    "indexedGuardedSamePrimitive",
+    "indexedFaceFirstMidpoint",
+    "indexedFaceSecondMidpoint",
+    "indexedFaceSourceCone",
+    "FaceMember",
+    "MeshSelectedCayleyFace.selectedReallyOccurs",
+    "meshSelectedFaceMidpointFirst",
+    "meshSelectedFaceMidpointSecond"
+  ],
+  "tests": {
+    "old": 164,
+    "new": 11,
+    "total": "175/175 local PASS",
+    "cmd": "python -m pytest -q test_smith_filsinger_*sympy.py",
+    "sympy": "1.14.0",
+    "pytest": "9.0.2",
+    "exact_git_head_ci": "NOT OBSERVED",
+    "agda_kernel": "NOT RUN"
+  },
+  "strict_gates": {
+    "D1_pinned_agda": "OPEN",
+    "F13_physical_3d_retarded_dyadic": "OPEN",
+    "F13_selected_geometric_face_to_state_cochain": "OPEN",
+    "F13_signed_poynting_and_terminal": "OPEN",
+    "F15_independently_replenished_measured_source": "OPEN"
+  },
+  "original_meter": false,
+  "attribution": "Original DASHI owners/source attribution reused, no ESD edits. Mathematical field/mesh identity record does not certify original physical face-to-cochain mapping."
+}

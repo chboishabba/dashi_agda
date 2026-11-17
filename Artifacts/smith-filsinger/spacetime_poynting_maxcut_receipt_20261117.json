@@ -1,0 +1,52 @@
+{
+  "date": "2026-11-17",
+  "pr": 1524,
+  "scope": "finite signed rational 4-direction time/space Poynting and selected-original Maxwell port plus nonconstant rational travelling vacuum field control",
+  "formal_sources": [
+    "DASHI/Physics/Motors/SmithFilsingerSpaceTimePoyntingTelescopeExact.agda",
+    "DASHI/Physics/Motors/SmithFilsingerSelectedSpaceTimePortWeldExact.agda",
+    "DASHI/Physics/Motors/SmithFilsingerPlaneWaveSpaceTimeWitnessExact.agda"
+  ],
+  "original_owners_reused": [
+    "DASHI/Physics/YangMills/YangMillsLatticeStressWardSliceConservationExact.agda",
+    "DASHI/Physics/Motors/SmithFilsingerOpenBoundaryPoyntingGaussExact.agda",
+    "DASHI/Physics/Plasma/KSW668FullVectorMaxwellJetExact.agda",
+    "DASHI/Physics/Closure/NSTriadKNRationalOrderedFiniteL2.agda",
+    "DASHI/Physics/Motors/SmithFilsingerFullVectorIndexedFaceSampleExact.agda",
+    "DASHI/Physics/Motors/SmithFilsingerSourceMaxwellBoundaryWeldExact.agda"
+  ],
+  "independent_equivalent_local_checks": {
+    "four_direction_random_fraction_windows": {
+      "passed": 800,
+      "attempted": 800
+    },
+    "nonconstant_vacuum_plane_wave_fraction_cases": {
+      "passed": 1200,
+      "attempted": 1200
+    },
+    "source_boundary_double_count_control": "PASS",
+    "omitted_ion_creation_controller_energy_control": "PASS",
+    "misoriented_exterior_face_control": "PASS",
+    "nonrestored_donor_storage_negative_control": "PASS",
+    "rational_plane_wave_unmatched_stride_control": "PASS"
+  },
+  "static_source_audit": {
+    "module_count": 3,
+    "balanced_delimiters": 3,
+    "explicit_postulates": 0,
+    "explicit_proof_holes": 0
+  },
+  "acceptance": {
+    "agda_kernel": "NOT RUN (Agda/Nix unavailable in active runtime)",
+    "exact_branch_python_combined": "NOT RUN (independent arithmetic replay only)",
+    "physical_original_source_calibration": "NOT SUPPLIED",
+    "F10_discrete_4_axis": "Source-authored conditional finite telescoping + constructed nonconstant sampled plane-wave witness; kernel open",
+    "F10_physical_si_stokes": "OPEN",
+    "F02_physical_causal_green": "OPEN",
+    "F13_original_source_and_terminal_response": "OPEN",
+    "F15_replenished_original_solar_net": "OPEN"
+  },
+  "hypothesis_attribution": "User-origin Smith/Filsinger nonlinear solar-source access; existing KSW Maxwell and Yang-Mills Ward finite algebra reused; no ESD modification",
+  "important_no_double_count": "Natural input crossing exterior Maxwell boundary is already negative outward Poynting flux; must not also be counted as independent natural volume work",
+  "wave_limit": "Affine f(x-t) solution is not finite energy over infinite space; it is an exact local smooth vacuum Maxwell and finite-sample control, not atmosphere or original device."
+}

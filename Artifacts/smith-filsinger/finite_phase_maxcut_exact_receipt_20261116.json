@@ -1,0 +1,41 @@
+{
+  "date": "2026-11-16",
+  "status": "independent exact arithmetic replay PASS, NOT Agda proof-check/physical validation",
+  "repo_pr": 1524,
+  "mathematical_scope": [
+    "F01 cross-ratio under common positive scaling (algebraic proxy)",
+    "F04 finite four-phase signed cancellation",
+    "F05 denominator-cleared matching square",
+    "F06 complementary two-slot total conductance",
+    "F07 exact resistor-dependent phase preference reversal",
+    "F08 natural-port source-off sign",
+    "F11 matched-world balance"
+  ],
+  "independent_exact_checks": 9112,
+  "source_model": "V_oc=1; G_1,G_2 complementary; anti-phase G_total=1; in-phase G_total alternates 1/2 and 3/2",
+  "cases": [
+    {
+      "source_resistance": "1",
+      "anti_phase": "1/4",
+      "in_phase": "52/225",
+      "anti_minus_in": "17/900",
+      "winner": "anti-phase"
+    },
+    {
+      "source_resistance": "3",
+      "anti_phase": "1/16",
+      "in_phase": "196/3025",
+      "anti_minus_in": "-111/48400",
+      "winner": "in-phase"
+    }
+  ],
+  "phase_preference_discriminant": "D(R)=-R*(3R^3-12R-8)/((R+1)^2*(R+2)^2*(3R+2)^2)",
+  "positive_root_bracket": [
+    "9/4",
+    "23/10"
+  ],
+  "agda_compiler_receipt": null,
+  "same_apparatus_measurement": null,
+  "scientific_source_work_receipt": null,
+  "verification_notes": "Exact SymPy/Fraction independent replay run in working container. Newly added Agda module source authored with no kernel execution. The same exact committed Python script has not been independently run from its GitHub head."
+}
