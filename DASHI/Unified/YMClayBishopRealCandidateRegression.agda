@@ -48,3 +48,7 @@ import DASHI.Physics.YangMills.YMClayBishopSU2FiniteGibbsPartitionExact
 -- Canonical rational-to-Bishop SU2 trace source, group/Haar still open.
 import DASHI.Physics.YangMills.YMClayOriginalRationalSU2ToBishopTraceExact
   as OriginalRationalSU2BishopTrace
+
+-- Actual original rational norm -> Bishop unit matrix, pending Agda acceptance.
+import DASHI.Physics.YangMills.YMClayOriginalRationalSU2BishopUnitaryWeldExact
+  as OriginalRationalSU2BishopUnitary
