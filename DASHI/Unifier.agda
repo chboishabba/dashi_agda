@@ -1,5 +1,9 @@
 module DASHI.Unifier where
-import DASHI.Finance.SolarBatteryArbitrageFeasibilityExact as BatteryArbitrageTOE
+import DASHI.ComputerScience.TekumDASHIRoundingAssemblyExact
+import DASHI.ComputerScience.TekumDASHIRoundingBoundaryExact as TekumRoundingTOE
+import DASHI.ComputerScience.TekumProposition5FiniteNearestNoGoExact as TekumP5
+import DASHI.ComputerScience.TekumRawNearestCorrectionExact as TekumRaw
+import DASHI.ComputerScience.TekumNearestNoDoubleRoundingExact as TekumNoDouble
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
@@ -1209,101 +1213,30 @@ toeFleetNumericABIRequiresIndependentEvidence =
   FleetGapTOE.fleetSpectralNumericABIPromotionImpossible
 
 ------------------------------------------------------------------------
--- Canonical brain/connectome/fMRI quotient boundary.
--- The observation owners retain authority. This facade adds no empirical proof.
+-- Canonical Tékum exact-nearest / raw-rounding non-promotion convergence.
 ------------------------------------------------------------------------
 
-toeBrainFirstMissing : BrainObservation.BrainObservationFirstMissing
-toeBrainFirstMissing = BrainFMRI.brainFirstMissing
+unifierTekumDASHIRoundingBoundary :
+  TekumRoundingTOE.TekumDASHIRoundingBoundary
+unifierTekumDASHIRoundingBoundary =
+  TekumRoundingTOE.canonicalTekumDASHIRoundingBoundary
 
-toeBrainBidirectionalFirstMissing :
-  BrainBidirectional.BidirectionalObservationFirstMissing
-toeBrainBidirectionalFirstMissing = BrainFMRI.bidirectionalFirstMissing
+unifierTekumHunholdFiniteRepairImpossible :
+  TekumP5.RawTruncationNearestOnFiniteClosure → ⊥
+unifierTekumHunholdFiniteRepairImpossible =
+  TekumRoundingTOE.hunholdFiniteRepairStillRefuted
 
-toeBrainObservationNonPromotion :
-  BrainBidirectional.NonPromotionBoundary
-toeBrainObservationNonPromotion = BrainFMRI.brainNonPromotionBoundary
+unifierTekumRadiusOneRawCorrectionImpossible :
+  TekumRaw.UniformRadiusOneRawCorrection → ⊥
+unifierTekumRadiusOneRawCorrectionImpossible =
+  TekumRoundingTOE.rawRadiusOneStillRefuted
 
-toeBrainJPromotionBlocked :
-  BrainSpine.objectExternalJPromotion BrainFMRI.brainFMRIObject ≡ false
-toeBrainJPromotionBlocked = BrainFMRI.brainFMRIJPromotionBlocked
+unifierTekumNoDoubleFinalEqualityImpossible :
+  TekumNoDouble.twoStageFinal8 ≡ TekumNoDouble.directFinal8 → ⊥
+unifierTekumNoDoubleFinalEqualityImpossible =
+  TekumNoDouble.universalNoDoubleRoundingRefuted
 
-------------------------------------------------------------------------
--- Live Gate-4 frontier and Fleet target selection.
-------------------------------------------------------------------------
-
-unifierCurrentGate4FrontierLedgerLevel : ProofLevel
-unifierCurrentGate4FrontierLedgerLevel =
-  FleetHyperTOE.currentGate4FrontierLedgerLevel
-
-unifierCurrentGate4ClusteringToTransferGapLevel : ProofLevel
-unifierCurrentGate4ClusteringToTransferGapLevel =
-  FleetHyperTOE.currentGate4ClusteringToTransferGapLevel
-
-unifierFleetFormalGapTargetSelected : Bool
-unifierFleetFormalGapTargetSelected =
-  FleetHyperTOE.fleetFormalGapTargetSelected
-
-unifierHistoricalGate4CountSelectedAsFleetTarget : Bool
-unifierHistoricalGate4CountSelectedAsFleetTarget =
-  FleetHyperTOE.historicalGate4CountSelectedAsFleetTarget
-
-unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
-  FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
-unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
-  FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
-
-------------------------------------------------------------------------
--- Solar / battery / grid arbitrage feasibility boundary.
-------------------------------------------------------------------------
-
-toeBatteryArbitrageZKPFrame :
-  BatteryArbitrageTOE.BatteryArbitrageZKPFrame
-toeBatteryArbitrageZKPFrame =
-  BatteryArbitrageTOE.canonicalBatteryArbitrageZKPFrame
-
-toeBatteryGrossSpreadDoesNotCreateNetProfit :
-  BatteryArbitrageTOE.GrossSpreadCreatesNetProfit → ⊥
-toeBatteryGrossSpreadDoesNotCreateNetProfit =
-  BatteryArbitrageTOE.grossSpreadDoesNotCreateNetProfit
-
-toeBatteryLowHouseholdLoadDoesNotCapTradableThroughput :
-  BatteryArbitrageTOE.LowHouseholdLoadCapsTradableThroughput → ⊥
-toeBatteryLowHouseholdLoadDoesNotCapTradableThroughput =
-  BatteryArbitrageTOE.lowHouseholdLoadDoesNotCapTradableThroughput
-
-toeBatteryTariffSnapshotDoesNotCreateFutureTariff :
-  BatteryArbitrageTOE.TariffSnapshotCreatesFutureTariff → ⊥
-toeBatteryTariffSnapshotDoesNotCreateFutureTariff =
-  BatteryArbitrageTOE.tariffSnapshotDoesNotCreateFutureTariff
-
-toeBatterySmartMeterDoesNotCreateSavings :
-  BatteryArbitrageTOE.SmartMeterCreatesSavings → ⊥
-toeBatterySmartMeterDoesNotCreateSavings =
-  BatteryArbitrageTOE.smartMeterDoesNotCreateSavings
-
-toeBatterySeparateEVNMIDoesNotCreateApartmentTariffEligibility :
-  BatteryArbitrageTOE.SeparateEVNMICreatesApartmentTariffEligibility → ⊥
-toeBatterySeparateEVNMIDoesNotCreateApartmentTariffEligibility =
-  BatteryArbitrageTOE.separateEVNMIDoesNotCreateApartmentTariffEligibility
-
-toeBatteryCommonPropertySolarDoesNotCreateApartmentAccess :
-  BatteryArbitrageTOE.CommonPropertySolarCreatesApartmentAccess → ⊥
-toeBatteryCommonPropertySolarDoesNotCreateApartmentAccess =
-  BatteryArbitrageTOE.commonPropertySolarDoesNotCreateApartmentAccess
-
-toeBatteryExistingConduitDoesNotCreateElectricalCompatibility :
-  BatteryArbitrageTOE.ExistingConduitCreatesElectricalCompatibility → ⊥
-toeBatteryExistingConduitDoesNotCreateElectricalCompatibility =
-  BatteryArbitrageTOE.existingConduitDoesNotCreateElectricalCompatibility
-
-toeBatteryRetailerIncentiveDoesNotCreateGuaranteedPayback :
-  BatteryArbitrageTOE.RetailerIncentiveCreatesGuaranteedPayback → ⊥
-toeBatteryRetailerIncentiveDoesNotCreateGuaranteedPayback =
-  BatteryArbitrageTOE.retailerIncentiveDoesNotCreateGuaranteedPayback
-
-toeBatterySourceExampleDoesNotCreateUniversalOptimalBatterySize :
-  BatteryArbitrageTOE.SourceExampleCreatesUniversalOptimalBatterySize → ⊥
-toeBatterySourceExampleDoesNotCreateUniversalOptimalBatterySize =
-  BatteryArbitrageTOE.sourceExampleDoesNotCreateUniversalOptimalBatterySize
-
+unifierTekumNearestExistenceStillOpen :
+  TekumRoundingTOE.nearestExistencePaid
+    TekumRoundingTOE.canonicalTekumDASHIRoundingBoundary ≡ false
+unifierTekumNearestExistenceStillOpen = refl
