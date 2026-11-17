@@ -420,6 +420,9 @@ import DASHI.Unified.NSABCDTOENonPromotionBridgeExact as NSABCDTOE
 import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact as NSTOE
 import DASHI.Unified.NavierStokesR650DecisionTOEConvergenceExact as NSDecisionTOE
 
+-- Exact theorem surface. Do not replace with Unifier placeholder axioms.
+open import DASHI.Unified.ResidualWidthNonPromotionTOEExact public
+
 ¬ : Set → Set
 ¬ A = A → ⊥
 

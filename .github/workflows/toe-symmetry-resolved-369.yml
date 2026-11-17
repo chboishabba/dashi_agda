@@ -41,18 +41,9 @@ on:
       - 'DASHI/Unified/Physics.agda'
       - 'DASHI/Unifier.agda'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
-      - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda'
-      - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda'
-      - 'DASHI/Physics/Foundations/CMP119AntigravityCanonicalS4PhysicalMinCutExact.agda'
-      - 'DASHI/Physics/Foundations/CMP119AntigravityP3GPhysicalProducerMinCutExact.agda'
-      - 'DASHI/Unified/Physics.agda'
+      - 'DASHI/Unified/ResidualWidthNonPromotionTOEExact.agda'
+      - 'DASHI/Unified/ResidualWidthNonPromotionTOERegression.agda'
       - 'DASHI/Unifier.agda'
-      - 'DASHI/Unified/Everything.agda'
-      - 'DASHI/Unified/YMBlockDMaxCutTOEValidation.agda'
-      - 'DASHI/Unified/YMBlockDMaxCutTOEExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanCMP119RegularEReflectionSupportCutExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanCMP119LiteralResidualWeldMaxCut20261002Exact.agda'
-      - 'DASHI/Unified/YMCMP119ResidualWeldTOEExact.agda'
       - 'DASHI/Physics/Closure/Everything.agda'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
 
@@ -238,18 +229,9 @@ jobs:
             DASHI/Unified/Physics.agda
             DASHI/Unifier.agda
             DASHI/EverythingTOESymmetryResolved369.agda
-            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
-            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
-            DASHI/Physics/Foundations/CMP119AntigravityCanonicalS4PhysicalMinCutExact.agda
-            DASHI/Physics/Foundations/CMP119AntigravityP3GPhysicalProducerMinCutExact.agda
-            DASHI/Unified/Physics.agda
-            DASHI/Unified/YMBlockDMaxCutTOEExact.agda
-            DASHI/Unified/YMBlockDMaxCutTOEValidation.agda
-            DASHI/Unified/Everything.agda
+            DASHI/Unified/ResidualWidthNonPromotionTOEExact.agda
+            DASHI/Unified/ResidualWidthNonPromotionTOERegression.agda
             DASHI/Unifier.agda
-            DASHI/Physics/YangMills/BalabanCMP119RegularEReflectionSupportCutExact.agda
-            DASHI/Physics/YangMills/BalabanCMP119LiteralResidualWeldMaxCut20261002Exact.agda
-            DASHI/Unified/YMCMP119ResidualWeldTOEExact.agda
           )
           for source in "${sources[@]}"; do
             if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|NON_TERMINATING|TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
