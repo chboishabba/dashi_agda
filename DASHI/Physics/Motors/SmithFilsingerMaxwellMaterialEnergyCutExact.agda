@@ -12,6 +12,7 @@ module DASHI.Physics.Motors.SmithFilsingerMaxwellMaterialEnergyCutExact where
 
 open import Agda.Builtin.Nat using (Nat; zero; _+_)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Bool using (false)
 open import Data.Nat.Solver using (module +-*-Solver)
 open +-*-Solver using (solve; _:+_; _:=_)
 
@@ -159,7 +160,7 @@ fieldMaterialRepeatableWork :
 fieldMaterialRepeatableWork b f w restored =
   Cycle.+-cancelRight _ _ finalStored
     (Cycle.trans
-      (Cycle.cong (λ z → input + z) restored)
+      (Bound.sym (Cycle.cong (λ z → input + z) restored))
       (Cycle.trans
         (fieldMaterialCombinedWork b f w)
         (Bound.sym
@@ -212,5 +213,5 @@ fieldMaterialLoadBoundOnRepeatableCycle b f w restored =
 maxwellSourceEquationStillOpen :
   Maxwell.MaxwellExteriorCalculusAdapter.sourceEquationPromoted
     Maxwell.canonicalMaxwellExteriorCalculusAdapter ≡
-      Agda.Builtin.Bool.false
+      false
 maxwellSourceEquationStillOpen = refl
