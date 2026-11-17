@@ -293,3 +293,249 @@ cryptographic or FP authentication.
 Source measurements and a verified projection
 are still required to instantiate the
 original Agda profile on a trained model.
+
+
+## 17 November continued max-cut — original coherent R4 top-k replacement produces the early kink
+
+**New executable original-source algebra:**
+`scripts/check_x369_r4_topk_kink_sympy.py`.
+**Composition with existing R4 quantisation certificate:**
+`scripts/check_x369_r4_topk_kink_source_gate_sympy.py`.
+
+This is stronger than the earlier **proposed**
+`GELU(t)*16/(16+t³)` attenuation curve:
+the new construction uses ONLY actual
+`HistoryOrbitMoE` R4 scorer, learned expert
+biases, `torch.topk` + selected softmax,
+the original signed selected FFN with
+a source-licensed constant-output
+parameter choice, and source-owned
+original history. There is NO new
+attenuation gate and no altered R4
+algorithm. It proves the architecture
+*can* instantiate the original
+`ResponseKink` contract; it does
+NOT claim a fitted checkpoint does so.
+
+### Source-shaped original numerical fixture
+
+Use the original coherent `c2_c3_residual`
+branch, d=6 (two complete original
+C3 triads), E=4 experts, k=2.
+Fix the SAME initial retained history
+for every independent activation-load
+counterfactual. Set the baseline C2
+router history coefficients to zero,
+the shared C3 directed head to
+`w=(1,0,0,0,0,0)`, and expert
+histories `h_e=(1,0,s_e,0,0,0)`
+with slopes `s=(0,4,9,10)`.
+Set the source's learned
+`expert_bias=(8,3,-11,-13)`.
+Set activation `x(t)=(t,0,0,0,0,0)`
+for t=0,1,2,3.
+
+The original source coherent C3 phase
+rotates the first activation triad
+`(t,0,0)` into `(0,0,t)`.
+Therefore its ORIGINAL fused directed
+residual equals `s_e*t`; the common
+unary x terms cancel from relative
+logits. Exact source logits are
+
+    L_e(t) = s_e*t + expert_bias_e.
+
+Choose original source-compatible
+orientation weights reading `h_e[0]`
+and no orientation bias, so every
+selected sign score equals 2>0
+(no sign tie at any load).
+Choose each original FFN's final
+linear weights zero and output
+bias `y_e=(0,1,0,0)` on one
+emitted channel, and the selected
+history transition zero. These
+are allowed **parameter choices**,
+not actual learned Leech weights.
+The original R4 code and GELU
+remain unchanged: GELU hidden
+values simply do not affect the
+constant output under W2=0.
+
+| Load t | Original four logits | Strict ordered top2 | Weighted response |
+|---|---|---|---|
+| 0 | (8,3,-11,-13) | (0,1) | 1/(1+exp(5)) |
+| 1 | (8,7,-2,-3) | (0,1) | 1/(1+exp(1)) |
+| 2 | (8,11,7,7) | (1,0) | 1/(1+exp(-3)) |
+| 3 | (8,15,16,17) | (3,2) | 0 |
+
+The selected/unselected margins
+are at least 1 at every stage;
+the two ordered selected slots
+also have strict gaps (5,1,3,1).
+A tie between two unselected
+experts at t=2 is irrelevant to
+the certified top2 order because
+both remain strictly below the
+second selected expert.
+
+Use the OLD `ResponseKink`
+`Nat` observation scale 10.
+Elementary `8/3<e<11/4`
+bounds on the exponential prove
+the four Nat buckets exactly:
+
+    Nat(floor(10*response))=(0,2,9,0).
+
+This witnesses
+`low<prePeak<peak` and
+`overload<peak` for the
+**ORIGINAL R4 SOURCE ARCHITECTURE**
+under the disclosed parameters.
+
+### Matched mechanism ablation / no-go
+
+Keep the SAME inputs, histories,
+expert parameters and learned
+relative logits, but hold the
+selected pair at `(0,1)` and
+renormalise their logits through
+the SAME source softmax. This is
+an explicit counterfactual selected
+subset (supported conceptually by
+the original `execute_selected`
+consumer), not what native routing
+would select at overload t=3.
+The selected expert-1 weight is
+now
+
+    p1(t)=sigmoid(4t-5),
+
+strictly increasing in t because
+`p1'(t)=4*p1*(1-p1)>0`.
+No overload decline remains.
+
+Consequently **sparse competition /
+selected-set replacement is
+sufficient** to generate the old
+shape in the original R4 model,
+even with constant FFNs, no
+learned attenuation and zero
+transition. This is a genuine
+mechanism-specific *architectural
+possibility* with a matched control.
+It does not establish topk
+competition as the mechanism in
+the actual trained checkpoint.
+
+### Combined q/topk/orientation/precision and Nat interval gate
+
+The companion
+`check_x369_r4_topk_kink_source_gate_sympy.py`
+reuses the EXISTING independent
+`check_x369_r4_source_receipt.certify`
+instead of rebuilding a decision
+certificate. At each load it
+presents the same hypothetical
+checkpoint SHA, original
+source-authenticated-state flags,
+same expert histories, original
+orientation row, and coordinate
+precision tolerances 1/65536.
+It requires original source-selected
+IDs, strictly verified TopK
+membership and ordered slots,
+and selected orientation margins.
+
+For the coherent branch, the
+topk/phase mask is fixed. It
+uses the pairwise selected-score
+error bound / selected softmax
+variation to enclose the
+source response with rational
+exponential brackets. The
+resulting response interval is
+required to lie in ONE post-scale-10
+`Nat` cell at each load,
+not merely have ordered
+central values.
+
+The approximate admitted interval
+is robust:
+- t=0 response ≈0.0067,
+  Nat=0;
+- t=1 response ≈0.26894,
+  Nat=2;
+- t=2 response ≈0.95257,
+  Nat=9;
+- t=3 response exactly 0
+  because neither selected
+  expert emits a nonzero
+  value, Nat=0.
+
+The external checkpoint/export/
+float-error attestations in this
+fixture are **synthetic declared
+premises**, not real SHA verification
+or a calibrated Torch binary32
+error receipt. The companion
+refuses source-incorrect frozen
+IDs at overload and attempts to
+promote an uncertified mixed-q
+tie at t=0. These are necessary
+boundary tests, not actual
+original model validation.
+
+### High-alpha theorem / what remains
+
+For constant original expert
+histories and activation ray
+`x(t)=t x0` under fixed
+coherent C3 phase, the original
+relative logits are affine
+`L_e(t)=a_e t+b_e`.
+With a FIXED top2 selected pair
+and constant emitted expert
+outputs, the scalar mixture is
+a logistic interpolation of
+two constants and so is
+monotone in t. A non-monotone
+four-stage response of this
+restricted class must come from
+selected-pair changes or an
+explicit change in the emitted
+expert output/other admitted
+source consumer. Original
+mixed-null phase q is stable
+on strictly positive rays because
+q scales quadratically, but
+at zero load a mixed gate is
+generically ambiguous under
+quantization; the coherent
+witness is not silently promoted
+to the mixed arm.
+
+Next physical/fitted gate:
+export a real checkpoint and
+four source response states
+with fixed experimental
+semantics and authenticated
+hidden-history revisions;
+compare actual source output
+and fixed-route counterfactual
+at matched loads, then test
+history feedback and cap
+interactions separately. If
+a real source shows a
+non-monotone Nat response,
+the existing Agda
+`OriginalR4FourRegimeEvidence`
+can consume its strictly
+certified Nat observation.
+
+**New source construction is not
+a measured trained-model result,
+a claim that GELU is
+overload-decreasing, a clinical
+analogy, or an Agda kernel
+acceptance.**
