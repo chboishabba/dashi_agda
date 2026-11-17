@@ -1542,3 +1542,6 @@ import DASHI.Physics.YangMills.YMClayRationalS3DegreeSevenOrbitMomentsExact as S
 
 -- Compact exact rational SU2 degree-13 nine-invariant source certificate.
 import DASHI.Physics.YangMills.YMClayRationalS3DegreeThirteenInvariantCertificateExact as RationalS3Degree13
+
+-- Exact eleven-invariant rational S3 degree-15 source certificate.
+import DASHI.Physics.YangMills.YMClayRationalS3DegreeFifteenInvariantCertificateExact as RationalS3Degree15
