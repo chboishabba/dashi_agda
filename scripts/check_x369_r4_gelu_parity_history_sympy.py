@@ -176,4 +176,42 @@ for zz in [R(-2),R(-1,2),R(0),R(1,2),R(2)]:
     check("source biased even chart residual bound "+str(zz),
           abs(float(proj-ctr))<=bound+1e-12)
 
+# Original hard sign has THIRD case sigma=0 at unique fixed point
+# z=(x,h)=0 in non-raw route. Source y=sign*y_c and
+# updated_h=cap_history(sign*h_c) then both vanish even when
+# learned FFN and transition contain nonzero biases. This is NOT
+# captured by the two-chart identity sigma in {-1,+1}.
+def oriented_output(sign,preact):
+    return sign*F(sign*preact)
+check("original sign-zero fixed point gives zero output",
+      S.simplify(oriented_output(S.Integer(0),S.Integer(0)))==0)
+check("nonzero output bias prevents center-to-chart continuity",
+      S.simplify(oriented_output(S.Integer(1),S.Integer(0))
+              -oriented_output(S.Integer(0),S.Integer(0))
+              -(m*g(b)+b2))==0)
+# More generally for different z,z' and signs sigma,sigma',
+# add and subtract the intermediate same-sign y_sigma(z'):
+# |delta y| <= L_F |delta z| + [sigma!=sigma'] 2|E_F(z')|,
+# where L_F=|m*k| Lstar for scalar learned two-linear FFN.
+# This gives an APPROXIMATE branch-agnostic consumer budget,
+# not equality of returned orientation sign metadata.
+for src,qp in [(R(1,50),R(1,48)),(R(-1,2),R(-2,5)),
+               (R(2),R(9,5))]:
+    sub={k:2,m:3,b:R(1,3),b2:R(-1,4)}
+    yu=S.N(oriented_output(S.Integer(1),src).subs(sub),45)
+    yv=S.N(oriented_output(S.Integer(-1),qp).subs(sub),45)
+    even_here=S.N(even.subs(t,qp).subs(sub),45)
+    Lf=S.N(6*Lstar,45)
+    chart_bound=Lf*abs(src-qp)+2*abs(even_here)
+    check("source cross-chart input-perturbation bound "+
+          str((src,qp)),abs(yu-yv)<=chart_bound)
+# Bias-free GELU has quadratic chart jump near the zero preactivation,
+# but with learned biases a constant chart residual may remain.
+eps=R(1,100)
+check("bias-free tiny GELU sign jump has quadratic upper bound",
+      float(abs(g(eps)+g(-eps)))
+      <=float(2*eps**2/S.sqrt(2*S.pi)))
+check("bias alone can cause order-one chart residual",
+      S.simplify((Fp+Fm).subs({m:0,b2:1})-2)==0)
+
 print("X369_GELU_PARITY_HISTORY_SYMPY_PASS",len(checks),"checks")
