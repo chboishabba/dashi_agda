@@ -99,6 +99,20 @@ check('declared original-coordinate MDL minimal sufficient candidate is 2',
     min(cost for name,cost,sufficient in
         [('first',1,False),('two-centered',2,True),('raw',3,True)]
         if sufficient)==2)
+# A shared learned head means a common expert DC is a common
+# additive logit offset. It cancels even if that DC is nonzero.
+si,fi,ri,sj,fj,rj=sp.symbols('si fi ri sj fj rj')
+Di=si+fi+ri; Dj=sj+fj+rj
+source_difference=(ws*si+wf*fi+wr*ri)-(ws*sj+wf*fj+wr*rj)
+two_difference=(ws-wr)*(si-sj)+(wf-wr)*(fi-fj)
+check('original common-DC expert score difference factors through two',
+    sp.expand(source_difference-two_difference-wr*(Di-Dj))==0)
+check('nonzero common-DC exact two-channel relative score',
+    sp.expand((source_difference-two_difference).subs(rj,Di-sj-fj))==0)
+check('different-DC source feature collision can change relative score',
+    sp.expand((source_difference-two_difference).subs({
+        si:0,fi:0,ri:1,sj:0,fj:0,rj:0,ws:1,wf:1,wr:1}))==1)
+
 # Exact source-head quantization safety needs BOTH a bound and a
 # strict selected-vs-unselected margin. This is finite stand-in for
 # the Agda interval certificate, not a source quantizer validation.
