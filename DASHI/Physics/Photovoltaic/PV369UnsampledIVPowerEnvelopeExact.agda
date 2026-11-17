@@ -61,7 +61,7 @@ record IVFullIntervalMonotonicityEvidence : Set₁ where
 -- The worst-case P7 consumer cannot use the piecewise-linear sampled
 -- 4T MPP as a complete continuum upper bound. It requires source-typed
 -- unsampled-envelope evidence and P7's original robust net acceptance.
-record FullSweepRobustPVSourceWeld : Set₁ where
+record FullSweepRobustPVSourceWeld : Set₂ where
   field
     sourceFullSweepMonotonicity : IVFullIntervalMonotonicityEvidence
     measuredSolarNetInterval : Robust.MeasuredPVPowerInterval
