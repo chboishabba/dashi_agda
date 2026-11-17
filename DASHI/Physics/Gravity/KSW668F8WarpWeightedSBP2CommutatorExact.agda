@@ -26,6 +26,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; -_; _/_)
 open import Data.Rational.Tactic.RingSolver using (solve)
+import DASHI.Physics.Gravity.KSW668F8MovingSBP2SATBoundaryEnergyExact as WallEnergy
 
 half : ℚ
 half = (+ 1) / 2
@@ -105,3 +106,50 @@ descendingWarpNegativeCross :
     (node 1ℚ (- 1ℚ))
   ≡ - ((+ 1) / 2)
 descendingWarpNegativeCross = solve []
+
+-- Full weighted NORMAL principal + original endpoint SAT contribution,
+-- where cP, cM are the actual weighted face commutator sums.
+-- The source boundary squares carry w0; the outer damping carries wN.
+-- The interior terms a*cP+(v-1)*cM remain and are NOT sign definite.
+weightedNormalFluxAndSAT :
+  ℚ → ℚ → ℚ → ℚ → ℚ → ℚ → ℚ → ℚ → ℚ → ℚ
+weightedNormalFluxAndSAT v w0 wN p0 m0 pN mN target cP cM =
+  w0 * (- (half * (1ℚ + v) * p0 * p0)
+       + half * (1ℚ + - v) * m0 * m0
+       + (1ℚ + - v) * m0 * (target + - m0))
+  + wN * (- (half * (1ℚ + v) * pN * pN)
+          + - (half * (1ℚ + - v) * mN * mN))
+  + (1ℚ + v) * cP + (v + - 1ℚ) * cM
+
+weightedNormalCompleted :
+  ℚ → ℚ → ℚ → ℚ → ℚ → ℚ → ℚ → ℚ → ℚ → ℚ
+weightedNormalCompleted v w0 wN p0 m0 pN mN target cP cM =
+  w0 * (- (half * (1ℚ + v) * p0 * p0)
+       + - (half * (1ℚ + - v)
+            * (m0 + - target) * (m0 + - target))
+       + half * (1ℚ + - v) * target * target)
+  + wN * (- (half * (1ℚ + v) * pN * pN)
+          + - (half * (1ℚ + - v) * mN * mN))
+  + (1ℚ + v) * cP + (v + - 1ℚ) * cM
+
+originalWeightedNormalSATCompletion :
+  (v w0 wN p0 m0 pN mN target cP cM : ℚ) →
+  weightedNormalFluxAndSAT v w0 wN p0 m0 pN mN target cP cM
+  ≡ weightedNormalCompleted v w0 wN p0 m0 pN mN
+      target cP cM
+originalWeightedNormalSATCompletion
+  v w0 wN p0 m0 pN mN target cP cM = solve []
+
+-- Same source cap at original v=-3/5 rational slice, now with
+-- the genuine boundary weights (w0,wN) and interior commutators.
+originalWeightedNormalSourceSlice :
+  (w0 wN p0 m0 pN mN src cP cM : ℚ) →
+  weightedNormalFluxAndSAT
+    (- ((+ 3) / 5)) w0 wN p0 m0 pN mN
+    (WallEnergy.sourceAtSlice p0 src) cP cM
+  ≡ w0 * WallEnergy.completedLowerSourceAtSlice p0 m0 src
+    + wN * WallEnergy.upperBoundaryAtSlice pN mN
+    + ((+ 2) / 5) * cP
+    + - (((+ 8) / 5) * cM)
+originalWeightedNormalSourceSlice w0 wN p0 m0 pN mN
+  src cP cM = solve []
