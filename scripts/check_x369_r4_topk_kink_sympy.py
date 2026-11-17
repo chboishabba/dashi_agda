@@ -26,8 +26,8 @@ def coherent_phase(x):
 # w is NOT a separate parameter for every expert.
 w=tuple(map(R,(1,0,0,0,0,0)))
 history_head=(R(0),)*6
-slopes=(0,4,9,10)
-biases=tuple(map(R,(8,3,-11,-13)))
+slopes=(0,4,9,11)
+biases=tuple(map(R,(8,3,-11,-16)))
 histories=[tuple(map(R,(1,0,s,0,0,0))) for s in slopes]
 outputs=tuple(map(R,(0,1,0,0))) # licensed expert W2=0, b2 outputs
 def original_source_scores(t):
@@ -69,6 +69,8 @@ check("orientation stable and strictly positive at all loads",
 # A source expert FFN W2=0 and b2=constant produces a constant
 # output for ANY GELU hidden computation; transition matrices
 # set zero and state is reset for each independently compared load.
+check("source no selected/boundary tie at all four loads",
+      all(row[2]>0 and row[3]>0 for row in data))
 check("original constant expert output source-compatible",
       outputs[1]==1 and all(outputs[e]==0 for e in (0,2,3)))
 # e is rigorously bounded: 5/2 < e < 3.
