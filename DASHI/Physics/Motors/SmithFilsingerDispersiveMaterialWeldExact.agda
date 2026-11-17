@@ -164,6 +164,18 @@ record CanonicalDispersiveSameObject
         + Mat.MemoryMaterialPortLedger.feedLoss canonicalDonor
         ≡ Cut.FieldMaterialEnergyWeld.fieldDissipationAndOutgoing w
           + Cut.FieldMaterialEnergyWeld.materialDissipation w
+    donorInitialEnvironmentMatchesField :
+      Mat.MemoryMaterialPortLedger.environmentStoredInitially canonicalDonor
+        ≡ Cut.FieldMaterialEnergyWeld.fieldStoredInitially w
+    donorFinalEnvironmentMatchesField :
+      Mat.MemoryMaterialPortLedger.environmentStoredFinally canonicalDonor
+        ≡ Cut.FieldMaterialEnergyWeld.fieldStoredFinally w
+    donorInitialLocalMatchesMaterial :
+      Mat.MemoryMaterialPortLedger.localInitiallyStored canonicalDonor
+        ≡ Cut.FieldMaterialEnergyWeld.materialStoredInitially w
+    donorFinalLocalMatchesMaterial :
+      Mat.MemoryMaterialPortLedger.localFinallyStored canonicalDonor
+        ≡ Cut.FieldMaterialEnergyWeld.materialStoredFinally w
     donorEnvironmentalStorageReturns :
       Mat.MemoryMaterialPortLedger.environmentStoredInitially canonicalDonor
         ≡ Mat.MemoryMaterialPortLedger.environmentStoredFinally canonicalDonor
