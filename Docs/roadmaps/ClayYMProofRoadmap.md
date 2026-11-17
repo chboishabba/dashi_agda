@@ -1,3 +1,10 @@
+## 18 November 2026 — exact finite 24-cell blocked expectation / variance
+
+PR #1444 now includes `YMClayOriginalL1Rational24CellBlockedMomentsExact.agda` and `scripts/check_ym_original_L1_24cell_blocked_moments_20261118.py`. From the existing positive three-class quadratic-Taylor blocked density (multiplicities 6/16/2), the Agda source writes a normalized rational functional on arbitrary coarse scalar observables `f(t)`, its constant-one and first/second moment equations, and the strictly positive rational variance of `t=(Re(U0U1))²`:
+`806306942803/12833778905928 > 0`. The exact independent Fraction calculation verifies 10 identities. This proves finite normalized nonconstancy only, not a spectral mass gap.
+
+**Trust boundary:** No Agda compiler is available in the current execution environment, so the source-written Agda proofs are **not kernel accepted**. The exact original 24⁴ source action→conditional-moment theorem remains open in Agda. The full exponential Gibbs/Haar measure and continuum physical RG transfer remain open. Similarly the full Reynolds invariant basis, constructive effective `bn`, Bishop Cauchy/invariance and original SU(2) carrier equality remain open.
+
 ## 9 November: NEW actual SU(2) Wilson conditional analytic estimate (not a Clay endpoint)
 
 An independent analytic calculation on the **original** four-dimensional SU(2) Wilson one-link Gibbs conditional is in [YMClaySU2OriginalOneLinkCoherentStapleTail20261109.md](YMClaySU2OriginalOneLinkCoherentStapleTail20261109.md), with successfully executed exact-rational certificate `scripts/check_ym_su2_wilson_singlelink_uv_influence_20261109.py`. For six staple quaternion sum `S=R V` with `0≤R≤6` and coupling `β≥0`, the selected original one-link Haar conditional obeys `P(t(UV)≤0 | staples)≤3 exp(−βR/2)`, using the concrete SU(2) Haar cap `H(t≥1/2)>1/6`. Thus `P(t≤0)≤P(R<r₀)+3 exp(−βr₀/2)`, a quantitative reduction of this **local** large-field probability to actual original frustrating-staple mass. This proves a finite-volume-uniform aligned-staple conditional tail, not the requisite large-field **spatial covariance** bound.
