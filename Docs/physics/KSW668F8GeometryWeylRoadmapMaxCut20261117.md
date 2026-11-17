@@ -232,3 +232,55 @@ by ordinary Cauchy--Schwarz (the norm inequality is independently mathematical, 
 
 ### XXXI manufactured centered-difference symbol diagnostic (nonphysical)
 For fixed `k=(1,2,3)` and mismatched centered-derivative symbol `q_i(h)=sin(k_i h)/h`, exact Taylor algebra gives `T(k)q(h)=(-105,21,21)h²+O(h⁴)` as `h→0`. The independent audit found Euclidean norm `4.2638967157, 1.0848419878, 0.2724004105, 0.0681746399` at `h=.2,.1,.05,.025`. This illustrates the quantitative symbol-defect criterion, **not** the nonuniform radial FV/SAT scheme or a physical Weyl convergence rate. The actual original operator's boundary-compatible symbol/commutator still requires proof.
+
+
+## Maximum-cut XXXII — ORIGINAL radial shell FV exact Green proof and conjugation no-go
+
+**Source reuse:** Read and matched `scripts/ksw668_f8_tt_multipole.py`, `scripts/ksw668_f8_fv_source_flux.py`, and `KSW668AdS5TTFiniteVolumeFirstCellRationalExact.agda` before adding any owner. The original F8 solver evolves *regularized scalar* `V_l` for `d=3,7,11` with exact radial shell weights, not independent discretized Cartesian TT components. Keep original source authorship and Caldwell–Langlois/Thorne attribution.
+
+### G1/G3 actual finite shell Green algebra
+
+On `r_j=j h`, effective `d=3+2ell`, let
+```
+W_j = ((j+1/2)^d - max(j-1/2,0)^d) h^d/d,
+A_(j+1/2) = (j+1/2)^(d-1) h^(d-2).
+W_j (L_d,h V)_j = A_(j+1/2)(V_(j+1)-V_j)
+                   - A_(j-1/2)(V_j-V_(j-1)).
+```
+For `j=0`, `W0*2d/h²=A_(1/2)`. For the actual d=3,7,11 first interior coefficients reuse original `FV.d3Plus/d3Minus`, etc. This exact first-row mass/face identity is now source-written in `KSW668F8RadialFVGreenAndQuarticConsistencyExact.agda`. The module proves algebraically, for any finite list of face traces,
+```
+Sum_faces A[(u_L)(v_R-v_L) + (u_R)(v_L-v_R)]
+ = -Sum_faces A (u_R-u_L)(v_R-v_L).
+```
+With zero final Dirichlet endpoint, it assembles to the **original** interior weighted Green identity:
+```
+Sum_{j=0}^{N-2} W_j u_j (L_d,h v)_j
+ = -Sum_{j=0}^{N-2} A_(j+1/2)
+                 (u_(j+1)-u_j)(v_(j+1)-v_j).
+```
+The facewise finite-list theorem and concrete first-shell weights are source-written; the assembly of the face traces with all original `j` shell coefficients is **not separately proven for arbitrary N in Agda**. An independent exact Fraction regression tested 12 arbitrary vector pairs per dimension with zero Dirichlet last node, and all three d passed. Nonpositive radial self-energy is thus true for that scalar operator; fully coupled y/r/warp/SSPRK3 energy still OPEN.
+
+### G1/G5 manufactured original-operator consistency
+
+The original FV is exactly quadratic: `L_d,h(r²)=2d` for all interior radial rows and at origin. The first nonzero `r⁴` truncation is
+```
+L_d,h(r⁴) - 4(d+2)r² = h² e_(d,j)
+origin: e_(3,0)=6, e_(7,0)=14, e_(11,0)=22;
+j=1:   e_(3,1)=142/13,
+       e_(7,1)=37190/1093,
+       e_(11,1)=5137278/88573.
+```
+Exact rational first-interior and origin cases implemented in the new FV owner and checked independently; finite regularity/local consistency does NOT imply mesh-uniform solution/readout convergence.
+
+### Exact negative control — no naive discrete radial conjugation
+
+Continuum `H_l=r^ell V_l` conjugates the 3D spherical Laplacian to effective `d=3+2ell` scalar radial operator. That identity **does not commute** with the naive alternative "FV d=3 on H, subtract ell(ell+1)H/r²". At `h=eps=1`, `j=1`:
+- ell=2, V=r², H=r⁴: naive d3 FV minus centrifugal, compared with actual d7 FV of V, differs by exactly `142/13`.
+- ell=4, V=1, H=r⁴: naive d3 FV minus centrifugal, compared with actual d11 FV of V, differs by exactly `142/13`.
+New `KSW668F8RadialConjugationNoncommutationExact.agda` contains both exact rational negative controls. This does **not** show a bug in the original F8 solver: it never evolves H under the naive alternative. It shows that a new Cartesian tensor-to-existing-radial-FV commuting map must incorporate the correct discrete projection/transfer; the continuum `r^ell` identity and shell mass conservation are insufficient.
+
+### Verification and priority
+
+`scripts/test_ksw668_f8_radial_fv_green_and_conjugation.py` evaluates exact Fractions, 47/47 tests (three dimensions × [quadratic, quartic, face mass, 12 random Green vectors], plus two mismatch controls). All pass in independent local equivalent. The new Agda owner contains a generic finite-face Green telescope but **pinned Agda kernel NOT RUN**; all analytic, physical and higher-Sobolev kernel gates remain open.
+
+**Priority ordering:** G1 full tensor-to-original-scalar-radial-FV compatible projection (including origin and normal SAT); G2 joint Israel/SAT/wall residual trace; G3 coupled moving-domain and SSPRK3 stability; G4 original boundary high-Sobolev both-Weyl trace; G5 independent three-axis convergence; G6 same source/retarded FIO/matter/detector. Continue reuse before construction and attach via existing KSW authority + TOE graph. Preserve attribution and no ESD edits.
