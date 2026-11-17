@@ -282,3 +282,47 @@ and the sign metadata is not automatically identical.
 Original early GELU/parity formalisation is DASHI-owned;
 the analytic normal-CDF formula traces to the GELU
 literature. No ESD surfaces edited.
+
+
+## 8. Adversarial source-chart fixture — margin failure need not mean output failure
+
+The committed SymPy source now includes a constructive
+orientation error condition that FAILS strict sign preservation
+but passes a quantitative numerical consumer:
+
+    same nonzero source z=1/100,
+    original orientation coefficient +1/4096,
+    perturbed coefficient -1/4096.
+
+The original selected sign changes from + to -.
+For a bias-free scalar source-shaped expert F(z)=GELU(z),
+the exact output chart jump is
+
+    |g(z)+g(-z)| = z erf(z/sqrt(2))
+                 ≈ 0.0000797871262926,
+
+and the **global quadratic** analytic upper bound is
+
+    2 z²/sqrt(2 pi) ≈ 0.0000797884560803.
+
+With an identity output-to-history transition path
+and zero transition bias, the same residual controls the
+source history jump before the cap. Thus the strict
+orientation sign gate is necessary for exact `signs`
+metadata and strict routing-chart equality, but can
+be relaxed for a numeric output/history-error
+consumer whose budget admits this parity residual.
+
+The **negative control** sets the learned FFN output
+bias to +1 with otherwise trivial FFN: a ± chart flip
+then changes the output by exactly 2 even as
+the preactivation approaches zero. Small source
+state alone is not sufficient. The actual trained
+FFN biases and norms remain missing.
+
+The original expert's `sign=0` joint fixed point
+still requires a separate source branch, and sign
+flips in a quantized model require unchanged
+expert IDs plus appropriate source q-gate bounds
+before any single-expert residual is composable
+with mixture/recurrence.
