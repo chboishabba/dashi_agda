@@ -158,6 +158,47 @@ v1=((R(1)+eta,R(0),R(0)),v0[1])
 require("mixed source q threshold can flip for arbitrarily small error",
     mask(tuple(z for triad in v0 for z in triad),base)
     !=mask(tuple(z for triad in v1 for z in triad),base))
+# Source orientation is 2*linear([x,h],orientation.weight,None).
+# With input/history and orientation-weight perturbations it has a
+# separate chart-sign budget. At inference, certify |score|>budget to
+# preserve the +/- sign; equality uses first-nonzero fallback and is NOT
+# covered. This is independent of topk membership and q-gate stability.
+def orientation_score(z,weight):
+    return 2*dot(z,weight)
+def orientation_budget(z,weight,ez,ew):
+    return 2*sum(abs(weight[i])*ez[i]
+        +ew[i]*(abs(z[i])+ez[i]) for i in range(len(z)))
+orientation=tuple(map(R,(1,-2,2,0,1,-1,1,0,0,-1,0,2)))
+z0=x+h[2]
+ez0=ex+eh
+ew0=(R(1,256),)*len(z0)
+ori0=orientation_score(z0,orientation)
+orib=orientation_budget(z0,orientation,ez0,ew0)
+ori1=orientation_score(perturb(z0,ez0,+1),
+                       perturb(orientation,ew0,-1))
+require("orientation score quantization interval",
+        abs(ori1-ori0)<=orib)
+require("selected expert strict orientation chart margin",
+        abs(ori0)>orib and (ori0>0)==(ori1>0))
+# Arbitrarily near zero an orientation sign can flip while selected
+# route stays unchanged; first-nonzero tie fallback needs separate
+# equality/lexicographic certification.
+tau=R(1,4096)
+require("orientation tie discontinuity negative control",
+        orientation_score((tau,),(R(1),))>0 and
+        orientation_score((-tau,),(R(1),))<0)
+# Conditional recurrence after topk + orientation charts are stable:
+# one-step mixture <= M*B+Y; next-layer state error admitted as
+# D_(t+1)<=L*D_t+eta. For D_0=0, closed form
+# eta*(1+L+...+L^(t-1)); with L=1 it is eta*t.
+lam,eta_sym=S.symbols("lam eta",nonnegative=True)
+for horizon in range(1,10):
+    d=R(0)
+    for _ in range(horizon):d=lam*d+eta_sym
+    closed=eta_sym*sum(lam**j for j in range(horizon))
+    require("conditional recurrence bound unroll n="+str(horizon),
+            S.expand(d-closed)==0)
+
 # Symbolically derive exact perturbation of C2 absolute score and
 # original fused directed bilinear score; the abs term uses the
 # 1-Lipschitz inequality, never a false global polynomial expansion.
