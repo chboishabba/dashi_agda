@@ -185,6 +185,12 @@ def simulate(p=Parameters(), duration_s=1., samples=160):
                 bridge_heat_J=ch,exterior_heat_J=ext,
                 ionization_loss_J=ionloss,storage_delta_J=final-initial,
                 ledger_residual_J=residual,
+                controller_plus_ion_pump_J=controller+ion,
+                useful_after_controller_and_ion_pump_J=load-controller-ion,
+                load_to_paid_control_ratio=(load/(controller+ion)
+                    if controller+ion>0 else None),
+                reaches_100x_paid_control_model=(load>=100*(controller+ion)
+                    if controller+ion>0 else False),
                 max_instantaneous_residual_J_s=max(
                     abs(residual_at(t,sol.y[:2,k],p)) for k,t in enumerate(sol.t)),
                 valid='synthetic model, not source identity / measured solar work')
@@ -251,6 +257,12 @@ def simulate_backreacting_source(
        channel_heat_J=channel_heat,ion_creation_pump_J=ion_pump,
        ion_loss_J=ion_loss,controller_J=ctrl,storage_delta_J=final-initial,
        full_cycle_return_verified=False,energy_residual_J=residual,
+       controller_plus_ion_pump_J=ctrl+ion_pump,
+       useful_after_controller_and_ion_pump_J=load-ctrl-ion_pump,
+       load_to_paid_control_ratio=(load/(ctrl+ion_pump)
+           if ctrl+ion_pump>0 else None),
+       reaches_100x_paid_control_model=(load>=100*(ctrl+ion_pump)
+           if ctrl+ion_pump>0 else False),
        source_status="independently specified exogenous wave, finite reservoir, no solar calibration")
 
 def run():
