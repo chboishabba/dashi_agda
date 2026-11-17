@@ -49,6 +49,11 @@ jobs:
         with:
           submodules: recursive
           persist-credentials: false
+      - name: Shell syntax for acceptance runner and Agda dispatcher
+        run: |
+          bash -n scripts/run_smith_filsinger_acceptance.sh
+          bash -n scripts/check_smith_filsinger_formal_weld_agda29.sh
+          bash -n scripts/run_agda29_parallel_check.sh
       - name: Fail-closed original-source evidence checker tests
         run: python3 scripts/test_smith_filsinger_original_gate_evidence.py
       - name: Exact signed V/I interval arithmetic tests
