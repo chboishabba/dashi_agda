@@ -29,7 +29,47 @@
         18.4
       ],
       "source": "https://live-production.wcms.abc-cdn.net.au/92bea6c6ca9f85b7cbbcccff0f34ddf0",
-      "bom_2026_10_26_position": "investigating, not yet confirmed"
+      "bom_2026_10_26_position": "investigating, not yet confirmed",
+      "product_code": "IDCJAC0011",
+      "quality_flags_left": [
+        "Y",
+        "Y",
+        "Y",
+        "Y",
+        "Y",
+        "Y",
+        "Y"
+      ],
+      "quality_flags_right": [
+        "Y",
+        "Y",
+        "Y",
+        "Y",
+        "Y",
+        "Y",
+        "Y"
+      ],
+      "accumulation_days_left": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "accumulation_days_right": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "pdf_page_index": 0,
+      "original_observation_ledger_page_authenticated": false,
+      "provenance_note": "PDF is an ABC-hosted Berger-supplied CDO excerpt, visually checked on its page; it is NOT an independently retrieved 1910 logbook or 2026 CDO time-stamped snapshot."
     },
     {
       "id": "S1943-1944-JUNE",
