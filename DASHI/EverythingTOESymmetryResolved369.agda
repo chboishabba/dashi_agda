@@ -1216,45 +1216,12 @@ toeCitationAloneDoesNotRealiseLegalRule :
 toeCitationAloneDoesNotRealiseLegalRule =
   LegalGovernance.toeCitationAloneDoesNotRealiseLegalRule
 
-toeSemanticMeetDoesNotProveLegalApplicability :
-  LegalGovernance.SemanticMeetAloneProvesLegalApplicability → ⊥
-toeSemanticMeetDoesNotProveLegalApplicability =
-  LegalGovernance.toeSemanticMeetDoesNotProveLegalApplicability
-
-toeSemanticPromotionTruthAuthorityClosed :
-  LegalGovernance.SemanticPromotionTruthAuthorityClosed
-toeSemanticPromotionTruthAuthorityClosed =
-  LegalGovernance.toeSemanticPromotionTruthAuthorityClosed
-
-toeSemanticPromotionLegalAuthorityClosed :
-  LegalGovernance.SemanticPromotionLegalAuthorityClosed
-toeSemanticPromotionLegalAuthorityClosed =
-  LegalGovernance.toeSemanticPromotionLegalAuthorityClosed
-
-toeLegalCandidateSourceDoesNotCloseAuthority :
-  LegalGovernance.CandidateSourceIsAuthoritative → ⊥
-toeLegalCandidateSourceDoesNotCloseAuthority =
-  LegalGovernance.toeCandidateSourceDoesNotCloseAuthority
-
-toeCurrentValidityDoesNotEstablishApplicability :
-  LegalGovernance.CurrentValidityAutomaticallyMeansApplicability → ⊥
-toeCurrentValidityDoesNotEstablishApplicability =
-  LegalGovernance.toeCurrentValidityDoesNotAutomaticallyEstablishApplicability
-
-toeExactReuseDoesNotCreateSemanticAdmission :
-  LegalGovernance.ExactReuseCreatesSemanticAdmission → ⊥
-toeExactReuseDoesNotCreateSemanticAdmission =
-  LegalGovernance.toeExactReuseDoesNotCreateSemanticAdmission
-
-toeExactReuseDoesNotCreateSemanticAuthority :
-  LegalGovernance.ExactReuseCreatesSemanticAuthority → ⊥
-toeExactReuseDoesNotCreateSemanticAuthority =
-  LegalGovernance.toeExactReuseDoesNotCreateSemanticAuthority
-
-toeExactReuseDoesNotCreateClaimTruth :
-  LegalGovernance.ExactReuseCreatesClaimTruth → ⊥
-toeExactReuseDoesNotCreateClaimTruth =
-  LegalGovernance.toeExactReuseDoesNotCreateClaimTruth
+toeBalabanOSWightmanStillBlocked :
+  BalabanR559TOE.balabanOSWightmanConstruction
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false
+toeBalabanOSWightmanStillBlocked =
+  BalabanR559TOE.balabanOSWightmanConstructionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
 
 ------------------------------------------------------------------------

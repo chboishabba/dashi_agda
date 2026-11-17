@@ -1134,10 +1134,12 @@ unifierLegalCandidateSourceDoesNotCloseAuthority :
 unifierLegalCandidateSourceDoesNotCloseAuthority =
   GovernanceTOE.toeCandidateSourceDoesNotCloseAuthority
 
-unifierExactReuseDoesNotCreateSemanticAuthority :
-  GovernanceTOE.ExactReuseCreatesSemanticAuthority → ⊥
-unifierExactReuseDoesNotCreateSemanticAuthority =
-  GovernanceTOE.toeExactReuseDoesNotCreateSemanticAuthority
+unifierBalabanOSWightmanStillBlocked :
+  BalabanR559TOE.balabanOSWightmanConstruction
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false
+unifierBalabanOSWightmanStillBlocked =
+  BalabanR559TOE.balabanOSWightmanConstructionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
 
 ------------------------------------------------------------------------
