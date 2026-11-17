@@ -31,6 +31,7 @@ ROOTS = (
     "DASHI.Physics.YangMills.YMClayOriginalRationalSU2ToBishopTraceExact",
     "DASHI.Physics.YangMills.YMClayOriginalRationalSU2BishopUnitaryWeldExact",
     "DASHI.Physics.YangMills.YMClaySU2PochhammerMomentNumeratorsExact",
+    "DASHI.Physics.YangMills.YMClayNativeSixPlaneGaugeSameSourceExact",
     "DASHI.Physics.YangMills.YMClayNativeFiniteGaugeVectorNaturalitySafeExact",
     "DASHI.Physics.YangMills.YMClaySUNConstructedPeriodicGaugeCodecExact",
     "DASHI.Physics.YangMills.YMClaySUNVariablePhysicalCutoffFamilyExact",
