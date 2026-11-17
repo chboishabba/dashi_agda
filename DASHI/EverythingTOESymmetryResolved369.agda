@@ -1307,3 +1307,54 @@ toeBalabanOSWightmanStillBlocked :
 toeBalabanOSWightmanStillBlocked =
   BalabanR559TOE.balabanOSWightmanConstructionIsFalse
     BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+
+------------------------------------------------------------------------
+-- Direct TOE conjunctive closure: the three missing physical producers
+-- remain blocked together. No Boolean flag becomes proof authority.
+-- Reuse R559 source-owned proofs without adding a model or an axiom.
+------------------------------------------------------------------------
+
+toeBalabanPhysicalPromotionCut :
+  (BalabanR559TOE.balabanBlockSpinTransfer
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false)
+  × (BalabanR559TOE.balabanUniformKPAbsorption
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false)
+  × (BalabanR559TOE.balabanOSWightmanConstruction
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false)
+toeBalabanPhysicalPromotionCut =
+  toeBalabanBlockSpinStillBlocked ,
+  (toeBalabanUniformKPStillBlocked ,
+   toeBalabanOSWightmanStillBlocked)
+
+
+------------------------------------------------------------------------
+-- Computational-imaging observer TOE projection.
+-- Unified.Physics remains the normalized facade.
+------------------------------------------------------------------------
+
+import DASHI.Unified.Physics as UnifiedPhysicsOptics
+
+toeDiffuserImagingZKPFrame :
+  UnifiedPhysicsOptics.DiffuserImagingTOEZKPFrame
+toeDiffuserImagingZKPFrame =
+  UnifiedPhysicsOptics.diffuserImagingZKPFrame
+
+open UnifiedPhysicsOptics public using
+  ( roundTripImpliesIdentifiable
+  ; noUniversalDecoderAfterClip
+  ; saturatedCollision
+  ; overlapThenClip
+  ; redundantRecovery
+  ; recordedCodeInjective
+  ; firstPixelOnlyCannotRecoverDepth
+  ; depthRecoveryReceipt
+  ; recordedCollisionWouldContradictDepth
+  ; RestrictedInverseBudget
+  ; MeasuredReconstruction
+  ; stableReconstructionBound
+  ; stableWithMatchedResidual
+  ; codedDepthRoundTrip
+  ; noUniversalDepthDecoder
+  ; noRechartRepairsSaturatedDepth
+  )

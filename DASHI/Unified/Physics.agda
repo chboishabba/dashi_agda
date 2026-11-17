@@ -697,7 +697,53 @@ governanceSensibLawTargetDomainNeedsOwnAuthorityWitness :
 governanceSensibLawTargetDomainNeedsOwnAuthorityWitness =
   GovernanceTOE.governanceTargetDomainNeedsOwnAuthorityWitness
 
-governanceSensibLawZKPFrame :
-  GovernanceTOE.SensibLawGovernanceTOEZKPFrame
-governanceSensibLawZKPFrame =
-  GovernanceTOE.canonicalSensibLawGovernanceTOEZKPFrame
+yangMillsImplementAToDScaleTransferNonPromotion :
+  BalabanR559TOE.ScaleTransferPromotion → ⊥
+yangMillsImplementAToDScaleTransferNonPromotion =
+  YMAD.scaleTransferPromotionEliminator
+    YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+
+------------------------------------------------------------------------
+-- Computational-imaging observer facade.
+-- Reuse the existing optics owners. Do not duplicate their proofs.
+------------------------------------------------------------------------
+
+import DASHI.Physics.Optics.DiffuserImagingObserverDynamicRangeExact as DiffuserImaging
+import DASHI.Physics.Optics.DiffuserRedundantRecoveryExact as DiffuserRecovery
+import DASHI.Physics.Optics.DiffuserNoiseStableRecoveryExact as DiffuserStability
+import DASHI.Physics.Optics.FresnelZonePlateDiffuserCodecBridgeExact as ZonePlate
+
+diffuserImagingZKPFrame :
+  DiffuserImaging.DiffuserImagingTOEZKPFrame
+diffuserImagingZKPFrame =
+  DiffuserImaging.canonicalDiffuserImagingTOEZKPFrame
+
+open DiffuserImaging public using
+  ( DiffuserImagingTOEZKPFrame
+  ; roundTripImpliesIdentifiable
+  ; noUniversalDecoderAfterClip
+  ; saturatedCollision
+  ; overlapThenClip
+  )
+
+open DiffuserRecovery public using
+  ( redundantRecovery
+  ; recordedCodeInjective
+  ; firstPixelOnlyCannotRecoverDepth
+  ; depthRecoveryReceipt
+  ; recordedCollisionWouldContradictDepth
+  )
+
+open DiffuserStability public using
+  ( RestrictedInverseBudget
+  ; MeasuredReconstruction
+  ; stableReconstructionBound
+  ; stableWithMatchedResidual
+  )
+
+open ZonePlate public using
+  ( codedDepthRoundTrip
+  ; noUniversalDepthDecoder
+  ; noRechartRepairsSaturatedDepth
+  )

@@ -266,101 +266,29 @@ unifiedYMImplementAToDMaxCutReceipt =
 
 
 ------------------------------------------------------------------------
--- Fleet named-manifest acquisition boundary.
+-- Computational-imaging observer unified projection.
 ------------------------------------------------------------------------
 
-unifiedFleetManifestAcquisitionDemand =
-  FleetGapTOE.fleetManifestAcquisitionDemand
+unifiedDiffuserImagingZKPFrame :
+  Physics.DiffuserImagingTOEZKPFrame
+unifiedDiffuserImagingZKPFrame =
+  Physics.diffuserImagingZKPFrame
 
-unifiedFleetNamedManifestStillMissing :
-  FleetGapTOE.namedFormalGapManifestAcquired ≡ false
-unifiedFleetNamedManifestStillMissing =
-  FleetGapTOE.namedFormalGapManifestAcquiredIsFalse
-
-unifiedFleetPerGapDispatchStillBlocked :
-  FleetGapTOE.perGapDispatchEnabled ≡ false
-unifiedFleetPerGapDispatchStillBlocked =
-  FleetGapTOE.perGapDispatchEnabledIsFalse
-
-unifiedFleetRelatedSymbolsRequired :
-  FleetGapTOE.fleetRelatedSymbolsRequired ≡ true
-unifiedFleetRelatedSymbolsRequired =
-  FleetGapTOE.fleetRelatedSymbolsRequiredIsTrue
-
-unifiedFleetDiscoverRequired :
-  FleetGapTOE.fleetDiscoverRequired ≡ true
-unifiedFleetDiscoverRequired =
-  FleetGapTOE.fleetDiscoverRequiredIsTrue
-
-unifiedFleetRoundLineageRequired :
-  FleetGapTOE.fleetRoundLineageRequired ≡ true
-unifiedFleetRoundLineageRequired =
-  FleetGapTOE.fleetRoundLineageRequiredIsTrue
-
-unifiedFleetCountDoesNotCreateNamedManifest :
-  FleetGapTOE.CountCreatesNamedManifest → ⊥
-unifiedFleetCountDoesNotCreateNamedManifest =
-  FleetGapTOE.fleetCountDoesNotCreateNamedManifest
-
-
-------------------------------------------------------------------------
--- Direct Pareto / snowball / Ibrahim and ternary-27 non-promotion surface.
--- Canonical owners retain theorem authority.
-------------------------------------------------------------------------
-
-unifiedBalabanScaleTransferPromotionImpossible :
-  ParetoSnowballTOE.BalabanScaleTransferPromotion → ⊥
-unifiedBalabanScaleTransferPromotionImpossible =
-  ParetoSnowballTOE.balabanScaleTransferPromotionImpossible
-
-
-unifiedIbrahimSearchPriorityDoesNotCreateProof :
-  ParetoSnowballTOE.SearchPriorityCreatesProof → ⊥
-unifiedIbrahimSearchPriorityDoesNotCreateProof =
-  ParetoSnowballTOE.searchPriorityDoesNotCreateProof
-
-unifiedIbrahimProducerSourceDoesNotCreateRunReceipt :
-  ParetoSnowballTOE.ProducerSourceCreatesRunReceipt → ⊥
-unifiedIbrahimProducerSourceDoesNotCreateRunReceipt =
-  ParetoSnowballTOE.producerSourceDoesNotCreateRunReceipt
-
-unifiedIbrahimDegree729DoesNotCreateMonsterHZetaRecognition :
-  ParetoSnowballTOE.Degree729CreatesMonsterHZetaRecognition → ⊥
-unifiedIbrahimDegree729DoesNotCreateMonsterHZetaRecognition =
-  ParetoSnowballTOE.degree729DoesNotCreateMonsterHZetaRecognition
-
-unifiedIbrahimPaperOracleDoesNotIdentifyHistoricalDump :
-  ParetoSnowballTOE.PaperOracleIdentifiesDump → ⊥
-unifiedIbrahimPaperOracleDoesNotIdentifyHistoricalDump =
-  ParetoSnowballTOE.paperOracleDoesNotIdentifyHistoricalDump
-
-unifiedIbrahimRoutePreferenceDoesNotCreateExecutionReceipt :
-  ParetoSnowballTOE.RoutePreferenceCreatesExecutionReceipt → ⊥
-unifiedIbrahimRoutePreferenceDoesNotCreateExecutionReceipt =
-  ParetoSnowballTOE.routePreferenceDoesNotCreateExecutionReceipt
-
-unifiedIbrahimMergedLeanSourceDoesNotCreateKernelReceipt :
-  ParetoSnowballTOE.MergedLeanSourceCreatesKernelReceipt → ⊥
-unifiedIbrahimMergedLeanSourceDoesNotCreateKernelReceipt =
-  ParetoSnowballTOE.mergedLeanSourceDoesNotCreateKernelReceipt
-
-unifiedIbrahimOEISDoesNotCreateMultiplicityAction :
-  ParetoSnowballTOE.NinetyOEISEqualityCreatesMultiplicityAction → ⊥
-unifiedIbrahimOEISDoesNotCreateMultiplicityAction =
-  ParetoSnowballTOE.oeisDoesNotCreateMultiplicityAction
-
-unifiedIbrahimFiniteIrreducibilityDoesNotCreateMonsterHZetaRecognition :
-  ParetoSnowballTOE.FiniteIrreducibilityCreatesMonsterHZetaRecognition → ⊥
-unifiedIbrahimFiniteIrreducibilityDoesNotCreateMonsterHZetaRecognition =
-  ParetoSnowballTOE.finiteIrreducibilityDoesNotCreateMonsterHZetaRecognition
-
-unifiedIbrahimCurrentQidDoesNotIdentifyHistoricalTitle :
-  ParetoSnowballTOE.CurrentQidIdentifiesHistoricalTitle → ⊥
-unifiedIbrahimCurrentQidDoesNotIdentifyHistoricalTitle =
-  ParetoSnowballTOE.currentQidDoesNotIdentifyHistoricalTitle
-
-unified369Ternary27MonsterRepresentationNotPromoted =
-  MaxCut369.toe27MonsterRepresentationNotPromoted
-
-unified369Ternary27MonsterEmbeddingNotPromoted =
-  MaxCut369.toe27MonsterEmbeddingNotPromoted
+open Physics public using
+  ( roundTripImpliesIdentifiable
+  ; noUniversalDecoderAfterClip
+  ; saturatedCollision
+  ; overlapThenClip
+  ; redundantRecovery
+  ; recordedCodeInjective
+  ; firstPixelOnlyCannotRecoverDepth
+  ; depthRecoveryReceipt
+  ; recordedCollisionWouldContradictDepth
+  ; RestrictedInverseBudget
+  ; MeasuredReconstruction
+  ; stableReconstructionBound
+  ; stableWithMatchedResidual
+  ; codedDepthRoundTrip
+  ; noUniversalDepthDecoder
+  ; noRechartRepairsSaturatedDepth
+  )
