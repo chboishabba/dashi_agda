@@ -257,3 +257,19 @@ This exposes a **new conditional consistency requirement** between #1521 and #15
 Further, the timed all-N spatial consumer **allTimedSelectedOriginalCellsBelowNaturalCap** now imports the existing TimedSpatialPortChainExact owner, erases its timing index into the existing all-N spatial conservation theorem without modifying the work data, and transports the same-original natural-source cap while **allTimedSelectedOriginalArrivalIsCausal** imports the exact finite launch<=arrival result. This is NOT a relativistic Maxwell signal-front result, and does not licence identifying an observed acoustic clock with the electrical controller.
 
 **Remaining maximum cut:** the admitted Maxwell-jet pointwise-to-integral *physical* transport, original source+material constitutive identity and source-current/pin equality, and Agda 2.9 kernel acceptance; no more numerical simulation or duplicate algebraic power bounds is called for. The mathematical pointwise curl-jet and all-N spatial cancellation owners now exist and are consumed, not reinvented.
+
+
+## Refinement: typed full-vector Maxwell admission rather than free Set placeholders
+
+A second F10 pass strengthened SmithFilsingerFullVectorPoyntingPortWeldExact.agda. The original provisional SameOriginalPhysicalFieldBoundary had free evidence types which could be declared as arbitrary inhabitable Sets without proving equations. It has now been replaced by a dependent Agda record indexed by a real **FullVectorMaxwellJet F**, SelectedBoundary b, FormalFieldToPort f and original signed-cycle s. The fields contain the actual external source/driver and internal material/receiver work equations:
+
+- MaxwellIntegrationIntoSelectedTerminal: explicitly consumes the original three-component pointwise Poynting equation and supplies a **physically independent domain/surface/time integration result**, with net natural/controller work drawn from the selected s, field storage, internal field-to-material transfer, outgoing field losses and final field storage;
+- materialWorkLaw: requires exactly the SAME internal work transfer, paid modulation, initial/final material storage, useful load, relaxation dissipation and recovered modulation;
+- allFieldAndMaterialStatesRestored: an equality of combined field and material stored energies, not a capacitor voltage proxy;
+- originalUsefulPortIdentity: directly identifies the selected physical receiver useful load, preventing an unrelated source/receiver value substitution.
+
+selectedFullVectorPhysicalAdmissionCap derives the original receiver load bound from this contentful record by consuming selectedSourceFullVectorMaxwellCap. No free arbitrary chosen Set witnesses can satisfy the required mathematical equalities just by selecting an empty or unit type. **This is still a conditional formal theorem**: a trivial zero-energy model could inhabit the equations, so *original physical provenance and measured source/work* remain external and cannot be claimed from a type constructor. The real Maxwell PDE solution and source current, physical surface integration, and actual device measurements remain OPEN.
+
+**Separate mathematical consistency:** materialModulationReconcilesOriginalCycleLoss is added to the existing MaxwellMaterialEnergyCutExact owner and strictly derives that any paid modulation in the new material ledger must reconcile the losses and recovered modulation in the already-closed original signed cycle. This is especially important when comparing purported high-gain nonlinear field manipulation against a separately powered controller.
+
+**Kernel status unchanged:** Agda and Nix unavailable locally. These are source-authored exact proof candidates and must not be reported as kernel accepted until the pinned check runs.
