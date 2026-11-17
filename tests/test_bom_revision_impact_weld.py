@@ -47,6 +47,51 @@ class WeldTest(unittest.TestCase):
                     else '2026-10-30T10:00:00+10:00'}]
             return weld.summarize(manifest,root)
 
+    def test_deletion_changes_available_case_mean_not_fixed_calendar_mean(self):
+        before=replace_day(month_rows(1910,2),1910,2,1,'20')
+        after=replace_day(before,1910,2,1,'')
+        m=self.run_pair(before,after)['months'][0]
+        self.assertIsNone(m['full_month_delta_exact'])
+        self.assertEqual((m['before_available_numeric_days'],m['after_available_numeric_days']),(28,27))
+        self.assertEqual(m['available_case_before_mean_exact'],'145/14')
+        self.assertEqual(m['available_case_after_mean_exact'],'10')
+        self.assertEqual(m['available_case_mean_change_exact'],'-5/14')
+        self.assertEqual(m['common_support_mean_change_exact'],'0')
+        self.assertEqual(m['composition_change_exact'],'-5/14')
+        self.assertTrue(m['available_case_mean_denominator_changed'])
+        self.assertFalse(m['available_case_is_fixed_calendar_climate_mean'])
+
+    def test_composition_decomposes_with_simultaneous_shared_day_change(self):
+        from fractions import Fraction
+        before=replace_day(month_rows(1910,2),1910,2,1,'20')
+        after=replace_day(before,1910,2,1,'')
+        after=replace_day(after,1910,2,2,'17')
+        m=self.run_pair(before,after)['months'][0]
+        total=Fraction(m['available_case_mean_change_exact'])
+        within=Fraction(m['common_support_mean_change_exact'])
+        composition=Fraction(m['composition_change_exact'])
+        self.assertEqual(within, Fraction(7,27))
+        self.assertEqual(total,within+composition)
+        self.assertIsNone(m['full_month_delta_exact'])
+
+    def test_rainfall_missing_day_retains_only_observed_subtotals(self):
+        before=month_rows(1910,2,'rain','2')
+        after=replace_day(before,1910,2,1,'')
+        m=self.run_pair(before,after)['months'][0]
+        self.assertEqual(m['available_case_before_rain_subtotal_exact'],'56')
+        self.assertEqual(m['available_case_after_rain_subtotal_exact'],'54')
+        self.assertFalse(m['available_case_subtotals_are_full_month'])
+        self.assertIsNone(m['full_month_delta_exact'])
+
+    def test_quality_flags_reported_without_claim_of_accuracy(self):
+        before=month_rows(1910,2)
+        after=before.replace(',1,Y\\n',',1,N\\n',1)
+        m=self.run_pair(before,after)['months'][0]
+        self.assertEqual(m['before_quality_flag_counts'],{'Y':28})
+        self.assertEqual(m['after_quality_flag_counts'],{'N':1,'Y':27})
+        self.assertTrue(m['complete_same_day_month'])
+        self.assertFalse(m['true_original_observation_verified'])
+
     def test_complete_month_changed_one_day_mean(self):
         a=month_rows(1910,2)
         b=replace_day(a,1910,2,1,'17.0')
