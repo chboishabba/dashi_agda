@@ -1,0 +1,15 @@
+{
+  "schema": "dashi.v2.AH-omega-acceptance.v1",
+  "date": "2026-11-16",
+  "command": "OPENBLAS_NUM_THREADS=1 bash scripts/check_v2_disjoint_tranches_maxcut.sh",
+  "tests": {
+    "passed": 104,
+    "failed": 0,
+    "new_regressions": 41
+  },
+  "agda_kernel": "NOT_RUN",
+  "repo_acceptance": "NOT_YET_COMMITTED",
+  "fully_physical_certification": false,
+  "original_strict_closed": 0,
+  "original_strict_total": 16
+}

@@ -1,0 +1,229 @@
+{
+  "schema": "dashi.V2.Omega.converter-observability.v1",
+  "baseline": {
+    "scope": "necessary restrictions on constructed smooth winding only; not transistor feasibility",
+    "reverse_gross_w": 193.5965740260347,
+    "forward_gross_w": 159.0016211837888,
+    "required_voltage_upper_v": 319.62415992376646,
+    "available_voltage_v": 320.0,
+    "nominal_voltage_headroom_v": 0.3758400762335441,
+    "robust_voltage_headroom_v": 0.3758400762335441,
+    "voltage_envelope_certified": true,
+    "voltage_violation_proved": false,
+    "minimum_dc_bus_v": 338.6616261874624,
+    "dc_bus_headroom_over_required_voltage_v": 19.11854138417408,
+    "minimum_enhanced_eta_to_break_even": 0.9520661522654125,
+    "recovery_net_gain_w": 7.343862961041394,
+    "recovery_net_gain_interval_w": [
+      7.135639215854952,
+      7.552086706227835
+    ],
+    "gain_certified_positive": true,
+    "converter_hardware_admitted": false,
+    "required_missing_evidence": [
+      "full-bridge voltage capability and duty/dead-time",
+      "switching transients",
+      "actual eta map at instantaneous power and temperature",
+      "bus regulation and capacitor ESR",
+      "controller and cooling power at the same electrical boundary"
+    ]
+  },
+  "resistance_drift_0p1_ohm": {
+    "scope": "necessary restrictions on constructed smooth winding only; not transistor feasibility",
+    "reverse_gross_w": 193.5965740260347,
+    "forward_gross_w": 159.0016211837888,
+    "required_voltage_upper_v": 320.36910008808417,
+    "available_voltage_v": 320.0,
+    "nominal_voltage_headroom_v": 0.3758400762335441,
+    "robust_voltage_headroom_v": -0.36910008808416706,
+    "voltage_envelope_certified": false,
+    "voltage_violation_proved": false,
+    "minimum_dc_bus_v": 338.6616261874624,
+    "dc_bus_headroom_over_required_voltage_v": 18.37360121985637,
+    "minimum_enhanced_eta_to_break_even": 0.9520661522654125,
+    "recovery_net_gain_w": 7.343862961041394,
+    "recovery_net_gain_interval_w": [
+      7.135639215854952,
+      7.552086706227835
+    ],
+    "gain_certified_positive": true,
+    "converter_hardware_admitted": false,
+    "required_missing_evidence": [
+      "full-bridge voltage capability and duty/dead-time",
+      "switching transients",
+      "actual eta map at instantaneous power and temperature",
+      "bus regulation and capacitor ESR",
+      "controller and cooling power at the same electrical boundary"
+    ]
+  },
+  "voltage_headroom_1_v": {
+    "scope": "necessary restrictions on constructed smooth winding only; not transistor feasibility",
+    "reverse_gross_w": 193.5965740260347,
+    "forward_gross_w": 159.0016211837888,
+    "required_voltage_upper_v": 320.62415992376646,
+    "available_voltage_v": 320.0,
+    "nominal_voltage_headroom_v": 0.3758400762335441,
+    "robust_voltage_headroom_v": -0.6241599237664559,
+    "voltage_envelope_certified": false,
+    "voltage_violation_proved": false,
+    "minimum_dc_bus_v": 338.6616261874624,
+    "dc_bus_headroom_over_required_voltage_v": 18.11854138417408,
+    "minimum_enhanced_eta_to_break_even": 0.9520661522654125,
+    "recovery_net_gain_w": 7.343862961041394,
+    "recovery_net_gain_interval_w": [
+      7.135639215854952,
+      7.552086706227835
+    ],
+    "gain_certified_positive": true,
+    "converter_hardware_admitted": false,
+    "required_missing_evidence": [
+      "full-bridge voltage capability and duty/dead-time",
+      "switching transients",
+      "actual eta map at instantaneous power and temperature",
+      "bus regulation and capacitor ESR",
+      "controller and cooling power at the same electrical boundary"
+    ]
+  },
+  "high_control_overhead": {
+    "scope": "necessary restrictions on constructed smooth winding only; not transistor feasibility",
+    "reverse_gross_w": 193.5965740260347,
+    "forward_gross_w": 159.0016211837888,
+    "required_voltage_upper_v": 319.62415992376646,
+    "available_voltage_v": 320.0,
+    "nominal_voltage_headroom_v": 0.3758400762335441,
+    "robust_voltage_headroom_v": 0.3758400762335441,
+    "voltage_envelope_certified": true,
+    "voltage_violation_proved": false,
+    "minimum_dc_bus_v": 338.6616261874624,
+    "dc_bus_headroom_over_required_voltage_v": 19.11854138417408,
+    "minimum_enhanced_eta_to_break_even": 0.9964884259717823,
+    "recovery_net_gain_w": -1.256137038958606,
+    "recovery_net_gain_interval_w": [
+      -1.4643607841450472,
+      -1.0479132937721647
+    ],
+    "gain_certified_positive": false,
+    "converter_hardware_admitted": false,
+    "required_missing_evidence": [
+      "full-bridge voltage capability and duty/dead-time",
+      "switching transients",
+      "actual eta map at instantaneous power and temperature",
+      "bus regulation and capacitor ESR",
+      "controller and cooling power at the same electrical boundary"
+    ]
+  },
+  "three_sensor_design": {
+    "unknowns": [
+      "delta_aux_w",
+      "delta_loss_w",
+      "delta_storage_rate_w",
+      "delta_other_output_w"
+    ],
+    "sensors": [
+      "auxiliary_port",
+      "matched_storage_endpoints",
+      "other_output_ports"
+    ],
+    "rank": 4,
+    "nullity": 0,
+    "loss_uniquely_identifiable": true,
+    "all_four_unknowns_identifiable": true,
+    "nullspace_basis": [],
+    "matrix": [
+      [
+        1,
+        -1,
+        -1,
+        -1
+      ],
+      [
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        1
+      ]
+    ]
+  },
+  "redundant_meter_negative_control": {
+    "unknowns": [
+      "delta_aux_w",
+      "delta_loss_w",
+      "delta_storage_rate_w",
+      "delta_other_output_w"
+    ],
+    "sensors": [
+      "duplicate_input_output_meter"
+    ],
+    "rank": 1,
+    "nullity": 3,
+    "loss_uniquely_identifiable": false,
+    "all_four_unknowns_identifiable": false,
+    "nullspace_basis": [
+      [
+        "1",
+        "1",
+        "0",
+        "0"
+      ],
+      [
+        "1",
+        "0",
+        "1",
+        "0"
+      ],
+      [
+        "1",
+        "0",
+        "0",
+        "1"
+      ]
+    ],
+    "matrix": [
+      [
+        1,
+        -1,
+        -1,
+        -1
+      ],
+      [
+        1,
+        -1,
+        -1,
+        -1
+      ]
+    ]
+  },
+  "loss_measurement_design": {
+    "nominal_required_suppression_w": 45.0,
+    "guaranteed_suppression_interval_w": [
+      38.0,
+      52.0
+    ],
+    "worst_case_error_w": 7.0,
+    "suppression_sign_certified": true,
+    "confidence": null,
+    "assumptions": "independent bounded additive errors; all ports sampled simultaneously; same window"
+  },
+  "shaft_measurement_design": {
+    "delta_torque_at_fixed_speed_nm": 0.1825481505302113,
+    "omega_rad_s": 246.5103035516791,
+    "worst_case_power_error_w": 2.485266630689058,
+    "example_sensor_delta_torque_error_nm": 0.01,
+    "example_speed_error_rpm": 1.0,
+    "note": "Only applies when both electrical states share same measured RPM; instrument bounds not V2 data"
+  },
+  "device_identified": false,
+  "agda_kernel_verified": false
+}

@@ -1,0 +1,11 @@
+{
+  "date": "2026-11-17",
+  "suite": "v2_omega_magnetic_torque_priority",
+  "new_tests_passed": 28,
+  "new_tests_failed": 0,
+  "test_output": "............................                                             [100%]\n28 passed in 0.12s",
+  "git_head_acceptance": false,
+  "agda_kernel": "NOT RUN",
+  "source_v2_data": "NONE",
+  "strict_P0_P4_open": 16
+}
