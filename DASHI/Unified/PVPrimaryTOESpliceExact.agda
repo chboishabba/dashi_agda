@@ -51,3 +51,6 @@ import DASHI.Physics.Photovoltaic.PV369G173MultiJunctionLossFrontierExact
 
 -- P5/P7 measured 4T/ideal 2T source-matched spectral optical/EQE/JV weld.
 import DASHI.Physics.Photovoltaic.PV369FourJunctionOpticsToMeasuredIVExact
+
+-- P7 worst-case source-bounded >50% and same-spectrum physical 369 control.
+import DASHI.Physics.Photovoltaic.PV369IntervalRobustAcceptanceExact
