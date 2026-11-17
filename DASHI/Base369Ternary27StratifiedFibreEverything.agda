@@ -46,6 +46,18 @@ import DASHI.Moonshine.Base369ExceptionalAlbertFiftyThreeResidualBidiExact
 import DASHI.Moonshine.Base369MonsterExceptionalHybridBulkResidualBidiExact
 import DASHI.Base369ExceptionalResidualCrossPollinationValidation
 
+-- Characteristic-three E6 exterior-square continuation.  The existing raw
+-- punctured four-trit carrier remains distinct from the derived 80-state
+-- primitive/Lagrangian null carrier.  Exact 80/40 coordinate recognition,
+-- projective incidence/orthogonality, and six-generator action intertwining
+-- are source-paid here; full PGSp/W(E6) group closure remains a separate lane.
+import DASHI.Foundations.ExceptionalE6F3ExteriorSquareRecognitionExact
+import DASHI.Foundations.ExceptionalE6F3ExteriorSquareRecognitionValidation
+import DASHI.Foundations.ExceptionalE6F3ProjectiveIncidenceExact
+import DASHI.Foundations.ExceptionalE6F3ProjectiveIncidenceValidation
+import DASHI.Foundations.ExceptionalE6F3GeneratorActionExact
+import DASHI.Foundations.ExceptionalE6F3GeneratorActionValidation
+
 -- Consumer-first representation-theoretic frontier and finite Heisenberg core.
 import DASHI.Moonshine.Base369Monster3BRepresentationBidiSearchExact
 import DASHI.Moonshine.Monster3BFiniteHeisenbergCentralExtensionExact
