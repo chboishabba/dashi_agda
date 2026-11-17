@@ -12,7 +12,7 @@ module DASHI.Physics.YangMills.YMClayRationalS3PositiveWeightedNodesExact where
 -- Bishop proof. Non-safe due to imported existing non-safe owners.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.List using (List)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational using (ℚ; _*_; Positive)
 import Data.Rational.Properties as ℚP
 
@@ -74,10 +74,8 @@ rationalS3AllWeightsPositive :
   Finite.All
     (λ node → Positive (Finite.weight node))
     (rationalS3WeightedNodes parameters)
-rationalS3AllWeightsPositive parameters =
-  Finite.allMap weightedOriginalNode
-    (λ t _ → rawAreaWeightPositive t)
-    (allTrivially parameters)
-  where
-    allTrivially : ∀ ts → Finite.All (λ _ → ℚ) ts
-    allTrivially _ = {!!}
+rationalS3AllWeightsPositive [] = Finite.allNil
+rationalS3AllWeightsPositive (t ∷ ts) =
+  Finite.allCons
+    (rawAreaWeightPositive t)
+    (rationalS3AllWeightsPositive ts)
