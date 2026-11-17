@@ -5,7 +5,7 @@ import pytest
 from check_smith_filsinger_nonlinear_retarded_source_port import (
     Parameters, exact_identity_checks, passive_admittance,
     finite_passive_admittance_test, channel_conductance, rates,
-    residual_at, simulate, run)
+    residual_at, simulate, run, DynamicUpstream, simulate_backreacting_source)
 
 
 def test_exact_plasma_energy_and_nonlinear_iv_identities():
@@ -72,3 +72,29 @@ def test_ion_creation_paid_for_externally():
 def test_model_preserves_original_evidence_gates():
     result=run()
     assert 'source_first P1/P2 R2/R3 still null' in result['hard_gates']
+
+
+@pytest.mark.parametrize("source_amp",[0.,10.,100.])
+def test_finite_upstream_causal_recharge_energy_accounting(source_amp):
+    p=Parameters(source_ac_V=source_amp,source_delay_s=.005)
+    result=simulate_backreacting_source(p,duration_s=.02)
+    assert abs(result["energy_residual_J"])<2e-5
+    assert not result["full_cycle_return_verified"]
+    assert "no solar calibration" in result["source_status"]
+
+
+def test_zero_ambient_and_zero_stored_energy_stays_off():
+    p=Parameters(source_background_V=0.,source_ac_V=0.,
+                 n_initial_m3=0.,spontaneous_pairs_m3_s=0.)
+    d=DynamicUpstream(initial_voltage_V=0.)
+    r=simulate_backreacting_source(p,d,duration_s=.02)
+    assert abs(r["upstream_replenishment_signed_J"])<1e-14
+    assert abs(r["load_J"])<1e-14
+
+
+def test_initially_charged_source_not_automatically_replenished():
+    p=Parameters(source_background_V=0.,source_ac_V=0.)
+    d=DynamicUpstream(initial_voltage_V=500.)
+    r=simulate_backreacting_source(p,d,duration_s=.02)
+    assert r["source_voltage_final"] < d.initial_voltage_V
+    assert not r["full_cycle_return_verified"]
