@@ -151,3 +151,24 @@ New \`PV369NetHalfThresholdExact.agda\` imports original motors' inductive natur
 **TOE import graph:** `DASHI/Unified/PVPrimaryTOESpliceExact.agda` imports the new QW, net threshold and matched 369 advantage owners, attached already to the three original TOE roots. No ESD surfaces edited. **Agda kernel acceptance OPEN**. See [Docs/physics/PV369Net50QuantumWellMaxCut20261117.md](PV369Net50QuantumWellMaxCut20261117.md) for formulas, source provenance and required real-device specimens.
 
 **Max-cut next:** use source-specific full (111) quantum-well spectra/barrier profiles and corrected Bahder 8-band model; independently fit measured absorption and extraction, select 369 mechanism predicted by an *actual changed operator* rather than a relabel, and compare against a same-source conventional device. Treat P3–P6 as distinct routes in parallel. Do not call conditional radiative simulations >50% experiment.
+
+
+## 17 November P5/P7 same-G173 net loss frontier
+
+**Recall actual programme:** *experimentally measured >50% NET solar-to-electric*, both RF/auxiliary inputs subtracted and products energy-separated; 369 must produce a demonstrably *different material-level observable* relative to conventional group symmetry on the **same sample/source**, not an equivalent basis. Retain P1 atom→device, P2 EQE and loaded MPP, P3 RF/Floquet, P4 multiexciton extraction, P5 multijunction optics, P6 BH4 photosynthesis, P7 independent certification. Thermal remains only supporting.
+
+**P5/P7 new exact model loss frontier:** Previous one-sun G173 multi-start ideal radiative source `check_pv_astm_g173_radiative.py` remains a *numerical exploratory model*, not certified global optima. Committed `scripts/check_pv_g173_multijunction_net_loss_frontier.py` calculates all ten 2T/4T 1–5 junction cases, strictly rejects negative losses and exactly 50% ties, and expresses budgets in percentage points of incident aperture solar source (NOT as fractions of gross electrical power).
+
+- **2T 3J model 51.741%**: headroom 1.741 percentage points = 17.416 W/m² on 1000.370656 W/m² global G173, only 3.365% of ideal gross output can be lost.
+- **4T 4J model 56.077%**: headroom 6.077pp = 60.793 W/m², 10.837% of ideal gross output.
+- **4T 5J model 58.532%**: headroom 8.532pp = 85.352 W/m², 14.577% of ideal gross output.
+- **2T 1J and 2J**: still below 50% in this model, respectively -16.227pp and -4.176pp. No allowable positive-loss budget; must introduce an independently sourced physical mechanism rather than fictitious negative losses.
+- **4T converter/no-free-gain**: separate terminals, optical routing, extra converters and contacts are additional losses; an unfavourable realistic cost can reverse the apparent 4T advantage.
+
+**Agda:** new `PV369G173MultiJunctionLossFrontierExact.agda` imports original `PV369NetHalfThresholdExact` and motors Nat inductive ≤ bound, enumerates the historic model constants, proves two exact safe-side sample *arithmetic* budgets (2T3J and 4T4J) and uses the earlier strict half-equality obstruction. Imported into the existing TOE PV splice. **Does not prove that the proposed stacks exist**, nor that a 369 mechanism made them better. Agda native Golden acceptance OPEN. In-session independent 60/60 rational arithmetic validations PASS; the committed Python copy was not run from a remote checkout. All receipts source-labeled.
+
+**External comparison:** 2026 independently certified `Solar Cell Efficiency Tables v68`, DOI 10.1016/j.joule.2026.102494, gives 35.2% one-sun perovskite/Si 2T and 47.6% 665× four-junction CPV (different source normalization). Do NOT subtract its concentrator result from an ideal one-sun model.
+
+**Highest-alpha next:** obtain real loss intervals on 4T4J/5J (same source/spectrum, angular optics, output converters, carrier collection, contacts and thermal), first compare against conventional no-369 designs, *then* identify the smallest experimentally testable 369-specific changed Hamiltonian/transition that can reduce losses or increase actual J–V MPP. Continue source-matched P1d Bahder/well and independent P3/P4/P6 branches. No real-device >50% claim.
+
+See `Docs/physics/PV369G173MultiJunctionNetLossFrontier20261117.md` for full 2T/4T table and all strict falsifiers.
