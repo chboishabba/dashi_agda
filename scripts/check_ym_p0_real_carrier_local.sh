@@ -62,6 +62,7 @@ python3 scripts/check_ym_dyadic_character_bitpair_20261117.py --max-power 8
 python3 scripts/check_ym_s3_stereographic_rational_20261117.py
 python3 scripts/check_ym_s3_stereographic_invariance_20261117.py
 python3 scripts/check_ym_s3_exact_rational_orbit_designs_20261117.py
+python3 scripts/check_ym_original_L1_rational_design_weld_20261117.py
 python3 scripts/check_ym_wilson_all_cutoffs_interval_20261117.py
 python3 scripts/check_ym_naive_cylinder_negative_control_20261117.py
 python3 scripts/check_ym_su2_o4_invariance_20261117.py
