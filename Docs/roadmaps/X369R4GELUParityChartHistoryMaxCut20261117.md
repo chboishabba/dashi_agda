@@ -338,3 +338,44 @@ flips in a quantized model require unchanged
 expert IDs plus appropriate source q-gate bounds
 before any single-expert residual is composable
 with mixture/recurrence.
+
+
+### F07 guarded recurrence: implemented as a distinct source contract
+
+The SymPy script now symbolically checks, for every
+finite horizon from 1 to 6, an explicit
+guarded-error recurrence with chart-jump slack:
+
+    D_(t+1) <= L_t D_t + eta_base,t + flip_t * J_chart,t,
+
+where `flip_t` indicates the source's two nonzero
+orientation charts disagree and `J_chart,t`
+is admitted from the **actual** biased FFN
+even component and transition residual.
+For `D_0` and an arbitrary horizon N,
+the exact upper-envelope expression is
+
+    D_N <= D_0 * product_(k<N) L_k
+         + sum_(j<N) (eta_base,j+flip_j J_chart,j)
+                       * product_(j<k<N) L_k.
+
+This is a source-compatible proof-development
+RECURRENCE, not a new Agda F07 theorem:
+the old F07 `lipBound` requires a genuine
+global Lipschitz witness on its chosen carrier.
+One cannot replace that premise with
+pointwise chart-jump error without a new
+guarded one-step law (or an explicitly
+restricted carrier). The independently
+checked finite algebra supplies the
+right receiving formula but the fitted
+source's layer-by-layer guard and
+numerical Lipschitz/evaluation receipts
+remain necessary.
+
+The old even/odd F02a and F07 modules
+remain the original Agda owners. The
+finite-dimensional Euclidean F02b and
+source-specific chart residual are new
+SymPy exact-real bridges, not purported
+Agda kernel promotions.
