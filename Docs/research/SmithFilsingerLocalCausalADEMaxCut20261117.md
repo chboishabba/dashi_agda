@@ -81,3 +81,16 @@ D1 is unchanged: the true pinned Agda 2.9 workflow must typecheck the Agda proof
 **D1:** pinned Agda 2.9 CI/actual kernel acceptance and source-level repairs against any compiler errors. Continue to keep independent SymPy acceptance separate.
 
 All previous Smith/Filsinger attribution and source-first gates preserved.
+
+
+## Agda structural frame theorem: first kernel candidate
+
+New `DASHI/Physics/Motors/SmithFilsingerLocalCausalADEFrameExact.agda` imports the CANONICAL `IndexedFaceIncidenceExact.sameID` and defines explicit primitive two-coordinate updates. `outsidePrimitive` shows a coordinate distinct from both endpoint IDs is unchanged; the `OutsideEvery` receipt covers **every stage in the actual finite list**. `neverTouchedRetainsOriginal` proves by induction that any coordinate outside all update endpoints retains its initial state across arbitrary noncommuting finite stages.
+
+This is a bona fide finite frame theorem candidate with no added postulates or explicit holes. It is intentionally weaker than the full *dynamic* dependency-cone theorem: a touched coordinate can become nonzero only if its update actually depends on a previously activated endpoint, which the Python `dependency_cone` tests but this Agda module does not yet prove universally. No such theorem is promoted as a Maxwell front-speed result.
+
+The new source is included in `scripts/check_smith_filsinger_formal_weld_agda29.sh`, which must be executed on an actual pinned Agda 2.9 host. Its kernel acceptance is OPEN in this session.
+
+## Final tested receipt
+
+The existing 112 local exact tests, 15 new primitive-local/dense-inverse controls, and four new per-cell heterogeneous material/negative controls give **131/131 PASS** using SymPy 1.14.0 and pytest 9.0.2. A single runnable ZIP was locally produced from the eighteen exact source/test files, with no undocumented physics input. This is local exact arithmetic, not a GitHub-head CI or Agda proof receipt.
