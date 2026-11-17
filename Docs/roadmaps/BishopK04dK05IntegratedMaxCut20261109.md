@@ -1,0 +1,1622 @@
+# Bishop K04d/K05: original-source maximum cut (9 November 2026)
+
+## Status and ownership
+
+This note supplements the existing Bishop K04d/K05 roadmap; it does **not** assert any new Agda kernel receipt. Target branch: PR #1408. Preserve Bishop/Bridges and the pinned Murray/Csimma original Bishop real owner, with DASHI finite-stage derivative and source-quotient authors distinct. Do not modify ESD surfaces.
+
+Original source owners already inspected at commit `e25598e7418e74b4d59b38edb7ff7d0cd53ecec0`:
+
+- `DASHI/Analysis/BishopOriginalNegativeLogFiniteErrorDerivativeExact.agda`: actual source error `E_N`, quotient, initial value and finite ODE.
+- `DASHI/Analysis/BishopOriginalNegativeLogCrossWeightedIncrementExact.agda`: exact division-free local integrating-factor cross-product and explicit quotient defect.
+- `DASHI/Analysis/BishopOriginalNegativeLogFiniteExpMeshEndpointExact.agda`: original finite mesh exact endpoint identity and absolute error budget.
+- `DASHI/Analysis/BishopOriginalFactorIncrementFiniteTelescopeExact.agda`: finite constructive telescoping, **not** yet a uniform differentiable endpoint theorem.
+
+## P0: rigorous mathematical target, with stronger rate
+
+Let `L_N(x) = sum_{k=1}^N x^k/k`, `F_N(x)=exp_B(-L_N(x))` and `E_N(x)=F_N(x)-(1-x)`. At each finite N the existing original-source identity is
+
+```
+(1-x) E_N'(x) + E_N(x) = x^N F_N(x),  E_N(0)=0.
+```
+
+For fixed constructive real `0 <= r < 1` and `0 <= x <= r`, once the original Bishop positive reciprocal / finite endpoint integration is installed, define `G_N(x)=E_N(x)/(1-x)`. The product and quotient laws yield
+
+```
+G_N'(x) = x^N F_N(x)/(1-x)^2,  G_N(0)=0.
+```
+
+Using the already source-derived `0 <= F_N(x) <= 1` on the interval, positivity and monotonicity give
+
+```
+0 <= G_N(x) <= x^(N+1)/((N+1)*(1-r)^2).
+0 <= E_N(x) <= x^(N+1)/((N+1)*(1-r)^2)
+             <= r^(N+1)/((N+1)*(1-r)^2).
+```
+
+The displayed bound is a *mathematical proof target* over ordered reals using interval integration, **not** an Agda theorem and not a claim that a Bishop FTC instance currently exists. It improves the previous proposed bound `x*r^N/(1-r)^2` by integrating the original power `t^N` exactly. In a constructive implementation, division by `1-r` needs an explicit positive apartness witness; `N+1` is a positive natural rational.
+
+### P0 exact code cut
+
+1. Locate and reuse the real positive reciprocal, real power endpoint-integral and differentiable product / quotient owners. The Marx integration bridge has an FTC law **as a field**, so it cannot be used until concretely inhabited on the same `Real.ℝ` and source derivative.
+2. Prove a same-source finite-mesh quotient modulus strong enough to pass the finite cross-weighted telescope to the endpoint, **or** furnish a concrete Bishop interval integration instance for the finite function `G_N`. Do not identify derivative slopes with positive-step quotients without the modulus.
+3. Kernel-check the original Bishop endpoint inequality above; send the uniform `N -> infinity` convergence through the existing original finite-stage limit uniqueness witness to inhabit `OriginalBishopNegativeLogExponentialGap`.
+4. Do a pinned Agda 2.9 kernel run on the changed module and transitive imports and then the three TOE roots. Static absence of holes/postulates is insufficient.
+
+**Avoid circularity:** the forcing `x^N F_N(x)` alone does not control `E_N'(x)`; the error term in the ODE cannot be dropped. The normalized integrating factor is precisely what cancels it.
+
+## P1: two-point Cayley/atan max-cut
+
+For each `t in {1/5,1/239}`, the required *analytic* identity is
+
+```
+exp_C(2 i atan_B(t)) = (1+i*t)/(1-i*t).
+```
+
+The rational target values are already present: `12/13 + 5i/13` and `28560/28561 + 239i/28561`. The exact remaining Agda work is to prove the original atan-series derivative and original complex exponential chain rule on the same carrier, then prove the derivative of `H(t)=exp_C(2i atan_B(t))*(1-it)/(1+it)` vanishes and `H(0)=1`. This is an alternative to all-degree series convolution but still requires constructive uniqueness/endpoint machinery, and no zero-derivative theorem is claimed here. Consume existing corrected grouped-parity boundary terms rather than reinstating an invalid naive Cauchy convolution. Then inhabit `OriginalAtanFiveCayleyEvaluation` and `OriginalAtan239CayleyEvaluation`.
+
+## P2: above-two zeta same-object maximum cut
+
+After P0, instantiate the original source-native `Re(s)>2` Dirichlet series using existing local convergence / Basel domination. Separately identify it with the **independently selected** `ZetaHalfPlaneLayer.zetaHalfPlane`; do not set an opaque field by fiat. The previously identified opaque-zeta countermodel shows why an arbitrary Set-valued layer does not prove analytic equality.
+
+## Verification cut
+
+| Gate | At this revision | Terminal kernel obligation |
+| --- | --- | --- |
+| P0 | Original finite ODE, initial value, source quotient and cross-weight identity exist; sharpened endpoint target specified | Concrete same-Bishop endpoint estimate and `OriginalBishopNegativeLogExponentialGap` |
+| P1 | Exact rational Cayley values exist | Original analytic two-point atan-to-exp identities |
+| P2 | Above-two convergence infrastructure and conditional construction exist | Actual original Dirichlet instantiation plus independent selected-function equality |
+| P3 (downstream) | Continuity/factor compiler partial | Genuine Gamma/prefactor, analytic continuation and completed-Xi same-object weld |
+
+No new theorem files, kernel check or P0/P1/P2 closure is claimed by this roadmap-only commit.
+
+## 9 November continuation: original finite exponential same-object transport
+
+New source owner `DASHI/Analysis/BishopOriginalNegativeLogFiniteExpCrossWeightTransportExact.agda` (commit `a709f36ab19f8259fd552f81dcde1b7e42af8eaf`), imported by all three canonical TOE roots.
+
+For `F_N` the **actual** pinned original finite exponential and `E_N=F_N-(1-x)`, the new `originalFiniteExpCrossWeightIsOriginalErrorCrossWeight` proves by real-ring cancellation, for all `N,x,h`:
+
+```
+(1-x) F_N(x+h) - (1-x-h) F_N(x)
+    = (1-x) E_N(x+h) - (1-x-h) E_N(x).
+```
+
+`originalFiniteExpCrossWeightIsResidualPlusDefect` then consumes the existing original ODE and division-free error-derivative receipts to establish the same left-hand side equals
+
+```
+h * [ x^N F_N(x) + (1-x)(q_E(N,x,h)-E_N'(x)) ].
+```
+
+This removes the opportunity to substitute a synthetic exponential or an unrelated error function in the next weighted mesh analysis. **It does not prove the source quotient modulus, positive reciprocal endpoint telescope, convergence to `1-x`, or terminal `OriginalBishopNegativeLogExponentialGap`.**
+
+Remaining implementation sequence: (1) source uniform modulus for `q_E(N,x,h)-E_N'(x)` on `0<=x<=r<1` at fixed N; (2) positive Bishop reciprocal weighted finite telescope, preserving the modulus after refinement; (3) derive the integrated `r^(N+1)/((N+1)(1-r)^2)` bound, then source convergence/limit uniqueness; (4) Agda 2.9 transitive imports and TOE root typecheck. P1/P2/P3 still have the exact terminal obligations above.
+
+Verification: source-written Agda and committed imports; no kernel acceptance receipt. No claim of P0–P3 closure.
+
+## Further 9 November implementation: exact multi-cell P0 composition
+
+New owner: `DASHI/Analysis/BishopOriginalNegativeLogCrossWeightCocycleExact.agda`, wired into `EverythingTOESymmetryResolved369`, `Unifier` and `Unified/Everything`. This reuses the original exp/log finite-stage owner and the preceding source-cross-weight module.
+
+Write `w(x)=1-x`, `F_N(x)=exp_B(-L_N(x))`, `D_N(a,b)=w(a)F_N(b)-w(b)F_N(a)`. A source-written ring proof now establishes the *three-vertex weighted cocycle*
+
+```
+w(b) D_N(a,c) = w(a) D_N(b,c) + w(c) D_N(a,b).
+```
+
+The same file proves `D_N(a,b)` equals the original target-error determinant, and refines the cocycle to the two-cell residual identity for `y=x+h`, `z=y+k`:
+
+```
+w(y) D_N(x,z)
+ = w(x)*k*(R_N(y)+w(y)*(q_E(y,k)-E_N'(y)))
+ + w(z)*h*(R_N(x)+w(x)*(q_E(x,h)-E_N'(x))).
+```
+
+**Specific new reduction:** a two-cell normalized cross-weight endpoint is now an exact polynomial combination of *actual original source local residuals and the actual original source quotient defects*, without inserting or assuming an FTC/integral, arbitrary selected function or reciprocal. Repeated finite composition is supported algebraically by this three-vertex law; a general mesh-majorant/positivity theorem is still needed. No bound on the quotient defects was fabricated.
+
+### Remaining terminal proof leaves (unchanged)
+
+- **P0.1**: derive a compact-uniform `q_E(N,x,h)-E_N'(x)` modulus on the original Bishop carrier from the explicit finite polynomial quotient and shifted-factorial exponential series; avoid claiming `h->0` pointwise suffices uniformly.
+- **P0.2**: prove positive weight/reciprocal monotonicity for all mesh vertices `x<=r<1`, then sum the cocycle without losing the quotient remainder.
+- **P0.3**: produce the original Bishop sharp endpoint error and effective common stage cutoff, then use existing `originalNegativeLogTerminalFromFiniteEvaluation`.
+- **P1**: original nested atan-to-complex-exp coefficient evaluation at `1/5`, `1/239` or equivalent constructive ODE uniqueness; rational Cayley evaluations alone are insufficient.
+- **P2**: feed P0 to already-existing `BishopRiemannOriginalZetaAboveTwoExact.FromOriginalNegativeLog` and prove selected external/opaque zeta same-object value equality, not fiat.
+- **P3**: genuine Gamma factor, prefactor, continuation, reflection and completed Xi same-object identification.
+
+**Verification status:** new source declarations and three imports committed, exact branch file readback planned; `agda` executable unavailable in working container. No kernel acceptance or terminal P0/P1/P2/P3 discharge is claimed.
+
+## 9 November: all-finite-mesh induction (P0 next implementation)
+
+Committed original Agda source owner `DASHI/Analysis/BishopOriginalNegativeLogFiniteWeightedMeshRecurrenceExact.agda` (first commit `a591ed24fb65f7a67b57c1cb1960a0c9b395b4f6`). All three TOE root import graphs now consume it. This generalizes the earlier two-cell source cocycle to an **arbitrary finite** walk rather than adding a new selected integrating-factor record.
+
+For `v_n = finiteWalk 0 steps n`, `w_n=1-v_n`, `F_N=exp_B(-L_N)` and `D_N(a,b)=w(a)F_N(b)-w(b)F_N(a)`, define
+
+```
+P_0 = 1; P_(n+1) = P_n * w_(n+1)
+B_0 = D_N(v_0,v_1)
+B_(n+1) = (P_n*w_0)*D_N(v_(n+1),v_(n+2)) + w_(n+2)*B_n.
+```
+
+The new source declarations state the fully quantitative *finite algebraic* endpoint equality
+
+```
+P_n * D_N(v_0,v_(n+1)) = B_n,
+```
+
+then recursively replace every local determinant by its **actual** original source residual-plus-quotient-defect,
+
+```
+D_N(v_j,v_(j+1)) = h_j * [v_j^N * F_N(v_j)
+                          + w_j*(q_E(N,v_j,h_j)-E_N'(v_j))].
+```
+
+The terminal source-level consumer `originalFiniteSourceScaledEndpointIsResidualBudget` unifies these two recursions. No reciprocal, FTC, MVT, positivity premise, or derivative-limit substitution is smuggled into the finite induction.
+
+This resolves the **all-cell algebraic accumulation** subgate, subject to kernel acceptance, but **not** the source quotient modulus. Exact terminal leaves now:
+
+1. **P0.a**: Original same-stage compact-uniform factor-quotient defect estimate from `BishopOriginalNegativeLogFiniteExplicitQuotientExact` (finite LOG polynomial quotient × shifted-factorial exp quotient) with explicit dependence on stage, radius and increment.
+2. **P0.b**: Prove positive `w_j` and quantitative inverse bounds on `0<=v_j<=r<1`; transform the algebraic weighted budget into the normalized endpoint estimate *without losing uniform control as the mesh is refined*. Be attentive to products `P_n` tending to zero: never divide by them without independent conditioning.
+3. **P0.c**: Apply an actual constructive endpoint integration comparison to obtain `0<=E_N(x)<=r^(N+1)/((N+1)*(1-r)^2)` and a common effective convergence cutoff; apply `originalNegativeLogTerminalFromFiniteEvaluation`.
+4. **P1**: Original nested atan-to-complex-exp evaluation at both `1/5` and `1/239`, using already verified finite polynomial and corrected odd/odd Cauchy-owner.
+5. **P2**: Supply the P0 identity to `BishopRiemannOriginalZetaAboveTwoExact.FromOriginalNegativeLog` and prove original selected zeta same-object equality independent of its opaque substrate.
+6. **P3**: Genuine source Gamma, prefactor, continuation and completed-Xi equality.
+
+**Verification**: declaration and import readback, static holes/postulates check, plus exact-head Agda 2.9 test are separate gates. Source-only work may not be marked accepted until an Agda kernel receipt. This commit does not close P0/P1/P2/P3.
+
+## P0.01/P0.03 original-source implementation pass (9 November 2026)
+
+**Implemented source declarations, kernel acceptance still pending:**
+
+- `DASHI/Analysis/BishopOriginalFiniteLogQuotientSecondOrderExact.agda`:
+  `sourcePowerSecondQuotient`, `originalPowerQuotientSecondOrder`,
+  `sourceFiniteLogSecondQuotient`, `originalFiniteLogQuotientSecondOrder`,
+  `originalFiniteLogQuotientAtZeroIsDerivativePolynomial`, and
+  `originalFiniteLogPolynomialQuotientExactDefect`.
+  Last theorem proves for every N,x,h:
+  `q_L,N(x,h) ≃ P_N(x) + h*S_N(x,h)`, where P_N is the actual
+  `negativeLogDerivativePolynomial` and S_N is the explicit source
+  reciprocal-weighted finite polynomial. This is algebraic *factorization*,
+  **not** the requested compact-uniform inequality.
+- `DASHI/Analysis/BishopOriginalFiniteLogExpQuotientDefectSplitExact.agda`:
+  `originalFiniteLogErrorQuotientDefectSplit` states
+  `q_E-d_E ≃ -F_N * [h*S_N*Q(delta) + P_N*(Q(delta)-1)]`,
+  where delta is the actual source negative finite-log increment, Q is
+  `Origin.originalExpOriginQuotient`, F_N is the original bishopExp
+  of the actual finite partial. `originalSourceShiftedFactorialErrorBound`
+  reuses the existing P0.02 majorant
+  `ExpClosed.originalExpQuotientMinusOneAbsBound`, which proves
+  `|Q(delta)-1| <= exp_B(|delta|)-1`.
+- Both new modules imported into `EverythingTOESymmetryResolved369`,
+  `Unifier` and `Unified/Everything`.
+
+**Independent finite regression**: 1,377 exact-rational triples (N,x,h),
+N=0..16, 9x9 rational grid, checked both power/log quotient recurrences,
+the zero-step derivative equality, and the composite-defect algebra for
+two independent rational selections of F,Q (2,754 composite checks).
+The mathematical identity passes; these tests do not replace the Agda kernel.
+
+**New sharpened next inequality target (not yet formalized)**: for
+`0<=x,x+h<=r<1`, the finite polynomial S_N is nonnegative and its
+coefficientwise upper bound satisfies
+
+```
+0 <= S_N(x,h) <= sum_{k=2}^N (k-1)*r^(k-2)/2
+              <= 1/[2*(1-r)^2].
+|q_L,N(x,h)-P_N(x)| <= |h|/[2*(1-r)^2].
+```
+
+This is uniform in N, not merely a fixed-N modulus. A Bishop-order proof
+needs nonnegative finite powers, rational coefficient embedding,
+`T_k <= binomial(k,2) r^(k-2)`, and the geometric derivative-square
+majorant with positive apartness of 1-r. The original shifted-factorial
+bound then controls the remaining `Q(delta)-1` term. No general FTC
+assumption is introduced.
+
+**Still unpaid:** make the above order bound Agda-kernel accepted;
+control `|delta| <= |h|/(1-r)` and exp_B on the source compact;
+combine both in the P0.03 error bound; positivity/conditioning of mesh
+weights; actual normalized endpoint comparison and convergence to 1-x;
+the independently selected original P1 Cayley evaluations, P2 same-object
+zeta value, and P3 Gamma/continuation/xi. Do not mark them closed.
+
+## Further P0 implementation: original positive reciprocals and all-cell normalized endpoint
+
+New source owners (all imported into three canonical TOE roots):
+
+- `DASHI/Analysis/BishopOriginalFiniteMeshPositiveGapExact.agda`
+  provides `originalBishopMeshVertexRatio`, `originalBishopMeshWeightsPositive`,
+  `originalBishopMeshWeightNonzero`,
+  `originalBishopMeshWeightInverse`,
+  `originalBishopMeshWeightInversePositive`,
+  `originalBishopMeshWeightInverseCancels`.
+  Consumes **existing** `BishopFiniteDegreeOneGeometricBoundExact`
+  `BishopUnitIntervalRatio` and native `Inverse.*-inverseˡ`, requiring real
+  supplied evidence that each original vertex lies in `[0,1)`.
+  The **uniform inverse upper bound** for a radius `r<1` is not proved here.
+- `DASHI/Analysis/BishopOriginalNormalizedExpIncrementExact.agda`
+  proves `originalNormalizedFiniteExpCrossIsSourceCross`,
+  `originalNormalizedFiniteExpIncrementIsResidualPlusDefect`,
+  and `originalNormalizedFiniteExpUnweightedIncrement`.
+  Let `G_N(x)=F_N(x)*inv(1-x)`; it establishes the exact *local* equality
+  `G_N(x+h)-G_N(x) = inv(1-x)*inv(1-x-h)*h*(R_N(x)+(1-x)*(q_E-d_E))`.
+- `DASHI/Analysis/BishopOriginalNormalizedFiniteMeshEndpointExact.agda`
+  proves `sourceFiniteSequenceIncrementTelescope`,
+  `originalNormalizedMeshIncrementIsResidualCell`,
+  `originalNormalizedMeshResidualSumIsIncrementSum`,
+  and `originalNormalizedFiniteMeshEndpointIsSourceResidualBudget`.
+  For any finite original walk and a proof-bearing ratio for each vertex,
+  this is the exact endpoint equality
+  ```
+  G_N(v_m)-G_N(v_0)
+    = Σ(j<m) inv(1-v_j)*inv(1-v_(j+1))*h_j*
+        [v_j^N F_N(v_j)+(1-v_j)*(q_E(N,v_j,h_j)-E'_N(v_j))].
+  ```
+  Every quotient and exponential is the *original pinned* one.
+
+This **supersedes the older P_n product-weight algebra as the preferred
+P0 endpoint route**: local inverses are bounded by one common
+`inv(1-r)` when `v_j<=r<1`, whereas a mesh-wide product may
+degenerate under refinement.
+
+**What is and isn't paid:** P0.01 and P0.03 algebraic decompositions,
+P0.04 exact pointwise reciprocal existence/cancellation and P0.05
+finite normalized endpoint transport are newly source-written.
+The following are still real mathematical obligations and *cannot*
+be replaced by the above equalities: construct an actual Bishop-order
+uniform S_N bound (proposed `S_N <= 1/[2(1-r)^2]`), an original
+`|delta| <= |h|/(1-r)` bound, uniform exponential error control,
+the reciprocal antitonicity/radius comparison, passage from finite
+mesh quadrature to the proper endpoint majorant, the sharp stage error
+bound and terminal convergence. P1 original two Machin analytic
+equalities, P2 selected zeta semantics and P3 Gamma/continuation
+remain independent open leaves. No Agda kernel receipt is claimed.
+
+**No document-only gate can be marked an Agda theorem.** Run exact-head
+Agda 2.9 typecheck of each new owner and transitive imports. In
+particular examine native solver goal conversion and proof irrelevance
+of the positive inverse witnesses.
+
+## P0.02 compact-uniform original shifted-factorial bound (further 9 November)
+
+Added `DASHI/Analysis/BishopOriginalShiftedFactorialUniformModulusExact.agda`
+and wired it into all three canonical TOE roots. The theorem
+`originalShiftedFactorialExpQuotientUniformModulus` directly composes
+the already existing source owners
+`ExpClosed.originalExpQuotientMinusOneAbsBound` and
+`ExpMono.bishopExpMonotoneNonnegative`. It gives, with a genuine
+nonnegative Bishop radius rho,
+
+```
+|u| <= rho => |Q(u)-1| <= bishopExp(rho)-1
+```
+
+for the **literal** original shifted-factorial source Q. The
+`originalNegativeLogShiftedFactorialUniformModulus` specialization
+feeds the *actual* finite LOG increment delta as u.
+
+This is a uniform **argument-ball** bound. To produce a full mesh
+modulus as h->0, combine the existing
+`originalSourceNegativeLogDeltaIsSecondOrder` with a genuine original
+Bishop radius estimate `|delta_N(x,h)|<=rho_N(h)`, uniformly over
+the mesh compact. Do not mark P0.03 or terminal P0.06 complete merely
+because P0.02's argument-ball comparison is source-written.
+
+Independent exact-rational finite checks: 14,520 source second-order
+modulus instances (N through 30, four r values, 11x11 endpoint grid)
+and 14 normalized endpoint meshes passed. No Agda 2.9 kernel receipt
+is available. Keep P1/P2/P3 semantic leaves unchanged.
+
+## 2026-11-09 P0.01–P0.03 SOURCE-WRITTEN ANALYTIC MODULUS PASS
+
+The following are **new concrete Agda definitions and proof terms** on the original pinned Bishop real. Each remains subject to Agda 2.9 kernel acceptance; static readback/regression is not such acceptance.
+
+1. `BishopOriginalFiniteLogSecondQuotientPositiveExact.agda`:
+   `originalPowerZeroStepQuotientNonnegative`,
+   `originalPowerSecondQuotientNonnegative`,
+   `originalFiniteLogSecondQuotientNonnegative`,
+   `originalFiniteLogPolynomialQuotientDefectEqualsStep`,
+   `originalFiniteLogPolynomialQuotientDefectNonnegative`.
+   Nonnegative endpoint polynomials and positive-step source secant sign.
+2. `BishopOriginalFiniteLogQuotientUniformModulusExact.agda`:
+   `sourcePowerZeroQuotientMonotone`,
+   `sourcePowerSecondQuotientMonotone`,
+   `sourceFiniteLogSecondQuotientMonotone`,
+   `originalFiniteLogPolynomialQuotientUniformModulus`.
+   **Fixed-stage compact-uniform** original log quotient:
+   ```
+   0<=x,x+h<=r =>
+   |q_L,N(x,h)-P_N(x)| <= |h| S_N(r,0).
+   ```
+   Handles negative h; no division by h. The stronger single
+   N-independent bound `S_N(r,0)<=1/(2(1-r)^2)` remains **not
+   implemented** in original Bishop order.
+3. `BishopOriginalFiniteLogQuotientRadiusDominanceExact.agda`:
+   `sourcePowerQuotientRadiusDominance`,
+   `originalSourceFiniteLogQuotientRadiusDominance`,
+   `originalNegativeLogIncrementAbsoluteIsStepTimesQuotient`,
+   `originalNegativeLogIncrementUniformRadiusBound`,
+   `originalFiniteLogRadiusDerivativeNonnegative`,
+   `originalFiniteLogDerivativeRadiusDominance`,
+   `originalFiniteLogShiftedFactorialStagewiseMeshBound`.
+   Proves on nonnegative source endpoints `|Delta_N(x,h)|<=|h| P_N(r)`
+   and `|Q(Delta_N)-1|<=exp_B(|h|P_N(r))-1`.
+4. Existing `BishopOriginalShiftedFactorialUniformModulusExact.agda`
+   strengthened by `originalShiftedFactorialAbsoluteBelowExpBall`:
+   `|u|<=rho => |Q(u)|<=exp_B(rho)`, reusing original source
+   monotonicity and the previously established
+   `originalShiftedFactorialExpQuotientUniformModulus`.
+5. `BishopOriginalFiniteLogExpQuotientTriangleExact.agda`:
+   `originalFiniteLogErrorQuotientAbsoluteTriangle`,
+   `originalFiniteLogErrorFirstTermRadiusBound`,
+   `originalFiniteLogErrorSecondTermRadiusBound`,
+   `originalFiniteLogErrorQuotientRadiusTriangle`.
+   An actual source absolute-triangle proof for the original composite
+   quotient defect, with no abstract "bound" field.
+6. `BishopOriginalFiniteLogExpStagewiseUniformDefectExact.agda`:
+   `sourceOriginalUniformErrorBudget`,
+   `sourceOriginalUniformErrorBudgetNonnegative`,
+   `originalFiniteLogExpStagewiseUniformDefectWithFactor`,
+   `originalFiniteLogErrorQuotientUniformModulus`.
+   For `N=suc n`, `0<x<=r`, `0<=x+h<=r`, source writes
+   ```
+   |q_E,N(x,h)-E_N'(x)| <=
+      |h| S_N(r,0) exp_B(|h| P_N(r))
+      +P_N(r)[exp_B(|h| P_N(r))-1].
+   ```
+   Stagewise uniform in x and the sign of h. Uses ORIGINAL
+   `F_N(x)>0` and `F_N(x)<1`, not a synthetic exp.
+7. `BishopOriginalFiniteLogExpUniformDefectNullModulusExact.agda`:
+   `originalNullAbsoluteConvergesZero`,
+   `originalNullScaledConvergesZero`,
+   `originalNullExpOfScaledAbsConvergesOne`,
+   `originalNullExpOfScaledAbsMinusOneConvergesZero`,
+   `originalFiniteLogStagewiseUniformBudgetConvergesZero`.
+   Source proof that the displayed common budget tends to zero
+   for **every original null sequence h** at fixed degree/radius,
+   via native Bishop exp continuity and Sequence product/sum laws.
+8. `BishopOriginalNormalizedFiniteMeshEndpointExact.agda` gained
+   `originalNormalizedFiniteMeshEndpointAbsoluteBudget`: actual
+   `|G_N(v_m)-G_N(v_0)|<=sum_j |localOriginalResidualCell_j|`,
+   using finite source `sumFiniteAbsoluteTriangle` without FTC.
+
+All seven new mathematical source modules, the strengthened original
+Q module and normalized endpoint are now imported (directly or
+transitively) by `EverythingTOESymmetryResolved369`, `Unifier`,
+`Unified/Everything`. The exact-rational first/second quotient and
+modulus regression was executed against a matching source recurrence
+for **10,164** cases (four radii, 11x11 endpoints, degrees 0..20);
+all checks passed, including negative h. The script is committed as
+`scripts/check_bishop_original_log_quotient_uniform_modulus.py`.
+This supports the finite algebra only; **not an Agda receipt**.
+
+### Next exact semantic leaves, not mere wrapper work
+
+- `originalBishopMeshInverseDominatedByRadiusInverse`:
+  derive `0<1-r<=1-v_j` and quantitative native Bishop
+  `inv(1-v_j)<=inv(1-r)` for all actual mesh vertices, including
+  proof-relevant inverses, from original order laws.
+- `originalBishopFiniteNormalizedEndpointResidualComparison`:
+  apply original `originalFiniteLogErrorQuotientUniformModulus` to
+  the SOURCE normalized mesh summands and bound the forcing by
+  `v_j^N F_N(v_j)`, maintaining one common modulus for all cells.
+- `originalBishopFinitePowerQuadratureEndpointBound`:
+  bound original finite quadrature of `t^N` by
+  `x^(N+1)/(N+1)`, with a constructive finite-mesh refinement
+  theorem; cannot introduce an uninhabited FTC.
+- `originalFiniteNegativeLogExpUniformEndpointBound` and
+  `originalNegativeLogFiniteEvaluationConvergesToOneMinus`:
+  compose these to yield the existing
+  `OriginalBishopNegativeLogExponentialGap` via original
+  `originalNegativeLogTerminalFromFiniteEvaluation`.
+- Independently, original analytic P1 Cayley nested composition,
+  P2 selected-zeta same-object value identification and P3 original
+  Gamma/continuation/Xi remain genuinely unpaid. Do not mark them
+  closed merely because the conditional compilers exist.
+
+## Verification boundary
+
+The container lacks `agda` and `nix`, and this pass obtained no
+exact-head Agda 2.9 kernel run. Direct GitHub readback and balanced
+source delimiters are **not** kernel acceptance. The new P0.01/P0.03
+declarations are *source-written with concrete proofs*, **not
+confirmed accepted**; check their transitive Agda elaboration before
+claiming a terminal closure.
+
+
+## 2026-11-09 exact-branch reconciliation: source proof versus kernel receipt
+
+The older “Next exact semantic leaves” paragraph above is historical and
+must not be read as the current implementation status. Exact-head readback
+now confirms the following concrete **source-written** declarations:
+
+- `BishopOriginalFiniteNegativeLogExpEndpointBoundExact.originalFiniteNegativeLogExpUniformEndpointBound`:
+  `|exp_B(-L_N(x))-(1-x)| <= inv(1-(x+1)/2)^2 * x^(N+1)/(N+1)`
+  for original proof-bearing `0<=x<1`. The midpoint factor is
+  `4/(1-x)^2`, weaker than the earlier desired compact-radius constant but
+  sufficient for convergence.
+- `BishopOriginalNegativeLogTerminalFromMeshExact.originalNegativeLogFiniteEvaluationConvergesToOneMinus`:
+  consumes the stagewise endpoint bound, native power and reciprocal
+  convergence, and vanishing-difference convergence.
+- `BishopOriginalNegativeLogTerminalFromMeshExact.originalBishopNegativeLogExponentialGap`:
+  feeds the actual source finite evaluation into the pre-existing
+  `originalNegativeLogTerminalFromFiniteEvaluation`.
+- `BishopOriginalZetaAboveTwoFromMeshLogExact.FromOriginalBishopMeshLog.originalAboveTwoZetaFromCompletedLog`:
+  instantiates the original above-two Dirichlet construction with that
+  LOG witness. This is P2.01 only, not selected external zeta equality.
+
+The focused Agda workflow was amended to include these exact terminal
+modules and their endpoint prerequisites as explicit targets; the three
+canonical TOE root checks remain required. Missing `0ℚᵘ` scope imports
+were corrected in the original finite-power quadrature, finite-error
+equal-mesh comparison, normalized endpoint quadrature, and terminal LOG
+source modules. These corrections are **not** proof of kernel acceptance.
+
+### Current decisive cuts (do not re-list the already source-written P0 leaves)
+
+1. **P0-V**: execute the pinned Agda 2.9 `--safe` checker over all
+   changed terminal owners plus transitive imports and three TOE roots;
+   repair actual compiler errors, and store exact-head kernel receipts.
+2. **P1.01–P1.03**: prove a same-original-carrier analytic identity
+   `exp_C(2 i atan_B(t)) = Cayley(t)` on the selected half-ball.
+   The repository already supplies the source atan uniform tail,
+   geometric finite derivative, derivative-limit cancellation,
+   rational Cayley differential polynomial, formal coefficients, and
+   pointwise rational phases. It does **not** yet exhibit the analytic
+   composite coefficient/evaluation or constructive ODE uniqueness
+   across the independently selected original series.
+3. **P1.04–P1.05**: specialize that genuine result to the existing
+   `OriginalAtanFiveCayleyEvaluation` and
+   `OriginalAtan239CayleyEvaluation` targets; the downstream Machin
+   first-zero consumer is already implemented.
+4. **P2.02–P2.04**: re-use
+   `BishopRiemannOriginalNatLogTermCoherenceExact` and
+   `BishopRiemannDirichletBaselSameObjectExact` for termwise and
+   majorant-independent original values. Equality with the separately
+   selected `ZetaHalfPlaneLayer.zetaHalfPlane` remains semantically
+   **underdetermined** by the current opaque interface: see
+   `RiemannOpaqueZetaHalfPlaneCountermodelExact`. Add a real
+   original-Dirichlet identification to the concrete selected
+   implementation, not a free proof field or fiat.
+5. **P3.01–P3.07**: the original Gamma Mellin construction, prefactor,
+   meromorphic continuation, functional equation, factor equality,
+   entireness and reflection are still genuine analytic work. The
+   current Xi continuity compiler is conditional and the existing
+   opaque completed-Xi countermodel rules out semantic closure by
+   interface projection alone.
+
+**Verification status**: GitHub source readback and workflow coverage
+confirmed. No exact-head Agda kernel result, completion of the P1
+analytic composition, independent selected-zeta equality, or P3
+completed-Xi proof is claimed by this reconciliation.
+
+
+## 2026-11-09 P1.01 forced formal coefficient uniqueness (source implementation)
+
+New original carrier owner:
+`DASHI/Foundations/BishopMachinCayleyEquationForcesCoefficientsExact.agda`;
+imported by all three canonical TOE roots.
+
+For any stream `c : Nat → RationalComplex`, define the literal coefficient
+of `(1-iX) c` by `c₀` at degree zero and
+`c_(n+1) - i*c_n` at degree `n+1`. The new proof constructs
+`originalEquationForcesRecurrence`: assuming this coefficient agrees
+at **every degree** with the original finite polynomial `1+iX`
+automatically implies:
+
+```
+c₀ = 1;
+c₁ = 2i;
+c_(n+2) = i*c_(n+1).
+```
+
+Then `originalCayleyEquationCoefficientUnique` invokes the already
+existing original canonical recurrence uniqueness theorem and proves
+
+```
+forall n, c n = BishopMachinOriginalCayleyFormalSeriesExact.cayleyFormalCoefficient n.
+```
+
+This discharges a stronger finite-algebra part of P1.01, removing any
+independent recurrence assumption. The decisive **analytic** part of
+P1.01/P1.02 remains: construct the coefficient stream of the actual
+nested `exp_C(2i atan_B(t))`, show that its analytic composition has
+the original denominator equation (with valid convergence/reindexing),
+and then identify evaluation on the selected half-ball. Only after that
+can the existing `OriginalAtanFiveCayleyEvaluation` and
+`OriginalAtan239CayleyEvaluation` be inhabited. No assertion of
+analytic completion or kernel acceptance is made by the new source.
+
+
+## P1 algebraic expansion and stage-13 provenance boundary
+
+Source owner: `DASHI/Foundations/BishopMachinCayleyFourCycleJanko13BoundaryExact.agda`.
+
+New source-written statements (kernel check intentionally deferred):
+
+- `originalCayleyCoefficientFourPeriod` proves the canonical Cayley
+  rational-complex coefficients have `c_(n+5)=c_(n+1)` for all
+  `n : Nat`; `c0=1` remains the exceptional constant term.
+- `originalCayleyThirteenSameAsOne` and
+  `originalCayleyThirteenIsTwoImaginaryUnits` prove `c13=c1=2i`.
+- `originalEquationForcesFourPeriod` proves that ANY coefficient stream
+  satisfying the previous original `(1-iX)F=1+iX` all-degree equation
+  has that same four-period, by transporting the established unique
+  coefficient identification; no independently supplied recurrence.
+- `originalEquationForcesStage13Phase` specializes to stage 13.
+- The existing `SecondRevolutionJankoTarotExact` supplies the
+  independent exact ordinal charts `J3 -> 13=10+3=9+4`.
+  Those are merely common Nat indices. The group, modular j function,
+  principal modular level, stage carrier, and coefficient stream remain
+  distinct typed objects; `JChartSuccessorBoundary` already
+  enforces distinct chart/modular/representation roles.
+
+This is a stronger finite-algebra slice of **P1.01** and a provenance-safe
+index bridge. It is not `exp_C(2i atan_B(t)) = Cayley(t)`.
+The remaining decisive original-source obligations are (a) derive the
+same all-degree denominator identity from actual nested original
+exp/atan coefficients with the justified Cauchy/reindex theorem, or
+(b) prove a same-source ODE uniqueness theorem with full derivative
+and initial-value transport; then (c) produce genuine convergent
+half-ball evaluation and the two original pointwise witnesses.
+P2 selected-zeta semantic equality and P3 Gamma/continuation/Xi
+remain open independently.
+
+
+## Cross-programme maximum cut: 13-coordinate hyperfabric / puncture
+
+For the exact 12+1 and 9+3+1 fibre decomposition, constructive
+zero-section/last-coordinate complement, globally punctured-origin
+counterexample, canonical prefix-observer non-descent, source commit
+receipts, and independently outstanding Bishop analytic work, see:
+
+`Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`
+
+Implementation owners:
+`DASHI/Foundations/TernaryThirteenFibreSplitExact.agda`,
+`DASHI/Foundations/TernaryThirteenFibrePunctureExact.agda`, and
+`DASHI/Foundations/TernaryThirteenFibreObserverNonDescentExact.agda`.
+
+The new finite-word proofs do not close the original-source
+`centralCompletionIsThirteenTritFibre` equivalence, semantic
+observer/gluing transport, Bishop P1 atan–exponential–Cayley
+same-object identity, independently selected zeta equality or
+Gamma/Xi construction.
+
+
+### 2026-11-09 source-grounded central valuation continuation
+
+The hyperfabric programme now has an original `StageAtlasZeroToEleven`/
+`Base369.TriTruth` valuation-with-centre model, a pointwise
+12-axis / full 13-word bridge, original DASHI consumer non-descent
+and concrete chart-refinement naturality. For exact declarations,
+commit receipts and remaining *original semantic identification*
+and sheaf-gluing obligations, consult:
+
+`Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`
+
+These results do not discharge the Bishop P1 original nested atan-exp
+analytic identity, P2 independently selected zeta or P3 Gamma/Xi.
+
+
+### 2026-11-09: original StageBundleSheaf / hyperfabric puncture gluing
+
+The source-grounded 12-axis central completion now instantiates the
+original `StageValuationBundleAtlas.BundleSheaf` interface:
+`TernaryThirteenCentralCompletionBundleSheafExact` proves genuine
+matching compatibility, construction of glued global sections,
+local restriction equality, puncture predicate transport and an
+explicit incompatible local family. The accompanying
+`TernaryThirteenCentralCompletionSheafNaturalityExact` transports
+matching and gluing through an original stage-axis rechart.
+
+See `Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`
+for source filenames, declarations, commits and strict remaining cut.
+
+The discrete StageAtlas sheaf is **not** independent identification
+of the original intended group/relational completion, a general
+nontrivial Grothendieck covering site, or a proof of Bishop P1/P2/P3.
+
+
+### 2026-11-09: original pants-gluing reuse for central 13
+
+The H2.02 source lane now reuses **the original**
+`TernaryCylinderPantsGeometryExact`,
+`TernaryPantsFrontierExact`,
+`StageValuationBundleAtlas.BundleSheaf`, and
+`ConsumerDescentMinimalObserverExact` instead of introducing
+another pants analogue. Actual `TritWord n ↔ PantsPath n ↔
+SSP369Ultrametric.Address n` inverse laws and source 12+1
+append/refinement are implemented for the finite carriers.
+Compatible original-stage local sections are glued into original
+depth-13 pants paths and pointwise re-restricted. An explicit
+pants-path observer non-descent witness is also implemented.
+
+These results are tracked in
+`Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`.
+Remaining decisive physical/semantic gluing: original edge-stalk
+`InterfaceMatch` and topology mutation, plus nontrivial cover
+selection. No implication for Bishop analytic Cayley P1, canonical
+zeta P2, or Gamma/Xi P3 is inferred from the pants address
+correspondence. Source-written; kernel receipt not requested.
+
+
+### 2026-11-09: original pants seam quotient and nontrivial chart overlap
+
+The current H2.02 implementation now goes beyond the previously
+vacuous typed-hyperfabric seam certificate. New owner
+`DASHI/Reasoning/TypedHyperfabricPantsNonvacuousSeamQuotientExact.agda`
+constructs two actually incident original pants boundary channels,
+merges their edge addresses, and preserves exactly the five fields
+paid by the original `InterfaceMatch` in a new compatible
+`TypedHyperfabric.GlobalSection`. Full channel-label/provenance
+equality is not falsely claimed; both source provenance labels are
+retained at the merged edge.
+
+`DASHI/Foundations/TernaryThirteenTwoChartOverlapGluingExact.agda`
+adds two proper charts of the original 12-axis carrier, with true
+overlap at atlas-6 and independent centre matching. It constructs
+their source valuation/centre glue, proves exact local restrictions,
+provides negative cases for mismatched overlap and centre, and
+transports the glue to original depth-13 pants paths.
+
+These are finite case constructions, not the all-cover theorem for
+an independently selected nontrivial Grothendieck topology. See
+`Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`
+for exact names, commits, and remaining original semantic seams.
+The analytic Bishop P1 atan–Cayley, P2 selected zeta and P3
+Gamma/Xi obligations are unchanged and open.
+
+
+### 2026-11-09: H2.02 quantified seam and arbitrary binary cover
+
+The hyperfabric/pants proof lane now source-writes a parameterized
+two-edge topology quotient for **any two original branch channels
+with an independently supplied complete five-field `InterfaceMatch`**,
+preserving their admitted boundary signature and both nonempty
+incidences. The generic original-axis cover lane now proves
+constructive gluing/restriction for **any decidable two-chart cover**
+with agreement on every overlap and a shared centre, including
+pointwise round-trip recovery and puncture preservation.
+
+Exact owners:
+`DASHI/Reasoning/TypedHyperfabricPantsParametricSeamQuotientExact.agda`;
+`DASHI/Foundations/TernaryThirteenArbitraryBinaryCoverDescentExact.agda`.
+
+These advances do **not** construct an arbitrary-source
+`InterfaceMatch`, a full all-sieve nontrivial Grothendieck site,
+semantic identification of the original world/group completion,
+or the original Bishop analytic P1/P2/P3 theorems. See
+`Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`
+for the maintained exact unpaid cut and commit receipts.
+
+
+### 2026-11-09: reuse already-proved non-discrete pullback/topology
+
+Correcting the previous proof inventory: the original
+`RelationalStageTwelveGrothendieckExtensionExact` already owns
+the seven-object A/B/C category, nonidentity restriction arrows,
+three-chart covering sieve, `pullbackSieve` via the Stage-12 API,
+stability and transitivity. This *pre-existing* topology should
+not have been listed as an unproved construction.
+
+New source work now specializes the original 4+4+4 twelve-axis
+valuation plus independently retained central `TriTruth` to that
+actual triadic cover. It constructs the compatible local triple,
+genuine glue and restrictions, uniqueness, pullback-stability reuse,
+and depth-13 pants transport. A separate indexed
+`Section : RelObj → Set` presheaf has restriction maps on all
+original relational arrows with identity/composition laws.
+
+The original `SectionedProjectionProvenanceBridgeExact` and
+`PredicatePullbackLatticeExact` now implement the same-source
+central projection's observable/predicate pullback,
+representative-based projection ('selected pushforward'), and
+exact fine-state reopening using the residual central trit.
+A representative pushforward is **not** advertised as a
+general categorical direct-image functor.
+
+The only outstanding H2.02 site theorem is **all-covering-sieve
+descent and uniqueness** for the already-built topology; source
+semantic identification and independent world-model consumers
+remain separate. Original Bishop Cayley, zeta and Gamma/Xi
+analytical gates remain OPEN.
+
+See `Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`
+for exact declarations and per-commit receipts.
+
+
+### 2026-11-09 final H2.02 source update: original all-sieve gluing
+
+The original non-discrete A/B/C `RelCover` Grothendieck topology,
+its `pullbackSieve` stability and transitivity were already
+proved by `RelationalStageTwelveGrothendieckExtensionExact`.
+`TernaryThirteenOriginalTriadicPresheafExact` now provides
+the actual object-indexed original restriction functor on all
+`RelHom`; `TernaryThirteenOriginalTriadicAllSieveSheafExact`
+source-writes sieve-indexed proof-independent matching families,
+restrictions of global sections, glue for **both** coverage
+constructors, recovery on every sieve member, and uniqueness
+of the matched global section.
+
+Consequently the H2.02 constructed central-valuation **all-cover
+sheaf condition is source-written**, with kernel acceptance
+unverified (no Agda executable available here). Unpaid
+highest-alpha seams are original independent semantic equality,
+actual world-observer transport, and heterogeneous original
+edge-stalk `InterfaceMatch`/topology rewrite. The separate Bishop
+analytic P1 Cayley, P2 selected zeta and P3 Gamma/Xi proofs
+remain mathematically OPEN.
+
+Detailed receipts:
+`Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`.
+
+
+### 2026-11-09: ITIR original-world consumer transport, paid gate
+
+H2.01 continuation now uses the existing
+`ITIRFederatedTypedWorldProjectionExact.SourceAddressableSemanticNode`
+as its ORIGINAL operational world carrier instead of inventing
+world states. The implemented
+`TernaryThirteenOriginalConsumerRepairAndWorldTransportExact`
+source constructs the canonical original observer-pair repair
+(12-stage projection plus central trit), proves sufficiency,
+strict refinement and necessity of separating its explicit
+non-descent pair. The `OriginalWorldCentralTransport`
+source-admission record requires actual world nodes, a
+source-valuation correspondence and *commuting* selected
+world-observer/world-consumer maps before its conditional
+non-descent and factorization obstruction can be invoked.
+
+No canonical world-node witness has been fabricated. Therefore
+the **world-source admission/identification leaf remains open**,
+even though transport *given payment* is implemented.
+
+See `Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`
+for exact declarations and source receipts. This does not
+discharge original Bishop Cayley P1, independent zeta P2 or
+Gamma/Xi P3.
+
+
+### 2026-11-09 H2.02 selected original heterogeneous pants seam completed in source
+
+A substantive P0 **selected finite relational-pants** instance is now
+source-complete in
+`DASHI/Reasoning/TypedHyperfabricOriginalHeterogeneousPantsSeamExact.agda`.
+
+The before-fabric has genuinely different source edge-stalk
+types: original `BoundaryInterface` on its selected outer edge
+and original `BranchChannel` on its inner edge. The source
+interprets both original values as the actual canonical donor
+channels, proves the donor `outerInnerMatch` is the selected
+`HyperfabricPantsGluing` interface, and merges two nonempty
+incidences into one seam. The after-fabric has a compatible global
+section, both source-to-seam restrictions and edge values
+preserved at the exact five-field match boundary, and the
+concatenation of both original provenance lists.
+
+This pays the selected finite H2.02 source seam, not a full
+world/ITIR heterogeneous fabric or an independently intended
+group completion. **Agda kernel checking remains unperformed.**
+The separate original Bishop analytic P1, zeta P2 and Gamma/Xi
+P3 theorems remain OPEN. Complete proof inventory and receipts
+are in `Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`.
+
+
+### 2026-11-09 H2.02 signature iff match and P1 exact rational Machin points
+
+The original five pants-boundary observables now have a genuinely
+bidirectional source-level theorem:
+`TypedHyperfabricPantsSignatureCompletenessExact` derives the
+ORIGINAL `InterfaceMatch` from complete signature equality
+and reuses the already existing converse. A second owner
+`TypedHyperfabricPantsSourceHeterogeneousTransportExact`
+constructs a typed two-incidence seam for independently typed
+original edge stalks when their signature equality and source
+provenance are actually supplied. Original donor
+`BoundaryInterface` / `BranchChannel` instantiation is included.
+
+The Bishop P1 programme separately advances at the finite arithmetic
+seam. `BishopMachinOriginalCayleyRationalPointAlgebraExact`
+implements direct source Q[i] denominator equations at the
+original 1/5 and 1/239 Machin arguments with exact target
+coordinates (12/13,5/13) and (28560/28561,239/28561).
+This is NOT the original analytic exp(2i atan_B) identity:
+absolute/convergent nested composition and the same-source
+Bishop equality remain open, as do independent zeta/Gamma/Xi.
+
+All new modules are source-written only, NOT kernel checked.
+See `Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`
+for exact names, source receipts and narrowed high-alpha obligations.
+
+
+### 2026-11-10: full rational Gaussian Machin phase and canonical-power prior art
+
+`BishopMachinOriginalCayleyPhaseCompositionExact.agda` now
+source-writes the exact original `Q[i]` phase equation
+`C(1/5)^4 × conjugate(C(1/239)) = i`, with the stronger
+`C(1/5)^4 = i × C(1/239)` and coordinate consequences.
+The original Cayley point owner pays the denominator equations.
+This is strictly finite algebra, not the original Bishop
+`exp_C(2i atan_B)` analytic same-function identity.
+
+**Correction:** `BishopNatEmbeddingPowerExact.natRealPowNat`
+already proves arbitrary canonical natural powers commute with
+the actual `Nat → BishopReal` embedding; the validation module
+already crosschecks it. Do not keep listing P2 canonical powers
+as unpaid. The actual P2 unpaid leaf is independently selected
+analytic Riemann-zeta function equality, its source convergence
+and analytic continuation. P3 Gamma/Xi remains analytically open.
+
+Source changes `866ad95`, `1185469`; golden imports
+`68afac0`, `cab8a39`, `541dcc7`.
+Full proof ledger: `Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`.
+No new Agda kernel receipt.
+
+
+### 2026-11-10 original Machin prior art and H1.01 144→13 obstruction
+
+Audited original source ownership: `BishopMachinArctanConstructionExact`,
+`BishopMachinRationalTangentAlgebraExact`,
+`BishopMachinQuarterAngleBranchExact`,
+`BishopMachinPiRationalWindowExact`,
+`BishopMachinPiArchimedesWindowExact` and
+`BishopRound11MachinSetoidComplexInstanceExact` already own the
+genuine constructed Bishop Machin real, tangent arithmetic,
+branch bounds, numerical window and selected Round11 setoid
+transcendentals. Previous additions of finite Cayley point
+values and phase composition are incremental rational Q[i]
+lemmas, **not an original Machin proof**. The original
+Bishop nested analytic `exp(2i atan)` identification remains
+open at the specified same-source type.
+
+New highest-alpha original semantic source:
+`TernaryThirteenOriginalRelational144NonIdentificationExact`
+proves that the **original** 144-cell ordered relational field
+cannot be recovered from 12 original diagonal trits plus one
+selected (0,1) central relation trit: two original fields have
+identical 13-code and different reverse (1,0) relation value.
+It also builds an explicit 13-parameter selected subcarrier
+inside the original 144-cell field and proves the code map
+has a section but no inverse recovering all 144 source cells.
+
+This materially **corrects H1.01**: full original relational
+semantics cannot be asserted equal to the constructed 12+1
+carrier through the natural source observer. A restricted
+subcarrier or lossy quotient, selected independently with
+its actual relation/group semantics, is the remaining
+identification obligation. H2.01 genuine world nodes, H2.02
+independently selected world-fabric edge proofs, Bishop
+analytic P1, selected zeta P2 and Gamma/Xi P3 stay open.
+Source-level only: kernel certification not asserted.
+
+See `Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`
+for declaration-level receipts.
+
+
+### 2026-11-11 exact 144-cell relation residual reopening: 13 + 131
+
+The original H1.01 semantic audit has now been continued beyond
+non-identification. New
+`TernaryThirteenOriginalRelationResidualReopeningExact.agda`
+constructs a **pointwise exact** normalized product description of
+the actual full original 144 ordered relation cells: the selected
+12 diagonal + one (0,1) observation and an independent 131-cell
+residual with the 13 observed addresses explicitly fixed neutral.
+Both encode/decode directions are source-written over all original
+144 addresses, without funext/postulates. The existing
+`SectionedProjectionProvenanceBridgeExact` is reused to
+characterize which original consumers factor through the
+13-observation alone. The full 13+131 pair suffices for every
+source indexed relation-cell consumer; the reverse (1,0) consumer
+still disproves sufficiency of the coarse 13-code alone.
+
+This pays the **finite original relational residual/reopening
+and indexed-consumer** lemmas, but NOT semantic identity with a
+13-dimensional Monster/group completion, actual ITIR-world
+sources or authoritative world-fabric topology. Bishop P1's
+analytic exp/atan-to-Cayley identity, P2 independently sourced
+analytic zeta and P3 Gamma/Xi remain open. The canonical Nat-power
+and original Machin construction had already been established
+in prior original repository owners.
+
+See `Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`
+for exact declarations and source receipts. New code is
+SOURCE-WRITTEN, not kernel verified.
+
+
+### 2026-11-11: universal relational-consumer factorization and transpose residual necessity
+
+The actual original 144-address relation and its 13+131 normal
+form now have a **quantified consumer factorization**:
+`TernaryThirteenOriginalRelationConsumerUniversalityExact`
+proves that every independently supplied pointwise-extensional
+original relation-field consumer factors through the full 13-code
+plus normalized 131-cell residual, by constructing the original
+`FactorizedRefinement`. All 144 indexed relation-cell consumers
+are special cases. The old non-descent of the (1,0) consumer
+through the coarse 13 alone is retained.
+
+`TernaryThirteenOriginalRelationalTransposeDescentExact`
+adds a concrete original operation test: the source's actual
+ordered-relation transpose puts unobserved (1,0) into observed
+central (0,1), proving **there is no map from the 13-code to
+itself commuting with all original transpositions**.
+Transposition is nevertheless reconstructed exactly at every
+original address by the 13+131 full observer and its existing
+reopening operation. These are semantic-preservation constraints,
+not an assumption that a Monster/group completion has been
+identified.
+
+Finite model regression
+`scripts/check_ternary13_original_relation_residual.py`
+was added and 864 basis/inverse cases plus zero-field
+were independently run successfully (not Agda kernel checking).
+
+P0 independent group/ITIR world admission and full world
+edge-stalk semantics remain open. Bishop original analytic
+exp/atan, independently sourced zeta and Gamma/Xi remain open.
+See `Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`
+for exact source declarations and commits.
+
+
+### 2026-11-11: H1.01 original Heisenberg group 12+centre SAME-CARRIER proof
+
+The independent group source was already available:
+`Monster3BFiniteHeisenbergCentralExtensionExact.Heisenberg6`,
+with a genuine F3 six-translation, six-modulation, one-centre
+carrier and nontrivial cocycle multiplication, supported by
+the separate original associativity/inverse owners. The new
+`TernaryThirteenOriginalHeisenbergGroupCarrierExact`
+source establishes explicit BOTH-WAY 13-word encodings,
+transports the original nonabelian group multiplication and
+noncommuting generator pair, and proves an exact group-side /
+pointwise 12-axis plus exact central-coordinate correspondence
+with the already constructed `SourceCentralCompletionCarrier`.
+This is a SOURCE-WRITTEN **finite group representation** result,
+not a derivation from group-order numerology.
+
+The unpaid H1.01 semantic seam is now more specific:
+independently justify that the *intended relational/appraisal*
+completion selects this original Heisenberg group operation,
+cocycle and observable correspondence; the full 144-cell
+relation field is not the 13-code, and ITIR-world semantic nodes
+are not canonically group elements. Source Monster group/VOA
+action recognition and ITIR-world/heterogeneous edge admission
+remain independent. All new source is **not yet Agda kernel-checked**.
+
+P1 original Bishop analytic exp/atan-Cayley same-function
+identity, P2 independent analytic zeta identification, P3
+Gamma/Xi integral and continuation are unchanged and open.
+See `Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`.
+
+
+### 2026-11-11: independently owned original Heisenberg group to 13 source valuations
+
+H1.01 now has a stronger real-group owner than numerical
+`3^(1+12)` parallels. `Monster3BFiniteHeisenbergCentralExtensionExact`
+already builds the finite `Heisenberg6` carrier, true
+six+six+central group multiplication with cocycle, and
+nontrivial Weyl dual-pair witness; original associativity
+and inverse owners were also already available.
+
+New `TernaryThirteenOriginalHeisenbergGroupCarrierExact`
+constructs both **full** group↔13-word inverse maps,
+transports the existing noncommutative group multiplication,
+identity/inverse and a noncommuting generator pair, and welds
+the group to the selected original
+`SourceCentralCompletionCarrier` (group equality and source
+axis/centre pointwise recovery). The accompanying
+`TernaryThirteenOriginalHeisenbergRelationalImageExact`
+places this actual group and cocycle multiplication inside
+the previously selected 13-parameter image of the ORIGINAL
+144-address relational field, with all-address product
+agreement and selected-image closure.
+
+This pays a nontrivial **FINITE ORIGINAL GROUP SAME-CARRIER**
+source proof, distinct from both the unrestricted original
+144 relation field and intended ITIR/world/Monster group
+representation semantics. Original relational/appraisal
+meaning, world-source observer correspondence and genuine
+heterogeneous world edge admission remain open and cannot
+be inferred from the finite-group isomorphism.
+
+Bishop analytic P1 exp/atan, P2 independent analytic zeta,
+P3 Gamma/Xi remain open. NO new Agda kernel receipt;
+source-written only. Details:
+`Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`.
+
+
+### 2026-11-11: source-owned complete finite Heisenberg group laws on 13 words
+
+`TernaryThirteenOriginalHeisenbergTransportedGroupLawsExact`
+now proves original transported nonabelian group associativity,
+both identity laws, both inverse laws and source generator
+noncommutativity on the genuine `TritWord 13` carrier,
+reusing the already-existing full
+`Monster3BFiniteHeisenbergAssociativityExact` and
+`Monster3BFiniteHeisenbergInverseExact` owners.
+`commutativeSemanticCompletionCannotAgree` proves any
+commutative candidate on these words fails to be the same
+operation as the original Heisenberg group law.
+
+A finite independent mod-3 cocycle check passed basis
+identity/inverse checks and 10,000 seeded associativity
+triples. Source Agda kernel acceptance remains OPEN.
+
+H1.01 thus has complete source-written *finite group
+structure*, but the external semantic decision that the
+original appraisal/ITIR/Monster intended completion is
+this same group, with action/consumer equivariance, remains
+OPEN. The source 144-cell relation field is still larger.
+Bishop P1 original analytic exp/atan, P2 independent zeta
+and P3 Gamma/Xi remain analytically open.
+Details: `Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`.
+
+
+### 2026-11-11 H1.01 original action obstruction: selected transpose collapses Heisenberg centre
+
+The real original `Base369RelationalUpdateKernelExact`
+is asymmetric and context-indexed; its action-equivariance
+and propagation-equivalence evidence is separate from the
+existing finite Heisenberg carrier. This pass does not
+manufacture a source action from cardinality.
+
+`TernaryThirteenOriginalHeisenbergSelectedTransposeObstructionExact`
+uses TWO original distinct `H.central` elements and actual
+`StageTwelveGrothendieckRelationHyperformExact.transposeRelation`,
+through the selected 13-parameter image of the ORIGINAL
+144-cell ordered relation field. Because transpose moves
+selected (0,1) centre into omitted (1,0), the coarse
+13-observation COLLAPSES two different central phases.
+Consequently this selected coarse transpose has no left
+inverse and cannot be an automorphism of the original
+Heisenberg group. A separate finite three-phase/144-address
+regression confirms the exact collision, but Agda kernel
+checking remains outstanding.
+
+The H1.01 remaining gate is independently sourced semantic
+action agreement/equivariance, not additional group-coordinate
+bijections. In particular, original relational transpose
+cannot be promoted to the Heisenberg automorphism; a valid
+observer must retain the original 131 residual cells if
+full original directed relation transport is required.
+H2.01 genuine ITIR world nodes, H2.02 original full-world
+heterogeneous seams and analytic P1–P3 remain open.
+Details: `Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`.
+
+
+### H1.01 2026-11-11 residual recovery of original central phase under relational transpose
+
+The selected relational image of the genuine finite Heisenberg
+group loses its central phase if its original 144-cell transpose
+is observed through only 12 diagonals plus (0,1). That
+particular coarse operation is therefore noninjective, and
+cannot be the same as an invertible Heisenberg action.
+`TernaryThirteenOriginalHeisenbergSelectedTransposeObstructionExact`
+proves the collision and impossibility of any left inverse.
+
+The same source now also proves the **positive repair**:
+after transpose, original central phase survives in directed
+residual cell (1,0), and the previous 13+131 exact
+pointwise decoder reconstructs it (`selectedTransposeResidualAtReverse`,
+`selectedTransposeReopensAtReverse`).
+This is original operation preservation without an invented
+same-object semantic identification. H1.01 independent
+appraisal/Heisenberg action equivariance remains open; H2.01
+ITIR node and H2.02 actual world-fabric matches remain open.
+No Agda kernel receipt.
+
+
+### 2026-11-11: actual nontrivial finite Heisenberg action on source 13+131 relation data
+
+New `TernaryThirteenOriginalHeisenbergResidualActionExact` goes
+beyond an uninhabited relational/appraisal equivariance record:
+the **original** finite Heisenberg cocycle-bearing group
+now left-acts on the exact 13-word/normalized-131-cell
+original relational normal form. Group-action identity,
+composition and inverse are source-written from original
+Heisenberg group laws; all 131 omitted relation cells
+are preserved exactly. The corresponding action on the
+actual original 144 ordered relation cells has exact
+13-code transport and pointwise residual invariance.
+The action is proved nontrivial by an original translation
+generator with an actual distinct state.
+
+Also fixed a real type bug in the prior
+`TernaryThirteenOriginalHeisenbergRelationalImageExact`
+selected-image proof: its first Σ component must be the
+original source 12+centre valuation derived from the
+Heisenberg product, not the raw group element. The fix is
+commit `05dd669`. New original action commits
+`3f147cd`, `9e9ac8d`; root imports
+`ac9d0a4`, `eedb353`, `970b2c4`.
+
+A new reproducible finite model test
+`scripts/check_heisenberg_original_full_residual_action.py`
+passed 20,000 deterministic original-cocycle action trials.
+This is **not** Agda kernel checking.
+
+The decisive independent H1.01 source gap remains actual
+relational/appraisal action selection and equivariance with
+its proper participant, context, provenance and observer
+semantics. H2.01 genuine ITIR nodes, H2.02 actual
+heterogeneous original-world edge source matches and
+analytic Bishop P1, zeta P2 and Gamma/Xi P3 remain OPEN.
+See the Hyperform13 max-cut roadmap for full proof inventory.
+
+
+## 2026-11-12: adversarial audit of attached "P0–P3 all closed" assertion
+
+**Inputs:** user-provided `Pasted text.txt` P0–P3 proposed closure
+(12 November 2026), exact existing source owners on DASHI PR
+[#1408](https://github.com/chboishabba/dashi_agda/pull/1408),
+the separate Bishop/Koenigs PR
+[#1478](https://github.com/chboishabba/dashi_agda/pull/1478),
+and zeta odd-value PR
+[#1497](https://github.com/chboishabba/dashi_agda/pull/1497).
+**Policy:** separate finite mathematical identity, original Bishop
+same-source implementation, actual source-valued analytic theorem,
+pinned local Agda-2.9 kernel acceptance, and independently
+admitted external theorem. No false closure from a paper calculation.
+
+### Exact new Agda contributions (finite source evidence only)
+
+1. `DASHI/Analysis/BishopMachinOppositeCayleyConventionExact.agda`
+   (commit `306234e`): uses existing original
+   `BishopMachinExistingCayleyReuseExact` and actual Q[i]
+   `CayleyDicksonRationalComplexQuaternionExact` carrier.
+   Proves the inverse-convention phases are conjugates of the
+   original ones, their squares and fourth powers transport
+   via actual complex conjugation/product algebra, and
+   `oppositeMachinQuarterIsMinusImaginaryUnit` is EXACTLY
+   `-i`. Original DASHI convention is
+   `C+(t)=(1+it)/(1-it)` and the phase product is `+i`;
+   the attached opposite convention
+   `C-(t)=(1-it)/(1+it)` gives `-i`.
+   Neither finite identity proves
+   `exp_C(±2i atan_B(t)) ≈ C±(t)`.
+
+2. `DASHI/Analysis/RiemannEtaZetaOriginalFinitePairingExact.agda`
+   (commit `f37a4e5`): arbitrary original Q[i] Nat-indexed
+   term family, *all finite cutoffs*, exact even/odd
+   block reindexing and
+   `finiteEtaPlusTwiceEvenIsZeta` /
+   `finiteEtaIsZetaMinusTwiceEven`. Here `term n`
+   denotes the positive-index source term at `n+1`.
+   For every finite N:
+   `eta(2N) + 2 sum_{k<N} term(2k+1) = zeta(2N)`.
+   This is a finite ring theorem, NOT the native analytic
+   `eta=(1-2^(1-s))zeta` limit, and it does not instantiate
+   the Bishop Dirichlet term family without a verified
+   same-carrier embedding and convergence proof.
+
+3. `DASHI/Analysis/RiemannXiSymmetricMellinPolynomialExact.agda`
+   (commit `ac07821`): reuses original
+   `RiemannXiSymmetryExact.ComplexCoordinate` and actual
+   `functionalReflection`. Proves
+   `s(s-1)=(1-s)((1-s)-1)` on original rational-complex
+   coordinates and normalized reflection symmetry of
+   `1/2+[s(s-1)/2]T(s)` CONDITIONAL on an independently
+   supplied reflection-symmetric tail `T`.
+   This is NOT a constructed Euler Gamma integral, Jacobi
+   theta transform, actual completed Xi or entireness proof.
+
+Golden TOE root imports `DASHI/EverythingTOESymmetryResolved369`,
+`DASHI/Unifier`, `DASHI/Unified/Everything` updated in
+commits `e58138b`, `ac8676f`, `a652ebe`.
+New source declarations are **SOURCE-WRITTEN**:
+Agda 2.9 kernel acceptance is **NOT** established in this
+execution environment.
+
+### Reproducible independent arithmetic check AND negative control
+
+`scripts/check_bishop_attached_p0_p3_finite.py`
+(commit `8b77d24`) passed as locally executed exact-fraction
+and exact-integer checks:
+
+- original positive/inverse Cayley products `+i/-i`;
+- **2100** finite Q[i] eta/even/odd all-prefix tests;
+- **100** exact Q[i] Xi prefactor reflection tests;
+- **1240** conservative factorial bounds;
+- decisive counterexample to the attachment's UNSOUND proposed
+  factorial null modulus
+  `max(ceil(2R),ceil(log2(1/epsilon)))`:
+  with `R=10`, `epsilon=1/1000`, `N=20`,
+  `10^20/20! = 610351562500/14849255421 > 1/1000`.
+
+A correct conservative **integer-radius** statement is:
+for `R≥1, L≥0, N=2R²+L`,
+`R^N/N!≤2^-L`, and all subsequent terms decrease by at
+least a factor of `1/2`.
+Proof at anchor `m=2R²`: the upper `R²` factors in
+`m!` are each at least `R²`, so
+`m!≥(R²)^(R²)=R^m`; for `n≥m`, the ratio
+`R/(n+1)≤1/2`. This supplies an honest finite numerical
+modulus donor, **not** an original Bishop-real compact-ball
+limit proof. Prefer existing original Bishop even/odd
+source-owner lemmas in PR #1478 for true native convergence.
+
+### Corrections to the attachment's nine "closed" claims
+
+| P | Attached claim | Actual source/analytic boundary |
+|---|---|---|
+| P0 | `exp(-log x)=1/x` closes K04d | Different from original K04d target `exp_B(-L_B(x))≃1-x`. The actual source-native original K04d terminal theorem already exists as `BishopOriginalNegativeLogTerminalFromMeshExact.originalBishopNegativeLogExponentialGap`. SOURCE-WRITTEN; Agda unverified |
+| P0 | K05 expC product | Already written from actual original signed factorial Cauchy product in `BishopK04dK05NativeProductDischargeExact` and `BishopMachinCayleyNativeProductFirstZeroExact`; source-written, kernel open |
+| P0 | expC factorial series, simple null modulus | PR #1478 `BishopComplexExpFactEqualsNativeExpExact.originalBishopExpFactEqualsNativeExp` already source-written; pasted explicit cutoff FALSE, as proved above; native PR #1478 kernel check open |
+| P1 | rational Machin phase gives analytic atan/Cayley | The original finite rational identity and both sign conventions are now exact, but the two original source-specific `OriginalAtanFiveCayleyEvaluation` and `OriginalAtan239CayleyEvaluation` are explicitly INPUTS in `BishopMachinTwoPointCayleyCompositionExact`. Taking a complex logarithm of `±i` also requires branch and first-zero proof |
+| P1 | Koenigs fixed point and global log constructed | PR #1478 has strong exact rational and ordinary complex local proof plus conditional native Bishop limit transports; source-native principal Log, convergence, selected fixed point, winding/sector and global Kneser still separately open |
+| P2 | eta quotient gives full Re(s)>0 continuation | The finite parity equality is source-written. Analytic eta convergence, same-object zeta identity, continuation and removable singularities at `1-2^(1-s)=0` remain open. **For complex s, this factor vanishes at s=1+2πik/log2 for all integer k**; not only the pole s=1 |
+| P2 | Apéry and external odd-zeta theorem admitted | `AbelZeta.agda` defines rational constants `zeta0`, `zetaMinus1`, but does not construct analytic Abel limits. PR #1497 `ZetaOddValueWitnessTransportExact` is generic and explicitly requires external theorem/admission and equality of actual zeta values; neither ζ(3) nor odd-window irrationality is promoted as DASHI's unconditional source result |
+| P3 | Euler Gamma integral complete | The finite series calculation does not supply original Bishop integral, convergence/analytic continuation, Gamma functional equation or meromorphic function semantics. These remain OPEN |
+| P3 | Xi entire/functional equation complete | Exact `s(s-1)` reflection algebra is paid as above. The **independently original** Jacobi theta modular transformation, Mellin integral, original Gamma/zeta same-function equation, entireness and completed Xi identify remain OPEN |
+
+### Current highest-information action
+
+**P0 verification:** run the pinned **local** Agda 2.9 checker
+at exact PR #1408 head on the three new modules and their
+dependencies, then the separate PR #1478 bishop-exp owner;
+fix every real typecheck failure before claiming acceptance.
+Do NOT promote compilation through GitHub imports alone.
+
+**P1:** solve the *two original analytic atan/Cayley*
+same-object evaluations, using the actual
+`BishopOriginalLogAtanDerivativeLimitValuesExact`,
+`BishopOriginalMachinAtanUniformHalfBallTailExact`,
+`BishopComplexExpFactEqualsNativeExpExact` (separate #1478
+branch) and selected branch/first-zero proofs. The true
+remaining analytic step includes derivative-of-limit
+interchange and solution uniqueness; rational Q[i] arithmetic
+is already paid.
+
+**P2:** prove actual original Bishop Dirichlet/eta
+termwise equality and uniform convergence in the appropriate
+region; continue with zero-set/removable-singularity handling
+rather than dividing across complex zeros.
+Native original zeta value for `Re(s)>2` already exists
+SOURCE-WRITTEN in `BishopRiemannOriginalZetaAboveTwoExact`
+and `BishopOriginalZetaAboveTwoFromMeshLogExact`; no
+external independently selected zeta identification yet.
+
+**P3:** independently supply actual original Euler Gamma
+Mellin domain/continuation, theta modular inversion and
+integral identity, then instantiate `CompletedRiemannZeta`
+with full function/period/entire/symmetry proofs. Polynomial
+reflection does NOT instantiate these source analytic fields.
+
+**Statuses:** three NEW finite algebra/proof transport
+modules SOURCE-WRITTEN; finite Python regression LOCALLY
+EXECUTED; Agda kernel unverified; original analytic P1–P3
+and external theorem admission OPEN. No axiom/postulate,
+silently selected analytic function or fake source receipt.
+
+
+### 2026-11-12 higher-alpha P2: ACTUAL original Bishop Dirichlet eta–zeta finite pairing
+
+After the exact Q[i] finite reindex, the same all-prefix relation is
+now source-written on the **original pinned Bishop real complex carrier**
+itself, not just rational-complex values:
+
+`DASHI/Analysis/BishopOriginalDirichletEtaFinitePairingExact.agda`
+(commit `4074bc2`), imported into all three golden TOE roots
+(commits `2e015b9`, `23bbda4`, `51a6dc6`).
+
+- `_≈C_`: original `RiemannBishopComplexAnalyticCarrierExact`
+  Cartesian complex pair with **Bishop setoid** equality in each
+  original component, no quotient/equality-of-record shortcut.
+- `originalBishopEtaStep` proves the actual 4-input original
+  Bishop real ring-rearrangement on real and imaginary coordinates,
+  using `RealProperties.ℝ-Solver`, no synthetic complex carrier.
+- `originalBishopEtaZetaPairing` proves by induction, for
+  ANY original Bishop complex source term sequence and all N,
+  `eta_(2N)+2*evenPositivePrefix_N ≈C zeta_(2N)`.
+- `OriginalRound11DirichletEta.sourceTerms` is *literally*
+  the same original `bishopDirichletExponentialTerm` from
+  `BishopRiemannOriginalZetaAboveTwoExact`, configured with
+  original `round11MachinTranscendentals` and the original
+  `sourceCanonicalNatLogCandidate`.
+- `OriginalRound11DirichletEta.actualOriginalFiniteEtaZetaPairing`
+  inhabits the finite pairing for that actual native
+  original zeta term family on EVERY complex input s and cutoff N.
+
+**Source-written, kernel not checked.** This materially reduces
+P2's original eta–zeta work to exact Seq.SeriesOf cutoff
+identification, the EVEN term rescaling law
+`(2n)^(-s)=2^(-s)n^(-s)`, actual uniform eta convergence,
+the divisor's complex zeros/removable singularities, and
+the independent original Riemann analytic same-function
+continuation/identification. None is inferred from finite
+ring equality. The Re(s)>2 native zeta value remains separately
+source-written, kernel acceptance unverified.
+
+
+#### Bidirectional native eta finite identity — 2026-11-12
+
+Commit `97280ac` extends the actual original Bishop
+`BishopOriginalDirichletEtaFinitePairingExact` with
+`originalBishopFiniteEvenCancellation` and
+`originalBishopEtaIsZetaMinusTwiceEven`:
+`eta_(2N)(s) ≈C zeta_(2N)(s) - 2*evenPositivePrefix_N(s)`
+at **every original Bishop complex input and finite cutoff**,
+via the selected original real `RP.ℝ-Solver` on both coordinates.
+The original Round11 same-term instance remains
+`OriginalRound11DirichletEta.actualOriginalFiniteEtaZetaPairing`.
+No analytic limit, even-term rescaling or divisor inversion is
+deduced from this bidirectional finite algebra. Kernel pending.
+
+
+#### 2026-11-12 live Bishop #1478 cross-PR exact-head source audit
+
+Live PR [#1478](https://github.com/chboishabba/dashi_agda/pull/1478)
+was checked at head `1a4c1de31280034f6de0995a78ef40a618545ea7`
+(branch `chatgpt/analytic-j-tetration-abel-transport`);
+zeta [#1497](https://github.com/chboishabba/dashi_agda/pull/1497)
+at `1d32eb53593aa636ddb4a9ed74f6629bd335d750`.
+These are separate unmerged, non-kernel-admitted parents.
+
+Newer #1478 `AbelBishopNewtonSourceInhabitationExact`
+now explicitly constructs the selected Bishop Newton limit and
+same-source `expC(p)≈C p` **FROM**
+`OriginalBishopNewtonActualAnalyticSources`, not without it.
+That record's exact independent unpaid fields are:
+
+1. `selectedDiskCertificate` :
+   `OriginalBishopAnalyticNewtonContraction T nz` of the
+   actual original Newton disk and first-step enclosure;
+2. `originalExpContinuousAlongNewton` :
+   original Bishop exp along the literal Newton orbit;
+3. `originalCosContinuousAlongNewton` :
+   configured original Bishop cosine along that orbit;
+4. `originalSinContinuousAlongNewton` :
+   configured original Bishop sine along that orbit.
+
+#1478 also source-writes genuine local log coefficient convergence,
+the shifted quadratic log-series limit and the selected logarithm
+germ remainder weld. This is strong reuse for analytic P1 but
+not the native principal Log with all source evaluations, the
+selected fixed-point source assumptions, a global Kneser
+continuation, or complete modular-period/contour validation.
+In particular, the user-provided `Principal Log Koenigs: Closed`
+claim is NOT supported by this exact-head source.
+
+Cross-branch acceptance remains: run original Agda 2.9 focused
+checker for each PR's complete imports; reconcile actual carrier
+revision and source equality before any cherry-pick/rebase.
+No CI-only or source-description-based completion promotion.
+
+
+**Late exact-head refresh, 2026-11-12:** the independent
+#1478 branch advanced during this audit to
+`11d3c1f976d5b9a84462b5f36fb8c2f089a34e3a`.
+At that refreshed head,
+`AbelBishopNewtonSourceInhabitationExact.agda`
+still has source blob `84933052a3fb070d4728878ff1f3b7a7d02fc32f`
+and requires the selected-disk certificate and three original
+exp/cos/sin orbit-continuity fields.
+`BishopComplexExpFactEqualsNativeExpExact.agda` has
+source blob `904fcc2ee2c022131e81886b0d751ca215bd4a2f`.
+#1497 advanced to `c0bd37c0bb24448f36789d09ec2add104aef08b7`;
+the core generic odd-zeta witness module retains blob
+`116d776e41016f03dda382ab71869994facd7e4f`.
+These refreshed heads are **not merged into #1408**;
+no all-branch Agda kernel receipt is claimed.
+
+
+## 2026-11-12 attached nine-gate maximum-cut continuation: source-native P2/P3 welds and certified eta obstruction
+
+User supplied a second proposed mathematical closure ledger on 12 November
+2026 (P0 negative LOG mesh, complex Cauchy product/factorial modulus; P1
+Machin/Koenigs; P2 eta/odd-zeta; P3 Gamma/Xi). This is a **candidate
+derivation**, not a kernel receipt. The new source-owned implementations
+and invalid claims below are kept separate from earlier finite Q[i] work.
+
+### NEW P2 SAME-OBJECT Bishop prefix→actual SeriesOf/Dirichlet cutoff
+
+Source module `DASHI/Analysis/BishopOriginalEtaZetaEvenCutoffSeriesWeldExact.agda`
+(commits `f1b0c32`, `5ff57d3`):
+
+- `originalBishopPrefixIsNativeSeries` constructs both REAL
+  componentwise setoid equalities between the prior original
+  `Eta.originalBishopPrefix term N` and the actual pinned
+  `Sequence.SeriesOf (re ∘ term) N` and `SeriesOf (im ∘ term) N`.
+- `twoIndexSuccessor` proves **the actual Nat reindex**:
+  `Eta.twice (suc N) ≡ suc (suc (Eta.twice N))`,
+  not assumed by definitional equality.
+- `originalBishopAdditionReassociate` proves the necessary
+  three-argument original Bishop complex addition identity using
+  the pinned `RealProperties.ℝ-Solver` independently in both
+  coordinates.
+- `pairedUnsignedIsOriginalEvenPrefix` proves the ALL-N
+  two-at-a-time unpairing on original Bishop terms.
+- `pairedUnsignedIsOriginalDirichletPartial` identifies the
+  paired eta/zeta proof's original `originalZetaPrefix`
+  with the ACTUAL `BishopRiemannDirichletBaselSameObjectExact.dirichletPartial`
+  at cutoff `Eta.twice N`, not an independent analytic function.
+- `OriginalRound11.actualRound11PairedZetaIsNativeSeries`
+  instantiates the SAME original source negative-log/native-exp
+  Dirichlet term family from the actual Round11 kernel.
+
+This **pays the original finite 2N/Sequence.SeriesOf cutoff weld at
+SOURCE-WRITTEN level**, previously an explicit P2 remaining leaf.
+Agda 2.9 kernel check and dependency elaboration remain UNVERIFIED.
+
+### NEW P3 same-carrier Bishop Xi polynomial/symmetric tail result
+
+`DASHI/Analysis/BishopOriginalXiPolynomialReflectionSameCarrierExact.agda`
+(commit `eb00ac2`):
+
+- `bishopFunctionalReflection` is the actual Bishop Cartesian
+  complex reflection `s↦1-s`;
+- `bishopXiPolynomial` is the original Bishop complex
+  `s(s-1)`, using the same `BC._*C_` carrier;
+- `originalBishopXiPolynomialReflection` proves equality of
+  the **actual Bishop real and imaginary coordinates** under
+  reflection, via original `RP.ℝ-Solver`;
+- `originalBishopNormalizedMellinSymmetry` transports the
+  polynomial symmetry to `1/2+(s(s-1)/2)T(s)` only AFTER
+  source evidence that `T(s)≈C T(1-s)` is provided.
+
+This is not an original theta integral, Gamma construction,
+holomorphic function proof, entireness or actual completed-xi
+same-object identification. Both new modules are imported into
+the three canonical TOE roots (commits `fbc5066`, `0facf7e`,
+`e889aab`).
+
+### Rigorous failure of the attached eta uniform tail claim
+
+`scripts/check_bishop_eta_complex_tail_enclosure.py`
+(commit `5178739`) independently supplies an EXACT-RATIONAL
+counterexample using arctanh log intervals, alternating Machin
+pi intervals, finite rational Taylor phases, and an integral
+bound for the infinite remainder. The independently executed
+certificate passed:
+
+For `s=2+20i`, after `N=4` terms,
+`|eta(s)-eta_prefix_4(s)| > 86/1000 > 2/25 = 2/(N+1)^Re(s)`.
+The finite tail `n=5..100` has computed lower modulus
+`>97/1000`, approximation errors total `<1/1000`,
+and the infinite tail `n>100` has an absolute upper bound
+`<=1/100`. Thus the proposed universal
+`2/(N+1)^sigma` complex bound is mathematically FALSE,
+not an outstanding Agda implementation detail.
+
+The correct Abel-partial-summation **analytic target** for
+`sigma=Re(s)>0` (subject to proving source derivatives and
+uniform termwise convergence) is
+`|eta_tail_N(s)| <= (|s|/sigma)*(N+1)^(-sigma)`;
+uniformity on a compact chart requires source witnesses
+`sigma>=delta>0` and `|s|<=M`, giving
+`(M/delta)*(N+1)^(-delta)`. This statement is not yet
+proved against the ORIGINAL Bishop complex/derivative layer.
+
+The other attached P2 quotient defect remains: for COMPLEX
+`s=1+(2*pi*i*k)/log 2`, all integral `k`,
+`1-2^(1-s)=0`. `k=0` is the genuine zeta pole,
+while nonzero `k` need removable-singularity proofs;
+no indiscriminate source division is allowed.
+
+### Exact remaining true P0–P3 cut (do not promote classical text)
+
+| Priority | Current source status | Exact remaining work |
+|---|---|---|
+| P0 K04d-LOG | `originalBishopNegativeLogExponentialGap` SOURCE-WRITTEN | Agda 2.9 kernel acceptance and original finite-mesh dependency audit; attachment's integral log(1→x) is not the same original geometric-log owner |
+| P0 K05-PRODUCT | Original native exponential Cauchy product SOURCE-WRITTEN | Kernel acceptance and original exp/sin/cos dependency check |
+| P0 factorial exp | PR #1478 original all-degree factorial/native exp SOURCE-WRITTEN | Pinned local Agda kernel acceptance and cross-branch compatibility; its actual even/odd tail owners already exist |
+| P1 Machin | Exact rational +i/-i Cayley and first-zero transports SOURCE-WRITTEN | BOTH original `OriginalAtanFiveCayleyEvaluation`, `OriginalAtan239CayleyEvaluation`, same-source analytic derivative/limit interchange and branch |
+| P1 Koenigs | PR #1478 geometric/analytic skeleton SOURCE-WRITTEN | original selected Newton disk and first-step certificate, original exp/cos/sin orbit continuity, principal Log analytic germ, native holomorphic limit, global Kneser |
+| P2 eta/zeta | NEW original Bishop eta pairing + finite 2N native SeriesOf weld SOURCE-WRITTEN | original `log(2n)=log2+log n`, even-power term law, derivative/Abel-summation compact bound, eta continuation, all divisor zeros/removability, original analytic zeta equality |
+| P2 odd-zeta | PR #1497 conditional external witness transport | independently kernel-audited external source theorem, accurate index scope, exact original Bishop zeta same-value equality and irrationality |
+| P3 Gamma | Original GammaMellinLayer is an uninhabited analytic interface | genuine Bishop improper integral, uniform convergence/holomorphy, recurrence, poles and continuation |
+| P3 Xi | NEW original Bishop polynomial reflection and conditional symmetric-tail transport SOURCE-WRITTEN | native theta Poisson transform, integral convergence, actual Mellin equality, original Gamma/zeta completed-Xi equality, entire/order-one proof and original functional equation |
+
+The attachment's nine "constructively closed" labels are NOT
+kernel acceptance. No original analytic P1–P3 closure is asserted.
+
+**Verification receipts**: exact-rational external arithmetic
+certificate EXECUTED PASS, new Agda sources committed/read back,
+original Agda-2.9 kernel check UNAVAILABLE in this session.
+No CI or fabricated physical/analytic admission used.
+
+
+### 2026-11-12 final source consumer and refreshed PR donor heads
+
+`BishopOriginalEtaZetaEvenCutoffSeriesWeldExact` commit
+`cf6be10` also exports
+`originalEtaAndEvenTermsIsNativeZetaPartial` and
+`OriginalRound11.actualRound11EtaIsNativeZetaAtEvenCutoff`.
+These combine the ORIGINAL native Bishop eta/even pairing
+with its independently established 2N cutoff/SeriesOf
+identification into one **actual Round11 same-term consumer**:
+
+`etaPrefix_(2N)(s) + 2*evenPositivePrefix_N(s)
+  ≈C Dirichlet.dirichletPartial sourceTerms s (2N)`.
+
+This removes all residual abstract finite pairing/cutoff
+assumptions from the original P2 **finite** eta identity.
+The infinite-series convergence, exponential log(2n)
+multiplicative rescaling, nonzero divisor checks, analytic
+same-object zeta, and continuation remain OPEN.
+
+Latest independent donor PR heads observed during this session:
+`#1478 a46944e6dd9ad00008e82bcba9f380afaa47f00d`;
+`#1497 ea9644ee32d6f61e9b79fc873f527f24de1313cc`.
+Neither is merged into #1408 or kernel-verified from this
+session. Their original analytic/generic external admission
+requirements remain independent.
+
+
+## 12 November 2026: source-native P2 even-index scaling bridge
+
+**New implementation (PR #1408; original Bishop complex, not a rational proxy):**
+`DASHI/Analysis/BishopOriginalEtaEvenSourceScaleFiniteWeldExact.agda`
+is imported by the three golden TOE roots. It proves the
+all-cutoff finite scaling and original `Sequence.SeriesOf` result,
+conditional only on the precise original source-term identity
+
+```text
+OriginalDyadicSourceScale term scale
+  = forall k, term (2*k+1) ≈C scale *C term k
+
+originalEvenSourceScaleNativePartial:
+  evenPositivePrefix(term,n) ≈C scale *C originalDirichletPartial(term,n)
+
+originalEtaScaleToNativeZetaEvenCutoff:
+  etaPrefix(term,n) +C (scale *C zetaPartial(term,n)
+                        +C scale *C zetaPartial(term,n))
+    ≈C zetaPartial(term,2*n)
+```
+
+The module explicitly specializes the consumer to
+`Eta.OriginalRound11DirichletEta inputs .sourceTerms`. Its mathematical
+source obligation is **not** an arbitrarily supplied same-value zeta:
+for the actual index convention `term s k = (k+1)^(-s)`, prove
+
+```text
+term s (2*k+1) ≈C exp_C(-s*log_B(2)) *C term s k
+```
+
+from the pinned Bishop natural-log multiplicativity and the actual
+native complex exponential product theorem, with compatible carrier,
+negative-log sign and branch conventions. These two PR donors are
+separate: #1408 owns the original Round11 term, #1478 owns extensive
+Bishop complex factorial/exponential same-value transport. Importing
+one branch does not automatically pay the original source-term identity.
+
+**Independent finite evidence:** `scripts/check_bishop_p2_even_source_scale_exact.py`
+executed locally: **936/936 exact Gaussian-rational finite-prefix cases
+PASS** (cutoffs 0..25), plus a nontrivial altered-term negative control.
+This checks polynomial/setoid algebra only. It is NOT an Agda typecheck,
+does not construct Bishop analytic terms, and is not a kernel receipt.
+
+**Correct classical complex eta-tail theorem (mathematical donor only).**
+For `s = sigma+i*t`, `sigma>0`, and integer `N>=0`, let
+`a_n(s)=(n+1)^(-s)`. Ordinary complex calculus gives
+
+```text
+eta(s) - eta_(2N)(s)
+ = sum_(k=N)^infinity [ (2k+1)^(-s) - (2k+2)^(-s) ]
+ = s * sum_(k=N)^infinity integral_(2k+1)^(2k+2) x^(-s-1) dx.
+```
+
+The disjoint integration intervals are subsets of `[2N+1,infinity)`.
+Consequently,
+
+```text
+|eta(s) - eta_(2N)(s)|
+ <= |s| * integral_(2N+1)^infinity x^(-sigma-1) dx
+ = (|s|/sigma) * (2N+1)^(-sigma).
+```
+
+For a compact parameter set with `sigma>=delta>0` and `|s|<=M`,
+the bound is `(M/delta)*(2N+1)^(-delta)`, so the classical paired
+eta partials converge uniformly on compacta in `Re(s)>0`.
+This repairs the invalid complex-uniform `2/(N+1)^sigma` estimate.
+It still requires a **source-native Bishop** derivative/integral
+or difference-majorant certificate and a Bishop uniform-limit
+holomorphy/continuity owner before promotion into Agda.
+
+**Remaining exact P2 max-cut:** (a) original Round11 dyadic source
+scaling, (b) original Bishop compact-uniform eta modulus,
+(c) native even-source scaling at the limit and eta/zeta identity on
+`Re(s)>1`, (d) divisor zeros
+`s=1+2*pi*i*k/log(2)` including nonzero `k` and their removal,
+(e) selected independently defined analytic zeta identification,
+and (f) local Agda 2.9 typechecking of transitive dependencies.
+No meromorphic continuation or RH/odd-zeta theorem is claimed.

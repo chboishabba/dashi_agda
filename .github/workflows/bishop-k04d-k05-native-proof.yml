@@ -1,0 +1,284 @@
+name: Bishop K04d K05 Agda-2.9 golden proof receipts
+
+on:
+  push:
+    branches:
+      - feat/twin-prime-six-wheel-bounded-gap-reuse-20261028
+    paths:
+      - 'DASHI/Analysis/Bishop*.agda'
+      - 'DASHI/Foundations/BishopFiniteEvenOddCauchyReindexExact.agda'
+      - 'DASHI/Foundations/BishopNegativeLogGeometricSourceConvergenceExact.agda'
+      - 'DASHI/Foundations/BishopNegativeLogExponentialReciprocalFromCancellationExact.agda'
+      - 'DASHI/Foundations/BishopMachinQuarterAngleBranchExact.agda'
+      - 'DASHI/Foundations/BishopMachinRationalGaussianPhaseExact.agda'
+      - 'DASHI/Foundations/BishopMachinExistingCayleyReuseExact.agda'
+      - 'DASHI/Foundations/BishopMachinOriginalCayleyFormalSeriesExact.agda'
+      - 'DASHI/Foundations/BishopLogAtanFiniteDerivativeGeometricExact.agda'
+      - 'DASHI/Foundations/BishopCayleyRationalDifferentialEquationExact.agda'
+      - 'DASHI/Analysis/BishopOriginalNegativeLogFiniteDerivativeExact.agda'
+      - 'DASHI/Analysis/BishopOriginalMachinAtanFiniteDerivativeExact.agda'
+      - 'DASHI/Analysis/BishopOriginalMachinAtanDerivativeGeometricWeldExact.agda'
+      - 'DASHI/Analysis/BishopOriginalExponentialFiniteFactorDerivativeExact.agda'
+      - 'DASHI/Analysis/BishopOriginalLogAtanDerivativeLimitValuesExact.agda'
+      - 'DASHI/Analysis/BishopOriginalLogAtanUniformDerivativeRemainderExact.agda'
+      - 'DASHI/Analysis/BishopOriginalExponentialUniformCompactTailExact.agda'
+      - 'DASHI/Analysis/BishopOriginalExponentialSequentialContinuityExact.agda'
+      - 'DASHI/Analysis/BishopK04dOriginalPolynomialChartTermContinuityExact.agda'
+      - 'DASHI/Analysis/BishopSquareZeroReflectsSetoidZeroExact.agda'
+      - 'DASHI/Analysis/BishopMachinCayleyHalfPhaseToFirstZeroExact.agda'
+      - 'DASHI/Analysis/BishopMachinCayleyNativeProductFirstZeroExact.agda'
+      - 'DASHI/Analysis/BishopMachinTwoPointCayleyCompositionExact.agda'
+      - 'DASHI/Analysis/BishopK04dK05NativeProductDischargeExact.agda'
+      - 'DASHI/Analysis/RiemannOpaqueZetaHalfPlaneCountermodelExact.agda'
+      - 'DASHI/Analysis/BishopFactorDerivativeChainExact.agda'
+      - 'DASHI/Analysis/BishopOriginalNegativeLogUniformCompactTailExact.agda'
+      - 'DASHI/Analysis/BishopOriginalMachinAtanUniformHalfBallTailExact.agda'
+      - 'DASHI/Analysis/BishopOriginalExponentialGlobalDerivativeFromOriginExact.agda'
+      - 'DASHI/Analysis/BishopOriginalExpOriginDividedDifferenceSeriesExact.agda'
+      - 'DASHI/Analysis/BishopOriginalExpOriginDerivativeClosedExact.agda'
+      - 'DASHI/Analysis/BishopRiemannOriginalZetaAboveTwoExact.agda'
+      - 'DASHI/Analysis/BishopRiemannOriginalNatLogTermCoherenceExact.agda'
+      - 'DASHI/Analysis/BishopOriginalNegativeLogExpFiniteStageLimitExact.agda'
+      - 'DASHI/Analysis/BishopOriginalNegativeLogFiniteExpDerivativeResidualExact.agda'
+      - 'DASHI/Analysis/BishopOriginalNegativeLogFiniteExpUniformResidualExact.agda'
+      - 'DASHI/Analysis/BishopOriginalNegativeLogFiniteExpInitialValueExact.agda'
+      - 'DASHI/Analysis/BishopOriginalFactorIncrementFiniteTelescopeExact.agda'
+      - 'DASHI/Analysis/BishopOriginalNegativeLogFiniteExpMeshEndpointExact.agda'
+      - 'DASHI/Analysis/BishopOriginalNegativeLogFiniteErrorDerivativeExact.agda'
+      - 'DASHI/Analysis/BishopOriginalNegativeLogFiniteExplicitQuotientExact.agda'
+      - 'DASHI/Analysis/BishopOriginalNegativeLogCrossWeightedIncrementExact.agda'
+      - 'DASHI/Analysis/BishopOriginalLogAtanDerivativeLimitValuesExact.agda'
+      - 'DASHI/Analysis/BishopK04dNatLogFromOriginalGapExact.agda'
+      - 'DASHI/Analysis/BishopK04dConcreteAboveTwoPolynomialChartExact.agda'
+      - 'DASHI/Analysis/BishopMachinRationalCayleyToOriginalComplexExact.agda'
+      - 'DASHI/Foundations/BishopNegativeLogExpFormalRecurrenceUniquenessExact.agda'
+      - 'DASHI/Analysis/BishopSequentialContinuityRingCompilerExact.agda'
+      - 'DASHI/Analysis/BishopComplexSequentialContinuityAlgebraExact.agda'
+      - 'DASHI/Analysis/BishopOriginalCompletedXiFactorContinuityCompilerExact.agda'
+      - 'scripts/check_bishop_machin_rational_gaussian_phase.py'
+      - 'scripts/check_k05_cayley_formal_coefficients.py'
+      - 'scripts/check_bishop_k04d_k05_nested_source_exp_coefficients.py'
+      - 'scripts/check_k04d_nat_log_gap_rational.py'
+      - 'DASHI/Foundations/BishopRound11SignedFactorialExponentEncodingExact.agda'
+      - 'DASHI/Foundations/BishopGroupedCauchyParityTelescopeExact.agda'
+      - 'DASHI/Foundations/BishopRound11FiniteParityDegreeZeroExact.agda'
+      - 'DASHI/Foundations/BishopUnsignedFactorialCauchyParitySplitExact.agda'
+      - 'DASHI/Foundations/BishopSignTwistedFiniteCauchyCoefficientExact.agda'
+      - 'DASHI/Foundations/BishopRound11SignedFactorialDegreeBinomialExact.agda'
+      - 'scripts/check_k05_symbolic_grouped.py'
+      - 'scripts/check_k04d_negative_log_exp_truncated.py'
+      - 'DASHI/EverythingTOESymmetryResolved369.agda'
+      - 'DASHI/Unifier.agda'
+      - 'DASHI/Unified/Everything.agda'
+      - '.github/workflows/bishop-k04d-k05-native-proof.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bishop-k04d-k05-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  golden-kernel:
+    runs-on: ubuntu-latest
+    timeout-minutes: 125
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Original pinned Bishop, DCHoTT and cubical submodules
+        run: git submodule update --init vendor/bishop DCHoTT-Agda cubical
+
+      - name: Install Nix (the repository pins the Agda-2.9 executable)
+        uses: nix-community/install-nix-action@v31
+
+      - name: Validate canonical Agda parallel checker entrypoint
+        shell: bash
+        run: bash -n scripts/run_agda29_parallel_check.sh
+
+      - name: Resolve the repository-selected experimental stdlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          git clone --filter=blob:none https://github.com/agda/agda-stdlib.git "$GITHUB_WORKSPACE/.agda-stdlib"
+          git -C "$GITHUB_WORKSPACE/.agda-stdlib" fetch --depth=1 origin 008f12c2908479567a3ae3c873f9cf0b8fe5987e
+          git -C "$GITHUB_WORKSPACE/.agda-stdlib" checkout --detach FETCH_HEAD
+          test "$(git -C "$GITHUB_WORKSPACE/.agda-stdlib" rev-parse HEAD)" = 008f12c2908479567a3ae3c873f9cf0b8fe5987e
+          git -C "$GITHUB_WORKSPACE/.agda-stdlib" rev-parse HEAD | tee agda-stdlib-sha.txt
+
+      - name: Independent finite exact bivariate coefficient regression
+        shell: bash
+        run: python3 scripts/check_k05_symbolic_grouped.py --through-degree 48 | tee bishop-k05-symbolic.log
+
+      - name: Exact rational finite canonical negative-log exponential regression
+        shell: bash
+        run: python3 scripts/check_k04d_negative_log_exp_truncated.py --through-degree 32 | tee bishop-k04d-finite-log-exp.log
+
+      - name: Exact Machin Gaussian phase fraction regression
+        shell: bash
+        run: python3 scripts/check_bishop_machin_rational_gaussian_phase.py | tee bishop-machin-rational-gaussian.log
+
+      - name: Exact Cayley rational all-degree recurrence regression
+        shell: bash
+        run: python3 scripts/check_k05_cayley_formal_coefficients.py --through-degree 4095 | tee bishop-cayley-formal-coefficients.log
+
+      - name: Exact original nested log and atan formal exponential coefficient regression
+        shell: bash
+        run: python3 scripts/check_bishop_k04d_k05_nested_source_exp_coefficients.py --through-degree 96 | tee bishop-log-atan-nested-formal.log
+
+      - name: Exact Nat log-gap rational regression
+        shell: bash
+        run: python3 scripts/check_k04d_nat_log_gap_rational.py --through-index 9999 | tee bishop-nat-log-gap-rational.log
+
+      - name: Kernel check all focused K05 and K04d new owners via parallel checker
+        shell: bash
+        run: |
+          set -euo pipefail
+          export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+          export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+          export DASHI_STATUS_DIR="$RUNNER_TEMP/dashi-agda-status"
+          export XDG_CACHE_HOME="$RUNNER_TEMP/xdg-cache"
+          export AGDA_STDLIB_SRC_29="$GITHUB_WORKSPACE/.agda-stdlib/src"
+          export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
+          export AGDA_JOBS=2
+          export DASHI_NO_TMUX=1
+          export AGDA_LOG_PATH="$RUNNER_TEMP/bishop-focused-parallel-check.log"
+          files=(
+            DASHI/Analysis/BishopOneStepLagConvergenceExact.agda
+            DASHI/Analysis/BishopSetoidSqueezeConvergenceExact.agda
+            DASHI/Analysis/BishopMonotoneDoubleSubsequenceLimitExact.agda
+            DASHI/Foundations/BishopFiniteEvenOddCauchyReindexExact.agda
+            DASHI/Foundations/BishopRound11SignedFactorialExponentEncodingExact.agda
+            DASHI/Foundations/BishopGroupedCauchyParityTelescopeExact.agda
+            DASHI/Foundations/BishopRound11FiniteParityDegreeZeroExact.agda
+            DASHI/Foundations/BishopUnsignedFactorialCauchyParitySplitExact.agda
+            DASHI/Foundations/BishopSignTwistedFiniteCauchyCoefficientExact.agda
+            DASHI/Foundations/BishopRound11SignedFactorialDegreeBinomialExact.agda
+            DASHI/Foundations/BishopNegativeLogExpFormalRecurrenceUniquenessExact.agda
+            DASHI/Foundations/BishopMachinRationalGaussianPhaseExact.agda
+            DASHI/Foundations/BishopMachinExistingCayleyReuseExact.agda
+            DASHI/Foundations/BishopMachinOriginalCayleyFormalSeriesExact.agda
+            DASHI/Foundations/BishopLogAtanFiniteDerivativeGeometricExact.agda
+            DASHI/Foundations/BishopCayleyRationalDifferentialEquationExact.agda
+            DASHI/Analysis/BishopOriginalNegativeLogFiniteDerivativeExact.agda
+            DASHI/Analysis/BishopOriginalMachinAtanFiniteDerivativeExact.agda
+            DASHI/Analysis/BishopOriginalMachinAtanDerivativeGeometricWeldExact.agda
+            DASHI/Analysis/BishopOriginalExponentialFiniteFactorDerivativeExact.agda
+            DASHI/Analysis/BishopOriginalLogAtanDerivativeLimitValuesExact.agda
+            DASHI/Analysis/BishopFactorDerivativeChainExact.agda
+            DASHI/Analysis/BishopOriginalNegativeLogUniformCompactTailExact.agda
+            DASHI/Analysis/BishopOriginalMachinAtanUniformHalfBallTailExact.agda
+            DASHI/Analysis/BishopOriginalExponentialGlobalDerivativeFromOriginExact.agda
+            DASHI/Analysis/BishopOriginalExpOriginDividedDifferenceSeriesExact.agda
+            DASHI/Analysis/BishopOriginalExpOriginDerivativeClosedExact.agda
+            DASHI/Analysis/BishopRiemannOriginalZetaAboveTwoExact.agda
+            DASHI/Analysis/BishopRiemannOriginalNatLogTermCoherenceExact.agda
+            DASHI/Analysis/BishopOriginalNegativeLogExpFiniteStageLimitExact.agda
+            DASHI/Analysis/BishopOriginalClippedEqualMeshExact.agda
+            DASHI/Analysis/BishopOriginalClippedMeshDefectRemainderExact.agda
+            DASHI/Analysis/BishopOriginalFinitePowerQuadratureExact.agda
+            DASHI/Analysis/BishopOriginalFiniteNormalizedEndpointQuadratureRemainderExact.agda
+            DASHI/Analysis/BishopOriginalFiniteErrorEqualMeshComparisonExact.agda
+            DASHI/Analysis/BishopOriginalFiniteNegativeLogExpEndpointBoundExact.agda
+            DASHI/Analysis/BishopOriginalNegativeLogTerminalFromMeshExact.agda
+            DASHI/Analysis/BishopOriginalZetaAboveTwoFromMeshLogExact.agda
+            DASHI/Analysis/BishopOriginalNegativeLogFiniteExpDerivativeResidualExact.agda
+            DASHI/Analysis/BishopOriginalNegativeLogFiniteExpUniformResidualExact.agda
+            DASHI/Analysis/BishopOriginalNegativeLogFiniteExpInitialValueExact.agda
+            DASHI/Analysis/BishopOriginalFactorIncrementFiniteTelescopeExact.agda
+            DASHI/Analysis/BishopOriginalNegativeLogFiniteExpMeshEndpointExact.agda
+            DASHI/Analysis/BishopOriginalNegativeLogFiniteErrorDerivativeExact.agda
+            DASHI/Analysis/BishopOriginalNegativeLogFiniteExplicitQuotientExact.agda
+            DASHI/Analysis/BishopOriginalNegativeLogCrossWeightedIncrementExact.agda
+            DASHI/Analysis/BishopOriginalLogAtanUniformDerivativeRemainderExact.agda
+            DASHI/Analysis/BishopOriginalExponentialUniformCompactTailExact.agda
+            DASHI/Analysis/BishopOriginalExponentialSequentialContinuityExact.agda
+            DASHI/Analysis/BishopK04dOriginalPolynomialChartTermContinuityExact.agda
+            DASHI/Analysis/BishopSquareZeroReflectsSetoidZeroExact.agda
+            DASHI/Analysis/BishopMachinCayleyHalfPhaseToFirstZeroExact.agda
+            DASHI/Analysis/BishopMachinCayleyNativeProductFirstZeroExact.agda
+            DASHI/Analysis/BishopMachinTwoPointCayleyCompositionExact.agda
+            DASHI/Analysis/BishopK04dK05NativeProductDischargeExact.agda
+            DASHI/Analysis/RiemannOpaqueZetaHalfPlaneCountermodelExact.agda
+            DASHI/Analysis/BishopK04dNatLogFromOriginalGapExact.agda
+            DASHI/Analysis/BishopK04dConcreteAboveTwoPolynomialChartExact.agda
+            DASHI/Analysis/BishopMachinRationalCayleyToOriginalComplexExact.agda
+            DASHI/Analysis/BishopSequentialContinuityRingCompilerExact.agda
+            DASHI/Analysis/BishopComplexSequentialContinuityAlgebraExact.agda
+            DASHI/Analysis/BishopOriginalCompletedXiFactorContinuityCompilerExact.agda
+            # Terminal and same-object consumer checks: unlike static lemma
+            # discovery, these force Agda to elaborate the actual endpoints.
+            DASHI/Foundations/BishopNegativeLogGeometricSourceConvergenceExact.agda
+            DASHI/Foundations/BishopNegativeLogExponentialReciprocalFromCancellationExact.agda
+            DASHI/Analysis/BishopRound11CanonicalNegativeLogSameObjectExact.agda
+            DASHI/Analysis/BishopRiemannDirichletExponentialTermExact.agda
+            DASHI/Analysis/BishopRiemannDirichletBaselSameObjectExact.agda
+            DASHI/Analysis/BishopRound11ImaginaryProductPythagoreanReuseExact.agda
+            DASHI/Analysis/BishopMachinQuarterPhaseQuadruplicationAlgebraExact.agda
+            DASHI/Foundations/BishopMachinQuarterAngleBranchExact.agda
+            DASHI/Analysis/BishopMachinFirstPositiveSineZeroFromNativePhaseExact.agda
+            DASHI/Analysis/BishopSinePositiveTwoBallFromCubicExact.agda
+            DASHI/Analysis/BishopMachinQuarterStrictSineFromTwoBallExact.agda
+            DASHI/Analysis/BishopMachinPiGlobalSineSignFromTwoBallExact.agda
+            DASHI/Analysis/BishopMachinZetaSequentialContinuityReducerExact.agda
+            DASHI/Analysis/BishopRound11ConcreteAbsoluteSeriesConvergenceExact.agda
+            DASHI/Analysis/BishopGenericCauchyFromAbsoluteTriangleExact.agda
+            DASHI/Analysis/BishopPositiveCauchyTriangleFromAbsoluteSeriesExact.agda
+            DASHI/Analysis/BishopFinitePowerSeriesSequentialContinuityExact.agda
+            DASHI/Analysis/BishopUniformLimitSequentialContinuityExact.agda
+            DASHI/Analysis/BishopDirichletUniformLimitContinuityCompilerExact.agda
+            DASHI/Analysis/BishopOriginalCompletedZetaUniformChartContinuityExact.agda
+            DASHI/Analysis/BishopRound11NativeComplexRectangleExact.agda
+          )
+          printf '%s\n' "${files[@]}" > "$RUNNER_TEMP/bishop-focused-targets.txt"
+          export AGDA_TARGETS_FILE="$RUNNER_TEMP/bishop-focused-targets.txt"
+          bash scripts/run_agda29_parallel_check.sh --safe 2>&1 | tee bishop-focused-kernel.log
+
+      - name: Check three canonical TOE roots via parallel checker
+        if: always()
+        shell: bash
+        run: |
+          set -uo pipefail
+          export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+          export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+          export DASHI_STATUS_DIR="$RUNNER_TEMP/dashi-agda-status"
+          export XDG_CACHE_HOME="$RUNNER_TEMP/xdg-cache"
+          export AGDA_STDLIB_SRC_29="$GITHUB_WORKSPACE/.agda-stdlib/src"
+          export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
+          export AGDA_JOBS=2
+          export DASHI_NO_TMUX=1
+          export AGDA_LOG_PATH="$RUNNER_TEMP/bishop-toe-parallel-check.log"
+          unset AGDA_TARGETS_FILE
+          status=0
+          : > bishop-toe-kernel.log
+          for file in DASHI/EverythingTOESymmetryResolved369.agda DASHI/Unifier.agda DASHI/Unified/Everything.agda; do
+            echo "=== golden TOE ${file} ===" | tee -a bishop-toe-kernel.log
+            timeout 600s bash scripts/run_agda29_parallel_check.sh --safe "${file}" 2>&1 | tee -a bishop-toe-kernel.log
+            rc=${PIPESTATUS[0]}
+            if [[ ${rc} -ne 0 ]]; then
+              echo "FAIL rc=${rc} ${file}" | tee -a bishop-toe-kernel.log
+              status=1
+            else
+              echo "PASS ${file}" | tee -a bishop-toe-kernel.log
+            fi
+          done
+          exit "${status}"
+
+      - name: Preserve exact-head proof receipts and counterexamples
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bishop-k04d-k05-agda29-kernel-receipts
+          path: |
+            bishop-focused-kernel.log
+            bishop-toe-kernel.log
+            agda-stdlib-sha.txt
+            bishop-k05-symbolic.log
+            bishop-k04d-finite-log-exp.log
+            bishop-machin-rational-gaussian.log
+            bishop-cayley-formal-coefficients.log
+            bishop-log-atan-nested-formal.log
+            bishop-nat-log-gap-rational.log

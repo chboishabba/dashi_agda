@@ -22,11 +22,14 @@ module DASHI.Analysis.BishopSetoidComplexExact where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Product.Base using (_×_; _,_; proj₁; proj₂)
 
 import Real as BishopReal
 import RealProperties as BishopP
 
 import DASHI.Foundations.BishopExponentialSeriesConvergenceExact as Exp
+import DASHI.Foundations.BishopExponentialPositiveOrderExact as ExpPositive
+import DASHI.Foundations.BishopExponentialCauchyProductExact as ExpAdd
 import DASHI.Foundations.BishopExponentialSetoidCongruenceExact as ExpCong
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as Elementary
 import DASHI.Foundations.BishopSineCosineSetoidCongruenceExact as TrigCong
@@ -289,3 +292,245 @@ bishopSetoidComplexExponentialLevel = machineChecked
 
 bishopSetoidComplexConfiguredTrigIdentificationLevel : ProofLevel
 bishopSetoidComplexConfiguredTrigIdentificationLevel = conditional
+
+
+------------------------------------------------------------------------
+-- K05: EXACT SAME-OBJECT REDUCTION OF BOTH ROUND11 TRIG ADDITION
+-- LAWS TO ONE PURE-IMAGINARY COMPLEX EXPONENTIAL PRODUCT.
+--
+-- Unlike the generic constructed-real ExpAdd authority, ALL objects
+-- here are the literal pinned Bishop setoid complex, original native
+-- factorial exp, and the configured (signed-factorial) sine/cosine.
+-- This pays the two-way Cartesian normalisation, NOT the still-open
+-- all-x,y source Cauchy product of the imaginary exponential.
+------------------------------------------------------------------------
+
+imaginaryPhase :
+  BishopSetoidComplexTranscendentals → BishopReal.ℝ → BishopComplex
+imaginaryPhase T x =
+  complex
+    (Elementary.bishopCos (dataSet T) x)
+    (Elementary.bishopSin (dataSet T) x)
+
+pureImaginary : BishopReal.ℝ → BishopComplex
+pureImaginary x = complex BishopReal.0ℝ x
+
+imaginaryExponentialIsPhase :
+  (T : BishopSetoidComplexTranscendentals) (x : BishopReal.ℝ) →
+  expC T (pureImaginary x) ≈C imaginaryPhase T x
+imaginaryExponentialIsPhase T x =
+  complex-equivalent
+    (BishopP.≃-trans
+      (BishopP.*-cong ExpPositive.bishopExpZero BishopP.≃-refl)
+      (BishopP.*-identityˡ
+        (Elementary.bishopCos (dataSet T) x)))
+    (BishopP.≃-trans
+      (BishopP.*-cong ExpPositive.bishopExpZero BishopP.≃-refl)
+      (BishopP.*-identityˡ
+        (Elementary.bishopSin (dataSet T) x)))
+
+-- The following predicates are *exact equalities* of the ORIGINAL
+-- Bishop functions. They are not arbitrary Set-valued authority fields.
+BishopSineAdditionAt :
+  BishopSetoidComplexTranscendentals →
+  BishopReal.ℝ → BishopReal.ℝ → Set
+BishopSineAdditionAt T x y =
+  BishopReal._≃_
+    (Elementary.bishopSin (dataSet T)
+      (BishopReal._+_ x y))
+    (BishopReal._+_
+      (BishopReal._*_
+        (Elementary.bishopSin (dataSet T) x)
+        (Elementary.bishopCos (dataSet T) y))
+      (BishopReal._*_
+        (Elementary.bishopCos (dataSet T) x)
+        (Elementary.bishopSin (dataSet T) y)))
+
+BishopCosineAdditionAt :
+  BishopSetoidComplexTranscendentals →
+  BishopReal.ℝ → BishopReal.ℝ → Set
+BishopCosineAdditionAt T x y =
+  BishopReal._≃_
+    (Elementary.bishopCos (dataSet T)
+      (BishopReal._+_ x y))
+    (BishopReal._-_
+      (BishopReal._*_
+        (Elementary.bishopCos (dataSet T) x)
+        (Elementary.bishopCos (dataSet T) y))
+      (BishopReal._*_
+        (Elementary.bishopSin (dataSet T) x)
+        (Elementary.bishopSin (dataSet T) y)))
+
+imaginaryPhaseProductFromAddition :
+  (T : BishopSetoidComplexTranscendentals)
+  (x y : BishopReal.ℝ) →
+  BishopSineAdditionAt T x y →
+  BishopCosineAdditionAt T x y →
+  imaginaryPhase T (BishopReal._+_ x y)
+    ≈C (imaginaryPhase T x *C imaginaryPhase T y)
+imaginaryPhaseProductFromAddition T x y sineAddition cosineAddition =
+  complex-equivalent
+    cosineAddition
+    (BishopP.≃-trans
+      sineAddition
+      (BishopP.+-comm
+        (BishopReal._*_
+          (Elementary.bishopSin (dataSet T) x)
+          (Elementary.bishopCos (dataSet T) y))
+        (BishopReal._*_
+          (Elementary.bishopCos (dataSet T) x)
+          (Elementary.bishopSin (dataSet T) y))))
+
+imaginaryPhaseProductGivesSineAddition :
+  (T : BishopSetoidComplexTranscendentals)
+  (x y : BishopReal.ℝ) →
+  imaginaryPhase T (BishopReal._+_ x y)
+    ≈C (imaginaryPhase T x *C imaginaryPhase T y) →
+  BishopSineAdditionAt T x y
+imaginaryPhaseProductGivesSineAddition T x y product =
+  BishopP.≃-trans
+    (imEquivalent product)
+    (BishopP.+-comm
+      (BishopReal._*_
+        (Elementary.bishopCos (dataSet T) x)
+        (Elementary.bishopSin (dataSet T) y))
+      (BishopReal._*_
+        (Elementary.bishopSin (dataSet T) x)
+        (Elementary.bishopCos (dataSet T) y)))
+
+imaginaryPhaseProductGivesCosineAddition :
+  (T : BishopSetoidComplexTranscendentals)
+  (x y : BishopReal.ℝ) →
+  imaginaryPhase T (BishopReal._+_ x y)
+    ≈C (imaginaryPhase T x *C imaginaryPhase T y) →
+  BishopCosineAdditionAt T x y
+imaginaryPhaseProductGivesCosineAddition T x y product =
+  reEquivalent product
+
+-- Exact core interchange: ONE original complex exponential equation
+-- is equivalent to BOTH original sine/cosine addition equations.
+imaginaryExponentialProductFromAddition :
+  (T : BishopSetoidComplexTranscendentals)
+  (x y : BishopReal.ℝ) →
+  BishopSineAdditionAt T x y →
+  BishopCosineAdditionAt T x y →
+  expC T (pureImaginary (BishopReal._+_ x y))
+    ≈C (expC T (pureImaginary x) *C expC T (pureImaginary y))
+imaginaryExponentialProductFromAddition T x y sineAddition cosineAddition =
+  ≈C-trans
+    (imaginaryExponentialIsPhase T (BishopReal._+_ x y))
+    (≈C-trans
+      (imaginaryPhaseProductFromAddition
+        T x y sineAddition cosineAddition)
+      (mulCongruent
+        (≈C-sym (imaginaryExponentialIsPhase T x))
+        (≈C-sym (imaginaryExponentialIsPhase T y))))
+
+imaginaryExponentialProductGivesPhaseProduct :
+  (T : BishopSetoidComplexTranscendentals)
+  (x y : BishopReal.ℝ) →
+  expC T (pureImaginary (BishopReal._+_ x y))
+    ≈C (expC T (pureImaginary x) *C expC T (pureImaginary y)) →
+  imaginaryPhase T (BishopReal._+_ x y)
+    ≈C (imaginaryPhase T x *C imaginaryPhase T y)
+imaginaryExponentialProductGivesPhaseProduct T x y product =
+  ≈C-trans
+    (≈C-sym (imaginaryExponentialIsPhase T (BishopReal._+_ x y)))
+    (≈C-trans
+      product
+      (mulCongruent
+        (imaginaryExponentialIsPhase T x)
+        (imaginaryExponentialIsPhase T y)))
+
+imaginaryExponentialProductGivesAddition :
+  (T : BishopSetoidComplexTranscendentals)
+  (x y : BishopReal.ℝ) →
+  expC T (pureImaginary (BishopReal._+_ x y))
+    ≈C (expC T (pureImaginary x) *C expC T (pureImaginary y)) →
+  BishopSineAdditionAt T x y
+    × BishopCosineAdditionAt T x y
+imaginaryExponentialProductGivesAddition T x y product =
+  imaginaryPhaseProductGivesSineAddition T x y
+    (imaginaryExponentialProductGivesPhaseProduct T x y product)
+  ,
+  imaginaryPhaseProductGivesCosineAddition T x y
+    (imaginaryExponentialProductGivesPhaseProduct T x y product)
+
+
+------------------------------------------------------------------------
+-- K05/K04d: THE FULL ORIGINAL BISHOP COMPLEX EXPONENTIAL PRODUCT
+-- IS A PURE CARTESIAN CONSEQUENCE OF ITS ALREADY-PROVED REAL
+-- CAUCHY PRODUCT AND THE TWO STILL-REQUIRED NATIVE TRIG LAWS.
+--
+-- This is a SAME-OBJECT theorem on the pinned BishopComplex carrier
+-- and original Round11 factorial series. It does NOT assume a
+-- generic constructed-real complex character or trigonometric
+-- identity record. It also does not claim to prove the missing
+-- pure-imaginary Cauchy multiplication identity.
+------------------------------------------------------------------------
+
+expCAddFromRealAndTrigAddition :
+  (T : BishopSetoidComplexTranscendentals) →
+  (x y a b : BishopReal.ℝ) →
+  BishopSineAdditionAt T y b →
+  BishopCosineAdditionAt T y b →
+  expC T ((complex x y) +C (complex a b))
+    ≈C (expC T (complex x y) *C expC T (complex a b))
+expCAddFromRealAndTrigAddition
+    T x y a b sineAdd cosineAdd =
+  complex-equivalent
+    (BishopP.≃-trans
+      (BishopP.*-cong
+        (ExpAdd.bishopExpAdd x a)
+        cosineAdd)
+      (let open BishopP.ℝ-Solver
+       in solve 6
+         (λ ex ea cy sy cb sb →
+           (ex ⊗ ea) ⊗ ((cy ⊗ cb) ⊖ (sy ⊗ sb))
+           ⊜ ((ex ⊗ cy) ⊗ (ea ⊗ cb))
+             ⊖ ((ex ⊗ sy) ⊗ (ea ⊗ sb)))
+         BishopP.≃-refl
+         (Exp.bishopExp x)
+         (Exp.bishopExp a)
+         (Elementary.bishopCos (dataSet T) y)
+         (Elementary.bishopSin (dataSet T) y)
+         (Elementary.bishopCos (dataSet T) b)
+         (Elementary.bishopSin (dataSet T) b)))
+    (BishopP.≃-trans
+      (BishopP.*-cong
+        (ExpAdd.bishopExpAdd x a)
+        sineAdd)
+      (let open BishopP.ℝ-Solver
+       in solve 6
+         (λ ex ea cy sy cb sb →
+           (ex ⊗ ea) ⊗ ((sy ⊗ cb) ⊕ (cy ⊗ sb))
+           ⊜ ((ex ⊗ cy) ⊗ (ea ⊗ sb))
+             ⊕ ((ex ⊗ sy) ⊗ (ea ⊗ cb)))
+         BishopP.≃-refl
+         (Exp.bishopExp x)
+         (Exp.bishopExp a)
+         (Elementary.bishopCos (dataSet T) y)
+         (Elementary.bishopSin (dataSet T) y)
+         (Elementary.bishopCos (dataSet T) b)
+         (Elementary.bishopSin (dataSet T) b)))
+
+-- Consequently only ONE remaining PURE-IMAGINARY exponential
+-- multiplicativity equation, on ALL Bishop real pairs, is needed
+-- to establish expC(z+w)=expC(z)expC(w) on the entire ORIGINAL
+-- Bishop Cartesian complex and thereby transport to K04d.
+expCAddFromImaginaryMultiplicativity :
+  (T : BishopSetoidComplexTranscendentals) →
+  ((y b : BishopReal.ℝ) →
+    expC T (pureImaginary (BishopReal._+_ y b))
+      ≈C (expC T (pureImaginary y) *C
+           expC T (pureImaginary b))) →
+  (z w : BishopComplex) →
+  expC T (z +C w) ≈C (expC T z *C expC T w)
+expCAddFromImaginaryMultiplicativity
+    T imaginaryProduct (complex x y) (complex a b) =
+  let
+    laws = imaginaryExponentialProductGivesAddition
+      T y b (imaginaryProduct y b)
+  in
+  expCAddFromRealAndTrigAddition
+    T x y a b (proj₁ laws) (proj₂ laws)

@@ -621,38 +621,270 @@ monitor surface.
   `walkObjectExtendMemberByVertices` in
   `DASHI/Physics/YangMills/GraphCombinatorics.agda`.
 
+## 2026-10-30 — twin-prime CT11-to-M15 exact support bridge (PR #1408)
 
-## 2026-10-30 — PR #1407 source-identical finite Fourier 729-product Fubini (kernel pending)
+- Added `DASHI.Arithmetic.TwinPrimeMangoldtProperPowerCandidateCoverageExact`: real support -> computed duplicate-free power image, nonzero residual endpoint inclusion and exact zero-if-outside theorem, using prior owners.
+- Constructed the numeric base ≥2 bridge from the original certified Chebyshev Nat-prime carrier; rejected any assumption that abstract `toNat` alone implies primality.
+- Imported through `DASHI/EverythingTOESymmetryResolved369.agda`, `DASHI/Unifier.agda` and `DASHI/Unified/Everything.agda`; updated roadmap, paper and TODO; committed a finite overcount/support adversary regression.
+- Checked actual Agda/Lean and recent PR sources, not just PR descriptions; original authors and semantic admission gates retained, no ESD modifications.
+- **Evidence boundary:** source-written and independent numeric oracle only. Agda/Lean kernel closure, complete ordered scalar, CT13–CT14 error asymptotic and CT15 positivity remain unproved. CI not run.
 
-- Directly audited actual `dashi_agda` C3/C4/C5 Fourier, 27/729 pair/orbit, original coefficient-polymorphic convolution, Yang–Mills Fubini and NS rank/permutation code; directly read `dashi_lean4` NS semantic contract and zero-padding adversary. Checked new PR #1437/#1438 Agda owner files and #1433 NS boundary.
-- Added **source-written** C4/Q(i) and C5/Q(ζ5) ring algebra laws plus finite source-group character-addition lemmas; original C3 Fourier source correctly flags that diagonalization is **not** already the group-convolution theorem.
-- Added `FiniteSumAlgebra` and generic finite-sum add, scale, swap, append, map, concat-map and 27×27→729 pair-product expansion to **existing** `R2P227729BilinearCyclotomicPadCutExact.agda` instead of duplicating the original indexed operator. Instantiated over both scalar carriers and exposed named theorem candidates in all three TOE roots.
-- Independently checked the original Agda C4/C5 scalar-group tables (64 and 125 cases, zero mismatch); local exact `Fraction` verified 8 Gaussian and 64 fifth-cyclotomic ring basis triples and five distinct dense 729-pair inputs per carrier. Extended existing Python diagnostics in place, without claiming an exact-checkout run.
-- Updated `.planning/ROADMAP.md`, `TODO.md` and paper §5j. **Agda kernel was not run and CI was neither changed nor run**; source-written proofs are not certified. Remaining C4/C5 3D sampled↔indexed identities, NS physical R440/R736/B4, original external forced C/D attribution, R2P2 calibration and Ibrahim Monster 3B same-object evidence remain strictly separate.
+## 2026-10-30 — CT13 finite error-position image envelope (#1408 continuation)
+
+- Reused the CT11 candidate image and generic Nat-list deduplicator to source-write two-position-per-value coverage, exact envelope length, zero duplicate positions, and a bound `2*floorSquareRoot(U)*floorBinaryExponent(U)` for the numeric covering set.
+- Connected certified nonzero retained Mangoldt errors to this set; no candidate image is mistaken for certified primality or a signed-correlation theorem.
+- Independent local exact-number test covered 1,998,997 shifted positions across U=4..2000 with zero support misses. Updated the committed regression; exact checkout execution unavailable. Kernel typechecking, ordered real weight bounds and CT15 remain open.
+
+## 2026-10-30 — CT15 frontier parity attempt and observer-sensitive exact M16 route
+
+- Extended original proper-power 25/27 no-go Agda owner with the true prime 103 versus odd squarefree composite 105=3×5×7 counterexample to promotion of negative Möbius signs into true twin pairs, using original certified Nat-primality/factorisation.
+- Committed exact finite signed-parity / cube-roughness diagnostic; an independently executed equivalent Python oracle passed five dyadic windows, X=10,000..1,000,000, showing at X=1M: 26,607 negative sign partners = 6,702 twins + 19,905 odd squarefree composites.
+- Extended original M16 Mangoldt finite witness module with exact `S!=E` and observed-separation lemmas and a conditional cofinal observer→twin infinitude composition. The missing cofinal separation is NOT asserted or proved.
+- Reused existing Core.pow2 and in-repo Data.Nat.Logarithm precedent; added standard library floor-log₂ bound, source equality with custom cutoff, and duplicate-safe stdlib-log rectangle coverage.
+- Updated research proof matrix, paper and TODO. No ESD paths touched, no CI. Agda/Lean compilers unavailable, all new Agda theorem source remains kernel pending; no twin-prime infinitude or parity breakthrough is claimed.
+
+## 2026-10-30 — universal cube-roughness arithmetic and canonical CT11→M15 images
+
+- Added `TwinPrimeOddCompositeCubeRoughCutExact.agda`, safe-source universal three-factor threshold cube lower bound and contradiction to cube-roughness. Wired into original certified 103/105 odd-squarefree counterfeit and all three TOE roots.
+- Transported original computed binary cutoff and candidate/deduplicated power lists to equal standard-library `⌊log₂⌋` counterparts, yielding a source-written exact M15 position-cover envelope `2*floorSquareRoot(U)*⌊log₂U⌋`.
+- Real Möbius shifted-prime contamination asymptotics, strict ordinary-real Mangoldt scalar and cofinal correlation separation remain mathematical research obligations. No Agda/Lean compiler receipt, no CI, no ESD changes; independent historical owners/PR authorship and Ibrahim/Monster 3B/QID distinctions retained.
+
+## 2026-10-30 — FRACTRAN catches 59/329; source-level Pickover residual repair + actual Mangoldt window fibre
+
+- Added `DASHI/Arithmetic/TwinPrimeFractranResidualHyperfabricExact.agda`. Uses inherited SSP lane primes 7/47/59 with explicit 59 and 329 factor witnesses; adds literal first-applicable [1/7,1/47] operational step 329→47, with 59 locally stuck. Does not conflate Conway's prime-generating 14-fraction program with this mini-rack or the repo's five-lane FractranCOL.
+- Inhabited inherited exact `CoarseFineReopening Nat`, `ConsumerIndexedResidualRefinement.ResidualRepair`, Pickover sin-9999 `SignedPhaseFibre` for the *actual* twin consumer. Original 59/329 collision proves the residual must separate them. Reuses exact `NatPeriod270` inverse, not a duplicate quotient.
+- Proved in source exact actual Mangoldt pointwise consumer reopening and any finite-window pair-correlation BIDI through this fibre, followed by original prime-only / proper-power error sum split. Full FRACTRAN machine readout correctness and cofinal CT15 estimate remain explicit, uninhabited/missing premises.
+- Linked via all 3 canonical TOE roots, added finite exact Python diagnostic. No ESD edits, no CI, no kernel test; historical Conway/Brun/Hardy–Littlewood and original Ibrahim/Pareto/Snowball/QID ownership preserved.
+
+## 2026-10-30 — cofinal fixed-FRACTRAN-rack no-go from original factorable sieve owner
+
+- Source-wrote the exact certified-modulus survivor ↔ paired two-register FRACTRAN blocked-prefix equivalence using the original FRACDASH first-applicable contract and CertifiedPrimePairModulusExact.
+- Reused existing `FiniteTwinSieveFactorableLiftExact` unbounded double-composite construction to prove source-level `cofinallyBlockedCompositePrimePairs` for any finite rack with a surviving seed. It rules out global prime classification from any fixed finite divisor rack, not from a genuine unbounded FRACTRAN computation.
+- Source-wrote Pickover's original `signedFibreStrictlyRefinesSector` specialized to the twin-consumer period fibre. Exact finite tests passed locally; Agda/Lean kernel pending, no ESD changes or CI.
+
+## 2026-10-30 — FRACTRAN fixed-prefix terminal classifier no-go
+
+- Extended the actual twin-prime FRACTRAN hyperfabric owner with ordered `329→47→1` trace and proof of 1 terminality; independent local Python check passed.
+- Proved in source `noFixedFractranPrefixCanCertifyEveryTwin` from the original cofinally blocked composite-pair construction; explicitly conditional on an inhabited surviving seed. Maintains distinction between fixed finite denominator prefix, general FRACTRAN machine and genuine unbounded prime-pair analytic theorem.
+- Golden source typecheck pending; no CI, no ESD edits, provenance unchanged.
+
+## 2026-10-30 — CT15 graph/wave hyperfabric discriminator from recent graph PR
+
+- Crosswalked actual PR #1438 asymmetric weighted matrix and C3 hyperfabric with existing true Mangoldt finite prime/error split and the new FRACTRAN fixed-prefix counterexample. The graph owner now proves a consumer-specific C3 symmetrization information-loss theorem, preventing promotion from spectral graph symmetry to prime-only cofinal positivity without a signed residual and independent analytic estimate.
+- Checked contemporaneous Oct 2026 external research: recent AI-assisted dilation-spectral parity limitation preprint is a scoped method claim, not solved twins; arXiv:2006.04547 author withdrew claimed twin-prime proof ('Lemma 2 is false'). Preserved original mathematics and independent Ibrahim/Pareto/Snowball/QID attribution, without importing unmerged graph code or editing ESD. No CI; Agda kernel remains pending.
+
+## 2026-10-31 — actual Mangoldt proper-power error support estimate
+
+- Checked original `finiteMangoldtPrimeErrorSplit` against real-valued standard \(\Lambda\), deriving explicit elementary \(E(Y)\le2\lfloor\sqrt Y\rfloor\lfloor\log_2 Y\rfloor(\log Y)^2\). The generic abstract Weil scalar does **not** get this order structure for free. Added deterministic exact prime-power support checker and independently enumerated Y=100..100000. This leaves an honest, now sharply isolated missing positive shifted-correlation main-term estimate \(S(Y)\gg Y\); it is open, not proven from symmetry. No ESD modifications or CI.
+
+## 2026-10-31 — sharpen actual prime-power error bound, clarify record boundary
+
+- Replaced the unnecessary (\lfloor\log_2Y\rfloor\lfloor\sqrt Y\rfloor) count with (B(Y)=(\lfloor\sqrt Y\rfloor-1)+\max(\lfloor\log_2Y\rfloor-2,0)(\lfloor Y^{1/3}\rfloor-1)), establishing the classical standard-Mangoldt estimate (E(Y)\le2B(Y)(\log Y)^2=O(\sqrt Y\log^2 Y)). Updated original exact support regression to compute integer cube roots. This is a routine quantitative refinement, NOT a new twin-prime breakthrough or claimed world record; true (S(Y)\gg Y) remains open. Agda abstract scalar has no asserted real order/log bounds. 
+
+## 2026-10-31 — SOTA prime-gap semantic bidirectional bridge
+
+- Inspected actual `TwinPrimeSixWheelExact`, its exact `BoundedPrimePair` record and CT18 actual Mangoldt total/error separator. Added `TwinPrimeSOTABoundedGapBidiExact.agda`: two-way exact-gap-two proof transport and cofinal-family equivalence through a *retained shift equality* rather than treating a 186/246 bound as twin primes. Three TOE roots now import the bridge.
+- Grounded source ledger in GPY, Zhang, Maynard/Tao, Polymath8b (unconditional 246), Axiom Math Lean 246 blueprint, OpenAI PrimeGaps186 (three explicit conditional inputs) and Chen prime/almost-prime result, with original author/AI/repository attribution and no promotion of conditional, almost-prime or finite model claims to gap two. Kernel typecheck pending; no ESD edits or CI.
+
+## 2026-10-31 — exact cofinal certified twin count-jump BIDI and terminal register (PR #1408)
+
+- Extended original `TwinPrimeConditionalUnboundedFromCountJumpsExact` with `certifiedCountJumpsFromTwinInfinitude`, `twinInfinitudeGivesUnboundedCertifiedCountJumps` and the full `certifiedCountJumpInfinitudeBidi` record. The reverse direction uses actual certified twin witnesses at cutoff N+2, handles 0/1 by absurd lower-bound patterns, and reuses the original count-jump theorem.
+- Extended `TwinPrimeStrongWeakMaxCutBidiExact` with two-way cofinal finite-window/count-jump adapters; all three canonical TOE roots import it. No new primality decision procedure or arithmetic axiom.
+- Reconciled T13/M16 (semantic equivalence source-written) against CT15/T10 (still open unbounded prime-specific correlation) in the six-direction and exact remaining-lemma roadmaps and TODO. Recorded the prior sharper `E(X)=O(√X log²X)` classical mathematical envelope, which still needs ordered-real Agda transport.
+- **Evidence:** GitHub source written and readback, **no Agda kernel verification, no CI, no terminal analytic solution claimed**. Original Brun/Hardy–Littlewood, earlier DASHI authors and Ibrahim Monster 3B priority retained; ESD untouched.
+
+## 2026-10-31 — K04 Bishop root reuse, arbitrary finite-time fibre closure and syntax repair
+
+- Inspected genuine `BishopMachinArctanConstructionExact` and `BishopRound11MachinSetoidComplexInstanceExact`: both arctangent series already converge on a genuine Bishop real, and `bishopMachinPi` already exists. Also inspected original tangent, π branch/window and Lean semantic receipt. Corrected K04 roadmap not to rebuild the original real.
+- Added `stageIndexAfter`, `readoutStableAcrossFiniteSteps`, `consumerStableAcrossFiniteSteps`, `primeCountStableAcrossFiniteSteps` in the original zeta/fibre square; they compose the supplied retained-Nat equality over any finite number of stages. This is finite consumer agreement only, no analytic `ζ` convergence.
+- Fixed malformed constructor type syntax in `QuadraticIrrationalSignedApproximationFibreExact` for sqrt(3)/2 and golden-ratio defects, preserving the original 3-direction classification.
+- Updated K04a–d / K05 exact outstanding mathematical/source/kernel gates. **Source-written only; no Agda compiler, no CI, no external Lean proof promotion.** ESD unchanged; source authorship retained.
+
+## 2026-10-31 — actual Bishop Machin finite signed stage (K04a source cut)
+
+- Added `DASHI.Analysis.BishopMachinSignedFiniteHistoryExact`. Its actual Bishop `SeriesOf` stage uses original Machin 1/5 and 1/239 signed terms, 16/4 weights, and proves stagewise signed difference using previously owned `BishopFiniteSeriesDifferenceExact.finiteSeriesDifference`; no generic carrier or duplicate sum library.
+- Imported into all three TOE roots and updated roadmap/TODO. Quantitative rational-q_n embedding, Bishop combined convergence, classical trigonometric π, meromorphic ζ continuation and all three terminal RH/TP/Pickover gates remain open. **Only source-written, no Agda kernel/CI claim.** Original Machin/Bishop/Murray, repository and independent Lean proof ownership unchanged, ESD untouched.
+
+## 2026-11-01 — K04a–d / K05 direct Machin-Bishop, prime-factor and zeta max-cut (PR #1408)
+
+- Wrote `DASHI.Analysis.BishopMachinRationalStageEmbeddingExact` as an actual `ℚᵘ` Machin partial-sum history with signed powers, original Bishop real termwise/rational embedding and all-index finite partial-sum setoid equivalence, then transported previously proved concrete series convergence to the ACTUAL `bishopMachinPi`. Continued `BishopMachinSignedFiniteHistoryExact` using native Bishop limit arithmetic; no alternate real carrier/convergence postulate.
+- Wrote `BishopMachinPrimeFactorStageExact` using original Hecke/Agda stdlib certified all-prime factorization, zero case, signed numerator and exact reconstruction; wrote `BishopMachinSSP15PrimeDictionarySplitExact` using the original 15 prime labels, exact signed dictionary/residual product and primality certificates. Explicit out-of-dictionary q1 factors 317 and 239 retained.
+- Wrote `BishopMachinZetaRegularHalfPlaneExact` with actual constructed Bishop complex sequence/limit, actual original completed-zeta consumer and conditional original half-plane Dirichlet agreement; continuity/implemented zeta not invented from `Meromorphic`.
+- Wrote `BishopMachinConfiguredTrigPiExact`: actual Round11 complex pi is definitionally original Bishop Machin pi, is 4× original quarter angle up to Bishop `≃`, with configured sine and cosine consumers. Independent trig/geometric pi identity in Agda remains K05b.
+- Strengthened exact-rational `check_machin_fractran_cauchy_history.py` n=0 and universal geometric-envelope algebra, finite Cauchy and q1 non-SSP residual tests; these remain executable bounded receipts, not Agda kernel proof.
+- Imported new K04/K05 owners through all three canonical TOE roots; roadmap/TODO synchronized. **All new Agda source is written/committed but NOT kernel typechecked; no CI; quantitative Bishop remainder, analytic zeta continuity and classical trig pi semantic theorem remain explicitly OPEN.** Previous authorship, independently authored Lean source and ESD import-only protected.
+
+## 2026-11-01 — K04b2 real Bishop alternating remainder narrowed to rational majorant
+
+- Added `BishopMachinQuantitativeOmittedTailExact.agda` using ORIGINAL positive-half-ball arctangent interlacing and first-omitted signed Bishop tail theorems for both actual Machin arguments. Source-proved even/odd partial difference `≤` first omitted term, not merely floating/exact-rational sampled tests. Imported into all three TOE roots.
+- Remaining numeric conversion: identify each omitted magnitude with embedded rational odd-power quotient and combine/transport the all-n `4/25^n` envelope into Bishop real order. Source written, **Agda kernel not run**; zeta uniform convergence and true trig-π characterization also remain open.
+
+- Continued K04b2: `BishopMachinQuantitativeOmittedTailExact` now source-identifies the native Bishop omitted magnitudes with the original rational inverse-odd/exponent expression via existing nonnegative-power and rational-embedding theorems. Remaining direct mathematical work is signed 16/4 tail combination, all-n rational geometric majorant and kernel verification; no CI.
+
+- K04c3 source follow-on: zero-sensitive indexed raw-factor `factorisationZeroOrProduct`, and stage-wise numerator/denominator magnitude reconstruction through dictionary and residual product witnesses. Original signed numerator retained; full rational codec inverse and kernel verification remain open.
+
+## 2026-11-01 — second K04/K05 mathematical max-cut (PR #1408)
+
+- Source-added `BishopMachinCombinedRemainderBoundExact.agda`: from source-owned Bishop alternating arctan tail brackets, actual Bishop 16/4 Machin Pi, signed partial series, finite rational embedding and source real absolute triangle, derived explicit first-omitted total error for both parities and an all-Nat parity closure.
+- Source-added `BishopMachinGeometricEnvelopeNatExact.agda`: exact induction `25^n≤57121^n` and `3824·57121^n+20·25^n≤(2n+1)·4780·57121^n`. This is the full all-n positive cross-multiplied arithmetic comparison for e_n≤4/25^n; rational/Bishop order transport still needed.
+- Source-added `BishopMachinEventualHalfPlaneExact.agda`: actual convergent Bishop rational Machin stages eventually >3 by original source 3<pi_M and Bishop epsilon extraction. Analytic zeta domain remains a distinct opaque predicate.
+- Replaced invalid strict-equal rational endpoint arguments in `BishopMachinQuarterAngleBranchExact.agda` with correct strict positive 1/4 multiplication of original 3<pi_M<22/7 and rational setoid equality.
+- Source-added `BishopMachinQuarterPhaseQuadruplicationAlgebraExact.agda`: Bishop fourfold sine/cosine polynomials yield 0/−1 from unit/equal quarter-phase; explicit conditional real-series transfer to actual Round11 sine/cosine at original Machin pi.
+- Imported owners through all three canonical TOE roots, synchronized exact lemma register, cross-repo audit and TODO. Separate local Python Fraction checks passed n=0..100 with Cauchy finite windows; no golden Agda typecheck, no CI. K04b rational bound transfer, actual K04d zeta continuity, unconditional K05 trig/geometry remain OPEN; provenance and source-written vs kernel-verified boundaries preserved.
+
+## 2026-11-01 — third K04b/K04d max-cut: actual Bishop base-25 geometric modulus and Cauchy source
+
+- Created `BishopMachinGeometricBishopRateExact.agda`. Derived on the original Bishop carrier source arctangent square contraction at inputs 1/5 and 1/239 with common 1/25 factor, true all-index geometric magnitude majorants, original Machin 16/4 weighted coefficient, stdlib exact-rational comparison `16/5+4/239≤4`, source Bishop `|pi_M−⋆q_n|≤4(1/25)^n`, and two-index `|⋆q_j−⋆q_k|≤8(1/25)^n` for n≤j,k. Corrected qualified rational imports and preexisting malformed Bishop absolute-value syntax. Source-written Agda, not kernel checked.
+- Strengthened `BishopMachinZetaRegularHalfPlaneExact` by a genuine eventual Re(q_n)>1 theorem and conditional original-completed-zeta/Dirichlet equality for the actual q_n stage points. Original analytic substrate domain remains abstract; genuine zeta continuity is NOT established.
+- Extended exact-rational regression (64 stages, 475 cutoff pairs); code readback and source signature inspections only, no Agda or CI. Connected new owner to three canonical TOE roots; root/provenance/remaining-lemma register/TODO synchronized. K05 unproved same-Bishop-carrier trig/quarter algebra/period uniqueness, K04d uniform n^(-s) continuity and T10/R10/P10 terminal gates remain OPEN.
+
+## 2026-11-01 — fourth K04d/K05 source-owner max-cut (PR #1408)
+
+- Added `BishopMachinZetaSequentialContinuityReducerExact.agda`: actually proves generic Bishop epsilon-delta continuous-image sequential convergence using pinned `Sequence.fast-ε-from-convergence`/native `con*`, and specializes to real and imaginary components of the ORIGINAL `CompletedRiemannZeta.zeta` on the ACTUAL Machin rational history/limit. The missing true analytic continuity/Dirichlet exp-log realization remains explicit.
+- Added `BishopMachinQuarterSharedTrigWeldBidiExact.agda`: consumes EXISTING `BishopRound11ClassicalTrigObjectWeldExact.compileRound11Pythagorean`, deriving native quarter Pythagorean and plugging it into the source-written 4× Machin phase endpoint, with the shared same-classical/Bishop object evidence explicit. No source-backed DLMF theorem is silently promoted to a proved same-object local theorem; quarter tangent/addition and π uniqueness remain open.
+- Updated three canonical TOE roots and K04/K05 exact remaining register, six-direction roadmap, cross-repo audit, TODO. Independently executed local exact Fraction checks of 64 stages/475 cutoff pairs. All new Agda is **source-written only, no compiler or CI**, with original mathematical authors, independent repository proof owners, and original ESD import-only protected.
 
 
-### 2026-10-30 — PR #1407 sampled Fourier phase-sum intermediate proof (kernel pending)
-- Extended original coefficient-polymorphic Fubini algebra with `productShuffle4/productShuffleSix` and concrete scalar multiplication-associativity/commutativity laws. Added actual Q(i) C4 and Q(ζ5) C5 character-weighted `Original27UnscaledSynthesisAt`/ `Original729PhaseContribution` and `SourceSampledProductExpands729` in existing operator owners, with typed projections into all three TOE roots.
-- Independently executed exact arithmetic checks on full 64/125 sample sets, each involving the original 729 input-pair phases, and extended existing regression scripts. Pinned repository checkout/Agda/Lean kernels and CI not run.
-- Remains open: actual padded tensor FFT-to-source character identification, normalized forward orthogonality collapse, sampled/index equality, native physical NS/analytic B4, R2P2 data and separate Ibrahim Monster 3B same-object evidence. No ESD or CI modifications in this tranche.
+### 2026-11-02 — K04b/K04d/K05 shared commuting square on existing PR #1408
+
+- Extended `BishopMachinQuarterPhaseQuadruplicationAlgebraExact` with a **single uniform original Round11 double-angle law** and genuinely derived fourfold sine/cosine identities using actual same-series setoid congruence and polynomial transport. The uniform law itself remains an explicit analytic premise.
+- Extended `BishopMachinQuarterSharedTrigWeldBidiExact` to reuse the original shared Pythagorean classical/Bishop weld and the new double-angle reducer. No fresh period or trig source assumptions were silently installed.
+- Added `BishopMachinQuantitativeZetaCommutingSquareExact`: original rational q_n, signed finite Bishop history, true complex real-axis points, 4/25^n error, 8/25^n two-index Cauchy estimate, original completed/half-plane zeta agreement at eligible stages and limit, and coordinatewise zeta convergence from an explicit analytic-continuity gate.
+- Attached new analytic square to all three canonical TOE root import graphs; updated lemma register, cross-repo provenance, and TODO.
+- **Verification/provenance:** source-written Agda, not kernel verified, no CI run. Nat denominator realization, real analytic Dirichlet-series construction, exact K05 double-angle/quarter/unique-π proofs, T10/R10/P10 remain open.
 
 
-### 2026-10-30 — PR #1407 exact C4/C5 normalized resolution extraction boundary (kernel pending)
-- Reused the ORIGINAL `R2P227729BilinearCyclotomicPadCutExact` with generic `finiteFourierExtractionFromOriginal729GivenResolution`. Its sole premise is the explicitly required normalized character-resolution identity; proof terms use inherited finite sum swap, scale, membership case split, not hidden postulates.
-- Extended existing C4/C5 operators with actual normalized character phase, original 64/125 Nyquist sample lists, source selected-pair kernels, and resolution-hypothesis-bearing `SourceSampledEqualsIndexedGivenResolution`. Projected these correctly conditional theorems in TOE, Unifier, Unified.Everything.
-- Independently checked full actual source-order finite characters: C4 4096 group comparisons/19683 original pair-targets and C5 15625 group comparisons/91125 original pair-targets, pure exact arithmetic. A preliminary 1D-vs-3D N/N³ diagnostic was fixed before complete passing run. Added source-order checks to existing universal Python certificate. Exact checkout Python suite and Agda/Lean kernels NOT run.
-- Remaining independent golden kernel obligations: actual normalized 3D character resolution, sample-array FFT/source character equivalence, final C4/C5 sampled→indexed, physical NS R440/R736/B4/real time, clock calibration, original Ibrahim Monster 3B; no ESD/CI modifications.
+### 2026-11-02 — reuse the in-repo Dirichlet/Basel continuum
+
+- Found/reused `BishopBaselReciprocalSquareConvergenceExact`, `BishopNatRealReciprocalSquareBaselExact`, `EllipticDirichletBaselMajorantExact`, `BishopExponentialCauchyProductExact` and original finite Euler/Dirichlet owners.
+- Created `BishopRiemannDirichletBaselSameObjectExact`: original Bishop-complex finite Dirichlet sums, real/imag comparisons to the actual Basel majorant, genuine Bishop coordinatewise series limits, a concrete integer-two Basel fibre, and explicit original half-plane same-object equality transport to completed ζ. No false generic Dirichlet continuity inferred.
+- Extended `BishopMachinQuantitativeZetaCommutingSquareExact` with direct original ζ-to-summed-Dirichlet claims at the actual Machin stages/limit. Added imports to all three TOE roots and updated exact K04d-TERM/UNIFORM/SAME obligations.
+- Attribution retained (Riemann, Dirichlet, Bishop/Bridges, Murray, original in-repo authors). Source-written candidates; pinned Agda kernel/CI not run. The real log/exp n^(−s), locally uniform tail, true analytic same-object and K05/R10/T10/P10 terminals are not proved.
 
 
-### 2026-10-30 — exact spectral primary sources and `--safe` admission boundary
-- Verified historical Orszag (1971 J. Atmos. Sci.), Patterson/Orszag (1971 Phys. Fluids) and Orszag (1971 Galerkin spectral) primary-source authorship; kept finite method inheritance, branch-owned Agda proof terms and executed exact checks separate.
-- Source-audited original `Core.Prelude`, observer incidence and new C4/C5/bilinear modules: `{-# OPTIONS --safe #-}` is not declared in these files. Static hole/postulate scans do not certify safe mode. Recorded transitive `--safe` import closure and exact-head Agda checking as mandatory before golden certification; no ESD change and no CI run.
-- Made C4 four-point source rational normalization explicit with `normalize 4 1`.
+- Strengthened the K04d Basel fibre from a convergence citation into an actual original-term majorant instance and native uniqueness-of-limits proof identifying the compiled sum with the original Bishop Basel limit and zero imaginary part (source-written only).
 
 
-## 2026-10-30 — original Nyquist 3D character to true 729 integer convolution (kernel pending)
+- Reused original `BishopSetoidComplexExact.expC` in the Riemann analytic Bishop carrier through exact source-written pair inverse/arithmetic/exp-congruence bridges; no duplicate complex exp implementation.
+- Defined original Bishop complex `exp(−s log(n+1))` Dirichlet-term family with provable real/imag component identities and Basel-majorant convergence reuse. Constructed an actual logarithm candidate with original convergent Bishop `−log(1−x)` series at rational x=n/(n+1), retaining membership/exp-log laws as open proofs.
+- Distinguished unproved legacy postulate-backed `RealElementaryFunctionsCanonicalInstanceExact` and generic constructed-real inverse-log owners from the genuine Bishop real completion. All new proofs are source-written pending Agda golden acceptance; zeta, RH, twin prime and Pickover terminals are not promoted.
 
-- Audited actual Agda source, the dashi_lean4 NS source, latest PR #1441 governance/#1440 YM/#1438 trialectics/#1437 max-cut; QID/Ibrahim same-object guards already in the existing Pareto snowball owner.
-- Reused existing C4/C5 cyclotomic scalars and original Nyquist axes. Source-wrote 16/25 exact normalized 1-axis character equality cases; generic triple Cartesian sum/Fubini and source Boolean multiplication; exact three-factor scale/conjugate normalizations; and three-axis C4/C5 delta on original 64/125 point lists. C5 source integer-label equivalence uses 25 explicit group/wide equality cases and the original `wideFiveRoundTrip` proof.
-- Replaced abstract character-resolution payment with source-written `gaussianActualCharacterResolutionPaid` and `cyclotomicFiveActualCharacterResolutionPaid`. Source-written unconditional `SourceSampledEqualsIndexed` theorems and original `trueInteger` 729-pair convolution transport are reachable from three TOE roots; the term `SourceSampled` denotes finite **character sums**, not the actual padded tensor FFT.
-- Independently executed exact tests: 16/25 one-axis roots and 19,683/91,125 original pair→target selector comparisons passed. Exact branch Agda/Lean kernel, `--safe` closure, CI and pinned checkout testing were not run. No protected ESD changes; original R440/R736/B4, real-time physical NS, clock measurements, Ibrahim historical dump and Monster same-object promotion remain open.
+
+- Specialized the Machin actual completed-zeta square directly to original Bishop exp/negative-log constructed Dirichlet terms, preserving exact real+imag coordinate equality and explicit original analytic agreement gates.
+
+
+## 2026-11-03 — Bishop K04d/K05 exact source reuse and conditional 2π period
+
+- Added `DASHI/Analysis/BishopMachinTwoPiPeriodFromImaginaryProductExact.agda`: from existing source-native `Round11ImaginaryExpMultiplicative` and actual Machin quarter `cos_B ≃ sin_B`, derive sine and cosine period `2 * bishopMachinPi` via two π-shifts, trig setoid congruence, reassociation and double negation. No new axioms.
+- Attached new source owner to `EverythingTOESymmetryResolved369.agda`, `Unifier.agda`, and `Unified/Everything.agda`.
+- Added exact theorem-owner audit `Docs/roadmaps/BishopK04dK05SourceNativeMaxCut20261103.md`; synchronized canonical remaining-lemma register and TODO.
+- **Evidence:** source-written and GitHub-committed, not Agda-kernel-checked. Full completion is still blocked by the canonical native exp/log inverse at Nat successors, mixed signed-factorial imaginary exponential Cauchy product, real finite-term/limit zeta continuity with original same-object identification, and independent trigonometric π characterization. The previously separated Pythagorean proof is a *consumer* of the mixed product, not a third gate.
+
+Additional K05 source theorem outputs: `round11SineAtTwoPi` and `round11CosineAtTwoPi` transport the existing Round11 origin values through the new period. They remain conditional and kernel-pending.
+
+
+## 2026-11-03 — Bishop K04d/K05 source-native and cross-prover continuation
+
+- Golden Agda `BishopNegativeLogExponentialReciprocalFromCancellationExact.agda`: original convergent Bishop negative-log value plus preexisting true exp Cauchy and actual inverse-uniqueness reduce LOG to `exp_B(-L(x)) ≃ 1-x`. Source reduction, **not** a proved native inverse.
+- Golden Agda `BishopMachinFirstPositiveSineZeroFromNativePhaseExact.agda`: original Machin pi positive via rational window; native first sine zero compiler consumes the existing one K05 imaginary product, quarter equality and new precise interval sine-sign obligation. Does not claim these assumptions inhabited.
+- Three TOE root imports updated for both owners; no ESD changes.
+- Open draft Lean PR [#104](https://github.com/chboishabba/dashi_lean4/pull/104) contains source-faithful native-log, imaginary-product/quarter, genuine Riemann zeta/continuity Lean companion proofs and focused source-level checks. Prior Lean PR #24 is merged/closed, not the live work.
+- All four mathematical gates remain **OPEN on golden Agda** pending native proofs or verified proof-term import and independent exact-head Agda elaboration. No kernel pass, zero-axiom receipt or complete theorem is claimed from GitHub source readback.
+
+## 2026-11-04 — Machin exact owner reuse and new golden Bishop sign/reflection
+
+- Re-audited the existing constructive arctangent construction, exact rational tangent chain, Archimedes 223/71–22/7 enclosure, Machin quarter window, Round11 shared classical trig weld and derivative source owners, radius-two alternating sine source, and Wilson period carrier. Formal source documentation now distinguishes numerical theorem, chosen period carrier, conditional source-weld and true analytic pi identification.
+- New `DASHI/Analysis/BishopMachinPiComplementReflectionFromImaginaryProductExact.agda`: same selected Bishop signed-series `sin(pi_M−x)=sin(x)`, `cos(pi_M−x)=−cos(x)` under only already-owed K05 product and quarter equality; original odd/even parity/limit and ring-setoid solver reused.
+- New `DASHI/Analysis/BishopMachinQuarterStrictSineFromTwoBallExact.agda`: actual selected Round11 sine satisfies `87/128 ≤ sin_B(theta_M)` and `0<sin_B(theta_M)` from original two-ball sine certificate and Machin quarter interval, without new trigonometric assumptions.
+- Imported both into `EverythingTOESymmetryResolved369`, `Unifier`, and `Unified/Everything`. No protected ESD surfaces touched. Both are source-written with no added postulates or unsolved holes; exact Agda `--safe` kernel acceptance not yet observed. K04d/K05 terminal four mathematical obligations remain OPEN.
+
+- `BishopMachinHalfPhaseFromImaginaryProductExact.agda` now composes the original Bishop Machin quarter arithmetic with original Round11 source-double-angle and product-derived Pythagorean: twice the half angle equals π_M, and the actual half-angle sine/cosine become 1/0 under the same existing K05 product and quarter equality. No new analytic premise, no independent π theorem, and no kernel acceptance claim.
+
+## 2026-11-04 — Bishop Machin global sign / first positive sine zero source theorem
+
+- Golden PR #1408 adds `BishopSinePositiveTwoBallFromCubicExact.agda`: strict native sign of actual Round11 Bishop sine for 0<x, |x|≤2 by the existing factorial cubic lower and factor positivity 1−x²/6≥1/3>0; no new sine product, pi or atan assumptions.
+- Adds `BishopMachinPiGlobalSineSignFromTwoBallExact.agda`: original Bishop locatedness `fast-corollary-2-17` splits the real line between 3/2 and 2; pi_M<22/7 ensures the complementary positive angle is below 23/14<2 when x≥3/2; original signed-series π_M reflection transfers radius-two positivity. `round11MachinPiIsFirstPositiveSineZero` composes the already source-written first-zero constructor, with no separately assumed global sign family.
+- This narrows K05-PI to the actual source arctangent/tangent quarter equality and K05-PRODUCT. It is a **conditional original same-series proof** until both independent premises and exact-head Agda kernel checking succeed; do not claim full π completion.
+- Original pinned `viktorcsimma/bishop` `RealProperties.agda` was inspected for exact locatedness and order congruence theorem types; setoid order orientation fixed in the new radius-two and earlier Machin-quarter modules. Both new modules imported into all three TOE roots. No ESD edits.
+
+
+## 2026-11-06 — Bishop K04d/K05 vendor-native analytic max-cut continuation
+
+- Reused the pinned `vendor/bishop` `Real.ℝ`, `RealProperties`, and `Sequence` proof laws. Added `BishopNegativeLogExpFormalRecurrenceUniquenessExact`: all-degree *rational solved-recurrence* uniqueness for the formal negative-log exponential coefficient sequence; original nested-series coefficient identification and Bishop limit interchange remain OPEN.
+- Added `BishopMachinRationalGaussianPhaseExact`: exact `Q[i]` Cayley phase at 1/5 and 1/239, proving the fourfold rational Machin phase is `i`. The independent exact-fraction calculation passed, but the original Bishop arctan/exponential same-object phase identity remains OPEN.
+- Added `BishopSequentialContinuityRingCompilerExact` and `BishopComplexSequentialContinuityAlgebraExact`, using pinned Bishop convergence algebra for the selected real and Cartesian complex operations.
+- Added `BishopOriginalCompletedXiFactorContinuityCompilerExact` for the literal original completed `xi`, gamma and zeta fields. This is a conditional algebraic consumer requiring the actual `xi` factor-formula equality and factor continuities, NOT proof that `xiEntire` implies continuity of a separately constructed `zeta`.
+- Imported all five owners into the three TOE roots; extended focused Agda --safe CI, pinned the experimental stdlib checkout to `008f12c2908479567a3ae3c873f9cf0b8fe5987e`, and added a deterministic Gaussian-phase test to CI. Updated the exact K04d/K05 roadmap. No ESD owner changed.
+- **Fail-closed evidence:** new modules are hole-free, postulate-free `--safe` source candidates; no exact-head Agda compiler or TOE-root acceptance receipt was observed. K05-PRODUCT terminal source still needs kernel acceptance; K04d-LOG native exp/log equality, K05-PI native arctan correspondence, and K04d-CONTINUITY original Dirichlet/xi identification remain mathematically OPEN.
+
+
+## 2026-11-06 — K05-PI existing Cayley/Pythagorean reuse
+
+- Audited source-native `BalabanSelectedGaugeRedundancyHolonomyGuardExact`:
+  the exact rational Cayley/Pythagorean parameterization at `rho=1/8192`
+  and unit-quaternion norm were already implemented. Also reused
+  `CayleyDicksonRationalComplexQuaternionExact` for ORIGINAL rational
+  complex multiplication, conjugation, norm composition and literal quaternion
+  identity (not the unrelated Cayley graph, Cayley–Hamilton or Smith observer lanes).
+- Added `BishopMachinExistingCayleyReuseExact.agda`: universal denominator-free
+  Cayley numerator norm polynomial; definally identical quaternion embedding
+  of the existing selected YM Cayley unit; exact t=1/5 and t=1/239
+  source-Cayley specialization; original rational-complex Machin phase `=i`;
+  and an independent unit-norm derivation reusing existing rational complex
+  norm multiplicativity. No new scalar or complex carrier.
+- Imported the new source in all three golden TOE roots and focused Agda
+  --safe workflow; updated K04d/K05 max-cut roadmap.
+- **Unclosed and not misrepresented:** the original Bishop arctangent power-series
+  to Cayley phase equality, at the two Machin points, remains a genuinely
+  analytic **PI.1** goal. The above finite source-written lemmas do not yet
+  have an exact-head Agda kernel receipt. Their presence does not close
+  K05-PI's original positive-sine/first-zero terminal.
+
+
+## 2026-11-06 — Bishop Machin Cayley formal/real same-object max-cut
+
+- Proved in new source candidate `BishopMachinOriginalCayleyFormalSeriesExact` the all-degree Q[i] coefficient equation for `(1-iX)F=1+iX` and all-degree recurrence uniqueness, reusing the existing rational complex type and not creating a second Cayley/phase model.
+- Source-wrote `BishopSquareZeroReflectsSetoidZeroExact`: `x*x ≃ 0 ⇒ x ≃ 0` on the vendored Bishop reals by reusing native square/absolute reflection. No imported square-root authority required.
+- Source-wrote `BishopMachinRationalCayleyToOriginalComplexExact`: actual normalized rational → unnormalized rational → vendored `Real._⋆`, preserving add/subtract/negate/multiply and original Cartesian complex multiplication; transported the existing finite Machin Cayley phase `= i` into the *same* selected original Bishop complex carrier.
+- Source-wrote `BishopMachinCayleyHalfPhaseToFirstZeroExact`: selected exact `exp_C(2i θ_M) ≃ i` plus the existing K05 shared original imaginary exponential product implies `(cos_B θ_M - sin_B θ_M)^2 ≃ 0`, then original quarter equality and first positive source sine zero through existing global sign theorem. New strongest consumer: `sourceMachinFirstPositiveZeroFromSameObjectCayley`.
+- New exact Python regression `check_k05_cayley_formal_coefficients.py`; independently evaluated 4096 Q[i] denominator-product coefficients without failures. These tests are non-promotional.
+- Added four Agda owners to all three golden TOE roots and focused workflow. Corrected the focused CI to invoke the **existing repository Agda parallel-checker wrapper** (`scripts/run_agda29_parallel_check.sh`), not directly `nix build` or `AGDA_BIN`, with fixed selected stdlib commit and 41 focused files. Updated max-cut roadmap.
+- **Evidence gate:** No successful Agda kernel logs or TOE acceptance receipts were returned. The original Bishop atan/exponential selected Cayley evaluation, the all-parameter imaginary product kernel receipt, K04d-LOG nested source exp/log identity and K04d-CONTINUITY selected original zeta/xi weld remain OPEN. Never mark conditional compilers as completed analytic theorems.
+
+
+## 2026-11-06 — K05-PI/PRODUCT and K04d-LOG/CONTINUITY native analytic max-cut continuation
+
+- Audited original `BishopRound11SignedFactorialDegreeBinomialExact.originalImaginaryExponentialMultiplicative`. In `BishopMachinCayleyNativeProductFirstZeroExact`, construct the exact prior-product witness `originalNativeImaginaryExpProduct` by source setoid symmetry. Consequently the original Machin first-zero consumer no longer accepts a free imaginary-product premise; the actual original signed-factorial proof is imported directly. The same theorem discharges the Round11 Pythagorean/phase-modulus assumption for the original Re(s)>2 Basel domination.
+- Added `BishopMachinTwoPointCayleyCompositionExact`. The exact native atan evaluation at 1/5 and the evaluation at 1/239 are the only K05-PI analytic theorem inputs; existing literal complex product, original Bishop sine/cosine parity, rational Cayley power/conjugation and source Machin angle ring arithmetic derive the combined Cayley identity and first positive sine zero.
+- Added `BishopK04dNatLogFromOriginalGapExact`. Exact finite Nat rational cross-product identities, native `Real._⋆` gap transport and existing Bishop inverse cancellation prove `exp_B(L_n) ≃ n+1` at all indices from ONE global original Bishop `exp_B(-L(x)) ≃1-x` analytic theorem. Zero index reuses the original `exp_B(0)≃1` proof. There is no separately assumed Nat inverse family.
+- Added `BishopK04dConcreteAboveTwoPolynomialChartExact`. The original chart `(3+t²)+i eta` has *proved* above-two membership for every Bishop input, real/imag source Sequence continuity, and the selected original Dirichlet Basel uniform approximations from the one source LOG identity and the original K05 factorial product. Selected original exp-term continuity and actual zeta/xi semantic identifications remain open.
+- Removed unrelated Yang–Mills chord/square-root imports from `BishopSquareZeroReflectsSetoidZeroExact`: it now derives absolute-zero reflection directly from the vendored Bishop order/absolute-value laws. Extended `BishopMachinRationalCayleyToOriginalComplexExact` with exact source conjugation preservation.
+- Added `scripts/check_k04d_nat_log_gap_rational.py` (10,000 exact rational inputs) and extended the focused golden Agda CI to 45 owners. The workflow now invokes the *existing* repository parallel-checker wrapper with `--safe` for both focused checks and ALL THREE TOE roots; no direct Nix/Agda compiler command in the workflow checking steps.
+- **Fail closed:** all new owners are source-written with no intentional postulates/holes; no successful exact-head Agda kernel or TOE acceptance receipt observed. The two literal source atan/exp-to-Cayley evaluations, the original Bishop exp/negative-log composition interchange, original selected finite exp continuity, original zeta agreement and independent completed-xi factor definition/continuity remain genuine open analytical proof leaves. These are not silently filled by record constructors, symbolic tests or the formal Cayley coefficient recurrence.
+
+
+## 2026-11-06 — Original Bishop LOG / ATAN / EXP finite calculus, source-level
+
+- Implemented all-N finite Bishop geometric derivative telescope and original Cayley rational quotient-ODE polynomial identities, using only the pinned original Bishop real and pre-existing rational Cayley/Dickson carrier.
+- Added original negative-log source term/finite-partial Bishop factor derivatives in `BishopOriginalNegativeLogFiniteDerivativeExact`; eliminated independent finite log derivative assumptions by reusing natural scale, native power derivative and exact Nat reciprocal cancellation.
+- Added original signed Machin arctan term/finite-partial Bishop factor derivatives in `BishopOriginalMachinAtanFiniteDerivativeExact`; welded the source signed power to the actual geometric derivative polynomial in `BishopOriginalMachinAtanDerivativeGeometricWeldExact`.
+- Added original exponential finite-term/finite-partial Bishop factor derivatives in `BishopOriginalExponentialFiniteFactorDerivativeExact`, with a source-native shift of derivative partials to original exp partials and the resulting actual pointwise derivative-series convergence to `Exp.bishopExp`. Reuses original inverse-factorial coefficient cancellation; does not assume infinite derivative-limit interchange.
+- Wrote a full constructive mathematical derivation with explicit radius-gap absolute-composition bounds and factorial-tail moduli in `Docs/proofs/BishopK04dK05OriginalSeriesConstructiveDerivations.md`. This is mathematical proof documentation, NOT a substitute for Agda kernel acceptance or the true selected original zeta/xi value semantics.
+- Added independent exact Q[i] nested-source-exp coefficient test, deriving both `exp(-sum x^k/k)=1-x` and `exp(2i atan)=Cayley` formally from original weighted coefficients rather than supplying the answer. Test verified 128 degrees in local exact Fraction arithmetic and CI runs 96. Mathematically independent analytic-limit transport remains open.
+- All six calculus/finite source modules imported into three golden TOE roots; CI focused list now 51 owner files via canonical `scripts/run_agda29_parallel_check.sh --safe`, and the three roots also require `--safe`. The original pointwise and uniform analytic summation, original `ZetaHalfPlaneLayer` value equality, original `CompletedRiemannZeta.xi` factor identity, and an exact-head Agda acceptance receipt **remain open**.
+
+
+## 2026-11-06 — original Bishop geometric derivative limits and uniform half-ball residual
+
+- New `BishopOriginalLogAtanDerivativeLimitValuesExact.agda`: original **source derivative finite partial** series convergence for negative log at every |x|<1 and for source Machin arctan at every |t|≤1/2, including original 1/5 and 1/239. The terminal values are projected directly from the pinned Bishop `Sequence.geometric-series-isConvergent` pair; a vendor-private nonzero proof is neither imported nor simulated.
+- New `BishopOriginalLogAtanUniformDerivativeRemainderExact.agda`: original all-N explicit Bishop-order residual bounds `|x^N|≤r^N` and `|(-t²)^N|≤(1/4)^N`, with a shared quarter-power zero convergence proof via pinned vendor Sequence.
+- Both source owners are imported into all three golden TOE roots and focused canonical `--safe` parallel-checker workflow (53 owner files).
+- **Fail closed:** The source-level derivative series and geometric residual bounds do **not** substitute for original infinite factor-quotient derivative interchange, nested exp/log and exp/atan series composition, actual zeta/xi function identification, or an Agda kernel acceptance receipt. All terminal analytic endpoints remain open until those independent proofs and receipts are supplied.
+
+
+## 2026-11-06 — Original exp_B compact-uniform continuity and actual K04d Dirichlet chart
+
+- `BishopOriginalExponentialUniformCompactTailExact` source-writes the actual Bishop original factorial power-series compact-uniform majorant `|x^n/n!|≤M^n/n!` for every `|x|≤M`. One cutoff from `Exp.expMagnitudeSeriesConvergent M` bounds all original terms uniformly; native Sequence finite Cauchy triangle and limit order yield the actual source `Exp.bishopExp` approximation `sourceExpUniformApproximationOnBall`.
+- `BishopOriginalExponentialSequentialContinuityExact` uses exact source finite sum extensionality, native finite polynomial sequential continuity, vendored `Sequence.convergent⇒bounded`, and the existing three-leg uniform limit inequality to derive source original global `Exp.bishopExp` sequential continuity. No assumed derivative exchange.
+- `BishopK04dOriginalPolynomialChartTermContinuityExact` discharges source real/imag Dirichlet term and finite partial continuity on `s_eta(t)=3+t²+i eta`, whose imaginary frequency factor is constant in t. It applies the already existing ORIGINAL Basel uniform-limit compiler to derive the constructed original Bishop Dirichlet chart's real/imag sequential continuity from the **single** pending original LOG identity.
+- All three modules imported into all three golden TOE roots and the original `--safe` parallel checker (56 focused files); roadmap/source evidence synchronized. **Kernel acceptance and the independent actual zetaHalfPlane/xi function identities are not supplied by these source-written modules**; no successful Agda receipt observed.
