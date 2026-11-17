@@ -10,6 +10,7 @@ owners=(
   DASHI/Physics/Motors/SmithFilsingerFinitePhaseMatchingExact.agda
   DASHI/Physics/Motors/SmithFilsingerReplenishedCycleCapExact.agda
   DASHI/Promotion/MaxwellExteriorCalculusAdapter.agda
+  DASHI/Physics/Motors/SmithFilsingerSpatialPortChainExact.agda
   DASHI/Physics/Motors/SmithFilsingerSourceMaxwellBoundaryWeldExact.agda
   DASHI/Physics/Motors/SmithFilsingerCloudCausalWeldExact.agda
   DASHI/Physics/Motors/SmithFilsingerMaxwellMaterialEnergyCutExact.agda
@@ -29,4 +30,4 @@ if grep -nE '^[[:space:]]*postulate([[:space:]]|$)|\\{!!\\}' "${new_owners[@]}";
 fi
 # No Python surrogate or simulation: require actual pinned Agda type-check.
 scripts/run_agda29_parallel_check.sh "${new_owners[@]}"
-echo "PASS pinned Agda 2.9 four source/Maxwell/material/cloud formal welds"
+echo "PASS pinned Agda 2.9 source/Maxwell/material/cloud/spatial formal welds"
