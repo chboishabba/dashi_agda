@@ -114,3 +114,78 @@ originReconstructionAlwaysZero :
   (lambda origin : ℚ) →
   0ℚ * lambda * origin ≡ 0ℚ
 originReconstructionAlwaysZero lambda origin = solve []
+
+-- Original evolving U,P,M characteristic fields use the SAME
+-- radial reconstruction factor lambda_j at all normal nodes and
+-- at every T. Therefore their linear nonradial stage equations
+-- (normal derivative, warp force, advection and SAT numerator)
+-- are homogeneous under this factor, assuming the physical
+-- source is scaled by the SAME lambda_j.
+--
+-- At a frozen stage the original wave force is
+-- force = radial - 3*(P-M)/(2*z).
+-- Parametrize invz=1/z externally to avoid variable division.
+originalWarpForce : ℚ → ℚ → ℚ → ℚ → ℚ
+originalWarpForce radial p m invz =
+  radial + - (((+ 3) / 2) * invz * (p + - m))
+
+warpForceScalesWithReconstruction :
+  (lambda radial p m invz : ℚ) →
+  originalWarpForce (lambda * radial)
+    (lambda * p) (lambda * m) invz
+    ≡ lambda * originalWarpForce radial p m invz
+warpForceScalesWithReconstruction lambda radial p m invz = solve []
+
+-- outU=.5*((1+v)P+(1-v)M), exactly as original stage().
+originalUStage : ℚ → ℚ → ℚ → ℚ
+originalUStage v p m =
+  ((+ 1) / 2) * ((1ℚ + v) * p + (1ℚ + - v) * m)
+
+originalUStageScales :
+  (lambda v p m : ℚ) →
+  originalUStage v (lambda * p) (lambda * m)
+    ≡ lambda * originalUStage v p m
+originalUStageScales lambda v p m = solve []
+
+-- The original normal_order=3 stage bulk normal derivatives and
+-- radial/warp force have linear characteristic dependence.
+-- dpNormal and dmNormal are the ACTUAL normal stencil outputs.
+originalPStage : ℚ → ℚ → ℚ → ℚ
+originalPStage v dpNormal force = (1ℚ + v) * dpNormal + force
+originalMStage : ℚ → ℚ → ℚ → ℚ
+originalMStage v dmNormal force = (v + - 1ℚ) * dmNormal + force
+
+originalPStageScales :
+  (lambda v dpNormal force : ℚ) →
+  originalPStage v (lambda * dpNormal) (lambda * force)
+    ≡ lambda * originalPStage v dpNormal force
+originalPStageScales lambda v dpNormal force = solve []
+
+originalMStageScales :
+  (lambda v dmNormal force : ℚ) →
+  originalMStage v (lambda * dmNormal) (lambda * force)
+    ≡ lambda * originalMStage v dmNormal force
+originalMStageScales lambda v dmNormal force = solve []
+
+-- Lower weak-Israel SAT correction
+--   2*(1-v)/dy *(target-M), i.e. with invdy=1/dy.
+originalMSATStage : ℚ → ℚ → ℚ → ℚ → ℚ
+originalMSATStage v invdy target m =
+  ((+ 2) / 1) * (1ℚ + - v) * invdy * (target + - m)
+
+originalMSATStageScales :
+  (lambda v invdy target m : ℚ) →
+  originalMSATStage v invdy (lambda * target) (lambda * m)
+  ≡ lambda * originalMSATStage v invdy target m
+originalMSATStageScales lambda v invdy target m = solve []
+
+-- Upper P penalty -2(1+v)P/dy has the same homogeneity.
+originalPSATOuter : ℚ → ℚ → ℚ → ℚ
+originalPSATOuter v invdy p =
+  - (((+ 2) / 1) * (1ℚ + v) * invdy * p)
+
+originalPSATOuterScales :
+  (lambda v invdy p : ℚ) →
+  originalPSATOuter v invdy (lambda * p)
+    ≡ lambda * originalPSATOuter v invdy p
+originalPSATOuterScales lambda v invdy p = solve []
