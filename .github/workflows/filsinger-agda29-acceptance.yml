@@ -4,6 +4,15 @@ name: Smith-Filsinger pinned Agda proof acceptance
 # This is a REAL kernel check, not a Python proof surrogate.
 # A draft PR must not be described as passed until this run succeeds.
 on:
+  push:
+    branches:
+      - "research/sun-earth-coupled-source-20261116"
+    paths:
+      - "DASHI/Physics/Motors/SmithFilsinger*.agda"
+      - "scripts/check_smith_filsinger_*.py"
+      - "scripts/test_smith_filsinger_*.py"
+      - "scripts/check_smith_filsinger_formal_weld_agda29.sh"
+      - ".github/workflows/filsinger-agda29-acceptance.yml"
   pull_request:
     paths:
       - "DASHI/Physics/Motors/SmithFilsinger*.agda"
