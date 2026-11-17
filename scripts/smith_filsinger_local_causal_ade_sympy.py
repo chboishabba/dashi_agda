@@ -91,11 +91,69 @@ def dependency_step(dependent,touched):
     return result
 
 def dependency_cone(initial_index,steps):
-    result={initial_index}
+    """Conservative cone from initial activity AND each external source.
+
+    A later natural/controller kick is a NEW root, even if the original
+    source could not reach its cell. Omitting roots is unsound.
+    """
+    result=set() if initial_index is None else {initial_index}
     for step in steps:
-        touched=step['support'] if 'support' in step else (step['cell'],)
-        result=dependency_step(result,touched)
+        if step.get('kind') in ('natural','controller'):
+            result.add(step['cell'])
+        elif 'support' in step:
+            result=dependency_step(result,step['support'])
+        else:
+            raise ValueError('untyped step cannot be used as cone receipt')
     return result
+
+
+def verified_dependency_trace(initial_state,steps):
+    """Check every stage's actual exact state and source-seeded cone.
+
+    Starting nonzero coordinates are roots; any later source kick is a
+    separately identified root. Checks exact state/continuity for all
+    intermediate stages, not merely a final projection or an energy sum.
+    An unchecked Python record remains a model receipt, not calibration.
+    """
+    if initial_state.cols!=1:
+        raise ValueError('column state required')
+    active={k for k in range(initial_state.rows) if initial_state[k]!=0}
+    previous=initial_state
+    timeline=[]
+    for index,step in enumerate(steps):
+        if step.get('initial_state')!=previous:
+            raise ValueError('nonconsecutive dependency trace')
+        if 'kind' in step:
+            if step['kind'] not in ('natural','controller'):
+                raise ValueError('unknown source owner')
+            cell=step['cell']
+            if not 0<=cell<previous.rows:
+                raise ValueError('source cell outside state')
+            if any(step['z'][k]!=previous[k]
+                   for k in range(previous.rows) if k!=cell):
+                raise ValueError('source kick violates local cell ownership')
+            active.add(cell)
+        elif 'support' in step:
+            support=set(step['support'])
+            if not support or any(k<0 or k>=previous.rows for k in support):
+                raise ValueError('invalid update support')
+            # A declared stage must actually leave everything outside its
+            # support unchanged, or its purported local graph is forged.
+            if any(step['z'][k]!=previous[k]
+                   for k in range(previous.rows) if k not in support):
+                raise ValueError('stage violates declared local support')
+            active=dependency_step(active,support)
+        else:
+            raise ValueError('untyped update/source')
+        if step['z'].shape!=previous.shape:
+            raise ValueError('state dimensions changed')
+        if any(step['z'][k]!=0 for k in range(previous.rows) if k not in active):
+            raise ValueError('field outside dynamic source cone')
+        previous=step['z']
+        timeline.append(frozenset(active))
+    return dict(cone=active,stages=tuple(timeline),
+                all_outside_zero=True,original_source_meter=False,
+                physical_maxwell_front=False)
 
 def source_response(spec,initial_source_cell,ops,dt=S.Rational(1,4)):
     n=spec['n'];z=S.zeros(4*n,1)
@@ -104,7 +162,8 @@ def source_response(spec,initial_source_cell,ops,dt=S.Rational(1,4)):
     for edge in ops:
         step=cayley_edge_step(spec,z,edge,dt)
         records.append(step);z=step['z']
-    cone=dependency_cone(initial_source_cell,records)
+    trace=verified_dependency_trace(S.zeros(4*n,1),records)
+    cone=trace['cone']
     outside=[k for k in range(4*n) if k not in cone]
     if any(z[k]!=0 for k in outside):raise AssertionError('graph cone violated')
     return dict(field=z,cone=cone,records=records,all_outside_zero=True)
