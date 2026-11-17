@@ -406,3 +406,80 @@ An independent local SymPy recreation
 passed all five matrix/transition/MSE
 checks. No Golden Agda/kernel receipt
 is asserted.
+
+
+## 17 November: corrected *early* GELU/kink prior-art attribution
+
+The actual **facilitation-before-suppression** owner is
+`DASHI/Cognition/ResponseKink.agda`, whose
+`RecruitmentSuppressionProfile` and `profile-shape`
+check a four-level rise–rise–overload-decline shape.
+The pasted attribution to
+`DASHI/Cognition/Utterance/AdmissibilityGate.agda`
+is incorrect on the inspected default branch:
+that module governs literal vs symbolic
+utterance admission, not this profile.
+
+The original cognitive computation owner
+`DASHI/Cognition/AnesthesiaLanguagePhaseDynamics.agda`
+has the distinct exact cubic margin
+`10+4t-t³`, giving margins
+`(+10,+13,+10,-5)` and hysteresis/stack
+rebuilding. The separate HPA owner
+`DASHI/Governance/SituatedHPARegimeFlexibilityExact.agda`
+**reuses the canonical ResponseKink** as a
+hypothetical ordinal stress-response
+profile and explicitly prohibits inferring
+an actual clinical condition or deterministic
+high-load adrenal-exhaustion claim.
+
+New source-written reuse bridge:
+`DASHI/Cognition/PNF/X369R4EarlyKinkSourceWeldExact.agda`.
+The bridge needs an explicit equality between
+an actual original R4 observable and the
+existing canonical profile's response,
+before transporting the profile inequalities.
+No verified R4 response/source record is
+supplied, and no kernel run is asserted.
+
+Exact SymPy candidate:
+`scripts/check_x369_r4_early_kink_sympy.py`;
+independent local execution: **14 grouped checks
+passed**. A rational load-attenuated candidate
+has profile values `(1,80/17,6,208/43)`;
+a separate standard GELU-times-cubic-attenuation
+example has values approximately
+`(0,0.791853879,1.302999824,1.114772207)`.
+Neither is claimed to be implemented or
+fitted by the original R4. Unattenuated
+positive-input GELU is an explicit negative
+control: its increasing response cannot
+establish the overload decline. A radial
+history cap gives saturation, not necessarily
+suppression of a selected expert's output.
+
+The source-facing *conditional* evidence
+checker `scripts/check_x369_r4_kink_source_receipt.py`
+accepts only four source-provenance-bound
+ordered loads and strict response intervals
+for the SAME observable, checkpoint and
+history revision. Companion
+`scripts/check_x369_r4_kink_source_receipt_selftest.py`
+adds 14 synthetic positive/negative fixtures.
+Claims of source authentication or fitted
+overload mechanism remain OPEN.
+
+**Next actual maximum cut:** define and
+measure an R4 original response observable
+(e.g. selected contribution norm, fixed-expert
+quality, router margin) as a function of
+controlled increasing load with fixed
+source checkpoint/history provenance.
+Discharge the three original order
+comparisons with response interval bounds,
+then distinguish source mechanism by
+independently tested attenuation,
+topk competition, signed FFN dynamics,
+history cap or hysteresis. Do not
+derive shape from the earlier GELU
+parity or correlated logit equivalence.
