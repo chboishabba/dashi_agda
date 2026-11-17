@@ -68,4 +68,11 @@ for ell in modes:
 assert s.expand(modes[0]-s.Rational(2,5)*j4)!=0
 assert s.expand(modes[2]-s.Rational(4,7)*j4)!=0
 checks+=2
+# Exact origin-safe source-weight transport to actual original FV primitives.
+weighted={0:s.Rational(2,5)*(r*r*f4+4*r*f3),
+  2:s.Rational(4,7)*(r**4*f4+r**3*f3-6*r*r*f2+6*r*f1),
+  4:(r**6*f4-6*r**5*f3+15*r**4*f2-15*r**3*f1)/35}
+assert s.expand(r*r*weighted[0]-modes[0])==0;checks+=1
+assert s.expand(weighted[2]-modes[2])==0;checks+=1
+assert s.expand(weighted[4]-r*r*modes[4])==0;checks+=1
 print(f"{checks}/{checks} original Cartesian TT radial differential / source primitive tests PASS")
