@@ -2797,3 +2797,7 @@ toeBalabanRouteSP2R445CompilerLevel =
 -- The curvature identification, Israel source, coupled stability and FIO
 -- are explicitly OPEN; no Monster/369/ternary physical equivalence follows.
 import DASHI.Physics.Gravity.KSW668F8DualElectricWeylReadoutAlgebraExact as KSWF8WeylAlgebra
+
+-- XXIX original-metric rational AdS5 / SAT / SSPRK3 negative-control
+-- authority seam; the physical G1--G6 witnesses are NOT constructed.
+import DASHI.Physics.Gravity.KSW668F8SameObjectWeylAuthorityBoundary as KSWF8GeometryAuthority
