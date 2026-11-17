@@ -1,0 +1,78 @@
+@startuml
+title Neurodivergent situated reachability TOE
+
+skinparam componentStyle rectangle
+
+actor "Situated person" as Person
+
+package "DASHI Biology domain" {
+  component "ProcessingGeometryActionGateExact" as Processing
+  component "EmbodiedCausalConeFeedbackExact" as History
+  component "ObserverRelativeReachableSubfabricExact" as Reach
+  component "TrustedFriendEcologyInteractionExact" as Relation
+  component "SocialEcologicalAffordanceConeExact" as Ecology
+  component "HistoryConditionedSocialEcologyOptionConeExact" as HistoryCone
+  component "HistoryObserverAuthorityOptionConeCapstoneExact" as AuthorityCapstone
+  component "EmbodiedSocialEcologyRelationalHistoryObligationExact\n(golden adapter)" as Adapter
+}
+
+package "DASHI Core" {
+  component "RelationalHistoryFabricExact" as Fabric
+  component "BinaryInteractionNonseparabilityExact" as Interaction
+}
+
+package "Canonical TOE roots" {
+  component "EverythingTOESymmetryResolved369" as TOE
+  component "Unifier" as Unifier
+  component "Unified/Everything" as Unified
+}
+
+cloud "dashi_lean4 support" as Lean {
+  component "IndexedRelationalHyperfabric" as LeanFabric
+  component "ContextIndexedEncoding" as LeanContext
+  component "RequestProject Reachability / Observer / ObserverJoin\nJMD / meta-introspector attribution retained" as LeanJMD
+}
+
+rectangle "ESD surfaces\nimport-only boundary\nno edits" as ESD
+
+Person --> Adapter : situated state
+Processing --> Adapter : processing gate
+History --> Adapter : history gate
+Reach --> Adapter : accessible branch
+Relation --> Adapter : relation x ecology
+Ecology --> Adapter : realised affordance
+Fabric --> Adapter : generic history/relation fabric
+HistoryCone --> Adapter : proof-bearing option-cone contractions
+AuthorityCapstone --> Adapter : observer / affordance / authority boundary
+Interaction --> Relation : nonseparability test
+
+Adapter --> TOE : typed receipt + ZKP frame
+Adapter --> Unifier : typed receipt + ZKP frame
+Adapter --> Unified : typed receipt + ZKP frame
+
+LeanFabric ..> Fabric : support / mirror
+LeanContext ..> Adapter : context-indexed reading
+LeanJMD ..> Adapter : executable reachability and observer support
+
+ESD .. Adapter : protected boundary
+
+note right of Adapter
+Preconditions:
+- shared Agda ancestry
+- fixed processing in history witness
+- fixed history in relation witness
+- zero trust escapes
+
+Postconditions:
+- history propagation witness
+- relation essentiality witness
+- latency non-factorability
+- no universal autism promotion
+end note
+
+note bottom of TOE
+Fleet 584 / 44 / 58 ledger is unchanged.
+This domain receipt is not a YM Gate-4 gap.
+end note
+
+@enduml

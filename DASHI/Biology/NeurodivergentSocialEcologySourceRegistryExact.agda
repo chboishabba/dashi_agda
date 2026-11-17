@@ -145,6 +145,27 @@ friendshipTrust2025 = sourceReference
   "peer-reviewed qualitative sociological study"
   "supports comfort, acceptance and trust as central friendship values embedded in physical-social environments and lived experience"
 
+
+friendshipAuthenticity2026 : SourceReference
+friendshipAuthenticity2026 = sourceReference
+  "Erinn H. Finke; Danny H. Dunn"
+  "There's No Pretense Needed: Autistic Perspectives on Autistic Friendships"
+  "Autism 30(9):2260-2271"
+  2026
+  "10.1177/13623613261464197"
+  "peer-reviewed qualitative dyadic study"
+  "supports mutual choice, acceptance, authenticity, flexible reciprocity and unmasking in autistic friendship; not a universal friendship law"
+
+autisticHomophily2026 : SourceReference
+autisticHomophily2026 = sourceReference
+  "George W. Wolford; Gabriel Varela; Robert E. Freeland; Monica L. Bellon-Harn"
+  "Social Isolation or Autistic Homophily: An Exploration of the Social Networks of Autistic College Students"
+  "Autism 30(6):1504-1518"
+  2026
+  "10.1177/13623613261435994"
+  "peer-reviewed quantitative social-network study"
+  "reports similar network structure, closeness and social satisfaction in the college sample with a higher proportion of autistic/neurodivergent friends; does not generalize to every autistic population"
+
 supportTranslation2024 : SourceReference
 supportTranslation2024 = sourceReference
   "Yunhe Huang; Samuel R. C. Arnold; Kitty-Rose Foley; Julian N. Trollor"
@@ -289,8 +310,8 @@ open SolisConceptProvenance public
 solisConversationConcept : SolisConceptProvenance
 solisConversationConcept = solisConceptProvenance
   "Solis communicator / system-sensitivity / psybernetic-dissonance concept bundle"
-  "user-supplied prior-discussion conceptual material"
-  "Autistic Signal[x] as a candidate systemic-integrity check; thresholded system-risk flag; sacred-data/syntax-checker metaphor; optional 3-6-9 and phase-shifted-Nash analogies"
+  "project archive / supplied-notes conceptual provenance; attributed to @solishood in supplied notes; identity not independently verified"
+  "dashiTRADE ignore.TRADER_CANTEXT.md archive reports SCN integrity checking, 1/2 threshold and qPARA handling; later DASHI formalization remains distinct from the attributed conceptual source"
   false
   false
 

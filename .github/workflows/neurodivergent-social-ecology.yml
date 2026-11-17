@@ -13,12 +13,19 @@ on:
       - 'DASHI/Biology/TrustedFriendRelationalScaffoldingExact.agda'
       - 'DASHI/Biology/TrustedFriendRelationalGateExact.agda'
       - 'DASHI/Biology/TrustedFriendEcologyInteractionExact.agda'
+      - 'DASHI/Biology/EmbodiedSocialEcologyRelationalHistoryObligationExact.agda'
       - 'DASHI/Biology/NeuroqueerRelationshipEcologyExact.agda'
       - 'DASHI/Biology/SolisProjectProvenanceExact.agda'
       - 'DASHI/Biology/SolisSystemSensitivityBoundaryExact.agda'
       - 'DASHI/Biology/NeurodivergentSocialEcologyCrossPollinationExact.agda'
       - 'DASHI/Core/ContrastiveInterventionResponseExact.agda'
       - 'DASHI/Biology/DomainEverything.agda'
+      - 'DASHI/EverythingTOESymmetryResolved369.agda'
+      - 'DASHI/Unifier.agda'
+      - 'DASHI/Unified/Everything.agda'
+      - 'Docs/support/reference/NeurodivergentSituatedReachabilityTOE.md'
+      - 'Docs/diagrams/neurodivergent-situated-reachability-toe.puml'
+      - 'scripts/check_neurodivergent_situated_reachability_toe.py'
       - '.github/workflows/neurodivergent-social-ecology.yml'
   workflow_dispatch:
 
@@ -44,6 +51,8 @@ jobs:
         with:
           path: ${{ runner.temp }}/dashi-agda29
           key: neurodivergent-social-ecology-agda29-${{ runner.os }}-86a1179-${{ hashFiles('scripts/run_agda29_parallel_check.sh') }}
+      - name: Deterministic situated reachability source audit
+        run: python3 scripts/check_neurodivergent_situated_reachability_toe.py
       - name: Trust scan neurodivergent social-ecology tranche
         shell: bash
         run: |
@@ -65,7 +74,7 @@ jobs:
             DASHI/Biology/NeurodivergentSocialEcologyCrossPollinationExact.agda
             DASHI/Core/ContrastiveInterventionResponseExact.agda
           )
-          if grep -nE '\b(postulate|{-# OPTIONS --allow-unsolved-metas #-}|sorry|admit)\b' "${files[@]}"; then
+          if grep -nE '\\b(postulate|TERMINATING|NO_POSITIVITY_CHECK|sorry|admit)\\b|allow-unsolved-metas' "${files[@]}"; then
             echo 'Forbidden trust-boundary token found in neurodivergent social-ecology tranche.' >&2
             exit 1
           fi
@@ -91,6 +100,9 @@ jobs:
               DASHI/Biology/TrustedFriendEcologyInteractionExact.agda
               DASHI/Biology/NeurodivergentSocialEcologyCrossPollinationExact.agda
               DASHI/Biology/DomainEverything.agda
+              DASHI/EverythingTOESymmetryResolved369.agda
+              DASHI/Unifier.agda
+              DASHI/Unified/Everything.agda
             )
             scripts/run_agda29_parallel_check.sh "${targets[@]}"
           ) > agda-neurodivergent-social-ecology-check.log 2>&1
