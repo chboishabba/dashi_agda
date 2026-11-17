@@ -55,3 +55,22 @@ bash scripts/check_smith_filsinger_formal_weld_agda29.sh
 Reuse the existing KSW668 pointwise full-vector Poynting theorem, indexed signed face incidence/Stokes, finite rational spacetime telescope, signed source/receiver work, signed controller-paid environmental sink, and canonical proof-carrying finite-sum error bounds; **no simulated model is promoted to physical admission**. The remaining work is obtaining actual original physical evidence and a real Agda kernel receipt, not adding empty Set-shaped evidence labels. No ESD modifications or unsupported TOE promotion.
 
 Sources: original programme's [PR #1524](https://github.com/chboishabba/dashi_agda/pull/1524), `Docs/research/SmithFilsingerMaxwellValueAndSourceFirstCut20261117.md` and canonical `Docs/research/SmithFilsingerFormalWeldMaxCut20261117.md`.
+
+
+## Continuation — independent-role evidence and exact signed V/I integrator
+
+Implemented `scripts/check_smith_filsinger_signed_vi_intervals.py` and `scripts/test_smith_filsinger_signed_vi_intervals.py` (13 exact arithmetic / adversarial fixtures). This is a **data reader**, not simulated physics: five separately hashed raw port CSV channels (`natural_incident`, `natural_outgoing`, `controller_incident`, `controller_outgoing`, `load_output`) must share the exact physical original ID, sampling clock and all exact rational sample times, using explicit `positive_in_port_direction` convention and a declared `piecewise_linear_power_trapezoid` integration assumption. For each signed V/I sample, exact `Fraction` interval multiplication propagates the supplied voltage/current uncertainty radii, and trapezoidal integration supplies exact rational work intervals. It reports net natural incoming minus outgoing work, net controller incoming minus outgoing work, useful load and the residual **unassigned loss OR storage change**, NOT a fabricated conservation pass. It is explicitly conditional on supplied sample interpolation/aliasing accuracy; true calibration uncertainty and physical provenance are NOT derived from raw CSV.
+
+The original five-gate evidence audit previously had a meaningful weakness: copying one already-hashed artifact into several roles could make all 24 role labels appear present. It now **rejects the same path or identical SHA-256 bytes assigned to different roles**, even if copied under a second filename. Role-specific evidence files or separately hashed extracted channels are required, but that alone is still not proof of scientific independence or calibrated measurement. The corresponding adversarial regression suite is extended from 10 to 12 cases, with role-distinct fixtures for review-readiness tests.
+
+CI `.github/workflows/filsinger-agda29-acceptance.yml` includes both Python test suites before true pinned Agda kernel acceptance. **These are authored CI checks, not an observed successful CI run**. No Agda/Nix binaries are available in this container. F10 original Maxwell port/metric and SI boundary integration, meter sample/bandwidth error validity, F15 all storage returns and independently replenished natural source, F16 controlled atmospheric causality and D1 actual pinned kernel PASS remain OPEN. The port-reader deliberately never sets `physical_claim_closed` or `f15_closed` to true, even when a hypothetical CSV yields a positive conditional source interval.
+
+Run on authentic separately hashed instrument traces only:
+
+```sh
+python3 scripts/test_smith_filsinger_original_gate_evidence.py
+python3 scripts/test_smith_filsinger_signed_vi_intervals.py
+python3 scripts/check_smith_filsinger_signed_vi_intervals.py ORIGINAL_VI_MANIFEST.json --root RAW_ORIGINAL_PORTS --out signed_work_intervals.json
+```
+
+The manifest must include `original_id`, `clock_id`, `port_orientation`, `integration_rule` and `ports`. Each port record carries `file`, `sha256`, `clock_id`; each CSV has exactly `time_s,voltage_V,current_A,voltage_error_V,current_error_A`, in SI units. All numerical values are strings parsed as exact decimals or rational fractions. If the original fields lack independent current, time, error radius or source authentication, the input is **not available**; do not fill with guesses or model values.
