@@ -99,3 +99,24 @@ Acceptance scripts and trust scanner were extended for these source modules. The
 4. Run pinned Nix/Agda source checks and transitive postulate audit; no such run happened in this environment.
 
 **Status remains YM.REAL OPEN; 19/28 expanded gates OPEN.** Do not replace the legacy RealAnalysisAxioms.ℝ by a propositional equality, and do not relabel a Bishop-safe consumer as an original source producer.
+
+
+## 17 November continuation: corrected YM.REAL trust and proof cut
+
+The six requests are NOT closed. The following new proof transformations are source-written:
+
+1. **Bishop direct Cauchy limit.** YMClayBishopSU2HaarSeriesLimitExact now imports the pinned Sequence directly rather than BishopConstructiveRealBridgeExact, which itself imported RealAnalysisAxioms. The new EffectiveHaarCauchyApproximation consumes an actual Cauchy proof and constructs its limit, convergence and uniqueness through Sequence.fast-cauchy⇒convergent and Sequence.lim. The b_n cubature *producer* of the Cauchy witness is still unpaid. Absolute telescoping convergence is no longer necessary.
+
+2. **Strict finite weighted positivity.** YMClayBishopFiniteWilsonNormalizedExact now derives nonnegative finite weighted sums by structural induction, and a strictly positive sum from a nonempty list with a positive first weight/integrand and remaining nonnegative contributions. This is a theorem on the actual Bishop ordered real, not a new partition-positive assumption. To instantiate it physically, original Wilson exp(-S) strict positivity and positive original Haar node weights must be proved separately.
+
+3. **SU(2) quaternion matrix identities.** The trace, determinant and U-dagger U Agda source is present, but kernel acceptance pending. Independent exact symbolic identities give RealTr U(q)=2q0, det U(q)=||q||^2, and U†U=UU†=||q||^2 I2. The *original* SUN.CertifiedSUNMatrixTheory carrier is propositionally typed and cannot be silently equated to Bishop setoid equality.
+
+4. **Trust correction.** The canonical TOE regression is declared --safe; the non-safe candidate complex/matrix/Wilson modules were removed from direct imports and reaggregated under the separate non-safe DASHI.Unified.YMClayBishopRealCandidateRegression. The two safe-only finite algebra modules remain in the canonical TOE import graph. A local --safe pragma by itself is not an Agda acceptance receipt.
+
+5. **Existing all-m Fejer gap.** Complete source proof of Fejer/Chebyshev-II/circle trigonometric nodes, Fourier orthogonality and Pochhammer equality remains open. The 1,132 exact-rational assertions do not establish that Agda theorem.
+
+6. **Existing Bishop/Wilson gap.** Effective b_n approximation as a Bishop real theorem, constructive Haar on all admissible continuous functions, and original Wilson exponential, same-link cylinder and gauge/source identities remain open.
+
+No Agda compiler or Nix environment was available; all new modules are source-written and not kernel typechecked. YM.REAL OPEN; expanded ledger 19/28 OPEN.
+
+Attribution: Wilson/Balaban; Fejer/Stroud; Pizzetti/Folland; Bishop/Bridges/Murray/Csimma; prior DASHI original quaternion and real proof owners.
