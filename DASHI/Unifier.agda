@@ -15,6 +15,7 @@ import DASHI.Reasoning.TrialecticThreeStrandBraidHistoryExact as BraidedHistoryT
 import DASHI.Physics.Closure.BrainConnectomeFMRIObservationQuotient as BrainObservation
 import DASHI.Physics.Closure.BidirectionalBrainObservationQuotient as BrainBidirectional
 import DASHI.Unified.InvariantSpine as BrainSpine
+import DASHI.Unified.PNFHyperfabric as PNFHyperfabric
 
 
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
@@ -1931,192 +1932,20 @@ unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
 
 
 ------------------------------------------------------------------------
--- Safe/just and legal-compliance governance handoff.
--- These aliases preserve the golden FleetFormalGapTargetTOEExact owner.
+-- Numeric PNF delta-fed projection consumer boundary.
 ------------------------------------------------------------------------
 
-unifierFanningLiteralSituatedAuthorityBoundary :
-  FleetGapTOE.FanningLiteralSituatedAuthorityBoundary
-unifierFanningLiteralSituatedAuthorityBoundary =
-  FleetGapTOE.fleetFanningLiteralSituatedAuthorityBoundary
+unifierPNFAnaphorSurfaceIdentityPromotionImpossible :
+  PNFHyperfabric.PNFAnaphorSurfaceIdentityPromotion → ⊥
+unifierPNFAnaphorSurfaceIdentityPromotionImpossible =
+  PNFHyperfabric.pnfAnaphorSurfaceIdentityPromotionImpossible
 
-unifierCompositionalComplianceBoundary :
-  FleetGapTOE.CompositionalComplianceBoundary
-unifierCompositionalComplianceBoundary =
-  FleetGapTOE.fleetCompositionalComplianceBoundary
+unifierPNFAnaphorCandidateResolutionPromotionImpossible :
+  PNFHyperfabric.PNFAnaphorCandidateResolutionPromotion → ⊥
+unifierPNFAnaphorCandidateResolutionPromotionImpossible =
+  PNFHyperfabric.pnfAnaphorCandidateResolutionPromotionImpossible
 
-unifierSafeJustLegalGovernanceBoundary :
-  FleetGapTOE.SafeJustLegalGovernanceBoundary
-unifierSafeJustLegalGovernanceBoundary =
-  FleetGapTOE.canonicalSafeJustLegalGovernanceBoundary
-
-unifierSafeJustLegalGovernanceZKPFrame :
-  FleetGapTOE.SafeJustLegalGovernanceZKPFrame
-unifierSafeJustLegalGovernanceZKPFrame =
-  FleetGapTOE.canonicalSafeJustLegalGovernanceZKPFrame
-
-unifierSensibLawRecordDoesNotCreateLegalAuthority :
-  FleetGapTOE.SensibLawRecordCreatesLegalAuthority → ⊥
-unifierSensibLawRecordDoesNotCreateLegalAuthority =
-  FleetGapTOE.sensibLawRecordDoesNotCreateLegalAuthority
-
-unifierYMA1CompletionDoesNotSelfPromote :
-  Proof.promotable
-    (YMA1Frontier.rowACompletion
-      YMA1Frontier.canonicalYMA1SourceFrontierReceipt)
-  ≡ false
-unifierYMA1CompletionDoesNotSelfPromote =
-  YMA1Frontier.rowACompletionDoesNotSelfPromote
-
-
-------------------------------------------------------------------------
--- Safe/just and legal-compliance governance handoff.
-------------------------------------------------------------------------
-
-unifierFanningLiteralSituatedAuthorityBoundary :
-  FleetGapTOE.FanningLiteralSituatedAuthorityBoundary
-unifierFanningLiteralSituatedAuthorityBoundary =
-  FleetGapTOE.fleetFanningLiteralSituatedAuthorityBoundary
-
-unifierCompositionalComplianceBoundary :
-  FleetGapTOE.CompositionalComplianceBoundary
-unifierCompositionalComplianceBoundary =
-  FleetGapTOE.fleetCompositionalComplianceBoundary
-
-unifierSafeJustLegalGovernanceBoundary :
-  FleetGapTOE.SafeJustLegalGovernanceBoundary
-unifierSafeJustLegalGovernanceBoundary =
-  FleetGapTOE.canonicalSafeJustLegalGovernanceBoundary
-
-unifierSafeJustLegalGovernanceZKPFrame :
-  FleetGapTOE.SafeJustLegalGovernanceZKPFrame
-unifierSafeJustLegalGovernanceZKPFrame =
-  FleetGapTOE.canonicalSafeJustLegalGovernanceZKPFrame
-
-unifierSensibLawRecordDoesNotCreateLegalAuthority :
-  FleetGapTOE.SensibLawRecordCreatesLegalAuthority → ⊥
-unifierSensibLawRecordDoesNotCreateLegalAuthority =
-  FleetGapTOE.sensibLawRecordDoesNotCreateLegalAuthority
-
-unifierActionstepRecordDoesNotCreateLegalAuthority :
-  FleetGapTOE.ActionstepRecordCreatesLegalAuthority → ⊥
-unifierActionstepRecordDoesNotCreateLegalAuthority =
-  FleetGapTOE.actionstepRecordDoesNotCreateLegalAuthority
-
-
-------------------------------------------------------------------------
--- Institutional settlement / norm-transmission non-promotion.
-------------------------------------------------------------------------
-
-unifierSettlementTransmissionBoundary :
-  FleetGapTOE.SettlementTransmissionBoundary
-unifierSettlementTransmissionBoundary =
-  FleetGapTOE.fleetSettlementTransmissionBoundary
-
-unifierSettlementNormTransmissionZKPFrame :
-  FleetGapTOE.SettlementNormTransmissionZKPFrame
-unifierSettlementNormTransmissionZKPFrame =
-  FleetGapTOE.canonicalSettlementNormTransmissionZKPFrame
-
-unifierIndustryConventionDoesNotCreateFederalLaw :
-  FleetGapTOE.IndustryConventionCreatesFederalLaw → ⊥
-unifierIndustryConventionDoesNotCreateFederalLaw =
-  FleetGapTOE.fleetIndustryConventionDoesNotCreateFederalLaw
-
-unifierSettlementDoesNotCreateSupremeCourtHolding :
-  FleetGapTOE.SettlementCreatesSupremeCourtHolding → ⊥
-unifierSettlementDoesNotCreateSupremeCourtHolding =
-  FleetGapTOE.fleetSettlementDoesNotCreateSupremeCourtHolding
-
-unifierSettlementDoesNotCreateConstitutionalPrecedent :
-  FleetGapTOE.SettlementCreatesConstitutionalPrecedent → ⊥
-unifierSettlementDoesNotCreateConstitutionalPrecedent =
-  FleetGapTOE.fleetSettlementDoesNotCreateConstitutionalPrecedent
-
-unifierSameVisiblePolicyDoesNotImplySameAuthoritySource :
-  FleetGapTOE.SameVisiblePolicyImpliesSameAuthoritySource → ⊥
-unifierSameVisiblePolicyDoesNotImplySameAuthoritySource =
-  FleetGapTOE.fleetSameVisiblePolicyDoesNotImplySameAuthoritySource
-
-
-------------------------------------------------------------------------
--- Safe/just paper-chain normalization through Unifier.
-------------------------------------------------------------------------
-
-unifierSafeJustPaperChainBoundary :
-  FleetGapTOE.SafeJustPaperChainBoundary
-unifierSafeJustPaperChainBoundary =
-  FleetGapTOE.canonicalSafeJustPaperChainBoundary
-
-unifierSafeJustPaperChainZKPFrame :
-  FleetGapTOE.SafeJustPaperChainZKPFrame
-unifierSafeJustPaperChainZKPFrame =
-  FleetGapTOE.canonicalSafeJustPaperChainZKPFrame
-
-unifierONeillCountProjectionBoundary :
-  FleetGapTOE.ONeillCountProjectionBoundary
-unifierONeillCountProjectionBoundary =
-  FleetGapTOE.fleetONeillCountProjectionBoundary
-
-unifierONeillObservedResultDoesNotCreateUniversalImpossibility :
-  FleetGapTOE.ONeillUniversalImpossibilityPromotion → ⊥
-unifierONeillObservedResultDoesNotCreateUniversalImpossibility =
-  FleetGapTOE.fleetONeillObservedResultDoesNotCreateUniversalImpossibility
-
-unifierObservedProvisioningResidualDoesNotIdentifyTreatmentEffect :
-  FleetGapTOE.ProvisioningTreatmentEffectPromotion → ⊥
-unifierObservedProvisioningResidualDoesNotIdentifyTreatmentEffect =
-  FleetGapTOE.fleetObservedProvisioningResidualDoesNotIdentifyTreatmentEffect
-
-unifierFanningProjectionBoundary :
-  FleetGapTOE.FanningProjectionBoundary
-unifierFanningProjectionBoundary =
-  FleetGapTOE.fleetFanningProjectionBoundary
-
-unifierFanningBAUProjectionIsNotObserved2050Outcome :
-  FleetGapTOE.FanningBAUNotObservationReceipt
-unifierFanningBAUProjectionIsNotObserved2050Outcome =
-  FleetGapTOE.fleetFanningBAUProjectionIsNotObserved2050Outcome
-
-unifierGDP15000UpstreamBoundary :
-  FleetGapTOE.GDP15000UpstreamBoundary
-unifierGDP15000UpstreamBoundary =
-  FleetGapTOE.fleetGDP15000UpstreamBoundary
-
-unifierGDP15000DoesNotOpenCausalConsumer :
-  FleetGapTOE.GDP15000CausalConsumerPromotion → ⊥
-unifierGDP15000DoesNotOpenCausalConsumer =
-  FleetGapTOE.fleetGDP15000DoesNotOpenCausalConsumer
-
-
-unifierMeta2026SettlementNormCalibration :
-  FleetGapTOE.Meta2026SettlementNormCalibration
-unifierMeta2026SettlementNormCalibration =
-  FleetGapTOE.fleetMeta2026SettlementNormCalibration
-
-unifierMetaSettlementAloneLegallyBindsCompetitors : Bool
-unifierMetaSettlementAloneLegallyBindsCompetitors =
-  FleetGapTOE.fleetMetaSettlementAloneLegallyBindsCompetitors
-
-unifierMetaSettlementDoesNotBindCompetitors :
-  unifierMetaSettlementAloneLegallyBindsCompetitors ≡ false
-unifierMetaSettlementDoesNotBindCompetitors =
-  FleetGapTOE.fleetMetaSettlementDoesNotBindCompetitors
-
-unifierMetaSettlementCreatesFederalStatute : Bool
-unifierMetaSettlementCreatesFederalStatute =
-  FleetGapTOE.fleetMetaSettlementCreatesFederalStatute
-
-unifierMetaSettlementDoesNotCreateFederalStatute :
-  unifierMetaSettlementCreatesFederalStatute ≡ false
-unifierMetaSettlementDoesNotCreateFederalStatute =
-  FleetGapTOE.fleetMetaSettlementDoesNotCreateFederalStatute
-
-unifierJMDPosterCreatesLegalAuthority : Bool
-unifierJMDPosterCreatesLegalAuthority =
-  FleetGapTOE.fleetJMDPosterCreatesLegalAuthority
-
-unifierJMDPosterDoesNotCreateLegalAuthority :
-  unifierJMDPosterCreatesLegalAuthority ≡ false
-unifierJMDPosterDoesNotCreateLegalAuthority =
-  FleetGapTOE.fleetJMDPosterDoesNotCreateLegalAuthority
+unifierPNFAnaphorProceduralProjectionCannotClaimSetBased :
+  PNFHyperfabric.PNFAnaphorProceduralProjectionClaim → ⊥
+unifierPNFAnaphorProceduralProjectionCannotClaimSetBased =
+  PNFHyperfabric.pnfAnaphorProceduralProjectionCannotClaimSetBased

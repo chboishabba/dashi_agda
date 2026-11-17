@@ -257,117 +257,15 @@ unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
 
 
 ------------------------------------------------------------------------
--- Safe/just paper-chain normalization through Unified.Everything.
+-- Numeric PNF delta-fed projection aliases.
 ------------------------------------------------------------------------
 
-unifiedSafeJustPaperChainBoundary :
-  FleetGapTOE.SafeJustPaperChainBoundary
-unifiedSafeJustPaperChainBoundary =
-  FleetGapTOE.canonicalSafeJustPaperChainBoundary
+unifiedPNFAnaphorSurfaceIdentityPromotionImpossible :
+  PNFHyperfabric.PNFAnaphorSurfaceIdentityPromotion → ⊥
+unifiedPNFAnaphorSurfaceIdentityPromotionImpossible =
+  PNFHyperfabric.pnfAnaphorSurfaceIdentityPromotionImpossible
 
-unifiedSafeJustPaperChainZKPFrame :
-  FleetGapTOE.SafeJustPaperChainZKPFrame
-unifiedSafeJustPaperChainZKPFrame =
-  FleetGapTOE.canonicalSafeJustPaperChainZKPFrame
-
-unifiedONeillCountProjectionBoundary :
-  FleetGapTOE.ONeillCountProjectionBoundary
-unifiedONeillCountProjectionBoundary =
-  FleetGapTOE.fleetONeillCountProjectionBoundary
-
-unifiedONeillObservedResultDoesNotCreateUniversalImpossibility :
-  FleetGapTOE.ONeillUniversalImpossibilityPromotion → ⊥
-unifiedONeillObservedResultDoesNotCreateUniversalImpossibility =
-  FleetGapTOE.fleetONeillObservedResultDoesNotCreateUniversalImpossibility
-
-unifiedObservedProvisioningResidualDoesNotIdentifyTreatmentEffect :
-  FleetGapTOE.ProvisioningTreatmentEffectPromotion → ⊥
-unifiedObservedProvisioningResidualDoesNotIdentifyTreatmentEffect =
-  FleetGapTOE.fleetObservedProvisioningResidualDoesNotIdentifyTreatmentEffect
-
-unifiedFanningProjectionBoundary :
-  FleetGapTOE.FanningProjectionBoundary
-unifiedFanningProjectionBoundary =
-  FleetGapTOE.fleetFanningProjectionBoundary
-
-unifiedFanningBAUProjectionIsNotObserved2050Outcome :
-  FleetGapTOE.FanningBAUNotObservationReceipt
-unifiedFanningBAUProjectionIsNotObserved2050Outcome =
-  FleetGapTOE.fleetFanningBAUProjectionIsNotObserved2050Outcome
-
-unifiedGDP15000UpstreamBoundary :
-  FleetGapTOE.GDP15000UpstreamBoundary
-unifiedGDP15000UpstreamBoundary =
-  FleetGapTOE.fleetGDP15000UpstreamBoundary
-
-unifiedGDP15000DoesNotOpenCausalConsumer :
-  FleetGapTOE.GDP15000CausalConsumerPromotion → ⊥
-unifiedGDP15000DoesNotOpenCausalConsumer =
-  FleetGapTOE.fleetGDP15000DoesNotOpenCausalConsumer
-
-
-------------------------------------------------------------------------
--- Institutional settlement / norm-transmission governance surface.
-------------------------------------------------------------------------
-
-unifiedSettlementTransmissionBoundary :
-  FleetGapTOE.SettlementTransmissionBoundary
-unifiedSettlementTransmissionBoundary =
-  FleetGapTOE.fleetSettlementTransmissionBoundary
-
-unifiedSettlementNormTransmissionZKPFrame :
-  FleetGapTOE.SettlementNormTransmissionZKPFrame
-unifiedSettlementNormTransmissionZKPFrame =
-  FleetGapTOE.canonicalSettlementNormTransmissionZKPFrame
-
-unifiedIndustryConventionDoesNotCreateFederalLaw :
-  FleetGapTOE.IndustryConventionCreatesFederalLaw → ⊥
-unifiedIndustryConventionDoesNotCreateFederalLaw =
-  FleetGapTOE.fleetIndustryConventionDoesNotCreateFederalLaw
-
-unifiedSettlementDoesNotCreateSupremeCourtHolding :
-  FleetGapTOE.SettlementCreatesSupremeCourtHolding → ⊥
-unifiedSettlementDoesNotCreateSupremeCourtHolding =
-  FleetGapTOE.fleetSettlementDoesNotCreateSupremeCourtHolding
-
-unifiedSettlementDoesNotCreateConstitutionalPrecedent :
-  FleetGapTOE.SettlementCreatesConstitutionalPrecedent → ⊥
-unifiedSettlementDoesNotCreateConstitutionalPrecedent =
-  FleetGapTOE.fleetSettlementDoesNotCreateConstitutionalPrecedent
-
-unifiedSameVisiblePolicyDoesNotImplySameAuthoritySource :
-  FleetGapTOE.SameVisiblePolicyImpliesSameAuthoritySource → ⊥
-unifiedSameVisiblePolicyDoesNotImplySameAuthoritySource =
-  FleetGapTOE.fleetSameVisiblePolicyDoesNotImplySameAuthoritySource
-
-unifiedMeta2026SettlementNormCalibration :
-  FleetGapTOE.Meta2026SettlementNormCalibration
-unifiedMeta2026SettlementNormCalibration =
-  FleetGapTOE.fleetMeta2026SettlementNormCalibration
-
-unifiedMetaSettlementAloneLegallyBindsCompetitors : Bool
-unifiedMetaSettlementAloneLegallyBindsCompetitors =
-  FleetGapTOE.fleetMetaSettlementAloneLegallyBindsCompetitors
-
-unifiedMetaSettlementDoesNotBindCompetitors :
-  unifiedMetaSettlementAloneLegallyBindsCompetitors ≡ false
-unifiedMetaSettlementDoesNotBindCompetitors =
-  FleetGapTOE.fleetMetaSettlementDoesNotBindCompetitors
-
-unifiedMetaSettlementCreatesFederalStatute : Bool
-unifiedMetaSettlementCreatesFederalStatute =
-  FleetGapTOE.fleetMetaSettlementCreatesFederalStatute
-
-unifiedMetaSettlementDoesNotCreateFederalStatute :
-  unifiedMetaSettlementCreatesFederalStatute ≡ false
-unifiedMetaSettlementDoesNotCreateFederalStatute =
-  FleetGapTOE.fleetMetaSettlementDoesNotCreateFederalStatute
-
-unifiedJMDPosterCreatesLegalAuthority : Bool
-unifiedJMDPosterCreatesLegalAuthority =
-  FleetGapTOE.fleetJMDPosterCreatesLegalAuthority
-
-unifiedJMDPosterDoesNotCreateLegalAuthority :
-  unifiedJMDPosterCreatesLegalAuthority ≡ false
-unifiedJMDPosterDoesNotCreateLegalAuthority =
-  FleetGapTOE.fleetJMDPosterDoesNotCreateLegalAuthority
+unifiedPNFAnaphorCandidateResolutionPromotionImpossible :
+  PNFHyperfabric.PNFAnaphorCandidateResolutionPromotion → ⊥
+unifiedPNFAnaphorCandidateResolutionPromotionImpossible =
+  PNFHyperfabric.pnfAnaphorCandidateResolutionPromotionImpossible

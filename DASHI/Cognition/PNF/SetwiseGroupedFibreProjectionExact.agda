@@ -1,7 +1,7 @@
 module DASHI.Cognition.PNF.SetwiseGroupedFibreProjectionExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; zero)
 
 ------------------------------------------------------------------------
 -- Exact grouped-fibre projection economy.
@@ -60,6 +60,56 @@ consumerObservationExact :
     ≡ observe (setwiseProjection projection input)
 consumerObservationExact projection observe input
   rewrite projectionExact projection input = refl
+
+------------------------------------------------------------------------
+-- Generic delta-fed projection.
+--
+-- This is the reusable execution owner behind sentence anaphors, transported
+-- parent boundaries, occurrence provenance, and other projection relations.
+-- ProjectionRelation is relation-valued on purpose.  A runtime may realise it
+-- with transition tables, temporary tables, or another set carrier.  The
+-- semantic contract sees only the final authority and the affected-key carrier.
+------------------------------------------------------------------------
+
+record DeltaFedProjection
+  (SourceDelta ProjectionRelation AffectedKeys Authority : Set)
+  : Set₁ where
+  field
+    projectDelta : SourceDelta → ProjectionRelation
+    affectedKeys : ProjectionRelation → AffectedKeys
+
+    legacyAuthority : SourceDelta → Authority
+    deltaFedAuthority : SourceDelta → Authority
+
+    finalAuthorityExact :
+      ∀ delta →
+      legacyAuthority delta ≡ deltaFedAuthority delta
+
+    sourceInteriorRescanCount : SourceDelta → Nat
+    sourceInteriorRescanCountIsZero :
+      ∀ delta → sourceInteriorRescanCount delta ≡ zero
+
+    recursiveSelfUpdateCount : SourceDelta → Nat
+    recursiveSelfUpdateCountIsZero :
+      ∀ delta → recursiveSelfUpdateCount delta ≡ zero
+
+    perSourceProceduralStatementCount : SourceDelta → Nat
+    perSourceProceduralStatementCountIsZero :
+      ∀ delta → perSourceProceduralStatementCount delta ≡ zero
+
+open DeltaFedProjection public
+
+deltaFedProjectionConsumerExact :
+  ∀ {SourceDelta ProjectionRelation AffectedKeys Authority Observation : Set}
+    (projection :
+      DeltaFedProjection
+        SourceDelta ProjectionRelation AffectedKeys Authority)
+    (observe : Authority → Observation)
+    (delta : SourceDelta) →
+  observe (legacyAuthority projection delta)
+    ≡ observe (deltaFedAuthority projection delta)
+deltaFedProjectionConsumerExact projection observe delta
+  rewrite finalAuthorityExact projection delta = refl
 
 ------------------------------------------------------------------------
 -- Recurrence specialization contract.
