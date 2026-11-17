@@ -1583,287 +1583,67 @@ open NSBM2TOE public using
 -- Navier-Stokes B / R571 M2 producer-strategy TOE surface.
 ------------------------------------------------------------------------
 
-toeNavierStokesBM2FiniteFoldClosed : Bool
-toeNavierStokesBM2FiniteFoldClosed =
-  NSBM2TOE.cardinalityFreeFiniteFoldClosed
+toeBalabanPhysicalPromotionCut :
+  (BalabanR559TOE.balabanBlockSpinTransfer
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false)
+  × (BalabanR559TOE.balabanUniformKPAbsorption
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false)
+  × (BalabanR559TOE.balabanOSWightmanConstruction
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false)
+toeBalabanPhysicalPromotionCut =
+  toeBalabanBlockSpinStillBlocked ,
+  (toeBalabanUniformKPStillBlocked ,
+   toeBalabanOSWightmanStillBlocked)
 
-toeNavierStokesBM2FiniteFoldClosedIsTrue :
-  toeNavierStokesBM2FiniteFoldClosed ≡ true
-toeNavierStokesBM2FiniteFoldClosedIsTrue =
-  NSBM2TOE.cardinalityFreeFiniteFoldClosedIsTrue
-
-toeNavierStokesBM2SamplewisePaymentStillAnalytic :
-  NSBM2TOE.samplewisePhysicalPaymentStillAnalytic ≡ true
-toeNavierStokesBM2SamplewisePaymentStillAnalytic =
-  NSBM2TOE.samplewisePhysicalPaymentStillAnalyticIsTrue
-
-toeNavierStokesBM2GalerkinFoldStillAnalytic :
-  NSBM2TOE.literalFoldIntoGalerkinDissipationStillAnalytic ≡ true
-toeNavierStokesBM2GalerkinFoldStillAnalytic =
-  NSBM2TOE.literalFoldIntoGalerkinDissipationStillAnalyticIsTrue
-
-toeNavierStokesBM2OldPDFB1B2B3B4NotMandatory :
-  NSBM2TOE.oldPDFB1B2B3B4Mandatory ≡ false
-toeNavierStokesBM2OldPDFB1B2B3B4NotMandatory =
-  NSBM2TOE.oldPDFB1B2B3B4MandatoryIsFalse
-
-toeNavierStokesBM2OldPDFB7NotMandatory :
-  NSBM2TOE.oldPDFB7DirectCovarianceEqualityMandatory ≡ false
-toeNavierStokesBM2OldPDFB7NotMandatory =
-  NSBM2TOE.oldPDFB7DirectCovarianceEqualityMandatoryIsFalse
-
-toeNavierStokesBM2ClayPromotion : Bool
-toeNavierStokesBM2ClayPromotion =
-  NSBM2TOE.modernNSClayPromotion
-
-toeNavierStokesBM2ClayPromotionStillFalse :
-  toeNavierStokesBM2ClayPromotion ≡ false
-toeNavierStokesBM2ClayPromotionStillFalse =
-  NSBM2TOE.modernNSClayPromotionStillFalse
-
-toeNavierStokesBM2Receipt :
-  NSBM2TOE.NavierStokesBM2TOEReceipt
-toeNavierStokesBM2Receipt =
-  NSBM2TOE.canonicalNavierStokesBM2TOEReceipt
-
-toeNavierStokesBM2ZKPFrame :
-  NSBM2TOE.NavierStokesBM2TOEZKPFrame
-toeNavierStokesBM2ZKPFrame =
-  NSBM2TOE.canonicalNavierStokesBM2TOEZKPFrame
-
-------------------------------------------------------------------------
--- Canonical Navier-Stokes Clay frontier and direct non-promotion exports.
-------------------------------------------------------------------------
-
-import DASHI.Unified.NavierStokesClayFrontierTOEConvergenceExact as NSClayTOE
-
-toeNavierStokesClayPromotion : Bool
-toeNavierStokesClayPromotion =
-  NSClayTOE.navierStokesABCDClayPromotion
-
-toeNavierStokesClayPromotionStillFalse :
-  toeNavierStokesClayPromotion ≡ false
-toeNavierStokesClayPromotionStillFalse =
-  NSClayTOE.navierStokesABCDClayPromotionStillFalse
-
-toeNavierStokesGeneralRegularityComplete : Bool
-toeNavierStokesGeneralRegularityComplete =
-  NSClayTOE.generalNSGlobalRegularityComplete
-
-toeNavierStokesGeneralRegularityStillOpen :
-  toeNavierStokesGeneralRegularityComplete ≡ false
-toeNavierStokesGeneralRegularityStillOpen =
-  NSClayTOE.generalNSGlobalRegularityStillOpen
-
-toeNavierStokesCarrierToGeneralImplicationProved : Bool
-toeNavierStokesCarrierToGeneralImplicationProved =
-  NSClayTOE.carrierToGeneralNSImplicationProved
-
-toeNavierStokesCarrierToGeneralImplicationStillOpen :
-  toeNavierStokesCarrierToGeneralImplicationProved ≡ false
-toeNavierStokesCarrierToGeneralImplicationStillOpen =
-  NSClayTOE.carrierToGeneralNSImplicationStillOpen
-
-toeNavierStokesAuthorityPromotionGuard : Bool
-toeNavierStokesAuthorityPromotionGuard =
-  NSClayTOE.navierStokesPromotionGuard
-
-toeNavierStokesAuthorityPromotionGuardStillFalse :
-  toeNavierStokesAuthorityPromotionGuard ≡ false
-toeNavierStokesAuthorityPromotionGuardStillFalse =
-  NSClayTOE.navierStokesPromotionGuardStillFalse
-
-toeNavierStokesClayFrontierZKPFrame :
-  NSClayTOE.NavierStokesClayFrontierTOEZKPFrame
-toeNavierStokesClayFrontierZKPFrame =
-  NSClayTOE.canonicalNavierStokesClayFrontierTOEZKPFrame
-
-toeNavierStokesTerminalPromotionImpossible :
-  NSClayTOE.NSClayDistanceFinalPromotion → ⊥
-toeNavierStokesTerminalPromotionImpossible =
-  NSClayTOE.terminalClayPromotionImpossible
-
-
-------------------------------------------------------------------------
--- Current periodic-B shared weighted wall from R736.
--- Proof ownership remains in R736 through the canonical NS Clay facade.
-------------------------------------------------------------------------
-
-toeNavierStokesSharedWeightedExactlyTwoLeaves : Bool
-toeNavierStokesSharedWeightedExactlyTwoLeaves =
-  NSClayTOE.currentSharedWeightedExactlyTwoLeaves
-
-toeNavierStokesSharedWeightedExactlyTwoLeavesIsTrue :
-  toeNavierStokesSharedWeightedExactlyTwoLeaves ≡ true
-toeNavierStokesSharedWeightedExactlyTwoLeavesIsTrue =
-  NSClayTOE.currentSharedWeightedExactlyTwoLeavesIsTrue
-
-toeNavierStokesSharedWeightedSameCarrier : Bool
-toeNavierStokesSharedWeightedSameCarrier =
-  NSClayTOE.currentSharedWeightedSameCarrier
-
-toeNavierStokesSharedWeightedSameCarrierIsTrue :
-  toeNavierStokesSharedWeightedSameCarrier ≡ true
-toeNavierStokesSharedWeightedSameCarrierIsTrue =
-  NSClayTOE.currentSharedWeightedSameCarrierIsTrue
-
-toeNavierStokesSharedWeightedCarrierIsInputLaplacian : Bool
-toeNavierStokesSharedWeightedCarrierIsInputLaplacian =
-  NSClayTOE.currentSharedWeightedCarrierIsInputLaplacian
-
-toeNavierStokesWeightedPlusEndpointClosed : Bool
-toeNavierStokesWeightedPlusEndpointClosed =
-  NSClayTOE.currentWeightedPlusEndpointClosed
-
-toeNavierStokesWeightedPlusEndpointStillOpen :
-  toeNavierStokesWeightedPlusEndpointClosed ≡ false
-toeNavierStokesWeightedPlusEndpointStillOpen =
-  NSClayTOE.currentWeightedPlusEndpointStillOpen
-
-toeNavierStokesAugmentedCriticalWeightedClosed : Bool
-toeNavierStokesAugmentedCriticalWeightedClosed =
-  NSClayTOE.currentAugmentedCriticalWeightedClosed
-
-toeNavierStokesAugmentedCriticalWeightedStillOpen :
-  toeNavierStokesAugmentedCriticalWeightedClosed ≡ false
-toeNavierStokesAugmentedCriticalWeightedStillOpen =
-  NSClayTOE.currentAugmentedCriticalWeightedStillOpen
-
-toeNavierStokesSharedWeightedLeavesBuildBarrier : Bool
-toeNavierStokesSharedWeightedLeavesBuildBarrier =
-  NSClayTOE.currentSharedWeightedLeavesBuildBarrier
-
-toeNavierStokesSharedWeightedLeavesBuildBarrierIsTrue :
-  toeNavierStokesSharedWeightedLeavesBuildBarrier ≡ true
-toeNavierStokesSharedWeightedLeavesBuildBarrierIsTrue =
-  NSClayTOE.currentSharedWeightedLeavesBuildBarrierIsTrue
-
-toeNavierStokesR726IndependentLeafRequired : Bool
-toeNavierStokesR726IndependentLeafRequired =
-  NSClayTOE.legacyR726IndependentLeafRequired
-
-toeNavierStokesR726IndependentLeafNotRequired :
-  toeNavierStokesR726IndependentLeafRequired ≡ false
-toeNavierStokesR726IndependentLeafNotRequired =
-  NSClayTOE.legacyR726IndependentLeafNotRequired
-
-toeNavierStokesStrictMarginR406IndependentLeafRequired : Bool
-toeNavierStokesStrictMarginR406IndependentLeafRequired =
-  NSClayTOE.legacyStrictMarginR406IndependentLeafRequired
-
-toeNavierStokesStrictMarginR406IndependentLeafNotRequired :
-  toeNavierStokesStrictMarginR406IndependentLeafRequired ≡ false
-toeNavierStokesStrictMarginR406IndependentLeafNotRequired =
-  NSClayTOE.legacyStrictMarginR406IndependentLeafNotRequired
-
-toeNavierStokesBarrierDependentQPlusMinusShortcutAdmissible : Bool
-toeNavierStokesBarrierDependentQPlusMinusShortcutAdmissible =
-  NSClayTOE.barrierDependentQPlusMinusShortcutAdmissible
-
-toeNavierStokesBarrierDependentQPlusMinusShortcutStillCircular :
-  toeNavierStokesBarrierDependentQPlusMinusShortcutAdmissible ≡ false
-toeNavierStokesBarrierDependentQPlusMinusShortcutStillCircular =
-  NSClayTOE.barrierDependentQPlusMinusShortcutStillCircular
-
-toeNavierStokesSharedWeightedClayPromotion : Bool
-toeNavierStokesSharedWeightedClayPromotion =
-  NSClayTOE.currentSharedWeightedClayPromotion
-
-toeNavierStokesSharedWeightedClayPromotionStillFalse :
-  toeNavierStokesSharedWeightedClayPromotion ≡ false
-toeNavierStokesSharedWeightedClayPromotionStillFalse =
-  NSClayTOE.currentSharedWeightedClayPromotionStillFalse
-
-toeNavierStokesContinuumBKMPassageConstructed : Bool
-toeNavierStokesContinuumBKMPassageConstructed =
-  NSClayTOE.continuumBKMPassageConstructed
-
-toeNavierStokesContinuumBKMPassageStillOpen :
-  toeNavierStokesContinuumBKMPassageConstructed ≡ false
-toeNavierStokesContinuumBKMPassageStillOpen =
-  NSClayTOE.continuumBKMPassageStillOpen
-
-toeNavierStokesAllDataBridgeConstructed : Bool
-toeNavierStokesAllDataBridgeConstructed =
-  NSClayTOE.allDataBridgeConstructed
-
-toeNavierStokesAllDataBridgeStillOpen :
-  toeNavierStokesAllDataBridgeConstructed ≡ false
-toeNavierStokesAllDataBridgeStillOpen =
-  NSClayTOE.allDataBridgeStillOpen
-
-toeNavierStokesSubmissionPacketReady : Bool
-toeNavierStokesSubmissionPacketReady =
-  NSClayTOE.submissionPacketReady
-
-toeNavierStokesSubmissionPacketStillNotReady :
-  toeNavierStokesSubmissionPacketReady ≡ false
-toeNavierStokesSubmissionPacketStillNotReady =
-  NSClayTOE.submissionPacketStillNotReady
-
-toeNavierStokesClayEligible : Bool
-toeNavierStokesClayEligible =
-  NSClayTOE.clayEligible
-
-toeNavierStokesClayEligibilityStillFalse :
-  toeNavierStokesClayEligible ≡ false
-toeNavierStokesClayEligibilityStillFalse =
-  NSClayTOE.clayEligibilityStillFalse
-
-------------------------------------------------------------------------
--- Canonical Pareto / Ibrahim / fleet non-promotion gates.
--- These are direct aliases of proof owners. No new theorem authority.
-------------------------------------------------------------------------
-
-toeParetoSearchPriorityCannotPayProof :
-  ParetoSnowballTOE.SearchPriorityCreatesProof → ⊥
-toeParetoSearchPriorityCannotPayProof =
-  ParetoSnowballTOE.searchPriorityDoesNotCreateProof
-
-toeIbrahimDegree729CannotPayMonsterRecognition :
-  ParetoSnowballTOE.Degree729CreatesMonsterHZetaRecognition → ⊥
-toeIbrahimDegree729CannotPayMonsterRecognition =
-  ParetoSnowballTOE.degree729DoesNotCreateMonsterHZetaRecognition
-
-toeFleetSpectralRankCannotPayAuthority :
-  FleetGapTOE.VectorSpectralAuthorityPromotion → ⊥
-toeFleetSpectralRankCannotPayAuthority =
-  FleetGapTOE.fleetVectorSpectralAuthorityPromotionImpossible
-
-toeFleetNumericABIRequiresIndependentEvidence :
-  FleetGapTOE.SpectralNumericABIPromotion → ⊥
-toeFleetNumericABIRequiresIndependentEvidence =
-  FleetGapTOE.fleetSpectralNumericABIPromotionImpossible
-
-------------------------------------------------------------------------
--- Canonical brain/connectome/fMRI quotient boundary.
--- The observation owners retain authority. This facade adds no empirical proof.
-------------------------------------------------------------------------
-
-toeBrainFirstMissing : BrainObservation.BrainObservationFirstMissing
-toeBrainFirstMissing = BrainFMRI.brainFirstMissing
-
-toeBrainBidirectionalFirstMissing :
-  BrainBidirectional.BidirectionalObservationFirstMissing
-toeBrainBidirectionalFirstMissing = BrainFMRI.bidirectionalFirstMissing
-
-toeBrainObservationNonPromotion :
-  BrainBidirectional.NonPromotionBoundary
-toeBrainObservationNonPromotion = BrainFMRI.brainNonPromotionBoundary
-
-toeBrainJPromotionBlocked :
-  BrainSpine.objectExternalJPromotion BrainFMRI.brainFMRIObject ≡ false
-toeBrainJPromotionBlocked = BrainFMRI.brainFMRIJPromotionBlocked
 
 ------------------------------------------------------------------------
 -- Navier-Stokes A/B/C/D native-proof max-cut.
+-- Source owner remains NSABCDConcentratedCompletionCutExact.
 ------------------------------------------------------------------------
 
 toeNSABCDMaxCutReceipt : NSCut.NSABCDTOEMaxCutReceipt
-toeNSABCDMaxCutReceipt = NSCut.canonicalNSABCDTOEMaxCutReceipt
+toeNSABCDMaxCutReceipt =
+  NSCut.canonicalNSABCDTOEMaxCutReceipt
 
 toeNSABCDZKPFrame : NSCut.NSABCDTOEZKPFrame
-toeNSABCDZKPFrame = NSCut.canonicalNSABCDTOEZKPFrame
+toeNSABCDZKPFrame =
+  NSCut.canonicalNSABCDTOEZKPFrame
+
+toeNSR540OrderedOffDiagonalM2CompilerClosed :
+  NSCut.bR540OrderedOffDiagonalM2CompilerClosed ≡ true
+toeNSR540OrderedOffDiagonalM2CompilerClosed =
+  NSCut.bR540OrderedOffDiagonalM2CompilerClosedIsTrue
+
+toeNSM2ToR568CompilerClosed :
+  NSCut.bM2ToR568CompilerClosed ≡ true
+toeNSM2ToR568CompilerClosed =
+  NSCut.bM2ToR568CompilerClosedIsTrue
+
+toeNSR567FullSquareNotCanonicalM2Consumer :
+  NSCut.bR567FullSquarePointwiseM2IsCanonicalConsumer ≡ false
+toeNSR567FullSquareNotCanonicalM2Consumer =
+  NSCut.bR567FullSquarePointwiseM2IsCanonicalConsumerIsFalse
+
+toeNSPhysicalWeightedSecondMomentPaymentStillOpen :
+  NSCut.bPhysicalWeightedSecondMomentPaymentClosed ≡ false
+toeNSPhysicalWeightedSecondMomentPaymentStillOpen =
+  NSCut.bPhysicalWeightedSecondMomentPaymentClosedIsFalse
+
+toeNSLiteralAlternativeStillOpen :
+  NSCut.anyLiteralAlternativeClosedInAgdaHere ≡ false
+toeNSLiteralAlternativeStillOpen =
+  NSCut.anyLiteralAlternativeClosedInAgdaHereIsFalse
+
+toeNSExternalReceiptNotPromoted :
+  NSCut.externalReceiptPromotedToAgdaProof ≡ false
+toeNSExternalReceiptNotPromoted =
+  NSCut.externalReceiptPromotedToAgdaProofIsFalse
+
+toeNSWholeSpaceNotDerivedFromPeriodic :
+  NSCut.aDerivedFromB ≡ false
+toeNSWholeSpaceNotDerivedFromPeriodic =
+  NSCut.aDerivedFromBIsFalse
+
 
 toeNSLiteralFixedOutputCovarianceM2PaymentClosed :
   NSCut.bLiteralFixedOutputCovarianceM2PaymentClosed ≡ true
@@ -1904,28 +1684,3 @@ toeNSCrossGradientCutoffUniformAggregationStillOpen :
   NSCut.bCrossGradientCutoffUniformAggregationClosed ≡ false
 toeNSCrossGradientCutoffUniformAggregationStillOpen =
   NSCut.bCrossGradientCutoffUniformAggregationClosedIsFalse
-
-toeNSM2ToR568CompilerClosed :
-  NSCut.bM2ToR568CompilerClosed ≡ true
-toeNSM2ToR568CompilerClosed =
-  NSCut.bM2ToR568CompilerClosedIsTrue
-
-toeNSR567FullSquareNotCanonicalM2Consumer :
-  NSCut.bR567FullSquarePointwiseM2IsCanonicalConsumer ≡ false
-toeNSR567FullSquareNotCanonicalM2Consumer =
-  NSCut.bR567FullSquarePointwiseM2IsCanonicalConsumerIsFalse
-
-toeNSLiteralAlternativeStillOpen :
-  NSCut.anyLiteralAlternativeClosedInAgdaHere ≡ false
-toeNSLiteralAlternativeStillOpen =
-  NSCut.anyLiteralAlternativeClosedInAgdaHereIsFalse
-
-toeNSExternalReceiptNotPromoted :
-  NSCut.externalReceiptPromotedToAgdaProof ≡ false
-toeNSExternalReceiptNotPromoted =
-  NSCut.externalReceiptPromotedToAgdaProofIsFalse
-
-toeNSWholeSpaceNotDerivedFromPeriodic :
-  NSCut.aDerivedFromB ≡ false
-toeNSWholeSpaceNotDerivedFromPeriodic =
-  NSCut.aDerivedFromBIsFalse

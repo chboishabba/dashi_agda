@@ -313,183 +313,54 @@ unifiedYMImplementAToDMaxCutReceipt :
 unifiedYMImplementAToDMaxCutReceipt =
   YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
 
-------------------------------------------------------------------------
--- Navier-Stokes B / R571 M2 normalized TOE receipt.
-------------------------------------------------------------------------
-
-unifiedNavierStokesBM2Receipt :
-  NSBM2TOE.NavierStokesBM2TOEReceipt
-unifiedNavierStokesBM2Receipt =
-  NSBM2TOE.canonicalNavierStokesBM2TOEReceipt
-
-unifiedNavierStokesBM2ZKPFrame :
-  NSBM2TOE.NavierStokesBM2TOEZKPFrame
-unifiedNavierStokesBM2ZKPFrame =
-  NSBM2TOE.canonicalNavierStokesBM2TOEZKPFrame
-
-------------------------------------------------------------------------
--- Typed Balaban continuum and Fleet target aggregate aliases.
-------------------------------------------------------------------------
-
-unifiedBalabanContinuumLimitReceipt :
-  BalabanRGTOE.BalabanContinuumLimitReceipt
-unifiedBalabanContinuumLimitReceipt =
-  BalabanRGTOE.balabanContinuumLimitReceipt
-
-unifiedBalabanContinuumLimitPromotionImpossible :
-  BalabanRGTOE.BalabanContinuumLimitPromotion → ⊥
-unifiedBalabanContinuumLimitPromotionImpossible =
-  BalabanRGTOE.balabanContinuumLimitPromotionImpossible
-
-unifiedDepthContinuumLimitReceipt :
-  BalabanRGTOE.DepthContinuumLimitReceipt
-unifiedDepthContinuumLimitReceipt =
-  BalabanRGTOE.depthContinuumLimitReceipt
-
-unifiedDepthContinuumLimitPromotionImpossible :
-  BalabanRGTOE.DepthContinuumLimitPromotion → ⊥
-unifiedDepthContinuumLimitPromotionImpossible =
-  BalabanRGTOE.depthContinuumLimitPromotionImpossible
-
-unifiedFleetDischargedCoreKnowledgeFibres : ℕ
-unifiedFleetDischargedCoreKnowledgeFibres =
-  FleetGapTOE.dischargedCoreKnowledgeFibres
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
-
-unifiedFleetDischargedCoreKnowledgeFibresIs584 :
-  unifiedFleetDischargedCoreKnowledgeFibres ≡ 584
-unifiedFleetDischargedCoreKnowledgeFibresIs584 =
-  FleetGapTOE.fleetRecordedDischargedCountIs584
-
-unifiedFleetPolarityContradictionGaps : ℕ
-unifiedFleetPolarityContradictionGaps =
-  FleetGapTOE.polarityContradictionGaps
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
-
-unifiedFleetPolarityContradictionGapsIs44 :
-  unifiedFleetPolarityContradictionGaps ≡ 44
-unifiedFleetPolarityContradictionGapsIs44 =
-  FleetGapTOE.fleetRecordedContradictionCountIs44
-
-unifiedFleetUnformalisedFormalGaps : ℕ
-unifiedFleetUnformalisedFormalGaps =
-  FleetGapTOE.unformalisedFormalGaps
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
-
-unifiedFleetUnformalisedFormalGapsIs58 :
-  unifiedFleetUnformalisedFormalGaps ≡ 58
-unifiedFleetUnformalisedFormalGapsIs58 =
-  FleetGapTOE.fleetRecordedUnformalisedGapCountIs58
-
-unifiedFleetTargetsOnlyUnformalisedFormalGaps :
-  FleetGapTOE.targetOnlyUnformalisedFormalGaps
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
-  ≡ true
-unifiedFleetTargetsOnlyUnformalisedFormalGaps =
-  FleetGapTOE.fleetTargetsOnlyUnformalisedFormalGaps
-
-
-------------------------------------------------------------------------
--- Fleet named-manifest acquisition boundary.
-------------------------------------------------------------------------
-
-unifiedFleetManifestAcquisitionDemand =
-  FleetGapTOE.fleetManifestAcquisitionDemand
-
-unifiedFleetNamedManifestStillMissing :
-  FleetGapTOE.namedFormalGapManifestAcquired ≡ false
-unifiedFleetNamedManifestStillMissing =
-  FleetGapTOE.namedFormalGapManifestAcquiredIsFalse
-
-unifiedFleetPerGapDispatchStillBlocked :
-  FleetGapTOE.perGapDispatchEnabled ≡ false
-unifiedFleetPerGapDispatchStillBlocked =
-  FleetGapTOE.perGapDispatchEnabledIsFalse
-
-unifiedFleetRelatedSymbolsRequired :
-  FleetGapTOE.fleetRelatedSymbolsRequired ≡ true
-unifiedFleetRelatedSymbolsRequired =
-  FleetGapTOE.fleetRelatedSymbolsRequiredIsTrue
-
-unifiedFleetDiscoverRequired :
-  FleetGapTOE.fleetDiscoverRequired ≡ true
-unifiedFleetDiscoverRequired =
-  FleetGapTOE.fleetDiscoverRequiredIsTrue
-
-unifiedFleetRoundLineageRequired :
-  FleetGapTOE.fleetRoundLineageRequired ≡ true
-unifiedFleetRoundLineageRequired =
-  FleetGapTOE.fleetRoundLineageRequiredIsTrue
-
-unifiedFleetCountDoesNotCreateNamedManifest :
-  FleetGapTOE.CountCreatesNamedManifest → ⊥
-unifiedFleetCountDoesNotCreateNamedManifest =
-  FleetGapTOE.fleetCountDoesNotCreateNamedManifest
-
-------------------------------------------------------------------------
--- Direct Pareto / snowball / Ibrahim and ternary-27 non-promotion surface.
-------------------------------------------------------------------------
-
-unifiedIbrahimSearchPriorityDoesNotCreateProof :
-  ParetoSnowballTOE.SearchPriorityCreatesProof → ⊥
-unifiedIbrahimSearchPriorityDoesNotCreateProof =
-  ParetoSnowballTOE.searchPriorityDoesNotCreateProof
-
-unifiedIbrahimProducerSourceDoesNotCreateRunReceipt :
-  ParetoSnowballTOE.ProducerSourceCreatesRunReceipt → ⊥
-unifiedIbrahimProducerSourceDoesNotCreateRunReceipt =
-  ParetoSnowballTOE.producerSourceDoesNotCreateRunReceipt
-
-unifiedIbrahimDegree729DoesNotCreateMonsterHZetaRecognition :
-  ParetoSnowballTOE.Degree729CreatesMonsterHZetaRecognition → ⊥
-unifiedIbrahimDegree729DoesNotCreateMonsterHZetaRecognition =
-  ParetoSnowballTOE.degree729DoesNotCreateMonsterHZetaRecognition
-
-unifiedIbrahimPaperOracleDoesNotIdentifyHistoricalDump :
-  ParetoSnowballTOE.PaperOracleIdentifiesDump → ⊥
-unifiedIbrahimPaperOracleDoesNotIdentifyHistoricalDump =
-  ParetoSnowballTOE.paperOracleDoesNotIdentifyHistoricalDump
-
-unifiedIbrahimRoutePreferenceDoesNotCreateExecutionReceipt :
-  ParetoSnowballTOE.RoutePreferenceCreatesExecutionReceipt → ⊥
-unifiedIbrahimRoutePreferenceDoesNotCreateExecutionReceipt =
-  ParetoSnowballTOE.routePreferenceDoesNotCreateExecutionReceipt
-
-unifiedIbrahimMergedLeanSourceDoesNotCreateKernelReceipt :
-  ParetoSnowballTOE.MergedLeanSourceCreatesKernelReceipt → ⊥
-unifiedIbrahimMergedLeanSourceDoesNotCreateKernelReceipt =
-  ParetoSnowballTOE.mergedLeanSourceDoesNotCreateKernelReceipt
-
-unifiedIbrahimOEISDoesNotCreateMultiplicityAction :
-  ParetoSnowballTOE.NinetyOEISEqualityCreatesMultiplicityAction → ⊥
-unifiedIbrahimOEISDoesNotCreateMultiplicityAction =
-  ParetoSnowballTOE.oeisDoesNotCreateMultiplicityAction
-
-unifiedIbrahimFiniteIrreducibilityDoesNotCreateMonsterHZetaRecognition :
-  ParetoSnowballTOE.FiniteIrreducibilityCreatesMonsterHZetaRecognition → ⊥
-unifiedIbrahimFiniteIrreducibilityDoesNotCreateMonsterHZetaRecognition =
-  ParetoSnowballTOE.finiteIrreducibilityDoesNotCreateMonsterHZetaRecognition
-
-unifiedIbrahimCurrentQidDoesNotIdentifyHistoricalTitle :
-  ParetoSnowballTOE.CurrentQidIdentifiesHistoricalTitle → ⊥
-unifiedIbrahimCurrentQidDoesNotIdentifyHistoricalTitle =
-  ParetoSnowballTOE.currentQidDoesNotIdentifyHistoricalTitle
-
-unified369Ternary27MonsterRepresentationNotPromoted =
-  MaxCut369.toe27MonsterRepresentationNotPromoted
-
-unified369Ternary27MonsterEmbeddingNotPromoted =
-  MaxCut369.toe27MonsterEmbeddingNotPromoted
 
 ------------------------------------------------------------------------
 -- Navier-Stokes A/B/C/D native-proof max-cut.
 ------------------------------------------------------------------------
 
 unifiedNSABCDMaxCutReceipt : NSCut.NSABCDTOEMaxCutReceipt
-unifiedNSABCDMaxCutReceipt = NSCut.canonicalNSABCDTOEMaxCutReceipt
+unifiedNSABCDMaxCutReceipt =
+  NSCut.canonicalNSABCDTOEMaxCutReceipt
 
 unifiedNSABCDZKPFrame : NSCut.NSABCDTOEZKPFrame
-unifiedNSABCDZKPFrame = NSCut.canonicalNSABCDTOEZKPFrame
+unifiedNSABCDZKPFrame =
+  NSCut.canonicalNSABCDTOEZKPFrame
+
+unifiedNSR540OrderedOffDiagonalM2CompilerClosed :
+  NSCut.bR540OrderedOffDiagonalM2CompilerClosed ≡ true
+unifiedNSR540OrderedOffDiagonalM2CompilerClosed =
+  NSCut.bR540OrderedOffDiagonalM2CompilerClosedIsTrue
+
+unifiedNSM2ToR568CompilerClosed :
+  NSCut.bM2ToR568CompilerClosed ≡ true
+unifiedNSM2ToR568CompilerClosed =
+  NSCut.bM2ToR568CompilerClosedIsTrue
+
+unifiedNSR567FullSquareNotCanonicalM2Consumer :
+  NSCut.bR567FullSquarePointwiseM2IsCanonicalConsumer ≡ false
+unifiedNSR567FullSquareNotCanonicalM2Consumer =
+  NSCut.bR567FullSquarePointwiseM2IsCanonicalConsumerIsFalse
+
+unifiedNSPhysicalWeightedSecondMomentPaymentStillOpen :
+  NSCut.bPhysicalWeightedSecondMomentPaymentClosed ≡ false
+unifiedNSPhysicalWeightedSecondMomentPaymentStillOpen =
+  NSCut.bPhysicalWeightedSecondMomentPaymentClosedIsFalse
+
+unifiedNSLiteralAlternativeStillOpen :
+  NSCut.anyLiteralAlternativeClosedInAgdaHere ≡ false
+unifiedNSLiteralAlternativeStillOpen =
+  NSCut.anyLiteralAlternativeClosedInAgdaHereIsFalse
+
+unifiedNSExternalReceiptNotPromoted :
+  NSCut.externalReceiptPromotedToAgdaProof ≡ false
+unifiedNSExternalReceiptNotPromoted =
+  NSCut.externalReceiptPromotedToAgdaProofIsFalse
+
+unifiedNSWholeSpaceNotDerivedFromPeriodic :
+  NSCut.aDerivedFromB ≡ false
+unifiedNSWholeSpaceNotDerivedFromPeriodic =
+  NSCut.aDerivedFromBIsFalse
+
 
 unifiedNSLiteralFixedOutputCovarianceM2PaymentClosed :
   NSCut.bLiteralFixedOutputCovarianceM2PaymentClosed ≡ true
@@ -530,28 +401,3 @@ unifiedNSCrossGradientCutoffUniformAggregationStillOpen :
   NSCut.bCrossGradientCutoffUniformAggregationClosed ≡ false
 unifiedNSCrossGradientCutoffUniformAggregationStillOpen =
   NSCut.bCrossGradientCutoffUniformAggregationClosedIsFalse
-
-unifiedNSM2ToR568CompilerClosed :
-  NSCut.bM2ToR568CompilerClosed ≡ true
-unifiedNSM2ToR568CompilerClosed =
-  NSCut.bM2ToR568CompilerClosedIsTrue
-
-unifiedNSR567FullSquareNotCanonicalM2Consumer :
-  NSCut.bR567FullSquarePointwiseM2IsCanonicalConsumer ≡ false
-unifiedNSR567FullSquareNotCanonicalM2Consumer =
-  NSCut.bR567FullSquarePointwiseM2IsCanonicalConsumerIsFalse
-
-unifiedNSLiteralAlternativeStillOpen :
-  NSCut.anyLiteralAlternativeClosedInAgdaHere ≡ false
-unifiedNSLiteralAlternativeStillOpen =
-  NSCut.anyLiteralAlternativeClosedInAgdaHereIsFalse
-
-unifiedNSExternalReceiptNotPromoted :
-  NSCut.externalReceiptPromotedToAgdaProof ≡ false
-unifiedNSExternalReceiptNotPromoted =
-  NSCut.externalReceiptPromotedToAgdaProofIsFalse
-
-unifiedNSWholeSpaceNotDerivedFromPeriodic :
-  NSCut.aDerivedFromB ≡ false
-unifiedNSWholeSpaceNotDerivedFromPeriodic =
-  NSCut.aDerivedFromBIsFalse
