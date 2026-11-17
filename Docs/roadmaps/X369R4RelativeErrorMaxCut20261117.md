@@ -160,3 +160,91 @@ grokking/Sophontic/trialectic-face non-descent gates.
 Attribution: original Leech-LILA Anatolii Kornienko; DASHI
 mathematical formalisation follows the pre-existing original-source
 owner graph. No ESD surfaces changed.
+
+
+## Round 3: directly certified pairwise R4 errors
+
+New independently tested SymPy owner:
+`scripts/check_x369_r4_pairwise_sympy.py`.
+For a fixed certified coherent/mixed phase,
+write `H=h_i-h_j`, `Delta H=Delta h_i-Delta h_j`,
+`u=K_w phase(x)`, and `Delta u` its shared fused-coefficient
+error. Exact polynomial:
+
+    Delta(<u,H>) = <Delta u,H> + <u,Delta H>
+                    + <Delta u,Delta H>.
+
+For `|Delta u_l|<=U_l` and independent history
+errors, a sufficient pairwise directed envelope is
+
+    B_ij^directed = Σ_l [
+      U_l |h_i,l-h_j,l|
+      + (|u_l|+U_l)*(eps_hi,l+eps_hj,l) ].
+
+For the shared C2 head `v_l`, put
+`A_l=|h_i,l|-|h_j,l|`. The absolute value's
+1-Lipschitz law gives
+
+    B_ij^C2 = Σ_l [
+      |v_l|*(eps_hi,l+eps_hj,l)
+      + eps_v,l*(|A_l|+eps_hi,l+eps_hj,l) ].
+
+Add the bias-difference error, and *separately*
+the differential source floating-evaluation
+error. The total strict decision condition is
+
+    source_score_i-source_score_j > B_ij.
+
+To preserve the ordered TopK source output,
+apply this to all selected/unselected pairs
+and all adjacent ordered selected pairs.
+Original `torch.topk` equality/tie policy,
+q-mask branch and orientation sign have
+independent admissions.
+
+This is strictly more informative than adding
+two isolated full-logit error budgets: shared
+x/w perturbations multiply `h_i-h_j`,
+not `h_i` and `h_j` independently. Independent
+history-quantizer errors remain bounded
+separately unless shared representation
+provenance establishes their correlation.
+
+**Direct local SymPy execution: 20 grouped checks PASS.**
+Source rational coherent fixture has ordered
+top2 `(2,3)` and error tolerance 1/256
+for every declared input/head/history channel
+and expert bias. Every selected/outside
+strict pair, selected internal gap,
+all six perturbed pair intervals and the
+mean-q correlation algebra pass.
+
+Measured *symbolic bound tightening*
+for selected pair (2,3):
+
+    independent B2+B3 = 1648402/8388608 ≈ 0.196505
+    pairwise B23        = 1185801/8388608 ≈ 0.141358
+
+i.e. **28.1%** less conservative. For selected
+(2) against outside (0), the bound changes
+from `1418642/8388608` (≈0.169115)
+to `956041/8388608` (≈0.113969),
+**32.6%** less conservative.
+
+These numbers are exact RATIONAL FIXTURE
+envelopes, not a physical quantiser,
+trained model or device uncertainty
+measurement. No Agda/CI/GPU acceptance
+is implied.
+
+**Next maximum cut:** extend this pairwise
+relative-error object to source **all-triad**
+tensor scores and the COMPLETE baseline C2
+h-half plus expert bias under independently
+declared per-coordinate precision conventions,
+then instantiate the same relative envelope
+for softmax oscillation and a guarded
+selected-history trace. Do not require
+a false exact reconstruction of original
+directed activations, and retain independent
+semantic/face consumer evidence.
