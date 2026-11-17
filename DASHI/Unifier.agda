@@ -2018,9 +2018,26 @@ unifierBalabanOSWightmanStillBlocked =
 -- Unifier is a facade. It owns no legal or source theorem.
 ------------------------------------------------------------------------
 
+unifierBalabanPhysicalPromotionCut :
+  (BalabanR559TOE.balabanBlockSpinTransfer
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false)
+  × (BalabanR559TOE.balabanUniformKPAbsorption
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false)
+  × (BalabanR559TOE.balabanOSWightmanConstruction
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false)
+unifierBalabanPhysicalPromotionCut =
+  unifierBalabanBlockSpinStillBlocked ,
+  (unifierBalabanUniformKPStillBlocked ,
+   unifierBalabanOSWightmanStillBlocked)
+
+
+------------------------------------------------------------------------
+-- Governed legal workflow -> Ibrahim source genealogy -> semantic boundary.
+-- Unifier is a facade. It owns no legal or source theorem.
+------------------------------------------------------------------------
+
 import DASHI.Unified.GovernedLegalWorkflowSourceGenealogyTOEExact as LegalGenealogyTOE
 import DASHI.Unified.GovernedLegalWorkflowSourceSemanticTOEExact as LegalSemanticTOE
-import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalGovernanceTOE
 
 unifierGovernedLegalWorkflowSourceSemanticHandoff :
   LegalSemanticTOE.GovernedLegalWorkflowSourceSemanticHandoff
@@ -2054,47 +2071,6 @@ unifierLegalSemanticIdentifierAuthorityFirewall =
 unifierLegalSemanticESDMutationForbidden =
   LegalSemanticTOE.toeESDSurfaceMutationRemainsForbidden
 
-unifierGovernedLegalWorkflowInvariantHandoff :
-  LegalGovernanceTOE.GovernedLegalWorkflowTOEInvariantHandoff
-unifierGovernedLegalWorkflowInvariantHandoff =
-  LegalGovernanceTOE.canonicalGovernedLegalWorkflowTOEInvariantHandoff
-
-unifierQualificationDoesNotAutomaticallyProveForensicCompliance :
-  LegalGovernanceTOE.QualificationAutomaticallyForensicCompliance → ⊥
-unifierQualificationDoesNotAutomaticallyProveForensicCompliance =
-  LegalGovernanceTOE.toeQualificationDoesNotAutomaticallyProveForensicCompliance
-
-unifierLegalReviewDoesNotCreateClaimTruth :
-  LegalGovernanceTOE.LegalReviewDecisionCreatesClaimTruth → ⊥
-unifierLegalReviewDoesNotCreateClaimTruth =
-  LegalGovernanceTOE.toeLegalReviewDoesNotCreateClaimTruth
-
-unifierOfficialLegalSurfaceDoesNotRecoverFineState :
-  LegalGovernanceTOE.OfficialLegalSurfaceRecoversFineState → ⊥
-unifierOfficialLegalSurfaceDoesNotRecoverFineState =
-  LegalGovernanceTOE.toeOfficialLegalSurfaceDoesNotRecoverFineState
-
-unifierOfficialActionDoesNotRecoverAutonomyAndAuthority :
-  LegalGovernanceTOE.OfficialActionRecoversAutonomyAndAuthority → ⊥
-unifierOfficialActionDoesNotRecoverAutonomyAndAuthority =
-  LegalGovernanceTOE.toeOfficialActionDoesNotRecoverAutonomyAndAuthority
-
-unifierLegalityAloneDoesNotCreateLegitimacy :
-  LegalGovernanceTOE.LegalOnlyCreatesLegitimacy → ⊥
-unifierLegalityAloneDoesNotCreateLegitimacy =
-  LegalGovernanceTOE.toeLegalityAloneDoesNotCreateLegitimacy
-
-unifierActionstepStyleVendorIdentityDoesNotCreateAuthority :
-  LegalGovernanceTOE.actionstepStyleVendorIdentityCreatesAuthority ≡ false
-unifierActionstepStyleVendorIdentityDoesNotCreateAuthority =
-  LegalGovernanceTOE.toeActionstepStyleVendorIdentityCreatesAuthority
-
-unifierActionstepStyleTargetNeedsOwnAuthorityWitness :
-  LegalGovernanceTOE.actionstepStyleTargetNeedsOwnAuthorityWitness ≡ true
-unifierActionstepStyleTargetNeedsOwnAuthorityWitness =
-  LegalGovernanceTOE.toeActionstepStyleTargetNeedsOwnAuthorityWitness
-
-
 ------------------------------------------------------------------------
 -- Fleet-58 named-manifest dispatch boundary.
 ------------------------------------------------------------------------
@@ -2113,132 +2089,42 @@ unifierFleetDispatchRequiresNamedManifest =
 unifierFleetCountDoesNotIdentifyGapObjects =
   FleetGapTOE.externalGapCountIdentifiesIndividualGapsIsFalse
 
+-- Reuse source-owned semantic classification and non-promotion.
+unifierHeuristicOnlyLegalSemanticCandidateAbstains =
+  LegalSemanticTOE.toeHeuristicOnlyLegalSemanticCandidateAbstains
 
-------------------------------------------------------------------------
--- SensibLaw / governance direct non-promotion handoff.
-------------------------------------------------------------------------
+unifierSemanticPromotionCannotConferLegalAuthority =
+  LegalSemanticTOE.toeSemanticPromotionCannotConferLegalAuthority
 
-open import DASHI.Governance.PromotionSpineTests public using
-  ( candidateExampleQuarantines
-  ; candidateExampleAbstains
-  ; citationExampleCannotCloseIdentity
-  ; citationExampleQuarantines
-  ; artifactExamplePromotesWhenAllFiveClose
-  ; artifactExampleAuthorizesGovernedPromotion
-  )
-
-open import DASHI.Law.SensibLawITIRParityEverything public using
-  ( selectedLegalRuntimeContract
-  ; selectedITIRNormalizedParity
-  ; selectedStageParityWitness
-  ; selectedOwnerParityWitness
-  ; SemanticPromotionPolicySurface
-  ; semanticPromotionPolicySurface
-  ; heuristic-only-abstains
-  ; promotion-ignores-heuristic-bits
-  ; semantic-promotion-truth-authority-closed
-  ; semantic-promotion-legal-authority-closed
-  ; semantic-promotion-all-authority-closed
-  ; LegalCitationBoundary
-  ; canonicalLegalCitationBoundary
-  ; CompositeCompliance
-  ; composeCertifiedStages
-  )
-
-------------------------------------------------------------------------
--- Fleet formal-gap cut. Reuse the canonical fleet owner.
-------------------------------------------------------------------------
-
-unifierFleetRecordedDischargedCountIs584 :
-  FleetGapTOE.dischargedCoreKnowledgeFibres
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 584
-unifierFleetRecordedDischargedCountIs584 =
-  FleetGapTOE.fleetRecordedDischargedCountIs584
-
-unifierFleetRecordedUnformalisedGapCountIs58 :
-  FleetGapTOE.unformalisedFormalGaps
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 58
-unifierFleetRecordedUnformalisedGapCountIs58 =
-  FleetGapTOE.fleetRecordedUnformalisedGapCountIs58
-
-unifierFleetRecordedContradictionCountIs44 :
-  FleetGapTOE.polarityContradictionGaps
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 44
-unifierFleetRecordedContradictionCountIs44 =
-  FleetGapTOE.fleetRecordedContradictionCountIs44
-
-unifierFleetRecordedMacroscopicMotifCountIs3 :
-  FleetGapTOE.macroscopicEigenMotifCount
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 3
-unifierFleetRecordedMacroscopicMotifCountIs3 =
-  FleetGapTOE.fleetRecordedMacroscopicMotifCountIs3
-
-unifierFleetTargetsOnlyUnformalisedFormalGaps :
-  FleetGapTOE.targetOnlyUnformalisedFormalGaps
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
-unifierFleetTargetsOnlyUnformalisedFormalGaps =
-  FleetGapTOE.fleetTargetsOnlyUnformalisedFormalGaps
+unifierSemanticPromotionCannotConferAnyAuthority =
+  LegalSemanticTOE.toeSemanticPromotionCannotConferAnyAuthority
 
 
-unifierFleetSpectralLabelsDoNotIdentifyTheoremOwners :
-  FleetGapTOE.spectralLabelsIdentifyTheoremOwners
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
-unifierFleetSpectralLabelsDoNotIdentifyTheoremOwners =
-  FleetGapTOE.fleetSpectralLabelDoesNotIdentifyTheoremOwner
+-- Unifier facade over canonical governed legal compliance firewalls.
+unifierExpertQualificationDoesNotCreateForensicCompliance =
+  LegalSemanticTOE.toeExpertQualificationDoesNotCreateForensicCompliance
 
-unifierFleetMetaIntrospectorAttributionPreserved :
-  FleetGapTOE.metaIntrospectorAttributionPreserved
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
-unifierFleetMetaIntrospectorAttributionPreserved = refl
+unifierReportAdmissionDoesNotRepairMissingInput =
+  LegalSemanticTOE.toeReportAdmissionDoesNotRepairMissingInput
 
-unifierFleetMetaIntrospectorProofNotBorrowed :
-  FleetGapTOE.metaIntrospectorProofBorrowed
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
-unifierFleetMetaIntrospectorProofNotBorrowed = refl
+unifierLegalReviewDoesNotCreateClaimTruth =
+  LegalSemanticTOE.toeLegalReviewDoesNotCreateClaimTruth
 
-unifierFleetDischargedFibresRemainOutOfTarget :
-  FleetGapTOE.dischargedFibresRemainDischarged
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
-unifierFleetDischargedFibresRemainOutOfTarget =
-  FleetGapTOE.fleetDischargedFibresRemainOutOfTarget
+unifierOfficialLegalSurfaceDoesNotRecoverFineState =
+  LegalSemanticTOE.toeOfficialLegalSurfaceDoesNotRecoverFineState
 
-------------------------------------------------------------------------
--- Recognition-objective rechart -> Unifier facade.
---
--- Reuse existing Lacan/Irigaray and feminist recognition owners.
--- This facade preserves separation from legal authority and compliance.
--- A changed approval objective can change selected conduct.
--- It does not erase sanctions, desire, symbolic structure, or proof duties.
-------------------------------------------------------------------------
+unifierLegalityAloneDoesNotCreateLegitimacy =
+  LegalSemanticTOE.toeLegalityAloneDoesNotCreateLegitimacy
 
-import DASHI.Core.GenderedApprovalObjectiveRechartExact as ApprovalRechart
-import DASHI.Governance.FeministRecognitionAuthorityCrossPollinationExact as FeministRecognition
+unifierActionstepStyleVendorIdentityCreatesAuthority =
+  LegalSemanticTOE.toeActionstepStyleVendorIdentityCreatesAuthority
 
-unifierApprovalObjectiveRechartBoundary :
-  ApprovalRechart.ApprovalObjectiveRechartBoundary
-unifierApprovalObjectiveRechartBoundary =
-  ApprovalRechart.canonicalApprovalObjectiveRechartBoundary
+unifierActionstepStyleVendorIdentityCreatesAuthorityIsFalse =
+  LegalSemanticTOE.toeActionstepStyleVendorIdentityCreatesAuthorityIsFalse
 
-unifierApprovalObjectiveRechartChangesSelectedConduct :
-  ApprovalRechart.chooseByObjective ApprovalRechart.approvalIndexedObjective
-    ≡ ApprovalRechart.chooseByObjective ApprovalRechart.declaredCriterionObjective
-    → ⊥
-unifierApprovalObjectiveRechartChangesSelectedConduct =
-  ApprovalRechart.objectiveRechartChangesSelectedConduct
+unifierActionstepStyleTargetNeedsOwnAuthorityWitness =
+  LegalSemanticTOE.toeActionstepStyleTargetNeedsOwnAuthorityWitness
 
-unifierApprovalSupposedAuthorityIsNotVerifiedAuthority =
-  ApprovalRechart.supposedApprovalAuthorityIsNotVerifiedAuthority
+unifierActionstepStyleTargetNeedsOwnAuthorityWitnessIsTrue =
+  LegalSemanticTOE.toeActionstepStyleTargetNeedsOwnAuthorityWitnessIsTrue
 
-unifierApprovalDesireNeedNotTerminateAtApproval =
-  ApprovalRechart.desireNeedNotTerminateAtApproval
-
-unifierApprovalBigOtherIsNotLiteralOmniscientApprover =
-  ApprovalRechart.bigOtherIsNotLiteralOmniscientApprover
-
-unifierApprovalReciprocalContactDoesNotDetermineUniqueHierarchy =
-  ApprovalRechart.reciprocalContactDoesNotDetermineUniqueHierarchy
-
-unifierFeministRecognitionCrossPollinationBoundary :
-  FeministRecognition.FeministRecognitionCrossPollinationBoundary
-unifierFeministRecognitionCrossPollinationBoundary =
-  FeministRecognition.canonicalFeministRecognitionCrossPollinationBoundary

@@ -1784,9 +1784,26 @@ toeBalabanOSWightmanStillBlocked =
 -- Reuse-only. Original theorem owners retain proof authority.
 ------------------------------------------------------------------------
 
+toeBalabanPhysicalPromotionCut :
+  (BalabanR559TOE.balabanBlockSpinTransfer
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false)
+  × (BalabanR559TOE.balabanUniformKPAbsorption
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false)
+  × (BalabanR559TOE.balabanOSWightmanConstruction
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false)
+toeBalabanPhysicalPromotionCut =
+  toeBalabanBlockSpinStillBlocked ,
+  (toeBalabanUniformKPStillBlocked ,
+   toeBalabanOSWightmanStillBlocked)
+
+
+------------------------------------------------------------------------
+-- Governed legal workflow -> Ibrahim source genealogy -> semantic boundary.
+-- Reuse-only. Original theorem owners retain proof authority.
+------------------------------------------------------------------------
+
 import DASHI.Unified.GovernedLegalWorkflowSourceGenealogyTOEExact as LegalGenealogyTOE
 import DASHI.Unified.GovernedLegalWorkflowSourceSemanticTOEExact as LegalSemanticTOE
-import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalGovernanceTOE
 
 toeGovernedLegalWorkflowSourceSemanticHandoff :
   LegalSemanticTOE.GovernedLegalWorkflowSourceSemanticHandoff
@@ -1820,47 +1837,6 @@ toeLegalSemanticIdentifierAuthorityFirewall =
 toeLegalSemanticESDMutationForbidden =
   LegalSemanticTOE.toeESDSurfaceMutationRemainsForbidden
 
-toeGovernedLegalWorkflowInvariantHandoff :
-  LegalGovernanceTOE.GovernedLegalWorkflowTOEInvariantHandoff
-toeGovernedLegalWorkflowInvariantHandoff =
-  LegalGovernanceTOE.canonicalGovernedLegalWorkflowTOEInvariantHandoff
-
-toeQualificationDoesNotAutomaticallyProveForensicCompliance :
-  LegalGovernanceTOE.QualificationAutomaticallyForensicCompliance → ⊥
-toeQualificationDoesNotAutomaticallyProveForensicCompliance =
-  LegalGovernanceTOE.toeQualificationDoesNotAutomaticallyProveForensicCompliance
-
-toeLegalReviewDoesNotCreateClaimTruth :
-  LegalGovernanceTOE.LegalReviewDecisionCreatesClaimTruth → ⊥
-toeLegalReviewDoesNotCreateClaimTruth =
-  LegalGovernanceTOE.toeLegalReviewDoesNotCreateClaimTruth
-
-toeOfficialLegalSurfaceDoesNotRecoverFineState :
-  LegalGovernanceTOE.OfficialLegalSurfaceRecoversFineState → ⊥
-toeOfficialLegalSurfaceDoesNotRecoverFineState =
-  LegalGovernanceTOE.toeOfficialLegalSurfaceDoesNotRecoverFineState
-
-toeOfficialActionDoesNotRecoverAutonomyAndAuthority :
-  LegalGovernanceTOE.OfficialActionRecoversAutonomyAndAuthority → ⊥
-toeOfficialActionDoesNotRecoverAutonomyAndAuthority =
-  LegalGovernanceTOE.toeOfficialActionDoesNotRecoverAutonomyAndAuthority
-
-toeLegalityAloneDoesNotCreateLegitimacy :
-  LegalGovernanceTOE.LegalOnlyCreatesLegitimacy → ⊥
-toeLegalityAloneDoesNotCreateLegitimacy =
-  LegalGovernanceTOE.toeLegalityAloneDoesNotCreateLegitimacy
-
-toeActionstepStyleVendorIdentityDoesNotCreateAuthority :
-  LegalGovernanceTOE.actionstepStyleVendorIdentityCreatesAuthority ≡ false
-toeActionstepStyleVendorIdentityDoesNotCreateAuthority =
-  LegalGovernanceTOE.toeActionstepStyleVendorIdentityCreatesAuthority
-
-toeActionstepStyleTargetNeedsOwnAuthorityWitness :
-  LegalGovernanceTOE.actionstepStyleTargetNeedsOwnAuthorityWitness ≡ true
-toeActionstepStyleTargetNeedsOwnAuthorityWitness =
-  LegalGovernanceTOE.toeActionstepStyleTargetNeedsOwnAuthorityWitness
-
-
 ------------------------------------------------------------------------
 -- Fleet-58 named-manifest dispatch boundary.
 ------------------------------------------------------------------------
@@ -1879,137 +1855,42 @@ toeFleetDispatchRequiresNamedManifest =
 toeFleetCountDoesNotIdentifyGapObjects =
   FleetGapTOE.externalGapCountIdentifiesIndividualGapsIsFalse
 
+-- Reuse source-owned semantic classification and non-promotion.
+toeHeuristicOnlyLegalSemanticCandidateAbstains =
+  LegalSemanticTOE.toeHeuristicOnlyLegalSemanticCandidateAbstains
 
-------------------------------------------------------------------------
--- SensibLaw / governance direct non-promotion handoff.
---
--- Reuse canonical owners. No Actionstep-specific ontology is introduced.
-------------------------------------------------------------------------
+toeSemanticPromotionCannotConferLegalAuthority =
+  LegalSemanticTOE.toeSemanticPromotionCannotConferLegalAuthority
 
-open import DASHI.Governance.PromotionSpineTests public using
-  ( candidateExampleQuarantines
-  ; candidateExampleAbstains
-  ; citationExampleCannotCloseIdentity
-  ; citationExampleQuarantines
-  ; artifactExamplePromotesWhenAllFiveClose
-  ; artifactExampleAuthorizesGovernedPromotion
-  )
-
-open import DASHI.Law.SensibLawITIRParityEverything public using
-  ( selectedLegalRuntimeContract
-  ; selectedITIRNormalizedParity
-  ; selectedStageParityWitness
-  ; selectedOwnerParityWitness
-  ; SemanticPromotionPolicySurface
-  ; semanticPromotionPolicySurface
-  ; heuristic-only-abstains
-  ; promotion-ignores-heuristic-bits
-  ; semantic-promotion-truth-authority-closed
-  ; semantic-promotion-legal-authority-closed
-  ; semantic-promotion-all-authority-closed
-  ; LegalCitationBoundary
-  ; canonicalLegalCitationBoundary
-  ; CompositeCompliance
-  ; composeCertifiedStages
-  )
-
-------------------------------------------------------------------------
--- Fleet formal-gap cut.
---
--- These values come from FleetFormalGapTargetTOEExact. The eigen labels are
--- planning metadata. They do not identify theorem owners.
-------------------------------------------------------------------------
-
-toeFleetRecordedDischargedCountIs584 :
-  FleetGapTOE.dischargedCoreKnowledgeFibres
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 584
-toeFleetRecordedDischargedCountIs584 =
-  FleetGapTOE.fleetRecordedDischargedCountIs584
-
-toeFleetRecordedUnformalisedGapCountIs58 :
-  FleetGapTOE.unformalisedFormalGaps
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 58
-toeFleetRecordedUnformalisedGapCountIs58 =
-  FleetGapTOE.fleetRecordedUnformalisedGapCountIs58
-
-toeFleetRecordedContradictionCountIs44 :
-  FleetGapTOE.polarityContradictionGaps
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 44
-toeFleetRecordedContradictionCountIs44 =
-  FleetGapTOE.fleetRecordedContradictionCountIs44
-
-toeFleetRecordedMacroscopicMotifCountIs3 :
-  FleetGapTOE.macroscopicEigenMotifCount
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 3
-toeFleetRecordedMacroscopicMotifCountIs3 =
-  FleetGapTOE.fleetRecordedMacroscopicMotifCountIs3
-
-toeFleetTargetsOnlyUnformalisedFormalGaps :
-  FleetGapTOE.targetOnlyUnformalisedFormalGaps
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
-toeFleetTargetsOnlyUnformalisedFormalGaps =
-  FleetGapTOE.fleetTargetsOnlyUnformalisedFormalGaps
+toeSemanticPromotionCannotConferAnyAuthority =
+  LegalSemanticTOE.toeSemanticPromotionCannotConferAnyAuthority
 
 
-toeFleetSpectralLabelsDoNotIdentifyTheoremOwners :
-  FleetGapTOE.spectralLabelsIdentifyTheoremOwners
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
-toeFleetSpectralLabelsDoNotIdentifyTheoremOwners =
-  FleetGapTOE.fleetSpectralLabelDoesNotIdentifyTheoremOwner
+-- Reuse canonical governed legal compliance and Actionstep-style authority firewalls.
+toeExpertQualificationDoesNotCreateForensicCompliance =
+  LegalSemanticTOE.toeExpertQualificationDoesNotCreateForensicCompliance
 
-toeFleetMetaIntrospectorAttributionPreserved :
-  FleetGapTOE.metaIntrospectorAttributionPreserved
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
-toeFleetMetaIntrospectorAttributionPreserved = refl
+toeReportAdmissionDoesNotRepairMissingInput =
+  LegalSemanticTOE.toeReportAdmissionDoesNotRepairMissingInput
 
-toeFleetMetaIntrospectorProofNotBorrowed :
-  FleetGapTOE.metaIntrospectorProofBorrowed
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
-toeFleetMetaIntrospectorProofNotBorrowed = refl
+toeLegalReviewDoesNotCreateClaimTruth =
+  LegalSemanticTOE.toeLegalReviewDoesNotCreateClaimTruth
 
-toeFleetDischargedFibresRemainOutOfTarget :
-  FleetGapTOE.dischargedFibresRemainDischarged
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
-toeFleetDischargedFibresRemainOutOfTarget =
-  FleetGapTOE.fleetDischargedFibresRemainOutOfTarget
+toeOfficialLegalSurfaceDoesNotRecoverFineState =
+  LegalSemanticTOE.toeOfficialLegalSurfaceDoesNotRecoverFineState
 
-------------------------------------------------------------------------
--- Recognition-objective rechart -> TOE governance boundary.
---
--- Reuse existing Lacan/Irigaray and feminist recognition owners.
--- This lane is distinct from legal authority and compliance.
--- A changed approval objective can change selected conduct.
--- It does not erase sanctions, desire, symbolic structure, or proof duties.
-------------------------------------------------------------------------
+toeLegalityAloneDoesNotCreateLegitimacy =
+  LegalSemanticTOE.toeLegalityAloneDoesNotCreateLegitimacy
 
-import DASHI.Core.GenderedApprovalObjectiveRechartExact as ApprovalRechart
-import DASHI.Governance.FeministRecognitionAuthorityCrossPollinationExact as FeministRecognition
+toeActionstepStyleVendorIdentityCreatesAuthority =
+  LegalSemanticTOE.toeActionstepStyleVendorIdentityCreatesAuthority
 
-toeApprovalObjectiveRechartBoundary :
-  ApprovalRechart.ApprovalObjectiveRechartBoundary
-toeApprovalObjectiveRechartBoundary =
-  ApprovalRechart.canonicalApprovalObjectiveRechartBoundary
+toeActionstepStyleVendorIdentityCreatesAuthorityIsFalse =
+  LegalSemanticTOE.toeActionstepStyleVendorIdentityCreatesAuthorityIsFalse
 
-toeApprovalObjectiveRechartChangesSelectedConduct :
-  ApprovalRechart.chooseByObjective ApprovalRechart.approvalIndexedObjective
-    ≡ ApprovalRechart.chooseByObjective ApprovalRechart.declaredCriterionObjective
-    → ⊥
-toeApprovalObjectiveRechartChangesSelectedConduct =
-  ApprovalRechart.objectiveRechartChangesSelectedConduct
+toeActionstepStyleTargetNeedsOwnAuthorityWitness =
+  LegalSemanticTOE.toeActionstepStyleTargetNeedsOwnAuthorityWitness
 
-toeApprovalSupposedAuthorityIsNotVerifiedAuthority =
-  ApprovalRechart.supposedApprovalAuthorityIsNotVerifiedAuthority
+toeActionstepStyleTargetNeedsOwnAuthorityWitnessIsTrue =
+  LegalSemanticTOE.toeActionstepStyleTargetNeedsOwnAuthorityWitnessIsTrue
 
-toeApprovalDesireNeedNotTerminateAtApproval =
-  ApprovalRechart.desireNeedNotTerminateAtApproval
-
-toeApprovalBigOtherIsNotLiteralOmniscientApprover =
-  ApprovalRechart.bigOtherIsNotLiteralOmniscientApprover
-
-toeApprovalReciprocalContactDoesNotDetermineUniqueHierarchy =
-  ApprovalRechart.reciprocalContactDoesNotDetermineUniqueHierarchy
-
-toeFeministRecognitionCrossPollinationBoundary :
-  FeministRecognition.FeministRecognitionCrossPollinationBoundary
-toeFeministRecognitionCrossPollinationBoundary =
-  FeministRecognition.canonicalFeministRecognitionCrossPollinationBoundary

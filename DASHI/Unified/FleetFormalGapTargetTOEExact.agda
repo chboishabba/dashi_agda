@@ -221,3 +221,143 @@ canonicalFleetFormalGapZKPFrame =
     false
     false
     false
+
+
+------------------------------------------------------------------------
+-- Direct source-owned PNF non-promotion gates.
+--
+-- The fleet receipt is external planning context. These theorem gates come
+-- from the canonical DASHI PNF owners and remain the proof authority.
+------------------------------------------------------------------------
+
+NonRebuildableCoordinatePromotion : Set
+NonRebuildableCoordinatePromotion =
+  Rebuild.NonRebuildablePromotion
+
+VectorSpectralAuthorityPromotion : Set
+VectorSpectralAuthorityPromotion =
+  Rebuild.VectorAuthorityPromotion
+
+SpectralNumericABIPromotion : Set
+SpectralNumericABIPromotion =
+  Numeric.PNFSpectralNumericABIPromotion
+
+ResidualFieldPromotion : Set
+ResidualFieldPromotion =
+  Residual.PNFResidualFieldInvariantPromotion
+
+fleetNonRebuildableCoordinatePromotionImpossible :
+  NonRebuildableCoordinatePromotion → ⊥
+fleetNonRebuildableCoordinatePromotionImpossible =
+  Rebuild.nonRebuildablePromotionImpossible
+
+fleetVectorSpectralAuthorityPromotionImpossible :
+  VectorSpectralAuthorityPromotion → ⊥
+fleetVectorSpectralAuthorityPromotionImpossible =
+  Rebuild.vectorAuthorityPromotionImpossible
+
+fleetSpectralNumericABIPromotionImpossible :
+  SpectralNumericABIPromotion → ⊥
+fleetSpectralNumericABIPromotionImpossible =
+  Numeric.pnfSpectralNumericABIPromotionImpossible
+
+fleetResidualFieldPromotionImpossible :
+  ResidualFieldPromotion → ⊥
+fleetResidualFieldPromotionImpossible =
+  Residual.pnfResidualFieldInvariantPromotionImpossible
+
+fleetVectorCoordinateTruthStillFalse :
+  Rebuild.vectorCoordinateIsTruth ≡ false
+fleetVectorCoordinateTruthStillFalse =
+  Rebuild.vectorCoordinateTruthFalse
+
+fleetVectorCoordinateSupportStillFalse :
+  Rebuild.vectorCoordinateIsCommittedSupport ≡ false
+fleetVectorCoordinateSupportStillFalse =
+  Rebuild.vectorCoordinateCommittedSupportFalse
+
+fleetVectorCoordinateAdmissibilityStillFalse :
+  Rebuild.vectorCoordinateIsAdmissibility ≡ false
+fleetVectorCoordinateAdmissibilityStillFalse =
+  Rebuild.vectorCoordinateAdmissibilityFalse
+
+fleetTextFallbackAuthorityStillFalse :
+  Rebuild.textFallbackIsCoordinateAuthority ≡ false
+fleetTextFallbackAuthorityStillFalse =
+  Rebuild.textFallbackCoordinateAuthorityFalse
+
+
+------------------------------------------------------------------------
+-- Named Fleet-58 dispatch boundary.
+--
+-- The external producer pays the count class. It does not provide a named
+-- 58-row manifest on the verified source surface. Count equality is not
+-- object identity. Dispatch therefore remains closed.
+------------------------------------------------------------------------
+
+record FleetFormalGapDispatchBoundary : Set where
+  constructor fleet-formal-gap-dispatch-boundary
+  field
+    countedFormalGapClassAvailable : Bool
+    namedFormalGapManifestAvailable : Bool
+    dispatchRequiresNamedFormalGapManifest : Bool
+    externalGapCountIdentifiesIndividualGaps : Bool
+    dischargedFibresEligibleForGapDispatch : Bool
+    contradictionGapsEligibleForFormalGapDispatch : Bool
+
+open FleetFormalGapDispatchBoundary public
+
+canonicalFleetFormalGapDispatchBoundary : FleetFormalGapDispatchBoundary
+canonicalFleetFormalGapDispatchBoundary =
+  fleet-formal-gap-dispatch-boundary
+    true
+    false
+    true
+    false
+    false
+    false
+
+namedFormalGapManifestAvailable : Bool
+namedFormalGapManifestAvailable =
+  FleetFormalGapDispatchBoundary.namedFormalGapManifestAvailable
+    canonicalFleetFormalGapDispatchBoundary
+
+namedFormalGapManifestAvailableIsFalse :
+  namedFormalGapManifestAvailable ≡ false
+namedFormalGapManifestAvailableIsFalse = refl
+
+dispatchRequiresNamedFormalGapManifest : Bool
+dispatchRequiresNamedFormalGapManifest =
+  FleetFormalGapDispatchBoundary.dispatchRequiresNamedFormalGapManifest
+    canonicalFleetFormalGapDispatchBoundary
+
+dispatchRequiresNamedFormalGapManifestIsTrue :
+  dispatchRequiresNamedFormalGapManifest ≡ true
+dispatchRequiresNamedFormalGapManifestIsTrue = refl
+
+externalGapCountIdentifiesIndividualGaps : Bool
+externalGapCountIdentifiesIndividualGaps =
+  FleetFormalGapDispatchBoundary.externalGapCountIdentifiesIndividualGaps
+    canonicalFleetFormalGapDispatchBoundary
+
+externalGapCountIdentifiesIndividualGapsIsFalse :
+  externalGapCountIdentifiesIndividualGaps ≡ false
+externalGapCountIdentifiesIndividualGapsIsFalse = refl
+
+dischargedFibresEligibleForGapDispatch : Bool
+dischargedFibresEligibleForGapDispatch =
+  FleetFormalGapDispatchBoundary.dischargedFibresEligibleForGapDispatch
+    canonicalFleetFormalGapDispatchBoundary
+
+dischargedFibresEligibleForGapDispatchIsFalse :
+  dischargedFibresEligibleForGapDispatch ≡ false
+dischargedFibresEligibleForGapDispatchIsFalse = refl
+
+contradictionGapsEligibleForFormalGapDispatch : Bool
+contradictionGapsEligibleForFormalGapDispatch =
+  FleetFormalGapDispatchBoundary.contradictionGapsEligibleForFormalGapDispatch
+    canonicalFleetFormalGapDispatchBoundary
+
+contradictionGapsEligibleForFormalGapDispatchIsFalse :
+  contradictionGapsEligibleForFormalGapDispatch ≡ false
+contradictionGapsEligibleForFormalGapDispatchIsFalse = refl

@@ -989,353 +989,75 @@ unifiedYMImplementAToDMaxCutReceipt :
 unifiedYMImplementAToDMaxCutReceipt =
   YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
 
-------------------------------------------------------------------------
--- Canonical SensibLaw / case-management / legal-governance handoff.
---
--- Reuse only. These owners already exist in-repo.
--- A case-management vendor name, including Actionstep, does not transport
--- legal authority. Operational completion does not create semantic truth.
--- Passing a governance control does not create certification.
--- Standards remain process lenses. No standards certification is claimed.
-------------------------------------------------------------------------
-
-import DASHI.Core.AuthorityNonPromotionCore as LegalAuthority
-import DASHI.Interop.SensibLawSemanticPromotionPolicy as LegalSemantic
-import DASHI.Law.SensibLawAgdaFirstLegalRuntimeEverything as LegalRuntime
-import DASHI.Law.SensibLawITIRParityEverything as LegalParity
-import DASHI.Governance.DomainPermeabilityAuthorityTransport as DomainAuthority
-import DASHI.Cognition.PNF.SensibLawOperationalSemanticBoundaryExact as OperationalBoundary
-import DASHI.Core.ITIRGovernanceControlCaseExact as GovernanceControl
-
-unifiedSensibLawSemanticAuthorityBoundary =
-  LegalSemantic.semanticPromotionAuthorityBoundary
-
-unifiedSensibLawSemanticTruthAuthorityStillClosed :
-  LegalAuthority.truthAuthorityFlag unifiedSensibLawSemanticAuthorityBoundary ≡ false
-unifiedSensibLawSemanticTruthAuthorityStillClosed =
-  LegalSemantic.semantic-promotion-truth-authority-closed
-
-unifiedSensibLawSemanticLegalAuthorityStillClosed :
-  LegalAuthority.legalAuthorityFlag unifiedSensibLawSemanticAuthorityBoundary ≡ false
-unifiedSensibLawSemanticLegalAuthorityStillClosed =
-  LegalSemantic.semantic-promotion-legal-authority-closed
-
-unifiedSensibLawSemanticAllAuthorityStillClosed :
-  LegalAuthority.promotesAnyAuthority unifiedSensibLawSemanticAuthorityBoundary ≡ false
-unifiedSensibLawSemanticAllAuthorityStillClosed =
-  LegalSemantic.semantic-promotion-all-authority-closed
-
-unifiedSensibLawLegalRuntimeContract :
-  LegalRuntime.AgdaFirstLegalRuntimeContract
-unifiedSensibLawLegalRuntimeContract =
-  LegalRuntime.canonicalAgdaFirstLegalRuntimeContract
-
-unifiedSensibLawITIRLegalRuntimeContract :
-  LegalRuntime.AgdaFirstLegalRuntimeContract
-unifiedSensibLawITIRLegalRuntimeContract =
-  LegalParity.selectedLegalRuntimeContract
-
-unifiedLegalRuntimeCannotInventMissingSemantics :
-  LegalRuntime.AgdaFirstLegalRuntimeContract.runtimeMayInventMissingFormalLegalSemantics
-    unifiedSensibLawLegalRuntimeContract
-  ≡ false
-unifiedLegalRuntimeCannotInventMissingSemantics =
-  LegalRuntime.AgdaFirstLegalRuntimeContract.runtimeMayInventMissingFormalLegalSemanticsIsFalse
-    unifiedSensibLawLegalRuntimeContract
-
-unifiedParserCandidateDoesNotBecomeTruthByTransport :
-  LegalRuntime.AgdaFirstLegalRuntimeContract.parserCandidateMayBecomeTruthByTransport
-    unifiedSensibLawLegalRuntimeContract
-  ≡ false
-unifiedParserCandidateDoesNotBecomeTruthByTransport =
-  LegalRuntime.AgdaFirstLegalRuntimeContract.parserCandidateMayBecomeTruthByTransportIsFalse
-    unifiedSensibLawLegalRuntimeContract
-
-unifiedSourceFollowDoesNotBecomeAuthorityByTransport :
-  LegalRuntime.AgdaFirstLegalRuntimeContract.sourceFollowMayBecomeAuthorityByTransport
-    unifiedSensibLawLegalRuntimeContract
-  ≡ false
-unifiedSourceFollowDoesNotBecomeAuthorityByTransport =
-  LegalRuntime.AgdaFirstLegalRuntimeContract.sourceFollowMayBecomeAuthorityByTransportIsFalse
-    unifiedSensibLawLegalRuntimeContract
-
-unifiedTypedMeetDoesNotBecomeViolationByTransport :
-  LegalRuntime.AgdaFirstLegalRuntimeContract.typedMeetMayBecomeViolationByTransport
-    unifiedSensibLawLegalRuntimeContract
-  ≡ false
-unifiedTypedMeetDoesNotBecomeViolationByTransport =
-  LegalRuntime.AgdaFirstLegalRuntimeContract.typedMeetMayBecomeViolationByTransportIsFalse
-    unifiedSensibLawLegalRuntimeContract
-
-unifiedWrongTypeElementPaymentDoesNotBecomeLiability :
-  LegalRuntime.AgdaFirstLegalRuntimeContract.wrongTypeElementPaymentMayBecomeLiabilityByTransport
-    unifiedSensibLawLegalRuntimeContract
-  ≡ false
-unifiedWrongTypeElementPaymentDoesNotBecomeLiability =
-  LegalRuntime.AgdaFirstLegalRuntimeContract.wrongTypeElementPaymentMayBecomeLiabilityByTransportIsFalse
-    unifiedSensibLawLegalRuntimeContract
-
-unifiedCaseManagementDomainTransportReceipt :
-  DomainAuthority.DomainTransportReceipt
-unifiedCaseManagementDomainTransportReceipt =
-  DomainAuthority.canonicalDomainTransportReceipt
-
-unifiedCaseManagementRepresentationDoesNotCreateLegalAuthority :
-  DomainAuthority.DomainTransportReceipt.representationEqualityCreatesLegalAuthority
-    unifiedCaseManagementDomainTransportReceipt
-  ≡ false
-unifiedCaseManagementRepresentationDoesNotCreateLegalAuthority = refl
-
-unifiedCaseManagementVendorIdentityDoesNotCreateAuthority :
-  DomainAuthority.DomainTransportReceipt.vendorIdentityCreatesAuthority
-    unifiedCaseManagementDomainTransportReceipt
-  ≡ false
-unifiedCaseManagementVendorIdentityDoesNotCreateAuthority = refl
-
-unifiedTaskCompletionDoesNotCreateTruth :
-  OperationalBoundary.TaskCompletionCreatesTruth → ⊥
-unifiedTaskCompletionDoesNotCreateTruth =
-  OperationalBoundary.taskCompletionDoesNotCreateTruth
-
-unifiedPassingControlDoesNotCreateCertification :
-  GovernanceControl.PassingControlMeansCertified → ⊥
-unifiedPassingControlDoesNotCreateCertification =
-  GovernanceControl.passingDoesNotMeanCertified
-
-unifiedControlEvidenceDoesNotCreateTruth :
-  GovernanceControl.ControlEvidenceCreatesTruth → ⊥
-unifiedControlEvidenceDoesNotCreateTruth =
-  GovernanceControl.controlEvidenceDoesNotCreateTruth
-
-unifiedGovernanceStandardsCertificationStillFalse :
-  GovernanceControl.GOV1Boundary.standardsCertificationClaimed
-    GovernanceControl.canonicalGOV1Boundary
-  ≡ false
-unifiedGovernanceStandardsCertificationStillFalse =
-  GovernanceControl.GOV1Boundary.standardsCertificationClaimedIsFalse
-    GovernanceControl.canonicalGOV1Boundary
-
-unifiedFleetRelatedSymbolsRequired :
-  FleetGapTOE.fleetRelatedSymbolsRequired ≡ true
-unifiedFleetRelatedSymbolsRequired =
-  FleetGapTOE.fleetRelatedSymbolsRequiredIsTrue
-
-unifiedFleetDiscoverRequired :
-  FleetGapTOE.fleetDiscoverRequired ≡ true
-unifiedFleetDiscoverRequired =
-  FleetGapTOE.fleetDiscoverRequiredIsTrue
-
-unifiedFleetRoundLineageRequired :
-  FleetGapTOE.fleetRoundLineageRequired ≡ true
-unifiedFleetRoundLineageRequired =
-  FleetGapTOE.fleetRoundLineageRequiredIsTrue
-
-unifiedFleetCountDoesNotCreateNamedManifest :
-  FleetGapTOE.CountCreatesNamedManifest → ⊥
-unifiedFleetCountDoesNotCreateNamedManifest =
-  FleetGapTOE.fleetCountDoesNotCreateNamedManifest
 
 ------------------------------------------------------------------------
--- Direct Pareto / snowball / Ibrahim and ternary-27 non-promotion surface.
+-- Governed legal workflow / Ibrahim genealogy / semantic non-promotion.
 ------------------------------------------------------------------------
 
-unifiedIbrahimSearchPriorityDoesNotCreateProof :
-  ParetoSnowballTOE.SearchPriorityCreatesProof → ⊥
-unifiedIbrahimSearchPriorityDoesNotCreateProof =
-  ParetoSnowballTOE.searchPriorityDoesNotCreateProof
+import DASHI.Unified.GovernedLegalWorkflowSourceSemanticTOEExact as LegalSemanticTOE
+import DASHI.Unified.GovernedLegalWorkflowSourceSemanticTOERegression
 
-unifiedIbrahimProducerSourceDoesNotCreateRunReceipt :
-  ParetoSnowballTOE.ProducerSourceCreatesRunReceipt → ⊥
-unifiedIbrahimProducerSourceDoesNotCreateRunReceipt =
-  ParetoSnowballTOE.producerSourceDoesNotCreateRunReceipt
+unifiedGovernedLegalWorkflowSourceSemanticHandoff :
+  LegalSemanticTOE.GovernedLegalWorkflowSourceSemanticHandoff
+unifiedGovernedLegalWorkflowSourceSemanticHandoff =
+  LegalSemanticTOE.canonicalGovernedLegalWorkflowSourceSemanticHandoff
 
-unifiedIbrahimDegree729DoesNotCreateMonsterHZetaRecognition :
-  ParetoSnowballTOE.Degree729CreatesMonsterHZetaRecognition → ⊥
-unifiedIbrahimDegree729DoesNotCreateMonsterHZetaRecognition =
-  ParetoSnowballTOE.degree729DoesNotCreateMonsterHZetaRecognition
+unifiedLegalSemanticSharedLexemeFirewall =
+  LegalSemanticTOE.toeSharedLexemeDoesNotCreateSemanticIdentity
 
-unifiedIbrahimPaperOracleDoesNotIdentifyHistoricalDump :
-  ParetoSnowballTOE.PaperOracleIdentifiesDump → ⊥
-unifiedIbrahimPaperOracleDoesNotIdentifyHistoricalDump =
-  ParetoSnowballTOE.paperOracleDoesNotIdentifyHistoricalDump
+unifiedLegalSemanticDiagnosticPromotionFirewall =
+  LegalSemanticTOE.toeDiagnosticCheckDoesNotCreateTheoremPromotion
 
-unifiedIbrahimRoutePreferenceDoesNotCreateExecutionReceipt :
-  ParetoSnowballTOE.RoutePreferenceCreatesExecutionReceipt → ⊥
-unifiedIbrahimRoutePreferenceDoesNotCreateExecutionReceipt =
-  ParetoSnowballTOE.routePreferenceDoesNotCreateExecutionReceipt
+unifiedLegalSemanticIdentifierAuthorityFirewall =
+  LegalSemanticTOE.toeSourceIdentifierDoesNotCreateProofAuthority
 
-unifiedIbrahimMergedLeanSourceDoesNotCreateKernelReceipt :
-  ParetoSnowballTOE.MergedLeanSourceCreatesKernelReceipt → ⊥
-unifiedIbrahimMergedLeanSourceDoesNotCreateKernelReceipt =
-  ParetoSnowballTOE.mergedLeanSourceDoesNotCreateKernelReceipt
+unifiedLegalSemanticESDMutationForbidden =
+  LegalSemanticTOE.toeESDSurfaceMutationRemainsForbidden
 
-unifiedIbrahimOEISDoesNotCreateMultiplicityAction :
-  ParetoSnowballTOE.NinetyOEISEqualityCreatesMultiplicityAction → ⊥
-unifiedIbrahimOEISDoesNotCreateMultiplicityAction =
-  ParetoSnowballTOE.oeisDoesNotCreateMultiplicityAction
 
-unifiedIbrahimFiniteIrreducibilityDoesNotCreateMonsterHZetaRecognition :
-  ParetoSnowballTOE.FiniteIrreducibilityCreatesMonsterHZetaRecognition → ⊥
-unifiedIbrahimFiniteIrreducibilityDoesNotCreateMonsterHZetaRecognition =
-  ParetoSnowballTOE.finiteIrreducibilityDoesNotCreateMonsterHZetaRecognition
+-- Unified aggregate aliases the same canonical legal compliance owner.
+unifiedExpertQualificationDoesNotCreateForensicCompliance =
+  LegalSemanticTOE.toeExpertQualificationDoesNotCreateForensicCompliance
 
-unifiedIbrahimCurrentQidDoesNotIdentifyHistoricalTitle :
-  ParetoSnowballTOE.CurrentQidIdentifiesHistoricalTitle → ⊥
-unifiedIbrahimCurrentQidDoesNotIdentifyHistoricalTitle =
-  ParetoSnowballTOE.currentQidDoesNotIdentifyHistoricalTitle
+unifiedReportAdmissionDoesNotRepairMissingInput =
+  LegalSemanticTOE.toeReportAdmissionDoesNotRepairMissingInput
 
-unified369Ternary27MonsterRepresentationNotPromoted =
-  MaxCut369.toe27MonsterRepresentationNotPromoted
-
-unified369Ternary27MonsterEmbeddingNotPromoted =
-  MaxCut369.toe27MonsterEmbeddingNotPromoted
-
-------------------------------------------------------------------------
--- Live Gate-4 frontier and Fleet target selection.
-------------------------------------------------------------------------
-
-unifiedCurrentGate4FrontierLedgerLevel : ProofLevel
-unifiedCurrentGate4FrontierLedgerLevel =
-  FleetHyperTOE.currentGate4FrontierLedgerLevel
-
-unifiedCurrentGate4ClusteringToTransferGapLevel : ProofLevel
-unifiedCurrentGate4ClusteringToTransferGapLevel =
-  FleetHyperTOE.currentGate4ClusteringToTransferGapLevel
-
-unifiedFleetFormalGapTargetSelected : Bool
-unifiedFleetFormalGapTargetSelected =
-  FleetHyperTOE.fleetFormalGapTargetSelected
-
-unifiedHistoricalGate4CountSelectedAsFleetTarget : Bool
-unifiedHistoricalGate4CountSelectedAsFleetTarget =
-  FleetHyperTOE.historicalGate4CountSelectedAsFleetTarget
-
-unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
-  FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
-unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
-  FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
-
-unifiedFleetRecordedContradictionCountIs44 :
-  FleetGapTOE.polarityContradictionGaps
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 44
-unifiedFleetRecordedContradictionCountIs44 =
-  FleetGapTOE.fleetRecordedContradictionCountIs44
-
-unifiedFleetRecordedMacroscopicMotifCountIs3 :
-  FleetGapTOE.macroscopicEigenMotifCount
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 3
-unifiedFleetRecordedMacroscopicMotifCountIs3 =
-  FleetGapTOE.fleetRecordedMacroscopicMotifCountIs3
-
-unifiedFleetTargetsOnlyUnformalisedFormalGaps :
-  FleetGapTOE.targetOnlyUnformalisedFormalGaps
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
-unifiedFleetTargetsOnlyUnformalisedFormalGaps =
-  FleetGapTOE.fleetTargetsOnlyUnformalisedFormalGaps
-
-unifiedFleetDischargedFibresRemainOutOfTarget :
-  FleetGapTOE.dischargedFibresRemainDischarged
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
-unifiedFleetDischargedFibresRemainOutOfTarget =
-  FleetGapTOE.fleetDischargedFibresRemainOutOfTarget
-
-unifiedFleetSpectralLabelsDoNotIdentifyTheoremOwners :
-  FleetGapTOE.spectralLabelsIdentifyTheoremOwners
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
-unifiedFleetSpectralLabelsDoNotIdentifyTheoremOwners =
-  FleetGapTOE.fleetSpectralLabelDoesNotIdentifyTheoremOwner
-
-unifiedFleetMetaIntrospectorAttributionPreserved :
-  FleetGapTOE.metaIntrospectorAttributionPreserved
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
-unifiedFleetMetaIntrospectorAttributionPreserved = refl
-
-unifiedFleetMetaIntrospectorProofNotBorrowed :
-  FleetGapTOE.metaIntrospectorProofBorrowed
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
-unifiedFleetMetaIntrospectorProofNotBorrowed = refl
-
-------------------------------------------------------------------------
--- Recognition-objective rechart -> Unified aggregate.
---
--- Reuse existing Lacan/Irigaray and feminist recognition owners.
--- This aggregate preserves separation from legal authority and compliance.
--- A changed approval objective can change selected conduct.
--- It does not erase sanctions, desire, symbolic structure, or proof duties.
-------------------------------------------------------------------------
-
-import DASHI.Core.GenderedApprovalObjectiveRechartExact as ApprovalRechart
-import DASHI.Governance.FeministRecognitionAuthorityCrossPollinationExact as FeministRecognition
-
-unifiedApprovalObjectiveRechartBoundary :
-  ApprovalRechart.ApprovalObjectiveRechartBoundary
-unifiedApprovalObjectiveRechartBoundary =
-  ApprovalRechart.canonicalApprovalObjectiveRechartBoundary
-
-unifiedApprovalObjectiveRechartChangesSelectedConduct :
-  ApprovalRechart.chooseByObjective ApprovalRechart.approvalIndexedObjective
-    ≡ ApprovalRechart.chooseByObjective ApprovalRechart.declaredCriterionObjective
-    → ⊥
-unifiedApprovalObjectiveRechartChangesSelectedConduct =
-  ApprovalRechart.objectiveRechartChangesSelectedConduct
-
-unifiedApprovalSupposedAuthorityIsNotVerifiedAuthority =
-  ApprovalRechart.supposedApprovalAuthorityIsNotVerifiedAuthority
-
-unifiedApprovalDesireNeedNotTerminateAtApproval =
-  ApprovalRechart.desireNeedNotTerminateAtApproval
-
-unifiedApprovalBigOtherIsNotLiteralOmniscientApprover =
-  ApprovalRechart.bigOtherIsNotLiteralOmniscientApprover
-
-unifiedApprovalReciprocalContactDoesNotDetermineUniqueHierarchy =
-  ApprovalRechart.reciprocalContactDoesNotDetermineUniqueHierarchy
-
-unifiedFeministRecognitionCrossPollinationBoundary :
-  FeministRecognition.FeministRecognitionCrossPollinationBoundary
-unifiedFeministRecognitionCrossPollinationBoundary =
-  FeministRecognition.canonicalFeministRecognitionCrossPollinationBoundary
-
-------------------------------------------------------------------------
--- Governed legal workflow -> Unified invariant handoff.
---
--- Reuse the canonical owner used by the TOE root and Unifier.
--- Actionstep-style workflow state does not create legal authority.
-------------------------------------------------------------------------
-
-import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalGovernanceTOE
-
-unifiedGovernedLegalWorkflowInvariantHandoff :
-  LegalGovernanceTOE.GovernedLegalWorkflowTOEInvariantHandoff
-unifiedGovernedLegalWorkflowInvariantHandoff =
-  LegalGovernanceTOE.canonicalGovernedLegalWorkflowTOEInvariantHandoff
-
-unifiedQualificationDoesNotAutomaticallyProveForensicCompliance :
-  LegalGovernanceTOE.QualificationAutomaticallyForensicCompliance → ⊥
-unifiedQualificationDoesNotAutomaticallyProveForensicCompliance =
-  LegalGovernanceTOE.toeQualificationDoesNotAutomaticallyProveForensicCompliance
-
-unifiedLegalReviewDoesNotCreateClaimTruth :
-  LegalGovernanceTOE.LegalReviewDecisionCreatesClaimTruth → ⊥
 unifiedLegalReviewDoesNotCreateClaimTruth =
-  LegalGovernanceTOE.toeLegalReviewDoesNotCreateClaimTruth
+  LegalSemanticTOE.toeLegalReviewDoesNotCreateClaimTruth
 
-unifiedOfficialLegalSurfaceDoesNotRecoverFineState :
-  LegalGovernanceTOE.OfficialLegalSurfaceRecoversFineState → ⊥
 unifiedOfficialLegalSurfaceDoesNotRecoverFineState =
-  LegalGovernanceTOE.toeOfficialLegalSurfaceDoesNotRecoverFineState
+  LegalSemanticTOE.toeOfficialLegalSurfaceDoesNotRecoverFineState
 
-unifiedLegalityAloneDoesNotCreateLegitimacy :
-  LegalGovernanceTOE.LegalOnlyCreatesLegitimacy → ⊥
 unifiedLegalityAloneDoesNotCreateLegitimacy =
-  LegalGovernanceTOE.toeLegalityAloneDoesNotCreateLegitimacy
+  LegalSemanticTOE.toeLegalityAloneDoesNotCreateLegitimacy
 
-unifiedActionstepStyleVendorIdentityDoesNotCreateAuthority :
-  LegalGovernanceTOE.actionstepStyleVendorIdentityCreatesAuthority ≡ false
-unifiedActionstepStyleVendorIdentityDoesNotCreateAuthority =
-  LegalGovernanceTOE.toeActionstepStyleVendorIdentityCreatesAuthority
+unifiedActionstepStyleVendorIdentityCreatesAuthority =
+  LegalSemanticTOE.toeActionstepStyleVendorIdentityCreatesAuthority
 
-unifiedActionstepStyleTargetNeedsOwnAuthorityWitness :
-  LegalGovernanceTOE.actionstepStyleTargetNeedsOwnAuthorityWitness ≡ true
+unifiedActionstepStyleVendorIdentityCreatesAuthorityIsFalse =
+  LegalSemanticTOE.toeActionstepStyleVendorIdentityCreatesAuthorityIsFalse
+
 unifiedActionstepStyleTargetNeedsOwnAuthorityWitness =
-  LegalGovernanceTOE.toeActionstepStyleTargetNeedsOwnAuthorityWitness
+  LegalSemanticTOE.toeActionstepStyleTargetNeedsOwnAuthorityWitness
+
+unifiedActionstepStyleTargetNeedsOwnAuthorityWitnessIsTrue =
+  LegalSemanticTOE.toeActionstepStyleTargetNeedsOwnAuthorityWitnessIsTrue
+
+
+------------------------------------------------------------------------
+-- Fleet-58 named-manifest dispatch boundary.
+------------------------------------------------------------------------
+
+unifiedFleetGapDispatchBoundary :
+  FleetGapTOE.FleetFormalGapDispatchBoundary
+unifiedFleetGapDispatchBoundary =
+  FleetGapTOE.canonicalFleetFormalGapDispatchBoundary
+
+unifiedFleetNamedManifestStillOpen =
+  FleetGapTOE.namedFormalGapManifestAvailableIsFalse
+
+unifiedFleetDispatchRequiresNamedManifest =
+  FleetGapTOE.dispatchRequiresNamedFormalGapManifestIsTrue
+
+unifiedFleetCountDoesNotIdentifyGapObjects =
+  FleetGapTOE.externalGapCountIdentifiesIndividualGapsIsFalse
