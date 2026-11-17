@@ -1,4 +1,11 @@
 module DASHI.Unified.Everything where
+
+-- X369 early facilitation-before-suppression source-typed witness:
+-- reuse canonical DASHI.Cognition.ResponseKink through the R4
+-- same-source Nat fixture transport; the real PyTorch source weld
+-- and Agda kernel acceptance remain separate gates.
+import DASHI.Cognition.PNF.X369R4TopKSourceKinkWitnessExact as X369R4Kink
+open X369R4Kink public using (r4FiniteKinkSourceShape)
 import DASHI.Empirical.KozyrevMirrorClaimTesting as KozyrevMirror
 -- Reuse source-typed finite Sonic Warfare witness; no external promotion.
 import DASHI.Culture.GoodmanSonicWarfareExact as GoodmanSonicWarfare
