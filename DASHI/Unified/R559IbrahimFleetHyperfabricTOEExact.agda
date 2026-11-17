@@ -62,10 +62,7 @@ import DASHI.Core.IndexedRelationalHyperfabricSpineExact as Fabric
 import DASHI.Core.IndexedRelationalPadicWaveContinuousAdaptersExact as PadicWave
 import DASHI.Law.SensibLawWrongTypeGenericHyperfabricAdapterExact as WrongType
 import DASHI.Physics.Closure.BalancedTernaryContinuousEnvelope as Stream
-import DASHI.Unified.BalabanRGTOERegression as Balaban
-import DASHI.Biology.EqualCardinalityStructureBoundaryExact as EqualCardinality
-import DASHI.Physics.YangMills.BalabanClayGate4CurrentFrontierReceipt as Gate4Current
-import DASHI.Physics.YangMills.CompactLieProofLevel as Proof
+import DASHI.Core.RelationalTrialecticDisambiguationExact as IdentityFirewall
 
 ------------------------------------------------------------------------
 -- Exact existing owners.
@@ -105,48 +102,20 @@ fleetContradictionGapsAre44 = refl
 fleetFormalGapsAre58 : fleetFormalGaps ≡ 58
 fleetFormalGapsAre58 = refl
 
-historicalGate4GapCount : Nat
-historicalGate4GapCount =
-  YM.gate4UnresolvedCount YM.canonicalBalabanR559TOEMaxCutReceipt
 
-historicalGate4GapCountIs58 : historicalGate4GapCount ≡ 58
-historicalGate4GapCountIs58 =
-  YM.gate4UnresolvedCountIs58 YM.canonicalBalabanR559TOEMaxCutReceipt
+ymGate4FormalGaps : Nat
+ymGate4FormalGaps =
+  YM.gate4UnresolvedObligationCount
 
-fleetFormalGapCountEqualsHistoricalGate4Count :
-  fleetFormalGaps ≡ historicalGate4GapCount
-fleetFormalGapCountEqualsHistoricalGate4Count =
-  trans fleetFormalGapsAre58 (sym historicalGate4GapCountIs58)
+ymGate4FormalGapsAre58 : ymGate4FormalGaps ≡ 58
+ymGate4FormalGapsAre58 =
+  YM.gate4UnresolvedObligationCountIs58
 
-fleetGate4EqualCardinalityBoundary :
-  EqualCardinality.EqualCardinalityBoundary
-fleetGate4EqualCardinalityBoundary =
-  EqualCardinality.canonicalEqualCardinalityBoundary
+ymGate4PaidReductionLevel =
+  YM.gate4PaidReductionLedgerLevel
 
-fleetGate4EqualCardinalitySelectsCanonicalMap : Bool
-fleetGate4EqualCardinalitySelectsCanonicalMap =
-  EqualCardinality.equalCardinalitySelectsCanonicalMap
-    fleetGate4EqualCardinalityBoundary
-
-fleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
-  fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
-fleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
-  EqualCardinality.equalCardinalitySelectsCanonicalMapIsFalse
-    fleetGate4EqualCardinalityBoundary
-
-fleetFormalGapTargetSelected : Bool
-fleetFormalGapTargetSelected = true
-
-fleetFormalGapTargetSelectedIsTrue :
-  fleetFormalGapTargetSelected ≡ true
-fleetFormalGapTargetSelectedIsTrue = refl
-
-historicalGate4CountSelectedAsFleetTarget : Bool
-historicalGate4CountSelectedAsFleetTarget = false
-
-historicalGate4CountSelectedAsFleetTargetIsFalse :
-  historicalGate4CountSelectedAsFleetTarget ≡ false
-historicalGate4CountSelectedAsFleetTargetIsFalse = refl
+ymGate4InhabitantsLevel =
+  YM.gate4CutsetInhabitantsLevel
 
 fleetEigenPriorityDoesNotCreateProof :
   Fleet.eigenvalueMagnitudeCreatesProofAuthority fleetFormalGapTargetReceipt ≡ false
@@ -167,6 +136,25 @@ fleetContradictionGapsStaySeparate :
   Fleet.contradictionGapsRemainSeparate fleetFormalGapTargetReceipt ≡ true
 fleetContradictionGapsStaySeparate =
   Fleet.fleetContradictionGapsRemainSeparate
+
+
+Fleet58EqualsYMGate4SameObject : Set
+Fleet58EqualsYMGate4SameObject =
+  IdentityFirewall.SharedCardinalityCreatesIdentity
+
+fleet58CardinalityDoesNotProveYMGate4Identity :
+  Fleet58EqualsYMGate4SameObject → ⊥
+fleet58CardinalityDoesNotProveYMGate4Identity =
+  IdentityFirewall.sharedCardinalityDoesNotCreateIdentity
+
+Fleet58Gate458SameIdentityFromCount : Set
+Fleet58Gate458SameIdentityFromCount =
+  Fleet58EqualsYMGate4SameObject
+
+fleet58AndGate458CardinalityDoesNotCreateSameGapIdentity :
+  Fleet58Gate458SameIdentityFromCount → ⊥
+fleet58AndGate458CardinalityDoesNotCreateSameGapIdentity =
+  fleet58CardinalityDoesNotProveYMGate4Identity
 
 
 Fleet58EqualsYMGate4SameObject : Set

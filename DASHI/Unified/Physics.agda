@@ -1,12 +1,6 @@
 module DASHI.Unified.Physics where
 
-import DASHI.Unified.SensibLawGovernanceTOEExact as GovernanceTOE
-import DASHI.Core.AuthorityNonPromotionCore as Authority
-import DASHI.Promotion.AuthorityBoundaryCore as AuthorityBoundary
-import DASHI.Law.SensibLawAgdaFirstLegalRuntimeEverything as LegalRuntime
-import DASHI.Governance.DomainPermeabilityAuthorityTransport as Domain
-
-open import Agda.Builtin.Bool using (false; true)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Nat.Base using (ℕ)
 open import Data.Empty using (⊥)
@@ -905,70 +899,3 @@ navierStokesClayEligibilityStillFalse :
   navierStokesClayEligible ≡ false
 navierStokesClayEligibilityStillFalse =
   NSClayTOE.clayEligibilityStillFalse
-
-
-------------------------------------------------------------------------
--- Joint Balaban/R559 typed continuum non-promotion.
-------------------------------------------------------------------------
-
-physicsBalabanR559ContinuumLimitPromotionImpossible :
-  BalabanRGTOE.BalabanContinuumLimitPromotion → ⊥
-physicsBalabanR559ContinuumLimitPromotionImpossible =
-  BalabanR559TOE.continuumLimitPromotionEliminator
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-physicsBalabanR559DepthContinuumLimitPromotionImpossible :
-  BalabanRGTOE.DepthContinuumLimitPromotion → ⊥
-physicsBalabanR559DepthContinuumLimitPromotionImpossible =
-  BalabanR559TOE.depthContinuumLimitPromotionEliminator
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-
-------------------------------------------------------------------------
--- R829-vector instantaneous snapshot and exact non-promotion boundary.
-------------------------------------------------------------------------
-
-navierStokesInstantaneousVectorSnapshotClosed : Bool
-navierStokesInstantaneousVectorSnapshotClosed =
-  NSClayTOE.instantaneousVectorSnapshotClosed
-
-navierStokesInstantaneousVectorSnapshotClosedIsTrue :
-  navierStokesInstantaneousVectorSnapshotClosed ≡ true
-navierStokesInstantaneousVectorSnapshotClosedIsTrue =
-  NSClayTOE.instantaneousVectorSnapshotClosedIsTrue
-
-navierStokesInstantaneousRepositoryRateStrictlyNegative : Bool
-navierStokesInstantaneousRepositoryRateStrictlyNegative =
-  NSClayTOE.instantaneousRepositoryRateStrictlyNegative
-
-navierStokesInstantaneousRepositoryRateStrictlyNegativeIsTrue :
-  navierStokesInstantaneousRepositoryRateStrictlyNegative ≡ true
-navierStokesInstantaneousRepositoryRateStrictlyNegativeIsTrue =
-  NSClayTOE.instantaneousRepositoryRateStrictlyNegativeIsTrue
-
-navierStokesRealFiniteODETransportClosed : Bool
-navierStokesRealFiniteODETransportClosed =
-  NSClayTOE.realFiniteODETransportClosed
-
-navierStokesRealFiniteODETransportStillOpen :
-  navierStokesRealFiniteODETransportClosed ≡ false
-navierStokesRealFiniteODETransportStillOpen =
-  NSClayTOE.realFiniteODETransportStillOpen
-
-navierStokesUniversalR823IntegratedReserveRefuted : Bool
-navierStokesUniversalR823IntegratedReserveRefuted =
-  NSClayTOE.universalR823IntegratedReserveRefuted
-
-navierStokesUniversalR823IntegratedReserveStillUnrefuted :
-  navierStokesUniversalR823IntegratedReserveRefuted ≡ false
-navierStokesUniversalR823IntegratedReserveStillUnrefuted =
-  NSClayTOE.universalR823IntegratedReserveStillUnrefuted
-
-navierStokesInstantaneousSnapshotClayPromotion : Bool
-navierStokesInstantaneousSnapshotClayPromotion =
-  NSClayTOE.instantaneousSnapshotClayPromotion
-
-navierStokesInstantaneousSnapshotClayPromotionStillFalse :
-  navierStokesInstantaneousSnapshotClayPromotion ≡ false
-navierStokesInstantaneousSnapshotClayPromotionStillFalse =
-  NSClayTOE.instantaneousSnapshotClayPromotionStillFalse
