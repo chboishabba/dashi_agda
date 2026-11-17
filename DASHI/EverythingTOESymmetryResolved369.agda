@@ -2791,3 +2791,9 @@ toeBalabanRouteSP2R445NoSecondMoment =
 toeBalabanRouteSP2R445CompilerLevel : ProofLevel
 toeBalabanRouteSP2R445CompilerLevel =
   BalabanRGTOE.balabanRouteSP2R445NativeCompilerLevel
+
+-- KSW668 F8 source-typed cross-programme seam (max-cut XXVIII).
+-- Original a=t AdS5 E4/E5 readout cancellation is exact finite algebra.
+-- The curvature identification, Israel source, coupled stability and FIO
+-- are explicitly OPEN; no Monster/369/ternary physical equivalence follows.
+import DASHI.Physics.Gravity.KSW668F8DualElectricWeylReadoutAlgebraExact as KSWF8WeylAlgebra
