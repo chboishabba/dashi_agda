@@ -161,3 +161,24 @@ The dependent FieldMaterialEnergyWeld b f sourceCycle requires TWO independently
 No new physical fields or energy constants are invented. This is stronger than the earlier Nat cycle bound because the field/material interface is **proved to cancel** using two separately evidenced equations, and material modulation cannot masquerade as natural input.
 
 **Kernel still OPEN:** scripts/check_smith_filsinger_formal_weld_agda29.sh now includes the third theorem owner. Agda 2.9/Nix unavailable in this environment: source authored and dependency signatures audited, but NO kernel acceptance. A physically calibrated Maxwell material/Poynting identity and the same-original #1521 source/receiver weld remain uninhabited; physical F10/F13/F14/F15/F16 remain OPEN. No ESD editing or TOE promotion.
+
+
+## Direct canonical #1521 material-ledger import and same-original formal weld
+
+**Reuse, not duplicate construction.** The exact original source bytes of DASHI/Physics/Motors/SmithFilsingerDispersiveMaterialPortExact.agda (PR #1521, Git blob fb4039927678b370f359b3151c1fc2a2286c33ab) are now on PR #1524, preserving the original author and code unchanged; retrieved Git blob SHA is IDENTICAL on both branches. The canonical owner is NOT rewritten, and a new consumer holds all additional proofs. This replaces the earlier declaration that a cross-branch import was impossible.
+
+**New direct imported proof consumer:** DASHI/Physics/Motors/SmithFilsingerDispersiveMaterialWeldExact.agda. Existing proof owners: DispersiveMaterialPortExact.MemoryMaterialPortLedger, SourceMaxwellBoundaryWeldExact, MaxwellMaterialEnergyCutExact, ReplenishedCycleCapExact and Circuit36927RecoveryEnergyBoundExact. It establishes these source-authored theorems:
+
+- donorAllStoresReturn: if both the original material donor's environment storage and local storage return individually, their combined store returns.
+- donorReorderInputs/donorReorderOutputs: exact Nat polynomial normalisation of the ORIGINAL #1521 fullBalance, not a replacement equation.
+- originalDispersiveRepeatableWork: using the source owner's actual MemoryMaterialPortLedger.fullBalance, proves source recharge + driver + material modulator input = useful load + resistive/relaxation heat + feed loss + modulator recovery when BOTH stored states return, by exact cancellation.
+- originalDispersiveLoadBound: useful load bounded by those paid inputs from that derived equation.
+- CanonicalDispersiveSameObject b f s w: a source-indexed record requiring the ORIGINAL Mat.SameOriginalAdmittanceAdmission witness and exact equalities of donor natural recharge to previously signed **net** natural work, paid driver, modulation input, modulation recovery, actual load and field/material losses. Requires separately witnessed environment and local storage return.
+- donorOriginalLoadIsPaid: transports the original material donor's derived bound to the same selected original receiver useful load, without assuming its previous aggregate cycle equation.
+- donorOriginalLoadBelowAdmittedNaturalCap: a second cross-owner theorem, bounding that original load by independent natural-source cap + **net** controller input + explicitly paid material modulation.
+
+These are genuine formal join points, not a numerical source scenario. The original upstream source cap, source current/Poynting boundary and physical same-original witness remain EXTERNAL proof premises, so no claim that Filsinger's apparatus has a positive natural supply follows. The signed Nat-grid branch assumes nonnegative net natural work: arbitrary reverse power needs an ordered additive group or a pair-of-naturals representation.
+
+**Kernel:** the pinned formal checker now targets FOUR consumers (source Maxwell, cloud causal, Maxwell material interface cut, canonical dispersive material weld) and checks original donor import. Agda 2.9/Nix unavailable to run here; all added theorem bodies are SOURCE-AUTHORED, not kernel-accepted. The unchanged donor's matching blob is evidence of attribution and reproducibility, not proof correctness. Physical F10/F13/F14/F15/F16 and D1 remain OPEN.
+
+**Max-cut next:** a physically parameterised original Maxwell/material/port construction must inhabit the exact same-source field energy, nonlinear constitutive and signed flux equations, not choose their numeric values. The two mathematical joins are now authored; pin-level and environmental source measurements and actual Maxwell Hodge/inhomogeneous field source law still cannot be derived from the repository's symbolic exterior-calculus inventory.
