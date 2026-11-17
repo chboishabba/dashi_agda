@@ -42,3 +42,6 @@ import DASHI.Physics.Photovoltaic.GaAs111QuantumWellConfinementExact
 
 -- P1d quantum-well source confinement and strict P7 net solar-electric gate.
 import DASHI.Physics.Photovoltaic.PV369NetHalfThresholdExact
+
+-- Same-material no-free-gain and strict physical 369 vs conventional control.
+import DASHI.Physics.Photovoltaic.PV369MatchedDevicePhysicalAdvantageExact
