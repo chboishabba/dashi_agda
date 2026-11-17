@@ -388,3 +388,14 @@ A trivially zero conversion from reals to integer work would be additive but wou
 The signed work branch also imports the actual original driverOnlyCanRadiateIntoEnvironment record, proving originalDriverOnlyReverseFlowIsPaid and originalDriverOnlySinkBound without constructing a new toy example. Source/field real-domain algebra stays owned by SignedIndexedFaceFluxExact, IndexedSignedCellStokesExact and SpaceTimePoyntingTelescopeExact. No duplicate real-field solver.
 
 Agda/Nix and exact-head CI are still unavailable in this session. No new source-level mathematical theorem is claimed kernel accepted or a physical proof of Filsinger Earth power, an actual surface integral or cloud/rain intervention.
+
+
+## Exact additive meter no-go under a half-divisible source carrier
+
+**New source-authored formal consumer:** DASHI/Physics/Motors/SmithFilsingerSignedMeterQuantisationNoGoExact.agda. It imports the canonical SignedBoundaryGroupCompletionExact signed Nat-pair pre-quotient, the original oneWorkQuantumHasNoExactSignedHalf theorem and the existing MidpointTwoPortWorkExact contradiction owner. It does NOT create a new real-field or sign-flux algebra.
+
+Theorem additiveExactMeterCannotSendHalvedUnitToOneQuantum is universe-polymorphic in any source carrier A with an operation plus, a half element h, a full element u and exact h plus h = u. If an integer signed-pair meter respects the source operation via cross-sum equivalence AND maps the full element to one integer quantum, its value at half would have to be half an odd integer, contradicting the original exact Nat-pair parity theorem. This is a formal argument against an unrestricted EXACT nonzero additive C3.RealField/rational -> integer-quanta bridge; it is NOT a theorem against approximate meters or discrete finite-lattice models.
+
+The actual physics lane should use the existing C3.RealField indexed signed face algebra and rational SpaceTimePoyntingTelescopeExact source carriers, preserving the field metric, source-current and integrated Poynting identity. For comparison with Nat terminal energy, a future *independently calibrated* metering map must either have a declared discrete domain/quantum lattice or bounded interval/rounding uncertainty with summed error. Such a map has not yet been constructed and may fail to exist for the original device.
+
+A GitHub update race was resolved by creating a **separate proof consumer**, avoiding overwrites in the signed boundary owner. The pinned script now lists the consumer. Agda/Nix remain unavailable locally, so all new proof bodies remain pending kernel type-check; no physical F10/F13/F14/F15/F16 source/weather claims are promoted.
