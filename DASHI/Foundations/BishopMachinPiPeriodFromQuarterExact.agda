@@ -147,7 +147,7 @@ module _ (inputs : Round11.Round11BishopCutset) where
               (BP.≃-trans (doubleSinAtQuarter w)
                 (Algebra.quarterSinCosEqualityGivesDoubleSinOne
                   (sin quarter) (cos quarter)
-                  (sinEqualsCos w)))))
+                  (sinEqualsCos w) (unitSinFirst w))))))
           (let open BP.ℝ-Solver in
            solve 0
              (((Κ (+ 0 / 1) ⊗ Κ (+ 0 / 1)) ⊖
