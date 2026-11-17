@@ -761,707 +761,111 @@ unifierBalabanScaleTransferNonPromotion =
   BalabanR559TOE.scaleTransferPromotionEliminator
     BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
-------------------------------------------------------------------------
--- CONTEXTUAL-SEMANTIC-FRACTRAN-TOE-MAXCUT
-------------------------------------------------------------------------
-
-import DASHI.Unified.ContextualSemanticFractranTOEMaxCutExact as ContextualTOE
-
-unifierContextualSemanticFractranMaxCutReceipt :
-  ContextualTOE.ContextualSemanticFractranTOEMaxCutReceipt
-unifierContextualSemanticFractranMaxCutReceipt =
-  ContextualTOE.canonicalContextualSemanticFractranTOEMaxCutReceipt
-
-unifierContextualSemanticFractranZKPFrame :
-  ParetoSnowballTOE.TOEZKPFrame
-unifierContextualSemanticFractranZKPFrame =
-  ContextualTOE.canonicalContextualSemanticFractranTOEZKPFrame
-
-unifierContextualCoverageDoesNotCreateMonsterRepresentation :
-  ContextualTOE.CoverageMonsterRepresentationPromotion → ⊥
-unifierContextualCoverageDoesNotCreateMonsterRepresentation =
-  ContextualTOE.coverageDoesNotCreateMonsterRepresentation
-
-unifierContextualParetoChartDoesNotCreateMonsterRepresentation :
-  ContextualTOE.ParetoTernaryMonsterRepresentationPromotion → ⊥
-unifierContextualParetoChartDoesNotCreateMonsterRepresentation =
-  ContextualTOE.paretoTernaryChartDoesNotCreateMonsterRepresentation
-
-unifierYMGate4InhabitantsLevel : ProofLevel
-unifierYMGate4InhabitantsLevel =
-  FleetHyperTOE.ymGate4InhabitantsLevel
-
-unifierFleet58DoesNotIdentifyYMGate4 :
-  FleetHyperTOE.Fleet58EqualsYMGate4SameObject → ⊥
-unifierFleet58DoesNotIdentifyYMGate4 =
-  FleetHyperTOE.fleet58CardinalityDoesNotProveYMGate4Identity
-
-unifierFleetDischargedFibresAre584 :
-  FleetHyperTOE.fleetDischargedFibres ≡ 584
-unifierFleetDischargedFibresAre584 =
-  FleetHyperTOE.fleetDischargedFibresAre584
-
-unifierFleetContradictionGapsAre44 :
-  FleetHyperTOE.fleetContradictionGaps ≡ 44
-unifierFleetContradictionGapsAre44 =
-  FleetHyperTOE.fleetContradictionGapsAre44
-
-unifierPadicPrefixCannotRecoverDiscardedDigit :
-  FleetHyperTOE.PadicPrefixRecovery → ⊥
-unifierPadicPrefixCannotRecoverDiscardedDigit =
-  FleetHyperTOE.toePadicPrefixCannotRecoverDiscardedDigit
-
-unifierTwoDigitStreamCannotRecoverThird :
-  FleetHyperTOE.StreamThirdPrefixRecovery → ⊥
-unifierTwoDigitStreamCannotRecoverThird =
-  FleetHyperTOE.toeTwoDigitStreamCannotRecoverThird
 
 ------------------------------------------------------------------------
--- Implement-A-to-D reuse-only TOE facade.
+-- Current-master governance x fleet x Balaban/R559 x Ibrahim max-cut.
 ------------------------------------------------------------------------
 
-import DASHI.Unified.YMImplementAToDTOEMaxCutExact as YMAD
+import DASHI.Unified.TOECurrentMaxCutGovernanceFleetExact as CurrentMaxCut
+import DASHI.Unified.TOECurrentMaxCutGovernanceFleetRegression
 
-unifierYMImplementAToDMaxCutReceipt :
-  YMAD.YMImplementAToDTOEMaxCutReceipt
-unifierYMImplementAToDMaxCutReceipt =
-  YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+unifierCurrentMaxCutGovernanceFleetReceipt :
+  CurrentMaxCut.TOECurrentMaxCutGovernanceFleetReceipt
+unifierCurrentMaxCutGovernanceFleetReceipt =
+  CurrentMaxCut.canonicalTOECurrentMaxCutGovernanceFleetReceipt
 
-unifierYMImplementAToDZKPFrame : YMAD.YMImplementAToDZKPFrame
-unifierYMImplementAToDZKPFrame =
-  YMAD.canonicalYMImplementAToDZKPFrame
+unifierCurrentFormalGapTarget : ℕ
+unifierCurrentFormalGapTarget =
+  CurrentMaxCut.gate4FormalGapCount
 
-unifierYMImplementAToDPublishedContinuumStillBlocked :
-  YMAD.publishedContinuumPromotion YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
-  ≡ false
-unifierYMImplementAToDPublishedContinuumStillBlocked =
-  YMAD.publishedContinuumPromotionIsFalse
-    YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+unifierCurrentFormalGapTargetIs58 :
+  unifierCurrentFormalGapTarget ≡ 58
+unifierCurrentFormalGapTargetIs58 =
+  CurrentMaxCut.gate4FormalGapCountIs58
 
-unifierYMImplementAToDContinuumMassGapStillBlocked :
-  YMAD.continuumMassGapPromotion YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
-  ≡ false
-unifierYMImplementAToDContinuumMassGapStillBlocked =
-  YMAD.continuumMassGapPromotionIsFalse
-    YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+unifierCurrentFleetReportedFormalGapTarget : ℕ
+unifierCurrentFleetReportedFormalGapTarget =
+  CurrentMaxCut.fleetReportedFormalGapCount
 
-unifierYMImplementAToDClayStillBlocked :
-  YMAD.clayPromotion YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
-  ≡ false
-unifierYMImplementAToDClayStillBlocked =
-  YMAD.clayPromotionIsFalse YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+unifierCurrentFleetReportedFormalGapTargetIs58 :
+  unifierCurrentFleetReportedFormalGapTarget ≡ 58
+unifierCurrentFleetReportedFormalGapTargetIs58 =
+  CurrentMaxCut.fleetReportedFormalGapCountIs58
 
-unifierYMImplementAToDScaleTransferNonPromotion :
-  BalabanR559TOE.ScaleTransferPromotion → ⊥
-unifierYMImplementAToDScaleTransferNonPromotion =
-  YMAD.scaleTransferPromotionEliminator
-    YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
 
-------------------------------------------------------------------------
--- CONTEXTUAL-SEMANTIC-FRACTRAN-TOE-MAXCUT
-------------------------------------------------------------------------
+unifierCurrentFleetDischargedFibresExcluded :
+  CurrentMaxCut.dischargedFleetFibresExcluded ≡ true
+unifierCurrentFleetDischargedFibresExcluded = refl
 
-import DASHI.Unified.ContextualSemanticFractranTOEMaxCutExact as ContextualTOE
+unifierCurrentFiniteRGStillDoesNotPromoteContinuum :
+  CurrentMaxCut.finiteRGCreatesContinuumPromotion ≡ false
+unifierCurrentFiniteRGStillDoesNotPromoteContinuum =
+  CurrentMaxCut.finiteRGCreatesContinuumPromotionIsFalse
 
-unifierContextualSemanticFractranMaxCutReceipt :
-  ContextualTOE.ContextualSemanticFractranTOEMaxCutReceipt
-unifierContextualSemanticFractranMaxCutReceipt =
-  ContextualTOE.canonicalContextualSemanticFractranTOEMaxCutReceipt
+unifierCurrentCandidateLegalSourceStillDoesNotCreateAuthority :
+  CurrentMaxCut.candidateLegalSourceCreatesAuthority ≡ false
+unifierCurrentCandidateLegalSourceStillDoesNotCreateAuthority =
+  CurrentMaxCut.candidateLegalSourceCreatesAuthorityIsFalse
 
-unifierContextualSemanticFractranZKPFrame :
-  ParetoSnowballTOE.TOEZKPFrame
-unifierContextualSemanticFractranZKPFrame =
-  ContextualTOE.canonicalContextualSemanticFractranTOEZKPFrame
+unifierCurrentFormalGovernanceStillDoesNotCreatePoliticalLegitimacy :
+  CurrentMaxCut.formalGovernanceCreatesPoliticalLegitimacy ≡ false
+unifierCurrentFormalGovernanceStillDoesNotCreatePoliticalLegitimacy =
+  CurrentMaxCut.formalGovernanceCreatesPoliticalLegitimacyIsFalse
 
-unifierContextualCoverageDoesNotCreateMonsterRepresentation :
-  ContextualTOE.CoverageMonsterRepresentationPromotion → ⊥
-unifierContextualCoverageDoesNotCreateMonsterRepresentation =
-  ContextualTOE.coverageDoesNotCreateMonsterRepresentation
-
-unifierContextualParetoChartDoesNotCreateMonsterRepresentation :
-  ContextualTOE.ParetoTernaryMonsterRepresentationPromotion → ⊥
-unifierContextualParetoChartDoesNotCreateMonsterRepresentation =
-  ContextualTOE.paretoTernaryChartDoesNotCreateMonsterRepresentation
-
-unifierBalabanUniformKPStillBlocked :
-  BalabanR559TOE.balabanUniformKPAbsorption
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false
-unifierBalabanUniformKPStillBlocked =
-  BalabanR559TOE.balabanUniformKPAbsorptionIsFalse
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-unifierBalabanOSWightmanStillBlocked :
-  BalabanR559TOE.balabanOSWightmanConstruction
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false
-unifierBalabanOSWightmanStillBlocked =
-  BalabanR559TOE.balabanOSWightmanConstructionIsFalse
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+unifierCurrentIbrahimSearchPriorityDoesNotCreateProof :
+  CurrentMaxCut.IbrahimSearchPriorityCreatesProof → ⊥
+unifierCurrentIbrahimSearchPriorityDoesNotCreateProof =
+  CurrentMaxCut.ibrahimSearchPriorityCannotCreateProof
 
 
 ------------------------------------------------------------------------
--- Direct TOE conjunctive closure: the three missing physical producers
--- remain blocked together. No Boolean flag becomes proof authority.
--- Reuse R559 source-owned proofs without adding a model or an axiom.
+-- Direct legal-governance semantic non-promotion at the TOE consumer.
+-- The theorem owner remains TOECurrentMaxCutGovernanceFleetExact.
 ------------------------------------------------------------------------
 
-unifierBalabanPhysicalPromotionCut :
-  (BalabanR559TOE.balabanBlockSpinTransfer
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false)
-  × (BalabanR559TOE.balabanUniformKPAbsorption
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false)
-  × (BalabanR559TOE.balabanOSWightmanConstruction
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false)
-unifierBalabanPhysicalPromotionCut =
-  unifierBalabanBlockSpinStillBlocked ,
-  (unifierBalabanUniformKPStillBlocked ,
-   unifierBalabanOSWightmanStillBlocked)
-
-import DASHI.Unified.NavierStokesBM2TOEConvergenceExact as NSBM2TOE
-
-open NSBM2TOE public using
-  ( LiteralR571DissipationFold
-  ; ExactLiteralR571DissipationFold
-  ; literalR571M2BelowPhysicalDissipation
-  ; exactLiteralR571M2BelowPhysicalDissipation
-  )
-------------------------------------------------------------------------
--- Navier-Stokes B / R571 M2 producer-strategy facade.
-------------------------------------------------------------------------
-
-unifierNavierStokesBM2FiniteFoldClosed : Bool
-unifierNavierStokesBM2FiniteFoldClosed =
-  NSBM2TOE.cardinalityFreeFiniteFoldClosed
-
-unifierNavierStokesBM2SamplewisePaymentStillAnalytic :
-  NSBM2TOE.samplewisePhysicalPaymentStillAnalytic ≡ true
-unifierNavierStokesBM2SamplewisePaymentStillAnalytic =
-  NSBM2TOE.samplewisePhysicalPaymentStillAnalyticIsTrue
-
-unifierNavierStokesBM2GalerkinFoldStillAnalytic :
-  NSBM2TOE.literalFoldIntoGalerkinDissipationStillAnalytic ≡ true
-unifierNavierStokesBM2GalerkinFoldStillAnalytic =
-  NSBM2TOE.literalFoldIntoGalerkinDissipationStillAnalyticIsTrue
-
-unifierNavierStokesBM2OldPDFB1B2B3B4NotMandatory :
-  NSBM2TOE.oldPDFB1B2B3B4Mandatory ≡ false
-unifierNavierStokesBM2OldPDFB1B2B3B4NotMandatory =
-  NSBM2TOE.oldPDFB1B2B3B4MandatoryIsFalse
-
-unifierNavierStokesBM2OldPDFB7NotMandatory :
-  NSBM2TOE.oldPDFB7DirectCovarianceEqualityMandatory ≡ false
-unifierNavierStokesBM2OldPDFB7NotMandatory =
-  NSBM2TOE.oldPDFB7DirectCovarianceEqualityMandatoryIsFalse
-
-unifierNavierStokesBM2ClayPromotion : Bool
-unifierNavierStokesBM2ClayPromotion =
-  NSBM2TOE.modernNSClayPromotion
-
-unifierNavierStokesBM2ClayPromotionStillFalse :
-  unifierNavierStokesBM2ClayPromotion ≡ false
-unifierNavierStokesBM2ClayPromotionStillFalse =
-  NSBM2TOE.modernNSClayPromotionStillFalse
-
-unifierNavierStokesBM2Receipt :
-  NSBM2TOE.NavierStokesBM2TOEReceipt
-unifierNavierStokesBM2Receipt =
-  NSBM2TOE.canonicalNavierStokesBM2TOEReceipt
-
-unifierNavierStokesBM2ZKPFrame :
-  NSBM2TOE.NavierStokesBM2TOEZKPFrame
-unifierNavierStokesBM2ZKPFrame =
-  NSBM2TOE.canonicalNavierStokesBM2TOEZKPFrame
+unifierCurrentLegalAuthorityDoesNotEstablishApplicability :
+  CurrentMaxCut.legalAuthorityCreatesApplicability ≡ false
+unifierCurrentLegalAuthorityDoesNotEstablishApplicability =
+  CurrentMaxCut.legalAuthorityCreatesApplicabilityIsFalse
 
 ------------------------------------------------------------------------
--- Canonical Navier-Stokes Clay frontier.
--- Unifier consumes theorem-bearing owners through the normalized facade.
+-- Current max-cut + generic hyperfabric convergence.
+-- Unifier remains a facade over the joint owner.
 ------------------------------------------------------------------------
 
-import DASHI.Unified.NavierStokesClayFrontierTOEConvergenceExact as NSClayTOE
-
-unifierNavierStokesClayPromotion : Bool
-unifierNavierStokesClayPromotion =
-  NSClayTOE.navierStokesABCDClayPromotion
-
-unifierNavierStokesClayPromotionStillFalse :
-  unifierNavierStokesClayPromotion ≡ false
-unifierNavierStokesClayPromotionStillFalse =
-  NSClayTOE.navierStokesABCDClayPromotionStillFalse
-
-unifierNavierStokesGeneralRegularityComplete : Bool
-unifierNavierStokesGeneralRegularityComplete =
-  NSClayTOE.generalNSGlobalRegularityComplete
-
-unifierNavierStokesGeneralRegularityStillOpen :
-  unifierNavierStokesGeneralRegularityComplete ≡ false
-unifierNavierStokesGeneralRegularityStillOpen =
-  NSClayTOE.generalNSGlobalRegularityStillOpen
-
-unifierNavierStokesCarrierToGeneralImplicationProved : Bool
-unifierNavierStokesCarrierToGeneralImplicationProved =
-  NSClayTOE.carrierToGeneralNSImplicationProved
-
-unifierNavierStokesCarrierToGeneralImplicationStillOpen :
-  unifierNavierStokesCarrierToGeneralImplicationProved ≡ false
-unifierNavierStokesCarrierToGeneralImplicationStillOpen =
-  NSClayTOE.carrierToGeneralNSImplicationStillOpen
-
-unifierNavierStokesAuthorityPromotionGuard : Bool
-unifierNavierStokesAuthorityPromotionGuard =
-  NSClayTOE.navierStokesPromotionGuard
-
-unifierNavierStokesAuthorityPromotionGuardStillFalse :
-  unifierNavierStokesAuthorityPromotionGuard ≡ false
-unifierNavierStokesAuthorityPromotionGuardStillFalse =
-  NSClayTOE.navierStokesPromotionGuardStillFalse
-
-unifierNavierStokesClayFrontierZKPFrame :
-  NSClayTOE.NavierStokesClayFrontierTOEZKPFrame
-unifierNavierStokesClayFrontierZKPFrame =
-  NSClayTOE.canonicalNavierStokesClayFrontierTOEZKPFrame
-
-unifierNavierStokesTerminalPromotionImpossible :
-  NSClayTOE.NSClayDistanceFinalPromotion → ⊥
-unifierNavierStokesTerminalPromotionImpossible =
-  NSClayTOE.terminalClayPromotionImpossible
-
-
-------------------------------------------------------------------------
--- Current periodic-B shared weighted wall from R736.
--- Proof ownership remains in R736 through the canonical NS Clay facade.
-------------------------------------------------------------------------
-
-unifierNavierStokesSharedWeightedExactlyTwoLeaves : Bool
-unifierNavierStokesSharedWeightedExactlyTwoLeaves =
-  NSClayTOE.currentSharedWeightedExactlyTwoLeaves
-
-unifierNavierStokesSharedWeightedExactlyTwoLeavesIsTrue :
-  unifierNavierStokesSharedWeightedExactlyTwoLeaves ≡ true
-unifierNavierStokesSharedWeightedExactlyTwoLeavesIsTrue =
-  NSClayTOE.currentSharedWeightedExactlyTwoLeavesIsTrue
-
-unifierNavierStokesSharedWeightedSameCarrier : Bool
-unifierNavierStokesSharedWeightedSameCarrier =
-  NSClayTOE.currentSharedWeightedSameCarrier
-
-unifierNavierStokesSharedWeightedSameCarrierIsTrue :
-  unifierNavierStokesSharedWeightedSameCarrier ≡ true
-unifierNavierStokesSharedWeightedSameCarrierIsTrue =
-  NSClayTOE.currentSharedWeightedSameCarrierIsTrue
-
-unifierNavierStokesSharedWeightedCarrierIsInputLaplacian : Bool
-unifierNavierStokesSharedWeightedCarrierIsInputLaplacian =
-  NSClayTOE.currentSharedWeightedCarrierIsInputLaplacian
-
-unifierNavierStokesWeightedPlusEndpointClosed : Bool
-unifierNavierStokesWeightedPlusEndpointClosed =
-  NSClayTOE.currentWeightedPlusEndpointClosed
-
-unifierNavierStokesWeightedPlusEndpointStillOpen :
-  unifierNavierStokesWeightedPlusEndpointClosed ≡ false
-unifierNavierStokesWeightedPlusEndpointStillOpen =
-  NSClayTOE.currentWeightedPlusEndpointStillOpen
-
-unifierNavierStokesAugmentedCriticalWeightedClosed : Bool
-unifierNavierStokesAugmentedCriticalWeightedClosed =
-  NSClayTOE.currentAugmentedCriticalWeightedClosed
-
-unifierNavierStokesAugmentedCriticalWeightedStillOpen :
-  unifierNavierStokesAugmentedCriticalWeightedClosed ≡ false
-unifierNavierStokesAugmentedCriticalWeightedStillOpen =
-  NSClayTOE.currentAugmentedCriticalWeightedStillOpen
-
-unifierNavierStokesSharedWeightedLeavesBuildBarrier : Bool
-unifierNavierStokesSharedWeightedLeavesBuildBarrier =
-  NSClayTOE.currentSharedWeightedLeavesBuildBarrier
-
-unifierNavierStokesSharedWeightedLeavesBuildBarrierIsTrue :
-  unifierNavierStokesSharedWeightedLeavesBuildBarrier ≡ true
-unifierNavierStokesSharedWeightedLeavesBuildBarrierIsTrue =
-  NSClayTOE.currentSharedWeightedLeavesBuildBarrierIsTrue
-
-unifierNavierStokesR726IndependentLeafRequired : Bool
-unifierNavierStokesR726IndependentLeafRequired =
-  NSClayTOE.legacyR726IndependentLeafRequired
-
-unifierNavierStokesR726IndependentLeafNotRequired :
-  unifierNavierStokesR726IndependentLeafRequired ≡ false
-unifierNavierStokesR726IndependentLeafNotRequired =
-  NSClayTOE.legacyR726IndependentLeafNotRequired
-
-unifierNavierStokesStrictMarginR406IndependentLeafRequired : Bool
-unifierNavierStokesStrictMarginR406IndependentLeafRequired =
-  NSClayTOE.legacyStrictMarginR406IndependentLeafRequired
-
-unifierNavierStokesStrictMarginR406IndependentLeafNotRequired :
-  unifierNavierStokesStrictMarginR406IndependentLeafRequired ≡ false
-unifierNavierStokesStrictMarginR406IndependentLeafNotRequired =
-  NSClayTOE.legacyStrictMarginR406IndependentLeafNotRequired
-
-unifierNavierStokesBarrierDependentQPlusMinusShortcutAdmissible : Bool
-unifierNavierStokesBarrierDependentQPlusMinusShortcutAdmissible =
-  NSClayTOE.barrierDependentQPlusMinusShortcutAdmissible
-
-unifierNavierStokesBarrierDependentQPlusMinusShortcutStillCircular :
-  unifierNavierStokesBarrierDependentQPlusMinusShortcutAdmissible ≡ false
-unifierNavierStokesBarrierDependentQPlusMinusShortcutStillCircular =
-  NSClayTOE.barrierDependentQPlusMinusShortcutStillCircular
-
-unifierNavierStokesSharedWeightedClayPromotion : Bool
-unifierNavierStokesSharedWeightedClayPromotion =
-  NSClayTOE.currentSharedWeightedClayPromotion
-
-unifierNavierStokesSharedWeightedClayPromotionStillFalse :
-  unifierNavierStokesSharedWeightedClayPromotion ≡ false
-unifierNavierStokesSharedWeightedClayPromotionStillFalse =
-  NSClayTOE.currentSharedWeightedClayPromotionStillFalse
-
-unifierNavierStokesContinuumBKMPassageConstructed : Bool
-unifierNavierStokesContinuumBKMPassageConstructed =
-  NSClayTOE.continuumBKMPassageConstructed
-
-unifierNavierStokesContinuumBKMPassageStillOpen :
-  unifierNavierStokesContinuumBKMPassageConstructed ≡ false
-unifierNavierStokesContinuumBKMPassageStillOpen =
-  NSClayTOE.continuumBKMPassageStillOpen
-
-unifierNavierStokesAllDataBridgeConstructed : Bool
-unifierNavierStokesAllDataBridgeConstructed =
-  NSClayTOE.allDataBridgeConstructed
-
-unifierNavierStokesAllDataBridgeStillOpen :
-  unifierNavierStokesAllDataBridgeConstructed ≡ false
-unifierNavierStokesAllDataBridgeStillOpen =
-  NSClayTOE.allDataBridgeStillOpen
-
-unifierNavierStokesSubmissionPacketReady : Bool
-unifierNavierStokesSubmissionPacketReady =
-  NSClayTOE.submissionPacketReady
-
-unifierNavierStokesSubmissionPacketStillNotReady :
-  unifierNavierStokesSubmissionPacketReady ≡ false
-unifierNavierStokesSubmissionPacketStillNotReady =
-  NSClayTOE.submissionPacketStillNotReady
-
-unifierNavierStokesClayEligible : Bool
-unifierNavierStokesClayEligible =
-  NSClayTOE.clayEligible
-
-unifierNavierStokesClayEligibilityStillFalse :
-  unifierNavierStokesClayEligible ≡ false
-unifierNavierStokesClayEligibilityStillFalse =
-  NSClayTOE.clayEligibilityStillFalse
-
-------------------------------------------------------------------------
--- Current Gate-4 frontier, Fleet target split, and manifest boundary.
-------------------------------------------------------------------------
-
-unifierCurrentGate4FrontierLedgerLevel : ProofLevel
-unifierCurrentGate4FrontierLedgerLevel =
-  FleetHyperTOE.currentGate4FrontierLedgerLevel
-
-unifierCurrentGate4ClusteringToTransferGapLevel : ProofLevel
-unifierCurrentGate4ClusteringToTransferGapLevel =
-  FleetHyperTOE.currentGate4ClusteringToTransferGapLevel
-
-unifierFleetFormalGapTargetSelected : Bool
-unifierFleetFormalGapTargetSelected =
-  FleetHyperTOE.fleetFormalGapTargetSelected
-
-unifierHistoricalGate4CountSelectedAsFleetTarget : Bool
-unifierHistoricalGate4CountSelectedAsFleetTarget =
-  FleetHyperTOE.historicalGate4CountSelectedAsFleetTarget
-
-unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
-  FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
-unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
-  FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
-
-unifierFleetManifestAcquisitionDemand =
-  FleetGapTOE.fleetManifestAcquisitionDemand
-
-unifierFleetNamedManifestStillMissing :
-  FleetGapTOE.namedFormalGapManifestAcquired ≡ false
-unifierFleetNamedManifestStillMissing =
-  FleetGapTOE.namedFormalGapManifestAcquiredIsFalse
-
-unifierFleetPerGapDispatchStillBlocked :
-  FleetGapTOE.perGapDispatchEnabled ≡ false
-unifierFleetPerGapDispatchStillBlocked =
-  FleetGapTOE.perGapDispatchEnabledIsFalse
-
-unifierFleetRelatedSymbolsRequired :
-  FleetGapTOE.fleetRelatedSymbolsRequired ≡ true
-unifierFleetRelatedSymbolsRequired =
-  FleetGapTOE.fleetRelatedSymbolsRequiredIsTrue
-
-unifierFleetDiscoverRequired :
-  FleetGapTOE.fleetDiscoverRequired ≡ true
-unifierFleetDiscoverRequired =
-  FleetGapTOE.fleetDiscoverRequiredIsTrue
-
-unifierFleetRoundLineageRequired :
-  FleetGapTOE.fleetRoundLineageRequired ≡ true
-unifierFleetRoundLineageRequired =
-  FleetGapTOE.fleetRoundLineageRequiredIsTrue
-
-unifierFleetCountDoesNotCreateNamedManifest :
-  FleetGapTOE.CountCreatesNamedManifest → ⊥
-unifierFleetCountDoesNotCreateNamedManifest =
-  FleetGapTOE.fleetCountDoesNotCreateNamedManifest
-
-unifier369Ternary27MonsterRepresentationNotPromoted =
-  MaxCut369.toe27MonsterRepresentationNotPromoted
-
-unifier369Ternary27MonsterEmbeddingNotPromoted =
-  MaxCut369.toe27MonsterEmbeddingNotPromoted
-
-toeFleetNumericABIRequiresIndependentEvidence :
-  FleetGapTOE.SpectralNumericABIPromotion → ⊥
-toeFleetNumericABIRequiresIndependentEvidence =
-  FleetGapTOE.fleetSpectralNumericABIPromotionImpossible
-
-------------------------------------------------------------------------
--- Current Gate-4 frontier, Fleet target split, and manifest boundary.
-------------------------------------------------------------------------
-
-unifierCurrentGate4FrontierLedgerLevel : ProofLevel
-unifierCurrentGate4FrontierLedgerLevel =
-  FleetHyperTOE.currentGate4FrontierLedgerLevel
-
-unifierCurrentGate4ClusteringToTransferGapLevel : ProofLevel
-unifierCurrentGate4ClusteringToTransferGapLevel =
-  FleetHyperTOE.currentGate4ClusteringToTransferGapLevel
-
-unifierFleetFormalGapTargetSelected : Bool
-unifierFleetFormalGapTargetSelected =
-  FleetHyperTOE.fleetFormalGapTargetSelected
-
-unifierHistoricalGate4CountSelectedAsFleetTarget : Bool
-unifierHistoricalGate4CountSelectedAsFleetTarget =
-  FleetHyperTOE.historicalGate4CountSelectedAsFleetTarget
-
-unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
-  FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
-unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
-  FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
-
-unifierFleetManifestAcquisitionDemand =
-  FleetGapTOE.fleetManifestAcquisitionDemand
-
-unifierFleetNamedManifestStillMissing :
-  FleetGapTOE.namedFormalGapManifestAcquired ≡ false
-unifierFleetNamedManifestStillMissing =
-  FleetGapTOE.namedFormalGapManifestAcquiredIsFalse
-
-unifierFleetPerGapDispatchStillBlocked :
-  FleetGapTOE.perGapDispatchEnabled ≡ false
-unifierFleetPerGapDispatchStillBlocked =
-  FleetGapTOE.perGapDispatchEnabledIsFalse
-
-unifierFleetRelatedSymbolsRequired :
-  FleetGapTOE.fleetRelatedSymbolsRequired ≡ true
-unifierFleetRelatedSymbolsRequired =
-  FleetGapTOE.fleetRelatedSymbolsRequiredIsTrue
-
-unifierFleetDiscoverRequired :
-  FleetGapTOE.fleetDiscoverRequired ≡ true
-unifierFleetDiscoverRequired =
-  FleetGapTOE.fleetDiscoverRequiredIsTrue
-
-unifierFleetRoundLineageRequired :
-  FleetGapTOE.fleetRoundLineageRequired ≡ true
-unifierFleetRoundLineageRequired =
-  FleetGapTOE.fleetRoundLineageRequiredIsTrue
-
-unifierFleetCountDoesNotCreateNamedManifest :
-  FleetGapTOE.CountCreatesNamedManifest → ⊥
-unifierFleetCountDoesNotCreateNamedManifest =
-  FleetGapTOE.fleetCountDoesNotCreateNamedManifest
-
-toeBrainJPromotionBlocked :
-  BrainSpine.objectExternalJPromotion BrainFMRI.brainFMRIObject ≡ false
-toeBrainJPromotionBlocked = BrainFMRI.brainFMRIJPromotionBlocked
-
-unifierFleetRecordedDischargedCountIs584 :
-  FleetGapTOE.dischargedCoreKnowledgeFibres
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 584
-unifierFleetRecordedDischargedCountIs584 =
-  FleetGapTOE.fleetRecordedDischargedCountIs584
-
-unifierFleetRecordedUnformalisedGapCountIs58 :
-  FleetGapTOE.unformalisedFormalGaps
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 58
-unifierFleetRecordedUnformalisedGapCountIs58 =
-  FleetGapTOE.fleetRecordedUnformalisedGapCountIs58
-
-unifierFleetRecordedContradictionCountIs44 :
-  FleetGapTOE.polarityContradictionGaps
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 44
-unifierFleetRecordedContradictionCountIs44 =
-  FleetGapTOE.fleetRecordedContradictionCountIs44
-
-unifierFleetRecordedMacroscopicMotifCountIs3 :
-  FleetGapTOE.macroscopicEigenMotifCount
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 3
-unifierFleetRecordedMacroscopicMotifCountIs3 =
-  FleetGapTOE.fleetRecordedMacroscopicMotifCountIs3
-
-unifierFleetTargetsOnlyUnformalisedFormalGaps :
-  FleetGapTOE.targetOnlyUnformalisedFormalGaps
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
-unifierFleetTargetsOnlyUnformalisedFormalGaps =
-  FleetGapTOE.fleetTargetsOnlyUnformalisedFormalGaps
-
-unifierFleetMetaIntrospectorAttributionPreserved :
-  FleetGapTOE.metaIntrospectorAttributionPreserved
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
-unifierFleetMetaIntrospectorAttributionPreserved = refl
-
-unifierFleetMetaIntrospectorProofNotBorrowed :
-  FleetGapTOE.metaIntrospectorProofBorrowed
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
-unifierFleetMetaIntrospectorProofNotBorrowed = refl
-
-unifierFleetCoordinateRebuildabilityReceipt =
-  FleetGapTOE.fleetCoordinateRebuildabilityReceipt
-
-unifierFleetNumericABIReceipt =
-  FleetGapTOE.fleetNumericABIReceipt
-
-unifierFleetResidualInvariantReceipt =
-  FleetGapTOE.fleetResidualInvariantReceipt
-
-unifierFleetPlanningBoundary =
-  FleetGapTOE.fleetPlanningBoundary
-
-unifierFleetVectorCoordinateDoesNotCreateTruth =
-  FleetGapTOE.fleetVectorCoordinateDoesNotCreateTruth
-
-unifierFleetPromotionObligationIndex =
-  FleetGapTOE.fleetPromotionObligationIndex
-
-unifierTriadicBoundedABIDoesNotCreateRust :
-  TriadicABI.BoundedABIImpliesRustImplementation → ⊥
-unifierTriadicBoundedABIDoesNotCreateRust =
-  TriadicABI.abiDoesNotCreateRust
-
-unifierCompiledScalarDoesNotCreateRust :
-  CompiledU8.CUint8ImpliesRustU8 → ⊥
-unifierCompiledScalarDoesNotCreateRust =
-  CompiledU8.cUint8DoesNotCreateRustBinding
-
-unifierCompiledScalarDoesNotCreateBackendEquivalence :
-  CompiledU8.ExhaustiveScalarImpliesBackendEquivalence → ⊥
-unifierCompiledScalarDoesNotCreateBackendEquivalence =
-  CompiledU8.scalarExhaustionDoesNotCreateBackendEquivalence
-
-unifierCompilerSuccessDoesNotCreateAgdaKernelSuccess :
-  CompiledU8.CompilerSuccessImpliesAgdaKernelSuccess → ⊥
-unifierCompilerSuccessDoesNotCreateAgdaKernelSuccess =
-  CompiledU8.compilerSuccessDoesNotCreateKernelSuccess
-
-------------------------------------------------------------------------
--- Exact finite-27 codec BIDI aliases from the canonical Max Cut owner.
-------------------------------------------------------------------------
-
-unifier369Ternary27StateCode :
-  MaxCut369.TernaryEncodedState → MaxCut369.TernaryState27
-unifier369Ternary27StateCode = MaxCut369.toe27StateCode
-
-unifier369Ternary27StateDecode :
-  MaxCut369.TernaryState27 → MaxCut369.TernaryEncodedState
-unifier369Ternary27StateDecode = MaxCut369.toe27StateDecode
-
-unifier369Ternary27StateDecodeStateCode :
-  (e : MaxCut369.TernaryEncodedState) →
-  unifier369Ternary27StateDecode (unifier369Ternary27StateCode e) ≡ e
-unifier369Ternary27StateDecodeStateCode =
-  MaxCut369.toe27StateDecodeStateCode
-
-unifier369Ternary27StateCodeStateDecode :
-  (i : MaxCut369.TernaryState27) →
-  unifier369Ternary27StateCode (unifier369Ternary27StateDecode i) ≡ i
-unifier369Ternary27StateCodeStateDecode =
-  MaxCut369.toe27StateCodeStateDecode
-
-------------------------------------------------------------------------
--- Fleet max-cut promotion and manifest firewalls.
-------------------------------------------------------------------------
-
-unifierFleetSpectralLabelsDoNotIdentifyTheoremOwners :
-  FleetGapTOE.spectralLabelsIdentifyTheoremOwners
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
-unifierFleetSpectralLabelsDoNotIdentifyTheoremOwners =
-  FleetGapTOE.fleetSpectralLabelDoesNotIdentifyTheoremOwner
-
-unifierFleetESDSurfaceUnedited :
-  FleetGapTOE.esdSurfaceEdited
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
-unifierFleetESDSurfaceUnedited = refl
-
-unifierFleetEigenPriorityPromotionImpossible :
-  FleetGapTOE.FleetEigenPriorityCreatesProof → ⊥
-unifierFleetEigenPriorityPromotionImpossible =
-  FleetGapTOE.fleetEigenPriorityPromotionImpossible
-
-unifierFleetExternalCountPromotionImpossible :
-  FleetGapTOE.FleetExternalCountCreatesFormalDischarge → ⊥
-unifierFleetExternalCountPromotionImpossible =
-  FleetGapTOE.fleetExternalCountPromotionImpossible
-
-unifierFleetDischargedFibreRetargetImpossible :
-  FleetGapTOE.FleetDischargedFibreRetargetPermission → ⊥
-unifierFleetDischargedFibreRetargetImpossible =
-  FleetGapTOE.fleetDischargedFibresCannotBeRetargetedByThisBoundary
-
-unifierFleetContradictionGapReclassificationImpossible :
-  FleetGapTOE.FleetContradictionGapReclassificationPermission → ⊥
-unifierFleetContradictionGapReclassificationImpossible =
-  FleetGapTOE.fleetContradictionsCannotBeRelabelledAsFormalGaps
-
-unifierFleet58ManifestAbsent :
-  FleetManifestTOE.named58ManifestAcquired ≡ false
-unifierFleet58ManifestAbsent =
-  FleetManifestTOE.named58ManifestAcquiredIsFalse
-
-unifierFleet58CountDoesNotNameRows :
-  FleetManifestTOE.countIdentifiesNamedRows ≡ false
-unifierFleet58CountDoesNotNameRows =
-  FleetManifestTOE.countIdentifiesNamedRowsIsFalse
-
-unifierFleet58PerGapDispatchDisabled :
-  FleetManifestTOE.perGapDispatchEnabled ≡ false
-unifierFleet58PerGapDispatchDisabled =
-  FleetManifestTOE.perGapDispatchEnabledIsFalse
-
-unifierFleet58RelatedSymbolsRequired :
-  FleetManifestTOE.relatedSymbolsRequired ≡ true
-unifierFleet58RelatedSymbolsRequired =
-  FleetManifestTOE.relatedSymbolsRequiredIsTrue
-
-unifierFleet58DiscoverRequired :
-  FleetManifestTOE.discoverRequired ≡ true
-unifierFleet58DiscoverRequired =
-  FleetManifestTOE.discoverRequiredIsTrue
-
-unifierFleet58RoundLineageRequired :
-  FleetManifestTOE.roundLineageRequired ≡ true
-unifierFleet58RoundLineageRequired =
-  FleetManifestTOE.roundLineageRequiredIsTrue
-
-unifierFleet58AcquisitionDoesNotCloseConsumer :
-  FleetManifestTOE.BoundDemandAutomaticallyClosesConsumer → ⊥
-unifierFleet58AcquisitionDoesNotCloseConsumer =
-  FleetManifestTOE.acquisitionDoesNotCloseConsumer
-
-unifierFleet58ProducerDoesNotIdentifyResidual :
-  FleetManifestTOE.SameProducerIdentifiesResidual → ⊥
-unifierFleet58ProducerDoesNotIdentifyResidual =
-  FleetManifestTOE.producerDoesNotIdentifyResidual
-
-
-
-unifier369MaxCutZKPFrame :
-  ParetoSnowballTOE.TOEZKPFrame
-unifier369MaxCutZKPFrame =
-  MaxCut369.canonicalTOE369MaxCutZKPFrame
+import DASHI.Unified.TOECurrentMaxCutHyperfabricExact as CurrentHyper
+
+unifierCurrentMaxCutHyperfabricReceipt :
+  CurrentHyper.TOECurrentMaxCutHyperfabricReceipt
+unifierCurrentMaxCutHyperfabricReceipt =
+  CurrentHyper.canonicalTOECurrentMaxCutHyperfabricReceipt
+
+unifierCurrentHyperformNineCount :
+  CurrentHyper.HyperformNineCountProof
+unifierCurrentHyperformNineCount =
+  CurrentHyper.currentHyperformNineCount
+
+unifierCurrentHyperformTwentySevenCount :
+  CurrentHyper.HyperformTwentySevenCountProof
+unifierCurrentHyperformTwentySevenCount =
+  CurrentHyper.currentHyperformTwentySevenCount
+
+unifierCurrentHyperformEightyOneCount :
+  CurrentHyper.HyperformEightyOneCountProof
+unifierCurrentHyperformEightyOneCount =
+  CurrentHyper.currentHyperformEightyOneCount
+
+unifierCurrentPadicPrefixCannotRecoverDiscardedDigit :
+  CurrentHyper.PadicPrefixRecovery → ⊥
+unifierCurrentPadicPrefixCannotRecoverDiscardedDigit =
+  CurrentHyper.currentPadicPrefixCannotRecoverDiscardedDigit
+
+unifierCurrentTwoDigitStreamCannotRecoverThird :
+  CurrentHyper.StreamThirdPrefixRecovery → ⊥
+unifierCurrentTwoDigitStreamCannotRecoverThird =
+  CurrentHyper.currentTwoDigitStreamCannotRecoverThird
+
+unifierCurrentFleet58DoesNotBecomeGate4SameObject :
+  CurrentHyper.Fleet58IsGate4SameObject → ⊥
+unifierCurrentFleet58DoesNotBecomeGate4SameObject =
+  CurrentHyper.currentFleet58DoesNotBecomeGate4SameObject
