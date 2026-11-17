@@ -1465,6 +1465,30 @@ toeTekumRadiusOneRawCorrectionImpossible :
 toeTekumRadiusOneRawCorrectionImpossible =
   TekumRoundingTOE.rawRadiusOneStillRefuted
 
+toeBrainJPromotionBlocked :
+  BrainSpine.objectExternalJPromotion BrainFMRI.brainFMRIObject ≡ false
+toeBrainJPromotionBlocked = BrainFMRI.brainFMRIJPromotionBlocked
+
+------------------------------------------------------------------------
+-- Canonical Tékum exact-nearest / raw-rounding non-promotion convergence.
+-- Reuse the existing DASHI-owned rounding boundary from PR #1102.
+------------------------------------------------------------------------
+
+toeTekumDASHIRoundingBoundary :
+  TekumRoundingTOE.TekumDASHIRoundingBoundary
+toeTekumDASHIRoundingBoundary =
+  TekumRoundingTOE.canonicalTekumDASHIRoundingBoundary
+
+toeTekumHunholdFiniteRepairImpossible :
+  TekumP5.RawTruncationNearestOnFiniteClosure → ⊥
+toeTekumHunholdFiniteRepairImpossible =
+  TekumRoundingTOE.hunholdFiniteRepairStillRefuted
+
+toeTekumRadiusOneRawCorrectionImpossible :
+  TekumRaw.UniformRadiusOneRawCorrection → ⊥
+toeTekumRadiusOneRawCorrectionImpossible =
+  TekumRoundingTOE.rawRadiusOneStillRefuted
+
 toeTekumNoDoubleFinalEqualityImpossible :
   TekumNoDouble.twoStageFinal8 ≡ TekumNoDouble.directFinal8 → ⊥
 toeTekumNoDoubleFinalEqualityImpossible =

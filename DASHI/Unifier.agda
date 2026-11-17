@@ -1231,6 +1231,29 @@ unifierTekumRadiusOneRawCorrectionImpossible :
 unifierTekumRadiusOneRawCorrectionImpossible =
   TekumRoundingTOE.rawRadiusOneStillRefuted
 
+toeBrainJPromotionBlocked :
+  BrainSpine.objectExternalJPromotion BrainFMRI.brainFMRIObject ≡ false
+toeBrainJPromotionBlocked = BrainFMRI.brainFMRIJPromotionBlocked
+
+------------------------------------------------------------------------
+-- Canonical Tékum exact-nearest / raw-rounding non-promotion convergence.
+------------------------------------------------------------------------
+
+unifierTekumDASHIRoundingBoundary :
+  TekumRoundingTOE.TekumDASHIRoundingBoundary
+unifierTekumDASHIRoundingBoundary =
+  TekumRoundingTOE.canonicalTekumDASHIRoundingBoundary
+
+unifierTekumHunholdFiniteRepairImpossible :
+  TekumP5.RawTruncationNearestOnFiniteClosure → ⊥
+unifierTekumHunholdFiniteRepairImpossible =
+  TekumRoundingTOE.hunholdFiniteRepairStillRefuted
+
+unifierTekumRadiusOneRawCorrectionImpossible :
+  TekumRaw.UniformRadiusOneRawCorrection → ⊥
+unifierTekumRadiusOneRawCorrectionImpossible =
+  TekumRoundingTOE.rawRadiusOneStillRefuted
+
 unifierTekumNoDoubleFinalEqualityImpossible :
   TekumNoDouble.twoStageFinal8 ≡ TekumNoDouble.directFinal8 → ⊥
 unifierTekumNoDoubleFinalEqualityImpossible =
