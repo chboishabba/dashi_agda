@@ -1508,3 +1508,6 @@ open SUNPushforwardNoBare public using
 import DASHI.Physics.YangMills.YMClayD1PhysicalRemoteCoverageNoGoExact as YMPhysicalPairCoverage
 
 import DASHI.Physics.YangMills.YangMillsCMP119LiteralWilsonSpanAdditiveExact as CMP119LiteralSpan
+
+-- YM.REAL: root-free Fejer finite product positivity ONLY; continuous Haar remains OPEN.
+import DASHI.Physics.YangMills.YMClaySU2FejerProductFiniteExact as SU2RootFreeFejerFinite
