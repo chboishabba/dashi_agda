@@ -33,6 +33,7 @@ owners=(
   DASHI/Physics/Motors/SmithFilsingerMaxwellTimedSpatialWeldExact.agda
   DASHI/Physics/Motors/SmithFilsingerOpenBoundaryPoyntingGaussExact.agda
   DASHI/Physics/Motors/SmithFilsingerSpaceTimePoyntingTelescopeExact.agda
+  DASHI/Physics/Motors/SmithFilsingerSignedBoundaryGroupCompletionExact.agda
 )
 new_owners=(
   DASHI/Physics/Motors/SmithFilsingerSpatialPortChainExact.agda
@@ -55,6 +56,7 @@ new_owners=(
   DASHI/Physics/Motors/SmithFilsingerMaxwellTimedSpatialWeldExact.agda
   DASHI/Physics/Motors/SmithFilsingerOpenBoundaryPoyntingGaussExact.agda
   DASHI/Physics/Motors/SmithFilsingerSpaceTimePoyntingTelescopeExact.agda
+  DASHI/Physics/Motors/SmithFilsingerSignedBoundaryGroupCompletionExact.agda
 )
 for f in "${owners[@]}"; do test -s "$f"; done
 # Do not use a regex for Agda's literal {!!} hole. The old
@@ -62,7 +64,7 @@ for f in "${owners[@]}"; do test -s "$f"; done
 # grep -F tests the exact concrete token; the optional source guard rejects
 # explicit postulates and compiler-escape pragmas in all new owners.
 if grep -nE '^[[:space:]]*postulate([[:space:]]|$)' "${new_owners[@]}" \
-   || grep -nF '{!!}' "${new_owners[@]}" \
+   || grep -nF '{!' "${new_owners[@]}" \
    || grep -nE '^[[:space:]]*\{-# *(TERMINATING|NON_TERMINATING|OPTIONS[^}]*--(allow-unsolved-metas|type-in-type|no-termination-check|no-positivity-check|no-coverage-check))' "${new_owners[@]}"; then
   echo "REJECT: postulate, explicit proof hole, or unsafe Agda pragma" >&2
   exit 1
