@@ -273,3 +273,30 @@ selectedFullVectorPhysicalAdmissionCap derives the original receiver load bound 
 **Separate mathematical consistency:** materialModulationReconcilesOriginalCycleLoss is added to the existing MaxwellMaterialEnergyCutExact owner and strictly derives that any paid modulation in the new material ledger must reconcile the losses and recovered modulation in the already-closed original signed cycle. This is especially important when comparing purported high-gain nonlinear field manipulation against a separately powered controller.
 
 **Kernel status unchanged:** Agda and Nix unavailable locally. These are source-authored exact proof candidates and must not be reported as kernel accepted until the pinned check runs.
+
+
+## Complete formal compositional diagram: full-vector Maxwell jets to all-N timed original ports
+
+**Source-authored Agda consumer:** DASHI/Physics/Motors/SmithFilsingerMaxwellTimedSpatialWeldExact.agda. This is the shortest logically useful **actual formal weld**, not a simulation and not a new duplicate Maxwell or network algebra owner. It imports the already-present KSW668FullVectorMaxwellJetExact, TimedSpatialPortChainExact and SpatialSourceCapWeldExact.
+
+### Type-level structure
+
+- MaxwellTimedPath b f s first last start finish is a dependent all-N path **indexed by the selected original b**, its existing field/port f, and its same-original signed environmental cycle s. It has a zero-cell terminal and a constructor for a single physical link.
+- Every physical link carries a **three-component Maxwell curl-jet with Ampere/Faraday equations** and an independently supplied implication from the original pointwise fullVectorSignedBudget = zero to an actual CausalSpatialCell. That target cell already contains a typed RetardedFlight and a local Poynting/work conservation receipt. The implication is the exact physical spacetime integration, orientation, constitutive and source/terminal identification obligation; it is NOT automatically constructed from an acoustic phase, scalar voltage, or arbitrary receiver.
+- eraseMaxwellToTimedSpatial is the source-to-consumer compiler: it applies the original fullVectorMaxwellPoyntingIdentity for each link and uses its independently supplied field-to-cell integration witness to build the existing timed/spatial work chain. It preserves the selected original source b/f/s across all links.
+- allIntegratedMaxwellCellsConserveWork is the inherited all-N network conservation theorem; allIntegratedMaxwellCellsRespectFlight is the inherited no-early-arrival finite causal theorem.
+- allIntegratedMaxwellCellsBelowSelectedNaturalCap consumes the original natural NET first/last source boundary, selected same-original source work, controller work, useful receiver and full aggregate stored-state return, then invokes the previously derived allTimedSelectedOriginalCellsBelowNaturalCap. It yields selected original useful load <= independent natural-source cap + net controller work. No internal field-to-material/current transfer or outgoing radiation is classified as a new source.
+
+### Dependency chain and exact remaining source gate
+
+KSW original true 3-component Maxwell **pointwise curl jet**
+  → REQUIRED independently proved physical field integral for EACH causal cell
+  → TimedSpatialPortChainExact (arbitrary N, launch <= arrival)
+  → SpatialPortChainExact (all shared internal flux cancels)
+  → SpatialSourceCapWeldExact (outgoing environment not credited as incoming)
+  → signed original source-identity and replenished-cycle cap
+  → selected original load bound.
+
+**Physical gate unchanged:** existence of a physically parameterized Maxwell/plasma/soil source-current field on the original device geometry, an integration/trace theorem with correct constitutive/material modulation and boundary conditions, independently replenished terminal source strength, and measured synchronous original hardware state. Any of these may fail. This is a conditional compositional theorem: it does not manufacture physical observations.
+
+**Acceptance:** the exact pinned script now includes this new owner and its original imports. Agda/Nix are unavailable in this environment; none of this new source is claimed kernel-checked. Full, source-authored proofs are subject to the actual compiler's elaboration/type/universe constraints. No ESD modification; no TOE promotion before acceptance and attribution audit.
