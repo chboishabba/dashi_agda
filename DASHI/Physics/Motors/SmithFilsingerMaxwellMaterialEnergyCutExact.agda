@@ -222,3 +222,90 @@ maxwellSourceEquationStillOpen :
     Maxwell.canonicalMaxwellExteriorCalculusAdapter ≡
       false
 maxwellSourceEquationStillOpen = refl
+
+
+-- The external cap applies only to the *net* natural input associated
+-- with the existing selected sourceCycle. It cannot pay for modulator
+-- work or allow the material recovery channel to vanish.
+netNaturalUnderExistingAdmittedCap :
+  (b : Weld.SelectedBoundary)
+  (f : Weld.FormalFieldToPort b)
+  (sourceCycle : Weld.SignedSourceCycleWeld b f)
+  (w : FieldMaterialEnergyWeld b f sourceCycle) →
+  Bound._≤_
+    (FieldMaterialEnergyWeld.naturalInput w)
+    (Cycle.AdmittedSourceCapCycle.independentlyAdmittedNaturalCap
+      (Weld.SignedSourceCycleWeld.cycleWithSourceCap sourceCycle))
+netNaturalUnderExistingAdmittedCap b f sourceCycle w =
+  Bound.transportUpper
+    (Cycle.trans
+      (Cycle.cong (λ z → z + unused)
+        (FieldMaterialEnergyWeld.sameNetNaturalWork w))
+      (Cycle.AdmittedSourceCapCycle.capReceipt cap))
+    (Bound.≤-append (FieldMaterialEnergyWeld.naturalInput w) unused)
+  where
+    cap : Cycle.AdmittedSourceCapCycle
+    cap = Weld.SignedSourceCycleWeld.cycleWithSourceCap sourceCycle
+    unused : Nat
+    unused = Cycle.AdmittedSourceCapCycle.unspentNaturalBudget cap
+
+fieldMaterialLoadBelowAdmittedCapPlusPaidModulation :
+  (b : Weld.SelectedBoundary)
+  (f : Weld.FormalFieldToPort b)
+  (sourceCycle : Weld.SignedSourceCycleWeld b f)
+  (w : FieldMaterialEnergyWeld b f sourceCycle) →
+  FieldMaterialEnergyWeld.fieldStoredInitially w
+    + FieldMaterialEnergyWeld.materialStoredInitially w
+  ≡ FieldMaterialEnergyWeld.fieldStoredFinally w
+    + FieldMaterialEnergyWeld.materialStoredFinally w →
+  Bound._≤_
+    (FieldMaterialEnergyWeld.usefulLoad w)
+    ((Cycle.AdmittedSourceCapCycle.independentlyAdmittedNaturalCap
+       (Weld.SignedSourceCycleWeld.cycleWithSourceCap sourceCycle)
+        + FieldMaterialEnergyWeld.driverInput w)
+      + FieldMaterialEnergyWeld.modulationInput w)
+fieldMaterialLoadBelowAdmittedCapPlusPaidModulation b f sourceCycle w restored =
+  Cycle.≤-trans
+    (fieldMaterialLoadBoundOnRepeatableCycle b f sourceCycle w restored)
+    (Cycle.+-monotoneRight (FieldMaterialEnergyWeld.modulationInput w)
+      (Cycle.+-monotoneRight (FieldMaterialEnergyWeld.driverInput w)
+        (netNaturalUnderExistingAdmittedCap b f sourceCycle w)))
+
+-- Strong same-ORIGINAL result: from two independently identified
+-- Maxwell/material boundaries plus calibrated net-source cap, prove
+-- a useful-load bound including all paid controller/material work.
+-- Crucially does not assume a second aggregate energy equality.
+sameOriginalMaterialCapWithControllerAndModulator :
+  (b : Weld.SelectedBoundary)
+  (f : Weld.FormalFieldToPort b)
+  (sourceCycle : Weld.SignedSourceCycleWeld b f)
+  (w : FieldMaterialEnergyWeld b f sourceCycle) →
+  FieldMaterialEnergyWeld.fieldStoredInitially w
+    + FieldMaterialEnergyWeld.materialStoredInitially w
+  ≡ FieldMaterialEnergyWeld.fieldStoredFinally w
+    + FieldMaterialEnergyWeld.materialStoredFinally w →
+  Bound._≤_
+    (Port.MidpointTwoPortWorkWindow.usefulWork
+      (Weld.FormalFieldToPort.portWindow f))
+    ((Cycle.AdmittedSourceCapCycle.independentlyAdmittedNaturalCap
+       (Weld.SignedSourceCycleWeld.cycleWithSourceCap sourceCycle)
+       + Cycle.RepeatableSourceCycle.controllerWork
+          (Cycle.AdmittedSourceCapCycle.repeatable
+            (Weld.SignedSourceCycleWeld.cycleWithSourceCap sourceCycle)))
+      + FieldMaterialEnergyWeld.modulationInput w)
+sameOriginalMaterialCapWithControllerAndModulator b f sourceCycle w restored =
+  substLower (Bound.sym (FieldMaterialEnergyWeld.sameOriginalLoad w))
+    (Bound.transportUpper
+      (Cycle.cong (λ z → (naturalCap + z) + materialModulation)
+        (FieldMaterialEnergyWeld.sameNetPoweredWork w))
+      (fieldMaterialLoadBelowAdmittedCapPlusPaidModulation
+        b f sourceCycle w restored))
+  where
+    substLower : {a b c : Nat} → a ≡ b → Bound._≤_ b c → Bound._≤_ a c
+    substLower refl p = p
+    naturalCap : Nat
+    naturalCap =
+      Cycle.AdmittedSourceCapCycle.independentlyAdmittedNaturalCap
+        (Weld.SignedSourceCycleWeld.cycleWithSourceCap sourceCycle)
+    materialModulation : Nat
+    materialModulation = FieldMaterialEnergyWeld.modulationInput w
