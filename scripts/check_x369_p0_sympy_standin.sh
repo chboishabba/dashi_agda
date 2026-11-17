@@ -123,6 +123,65 @@ check('non-centered activation can retain unequal expert DC',
         history_alt[0]:0,history_alt[1]:0,history_alt[2]:0}))==1)
 
 
+# No-centering required for a stronger ORIGINAL router score consumer:
+# one shared K_w x can be calculated once, then each expert supplies h_e.
+# Original directed feature and head definitions, not a new model.
+fusedA=ws*a+wf*c+wr*b
+fusedB=ws*b+wf*a+wr*c
+fusedC=ws*c+wf*b+wr*a
+directed_score=ws*s+wf*f+wr*r
+fused_score=A*fusedA+B*fusedB+C*fusedC
+check('original full directed score equals fused shared bilinear kernel',
+      sp.expand(directed_score-fused_score)==0)
+# Bilinear fusion is valid for every expert and every source triad:
+# verify a heterogeneous finite batch and heterogeneous triad lists.
+for triple in [
+    {a:0,b:1,c:-2,ws:2,wf:-3,wr:1,A:1,B:-1,C:4},
+    {a:3,b:-1,c:1,ws:-2,wf:1,wr:4,A:0,B:5,C:-2},
+    {a:-2,b:4,c:0,ws:3,wf:0,wr:-1,A:3,B:-3,C:2},
+]:
+    if sp.expand((directed_score-fused_score).subs(triple))!=0:
+        raise AssertionError('heterogeneous original triad did not fuse')
+check('heterogeneous source/history/weight triad fusion',True)
+block_source=[
+    (1,-1,3,2,0,-1),
+    (0,4,-2,-1,2,3),
+    (2,3,0,-3,-1,2),
+]
+histories=[
+    [(2,-1,0), (1,0,5), (-2,2,-1)],
+    [(0,1,1), (3,-2,2), (1,4,-2)],
+    [(-1,0,2), (-2,1,0), (3,-3,1)],
+    [(4,-3,-1), (-1,-2,1), (0,0,5)],
+]
+def source_score(block,h):
+    xx,yy,zz,w0,w1,w2=block
+    H0,H1,H2=h
+    return (w0*(xx*H0+yy*H1+zz*H2)+
+            w1*(xx*H1+yy*H2+zz*H0)+
+            w2*(xx*H2+yy*H0+zz*H1))
+def shared_precompute(block):
+    xx,yy,zz,w0,w1,w2=block
+    return (w0*xx+w1*zz+w2*yy,
+            w0*yy+w1*xx+w2*zz,
+            w0*zz+w1*yy+w2*xx)
+precomputed=list(map(shared_precompute,block_source))
+for per_expert in histories:
+    source_sum=sum(source_score(src,h) for src,h in zip(block_source,per_expert))
+    fused_sum=sum(sum(kk*hh for kk,hh in zip(shared,h))
+                  for shared,h in zip(precomputed,per_expert))
+    if source_sum!=fused_sum:
+        raise AssertionError('all-expert all-triad fused score mismatch')
+check('all sampled expert histories share precomputed source exact',True)
+# Count ONLY scalar multiplications in the directed per-expert
+# bilinear route plus the weight aggregation; not GPU runtime.
+# Naive (3 correlations x 3 multiplies + 3 weighted head) = 12E;
+# fused shared head Kx = 9 once + 3E history multiplies.
+check('fused arithmetic scalar-multiply model at E=4',
+      9+3*4<12*4)
+check('fused arithmetic scalar-multiply model at E=1 is equal',
+      9+3*1==12*1)
+
 # Exact source-head quantization safety needs BOTH a bound and a
 # strict selected-vs-unselected margin. This is finite stand-in for
 # the Agda interval certificate, not a source quantizer validation.
