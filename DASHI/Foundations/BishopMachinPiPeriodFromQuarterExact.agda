@@ -153,4 +153,4 @@ module _ (inputs : Round11.Round11BishopCutset) where
              (((Κ (+ 0 / 1) ⊗ Κ (+ 0 / 1)) ⊖
                 (Κ (+ 1 / 1) ⊗ Κ (+ 1 / 1)))
                ⊜ (⊝ Κ (+ 1 / 1)))
-             BP.≃-refl)))
+             BP.≃-refl))
