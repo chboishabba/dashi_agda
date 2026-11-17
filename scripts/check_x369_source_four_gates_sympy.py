@@ -216,6 +216,41 @@ check("rational four-expert selection actually preserved",
 check("strict budget is sufficient, not necessary",
       source_scores[3]>source_scores[2])
 
+# Explicit consumer non-descent from the EXISTING DASHI
+# TrialecticBoundaryFaceNonfactorabilityExact witness: same three
+# positive dyadic edges, different reciprocal/coercive face labels.
+# Route-score equality (or equal boundary features) cannot distinguish
+# this independent semantic face without additional evidence.
+boundary=("positive","positive","positive")
+state_reciprocal=(boundary,"reciprocal")
+state_coercive=(boundary,"coercive")
+check("identical trialectic boundary distinct face consumers",
+      state_reciprocal[0]==state_coercive[0] and
+      state_reciprocal[1]!=state_coercive[1])
+# An external 'semantic action' requires a licensed task action,
+# not reinterpreting a C2 sign flip or arbitrary geometric C3 cycle.
+# These intentionally separate output action domains.
+semantic_labels=("reciprocal","coercive","underdetermined")
+geometric_rotation=lambda v:(v[1],v[2],v[0])
+check("rotating geometry does not synthesize a face label",
+      geometric_rotation((1,2,3))==(2,3,1) and
+      "reciprocal" not in geometric_rotation((1,2,3)))
+# The source's route logits can be exactly equal despite a changed
+# face label; any model claiming this face consumer must carry its
+# information in another verified channel or residual.
+check("router-score sufficiency alone cannot recover semantic face",
+      K.dot(hi)==K.dot(hi) and
+      state_reciprocal[1]!=state_coercive[1])
+
+# The rational four-expert fixture also has a strict WITHIN-SELECTED
+# order margin, so both ordered slots (not merely the set) are safe.
+ordered=sorted_ids(source_scores)[:2]
+check("rational top2 slot order certified",
+      source_scores[ordered[0]]-certified_budget[ordered[0]] >
+      source_scores[ordered[1]]+certified_budget[ordered[1]])
+check("rational top2 slot order actually preserved",
+      sorted_ids(quant_scores)[:2]==ordered)
+
 print("X369_SOURCE_FOUR_GATES_SYMPY_PASS",len(checks),
       "grouped checks; strict_top2=",top2_certificates,
       "same_order=",top2_ordered)
