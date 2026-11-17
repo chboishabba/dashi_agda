@@ -20,7 +20,7 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _≤_; _<_; Positive)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 import DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact as PositiveSquares
 import DASHI.Physics.YangMills.BalabanClayGate4RationalPositiveMassReciprocalExact as Reciprocal
 import DASHI.Physics.YangMills.YMClayRationalS3StereographicNodeExact as Stereo
@@ -60,7 +60,7 @@ stereoInverseLaw x y z =
   in
   subst
     (λ result → result ≡ 1ℚ)
-    (ℚP.*-comm d inverse)
+    (sym (ℚP.*-comm d inverse))
     (Reciprocal.safeRationalReciprocalTimesPositive
       d (denominatorPositive x y z))
 
