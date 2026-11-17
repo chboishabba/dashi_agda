@@ -47,7 +47,12 @@ def strict_spectrum(spec,optic,eqe,n):
     if spec.shape[1] not in (2,4) or optic.shape[1]!=n+3 or eqe.shape[1]!=n+1:
         raise ValueError("unexpected spectrum/optics/EQE column count")
     matching(spec,optic);matching(spec,eqe)
-    wl=spec[:,0]; incoming=spec[:,2] if spec.shape[1]==4 else spec[:,1]\n    if spec.shape[1]==4:\n        if spec.shape[0]!=2002 or abs(wl[0]-280)>.001 or abs(wl[-1]-4000)>.001:\n            raise ValueError("4-column G173 must have all 2002 standard rows")\n        if abs(float(np.trapezoid(incoming,wl))-1000.3706555734)>.015:\n            raise ValueError("G173 global input checksum failed")
+    wl=spec[:,0]; incoming=spec[:,2] if spec.shape[1]==4 else spec[:,1]
+    if spec.shape[1]==4:
+        if spec.shape[0]!=2002 or abs(wl[0]-280)>.001 or abs(wl[-1]-4000)>.001:
+            raise ValueError("4-column G173 must have all 2002 standard rows")
+        if abs(float(np.trapezoid(incoming,wl))-1000.3706555734)>.015:
+            raise ValueError("G173 global input checksum failed")
     if np.any(np.diff(wl)<=0) or wl[0]<=0 or np.any(incoming<0):
         raise ValueError("invalid wavelength ordering or negative irradiance")
     R=optic[:,1]; A=optic[:,2:2+n]; T=optic[:,-1]; E=eqe[:,1:]
@@ -175,13 +180,14 @@ def selftest():
         return False
     ck("reject double-counted absorption",rejected(lambda:strict_spectrum(S,np.column_stack([wl,np.full(len(wl),.1),A*2,np.full(len(wl),.1)]),eqe,n)))
     ck("reject EQE > A",rejected(lambda:strict_spectrum(S,optical,np.column_stack([wl,A*1.1]),n)))
-    ck("reject grid mismatch",rejected(lambda:strict_spectrum(S,optical,np.column_stack([wl+1,A*.8]),n)))\n    ck("reject incomplete 4-column G173",rejected(lambda:strict_spectrum(np.column_stack([wl,wl,wl,wl]),optical,eqe,n)))
+    ck("reject grid mismatch",rejected(lambda:strict_spectrum(S,optical,np.column_stack([wl+1,A*.8]),n)))
+    ck("reject incomplete 4-column G173",rejected(lambda:strict_spectrum(np.column_stack([wl,wl,wl,wl]),optical,eqe,n)))
     ck("reject Jsc mismatch",rejected(lambda:weld(S,optical,eqe,[np.column_stack([i[:,0],i[:,1]*.1]) for i in iv],[.97]*n)))
     ck("reject converter eta >1",rejected(lambda:weld(S,optical,eqe,iv,[1.2]*n)))
     ck("reject recovered work > drive",rejected(lambda:weld(S,optical,eqe,iv,[1.]*n,drive=1,recovered=2)))
     ck("reject non-monotonic IV",rejected(lambda:validate_iv(np.array([[0,1],[1,2]]))))
     ck("pure 1J piecewise MPP is V=Voc/2",abs(segment_power_max(*validate_iv(iv[0]))[1]-.5)<1e-12)
-    ck("4T gross dominates ideal lossless 2T",sum(x["gross_mpp_W_m2"] for x in max_4terminal(ivs,[1.]*n))>=series_max(ivs)["gross_mpp_W_m2"]-1e-9)
+    ck("4T gross dominates ideal lossless 2T",sum(x["gross_mpp_W_m2"] for x in max_4terminal(iv,[1.]*n))>=series_max(iv)["gross_mpp_W_m2"]-1e-9)
     return {"checks_passed":len(checks),"all_passed":True,"checks":checks,
             "synthetic_example_not_measured":result}
 
