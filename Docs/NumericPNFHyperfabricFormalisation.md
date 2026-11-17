@@ -223,83 +223,72 @@ The formalisation proves the algorithmic and authority contract. It does not
 substitute for migration tests, database execution plans, parser-quality
 assessment, or measured scaling evidence.
 
-## Delta-fed projection and affected-key reduction
+## Parent exact-work admission and migration 209 certification
 
-The current SensibLaw E0d optimization is normalized onto existing theorem
-owners. It does not introduce a second PNF semantic object.
+The active SensibLaw parent reducer now calls the relation-delta reconciler from
+migration 209. The formal owner remains
+`DASHI.Cognition.PNF.DeltaNativeParentRuntimeBridgeExact`.
 
-`SetwiseGroupedFibreProjectionExact.agda` now owns the generic delta-fed
-projection shape:
+The current large-parent replay reached one parent with 8,206 object keys while
+the configured exact key budget was 8,192. The runtime failed closed before the
+transaction could commit. The rollback also removed the reconciliation receipts.
+This is a resource-admission failure. It is not a semantic failure and it is not
+a relation-reconciliation failure.
 
-```text
-source delta
-  -> projection relation
-  -> affected keys
-  -> exact final authority
-```
-
-The projection contract requires:
-
-- exact equality between the legacy and delta-fed final authority;
-- zero source-interior rescans;
-- zero recursive semantic self-updates; and
-- zero required procedural statement per source row.
-
-`AffectedBoundaryLocalReductionExact.agda` now exposes the generic
-`AffectedLocalReducer` and `SoundAffectedKeySelection`. The existing parent-frontier reducer is an instance of
-that owner. A consumer with zero affected keys must retain its state exactly. A
-consumer that produces no semantic state change must emit no hierarchy delta.
-
-`SoundAffectedKeySelection` coalesces the useful no-missing-wakeup rule from the
-historical `itir-edit-transport-leaf-locality-v2` lineage. Conservative extra
-wakeups are permitted. Missing a required affected key is not permitted. The
-historical `DependencyIndexedOwnerWakeupExact` file is not revived as a second
-live theorem owner.
-
-`SentenceAnaphorSetwiseProjectionExact.agda` is the E0d specialization. Its
-semantic boundary is:
+The golden Agda surface now records the exact regression as:
 
 ```text
-pronoun occurrence
-  -> surface / role / residual evidence
-  -> open demand
-  -> bounded candidate evidence
+parent key demand       = 8206
+configured exact budget = 8192
+positive excess         = 14
+disposition             = rejected
 ```
 
-The projection does not infer referent identity from surface spelling. Candidate
-evidence does not resolve a demand. The implementation must not update the
-demand table recursively to trigger itself.
+The proof uses the existing exact-sketch capacity owner. It does not turn 8,192
+into a semantic constant. It also does not authorize key truncation.
 
-The ZKP frame uses the repository convention:
+`RelationDeltaReconciliationExact` now separates a transaction-local
+reconciliation from a persisted reconciliation receipt. A rolled-back
+reconciliation cannot certify the runtime path. A persisted no-op replay has
+logical rows but zero physical mutations. This is the fixed-point receipt needed
+for the second replay after migration 209.
 
-- **O**: legacy and delta-fed final authority are equal;
-- **R**: projection is set-based;
-- **C**: recursive semantic self-update count is zero;
-- **S**: only affected keys enter the local reducer;
-- **L**: surface spelling cannot promote to witness identity;
-- **P**: candidate evidence cannot promote to resolution;
-- **G**: source-interior rescan count is zero; and
-- **F**: each projected anaphor demand remains open until explicit resolution.
+Runtime certification therefore requires both conditions:
 
-The result is attached to the TOE graph through
-`DASHI.Unified.PNFHyperfabric`, `DASHI.EverythingTOESymmetryResolved369`,
-`DASHI.Unifier`, and `DASHI.Unified.Everything`.
+1. the exact parent-key execution is admitted under the declared execution
+   budget; and
+2. the relation-delta receipt survives commit.
 
-The Lean mirror in `dashi_lean4/Integration/DASHITOE/Core.lean` is a consumer
-contract only. Agda remains the golden theorem authority.
+The current 8,206/8,192 replay fails the first condition. The previous rolled-back
+run also fails the second condition. The correct status is therefore:
+**migration 209 structurally live; runtime certification still pending**.
 
-### Runtime acceptance for E0d
+### ZKP O/R/C/S/L/P/G/F
 
-SensibLaw must certify the replacement against the pre-E0d authority on the same
-isolated corpus. The parity surface includes demand identity, source occurrence,
-surface evidence, role evidence, residual type, target constraints, candidate
-evidence, demand status, provenance, export consequences, and lookup
-consequences.
+- **O — objective:** certify the active parent reducer only after exact
+  resource admission and durable relation-delta evidence.
+- **R — reuse:** reuse `BoundedInterfaceSketch`,
+  `DeltaNativeParentRuntimeBridgeExact`, `RelationDeltaReconciliationExact`,
+  and `AuthorityNonPromotionCore`.
+- **C — construction:** bind observed parent key demand to configured capacity.
+  Reject 8,206 under 8,192. Require a persisted reconciliation receipt.
+- **S — safety:** fail closed. Do not truncate semantic keys. Do not treat a
+  larger execution budget as semantic authority. Do not treat rollback as
+  certification.
+- **L — lane:** keep exact-work admission separate from relation mutation
+  ownership. Migration 209 remains the single candidate-mutation authority.
+- **P — preconditions:** migration 209 is structurally active; key demand and
+  configured capacity are explicit; the database transaction boundary is
+  observable.
+- **G — governance and invariants:** semantic cardinality, execution policy,
+  runtime evidence, empirical evidence, theorem authority, and legal authority
+  remain distinct. ITIL, ISO 9000/42001/27001/27701/23894/9241, NIST AI RMF,
+  Six Sigma, and C4/PlantUML are process lenses only.
+- **F — postconditions and verification:** an admitted run with a persisted
+  conservation receipt may certify the runtime path. A rejected or rolled-back
+  run cannot. The controlled second replay should preserve logical inspection
+  while physical mutations fall to zero when state is unchanged.
 
-Performance is a separate gate. The measured E0c baseline for
-`project_numeric_sentence_anaphors_setwise` was 296 calls, 1.486 seconds total,
-and 0.600 seconds exclusive on the 95-sentence fixture. E0d is admitted only if
-semantic parity remains exact and the physical invocation/statement count falls.
-
-No Agda kernel receipt is claimed for this edit in the current execution
-environment.
+No new C4 or PlantUML topology is required for this formalisation. The runtime
+topology did not change. Only the admission and certification contract became
+explicit.
