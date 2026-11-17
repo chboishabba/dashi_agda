@@ -23,6 +23,7 @@ python_tests=(
   scripts/test_smith_filsinger_indexed_signed_cell_stokes_exact.py
   scripts/test_smith_filsinger_full_vector_indexed_face_sample_exact.py
   scripts/test_smith_filsinger_space_time_poynting_telescope_exact.py
+  scripts/test_smith_filsinger_plane_wave_spacetime_exact.py
 )
 test -s "$target"
 test -s "$phase_owner"
