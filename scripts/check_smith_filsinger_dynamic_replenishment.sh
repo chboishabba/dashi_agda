@@ -28,6 +28,8 @@ python_tests=(
   scripts/test_smith_filsinger_tangential_maxwell_sympy.py
   scripts/test_smith_filsinger_radiation_green_sympy.py
   scripts/test_smith_filsinger_oblique_maxwell_sympy.py
+  scripts/test_smith_filsinger_passive_radiation_sympy.py
+  scripts/test_smith_filsinger_periodic_fourier_green_sympy.py
   scripts/test_smith_filsinger_plane_wave_spacetime_exact.py
 )
 test -s "$target"
