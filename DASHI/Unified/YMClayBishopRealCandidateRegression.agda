@@ -44,3 +44,7 @@ import DASHI.Physics.YangMills.YMClayBishopSU2WilsonDeficitPositiveExact
 -- Positive finite Bishop Wilson construction; original periodic Haar still OPEN.
 import DASHI.Physics.YangMills.YMClayBishopSU2FiniteGibbsPartitionExact
   as BishopSU2FiniteGibbsPartitionExact
+
+-- Canonical rational-to-Bishop SU2 trace source, group/Haar still open.
+import DASHI.Physics.YangMills.YMClayOriginalRationalSU2ToBishopTraceExact
+  as OriginalRationalSU2BishopTrace
