@@ -58,47 +58,6 @@ unifierBalabanScaleTransferStillImpossible =
   Unifier.unifierBalabanScaleTransferPromotionImpossible
 
 
-toeBalabanContinuumLimitStillImpossible :
-  Owner.BalabanContinuumLimitPromotion → ⊥
-toeBalabanContinuumLimitStillImpossible =
-  TOE.toeBalabanContinuumLimitPromotionImpossible
-
-unifierBalabanContinuumLimitStillImpossible :
-  Owner.BalabanContinuumLimitPromotion → ⊥
-unifierBalabanContinuumLimitStillImpossible =
-  Unifier.unifierBalabanContinuumLimitPromotionImpossible
-
-toeDepthContinuumLimitStillImpossible :
-  Owner.DepthContinuumLimitPromotion → ⊥
-toeDepthContinuumLimitStillImpossible =
-  TOE.toeDepthContinuumLimitPromotionImpossible
-
-unifierDepthContinuumLimitStillImpossible :
-  Owner.DepthContinuumLimitPromotion → ⊥
-unifierDepthContinuumLimitStillImpossible =
-  Unifier.unifierDepthContinuumLimitPromotionImpossible
-
-toeBalabanContinuumReceiptMatchesParetoOwner :
-  TOE.toeBalabanContinuumLimitReceipt
-  ≡ Owner.balabanContinuumLimitReceipt
-toeBalabanContinuumReceiptMatchesParetoOwner = refl
-
-unifierBalabanContinuumReceiptMatchesParetoOwner :
-  Unifier.unifierBalabanContinuumLimitReceipt
-  ≡ Owner.balabanContinuumLimitReceipt
-unifierBalabanContinuumReceiptMatchesParetoOwner = refl
-
-toeDepthContinuumReceiptMatchesParetoOwner :
-  TOE.toeDepthContinuumLimitReceipt
-  ≡ Owner.depthContinuumLimitReceipt
-toeDepthContinuumReceiptMatchesParetoOwner = refl
-
-unifierDepthContinuumReceiptMatchesParetoOwner :
-  Unifier.unifierDepthContinuumLimitReceipt
-  ≡ Owner.depthContinuumLimitReceipt
-unifierDepthContinuumReceiptMatchesParetoOwner = refl
-
-
 toePhaseResolutionMatchesOwner :
   TOE.toeIbrahimPhaseResolutionFrontier
   ≡ Owner.ibrahimPhaseResolutionFrontier
@@ -226,3 +185,158 @@ unifierCurrentQidStillNotHistoricalTitle :
   Owner.CurrentQidIdentifiesHistoricalTitle → ⊥
 unifierCurrentQidStillNotHistoricalTitle =
   Unifier.unifierIbrahimCurrentQidDoesNotIdentifyHistoricalTitle
+
+
+------------------------------------------------------------------------
+-- Residual direct-owner non-promotion regression: route and execution.
+------------------------------------------------------------------------
+
+toeOEISRouteStillNotProof :
+  Owner.OEISSelectsRepresentationProofRoute → ⊥
+toeOEISRouteStillNotProof =
+  TOE.toeIbrahimOEISDoesNotSelectRepresentationProofRoute
+
+unifierOEISRouteStillNotProof :
+  Owner.OEISSelectsRepresentationProofRoute → ⊥
+unifierOEISRouteStillNotProof =
+  Unifier.unifierIbrahimOEISDoesNotSelectRepresentationProofRoute
+
+toeDimensionStillDoesNotCloseRoute :
+  Owner.DimensionClosesRepresentationRoute → ⊥
+toeDimensionStillDoesNotCloseRoute =
+  TOE.toeIbrahimDimensionDoesNotCloseRepresentationRoute
+
+unifierDimensionStillDoesNotCloseRoute :
+  Owner.DimensionClosesRepresentationRoute → ⊥
+unifierDimensionStillDoesNotCloseRoute =
+  Unifier.unifierIbrahimDimensionDoesNotCloseRepresentationRoute
+
+toeFailedCoarseStillDoesNotForceBasis :
+  Owner.FailedCoarseRouteForcesConcreteBasisReconstruction → ⊥
+toeFailedCoarseStillDoesNotForceBasis =
+  TOE.toeIbrahimFailedCoarseRouteDoesNotForceConcreteBasis
+
+unifierFailedCoarseStillDoesNotForceBasis :
+  Owner.FailedCoarseRouteForcesConcreteBasisReconstruction → ⊥
+unifierFailedCoarseStillDoesNotForceBasis =
+  Unifier.unifierIbrahimFailedCoarseRouteDoesNotForceConcreteBasis
+
+toeKernelCharacterStillDoesNotCreateConstituents :
+  Owner.KernelCharacterEqualityCreatesConstituentList → ⊥
+toeKernelCharacterStillDoesNotCreateConstituents =
+  TOE.toeIbrahimKernelCharacterDoesNotCreateConstituentList
+
+unifierKernelCharacterStillDoesNotCreateConstituents :
+  Owner.KernelCharacterEqualityCreatesConstituentList → ⊥
+unifierKernelCharacterStillDoesNotCreateConstituents =
+  Unifier.unifierIbrahimKernelCharacterDoesNotCreateConstituentList
+
+toeAgdaConsumerStillDoesNotCreateExternalTheorem :
+  Owner.AgdaConsumerRecordCreatesExternalTheorem → ⊥
+toeAgdaConsumerStillDoesNotCreateExternalTheorem =
+  TOE.toeIbrahimAgdaConsumerDoesNotCreateExternalTheorem
+
+unifierAgdaConsumerStillDoesNotCreateExternalTheorem :
+  Owner.AgdaConsumerRecordCreatesExternalTheorem → ⊥
+unifierAgdaConsumerStillDoesNotCreateExternalTheorem =
+  Unifier.unifierIbrahimAgdaConsumerDoesNotCreateExternalTheorem
+
+
+------------------------------------------------------------------------
+-- Residual direct-owner non-promotion regression: phase and H-zeta.
+------------------------------------------------------------------------
+
+toePairDegreeStillDoesNotOrientPhase :
+  Owner.PairDegreeCreatesPhaseOrientation → ⊥
+toePairDegreeStillDoesNotOrientPhase =
+  TOE.toeIbrahimPairDegreeDoesNotCreatePhaseOrientation
+
+unifierPairDegreeStillDoesNotOrientPhase :
+  Owner.PairDegreeCreatesPhaseOrientation → ⊥
+unifierPairDegreeStillDoesNotOrientPhase =
+  Unifier.unifierIbrahimPairDegreeDoesNotCreatePhaseOrientation
+
+toeTwelveSeventyEightStillDoesNotCreateIntertwiner :
+  Owner.TwelveSeventyEightCreatesSameActionIntertwiner → ⊥
+toeTwelveSeventyEightStillDoesNotCreateIntertwiner =
+  TOE.toeIbrahimTwelveSeventyEightDoesNotCreateSameActionIntertwiner
+
+unifierTwelveSeventyEightStillDoesNotCreateIntertwiner :
+  Owner.TwelveSeventyEightCreatesSameActionIntertwiner → ⊥
+unifierTwelveSeventyEightStillDoesNotCreateIntertwiner =
+  Unifier.unifierIbrahimTwelveSeventyEightDoesNotCreateSameActionIntertwiner
+
+toeCTblLibStillDoesNotCreateMonsterAction :
+  Owner.CTblLibTableNameCreatesActualMonsterAction → ⊥
+toeCTblLibStillDoesNotCreateMonsterAction =
+  TOE.toeIbrahimCTblLibNameDoesNotCreateActualMonsterAction
+
+unifierCTblLibStillDoesNotCreateMonsterAction :
+  Owner.CTblLibTableNameCreatesActualMonsterAction → ⊥
+unifierCTblLibStillDoesNotCreateMonsterAction =
+  Unifier.unifierIbrahimCTblLibNameDoesNotCreateActualMonsterAction
+
+toeSharedZetaScalarStillDoesNotRecognizeMonster :
+  Owner.SharedZetaScalarCreatesMonsterHZetaRecognition → ⊥
+toeSharedZetaScalarStillDoesNotRecognizeMonster =
+  TOE.toeIbrahimSharedZetaScalarDoesNotCreateMonsterRecognition
+
+unifierSharedZetaScalarStillDoesNotRecognizeMonster :
+  Owner.SharedZetaScalarCreatesMonsterHZetaRecognition → ⊥
+unifierSharedZetaScalarStillDoesNotRecognizeMonster =
+  Unifier.unifierIbrahimSharedZetaScalarDoesNotCreateMonsterRecognition
+
+toeSchrodingerConstructionStillDoesNotBindHomCarrier :
+  Owner.SchrodingerConstructionCreatesHomCarrierBinding → ⊥
+toeSchrodingerConstructionStillDoesNotBindHomCarrier =
+  TOE.toeIbrahimSchrodingerConstructionDoesNotCreateHomBinding
+
+unifierSchrodingerConstructionStillDoesNotBindHomCarrier :
+  Owner.SchrodingerConstructionCreatesHomCarrierBinding → ⊥
+unifierSchrodingerConstructionStillDoesNotBindHomCarrier =
+  Unifier.unifierIbrahimSchrodingerConstructionDoesNotCreateHomBinding
+
+
+------------------------------------------------------------------------
+-- Residual direct-owner non-promotion regression: historical provenance.
+------------------------------------------------------------------------
+
+toeDeweyStillDoesNotClassifyHistoricalEdge :
+  Owner.DeweyClassifiesHistoricalEdge → ⊥
+toeDeweyStillDoesNotClassifyHistoricalEdge =
+  TOE.toeIbrahimDeweyDoesNotClassifyHistoricalEdge
+
+unifierDeweyStillDoesNotClassifyHistoricalEdge :
+  Owner.DeweyClassifiesHistoricalEdge → ⊥
+unifierDeweyStillDoesNotClassifyHistoricalEdge =
+  Unifier.unifierIbrahimDeweyDoesNotClassifyHistoricalEdge
+
+toeFourEdgesStillDoNotProveCorpus :
+  Owner.FourMatchingEdgesProveWholeCorpus → ⊥
+toeFourEdgesStillDoNotProveCorpus =
+  TOE.toeIbrahimFourEdgesDoNotProveWholeCorpus
+
+unifierFourEdgesStillDoNotProveCorpus :
+  Owner.FourMatchingEdgesProveWholeCorpus → ⊥
+unifierFourEdgesStillDoNotProveCorpus =
+  Unifier.unifierIbrahimFourEdgesDoNotProveWholeCorpus
+
+toeOctoberCommentStillDoesNotOverridePaper :
+  Owner.OctoberCommentOverridesPrimaryPaper → ⊥
+toeOctoberCommentStillDoesNotOverridePaper =
+  TOE.toeIbrahimOctoberCommentDoesNotOverridePrimaryPaper
+
+unifierOctoberCommentStillDoesNotOverridePaper :
+  Owner.OctoberCommentOverridesPrimaryPaper → ⊥
+unifierOctoberCommentStillDoesNotOverridePaper =
+  Unifier.unifierIbrahimOctoberCommentDoesNotOverridePrimaryPaper
+
+toePaperMonthStillDoesNotOverrideBytes :
+  Owner.PaperMonthOverridesExecutedBytes → ⊥
+toePaperMonthStillDoesNotOverrideBytes =
+  TOE.toeIbrahimPaperMonthDoesNotOverrideExecutedBytes
+
+unifierPaperMonthStillDoesNotOverrideBytes :
+  Owner.PaperMonthOverridesExecutedBytes → ⊥
+unifierPaperMonthStillDoesNotOverrideBytes =
+  Unifier.unifierIbrahimPaperMonthDoesNotOverrideExecutedBytes

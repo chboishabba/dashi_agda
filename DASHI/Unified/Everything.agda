@@ -1,8 +1,6 @@
 module DASHI.Unified.Everything where
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
-import DASHI.Analysis.RiemannG2AdaptiveCutoffCrossingCompatibilityLeanDonorExact as RHAdaptiveCutoff
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
-import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -15,7 +13,10 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 import DASHI.Unified.ArithmeticMoonshine as ArithmeticMoonshine
 import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
 import DASHI.Unified.BalabanRGTOEMaxCutValidation
-import DASHI.Unified.BalabanAntigravityTOEConvergenceExact as BalabanAntiTOE
+import DASHI.Unified.BalabanIbrahimParetoSnowballTOEValidation
+import DASHI.Unified.FleetFormalGapTargetTOEValidation
+import DASHI.Unified.TOE369MaxCutKernelBidiTernaryValidation
+import DASHI.Unified.SingularBasinCoarseRGTOEValidation
 import DASHI.Unified.BrainFMRI as BrainFMRI
 import DASHI.Reasoning.TrialecticBraidedTwoEyedCoordinationExact as BraidedTransferTOE
 import DASHI.Reasoning.TrialecticThreeStrandBraidHistoryExact as BraidedHistoryTOE
@@ -106,6 +107,7 @@ yangMillsRemainsNonPromoting :
   Spine.objectExternalJPromotion Physics.yangMillsObject ≡ false
 yangMillsRemainsNonPromoting =
   refl
+
 brainFMRIFormalProjectionsRemainNonPromoting :
   ∀ kind →
   Spine.objectProjectionPromotion BrainFMRI.brainFMRIObject kind ≡ false
@@ -126,169 +128,3 @@ yangMillsFormalProjectionsRemainNonPromoting :
 yangMillsFormalProjectionsRemainNonPromoting =
   Spine.canonicalInvariantObjectsDoNotPromoteFormalProjections
     Physics.yangMillsObject
-
-------------------------------------------------------------------------
--- Typed Balaban continuum non-promotion.
--- Reuse the constructorless owners already normalized by BalabanRGTOERegression.
-------------------------------------------------------------------------
-
-unifiedBalabanContinuumLimitReceipt :
-  BalabanRGTOE.BalabanContinuumLimitReceipt
-unifiedBalabanContinuumLimitReceipt =
-  BalabanRGTOE.balabanContinuumLimitReceipt
-
-unifiedBalabanContinuumLimitPromotionImpossible :
-  BalabanRGTOE.BalabanContinuumLimitPromotion → ⊥
-unifiedBalabanContinuumLimitPromotionImpossible =
-  BalabanRGTOE.balabanContinuumLimitPromotionImpossible
-
-unifiedDepthContinuumLimitReceipt :
-  BalabanRGTOE.DepthContinuumLimitReceipt
-unifiedDepthContinuumLimitReceipt =
-  BalabanRGTOE.depthContinuumLimitReceipt
-
-unifiedDepthContinuumLimitPromotionImpossible :
-  BalabanRGTOE.DepthContinuumLimitPromotion → ⊥
-unifiedDepthContinuumLimitPromotionImpossible =
-  BalabanRGTOE.depthContinuumLimitPromotionImpossible
-
-------------------------------------------------------------------------
--- Joint Yang-Mills Balaban/R559 TOE receipt.
-------------------------------------------------------------------------
-
-canonicalUnifiedRound5FullBoundary :
-  Round5Full.Round5FullBoundary
-canonicalUnifiedRound5FullBoundary =
-  Round5Full.canonicalRound5FullBoundary
-
-
-
-------------------------------------------------------------------------
--- Fleet R5 exact target and receipt-level non-promotion projection.
-------------------------------------------------------------------------
-
-unifiedFleetR5OrdinalCutReceipt :
-  FleetGapTOE.FleetR5OrdinalCutReceipt
-unifiedFleetR5OrdinalCutReceipt =
-  FleetGapTOE.canonicalFleetR5OrdinalCutReceipt
-
-unifiedFleetFormalGapOrdinalCountIs58 :
-  FleetGapTOE.fleetFormalGapOrdinalCount ≡ 58
-unifiedFleetFormalGapOrdinalCountIs58 =
-  FleetGapTOE.fleetFormalGapOrdinalCountIs58
-
-unifiedFleetOrdinalRowIdentityStillUnattached :
-  FleetGapTOE.fleetOrdinalCarriesPersistedRowIdentity ≡ false
-unifiedFleetOrdinalRowIdentityStillUnattached =
-  FleetGapTOE.fleetOrdinalCarriesPersistedRowIdentityIsFalse
-
-unifiedFleetSharedCardinalityDoesNotCreateIdentity :
-  FleetGapTOE.FleetSharedCardinalityCreatesIdentity → ⊥
-unifiedFleetSharedCardinalityDoesNotCreateIdentity =
-  FleetGapTOE.fleetSharedCardinalityDoesNotCreateIdentity
-
-unifiedFleetEigenPriorityDoesNotCreateProof :
-  FleetGapTOE.eigenvalueMagnitudeCreatesProofAuthority
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
-unifiedFleetEigenPriorityDoesNotCreateProof =
-  FleetGapTOE.fleetEigenPriorityDoesNotCreateProof
-
-unifiedFleetExternalCountDoesNotCreateFormalDischarge :
-  FleetGapTOE.externalCountCreatesFormalProof
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
-unifiedFleetExternalCountDoesNotCreateFormalDischarge =
-  FleetGapTOE.fleetExternalCountDoesNotCreateFormalDischarge
-
-unifiedFleetDischargedFibresRemainOutOfTarget :
-  FleetGapTOE.dischargedFibresRemainDischarged
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
-unifiedFleetDischargedFibresRemainOutOfTarget =
-  FleetGapTOE.fleetDischargedFibresRemainOutOfTarget
-
-unifiedFleetContradictionGapsRemainSeparate :
-  FleetGapTOE.contradictionGapsRemainSeparate
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
-unifiedFleetContradictionGapsRemainSeparate =
-  FleetGapTOE.fleetContradictionGapsRemainSeparate
-
-unifiedFleetPlanningTextDoesNotCreateFormalResidual :
-  FleetGapTOE.externalPlanningTextCreatesFormalResidual
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
-unifiedFleetPlanningTextDoesNotCreateFormalResidual =
-  FleetGapTOE.fleetExternalPlanningTextDoesNotCreateFormalResidual
-
-
-unifiedFleetDischargedCoreKnowledgeFibres : ℕ
-unifiedFleetDischargedCoreKnowledgeFibres =
-  FleetGapTOE.dischargedCoreKnowledgeFibres
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
-
-unifiedFleetDischargedCoreKnowledgeFibresIs584 :
-  unifiedFleetDischargedCoreKnowledgeFibres ≡ 584
-unifiedFleetDischargedCoreKnowledgeFibresIs584 = refl
-
-unifiedFleetPolarityContradictionGaps : ℕ
-unifiedFleetPolarityContradictionGaps =
-  FleetGapTOE.polarityContradictionGaps
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
-
-unifiedFleetPolarityContradictionGapsIs44 :
-  unifiedFleetPolarityContradictionGaps ≡ 44
-unifiedFleetPolarityContradictionGapsIs44 = refl
-
-unifiedFleetUnformalisedFormalGaps : ℕ
-unifiedFleetUnformalisedFormalGaps =
-  FleetGapTOE.unformalisedFormalGaps
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
-
-unifiedFleetUnformalisedFormalGapsIs58 :
-  unifiedFleetUnformalisedFormalGaps ≡ 58
-unifiedFleetUnformalisedFormalGapsIs58 = refl
-
-unifiedFleetTargetsOnlyUnformalisedFormalGaps :
-  FleetGapTOE.targetOnlyUnformalisedFormalGaps
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
-  ≡ true
-unifiedFleetTargetsOnlyUnformalisedFormalGaps =
-  FleetGapTOE.fleetTargetsOnlyUnformalisedFormalGaps
-
-------------------------------------------------------------------------
--- Golden Millennium three-lane aggregate consumer.
-------------------------------------------------------------------------
-
-unifiedFleetManifestAcquisitionDemand =
-  FleetGapTOE.fleetManifestAcquisitionDemand
-
-unifiedYMImplementAToDMaxCutReceipt :
-  YMAD.YMImplementAToDTOEMaxCutReceipt
-unifiedYMImplementAToDMaxCutReceipt =
-  YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
-
-
-------------------------------------------------------------------------
--- Computational-imaging observer unified projection.
-------------------------------------------------------------------------
-
-unifiedDiffuserImagingZKPFrame :
-  Physics.DiffuserImagingTOEZKPFrame
-unifiedDiffuserImagingZKPFrame =
-  Physics.diffuserImagingZKPFrame
-
-open Physics public using
-  ( roundTripImpliesIdentifiable
-  ; noUniversalDecoderAfterClip
-  ; saturatedCollision
-  ; overlapThenClip
-  ; redundantRecovery
-  ; recordedCodeInjective
-  ; firstPixelOnlyCannotRecoverDepth
-  ; depthRecoveryReceipt
-  ; recordedCollisionWouldContradictDepth
-  ; RestrictedInverseBudget
-  ; MeasuredReconstruction
-  ; stableReconstructionBound
-  ; stableWithMatchedResidual
-  ; codedDepthRoundTrip
-  ; noUniversalDepthDecoder
-  ; noRechartRepairsSaturatedDepth
-  )
