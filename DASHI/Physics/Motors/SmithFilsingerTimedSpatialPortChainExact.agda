@@ -6,7 +6,7 @@ module DASHI.Physics.Motors.SmithFilsingerTimedSpatialPortChainExact where
 -- User hypothesis: phase/time control of Smith/Filsinger source-sink paths.
 -- Physical propagation geometry, original clock and solar source OPEN.
 
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (sym)
 
