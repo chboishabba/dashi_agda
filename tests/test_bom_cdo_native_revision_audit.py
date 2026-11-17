@@ -110,6 +110,27 @@ class NativeTest(unittest.TestCase):
         result=self.run_native(old,new)
         self.assertEqual(result['before2025_observed_values_lost_by_station'],{})
 
+    def test_rainfall_loss_not_temperature_target(self):
+        with TemporaryDirectory() as tmp:
+            root=Path(tmp)
+            manifest={'schema':'dashi.bom.cdo.native_revision.v1','before':[],'after':[]}
+            for snapshot in ('before','after'):
+                header=('Product code,Bureau of Meteorology station number,Year,Month,Day,'
+                        'Rainfall amount (millimetres),Period over which rainfall was measured (days),Quality\n')
+                value='11.2' if snapshot=='before' else ''
+                raw=(header+f'IDCJAC0009,066062,1980,1,1,{value},1,Y\n').encode()
+                name=f'{snapshot}_rain.csv'
+                (root/name).write_bytes(raw)
+                manifest[snapshot].append({'path':name,'sha256':sha256(raw).hexdigest(),
+                    'capture_utc':'2026-05-19T09:00:00+10:00' if snapshot=='before'
+                                 else '2026-10-30T09:00:00+10:00'})
+            result=native.audit(manifest,root)
+            self.assertEqual(result['counts'],{'value_removed':1})
+            self.assertEqual(result['before2025_observed_values_lost_by_station'],{})
+            self.assertEqual(result['temperature_values_lost_all_dates'],0)
+            self.assertFalse(result['before2025_target_numeric_match_only'])
+            self.assertFalse(result['original_archive_coverage_verified'])
+
     def test_accumulation_change(self):
         self.assertEqual(self.run_native(line(),line(accum='2'))['counts'],{'accumulation_changed':1})
 
