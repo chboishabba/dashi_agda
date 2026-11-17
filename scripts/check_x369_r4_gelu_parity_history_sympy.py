@@ -288,4 +288,47 @@ for steps in range(1,7):
 check("local bounded chart residual is not a global Lipschitz law",
       S.simplify((Fp+Fm).subs({m:0,b2:1}))==2)
 
+# MATRIX-LIFT to the actual source FFN shapes:
+# W1:(hidden_width x 2d), b1:hidden_width,
+# W2:(d x hidden_width), b2:d. The hidden GELU values
+# g(W1 z+b1) and g(-W1 z+b1) are separate symbols here,
+# so the algebra does not assume diagonal W2, no bias or
+# the unproved kernel acceptance of real CDF identities.
+# Instantiate d=2, hidden_width=3, arbitrary learned symbols.
+W2v=S.Matrix(2,3,S.symbols("W2_0:6",real=True))
+gp=S.Matrix(S.symbols("gpositive0:3",real=True))
+gm=S.Matrix(S.symbols("gnegative0:3",real=True))
+b2v=S.Matrix(S.symbols("b2vector0:2",real=True))
+Fpv=W2v*gp+b2v
+Fmv=W2v*gm+b2v
+Ov=(Fpv-Fmv)/2
+Ev=(Fpv+Fmv)/2
+check("arbitrary learned output matrix/bias plus chart",
+      all(S.expand(z)==0 for z in Fpv-(Ov+Ev)))
+check("arbitrary learned output matrix/bias minus chart",
+      all(S.expand(z)==0 for z in -Fmv-(Ov-Ev)))
+check("full matrix FFN chart difference exactly twice even",
+      all(S.expand(z)==0 for z in (Fpv+Fmv)-2*Ev))
+# Original source transition acts on sign*h,sign*x,y_c.
+# Its affine blocks can be arbitrary matrices, including
+# low-rank factorisations composed to an affine map.
+Thv=S.Matrix(2,2,S.symbols("Th0:4",real=True))
+Txv=S.Matrix(2,2,S.symbols("Tx0:4",real=True))
+Tyv=S.Matrix(2,2,S.symbols("Ty0:4",real=True))
+hv=S.Matrix(S.symbols("history0:2",real=True))
+xv=S.Matrix(S.symbols("activation0:2",real=True))
+bTv=S.Matrix(S.symbols("transition_bias0:2",real=True))
+Hpv=Thv*hv+Txv*xv+Tyv*Fpv+bTv
+Hmv=Thv*hv+Txv*xv-Tyv*Fmv-bTv
+check("full source arbitrary learned affine transition chart gap",
+      all(S.expand(z)==0 for z in Hpv-Hmv-2*(Tyv*Ev+bTv)))
+# The old F02b real Euclidean pair result is separately
+# valid for any source output coordinate coupling:
+# no assumptions on W2 are used in its parallelogram law.
+sv=S.Matrix(S.symbols("odd_student0:2",real=True))
+norm2=lambda z:(z.T*z)[0]
+check("matrix FFN mirrors retain odd-only Euclidean MSE floor",
+      S.expand((norm2(Fpv-sv)+norm2(Fmv+sv))/2
+          -norm2(Ev)-norm2(Ov-sv))==0)
+
 print("X369_GELU_PARITY_HISTORY_SYMPY_PASS",len(checks),"checks")
