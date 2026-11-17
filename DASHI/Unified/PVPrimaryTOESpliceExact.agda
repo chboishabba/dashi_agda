@@ -45,3 +45,6 @@ import DASHI.Physics.Photovoltaic.PV369NetHalfThresholdExact
 
 -- Same-material no-free-gain and strict physical 369 vs conventional control.
 import DASHI.Physics.Photovoltaic.PV369MatchedDevicePhysicalAdvantageExact
+
+-- P5/P7 same-G173 2T/4T model loss thresholds; strict above-half accounting.
+import DASHI.Physics.Photovoltaic.PV369G173MultiJunctionLossFrontierExact
