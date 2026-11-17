@@ -89,3 +89,41 @@ record SameArtifactPVConversionWeld : Set₁ where
 -- finite 8-state energy differences != exciton fine structure,
 -- Kane-sum conservation != absorption/extracted charge,
 -- same C3v characters != a 369-specific semiconductor advantage.
+
+-- Positive/negative hydrostatic coefficient source-magnitude audit.
+-- Published pair in one common electron band-edge convention:
+--   ac=-7.17 eV, av=+1.16 eV, ag=ac-av=-8.33 eV.
+-- Mixing av_eff=-1.16 into that pair would instead imply -6.01 eV.
+-- These are distinct conventions: do not infer a physical sign from Nat alone.
+sourceConductionAbsCenti sourceValenceAbsCenti : Nat
+sourceConductionAbsCenti = 717
+sourceValenceAbsCenti = 116
+
+sourceCommonReferenceGapMagnitude : Nat
+sourceCommonReferenceGapMagnitude = 833
+
+sourceCommonReferenceExact :
+  sourceCommonReferenceGapMagnitude
+  ≡ sourceConductionAbsCenti + sourceValenceAbsCenti
+sourceCommonReferenceExact = refl
+
+wrongMixedConventionGapMagnitude : Nat
+wrongMixedConventionGapMagnitude = 601
+
+wrongMixedReferenceExact :
+  wrongMixedConventionGapMagnitude + sourceValenceAbsCenti
+  ≡ sourceConductionAbsCenti
+wrongMixedReferenceExact = refl
+
+-- The exact numerical magnitude check does not resolve which convention
+-- the original near-Gamma Bir-Pikus script uses for its electron valence
+-- energy zero. The physical source-to-source comparison is still OPEN.
+record SameReferenceHydrostaticWeld : Set₁ where
+  field
+    sourceConductionHydrostaticShift : Set
+    sourceValenceHydrostaticShift : Set
+    sourceEgHydrostaticShift : Set
+    sameElectronEnergyZero : Set
+    independentlyValidatedTemperature : Set
+    signedCommonReferenceWeld : sameElectronEnergyZero
+    sourceEgValidated : sourceEgHydrostaticShift
