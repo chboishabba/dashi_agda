@@ -23,6 +23,7 @@ on:
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda'
       - 'Docs/diagrams/ym_toe_r559_current_master_convergence.puml'
+      - 'Docs/diagrams/contextual_semantic_fractran_toe_maxcut.puml'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
       - 'DASHI/Mathematics/CrossPollination/MillenniumLeanAssistReceiptExact.agda'
       - 'DASHI/Mathematics/CrossPollination/MillenniumThreeLaneContinuationValidation.agda'
@@ -33,6 +34,13 @@ on:
     paths:
       - 'DASHI/Core/SymmetryResolvedFibreExact.agda'
       - 'DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayGoal1MaximumCutRound485Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayIrreducibleSourceFamiliesRound546Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayCriticalPathRound558Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda'
+      - 'Docs/diagrams/ym_toe_r559_current_master_convergence.puml'
+      - 'Docs/diagrams/contextual_semantic_fractran_toe_maxcut.puml'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
       - 'DASHI/Mathematics/CrossPollination/MillenniumLeanAssistReceiptExact.agda'
       - 'DASHI/Mathematics/CrossPollination/MillenniumThreeLaneContinuationValidation.agda'
@@ -101,6 +109,27 @@ jobs:
           dashi-repo related balabanDensityAnchoredStressLaneCompilerLevel --root . --limit 20
           dashi-repo discover 'Balaban scale density regular-E localization Casimir stress Cauchy telescope Schwinger same-family RG continuum non-promotion' --root .
           dashi-repo lineage --prefix DASHI.Physics.YangMills.Balaban --root .
+          dashi-repo diagnose DASHI/Unified/BalabanRGTOEMaxCutValidation.agda --root .
+          dashi-repo diagnose DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda --root .
+          dashi-repo diagnose DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda --root .
+          dashi-repo related round485MaximumCutCompilerLevel --root . --limit 20
+          dashi-repo related round546IrreducibleSourceFamilyCutCompilerLevel --root . --limit 20
+          dashi-repo related round558CriticalPathCompilerLevel --root . --limit 20
+          dashi-repo related toeCriticalFullCLayerRetainedForConservativeClayExistence --root . --limit 20
+          dashi-repo related toeGoal1MaximumCutCompilerLevel --root . --limit 20
+          dashi-repo discover 'Yang Mills Goal1 R485 R546 R558 maximum cut irreducible critical path R559 TOE' --root . --limit 50
+          dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayGoal1 --root .
+          dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayIrreducibleSourceFamilies --root .
+          dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayCriticalPath --root .
+          dashi-repo diagnose DASHI/Unified/ContextualSemanticFractranTOEMaxCutExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/ContextualSemanticFractranTOEMaxCutValidation.agda --root .
+          dashi-repo related canonicalContextualSemanticFractranTOEMaxCutReceipt --root . --limit 30
+          dashi-repo related canonicalThreadCoverage --root . --limit 30
+          dashi-repo related canonicalOrderSensitiveParetoTernaryBidiBoundary --root . --limit 30
+          dashi-repo related noAutomaticCoverageMonsterRepresentationPromotion --root . --limit 30
+          dashi-repo discover 'contextual FRACTRAN SSSP consumer quotient Pareto ternary residual Monster non-promotion 58 formal gaps' --root . --limit 50
+          dashi-repo lineage --prefix DASHI.Cognition.PNF.ContextualFractran --root .
+          dashi-repo lineage --prefix DASHI.Computation.SSSP --root .
 
       - name: Reject ESD surface changes
         shell: bash
@@ -138,6 +167,9 @@ jobs:
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
             DASHI/Unified/YMGoal1TOECompatibilityValidation.agda
             DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
+            DASHI/Unified/ContextualSemanticFractranTOEMaxCutExact.agda
+            DASHI/Unified/ContextualSemanticFractranTOEMaxCutValidation.agda
+            DASHI/Unified/PNFHyperfabric.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
             DASHI/Unified/Physics.agda
@@ -172,13 +204,9 @@ jobs:
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
-            DASHI/Mathematics/CrossPollination/MillenniumLeanAssistReceiptExact.agda
-            DASHI/Mathematics/CrossPollination/MillenniumResidualDescentClassifierExact.agda
-            DASHI/Mathematics/CrossPollination/MillenniumThreeLaneContinuationValidation.agda
-            DASHI/Unified/R559IbrahimFleetHyperfabricTOEExact.agda
-            DASHI/Unified/R559IbrahimFleetHyperfabricTOEValidation.agda
-            DASHI/Unified/NavierStokesClayFrontierTOEConvergenceExact.agda
-            DASHI/Unified/NavierStokesClayFrontierTOEConvergenceValidation.agda
+            DASHI/Unified/ContextualSemanticFractranTOEMaxCutExact.agda
+            DASHI/Unified/ContextualSemanticFractranTOEMaxCutValidation.agda
+            DASHI/Unified/PNFHyperfabric.agda
             DASHI/Unified/Physics.agda
             DASHI/EverythingTOESymmetryResolved369.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda

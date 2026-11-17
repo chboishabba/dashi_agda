@@ -10,9 +10,7 @@ import DASHI.Interop.SensibLawResidualLattice as Residual
 import DASHI.Interop.UnifiedMathLanguageAssertedProofs as Asserted
 import DASHI.Interop.UnifiedMathLanguageSpine as Unified
 import DASHI.Unified.InvariantSpine as Spine
-import DASHI.Cognition.PNF.RelationDeltaReconciliationExact as RelationDeltaExact
-import DASHI.Cognition.PNF.RelationDeltaReconciliationRegression as RelationDelta
-import DASHI.Interop.IntrospectiveProofLoopExact as Introspective
+import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 
 pnfHyperfabricSurface : Hyperfabric.PNFHyperfabric369Surface
 pnfHyperfabricSurface =
@@ -42,26 +40,19 @@ pnfHyperfabricJPromotionBlocked :
 pnfHyperfabricJPromotionBlocked =
   refl
 
-
 ------------------------------------------------------------------------
--- SensibLaw relation-delta authority routing.
---
--- The unified surface consumes the golden PNF reconciliation theorem. It does
--- not become an independent candidate mutation authority.
+-- Contextual semantic FRACTRAN / SSSP max-cut normalization.
+-- The theorem owner remains DASHI.Unified.ContextualSemanticFractranTOEMaxCutExact.
 ------------------------------------------------------------------------
 
-unifiedCandidateRelationOwnerRouting :
-  RelationDeltaExact.RelationDeltaOwnerRouting
-unifiedCandidateRelationOwnerRouting =
-  RelationDelta.singleCandidateRelationOwner
+import DASHI.Unified.ContextualSemanticFractranTOEMaxCutExact as ContextualTOE
 
+pnfContextualSemanticFractranMaxCutReceipt :
+  ContextualTOE.ContextualSemanticFractranTOEMaxCutReceipt
+pnfContextualSemanticFractranMaxCutReceipt =
+  ContextualTOE.canonicalContextualSemanticFractranTOEMaxCutReceipt
 
-unifiedCandidateRelationExecutionBoundary :
-  RelationDeltaExact.RelationDeltaAuthorityBoundary
-unifiedCandidateRelationExecutionBoundary =
-  RelationDelta.candidateRelationExecutionBoundary
-
-
-unifiedCandidateRelationZKPFrame : Introspective.ZKPFrame
-unifiedCandidateRelationZKPFrame =
-  RelationDelta.candidateRelationZKPFrame
+pnfContextualSemanticFractranZKPFrame :
+  ParetoSnowballTOE.TOEZKPFrame
+pnfContextualSemanticFractranZKPFrame =
+  ContextualTOE.canonicalContextualSemanticFractranTOEZKPFrame
