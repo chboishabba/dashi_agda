@@ -15,6 +15,7 @@ open import Data.Nat.Solver using (module +-*-Solver)
 open +-*-Solver using (solve; _:+_; _:=_)
 
 import DASHI.Physics.Motors.SmithFilsingerSpatialPortChainExact as Spatial
+import DASHI.Physics.Motors.SmithFilsingerTimedSpatialPortChainExact as Timed
 import DASHI.Physics.Motors.SmithFilsingerSourceMaxwellBoundaryWeldExact as Weld
 import DASHI.Physics.Motors.SmithFilsingerMidpointPhaseWorkExact as Port
 import DASHI.Physics.Motors.SmithFilsingerReplenishedCycleCapExact as Cycle
@@ -154,3 +155,49 @@ selectedOriginalAllSpatialCellsBelowNaturalCap
       Cycle.trans
         (Cycle.cong (λ x → x + unused) sameNatural)
         (Cycle.AdmittedSourceCapCycle.capReceipt capCycle)
+
+-- Cross-owner causality weld: the timed all-N spatial source/receiver
+-- chain erases to the CANONICAL all-N energy chain without changing the
+-- admitted natural work or finite-slew controller work. Retarded flight
+-- also certifies that the final event is not before the launch event.
+-- Neither theorem is a continuous Maxwell light-cone statement.
+allTimedSelectedOriginalCellsBelowNaturalCap :
+  ∀ {first last start finish}
+  (b : Weld.SelectedBoundary)
+  (f : Weld.FormalFieldToPort b)
+  (s : Weld.SignedSourceCycleWeld b f)
+  (path : Timed.TimedSpatialChain first last start finish)
+  (naturalNet : Nat) →
+  first ≡ last + naturalNet →
+  naturalNet ≡ Cycle.RepeatableSourceCycle.naturalSourceWork
+    (Cycle.AdmittedSourceCapCycle.repeatable
+      (Weld.SignedSourceCycleWeld.cycleWithSourceCap s)) →
+  Spatial.sumDrive (Timed.eraseTiming path)
+    ≡ Cycle.RepeatableSourceCycle.controllerWork
+        (Cycle.AdmittedSourceCapCycle.repeatable
+          (Weld.SignedSourceCycleWeld.cycleWithSourceCap s)) →
+  Spatial.sumUsefulLoad (Timed.eraseTiming path)
+    ≡ Port.MidpointTwoPortWorkWindow.usefulWork
+        (Weld.FormalFieldToPort.portWindow f) →
+  Spatial.sumInitialStorage (Timed.eraseTiming path)
+    ≡ Spatial.sumFinalStorage (Timed.eraseTiming path) →
+  Bound._≤_
+    (Port.MidpointTwoPortWorkWindow.usefulWork
+      (Weld.FormalFieldToPort.portWindow f))
+    (Cycle.AdmittedSourceCapCycle.independentlyAdmittedNaturalCap
+      (Weld.SignedSourceCycleWeld.cycleWithSourceCap s)
+     + Cycle.RepeatableSourceCycle.controllerWork
+        (Cycle.AdmittedSourceCapCycle.repeatable
+          (Weld.SignedSourceCycleWeld.cycleWithSourceCap s)))
+allTimedSelectedOriginalCellsBelowNaturalCap
+  b f s path n sourceBoundary sourceOwner driverOwner loadOwner restored =
+  selectedOriginalAllSpatialCellsBelowNaturalCap
+    b f s (Timed.eraseTiming path) n
+    sourceBoundary sourceOwner driverOwner loadOwner restored
+
+allTimedSelectedOriginalArrivalIsCausal :
+  ∀ {first last start finish}
+  (path : Timed.TimedSpatialChain first last start finish) →
+  Bound._≤_ start finish
+allTimedSelectedOriginalArrivalIsCausal =
+  Timed.allTimedPathsArriveAfterLaunch
