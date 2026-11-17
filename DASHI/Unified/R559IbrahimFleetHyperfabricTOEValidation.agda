@@ -1,6 +1,7 @@
 {-# OPTIONS --safe #-}
 module DASHI.Unified.R559IbrahimFleetHyperfabricTOEValidation where
 
+open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
@@ -26,39 +27,32 @@ unifiedReceiptMatchesOwner :
 unifiedReceiptMatchesOwner = refl
 
 toeFormalGapTargetIs58 :
-  TOE.toeFleetFormalGapsAre58
-  ≡ Owner.fleetFormalGapsAre58
+  TOE.toeFleetFormalGapsAre58 ≡ Owner.fleetFormalGapsAre58
 toeFormalGapTargetIs58 = refl
 
 unifierFormalGapTargetIs58 :
-  Unifier.unifierFleetFormalGapsAre58
-  ≡ Owner.fleetFormalGapsAre58
+  Unifier.unifierFleetFormalGapsAre58 ≡ Owner.fleetFormalGapsAre58
 unifierFormalGapTargetIs58 = refl
 
 toeDischargedFibresRemain584 :
-  TOE.toeFleetDischargedFibresAre584
-  ≡ Owner.fleetDischargedFibresAre584
+  TOE.toeFleetDischargedFibresAre584 ≡ Owner.fleetDischargedFibresAre584
 toeDischargedFibresRemain584 = refl
 
 unifierDischargedFibresRemain584 :
-  Unifier.unifierFleetDischargedFibresAre584
-  ≡ Owner.fleetDischargedFibresAre584
+  Unifier.unifierFleetDischargedFibresAre584 ≡ Owner.fleetDischargedFibresAre584
 unifierDischargedFibresRemain584 = refl
 
 toeContradictionGapsRemain44 :
-  TOE.toeFleetContradictionGapsAre44
-  ≡ Owner.fleetContradictionGapsAre44
+  TOE.toeFleetContradictionGapsAre44 ≡ Owner.fleetContradictionGapsAre44
 toeContradictionGapsRemain44 = refl
 
 unifierContradictionGapsRemain44 :
-  Unifier.unifierFleetContradictionGapsAre44
-  ≡ Owner.fleetContradictionGapsAre44
+  Unifier.unifierFleetContradictionGapsAre44 ≡ Owner.fleetContradictionGapsAre44
 unifierContradictionGapsRemain44 = refl
 
 toePadicLossStillExact :
   Owner.PadicPrefixRecovery → ⊥
-toePadicLossStillExact =
-  TOE.toePadicPrefixCannotRecoverDiscardedDigit
+toePadicLossStillExact = TOE.toePadicPrefixCannotRecoverDiscardedDigit
 
 unifierPadicLossStillExact :
   Owner.PadicPrefixRecovery → ⊥
@@ -67,20 +61,28 @@ unifierPadicLossStillExact =
 
 toeStreamLossStillExact :
   Owner.StreamThirdPrefixRecovery → ⊥
-toeStreamLossStillExact =
-  TOE.toeTwoDigitStreamCannotRecoverThird
+toeStreamLossStillExact = TOE.toeTwoDigitStreamCannotRecoverThird
 
 unifierStreamLossStillExact :
   Owner.StreamThirdPrefixRecovery → ⊥
-unifierStreamLossStillExact =
-  Unifier.unifierTwoDigitStreamCannotRecoverThird
+unifierStreamLossStillExact = Unifier.unifierTwoDigitStreamCannotRecoverThird
 
-fleetCountStillDoesNotCreateFormalDischarge :
-  Fleet.FleetExternalCountCreatesFormalDischarge → ⊥
-fleetCountStillDoesNotCreateFormalDischarge =
+fleetCountNoProofIsReceiptExact :
+  Fleet.externalCountCreatesFormalProof Owner.fleetFormalGapTargetReceipt ≡ false
+fleetCountNoProofIsReceiptExact =
   Owner.fleetExternalCountDoesNotCreateFormalDischarge
 
-fleetDischargedFibresStillCannotBeRetargeted :
-  Fleet.FleetDischargedFibreRetargetPermission → ⊥
-fleetDischargedFibresStillCannotBeRetargeted =
+fleetEigenPriorityNoProofIsReceiptExact :
+  Fleet.eigenvalueMagnitudeCreatesProofAuthority Owner.fleetFormalGapTargetReceipt ≡ false
+fleetEigenPriorityNoProofIsReceiptExact =
+  Owner.fleetEigenPriorityDoesNotCreateProof
+
+fleetDischargedStayExcludedIsReceiptExact :
+  Fleet.dischargedFibresRemainDischarged Owner.fleetFormalGapTargetReceipt ≡ true
+fleetDischargedStayExcludedIsReceiptExact =
   Owner.fleetDischargedFibresStayOutOfTarget
+
+fleetContradictionsStaySeparateIsReceiptExact :
+  Fleet.contradictionGapsRemainSeparate Owner.fleetFormalGapTargetReceipt ≡ true
+fleetContradictionsStaySeparateIsReceiptExact =
+  Owner.fleetContradictionGapsStaySeparate

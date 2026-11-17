@@ -785,6 +785,188 @@ unifierPadicPrefixCannotRecoverDiscardedDigit :
 unifierPadicPrefixCannotRecoverDiscardedDigit =
   FleetHyperTOE.toePadicPrefixCannotRecoverDiscardedDigit
 
+unifierYanchukIntervalODECheckerStillMissing =
+  SingularBasinTOE.intervalODECheckerStillMissing
+
+unifierYanchukCheckerSoundStillMissing =
+  SingularBasinTOE.checkerSoundToBasinCertificateStillMissing
+
+unifierYanchukAnalyticGlobalWidthLawStillMissing =
+  SingularBasinTOE.analyticGlobalWidthLawStillMissing
+
+unifierYanchukIntervalStableManifoldTubeStillMissing =
+  SingularBasinTOE.intervalStableManifoldTubeStillMissing
+
+unifierYanchukBasinSeparationTheoremStillMissing =
+  SingularBasinTOE.basinSeparationTheoremStillMissing
+
+unifierSingularBasinZKPFrame :
+  SingularBasinTOE.SingularBasinTOEZKPFrame
+unifierSingularBasinZKPFrame =
+  SingularBasinTOE.canonicalSingularBasinTOEZKPFrame
+
+
+------------------------------------------------------------------------
+-- Fleet R4/R5 formal-gap selection boundary.
+-- Unifier consumes the normalized owner. It does not own fleet evidence.
+------------------------------------------------------------------------
+
+unifierFleetFormalGapTargetReceipt :
+  FleetGapTOE.FleetFormalGapTargetReceipt
+unifierFleetFormalGapTargetReceipt =
+  FleetGapTOE.canonicalFleetFormalGapTargetReceipt
+
+unifierFleetCoordinateRebuildabilityReceipt =
+  FleetGapTOE.fleetCoordinateRebuildabilityReceipt
+
+unifierFleetNumericABIReceipt =
+  FleetGapTOE.fleetNumericABIReceipt
+
+unifierFleetResidualInvariantReceipt =
+  FleetGapTOE.fleetResidualInvariantReceipt
+
+unifierFleetPlanningBoundary =
+  FleetGapTOE.fleetPlanningBoundary
+
+unifierFleetVectorCoordinateDoesNotCreateTruth =
+  FleetGapTOE.fleetVectorCoordinateDoesNotCreateTruth
+
+unifierFleetPromotionObligationIndex =
+  FleetGapTOE.fleetPromotionObligationIndex
+
+unifierFleetFormalGapZKPFrame :
+  ParetoSnowballTOE.TOEZKPFrame
+unifierFleetFormalGapZKPFrame =
+  FleetGapTOE.canonicalFleetFormalGapZKPFrame
+
+unifierFleetEigenPriorityDoesNotCreateProof :
+  FleetGapTOE.eigenvalueMagnitudeCreatesProofAuthority
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+unifierFleetEigenPriorityDoesNotCreateProof =
+  FleetGapTOE.fleetEigenPriorityDoesNotCreateProof
+
+unifierFleetExternalCountDoesNotCreateFormalDischarge :
+  FleetGapTOE.externalCountCreatesFormalProof
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+unifierFleetExternalCountDoesNotCreateFormalDischarge =
+  FleetGapTOE.fleetExternalCountDoesNotCreateFormalDischarge
+
+unifierFleetDischargedFibresRemainOutOfTarget :
+  FleetGapTOE.dischargedFibresRemainDischarged
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
+unifierFleetDischargedFibresRemainOutOfTarget =
+  FleetGapTOE.fleetDischargedFibresRemainOutOfTarget
+
+unifierFleetContradictionGapsRemainSeparate :
+  FleetGapTOE.contradictionGapsRemainSeparate
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
+unifierFleetContradictionGapsRemainSeparate =
+  FleetGapTOE.fleetContradictionGapsRemainSeparate
+
+unifierFleetPlanningTextDoesNotCreateFormalResidual :
+  FleetGapTOE.PlanningSourceTextFormalResidualFlag
+unifierFleetPlanningTextDoesNotCreateFormalResidual =
+  FleetGapTOE.fleetPlanningTextDoesNotCreateFormalResidual
+
+------------------------------------------------------------------------
+-- Joint Balaban RG + R559 same-owner max-cut facade.
+------------------------------------------------------------------------
+
+import DASHI.Unified.BalabanR559TOEMaxCutExact as BalabanR559TOE
+
+unifierBalabanR559MaxCutReceipt :
+  BalabanR559TOE.BalabanR559TOEMaxCutReceipt
+unifierBalabanR559MaxCutReceipt =
+  BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifierBalabanR559PublishedContinuumStillOpen :
+  BalabanR559TOE.publishedContinuumPromotion
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ false
+unifierBalabanR559PublishedContinuumStillOpen =
+  BalabanR559TOE.publishedContinuumPromotionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifierBalabanR559ContinuumMassGapStillBlocked :
+  BalabanR559TOE.continuumMassGapPromotion
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ false
+unifierBalabanR559ContinuumMassGapStillBlocked =
+  BalabanR559TOE.continuumMassGapPromotionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifierBalabanR559ClayPromotionStillBlocked :
+  BalabanR559TOE.clayPromotion
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ false
+unifierBalabanR559ClayPromotionStillBlocked =
+  BalabanR559TOE.clayPromotionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+
+------------------------------------------------------------------------
+-- Direct constructive Balaban RG scale-transfer non-promotion.
+-- The joint receipt is the normalized facade path.
+------------------------------------------------------------------------
+
+unifierBalabanR559Gate4UnresolvedCount : ℕ
+unifierBalabanR559Gate4UnresolvedCount =
+  BalabanR559TOE.gate4UnresolvedCount
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifierBalabanR559Gate4UnresolvedCountIs58 :
+  unifierBalabanR559Gate4UnresolvedCount ≡ 58
+unifierBalabanR559Gate4UnresolvedCountIs58 =
+  BalabanR559TOE.gate4UnresolvedCountIs58
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifierBalabanR559Gate4DefinitionLevel : ProofLevel
+unifierBalabanR559Gate4DefinitionLevel =
+  BalabanR559TOE.gate4DefinitionLevel
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifierBalabanR559Gate4InhabitantsLevel : ProofLevel
+unifierBalabanR559Gate4InhabitantsLevel =
+  BalabanR559TOE.gate4InhabitantsLevel
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifierBalabanScaleTransferNonPromotion :
+  BalabanR559TOE.ScaleTransferPromotion → ⊥
+unifierBalabanScaleTransferNonPromotion =
+  BalabanR559TOE.scaleTransferPromotionEliminator
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+------------------------------------------------------------------------
+-- R559 / Ibrahim / fleet-58 / generic-hyperfabric TOE convergence.
+------------------------------------------------------------------------
+
+import DASHI.Unified.R559IbrahimFleetHyperfabricTOEExact as FleetHyperTOE
+
+unifierR559IbrahimFleetHyperfabricReceipt :
+  FleetHyperTOE.R559IbrahimFleetHyperfabricTOEReceipt
+unifierR559IbrahimFleetHyperfabricReceipt =
+  FleetHyperTOE.canonicalR559IbrahimFleetHyperfabricTOEReceipt
+
+unifierFleetFormalGapsAre58 :
+  FleetHyperTOE.fleetFormalGaps ≡ 58
+unifierFleetFormalGapsAre58 =
+  FleetHyperTOE.fleetFormalGapsAre58
+
+unifierFleetDischargedFibresAre584 :
+  FleetHyperTOE.fleetDischargedFibres ≡ 584
+unifierFleetDischargedFibresAre584 =
+  FleetHyperTOE.fleetDischargedFibresAre584
+
+unifierFleetContradictionGapsAre44 :
+  FleetHyperTOE.fleetContradictionGaps ≡ 44
+unifierFleetContradictionGapsAre44 =
+  FleetHyperTOE.fleetContradictionGapsAre44
+
+unifierPadicPrefixCannotRecoverDiscardedDigit :
+  FleetHyperTOE.PadicPrefixRecovery → ⊥
+unifierPadicPrefixCannotRecoverDiscardedDigit =
+  FleetHyperTOE.toePadicPrefixCannotRecoverDiscardedDigit
+
 unifierTwoDigitStreamCannotRecoverThird :
   FleetHyperTOE.StreamThirdPrefixRecovery → ⊥
 unifierTwoDigitStreamCannotRecoverThird =

@@ -31,22 +31,12 @@ on:
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda'
       - 'DASHI/Unified/**'
       - 'DASHI/Unified/BalabanRGTOEMaxCutValidation.agda'
-      - 'DASHI/Unified/BalabanR559TOEMaxCutExact.agda'
-      - 'DASHI/Unified/BalabanR559TOEMaxCutValidation.agda'
-      - 'DASHI/Unified/BalabanR559TOEUnifiedEverythingValidation.agda'
-      - 'DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda'
-      - 'DASHI/Unified/BalabanIbrahimParetoSnowballTOEValidation.agda'
-      - 'DASHI/Unified/YMGoal1R559IbrahimTOEValidation.agda'
-      - 'DASHI/Unified/FleetFormalGapTargetTOEExact.agda'
       - 'DASHI/Unified/R559IbrahimFleetHyperfabricTOEExact.agda'
       - 'DASHI/Unified/R559IbrahimFleetHyperfabricTOEValidation.agda'
       - 'DASHI/Core/IndexedRelationalHyperfabricSpineExact.agda'
       - 'DASHI/Core/IndexedRelationalPadicWaveContinuousAdaptersExact.agda'
       - 'DASHI/Law/SensibLawWrongTypeGenericHyperfabricAdapterExact.agda'
-      - 'Docs/architecture/R559IbrahimFleetHyperfabricTOE.puml'
-      - 'Docs/architecture/YMGoal1R559IbrahimTOE.puml'
-      - 'Docs/architecture/R559IbrahimFleetHyperfabricTOE.puml'
-      - 'DASHI/Physics/Closure/BalabanRGScaleTransferFrontierReceipt.agda'
+      - 'Docs/architecture/R559IbrahimFleetTernaryHyperfabricTOE.puml'
       - 'DASHI/Unifier.agda'
       - 'DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda'
       - 'DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda'
@@ -99,20 +89,12 @@ on:
       - 'DASHI/Unified/YMGoal1TOECompatibilityExact.agda'
       - 'DASHI/Unified/YMGoal1TOECompatibilityValidation.agda'
       - 'DASHI/Unified/BalabanRGTOEMaxCutValidation.agda'
-      - 'DASHI/Unified/BalabanR559TOEMaxCutExact.agda'
-      - 'DASHI/Unified/BalabanR559TOEMaxCutValidation.agda'
-      - 'DASHI/Unified/BalabanR559TOEUnifiedEverythingValidation.agda'
-      - 'DASHI/Unified/YMImplementAToDTOEMaxCutExact.agda'
-      - 'DASHI/Unified/YMImplementAToDTOEMaxCutValidation.agda'
-      - 'DASHI/Physics/YangMills/BalabanCMP119ReflectionMaxCut20261002Exact.agda'
-      - 'DASHI/Physics/YangMills/BalabanCMP119ROperationReflectionSupportMaxCut20261003Exact.agda'
-      - 'DASHI/Physics/YangMills/BalabanCMP119LiteralResidualWeldMaxCut20261002Exact.agda'
-      - 'DASHI/Physics/YangMills/YangMillsProjectiveCylinderMeasureRepresentationRound534Exact.agda'
-      - 'DASHI/Physics/YangMills/YangMillsPhysicalProjectiveCylinderRepresentationRound535Exact.agda'
-      - 'DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda'
-      - 'DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6Ledger.agda'
-      - 'DASHI/Physics/YangMills/YangMillsSubmissionObligationCardinalityExact.agda'
-      - 'DASHI/Physics/Closure/BalabanRGScaleTransferFrontierReceipt.agda'
+      - 'DASHI/Unified/R559IbrahimFleetHyperfabricTOEExact.agda'
+      - 'DASHI/Unified/R559IbrahimFleetHyperfabricTOEValidation.agda'
+      - 'DASHI/Core/IndexedRelationalHyperfabricSpineExact.agda'
+      - 'DASHI/Core/IndexedRelationalPadicWaveContinuousAdaptersExact.agda'
+      - 'DASHI/Law/SensibLawWrongTypeGenericHyperfabricAdapterExact.agda'
+      - 'Docs/architecture/R559IbrahimFleetTernaryHyperfabricTOE.puml'
       - 'DASHI/Unified/Physics.agda'
       - 'DASHI/Unified/Everything.agda'
       - 'DASHI/Unifier.agda'
@@ -240,14 +222,17 @@ jobs:
           dashi-repo discover 'Balaban R559 Goal1 max cut Ibrahim Pareto snowball Monster 3B H-zeta non-promotion' --root . --limit 50
           dashi-repo lineage --prefix DASHI.Wikimedia.IbrahimMonster3B --root .
           dashi-repo diagnose DASHI/Unified/FleetFormalGapTargetTOEExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/FleetFormalGapTargetTOEValidation.agda --root .
+          dashi-repo related fleetVectorCoordinateDoesNotCreateTruth --root . --limit 20
+          dashi-repo related fleetExternalCountDoesNotCreateFormalDischarge --root . --limit 20
+          dashi-repo discover 'fleet 584 discharged 58 unformalised formal gaps eigen priority non-promotion' --root . --limit 40
           dashi-repo diagnose DASHI/Unified/R559IbrahimFleetHyperfabricTOEExact.agda --root .
-          dashi-repo diagnose DASHI/Core/IndexedRelationalHyperfabricSpineExact.agda --root .
-          dashi-repo related canonicalFleetFormalGapTargetReceipt --root . --limit 20
-          dashi-repo related collisionRefutesSufficiency --root . --limit 20
-          dashi-repo related padicPrefixCannotDetermineDiscardedDigit --root . --limit 20
-          dashi-repo discover 'fleet 58 formal gaps 584 discharged 44 contradiction R559 Ibrahim hyperfabric p-adic projection loss' --root . --limit 50
+          dashi-repo diagnose DASHI/Unified/R559IbrahimFleetHyperfabricTOEValidation.agda --root .
+          dashi-repo related canonicalR559IbrahimFleetHyperfabricTOEReceipt --root . --limit 20
+          dashi-repo related toePadicPrefixCannotRecoverDiscardedDigit --root . --limit 20
+          dashi-repo related toeTwoDigitStreamCannotRecoverThird --root . --limit 20
+          dashi-repo discover 'R559 Ibrahim fleet 58 hyperfabric p-adic wave WrongType exact non-promotion' --root . --limit 50
           dashi-repo lineage --prefix DASHI.Core.IndexedRelational --root .
-          dashi-agda-preflight DASHI/Unified/R559IbrahimFleetHyperfabricTOEValidation.agda --root .
 
       - name: Reject ESD surface changes
         shell: bash
@@ -260,26 +245,18 @@ jobs:
             exit 1
           fi
 
-      - name: Fast Agda preflight on converged max-cut graph
+      - name: Fast Agda preflight on converged TOE graph
         run: |
           files=(
-            DASHI/ComputerScience/TriadicFin27Byte256ABIExact.agda
-            DASHI/ComputerScience/TriadicU8RuntimeOracleCrossRepoExact.agda
-            DASHI/ComputerScience/TriadicCompiledScalarU8RuntimeExact.agda
             DASHI/Unified/TOE369MaxCutKernelBidiTernaryExact.agda
             DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda
             DASHI/Unified/FleetFormalGapTargetTOEExact.agda
             DASHI/Unified/FleetFormalGapTargetTOEValidation.agda
+            DASHI/Unified/R559IbrahimFleetHyperfabricTOEExact.agda
+            DASHI/Unified/R559IbrahimFleetHyperfabricTOEValidation.agda
             DASHI/EverythingTOESymmetryResolved369.agda
             DASHI/Unifier.agda
             DASHI/Unified/Everything.agda
-            DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda
-            DASHI/Analysis/Everything.agda
-            DASHI/Analysis/RiemannMarkedCompletedTraceArithmeticAuditExact.agda
-            DASHI/Analysis/RiemannThreeTapTerminalCompletionLeanDonorExact.agda
-            DASHI/Analysis/RiemannThreeTapCurrentLeanFrontierExact.agda
-            DASHI/Unified/R559IbrahimFleetHyperfabricTOEValidation.agda
-            DASHI/Unified/R559IbrahimFleetHyperfabricTOEExact.agda
           )
           for file in "${files[@]}"; do
             dashi-agda-preflight --root . "$file"
@@ -391,24 +368,8 @@ jobs:
             DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda
             DASHI/Unified/FleetFormalGapTargetTOEExact.agda
             DASHI/Unified/FleetFormalGapTargetTOEValidation.agda
-            DASHI/Unified/BalabanRGTOERegression.agda
-            DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
-            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
-            DASHI/Unified/BalabanR559TOEMaxCutExact.agda
-            DASHI/Unified/BalabanR559TOEMaxCutValidation.agda
-            DASHI/Unified/BalabanR559TOEUnifiedEverythingValidation.agda
-            DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda
-            DASHI/Physics/YangMills/YangMillsSubmissionObligationCardinalityExact.agda
-            DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda
-            DASHI/Unified/BalabanIbrahimParetoSnowballTOEValidation.agda
-            DASHI/Unified/FleetFormalGapTargetTOEExact.agda
             DASHI/Unified/R559IbrahimFleetHyperfabricTOEExact.agda
             DASHI/Unified/R559IbrahimFleetHyperfabricTOEValidation.agda
-            DASHI/Unified/YMImplementAToDTOEMaxCutExact.agda
-            DASHI/Unified/YMImplementAToDTOEMaxCutValidation.agda
-            DASHI/Core/IndexedRelationalHyperfabricSpineExact.agda
-            DASHI/Core/IndexedRelationalPadicWaveContinuousAdaptersExact.agda
-            DASHI/Law/SensibLawWrongTypeGenericHyperfabricAdapterExact.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda

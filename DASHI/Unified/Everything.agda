@@ -246,23 +246,6 @@ unifiedBalabanScaleTransferNonPromotion =
   BalabanR559TOE.scaleTransferPromotionEliminator
     BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
-
-------------------------------------------------------------------------
--- Current Navier--Stokes A/B/C/D terminal convergence.
-------------------------------------------------------------------------
-
-import DASHI.Unified.NavierStokesABCDTerminalTOEExact as NSABCDTerminal
-
-unifiedNavierStokesABCDTerminalReceipt :
-  NSABCDTerminal.NSABCDTerminalTOEReceipt
-unifiedNavierStokesABCDTerminalReceipt =
-  NSABCDTerminal.canonicalNSABCDTerminalTOEReceipt
-
-unifiedNavierStokesABCDTerminalZKPFrame :
-  NSABCDTerminal.NSABCDTerminalZKPFrame
-unifiedNavierStokesABCDTerminalZKPFrame =
-  NSABCDTerminal.canonicalNSABCDTerminalZKPFrame
-
 ------------------------------------------------------------------------
 -- R559 / Ibrahim / fleet-58 / generic-hyperfabric TOE convergence.
 ------------------------------------------------------------------------

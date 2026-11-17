@@ -1,0 +1,63 @@
+@startuml
+title R559 / Ibrahim / Fleet-58 / Ternary-27 / Hyperfabric TOE convergence
+
+skinparam componentStyle rectangle
+
+package "Canonical owners" {
+  component "BalabanR559TOEMaxCutExact" as YM
+  component "BalabanIbrahimParetoSnowballTOEExact" as Ibrahim
+  component "FleetFormalGapTargetTOEExact" as Fleet
+  component "TOE369MaxCutKernelBidiTernaryExact" as Ternary
+  component "IndexedRelationalHyperfabricSpineExact" as Fabric
+  component "IndexedRelationalPadicWaveContinuousAdaptersExact" as PadicWave
+  component "SensibLawWrongTypeGenericHyperfabricAdapterExact" as WrongType
+}
+
+component "R559IbrahimFleetHyperfabricTOEExact" as Joint
+component "EverythingTOESymmetryResolved369" as TOE
+component "Unifier" as Unifier
+component "Unified.Everything" as Unified
+component "R559IbrahimFleetHyperfabricTOEValidation" as Validation
+
+YM --> Joint : exact R559 receipt + scale-transfer firewall
+Ibrahim --> Joint : Pareto / snowball non-promotion
+Fleet --> Joint : 584 discharged / 44 contradiction / 58 target
+Fabric --> Joint : B^k 9/27/81 carriers
+PadicWave --> Joint : exact prefix-loss theorems
+WrongType --> Joint : generic adapter only
+
+Ternary --> TOE : existing 27-state / selected-3B max-cut
+Ternary --> Unifier : existing non-promotion aliases
+
+Joint --> TOE
+Joint --> Unifier
+Joint --> Unified
+
+TOE --> Validation
+Unifier --> Validation
+Unified --> Validation
+Joint --> Validation
+
+note right of Fleet
+External counts and eigen labels are planning receipts.
+They do not create theorem authority.
+Only the recorded 58 formal gaps are targeted.
+The 584 discharged fibres stay discharged.
+The 44 contradiction gaps stay separate.
+end note
+
+note right of Ternary
+CFFI is an orchestration label here.
+No separate in-repo CFFI theorem owner was found.
+No synthetic identity is created.
+end note
+
+note bottom of Joint
+Finite RG != continuum Yang-Mills.
+Search priority != proof.
+Address count != semantics.
+Projection sufficiency is consumer-relative.
+No ESD mutation.
+end note
+
+@enduml

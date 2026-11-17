@@ -79,6 +79,53 @@ canonicalFleetFormalGapTargetReceipt =
     false
 
 ------------------------------------------------------------------------
+-- Exact canonical receipt facts.
+--
+-- These facts validate the DASHI receipt value only.
+-- They do not validate the external spectral producer.
+------------------------------------------------------------------------
+
+fleetRecordedDischargedCountIs584 :
+  dischargedCoreKnowledgeFibres canonicalFleetFormalGapTargetReceipt ≡ 584
+fleetRecordedDischargedCountIs584 = refl
+
+fleetRecordedContradictionCountIs44 :
+  polarityContradictionGaps canonicalFleetFormalGapTargetReceipt ≡ 44
+fleetRecordedContradictionCountIs44 = refl
+
+fleetRecordedUnformalisedGapCountIs58 :
+  unformalisedFormalGaps canonicalFleetFormalGapTargetReceipt ≡ 58
+fleetRecordedUnformalisedGapCountIs58 = refl
+
+fleetRecordedMacroscopicMotifCountIs3 :
+  macroscopicEigenMotifCount canonicalFleetFormalGapTargetReceipt ≡ 3
+fleetRecordedMacroscopicMotifCountIs3 = refl
+
+fleetTargetsOnlyUnformalisedFormalGaps :
+  targetOnlyUnformalisedFormalGaps canonicalFleetFormalGapTargetReceipt ≡ true
+fleetTargetsOnlyUnformalisedFormalGaps = refl
+
+fleetDoesNotRetargetDischargedFibres :
+  dischargedFibresRemainDischarged canonicalFleetFormalGapTargetReceipt ≡ true
+fleetDoesNotRetargetDischargedFibres = refl
+
+fleetKeepsContradictionsSeparate :
+  contradictionGapsRemainSeparate canonicalFleetFormalGapTargetReceipt ≡ true
+fleetKeepsContradictionsSeparate = refl
+
+fleetEigenvalueMagnitudeHasNoProofAuthority :
+  eigenvalueMagnitudeCreatesProofAuthority canonicalFleetFormalGapTargetReceipt ≡ false
+fleetEigenvalueMagnitudeHasNoProofAuthority = refl
+
+fleetExternalCountHasNoFormalProofAuthority :
+  externalCountCreatesFormalProof canonicalFleetFormalGapTargetReceipt ≡ false
+fleetExternalCountHasNoFormalProofAuthority = refl
+
+fleetExternalPlanningTextHasNoFormalResidualAuthority :
+  externalPlanningTextCreatesFormalResidual canonicalFleetFormalGapTargetReceipt ≡ false
+fleetExternalPlanningTextHasNoFormalResidualAuthority = refl
+
+------------------------------------------------------------------------
 -- Reused canonical proof and receipt owners.
 ------------------------------------------------------------------------
 
@@ -126,31 +173,33 @@ fleetPlanningTextDoesNotCreateFormalResidual =
 
 ------------------------------------------------------------------------
 -- Exact non-promotion gates for the external fleet selection.
+--
+-- Use canonical receipt facts. Do not manufacture proof by empty datatype.
 ------------------------------------------------------------------------
 
-data FleetEigenPriorityCreatesProof : Set where
-
 fleetEigenPriorityDoesNotCreateProof :
-  FleetEigenPriorityCreatesProof → ⊥
-fleetEigenPriorityDoesNotCreateProof ()
-
-data FleetExternalCountCreatesFormalDischarge : Set where
+  eigenvalueMagnitudeCreatesProofAuthority canonicalFleetFormalGapTargetReceipt
+  ≡ false
+fleetEigenPriorityDoesNotCreateProof =
+  fleetEigenvalueMagnitudeHasNoProofAuthority
 
 fleetExternalCountDoesNotCreateFormalDischarge :
-  FleetExternalCountCreatesFormalDischarge → ⊥
-fleetExternalCountDoesNotCreateFormalDischarge ()
+  externalCountCreatesFormalProof canonicalFleetFormalGapTargetReceipt
+  ≡ false
+fleetExternalCountDoesNotCreateFormalDischarge =
+  fleetExternalCountHasNoFormalProofAuthority
 
-data FleetDischargedFibreRetargetPermission : Set where
+fleetDischargedFibresRemainOutOfTarget :
+  dischargedFibresRemainDischarged canonicalFleetFormalGapTargetReceipt
+  ≡ true
+fleetDischargedFibresRemainOutOfTarget =
+  fleetDoesNotRetargetDischargedFibres
 
-fleetDischargedFibresCannotBeRetargetedByThisBoundary :
-  FleetDischargedFibreRetargetPermission → ⊥
-fleetDischargedFibresCannotBeRetargetedByThisBoundary ()
-
-data FleetContradictionGapReclassificationPermission : Set where
-
-fleetContradictionsCannotBeRelabelledAsFormalGaps :
-  FleetContradictionGapReclassificationPermission → ⊥
-fleetContradictionsCannotBeRelabelledAsFormalGaps ()
+fleetContradictionGapsRemainSeparate :
+  contradictionGapsRemainSeparate canonicalFleetFormalGapTargetReceipt
+  ≡ true
+fleetContradictionGapsRemainSeparate =
+  fleetKeepsContradictionsSeparate
 
 ------------------------------------------------------------------------
 -- Reuse the existing O/R/C/S/L/P/G/F process carrier.

@@ -79,12 +79,9 @@ unifierContradictionGapsRemainSeparate :
 unifierContradictionGapsRemainSeparate =
   Unifier.unifierFleetContradictionGapsRemainSeparate
 
--- Verify the selected planning coordinates without treating their values
--- as scientific or formal proof authority.
-
-fleetTargetIsExactly58 :
-  Fleet.unformalisedFormalGaps Fleet.canonicalFleetFormalGapTargetReceipt ≡ 58
-fleetTargetIsExactly58 = refl
+toeFleetPlanningBoundaryMatchesOwner :
+  TOE.toeFleetPlanningBoundary ≡ Fleet.fleetPlanningBoundary
+toeFleetPlanningBoundaryMatchesOwner = refl
 
 previouslyDischarged584RemainSeparate :
   Fleet.dischargedCoreKnowledgeFibres Fleet.canonicalFleetFormalGapTargetReceipt ≡ 584

@@ -760,7 +760,229 @@ toeBalabanScaleTransferNonPromotion =
 
 
 ------------------------------------------------------------------------
--- Joint Balaban RG + R559 maximum-cut TOE receipt.
+-- Complete direct Balaban/Ibrahim Pareto-snowball exports.
+------------------------------------------------------------------------
+
+toeBalabanScaleTransferFrontier :
+  ParetoSnowballTOE.BalabanScaleTransferFrontierReceipt
+toeBalabanScaleTransferFrontier =
+  ParetoSnowballTOE.balabanScaleTransferFrontier
+
+toeIbrahimRoutePreferenceDoesNotCreateExecutionReceipt :
+  ParetoSnowballTOE.RoutePreferenceCreatesExecutionReceipt → ⊥
+toeIbrahimRoutePreferenceDoesNotCreateExecutionReceipt =
+  ParetoSnowballTOE.routePreferenceDoesNotCreateExecutionReceipt
+
+toeIbrahimMergedLeanSourceDoesNotCreateKernelReceipt :
+  ParetoSnowballTOE.MergedLeanSourceCreatesKernelReceipt → ⊥
+toeIbrahimMergedLeanSourceDoesNotCreateKernelReceipt =
+  ParetoSnowballTOE.mergedLeanSourceDoesNotCreateKernelReceipt
+
+toeIbrahimOEISDoesNotCreateMultiplicityAction :
+  ParetoSnowballTOE.NinetyOEISEqualityCreatesMultiplicityAction → ⊥
+toeIbrahimOEISDoesNotCreateMultiplicityAction =
+  ParetoSnowballTOE.oeisDoesNotCreateMultiplicityAction
+
+toeIbrahimFiniteIrreducibilityDoesNotCreateMonsterHZetaRecognition :
+  ParetoSnowballTOE.FiniteIrreducibilityCreatesMonsterHZetaRecognition → ⊥
+toeIbrahimFiniteIrreducibilityDoesNotCreateMonsterHZetaRecognition =
+  ParetoSnowballTOE.finiteIrreducibilityDoesNotCreateMonsterHZetaRecognition
+
+toeIbrahimCurrentQidDoesNotIdentifyHistoricalTitle :
+  ParetoSnowballTOE.CurrentQidIdentifiesHistoricalTitle → ⊥
+toeIbrahimCurrentQidDoesNotIdentifyHistoricalTitle =
+  ParetoSnowballTOE.currentQidDoesNotIdentifyHistoricalTitle
+
+
+------------------------------------------------------------------------
+-- 369 max-cut / kernel-BIDI / ternary-27 convergence.
+------------------------------------------------------------------------
+
+toe369Ternary27RotationOrderThree =
+  MaxCut369.toe27RotationOrderThree
+
+toe369Ternary27OriginFixed =
+  MaxCut369.toe27OriginFixed
+
+toe369FullCubeRotationNotFree :
+  MaxCut369.FullCubeRotationFree → ⊥
+toe369FullCubeRotationNotFree =
+  MaxCut369.toe27FullCubeRotationNotFree
+
+toe369MonsterPhaseConjugationIntertwiner =
+  MaxCut369.toe27MonsterPhaseConjugationIntertwiner
+
+toe369Ternary27MonsterRepresentationNotPromoted =
+  MaxCut369.toe27MonsterRepresentationNotPromoted
+
+toe369Ternary27MonsterEmbeddingNotPromoted =
+  MaxCut369.toe27MonsterEmbeddingNotPromoted
+
+toe369Ternary27PhaseReductionNotGlobalInversion =
+  MaxCut369.toe27PhaseReductionNotGlobalInversion
+
+toe369Ternary27OrbitIndexingNotSemanticIdentity =
+  MaxCut369.toe27OrbitIndexingNotSemanticIdentity
+
+toe369Ternary27ReductionNotMonster42SameObject =
+  MaxCut369.toe27ReductionNotMonster42SameObject
+
+toe369FullGradeDimensionDoesNotCreateFaithfulness =
+  MaxCut369.toeFullGradeDimensionDoesNotCreateFaithfulness
+
+toe369FullGradeSameCarrierDoesNotCreateActionAgreement =
+  MaxCut369.toeFullGradeSameCarrierDoesNotCreateActionAgreement
+
+toe369FullGradeCharacterDoesNotCreateActionAgreement =
+  MaxCut369.toeFullGradeCharacterDoesNotCreateActionAgreement
+
+toe369ProjectedDimensionDoesNotCreateAction =
+  MaxCut369.toeProjectedDimensionDoesNotCreateAction
+
+toe369CoordinateRetractionDoesNotCreateProjectedAction =
+  MaxCut369.toeCoordinateRetractionDoesNotCreateProjectedAction
+
+toe369ProjectedCharacterDoesNotCreateAction =
+  MaxCut369.toeProjectedCharacterDoesNotCreateAction
+
+toe369KernelTrace53DoesNotIdentify3B =
+  MaxCut369.toeKernelTrace53DoesNotIdentify3B
+
+toe369KernelCharacterIsotypyDoesNotConstructActionIntertwiner =
+  MaxCut369.toeKernelCharacterIsotypyDoesNotConstructActionIntertwiner
+
+toe369KernelActualZetaRecognitionStillOpen =
+  MaxCut369.toeKernelActualZetaRecognitionStillOpen
+
+toe369KernelFullHyperformalActionStillOpen =
+  MaxCut369.toeKernelFullHyperformalActionStillOpen
+
+toe369SelectedSameElementClass3BStillOpen =
+  MaxCut369.toeSelectedSameElementClass3BStillOpen
+
+toe369SingleActionProducerStillOpen =
+  MaxCut369.toeSingleActionProducerStillOpen
+
+toe369FiniteChartDoesNotCreateLinearMultiplicityAction =
+  MaxCut369.toeFiniteChartDoesNotCreateLinearMultiplicityAction
+
+toe369NinetySlicesDoNotCreatePermutationRepresentation =
+  MaxCut369.toeNinetySlicesDoNotCreatePermutationRepresentation
+
+toe369CharacterDoesNotCreateHomEvaluation =
+  MaxCut369.toeCharacterDoesNotCreateHomEvaluation
+
+toe369PermutationNoGoDoesNotCreateLinearAction =
+  MaxCut369.toePermutationNoGoDoesNotCreateLinearAction
+
+
+------------------------------------------------------------------------
+-- Singular-basin / coarse-RG obstruction convergence.
+------------------------------------------------------------------------
+
+toeSingularBasinFiniteReduction =
+  SingularBasinTOE.finiteReduction
+
+toeSingularBasinFiniteReductionNotBasinPreserving =
+  SingularBasinTOE.finiteReductionNotBasinPreserving
+
+toeSingularBasinFiniteFullBasinDoesNotFactor =
+  SingularBasinTOE.finiteFullBasinDoesNotFactorThroughReduction
+
+toeSingularBasinSelectedResolutionNotRobust =
+  SingularBasinTOE.selectedResolutionNotRobust
+
+toeSingularBasinSelectedProjectionNotResolutionAdequate =
+  SingularBasinTOE.selectedProjectionNotResolutionAdequate
+
+toeSingularBasinSelectedResolutionRefutesGlobalFactorisation =
+  SingularBasinTOE.selectedResolutionAlsoRefutesGlobalFactorisation
+
+toeYanchukIntervalODECheckerStillMissing =
+  SingularBasinTOE.intervalODECheckerStillMissing
+
+toeYanchukCheckerSoundStillMissing =
+  SingularBasinTOE.checkerSoundToBasinCertificateStillMissing
+
+toeYanchukAnalyticGlobalWidthLawStillMissing =
+  SingularBasinTOE.analyticGlobalWidthLawStillMissing
+
+toeYanchukIntervalStableManifoldTubeStillMissing =
+  SingularBasinTOE.intervalStableManifoldTubeStillMissing
+
+toeYanchukBasinSeparationTheoremStillMissing =
+  SingularBasinTOE.basinSeparationTheoremStillMissing
+
+toeSingularBasinZKPFrame :
+  SingularBasinTOE.SingularBasinTOEZKPFrame
+toeSingularBasinZKPFrame =
+  SingularBasinTOE.canonicalSingularBasinTOEZKPFrame
+
+
+------------------------------------------------------------------------
+-- Fleet R4/R5 formal-gap selection boundary.
+-- External spectral priority is planning context only.
+------------------------------------------------------------------------
+
+toeFleetFormalGapTargetReceipt :
+  FleetGapTOE.FleetFormalGapTargetReceipt
+toeFleetFormalGapTargetReceipt =
+  FleetGapTOE.canonicalFleetFormalGapTargetReceipt
+
+toeFleetCoordinateRebuildabilityReceipt =
+  FleetGapTOE.fleetCoordinateRebuildabilityReceipt
+
+toeFleetNumericABIReceipt =
+  FleetGapTOE.fleetNumericABIReceipt
+
+toeFleetResidualInvariantReceipt =
+  FleetGapTOE.fleetResidualInvariantReceipt
+
+toeFleetPlanningBoundary =
+  FleetGapTOE.fleetPlanningBoundary
+
+toeFleetVectorCoordinateDoesNotCreateTruth =
+  FleetGapTOE.fleetVectorCoordinateDoesNotCreateTruth
+
+toeFleetPromotionObligationIndex =
+  FleetGapTOE.fleetPromotionObligationIndex
+
+toeFleetFormalGapZKPFrame :
+  ParetoSnowballTOE.TOEZKPFrame
+toeFleetFormalGapZKPFrame =
+  FleetGapTOE.canonicalFleetFormalGapZKPFrame
+
+toeFleetEigenPriorityDoesNotCreateProof :
+  FleetGapTOE.eigenvalueMagnitudeCreatesProofAuthority
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+toeFleetEigenPriorityDoesNotCreateProof =
+  FleetGapTOE.fleetEigenPriorityDoesNotCreateProof
+
+toeFleetExternalCountDoesNotCreateFormalDischarge :
+  FleetGapTOE.externalCountCreatesFormalProof
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+toeFleetExternalCountDoesNotCreateFormalDischarge =
+  FleetGapTOE.fleetExternalCountDoesNotCreateFormalDischarge
+
+toeFleetDischargedFibresRemainOutOfTarget :
+  FleetGapTOE.dischargedFibresRemainDischarged
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
+toeFleetDischargedFibresRemainOutOfTarget =
+  FleetGapTOE.fleetDischargedFibresRemainOutOfTarget
+
+toeFleetContradictionGapsRemainSeparate :
+  FleetGapTOE.contradictionGapsRemainSeparate
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
+toeFleetContradictionGapsRemainSeparate =
+  FleetGapTOE.fleetContradictionGapsRemainSeparate
+
+toeFleetPlanningTextDoesNotCreateFormalResidual :
+  FleetGapTOE.PlanningSourceTextFormalResidualFlag
+toeFleetPlanningTextDoesNotCreateFormalResidual =
+  FleetGapTOE.fleetPlanningTextDoesNotCreateFormalResidual
+
+------------------------------------------------------------------------
+-- Joint Balaban RG + R559 same-owner max-cut receipt.
 ------------------------------------------------------------------------
 
 import DASHI.Unified.BalabanR559TOEMaxCutExact as BalabanR559TOE
@@ -844,117 +1066,6 @@ toeBalabanScaleTransferNonPromotion :
 toeBalabanScaleTransferNonPromotion =
   BalabanR559TOE.scaleTransferPromotionEliminator
     BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-
-------------------------------------------------------------------------
--- Direct RG non-promotion and Pareto/snowball/Ibrahim TOE convergence.
-------------------------------------------------------------------------
-
-toeBalabanScaleTransferPromotionImpossible :
-  ParetoSnowballTOE.BalabanScaleTransferPromotion → ⊥
-toeBalabanScaleTransferPromotionImpossible =
-  ParetoSnowballTOE.balabanScaleTransferPromotionImpossible
-
-toeBalabanScaleTransferNonPromotion :
-  BalabanR559TOE.ScaleTransferPromotion → ⊥
-toeBalabanScaleTransferNonPromotion =
-  BalabanR559TOE.scaleTransferPromotionEliminator
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-------------------------------------------------------------------------
--- R559 / Ibrahim / fleet-58 / generic-hyperfabric TOE convergence.
--- The theorem owners remain in DASHI.Unified.R559IbrahimFleetHyperfabricTOEExact.
-------------------------------------------------------------------------
-
-import DASHI.Unified.R559IbrahimFleetHyperfabricTOEExact as FleetHyperTOE
-
-toeR559IbrahimFleetHyperfabricReceipt :
-  FleetHyperTOE.R559IbrahimFleetHyperfabricTOEReceipt
-toeR559IbrahimFleetHyperfabricReceipt =
-  FleetHyperTOE.canonicalR559IbrahimFleetHyperfabricTOEReceipt
-
-toeFleetFormalGapsAre58 :
-  FleetHyperTOE.fleetFormalGaps ≡ 58
-toeFleetFormalGapsAre58 =
-  FleetHyperTOE.fleetFormalGapsAre58
-
-toeFleetDischargedFibresAre584 :
-  FleetHyperTOE.fleetDischargedFibres ≡ 584
-toeFleetDischargedFibresAre584 =
-  FleetHyperTOE.fleetDischargedFibresAre584
-
-toeFleetContradictionGapsAre44 :
-  FleetHyperTOE.fleetContradictionGaps ≡ 44
-toeFleetContradictionGapsAre44 =
-  FleetHyperTOE.fleetContradictionGapsAre44
-
-toePadicPrefixCannotRecoverDiscardedDigit :
-  FleetHyperTOE.PadicPrefixRecovery → ⊥
-toePadicPrefixCannotRecoverDiscardedDigit =
-  FleetHyperTOE.toePadicPrefixCannotRecoverDiscardedDigit
-
-toeTwoDigitStreamCannotRecoverThird :
-  FleetHyperTOE.StreamThirdPrefixRecovery → ⊥
-toeTwoDigitStreamCannotRecoverThird =
-  FleetHyperTOE.toeTwoDigitStreamCannotRecoverThird
-
-toeFleetGate4CountAgreement :
-  FleetHyperTOE.fleetFormalGaps
-  ≡ BalabanR559TOE.gate4UnresolvedCount
-      BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-toeFleetGate4CountAgreement =
-  FleetHyperTOE.fleetFormalGapCountEqualsGate4Count
-
-toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
-  FleetHyperTOE.fleetGate4CountEqualitySelectsCanonicalMap ≡ false
-toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
-  FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
-
-toeRGAndIbrahimSearchPromotionImpossible :
-  ParetoSnowballTOE.SearchPriorityCreatesProof →
-  ParetoSnowballTOE.BalabanScaleTransferPromotion → ⊥
-toeRGAndIbrahimSearchPromotionImpossible sourcePriority rg =
-  toeIbrahimSearchPriorityDoesNotCreateProof sourcePriority
-
--- These are two independent 27-state owners. No same-carrier assertion follows.
-import DASHI.Core.ConsumerDescentMinimalObserverExact as TOE27Descent
-import DASHI.Foundations.BalancedTernaryAntipodalOrbitExact as TOE27Orbit
-import Data.Empty as TOE27Empty
-
-------------------------------------------------------------------------
--- R559 / Ibrahim / fleet-58 / generic-hyperfabric TOE convergence.
-------------------------------------------------------------------------
-
-toeTernary27DependentCodePreservesConsumer :
-  ∀ {Outcome : Set} → (consumer : TOE27Orbit.TritTriple → Outcome) →
-  TOE27Descent.ConsumerSufficient Recoverable27TOE.ternary27ExactCodeObserver consumer
-toeTernary27DependentCodePreservesConsumer = Recoverable27TOE.ternary27ExactCodeAdequateForEveryConsumer
-
-
-------------------------------------------------------------------------
--- Current Navier--Stokes A/B/C/D terminal convergence.
-------------------------------------------------------------------------
-
-import DASHI.Unified.NavierStokesABCDTerminalTOEExact as NSABCDTerminal
-
-toeNavierStokesABCDTerminalReceipt :
-  NSABCDTerminal.NSABCDTerminalTOEReceipt
-toeNavierStokesABCDTerminalReceipt =
-  NSABCDTerminal.canonicalNSABCDTerminalTOEReceipt
-
-toeNavierStokesABCDTerminalZKPFrame :
-  NSABCDTerminal.NSABCDTerminalZKPFrame
-toeNavierStokesABCDTerminalZKPFrame =
-  NSABCDTerminal.canonicalNSABCDTerminalZKPFrame
-
-toeNavierStokesBReserveStillOpen =
-  NSABCDTerminal.toeBReserveStillOpen
-
-toeNavierStokesBW1StillOpen =
-  NSABCDTerminal.toeBW1StillOpen
-
-toeNavierStokesBContinuationStillOpen =
-  NSABCDTerminal.toeBContinuationStillOpen
 
 ------------------------------------------------------------------------
 -- R559 / Ibrahim / fleet-58 / generic-hyperfabric TOE convergence.
