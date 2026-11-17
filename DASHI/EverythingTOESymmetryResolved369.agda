@@ -1,4 +1,8 @@
 module DASHI.EverythingTOESymmetryResolved369 where
+
+-- PV-first 369/optical-conversion spine. Thermal only as an auxiliary.
+-- Source-written draft: physical same-material and Agda acceptance remain open.
+import DASHI.Unified.PVPrimaryTOESpliceExact as PVPrimaryTOE
 import DASHI.Unified.AdelicSpectralPaperTOEExact as AdelicSpectralTOE
 
 -- September 2026 source-typed finite spectral closure and fail-closed gates.
