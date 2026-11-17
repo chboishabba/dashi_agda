@@ -1,0 +1,57 @@
+{
+  "date": "2026-11-17",
+  "pr": 1524,
+  "mode": "FINITE_MODEL_EXACT_MATH_ONLY",
+  "formal_source_modules": [
+    "DASHI/Physics/Motors/SmithFilsingerIndexedFaceIncidenceExact.agda",
+    "DASHI/Physics/Motors/SmithFilsingerIndexedFaceSourceWeldExact.agda",
+    "DASHI/Physics/Motors/SmithFilsingerSignedIndexedFaceFluxExact.agda",
+    "DASHI/Physics/Motors/SmithFilsingerIndexedSignedCellStokesExact.agda",
+    "DASHI/Physics/Motors/SmithFilsingerFullVectorIndexedFaceSampleExact.agda"
+  ],
+  "new_lemmas": [
+    "sourceWorkFromCount",
+    "targetWorkFromCount",
+    "outgoingFromIndexedFaces",
+    "incomingFromIndexedFaces",
+    "indexedFaceExteriorEnergyBalance",
+    "indexedFaceSourceOffNoLoad",
+    "allIndexedInternalSignedFluxCancels",
+    "poyntingNormalReversal",
+    "allSelectedFullVectorFaceSamplesCancel",
+    "indexedFaceClosesSelectedOriginalPort"
+  ],
+  "independent_local_replay": {
+    "unique_ID_directed_graph_cases": "512/512 PASS",
+    "signed_rational_per_cell_flux_cases": "512/512 PASS",
+    "rational_vector_EcrossB_face_normal_reversals": "1000/1000 PASS",
+    "count_weighted_face_work_identities": "5000/5000 PASS",
+    "deliberate_aggregate_incoming_spoof": "old aggregate accepts; strict ID checker rejects",
+    "duplicate_cell_and_face_ID_negative_controls": "source equivalent tests added",
+    "source_free_and_zero_face_work_controls": "source equivalent tests added",
+    "note": "These checks use a separately implemented exact Python/Fraction arithmetic replay. They do not compile Agda nor independently execute the committed GitHub-head pytest suite."
+  },
+  "static_proof_source_review": {
+    "postulates_or_holes_found": 0,
+    "unbalanced_delimiters_after_fix": 0,
+    "agda_kernel_typecheck": "NOT RUN: pinned toolchain unavailable",
+    "github_head_full_pytest": "NOT RUN"
+  },
+  "physical_admissions": {
+    "original_same_device_netlist": null,
+    "measured_E_B_field_and_real_face_integrals": null,
+    "physical_Green_kernel_and_causal_cone": null,
+    "calibrated_original_V_I_and_return": null,
+    "independent_solar_source_work": null,
+    "complete_source_and_receiver_state_restoration": null,
+    "F15_sustained_natural_net": "OPEN"
+  },
+  "next_gates": [
+    "D1 pinned Agda source acceptance",
+    "F10 real signed Maxwell spacetime Stokes and ADE/ion material energy",
+    "F02 physical retarded propagator support",
+    "F13 calibrated original source-to-terminal operator",
+    "F15 same-source replenished net load after all costs"
+  ],
+  "attribution": "Classical Maxwell/Yee/finite-volume and reused C3+Yang-Mills theorem owners; user-origin Smith/Filsinger solar coupling steelman. No ESD surfaces edited."
+}
