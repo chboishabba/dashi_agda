@@ -1,9 +1,5 @@
 module DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact where
 
-import DASHI.ComputerScience.TriadicFin27Byte256ABIExact as ABI
-import DASHI.ComputerScience.TriadicU8RuntimeOracleCrossRepoExact as HostU8
-import DASHI.ComputerScience.TriadicCompiledScalarU8RuntimeExact as CompiledU8
-import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
@@ -22,8 +18,6 @@ import DASHI.Moonshine.MonsterGradedVOASelected3BSameElementBidiExact as Selecte
 import DASHI.Moonshine.Base369Monster3BSingleActionProducerBidiExact as SingleAction
 import DASHI.Wikimedia.IbrahimMonsterTernary27PhasePreservingFiveOrbitReductionExact as TernaryReduction
 import DASHI.Wikimedia.IbrahimMonster3BLinearShortestFrontierCorrectionExact as Ibrahim
-import DASHI.ComputerScience.TriadicFin27Byte256ABIExact as ABI
-import DASHI.ComputerScience.TriadicScalarCompactCodecReferenceExact as CodecRef
 
 ------------------------------------------------------------------------
 -- ZKP O/R/C/S/L/P/G/F.
@@ -40,20 +34,6 @@ import DASHI.ComputerScience.TriadicScalarCompactCodecReferenceExact as CodecRef
 -- G. Original authors and source repositories retain attribution.
 -- F. Exact-head Agda validation is required before kernel certification.
 ------------------------------------------------------------------------
-
-canonicalTOE369MaxCutZKPFrame : ParetoSnowballTOE.TOEZKPFrame
-canonicalTOE369MaxCutZKPFrame =
-  ParetoSnowballTOE.toe-zkp-frame
-    "converge existing max-cut, kernel-BIDI, ternary-27, byte-ABI, Fleet and Ibrahim boundaries into the DASHI TOE"
-    "reuse canonical theorem owners before any extension"
-    "export exact aliases, bidirectional finite-state equalities, and non-promotion eliminators only"
-    "584 discharged fibres stay discharged; 44 contradiction gaps stay separate; 58 formal gaps stay count-only until the named manifest is acquired"
-    "one disjoint TOE normalization lane"
-    "donor owners exist; attribution remains unchanged; ESD surfaces are read-only; the named 58-row manifest is not synthesized"
-    "ITIL, ISO 9000/42001/27001/27701/23894/9241, NIST AI RMF, Six Sigma and C4/PlantUML are process lenses only"
-    "EverythingTOESymmetryResolved369, Unifier, and Unified.Everything reach the same exact owners and firewalls"
-    "related-symbols, discover, lineage, trust-escape scan, ESD diff audit, and Agda kernel typecheck"
-    false false false false
 
 ------------------------------------------------------------------------
 -- Ternary-27 exact symmetry.
@@ -229,33 +209,3 @@ toePermutationNoGoDoesNotCreateLinearAction :
   Ibrahim.NonPermutationNoGoCreatesLinearAction → ⊥
 toePermutationNoGoDoesNotCreateLinearAction =
   Ibrahim.noGoDoesNotCreateLinearAction
-
-------------------------------------------------------------------------
--- Exact finite-27 codec BIDI normalization.
---
--- Reuse the canonical ABI functions and both inverse laws. This pays the
--- finite Agda carrier BIDI coordinate only. Runtime and device promotion are
--- separate claims and are not inferred here.
-------------------------------------------------------------------------
-
-TernaryEncodedState : Set
-TernaryEncodedState = CodecRef.Encoded3
-
-TernaryState27 : Set
-TernaryState27 = ABI.State27
-
-toe27StateCode : TernaryEncodedState → TernaryState27
-toe27StateCode = ABI.stateCode
-
-toe27StateDecode : TernaryState27 → TernaryEncodedState
-toe27StateDecode = ABI.stateDecode
-
-toe27StateDecodeStateCode :
-  (e : TernaryEncodedState) →
-  toe27StateDecode (toe27StateCode e) ≡ e
-toe27StateDecodeStateCode = ABI.stateDecode-stateCode
-
-toe27StateCodeStateDecode :
-  (i : TernaryState27) →
-  toe27StateCode (toe27StateDecode i) ≡ i
-toe27StateCodeStateDecode = ABI.stateCode-stateDecode

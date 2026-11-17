@@ -17,6 +17,14 @@ open import Data.Empty using (⊥)
 import DASHI.Unified.ArithmeticMoonshine as ArithmeticMoonshine
 import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
 import DASHI.Unified.BalabanRGTOEMaxCutValidation
+import DASHI.Unified.BalabanR559TOEMaxCutValidation
+import DASHI.Unified.BalabanR559TOEUnifiedEverythingValidation
+import DASHI.Unified.BalabanIbrahimParetoSnowballTOEValidation
+import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
+import DASHI.Unified.FleetFormalGapTargetTOEValidation
+import DASHI.Unified.TOE369MaxCutKernelBidiTernaryValidation
+import DASHI.Unified.SingularBasinCoarseRGTOEValidation
+import DASHI.Unified.YMGoal1R559IbrahimTOEValidation
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Validation
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEValidation
 import DASHI.Unified.FleetFormalGapTargetTOEValidation

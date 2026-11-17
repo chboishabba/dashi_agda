@@ -1,12 +1,9 @@
 import DASHI.Unified.GovernedLegalWorkflowComplianceTOEExact as LegalCompliance
 module DASHI.EverythingTOESymmetryResolved369 where
-import DASHI.Interop.SLRSemanticWorldClosureExact as LegalSemanticClosure
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 import DASHI.Unified.SingularBasinCoarseRGTOEExact as SingularBasinTOE
-import DASHI.Physics.Foundations.CMP119CosmologyLatestParetoFrontierExact as CMP119Preferred
-
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Bool using (Bool; false)
@@ -737,272 +734,311 @@ toe369YangMillsGoal1C4CommonMetricCompilerLevel =
 toe369YangMillsGoal1ParetoZKPFrame : YMMaxCut.Goal1ParetoTOEZKPFrame
 toe369YangMillsGoal1ParetoZKPFrame = YMMaxCut.canonicalGoal1ParetoTOEZKPFrame
 
-
 ------------------------------------------------------------------------
--- Governed legal workflow + Ibrahim Pareto/snowball + fleet-gap cut.
---
--- These are exact aliases to existing owners.
--- The facade does not create legal, scientific, historical, or proof authority.
+-- Joint Balaban RG + R559 same-owner max-cut receipt.
 ------------------------------------------------------------------------
 
-import Data.Empty as TOEEmpty
-import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalGovernanceTOE
-import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as IbrahimTOE
-import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetTOE
+import DASHI.Unified.BalabanR559TOEMaxCutExact as BalabanR559TOE
 
-toe369GovernedLegalWorkflowAuthorityInvariantHandoff :
-  LegalGovernanceTOE.GovernedLegalWorkflowAuthorityInvariantHandoff
-toe369GovernedLegalWorkflowAuthorityInvariantHandoff =
-  LegalGovernanceTOE.canonicalGovernedLegalWorkflowAuthorityInvariantHandoff
+toeBalabanR559MaxCutReceipt :
+  BalabanR559TOE.BalabanR559TOEMaxCutReceipt
+toeBalabanR559MaxCutReceipt =
+  BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
-toe369CanonicalLegalSourceAuthorityBoundary :
-  LegalGovernanceTOE.LegalSourceAuthorityBoundary
-toe369CanonicalLegalSourceAuthorityBoundary =
-  LegalGovernanceTOE.toeCanonicalLegalSourceAuthorityBoundary
+toeBalabanR559PublishedContinuumStillOpen :
+  BalabanR559TOE.publishedContinuumPromotion
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ false
+toeBalabanR559PublishedContinuumStillOpen =
+  BalabanR559TOE.publishedContinuumPromotionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
-toe369CandidateSourceIsNotLegalAuthority :
-  LegalGovernanceTOE.CandidateSourceIsAuthoritative → TOEEmpty.⊥
-toe369CandidateSourceIsNotLegalAuthority =
-  LegalGovernanceTOE.toeCandidateSourceDoesNotCloseAuthority
+toeBalabanR559ContinuumMassGapStillBlocked :
+  BalabanR559TOE.continuumMassGapPromotion
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ false
+toeBalabanR559ContinuumMassGapStillBlocked =
+  BalabanR559TOE.continuumMassGapPromotionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
-toe369SameLegalSystemIsNotLegalAuthority :
-  LegalGovernanceTOE.SameLegalSystemAutomaticallyMeansAuthority → TOEEmpty.⊥
-toe369SameLegalSystemIsNotLegalAuthority =
-  LegalGovernanceTOE.toeSameSystemDoesNotAutomaticallyCloseAuthority
-
-toe369CurrentValidityIsNotApplicability :
-  LegalGovernanceTOE.CurrentValidityAutomaticallyMeansApplicability → TOEEmpty.⊥
-toe369CurrentValidityIsNotApplicability =
-  LegalGovernanceTOE.toeCurrentValidityDoesNotAutomaticallyEstablishApplicability
-
-toe369SemanticAdmissionIsNotLegalAuthority :
-  LegalGovernanceTOE.SemanticAdmissionAuthorityIsLegalSourceAuthority → TOEEmpty.⊥
-toe369SemanticAdmissionIsNotLegalAuthority =
-  LegalGovernance.toeSemanticAdmissionDoesNotBecomeLegalSourceAuthority
-
-
-toe369GovernedLegalWorkflowAuthorityInvariantHandoff :
-  LegalGovernance.GovernedLegalWorkflowAuthorityInvariantHandoff
-toe369GovernedLegalWorkflowAuthorityInvariantHandoff =
-  LegalGovernance.canonicalGovernedLegalWorkflowAuthorityInvariantHandoff
-
-toe369CanonicalLegalSourceAuthorityBoundary :
-  LegalGovernance.LegalSourceAuthorityBoundary
-toe369CanonicalLegalSourceAuthorityBoundary =
-  LegalGovernance.toeCanonicalLegalSourceAuthorityBoundary
-
-
-
-toe369NativeLegalFollowDoesNotCreateLegalAuthority :
-  LegalGovernance.NativeCliAutomaticallyLegalAuthority → ⊥
-toe369NativeLegalFollowDoesNotCreateLegalAuthority =
-  LegalGovernance.toeNativeLegalFollowDoesNotCreateLegalAuthority
-
-toe369ProviderFailureDoesNotMakePropositionFalse :
-  LegalGovernance.ProviderFailureAutomaticallyPropositionFalse → ⊥
-toe369ProviderFailureDoesNotMakePropositionFalse =
-  LegalGovernance.toeProviderFailureDoesNotMakePropositionFalse
-
-toe369ExpertProductionPromotesAnyAuthorityIsFalse :
-  LegalGovernance.toeExpertProductionPromotesAnyAuthority ≡ false
-toe369ExpertProductionPromotesAnyAuthorityIsFalse =
-  LegalGovernance.toeExpertProductionPromotesAnyAuthorityIsFalse
+toeBalabanR559ClayPromotionStillBlocked :
+  BalabanR559TOE.clayPromotion
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ false
+toeBalabanR559ClayPromotionStillBlocked =
+  BalabanR559TOE.clayPromotionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
 
 ------------------------------------------------------------------------
--- Direct legal execution and expert-evidence non-promotion aliases.
+-- Direct constructive Balaban RG scale-transfer non-promotion.
+-- The theorem owner remains the scale-transfer frontier.
+-- The joint receipt is the normalized TOE path.
 ------------------------------------------------------------------------
 
-toe369SpacyDoesNotCreateLegalAuthority :
-  LegalGovernance.SpacyParserAutomaticallyLegalAuthority → ⊥
-toe369SpacyDoesNotCreateLegalAuthority =
-  LegalGovernance.toeSpacyDoesNotCreateLegalAuthority
+import Data.Empty using (⊥)
 
-toe369SpacyDoesNotCreateLegalConstruction :
-  LegalGovernance.SpacyParserAutomaticallyLegalConstruction → ⊥
-toe369SpacyDoesNotCreateLegalConstruction =
-  LegalGovernance.toeSpacyDoesNotCreateLegalConstruction
+toeBalabanR559Gate4UnresolvedCount : ℕ
+toeBalabanR559Gate4UnresolvedCount =
+  BalabanR559TOE.gate4UnresolvedCount
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
-toe369LatestKnownSectionDoesNotBecomeHistoricalLaw :
-  LegalGovernance.SectionSliceAutomaticallyHistoricalLaw → ⊥
-toe369LatestKnownSectionDoesNotBecomeHistoricalLaw =
-  LegalGovernance.toeLatestKnownSectionDoesNotBecomeHistoricalLaw
+toeBalabanR559Gate4UnresolvedCountIs58 :
+  toeBalabanR559Gate4UnresolvedCount ≡ 58
+toeBalabanR559Gate4UnresolvedCountIs58 =
+  BalabanR559TOE.gate4UnresolvedCountIs58
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
-toe369PythonWrapperDoesNotOwnLegalSemantics :
-  LegalGovernance.PythonWrapperOwnsLegalSemantics → ⊥
-toe369PythonWrapperDoesNotOwnLegalSemantics =
-  LegalGovernance.toePythonWrapperDoesNotOwnLegalSemantics
+toeBalabanR559Gate4DefinitionLevel : ProofLevel
+toeBalabanR559Gate4DefinitionLevel =
+  BalabanR559TOE.gate4DefinitionLevel
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
-toe369JsonIsNotSemanticCommandAbi :
-  LegalGovernance.JsonArtifactIsSemanticCommandAbi → ⊥
-toe369JsonIsNotSemanticCommandAbi =
-  LegalGovernance.toeJsonIsNotSemanticCommandAbi
+toeBalabanR559Gate4InhabitantsLevel : ProofLevel
+toeBalabanR559Gate4InhabitantsLevel =
+  BalabanR559TOE.gate4InhabitantsLevel
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+toeBalabanR559CurrentGate4FrontierLedgerLevel : ProofLevel
+toeBalabanR559CurrentGate4FrontierLedgerLevel =
+  BalabanR559TOE.currentGate4FrontierLedgerLevel
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
-toe369JsonReviewDoesNotCreateDecision :
-  LegalGovernance.JsonReviewFileAutomaticallyReviewerDecision → ⊥
-toe369JsonReviewDoesNotCreateDecision =
-  LegalGovernance.toeJsonReviewDoesNotCreateDecision
+toeBalabanR559CurrentGate4PostulateFreeSurfaceLevel : ProofLevel
+toeBalabanR559CurrentGate4PostulateFreeSurfaceLevel =
+  BalabanR559TOE.currentGate4PostulateFreeSurfaceLevel
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
-toe369JsonReceiptDoesNotCreateTruth :
-  LegalGovernance.JsonReceiptAutomaticallyClaimTruth → ⊥
-toe369JsonReceiptDoesNotCreateTruth =
-  LegalGovernance.toeJsonReceiptDoesNotCreateTruth
 
-toe369CliSequenceDoesNotPayResidual :
-  LegalGovernance.CliSequenceAutomaticallyPaysOpenResidual → ⊥
-toe369CliSequenceDoesNotPayResidual =
-  LegalGovernance.toeCliSequenceDoesNotPayResidual
+toeBalabanScaleTransferNonPromotion :
+  BalabanR559TOE.ScaleTransferPromotion → ⊥
+toeBalabanScaleTransferNonPromotion =
+  BalabanR559TOE.scaleTransferPromotionEliminator
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
-toe369PinnedStreamDoesNotCreateLegalTruth :
-  LegalGovernance.PinnedOalcStreamingAutomaticallyLegalTruth → ⊥
-toe369PinnedStreamDoesNotCreateLegalTruth =
-  LegalGovernance.toePinnedStreamDoesNotCreateLegalTruth
-
-toe369ReviewedHopJsonDoesNotBecomeCanonicalSemanticTransport :
-  LegalGovernance.ReviewedHopJsonBecomesCanonicalSemanticTransport → ⊥
-toe369ReviewedHopJsonDoesNotBecomeCanonicalSemanticTransport =
-  LegalGovernance.toeReviewedHopJsonDoesNotBecomeCanonicalSemanticTransport
-
-toe369OalcHitDoesNotBecomeBindingAuthority :
-  LegalGovernance.OalcHitAutomaticallyBindingAuthority → ⊥
-toe369OalcHitDoesNotBecomeBindingAuthority =
-  LegalGovernance.toeOalcHitDoesNotBecomeBindingAuthority
-
-toe369OfficialCourtBytesDoNotBecomePropositionCorrespondence :
-  LegalGovernance.OfficialCourtBytesAutomaticallyPropositionCorrespondence → ⊥
-toe369OfficialCourtBytesDoNotBecomePropositionCorrespondence =
-  LegalGovernance.toeOfficialCourtBytesDoNotBecomePropositionCorrespondence
-
-toe369SameMncDoesNotCollapseSourceRevisions :
-  LegalGovernance.SameMncAutomaticallySameSourceRevision → ⊥
-toe369SameMncDoesNotCollapseSourceRevisions =
-  LegalGovernance.toeSameMncDoesNotCollapseSourceRevisions
-
-toe369SuccessfulOfficialFetchDoesNotBecomeProductionReady :
-  LegalGovernance.SuccessfulOfficialFetchAutomaticallyProductionReady → ⊥
-toe369SuccessfulOfficialFetchDoesNotBecomeProductionReady =
-  LegalGovernance.toeSuccessfulOfficialFetchDoesNotBecomeProductionReady
-
-toe369MultipleReportsDoNotAutomaticallyCreateIndependence :
-  LegalGovernance.MultipleReportsAutomaticallyIndependent → ⊥
-toe369MultipleReportsDoNotAutomaticallyCreateIndependence =
-  LegalGovernance.toeMultipleReportsDoNotAutomaticallyCreateIndependence
-
-toe369AgreementDoesNotAutomaticallyCreateIndependentCorroboration :
-  LegalGovernance.AgreementAutomaticallyIndependentCorroboration → ⊥
-toe369AgreementDoesNotAutomaticallyCreateIndependentCorroboration =
-  LegalGovernance.toeAgreementDoesNotAutomaticallyCreateIndependentCorroboration
-
-toe369DependenceDoesNotMeanNoEvidence :
-  LegalGovernance.DependenceMeansNoEvidence → ⊥
-toe369DependenceDoesNotMeanNoEvidence =
-  LegalGovernance.toeDependenceDoesNotMeanNoEvidence
-
-toe369ExpertStatusDoesNotAutomaticallyCreateTruth :
-  LegalGovernance.ExpertStatusAutomaticallyTruth → ⊥
-toe369ExpertStatusDoesNotAutomaticallyCreateTruth =
-  LegalGovernance.toeExpertStatusDoesNotAutomaticallyCreateTruth
-
-toe369ReportAdmissionDoesNotRepairMissingInput :
-  LegalGovernance.ReportAdmissionRepairsMissingInput → ⊥
-toe369ReportAdmissionDoesNotRepairMissingInput =
-  LegalGovernance.toeReportAdmissionDoesNotRepairMissingInput
-
-toe369CrossExaminationDoesNotAddUnobservedInput :
-  LegalGovernance.CrossExaminationAddsUnobservedInput → ⊥
-toe369CrossExaminationDoesNotAddUnobservedInput =
-  LegalGovernance.toeCrossExaminationDoesNotAddUnobservedInput
-
-toe369DisputedRiskDoesNotBecomeIrrelevant :
-  LegalGovernance.DisputedRiskIsIrrelevant → ⊥
-toe369DisputedRiskDoesNotBecomeIrrelevant =
-  LegalGovernance.toeDisputedRiskDoesNotBecomeIrrelevant
-
-toe369ObserverDefectDoesNotProveOpinionFalse :
-  LegalGovernance.ObserverDefectMakesOpinionFalse → ⊥
-toe369ObserverDefectDoesNotProveOpinionFalse =
-  LegalGovernance.toeObserverDefectDoesNotProveOpinionFalse
-
-toe369QualificationDoesNotAutomaticallyProveForensicCompliance :
-  LegalGovernance.QualificationAutomaticallyForensicCompliance → ⊥
-toe369QualificationDoesNotAutomaticallyProveForensicCompliance =
-  LegalGovernance.toeQualificationDoesNotAutomaticallyProveForensicCompliance
 
 ------------------------------------------------------------------------
--- Governed legal workflow / source-genealogy handoff.
--- The handoff reuses the canonical legal-governance and PNF source owners.
+-- Direct RG non-promotion and Pareto/snowball/Ibrahim TOE convergence.
 ------------------------------------------------------------------------
 
-import DASHI.Unified.GovernedLegalWorkflowSourceGenealogyTOEExact as LegalSourceGenealogy
+toeBalabanScaleTransferPromotionImpossible :
+  ParetoSnowballTOE.BalabanScaleTransferPromotion → ⊥
+toeBalabanScaleTransferPromotionImpossible =
+  ParetoSnowballTOE.balabanScaleTransferPromotionImpossible
 
-toeGovernedLegalWorkflowSourceGenealogyHandoff :
-  LegalSourceGenealogy.GovernedLegalWorkflowSourceGenealogyHandoff
-toeGovernedLegalWorkflowSourceGenealogyHandoff =
-  LegalSourceGenealogy.canonicalGovernedLegalWorkflowSourceGenealogyHandoff
+toeIbrahimRecognitionParetoBoundary :
+  ParetoSnowballTOE.RecognitionRouteParetoBoundary
+toeIbrahimRecognitionParetoBoundary =
+  ParetoSnowballTOE.ibrahimRecognitionParetoBoundary
 
-toeLegalPerceivedIndependenceDoesNotCreateProvenanceIndependence =
-  LegalSourceGenealogy.toePerceivedIndependenceDoesNotCreateLegalProvenanceIndependence
+toeIbrahimCharacterExecutionFrontier :
+  ParetoSnowballTOE.Monster3BCharacterExecutionFrontier
+toeIbrahimCharacterExecutionFrontier =
+  ParetoSnowballTOE.ibrahimCharacterExecutionFrontier
 
-toeLegalRepetitionDoesNotCreateIndependentEvidence =
-  LegalSourceGenealogy.toeRepetitionDoesNotCreateIndependentLegalEvidence
+toeIbrahimPhaseResolutionFrontier :
+  ParetoSnowballTOE.InertiaPhaseResolutionFrontier
+toeIbrahimPhaseResolutionFrontier =
+  ParetoSnowballTOE.ibrahimPhaseResolutionFrontier
+
+toeIbrahimSchrodingerHZetaMaxCutBoundary :
+  ParetoSnowballTOE.SchrodingerHZetaRecognitionMaxCutBoundary
+toeIbrahimSchrodingerHZetaMaxCutBoundary =
+  ParetoSnowballTOE.ibrahimSchrodingerHZetaMaxCutBoundary
+
+toeIbrahimHistoricalDiscriminatorBoundary :
+  ParetoSnowballTOE.HistoricalDiscriminatorBoundary
+toeIbrahimHistoricalDiscriminatorBoundary =
+  ParetoSnowballTOE.ibrahimHistoricalDiscriminatorBoundary
+
+toeBalabanIbrahimParetoSnowballZKPFrame :
+  ParetoSnowballTOE.TOEZKPFrame
+toeBalabanIbrahimParetoSnowballZKPFrame =
+  ParetoSnowballTOE.canonicalTOEZKPFrame
+
+toeIbrahimSearchPriorityDoesNotCreateProof :
+  ParetoSnowballTOE.SearchPriorityCreatesProof → ⊥
+toeIbrahimSearchPriorityDoesNotCreateProof =
+  ParetoSnowballTOE.searchPriorityDoesNotCreateProof
+
+toeIbrahimProducerSourceDoesNotCreateRunReceipt :
+  ParetoSnowballTOE.ProducerSourceCreatesRunReceipt → ⊥
+toeIbrahimProducerSourceDoesNotCreateRunReceipt =
+  ParetoSnowballTOE.producerSourceDoesNotCreateRunReceipt
+
+toeIbrahimDegree729DoesNotCreateMonsterHZetaRecognition :
+  ParetoSnowballTOE.Degree729CreatesMonsterHZetaRecognition → ⊥
+toeIbrahimDegree729DoesNotCreateMonsterHZetaRecognition =
+  ParetoSnowballTOE.degree729DoesNotCreateMonsterHZetaRecognition
+
+toeIbrahimPaperOracleDoesNotIdentifyHistoricalDump :
+  ParetoSnowballTOE.PaperOracleIdentifiesDump → ⊥
+toeIbrahimPaperOracleDoesNotIdentifyHistoricalDump =
+  ParetoSnowballTOE.paperOracleDoesNotIdentifyHistoricalDump
+
+toeRGAndIbrahimJointPromotionImpossible :
+  ParetoSnowballTOE.BalabanScaleTransferPromotion →
+  ParetoSnowballTOE.SearchPriorityCreatesProof → ⊥
+toeRGAndIbrahimJointPromotionImpossible rg sourcePriority =
+  toeBalabanScaleTransferPromotionImpossible rg
+
+toeRGAndIbrahimSearchPromotionImpossible :
+  ParetoSnowballTOE.SearchPriorityCreatesProof →
+  ParetoSnowballTOE.BalabanScaleTransferPromotion → ⊥
+toeRGAndIbrahimSearchPromotionImpossible sourcePriority rg =
+  toeIbrahimSearchPriorityDoesNotCreateProof sourcePriority
+
+-- These are two independent 27-state owners. No same-carrier assertion follows.
+import DASHI.Core.ConsumerDescentMinimalObserverExact as TOE27Descent
+import DASHI.Foundations.BalancedTernaryAntipodalOrbitExact as TOE27Orbit
+import Data.Empty as TOE27Empty
+
+toeTernary27FaceCannotDescend :
+  TOE27Descent.FactorsThrough Face27TOE.boundaryObserver Face27TOE.faceConsumer → TOE27Empty.⊥
+toeTernary27FaceCannotDescend = Face27TOE.triadicFaceCannotFactorThroughThreeEdges
+
+toeTernary27DependentCodePreservesConsumer :
+  ∀ {Outcome : Set} → (consumer : TOE27Orbit.TritTriple → Outcome) →
+  TOE27Descent.ConsumerSufficient Recoverable27TOE.ternary27ExactCodeObserver consumer
+toeTernary27DependentCodePreservesConsumer = Recoverable27TOE.ternary27ExactCodeAdequateForEveryConsumer
+
+
+------------------------------------------------------------------------
+-- Current Navier--Stokes A/B/C/D terminal convergence.
+------------------------------------------------------------------------
+
+import DASHI.Unified.NavierStokesABCDTerminalTOEExact as NSABCDTerminal
+
+toeNavierStokesABCDTerminalReceipt :
+  NSABCDTerminal.NSABCDTerminalTOEReceipt
+toeNavierStokesABCDTerminalReceipt =
+  NSABCDTerminal.canonicalNSABCDTerminalTOEReceipt
+
+toeNavierStokesABCDTerminalZKPFrame :
+  NSABCDTerminal.NSABCDTerminalZKPFrame
+toeNavierStokesABCDTerminalZKPFrame =
+  NSABCDTerminal.canonicalNSABCDTerminalZKPFrame
+
+toeNavierStokesBReserveStillOpen =
+  NSABCDTerminal.toeBReserveStillOpen
+
+toeNavierStokesBW1StillOpen =
+  NSABCDTerminal.toeBW1StillOpen
+
+toeNavierStokesBContinuationStillOpen =
+  NSABCDTerminal.toeBContinuationStillOpen
+
+------------------------------------------------------------------------
+-- 369 max-cut / kernel-BIDI / ternary-27 convergence.
+------------------------------------------------------------------------
+
+toe369Ternary27RotationOrderThree =
+  MaxCut369.toe27RotationOrderThree
+
+toe369Ternary27OriginFixed =
+  MaxCut369.toe27OriginFixed
+
+toe369FullCubeRotationNotFree :
+  MaxCut369.FullCubeRotationFree → ⊥
+toe369FullCubeRotationNotFree =
+  MaxCut369.toe27FullCubeRotationNotFree
+
+toe369MonsterPhaseConjugationIntertwiner =
+  MaxCut369.toe27MonsterPhaseConjugationIntertwiner
 
 toe369Ternary27PhaseReductionNotGlobalInversion =
   MaxCut369.toe27PhaseReductionNotGlobalInversion
 
-toeReviewedGenealogyDoesNotPayApplicability =
-  LegalSourceGenealogy.toeReviewedGenealogyDoesNotPayApplicability
+toe369Ternary27OrbitIndexingNotSemanticIdentity =
+  MaxCut369.toe27OrbitIndexingNotSemanticIdentity
 
-toeGenealogyAdmissionDoesNotBecomeLegalSourceAuthority =
-  LegalSourceGenealogy.toeGenealogyAdmissionDoesNotBecomeLegalSourceAuthority
+toe369Ternary27ReductionNotMonster42SameObject =
+  MaxCut369.toe27ReductionNotMonster42SameObject
 
+toe369FullGradeDimensionDoesNotCreateFaithfulness =
+  MaxCut369.toeFullGradeDimensionDoesNotCreateFaithfulness
 
-toeGenealogyCandidateSourceDoesNotCreateLegalAuthority =
-  LegalSourceGenealogy.toeGenealogyCandidateSourceDoesNotCreateLegalAuthority
+toe369FullGradeSameCarrierDoesNotCreateActionAgreement =
+  MaxCut369.toeFullGradeSameCarrierDoesNotCreateActionAgreement
 
-toeGenealogySameLegalSystemDoesNotCreateLegalAuthority =
-  LegalSourceGenealogy.toeGenealogySameLegalSystemDoesNotCreateLegalAuthority
+toe369FullGradeCharacterDoesNotCreateActionAgreement =
+  MaxCut369.toeFullGradeCharacterDoesNotCreateActionAgreement
 
-toeGenealogyCurrentValidityDoesNotCreateApplicability =
-  LegalSourceGenealogy.toeGenealogyCurrentValidityDoesNotCreateApplicability
+toe369ProjectedDimensionDoesNotCreateAction =
+  MaxCut369.toeProjectedDimensionDoesNotCreateAction
 
-toeGenealogyDocumentRoleDoesNotCreateLegalAuthority =
-  LegalSourceGenealogy.toeGenealogyDocumentRoleDoesNotCreateLegalAuthority
+toe369CoordinateRetractionDoesNotCreateProjectedAction =
+  MaxCut369.toeCoordinateRetractionDoesNotCreateProjectedAction
+
+toe369ProjectedCharacterDoesNotCreateAction =
+  MaxCut369.toeProjectedCharacterDoesNotCreateAction
+
+toe369KernelTrace53DoesNotIdentify3B =
+  MaxCut369.toeKernelTrace53DoesNotIdentify3B
+
+toe369KernelCharacterIsotypyDoesNotConstructActionIntertwiner =
+  MaxCut369.toeKernelCharacterIsotypyDoesNotConstructActionIntertwiner
+
+toe369KernelActualZetaRecognitionStillOpen =
+  MaxCut369.toeKernelActualZetaRecognitionStillOpen
+
+toe369KernelFullHyperformalActionStillOpen =
+  MaxCut369.toeKernelFullHyperformalActionStillOpen
+
+toe369SelectedSameElementClass3BStillOpen =
+  MaxCut369.toeSelectedSameElementClass3BStillOpen
+
+toe369SingleActionProducerStillOpen =
+  MaxCut369.toeSingleActionProducerStillOpen
+
+toe369FiniteChartDoesNotCreateLinearMultiplicityAction =
+  MaxCut369.toeFiniteChartDoesNotCreateLinearMultiplicityAction
+
+toe369NinetySlicesDoNotCreatePermutationRepresentation =
+  MaxCut369.toeNinetySlicesDoNotCreatePermutationRepresentation
+
+toe369CharacterDoesNotCreateHomEvaluation =
+  MaxCut369.toeCharacterDoesNotCreateHomEvaluation
+
+toe369PermutationNoGoDoesNotCreateLinearAction =
+  MaxCut369.toePermutationNoGoDoesNotCreateLinearAction
+
 
 ------------------------------------------------------------------------
--- Governed legal/source/semantic non-promotion handoff.
+-- Singular-basin / coarse-RG obstruction convergence.
 ------------------------------------------------------------------------
 
-import DASHI.Unified.GovernedLegalWorkflowSourceSemanticTOEExact as LegalSourceSemantic
+toeSingularBasinFiniteReduction =
+  SingularBasinTOE.finiteReduction
 
-toeGovernedLegalWorkflowSourceSemanticHandoff :
-  LegalSourceSemantic.GovernedLegalWorkflowSourceSemanticHandoff
-toeGovernedLegalWorkflowSourceSemanticHandoff =
-  LegalSourceSemantic.canonicalGovernedLegalWorkflowSourceSemanticHandoff
+toeSingularBasinFiniteReductionNotBasinPreserving =
+  SingularBasinTOE.finiteReductionNotBasinPreserving
 
-toeGovernedSharedLexemeDoesNotCreateSemanticIdentity =
-  LegalSourceSemantic.toeSharedLexemeDoesNotCreateSemanticIdentity
+toeSingularBasinFiniteFullBasinDoesNotFactor =
+  SingularBasinTOE.finiteFullBasinDoesNotFactorThroughReduction
 
-toeGovernedDiagnosticCheckDoesNotCreateTheoremPromotion =
-  LegalSourceSemantic.toeDiagnosticCheckDoesNotCreateTheoremPromotion
+toeSingularBasinSelectedResolutionNotRobust =
+  SingularBasinTOE.selectedResolutionNotRobust
 
-toeGovernedSourceIdentifierDoesNotCreateProofAuthority =
-  LegalSourceSemantic.toeSourceIdentifierDoesNotCreateProofAuthority
+toeSingularBasinSelectedProjectionNotResolutionAdequate =
+  SingularBasinTOE.selectedProjectionNotResolutionAdequate
 
-toeGovernedESDSurfaceMutationRemainsForbidden =
-  LegalSourceSemantic.toeESDSurfaceMutationRemainsForbidden
+toeSingularBasinSelectedResolutionRefutesGlobalFactorisation =
+  SingularBasinTOE.selectedResolutionAlsoRefutesGlobalFactorisation
 
+toeYanchukIntervalODECheckerStillMissing =
+  SingularBasinTOE.intervalODECheckerStillMissing
 
-toeGovernedRuntimeCannotInventLegalSemantics =
-  LegalSourceSemantic.toeRuntimeCannotInventLegalSemantics
+toeYanchukCheckerSoundStillMissing =
+  SingularBasinTOE.checkerSoundToBasinCertificateStillMissing
 
-toeGovernedSourceFollowCannotCreateAuthorityByTransport =
-  LegalSourceSemantic.toeSourceFollowCannotCreateAuthorityByTransport
+toeYanchukAnalyticGlobalWidthLawStillMissing =
+  SingularBasinTOE.analyticGlobalWidthLawStillMissing
 
-toeGovernedTargetDomainNeedsOwnAuthorityWitness =
-  LegalSourceSemantic.toeTargetDomainNeedsOwnAuthorityWitness
+toeYanchukIntervalStableManifoldTubeStillMissing =
+  SingularBasinTOE.intervalStableManifoldTubeStillMissing
 
-toeGovernedRepresentationEqualityDoesNotCreateLegalAuthority =
-  LegalSourceSemantic.toeRepresentationEqualityDoesNotCreateLegalAuthority
+toeYanchukBasinSeparationTheoremStillMissing =
+  SingularBasinTOE.basinSeparationTheoremStillMissing
 
 toeSingularBasinZKPFrame :
   SingularBasinTOE.SingularBasinTOEZKPFrame
@@ -1094,11 +1130,84 @@ toeFleetQuantumMereologyAttributionBoundary =
   FleetGapTOE.fleetQuantumMereologyAttributionBoundary
 
 toeFleetSpectralLabelDoesNotIdentifyTheoremOwner :
-  FleetGapTOE.spectralLabelsIdentifyTheoremOwners
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+  FleetGapTOE.FleetSpectralLabelIdentifiesTheoremOwner → ⊥
 toeFleetSpectralLabelDoesNotIdentifyTheoremOwner =
   FleetGapTOE.fleetSpectralLabelDoesNotIdentifyTheoremOwner
 
+
+------------------------------------------------------------------------
+-- Direct residual Ibrahim source-owner firewalls.
+------------------------------------------------------------------------
+
+toeIbrahimOEISDoesNotSelectRepresentationProofRoute :
+  ParetoSnowballTOE.OEISSelectsRepresentationProofRoute → ⊥
+toeIbrahimOEISDoesNotSelectRepresentationProofRoute =
+  ParetoSnowballTOE.oeisDoesNotSelectRepresentationProofRoute
+
+toeIbrahimDimensionDoesNotCloseRepresentationRoute :
+  ParetoSnowballTOE.DimensionClosesRepresentationRoute → ⊥
+toeIbrahimDimensionDoesNotCloseRepresentationRoute =
+  ParetoSnowballTOE.dimensionDoesNotCloseRepresentationRoute
+
+toeIbrahimFailedCoarseRouteDoesNotForceConcreteBasis :
+  ParetoSnowballTOE.FailedCoarseRouteForcesConcreteBasisReconstruction → ⊥
+toeIbrahimFailedCoarseRouteDoesNotForceConcreteBasis =
+  ParetoSnowballTOE.failedCoarseRouteDoesNotForceConcreteBasisReconstruction
+
+toeIbrahimKernelCharacterDoesNotCreateConstituentList :
+  ParetoSnowballTOE.KernelCharacterEqualityCreatesConstituentList → ⊥
+toeIbrahimKernelCharacterDoesNotCreateConstituentList =
+  ParetoSnowballTOE.kernelCharacterEqualityDoesNotCreateConstituentList
+
+toeIbrahimAgdaConsumerDoesNotCreateExternalTheorem :
+  ParetoSnowballTOE.AgdaConsumerRecordCreatesExternalTheorem → ⊥
+toeIbrahimAgdaConsumerDoesNotCreateExternalTheorem =
+  ParetoSnowballTOE.agdaConsumerRecordDoesNotCreateExternalTheorem
+
+toeIbrahimPairDegreeDoesNotCreatePhaseOrientation :
+  ParetoSnowballTOE.PairDegreeCreatesPhaseOrientation → ⊥
+toeIbrahimPairDegreeDoesNotCreatePhaseOrientation =
+  ParetoSnowballTOE.pairDegreeDoesNotCreatePhaseOrientation
+
+toeIbrahimTwelveSeventyEightDoesNotCreateSameActionIntertwiner :
+  ParetoSnowballTOE.TwelveSeventyEightCreatesSameActionIntertwiner → ⊥
+toeIbrahimTwelveSeventyEightDoesNotCreateSameActionIntertwiner =
+  ParetoSnowballTOE.twelveSeventyEightDoesNotCreateSameActionIntertwiner
+
+toeIbrahimCTblLibNameDoesNotCreateActualMonsterAction :
+  ParetoSnowballTOE.CTblLibTableNameCreatesActualMonsterAction → ⊥
+toeIbrahimCTblLibNameDoesNotCreateActualMonsterAction =
+  ParetoSnowballTOE.ctbllibTableNameDoesNotCreateActualMonsterAction
+
+toeIbrahimSharedZetaScalarDoesNotCreateMonsterRecognition :
+  ParetoSnowballTOE.SharedZetaScalarCreatesMonsterHZetaRecognition → ⊥
+toeIbrahimSharedZetaScalarDoesNotCreateMonsterRecognition =
+  ParetoSnowballTOE.sharedZetaScalarDoesNotCreateMonsterHZetaRecognition
+
+toeIbrahimSchrodingerConstructionDoesNotCreateHomBinding :
+  ParetoSnowballTOE.SchrodingerConstructionCreatesHomCarrierBinding → ⊥
+toeIbrahimSchrodingerConstructionDoesNotCreateHomBinding =
+  ParetoSnowballTOE.schrodingerConstructionDoesNotCreateHomCarrierBinding
+
+toeIbrahimDeweyDoesNotClassifyHistoricalEdge :
+  ParetoSnowballTOE.DeweyClassifiesHistoricalEdge → ⊥
+toeIbrahimDeweyDoesNotClassifyHistoricalEdge =
+  ParetoSnowballTOE.deweyDoesNotClassifyHistoricalEdge
+
+toeIbrahimFourEdgesDoNotProveWholeCorpus :
+  ParetoSnowballTOE.FourMatchingEdgesProveWholeCorpus → ⊥
+toeIbrahimFourEdgesDoNotProveWholeCorpus =
+  ParetoSnowballTOE.fourMatchingEdgesDoNotProveWholeCorpus
+
+toeIbrahimOctoberCommentDoesNotOverridePrimaryPaper :
+  ParetoSnowballTOE.OctoberCommentOverridesPrimaryPaper → ⊥
+toeIbrahimOctoberCommentDoesNotOverridePrimaryPaper =
+  ParetoSnowballTOE.octoberCommentDoesNotOverridePrimaryPaper
+
+toeIbrahimPaperMonthDoesNotOverrideExecutedBytes :
+  ParetoSnowballTOE.PaperMonthOverridesExecutedBytes → ⊥
+toeIbrahimPaperMonthDoesNotOverrideExecutedBytes =
+  ParetoSnowballTOE.paperMonthDoesNotOverrideExecutedBytes
 
 ------------------------------------------------------------------------
 -- Direct canonical PNF firewalls for fleet R4/R5 selection.
@@ -1135,343 +1244,3 @@ toeFleetVectorCoordinateAdmissibilityStillFalse =
 
 toeFleetTextFallbackAuthorityStillFalse =
   FleetGapTOE.fleetTextFallbackAuthorityStillFalse
-
-------------------------------------------------------------------------
--- Joint Balaban RG + R559 same-owner max-cut receipt.
-------------------------------------------------------------------------
-
-import DASHI.Unified.BalabanR559TOEMaxCutExact as BalabanR559TOE
-
-toeBalabanR559MaxCutReceipt :
-  BalabanR559TOE.BalabanR559TOEMaxCutReceipt
-toeBalabanR559MaxCutReceipt =
-  BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-toeBalabanR559PublishedContinuumStillOpen :
-  BalabanR559TOE.publishedContinuumPromotion
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-  ≡ false
-toeBalabanR559PublishedContinuumStillOpen =
-  BalabanR559TOE.publishedContinuumPromotionIsFalse
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-toeBalabanR559ContinuumMassGapStillBlocked :
-  BalabanR559TOE.continuumMassGapPromotion
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-  ≡ false
-toeBalabanR559ContinuumMassGapStillBlocked =
-  BalabanR559TOE.continuumMassGapPromotionIsFalse
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-toeBalabanR559ClayPromotionStillBlocked :
-  BalabanR559TOE.clayPromotion
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-  ≡ false
-toeBalabanR559ClayPromotionStillBlocked =
-  BalabanR559TOE.clayPromotionIsFalse
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-
-------------------------------------------------------------------------
--- Direct constructive Balaban RG scale-transfer non-promotion.
--- The theorem owner remains the scale-transfer frontier.
--- The joint receipt is the normalized TOE path.
-------------------------------------------------------------------------
-
-import Data.Empty using (⊥)
-
-toeBalabanR559Gate4UnresolvedCount : ℕ
-toeBalabanR559Gate4UnresolvedCount =
-  BalabanR559TOE.gate4UnresolvedCount
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-toeBalabanR559Gate4UnresolvedCountIs58 :
-  toeBalabanR559Gate4UnresolvedCount ≡ 58
-toeBalabanR559Gate4UnresolvedCountIs58 =
-  BalabanR559TOE.gate4UnresolvedCountIs58
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-toeBalabanR559Gate4DefinitionLevel : ProofLevel
-toeBalabanR559Gate4DefinitionLevel =
-  BalabanR559TOE.gate4DefinitionLevel
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-toeBalabanR559Gate4InhabitantsLevel : ProofLevel
-toeBalabanR559Gate4InhabitantsLevel =
-  BalabanR559TOE.gate4InhabitantsLevel
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-toeBalabanScaleTransferNonPromotion :
-  BalabanR559TOE.ScaleTransferPromotion → ⊥
-toeBalabanScaleTransferNonPromotion =
-  BalabanR559TOE.scaleTransferPromotionEliminator
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-------------------------------------------------------------------------
--- R559 / Ibrahim / fleet-58 / generic-hyperfabric TOE convergence.
-------------------------------------------------------------------------
-
-import DASHI.Unified.R559IbrahimFleetHyperfabricTOEExact as FleetHyperTOE
-
-toeR559IbrahimFleetHyperfabricReceipt :
-  FleetHyperTOE.R559IbrahimFleetHyperfabricTOEReceipt
-toeR559IbrahimFleetHyperfabricReceipt =
-  FleetHyperTOE.canonicalR559IbrahimFleetHyperfabricTOEReceipt
-
-toeFleetFormalGapsAre58 :
-  FleetHyperTOE.fleetFormalGaps ≡ 58
-toeFleetFormalGapsAre58 =
-  FleetHyperTOE.fleetFormalGapsAre58
-
-toeYMGate4FormalGapsAre58 :
-  FleetHyperTOE.ymGate4FormalGaps ≡ 58
-toeYMGate4FormalGapsAre58 =
-  FleetHyperTOE.ymGate4FormalGapsAre58
-
-toeYMGate4PaidReductionLevel : ProofLevel
-toeYMGate4PaidReductionLevel =
-  FleetHyperTOE.ymGate4PaidReductionLevel
-
-toeYMGate4InhabitantsLevel : ProofLevel
-toeYMGate4InhabitantsLevel =
-  FleetHyperTOE.ymGate4InhabitantsLevel
-
-toeFleet58DoesNotIdentifyYMGate4 :
-  FleetHyperTOE.Fleet58EqualsYMGate4SameObject → ⊥
-toeFleet58DoesNotIdentifyYMGate4 =
-  FleetHyperTOE.fleet58CardinalityDoesNotProveYMGate4Identity
-
-toeFleetDischargedFibresAre584 :
-  FleetHyperTOE.fleetDischargedFibres ≡ 584
-toeFleetDischargedFibresAre584 =
-  FleetHyperTOE.fleetDischargedFibresAre584
-
-toeFleetContradictionGapsAre44 :
-  FleetHyperTOE.fleetContradictionGaps ≡ 44
-toeFleetContradictionGapsAre44 =
-  FleetHyperTOE.fleetContradictionGapsAre44
-
-toePadicPrefixCannotRecoverDiscardedDigit :
-  FleetHyperTOE.PadicPrefixRecovery → ⊥
-toePadicPrefixCannotRecoverDiscardedDigit =
-  FleetHyperTOE.toePadicPrefixCannotRecoverDiscardedDigit
-
-toeTwoDigitStreamCannotRecoverThird :
-  FleetHyperTOE.StreamThirdPrefixRecovery → ⊥
-toeTwoDigitStreamCannotRecoverThird =
-  FleetHyperTOE.toeTwoDigitStreamCannotRecoverThird
-
-------------------------------------------------------------------------
--- Implement-A-to-D reuse-only TOE normalization.
-------------------------------------------------------------------------
-
-import DASHI.Unified.YMImplementAToDTOEMaxCutExact as YMAD
-
-toeYMImplementAToDMaxCutReceipt :
-  YMAD.YMImplementAToDTOEMaxCutReceipt
-toeYMImplementAToDMaxCutReceipt =
-  YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
-
-toeYMImplementAToDZKPFrame : YMAD.YMImplementAToDZKPFrame
-toeYMImplementAToDZKPFrame =
-  YMAD.canonicalYMImplementAToDZKPFrame
-
-toeYMImplementAToDGate4UnresolvedCount : ℕ
-toeYMImplementAToDGate4UnresolvedCount =
-  YMAD.gate4UnresolvedCount YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
-
-toeYMImplementAToDGate4UnresolvedCountIs58 :
-  toeYMImplementAToDGate4UnresolvedCount ≡ 58
-toeYMImplementAToDGate4UnresolvedCountIs58 =
-  YMAD.gate4UnresolvedCountIs58 YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
-
-toeYMImplementAToDPublishedContinuumStillBlocked :
-  YMAD.publishedContinuumPromotion YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
-  ≡ false
-toeYMImplementAToDPublishedContinuumStillBlocked =
-  YMAD.publishedContinuumPromotionIsFalse
-    YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
-
-toeYMImplementAToDContinuumMassGapStillBlocked :
-  YMAD.continuumMassGapPromotion YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
-  ≡ false
-toeYMImplementAToDContinuumMassGapStillBlocked =
-  YMAD.continuumMassGapPromotionIsFalse
-    YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
-
-toeYMImplementAToDClayStillBlocked :
-  YMAD.clayPromotion YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
-  ≡ false
-toeYMImplementAToDClayStillBlocked =
-  YMAD.clayPromotionIsFalse YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
-
-toeYMImplementAToDScaleTransferNonPromotion :
-  BalabanR559TOE.ScaleTransferPromotion → ⊥
-toeYMImplementAToDScaleTransferNonPromotion =
-  YMAD.scaleTransferPromotionEliminator
-    YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
-
-------------------------------------------------------------------------
--- Direct proof-bearing byte-ABI and host/device promotion cut.
--- Reuse original finite codec and actual host runtime owners.
--- The 58 planning gaps are not discharged by a host byte witness.
-------------------------------------------------------------------------
-
-import DASHI.ComputerScience.TriadicFin27Byte256ABIExact as TriadicABI
-import DASHI.ComputerScience.TriadicU8RuntimeOracleCrossRepoExact as TriadicHost
-
-toeHostU8RustBindingStillUnpaid :
-  TriadicHost.rustU8BindingPaid TriadicHost.currentU8RuntimeBoundary
-  ≡ false
-toeHostU8RustBindingStillUnpaid = refl
-
-toeHostByteDoesNotCreateDeviceByte :
-  TriadicHost.HostByteImpliesDeviceByte → ⊥
-toeHostByteDoesNotCreateDeviceByte =
-  TriadicHost.hostByteDoesNotCreateDeviceByte
-
-toeHostRuntimeReceiptCannotCreateKernelCertification :
-  TriadicHost.RuntimeSourceImpliesKernelCertification → ⊥
-toeHostRuntimeReceiptCannotCreateKernelCertification =
-  TriadicHost.runtimeSourceDoesNotCreateKernelCertification
-
-toeFinite27ByteABIDoesNotCreateRustImplementation :
-  TriadicABI.BoundedABIImpliesRustImplementation → ⊥
-toeFinite27ByteABIDoesNotCreateRustImplementation =
-  TriadicABI.abiDoesNotCreateRust
-
-------------------------------------------------------------------------
--- Kernel-bidi / ternary-27 / byte-ABI max-cut convergence.
-------------------------------------------------------------------------
-
-import DASHI.Unified.R559IbrahimFleetKernelBidiTernary27TOEExact as Kernel27TOE
-
-toeR559IbrahimFleetKernelBidiTernary27Receipt :
-  Kernel27TOE.R559IbrahimFleetKernelBidiTernary27TOEReceipt
-toeR559IbrahimFleetKernelBidiTernary27Receipt =
-  Kernel27TOE.canonicalR559IbrahimFleetKernelBidiTernary27TOEReceipt
-
-toeTriadicRustBindingStillUnpaid :
-  Kernel27TOE.ABI.rustU8BindingPaid Kernel27TOE.triadicByteBoundary ≡ false
-toeTriadicRustBindingStillUnpaid =
-  Kernel27TOE.rustU8BindingStillUnpaid
-
-toeKernelCharacterIsotypyStillDoesNotConstructActionIntertwiner :
-  Kernel27TOE.KernelBidi.characterIsotypyConstructsActionIntertwiner
-    Kernel27TOE.kernelBidiBoundary ≡ false
-toeKernelCharacterIsotypyStillDoesNotConstructActionIntertwiner =
-  Kernel27TOE.kernelCharacterIsotypyStillDoesNotConstructActionIntertwiner
-
-toeSelected3BSingleActionProducerStillUninhabited :
-  Kernel27TOE.SingleProducer.actualSingleProducerInhabitedHere
-    Kernel27TOE.singleProducerBoundary ≡ false
-toeSelected3BSingleActionProducerStillUninhabited =
-  Kernel27TOE.singleActionProducerStillUninhabited
-
-
-------------------------------------------------------------------------
--- Canonical Balaban RG / R559 same-owner and non-promotion projection.
--- No new physical theorem. The joint owner supplies these proofs.
--- Fleet 584/58 refers to the separate inventory, not a YM same-object proof.
-------------------------------------------------------------------------
-
-toeBalabanDensityOwnerAgreement :
-  BalabanR559TOE.balabanDensityFlow
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-  ≡ BalabanR559TOE.r559DensityFlow
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-toeBalabanDensityOwnerAgreement =
-  BalabanR559TOE.densityOwnerAgreement
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-toeBalabanRegularEOwnerAgreement :
-  BalabanR559TOE.balabanRegularELocalization
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-  ≡ BalabanR559TOE.r559RegularELocalization
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-toeBalabanRegularEOwnerAgreement =
-  BalabanR559TOE.regularEOwnerAgreement
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-toeBalabanStressMarkedShellOwnerAgreement :
-  BalabanR559TOE.balabanStressMarkedShell
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-  ≡ BalabanR559TOE.r559StressMarkedShell
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-toeBalabanStressMarkedShellOwnerAgreement =
-  BalabanR559TOE.stressMarkedShellOwnerAgreement
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-toeBalabanStressHilbertOwnerAgreement :
-  BalabanR559TOE.balabanStressHilbertCompiler
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-  ≡ BalabanR559TOE.r559StressHilbertCompiler
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-toeBalabanStressHilbertOwnerAgreement =
-  BalabanR559TOE.stressHilbertOwnerAgreement
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-toeBalabanBlockSpinStillBlocked :
-  BalabanR559TOE.balabanBlockSpinTransfer
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false
-toeBalabanBlockSpinStillBlocked =
-  BalabanR559TOE.balabanBlockSpinTransferIsFalse
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-toeBalabanUniformKPStillBlocked :
-  BalabanR559TOE.balabanUniformKPAbsorption
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false
-toeBalabanUniformKPStillBlocked =
-  BalabanR559TOE.balabanUniformKPAbsorptionIsFalse
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-toeBalabanOSWightmanStillBlocked :
-  BalabanR559TOE.balabanOSWightmanConstruction
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false
-toeBalabanOSWightmanStillBlocked =
-  BalabanR559TOE.balabanOSWightmanConstructionIsFalse
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-
-------------------------------------------------------------------------
--- Direct TOE conjunctive closure: the three missing physical producers
--- remain blocked together. No Boolean flag becomes proof authority.
--- Reuse R559 source-owned proofs without adding a model or an axiom.
-------------------------------------------------------------------------
-
-toeBalabanPhysicalPromotionCut :
-  (BalabanR559TOE.balabanBlockSpinTransfer
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false)
-  × (BalabanR559TOE.balabanUniformKPAbsorption
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false)
-  × (BalabanR559TOE.balabanOSWightmanConstruction
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false)
-toeBalabanPhysicalPromotionCut =
-  toeBalabanBlockSpinStillBlocked ,
-  (toeBalabanUniformKPStillBlocked ,
-   toeBalabanOSWightmanStillBlocked)
-
-------------------------------------------------------------------------
--- Live Gate-4 frontier and fleet-target selection.
-------------------------------------------------------------------------
-
-toeCurrentGate4FrontierLedgerLevel : ProofLevel
-toeCurrentGate4FrontierLedgerLevel =
-  FleetHyperTOE.currentGate4FrontierLedgerLevel
-
-toeCurrentGate4ClusteringToTransferGapLevel : ProofLevel
-toeCurrentGate4ClusteringToTransferGapLevel =
-  FleetHyperTOE.currentGate4ClusteringToTransferGapLevel
-
-toeFleetFormalGapTargetSelected : Bool
-toeFleetFormalGapTargetSelected =
-  FleetHyperTOE.fleetFormalGapTargetSelected
-
-toeHistoricalGate4CountSelectedAsFleetTarget : Bool
-toeHistoricalGate4CountSelectedAsFleetTarget =
-  FleetHyperTOE.historicalGate4CountSelectedAsFleetTarget
-
-toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
-  FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
-toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
-  FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap

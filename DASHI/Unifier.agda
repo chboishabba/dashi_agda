@@ -1,10 +1,8 @@
 module DASHI.Unifier where
-import DASHI.Interop.SLRSemanticWorldClosureExact as LegalSemanticClosure
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 import DASHI.Unified.SingularBasinCoarseRGTOEExact as SingularBasinTOE
-import DASHI.Physics.Foundations.CMP119CosmologyLatestParetoFrontierExact as CMP119Preferred
 
 
 import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as GovernanceTOE
@@ -560,6 +558,85 @@ unifierYangMillsGoal1ParetoZKPFrame : YMMaxCut.Goal1ParetoTOEZKPFrame
 unifierYangMillsGoal1ParetoZKPFrame = YMMaxCut.canonicalGoal1ParetoTOEZKPFrame
 
 ------------------------------------------------------------------------
+-- Joint Balaban RG + R559 same-owner max-cut facade.
+------------------------------------------------------------------------
+
+import DASHI.Unified.BalabanR559TOEMaxCutExact as BalabanR559TOE
+
+unifierBalabanR559MaxCutReceipt :
+  BalabanR559TOE.BalabanR559TOEMaxCutReceipt
+unifierBalabanR559MaxCutReceipt =
+  BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifierBalabanR559PublishedContinuumStillOpen :
+  BalabanR559TOE.publishedContinuumPromotion
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ false
+unifierBalabanR559PublishedContinuumStillOpen =
+  BalabanR559TOE.publishedContinuumPromotionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifierBalabanR559ContinuumMassGapStillBlocked :
+  BalabanR559TOE.continuumMassGapPromotion
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ false
+unifierBalabanR559ContinuumMassGapStillBlocked =
+  BalabanR559TOE.continuumMassGapPromotionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifierBalabanR559ClayPromotionStillBlocked :
+  BalabanR559TOE.clayPromotion
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ false
+unifierBalabanR559ClayPromotionStillBlocked =
+  BalabanR559TOE.clayPromotionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+
+------------------------------------------------------------------------
+-- Direct constructive Balaban RG scale-transfer non-promotion.
+-- The joint receipt is the normalized facade path.
+------------------------------------------------------------------------
+
+unifierBalabanR559Gate4UnresolvedCount : Nat.ℕ
+unifierBalabanR559Gate4UnresolvedCount =
+  BalabanR559TOE.gate4UnresolvedCount
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifierBalabanR559Gate4UnresolvedCountIs58 :
+  unifierBalabanR559Gate4UnresolvedCount ≡ 58
+unifierBalabanR559Gate4UnresolvedCountIs58 =
+  BalabanR559TOE.gate4UnresolvedCountIs58
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifierBalabanR559Gate4DefinitionLevel : ProofLevel
+unifierBalabanR559Gate4DefinitionLevel =
+  BalabanR559TOE.gate4DefinitionLevel
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifierBalabanR559Gate4InhabitantsLevel : ProofLevel
+unifierBalabanR559Gate4InhabitantsLevel =
+  BalabanR559TOE.gate4InhabitantsLevel
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+unifierBalabanR559CurrentGate4FrontierLedgerLevel : ProofLevel
+unifierBalabanR559CurrentGate4FrontierLedgerLevel =
+  BalabanR559TOE.currentGate4FrontierLedgerLevel
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifierBalabanR559CurrentGate4PostulateFreeSurfaceLevel : ProofLevel
+unifierBalabanR559CurrentGate4PostulateFreeSurfaceLevel =
+  BalabanR559TOE.currentGate4PostulateFreeSurfaceLevel
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+
+unifierBalabanScaleTransferNonPromotion :
+  BalabanR559TOE.ScaleTransferPromotion → ⊥
+unifierBalabanScaleTransferNonPromotion =
+  BalabanR559TOE.scaleTransferPromotionEliminator
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+
+------------------------------------------------------------------------
 -- Direct RG non-promotion and Pareto/snowball/Ibrahim facade.
 ------------------------------------------------------------------------
 
@@ -586,7 +663,6 @@ unifierIbrahimHistoricalDiscriminatorBoundary =
 unifierBalabanIbrahimParetoSnowballZKPFrame =
   ParetoSnowballTOE.canonicalTOEZKPFrame
 
-
 unifierIbrahimSearchPriorityDoesNotCreateProof :
   ParetoSnowballTOE.SearchPriorityCreatesProof → ⊥
 unifierIbrahimSearchPriorityDoesNotCreateProof =
@@ -607,12 +683,6 @@ unifierIbrahimPaperOracleDoesNotIdentifyHistoricalDump :
 unifierIbrahimPaperOracleDoesNotIdentifyHistoricalDump =
   ParetoSnowballTOE.paperOracleDoesNotIdentifyHistoricalDump
 
-------------------------------------------------------------------------
--- Joint non-promotion: two independent blocked proof routes.
--- Do not infer either proof from a search score, a source alias, or
--- the other's conditional result. Reuse both canonical owner proofs.
-------------------------------------------------------------------------
-
 unifierRGAndIbrahimJointPromotionImpossible :
   ParetoSnowballTOE.BalabanScaleTransferPromotion →
   ParetoSnowballTOE.SearchPriorityCreatesProof → ⊥
@@ -625,41 +695,45 @@ unifierRGAndIbrahimSearchPromotionImpossible :
 unifierRGAndIbrahimSearchPromotionImpossible sourcePriority rg =
   unifierIbrahimSearchPriorityDoesNotCreateProof sourcePriority
 
+-- These are two independent 27-state owners. No same-carrier assertion follows.
+import DASHI.Core.ConsumerDescentMinimalObserverExact as TOE27Descent
+import DASHI.Foundations.BalancedTernaryAntipodalOrbitExact as TOE27Orbit
+import Data.Empty as TOE27Empty
+
+toeTernary27FaceCannotDescend :
+  TOE27Descent.FactorsThrough Face27TOE.boundaryObserver Face27TOE.faceConsumer → TOE27Empty.⊥
+toeTernary27FaceCannotDescend = Face27TOE.triadicFaceCannotFactorThroughThreeEdges
+
+toeTernary27DependentCodePreservesConsumer :
+  ∀ {Outcome : Set} → (consumer : TOE27Orbit.TritTriple → Outcome) →
+  TOE27Descent.ConsumerSufficient Recoverable27TOE.ternary27ExactCodeObserver consumer
+toeTernary27DependentCodePreservesConsumer = Recoverable27TOE.ternary27ExactCodeAdequateForEveryConsumer
+
 
 ------------------------------------------------------------------------
--- Complete direct Balaban/Ibrahim Pareto-snowball exports.
+-- Current Navier--Stokes A/B/C/D terminal convergence.
 ------------------------------------------------------------------------
 
-unifierBalabanScaleTransferFrontier :
-  ParetoSnowballTOE.BalabanScaleTransferFrontierReceipt
-unifierBalabanScaleTransferFrontier =
-  ParetoSnowballTOE.balabanScaleTransferFrontier
+import DASHI.Unified.NavierStokesABCDTerminalTOEExact as NSABCDTerminal
 
-unifierIbrahimRoutePreferenceDoesNotCreateExecutionReceipt :
-  ParetoSnowballTOE.RoutePreferenceCreatesExecutionReceipt → ⊥
-unifierIbrahimRoutePreferenceDoesNotCreateExecutionReceipt =
-  ParetoSnowballTOE.routePreferenceDoesNotCreateExecutionReceipt
+unifierNavierStokesABCDTerminalReceipt :
+  NSABCDTerminal.NSABCDTerminalTOEReceipt
+unifierNavierStokesABCDTerminalReceipt =
+  NSABCDTerminal.canonicalNSABCDTerminalTOEReceipt
 
-unifierIbrahimMergedLeanSourceDoesNotCreateKernelReceipt :
-  ParetoSnowballTOE.MergedLeanSourceCreatesKernelReceipt → ⊥
-unifierIbrahimMergedLeanSourceDoesNotCreateKernelReceipt =
-  ParetoSnowballTOE.mergedLeanSourceDoesNotCreateKernelReceipt
+unifierNavierStokesABCDTerminalZKPFrame :
+  NSABCDTerminal.NSABCDTerminalZKPFrame
+unifierNavierStokesABCDTerminalZKPFrame =
+  NSABCDTerminal.canonicalNSABCDTerminalZKPFrame
 
-unifierIbrahimOEISDoesNotCreateMultiplicityAction :
-  ParetoSnowballTOE.NinetyOEISEqualityCreatesMultiplicityAction → ⊥
-unifierIbrahimOEISDoesNotCreateMultiplicityAction =
-  ParetoSnowballTOE.oeisDoesNotCreateMultiplicityAction
+unifierNavierStokesBReserveStillOpen =
+  NSABCDTerminal.toeBReserveStillOpen
 
-unifierIbrahimFiniteIrreducibilityDoesNotCreateMonsterHZetaRecognition :
-  ParetoSnowballTOE.FiniteIrreducibilityCreatesMonsterHZetaRecognition → ⊥
-unifierIbrahimFiniteIrreducibilityDoesNotCreateMonsterHZetaRecognition =
-  ParetoSnowballTOE.finiteIrreducibilityDoesNotCreateMonsterHZetaRecognition
+unifierNavierStokesBW1StillOpen =
+  NSABCDTerminal.toeBW1StillOpen
 
-unifierIbrahimCurrentQidDoesNotIdentifyHistoricalTitle :
-  ParetoSnowballTOE.CurrentQidIdentifiesHistoricalTitle → ⊥
-unifierIbrahimCurrentQidDoesNotIdentifyHistoricalTitle =
-  ParetoSnowballTOE.currentQidDoesNotIdentifyHistoricalTitle
-
+unifierNavierStokesBContinuationStillOpen =
+  NSABCDTerminal.toeBContinuationStillOpen
 
 ------------------------------------------------------------------------
 -- 369 max-cut / kernel-BIDI / ternary-27 consumer facade.
@@ -837,12 +911,80 @@ unifierFleetPlanningTextDoesNotCreateFormalResidual :
 unifierFleetPlanningTextDoesNotCreateFormalResidual =
   FleetGapTOE.fleetExternalPlanningTextDoesNotCreateFormalResidual
 
-unifierFleetSpectralLabelDoesNotIdentifyTheoremOwner :
-  FleetGapTOE.spectralLabelsIdentifyTheoremOwners
-    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
-unifierFleetSpectralLabelDoesNotIdentifyTheoremOwner =
-  FleetGapTOE.fleetSpectralLabelDoesNotIdentifyTheoremOwner
 
+------------------------------------------------------------------------
+-- Direct residual Ibrahim source-owner firewalls.
+------------------------------------------------------------------------
+
+unifierIbrahimOEISDoesNotSelectRepresentationProofRoute :
+  ParetoSnowballTOE.OEISSelectsRepresentationProofRoute → ⊥
+unifierIbrahimOEISDoesNotSelectRepresentationProofRoute =
+  ParetoSnowballTOE.oeisDoesNotSelectRepresentationProofRoute
+
+unifierIbrahimDimensionDoesNotCloseRepresentationRoute :
+  ParetoSnowballTOE.DimensionClosesRepresentationRoute → ⊥
+unifierIbrahimDimensionDoesNotCloseRepresentationRoute =
+  ParetoSnowballTOE.dimensionDoesNotCloseRepresentationRoute
+
+unifierIbrahimFailedCoarseRouteDoesNotForceConcreteBasis :
+  ParetoSnowballTOE.FailedCoarseRouteForcesConcreteBasisReconstruction → ⊥
+unifierIbrahimFailedCoarseRouteDoesNotForceConcreteBasis =
+  ParetoSnowballTOE.failedCoarseRouteDoesNotForceConcreteBasisReconstruction
+
+unifierIbrahimKernelCharacterDoesNotCreateConstituentList :
+  ParetoSnowballTOE.KernelCharacterEqualityCreatesConstituentList → ⊥
+unifierIbrahimKernelCharacterDoesNotCreateConstituentList =
+  ParetoSnowballTOE.kernelCharacterEqualityDoesNotCreateConstituentList
+
+unifierIbrahimAgdaConsumerDoesNotCreateExternalTheorem :
+  ParetoSnowballTOE.AgdaConsumerRecordCreatesExternalTheorem → ⊥
+unifierIbrahimAgdaConsumerDoesNotCreateExternalTheorem =
+  ParetoSnowballTOE.agdaConsumerRecordDoesNotCreateExternalTheorem
+
+unifierIbrahimPairDegreeDoesNotCreatePhaseOrientation :
+  ParetoSnowballTOE.PairDegreeCreatesPhaseOrientation → ⊥
+unifierIbrahimPairDegreeDoesNotCreatePhaseOrientation =
+  ParetoSnowballTOE.pairDegreeDoesNotCreatePhaseOrientation
+
+unifierIbrahimTwelveSeventyEightDoesNotCreateSameActionIntertwiner :
+  ParetoSnowballTOE.TwelveSeventyEightCreatesSameActionIntertwiner → ⊥
+unifierIbrahimTwelveSeventyEightDoesNotCreateSameActionIntertwiner =
+  ParetoSnowballTOE.twelveSeventyEightDoesNotCreateSameActionIntertwiner
+
+unifierIbrahimCTblLibNameDoesNotCreateActualMonsterAction :
+  ParetoSnowballTOE.CTblLibTableNameCreatesActualMonsterAction → ⊥
+unifierIbrahimCTblLibNameDoesNotCreateActualMonsterAction =
+  ParetoSnowballTOE.ctbllibTableNameDoesNotCreateActualMonsterAction
+
+unifierIbrahimSharedZetaScalarDoesNotCreateMonsterRecognition :
+  ParetoSnowballTOE.SharedZetaScalarCreatesMonsterHZetaRecognition → ⊥
+unifierIbrahimSharedZetaScalarDoesNotCreateMonsterRecognition =
+  ParetoSnowballTOE.sharedZetaScalarDoesNotCreateMonsterHZetaRecognition
+
+unifierIbrahimSchrodingerConstructionDoesNotCreateHomBinding :
+  ParetoSnowballTOE.SchrodingerConstructionCreatesHomCarrierBinding → ⊥
+unifierIbrahimSchrodingerConstructionDoesNotCreateHomBinding =
+  ParetoSnowballTOE.schrodingerConstructionDoesNotCreateHomCarrierBinding
+
+unifierIbrahimDeweyDoesNotClassifyHistoricalEdge :
+  ParetoSnowballTOE.DeweyClassifiesHistoricalEdge → ⊥
+unifierIbrahimDeweyDoesNotClassifyHistoricalEdge =
+  ParetoSnowballTOE.deweyDoesNotClassifyHistoricalEdge
+
+unifierIbrahimFourEdgesDoNotProveWholeCorpus :
+  ParetoSnowballTOE.FourMatchingEdgesProveWholeCorpus → ⊥
+unifierIbrahimFourEdgesDoNotProveWholeCorpus =
+  ParetoSnowballTOE.fourMatchingEdgesDoNotProveWholeCorpus
+
+unifierIbrahimOctoberCommentDoesNotOverridePrimaryPaper :
+  ParetoSnowballTOE.OctoberCommentOverridesPrimaryPaper → ⊥
+unifierIbrahimOctoberCommentDoesNotOverridePrimaryPaper =
+  ParetoSnowballTOE.octoberCommentDoesNotOverridePrimaryPaper
+
+unifierIbrahimPaperMonthDoesNotOverrideExecutedBytes :
+  ParetoSnowballTOE.PaperMonthOverridesExecutedBytes → ⊥
+unifierIbrahimPaperMonthDoesNotOverrideExecutedBytes =
+  ParetoSnowballTOE.paperMonthDoesNotOverrideExecutedBytes
 
 ------------------------------------------------------------------------
 -- Direct canonical PNF firewalls for fleet R4/R5 selection.
@@ -880,6 +1022,10 @@ unifierFleetVectorCoordinateAdmissibilityStillFalse =
 unifierFleetTextFallbackAuthorityStillFalse =
   FleetGapTOE.fleetTextFallbackAuthorityStillFalse
 
+------------------------------------------------------------------------
+-- Fleet discharged-motif owner aliases.
+-- The spectral labels remain planning context only.
+------------------------------------------------------------------------
 
 unifierFleetBalabanDischargedOwnerReceipt :
   FleetGapTOE.BalabanDischargedOwnerReceipt
@@ -906,135 +1052,7 @@ unifierFleetQuantumMereologyAttributionBoundary :
 unifierFleetQuantumMereologyAttributionBoundary =
   FleetGapTOE.fleetQuantumMereologyAttributionBoundary
 
-------------------------------------------------------------------------
--- Joint Balaban RG + R559 same-owner max-cut facade.
-------------------------------------------------------------------------
-
-import DASHI.Unified.BalabanR559TOEMaxCutExact as BalabanR559TOE
-
-unifierBalabanR559MaxCutReceipt :
-  BalabanR559TOE.BalabanR559TOEMaxCutReceipt
-unifierBalabanR559MaxCutReceipt =
-  BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-unifierBalabanR559PublishedContinuumStillOpen :
-  BalabanR559TOE.publishedContinuumPromotion
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-  ≡ false
-toeForecastProbabilityIsNotWorldState =
-  ForecastTOE.toeProbabilityIsNotWorldState
-
-toeForecastScoreIsNotTruth :
-  ForecastKernel.ForecastVerificationKernelBoundary.scoreIsForecastTruth
-    ForecastTOE.forecastKernelBoundary
-  ≡ false
-toeForecastScoreIsNotTruth =
-  ForecastTOE.toeScoreIsNotForecastTruth
-
-toeForecastSearchHitDoesNotPayResidual :
-  ForecastQuery.ProviderNeutralWorldQueryBoundary.searchHitEqualsPayment
-    ForecastTOE.worldQueryBoundary
-  ≡ false
-toeForecastSearchHitDoesNotPayResidual =
-  ForecastTOE.toeSearchHitDoesNotPayResidual
-
-toeForecastChangeDoesNotAutomaticallyChangeWorld :
-  ForecastWorldMonitor.WorldMonitorComparativeBoundary.forecastChangeAutomaticallyChangesWorld
-    ForecastTOE.worldMonitorBoundary
-  ≡ false
-toeForecastChangeDoesNotAutomaticallyChangeWorld =
-  ForecastTOE.toeForecastChangeDoesNotAutomaticallyChangeWorld
-
-toeTradeJustificationDoesNotCreateCausalProof :
-  ForecastTrade.DashiTradeComparativeBoundary.justificationChainCreatesCausalProof
-    ForecastTOE.tradeBoundary
-  ≡ false
-unifierYMImplementAToDContinuumMassGapStillBlocked =
-  YMAD.continuumMassGapPromotionIsFalse
-    YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
-
-unifierYMImplementAToDClayStillBlocked :
-  YMAD.clayPromotion YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
-  ≡ false
-unifierYMImplementAToDClayStillBlocked =
-  YMAD.clayPromotionIsFalse YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
-
-unifierYMImplementAToDScaleTransferNonPromotion :
-  BalabanR559TOE.ScaleTransferPromotion → ⊥
-unifierYMImplementAToDScaleTransferNonPromotion =
-  YMAD.scaleTransferPromotionEliminator
-    YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
-
-import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as GovernanceTOE
-import DASHI.Unified.PNFSourceBoundaryTOEExact as PNFSource
-import DASHI.Unified.PNFDistilledNonPromotionTOEExact as PNFDistilled
-import DASHI.Unified.SCALEEvidenceReviewTOEConvergenceExact as SCALEReview
-import DASHI.Unified.GovernanceBalabanIbrahim58GapTOEExact as GBI58
-import DASHI.Unified.BalabanFleetDual58TOEExact as Dual58
-
-------------------------------------------------------------------------
--- Canonical PNF source-boundary aliases.
--- Exact proof authority remains in the native imported owners.
-
-------------------------------------------------------------------------
-
-toePNFSourceBoundaryReceipt :
-  PNFSource.PNFSourceBoundaryTOEReceipt
-toePNFSourceBoundaryReceipt =
-  PNFSource.canonicalPNFSourceBoundaryTOEReceipt
-
-toePNFGluingProxyDoesNotProveTrueLinearity =
-  PNFSource.gluingProxyDoesNotProveTrueLinearity
-
-toePNFSelfAdjointProxyDoesNotProveFiniteTheorem =
-  PNFSource.selfAdjointProxyDoesNotProveFiniteTheorem
-
-toePNFDominationProxyDoesNotProveHamiltonianTheorem =
-  PNFSource.dominationProxyDoesNotProveHamiltonianTheorem
-
-toePNFFungalNetworkClaimsRequireSpeciesEvidence =
-  PNFSource.fungalNetworkClaimsRequireSpeciesEvidence
-
-toePNFKluverCobwebForm =
-  PNFSource.kluverCobwebForm
-
-unifierBalabanOSWightmanStillBlocked :
-  BalabanR559TOE.balabanOSWightmanConstruction
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false
-unifierBalabanOSWightmanStillBlocked =
-  BalabanR559TOE.balabanOSWightmanConstructionIsFalse
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-------------------------------------------------------------------------
--- Governed legal-workflow convergence.
-------------------------------------------------------------------------
-
-unifierGovernedLegalWorkflowInvariantHandoff :
-  GovernanceTOE.GovernedLegalWorkflowTOEInvariantHandoff
-unifierGovernedLegalWorkflowInvariantHandoff =
-  GovernanceTOE.canonicalGovernedLegalWorkflowTOEInvariantHandoff
-
-------------------------------------------------------------------------
--- Live Gate-4 frontier and fleet-target selection.
-------------------------------------------------------------------------
-
-unifierCurrentGate4FrontierLedgerLevel : ProofLevel
-unifierCurrentGate4FrontierLedgerLevel =
-  FleetHyperTOE.currentGate4FrontierLedgerLevel
-
-unifierCurrentGate4ClusteringToTransferGapLevel : ProofLevel
-unifierCurrentGate4ClusteringToTransferGapLevel =
-  FleetHyperTOE.currentGate4ClusteringToTransferGapLevel
-
-unifierFleetFormalGapTargetSelected : Bool
-unifierFleetFormalGapTargetSelected =
-  FleetHyperTOE.fleetFormalGapTargetSelected
-
-unifierHistoricalGate4CountSelectedAsFleetTarget : Bool
-unifierHistoricalGate4CountSelectedAsFleetTarget =
-  FleetHyperTOE.historicalGate4CountSelectedAsFleetTarget
-
-unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
-  FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
-unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
-  FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+unifierFleetSpectralLabelDoesNotIdentifyTheoremOwner :
+  FleetGapTOE.FleetSpectralLabelIdentifiesTheoremOwner → ⊥
+unifierFleetSpectralLabelDoesNotIdentifyTheoremOwner =
+  FleetGapTOE.fleetSpectralLabelDoesNotIdentifyTheoremOwner

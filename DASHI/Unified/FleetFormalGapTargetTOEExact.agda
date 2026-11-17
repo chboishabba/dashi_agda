@@ -13,7 +13,6 @@ import DASHI.Interop.PNFResidualFieldInvariants as Residual
 import DASHI.Planning.PlanningPNFClaimBoundaryExact as Planning
 import DASHI.Promotion.ObligationIndex as Obligation
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowball
-import DASHI.Core.BoundAcquisitionDemandExact as Bound
 import DASHI.Unified.BalabanRGTOERegression as BalabanRG
 import DASHI.Physics.Closure.NSABCDConcentratedCompletionCutExact as NS
 import DASHI.Quantum.QuantumMereologyExact as QM
@@ -216,31 +215,36 @@ fleetPlanningTextDoesNotCreateFormalResidual =
 
 ------------------------------------------------------------------------
 -- Exact non-promotion gates for the external fleet selection.
+--
+-- These are facts about the canonical receipt fields. They are not vacuous
+-- empty-type eliminators and they do not convert external planning data into
+-- theorem authority.
 ------------------------------------------------------------------------
 
-data FleetEigenPriorityCreatesProof : Set where
-
 fleetEigenPriorityDoesNotCreateProof :
-  FleetEigenPriorityCreatesProof → ⊥
-fleetEigenPriorityDoesNotCreateProof ()
-
-data FleetExternalCountCreatesFormalDischarge : Set where
+  eigenvalueMagnitudeCreatesProofAuthority canonicalFleetFormalGapTargetReceipt
+  ≡ false
+fleetEigenPriorityDoesNotCreateProof = refl
 
 fleetExternalCountDoesNotCreateFormalDischarge :
-  FleetExternalCountCreatesFormalDischarge → ⊥
-fleetExternalCountDoesNotCreateFormalDischarge ()
+  externalCountCreatesFormalProof canonicalFleetFormalGapTargetReceipt
+  ≡ false
+fleetExternalCountDoesNotCreateFormalDischarge = refl
 
-data FleetDischargedFibreRetargetPermission : Set where
+fleetDischargedFibresRemainOutOfTarget :
+  dischargedFibresRemainDischarged canonicalFleetFormalGapTargetReceipt
+  ≡ true
+fleetDischargedFibresRemainOutOfTarget = refl
 
-fleetDischargedFibresCannotBeRetargetedByThisBoundary :
-  FleetDischargedFibreRetargetPermission → ⊥
-fleetDischargedFibresCannotBeRetargetedByThisBoundary ()
+fleetContradictionGapsRemainSeparate :
+  contradictionGapsRemainSeparate canonicalFleetFormalGapTargetReceipt
+  ≡ true
+fleetContradictionGapsRemainSeparate = refl
 
-data FleetContradictionGapReclassificationPermission : Set where
-
-fleetContradictionsCannotBeRelabelledAsFormalGaps :
-  FleetContradictionGapReclassificationPermission → ⊥
-fleetContradictionsCannotBeRelabelledAsFormalGaps ()
+fleetExternalPlanningTextDoesNotCreateFormalResidual :
+  externalPlanningTextCreatesFormalResidual canonicalFleetFormalGapTargetReceipt
+  ≡ false
+fleetExternalPlanningTextDoesNotCreateFormalResidual = refl
 
 ------------------------------------------------------------------------
 -- Reuse the existing O/R/C/S/L/P/G/F process carrier.
@@ -326,108 +330,3 @@ fleetTextFallbackAuthorityStillFalse :
   Rebuild.textFallbackIsCoordinateAuthority ≡ false
 fleetTextFallbackAuthorityStillFalse =
   Rebuild.textFallbackCoordinateAuthorityFalse
-
-------------------------------------------------------------------------
--- Named Fleet-gap manifest acquisition boundary.
---
--- The external receipt gives the count 58. It does not give 58 named rows.
--- Per-gap search and dispatch stay blocked until that artifact is acquired.
--- This section reuses the generic acquisition carrier. It creates no gap row.
-------------------------------------------------------------------------
-
-data FleetManifestRequirement : Set where
-  namedFormalGapManifest : FleetManifestRequirement
-
-data FleetManifestResidual : Set where
-  unnamedFormalGapIdentities : FleetManifestResidual
-
-data FleetManifestProducer : Set where
-  externalFleetSourceStore : FleetManifestProducer
-
-data FleetManifestAcquisition : Set where
-  acquireNamedFormalGapManifest : FleetManifestAcquisition
-
-fleetManifestAlignment :
-  Bound.AcquisitionAlignment
-    FleetManifestRequirement
-    FleetManifestResidual
-    FleetManifestProducer
-    FleetManifestAcquisition
-fleetManifestAlignment =
-  Bound.acquisition-alignment
-    (λ _ → unnamedFormalGapIdentities)
-    (λ _ → externalFleetSourceStore)
-    (λ _ → unnamedFormalGapIdentities)
-    (λ _ → externalFleetSourceStore)
-
-fleetManifestAcquisitionDemand :
-  Bound.BoundAcquisitionDemand
-    fleetManifestAlignment
-    namedFormalGapManifest
-    unnamedFormalGapIdentities
-fleetManifestAcquisitionDemand =
-  Bound.bound-acquisition-demand
-    acquireNamedFormalGapManifest
-    refl
-    refl
-    refl
-
-namedFormalGapManifestAcquired : Bool
-namedFormalGapManifestAcquired = false
-
-namedFormalGapManifestAcquiredIsFalse :
-  namedFormalGapManifestAcquired ≡ false
-namedFormalGapManifestAcquiredIsFalse = refl
-
-perGapDispatchEnabled : Bool
-perGapDispatchEnabled = false
-
-perGapDispatchEnabledIsFalse :
-  perGapDispatchEnabled ≡ false
-perGapDispatchEnabledIsFalse = refl
-
-fleetRelatedSymbolsRequired : Bool
-fleetRelatedSymbolsRequired = true
-
-fleetRelatedSymbolsRequiredIsTrue :
-  fleetRelatedSymbolsRequired ≡ true
-fleetRelatedSymbolsRequiredIsTrue = refl
-
-fleetDiscoverRequired : Bool
-fleetDiscoverRequired = true
-
-fleetDiscoverRequiredIsTrue :
-  fleetDiscoverRequired ≡ true
-fleetDiscoverRequiredIsTrue = refl
-
-fleetRoundLineageRequired : Bool
-fleetRoundLineageRequired = true
-
-fleetRoundLineageRequiredIsTrue :
-  fleetRoundLineageRequired ≡ true
-fleetRoundLineageRequiredIsTrue = refl
-
-CountCreatesNamedManifest : Set
-CountCreatesNamedManifest =
-  Bound.BoundDemandAutomaticallyPaysRequirement
-
-fleetCountDoesNotCreateNamedManifest :
-  CountCreatesNamedManifest → ⊥
-fleetCountDoesNotCreateNamedManifest =
-  Bound.bindingDoesNotPayRequirement
-
-fleetManifestAcquisitionDoesNotCloseConsumer :
-  Bound.BoundDemandAutomaticallyClosesConsumer → ⊥
-fleetManifestAcquisitionDoesNotCloseConsumer =
-  Bound.bindingDoesNotCloseConsumer
-
-fleetManifestProducerDoesNotIdentifyResidual :
-  Bound.SameProducerIdentifiesResidual → ⊥
-fleetManifestProducerDoesNotIdentifyResidual =
-  Bound.producerIdentityDoesNotIdentifyResidual
-
-fleetManifestSearchPriorityDoesNotCreateProof :
-  ParetoSnowball.SearchPriorityCreatesProof → ⊥
-fleetManifestSearchPriorityDoesNotCreateProof =
-  ParetoSnowball.searchPriorityDoesNotCreateProof
-
