@@ -1681,3 +1681,61 @@ multivariate order/Cauchy proof, completed actual SU2 Haar
 bilateral invariance, pinned original SU(N) carrier mapping,
 original Wilson finite product and selected physical RG transfer.
 No pinned Agda kernel acceptance is claimed.
+
+
+### 2026-11-17 continuation: closed 24-cell original finite Wilson/RG
+
+NEW SOURCE FINDING: The rational 24-cell one-link degree-five
+cubature is closed under actual quaternion multiplication and
+conjugation. It is the 24-element binary tetrahedral subgroup.
+The constructed exact 24x24 multiplication table verifies
+closure, identity, inverses, and all 24^3=13824 associativity
+instances. Every left and right translation permutes the 24
+nodes, giving exact uniform bi-invariance on this finite subgroup.
+
+New Agda candidate:
+DASHI/Physics/YangMills/YMClayOriginalRationalWilsonTaylor2PositiveExact.agda.
+Uses prior original rational square positivity, rational ring
+identities and strict rational products to derive, without a
+positive-density assumption,
+
+   T2(S) = 1-S+S²/2 = (1+(1-S)²)/2 > 0
+
+for ANY rational action S. It deliberately makes no --safe
+transitive claim, since the original positivity imports are non-safe.
+
+New exact original Wilson finite RG checker:
+scripts/check_ym_original_L1_24cell_group_rg_20261117.py.
+It builds the true original L=1 4-link/6-positive-plane
+quaternion commutator action on all 24^4=331776 fine states.
+At beta=1/96 it assigns strictly positive rational quadratic
+Taylor Gibbs weights and pushes them forward through the
+ACTUAL noncommutative block B(U)=U0*U1. The coarse image is
+exactly the same 24-element rational SU2 subgroup, with 24^3
+fine configurations per coarse state. All coarse masses are
+strictly positive and normalized; direct and blocked weighted
+expectations are exactly equal. It recovers
+  H(D)=9/2; H(D²)=187/8;
+  Z_(L1,T2)=140731/147456;
+  E_(T2)(Re(U0 U1))=0.
+Exact quotient checks total 346302, including the complete
+degree-five Pochhammer monomial basis and 24^3 associativity
+tests. All arithmetic is rational; no Monte Carlo, pi or sqrt.
+
+This is a real finite original-source noncommutative RG
+PUSHFORWARD of a positive polynomial Gibbs measure. It is
+NOT the full exponential Wilson measure, the continuous
+SU2 Haar, the original Agda RG-record instantiation or a
+continuum/Clay result. The finite 24-cell integrates linkwise
+polynomial observables through degree five, but does not
+provide exactness for all analytic observables.
+
+Next kernel cut: construct the literal original RationalUnitQuaternion
+24x24 Cayley table and full finite carrier, instantiate the
+EXISTING BalabanFiniteProbabilityPartitionDisintegrationExact
+and YMClayFiniteRGExistingPushPullReopeningWeldExact owners
+with its positive T2 fine weights and block projection,
+and prove consistency with the actual Bishop/continuous Haar
+polynomial limit and original SUN matrix-carrier identity.
+All-degree Bishop, full exponential and RG source welds OPEN.
+Agda/Nix are unavailable here, so no kernel acceptance is claimed.
