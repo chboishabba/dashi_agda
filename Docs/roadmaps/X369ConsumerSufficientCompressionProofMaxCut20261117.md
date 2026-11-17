@@ -1447,3 +1447,54 @@ identities were also checked locally.
 The complete committed script's direct
 execution is not independently
 recorded in this environment.
+
+
+## 17 Nov follow-on: correlated R4 pairwise error max-cut (source score, no run gate)
+
+See detailed standalone owner:
+`Docs/roadmaps/X369R4RelativeErrorMaxCut20261117.md`.
+New SymPy-only source checks:
+`scripts/check_x369_r4_relative_certificate_sympy.py`,
+`scripts/check_x369_r4_pairwise_sympy.py`,
+`scripts/check_x369_r4_alltriad_pairwise_sympy.py`.
+
+**Now source-written and locally independently exercised:**
+
+- Exact shared activation / directed-head / C2-history
+  pairwise error formula. For original learned head
+  `u=K_w phase(x)`, the *shared* quantizer
+  perturbation contributes `Delta u·(h_i-h_j)`,
+  not independent `Delta u·h_i` and
+  `Delta u·h_j` terms.
+- Direct strict score-difference margin tests
+  preserve TopK membership and ordered slots.
+- Sharper one-sided q gate interval using correlated
+  source sample mean, with exact tie refusal.
+- Selected softmax error controlled by half
+  the maximal certified selected-pair score
+  difference error, not the full absolute
+  per-expert logit uncertainty. This correctly
+  quotients the shared unary R4 direction.
+- Original two-triad, E=4 coherent/mixed source
+  fixtures both pass rational pairwise intervals
+  and conditional selected output-mixture bounds;
+  no hardware data are inferred.
+- A nonautonomous recurrence coefficient identity
+  is checked symbolically. Actual checkpoint
+  spectral norms and guard admission across a
+  full source trace remain OPEN.
+
+The coherent first-triad selected-pair interval
+tightens by 28.1% relative to independent-logit
+error addition in the same admitted rational
+precision fixture. This improvement belongs to
+the proven error budget, not a measured decrease
+in hardware quantisation error.
+
+**Remaining high-alpha:** actual source precision
+and evaluation receipts; maintain per-step TopK/
+q/orientation strict guards; authoritative inactive
+history reactivation and typed semantic consumers;
+original performance and runtime calibration.
+CI and kernel acceptance are explicitly deferred
+by user instruction, not silently marked passed.
