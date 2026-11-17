@@ -263,4 +263,29 @@ check("source affine history chart jump follows output residual",
 check("FFN output bias spoils sign flip quadratic smallness",
       S.simplify((Fp+Fm).subs({m:0,b2:1})-2)==0)
 
+# Guarded error transport DIFFERENT from the old F07 global
+# ErrorLayer.lipBound: an orientation chart jump contributes an additive
+# eta_chart on that step. It is sound only when a source local one-step
+# inequality has itself been proved/admitted on the current route region.
+# All-N closed product/sum is proved symbolically here for n=1..6.
+D_initial=S.symbols("D_initial",nonnegative=True)
+for steps in range(1,7):
+    Ls=S.symbols("L0:"+str(steps),nonnegative=True)
+    eta_base=S.symbols("eta_base0:"+str(steps),nonnegative=True)
+    J=S.symbols("J_chart0:"+str(steps),nonnegative=True)
+    flags=S.symbols("is_flip0:"+str(steps),nonnegative=True)
+    running=D_initial
+    for i in range(steps):
+        running=Ls[i]*running+eta_base[i]+flags[i]*J[i]
+    closed=D_initial*S.prod(Ls)+sum(
+        (eta_base[i]+flags[i]*J[i])
+        *S.prod(Ls[i+1:]) for i in range(steps))
+    check("chart-guarded finite recurrence n="+str(steps),
+          S.expand(running-closed)==0)
+# The F07 linear Lipschitz premise cannot be inferred from
+# |F_+(z)-F_-(z)|<=J alone: nonzero learned output bias yields
+# a fixed chart jump even as the input distance approaches zero.
+check("local bounded chart residual is not a global Lipschitz law",
+      S.simplify((Fp+Fm).subs({m:0,b2:1}))==2)
+
 print("X369_GELU_PARITY_HISTORY_SYMPY_PASS",len(checks),"checks")
