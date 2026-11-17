@@ -160,6 +160,12 @@ def audit(manifest,root):
             historical_counts[event['station']] += 1
             historical_products[(event['station'], event['variable'])] += 1
     historical = dict(sorted(historical_counts.items()))
+    # Positive-control fingerprint, sourced to Lloyd's original published report.
+    # It only passes if actual input events contain the reported added reading.
+    sydney_1865 = [e for e in events if e['station'] == '066062' and
+                   e['date'] == '1865-06-25' and e['variable'] == 'tmax' and
+                   e['kind'] in ('value_added','calendar_row_added') and
+                   e['after'] is not None and e['after'][0] == '0.0']
     return {'schema':'dashi.bom.cdo.native_revision_result.v1',
             'before_receipts':old,'after_receipts':new,
             'before_rows':len(before),'after_rows':len(after),
@@ -180,6 +186,7 @@ def audit(manifest,root):
                                    and historical.get('066062')==515
                                    and sum(v for s,v in historical.items()
                                            if s in ('044022','044021'))==56,
+            'sydney_1865_06_25_zero_max_added_numeric_fingerprint':bool(sydney_1865),
             'original_archive_coverage_verified':False,
             'author_target_counts_independently_reproduced':False,
             'source_identification':'BOM CDO-formatted rows with matching SHA256; publisher identity requires independent provenance',
