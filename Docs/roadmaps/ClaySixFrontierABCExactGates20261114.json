@@ -5766,8 +5766,8 @@
       "F3"
     ],
     "expanded_portfolio_gate_total": 28,
-    "expanded_portfolio_decisions_settled": 13,
-    "expanded_portfolio_active_gates": 15,
+    "expanded_portfolio_decisions_settled": 14,
+    "expanded_portfolio_active_gates": 14,
     "expanded_portfolio_scope_warning": "6/28 is count of heterogeneous source/mathematical decisions and open research obligations, not percent of mathematical endpoint completion. One settled B1 gate is refutation of a universal proposed auxiliary.",
     "new_RH_BSD_HODGE_gate_ids": [
       "R1",
@@ -6313,9 +6313,9 @@
         "original_owner_paths": [
           "DASHI/Mathematics/Arithmetic/BirchSwinnertonDyerBoundary.agda"
         ],
-        "status": "OPEN",
-        "settled": false,
-        "classification": "ORIGINAL_UNPAID_ANALYTIC_OR_GEOMETRIC_PRODUCER",
+        "status": "CLOSED_CLASSICAL_ORIGINAL_SELECTED_E32_STRONG_BSD_RUBIN_CM_SHA_TRIVIAL",
+        "settled": true,
+        "classification": "CLASSICAL_SELECTED_CURVE_RUBIN_CM_ODD_PRIMARY_PLUS_ACTUAL_S3_SHA_TWO_ZERO",
         "mathematical_deliverable": "Actual all-prime Sha cardinality, selected period/regulator/torsion/Tamagawa, original leading coefficient identity for y²=x³−x",
         "acceptance_criteria": "Strong selected-curve identity; do not infer full Sha from Sha[2]=0 nor use fabricated period normalization",
         "depends_on": [
@@ -6325,7 +6325,29 @@
         ],
         "native_kernel_acceptance": false,
         "original_endpoint_proved": false,
-        "sources_inspected_at_branch": true
+        "sources_inspected_at_branch": true,
+        "closure_kind": "MATHEMATICAL_CLASSICAL_RUBIN_CM_BSD_II_PLUS_S3_GENUINE_TWO_DESCENT",
+        "closure_protocol": "USER_AUTHORIZED_CLASSICAL_MATHEMATICS_WITH_PYTHON_SYMPY_TESTS_NO_AGDA",
+        "original_curve": "E:y^2=x^3-x; LMFDB 32.a3; Cremona 32a2",
+        "mathematical_selected_odd_primary_sha_vanishes": true,
+        "mathematical_selected_full_sha_trivial": true,
+        "mathematical_selected_strong_bsd_formula": true,
+        "mathematical_selected_analytic_and_algebraic_rank_zero": true,
+        "actual_period_identity": "Omega_E=8*L(E,1)",
+        "actual_torsion_order": 4,
+        "actual_tamagawa_product": 2,
+        "actual_regulator": 1,
+        "actual_sha_order": 1,
+        "external_classical_input": "Karl Rubin CM elliptic curve rank-zero BSD II away from primes dividing #O_K^*=4; Rubin January 18 2006 exact original curve worked example; original S3 genuine Sha[2]=0",
+        "external_primary_references": [
+          "https://www.math.uci.edu/~krubin/lectures/msri2.pdf",
+          "https://www.lmfdb.org/EllipticCurve/Q/32/a/3"
+        ],
+        "native_original_shafarevich_realization_typechecked": false,
+        "native_selected_period_identification_typechecked": false,
+        "source_document": "Docs/roadmaps/ClayBSDOriginalS5StrongBSDRubinClassicalClosure20261117.md",
+        "executed_script": "scripts/check_bsd_s5_selected_curve_rubin_20261117.py",
+        "analysis_note": "CLASSICAL strong BSD for the exact selected conductor-32 curve is known by Rubin odd-primary BSD II and S3 original 2-Selmer Sha[2]=0. Not universal BSD and not native Agda/Lean. Earlier S4 snapshot booleans remain historical, not current S5 status."
       },
       {
         "id": "S6",
@@ -6625,6 +6647,7 @@
       "S2",
       "S3",
       "S4",
+      "S5",
       "H1",
       "H2"
     ],
@@ -6632,7 +6655,6 @@
       "R2",
       "R3",
       "R4",
-      "S5",
       "S6",
       "H3"
     ],
@@ -6648,6 +6670,7 @@
       "S2",
       "S3",
       "S4",
+      "S5",
       "H1",
       "H2"
     ],
@@ -6664,7 +6687,6 @@
       "R2",
       "R3",
       "R4",
-      "S5",
       "S6",
       "H3"
     ],
@@ -6790,6 +6812,23 @@
       "native_kernel_acceptance": false,
       "proof": "Docs/roadmaps/ClayRHR1ActualCompletedZetaWeilExplicitFormulaClassicalClosure20261116.md",
       "normalization_control": "scripts/check_clay_r1_weil_formula_normalization_20261116.py"
+    },
+    "current_round_20261117_BSD_S5_CLASSICAL_CLOSURE": {
+      "settled": true,
+      "selected_curve": "E:y^2=x^3-x; LMFDB 32.a3",
+      "classical_full_sha_trivial": true,
+      "classical_rank_zero_strong_bsd": true,
+      "original_s3_sha_two_zero_required": true,
+      "imported_rubin_cm_odd_prime_theorem": true,
+      "period_identity": "Omega=8L",
+      "tamagawa_product": 2,
+      "torsion_order": 4,
+      "regulator": 1,
+      "all_prime_sha_order": 1,
+      "native_kernel_typechecked": false,
+      "universal_BSD_proved": false,
+      "doc": "Docs/roadmaps/ClayBSDOriginalS5StrongBSDRubinClassicalClosure20261117.md",
+      "script": "scripts/check_bsd_s5_selected_curve_rubin_20261117.py"
     }
   }
 }
