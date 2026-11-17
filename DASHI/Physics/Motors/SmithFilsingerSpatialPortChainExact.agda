@@ -169,6 +169,62 @@ spatialChainWorkBalance {first} {last}
     (SpatialCell.localWork cell)
     (spatialChainWorkBalance rest)
 
+-- The useful load cannot exceed all admitted driving and initial
+-- stored work at the incoming boundary. This uses the SAME all-N chain
+-- and the existing finite Nat order owner.
+outputReorder : (outgoing load loss final : Nat) →
+  outgoing + (load + (loss + final))
+    ≡ load + (outgoing + (loss + final))
+outputReorder a b c d =
+  solve 4
+    (λ a b c d →
+      a :+ (b :+ (c :+ d))
+        := b :+ (a :+ (c :+ d)))
+    refl a b c d
+
+spatialLoadBoundedByAdmittedInputs :
+  ∀ {first last} (chain : SpatialChain first last) →
+  Bound._≤_ (sumUsefulLoad chain)
+    (first + (sumDrive chain + sumInitialStorage chain))
+spatialLoadBoundedByAdmittedInputs {last = last} chain =
+  Bound.transportUpper (sym (spatialChainWorkBalance chain))
+    (Bound.transportUpper
+      (sym (outputReorder last (sumUsefulLoad chain)
+        (sumDissipation chain) (sumFinalStorage chain)))
+      (Bound.≤-append (sumUsefulLoad chain)
+        (last + (sumDissipation chain + sumFinalStorage chain))))
+
+onlyZeroCanBeBelowZero :
+  ∀ {n : Nat} → Bound._≤_ n zero → n ≡ zero
+onlyZeroCanBeBelowZero Bound.z≤n = refl
+
+-- Source-off negative control for ANY chain size; outgoing work,
+-- useful work and losses cannot arise from zero initial storage and
+-- zero controller/source inputs.
+sourceFreeSpatialChainHasZeroLoad :
+  ∀ {last} (chain : SpatialChain 0 last) →
+  sumDrive chain ≡ 0 →
+  sumInitialStorage chain ≡ 0 →
+  sumUsefulLoad chain ≡ 0
+sourceFreeSpatialChainHasZeroLoad chain noDriver noStorage
+  rewrite noDriver | noStorage =
+  onlyZeroCanBeBelowZero (spatialLoadBoundedByAdmittedInputs chain)
+
+-- Nonvacuous two-cell constructor with a shared internal port of 8.
+-- First cell: 10 + (1+2) = 8 + (2+(1+2)).
+-- Second cell: 8 + (0+1) = 6 + (1+(1+1)).
+exampleTwoCellChain : SpatialChain 10 6
+exampleTwoCellChain =
+  thenCell (spatialCell 1 2 2 1 2 refl)
+    (thenCell (spatialCell 0 1 1 1 1 refl)
+      (empty 6))
+
+exampleTwoCellConserves :
+  10 + (sumDrive exampleTwoCellChain + sumInitialStorage exampleTwoCellChain)
+    ≡ 6 + (sumUsefulLoad exampleTwoCellChain
+      + (sumDissipation exampleTwoCellChain + sumFinalStorage exampleTwoCellChain))
+exampleTwoCellConserves = spatialChainWorkBalance exampleTwoCellChain
+
 -- An original-world environmental-work claim cannot be obtained by
 -- relabelling the 'first' boundary Nat as solar energy.
 record PhysicalSpatialAccessAdmission
