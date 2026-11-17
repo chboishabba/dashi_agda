@@ -1,0 +1,13 @@
+{
+  "schema": "DASHI.V2.Omega.load-intervention-acceptance.v1",
+  "local_selected_pytest": {
+    "new": 41,
+    "prior_selected": 201,
+    "total": 242,
+    "passed": 242
+  },
+  "agda": "NOT RUN",
+  "github_ci": "NOT RUN",
+  "physical_V2": "NOT VERIFIED",
+  "scope": "same local reconstructed source as earlier tests, includes all selected modules, excludes legacy PWM donor"
+}
