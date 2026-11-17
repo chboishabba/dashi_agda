@@ -349,3 +349,65 @@ Thus the axisymmetric yy `l=0,2,4` information alone cannot specify the full ten
 - G6: same matter, retarded FIO and calibrated detector OPEN.
 
 Original KSW/Thorne/Caldwell--Langlois source attribution and user-directed research programme preserved. No ESD edit, no unrelated Monster/369 geometric equivalence, no physical detector claim.
+
+
+## Maximum-cut XXXIV (2026-11-17) — complete original Fourier tensor atlas and exact rational axial angular projection
+
+**Priority:** reuse the original fourth-order KSW F8 Fourier-space TT generator `T=PQP-P tr(PQ)/2` and existing `KSW668AdS5TTMultipoleAngularRationalExact.agda`, rather than infer geometry from receiver data. This does not alter the original F8 solver, ESD or other owners.
+
+### G1 original full 3×3 tensor solid-spherical-harmonic atlas
+
+For longitudinal Fourier coordinate `x=kx`, transverse `y=ky, z=kz`, `K=x²+y²+z²`, six polynomial component identities expand the **complete** original TT tensor on real (Condon–Shortley) solid harmonics `H_lm^(cos/sin)` of homogeneous degree four. The modes present are:
+```
+Txx : (ell,m)=(2,2)c,(4,2)c
+Txy : (2,1)c,(4,1)c,(4,3)c
+Txz : (2,1)s,(4,1)s,(4,3)s
+Tyy : (0,0),(2,0),(4,0),(2,2)c,(4,2)c,(4,4)c
+Tyz : (4,4)s
+Tzz : (0,0),(2,0),(4,0),(2,2)c,(4,2)c,(4,4)c
+```
+(There are no odd ell sectors, but there ARE odd azimuth m=1,3 sectors in the off-diagonal tensor components.)
+
+Using `K P_l^m` for l=2 and `P_l^m` for l=4, the exact coefficients in `KSW668F8FullTensorSolidHarmonicAtlasExact.agda` are:
+```
+Txx = (4/21) H22c +(1/105) H42c
+Txy = (2/7) H21c +(1/70) H41c -(1/420) H43c
+Txz = -(2/7) H21s -(1/70) H41s -(1/420) H43s
+Tyy = (2/5) H00 +(4/7) H20 +(1/35) H40
+      -(2/21) H22c -(1/210) H42c +(1/840) H44c
+Tyz = (1/840) H44s
+Tzz = -(2/5) H00 -(4/7) H20 -(1/35) H40
+      -(2/21) H22c -(1/210) H42c -(1/840) H44c.
+```
+Six exact SymPy polynomial residuals vanish identically; original trace and all three divergence constraints also checked. **These are Fourier tensor identities, not a rebuilt real-space 3×3 tensor evolution or the Agda-pinned source-to-Weyl theorem.**
+
+### New exact *finite* rational projector for the original axial receiver
+
+Construct a 12-node positive-weight rational circle cubature:
+
+- Four cardinal nodes `(±1,0),(0,±1)` with weight `527/4608` **each**
+- Eight nodes `(±3/5,±4/5),(±4/5,±3/5)` with weight `625/9216` **each**
+
+The weights are positive and sum to one. Direct exact rational evaluation reproduces all 15 uniform-circle monomial moments `y^i z^j` for `i+j<=4`. In particular `<y²>=<z²>=1/2`, `<y⁴>=<z⁴>=3/8`, `<y²z²>=1/8`, and odd moments vanish.
+
+For ANY rational longitudinal `x` and transverse radius `rho`, applying this angular projector to all six original tensor components `T(x,rho y,rho z)` gives exactly
+```
+Proj_angular T = diag(0, A(x,rho), -A(x,rho)),
+A(x,rho)=[(x²+rho²)²+6(x²+rho²)x²+x⁴]/8.
+```
+At `x²+rho²=1`, `A=(x⁴+6x²+1)/8`, exactly the original F8 `yy` P0/P2/P4 angular source polynomial. The original receiver lies on the x axis and the Fourier factor `exp(i kx receiver_x)` is independent of azimuth, so the projector is exact on the fourth-order tensor multiplier **at each Fourier momentum for this axial geometry**. It is not an exact cubature for generic off-axis wave factors or full inverse Fourier transforms without integrability/commutation arguments.
+
+**Adversarial 4-node control:** averaging only the four cardinal directions aliases the `m=4` original `yy` tensor contribution and yields `A(x,rho)+rho⁴/8`, a nonzero defect for `rho≠0`. This is a concrete reason not to use coarse azimuth sampling in any future tensor-to-FV adapter.
+
+New Agda rational source owner `KSW668F8RationalAxialTTCubatureExact.agda` states exact finite angular moments, all six projected tensor components and the four-cardinal alias identity. New independent SymPy scripts `test_ksw668_f8_full_tensor_solid_harmonic_atlas.py` and `test_ksw668_f8_rational_axial_tt_cubature.py` check all six atlas identities and **21/21** cubature tensor/moment checks. This cut creates no new physical run and no source reconstruction of the full real-space tensor.
+
+### Refined G1–G6 cut-set (Pareto)
+
+- **G1 Fourier angular subgate:** full six-component angular atlas and constructive rational axial projector source-written and independently symbolically verified. **Next G1 physical operator weld:** original radial inverse-transform/projection to exact conservative d=3,7,11 source and finite-volume solver, including axis/origin stencil and P/M/U moving SAT; prove a discrete tensor divergence/trace defect bound or compatible commuting diagram. General 3×3 tensor energy remains OPEN.
+- **G2:** use original SAT Neumann and PDE residual equations to control a pointwise *tensor* electric-Weyl/SMS discrepancy, not just an integrated scalar wall norm; joint energy OPEN.
+- **G3:** fully coupled moving warp/FV/SBP2 SAT SSPRK3 stability and admissible CFL OPEN.
+- **G4:** uniform moving-domain Sobolev source-to-two-Weyl receiver trace OPEN.
+- **G5:** independent dr/dy/dt receiver and outside-cone convergence certificates OPEN.
+- **G6:** original matter action, retarded tensor FIO, physical detector and independent replenishment/evidence OPEN.
+
+**Acceptance/provenance:** exact SymPy polynomial and rational finite cubature checks PASS; pinned Agda kernel NOT RUN. User-directed maximum-cut continuation and original mathematical derivations separated from original DASHI/Caldwell–Langlois/Thorne prior art. No ESD modifications; no Monster/369 physical equivalence; no detected graviton claim.
