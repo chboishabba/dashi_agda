@@ -1,4 +1,7 @@
 module DASHI.EverythingTOESymmetryResolved369 where
+-- KeyShoe / CLARA R13 source-typed downstream research; no Monster or physical promotion.
+import DASHI.Wikimedia.KeyShoeCLARACrossProgrammeEverything
+
 import DASHI.Unified.AdelicSpectralPaperTOEExact as AdelicSpectralTOE
 
 -- September 2026 source-typed finite spectral closure and fail-closed gates.
