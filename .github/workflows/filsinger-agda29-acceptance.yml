@@ -41,6 +41,20 @@ jobs:
           extra_nix_config: |
             experimental-features = nix-command flakes
             accept-flake-config = false
+      - name: Pin Agda experimental standard library to exact upstream commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          REF=008f12c2908479567a3ae3c873f9cf0b8fe5987e
+          mkdir -p pinned-agda-stdlib
+          git -C pinned-agda-stdlib init --quiet
+          git -C pinned-agda-stdlib remote add origin https://github.com/agda/agda-stdlib.git
+          git -C pinned-agda-stdlib fetch --depth=1 origin "$REF"
+          git -C pinned-agda-stdlib checkout --quiet FETCH_HEAD
+          test "$(git -C pinned-agda-stdlib rev-parse HEAD)" = "$REF"
+          test -d pinned-agda-stdlib/src
+          printf 'agda-stdlib %s\n' "$REF" | tee agda29-stdlib.txt
+          echo "AGDA_STDLIB_SRC_29=$GITHUB_WORKSPACE/pinned-agda-stdlib/src" >> "$GITHUB_ENV"
       - name: Resolve exact repository-pinned Agda derivation
         shell: bash
         run: |
@@ -56,7 +70,6 @@ jobs:
         env:
           DASHI_NO_TMUX: "1"
           AGDA_FLAKE: ".#agda29-parallel"
-          AGDA_STDLIB_REF: "experimental"
           AGDA_LOG_PATH: "${{ github.workspace }}/filsinger-agda29.log"
           AGDA_JOBS: "2"
           DASHI_AGDA_RSS_LIMIT_MB: "8192"
@@ -70,5 +83,6 @@ jobs:
           name: filsinger-agda29-kernel-receipt
           path: |
             agda29-version.txt
+            agda29-stdlib.txt
             filsinger-agda29*.log
           if-no-files-found: warn
