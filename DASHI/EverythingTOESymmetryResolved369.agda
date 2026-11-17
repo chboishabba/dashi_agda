@@ -813,84 +813,115 @@ toe369ExpertProductionPromotesAnyAuthorityIsFalse =
 -- Direct legal execution and expert-evidence non-promotion aliases.
 ------------------------------------------------------------------------
 
-toeBalabanScaleTransferFrontier :
-  ParetoSnowballTOE.BalabanScaleTransferFrontierReceipt
-toeBalabanScaleTransferFrontier =
-  ParetoSnowballTOE.balabanScaleTransferFrontier
+toe369SpacyDoesNotCreateLegalAuthority :
+  LegalGovernance.SpacyParserAutomaticallyLegalAuthority → ⊥
+toe369SpacyDoesNotCreateLegalAuthority =
+  LegalGovernance.toeSpacyDoesNotCreateLegalAuthority
 
-toeIbrahimRoutePreferenceDoesNotCreateExecutionReceipt :
-  ParetoSnowballTOE.RoutePreferenceCreatesExecutionReceipt → ⊥
-toeIbrahimRoutePreferenceDoesNotCreateExecutionReceipt =
-  ParetoSnowballTOE.routePreferenceDoesNotCreateExecutionReceipt
+toe369SpacyDoesNotCreateLegalConstruction :
+  LegalGovernance.SpacyParserAutomaticallyLegalConstruction → ⊥
+toe369SpacyDoesNotCreateLegalConstruction =
+  LegalGovernance.toeSpacyDoesNotCreateLegalConstruction
 
-toeIbrahimMergedLeanSourceDoesNotCreateKernelReceipt :
-  ParetoSnowballTOE.MergedLeanSourceCreatesKernelReceipt → ⊥
-toeIbrahimMergedLeanSourceDoesNotCreateKernelReceipt =
-  ParetoSnowballTOE.mergedLeanSourceDoesNotCreateKernelReceipt
+toe369LatestKnownSectionDoesNotBecomeHistoricalLaw :
+  LegalGovernance.SectionSliceAutomaticallyHistoricalLaw → ⊥
+toe369LatestKnownSectionDoesNotBecomeHistoricalLaw =
+  LegalGovernance.toeLatestKnownSectionDoesNotBecomeHistoricalLaw
 
-toeIbrahimOEISDoesNotCreateMultiplicityAction :
-  ParetoSnowballTOE.NinetyOEISEqualityCreatesMultiplicityAction → ⊥
-toeIbrahimOEISDoesNotCreateMultiplicityAction =
-  ParetoSnowballTOE.oeisDoesNotCreateMultiplicityAction
+toe369PythonWrapperDoesNotOwnLegalSemantics :
+  LegalGovernance.PythonWrapperOwnsLegalSemantics → ⊥
+toe369PythonWrapperDoesNotOwnLegalSemantics =
+  LegalGovernance.toePythonWrapperDoesNotOwnLegalSemantics
 
-toeIbrahimFiniteIrreducibilityDoesNotCreateMonsterHZetaRecognition :
-  ParetoSnowballTOE.FiniteIrreducibilityCreatesMonsterHZetaRecognition → ⊥
-toeIbrahimFiniteIrreducibilityDoesNotCreateMonsterHZetaRecognition =
-  ParetoSnowballTOE.finiteIrreducibilityDoesNotCreateMonsterHZetaRecognition
+toe369JsonIsNotSemanticCommandAbi :
+  LegalGovernance.JsonArtifactIsSemanticCommandAbi → ⊥
+toe369JsonIsNotSemanticCommandAbi =
+  LegalGovernance.toeJsonIsNotSemanticCommandAbi
 
-toeIbrahimCurrentQidDoesNotIdentifyHistoricalTitle :
-  ParetoSnowballTOE.CurrentQidIdentifiesHistoricalTitle → ⊥
-toeIbrahimCurrentQidDoesNotIdentifyHistoricalTitle =
-  ParetoSnowballTOE.currentQidDoesNotIdentifyHistoricalTitle
+toe369JsonReviewDoesNotCreateDecision :
+  LegalGovernance.JsonReviewFileAutomaticallyReviewerDecision → ⊥
+toe369JsonReviewDoesNotCreateDecision =
+  LegalGovernance.toeJsonReviewDoesNotCreateDecision
 
+toe369JsonReceiptDoesNotCreateTruth :
+  LegalGovernance.JsonReceiptAutomaticallyClaimTruth → ⊥
+toe369JsonReceiptDoesNotCreateTruth =
+  LegalGovernance.toeJsonReceiptDoesNotCreateTruth
 
-------------------------------------------------------------------------
--- 369 max-cut / kernel-BIDI / ternary-27 convergence.
-------------------------------------------------------------------------
+toe369CliSequenceDoesNotPayResidual :
+  LegalGovernance.CliSequenceAutomaticallyPaysOpenResidual → ⊥
+toe369CliSequenceDoesNotPayResidual =
+  LegalGovernance.toeCliSequenceDoesNotPayResidual
 
-toe369Ternary27RotationOrderThree =
-  MaxCut369.toe27RotationOrderThree
+toe369PinnedStreamDoesNotCreateLegalTruth :
+  LegalGovernance.PinnedOalcStreamingAutomaticallyLegalTruth → ⊥
+toe369PinnedStreamDoesNotCreateLegalTruth =
+  LegalGovernance.toePinnedStreamDoesNotCreateLegalTruth
 
-toe369Ternary27OriginFixed =
-  MaxCut369.toe27OriginFixed
+toe369ReviewedHopJsonDoesNotBecomeCanonicalSemanticTransport :
+  LegalGovernance.ReviewedHopJsonBecomesCanonicalSemanticTransport → ⊥
+toe369ReviewedHopJsonDoesNotBecomeCanonicalSemanticTransport =
+  LegalGovernance.toeReviewedHopJsonDoesNotBecomeCanonicalSemanticTransport
 
-toe369FullCubeRotationNotFree :
-  MaxCut369.FullCubeRotationFree → ⊥
-toe369FullCubeRotationNotFree =
-  MaxCut369.toe27FullCubeRotationNotFree
+toe369OalcHitDoesNotBecomeBindingAuthority :
+  LegalGovernance.OalcHitAutomaticallyBindingAuthority → ⊥
+toe369OalcHitDoesNotBecomeBindingAuthority =
+  LegalGovernance.toeOalcHitDoesNotBecomeBindingAuthority
 
-toe369MonsterPhaseConjugationIntertwiner =
-  MaxCut369.toe27MonsterPhaseConjugationIntertwiner
+toe369OfficialCourtBytesDoNotBecomePropositionCorrespondence :
+  LegalGovernance.OfficialCourtBytesAutomaticallyPropositionCorrespondence → ⊥
+toe369OfficialCourtBytesDoNotBecomePropositionCorrespondence =
+  LegalGovernance.toeOfficialCourtBytesDoNotBecomePropositionCorrespondence
 
-toe369Ternary27PhaseReductionNotGlobalInversion =
-  MaxCut369.toe27PhaseReductionNotGlobalInversion
+toe369SameMncDoesNotCollapseSourceRevisions :
+  LegalGovernance.SameMncAutomaticallySameSourceRevision → ⊥
+toe369SameMncDoesNotCollapseSourceRevisions =
+  LegalGovernance.toeSameMncDoesNotCollapseSourceRevisions
 
-toe369Ternary27OrbitIndexingNotSemanticIdentity =
-  MaxCut369.toe27OrbitIndexingNotSemanticIdentity
+toe369SuccessfulOfficialFetchDoesNotBecomeProductionReady :
+  LegalGovernance.SuccessfulOfficialFetchAutomaticallyProductionReady → ⊥
+toe369SuccessfulOfficialFetchDoesNotBecomeProductionReady =
+  LegalGovernance.toeSuccessfulOfficialFetchDoesNotBecomeProductionReady
 
-toe369Ternary27ReductionNotMonster42SameObject =
-  MaxCut369.toe27ReductionNotMonster42SameObject
+toe369MultipleReportsDoNotAutomaticallyCreateIndependence :
+  LegalGovernance.MultipleReportsAutomaticallyIndependent → ⊥
+toe369MultipleReportsDoNotAutomaticallyCreateIndependence =
+  LegalGovernance.toeMultipleReportsDoNotAutomaticallyCreateIndependence
 
-toe369FullGradeDimensionDoesNotCreateFaithfulness =
-  MaxCut369.toeFullGradeDimensionDoesNotCreateFaithfulness
+toe369AgreementDoesNotAutomaticallyCreateIndependentCorroboration :
+  LegalGovernance.AgreementAutomaticallyIndependentCorroboration → ⊥
+toe369AgreementDoesNotAutomaticallyCreateIndependentCorroboration =
+  LegalGovernance.toeAgreementDoesNotAutomaticallyCreateIndependentCorroboration
 
-toe369FullGradeSameCarrierDoesNotCreateActionAgreement =
-  MaxCut369.toeFullGradeSameCarrierDoesNotCreateActionAgreement
+toe369DependenceDoesNotMeanNoEvidence :
+  LegalGovernance.DependenceMeansNoEvidence → ⊥
+toe369DependenceDoesNotMeanNoEvidence =
+  LegalGovernance.toeDependenceDoesNotMeanNoEvidence
 
-toe369FullGradeCharacterDoesNotCreateActionAgreement =
-  MaxCut369.toeFullGradeCharacterDoesNotCreateActionAgreement
+toe369ExpertStatusDoesNotAutomaticallyCreateTruth :
+  LegalGovernance.ExpertStatusAutomaticallyTruth → ⊥
+toe369ExpertStatusDoesNotAutomaticallyCreateTruth =
+  LegalGovernance.toeExpertStatusDoesNotAutomaticallyCreateTruth
 
-toe369ProjectedDimensionDoesNotCreateAction =
-  MaxCut369.toeProjectedDimensionDoesNotCreateAction
+toe369ReportAdmissionDoesNotRepairMissingInput :
+  LegalGovernance.ReportAdmissionRepairsMissingInput → ⊥
+toe369ReportAdmissionDoesNotRepairMissingInput =
+  LegalGovernance.toeReportAdmissionDoesNotRepairMissingInput
 
-toe369CoordinateRetractionDoesNotCreateProjectedAction =
-  MaxCut369.toeCoordinateRetractionDoesNotCreateProjectedAction
+toe369CrossExaminationDoesNotAddUnobservedInput :
+  LegalGovernance.CrossExaminationAddsUnobservedInput → ⊥
+toe369CrossExaminationDoesNotAddUnobservedInput =
+  LegalGovernance.toeCrossExaminationDoesNotAddUnobservedInput
 
-toe369ProjectedCharacterDoesNotCreateAction =
-  MaxCut369.toeProjectedCharacterDoesNotCreateAction
+toe369DisputedRiskDoesNotBecomeIrrelevant :
+  LegalGovernance.DisputedRiskIsIrrelevant → ⊥
+toe369DisputedRiskDoesNotBecomeIrrelevant =
+  LegalGovernance.toeDisputedRiskDoesNotBecomeIrrelevant
 
-toe369KernelTrace53DoesNotIdentify3B =
-  MaxCut369.toeKernelTrace53DoesNotIdentify3B
+toe369ObserverDefectDoesNotProveOpinionFalse :
+  LegalGovernance.ObserverDefectMakesOpinionFalse → ⊥
+toe369ObserverDefectDoesNotProveOpinionFalse =
+  LegalGovernance.toeObserverDefectDoesNotProveOpinionFalse
 
 toe369QualificationDoesNotAutomaticallyProveForensicCompliance :
   LegalGovernance.QualificationAutomaticallyForensicCompliance → ⊥
@@ -899,6 +930,7 @@ toe369QualificationDoesNotAutomaticallyProveForensicCompliance =
 
 ------------------------------------------------------------------------
 -- Governed legal workflow / source-genealogy handoff.
+-- The handoff reuses the canonical legal-governance and PNF source owners.
 ------------------------------------------------------------------------
 
 import DASHI.Unified.GovernedLegalWorkflowSourceGenealogyTOEExact as LegalSourceGenealogy
@@ -910,24 +942,35 @@ toeGovernedLegalWorkflowSourceGenealogyHandoff =
 
 toeLegalPerceivedIndependenceDoesNotCreateProvenanceIndependence =
   LegalSourceGenealogy.toePerceivedIndependenceDoesNotCreateLegalProvenanceIndependence
+
 toeLegalRepetitionDoesNotCreateIndependentEvidence =
   LegalSourceGenealogy.toeRepetitionDoesNotCreateIndependentLegalEvidence
+
 toeLegalCommonSourceDoesNotEraseEvidence =
   LegalSourceGenealogy.toeCommonSourceDependenceDoesNotEraseLegalEvidence
+
 toeSourceMultiplicityDoesNotAdmitTruth =
   LegalSourceGenealogy.toeExternalSourceMultiplicityDoesNotAdmitTruth
+
 toeGenealogyDoesNotPromoteLegalAuthorityTruth =
   LegalSourceGenealogy.toeLegalAuthorityStillDoesNotCreateTruthAfterGenealogy
+
 toeReviewedGenealogyDoesNotPayApplicability =
   LegalSourceGenealogy.toeReviewedGenealogyDoesNotPayApplicability
+
 toeGenealogyAdmissionDoesNotBecomeLegalSourceAuthority =
   LegalSourceGenealogy.toeGenealogyAdmissionDoesNotBecomeLegalSourceAuthority
+
+
 toeGenealogyCandidateSourceDoesNotCreateLegalAuthority =
   LegalSourceGenealogy.toeGenealogyCandidateSourceDoesNotCreateLegalAuthority
+
 toeGenealogySameLegalSystemDoesNotCreateLegalAuthority =
   LegalSourceGenealogy.toeGenealogySameLegalSystemDoesNotCreateLegalAuthority
+
 toeGenealogyCurrentValidityDoesNotCreateApplicability =
   LegalSourceGenealogy.toeGenealogyCurrentValidityDoesNotCreateApplicability
+
 toeGenealogyDocumentRoleDoesNotCreateLegalAuthority =
   LegalSourceGenealogy.toeGenealogyDocumentRoleDoesNotCreateLegalAuthority
 
@@ -944,9 +987,28 @@ toeGovernedLegalWorkflowSourceSemanticHandoff =
 
 toeGovernedSharedLexemeDoesNotCreateSemanticIdentity =
   LegalSourceSemantic.toeSharedLexemeDoesNotCreateSemanticIdentity
+
 toeGovernedDiagnosticCheckDoesNotCreateTheoremPromotion =
   LegalSourceSemantic.toeDiagnosticCheckDoesNotCreateTheoremPromotion
+
 toeGovernedSourceIdentifierDoesNotCreateProofAuthority =
   LegalSourceSemantic.toeSourceIdentifierDoesNotCreateProofAuthority
+
 toeGovernedESDSurfaceMutationRemainsForbidden =
   LegalSourceSemantic.toeESDSurfaceMutationRemainsForbidden
+
+
+toeGovernedRuntimeCannotInventLegalSemantics =
+  LegalSourceSemantic.toeRuntimeCannotInventLegalSemantics
+
+toeGovernedSourceFollowCannotCreateAuthorityByTransport =
+  LegalSourceSemantic.toeSourceFollowCannotCreateAuthorityByTransport
+
+toeGovernedTargetDomainNeedsOwnAuthorityWitness =
+  LegalSourceSemantic.toeTargetDomainNeedsOwnAuthorityWitness
+
+toeGovernedRepresentationEqualityDoesNotCreateLegalAuthority =
+  LegalSourceSemantic.toeRepresentationEqualityDoesNotCreateLegalAuthority
+
+toeGovernedVendorIdentityDoesNotCreateAuthority =
+  LegalSourceSemantic.toeVendorIdentityDoesNotCreateAuthority

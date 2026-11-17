@@ -91,12 +91,10 @@ on:
       - 'Docs/diagrams/pnf_distilled_nonpromotion_toe.puml'
       - 'Docs/architecture/GovernedFleetResidualTOE.puml'
       - 'tests/test_governed_legal_workflow_toe_convergence.py'
-      - 'DASHI/Unified/GovernedLegalWorkflowSourceGenealogyTOEExact.agda'
-      - 'DASHI/Unified/GovernedLegalWorkflowSourceGenealogyTOERegression.agda'
-      - 'DASHI/Unified/GovernedLegalWorkflowSourceSemanticTOEExact.agda'
-      - 'DASHI/Unified/GovernedLegalWorkflowSourceSemanticTOERegression.agda'
       - 'tests/test_governed_legal_workflow_source_genealogy_toe.py'
       - 'tests/test_governed_legal_workflow_source_semantic_toe.py'
+      - 'DASHI/Unified/GovernedLegalWorkflowSourceGenealogyTOEExact.agda'
+      - 'DASHI/Unified/GovernedLegalWorkflowSourceGenealogyTOERegression.agda'
       - 'DASHI/Physics/Closure/Everything.agda'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
 
@@ -168,6 +166,11 @@ jobs:
           dashi-repo related canonicalGovernedLegalWorkflowSourceSemanticHandoff --root . --limit 20
           dashi-repo discover 'governed legal workflow source genealogy distilled semantic non promotion authority TOE' --root . --limit 40
           dashi-repo lineage --prefix DASHI.Unified.GovernedLegalWorkflowSourceSemanticTOE --root .
+          dashi-repo related canonicalAgdaFirstLegalRuntimeContract --root . --limit 20
+          dashi-repo related canonicalDomainTransportReceipt --root . --limit 20
+          dashi-repo discover 'SensibLaw legal runtime transport source follow authority domain permeability vendor representation authority' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Law.SensibLawAgdaFirstLegalRuntime --root .
+          dashi-repo lineage --prefix DASHI.Governance.DomainPermeabilityAuthorityTransport --root .
           dashi-repo diagnose DASHI/Unified/PNFDistilledNonPromotionTOEExact.agda --root .
           dashi-repo related canonicalPNFDistilledNonPromotionBoundary --root . --limit 20
           dashi-repo related canonicalPNFDistilledReuseZKPReceipt --root . --limit 20

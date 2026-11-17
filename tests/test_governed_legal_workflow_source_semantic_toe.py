@@ -32,6 +32,13 @@ def test_handoff_contains_only_existing_nonpromotion_coordinates():
         "diagnosticCheckCreatesTheoremPromotionIsFalse",
         "sourceIdentifierCreatesProofAuthorityIsFalse",
         "esdSurfaceMutationAllowedIsFalse",
+        "legalRuntimeContract",
+        "runtimeInventsLegalSemanticsIsFalse",
+        "sourceFollowCreatesAuthorityIsFalse",
+        "domainTransportReceipt",
+        "targetDomainNeedsOwnAuthorityWitnessIsTrue",
+        "representationEqualityCreatesLegalAuthorityIsFalse",
+        "vendorIdentityCreatesAuthorityIsFalse",
         "canonicalGovernedLegalWorkflowSourceSemanticHandoff",
     ):
         assert token in text
@@ -46,6 +53,30 @@ def test_all_toe_facades_reach_same_handoff():
     assert "governedLegalWorkflowSourceSemanticHandoff" in unified
     for text in (root, unifier, unified):
         assert "GovernedLegalWorkflowSourceSemanticTOEExact as LegalSourceSemantic" in text
+    for token in (
+        "toeGovernedRuntimeCannotInventLegalSemantics",
+        "toeGovernedSourceFollowCannotCreateAuthorityByTransport",
+        "toeGovernedTargetDomainNeedsOwnAuthorityWitness",
+        "toeGovernedRepresentationEqualityDoesNotCreateLegalAuthority",
+        "toeGovernedVendorIdentityDoesNotCreateAuthority",
+    ):
+        assert token in root
+    for token in (
+        "unifierGovernedRuntimeCannotInventLegalSemantics",
+        "unifierGovernedSourceFollowCannotCreateAuthorityByTransport",
+        "unifierGovernedTargetDomainNeedsOwnAuthorityWitness",
+        "unifierGovernedRepresentationEqualityDoesNotCreateLegalAuthority",
+        "unifierGovernedVendorIdentityDoesNotCreateAuthority",
+    ):
+        assert token in unifier
+    for token in (
+        "governedRuntimeCannotInventLegalSemantics",
+        "governedSourceFollowCannotCreateAuthorityByTransport",
+        "governedTargetDomainNeedsOwnAuthorityWitness",
+        "governedRepresentationEqualityDoesNotCreateLegalAuthority",
+        "governedVendorIdentityDoesNotCreateAuthority",
+    ):
+        assert token in unified
 
 
 def test_regression_binds_unifier_to_canonical_handoff():
@@ -57,6 +88,13 @@ def test_regression_binds_unifier_to_canonical_handoff():
         "diagnosticCheckStillDoesNotCreateTheoremPromotion",
         "sourceIdentifierStillDoesNotCreateProofAuthority",
         "esdMutationStillForbidden",
+        "runtimeContractIsCanonical",
+        "domainTransportReceiptIsCanonical",
+        "runtimeSemanticsStillFailClosed",
+        "sourceFollowAuthorityStillFailClosed",
+        "representationAuthorityStillFailClosed",
+        "vendorAuthorityStillFailClosed",
+        "targetDomainAuthorityWitnessStillRequired",
         "unifierHandoffIsCanonical",
     ):
         assert token in text

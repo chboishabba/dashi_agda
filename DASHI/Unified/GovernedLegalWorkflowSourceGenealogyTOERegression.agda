@@ -74,7 +74,7 @@ unifierCommonSourceAliasIsExact :
   Source.CommonSourceMeansNoEvidence → ⊥
 unifierCommonSourceAliasIsExact =
   Unifier.unifierLegalCommonSourceDoesNotEraseEvidence
-    
+
 candidateSourceAuthorityAliasIsExact :
   Legal.CandidateSourceIsAuthoritative → ⊥
 candidateSourceAuthorityAliasIsExact =
@@ -94,3 +94,23 @@ documentRoleAuthorityAliasIsExact :
   Legal.DocumentRoleSuppliesLegalSourceAuthority → ⊥
 documentRoleAuthorityAliasIsExact =
   Handoff.toeGenealogyDocumentRoleDoesNotCreateLegalAuthority
+
+unifierCandidateSourceAuthorityAliasIsExact :
+  Legal.CandidateSourceIsAuthoritative → ⊥
+unifierCandidateSourceAuthorityAliasIsExact =
+  Unifier.unifierGenealogyCandidateSourceDoesNotCreateLegalAuthority
+
+unifierSameLegalSystemAuthorityAliasIsExact :
+  Legal.SameLegalSystemAutomaticallyMeansAuthority → ⊥
+unifierSameLegalSystemAuthorityAliasIsExact =
+  Unifier.unifierGenealogySameLegalSystemDoesNotCreateLegalAuthority
+
+unifierCurrentValidityApplicabilityAliasIsExact :
+  Legal.CurrentValidityAutomaticallyMeansApplicability → ⊥
+unifierCurrentValidityApplicabilityAliasIsExact =
+  Unifier.unifierGenealogyCurrentValidityDoesNotCreateApplicability
+
+unifierDocumentRoleAuthorityAliasIsExact :
+  Legal.DocumentRoleSuppliesLegalSourceAuthority → ⊥
+unifierDocumentRoleAuthorityAliasIsExact =
+  Unifier.unifierGenealogyDocumentRoleDoesNotCreateLegalAuthority
