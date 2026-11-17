@@ -349,7 +349,7 @@ rawCenteredTwoTwiceFirst s f =
 rotateCenteredTwoSquared :
   (s f : ℤ) →
   rotateCenteredTwo (rotateCenteredTwo (s , f))
-    ≡ f , (((+ 0) - s) - f)
+    ≡ (f , (((+ 0) - s) - f))
 rotateCenteredTwoSquared s f =
   cong₂ _,_ (rawCenteredTwoTwiceFirst s f) refl
   where
