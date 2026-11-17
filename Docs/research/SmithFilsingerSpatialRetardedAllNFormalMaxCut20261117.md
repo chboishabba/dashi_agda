@@ -52,3 +52,8 @@ This is an exact energy-ledger proof candidate, **not** a theorem that a spatial
 **Next max-cut:** execute pinned Agda target locally on the proper host; then work on a selected, *physically sourced* 3D spatial Maxwell/soil/ionosphere current-to-port operator. If device-specific source/geometry traces remain absent, a general formal operator can only be a conditional mathematical object and must not be promoted to original Sun–Earth power measurements.
 
 Attribution: conventional network conservation / time-indexed reasoning cited as reusable mathematics; user originated the proposed large solar-powered phase-controlled harvesting steelman; DASHI proof source is a derived formalisation. No ESD edit, no claimed new physical theorem, no premature TOE promotion.
+
+## Concurrent original material-ledger cross-check
+While this cut was being committed, PR #1524 advanced to `fb897a90e819bd756523de6aa842c34f20b4a993`, adding `materialModulationReconcilesOriginalCycleLoss` in `SmithFilsingerMaxwellMaterialEnergyCutExact.agda`. It derives a **two-ledger consistency** obligation between signed original-cycle loss and the field/material-modulator ledger: `old internal loss + paid modulation = field dissipation/outgoing + material dissipation + recovered modulation` under explicit same-source work and restored-field/material-storage hypotheses.
+
+This is complementary to the new all-N spatial port telescope: one checks **spatial intercell work cancellation**, the other prevents **double accounting of modulator work across two original-port ledgers**. Reuse both from the existing `SourceMaxwellBoundaryWeld` and do not merge their physical `Set` witnesses by assertion. The concurrent theorem is source-authored but was not pinned kernel checked in this session.
