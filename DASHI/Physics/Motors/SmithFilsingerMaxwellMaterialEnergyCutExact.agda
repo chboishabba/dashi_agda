@@ -44,7 +44,8 @@ cancelSharedInterface a b c d x eField eMaterial =
 -- Neither field energy nor material parameter work can be suppressed.
 record FieldMaterialEnergyWeld
   (b : Weld.SelectedBoundary)
-  (f : Weld.FormalFieldToPort b) : Set₂ where
+  (f : Weld.FormalFieldToPort b)
+  (sourceCycle : Weld.SignedSourceCycleWeld b f) : Set₂ where
   field
     naturalInput driverInput : Nat
     fieldStoredInitially fieldStoredFinally : Nat
@@ -70,14 +71,18 @@ record FieldMaterialEnergyWeld
     -- True source input and delivered load must be SAME as actual
     -- selected terminal work, not merely equal numbers from unrelated
     -- experimental machines or incompatible boundary conventions.
-    sameNaturalIncident :
+    -- Full port conservation already subtracts natural/controller
+    -- OUTGOING flux; attach net real work, NOT gross incident waves.
+    sameNetNaturalWork :
       naturalInput ≡
-        Port.MidpointTwoPortWorkWindow.naturalIncident
-          (Weld.FormalFieldToPort.portWindow f)
-    sameControllerIncident :
+        Cycle.RepeatableSourceCycle.naturalSourceWork
+          (Cycle.AdmittedSourceCapCycle.repeatable
+            (Weld.SignedSourceCycleWeld.cycleWithSourceCap sourceCycle))
+    sameNetPoweredWork :
       driverInput ≡
-        Port.MidpointTwoPortWorkWindow.controllerIncident
-          (Weld.FormalFieldToPort.portWindow f)
+        Cycle.RepeatableSourceCycle.controllerWork
+          (Cycle.AdmittedSourceCapCycle.repeatable
+            (Weld.SignedSourceCycleWeld.cycleWithSourceCap sourceCycle))
     sameOriginalLoad :
       usefulLoad ≡
         Port.MidpointTwoPortWorkWindow.usefulWork
@@ -98,7 +103,8 @@ record FieldMaterialEnergyWeld
 fieldMaterialCombinedWork :
   (b : Weld.SelectedBoundary)
   (f : Weld.FormalFieldToPort b)
-  (w : FieldMaterialEnergyWeld b f) →
+  (sourceCycle : Weld.SignedSourceCycleWeld b f)
+  (w : FieldMaterialEnergyWeld b f sourceCycle) →
   ((FieldMaterialEnergyWeld.naturalInput w
       + FieldMaterialEnergyWeld.driverInput w)
       + FieldMaterialEnergyWeld.modulationInput w)
@@ -110,7 +116,7 @@ fieldMaterialCombinedWork :
         + (FieldMaterialEnergyWeld.modulationRecovery w
           + (FieldMaterialEnergyWeld.fieldStoredFinally w
             + FieldMaterialEnergyWeld.materialStoredFinally w))))
-fieldMaterialCombinedWork b f w =
+fieldMaterialCombinedWork b f sourceCycle w =
   Cycle.trans
     (solve 6
       (λ n d m fi mi x →
@@ -145,7 +151,8 @@ fieldMaterialCombinedWork b f w =
 fieldMaterialRepeatableWork :
   (b : Weld.SelectedBoundary)
   (f : Weld.FormalFieldToPort b)
-  (w : FieldMaterialEnergyWeld b f) →
+  (sourceCycle : Weld.SignedSourceCycleWeld b f)
+  (w : FieldMaterialEnergyWeld b f sourceCycle) →
   FieldMaterialEnergyWeld.fieldStoredInitially w
     + FieldMaterialEnergyWeld.materialStoredInitially w
   ≡ FieldMaterialEnergyWeld.fieldStoredFinally w
@@ -157,12 +164,12 @@ fieldMaterialRepeatableWork :
     + (FieldMaterialEnergyWeld.fieldDissipationAndOutgoing w
       + (FieldMaterialEnergyWeld.materialDissipation w
         + FieldMaterialEnergyWeld.modulationRecovery w))
-fieldMaterialRepeatableWork b f w restored =
+fieldMaterialRepeatableWork b f sourceCycle w restored =
   Cycle.+-cancelRight _ _ finalStored
     (Cycle.trans
       (Bound.sym (Cycle.cong (λ z → input + z) restored))
       (Cycle.trans
-        (fieldMaterialCombinedWork b f w)
+        (fieldMaterialCombinedWork b f sourceCycle w)
         (Bound.sym
           (solve 6
             (λ l fl ml rec fs ms →
@@ -190,7 +197,8 @@ fieldMaterialRepeatableWork b f w restored =
 fieldMaterialLoadBoundOnRepeatableCycle :
   (b : Weld.SelectedBoundary)
   (f : Weld.FormalFieldToPort b)
-  (w : FieldMaterialEnergyWeld b f) →
+  (sourceCycle : Weld.SignedSourceCycleWeld b f)
+  (w : FieldMaterialEnergyWeld b f sourceCycle) →
   FieldMaterialEnergyWeld.fieldStoredInitially w
     + FieldMaterialEnergyWeld.materialStoredInitially w
   ≡ FieldMaterialEnergyWeld.fieldStoredFinally w
@@ -199,9 +207,9 @@ fieldMaterialLoadBoundOnRepeatableCycle :
     ((FieldMaterialEnergyWeld.naturalInput w
       + FieldMaterialEnergyWeld.driverInput w)
       + FieldMaterialEnergyWeld.modulationInput w)
-fieldMaterialLoadBoundOnRepeatableCycle b f w restored =
+fieldMaterialLoadBoundOnRepeatableCycle b f sourceCycle w restored =
   Bound.transportUpper
-    (Bound.sym (fieldMaterialRepeatableWork b f w restored))
+    (Bound.sym (fieldMaterialRepeatableWork b f sourceCycle w restored))
     (Bound.≤-append
       (FieldMaterialEnergyWeld.usefulLoad w)
       (FieldMaterialEnergyWeld.fieldDissipationAndOutgoing w
