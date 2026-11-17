@@ -26,6 +26,7 @@ SCRIPTS = (
     "check_pv_g173_multijunction_net_loss_frontier.py",
     "check_pv_v68_published_multijunction_table_identity.py",
     "check_pv_v68_printed_4t_rounding_interval.py",
+    "check_pv_nrel_2017_4t_group_topology.py",
 )
 AGDA = (
     "DASHI/Physics/Photovoltaic/PV369NetHalfThresholdExact.agda",
@@ -36,6 +37,7 @@ AGDA = (
     "DASHI/Physics/Photovoltaic/Atomic369BasisTransportNoFreeGainExact.agda",
     "DASHI/Physics/Photovoltaic/PVGreen68FourTerminalPublishedSourceExact.agda",
     "DASHI/Physics/Photovoltaic/PV369P2CoulombSolarNonPromotionExact.agda",
+    "DASHI/Physics/Photovoltaic/PV369NREL2017ThreeJunctionTwoGroupTopologyExact.agda",
     "DASHI/Unified/PVPrimaryTOESpliceExact.agda",
 )
 
