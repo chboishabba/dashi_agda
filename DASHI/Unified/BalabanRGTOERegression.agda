@@ -1524,3 +1524,6 @@ import DASHI.Physics.YangMills.YMClayBishopFiniteWeightedIntegralLawsExact as Bi
 -- YM.REAL Bishop Cauchy limit source lives in separate regression root.
 
 -- YM.REAL non-safe original Wilson normalization adapter isolated.
+
+-- Original 4D Wilson finite second-order Nat arithmetic, not a Haar closure.
+import DASHI.Physics.YangMills.YMClayOriginalWilsonSecondOrderCombinatoricsExact as WilsonSecondOrder
