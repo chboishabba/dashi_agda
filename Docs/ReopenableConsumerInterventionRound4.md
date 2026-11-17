@@ -141,3 +141,148 @@ The module does not claim that angle defect alone determines a manufacturable pa
 Thus the cross-project relation is theorem-level rather than a similarity table.
 ## Claim boundary
 The common kernel proves structural facts about abstraction, finite future behaviour, fidelity escalation, evidence provenance, reopening and authority. It does not establish cloth constitutive laws, animal semantics, environmental calibration, stakeholder legitimacy, or continuous-state global search completeness. Those remain domain producers and can now be attached without reimplementing the shared theorem machinery.
+
+
+## TOE safe-and-just legal governance convergence
+
+This section records the current golden Agda handoff.
+
+The implementation reuses DASHI.Core.CompositionalComplianceExact.
+
+The implementation reuses DASHI.Governance.Fanning2022LiteralSituatedQualifiedUseBridgeExact.
+
+The implementation reuses DASHI.Unified.FleetFormalGapTargetTOEExact.
+
+The implementation exports the same receipts through DASHI.EverythingTOESymmetryResolved369 and DASHI.Unifier.
+
+Fanning et al. retain source ownership for the 2022 empirical study.
+
+The paper is The social shortfall and ecological overshoot of nations.
+
+The DOI is 10.1038/s41893-021-00799-z.
+
+Necula retains source attribution for the proof-carrying-code reference.
+
+The canonical source record is CMU-CS-98-154.
+
+No DOI is asserted for that thesis in this repository.
+
+Bitansky, Canetti, Chiesa, and Tromer retain source attribution for recursive proof-carrying-data composition.
+
+The DOI is 10.1145/2488608.2488623.
+
+DASHI owns the exact Agda handoff records and non-promotion theorems.
+
+SensibLaw records are operational evidence inputs.
+
+SensibLaw records do not create legal authority by themselves.
+
+Actionstep records are operational case-management inputs.
+
+Actionstep records do not create legal authority by themselves.
+
+A literal Fanning source row does not create causal authority.
+
+A literal Fanning source row does not create policy decision authority.
+
+A downstream compliance proof must retain the typed intermediate witness.
+
+Endpoint equality alone does not replace that witness.
+
+### ZKP frame
+
+O is the objective.
+
+The objective is to attach the existing literal-data and legal-compliance semantics to the DASHI TOE.
+
+R is reuse.
+
+Reuse the canonical Agda owners before any extension.
+
+C is construction.
+
+Add only aliases and exact boundary receipts.
+
+S is the safety invariant.
+
+Evidence, citation, operational records, and endpoint equality do not self-promote into legal or policy authority.
+
+L is the lane.
+
+Use one disjoint governance-convergence lane.
+
+The 584 discharged fibres remain discharged.
+
+Only the 58 unformalised formal gaps remain in the fleet target.
+
+P is the precondition set.
+
+The canonical Agda owners must exist.
+
+The source identifiers must remain unchanged.
+
+ESD surfaces are read-only.
+
+G is governance.
+
+ITIL and Six Sigma are process lenses.
+
+ISO 9000 is a quality-management lens.
+
+ISO/IEC 42001:2023 is an AI management-system lens.
+
+ISO/IEC 27001:2022 is an information-security management lens.
+
+ISO/IEC 27701:2025 is a privacy-information management lens.
+
+ISO/IEC 23894:2023 is an AI risk-management lens.
+
+ISO 9241 interaction and human-centred-design standards are usability lenses.
+
+NIST AI RMF 1.0 and NIST AI 600-1 are risk-management lenses.
+
+C4 and PlantUML are architecture documentation lenses.
+
+None of these statements claim certification.
+
+F is the postcondition set.
+
+The TOE root and Unifier expose the same governance receipts.
+
+The operational-record non-promotion proofs remain exact.
+
+The literal-data non-promotion proofs remain exact.
+
+The compositional-compliance invariant remains exact.
+
+### C4 view
+
+The source layer contains empirical papers and operational records.
+
+The proof layer contains golden Agda theorem owners.
+
+The TOE layer imports proof owners.
+
+The Lean layer mirrors only the stable exported theorem surface.
+
+The ESD layer remains read-only.
+
+### Verification
+
+Run duplicate and related-symbol discovery before writing.
+
+Run the repository preflight referee when it is available locally.
+
+Scan the changed Agda files for trust escapes.
+
+Reject postulate.
+
+Reject allow-unsolved-metas.
+
+Reject TERMINATING.
+
+Reject NO_POSITIVITY_CHECK.
+
+Check that no ESD path changed.
+
+Run the focused Agda kernel check on the exact head before claiming kernel success.

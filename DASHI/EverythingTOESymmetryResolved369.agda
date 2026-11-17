@@ -1241,46 +1241,38 @@ toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
 toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
   FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
 
+
 ------------------------------------------------------------------------
--- Riemann / RH max-cut TOE convergence.
+-- Safe/just and legal-compliance governance handoff.
+-- These aliases preserve the golden FleetFormalGapTargetTOEExact owner.
 ------------------------------------------------------------------------
 
-toeRiemannRHCurrentFrontier :
-  RiemannRHTOE.CurrentThreeTapFrontier
-toeRiemannRHCurrentFrontier =
-  RiemannRHTOE.currentThreeTapFrontier
+toeFanningLiteralSituatedAuthorityBoundary :
+  FleetGapTOE.FanningLiteralSituatedAuthorityBoundary
+toeFanningLiteralSituatedAuthorityBoundary =
+  FleetGapTOE.fleetFanningLiteralSituatedAuthorityBoundary
 
-toeRiemannRHZKPFrame :
-  RiemannRHTOE.RiemannRHTOEZKPFrame
-toeRiemannRHZKPFrame =
-  RiemannRHTOE.canonicalRiemannRHTOEZKPFrame
+toeCompositionalComplianceBoundary :
+  FleetGapTOE.CompositionalComplianceBoundary
+toeCompositionalComplianceBoundary =
+  FleetGapTOE.fleetCompositionalComplianceBoundary
 
-toeRiemannRHA1CarrierStillOpen :
-  RiemannRHTOE.currentA1CarrierSummationPaid ≡ false
-toeRiemannRHA1CarrierStillOpen =
-  RiemannRHTOE.a1CarrierSummationStillOpen
+toeSafeJustLegalGovernanceBoundary :
+  FleetGapTOE.SafeJustLegalGovernanceBoundary
+toeSafeJustLegalGovernanceBoundary =
+  FleetGapTOE.canonicalSafeJustLegalGovernanceBoundary
 
-toeRiemannRHA2ScalarStillOpen :
-  RiemannRHTOE.currentA2StrictScalarPaid ≡ false
-toeRiemannRHA2ScalarStillOpen =
-  RiemannRHTOE.a2StrictScalarStillOpen
+toeSafeJustLegalGovernanceZKPFrame :
+  FleetGapTOE.SafeJustLegalGovernanceZKPFrame
+toeSafeJustLegalGovernanceZKPFrame =
+  FleetGapTOE.canonicalSafeJustLegalGovernanceZKPFrame
 
-toeRiemannRHRouteBStillOpen :
-  RiemannRHTOE.currentRouteBEventualGapPaid ≡ false
-toeRiemannRHRouteBStillOpen =
-  RiemannRHTOE.routeBEventualGapStillOpen
+toeSensibLawRecordDoesNotCreateLegalAuthority :
+  FleetGapTOE.SensibLawRecordCreatesLegalAuthority → ⊥
+toeSensibLawRecordDoesNotCreateLegalAuthority =
+  FleetGapTOE.sensibLawRecordDoesNotCreateLegalAuthority
 
-toeRiemannRHStillOpen :
-  RiemannRHTOE.currentRHDerived ≡ false
-toeRiemannRHStillOpen =
-  RiemannRHTOE.riemannHypothesisStillOpen
-
-toeRiemannTerminalOffPaymentType : Set₁
-toeRiemannTerminalOffPaymentType =
-  RiemannRHTOE.terminalOffPaymentType
-
-toeRiemannTerminalGammaPaymentType : Set₁
-toeRiemannTerminalGammaPaymentType =
-  RiemannRHTOE.terminalGammaPaymentType
-
-
+toeActionstepRecordDoesNotCreateLegalAuthority :
+  FleetGapTOE.ActionstepRecordCreatesLegalAuthority → ⊥
+toeActionstepRecordDoesNotCreateLegalAuthority =
+  FleetGapTOE.actionstepRecordDoesNotCreateLegalAuthority

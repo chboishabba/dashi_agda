@@ -25,6 +25,8 @@ module DASHI.Core.CompositionalComplianceExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Data.Empty using (⊥)
 open import Agda.Builtin.String using (String)
 open import Data.Product using (Σ; _×_; _,_)
 
@@ -93,3 +95,47 @@ open DependentCertifiedStage public
 -- governance/authority witness unless the declared downstream predicate asks
 -- for that authority explicitly.
 ------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------
+-- Canonical handoff boundary.
+--
+-- This is a DASHI theorem surface. It does not assert that a case-management
+-- record, source citation, or endpoint hash is a legal-authority proof.
+------------------------------------------------------------------------
+
+data EndpointOnlyCompositionCreatesCompliance : Set where
+
+endpointOnlyCompositionDoesNotCreateCompliance :
+  EndpointOnlyCompositionCreatesCompliance → ⊥
+endpointOnlyCompositionDoesNotCreateCompliance ()
+
+data OperationalRecordCreatesLegalAuthority : Set where
+
+operationalRecordDoesNotCreateLegalAuthority :
+  OperationalRecordCreatesLegalAuthority → ⊥
+operationalRecordDoesNotCreateLegalAuthority ()
+
+record CompositionalComplianceBoundary : Set where
+  constructor compositionalComplianceBoundary
+  field
+    downstreamReceiptRetainsIntermediateWitness : Bool
+    downstreamReceiptRetainsIntermediateWitnessIsTrue :
+      downstreamReceiptRetainsIntermediateWitness ≡ true
+    endpointEqualityAloneCreatesCompliance : Bool
+    endpointEqualityAloneCreatesComplianceIsFalse :
+      endpointEqualityAloneCreatesCompliance ≡ false
+    sourceCitationAloneCreatesLegalAuthority : Bool
+    sourceCitationAloneCreatesLegalAuthorityIsFalse :
+      sourceCitationAloneCreatesLegalAuthority ≡ false
+    operationalRecordAloneCreatesLegalAuthority : Bool
+    operationalRecordAloneCreatesLegalAuthorityIsFalse :
+      operationalRecordAloneCreatesLegalAuthority ≡ false
+
+canonicalCompositionalComplianceBoundary : CompositionalComplianceBoundary
+canonicalCompositionalComplianceBoundary =
+  compositionalComplianceBoundary
+    true refl
+    false refl
+    false refl
+    false refl

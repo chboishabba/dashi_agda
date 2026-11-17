@@ -1929,44 +1929,38 @@ unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
 unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
   FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
 
+
 ------------------------------------------------------------------------
--- Riemann current max-cut convergence.
+-- Safe/just and legal-compliance governance handoff.
+-- These aliases preserve the golden FleetFormalGapTargetTOEExact owner.
 ------------------------------------------------------------------------
 
-unifierRiemannRHCurrentFrontier :
-  RiemannRHTOE.CurrentThreeTapFrontier
-unifierRiemannRHCurrentFrontier =
-  RiemannRHTOE.currentThreeTapFrontier
+unifierFanningLiteralSituatedAuthorityBoundary :
+  FleetGapTOE.FanningLiteralSituatedAuthorityBoundary
+unifierFanningLiteralSituatedAuthorityBoundary =
+  FleetGapTOE.fleetFanningLiteralSituatedAuthorityBoundary
 
-unifierRiemannRHZKPFrame :
-  RiemannRHTOE.RiemannRHTOEZKPFrame
-unifierRiemannRHZKPFrame =
-  RiemannRHTOE.canonicalRiemannRHTOEZKPFrame
+unifierCompositionalComplianceBoundary :
+  FleetGapTOE.CompositionalComplianceBoundary
+unifierCompositionalComplianceBoundary =
+  FleetGapTOE.fleetCompositionalComplianceBoundary
 
-unifierRiemannRHA1CarrierStillOpen :
-  RiemannRHTOE.currentA1CarrierSummationPaid ≡ false
-unifierRiemannRHA1CarrierStillOpen =
-  RiemannRHTOE.a1CarrierSummationStillOpen
+unifierSafeJustLegalGovernanceBoundary :
+  FleetGapTOE.SafeJustLegalGovernanceBoundary
+unifierSafeJustLegalGovernanceBoundary =
+  FleetGapTOE.canonicalSafeJustLegalGovernanceBoundary
 
-unifierRiemannRHA2ScalarStillOpen :
-  RiemannRHTOE.currentA2StrictScalarPaid ≡ false
-unifierRiemannRHA2ScalarStillOpen =
-  RiemannRHTOE.a2StrictScalarStillOpen
+unifierSafeJustLegalGovernanceZKPFrame :
+  FleetGapTOE.SafeJustLegalGovernanceZKPFrame
+unifierSafeJustLegalGovernanceZKPFrame =
+  FleetGapTOE.canonicalSafeJustLegalGovernanceZKPFrame
 
-unifierRiemannRHRouteBStillOpen :
-  RiemannRHTOE.currentRouteBEventualGapPaid ≡ false
-unifierRiemannRHRouteBStillOpen =
-  RiemannRHTOE.routeBEventualGapStillOpen
+unifierSensibLawRecordDoesNotCreateLegalAuthority :
+  FleetGapTOE.SensibLawRecordCreatesLegalAuthority → ⊥
+unifierSensibLawRecordDoesNotCreateLegalAuthority =
+  FleetGapTOE.sensibLawRecordDoesNotCreateLegalAuthority
 
-unifierRiemannRHStillOpen :
-  RiemannRHTOE.currentRHDerived ≡ false
-unifierRiemannRHStillOpen =
-  RiemannRHTOE.riemannHypothesisStillOpen
-
-unifierRiemannTerminalOffPaymentType : Set₁
-unifierRiemannTerminalOffPaymentType =
-  RiemannRHTOE.terminalOffPaymentType
-
-unifierRiemannTerminalGammaPaymentType : Set₁
-unifierRiemannTerminalGammaPaymentType =
-  RiemannRHTOE.terminalGammaPaymentType
+unifierActionstepRecordDoesNotCreateLegalAuthority :
+  FleetGapTOE.ActionstepRecordCreatesLegalAuthority → ⊥
+unifierActionstepRecordDoesNotCreateLegalAuthority =
+  FleetGapTOE.actionstepRecordDoesNotCreateLegalAuthority

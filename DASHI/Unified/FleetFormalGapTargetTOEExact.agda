@@ -17,6 +17,8 @@ import DASHI.Unified.BalabanRGTOERegression as BalabanRG
 import DASHI.Physics.Closure.NSABCDConcentratedCompletionCutExact as NS
 import DASHI.Quantum.QuantumMereologyExact as QM
 import DASHI.Quantum.QuantumMereologySourceAtlasExact as QMSources
+import DASHI.Core.CompositionalComplianceExact as Compliance
+import DASHI.Governance.Fanning2022LiteralSituatedQualifiedUseBridgeExact as FanningLiteral
 
 ------------------------------------------------------------------------
 -- Fleet R4/R5 selection boundary.
@@ -335,3 +337,155 @@ fleetTextFallbackAuthorityStillFalse :
   Rebuild.textFallbackIsCoordinateAuthority ≡ false
 fleetTextFallbackAuthorityStillFalse =
   Rebuild.textFallbackCoordinateAuthorityFalse
+
+
+------------------------------------------------------------------------
+-- SAFE/JUST + LEGAL COMPLIANCE TOE HANDOFF
+--
+-- The 584 discharged fibres remain discharged.
+-- This lane only attaches existing golden governance proofs to the 58-gap TOE
+-- target surface. It creates no new empirical row and no legal mandate.
+--
+-- Fanning source:
+-- Andrew L. Fanning, Daniel W. O'Neill, Jason Hickel, Nicolas Roux,
+-- "The social shortfall and ecological overshoot of nations",
+-- Nature Sustainability 5 (2022), 26--36.
+-- DOI 10.1038/s41893-021-00799-z.
+--
+-- Proof-carrying compliance sources retained by the canonical Core owner:
+-- George C. Necula, "Compiling with Proofs", CMU-CS-98-154 (1998).
+-- No DOI recorded in the canonical owner.
+-- Bitansky, Canetti, Chiesa, Tromer, STOC 2013.
+-- DOI 10.1145/2488608.2488623.
+--
+-- The theorem products below are DASHI constructions.
+------------------------------------------------------------------------
+
+FanningLiteralSituatedAuthorityBoundary : Set
+FanningLiteralSituatedAuthorityBoundary =
+  FanningLiteral.LiteralSituatedAuthorityBoundary
+
+fleetFanningLiteralSituatedAuthorityBoundary :
+  FanningLiteralSituatedAuthorityBoundary
+fleetFanningLiteralSituatedAuthorityBoundary =
+  FanningLiteral.canonicalLiteralSituatedAuthorityBoundary
+
+fleetLiteralSourceSurvivesSituatedQualification :
+  FanningLiteral.LiteralSituatedAuthorityBoundary.literalSourceReceiptSurvivesSituatedQualification
+    FanningLiteral.canonicalLiteralSituatedAuthorityBoundary ≡ true
+fleetLiteralSourceSurvivesSituatedQualification = refl
+
+fleetHistoricalObservationCannotSilentlyBecomeBAUForecastEvidence :
+  FanningLiteral.LiteralSituatedAuthorityBoundary.historicalObservationCanSilentlyBecomeBAUForecastEvidence
+    FanningLiteral.canonicalLiteralSituatedAuthorityBoundary ≡ false
+fleetHistoricalObservationCannotSilentlyBecomeBAUForecastEvidence = refl
+
+fleetQualifiedLiteralResearchUseDoesNotCreateCausalAuthority :
+  FanningLiteral.LiteralSituatedAuthorityBoundary.qualifiedLiteralResearchUseCreatesCausalAuthority
+    FanningLiteral.canonicalLiteralSituatedAuthorityBoundary ≡ false
+fleetQualifiedLiteralResearchUseDoesNotCreateCausalAuthority = refl
+
+fleetQualifiedLiteralResearchUseDoesNotCreateDecisionAuthority :
+  FanningLiteral.LiteralSituatedAuthorityBoundary.qualifiedLiteralResearchUseCreatesDecisionAuthority
+    FanningLiteral.canonicalLiteralSituatedAuthorityBoundary ≡ false
+fleetQualifiedLiteralResearchUseDoesNotCreateDecisionAuthority = refl
+
+fleetDoesNotClaimFanningWorkbookAlreadyIngested :
+  FanningLiteral.LiteralSituatedAuthorityBoundary.thisModuleClaimsWorkbookAlreadyIngested
+    FanningLiteral.canonicalLiteralSituatedAuthorityBoundary ≡ false
+fleetDoesNotClaimFanningWorkbookAlreadyIngested = refl
+
+CompositionalComplianceBoundary : Set
+CompositionalComplianceBoundary =
+  Compliance.CompositionalComplianceBoundary
+
+fleetCompositionalComplianceBoundary : CompositionalComplianceBoundary
+fleetCompositionalComplianceBoundary =
+  Compliance.canonicalCompositionalComplianceBoundary
+
+fleetComplianceRetainsIntermediateWitness :
+  Compliance.CompositionalComplianceBoundary.downstreamReceiptRetainsIntermediateWitness
+    Compliance.canonicalCompositionalComplianceBoundary ≡ true
+fleetComplianceRetainsIntermediateWitness = refl
+
+fleetEndpointEqualityDoesNotCreateCompliance :
+  Compliance.CompositionalComplianceBoundary.endpointEqualityAloneCreatesCompliance
+    Compliance.canonicalCompositionalComplianceBoundary ≡ false
+fleetEndpointEqualityDoesNotCreateCompliance = refl
+
+fleetOperationalRecordDoesNotCreateLegalAuthority :
+  Compliance.OperationalRecordCreatesLegalAuthority → ⊥
+fleetOperationalRecordDoesNotCreateLegalAuthority =
+  Compliance.operationalRecordDoesNotCreateLegalAuthority
+
+data SensibLawRecordCreatesLegalAuthority : Set where
+
+sensibLawRecordDoesNotCreateLegalAuthority :
+  SensibLawRecordCreatesLegalAuthority → ⊥
+sensibLawRecordDoesNotCreateLegalAuthority ()
+
+data ActionstepRecordCreatesLegalAuthority : Set where
+
+actionstepRecordDoesNotCreateLegalAuthority :
+  ActionstepRecordCreatesLegalAuthority → ⊥
+actionstepRecordDoesNotCreateLegalAuthority ()
+
+record SafeJustLegalGovernanceBoundary : Set where
+  constructor safe-just-legal-governance-boundary
+  field
+    goldenAgdaOwnsFormalSemantics : Bool
+    goldenAgdaOwnsFormalSemanticsIsTrue : goldenAgdaOwnsFormalSemantics ≡ true
+    sensibLawOperationalRecordCreatesLegalAuthority : Bool
+    sensibLawOperationalRecordCreatesLegalAuthorityIsFalse :
+      sensibLawOperationalRecordCreatesLegalAuthority ≡ false
+    actionstepOperationalRecordCreatesLegalAuthority : Bool
+    actionstepOperationalRecordCreatesLegalAuthorityIsFalse :
+      actionstepOperationalRecordCreatesLegalAuthority ≡ false
+    legalComplianceHandoffRequiresTypedIntermediateWitness : Bool
+    legalComplianceHandoffRequiresTypedIntermediateWitnessIsTrue :
+      legalComplianceHandoffRequiresTypedIntermediateWitness ≡ true
+    literalDataReceiptCreatesPolicyMandate : Bool
+    literalDataReceiptCreatesPolicyMandateIsFalse :
+      literalDataReceiptCreatesPolicyMandate ≡ false
+    discharged584FibresRetargeted : Bool
+    discharged584FibresRetargetedIsFalse :
+      discharged584FibresRetargeted ≡ false
+    only58UnformalisedFormalGapsRemainTargeted : Bool
+    only58UnformalisedFormalGapsRemainTargetedIsTrue :
+      only58UnformalisedFormalGapsRemainTargeted ≡ true
+    esdSurfaceEditedByThisLane : Bool
+    esdSurfaceEditedByThisLaneIsFalse :
+      esdSurfaceEditedByThisLane ≡ false
+
+canonicalSafeJustLegalGovernanceBoundary : SafeJustLegalGovernanceBoundary
+canonicalSafeJustLegalGovernanceBoundary =
+  safe-just-legal-governance-boundary
+    true refl
+    false refl
+    false refl
+    true refl
+    false refl
+    false refl
+    true refl
+    false refl
+
+SafeJustLegalGovernanceZKPFrame : Set
+SafeJustLegalGovernanceZKPFrame = ParetoSnowball.TOEZKPFrame
+
+canonicalSafeJustLegalGovernanceZKPFrame :
+  SafeJustLegalGovernanceZKPFrame
+canonicalSafeJustLegalGovernanceZKPFrame =
+  ParetoSnowball.toe-zkp-frame
+    "O: converge literal safe-and-just evidence, legal compliance handoffs, and semantic non-promotion into the existing DASHI TOE"
+    "R: reuse Fanning2022LiteralSituatedQualifiedUseBridgeExact, CompositionalComplianceExact, FleetFormalGapTargetTOEExact, and the existing TOE roots"
+    "C: attach aliases and exact boundary receipts only; do not add a second authority or compliance calculus"
+    "S: literal data does not create causal or decision authority; operational case records do not create legal authority; endpoint equality does not replace a typed intermediate witness"
+    "L: one disjoint nonblocking governance-convergence lane; the 584 discharged fibres remain outside the 58-gap target"
+    "P: canonical golden Agda owners exist; Fanning DOI and proof-carrying-compliance attribution remain intact; ESD surfaces are read-only"
+    "G: ITIL, ISO 9000, ISO/IEC 42001:2023, ISO/IEC 27001:2022, ISO/IEC 27701:2025, ISO/IEC 23894:2023, ISO 9241 interaction/HCD standards, NIST AI RMF, Six Sigma, and C4/PlantUML are process lenses only; meta-introspector attribution remains separate"
+    "F: TOE root and Unifier expose the same literal-data, compliance, and operational-record non-promotion receipts"
+    "verification: repository duplicate search; exact branch read-back; zero-trust escape scan; ESD diff scan; Agda kernel check when available"
+    false
+    false
+    false
+    false
