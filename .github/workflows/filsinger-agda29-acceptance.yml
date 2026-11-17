@@ -30,6 +30,7 @@ on:
       - "scripts/check_smith_filsinger_restored_cycle_intervals.py"
       - "scripts/test_smith_filsinger_restored_cycle_intervals.py"
       - "scripts/test_smith_filsinger_restored_cycle_raw_replay.py"
+      - "scripts/run_smith_filsinger_acceptance.sh"
   workflow_dispatch:
 
 permissions:
@@ -95,7 +96,7 @@ jobs:
           DASHI_AGDA_RSS_LIMIT_MB: "8192"
         run: |
           set -euo pipefail
-          bash scripts/check_smith_filsinger_formal_weld_agda29.sh
+          bash scripts/run_smith_filsinger_acceptance.sh --full
       - name: Upload proof and toolchain logs even on failure
         if: always()
         uses: actions/upload-artifact@v4
@@ -105,4 +106,6 @@ jobs:
             agda29-version.txt
             agda29-stdlib.txt
             filsinger-agda29*.log
+            .filsinger-acceptance/acceptance.log
+            .filsinger-acceptance/acceptance-pass.txt
           if-no-files-found: warn
