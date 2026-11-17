@@ -38,6 +38,7 @@ ROOTS = (
     "DASHI.Physics.YangMills.YMClayRationalS3DegreeFifteenInvariantCertificateExact",
     "DASHI.Physics.YangMills.YMClayRationalS3StereographicConcreteExact",
     "DASHI.Physics.YangMills.YMClayRationalS3PositiveWeightedNodesExact",
+    "DASHI.Physics.YangMills.YMClayOriginalRationalWilsonTaylor2PositiveExact",
     "DASHI.Physics.YangMills.YMClayNativeSixPlaneGaugeSameSourceExact",
     "DASHI.Physics.YangMills.YMClayNativeFiniteGaugeVectorNaturalitySafeExact",
     "DASHI.Physics.YangMills.YMClaySUNConstructedPeriodicGaugeCodecExact",
