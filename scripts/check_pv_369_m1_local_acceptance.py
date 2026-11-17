@@ -27,6 +27,7 @@ SCRIPTS = (
     "check_pv_v68_published_multijunction_table_identity.py",
     "check_pv_v68_printed_4t_rounding_interval.py",
     "check_pv_nrel_2017_4t_group_topology.py",
+    "check_pv_369_bp111_scalar_coulomb_distinction.py",
 )
 AGDA = (
     "DASHI/Physics/Photovoltaic/PV369NetHalfThresholdExact.agda",
