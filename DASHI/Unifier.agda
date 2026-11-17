@@ -18,6 +18,14 @@ import DASHI.Unified.InvariantSpine as BrainSpine
 import DASHI.Unified.PNFHyperfabric as PNFHyperfabric
 
 
+open import Agda.Builtin.Bool using (false; true)
+
+import DASHI.Unified.SensibLawGovernanceTOEExact as GovernanceTOE
+import DASHI.Core.AuthorityNonPromotionCore as Authority
+import DASHI.Promotion.AuthorityBoundaryCore as AuthorityBoundary
+import DASHI.Law.SensibLawAgdaFirstLegalRuntimeEverything as LegalRuntime
+import DASHI.Governance.DomainPermeabilityAuthorityTransport as Domain
+
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
 
 import DASHI.Unified.OggSSP2BTOEExact as TwoBTOE

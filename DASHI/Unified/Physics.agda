@@ -1,6 +1,12 @@
 module DASHI.Unified.Physics where
 
-open import Agda.Builtin.Bool using (Bool; false; true)
+import DASHI.Unified.SensibLawGovernanceTOEExact as GovernanceTOE
+import DASHI.Core.AuthorityNonPromotionCore as Authority
+import DASHI.Promotion.AuthorityBoundaryCore as AuthorityBoundary
+import DASHI.Law.SensibLawAgdaFirstLegalRuntimeEverything as LegalRuntime
+import DASHI.Governance.DomainPermeabilityAuthorityTransport as Domain
+
+open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.List.Base using (List; _∷_; [])
@@ -352,7 +358,169 @@ yangMillsTOEIrreducibleFamilyLevel :
 yangMillsTOEIrreducibleFamilyLevel =
   YMTOE.toeIrreducibleFamilyLevel
 
-yangMillsTOECriticalFamilyLevel :
-  CriticalFamily → ProofLevel
-yangMillsTOECriticalFamilyLevel =
-  YMTOE.toeCriticalFamilyLevel
+yangMillsBalabanStressMarkedShellReuseLevel : ProofLevel
+yangMillsBalabanStressMarkedShellReuseLevel =
+  BalabanRGTOE.balabanStressMarkedShellReuseLevel
+
+yangMillsBalabanStressPairingPhysicalWeldLevel : ProofLevel
+yangMillsBalabanStressPairingPhysicalWeldLevel =
+  BalabanRGTOE.balabanStressPairingPhysicalWeldLevel
+
+yangMillsBalabanGeneratedActionDensityCompilerLevel : ProofLevel
+yangMillsBalabanGeneratedActionDensityCompilerLevel =
+  BalabanRGTOE.balabanGeneratedActionDensityCompilerLevel
+
+yangMillsBalabanCombinedRGEffectiveActionCompilerLevel : ProofLevel
+yangMillsBalabanCombinedRGEffectiveActionCompilerLevel =
+  BalabanRGTOE.balabanCombinedRGEffectiveActionCompilerLevel
+
+yangMillsBalabanGeneratedActionStressScaleCompilerLevel : ProofLevel
+yangMillsBalabanGeneratedActionStressScaleCompilerLevel =
+  BalabanRGTOE.balabanGeneratedActionStressScaleCompilerLevel
+
+yangMillsBalabanPublishedFlowRegularEProjectionCompilerLevel : ProofLevel
+yangMillsBalabanPublishedFlowRegularEProjectionCompilerLevel =
+  BalabanRGTOE.balabanPublishedFlowRegularEProjectionCompilerLevel
+
+yangMillsBalabanRegularESection2PredicateCompilerLevel : ProofLevel
+yangMillsBalabanRegularESection2PredicateCompilerLevel =
+  BalabanRGTOE.balabanRegularESection2PredicateCompilerLevel
+
+yangMillsBalabanConcreteRegularELocalizationWitnessLevel : ProofLevel
+yangMillsBalabanConcreteRegularELocalizationWitnessLevel =
+  BalabanRGTOE.balabanConcreteRegularELocalizationWitnessLevel
+
+yangMillsBalabanStressCauchyModulusCompilerLevel : ProofLevel
+yangMillsBalabanStressCauchyModulusCompilerLevel =
+  BalabanRGTOE.balabanStressCauchyModulusCompilerLevel
+
+yangMillsBalabanStressCauchyPhysicalInsertionLevel : ProofLevel
+yangMillsBalabanStressCauchyPhysicalInsertionLevel =
+  BalabanRGTOE.balabanStressCauchyPhysicalInsertionLevel
+
+yangMillsBalabanStressHilbertBoundCompilerLevel : ProofLevel
+yangMillsBalabanStressHilbertBoundCompilerLevel =
+  BalabanRGTOE.balabanStressHilbertBoundCompilerLevel
+
+yangMillsBalabanStressHilbertPhysicalShellLevel : ProofLevel
+yangMillsBalabanStressHilbertPhysicalShellLevel =
+  BalabanRGTOE.balabanStressHilbertPhysicalShellLevel
+
+yangMillsBalabanPublishedNonlinearRGCoreLevel : ProofLevel
+yangMillsBalabanPublishedNonlinearRGCoreLevel =
+  BalabanRGTOE.balabanPublishedNonlinearRGCoreLevel
+
+yangMillsBalabanPublishedRGPhysicalSameObjectLevel : ProofLevel
+yangMillsBalabanPublishedRGPhysicalSameObjectLevel =
+  BalabanRGTOE.balabanPublishedRGPhysicalSameObjectLevel
+
+yangMillsBalabanRGUniformKPAbsorptionStillOpen :
+  BalabanRGTOE.balabanRGUniformKPAbsorptionOpenFlag ≡ false
+yangMillsBalabanRGUniformKPAbsorptionStillOpen =
+  BalabanRGTOE.balabanRGUniformKPAbsorptionStillOpen
+
+yangMillsBalabanRGBlockSpinTransferStillOpen :
+  BalabanRGTOE.balabanRGBlockSpinTransferOpenFlag ≡ false
+yangMillsBalabanRGBlockSpinTransferStillOpen =
+  BalabanRGTOE.balabanRGBlockSpinTransferStillOpen
+
+yangMillsBalabanPublishedRGContinuumTransferStillOpen :
+  BalabanRGTOE.balabanPublishedRGContinuumTransferOpenFlag ≡ false
+yangMillsBalabanPublishedRGContinuumTransferStillOpen =
+  BalabanRGTOE.balabanPublishedRGContinuumTransferStillOpen
+
+yangMillsBalabanOSWightmanContinuumConstructionStillOpen :
+  BalabanRGTOE.balabanOSWightmanContinuumConstructionOpenFlag ≡ false
+yangMillsBalabanOSWightmanContinuumConstructionStillOpen =
+  BalabanRGTOE.balabanOSWightmanContinuumConstructionStillOpen
+
+yangMillsBalabanContinuumRouteMassGapPromotionStillOpen :
+  BalabanRGTOE.balabanContinuumRouteMassGapPromotionOpenFlag ≡ false
+yangMillsBalabanContinuumRouteMassGapPromotionStillOpen =
+  BalabanRGTOE.balabanContinuumRouteMassGapPromotionStillOpen
+
+yangMillsBalabanRGContinuumConstructionStillOpen :
+  BalabanRGTOE.balabanRGContinuumConstructionOpenFlag ≡ false
+yangMillsBalabanRGContinuumConstructionStillOpen =
+  BalabanRGTOE.balabanRGContinuumConstructionStillOpen
+
+yangMillsBalabanContinuumMassGapStillOpen :
+  BalabanRGTOE.balabanRGContinuumMassGapOpenFlag ≡ false
+yangMillsBalabanContinuumMassGapStillOpen =
+  BalabanRGTOE.balabanRGContinuumMassGapStillOpen
+
+yangMillsBalabanTerminalPromotionStillOpen :
+  BalabanRGTOE.balabanTerminalPromotionOpenFlag ≡ false
+yangMillsBalabanTerminalPromotionStillOpen =
+  BalabanRGTOE.balabanTerminalPromotionStillOpen
+
+yangMillsBalabanClayPromotionStillFalse :
+  BalabanRGTOE.balabanRGClayPromotionFlag ≡ false
+yangMillsBalabanClayPromotionStillFalse =
+  BalabanRGTOE.balabanRGClayPromotionStillFalse
+
+
+------------------------------------------------------------------------
+-- Cross-domain governance facade.
+-- This facade exposes legal-governance non-promotion beside physics.
+-- It does not turn governance evidence into physics or legal authority.
+------------------------------------------------------------------------
+
+governanceSensibLawSemanticBoundary :
+  Authority.AuthorityNonPromotionBundle
+governanceSensibLawSemanticBoundary =
+  GovernanceTOE.governanceSemanticAuthorityBoundary
+
+governanceSensibLawSemanticTruthAuthorityStillClosed :
+  Authority.truthAuthorityFlag governanceSensibLawSemanticBoundary ≡ false
+governanceSensibLawSemanticTruthAuthorityStillClosed =
+  GovernanceTOE.governanceSemanticTruthAuthorityStillClosed
+
+governanceSensibLawSemanticLegalAuthorityStillClosed :
+  Authority.legalAuthorityFlag governanceSensibLawSemanticBoundary ≡ false
+governanceSensibLawSemanticLegalAuthorityStillClosed =
+  GovernanceTOE.governanceSemanticLegalAuthorityStillClosed
+
+governanceSensibLawSemanticAllAuthorityStillClosed :
+  Authority.promotesAnyAuthority governanceSensibLawSemanticBoundary ≡ false
+governanceSensibLawSemanticAllAuthorityStillClosed =
+  GovernanceTOE.governanceSemanticAllAuthorityStillClosed
+
+governanceSensibLawLegalAuthorityBoundaryReceipt :
+  AuthorityBoundary.AuthorityBoundaryReceipt
+governanceSensibLawLegalAuthorityBoundaryReceipt =
+  GovernanceTOE.governanceLegalAuthorityBoundaryReceipt
+
+governanceSensibLawLegalRuntimeContract :
+  LegalRuntime.AgdaFirstLegalRuntimeContract
+governanceSensibLawLegalRuntimeContract =
+  GovernanceTOE.governanceLegalRuntimeContract
+
+governanceSensibLawDomainTransportReceipt :
+  Domain.DomainTransportReceipt
+governanceSensibLawDomainTransportReceipt =
+  GovernanceTOE.governanceDomainTransportReceipt
+
+governanceSensibLawRepresentationEqualityDoesNotCreateLegalAuthority :
+  Domain.representationEqualityCreatesLegalAuthority
+    governanceSensibLawDomainTransportReceipt
+  ≡ false
+governanceSensibLawRepresentationEqualityDoesNotCreateLegalAuthority =
+  GovernanceTOE.governanceRepresentationEqualityDoesNotCreateLegalAuthority
+
+governanceSensibLawVendorIdentityDoesNotCreateAuthority :
+  Domain.vendorIdentityCreatesAuthority governanceSensibLawDomainTransportReceipt
+  ≡ false
+governanceSensibLawVendorIdentityDoesNotCreateAuthority =
+  GovernanceTOE.governanceVendorIdentityDoesNotCreateAuthority
+
+governanceSensibLawTargetDomainNeedsOwnAuthorityWitness :
+  Domain.targetDomainNeedsOwnAuthorityWitness governanceSensibLawDomainTransportReceipt
+  ≡ true
+governanceSensibLawTargetDomainNeedsOwnAuthorityWitness =
+  GovernanceTOE.governanceTargetDomainNeedsOwnAuthorityWitness
+
+governanceSensibLawZKPFrame :
+  GovernanceTOE.SensibLawGovernanceTOEZKPFrame
+governanceSensibLawZKPFrame =
+  GovernanceTOE.canonicalSensibLawGovernanceTOEZKPFrame

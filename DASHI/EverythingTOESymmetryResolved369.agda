@@ -13,8 +13,14 @@ import DASHI.Unified.InvariantSpine as BrainSpine
 import DASHI.Unified.PNFHyperfabric as PNFHyperfabric
 
 
-open import Agda.Builtin.Bool using (false)
+import DASHI.Unified.SensibLawGovernanceTOEExact as GovernanceTOE
+import DASHI.Core.AuthorityNonPromotionCore as Authority
+import DASHI.Promotion.AuthorityBoundaryCore as AuthorityBoundary
+import DASHI.Law.SensibLawAgdaFirstLegalRuntimeEverything as LegalRuntime
+import DASHI.Governance.DomainPermeabilityAuthorityTransport as Domain
+
 open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Bool using (false; true)
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 
 ------------------------------------------------------------------------
