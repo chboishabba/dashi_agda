@@ -518,3 +518,52 @@ New `DASHI/Physics/Gravity/KSW668F8CartesianTTToOriginalRadialSourceJetsExact.ag
 **G1 status:** the original smooth Fourier/real-space **source handoff** from the fourth-order TT yy generator to exact effective-shell FV source inputs is now verified at the symbolic differential/algebra level for radial smooth f. The Agda theorem is finite rational jet algebra, **not** a pinned-kernel smooth-calculus theorem. The actual full Cartesian tensor-to-scalar-FV **evolution** commuting diagram, discrete TT preservation through radial shell projection/axis closures, weak-Israel `P,M,U` wall/gauge and electric-Weyl pointwise error estimate remain OPEN.
 
 **G2–G6:** G2 joint SAT boundary energy OPEN; G3 moving warp/normal/radial SSPRK3 + uniform CFL OPEN; G4 moving-domain high Sobolev to both-Weyl trace OPEN; G5 independently convergent dr,dy,dt full receiver and outside-cone controls OPEN; G6 same original matter source, retarded tensor FIO and physically calibrated detector OPEN. Keep source authorship, Caldwell–Langlois/Thorne prior art and user-directed max-cut distinct. No ESD edits or Monster/369 gravity theorem claims.
+
+
+## Maximum-cut XXXVII — exact original FV reconstruction **with origin trace** and SSPRK3 stage naturality
+
+**Most significant new cut:** The XXXVI smooth Cartesian TT → actual three source modes/finite-volume masses is not yet an operator-level discrete evolution theorem. Inspecting the ORIGINAL `scripts/ksw668_f8_tt_multipole.py:stage` radial stencil identified an exact and previously hidden requirement: **the full regularized origin trace V0 is indispensable** for reconstructing the original evolved `H_l=(r/eps)^l V_l`, for ell=2,4.
+
+The original effective-dimensional FV operator at first interior index j=1 in grid units is
+```
+(L_d V)_1 = cp_(d,1)*(V_2-V_1) - cm_(d,1)*(V_1-V_0),
+d=3+2ell.
+```
+Write `lambda=(h/eps)^ell`, `H_1=lambda V_1`, `H_2=2^ell lambda V_2`. Its **exact induced physical radial operator**, including the origin, is
+```
+lambda (L_d V)_1 =
+  cp_(d,1)*(H_2/2^ell-H_1)
+  -cm_(d,1)*(H_1-lambda V_0).
+```
+This is source-written in new `KSW668F8AugmentedOriginRadialFVIntertwinerExact.agda` and independently verified with exact Fractions across all three original d=3,7,11 dimensions and every numerical row. For j>=2, the induced physical stencil is
+```
+(jh/eps)^ell (L_d V)_j =
+   cp_(d,j)*[(j/(j+1))^ell H_(j+1)-H_j]
+  -cm_(d,j)*[H_j-(j/(j-1))^ell H_(j-1)].
+```
+This is a **positive EXACT discrete operator-level commuting diagram** between original regularized FV and its induced physical harmonic radial lift, but only when the regularized origin state is retained. The physical `1/h²` factor is common to both sides. It does not assert that an independently chosen Cartesian 3D tensor FV operator agrees with the induced one.
+
+**Sharp same-reconstructed-field negative control:** For ell>0, changing `V_0` does not change ANY physical node `H_j` when `V_j=0` for j>=1; `H_0=0` regardless of `V_0`. Yet if `V0=1` and all later V_j=0, at grid h=eps=1 the original induced radial force at j=1 is
+```
+ell=2, d=7:  cm_(7,1)=7/1093;
+ell=4, d=11: cm_(11,1)=11/88573.
+```
+Thus there is **no closed local FV operator on these H samples alone** reproducing the original solver; it must carry V0 or an equivalent origin derivative jet. More generally the exact first-shell defect from using an incorrect origin trace is
+```
+delta radial force = [cm_(d,1)/h²] * lambda * (V0-V0_assumed).
+```
+A separate arbitrary-interior ratio theorem gives the exact defect as two face-weighted reconstruction ratio errors. This supplies a concrete, numerical-source-independent G1/G5 error target.
+
+**Stage and time-step compatibility:** The original normal_order=3 semidiscrete U/P/M formulas are linear in their fields and SAT target when geometry `b(T),v(T)`, source amplitude and mesh are fixed per RK stage. New exact rational lemmas prove homogeneous lifting of `dU`, `dP`, `dM`, warp force `-3(P-M)/(2z)`, lower weak-Israel M SAT `2(1-v)(target-M)/dy`, and upper P SAT `-2(1+v)P/dy`, given the SAME spatial multiplier on fields, radial force and source. The separately new `KSW668F8SSPRK3RadialLiftNaturalityExact.agda` proves homogeneous scalar linear-source Shu-Osher SSPRK3 for **time-varying** stage coefficients `a0,a1,a2`. It does **not** prove the entire original coupled matrix intertwines without its original source, boundary and origin conditions, and gives **no stability/CFL theorem**.
+
+**Local checks:** independently executed **1,232/1,232** exact rational radial/FV/stage-reconstruction checks plus **250/250** exact SSPRK3 stage-composition checks (1,482 total). Committed `scripts/test_ksw668_f8_augmented_origin_fv_intertwiner.py` and `scripts/test_ksw668_f8_ssprk3_radial_lift.py` cover these aspects. The exact first-shell origin coefficients are recomputed from the *same original* `FV.d7Minus, FV.d11Minus` and analytic shell volumes; no alternative FV scheme was introduced. Both modules imported by `KSW668F8SameObjectWeylAuthorityBoundary.agda` through original KSW/TOE graph. **Agda pinned kernel NOT RUN**, so rational source-written theorems await typechecking.
+
+**Gate reassessment:**
+- **G1:** Original radial-harmonic *discrete induced operator* with augmented origin trace now **closed at exact rational-algebra level** for radial rows. The missing full 3x3 tensor-Cartesian projector/induced-FV/gauge and original moving physical Weyl receiver identification remain **OPEN**. Unlike the XXXII naive d=3 radial FV counterexample, this new scheme is precisely the conjugate of the ORIGINAL effective-dimensional FV and carries V0 explicitly.
+- **G2:** Original semidiscrete weak-Israel SAT **linear scaling** established algebraically; coupled moving boundary energy, source dependence and pointwise geometric defect remain OPEN.
+- **G3:** Scalar time-varying SSPRK3 **reconstruction naturality** established algebraically; fully discrete weighted stability/CFL/outer closure still OPEN.
+- **G4:** Moving warped-boundary high-Sobolev original source-to-both-electric-Weyl trace estimate OPEN.
+- **G5:** Exact origin and interior reconstruction defects identified; uniform dr/dy/dt and receiver convergence/open-cone negative control remain OPEN.
+- **G6:** Actual Einstein–matter source/retarded FIO/calibrated detector evidence OPEN.
+
+**Next highest-alpha step:** use the *actual original* `(V0,U,P,M)` augmented radial state, the conserved finite-volume shell/Green form, and the moving SAT stage operator to prove a **coupled weighted semidiscrete radial/normal energy bound including the origin trace**, then a quantitative high-derivative receiver estimate. Do not substitute unrelated geometric metrics or a source-changing FV reinterpretation. Preserve original DASHI/Caldwell–Langlois/Thorne attribution and user-directed research distinction. No ESD edits, no Monster/369 physical equivalence, no graviton detection claim.
