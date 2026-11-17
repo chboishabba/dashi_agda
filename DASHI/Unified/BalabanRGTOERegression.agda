@@ -1551,3 +1551,6 @@ import DASHI.Physics.YangMills.YMClayOriginalL1Rational24CellEffectiveRGExact as
 
 -- Original rational SU2 B4 sign/permutation norm and orbit-invariant generators.
 import DASHI.Physics.YangMills.YMClayOriginalRationalS3HyperoctahedralGeneratorsExact as OriginalRationalS3B4
+
+-- All-degree odd coordinate monomial cancellation on genuine 16 signed rational S3 orbit multiset.
+import DASHI.Physics.YangMills.YMClayRationalS3OddSignOrbitCancellationExact as RationalS3OddOrbit
