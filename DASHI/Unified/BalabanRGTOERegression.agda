@@ -1512,20 +1512,15 @@ import DASHI.Physics.YangMills.YangMillsCMP119LiteralWilsonSpanAdditiveExact as 
 -- YM.REAL: root-free Fejer finite product positivity ONLY; continuous Haar remains OPEN.
 import DASHI.Physics.YangMills.YMClaySU2FejerProductFiniteExact as SU2RootFreeFejerFinite
 
--- YM.REAL finite quaternion/Bishop matrix trace weld; Haar and unitary gates OPEN.
-import DASHI.Physics.YangMills.YMClayBishopSU2QuaternionTraceWeldExact as BishopSU2QuaternionTrace
+-- YM.REAL unsafe Bishop trace source lives in separate non-safe regression root.
 
 -- YM.REAL: actual finite weighted integration laws; analytic Haar still open.
 import DASHI.Physics.YangMills.YMClayBishopFiniteWeightedIntegralLawsExact as BishopFiniteWeightedIntegral
 
--- YM.REAL: explicit Bishop SU2 determinant polynomial, physical Haar open.
-import DASHI.Physics.YangMills.YMClayBishopSU2DeterminantExact as BishopSU2Determinant
+-- YM.REAL unsafe Bishop determinant moved out of --safe regression.
 
--- YM.REAL: Bishop SU2 unitary matrix identities, original Wilson Haar OPEN.
-import DASHI.Physics.YangMills.YMClayBishopSU2UnitarityExact as BishopSU2Unitarity
+-- YM.REAL unsafe Bishop SU2 unitarity moved out of --safe regression.
 
--- YM.REAL: concrete Bishop series-limit consumer; source dyadic bound OPEN.
-import DASHI.Physics.YangMills.YMClayBishopSU2HaarSeriesLimitExact as BishopSU2HaarSeriesLimit
+-- YM.REAL Bishop Cauchy limit source lives in separate regression root.
 
--- YM.REAL: Bishop finite normalized Wilson algebra; original source weld OPEN.
-import DASHI.Physics.YangMills.YMClayBishopFiniteWilsonNormalizedExact as BishopFiniteWilsonNormalized
+-- YM.REAL non-safe original Wilson normalization adapter isolated.
