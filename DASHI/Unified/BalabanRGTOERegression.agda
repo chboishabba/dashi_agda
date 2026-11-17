@@ -1517,3 +1517,6 @@ import DASHI.Physics.YangMills.YMClayBishopSU2QuaternionTraceWeldExact as Bishop
 
 -- YM.REAL: actual finite weighted integration laws; analytic Haar still open.
 import DASHI.Physics.YangMills.YMClayBishopFiniteWeightedIntegralLawsExact as BishopFiniteWeightedIntegral
+
+-- YM.REAL: explicit Bishop SU2 determinant polynomial, physical Haar open.
+import DASHI.Physics.YangMills.YMClayBishopSU2DeterminantExact as BishopSU2Determinant
