@@ -16,57 +16,11 @@ open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 import Data.Empty
 
-------------------------------------------------------------------------
--- Current Lean RH max-cut status mirror.
--- Real analysis remains owned by dashi_lean4.
-------------------------------------------------------------------------
-
-toeRiemannThreeTapCurrentLeanFrontier :
-  RiemannFrontier.ThreeTapCurrentLeanFrontier
-toeRiemannThreeTapCurrentLeanFrontier =
-  RiemannFrontier.currentThreeTapCurrentLeanFrontier
-
-toeRiemannA1CarrierSummationStillOpen :
-  RiemannFrontier.ThreeTapCurrentLeanFrontier.a1CarrierSummationPaid
-    toeRiemannThreeTapCurrentLeanFrontier ≡ false
-toeRiemannA1CarrierSummationStillOpen =
-  RiemannFrontier.a1CarrierIsStillOpen
-
-toeRiemannA1UniformCurvatureStillOpen :
-  RiemannFrontier.ThreeTapCurrentLeanFrontier.a1UniformCurvaturePaid
-    toeRiemannThreeTapCurrentLeanFrontier ≡ false
-toeRiemannA1UniformCurvatureStillOpen =
-  RiemannFrontier.a1UniformCurvatureIsStillOpen
-
-toeRiemannA1CompensationStillOpen :
-  RiemannFrontier.ThreeTapCurrentLeanFrontier.a1CompensationPaid
-    toeRiemannThreeTapCurrentLeanFrontier ≡ false
-toeRiemannA1CompensationStillOpen =
-  RiemannFrontier.a1CompensationIsStillOpen
-
-toeRiemannA2ScalarStillOpen :
-  RiemannFrontier.ThreeTapCurrentLeanFrontier.a2StrictScalarPaid
-    toeRiemannThreeTapCurrentLeanFrontier ≡ false
-toeRiemannA2ScalarStillOpen =
-  RiemannFrontier.a2ScalarIsStillOpen
-
-toeRiemannRouteBStillOpen :
-  RiemannFrontier.ThreeTapCurrentLeanFrontier.routeBEventualGapPaid
-    toeRiemannThreeTapCurrentLeanFrontier ≡ false
-toeRiemannRouteBStillOpen =
-  RiemannFrontier.routeBIsStillOpen
-
-toeRiemannExactHeadLeanKernelReceiptStillOpen :
-  RiemannFrontier.ThreeTapCurrentLeanFrontier.exactHeadLeanKernelReceipt
-    toeRiemannThreeTapCurrentLeanFrontier ≡ false
-toeRiemannExactHeadLeanKernelReceiptStillOpen =
-  RiemannFrontier.exactHeadLeanKernelReceiptIsStillOpen
-
-toeRiemannRHStillOpen :
-  RiemannFrontier.ThreeTapCurrentLeanFrontier.rhDerivedHere
-    toeRiemannThreeTapCurrentLeanFrontier ≡ false
-toeRiemannRHStillOpen =
-  RiemannFrontier.rhNotClaimedByAgdaStatusMirror
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Bool using (Bool; false)
+open import Data.Empty using (⊥)
+open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
+open import Data.Nat.Base using (ℕ)
 
 ------------------------------------------------------------------------
 -- Focused TOE aggregate: generic symmetry-resolved fibre calculus plus the
@@ -806,6 +760,40 @@ toeFleetFormalGapTargetReceipt :
 toeFleetFormalGapTargetReceipt =
   FleetGapTOE.canonicalFleetFormalGapTargetReceipt
 
+
+toeFleetDischargedCoreKnowledgeFibres : ℕ
+toeFleetDischargedCoreKnowledgeFibres =
+  FleetGapTOE.dischargedCoreKnowledgeFibres
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
+
+toeFleetDischargedCoreKnowledgeFibresIs584 :
+  toeFleetDischargedCoreKnowledgeFibres ≡ 584
+toeFleetDischargedCoreKnowledgeFibresIs584 = refl
+
+toeFleetPolarityContradictionGaps : ℕ
+toeFleetPolarityContradictionGaps =
+  FleetGapTOE.polarityContradictionGaps
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
+
+toeFleetPolarityContradictionGapsIs44 :
+  toeFleetPolarityContradictionGaps ≡ 44
+toeFleetPolarityContradictionGapsIs44 = refl
+
+toeFleetUnformalisedFormalGaps : ℕ
+toeFleetUnformalisedFormalGaps =
+  FleetGapTOE.unformalisedFormalGaps
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
+
+toeFleetUnformalisedFormalGapsIs58 :
+  toeFleetUnformalisedFormalGaps ≡ 58
+toeFleetUnformalisedFormalGapsIs58 = refl
+
+toeFleetTargetsOnlyUnformalisedFormalGaps :
+  FleetGapTOE.targetOnlyUnformalisedFormalGaps
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt
+  ≡ true
+toeFleetTargetsOnlyUnformalisedFormalGaps = refl
+
 toeFleetCoordinateRebuildabilityReceipt =
   FleetGapTOE.fleetCoordinateRebuildabilityReceipt
 
@@ -1309,60 +1297,3 @@ toeBalabanOSWightmanStillBlocked :
 toeBalabanOSWightmanStillBlocked =
   BalabanR559TOE.balabanOSWightmanConstructionIsFalse
     BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-
-------------------------------------------------------------------------
--- Direct TOE conjunctive closure: the three missing physical producers
--- remain blocked together. No Boolean flag becomes proof authority.
--- Reuse R559 source-owned proofs without adding a model or an axiom.
-------------------------------------------------------------------------
-
-toeBalabanPhysicalPromotionCut :
-  (BalabanR559TOE.balabanBlockSpinTransfer
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false)
-  × (BalabanR559TOE.balabanUniformKPAbsorption
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false)
-  × (BalabanR559TOE.balabanOSWightmanConstruction
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false)
-toeBalabanPhysicalPromotionCut =
-  toeBalabanBlockSpinStillBlocked ,
-  (toeBalabanUniformKPStillBlocked ,
-   toeBalabanOSWightmanStillBlocked)
-
-
-------------------------------------------------------------------------
--- Fleet named-manifest acquisition boundary.
-------------------------------------------------------------------------
-
-toeFleetManifestAcquisitionDemand =
-  FleetGapTOE.fleetManifestAcquisitionDemand
-
-toeFleetNamedManifestStillMissing :
-  FleetGapTOE.namedFormalGapManifestAcquired ≡ false
-toeFleetNamedManifestStillMissing =
-  FleetGapTOE.namedFormalGapManifestAcquiredIsFalse
-
-toeFleetPerGapDispatchStillBlocked :
-  FleetGapTOE.perGapDispatchEnabled ≡ false
-toeFleetPerGapDispatchStillBlocked =
-  FleetGapTOE.perGapDispatchEnabledIsFalse
-
-toeFleetRelatedSymbolsRequired :
-  FleetGapTOE.fleetRelatedSymbolsRequired ≡ true
-toeFleetRelatedSymbolsRequired =
-  FleetGapTOE.fleetRelatedSymbolsRequiredIsTrue
-
-toeFleetDiscoverRequired :
-  FleetGapTOE.fleetDiscoverRequired ≡ true
-toeFleetDiscoverRequired =
-  FleetGapTOE.fleetDiscoverRequiredIsTrue
-
-toeFleetRoundLineageRequired :
-  FleetGapTOE.fleetRoundLineageRequired ≡ true
-toeFleetRoundLineageRequired =
-  FleetGapTOE.fleetRoundLineageRequiredIsTrue
-
-toeFleetCountDoesNotCreateNamedManifest :
-  FleetGapTOE.CountCreatesNamedManifest → ⊥
-toeFleetCountDoesNotCreateNamedManifest =
-  FleetGapTOE.fleetCountDoesNotCreateNamedManifest

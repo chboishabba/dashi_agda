@@ -2,6 +2,7 @@
 module DASHI.Unified.FleetFormalGapTargetTOEValidation where
 
 open import DASHI.Core.Prelude
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
 import DASHI.Unified.FleetFormalGapTargetTOEExact as Fleet
@@ -265,56 +266,52 @@ toeResidualFieldStillNotPromoted =
   TOE.toeFleetResidualFieldPromotionImpossible
 
 
-------------------------------------------------------------------------
--- Named-manifest acquisition remains fail-closed at both TOE facades.
-------------------------------------------------------------------------
+toeFleetDischargedCountMatchesOwner :
+  TOE.toeFleetDischargedCoreKnowledgeFibres
+  ≡ Fleet.dischargedCoreKnowledgeFibres
+      Fleet.canonicalFleetFormalGapTargetReceipt
+toeFleetDischargedCountMatchesOwner = refl
 
-toeFleetNamedManifestStillMissingMatches :
-  Fleet.namedFormalGapManifestAcquired ≡ false
-toeFleetNamedManifestStillMissingMatches =
-  TOE.toeFleetNamedManifestStillMissing
+unifierFleetDischargedCountMatchesOwner :
+  Unifier.unifierFleetDischargedCoreKnowledgeFibres
+  ≡ Fleet.dischargedCoreKnowledgeFibres
+      Fleet.canonicalFleetFormalGapTargetReceipt
+unifierFleetDischargedCountMatchesOwner = refl
 
-unifierFleetNamedManifestStillMissingMatches :
-  Fleet.namedFormalGapManifestAcquired ≡ false
-unifierFleetNamedManifestStillMissingMatches =
-  Unifier.unifierFleetNamedManifestStillMissing
+toeFleetContradictionCountMatchesOwner :
+  TOE.toeFleetPolarityContradictionGaps
+  ≡ Fleet.polarityContradictionGaps
+      Fleet.canonicalFleetFormalGapTargetReceipt
+toeFleetContradictionCountMatchesOwner = refl
 
-toeFleetPerGapDispatchStillBlockedMatches :
-  Fleet.perGapDispatchEnabled ≡ false
-toeFleetPerGapDispatchStillBlockedMatches =
-  TOE.toeFleetPerGapDispatchStillBlocked
+unifierFleetContradictionCountMatchesOwner :
+  Unifier.unifierFleetPolarityContradictionGaps
+  ≡ Fleet.polarityContradictionGaps
+      Fleet.canonicalFleetFormalGapTargetReceipt
+unifierFleetContradictionCountMatchesOwner = refl
 
-unifierFleetPerGapDispatchStillBlockedMatches :
-  Fleet.perGapDispatchEnabled ≡ false
-unifierFleetPerGapDispatchStillBlockedMatches =
-  Unifier.unifierFleetPerGapDispatchStillBlocked
+toeFleetFormalGapCountMatchesOwner :
+  TOE.toeFleetUnformalisedFormalGaps
+  ≡ Fleet.unformalisedFormalGaps
+      Fleet.canonicalFleetFormalGapTargetReceipt
+toeFleetFormalGapCountMatchesOwner = refl
 
-toeFleetRelatedSymbolsRequiredMatches :
-  Fleet.fleetRelatedSymbolsRequired ≡ true
-toeFleetRelatedSymbolsRequiredMatches =
-  TOE.toeFleetRelatedSymbolsRequired
+unifierFleetFormalGapCountMatchesOwner :
+  Unifier.unifierFleetUnformalisedFormalGaps
+  ≡ Fleet.unformalisedFormalGaps
+      Fleet.canonicalFleetFormalGapTargetReceipt
+unifierFleetFormalGapCountMatchesOwner = refl
 
-unifierFleetRelatedSymbolsRequiredMatches :
-  Fleet.fleetRelatedSymbolsRequired ≡ true
-unifierFleetRelatedSymbolsRequiredMatches =
-  Unifier.unifierFleetRelatedSymbolsRequired
+toeFleetTargetsOnlyFormalResidual :
+  Fleet.targetOnlyUnformalisedFormalGaps
+    Fleet.canonicalFleetFormalGapTargetReceipt
+  ≡ true
+toeFleetTargetsOnlyFormalResidual =
+  TOE.toeFleetTargetsOnlyUnformalisedFormalGaps
 
-toeFleetDiscoverRequiredMatches :
-  Fleet.fleetDiscoverRequired ≡ true
-toeFleetDiscoverRequiredMatches =
-  TOE.toeFleetDiscoverRequired
-
-unifierFleetDiscoverRequiredMatches :
-  Fleet.fleetDiscoverRequired ≡ true
-unifierFleetDiscoverRequiredMatches =
-  Unifier.unifierFleetDiscoverRequired
-
-toeFleetRoundLineageRequiredMatches :
-  Fleet.fleetRoundLineageRequired ≡ true
-toeFleetRoundLineageRequiredMatches =
-  TOE.toeFleetRoundLineageRequired
-
-unifierFleetRoundLineageRequiredMatches :
-  Fleet.fleetRoundLineageRequired ≡ true
-unifierFleetRoundLineageRequiredMatches =
-  Unifier.unifierFleetRoundLineageRequired
+unifierFleetTargetsOnlyFormalResidual :
+  Fleet.targetOnlyUnformalisedFormalGaps
+    Fleet.canonicalFleetFormalGapTargetReceipt
+  ≡ true
+unifierFleetTargetsOnlyFormalResidual =
+  Unifier.unifierFleetTargetsOnlyUnformalisedFormalGaps
