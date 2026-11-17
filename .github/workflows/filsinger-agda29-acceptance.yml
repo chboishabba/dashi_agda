@@ -14,6 +14,8 @@ on:
       - "flake.nix"
       - "flake.lock"
       - ".github/workflows/filsinger-agda29-acceptance.yml"
+      - "scripts/check_smith_filsinger_original_gate_evidence.py"
+      - "scripts/test_smith_filsinger_original_gate_evidence.py"
   workflow_dispatch:
 
 permissions:
@@ -32,6 +34,8 @@ jobs:
         with:
           submodules: recursive
           persist-credentials: false
+      - name: Fail-closed original-source evidence checker tests
+        run: python3 scripts/test_smith_filsinger_original_gate_evidence.py
       - uses: cachix/install-nix-action@v31
         with:
           extra_nix_config: |
