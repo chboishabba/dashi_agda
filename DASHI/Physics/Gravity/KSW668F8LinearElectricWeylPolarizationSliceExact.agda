@@ -76,6 +76,11 @@ normalMinkowskiNormAtOriginalSlice :
   - (nT * nT) + nZ * nZ ≡ (+ 9) / 16
 normalMinkowskiNormAtOriginalSlice = solve []
 
+normalOriginalAdSUnitAtOriginalSlice :
+  ((+ 16) / 9) * (- (nT * nT) + nZ * nZ)
+    ≡ (+ 1) / 1
+normalOriginalAdSUnitAtOriginalSlice = solve []
+
 data LinearElectricWeylSourceIdentityHole : Set where
   conformalCovarianceDerivedFromCurvedConnection :
     LinearElectricWeylSourceIdentityHole
