@@ -1,0 +1,496 @@
+{
+  "source_world": "DMT-2023-empirical-source-world",
+  "snapshot_version": "2026-10-24-phase-model-cards-true-git-tree-correction",
+  "derivation": "read-only evaluation against pinned Git tree; no scientific computation or data acquisition",
+  "source_records": 7,
+  "source_file_objects": 56,
+  "original_script_git_sha1": "f87d99f448848c3b0531fea0780ee241ebd77549",
+  "source_script_20_ids_match_20_mat_pairs": true,
+  "artifact_status_counts": {
+    "present": 5,
+    "notLocated": 14,
+    "knownAbsent": 2
+  },
+  "claims": [
+    {
+      "consumer": "c_public_2023",
+      "grade": "source_claim",
+      "required_artifact_ids": [
+        "primary_paper"
+      ],
+      "missing": [],
+      "known_absent_in_declared_source_scope": [],
+      "state": "source_attested_only"
+    },
+    {
+      "consumer": "c_public_files",
+      "grade": "source_metadata",
+      "required_artifact_ids": [
+        "git_tree"
+      ],
+      "missing": [],
+      "known_absent_in_declared_source_scope": [],
+      "state": "source_attested_only"
+    },
+    {
+      "consumer": "c_original_static_inclusion",
+      "grade": "subject_specific",
+      "required_artifact_ids": [
+        "original_static_fd",
+        "original_preproc"
+      ],
+      "missing": [
+        "original_static_fd",
+        "original_preproc"
+      ],
+      "known_absent_in_declared_source_scope": [],
+      "state": "acquisition_blocked"
+    },
+    {
+      "consumer": "c_original_dynamic_inclusion",
+      "grade": "subject_specific",
+      "required_artifact_ids": [
+        "original_static_fd",
+        "original_full_fd"
+      ],
+      "missing": [
+        "original_static_fd",
+        "original_full_fd"
+      ],
+      "known_absent_in_declared_source_scope": [],
+      "state": "acquisition_blocked"
+    },
+    {
+      "consumer": "c_original_joint_inclusion",
+      "grade": "subject_specific",
+      "required_artifact_ids": [
+        "original_static_fd",
+        "original_eeg_qc"
+      ],
+      "missing": [
+        "original_static_fd",
+        "original_eeg_qc"
+      ],
+      "known_absent_in_declared_source_scope": [],
+      "state": "acquisition_blocked"
+    },
+    {
+      "consumer": "c_data_acquisition",
+      "grade": "research_access",
+      "required_artifact_ids": [
+        "data_use_review",
+        "source_local_bytes"
+      ],
+      "missing": [
+        "data_use_review",
+        "source_local_bytes"
+      ],
+      "known_absent_in_declared_source_scope": [],
+      "state": "acquisition_blocked"
+    },
+    {
+      "consumer": "c_static_reproduction",
+      "grade": "empirical",
+      "required_artifact_ids": [
+        "original_static_fd",
+        "original_preproc",
+        "data_use_review",
+        "static_fmri_replay",
+        "original_preprocessed_voxel_nifti",
+        "original_schaefer_extended_mask",
+        "effective_static_gfc_workspace"
+      ],
+      "missing": [
+        "original_static_fd",
+        "original_preproc",
+        "data_use_review",
+        "static_fmri_replay",
+        "original_preprocessed_voxel_nifti",
+        "original_schaefer_extended_mask",
+        "effective_static_gfc_workspace"
+      ],
+      "known_absent_in_declared_source_scope": [],
+      "state": "acquisition_blocked"
+    },
+    {
+      "consumer": "c_published_precursor",
+      "grade": "source_claim",
+      "required_artifact_ids": [
+        "sanders_article"
+      ],
+      "missing": [],
+      "known_absent_in_declared_source_scope": [],
+      "state": "source_attested_only"
+    },
+    {
+      "consumer": "c_temporal_replication",
+      "grade": "empirical",
+      "required_artifact_ids": [
+        "sanders_phase_data",
+        "sanders_codebook",
+        "participant_lineage"
+      ],
+      "missing": [
+        "sanders_phase_data",
+        "sanders_codebook",
+        "participant_lineage"
+      ],
+      "known_absent_in_declared_source_scope": [],
+      "state": "acquisition_blocked"
+    },
+    {
+      "consumer": "c_external_entity",
+      "grade": "ontology",
+      "required_artifact_ids": [
+        "concealed_target_protocol"
+      ],
+      "missing": [
+        "concealed_target_protocol"
+      ],
+      "known_absent_in_declared_source_scope": [],
+      "state": "acquisition_blocked"
+    },
+    {
+      "consumer": "c_verified_source_namespace",
+      "grade": "source_metadata",
+      "required_artifact_ids": [
+        "source_subject_namespace",
+        "git_tree"
+      ],
+      "missing": [],
+      "known_absent_in_declared_source_scope": [],
+      "state": "source_attested_only"
+    },
+    {
+      "consumer": "c_original_static_code_located",
+      "grade": "source_metadata",
+      "required_artifact_ids": [
+        "source_static_analysis_code"
+      ],
+      "missing": [],
+      "known_absent_in_declared_source_scope": [],
+      "state": "source_attested_only"
+    },
+    {
+      "consumer": "c_dynamic_replay_from_tree_alone",
+      "grade": "empirical",
+      "required_artifact_ids": [
+        "source_local_bytes",
+        "original_preproc",
+        "dynamic_tapered_window_in_pinned_tree"
+      ],
+      "missing": [
+        "source_local_bytes",
+        "original_preproc",
+        "dynamic_tapered_window_in_pinned_tree"
+      ],
+      "known_absent_in_declared_source_scope": [
+        "dynamic_tapered_window_in_pinned_tree"
+      ],
+      "state": "source_scope_blocked"
+    },
+    {
+      "consumer": "c_public_mat_reproduces_original_static",
+      "grade": "empirical",
+      "required_artifact_ids": [
+        "original_static_nifti_and_mask_in_pinned_tree",
+        "effective_static_gfc_workspace",
+        "original_static_fd",
+        "source_local_bytes",
+        "static_fmri_replay"
+      ],
+      "missing": [
+        "original_static_nifti_and_mask_in_pinned_tree",
+        "effective_static_gfc_workspace",
+        "original_static_fd",
+        "source_local_bytes",
+        "static_fmri_replay"
+      ],
+      "known_absent_in_declared_source_scope": [
+        "original_static_nifti_and_mask_in_pinned_tree"
+      ],
+      "state": "source_scope_blocked"
+    }
+  ],
+  "action_frontier": [
+    {
+      "id": "a_original_motion_primary",
+      "kind": "institutional_source_recovery",
+      "state": "candidate_admissible",
+      "missing_prerequisites": [],
+      "potential_artifacts": [
+        "original_static_fd",
+        "original_full_fd",
+        "original_eeg_qc",
+        "original_preproc"
+      ],
+      "potential_consumer_ids": [
+        "c_original_static_inclusion",
+        "c_original_dynamic_inclusion",
+        "c_original_joint_inclusion",
+        "c_static_reproduction"
+      ],
+      "potential_consumer_count": 4,
+      "cost_band": 3,
+      "access_risk": 1,
+      "research_action": "Search publisher SI, original deposited scripts and QC metadata first; record unavailable exact artifacts; no automated messaging; respect custodian-controlled access",
+      "promotion_authorised": false,
+      "pareto": true
+    },
+    {
+      "id": "b_rights_review",
+      "kind": "context_provenance_audit",
+      "state": "candidate_admissible",
+      "missing_prerequisites": [],
+      "potential_artifacts": [
+        "data_use_review"
+      ],
+      "potential_consumer_ids": [
+        "c_data_acquisition",
+        "c_static_reproduction"
+      ],
+      "potential_consumer_count": 2,
+      "cost_band": 2,
+      "access_risk": 1,
+      "research_action": "Review article data statement, exact Git licence absence, applicable consent/data-use/re-use rules; do not infer approval",
+      "promotion_authorised": false,
+      "pareto": true
+    },
+    {
+      "id": "c_source_bytes",
+      "kind": "data_acquisition",
+      "state": "source_prerequisite_blocked",
+      "missing_prerequisites": [
+        "data_use_review"
+      ],
+      "potential_artifacts": [
+        "source_local_bytes"
+      ],
+      "potential_consumer_ids": [
+        "c_data_acquisition"
+      ],
+      "potential_consumer_count": 1,
+      "cost_band": 2,
+      "access_risk": 3,
+      "research_action": "Only rights-reviewed parcelled BOLD_AAL MAT acquisition and Git/SHA256 verification for exploratory/dynamic consumers; NOT an input prerequisite for voxelwise 2023 StaticGFC",
+      "promotion_authorised": false,
+      "pareto": false
+    },
+    {
+      "id": "d_replay_static",
+      "kind": "empirical_replication",
+      "state": "source_prerequisite_blocked",
+      "missing_prerequisites": [
+        "original_static_fd",
+        "original_preproc",
+        "data_use_review",
+        "original_preprocessed_voxel_nifti",
+        "original_schaefer_extended_mask",
+        "effective_static_gfc_workspace"
+      ],
+      "potential_artifacts": [
+        "static_fmri_replay"
+      ],
+      "potential_consumer_ids": [
+        "c_static_reproduction"
+      ],
+      "potential_consumer_count": 1,
+      "cost_band": 4,
+      "access_risk": 3,
+      "research_action": "Run original n16 post-bolus static GFC with matched source preprocessing, compare source t/p/CI, publish discrepancy",
+      "promotion_authorised": false,
+      "pareto": false
+    },
+    {
+      "id": "e_phase_matrices",
+      "kind": "controlled_source_recovery",
+      "state": "candidate_admissible",
+      "missing_prerequisites": [],
+      "potential_artifacts": [
+        "sanders_phase_data",
+        "sanders_codebook",
+        "participant_lineage"
+      ],
+      "potential_consumer_ids": [
+        "c_temporal_replication"
+      ],
+      "potential_consumer_count": 1,
+      "cost_band": 3,
+      "access_risk": 3,
+      "research_action": "Locate archived data and supplementary codebooks; external reasonable-request process only after independent access approval",
+      "promotion_authorised": false,
+      "pareto": true
+    },
+    {
+      "id": "f_entity_story",
+      "kind": "deferred_experiment",
+      "state": "source_prerequisite_blocked",
+      "missing_prerequisites": [
+        "concealed_target_protocol"
+      ],
+      "potential_artifacts": [],
+      "potential_consumer_ids": [],
+      "potential_consumer_count": 0,
+      "cost_band": 4,
+      "access_risk": 4,
+      "research_action": "Not currently admitted: no preregistered leakage-controlled experiment or distinct prediction",
+      "promotion_authorised": false,
+      "pareto": false
+    },
+    {
+      "id": "g_voxel_and_atlas_source",
+      "kind": "primary_source_recovery",
+      "state": "source_prerequisite_blocked",
+      "missing_prerequisites": [
+        "data_use_review"
+      ],
+      "potential_artifacts": [
+        "original_preprocessed_voxel_nifti",
+        "original_schaefer_extended_mask"
+      ],
+      "potential_consumer_ids": [
+        "c_static_reproduction"
+      ],
+      "potential_consumer_count": 1,
+      "cost_band": 4,
+      "access_risk": 3,
+      "research_action": "Locate same-object NIfTI preprocessed inputs and 112-region Schaefer/subcortical atlas identified by author StaticGFC.m. Treat published BOLD_AAL as separate representation, not a replacement; no unapproved redistribution",
+      "promotion_authorised": false,
+      "pareto": false
+    },
+    {
+      "id": "h_effective_static_code",
+      "kind": "source_preprocessing_recovery",
+      "state": "candidate_admissible",
+      "missing_prerequisites": [],
+      "potential_artifacts": [
+        "effective_static_gfc_workspace"
+      ],
+      "potential_consumer_ids": [
+        "c_static_reproduction"
+      ],
+      "potential_consumer_count": 1,
+      "cost_band": 3,
+      "access_risk": 1,
+      "research_action": "Recover actual executed static-GFC code revision/workspace and specific upstream xdata/ydata/network/FDR assignments, MATLAB/NIfTI dependencies and exclusions. Current script is not self-contained.",
+      "promotion_authorised": false,
+      "pareto": true
+    }
+  ],
+  "live_pareto_source_routes": [
+    "a_original_motion_primary",
+    "b_rights_review",
+    "e_phase_matrices",
+    "h_effective_static_code"
+  ],
+  "static_gfc_conditional_plan": [
+    "a_original_motion_primary",
+    "b_rights_review",
+    "g_voxel_and_atlas_source",
+    "h_effective_static_code",
+    "d_replay_static"
+  ],
+  "phenomenology_conditional_plan": [
+    "e_phase_matrices"
+  ],
+  "dynamic_tree_only_conditional_plan": null,
+  "ontology_conditional_plan": null,
+  "no_status_promoted": true,
+  "no_network_acquisition": true,
+  "no_contact_or_email": true,
+  "source_claims_are_not_independent_replications": true,
+  "public_mat_alone_static_result_plan": null,
+  "bibliographic_lineage_roots": 3,
+  "participant_independence_certified": false,
+  "independently_reproduced_original_statistic": false,
+  "verification": {
+    "as_of_date": "2026-10-24",
+    "status": "exact_blob_local_six_suite_57_of_57_passed",
+    "method": "Git blob SHA verified local mirror, Python 3.13.5 six focused pytest suites (existing 5 + exact DMT steelman witness suite)",
+    "source_world_git_blob": "48a9062418dc970cc25557c68c9d355580cff0b1",
+    "source_tree_git_blob": "517fed29556eceaca1453b86941042296a5aee4e",
+    "source_search_runtime_git_blob": "1907a2e184557981fabe47635967910d795f9543",
+    "source_world_tests_git_blob": "ed438b70f4185f1080a1a8e79c323abf61f6c655",
+    "model_cards_git_blob": "0f6d3ffc2954c570512b2970fb10687ee01106fc",
+    "phase_audit_git_blob": "469ea61a7112844ff1cb1d232e7667c8ca0b8592",
+    "executed_test_suites": [
+      "tests/test_dmt_source_world_search.py",
+      "tests/test_dmt_paired_fc.py",
+      "tests/test_dmt_original_motion_cohort.py",
+      "tests/test_dmt_source_acquisition.py",
+      "tests/test_dmt_research_phase_audit.py",
+      "tests/test_dmt_steelman_identifiability.py"
+    ],
+    "python_test_result": "57 passed in 0.81s",
+    "source_world_python_tests_written": 20,
+    "model_card_phase_python_tests_written": 10,
+    "source_world_python_pytest_current_head_executed": true,
+    "paired_fc_python_pytest_current_head_executed": true,
+    "agda_kernel_current_head_checked": false,
+    "original_human_data_replay_completed": false,
+    "source_code_tests_do_not_evidence_scientific_model_fit": true,
+    "steelman_source_code_git_blobs": {
+      "scripts/audit_dmt_steelman_identifiability.py": "ace42b33a41a5b95d70125d091657d13a998efec",
+      "tests/test_dmt_steelman_identifiability.py": "335858f39a234fa10a997be549c10242faf1cdb6",
+      "Docs/receipts/DMTSteelmanDiscriminatorValue20261024.json": "5417a2d0726d683dc07ee5dc462b5055eade0aff",
+      "Docs/receipts/DMTRestrictedModelCards20261024.json": "2a890cf116e178a0035990642b22fdfd281ff33c",
+      "scripts/audit_dmt_research_phase.py": "36f4b1dbc88900826dfb34c93e3207aa2c8985a2",
+      "tests/test_dmt_research_phase_audit.py": "985132eb99ef611ba4834b5600cca044e736698c"
+    },
+    "phase_audit_tests_written": 13,
+    "steelman_witness_tests_written": 6
+  },
+  "claim_state_counts": {
+    "source_attested_only": 5,
+    "acquisition_blocked": 7,
+    "source_scope_blocked": 2
+  },
+  "source_scope_disjoint_reentry_required": true,
+  "source_world_regression_tests_written": 19,
+  "read_only_derivation": true,
+  "primary_source_git_provenance": {
+    "source_commit_sha1": "b35701d88d904e2f602164ff2eae0fc879772078",
+    "source_tree_sha1": "38bdb12d180303f1738b7c5b6d99f34f157c26f9",
+    "source_commit_and_tree_distinct": true,
+    "recursive_tree_truncated": false,
+    "blob_entry_count": 56,
+    "paths_hashes_sizes_all_match": true,
+    "verification": "Independent connected GitHub REST git/commits and recursive git/trees read, 2026-10-24"
+  },
+  "research_phase_contract": {
+    "acquisition_dossier": "Docs/receipts/DMT2023DeweyIbrahimAcquisitionDecision20261024.json",
+    "model_cards": "Docs/receipts/DMTRestrictedModelCards20261024.json",
+    "audit_script": "scripts/audit_dmt_research_phase.py",
+    "active_phase": "phase_1_primary_source_acquisition",
+    "model_families": [
+      "M0",
+      "M1",
+      "M2"
+    ],
+    "unapproved_consumer_models": [
+      "M3",
+      "M4"
+    ],
+    "original_static_measurement_reproduced": false,
+    "model_fits_completed": false,
+    "model_preregistration_completed": false
+  },
+  "steelman_research_value": {
+    "source_library_note": "Existing human-data source-world keeps seven attributed records/three bibliographic provenance roots. New Mago 2026 conceptual donor is separately attributed in steelman dossier, not counted as an additional independent human participant cohort.",
+    "value_ledger": "Docs/receipts/DMTSteelmanDiscriminatorValue20261024.json",
+    "model_cards": "Docs/receipts/DMTRestrictedModelCards20261024.json",
+    "exact_rational_witness": "scripts/audit_dmt_steelman_identifiability.py",
+    "adversarial_comparators": [
+      "M0",
+      "M1a",
+      "M1b",
+      "M2"
+    ],
+    "finite_binary_observation_words_exhausted_at_horizons_1_to_6": 126,
+    "word_probabilities_exactly_equal": true,
+    "inference_to_external_agent_authorised": false,
+    "empirical_M1a_fit_completed": false,
+    "empirical_M2_fit_completed": false,
+    "relative_value_decision": "Highest unconditional proof gap: observational nonidentifiability/strong comparator; conditional empirical frontier: temporal phenom phase data; original-GFC reproducibility supports methodological integrity; M3 concealed targets separate prospective study."
+  }
+}

@@ -1,0 +1,260 @@
+{
+  "schema": "dashi-dmt-steelman-discriminator-v1",
+  "revision": "2026-10-24",
+  "scope": "Consumer-indexed research value and strongest alternatives; priority judgments are DASHI analysis, NOT experimentally measured effects or calibrated utility",
+  "source_world": "Docs/receipts/DMT2023SourceWorld.json",
+  "model_cards": "Docs/receipts/DMTRestrictedModelCards20261024.json",
+  "prior_acquisition": "Docs/receipts/DMT2023DeweyIbrahimAcquisitionDecision20261024.json",
+  "exact_synthetic_witness": "scripts/audit_dmt_steelman_identifiability.py",
+  "primary_roots": [
+    {
+      "id": "timmermann2023",
+      "authors": "Christopher Timmermann, Leor Roseman, Sharad Haridas, Fernando E Rosas and collaborators",
+      "doi": "10.1073/pnas.2218949120",
+      "role": "actual human EEG-fMRI source; original n16 static source result, original preprocessing unlocated"
+    },
+    {
+      "id": "sanders2026",
+      "authors": "James W Sanders, Raphaël Millière, Ema Demšar and coauthors",
+      "doi": "10.1093/nc/niag015",
+      "role": "primary microphenomenology paper; 23 interviewed, temporal sequence and perceived-presence categories; original 2023 participant/crosswalk independence NOT established"
+    },
+    {
+      "id": "mago2026",
+      "authors": "Jonas Mago, George Deane, Lars Sandved-Smith and coauthors",
+      "doi": "10.1093/nc/niaf069",
+      "role": "ORIGINAL theoretical endogenous competitor, active inference with counterfactual richness and exogenous agency attribution; explicitly conceptual, no mathematical implementation or new data generated or analysed"
+    },
+    {
+      "id": "davis2020",
+      "authors": "Alan K Davis, John M Clifton, Eric G Weaver and coauthors",
+      "doi": "10.1177/0269881120916143",
+      "role": "self-selected retrospective DMT entity-encounter survey; phenomenology/motivation and bias caution, NOT independent fMRI validation"
+    },
+    {
+      "id": "ibrahim2017",
+      "authors": "Mark Ibrahim, Christopher M Danforth and Peter Sheridan Dodds",
+      "doi": "10.1016/j.jocs.2016.12.001",
+      "role": "historical Wikipedia first-link network and research navigation methodology donor, NOT an actual 2026 DMT edge"
+    }
+  ],
+  "research_questions": [
+    {
+      "id": "R1_presence_onset",
+      "consumer": "c_temporal_replication",
+      "question": "Which contextual, sensory-integration, spatialisation and self-other covariates precede the time of reported autonomous presence?",
+      "existing_source": "Sanders2026 reports typical sensory and three-dimensional spatial precursors; phase matrices and timing still unlocated",
+      "strong_null": "Mechanistic active-inference M1a can generate these phenomena endogenously; interviews retrospectively reconstruct temporal order",
+      "strong_M2": "A restricted fixed-Q agent-trace may constrain nested event-return timing after a truly measured mapping is specified",
+      "discriminator": "Predeclared patient/participant-level event dictionary, time alignment and conditional presence onset controlling sensory richness, expectation and cognitive variables; require an M2-exclusive pattern beyond bounded M1a",
+      "possible_outcome": "Useful temporally predictive phenomenology even if no ontological discrimination",
+      "value_class": "high_conditional_empirical"
+    },
+    {
+      "id": "R2_mechanism",
+      "consumer": "theory_specific_M2_vs_M1",
+      "question": "Does constrained M2 outperform a serious mechanistic M1a and an observationally expressive M1b under common outcome/missingness and equal complexity rules?",
+      "existing_source": "Mago2026 is a strong qualitative M1 donor but admits no mathematical implementation/new data; our M2 currently has only a generic fixed-Q trace identity",
+      "strong_null": "An endogenous HMM can reproduce any same finite hidden-Q/emission observational law; semantic interpretation is not identified",
+      "strong_M2": "Introduce independently grounded fixed-Q, nested subset trace, return-time, or controlled-transition constraints that yield falsifiable predictions outside prespecified mechanistic M1a",
+      "discriminator": "Mathematically exhibit positive distance between restricted observational families on source-defined outcomes, or publish their intersection/no-go; score held-out subjects after preregistering capacity and calibration",
+      "possible_outcome": "Strong theoretical negative/no-identification result OR uniquely testable narrower hypothesis; either sharpens scientific boundary",
+      "value_class": "highest_unconditionally_available_math"
+    },
+    {
+      "id": "R3_original_qc_and_replay",
+      "consumer": "c_static_reproduction",
+      "question": "Can original human n16 paper static voxelwise GFC and QC eligibility be replayed exactly?",
+      "existing_source": "Original author static script namespace 20 paired people and 56-file tree pinned; processed voxel NIfTI/atlas, actual QC crosswalk and workspace unavailable",
+      "strong_null": "Published t(15)=3.11 is a neural contrast compatible with many mechanisms; reproducing it does not identify M2",
+      "strong_M2": "Source-specific reproducible neural measurement can become an honest input feature to later matched model comparisons",
+      "discriminator": "Original processed NIfTI, Schaefer atlas, original preprocessing/motion FD and rights reviewed; reproduce numerator and uncertainty from actual participants",
+      "possible_outcome": "High-integrity open-reproducibility audit; transferable value even if no theory prediction verified",
+      "value_class": "high_infrastructure_not_ontology"
+    },
+    {
+      "id": "R4_concealed_information",
+      "consumer": "M3_prospective_target",
+      "question": "Is there a preregistered, leakage-resistant dependence on concealed target data beyond all available ordinary information?",
+      "existing_source": "Neither original DMT fMRI nor retrospective Sanders interview measured concealed targets",
+      "strong_null": "Target and participant signal independent; any information-transfer claim must defeat ordinary leakage, unblinding and analysis selection",
+      "strong_M2": "A separate source-defined channel may predict above-chance target information, but must not assume agent identity or cooperation",
+      "discriminator": "Independent ethically approved experimental protocol; cryptographic target commitments, blinds, anti-leakage audits, prespecified denominator/effect, independent replication",
+      "possible_outcome": "A strong replicated channel result would be transformative and worth explaining, BUT not logically unique proof of independent conscious entities; a well-powered null constrains specific channels",
+      "value_class": "highest_potential_impact_highest_access_and_error_risk"
+    },
+    {
+      "id": "R5_model_semantics",
+      "consumer": "external_agent_ontology",
+      "question": "Is an independently conscious external ontology identified rather than simply a psychologically real subjective presence?",
+      "existing_source": "No empirically adequate distinct experiment in current source world; subjective experience, neural signatures and generic information-channel performance do not suffice",
+      "strong_null": "Ordinary generative social cognition can account for rich encounter experience and transmission-like narratives; metaphysical ontology does not follow",
+      "strong_M2": "Independent agent ontology must entail some unique robust counterfactual dependency no endogenous/instrumental account reproduces",
+      "discriminator": "A source-locked causal/experimental alternative-excluding prediction, with independent replication and detection of leaked information",
+      "possible_outcome": "Remain appropriately unproved; intellectual clarity and a hard non-promotion theorem still useful",
+      "value_class": "currently_not_admitted"
+    }
+  ],
+  "ranked_research_payoffs": [
+    {
+      "id": "P1_no_identification",
+      "priority_band": "P0",
+      "reason": "Requires no new participant access; can establish exact mathematical non-uniqueness and force a genuinely discriminating M2 prediction, preventing wasted effort on tautological trace theorems",
+      "deliverable": "Exact finite observational equivalence witness, structural theorem statement and controlled comparator overlap certificate",
+      "consumer_payoff": [
+        "M0_M1_M2_design",
+        "methodological_nonpromotion",
+        "source_model_cards"
+      ],
+      "stop_rule": "Do not call an ordinary finite HMM output difference proof of external identity."
+    },
+    {
+      "id": "P2_strong_M1",
+      "priority_band": "P0",
+      "reason": "The 2026 active-inference account is a far better adversarial comparator than an impoverished null; discharging this avoids weak-strawman model wins",
+      "deliverable": "Operational M1a with independently measured sensory precision, counterfactual depth, agency attribution and cultural/expectancy covariates where data exist, plus M1b generic latent ceiling",
+      "consumer_payoff": [
+        "R1_presence_onset",
+        "R2_mechanism"
+      ],
+      "stop_rule": "If critical variables are unavailable, report M1a unidentifiable rather than silently equate with measured intensity."
+    },
+    {
+      "id": "P3_primary_phase_data",
+      "priority_band": "P0_dependent",
+      "reason": "Original participant×phase matrices pay temporal model design, independent annotation reliability, and intervention design; cannot infer these from paper quotes",
+      "deliverable": "Permitted participant-level phase/category/timing source with codebook, missingness, exclusions and original-cohort overlap crosswalk",
+      "consumer_payoff": [
+        "R1_presence_onset",
+        "M1a_training",
+        "M2_event_dictionary"
+      ],
+      "stop_rule": "Do not promote paper's 125 category labels to 21 source-valued participant matrices."
+    },
+    {
+      "id": "P4_source_QC",
+      "priority_band": "P1",
+      "reason": "Original source-method reproducibility and evidence rights pay integrity and neural features but by themselves are not M2 vs M1 discriminators",
+      "deliverable": "Reviewed 20-person QC/FD/voxel NIfTI/Schaefer/motion and authored execution receipt",
+      "consumer_payoff": [
+        "R3_original_qc_and_replay",
+        "R2_mechanism_future_data"
+      ],
+      "stop_rule": "If original NIfTI not available, issue bounded nonreproducibility from public tree and use differently typed exploratory data."
+    },
+    {
+      "id": "P5_target_protocol",
+      "priority_band": "P2_separate_study",
+      "reason": "Potentially highest information-channel impact but no existing target data, ethical approval, participant-blinding or preregistration; must not draw evidence from introspective narrative",
+      "deliverable": "Legally and ethically approved prospective preregistered protocol with independent replication",
+      "consumer_payoff": [
+        "R4_concealed_information"
+      ],
+      "stop_rule": "No induced experiment, no participant claims, no external-entity inference from benchmark software."
+    }
+  ],
+  "adversarial_model_families": [
+    {
+      "id": "M0",
+      "description": "Empirical subject/time/expectancy/missingness baseline; calibrate the measurement floor",
+      "separable_from_M2_without_extra_variables": false
+    },
+    {
+      "id": "M1a",
+      "description": "Mechanistically bounded endogenous active-inference/agency account with counterfactual richness, sensory attenuation/precision, exogenous attribution and cultural priors; theory donor Mago2026, actual parametrisation future DASHI work",
+      "separable_from_M2_without_extra_variables": "undetermined_requires_operational_measurement"
+    },
+    {
+      "id": "M1b",
+      "description": "Matched-capacity general endogenous latent HMM/Markov model, serves as observational equivalence ceiling",
+      "separable_from_M2_without_extra_variables": false
+    },
+    {
+      "id": "M2",
+      "description": "Restricted fixed-Q nested trace-chain conscious-agent semantics, only source-specific if independently measured restrictions or new consumers exist",
+      "separable_from_M1b_without_extra_variables": false
+    }
+  ],
+  "critical_no_go": {
+    "hypothesis": "A finite latent 'agent' model identified solely by finite hidden Markov initial/transition/emission probabilities",
+    "construction": "Rename every hidden agent state as an endogenous hidden brain/cognitive state and leave all initial, Q and observation/emission probabilities unchanged.",
+    "consequence": "All finite observable sequence probabilities are exactly equal. Any analytic property of this same observed distribution, including trace-of-trace identities, is equal. No finite sequence can identify the hidden state's metaphysical interpretation.",
+    "scope": "This does not refute agents, does not apply to explicit external-intervention variables absent from the original observation alphabet, and does not show mechanistically *restricted* endogenous M1a and M2 are indistinguishable.",
+    "implementation": "scripts/audit_dmt_steelman_identifiability.py",
+    "source_role": "standard hidden Markov observational equivalence, DASHI rational calculation; not claimed novel original theory"
+  },
+  "outcome_matrix": [
+    {
+      "observation": "M1a and M2 tie on held-out measured outcomes",
+      "interpretation": "No discriminatory evidence; constrain either model or report observational non-identifiability",
+      "legitimate_claim": "null or equivalence given adequate design and power",
+      "illegitimate_claim": "latent entities proved or disproved"
+    },
+    {
+      "observation": "M2 beats M0 but not matched M1a/M1b",
+      "interpretation": "Structured latent dynamics or regularization useful, not metaphysical evidence",
+      "legitimate_claim": "prediction gains attributable to shared latent model class",
+      "illegitimate_claim": "external conscious agency"
+    },
+    {
+      "observation": "M2 beats predeclared restricted M1a but ties M1b",
+      "interpretation": "May reject specific endogenous mechanism, not all possible endogenous accounts",
+      "legitimate_claim": "falsifies bounded M1a mechanism conditionally",
+      "illegitimate_claim": "external entity established"
+    },
+    {
+      "observation": "Original GFC reproduces source t/p",
+      "interpretation": "source-method same-object validation, not mechanism identification",
+      "legitimate_claim": "source-specific neural contrast reproduced",
+      "illegitimate_claim": "support for M2 versus M1"
+    },
+    {
+      "observation": "Temporal presence onset predicted after spatial integration",
+      "interpretation": "consistent with published descriptive sequence AND Mago-style endogenous account",
+      "legitimate_claim": "conditional temporal phenomenology prediction",
+      "illegitimate_claim": "presence has external origin"
+    },
+    {
+      "observation": "A truly concealed target is predicted beyond leakage controls and replicates",
+      "interpretation": "unexplained information dependency merits rigorous investigation",
+      "legitimate_claim": "restricted information-channel effect, source-specific",
+      "illegitimate_claim": "external conscious being uniquely identified"
+    },
+    {
+      "observation": "No original author NIfTI or original QC available",
+      "interpretation": "bounded original-public-source replay limitation",
+      "legitimate_claim": "documented missing original inputs and alternative exploratory estimate",
+      "illegitimate_claim": "paper refuted or fabricated"
+    }
+  ],
+  "practical_benefits": [
+    "Credible model-selection and null reporting for psychedelic experience/agency research, including competing explanations rather than only visual imagery analogies",
+    "Temporal phenomenology codebook that may improve study of self-other boundaries and attributed agency without endorsing any metaphysical interpretation",
+    "Reproducible provenance/QC and participant overlap assessment for multi-paper neuroscience, preventing false independent replication claims",
+    "Transferable blinded-information-channel experimental design and anti-leakage methodology for unusual experiences, without unapproved participant experimentation",
+    "A rigorously scoped mathematical no-identification result that prevents conflating shared Markov trace identities with unique conscious ontology",
+    "Better-informed clinical, cultural and ethical discussion only if later supported by controlled data, not a therapeutic recommendation"
+  ],
+  "source_independence": {
+    "mago2026": "independent conceptual paper (coauthors overlap with Timmermann/Sanders; no new participant dataset or mathematical implementation)",
+    "sanders2026": "primary phenomenology publication within a broader DMT EEG-fMRI research programme, subject overlap with Timmermann not verified and must not be treated as independent recruited cohort",
+    "davis2020": "retrospective self-selected survey of entity experiencers; selection limits population inference",
+    "timmermann2023": "original EEG-fMRI experiment and source archive; reanalysis derivatives share data lineage"
+  },
+  "forbidden_promotions": [
+    "Klüver visual geometry -> independent entity",
+    "2023 GFC t statistic -> M2 versus M1",
+    "HMM fixed-Q trace identity -> physical mind",
+    "participant narrative -> cryptographically concealed information",
+    "bibliographic source roots -> independent human cohorts",
+    "Mago proposed computational mechanism -> validated model or new data",
+    "synthetic 2-state witness -> measured human result"
+  ],
+  "status": {
+    "new_human_data_recovered": false,
+    "existing_source_world_evidence_promoted": false,
+    "preregistered_experiment_authorised": false,
+    "steelman_formalised": true,
+    "empirical_discriminator_computed": false
+  }
+}

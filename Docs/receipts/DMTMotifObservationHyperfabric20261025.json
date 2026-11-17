@@ -1,0 +1,333 @@
+{
+  "schema": "dashi-dmt-motif-hyperfabric-v1",
+  "revision": "2026-10-25",
+  "canonical_origin": {
+    "source_world": "Docs/receipts/DMT2023SourceWorld.json",
+    "erowid_prior_art": "Docs/receipts/DMTRecurringMotifErowidPriorArtBridge20261025.json",
+    "erowid_published_doi": "10.3389/fpsyg.2024.1397064",
+    "original_pnas_doi": "10.1073/pnas.2218949120",
+    "sanders_doi": "10.1093/nc/niag015",
+    "formal_owner": "DASHI.Reasoning.TypedHyperfabricCore",
+    "evidence_owner": "DASHI.Core.EvidenceHyperfabricExact",
+    "observer_owner": "DASHI.Core.ObserverRefinementLatticeExact",
+    "typed_domain": "DASHI.Biology.DMTMotifObservationHyperfabricExact"
+  },
+  "interpretation": "A fibre/site owns a source-specific observation grain, provenance and rights; hyperedges describe needed compatible coordinates. A missing/stale source does not become a measured assertion merely by appearing on a research path.",
+  "sites": [
+    {
+      "id": "erowid_category",
+      "kind": "published_aggregate",
+      "unit": "classified_sentence_and_substance_group",
+      "state": "present_source_statement",
+      "source": "noah2024",
+      "provenance": "published 2024 Noah/Shen/Erowid/Silver article, not raw controlled Erowid report bytes",
+      "rights": "citation_of_paper_only",
+      "measurement": "Entities and other author seed categories; no reported within-person temporal transitions"
+    },
+    {
+      "id": "erowid_sequenced_report",
+      "kind": "person_report_temporal_measurement",
+      "unit": "one report with chronological motif intervals",
+      "state": "notLocated",
+      "source": "erowid2024",
+      "provenance": "raw Experience Vault report-level timing not collected",
+      "rights": "controlled_permission_required",
+      "measurement": "no timestamped motif transition objects recovered"
+    },
+    {
+      "id": "erowid_reuse_authority",
+      "kind": "governance_receipt",
+      "unit": "authorized data use for specific Erowid corpus",
+      "state": "notLocated",
+      "source": "erowid_archive",
+      "provenance": "written research data-use authorization not recovered",
+      "rights": "prior_written_permission_required",
+      "measurement": "legal access rather than experimental outcome"
+    },
+    {
+      "id": "existing_motif_operator",
+      "kind": "constructed_formal_toy",
+      "unit": "finite symbolic three-cycle",
+      "state": "present_constructed_not_empirical",
+      "source": "DASHI.Biology.VisualMotifTransitionOperator",
+      "provenance": "existing Agda finite model and ternary quotient",
+      "rights": "repository_local_source",
+      "measurement": "a stipulated lattice-tunnel-face transition, NOT measured Erowid sequences"
+    },
+    {
+      "id": "sanders_published_phase",
+      "kind": "published_phenomenology_summary",
+      "unit": "published cohort-level phase sequence",
+      "state": "present_source_statement",
+      "source": "sanders2026",
+      "provenance": "original 2026 descriptive article, participant overlap unknown",
+      "rights": "paper_citation_only",
+      "measurement": "descriptive immersion/presence temporal ordering"
+    },
+    {
+      "id": "sanders_individual_phase",
+      "kind": "individual_phase_measurement",
+      "unit": "subject-specific phase/category observations",
+      "state": "notLocated",
+      "source": "sanders2026",
+      "provenance": "21 complete phase matrices described by authors, not in current source world",
+      "rights": "controlled_access_review_required",
+      "measurement": "source-valued subject sequences not recovered"
+    },
+    {
+      "id": "cohort_crosswalk",
+      "kind": "independence_receipt",
+      "unit": "source-resolved participant lineage/overlap",
+      "state": "notLocated",
+      "source": "cross_study",
+      "provenance": "no subject-overlap/independent replication crosswalk for Erowid, Timmermann and Sanders",
+      "rights": "privacy_preserving_review",
+      "measurement": "no same-person alignment available"
+    },
+    {
+      "id": "original_voxel_input",
+      "kind": "measured_neural_source",
+      "unit": "one original QC-selected voxel-NIfTI/ROI source object",
+      "state": "notLocated",
+      "source": "pnas2023",
+      "provenance": "source world original_preprocessed_voxel_nifti",
+      "rights": "human_data_research_review_required",
+      "measurement": "original processed voxelwise data not in 56-file tree"
+    },
+    {
+      "id": "original_motion_qc",
+      "kind": "measured_motion_source",
+      "unit": "source participant FD and eligibility",
+      "state": "notLocated",
+      "source": "pnas2023",
+      "provenance": "source world original_static_fd",
+      "rights": "human_data_research_review_required",
+      "measurement": "original four motion exclusion IDs still unknown"
+    },
+    {
+      "id": "original_executable_state",
+      "kind": "reproducible_code_source",
+      "unit": "effective author MATLAB workspace and dependencies",
+      "state": "notLocated",
+      "source": "pnas2023",
+      "provenance": "source world effective_static_gfc_workspace",
+      "rights": "original_analysis_author_provenance",
+      "measurement": "author source code present but actual executed workspace not established"
+    },
+    {
+      "id": "original_data_authority",
+      "kind": "governance_receipt",
+      "unit": "specific research and redistribution access",
+      "state": "notLocated",
+      "source": "pnas2023",
+      "provenance": "source world data_use_review",
+      "rights": "requires_primary_review",
+      "measurement": "lawful reuse not established"
+    },
+    {
+      "id": "prospective_same_subject_timing",
+      "kind": "prospective_joint_measurement",
+      "unit": "time-aligned multi-modal participant event sequence",
+      "state": "notLocated",
+      "source": "future_design",
+      "provenance": "new prospective study has not happened or been approved",
+      "rights": "ethics_and_consent_required",
+      "measurement": "no direct neural/visual/agency joint measurement"
+    },
+    {
+      "id": "mechanistic_M1a",
+      "kind": "model_specification",
+      "unit": "measured sensory precision, cultural priors, agency and counterfactual depth",
+      "state": "notLocated",
+      "source": "mago2026",
+      "provenance": "2026 conceptual active-inference donor, not implemented/experimentally validated",
+      "rights": "public_theory_not_an_experiment",
+      "measurement": "no source-fitted M1a yet"
+    },
+    {
+      "id": "distinct_M2_constraint",
+      "kind": "model_discriminator",
+      "unit": "source-specified restriction rejecting matched endogenous alternatives",
+      "state": "notLocated",
+      "source": "DMTRestrictedModelCards",
+      "provenance": "generic finite-Q trace is an observation law compatible with M1b",
+      "rights": "preregistration_missing",
+      "measurement": "no observed violation or unique intervention prediction"
+    },
+    {
+      "id": "hidden_target_evidence",
+      "kind": "prospective_information_channel",
+      "unit": "precommitted independently blinded concealed target",
+      "state": "notLocated",
+      "source": "future_design",
+      "provenance": "no such measurements in Erowid, Sanders or original PNAS study",
+      "rights": "ethics_and_preregistration_required",
+      "measurement": "no concealed-target test run"
+    }
+  ],
+  "edges": [
+    {
+      "id": "e_published_motif_summary",
+      "role": "descriptive",
+      "requires": [
+        "erowid_category"
+      ],
+      "max_claim": "published_descriptive_category_only",
+      "output": "E1_substance_motif_frequency",
+      "admission": "attestable_published_source",
+      "provenance": [
+        "noah2024"
+      ]
+    },
+    {
+      "id": "e_synthetic_recurrence_counterexample",
+      "role": "formal_not_empirical",
+      "requires": [
+        "existing_motif_operator"
+      ],
+      "max_claim": "synthetic_nonidentification_only",
+      "output": "static_marginal_not_transition",
+      "admission": "constructed_toy",
+      "provenance": [
+        "DASHI.Biology.VisualMotifTransitionOperator",
+        "DASHI.Core.ObserverRefinementLatticeExact"
+      ]
+    },
+    {
+      "id": "e_report_temporal_transition",
+      "role": "measured_temporal",
+      "requires": [
+        "erowid_sequenced_report",
+        "erowid_reuse_authority"
+      ],
+      "max_claim": "permitted_coded_within_report_transitions",
+      "output": "E3_temporal_motif_recurrence",
+      "admission": "all_required_measured_and_authorized",
+      "provenance": [
+        "noah2024",
+        "erowid_rights"
+      ]
+    },
+    {
+      "id": "e_published_cross_study_description",
+      "role": "comparison_without_subject_join",
+      "requires": [
+        "erowid_category",
+        "sanders_published_phase"
+      ],
+      "max_claim": "cross_paper_descriptive_hypothesis_only",
+      "output": "E4_descriptive_hypothesis",
+      "admission": "source_comparison_not_independent_replication",
+      "provenance": [
+        "noah2024",
+        "sanders2026"
+      ]
+    },
+    {
+      "id": "e_paired_temporal_claim",
+      "role": "cross_study_paired",
+      "requires": [
+        "erowid_sequenced_report",
+        "erowid_reuse_authority",
+        "sanders_individual_phase",
+        "cohort_crosswalk"
+      ],
+      "max_claim": "aligned_subject_data_only_if_matching_proven",
+      "output": "E4_cross_modal_agent_stage",
+      "admission": "requires_alignment_and_rights",
+      "provenance": [
+        "erowid_rights",
+        "noah2024",
+        "sanders2026"
+      ]
+    },
+    {
+      "id": "e_original_neural_replay",
+      "role": "original_study_reproduction",
+      "requires": [
+        "original_voxel_input",
+        "original_motion_qc",
+        "original_executable_state",
+        "original_data_authority"
+      ],
+      "max_claim": "exact_method_replay_only",
+      "output": "c_static_reproduction",
+      "admission": "all_exact_source_inputs",
+      "provenance": [
+        "pnas2023"
+      ]
+    },
+    {
+      "id": "e_mechanistic_M2_test",
+      "role": "theory_discriminator",
+      "requires": [
+        "prospective_same_subject_timing",
+        "mechanistic_M1a",
+        "distinct_M2_constraint"
+      ],
+      "max_claim": "restricted_model_comparison_not_ontology",
+      "output": "model_M2_vs_M1a",
+      "admission": "matched_measured_observable_and_locked_hypotheses",
+      "provenance": [
+        "mago2026",
+        "DMTRestrictedModelCards"
+      ]
+    },
+    {
+      "id": "e_concealed_target_test",
+      "role": "prospective_anomalous_channel",
+      "requires": [
+        "hidden_target_evidence"
+      ],
+      "max_claim": "source_locked_information_channel_only",
+      "output": "M3_concealed_target",
+      "admission": "independent_ethics_and_leakage_controls",
+      "provenance": [
+        "future_design"
+      ]
+    }
+  ],
+  "forbidden_edges": [
+    {
+      "from": "erowid_category",
+      "to": "e_report_temporal_transition",
+      "reason": "sentence marginal cannot produce report-level chronological transitions"
+    },
+    {
+      "from": "erowid_category",
+      "to": "e_original_neural_replay",
+      "reason": "Erowid self-report statistics are not same-object voxel fMRI inputs"
+    },
+    {
+      "from": "existing_motif_operator",
+      "to": "e_mechanistic_M2_test",
+      "reason": "toy transition is not measured mechanism"
+    },
+    {
+      "from": "sanders_published_phase",
+      "to": "e_paired_temporal_claim",
+      "reason": "published phase summary is not individual aligned matrices"
+    },
+    {
+      "from": "e_published_cross_study_description",
+      "to": "e_paired_temporal_claim",
+      "reason": "separate published summaries are not participant-linked observations"
+    },
+    {
+      "from": "e_concealed_target_test",
+      "to": "M4_independent_external_ontology",
+      "reason": "even an independent information channel does not uniquely identify its source as independently conscious"
+    }
+  ],
+  "no_auto_promotions": {
+    "bibliographic_roots_not_independent_participants": true,
+    "present_source_statement_not_raw_corpus": true,
+    "formal_toy_not_empirical_generator": true,
+    "same_marginal_not_same_transitions": true,
+    "known_absent_is_source_revision_scoped": true,
+    "nonexistent_link_cannot_be_assumed": true,
+    "rights_gate_not_experiment_data": true,
+    "external_agent_not_identified": true
+  },
+  "readme": "`scripts/audit_dmt_motif_hyperfabric.py` reads this file and the canonical repo receipts, computes edge closure/readiness, and dry-runs selective changes without modifying source statuses. No new scheduler, no direct report access."
+}

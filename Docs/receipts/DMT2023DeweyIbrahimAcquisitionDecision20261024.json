@@ -1,0 +1,250 @@
+{
+  "schema": "dashi-dmt-acquisition-decision-v1",
+  "revision": "2026-10-24",
+  "world_path": "Docs/receipts/DMT2023SourceWorld.json",
+  "scope": "Primary-object acquisition, not correspondence, experimental evidence or ethical permission",
+  "provenance_rules": [
+    "paper report != raw record",
+    "same cohort reanalysis != independent replication",
+    "code deposited != source-equivalent execution",
+    "present publicly != research-use or redistribution permission",
+    "knownAbsent applies only to inspected revision",
+    "QID/DOI/DDC != scientific authority",
+    "retrieval plan != acquisition"
+  ],
+  "navigation": {
+    "dewey_status": "classification_candidates_not_verified",
+    "subject_lenses": [
+      {
+        "node": "functional_neuroimaging",
+        "label": "functional MRI / signal processing / neurophysiology",
+        "dewey": "unresolved",
+        "qid": "unresolved",
+        "queries": [
+          "Timmermann original voxelwise fMRI data code NIfTI 2023",
+          "Schaeffer Schaeff1007NExt image extended subcortical atlas"
+        ]
+      },
+      {
+        "node": "psychopharmacology",
+        "label": "intravenous DMT 5-HT2A pharmacokinetics",
+        "dewey": "unresolved",
+        "qid": "unresolved",
+        "queries": [
+          "20mg DMT 2023 bolus dose time fMRI rating synchronization"
+        ]
+      },
+      {
+        "node": "microphenomenology",
+        "label": "DMT first-person experience temporal and perceived presence methods",
+        "dewey": "unresolved",
+        "qid": "unresolved",
+        "queries": [
+          "Sanders niag015 supplementary A B phase matrices presence codebook"
+        ]
+      },
+      {
+        "node": "statistical_replication",
+        "label": "source-specific reproducibility, measurement error, motion exclusion",
+        "dewey": "unresolved",
+        "qid": "unresolved",
+        "queries": [
+          "original PNAS static GFC motion QC FD >0.4 n16 author code"
+        ]
+      },
+      {
+        "node": "experimental_design",
+        "label": "preregistered hidden target and ordinary-information leakage controls",
+        "dewey": "unresolved",
+        "qid": "unresolved",
+        "queries": [
+          "concealed target design preregistered power multiplicity side channels"
+        ]
+      },
+      {
+        "node": "source_methodology",
+        "label": "Dewey navigation, Ibrahim first-link methodology, snowball and source-relative Pareto",
+        "dewey": "unresolved",
+        "qid": "unresolved",
+        "queries": [
+          "Ibrahim Danforth Dodds First Link Network DOI 10.1016/j.jocs.2016.12.001"
+        ]
+      }
+    ],
+    "attributed_method_donors": [
+      {
+        "id": "ibrahim2017",
+        "doi": "10.1016/j.jocs.2016.12.001",
+        "role": "original historical Wikipedia first-link study; methodological analogy only; no assertion of historical edge in 2014 snapshot"
+      },
+      {
+        "id": "source_producer_scheduler",
+        "repo": "DASHI.Core.RequirementProducerSchedulerExact",
+        "role": "action-producer prerequisites and nonautomatic closure"
+      },
+      {
+        "id": "snowball_genealogy",
+        "repo": "DASHI.Wikimedia.IbrahimSnowballSourceGenealogyIndependenceEvidenceSynthesisBidiExact",
+        "role": "citation/source/root/sample dependency separate"
+      },
+      {
+        "id": "dewey_quality",
+        "repo": "DASHI.Ontology.DeweyQidCoverageQualityExact",
+        "role": "DDC/QID/DOI discovery is navigation without truth"
+      },
+      {
+        "id": "pareto_frontier",
+        "repo": "DASHI.Wikimedia.IbrahimSnowballParetoFrontierExact",
+        "role": "consumer-relative information gains, not scalar citations"
+      }
+    ]
+  },
+  "source_search": [
+    {
+      "id": "motion_qc",
+      "world_action": "a_original_motion_primary",
+      "source_root": "pnas2023",
+      "producer": "original per-subject motion processing and original paper SI",
+      "known_source": "https://doi.org/10.1073/pnas.2218949120",
+      "verified_locator_detail": "2023 paper states >20% FD>0.4 over post-injection eight minutes, four static exclusions; further three full-scan exclusions. Git README offers motion parameters by direct request, not deposited in pinned tree.",
+      "missing_artifacts": [
+        "original_static_fd",
+        "original_full_fd",
+        "original_eeg_qc",
+        "original_preproc"
+      ],
+      "target_consumers": [
+        "c_original_static_inclusion",
+        "c_original_dynamic_inclusion",
+        "c_original_joint_inclusion",
+        "c_static_reproduction"
+      ],
+      "discovery_only_queries": [
+        "site:pmc.ncbi.nlm.nih.gov/articles/PMC10068756 supplementary motion FD exclusion table",
+        "timmer500 DMT_Imaging fMRI motion parameters pseudonym"
+      ],
+      "completion_test": "Versioned source-producer FD/QA tables for 20 author-script IDs, exact post-bolus TR and n16/n13/n12 original analysis inclusion crosswalk",
+      "next_action": "Inspect original PNAS SI and historical author-code commits for exact QC tables; preserve nonpublic custodian route as dependency but do not email or infer IDs",
+      "status": "unlocated_primary_object"
+    },
+    {
+      "id": "rights",
+      "world_action": "b_rights_review",
+      "source_root": "pnas2023",
+      "producer": "original paper data availability + study consent/ethics + applicable repository permissions",
+      "known_source": "https://github.com/timmer500/DMT_Imaging",
+      "verified_locator_detail": "Original paper and public Git deposition establish access to a subset of files, not license for unrestricted use; conventional root LICENSE not located in pinned inventory.",
+      "missing_artifacts": [
+        "data_use_review"
+      ],
+      "target_consumers": [
+        "c_data_acquisition",
+        "c_static_reproduction"
+      ],
+      "completion_test": "Specific provenance-backed distinction for reading/download, research computation, derived outputs, raw redistribution, privacy and permitted sharing",
+      "next_action": "Review statements and rights provenance, fail closed on unverified redistribution; do not equate public checkout with a permission grant",
+      "status": "under_review_no_approval"
+    },
+    {
+      "id": "effective_code",
+      "world_action": "h_effective_static_code",
+      "source_root": "pnas2023",
+      "producer": "Christopher Timmermann original executable StaticGFC.m state",
+      "known_source": "https://github.com/timmer500/DMT_Imaging/blob/b35701d88d904e2f602164ff2eae0fc879772078/Scripts/StaticGFC.m",
+      "verified_locator_detail": "Pinned author script cites author-local NIfTI/atlas and variables xdata, ydata, fdrcorrection, nets; literal script is not an independently verified complete execution.",
+      "missing_artifacts": [
+        "effective_static_gfc_workspace"
+      ],
+      "target_consumers": [
+        "c_static_reproduction"
+      ],
+      "completion_test": "Original effective executed script revision, all upstream variable origins/tool versions, exact ROI index, scrub interpolation, averaging, statistic and result hash",
+      "next_action": "Backtrack each unbound MATLAB variable to script/producer history, not inferred numerical output; attempt exact code archaeology before further bibliographic search",
+      "status": "located_script_unlocated_effective_execution"
+    },
+    {
+      "id": "voxel_atlas",
+      "world_action": "g_voxel_and_atlas_source",
+      "source_root": "pnas2023",
+      "producer": "original scanner preprocessing and image/atlas file producers",
+      "known_source": "https://github.com/timmer500/DMT_Imaging",
+      "verified_locator_detail": "Original StaticGFC calls cleaned post1 voxelwise NIfTI and Schaeff1007NExt.nii.gz; no matching NIfTI/mask in frozen 56-file tree; separate public parcelled BOLD_AAL MAT is not equivalent.",
+      "missing_artifacts": [
+        "original_preprocessed_voxel_nifti",
+        "original_schaefer_extended_mask"
+      ],
+      "target_consumers": [
+        "c_static_reproduction"
+      ],
+      "completion_test": "Each required voxel image and atlas with source/hashes plus valid rights, time alignment, subject mapping and exact preprocessing",
+      "next_action": "Acquire metadata/producer IDs first; only acquire restricted data after rights review; never substitute the parcelled MAT representation",
+      "status": "rights_gated_unlocated_source_inputs"
+    },
+    {
+      "id": "sanders_phases",
+      "world_action": "e_phase_matrices",
+      "source_root": "sanders2026",
+      "producer": "James W Sanders et al 2026 micro-phenomenology first-person phase coding",
+      "known_source": "https://doi.org/10.1093/nc/niag015",
+      "verified_locator_detail": "Primary paper reports 23 interviews, 21 complete phase matrices and 125 categories. Supplementary A/B document analysis/categories; full participant phase matrices and underlying interview data are available upon reasonable request, not already recovered.",
+      "missing_artifacts": [
+        "sanders_phase_data",
+        "sanders_codebook",
+        "participant_lineage"
+      ],
+      "target_consumers": [
+        "c_temporal_replication"
+      ],
+      "completion_test": "Actual phase×category matrices, complete codebook and adjudication instructions, phase timing, allowed-use terms, overlap with 2023 cohorts established or explicitly unknown",
+      "next_action": "Inspect public supplementary appendix as public methodological object; separately record request-only phase matrices and subject-overlap uncertainty; no email",
+      "status": "published_method_present_primary_matrices_unlocated"
+    },
+    {
+      "id": "public_mat_exploratory",
+      "world_action": "c_source_bytes",
+      "source_root": "pnas2023",
+      "producer": "20 paired original DMT/placebo AAL MATLAB arrays in exact Git source tree",
+      "known_source": "https://github.com/timmer500/DMT_Imaging/tree/b35701d88d904e2f602164ff2eae0fc879772078",
+      "verified_locator_detail": "40 paired fMRI MAT source identities are pinned, not locally analysed; separate representation and not a prerequisite for original static NIfTI GFC.",
+      "missing_artifacts": [
+        "source_local_bytes"
+      ],
+      "target_consumers": [
+        "c_data_acquisition"
+      ],
+      "completion_test": "Rights-reviewed, per-file Git blob+SHA256 local copy and data dictionary; label analysis exploratory_not_source_equivalent",
+      "next_action": "Optional parallel lane only after rights determination; avoid diverting original GFC source recovery",
+      "status": "optional_rights_gated"
+    }
+  ],
+  "fanout_preference": "Prioritise one exact primary acquisition that pays multiple typed consumer obligations, not secondary-citation frequency. No scalar expected-information-gain estimates without empirical cost/likelihood data.",
+  "known_impossibilities": [
+    {
+      "consumer": "c_public_mat_reproduces_original_static",
+      "status": "source_scope_blocked",
+      "scope": "pinned 56-file repository excludes required original NIfTI/atlas",
+      "reopen": "new source scope with correct data; cannot relabel the old pinned tree"
+    },
+    {
+      "consumer": "c_dynamic_replay_from_tree_alone",
+      "status": "source_scope_blocked",
+      "scope": "pinned 56-file repository lacks tapered_sliding_window implementation",
+      "reopen": "new version/scope or exact original function, not fiat known-absent->present"
+    }
+  ],
+  "no_outreach": true,
+  "no_data_fetched": true,
+  "declared_not_verified": [
+    "DDC or QID for particular scientific concepts",
+    "Sanders participant overlap",
+    "data-use permissions",
+    "original n16 identities",
+    "exact original MATLAB execution"
+  ],
+  "exit_rules": {
+    "phase1": "QC, metadata and licensed/allowed-use boundaries validated source-specifically; where author data are unavailable, produce a bounded negative provenance receipt, not global nonexistence",
+    "snowball": "Stop branch when it yields only citations/motif analogies without new primary object, transformation, measurement or falsifiable discriminator",
+    "pareto": "Recalculate only following a verified source-state change; maintain incomparable source objects/consumers",
+    "ontological": "Neither source search nor reanalysed neuroimaging changes independent-conscious-entity status"
+  }
+}
