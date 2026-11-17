@@ -1,8 +1,6 @@
 {-# OPTIONS --safe #-}
 module DASHI.Unified.BalabanRGTOERegression where
 
-open import Agda.Primitive using (Setω)
-
 ------------------------------------------------------------------------
 -- TOE NORMALIZATION FOR THE BALABAN YANG--MILLS LANE
 --
@@ -20,9 +18,7 @@ open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
-open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
-open import Data.Empty using (⊥)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -50,21 +46,13 @@ import DASHI.Physics.YangMills.CompactSimpleClassificationAdjointCasimirExact as
 import DASHI.Physics.YangMills.BalabanCMP116FirstVariationStressPairingRound105Exact as Stress
 import DASHI.Physics.YangMills.BalabanSameFamilyStressCauchySchwingerRound109Exact as StressCauchy
 import DASHI.Physics.YangMills.BalabanStressShellEnergyToHilbertRound112Exact as StressHilbert
-import DASHI.Physics.YangMills.YMClayLevel2SameFamilyStressRecoveryExact as SameFamilyRecovery
-import DASHI.Physics.YangMills.YangMillsClayGoal1CSourceCutRound475Exact as Goal1C
-import DASHI.Physics.YangMills.YangMillsClayCPhysicalPackageMaxCutRound527Exact as CMaxCut
 import DASHI.Physics.Closure.BalabanRGScaleTransferFrontierReceipt as RGFrontier
-import DASHI.Physics.Closure.YMBalabanContinuumLimitReceipt as ContinuumLimit
-import DASHI.Physics.Closure.YMDepthAsContinuumLimitReceipt as DepthContinuum
 import DASHI.Physics.Closure.BalabanRGMassGapReceiptSurface as MassGap
 import DASHI.Geometry.Gauge.SUNPrimitives as SUN
 import DASHI.Physics.YangMills.BalabanRGLane as LegacyRGLane
 import DASHI.Physics.YangMills.YangMillsHighestAlphaGateDependencyExact as Gate
 import DASHI.Physics.YangMills.YangMillsClayProblemContractExact as Clay
 import DASHI.Physics.YangMills.YangMillsConstructivePathPrePostInvariantExact as Path
-import DASHI.Physics.YangMills.BalabanFiniteRGObservableReopeningExact as RGReopen
-import DASHI.Physics.YangMills.BalabanFiniteRGTotalCovarianceExact as RGCovariance
-import DASHI.Physics.YangMills.BalabanSourceResidualConsumerNonDescent369Exact as Residual369
 
 ------------------------------------------------------------------------
 -- Exact theorem-owner re-exports.
@@ -246,124 +234,6 @@ balabanStressCauchyPhysicalInsertionLevel : ProofLevel
 balabanStressCauchyPhysicalInsertionLevel =
   StressCauchy.literalStressInsertionIsCMP119LocalInsertionLevel
 
-------------------------------------------------------------------------
--- Canonical same-family Cauchy / Schwinger stress recovery cut.
---
--- Historical round numbers are provenance only.
--- The source-owned telescope and same-family recovery remove any separate
--- finite-to-continuum stress convergence payment.
-------------------------------------------------------------------------
-
-open SameFamilyRecovery public using
-  ( r129ExportsLiteralContinuumLimit
-  ; r129ExportsLiteralSchwingerMembership
-  ; r129ExportsLiteralStressDerivative
-  ; r129ExportsCompositeMarkedSourceData
-  )
-
-balabanSameFamilyRecoveryCompilerLevel : ProofLevel
-balabanSameFamilyRecoveryCompilerLevel =
-  SameFamilyRecovery.r129SameFamilyRecoveryCompilerLevel
-
-balabanSameFamilyRecoveryPhysicalLevel : ProofLevel
-balabanSameFamilyRecoveryPhysicalLevel =
-  SameFamilyRecovery.physicalR129SameFamilyRecoveryLevel
-
-balabanLiteralContinuumLimitIndependentAfterSameFamilyRecoveryIsFalse :
-  SameFamilyRecovery.literalContinuumLimitIndependentAfterR129Recovery ≡ false
-balabanLiteralContinuumLimitIndependentAfterSameFamilyRecoveryIsFalse =
-  SameFamilyRecovery.literalContinuumLimitIndependentAfterR129RecoveryIsFalse
-
-balabanLiteralSchwingerMembershipIndependentAfterSameFamilyRecoveryIsFalse :
-  SameFamilyRecovery.literalSchwingerMembershipIndependentAfterR129Recovery ≡ false
-balabanLiteralSchwingerMembershipIndependentAfterSameFamilyRecoveryIsFalse =
-  SameFamilyRecovery.literalSchwingerMembershipIndependentAfterR129RecoveryIsFalse
-
-balabanLiteralStressDerivativeIndependentAfterSameFamilyRecoveryIsFalse :
-  SameFamilyRecovery.literalStressDerivativeIndependentAfterR129Recovery ≡ false
-balabanLiteralStressDerivativeIndependentAfterSameFamilyRecoveryIsFalse =
-  SameFamilyRecovery.literalStressDerivativeIndependentAfterR129RecoveryIsFalse
-
-balabanGoal1CSourceCutCompilerLevel : ProofLevel
-balabanGoal1CSourceCutCompilerLevel =
-  Goal1C.round475CSourceCutCompilerLevel
-
-balabanGoal1CFiniteStressInsertionIsCMP119LocalLevel : ProofLevel
-balabanGoal1CFiniteStressInsertionIsCMP119LocalLevel =
-  Goal1C.c4FiniteStressInsertionIsCMP119LocalLevel
-
-balabanGoal1CStressCompletionIsCompletedMarkedStressLevel : ProofLevel
-balabanGoal1CStressCompletionIsCompletedMarkedStressLevel =
-  Goal1C.c4StressCompletionIsCompletedMarkedStressLevel
-
-balabanGoal1CCompletedStressIsClayStressLevel : ProofLevel
-balabanGoal1CCompletedStressIsClayStressLevel =
-  Goal1C.c4CompletedStressIsClayStressLevel
-
-balabanGoal1CLiteralDensityMetricDerivativeLevel : ProofLevel
-balabanGoal1CLiteralDensityMetricDerivativeLevel =
-  Goal1C.c4LiteralDensityMetricDerivativeLevel
-
-balabanGoal1CDensityAnchoredLaneInstantiationLevel : ProofLevel
-balabanGoal1CDensityAnchoredLaneInstantiationLevel =
-  Goal1C.c4DensityAnchoredLaneInstantiationLevel
-
-balabanGoal1CContinuumStressRecoveryCompilerLevel : ProofLevel
-balabanGoal1CContinuumStressRecoveryCompilerLevel =
-  Goal1C.c4ContinuumStressRecoveryCompilerLevel
-
-balabanGoal1CMetricPairingCompilerLevel : ProofLevel
-balabanGoal1CMetricPairingCompilerLevel =
-  Goal1C.c4MetricPairingCompilerLevel
-
-balabanGoal1CLiteralSourceInstantiationLevel : ProofLevel
-balabanGoal1CLiteralSourceInstantiationLevel =
-  Goal1C.literalRound475CSourceInstantiationLevel
-
-------------------------------------------------------------------------
--- Current C physical max-cut.
---
--- The five physical packages are the authoritative C research cut.
--- Round labels remain provenance only.
-------------------------------------------------------------------------
-
-balabanCPhysicalPackageMaxCutCompilerLevel : ProofLevel
-balabanCPhysicalPackageMaxCutCompilerLevel =
-  CMaxCut.round527CPhysicalPackageMaxCutCompilerLevel
-
-balabanC0LiteralGaugeInvariantLocalObservableFamilyLevel : ProofLevel
-balabanC0LiteralGaugeInvariantLocalObservableFamilyLevel =
-  CMaxCut.c0LiteralGaugeInvariantLocalObservableFamilyLevel
-
-balabanC1MarkedCurvatureFamilyLevel : ProofLevel
-balabanC1MarkedCurvatureFamilyLevel =
-  CMaxCut.c1MarkedCurvatureFamilyLevel
-
-balabanC2PhysicalRemainderSharedTailLevel : ProofLevel
-balabanC2PhysicalRemainderSharedTailLevel =
-  CMaxCut.c2PhysicalRemainderSharedTailLevel
-
-balabanC3OneStepAFRecurrenceIdentificationLevel : ProofLevel
-balabanC3OneStepAFRecurrenceIdentificationLevel =
-  CMaxCut.c3OneStepAFRecurrenceIdentificationLevel
-
-balabanC4DensityAnchoredStressLaneLevel : ProofLevel
-balabanC4DensityAnchoredStressLaneLevel =
-  CMaxCut.c4DensityAnchoredStressLaneLevel
-
-balabanCPhysicalPackageCount : Nat
-balabanCPhysicalPackageCount =
-  CMaxCut.cPhysicalPackageCount
-
-balabanLevel2ClayPromotionFlag : Bool
-balabanLevel2ClayPromotionFlag =
-  SameFamilyRecovery.clayPromotion
-
-balabanLevel2ClayPromotionStillFalse :
-  balabanLevel2ClayPromotionFlag ≡ false
-balabanLevel2ClayPromotionStillFalse =
-  SameFamilyRecovery.clayPromotionIsFalse
-
 balabanStressHilbertBoundCompilerLevel : ProofLevel
 balabanStressHilbertBoundCompilerLevel =
   StressHilbert.stressShellEnergyToHilbertCompilerLevel
@@ -466,62 +336,10 @@ balabanRGClayPromotionStillFalse :
 balabanRGClayPromotionStillFalse =
   RGFrontier.canonicalBalabanRGScaleTransferNoClayPromotion
 
-BalabanScaleTransferPromotion : Set
-BalabanScaleTransferPromotion =
-  RGFrontier.BalabanRGScaleTransferPromotion
-
-balabanScaleTransferPromotionImpossible :
-  BalabanScaleTransferPromotion → ⊥
-balabanScaleTransferPromotionImpossible =
-  RGFrontier.balabanRGScaleTransferPromotionImpossibleHere
-
 legacyBalabanLaneAlsoDeclaresNoClayPromotion :
   SUN.clayYangMillsPromoted ≡ false
 legacyBalabanLaneAlsoDeclaresNoClayPromotion =
   LegacyRGLane.noClayPromotion LegacyRGLane.canonicalBalabanRGLane
-
-------------------------------------------------------------------------
--- Reused typed continuum and RG-flow non-promotion owners.
---
--- These are distinct from Boolean status flags.
--- The constructorless promotion types remain owned by the original receipts.
-------------------------------------------------------------------------
-
-BalabanContinuumLimitReceipt : Setω
-BalabanContinuumLimitReceipt =
-  ContinuumLimit.YMBalabanContinuumLimitReceipt
-
-BalabanContinuumLimitPromotion : Set
-BalabanContinuumLimitPromotion =
-  ContinuumLimit.YMBalabanContinuumLimitPromotion
-
-balabanContinuumLimitPromotionImpossible :
-  BalabanContinuumLimitPromotion → ⊥
-balabanContinuumLimitPromotionImpossible =
-  ContinuumLimit.ymBalabanContinuumLimitPromotionImpossibleHere
-
-DepthContinuumLimitReceipt : Setω
-DepthContinuumLimitReceipt =
-  DepthContinuum.YMDepthAsContinuumLimitReceipt
-
-DepthContinuumLimitPromotion : Set
-DepthContinuumLimitPromotion =
-  DepthContinuum.YMDepthContinuumLimitPromotion
-
-depthContinuumLimitPromotionImpossible :
-  DepthContinuumLimitPromotion → ⊥
-depthContinuumLimitPromotionImpossible =
-  DepthContinuum.ymDepthContinuumLimitPromotionImpossibleHere
-
-balabanContinuumLimitReceipt :
-  BalabanContinuumLimitReceipt
-balabanContinuumLimitReceipt =
-  ContinuumLimit.canonicalYMBalabanContinuumLimitReceipt
-
-depthContinuumLimitReceipt :
-  DepthContinuumLimitReceipt
-depthContinuumLimitReceipt =
-  DepthContinuum.canonicalYMDepthAsContinuumLimitReceipt
 
 ------------------------------------------------------------------------
 -- Normalize authority on the stricter frontier.
@@ -573,25 +391,6 @@ record BalabanRGTOEReceipt : Set where
 
     stressMarkedShellReuse : ProofLevel
     stressPairingPhysicalWeld : ProofLevel
-    stressCauchyModulusCompiler : ProofLevel
-    stressCauchyPhysicalInsertion : ProofLevel
-    stressCauchyCompletionToMarkedStress : ProofLevel
-    stressCompletedMarkedIsClayStress : ProofLevel
-    sameFamilyRecoveryCompiler : ProofLevel
-    sameFamilyRecoveryPhysical : ProofLevel
-    goal1CSourceCutCompiler : ProofLevel
-    goal1CContinuumStressRecoveryCompiler : ProofLevel
-    goal1CMetricPairingCompiler : ProofLevel
-    goal1CLiteralSourceInstantiation : ProofLevel
-    cPhysicalPackageMaxCutCompiler : ProofLevel
-    c0LiteralGaugeInvariantLocalObservableFamily : ProofLevel
-    c1MarkedCurvatureFamily : ProofLevel
-    c2PhysicalRemainderSharedTail : ProofLevel
-    c3OneStepAFRecurrenceIdentification : ProofLevel
-    c4DensityAnchoredStressLane : ProofLevel
-    cPhysicalPackageCount : Nat
-    stressHilbertBoundCompiler : ProofLevel
-    stressHilbertPhysicalShell : ProofLevel
 
     publishedNonlinearRGCore : ProofLevel
     publishedRGPhysicalSameObject : ProofLevel
@@ -599,14 +398,6 @@ record BalabanRGTOEReceipt : Set where
     publishedRGContinuumTransferProved : Bool
     publishedRGContinuumTransferProvedIsFalse :
       publishedRGContinuumTransferProved ≡ false
-
-    osWightmanContinuumConstructionProved : Bool
-    osWightmanContinuumConstructionProvedIsFalse :
-      osWightmanContinuumConstructionProved ≡ false
-
-    uniformKPAbsorptionProved : Bool
-    uniformKPAbsorptionProvedIsFalse :
-      uniformKPAbsorptionProved ≡ false
 
     blockSpinTransferProved : Bool
     blockSpinTransferProvedIsFalse :
@@ -619,10 +410,6 @@ record BalabanRGTOEReceipt : Set where
     continuumMassGapProved : Bool
     continuumMassGapProvedIsFalse :
       continuumMassGapProved ≡ false
-
-    terminalPromotion : Bool
-    terminalPromotionIsFalse :
-      terminalPromotion ≡ false
 
     clayPromotion : Bool
     clayPromotionIsFalse :
@@ -681,44 +468,6 @@ canonicalBalabanRGTOEReceipt =
         balabanStressMarkedShellReuseLevel
     ; stressPairingPhysicalWeld =
         balabanStressPairingPhysicalWeldLevel
-    ; stressCauchyModulusCompiler =
-        balabanStressCauchyModulusCompilerLevel
-    ; stressCauchyPhysicalInsertion =
-        balabanStressCauchyPhysicalInsertionLevel
-    ; stressCauchyCompletionToMarkedStress =
-        balabanGoal1CStressCompletionIsCompletedMarkedStressLevel
-    ; stressCompletedMarkedIsClayStress =
-        balabanGoal1CCompletedStressIsClayStressLevel
-    ; sameFamilyRecoveryCompiler =
-        balabanSameFamilyRecoveryCompilerLevel
-    ; sameFamilyRecoveryPhysical =
-        balabanSameFamilyRecoveryPhysicalLevel
-    ; goal1CSourceCutCompiler =
-        balabanGoal1CSourceCutCompilerLevel
-    ; goal1CContinuumStressRecoveryCompiler =
-        balabanGoal1CContinuumStressRecoveryCompilerLevel
-    ; goal1CMetricPairingCompiler =
-        balabanGoal1CMetricPairingCompilerLevel
-    ; goal1CLiteralSourceInstantiation =
-        balabanGoal1CLiteralSourceInstantiationLevel
-    ; cPhysicalPackageMaxCutCompiler =
-        balabanCPhysicalPackageMaxCutCompilerLevel
-    ; c0LiteralGaugeInvariantLocalObservableFamily =
-        balabanC0LiteralGaugeInvariantLocalObservableFamilyLevel
-    ; c1MarkedCurvatureFamily =
-        balabanC1MarkedCurvatureFamilyLevel
-    ; c2PhysicalRemainderSharedTail =
-        balabanC2PhysicalRemainderSharedTailLevel
-    ; c3OneStepAFRecurrenceIdentification =
-        balabanC3OneStepAFRecurrenceIdentificationLevel
-    ; c4DensityAnchoredStressLane =
-        balabanC4DensityAnchoredStressLaneLevel
-    ; cPhysicalPackageCount =
-        balabanCPhysicalPackageCount
-    ; stressHilbertBoundCompiler =
-        balabanStressHilbertBoundCompilerLevel
-    ; stressHilbertPhysicalShell =
-        balabanStressHilbertPhysicalShellLevel
     ; publishedNonlinearRGCore =
         balabanPublishedNonlinearRGCoreLevel
     ; publishedRGPhysicalSameObject =
@@ -727,14 +476,6 @@ canonicalBalabanRGTOEReceipt =
         balabanPublishedRGContinuumTransferOpenFlag
     ; publishedRGContinuumTransferProvedIsFalse =
         balabanPublishedRGContinuumTransferStillOpen
-    ; osWightmanContinuumConstructionProved =
-        balabanOSWightmanContinuumConstructionOpenFlag
-    ; osWightmanContinuumConstructionProvedIsFalse =
-        balabanOSWightmanContinuumConstructionStillOpen
-    ; uniformKPAbsorptionProved =
-        balabanRGUniformKPAbsorptionOpenFlag
-    ; uniformKPAbsorptionProvedIsFalse =
-        balabanRGUniformKPAbsorptionStillOpen
     ; blockSpinTransferProved =
         RGFrontier.balabanBlockSpinTransferProved
           RGFrontier.canonicalBalabanRGScaleTransferFrontierReceipt
@@ -751,10 +492,6 @@ canonicalBalabanRGTOEReceipt =
             RGFrontier.canonicalBalabanRGScaleTransferFrontierReceipt)
     ; continuumMassGapProvedIsFalse =
         balabanRGContinuumMassGapStillOpen
-    ; terminalPromotion =
-        balabanTerminalPromotionOpenFlag
-    ; terminalPromotionIsFalse =
-        balabanTerminalPromotionStillOpen
     ; clayPromotion =
         RGFrontier.clayYangMillsPromoted
           RGFrontier.canonicalBalabanRGScaleTransferFrontierReceipt
@@ -861,133 +598,3 @@ toeContinuumPromotionRemainsFalseIsFalse = refl
 toeClayPromotionRemainsFalseIsFalse :
   toeClayPromotionRemainsFalse ≡ false
 toeClayPromotionRemainsFalseIsFalse = refl
-
-
-------------------------------------------------------------------------
--- CATEGORICAL FIBRE / OBSERVER NORMALIZATION
---
--- Reuse the existing Balaban coarse/fine reopening and 369 residual owners.
--- Do not create a parallel Pi/Phi/Psi ontology.
--- Pi, Phi, and Psi remain structural roles over existing carriers.
--- Tau and zeta remain domain-specific coordinates unless a typed crosswalk exists.
---
--- The finite reopening theorem is the categorical analogue used here:
--- coarse projection keeps an explicit fibre kernel, and observables transport
--- through that kernel. The total-covariance theorem keeps the residual
--- conditional covariance instead of erasing it.
-------------------------------------------------------------------------
-
-open RGReopen public using
-  ( FiniteRGReopeningStep
-  ; Observable
-  ; transportObservable
-  ; finiteRGObservableExpectationPreserved
-  ; finiteRGCompositeExpectationPreserved
-  ; finiteRGObservableReopeningLevel
-  ; finiteRGCompositeObservableTransportLevel
-  ; scaleUniformRGAnalyticProducerStillRequiredLevel
-  )
-
-open RGCovariance public using
-  ( conditionalCovariance
-  ; finiteRGTotalCovariance
-  ; finiteRGTotalVariance
-  ; finiteRGConnectedObservableReopening
-  ; finiteRGTotalCovarianceLevel
-  ; finiteRGTotalVarianceLevel
-  ; finiteRGConnectedObservableReopeningLevel
-  )
-
-open Residual369 public using
-  ( sourceRecoveryNonDescentWitness
-  ; coarseBalabanClaimNotSufficientForRecoveryDecision
-  ; coarseBalabanClaimCannotFactorRecoveryDecision
-  ; ym369ResidualNoDirectTheoremTransfer
-  )
-
-record BalabanCategoricalFibreTOEReceipt : Set where
-  field
-    finiteObservableReopening : ProofLevel
-    finiteCompositeObservableTransport : ProofLevel
-    finiteTotalCovariance : ProofLevel
-    finiteTotalVariance : ProofLevel
-    finiteConnectedObservableReopening : ProofLevel
-    scaleUniformAnalyticProducer : ProofLevel
-
-    sourceResidualNonDescentReused : Bool
-    sourceResidualNonDescentReusedIsTrue :
-      sourceResidualNonDescentReused ≡ true
-
-    piPhiPsiCreateParallelOntology : Bool
-    piPhiPsiCreateParallelOntologyIsFalse :
-      piPhiPsiCreateParallelOntology ≡ false
-
-    tauZetaPromotedAsGenericPipelineStages : Bool
-    tauZetaPromotedAsGenericPipelineStagesIsFalse :
-      tauZetaPromotedAsGenericPipelineStages ≡ false
-
-    finiteFibreResultPromotesContinuumRG : Bool
-    finiteFibreResultPromotesContinuumRGIsFalse :
-      finiteFibreResultPromotesContinuumRG ≡ false
-
-    fibrePreconditions : List Path.PathClause
-    fibrePostconditions : List Path.PathClause
-    fibreInvariants : List Clay.ClayInvariant
-
-open BalabanCategoricalFibreTOEReceipt public
-
-canonicalBalabanCategoricalFibreTOEReceipt :
-  BalabanCategoricalFibreTOEReceipt
-canonicalBalabanCategoricalFibreTOEReceipt =
-  record
-    { finiteObservableReopening =
-        RGReopen.finiteRGObservableReopeningLevel
-    ; finiteCompositeObservableTransport =
-        RGReopen.finiteRGCompositeObservableTransportLevel
-    ; finiteTotalCovariance =
-        RGCovariance.finiteRGTotalCovarianceLevel
-    ; finiteTotalVariance =
-        RGCovariance.finiteRGTotalVarianceLevel
-    ; finiteConnectedObservableReopening =
-        RGCovariance.finiteRGConnectedObservableReopeningLevel
-    ; scaleUniformAnalyticProducer =
-        RGReopen.scaleUniformRGAnalyticProducerStillRequiredLevel
-    ; sourceResidualNonDescentReused = true
-    ; sourceResidualNonDescentReusedIsTrue = refl
-    ; piPhiPsiCreateParallelOntology = false
-    ; piPhiPsiCreateParallelOntologyIsFalse = refl
-    ; tauZetaPromotedAsGenericPipelineStages = false
-    ; tauZetaPromotedAsGenericPipelineStagesIsFalse = refl
-    ; finiteFibreResultPromotesContinuumRG = false
-    ; finiteFibreResultPromotesContinuumRGIsFalse = refl
-    ; fibrePreconditions =
-        preconditions canonicalBalabanTOEZKPFrame
-    ; fibrePostconditions =
-        postconditions canonicalBalabanTOEZKPFrame
-    ; fibreInvariants =
-        invariants canonicalBalabanTOEZKPFrame
-    }
-
-balabanCategoricalFibreKeepsContinuumPromotionClosed :
-  finiteFibreResultPromotesContinuumRG
-    canonicalBalabanCategoricalFibreTOEReceipt
-  ≡ false
-balabanCategoricalFibreKeepsContinuumPromotionClosed =
-  finiteFibreResultPromotesContinuumRGIsFalse
-    canonicalBalabanCategoricalFibreTOEReceipt
-
-balabanPiPhiPsiRemainRolesNotOntology :
-  piPhiPsiCreateParallelOntology
-    canonicalBalabanCategoricalFibreTOEReceipt
-  ≡ false
-balabanPiPhiPsiRemainRolesNotOntology =
-  piPhiPsiCreateParallelOntologyIsFalse
-    canonicalBalabanCategoricalFibreTOEReceipt
-
-balabanTauZetaRemainDomainSpecific :
-  tauZetaPromotedAsGenericPipelineStages
-    canonicalBalabanCategoricalFibreTOEReceipt
-  ≡ false
-balabanTauZetaRemainDomainSpecific =
-  tauZetaPromotedAsGenericPipelineStagesIsFalse
-    canonicalBalabanCategoricalFibreTOEReceipt
