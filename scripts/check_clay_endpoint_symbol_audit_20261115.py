@@ -198,9 +198,9 @@ def main() -> int:
     if (scope.get("legacy_gate_total") != 15
             or scope.get("legacy_source_or_math_decisions_settled") != 6
             or scope.get("legacy_active_gates") != 9
-            or scope.get("expanded_portfolio_decisions_settled") != 13
-            or scope.get("expanded_portfolio_active_gates") != 15
-            or scope.get("expanded_portfolio_decision_ids") != completed + ["R1", "S1", "S2", "S3", "S4", "H1", "H2"]
+            or scope.get("expanded_portfolio_decisions_settled") != 14
+            or scope.get("expanded_portfolio_active_gates") != 14
+            or scope.get("expanded_portfolio_decision_ids") != completed + ["R1", "S1", "S2", "S3", "S4", "S5", "H1", "H2"]
             or scope.get("expanded_portfolio_active_ids") != active +
                 [g.get("id") for g in added if g.get("settled") is not True]
             or scope.get("legacy_completed_ids") != completed
@@ -227,9 +227,9 @@ def main() -> int:
             g.get("status") != "OPEN" or
             g.get("native_kernel_acceptance") is not False or
             g.get("original_endpoint_proved") is not False)
-           for g in added if g.get("id") not in ("R1", "S1", "S2", "S3", "S4", "H1", "H2")):
+           for g in added if g.get("id") not in ("R1", "S1", "S2", "S3", "S4", "S5", "H1", "H2")):
         problems.append("OTHER_SIX_NEW_RH_BSD_HODGE_GATE_FALSELY_PROVED")
-    if scope.get("newly_added_settled_gate_ids") != ["R1", "S1", "S2", "S3", "S4", "H1", "H2"]:
+    if scope.get("newly_added_settled_gate_ids") != ["R1", "S1", "S2", "S3", "S4", "S5", "H1", "H2"]:
         problems.append("BSD_S4_EXPANDED_DECISION_ID_MISMATCH")
     r1 = next((g for g in added if g.get("id") == "R1"), None)
     if (r1 is None
@@ -326,7 +326,24 @@ def main() -> int:
             or not (ROOT / "Docs/roadmaps/ClayBSDOriginalS2ActualKummerShaClassicalClosure20261116.md").is_file()
             or not (ROOT / "scripts/check_clay_s2_actual_kummer_sha_classical_20261116.py").is_file()):
         problems.append("BSD_S2_ACTUAL_CLASSICAL_SHA_KUMMER_NATIVE_OR_UNIVERSAL_FIREWALL_MISSING")
-    for leaf in ("S1","S3","S5","S6"):
+    # S5 has a separate classical closure: Rubin's theorem establishes odd-primary
+    # BSD for the actual CM curve and original S3 proves Sha[2]=0. It does NOT
+    # instantiate original Agda cohomology, the real period or universal BSD.
+    s5 = next((g for g in added if g.get("id") == "S5"), None)
+    if (s5 is None
+            or s5.get("settled") is not True
+            or s5.get("status") != "CLOSED_CLASSICAL_ORIGINAL_SELECTED_E32_STRONG_BSD_RUBIN_CM_SHA_TRIVIAL"
+            or s5.get("mathematical_selected_odd_primary_sha_vanishes") is not True
+            or s5.get("mathematical_selected_full_sha_trivial") is not True
+            or s5.get("mathematical_selected_strong_bsd_formula") is not True
+            or s5.get("original_endpoint_proved") is not False
+            or s5.get("native_kernel_acceptance") is not False
+            or s5.get("native_original_shafarevich_realization_typechecked") is not False
+            or s5.get("native_selected_period_identification_typechecked") is not False
+            or not (ROOT / "Docs/roadmaps/ClayBSDOriginalS5StrongBSDRubinClassicalClosure20261117.md").is_file()
+            or not (ROOT / "scripts/check_bsd_s5_selected_curve_rubin_20261117.py").is_file()):
+        problems.append("BSD_S5_RUBIN_CLASSICAL_SELECTED_CURVE_NATIVE_OR_UNIVERSAL_FIREWALL_MISSING")
+    for leaf in ("S1","S3","S6"):
         g = next((g for g in added if g.get("id") == leaf), None)
         if g is None or g.get("settled") is not False:
             problems.append("BSD_"+leaf+"_FALSELY_PROMOTED_FROM_S4_ANALYTIC_POSITIVITY")
