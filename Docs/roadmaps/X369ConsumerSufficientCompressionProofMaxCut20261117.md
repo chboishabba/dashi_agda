@@ -1868,3 +1868,25 @@ topk competition, signed FFN dynamics,
 history cap or hysteresis. Do not
 derive shape from the earlier GELU
 parity or correlated logit equivalence.
+
+
+**Critical Nat refinement of original early Kink owner:**
+`ResponseKink.response` is `Input → Nat`,
+not a real-valued activity. The candidate rational
+envelope admits an integer-coded four-stage witness
+`floor(r(t))=(1,4,6,4)`. The attenuated exact
+Gaussian GELU candidate has
+`floor(10*g(t)*A(t))=(0,7,13,11)`;
+unscaled floor loses strict shape. This shows
+why numerical source-to-Nat admission must
+preserve strict margins AFTER quantization.
+Local independent SymPy reconstruction now
+passes 19 grouped checks. The source receipt
+adapter now fails closed without explicit
+Nat codomain, integer response, claimed
+external observation-projection verification,
+and an interval enclosing that response.
+Its 18-case synthetic selftest is source
+written but not directly run as the exact
+committed file. No real trained Leech
+overload-shape source evidence exists here.
