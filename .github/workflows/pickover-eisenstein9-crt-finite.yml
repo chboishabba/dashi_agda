@@ -1,0 +1,110 @@
+name: pickover-eisenstein9-crt-finite
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Mathematics/NumberTheory/EisensteinNineCRTPhaseMaxCutExact.agda'
+      - 'DASHI/Analysis/PickoverSignedSSPTorquePhaseBridgeExact.agda'
+      - 'DASHI/Analysis/PickoverRHSSPTorqueRoleBridgeExact.agda'
+      - 'DASHI/Analysis/PickoverConsumerResidualFibreBridgeExact.agda'
+      - 'DASHI/Analysis/PickoverBase99SignedTailExact.agda'
+      - 'DASHI/Analysis/PickoverSignedZeroTorque369GridExact.agda'
+      - 'scripts/check_pickover_eisenstein9_crt.py'
+      - 'scripts/check_pickover_machin_factorial_phase.py'
+      - 'scripts/check_pickover_ssp_torque_101.py'
+      - 'scripts/check_pickover_chebyshev_101_local.py'
+      - 'scripts/check_pickover_phase_reopening_exact.py'
+      - 'scripts/check_pickover_exact_interval_certificate.py'
+      - 'scripts/check_pickover_base10_factorial_maxcut.py'
+      - 'scripts/check_pickover_factorial_fast_jump_information.py'
+      - 'scripts/check_pickover_ninth_power_non_descent.py'
+      - 'scripts/check_pickover_punctured_hex_cost_audit.py'
+      - 'scripts/check_pickover_punctured_hex_bbp_exact.py'
+      - 'scripts/check_pickover_c3_angle_pi_windows.py'
+      - 'scripts/check_pickover_factor_fibre_query_adequacy.py'
+      - 'scripts/check_pickover_jcoarse_jfine_mdl_pareto.py'
+      - 'scripts/check_pickover_actual_certificate_precision_pareto.py'
+      - 'scripts/check_pickover_bt_tree_refinement.py'
+      - 'scripts/check_pickover_fast_sine_complex_power.py'
+      - 'scripts/check_pickover_horned_c3_phase_non_descent.py'
+      - 'scripts/check_pickover_factorial_pi_interval_width_budget.py'
+      - 'scripts/check_pickover_bit_shift_cocycle_ladder.py'
+      - 'scripts/check_pickover_369_signed_circle_observer.py'
+      - 'scripts/check_pickover_369_torque_signedzero_cocycle.py'
+      - '.github/workflows/pickover-eisenstein9-crt-finite.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: pickover-eisenstein9-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  finite-replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run exhaustive integer-ring and CRT certificates
+        run: python3 scripts/check_pickover_eisenstein9_crt.py
+      - name: Run independent exact Machin phase certificates
+        run: python3 scripts/check_pickover_machin_factorial_phase.py
+      - name: Run SSP/FRACTRAN, torque and 101-torsion audit
+        run: python3 scripts/check_pickover_ssp_torque_101.py
+      - name: Certify Chebyshev signed steps and 101 non-descent
+        run: python3 scripts/check_pickover_chebyshev_101_local.py
+      - name: Certify actual base99 phase-tail reopening
+        run: python3 scripts/check_pickover_phase_reopening_exact.py
+      - name: Verify terminal rational interval sign certificates
+        run: python3 scripts/check_pickover_exact_interval_certificate.py
+      - name: Certify base-10-only factorial and round phase cases
+        run: python3 scripts/check_pickover_base10_factorial_maxcut.py
+      - name: Check fast-jump phase information loss
+        run: python3 scripts/check_pickover_factorial_fast_jump_information.py
+      - name: Verify ninth-power finite-to-real sign obstruction
+        run: python3 scripts/check_pickover_ninth_power_non_descent.py
+      - name: Audit structured hex codec and inversion no-go
+        run: python3 scripts/check_pickover_punctured_hex_cost_audit.py
+      - name: Certify BBP modulo fractions through hex punctured codec
+        run: python3 scripts/check_pickover_punctured_hex_bbp_exact.py
+      - name: Certify pi and phase via C3 equilateral-angle rational windows
+        run: python3 scripts/check_pickover_c3_angle_pi_windows.py
+      - name: Verify factor-fibre residual and query nonfactorability
+        run: python3 scripts/check_pickover_factor_fibre_query_adequacy.py
+      - name: Audit jCoarse jFine consumer-admissible MDL Pareto
+        run: python3 scripts/check_pickover_jcoarse_jfine_mdl_pareto.py
+      - name: Measure certified factorial sine precision and actual producer work
+        run: python3 scripts/check_pickover_actual_certificate_precision_pareto.py
+      - name: Audit p3 Bruhat Tits cylinders and phase non-descent
+        run: python3 scripts/check_pickover_bt_tree_refinement.py
+      - name: Verify fixed point fast sine complex-power certificate
+        run: python3 scripts/check_pickover_fast_sine_complex_power.py
+      - name: Cross-validate actual e-to-i complex powers against Machin and C3 finite non-descent
+        run: python3 scripts/check_pickover_horned_c3_phase_non_descent.py
+      - name: Check exact 9999-factorial naive pi-interval precision budget
+        run: python3 scripts/check_pickover_factorial_pi_interval_width_budget.py
+      - name: Audit exact bit-shift cocycle and exponent bit cost
+        run: python3 scripts/check_pickover_bit_shift_cocycle_ladder.py
+      - name: Audit nested 369 signed circle and Q9 group separation
+        run: python3 scripts/check_pickover_369_signed_circle_observer.py
+      - name: Verify signed-zero 369 grid-cube tail cocycle and all-horizon quotient obstruction
+        run: python3 scripts/check_pickover_369_torque_signedzero_cocycle.py
+  finite-agda-source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Agda and standard library
+        uses: wenkokke/setup-agda@v2
+        with:
+          agda-version: '2.6.4.3'
+          agda-stdlib-version: '2.1'
+      - name: Typecheck new finite bridge and signed torque/RH role welds
+        run: |
+          agda -i . -l standard-library DASHI/Mathematics/NumberTheory/EisensteinNineCRTPhaseMaxCutExact.agda
+          agda -i . -l standard-library DASHI/Analysis/PickoverSignedSSPTorquePhaseBridgeExact.agda
+          agda -i . -l standard-library DASHI/Analysis/PickoverRHSSPTorqueRoleBridgeExact.agda
+          agda -i . -l standard-library DASHI/Analysis/PickoverBase99SignedTailExact.agda
+          agda -i . -l standard-library DASHI/Analysis/PickoverSignedZeroTorque369GridExact.agda

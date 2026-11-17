@@ -17213,3 +17213,14 @@ Cleanup
 - [ ] Next adapter/generalization lane: lift the same shared Stage12 contract
   beyond the p13 closure row without breaking the candidate-only/fail-closed
   boundary.
+
+### 2026-10-30 analytical j/Bishop → Pickover history max-cut
+- [x] Inspect actual analytic j, Bishop trigonometric phase, q radial convergence, j-coarse/fine observer and modular-level non-descent Agdas.
+- [x] Source-write direct analytic carrier identification for actual Bishop sine as Im(cos+i sin), retaining prior/live/terminal history, and require correct producer at terminal angle; import into three TOE roots.
+- [ ] Construct actual elementary power-series dataset and an executable/proof-checked real-angle `theta=99^(9999!)` in the canonical Bishop real carrier; demonstrate an explicit certified terminal history phase satisfying the source equality.
+- [ ] Prove a separated positive or negative imaginary interval for the actual terminal phase, with explicit error/control over 9999! power propagation; do not substitute an arbitrary C3/j/q coordinate.
+- [ ] Typecheck with Agda --safe and Lean parity; currently source-written only, no CI.
+
+### 2026-10-31 effective phase-precision cut
+- [x] Independently certify true real sine signs at k=1!,2!,3!,4!,5!,6! using dynamic decimal precision P=2k+25 and exact Gaussian fixed-point error propagation; largest k=720, P=1465, 7088 multiplications.
+- [ ] Obtain source-specific actual phase certificate for exponent k=9999! with provable production/checking resources; current exact methods require precision exponential in the 35,656-digit integer k itself (proportional to k), so no terminal answer is claimed.
