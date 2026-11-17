@@ -2,7 +2,6 @@
 module DASHI.Unified.R559IbrahimFleetHyperfabricTOEValidation where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Bool using (true; false)
 open import Data.Empty using (⊥)
 
 import DASHI.EverythingTOESymmetryResolved369 as TOE
@@ -10,7 +9,6 @@ import DASHI.Unifier as Unifier
 import DASHI.Unified.Everything as Unified
 import DASHI.Unified.R559IbrahimFleetHyperfabricTOEExact as Owner
 import DASHI.Unified.FleetFormalGapTargetTOEExact as Fleet
-import DASHI.Physics.YangMills.CompactLieProofLevel as Proof
 
 toeReceiptMatchesOwner :
   TOE.toeR559IbrahimFleetHyperfabricReceipt
@@ -86,57 +84,3 @@ fleetDischargedFibresStillCannotBeRetargeted :
   Fleet.FleetDischargedFibreRetargetPermission → ⊥
 fleetDischargedFibresStillCannotBeRetargeted =
   Owner.fleetDischargedFibresStayOutOfTarget
-
-
-ymGate4FormalGapCountIs58 :
-  Owner.ymGate4FormalGaps ≡ 58
-ymGate4FormalGapCountIs58 =
-  Owner.ymGate4FormalGapsAre58
-
-ymGate4PaidReductionIsMachineChecked :
-  Proof.promotable Owner.ymGate4PaidReductionLevel ≡ true
-ymGate4PaidReductionIsMachineChecked =
-  Proof.machineCheckedPromotes
-
-ymGate4InhabitantsRemainNonPromoting :
-  Proof.promotable Owner.ymGate4InhabitantsLevel ≡ false
-ymGate4InhabitantsRemainNonPromoting =
-  Proof.conditionalDoesNotSelfPromote
-
-sameCardinalityDoesNotIdentifyFleetAndGate4 :
-  Owner.Fleet58EqualsYMGate4SameObject → ⊥
-sameCardinalityDoesNotIdentifyFleetAndGate4 =
-  Owner.fleet58CardinalityDoesNotProveYMGate4Identity
-
-
-
-toeYMGate4GapCountMatchesOwner :
-  TOE.toeYMGate4FormalGapsAre58
-  ≡ Owner.ymGate4FormalGapsAre58
-toeYMGate4GapCountMatchesOwner = refl
-
-unifierYMGate4GapCountMatchesOwner :
-  Unifier.unifierYMGate4FormalGapsAre58
-  ≡ Owner.ymGate4FormalGapsAre58
-unifierYMGate4GapCountMatchesOwner = refl
-
-unifiedYMGate4GapCountMatchesOwner :
-  Unified.unifiedYMGate4FormalGapsAre58
-  ≡ Owner.ymGate4FormalGapsAre58
-unifiedYMGate4GapCountMatchesOwner = refl
-
-toeFleet58IdentityFirewallMatchesOwner :
-  Owner.Fleet58EqualsYMGate4SameObject → ⊥
-toeFleet58IdentityFirewallMatchesOwner =
-  TOE.toeFleet58DoesNotIdentifyYMGate4
-
-unifierFleet58IdentityFirewallMatchesOwner :
-  Owner.Fleet58EqualsYMGate4SameObject → ⊥
-unifierFleet58IdentityFirewallMatchesOwner =
-  Unifier.unifierFleet58DoesNotIdentifyYMGate4
-
-unifiedFleet58IdentityFirewallMatchesOwner :
-  Owner.Fleet58EqualsYMGate4SameObject → ⊥
-unifiedFleet58IdentityFirewallMatchesOwner =
-  Unified.unifiedFleet58DoesNotIdentifyYMGate4
-

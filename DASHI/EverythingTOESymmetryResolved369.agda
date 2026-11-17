@@ -25,7 +25,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Bool using (false)
-open import Data.Empty using (⊥)
+open import Data.Nat.Base using (ℕ)
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 
 ------------------------------------------------------------------------
@@ -808,139 +808,31 @@ toeNavierStokesBM2FiniteFoldClosed : Bool
 toeNavierStokesBM2FiniteFoldClosed =
   NSBM2TOE.cardinalityFreeFiniteFoldClosed
 
-toeNavierStokesBM2FiniteFoldClosedIsTrue :
-  toeNavierStokesBM2FiniteFoldClosed ≡ true
-toeNavierStokesBM2FiniteFoldClosedIsTrue =
-  NSBM2TOE.cardinalityFreeFiniteFoldClosedIsTrue
+toeBalabanR559Gate4UnresolvedCount : ℕ
+toeBalabanR559Gate4UnresolvedCount =
+  BalabanR559TOE.gate4UnresolvedCount
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
-toeNavierStokesBM2SamplewisePaymentStillAnalytic :
-  NSBM2TOE.samplewisePhysicalPaymentStillAnalytic ≡ true
-toeNavierStokesBM2SamplewisePaymentStillAnalytic =
-  NSBM2TOE.samplewisePhysicalPaymentStillAnalyticIsTrue
+toeBalabanR559Gate4UnresolvedCountIs58 :
+  toeBalabanR559Gate4UnresolvedCount ≡ 58
+toeBalabanR559Gate4UnresolvedCountIs58 =
+  BalabanR559TOE.gate4UnresolvedCountIs58
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
-toeNavierStokesBM2GalerkinFoldStillAnalytic :
-  NSBM2TOE.literalFoldIntoGalerkinDissipationStillAnalytic ≡ true
-toeNavierStokesBM2GalerkinFoldStillAnalytic =
-  NSBM2TOE.literalFoldIntoGalerkinDissipationStillAnalyticIsTrue
+toeBalabanR559Gate4DefinitionLevel : ProofLevel
+toeBalabanR559Gate4DefinitionLevel =
+  BalabanR559TOE.gate4DefinitionLevel
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
-toeNavierStokesBM2OldPDFB1B2B3B4NotMandatory :
-  NSBM2TOE.oldPDFB1B2B3B4Mandatory ≡ false
-toeNavierStokesBM2OldPDFB1B2B3B4NotMandatory =
-  NSBM2TOE.oldPDFB1B2B3B4MandatoryIsFalse
+toeBalabanR559Gate4InhabitantsLevel : ProofLevel
+toeBalabanR559Gate4InhabitantsLevel =
+  BalabanR559TOE.gate4InhabitantsLevel
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
-toeNavierStokesBM2OldPDFB7NotMandatory :
-  NSBM2TOE.oldPDFB7DirectCovarianceEqualityMandatory ≡ false
-toeNavierStokesBM2OldPDFB7NotMandatory =
-  NSBM2TOE.oldPDFB7DirectCovarianceEqualityMandatoryIsFalse
-
-toeNavierStokesBM2ClayPromotion : Bool
-toeNavierStokesBM2ClayPromotion =
-  NSBM2TOE.modernNSClayPromotion
-
-toeNavierStokesBM2ClayPromotionStillFalse :
-  toeNavierStokesBM2ClayPromotion ≡ false
-toeNavierStokesBM2ClayPromotionStillFalse =
-  NSBM2TOE.modernNSClayPromotionStillFalse
-
-toeNavierStokesBM2Receipt :
-  NSBM2TOE.NavierStokesBM2TOEReceipt
-toeNavierStokesBM2Receipt =
-  NSBM2TOE.canonicalNavierStokesBM2TOEReceipt
-
-toeNavierStokesBM2ZKPFrame :
-  NSBM2TOE.NavierStokesBM2TOEZKPFrame
-toeNavierStokesBM2ZKPFrame =
-  NSBM2TOE.canonicalNavierStokesBM2TOEZKPFrame
-
-------------------------------------------------------------------------
--- Canonical Navier-Stokes Clay frontier and direct non-promotion exports.
-------------------------------------------------------------------------
-
-import DASHI.Unified.NavierStokesClayFrontierTOEConvergenceExact as NSClayTOE
-
-toeNavierStokesClayPromotion : Bool
-toeNavierStokesClayPromotion =
-  NSClayTOE.navierStokesABCDClayPromotion
-
-toeNavierStokesClayPromotionStillFalse :
-  toeNavierStokesClayPromotion ≡ false
-toeNavierStokesClayPromotionStillFalse =
-  NSClayTOE.navierStokesABCDClayPromotionStillFalse
-
-toeNavierStokesGeneralRegularityComplete : Bool
-toeNavierStokesGeneralRegularityComplete =
-  NSClayTOE.generalNSGlobalRegularityComplete
-
-toeNavierStokesGeneralRegularityStillOpen :
-  toeNavierStokesGeneralRegularityComplete ≡ false
-toeNavierStokesGeneralRegularityStillOpen =
-  NSClayTOE.generalNSGlobalRegularityStillOpen
-
-toeNavierStokesCarrierToGeneralImplicationProved : Bool
-toeNavierStokesCarrierToGeneralImplicationProved =
-  NSClayTOE.carrierToGeneralNSImplicationProved
-
-toeNavierStokesCarrierToGeneralImplicationStillOpen :
-  toeNavierStokesCarrierToGeneralImplicationProved ≡ false
-toeNavierStokesCarrierToGeneralImplicationStillOpen =
-  NSClayTOE.carrierToGeneralNSImplicationStillOpen
-
-toeNavierStokesAuthorityPromotionGuard : Bool
-toeNavierStokesAuthorityPromotionGuard =
-  NSClayTOE.navierStokesPromotionGuard
-
-toeNavierStokesAuthorityPromotionGuardStillFalse :
-  toeNavierStokesAuthorityPromotionGuard ≡ false
-toeNavierStokesAuthorityPromotionGuardStillFalse =
-  NSClayTOE.navierStokesPromotionGuardStillFalse
-
-toeNavierStokesClayFrontierZKPFrame :
-  NSClayTOE.NavierStokesClayFrontierTOEZKPFrame
-toeNavierStokesClayFrontierZKPFrame =
-  NSClayTOE.canonicalNavierStokesClayFrontierTOEZKPFrame
-
-toeNavierStokesTerminalPromotionImpossible :
-  NSClayTOE.NSClayDistanceFinalPromotion → ⊥
-toeNavierStokesTerminalPromotionImpossible =
-  NSClayTOE.terminalClayPromotionImpossible
-
-
-------------------------------------------------------------------------
--- Current periodic-B shared weighted wall from R736.
--- Proof ownership remains in R736 through the canonical NS Clay facade.
-------------------------------------------------------------------------
-
-toeNavierStokesSharedWeightedExactlyTwoLeaves : Bool
-toeNavierStokesSharedWeightedExactlyTwoLeaves =
-  NSClayTOE.currentSharedWeightedExactlyTwoLeaves
-
-toeNavierStokesSharedWeightedExactlyTwoLeavesIsTrue :
-  toeNavierStokesSharedWeightedExactlyTwoLeaves ≡ true
-toeNavierStokesSharedWeightedExactlyTwoLeavesIsTrue =
-  NSClayTOE.currentSharedWeightedExactlyTwoLeavesIsTrue
-
-toeNavierStokesSharedWeightedSameCarrier : Bool
-toeNavierStokesSharedWeightedSameCarrier =
-  NSClayTOE.currentSharedWeightedSameCarrier
-
-toeNavierStokesSharedWeightedSameCarrierIsTrue :
-  toeNavierStokesSharedWeightedSameCarrier ≡ true
-toeNavierStokesSharedWeightedSameCarrierIsTrue =
-  NSClayTOE.currentSharedWeightedSameCarrierIsTrue
-
-toeNavierStokesSharedWeightedCarrierIsInputLaplacian : Bool
-toeNavierStokesSharedWeightedCarrierIsInputLaplacian =
-  NSClayTOE.currentSharedWeightedCarrierIsInputLaplacian
-
-toeNavierStokesWeightedPlusEndpointClosed : Bool
-toeNavierStokesWeightedPlusEndpointClosed =
-  NSClayTOE.currentWeightedPlusEndpointClosed
-
-toeBalabanOSWightmanStillBlocked :
-  BalabanR559TOE.balabanOSWightmanConstruction
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false
-toeBalabanOSWightmanStillBlocked =
-  BalabanR559TOE.balabanOSWightmanConstructionIsFalse
+toeBalabanScaleTransferNonPromotion :
+  BalabanR559TOE.ScaleTransferPromotion → ⊥
+toeBalabanScaleTransferNonPromotion =
+  BalabanR559TOE.scaleTransferPromotionEliminator
     BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
 
@@ -1014,6 +906,46 @@ toeRGAndIbrahimSearchPromotionImpossible :
 toeRGAndIbrahimSearchPromotionImpossible sourcePriority rg =
   toeIbrahimSearchPriorityDoesNotCreateProof sourcePriority
 
+-- These are two independent 27-state owners. No same-carrier assertion follows.
+import DASHI.Core.ConsumerDescentMinimalObserverExact as TOE27Descent
+import DASHI.Foundations.BalancedTernaryAntipodalOrbitExact as TOE27Orbit
+import Data.Empty as TOE27Empty
+
+------------------------------------------------------------------------
+-- R559 / Ibrahim / fleet-58 / generic-hyperfabric TOE convergence.
+------------------------------------------------------------------------
+
+toeTernary27DependentCodePreservesConsumer :
+  ∀ {Outcome : Set} → (consumer : TOE27Orbit.TritTriple → Outcome) →
+  TOE27Descent.ConsumerSufficient Recoverable27TOE.ternary27ExactCodeObserver consumer
+toeTernary27DependentCodePreservesConsumer = Recoverable27TOE.ternary27ExactCodeAdequateForEveryConsumer
+
+
+------------------------------------------------------------------------
+-- Current Navier--Stokes A/B/C/D terminal convergence.
+------------------------------------------------------------------------
+
+import DASHI.Unified.NavierStokesABCDTerminalTOEExact as NSABCDTerminal
+
+toeNavierStokesABCDTerminalReceipt :
+  NSABCDTerminal.NSABCDTerminalTOEReceipt
+toeNavierStokesABCDTerminalReceipt =
+  NSABCDTerminal.canonicalNSABCDTerminalTOEReceipt
+
+toeNavierStokesABCDTerminalZKPFrame :
+  NSABCDTerminal.NSABCDTerminalZKPFrame
+toeNavierStokesABCDTerminalZKPFrame =
+  NSABCDTerminal.canonicalNSABCDTerminalZKPFrame
+
+toeNavierStokesBReserveStillOpen =
+  NSABCDTerminal.toeBReserveStillOpen
+
+toeNavierStokesBW1StillOpen =
+  NSABCDTerminal.toeBW1StillOpen
+
+toeNavierStokesBContinuationStillOpen =
+  NSABCDTerminal.toeBContinuationStillOpen
+
 
 ------------------------------------------------------------------------
 -- R559 / Ibrahim / fleet-58 / generic-hyperfabric TOE convergence.
@@ -1030,24 +962,6 @@ toeFleetFormalGapsAre58 :
   FleetHyperTOE.fleetFormalGaps ≡ 58
 toeFleetFormalGapsAre58 =
   FleetHyperTOE.fleetFormalGapsAre58
-
-toeYMGate4FormalGapsAre58 :
-  FleetHyperTOE.ymGate4FormalGaps ≡ 58
-toeYMGate4FormalGapsAre58 =
-  FleetHyperTOE.ymGate4FormalGapsAre58
-
-toeYMGate4PaidReductionLevel : ProofLevel
-toeYMGate4PaidReductionLevel =
-  FleetHyperTOE.ymGate4PaidReductionLevel
-
-toeYMGate4InhabitantsLevel : ProofLevel
-toeYMGate4InhabitantsLevel =
-  FleetHyperTOE.ymGate4InhabitantsLevel
-
-toeFleet58DoesNotIdentifyYMGate4 :
-  FleetHyperTOE.Fleet58EqualsYMGate4SameObject → ⊥
-toeFleet58DoesNotIdentifyYMGate4 =
-  FleetHyperTOE.fleet58CardinalityDoesNotProveYMGate4Identity
 
 toeFleetDischargedFibresAre584 :
   FleetHyperTOE.fleetDischargedFibres ≡ 584
@@ -1068,71 +982,3 @@ toeTwoDigitStreamCannotRecoverThird :
   FleetHyperTOE.StreamThirdPrefixRecovery → ⊥
 toeTwoDigitStreamCannotRecoverThird =
   FleetHyperTOE.toeTwoDigitStreamCannotRecoverThird
-
-------------------------------------------------------------------------
--- Implement-A-to-D reuse-only TOE normalization.
-------------------------------------------------------------------------
-
-import DASHI.Unified.YMImplementAToDTOEMaxCutExact as YMAD
-
-toeYMImplementAToDMaxCutReceipt :
-  YMAD.YMImplementAToDTOEMaxCutReceipt
-toeYMImplementAToDMaxCutReceipt =
-  YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
-
-toeYMImplementAToDZKPFrame : YMAD.YMImplementAToDZKPFrame
-toeYMImplementAToDZKPFrame =
-  YMAD.canonicalYMImplementAToDZKPFrame
-
-toeYMImplementAToDGate4UnresolvedCount : ℕ
-toeYMImplementAToDGate4UnresolvedCount =
-  YMAD.gate4UnresolvedCount YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
-
-toeYMImplementAToDGate4UnresolvedCountIs58 :
-  toeYMImplementAToDGate4UnresolvedCount ≡ 58
-toeYMImplementAToDGate4UnresolvedCountIs58 =
-  YMAD.gate4UnresolvedCountIs58 YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
-
-toeYMImplementAToDPublishedContinuumStillBlocked :
-  YMAD.publishedContinuumPromotion YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
-  ≡ false
-toeYMImplementAToDPublishedContinuumStillBlocked =
-  YMAD.publishedContinuumPromotionIsFalse
-    YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
-
-toeYMImplementAToDContinuumMassGapStillBlocked :
-  YMAD.continuumMassGapPromotion YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
-  ≡ false
-toeYMImplementAToDContinuumMassGapStillBlocked =
-  YMAD.continuumMassGapPromotionIsFalse
-    YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
-
-toeYMImplementAToDClayStillBlocked :
-  YMAD.clayPromotion YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
-  ≡ false
-toeYMImplementAToDClayStillBlocked =
-  YMAD.clayPromotionIsFalse YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
-
-toeYMImplementAToDScaleTransferNonPromotion :
-  BalabanR559TOE.ScaleTransferPromotion → ⊥
-toeYMImplementAToDScaleTransferNonPromotion =
-  YMAD.scaleTransferPromotionEliminator
-    YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
-
-------------------------------------------------------------------------
--- Kernel-bidi / ternary-27 / byte-ABI max-cut convergence.
-------------------------------------------------------------------------
-
-import DASHI.Unified.R559IbrahimFleetKernelBidiTernary27TOEExact as Kernel27TOE
-
-toeR559IbrahimFleetKernelBidiTernary27Receipt =
-  Kernel27TOE.canonicalR559IbrahimFleetKernelBidiTernary27TOEReceipt
-
-toeTriadicRustBindingStillUnpaid =
-  Kernel27TOE.rustU8BindingStillUnpaid
-
-toeKernelCharacterIsotypyStillDoesNotConstructActionIntertwiner =
-  Kernel27TOE.kernelCharacterIsotypyStillDoesNotConstructActionIntertwiner
-
-toeSelected3BSingleActionProducerStillUninhabited =
-  Kernel27TOE.singleActionProducerStillUninhabited

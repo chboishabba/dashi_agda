@@ -1,10 +1,9 @@
 @startuml
-title R559 / Ibrahim / Fleet / Yang-Mills A-D / Hyperfabric TOE convergence
+title R559 / Ibrahim / Fleet / Hyperfabric TOE convergence
 
 skinparam componentStyle rectangle
-skinparam shadowing false
 
-package "Canonical normalization owners" {
+package "Canonical owners" {
   component "BalabanR559TOEMaxCutExact" as YM
   component "BalabanIbrahimParetoSnowballTOEExact" as Ibrahim
   component "FleetFormalGapTargetTOEExact" as Fleet
@@ -13,50 +12,22 @@ package "Canonical normalization owners" {
   component "SensibLawWrongTypeGenericHyperfabricAdapterExact" as WrongType
 }
 
-package "Yang-Mills A-D theorem owners" {
-  component "R443 / R444 / R461\nfinite Wilson OS owners" as A
-  component "CMP119 reflection max-cut\nE/R/B crossing certificates explicit" as B
-  component "CMP119 literal residual weld\nEq.2.23 E/R/B/V same-object cut" as C
-  component "R534 / R535\nprojective continuum representation" as D
-  component "Gate4 Round6 ledger + cutset\npaid reductions + 58 conditional fields" as G58
-}
-
-component "YMImplementAToDTOEMaxCutExact\nreuse-only A-D receipt" as AD
 component "R559IbrahimFleetHyperfabricTOEExact" as Joint
 component "EverythingTOESymmetryResolved369" as TOE
 component "Unifier" as Unifier
-component "Unified.Physics" as Physics
 component "Unified.Everything" as Unified
-component "A-D Validation" as ADValidation
-component "Fleet/Ibrahim Validation" as Validation
+component "R559IbrahimFleetHyperfabricTOEValidation" as Validation
 
-YM --> Joint : exact receipt + RG non-promotion\nYM --> Joint : Gate-4 58 + paid/open proof posture
+YM --> Joint : exact receipt + RG non-promotion
 Ibrahim --> Joint : Pareto / snowball boundaries
 Fleet --> Joint : 584 discharged / 44 contradiction / 58 target
 Fabric --> Joint : B^k + factorisation
 PadicWave --> Joint : prefix / stream projection loss
 WrongType --> Joint : legal adapter only
 
-A --> AD : existing finite OS levels
-B --> AD : existing complete-action RP audit
-C --> AD : existing selected residual weld
-D --> AD : existing projective representation
-G58 --> AD : exact Gate-4 scope and paid reductions
-YM --> AD : scale-transfer and terminal non-promotion
-
 Joint --> TOE
 Joint --> Unifier
 Joint --> Unified
-
-AD --> TOE
-AD --> Unifier
-AD --> Physics
-AD --> Unified
-
-TOE --> ADValidation
-Unifier --> ADValidation
-Physics --> ADValidation
-AD --> ADValidation
 
 TOE --> Validation
 Unifier --> Validation
@@ -64,30 +35,20 @@ Unified --> Validation
 Joint --> Validation
 
 note right of Fleet
-The fleet receipt is external planning context.
-584 discharged fibres stay discharged.
-44 contradiction gaps stay separate.
-58 target gaps remain the fleet target.
-Three eigen-motif labels do not create proof authority.
+External fleet counts remain planning receipts.
+Counts do not create proof authority.
+Only the reported 58 formal gaps are targeted.
 end note
 
-note right of G58
-The Yang-Mills Gate-4 count is also 58.
-Equal cardinality does not prove same-object identity.
-The round-six ledger records paid reductions.
-The cutset inhabitants remain conditional.
-end note
-
-note right of AD
-A-D reuses theorem owners.
-Localization does not imply reflection positivity.
-Projective compilers do not imply continuum Yang-Mills.
+note right of Fabric
+Address count does not create semantics.
+Projection sufficiency is consumer-relative.
 end note
 
 note bottom of Joint
-Finite RG does not imply continuum Yang-Mills.
-Search priority does not imply proof.
-Arithmetic coincidence does not imply Monster recognition.
+Finite RG != continuum Yang-Mills.
+Search priority != proof.
+Arithmetic coincidence != Monster recognition.
 No ESD mutation.
 end note
 

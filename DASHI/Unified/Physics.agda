@@ -582,6 +582,27 @@ yangMillsBalabanR559ClayPromotionStillBlocked =
   BalabanR559TOE.clayPromotionIsFalse
     BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
+yangMillsBalabanR559Gate4UnresolvedCount : ℕ
+yangMillsBalabanR559Gate4UnresolvedCount =
+  BalabanR559TOE.gate4UnresolvedCount
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+yangMillsBalabanR559Gate4UnresolvedCountIs58 :
+  yangMillsBalabanR559Gate4UnresolvedCount ≡ 58
+yangMillsBalabanR559Gate4UnresolvedCountIs58 =
+  BalabanR559TOE.gate4UnresolvedCountIs58
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+yangMillsBalabanR559Gate4DefinitionLevel : ProofLevel
+yangMillsBalabanR559Gate4DefinitionLevel =
+  BalabanR559TOE.gate4DefinitionLevel
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+yangMillsBalabanR559Gate4InhabitantsLevel : ProofLevel
+yangMillsBalabanR559Gate4InhabitantsLevel =
+  BalabanR559TOE.gate4InhabitantsLevel
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
 yangMillsBalabanScaleTransferNonPromotion :
   BalabanR559TOE.ScaleTransferPromotion → ⊥
 yangMillsBalabanScaleTransferNonPromotion =

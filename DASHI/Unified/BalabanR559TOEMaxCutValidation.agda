@@ -7,6 +7,9 @@ import Data.Empty using (⊥)
 
 import DASHI.Unified.BalabanR559TOEMaxCutExact as Joint
 import DASHI.Physics.Closure.BalabanRGScaleTransferFrontierReceipt as RGNonPromotion
+import DASHI.Physics.YangMills.BalabanClayGate4PhysicalClosureRound6ExactCutset as Gate4
+import DASHI.Physics.YangMills.YangMillsSubmissionObligationCardinalityExact as Counts
+import DASHI.Physics.YangMills.CompactLieProofLevel as Proof
 import DASHI.EverythingTOESymmetryResolved369 as TOE
 import DASHI.Unifier as Unifier
 import DASHI.Unified.Physics as Physics
@@ -37,32 +40,94 @@ unifiedEverythingReceiptMatches :
 unifiedEverythingReceiptMatches = refl
 
 ------------------------------------------------------------------------
--- Shared owner checks.
+-- Canonical owner reachability.
+--
+-- Balaban and R559 remain distinct theorem owners.
+-- The joint receipt proves reachability to each canonical owner.
 ------------------------------------------------------------------------
 
-densityOwnerAgreementIsExact :
+jointBalabanDensityMatchesOwner :
   Joint.balabanDensityFlow Joint.canonicalBalabanR559TOEMaxCutReceipt
-  ≡ Joint.r559DensityFlow Joint.canonicalBalabanR559TOEMaxCutReceipt
-densityOwnerAgreementIsExact =
-  Joint.densityOwnerAgreement Joint.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ Balaban.balabanScaleDensityFlowLevel
+jointBalabanDensityMatchesOwner = refl
 
-regularEOwnerAgreementIsExact :
+jointBalabanRegularEMatchesOwner :
   Joint.balabanRegularELocalization Joint.canonicalBalabanR559TOEMaxCutReceipt
-  ≡ Joint.r559RegularELocalization Joint.canonicalBalabanR559TOEMaxCutReceipt
-regularEOwnerAgreementIsExact =
-  Joint.regularEOwnerAgreement Joint.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ Balaban.balabanRegularELocalizationSourceLevel
+jointBalabanRegularEMatchesOwner = refl
 
-stressMarkedShellOwnerAgreementIsExact :
+jointBalabanCasimirMatchesOwner :
+  Joint.balabanCasimirLowerBoundTransport
+    Joint.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ Balaban.balabanCasimirLowerBoundTransportLevel
+jointBalabanCasimirMatchesOwner = refl
+
+jointBalabanMarkedShellStressMatchesOwner :
   Joint.balabanStressMarkedShell Joint.canonicalBalabanR559TOEMaxCutReceipt
-  ≡ Joint.r559StressMarkedShell Joint.canonicalBalabanR559TOEMaxCutReceipt
-stressMarkedShellOwnerAgreementIsExact =
-  Joint.stressMarkedShellOwnerAgreement Joint.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ Balaban.balabanStressMarkedShellReuseLevel
+jointBalabanMarkedShellStressMatchesOwner = refl
 
-stressHilbertOwnerAgreementIsExact :
+jointBalabanHilbertStressMatchesOwner :
   Joint.balabanStressHilbertCompiler Joint.canonicalBalabanR559TOEMaxCutReceipt
-  ≡ Joint.r559StressHilbertCompiler Joint.canonicalBalabanR559TOEMaxCutReceipt
-stressHilbertOwnerAgreementIsExact =
-  Joint.stressHilbertOwnerAgreement Joint.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ Balaban.balabanStressHilbertBoundCompilerLevel
+jointBalabanHilbertStressMatchesOwner = refl
+
+jointR559BetaSourceMatchesOwner :
+  Joint.r559CurrentStepBetaSource Joint.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ R559.toeGoal1A1CurrentStepBetaSourceLevel
+jointR559BetaSourceMatchesOwner = refl
+
+jointR559StressDensityMatchesOwner :
+  Joint.r559StressDensityFiniteMeasure Joint.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ R559.toeGoal1A3StressDensityIsLiteralFiniteMeasureLevel
+jointR559StressDensityMatchesOwner = refl
+
+------------------------------------------------------------------------
+-- Canonical 58-field Gate-4 unresolved-cut boundary.
+------------------------------------------------------------------------
+
+jointGate4CountIsCanonical :
+  Joint.gate4UnresolvedCount Joint.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ Counts.gate4ObligationCount
+jointGate4CountIsCanonical = refl
+
+jointGate4CountIs58 :
+  Joint.gate4UnresolvedCount Joint.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ 58
+jointGate4CountIs58 =
+  Joint.gate4UnresolvedCountIs58 Joint.canonicalBalabanR559TOEMaxCutReceipt
+
+jointGate4DefinitionLevelMatchesOwner :
+  Joint.gate4DefinitionLevel Joint.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ Gate4.physicalClosureRound6CutsetDefinitionLevel
+jointGate4DefinitionLevelMatchesOwner = refl
+
+jointGate4InhabitantsLevelMatchesOwner :
+  Joint.gate4InhabitantsLevel Joint.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ Gate4.physicalClosureRound6CutsetInhabitantsLevel
+jointGate4InhabitantsLevelMatchesOwner = refl
+
+jointGate4InhabitantsDoNotSelfPromote :
+  Proof.promotable
+    (Joint.gate4InhabitantsLevel Joint.canonicalBalabanR559TOEMaxCutReceipt)
+  ≡ false
+jointGate4InhabitantsDoNotSelfPromote =
+  Proof.conditionalDoesNotSelfPromote
+
+rootGate4CountIs58 :
+  TOE.toeBalabanR559Gate4UnresolvedCount ≡ 58
+rootGate4CountIs58 =
+  TOE.toeBalabanR559Gate4UnresolvedCountIs58
+
+unifierGate4CountIs58 :
+  Unifier.unifierBalabanR559Gate4UnresolvedCount ≡ 58
+unifierGate4CountIs58 =
+  Unifier.unifierBalabanR559Gate4UnresolvedCountIs58
+
+physicsGate4CountIs58 :
+  Physics.yangMillsBalabanR559Gate4UnresolvedCount ≡ 58
+physicsGate4CountIs58 =
+  Physics.yangMillsBalabanR559Gate4UnresolvedCountIs58
 
 ------------------------------------------------------------------------
 -- Fail-closed promotion checks.

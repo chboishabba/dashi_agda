@@ -8,6 +8,7 @@ package "Yang-Mills theorem owners" {
   [R559 TOE convergence] as R559
   [Balaban RG TOE regression] as BRG
   [Balaban scale-transfer frontier] as BFront
+  [Gate-4 canonical cutset\n58 unresolved fields] as G58
 }
 
 package "Ibrahim / recognition owners" {
@@ -33,6 +34,7 @@ R558 --> R559
 BRG --> JointYM
 R559 --> JointYM
 BFront --> JointYM : exact non-promotion
+G58 --> JointYM : exact count + proof posture
 
 Rec --> JointI
 Exec --> JointI
@@ -53,6 +55,9 @@ Physics --> Everything
 JointI --> Everything : validation
 
 note right of JointYM
+Canonical unresolved count = 58.
+Cutset definition is machine-checked.
+Cutset inhabitants remain conditional.
 Finite RG remains finite.
 Continuum YM is not promoted.
 Mass gap is not promoted by facade.
