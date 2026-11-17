@@ -70,6 +70,31 @@ first=(1,4,6,5)
 second=(1,2,3,7)
 require("identical loads do not determine shape without source observation",
         shape(first) and not shape(second))
+# CRITICAL TYPE WELD: the original Agda ResponseKink.response is Nat.
+# The rational / analytic real-valued witnesses above are NOT direct
+# inhabitants of that type. An order-preserving, calibrated observation
+# map is an ADDITIONAL obligation. Here give two finite examples.
+nat_rational=tuple(int(S.floor(x)) for x in rvals)
+require("Nat observation of rational envelope is still strictly ordered",
+        nat_rational==(1,4,6,4) and shape(nat_rational))
+nat_gelu=tuple(int(S.floor(10*x)) for x in observed)
+require("Nat observation of GELU envelope still meets old shape",
+        nat_gelu==(0,7,13,11) and shape(nat_gelu))
+# Floor quantization can erase the shape, so the original Nat
+# profile cannot be inferred from a real inequality without
+# certified separation AFTER the observation map.
+erasing=tuple(int(S.floor(x)) for x in observed)
+require("unit-scale floor loses strict GELU rise",
+        not shape(erasing))
+# Rational tail lower bound improved to Phi(2)>15/16:
+# thus a(2)> (2*15/16)*(2/3) = 5/4;
+# with scale 10, floor(10*a2) >=12.
+# At a3<=48/43, floor(10*a3)<=11.
+require("tail-bound supports robust Nat peak vs overload",
+        bool(S.N(phi2/2,60)<R(1,16)) and R(5,4)>R(48,43))
+require("Nat scale10 stage1 and peak separation certified",
+        R(10)*R(16,17)<R(10)*R(5,4))
+
 print("X369_EARLY_KINK_CROSSWALK_SYMPY_PASS",len(passed))
-print("EXACT_RATIONAL_ENVELOPE",rvals)
-print("GELU_ENVELOPE",tuple(str(S.N(z,12)) for z in observed))
+print("EXACT_RATIONAL_ENVELOPE",rvals,"Nat",nat_rational)
+print("GELU_ENVELOPE",tuple(str(S.N(z,12)) for z in observed),"Nat",nat_gelu)
