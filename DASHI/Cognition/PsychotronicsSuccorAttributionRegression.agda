@@ -222,6 +222,22 @@ noaaOriginalISDAndConverted1953HaveSameCustody :
   Atlas.root Atlas.noaaISD1953YearArchivePresent
 noaaOriginalISDAndConverted1953HaveSameCustody = refl
 
+
+noaaSynopticPressureAndRainHaveSameObserverRoot :
+  Atlas.root Atlas.noaaBangor1953SynopticPressureBeforeRain ≡
+  Atlas.root Atlas.noaaBangorJul1953HourlyRealWeatherBound
+noaaSynopticPressureAndRainHaveSameObserverRoot = refl
+
+noaaBangorWindAndClaimClockHaveSameObserverRoot :
+  Atlas.root Atlas.noaaBangor1953WindsNotEllsworthOperation ≡
+  Atlas.root Atlas.noaaBangorJul1953HourlyRealWeatherBound
+noaaBangorWindAndClaimClockHaveSameObserverRoot = refl
+
+noaaPressureJulyReferenceIsNotNewReplication :
+  Atlas.root Atlas.noaaBangor1953OverlappingJulyPressureReference ≡
+  Atlas.root Atlas.noaaBangor1953SynopticPressureBeforeRain
+noaaPressureJulyReferenceIsNotNewReplication = refl
+
 -- Additional original 1953 NOAA station does not change the publisher
 -- denominator; observations must retain their actual distinct site keys.
 barHarborJuly6Through8Equals130TenthsMm :
@@ -628,6 +644,94 @@ saikiaPublisherSITopicListingNotMeasuredCoilResult =
 saikiaSITopicListingDoesNotProveSixtyPercent :
   Atlas.citationCreatesTruth Atlas.saikia2019ACSOriginalSITopicListing ≡ false
 saikiaSITopicListingDoesNotProveSixtyPercent = refl
+
+------------------------------------------------------------------------
+-- ACS SAiKIA ORIGINAL 2019 SI LISTING: AN IDENTIFIABILITY COUNTERMODEL
+--
+-- The publisher's original SI catalogue mentions a magnetic-field topic.
+-- This finite *hypothetical* pair demonstrates nonidentification of a
+-- **specific** matched Rodin/Helmholtz ~60%-comparator *from that listing*.
+-- Neither model alleges what the actual unread PDF contains. Original
+-- experimental credit remains Saikia et al. and Ramirez-Galindo et al.
+------------------------------------------------------------------------
+
+data PossibleSaikiaSIBody : Set where
+  magneticSecondaryAggregationOnly : PossibleSaikiaSIBody
+  magneticSecondaryAggregationWithMatchedCoils : PossibleSaikiaSIBody
+
+siPublisherMFListing : PossibleSaikiaSIBody → Bool
+siPublisherMFListing magneticSecondaryAggregationOnly = true
+siPublisherMFListing magneticSecondaryAggregationWithMatchedCoils = true
+
+siBodyHasNamedMatchedCoil60Percent : PossibleSaikiaSIBody → Bool
+siBodyHasNamedMatchedCoil60Percent magneticSecondaryAggregationOnly = false
+siBodyHasNamedMatchedCoil60Percent magneticSecondaryAggregationWithMatchedCoils = true
+
+siSameListing : siPublisherMFListing magneticSecondaryAggregationOnly ≡
+                siPublisherMFListing magneticSecondaryAggregationWithMatchedCoils
+siSameListing = refl
+
+siDifferentPotentialComparatorResult :
+  siBodyHasNamedMatchedCoil60Percent magneticSecondaryAggregationOnly ≡
+  siBodyHasNamedMatchedCoil60Percent magneticSecondaryAggregationWithMatchedCoils → ⊥
+siDifferentPotentialComparatorResult ()
+
+siListingDoesNotFactorSpecificComparator :
+  (decoder : Bool → Bool) →
+  (∀ w → decoder (siPublisherMFListing w) ≡
+          siBodyHasNamedMatchedCoil60Percent w) →
+  ⊥
+siListingDoesNotFactorSpecificComparator decoder claimed
+  with trans (sym (claimed magneticSecondaryAggregationOnly))
+             (claimed magneticSecondaryAggregationWithMatchedCoils)
+... | ()
+
+------------------------------------------------------------------------
+-- 2024 RODIN TABLE II: SAME CENTRE B, DIFFERENT LOCAL FIELD SLOPE.
+--
+-- These are exact *synthetic local linear field* families, not original
+-- Hall-probe recordings or measured real-coil gradients.
+-- The general field form is B=(g*z, 0, b+g*x) with b>0. Its spatial
+-- divergence is zero and its curl is zero because dBx/dz=dBz/dx=g;
+-- the centre has B=(0,0,b), even when g changes. At z=0 the Bz
+-- slope is g; for b>0 the magnitude gradient at the centre is g.
+-- The finite Nat representation below only certifies equality of
+-- polynomial COEFFICIENTS and the centre-value collision, not full
+-- 3D continuum Maxwell identities or actual SI metrology.
+------------------------------------------------------------------------
+
+record RodinLocalLinearMagneticField : Set where
+  constructor local-linear-B
+  field
+    centreBz : Nat
+    BxSlopeInZ : Nat
+    BzSlopeInX : Nat
+open RodinLocalLinearMagneticField
+
+uniformSameCentreField : RodinLocalLinearMagneticField
+uniformSameCentreField = local-linear-B 4 0 0
+
+gradientSameCentreField : RodinLocalLinearMagneticField
+gradientSameCentreField = local-linear-B 4 1 1
+
+rodinCentreFieldsIdentical :
+  centreBz uniformSameCentreField ≡ centreBz gradientSameCentreField
+rodinCentreFieldsIdentical = refl
+
+rodinSyntheticGradientCurlFreeCoefficients :
+  BxSlopeInZ gradientSameCentreField ≡
+  BzSlopeInX gradientSameCentreField
+rodinSyntheticGradientCurlFreeCoefficients = refl
+
+rodinSyntheticUniformCurlFreeCoefficients :
+  BxSlopeInZ uniformSameCentreField ≡
+  BzSlopeInX uniformSameCentreField
+rodinSyntheticUniformCurlFreeCoefficients = refl
+
+rodinCenterOnlyDoesNotDetermineSpatialSlope :
+  BzSlopeInX uniformSameCentreField ≡
+  BzSlopeInX gradientSameCentreField → ⊥
+rodinCenterOnlyDoesNotDetermineSpatialSlope ()
 
 ramirezRef24ComparisonNotProvenByCitation :
   Atlas.historicalTransmissionProved Atlas.ramirezRef24NotValidatedCoilComparison ≡ false

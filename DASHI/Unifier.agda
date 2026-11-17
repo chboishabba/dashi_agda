@@ -1,38 +1,4 @@
 module DASHI.Unifier where
-
--- BOM 2026 additive governance export: reuse original proof owner.
-import DASHI.Governance.BOMVersionedSameObjectCorrectionExact as BOMVersioned
-import DASHI.Core.IntersectionalNonFactorability as BOMNonFactor
-
-import DASHI.Unified.AdelicSpectralPaperTOEExact as AdelicSpectralTOE
-
--- September 2026 source-typed finite spectral closure and fail-closed gates.
--- Reuse the existing NonArchimedean owner; do not rebuild source Lean proofs.
-open AdelicSpectralTOE public using
-  ( toeFiniteSpatialCircleClosed
-  ; toeFiniteTwistedPowerClosed
-  ; toeLiteralSpectrumTowerClosed
-  ; toePrefactoredFiniteMixingClosed
-  ; toeConstructiveFiniteStoppingTailClosed
-  ; toeDirectedSizeSigmaHalfRejected
-  ; toeArbitraryDAGCoverNeedsConstruction
-  ; toeDepthSparsityNeedsQuantitativeBound
-  ; toeBoundaryEntropyNeedsSameObjectWeld
-  ; toeRoPEOptimalityNeedsModelConsumer
-  ; toeMultiPrimeSparsityNonPromotion
-  ; toeHolographySameObjectNonPromotion
-  ; toeNoAutomaticSpectralToRoPETransfer
-  ; toeOriginalAdvertisedChainHasNoLiveProducer
-  )
-
--- TOE governance lane. Reuse original proof owners; no ESD modifications.
-import DASHI.Governance.BOMFordhamMediaClaimAuditExact as BOM
-import DASHI.Governance.BOMFordhamMediaClaimAuditValidation as BOMCheck
-import DASHI.Governance.EmpiricalGenealogyRound3Regression as Origins
-import DASHI.Governance.ClimateGenealogyTypedCasesExact as Climate
-import DASHI.Core.IntersectionalNonFactorability as INF
-import DASHI.Core.InstitutionalProximityInfluenceAdequacyExact as Proximity
-
 open import Agda.Primitive using (Level; lzero; lsuc)
 open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -618,11 +584,3 @@ record DASHIUnificationAxiom : Set₁ where
 DASHI-Unification-Theorem : Set₁
 DASHI-Unification-Theorem = DASHIUnificationAxiom
 
-------------------------------------------------------------------------
--- Source-audit evidence boundary: exact imported proof owners.
--- These imports make source-truth and causal-identifiability limits visible
--- at the unifier root. No ESD implementation or interface is changed.
-------------------------------------------------------------------------
-import DASHI.Wikimedia.IbrahimSnowballInvestigativeClaimSourceLineageBidiExact as SourceGenealogy
-import DASHI.Cognition.HardtIbrahimSourceRootMaxCutExact as HardtSourceCase
-import DASHI.Cognition.HardtBrainInterventionNonidentifiabilityExact as HardtCausalCase
