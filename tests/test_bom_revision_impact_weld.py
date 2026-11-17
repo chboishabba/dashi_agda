@@ -151,6 +151,108 @@ class WeldTest(unittest.TestCase):
         self.assertEqual(interval['unknown_before_days'],28)
         self.assertEqual(interval['unknown_after_days'],28)
 
+
+    @staticmethod
+    def interval_month(year, month, lower, upper):
+        from calendar import monthrange
+        return {
+            'station': '066062', 'variable': 'tmax',
+            'month': f'{year}-{month:02d}',
+            'expected_calendar_days': monthrange(year, month)[1],
+            'conditional_fixed_calendar_delta_interval': {
+                'lower_fixed_calendar_delta_C': str(lower),
+                'upper_fixed_calendar_delta_C': str(upper),
+            },
+        }
+
+    @classmethod
+    def interval_year(cls, year, lower, upper):
+        return [cls.interval_month(year, m, lower, upper) for m in range(1, 13)]
+
+    def test_annual_interval_dayweighted(self):
+        from fractions import Fraction
+        rows = self.interval_year(1910, 0, 0)
+        rows[1] = self.interval_month(1910, 2, Fraction(-5, 7), Fraction(5, 7))
+        annual, trends = weld.conditional_annual_trend_bounds(rows)
+        self.assertEqual((annual[0]['lower_exact_C'], annual[0]['upper_exact_C']),
+                         ('-4/73', '4/73'))
+        self.assertEqual(trends, [])
+
+    def test_two_year_trend_interval_signed_leverage(self):
+        from fractions import Fraction
+        rows = self.interval_year(1910, 0, 0) + self.interval_year(1911, 0, 0)
+        rows[1] = self.interval_month(1910, 2, Fraction(-5, 7), Fraction(5, 7))
+        _, trends = weld.conditional_annual_trend_bounds(rows)
+        self.assertEqual((trends[0]['lower_exact_C_per_decade'],
+                          trends[0]['upper_exact_C_per_decade']),
+                         ('-40/73', '40/73'))
+        self.assertFalse(trends[0]['national_trend_authorised'])
+
+    def test_interval_point_reduces_to_existing_panel_slope(self):
+        _, trends = weld.conditional_annual_trend_bounds(
+            self.interval_year(1910, 1, 1) + self.interval_year(1911, 3, 3))
+        self.assertEqual((trends[0]['lower_exact_C_per_decade'],
+                          trends[0]['upper_exact_C_per_decade']), ('20', '20'))
+
+    def test_interval_leap_year(self):
+        annual, _ = weld.conditional_annual_trend_bounds(self.interval_year(1912, 1, 1))
+        self.assertEqual(annual[0]['days'], 366)
+        self.assertEqual(annual[0]['lower_exact_C'], '1')
+
+    def test_interval_missing_month_blocks_annual_and_trend(self):
+        annual, trends = weld.conditional_annual_trend_bounds(
+            self.interval_year(1910, 0, 0)[:-1] + self.interval_year(1911, 0, 0))
+        self.assertEqual(len(annual), 1)
+        self.assertEqual(trends, [])
+
+    def test_interval_no_input(self):
+        self.assertEqual(weld.conditional_annual_trend_bounds([]), ([], []))
+
+    def test_interval_invalid_reversed_bounds(self):
+        with self.assertRaises(ValueError):
+            weld.conditional_annual_trend_bounds(self.interval_year(1910, 4, 2))
+
+    def test_interval_duplicate_month_refused(self):
+        rows = self.interval_year(1910, 0, 0)
+        rows.append(dict(rows[0]))
+        with self.assertRaises(ValueError):
+            weld.conditional_annual_trend_bounds(rows)
+
+    def test_interval_calendar_mismatch_refused(self):
+        rows = self.interval_year(1910, 0, 0)
+        rows[0]['expected_calendar_days'] = 30
+        with self.assertRaises(ValueError):
+            weld.conditional_annual_trend_bounds(rows)
+
+    def test_interval_full_native_csv_to_station_trend(self):
+        from fractions import Fraction
+        baseline = HEADER + ''.join(
+            month_rows(y, m).split('\n', 1)[1]
+            for y in (1910, 1911) for m in range(1, 13))
+        revised = replace_day(baseline, 1910, 2, 1, '')
+        with TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            manifest = {'schema': 'dashi.bom.cdo.native_revision.v1'}
+            for side, body in (('before', baseline), ('after', revised)):
+                data = body.encode()
+                filename = side + '.csv'
+                (root / filename).write_bytes(data)
+                manifest[side] = [{
+                    'path': filename, 'sha256': sha256(data).hexdigest(),
+                    'capture_utc': ('2026-05-01T09:00:00+10:00' if side == 'before'
+                                    else '2026-10-30T09:00:00+10:00'),
+                }]
+            result = weld.summarize(manifest, root, '0', '40')
+        annual = result['conditional_complete_calendar_station_year_intervals']
+        trends = result['conditional_selected_year_station_trend_intervals']
+        self.assertEqual(len(annual), 2)
+        self.assertEqual(len(trends), 1)
+        self.assertEqual((trends[0]['lower_exact_C_per_decade'],
+                          trends[0]['upper_exact_C_per_decade']),
+                         ('-300/365', '100/365'))
+        self.assertEqual(result['counts']['complete_station_years'], 1)
+        self.assertFalse(result['acorn_homogenisation_recomputed'])
+
     def test_complete_month_changed_one_day_mean(self):
         a=month_rows(1910,2)
         b=replace_day(a,1910,2,1,'17.0')
