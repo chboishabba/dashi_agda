@@ -67,10 +67,32 @@ t('111 shear offdiagonal nonzero for axial != transverse',
   s.simplify(N111[0,1]).subs({axial:1,trans:0,Delta:1}) != 0)
 t('substitution strain zero reduces N blocks',iszero(N111.subs({axial:0,trans:0})))
 
+# 1992 erratum independent algebraic changes (not yet integrated into a
+# SAME-BASIS 8x8 Hamiltonian). Exact source also corrects Eq.16 R,
+# Eq.30 a and powers of hbar in Eq.42 P,Q,R,S.
+gamma2,gamma3,kx,ky,hbar,mass=s.symbols(
+    'gamma2 gamma3 kx ky hbar m0',real=True,nonzero=True)
+Rfix=-s.sqrt(3)/2*(hbar**2/mass)*(
+    gamma2*(kx**2-ky**2)-2*s.I*gamma3*kx*ky)
+Rwrong=-Rfix
+l,m=s.symbols('ell m',real=True)
+afix=-(l+2*m)/3
+awrong=(l+2*m)/3
+t('Eq16 R fixed kx-axis',s.simplify(Rfix.subs(ky,0)+s.sqrt(3)/2*(hbar**2/mass)*gamma2*kx**2)==0)
+t('Eq16 R fixed ky-axis',s.simplify(Rfix.subs(kx,0)-s.sqrt(3)/2*(hbar**2/mass)*gamma2*ky**2)==0)
+t('Eq16 R cross term at kx=ky',s.simplify(Rfix.subs(ky,kx)-s.I*s.sqrt(3)*(hbar**2/mass)*gamma3*kx**2)==0)
+t('Eq16 R conjugate offdiagonal Hermiticity',iszero(s.Matrix([[0,Rfix],[s.conjugate(Rfix),0]])-s.Matrix([[0,Rfix],[s.conjugate(Rfix),0]]).H))
+t('Eq16 R source-correct minus fixed in convention',s.simplify(Rfix-Rwrong)!=0)
+t('Eq30 a corrected minus sign',s.simplify(afix+(l+2*m)/3)==0)
+t('Eq30 a mismatched alternative except special parameters',s.simplify(afix-awrong)!=0)
+t('Eq42 hbar squared dimensional homogeneity',s.simplify(Rfix/hbar**2).has(hbar)==False)
+t('Eq42 missing hbar factor not equivalent',s.simplify(Rfix.subs(hbar,1)-Rfix)!=0)
+
 print(json.dumps({'checks':len(tests),'all_passed':True,
  'source':'Bahder PRB 46 9913 (1992) one-page erratum, corrected spin-orbit strain blocks only',
  'Gamma_basis':'Gamma8 (4) + Gamma7 (2), as published in erratum',
  'corrected_spin_orbit_blocks':'N1 (4x4), N2 (4x2), N3 (2x2)',
- 'other_erratum_items_not_implemented':['eq30 valence a sign','eq16 R','eq42 hbar squared'],
+ 'other_erratum_items_symbolically_checked':['eq30 valence a sign','eq16 R','eq42 hbar squared'],
+ 'same_basis_8band_assembly_and_original_source_fit':'OPEN',
  'full_Bahder_8band':'OPEN',
  'tests':tests},indent=2))
