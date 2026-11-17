@@ -87,3 +87,23 @@ The actual original moving brane at t=4/3 has orthonormal unit normal `(n^T,n^z)
   -129/512 H_TT + 3/32 H_xx - 177/512 H_zz + 135/256 H_Tz .
 ```
 This has been verified exactly as a SymPy linearized Weyl / frame-projection identity and as an Agda rational contraction **source** in `KSW668F8LinearElectricWeylPolarizationSliceExact.agda` (kernel pending). It is a **single TT Cartesian polarization at the rational slice**, not yet the original three-harmonic fully moving tensor and not automatically the solver's SMS `E5`. The missing, sharply identifiable G1 weld is: original bulk linearized wave + original moving Neumann/Israel source + gauge and brane tangential/normal derivatives -> equality of this curvature projection to the original on-brane SMS readout `-(H_etaeta+2H_eta-Delta3 H)/(2t²)` in the source-free receiver region. **This equality is OPEN and cannot be inferred from background Weyl=0.**
+
+
+### XXIX G1 exact source-free Weyl reduction — stronger result
+
+The previous G1 diagnostic with normal derivatives has now been **reduced exactly** under (i) the original bulk TT equation `-H_TT+H_xx+H_zz-(3/z) H_z=0`; (ii) the original source-free moving-Neumann wall `n^A partial_A H=0`, differentiated in brane proper time; and (iii) the same Cartesian TT polarization/gauge. Write `E=dH/dt`, `A=H_TT`, `B=H_xx`. The Neumann constraint gives `H_z=E, H_T=sqrt(1+t²) E`; bulk PDE gives `H_zz=A-B+3tE`. The differentiated boundary condition fixes `H_Tz`, and the brane proper acceleration is
+```
+H_ddot = (t² A + B - (t³+3t) E)/(t²(t²+2)).
+```
+The **actual linearized 5D electric Weyl normal projection** and the solver's **SMS** projected readout both reduce, for every real t>0, to
+```
+Eelectric = E_SMS =
+ -(t² A + (2t³+3t) E - (t²+1) B)/(2t²(t²+2)).
+```
+Independently checked by SymPy on the unperturbed AdS5 geometry with the TT first variation and the original source-free Israel/Neumann boundary. At original t=4/3 the exact rational identity is
+```
+Eelectric = E_SMS = -9 A/68 + 225 B/1088 - 177 E/272.
+```
+This particular same-object G1 *mathematical identification for the local source-free Cartesian polarization* is now closed symbolically. An Agda rational-slice source owner `KSW668F8SourceFreeElectricWeylSMSSliceWeldExact.agda` proves the finite wave, differentiated wall and electric/SMS arithmetic, with pinned Agda kernel **not yet run**. The full three angular multipoles, 5D perturbed Einstein–Israel gauge and independent curvature variation proof in Agda remain OPEN; do not promote the restricted equality to full G1.
+
+The prior text calling the source-free normal/SMS identification wholly OPEN applies to the full original solver and general Agda proof, not to this newly verified restricted source-free polarisation computation.
