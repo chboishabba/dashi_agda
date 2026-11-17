@@ -26,6 +26,8 @@ import DASHI.Physics.Gravity.KSW668F8RadialFVGreenAndQuarticConsistencyExact as 
 import DASHI.Physics.Gravity.KSW668F8RadialConjugationNoncommutationExact as ConjugationNoGo
 import DASHI.Physics.Gravity.KSW668F8ThreeAngularGramRadialMeasureExact as AngularGram
 import DASHI.Physics.Gravity.KSW668F8FullTensorAngularNormExact as FullTensorNorm
+import DASHI.Physics.Gravity.KSW668F8FullTensorSolidHarmonicAtlasExact as FullAngularAtlas
+import DASHI.Physics.Gravity.KSW668F8RationalAxialTTCubatureExact as AxialCubature
 import DASHI.Physics.Gravity.KSW668F8WeakIsraelSATSliceExact as Wall
 import DASHI.Physics.Gravity.KSW668F8WeakIsraelSATGeneralPolynomialTransportExact as GeneralSAT
 import DASHI.Physics.Gravity.KSW668F8SSPRK3FullStabilityPrerequisiteExact as RK
