@@ -35,6 +35,7 @@ python_tests=(
   scripts/test_smith_filsinger_local_causal_ade_sympy.py
   scripts/test_smith_filsinger_cayley_coefficients_sympy.py
   scripts/test_smith_filsinger_cayley_midpoint_sympy.py
+  scripts/test_smith_filsinger_indexed_cayley_face_sympy.py
   scripts/test_smith_filsinger_plane_wave_spacetime_exact.py
 )
 test -s "$target"
