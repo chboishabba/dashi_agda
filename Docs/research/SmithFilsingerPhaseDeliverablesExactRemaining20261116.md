@@ -179,3 +179,23 @@ Read [the new F10/F13 dedicated report](https://github.com/chboishabba/dashi_agd
 * Prior citation correction: A. Tip (1998) is **Phys Rev A 57, 4818**, `10.1103/PhysRevA.57.4818` (“Linear absorptive dielectrics”); Wu & Lalanne (2024) title is *Exact Maxwell evolution equation of resonator dynamics: temporal coupled-mode theory revisited*.
 * Local independent selected-model verifier **14/14 pytest PASS**; committed checker added to `scripts/check_smith_filsinger_dynamic_replenishment.sh`. No exact-head Agda compiler run, no calibrated Filsinger measurements. F15/R3 and rain-cooling F16 OPEN.
 * Crucially, the environmental-power steelman is a **dynamic Sun/Earth source**, possibly ample enough to pay MW pump expenditure if physically transferred. The passive half-space Thevenin matched-load example is a **null** not a bound on solar-wind Poynting flow or nonlinear, source-responsive, spatially distributed power.
+
+
+## 2026-11-17 source-first Maxwell value-of-information cut (F10/F13-F16)
+
+**Full detailed source/verification record:** [SmithFilsingerMaxwellValueAndSourceFirstCut20261117.md](SmithFilsingerMaxwellValueAndSourceFirstCut20261117.md). New exact-head code, tests, original missing-evidence schema and conditional acceptance runner are on PR #1524.
+
+**Highest alpha decision:** calibrated source-to-terminal work precedes a large 3D Earth/ionosphere Maxwell model. Spatial Maxwell/plasma is worth implementing after one selected apparatus has authentic geometry/materials, loaded natural-source response and a physical anomaly which a reduced DC/1D/port law cannot explain. It cannot produce a measured natural generator by choosing a boundary amplitude. Acoustic 7.8kHz is not an electrical phase measurement.
+
+| Target | New restricted result | Strict remaining original-world wall |
+|---|---|---|
+| F10 / R2 | Exact symbolic local vector Poynting + nonlinear time-varying polarization + Hall/Pedersen/neutral-wind + generator signed work; 8/8 tests | Full calibrated causal Maxwell/plasma/soil/material source operator |
+| F13 / P2 | Crowley 2011 Eq.25,28–37 isolated spherical fair-weather collector physics; 2m/0.1m conditional example ~0.1483 nW, 2.97 pA and 6.74e13 Ω; unit/model negative controls | Actual Filsinger electrodes/plate source identity and voltage/current geometry; no global 250kV assigned locally |
+| F14 / R1 | Original-load-only energy balance rank 1/nullity 3; drive, natural supply and donor depletion counterworlds indistinguishable at load | Original actual pin graph, simultaneous driving/source/shunt/load/switch, acoustic waveforms and one parameter set |
+| F15 / R3 | Conservative signed v*i interval receiver; requires independent source identity and full stored-state return; passing external flags is not an empirical receipt | Positive independently replenished natural work at selected original port over whole cycles |
+| F16 / Q6 | Two causal models give identical natural electric-field/rain observations but differing controlled effect; 2021 paper establishes observational relation only | Actual controller→cloud electric-field transfer, causal rain/drizzle response and local cooling with controls |
+| D1/D2 | 4/4 Git blobs parity; 33/33 new tests, 99/99 combined local source-equivalent tests | Pinned Agda kernel, original-world evidence admission and same-head CI |
+
+**Source correction:** Crowley calls pi*d² a sphere's geometric cross section while defining d as diameter; physical projected disk is pi*d²/4 (fourfold convention discrepancy). Eq.28 Isc, Eq.35 R and Eq.37 Pmax do not change. Neither Crowley sphere nor earlier 1D slab are measurements of Filsinger's actual grounded/portable collector. Source: https://electrostatic.com/research/c11theatmos/c11atmo.html, 2026 Borok https://doi.org/10.1016/j.asr.2026.01.090, 2021 cloud raindrops https://doi.org/10.1029/2021GL093577, Tinsley https://doi.org/10.1029/2021JD035954.
+
+**Execution:** scripts/check_smith_filsinger_source_first_maxcut.sh; 99 local targeted model tests **PASS**, all four new code/test blobs byte-identical to branch, no exact-branch CI nor Agda proof checker. No original same-unit physical gate is closed. All S0/P1/P2/R1/R2/R3/D1/D2 remain **OPEN (0/8)**. Retain W/B/N source regime distinctions and source-qualification; no ESD edits and no premature TOE promotion. F16 does not authorize weather intervention or indicate local/global cooling gain.
