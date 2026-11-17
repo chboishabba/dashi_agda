@@ -1886,271 +1886,57 @@ toeBrainJPromotionBlocked :
   BrainSpine.objectExternalJPromotion BrainFMRI.brainFMRIObject ≡ false
 toeBrainJPromotionBlocked = BrainFMRI.brainFMRIJPromotionBlocked
 
-------------------------------------------------------------------------
--- Live Gate-4 frontier and Fleet target selection.
-------------------------------------------------------------------------
-
-toeCurrentGate4FrontierLedgerLevel : ProofLevel
-toeCurrentGate4FrontierLedgerLevel =
-  FleetHyperTOE.currentGate4FrontierLedgerLevel
-
-toeCurrentGate4ClusteringToTransferGapLevel : ProofLevel
-toeCurrentGate4ClusteringToTransferGapLevel =
-  FleetHyperTOE.currentGate4ClusteringToTransferGapLevel
-
-toeFleetFormalGapTargetSelected : Bool
-toeFleetFormalGapTargetSelected =
-  FleetHyperTOE.fleetFormalGapTargetSelected
-
-toeHistoricalGate4CountSelectedAsFleetTarget : Bool
-toeHistoricalGate4CountSelectedAsFleetTarget =
-  FleetHyperTOE.historicalGate4CountSelectedAsFleetTarget
-
-toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
-  FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
-toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
-  FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
 
 ------------------------------------------------------------------------
--- Canonical ternary-27 codec / ABI max-cut.
--- The codec BIDI is exact. Host/device and kernel promotion remain blocked.
+-- Fleet max-cut: planning counts, named-manifest wall, and attribution.
 ------------------------------------------------------------------------
 
-toe369Ternary27StateCode :
-  MaxCut369.TernaryEncodedState → MaxCut369.TernaryState27
-toe369Ternary27StateCode = MaxCut369.toe27StateCode
+toeFleetMacroscopicEigenMotifsAre3 :
+  FleetGapTOE.macroscopicEigenMotifCount FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 3
+toeFleetMacroscopicEigenMotifsAre3 = FleetGapTOE.fleetRecordedMacroscopicMotifCountIs3
 
-toe369Ternary27StateDecode :
-  MaxCut369.TernaryState27 → MaxCut369.TernaryEncodedState
-toe369Ternary27StateDecode = MaxCut369.toe27StateDecode
+toeFleetTargetsOnlyUnformalisedFormalGaps :
+  FleetGapTOE.targetOnlyUnformalisedFormalGaps FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
+toeFleetTargetsOnlyUnformalisedFormalGaps = FleetGapTOE.fleetTargetsOnlyUnformalisedFormalGaps
 
-toe369Ternary27StateDecodeStateCode :
-  (e : MaxCut369.TernaryEncodedState) →
-  toe369Ternary27StateDecode (toe369Ternary27StateCode e) ≡ e
-toe369Ternary27StateDecodeStateCode =
-  MaxCut369.toe27StateDecodeStateCode
+toeFleetSpectralLabelsDoNotIdentifyTheoremOwners :
+  FleetGapTOE.spectralLabelsIdentifyTheoremOwners FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+toeFleetSpectralLabelsDoNotIdentifyTheoremOwners = FleetGapTOE.fleetSpectralLabelDoesNotIdentifyTheoremOwner
 
-toe369Ternary27StateCodeStateDecode :
-  (i : MaxCut369.TernaryState27) →
-  toe369Ternary27StateCode (toe369Ternary27StateDecode i) ≡ i
-toe369Ternary27StateCodeStateDecode =
-  MaxCut369.toe27StateCodeStateDecode
+toeFleetMetaIntrospectorAttributionPreserved :
+  FleetGapTOE.metaIntrospectorAttributionPreserved FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
+toeFleetMetaIntrospectorAttributionPreserved = refl
 
-toe369Ternary27FiniteStateABIExact =
-  MaxCut369.toe27FiniteStateABIExact
+toeFleetMetaIntrospectorProofNotBorrowed :
+  FleetGapTOE.metaIntrospectorProofBorrowed FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+toeFleetMetaIntrospectorProofNotBorrowed = refl
 
-toe369Ternary27ByteCarrierABIExact =
-  MaxCut369.toe27ByteCarrierABIExact
+toeFleetESDSurfaceUnedited :
+  FleetGapTOE.esdSurfaceEdited FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+toeFleetESDSurfaceUnedited = refl
 
-toe369Ternary27CompiledHostU8Exact =
-  MaxCut369.toe27CompiledHostU8Exact
+toeFleet58ManifestAbsent : FleetManifestTOE.named58ManifestAcquired ≡ false
+toeFleet58ManifestAbsent = FleetManifestTOE.named58ManifestAcquiredIsFalse
 
-toe369Ternary27RustBindingStillUnpaid =
-  MaxCut369.toe27RustBindingStillUnpaid
+toeFleet58CountDoesNotNameRows : FleetManifestTOE.countIdentifiesNamedRows ≡ false
+toeFleet58CountDoesNotNameRows = FleetManifestTOE.countIdentifiesNamedRowsIsFalse
 
-toe369Ternary27CUDABindingStillUnpaid =
-  MaxCut369.toe27CUDABindingStillUnpaid
+toeFleet58PerGapDispatchDisabled : FleetManifestTOE.perGapDispatchEnabled ≡ false
+toeFleet58PerGapDispatchDisabled = FleetManifestTOE.perGapDispatchEnabledIsFalse
 
-toe369Ternary27ROCmBindingStillUnpaid =
-  MaxCut369.toe27ROCmBindingStillUnpaid
+toeFleet58RelatedSymbolsRequired : FleetManifestTOE.relatedSymbolsRequired ≡ true
+toeFleet58RelatedSymbolsRequired = FleetManifestTOE.relatedSymbolsRequiredIsTrue
 
-toe369Ternary27HostByteDoesNotCreateDeviceByte =
-  MaxCut369.toe27HostByteDoesNotCreateDeviceByte
+toeFleet58DiscoverRequired : FleetManifestTOE.discoverRequired ≡ true
+toeFleet58DiscoverRequired = FleetManifestTOE.discoverRequiredIsTrue
 
-toe369Ternary27RuntimeSourceDoesNotCreateKernelCertification =
-  MaxCut369.toe27RuntimeSourceDoesNotCreateKernelCertification
+toeFleet58RoundLineageRequired : FleetManifestTOE.roundLineageRequired ≡ true
+toeFleet58RoundLineageRequired = FleetManifestTOE.roundLineageRequiredIsTrue
 
-toe369Ternary27CompilerSuccessDoesNotCreateAgdaKernelSuccess =
-  MaxCut369.toe27CompilerSuccessDoesNotCreateAgdaKernelSuccess
+toeFleet58AcquisitionDoesNotCloseConsumer :
+  FleetManifestTOE.BoundDemandAutomaticallyClosesConsumer → ⊥
+toeFleet58AcquisitionDoesNotCloseConsumer = FleetManifestTOE.acquisitionDoesNotCloseConsumer
 
-------------------------------------------------------------------------
--- Fleet-58 ordinal max-cut.
--- Cardinality is exact. Persisted row identity does not follow from cardinality.
-------------------------------------------------------------------------
-
-toeFleetR5OrdinalCutReceipt :
-  FleetGapTOE.FleetR5OrdinalCutReceipt
-toeFleetR5OrdinalCutReceipt =
-  FleetGapTOE.canonicalFleetR5OrdinalCutReceipt
-
-toeFleetFormalGapOrdinalCountIs58 :
-  FleetGapTOE.fleetFormalGapOrdinalCount ≡ 58
-toeFleetFormalGapOrdinalCountIs58 =
-  FleetGapTOE.fleetFormalGapOrdinalCountIs58
-
-toeFleetDischargedOrdinalCountIs584 :
-  FleetGapTOE.fleetDischargedOrdinalCount ≡ 584
-toeFleetDischargedOrdinalCountIs584 =
-  FleetGapTOE.fleetDischargedOrdinalCountIs584
-
-toeFleetContradictionOrdinalCountIs44 :
-  FleetGapTOE.fleetContradictionOrdinalCount ≡ 44
-toeFleetContradictionOrdinalCountIs44 =
-  FleetGapTOE.fleetContradictionOrdinalCountIs44
-
-toeFleetOrdinalRowIdentityStillUnattached :
-  FleetGapTOE.fleetOrdinalCarriesPersistedRowIdentity ≡ false
-toeFleetOrdinalRowIdentityStillUnattached =
-  FleetGapTOE.fleetOrdinalCarriesPersistedRowIdentityIsFalse
-
-toeFleetSharedCardinalityDoesNotCreateIdentity :
-  FleetGapTOE.FleetSharedCardinalityCreatesIdentity → ⊥
-toeFleetSharedCardinalityDoesNotCreateIdentity =
-  FleetGapTOE.fleetSharedCardinalityDoesNotCreateIdentity
-
-
-------------------------------------------------------------------------
--- Current Lean three-route RH max-cut status.
--- Lean owns the real analysis. This root only exports the exact mirror.
-------------------------------------------------------------------------
-
-toeRiemannThreeTapCurrentLeanFrontier :
-  RiemannThreeTap.ThreeTapCurrentLeanFrontier
-toeRiemannThreeTapCurrentLeanFrontier =
-  RiemannThreeTap.currentThreeTapCurrentLeanFrontier
-
-toeRiemannA2DominantCoefficientPaid :
-  RiemannThreeTap.a2DominantCoefficientPaid
-    RiemannThreeTap.currentThreeTapCurrentLeanFrontier ≡ true
-toeRiemannA2DominantCoefficientPaid =
-  RiemannThreeTap.a2DominantCoefficientIsPaid
-
-toeRiemannA2MuGainPositiveSourceWritten :
-  RiemannThreeTap.a2CanonicalMuGainPositiveSourceWritten
-    RiemannThreeTap.currentThreeTapCurrentLeanFrontier ≡ true
-toeRiemannA2MuGainPositiveSourceWritten =
-  RiemannThreeTap.a2MuGainIsPositiveSourceWritten
-
-toeRiemannA1CarrierSummationStillOpen :
-  RiemannThreeTap.a1CarrierSummationPaid
-    RiemannThreeTap.currentThreeTapCurrentLeanFrontier ≡ false
-toeRiemannA1CarrierSummationStillOpen =
-  RiemannThreeTap.a1CarrierIsStillOpen
-
-toeRiemannA2StrictScalarStillOpen :
-  RiemannThreeTap.a2StrictScalarPaid
-    RiemannThreeTap.currentThreeTapCurrentLeanFrontier ≡ false
-toeRiemannA2StrictScalarStillOpen =
-  RiemannThreeTap.a2ScalarIsStillOpen
-
-toeRiemannRouteBEventualGapStillOpen :
-  RiemannThreeTap.routeBEventualGapPaid
-    RiemannThreeTap.currentThreeTapCurrentLeanFrontier ≡ false
-toeRiemannRouteBEventualGapStillOpen =
-  RiemannThreeTap.routeBIsStillOpen
-
-toeRiemannRHNotPromoted :
-  RiemannThreeTap.rhDerivedHere
-    RiemannThreeTap.currentThreeTapCurrentLeanFrontier ≡ false
-toeRiemannRHNotPromoted =
-  RiemannThreeTap.rhNotClaimedByAgdaStatusMirror
-
-------------------------------------------------------------------------
--- RH transformed-prime and current Route-A/Route-B max-cut convergence.
--- Analysis modules remain the theorem and provenance owners.
-------------------------------------------------------------------------
-
-toeRHCompletedTraceCrossPollinationBoundary :
-  RHPrimeAudit.CompletedTraceCrossPollinationBoundary
-toeRHCompletedTraceCrossPollinationBoundary =
-  RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary
-
-toeRHPrimeActivationRequiresFirstPrimeSupport :
-  RHPrimeAudit.nonzeroPrimeRequiresFirstPrimeSupportSourceWritten
-    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ true
-toeRHPrimeActivationRequiresFirstPrimeSupport =
-  RHPrimeAudit.firstPrimeSupportNecessary
-
-toeRHUnmarkedTerminalStillNotIdentifiedWithMarkedArithmetic :
-  RHPrimeAudit.selectedUnmarkedTerminalEqualsMarkedArithmetic
-    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
-toeRHUnmarkedTerminalStillNotIdentifiedWithMarkedArithmetic =
-  RHPrimeAudit.selectedUnmarkedTerminalStillNotIdentifiedWithMarkedArithmetic
-
-toeRHIndependentArithmeticDiagonalProducerStillAbsent :
-  RHPrimeAudit.independentArithmeticDiagonalProducer
-    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
-toeRHIndependentArithmeticDiagonalProducerStillAbsent =
-  RHPrimeAudit.independentArithmeticDiagonalProducerStillAbsent
-
-toeRHHeisenbergTraceTransportStillBlocked :
-  RHPrimeAudit.actualHeisenbergTraceEqualsSelectedZetaFunctional
-    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
-toeRHHeisenbergTraceTransportStillBlocked =
-  RHPrimeAudit.noUnjustifiedAnalyticTransport
-
-toeRHPrimeAuditDoesNotPromoteRH :
-  RHPrimeAudit.rhDerived
-    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
-toeRHPrimeAuditDoesNotPromoteRH =
-  RHPrimeAudit.noUnjustifiedRH
-
-toeRHThreeTapCurrentLeanFrontier :
-  RHThreeTapFrontier.ThreeTapCurrentLeanFrontier
-toeRHThreeTapCurrentLeanFrontier =
-  RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier
-
-toeRHThreeTapA1FiniteAndDecayPaid :
-  RHThreeTapFrontier.a1FiniteAndDecaySourceWritten
-    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ true
-toeRHThreeTapA1FiniteAndDecayPaid =
-  RHThreeTapFrontier.a1FiniteAndDecayPaid
-
-toeRHThreeTapA1InverseSquareWindowsPaid :
-  RHThreeTapFrontier.a1LiteralWindowMachinerySourceWritten
-    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ true
-toeRHThreeTapA1InverseSquareWindowsPaid =
-  RHThreeTapFrontier.a1LiteralWindowsPaid
-
-toeRHThreeTapA1DyadicSeriesPaid :
-  RHThreeTapFrontier.a1DyadicSeriesSourceWritten
-    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ true
-toeRHThreeTapA1DyadicSeriesPaid =
-  RHThreeTapFrontier.a1SeriesPaid
-
-toeRHThreeTapA1CarrierToTailCompilerPaid :
-  RHThreeTapFrontier.a1CarrierToTailCompilerSourceWritten
-    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ true
-toeRHThreeTapA1CarrierToTailCompilerPaid =
-  RHThreeTapFrontier.a1ConditionalTailCompilerPaid
-
-toeRHThreeTapA1CarrierSummationStillOpen :
-  RHThreeTapFrontier.a1CarrierSummationPaid
-    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ false
-toeRHThreeTapA1CarrierSummationStillOpen =
-  RHThreeTapFrontier.a1CarrierIsStillOpen
-
-toeRHThreeTapA1UniformCurvatureStillOpen :
-  RHThreeTapFrontier.a1UniformCurvaturePaid
-    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ false
-toeRHThreeTapA1UniformCurvatureStillOpen =
-  RHThreeTapFrontier.a1CurvatureStillOpen
-
-toeRHThreeTapA1CompensationStillOpen :
-  RHThreeTapFrontier.a1CompensationPaid
-    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ false
-toeRHThreeTapA1CompensationStillOpen =
-  RHThreeTapFrontier.a1CompensationStillOpen
-
-toeRHThreeTapA2StrictScalarStillOpen :
-  RHThreeTapFrontier.a2StrictScalarPaid
-    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ false
-toeRHThreeTapA2StrictScalarStillOpen =
-  RHThreeTapFrontier.a2ScalarIsStillOpen
-
-toeRHSignedFifthRouteStillOpen :
-  RHThreeTapFrontier.routeBEventualGapPaid
-    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ false
-toeRHSignedFifthRouteStillOpen =
-  RHThreeTapFrontier.routeBIsStillOpen
-
-toeRHThreeTapFrontierDoesNotPromoteRH :
-  RHThreeTapFrontier.rhDerivedHere
-    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ false
-toeRHThreeTapFrontierDoesNotPromoteRH =
-  RHThreeTapFrontier.rhNotClaimedByAgdaStatusMirror
-
-toeRHThreeTapTerminalBoundary :
-  RHTerminal.ThreeTapTerminalCompletionBoundary
-toeRHThreeTapTerminalBoundary =
-  RHTerminal.canonicalThreeTapTerminalCompletionBoundary
+toeFleet58ProducerDoesNotIdentifyResidual :
+  FleetManifestTOE.SameProducerIdentifiesResidual → ⊥
+toeFleet58ProducerDoesNotIdentifyResidual = FleetManifestTOE.producerDoesNotIdentifyResidual

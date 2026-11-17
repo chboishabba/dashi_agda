@@ -31,6 +31,8 @@ import DASHI.Unified.YMGoal1R559IbrahimTOEValidation
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Validation
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEValidation
 import DASHI.Unified.FleetFormalGapTargetTOEValidation
+import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
+import DASHI.Unified.Fleet58ManifestAcquisitionRegression
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryValidation
 import DASHI.Unified.SingularBasinCoarseRGTOEValidation
 import DASHI.Unified.YMGoal1R559IbrahimTOEValidation
@@ -500,202 +502,108 @@ unified369Ternary27CUDABindingStillUnpaid =
 unified369Ternary27ROCmBindingStillUnpaid =
   MaxCut369.toe27ROCmBindingStillUnpaid
 
-unified369Ternary27HostByteDoesNotCreateDeviceByte =
-  MaxCut369.toe27HostByteDoesNotCreateDeviceByte
-
-unified369Ternary27RuntimeSourceDoesNotCreateKernelCertification =
-  MaxCut369.toe27RuntimeSourceDoesNotCreateKernelCertification
-
-unified369Ternary27CompilerSuccessDoesNotCreateAgdaKernelSuccess =
-  MaxCut369.toe27CompilerSuccessDoesNotCreateAgdaKernelSuccess
-
-------------------------------------------------------------------------
--- Fleet-58 ordinal max-cut.
-------------------------------------------------------------------------
-
-unifiedFleetR5OrdinalCutReceipt :
-  FleetGapTOE.FleetR5OrdinalCutReceipt
-unifiedFleetR5OrdinalCutReceipt =
-  FleetGapTOE.canonicalFleetR5OrdinalCutReceipt
-
-unifiedFleetFormalGapOrdinalCountIs58 :
-  FleetGapTOE.fleetFormalGapOrdinalCount ≡ 58
-unifiedFleetFormalGapOrdinalCountIs58 =
-  FleetGapTOE.fleetFormalGapOrdinalCountIs58
-
-unifiedFleetDischargedOrdinalCountIs584 :
-  FleetGapTOE.fleetDischargedOrdinalCount ≡ 584
-unifiedFleetDischargedOrdinalCountIs584 =
-  FleetGapTOE.fleetDischargedOrdinalCountIs584
-
-unifiedFleetContradictionOrdinalCountIs44 :
-  FleetGapTOE.fleetContradictionOrdinalCount ≡ 44
-unifiedFleetContradictionOrdinalCountIs44 =
-  FleetGapTOE.fleetContradictionOrdinalCountIs44
-
-unifiedFleetOrdinalRowIdentityStillUnattached :
-  FleetGapTOE.fleetOrdinalCarriesPersistedRowIdentity ≡ false
-unifiedFleetOrdinalRowIdentityStillUnattached =
-  FleetGapTOE.fleetOrdinalCarriesPersistedRowIdentityIsFalse
-
-unifiedFleetSharedCardinalityDoesNotCreateIdentity :
-  FleetGapTOE.FleetSharedCardinalityCreatesIdentity → ⊥
-unifiedFleetSharedCardinalityDoesNotCreateIdentity =
-  FleetGapTOE.fleetSharedCardinalityDoesNotCreateIdentity
+unified369Ternary27MonsterEmbeddingNotPromoted =
+  MaxCut369.toe27MonsterEmbeddingNotPromoted
 
 
 ------------------------------------------------------------------------
--- Current Lean three-route RH max-cut status in Unified.
--- Lean owns the real analysis. This root only exports the exact mirror.
+-- Canonical Balaban physics and Fleet manifest reachability.
 ------------------------------------------------------------------------
 
-unifiedRiemannThreeTapCurrentLeanFrontier :
-  RiemannThreeTap.ThreeTapCurrentLeanFrontier
-unifiedRiemannThreeTapCurrentLeanFrontier =
-  RiemannThreeTap.currentThreeTapCurrentLeanFrontier
+open Physics public using
+  ( yangMillsBalabanRGReceipt
+  ; yangMillsBalabanScaleDensityFlowLevel
+  ; yangMillsBalabanCompleteDensitySourceShapeLevel
+  ; yangMillsBalabanCompleteDensityDerivedSummaryLevel
+  ; yangMillsBalabanCompleteDensityPhysicalProjectionBoundsLevel
+  ; yangMillsBalabanScaleDensityFiniteMeasureWeldLevel
+  ; yangMillsBalabanLiteralGeneratedActionDensityLevel
+  ; yangMillsBalabanLiteralCombinedRGEffectiveActionLevel
+  ; yangMillsBalabanLiteralGeneratedActionStressScaleLevel
+  ; yangMillsBalabanScaleDensityStressLaneCompilerLevel
+  ; yangMillsBalabanDensityAnchoredStressLaneCompilerLevel
+  ; yangMillsBalabanLiteralDensityAnchoredStressLaneInstantiationLevel
+  ; yangMillsBalabanRegularESelectedDensityCompilerLevel
+  ; yangMillsBalabanRegularELocalizationSourceLevel
+  ; yangMillsBalabanRegularELocalizationCarrierLevel
+  ; yangMillsBalabanRegularEContinuationCompilerLevel
+  ; yangMillsBalabanHaarCasimirCoefficientLevel
+  ; yangMillsBalabanCasimirOrbitFactorizationLevel
+  ; yangMillsBalabanCasimirLowerBoundTransportLevel
+  ; yangMillsBalabanLiteralCasimirFactorizationLevel
+  ; yangMillsBalabanClassifiedCasimirPositivityLevel
+  ; yangMillsBalabanStressMarkedShellReuseLevel
+  ; yangMillsBalabanStressPairingPhysicalWeldLevel
+  ; yangMillsBalabanGeneratedActionDensityCompilerLevel
+  ; yangMillsBalabanCombinedRGEffectiveActionCompilerLevel
+  ; yangMillsBalabanGeneratedActionStressScaleCompilerLevel
+  ; yangMillsBalabanPublishedFlowRegularEProjectionCompilerLevel
+  ; yangMillsBalabanRegularESection2PredicateCompilerLevel
+  ; yangMillsBalabanConcreteRegularELocalizationWitnessLevel
+  ; yangMillsBalabanStressCauchyModulusCompilerLevel
+  ; yangMillsBalabanStressCauchyPhysicalInsertionLevel
+  ; yangMillsBalabanStressHilbertBoundCompilerLevel
+  ; yangMillsBalabanStressHilbertPhysicalShellLevel
+  ; yangMillsBalabanPublishedNonlinearRGCoreLevel
+  ; yangMillsBalabanPublishedRGPhysicalSameObjectLevel
+  ; yangMillsBalabanContinuumLimitReceipt
+  ; yangMillsBalabanContinuumLimitPromotionImpossible
+  ; yangMillsDepthContinuumLimitReceipt
+  ; yangMillsDepthContinuumLimitPromotionImpossible
+  ; yangMillsBalabanScaleTransferNonPromotion
+  )
 
-unifiedRiemannA2DominantCoefficientPaid :
-  RiemannThreeTap.a2DominantCoefficientPaid
-    RiemannThreeTap.currentThreeTapCurrentLeanFrontier ≡ true
-unifiedRiemannA2DominantCoefficientPaid =
-  RiemannThreeTap.a2DominantCoefficientIsPaid
+unifiedFleetRecordedDischargedFibresAre584 :
+  FleetGapTOE.dischargedCoreKnowledgeFibres FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 584
+unifiedFleetRecordedDischargedFibresAre584 = FleetGapTOE.fleetRecordedDischargedCountIs584
 
-unifiedRiemannA2MuGainPositiveSourceWritten :
-  RiemannThreeTap.a2CanonicalMuGainPositiveSourceWritten
-    RiemannThreeTap.currentThreeTapCurrentLeanFrontier ≡ true
-unifiedRiemannA2MuGainPositiveSourceWritten =
-  RiemannThreeTap.a2MuGainIsPositiveSourceWritten
+unifiedFleetRecordedFormalGapsAre58 :
+  FleetGapTOE.unformalisedFormalGaps FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 58
+unifiedFleetRecordedFormalGapsAre58 = FleetGapTOE.fleetRecordedUnformalisedGapCountIs58
 
-unifiedRiemannA1CarrierSummationStillOpen :
-  RiemannThreeTap.a1CarrierSummationPaid
-    RiemannThreeTap.currentThreeTapCurrentLeanFrontier ≡ false
-unifiedRiemannA1CarrierSummationStillOpen =
-  RiemannThreeTap.a1CarrierIsStillOpen
+unifiedFleetRecordedContradictionGapsAre44 :
+  FleetGapTOE.polarityContradictionGaps FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 44
+unifiedFleetRecordedContradictionGapsAre44 = FleetGapTOE.fleetRecordedContradictionCountIs44
 
-unifiedRiemannA2StrictScalarStillOpen :
-  RiemannThreeTap.a2StrictScalarPaid
-    RiemannThreeTap.currentThreeTapCurrentLeanFrontier ≡ false
-unifiedRiemannA2StrictScalarStillOpen =
-  RiemannThreeTap.a2ScalarIsStillOpen
+unifiedFleetMacroscopicEigenMotifsAre3 :
+  FleetGapTOE.macroscopicEigenMotifCount FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 3
+unifiedFleetMacroscopicEigenMotifsAre3 = FleetGapTOE.fleetRecordedMacroscopicMotifCountIs3
 
-unifiedRiemannRouteBEventualGapStillOpen :
-  RiemannThreeTap.routeBEventualGapPaid
-    RiemannThreeTap.currentThreeTapCurrentLeanFrontier ≡ false
-unifiedRiemannRouteBEventualGapStillOpen =
-  RiemannThreeTap.routeBIsStillOpen
+unifiedFleetSpectralLabelsDoNotIdentifyTheoremOwners :
+  FleetGapTOE.spectralLabelsIdentifyTheoremOwners FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+unifiedFleetSpectralLabelsDoNotIdentifyTheoremOwners = FleetGapTOE.fleetSpectralLabelDoesNotIdentifyTheoremOwner
 
-unifiedRiemannRHNotPromoted :
-  RiemannThreeTap.rhDerivedHere
-    RiemannThreeTap.currentThreeTapCurrentLeanFrontier ≡ false
-unifiedRiemannRHNotPromoted =
-  RiemannThreeTap.rhNotClaimedByAgdaStatusMirror
+unifiedFleetMetaIntrospectorAttributionPreserved :
+  FleetGapTOE.metaIntrospectorAttributionPreserved FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
+unifiedFleetMetaIntrospectorAttributionPreserved = refl
 
-------------------------------------------------------------------------
--- RH transformed-prime and current Route-A/Route-B unified reachability.
--- Analysis modules remain the theorem and provenance owners.
-------------------------------------------------------------------------
+unifiedFleetMetaIntrospectorProofNotBorrowed :
+  FleetGapTOE.metaIntrospectorProofBorrowed FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+unifiedFleetMetaIntrospectorProofNotBorrowed = refl
 
-unifiedRHCompletedTraceCrossPollinationBoundary :
-  RHPrimeAudit.CompletedTraceCrossPollinationBoundary
-unifiedRHCompletedTraceCrossPollinationBoundary =
-  RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary
+unifiedFleetESDSurfaceUnedited :
+  FleetGapTOE.esdSurfaceEdited FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+unifiedFleetESDSurfaceUnedited = refl
 
-unifiedRHPrimeActivationRequiresFirstPrimeSupport :
-  RHPrimeAudit.nonzeroPrimeRequiresFirstPrimeSupportSourceWritten
-    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ true
-unifiedRHPrimeActivationRequiresFirstPrimeSupport =
-  RHPrimeAudit.firstPrimeSupportNecessary
+unifiedFleet58ManifestAcquisitionReceipt :
+  FleetManifestTOE.Fleet58ManifestAcquisitionReceipt
+unifiedFleet58ManifestAcquisitionReceipt =
+  FleetManifestTOE.canonicalFleet58ManifestAcquisitionReceipt
 
-unifiedRHUnmarkedTerminalStillNotIdentifiedWithMarkedArithmetic :
-  RHPrimeAudit.selectedUnmarkedTerminalEqualsMarkedArithmetic
-    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
-unifiedRHUnmarkedTerminalStillNotIdentifiedWithMarkedArithmetic =
-  RHPrimeAudit.selectedUnmarkedTerminalStillNotIdentifiedWithMarkedArithmetic
+unifiedFleet58ManifestAbsent : FleetManifestTOE.named58ManifestAcquired ≡ false
+unifiedFleet58ManifestAbsent = FleetManifestTOE.named58ManifestAcquiredIsFalse
 
-unifiedRHIndependentArithmeticDiagonalProducerStillAbsent :
-  RHPrimeAudit.independentArithmeticDiagonalProducer
-    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
-unifiedRHIndependentArithmeticDiagonalProducerStillAbsent =
-  RHPrimeAudit.independentArithmeticDiagonalProducerStillAbsent
+unifiedFleet58CountDoesNotNameRows : FleetManifestTOE.countIdentifiesNamedRows ≡ false
+unifiedFleet58CountDoesNotNameRows = FleetManifestTOE.countIdentifiesNamedRowsIsFalse
 
-unifiedRHHeisenbergTraceTransportStillBlocked :
-  RHPrimeAudit.actualHeisenbergTraceEqualsSelectedZetaFunctional
-    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
-unifiedRHHeisenbergTraceTransportStillBlocked =
-  RHPrimeAudit.noUnjustifiedAnalyticTransport
+unifiedFleet58PerGapDispatchDisabled : FleetManifestTOE.perGapDispatchEnabled ≡ false
+unifiedFleet58PerGapDispatchDisabled = FleetManifestTOE.perGapDispatchEnabledIsFalse
 
-unifiedRHPrimeAuditDoesNotPromoteRH :
-  RHPrimeAudit.rhDerived
-    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
-unifiedRHPrimeAuditDoesNotPromoteRH =
-  RHPrimeAudit.noUnjustifiedRH
+unifiedFleet58RelatedSymbolsRequired : FleetManifestTOE.relatedSymbolsRequired ≡ true
+unifiedFleet58RelatedSymbolsRequired = FleetManifestTOE.relatedSymbolsRequiredIsTrue
 
-unifiedRHThreeTapCurrentLeanFrontier :
-  RHThreeTapFrontier.ThreeTapCurrentLeanFrontier
-unifiedRHThreeTapCurrentLeanFrontier =
-  RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier
+unifiedFleet58DiscoverRequired : FleetManifestTOE.discoverRequired ≡ true
+unifiedFleet58DiscoverRequired = FleetManifestTOE.discoverRequiredIsTrue
 
-unifiedRHThreeTapA1FiniteAndDecayPaid :
-  RHThreeTapFrontier.a1FiniteAndDecaySourceWritten
-    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ true
-unifiedRHThreeTapA1FiniteAndDecayPaid =
-  RHThreeTapFrontier.a1FiniteAndDecayPaid
-
-unifiedRHThreeTapA1InverseSquareWindowsPaid :
-  RHThreeTapFrontier.a1LiteralWindowMachinerySourceWritten
-    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ true
-unifiedRHThreeTapA1InverseSquareWindowsPaid =
-  RHThreeTapFrontier.a1LiteralWindowsPaid
-
-unifiedRHThreeTapA1DyadicSeriesPaid :
-  RHThreeTapFrontier.a1DyadicSeriesSourceWritten
-    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ true
-unifiedRHThreeTapA1DyadicSeriesPaid =
-  RHThreeTapFrontier.a1SeriesPaid
-
-unifiedRHThreeTapA1CarrierToTailCompilerPaid :
-  RHThreeTapFrontier.a1CarrierToTailCompilerSourceWritten
-    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ true
-unifiedRHThreeTapA1CarrierToTailCompilerPaid =
-  RHThreeTapFrontier.a1ConditionalTailCompilerPaid
-
-unifiedRHThreeTapA1CarrierSummationStillOpen :
-  RHThreeTapFrontier.a1CarrierSummationPaid
-    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ false
-unifiedRHThreeTapA1CarrierSummationStillOpen =
-  RHThreeTapFrontier.a1CarrierIsStillOpen
-
-unifiedRHThreeTapA1UniformCurvatureStillOpen :
-  RHThreeTapFrontier.a1UniformCurvaturePaid
-    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ false
-unifiedRHThreeTapA1UniformCurvatureStillOpen =
-  RHThreeTapFrontier.a1CurvatureStillOpen
-
-unifiedRHThreeTapA1CompensationStillOpen :
-  RHThreeTapFrontier.a1CompensationPaid
-    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ false
-unifiedRHThreeTapA1CompensationStillOpen =
-  RHThreeTapFrontier.a1CompensationStillOpen
-
-unifiedRHThreeTapA2StrictScalarStillOpen :
-  RHThreeTapFrontier.a2StrictScalarPaid
-    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ false
-unifiedRHThreeTapA2StrictScalarStillOpen =
-  RHThreeTapFrontier.a2ScalarIsStillOpen
-
-unifiedRHSignedFifthRouteStillOpen :
-  RHThreeTapFrontier.routeBEventualGapPaid
-    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ false
-unifiedRHSignedFifthRouteStillOpen =
-  RHThreeTapFrontier.routeBIsStillOpen
-
-unifiedRHThreeTapFrontierDoesNotPromoteRH :
-  RHThreeTapFrontier.rhDerivedHere
-    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ false
-unifiedRHThreeTapFrontierDoesNotPromoteRH =
-  RHThreeTapFrontier.rhNotClaimedByAgdaStatusMirror
-
-unifiedRHThreeTapTerminalBoundary :
-  RHTerminal.ThreeTapTerminalCompletionBoundary
-unifiedRHThreeTapTerminalBoundary =
-  RHTerminal.canonicalThreeTapTerminalCompletionBoundary
+unifiedFleet58RoundLineageRequired : FleetManifestTOE.roundLineageRequired ≡ true
+unifiedFleet58RoundLineageRequired = FleetManifestTOE.roundLineageRequiredIsTrue
