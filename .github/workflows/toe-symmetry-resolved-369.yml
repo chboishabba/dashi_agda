@@ -47,11 +47,18 @@ on:
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda'
       - 'Docs/diagrams/ym_toe_r559_current_master_convergence.puml'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
+      - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda'
+      - 'DASHI/Physics/Foundations/CMP119AntigravityCanonicalS4PhysicalMinCutExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119AntigravityP3GPhysicalProducerMinCutExact.agda'
+      - 'DASHI/Unified/Physics.agda'
       - 'DASHI/Unifier.agda'
-      - 'DASHI/Unified/SensibLawActionstepGovernanceTOEExact.agda'
-      - 'DASHI/Unified/SensibLawActionstepGovernanceTOEValidation.agda'
-      - 'DASHI/Unified/MissingDeceasedIbrahimDeweyParetoTOEExact.agda'
-      - 'DASHI/Unified/MissingDeceasedIbrahimDeweyParetoTOEValidation.agda'
+      - 'DASHI/Unified/Everything.agda'
+      - 'DASHI/Unified/YMBlockDMaxCutTOEValidation.agda'
+      - 'DASHI/Unified/YMBlockDMaxCutTOEExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP119RegularEReflectionSupportCutExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP119LiteralResidualWeldMaxCut20261002Exact.agda'
+      - 'DASHI/Unified/YMCMP119ResidualWeldTOEExact.agda'
       - 'DASHI/Physics/Closure/Everything.agda'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
 
@@ -204,6 +211,30 @@ jobs:
           agda-version: '2.6.4.3'
           agda-stdlib-version: '2.1'
 
+      - name: Install DASHI Agda preflight
+        run: python -m pip install -e tools/agda_preflight
+
+      - name: Run DASHI Agda preflight
+        run: |
+          modules=(
+            DASHI/EverythingTOESymmetryResolved369.agda
+            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
+            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
+            DASHI/Physics/Foundations/CMP119AntigravityCanonicalS4PhysicalMinCutExact.agda
+            DASHI/Physics/Foundations/CMP119AntigravityP3GPhysicalProducerMinCutExact.agda
+            DASHI/Unified/Physics.agda
+            DASHI/Unified/YMBlockDMaxCutTOEExact.agda
+            DASHI/Unified/YMBlockDMaxCutTOEValidation.agda
+            DASHI/Unified/Everything.agda
+            DASHI/Unifier.agda
+            DASHI/Physics/YangMills/BalabanCMP119RegularEReflectionSupportCutExact.agda
+            DASHI/Physics/YangMills/BalabanCMP119LiteralResidualWeldMaxCut20261002Exact.agda
+            DASHI/Unified/YMCMP119ResidualWeldTOEExact.agda
+          )
+          for module in "${modules[@]}"; do
+            dashi-agda-preflight --root . "$module"
+          done
+
       - name: Reject trust escapes
         run: |
           sources=(
@@ -212,11 +243,18 @@ jobs:
             DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda
             DASHI/Unified/OggSSP2BTOEExact.agda
             DASHI/EverythingTOESymmetryResolved369.agda
+            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
+            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
+            DASHI/Physics/Foundations/CMP119AntigravityCanonicalS4PhysicalMinCutExact.agda
+            DASHI/Physics/Foundations/CMP119AntigravityP3GPhysicalProducerMinCutExact.agda
+            DASHI/Unified/Physics.agda
+            DASHI/Unified/YMBlockDMaxCutTOEExact.agda
+            DASHI/Unified/YMBlockDMaxCutTOEValidation.agda
+            DASHI/Unified/Everything.agda
             DASHI/Unifier.agda
-            DASHI/Unified/SensibLawActionstepGovernanceTOEExact.agda
-            DASHI/Unified/SensibLawActionstepGovernanceTOEValidation.agda
-            DASHI/Unified/MissingDeceasedIbrahimDeweyParetoTOEExact.agda
-            DASHI/Unified/MissingDeceasedIbrahimDeweyParetoTOEValidation.agda
+            DASHI/Physics/YangMills/BalabanCMP119RegularEReflectionSupportCutExact.agda
+            DASHI/Physics/YangMills/BalabanCMP119LiteralResidualWeldMaxCut20261002Exact.agda
+            DASHI/Unified/YMCMP119ResidualWeldTOEExact.agda
           )
           for source in "${sources[@]}"; do
             if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|NON_TERMINATING|TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
@@ -225,13 +263,21 @@ jobs:
             fi
           done
 
-      - name: Kernel-check normalized Monster 2B TOE facade
+      - name: Kernel-check TOE symmetry-resolved aggregate and direct endpoints
         run: |
           agda --version
-          agda -i . -l standard-library DASHI/Unified/OggSSP2BTOEExact.agda
-
-      - name: Kernel-check TOE symmetry-resolved aggregate
-        run: |
-          agda -i . -l standard-library DASHI/EverythingTOESymmetryResolved369.agda
-          agda -i . -l standard-library DASHI/Unified/SensibLawActionstepGovernanceTOEValidation.agda
-          agda -i . -l standard-library DASHI/Unified/MissingDeceasedIbrahimDeweyParetoTOEValidation.agda
+          modules=(
+            DASHI/EverythingTOESymmetryResolved369.agda
+            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
+            DASHI/Unified/Physics.agda
+            DASHI/Unified/YMBlockDMaxCutTOEExact.agda
+            DASHI/Unified/YMBlockDMaxCutTOEValidation.agda
+            DASHI/Unified/Everything.agda
+            DASHI/Unifier.agda
+            DASHI/Physics/YangMills/BalabanCMP119RegularEReflectionSupportCutExact.agda
+            DASHI/Physics/YangMills/BalabanCMP119LiteralResidualWeldMaxCut20261002Exact.agda
+            DASHI/Unified/YMCMP119ResidualWeldTOEExact.agda
+          )
+          for module in "${modules[@]}"; do
+            agda -i . -l standard-library "$module"
+          done

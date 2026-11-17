@@ -38,9 +38,10 @@ import DASHI.Unified.FormalObjectParents as FormalObjectParents
 import DASHI.Unified.InvariantSpine as Spine
 import DASHI.Unified.PNFHyperfabric as PNFHyperfabric
 import DASHI.Unified.Physics as Physics
-import DASHI.Unified.SensibLawActionstepGovernanceTOEExact as SensibLawActionstepGovernance
-import DASHI.Unified.MissingDeceasedIbrahimDeweyParetoTOEExact as MissingDeceasedIbrahimDeweyPareto
+import DASHI.Unified.YMBlockDMaxCutTOEExact as YMBlockD
+import DASHI.Unified.YMCMP119ResidualWeldTOEExact as YMResidualWeld
 import DASHI.Physics.Foundations.Round5CompleteBoundary as Round5
+import DASHI.Physics.Foundations.Round5FullBoundary as Round5Full
 canonicalUnifiedObjects : List Spine.UnifiedObjectInvariant
 canonicalUnifiedObjects =
   CarrierGrammar.carrierGrammarObject
@@ -106,12 +107,12 @@ brainFMRIRemainsNonPromoting =
 navierStokesRemainsNonPromoting :
   Spine.objectExternalJPromotion Physics.navierStokesObject ≡ false
 navierStokesRemainsNonPromoting =
-  refl
+  Physics.navierStokesJPromotionBlocked
 
 yangMillsRemainsNonPromoting :
   Spine.objectExternalJPromotion Physics.yangMillsObject ≡ false
 yangMillsRemainsNonPromoting =
-  refl
+  Physics.yangMillsJPromotionBlocked
 
 brainFMRIFormalProjectionsRemainNonPromoting :
   ∀ kind →
@@ -133,10 +134,16 @@ yangMillsFormalProjectionsRemainNonPromoting :
 yangMillsFormalProjectionsRemainNonPromoting =
   Spine.canonicalInvariantObjectsDoNotPromoteFormalProjections
     Physics.yangMillsObject
-import DASHI.Physics.Foundations.Round5FullBoundary as Round5
-      Round5.Round5FullBoundary
-        Round5.canonicalRound5FullBoundary
-        "Every unified facade object exposes observation, projection, carrier/role vector, residual, proof posture, invariant strength, and the required formal parent projection bundle. The bundle includes modular-j, Hecke, Bott, Kolmogorov, category, quotient, lattice, and operator projections. Literal authority is lane-specific; every formal projection has externalPromotion = false. The cross-scale matter/physics parent records the atoms-to-stellar composition ladder as structural and receipt-gated, with quantitative solar-style counterfactual prediction still blocked. Round Five adds a fail-closed finite boundary for constants, dimension, atomic and nuclear structure, causal cosmological observation, and the GR-QFT emergence cutsets without promoting terminal unification."
 
--- Source-owned Occupy non-factorability and proof-relevant non-domination gate.
-import DASHI.Unified.OccupyNonDominationTOEExact
+------------------------------------------------------------------------
+-- Full Round-Five owner.
+-- Keep the complete-boundary field above for compatibility.
+------------------------------------------------------------------------
+
+round5FullFoundationsBoundary : Round5Full.Round5FullBoundary
+round5FullFoundationsBoundary =
+  Round5Full.canonicalRound5FullBoundary
+
+round5FullPolicy : String
+round5FullPolicy =
+  "Every unified facade object exposes observation, projection, carrier/role vector, residual, proof posture, invariant strength, and the required formal parent projection bundle. Literal authority is lane-specific. Formal projections remain non-promoting. Round Five keeps constants, dimension, atomic and nuclear structure, causal cosmological observation, and GR-QFT emergence boundaries fail closed."

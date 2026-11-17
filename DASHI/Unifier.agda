@@ -22,10 +22,16 @@ import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
 
 import DASHI.Unified.OggSSP2BTOEExact as TwoBTOE
 
+import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as YMTOE
+import DASHI.Unified.YMBlockDMaxCutTOEExact as YMBlockD
+import DASHI.Unified.YMCMP119ResidualWeldTOEExact as YMResidualWeld
+import DASHI.Unified.YMBalabanRGPhysicalBoundaryTOEExact as YMBoundary
+open import DASHI.Physics.YangMills.CompactLieProofLevel
+
 open import Agda.Primitive using (Level; lzero; lsuc)
 open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Bool using (false)
 open import Data.Empty using (⊥)
 open import Data.Nat as Nat using (ℕ; _*_; _≤_; _<_; _⊔_; _∸_)
 open import Data.Integer using (ℤ)
@@ -278,6 +284,138 @@ toeBalabanTerminalPromotionStillOpen :
   BalabanRGTOE.balabanTerminalPromotionOpenFlag ≡ false
 toeBalabanTerminalPromotionStillOpen =
   BalabanRGTOE.balabanTerminalPromotionStillOpen
+
+------------------------------------------------------------------------
+-- Normalized Yang-Mills Block-D TOE exports.
+-- The theorem owners remain in YMBlockD and its imported source modules.
+------------------------------------------------------------------------
+
+unifierYangMillsBlockDProjectiveCarrierLevel : ProofLevel
+unifierYangMillsBlockDProjectiveCarrierLevel =
+  YMBlockD.blockDProjectiveFiniteMarginalCarrierCompilerLevel
+
+unifierYangMillsBlockDProjectivePhysicalMomentInputsLevel : ProofLevel
+unifierYangMillsBlockDProjectivePhysicalMomentInputsLevel =
+  YMBlockD.blockDProjectivePhysicalMomentCompactnessInputsLevel
+
+unifierYangMillsBlockDSelectedMarginalDictionaryLevel : ProofLevel
+unifierYangMillsBlockDSelectedMarginalDictionaryLevel =
+  YMBlockD.blockDSelectedCMP119ToProjectiveMarginalDictionaryLevel
+
+unifierYangMillsBlockDGlobalContainmentProducerLevel : ProofLevel
+unifierYangMillsBlockDGlobalContainmentProducerLevel =
+  YMBlockD.blockDGlobalSelectedContainmentProducerLevel
+
+unifierYangMillsBlockDContinuumStillOpen :
+  YMTOE.toeFlat4DContinuumTransferProvedHere ≡ false
+unifierYangMillsBlockDContinuumStillOpen =
+  YMBlockD.blockDFlat4DContinuumTransferStillOpen
+
+unifierYangMillsBlockDClayStillNotPromoted :
+  YMTOE.toeClayYangMillsPromoted ≡ false
+unifierYangMillsBlockDClayStillNotPromoted =
+  YMBlockD.blockDClayYangMillsStillNotPromoted
+
+------------------------------------------------------------------------
+-- Normalized Bałaban RG physical-boundary TOE exports.
+------------------------------------------------------------------------
+
+unifierCMP119SourceNativeStateLevel : ProofLevel
+unifierCMP119SourceNativeStateLevel =
+  YMBoundary.toeBoundaryCMP119SourceNativeStateLevel
+
+unifierCMP119LiteralCompleteDensityLevel : ProofLevel
+unifierCMP119LiteralCompleteDensityLevel =
+  YMBoundary.toeBoundaryCMP119LiteralCompleteDensityLevel
+
+unifierRegularEFunctionalToRawCompilerLevel : ProofLevel
+unifierRegularEFunctionalToRawCompilerLevel =
+  YMBoundary.toeBoundaryRegularEFunctionalToRawCompilerLevel
+
+unifierRegularELiteralLocalizationLevel : ProofLevel
+unifierRegularELiteralLocalizationLevel =
+  YMBoundary.toeBoundaryRegularELiteralLocalizationLevel
+
+unifierActiveRawToBC1CompilerLevel : ProofLevel
+unifierActiveRawToBC1CompilerLevel =
+  YMBoundary.toeBoundaryActiveRawToBC1CompilerLevel
+
+unifierActiveRawSameRegularELevel : ProofLevel
+unifierActiveRawSameRegularELevel =
+  YMBoundary.toeBoundaryActiveRawSameRegularELevel
+
+unifierAdjointCasimirStrictPositivityLevel : ProofLevel
+unifierAdjointCasimirStrictPositivityLevel =
+  YMBoundary.toeBoundaryAdjointCasimirStrictPositivityLevel
+
+unifierMetricStressCompilerLevel : ProofLevel
+unifierMetricStressCompilerLevel =
+  YMBoundary.toeBoundaryMetricStressCompilerLevel
+
+unifierLiteralMetricStressLevel : ProofLevel
+unifierLiteralMetricStressLevel =
+  YMBoundary.toeBoundaryLiteralMetricStressLevel
+
+unifierRGSlopeMayReplaceInverseCouplingValue :
+  YMBoundary.toeBoundaryRGSlopeMayReplaceInverseCouplingValue ≡ false
+unifierRGSlopeMayReplaceInverseCouplingValue =
+  YMBoundary.toeBoundaryRGSlopeMayReplaceInverseCouplingValueIsFalse
+
+unifierNegativeTraceAloneClosesNegativeActiveStress :
+  YMBoundary.toeBoundaryNegativeTraceAloneClosesNegativeActiveStress ≡ false
+unifierNegativeTraceAloneClosesNegativeActiveStress =
+  YMBoundary.toeBoundaryNegativeTraceAloneClosesNegativeActiveStressIsFalse
+
+unifierPhysicalBoundaryContinuumStillOpen :
+  YMTOE.toeFlat4DContinuumTransferProvedHere ≡ false
+unifierPhysicalBoundaryContinuumStillOpen =
+  YMBoundary.toeBoundaryFlat4DContinuumPromotedIsFalse
+
+unifierPhysicalBoundaryClayStillNotPromoted :
+  YMTOE.toeClayYangMillsPromoted ≡ false
+unifierPhysicalBoundaryClayStillNotPromoted =
+  YMBoundary.toeBoundaryClayYangMillsPromotedIsFalse
+
+
+------------------------------------------------------------------------
+-- Normalized CMP119 residual-weld source frontier.
+------------------------------------------------------------------------
+
+unifierYMResidualWeldCompilerLevel : ProofLevel
+unifierYMResidualWeldCompilerLevel =
+  YMResidualWeld.toeResidualWeldCompilerLevel
+
+unifierYMRegularEComponentPeriodicSupportDictionaryLevel : ProofLevel
+unifierYMRegularEComponentPeriodicSupportDictionaryLevel =
+  YMResidualWeld.toeRegularEComponentPeriodicSupportDictionaryLevel
+
+unifierYMRegularEOneSidedActivityReflectionLevel : ProofLevel
+unifierYMRegularEOneSidedActivityReflectionLevel =
+  YMResidualWeld.toeRegularEOneSidedActivityReflectionLevel
+
+unifierYMRegularECrossingKernelRPLevel : ProofLevel
+unifierYMRegularECrossingKernelRPLevel =
+  YMResidualWeld.toeRegularECrossingKernelRPLevel
+
+unifierYMROperationPublishedPolymerDictionaryLevel : ProofLevel
+unifierYMROperationPublishedPolymerDictionaryLevel =
+  YMResidualWeld.toeROperationPublishedPolymerDictionaryLevel
+
+unifierYMBoundaryPublishedPolymerDictionaryLevel : ProofLevel
+unifierYMBoundaryPublishedPolymerDictionaryLevel =
+  YMResidualWeld.toeBoundaryPublishedPolymerDictionaryLevel
+
+unifierYMCommonERBPeriodicSupportToSelectedShellCarrierLevel : ProofLevel
+unifierYMCommonERBPeriodicSupportToSelectedShellCarrierLevel =
+  YMResidualWeld.toeCommonERBPeriodicSupportToSelectedShellCarrierLevel
+
+unifierYMFullResidualEqualsSelectedFiniteShellTailLevel : ProofLevel
+unifierYMFullResidualEqualsSelectedFiniteShellTailLevel =
+  YMResidualWeld.toeFullResidualEqualsSelectedFiniteShellTailLevel
+
+------------------------------------------------------------------------
+-- Legacy carrier surface starts below.
+------------------------------------------------------------------------
 
 ¬ : Set → Set
 ¬ A = A → ⊥
@@ -585,5 +723,42 @@ record DASHIUnificationAxiom : Set₁ where
 DASHI-Unification-Theorem : Set₁
 DASHI-Unification-Theorem = DASHIUnificationAxiom
 
--- Source-owned Occupy non-factorability and proof-relevant non-domination gate.
-import DASHI.Unified.OccupyNonDominationTOEExact
+
+------------------------------------------------------------------------
+-- TOE Yang-Mills non-promotion reuse.
+------------------------------------------------------------------------
+
+unifierYangMillsPublishedRGDoesNotPromoteContinuum :
+  YMTOE.toeFlat4DContinuumTransferProvedHere ≡ false
+unifierYangMillsPublishedRGDoesNotPromoteContinuum =
+  YMTOE.toePublishedRGDoesNotPromoteContinuum
+
+unifierYangMillsContinuumMassGapNotPromoted :
+  YMTOE.toeContinuumMassGapPromoted ≡ false
+unifierYangMillsContinuumMassGapNotPromoted =
+  YMTOE.toeContinuumMassGapPromotedIsFalse
+
+unifierYangMillsClayNotPromoted :
+  YMTOE.toeClayYangMillsPromoted ≡ false
+unifierYangMillsClayNotPromoted =
+  YMTOE.toeClayYangMillsPromotedIsFalse
+
+------------------------------------------------------------------------
+-- Antigravity S4 / P3G TOE reuse.
+------------------------------------------------------------------------
+
+unifierYangMillsAntigravityS4CompilerLevel : ProofLevel
+unifierYangMillsAntigravityS4CompilerLevel =
+  YMTOE.toeAntigravityS4PhysicalMinCutCompilerLevel
+
+unifierYangMillsAntigravityP3GCompilerLevel : ProofLevel
+unifierYangMillsAntigravityP3GCompilerLevel =
+  YMTOE.toeAntigravityP3GPhysicalProducerCompilerLevel
+
+unifierYangMillsAntigravityInitialSharedCouplingLevel : ProofLevel
+unifierYangMillsAntigravityInitialSharedCouplingLevel =
+  YMTOE.toeAntigravityP3GInitialSharedCouplingLevel
+
+unifierYangMillsAntigravityLocalRemainderLevel : ProofLevel
+unifierYangMillsAntigravityLocalRemainderLevel =
+  YMTOE.toeAntigravityP3GLocalRemainderLevel
