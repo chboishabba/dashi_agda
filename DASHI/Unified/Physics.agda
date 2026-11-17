@@ -541,6 +541,18 @@ yangMillsBalabanClayPromotionStillFalse :
 yangMillsBalabanClayPromotionStillFalse =
   BalabanRGTOE.balabanRGClayPromotionStillFalse
 
+yangMillsBalabanContinuumLimitReceipt : BalabanRGTOE.BalabanContinuumLimitReceipt
+yangMillsBalabanContinuumLimitReceipt = BalabanRGTOE.balabanContinuumLimitReceipt
+
+yangMillsBalabanContinuumLimitPromotionImpossible : BalabanRGTOE.BalabanContinuumLimitPromotion → ⊥
+yangMillsBalabanContinuumLimitPromotionImpossible = BalabanRGTOE.balabanContinuumLimitPromotionImpossible
+
+yangMillsDepthContinuumLimitReceipt : BalabanRGTOE.DepthContinuumLimitReceipt
+yangMillsDepthContinuumLimitReceipt = BalabanRGTOE.depthContinuumLimitReceipt
+
+yangMillsDepthContinuumLimitPromotionImpossible : BalabanRGTOE.DepthContinuumLimitPromotion → ⊥
+yangMillsDepthContinuumLimitPromotionImpossible = BalabanRGTOE.depthContinuumLimitPromotionImpossible
+
 
 ------------------------------------------------------------------------
 -- Joint Balaban RG + R559 maximum-cut physics facade.

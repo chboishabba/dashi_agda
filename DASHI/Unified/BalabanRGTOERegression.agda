@@ -1,6 +1,8 @@
 {-# OPTIONS --safe #-}
 module DASHI.Unified.BalabanRGTOERegression where
 
+open import Agda.Primitive using (Setω)
+
 ------------------------------------------------------------------------
 -- TOE NORMALIZATION FOR THE BALABAN YANG--MILLS LANE
 --
@@ -20,6 +22,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
+open import Data.Empty using (⊥)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 
@@ -53,6 +56,8 @@ import DASHI.Physics.YangMills.YangMillsClayGoal1CSourceCutRound475Exact as Goal
 import DASHI.Physics.YangMills.YangMillsClayCPhysicalPackageMaxCutRound527Exact as CMaxCut
 import DASHI.Physics.YangMills.YangMillsClayCriticalPathRound555Exact as CriticalPath
 import DASHI.Physics.Closure.BalabanRGScaleTransferFrontierReceipt as RGFrontier
+import DASHI.Physics.Closure.YMBalabanContinuumLimitReceipt as ContinuumLimit
+import DASHI.Physics.Closure.YMDepthAsContinuumLimitReceipt as DepthContinuum
 import DASHI.Physics.Closure.BalabanRGMassGapReceiptSurface as MassGap
 import DASHI.Geometry.Gauge.SUNPrimitives as SUN
 import DASHI.Physics.YangMills.BalabanRGLane as LegacyRGLane
@@ -509,34 +514,14 @@ legacyBalabanLaneAlsoDeclaresNoClayPromotion =
   LegacyRGLane.noClayPromotion LegacyRGLane.canonicalBalabanRGLane
 
 ------------------------------------------------------------------------
--- Direct typed scale-transfer non-promotion owner.
---
--- Keep this gate beside the normalized density, regular-E, Casimir, stress,
--- and continuum owners. TOE consumers do not need a Pareto/Snowball detour.
-------------------------------------------------------------------------
-
-BalabanRGScaleTransferPromotion : Set
-BalabanRGScaleTransferPromotion =
-  RGFrontier.BalabanRGScaleTransferPromotion
-
-balabanRGScaleTransferPromotionImpossible :
-  BalabanRGScaleTransferPromotion → ⊥
-balabanRGScaleTransferPromotionImpossible =
-  RGFrontier.balabanRGScaleTransferPromotionImpossibleHere
-
-------------------------------------------------------------------------
 -- Reused typed continuum and RG-flow non-promotion owners.
---
--- The constructorless promotion types remain owned by their source receipts.
 ------------------------------------------------------------------------
 
 BalabanContinuumLimitReceipt : Setω
-BalabanContinuumLimitReceipt =
-  ContinuumLimit.YMBalabanContinuumLimitReceipt
+BalabanContinuumLimitReceipt = ContinuumLimit.YMBalabanContinuumLimitReceipt
 
 BalabanContinuumLimitPromotion : Set
-BalabanContinuumLimitPromotion =
-  ContinuumLimit.YMBalabanContinuumLimitPromotion
+BalabanContinuumLimitPromotion = ContinuumLimit.YMBalabanContinuumLimitPromotion
 
 balabanContinuumLimitPromotionImpossible :
   BalabanContinuumLimitPromotion → ⊥
@@ -544,25 +529,21 @@ balabanContinuumLimitPromotionImpossible =
   ContinuumLimit.ymBalabanContinuumLimitPromotionImpossibleHere
 
 DepthContinuumLimitReceipt : Setω
-DepthContinuumLimitReceipt =
-  DepthContinuum.YMDepthAsContinuumLimitReceipt
+DepthContinuumLimitReceipt = DepthContinuum.YMDepthAsContinuumLimitReceipt
 
 DepthContinuumLimitPromotion : Set
-DepthContinuumLimitPromotion =
-  DepthContinuum.YMDepthContinuumLimitPromotion
+DepthContinuumLimitPromotion = DepthContinuum.YMDepthContinuumLimitPromotion
 
 depthContinuumLimitPromotionImpossible :
   DepthContinuumLimitPromotion → ⊥
 depthContinuumLimitPromotionImpossible =
   DepthContinuum.ymDepthContinuumLimitPromotionImpossibleHere
 
-balabanContinuumLimitReceipt :
-  BalabanContinuumLimitReceipt
+balabanContinuumLimitReceipt : ContinuumLimit.YMBalabanContinuumLimitReceipt
 balabanContinuumLimitReceipt =
   ContinuumLimit.canonicalYMBalabanContinuumLimitReceipt
 
-depthContinuumLimitReceipt :
-  DepthContinuumLimitReceipt
+depthContinuumLimitReceipt : DepthContinuum.YMDepthAsContinuumLimitReceipt
 depthContinuumLimitReceipt =
   DepthContinuum.canonicalYMDepthAsContinuumLimitReceipt
 

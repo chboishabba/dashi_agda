@@ -633,42 +633,16 @@ unifierClayStillFalse =
   Unifier.balabanRGClayPromotionStillFalse
 
 ------------------------------------------------------------------------
--- Direct scale-transfer non-promotion reachability.
-------------------------------------------------------------------------
-
-validationBalabanScaleTransferPromotionImpossible :
-  Balaban.BalabanScaleTransferPromotion → ⊥
-validationBalabanScaleTransferPromotionImpossible =
-  Balaban.balabanScaleTransferPromotionImpossible
-
-toeBalabanScaleTransferPromotionImpossible :
-  Balaban.BalabanScaleTransferPromotion → ⊥
-toeBalabanScaleTransferPromotionImpossible =
-  TOE.toeBalabanScaleTransferPromotionImpossible
-
-unifierBalabanScaleTransferPromotionImpossible :
-  Balaban.BalabanScaleTransferPromotion → ⊥
-unifierBalabanScaleTransferPromotionImpossible =
-  Unifier.unifierBalabanScaleTransferPromotionImpossible
-
-------------------------------------------------------------------------
--- Typed continuum and depth-limit non-promotion reachability.
+-- Typed continuum/RG non-promotion reachability.
 ------------------------------------------------------------------------
 
 toeBalabanContinuumLimitReceiptMatchesOwner :
-  TOE.toeBalabanContinuumLimitReceipt
-  ≡ Balaban.balabanContinuumLimitReceipt
+  TOE.toeBalabanContinuumLimitReceipt ≡ Balaban.balabanContinuumLimitReceipt
 toeBalabanContinuumLimitReceiptMatchesOwner = refl
 
 unifierBalabanContinuumLimitReceiptMatchesOwner :
-  Unifier.unifierBalabanContinuumLimitReceipt
-  ≡ Balaban.balabanContinuumLimitReceipt
+  Unifier.unifierBalabanContinuumLimitReceipt ≡ Balaban.balabanContinuumLimitReceipt
 unifierBalabanContinuumLimitReceiptMatchesOwner = refl
-
-physicsBalabanContinuumLimitReceiptMatchesOwner :
-  Physics.yangMillsBalabanContinuumLimitReceipt
-  ≡ Balaban.balabanContinuumLimitReceipt
-physicsBalabanContinuumLimitReceiptMatchesOwner = refl
 
 toeBalabanContinuumLimitPromotionImpossible :
   Balaban.BalabanContinuumLimitPromotion → ⊥
@@ -680,25 +654,13 @@ unifierBalabanContinuumLimitPromotionImpossible :
 unifierBalabanContinuumLimitPromotionImpossible =
   Unifier.unifierBalabanContinuumLimitPromotionImpossible
 
-physicsBalabanContinuumLimitPromotionImpossible :
-  Balaban.BalabanContinuumLimitPromotion → ⊥
-physicsBalabanContinuumLimitPromotionImpossible =
-  Physics.yangMillsBalabanContinuumLimitPromotionImpossible
-
 toeDepthContinuumLimitReceiptMatchesOwner :
-  TOE.toeDepthContinuumLimitReceipt
-  ≡ Balaban.depthContinuumLimitReceipt
+  TOE.toeDepthContinuumLimitReceipt ≡ Balaban.depthContinuumLimitReceipt
 toeDepthContinuumLimitReceiptMatchesOwner = refl
 
 unifierDepthContinuumLimitReceiptMatchesOwner :
-  Unifier.unifierDepthContinuumLimitReceipt
-  ≡ Balaban.depthContinuumLimitReceipt
+  Unifier.unifierDepthContinuumLimitReceipt ≡ Balaban.depthContinuumLimitReceipt
 unifierDepthContinuumLimitReceiptMatchesOwner = refl
-
-physicsDepthContinuumLimitReceiptMatchesOwner :
-  Physics.yangMillsDepthContinuumLimitReceipt
-  ≡ Balaban.depthContinuumLimitReceipt
-physicsDepthContinuumLimitReceiptMatchesOwner = refl
 
 toeDepthContinuumLimitPromotionImpossible :
   Balaban.DepthContinuumLimitPromotion → ⊥
@@ -709,6 +671,19 @@ unifierDepthContinuumLimitPromotionImpossible :
   Balaban.DepthContinuumLimitPromotion → ⊥
 unifierDepthContinuumLimitPromotionImpossible =
   Unifier.unifierDepthContinuumLimitPromotionImpossible
+
+physicsBalabanContinuumLimitReceiptMatchesOwner :
+  Physics.yangMillsBalabanContinuumLimitReceipt ≡ Balaban.balabanContinuumLimitReceipt
+physicsBalabanContinuumLimitReceiptMatchesOwner = refl
+
+physicsBalabanContinuumLimitPromotionImpossible :
+  Balaban.BalabanContinuumLimitPromotion → ⊥
+physicsBalabanContinuumLimitPromotionImpossible =
+  Physics.yangMillsBalabanContinuumLimitPromotionImpossible
+
+physicsDepthContinuumLimitReceiptMatchesOwner :
+  Physics.yangMillsDepthContinuumLimitReceipt ≡ Balaban.depthContinuumLimitReceipt
+physicsDepthContinuumLimitReceiptMatchesOwner = refl
 
 physicsDepthContinuumLimitPromotionImpossible :
   Balaban.DepthContinuumLimitPromotion → ⊥
