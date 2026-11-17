@@ -79,16 +79,10 @@ record RobustMatched369Advantage : Set where
 -- which observed net has its lower bound and solar has its upper bound.
 -- We prove its relevance to the *observed* solar and electric values
 -- using only the original Nat constructor and transitivity.
-doubleMonotone : {a b : Nat} ->
-  Bound._≤_ a b -> Bound._≤_ (a + a) (b + b)
-doubleMonotone Bound.z≤n = Bound.z≤n
-doubleMonotone (Bound.s≤s {m} {n} ab) =
-  Bound.s≤s (Bound.s≤s (doubleMonotone ab))
-
--- The above inductive doubleMonotone proof handles one simultaneous
--- successor on each side, but the original Nat <= permits zero on the
--- left and arbitrary right side. No correspondence with measured CPO or
--- continuum units is claimed.
+-- Doubling monotonicity requires the existing library's Nat addition
+-- compatibility lemma. We deliberately do NOT fake it using refl or
+-- direct successor induction; source interval acceptance below keeps
+-- its strict premise until a native kernel-confirmed transfer is available.
 
 -- Interval crossing a tied 50% lower bound cannot pass.
 strictHalfTieImpossible :
