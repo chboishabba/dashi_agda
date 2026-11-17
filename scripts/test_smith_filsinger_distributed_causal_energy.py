@@ -2,7 +2,7 @@
 """Regression on finite LC/plasma source backaction; no original-world evidence."""
 from dataclasses import replace
 import pytest
-from check_smith_filsinger_distributed_causal_energy import Model,run
+from check_smith_filsinger_distributed_causal_energy import Model,run,symbolic_telescoping_check
 
 def test_baseline_energy():
     r=run(Model(), duration=5.)
@@ -37,3 +37,14 @@ def test_multiple_spatial_sizes(nodes):
     p=replace(Model(),nodes=nodes,plasma_node=nodes//2)
     r=run(p,duration=3.)
     assert abs(r['net_balance_residual'])<1e-7
+
+@pytest.mark.parametrize('nodes',[3,5,8])
+def test_general_discrete_chain_symbolic_energy(nodes):
+    assert symbolic_telescoping_check(nodes)
+
+def test_more_conductance_can_reduce_useful_load():
+    baseline=run(Model(),duration=10.)
+    controlled=run(replace(Model(),ion_driven=.8,controller_aux=.02),duration=10.)
+    assert controlled['channel_conductance']>baseline['channel_conductance']
+    assert controlled['work']['load']<baseline['work']['load']
+    assert controlled['net_useful_after_control_and_ionization']<baseline['net_useful_after_control_and_ionization']
