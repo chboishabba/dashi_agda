@@ -1,0 +1,46 @@
+{
+  "date": "2026-10-17",
+  "pr": 1148,
+  "local_scientific_payments": {
+    "xor_minimal_boolean_bipermutativity": true,
+    "ternary_affine_bipermutative_classification": true,
+    "xor_grid_as_two_input_one_output_synthesis_fabric": true,
+    "finite_grid_torque_C3_path_phase_intertwiner": true,
+    "matched_binary_fabric_vs_same_plus_ABC": true,
+    "pairwise_control_same_TPM_as_PyPhi_canonical_XOR": true,
+    "PyPhi_2023_golden_calibration": true,
+    "PyPhi_2026_system_phi_vs_CES_separation_receipt": true,
+    "golden_calibrated_matched_full_CES_reference": true,
+    "full_CES_resolves_scalar_collision_at_110": true,
+    "cube_graph_centralizer_iff_commutes_with_B": true,
+    "explicit_18_state_permutation_stabilizer": true,
+    "concrete_three_length_three_Jordan_chains": true,
+    "explicit_two_sided_inverse_Jordan_basis_matrix": true,
+    "concrete_N_matrix_recognized_as_actual_B_plus_I": true,
+    "concrete_N_conjugates_to_three_Jordan_blocks": true,
+    "Jordan_centralizer_exact_Toeplitz_shape": true,
+    "Jordan_centralizer_polynomial_extraction_expansion": true,
+    "target_algebra_M3_F3_t_mod_t3": true,
+    "residual_cube_C3xC3_translations_same_action_as_determinant_one_first_Tits_SL3_coordinate_cycles": true
+  },
+  "external_or_environment_bound": {
+    "direct_package_level_PyPhi_replay_of_plus_ABC": true,
+    "actual_LILA_hidden_trajectories_or_checkpoints": true,
+    "fresh_Agda_kernel_execution_for_newest_owners": true
+  },
+  "retired_as_local_max_cut": {
+    "more_boolean_truth_table_enumeration": true,
+    "another_binary_vs_triadic_fixture": true,
+    "more_cube_rank_or_cardinality_counting": true,
+    "more_finite_C3_recharting": true,
+    "another_centralizer_dimension_scan": true,
+    "another_finite_SL3_translation_test": true
+  },
+  "authority_boundary": {
+    "Agda_newest_owners_kernel_green_claim": false,
+    "triadic_full_CES_is_direct_PyPhi_package_output": false,
+    "finite_C3_phase_identifies_physical_torque_amplitude": false,
+    "residual_SL3_coordinate_action_identifies_full_E6_invariant_dynamics": false,
+    "synthetic_LILA_data_substitutes_for_real_model_data": false
+  }
+}

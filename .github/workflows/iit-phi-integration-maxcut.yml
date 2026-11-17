@@ -1,0 +1,46 @@
+name: IIT Phi Integration Max-Cut
+
+on:
+  push:
+    paths:
+      - 'DASHI/Biology/IIT*.agda'
+      - 'DASHI/Core/IntegrationConsumerDescentOrderExact.agda'
+      - 'DASHI/Reasoning/IIT*.agda'
+      - 'DASHI/Moonshine/IIT*.agda'
+      - 'DASHI/Analysis/IIT*.agda'
+      - 'DASHI/EverythingIITPhiIntegrationMaxCut.agda'
+      - 'scripts/iit*.py'
+      - '.github/workflows/iit-phi-integration-maxcut.yml'
+  pull_request:
+    paths:
+      - 'DASHI/Biology/IIT*.agda'
+      - 'DASHI/Core/IntegrationConsumerDescentOrderExact.agda'
+      - 'DASHI/Reasoning/IIT*.agda'
+      - 'DASHI/Moonshine/IIT*.agda'
+      - 'DASHI/Analysis/IIT*.agda'
+      - 'DASHI/EverythingIITPhiIntegrationMaxCut.agda'
+      - 'scripts/iit*.py'
+      - '.github/workflows/iit-phi-integration-maxcut.yml'
+  workflow_dispatch:
+
+jobs:
+  numeric:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify finite IIT numerics
+        run: python scripts/iit_numeric_verification.py
+
+  kernel:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Agda + stdlib
+        uses: wenkokke/setup-agda@v2
+        with:
+          agda-version: '2.6.4.3'
+          agda-stdlib-version: '2.1'
+      - name: Check IIT phi integration aggregate
+        run: >-
+          agda -i . -i DCHoTT-Agda -i cubical -l standard-library
+          DASHI/EverythingIITPhiIntegrationMaxCut.agda
