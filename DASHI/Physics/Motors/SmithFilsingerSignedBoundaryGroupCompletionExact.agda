@@ -177,3 +177,69 @@ reverseEnvironmentalFlowConsumesControllerWork p reversed controllerNet
       Cycle.trans
         (Bound.sym (Cycle.+-zeroRight _))
         (originalTwoPortSignedWorkConservation x store)
+
+
+-- Sharp reverse-source negative control: environmental sink work is
+-- controller-paid and cannot be counted as additional useful load.
+-- Even when the natural port reverses sign, the bound is exact.
+reverseEnvironmentalLoadPlusSinkBelowController :
+  (p : Port.MidpointTwoPortWorkWindow)
+  (reversed controllerNet : Nat) →
+  Port.MidpointTwoPortWorkWindow.naturalOutgoing p
+    ≡ Port.MidpointTwoPortWorkWindow.naturalIncident p + reversed →
+  Port.MidpointTwoPortWorkWindow.controllerIncident p
+    ≡ Port.MidpointTwoPortWorkWindow.controllerOutgoing p + controllerNet →
+  Port.MidpointTwoPortWorkWindow.initialStored p
+    ≡ Port.MidpointTwoPortWorkWindow.finalStored p →
+  Bound._≤_
+    (Port.MidpointTwoPortWorkWindow.usefulWork p + reversed)
+    controllerNet
+reverseEnvironmentalLoadPlusSinkBelowController
+  p reversed ctrl reverseWork controllerWork storeReturns =
+  Bound.transportUpper
+    (Cycle.trans
+      (solve 3
+        (λ load loss sink →
+          ((load :+ sink) :+ loss)
+            := ((load :+ loss) :+ sink))
+        refl useful losses reversed)
+      (Bound.sym
+        (reverseEnvironmentalFlowConsumesControllerWork
+          p reversed ctrl reverseWork controllerWork storeReturns)))
+    (Bound.≤-append (useful + reversed) losses)
+  where
+    useful : Nat
+    useful = Port.MidpointTwoPortWorkWindow.usefulWork p
+    losses : Nat
+    losses = Port.MidpointTwoPortWorkWindow.internalLoss p
+
+-- Same selected original source b/f: unlike the previously formalised
+-- nonnegative-natural-net source cap, this proof requires NO such
+-- admission and remains valid for a negative net environmental port.
+import DASHI.Physics.Motors.SmithFilsingerSourceMaxwellBoundaryWeldExact as Weld
+
+originalReverseEnvironmentalPortFundedByController :
+  (b : Weld.SelectedBoundary)
+  (f : Weld.FormalFieldToPort b)
+  (environmentalReturn controllerNet : Nat) →
+  Port.MidpointTwoPortWorkWindow.naturalOutgoing
+    (Weld.FormalFieldToPort.portWindow f)
+    ≡ Port.MidpointTwoPortWorkWindow.naturalIncident
+      (Weld.FormalFieldToPort.portWindow f) + environmentalReturn →
+  Port.MidpointTwoPortWorkWindow.controllerIncident
+    (Weld.FormalFieldToPort.portWindow f)
+    ≡ Port.MidpointTwoPortWorkWindow.controllerOutgoing
+      (Weld.FormalFieldToPort.portWindow f) + controllerNet →
+  Port.MidpointTwoPortWorkWindow.initialStored
+    (Weld.FormalFieldToPort.portWindow f)
+    ≡ Port.MidpointTwoPortWorkWindow.finalStored
+      (Weld.FormalFieldToPort.portWindow f) →
+  Bound._≤_
+    (Port.MidpointTwoPortWorkWindow.usefulWork
+      (Weld.FormalFieldToPort.portWindow f) + environmentalReturn)
+    controllerNet
+originalReverseEnvironmentalPortFundedByController b f environmentalReturn
+  controllerNet reverseLaw controllerLaw restored =
+  reverseEnvironmentalLoadPlusSinkBelowController
+    (Weld.FormalFieldToPort.portWindow f)
+    environmentalReturn controllerNet reverseLaw controllerLaw restored
