@@ -57,3 +57,6 @@ import DASHI.Physics.Photovoltaic.PV369IntervalRobustAcceptanceExact
 
 -- P7 full IV source-backed monotonicity, rectangle MPP envelope and strict worst-case net power.
 import DASHI.Physics.Photovoltaic.PV369UnsampledIVPowerEnvelopeExact
+
+-- M2 primary-source independent 2017 four-terminal NREL GaInP/GaAs//Si real published data identity; not a measured 369 device.
+import DASHI.Physics.Photovoltaic.PVGreen68FourTerminalPublishedSourceExact
