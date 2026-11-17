@@ -505,3 +505,118 @@ floating-point activations/weights, explicit scalar
 quantizer error budgets, Agda kernel checking,
 and future expert reactivation. Do not label
 new sympy checks as accepted kernel theorems.
+
+
+## 17 Nov fourth P0 cut: arbitrary-source SHARED-HEAD FUSED SCORE
+
+**New strongest source-to-consumer formal owner:**
+`DASHI/Cognition/PNF/X369SharedHeadFusedScoreExact.agda`.
+
+The earlier 3→2 directed-coordinate quotient is conditional
+on a zero DC, an equally shared expert DC, or a suitable
+consumer restriction. This NEW reduction is strictly more
+general for the **original learned scalar router-score
+consumer**: it requires NO centering, NO equal DC and NO
+inference that a trialectic face can be discarded.
+
+For every original triad x=(a,b,c), expert history
+h=(A,B,C), and shared learned original directed head
+w=(ws,wf,wr),
+
+    score = ws*(aA+bB+cC)
+          + wf*(aB+bC+cA)
+          + wr*(aC+bA+cB)
+          = <K_w x,h>,
+
+    K_w x = (ws*a+wf*c+wr*b,
+             ws*b+wf*a+wr*c,
+             ws*c+wf*b+wr*a).
+
+`rawOriginalScoreFuses` supplies a nine-variable typed
+integer ring-solver proof on the ACTUAL original
+three-channel construction. `sourceScoreEqualsFusedConsumer`
+factors the existing original weighted-score owner
+through `precomputeSharedSource` and `fusedExpertDot`.
+`allExpertScoresExactlyPreserved` structurally lifts this
+to an arbitrary list of independent expert histories with
+ONE precomputed K_w x. `allSourceTriadBlocksExactlyPreserved`
+structurally lifts it to an arbitrary list of triad blocks
+with their independently shared source/head values.
+`everyScoreListConsumerExactlyPreserved` then transports
+ANY deterministic consumer of that full ordered score
+list, encompassing a fixed source sorting/tie policy,
+but NOT an observer needing the discarded internal
+T coordinates or inactive history.
+
+This is a **computation/intermediate consumer** reduction
+valid on every source integer triad; it is NOT a
+reconstruction codec for T itself. All full original
+source weights and expert histories remain available
+to the fused score path.
+
+An explicit cost model counting scalar MULTIPLICATIONS
+in the stated arithmetic plans gives per triad:
+
+    baseline unfused  = 12 * experts
+    shared-head fused = 9 + 3 * experts
+
+For E=1 both count 12; for E=4 the elementary
+plan counts 48 versus 21 (27 fewer). Actual memory,
+additions, register pressure, kernel launches, float
+rounding/reassociation, autograd, routing, GPU compiler
+fusion, wall time and energy remain unmeasured. This
+arithmetical comparison is NOT a physical speedup.
+
+**SymPy 1.14 symbolic stand-in** independently reduced
+the source nine-variable polynomial to exactly zero
+and matched four heterogeneous expert histories each
+spanning three different triads. The repository
+stand-in script also contains those exact checks,
+scalar-multiply counting controls, all recent
+DC/margin/quantizer controls. The current-head full
+GitHub workflow has not reported a pass and is NOT
+a substitute for Agda 2.9 elaboration.
+
+**Highest-alpha next binding:** replace the temporary
+candidate full-T computation in the original Leech
+source with a deliberately opt-in *fused scoring path*
+only after proof of torch/float approximate consumer
+bounds and the source-specific sorting/gradient
+contract. Model changes need a separate original
+physical run and a full E=number-of-experts cost
+benchmark. This no-run branch therefore updates
+formal proof sources and SymPy CI only, not Leech
+PyTorch itself.
+
+### Revised source hierarchy
+
+- P0 exact full-3-channel gauge: a fixed rotation is
+  a change of coordinates, not an expressivity gain
+- P0 exact conditional 3→2 state code: only with
+  admitted DC side info or centered source domain
+- P0 exact common-DC relative score code: two channels
+  can preserve relative logits even without full T
+- **P0 exact arbitrary-state fused score**: no DC
+  condition when the consumer is the original scalar
+  learned shared router score; project x through
+  a circulant learned linear operator once, then dot
+  with each expert h
+- P0 quantizer margin: finite formal envelope source
+  written, source floating/error admission still OPEN
+- P1 future history/selected consumer: existing
+  generic owner, original step-to-code weld OPEN
+- P1 original task/Sophontic/dialectic/trialectic
+  semantic action: OPEN independently of score fusion
+- P1 costed physical precision/latency/energy: OPEN
+- Agda 2.9 kernel and Golden TOE import acceptance:
+  OPEN until pinned actual checker receipt
+
+To check new sources on the actual Agda host:
+
+```bash
+export DASHI_NO_TMUX=1
+scripts/run_agda29_parallel_check.sh \
+  DASHI/Cognition/PNF/X369QuantizedRouterDecisionMarginExact.agda
+scripts/run_agda29_parallel_check.sh \
+  DASHI/Cognition/PNF/X369SharedHeadFusedScoreExact.agda
+```
