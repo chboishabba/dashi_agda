@@ -89,6 +89,22 @@ for arm,expected in (("coherent",(2,3)),("mixed",(3,2))):
     require(arm+" exact rational interval",
        all(abs(s-z)<=u for s,z,u in zip(src,out,budget)))
     require(arm+" ordered top2 original fixture",tuple(ids)==expected)
+    # Exact real softmax on ordered selected IDs; source torch.topk tie
+    # semantics are only certified when the listed margins are strict.
+    pp=[S.exp(src[i])/sum(S.exp(src[j]) for j in ids) for i in ids]
+    qq=[S.exp(out[i])/sum(S.exp(out[j]) for j in ids) for i in ids]
+    tv=S.N(sum(S.Abs(pi-qi) for pi,qi in zip(pp,qq)),40)
+    Bmax=max(budget[i] for i in ids)
+    require(arm+" exact softmax within max selected score budget",
+        tv <= Bmax)
+    # The one-step selected output mixture is a consumer of scores AND
+    # expert outputs; the latter are fixed here, so ||sum(p'-p)y|| <= M B.
+    expert_output={ids[0]:R(3),ids[1]:R(-2)}
+    out_delta=S.N(S.Abs(sum((qi-pi)*expert_output[i]
+                 for i,pi,qi in zip(ids,pp,qq))),40)
+    require(arm+" one-step mixture envelope with fixed expert output",
+       out_delta<=max(abs(t) for t in expert_output.values())*Bmax)
+
     require(arm+" original top2 membership margin",
        all(src[i]-budget[i]>src[j]+budget[j]
            for i in ids for j in range(E) if j not in ids))
@@ -102,6 +118,39 @@ for arm,expected in (("coherent",(2,3)),("mixed",(3,2))):
        branch(x,arm,base)==branch(xp,arm,base)))
     print("R4_FIXTURE",arm,"source",src,"budgets",budget,
           "quantized",out,"ordered_top2",ids)
+# Matched R4 C2-residual control has a DIFFERENT score
+#   (baseline history v + C2 residual history z)·abs(h_e)+expert_bias[e].
+# Shared x-only portions cancel. This controls active history capacity
+# without pretending its semantic/phase features equal C3.
+z=tuple(map(R,(1,-1,2,0,1,-2)))
+ez=(R(1,256),)*n
+def c2_scores(hist,v,z,b):
+    return tuple(dot(tuple(v[i]+z[i] for i in range(n)),
+                     tuple(abs(t) for t in he))+b[e]
+                 for e,he in enumerate(hist))
+def c2_bounds(hist,v,z,eh,ev,ez,eb):
+    return tuple(sum(abs(v[i]+z[i])*eh[i]
+          +(ev[i]+ez[i])*(abs(he[i])+eh[i])
+                 for i in range(n))+eb for he in hist)
+c2a=c2_scores(h,v,z,bias)
+c2b=c2_scores([perturb(he,eh,-1) for he in h],
+              perturb(v,ev,+1),perturb(z,ez,-1),
+              perturb(bias,(eb,)*E,+1))
+c2B=c2_bounds(h,v,z,eh,ev,ez,eb)
+require("matched C2 control full history/bias rational interval",
+    all(abs(a-b)<=bb for a,b,bb in zip(c2a,c2b,c2B)))
+c2ids=rank(c2a)[:2]
+require("matched C2 control top2 strict membership",
+    all(c2a[i]-c2B[i]>c2a[j]+c2B[j]
+        for i in c2ids for j in range(E) if j not in c2ids))
+require("matched C2 control ordered top2 strict",
+    c2a[c2ids[0]]-c2B[c2ids[0]] >
+    c2a[c2ids[1]]+c2B[c2ids[1]])
+require("matched C2 control ordered IDs preserved",
+    c2ids==rank(c2b)[:2])
+print("R4_FIXTURE c2_control","source",c2a,"budgets",c2B,
+      "quantized",c2b,"ordered_top2",c2ids)
+
 # Counterexample to smooth mixed-null quantization across a mean-energy tie.
 v0=((R(1),R(0),R(0)),(R(0),R(1),R(0)))
 eta=R(1,4096)
