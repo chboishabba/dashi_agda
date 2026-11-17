@@ -121,7 +121,7 @@ commonUnaryCancelsRelativeScores common hi hj bi bj =
         :- ((common :+ hj) :+ bj))
        := ((hi :+ bi) :- (hj :+ bj)))
     refl common hi hj bi bj
-
+)
 -- The original baseline history contribution must be sourced from
 -- the actual v_h * abs(h) computation, not inferred from the
 -- directed score; this record treats that observed contribution
