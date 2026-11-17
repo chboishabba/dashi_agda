@@ -63,6 +63,23 @@ class WeekTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             mod.source_case(self.source)
 
+    def test_noaa_presented_minima_match_but_maxima_differ(self):
+        other = json.loads((ROOT / "Docs/support/reference/bom_sydney1910_noaa_presentation_crosscheck.json").read_text())
+        left, right = other["periods"]
+        self.assertEqual(left["minimum_C"], right["minimum_C"])
+        self.assertEqual(left["minimum_C"], self.source["cases"][0]["left"])
+        self.assertNotEqual(left["maximum_C"], right["maximum_C"])
+        self.assertNotEqual(left["rain_cm"], right["rain_cm"])
+        self.assertFalse(other["independent_origin_established"])
+
+    def test_noaa_presented_context_exact_sums(self):
+        other = json.loads((ROOT / "Docs/support/reference/bom_sydney1910_noaa_presentation_crosscheck.json").read_text())
+        left, right = other["periods"]
+        self.assertEqual(sum(Fraction(str(x)) for x in left["maximum_C"]), Fraction(1689, 10))
+        self.assertEqual(sum(Fraction(str(x)) for x in right["maximum_C"]), Fraction(1889, 10))
+        self.assertEqual(sum(Fraction(str(x)) for x in left["rain_cm"]), Fraction(69, 20))
+        self.assertEqual(sum(Fraction(str(x)) for x in right["rain_cm"]), Fraction(2, 25))
+
 
 if __name__ == "__main__":
     unittest.main()
