@@ -34,6 +34,12 @@ def bound_receipt(data,unc):
     source=data.get("declared_provenance")
     if not isinstance(source,dict) or not source.get("sample_id") or not source.get("source_document") or not source.get("input_sha256") or not source.get("incident_spectrum_sha256"):
         raise ValueError("missing same-sample raw-data hashes and provenance")
+    input_hashes=source["input_sha256"]
+    spectrum_hash=source["incident_spectrum_sha256"]
+    if not isinstance(input_hashes,dict) or not isinstance(spectrum_hash,str) or (
+        len(spectrum_hash)!=64 or any(c not in "0123456789abcdef" for c in spectrum_hash)
+    ) or spectrum_hash not in input_hashes.values():
+        raise ValueError("source spectrum SHA256 not authenticated against original input manifest")
     solar=number(data["incident_solar_W_m2"],"incident",1e-12)
     per=data.get("four_terminal_per_junction")
     if not isinstance(per,list) or len(per)<2 or len(per)>5:
@@ -118,8 +124,8 @@ def selftest():
     def receipt(net=510.,sample="369",solar=1000):
         return {"real_world_certified":False,
             "declared_provenance":{"sample_id":sample,"source_document":"same-simulator-session",
-              "temperature_K":298.15,"incident_spectrum_sha256":"hash",
-              "input_sha256":{"spectrum":"hash"}},
+              "temperature_K":298.15,"incident_spectrum_sha256":"a"*64,
+              "input_sha256":{"spectrum":"a"*64}},
             "incident_solar_W_m2":solar,
             "four_terminal_net_W_m2":net,
             "four_terminal_per_junction":[{"gross_mpp_W_m2":net/4,"converter_eta":1.,"delivered_mpp_W_m2":net/4} for _ in range(4)]}
@@ -158,7 +164,9 @@ def selftest():
            "converter_eta":1.,"delivered_mpp_W_m2":150.} for _ in range(4)]},err())))
     ck("same sample cannot be control",rejected(lambda:compare(a,a)))
     ck("different solar provenance cannot be matched",rejected(lambda:compare(a,{**base,"declared_source":"different"})))
-    ck("different spectrum bytes cannot be matched",rejected(lambda:compare(a,{**base,"incident_spectrum_sha256":"another"})))
+    ck("different spectrum bytes cannot be matched",rejected(lambda:compare(a,{**base,"incident_spectrum_sha256":"b"*64})))
+    ck("spectrum hash must occur in original source manifest",rejected(lambda:bound_receipt(
+        {**receipt(),"declared_provenance":{**receipt()["declared_provenance"],"incident_spectrum_sha256":"b"*64}},err())))
     ck("missing relative bound fails",rejected(lambda:bound_receipt(receipt(),{k:v for k,v in err().items() if k!="solar_rel_bound"})))
     ck("invalid negative interval fails",rejected(lambda:bound_receipt(receipt(),{**err(),"current_rel_bound":-.1})))
     ck("invalid relative error >100% fails",rejected(lambda:bound_receipt(receipt(),{**err(),"current_rel_bound":1.2})))
