@@ -68,50 +68,19 @@ import DASHI.Physics.Gravity.KSW668AdS5MovingNormalFiniteSBPTelescopeExact
 -- observations remain independent OPEN gates.
 import DASHI.Physics.Gravity.KSW668AdS5RadialSSPRK3ImaginaryPolynomialExact
 
--- F8 VIII: original a=t physical moving AdS5 TT full coupled
--- homogeneous weighted-SBP2/SAT + exact radial FV symmetrizer algebra,
--- forced Neumann boundary term and characteristic source lift.
--- Generic rational polynomial lemmas in Agda SOURCE, not pinned kernel.
--- Actual complete T-y-r semidiscrete Gronwall on original t>=1
--- verified separately; fully discrete RK3, H4+Weyl and FIO still OPEN.
-import DASHI.Physics.Gravity.KSW668AdS5OriginalCoupledSBPSymmetrizerRationalExact
+-- XXVIII: exact algebraic relation between ORIGINAL E4 and E5 receiver
+-- formulae. This is NOT an AdS5 covariant electric-Weyl identification;
+-- G1 metric/gauge/linearized-curvature and higher-trace gates remain OPEN.
+import DASHI.Physics.Gravity.KSW668F8DualElectricWeylReadoutAlgebraExact
 
--- F8 IX original a=t physical characteristic C=DyU-(P-M)/2.
--- Unweighted normal SBP2 SAT stage preserves C exactly at every
--- interior node (even across all SSPRK3 stages and sourced Israel);
--- weighted split SBP4 has explicit interior D-Dw commutator defect.
--- Weak SAT global boundary constraint has rational t4/3 negative control.
--- The full coupled mode3 weighted energy gets explicit commutator bound
--- E' <= (5+16t)E for dy<=b/4; forced source lift E' <= (6+16t)E+||F||²/2.
--- Actual Agda rational source, pinned kernel NOT run.
-import DASHI.Physics.Gravity.KSW668AdS5OriginalTTCharacteristicConstraintRationalExact
-
--- Finite radial -L_d Sobolev powers commute with all original moving
--- y/warp/SAT operators, with source powers treated in parallel.
--- Generic natural-order Agda induction conditional on single
--- commutator; concrete finite matrices checked independently.
--- NOT a mesh-uniform 5D H4+epsilon Weyl trace theorem.
-import DASHI.Physics.Gravity.KSW668AdS5OriginalRadialSobolevPowerReuseExact
-
--- F8 X: ORIGINAL a=t TT angular yy source 0/2/4 is exactly the
--- Base369.TriTruth unsigned 0/1/2 *index* (ell=2q, radial d=3+4q).
--- Exact source Legendre weights/receiver axis, source-producer consumer;
--- explicit C3 label-rotation radial non-intertwiner. Not physical C3,
--- not 3/6/9 gravity dimensions, not dual-Weyl convergence or Agda kernel.
-import DASHI.Physics.Gravity.KSW668AdS5TTUnbalancedTernary369ConsumerExact
-
--- F8 XI: original weak Israel SAT global C boundary Udot-only repair
--- has exact SBP2 left-null parity obstruction. Native n3/n4 rational
--- column certificates; general n symbolic recurrence checked in Python.
--- Joint P/M/U energy-compatible SAT and continuum Weyl remain OPEN.
-import DASHI.Physics.Gravity.KSW668AdS5TTWeakIsraelSBPLeftNullParityExact
-
--- KSW XII exact radial dimension-raising ladder L_(d+2) J=J L_d
--- (d3->7->11): the three-channel nilpotent commuting shift has
--- genuine supplied differential intertwiner premises. NOT an
--- invertible C3 rotation or a physical original sourced Weyl action.
--- Optional chosen Z3 Weil SL2Z modular S/T is source-level SymPy
--- tested, but DOES NOT commute with the original radial generator.
--- Monster min nontrivial complex rep 196883 forbids a whole-Monster
--- nontrivial 3D index action; z is KK normal, not spatial radial r.
-import DASHI.Physics.Gravity.KSW668AdS5TTModularRadialLadderConsumerExact
+-- XXIX ORIGINAL-GEOMETRY / SAT / CFL concrete precursor lemmas.
+-- G1: proper-time induced metric at original t=4/3 slice; complete
+-- 5D curved Riemann + linearised Weyl Agda proof remains OPEN.
+import DASHI.Physics.Gravity.KSW668F8OriginalAdS5EmbeddingSliceExact
+-- G2: actual weak-Israel SAT injection rational algebra, NOT full energy.
+import DASHI.Physics.Gravity.KSW668F8WeakIsraelSATSliceExact
+-- G3: SSPRK3 damping instability at dt*k=3, NOT coupled stability.
+import DASHI.Physics.Gravity.KSW668F8SSPRK3FullStabilityPrerequisiteExact
+-- G1--G6 cross-programme non-promotion authority using existing
+-- ContinuumCurvatureSourceSpinTwo approximation and explicit witnesses.
+import DASHI.Physics.Gravity.KSW668F8SameObjectWeylAuthorityBoundary
