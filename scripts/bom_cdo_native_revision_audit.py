@@ -126,18 +126,27 @@ def audit(manifest,root):
         events.append({'station':station,'date':day,'variable':var,'kind':kind,
                        'before':list(map(str,oldrow)) if oldrow else None,
                        'after':list(map(str,newrow)) if newrow else None})
-    historical={station:sum(1 for x in events
-                            if x['station']==station and x['date']<'2000-01-01'
-                            and x['before'] is not None and x['before'][0]!='None'
-                            and (x['after'] is None or x['after'][0]=='None'))
-                for station,_ in lost_values}
-    historical={k:v for k,v in sorted(historical.items()) if v}
+    # Aggregate each lost measurement once across ALL variables of a station.
+    # The previous (station, variable) dict comprehension overwrote one
+    # variable's count with the next at multi-product locations.
+    historical_counts = Counter()
+    historical_products = Counter()
+    for event in events:
+        if (event['date'] < '2000-01-01'
+                and event['before'] is not None
+                and event['before'][0] != 'None'
+                and (event['after'] is None or event['after'][0] == 'None')):
+            historical_counts[event['station']] += 1
+            historical_products[(event['station'], event['variable'])] += 1
+    historical = dict(sorted(historical_counts.items()))
     return {'schema':'dashi.bom.cdo.native_revision_result.v1',
             'before_receipts':old,'after_receipts':new,
             'before_rows':len(before),'after_rows':len(after),
             'counts':dict(sorted(counts.items())),
             'value_removals_by_station_product':{f'{s}:{v}':n for (s,v),n in sorted(removals.items())},
             'pre2000_observed_values_lost_by_station':historical,
+            'pre2000_observed_values_lost_by_station_product':
+                {f'{s}:{v}':n for (s,v),n in sorted(historical_products.items())},
             'values_lost_including_disappearing_calendar_rows':
                 {f'{s}:{v}':n for (s,v),n in sorted(lost_values.items())},
             'author_reported_target_only':{'pre2000_total':571,'066062':515,
