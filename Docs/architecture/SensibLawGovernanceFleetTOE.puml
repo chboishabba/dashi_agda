@@ -1,0 +1,58 @@
+@startuml
+title SensibLaw governance + fleet target TOE normalization
+
+skinparam componentStyle rectangle
+
+component "Semantic promotion\ncanonical owner" as Semantic
+component "Legal-source authority\ncanonical owner" as Legal
+component "Agda-first legal runtime\ncanonical owner" as Runtime
+component "Domain authority transport\ncanonical owner" as Domain
+component "Snowball attribution + lineage\ncanonical owners" as Snowball
+component "Pareto proof-directed search\ncanonical owner" as Pareto
+component "Native legal follow + acquisition\ncanonical owners" as Acquisition
+component "Expert evidence integrity\ncanonical owner" as Expert
+component "Fleet formal-gap target\ncanonical owner" as Fleet
+
+component "SensibLawGovernanceFleetTOEExact" as Join
+
+component "EverythingTOESymmetryResolved369" as Root
+component "DASHI.Unifier" as Unifier
+component "DASHI.Unified.Everything" as Unified
+
+Semantic --> Join
+Legal --> Join
+Runtime --> Join
+Domain --> Join
+Snowball --> Join
+Pareto --> Join
+Acquisition --> Join
+Expert --> Join
+Fleet --> Join
+
+Join --> Root
+Join --> Unifier
+Join --> Unified
+
+note right of Join
+Preconditions:
+- reuse current-master owners
+- preserve original attribution
+- no Actionstep-specific ontology
+
+Invariants:
+- semantic/runtime/vendor state != authority
+- candidate source/current validity != authority/applicability
+- citation/Pareto schedule != proof
+- provider failure != negative legal evidence
+- expert production != truth/authority
+- 584 discharged fibres stay discharged
+- 44 contradiction gaps stay separate
+- target only 58 unformalised formal gaps
+- spectral labels do not identify theorem owners
+- ESD surfaces remain untouched
+
+Postcondition:
+all three TOE facades expose
+one canonical receipt
+end note
+@enduml

@@ -929,7 +929,65 @@ unifierSensibLawOfficialSurfaceDoesNotRecoverFineLegalState :
 unifierSensibLawOfficialSurfaceDoesNotRecoverFineLegalState =
   ComplianceTOE.sensibLawOfficialSurfaceDoesNotRecoverFineLegalState
 
-unifierSensibLawLegalityAloneDoesNotCreateLegitimacy :
-  ComplianceTOE.LegalOnlyCreatesLegitimacy → ⊥
-unifierSensibLawLegalityAloneDoesNotCreateLegitimacy =
-  ComplianceTOE.sensibLawLegalityAloneDoesNotCreateLegitimacy
+unifierYMImplementAToDClayStillBlocked :
+  YMAD.clayPromotion YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+  ≡ false
+unifierYMImplementAToDClayStillBlocked =
+  YMAD.clayPromotionIsFalse YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+unifierYMImplementAToDScaleTransferNonPromotion :
+  BalabanR559TOE.ScaleTransferPromotion → ⊥
+unifierYMImplementAToDScaleTransferNonPromotion =
+  YMAD.scaleTransferPromotionEliminator
+    YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+
+------------------------------------------------------------------------
+-- Current-master SensibLaw governance / fleet target normalization.
+------------------------------------------------------------------------
+
+import DASHI.Unified.SensibLawGovernanceFleetTOEExact as GovernanceFleet
+
+unifierSensibLawGovernanceFleetReceipt :
+  GovernanceFleet.SensibLawGovernanceFleetTOEReceipt
+unifierSensibLawGovernanceFleetReceipt =
+  GovernanceFleet.canonicalSensibLawGovernanceFleetTOEReceipt
+
+unifierSensibLawSemanticAuthorityRemainsClosed =
+  GovernanceFleet.governanceSemanticAllAuthorityStillClosed
+
+unifierSensibLawCandidateSourceDoesNotCreateAuthority =
+  GovernanceFleet.governanceCandidateSourceDoesNotCloseAuthority
+
+unifierSensibLawCurrentValidityDoesNotCreateApplicability =
+  GovernanceFleet.governanceCurrentValidityDoesNotEstablishApplicability
+
+unifierSensibLawRuntimeDoesNotInventLegalSemantics =
+  GovernanceFleet.governanceRuntimeCannotInventLegalSemantics
+
+unifierSensibLawRepresentationDoesNotCreateLegalAuthority =
+  GovernanceFleet.governanceRepresentationEqualityDoesNotCreateLegalAuthority
+
+unifierSensibLawSnowballCitationDoesNotCreateAuthority =
+  GovernanceFleet.governanceSnowballCitationDoesNotCreateAuthority
+
+unifierSensibLawParetoDirectiveIsNotLegalAuthority =
+  GovernanceFleet.governanceParetoDirectiveIsNotLegalAuthority
+
+unifierSensibLawProviderFailureDoesNotCreateNegativeEvidence =
+  GovernanceFleet.governanceProviderFailureDoesNotMakePropositionFalse
+
+unifierSensibLawExpertProductionPromotesNoAuthority =
+  GovernanceFleet.governanceExpertProductionPromotesNoAuthority
+
+unifierGovernanceFleetDischargedFibresAre584 =
+  GovernanceFleet.governanceFleetDischargedFibresAre584
+
+unifierGovernanceFleetContradictionGapsAre44 =
+  GovernanceFleet.governanceFleetContradictionGapsAre44
+
+unifierGovernanceFleetFormalGapsAre58 =
+  GovernanceFleet.governanceFleetFormalGapsAre58
+
+unifierGovernanceFleetSpectralLabelsDoNotIdentifyTheoremOwners =
+  GovernanceFleet.governanceFleetSpectralLabelsDoNotIdentifyTheoremOwners

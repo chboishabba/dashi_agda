@@ -1160,12 +1160,59 @@ toeSensibLawParserCandidateDoesNotAuthorizeAdmission :
 toeSensibLawParserCandidateDoesNotAuthorizeAdmission =
   ComplianceTOE.sensibLawParserCandidateDoesNotAuthorizeAdmission
 
-toeSensibLawOfficialSurfaceDoesNotRecoverFineLegalState :
-  ComplianceTOE.OfficialLegalSurfaceRecoversFineState → ⊥
-toeSensibLawOfficialSurfaceDoesNotRecoverFineLegalState =
-  ComplianceTOE.sensibLawOfficialSurfaceDoesNotRecoverFineLegalState
+toeSelected3BSingleActionProducerStillUninhabited :
+  Kernel27TOE.SingleProducer.actualSingleProducerInhabitedHere
+    Kernel27TOE.singleProducerBoundary ≡ false
+toeSelected3BSingleActionProducerStillUninhabited =
+  Kernel27TOE.singleActionProducerStillUninhabited
 
-toeSensibLawLegalityAloneDoesNotCreateLegitimacy :
-  ComplianceTOE.LegalOnlyCreatesLegitimacy → ⊥
-toeSensibLawLegalityAloneDoesNotCreateLegitimacy =
-  ComplianceTOE.sensibLawLegalityAloneDoesNotCreateLegitimacy
+
+------------------------------------------------------------------------
+-- Current-master SensibLaw governance / fleet target normalization.
+------------------------------------------------------------------------
+
+import DASHI.Unified.SensibLawGovernanceFleetTOEExact as GovernanceFleet
+
+toeSensibLawGovernanceFleetReceipt :
+  GovernanceFleet.SensibLawGovernanceFleetTOEReceipt
+toeSensibLawGovernanceFleetReceipt =
+  GovernanceFleet.canonicalSensibLawGovernanceFleetTOEReceipt
+
+toeSensibLawSemanticAuthorityRemainsClosed =
+  GovernanceFleet.governanceSemanticAllAuthorityStillClosed
+
+toeSensibLawCandidateSourceDoesNotCreateAuthority =
+  GovernanceFleet.governanceCandidateSourceDoesNotCloseAuthority
+
+toeSensibLawCurrentValidityDoesNotCreateApplicability =
+  GovernanceFleet.governanceCurrentValidityDoesNotEstablishApplicability
+
+toeSensibLawRuntimeDoesNotInventLegalSemantics =
+  GovernanceFleet.governanceRuntimeCannotInventLegalSemantics
+
+toeSensibLawRepresentationDoesNotCreateLegalAuthority =
+  GovernanceFleet.governanceRepresentationEqualityDoesNotCreateLegalAuthority
+
+toeSensibLawSnowballCitationDoesNotCreateAuthority =
+  GovernanceFleet.governanceSnowballCitationDoesNotCreateAuthority
+
+toeSensibLawParetoDirectiveIsNotLegalAuthority =
+  GovernanceFleet.governanceParetoDirectiveIsNotLegalAuthority
+
+toeSensibLawProviderFailureDoesNotCreateNegativeEvidence =
+  GovernanceFleet.governanceProviderFailureDoesNotMakePropositionFalse
+
+toeSensibLawExpertProductionPromotesNoAuthority =
+  GovernanceFleet.governanceExpertProductionPromotesNoAuthority
+
+toeGovernanceFleetDischargedFibresAre584 =
+  GovernanceFleet.governanceFleetDischargedFibresAre584
+
+toeGovernanceFleetContradictionGapsAre44 =
+  GovernanceFleet.governanceFleetContradictionGapsAre44
+
+toeGovernanceFleetFormalGapsAre58 =
+  GovernanceFleet.governanceFleetFormalGapsAre58
+
+toeGovernanceFleetSpectralLabelsDoNotIdentifyTheoremOwners =
+  GovernanceFleet.governanceFleetSpectralLabelsDoNotIdentifyTheoremOwners
