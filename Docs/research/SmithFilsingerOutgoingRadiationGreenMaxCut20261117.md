@@ -76,8 +76,8 @@ loss of flux.
 
 Local exact arithmetic:
 - Prior reduced layer/Hall and tangential Maxwell tests: 32/32 PASS
-- New outgoing-radiation/Hall/source-sheet + F15 source-off tests: 9/9 PASS
-- Combined suite: 41/41 PASS using pytest/SymPy 1.14.0.
+- New outgoing-radiation/Hall/source-sheet + F15 source-off/evanescence tests: 11/11 PASS
+- Combined suite: 43/43 PASS using pytest/SymPy 1.14.0.
 
 Committed files:
 - scripts/smith_filsinger_radiation_green_sympy.py
@@ -126,3 +126,10 @@ High-alpha follow-on:
 6. Only after such evidence certify restored-cycle F15 100x lower bound.
 
 No ESD edit; same source-attribution discipline as earlier PR rounds.
+
+
+## Strictly evanescent exterior branch, with no fictitious useful power
+
+A second, separately guarded exterior admittance `evanescent_outgoing_admittance` implements a lossless `q_z=+i sqrt(kx²-w² mu eps)` for `kx²>w² mu eps`. A source sheet between two identical evanescent halfspaces has nonzero complex/reactive field, but exact zero **real** outward Poynting flux and zero real time-average sheet work for the tested lossless fixture. The exact zero-thickness sheet Green is `[-2 R Y_ev]^-1`. The frequency/angle cutoff and incorrectly selected propagating/evanescent branches are rejected instead of silently reinterpreted.
+
+Added two tests. Final independent locally executed combined exact SymPy suite: **43/43 PASS** (32 preexisting + 11 radiation/source tests). This is evidence about the defined finite planar mathematical response only: neither zero real work for a pure evanescent mode nor positive propagating source-sheet work says anything about separately measured solar replenishment, a global Earth-ionosphere cavity or the Filsinger electrical terminal. Absorbing complex branch selection and the full k_parallel 2D inverse Fourier transform remain OPEN.
