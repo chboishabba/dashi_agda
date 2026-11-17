@@ -51,6 +51,23 @@ voltages=[sum(np.interp(k,curve[:,1][::-1],curve[:,0][::-1])
 p,j=piecewise_max(np.asarray(knots),np.asarray(voltages))
 chk("series piecewise maximum same P for identical",abs(p-P2)<1e-7)
 chk("series maximum current one half Jsc",abs(j-Jsc[0]/2)<1e-7)
+# Independent unequal-junction series-current negative control:
+# a 2T string must current-match, while 4T can extract at independent MPP.
+sourceJ=np.array([21.,24.,29.,31.])
+sourceVoc=np.array([1.2,1.1,.9,.8])
+unequal=[np.column_stack([np.linspace(0,v,21),
+    j*(1-np.linspace(0,v,21)/v)]) for j,v in zip(sourceJ,sourceVoc)]
+unequal4=float(sum(j*v/4 for j,v in zip(sourceJ,sourceVoc)))
+cap=float(min(sourceJ))
+knots2=sorted(set([0.,cap]+[float(c) for iv in unequal
+                         for c in iv[:,1] if 0<=c<=cap]))
+volts2=[sum(np.interp(k,iv[:,1][::-1],iv[:,0][::-1])
+        for iv in unequal) for k in knots2]
+unequal2,atI=piecewise_max(np.asarray(knots2),np.asarray(volts2))
+chk("unequal 2T current matching costs power",
+    abs(unequal4-25.625)<1e-10 and
+    abs(unequal2-25.02860693940963)<1e-9 and unequal2<unequal4)
+
 print("PASS",len(checks),"synthetic tests; gross W/m2",P4,
       "net W/m2",P4*.97-2,
       "synthetic net efficiency %",100*(P4*.97-2)/600)
