@@ -52,7 +52,7 @@ record EffectiveHaarApproximation (Sphere : Set) : Set₁ where
     proj₂ (Seq.absolute⇒isConvergent (absoluteDyadicTelescope f))
 
   completedIntegralUnique : ∀ f {candidate : B.ℝ} →
-    Bridge.BishopConvergesTo
+    Seq._ConvergesTo_
       (Seq.SeriesOf (difference f)) candidate →
     B._≃_ (completedIntegral f) candidate
   completedIntegralUnique f candidateConverges =
