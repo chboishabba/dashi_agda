@@ -7,6 +7,10 @@ MODE="${1:---full}"
 case "$MODE" in --full|--python-only) ;; *) echo "usage: $0 [--full|--python-only]" >&2; exit 2 ;; esac
 command -v git >/dev/null
 command -v python3 >/dev/null
+# Delete any earlier success marker BEFORE a dirty-checkout or missing-git failure.
+RECEIPT_DIR="${SMITH_FILSINGER_RECEIPT_DIR:-$ROOT/.filsinger-acceptance}"
+mkdir -p "$RECEIPT_DIR"
+rm -f "$RECEIPT_DIR/acceptance-pass.txt"
 HEAD="$(git rev-parse --verify HEAD)"
 # Reject changed tracked inputs but ignore generated Agda caches.
 if ! git diff --quiet HEAD -- .; then
@@ -18,9 +22,6 @@ if git ls-files --others --exclude-standard -- DASHI scripts .github/workflows |
   echo "REJECT: untracked source, proof or workflow inputs" >&2
   exit 2
 fi
-RECEIPT_DIR="${SMITH_FILSINGER_RECEIPT_DIR:-$ROOT/.filsinger-acceptance}"
-mkdir -p "$RECEIPT_DIR"
-rm -f "$RECEIPT_DIR/acceptance-pass.txt"
 LOG="$RECEIPT_DIR/acceptance.log"
 : > "$LOG"
 printf "commit=%s\nmode=%s\n" "$HEAD" "$MODE" | tee -a "$LOG"
