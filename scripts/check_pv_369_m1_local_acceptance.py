@@ -33,6 +33,8 @@ AGDA = (
     "DASHI/Physics/Photovoltaic/PV369IntervalRobustAcceptanceExact.agda",
     "DASHI/Physics/Photovoltaic/PV369UnsampledIVPowerEnvelopeExact.agda",
     "DASHI/Physics/Photovoltaic/Atomic369BasisTransportNoFreeGainExact.agda",
+    "DASHI/Physics/Photovoltaic/PVGreen68FourTerminalPublishedSourceExact.agda",
+    "DASHI/Physics/Photovoltaic/PV369P2CoulombSolarNonPromotionExact.agda",
     "DASHI/Unified/PVPrimaryTOESpliceExact.agda",
 )
 
