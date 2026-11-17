@@ -104,8 +104,8 @@ class SignedWorkIntervalTests(unittest.TestCase):
         record = self.meta["ports"]["natural_outgoing"]
         path = self.root / record["file"]
         path.write_text(
-            "time_s,voltage_V,current_A,voltage_error_V,current_error_A\\n"
-            "0,7,1,0,0\\n1,7,1,0,0\\n", encoding="utf-8"
+            "time_s,voltage_V,current_A,voltage_error_V,current_error_A\n"
+            "0,7,1,0,0\n1,7,1,0,0\n", encoding="utf-8"
         )
         record["sha256"] = hashlib.sha256(path.read_bytes()).hexdigest()
         receipt = calculate(self.meta, self.root)
