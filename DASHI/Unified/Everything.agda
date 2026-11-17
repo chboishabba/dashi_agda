@@ -47,11 +47,7 @@ import DASHI.Unified.GovernedLegalWorkflowComplianceTOEExact
 import DASHI.Unified.GovernedLegalWorkflowComplianceTOEValidation
 import DASHI.Physics.Foundations.CMP119CosmologyLatestParetoFrontierExact as CMP119Preferred
 import DASHI.Unified.PNFHyperfabric as PNFHyperfabric
-import DASHI.Unified.PNFSourceBoundaryTOEExact as PNFSource
-import DASHI.Unified.PNFDistilledNonPromotionTOEExact as PNFDistilled
-import DASHI.Unified.PNFDistilledNonPromotionTOEValidation
-import DASHI.Unified.SCALEEvidenceReviewTOEConvergenceExact as SCALEReview
-import DASHI.Unified.SCALEEvidenceReviewTOEConvergenceValidation
+import DASHI.Unified.Relate369HyperfabricPantsTOEExact as Relate369PantsTOE
 import DASHI.Unified.Physics as Physics
 import DASHI.Unified.NavierStokesBM2TOEConvergenceExact as NSBM2TOE
 import DASHI.Unified.NavierStokesBM2TOEConvergenceValidation
@@ -208,108 +204,12 @@ import DASHI.Physics.Foundations.Round5FullBoundary as Round5
         "Every unified facade object exposes observation, projection, carrier/role vector, residual, proof posture, invariant strength, and the required formal parent projection bundle. The bundle includes modular-j, Hecke, Bott, Kolmogorov, category, quotient, lattice, and operator projections. Literal authority is lane-specific; every formal projection has externalPromotion = false. The cross-scale matter/physics parent records the atoms-to-stellar composition ladder as structural and receipt-gated, with quantitative solar-style counterfactual prediction still blocked. Round Five adds a fail-closed finite boundary for constants, dimension, atomic and nuclear structure, causal cosmological observation, and the GR-QFT emergence cutsets without promoting terminal unification."
 
 
-------------------------------------------------------------------------
--- Joint Yang-Mills Balaban/R559 TOE surface.
-------------------------------------------------------------------------
+relate369HyperfabricPantsTOEReceipt :
+  Relate369PantsTOE.Relate369HyperfabricPantsTOEReceipt
+relate369HyperfabricPantsTOEReceipt =
+  Relate369PantsTOE.canonicalRelate369HyperfabricPantsTOEReceipt
 
-import DASHI.Unified.BalabanR559TOEMaxCutExact as BalabanR559TOE
-
-unifiedBalabanR559MaxCutReceipt :
-  BalabanR559TOE.BalabanR559TOEMaxCutReceipt
-unifiedBalabanR559MaxCutReceipt =
-  BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-unifiedBalabanR559Gate4UnresolvedCount : ℕ
-unifiedBalabanR559Gate4UnresolvedCount =
-  BalabanR559TOE.gate4UnresolvedCount
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-unifiedBalabanR559Gate4UnresolvedCountIs58 :
-  unifiedBalabanR559Gate4UnresolvedCount ≡ 58
-unifiedBalabanR559Gate4UnresolvedCountIs58 =
-  BalabanR559TOE.gate4UnresolvedCountIs58
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-unifiedBalabanR559Gate4DefinitionLevel : ProofLevel
-unifiedBalabanR559Gate4DefinitionLevel =
-  BalabanR559TOE.gate4DefinitionLevel
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-unifiedBalabanR559Gate4InhabitantsLevel : ProofLevel
-unifiedBalabanR559Gate4InhabitantsLevel =
-  BalabanR559TOE.gate4InhabitantsLevel
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-unifiedBalabanScaleTransferNonPromotion :
-  BalabanR559TOE.ScaleTransferPromotion → ⊥
-unifiedBalabanScaleTransferNonPromotion =
-  BalabanR559TOE.scaleTransferPromotionEliminator
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-------------------------------------------------------------------------
--- R559 / Ibrahim / fleet-58 / generic-hyperfabric TOE convergence.
-------------------------------------------------------------------------
-
-import DASHI.Unified.R559IbrahimFleetHyperfabricTOEExact as FleetHyperTOE
-
-unifiedR559IbrahimFleetHyperfabricReceipt :
-  FleetHyperTOE.R559IbrahimFleetHyperfabricTOEReceipt
-unifiedR559IbrahimFleetHyperfabricReceipt =
-  FleetHyperTOE.canonicalR559IbrahimFleetHyperfabricTOEReceipt
-
-unifiedFleetFormalGapsAre58 :
-  FleetHyperTOE.fleetFormalGaps ≡ 58
-unifiedFleetFormalGapsAre58 =
-  FleetHyperTOE.fleetFormalGapsAre58
-
-------------------------------------------------------------------------
--- Implement-A-to-D terminal unified validation.
-------------------------------------------------------------------------
-
-import DASHI.Unified.YMImplementAToDTOEMaxCutExact as YMAD
-import DASHI.Unified.YMImplementAToDTOEMaxCutValidation
-
-unifiedYMImplementAToDMaxCutReceipt :
-  YMAD.YMImplementAToDTOEMaxCutReceipt
-unifiedYMImplementAToDMaxCutReceipt =
-  YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
-
-
-------------------------------------------------------------------------
--- Live Gate-4 frontier and fleet-target selection.
-------------------------------------------------------------------------
-
-unifiedCurrentGate4FrontierLedgerLevel : ProofLevel
-unifiedCurrentGate4FrontierLedgerLevel =
-  FleetHyperTOE.currentGate4FrontierLedgerLevel
-
-unifiedCurrentGate4ClusteringToTransferGapLevel : ProofLevel
-unifiedCurrentGate4ClusteringToTransferGapLevel =
-  FleetHyperTOE.currentGate4ClusteringToTransferGapLevel
-
-unifiedFleetFormalGapTargetSelected : Bool
-unifiedFleetFormalGapTargetSelected =
-  FleetHyperTOE.fleetFormalGapTargetSelected
-
-unifiedHistoricalGate4CountSelectedAsFleetTarget : Bool
-unifiedHistoricalGate4CountSelectedAsFleetTarget =
-  FleetHyperTOE.historicalGate4CountSelectedAsFleetTarget
-
-unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
-  FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
-unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
-  FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
-
-------------------------------------------------------------------------
--- Typed continuum no-go is reused from BalabanRGTOERegression.
-------------------------------------------------------------------------
-
-unifiedBalabanContinuumLimitPromotionImpossible :
-  BalabanRGTOE.BalabanContinuumLimitPromotion → ⊥
-unifiedBalabanContinuumLimitPromotionImpossible =
-  BalabanRGTOE.balabanContinuumLimitPromotionImpossible
-
-unifiedDepthContinuumLimitPromotionImpossible :
-  BalabanRGTOE.DepthContinuumLimitPromotion → ⊥
-unifiedDepthContinuumLimitPromotionImpossible =
-  BalabanRGTOE.depthContinuumLimitPromotionImpossible
+relate369HyperfabricPantsTOEZKPFrame :
+  Relate369PantsTOE.Relate369HyperfabricPantsTOEZKPFrame
+relate369HyperfabricPantsTOEZKPFrame =
+  Relate369PantsTOE.canonicalRelate369HyperfabricPantsTOEZKPFrame
