@@ -35,6 +35,9 @@ targets=(
   DASHI/Physics/YangMills/YMClayOriginalRationalSU2BishopUnitaryWeldExact.agda
   DASHI/Physics/YangMills/YMClaySU2PochhammerMomentNumeratorsExact.agda
   DASHI/Physics/YangMills/YMClayDyadicCharacterPairCancellationExact.agda
+  DASHI/Physics/YangMills/YMClayRationalS3StereographicNodeExact.agda
+  DASHI/Physics/YangMills/YMClayRationalS3StereographicConcreteExact.agda
+  DASHI/Physics/YangMills/YMClayRationalS3PositiveWeightedNodesExact.agda
   DASHI/Physics/YangMills/YMClayNativeSixPlaneGaugeSameSourceExact.agda
 )
 
@@ -56,6 +59,9 @@ python3 scripts/check_ym_wilson_L1_commutator_20261117.py
 python3 scripts/check_ym_real_sympy_fullchain_20261117.py
 python3 scripts/check_ym_universal_cubature_producer_20261117.py --degree 9
 python3 scripts/check_ym_dyadic_character_bitpair_20261117.py --max-power 8
+python3 scripts/check_ym_s3_stereographic_rational_20261117.py
+python3 scripts/check_ym_s3_stereographic_invariance_20261117.py
+python3 scripts/check_ym_s3_exact_rational_orbit_designs_20261117.py
 python3 scripts/check_ym_wilson_all_cutoffs_interval_20261117.py
 python3 scripts/check_ym_naive_cylinder_negative_control_20261117.py
 python3 scripts/check_ym_su2_o4_invariance_20261117.py
