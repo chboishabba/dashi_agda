@@ -43,14 +43,17 @@ def curl_matrix(n):
         -S.Integer(1) if j==i+1 else S.Integer(0)))
 
 
-def generator(n=2, material=None, curl=None):
+def generator(n=2, material=None, curl=None, load_conductance=0):
     m=(material or LorentzMaterial()).validated()
     C=curl if curl is not None else curl_matrix(n)
     if C.shape!=(n,n):raise ValueError('curl matrix dimensions')
+    load_conductance=S.sympify(load_conductance)
+    if load_conductance.is_nonnegative is not True:
+        raise ValueError('nonnegative separately metered useful load required')
     ident=S.eye(n);zero=S.zeros(n)
     # state z=(E,H,P,V), four n-vectors; J enters E-equation only.
     A=S.BlockMatrix([
-        [-m.sigma/m.eps*ident, C/m.eps, zero, -ident/m.eps],
+        [-(m.sigma+load_conductance)/m.eps*ident, C/m.eps, zero, -ident/m.eps],
         [-C.T/m.mu, zero, zero, zero],
         [zero, zero, zero, ident],
         [m.alpha*ident, zero, -m.omega0sq*ident, -m.gamma*ident],
@@ -65,7 +68,7 @@ def energy(z,mass):
     return S.expand((z.T*mass*z)[0]/2)
 
 
-def exact_midpoint(z,jn,jc,dt,A,B,mass):
+def exact_midpoint(z,jn,jc,dt,A,B,mass,load_conductance=0):
     if not S.sympify(dt).is_positive:raise ValueError('dt>0 required')
     n=B.cols
     if any(v.shape!=(n,1) for v in (jn,jc)):
@@ -76,17 +79,23 @@ def exact_midpoint(z,jn,jc,dt,A,B,mass):
     z1=2*mid-z
     e=mid[:n,:];v=mid[3*n:4*n,:]
     eps=mass[0,0];alpha=1/mass[3*n,3*n]
-    sigma=S.simplify(-A[0,0]*eps)
+    load_conductance=S.sympify(load_conductance)
+    if load_conductance.is_nonnegative is not True:
+        raise ValueError('nonnegative separate useful load required')
+    sigma=S.simplify(-A[0,0]*eps-load_conductance)
+    if sigma.is_nonnegative is not True:
+        raise ValueError('inconsistent useful-load decomposition')
     gamma=S.simplify(-A[3*n,3*n])
     natural=S.expand(dt*(e.T*jn)[0])
     controller=S.expand(dt*(e.T*jc)[0])
     ohmic=S.expand(dt*sigma*(e.T*e)[0])
     relaxation=S.expand(dt*gamma/alpha*(v.T*v)[0])
+    useful_load=S.expand(dt*load_conductance*(e.T*e)[0])
     change=S.expand(energy(z1,mass)-energy(z,mass))
-    residual=S.factor(change-natural-controller+ohmic+relaxation)
+    residual=S.factor(change-natural-controller+ohmic+relaxation+useful_load)
     return dict(z=z1,mid=mid,energy_change=change,natural_work=natural,
                 controller_work=controller,ohmic=ohmic,
-                relaxation=relaxation,residual=residual)
+                relaxation=relaxation,useful_load=useful_load,residual=residual)
 
 
 def susceptibility_laplace(s,m=None):
