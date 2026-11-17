@@ -415,3 +415,65 @@ sourceCenteredC3TwoChannelIntertwines (directed s f r) zeroTotal =
 -- scoring law. Whether the original trained states actually satisfy
 -- zero-DC and whether quantized future-history transitions commute
 -- still require source evidence and a separate formal weld.
+
+
+------------------------------------------------------------------------
+-- P0 stronger consumer reduction: SAME DC across TWO expert candidates
+-- suffices for exact RELATIVE score preservation. DC need NOT be zero.
+--
+-- Original HistoryOrbitMoE shares one learned directed head w across
+-- experts. The per-expert DC contribution wr*D_e is then common
+-- when D_e=D_j, and cancels from score differences/softmax ratios.
+-- The feature triple itself need not be reconstructible from two
+-- channels without the missing DC; this is strictly a selected
+-- router-score consumer theorem.
+------------------------------------------------------------------------
+
+twoChannelRelativeScore :
+  (ws wf wr : ℤ) →
+  (ℤ × ℤ) → (ℤ × ℤ) → ℤ
+twoChannelRelativeScore ws wf wr (si , fi) (sj , fj) =
+  (((ws - wr) * si) + ((wf - wr) * fi))
+  - (((ws - wr) * sj) + ((wf - wr) * fj))
+
+rawCommonDCCancels :
+  (ws wf wr common si fi sj fj : ℤ) →
+  (twoDirectedWeightedScoreWithTotal
+      ws wf wr common (si , fi)
+  - twoDirectedWeightedScoreWithTotal
+      ws wf wr common (sj , fj))
+  ≡ twoChannelRelativeScore ws wf wr
+      (si , fi) (sj , fj)
+rawCommonDCCancels ws wf wr common si fi sj fj =
+  solve 8
+    (λ ws wf wr common si fi sj fj →
+      ((((((ws :- wr) :* si) :+ ((wf :- wr) :* fi))
+        :+ (wr :* common))
+       :- (((((ws :- wr) :* sj) :+ ((wf :- wr) :* fj))
+        :+ (wr :* common)))
+      := (((((ws :- wr) :* si) :+ ((wf :- wr) :* fi))
+        :- (((ws :- wr) :* sj) :+ ((wf :- wr) :* fj)))))
+    refl ws wf wr common si fi sj fj
+
+originalSameDCRelativeScoreFactors :
+  (ws wf wr : ℤ) (di dj : Directed) →
+  originalDirectedTotal di ≡ originalDirectedTotal dj →
+  (directedWeightedScore ws wf wr di
+    - directedWeightedScore ws wf wr dj)
+  ≡ twoChannelRelativeScore ws wf wr
+      (encodeDirectedTwo di) (encodeDirectedTwo dj)
+originalSameDCRelativeScoreFactors ws wf wr
+  (directed si fi ri) (directed sj fj rj) sameDC
+  rewrite weightedScoreFactorsThroughTwoPlusTotal
+            ws wf wr (directed si fi ri)
+        | weightedScoreFactorsThroughTwoPlusTotal
+            ws wf wr (directed sj fj rj)
+        | sameDC =
+  rawCommonDCCancels
+    ws wf wr (originalDirectedTotal (directed sj fj rj))
+    si fi sj fj
+
+-- Operational hypothesis still OPEN: original expert histories
+-- must have identical DC sums (or the shared activation has
+-- zero DC) on the source states being routed. Shared learned
+-- weights alone DO NOT imply D_e identical across experts.
