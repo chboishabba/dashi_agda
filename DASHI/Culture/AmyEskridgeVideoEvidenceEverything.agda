@@ -49,3 +49,7 @@ import DASHI.Culture.AmyEskridgeVideoHistoricalPrimaryControlsExact
 import DASHI.Culture.AmyEskridgeVideoDIAFullInventoryExact
 import DASHI.Culture.AmyEskridgeVideoHAL5AllSlidesExact
 import DASHI.Culture.AmyEskridgeVideoSurroundingSourceAtlasExact
+
+-- Same-object typed dispatch from the source registries to pre-existing
+-- original-paper, superconducting-test, Army administrative and slide owners.
+import DASHI.Culture.AmyEskridgeVideoSurroundingProducerWeldExact
