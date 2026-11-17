@@ -966,3 +966,75 @@ bitwise equal output weights or any
 finite-precision source contract; it is
 a downstream analytical theorem contingent
 on the admitted envelopes.
+
+
+### Round 2c: exact declared arithmetic plan and model-level cost firewall
+
+At d=384, there are N=128 original 3-coordinate
+triads per hidden activation. For E candidate experts
+the source directed-channel scalar expression uses
+per triad 12E multiplications and 8E additions
+(3 bilinear 3-product/2-add channels, followed by
+3-product/2-add weighted head).
+The shared-head fused direct score uses
+9+3E multiplications and 6+2E additions
+(three 3-product/2-add shared K coefficients,
+then one 3-product/2-add history dot per expert).
+At the **default E=4** source configuration:
+
+- Original expression: 6,144 scalar multiplications,
+  4,096 additions; total 10,240 elementary operations
+  per d=384 token under the disclosed plan.
+- Fused expression: 2,688 multiplications,
+  1,792 additions; total 4,480 operations.
+- Plan savings: 3,456 scalar multiplications,
+  2,304 additions; 5,760 elementary operations.
+- Directed correlation buffer if materialized:
+  `[B,E,d]` float32 = 6,144 bytes per batch item.
+  Shared K coefficient vector `[B,d]`
+  float32 = 1,536 bytes per batch item.
+  This is 4.5 KiB less *in this one hypothetical
+  pair of materialized intermediates*, not a
+  measured device peak-memory improvement.
+
+For an honest runtime model, the fused path only
+wins when total source costs, compilation,
+kernel launches, memory traffic, gradient
+recomputation and native device utilization
+make
+
+    T_fused = T_precompute + T_expert_dots + T_overheads
+          < T_original_directed.
+
+It may lose for E=1 or when the original framework
+already combines directed channels and head weights
+into an equivalent kernel. No timing observation
+or source scalar instruction trace was obtained.
+
+The R4 router still evaluates the baseline
+C2 expert-history `abs(h_e)`, expert-specific
+biases, selected softmax, C2 orientation,
+expert FFNs, history transitions, cap and
+full next-layer state. Source independent
+`phase_x` q-gate (mixed-null) can itself
+be computed once from the shared activation
+per sample, but its threshold stability under
+quantization is an independent prerequisite.
+
+**Gradient/learning interpretation:** the
+shared unary x contributions of C2 source
+and every R4 residual are exact null
+directions for the *selection/softmax
+consumer* in real arithmetic. That is
+distinct from the separately retained
+expert-history features, which can change
+which expert is selected, and from
+learned coherent/mixed C3 directed features.
+Only the latter provide immediate
+x–history conditional interaction in
+this selected route. Effective routing
+rank can be below d if features are
+further dependent; d is an upper
+bound on the effective active first-order
+linear coefficients, not a confirmed
+rank or a measured training result.
