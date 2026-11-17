@@ -64,6 +64,26 @@ class NativeTest(unittest.TestCase):
             root=Path(tmp);m=fixture(root,line(),line())
             m['before'][0]['capture_utc']='2026-11-01T09:00:00+10:00'
             with self.assertRaises(native.AuditError):native.audit(m,root)
+    def test_both_maximum_and_minimum_losses_count_for_same_station(self):
+        with TemporaryDirectory() as tmp:
+            root=Path(tmp)
+            manifest={'schema':'dashi.bom.cdo.native_revision.v1','before':[],'after':[]}
+            for label, date_day, product in (('Maximum',1,'IDCJAC0010'),('Minimum',2,'IDCJAC0011')):
+                h=(f'Product code,Bureau of Meteorology station number,Year,Month,Day,'
+                   f'{label} temperature (Degree C),Days of accumulation of {label.lower()} temperature,Quality\n')
+                for snapshot in ('before','after'):
+                    name=f'{snapshot}_{product}.csv'
+                    csv_data=(h+f'{product},066062,1905,01,{date_day},'
+                              + ('20.1' if snapshot=='before' else '')+',1,Y\n').encode()
+                    (root/name).write_bytes(csv_data)
+                    manifest[snapshot].append({'path':name,
+                      'sha256':sha256(csv_data).hexdigest(),
+                      'capture_utc':('2026-05-19T09:00:00+10:00' if snapshot=='before'
+                                     else '2026-10-30T09:00:00+10:00')})
+            out=native.audit(manifest,root)
+            self.assertEqual(out['pre2000_observed_values_lost_by_station'],{'066062':2})
+            self.assertEqual(out['pre2000_observed_values_lost_by_station_product'],
+                             {'066062:tmax':1,'066062:tmin':1})
     def test_accumulation_change(self):
         self.assertEqual(self.run_native(line(),line(accum='2'))['counts'],{'accumulation_changed':1})
 
