@@ -34,6 +34,7 @@ import DASHI.Physics.Gravity.KSW668F8CartesianTTToOriginalRadialSourceJetsExact 
 import DASHI.Physics.Gravity.KSW668F8AugmentedOriginRadialFVIntertwinerExact as OriginAugmentedFV
 import DASHI.Physics.Gravity.KSW668F8SSPRK3RadialLiftNaturalityExact as SSPRK3Lift
 import DASHI.Physics.Gravity.KSW668F8MovingSBP2SATBoundaryEnergyExact as SBP2SATEnergy
+import DASHI.Physics.Gravity.KSW668F8WarpWeightedSBP2CommutatorExact as WarpWeightCommutator
 import DASHI.Physics.Gravity.KSW668F8AugmentedOriginRadialFVIntertwinerExact as AugmentedOriginRadialFV
 import DASHI.Physics.Gravity.KSW668F8WeakIsraelSATSliceExact as Wall
 import DASHI.Physics.Gravity.KSW668F8WeakIsraelSATGeneralPolynomialTransportExact as GeneralSAT
