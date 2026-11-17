@@ -40,6 +40,7 @@ def bound_receipt(data,unc):
         len(spectrum_hash)!=64 or any(c not in "0123456789abcdef" for c in spectrum_hash)
     ) or spectrum_hash not in input_hashes.values():
         raise ValueError("source spectrum SHA256 not authenticated against original input manifest")
+    temperature=number(source["temperature_K"],"sample temperature K",1e-12)
     solar=number(data["incident_solar_W_m2"],"incident",1e-12)
     per=data.get("four_terminal_per_junction")
     if not isinstance(per,list) or len(per)<2 or len(per)>5:
@@ -85,7 +86,7 @@ def bound_receipt(data,unc):
       "declared_source":source["source_document"],
       "input_sha256":source["input_sha256"],
       "incident_spectrum_sha256":source["incident_spectrum_sha256"],
-      "temperature_K":source.get("temperature_K"),
+      "temperature_K":temperature,
       "solar_lower_W_m2":solar*(1-solarErr),
       "solar_upper_W_m2":solar*(1+solarErr),
       "net_lower_W_m2":lowerNet,"net_upper_W_m2":upperNet,
