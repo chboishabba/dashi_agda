@@ -396,4 +396,30 @@ The preceding smooth q=0, lead=0 candidate has only 0.375840 V conservative volt
 
 **Still OPEN at strong scope:** `v2CDRealSwitchingEnergyMapAndThermalFlow` (actual Eon/Eoff, Rds(T), bus, gate, deadtime, ESR, junction thermal transients); `v2ABActualCurrentLoopTrackingAndStationarity`; `v2GSourceBoundedGloballyRobustPhysicalPareto`; `v2HOriginal45WIdentifiabilityAndIntervention` (source-selected topology, torque, independent input/output, aux, loss/storage intervention); full **Ω** physical closure, pinned Agda 2.9 kernel and the **16 original P0–P4 strict gates**. Cable/Maxwell propagation remains a conditional high-frequency refinement rather than primary steelman owner.
 
-**Verification:** 33 new regression tests and **201/201** integrated A–H/Ω local Python tests passed; legacy historical PWM module not included. No Agda compiler, GitHub CI, original hardware measurements or physical converter validation. The new source/tests and 12 previously uncommitted converter/robust-Pareto files remain locally packaged; **do not represent them as committed**. The canonical report and roadmap are GitHub documentation only this round.
+**Verification:** 33 new regression tests and **201/201** integrated A–H/Ω local Python tests passed; legacy historical PWM module not included. No Agda compiler, GitHub CI, original hardware measurements or physical converter validation. **Repository status revised 17 November 2026:** these source/test/receipt files were subsequently committed as part of 21 files at `f0a9d67f969b391f73516b59b8243fd21e1ef4c7`, alongside the factorial intervention theorem. Local test replay is not GitHub CI or Agda kernel acceptance.
+
+
+## 2026-11-17 — whole drivetrain load × recovery factorial maximum cut (E×F/H/Ω)
+
+**Proof and runnable source:** [MadScience369V2OmegaLoadInterventionMaxCut20261117.md](MadScience369V2OmegaLoadInterventionMaxCut20261117.md), `scripts/v2_omega_load_intervention_weld.py`, `tests/test_v2_omega_load_intervention_weld.py`, and `scripts/check_v2_omega_load_intervention_weld.sh`. The original V2 evidence has **not** changed.
+
+**Exact all-state two-ledger weld:** for motor input M, internal shaft transfer S, auxiliary input A, useful electrical load L, other output O, motor/generator losses D_m/D_g and three material/rotor storage rates,
+
+\[
+M=S+D_m+\dot E_m,\quad S+A=L+O+D_g+\dot E_g+\dot E_r,\quad
+M+A=L+O+D_m+D_g+\dot E_m+\dot E_g+\dot E_r.
+\]
+
+The internal shaft S **cancels** and must not be counted as an independent input in addition to M. The executable uses exact rational arithmetic, checks all individual/combined port residuals, nonnegative losses, and tests that transient depletion fails stationary acceptance.
+
+**Fixed electrical-input negative control:** a transparent constructed motor at 286 W electrical input can increase shaft transfer from 200 to 245 W with losses decreasing from 86 to 41 W; generator load then rises by 45 W with unchanged generator loss and other output, and all storage endpoints matched. Therefore `ΔP_motor=0` does **not** imply `ΔP_shaft=0`. The required large motor-efficiency change is hypothetical, not source-observed or suggested as the likely V2 mechanism.
+
+**Factorial interaction theorem:** on four constructed loaded/unloaded × ordinary/enhanced-recovery arms, `I[Y]=Y_11−Y_10−Y_01+Y_00`, the *complete* signed energy interaction closes exactly. In the witness `I[P_load]=+7 W`, `I[D_generator]=−7 W`, every other interaction vanishes. Controller auxiliary power is explicitly present on each recovery arm and cancels from that specific interaction. This does not prove that recovery reduces shaft torque; torque and motor efficiency must be tested as independent effects.
+
+**Identifiability and adversarial controls:** five different exact energy-consistent source-independent worlds reproduce unchanged displayed 286 W input and new 45 W output: generator loss suppression, increased shaft transfer plus motor loss reduction, extra auxiliary input, negative rotor/storage rate, or displaced other output. Whole electrical balance supplies rank 1 of 5 unknown deltas when shaft is included, leaving nullity 4. Independently measuring auxiliary, storage, other output and shaft transfer yields rank 5, with total losses inferred as residual. A duplicate meter adds no rank. Four-arm uncertainty bounds are **deterministic worst-case** and require synchronized, predeclared, stable measurements. The original reel provides none of these independent series.
+
+**Named restricted leaf results:** `v2OmegaMotorShaftGeneratorTwoLedgerAllStatesExact`; `v2OmegaLoadedUnloadedConstantInputShaftNonidentifiability`; `v2OmegaFactorialLoadRecoveryInteractionSignedDissipationWeld`; `v2OmegaFiveWorld45WNegativeControls`; `v2OmegaTorqueAndStorageMeasurementRankFive`; `v2OmegaWorstCaseFourArmInteractionUncertainty`.
+
+**Acceptance:** 41 new tests, **242/242 selected integrated local tests PASS** with previous 201 modules; exact Git blob staging and PR commit `f0a9d67f969b391f73516b59b8243fd21e1ef4c7` for 21 prior and current source, tests and compact receipts. The old *legacy PWM* historical donor module is not part of this selected run. Agda pinned kernel and connected-head GitHub Actions: **NOT RUN**.
+
+**Remaining highest-alpha acceptance:** `v2HOriginal45WIdentifiabilityAndIntervention` and `v2EFWholeDrivetrainVariableEfficiencyLoadResponse` demand simultaneous real shaft torque, speed, motor and auxiliary electrical power, other outputs and storage state; `v2CDRealSwitchingEnergyMapAndThermalFlow` demands original converter topology and measured switching losses. `v2GSourceBoundedGloballyRobustPhysicalPareto`, full Ω source-qualified calibration, and all **16 original strict P0–P4 gates remain OPEN**. Cable geometry remains conditional, not a primary steelman tranche.
