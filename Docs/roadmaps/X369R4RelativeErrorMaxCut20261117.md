@@ -248,3 +248,105 @@ selected-history trace. Do not require
 a false exact reconstruction of original
 directed activations, and retain independent
 semantic/face consumer evidence.
+
+
+## Round 4: all original triad blocks → selected softmax/mixture
+
+The source-scoped full six-coordinate R4 fixture
+is now validated across **both original triads**
+and ALL FOUR expert histories, in
+`scripts/check_x369_r4_alltriad_pairwise_sympy.py`.
+The proof scales directly to arbitrary finite
+triad lists by summing the pairwise bounds across
+blocks with the same source phase and shared
+weights. It does not require centred activation
+or equal per-expert DC.
+
+Both source branches retain original
+ordered TopK under the same admitted rational
+1/256 input/history/head/bias errors:
+
+    coherent: original (3,4,13,11), ordered (2,3)
+    mixed:    original (5,2,9,17), ordered (3,2).
+
+The mixed arm is conditioned on its separately
+certified strict source mean-q gate stability.
+For each branch, every selected/unselected pair
+and the selected internal pair satisfy the
+pairwise strict margin; all six independently
+perturbed score differences remain inside
+their source rational intervals.
+
+For the selected pair in these fixtures,
+the exact combined source pairwise
+error bound is
+
+    B_pair = 594441/4194304
+           ≈ 0.141726.
+
+(Note this is the same rational as
+`1188882/8388608`; use the exact
+fraction from the script as source of truth.)
+
+The pairwise error bound gives a tighter
+**direct softmax** certificate. Let
+`delta_i` be the perturbation of the
+selected expert's score. Then
+
+    osc(delta) = max_i(delta_i)-min_i(delta_i)
+               = max_(i,j selected)(delta_i-delta_j)
+               <= max_(i,j selected) B_ij.
+
+Thus
+
+    ||softmax(s+delta)-softmax(s)||_1
+      <= (1/2) max_(i,j in selected) B_ij.
+
+For top2, this is simply `B_pair/2`;
+no absolute logit envelope or common-unary
+error has to be charged. If original
+selected expert outputs have norm <=M
+and do NOT change, the score-only output
+mixture error is bounded by
+`(M/2)*max_selected B_ij`. If source
+FFN outputs also change by <=Y, add Y.
+
+The script now verifies the pairwise
+bound against exact real selected softmax
+and a fixed output-mixture fixture on
+both coherent and mixed branches.
+A local independent SymPy check returned
+
+    coherent: selected softmax L1 ≈0.00164541146
+    mixed:    selected softmax L1 ≈0.00000521769412
+
+both within the source-admitted pairwise
+bound divided by two. The exact numbers
+are mathematical rational+exponential
+fixtures, not source Torch evaluations.
+
+**No forced semantic weld:** independent
+grokking, Sophontic argument and trialectic
+face consumers remain separate. No actual
+checkpoint matrix norms, quantizer provenance,
+bitwise FP parity, device latency or Golden
+kernel acceptance has been asserted.
+
+### New maximum cut
+
+1. Recover the original checkpoint's precision
+   and quantizer error receipts if available,
+   including source `abs(h)` and q-threshold
+   rounding semantics.
+2. Instantiate per-expert, per-triad **pairwise**
+   error intervals from actual active and
+   inactive expert histories.
+3. Certify full ordered TopK + q-gate +
+   selected orientation signs for each step,
+   then conditional softmax and selected
+   FFN/transition Lipschitz bounds.
+4. Reopen inactive histories at the source
+   and propagate the guarded recurrence.
+5. Preserve task-specific semantic/face
+   non-descent and measure original hardware
+   costs separately from exact source algebra.
