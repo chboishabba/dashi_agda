@@ -18,6 +18,7 @@ open import Agda.Builtin.String using (String)
 open import Data.Nat.Base using (ℕ)
 open import Data.List.Base using (List; _∷_; [])
 open import Data.Empty using (⊥)
+open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 import DASHI.Unified.ArithmeticMoonshine as ArithmeticMoonshine
 import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
 import DASHI.Unified.BalabanRGTOEMaxCutValidation
@@ -239,55 +240,62 @@ unifiedBalabanScaleTransferNonPromotion =
   BalabanR559TOE.scaleTransferPromotionEliminator
     BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
+
 ------------------------------------------------------------------------
 -- R559 / Ibrahim / fleet-58 / generic-hyperfabric TOE convergence.
 ------------------------------------------------------------------------
 
 import DASHI.Unified.R559IbrahimFleetHyperfabricTOEExact as FleetHyperTOE
+
 unifiedR559IbrahimFleetHyperfabricReceipt :
   FleetHyperTOE.R559IbrahimFleetHyperfabricTOEReceipt
 unifiedR559IbrahimFleetHyperfabricReceipt =
   FleetHyperTOE.canonicalR559IbrahimFleetHyperfabricTOEReceipt
+
+unifiedYMGate4FormalGapsAre58 :
+  FleetHyperTOE.ymGate4FormalGaps ≡ 58
+unifiedYMGate4FormalGapsAre58 =
+  FleetHyperTOE.ymGate4FormalGapsAre58
+
+unifiedYMGate4PaidReductionLevel : ProofLevel
+unifiedYMGate4PaidReductionLevel =
+  FleetHyperTOE.ymGate4PaidReductionLevel
+
+unifiedYMGate4InhabitantsLevel : ProofLevel
+unifiedYMGate4InhabitantsLevel =
+  FleetHyperTOE.ymGate4InhabitantsLevel
+
+unifiedFleet58DoesNotIdentifyYMGate4 :
+  FleetHyperTOE.Fleet58EqualsYMGate4SameObject → ⊥
+unifiedFleet58DoesNotIdentifyYMGate4 =
+  FleetHyperTOE.fleet58CardinalityDoesNotProveYMGate4Identity
 
 unifiedFleetFormalGapsAre58 :
   FleetHyperTOE.fleetFormalGaps ≡ 58
 unifiedFleetFormalGapsAre58 =
   FleetHyperTOE.fleetFormalGapsAre58
 
-unifiedFleetGate4CountAgreement :
-  FleetHyperTOE.fleetFormalGaps
-  ≡ BalabanR559TOE.gate4UnresolvedCount
-      BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-unifiedFleetGate4CountAgreement =
-  FleetHyperTOE.fleetFormalGapCountEqualsGate4Count
-
-
 ------------------------------------------------------------------------
--- Typed Balaban continuum no-go and live Gate-4 frontier.
+-- Implement-A-to-D terminal unified validation.
 ------------------------------------------------------------------------
 
-unifiedBalabanContinuumPromotionImpossible :
-  FleetHyperTOE.BalabanContinuumPromotion → ⊥
-unifiedBalabanContinuumPromotionImpossible =
-  FleetHyperTOE.toeBalabanContinuumPromotionImpossible
+import DASHI.Unified.YMImplementAToDTOEMaxCutExact as YMAD
+import DASHI.Unified.YMImplementAToDTOEMaxCutValidation
 
-unifiedDepthContinuumPromotionImpossible :
-  FleetHyperTOE.DepthContinuumPromotion → ⊥
-unifiedDepthContinuumPromotionImpossible =
-  FleetHyperTOE.toeDepthContinuumPromotionImpossible
+unifiedYMImplementAToDMaxCutReceipt :
+  YMAD.YMImplementAToDTOEMaxCutReceipt
+unifiedYMImplementAToDMaxCutReceipt =
+  YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
 
-unifiedCurrentGate4FrontierLedgerLevel : ProofLevel
-unifiedCurrentGate4FrontierLedgerLevel =
-  FleetHyperTOE.currentGate4FrontierLedgerLevel
+------------------------------------------------------------------------
+-- Kernel-bidi / ternary-27 / byte-ABI convergence.
+------------------------------------------------------------------------
 
-unifiedCurrentGate4ClusteringToTransferGapLevel : ProofLevel
-unifiedCurrentGate4ClusteringToTransferGapLevel =
-  FleetHyperTOE.currentGate4ClusteringToTransferGapLevel
+import DASHI.Unified.R559IbrahimFleetKernelBidiTernary27TOEExact as Kernel27TOE
+import DASHI.Unified.R559IbrahimFleetKernelBidiTernary27TOEValidation
 
-unifiedFleetFormalGapTargetSelected : Bool
-unifiedFleetFormalGapTargetSelected =
-  FleetHyperTOE.fleetFormalGapTargetSelected
+unifiedR559IbrahimFleetKernelBidiTernary27Receipt =
+  Kernel27TOE.canonicalR559IbrahimFleetKernelBidiTernary27TOEReceipt
 
-unifiedHistoricalGate4CountSelectedAsFleetTarget : Bool
-unifiedHistoricalGate4CountSelectedAsFleetTarget =
-  FleetHyperTOE.historicalGate4CountSelectedAsFleetTarget
+unifiedKernelActionIntertwinerStillUnpaid =
+  Kernel27TOE.kernelCharacterIsotypyStillDoesNotConstructActionIntertwiner

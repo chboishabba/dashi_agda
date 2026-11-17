@@ -2,6 +2,7 @@
 module DASHI.Unified.R559IbrahimFleetHyperfabricTOEValidation where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Bool using (true; false)
 open import Data.Empty using (⊥)
 
 import DASHI.EverythingTOESymmetryResolved369 as TOE
@@ -9,6 +10,7 @@ import DASHI.Unifier as Unifier
 import DASHI.Unified.Everything as Unified
 import DASHI.Unified.R559IbrahimFleetHyperfabricTOEExact as Owner
 import DASHI.Unified.FleetFormalGapTargetTOEExact as Fleet
+import DASHI.Physics.YangMills.CompactLieProofLevel as Proof
 
 toeReceiptMatchesOwner :
   TOE.toeR559IbrahimFleetHyperfabricReceipt
@@ -85,97 +87,56 @@ fleetDischargedFibresStillCannotBeRetargeted :
 fleetDischargedFibresStillCannotBeRetargeted =
   Owner.fleetDischargedFibresStayOutOfTarget
 
-------------------------------------------------------------------------
--- Equal count does not create same-object identity.
-------------------------------------------------------------------------
 
-toeFleetGate4CountAgreementMatchesOwner :
-  TOE.toeFleetGate4CountAgreement
-  ≡ Owner.fleetFormalGapCountEqualsGate4Count
-toeFleetGate4CountAgreementMatchesOwner = refl
+ymGate4FormalGapCountIs58 :
+  Owner.ymGate4FormalGaps ≡ 58
+ymGate4FormalGapCountIs58 =
+  Owner.ymGate4FormalGapsAre58
 
-unifierFleetGate4CountAgreementMatchesOwner :
-  Unifier.unifierFleetGate4CountAgreement
-  ≡ Owner.fleetFormalGapCountEqualsGate4Count
-unifierFleetGate4CountAgreementMatchesOwner = refl
+ymGate4PaidReductionIsMachineChecked :
+  Proof.promotable Owner.ymGate4PaidReductionLevel ≡ true
+ymGate4PaidReductionIsMachineChecked =
+  Proof.machineCheckedPromotes
 
-unifiedFleetGate4CountAgreementMatchesOwner :
-  Unified.unifiedFleetGate4CountAgreement
-  ≡ Owner.fleetFormalGapCountEqualsGate4Count
-unifiedFleetGate4CountAgreementMatchesOwner = refl
+ymGate4InhabitantsRemainNonPromoting :
+  Proof.promotable Owner.ymGate4InhabitantsLevel ≡ false
+ymGate4InhabitantsRemainNonPromoting =
+  Proof.conditionalDoesNotSelfPromote
 
-toeFleetGate4NonidentityMatchesOwner :
-  TOE.toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap
-  ≡ Owner.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
-toeFleetGate4NonidentityMatchesOwner = refl
-
-unifierFleetGate4NonidentityMatchesOwner :
-  Unifier.unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap
-  ≡ Owner.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
-unifierFleetGate4NonidentityMatchesOwner = refl
+sameCardinalityDoesNotIdentifyFleetAndGate4 :
+  Owner.Fleet58EqualsYMGate4SameObject → ⊥
+sameCardinalityDoesNotIdentifyFleetAndGate4 =
+  Owner.fleet58CardinalityDoesNotProveYMGate4Identity
 
 
 
-------------------------------------------------------------------------
--- Current frontier and typed continuum no-go agreement.
-------------------------------------------------------------------------
+toeYMGate4GapCountMatchesOwner :
+  TOE.toeYMGate4FormalGapsAre58
+  ≡ Owner.ymGate4FormalGapsAre58
+toeYMGate4GapCountMatchesOwner = refl
 
-toeCurrentGate4FrontierMatchesOwner :
-  TOE.toeCurrentGate4FrontierLedgerLevel
-  ≡ Owner.currentGate4FrontierLedgerLevel
-toeCurrentGate4FrontierMatchesOwner = refl
+unifierYMGate4GapCountMatchesOwner :
+  Unifier.unifierYMGate4FormalGapsAre58
+  ≡ Owner.ymGate4FormalGapsAre58
+unifierYMGate4GapCountMatchesOwner = refl
 
-unifierCurrentGate4FrontierMatchesOwner :
-  Unifier.unifierCurrentGate4FrontierLedgerLevel
-  ≡ Owner.currentGate4FrontierLedgerLevel
-unifierCurrentGate4FrontierMatchesOwner = refl
+unifiedYMGate4GapCountMatchesOwner :
+  Unified.unifiedYMGate4FormalGapsAre58
+  ≡ Owner.ymGate4FormalGapsAre58
+unifiedYMGate4GapCountMatchesOwner = refl
 
-unifiedCurrentGate4FrontierMatchesOwner :
-  Unified.unifiedCurrentGate4FrontierLedgerLevel
-  ≡ Owner.currentGate4FrontierLedgerLevel
-unifiedCurrentGate4FrontierMatchesOwner = refl
+toeFleet58IdentityFirewallMatchesOwner :
+  Owner.Fleet58EqualsYMGate4SameObject → ⊥
+toeFleet58IdentityFirewallMatchesOwner =
+  TOE.toeFleet58DoesNotIdentifyYMGate4
 
-toeFleetTargetSelectionMatchesOwner :
-  TOE.toeFleetFormalGapTargetSelected
-  ≡ Owner.fleetFormalGapTargetSelected
-toeFleetTargetSelectionMatchesOwner = refl
+unifierFleet58IdentityFirewallMatchesOwner :
+  Owner.Fleet58EqualsYMGate4SameObject → ⊥
+unifierFleet58IdentityFirewallMatchesOwner =
+  Unifier.unifierFleet58DoesNotIdentifyYMGate4
 
-unifierFleetTargetSelectionMatchesOwner :
-  Unifier.unifierFleetFormalGapTargetSelected
-  ≡ Owner.fleetFormalGapTargetSelected
-unifierFleetTargetSelectionMatchesOwner = refl
+unifiedFleet58IdentityFirewallMatchesOwner :
+  Owner.Fleet58EqualsYMGate4SameObject → ⊥
+unifiedFleet58IdentityFirewallMatchesOwner =
+  Unified.unifiedFleet58DoesNotIdentifyYMGate4
 
-unifiedFleetTargetSelectionMatchesOwner :
-  Unified.unifiedFleetFormalGapTargetSelected
-  ≡ Owner.fleetFormalGapTargetSelected
-unifiedFleetTargetSelectionMatchesOwner = refl
-
-toeBalabanContinuumNoGoReachable :
-  Owner.BalabanContinuumPromotion → ⊥
-toeBalabanContinuumNoGoReachable =
-  TOE.toeBalabanContinuumPromotionImpossible
-
-unifierBalabanContinuumNoGoReachable :
-  Owner.BalabanContinuumPromotion → ⊥
-unifierBalabanContinuumNoGoReachable =
-  Unifier.unifierBalabanContinuumPromotionImpossible
-
-unifiedBalabanContinuumNoGoReachable :
-  Owner.BalabanContinuumPromotion → ⊥
-unifiedBalabanContinuumNoGoReachable =
-  Unified.unifiedBalabanContinuumPromotionImpossible
-
-toeDepthContinuumNoGoReachable :
-  Owner.DepthContinuumPromotion → ⊥
-toeDepthContinuumNoGoReachable =
-  TOE.toeDepthContinuumPromotionImpossible
-
-unifierDepthContinuumNoGoReachable :
-  Owner.DepthContinuumPromotion → ⊥
-unifierDepthContinuumNoGoReachable =
-  Unifier.unifierDepthContinuumPromotionImpossible
-
-unifiedDepthContinuumNoGoReachable :
-  Owner.DepthContinuumPromotion → ⊥
-unifiedDepthContinuumNoGoReachable =
-  Unified.unifiedDepthContinuumPromotionImpossible

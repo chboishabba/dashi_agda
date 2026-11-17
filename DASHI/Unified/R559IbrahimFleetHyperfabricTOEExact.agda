@@ -50,10 +50,11 @@ module DASHI.Unified.R559IbrahimFleetHyperfabricTOEExact where
 -- remain the certification gate.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_; refl; sym; trans)
+open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
+open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 
 import DASHI.Unified.BalabanR559TOEMaxCutExact as YM
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as Ibrahim
@@ -62,11 +63,6 @@ import DASHI.Core.IndexedRelationalHyperfabricSpineExact as Fabric
 import DASHI.Core.IndexedRelationalPadicWaveContinuousAdaptersExact as PadicWave
 import DASHI.Law.SensibLawWrongTypeGenericHyperfabricAdapterExact as WrongType
 import DASHI.Physics.Closure.BalancedTernaryContinuousEnvelope as Stream
-import DASHI.Biology.EqualCardinalityStructureBoundaryExact as EqualCardinality
-import DASHI.Physics.Closure.YMBalabanContinuumLimitReceipt as Continuum
-import DASHI.Physics.Closure.YMDepthAsContinuumLimitReceipt as Depth
-import DASHI.Physics.YangMills.BalabanClayGate4CurrentFrontierReceipt as Gate4Current
-import DASHI.Physics.YangMills.CompactLieProofLevel as Proof
 
 ------------------------------------------------------------------------
 -- Exact existing owners.
@@ -106,35 +102,6 @@ fleetContradictionGapsAre44 = refl
 fleetFormalGapsAre58 : fleetFormalGaps ≡ 58
 fleetFormalGapsAre58 = refl
 
--- The fleet target count and the repository-native Yang-Mills Gate-4 count
--- are numerically equal. This equality is a count equality only.
-fleetFormalGapCountEqualsGate4Count :
-  fleetFormalGaps
-  ≡ YM.gate4UnresolvedCount YM.canonicalBalabanR559TOEMaxCutReceipt
-fleetFormalGapCountEqualsGate4Count =
-  trans
-    fleetFormalGapsAre58
-    (sym
-      (YM.gate4UnresolvedCountIs58
-        YM.canonicalBalabanR559TOEMaxCutReceipt))
-
-fleetGate4EqualCardinalityBoundary :
-  EqualCardinality.EqualCardinalityBoundary
-fleetGate4EqualCardinalityBoundary =
-  EqualCardinality.canonicalEqualCardinalityBoundary
-
-fleetGate4CountEqualitySelectsCanonicalMap : Bool
-fleetGate4CountEqualitySelectsCanonicalMap =
-  EqualCardinality.equalCardinalitySelectsCanonicalMap
-    fleetGate4EqualCardinalityBoundary
-
-fleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
-  fleetGate4CountEqualitySelectsCanonicalMap ≡ false
-fleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
-  EqualCardinality.equalCardinalitySelectsCanonicalMapIsFalse
-    fleetGate4EqualCardinalityBoundary
-
-
 fleetEigenPriorityDoesNotCreateProof :
   Fleet.FleetEigenPriorityCreatesProof → ⊥
 fleetEigenPriorityDoesNotCreateProof =
@@ -154,6 +121,33 @@ fleetContradictionGapsStaySeparate :
   Fleet.FleetContradictionGapReclassificationPermission → ⊥
 fleetContradictionGapsStaySeparate =
   Fleet.fleetContradictionsCannotBeRelabelledAsFormalGaps
+
+
+------------------------------------------------------------------------
+-- Equal cardinality is not same-object identity.
+------------------------------------------------------------------------
+
+ymGate4FormalGaps : Nat
+ymGate4FormalGaps =
+  YM.gate4UnresolvedCount YM.canonicalBalabanR559TOEMaxCutReceipt
+
+ymGate4FormalGapsAre58 : ymGate4FormalGaps ≡ 58
+ymGate4FormalGapsAre58 =
+  YM.gate4UnresolvedCountIs58 YM.canonicalBalabanR559TOEMaxCutReceipt
+
+ymGate4PaidReductionLevel : ProofLevel
+ymGate4PaidReductionLevel =
+  YM.gate4PaidReductionLevel YM.canonicalBalabanR559TOEMaxCutReceipt
+
+ymGate4InhabitantsLevel : ProofLevel
+ymGate4InhabitantsLevel =
+  YM.gate4InhabitantsLevel YM.canonicalBalabanR559TOEMaxCutReceipt
+
+data Fleet58EqualsYMGate4SameObject : Set where
+
+fleet58CardinalityDoesNotProveYMGate4Identity :
+  Fleet58EqualsYMGate4SameObject → ⊥
+fleet58CardinalityDoesNotProveYMGate4Identity ()
 
 ------------------------------------------------------------------------
 -- Existing hyperfabric / 369 / p-adic / wave exact surfaces.
@@ -215,55 +209,6 @@ toeProducerSourceDoesNotCreateRun =
   Ibrahim.producerSourceDoesNotCreateRunReceipt
 
 ------------------------------------------------------------------------
--- Typed continuum non-promotion and live Gate-4 frontier reuse.
-------------------------------------------------------------------------
-
-BalabanContinuumPromotion : Set
-BalabanContinuumPromotion =
-  Continuum.YMBalabanContinuumLimitPromotion
-
-DepthContinuumPromotion : Set
-DepthContinuumPromotion =
-  Depth.YMDepthContinuumLimitPromotion
-
-toeBalabanContinuumPromotionImpossible :
-  Continuum.YMBalabanContinuumLimitPromotion → ⊥
-toeBalabanContinuumPromotionImpossible =
-  Continuum.ymBalabanContinuumLimitPromotionImpossibleHere
-
-toeDepthContinuumPromotionImpossible :
-  Depth.YMDepthContinuumLimitPromotion → ⊥
-toeDepthContinuumPromotionImpossible =
-  Depth.ymDepthContinuumLimitPromotionImpossibleHere
-
-currentGate4FrontierLedgerLevel : Proof.ProofLevel
-currentGate4FrontierLedgerLevel =
-  Gate4Current.currentFrontierLedgerTypecheckLevel
-
-currentGate4ClusteringToTransferGapLevel : Proof.ProofLevel
-currentGate4ClusteringToTransferGapLevel =
-  Gate4Current.clusteringToTransferGapReductionTypecheckLevel
-
-currentGate4FrontierDoesNotSelfPromote :
-  Proof.promotable currentGate4FrontierLedgerLevel ≡ false
-currentGate4FrontierDoesNotSelfPromote =
-  Proof.conditionalDoesNotSelfPromote
-
-fleetFormalGapTargetSelected : Bool
-fleetFormalGapTargetSelected = true
-
-fleetFormalGapTargetSelectedIsTrue :
-  fleetFormalGapTargetSelected ≡ true
-fleetFormalGapTargetSelectedIsTrue = refl
-
-historicalGate4CountSelectedAsFleetTarget : Bool
-historicalGate4CountSelectedAsFleetTarget = false
-
-historicalGate4CountSelectedAsFleetTargetIsFalse :
-  historicalGate4CountSelectedAsFleetTarget ≡ false
-historicalGate4CountSelectedAsFleetTargetIsFalse = refl
-
-------------------------------------------------------------------------
 -- One normalized receipt.
 ------------------------------------------------------------------------
 
@@ -283,10 +228,12 @@ record R559IbrahimFleetHyperfabricTOEReceipt : Set₁ where
     dischargedFibresIs584 : dischargedFibres ≡ 584
     contradictionGaps : Nat
     contradictionGapsIs44 : contradictionGaps ≡ 44
-    fleetGate4CountAgreement :
-      targetFormalGaps
-      ≡ YM.gate4UnresolvedCount YM.canonicalBalabanR559TOEMaxCutReceipt
-    equalCardinalityBoundary : EqualCardinality.EqualCardinalityBoundary
+    ymGate4GapCount : Nat
+    ymGate4GapCountIs58 : ymGate4GapCount ≡ 58
+    ymGate4PaidReduction : ProofLevel
+    ymGate4Inhabitants : ProofLevel
+    fleet58DoesNotIdentifyYMGate4 :
+      Fleet58EqualsYMGate4SameObject → ⊥
     scaleTransferBlocked : YM.ScaleTransferPromotion → ⊥
     fleetCountDoesNotDischarge :
       Fleet.FleetExternalCountCreatesFormalDischarge → ⊥
@@ -312,8 +259,12 @@ canonicalR559IbrahimFleetHyperfabricTOEReceipt = record
   ; dischargedFibresIs584 = fleetDischargedFibresAre584
   ; contradictionGaps = fleetContradictionGaps
   ; contradictionGapsIs44 = fleetContradictionGapsAre44
-  ; fleetGate4CountAgreement = fleetFormalGapCountEqualsGate4Count
-  ; equalCardinalityBoundary = fleetGate4EqualCardinalityBoundary
+  ; ymGate4GapCount = ymGate4FormalGaps
+  ; ymGate4GapCountIs58 = ymGate4FormalGapsAre58
+  ; ymGate4PaidReduction = ymGate4PaidReductionLevel
+  ; ymGate4Inhabitants = ymGate4InhabitantsLevel
+  ; fleet58DoesNotIdentifyYMGate4 =
+      fleet58CardinalityDoesNotProveYMGate4Identity
   ; scaleTransferBlocked = toeScaleTransferPromotionImpossible
   ; fleetCountDoesNotDischarge = fleetExternalCountDoesNotCreateFormalDischarge
   ; dischargedFibreRetargetBlocked = fleetDischargedFibresStayOutOfTarget
