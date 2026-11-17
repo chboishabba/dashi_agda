@@ -28,3 +28,7 @@ import DASHI.Physics.YangMills.YMClayBishopFiniteWilsonNormalizedExact
 -- Pi: algebraic last-mile of quarter-angle bridge, analytic inputs OPEN.
 import DASHI.Foundations.BishopMachinPiDoubleAngleAlgebraExact
   as BishopMachinDoubleAngle
+
+-- True selected Round11 sine/cosine and Machin pi; analytic quarter input open.
+import DASHI.Foundations.BishopMachinPiPeriodFromQuarterExact
+  as BishopMachinSameSourcePeriod
