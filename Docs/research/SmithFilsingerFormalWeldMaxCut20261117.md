@@ -399,3 +399,43 @@ Theorem additiveExactMeterCannotSendHalvedUnitToOneQuantum is universe-polymorph
 The actual physics lane should use the existing C3.RealField indexed signed face algebra and rational SpaceTimePoyntingTelescopeExact source carriers, preserving the field metric, source-current and integrated Poynting identity. For comparison with Nat terminal energy, a future *independently calibrated* metering map must either have a declared discrete domain/quantum lattice or bounded interval/rounding uncertainty with summed error. Such a map has not yet been constructed and may fail to exist for the original device.
 
 A GitHub update race was resolved by creating a **separate proof consumer**, avoiding overwrites in the signed boundary owner. The pinned script now lists the consumer. Agda/Nix remain unavailable locally, so all new proof bodies remain pending kernel type-check; no physical F10/F13/F14/F15/F16 source/weather claims are promoted.
+
+
+## F10/F13 signed rational metering: canonical finite residual sums and two-sided certified bounds
+
+**This pass continues the FORMALISATION / WELD, not numerical simulation.** The previous no-half-quantum theorem correctly blocks an unrestricted exact nonzero additive rational-to-integer Nat meter. The canonical signed rational field-work and source-window owners must therefore remain rational through integration and certification.
+
+A repository-wide reuse search identified **DASHI/Core/ProofCarryingFiniteSumEnclosureExact.agda** (a reusable proof-carrying finite-sum/error aggregate and certified upper endpoint, already consumed by the RH programme). No new interval framework was written.
+
+### New exact Agda proof consumer 1 — signed rational residual
+
+DASHI/Physics/Motors/SmithFilsingerCertifiedSignedMeterResidualExact.agda:
+
+- rationalAdditiveCarrier is the concrete Data.Rational.Base rational additive carrier for the existing generic proof-carrying finite-sum owner.
+- FiniteSignedMeterWork certificate carries the **same** finite error terms, per-term physically calibrated signed actual work and observed rational work, and requires EACH equality actualTerm = meteredTerm + signedResidualTerm. The term samples cannot be silently selected from different apparatus clocks or port orientations.
+- signedResidualsTelescope proves by induction and the existing rational ring solver that TOTAL actual work = TOTAL measured work + sum of the SAME signed per-term residuals. Errors accumulate algebraically, rather than being silently dropped or rounded to integer quanta.
+- SelectedOriginalCertifiedMeter window requires this finite certificate, the measured term sum to be the original terminal reading, and the physically sourced term sum to equal the actual same-original 4D Poynting window useful receiver work. **These are substantive physical trace/calibration hypotheses, not derived Maxwell PDE or invented meter data.**
+- originalUsefulReceiverEqualsMeterPlusResidual derives the actual selected original receiver work identity from those per-term laws, not by assuming a new aggregate energy equation.
+- originalSignedResidualBelowCertifiedUpper imports the canonical finiteSumBelowCertifiedUpper, with the SAME exact residual sample collection; no arbitrary unrelated interval bound can be used.
+- SignedMeterUpperMonotonicity adds only the necessary proof that the chosen certified order is stable under adding the actual observed work. originalReceiverBelowObservedPlusCertifiedResidual then derives receiverWork <= observedWork + certifiedUpper using equality transport. This is a conditional ordered theorem, not an empirical bound.
+
+### New exact Agda proof consumer 2 — *two-sided* signed uncertainty
+
+DASHI/Physics/Motors/SmithFilsingerCertifiedSignedMeterTwoSidedExact.agda:
+
+- TwoSidedMeterCertificate w reuses the existing original certificate and independently supplies the canonical ProofCarryingFiniteSumEnclosure + ProofCarryingFiniteSumUpperEnclosure for the NEGATIVE residual.
+- exactOppositeErrorSum forces the negative certificate's total to be the additive inverse of the SAME original signed-error total. It cannot be an arbitrary second experiment's error interval.
+- positiveUpperIsRationalOrder, negativeUpperIsRationalOrder, negativeReversesOrder and translateOrder demand the actual rational-order transport laws; an arbitrary relation labelled LessOrEqual cannot silently become a usable physical inequality.
+- twoSidedOriginalReceiverUpper and twoSidedOriginalReceiverLower derive both physical-source indexed receiver-work bounds:
+
+    observedNetWork - certifiedNegativeResidualUpper
+      <= originalUsefulReceiverWork
+      <= observedNetWork + certifiedPositiveResidualUpper.
+
+**All bounds are symbolic/certified and have NO assigned numerical magnitude.** The existence of the physical sampling, independent source provenance, signed full-vector Poynting→same terminal calibration, control/modulator power and dual error certificates is unproved. A deliberately coarse valid interval would not demonstrate gain; physical identification remains necessary.
+
+### Source / acceptance / remaining max-cut
+
+Both new Agda modules are authored on draft #1524 and added to scripts/check_smith_filsinger_formal_weld_agda29.sh, including the ORIGINAL core certificate donor. A source delimiter and literal hole/postulate scan is clean in both, but **Agda/Nix kernel checking is not available locally**, and no Agda 2.9 acceptance is claimed. Do not confuse the stronger typed proof obligations with actual SI units, a measured calibrated Poynting integral, a finite-grid convergence theorem or a real battery/current-source measurement.
+
+**Next highest-alpha cut:** instantiate an original-device time-synchronous, current/voltage and signed environmental-face measurement with *independently obtained* finite residual certificates, then integrate the existing space–time signed rational Poynting ledger and terminal-work decomposition. The user requested FORMAL proof welds, not simulations, so if empirical calibration is unavailable the correct gate remains OPEN rather than fabricated. Other open gates F14 original electrical clock/geometry, F15 actual source replenishment, F16 atmospheric controlled causal evidence, and D1 pinned kernel type-check remain unchanged. No ESD edits or premature TOE promotion.
