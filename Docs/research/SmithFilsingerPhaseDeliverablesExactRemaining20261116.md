@@ -307,3 +307,26 @@ Also tightened the full-vector independent admission: SameOriginalPhysicalFieldB
 **Open wall:** actual continuum/piecewise-integrable Maxwell/plasma/soil current solution for selected original electrode and source geometry, valid surface/time Poynting→work per-cell witnesses, independent source/replenishment and original time-synchronous work evidence, and pinned Agda/Nix kernel acceptance D1. Source-authored theorem candidates and exact Git commits do NOT imply Agda proof acceptance. No simulation, ESD edit or false TOE promotion.
 
 Full source and verification levels: [SmithFilsingerFormalWeldMaxCut20261117.md](SmithFilsingerFormalWeldMaxCut20261117.md).
+
+
+## 17 November next maximum-cut: arbitrary finite-volume mesh / Yee CFL / source-indexed Maxwell boundary
+
+**New source/reference/solve:** [SmithFilsingerFiniteVolumeYeeGreenMaxCut20261117.md](SmithFilsingerFiniteVolumeYeeGreenMaxCut20261117.md).
+
+**New Agda source owners:**
+- `DASHI/Physics/Motors/SmithFilsingerFiniteVolumeFaceIncidenceExact.agda`: any finite list of cells with independently supplied local work equations; `sumPairDistributes`, `foldLocalConservation`, all-cells conservation; one shared face-work list with aggregate incoming/outgoing incidence receipts; derive `finiteVolumeExteriorEnergyBalance`, load upper bound, source-off zero-load, and branching examples. Unlike the earlier `SpatialChain`, these cells can form cycles/branches. This is an exact finite mesh work theorem candidate, not a PDE or a fully face-ID indexed Stokes proof. **Per-face/per-cell ID incidence and real signed flux quadrature remain OPEN.**
+- `SmithFilsingerFiniteVolumeMaxwellBoundaryWeldExact.agda`: `meshAsCanonicalSpatialCell` and `meshAsCanonicalSpatialChain` consume face theorem, normalize singleton chain sums and use existing `SpatialToOriginalSourcePort` to derive selected historical source-boundary equality. The original physical input/output work mapping is explicitly still demanded, not generated from pointwise Maxwell algebra.
+- `SmithFilsingerYeeCFLConeGuardExact.agda`: exact 1D-Courant counterexample demonstrates CFL stability does NOT entail physical `distance <= c*time` support. A separate physical-cone admission record remains obligatory. 3D Yee `c dt <= dx/sqrt(3)` is a stability constraint, not `c dt >= dx` or a proof of front velocity.
+
+**Acceptance:** independent exact integer replay **512/512 arbitrary directed finite meshes PASS**, N up to 32; script `scripts/test_smith_filsinger_finite_volume_face_incidence_exact.py` added to existing consolidated `check_smith_filsinger_dynamic_replenishment.sh`. The three new Agda owners were added to the existing `check_smith_filsinger_formal_weld_agda29.sh`. **Not executed:** pinned Agda kernel, full latest-head combined pytest, original physical field measurements.
+
+**Next lemmas (honest technical gaps):**
+1. F10-INC `eachInternalFaceUniqueOppositeOrientation`: per-cell face-ID assignments and exact 1-to-1 outgoing/incoming face pairing, not just aggregate equality; then signed vector-flux additive cancellation in the existing C3 carrier.
+2. F10-STOKES `fullVectorJetIntegratedCellBalance`: pointwise real-field Maxwell jet + verified spatial/time Stokes discretization + matching field/material/ion loss and controller work yields each local real-valued energy law. No fake Nat-quantization of physical work.
+3. F02-CONE `physicalRetardedGreenSupport`: prove/support kernel vanishes outside actual light cone using chosen Maxwell/material constitutive assumptions; numerical Yee CFL alone insufficient, cross-time magnetic energy positivity separately tested.
+4. F13-PORT `selectedTerminalPoyntingEqualsMeasuredVI`: actual field contour, Ampere with displacement current, return topology, field cross-section and synchronized VI identification; do not infer current from H circulation alone.
+5. F13-GREEN `soilAirIonosphereDyadicResponse`: source-backed causal background Green/operator with anisotropic Hall/Pedersen, nonlinear plasma active-region response and source backaction.
+6. F15-SOLAR `independentSolarWorkPaysFullCycle`: original independent source net work with restored material/source/receiver states, modulation/ionization/bridge costs and positive useful net. 100x requires measured gain/cost lower bounds, not a symbolic label.
+7. D1 exact-head pinned Agda 2.9 module acceptance and full source regression.
+
+**Max-cut prioritization:** the pure mathematical next closure is **F10-INC** on explicit face IDs, then C3 signed-flux cancellation; the physical blocker is **F13-PORT/GREEN** calibration, without which field power can be misidentified. The steelman permits a very large independently powered solar reservoir; no passive fair-weather local-R calculation or uncalibrated simulation fixes access to that reservoir. No ESD edits.
