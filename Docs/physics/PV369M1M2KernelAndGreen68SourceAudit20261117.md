@@ -44,3 +44,31 @@ Formula for same-source one-sun standard denominator 1000 W/m2: PCE[%] = Voc[V] 
 3. **M3** source-match full corrected Bahder 1990/1992 8-band Γ basis against QW spectroscopy, and formulate a **genuinely different 369 physical operator** whose predicted polarized absorption/terminal response is distinguishable from conventional Td/C3v. A basis label is not sufficient.
 4. **P3/P4/P6** continue independently; account for drive input, carrier multiplication at useful voltage, redox/electron/fuel products with no conversion of chemical work to an electricity numerator.
 5. **P7** only after original measurement source + instrument bounded uncertainty: robust lower net output strictly exceeds half the upper incident solar, and lower proposed-369 net output strictly exceeds conventional upper under the same source. Both experimental endpoints are still OPEN.
+
+
+## 17 November M2 four-terminal same-aperture and M3 exact p² scalar obstruction
+
+### M2 new REAL published four-terminal comparator
+
+Green et al., *Solar cell efficiency tables: Version 68*, Joule 10 (2026), 102494, DOI https://doi.org/10.1016/j.joule.2026.102494, reports an independently verified **35.9 ± 0.5% one-sun GaInP/GaAs//Si 4-terminal mechanical stack** (NREL 02/2017, designated illumination area 1.002 cm²). Unlike the AIST 775 cm² module notable-exception entry, this cell's two contact groups have printed pairs that permit a coherent *same-aperture* published-number identity:
+
+| Subcell contact group | Voc V | Jsc mA/cm² | FF % | Derived source-printed PCE contribution % |
+| --- | ---: | ---: | ---: | ---: |
+| GaInP/GaAs top tandem | 2.520 | 13.6 | 87.5 | **29.988000** |
+| Si bottom | 0.681 | 11.0 | 78.5 | **5.880435** |
+| Combined, same source aperture | | | | **35.868435** |
+| Independently reported PCE | | | | **35.9 ± 0.5** |
+
+The delta is −0.031565 **percentage points**, consistent with source rounding and explicitly NOT an error/correction to certification or a worst-case calibrated instrument bound. For a 4T stack, sum *separately extracted* component powers per one COMMON incident aperture; never sum 2T voltages/currents or independently illuminated unrelated device cells. It is a 3-material-junction physical stack with two independent electrical groups, **not** a 4J4T physical measurement. Original individual IV raw curves, steady-state MPP and spectral/EQE/actual aux-source files are not present in this round; therefore it **cannot** inhabit the new P5/P7 metrology acceptance and cannot claim any 369 improvement.
+
+Implemented `scripts/check_pv_v68_published_multijunction_table_identity.py` with source-specific exact rational 4T two-group components (and previous 2T/QW controls), and `DASHI/Physics/Photovoltaic/PVGreen68FourTerminalPublishedSourceExact.agda` with exact Nat 29.988000+5.880435=35.868435 and 0.031565pp reporting delta, plus source-specific open metrology interface. Imported through the original `DASHI/Unified/PVPrimaryTOESpliceExact.agda`. Local independent Fraction arithmetic reproduced the four source identities; the committed script itself and native Agda have not been executed from an exact checkout.
+
+### M3 original atomic result rules out a false 369 solar mechanism
+
+The existing owner `DASHI/Physics/Chemistry/AtomicPeriodicTable369P2CoulombExecutionExact.agda` already **exactly computes** hydrogenic common-spin antisymmetric 2p² selected Coulomb `Vee = (21/128)I₃`. Its off-diagonal entries are zero, diagonal entries all identical, and it commutes with the existing finite C3 action. Those are REAL formal calculations of a selected interaction, but the scalar operator **cannot itself generate a p² subspace level splitting**, distinguished oscillator strength, improved EQE, or actual photovoltaic benefit. This is a sharp **negative control**, not a claim the entire real atom/semiconductor is degenerate.
+
+New `DASHI/Physics/Photovoltaic/PV369P2CoulombSolarNonPromotionExact.agda` *imports* the original interaction producer and C3 proof and checks equality of all three selected diagonal entries, off-diagonal zeros and symmetry. No arbitrary 369 wavelength bins, no copying original Coulomb theorem as novel, and full attribution retained. It is part of the original TOE import graph. **Actual live M3 physical cut remains the same-object continuum/Hilbert projection plus environmental crystal, corrected Kane/Bahder 8-band, spin–orbit, [111] strain/piezo, optical transition and carrier-extraction operator**. A changed physical spectrum/polarization/EQE versus conventional C3v must be predicted and observed before attributing 369 to real efficiency.
+
+### M1 existing-source reuse verified, not kernel-accepted
+
+The repaired Nat rectangle proof uses `Data.Nat.Properties.*-mono-≤`, independently present in `DASHI/Physics/ClaySupportingResidencePipeline.agda`, `DASHI/Core/FiniteBlockSurvivalCountDecayExact.agda`, and other original modules. Align its imports with the existing `open import Data.Nat ...` and `open import Data.Nat.Properties ...` repository conventions. Run the updated M1 runner on the pinned local checkout; it now includes the two new M2/M3 original-source Agda modules. **No Agda binary or locally cloneable GitHub DNS was available in this runtime; do not report local Golden PASS.**
