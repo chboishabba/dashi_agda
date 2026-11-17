@@ -94,17 +94,19 @@ interiorInducedRow cp cm nextRatio prevRatio hprev h hnext =
   cp * (nextRatio * hnext + - h)
     + - (cm * (h + - (prevRatio * hprev)))
 
-interiorIntertwinesGivenRatios :
+-- A general quantitative defect equation for imperfect reconstruction
+-- ratios: the entire interior discrepancy is the two face-coefficient
+-- mismatches, not an unknown tensor curvature residual.
+interiorOperatorDefect :
   (cp cm lambda lambdaPrev lambdaNext
     nextRatio prevRatio vprev v vnext : ℚ) →
-  (nextRatio * lambdaNext ≡ lambda) →
-  (prevRatio * lambdaPrev ≡ lambda) →
   interiorInducedRow cp cm nextRatio prevRatio
     (lambdaPrev * vprev) (lambda * v) (lambdaNext * vnext)
-    ≡ lambda * originalFirstRow cp cm vprev v vnext
-interiorIntertwinesGivenRatios cp cm lambda lambdaPrev lambdaNext
-  nextRatio prevRatio vprev v vnext eqNext eqPrev
-  rewrite eqNext | eqPrev = solve []
+    + - (lambda * originalFirstRow cp cm vprev v vnext)
+  ≡ cp * ((nextRatio * lambdaNext + - lambda) * vnext)
+    + cm * ((prevRatio * lambdaPrev + - lambda) * vprev)
+interiorOperatorDefect cp cm lambda lambdaPrev lambdaNext
+  nextRatio prevRatio vprev v vnext = solve []
 
 -- Zero origin multiplier destroys injectivity. Keeping V0 as an
 -- additional datum restores an exact operator correspondence.
