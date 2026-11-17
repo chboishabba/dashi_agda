@@ -19,6 +19,7 @@ owners=(
   DASHI/Physics/Motors/SmithFilsingerDispersiveMaterialPortExact.agda
   DASHI/Physics/Motors/SmithFilsingerDispersiveMaterialWeldExact.agda
   DASHI/Physics/Motors/SmithFilsingerFullVectorPoyntingPortWeldExact.agda
+  DASHI/Physics/Motors/SmithFilsingerSpatialSourceCapWeldExact.agda
 )
 new_owners=(
   DASHI/Physics/Motors/SmithFilsingerSpatialPortChainExact.agda
@@ -28,6 +29,7 @@ new_owners=(
   DASHI/Physics/Motors/SmithFilsingerMaxwellMaterialEnergyCutExact.agda
   DASHI/Physics/Motors/SmithFilsingerDispersiveMaterialWeldExact.agda
   DASHI/Physics/Motors/SmithFilsingerFullVectorPoyntingPortWeldExact.agda
+  DASHI/Physics/Motors/SmithFilsingerSpatialSourceCapWeldExact.agda
 )
 for f in "${owners[@]}"; do test -s "$f"; done
 if grep -nE '^[[:space:]]*postulate([[:space:]]|$)|\\{!!\\}' "${new_owners[@]}"; then
