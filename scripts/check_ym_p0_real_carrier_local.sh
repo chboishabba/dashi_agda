@@ -24,6 +24,7 @@ targets=(
   DASHI/Physics/YangMills/YMClayBishopSU2DeterminantExact.agda
   DASHI/Physics/YangMills/YMClayBishopSU2UnitarityExact.agda
   DASHI/Physics/YangMills/YMClayBishopSU2HaarSeriesLimitExact.agda
+  DASHI/Physics/YangMills/YMClayBishopFiniteWilsonNormalizedExact.agda
 )
 
 for target in "${targets[@]}"; do
@@ -49,5 +50,5 @@ for target in "${targets[@]}"; do
     bash scripts/run_agda29_parallel_check.sh "$target"
 done
 
-echo 'PASS: all nine isolated P0 scalar/SU2 Agda module checks completed.'
+echo 'PASS: all ten isolated P0 scalar/SU2 Agda module checks completed.'
 echo 'NOTE: OriginalWilsonToBishopScalarWeld is not thereby inhabited.'
