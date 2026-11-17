@@ -112,4 +112,68 @@ check("even GELU quadratic leading term",
                  -1/S.sqrt(2*S.pi))==0)
 check("even GELU has nonzero fourth-order correction",
       S.simplify(S.diff(even_g(t),t,4).subs(t,0))!=0)
+# GELU exact GLOBAL first-derivative bound. g''(t)=
+# (2-t²)*phi(t), so stationary points of g' are ±sqrt(2);
+# g'(-sqrt2)=1-g'(sqrt2)<0 and limits are 0 and 1.
+# Consequently |g'|<=L*=Phi(sqrt2)+sqrt2 phi(sqrt2).
+# This tightens the loose 1+1/sqrt(2*pi*e) bound in the R4
+# recurrence without assuming any fitted network weight norms.
+derivative=S.diff(g(t),t)
+root=S.sqrt(2)
+Lstar=S.simplify(derivative.subs(t,root))
+Lformula=(1+S.erf(1))/2+S.exp(-1)/S.sqrt(S.pi)
+check("exact GELU optimum first derivative expression",
+      S.simplify(Lstar-Lformula)==0)
+check("GELU negative stationary derivative is 1 minus maximum",
+      S.simplify(derivative.subs(t,-root)-(1-Lstar))==0)
+check("GELU first derivative reaches stationary extrema",
+      S.simplify(dd.subs(t,root))==0
+      and S.simplify(dd.subs(t,-root))==0)
+check("exact source GELU global Lipschitz sharpens loose bound",
+      float(Lstar)<float(1+1/S.sqrt(2*S.pi*S.E))
+      and float(Lstar)>1)
+# The EVEN nonlinear channel has global Lipschitz
+# L_even=Lstar-1/2 (bias-free GELU even projection).
+even_derivative=S.diff(even_g(t),t)
+check("GELU even derivative equals total derivative minus half",
+      S.simplify(even_derivative-derivative+S.Rational(1,2))==0)
+check("even-channel sharp derivative maximum at sqrt2",
+      S.simplify(even_derivative.subs(t,root)
+        -(Lstar-S.Rational(1,2)))==0)
+# Curvature gives a global quadratic envelope for the even
+# projection around preactivation bias b:
+# |(g(b+t)+g(b-t))/2-g(b)| <= t²/sqrt(2*pi).
+# Source second-derivative extremum is sqrt(2/pi).
+# At b1=0 the bias-free E_g is O(t²), not generically O(t).
+# This enables a chart-flip alternative to strict orientation
+# stability when downstream tolerates a bounded residual.
+for z1 in [R(0),R(1,4),R(1,2),R(1),R(2),R(4)]:
+    for bias_value in [R(-2),R(0),R(1)]:
+        curvature=S.N((g(bias_value+z1)+g(bias_value-z1))/2
+                  -g(bias_value),40)
+        envelope=S.N(z1*z1/S.sqrt(2*S.pi),40)
+        check("centered GELU even curvature bound "+str((z1,bias_value)),
+              abs(curvature)<=envelope)
+# Source FFN output with W1-bias b, W2-scale m and output bias b2
+# obeys |even_F(z)| <= |F(0)|
+#   + |m| min((Lstar-1/2)|k*z|, |k*z|²/sqrt(2*pi)).
+# For same state and arbitrary sign-chart flip:
+# |y_plus-y_minus|=2|even_F(z)|. Original affine transition
+# gives |h_pre_plus-h_pre_minus|=2|Ty*even_F(z)+bT|.
+# The source history cap is nonexpansive in the exact Euclidean model.
+for zz in [R(-2),R(-1,2),R(0),R(1,2),R(2)]:
+    zvalue=S.N(zz,50);bvalue=S.N(R(1,3),50)
+    projection=S.N((F(zz)+F(-zz))/2,45)
+    centre=S.N(F(0),45)
+    dt=abs(k*zz)
+    # instantiate k=2,m=3,b2=-1/4 for a nontrivial biased FFN
+    sub={k:2,m:3,b:R(1,3),b2:R(-1,4)}
+    proj=S.N(projection.subs(sub),40)
+    ctr=S.N(centre.subs(sub),40)
+    normz=abs(2*zz)
+    bound=3*min(float((Lstar-S.Rational(1,2))*normz),
+                float(S.N(normz**2/S.sqrt(2*S.pi),40)))
+    check("source biased even chart residual bound "+str(zz),
+          abs(float(proj-ctr))<=bound+1e-12)
+
 print("X369_GELU_PARITY_HISTORY_SYMPY_PASS",len(checks),"checks")
