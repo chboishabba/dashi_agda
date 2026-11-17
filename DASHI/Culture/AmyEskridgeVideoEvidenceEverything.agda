@@ -43,3 +43,9 @@ import DASHI.Culture.AmyEskridgeVideoPrimaryInspectionExact
 
 -- Original Podkletnov experiment, GAO 1969/1970 law, Boeing 2002 reporting.
 import DASHI.Culture.AmyEskridgeVideoHistoricalPrimaryControlsExact
+
+-- Source-exhaustive original-slide, original-DIA-inventory, and external-source
+-- attribution registries (independent of scientific/forensic truth status).
+import DASHI.Culture.AmyEskridgeVideoDIAFullInventoryExact
+import DASHI.Culture.AmyEskridgeVideoHAL5AllSlidesExact
+import DASHI.Culture.AmyEskridgeVideoSurroundingSourceAtlasExact
