@@ -257,7 +257,8 @@ def check_surrounding_source_coverage() -> None:
     assert "exactSourceScopedWeldCount = refl" in weld
     assert "allAdditionalSourcesIndexed = refl" in omitted
 
-    declared = set(source_names)
+    # Atlas.LinkedSource is a record TYPE, not one of the 42 source entries.
+    declared = set(source_names) | {"LinkedSource"}
     required = set(re.findall(r'\bAtlas\.([A-Za-z]\w+)\b', weld))
     assert required <= declared, f"unresolved original-source symbols: {sorted(required - declared)}"
 
