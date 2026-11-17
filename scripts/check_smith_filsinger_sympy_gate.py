@@ -28,6 +28,11 @@ REQUIRED={
       ("CertifiedCayley","sameCayleyFirstZero","sameCayleySecondZero",
        "sameCayleyZeroPreserving","guardedDistinctCayleyEdge",
        "diagonalCayleyZero","singleCayleyWithSourceNoSignalOutsideReach"),
+    "SmithFilsingerLocalCayleyMidpointExact.agda":
+      ("CertifiedHalfStep","halfStepInverseLaw",
+       "sameFirstIsReduced","sameSecondIsReduced",
+       "firstMidpointPolynomial","secondMidpointPolynomial",
+       "sameCayleyFirstMidpoint","sameCayleySecondMidpoint"),
 }
 TESTS=[str(ROOT/"scripts/test_smith_filsinger_layered_green_sympy.py"),
        str(ROOT/"scripts/test_smith_filsinger_tangential_maxwell_sympy.py"),
