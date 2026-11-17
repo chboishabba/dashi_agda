@@ -346,3 +346,28 @@ originalReverseEnvironmentalPortFundedByController b f environmentalReturn
   reverseEnvironmentalLoadPlusSinkBelowController
     (Weld.FormalFieldToPort.portWindow f)
     environmentalReturn controllerNet reverseLaw controllerLaw restored
+
+
+-- Existing canonical negative control re-used UNCHANGED, not a new
+-- source-current simulation or original-device observation. The owner
+-- exhibits environmental net *outflow* under a driven controller.
+-- In that actual finite record, controller net 2 pays load 1 and
+-- returned environmental work 1, with all storage restored.
+originalDriverOnlyReverseFlowIsPaid :
+  2 ≡
+    (Port.MidpointTwoPortWorkWindow.usefulWork
+      Port.driverOnlyCanRadiateIntoEnvironment
+      + Port.MidpointTwoPortWorkWindow.internalLoss
+        Port.driverOnlyCanRadiateIntoEnvironment)
+      + 1
+originalDriverOnlyReverseFlowIsPaid =
+  reverseEnvironmentalFlowConsumesControllerWork
+    Port.driverOnlyCanRadiateIntoEnvironment 1 2 refl refl refl
+
+originalDriverOnlySinkBound :
+  Bound._≤_
+    (Port.MidpointTwoPortWorkWindow.usefulWork
+      Port.driverOnlyCanRadiateIntoEnvironment + 1) 2
+originalDriverOnlySinkBound =
+  reverseEnvironmentalLoadPlusSinkBelowController
+    Port.driverOnlyCanRadiateIntoEnvironment 1 2 refl refl refl
