@@ -102,7 +102,8 @@ ternary27ToBinaryWord9 (ternary27Word3 c0 c1 c2) =
 binaryWordToTernaryRoundTrip :
   (word : BinaryWord9) →
   ternary27ToBinaryWord9 (binaryWord9ToTernary27 word) ≡ word
-binaryWordToTernaryRoundTrip (binaryWord9 a0 a1 a2 b0 b1 b2 c0 c1 c2)
+binaryWordToTernaryRoundTrip
+  (binaryWord9 a0 a1 a2 b0 b1 b2 c0 c1 c2)
   rewrite Lift27.bit3LiftRoundTrip (Block.bits3 a0 a1 a2)
         | Lift27.bit3LiftRoundTrip (Block.bits3 b0 b1 b2)
         | Lift27.bit3LiftRoundTrip (Block.bits3 c0 c1 c2) = refl
