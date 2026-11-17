@@ -33,6 +33,7 @@ for target in "${targets[@]}"; do
 done
 
 python3 scripts/check_ym_su2_fejer_rootfree_20261117.py
+python3 scripts/check_ym_su2_bishop_matrix_20261117.py
 
 if ! command -v nix >/dev/null 2>&1; then
   echo 'Nix unavailable: local P0 Agda acceptance NOT performed' >&2
