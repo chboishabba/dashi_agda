@@ -215,3 +215,22 @@ normalizedOriginalNodesMassOne first rest =
         (ℚP.*-comm mass inverse)
         (Reciprocal.safeRationalReciprocalTimesPositive mass
           (rawMassPositive first rest))))
+
+
+------------------------------------------------------------------------
+-- SAME-OBJECT original rational node -> Bishop SU2 unitary matrix.
+-- Reuses original rational-to-Bishop norm transport, rather than
+-- supplying a new norm-one witness or an independent quaternion.
+------------------------------------------------------------------------
+import DASHI.Physics.YangMills.YMClayOriginalRationalSU2BishopUnitaryWeldExact as Weld
+import DASHI.Physics.YangMills.YMClayBishopSU2DeterminantExact as Matrix
+
+originalRationalNodeAsBishopSU2 :
+  Parameters → Matrix.UnitQuaternion
+originalRationalNodeAsBishopSU2 t =
+  Weld.originalRationalSU2AsBishopUnit (parameterNode t)
+
+-- Existing Weld.originalRationalSU2DeterminantOne and
+-- Weld.originalRationalSU2BishopUnitarity apply directly to
+-- parameterNode t; their original Agda kernel receipt remains
+-- outstanding. This module adds no separate matrix theory.
