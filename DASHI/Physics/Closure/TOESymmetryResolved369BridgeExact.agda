@@ -12,6 +12,7 @@ import DASHI.Physics.Closure.SSP369PolarResidualQuotient as Polar
 import DASHI.Physics.Closure.SSPPrimeLane369DepthAddressWheel as Address
 import DASHI.Physics.Closure.SSPPrimeLane369DepthWheelCantorBridge as Wheel
 import DASHI.Physics.Closure.NSTriadKNStage3Ternary369Ledger as NS369
+import DASHI.Physics.Closure.NSTriadKNPeriodicTwoInequalityMaxCutRound650Exact as NSR650
 import DASHI.Foundations.Base369MobiusTransport as Mobius
 
 ------------------------------------------------------------------------
@@ -261,3 +262,61 @@ canonicalTOESymmetryResolved369Bridge = bridge
   sspNativeCompositionPreserved
   axisPlusPolarityRecoversLift
   sspPolarProjectionIsLosslessWithResidual
+
+
+------------------------------------------------------------------------
+-- 5. Live periodic Navier--Stokes max-cut normalized onto the TOE graph.
+--
+-- ZKP O/R/C/S/L/P/G/F.
+--
+-- O: Expose the current R650 periodic-B frontier from the existing TOE owner.
+-- R: Reuse R650 and R722. Do not create a second Navier--Stokes ontology.
+-- C: Export only exact carrier and routing facts.
+-- S: Keep finite algebra, analytic payment, and Clay promotion distinct.
+-- L: This bridge owns only the normalized TOE import edge.
+-- P: TOE consumers see one combined global commutator analytic object.
+-- G: Original PDE authors and original DASHI theorem owners retain credit.
+-- F: Open analytic payment and Clay promotion remain fail-closed.
+--
+-- Preconditions.
+--   * R700/R701 already expose the literal complete nested orbit.
+--   * R722 already recombines self and external terms.
+--
+-- Invariants.
+--   * Separate self cancellation is not a required analytic leaf.
+--   * Separate external payment is not a required analytic leaf.
+--   * A representation compiler is not a cutoff-uniform PDE estimate.
+--
+-- Postconditions.
+--   * The focused TOE graph reaches the live periodic-B max-cut.
+--   * Clay promotion remains false.
+------------------------------------------------------------------------
+
+toeNSR650LiteralNestedOrbitExpansionClosed :
+  NSR650.round650LiteralNestedFourHelicityOrbitExpansionClosed ≡ true
+toeNSR650LiteralNestedOrbitExpansionClosed = refl
+
+toeNSR650CombinedSelfExternalRecombined :
+  NSR650.round650SelfExternalRecombineToSingleGlobalCommutator ≡ true
+toeNSR650CombinedSelfExternalRecombined = refl
+
+toeNSR650SeparateSelfPaymentNotRequired :
+  NSR650.round650SeparateSelfCancellationRequiredAfterRecombination ≡ false
+toeNSR650SeparateSelfPaymentNotRequired = refl
+
+toeNSR650SeparateExternalPaymentNotRequired :
+  NSR650.round650SeparateExternalPaymentRequiredAfterRecombination ≡ false
+toeNSR650SeparateExternalPaymentNotRequired = refl
+
+toeNSR650RemainingObjectIsCombinedGlobalCommutator :
+  NSR650.round650RemainingAnalyticObjectIsCombinedGlobalCommutator ≡ true
+toeNSR650RemainingObjectIsCombinedGlobalCommutator = refl
+
+toeNSR650CombinedCutoffUniformPaymentRemainsOpen :
+  NSR650.round650CombinedSelfExternalCutoffUniformPaymentClosed ≡ false
+toeNSR650CombinedCutoffUniformPaymentRemainsOpen = refl
+
+toeNSR650ClayPromotionRemainsFalse :
+  NSR650.round650ClayPromotion ≡ false
+toeNSR650ClayPromotionRemainsFalse =
+  NSR650.round650ClayPromotionIsFalse

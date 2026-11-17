@@ -12,9 +12,11 @@ import DASHI.Interop.UnifiedMathLanguageSpine as Unified
 import DASHI.Physics.Closure.ClayNSProofRoadmapReceipt as NSRoadmap
 import DASHI.Physics.Closure.ClayYMProofRoadmapReceipt as YMRoadmap
 import DASHI.Physics.Closure.YMClayPromotionBoundary as YMBoundary
+import DASHI.Physics.Closure.NSABCDMaxCut20261002Exact as NSMaxCut
 import DASHI.Unified.InvariantSpine as Spine
-import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as YMTOE
-open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Unified.NSABCDTOENonPromotionBridgeExact as NSABCDTOE
+import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact as NSTOE
+import DASHI.Unified.NavierStokesR650DecisionTOEConvergenceExact as NSDecisionTOE
 
 navierStokesObject : Spine.UnifiedObjectInvariant
 navierStokesObject =
@@ -70,54 +72,33 @@ yangMillsPostureIsApproaching :
 yangMillsPostureIsApproaching =
   refl
 
-------------------------------------------------------------------------
--- Reuse the canonical Yang-Mills TOE convergence boundary.
-------------------------------------------------------------------------
-
-yangMillsTOEClayPromotionBlocked :
-  YMTOE.toeClayYangMillsPromoted ≡ false
-yangMillsTOEClayPromotionBlocked =
-  YMTOE.toeClayYangMillsPromotedIsFalse
-
-
-yangMillsTOECriticalFamilyCountIsSeven =
-  YMTOE.toeCriticalFamilyCountIsSeven
-
-
-yangMillsTOEIrreducibleFamilyCountIsFourteen =
-  YMTOE.toeIrreducibleSourceFamilyCountIsFourteen
-
-
-yangMillsTOEPublishedRGDoesNotPromoteContinuum :
-  YMTOE.toeFlat4DContinuumTransferProvedHere ≡ false
-yangMillsTOEPublishedRGDoesNotPromoteContinuum =
-  YMTOE.toePublishedRGDoesNotPromoteContinuum
-
-yangMillsTOEContinuumMassGapBlocked :
-  YMTOE.toeContinuumMassGapPromoted ≡ false
-yangMillsTOEContinuumMassGapBlocked =
-  YMTOE.toeContinuumMassGapPromotedIsFalse
 
 ------------------------------------------------------------------------
--- Antigravity S4 / P3G normalized TOE surface.
+-- Exact NS max-cut TOE attachment.
 ------------------------------------------------------------------------
 
-yangMillsTOEAntigravityS4CompilerLevel :
-  ProofLevel
-yangMillsTOEAntigravityS4CompilerLevel =
-  YMTOE.toeAntigravityS4PhysicalMinCutCompilerLevel
+navierStokesABCDTOEConvergenceReceipt :
+  NSABCDTOE.NSABCDTOEConvergenceReceipt
+navierStokesABCDTOEConvergenceReceipt =
+  NSABCDTOE.canonicalNSABCDTOEConvergenceReceipt
 
-yangMillsTOEAntigravityP3GCompilerLevel :
-  ProofLevel
-yangMillsTOEAntigravityP3GCompilerLevel =
-  YMTOE.toeAntigravityP3GPhysicalProducerCompilerLevel
+navierStokesClayPromotionRemainsFalse :
+  NSMaxCut.clayPromotion ≡ false
+navierStokesClayPromotionRemainsFalse =
+  NSABCDTOE.nsClayPromotionRemainsFalse
 
-yangMillsTOEAntigravityInitialSharedCouplingLevel :
-  ProofLevel
-yangMillsTOEAntigravityInitialSharedCouplingLevel =
-  YMTOE.toeAntigravityP3GInitialSharedCouplingLevel
 
-yangMillsTOEAntigravityLocalRemainderLevel :
-  ProofLevel
-yangMillsTOEAntigravityLocalRemainderLevel =
-  YMTOE.toeAntigravityP3GLocalRemainderLevel
+navierStokesR650CombinedSelfExternalRecombined :
+  NSTOE.NSR650.round650SelfExternalRecombineToSingleGlobalCommutator ≡ true
+navierStokesR650CombinedSelfExternalRecombined =
+  NSTOE.toeNSR650CombinedSelfExternalRecombined
+
+navierStokesR650CombinedPaymentRemainsOpen :
+  NSTOE.NSR650.round650CombinedSelfExternalCutoffUniformPaymentClosed ≡ false
+navierStokesR650CombinedPaymentRemainsOpen =
+  NSTOE.toeNSR650CombinedCutoffUniformPaymentRemainsOpen
+
+navierStokesR650ClayPromotionRemainsFalse :
+  NSTOE.NSR650.round650ClayPromotion ≡ false
+navierStokesR650ClayPromotionRemainsFalse =
+  NSTOE.toeNSR650ClayPromotionRemainsFalse

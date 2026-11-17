@@ -37,15 +37,9 @@ on:
     paths:
       - 'DASHI/Core/SymmetryResolvedFibreExact.agda'
       - 'DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda'
-      - 'DASHI/Physics/Closure/NSClayFacingBPureAnalysisFrontier20261005Exact.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingDefectR44020261007Exact.agda'
-      - 'DASHI/Physics/Closure/NSHistoricalSignedExternalCommutatorSnowballLineageExact.agda'
-      - 'DASHI/Physics/YangMills/YangMillsClayGoal1MaximumCutRound485Exact.agda'
-      - 'DASHI/Physics/YangMills/YangMillsClayIrreducibleSourceFamiliesRound546Exact.agda'
-      - 'DASHI/Physics/YangMills/YangMillsClayCriticalPathRound558Exact.agda'
-      - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda'
-      - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda'
-      - 'Docs/diagrams/ym_toe_r559_current_master_convergence.puml'
+      - 'DASHI/Physics/Closure/NSTriadKNPeriodicTwoInequalityMaxCutRound650Exact.agda'
+      - 'DASHI/Unified/Physics.agda'
+      - 'DASHI/Unifier.agda'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda'
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda'
@@ -241,7 +235,8 @@ jobs:
             DASHI/Unified/Fleet58ManifestAcquisitionExact.agda
             DASHI/Core/SymmetryResolvedFibreExact.agda
             DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda
-            DASHI/Unified/OggSSP2BTOEExact.agda
+            DASHI/Unified/Physics.agda
+            DASHI/Unifier.agda
             DASHI/EverythingTOESymmetryResolved369.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
@@ -263,21 +258,20 @@ jobs:
             fi
           done
 
-      - name: Kernel-check TOE symmetry-resolved aggregate and direct endpoints
+      - name: Install semantic preflight
+        run: python -m pip install -e tools/agda_preflight
+
+      - name: Semantic preflight normalized NS TOE surfaces
+        run: |
+          dashi-agda-preflight --root . DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda
+          dashi-agda-preflight --root . DASHI/Unified/Physics.agda
+          dashi-agda-preflight --root . DASHI/Unifier.agda
+          dashi-agda-preflight --root . DASHI/EverythingTOESymmetryResolved369.agda
+
+      - name: Kernel-check TOE symmetry-resolved aggregate
         run: |
           agda --version
-          modules=(
-            DASHI/EverythingTOESymmetryResolved369.agda
-            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
-            DASHI/Unified/Physics.agda
-            DASHI/Unified/YMBlockDMaxCutTOEExact.agda
-            DASHI/Unified/YMBlockDMaxCutTOEValidation.agda
-            DASHI/Unified/Everything.agda
-            DASHI/Unifier.agda
-            DASHI/Physics/YangMills/BalabanCMP119RegularEReflectionSupportCutExact.agda
-            DASHI/Physics/YangMills/BalabanCMP119LiteralResidualWeldMaxCut20261002Exact.agda
-            DASHI/Unified/YMCMP119ResidualWeldTOEExact.agda
-          )
-          for module in "${modules[@]}"; do
-            agda -i . -l standard-library "$module"
-          done
+          agda -i . -l standard-library DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda
+          agda -i . -l standard-library DASHI/Unified/Physics.agda
+          agda -i . -l standard-library DASHI/Unifier.agda
+          agda -i . -l standard-library DASHI/EverythingTOESymmetryResolved369.agda
