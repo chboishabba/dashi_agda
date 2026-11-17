@@ -33,18 +33,23 @@ class Model:
     exogenous_freq: float = 0.7
     delay: float = 0.4
     plasma_node: int = 2
+    plasma_mode: str = 'shunt'  # 'series' inserts a variable resistor on link
 
 ENERGY_KEYS=('upstream_input','recharge_heat','feed_heat','link_heat',
              'plasma_heat','load','ion_creation_paid','ion_loss','controller_input',
              'controller_loss')
 
 def validate(p):
+    if p.plasma_mode not in ('shunt','series'):
+        raise ValueError('unknown plasma placement')
     if p.nodes < 3 or not 0 <= p.plasma_node < p.nodes:
         raise ValueError('bad discrete geometry')
     pos=(p.c_node,p.l_link,p.c_source,p.pair_energy)
     nonneg=(p.r_link,p.g_recharge,p.g_feed,p.g_load,p.g_plasma_per_n,
             p.n_init,p.ion_seed,p.ion_driven,p.attachment,p.recombination,
             p.controller_aux,p.exogenous_freq,p.delay)
+    if p.plasma_mode == 'series' and p.plasma_node >= p.nodes-1:
+        raise ValueError('series channel must lie on a link')
     if not all(isfinite(x) and x>0 for x in pos) or not all(isfinite(x) and x>=0 for x in nonneg):
         raise ValueError('passive model needs positive storage and nonnegative losses')
     if not all(isfinite(x) for x in (p.exogenous_dc,p.exogenous_ac)):
@@ -72,9 +77,13 @@ def powers_and_derivative(t,y,p):
         inbound=feed if k==0 else i[k-1]
         outbound=0. if k==p.nodes-1 else i[k]
         dissipative=(p.g_load*v[k] if k==p.nodes-1 else 0.)
-        if k==p.plasma_node:dissipative+=p.g_plasma_per_n*n*v[k]
+        if p.plasma_mode=='shunt' and k==p.plasma_node:dissipative+=p.g_plasma_per_n*n*v[k]
         dv[k]=(inbound-outbound-dissipative)/p.c_node
-    di=(v[:-1]-v[1:]-p.r_link*i)/p.l_link
+    gch=p.g_plasma_per_n*n
+    channel_R=(1/gch if gch>0 else 1e30)
+    link_R=np.full(p.nodes-1,p.r_link)
+    if p.plasma_mode=='series':link_R[p.plasma_node]+=channel_R
+    di=(v[:-1]-v[1:]-link_R*i)/p.l_link
     created=p.ion_seed+p.ion_driven
     lost=p.attachment*n+p.recombination*n*n
     dn=created-lost
@@ -84,7 +93,8 @@ def powers_and_derivative(t,y,p):
         p.g_recharge*(vexo-vs)**2,
         p.g_feed*(vs-v[0])**2,
         p.r_link*np.dot(i,i),
-        p.g_plasma_per_n*n*v[p.plasma_node]**2,
+        (p.g_plasma_per_n*n*v[p.plasma_node]**2 if p.plasma_mode=='shunt'
+         else channel_R*i[p.plasma_node]**2),
         p.g_load*v[-1]**2,
         p.pair_energy*created,
         p.pair_energy*lost,
@@ -119,7 +129,15 @@ def symbolic_telescoping_check(nodes=5):
     p_in=ve*recharge+pump+aux
     p_out=(gr*(ve-vs)**2+gf*(vs-vv[0])**2+rr*sum(x*x for x in ii)
           +gl*vv[-1]**2+gp*nn*vv[nodes//2]**2+loss+aux)
-    return sp.expand(p_in-p_out-energy_rate)==0
+    assert sp.expand(p_in-p_out-energy_rate)==0
+    # Series alternative inserts dissipative Rc in one link; account Rc*I_j^2.
+    j=nodes//2-1
+    Rc=sp.symbols('Rc',real=True)
+    di_series=list(di)
+    di_series[j]-=Rc*ii[j]/ll
+    rate_series=energy_rate+ll*ii[j]*(di_series[j]-di[j])
+    out_series=p_out+Rc*ii[j]**2
+    return sp.expand(p_in-out_series-rate_series)==0
 
 def energy(y,p):
     vs,v,i,n=unpack(y,p)
