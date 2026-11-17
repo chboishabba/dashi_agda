@@ -1,17 +1,28 @@
 module DASHI.Unifier where
-import DASHI.Arithmetic.TwinPrimeSixWheelExact as TwinPrimeSixWheel
-import DASHI.Arithmetic.TwinPrimeFRACDASHReuseExact as TwinPrimeFRACDASH
-import DASHI.Arithmetic.CertifiedPrimePairModulusExact as ArbitraryPrimeCRT
-import DASHI.Arithmetic.CertifiedPrimePairPeriodExact as PairCRTPeriod
-import DASHI.Arithmetic.SignedSSPPrimeOffsetMacroExact as SignedOffsetMacro
-open SignedOffsetMacro public using
-  ( plusTwoFractionMacro
-  ; minusTwoFractionMacro
-  ; plusOutputHasOffsetExponent
-  ; minusOutputHasOffsetExponent
-  ; signedPlusIsForward
-  ; signedMinusIsInverse
-  ; minusIsNegationOfPlus
+
+-- BOM 2026 additive governance export: reuse original proof owner.
+import DASHI.Governance.BOMVersionedSameObjectCorrectionExact as BOMVersioned
+import DASHI.Core.IntersectionalNonFactorability as BOMNonFactor
+
+import DASHI.Unified.AdelicSpectralPaperTOEExact as AdelicSpectralTOE
+
+-- September 2026 source-typed finite spectral closure and fail-closed gates.
+-- Reuse the existing NonArchimedean owner; do not rebuild source Lean proofs.
+open AdelicSpectralTOE public using
+  ( toeFiniteSpatialCircleClosed
+  ; toeFiniteTwistedPowerClosed
+  ; toeLiteralSpectrumTowerClosed
+  ; toePrefactoredFiniteMixingClosed
+  ; toeConstructiveFiniteStoppingTailClosed
+  ; toeDirectedSizeSigmaHalfRejected
+  ; toeArbitraryDAGCoverNeedsConstruction
+  ; toeDepthSparsityNeedsQuantitativeBound
+  ; toeBoundaryEntropyNeedsSameObjectWeld
+  ; toeRoPEOptimalityNeedsModelConsumer
+  ; toeMultiPrimeSparsityNonPromotion
+  ; toeHolographySameObjectNonPromotion
+  ; toeNoAutomaticSpectralToRoPETransfer
+  ; toeOriginalAdvertisedChainHasNoLiveProducer
   )
 
 -- TOE governance lane. Reuse original proof owners; no ESD modifications.
@@ -609,87 +620,131 @@ DASHI-Unification-Theorem = DASHIUnificationAxiom
 
 
 ------------------------------------------------------------------------
--- Fact check BOM scandal: proof-preserving aliases from original owners.
--- A reported error is not fraud. Repetition is not independent evidence.
--- Shared policy headlines do not identify original source or tax design.
+
+unifierCannabisPotencyPreferenceBoundary :
+  CannabisAssay.CannabisPotencyPreferenceBoundary
+unifierCannabisPotencyPreferenceBoundary =
+  CannabisAssay.canonicalCannabisPotencyPreferenceBoundary
+
+unifierCannabisRoyaleComparatorPreferenceObservation :
+  CannabisAssay.PotencyPreferenceObservation
+unifierCannabisRoyaleComparatorPreferenceObservation =
+  CannabisAssay.royaleComparatorPreferenceObservation
+
+unifierCannabisJadeRoyalePreferenceObservation :
+  CannabisAssay.PotencyPreferenceObservation
+unifierCannabisJadeRoyalePreferenceObservation =
+  CannabisAssay.jadeRoyalePreferenceObservation
+
+unifierCannabisPotencyOnlyMonotoneDoesNotFitCurrentFixture :
+  CannabisAssay.PotencyOnlyMonotoneFitsCurrentFixture → ⊥
+unifierCannabisPotencyOnlyMonotoneDoesNotFitCurrentFixture =
+  CannabisAssay.potencyOnlyMonotoneDoesNotFitCurrentFixture
+
+unifierCannabisNominalPotencyDoesNotCreateDeliveredDose :
+  CannabisAssay.NominalPotencyCreatesDeliveredDose → ⊥
+unifierCannabisNominalPotencyDoesNotCreateDeliveredDose =
+  CannabisAssay.nominalPotencyDoesNotCreateDeliveredDose
+
+unifierCannabisReportedPreferenceDoesNotCreateTerpeneCause :
+  CannabisAssay.ReportedPreferenceCreatesTerpeneCause → ⊥
+unifierCannabisReportedPreferenceDoesNotCreateTerpeneCause =
+  CannabisAssay.reportedPreferenceDoesNotCreateTerpeneCause
+
+unifierCannabisReportedPreferenceDoesNotCreateOutdoorCause :
+  CannabisAssay.ReportedPreferenceCreatesOutdoorCause → ⊥
+unifierCannabisReportedPreferenceDoesNotCreateOutdoorCause =
+  CannabisAssay.reportedPreferenceDoesNotCreateOutdoorCause
+
+unifierCannabisPotencyPreferenceZKPFrame :
+  ParetoSnowballTOE.TOEZKPFrame
+unifierCannabisPotencyPreferenceZKPFrame =
+  ParetoSnowballTOE.toe-zkp-frame
+    "O: formalise the current Jade/Royale/high-potency comparison without promoting headline THC into dose, exposure, mechanism, or clinical effect"
+    "R: reuse the commercial same-sample assay, composition, interaction, temporal-evidence, and non-promotion owners before extension"
+    "C: extend the existing commercial-assay owner with one bounded potency/preference discriminator and expose exact aliases through TOE roots"
+    "S: product label potency is not exact batch composition; potency is not delivered dose; dose is not exposure; preference does not create terpene or outdoor causation"
+    "L: one disjoint cannabis evidence lane; no ESD mutation; no retargeting of the 584 discharged fibres"
+    "P: Agda remains golden; current preference evidence is source-bounded; exact batch assays remain unpaid; attribution stays with source authors"
+    "G: ITIL, ISO 9000/42001/27001/27701/23894/9241, NIST AI RMF, Six Sigma, and C4/PlantUML are process lenses only and do not create scientific authority"
+    "F: Unifier reaches the same bounded reversal and non-promotion theorems as the TOE root"
+    "verification: code-search deduplication; trust-escape scan; ESD diff scan; Agda kernel check when an Agda runtime is available"
+    false false false false
+
+------------------------------------------------------------------------
+-- Highest-alpha YM Route-S selected source -> OS max-cut (canonical owner).
+-- Reuses R320 -> R295 -> R313 -> R296 -> R333; physical inputs not promoted.
 ------------------------------------------------------------------------
 
-toeBOMHistoricalErrorDoesNotProveFraud :
-  BOM.rawDigitisationErrorImpliesDeliberateFraud
-    BOM.canonicalNonPromotionBoundary ≡ false
-toeBOMHistoricalErrorDoesNotProveFraud =
-  BOMCheck.historicalErrorCannotProveFraud
+unifierBalabanR320RouteSToOSCompilerLevel : ProofLevel
+unifierBalabanR320RouteSToOSCompilerLevel =
+  BalabanRGTOE.balabanR320RouteSToOSCompilerLevel
 
-toeBOMMediaOwnershipDoesNotProveCommand :
-  BOM.publisherOwnershipProvesEditorialDirection
-    BOM.canonicalNonPromotionBoundary ≡ false
-toeBOMMediaOwnershipDoesNotProveCommand =
-  BOMCheck.ownershipDoesNotEstablishCommand
+unifierBalabanR320RouteSSelectedSourceLevel : ProofLevel
+unifierBalabanR320RouteSSelectedSourceLevel =
+  BalabanRGTOE.balabanR320RouteSSelectedPhysicalSourceLevel
 
-toeBOMRhetoricDoesNotProveCoordination :
-  BOM.sameRhetoricProvesTPUSAOrBannonControl
-    BOM.canonicalNonPromotionBoundary ≡ false
-toeBOMRhetoricDoesNotProveCoordination =
-  BOMCheck.similarRhetoricDoesNotProveNetwork
-
-toeBOMOriginalAuditRemainsUnacquired :
-  BOM.canonicalOriginalAuditStatus ≡ BOM.notAcquired
-toeBOMOriginalAuditRemainsUnacquired =
-  BOMCheck.unseenAuditIsNotAcquired
-
-toeBOMCorrectionRequiresSameObject :
-  BOM.correctionNeedsSameObjectDataComparison
-    BOM.canonicalNonPromotionBoundary ≡ true
-toeBOMCorrectionRequiresSameObject =
-  BOMCheck.correctionRequiresSameObjectComparison
-
-toeBOMPalmervilleRoundedDataCannotRecoverExactDay :
-  INF.FactorsThrough
-    BOM.roundedSeventeenDayObservation BOM.firstDayTenths → ⊥
-toeBOMPalmervilleRoundedDataCannotRecoverExactDay =
-  BOMCheck.palmervilleMeasurementPrecisionNotAProbability
-
-toeClimateRepeated17BDoesNotIdentifySourceCount :
-  INF.FactorsThrough
-    Climate.same17BPrinted Climate.namedModelSourceCount → ⊥
-toeClimateRepeated17BDoesNotIdentifySourceCount =
-  Origins.same17BHeadlineDoesNotIdentifyNamedModelCount
-
-toeClimateSame25PcDoesNotIdentifyTaxDesign :
-  INF.FactorsThrough
-    Climate.taxRateLabel Climate.taxPolicyMeaning → ⊥
-toeClimateSame25PcDoesNotIdentifyTaxDesign =
-  Origins.same25PcHeadlineDoesNotIdentifyTaxDesign
-
-toeIndustry21Point9BDoesNotIdentifyForecastStatus :
-  INF.FactorsThrough
-    Climate.same21BPrinted Climate.reportedStatusFor21B → ⊥
-toeIndustry21Point9BDoesNotIdentifyForecastStatus =
-  Origins.same21Point9BNumberDoesNotEstablishActualityStatus
-
-toeThinkTankProximityDoesNotProveDirection :
-  Proximity.InfluenceThroughProximity → ⊥
-toeThinkTankProximityDoesNotProveDirection =
-  Proximity.influenceDoesNotFactorThroughProximity
+unifierBalabanR320RouteSNoDuplicateMagnitude :
+  BalabanRGTOE.balabanR320RouteSMagnitudeNotNewPhysical ≡ false
+unifierBalabanR320RouteSNoDuplicateMagnitude =
+  BalabanRGTOE.balabanR320RouteSNoSecondAbsoluteMagnitudeInput
 
 
--- Global original-claim genealogy, not a gas-tax-as-climate-denial shortcut.
--- Preserve one WFA film as one evidence object with several propositions.
+------------------------------------------------------------------------
+-- Pareto P2: existing rational SU2 trace bound -> same-physical Gram
+-- boundedness producer -> canonical Wilson S2 input.
+------------------------------------------------------------------------
 
-toeGlobalOneFilmThreeClaimsNotThreeIndependentModels :
-  INF.FactorsThrough
-    Climate.threeTalkingPointsObserved Climate.originalObjectsForTalkingPoints → ⊥
-toeGlobalOneFilmThreeClaimsNotThreeIndependentModels =
-  Origins.globalOneFilmThreeClaimsNotThreeIndependentModels
+unifierBalabanRouteSP2TraceToS2Level : ProofLevel
+unifierBalabanRouteSP2TraceToS2Level =
+  BalabanRGTOE.balabanRouteSP2TraceToCanonicalS2CompilerLevel
 
-toeGlobalPlantFertilisationIsNotNetClimateImpact :
-  INF.FactorsThrough
-    Climate.observedPlantFertilisation Climate.wholeClimateOutcome → ⊥
-toeGlobalPlantFertilisationIsNotNetClimateImpact =
-  Origins.globalPositiveFertilisationIsNotNetClimateHarmEvaluation
+unifierBalabanRouteSP2PhysicalInterpretationLevel : ProofLevel
+unifierBalabanRouteSP2PhysicalInterpretationLevel =
+  BalabanRGTOE.balabanRouteSP2TracePhysicalInterpretationLevel
 
-toeGlobal1975CoolingMediaIsNotConsensus :
-  INF.FactorsThrough
-    Climate.sampledHistoricalMediaPresence Climate.hypotheticalScientificMajority → ⊥
-toeGlobal1975CoolingMediaIsNotConsensus =
-  Origins.global1975MediaArticleIsNotContemporaryScienceCensus
+unifierBalabanRouteSP2PerLoopBoundAfterInterpretation :
+  BalabanRGTOE.balabanRouteSP2TracePerLoopBoundFlag ≡ true
+unifierBalabanRouteSP2PerLoopBoundAfterInterpretation =
+  BalabanRGTOE.balabanRouteSP2TracePaysPerLoopBounds
+
+
+------------------------------------------------------------------------
+-- Preferred native rational-Wilson P2 (actual measure producer), not
+-- the generic external trace-to-Gram compatibility adapter.
+------------------------------------------------------------------------
+
+unifierBalabanRouteSP2NativeNoProductPayment :
+  BalabanRGTOE.balabanRouteSP2NativeNoExtraProduct ≡ true
+unifierBalabanRouteSP2NativeNoProductPayment =
+  BalabanRGTOE.balabanRouteSP2NativeNoExtraProductIsTrue
+
+unifierBalabanRouteSP2NativeNoDistancePayment :
+  BalabanRGTOE.balabanRouteSP2NativeNoDistance ≡ false
+unifierBalabanRouteSP2NativeNoDistancePayment =
+  BalabanRGTOE.balabanRouteSP2NativeNoDistanceIsFalse
+
+unifierBalabanRouteSP2NativeCompilerLevel : ProofLevel
+unifierBalabanRouteSP2NativeCompilerLevel =
+  BalabanRGTOE.balabanRouteSP2NativeCompilerLevel
+
+
+unifierBalabanRouteSP2R445NoSecondMoment :
+  BalabanRGTOE.balabanRouteSP2R445IndependentMomentRequired ≡ false
+unifierBalabanRouteSP2R445NoSecondMoment =
+  BalabanRGTOE.balabanRouteSP2R445IndependentMomentRequiredIsFalse
+
+unifierBalabanRouteSP2R445CompilerLevel : ProofLevel
+unifierBalabanRouteSP2R445CompilerLevel =
+  BalabanRGTOE.balabanRouteSP2R445NativeCompilerLevel
+
+------------------------------------------------------------------------
+-- BOM 2026 versioned raw-data correction: narrowly scoped non-promotion.
+-- This is a finite information-loss result, not an estimated climate trend.
+------------------------------------------------------------------------
+
+unifierBOMRawErrorNoTrendPromotion :
+  BOMNonFactor.FactorsThrough
+    BOMVersioned.seenRawError BOMVersioned.downstreamTrendEffect → ⊥
+unifierBOMRawErrorNoTrendPromotion =
+  BOMVersioned.rawErrorCannotByItselfEstablishTrendImpact
