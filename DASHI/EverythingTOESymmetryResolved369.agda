@@ -9,8 +9,9 @@ import DASHI.Analysis.RiemannMarkedCompletedTraceArithmeticAuditExact as RHPrime
 import DASHI.Analysis.RiemannThreeTapCurrentLeanFrontierExact as RHThreeTapFrontier
 import DASHI.Analysis.RiemannThreeTapTerminalCompletionLeanDonorExact as RHTerminal
 import DASHI.Unified.SingularBasinCoarseRGTOEExact as SingularBasinTOE
-import DASHI.Mathematics.CrossPollination.MillenniumLeanAssistReceiptExact as MillenniumExternal
-import DASHI.Mathematics.CrossPollination.MillenniumResidualDescentClassifierExact as MillenniumResidual
+import DASHI.Analysis.RiemannMarkedCompletedTraceArithmeticAuditExact as RHPrimeAudit
+import DASHI.Analysis.RiemannThreeTapCurrentLeanFrontierExact as RHThreeTapFrontier
+import DASHI.Analysis.RiemannThreeTapTerminalCompletionLeanDonorExact as RHTerminal
 
 
 -- TOE ternary-27: retain dependent residual; never identify a three-edge boundary with its face.
@@ -21,7 +22,7 @@ import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Bool using (Bool; false; true)
-import Data.Empty using (⊥)
+open import Data.Empty using (⊥)
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -1171,9 +1172,385 @@ toeRHPrimeIdentityStillOpen =
   RHFrontier.StrictTP2TrancheReceipt.g22LiteralPrimeIdentityDerivedIsFalse
     toeRHStrictTP2Receipt
 
-toeRHClayNotPromoted :
-  RHFrontier.StrictTP2TrancheReceipt.riemannHypothesisDerived
-    toeRHStrictTP2Receipt ≡ false
-toeRHClayNotPromoted =
-  RHFrontier.StrictTP2TrancheReceipt.riemannHypothesisDerivedIsFalse
-    toeRHStrictTP2Receipt
+------------------------------------------------------------------------
+-- Direct constructive Balaban RG scale-transfer non-promotion.
+-- The theorem owner remains the scale-transfer frontier.
+-- The joint receipt is the normalized TOE path.
+------------------------------------------------------------------------
+
+import Data.Empty using (⊥)
+
+toeBalabanR559Gate4UnresolvedCount : ℕ
+toeBalabanR559Gate4UnresolvedCount =
+  BalabanR559TOE.gate4UnresolvedCount
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+toeBalabanR559Gate4UnresolvedCountIs58 :
+  toeBalabanR559Gate4UnresolvedCount ≡ 58
+toeBalabanR559Gate4UnresolvedCountIs58 =
+  BalabanR559TOE.gate4UnresolvedCountIs58
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+toeBalabanR559Gate4DefinitionLevel : ProofLevel
+toeBalabanR559Gate4DefinitionLevel =
+  BalabanR559TOE.gate4DefinitionLevel
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+toeBalabanR559Gate4InhabitantsLevel : ProofLevel
+toeBalabanR559Gate4InhabitantsLevel =
+  BalabanR559TOE.gate4InhabitantsLevel
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+toeBalabanScaleTransferNonPromotion :
+  BalabanR559TOE.ScaleTransferPromotion → ⊥
+toeBalabanScaleTransferNonPromotion =
+  BalabanR559TOE.scaleTransferPromotionEliminator
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+------------------------------------------------------------------------
+-- R559 / Ibrahim / fleet-58 / generic-hyperfabric TOE convergence.
+------------------------------------------------------------------------
+
+import DASHI.Unified.R559IbrahimFleetHyperfabricTOEExact as FleetHyperTOE
+
+toeR559IbrahimFleetHyperfabricReceipt :
+  FleetHyperTOE.R559IbrahimFleetHyperfabricTOEReceipt
+toeR559IbrahimFleetHyperfabricReceipt =
+  FleetHyperTOE.canonicalR559IbrahimFleetHyperfabricTOEReceipt
+
+toeFleetFormalGapsAre58 :
+  FleetHyperTOE.fleetFormalGaps ≡ 58
+toeFleetFormalGapsAre58 =
+  FleetHyperTOE.fleetFormalGapsAre58
+
+toeYMGate4FormalGapsAre58 :
+  FleetHyperTOE.ymGate4FormalGaps ≡ 58
+toeYMGate4FormalGapsAre58 =
+  FleetHyperTOE.ymGate4FormalGapsAre58
+
+toeYMGate4PaidReductionLevel : ProofLevel
+toeYMGate4PaidReductionLevel =
+  FleetHyperTOE.ymGate4PaidReductionLevel
+
+toeYMGate4InhabitantsLevel : ProofLevel
+toeYMGate4InhabitantsLevel =
+  FleetHyperTOE.ymGate4InhabitantsLevel
+
+toeFleet58DoesNotIdentifyYMGate4 :
+  FleetHyperTOE.Fleet58EqualsYMGate4SameObject → ⊥
+toeFleet58DoesNotIdentifyYMGate4 =
+  FleetHyperTOE.fleet58CardinalityDoesNotProveYMGate4Identity
+
+toeFleetDischargedFibresAre584 :
+  FleetHyperTOE.fleetDischargedFibres ≡ 584
+toeFleetDischargedFibresAre584 =
+  FleetHyperTOE.fleetDischargedFibresAre584
+
+toeFleetContradictionGapsAre44 :
+  FleetHyperTOE.fleetContradictionGaps ≡ 44
+toeFleetContradictionGapsAre44 =
+  FleetHyperTOE.fleetContradictionGapsAre44
+
+toePadicPrefixCannotRecoverDiscardedDigit :
+  FleetHyperTOE.PadicPrefixRecovery → ⊥
+toePadicPrefixCannotRecoverDiscardedDigit =
+  FleetHyperTOE.toePadicPrefixCannotRecoverDiscardedDigit
+
+toeTwoDigitStreamCannotRecoverThird :
+  FleetHyperTOE.StreamThirdPrefixRecovery → ⊥
+toeTwoDigitStreamCannotRecoverThird =
+  FleetHyperTOE.toeTwoDigitStreamCannotRecoverThird
+
+------------------------------------------------------------------------
+-- Implement-A-to-D reuse-only TOE normalization.
+------------------------------------------------------------------------
+
+import DASHI.Unified.YMImplementAToDTOEMaxCutExact as YMAD
+
+toeYMImplementAToDMaxCutReceipt :
+  YMAD.YMImplementAToDTOEMaxCutReceipt
+toeYMImplementAToDMaxCutReceipt =
+  YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+toeYMImplementAToDZKPFrame : YMAD.YMImplementAToDZKPFrame
+toeYMImplementAToDZKPFrame =
+  YMAD.canonicalYMImplementAToDZKPFrame
+
+toeYMImplementAToDGate4UnresolvedCount : ℕ
+toeYMImplementAToDGate4UnresolvedCount =
+  YMAD.gate4UnresolvedCount YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+toeYMImplementAToDGate4UnresolvedCountIs58 :
+  toeYMImplementAToDGate4UnresolvedCount ≡ 58
+toeYMImplementAToDGate4UnresolvedCountIs58 =
+  YMAD.gate4UnresolvedCountIs58 YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+toeYMImplementAToDPublishedContinuumStillBlocked :
+  YMAD.publishedContinuumPromotion YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+  ≡ false
+toeYMImplementAToDPublishedContinuumStillBlocked =
+  YMAD.publishedContinuumPromotionIsFalse
+    YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+toeYMImplementAToDContinuumMassGapStillBlocked :
+  YMAD.continuumMassGapPromotion YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+  ≡ false
+toeYMImplementAToDContinuumMassGapStillBlocked =
+  YMAD.continuumMassGapPromotionIsFalse
+    YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+toeYMImplementAToDClayStillBlocked :
+  YMAD.clayPromotion YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+  ≡ false
+toeYMImplementAToDClayStillBlocked =
+  YMAD.clayPromotionIsFalse YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+toeYMImplementAToDScaleTransferNonPromotion :
+  BalabanR559TOE.ScaleTransferPromotion → ⊥
+toeYMImplementAToDScaleTransferNonPromotion =
+  YMAD.scaleTransferPromotionEliminator
+    YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+------------------------------------------------------------------------
+-- Direct proof-bearing byte-ABI and host/device promotion cut.
+-- Reuse original finite codec and actual host runtime owners.
+-- The 58 planning gaps are not discharged by a host byte witness.
+------------------------------------------------------------------------
+
+import DASHI.ComputerScience.TriadicFin27Byte256ABIExact as TriadicABI
+import DASHI.ComputerScience.TriadicU8RuntimeOracleCrossRepoExact as TriadicHost
+
+toeHostU8RustBindingStillUnpaid :
+  TriadicHost.rustU8BindingPaid TriadicHost.currentU8RuntimeBoundary
+  ≡ false
+toeHostU8RustBindingStillUnpaid = refl
+
+toeHostByteDoesNotCreateDeviceByte :
+  TriadicHost.HostByteImpliesDeviceByte → ⊥
+toeHostByteDoesNotCreateDeviceByte =
+  TriadicHost.hostByteDoesNotCreateDeviceByte
+
+toeHostRuntimeReceiptCannotCreateKernelCertification :
+  TriadicHost.RuntimeSourceImpliesKernelCertification → ⊥
+toeHostRuntimeReceiptCannotCreateKernelCertification =
+  TriadicHost.runtimeSourceDoesNotCreateKernelCertification
+
+toeFinite27ByteABIDoesNotCreateRustImplementation :
+  TriadicABI.BoundedABIImpliesRustImplementation → ⊥
+toeFinite27ByteABIDoesNotCreateRustImplementation =
+  TriadicABI.abiDoesNotCreateRust
+
+------------------------------------------------------------------------
+-- Kernel-bidi / ternary-27 / byte-ABI max-cut convergence.
+------------------------------------------------------------------------
+
+import DASHI.Unified.R559IbrahimFleetKernelBidiTernary27TOEExact as Kernel27TOE
+
+toeR559IbrahimFleetKernelBidiTernary27Receipt :
+  Kernel27TOE.R559IbrahimFleetKernelBidiTernary27TOEReceipt
+toeR559IbrahimFleetKernelBidiTernary27Receipt =
+  Kernel27TOE.canonicalR559IbrahimFleetKernelBidiTernary27TOEReceipt
+
+toeTriadicRustBindingStillUnpaid :
+  Kernel27TOE.ABI.rustU8BindingPaid Kernel27TOE.triadicByteBoundary ≡ false
+toeTriadicRustBindingStillUnpaid =
+  Kernel27TOE.rustU8BindingStillUnpaid
+
+toeKernelCharacterIsotypyStillDoesNotConstructActionIntertwiner :
+  Kernel27TOE.KernelBidi.characterIsotypyConstructsActionIntertwiner
+    Kernel27TOE.kernelBidiBoundary ≡ false
+toeKernelCharacterIsotypyStillDoesNotConstructActionIntertwiner =
+  Kernel27TOE.kernelCharacterIsotypyStillDoesNotConstructActionIntertwiner
+
+toeSelected3BSingleActionProducerStillUninhabited :
+  Kernel27TOE.SingleProducer.actualSingleProducerInhabitedHere
+    Kernel27TOE.singleProducerBoundary ≡ false
+toeSelected3BSingleActionProducerStillUninhabited =
+  Kernel27TOE.singleActionProducerStillUninhabited
+
+
+------------------------------------------------------------------------
+-- Canonical Balaban RG / R559 same-owner and non-promotion projection.
+-- No new physical theorem. The joint owner supplies these proofs.
+-- Fleet 584/58 refers to the separate inventory, not a YM same-object proof.
+------------------------------------------------------------------------
+
+toeBalabanDensityOwnerAgreement :
+  BalabanR559TOE.balabanDensityFlow
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ BalabanR559TOE.r559DensityFlow
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+toeBalabanDensityOwnerAgreement =
+  BalabanR559TOE.densityOwnerAgreement
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+toeBalabanRegularEOwnerAgreement :
+  BalabanR559TOE.balabanRegularELocalization
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ BalabanR559TOE.r559RegularELocalization
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+toeBalabanRegularEOwnerAgreement =
+  BalabanR559TOE.regularEOwnerAgreement
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+toeBalabanStressMarkedShellOwnerAgreement :
+  BalabanR559TOE.balabanStressMarkedShell
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ BalabanR559TOE.r559StressMarkedShell
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+toeBalabanStressMarkedShellOwnerAgreement =
+  BalabanR559TOE.stressMarkedShellOwnerAgreement
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+toeBalabanStressHilbertOwnerAgreement :
+  BalabanR559TOE.balabanStressHilbertCompiler
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ BalabanR559TOE.r559StressHilbertCompiler
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+toeBalabanStressHilbertOwnerAgreement =
+  BalabanR559TOE.stressHilbertOwnerAgreement
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+toeBalabanBlockSpinStillBlocked :
+  BalabanR559TOE.balabanBlockSpinTransfer
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false
+toeBalabanBlockSpinStillBlocked =
+  BalabanR559TOE.balabanBlockSpinTransferIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+toeBalabanUniformKPStillBlocked :
+  BalabanR559TOE.balabanUniformKPAbsorption
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false
+toeBalabanUniformKPStillBlocked =
+  BalabanR559TOE.balabanUniformKPAbsorptionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+toeBalabanOSWightmanStillBlocked :
+  BalabanR559TOE.balabanOSWightmanConstruction
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false
+toeBalabanOSWightmanStillBlocked =
+  BalabanR559TOE.balabanOSWightmanConstructionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+toeRHUnmarkedTerminalStillNotIdentifiedWithMarkedArithmetic :
+  RHPrimeAudit.selectedUnmarkedTerminalEqualsMarkedArithmetic
+    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
+toeRHUnmarkedTerminalStillNotIdentifiedWithMarkedArithmetic =
+  RHPrimeAudit.selectedUnmarkedTerminalStillNotIdentifiedWithMarkedArithmetic
+
+toeRHIndependentArithmeticDiagonalProducerStillAbsent :
+  RHPrimeAudit.independentArithmeticDiagonalProducer
+    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
+toeRHIndependentArithmeticDiagonalProducerStillAbsent =
+  RHPrimeAudit.independentArithmeticDiagonalProducerStillAbsent
+
+toeRHTerminalStrictSignedEstimateStillOpen :
+  RHPrimeAudit.terminalStrictSignedEstimatePaid
+    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
+toeRHTerminalStrictSignedEstimateStillOpen =
+  RHPrimeAudit.terminalStrictSignedEstimateStillOpen
+
+
+------------------------------------------------------------------------
+-- RH transformed-prime / three-tap non-promotion convergence.
+-- Direct aliases only. Analysis remains the theorem/status owner.
+------------------------------------------------------------------------
+
+toeRHCompletedTraceCrossPollinationBoundary :
+  RHPrimeAudit.CompletedTraceCrossPollinationBoundary
+toeRHCompletedTraceCrossPollinationBoundary =
+  RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary
+
+toeRHSelectedMarkedPrimeAbsent :
+  RHPrimeAudit.selectedMarkedPrimeVanishingSourceWritten
+    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ true
+toeRHSelectedMarkedPrimeAbsent =
+  RHPrimeAudit.sourcePrimeAbsent
+
+toeRHUnmarkedSelectedPhysicalPrimeAbsent :
+  RHPrimeAudit.unmarkedSelectedPhysicalPrimeVanishingSourceWritten
+    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ true
+toeRHUnmarkedSelectedPhysicalPrimeAbsent =
+  RHPrimeAudit.unmarkedPrimeAbsent
+
+toeRHPrimeActivationRequiresFirstPrimeSupport :
+  RHPrimeAudit.nonzeroPrimeRequiresFirstPrimeSupportSourceWritten
+    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ true
+toeRHPrimeActivationRequiresFirstPrimeSupport =
+  RHPrimeAudit.firstPrimeSupportNecessary
+
+toeRHHeisenbergTraceTransportStillBlocked :
+  RHPrimeAudit.actualHeisenbergTraceEqualsSelectedZetaFunctional
+    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
+toeRHHeisenbergTraceTransportStillBlocked =
+  RHPrimeAudit.noUnjustifiedAnalyticTransport
+
+toeRHPrimeAuditDoesNotPromoteRH :
+  RHPrimeAudit.rhDerived
+    RHPrimeAudit.canonicalCompletedTraceCrossPollinationBoundary ≡ false
+toeRHPrimeAuditDoesNotPromoteRH =
+  RHPrimeAudit.noUnjustifiedRH
+
+toeRHThreeTapCurrentLeanFrontier :
+  RHThreeTapFrontier.ThreeTapCurrentLeanFrontier
+toeRHThreeTapCurrentLeanFrontier =
+  RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier
+
+toeRHThreeTapA1CarrierSummationStillOpen :
+  RHThreeTapFrontier.a1CarrierSummationPaid
+    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ false
+toeRHThreeTapA1CarrierSummationStillOpen =
+  RHThreeTapFrontier.a1CarrierIsStillOpen
+
+toeRHThreeTapA2StrictScalarStillOpen :
+  RHThreeTapFrontier.a2StrictScalarPaid
+    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ false
+toeRHThreeTapA2StrictScalarStillOpen =
+  RHThreeTapFrontier.a2ScalarIsStillOpen
+
+toeRHSignedFifthRouteStillOpen :
+  RHThreeTapFrontier.routeBEventualGapPaid
+    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ false
+toeRHSignedFifthRouteStillOpen =
+  RHThreeTapFrontier.routeBIsStillOpen
+
+toeRHThreeTapFrontierDoesNotPromoteRH :
+  RHThreeTapFrontier.rhDerivedHere
+    RHThreeTapFrontier.currentThreeTapCurrentLeanFrontier ≡ false
+toeRHThreeTapFrontierDoesNotPromoteRH =
+  RHThreeTapFrontier.rhNotClaimedByAgdaStatusMirror
+
+toeRHThreeTapTerminalBoundary :
+  RHTerminal.ThreeTapTerminalCompletionBoundary
+toeRHThreeTapTerminalBoundary =
+  RHTerminal.canonicalThreeTapTerminalCompletionBoundary
+
+toeRHThreeTapProjectiveTransportStillUnpaid :
+  RHTerminal.transformedProjectiveM6M8TransportPaid
+    RHTerminal.canonicalThreeTapTerminalCompletionBoundary ≡ false
+toeRHThreeTapProjectiveTransportStillUnpaid =
+  RHTerminal.projectiveM6M8TransportStillOpen
+
+toeRHThreeTapTerminalStrictSignStillOpen :
+  RHTerminal.transformedTerminalStrictSignPaid
+    RHTerminal.canonicalThreeTapTerminalCompletionBoundary ≡ false
+toeRHThreeTapTerminalStrictSignStillOpen =
+  RHTerminal.strictTerminalSignStillOpen
+
+toeRHThreeTapResonanceSignStillOpen :
+  RHTerminal.resonanceStrictSignPaid
+    RHTerminal.canonicalThreeTapTerminalCompletionBoundary ≡ false
+toeRHThreeTapResonanceSignStillOpen =
+  RHTerminal.resonanceSignStillOpen
+
+toeRHThreeTapNearLineCoefficientStillOpen :
+  RHTerminal.nearLineLeadingCoefficientStrictlyPositivePaid
+    RHTerminal.canonicalThreeTapTerminalCompletionBoundary ≡ false
+toeRHThreeTapNearLineCoefficientStillOpen =
+  RHTerminal.nearLineCoefficientStillOpen
+
+toeRHThreeTapTerminalDoesNotPromoteRH :
+  RHTerminal.rhDerivedHere
+    RHTerminal.canonicalThreeTapTerminalCompletionBoundary ≡ false
+toeRHThreeTapTerminalDoesNotPromoteRH =
+  RHTerminal.rhStillOpen
