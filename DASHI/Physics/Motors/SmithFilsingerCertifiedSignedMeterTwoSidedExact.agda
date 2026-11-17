@@ -30,9 +30,11 @@ record TwoSidedMeterCertificate
       Cert.ProofCarryingFiniteSumUpperEnclosure
         Meter.rationalAdditiveCarrier negativeCertificate
 
-    -- This equality is substantive: it pairs *the same signed residual
-    -- observations* across positive/negative certificates, not merely
-    -- two unrelated bounds with reassuring labels.
+    -- This equality is substantive: it identifies the EXACT TOTAL signed
+    -- residual of the original selected certificate with the opposite
+    -- TOTAL of the second certificate. It does not impose a bijection
+    -- between individual samples: aggregate bounds require precisely
+    -- aggregate equality, while physical sample provenance is separate.
     exactOppositeErrorSum :
       Cert.foldScalars Meter.rationalAdditiveCarrier
         (Cert.mapValues
