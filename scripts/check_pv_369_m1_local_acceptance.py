@@ -73,8 +73,9 @@ def main():
             entry["selftest"]="PASS"
             try:
                 report=json.loads(run.stdout)
-                entry["checks_reported"]=report.get("checks_passed")
-                if report.get("all_passed") is not True or not isinstance(report.get("checks_passed"),int) or report["checks_passed"]<10:
+                count=report.get("checks_passed",report.get("passed"))
+                entry["checks_reported"]=count
+                if report.get("all_passed") is not True or not isinstance(count,int) or count<10:
                     entry["selftest"]="FAIL"
                     result["errors"].append("missing verifiable JSON selftest count: "+name)
             except json.JSONDecodeError:
