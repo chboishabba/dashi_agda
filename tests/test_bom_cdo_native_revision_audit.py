@@ -32,7 +32,7 @@ class NativeTest(unittest.TestCase):
     def test_removed(self):
         r=self.run_native(line(),line(value=''))
         self.assertEqual(r['counts'],{'value_removed':1})
-        self.assertEqual(r['pre2000_value_removals_by_station'],{'066062':1})
+        self.assertEqual(r['pre2000_observed_values_lost_by_station'],{'066062':1})
         self.assertFalse(r['pre2000_target_matched'])
     def test_quality_change(self):
         self.assertEqual(self.run_native(line(),line(flag='N'))['counts'],{'quality_flag_changed':1})
