@@ -109,12 +109,12 @@ burischCamelot = scoped-source
 
 videoTranscript : ScopedSource
 videoTranscript = scoped-source
-  "Unidentified video narrator and quoted clips"
+  "Be Inspired / @beinspiredchannel; multiple archived interview clips"
   "She Researched Something THEY DON'T ALLOW. Then She Died"
-  "User-provided 32:44 timestamped transcript; video URL and upload date not supplied"
-  unresolvedLead notInspected
+  "https://www.youtube.com/watch?v=acw16d6CCnY; indexed 2026-05-12, duration 32:47; supplied transcript stops 32:44"
+  secondaryReport metadataAndNamedPassage
   "That the submitted transcript contains narrator statements and quotations at given timestamps"
-  "Correct clip identification, original footage integrity, primary scientific validation or an actual eleven-person roster"
+  "Exact original offsets of remaining unidentified interview cuts, independent experimental validation or an authenticated video eleven-person roster"
 
 -- Thomas Townsend Brown, Electrokinetic apparatus, US 2,949,550,
 -- filed 1957, granted 1960:
