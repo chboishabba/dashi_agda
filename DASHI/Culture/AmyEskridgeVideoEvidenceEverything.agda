@@ -13,6 +13,7 @@ module DASHI.Culture.AmyEskridgeVideoEvidenceEverything where
 
 import DASHI.Culture.AmyEskridgeVideoClaimAttributionLedgerExact
 import DASHI.Culture.AmyEskridgeVideoSourceRegistryExact
+import DASHI.Culture.AmyEskridgeVideoZoomClipSourceWeldExact
 import DASHI.Culture.AmyEskridgeVideoClaimProducerWeldExact
 import DASHI.Culture.AmyEskridgeVideoRosterScopeWeldExact
 import DASHI.Culture.AmyEskridgeVideoEleventhMediaRosterWeldExact
