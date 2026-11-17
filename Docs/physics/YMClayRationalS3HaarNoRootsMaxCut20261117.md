@@ -428,3 +428,61 @@ and prove consistency with the actual Bishop/continuous Haar
 polynomial limit and original SUN matrix-carrier identity.
 All-degree Bishop, full exponential and RG source welds OPEN.
 Agda/Nix are unavailable here, so no kernel acceptance is claimed.
+
+
+### 2026-11-17 finite original Wilson RG: explicit induced effective action
+
+This continuation goes BEYOND a generic pushforward existence statement.
+The original L=1 24cell rational subgroup has exact 24x24
+noncommutative multiplication, uniform finite one-link Haar and
+complete degree<=5 S3 monomial moments. Tensor its 24 nodes over
+the original four positive links, enumerate ALL 24^4=331776 true
+six-commutator fine configurations, and use the provably positive
+rational Gibbs Taylor polynomial
+  T2(beta D)=1-beta D+(beta D)^2/2 > 0, beta=1/96.
+The actual selected noncommutative block is B=U0*U1 and lies
+inside the SAME original rational 24cell subgroup.
+
+NEW exact CONDITIONAL moment identities: with t=(Re B)^2,
+
+  E[D | B]   = 19/4 - t
+  E[D^2 | B] = 4t^2/3 - 169t/18 + 230/9.
+
+The actual induced effective coarse density relative to the
+uniform 24-cell law is therefore
+
+  W_beta(t) = 1 - beta*(19/4-t)
+             + beta^2/2*(4t^2/3-169t/18+230/9).
+
+Three exact trace-square coarse classes exist:
+  t=0   : 6 states, W=78955/82944;
+  t=1/4 : 16 states, W=422191/442368;
+  t=1   : 2 states, W=35459/36864.
+
+Their positive mass average is exactly
+  Z_(L1,T2)=(6 W0 +16 W1/4 +2 W1)/24=140731/147456.
+The normalized pushforward law has coarse mass W_beta(t)/(24 Z),
+and exact blocked real trace expectation zero. Conditional coarse
+fibre counts are 24^3; finite positive disintegration is exact.
+This is NOT a fake renormalized same-beta Wilson action; it is the
+explicitly INDUCED coarse density.
+
+Executable sources:
+- scripts/check_ym_original_L1_24cell_group_rg_20261117.py
+  (346302 exact group/Wilson/pushforward assertions);
+- scripts/check_ym_original_L1_24cell_induced_rg_20261117.py
+  (full 331776-state conditional moment enumeration and class checks).
+
+Kernel-facing algebraic source:
+DASHI/Physics/YangMills/YMClayOriginalL1Rational24CellEffectiveRGExact.agda,
+a --safe CANDIDATE carrying the actual three-class rational weights,
+closed exact rational positivity, and Z equality. This does NOT yet
+prove the original group conditional moment formulas in Agda, nor
+inhabit the previous finite partition/disintegration owner from the
+24^4 literal group table. No pinned Agda/CI receipt is available.
+
+This closes a concrete original finite-quadratic-Taylor RG
+MATHEMATICAL subproblem. It DOES NOT prove the full exponential
+Wilson coarse effective action, native Bishop all-degree/limit
+functional, same-original SUN source equivalence, 4D continuum
+Yang-Mills or Clay mass gap. Those remain OPEN.
