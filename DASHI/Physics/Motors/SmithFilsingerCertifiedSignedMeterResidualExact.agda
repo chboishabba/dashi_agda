@@ -148,3 +148,49 @@ originalSignedResidualBelowCertifiedUpper :
     (Cert.ProofCarryingFiniteSumUpperEnclosure.certifiedUpper (upper m))
 originalSignedResidualBelowCertifiedUpper window m =
   Cert.finiteSumBelowCertifiedUpper (upper m)
+
+
+-- The upper endpoint is now transported all the way from the signed
+-- residual sum to the physically SAME ORIGINAL receiver work, but ONLY
+-- when the certified order is additive. This is a proof-bearing extra
+-- property, not a free assertion that every arbitrary relation is ≤.
+record SignedMeterUpperMonotonicity
+  (window : SpaceTime.FiniteSpaceTimeWindow)
+  (m : SelectedOriginalCertifiedMeter window) : Set₁ where
+  private
+    _≼_ =
+      Cert.ProofCarryingFiniteSumUpperEnclosure.lessOrEqual (upper m)
+  field
+    upperStableUnderObservedMeterWork :
+      ∀ {a b : ℚ.ℚ} →
+      a ≼ b →
+      (observedNetTerminalWork m ℚ.+ a)
+        ≼ (observedNetTerminalWork m ℚ.+ b)
+
+-- One-sided rigorous signed meter/work inequality. The residual bound
+-- may be negative or positive: the ordered theorem does not declare
+-- that measured work came from the environment, and does not assume
+-- the external field has an original-device physical witness.
+originalReceiverBelowObservedPlusCertifiedResidual :
+  (window : SpaceTime.FiniteSpaceTimeWindow)
+  (m : SelectedOriginalCertifiedMeter window)
+  (law : SignedMeterUpperMonotonicity window m) →
+  Cert.ProofCarryingFiniteSumUpperEnclosure.lessOrEqual (upper m)
+    (SpaceTime.FiniteSpaceTimeWindow.usefulReceiverWork window)
+    (observedNetTerminalWork m ℚ.+
+      Cert.ProofCarryingFiniteSumUpperEnclosure.certifiedUpper (upper m))
+originalReceiverBelowObservedPlusCertifiedResidual window m law =
+  subst
+    (λ z →
+      Cert.ProofCarryingFiniteSumUpperEnclosure.lessOrEqual (upper m)
+        z
+        (observedNetTerminalWork m ℚ.+
+          Cert.ProofCarryingFiniteSumUpperEnclosure.certifiedUpper (upper m)))
+    (sym (originalUsefulReceiverEqualsMeterPlusResidual window m))
+    (SignedMeterUpperMonotonicity.upperStableUnderObservedMeterWork law
+      (originalSignedResidualBelowCertifiedUpper window m))
+  where
+    subst :
+      {A : Set} (P : A → Set) {x y : A} →
+      x ≡ y → P x → P y
+    subst P refl proof = proof
