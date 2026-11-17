@@ -66,3 +66,6 @@ import DASHI.Physics.Photovoltaic.PV369P2CoulombSolarNonPromotionExact
 
 -- M2 NREL 4T = three true optical absorbers but TWO independent electrical outputs (top series III-V + separate Si).
 import DASHI.Physics.Photovoltaic.PV369NREL2017ThreeJunctionTwoGroupTopologyExact
+
+-- P5 passive same-source absorbed-solar energy ceiling on EACH MPP; original energy ledger and strict non-overproduction theorem.
+import DASHI.Physics.Photovoltaic.PV369PassiveAbsorbedEnergyCeilingExact
