@@ -28,20 +28,8 @@ on:
     paths:
       - 'DASHI/Core/SymmetryResolvedFibreExact.agda'
       - 'DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda'
-      - 'DASHI/Physics/YangMills/BalabanCMP116CanonicalSelectedBSourceRound435Exact.agda'
-      - 'DASHI/Physics/YangMills/YangMillsClayPinnedCMP119CanonicalASourceRound436Exact.agda'
-      - 'DASHI/Physics/YangMills/YangMillsClayGoal1CanonicalCSourceRound437Exact.agda'
-      - 'DASHI/Physics/YangMills/BalabanCMP116CanonicalLiteralRateSourceRound438Exact.agda'
-      - 'DASHI/Physics/YangMills/YangMillsClayGoal1SameHNontrivialityRound439Exact.agda'
-      - 'DASHI/Physics/YangMills/BalabanCMP116VariableDomainPreferredR415Round440Exact.agda'
-      - 'DASHI/Physics/YangMills/BalabanCMP116R429RootedTraceCountingRound441Exact.agda'
-      - 'DASHI/Physics/YangMills/BalabanCMP116R429TraceEntropyBudgetRound442Exact.agda'
-      - 'DASHI/Physics/YangMills/YangMillsCMP119WilsonGibbsHaarActionRound443Exact.agda'
-      - 'DASHI/Physics/YangMills/YangMillsCMP119PeterWeylWilsonSquareRound444Exact.agda'
-      - 'DASHI/Unified/YMGoal1TOECompatibilityExact.agda'
-      - 'DASHI/Unified/YMGoal1TOECompatibilityValidation.agda'
+      - 'DASHI/Unified/BalabanRGTOEConvergenceExact.agda'
       - 'DASHI/Unified/Physics.agda'
-      - 'DASHI/Unified/Everything.agda'
       - 'DASHI/Unifier.agda'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
       - 'DASHI/Moonshine/OggSSPP2F4CurveShearReflectionExact.agda'
@@ -181,17 +169,9 @@ jobs:
             DASHI/Core/SituatedFibreDynamicsEverything.agda
             DASHI/Cognition/PNF/RationalMarkovLumpingFutureExact.agda
             DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda
-            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
-            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
+            DASHI/Unified/BalabanRGTOEConvergenceExact.agda
             DASHI/Unified/Physics.agda
-            DASHI/Unified/Everything.agda
             DASHI/Unifier.agda
-            DASHI/Interop/SensibLawSemanticPromotionPolicy.agda
-            DASHI/Law/SensibLawAgdaFirstLegalRuntimeEverything.agda
-            DASHI/Law/SensibLawITIRParityEverything.agda
-            DASHI/Governance/DomainPermeabilityAuthorityTransport.agda
-            DASHI/Cognition/PNF/SensibLawOperationalSemanticBoundaryExact.agda
-            DASHI/Core/ITIRGovernanceControlCaseExact.agda
             DASHI/EverythingTOESymmetryResolved369.agda
             DASHI/Moonshine/OggSSPP2F4CurveShearReflectionExact.agda
             DASHI/Unified/TOELegalGovernanceHandoffExact.agda
