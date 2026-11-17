@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""PV P5/P7: certified arithmetic FRONTIER over prior G173 model outputs.
+"""PV P5/P7: exact rational-grid arithmetic FRONTIER over prior G173 model outputs.
 
 The stored ideal efficiency percentages are historical exploratory,
 multi-start numerical optimizations from check_pv_astm_g173_radiative.py,
@@ -27,10 +27,13 @@ def row(architecture):
     return {"architecture":architecture,"ideal_model_pct":ideal/1000,
             "model_headroom_percentage_points":headroom/1000,
             "model_gross_W_m2":float(ONE_SUN_W_M2*ideal/100000),
-            "total_allowed_loss_strict_W_m2":float(ONE_SUN_W_M2*headroom/100000),
-            "fraction_of_ideal_output_spendable_pct":float(F(100*headroom,ideal)),
+            "total_allowed_loss_strict_W_m2":float(ONE_SUN_W_M2*max(0,headroom)/100000),
+            "minimum_gain_required_W_m2":float(ONE_SUN_W_M2*max(0,-headroom)/100000),
+            "fraction_of_ideal_output_spendable_pct":float(F(100*max(0,headroom),ideal)),
             "50pct_possible_in_idealized_ledger":headroom>0}
 def net_after_losses(architecture,loss_pp_thousandths):
+    if any(v<0 for v in loss_pp_thousandths):
+        raise ValueError("losses cannot be negative; model upgrades are a separate source")
     return IDEAL_PCT_THOUSANDTH[architecture]-sum(loss_pp_thousandths)
 def validate():
     t=[]
@@ -41,16 +44,22 @@ def validate():
     check("same one sun source",abs(float(ONE_SUN_W_M2)-1000.3706555734)<1e-8)
     for label,ideal in IDEAL_PCT_THOUSANDTH.items():
         h=ideal-HALF
-        check(label+" exact threshold",net_after_losses(label,[h])==HALF)
-        check(label+" strict threshold tie fails",not(net_after_losses(label,[h])>HALF))
         if h>0:
+            check(label+" exact threshold with nonnegative losses",net_after_losses(label,[h])==HALF)
+            check(label+" strict threshold tie fails",not(net_after_losses(label,[h])>HALF))
             check(label+" one unit below headroom passes",net_after_losses(label,[h-1])>HALF)
             check(label+" one unit above headroom fails",not(net_after_losses(label,[h+1])>HALF))
         else:
             check(label+" no loss cannot reach >50",net_after_losses(label,[0])<=HALF)
+            check(label+" cannot be rescued by positive loss",net_after_losses(label,[1])<HALF)
+            check(label+" zero allowed loss",row(label)["total_allowed_loss_strict_W_m2"]==0)
+            check(label+" positive shortfall",row(label)["minimum_gain_required_W_m2"]>0)
         r=row(label)
         check(label+" reproducible headroom",abs(r["model_headroom_percentage_points"]-(ideal-50000)/1000)<1e-10)
         check(label+" positive output",r["model_gross_W_m2"]>0)
+    try: net_after_losses("2T_1J",[-100])
+    except ValueError: check("negative loss rejected",True)
+    else: check("negative loss rejected",False)
     check("4T3J >= 2T3J",IDEAL_PCT_THOUSANDTH["4T_3J"]>=IDEAL_PCT_THOUSANDTH["2T_3J"])
     check("4T4J >= 2T4J",IDEAL_PCT_THOUSANDTH["4T_4J"]>=IDEAL_PCT_THOUSANDTH["2T_4J"])
     check("4T5J >= 2T5J",IDEAL_PCT_THOUSANDTH["4T_5J"]>=IDEAL_PCT_THOUSANDTH["2T_5J"])
