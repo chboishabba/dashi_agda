@@ -31,11 +31,25 @@ import DASHI.Promotion.MaxwellExteriorCalculusAdapter as Maxwell
 -- The Smith suitcase, Filsinger Earth reel and portable proposal are
 -- distinct configuration constructors in the existing Bidi owner.
 
+-- Original provenance is a typed relation, not a string or an
+-- implicit assertion that two historically different schematics coincide.
+data SourceOwner : Bidi.Configuration → Time.SourceFamily → Set where
+  ownerEarthReel :
+    SourceOwner Bidi.filsingerEarthNarration Time.filsingerEarth
+  ownerPortableProposal :
+    SourceOwner Bidi.filsingerPortableProposal Time.filsingerPortable
+  ownerSmithCompiled :
+    SourceOwner Bidi.smithSuitcaseFigureTen Time.smithCompiled
+  ownerKellyDarrerCompilation :
+    SourceOwner Bidi.smithSuitcaseFigureTen Time.kellyDarrer
+
 record SelectedBoundary : Set where
   constructor selectedBoundary
   field
     originalConfiguration : Bidi.Configuration
     originalSource : Time.SourceFamily
+    sourceOwnerMatchesConfiguration :
+      SourceOwner originalConfiguration originalSource
     sourcePort : Sun.SourcePort
     selectedRegime : Port.EnvironmentalSourceRegime
     selectedPhaseReference : Port.PhaseReference
