@@ -133,3 +133,20 @@ No ESD edit; same source-attribution discipline as earlier PR rounds.
 A second, separately guarded exterior admittance `evanescent_outgoing_admittance` implements a lossless `q_z=+i sqrt(kx²-w² mu eps)` for `kx²>w² mu eps`. A source sheet between two identical evanescent halfspaces has nonzero complex/reactive field, but exact zero **real** outward Poynting flux and zero real time-average sheet work for the tested lossless fixture. The exact zero-thickness sheet Green is `[-2 R Y_ev]^-1`. The frequency/angle cutoff and incorrectly selected propagating/evanescent branches are rejected instead of silently reinterpreted.
 
 Added two tests. Final independent locally executed combined exact SymPy suite: **43/43 PASS** (32 preexisting + 11 radiation/source tests). This is evidence about the defined finite planar mathematical response only: neither zero real work for a pure evanescent mode nor positive propagating source-sheet work says anything about separately measured solar replenishment, a global Earth-ionosphere cavity or the Filsinger electrical terminal. Absorbing complex branch selection and the full k_parallel 2D inverse Fourier transform remain OPEN.
+
+
+## Next high-alpha cut executed: arbitrary transverse Fourier vector and tilted geomagnetic Hall tensor
+
+New `scripts/smith_filsinger_oblique_maxwell_sympy.py` now derives the exact **local Fourier-domain 4×4 Maxwell tangential generator** for both `k_x,k_y`, scalar μ and an arbitrary 3×3 complex permittivity tensor ε (with invertible ε_zz). Unlike the previous k_y=0 model, it eliminates BOTH longitudinal E_z and H_z using the actual Maxwell curl constraints, retaining ε_zx, ε_zy, ε_xz and ε_yz. `tilted_hall_permittivity` constructs a lossless Hermitian gyrotropic tensor `ε=ε_base I+i h [b]_cross` with arbitrary oblique direction b.
+
+For isotropic homogeneous exterior halfspaces the strict propagating outgoing admittance is
+
+    Y(kx,ky) = 1/(ω μ q)
+      [[-kx ky, -(q²+ky²)], [q²+kx², kx ky]],
+    q = sqrt(ω² μ ε - kx² - ky²) > 0.
+
+The sheet source-to-field Green is the same exact Schur/boundary inverse previously proved for k_y=0, now with the full k-vector, and the existing three-layer Cayley transfer. This is a TRUE Maxwell four-tangential-component *spectral slice*, not a full 3D inverse-Fourier/retarded-space dyadic.
+
+New `scripts/test_smith_filsinger_oblique_maxwell_sympy.py` gives **8/8** additional exact checks: correct reduction to the old k_y=0 generator, Hermitian tilted Hall flux-conservation `M†F+FM=0`, outgoing flux signs for three distinct wavevectors, exact lossless three-layer transfer and sheet-source work, longitudinal-singularity rejection, and spectral cutoff rejection.
+
+**Latest full locally run independent source-equivalent exact suite: 51/51 PASS** (32 original + 11 outgoing/evanescent + 8 oblique/tilted). Both new tests wired into the same SymPy gate and consolidated Python runner. No Agda kernel claim. No physical material fit or original natural source calibration.
