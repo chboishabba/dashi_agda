@@ -38,6 +38,7 @@ AGDA = (
     "DASHI/Physics/Photovoltaic/PVGreen68FourTerminalPublishedSourceExact.agda",
     "DASHI/Physics/Photovoltaic/PV369P2CoulombSolarNonPromotionExact.agda",
     "DASHI/Physics/Photovoltaic/PV369NREL2017ThreeJunctionTwoGroupTopologyExact.agda",
+    "DASHI/Physics/Photovoltaic/PV369PassiveAbsorbedEnergyCeilingExact.agda",
     "DASHI/Unified/PVPrimaryTOESpliceExact.agda",
 )
 
