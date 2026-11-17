@@ -56,3 +56,8 @@ Remaining:
 - **D1** pinned Agda kernel for every exact head target OPEN.
 
 **Attribution:** Maxwell/Poynting/Yee/Chew are standard external physics/methods, the Smith/Filsinger high-energy solar phase-coupling idea is user-origin, and the finite graph/source-indexed Agda constructions are DASHI research artefacts. No ESD files edited; no premature TOE promotion.
+
+## Adversarial incidence negative control (F10-INC wall)
+`test_aggregate_totals_not_a_per_cell_face_id_certificate` supplies a declared 0→1 (3 work), 1→2 (4 work) graph, but replaces the physically expected per-cell incoming face assignment `[0,3,4]` with `[4,0,3]`. Because total inward and outward work remain both 7 and all local energy ledgers are individually balanced, the present aggregate `OrientedFaceMesh` theorem **accepts** this intentionally misassigned topology. This is a constructive proof of the limits of the current abstraction, **not** a failed conservation theorem.
+
+Closing F10-INC needs an actual finite incidence/boundary matrix (`∂²=0` when applicable), typed cell IDs, exactly-once directed face assignments, and a signed field-valued orientation/area pairing; merely retaining an unordered face-work list cannot guarantee those physical identities.
