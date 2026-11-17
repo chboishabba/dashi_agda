@@ -3,7 +3,7 @@
   "date": "2026-11-17",
   "scope": "finite N-node LC/telegrapher analogue, controlled dissipative plasma shunt, independently stipulated delayed exogenous source; NOT full 3D Maxwell / solar energy proof",
   "verification": {
-    "local_tests": "12/12 PASS",
+    "local_tests": "16/16 PASS",
     "symbolic_telescoping_selected_N": [
       3,
       5,
@@ -11,7 +11,11 @@
     ],
     "full_branch_exact_head": false,
     "agda_kernel": false,
-    "original_physical_gates_closed": 0
+    "original_physical_gates_closed": 0,
+    "topologies": [
+      "shunt",
+      "series"
+    ]
   },
   "scenario": {
     "N": 5,
@@ -41,11 +45,29 @@
     "ledger_residual": 7.325251516476783e-12,
     "restored": false
   },
-  "finding": "Conductance increase can reduce useful load when created as lossy shunt. Not evidence against source-connected conductive bridge.",
+  "finding": "Identical density increase gives opposite load-direction results depending on architecture: dissipative shunt reduces load by 2.25%, series access improves load by 110.31%. Both models remain net negative after assumed pump/control expense and are not repeatable-cycle source admissions.",
   "independent_measurements": null,
   "original_hardware_pins": null,
   "independent_source_replenishment_receipt": null,
   "strict_continuum_lightcone_receipt": null,
   "physical_source_maxwell_weld": null,
-  "notes": "Independent local numerical and symbolic replay performed before GitHub commit; source-only GitHub commit and integration do not constitute same-head acceptance. No actual solar source measured."
+  "notes": "Independent local numerical and symbolic replay performed before GitHub commit; source-only GitHub commit and integration do not constitute same-head acceptance. No actual solar source measured.",
+  "series_baseline": {
+    "channel_conductance": 0.632937166646739,
+    "load_work": 0.013104405192577558,
+    "ion_creation_work": 1,
+    "controller_aux_work": 0,
+    "ledger_residual": 6.626255100172784e-12,
+    "net_work_after_pump": -0.9868955948074264,
+    "restored": false
+  },
+  "series_controlled": {
+    "channel_conductance": 2.7173604441462995,
+    "load_work": 0.02755956352081591,
+    "ion_creation_work": 5,
+    "controller_aux_work": 0.2,
+    "ledger_residual": 6.981526468052834e-12,
+    "net_work_after_pump": -5.172440436479183,
+    "restored": false
+  }
 }
