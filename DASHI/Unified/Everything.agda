@@ -6,6 +6,13 @@ module DASHI.Unified.Everything where
 -- and Agda kernel acceptance remain separate gates.
 import DASHI.Cognition.PNF.X369R4TopKSourceKinkWitnessExact as X369R4Kink
 open X369R4Kink public using (r4FiniteKinkSourceShape)
+-- SAME-CLOCK source-shaped R4 history quotient obstruction.
+-- Reuse the existing generic NonFactorability theorem, not a
+-- duplicate recurrent-observability mathematical owner.
+import DASHI.Cognition.PNF.X369R4HistoryLoadNonFactorabilityExact as X369R4History
+open X369R4History public using
+  (sourceFixtureResponseCannotFactorThroughLoad
+  ; sourceFixtureLoadRechartCannotRecoverHistory)
 import DASHI.Empirical.KozyrevMirrorClaimTesting as KozyrevMirror
 -- Reuse source-typed finite Sonic Warfare witness; no external promotion.
 import DASHI.Culture.GoodmanSonicWarfareExact as GoodmanSonicWarfare
