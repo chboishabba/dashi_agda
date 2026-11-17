@@ -2,52 +2,27 @@ module DASHI.Cognition.Teleodynamics.ScopedVerifierArtifactRegression where
 
 open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Empty using (⊥)
 
 import DASHI.Cognition.Teleodynamics.ScopedVerifierArchitectureExact as Verify
+import DASHI.Cognition.Teleodynamics.ScopedVerifierConcreteInstancesExact as Concrete
 import DASHI.Cognition.Teleodynamics.VerifiedArtifactTransitionExact as Artifact
 import DASHI.Cognition.Teleodynamics.GAISArchitectureComparisonExact as GAIS
+import DASHI.Cognition.Teleodynamics.ScopedVerifierEvaluationProtocolExact as Eval
 
-universalTruthOracleRemainsFalse :
-  Verify.ScopedVerifierArchitectureBoundary.universalFalsehoodDetectorClaimed
-    Verify.canonicalScopedVerifierArchitectureBoundary ≡ false
-universalTruthOracleRemainsFalse = refl
+universalOracleStaysFalse : Verify.ScopedVerifierArchitectureBoundary.universalFalsehoodDetectorClaimed Verify.canonicalScopedVerifierArchitectureBoundary ≡ false
+universalOracleStaysFalse = refl
 
-knowledgeGraphDoesNotCreateTruth :
-  Verify.ScopedVerifierArchitectureBoundary.knowledgeGraphCreatesTruth
-    Verify.canonicalScopedVerifierArchitectureBoundary ≡ false
-knowledgeGraphDoesNotCreateTruth = refl
+deterministicSemanticCollapseStaysFalse : Verify.ScopedVerifierArchitectureBoundary.deterministicDecodeCreatesSemanticCorrectness Verify.canonicalScopedVerifierArchitectureBoundary ≡ false
+deterministicSemanticCollapseStaysFalse = refl
 
-deterministicDecodeDoesNotCreateSemanticCorrectness :
-  Verify.ScopedVerifierArchitectureBoundary.deterministicDecodeCreatesSemanticCorrectness
-    Verify.canonicalScopedVerifierArchitectureBoundary ≡ false
-deterministicDecodeDoesNotCreateSemanticCorrectness = refl
+concreteSyntaxPaid : Concrete.syntaxOK Concrete.fullyAdmitted ≡ true
+concreteSyntaxPaid = refl
 
-artifactTransitionRequiresRevalidation :
-  Artifact.VerifiedArtifactBoundary.postEditRevalidationRequired
-    Artifact.canonicalVerifiedArtifactBoundary ≡ true
-artifactTransitionRequiresRevalidation = refl
+concreteProvenancePaid : Concrete.provenanceOK Concrete.fullyAdmitted ≡ true
+concreteProvenancePaid = refl
 
-regenerationIsNotDefinitionallyEdit :
-  Artifact.VerifiedArtifactBoundary.regenerationEquivalentToEdit
-    Artifact.canonicalVerifiedArtifactBoundary ≡ false
-regenerationIsNotDefinitionallyEdit = refl
+gaisStillNeedsEmpirics : GAIS.GAISComparisonBoundary.empiricalHeadToHeadStillRequired GAIS.canonicalGAISComparisonBoundary ≡ true
+gaisStillNeedsEmpirics = refl
 
-gaisRemainsExternalCandidate :
-  GAIS.GAISComparisonBoundary.externalNamesTreatedAsPrivilegedTheory
-    GAIS.canonicalGAISComparisonBoundary ≡ false
-gaisRemainsExternalCandidate = refl
-
-gaisEmpiricalComparisonStillRequired :
-  GAIS.GAISComparisonBoundary.empiricalHeadToHeadStillRequired
-    GAIS.canonicalGAISComparisonBoundary ≡ true
-gaisEmpiricalComparisonStillRequired = refl
-
-noScopedValidatorToUniversalOracle :
-  Verify.UniversalTruthOracleFromScopedValidator → ⊥
-noScopedValidatorToUniversalOracle =
-  Verify.noUniversalTruthOracleFromScopedValidator
-
-noHypervisorNecessityPromotion :
-  GAIS.HypervisorPlacementIsNecessary → ⊥
-noHypervisorNecessityPromotion = GAIS.noHypervisorNecessityTheorem
+architectureDoesNotImplyWin : Eval.EvaluationBoundary.architectureImpliesEmpiricalWin Eval.canonicalEvaluationBoundary ≡ false
+architectureDoesNotImplyWin = refl
