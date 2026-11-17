@@ -86,13 +86,15 @@ fleetEigenPriorityStillHasNoProofAuthority =
 
 fleetCountStillDoesNotCreateFormalDischarge :
   Fleet.externalCountCreatesFormalProof
-    Owner.fleetFormalGapTargetReceipt ≡ false
+    Fleet.canonicalFleetFormalGapTargetReceipt
+  ≡ false
 fleetCountStillDoesNotCreateFormalDischarge =
   Owner.fleetExternalCountDoesNotCreateFormalDischarge
 
 fleetDischargedFibresStillCannotBeRetargeted :
   Fleet.dischargedFibresRemainDischarged
-    Owner.fleetFormalGapTargetReceipt ≡ true
+    Fleet.canonicalFleetFormalGapTargetReceipt
+  ≡ true
 fleetDischargedFibresStillCannotBeRetargeted =
   Owner.fleetDischargedFibresStayOutOfTarget
 

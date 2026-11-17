@@ -260,7 +260,317 @@ unifiedGovernanceMaxCutBalabanScaleTransferImpossible :
 unifiedGovernanceMaxCutBalabanScaleTransferImpossible =
   GovernanceMaxCut.balabanScaleTransferPromotionImpossible
 
-unifiedGovernanceMaxCutIbrahimSearchPriorityNotProof :
-  GovernanceMaxCut.SearchPriorityCreatesProof → ⊥
-unifiedGovernanceMaxCutIbrahimSearchPriorityNotProof =
-  GovernanceMaxCut.ibrahimSearchPriorityDoesNotCreateProof
+unifiedFleetRelatedSymbolsRequired :
+  FleetGapTOE.fleetRelatedSymbolsRequired ≡ true
+unifiedFleetRelatedSymbolsRequired =
+  FleetGapTOE.fleetRelatedSymbolsRequiredIsTrue
+
+unifiedFleetDiscoverRequired :
+  FleetGapTOE.fleetDiscoverRequired ≡ true
+unifiedFleetDiscoverRequired =
+  FleetGapTOE.fleetDiscoverRequiredIsTrue
+
+unifiedFleetRoundLineageRequired :
+  FleetGapTOE.fleetRoundLineageRequired ≡ true
+unifiedFleetRoundLineageRequired =
+  FleetGapTOE.fleetRoundLineageRequiredIsTrue
+
+unifiedFleetCountDoesNotCreateNamedManifest :
+  FleetGapTOE.CountCreatesNamedManifest → ⊥
+unifiedFleetCountDoesNotCreateNamedManifest =
+  FleetGapTOE.fleetCountDoesNotCreateNamedManifest
+
+------------------------------------------------------------------------
+-- Direct Pareto / snowball / Ibrahim and ternary-27 non-promotion surface.
+------------------------------------------------------------------------
+
+unifiedIbrahimSearchPriorityDoesNotCreateProof :
+  ParetoSnowballTOE.SearchPriorityCreatesProof → ⊥
+unifiedIbrahimSearchPriorityDoesNotCreateProof =
+  ParetoSnowballTOE.searchPriorityDoesNotCreateProof
+
+unifiedIbrahimProducerSourceDoesNotCreateRunReceipt :
+  ParetoSnowballTOE.ProducerSourceCreatesRunReceipt → ⊥
+unifiedIbrahimProducerSourceDoesNotCreateRunReceipt =
+  ParetoSnowballTOE.producerSourceDoesNotCreateRunReceipt
+
+unifiedIbrahimDegree729DoesNotCreateMonsterHZetaRecognition :
+  ParetoSnowballTOE.Degree729CreatesMonsterHZetaRecognition → ⊥
+unifiedIbrahimDegree729DoesNotCreateMonsterHZetaRecognition =
+  ParetoSnowballTOE.degree729DoesNotCreateMonsterHZetaRecognition
+
+unifiedIbrahimPaperOracleDoesNotIdentifyHistoricalDump :
+  ParetoSnowballTOE.PaperOracleIdentifiesDump → ⊥
+unifiedIbrahimPaperOracleDoesNotIdentifyHistoricalDump =
+  ParetoSnowballTOE.paperOracleDoesNotIdentifyHistoricalDump
+
+unifiedIbrahimRoutePreferenceDoesNotCreateExecutionReceipt :
+  ParetoSnowballTOE.RoutePreferenceCreatesExecutionReceipt → ⊥
+unifiedIbrahimRoutePreferenceDoesNotCreateExecutionReceipt =
+  ParetoSnowballTOE.routePreferenceDoesNotCreateExecutionReceipt
+
+unifiedIbrahimMergedLeanSourceDoesNotCreateKernelReceipt :
+  ParetoSnowballTOE.MergedLeanSourceCreatesKernelReceipt → ⊥
+unifiedIbrahimMergedLeanSourceDoesNotCreateKernelReceipt =
+  ParetoSnowballTOE.mergedLeanSourceDoesNotCreateKernelReceipt
+
+unifiedIbrahimOEISDoesNotCreateMultiplicityAction :
+  ParetoSnowballTOE.NinetyOEISEqualityCreatesMultiplicityAction → ⊥
+unifiedIbrahimOEISDoesNotCreateMultiplicityAction =
+  ParetoSnowballTOE.oeisDoesNotCreateMultiplicityAction
+
+unifiedIbrahimFiniteIrreducibilityDoesNotCreateMonsterHZetaRecognition :
+  ParetoSnowballTOE.FiniteIrreducibilityCreatesMonsterHZetaRecognition → ⊥
+unifiedIbrahimFiniteIrreducibilityDoesNotCreateMonsterHZetaRecognition =
+  ParetoSnowballTOE.finiteIrreducibilityDoesNotCreateMonsterHZetaRecognition
+
+unifiedIbrahimCurrentQidDoesNotIdentifyHistoricalTitle :
+  ParetoSnowballTOE.CurrentQidIdentifiesHistoricalTitle → ⊥
+unifiedIbrahimCurrentQidDoesNotIdentifyHistoricalTitle =
+  ParetoSnowballTOE.currentQidDoesNotIdentifyHistoricalTitle
+
+unified369Ternary27MonsterRepresentationNotPromoted =
+  MaxCut369.toe27MonsterRepresentationNotPromoted
+
+unified369Ternary27MonsterEmbeddingNotPromoted =
+  MaxCut369.toe27MonsterEmbeddingNotPromoted
+
+------------------------------------------------------------------------
+-- Live Gate-4 frontier and Fleet target selection.
+------------------------------------------------------------------------
+
+unifiedCurrentGate4FrontierLedgerLevel : ProofLevel
+unifiedCurrentGate4FrontierLedgerLevel =
+  FleetHyperTOE.currentGate4FrontierLedgerLevel
+
+unifiedCurrentGate4ClusteringToTransferGapLevel : ProofLevel
+unifiedCurrentGate4ClusteringToTransferGapLevel =
+  FleetHyperTOE.currentGate4ClusteringToTransferGapLevel
+
+unifiedFleetFormalGapTargetSelected : Bool
+unifiedFleetFormalGapTargetSelected =
+  FleetHyperTOE.fleetFormalGapTargetSelected
+
+unifiedHistoricalGate4CountSelectedAsFleetTarget : Bool
+unifiedHistoricalGate4CountSelectedAsFleetTarget =
+  FleetHyperTOE.historicalGate4CountSelectedAsFleetTarget
+
+unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
+  FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
+unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
+  FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+
+
+import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalGovernance
+import DASHI.Unified.PNFSourceBoundaryTOEExact as PNFSource
+import DASHI.Unified.PNFDistilledNonPromotionTOEExact as PNFDistilled
+import DASHI.Unified.SCALEEvidenceReviewTOEConvergenceExact as SCALEReview
+import DASHI.Unified.GovernedFleetResidualTOEHandoffExact as GovernedFleet
+import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifest
+
+
+------------------------------------------------------------------------
+-- Governed Fleet residual handoff.
+------------------------------------------------------------------------
+
+unifiedGovernedFleetResidualTOEHandoff :
+  GovernedFleet.GovernedFleetResidualTOEHandoff
+unifiedGovernedFleetResidualTOEHandoff =
+  GovernedFleet.canonicalGovernedFleetResidualTOEHandoff
+
+governedLegalWorkflowTOEBoundary :
+  LegalGovernance.GovernedLegalWorkflowTOEBoundary
+governedLegalWorkflowTOEBoundary =
+  LegalGovernance.canonicalGovernedLegalWorkflowTOEBoundary
+
+governedLegalWorkflowTOEInvariantHandoff :
+  LegalGovernance.GovernedLegalWorkflowTOEInvariantHandoff
+governedLegalWorkflowTOEInvariantHandoff =
+  LegalGovernance.canonicalGovernedLegalWorkflowTOEInvariantHandoff
+
+governedLegalWorkflowIntrospectiveZKPFrame :
+  LegalGovernance.GovernedLegalWorkflowIntrospectiveZKPFrame
+governedLegalWorkflowIntrospectiveZKPFrame =
+  LegalGovernance.canonicalGovernedLegalWorkflowIntrospectiveZKPFrame
+
+
+governedSemanticPromotionTruthAuthorityClosed :
+  LegalGovernance.SemanticPromotionTruthAuthorityClosed
+governedSemanticPromotionTruthAuthorityClosed =
+  LegalGovernance.toeSemanticPromotionTruthAuthorityClosed
+
+governedSemanticPromotionLegalAuthorityClosed :
+  LegalGovernance.SemanticPromotionLegalAuthorityClosed
+governedSemanticPromotionLegalAuthorityClosed =
+  LegalGovernance.toeSemanticPromotionLegalAuthorityClosed
+
+governedSemanticPromotionAllAuthorityClosed :
+  LegalGovernance.SemanticPromotionAllAuthorityClosed
+governedSemanticPromotionAllAuthorityClosed =
+  LegalGovernance.toeSemanticPromotionAllAuthorityClosed
+
+governedBoundAcquisitionDoesNotPayRequirement :
+  LegalGovernance.BoundDemandAutomaticallyPaysRequirement → ⊥
+governedBoundAcquisitionDoesNotPayRequirement =
+  LegalGovernance.toeBoundAcquisitionDoesNotPayRequirement
+
+governedBoundAcquisitionDoesNotCloseConsumer :
+  LegalGovernance.BoundDemandAutomaticallyClosesConsumer → ⊥
+governedBoundAcquisitionDoesNotCloseConsumer =
+  LegalGovernance.toeBoundAcquisitionDoesNotCloseConsumer
+
+governedProducerIdentityDoesNotIdentifyResidual :
+  LegalGovernance.SameProducerIdentifiesResidual → ⊥
+governedProducerIdentityDoesNotIdentifyResidual =
+  LegalGovernance.toeProducerIdentityDoesNotIdentifyResidual
+
+pnfSourceBoundaryReceipt :
+  PNFSource.PNFSourceBoundaryTOEReceipt
+pnfSourceBoundaryReceipt =
+  PNFSource.canonicalPNFSourceBoundaryTOEReceipt
+
+pnfGluingProxyDoesNotProveTrueLinearity =
+  PNFSource.gluingProxyDoesNotProveTrueLinearity
+
+pnfSelfAdjointProxyDoesNotProveFiniteTheorem =
+  PNFSource.selfAdjointProxyDoesNotProveFiniteTheorem
+
+pnfDominationProxyDoesNotProveHamiltonianTheorem =
+  PNFSource.dominationProxyDoesNotProveHamiltonianTheorem
+
+pnfFungalNetworkClaimsRequireSpeciesEvidence =
+  PNFSource.fungalNetworkClaimsRequireSpeciesEvidence
+
+pnfIdenticalWordsDoNotPayPredicate :
+  PNFSource.IdenticalWordsProveSamePredicate → ⊥
+pnfIdenticalWordsDoNotPayPredicate =
+  PNFSource.identicalWordsDoNotPayPredicate
+
+pnfCommonFingerprintDoesNotCreateTruth :
+  PNFSource.CommonPnfFingerprintProvesClaimTruth → ⊥
+pnfCommonFingerprintDoesNotCreateTruth =
+  PNFSource.commonPnfFingerprintDoesNotCreateClaimTruth
+
+pnfPerceivedIndependenceDoesNotCreateProvenanceIndependence :
+  PNFSource.PerceivedIndependenceMeansActualIndependence → ⊥
+pnfPerceivedIndependenceDoesNotCreateProvenanceIndependence =
+  PNFSource.perceivedIndependenceDoesNotCreateProvenanceIndependence
+
+pnfRepetitionDoesNotCreateIndependentEvidence :
+  PNFSource.RepetitionMeansIndependentEvidence → ⊥
+pnfRepetitionDoesNotCreateIndependentEvidence =
+  PNFSource.repetitionDoesNotCreateIndependentEvidence
+
+pnfCommonSourceDoesNotEraseEvidence :
+  PNFSource.CommonSourceMeansNoEvidence → ⊥
+pnfCommonSourceDoesNotEraseEvidence =
+  PNFSource.commonSourceDoesNotEraseEvidence
+
+pnfDistilledNonPromotionBoundary :
+  PNFDistilled.PNFDistilledNonPromotionBoundary
+pnfDistilledNonPromotionBoundary =
+  PNFDistilled.canonicalPNFDistilledNonPromotionBoundary
+
+pnfDistilledReuseZKPReceipt :
+  PNFDistilled.PNFDistilledReuseZKPReceipt
+pnfDistilledReuseZKPReceipt =
+  PNFDistilled.canonicalPNFDistilledReuseZKPReceipt
+
+scaleEvidenceReviewTOEReceipt :
+  SCALEReview.SCALEEvidenceReviewTOEReceipt
+scaleEvidenceReviewTOEReceipt =
+  SCALEReview.canonicalSCALEEvidenceReviewTOEReceipt
+
+scaleEvidenceReviewDoesNotPromoteSemanticTruth :
+  SCALEReview.ReplayEconomyReceiptPromotesSemanticTruth → ⊥
+scaleEvidenceReviewDoesNotPromoteSemanticTruth =
+  SCALEReview.scaleReplayDoesNotPromoteSemanticTruth
+
+scaleEvidenceReviewDoesNotAuthorizeFromFrontier :
+  SCALEReview.FrontierRouteMeansAuthorized → ⊥
+scaleEvidenceReviewDoesNotAuthorizeFromFrontier =
+  SCALEReview.frontierRouteDoesNotGrantAuthorization
+
+-- Legal authority remains independent of matter workflow and semantic admission.
+unifiedLegalCandidateIsNotAuthority :
+  LegalGovernance.CandidateSourceIsAuthoritative → ⊥
+unifiedLegalCandidateIsNotAuthority =
+  LegalGovernance.toeCandidateSourceDoesNotCloseAuthority
+
+unifiedLegalValidityIsNotApplicability :
+  LegalGovernance.CurrentValidityAutomaticallyMeansApplicability → ⊥
+unifiedLegalValidityIsNotApplicability =
+  LegalGovernance.toeCurrentValidityDoesNotAutomaticallyEstablishApplicability
+
+unifiedSemanticAdmissionIsNotLegalAuthority :
+  LegalGovernance.SemanticAdmissionAuthorityIsLegalSourceAuthority → ⊥
+unifiedSemanticAdmissionIsNotLegalAuthority =
+  LegalGovernance.toeSemanticAdmissionDoesNotBecomeLegalSourceAuthority
+
+
+unifiedGovernedLegalWorkflowAuthorityInvariantHandoff :
+  LegalGovernance.GovernedLegalWorkflowAuthorityInvariantHandoff
+unifiedGovernedLegalWorkflowAuthorityInvariantHandoff =
+  LegalGovernance.canonicalGovernedLegalWorkflowAuthorityInvariantHandoff
+
+unifiedCanonicalLegalSourceAuthorityBoundary :
+  LegalGovernance.LegalSourceAuthorityBoundary
+unifiedCanonicalLegalSourceAuthorityBoundary =
+  LegalGovernance.toeCanonicalLegalSourceAuthorityBoundary
+
+unifiedSameSystemIsNotLegalAuthority :
+  LegalGovernance.SameLegalSystemAutomaticallyMeansAuthority → ⊥
+unifiedSameSystemIsNotLegalAuthority =
+  LegalGovernance.toeSameSystemDoesNotAutomaticallyCloseAuthority
+
+unifiedDocumentRoleIsNotLegalAuthority :
+  LegalGovernance.DocumentRoleSuppliesLegalSourceAuthority → ⊥
+unifiedDocumentRoleIsNotLegalAuthority =
+  LegalGovernance.toeDocumentRoleDoesNotSupplyLegalSourceAuthority
+
+------------------------------------------------------------------------
+-- SCALE evidence genealogy firewalls.
+
+------------------------------------------------------------------------
+
+scaleEvidenceReviewPerceivedIndependenceDoesNotCreateProvenanceIndependence :
+  SCALEReview.PerceivedIndependenceMeansActualIndependence → ⊥
+scaleEvidenceReviewPerceivedIndependenceDoesNotCreateProvenanceIndependence =
+  SCALEReview.perceivedIndependenceDoesNotCreateProvenanceIndependence
+
+scaleEvidenceReviewRepetitionDoesNotCreateIndependentEvidence :
+  SCALEReview.RepetitionMeansIndependentEvidence → ⊥
+scaleEvidenceReviewRepetitionDoesNotCreateIndependentEvidence =
+  SCALEReview.repetitionDoesNotCreateIndependentEvidence
+
+------------------------------------------------------------------------
+-- SCALE physical-economy non-promotion firewalls.
+
+------------------------------------------------------------------------
+
+scaleEvidenceReviewReviewProjectionReuseDoesNotCreateClaimTruth :
+  SCALEReview.ReviewProjectionReuseCreatesClaimTruth → ⊥
+scaleEvidenceReviewReviewProjectionReuseDoesNotCreateClaimTruth =
+  SCALEReview.reviewProjectionReuseDoesNotCreateClaimTruth
+
+scaleEvidenceReviewCommitCoalescingDoesNotCreateSemanticAuthority :
+  SCALEReview.CommitCoalescingCreatesSemanticAuthority → ⊥
+scaleEvidenceReviewCommitCoalescingDoesNotCreateSemanticAuthority =
+  SCALEReview.commitCoalescingDoesNotCreateSemanticAuthority
+
+scaleEvidenceReviewFewCommitBarriersDoNotProveSemanticIndependence :
+  SCALEReview.FewCommitBarriersProveSemanticIndependence → ⊥
+scaleEvidenceReviewFewCommitBarriersDoNotProveSemanticIndependence =
+  SCALEReview.fewCommitBarriersDoNotProveSemanticIndependence
+
+------------------------------------------------------------------------
+-- SCALE Evidence Review ZKP frame.
+
+------------------------------------------------------------------------
+
+scaleEvidenceReviewTOEZKPFrame :
+  SCALEReview.SCALEEvidenceReviewTOEZKPFrame
+scaleEvidenceReviewTOEZKPFrame =
+  SCALEReview.canonicalSCALEEvidenceReviewTOEZKPFrame
+
+------------------------------------------------------------------------
