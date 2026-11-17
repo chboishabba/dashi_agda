@@ -6,7 +6,7 @@ curves may generate a candidate net electrical efficiency. Synthetic SELFTEST
 receipts are NEVER physical device results. Previous ideal G173 optimizer is
 not substituted for real EQE, JV or independently authenticated evidence.
 
-spectrum CSV: wavelength_nm,global_W_m2_nm (>=2 rows)
+spectrum CSV: wavelength_nm,global_W_m2_nm (>=2 rows), OR original\nASTM G173 four columns (wavelength, extraterrestrial, global, direct).
 optics CSV: wavelength_nm,R,A1,...,AN,T (N=2..5)
 eqe CSV: wavelength_nm,EQE1,...,EQEN
 iv_i CSV: voltage_V,current_A_m2 (>=2 rows for each of N cells)
@@ -40,10 +40,10 @@ def matching(primary,other):
         raise ValueError("spectral grids must match exactly; no silent interpolation")
 
 def strict_spectrum(spec,optic,eqe,n):
-    if spec.shape[1]!=2 or optic.shape[1]!=n+3 or eqe.shape[1]!=n+1:
+    if spec.shape[1] not in (2,4) or optic.shape[1]!=n+3 or eqe.shape[1]!=n+1:
         raise ValueError("unexpected spectrum/optics/EQE column count")
     matching(spec,optic);matching(spec,eqe)
-    wl=spec[:,0]; incoming=spec[:,1]
+    wl=spec[:,0]; incoming=spec[:,2] if spec.shape[1]==4 else spec[:,1]\n    if spec.shape[1]==4:\n        if spec.shape[0]!=2002 or abs(wl[0]-280)>.001 or abs(wl[-1]-4000)>.001:\n            raise ValueError("4-column G173 must have all 2002 standard rows")\n        if abs(float(np.trapezoid(incoming,wl))-1000.3706555734)>.015:\n            raise ValueError("G173 global input checksum failed")
     if np.any(np.diff(wl)<=0) or wl[0]<=0 or np.any(incoming<0):
         raise ValueError("invalid wavelength ordering or negative irradiance")
     R=optic[:,1]; A=optic[:,2:2+n]; T=optic[:,-1]; E=eqe[:,1:]
@@ -171,7 +171,7 @@ def selftest():
         return False
     ck("reject double-counted absorption",rejected(lambda:strict_spectrum(S,np.column_stack([wl,np.full(len(wl),.1),A*2,np.full(len(wl),.1)]),eqe,n)))
     ck("reject EQE > A",rejected(lambda:strict_spectrum(S,optical,np.column_stack([wl,A*1.1]),n)))
-    ck("reject grid mismatch",rejected(lambda:strict_spectrum(S,optical,np.column_stack([wl+1,A*.8]),n)))
+    ck("reject grid mismatch",rejected(lambda:strict_spectrum(S,optical,np.column_stack([wl+1,A*.8]),n)))\n    ck("reject incomplete 4-column G173",rejected(lambda:strict_spectrum(np.column_stack([wl,wl,wl,wl]),optical,eqe,n)))
     ck("reject Jsc mismatch",rejected(lambda:weld(S,optical,eqe,[np.column_stack([i[:,0],i[:,1]*.1]) for i in iv],[.97]*n)))
     ck("reject converter eta >1",rejected(lambda:weld(S,optical,eqe,iv,[1.2]*n)))
     ck("reject recovered work > drive",rejected(lambda:weld(S,optical,eqe,iv,[1.]*n,drive=1,recovered=2)))
