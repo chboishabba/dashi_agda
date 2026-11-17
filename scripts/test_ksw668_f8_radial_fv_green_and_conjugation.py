@@ -31,8 +31,10 @@ for d in (3,7,11):
     }[d]
     checks+=1
     assert W(d,0)*2*d==A(d,0)
-    assert W(d,1)*A(d,1)/W(d,1)==A(d,1)
-    assert W(d,1)*A(d,0)/W(d,1)==A(d,0)
+    cp1={3:F(27,13),7:F(5103,1093),11:F(649539,88573)}[d]
+    cm1={3:F(3,13),7:F(7,1093),11:F(11,88573)}[d]
+    assert W(d,1)*cp1==A(d,1)
+    assert W(d,1)*cm1==A(d,0)
     checks+=1
     rng=random.Random(668+d)
     for _ in range(12):
