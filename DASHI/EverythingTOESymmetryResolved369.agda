@@ -12,7 +12,8 @@ open X369R4Kink public using (r4FiniteKinkSourceShape)
 import DASHI.Cognition.PNF.X369R4HistoryLoadNonFactorabilityExact as X369R4History
 open X369R4History public using
   (sourceFixtureResponseCannotFactorThroughLoad
-  ; sourceFixtureLoadRechartCannotRecoverHistory)
+  ; sourceFixtureLoadRechartCannotRecoverHistory
+  ; fixedProbePairDoesFactorThroughCurrentLoad)
 import DASHI.Unified.AdelicSpectralPaperTOEExact as AdelicSpectralTOE
 
 -- September 2026 source-typed finite spectral closure and fail-closed gates.
