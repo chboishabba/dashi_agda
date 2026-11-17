@@ -6,12 +6,14 @@ on:
     paths:
       - 'DASHI/Cognition/PNF/X369ConsumerSufficientCompressionNoGoExact.agda'
       - 'DASHI/Cognition/PNF/X369DirectedRouterConditionalCodecExact.agda'
+      - 'DASHI/Cognition/PNF/X369CenteredDirectedConsumerMDLExact.agda'
       - 'scripts/check_x369_p0_sympy_standin.sh'
       - '.github/workflows/x369-p0-sympy-standin.yml'
   pull_request:
     paths:
       - 'DASHI/Cognition/PNF/X369ConsumerSufficientCompressionNoGoExact.agda'
       - 'DASHI/Cognition/PNF/X369DirectedRouterConditionalCodecExact.agda'
+      - 'DASHI/Cognition/PNF/X369CenteredDirectedConsumerMDLExact.agda'
       - 'scripts/check_x369_p0_sympy_standin.sh'
       - '.github/workflows/x369-p0-sympy-standin.yml'
   workflow_dispatch:
