@@ -221,6 +221,37 @@ l0=common+S.symbols("history_score0")
 l1=common+S.symbols("history_score1")
 require("shared activation unary removes from score difference",
     S.simplify((l0-l1)-(l0-common-l1+common))==0)
+# Source nn.GELU() uses the exact default Gaussian GELU. Its
+# derivative is Phi(t)+t*phi(t), admitting a global coarse bound
+# |GELU'(t)| <= 1 + 1/sqrt(2*pi*e), since 0<=Phi<=1
+# and max |t*phi(t)|=1/sqrt(2*pi*e).
+# SymPy checks the derivative IDENTITIES, not the global inequality
+# or the source's finite-precision erf implementation.
+T=S.symbols("T",real=True)
+gelu=T*(1+S.erf(T/S.sqrt(2)))/2
+phi=S.exp(-T**2/2)/S.sqrt(2*S.pi)
+Phi=(1+S.erf(T/S.sqrt(2)))/2
+require("source exact GELU derivative factorization",
+    S.simplify(S.diff(gelu,T)-(Phi+T*phi))==0)
+require("gaussian derivative extremum at |t|=1",
+    S.simplify(S.diff(T*phi,T).subs(T,1))==0)
+Lg=1+1/S.sqrt(2*S.pi*S.E)
+require("positive admitted GELU global Lipschitz coefficient",
+    bool(S.N(Lg>1)))
+# For fixed selected IDs and stable orientation charts, Euclidean
+# FFN bound Y_e <= ||W2||2 * Lg * ||W1||2
+#                  * sqrt(dx²+dh²) + eta_FFN_e
+# and cap-projected transition bound H'_e <=
+# ||Transition||2 * sqrt(dx²+dh²+Y_e²) + eta_T_e.
+# These are conditional operator-norm formulae: the actual
+# checkpoint spectral norms and rounding epsilons are NOT available.
+Wx,Wy,Tr,Dx,Dh,ef,et=S.symbols(
+    "Wx Wy Tr Dx Dh ef et",nonnegative=True)
+FFN=Wx*Wy*Lg*S.sqrt(Dx**2+Dh**2)+ef
+Ht=Tr*S.sqrt(Dx**2+Dh**2+FFN**2)+et
+require("conditional selected expert FFN/transition envelope",
+    S.simplify(Ht-(Tr*S.sqrt(Dx**2+Dh**2+FFN**2)+et))==0)
+
 # Conditional analytic consumer bounds:
 # ||softmax(z+dz)-softmax(z)||_1 <= max_i |dz_i|
 # via E_p|V-E_pV| <= (E_p V²)½ <= ||V||inf.
