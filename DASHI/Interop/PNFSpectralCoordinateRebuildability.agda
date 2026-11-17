@@ -539,7 +539,7 @@ canonicalNonRebuildableHasNoEquation =
 
 data AdmissibleCoordinateRow : Set where
   admissibleSpectralCoordinateRow :
-  (row : SpectralCoordinateMapRow) →
+    (row : SpectralCoordinateMapRow) →
     mapRowAdmissible row ≡ true →
     AdmissibleCoordinateRow
 
