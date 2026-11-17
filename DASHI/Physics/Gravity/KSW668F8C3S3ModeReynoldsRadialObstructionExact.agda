@@ -26,6 +26,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; -_; _/_)
 open import Data.Rational.Tactic.RingSolver using (solve)
+open import Relation.Binary.PropositionalEquality using (cong)
 import DASHI.Foundations.TernaryPermutationS3LawsExact as OriginalS3
 import DASHI.Foundations.TernaryEndomorphismConjugacyExact as Perm
 import DASHI.Physics.Gravity.KSW668AdS5TTFiniteVolumeFirstCellRationalExact as OriginalFV
@@ -85,11 +86,18 @@ c3MeanInvariant :
   mean3 (rotate (triple x y z)) ≡ mean3 (triple x y z)
 c3MeanInvariant x y z = solve []
 
+c3MeanIdempotent :
+  (x y z : ℚ) →
+  mean3 (reynoldsC3 (triple x y z))
+    ≡ mean3 (triple x y z)
+c3MeanIdempotent x y z = solve []
+
 c3ReynoldsIdempotent :
   (x y z : ℚ) →
   reynoldsC3 (reynoldsC3 (triple x y z))
     ≡ reynoldsC3 (triple x y z)
-c3ReynoldsIdempotent x y z = refl
+c3ReynoldsIdempotent x y z =
+  cong (λ q → triple q q q) (c3MeanIdempotent x y z)
 
 -- XXXVII original radial FV at j=0: (L_d V)_0 =
 -- 2d*(V_1-V_0)/h². The common h^-2 is outside this operator.
@@ -113,23 +121,33 @@ radialOriginDeviation (triple x y z) =
 
 originalRadialOriginReynoldsPlusDefect :
   (x y z : ℚ) →
-  nativeRadialOrigin (triple x y z)
-  ≡ triple (((+ 14) / 1) * x + - (((+ 8) / 1) * x))
-           (((+ 14) / 1) * y)
-           (((+ 14) / 1) * z + ((+ 8) / 1) * z)
-originalRadialOriginReynoldsPlusDefect x y z = refl
+  sum3 (nativeRadialOrigin (triple x y z))
+    ≡ sum3 (radialOriginMean (triple x y z))
+        + sum3 (radialOriginDeviation (triple x y z))
+originalRadialOriginReynoldsPlusDefect x y z = solve []
 
--- Exact [L_origin,C3] commutator (not zero):
--- L R(x)-R L(x)=(-8y,-8z,16x).
-originalRadialC3Commutator :
+-- Exact [L_origin,C3] = L_origin ∘ rotate - rotate ∘ L_origin.
+-- The three coordinates have the nonzero values (-8y,-8z,16x).
+originalRadialC3CommutatorFirst :
   (x y z : ℚ) →
-  nativeRadialOrigin (rotate (triple x y z))
-    ≡ triple
-         (((+ 14) / 1) * y + - (((+ 8) / 1) * y))
-         (((+ 22) / 1) * z + - (((+ 8) / 1) * z))
-         (((+ 6) / 1) * x + ((+ 16) / 1) * x
-           + - (((+ 16) / 1) * x))
-originalRadialC3Commutator x y z = refl
+  first (nativeRadialOrigin (rotate (triple x y z)))
+    + - (first (rotate (nativeRadialOrigin (triple x y z))))
+  ≡ - (((+ 8) / 1) * y)
+originalRadialC3CommutatorFirst x y z = solve []
+
+originalRadialC3CommutatorSecond :
+  (x y z : ℚ) →
+  second (nativeRadialOrigin (rotate (triple x y z)))
+    + - (second (rotate (nativeRadialOrigin (triple x y z))))
+  ≡ - (((+ 8) / 1) * z)
+originalRadialC3CommutatorSecond x y z = solve []
+
+originalRadialC3CommutatorThird :
+  (x y z : ℚ) →
+  third (nativeRadialOrigin (rotate (triple x y z)))
+    + - (third (rotate (nativeRadialOrigin (triple x y z))))
+  ≡ ((+ 16) / 1) * x
+originalRadialC3CommutatorThird x y z = solve []
 
 originalRadialOriginProjectedDefect :
   (x y z : ℚ) →
