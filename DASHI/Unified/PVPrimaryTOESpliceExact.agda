@@ -60,3 +60,6 @@ import DASHI.Physics.Photovoltaic.PV369UnsampledIVPowerEnvelopeExact
 
 -- M2 primary-source independent 2017 four-terminal NREL GaInP/GaAs//Si real published data identity; not a measured 369 device.
 import DASHI.Physics.Photovoltaic.PVGreen68FourTerminalPublishedSourceExact
+
+-- M3 original hydrogenic p² Coulomb scalar operator cannot be promoted into 369-specific PV splitting.
+import DASHI.Physics.Photovoltaic.PV369P2CoulombSolarNonPromotionExact
