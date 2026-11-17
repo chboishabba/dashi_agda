@@ -1,0 +1,202 @@
+{
+  "schema": "dashi-symbol-snowball-v1",
+  "date": "2026-11-09",
+  "purpose": "JMD image-hash -> native Agda candidate-owner discovery. Reuse PR #1212 runner, no second AST index. Search results are never semantic or kernel proof.",
+  "canonical_tool": "dashi-repo",
+  "canonical_database": ".dashi/repository.sqlite3",
+  "source_manifest": "Docs/roadmap/JMDImageSHA256Manifest.csv",
+  "image_sha256_used_as": "reference only, not theorem authority",
+  "negative_controls": [
+    "Never infer proof from image hash, filename or keyword coincidence.",
+    "Search actual Agda declarations before creating a new owner.",
+    "Agda stays golden for DASHI; Lean donor requires same-object and checker receipts.",
+    "No external PRs or publication of unpublished DASHI source.",
+    "Do not touch ESD modules."
+  ],
+  "groups": [
+    {
+      "lane": "JMD-G01",
+      "priority": 0,
+      "goal": "Hecke weight, T9 and tau",
+      "obligations": [
+        "JMD-IMG-006/013-017/021/023/026"
+      ],
+      "owners": [],
+      "search_terms": [
+        "AristotleHeckeRecurrenceCoreExact",
+        "ClassicalHeckeWeightKSmallWordExact",
+        "RamanujanTauHecke23Exact",
+        "AristotleHeckeWordsSourceParityExact"
+      ],
+      "related_symbols": []
+    },
+    {
+      "lane": "JMD-G02",
+      "priority": 0,
+      "goal": "Squarefree, coprime and prime-power assembly",
+      "obligations": [
+        "JMD-IMG-033/038"
+      ],
+      "owners": [],
+      "search_terms": [
+        "AristotleHeckeGeneralPrimePowerDecompositionExact",
+        "AristotleHeckeGeneralZeroUpdateExact",
+        "CoprimeLayer",
+        "AristotleMathSourceParityExact"
+      ],
+      "related_symbols": []
+    },
+    {
+      "lane": "JMD-G03",
+      "priority": 1,
+      "goal": "0-Hecke sorting, syntax/laws/handlers, FRACTRAN compiler",
+      "obligations": [
+        "JMD-IMG-022"
+      ],
+      "owners": [],
+      "search_terms": [
+        "FRACDASHCompilerCorrectionExact",
+        "FractranComputationEquivalence",
+        "SSSPSortingBarrierTernaryBidiExact",
+        "Handler",
+        "Monad"
+      ],
+      "related_symbols": []
+    },
+    {
+      "lane": "JMD-G04",
+      "priority": 1,
+      "goal": "Grothendieck indexed fibres versus K0 group completion",
+      "obligations": [
+        "JMD-IMG-003/019"
+      ],
+      "owners": [],
+      "search_terms": [
+        "TrialecticGrothendieckTransportCoherenceExact",
+        "RelationalStageTwelveGrothendieckExtensionExact",
+        "BottIncompleteCarrierKTheoryReceipt",
+        "Grothendieck"
+      ],
+      "related_symbols": []
+    },
+    {
+      "lane": "JMD-G05",
+      "priority": 2,
+      "goal": "Prime/ontology source-only imagery",
+      "obligations": [
+        "JMD-IMG-001/018"
+      ],
+      "owners": [],
+      "search_terms": [
+        "FactorVecCorrespondence",
+        "PrimeHeckeEigenMotifPipeline",
+        "SFMVerifiedClaimPresentation"
+      ],
+      "related_symbols": []
+    },
+    {
+      "lane": "JMD-G06",
+      "priority": 0,
+      "goal": "Monster Y443/VOA/Coxeter/weight-two",
+      "obligations": [
+        "JMD-IMG-008-012"
+      ],
+      "owners": [],
+      "search_terms": [
+        "Monster196884FibreInterferenceExact",
+        "MonsterGradedVOABridgeExact",
+        "VertexOperatorAlgebraCore",
+        "JMDMonsterRepresentationCrossPollinationMaxCutExact"
+      ],
+      "related_symbols": []
+    },
+    {
+      "lane": "JMD-G07",
+      "priority": 2,
+      "goal": "Blaze content-addressed DAG/JIT boundaries",
+      "obligations": [
+        "JMD-IMG-002/025"
+      ],
+      "owners": [],
+      "search_terms": [
+        "ContentAddressedTransitionIdentityExact",
+        "ContentAddressedVerificationBridgeExact",
+        "SourceHash",
+        "JMDAristotleSymposiumRegression"
+      ],
+      "related_symbols": []
+    },
+    {
+      "lane": "JMD-G08",
+      "priority": 1,
+      "goal": "Hilbert self-adjoint OS spectral context",
+      "obligations": [
+        "JMD-IMG-027/028"
+      ],
+      "owners": [],
+      "search_terms": [
+        "SelfAdjointGenerator",
+        "SelfAdjointColimitGenerator",
+        "BalabanOSMassGapClosure"
+      ],
+      "related_symbols": []
+    },
+    {
+      "lane": "JMD-G09",
+      "priority": 1,
+      "goal": "Prime-tower game, divisor and FRACTRAN semantics",
+      "obligations": [
+        "JMD-IMG-024"
+      ],
+      "owners": [],
+      "search_terms": [
+        "FractranComputationEquivalence",
+        "FiniteDivisorSumExact",
+        "FiniteProductCardinalityExact"
+      ],
+      "related_symbols": []
+    },
+    {
+      "lane": "JMD-G10",
+      "priority": 3,
+      "goal": "Omarchy and software service imagery",
+      "obligations": [
+        "JMD-IMG-004/005/020/034-036"
+      ],
+      "owners": [],
+      "search_terms": [
+        "ContentAddressedVerificationBridgeExact",
+        "ABIVerticalLiftBoundary"
+      ],
+      "related_symbols": []
+    },
+    {
+      "lane": "JMD-G11",
+      "priority": 1,
+      "goal": "Newspace Hecke character and nebentypus",
+      "obligations": [
+        "JMD-IMG-007"
+      ],
+      "owners": [],
+      "search_terms": [
+        "SSPRepresentationHeckeIntertwinerBoundaryExact",
+        "HeckeCorrOnX021Receipt",
+        "ClassicalHeckeWeightKSmallWordExact"
+      ],
+      "related_symbols": []
+    },
+    {
+      "lane": "JMD-G12",
+      "priority": 3,
+      "goal": "Symbolism/art non-theorem category",
+      "obligations": [
+        "JMD-IMG-029/037/039/040"
+      ],
+      "owners": [],
+      "search_terms": [
+        "SFMVerifiedClaimPresentation"
+      ],
+      "related_symbols": []
+    }
+  ]
+}
