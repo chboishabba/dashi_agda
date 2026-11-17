@@ -12,8 +12,15 @@ command -v python3 >/dev/null
 HEAD="$(git rev-parse --verify HEAD)"
 test -n "$HEAD"
 # A receipt for a dirty checkout cannot uniquely identify its source.
-if [[ -n "$(git status --porcelain --untracked-files=all -- DASHI/Physics/Motors scripts/check_smith_filsinger* scripts/test_smith_filsinger* scripts/run_agda29_parallel_check.sh scripts/run_smith_filsinger_acceptance.sh)" ]]; then
-  echo "REJECT: source/acceptance working tree differs from the recorded commit" >&2
+# Require a clean tracked commit across all proof and build inputs. Ignore
+# generated .agdai objects, which must NOT invalidate a second acceptance run.
+if ! git diff --quiet HEAD -- .; then
+  echo "REJECT: tracked working tree differs from the recorded commit" >&2
+  exit 2
+fi
+# Untracked new source files must not silently enter an exact-head result.
+if [[ -n "$(git ls-files --others --exclude-standard -- '*.agda' '*.py' '*.sh' '*.nix' '*.yml' '*.yaml')" ]]; then
+  echo "REJECT: untracked proof, test, build or workflow source" >&2
   exit 2
 fi
 
