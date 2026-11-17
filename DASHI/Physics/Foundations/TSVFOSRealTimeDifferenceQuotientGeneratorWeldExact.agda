@@ -26,9 +26,10 @@ module DASHI.Physics.Foundations.TSVFOSRealTimeDifferenceQuotientGeneratorWeldEx
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Unit using (⊤; tt)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Product using (Σ; _×_; _,_; proj₂)
-open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans; sym)
+open import Data.Product using (Σ; _×_; _,_; proj₁; proj₂)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans; sym; subst)
 
 import DASHI.Quantum.TSVF as TSVF
 import DASHI.Physics.Foundations.BidirectionallyAdmissibleHistoryFibreExact as Bidi
@@ -1008,6 +1009,634 @@ module _
       source conversion scalar a ,
     originalOSScalarEigenmodeToObserver
       source metric conversion scalar a
+
+
+  ------------------------------------------------------------------------
+  -- P07.L09: ORIGINAL SOURCE-NATIVE AFFINE SHIFT / RESOLVENT GRAPH.
+  --
+  -- This is a TWO-WAY equation for (H - scalar I) on the SAME selected
+  -- observer and OS physical-energy operator graph. Unlike a finite
+  -- eigenmode, the target need not vanish. It is derived only from
+  -- already-owned whole operator graph equality plus linearSubtract
+  -- and linearScale of the ORIGINAL J.
+  --
+  -- RealStep is NOT silently identified with a complex non-real
+  -- spectral parameter. A true physical resolvent requires a source
+  -- of complex scalars, self-adjoint Hilbert operators, and an inverse
+  -- with boundedness / spectral parameters independently justified.
+  ------------------------------------------------------------------------
+
+  OriginalObserverAffineShiftEquation :
+    (source : RealTimeDerivativeBridge)
+    (conversion : PhysicalHbarEnergyConversion source)
+    (scalar : RealStep source)
+    (a target : ObserverState) → Set
+  OriginalObserverAffineShiftEquation source conversion scalar a target =
+    ObserverGeneratorDomain source a
+    ×
+    (observerSubtract source
+      (observerPhysicalEnergyOperator conversion a)
+      (observerScale source scalar a)
+      ≡ target)
+
+  OriginalOSAffineShiftEquation :
+    (source : RealTimeDerivativeBridge)
+    (conversion : PhysicalHbarEnergyConversion source)
+    (scalar : RealStep source)
+    (a target : ObserverState) → Set
+  OriginalOSAffineShiftEquation source conversion scalar a target =
+    OSDomain source (J a)
+    ×
+    (osSubtract source
+      (originalOSPhysicalEnergyOperator conversion
+        (OS.hamiltonian reconstruction) (J a))
+      (osScale source scalar (J a))
+      ≡ J target)
+
+  originalSelectedAffineShiftIntertwines :
+    (source : RealTimeDerivativeBridge)
+    (conversion : PhysicalHbarEnergyConversion source)
+    (scalar : RealStep source)
+    (a : ObserverState)
+    (domain : ObserverGeneratorDomain source a) →
+    J (observerSubtract source
+      (observerPhysicalEnergyOperator conversion a)
+      (observerScale source scalar a))
+    ≡
+    osSubtract source
+      (originalOSPhysicalEnergyOperator conversion
+        (OS.hamiltonian reconstruction) (J a))
+      (osScale source scalar (J a))
+  originalSelectedAffineShiftIntertwines
+      source conversion scalar a domain =
+    trans
+      (linearSubtract source
+        (observerPhysicalEnergyOperator conversion a)
+        (observerScale source scalar a))
+      (cong₂ (osSubtract source)
+        (originalSelectedPhysicalEnergyIntertwines
+          source conversion a domain)
+        (linearScale source scalar a))
+
+  originalObserverAffineShiftToOS :
+    (source : RealTimeDerivativeBridge)
+    (conversion : PhysicalHbarEnergyConversion source)
+    (scalar : RealStep source)
+    (a target : ObserverState) →
+    OriginalObserverAffineShiftEquation
+      source conversion scalar a target →
+    OriginalOSAffineShiftEquation
+      source conversion scalar a target
+  originalObserverAffineShiftToOS
+      source conversion scalar a target (domain , equation) =
+    mappedDomain source a domain ,
+    trans
+      (sym (originalSelectedAffineShiftIntertwines
+        source conversion scalar a domain))
+      (cong J equation)
+
+  originalOSAffineShiftToObserver :
+    (source : RealTimeDerivativeBridge)
+    (metric : OriginalIsometricStrongLimitSource source)
+    (conversion : PhysicalHbarEnergyConversion source)
+    (scalar : RealStep source)
+    (a target : ObserverState) →
+    OriginalOSAffineShiftEquation
+      source conversion scalar a target →
+    OriginalObserverAffineShiftEquation
+      source conversion scalar a target
+  originalOSAffineShiftToObserver
+      source metric conversion scalar a target (osDomain , equation) =
+    let
+      observerDomain : ObserverGeneratorDomain source a
+      observerDomain =
+        proj₂
+          (originalMatchedMetricSourceForcesTwoSidedGeneratorDomains
+            source metric a)
+          osDomain
+
+      shifted : ObserverState
+      shifted =
+        observerSubtract source
+          (observerPhysicalEnergyOperator conversion a)
+          (observerScale source scalar a)
+    in
+    observerDomain ,
+    trans
+      (sym (Clock.decodeEmbed clock shifted))
+      (trans
+        (cong (Clock.decodeObserver clock)
+          (trans
+            (originalSelectedAffineShiftIntertwines
+              source conversion scalar a observerDomain)
+            equation))
+        (Clock.decodeEmbed clock target))
+
+  originalSelectedAffineShiftGraphsBidi :
+    (source : RealTimeDerivativeBridge)
+    (metric : OriginalIsometricStrongLimitSource source)
+    (conversion : PhysicalHbarEnergyConversion source)
+    (scalar : RealStep source)
+    (a target : ObserverState) →
+    (OriginalObserverAffineShiftEquation
+      source conversion scalar a target →
+      OriginalOSAffineShiftEquation
+        source conversion scalar a target)
+    ×
+    (OriginalOSAffineShiftEquation
+      source conversion scalar a target →
+      OriginalObserverAffineShiftEquation
+        source conversion scalar a target)
+  originalSelectedAffineShiftGraphsBidi
+      source metric conversion scalar a target =
+    originalObserverAffineShiftToOS
+      source conversion scalar a target ,
+    originalOSAffineShiftToObserver
+      source metric conversion scalar a target
+
+  ------------------------------------------------------------------------
+  -- NONRESONANT SELECTED SHIFT: transfer an independently selected OS
+  -- inverse to the ORIGINAL observer using the SAME decodeObserver.
+  --
+  -- Invertibility is NOT obtained by assuming "eigenmode transfer".
+  -- This record has explicit OS inverse-domain and right-inverse laws.
+  -- No off-real resolvent existence or boundedness is manufactured.
+  ------------------------------------------------------------------------
+
+  record OriginalOSSelectedShiftInverse
+      (source : RealTimeDerivativeBridge)
+      (conversion : PhysicalHbarEnergyConversion source)
+      (scalar : RealStep source) : Set₁ where
+    field
+      osInverse : ReconstructedState → ReconstructedState
+      osInverseInDomain :
+        ∀ target → OSDomain source (osInverse target)
+      osInverseRightEquation :
+        ∀ target →
+        osSubtract source
+          (originalOSPhysicalEnergyOperator conversion
+            (OS.hamiltonian reconstruction) (osInverse target))
+          (osScale source scalar (osInverse target))
+        ≡ target
+
+      -- The source independently pays nonresonance / injectivity.
+      -- A mere right inverse is insufficient to identify the resolvent.
+      osShiftInjective :
+        ∀ x y →
+        OSDomain source x →
+        OSDomain source y →
+        osSubtract source
+          (originalOSPhysicalEnergyOperator conversion
+            (OS.hamiltonian reconstruction) x)
+          (osScale source scalar x)
+        ≡
+        osSubtract source
+          (originalOSPhysicalEnergyOperator conversion
+            (OS.hamiltonian reconstruction) y)
+          (osScale source scalar y)
+        → x ≡ y
+
+  open OriginalOSSelectedShiftInverse public
+
+  -- Inverse-on-domain follows from the source's right solution and
+  -- injectivity: no second, unrelated left-inverse assumption.
+  originalOSShiftInverseLeft :
+    (source : RealTimeDerivativeBridge)
+    (conversion : PhysicalHbarEnergyConversion source)
+    (scalar : RealStep source)
+    (inverse : OriginalOSSelectedShiftInverse source conversion scalar)
+    (x : ReconstructedState)
+    (domain : OSDomain source x) →
+    osInverse inverse
+      (osSubtract source
+        (originalOSPhysicalEnergyOperator conversion
+          (OS.hamiltonian reconstruction) x)
+        (osScale source scalar x))
+    ≡ x
+  originalOSShiftInverseLeft source conversion scalar inverse x domain =
+    osShiftInjective inverse
+      (osInverse inverse
+        (osSubtract source
+          (originalOSPhysicalEnergyOperator conversion
+            (OS.hamiltonian reconstruction) x)
+          (osScale source scalar x)))
+      x
+      (osInverseInDomain inverse
+        (osSubtract source
+          (originalOSPhysicalEnergyOperator conversion
+            (OS.hamiltonian reconstruction) x)
+          (osScale source scalar x)))
+      domain
+      (osInverseRightEquation inverse
+        (osSubtract source
+          (originalOSPhysicalEnergyOperator conversion
+            (OS.hamiltonian reconstruction) x)
+          (osScale source scalar x)))
+
+  originalSelectedObserverShiftInverse :
+    (source : RealTimeDerivativeBridge)
+    (conversion : PhysicalHbarEnergyConversion source)
+    (scalar : RealStep source) →
+    OriginalOSSelectedShiftInverse source conversion scalar →
+    ObserverState → ObserverState
+  originalSelectedObserverShiftInverse source conversion scalar inverse target =
+    Clock.decodeObserver clock (osInverse inverse (J target))
+
+  originalSelectedObserverShiftInverseIntertwines :
+    (source : RealTimeDerivativeBridge)
+    (conversion : PhysicalHbarEnergyConversion source)
+    (scalar : RealStep source)
+    (inverse : OriginalOSSelectedShiftInverse source conversion scalar)
+    (target : ObserverState) →
+    J (originalSelectedObserverShiftInverse
+      source conversion scalar inverse target)
+    ≡ osInverse inverse (J target)
+  originalSelectedObserverShiftInverseIntertwines
+      source conversion scalar inverse target =
+    Clock.embedDecode clock (osInverse inverse (J target))
+
+  originalSelectedObserverShiftInverseSolves :
+    (source : RealTimeDerivativeBridge)
+    (metric : OriginalIsometricStrongLimitSource source)
+    (conversion : PhysicalHbarEnergyConversion source)
+    (scalar : RealStep source)
+    (inverse : OriginalOSSelectedShiftInverse source conversion scalar)
+    (target : ObserverState) →
+    OriginalObserverAffineShiftEquation source conversion scalar
+      (originalSelectedObserverShiftInverse
+        source conversion scalar inverse target)
+      target
+  originalSelectedObserverShiftInverseSolves
+      source metric conversion scalar inverse target =
+    let
+      selectedOSState : ReconstructedState
+      selectedOSState = osInverse inverse (J target)
+
+      observerState : ObserverState
+      observerState = Clock.decodeObserver clock selectedOSState
+
+      selectedOSEquation :
+        OriginalOSAffineShiftEquation
+          source conversion scalar observerState target
+      selectedOSEquation =
+        (subst (OSDomain source)
+          (sym (Clock.embedDecode clock selectedOSState))
+          (osInverseInDomain inverse (J target))) ,
+        trans
+          (cong
+            (λ x → osSubtract source
+              (originalOSPhysicalEnergyOperator conversion
+                (OS.hamiltonian reconstruction) x)
+              (osScale source scalar x))
+            (sym (Clock.embedDecode clock selectedOSState)))
+          (osInverseRightEquation inverse (J target))
+    in
+      originalOSAffineShiftToObserver
+        source metric conversion scalar observerState target
+        selectedOSEquation
+
+
+  ------------------------------------------------------------------------
+  -- The *same* original decode/embedding reflects solution uniqueness.
+  -- This proves an actual observer-side inverse-on-domain rather than
+  -- merely renaming the source-selected OS solution operator.
+  ------------------------------------------------------------------------
+
+  originalObserverShiftSolutionsUnique :
+    (source : RealTimeDerivativeBridge)
+    (conversion : PhysicalHbarEnergyConversion source)
+    (scalar : RealStep source)
+    (inverse : OriginalOSSelectedShiftInverse source conversion scalar)
+    (a b target : ObserverState) →
+    OriginalObserverAffineShiftEquation
+      source conversion scalar a target →
+    OriginalObserverAffineShiftEquation
+      source conversion scalar b target →
+    a ≡ b
+  originalObserverShiftSolutionsUnique
+      source conversion scalar inverse a b target first second =
+    let
+      firstOS : OriginalOSAffineShiftEquation
+        source conversion scalar a target
+      firstOS =
+        originalObserverAffineShiftToOS
+          source conversion scalar a target first
+
+      secondOS : OriginalOSAffineShiftEquation
+        source conversion scalar b target
+      secondOS =
+        originalObserverAffineShiftToOS
+          source conversion scalar b target second
+
+      osEquality : J a ≡ J b
+      osEquality =
+        osShiftInjective inverse (J a) (J b)
+          (proj₁ firstOS)
+          (proj₁ secondOS)
+          (trans (proj₂ firstOS) (sym (proj₂ secondOS)))
+    in
+    trans
+      (sym (Clock.decodeEmbed clock a))
+      (trans
+        (cong (Clock.decodeObserver clock) osEquality)
+        (Clock.decodeEmbed clock b))
+
+  originalSelectedObserverShiftInverseLeft :
+    (source : RealTimeDerivativeBridge)
+    (metric : OriginalIsometricStrongLimitSource source)
+    (conversion : PhysicalHbarEnergyConversion source)
+    (scalar : RealStep source)
+    (inverse : OriginalOSSelectedShiftInverse source conversion scalar)
+    (a : ObserverState)
+    (domain : ObserverGeneratorDomain source a) →
+    originalSelectedObserverShiftInverse
+      source conversion scalar inverse
+      (observerSubtract source
+        (observerPhysicalEnergyOperator conversion a)
+        (observerScale source scalar a))
+    ≡ a
+  originalSelectedObserverShiftInverseLeft
+      source metric conversion scalar inverse a domain =
+    let
+      target : ObserverState
+      target =
+        observerSubtract source
+          (observerPhysicalEnergyOperator conversion a)
+          (observerScale source scalar a)
+    in
+    originalObserverShiftSolutionsUnique
+      source conversion scalar inverse
+      (originalSelectedObserverShiftInverse
+        source conversion scalar inverse target)
+      a target
+      (originalSelectedObserverShiftInverseSolves
+        source metric conversion scalar inverse target)
+      (domain , refl)
+
+
+  ------------------------------------------------------------------------
+  -- P07.L10: SOURCE-NATIVE OPERATOR EXPRESSION AND STRONG LIMIT.
+  --
+  -- A typed expression uses ONLY the ORIGINAL observer and reconstructed
+  -- OS H, together with the ORIGINAL subtraction/scalar actions. There
+  -- is no newly selected operator and no independent "f(H)" equality.
+  --
+  -- A physically justified common invariant domain and convergence of
+  -- one source-selected expression sequence produce intertwinement of
+  -- its strong limit. This does not yet construct a Borel spectral
+  -- measure, trace-class heat semigroup or a dense self-adjoint core.
+  ------------------------------------------------------------------------
+
+  data OriginalEnergyExpression
+      (source : RealTimeDerivativeBridge) : Set where
+    selectedStateExpr : OriginalEnergyExpression source
+    applyEnergyExpr :
+      OriginalEnergyExpression source →
+      OriginalEnergyExpression source
+    subtractEnergyExpr :
+      OriginalEnergyExpression source →
+      OriginalEnergyExpression source →
+      OriginalEnergyExpression source
+    scaleEnergyExpr :
+      RealStep source →
+      OriginalEnergyExpression source →
+      OriginalEnergyExpression source
+
+  observerEnergyExpression :
+    (source : RealTimeDerivativeBridge)
+    (conversion : PhysicalHbarEnergyConversion source) →
+    OriginalEnergyExpression source →
+    ObserverState → ObserverState
+  observerEnergyExpression source conversion selectedStateExpr a = a
+  observerEnergyExpression source conversion
+      (applyEnergyExpr expression) a =
+    observerPhysicalEnergyOperator conversion
+      (observerEnergyExpression source conversion expression a)
+  observerEnergyExpression source conversion
+      (subtractEnergyExpr left right) a =
+    observerSubtract source
+      (observerEnergyExpression source conversion left a)
+      (observerEnergyExpression source conversion right a)
+  observerEnergyExpression source conversion
+      (scaleEnergyExpr scalar expression) a =
+    observerScale source scalar
+      (observerEnergyExpression source conversion expression a)
+
+  osEnergyExpression :
+    (source : RealTimeDerivativeBridge)
+    (conversion : PhysicalHbarEnergyConversion source) →
+    OriginalEnergyExpression source →
+    ReconstructedState → ReconstructedState
+  osEnergyExpression source conversion selectedStateExpr a = a
+  osEnergyExpression source conversion
+      (applyEnergyExpr expression) a =
+    originalOSPhysicalEnergyOperator conversion
+      (OS.hamiltonian reconstruction)
+      (osEnergyExpression source conversion expression a)
+  osEnergyExpression source conversion
+      (subtractEnergyExpr left right) a =
+    osSubtract source
+      (osEnergyExpression source conversion left a)
+      (osEnergyExpression source conversion right a)
+  osEnergyExpression source conversion
+      (scaleEnergyExpr scalar expression) a =
+    osScale source scalar
+      (osEnergyExpression source conversion expression a)
+
+  record OriginalEnergyExpressionCore
+      (source : RealTimeDerivativeBridge)
+      (conversion : PhysicalHbarEnergyConversion source) : Set₁ where
+    field
+      originalInvariantCore :
+        OriginalInvariantPhysicalEnergyCore source conversion
+
+      subtractStaysOnDomain :
+        ∀ a b →
+        ObserverGeneratorDomain source a →
+        ObserverGeneratorDomain source b →
+        ObserverGeneratorDomain source (observerSubtract source a b)
+
+      scaleStaysOnDomain :
+        ∀ scalar a →
+        ObserverGeneratorDomain source a →
+        ObserverGeneratorDomain source (observerScale source scalar a)
+
+  open OriginalEnergyExpressionCore public
+
+  originalExpressionDomain :
+    (source : RealTimeDerivativeBridge)
+    (conversion : PhysicalHbarEnergyConversion source)
+    (core : OriginalEnergyExpressionCore source conversion)
+    (expression : OriginalEnergyExpression source)
+    (a : ObserverState) →
+    ObserverGeneratorDomain source a →
+    ObserverGeneratorDomain source
+      (observerEnergyExpression source conversion expression a)
+  originalExpressionDomain source conversion core
+      selectedStateExpr a domain = domain
+  originalExpressionDomain source conversion core
+      (applyEnergyExpr expression) a domain =
+    originalObserverEnergyPreservesDomain
+      (originalInvariantCore core)
+      (observerEnergyExpression source conversion expression a)
+      (originalExpressionDomain source conversion core
+        expression a domain)
+  originalExpressionDomain source conversion core
+      (subtractEnergyExpr left right) a domain =
+    subtractStaysOnDomain core
+      (observerEnergyExpression source conversion left a)
+      (observerEnergyExpression source conversion right a)
+      (originalExpressionDomain source conversion core left a domain)
+      (originalExpressionDomain source conversion core right a domain)
+  originalExpressionDomain source conversion core
+      (scaleEnergyExpr scalar expression) a domain =
+    scaleStaysOnDomain core scalar
+      (observerEnergyExpression source conversion expression a)
+      (originalExpressionDomain source conversion core
+        expression a domain)
+
+  originalEnergyExpressionIntertwines :
+    (source : RealTimeDerivativeBridge)
+    (conversion : PhysicalHbarEnergyConversion source)
+    (core : OriginalEnergyExpressionCore source conversion)
+    (expression : OriginalEnergyExpression source)
+    (a : ObserverState)
+    (domain : ObserverGeneratorDomain source a) →
+    J (observerEnergyExpression source conversion expression a)
+    ≡ osEnergyExpression source conversion expression (J a)
+  originalEnergyExpressionIntertwines source conversion core
+      selectedStateExpr a domain = refl
+  originalEnergyExpressionIntertwines source conversion core
+      (applyEnergyExpr expression) a domain =
+    trans
+      (originalSelectedPhysicalEnergyIntertwines
+        source conversion
+        (observerEnergyExpression source conversion expression a)
+        (originalExpressionDomain
+          source conversion core expression a domain))
+      (cong
+        (originalOSPhysicalEnergyOperator conversion
+          (OS.hamiltonian reconstruction))
+        (originalEnergyExpressionIntertwines
+          source conversion core expression a domain))
+  originalEnergyExpressionIntertwines source conversion core
+      (subtractEnergyExpr left right) a domain =
+    trans
+      (linearSubtract source
+        (observerEnergyExpression source conversion left a)
+        (observerEnergyExpression source conversion right a))
+      (cong₂ (osSubtract source)
+        (originalEnergyExpressionIntertwines
+          source conversion core left a domain)
+        (originalEnergyExpressionIntertwines
+          source conversion core right a domain))
+  originalEnergyExpressionIntertwines source conversion core
+      (scaleEnergyExpr scalar expression) a domain =
+    trans
+      (linearScale source scalar
+        (observerEnergyExpression source conversion expression a))
+      (cong
+        (osScale source scalar)
+        (originalEnergyExpressionIntertwines
+          source conversion core expression a domain))
+
+  record OriginalEnergyExpressionStrongLimit
+      (source : RealTimeDerivativeBridge)
+      (conversion : PhysicalHbarEnergyConversion source)
+      (core : OriginalEnergyExpressionCore source conversion)
+      : Set₁ where
+    field
+      selectedApproximant : Nat → OriginalEnergyExpression source
+      selectedObserverLimit : ObserverState → ObserverState
+      selectedOSLimit : ReconstructedState → ReconstructedState
+
+      observerExpressionConverges :
+        ∀ a →
+        ObserverGeneratorDomain source a →
+        ObserverConverges source
+          (λ n → observerEnergyExpression
+            source conversion (selectedApproximant n) a)
+          (selectedObserverLimit a)
+
+      osExpressionConverges :
+        ∀ a →
+        ObserverGeneratorDomain source a →
+        OSConverges source
+          (λ n → osEnergyExpression
+            source conversion (selectedApproximant n) (J a))
+          (selectedOSLimit (J a))
+
+  open OriginalEnergyExpressionStrongLimit public
+
+  originalSelectedStrongFunctionalLimitIntertwines :
+    (source : RealTimeDerivativeBridge)
+    (conversion : PhysicalHbarEnergyConversion source)
+    (core : OriginalEnergyExpressionCore source conversion)
+    (approximation :
+      OriginalEnergyExpressionStrongLimit source conversion core)
+    (a : ObserverState)
+    (domain : ObserverGeneratorDomain source a) →
+    J (selectedObserverLimit approximation a)
+    ≡ selectedOSLimit approximation (J a)
+  originalSelectedStrongFunctionalLimitIntertwines
+      source conversion core approximation a domain =
+    osLimitUnique source
+      (osConvergesRespectPointwise source
+        (λ n → originalEnergyExpressionIntertwines
+          source conversion core
+          (selectedApproximant approximation n) a domain)
+        (embeddingPreservesLimit source
+          (observerExpressionConverges approximation a domain)))
+      (osExpressionConverges approximation a domain)
+
+
+  ------------------------------------------------------------------------
+  -- EXPERIMENTALLY RELEVANT CONSUMER: TWO-POINT CORRELATOR TRANSPORT.
+  --
+  -- An independently supplied pairwise expectation/pairing on the
+  -- ORIGINAL observer and OS states yields equality of correlators
+  -- for EVERY source-certified strong functional limit.
+  --
+  -- No trace-class claim, thermal partition function or actual
+  -- neutron/Bragg response is inferred from an uninterpreted pairing.
+  ------------------------------------------------------------------------
+
+  record OriginalSelectedCorrelationPairing
+      (source : RealTimeDerivativeBridge) : Set₁ where
+    field
+      Correlation : Set
+      observerCorrelation : ObserverState → ObserverState → Correlation
+      osCorrelation : ReconstructedState → ReconstructedState → Correlation
+      sameSelectedCorrelation :
+        ∀ a b →
+        observerCorrelation a b
+        ≡ osCorrelation (J a) (J b)
+
+  open OriginalSelectedCorrelationPairing public
+
+  originalSelectedStrongLimitCorrelationTransport :
+    (source : RealTimeDerivativeBridge)
+    (conversion : PhysicalHbarEnergyConversion source)
+    (core : OriginalEnergyExpressionCore source conversion)
+    (approximation :
+      OriginalEnergyExpressionStrongLimit source conversion core)
+    (pairing : OriginalSelectedCorrelationPairing source)
+    (a b : ObserverState)
+    (domain : ObserverGeneratorDomain source b) →
+    observerCorrelation pairing a
+      (selectedObserverLimit approximation b)
+    ≡
+    osCorrelation pairing (J a)
+      (selectedOSLimit approximation (J b))
+  originalSelectedStrongLimitCorrelationTransport
+      source conversion core approximation pairing a b domain =
+    trans
+      (sameSelectedCorrelation pairing a
+        (selectedObserverLimit approximation b))
+      (cong
+        (osCorrelation pairing (J a))
+        (originalSelectedStrongFunctionalLimitIntertwines
+          source conversion core approximation b domain))
 
 -- SOURCE conditional, KERNEL PENDING. In particular the original
 -- OSReconstructionAuthority.Hamiltonian is presently just an abstract
