@@ -43,11 +43,25 @@ Amy's family-obituary date is **2022-06-11** according to `AmyEskridgeDemiseCirc
 
 `AmyEskridgeVideoTypedObligationWeldExact`: all 86 joins have an explicit typed **remaining** proof-leaf packet; `gateCoverage = refl` ensures none disappears from the research frontier. Unpaid gates are source-identity/recording, roster identity, causal denominator, government programme, experimental data/replication, device/observable, historical full text and energy accounting. New evidence must be admitted by a source-owning module; this video cannot self-certify.
 
+`AmyEskridgeVideoEleventhMediaRosterWeldExact`: reuses the Fox OSINT source atoms and House ten to close the **source-reported** eleven-person member list, with no promotion to primary forensic or targeting evidence.
+
 `AmyEskridgeVideoRosterScopeWeldExact`: imports House, research twenty, original Amy obituary, the roster scope owner, and checked primary House carrier.
+
+
+## Recovered source: original April 17 Fox eleven-person journalistic list
+
+The original **secondary** source is now located in the existing repo producer `AmyEskridgeOSINTSnowballExact.agda`, not inferred from 10+1 arithmetic:
+
+- **Morgan Phillips**, *11th scientist death emerges in string of missing, dead officials with access to US secrets*, **Fox News Digital**, **2026-04-17 at 11:37 EDT**, https://www.foxnews.com/politics/11th-scientist-death-emerges-string-missing-dead-officials-access-us-secrets.amp.
+- **Michael Dorgan**, *White House reviewing cases of missing, dead scientists for possible links as 11th person identified*, **Fox News Digital**, **2026-04-17 at 15:02 EDT**, https://www.foxnews.com/politics/white-house-reviewing-cases-missing-dead-scientists-possible-links-11th-person-identified.amp.
+
+Phillips' named report lists **Eskridge plus Hicks, Reza, McCasland, Maiwald, Grillmair, Loureiro, Chavez, Thomas, Casias and Garcia**. This matches the repo-reconstructed ten-person reporting/House-context set plus Amy. This explicit source closes the **secondary-media attribution and named-list identity** gate that was previously open; `AmyEskridgeVideoEleventhMediaRosterWeldExact.agda` makes the eleven-name typed comparison with the earlier House ten, proves its finite list normalization with `refl`, and retains role distinctions. It **does not** establish the video narrator's actual source, case inclusion endorsed by a primary government agency, all-scientist status, government targeting or common-cause evidence.
+
+Both Fox articles are the **same outlet's reporting**, not two independent forensic witnesses. The April 20 House primary letter (which is later) calls its underlying news reports **unconfirmed** and does not itself add Amy or assert an eleven-person official roster. Fox explicitly reports no publicly available evidence linking Eskridge's death to the others, and no authority-established tie from her research to her death.
 
 ## High-alpha discriminators
 
-1. **Roster/cardinality non-uniqueness.** House ten + Amy = 11 arithmetically, but House ten + Ning Li = 11 also; neither equals the video roster without a source identifying its members. The repo's 20 scientific work rows and reconstructed House ten overlap by eight, leaving two House cases outside the retained twenty. The union is 22. Role-inclusive != scientists-only. The two cases outside the 20 are Casias and Garcia.
+1. **Roster source and cardinality.** House ten + Amy = 11 arithmetically; before external sourcing, House ten + Ning Li would also produce 11. **The April 17 Fox report now specifically selects Amy and enumerates ten other names**, closing the bounded secondary media roster membership gate but not the video's provenance or any factual causal connection. The repo's 20 scientific work rows and reconstructed House ten overlap by eight, leaving two House cases outside the retained twenty. The union is 22. Role-inclusive != scientists-only. The two cases outside the 20 are Casias and Garcia.
 2. **Patent mismatch.** At video 06:51, US1655144 is attributed to Tesla's space drive; the actual US1655144A patent is Hallgarth/Chandler's *Grain-treating machine*. Tesla US1655114A is a propeller-based aerial-transport patent, **not** an antigravity space drive. Source: respective published USPTO patents, canonical landing copies at https://patents.google.com/patent/US1655144A/en and https://patents.google.com/patent/US1655114A/en.
 3. **Podkletnov numerical-source mismatch.** Video 10:43 says approximately 2%. Earlier Podkletnov/Nieminen 1992 paper abstract (DOI **10.1016/0921-4534(92)90055-H**) reports **0.05-0.3%**, **not** 2%. Exact SymPy ratio **2/0.3 = 20/3**. Later claims require their own correctly linked publication; the earlier paper may not be used as a proof of the later 2% figure.
 4. **Li NASA work.** NASA NTRS **20000038203**, *Activities of UAH*, cooperative agreement NCC8-124, publicly reports that the planned integrated all-up experiments **could not be completed** during the agreement. https://ntrs.nasa.gov/citations/20000038203. This cannot pay a later AC Gravity/Army success claim.
@@ -70,7 +84,7 @@ Amy's family-obituary date is **2022-06-11** according to `AmyEskridgeDemiseCirc
 
 **G1 — Original video acquisition:** video URL, upload/author/date, opening clip, Eskridge surveillance/P-52s source, uncut Burisch and separate Deutsch/Bem footage; build clip-to-timestamp table and identify editing/context changes.
 
-**G2 — Eleven-roster attribution:** acquire narrator's list and explicit eleven identities; align each to event, employment and role records already owned by DASHI. Assess selection process, population at risk, negative controls and alternative case mechanisms. Never silently substitute House ten plus Amy.
+**G2 — Eleven-roster attribution:** the April 17 Fox media list now identifies eleven names. Establish whether the narrator actually used that article; continue member-by-member official event, employment and role alignment using existing owners. Assess selection process, population at risk, negative controls and alternative case mechanisms. Never treat House ten plus Amy as an *official* eleven; its membership is attested at Fox newsroom level.
 
 **G3 — Primary full-text source recovery:** HAL5 slide-by-slide source citations; Brown vacuum protocols, Podkletnov later 2% claim, Poher replication, Wallace apparatus, Woodward thrust; full raw data and measurement confounders when available.
 
