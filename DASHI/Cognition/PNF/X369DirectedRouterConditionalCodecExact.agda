@@ -311,3 +311,107 @@ rawTwoChannelQuantizationError ws wf wr total s f eD es ef =
 -- Equal exact scores do not establish the same routed experts if
 -- quantized scores perturb near a top-k tie, nor do equal expert
 -- sets imply identical softmax mixture weights or future histories.
+
+
+------------------------------------------------------------------------
+-- P0 C3 PHASE PRESERVATION IN THE TWO-CHANNEL CENTERED QUOTIENT
+--
+-- If original directed sum=0, the full three-channel action
+--   (s,f,r) -> (r,s,f)
+-- becomes the exact two-channel linear action
+--   (s,f) -> (-s-f,s).
+-- Its THIRD iterate is identity. Thus a two-channel code can
+-- retain the full C3 action when centered source admission
+-- is explicitly proved, unlike the invariant-only quotient no-go.
+------------------------------------------------------------------------
+
+rotateFullDirected : Directed → Directed
+rotateFullDirected (directed s f r) = directed r s f
+
+rotateFullDirectedCubed : (d : Directed) →
+  rotateFullDirected
+    (rotateFullDirected (rotateFullDirected d)) ≡ d
+rotateFullDirectedCubed (directed s f r) = refl
+
+rotateCenteredTwo : (ℤ × ℤ) → (ℤ × ℤ)
+rotateCenteredTwo (s , f) =
+  (((+ 0) - s) - f) , s
+
+rawCenteredTwoTwiceFirst :
+  (s f : ℤ) →
+  ((+ 0) - (((+ 0) - s) - f)) - s ≡ f
+rawCenteredTwoTwiceFirst s f =
+  solve 2
+    (λ s f →
+      (((con (+ 0) :- ((con (+ 0) :- s) :- f)) :- s) := f))
+    refl s f
+
+rotateCenteredTwoSquared :
+  (s f : ℤ) →
+  rotateCenteredTwo (rotateCenteredTwo (s , f))
+    ≡ f , (((+ 0) - s) - f)
+rotateCenteredTwoSquared s f =
+  cong₂ _,_ (rawCenteredTwoTwiceFirst s f) refl
+  where
+    cong₂ : ∀ {X Y Z : Set}
+      {a b : X}{c d : Y}
+      (fn : X → Y → Z) →
+      a ≡ b → c ≡ d → fn a c ≡ fn b d
+    cong₂ fn refl refl = refl
+
+rawCenteredTwoThriceFirst :
+  (s f : ℤ) →
+  ((+ 0) - f) - (((+ 0) - s) - f) ≡ s
+rawCenteredTwoThriceFirst s f =
+  solve 2
+    (λ s f →
+      (((con (+ 0) :- f) :- ((con (+ 0) :- s) :- f)) := s))
+    refl s f
+
+rotateCenteredTwoCubed :
+  (s f : ℤ) →
+  rotateCenteredTwo
+    (rotateCenteredTwo (rotateCenteredTwo (s , f)))
+  ≡ (s , f)
+rotateCenteredTwoCubed s f
+  rewrite rotateCenteredTwoSquared s f
+        | rawCenteredTwoThriceFirst s f = refl
+
+thirdFromZeroTotal :
+  (s f r : ℤ) →
+  ((s + f) + r) ≡ (+ 0) →
+  r ≡ (((+ 0) - s) - f)
+thirdFromZeroTotal s f r zeroTotal =
+  sym (cong sourceReverse (trans
+    (cong
+      (λ total → decodeDirectedWithKnownDC total (s , f))
+      (sym zeroTotal))
+    (twoDirectedPlusTotalReconstructsOriginal (directed s f r))))
+  where
+    sym : ∀ {X : Set}{x y : X} → x ≡ y → y ≡ x
+    sym refl = refl
+    trans : ∀ {X : Set}{x y z : X} → x ≡ y → y ≡ z → x ≡ z
+    trans refl eq = eq
+    cong : ∀ {X Y : Set}{x y : X} →
+      (fn : X → Y) → x ≡ y → fn x ≡ fn y
+    cong fn refl = refl
+
+sourceCenteredC3TwoChannelIntertwines :
+  (d : Directed) →
+  originalDirectedTotal d ≡ (+ 0) →
+  encodeDirectedTwo (rotateFullDirected d)
+    ≡ rotateCenteredTwo (encodeDirectedTwo d)
+sourceCenteredC3TwoChannelIntertwines (directed s f r) zeroTotal =
+  cong₂ _,_ (thirdFromZeroTotal s f r zeroTotal) refl
+  where
+    cong₂ : ∀ {X Y Z : Set}
+      {a b : X}{c d : Y}
+      (fn : X → Y → Z) →
+      a ≡ b → c ≡ d → fn a c ≡ fn b d
+    cong₂ fn refl refl = refl
+
+-- The zero-DC quotient retains a nontrivial 2D C3 action and any
+-- selected original linear head under the transported two-weight
+-- scoring law. Whether the original trained states actually satisfy
+-- zero-DC and whether quantized future-history transitions commute
+-- still require source evidence and a separate formal weld.
