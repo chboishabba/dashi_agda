@@ -17,6 +17,7 @@ module DASHI.Physics.Motors.SmithFilsingerSignedMeterQuantisationNoGoExact where
 open import Agda.Primitive using (Level)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong)
 
 import DASHI.Physics.Motors.SmithFilsingerSignedBoundaryGroupCompletionExact as Signed
 import DASHI.Physics.Motors.SmithFilsingerMidpointPhaseWorkExact as Port
@@ -63,7 +64,7 @@ additiveExactMeterCannotSendHalvedUnitToOneQuantum
         (meter full)
         (Signed.directedSignedWork (suc zero) zero)
         (workEqualityFromLiteralEquality
-          (Agda.Builtin.Equality.cong meter doubleHalfIsFull))
+          (cong meter doubleHalfIsFull))
         meterUnit))
   where
     halfMeter : Signed.DirectedSignedWork
