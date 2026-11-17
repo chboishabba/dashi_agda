@@ -1520,3 +1520,6 @@ import DASHI.Physics.YangMills.YMClayBishopFiniteWeightedIntegralLawsExact as Bi
 
 -- YM.REAL: explicit Bishop SU2 determinant polynomial, physical Haar open.
 import DASHI.Physics.YangMills.YMClayBishopSU2DeterminantExact as BishopSU2Determinant
+
+-- YM.REAL: Bishop SU2 unitary matrix identities, original Wilson Haar OPEN.
+import DASHI.Physics.YangMills.YMClayBishopSU2UnitarityExact as BishopSU2Unitarity
