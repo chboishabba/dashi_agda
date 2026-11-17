@@ -252,6 +252,61 @@ Ht=Tr*S.sqrt(Dx**2+Dh**2+FFN**2)+et
 require("conditional selected expert FFN/transition envelope",
     S.simplify(Ht-(Tr*S.sqrt(Dx**2+Dh**2+FFN**2)+et))==0)
 
+# Actual softmax Jacobian/coupled-score consumer algebra, for three
+# ordered selected experts. Shared shifts are a true exact-null
+# direction in real arithmetic, even though original torch floating
+# reassociation and topk ties are separately guarded.
+p0,p1,p2=S.symbols("p0 p1 p2",real=True)
+d0,d1,d2=S.symbols("d0 d1 d2",real=True)
+ps=S.Matrix((p0,p1,p2))
+deltas=S.Matrix((d0,d1,d2))
+J=S.diag(*ps)-ps*ps.T
+require("softmax Jacobian annihilates common shift on simplex",
+    all(S.simplify(z.subs(p2,1-p0-p1))==0
+        for z in J*S.ones(3,1)))
+mu=(ps.T*deltas)[0]
+variance=(ps.T*S.Matrix([di**2 for di in deltas]))[0]-mu**2
+centered=sum(ps[i]*(deltas[i]-mu)**2 for i in range(3))
+require("softmax Jacobian variance exact identity on simplex",
+    S.simplify((variance-centered).subs(p2,1-p0-p1))==0)
+# For pi>=0,sum pi=1 and |delta_i|<=B:
+# ||J delta||_1 = sum pi|delta_i-mu|
+#   <=sqrt(sum pi(delta_i-mu)^2)
+#   <=sqrt(sum pi delta_i^2) <= B.
+# Integrating the bound along the same selected-score path gives
+# ||softmax(s+delta)-softmax(s)||_1<=B.
+yp0,yp1,yn0,yn1=S.symbols("yp0 yp1 yn0 yn1",real=True)
+pp0,pp1,pn0,pn1=S.symbols("pp0 pp1 pn0 pn1",real=True)
+full_out=(pn0*yn0+pn1*yn1)-(pp0*yp0+pp1*yp1)
+split_out=((pn0-pp0)*yp0+(pn1-pp1)*yp1
+           +pn0*(yn0-yp0)+pn1*(yn1-yp1))
+require("output difference splits into softmax and FFN errors",
+    S.expand(full_out-split_out)==0)
+# Source history transition is computed before output weights:
+# use symbolic functions rather than confusing equality with
+# a claim about arbitrary external callbacks or selected packets.
+xv,hv,pe=S.symbols("xv hv pe",real=True)
+expert_ffn=S.Function("expert_ffn")
+history_step=S.Function("history_transition")
+selected_h=history_step(xv,hv,expert_ffn(xv,hv))
+selected_out=pe*expert_ffn(xv,hv)
+require("selected expert history is exactly weight-independent",
+    S.diff(selected_h,pe)==0)
+require("selected expert output carries mixture weight",
+    S.diff(selected_out,pe)==expert_ffn(xv,hv))
+# General nonautonomous recurrence conditional on all gate/route
+# margins re-certified along each input trajectory.
+Dstart=S.symbols("Dstart")
+Ltime=S.symbols("L0:4",nonnegative=True)
+etime=S.symbols("eta0:4",nonnegative=True)
+step=Dstart
+for k in range(4):step=Ltime[k]*step+etime[k]
+closed=Dstart*S.prod(Ltime)
+closed+=sum(etime[j]*S.prod(Ltime[k] for k in range(j+1,4))
+            for j in range(4))
+require("four-step variable-L conditional recurrence exact expansion",
+    S.expand(step-closed)==0)
+
 # Conditional analytic consumer bounds:
 # ||softmax(z+dz)-softmax(z)||_1 <= max_i |dz_i|
 # via E_p|V-E_pV| <= (E_p V²)½ <= ||V||inf.
