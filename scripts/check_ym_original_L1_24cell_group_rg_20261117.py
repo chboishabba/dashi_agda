@@ -60,7 +60,7 @@ def crossdef(i,j):
  a,b=V[i],V[j]
  return 2*sum((a[u]*b[v]-a[v]*b[u])**2 for u,v in ((1,2),(1,3),(2,3)))
 D2=[[crossdef(i,j) for j in range(24)] for i in range(24)]
-beta=Q(1,96);coarse=defaultdict(Q);Z=Q(0);N=Q(0);mom1=Q(0);mom2=Q(0)
+beta=Q(1,96);coarse=defaultdict(Q);conditional_num=defaultdict(Q);Z=Q(0);N=Q(0);mom1=Q(0);mom2=Q(0)
 for i,j,k,l in product(range(24),repeat=4):
  D=D2[i][j]+D2[i][k]+D2[i][l]+D2[j][k]+D2[j][l]+D2[k][l]
  S=beta*D
@@ -68,6 +68,7 @@ for i,j,k,l in product(range(24),repeat=4):
  assert w>0
  blocked=M[i][j]
  coarse[blocked]+=w
+ conditional_num[blocked]+=w*V[i][0]
  Z+=w;N+=w*V[blocked][0]
  mom1+=D;mom2+=D*D
 fine=24**4
@@ -77,6 +78,8 @@ assert len(coarse)==24 and all(w>0 for w in coarse.values())
 assert sum(coarse.values(),Q(0))==Z
 assert sum((w/Z for w in coarse.values()),Q(0))==1
 assert sum((w*V[a][0] for a,w in coarse.items()),Q(0))==N==0
+assert sum(conditional_num.values(),Q(0))==0
+assert sum((coarse[a]/Z)*(conditional_num[a]/coarse[a]) for a in coarse)==0
 assert all(sum(M[i][j]==a for i,j in product(range(24),repeat=2))==24 for a in range(24))
 print("ORIGINAL_L1_24CELL_GROUP_RG_PASS",24**2+24**3+moments+fine)
 print("fine states",fine,"blocked states",len(coarse))
