@@ -30,7 +30,6 @@ FILES=(
   DASHI/Analysis/RiemannAristotleCurrentFrontierExact.agda
   DASHI/Analysis/RiemannAristotleCurrentFrontierRegression.agda
   DASHI/Unified/RiemannRHMaxCutTOEExact.agda
-  DASHI/Unified/Physics.agda
   DASHI/Unified/Everything.agda
   DASHI/Unifier.agda
   DASHI/EverythingTOESymmetryResolved369.agda
@@ -67,7 +66,6 @@ if command -v agda >/dev/null 2>&1; then
   agda DASHI/Analysis/RiemannAristotlePoleQuotientCurrentCutRegression.agda
   agda DASHI/Analysis/RiemannAristotleCurrentFrontierRegression.agda
   agda DASHI/Unified/RiemannRHMaxCutTOEExact.agda
-  agda DASHI/Unified/Physics.agda
   agda DASHI/Unified/Everything.agda
   agda DASHI/Unifier.agda
   agda DASHI/EverythingTOESymmetryResolved369.agda

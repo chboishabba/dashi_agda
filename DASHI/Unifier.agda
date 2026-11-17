@@ -8,6 +8,7 @@ import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 import DASHI.Unified.SingularBasinCoarseRGTOEExact as SingularBasinTOE
+import DASHI.Unified.RiemannRHMaxCutTOEExact as RiemannRHTOE
 import DASHI.Unified.BrainFMRI as BrainFMRI
 import DASHI.Reasoning.TrialecticBraidedTwoEyedCoordinationExact as BraidedTransferTOE
 import DASHI.Reasoning.TrialecticThreeStrandBraidHistoryExact as BraidedHistoryTOE
@@ -1928,37 +1929,44 @@ unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
 unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
   FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
 
-
 ------------------------------------------------------------------------
--- RH adaptive-cutoff / centered-near-sign max-cut.
--- Agda records the companion Lean proof boundary without promoting Lean proof
--- terms to Agda kernel proofs.
+-- Riemann current max-cut convergence.
 ------------------------------------------------------------------------
 
-toeRHAdaptiveCutoffNearSignBoundary :
-  RHAdaptiveCutoff.AdaptiveCutoffCrossingBoundary
-toeRHAdaptiveCutoffNearSignBoundary =
-  RHAdaptiveCutoff.canonicalAdaptiveCutoffCrossingBoundary
+unifierRiemannRHCurrentFrontier :
+  RiemannRHTOE.CurrentThreeTapFrontier
+unifierRiemannRHCurrentFrontier =
+  RiemannRHTOE.currentThreeTapFrontier
 
-toeRHAdaptiveCutoffNearSignZKPFrame :
-  RHAdaptiveCutoff.AdaptiveCutoffNearSignZKPFrame
-toeRHAdaptiveCutoffNearSignZKPFrame =
-  RHAdaptiveCutoff.canonicalAdaptiveCutoffNearSignZKPFrame
+unifierRiemannRHZKPFrame :
+  RiemannRHTOE.RiemannRHTOEZKPFrame
+unifierRiemannRHZKPFrame =
+  RiemannRHTOE.canonicalRiemannRHTOEZKPFrame
 
-toeRHAdaptiveCrossingLeavesCenteredNearSignWindow :
-  RHAdaptiveCutoff.AdaptiveCutoffCrossingBoundary.crossingSelectorInsideCenteredNearSignWindow
-    RHAdaptiveCutoff.canonicalAdaptiveCutoffCrossingBoundary ≡ false
-toeRHAdaptiveCrossingLeavesCenteredNearSignWindow =
-  RHAdaptiveCutoff.adaptiveCrossingSelectorLeavesNearSignWindow
+unifierRiemannRHA1CarrierStillOpen :
+  RiemannRHTOE.currentA1CarrierSummationPaid ≡ false
+unifierRiemannRHA1CarrierStillOpen =
+  RiemannRHTOE.a1CarrierSummationStillOpen
 
-toeRHAdaptiveDirectNearSignWeldStillOpen :
-  RHAdaptiveCutoff.AdaptiveCutoffCrossingBoundary.directAdaptiveCutoffNearSignWeldPaid
-    RHAdaptiveCutoff.canonicalAdaptiveCutoffCrossingBoundary ≡ false
-toeRHAdaptiveDirectNearSignWeldStillOpen =
-  RHAdaptiveCutoff.directAdaptiveCutoffNearSignWeldStillOpen
+unifierRiemannRHA2ScalarStillOpen :
+  RiemannRHTOE.currentA2StrictScalarPaid ≡ false
+unifierRiemannRHA2ScalarStillOpen =
+  RiemannRHTOE.a2StrictScalarStillOpen
 
-toeRHCanonicalNearSignForcesLinearCutoff :
-  RHAdaptiveCutoff.AdaptiveCutoffCrossingBoundary.canonicalFixedSupportSignWindowForcesLinearCutoff
-    RHAdaptiveCutoff.canonicalAdaptiveCutoffCrossingBoundary ≡ true
-toeRHCanonicalNearSignForcesLinearCutoff =
-  RHAdaptiveCutoff.canonicalNearSignWindowForcesLinearCutoff
+unifierRiemannRHRouteBStillOpen :
+  RiemannRHTOE.currentRouteBEventualGapPaid ≡ false
+unifierRiemannRHRouteBStillOpen =
+  RiemannRHTOE.routeBEventualGapStillOpen
+
+unifierRiemannRHStillOpen :
+  RiemannRHTOE.currentRHDerived ≡ false
+unifierRiemannRHStillOpen =
+  RiemannRHTOE.riemannHypothesisStillOpen
+
+unifierRiemannTerminalOffPaymentType : Set₁
+unifierRiemannTerminalOffPaymentType =
+  RiemannRHTOE.terminalOffPaymentType
+
+unifierRiemannTerminalGammaPaymentType : Set₁
+unifierRiemannTerminalGammaPaymentType =
+  RiemannRHTOE.terminalGammaPaymentType
