@@ -24,6 +24,7 @@ SCRIPTS = (
     "check_pv_369_worst_case_power_intervals.py",
     "check_pv_369_unsampled_iv_mpp_envelope.py",
     "check_pv_g173_multijunction_net_loss_frontier.py",
+    "check_pv_v68_published_multijunction_table_identity.py",
 )
 AGDA = (
     "DASHI/Physics/Photovoltaic/PV369NetHalfThresholdExact.agda",
@@ -73,7 +74,7 @@ def main():
             entry["selftest"]="PASS"
             try:
                 report=json.loads(run.stdout)
-                count=report.get("checks_passed",report.get("passed"))
+                count=report.get("checks_passed",report.get("passed",report.get("local_exact_arithmetic_checks_passed")))
                 entry["checks_reported"]=count
                 if report.get("all_passed") is not True or not isinstance(count,int) or count<10:
                     entry["selftest"]="FAIL"
