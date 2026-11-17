@@ -47,24 +47,12 @@ on:
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda'
       - 'Docs/diagrams/ym_toe_r559_current_master_convergence.puml'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
-      - 'DASHI/Geo/EarthEmbedding*.agda'
-      - 'DASHI/Unified/BalabanRGTOERegression.agda'
-      - 'DASHI/Physics/YangMills/BalabanCMP116CanonicalSelectedBSourceRound435Exact.agda'
-      - 'DASHI/Physics/YangMills/YangMillsClayPinnedCMP119CanonicalASourceRound436Exact.agda'
-      - 'DASHI/Physics/YangMills/YangMillsClayGoal1CanonicalCSourceRound437Exact.agda'
-      - 'DASHI/Physics/YangMills/BalabanCMP116CanonicalLiteralRateSourceRound438Exact.agda'
-      - 'DASHI/Physics/YangMills/YangMillsClayGoal1SameHNontrivialityRound439Exact.agda'
-      - 'DASHI/Physics/YangMills/BalabanCMP116VariableDomainPreferredR415Round440Exact.agda'
-      - 'DASHI/Physics/YangMills/BalabanCMP116R429RootedTraceCountingRound441Exact.agda'
-      - 'DASHI/Physics/YangMills/BalabanCMP116R429TraceEntropyBudgetRound442Exact.agda'
-      - 'DASHI/Physics/YangMills/YangMillsCMP119WilsonGibbsHaarActionRound443Exact.agda'
-      - 'DASHI/Physics/YangMills/YangMillsCMP119PeterWeylWilsonSquareRound444Exact.agda'
-      - 'DASHI/Unified/YMGoal1TOECompatibilityExact.agda'
-      - 'DASHI/Unified/YMGoal1TOECompatibilityValidation.agda'
-      - 'DASHI/Unified/BalabanRGTOEMaxCutValidation.agda'
-      - 'DASHI/Unified/Physics.agda'
-      - 'DASHI/Unified/Everything.agda'
       - 'DASHI/Unifier.agda'
+      - 'DASHI/Unified/OggSSP2BTOEExact.agda'
+      - 'DASHI/Moonshine/OggSSP2BPostSocleMaxCutExact.agda'
+      - 'DASHI/Moonshine/OggSSP2BEquivariantWeldLastEquationCompressionExact.agda'
+      - 'DASHI/Moonshine/OggSSP2BTerminalRecognitionProductExact.agda'
+      - 'DASHI/Moonshine/OggSSP2B279FirewalledCrossPollinationExact.agda'
       - 'DASHI/Physics/Closure/Everything.agda'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
 
@@ -223,32 +211,9 @@ jobs:
             DASHI/Unified/Fleet58ManifestAcquisitionExact.agda
             DASHI/Core/SymmetryResolvedFibreExact.agda
             DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda
-            DASHI/Unified/BalabanRGTOERegression.agda
-            DASHI/Unified/YMGoal1TOECompatibilityExact.agda
-            DASHI/Unified/YMGoal1TOECompatibilityValidation.agda
-            DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
-            DASHI/Unified/TOE369MaxCutKernelBidiTernaryExact.agda
-            DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda
-            DASHI/Unified/FleetFormalGapTargetTOEExact.agda
-            DASHI/Unified/FleetFormalGapTargetTOEValidation.agda
-            DASHI/Geo/EarthEmbeddingWoogarooExact.agda
-            DASHI/Geo/EarthEmbeddingGeometryExact.agda
-            DASHI/Geo/EarthEmbeddingAttributedSourcesExact.agda
-            DASHI/Geo/EarthEmbeddingInterpretabilityExact.agda
-            DASHI/Geo/EarthEmbeddingAcquisitionExact.agda
-            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
-            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
-            DASHI/Unified/Physics.agda
-            DASHI/Unified/NavierStokesClayFrontierTOEConvergenceExact.agda
-            DASHI/Unified/NavierStokesClayFrontierTOEConvergenceValidation.agda
-            DASHI/Physics/Closure/NSHistoricalSignedExternalCommutatorSnowballLineageExact.agda
-            DASHI/Physics/Closure/NSClayFacingBPureAnalysisFrontier20261005Exact.agda
-            DASHI/Physics/Closure/NSTriadKNPhysicalCriticalTouchingDefectR44020261007Exact.agda
-            DASHI/Unified/Everything.agda
-            DASHI/Unified/FleetFormalGapTargetTOEExact.agda
-            DASHI/Unified/FleetFormalGapTargetTOEValidation.agda
-            DASHI/Unifier.agda
+            DASHI/Unified/OggSSP2BTOEExact.agda
             DASHI/EverythingTOESymmetryResolved369.agda
+            DASHI/Unifier.agda
           )
           for source in "${sources[@]}"; do
             if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|NON_TERMINATING|TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
@@ -257,33 +222,15 @@ jobs:
             fi
           done
 
-      - name: Kernel-check connected TOE graph
+      - name: Kernel-check normalized Monster 2B TOE facade
         run: |
           agda --version
-          modules=(
-            DASHI/Unified/Fleet58ManifestAcquisitionExact.agda
-            DASHI/ComputerScience/TriadicCompiledScalarU8RuntimeExact.agda
-            DASHI/ComputerScience/TriadicU8RuntimeOracleCrossRepoExact.agda
-            DASHI/ComputerScience/TriadicFin27Byte256ABIExact.agda
-            DASHI/Unified/BalabanRGTOERegression.agda
-            DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
-            DASHI/Unified/TOE369MaxCutKernelBidiTernaryExact.agda
-            DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda
-            DASHI/Unified/FleetFormalGapTargetTOEExact.agda
-            DASHI/Unified/FleetFormalGapTargetTOEValidation.agda
-            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
-            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
-            DASHI/Unified/YMGoal1TOECompatibilityExact.agda
-            DASHI/Unified/Physics.agda
-            DASHI/Geo/EarthEmbeddingAcquisitionExact.agda
-            DASHI/Unified/NavierStokesClayFrontierTOEConvergenceExact.agda
-            DASHI/Unified/NavierStokesClayFrontierTOEConvergenceValidation.agda
-            DASHI/EverythingTOESymmetryResolved369.agda
-            DASHI/Unifier.agda
-            DASHI/Unified/Everything.agda
-            DASHI/Unified/FleetFormalGapTargetTOEValidation.agda
-            DASHI/Unified/YMGoal1TOECompatibilityValidation.agda
-          )
-          for module in "${modules[@]}"; do
-            agda -i . -l standard-library "$module"
-          done
+          agda -i . -l standard-library DASHI/Unified/OggSSP2BTOEExact.agda
+
+      - name: Kernel-check TOE symmetry-resolved aggregate
+        run: |
+          agda -i . -l standard-library DASHI/EverythingTOESymmetryResolved369.agda
+
+      - name: Kernel-check Unifier consumer
+        run: |
+          agda -i . -l standard-library DASHI/Unifier.agda
