@@ -18,6 +18,34 @@ targets=(
   DASHI/Physics/YangMills/YMClayP0BishopRealCarrierInstancesExact.agda
   DASHI/Physics/YangMills/YMClayP0BishopToOriginalWilsonRealWeldExact.agda
   DASHI/Physics/YangMills/BalabanSU2RationalWilsonTraceBoundExact.agda
+  DASHI/Physics/YangMills/YMClaySU2FejerProductFiniteExact.agda
+  DASHI/Physics/YangMills/YMClayBishopSU2QuaternionTraceWeldExact.agda
+  DASHI/Physics/YangMills/YMClayBishopFiniteWeightedIntegralLawsExact.agda
+  DASHI/Physics/YangMills/YMClayBishopSU2DeterminantExact.agda
+  DASHI/Physics/YangMills/YMClayBishopSU2UnitarityExact.agda
+  DASHI/Physics/YangMills/YMClayBishopSU2HaarSeriesLimitExact.agda
+  DASHI/Physics/YangMills/YMClayBishopFiniteWilsonNormalizedExact.agda
+  DASHI/Foundations/BishopMachinPiDoubleAngleAlgebraExact.agda
+  DASHI/Foundations/BishopMachinPiPeriodFromQuarterExact.agda
+  DASHI/Physics/YangMills/YMClayBishopWilsonGibbsPositiveExact.agda
+  DASHI/Physics/YangMills/YMClayBishopSU2WilsonDeficitPositiveExact.agda
+  DASHI/Physics/YangMills/YMClayBishopSU2FiniteGibbsPartitionExact.agda
+  DASHI/Physics/YangMills/YMClayOriginalWilsonSecondOrderCombinatoricsExact.agda
+  DASHI/Physics/YangMills/YMClayOriginalRationalSU2ToBishopTraceExact.agda
+  DASHI/Physics/YangMills/YMClayOriginalRationalSU2BishopUnitaryWeldExact.agda
+  DASHI/Physics/YangMills/YMClaySU2PochhammerMomentNumeratorsExact.agda
+  DASHI/Physics/YangMills/YMClayDyadicCharacterPairCancellationExact.agda
+  DASHI/Physics/YangMills/YMClayRationalS3StereographicNodeExact.agda
+  DASHI/Physics/YangMills/YMClayRationalS3DegreeSevenOrbitMomentsExact.agda
+  DASHI/Physics/YangMills/YMClayRationalS3DegreeThirteenInvariantCertificateExact.agda
+  DASHI/Physics/YangMills/YMClayRationalS3DegreeFifteenInvariantCertificateExact.agda
+  DASHI/Physics/YangMills/YMClayOriginalL1Rational24CellEffectiveRGExact.agda
+  DASHI/Physics/YangMills/YMClayOriginalRationalS3HyperoctahedralGeneratorsExact.agda
+  DASHI/Physics/YangMills/YMClayRationalS3OddSignOrbitCancellationExact.agda
+  DASHI/Physics/YangMills/YMClayRationalS3StereographicConcreteExact.agda
+  DASHI/Physics/YangMills/YMClayRationalS3PositiveWeightedNodesExact.agda
+  DASHI/Physics/YangMills/YMClayOriginalRationalWilsonTaylor2PositiveExact.agda
+  DASHI/Physics/YangMills/YMClayNativeSixPlaneGaugeSameSourceExact.agda
 )
 
 for target in "${targets[@]}"; do
@@ -26,6 +54,39 @@ for target in "${targets[@]}"; do
     exit 2
   fi
 done
+
+python3 scripts/check_ym_su2_fejer_rootfree_20261117.py
+python3 scripts/check_ym_su2_bishop_matrix_20261117.py
+python3 scripts/check_bishop_machin_four_angle_algebra_20261117.py
+python3 scripts/check_ym_su2_gibbs_positive_20261117.py
+python3 scripts/check_ym_original_wilson_loworder_20261117.py
+python3 scripts/check_ym_bn_cauchy_schedule_20261117.py
+python3 scripts/check_ym_dyadic_cyclotomic_full_20261117.py
+python3 scripts/check_ym_wilson_L1_commutator_20261117.py
+python3 scripts/check_ym_real_sympy_fullchain_20261117.py
+python3 scripts/check_ym_universal_cubature_producer_20261117.py --degree 9
+python3 scripts/check_ym_dyadic_character_bitpair_20261117.py --max-power 8
+python3 scripts/check_ym_s3_stereographic_rational_20261117.py
+python3 scripts/check_ym_s3_stereographic_invariance_20261117.py
+python3 scripts/check_ym_s3_exact_rational_orbit_designs_20261117.py
+python3 scripts/check_ym_original_wilson_rational_degree15_taylor_budget_20261117.py
+python3 scripts/check_ym_s3_exact_rational_orbit_degree15_20261117.py
+python3 scripts/check_ym_s3_degree15_eleven_invariants_20261117.py
+python3 scripts/check_ym_original_L1_24cell_group_rg_20261117.py
+python3 scripts/check_ym_original_L1_24cell_induced_rg_20261117.py
+python3 scripts/check_ym_original_rational_s3_b4_invariants_20261117.py
+python3 scripts/check_ym_s3_sign_orbit_universal_parity_20261118.py
+python3 scripts/check_ym_s3_degree13_nine_invariants_20261117.py
+python3 scripts/check_ym_original_L1_rational_design_weld_20261117.py
+python3 scripts/check_ym_wilson_all_cutoffs_interval_20261117.py
+python3 scripts/check_ym_naive_cylinder_negative_control_20261117.py
+python3 scripts/check_ym_su2_o4_invariance_20261117.py
+python3 scripts/check_ym_effective_cauchy_general_20261117.py --levels 16
+python3 scripts/check_ym_original_wilson_polynomial_cylinder_20261117.py --side 1 --order 2
+python3 scripts/check_ym_original_wilson_polynomial_cylinder_20261117.py --side 2 --order 1
+python3 scripts/check_ym_original_wilson_cubic_incidence_20261117.py
+python3 scripts/check_ym_original_L1_cubic_sparse_pochhammer_20261117.py
+python3 scripts/check_ym_original_periodic_gauge_words_20261117.py
 
 if ! command -v nix >/dev/null 2>&1; then
   echo 'Nix unavailable: local P0 Agda acceptance NOT performed' >&2
@@ -40,5 +101,5 @@ for target in "${targets[@]}"; do
     bash scripts/run_agda29_parallel_check.sh "$target"
 done
 
-echo 'PASS: all three isolated P0 scalar/SU2 Agda module checks completed.'
+echo 'PASS: all twenty isolated P0 scalar/SU2 Agda module checks completed.'
 echo 'NOTE: OriginalWilsonToBishopScalarWeld is not thereby inhabited.'

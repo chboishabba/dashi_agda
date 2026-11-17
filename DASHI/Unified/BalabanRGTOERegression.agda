@@ -1666,3 +1666,49 @@ open SUNPushforwardNoBare public using
 import DASHI.Physics.YangMills.YMClayD1PhysicalRemoteCoverageNoGoExact as YMPhysicalPairCoverage
 
 import DASHI.Physics.YangMills.YangMillsCMP119LiteralWilsonSpanAdditiveExact as CMP119LiteralSpan
+
+-- YM.REAL: root-free Fejer finite product positivity ONLY; continuous Haar remains OPEN.
+import DASHI.Physics.YangMills.YMClaySU2FejerProductFiniteExact as SU2RootFreeFejerFinite
+
+-- YM.REAL unsafe Bishop trace source lives in separate non-safe regression root.
+
+-- YM.REAL: actual finite weighted integration laws; analytic Haar still open.
+import DASHI.Physics.YangMills.YMClayBishopFiniteWeightedIntegralLawsExact as BishopFiniteWeightedIntegral
+
+-- YM.REAL unsafe Bishop determinant moved out of --safe regression.
+
+-- YM.REAL unsafe Bishop SU2 unitarity moved out of --safe regression.
+
+-- YM.REAL Bishop Cauchy limit source lives in separate regression root.
+
+-- YM.REAL non-safe original Wilson normalization adapter isolated.
+
+-- Original 4D Wilson finite second-order Nat arithmetic, not a Haar closure.
+import DASHI.Physics.YangMills.YMClayOriginalWilsonSecondOrderCombinatoricsExact as WilsonSecondOrder
+
+-- Exact all-degree finite SU2 moments; analytic Haar/positivity still OPEN.
+import DASHI.Physics.YangMills.YMClaySU2PochhammerMomentNumeratorsExact as SU2ExactMoments
+
+-- Original Fejer/SU2 all-degree finite character block cancellation.
+import DASHI.Physics.YangMills.YMClayDyadicCharacterPairCancellationExact as SU2DyadicFourierPairs
+
+-- Source-safe algebraic norm of rational S3 stereographic coordinates.
+import DASHI.Physics.YangMills.YMClayRationalS3StereographicNodeExact as S3RationalStereoPolynomial
+
+-- Exact positive rational degree-seven S3 orbit moment certificate.
+import DASHI.Physics.YangMills.YMClayRationalS3DegreeSevenOrbitMomentsExact as S3RationalDegreeSeven
+
+-- Compact exact rational SU2 degree-13 nine-invariant source certificate.
+import DASHI.Physics.YangMills.YMClayRationalS3DegreeThirteenInvariantCertificateExact as RationalS3Degree13
+
+-- Exact eleven-invariant rational S3 degree-15 source certificate.
+import DASHI.Physics.YangMills.YMClayRationalS3DegreeFifteenInvariantCertificateExact as RationalS3Degree15
+
+-- Exact original L1 24cell induced rational Wilson T2 coarse density.
+import DASHI.Physics.YangMills.YMClayOriginalL1Rational24CellEffectiveRGExact as Rational24CellEffectiveRG
+
+-- Original rational SU2 B4 sign/permutation norm and orbit-invariant generators.
+import DASHI.Physics.YangMills.YMClayOriginalRationalS3HyperoctahedralGeneratorsExact as OriginalRationalS3B4
+
+-- All-degree odd coordinate monomial cancellation on genuine 16 signed rational S3 orbit multiset.
+import DASHI.Physics.YangMills.YMClayRationalS3OddSignOrbitCancellationExact as RationalS3OddOrbit
