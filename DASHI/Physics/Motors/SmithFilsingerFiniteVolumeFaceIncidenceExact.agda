@@ -20,6 +20,7 @@ open +-*-Solver using (solve; _:+_; _:=_)
 
 import DASHI.Physics.Motors.SmithFilsingerReplenishedCycleCapExact as Cycle
 import DASHI.Physics.Motors.Circuit36927RecoveryEnergyBoundExact as Bound
+import DASHI.Physics.Motors.SmithFilsingerSpatialPortChainExact as Spatial
 
 -- Internal fluxes are directed: all work is nonnegative and orientation
 -- is represented by choosing incoming vs outgoing. Thus signed scalar
@@ -243,6 +244,42 @@ finiteVolumeUsefulBelowAllSuppliedWork mesh =
   where
     cs : List LocalVolumeCell
     cs = OrientedFaceMesh.cells mesh
+
+-- All-mesh source-free no-load consequence, from the ORIGINAL
+-- Nat load-bound owner, independent of mesh shape and cell count.
+finiteVolumeSourceFreeHasZeroLoad :
+  (mesh : OrientedFaceMesh) →
+  totalExtIn (OrientedFaceMesh.cells mesh) ≡ 0 →
+  totalDrive (OrientedFaceMesh.cells mesh) ≡ 0 →
+  totalInitial (OrientedFaceMesh.cells mesh) ≡ 0 →
+  totalLoad (OrientedFaceMesh.cells mesh) ≡ 0
+finiteVolumeSourceFreeHasZeroLoad mesh zeroExt zeroDrive zeroStored
+  rewrite zeroExt | zeroDrive | zeroStored =
+  Spatial.onlyZeroCanBeBelowZero
+    (finiteVolumeUsefulBelowAllSuppliedWork mesh)
+
+-- Three non-collinear cell-index positions may share arbitrary directed
+-- face graph geometry; this concrete Y-branch has face works 2 and 3.
+-- Its total useful load is 1+2+3=6, all paid by external incident work 6.
+exampleBranchingMesh : OrientedFaceMesh
+exampleBranchingMesh =
+  orientedFaceMesh
+    ((localVolumeCell 6 0 0 0 0 5 1 0 0 refl)
+      ∷ (localVolumeCell 0 2 0 0 0 0 2 0 0 refl)
+      ∷ (localVolumeCell 0 3 0 0 0 0 3 0 0 refl) ∷ [])
+    (2 ∷ 3 ∷ [])
+    refl refl
+
+exampleBranchingMeshBalances :
+  totalExtIn (OrientedFaceMesh.cells exampleBranchingMesh)
+    + (totalDrive (OrientedFaceMesh.cells exampleBranchingMesh)
+      + totalInitial (OrientedFaceMesh.cells exampleBranchingMesh))
+  ≡ totalExtOut (OrientedFaceMesh.cells exampleBranchingMesh)
+    + (totalLoad (OrientedFaceMesh.cells exampleBranchingMesh)
+      + (totalLoss (OrientedFaceMesh.cells exampleBranchingMesh)
+      + totalFinal (OrientedFaceMesh.cells exampleBranchingMesh)))
+exampleBranchingMeshBalances =
+  finiteVolumeExteriorEnergyBalance exampleBranchingMesh
 
 -- A 2-cell physically oriented face matching example. The incoming
 -- internal face work of B and outgoing internal face work of A are 3.
