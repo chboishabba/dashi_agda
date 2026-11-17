@@ -424,7 +424,7 @@ currentMillenniumLeanAssistReceipt =
 -- CURRENT LEAN MILLENNIUM EXTERNAL-ACCEPTANCE CUSTODY
 --
 -- This receipt updates external target custody without replacing the older
--- theorem-source receipt above. It records the exact independent target pin,
+-- theorem-source receipt above.  It records the exact independent target pin,
 -- the existing DASHI same-object weld reuse rule, and the fail-closed status
 -- of targets that LeanDojo marks as incomplete.
 --
@@ -467,9 +467,9 @@ currentMillenniumExternalAcceptanceReceipt :
 currentMillenniumExternalAcceptanceReceipt =
   millennium-external-acceptance-receipt
     "chboishabba/dashi_lean4"
-    "#53"
-    "agent/millennium-submission-maxcut-restacked-20261007"
-    "e34477885ad64cb569a17e1a663092cd3fd783d3"
+    "#45"
+    "agent/millennium-external-target-adapters-20261006"
+    "9ab3f6a852af95061cd7ba5a890767ba7c1a1817"
     "lean-dojo/LeanMillenniumPrizeProblems"
     "603053dc267cf3efe422f438eb78098c0ececd6f"
     "vendor/LeanMillenniumPrizeProblems"
@@ -478,9 +478,9 @@ currentMillenniumExternalAcceptanceReceipt =
     "MillenniumBirchSwinnertonDyer.ClayBirchSwinnertonDyer"
     "MillenniumHodge.ClayHodge"
     "MillenniumYangMills.ClayYangMills"
-    "MillenniumExternal/ExactTargetSurface.lean"
-    "ExternalClayNS/LeanDojoExactTerminal.lean"
-    "Synthesis/MillenniumBSDProjectiveRankWeld.lean"
+    "Synthesis.RiemannSelectedRHMaxCutFrontier"
+    "ExternalClayNS/LiteralABCD.lean"
+    "Synthesis/MillenniumBSDUniversalRankWeld.lean"
     "Welds/YMClayAssembly.lean"
     true
     true
@@ -512,114 +512,3 @@ millenniumCrossToolchainAdapterStillNotKernelChecked = refl
 millenniumExternalReceiptDoesNotCreatePrizeProof :
   receiptCreatesPrizeProof currentMillenniumExternalAcceptanceReceipt ≡ false
 millenniumExternalReceiptDoesNotCreatePrizeProof = refl
-
-
-------------------------------------------------------------------------
--- Current PR #45 max-cut details.
---
--- These are derived custody facts. They do not create Lean or Agda proof
--- authority. Existing same-object and physical-object theorem owners remain
--- authoritative.
-------------------------------------------------------------------------
-
-leanMillenniumRHExactStatementWeldSourceWritten : Bool
-leanMillenniumRHExactStatementWeldSourceWritten = true
-
-leanMillenniumRHExactStatementWeldSourceWrittenIsTrue :
-  leanMillenniumRHExactStatementWeldSourceWritten ≡ true
-leanMillenniumRHExactStatementWeldSourceWrittenIsTrue = refl
-
-leanMillenniumNSFeffermanCExactTermSourceWritten : Bool
-leanMillenniumNSFeffermanCExactTermSourceWritten = true
-
-leanMillenniumNSFeffermanCExactTermSourceWrittenIsTrue :
-  leanMillenniumNSFeffermanCExactTermSourceWritten ≡ true
-leanMillenniumNSFeffermanCExactTermSourceWrittenIsTrue = refl
-
-leanMillenniumNSFeffermanDExactTermSourceWritten : Bool
-leanMillenniumNSFeffermanDExactTermSourceWritten = true
-
-leanMillenniumNSFeffermanDExactTermSourceWrittenIsTrue :
-  leanMillenniumNSFeffermanDExactTermSourceWritten ≡ true
-leanMillenniumNSFeffermanDExactTermSourceWrittenIsTrue = refl
-
-leanMillenniumNSAdapterRequiresNewMathematics : Bool
-leanMillenniumNSAdapterRequiresNewMathematics = false
-
-leanMillenniumNSAdapterRequiresNoNewMathematics :
-  leanMillenniumNSAdapterRequiresNewMathematics ≡ false
-leanMillenniumNSAdapterRequiresNoNewMathematics = refl
-
-leanMillenniumBSDProjectiveAffineRankWeldSourceWritten : Bool
-leanMillenniumBSDProjectiveAffineRankWeldSourceWritten = true
-
-leanMillenniumBSDProjectiveAffineRankWeldSourceWrittenIsTrue :
-  leanMillenniumBSDProjectiveAffineRankWeldSourceWritten ≡ true
-leanMillenniumBSDProjectiveAffineRankWeldSourceWrittenIsTrue = refl
-
-leanMillenniumPNPTerminalFailureBidiAgdaOwned : Bool
-leanMillenniumPNPTerminalFailureBidiAgdaOwned = true
-
-leanMillenniumPNPTerminalFailureBidiAgdaOwnedIsTrue :
-  leanMillenniumPNPTerminalFailureBidiAgdaOwned ≡ true
-leanMillenniumPNPTerminalFailureBidiAgdaOwnedIsTrue = refl
-
-leanMillenniumNSReleasedMetadataReportsNoSorry : Bool
-leanMillenniumNSReleasedMetadataReportsNoSorry =
-  NSReleased.releasedLeanMetadataReportsNoSorry4
-
-leanMillenniumNSReleasedMetadataReportsNoSorryIsTrue :
-  leanMillenniumNSReleasedMetadataReportsNoSorry ≡ true
-leanMillenniumNSReleasedMetadataReportsNoSorryIsTrue = refl
-
-leanMillenniumHodgeFaithfulPrizeTarget : Bool
-leanMillenniumHodgeFaithfulPrizeTarget =
-  hodgeExternalTargetValid currentMillenniumExternalAcceptanceReceipt
-
-leanMillenniumHodgeFaithfulPrizeTargetIsFalse :
-  leanMillenniumHodgeFaithfulPrizeTarget ≡ false
-leanMillenniumHodgeFaithfulPrizeTargetIsFalse =
-  millenniumHodgeExternalTargetInvalid
-
-LeanMillenniumHodgePrizePromotion : Set
-LeanMillenniumHodgePrizePromotion =
-  leanMillenniumHodgeFaithfulPrizeTarget ≡ true
-
-leanMillenniumHodgePrizePromotionImpossible :
-  LeanMillenniumHodgePrizePromotion → ⊥
-leanMillenniumHodgePrizePromotionImpossible ()
-
-leanMillenniumYangMillsFaithfulPrizeTarget : Bool
-leanMillenniumYangMillsFaithfulPrizeTarget =
-  yangMillsExternalTargetValid currentMillenniumExternalAcceptanceReceipt
-
-leanMillenniumYangMillsFaithfulPrizeTargetIsFalse :
-  leanMillenniumYangMillsFaithfulPrizeTarget ≡ false
-leanMillenniumYangMillsFaithfulPrizeTargetIsFalse =
-  millenniumYangMillsExternalTargetInvalid
-
-LeanMillenniumYangMillsPrizePromotion : Set
-LeanMillenniumYangMillsPrizePromotion =
-  leanMillenniumYangMillsFaithfulPrizeTarget ≡ true
-
-leanMillenniumYangMillsPrizePromotionImpossible :
-  LeanMillenniumYangMillsPrizePromotion → ⊥
-leanMillenniumYangMillsPrizePromotionImpossible ()
-
-leanMillenniumExactHeadKernelReceiptObserved : Bool
-leanMillenniumExactHeadKernelReceiptObserved =
-  directCrossToolchainAdapterKernelChecked
-    currentMillenniumExternalAcceptanceReceipt
-
-leanMillenniumExactHeadKernelReceiptStillUnobserved :
-  leanMillenniumExactHeadKernelReceiptObserved ≡ false
-leanMillenniumExactHeadKernelReceiptStillUnobserved =
-  millenniumCrossToolchainAdapterStillNotKernelChecked
-
-LeanMillenniumSourceWrittenKernelPromotion : Set
-LeanMillenniumSourceWrittenKernelPromotion =
-  leanMillenniumExactHeadKernelReceiptObserved ≡ true
-
-leanMillenniumSourceWrittenKernelPromotionImpossible :
-  LeanMillenniumSourceWrittenKernelPromotion → ⊥
-leanMillenniumSourceWrittenKernelPromotionImpossible ()

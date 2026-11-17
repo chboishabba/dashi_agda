@@ -2,10 +2,7 @@ module DASHI.Unified.Everything where
 import DASHI.Interop.SLRSemanticWorldClosureExact as LegalSemanticClosure
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
-import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
-import DASHI.Analysis.RiemannMarkedCompletedTraceArithmeticAuditExact as RHPrimeAudit
-import DASHI.Analysis.RiemannThreeTapCurrentLeanFrontierExact as RHThreeTapFrontier
-import DASHI.Analysis.RiemannThreeTapTerminalCompletionLeanDonorExact as RHTerminal
+import DASHI.Mathematics.CrossPollination.MillenniumLeanAssistReceiptExact as MillenniumExternal
 
 import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
 import DASHI.ComputerScience.TriadicFin27Byte256ABIExact as TriadicABI
@@ -306,304 +303,98 @@ import DASHI.Unified.GovernedLegalWorkflowSourceGenealogyTOERegression
 import DASHI.Unified.GovernedLegalWorkflowSourceSemanticTOEExact as LegalSourceSemantic
 import DASHI.Unified.GovernedLegalWorkflowSourceSemanticTOERegression
 
-governedLegalWorkflowSourceGenealogyHandoff :
-  LegalSourceGenealogy.GovernedLegalWorkflowSourceGenealogyHandoff
-governedLegalWorkflowSourceGenealogyHandoff =
-  LegalSourceGenealogy.canonicalGovernedLegalWorkflowSourceGenealogyHandoff
-
-governedLegalPerceivedIndependenceDoesNotCreateProvenanceIndependence =
-  LegalSourceGenealogy.toePerceivedIndependenceDoesNotCreateLegalProvenanceIndependence
-governedLegalRepetitionDoesNotCreateIndependentEvidence =
-  LegalSourceGenealogy.toeRepetitionDoesNotCreateIndependentLegalEvidence
-governedLegalCommonSourceDoesNotEraseEvidence =
-  LegalSourceGenealogy.toeCommonSourceDependenceDoesNotEraseLegalEvidence
-governedSourceMultiplicityDoesNotAdmitTruth =
-  LegalSourceGenealogy.toeExternalSourceMultiplicityDoesNotAdmitTruth
-governedGenealogyDoesNotPromoteLegalAuthorityTruth =
-  LegalSourceGenealogy.toeLegalAuthorityStillDoesNotCreateTruthAfterGenealogy
-governedReviewedGenealogyDoesNotPayApplicability =
-  LegalSourceGenealogy.toeReviewedGenealogyDoesNotPayApplicability
-governedGenealogyAdmissionDoesNotBecomeLegalSourceAuthority =
-  LegalSourceGenealogy.toeGenealogyAdmissionDoesNotBecomeLegalSourceAuthority
-governedGenealogyCandidateSourceDoesNotCreateLegalAuthority =
-  LegalSourceGenealogy.toeGenealogyCandidateSourceDoesNotCreateLegalAuthority
-governedGenealogySameLegalSystemDoesNotCreateLegalAuthority =
-  LegalSourceGenealogy.toeGenealogySameLegalSystemDoesNotCreateLegalAuthority
-governedGenealogyCurrentValidityDoesNotCreateApplicability =
-  LegalSourceGenealogy.toeGenealogyCurrentValidityDoesNotCreateApplicability
-governedGenealogyDocumentRoleDoesNotCreateLegalAuthority =
-  LegalSourceGenealogy.toeGenealogyDocumentRoleDoesNotCreateLegalAuthority
-
-governedLegalWorkflowSourceSemanticHandoff :
-  LegalSourceSemantic.GovernedLegalWorkflowSourceSemanticHandoff
-governedLegalWorkflowSourceSemanticHandoff =
-  LegalSourceSemantic.canonicalGovernedLegalWorkflowSourceSemanticHandoff
-
-governedJsonIsNotSemanticCommandAbi :
-  LegalGovernance.JsonArtifactIsSemanticCommandAbi → ⊥
-governedJsonIsNotSemanticCommandAbi =
-  LegalGovernance.toeJsonIsNotSemanticCommandAbi
-
-governedJsonReviewDoesNotCreateDecision :
-  LegalGovernance.JsonReviewFileAutomaticallyReviewerDecision → ⊥
-governedJsonReviewDoesNotCreateDecision =
-  LegalGovernance.toeJsonReviewDoesNotCreateDecision
-
-governedJsonReceiptDoesNotCreateTruth :
-  LegalGovernance.JsonReceiptAutomaticallyClaimTruth → ⊥
-governedJsonReceiptDoesNotCreateTruth =
-  LegalGovernance.toeJsonReceiptDoesNotCreateTruth
-
-governedCliSequenceDoesNotPayResidual :
-  LegalGovernance.CliSequenceAutomaticallyPaysOpenResidual → ⊥
-governedCliSequenceDoesNotPayResidual =
-  LegalGovernance.toeCliSequenceDoesNotPayResidual
-
-governedPinnedStreamDoesNotCreateLegalTruth :
-  LegalGovernance.PinnedOalcStreamingAutomaticallyLegalTruth → ⊥
-governedPinnedStreamDoesNotCreateLegalTruth =
-  LegalGovernance.toePinnedStreamDoesNotCreateLegalTruth
-
-governedReviewedHopJsonDoesNotBecomeCanonicalSemanticTransport :
-  LegalGovernance.ReviewedHopJsonBecomesCanonicalSemanticTransport → ⊥
-governedReviewedHopJsonDoesNotBecomeCanonicalSemanticTransport =
-  LegalGovernance.toeReviewedHopJsonDoesNotBecomeCanonicalSemanticTransport
-
-governedOalcHitDoesNotBecomeBindingAuthority :
-  LegalGovernance.OalcHitAutomaticallyBindingAuthority → ⊥
-governedOalcHitDoesNotBecomeBindingAuthority =
-  LegalGovernance.toeOalcHitDoesNotBecomeBindingAuthority
-
-governedOfficialCourtBytesDoNotBecomePropositionCorrespondence :
-  LegalGovernance.OfficialCourtBytesAutomaticallyPropositionCorrespondence → ⊥
-governedOfficialCourtBytesDoNotBecomePropositionCorrespondence =
-  LegalGovernance.toeOfficialCourtBytesDoNotBecomePropositionCorrespondence
-
-governedSameMncDoesNotCollapseSourceRevisions :
-  LegalGovernance.SameMncAutomaticallySameSourceRevision → ⊥
-governedSameMncDoesNotCollapseSourceRevisions =
-  LegalGovernance.toeSameMncDoesNotCollapseSourceRevisions
-
-governedSuccessfulOfficialFetchDoesNotBecomeProductionReady :
-  LegalGovernance.SuccessfulOfficialFetchAutomaticallyProductionReady → ⊥
-governedSuccessfulOfficialFetchDoesNotBecomeProductionReady =
-  LegalGovernance.toeSuccessfulOfficialFetchDoesNotBecomeProductionReady
-
-governedMultipleReportsDoNotAutomaticallyCreateIndependence :
-  LegalGovernance.MultipleReportsAutomaticallyIndependent → ⊥
-governedMultipleReportsDoNotAutomaticallyCreateIndependence =
-  LegalGovernance.toeMultipleReportsDoNotAutomaticallyCreateIndependence
-
-governedAgreementDoesNotAutomaticallyCreateIndependentCorroboration :
-  LegalGovernance.AgreementAutomaticallyIndependentCorroboration → ⊥
-governedAgreementDoesNotAutomaticallyCreateIndependentCorroboration =
-  LegalGovernance.toeAgreementDoesNotAutomaticallyCreateIndependentCorroboration
-
-governedDependenceDoesNotMeanNoEvidence :
-  LegalGovernance.DependenceMeansNoEvidence → ⊥
-governedDependenceDoesNotMeanNoEvidence =
-  LegalGovernance.toeDependenceDoesNotMeanNoEvidence
-
-governedExpertStatusDoesNotAutomaticallyCreateTruth :
-  LegalGovernance.ExpertStatusAutomaticallyTruth → ⊥
-governedExpertStatusDoesNotAutomaticallyCreateTruth =
-  LegalGovernance.toeExpertStatusDoesNotAutomaticallyCreateTruth
-
-governedReportAdmissionDoesNotRepairMissingInput :
-  LegalGovernance.ReportAdmissionRepairsMissingInput → ⊥
-governedReportAdmissionDoesNotRepairMissingInput =
-  LegalGovernance.toeReportAdmissionDoesNotRepairMissingInput
-
-governedCrossExaminationDoesNotAddUnobservedInput :
-  LegalGovernance.CrossExaminationAddsUnobservedInput → ⊥
-governedCrossExaminationDoesNotAddUnobservedInput =
-  LegalGovernance.toeCrossExaminationDoesNotAddUnobservedInput
-
-governedDisputedRiskDoesNotBecomeIrrelevant :
-  LegalGovernance.DisputedRiskIsIrrelevant → ⊥
-governedDisputedRiskDoesNotBecomeIrrelevant =
-  LegalGovernance.toeDisputedRiskDoesNotBecomeIrrelevant
-
-governedObserverDefectDoesNotProveOpinionFalse :
-  LegalGovernance.ObserverDefectMakesOpinionFalse → ⊥
-governedObserverDefectDoesNotProveOpinionFalse =
-  LegalGovernance.toeObserverDefectDoesNotProveOpinionFalse
-
-governedQualificationDoesNotAutomaticallyProveForensicCompliance :
-  LegalGovernance.QualificationAutomaticallyForensicCompliance → ⊥
-governedQualificationDoesNotAutomaticallyProveForensicCompliance =
-  LegalGovernance.toeQualificationDoesNotAutomaticallyProveForensicCompliance
+unifiedYMImplementAToDMaxCutReceipt :
+  YMAD.YMImplementAToDTOEMaxCutReceipt
+unifiedYMImplementAToDMaxCutReceipt =
+  YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
 
 
 ------------------------------------------------------------------------
--- Live Gate-4 frontier and fleet-target selection.
+-- Governed legal workflow / Ibrahim genealogy / semantic non-promotion.
 ------------------------------------------------------------------------
 
-unifiedCurrentGate4FrontierLedgerLevel : ProofLevel
-unifiedCurrentGate4FrontierLedgerLevel =
-  FleetHyperTOE.currentGate4FrontierLedgerLevel
+import DASHI.Unified.GovernedLegalWorkflowSourceSemanticTOEExact as LegalSemanticTOE
+import DASHI.Unified.GovernedLegalWorkflowSourceSemanticTOERegression
 
-unifiedCurrentGate4ClusteringToTransferGapLevel : ProofLevel
-unifiedCurrentGate4ClusteringToTransferGapLevel =
-  FleetHyperTOE.currentGate4ClusteringToTransferGapLevel
+unifiedGovernedLegalWorkflowSourceSemanticHandoff :
+  LegalSemanticTOE.GovernedLegalWorkflowSourceSemanticHandoff
+unifiedGovernedLegalWorkflowSourceSemanticHandoff =
+  LegalSemanticTOE.canonicalGovernedLegalWorkflowSourceSemanticHandoff
 
-unifiedFleetFormalGapTargetSelected : Bool
-unifiedFleetFormalGapTargetSelected =
-  FleetHyperTOE.fleetFormalGapTargetSelected
+unifiedLegalSemanticSharedLexemeFirewall =
+  LegalSemanticTOE.toeSharedLexemeDoesNotCreateSemanticIdentity
 
-unifiedHistoricalGate4CountSelectedAsFleetTarget : Bool
-unifiedHistoricalGate4CountSelectedAsFleetTarget =
-  FleetHyperTOE.historicalGate4CountSelectedAsFleetTarget
+unifiedLegalSemanticDiagnosticPromotionFirewall =
+  LegalSemanticTOE.toeDiagnosticCheckDoesNotCreateTheoremPromotion
 
-unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
-  FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
-unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
-  FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+unifiedLegalSemanticIdentifierAuthorityFirewall =
+  LegalSemanticTOE.toeSourceIdentifierDoesNotCreateProofAuthority
 
-------------------------------------------------------------------------
--- Canonical ternary-27 codec / ABI max-cut.
-------------------------------------------------------------------------
-
-unified369Ternary27StateCode :
-  MaxCut369.TernaryEncodedState → MaxCut369.TernaryState27
-unified369Ternary27StateCode = MaxCut369.toe27StateCode
-
-unified369Ternary27StateDecode :
-  MaxCut369.TernaryState27 → MaxCut369.TernaryEncodedState
-unified369Ternary27StateDecode = MaxCut369.toe27StateDecode
-
-unified369Ternary27StateDecodeStateCode :
-  (e : MaxCut369.TernaryEncodedState) →
-  unified369Ternary27StateDecode (unified369Ternary27StateCode e) ≡ e
-unified369Ternary27StateDecodeStateCode =
-  MaxCut369.toe27StateDecodeStateCode
-
-unified369Ternary27StateCodeStateDecode :
-  (i : MaxCut369.TernaryState27) →
-  unified369Ternary27StateCode (unified369Ternary27StateDecode i) ≡ i
-unified369Ternary27StateCodeStateDecode =
-  MaxCut369.toe27StateCodeStateDecode
-
-unified369Ternary27FiniteStateABIExact =
-  MaxCut369.toe27FiniteStateABIExact
-
-unified369Ternary27ByteCarrierABIExact =
-  MaxCut369.toe27ByteCarrierABIExact
-
-unified369Ternary27CompiledHostU8Exact =
-  MaxCut369.toe27CompiledHostU8Exact
-
-unified369Ternary27RustBindingStillUnpaid =
-  MaxCut369.toe27RustBindingStillUnpaid
-
-unified369Ternary27CUDABindingStillUnpaid =
-  MaxCut369.toe27CUDABindingStillUnpaid
-
-unified369Ternary27ROCmBindingStillUnpaid =
-  MaxCut369.toe27ROCmBindingStillUnpaid
-
-unified369Ternary27MonsterEmbeddingNotPromoted =
-  MaxCut369.toe27MonsterEmbeddingNotPromoted
+unifiedLegalSemanticESDMutationForbidden =
+  LegalSemanticTOE.toeESDSurfaceMutationRemainsForbidden
 
 
 ------------------------------------------------------------------------
--- Canonical Balaban physics and Fleet manifest reachability.
+-- Fleet-58 named-manifest dispatch boundary.
 ------------------------------------------------------------------------
 
-open Physics public using
-  ( yangMillsBalabanRGReceipt
-  ; yangMillsBalabanScaleDensityFlowLevel
-  ; yangMillsBalabanCompleteDensitySourceShapeLevel
-  ; yangMillsBalabanCompleteDensityDerivedSummaryLevel
-  ; yangMillsBalabanCompleteDensityPhysicalProjectionBoundsLevel
-  ; yangMillsBalabanScaleDensityFiniteMeasureWeldLevel
-  ; yangMillsBalabanLiteralGeneratedActionDensityLevel
-  ; yangMillsBalabanLiteralCombinedRGEffectiveActionLevel
-  ; yangMillsBalabanLiteralGeneratedActionStressScaleLevel
-  ; yangMillsBalabanScaleDensityStressLaneCompilerLevel
-  ; yangMillsBalabanDensityAnchoredStressLaneCompilerLevel
-  ; yangMillsBalabanLiteralDensityAnchoredStressLaneInstantiationLevel
-  ; yangMillsBalabanRegularESelectedDensityCompilerLevel
-  ; yangMillsBalabanRegularELocalizationSourceLevel
-  ; yangMillsBalabanRegularELocalizationCarrierLevel
-  ; yangMillsBalabanRegularEContinuationCompilerLevel
-  ; yangMillsBalabanHaarCasimirCoefficientLevel
-  ; yangMillsBalabanCasimirOrbitFactorizationLevel
-  ; yangMillsBalabanCasimirLowerBoundTransportLevel
-  ; yangMillsBalabanLiteralCasimirFactorizationLevel
-  ; yangMillsBalabanClassifiedCasimirPositivityLevel
-  ; yangMillsBalabanStressMarkedShellReuseLevel
-  ; yangMillsBalabanStressPairingPhysicalWeldLevel
-  ; yangMillsBalabanGeneratedActionDensityCompilerLevel
-  ; yangMillsBalabanCombinedRGEffectiveActionCompilerLevel
-  ; yangMillsBalabanGeneratedActionStressScaleCompilerLevel
-  ; yangMillsBalabanPublishedFlowRegularEProjectionCompilerLevel
-  ; yangMillsBalabanRegularESection2PredicateCompilerLevel
-  ; yangMillsBalabanConcreteRegularELocalizationWitnessLevel
-  ; yangMillsBalabanStressCauchyModulusCompilerLevel
-  ; yangMillsBalabanStressCauchyPhysicalInsertionLevel
-  ; yangMillsBalabanStressHilbertBoundCompilerLevel
-  ; yangMillsBalabanStressHilbertPhysicalShellLevel
-  ; yangMillsBalabanPublishedNonlinearRGCoreLevel
-  ; yangMillsBalabanPublishedRGPhysicalSameObjectLevel
-  ; yangMillsBalabanContinuumLimitReceipt
-  ; yangMillsBalabanContinuumLimitPromotionImpossible
-  ; yangMillsDepthContinuumLimitReceipt
-  ; yangMillsDepthContinuumLimitPromotionImpossible
-  ; yangMillsBalabanScaleTransferNonPromotion
-  )
+unifiedFleetGapDispatchBoundary :
+  FleetGapTOE.FleetFormalGapDispatchBoundary
+unifiedFleetGapDispatchBoundary =
+  FleetGapTOE.canonicalFleetFormalGapDispatchBoundary
 
-unifiedFleetRecordedDischargedFibresAre584 :
-  FleetGapTOE.dischargedCoreKnowledgeFibres FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 584
-unifiedFleetRecordedDischargedFibresAre584 = FleetGapTOE.fleetRecordedDischargedCountIs584
+unifiedFleetNamedManifestStillOpen =
+  FleetGapTOE.namedFormalGapManifestAvailableIsFalse
 
-unifiedFleetRecordedFormalGapsAre58 :
-  FleetGapTOE.unformalisedFormalGaps FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 58
-unifiedFleetRecordedFormalGapsAre58 = FleetGapTOE.fleetRecordedUnformalisedGapCountIs58
+unifiedFleetDispatchRequiresNamedManifest =
+  FleetGapTOE.dispatchRequiresNamedFormalGapManifestIsTrue
 
-unifiedFleetRecordedContradictionGapsAre44 :
-  FleetGapTOE.polarityContradictionGaps FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 44
-unifiedFleetRecordedContradictionGapsAre44 = FleetGapTOE.fleetRecordedContradictionCountIs44
+unifiedFleetCountDoesNotIdentifyGapObjects =
+  FleetGapTOE.externalGapCountIdentifiesIndividualGapsIsFalse
 
-unifiedFleetMacroscopicEigenMotifsAre3 :
-  FleetGapTOE.macroscopicEigenMotifCount FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 3
-unifiedFleetMacroscopicEigenMotifsAre3 = FleetGapTOE.fleetRecordedMacroscopicMotifCountIs3
 
-unifiedFleetSpectralLabelsDoNotIdentifyTheoremOwners :
-  FleetGapTOE.spectralLabelsIdentifyTheoremOwners FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
-unifiedFleetSpectralLabelsDoNotIdentifyTheoremOwners = FleetGapTOE.fleetSpectralLabelDoesNotIdentifyTheoremOwner
+------------------------------------------------------------------------
+-- Lean Millennium external-target custody and exact non-promotion.
+-- The canonical owner remains MillenniumLeanAssistReceiptExact.
+------------------------------------------------------------------------
 
-unifiedFleetMetaIntrospectorAttributionPreserved :
-  FleetGapTOE.metaIntrospectorAttributionPreserved FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
-unifiedFleetMetaIntrospectorAttributionPreserved = refl
+unifiedMillenniumExternalAcceptanceReceipt :
+  MillenniumExternal.MillenniumExternalAcceptanceReceipt
+unifiedMillenniumExternalAcceptanceReceipt =
+  MillenniumExternal.currentMillenniumExternalAcceptanceReceipt
 
-unifiedFleetMetaIntrospectorProofNotBorrowed :
-  FleetGapTOE.metaIntrospectorProofBorrowed FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
-unifiedFleetMetaIntrospectorProofNotBorrowed = refl
+unifiedMillenniumExternalDeclarationsPinned :
+  MillenniumExternal.exactExternalDeclarationsPinned
+    MillenniumExternal.currentMillenniumExternalAcceptanceReceipt ≡ true
+unifiedMillenniumExternalDeclarationsPinned =
+  MillenniumExternal.millenniumExternalDeclarationsPinned
 
-unifiedFleetESDSurfaceUnedited :
-  FleetGapTOE.esdSurfaceEdited FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
-unifiedFleetESDSurfaceUnedited = refl
+unifiedMillenniumExistingSameObjectWeldsReused :
+  MillenniumExternal.existingSameObjectWeldsReused
+    MillenniumExternal.currentMillenniumExternalAcceptanceReceipt ≡ true
+unifiedMillenniumExistingSameObjectWeldsReused =
+  MillenniumExternal.millenniumExistingSameObjectWeldsReused
 
-unifiedFleet58ManifestAcquisitionReceipt :
-  FleetManifestTOE.Fleet58ManifestAcquisitionReceipt
-unifiedFleet58ManifestAcquisitionReceipt =
-  FleetManifestTOE.canonicalFleet58ManifestAcquisitionReceipt
+unifiedMillenniumHodgeExternalTargetInvalid :
+  MillenniumExternal.hodgeExternalTargetValid
+    MillenniumExternal.currentMillenniumExternalAcceptanceReceipt ≡ false
+unifiedMillenniumHodgeExternalTargetInvalid =
+  MillenniumExternal.millenniumHodgeExternalTargetInvalid
 
-unifiedFleet58ManifestAbsent : FleetManifestTOE.named58ManifestAcquired ≡ false
-unifiedFleet58ManifestAbsent = FleetManifestTOE.named58ManifestAcquiredIsFalse
+unifiedMillenniumYangMillsExternalTargetInvalid :
+  MillenniumExternal.yangMillsExternalTargetValid
+    MillenniumExternal.currentMillenniumExternalAcceptanceReceipt ≡ false
+unifiedMillenniumYangMillsExternalTargetInvalid =
+  MillenniumExternal.millenniumYangMillsExternalTargetInvalid
 
-unifiedFleet58CountDoesNotNameRows : FleetManifestTOE.countIdentifiesNamedRows ≡ false
-unifiedFleet58CountDoesNotNameRows = FleetManifestTOE.countIdentifiesNamedRowsIsFalse
+unifiedMillenniumCrossToolchainAdapterStillNotKernelChecked :
+  MillenniumExternal.directCrossToolchainAdapterKernelChecked
+    MillenniumExternal.currentMillenniumExternalAcceptanceReceipt ≡ false
+unifiedMillenniumCrossToolchainAdapterStillNotKernelChecked =
+  MillenniumExternal.millenniumCrossToolchainAdapterStillNotKernelChecked
 
-unifiedFleet58PerGapDispatchDisabled : FleetManifestTOE.perGapDispatchEnabled ≡ false
-unifiedFleet58PerGapDispatchDisabled = FleetManifestTOE.perGapDispatchEnabledIsFalse
-
-unifiedFleet58RelatedSymbolsRequired : FleetManifestTOE.relatedSymbolsRequired ≡ true
-unifiedFleet58RelatedSymbolsRequired = FleetManifestTOE.relatedSymbolsRequiredIsTrue
-
-unifiedFleet58DiscoverRequired : FleetManifestTOE.discoverRequired ≡ true
-unifiedFleet58DiscoverRequired = FleetManifestTOE.discoverRequiredIsTrue
-
-unifiedFleet58RoundLineageRequired : FleetManifestTOE.roundLineageRequired ≡ true
-unifiedFleet58RoundLineageRequired = FleetManifestTOE.roundLineageRequiredIsTrue
+unifiedMillenniumExternalReceiptDoesNotCreatePrizeProof :
+  MillenniumExternal.receiptCreatesPrizeProof
+    MillenniumExternal.currentMillenniumExternalAcceptanceReceipt ≡ false
+unifiedMillenniumExternalReceiptDoesNotCreatePrizeProof =
+  MillenniumExternal.millenniumExternalReceiptDoesNotCreatePrizeProof

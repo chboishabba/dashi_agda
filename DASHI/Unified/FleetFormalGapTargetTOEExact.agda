@@ -333,132 +333,78 @@ fleetTextFallbackAuthorityStillFalse :
 fleetTextFallbackAuthorityStillFalse =
   Rebuild.textFallbackCoordinateAuthorityFalse
 
+
 ------------------------------------------------------------------------
--- Exact ordinal cut for the recorded R5 partition.
+-- Named Fleet-58 dispatch boundary.
 --
--- These Fin carriers encode only the three recorded cardinalities.
--- They do not identify persisted PostgreSQL rows.
--- They do not manufacture names for the 58 formal-gap rows.
--- They let downstream proof work range over exactly 58 target slots while
--- keeping the 584 discharged slots and 44 contradiction slots disjoint.
+-- The external producer pays the count class. It does not provide a named
+-- 58-row manifest on the verified source surface. Count equality is not
+-- object identity. Dispatch therefore remains closed.
 ------------------------------------------------------------------------
 
-FleetDischargedOrdinal : Set
-FleetDischargedOrdinal = Fin 584
-
-FleetContradictionOrdinal : Set
-FleetContradictionOrdinal = Fin 44
-
-FleetFormalGapOrdinal : Set
-FleetFormalGapOrdinal = Fin 58
-
-fleetFormalGapOrdinalCount : Nat
-fleetFormalGapOrdinalCount =
-  unformalisedFormalGaps canonicalFleetFormalGapTargetReceipt
-
-fleetFormalGapOrdinalCountIs58 :
-  fleetFormalGapOrdinalCount ≡ 58
-fleetFormalGapOrdinalCountIs58 =
-  fleetRecordedUnformalisedGapCountIs58
-
-fleetDischargedOrdinalCount : Nat
-fleetDischargedOrdinalCount =
-  dischargedCoreKnowledgeFibres canonicalFleetFormalGapTargetReceipt
-
-fleetDischargedOrdinalCountIs584 :
-  fleetDischargedOrdinalCount ≡ 584
-fleetDischargedOrdinalCountIs584 =
-  fleetRecordedDischargedCountIs584
-
-fleetContradictionOrdinalCount : Nat
-fleetContradictionOrdinalCount =
-  polarityContradictionGaps canonicalFleetFormalGapTargetReceipt
-
-fleetContradictionOrdinalCountIs44 :
-  fleetContradictionOrdinalCount ≡ 44
-fleetContradictionOrdinalCountIs44 =
-  fleetRecordedContradictionCountIs44
-
-fleetOrdinalCarriesPersistedRowIdentity : Bool
-fleetOrdinalCarriesPersistedRowIdentity = false
-
-fleetOrdinalCarriesPersistedRowIdentityIsFalse :
-  fleetOrdinalCarriesPersistedRowIdentity ≡ false
-fleetOrdinalCarriesPersistedRowIdentityIsFalse = refl
-
-FleetSharedCardinalityCreatesIdentity : Set
-FleetSharedCardinalityCreatesIdentity =
-  Disambiguation.SharedCardinalityCreatesIdentity
-
-fleetSharedCardinalityDoesNotCreateIdentity :
-  FleetSharedCardinalityCreatesIdentity → ⊥
-fleetSharedCardinalityDoesNotCreateIdentity =
-  Disambiguation.sharedCardinalityDoesNotCreateIdentity
-
-------------------------------------------------------------------------
--- ZKP cut receipt.
---
--- O: Fleet R5 target partition.
--- R: Reuse the recorded 584/44/58 receipt and generic identity firewall.
--- C: Add exact ordinal carriers only.
--- S: Names, row identity, theorem authority, and discharge do not follow.
--- L: Fleet receipt -> ordinal cut -> TOE consumers.
--- P: The recorded partition is the precondition.
--- G: Attribution and ESD boundaries stay unchanged.
--- F: Per-row dispatch still requires a checked row-identity attachment.
-------------------------------------------------------------------------
-
-record FleetR5OrdinalCutReceipt : Set₁ where
-  constructor fleet-r5-ordinal-cut-receipt
+record FleetFormalGapDispatchBoundary : Set where
+  constructor fleet-formal-gap-dispatch-boundary
   field
-    dischargedOrdinal : Set
-    dischargedOrdinalIsCanonical :
-      dischargedOrdinal ≡ FleetDischargedOrdinal
+    countedFormalGapClassAvailable : Bool
+    namedFormalGapManifestAvailable : Bool
+    dispatchRequiresNamedFormalGapManifest : Bool
+    externalGapCountIdentifiesIndividualGaps : Bool
+    dischargedFibresEligibleForGapDispatch : Bool
+    contradictionGapsEligibleForFormalGapDispatch : Bool
 
-    contradictionOrdinal : Set
-    contradictionOrdinalIsCanonical :
-      contradictionOrdinal ≡ FleetContradictionOrdinal
+open FleetFormalGapDispatchBoundary public
 
-    formalGapOrdinal : Set
-    formalGapOrdinalIsCanonical :
-      formalGapOrdinal ≡ FleetFormalGapOrdinal
+canonicalFleetFormalGapDispatchBoundary : FleetFormalGapDispatchBoundary
+canonicalFleetFormalGapDispatchBoundary =
+  fleet-formal-gap-dispatch-boundary
+    true
+    false
+    true
+    false
+    false
+    false
 
-    targetCount : Nat
-    targetCountIs58 : targetCount ≡ 58
+namedFormalGapManifestAvailable : Bool
+namedFormalGapManifestAvailable =
+  FleetFormalGapDispatchBoundary.namedFormalGapManifestAvailable
+    canonicalFleetFormalGapDispatchBoundary
 
-    dischargedCount : Nat
-    dischargedCountIs584 : dischargedCount ≡ 584
+namedFormalGapManifestAvailableIsFalse :
+  namedFormalGapManifestAvailable ≡ false
+namedFormalGapManifestAvailableIsFalse = refl
 
-    contradictionCount : Nat
-    contradictionCountIs44 : contradictionCount ≡ 44
+dispatchRequiresNamedFormalGapManifest : Bool
+dispatchRequiresNamedFormalGapManifest =
+  FleetFormalGapDispatchBoundary.dispatchRequiresNamedFormalGapManifest
+    canonicalFleetFormalGapDispatchBoundary
 
-    ordinalCarriesPersistedIdentity : Bool
-    ordinalCarriesPersistedIdentityIsFalse :
-      ordinalCarriesPersistedIdentity ≡ false
+dispatchRequiresNamedFormalGapManifestIsTrue :
+  dispatchRequiresNamedFormalGapManifest ≡ true
+dispatchRequiresNamedFormalGapManifestIsTrue = refl
 
-    sharedCardinalityIdentityFirewall :
-      FleetSharedCardinalityCreatesIdentity → ⊥
+externalGapCountIdentifiesIndividualGaps : Bool
+externalGapCountIdentifiesIndividualGaps =
+  FleetFormalGapDispatchBoundary.externalGapCountIdentifiesIndividualGaps
+    canonicalFleetFormalGapDispatchBoundary
 
-open FleetR5OrdinalCutReceipt public
+externalGapCountIdentifiesIndividualGapsIsFalse :
+  externalGapCountIdentifiesIndividualGaps ≡ false
+externalGapCountIdentifiesIndividualGapsIsFalse = refl
 
-canonicalFleetR5OrdinalCutReceipt : FleetR5OrdinalCutReceipt
-canonicalFleetR5OrdinalCutReceipt = record
-  { dischargedOrdinal = FleetDischargedOrdinal
-  ; dischargedOrdinalIsCanonical = refl
-  ; contradictionOrdinal = FleetContradictionOrdinal
-  ; contradictionOrdinalIsCanonical = refl
-  ; formalGapOrdinal = FleetFormalGapOrdinal
-  ; formalGapOrdinalIsCanonical = refl
-  ; targetCount = fleetFormalGapOrdinalCount
-  ; targetCountIs58 = fleetFormalGapOrdinalCountIs58
-  ; dischargedCount = fleetDischargedOrdinalCount
-  ; dischargedCountIs584 = fleetDischargedOrdinalCountIs584
-  ; contradictionCount = fleetContradictionOrdinalCount
-  ; contradictionCountIs44 = fleetContradictionOrdinalCountIs44
-  ; ordinalCarriesPersistedIdentity =
-      fleetOrdinalCarriesPersistedRowIdentity
-  ; ordinalCarriesPersistedIdentityIsFalse =
-      fleetOrdinalCarriesPersistedRowIdentityIsFalse
-  ; sharedCardinalityIdentityFirewall =
-      fleetSharedCardinalityDoesNotCreateIdentity
-  }
+dischargedFibresEligibleForGapDispatch : Bool
+dischargedFibresEligibleForGapDispatch =
+  FleetFormalGapDispatchBoundary.dischargedFibresEligibleForGapDispatch
+    canonicalFleetFormalGapDispatchBoundary
+
+dischargedFibresEligibleForGapDispatchIsFalse :
+  dischargedFibresEligibleForGapDispatch ≡ false
+dischargedFibresEligibleForGapDispatchIsFalse = refl
+
+contradictionGapsEligibleForFormalGapDispatch : Bool
+contradictionGapsEligibleForFormalGapDispatch =
+  FleetFormalGapDispatchBoundary.contradictionGapsEligibleForFormalGapDispatch
+    canonicalFleetFormalGapDispatchBoundary
+
+contradictionGapsEligibleForFormalGapDispatchIsFalse :
+  contradictionGapsEligibleForFormalGapDispatch ≡ false
+contradictionGapsEligibleForFormalGapDispatchIsFalse = refl

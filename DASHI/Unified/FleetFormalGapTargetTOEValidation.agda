@@ -264,44 +264,33 @@ toeResidualFieldStillNotPromoted :
 toeResidualFieldStillNotPromoted =
   TOE.toeFleetResidualFieldPromotionImpossible
 
+
 ------------------------------------------------------------------------
--- Fleet R5 ordinal max-cut regression.
+-- Named-gap dispatch must fail closed until the external producer supplies
+-- the identity of each member of the counted 58-gap class.
 ------------------------------------------------------------------------
 
-fleetFormalGapOrdinalCountIsExactly58 :
-  Fleet.fleetFormalGapOrdinalCount ≡ 58
-fleetFormalGapOrdinalCountIsExactly58 =
-  Fleet.fleetFormalGapOrdinalCountIs58
+fleetNamedManifestStillOpen :
+  Fleet.namedFormalGapManifestAvailable ≡ false
+fleetNamedManifestStillOpen =
+  Fleet.namedFormalGapManifestAvailableIsFalse
 
-fleetDischargedOrdinalCountIsExactly584 :
-  Fleet.fleetDischargedOrdinalCount ≡ 584
-fleetDischargedOrdinalCountIsExactly584 =
-  Fleet.fleetDischargedOrdinalCountIs584
+fleetDispatchRequiresNamedManifest :
+  Fleet.dispatchRequiresNamedFormalGapManifest ≡ true
+fleetDispatchRequiresNamedManifest =
+  Fleet.dispatchRequiresNamedFormalGapManifestIsTrue
 
-fleetContradictionOrdinalCountIsExactly44 :
-  Fleet.fleetContradictionOrdinalCount ≡ 44
-fleetContradictionOrdinalCountIsExactly44 =
-  Fleet.fleetContradictionOrdinalCountIs44
+fleetCountDoesNotIdentifyGapObjects :
+  Fleet.externalGapCountIdentifiesIndividualGaps ≡ false
+fleetCountDoesNotIdentifyGapObjects =
+  Fleet.externalGapCountIdentifiesIndividualGapsIsFalse
 
-fleetOrdinalDoesNotClaimPersistedRowIdentity :
-  Fleet.fleetOrdinalCarriesPersistedRowIdentity ≡ false
-fleetOrdinalDoesNotClaimPersistedRowIdentity =
-  Fleet.fleetOrdinalCarriesPersistedRowIdentityIsFalse
+fleetDischargedFibresNotDispatchEligible :
+  Fleet.dischargedFibresEligibleForGapDispatch ≡ false
+fleetDischargedFibresNotDispatchEligible =
+  Fleet.dischargedFibresEligibleForGapDispatchIsFalse
 
-toeFleetOrdinalCutMatchesOwner :
-  TOE.toeFleetR5OrdinalCutReceipt ≡ Fleet.canonicalFleetR5OrdinalCutReceipt
-toeFleetOrdinalCutMatchesOwner = refl
-
-unifierFleetOrdinalCutMatchesOwner :
-  Unifier.unifierFleetR5OrdinalCutReceipt ≡ Fleet.canonicalFleetR5OrdinalCutReceipt
-unifierFleetOrdinalCutMatchesOwner = refl
-
-toeSharedCardinalityStillDoesNotCreateIdentity :
-  Fleet.FleetSharedCardinalityCreatesIdentity → ⊥
-toeSharedCardinalityStillDoesNotCreateIdentity =
-  TOE.toeFleetSharedCardinalityDoesNotCreateIdentity
-
-unifierSharedCardinalityStillDoesNotCreateIdentity :
-  Fleet.FleetSharedCardinalityCreatesIdentity → ⊥
-unifierSharedCardinalityStillDoesNotCreateIdentity =
-  Unifier.unifierFleetSharedCardinalityDoesNotCreateIdentity
+fleetContradictionGapsNotDispatchEligible :
+  Fleet.contradictionGapsEligibleForFormalGapDispatch ≡ false
+fleetContradictionGapsNotDispatchEligible =
+  Fleet.contradictionGapsEligibleForFormalGapDispatchIsFalse

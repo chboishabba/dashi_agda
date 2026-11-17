@@ -80,6 +80,7 @@ import DASHI.Interop.SLRValidationRoadmapPromotionExact as ValidationRoadmap
 import DASHI.Cognition.PNF.SensibLawLegalSemanticAdmissionFrontierExact as Admission
 import DASHI.Cognition.PNF.SensibLawLegalSourceAuthorityEvidenceExact as LegalAuthority
 import DASHI.Cognition.PNF.SensibLawSemanticExpansionSoftwareValidationExact as SoftwareValidation
+import DASHI.Cognition.PNF.SensibLawDbNativeCorpusCompilerExact as DbNative
 import DASHI.Interop.SensibLawSemanticPromotionPolicy as SemanticPromotion
 import DASHI.Interop.IntrospectiveProofLoopExact as Introspection
 import DASHI.Law.SensibLawNativeLegalFollowCLIExact as NativeLegalFollow
@@ -742,7 +743,6 @@ canonicalGovernedLegalWorkflowZKPReceipt =
     ∷ "DASHI.Interop.SLRRuntimeValidationHandoffExact"
     ∷ "DASHI.Interop.SLRValidationRoadmapPromotionExact"
     ∷ "DASHI.Cognition.PNF.SensibLawLegalSemanticAdmissionFrontierExact"
-    ∷ "DASHI.Cognition.PNF.SensibLawLegalSourceAuthorityEvidenceExact"
     ∷ "DASHI.Cognition.PNF.SensibLawSemanticExpansionSoftwareValidationExact"
     ∷ "DASHI.Interop.SensibLawSemanticPromotionPolicy"
     ∷ "DASHI.Core.BoundAcquisitionDemandExact"
@@ -831,6 +831,7 @@ canonicalGovernedLegalWorkflowZKPReceipt =
     ∷ "Reject ESD path changes."
     ∷ "Kernel-check the focused Agda path."
     ∷ "Resolve review, validation, promotion, admission, and software-validation owners with repository intelligence."
+    ∷ "Resolve exact compiler-product reuse with related/discover/lineage before reuse."
     ∷ [] )
     true refl
     false refl
@@ -1504,14 +1505,6 @@ toeCanonicalLegalSourceAuthorityBoundary =
 
 CandidateSourceIsAuthoritative : Set
 CandidateSourceIsAuthoritative = LegalAuthority.CandidateSourceIsAuthoritative
-
-SameLegalSystemAutomaticallyMeansAuthority : Set
-SameLegalSystemAutomaticallyMeansAuthority =
-  LegalAuthority.SameLegalSystemAutomaticallyMeansAuthority
-
-DocumentRoleSuppliesLegalSourceAuthority : Set
-DocumentRoleSuppliesLegalSourceAuthority =
-  LegalAuthority.DocumentRoleSuppliesLegalSourceAuthority
 
 CurrentValidityAutomaticallyMeansApplicability : Set
 CurrentValidityAutomaticallyMeansApplicability =
