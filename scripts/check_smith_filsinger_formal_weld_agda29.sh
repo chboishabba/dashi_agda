@@ -4,6 +4,7 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 
 owners=(
+  DASHI/Physics/Plasma/KSW668FullVectorMaxwellJetExact.agda
   DASHI/Physics/Motors/Circuit36927RecoveryEnergyBoundExact.agda
   DASHI/Physics/Motors/SmithFilsingerTimeIndexedTransferExact.agda
   DASHI/Physics/Motors/SmithFilsingerMidpointPhaseWorkExact.agda
@@ -17,6 +18,7 @@ owners=(
   DASHI/Physics/Motors/SmithFilsingerMaxwellMaterialEnergyCutExact.agda
   DASHI/Physics/Motors/SmithFilsingerDispersiveMaterialPortExact.agda
   DASHI/Physics/Motors/SmithFilsingerDispersiveMaterialWeldExact.agda
+  DASHI/Physics/Motors/SmithFilsingerFullVectorPoyntingPortWeldExact.agda
 )
 new_owners=(
   DASHI/Physics/Motors/SmithFilsingerSpatialPortChainExact.agda
@@ -25,6 +27,7 @@ new_owners=(
   DASHI/Physics/Motors/SmithFilsingerCloudCausalWeldExact.agda
   DASHI/Physics/Motors/SmithFilsingerMaxwellMaterialEnergyCutExact.agda
   DASHI/Physics/Motors/SmithFilsingerDispersiveMaterialWeldExact.agda
+  DASHI/Physics/Motors/SmithFilsingerFullVectorPoyntingPortWeldExact.agda
 )
 for f in "${owners[@]}"; do test -s "$f"; done
 if grep -nE '^[[:space:]]*postulate([[:space:]]|$)|\\{!!\\}' "${new_owners[@]}"; then
@@ -33,4 +36,4 @@ if grep -nE '^[[:space:]]*postulate([[:space:]]|$)|\\{!!\\}' "${new_owners[@]}";
 fi
 # No Python surrogate or simulation: require actual pinned Agda type-check.
 scripts/run_agda29_parallel_check.sh "${new_owners[@]}"
-echo "PASS pinned Agda 2.9 source/Maxwell/material/cloud/spatial formal welds"
+echo "PASS pinned Agda 2.9 six full-vector Maxwell/material/cloud/all-N spatial formal welds"
