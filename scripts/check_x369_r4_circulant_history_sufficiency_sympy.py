@@ -62,4 +62,42 @@ check("zero-sum source head factors through rotating-plane projection",
 # may retain it; identity transition is an explicit semantic control.
 check("future identity history transition can distinguish dropped DC",
       S.eye(3)*hb!=S.eye(3)*ha)
+# Original q-gated mixed arm is a BIJECTION of the full activation
+# carrier in exact arithmetic: q is cyclic/sign invariant and the
+# sample-mean gate is unchanged by independent per-triad C3 rotations.
+# Hence the score observability no-go is not escaped by the q gate.
+aa,bb,cc=S.symbols("aa bb cc",real=True)
+def q3(t):
+    u,v,w=t
+    return u*u+v*v+w*w-u*v-v*w-w*u
+def plus(t):return (t[1],t[2],t[0])
+def minus(t):return (t[2],t[0],t[1])
+check("original q invariant under +120",
+      S.expand(q3((aa,bb,cc))-q3(plus((aa,bb,cc))))==0)
+check("original q invariant under -120",
+      S.expand(q3((aa,bb,cc))-q3(minus((aa,bb,cc))))==0)
+check("original q invariant under C2 sign",
+      S.expand(q3((aa,bb,cc))-q3((-aa,-bb,-cc)))==0)
+def gate_fn(triads,base):
+    energies=[q3(t) for t in triads]
+    avg=sum(energies)/len(energies)
+    return tuple(bool(k)^bool(e>avg) for k,e in zip(base,energies))
+def F(triads,base):
+    bits=gate_fn(triads,base)
+    return tuple(plus(t) if bit else minus(t)
+                 for t,bit in zip(triads,bits))
+def Finverse(triads,base):
+    bits=gate_fn(triads,base)
+    return tuple(minus(t) if bit else plus(t)
+                 for t,bit in zip(triads,bits))
+original=((S.Integer(2),S.Integer(0),S.Integer(0)),
+          (S.Integer(0),S.Integer(1),S.Integer(0)))
+base=(True,False)
+check("q gate phase is invariant along its own orbit",
+      gate_fn(original,base)==gate_fn(F(original,base),base))
+check("exact q-gated phase has explicit inverse on rational fixture",
+      Finverse(F(original,base),base)==original)
+check("q-gated map commutes with diagonal C3 action on fixture",
+      F(tuple(plus(t) for t in original),base)
+      ==tuple(plus(t) for t in F(original,base)))
 print("X369_CIRCULANT_SUFFICIENCY_SYMPY_PASS",len(checks),"checks")
