@@ -26,7 +26,55 @@ def fraction_text(x):
     return str(x.numerator) if x.denominator == 1 else f'{x.numerator}/{x.denominator}'
 
 
-def summarize(manifest, root):
+def conditional_month_delta_bounds(before_rows, after_rows, station, variable, month, low, high):
+    """Sharp fixed-calendar change bounds under EXPLICIT daily-value bounds.
+
+    Unknown observations may independently range over [low, high]. Known
+    one-day observations are fixed. A multi-day accumulated record cannot
+    identify a daily reading, so its day is unknown rather than imputed.
+    No climate-instrument range is assumed by this function.
+    """
+    if variable not in ('tmax', 'tmin'):
+        raise ValueError('temperature bounds cannot be applied to rainfall')
+    low, high = exact(low), exact(high)
+    if low > high:
+        raise ValueError('temperature lower bound exceeds upper bound')
+    yy, mm = map(int, month.split('-'))
+    n = monthrange(yy, mm)[1]
+    sum_lower = sum_upper = Fraction()
+    unknown_before = unknown_after = 0
+    for day_number in range(1, n + 1):
+        day = f'{month}-{day_number:02d}'
+        key = (station, day, variable)
+        old, new = before_rows.get(key), after_rows.get(key)
+        b = exact(old[0]) if old is not None and old[0] is not None and old[1] == 1 else None
+        a = exact(new[0]) if new is not None and new[0] is not None and new[1] == 1 else None
+        for known in (b, a):
+            if known is not None and not (low <= known <= high):
+                raise ValueError(f'observed daily value outside assumed range: {key}')
+        if b is None:
+            unknown_before += 1
+        if a is None:
+            unknown_after += 1
+        sum_lower += (a if a is not None else low) - (b if b is not None else high)
+        sum_upper += (a if a is not None else high) - (b if b is not None else low)
+    return {
+        'assumed_daily_min_C': fraction_text(low),
+        'assumed_daily_max_C': fraction_text(high),
+        'lower_fixed_calendar_delta_C': fraction_text(sum_lower / n),
+        'upper_fixed_calendar_delta_C': fraction_text(sum_upper / n),
+        'unknown_before_days': unknown_before,
+        'unknown_after_days': unknown_after,
+        'bounds_are_conditional_not_measured': True,
+        'sharp_only_for_independent_in_range_unknown_daily_values': True,
+    }
+
+
+def summarize(manifest, root, temperature_min=None, temperature_max=None):
+    if (temperature_min is None) != (temperature_max is None):
+        raise ValueError('supply both explicit temperature bounds or neither')
+    if temperature_min is not None and exact(temperature_min) > exact(temperature_max):
+        raise ValueError('temperature bounds reversed')
     ledger = audit(manifest, root)
     before, _ = read_set(manifest['before'], root)
     after, _ = read_set(manifest['after'], root)
@@ -135,6 +183,10 @@ def summarize(manifest, root):
         else:
             record['full_month_delta_exact'] = None
             record['statistic'] = 'UNRESOLVED: full-month quantity unavailable'
+        if variable in ('tmax', 'tmin') and temperature_min is not None:
+            record['conditional_fixed_calendar_delta_interval'] = conditional_month_delta_bounds(
+                before, after, station, variable, month,
+                temperature_min, temperature_max)
         months.append(record)
     years = []
     for (station, variable, year), monthly in sorted(annual_groups.items()):
@@ -194,10 +246,12 @@ def summarize(manifest, root):
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--manifest', type=Path, required=True)
+    p.add_argument('--temperature-min', help='Optional ASSUMED daily lower C limit')
+    p.add_argument('--temperature-max', help='Optional ASSUMED daily upper C limit')
     p.add_argument('--output', type=Path)
     a = p.parse_args()
     manifest = json.loads(a.manifest.read_text(encoding='utf-8'))
-    result = summarize(manifest, a.manifest.parent)
+    result = summarize(manifest, a.manifest.parent, a.temperature_min, a.temperature_max)
     data = json.dumps(result, indent=2, sort_keys=True) + '\n'
     if a.output:
         a.output.write_text(data, encoding='utf-8')
