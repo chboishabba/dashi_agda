@@ -61,36 +61,8 @@ dropTerminalZero4 :
   ≡ a + (b + (c + d))
 dropTerminalZero4 = solve-∀
 
-zeroSubtractSelf :
-  0ℚ ≡ 0ℚ - 0ℚ
-zeroSubtractSelf = solve-∀
-
-sumSubtractStep :
-  ∀ (a b c d : ℚ) →
-  (a - b) + (c - d) ≡ (a + c) - (b + d)
-sumSubtractStep = solve-∀
-
-distribSubRight :
-  ∀ (a b c : ℚ) →
-  (a - b) * c ≡ a * c - b * c
-distribSubRight = solve-∀
-
-squareBinomial :
-  ∀ (x y : ℚ) →
-  (x + y) * (x + y) ≡ x * x + (y * y + (1ℚ + 1ℚ) * (x * y))
-squareBinomial = solve-∀
-
-reassocPlusThree :
-  ∀ (a b c : ℚ) →
-  a + (b + c) ≡ (a + b) + c
-reassocPlusThree = solve-∀
-
-scaleSubFactor :
-  ∀ (w a b : ℚ) →
-  w * a - w * b ≡ w * (a - b)
-scaleSubFactor = solve-∀
-
 subtractShiftCancel :
   ∀ (a b c : ℚ) →
   (a - c) - (b - c) ≡ a - b
 subtractShiftCancel = solve-∀
+

@@ -8,11 +8,8 @@ import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans; subst)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
-open import DASHI.Physics.YangMills.BalabanBoolean4BlockPoincareExact using
-  (sq; sqDiff; baseBelowBasePlusRemainder)
-open import DASHI.Physics.YangMills.BalabanRationalLDLCertificate using
-  (LDLTerm; ldlTerm; sumTermValues; sumTermValuesNonnegative)
-open import DASHI.Physics.YangMills.BalabanPath13ScaledIntegerCoefficientDataExact public
+open import DASHI.Physics.YangMills.BalabanRationalLDLCertificate
+open import DASHI.Physics.YangMills.BalabanPath13QuadraticCoefficientDataExact public
 import DASHI.Physics.YangMills.BalabanTriangularQuadraticCertificateExact as Quad
 
 ------------------------------------------------------------------------

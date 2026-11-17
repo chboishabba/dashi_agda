@@ -131,11 +131,20 @@ walshRemainder f = sumQ (sq (w0011 f) ∷ sq (w0101 f) ∷ sq (w0110 f) ∷ sq (
 
 postulate
   walshSpectralIdentityRaw :
-    ∀ x0000 x0001 x0010 x0011 x0100 x0101 x0110 x0111 x1000 x1001 x1010 x1011 x1100 x1101 x1110 x1111 →
-    eightℚ * edgeEnergy (cube16 x0000 x0001 x0010 x0011 x0100 x0101 x0110 x0111 x1000 x1001 x1010 x1011 x1100 x1101 x1110 x1111)
-      + sq (blockSum (cube16 x0000 x0001 x0010 x0011 x0100 x0101 x0110 x0111 x1000 x1001 x1010 x1011 x1100 x1101 x1110 x1111))
-    ≡ sixteenℚ * normSq (cube16 x0000 x0001 x0010 x0011 x0100 x0101 x0110 x0111 x1000 x1001 x1010 x1011 x1100 x1101 x1110 x1111)
-      + walshRemainder (cube16 x0000 x0001 x0010 x0011 x0100 x0101 x0110 x0111 x1000 x1001 x1010 x1011 x1100 x1101 x1110 x1111)
+    ∀ x0000 x0001 x0010 x0011 x0100 x0101 x0110 x0111
+      x1000 x1001 x1010 x1011 x1100 x1101 x1110 x1111 →
+    eightℚ * edgeEnergy
+      (cube16 x0000 x0001 x0010 x0011 x0100 x0101 x0110 x0111
+              x1000 x1001 x1010 x1011 x1100 x1101 x1110 x1111)
+      + sq (blockSum
+        (cube16 x0000 x0001 x0010 x0011 x0100 x0101 x0110 x0111
+                x1000 x1001 x1010 x1011 x1100 x1101 x1110 x1111))
+    ≡ sixteenℚ * normSq
+        (cube16 x0000 x0001 x0010 x0011 x0100 x0101 x0110 x0111
+                x1000 x1001 x1010 x1011 x1100 x1101 x1110 x1111)
+      + walshRemainder
+        (cube16 x0000 x0001 x0010 x0011 x0100 x0101 x0110 x0111
+                x1000 x1001 x1010 x1011 x1100 x1101 x1110 x1111)
 
 walshSpectralIdentity : ∀ f →
   eightℚ * edgeEnergy f + sq (blockSum f)
