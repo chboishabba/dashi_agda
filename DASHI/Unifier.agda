@@ -12,11 +12,7 @@ import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 import DASHI.Unified.SingularBasinCoarseRGTOEExact as SingularBasinTOE
-import DASHI.Geo.EarthEmbeddingAcquisitionExact as EarthEmbeddingTOE
-import DASHI.Unified.BrainFMRI as BrainFMRI
-import DASHI.Physics.Closure.BrainConnectomeFMRIObservationQuotient as BrainObservation
-import DASHI.Physics.Closure.BidirectionalBrainObservationQuotient as BrainBidirectional
-import DASHI.Unified.InvariantSpine as BrainSpine
+import DASHI.Physics.Foundations.CMP119CosmologyLatestParetoFrontierExact as CMP119Preferred
 
 
 import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as GovernanceTOE
@@ -597,10 +593,6 @@ unifierExactReuseDoesNotCreateSemanticAuthority =
   GovernanceTOE.toeExactReuseDoesNotCreateSemanticAuthority
 
 
-------------------------------------------------------------------------
--- Governed legal-workflow compliance extension.
-------------------------------------------------------------------------
-
 unifierGovernedLegalWorkflowComplianceReceipt :
   LegalCompliance.GovernedLegalWorkflowComplianceTOEReceipt
 unifierGovernedLegalWorkflowComplianceReceipt =
@@ -625,3 +617,41 @@ unifierLegalityAloneDoesNotCreateLegitimacy :
   LegalCompliance.LegalOnlyCreatesLegitimacy → ⊥
 unifierLegalityAloneDoesNotCreateLegitimacy =
   LegalCompliance.legalityAloneDoesNotCreateLegitimacy
+
+
+unifierGovernedLegalWorkflowComplianceZKPFrame :
+  ParetoSnowballTOE.TOEZKPFrame
+unifierGovernedLegalWorkflowComplianceZKPFrame =
+  LegalCompliance.canonicalGovernedLegalWorkflowComplianceZKPFrame
+
+unifierReportAdmissionDoesNotRepairMissingInput :
+  LegalCompliance.ReportAdmissionRepairsMissingInput → ⊥
+unifierReportAdmissionDoesNotRepairMissingInput =
+  LegalCompliance.reportAdmissionDoesNotRepairMissingInput
+
+unifierActionstepStyleVendorIdentityCreatesAuthorityIsFalse =
+  LegalCompliance.actionstepStyleVendorIdentityCreatesAuthorityIsFalse
+    LegalCompliance.canonicalGovernedLegalWorkflowComplianceReceipt
+
+unifierActionstepStyleTargetNeedsOwnAuthorityWitnessIsTrue =
+  LegalCompliance.actionstepStyleTargetNeedsOwnAuthorityWitnessIsTrue
+    LegalCompliance.canonicalGovernedLegalWorkflowComplianceReceipt
+
+------------------------------------------------------------------------
+-- Current CMP119 preferred source frontier.
+------------------------------------------------------------------------
+
+unifierCMP119PreferredSourcePackageCount =
+  CMP119Preferred.remainingPreferredPackageCount
+
+unifierCMP119PreferredAdapterDebt =
+  CMP119Preferred.remainingAdapterDebt
+
+unifierCMP119PreferredWorkIsPhysicalSourcePackages =
+  CMP119Preferred.remainingWorkIsFourPhysicalSourcePackages
+
+unifierCMP119NoSyntheticPhysicalIdentificationAdded =
+  CMP119Preferred.noSyntheticPhysicalIdentificationAdded
+
+unifierCMP119RepresentationOnlySameObjectDebtRemains =
+  CMP119Preferred.representationOnlySameObjectDebtRemains

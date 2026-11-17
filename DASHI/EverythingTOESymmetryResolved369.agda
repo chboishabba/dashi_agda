@@ -13,11 +13,7 @@ import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 import DASHI.Unified.SingularBasinCoarseRGTOEExact as SingularBasinTOE
-import DASHI.Geo.EarthEmbeddingAcquisitionExact as EarthEmbeddingTOE
-import DASHI.Unified.BrainFMRI as BrainFMRI
-import DASHI.Physics.Closure.BrainConnectomeFMRIObservationQuotient as BrainObservation
-import DASHI.Physics.Closure.BidirectionalBrainObservationQuotient as BrainBidirectional
-import DASHI.Unified.InvariantSpine as BrainSpine
+import DASHI.Physics.Foundations.CMP119CosmologyLatestParetoFrontierExact as CMP119Preferred
 
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -397,6 +393,44 @@ toeBalabanRGZKPFrame =
 toeBalabanRGReceipt : BalabanRGTOE.BalabanRGTOEReceipt
 toeBalabanRGReceipt =
   BalabanRGTOE.canonicalBalabanRGTOEReceipt
+
+
+------------------------------------------------------------------------
+-- Current governed legal/compliance and CMP119 preferred-source handoffs.
+------------------------------------------------------------------------
+
+toeGovernedLegalWorkflowComplianceZKPFrame :
+  ParetoSnowballTOE.TOEZKPFrame
+toeGovernedLegalWorkflowComplianceZKPFrame =
+  LegalCompliance.canonicalGovernedLegalWorkflowComplianceZKPFrame
+
+toeReportAdmissionDoesNotRepairMissingInput :
+  LegalCompliance.ReportAdmissionRepairsMissingInput → ⊥
+toeReportAdmissionDoesNotRepairMissingInput =
+  LegalCompliance.reportAdmissionDoesNotRepairMissingInput
+
+toeActionstepStyleVendorIdentityCreatesAuthorityIsFalse =
+  LegalCompliance.actionstepStyleVendorIdentityCreatesAuthorityIsFalse
+    LegalCompliance.canonicalGovernedLegalWorkflowComplianceReceipt
+
+toeActionstepStyleTargetNeedsOwnAuthorityWitnessIsTrue =
+  LegalCompliance.actionstepStyleTargetNeedsOwnAuthorityWitnessIsTrue
+    LegalCompliance.canonicalGovernedLegalWorkflowComplianceReceipt
+
+toeCMP119PreferredSourcePackageCount =
+  CMP119Preferred.remainingPreferredPackageCount
+
+toeCMP119PreferredAdapterDebt =
+  CMP119Preferred.remainingAdapterDebt
+
+toeCMP119PreferredWorkIsPhysicalSourcePackages =
+  CMP119Preferred.remainingWorkIsFourPhysicalSourcePackages
+
+toeCMP119NoSyntheticPhysicalIdentificationAdded =
+  CMP119Preferred.noSyntheticPhysicalIdentificationAdded
+
+toeCMP119RepresentationOnlySameObjectDebtRemains =
+  CMP119Preferred.representationOnlySameObjectDebtRemains
 
 ------------------------------------------------------------------------
 -- Normalized Balaban density, regular-E, stress, and continuum surfaces.
@@ -1426,10 +1460,6 @@ toeExactReuseDoesNotCreateClaimTruth :
 toeExactReuseDoesNotCreateClaimTruth =
   LegalGovernance.toeExactReuseDoesNotCreateClaimTruth
 
-
-------------------------------------------------------------------------
--- Governed legal-workflow compliance extension.
-------------------------------------------------------------------------
 
 toeGovernedLegalWorkflowComplianceReceipt :
   LegalCompliance.GovernedLegalWorkflowComplianceTOEReceipt
