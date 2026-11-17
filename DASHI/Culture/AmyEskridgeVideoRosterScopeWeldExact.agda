@@ -21,6 +21,7 @@ import DASHI.Culture.MissingDeceasedTwentyScientistRound11SourceReplayParetoExac
 import DASHI.Culture.MissingDeceasedRosterScopeReconciliationExact as Scope
 import DASHI.Culture.AmyEskridgeDemiseCircumstancesSnowballExact as Amy
 import DASHI.Culture.AmyEskridgeVideoSourceRegistryExact as Source
+import DASHI.Culture.AmyEskridgeVideoEleventhMediaRosterWeldExact as Fox
 
 houseReportingCount : Nat
 houseReportingCount = House.officialReportingCohortCount
@@ -76,14 +77,30 @@ record VideoElevenScopeAudit : Set where
     videoRosterEqualsHousePlusAmyPaid : Bool
     commonProgrammePaid : Bool
     workLinkedHarmPaid : Bool
+    secondaryFoxElevenMembershipSourceLocated : Bool
+    foxElevenNameMatchHouseTenPlusAmyPaid : Bool
+    originalVideoNarratorSourceIdentityPaid : Bool
 
 videoElevenScopeAudit : VideoElevenScopeAudit
 videoElevenScopeAudit = video-eleven-scope-audit
   Scope.houseInquiryScope House.hicks Amy.familyObituaryDateAtom
   Source.houseApril2026
-  11 false false false false
+  11 false false false false true true false
 
--- Cannot infer a unique eleven-person roster merely from 10 + 1 = 11.
+
+-- The article's reported roster is now source-identified independently of
+-- this video's creator. Fox Media's eleven-member *news list* normalizes to
+-- the ten previously reconstructed media/House-context cases plus Amy.
+-- This is a source-content/list identity, not verified event causation.
+foxMediaMembershipSameNormalizedList :
+  Fox.foxElevenCanonicalKeys ≡
+  Fox.append Fox.houseTenCanonicalKeys (Fox.amyKey ∷ [])
+foxMediaMembershipSameNormalizedList =
+  Fox.foxElevenEqualsHouseTenPlusAmyKeys
+
+-- Cannot infer the VIDEO CREATOR'S direct source, or event causation,
+-- merely from arithmetic. A secondary Fox media roster is now separately
+-- source-identified above, with a narrower payment scope.
 data ProvedVideoElevenEqualsHouseTenPlusAmy : Set where
 data ProvedElevenAllScientists : Set where
 data ProvedAllElevenShareHarmCause : Set where
