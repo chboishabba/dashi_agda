@@ -204,7 +204,7 @@ def check_primary_inspection_and_clip_lineage() -> None:
     sources = re.findall(r'(?m)^clip\d{2}\s*=\s*clip-lineage\b', clips)
     assert len(rows) == 10
     assert len(sources) == 16
-    assert len(re.findall(r'(?m)^\\w+\\s*=\\s*historical-control\\b', historical)) == 3
+    assert len(re.findall(r'(?m)^\w+\s*=\s*historical-control\b', historical)) == 3
     assert "all86SourceAssociationRetained = Existing.all86RowsAccountedFor" in primary
     assert "acw16d6CCnY" in registry and "acw16d6CCnY" in clips
     for needle in ["20000038203", "19990039542", "19990019627",
