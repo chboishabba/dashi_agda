@@ -25,7 +25,93 @@ else
   TARGETS=("$@")
 fi
 
-AGDA_BIN="${AGDA_BIN:-$(nix build --no-link --print-out-paths "$AGDA_FLAKE")/bin/agda}"
+log_target_slug() {
+  local slug="$1"
+  slug="${slug//\//__}"
+  slug="${slug// /_}"
+  slug="${slug//[^A-Za-z0-9._-]/_}"
+  printf '%s\n' "$slug"
+}
+
+build_log_path() {
+  local base_path="$1"
+  local target_slug="$2"
+  local timestamp="$3"
+  local log_dir log_file log_stem log_ext
+
+  log_dir="$(dirname "$base_path")"
+  log_file="$(basename "$base_path")"
+
+  if [[ "$log_file" == *.* ]]; then
+    log_stem="${log_file%.*}"
+    log_ext=".${log_file##*.}"
+  else
+    log_stem="$log_file"
+    log_ext=""
+  fi
+
+  printf '%s/%s-%s-%s%s\n' \
+    "$log_dir" \
+    "$log_stem" \
+    "$timestamp" \
+    "$target_slug" \
+    "$log_ext"
+}
+
+prune_old_logs() {
+  local base_path="$1"
+  local keep_count="$2"
+  local log_dir log_file log_stem log_ext pattern
+
+  log_dir="$(dirname "$base_path")"
+  log_file="$(basename "$base_path")"
+
+  if [[ "$log_file" == *.* ]]; then
+    log_stem="${log_file%.*}"
+    log_ext=".${log_file##*.}"
+  else
+    log_stem="$log_file"
+    log_ext=""
+  fi
+
+  pattern="$log_dir/$log_stem-*${log_ext}"
+
+  mapfile -t existing_logs < <(find "$log_dir" -maxdepth 1 -type f -name "$(basename "$pattern")" -printf '%T@ %p\n' | sort -n | awk '{ $1=""; sub(/^ /, ""); print }')
+
+  while [ "${#existing_logs[@]}" -gt "$keep_count" ]; do
+    rm -f "${existing_logs[0]}"
+    existing_logs=("${existing_logs[@]:1}")
+  done
+}
+
+# Use the explicitly selected binary, then a working PATH Agda, and
+# only THEN Nix.  Previously an ordinary PATH-only installation tried
+# 'nix build' unconditionally and failed before any kernel check.
+if [ -z "${AGDA_BIN:-}" ]; then
+  if command -v agda >/dev/null 2>&1; then
+    AGDA_BIN="$(command -v agda)"
+  elif command -v nix >/dev/null 2>&1; then
+    AGDA_BIN="$(nix build --no-link --print-out-paths "$AGDA_FLAKE")/bin/agda"
+  else
+    echo "BLOCKED: AGDA_BIN unset, agda absent from PATH, and nix unavailable." >&2
+    exit 127
+  fi
+fi
+if [ ! -x "$AGDA_BIN" ]; then
+  echo "BLOCKED: selected Agda binary is not executable: $AGDA_BIN" >&2
+  exit 127
+fi
+export AGDA_BIN
+echo "Selected Agda executable: $AGDA_BIN"
+AGDA_SELECTED_VERSION="$("$AGDA_BIN" --version)"
+echo "$AGDA_SELECTED_VERSION"
+# Do not accept an Agda 2.8 or 2.10 PATH binary just because one is
+# executable: the Karp theorem suite is pinned to Agda 2.9.
+if [[ "$AGDA_SELECTED_VERSION" != *"2.9."* ]]; then
+  echo "BLOCKED: pinned Agda 2.9 required; selected executable reported: $AGDA_SELECTED_VERSION" >&2
+  echo "Set AGDA_BIN to Agda 2.9, or unset it and configure the Nix Agda 2.9 environment." >&2
+  exit 126
+fi
 if [ "$DASHI_EPHEMERAL" = "1" ]; then
   DASHI_WORK="$(mktemp -d /tmp/dashi-agda29-shadow.XXXXXX)"
   STDLIB_WORK="$(mktemp -d /tmp/agda-stdlib-experimental.XXXXXX)"

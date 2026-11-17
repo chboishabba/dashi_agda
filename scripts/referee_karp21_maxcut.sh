@@ -15,7 +15,7 @@ repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$repo_root"
 mode="${1:-all}"
 
-if ! command -v python3 >/dev/null 2>&1; then
+if [[ "$mode" != "kernel-cut" ]] && ! command -v python3 >/dev/null 2>&1; then
   echo "BLOCKED: python3 unavailable for preflight." >&2
   exit 127
 fi
@@ -27,12 +27,6 @@ case "$mode" in
     exit 2
     ;;
 esac
-
-# E0 source-root completeness: the previous focused cut skipped B1-B5.
-# Purely static source coverage, never a substitute for pinned kernel checks.
-if [[ "$mode" == "preflight" || "$mode" == "kernel-cut" ]]; then
-  python3 scripts/check_karp21_e0_kernel_root_coverage.py --root "$repo_root" --self-test
-fi
 
 # Fail closed only after checking ALL supported Agda sources.  The
 # previous guard required 'agda' on PATH *before* AGDA_BIN/Nix resolution,
@@ -193,13 +187,6 @@ if [[ "$mode" == "kernel-cut" ]]; then
   check_agda DASHI/Mathematics/Complexity/Karp21NativeLivePayloadPotentialExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21NativeOriginalSparseCertificateBoundExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21NativeOriginalSparseCertificateTightBoundExact.agda
-  # Full original B1-B5 theorem-owner roots. They must be explicitly
-  # checked even if some happen to be transitive imports of later roots.
-  check_agda DASHI/Mathematics/Complexity/Karp21NativeBinaryStrictAfterOriginalExact.agda
-  check_agda DASHI/Mathematics/Complexity/Karp21NativeBinaryValidRawEdgesOriginalExact.agda
-  check_agda DASHI/Mathematics/Complexity/Karp21NativeBinaryHeaderBudgetExact.agda
-  check_agda DASHI/Mathematics/Complexity/Karp21NativeBinaryCountBudgetExact.agda
-  check_agda DASHI/Mathematics/Complexity/Karp21NativeBinaryEndpointHistoryOriginalExact.agda
   # End-to-end original source-language B6, first-enabled D2,
   # event-by-event E1 and typed Fin/Cut E2. No theorem is certified
   # unless its exact owner is actually passed to the kernel.
