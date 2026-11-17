@@ -37,6 +37,54 @@ sameSignedWork a b =
   DirectedSignedWork.incoming a + DirectedSignedWork.outgoing b
     ≡ DirectedSignedWork.incoming b + DirectedSignedWork.outgoing a
 
+
+-- The cross-sum relation is an exact equivalence on pairs of Nat.
+-- There is NO quotient type claimed here; different pairs may represent
+-- the same signed work. Cancellation makes the relation transitive.
+sameSignedReflexive : (a : DirectedSignedWork) → sameSignedWork a a
+sameSignedReflexive a = refl
+
+sameSignedSymmetric :
+  (a b : DirectedSignedWork) →
+  sameSignedWork a b → sameSignedWork b a
+sameSignedSymmetric a b equal = Bound.sym equal
+
+sameSignedTransitive :
+  (a b c : DirectedSignedWork) →
+  sameSignedWork a b →
+  sameSignedWork b c →
+  sameSignedWork a c
+sameSignedTransitive a b c ab bc =
+  Cycle.+-cancelRight _ _ (B + bOut)
+    (Cycle.trans
+      (solve 6
+        (λ A aa B bb C cc →
+          ((A :+ cc) :+ (B :+ bb))
+            := ((A :+ bb) :+ (B :+ cc)))
+        refl A aOut B bOut C cOut)
+      (Cycle.trans
+        (Cycle.cong (λ x → x + (B + cOut)) ab)
+        (Cycle.trans
+          (Cycle.cong (λ x → (B + aOut) + x) bc)
+          (solve 6
+            (λ A aa B bb C cc →
+              ((B :+ aa) :+ (C :+ bb))
+                := ((C :+ aa) :+ (B :+ bb)))
+            refl A aOut B bOut C cOut))))
+  where
+    A : Nat
+    A = DirectedSignedWork.incoming a
+    aOut : Nat
+    aOut = DirectedSignedWork.outgoing a
+    B : Nat
+    B = DirectedSignedWork.incoming b
+    bOut : Nat
+    bOut = DirectedSignedWork.outgoing b
+    C : Nat
+    C = DirectedSignedWork.incoming c
+    cOut : Nat
+    cOut = DirectedSignedWork.outgoing c
+
 netNaturalPort : Port.MidpointTwoPortWorkWindow → DirectedSignedWork
 netNaturalPort p =
   directedSignedWork
