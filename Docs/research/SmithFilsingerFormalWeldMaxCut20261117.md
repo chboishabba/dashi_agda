@@ -350,3 +350,24 @@ This is a real proof *weld* but does NOT complete full F10 physical source-to-po
 | D1 | Source-integrity guard corrected, finite Gauss added to pinned checker, delimiter audit on three changed modules | Agda/Nix unavailable locally, no current kernel/CI acceptance |
 
 **Highest-alpha remaining formal target:** independently justified field-to-boundary integration at the actual selected geometry and material law, with consistent units/signs and no implicit 3D continuum promotion. Do not reprove the YM finite difference telescope or KSW 3D curl jet. Verify this source with the repo-owned Agda 2.9 toolchain before naming any new kernel-closed theorem.
+
+
+## 17 Nov signed-port completion and cross-branch real-field distinction
+
+The original all-N Nat source-cap theorem was deliberately restricted to nonnegative NET environmental supply: naturalIncident = naturalOutgoing + naturalNet. That fails to represent a genuine environmental SINK, even if all fields and stores return. This is a mathematical modelling restriction, not a physical prohibition.
+
+**New Agda source consumer** DASHI/Physics/Motors/SmithFilsingerSignedBoundaryGroupCompletionExact.agda imports the actual MidpointTwoPortWorkExact original signed incident/outgoing conservation law, Circuit36927RecoveryEnergyBoundExact and ReplenishedCycleCapExact. Rather than inventing negative Nats, it uses pairs of nonnegative directed work and exact cross-sum equality of their signed differences. This is a setoid **pre-quotient**, not a claim to have constructed a quotient type, a real-field measurement or a physical signed-power device.
+
+Source-authored theorem bodies:
+- sameSignedReflexive, sameSignedSymmetric and sameSignedTransitive: directed-work cross-sum equality is an equivalence.
+- signedWorkInverseCancels and sameSignedAddCongruenceRight: pairing a flow with the opposite direction cancels, and adding the same directed flow respects equivalent net work.
+- originalTwoPortSignedWorkConservation: from the actual original natural/controller incident and outgoing work plus full storage return, derive **signed** net environmental + controller work equals useful load + losses, WITHOUT presupposing naturalIncident >= naturalOutgoing.
+- reverseEnvironmentalFlowConsumesControllerWork: if naturalOutgoing = naturalIncident + returnedEnvironmentalWork and controllerIncident = controllerOutgoing + controllerNet, original complete boundary law implies
+    controllerNet = usefulLoad + internalLoss + returnedEnvironmentalWork.
+- reverseEnvironmentalLoadPlusSinkBelowController and originalReverseEnvironmentalPortFundedByController: at the SAME source-selected original receiver, usefulLoad + returnedEnvironmentalWork <= controllerNet. Environmental sinks cannot be relabeled as natural power sources.
+
+This is a genuine negative control. It prevents the earlier nonnegative-natural-cap theorem from accidentally being applied to a negative natural source. A separate source CAP still requires independent calibration; the signed-work theorem alone does not establish source access or real-world physics.
+
+**Source-first deduplication audit:** other concurrent modules in #1524 now include SmithFilsingerSignedIndexedFaceFluxExact and SmithFilsingerIndexedSignedCellStokesExact (actual C3.RealField additive inverse with face IDs), plus SmithFilsingerSpaceTimePoyntingTelescopeExact (rational four-direction finite Poynting flux). These are MORE GENERAL at field-space and mesh-incidence levels; do not duplicate their real-field additive algebra. The newly introduced Nat-pair carrier is only the nonnegative metering/port interface needed to derive the original reverse-flow bound. The next remaining formal weld should carry an actual calibrated signed real-field / rational exterior flux to that discrete original terminal receipt with chosen units, not assert that the same numerical flux was measured.
+
+**Verification gates:** new Agda source is hole/postulate-free by inspection, delimiter-balanced and Nat Solver arities are matched in a static audit. This is NOT a substitute for pinned Agda kernel elaboration. Strict F10/F13/F14/F15/F16 original physical and D1 verification gates remain open.
