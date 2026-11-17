@@ -633,271 +633,57 @@ unifierActionstepStyleTargetNeedsOwnAuthorityWitnessIsTrue =
 -- Current CMP119 preferred source frontier.
 ------------------------------------------------------------------------
 
-unifierCMP119PreferredSourcePackageCount =
-  CMP119Preferred.remainingPreferredPackageCount
-
-unifierCMP119PreferredAdapterDebt =
-  CMP119Preferred.remainingAdapterDebt
-
-unifierCMP119PreferredWorkIsPhysicalSourcePackages =
-  CMP119Preferred.remainingWorkIsFourPhysicalSourcePackages
-
-unifierCMP119NoSyntheticPhysicalIdentificationAdded =
-  CMP119Preferred.noSyntheticPhysicalIdentificationAdded
-
-unifierNavierStokesGeneralRegularityStillOpen :
-  unifierNavierStokesGeneralRegularityComplete ≡ false
-unifierNavierStokesGeneralRegularityStillOpen =
-  NSClayTOE.generalNSGlobalRegularityStillOpen
-
-unifierNavierStokesCarrierToGeneralImplicationProved : Bool
-unifierNavierStokesCarrierToGeneralImplicationProved =
-  NSClayTOE.carrierToGeneralNSImplicationProved
-
-unifierNavierStokesCarrierToGeneralImplicationStillOpen :
-  unifierNavierStokesCarrierToGeneralImplicationProved ≡ false
-unifierNavierStokesCarrierToGeneralImplicationStillOpen =
-  NSClayTOE.carrierToGeneralNSImplicationStillOpen
-
-unifierNavierStokesAuthorityPromotionGuard : Bool
-unifierNavierStokesAuthorityPromotionGuard =
-  NSClayTOE.navierStokesPromotionGuard
-
-unifierNavierStokesAuthorityPromotionGuardStillFalse :
-  unifierNavierStokesAuthorityPromotionGuard ≡ false
-unifierNavierStokesAuthorityPromotionGuardStillFalse =
-  NSClayTOE.navierStokesPromotionGuardStillFalse
-
-unifierNavierStokesClayFrontierZKPFrame :
-  NSClayTOE.NavierStokesClayFrontierTOEZKPFrame
-unifierNavierStokesClayFrontierZKPFrame =
-  NSClayTOE.canonicalNavierStokesClayFrontierTOEZKPFrame
-
-unifierNavierStokesTerminalPromotionImpossible :
-  NSClayTOE.NSClayDistanceFinalPromotion → ⊥
-unifierNavierStokesTerminalPromotionImpossible =
-  NSClayTOE.terminalClayPromotionImpossible
-
+unifierQualificationDoesNotAutomaticallyProveForensicCompliance :
+  GovernanceTOE.QualificationAutomaticallyForensicCompliance → ⊥
+unifierQualificationDoesNotAutomaticallyProveForensicCompliance =
+  GovernanceTOE.toeQualificationDoesNotAutomaticallyProveForensicCompliance
 
 ------------------------------------------------------------------------
--- Current periodic-B shared weighted wall from R736.
--- Proof ownership remains in R736 through the canonical NS Clay facade.
+-- Governed legal workflow / source-genealogy handoff.
 ------------------------------------------------------------------------
 
-unifierNavierStokesSharedWeightedExactlyTwoLeaves : Bool
-unifierNavierStokesSharedWeightedExactlyTwoLeaves =
-  NSClayTOE.currentSharedWeightedExactlyTwoLeaves
+import DASHI.Unified.GovernedLegalWorkflowSourceGenealogyTOEExact as LegalSourceGenealogy
 
-unifierNavierStokesSharedWeightedExactlyTwoLeavesIsTrue :
-  unifierNavierStokesSharedWeightedExactlyTwoLeaves ≡ true
-unifierNavierStokesSharedWeightedExactlyTwoLeavesIsTrue =
-  NSClayTOE.currentSharedWeightedExactlyTwoLeavesIsTrue
+unifierGovernedLegalWorkflowSourceGenealogyHandoff :
+  LegalSourceGenealogy.GovernedLegalWorkflowSourceGenealogyHandoff
+unifierGovernedLegalWorkflowSourceGenealogyHandoff =
+  LegalSourceGenealogy.canonicalGovernedLegalWorkflowSourceGenealogyHandoff
 
-unifierNavierStokesSharedWeightedSameCarrier : Bool
-unifierNavierStokesSharedWeightedSameCarrier =
-  NSClayTOE.currentSharedWeightedSameCarrier
+unifierLegalPerceivedIndependenceDoesNotCreateProvenanceIndependence =
+  LegalSourceGenealogy.toePerceivedIndependenceDoesNotCreateLegalProvenanceIndependence
+unifierLegalRepetitionDoesNotCreateIndependentEvidence =
+  LegalSourceGenealogy.toeRepetitionDoesNotCreateIndependentLegalEvidence
+unifierLegalCommonSourceDoesNotEraseEvidence =
+  LegalSourceGenealogy.toeCommonSourceDependenceDoesNotEraseLegalEvidence
+unifierSourceMultiplicityDoesNotAdmitTruth =
+  LegalSourceGenealogy.toeExternalSourceMultiplicityDoesNotAdmitTruth
+unifierGenealogyDoesNotPromoteLegalAuthorityTruth =
+  LegalSourceGenealogy.toeLegalAuthorityStillDoesNotCreateTruthAfterGenealogy
+unifierReviewedGenealogyDoesNotPayApplicability =
+  LegalSourceGenealogy.toeReviewedGenealogyDoesNotPayApplicability
+unifierGenealogyAdmissionDoesNotBecomeLegalSourceAuthority =
+  LegalSourceGenealogy.toeGenealogyAdmissionDoesNotBecomeLegalSourceAuthority
+unifierGenealogyCandidateSourceDoesNotCreateLegalAuthority =
+  LegalSourceGenealogy.toeGenealogyCandidateSourceDoesNotCreateLegalAuthority
+unifierGenealogySameLegalSystemDoesNotCreateLegalAuthority =
+  LegalSourceGenealogy.toeGenealogySameLegalSystemDoesNotCreateLegalAuthority
+unifierGenealogyCurrentValidityDoesNotCreateApplicability =
+  LegalSourceGenealogy.toeGenealogyCurrentValidityDoesNotCreateApplicability
+unifierGenealogyDocumentRoleDoesNotCreateLegalAuthority =
+  LegalSourceGenealogy.toeGenealogyDocumentRoleDoesNotCreateLegalAuthority
 
-unifierNavierStokesSharedWeightedSameCarrierIsTrue :
-  unifierNavierStokesSharedWeightedSameCarrier ≡ true
-unifierNavierStokesSharedWeightedSameCarrierIsTrue =
-  NSClayTOE.currentSharedWeightedSameCarrierIsTrue
+import DASHI.Unified.GovernedLegalWorkflowSourceSemanticTOEExact as LegalSourceSemantic
 
-unifierNavierStokesSharedWeightedCarrierIsInputLaplacian : Bool
-unifierNavierStokesSharedWeightedCarrierIsInputLaplacian =
-  NSClayTOE.currentSharedWeightedCarrierIsInputLaplacian
+unifierGovernedLegalWorkflowSourceSemanticHandoff :
+  LegalSourceSemantic.GovernedLegalWorkflowSourceSemanticHandoff
+unifierGovernedLegalWorkflowSourceSemanticHandoff =
+  LegalSourceSemantic.canonicalGovernedLegalWorkflowSourceSemanticHandoff
 
-unifierNavierStokesWeightedPlusEndpointClosed : Bool
-unifierNavierStokesWeightedPlusEndpointClosed =
-  NSClayTOE.currentWeightedPlusEndpointClosed
-
-unifierNavierStokesWeightedPlusEndpointStillOpen :
-  unifierNavierStokesWeightedPlusEndpointClosed ≡ false
-unifierNavierStokesWeightedPlusEndpointStillOpen =
-  NSClayTOE.currentWeightedPlusEndpointStillOpen
-
-unifierNavierStokesAugmentedCriticalWeightedClosed : Bool
-unifierNavierStokesAugmentedCriticalWeightedClosed =
-  NSClayTOE.currentAugmentedCriticalWeightedClosed
-
-unifierNavierStokesAugmentedCriticalWeightedStillOpen :
-  unifierNavierStokesAugmentedCriticalWeightedClosed ≡ false
-unifierNavierStokesAugmentedCriticalWeightedStillOpen =
-  NSClayTOE.currentAugmentedCriticalWeightedStillOpen
-
-unifierNavierStokesSharedWeightedLeavesBuildBarrier : Bool
-unifierNavierStokesSharedWeightedLeavesBuildBarrier =
-  NSClayTOE.currentSharedWeightedLeavesBuildBarrier
-
-unifierNavierStokesSharedWeightedLeavesBuildBarrierIsTrue :
-  unifierNavierStokesSharedWeightedLeavesBuildBarrier ≡ true
-unifierNavierStokesSharedWeightedLeavesBuildBarrierIsTrue =
-  NSClayTOE.currentSharedWeightedLeavesBuildBarrierIsTrue
-
-unifierNavierStokesR726IndependentLeafRequired : Bool
-unifierNavierStokesR726IndependentLeafRequired =
-  NSClayTOE.legacyR726IndependentLeafRequired
-
-unifierNavierStokesR726IndependentLeafNotRequired :
-  unifierNavierStokesR726IndependentLeafRequired ≡ false
-unifierNavierStokesR726IndependentLeafNotRequired =
-  NSClayTOE.legacyR726IndependentLeafNotRequired
-
-unifierNavierStokesStrictMarginR406IndependentLeafRequired : Bool
-unifierNavierStokesStrictMarginR406IndependentLeafRequired =
-  NSClayTOE.legacyStrictMarginR406IndependentLeafRequired
-
-unifierNavierStokesStrictMarginR406IndependentLeafNotRequired :
-  unifierNavierStokesStrictMarginR406IndependentLeafRequired ≡ false
-unifierNavierStokesStrictMarginR406IndependentLeafNotRequired =
-  NSClayTOE.legacyStrictMarginR406IndependentLeafNotRequired
-
-unifierNavierStokesBarrierDependentQPlusMinusShortcutAdmissible : Bool
-unifierNavierStokesBarrierDependentQPlusMinusShortcutAdmissible =
-  NSClayTOE.barrierDependentQPlusMinusShortcutAdmissible
-
-unifierNavierStokesBarrierDependentQPlusMinusShortcutStillCircular :
-  unifierNavierStokesBarrierDependentQPlusMinusShortcutAdmissible ≡ false
-unifierNavierStokesBarrierDependentQPlusMinusShortcutStillCircular =
-  NSClayTOE.barrierDependentQPlusMinusShortcutStillCircular
-
-unifierNavierStokesSharedWeightedClayPromotion : Bool
-unifierNavierStokesSharedWeightedClayPromotion =
-  NSClayTOE.currentSharedWeightedClayPromotion
-
-unifierNavierStokesSharedWeightedClayPromotionStillFalse :
-  unifierNavierStokesSharedWeightedClayPromotion ≡ false
-unifierNavierStokesSharedWeightedClayPromotionStillFalse =
-  NSClayTOE.currentSharedWeightedClayPromotionStillFalse
-
-unifierNavierStokesContinuumBKMPassageConstructed : Bool
-unifierNavierStokesContinuumBKMPassageConstructed =
-  NSClayTOE.continuumBKMPassageConstructed
-
-unifierNavierStokesContinuumBKMPassageStillOpen :
-  unifierNavierStokesContinuumBKMPassageConstructed ≡ false
-unifierNavierStokesContinuumBKMPassageStillOpen =
-  NSClayTOE.continuumBKMPassageStillOpen
-
-unifierNavierStokesAllDataBridgeConstructed : Bool
-unifierNavierStokesAllDataBridgeConstructed =
-  NSClayTOE.allDataBridgeConstructed
-
-unifierNavierStokesAllDataBridgeStillOpen :
-  unifierNavierStokesAllDataBridgeConstructed ≡ false
-unifierNavierStokesAllDataBridgeStillOpen =
-  NSClayTOE.allDataBridgeStillOpen
-
-unifierNavierStokesSubmissionPacketReady : Bool
-unifierNavierStokesSubmissionPacketReady =
-  NSClayTOE.submissionPacketReady
-
-unifierNavierStokesSubmissionPacketStillNotReady :
-  unifierNavierStokesSubmissionPacketReady ≡ false
-unifierNavierStokesSubmissionPacketStillNotReady =
-  NSClayTOE.submissionPacketStillNotReady
-
-unifierNavierStokesClayEligible : Bool
-unifierNavierStokesClayEligible =
-  NSClayTOE.clayEligible
-
-unifierNavierStokesClayEligibilityStillFalse :
-  unifierNavierStokesClayEligible ≡ false
-unifierNavierStokesClayEligibilityStillFalse =
-  NSClayTOE.clayEligibilityStillFalse
-
-------------------------------------------------------------------------
--- Canonical Pareto / Ibrahim / fleet non-promotion gates.
--- These are direct aliases of proof owners. No new theorem authority.
-------------------------------------------------------------------------
-
-toeParetoSearchPriorityCannotPayProof :
-  ParetoSnowballTOE.SearchPriorityCreatesProof → ⊥
-toeParetoSearchPriorityCannotPayProof =
-  ParetoSnowballTOE.searchPriorityDoesNotCreateProof
-
-toeIbrahimDegree729CannotPayMonsterRecognition :
-  ParetoSnowballTOE.Degree729CreatesMonsterHZetaRecognition → ⊥
-toeIbrahimDegree729CannotPayMonsterRecognition =
-  ParetoSnowballTOE.degree729DoesNotCreateMonsterHZetaRecognition
-
-toeFleetSpectralRankCannotPayAuthority :
-  FleetGapTOE.VectorSpectralAuthorityPromotion → ⊥
-toeFleetSpectralRankCannotPayAuthority =
-  FleetGapTOE.fleetVectorSpectralAuthorityPromotionImpossible
-
-toeFleetNumericABIRequiresIndependentEvidence :
-  FleetGapTOE.SpectralNumericABIPromotion → ⊥
-toeFleetNumericABIRequiresIndependentEvidence =
-  FleetGapTOE.fleetSpectralNumericABIPromotionImpossible
-
-------------------------------------------------------------------------
--- Canonical brain/connectome/fMRI quotient boundary.
--- The observation owners retain authority. This facade adds no empirical proof.
-------------------------------------------------------------------------
-
-toeBrainFirstMissing : BrainObservation.BrainObservationFirstMissing
-toeBrainFirstMissing = BrainFMRI.brainFirstMissing
-
-toeBrainBidirectionalFirstMissing :
-  BrainBidirectional.BidirectionalObservationFirstMissing
-toeBrainBidirectionalFirstMissing = BrainFMRI.bidirectionalFirstMissing
-
-toeBrainObservationNonPromotion :
-  BrainBidirectional.NonPromotionBoundary
-toeBrainObservationNonPromotion = BrainFMRI.brainNonPromotionBoundary
-
-toeBrainJPromotionBlocked :
-  BrainSpine.objectExternalJPromotion BrainFMRI.brainFMRIObject ≡ false
-toeBrainJPromotionBlocked = BrainFMRI.brainFMRIJPromotionBlocked
-
-------------------------------------------------------------------------
--- Live Gate-4 frontier and Fleet target selection.
-------------------------------------------------------------------------
-
-unifierCurrentGate4FrontierLedgerLevel : ProofLevel
-unifierCurrentGate4FrontierLedgerLevel =
-  FleetHyperTOE.currentGate4FrontierLedgerLevel
-
-unifierCurrentGate4ClusteringToTransferGapLevel : ProofLevel
-unifierCurrentGate4ClusteringToTransferGapLevel =
-  FleetHyperTOE.currentGate4ClusteringToTransferGapLevel
-
-unifierFleetFormalGapTargetSelected : Bool
-unifierFleetFormalGapTargetSelected =
-  FleetHyperTOE.fleetFormalGapTargetSelected
-
-unifierHistoricalGate4CountSelectedAsFleetTarget : Bool
-unifierHistoricalGate4CountSelectedAsFleetTarget =
-  FleetHyperTOE.historicalGate4CountSelectedAsFleetTarget
-
-unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
-  FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
-unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
-  FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
-
-
-------------------------------------------------------------------------
--- SensibLaw semantic governance: imported proof ownership stays in SLR.
--- Propagated QID evidence is not a target-surface assertion or legal truth.
--- These direct eliminators do not confer legal or external authority.
-------------------------------------------------------------------------
-
-unifierLegalSourceNonPromotion :
-  LegalSemanticClosure.PropagationRewritesSource → ⊥
-unifierLegalSourceNonPromotion =
-  LegalSemanticClosure.propagationDoesNotRewriteSource
-
-unifierLegalIdentityNonPromotion :
-  LegalSemanticClosure.SharedQidCreatesSemanticEquivalence → ⊥
-unifierLegalIdentityNonPromotion =
-  LegalSemanticClosure.sharedQidDoesNotCreateSemanticEquivalence
-
-unifierLegalClaimTruthNonPromotion :
-  LegalSemanticClosure.ArticleLinkCreatesClaimTruth → ⊥
-unifierLegalClaimTruthNonPromotion =
-  LegalSemanticClosure.articleLinkDoesNotCreateClaimTruth
-
-unifierLegalUnweldedFactNonPromotion :
-  LegalSemanticClosure.UnweldedPnfMayBecomeSharedFact → ⊥
-unifierLegalUnweldedFactNonPromotion =
-  LegalSemanticClosure.unweldedPnfDoesNotBecomeSharedFact
+unifierGovernedSharedLexemeDoesNotCreateSemanticIdentity =
+  LegalSourceSemantic.toeSharedLexemeDoesNotCreateSemanticIdentity
+unifierGovernedDiagnosticCheckDoesNotCreateTheoremPromotion =
+  LegalSourceSemantic.toeDiagnosticCheckDoesNotCreateTheoremPromotion
+unifierGovernedSourceIdentifierDoesNotCreateProofAuthority =
+  LegalSourceSemantic.toeSourceIdentifierDoesNotCreateProofAuthority
+unifierGovernedESDSurfaceMutationRemainsForbidden =
+  LegalSourceSemantic.toeESDSurfaceMutationRemainsForbidden

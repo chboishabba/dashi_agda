@@ -1,0 +1,45 @@
+@startuml
+title Governed legal workflow + source genealogy + semantic non-promotion TOE handoff
+
+skinparam componentStyle rectangle
+
+component "SensibLaw / legal workflow\ncanonical owners" as Legal
+component "PNF source genealogy\ncanonical owner" as Source
+component "PNF distilled non-promotion\ncompatibility/process facade" as Distilled
+component "GovernedLegalWorkflow\nSourceGenealogyTOEExact" as LegalSource
+component "GovernedLegalWorkflow\nSourceSemanticTOEExact" as Join
+component "EverythingTOE\nSymmetryResolved369" as Root
+component "DASHI.Unifier" as Unifier
+component "DASHI.Unified.Everything" as Unified
+
+Legal --> LegalSource : exact inherited proofs
+Source --> LegalSource : provenance firewalls
+Source --> Distilled : canonical receipt
+Distilled --> Join : false-by-construction process flags
+LegalSource --> Join : same-object legal/source handoff
+
+Join --> Root
+Join --> Unifier
+Join --> Unified
+
+note right of Join
+Preconditions:
+- normalized owners already exist
+- no Actionstep ontology
+- original attribution retained
+
+Invariants:
+- workflow != truth
+- review != applicability
+- source count != truth
+- shared lexeme != semantic identity
+- diagnostic check != theorem promotion
+- identifier != proof authority
+- ESD mutation forbidden
+
+Postcondition:
+all three TOE facades consume
+one canonical handoff
+end note
+
+@enduml

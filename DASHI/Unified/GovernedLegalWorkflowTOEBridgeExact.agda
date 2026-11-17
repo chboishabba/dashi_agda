@@ -1513,17 +1513,9 @@ SemanticAdmissionAuthorityIsLegalSourceAuthority : Set
 SemanticAdmissionAuthorityIsLegalSourceAuthority =
   LegalAuthority.SemanticAdmissionAuthorityIsLegalSourceAuthority
 
-
 ------------------------------------------------------------------------
--- Final legal-source authority invariant handoff.
---
--- Reuse the canonical workflow handoff and the exact legal-source authority
--- owner.  This closes the facade asymmetry without changing legal semantics.
+-- Legal-source authority type aliases required by normalized handoffs.
 ------------------------------------------------------------------------
-
-LegalSourceAuthorityBoundary : Set
-LegalSourceAuthorityBoundary =
-  LegalAuthority.LegalSourceAuthorityBoundary
 
 SameLegalSystemAutomaticallyMeansAuthority : Set
 SameLegalSystemAutomaticallyMeansAuthority =
@@ -1532,58 +1524,3 @@ SameLegalSystemAutomaticallyMeansAuthority =
 DocumentRoleSuppliesLegalSourceAuthority : Set
 DocumentRoleSuppliesLegalSourceAuthority =
   LegalAuthority.DocumentRoleSuppliesLegalSourceAuthority
-
-record GovernedLegalWorkflowAuthorityInvariantHandoff : Set₁ where
-  constructor governed-legal-workflow-authority-invariant-handoff
-  field
-    workflowInvariantHandoff :
-      GovernedLegalWorkflowTOEInvariantHandoff
-
-    workflowInvariantHandoffIsCanonical :
-      workflowInvariantHandoff
-      ≡
-      canonicalGovernedLegalWorkflowTOEInvariantHandoff
-
-    legalSourceAuthorityBoundary :
-      LegalAuthority.LegalSourceAuthorityBoundary
-
-    legalSourceAuthorityBoundaryIsCanonical :
-      legalSourceAuthorityBoundary
-      ≡
-      LegalAuthority.canonicalLegalSourceAuthorityBoundary
-
-    candidateSourceAuthorityFirewall :
-      LegalAuthority.CandidateSourceIsAuthoritative →
-      ⊥
-
-    sameSystemAuthorityFirewall :
-      LegalAuthority.SameLegalSystemAutomaticallyMeansAuthority →
-      ⊥
-
-    currentValidityApplicabilityFirewall :
-      LegalAuthority.CurrentValidityAutomaticallyMeansApplicability →
-      ⊥
-
-    semanticAdmissionAuthorityFirewall :
-      LegalAuthority.SemanticAdmissionAuthorityIsLegalSourceAuthority →
-      ⊥
-
-    documentRoleAuthorityFirewall :
-      LegalAuthority.DocumentRoleSuppliesLegalSourceAuthority →
-      ⊥
-
-open GovernedLegalWorkflowAuthorityInvariantHandoff public
-
-canonicalGovernedLegalWorkflowAuthorityInvariantHandoff :
-  GovernedLegalWorkflowAuthorityInvariantHandoff
-canonicalGovernedLegalWorkflowAuthorityInvariantHandoff =
-  governed-legal-workflow-authority-invariant-handoff
-    canonicalGovernedLegalWorkflowTOEInvariantHandoff
-    refl
-    LegalAuthority.canonicalLegalSourceAuthorityBoundary
-    refl
-    toeCandidateSourceDoesNotCloseAuthority
-    toeSameSystemDoesNotAutomaticallyCloseAuthority
-    toeCurrentValidityDoesNotAutomaticallyEstablishApplicability
-    toeSemanticAdmissionDoesNotBecomeLegalSourceAuthority
-    toeDocumentRoleDoesNotSupplyLegalSourceAuthority
