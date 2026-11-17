@@ -5,6 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Nat.Base using (ℕ)
 open import Data.Empty using (⊥)
 open import Data.List.Base using (List; _∷_; [])
+import Data.Empty
 
 import DASHI.Interop.SensibLawResidualLattice as Residual
 import DASHI.Interop.UnifiedMathLanguageAssertedProofs as Asserted
@@ -14,8 +15,16 @@ import DASHI.Physics.Closure.ClayYMProofRoadmapReceipt as YMRoadmap
 import DASHI.Physics.Closure.YMClayPromotionBoundary as YMBoundary
 import DASHI.Physics.Closure.NSABCDMaxCut20261002Exact as NSMaxCut
 import DASHI.Unified.InvariantSpine as Spine
-import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as YMTOE
-import DASHI.Unified.QuantumMetrologyTOEConvergenceExact as QuantumMetrologyTOE
+import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
+import DASHI.Unified.NavierStokesBM2TOEConvergenceExact as NSBM2TOE
+
+open NSBM2TOE public using
+  ( LiteralR571DissipationFold
+  ; ExactLiteralR571DissipationFold
+  ; literalR571M2BelowPhysicalDissipation
+  ; exactLiteralR571M2BelowPhysicalDissipation
+  )
+import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 
 
@@ -533,33 +542,8 @@ yangMillsBalabanClayPromotionStillFalse =
   BalabanRGTOE.balabanRGClayPromotionStillFalse
 
 
-yangMillsBalabanContinuumLimitReceipt :
-  BalabanRGTOE.BalabanContinuumLimitReceipt
-yangMillsBalabanContinuumLimitReceipt =
-  BalabanRGTOE.balabanContinuumLimitReceipt
-
-yangMillsBalabanContinuumLimitPromotionImpossible :
-  BalabanRGTOE.BalabanContinuumLimitPromotion → ⊥
-yangMillsBalabanContinuumLimitPromotionImpossible =
-  BalabanRGTOE.balabanContinuumLimitPromotionImpossible
-
-yangMillsDepthContinuumLimitReceipt :
-  BalabanRGTOE.DepthContinuumLimitReceipt
-yangMillsDepthContinuumLimitReceipt =
-  BalabanRGTOE.depthContinuumLimitReceipt
-
-yangMillsDepthContinuumLimitPromotionImpossible :
-  BalabanRGTOE.DepthContinuumLimitPromotion → ⊥
-yangMillsDepthContinuumLimitPromotionImpossible =
-  BalabanRGTOE.depthContinuumLimitPromotionImpossible
-
-
-yangMillsGoal1ParetoZKPFrame : YMMaxCut.Goal1ParetoTOEZKPFrame
-yangMillsGoal1ParetoZKPFrame = YMMaxCut.canonicalGoal1ParetoTOEZKPFrame
-
-
 ------------------------------------------------------------------------
--- Joint Balaban RG + R559 same-owner max-cut physics facade.
+-- Joint Balaban RG + R559 maximum-cut physics facade.
 ------------------------------------------------------------------------
 
 import DASHI.Unified.BalabanR559TOEMaxCutExact as BalabanR559TOE
@@ -568,6 +552,11 @@ yangMillsBalabanR559MaxCutReceipt :
   BalabanR559TOE.BalabanR559TOEMaxCutReceipt
 yangMillsBalabanR559MaxCutReceipt =
   BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+yangMillsBalabanR559ZKPFrame :
+  BalabanR559TOE.BalabanR559ZKPFrame
+yangMillsBalabanR559ZKPFrame =
+  BalabanR559TOE.canonicalBalabanR559ZKPFrame
 
 yangMillsBalabanR559PublishedContinuumStillOpen :
   BalabanR559TOE.publishedContinuumPromotion
@@ -593,87 +582,7 @@ yangMillsBalabanR559ClayPromotionStillBlocked =
   BalabanR559TOE.clayPromotionIsFalse
     BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
-yangMillsBalabanR559Gate4UnresolvedCount : ℕ
-yangMillsBalabanR559Gate4UnresolvedCount =
-  BalabanR559TOE.gate4UnresolvedCount
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
-yangMillsBalabanR559Gate4UnresolvedCountIs58 :
-  yangMillsBalabanR559Gate4UnresolvedCount ≡ 58
-yangMillsBalabanR559Gate4UnresolvedCountIs58 =
-  BalabanR559TOE.gate4UnresolvedCountIs58
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-yangMillsBalabanR559Gate4DefinitionLevel : ProofLevel
-yangMillsBalabanR559Gate4DefinitionLevel =
-  BalabanR559TOE.gate4DefinitionLevel
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-yangMillsBalabanR559Gate4InhabitantsLevel : ProofLevel
-yangMillsBalabanR559Gate4InhabitantsLevel =
-  BalabanR559TOE.gate4InhabitantsLevel
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-yangMillsBalabanR559Gate4PaidReductionLedgerLevel : ProofLevel
-yangMillsBalabanR559Gate4PaidReductionLedgerLevel =
-  BalabanR559TOE.gate4PaidReductionLevel
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-yangMillsBalabanScaleTransferNonPromotion :
-  BalabanR559TOE.ScaleTransferPromotion → ⊥
-yangMillsBalabanScaleTransferNonPromotion =
-  BalabanR559TOE.scaleTransferPromotionEliminator
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-------------------------------------------------------------------------
--- Implement-A-to-D reuse-only Yang-Mills physics facade.
-------------------------------------------------------------------------
-
-import DASHI.Unified.YMImplementAToDTOEMaxCutExact as YMAD
-
-yangMillsImplementAToDMaxCutReceipt :
-  YMAD.YMImplementAToDTOEMaxCutReceipt
-yangMillsImplementAToDMaxCutReceipt =
-  YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
-
-yangMillsImplementAToDZKPFrame : YMAD.YMImplementAToDZKPFrame
-yangMillsImplementAToDZKPFrame =
-  YMAD.canonicalYMImplementAToDZKPFrame
-
-yangMillsImplementAToDPublishedContinuumStillBlocked :
-  YMAD.publishedContinuumPromotion YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
-  ≡ false
-yangMillsImplementAToDPublishedContinuumStillBlocked =
-  YMAD.publishedContinuumPromotionIsFalse
-    YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
-
-yangMillsImplementAToDContinuumMassGapStillBlocked :
-  YMAD.continuumMassGapPromotion YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
-  ≡ false
-yangMillsImplementAToDContinuumMassGapStillBlocked =
-  YMAD.continuumMassGapPromotionIsFalse
-    YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
-
-yangMillsImplementAToDClayStillBlocked :
-  YMAD.clayPromotion YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
-  ≡ false
-yangMillsImplementAToDClayStillBlocked =
-  YMAD.clayPromotionIsFalse YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
-
-yangMillsImplementAToDScaleTransferNonPromotion :
-  BalabanR559TOE.ScaleTransferPromotion → ⊥
-yangMillsImplementAToDScaleTransferNonPromotion =
-  YMAD.scaleTransferPromotionEliminator
-    YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
-
-import DASHI.Unified.NavierStokesBM2TOEConvergenceExact as NSBM2TOE
-
-open NSBM2TOE public using
-  ( LiteralR571DissipationFold
-  ; ExactLiteralR571DissipationFold
-  ; literalR571M2BelowPhysicalDissipation
-  ; exactLiteralR571M2BelowPhysicalDissipation
-  )
 ------------------------------------------------------------------------
 -- Navier-Stokes B / R571 M2 producer-strategy physics facade.
 ------------------------------------------------------------------------
@@ -899,75 +808,3 @@ navierStokesClayEligibilityStillFalse :
   navierStokesClayEligible ≡ false
 navierStokesClayEligibilityStillFalse =
   NSClayTOE.clayEligibilityStillFalse
-
-
-------------------------------------------------------------------------
--- Canonical Row-A1 source frontier.
--- Agda remains theorem authority. Lean cross-prover progress does not promote.
-------------------------------------------------------------------------
-
-yangMillsYMA1SourceFrontierReceipt :
-  YMA1Frontier.YMA1SourceFrontierReceipt
-yangMillsYMA1SourceFrontierReceipt =
-  YMA1Frontier.canonicalYMA1SourceFrontierReceipt
-
-yangMillsYMA1ZKPFrame :
-  YMA1Frontier.YMA1ZKPFrame
-yangMillsYMA1ZKPFrame =
-  YMA1Frontier.canonicalYMA1ZKPFrame
-
-yangMillsYMA1FrozenResearchCount :
-  ℕ
-yangMillsYMA1FrozenResearchCount =
-  YMA1Frontier.frozenResearchCount
-    YMA1Frontier.canonicalYMA1SourceFrontierReceipt
-
-yangMillsYMA1FrozenResearchCountIsFour :
-  yangMillsYMA1FrozenResearchCount ≡ 4
-yangMillsYMA1FrozenResearchCountIsFour =
-  YMA1Frontier.frozenResearchCountStillFour
-
-yangMillsYMA1RowAStillNotPromoted :
-  YMA1Frontier.rowAPromoted
-    YMA1Frontier.canonicalYMA1SourceFrontierReceipt
-  ≡ false
-yangMillsYMA1RowAStillNotPromoted =
-  YMA1Frontier.rowAStillNotPromoted
-
-yangMillsYMA1CompletionDoesNotSelfPromote :
-  Proof.promotable
-    (YMA1Frontier.rowACompletion
-      YMA1Frontier.canonicalYMA1SourceFrontierReceipt)
-  ≡ false
-yangMillsYMA1CompletionDoesNotSelfPromote =
-  YMA1Frontier.rowACompletionDoesNotSelfPromote
-
-------------------------------------------------------------------------
--- Canonical current Navier-Stokes four-lane problem receipt.
-------------------------------------------------------------------------
-
-navierStokesCurrentProblemReceipt :
-  NSClayTOE.NavierStokesCurrentProblemReceipt
-navierStokesCurrentProblemReceipt =
-  NSClayTOE.canonicalNavierStokesCurrentProblemReceipt
-
-navierStokesCurrentProblemBM2FiniteFoldClosed :
-  NSClayTOE.laneBM2FiniteFoldClosed navierStokesCurrentProblemReceipt ≡ true
-navierStokesCurrentProblemBM2FiniteFoldClosed =
-  NSClayTOE.currentProblemBM2FiniteFoldClosed
-
-navierStokesCurrentProblemBWeightedPlusStillOpen :
-  NSClayTOE.laneBWeightedPlusEndpointClosed navierStokesCurrentProblemReceipt ≡ false
-navierStokesCurrentProblemBWeightedPlusStillOpen =
-  NSClayTOE.currentProblemBWeightedPlusEndpointStillOpen
-
-
-navierStokesCurrentProblemBR829VectorClosed :
-  NSClayTOE.laneBR829VectorClosed navierStokesCurrentProblemReceipt ≡ true
-navierStokesCurrentProblemBR829VectorClosed =
-  NSClayTOE.currentProblemBR829VectorClosed
-
-navierStokesCurrentProblemBR829RealODEStillOpen :
-  NSClayTOE.laneBR829RealFiniteODETransportClosed navierStokesCurrentProblemReceipt ≡ false
-navierStokesCurrentProblemBR829RealODEStillOpen =
-  NSClayTOE.currentProblemBR829RealFiniteODETransportStillOpen

@@ -55,17 +55,11 @@ module DASHI.Unified.BalabanR559TOEMaxCutExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
-open import Data.Empty using (⊥)
-open import Data.Nat.Base using (ℕ)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 
 import DASHI.Unified.BalabanRGTOERegression as Balaban
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as R559
-import DASHI.Physics.Closure.BalabanRGScaleTransferFrontierReceipt as RGFrontier
-import DASHI.Physics.YangMills.BalabanClayGate4PhysicalClosureRound6ExactCutset as Gate4
-import DASHI.Physics.YangMills.BalabanClayGate4PhysicalClosureRound6Ledger as Gate4Ledger
-import DASHI.Physics.YangMills.YangMillsSubmissionObligationCardinalityExact as Counts
 
 ------------------------------------------------------------------------
 -- Same-owner equalities.
@@ -105,16 +99,6 @@ continuumRouteMassGapBoundarySameOwner = refl
 -- Exact non-promotion reuse.
 ------------------------------------------------------------------------
 
-ScaleTransferPromotion : Set
-ScaleTransferPromotion =
-  RGFrontier.BalabanRGScaleTransferPromotion
-
-eliminateScaleTransferPromotion :
-  ScaleTransferPromotion → ⊥
-eliminateScaleTransferPromotion =
-  RGFrontier.balabanRGScaleTransferPromotionImpossibleHere
-
-
 jointPublishedContinuumStillOpen :
   R559.toeFlat4DContinuumTransferProvedHere ≡ false
 jointPublishedContinuumStillOpen =
@@ -146,52 +130,11 @@ jointBalabanOSWightmanStillOpen =
   Balaban.balabanOSWightmanContinuumConstructionStillOpen
 
 ------------------------------------------------------------------------
--- Canonical 58-field Gate-4 cutset boundary.
---
--- The count is exact.
--- The cutset type is machine checked.
--- Its inhabitants remain conditional.
--- This surface does not discharge any of the 58 fields.
-------------------------------------------------------------------------
-
-gate4UnresolvedObligationCount : ℕ
-gate4UnresolvedObligationCount =
-  Counts.gate4ObligationCount
-
-gate4UnresolvedObligationCountIs58 :
-  gate4UnresolvedObligationCount ≡ 58
-gate4UnresolvedObligationCountIs58 =
-  Counts.gate4ObligationCountExact
-
-gate4CutsetDefinitionLevel : ProofLevel
-gate4CutsetDefinitionLevel =
-  Gate4.physicalClosureRound6CutsetDefinitionLevel
-
-gate4CutsetInhabitantsLevel : ProofLevel
-gate4CutsetInhabitantsLevel =
-  Gate4.physicalClosureRound6CutsetInhabitantsLevel
-
-gate4PaidReductionLedgerLevel : ProofLevel
-gate4PaidReductionLedgerLevel =
-  Gate4Ledger.physicalClosureRound6LedgerLevel
-
-------------------------------------------------------------------------
 -- Joint normalized receipt.
 ------------------------------------------------------------------------
 
 record BalabanR559TOEMaxCutReceipt : Set where
   field
-    -- Parent receipts keep the complete normalized surfaces reachable.
-    -- Do not copy their full coordinate sets here.
-    balabanCompleteReceipt :
-      Balaban.BalabanRGTOEReceipt
-
-    balabanTypedZKPFrame :
-      Balaban.BalabanTOEZKPFrame
-
-    r559ParetoZKPFrame :
-      R559.Goal1ParetoTOEZKPFrame
-
     balabanDensityFlow : ProofLevel
     r559DensityFlow : ProofLevel
     densityOwnerAgreement :
@@ -219,13 +162,6 @@ record BalabanR559TOEMaxCutReceipt : Set where
     irreducibleSourceFamilyCutCompiler : ProofLevel
     criticalPathCompiler : ProofLevel
 
-    gate4UnresolvedCount : ℕ
-    gate4UnresolvedCountIs58 :
-      gate4UnresolvedCount ≡ 58
-    gate4DefinitionLevel : ProofLevel
-    gate4InhabitantsLevel : ProofLevel
-    gate4PaidReductionLevel : ProofLevel
-
     publishedContinuumPromotion : Bool
     publishedContinuumPromotionIsFalse :
       publishedContinuumPromotion ≡ false
@@ -250,20 +186,11 @@ record BalabanR559TOEMaxCutReceipt : Set where
     balabanOSWightmanConstructionIsFalse :
       balabanOSWightmanConstruction ≡ false
 
-    scaleTransferPromotionEliminator :
-      ScaleTransferPromotion → ⊥
-
 open BalabanR559TOEMaxCutReceipt public
 
 canonicalBalabanR559TOEMaxCutReceipt : BalabanR559TOEMaxCutReceipt
 canonicalBalabanR559TOEMaxCutReceipt = record
-  { balabanCompleteReceipt =
-      Balaban.canonicalBalabanRGTOEReceipt
-  ; balabanTypedZKPFrame =
-      Balaban.canonicalBalabanTOEZKPFrame
-  ; r559ParetoZKPFrame =
-      R559.canonicalGoal1ParetoTOEZKPFrame
-  ; balabanDensityFlow =
+  { balabanDensityFlow =
       Balaban.balabanScaleDensityFlowLevel
   ; r559DensityFlow =
       R559.toeBetaDrivenSourceFlowLevel
@@ -297,16 +224,6 @@ canonicalBalabanR559TOEMaxCutReceipt = record
       R559.toeIrreducibleSourceFamilyCutCompilerLevel
   ; criticalPathCompiler =
       R559.toeCriticalPathCompilerLevel
-  ; gate4UnresolvedCount =
-      gate4UnresolvedObligationCount
-  ; gate4UnresolvedCountIs58 =
-      gate4UnresolvedObligationCountIs58
-  ; gate4DefinitionLevel =
-      gate4CutsetDefinitionLevel
-  ; gate4InhabitantsLevel =
-      gate4CutsetInhabitantsLevel
-  ; gate4PaidReductionLevel =
-      gate4PaidReductionLedgerLevel
   ; publishedContinuumPromotion =
       R559.toeFlat4DContinuumTransferProvedHere
   ; publishedContinuumPromotionIsFalse =
@@ -331,8 +248,6 @@ canonicalBalabanR559TOEMaxCutReceipt = record
       Balaban.balabanOSWightmanContinuumConstructionOpenFlag
   ; balabanOSWightmanConstructionIsFalse =
       jointBalabanOSWightmanStillOpen
-  ; scaleTransferPromotionEliminator =
-      eliminateScaleTransferPromotion
   }
 
 ------------------------------------------------------------------------
@@ -379,13 +294,13 @@ canonicalBalabanR559ZKPFrame = record
   ; C-code =
       "Normalize existing owners only. Add no new Yang-Mills estimate."
   ; S-state =
-      "Round-6 reduction ledger is machine checked. The exact 58-field Gate-4 inhabitants remain conditional. Continuum and Clay promotion remain blocked."
+      "Finite and compiler-owned cuts are visible. Continuum and Clay promotion remain blocked."
   ; L-lattice =
       "Balaban owners -> BalabanRGTOERegression; R485/R546/R558 -> R559; both -> this normalized TOE consumer."
   ; P-proposal =
       "Use this joint receipt as the TOE max-cut surface without merging theorem ownership."
   ; G-gap =
-      "The canonical 58-field Gate-4 cutset remains conditional. Block-spin transfer, uniform KP absorption, OS/Wightman continuum construction, continuum mass gap, and Clay completion remain unpaid."
+      "Block-spin transfer, uniform KP absorption, OS/Wightman continuum construction, continuum mass gap, and Clay completion remain unpaid."
   ; F-follow-up =
       "Require exact-head Agda verification and preserve the ESD and attribution firewalls."
   ; ownersExist = true

@@ -212,193 +212,27 @@ import DASHI.Physics.Foundations.Round5FullBoundary as Round5
 
 
 ------------------------------------------------------------------------
--- Governed legal workflow + Ibrahim Pareto/snowball + fleet-gap facade.
+-- Joint Yang-Mills Balaban/R559 TOE surface.
 ------------------------------------------------------------------------
 
-import Data.Empty as UnifiedEmpty
-import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalGovernanceTOE
-import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as IbrahimTOE
-import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetTOE
+import DASHI.Unified.BalabanR559TOEMaxCutExact as BalabanR559TOE
 
-unifiedGovernedLegalWorkflowAuthorityInvariantHandoff :
-  LegalGovernanceTOE.GovernedLegalWorkflowAuthorityInvariantHandoff
-unifiedGovernedLegalWorkflowAuthorityInvariantHandoff =
-  LegalGovernanceTOE.canonicalGovernedLegalWorkflowAuthorityInvariantHandoff
-
-unifiedCanonicalLegalSourceAuthorityBoundary :
-  LegalGovernanceTOE.LegalSourceAuthorityBoundary
-unifiedCanonicalLegalSourceAuthorityBoundary =
-  LegalGovernanceTOE.toeCanonicalLegalSourceAuthorityBoundary
-
-unifiedCandidateSourceIsNotLegalAuthority :
-  LegalGovernanceTOE.CandidateSourceIsAuthoritative → UnifiedEmpty.⊥
-unifiedCandidateSourceIsNotLegalAuthority =
-  LegalGovernanceTOE.toeCandidateSourceDoesNotCloseAuthority
-
-unifiedSameLegalSystemIsNotLegalAuthority :
-  LegalGovernanceTOE.SameLegalSystemAutomaticallyMeansAuthority → UnifiedEmpty.⊥
-unifiedSameLegalSystemIsNotLegalAuthority =
-  LegalGovernanceTOE.toeSameSystemDoesNotAutomaticallyCloseAuthority
-
-unifiedCurrentValidityIsNotApplicability :
-  LegalGovernanceTOE.CurrentValidityAutomaticallyMeansApplicability → UnifiedEmpty.⊥
-unifiedCurrentValidityIsNotApplicability =
-  LegalGovernanceTOE.toeCurrentValidityDoesNotAutomaticallyEstablishApplicability
-
-unifiedBalabanScaleTransferNonPromotion :
-  BalabanR559TOE.ScaleTransferPromotion → ⊥
-unifiedBalabanScaleTransferNonPromotion =
-  BalabanR559TOE.scaleTransferPromotionEliminator
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-------------------------------------------------------------------------
--- Governed legal-source authority handoff.
-------------------------------------------------------------------------
-
-import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalGovernanceTOE
-
-unifiedGovernedLegalWorkflowAuthorityInvariantHandoff :
-  LegalGovernanceTOE.GovernedLegalWorkflowAuthorityInvariantHandoff
-unifiedGovernedLegalWorkflowAuthorityInvariantHandoff =
-  LegalGovernanceTOE.canonicalGovernedLegalWorkflowAuthorityInvariantHandoff
-
-unifiedCandidateSourceIsNotLegalAuthority :
-  LegalGovernanceTOE.CandidateSourceIsAuthoritative → ⊥
-unifiedCandidateSourceIsNotLegalAuthority =
-  LegalGovernanceTOE.toeCandidateSourceDoesNotCloseAuthority
-
-unifiedSameLegalSystemIsNotLegalAuthority :
-  LegalGovernanceTOE.SameLegalSystemAutomaticallyMeansAuthority → ⊥
-unifiedSameLegalSystemIsNotLegalAuthority =
-  LegalGovernanceTOE.toeSameSystemDoesNotAutomaticallyCloseAuthority
-
-unifiedCurrentValidityIsNotApplicability :
-  LegalGovernanceTOE.CurrentValidityAutomaticallyMeansApplicability → ⊥
-unifiedCurrentValidityIsNotApplicability =
-  LegalGovernanceTOE.toeCurrentValidityDoesNotAutomaticallyEstablishApplicability
-
-unifiedSemanticAdmissionIsNotLegalAuthority :
-  LegalGovernanceTOE.SemanticAdmissionAuthorityIsLegalSourceAuthority → ⊥
-unifiedSemanticAdmissionIsNotLegalAuthority =
-  LegalGovernanceTOE.toeSemanticAdmissionDoesNotBecomeLegalSourceAuthority
-
-
-
-governedNativeLegalFollowDoesNotCreateLegalAuthority :
-  LegalGovernance.NativeCliAutomaticallyLegalAuthority → ⊥
-governedNativeLegalFollowDoesNotCreateLegalAuthority =
-  LegalGovernance.toeNativeLegalFollowDoesNotCreateLegalAuthority
-
-governedProviderFailureDoesNotMakePropositionFalse :
-  LegalGovernance.ProviderFailureAutomaticallyPropositionFalse → ⊥
-governedProviderFailureDoesNotMakePropositionFalse =
-  LegalGovernance.toeProviderFailureDoesNotMakePropositionFalse
-
-governedExpertProductionPromotesAnyAuthorityIsFalse :
-  LegalGovernance.toeExpertProductionPromotesAnyAuthority ≡ false
-governedExpertProductionPromotesAnyAuthorityIsFalse =
-  LegalGovernance.toeExpertProductionPromotesAnyAuthorityIsFalse
-
-------------------------------------------------------------------------
--- Governed legal workflow / source-genealogy and semantic handoffs.
-------------------------------------------------------------------------
-
-import DASHI.Unified.GovernedLegalWorkflowSourceGenealogyTOEExact as LegalSourceGenealogy
-import DASHI.Unified.GovernedLegalWorkflowSourceGenealogyTOERegression
-import DASHI.Unified.GovernedLegalWorkflowSourceSemanticTOEExact as LegalSourceSemantic
-import DASHI.Unified.GovernedLegalWorkflowSourceSemanticTOERegression
-
-unifiedYMImplementAToDMaxCutReceipt :
-  YMAD.YMImplementAToDTOEMaxCutReceipt
-unifiedYMImplementAToDMaxCutReceipt =
-  YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+unifiedBalabanR559MaxCutReceipt :
+  BalabanR559TOE.BalabanR559TOEMaxCutReceipt
+unifiedBalabanR559MaxCutReceipt =
+  BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
 
 ------------------------------------------------------------------------
--- Navier-Stokes A/B/C/D native-proof max-cut.
+-- Navier-Stokes B / R571 M2 normalized TOE receipt.
 ------------------------------------------------------------------------
 
-unifiedNSABCDMaxCutReceipt : NSCut.NSABCDTOEMaxCutReceipt
-unifiedNSABCDMaxCutReceipt =
-  NSCut.canonicalNSABCDTOEMaxCutReceipt
+unifiedNavierStokesBM2Receipt :
+  NSBM2TOE.NavierStokesBM2TOEReceipt
+unifiedNavierStokesBM2Receipt =
+  NSBM2TOE.canonicalNavierStokesBM2TOEReceipt
 
 unifiedNavierStokesBM2ZKPFrame :
   NSBM2TOE.NavierStokesBM2TOEZKPFrame
 unifiedNavierStokesBM2ZKPFrame =
   NSBM2TOE.canonicalNavierStokesBM2TOEZKPFrame
-
-
-------------------------------------------------------------------------
--- Navier-Stokes A/B/C/D native-proof max-cut.
-------------------------------------------------------------------------
-
-unifiedNSABCDMaxCutReceipt : NSCut.NSABCDTOEMaxCutReceipt
-unifiedNSABCDMaxCutReceipt = NSCut.canonicalNSABCDTOEMaxCutReceipt
-
-unifiedNSABCDZKPFrame : NSCut.NSABCDTOEZKPFrame
-unifiedNSABCDZKPFrame = NSCut.canonicalNSABCDTOEZKPFrame
-
-unifiedNSLiteralFixedOutputCovarianceM2PaymentClosed :
-  NSCut.bLiteralFixedOutputCovarianceM2PaymentClosed ≡ true
-unifiedNSLiteralFixedOutputCovarianceM2PaymentClosed =
-  NSCut.bLiteralFixedOutputCovarianceM2PaymentClosedIsTrue
-
-unifiedNSLiveResidualWeightedWorkIdentityClosed :
-  NSCut.bLiveResidualWeightedWorkIdentityClosed ≡ true
-unifiedNSLiveResidualWeightedWorkIdentityClosed =
-  NSCut.bLiveResidualWeightedWorkIdentityClosedIsTrue
-
-unifiedNSSelfRateNotIndependentAnalyticLeaf :
-  NSCut.bSelfRateIsIndependentAnalyticLeaf ≡ false
-unifiedNSSelfRateNotIndependentAnalyticLeaf =
-  NSCut.bSelfRateIsIndependentAnalyticLeafIsFalse
-
-unifiedNSCanonicalRouteDoesNotRequireM2Majorant :
-  NSCut.bCanonicalRouteRequiresM2Majorant ≡ false
-unifiedNSCanonicalRouteDoesNotRequireM2Majorant =
-  NSCut.bCanonicalRouteRequiresM2MajorantIsFalse
-
-unifiedNSLiveResidualCrossGradientNormalFormClosed :
-  NSCut.bLiveResidualCrossGradientNormalFormClosed ≡ true
-unifiedNSLiveResidualCrossGradientNormalFormClosed =
-  NSCut.bLiveResidualCrossGradientNormalFormClosedIsTrue
-
-unifiedNSRemainingCoordinateUsesLiteralPDotQ :
-  NSCut.bRemainingCoordinateUsesLiteralPDotQ ≡ true
-unifiedNSRemainingCoordinateUsesLiteralPDotQ =
-  NSCut.bRemainingCoordinateUsesLiteralPDotQIsTrue
-
-unifiedNSCrossGradientQuantitativePaymentStillOpen :
-  NSCut.bCrossGradientQuantitativePaymentClosed ≡ false
-unifiedNSCrossGradientQuantitativePaymentStillOpen =
-  NSCut.bCrossGradientQuantitativePaymentClosedIsFalse
-
-unifiedNSCrossGradientCutoffUniformAggregationStillOpen :
-  NSCut.bCrossGradientCutoffUniformAggregationClosed ≡ false
-unifiedNSCrossGradientCutoffUniformAggregationStillOpen =
-  NSCut.bCrossGradientCutoffUniformAggregationClosedIsFalse
-
-unifiedNSM2ToR568CompilerClosed :
-  NSCut.bM2ToR568CompilerClosed ≡ true
-unifiedNSM2ToR568CompilerClosed =
-  NSCut.bM2ToR568CompilerClosedIsTrue
-
-unifiedNSR567FullSquareNotCanonicalM2Consumer :
-  NSCut.bR567FullSquarePointwiseM2IsCanonicalConsumer ≡ false
-unifiedNSR567FullSquareNotCanonicalM2Consumer =
-  NSCut.bR567FullSquarePointwiseM2IsCanonicalConsumerIsFalse
-
-unifiedNSLiteralAlternativeStillOpen :
-  NSCut.anyLiteralAlternativeClosedInAgdaHere ≡ false
-unifiedNSLiteralAlternativeStillOpen =
-  NSCut.anyLiteralAlternativeClosedInAgdaHereIsFalse
-
-unifiedNSExternalReceiptNotPromoted :
-  NSCut.externalReceiptPromotedToAgdaProof ≡ false
-unifiedNSExternalReceiptNotPromoted =
-  NSCut.externalReceiptPromotedToAgdaProofIsFalse
-
-unifiedNSWholeSpaceNotDerivedFromPeriodic :
-  NSCut.aDerivedFromB ≡ false
-unifiedNSWholeSpaceNotDerivedFromPeriodic =
-  NSCut.aDerivedFromBIsFalse

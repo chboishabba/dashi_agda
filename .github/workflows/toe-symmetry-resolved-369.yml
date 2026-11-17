@@ -25,12 +25,12 @@ on:
       - 'Docs/diagrams/ym_toe_r559_current_master_convergence.puml'
       - 'DASHI/Law/SensibLawITIRParityEverything.agda'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
-      - 'DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda'
-      - 'DASHI/Analysis/Everything.agda'
-      - 'DASHI/Analysis/RiemannMarkedCompletedTraceArithmeticAuditExact.agda'
-      - 'DASHI/Analysis/RiemannThreeTapTerminalCompletionLeanDonorExact.agda'
-      - 'DASHI/Analysis/RiemannThreeTapCurrentLeanFrontierExact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda'
       - 'DASHI/Unified/**'
+      - 'DASHI/Unified/BalabanRGTOEMaxCutValidation.agda'
+      - 'DASHI/Unified/BalabanR559TOEMaxCutExact.agda'
+      - 'DASHI/Unified/BalabanR559TOEMaxCutValidation.agda'
       - 'DASHI/Unifier.agda'
       - 'DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda'
       - 'DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda'
@@ -151,13 +151,25 @@ jobs:
           dashi-repo discover 'SensibLaw governance semantic promotion legal citation compositional compliance fleet formal gaps' --root . --limit 40
           dashi-repo diagnose DASHI/EverythingTOESymmetryResolved369.agda --root .
           dashi-repo diagnose DASHI/Unifier.agda --root .
-          dashi-repo diagnose DASHI/Analysis/RiemannThreeTapCurrentLeanFrontierExact.agda --root .
-          dashi-repo diagnose DASHI/Analysis/RiemannThreeTapTerminalCompletionLeanDonorExact.agda --root .
-          dashi-repo diagnose DASHI/Analysis/RiemannMarkedCompletedTraceArithmeticAuditExact.agda --root .
-          dashi-repo related currentThreeTapCurrentLeanFrontier --root . --limit 20
-          dashi-repo related rhNotClaimedByAgdaStatusMirror --root . --limit 20
-          dashi-repo discover 'Riemann three tap inverse square A1 A2 signed fifth non-promotion' --root . --limit 40
-          dashi-repo lineage --prefix DASHI.Analysis.RiemannThreeTap --root .
+          dashi-repo diagnose DASHI/Unified/NavierStokesClayFrontierTOEConvergenceExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/NavierStokesClayFrontierTOEConvergenceValidation.agda --root .
+          dashi-repo diagnose DASHI/Physics/Closure/NSTriadKNR650CurrentSharedWeightedWallRound736Exact.agda --root .
+          dashi-repo related round736ExactlyTwoPreferredAnalyticLeaves --root . --limit 20
+          dashi-repo related round736BothLeavesUseSameWeightedCarrier --root . --limit 20
+          dashi-repo related round736WeightedCarrierIsInputLaplacianWork --root . --limit 20
+          dashi-repo related round736ClayPromotion --root . --limit 20
+          dashi-repo discover 'Navier Stokes R736 shared weighted quartic input Laplacian two leaf Clay non-promotion' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Physics.Closure.NSTriadKNR650 --root .
+          dashi-repo related terminalClayPromotionImpossible --root . --limit 20
+          dashi-repo related carrierToGeneralNSImplicationStillOpen --root . --limit 20
+          dashi-repo related navierStokesPromotionGuardStillFalse --root . --limit 20
+          dashi-repo related continuumBKMPassageStillOpen --root . --limit 20
+          dashi-repo related allDataBridgeStillOpen --root . --limit 20
+          dashi-repo related clayEligibilityStillFalse --root . --limit 20
+          dashi-repo discover 'Navier Stokes roadmap Gate 1 Gate 2 BKM all-data gateway submission eligibility' --root . --limit 40
+          dashi-repo discover 'Navier Stokes A B C D canonical Clay frontier carrier-to-general non-promotion' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Physics.Closure.NSCanonical --root .
+          dashi-repo lineage --prefix DASHI.Physics.Closure.NSClay --root .
           dashi-repo related BalabanRGTOEReceipt --root .
           dashi-repo discover 'Balaban regular-E localization Casimir stress RG' --root .
           dashi-repo lineage --prefix DASHI.Physics.YangMills.Balaban --root .
@@ -173,39 +185,13 @@ jobs:
           dashi-repo lineage --prefix DASHI.Wikimedia.Ibrahim --root .
           dashi-repo diagnose DASHI/Unified/BalabanRGTOEMaxCutValidation.agda --root .
           dashi-repo diagnose DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda --root .
-          dashi-repo diagnose DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda --root .
-          dashi-repo related round485MaximumCutCompilerLevel --root . --limit 20
-          dashi-repo related round546IrreducibleSourceFamilyCutCompilerLevel --root . --limit 20
-          dashi-repo related round558CriticalPathCompilerLevel --root . --limit 20
-          dashi-repo related toeCriticalFullCLayerRetainedForConservativeClayExistence --root . --limit 20
-          dashi-repo related toeGoal1MaximumCutCompilerLevel --root . --limit 20
-          dashi-repo discover 'Yang Mills Goal1 R485 R546 R558 maximum cut irreducible critical path R559 TOE' --root . --limit 50
-          dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayGoal1 --root .
-          dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayIrreducibleSourceFamilies --root .
-          dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsClayCriticalPath --root .
-          dashi-repo diagnose DASHI/ComputerScience/TriadicFin27Byte256ABIExact.agda --root .
-          dashi-repo diagnose DASHI/Unified/TOE369MaxCutKernelBidiTernaryExact.agda --root .
-          dashi-repo diagnose DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda --root .
-          dashi-repo related stateDecode-stateCode --root . --limit 20
-          dashi-repo related stateCode-stateDecode --root . --limit 20
-          dashi-repo related compilerSuccessDoesNotCreateKernelSuccess --root . --limit 20
-          dashi-repo discover '369 max cut kernel bidi ternary 27 codec ABI Monster non-promotion' --root . --limit 40
-          dashi-repo lineage --prefix DASHI.Reasoning.Trialectic369Selected3B --root .
-          dashi-repo lineage --prefix DASHI.Moonshine.Base369Ternary27 --root .
-          dashi-repo diagnose DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda --root .
-          dashi-repo related searchPriorityDoesNotCreateProof --root . --limit 20
-          dashi-repo related degree729DoesNotCreateMonsterHZetaRecognition --root . --limit 20
-          dashi-repo related currentQidDoesNotIdentifyHistoricalTitle --root . --limit 20
-          dashi-repo discover 'Ibrahim Pareto snowball Monster 3B historical discriminator non-promotion' --root . --limit 40
-          dashi-repo lineage --prefix DASHI.Wikimedia.IbrahimMonster3B --root .
-          dashi-repo lineage --prefix DASHI.Wikimedia.IbrahimFirstLink --root .
-          dashi-repo diagnose DASHI/Unified/FleetFormalGapTargetTOEExact.agda --root .
-          dashi-repo diagnose DASHI/Unified/FleetFormalGapTargetTOEValidation.agda --root .
-          dashi-repo diagnose DASHI/Unified/R559IbrahimFleetHyperfabricTOEExact.agda --root .
-          dashi-repo diagnose DASHI/Unified/R559IbrahimFleetHyperfabricTOEValidation.agda --root .
-          dashi-repo related canonicalFleetR5OrdinalCutReceipt --root . --limit 20
-          dashi-repo related fleetSharedCardinalityDoesNotCreateIdentity --root . --limit 20
-          dashi-repo discover 'Fleet 584 discharged 44 contradiction 58 formal gaps ordinal identity non-promotion' --root . --limit 40
+          dashi-repo diagnose DASHI/Unified/BalabanR559TOEMaxCutExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/BalabanR559TOEMaxCutValidation.agda --root .
+          dashi-repo related densityFlowSameOwner --root . --limit 20
+          dashi-repo related regularELocalizationSameOwner --root . --limit 20
+          dashi-repo related stressHilbertCompilerSameOwner --root . --limit 20
+          dashi-repo discover 'R559 Balaban Goal1 density regular-E Casimir stress critical path continuum non-promotion' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Physics.YangMills.YangMillsTOEConvergence --root .
 
       - name: Reject ESD surface changes
         shell: bash
@@ -287,9 +273,12 @@ jobs:
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
             DASHI/Unified/YMGoal1TOECompatibilityValidation.agda
             DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
-            DASHI/Unified/Fleet58ManifestAcquisitionRegression.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
+            DASHI/Unified/BalabanR559TOEMaxCutExact.agda
+            DASHI/Unified/BalabanR559TOEMaxCutValidation.agda
+            DASHI/Unified/NavierStokesClayFrontierTOEConvergenceExact.agda
+            DASHI/Unified/NavierStokesClayFrontierTOEConvergenceValidation.agda
             DASHI/Unified/Physics.agda
             DASHI/Unified/Everything.agda
             DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda
@@ -326,17 +315,13 @@ jobs:
             DASHI/Unified/FleetFormalGapTargetTOEExact.agda
             DASHI/Unified/FleetFormalGapTargetTOEValidation.agda
             DASHI/Unified/BalabanRGTOERegression.agda
-            DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda
-            DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda
-            DASHI/Unified/GovernedLegalWorkflowSourceGenealogyTOEExact.agda
-            DASHI/Unified/GovernedLegalWorkflowSourceGenealogyTOERegression.agda
-            DASHI/Unified/GovernedLegalWorkflowSourceSemanticTOEExact.agda
-            DASHI/Unified/GovernedLegalWorkflowSourceSemanticTOERegression.agda
-            DASHI/Unified/PNFDistilledNonPromotionTOEExact.agda
-            DASHI/Unified/PNFDistilledNonPromotionTOEValidation.agda
-            DASHI/Unified/SCALEEvidenceReviewTOEConvergenceExact.agda
-            DASHI/Unified/SCALEEvidenceReviewTOEConvergenceValidation.agda
+            DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
+            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
+            DASHI/Unified/BalabanR559TOEMaxCutExact.agda
+            DASHI/Unified/BalabanR559TOEMaxCutValidation.agda
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
+            DASHI/Unified/NavierStokesClayFrontierTOEConvergenceExact.agda
+            DASHI/Unified/NavierStokesClayFrontierTOEConvergenceValidation.agda
             DASHI/Unified/Physics.agda
             DASHI/EverythingTOESymmetryResolved369.agda
             DASHI/Unifier.agda
