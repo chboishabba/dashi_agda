@@ -82,5 +82,16 @@ packed=lambda tt,si,fi:(ws-wr)*si+(wf-wr)*fi+wr*tt
 quant_delta=packed(total+eD,ss+es,ff+ef)-packed(total,ss,ff)
 check('original weighted score quantization error identity',
       sp.expand(quant_delta-((ws-wr)*es+(wf-wr)*ef+wr*eD))==0)
+centerA={a:1,b:0,c:0,A:0,B:0,C:0}
+centerB={a:1,b:0,c:0,A:0,B:1,C:-1}
+check('centered source counterexample to first channel',
+    all(sp.expand(D.subs(z))==0 for z in [centerA,centerB])
+    and sp.expand(s.subs(centerA)-s.subs(centerB))==0
+    and sp.expand(r.subs(centerA)-r.subs(centerB))!=0
+    and sp.expand(f.subs(centerA)-f.subs(centerB))!=0)
+check('declared original-coordinate MDL minimal sufficient candidate is 2',
+    min(cost for name,cost,sufficient in
+        [('first',1,False),('two-centered',2,True),('raw',3,True)]
+        if sufficient)==2)
 print('X369_SYMPY_STANDIN_PASS',len(checks),'symbolic/finite checks')
 PY
