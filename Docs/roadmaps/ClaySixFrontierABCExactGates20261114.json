@@ -6371,7 +6371,19 @@
         ],
         "native_kernel_acceptance": false,
         "original_endpoint_proved": false,
-        "sources_inspected_at_branch": true
+        "sources_inspected_at_branch": true,
+        "official_clay_prize_formal_statement": "UNIVERSAL_RANK_EQUALITY",
+        "refined_strong_bsd_status": "OPEN_SEPARATE_REFINEMENT",
+        "official_statement_source": "https://www.claymath.org/library/monographs/MPPc.pdf",
+        "official_statement_author": "Andrew Wiles, The Birch and Swinnerton-Dyer Conjecture, The Millennium Prize Problems (2006), pp. 32-33",
+        "official_prize_rank_requirement": "forall E/Q: ord_{s=1} L(E,s)=rank E(Q)",
+        "universal_rank_equality_proved": false,
+        "universal_sha_finiteness_proved": false,
+        "universal_strong_leading_coefficient_proved": false,
+        "proof_scope": "EVERY E/Q; no conductor-32/CM/low-rank restriction",
+        "new_universal_scope_owner": "DASHI/Mathematics/Arithmetic/BSDUniversalScopeFirewallExact.agda",
+        "new_scope_doc": "Docs/roadmaps/ClayBSDUniversalPrizeVersusStrongScopeExact20261117.md",
+        "native_universal_scope_typechecked": false
       },
       {
         "id": "H1",
@@ -6829,6 +6841,17 @@
       "universal_BSD_proved": false,
       "doc": "Docs/roadmaps/ClayBSDOriginalS5StrongBSDRubinClassicalClosure20261117.md",
       "script": "scripts/check_bsd_s5_selected_curve_rubin_20261117.py"
+    },
+    "current_round_20261117_BSD_UNIVERSAL_SCOPE": {
+      "selected_S5_closed_classical": true,
+      "S5_native_open": true,
+      "formal_clay_rank_equality_open": true,
+      "refined_strong_open": true,
+      "official_Wiles_refinement_is_remark": true,
+      "proposed_interface_only_not_an_inhabitant": true,
+      "original_clay_endpoint_proved": false,
+      "scope_module": "DASHI/Mathematics/Arithmetic/BSDUniversalScopeFirewallExact.agda",
+      "scope_doc": "Docs/roadmaps/ClayBSDUniversalPrizeVersusStrongScopeExact20261117.md"
     }
   }
 }
