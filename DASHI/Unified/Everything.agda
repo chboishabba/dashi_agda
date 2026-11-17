@@ -322,45 +322,21 @@ unifiedNSABCDMaxCutReceipt : NSCut.NSABCDTOEMaxCutReceipt
 unifiedNSABCDMaxCutReceipt =
   NSCut.canonicalNSABCDTOEMaxCutReceipt
 
+unifiedNavierStokesBM2ZKPFrame :
+  NSBM2TOE.NavierStokesBM2TOEZKPFrame
+unifiedNavierStokesBM2ZKPFrame =
+  NSBM2TOE.canonicalNavierStokesBM2TOEZKPFrame
+
+
+------------------------------------------------------------------------
+-- Navier-Stokes A/B/C/D native-proof max-cut.
+------------------------------------------------------------------------
+
+unifiedNSABCDMaxCutReceipt : NSCut.NSABCDTOEMaxCutReceipt
+unifiedNSABCDMaxCutReceipt = NSCut.canonicalNSABCDTOEMaxCutReceipt
+
 unifiedNSABCDZKPFrame : NSCut.NSABCDTOEZKPFrame
-unifiedNSABCDZKPFrame =
-  NSCut.canonicalNSABCDTOEZKPFrame
-
-unifiedNSR540OrderedOffDiagonalM2CompilerClosed :
-  NSCut.bR540OrderedOffDiagonalM2CompilerClosed ≡ true
-unifiedNSR540OrderedOffDiagonalM2CompilerClosed =
-  NSCut.bR540OrderedOffDiagonalM2CompilerClosedIsTrue
-
-unifiedNSM2ToR568CompilerClosed :
-  NSCut.bM2ToR568CompilerClosed ≡ true
-unifiedNSM2ToR568CompilerClosed =
-  NSCut.bM2ToR568CompilerClosedIsTrue
-
-unifiedNSR567FullSquareNotCanonicalM2Consumer :
-  NSCut.bR567FullSquarePointwiseM2IsCanonicalConsumer ≡ false
-unifiedNSR567FullSquareNotCanonicalM2Consumer =
-  NSCut.bR567FullSquarePointwiseM2IsCanonicalConsumerIsFalse
-
-unifiedNSPhysicalWeightedSecondMomentPaymentStillOpen :
-  NSCut.bPhysicalWeightedSecondMomentPaymentClosed ≡ false
-unifiedNSPhysicalWeightedSecondMomentPaymentStillOpen =
-  NSCut.bPhysicalWeightedSecondMomentPaymentClosedIsFalse
-
-unifiedNSLiteralAlternativeStillOpen :
-  NSCut.anyLiteralAlternativeClosedInAgdaHere ≡ false
-unifiedNSLiteralAlternativeStillOpen =
-  NSCut.anyLiteralAlternativeClosedInAgdaHereIsFalse
-
-unifiedNSExternalReceiptNotPromoted :
-  NSCut.externalReceiptPromotedToAgdaProof ≡ false
-unifiedNSExternalReceiptNotPromoted =
-  NSCut.externalReceiptPromotedToAgdaProofIsFalse
-
-unifiedNSWholeSpaceNotDerivedFromPeriodic :
-  NSCut.aDerivedFromB ≡ false
-unifiedNSWholeSpaceNotDerivedFromPeriodic =
-  NSCut.aDerivedFromBIsFalse
-
+unifiedNSABCDZKPFrame = NSCut.canonicalNSABCDTOEZKPFrame
 
 unifiedNSLiteralFixedOutputCovarianceM2PaymentClosed :
   NSCut.bLiteralFixedOutputCovarianceM2PaymentClosed ≡ true
@@ -401,3 +377,28 @@ unifiedNSCrossGradientCutoffUniformAggregationStillOpen :
   NSCut.bCrossGradientCutoffUniformAggregationClosed ≡ false
 unifiedNSCrossGradientCutoffUniformAggregationStillOpen =
   NSCut.bCrossGradientCutoffUniformAggregationClosedIsFalse
+
+unifiedNSM2ToR568CompilerClosed :
+  NSCut.bM2ToR568CompilerClosed ≡ true
+unifiedNSM2ToR568CompilerClosed =
+  NSCut.bM2ToR568CompilerClosedIsTrue
+
+unifiedNSR567FullSquareNotCanonicalM2Consumer :
+  NSCut.bR567FullSquarePointwiseM2IsCanonicalConsumer ≡ false
+unifiedNSR567FullSquareNotCanonicalM2Consumer =
+  NSCut.bR567FullSquarePointwiseM2IsCanonicalConsumerIsFalse
+
+unifiedNSLiteralAlternativeStillOpen :
+  NSCut.anyLiteralAlternativeClosedInAgdaHere ≡ false
+unifiedNSLiteralAlternativeStillOpen =
+  NSCut.anyLiteralAlternativeClosedInAgdaHereIsFalse
+
+unifiedNSExternalReceiptNotPromoted :
+  NSCut.externalReceiptPromotedToAgdaProof ≡ false
+unifiedNSExternalReceiptNotPromoted =
+  NSCut.externalReceiptPromotedToAgdaProofIsFalse
+
+unifiedNSWholeSpaceNotDerivedFromPeriodic :
+  NSCut.aDerivedFromB ≡ false
+unifiedNSWholeSpaceNotDerivedFromPeriodic =
+  NSCut.aDerivedFromBIsFalse

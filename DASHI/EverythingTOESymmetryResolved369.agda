@@ -1680,7 +1680,123 @@ toeNSCrossGradientQuantitativePaymentStillOpen :
 toeNSCrossGradientQuantitativePaymentStillOpen =
   NSCut.bCrossGradientQuantitativePaymentClosedIsFalse
 
+toeNavierStokesSharedWeightedClayPromotion : Bool
+toeNavierStokesSharedWeightedClayPromotion =
+  NSClayTOE.currentSharedWeightedClayPromotion
+
+toeNavierStokesSharedWeightedClayPromotionStillFalse :
+  toeNavierStokesSharedWeightedClayPromotion ≡ false
+toeNavierStokesSharedWeightedClayPromotionStillFalse =
+  NSClayTOE.currentSharedWeightedClayPromotionStillFalse
+
+toeNavierStokesContinuumBKMPassageConstructed : Bool
+toeNavierStokesContinuumBKMPassageConstructed =
+  NSClayTOE.continuumBKMPassageConstructed
+
+toeNavierStokesContinuumBKMPassageStillOpen :
+  toeNavierStokesContinuumBKMPassageConstructed ≡ false
+toeNavierStokesContinuumBKMPassageStillOpen =
+  NSClayTOE.continuumBKMPassageStillOpen
+
+toeNavierStokesAllDataBridgeConstructed : Bool
+toeNavierStokesAllDataBridgeConstructed =
+  NSClayTOE.allDataBridgeConstructed
+
+toeNavierStokesAllDataBridgeStillOpen :
+  toeNavierStokesAllDataBridgeConstructed ≡ false
+toeNavierStokesAllDataBridgeStillOpen =
+  NSClayTOE.allDataBridgeStillOpen
+
+toeNavierStokesSubmissionPacketReady : Bool
+toeNavierStokesSubmissionPacketReady =
+  NSClayTOE.submissionPacketReady
+
+toeNavierStokesSubmissionPacketStillNotReady :
+  toeNavierStokesSubmissionPacketReady ≡ false
+toeNavierStokesSubmissionPacketStillNotReady =
+  NSClayTOE.submissionPacketStillNotReady
+
+toeNavierStokesClayEligible : Bool
+toeNavierStokesClayEligible =
+  NSClayTOE.clayEligible
+
+toeNavierStokesClayEligibilityStillFalse :
+  toeNavierStokesClayEligible ≡ false
+toeNavierStokesClayEligibilityStillFalse =
+  NSClayTOE.clayEligibilityStillFalse
+
+
+------------------------------------------------------------------------
+-- Navier-Stokes A/B/C/D native-proof max-cut.
+------------------------------------------------------------------------
+
+toeNSABCDMaxCutReceipt : NSCut.NSABCDTOEMaxCutReceipt
+toeNSABCDMaxCutReceipt = NSCut.canonicalNSABCDTOEMaxCutReceipt
+
+toeNSABCDZKPFrame : NSCut.NSABCDTOEZKPFrame
+toeNSABCDZKPFrame = NSCut.canonicalNSABCDTOEZKPFrame
+
+toeNSLiteralFixedOutputCovarianceM2PaymentClosed :
+  NSCut.bLiteralFixedOutputCovarianceM2PaymentClosed ≡ true
+toeNSLiteralFixedOutputCovarianceM2PaymentClosed =
+  NSCut.bLiteralFixedOutputCovarianceM2PaymentClosedIsTrue
+
+toeNSLiveResidualWeightedWorkIdentityClosed :
+  NSCut.bLiveResidualWeightedWorkIdentityClosed ≡ true
+toeNSLiveResidualWeightedWorkIdentityClosed =
+  NSCut.bLiveResidualWeightedWorkIdentityClosedIsTrue
+
+toeNSSelfRateNotIndependentAnalyticLeaf :
+  NSCut.bSelfRateIsIndependentAnalyticLeaf ≡ false
+toeNSSelfRateNotIndependentAnalyticLeaf =
+  NSCut.bSelfRateIsIndependentAnalyticLeafIsFalse
+
+toeNSCanonicalRouteDoesNotRequireM2Majorant :
+  NSCut.bCanonicalRouteRequiresM2Majorant ≡ false
+toeNSCanonicalRouteDoesNotRequireM2Majorant =
+  NSCut.bCanonicalRouteRequiresM2MajorantIsFalse
+
+toeNSLiveResidualCrossGradientNormalFormClosed :
+  NSCut.bLiveResidualCrossGradientNormalFormClosed ≡ true
+toeNSLiveResidualCrossGradientNormalFormClosed =
+  NSCut.bLiveResidualCrossGradientNormalFormClosedIsTrue
+
+toeNSRemainingCoordinateUsesLiteralPDotQ :
+  NSCut.bRemainingCoordinateUsesLiteralPDotQ ≡ true
+toeNSRemainingCoordinateUsesLiteralPDotQ =
+  NSCut.bRemainingCoordinateUsesLiteralPDotQIsTrue
+
+toeNSCrossGradientQuantitativePaymentStillOpen :
+  NSCut.bCrossGradientQuantitativePaymentClosed ≡ false
+toeNSCrossGradientQuantitativePaymentStillOpen =
+  NSCut.bCrossGradientQuantitativePaymentClosedIsFalse
+
 toeNSCrossGradientCutoffUniformAggregationStillOpen :
   NSCut.bCrossGradientCutoffUniformAggregationClosed ≡ false
 toeNSCrossGradientCutoffUniformAggregationStillOpen =
   NSCut.bCrossGradientCutoffUniformAggregationClosedIsFalse
+
+toeNSM2ToR568CompilerClosed :
+  NSCut.bM2ToR568CompilerClosed ≡ true
+toeNSM2ToR568CompilerClosed =
+  NSCut.bM2ToR568CompilerClosedIsTrue
+
+toeNSR567FullSquareNotCanonicalM2Consumer :
+  NSCut.bR567FullSquarePointwiseM2IsCanonicalConsumer ≡ false
+toeNSR567FullSquareNotCanonicalM2Consumer =
+  NSCut.bR567FullSquarePointwiseM2IsCanonicalConsumerIsFalse
+
+toeNSLiteralAlternativeStillOpen :
+  NSCut.anyLiteralAlternativeClosedInAgdaHere ≡ false
+toeNSLiteralAlternativeStillOpen =
+  NSCut.anyLiteralAlternativeClosedInAgdaHereIsFalse
+
+toeNSExternalReceiptNotPromoted :
+  NSCut.externalReceiptPromotedToAgdaProof ≡ false
+toeNSExternalReceiptNotPromoted =
+  NSCut.externalReceiptPromotedToAgdaProofIsFalse
+
+toeNSWholeSpaceNotDerivedFromPeriodic :
+  NSCut.aDerivedFromB ≡ false
+toeNSWholeSpaceNotDerivedFromPeriodic =
+  NSCut.aDerivedFromBIsFalse

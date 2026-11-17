@@ -778,10 +778,6 @@ aDerivedFromBIsFalse = refl
 
 ------------------------------------------------------------------------
 -- TOE convergence receipt: current NS A/B/C/D max-cut.
---
--- This record does not prove a Clay alternative.
--- It packages the current theorem-bearing compiler surface and the exact
--- non-promotion boundary for direct reuse by the TOE roots.
 ------------------------------------------------------------------------
 
 bR540OrderedOffDiagonalM2CompilerClosedIsTrue :
@@ -809,59 +805,45 @@ record NSABCDTOEMaxCutReceipt : Set where
     r540OrderedOffDiagonalM2CompilerClosed : Bool
     r540OrderedOffDiagonalM2CompilerClosedProof :
       r540OrderedOffDiagonalM2CompilerClosed ≡ true
-
     m2ToR568CompilerClosed : Bool
     m2ToR568CompilerClosedProof :
       m2ToR568CompilerClosed ≡ true
-
     literalFixedOutputCovarianceM2PaymentClosed : Bool
     literalFixedOutputCovarianceM2PaymentClosedProof :
       literalFixedOutputCovarianceM2PaymentClosed ≡ true
-
     liveResidualWeightedWorkIdentityClosed : Bool
     liveResidualWeightedWorkIdentityClosedProof :
       liveResidualWeightedWorkIdentityClosed ≡ true
-
     selfRateIsIndependentAnalyticLeaf : Bool
     selfRateIsIndependentAnalyticLeafProof :
       selfRateIsIndependentAnalyticLeaf ≡ false
-
     canonicalRouteRequiresM2Majorant : Bool
     canonicalRouteRequiresM2MajorantProof :
       canonicalRouteRequiresM2Majorant ≡ false
-
     liveResidualCrossGradientNormalFormClosed : Bool
     liveResidualCrossGradientNormalFormClosedProof :
       liveResidualCrossGradientNormalFormClosed ≡ true
-
     remainingCoordinateUsesLiteralPDotQ : Bool
     remainingCoordinateUsesLiteralPDotQProof :
       remainingCoordinateUsesLiteralPDotQ ≡ true
-
     crossGradientQuantitativePaymentClosed : Bool
     crossGradientQuantitativePaymentClosedProof :
       crossGradientQuantitativePaymentClosed ≡ false
-
     crossGradientCutoffUniformAggregationClosed : Bool
     crossGradientCutoffUniformAggregationClosedProof :
       crossGradientCutoffUniformAggregationClosed ≡ false
-
     r567FullSquareIsCanonicalM2Consumer : Bool
     r567FullSquareIsCanonicalM2ConsumerProof :
       r567FullSquareIsCanonicalM2Consumer ≡ false
-
     physicalWeightedSecondMomentPaymentClosed : Bool
     physicalWeightedSecondMomentPaymentClosedProof :
       physicalWeightedSecondMomentPaymentClosed ≡ false
-
     literalAlternativeClosedInAgda : Bool
     literalAlternativeClosedInAgdaProof :
       literalAlternativeClosedInAgda ≡ false
-
     externalReceiptPromotedToAgdaProof : Bool
     externalReceiptPromotedToAgdaProofProof :
       externalReceiptPromotedToAgdaProof ≡ false
-
     wholeSpaceDerivedFromPeriodic : Bool
     wholeSpaceDerivedFromPeriodicProof :
       wholeSpaceDerivedFromPeriodic ≡ false
@@ -905,18 +887,8 @@ canonicalNSABCDTOEMaxCutReceipt =
 record NSABCDTOEZKPFrame : Set where
   constructor ns-abcd-toe-zkp-frame
   field
-    objective : String
-    reuse : String
-    construction : String
-    safetyInvariant : String
-    lane : String
-    preconditions : String
-    governance : String
-    postconditions : String
-    verification : String
-    esdMutationAllowed : Bool
-    createsClayPromotion : Bool
-    promotesExternalReceipt : Bool
+    objective reuse construction safetyInvariant lane preconditions governance postconditions verification : String
+    esdMutationAllowed createsClayPromotion promotesExternalReceipt : Bool
 
 canonicalNSABCDTOEZKPFrame : NSABCDTOEZKPFrame
 canonicalNSABCDTOEZKPFrame =
@@ -930,6 +902,4 @@ canonicalNSABCDTOEZKPFrame =
     "ITIL, ISO 9000/42001/27001/27701/23894/9241, NIST AI RMF, Six Sigma, C4/PlantUML, and ASD-STE100 are process and presentation lenses only"
     "TOE root, Unifier, and Unified aggregate reach the same canonical NS max-cut and exact non-promotion proofs"
     "code search, related-symbol lineage, trust-escape scan, ESD diff audit, duplicate-signature audit, and exact-head Agda kernel check"
-    false
-    false
-    false
+    false false false
