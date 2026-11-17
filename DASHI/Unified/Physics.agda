@@ -16,8 +16,60 @@ import DASHI.Physics.YangMills.YangMillsPlaquetteTOEBridgeExact as PlaquetteTOE
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as YMTOE
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 import DASHI.Unified.InvariantSpine as Spine
-import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
+import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as YMTOE
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
+
+
+------------------------------------------------------------------------
+-- Exact Yang-Mills theorem-owner exports.
+------------------------------------------------------------------------
+
+open YMTOE public using
+  ( sourceCouplingIsBetaHistoryCoupling
+  ; sourceSmallnessIsDerivedFromBetaHistory
+  ; betaHistoryGivesRepositoryCouplingCap
+  ; canonicalStateRunningCouplingIsBetaHistory
+  ; betaHistoryAndSourceTheoremGiveLiteralInvariantRegion
+  ; selectedDensityRepresentsExactBC1Potential
+  ; selectedDensityRepresentsBC2InitialPotential
+  ; stressSelectedDensityIndexIsUnifiedActionIndex
+  ; sourceDerivativeBelowExistingMarkedShell
+  ; stressCoefficientEnergyUniformBound
+  ; stressPairingSquaredCauchyFromShellEnergy
+  ; selectedRegularEIsLocalizedCompositeSum
+  ; universalCompactSimpleCasimirFloor
+  ; universalCompactSimpleBetaFloor
+  ; classificationAdjointCasimirAtLeastTwo
+  ; classificationGroupUniversalCoefficientAtLeastElevenTwelfths
+  ; uniformRemainderBelowEveryCompactSimpleCoefficient
+  )
+
+open YMTOE public using
+  ( SourceFamily
+  ; a1CurrentStepVariation
+  ; a2HistoryCoordinate
+  ; a3ProjectiveRepresentation
+  ; finiteT1AndPublishedOS
+  ; quantitativeT5CMP119Alignment
+  ; bWilsonWEXT
+  ; bSameHamiltonianEnergyDecay
+  ; actualGroupCompleteSource
+  ; densityToNormalizedFiniteMeasure
+  ; c0WilsonLocalObservable
+  ; c1MarkedCurvature
+  ; c2PhysicalRemainderTail
+  ; c3AFRecurrence
+  ; c4DensityAnchoredStress
+  ; CriticalFamily
+  ; a3SelectedRepresentation
+  ; t1FiniteOSSameFamily
+  ; t5QuantitativeSameFamily
+  ; b1SourceFirstWilsonWEXT
+  ; b2SameHamiltonian
+  ; g1ActualCompactSimple
+  ; h6MinimalWardNontriviality
+  )
+
 
 navierStokesObject : Spine.UnifiedObjectInvariant
 navierStokesObject =
@@ -74,59 +126,24 @@ yangMillsPostureIsApproaching =
   refl
 
 ------------------------------------------------------------------------
--- Exact Yang-Mills plaquette-to-TOE non-promotion projections.
+-- Reuse the canonical Yang-Mills TOE convergence boundary.
 ------------------------------------------------------------------------
 
-yangMillsPlaquetteTOEMassGapPromotionBlocked :
-  PlaquetteTOE.toeMassGapPromoted ≡ false
-yangMillsPlaquetteTOEMassGapPromotionBlocked =
-  PlaquetteTOE.toeMassGapPromotedIsFalse
+yangMillsTOEClayPromotionBlocked :
+  YMTOE.toeClayYangMillsPromoted ≡ false
+yangMillsTOEClayPromotionBlocked =
+  YMTOE.toeClayYangMillsPromotedIsFalse
 
-yangMillsPlaquetteTOEClayPromotionBlocked :
-  PlaquetteTOE.toeClayYangMillsPromoted ≡ false
-yangMillsPlaquetteTOEClayPromotionBlocked =
-  PlaquetteTOE.toeClayYangMillsPromotedIsFalse
+yangMillsTOECriticalFamilyCountIsSeven :
+  YMTOE.toeCriticalFamilyCount ≡ 7
+yangMillsTOECriticalFamilyCountIsSeven =
+  YMTOE.toeCriticalFamilyCountIsSeven
 
-yangMillsPlaquetteTOEBridgeAddsNoNewPhysicalTheorem :
-  PlaquetteTOE.plaquetteTOEBridgeAddsNewPhysicalTheorem ≡ false
-yangMillsPlaquetteTOEBridgeAddsNoNewPhysicalTheorem =
-  PlaquetteTOE.plaquetteTOEBridgeAddsNewPhysicalTheoremIsFalse
+yangMillsTOEIrreducibleFamilyCountIsFourteen :
+  YMTOE.toeIrreducibleSourceFamilyCount ≡ 14
+yangMillsTOEIrreducibleFamilyCountIsFourteen =
+  YMTOE.toeIrreducibleSourceFamilyCountIsFourteen
 
-
-yangMillsRouteSCrossProverPhysicalCutHasExactlyThreeClasses :
-  PlaquetteTOE.toeRouteSCrossProverPhysicalCutHasExactlyThreeClasses ≡ true
-yangMillsRouteSCrossProverPhysicalCutHasExactlyThreeClasses =
-  PlaquetteTOE.toeRouteSCrossProverPhysicalCutHasExactlyThreeClassesIsTrue
-
-yangMillsD2PublishedSourceEntryDoesNotPayInsertionNaturality :
-  PlaquetteTOE.toeD2PublishedSourceEntryPaysInsertionNaturality ≡ false
-yangMillsD2PublishedSourceEntryDoesNotPayInsertionNaturality =
-  PlaquetteTOE.toeD2PublishedSourceEntryPaysInsertionNaturalityIsFalse
-
-
-------------------------------------------------------------------------
--- Normalized Yang-Mills TOE convergence facade.
-------------------------------------------------------------------------
-
-open YMTOE public using
-  ( sourceCouplingIsBetaHistoryCoupling
-  ; sourceSmallnessIsDerivedFromBetaHistory
-  ; betaHistoryGivesRepositoryCouplingCap
-  ; canonicalStateRunningCouplingIsBetaHistory
-  ; betaHistoryAndSourceTheoremGiveLiteralInvariantRegion
-  ; selectedDensityRepresentsExactBC1Potential
-  ; selectedDensityRepresentsBC2InitialPotential
-  ; stressSelectedDensityIndexIsUnifiedActionIndex
-  ; sourceDerivativeBelowExistingMarkedShell
-  ; stressCoefficientEnergyUniformBound
-  ; stressPairingSquaredCauchyFromShellEnergy
-  ; selectedRegularEIsLocalizedCompositeSum
-  ; universalCompactSimpleCasimirFloor
-  ; universalCompactSimpleBetaFloor
-  ; classificationAdjointCasimirAtLeastTwo
-  ; classificationGroupUniversalCoefficientAtLeastElevenTwelfths
-  ; uniformRemainderBelowEveryCompactSimpleCoefficient
-  )
 
 yangMillsTOEPublishedRGDoesNotPromoteContinuum :
   YMTOE.toeFlat4DContinuumTransferProvedHere ≡ false
@@ -138,14 +155,40 @@ yangMillsTOEContinuumMassGapBlocked :
 yangMillsTOEContinuumMassGapBlocked =
   YMTOE.toeContinuumMassGapPromotedIsFalse
 
-yangMillsTOEClayPromotionBlocked :
-  YMTOE.toeClayYangMillsPromoted ≡ false
-yangMillsTOEClayPromotionBlocked =
-  YMTOE.toeClayYangMillsPromotedIsFalse
+
+yangMillsTOERegularEProjectionCompilerLevel : ProofLevel
+yangMillsTOERegularEProjectionCompilerLevel =
+  YMTOE.toePublishedFlowToRegularEProjectionCompilerLevel
+
+yangMillsTOERegularELocalizationSourceLevel : ProofLevel
+yangMillsTOERegularELocalizationSourceLevel =
+  YMTOE.toeCMP119RegularELocalizationSourceLevel
+
+yangMillsTOEHardAnalyticLemmaUpperCount : Nat
+yangMillsTOEHardAnalyticLemmaUpperCount =
+  YMTOE.toeHardAnalyticLemmaUpperCount
+
+yangMillsTOEHardAnalyticLemmaUpperCountIsSix :
+  yangMillsTOEHardAnalyticLemmaUpperCount ≡ 6
+yangMillsTOEHardAnalyticLemmaUpperCountIsSix =
+  YMTOE.toeHardAnalyticLemmaUpperCountIsSix
+
+
+------------------------------------------------------------------------
+-- Canonical Yang-Mills scale-density-stress convergence.
+------------------------------------------------------------------------
+
+yangMillsTOEBetaDrivenSourceFlowLevel : ProofLevel
+yangMillsTOEBetaDrivenSourceFlowLevel =
+  YMTOE.toeBetaDrivenSourceFlowLevel
 
 yangMillsTOEBetaHistorySameStateCouplingLevel : ProofLevel
 yangMillsTOEBetaHistorySameStateCouplingLevel =
   YMTOE.toeBetaHistorySameStateCouplingLevel
+
+yangMillsTOECanonicalCompleteDensityLevel : ProofLevel
+yangMillsTOECanonicalCompleteDensityLevel =
+  YMTOE.toeBetaHistoryToCanonicalCompleteDensityLevel
 
 yangMillsTOEGeneratedActionDensityCompilerLevel : ProofLevel
 yangMillsTOEGeneratedActionDensityCompilerLevel =
@@ -155,10 +198,6 @@ yangMillsTOECombinedRGUnifiedActionCompilerLevel : ProofLevel
 yangMillsTOECombinedRGUnifiedActionCompilerLevel =
   YMTOE.toeCompleteDensityEffectiveActionRealizationCompilerLevel
 
-yangMillsTOERegularEProjectionCompilerLevel : ProofLevel
-yangMillsTOERegularEProjectionCompilerLevel =
-  YMTOE.toePublishedFlowToRegularEProjectionCompilerLevel
-
 yangMillsTOEStressScaleCompilerLevel : ProofLevel
 yangMillsTOEStressScaleCompilerLevel =
   YMTOE.toeUnifiedGeneratedActionStressScaleCompilerLevel
@@ -166,6 +205,16 @@ yangMillsTOEStressScaleCompilerLevel =
 yangMillsTOEStrictCasimirCarrierLevel : ProofLevel
 yangMillsTOEStrictCasimirCarrierLevel =
   YMTOE.toeStrictCasimirCarrierCompilerLevel
+
+yangMillsTOEOSWightmanContinuumBlocked :
+  YMTOE.toeOSWightmanContinuumConstructionProvedHere ≡ false
+yangMillsTOEOSWightmanContinuumBlocked =
+  YMTOE.toeOSWightmanContinuumConstructionProvedHereIsFalse
+
+yangMillsTOETerminalPromotionBlocked :
+  YMTOE.toeTerminalPromotion ≡ false
+yangMillsTOETerminalPromotionBlocked =
+  YMTOE.toeTerminalPromotionIsFalse
 
 yangMillsTOEUniversalBetaFloorLevel : ProofLevel
 yangMillsTOEUniversalBetaFloorLevel =
@@ -183,61 +232,111 @@ yangMillsTOEStressShellEnergyHilbertLevel : ProofLevel
 yangMillsTOEStressShellEnergyHilbertLevel =
   YMTOE.toeStressShellEnergyToHilbertCompilerLevel
 
-yangMillsTOEOSWightmanContinuumBlocked :
-  YMTOE.toeOSWightmanContinuumConstructionProvedHere ≡ false
-yangMillsTOEOSWightmanContinuumBlocked =
-  YMTOE.toeOSWightmanContinuumConstructionProvedHereIsFalse
-
-yangMillsTOEPinnedAOS1CompilerLevel : ProofLevel
-yangMillsTOEPinnedAOS1CompilerLevel =
-  YMTOE.toePinnedAOS1LimitCompilerLevel
-
-yangMillsTOESelectedBSourceDecayCompilerLevel : ProofLevel
-yangMillsTOESelectedBSourceDecayCompilerLevel =
-  YMTOE.toeSelectedCMP116SourceDecayCompilerLevel
-
-yangMillsTOEPinnedCStressSameHamiltonianCompilerLevel : ProofLevel
-yangMillsTOEPinnedCStressSameHamiltonianCompilerLevel =
-  YMTOE.toePinnedConcreteStressSameHamiltonianAdapterLevel
+yangMillsTOELiteralStressActivityEntropyLevel : ProofLevel
+yangMillsTOELiteralStressActivityEntropyLevel =
+  YMTOE.toeLiteralStressActivityEntropyInstantiationLevel
 
 
 ------------------------------------------------------------------------
--- Later preferred A/B/C convergence aliases.
+-- Authoritative Goal-1 R485 maximum cut via normalized R559 owner.
 ------------------------------------------------------------------------
 
-yangMillsTOEPinnedRealBPostCoordinateCompilerLevel : ProofLevel
-yangMillsTOEPinnedRealBPostCoordinateCompilerLevel =
-  YMTOE.toePinnedRealBPostCoordinateCompilerLevel
+yangMillsTOEGoal1FiniteSymmetryAndRPSourceLevel : ProofLevel
+yangMillsTOEGoal1FiniteSymmetryAndRPSourceLevel =
+  YMTOE.toeGoal1FiniteSymmetryAndRPSourceLevel
 
-yangMillsTOER415ToContinuumPhysicalClusteringCompilerLevel : ProofLevel
-yangMillsTOER415ToContinuumPhysicalClusteringCompilerLevel =
-  YMTOE.toeR415ToContinuumPhysicalClusteringCompilerLevel
+yangMillsTOEGoal1A1CurrentStepBetaSourceLevel : ProofLevel
+yangMillsTOEGoal1A1CurrentStepBetaSourceLevel =
+  YMTOE.toeGoal1A1CurrentStepBetaSourceLevel
 
-yangMillsTOESameFamilyContinuumCoreRecoveryCompilerLevel : ProofLevel
-yangMillsTOESameFamilyContinuumCoreRecoveryCompilerLevel =
-  YMTOE.toeSameFamilyContinuumCoreRecoveryCompilerLevel
+yangMillsTOEGoal1A3SourceNativeContinuumOSLevel : ProofLevel
+yangMillsTOEGoal1A3SourceNativeContinuumOSLevel =
+  YMTOE.toeGoal1A3SourceNativeContinuumOSLevel
 
-yangMillsTOEPreferredSameFamilyMeasureCompilerLevel : ProofLevel
-yangMillsTOEPreferredSameFamilyMeasureCompilerLevel =
-  YMTOE.toePreferredSameFamilyMeasureCompilerLevel
+yangMillsTOEGoal1A3CountablyAdditiveRepresentationLevel : ProofLevel
+yangMillsTOEGoal1A3CountablyAdditiveRepresentationLevel =
+  YMTOE.toeGoal1A3CountablyAdditiveRepresentationLevel
 
-yangMillsTOEWeakMeasureFullConvergenceLevel : ProofLevel
-yangMillsTOEWeakMeasureFullConvergenceLevel =
-  YMTOE.toeWeakMeasureFullConvergenceLevel
+yangMillsTOEGoal1A4FiniteRegularityLevel : ProofLevel
+yangMillsTOEGoal1A4FiniteRegularityLevel =
+  YMTOE.toeGoal1A4FiniteRegularityLevel
 
-yangMillsTOEWeakMeasurePreGapCoreCompilerLevel : ProofLevel
-yangMillsTOEWeakMeasurePreGapCoreCompilerLevel =
-  YMTOE.toeWeakMeasurePreGapCoreCompilerLevel
+yangMillsTOEGoal1A5FiniteGrowthLevel : ProofLevel
+yangMillsTOEGoal1A5FiniteGrowthLevel =
+  YMTOE.toeGoal1A5FiniteGrowthLevel
 
-yangMillsTOEPinnedLiteralStressAttachmentCompilerLevel : ProofLevel
-yangMillsTOEPinnedLiteralStressAttachmentCompilerLevel =
-  YMTOE.toePinnedLiteralStressAttachmentCompilerLevel
+yangMillsTOEGoal1BWilsonTwoInsertionConnectedShellLevel : ProofLevel
+yangMillsTOEGoal1BWilsonTwoInsertionConnectedShellLevel =
+  YMTOE.toeGoal1BWilsonTwoInsertionConnectedShellLevel
 
-yangMillsTOEPinnedGRQFTStressExportLevel : ProofLevel
-yangMillsTOEPinnedGRQFTStressExportLevel =
-  YMTOE.toePinnedGRQFTStressExportLevel
+yangMillsTOEGoal1BGeometricDecayCompilerLevel : ProofLevel
+yangMillsTOEGoal1BGeometricDecayCompilerLevel =
+  YMTOE.toeGoal1BGeometricDecayCompilerLevel
 
-yangMillsTOEGRQFTStressWeldNotPromoted :
-  YMTOE.toeGRQFTStressWeldPromoted ≡ false
-yangMillsTOEGRQFTStressWeldNotPromoted =
-  YMTOE.toeGRQFTStressWeldPromotedIsFalse
+yangMillsTOEGoal1BStandardSpectralTransferLevel : ProofLevel
+yangMillsTOEGoal1BStandardSpectralTransferLevel =
+  YMTOE.toeGoal1BStandardSpectralTransferLevel
+
+yangMillsTOEGoal1CSameFamilySourceInstantiationLevel : ProofLevel
+yangMillsTOEGoal1CSameFamilySourceInstantiationLevel =
+  YMTOE.toeGoal1CSameFamilySourceInstantiationLevel
+
+yangMillsTOEGoal1G1ArbitraryCompactSimpleSourceMapLevel : ProofLevel
+yangMillsTOEGoal1G1ArbitraryCompactSimpleSourceMapLevel =
+  YMTOE.toeGoal1G1ArbitraryCompactSimpleSourceMapLevel
+
+yangMillsTOEGoal1G2SameSystemNontrivialitySemanticsLevel : ProofLevel
+yangMillsTOEGoal1G2SameSystemNontrivialitySemanticsLevel =
+  YMTOE.toeGoal1G2SameSystemNontrivialitySemanticsLevel
+
+yangMillsTOEGoal1MaximumCutCompilerLevel : ProofLevel
+yangMillsTOEGoal1MaximumCutCompilerLevel =
+  YMTOE.toeGoal1MaximumCutCompilerLevel
+
+yangMillsTOEGoal1ProjectiveProkhorovNotMandatory :
+  YMTOE.toeGoal1ProjectiveProkhorovMandatory ≡ false
+yangMillsTOEGoal1ProjectiveProkhorovNotMandatory = refl
+
+yangMillsTOEGoal1CompatibilityBRouteNotMandatory :
+  YMTOE.toeGoal1CompatibilityBRouteMandatory ≡ false
+yangMillsTOEGoal1CompatibilityBRouteNotMandatory = refl
+
+yangMillsTOEGoal1ClayCompletionNotClaimed :
+  YMTOE.toeGoal1ClayCompletionClaimed ≡ false
+yangMillsTOEGoal1ClayCompletionNotClaimed = refl
+
+
+------------------------------------------------------------------------
+-- Canonical R546/R558 family dispatch via R559.
+------------------------------------------------------------------------
+
+yangMillsTOEIrreducibleFamilyLevel :
+  SourceFamily → ProofLevel
+yangMillsTOEIrreducibleFamilyLevel =
+  YMTOE.toeIrreducibleFamilyLevel
+
+yangMillsTOECriticalFamilyLevel :
+  CriticalFamily → ProofLevel
+yangMillsTOECriticalFamilyLevel =
+  YMTOE.toeCriticalFamilyLevel
+
+-- Literal two-Wilson source-native path.
+open YMTOE public using
+  ( LiteralTwoWilsonR413FourStageSource
+  ; toeLiteralTwoWilsonR413ToR444
+  ; LiteralTwoWilsonQuarterDyadicFamily
+  ; toeLiteralTwoWilsonQuarterDyadicToR556
+  ; toeLiteralTwoWilsonFiniteCovarianceBelowCanonicalDyadicShell
+  ; LiteralTwoWilsonGeneralGeometricFamily
+  ; toeLiteralTwoWilsonFiniteCovarianceGeneralGeometricBound
+  ; toeLiteralTwoWilsonGeneralGeometricTrajectory
+  )
+
+
+open YMTOE public using
+  ( toeLiteralTwoWilsonR415CompilerLevel
+  ; toeLiteralTwoWilsonR444TermConstructionLevel
+  ; toeLiteralTwoWilsonR445MixedLogIdentificationLevel
+  ; toeLiteralTwoWilsonR453ConnectedCoreLevel
+  ; toeLiteralTwoWilsonR451PhysicalCalibrationLevel
+  )
