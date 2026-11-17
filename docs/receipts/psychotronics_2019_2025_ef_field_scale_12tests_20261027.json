@@ -1,0 +1,89 @@
+{
+  "schema": "dashi.psychotronics.si_original_simulation_experiment_scale.v1",
+  "date": "2026-10-27",
+  "owner_pr": 1242,
+  "related_hardt_pr": 1252,
+  "originals": [
+    {
+      "doi": "10.1039/C8RA09993F",
+      "original_authors": "Pandey; Morla; Nemade; Kumar; Ramakrishnan",
+      "first_published": "2019-02-06",
+      "type": "in_vitro_tau_short_peptide_electrode_E_field_experiment",
+      "sample": "PHF6/PHF6-star motifs",
+      "field_original": "150 and 300 V/cm AC and DC",
+      "field_si_v_m": [
+        15000,
+        30000
+      ]
+    },
+    {
+      "doi": "10.1021/jacs.4c14791",
+      "original_authors": "Kalita; Danovich; Shaik",
+      "first_published": "2025-01-08",
+      "type": "A_beta_molecular_dynamics_simulation",
+      "field_original": "0.01-0.02 V/angstrom",
+      "field_si_v_m": [
+        100000000,
+        125000000,
+        150000000,
+        175000000,
+        200000000
+      ],
+      "frequencies_sampled_hz": [
+        20000000,
+        100000000,
+        1000000000
+      ]
+    },
+    {
+      "doi": "10.1021/acs.jpcb.5c04393",
+      "original_authors": "Vargas-Rosales; Giangreco; Caflisch",
+      "first_published": "2025-08-27",
+      "type": "tau_filament_molecular_dynamics_simulation",
+      "field_original": "100,200 mV/nm",
+      "field_si_v_m": [
+        100000000,
+        200000000
+      ],
+      "frequencies_hz": [
+        100000000,
+        1000000000,
+        10000000000
+      ]
+    }
+  ],
+  "separate_original_2019_ACS": {
+    "doi": "10.1021/acschemneuro.8b00490",
+    "authors": "Saikia et al.",
+    "abstract_inspected": true,
+    "SI_catalogue_seen": true,
+    "full_SI_bytes_acquired": false,
+    "matched_Rodin_Helmholtz_60_percent_original_evidence_acquired": false
+  },
+  "computation": {
+    "jacs_max_over_2019_rsc_max": "20000/3",
+    "jpcb_min_over_2019_rsc_max": "10000/3",
+    "jacs_lowest_stated_freq_over_historical_marketed_15hz": "4000000/3",
+    "consumer_device_emitted_E_field_confirmed": false,
+    "ratios_are_biological_efficacy": false,
+    "md_is_clinical_study": false
+  },
+  "execution": {
+    "source": "scripts/check_psychotronics_ef_scale_original_roots.py",
+    "source_git_blob_sha": "ad19fb28940625cd7437ba6841bd1ad027f7a5dc",
+    "source_sha256": "5ce053ee876bd63dfd09949e1dad3e4f3f6231a91b533dfe1cad36579cb74aa4",
+    "wrapper": "tests/test_psychotronics_ef_scale_original_roots.py",
+    "wrapper_git_blob_sha": "68e545192f9f8bbd2e8255f93870f953efe4addb",
+    "cmd": "PYTHONPATH=scripts python -m unittest discover -s tests -p test_psychotronics_ef_scale_original_roots.py -q",
+    "new_cases": 12,
+    "passed": 12,
+    "failed": 0,
+    "source_exact_committed_git_hash_matched_local_executed_file": true,
+    "output_sha256": "35b928b48b40739d805ae77e4422204f181e39b85f7e08efdd75c79b39b48ae4",
+    "orig_simulations_rerun": false,
+    "agda_kernel_checked": false,
+    "ci_run": false
+  },
+  "attribution": "Experiments and publications retained by original named authors; Johl Brown research direction; OpenAI ChatGPT assisted source-bound computations; no same-object physics, treatment or historical extraordinary claim established.",
+  "report": "docs/research/psychotronics-2019-2025-original-ef-simulation-scale-maxcut-20261027.md"
+}

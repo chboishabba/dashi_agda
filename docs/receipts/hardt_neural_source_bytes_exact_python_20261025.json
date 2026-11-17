@@ -1,0 +1,39 @@
+{
+  "schema": "hardt-neural-source-byte-intake-exact-v1",
+  "date": "2026-10-25",
+  "owner": "chboishabba/dashi_agda PR #1252",
+  "status": "EXACT_GIT_BLOB_LOCAL_TEST_PASS",
+  "source": [
+    {
+      "path": "scripts/hardt_neural_source_bytes_gate.py",
+      "git_blob_sha1": "f38c28c580fb01d260a89d224220f411a336a84c",
+      "verified_against_exact_locally_executed_bytes": true
+    },
+    {
+      "path": "tests/test_hardt_neural_source_bytes_gate.py",
+      "git_blob_sha1": "970800922eb71112409e1d024aa3ec3a9a5a1b35",
+      "verified_against_exact_locally_executed_bytes": true
+    }
+  ],
+  "tests": {
+    "unittest_total": 5,
+    "passed": 5,
+    "failed": 0,
+    "local_status": "PASS",
+    "controls": [
+      "source, split and control/sham hashes actually replayed from three local files",
+      "tampering invalidates raw hash",
+      "absolute and parent traversal rejected",
+      "NaN/infinity/boolean/undersampled Nyquist rejected",
+      "source-origin synthetic flag cannot promote measured evidence"
+    ]
+  },
+  "provenance_boundary": "Matching hashes of local files does not independently authenticate an original publisher, instrument, calibration, rights, statistical design, neural state, physical field or causal effect.",
+  "experimental_outcome": {
+    "real_original_human_opm_data_ingested": false,
+    "actual_sensor_calibration": false,
+    "original_2026_spedden_v2_leadfield_downloaded": false,
+    "remote_influence_demonstrated": false
+  },
+  "separate_agda_status": "Not kernel typechecked; compiler absent locally"
+}

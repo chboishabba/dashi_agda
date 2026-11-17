@@ -5,6 +5,10 @@ module DASHI.Cognition.Everything where
 -- checkable but are also reachable through this parent.
 
 import DASHI.Cognition.CognitiveWarfareAdmissibleDetectionExact
+import DASHI.Cognition.PsychotronicsSuccorSourceAtlasExact
+import DASHI.Cognition.PsychotronicsSuccorAttributionRegression
+import DASHI.Cognition.PsychotronicsScreenshotDiscriminationExact
+import DASHI.Cognition.PsychotronicsColdWarTransmissionParetoExact
 import DASHI.Cognition.PlatoCaveTraumaMemoryDecisionBridgeExact
 import DASHI.Cognition.CaveTraumaNonErasingReopeningExact
 import DASHI.Cognition.CognitiveWarfarePlatoTraumaDetectorWeldExact

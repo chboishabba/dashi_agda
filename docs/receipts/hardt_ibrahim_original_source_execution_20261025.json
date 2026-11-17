@@ -1,0 +1,59 @@
+{
+  "schema": "hardt_ibrahim_original_source_maxcut_20261025_v1",
+  "source_authority": "Independent original published content and owner PR source, not physical/event validation",
+  "artifacts": {
+    "case_ledger": {
+      "path": "docs/research/hardt-ibrahim-crosslineage-caseledger-20261025.json",
+      "git_blob_sha1": "37786276a00544513643089129adb68f5e96f0c1",
+      "verification": "original GitHub JSON fetched and independently audited with 11 connector-JavaScript integrity/mutation checks"
+    },
+    "checker": {
+      "path": "scripts/check_hardt_ibrahim_crosslineage.py",
+      "git_blob_sha1": "a3db035dace159075b676320140b95177d832d5a",
+      "verification": "exact local Git blob hash match; actual Python executed"
+    },
+    "python_tests": {
+      "path": "tests/test_hardt_ibrahim_crosslineage.py",
+      "git_blob_sha1": "f13958a6b9e29e82b172739d0a20c5adf1aebb6b",
+      "verification": "exact local Git blob hash match; 10/10 unittest PASS on separately reconstructed semantically equivalent fixture"
+    },
+    "agda_module": "DASHI/Cognition/HardtIbrahimSourceRootMaxCutExact.agda",
+    "case_study": "docs/research/hardt-ibrahim-pareto-original-source-maxcut-20261025.md"
+  },
+  "results": {
+    "claims": 6,
+    "carrier_instances": 13,
+    "edges": 7,
+    "explicit_negative_joins": 6,
+    "source_actor_roots_for_hardt_assassination_claim": 1,
+    "independent_victim_event_or_trial_records_acquired": 0,
+    "original_hardt_unpublished_manuscript_acquired": false,
+    "original_2017_publication_type": "Opinion",
+    "github_json_connector_runtime_checks": "11/11 PASS",
+    "exact_github_script_and_tests_local_python_regressions": "10/10 PASS on reconstructed relationship-matched fixture",
+    "exact_original_github_json_rerun_under_python": false,
+    "agda_kernel_typechecked": false,
+    "rodin_2013_2024_matching_rounded_current_field_pairs": 3
+  },
+  "original_primary_source": {
+    "original_author": "James V. Hardt",
+    "title": "Your Wealth and Your Brain Waves",
+    "journal": "EC Psychology and Psychiatry 5(1), 16-21",
+    "date": "2017-08-24",
+    "url": "https://ecronicon.net/assets/ecpp/pdf/ECPP-05-00148.pdf",
+    "original_publisher_pdf_screenshot_pages": [
+      1,
+      6
+    ],
+    "reference_10_title": "How High Delta people can influence other people and the world around them",
+    "original_manuscript_content_read": false
+  },
+  "boundaries": [
+    "Original 2017 Opinion is not a remote intervention study",
+    "2017 approximately 80% alpha-occipital client distribution has no statistical join to later allegedly 80% remote-killing outcomes",
+    "original publication count is not independent actor/witness count",
+    "three same reported magnetic pairs prove table overlap, not raw data identity or wrongdoing",
+    "falsifiable case-specific static checks do not validate historical allegations, quantum new fields, Agda proofs or human measurements"
+  ],
+  "software_status": "Case-specific ledger, ten Python regression tests, and case-typed Ibrahim owner committed on PR #1252; no claim of kernel CI or original manuscript acquisition"
+}

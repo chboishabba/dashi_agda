@@ -1,0 +1,79 @@
+{
+  "schema": "dashi.hardt.rai2025.event_dyad_dependence.v1",
+  "as_of": "2026-10-27",
+  "pull_request": 1252,
+  "parent_pull_request": 1242,
+  "original_publication": {
+    "first_party_authors": "Rai, Lee, Becke, Trenado, Abad-Hernando, Sperling, Vidaurre, Wald-Fuhrmann, Richardson, Ward, Orgs",
+    "doi": "10.1016/j.isci.2025.112922",
+    "study_type": "original observational human EEG",
+    "reported_live_event_sizes": [
+      20,
+      18,
+      21
+    ],
+    "retained_live_eeg": 59
+  },
+  "separate_dataset": {
+    "authors": [
+      "Laura Rai",
+      "Guido Orgs"
+    ],
+    "doi": "10.5522/04/28508744.v1",
+    "declared_n": 57,
+    "inventory_acquired": false,
+    "participants_reconciled": false
+  },
+  "source_dependent_method": {
+    "original_cca_replayed": false,
+    "original_osf_code_fetched": false,
+    "distinct_software_roots_authenticated": false,
+    "performance_feature_granger_not_direct_brain_causing_brain": true
+  },
+  "synthetic_new_results": {
+    "possible_same_event_pairs": [
+      190,
+      153,
+      210
+    ],
+    "total_possible_pairs": 553,
+    "overlapping_dyad_pairs_sharing_participant": 9858,
+    "perfect_r_squared_synthetic_dyads": 553,
+    "synthetic_between_person_edges": 0,
+    "event_sign_randomization_worlds": 8,
+    "hypothetical_two_sided_p": "1/4",
+    "invalid_dyad_independent_sign_p": "1/2^552",
+    "actual_Rai_assignment_randomization_not_asserted": true,
+    "actual_Rai_permutation_method_not_reproduced": true
+  },
+  "execution": {
+    "source_file": "scripts/check_hardt_rai_event_dependence_cut.py",
+    "source_git_blob_sha1": "b4560557d81d024bf1acb46f57c42664acb2e9bb",
+    "tests_file": "tests/test_hardt_rai_event_dependence_cut.py",
+    "tests_git_blob_sha1": "84a7e673304b9d51b2f886bb4d61c65755124174",
+    "locally_executed_file_matches_remote_git_blob": true,
+    "new_tests_run": 12,
+    "passed": 12,
+    "failed": 0,
+    "command": "PYTHONPATH=/mnt/data/hardt_cut_20261027/scripts python3 -m unittest discover -s /mnt/data/hardt_cut_20261027/tests -p test_hardt_rai_event_dependence_cut.py -v",
+    "prior_51_reported_in_separate_receipt": true,
+    "full_63_test_suite_reexecuted": false,
+    "agda_kernel_checked": false,
+    "ci_checked": false
+  },
+  "original_hardt_evidence": {
+    "historical_claim_repeat_is_independent_witness": false,
+    "original_reference_10_unpublished_manuscript_acquired": false,
+    "independent_event_outcome_denominator_authenticated": false,
+    "extraordinary_effect_measured": false
+  },
+  "status": "exact synthetic unit-dependence proof-of-principle, not empirical reproduction or historical corroboration",
+  "next_gates": [
+    "UCL dataset v1 original file/subject/timebase inventory with source custody and SHA",
+    "Four OSF cited code-locator inventories and source byte identities",
+    "Same-recording author-CCA processing and common-source/motion control",
+    "Same-object calibrated physical source/receiver chain",
+    "Benign randomized intervention only if physical pathway measurable",
+    "Exact-head Agda kernel checks and third-party research replication"
+  ]
+}

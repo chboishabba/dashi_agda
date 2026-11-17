@@ -1,0 +1,9 @@
+# Web-inspected ORIGINAL NOAA NCEI .dly single month record; NOT a source-native byte-custody or hash receipt.
+# Official original: https://www.ncei.noaa.gov/pub/data/ghcn/daily/all/USC00170371.dly
+# NOAA original station: BAR HARBOR 3 NW MAINE, USC00170371, 44.41667 -68.25; 1893-01-01 to 1982-08-31
+# https://www.ncdc.noaa.gov/cdo-web/datasets/GHCND/stations/GHCND%3AUSC00170371/detail
+# Browser source exact locator: NOAA station-month line 3403 (0-index) USC00170371195307PRCP.
+# NOAA readme https://www.ncei.noaa.gov/pub/data/ghcn/daily/readme.txt
+# Acquisition: 2026-10-26 browser extraction; the full .dly original was NOT downloaded or hash-authenticated.
+# Original 269-character July 1953 PRCP row, retained with all 31 day values and all three daily flags:
+USC00170371195307PRCP    3  0    5  0    0T 0    0  0    0  0    0  0  130  0    0  0   10  0    0  0    0  0    0  0  168  0   10  0   56  0    0  0    0  0    0  0    0T 0    0  0    0T 0    0  0   46  0  340  0    0T 0    0  0    5  0    0T 0    0  0    0  0    0  0

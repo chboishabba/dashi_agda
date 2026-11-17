@@ -1,0 +1,134 @@
+# Cold War psychotronics transmission — source audit retained
+
+## Newly verified Soviet → US bibliographic dependency (24 October 2026)
+
+**Original source:** Soviet compilers **E. K. Naumov and L. V. Vilenskaya** prepared their bibliography in **Moscow, 1971**, circulated as [JPRS 55557 on 28 March 1972](https://documents2.theblackvault.com/documents/cia/ufos/C05516145.pdf). The *original compilers' preface* is visibly present at **PDF index 8 (printed p.1)** and their names on the report title leaf. JPRS is a **translation/custody carrier**, not creator of the Soviet original bibliographic analysis. The 1981 expanded bibliography with the same compilers is a different *edition*, not an independent source root.
+
+**Direct, inspected later use:** the **U.S. Air Force Foreign Technology Division** prepared ***Paraphysics R&D—Warsaw Pact (U)*, DST-1810S-202-78**, dated **30 March 1978** and later revised [4 February 1980](https://www.dia.mil/FOIA/FOIA-Electronic-Reading-Room/FileId/238544/). Its **original 1978** method Appendix III, printed **p.122 / PDF index 129**, names the Naumov/Vilenskaya bibliography and its JPRS 55557 translation as the seed. Analysts explicitly say they located original documents and other works by the same authors and followed bibliographies; only about **30%** of known relevant documents had full-content evaluation at the time. That is a **direct scholarly research-method / citation lineage** to the original Soviet compilers, **not** Soviet science being independently replicated by the US military. The unchanged Appendix III p.123 additionally discusses unreliable informants, biased interviewing and conspicuous missing detail; those **methodological cautions are themselves primary US-source reports**.
+
+**Edition correction, critical:** the same scan's discussion of Pavlita at **printed p.18 / PDF index 29** is stamped **“DST-1810S-202-78-Chg 1 / 4 February 1980”**, although other pages retain **30 March 1978**. It says conventional **static electricity may partly explain** the reported effects. Attribute this *particular passage to the 1980 amendment*, not to an uninspected March 1978 version or a measured independent trial. The original 1974 Kitaygorodsky iron/air/heat demonstrations remain physically and historically distinct first-person experimental reports.
+
+**Directed graph, preserving role and years:**
+
+```mermaid
+flowchart TD
+  Soviet["Naumov / Vilenskaya 1971 original source bibliography"]
+  JPRS["JPRS 55557, 28 March 1972 English carrier"]
+  USAF["US Air Force DST-1810S-202-78, 30 March 1978 original methods p122"]
+  Revision["Same report Change 1 / 4 Feb 1980, amended Pavlita analysis p18"]
+  Seed["Source-specific papers sought by original-author snowball"]
+  Soviet -->|"translation / edition carrier, not separate experiment"| JPRS
+  JPRS -->|"EXPLICIT citation as source-search seed"| USAF
+  USAF -->|"analysts describe sampling + source acquisition"| Seed
+  USAF -->|"document revision; amended pages"| Revision
+```
+
+**Public first-party methods missing:** the [1973 Prague original Part I JPRSL50221](https://ntrl.ntis.gov/NTRL/dashboard/searchResults/titleDetail/JPRSL50221.xhtml) remains publicly limited in print distribution; NTIS states government-only paper copies. Separate **1975 Monte Carlo** paper locators are now specific: Robert Pavlita, *Vertical Biomagnetic Field of Generator*, **p.203**, and Jana Pavlitová-Zapadlová, *Probe Controlled by Impulse from the Brain*, **p.206** in indexed congress papers. *Martin Ebon 1983* quotes from their translations but cannot substitute for native experiment pages. A third author pair D. Dean/E. Brame, *Physical Changes in Water by Laying-on-of-Hands?*, **p.200**, is an unexamined water research source, not an experiment by Pavlita or modern PAW.
+
+The **historical owner now has 21 attributed document instances**, including original compilers and translated/updated carriers, without creating a twenty-first independent experiment. [Critical review](psychotronics-literature-review-20261024.md) | [51-entry corpus](psychotronics-literature-corpus-20261024.csv) | [seven-effect comparison](psychotronics-pavlita-experiment-comparison-20261024.csv) | [Current Pareto](psychotronics-pareto-current.md). The Agda owner uses **a concrete directed `BoundedHistoricalEdge` and Ibrahim investigative claim receipt** for the citation. No new evidence ontology and no 5D extrapolation.
+
+
+> **Critical 1974 original recovered, 24 October 2026.** Physicist **Alexander I. Kitaygorodsky's own full first-person article** is in the native [*Nauka i Zhizn*, issue 10 (1974) publisher archive](https://www.nkj.ru/archive/articles/52740/). It explicitly identifies a first Czech ***Vesmír* issue 2 (1974)** publication. The same author's Russian text reports **iron dust on a match**, **hand-driven airflow on a vane**, **thermal convection inside a motor-vane box** (reported 2–3°C gradient). **These are different conventional physical mechanisms, not a single electrostatic explanation**, and the piece does not test water/plant/insect claims. Original Czech copy/films/logs unavailable. The original magazine's **1974** date is supported independently by a [1981 Naumov–Vilenskaya bibliography, printed p.36, entry 29](https://documents2.theblackvault.com/documents/cia/stargate/STARGATE%20%234%20176/Part0001/CIA-RDP96-00788R001300230001-3.pdf), which lists no.10 pp.65–68. A later historical bibliography's **1977** dating should not supersede these original/earlier references.
+>
+> The historical Agda consumer now contains **17 attributed source instances** (one new Kitaygorodsky original author-text), plus an existing Ibrahim claim receipt for what the author **reported**, not a new independent laboratory experiment. The comprehensive [45-record source corpus](psychotronics-literature-corpus-20261024.csv), [separate claim-level effect comparison](psychotronics-pavlita-experiment-comparison-20261024.csv), and [critical review](psychotronics-literature-review-20261024.md) supersede older statements that the entire negative experimental evidence existed only via 2017/2021 secondary histories.
+
+
+**Superseded as a priority plan by [the full critical literature review](psychotronics-literature-review-20261024.md) and [32-record source corpus](psychotronics-literature-corpus-20261024.csv).** The source graph remains an evidentiary supplement; documentary lineage is a component of the review, not its sole purpose.
+
+**Older snapshot: source owner then had 17 historical instances, including six review-specific references with reported counter-literature; prior ten-source graph/links unchanged.**
+
+**Current as of 24 October 2026.** This is a consumer-specific Pareto / snowball / Ibrahim graph over the **existing** DASHI research infrastructure. Historical-source owner: `DASHI/Cognition/PsychotronicsColdWarTransmissionParetoExact.agda`. Parent [psychotronics Pareto](psychotronics-pareto-current.md). Prior [attribution investigation](psychotronics-succor-punch-attribution-20261024.md).
+
+## Central answer
+
+The evidence **does** establish direct document reuse from **Sheila Ostrander and Lynn Schroeder, *Psychic Discoveries Behind the Iron Curtain* (Prentice-Hall, 1970)** into **Louis F. Maire III and J. D. LaMothe, *Soviet and Czechoslovakian Parapsychology Research (U)* (September 1975)**. The scanned 1975 report's *Selected Bibliography*, **printed p.69, PDF index 66, entry 5**, explicitly names the 1970 book. The scan's authors/title/task and **information cut-off date 15 April 1975** appear on PDF index 2; it was prepared by US Army Medical Intelligence and Information Agency, Office of the Surgeon General, for a Defense Intelligence Agency task. **Authorship is Maire/LaMothe; DIA is institutional sponsor/tasking recipient, not an invented anonymous experimenter.**
+
+This is a strong **source-transmission** edge, not corroboration of psychic energy, nor proof that every 1975 report passage was copied from the book. The same US report separately cites 1973 Prague conference papers and other sources. Claims of Soviet/Czech experimental effectiveness must be traced to each original report/experiment, not inferred from an intelligence agency's having discussed them.
+
+## Three distinct evidence layers
+
+### 1. Primary actor/institutional documents
+
+| Date | Original actor | Exact carrier / claim | Status and limitation |
+|---|---|---|---|
+| 30 Oct 1940 | Josef Wimmer, SS Ahnenerbe-associated researcher | [Assessment of confiscated dowsing and pendulum literature](https://digitalcommons.ursinus.edu/dowsing/25/), Ursinus folder XII documents 38, 42 | Actual authorial memorandum discussing censorship, proposed scientific control and Ahnenerbe review; NOT proof of dowsing efficacy |
+| 20 Nov 1940 | Wolfram Sievers writing Reinhard Heydrich | [Letter](https://digitalcommons.ursinus.edu/dowsing/13/), folder XII document 18, discusses Wimmer's assessments and oversight | **Direct documentary administrative reference** to Wimmer; institutional inquiry, not working weapons |
+| 1962 original / 1963 authorised English translation | Leonid L. Vasiliev | [*Experiments in Mental Suggestion* Wellcome catalogue](https://wellcomecollection.org/works/ygf3wazt) | Identity and Western translated publication established, **not original experiments inspected**; distinguish 1962 Russian original and 1963 English carrier |
+| 1970 | Sheila Ostrander & Lynn Schroeder | [*Psychic Discoveries Behind the Iron Curtain*, first edition](https://books.google.com/books/about/Psychic_discoveries_behind_the_Iron_Curt.html?id=Od4vAAAAYAAJ) | Public book about reported Eastern Bloc research; authors **say** they handled generators and watched demonstrations. This is first-person journalistic testimony, not controlled independent verification |
+| 1973 conference / 1974 US translation | Prague conference authors, Joint Publications Research Service for US translation | [NTIS JPRSL50221 Part I](https://ntrl.ntis.gov/NTRL/dashboard/searchResults/titleDetail/JPRSL50221.xhtml) | **Bibliographic catalogue and contents paid**; full original participant paper methods not acquired. Seek Pavlita/Rejdák protocols without treating the English translated title as the original creator's title |
+| Sep 1975 (cutoff Apr 15) | Louis F. Maire III; Major J. D. LaMothe, MSC | [69-page scan DST-1810S-387-75](https://www.theblackvault.com/documents/parapsychology/sovczech.pdf), PDF index 2 authors, 66 bibliography | The report discusses Pavlita devices and reported telepathy/psychokinesis. Its existence is evidence of US intelligence interest/reporting **not validation of reported paranormal effects** |
+| 6 Sep, 24 Oct, 31 Oct 1985 | Czechoslovak Minister of National Defence and army intelligence officials | [Security Services Archive summary](https://www.abscr.cz/en/archivalie/psychotronics-in-the-czechoslovak-peoples-army/) | Archivist **reports** a ministerial instruction, later reports and requests to Soviet/GDR military intelligence. Original file images/fonds record not retrieved; requests are **not evidence that cooperation was accepted or a joint project succeeded** |
+
+**Important policy and authorship boundary:** The Nazi Ahnenerbe actor documents describe interest, management and repression of dowsing literature. They do not link a technical Nazi device to later Soviet or Czech psychotronics. They also **do not** imply Wilhelm Reich worked for the Nazi programme. Historical coexistence, shared electric-field vocabulary and state secrecy are not transmission receipts.
+
+### 2. A documented PUBLIC-to-INTELLIGENCE transmission edge
+
+```mermaid
+flowchart TD
+  A["Eastern Bloc claims and demonstrations (original protocols often not acquired)"]
+  B["Ostrander & Schroeder, public book (1970)"]
+  C["Maire & LaMothe, US intelligence analytic report (1975)"]
+  D["Kirkus public review (1970)"]
+  E["Czechoslovak military records (1985); archive summary"]
+  F["Nazi Wimmer / Sievers correspondence (1940)"]
+  G["Modern copper/coils/5D sellers"]
+
+  A -. reported by authors .-> B
+  B -->|"EXACT citation: selected bibliography #5"| C
+  B -->|"independent review of book, not psychic replication"| D
+  F -. "similar historical ambition, no transmission documented" .-> A
+  C -. "no sourced design transfer" .-> G
+```
+
+**The dotted links are NOT transmitted original hardware or proven communication.** The unconnected 1985 Czech military archive node is a later, separate record family: no impossible 1985→1975 citation arrow exists. The actual directed documentary edges in the typed graph are Wimmer→Sievers, 1970 book→1975 report, and book→contemporary review. Czech requests are represented **separately** as reported requests, not invented letters of acceptance.
+
+Later combined editions and online chapter transcriptions provide additional access to book passages, but they are **the same authorial testimony**. A 1997 combined *Psychic Discoveries* edition's chapter 26 uses **p.285** for Pavlita's devices; the scanned **1973 British *PSI* edition's chapter 28 starts p.368**. These are **edition-specific locators**, not a claim that original 1970 pagination is identical. The first 1970 text and each original Pavlita report remain to be checked against the reprints.
+
+### 3. Independent physical controls, not cultural authority
+
+- **J. O. Pehek, H. J. Kyler and D. L. Faust**, [*Image modulation in corona discharge photography*, *Science* 194(4262):263-270, 15 Oct 1976](https://pubmed.ncbi.nlm.nih.gov/968480/), DOI **10.1126/science.968480**: documented independent physical analysis explaining much Kirlian photographic variability through **moisture, electrode configuration, waveform, circuit resistance and corona inception**. This does **not** say a person cannot have meaningful subjective experiences; it does challenge using a coloured corona photograph alone as evidence of a previously unknown aura.
+- **Ivan Souček**, [*Medical Pluralism During and After Socialism*, *Český lid* 107(1):51-69 (2020)](https://ceskylid.avcr.cz/media/articles/712/submission/original/712-2425-1-SM.pdf), DOI **10.21104/CL.2020.1.03**: peer-reviewed, partly ethnographic/secondary historical analysis of the **institutions and social strategies** of Czechoslovak psychotronics. Souček reports growth of conferences and research organisations and documents social adaptation; it does not validate energy transfer or prove that every claim repeated by practitioners is accurate.
+- **Kirkus**, [21 Apr 1970 contemporaneous review](https://www.kirkusreviews.com/book-reviews/a/sheila-lynn-schroeder-ostrander-2/psychic-discoveries-behind-the-iron-curtain/): independent **public circulation/reception** witness for the book, a derivative account of its alleged paranormal phenomena. Do not count as an independent psychic experimental witness.
+
+## Attribution / Snowball / Ibrahim rules actually reused
+
+- `AttributedSourceCore` owns original author/title/publication/DOI/canonical URL and the proof/authority non-import guard.
+- `SnowballAttributionProvenanceInvariantExact` keeps source-role, relation, visibility and authority/proof axes under downstream projection.
+- `SnowballOSINTAcquisitionInvariantExact` distinguishes an archival **summary of underlying files** from the native originals; metadata/snippets are discovery coordinates, not inspection or proof.
+- `IbrahimSnowballInvestigativeClaimSourceLineageBidiExact.InvestigativeClaimReceipt` records an **exact observed bibliography span**, primary role, inspection, **dependency on the 1970 original**, what was and was not paid.
+- `IbrahimSnowballParetoFrontierExact.ParetoFrontierLeaf` supplies rank/status, paid source, unpaid residual, test and downstream consumer. **Local ranks here do not change** the separate globally governed 2014 first-link historical dump/pruning frontier.
+- `IntersectionalNonFactorability` provides a **synthetic two-world counterexample**: the same modern 'invisible energy machine' vocabulary can occur with or without actual historical contact. It demonstrates the inferential limit of motif matching; no claim that absence has been historically proved.
+
+## 2026 literature-review delta to this narrow transmission graph
+
+The [current 36-record literature corpus](psychotronics-literature-corpus-20261024.csv) and [critical review](psychotronics-literature-review-20261024.md) add three crucial first-party versus secondary distinctions to this historical supplement.
+
+**Exact first-party source locator:** Robert Pavlita and Jana Pavlitová-Zapadlová, *Inductive Effect of the Human Organism on Matter*, **1973 Prague proceedings Part I p.64**, indexed in the combined contents of the 6 September 1974 JPRS translation. The digitised Part II contains a shared table of contents, not the Part I paper's experiment body. Its actual apparatus methods, figures and results have **not** been inspected.
+
+**Reported Soviet-led negative institutional appraisal:** Veronika Kindlová's Czech Radio Plus feature, [republished 15 August 2026](https://plus.rozhlas.cz/statni-bezpecnost-spolupracovala-i-s-psychotroniky-jeden-chtel-atomovy-hrib-9455137) from an April 2025 programme, says Czechoslovak StB supplied Pavlita an experimental laboratory in operation **Mefisto**, then closed it after months without extraordinary results following assessment by a Soviet-led commission. This is a **journalist-source historical summary**, distinct from a native StB/1972 lab file and distinct from 1985 Czech defence approaches to Soviet/GDR intelligence. It can corroborate the reported *institutional storyline* without serving as an independently verified electrical experiment.
+
+**Proponent technical counter-history:** Serge Kernbach's [2013 authored preprint](https://arxiv.org/abs/1312.1148) reports the conceptual progression from Pavlita passive shapes to later Soviet Beridze-Stakhovsky/Cerpan and Akimov spin/torsion devices; also raises hypothetical Nazi-era microwave research as a postwar precursor. These are **attributed historical and physical hypotheses**; without actual first-party apparatus logs or transmission receipts they do not establish functioning exotic radiation or a Nazi→Soviet technology transfer. Preserve Kernbach's authorship, the distinction between standard microwave biological effects and alleged torsion radiation, and the post-1970 dates of the later claimed systems.
+
+The strongest remaining scientific-literature cut is now **paired inspection of the original Pavlita paper and original negative-investigation materials on the same effects**, not speculative reconstruction of a hidden uninterrupted technology chain.
+
+## Priority and stop conditions
+
+| Rank | Exact remaining obligation | Paid today | Close only when |
+|---|---|---|---|
+| **P0 — achieved** | Direct Western public-to-intelligence document link | Explicit 1970 book **cited at 1975 report p.69 item 5**, independent book bibliographic record, author/task metadata | **Done for citation edge only**, not individual experiment claims |
+| **P1 — highest** | Pavlita's **first-party** construction papers & original experiments | 1970 journalist chapter and 1975 US analytic passage identify original generator claims; 1973 Prague proceedings **catalogued** | Retrieve original Pavlita/Rejdák paper, original experiment setup, drawings, controls and chain to specific Western passage; do not substitute later book paraphrase |
+| **P2** | 1985 Czech → Soviet/GDR cooperation requests | Archivist account specifies order and correspondence sequence | Exact original file IDs, outgoing letters, incoming replies, funded experiment records; distinguish request from acceptance, research from effective apparatus |
+| **P3** | Soviet primary protocols (Vasiliev and contemporaries) | 1962 original/1963 translated **bibliographic identity** | Read specific protocols and original criticisms/replications; establish whether electromagnetic shielding controls were adequate rather than inferring from title |
+| **P4** | Nazi Ahnenerbe 1940 administrative activity | Wimmer and Sievers original correspondence with exact locators | Further correspondence **only** if a concrete transmission bridge appears; otherwise historically settled *documented interest, not working energy technology* |
+| **P5** | 1970 → 2002 Croft or 2026 Rodin/iTorus direct influence | Word and mechanism parallels, source family known | Creator's actual bibliography, dated statement citing a particular page, or same-object circuit provenance; no presumed Nazi/Soviet ancestry |
+| **P6** | Psychology/PEMF/5D effect tests | Existing protocol/rank work and modern apparatus leads | Defer. First procure actual device field/sound records; no further 5D theory or sham-arm optimisation until hardware data |
+
+### Final status
+
+This is a **bounded historical research output**, not a new evidence ontology, a paranormal-power finding, a Nazi technology-transfer thesis, or a completed empirical replication. In particular, source counts are *document instances*, not number of independent proofs. Existing psychological and physical study specifications remain archival downstream consumers; focus of the new cut is specific documentary transmission and its outstanding first-party chain.
+
+Local acceptance (no CI needed):
+```sh
+agda -i . DASHI/Cognition/PsychotronicsColdWarTransmissionParetoExact.agda
+agda -i . DASHI/Cognition/Everything.agda
+```

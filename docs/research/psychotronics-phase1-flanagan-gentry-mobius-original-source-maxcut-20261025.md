@@ -1,0 +1,65 @@
+# Phase 1 original coil-winding origins — Flanagan, Gentry, Croft, and independent Möbius/Klein branches
+
+**Current ledger correction (25 October):** Subsequent parallel original-source work expanded the Phase-1 graph to **[38 source roles](psychotronics-phase1-literature-landscape-20261025.csv)** and **[54 edges](psychotronics-phase1-lineage-edges-20261025.csv)**. The `31/39` figures below refer to the **snapshot when this specific Flanagan/Gentry survey was first compiled** and must not be advertised as present totals. The later [2013/2024 Rodin table concordance](psychotronics-phase1-rodin-2013-2024-magnetometry-provenance-audit-20261025.md) is a separate, partly same-author scientific source-dependence object; neither it nor broader academic Rodin work corroborates a Croft/Gentry/Flanagan personal transfer.
+
+
+
+**25 October 2026 (Brisbane) · PR #1242 · documentary max-cut.** This report follows the user's explicit Phase-1 scope: **literature review, critical landscape, Pareto/Ibrahim source-root snowball and attribution**. Do **not** substitute native video, owner-controlled electronics/force testing, the optional Field Loom, new Agda theorem development or hardware construction as Phase-1 acceptance gates. Source additions appear in the [31-record source-role ledger](psychotronics-phase1-literature-landscape-20261025.csv) (P1-23–P1-31) and [39-edge original/dependency ledger](psychotronics-phase1-lineage-edges-20261025.csv) (E29–E39). Their original roots overlap earlier 61-row literature and existing screenshot-era Agda inventories; **the counts are classifications, not numbers of independent corroborations**.
+
+## Highest-alpha new timing: a Croft document internally dated 9 December 2002
+
+A later-hosted [full text copy](https://docsbay.net/doc/1283478/livea-cherish-s-ruminations-and-is-my-cb-working-advice-7-20-02) begins with the internal author/title line **`SUCCOR PUNCH December 9, '02 by Don Croft`**. It directly has Croft saying that **Gentry Smith gave him written directions for making a Möbius coil**, and saying Smith had received them from **Patrick Flanagan** during earlier work together. The body goes on to describe the Croft Succor Punch as a quartz crystal, winding, 15-Hz frequency box and 9-V battery. This is a stronger author-content **chronology** than depending solely on the *separately undated* Croft answer preserved near a February 2008 item about Welz.
+
+The hosting **page title** misleadingly includes `7/20/02` for a different article; **do not date this Croft text July 2002 from the hosting title**, or treat the later hosting upload as his 2002 site metadata. The 9 December 2002 line is an **internal author-text date**, not a recovered first-party server timestamp or a verified physical artefact. An original 2002 publisher capture/header would upgrade preservation provenance, but absence of this does not erase what the surviving text actually says.
+
+**Source-independence firewall:** both the older internally dated Croft article and the subsequent [Croft Zappers archive](https://www.croftzappers.com/the-don-croft-archives) repeat **Croft's own testimony**. This improves the original claim's dating and specificity; it does **not** create an independent eyewitness named Gentry or Flanagan, independent recorded employment, transferred original coil sketch, or any established efficacy. The claimed personal chain is:
+
+```text
+Patrick Flanagan --[Croft attributes source to Gentry]--> Gentry Smith
+Gentry Smith --[Croft reports receipt of written instructions]--> Don Croft
+Don Croft --[original 2002 author account]--> quartz/15 Hz Succor Punch
+```
+
+Only **Croft's first-person end of the chain** is documentary testimony in the recovered sources. The reverse arrow source-authorship/geometry match is open. Croft's additional conspiracy/medical/psychic narratives are **attributed claims, not findings**.
+
+## A genuine earlier Flanagan Möbius bibliography — with a material uncertainty
+
+An [indexed *Unorthodox Energy* bibliography compilation](https://www.scribd.com/document/372432913/Cejka-UnorthodoxEnergyDataBaseAssembledbyTomValone-pdf) contains an entry for **G. Patrick Flanagan, “Ain't Electronics Wonderful,” *Electronic Engineering Times* (1979)**, associating the article with a left-handed Möbius antenna and 6–10 Hz bodily response claims.
+
+**Acceptance ceiling:** the index presents **incompatible metadata** (`29 October 1979, p. 38` in one appearance, versus `27 October 1979, p. 3B` in another), and the actual original issue/article was **not recovered**. Neither its actual authorship nor its circuit diagram, winding recipe, bioelectromagnetic protocol or purported results is confirmed by reading the original page. Treat this as a **high-information microfilm/periodical retrieval candidate, not a first-party technical witness already acquired**.
+
+A different [Glen Rein author-attributed paper](https://www.item-bioenergy.com/infocenter/BiologicalEffectsofQuantumFields), published as *Frontier Perspectives* **7 (1998), 16–23** according to the author-title mirror, references a **“Flannigan (1979)”** Möbius skin-conductivity report. That spelling variation, unspecified periodical and claims scope are **not yet sufficient to weld the reference to “G. Patrick Flanagan” in the database**. Acquire the original Rein bibliography and original 1979 page before the two references are merged as identical. Rein's paper is a **source-owned speculative biophysical claim with a literature reference**, not a confirmed replication or a physical demonstration of non-Maxwell quantum signals.
+
+## Original first-party Flanagan patents: author confirmed; SAME winding not confirmed
+
+- [**US4391773A**](https://patents.google.com/patent/US4391773A/en), *Method of purifying air and negative field generator*, original inventor **Gillis Patrick Flanagan**, priority/filing **8 June 1981**, granted **5 July 1983**. Original patent body concerns air purification using electrodes/dielectric structures. No `Möbius` or `coil` text was found in the indexed specification.
+- [**US4743275A**](https://patents.google.com/patent/US4743275A/en), *Electron field generator*, same inventor, priority **25 August 1986**, grant **10 May 1988**. Conductive/dielectric dispersed-material arrangement and an electric-field mechanism. No `Möbius`/`coil` text matched in the indexed specification.
+
+**These are genuinely earlier, original, attributable Flanagan technical works.** They establish original inventor activity, not evidence the alleged Flanagan→Gentry→Croft specific winding was the same apparatus. In particular, an electric-field generator in Flanagan's name cannot stand in as a Gentry letter, quartz winding instruction or experimental proof.
+
+## Independent Möbius/Klein research roots and the *actual* citation connection
+
+- [**Andrija Puharich**, author-attributed invited paper](https://www.rexresearch.com/puharelf/puharich.htm), *Method and Apparatus for Shielding a Person from the Polluting Effects of ELF Magnetic Waves*, identifies **12 August 1984 Tesla Centennial Symposium**, and discusses Möbius-twisted tape/braid, field loops and claimed ELF/EEG shielding. The full later-hosted author text was read; original conference proceedings imprint remains uninspected. Its biological, anti-ELF, scalar and consciousness claims have **no independently verified efficacy here**.
+- [**Isao Osakabe**, Japanese patent **JPH0281404A**](https://patents.google.com/patent/JPH0281404A/en), *High efficiency klein coil*, **filed 16 September 1988**, **published 22 March 1990**. The patent describes a winding scheme with Möbius/Klein terminology, plus inventor claims about imaginary electromagnetic fields and gravity. The Japanese original and Google-translated text have been compared in the patent listing; the translated technical terminology is not an established physical new field.
+- [**Olaf Peters**, patent **US6512439B1**](https://patents.google.com/patent/US6512439B1/en), *Coil*, **priority 11 November 1999**, **WO family publication 17 May 2001**, US grant **28 January 2003**. The original specification concerns multiple offset bifilar/crossing windings; the family directly lists **Osakabe's JPH0281404A** as cited patent prior art and **Shinichi Seike (1994)** in non-patent citations.
+
+**This is the most solid new patent genealogy: Osakabe → Peters is an explicit cited-prior-art relationship.** It might originate from patent examination, not voluntary inventor acknowledgement, and does not prove Peters actually copied Osakabe's device. Importantly, **a private 1999 filing/priority is not evidence the invention was already publicly known to Croft when he reportedly received separate instructions in late 1999**. The first WO family publication is **2001**, and no patent/author statement links Peters with Gentry, Flanagan, Croft, Rodin, Aurumaya or the 24-point Starship seller.
+
+- [**New Energy News, March 1999: “Smith Coil”**](https://padrak.com/ine/NEN_6_8_8.html), original publisher/article text, explicitly credits **Wilbert Brockhouse Smith** and a ferrite-rod **caduceus winding**, with attributed non-Hertzian/tensor claims. He is **not** thereby **Gentry Smith** from Croft's 2002 testimony (nor the distinct inventor Don Smith). This is a **high-value false-name-collision exclusion**, not a positive edge to the Croft apparatus. The newsletter republished an older Planetary Association for Clean Energy account, also **not two independent coil demonstrations**.
+
+## Phase-1 updated documentary Pareto
+
+| Priority | Question / original object | Current evidence and highest-value missing object | Stop rule |
+|---|---|---|---|
+| **1 — High** | What exact original instruction did **Gentry Smith** pass to **Don Croft**? | Two Croft-authored later-preserved texts now report the handoff; seek **Gentry-authored dated instructions, correspondence, or directly attributable Flanagan/Gentry winding manual** | No third-person Croft mirrors, unrelated Smith-family search or magnetic-testing substitute |
+| **2 — High** | Did **G. Patrick Flanagan's** 1979 periodical piece discuss precisely this winding? | Secondary bibliographic index locates a likely issue but date/page conflict; **retrieve original *Electronic Engineering Times* article/scan** and inspect author, geometry and citations | Do not claim same-coil identity from “Möbius,” 8/15 Hz or Flanagan surname |
+| **3 — Medium** | Rein's **Flannigan (1979)** and indexed Flanagan (1979): one source? | Original Rein reference list and periodical article needed; the spelling mismatch is an acceptance test | Treat as unresolved variant, not two independent early biological experiments |
+| **4 — Paid source-root** | Osakabe 1988/1990 → Peters 1999/2001 patent relation | **Actual patent citation edge established** from original patent lists | Stop unless specific relation to photographed seller, Gentry or Croft appears |
+| **5 — Paid comparator** | 1984 Puharich, 1981/1986 Flanagan patents and 1999 W. B. Smith article | Original author/source/method categories discriminated | No unrelated scalar/psi further snowball without explicit original object/document connection |
+| **6 — Lower** | Croft's **9 Dec 2002** byline original-host verification | Later source contains dated authored text; original cached host or author archive could pay timestamp | Do not delay already-source-limited genealogy on inaccessible server metadata |
+
+**Broader scope remains unchanged:** the eight source-social accounts and 18 uploaded screenshots, wider Rodin/Volk/Nunez/Wong direct patent citation graph, Welz/Croft original material genealogy, iTorus, Oudin, Mayu, Pignatelli and Egely–Vértesy remain distinct owner/document categories in the [canonical Phase-1 review](psychotronics-phase1-literature-ibrahim-pareto-20261025.md). Neither the **31 source-role rows** nor **39 relationship rows** are independent lab replicates. This follow-on is a precise original-source upgrade, **not** a fabricated connection across every branch.
+
+**Phase verdict:** historic claim geography and at least one real patent citation chain are established at their appropriate grades. The only material unclosed *personal transmission* producer is still Gentry/Flanagan's own authored record or demonstrably matching prior winding directions. Physical/health/quantum/antigravity claims are not promoted by bibliography, original patent, patent-office publication, printed testimony, name similarity, or a citation.
+
+**Verification note:** sources were inspected as original-web patent specifications, original attributed contemporary author text on later carriers, and original/secondary bibliographic index entries as specified above. No original 1979 magazine page, early Gentry note, 2002 original-host timestamp, original Japanese patent laboratory observation, scientific replication, Agda typecheck, CI or hardware test was obtained for this documentary cut. This limitation is part of the deliverable, not an invitation to replace Phase 1 with device metrology.

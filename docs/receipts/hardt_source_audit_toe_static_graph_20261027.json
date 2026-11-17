@@ -1,0 +1,55 @@
+{
+  "schema": "dashi.toe.source_audit_nonpromotion_graph.v1",
+  "date": "2026-10-27",
+  "pr": 1252,
+  "graphEntries": [
+    {
+      "path": "DASHI/EverythingTOESymmetryResolved369.agda",
+      "sha": "4329d0b42198db77ca3dd3e52869689d39310e52"
+    },
+    {
+      "path": "DASHI/Unifier.agda",
+      "sha": "1b2e2efe08bd34a855c1360712cd235966016708"
+    },
+    {
+      "path": "DASHI/Unified/Everything.agda",
+      "sha": "be6f6b8e955b5db3091662df6a7fb2c46b98f035"
+    }
+  ],
+  "importedProofOwners": [
+    "DASHI.Wikimedia.IbrahimSnowballInvestigativeClaimSourceLineageBidiExact",
+    "DASHI.Cognition.HardtIbrahimSourceRootMaxCutExact",
+    "DASHI.Cognition.HardtBrainInterventionNonidentifiabilityExact"
+  ],
+  "namedSymmetryTOEExports": [
+    "toeCitationIsNotInspection",
+    "toePrimaryIsNotTruth",
+    "toeMentionsAreNotIndependentEvidence",
+    "toeNoPassiveObservationDecoder"
+  ],
+  "sourceEvidence": "GitHub code search and full exact-blob fetch for original theorem owner, aggregate and case modules",
+  "staticGitHubReadback": "PASS",
+  "preflight_cli_repository_source_found": true,
+  "preflight_referee_executed": false,
+  "agda_kernel_executed": false,
+  "ESD_files_edited": 0,
+  "limitations": [
+    "Static import graph is not Agda kernel verification",
+    "Pre-existing axiomatized Unifier surfaces remain unproved physical statements",
+    "No empirical historical event or novel neural coupling established",
+    "No code copied from meta-introspector repositories"
+  ],
+  "standard_alignment_only": [
+    "ITIL",
+    "ISO 9000",
+    "ISO/IEC 42001",
+    "ISO/IEC 27001",
+    "ISO/IEC 27701",
+    "ISO/IEC 23894",
+    "ISO 9241",
+    "NIST AI RMF",
+    "Six Sigma",
+    "C4/PlantUML"
+  ],
+  "report": "docs/research/hardt-source-audit-toe-import-convergence-20261027.md"
+}
