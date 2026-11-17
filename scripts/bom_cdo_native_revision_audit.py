@@ -142,7 +142,17 @@ def audit(manifest,root):
     # variable's count with the next at multi-product locations.
     historical_counts = Counter()
     historical_products = Counter()
+    temperature_losses_all_dates = Counter()
+    temperature_losses_2025_2026 = Counter()
     for event in events:
+        if event['variable'] not in ('tmax', 'tmin'):
+            continue  # Lloyd's 571/593 concern TEMPERATURE, never rainfall.
+        loss = (event['before'] is not None and event['before'][0] != 'None' and
+                (event['after'] is None or event['after'][0] == 'None'))
+        if loss:
+            temperature_losses_all_dates[event['station']] += 1
+            if event['date'] >= '2025-01-01':
+                temperature_losses_2025_2026[event['station']] += 1
         if (event['date'] < '2025-01-01'
                 and event['before'] is not None
                 and event['before'][0] != 'None'
@@ -161,12 +171,17 @@ def audit(manifest,root):
                 {f'{s}:{v}':n for (s,v),n in sorted(historical_products.items())},
             'values_lost_including_disappearing_calendar_rows':
                 {f'{s}:{v}':n for (s,v),n in sorted(lost_values.items())},
-            'author_reported_target_only':{'pre2000_total':571,'066062':515,
+            'temperature_values_lost_all_dates':sum(temperature_losses_all_dates.values()),
+            'temperature_values_lost_2025_onward':sum(temperature_losses_2025_2026.values()),
+            'author_reported_target_only':{'before2025_total':571,'all_dates_total':593,
+                                            'from2025_total':22,'066062':515,
                                             '044022_or_044021':56},
             'before2025_target_numeric_match_only':sum(historical.values())==571
                                    and historical.get('066062')==515
                                    and sum(v for s,v in historical.items()
                                            if s in ('044022','044021'))==56,
+            'original_archive_coverage_verified':False,
+            'author_target_counts_independently_reproduced':False,
             'source_identification':'BOM CDO-formatted rows with matching SHA256; publisher identity requires independent provenance',
             'original_paper_authenticated':False,
             'climate_impact_computed':False,'events':events}
