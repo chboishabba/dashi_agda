@@ -58,7 +58,7 @@ record SameMaterial111OpticalExperiment : Set₁ where
 
 -- Exact source witness carriers must be paid independently. Their presence
 -- is NOT proven by the finite 269/580 ratio or the closed-form 6-state model.
-record SameArtifactPVConversionWeld : Set₁ where
+record SameArtifactPVConversionWeld : Set₂ where
   field
     SiteId Spectrum AngleDist Temperature Shading Soiling Wind Humidity : Set
     siteFibre :
