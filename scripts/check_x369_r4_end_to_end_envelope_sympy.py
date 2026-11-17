@@ -235,9 +235,18 @@ require("source exact GELU derivative factorization",
     S.simplify(S.diff(gelu,T)-(Phi+T*phi))==0)
 require("gaussian derivative extremum at |t|=1",
     S.simplify(S.diff(T*phi,T).subs(T,1))==0)
-Lg=1+1/S.sqrt(2*S.pi*S.E)
-require("positive admitted GELU global Lipschitz coefficient",
-    bool(Lg>1))
+# Reuse early LeechGELUParityHistoricalSafetySteelman20261031:
+# exact real GELU reflection and the sharp derivative extremum at
+# ±sqrt2. This replaces the loose 1+1/sqrt(2*pi*e) majorant.
+Lg=(1+S.erf(1))/2+S.exp(-1)/S.sqrt(S.pi)
+require("sharp source GELU global Lipschitz",
+    S.simplify(S.diff(gelu,T).subs(T,S.sqrt(2))-Lg)==0
+    and bool(Lg>1)
+    and bool(Lg<1+1/S.sqrt(2*S.pi*S.E)))
+Leven=Lg-S.Rational(1,2)
+require("even GELU parity Lipschitz coefficient",
+    S.simplify(S.diff(T*S.erf(T/S.sqrt(2))/2,T)
+                .subs(T,S.sqrt(2))-Leven)==0)
 # For fixed selected IDs and stable orientation charts, Euclidean
 # FFN bound Y_e <= ||W2||2 * Lg * ||W1||2
 #                  * sqrt(dx²+dh²) + eta_FFN_e
@@ -306,6 +315,64 @@ closed+=sum(etime[j]*S.prod(Ltime[k] for k in range(j+1,4))
             for j in range(4))
 require("four-step variable-L conditional recurrence exact expansion",
     S.expand(step-closed)==0)
+
+# GELU parity chart alternative: exact real FFN
+# F(z)=W2*GELU(W1 z+b1)+b2. For the ORIGINAL signed chart:
+# y_sigma(z)=sigma F(sigma z)=O_F(z)+sigma E_F(z)
+# (sigma=±1), with chart-flip jump 2 E_F. The earlier
+# LeechOddOnlyApproximationObstructionExact donor explains why
+# removing the even component is not a generic exact solution.
+# The original history transition is affine on
+# (sigma h, sigma x, F(sigma z)), followed by sign restoration,
+# so H_sigma=Th h+Tx x+Ty y_sigma+sigma bT (before cap).
+# This yields chart jump 2(Ty E_F+bT), NOT an arbitrary error.
+zsym,bsym,msym,bout=S.symbols("zsym bsym msym bout",real=True)
+geluf=lambda zz:zz*(1+S.erf(zz/S.sqrt(2)))/2
+Fchart=lambda zz:msym*geluf(zz+bsym)+bout
+Fpositive=Fchart(zsym)
+Fnegative=Fchart(-zsym)
+Echart=(Fpositive+Fnegative)/2
+Ochart=(Fpositive-Fnegative)/2
+require("original oriented FFN two-sign parity",
+    S.simplify(Fpositive-(Ochart+Echart))==0
+    and S.simplify(-Fnegative-(Ochart-Echart))==0)
+require("learned biased source chart flip is exactly 2 even",
+    S.simplify(Fpositive+Fnegative-2*Echart)==0)
+Th,Tx,Ty,bT,xscalar,hscalar=S.symbols(
+    "Th Tx Ty bT xscalar hscalar",real=True)
+Hp=Th*hscalar+Tx*xscalar+Ty*Fpositive+bT
+Hn=Th*hscalar+Tx*xscalar-Ty*Fnegative-bT
+require("original affine history chart jump",
+    S.simplify(Hp-Hn-2*(Ty*Echart+bT))==0)
+# Bound on EVEN projection centered at F(0) from GELU curvature:
+# |E_F(z)-F(0)| <= ||W2|| min(
+#   (Lg-1/2)*||W1 z||,
+#   ||W1 z||²/sqrt(2*pi)).
+# We do not claim this bounds the bias F(0) without checkpoint data.
+require("GELU curvature exact for quadratic chart budget",
+    S.simplify(S.diff(geluf(zsym),zsym,2)
+       -(2-zsym*zsym)*S.exp(-zsym*zsym/2)/S.sqrt(2*S.pi))==0)
+# R4 one-step signed-output and history difference may now be
+# bounded with a chart RESIDUAL instead of strict sign preservation:
+# Y_e <= Lffn||dz||+2*flip||E_F(z')||+eta_FFN.
+# H_e'<=||Th||||dh||+||Tx||||dx||+||Ty|| Y_e
+#          +2*flip||bT||+eta_transition
+# when the same selected IDs and q gate are certified.
+# Orientation/sign METADATA is not preserved under this relaxation.
+Lffn,delta_z,even_norm,flip,delta_h,delta_x,Thnorm,Txnorm,Tynorm,biasT,errFFN,errH=S.symbols(
+    "Lffn delta_z even_norm flip delta_h delta_x Thnorm Txnorm Tynorm biasT errFFN errH",
+    nonnegative=True)
+chartY=Lffn*delta_z+2*flip*even_norm+errFFN
+chartH=Thnorm*delta_h+Txnorm*delta_x+Tynorm*chartY+2*flip*biasT+errH
+require("conditional history chart residual transport",
+    S.simplify(chartH-(Thnorm*delta_h+Txnorm*delta_x
+        +Tynorm*(Lffn*delta_z+2*flip*even_norm+errFFN)
+        +2*flip*biasT+errH))==0)
+# The ± chart formula cannot silently consume the source's sign=0
+# fixed-point case: y=0 and h_next=cap(0)=0 when x=h=0.
+require("nonraw zero-sign chart distinct from ± biased maps",
+    S.simplify(0*Fchart(0))==0
+    and S.simplify(Fchart(0)-(msym*geluf(bsym)+bout))==0)
 
 # Conditional analytic consumer bounds:
 # ||softmax(z+dz)-softmax(z)||_1 <= max_i |dz_i|
