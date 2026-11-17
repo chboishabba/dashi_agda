@@ -34,6 +34,7 @@ import DASHI.Culture.MissingDeceasedInvestigativeAttributedSourceAtlasExact as A
 import DASHI.Culture.MissingDeceasedRosterExtensionNingLiNickPopeExact as Extension
 import DASHI.Culture.AmyEskridgeOSINTSnowballExact as OSINT
 import DASHI.Culture.AmyEskridgeDemiseCircumstancesSnowballExact as Demise
+import DASHI.Culture.AmyEskridgeVideoZoomClipSourceWeldExact as Zoom
 
 data EvidentiaryCarrier : Set where
   unpaidCarrier : String → EvidentiaryCarrier
@@ -43,6 +44,7 @@ data EvidentiaryCarrier : Set where
   atlasSource : A.AttributedSource → EvidentiaryCarrier
   historicalRoster : Extension.RosterExtensionReceipt → EvidentiaryCarrier
   obituaryRecord : Demise.DemiseSnowballAtom → EvidentiaryCarrier
+  clipSource : Zoom.ExactClipJoin → EvidentiaryCarrier
   pairedCarriers : EvidentiaryCarrier → EvidentiaryCarrier → EvidentiaryCarrier
 
 record VideoClaimJoin : Set where
@@ -58,22 +60,22 @@ open VideoClaimJoin public
 claimJoin001 : VideoClaimJoin
 claimJoin001 = video-claim-join
   Video.claim001
-  (unpaidCarrier "unlocated-00:00")
-  "The NSA-list and eleven-scientist membership are not evidenced by any named roster or NSA primary document"
+  (clipSource Zoom.openingThreat)
+  "Original Zoom 35:40-35:53; Amy recounts alleged threats, not an inspected threatening actor, agency record or causal proof"
   "Claim 001 at 00:00 remains subject to exact provenance/independent-evidence gate"
 
 claimJoin002 : VideoClaimJoin
 claimJoin002 = video-claim-join
   Video.claim002
-  (unpaidCarrier "unlocated-00:05")
-  "The NSA-list and eleven-scientist membership are not evidenced by any named roster or NSA primary document"
+  (clipSource Zoom.nsaFive)
+  "Original Zoom 30:44-31:22; Amy attributes NSA five-person list to alleged secret-space-program contact; no original NSA roster"
   "Claim 002 at 00:05 remains subject to exact provenance/independent-evidence gate"
 
 claimJoin003 : VideoClaimJoin
 claimJoin003 = video-claim-join
   Video.claim003
-  (unpaidCarrier "unlocated-00:11")
-  "The NSA-list and eleven-scientist membership are not evidenced by any named roster or NSA primary document"
+  (clipSource Zoom.fourSuppressions)
+  "Original Zoom 34:18-34:38; repeated informant allegedly asserted four suppressions; named cases and causal proof absent"
   "Claim 003 at 00:11 remains subject to exact provenance/independent-evidence gate"
 
 claimJoin004 : VideoClaimJoin
@@ -86,22 +88,22 @@ claimJoin004 = video-claim-join
 claimJoin005 : VideoClaimJoin
 claimJoin005 = video-claim-join
   Video.claim005
-  (unpaidCarrier "precise-Eskridge-recording-and-clip-time")
-  "Prior archived first-person intrusion report concerns a different allegation; original Lexus/P52 clip must be source-identified, then independently corroborated"
+  (clipSource Zoom.lexusSurveillance)
+  "Original Zoom 2:53:41-2:56:11; first-person report of surveillance, not independent confirmation"
   "Claim 005 at 00:31 remains subject to exact provenance/independent-evidence gate"
 
 claimJoin006 : VideoClaimJoin
 claimJoin006 = video-claim-join
   Video.claim006
-  (unpaidCarrier "precise-Eskridge-recording-and-clip-time")
-  "Prior archived first-person intrusion report concerns a different allegation; original Lexus/P52 clip must be source-identified, then independently corroborated"
+  (clipSource Zoom.lexusVehicle)
+  "Original Zoom 2:54:11-2:56:11; reported tinted Lexus and plates, not independently verified registries"
   "Claim 006 at 00:36 remains subject to exact provenance/independent-evidence gate"
 
 claimJoin007 : VideoClaimJoin
 claimJoin007 = video-claim-join
   Video.claim007
-  (unpaidCarrier "precise-Eskridge-recording-and-clip-time")
-  "Prior archived first-person intrusion report concerns a different allegation; original Lexus/P52 clip must be source-identified, then independently corroborated"
+  (clipSource Zoom.lexusPlateChange)
+  "Original Zoom 2:55:05-2:56:11; first-person report of person changing plate, no independent corroboration"
   "Claim 007 at 01:03 remains subject to exact provenance/independent-evidence gate"
 
 claimJoin008 : VideoClaimJoin
@@ -121,8 +123,8 @@ claimJoin009 = video-claim-join
 claimJoin010 : VideoClaimJoin
 claimJoin010 = video-claim-join
   Video.claim010
-  (unpaidCarrier "precise-Eskridge-recording-and-clip-time")
-  "Prior archived first-person intrusion report concerns a different allegation; original Lexus/P52 clip must be source-identified, then independently corroborated"
+  (clipSource Zoom.futureP52)
+  "Original Zoom 52:22-52:59; Amy reports P47/P52 future-human ideas, not physical evidence"
   "Claim 010 at 01:41 remains subject to exact provenance/independent-evidence gate"
 
 claimJoin011 : VideoClaimJoin
