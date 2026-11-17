@@ -74,6 +74,14 @@ is sufficient for the consumer after every finite number
 of transitions. This does not pretend that one-time readout
 equivalence implies transition stability.
 
+`encodedTransitionWeldImpliesFibreStability` and
+`compressedTransitionPreservesEveryFutureConsumer`
+close the POSITIVE same-state diagram:
+`E(step(x)) = stepCode(E(x))` together with current
+consumer-sufficiency implies sufficiency after every
+finite iterate. The exact source Leech/FFN/History MoE
+transition-to-code weld is still an independent obligation.
+
 `tagSensitiveStepBreaksPhaseFibre` and
 `presentConsumerSufficientFutureConsumerNot` construct a
 counterexample: the dropped tag changes the next phase,
