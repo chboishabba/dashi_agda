@@ -1,0 +1,76 @@
+{
+  "schema": "dashi.bom.sydney1910.noaa_presentation_crosscheck.v1",
+  "source_url": "https://www.extremeweatherwatch.com/cities/sydney/year-1910",
+  "source_credit": "Extreme Weather Watch, states based on NOAA records",
+  "source_type": "secondary NOAA-labelled presentation; raw NOAA station ID and lineage not authenticated",
+  "same_root_as_BOM_CDO_possible": true,
+  "station": "Sydney, New South Wales; exact physical site join not authenticated",
+  "periods": [
+    {
+      "start": "1910-01-25",
+      "days": 7,
+      "minimum_C": [
+        17.2,
+        15.6,
+        17.1,
+        18.7,
+        17.9,
+        15.4,
+        18.4
+      ],
+      "maximum_C": [
+        29.1,
+        27.8,
+        27.8,
+        20.6,
+        21.6,
+        21.1,
+        20.9
+      ],
+      "rain_cm": [
+        0,
+        0,
+        0,
+        0.86,
+        2.08,
+        0.36,
+        0.15
+      ]
+    },
+    {
+      "start": "1910-02-01",
+      "days": 7,
+      "minimum_C": [
+        17.2,
+        15.6,
+        17.1,
+        18.7,
+        17.9,
+        15.4,
+        18.4
+      ],
+      "maximum_C": [
+        24.3,
+        24.7,
+        26.2,
+        27.4,
+        28.5,
+        26.1,
+        31.7
+      ],
+      "rain_cm": [
+        0.08,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "physical_original_source_authenticated": false,
+  "independent_origin_established": false,
+  "copy_direction_established": false,
+  "notes": "Minimum arrays exactly match ABC-hosted Berger-supplied CDO excerpt. Maximums and rainfall differ for the two weeks. These are contextual differences, not an authenticated original-paper witness; NOAA may have ingested BOM's same source."
+}
