@@ -611,3 +611,16 @@ python3 scripts/test_smith_filsinger_restored_cycle_raw_replay.py
 python3 scripts/check_smith_filsinger_signed_vi_intervals.py original_vi_manifest.json --root raw_original_ports --out signed_vi_work.json
 python3 scripts/check_smith_filsinger_restored_cycle_intervals.py signed_vi_work.json independent_loss_and_storage.json --vi-manifest original_vi_manifest.json --vi-root raw_original_ports --out first_law_audit.json
 ```
+
+
+## 17 Nov — actual rational Cayley coefficient → Agda dynamic reachability weld
+
+[Full coefficient-level source/verification report](SmithFilsingerCayleyCoefficientAgdaMaxCut20261117.md).
+
+**F13 formal implementation:** `SmithFilsingerLocalCayleyZeroWeldExact.agda` reuses `SmithFilsingerLocalCausalADEFrameExact.LocalPrimitive`, `SmithFilsingerLocalCausalADEReachExact.ZeroPreserving` and the original interleaved-source cone. A `CertifiedCayley` requires the genuine inverse relation `(1-h²ab/4)*q=1`, with `quarterIsQuarter` (four quarters = one). Its two actual rational polynomial outputs match the offdiagonal source-owned `2x2` Cayley midpoint formula. `sameCayleyFirstZero` and `sameCayleySecondZero` use the existing rational ring solver, yielding a conditional `sameCayleyZeroPreserving` and actual `sameCayleyReachEvent`. `DistinctCayleyEdge` prohibits equal coordinate endpoints, which would be inconsistent with the two-output priority rule. The passive one-coordinate Ohmic/relaxation/load formula `(1+hλ/2)/(1-hλ/2)` has its own certified diagonal zero theorem and frame-to-reach bridge. A nonvacuous `singleCayleyWithSourceNoSignalOutsideReach` explicitly injects a tagged source before the chosen Cayley propagation.
+
+**Independent exact arithmetic regression:** new `scripts/test_smith_filsinger_cayley_coefficients_sympy.py` compares the existing heterogeneous `cayley_edge_step` against direct matrix inversion and the exported Agda coefficient expression for n=1..5, including all curl/polarization and diagonal lossy edges, exact zero-preservation, midpoint equation, intentionally singular denominator rejection, later controller root and passive zero source. Prior 138 + 16 = **154/154 PASS locally** using SymPy 1.14.0 / pytest 9.0.2. All source/test bytes included in one checked runnable ZIP.
+
+**D1:** New Agda module included in both pinned checker `owners` and `new_owners`. Independent SymPy gate scans its nonvacuous theorem names **and executes** the new test. No Agda 2.9/Nix executable here and no completed GitHub-head kernel receipt. Agda source is **authored, not accepted**. The Agda full 2x2 matrix midpoint equation remains to be derived using the certified inverse law; cross-checked externally only.
+
+**Physical gates unchanged:** true layered 3D retarded Maxwell Green/physical cone F13 OPEN; original independently measured, replenished environmental natural work and receiver VI F15 OPEN; D1 actual pinned Agda kernel OPEN. No numerical Cayley coefficient can by itself be a solar-energy meter. No ESD edits.
