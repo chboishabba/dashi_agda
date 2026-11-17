@@ -15,7 +15,7 @@ cos4=cos2*cos2-sin2*sin2
 assert sp.expand(sin2.subs(c,s) - (s*s+c*c).subs(c,s))==0
 assert sp.expand(cos2.subs(c,s))==0
 assert sp.expand(sin4.subs(c,s))==0
-assert sp.expand(cos4+1).subs(c,s).factor()==-(2*s*s-1)*(2*s*s+1)
+assert sp.simplify(sp.expand(cos4+1).subs(c,s).factor() + (2*s*s-1)*(2*s*s+1))==0
 # On s=c and s^2+c^2=1, s^2=1/2.
 assert sp.factor((cos4+1).subs(c,s)).subs(s*s,sp.Rational(1,2))==0
 # Prove a stronger polynomial identity before quotient reduction:
