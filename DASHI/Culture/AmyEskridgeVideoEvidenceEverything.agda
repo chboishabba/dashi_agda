@@ -53,3 +53,7 @@ import DASHI.Culture.AmyEskridgeVideoSurroundingSourceAtlasExact
 -- Same-object typed dispatch from the source registries to pre-existing
 -- original-paper, superconducting-test, Army administrative and slide owners.
 import DASHI.Culture.AmyEskridgeVideoSurroundingProducerWeldExact
+
+-- Primary reports omitted by the edited video but present in HAL5's original
+-- scientific/source genealogy; ownership retained by report authors.
+import DASHI.Culture.AmyEskridgeVideoOmittedOriginalResearchWeldExact
