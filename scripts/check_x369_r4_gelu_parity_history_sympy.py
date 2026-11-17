@@ -214,4 +214,26 @@ check("bias-free tiny GELU sign jump has quadratic upper bound",
 check("bias alone can cause order-one chart residual",
       S.simplify((Fp+Fm).subs({m:0,b2:1})-2)==0)
 
+# Lift the old F02a odd-only no-go to the source MSE owner F02b
+# in finite-dimensional real Euclidean output, without postulating
+# the analytic normal-CDF theorem in Agda. This is the
+# parallelogram identity, exact for arbitrary mirrored output vectors
+# and any odd student value on the positive chart.
+for dimension in (1,2,3,4):
+    pp=S.Matrix(S.symbols("positive0:"+str(dimension),real=True))
+    nn=S.Matrix(S.symbols("negative0:"+str(dimension),real=True))
+    sv=S.Matrix(S.symbols("student0:"+str(dimension),real=True))
+    Ev=(pp+nn)/2
+    Ov=(pp-nn)/2
+    norm2=lambda z:(z.T*z)[0]
+    MSE=(norm2(pp-sv)+norm2(nn+sv))/2
+    parity_floor=norm2(Ev)+norm2(Ov-sv)
+    check("old F02b finite vector odd-only MSE decomposition d="+str(dimension),
+          S.expand(MSE-parity_floor)==0)
+    # For the matched *source* sign chart, the chart-flip output
+    # gap equals 2*E_F and its norm squared is 4*parity MSE floor.
+    gap=pp+nn
+    check("chart jump squared = four times even MSE floor d="+str(dimension),
+          S.expand(norm2(gap)-4*norm2(Ev))==0)
+
 print("X369_GELU_PARITY_HISTORY_SYMPY_PASS",len(checks),"checks")
