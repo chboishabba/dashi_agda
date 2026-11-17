@@ -2795,3 +2795,18 @@ toeBalabanRouteSP2R445NoSecondMoment =
 toeBalabanRouteSP2R445CompilerLevel : ProofLevel
 toeBalabanRouteSP2R445CompilerLevel =
   BalabanRGTOE.balabanRouteSP2R445NativeCompilerLevel
+
+-- Original AdS5 brane compact TT yy: reuse existing Base369 unsigned
+-- q=0/1/2 as a LOSSLESS index for ell=0/2/4 and d=3/7/11.
+-- NOT physical C3 rotation, continuum Weyl or TOE endpoint closure.
+import DASHI.Physics.Gravity.KSW668AdS5TTUnbalancedTernary369ConsumerExact
+
+-- KSW XII exact radial dimension-raising ladder L_(d+2) J=J L_d
+-- (d3->7->11): the three-channel nilpotent commuting shift has
+-- genuine supplied differential intertwiner premises. NOT an
+-- invertible C3 rotation or a physical original sourced Weyl action.
+-- Optional chosen Z3 Weil SL2Z modular S/T is source-level SymPy
+-- tested, but DOES NOT commute with the original radial generator.
+-- Monster min nontrivial complex rep 196883 forbids a whole-Monster
+-- nontrivial 3D index action; z is KK normal, not spatial radial r.
+import DASHI.Physics.Gravity.KSW668AdS5TTModularRadialLadderConsumerExact

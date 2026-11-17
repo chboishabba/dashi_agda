@@ -1453,3 +1453,155 @@ The prior legacy **three-grid** fail-closed receipt remains unchanged. New norma
 - \`ads5OriginalMovingTTThreeMultipoleThreeObservableConvergence\`: original H, intrinsic Weyl, SMS projected Weyl AND outside bulk-cone convergence on independently varied radial/normal/time meshes; **OPEN**.
 - \`ads5OriginalT2NeumannToWeylEllipticFIOComposition\` / \`ads5OriginalT2ActualCompactTTNonzeroEarlyBothWeyl\`: external-theorem-dependent original compact-source prescribed-source existential proof *candidate*, independent referee/Agda continuum acceptance **OPEN**.
 - F9 action-generated anisotropic stress, scalar/vector/brane-bending/cylinder stability; F10 physical scale/receiver; F11 Agda kernel/observable weld; D1 independently calibrated experiment remain **OPEN**.
+
+
+---
+
+## 15 November 2026 maximum-cut VIII — full coupled moving AdS₅ weighted SBP–SAT energy closed semidiscretely, sourced version included
+
+**Repository:** previous canonical KSW F8 rollup [PR #1512](https://github.com/chboishabba/dashi_agda/pull/1512) is **MERGED**. This is a follow-on based on merged \`master\`, not further edits to #1512. **Full new proof and audit:** [KSW668F8FullCoupledWeightedSBPEnergyMaxCut20261115.md](KSW668F8FullCoupledWeightedSBPEnergyMaxCut20261115.md). The originally requested standalone FIO proof \`Docs/physics/KSW668F8OriginalT2NeumannFIOProof20261115.md\` remains preserved in master and is not overwritten.
+
+**New actual original solver mode:** \`normal_order=4\` uses the *true* AdS \(z^{-3}\)-weighted normal SBP2 split derivative \(D_wf=z^{3/2}D(z^{-3/2}f)+3f/(2z)\), the original sourced moving Israel weak SAT boundary, and the existing exact \(d=3,7,11\) conservative radial FV. Modes 1/2/3 remain unchanged as negative and comparison controls.
+
+**New large mathematical closure:** For \(U_T=aP+cM\), \(a=(1+v)/2,c=(1-v)/2\), the full **coupled normal+radial+warp+moving-weight** energy
+\[
+E=\tfrac12\sum H_y z^{-3}V_r\bigl(aP^2+cM^2+U(-L_r)U\bigr)
+\]
+has an exact finite-grid semidiscrete identity with the negative original Israel homogeneous wall square
+\[
+-\tfrac{w_0}{4}\|(1+v)P_0-(1-v)M_0\|^2_{V_r}
+\]
+and negative far SAT squares, plus exact bulk remainder
+\[
+\sum H_y wV_r\left[
+\tfrac{3v}{2z}\bigl(PM-U(-L_r)U\bigr)+\tfrac{v_T}{4}(P^2-M^2)
+\right].
+\]
+On the **entire original physical interval \(t\ge1\)** (including exact FIO \(t=2\) and long-baseline numerical \(t=12\)) the coefficient bounds give **mesh-independent** \(\boxed{E'(T)\le5E(T)}\). The calculation uses **all three original angular multipoles and the correct physical warp \(3/z\)**; the full semidiscrete identity is independently checked against the *actual* \`normal_order=4\` Numba stage at the original \(t=1,4/3,2\).
+
+**Sourced boundary weld and NO-GO:** with nonzero Israel datum \(G\), the coupled wall has extra \(-w_0(1-v)\langle M_0,G\rangle\). It has no state-independent \(C\|G\|^2\) bound; importing the previous normal-only \(2\sqrt5\) flux inequality into this coupled symmetrizer would be incorrect. The explicit *algebraic first-order characteristic* lift \(\Lambda_U=\Lambda_P=0,\ \Lambda_M=-2G(T,r)\chi(y)/(1-v(T))\), \(\chi(0)=1\), homogenizes the weak Israel SAT target and yields a fully coupled **semidiscrete** bulk residual \(F\) including its actual normal derivative, \(G_T\) and radial gradient contribution. Young's inequality closes
+\[
+\boxed{\widetilde E'\le6\widetilde E+\tfrac12\|F\|_E^2},
+\]
+with a standard forced Gronwall integral. The lift is **algebraic in the first-order discrete state**, NOT a newly generated physical scalar tensor metric or matter source action. The original weak SAT characteristic constraint-propagation, uniform high-Sobolev TT source budget, entire **fully discrete** SSPRK3 stability and both-Weyl boundary trace still remain OPEN.
+
+**Formal owners and executable verification:** new \`DASHI/Physics/Gravity/KSW668AdS5OriginalCoupledSBPSymmetrizerRationalExact.agda\` (generic rational bulk/warp cancellation, forced SAT square and boundary-lift algebra), imported into \`KSW668BraneBulkMaxCutEverything.agda\`; **source only, pinned Agda 2.9 kernel not run**. Producers \`scripts/ksw668_f8_full_coupled_weighted_sbp_energy.py\`, \`scripts/ksw668_f8_full_coupled_source_lift.py\`, and **29** new tests plus merged baseline **255** give **284/284 source-equivalent local PASS**, explicitly NOT an exact connected branch-head or Agda kernel receipt.
+
+**Actual new compact-TT original \(t=12\) normal-order-4 two-grid negative receipt:** \(H_{yy}\) drift **13.28%**, intrinsic 4D electric Weyl drift **157.93%**, projected 5D Weyl drift **31.72%**. Outside-bulk-cone field and both-Weyl controls remain nonzero (medium ratios **2.07%**, **4.38%**, **1.73%**). **Only two grids have run**, and neither the 3-grid original Weyl acceptance nor real physical detection has been established. Machine evidence \`Artifacts/ksw668/ads5_f8_full_coupled_weighted_SBP4_maxcut_20261115.json\`; \`scripts/check_ksw668_f8_maxcut.sh --weighted-two-grid\` deliberately produces a receipt and exits **42**.
+
+**Exact remaining maximum cut** now moves to (1) \`ads5OriginalMovingSBP4SATFullyDiscreteSSPRK3CFLAndTruncationError\`; (2) \`ads5OriginalTTCharacteristicConstraintPropagationUnderWeakSAT\`; (3) \`ads5OriginalMovingCompactTTCharacteristicLiftUniformSobolevSourceBudget\`; (4) \`ads5OriginalMovingH4PlusEpsilonNeumannToBothWeylTrace\`; and (5) \`ads5OriginalMovingTTThreeMultipoleThreeObservableConvergence\`, all **OPEN**. The original \(t=2\) FIO and actual compact-source dual-Weyl existential theorem **still require independent mathematical/referee/Agda acceptance**. F9 generating matter action, all-mode backreaction and separate cylinder; F10 calibrated physical attenuation/detection; F11 pinned continuum kernel/semantic weld; and D1 independent experimental graviton observation remain OPEN. No new physics or empirical early signal is asserted.
+
+
+---
+
+## 15 November 2026 maximum-cut IX — original physical characteristic constraint + sourced coupled energy + finite radial Sobolev hierarchy
+
+**Full canonical new proof/source/negative control:** [KSW668F8PhysicalConstraintRadialSobolevMaxCut20261115.md](KSW668F8PhysicalConstraintRadialSobolevMaxCut20261115.md). Machine acceptance: \`Artifacts/ksw668/ads5_f8_physical_constraint_radial_sobolev_maxcut_ix_20261115.json\`. This continues **PR #1520**, based on merged #1512. The previously requested original \`KSW668F8OriginalT2NeumannFIOProof20261115.md\` stays committed in \`master\`; **independent FIO referee/Agda acceptance remains OPEN**.
+
+**Substantial correction to previous F8 VIII numerical emphasis:** the new physically AdS-weighted normal SBP2 SAT mode \`normal_order=4\` has the exact coupled energy estimate \`E4'<=5E4\` but does **not** exactly preserve the physical tensor characteristic constraint \(C_h=D_yU-(P-M)/2\) on a finite grid. Its exact interior violation is \(a(D_y-D_w)P+c(D_y-D_w)M\). Smooth-state interior defect is second-order in \(\Delta y\), but rough-grid tests can show significant drift. A stable semidiscrete energy theorem alone was NOT proof of physical tensor constraint compatibility.
+
+**Repaired maximum cut:** existing **unweighted** second-order SBP2 SAT \`normal_order=3\` uses the same \(D_y\) in the original characteristic \(P,M\) equations, so for every interior normal node \(\dot C_h=0\) **identically**, and all SSPRK3 stages preserve that interior constraint **exactly** even with the original nonzero Israel datum and time-varying original Poincaré clock. The exact weighted quadratic commutator has diagonal \(-H_iw_i3/(2z_i)\) and edge \((w_i-w_{i+1})/4\); for \(\Delta y\le b/4\), a Gershgorin proof gives \(|\langle f,(D_y-D_w)f\rangle_{Hw}|\le4\|f\|_{Hw}^2/b\). Therefore on original \(t\ge1\) (all \(d=3,7,11\) TT radial modes) **one scheme** now has the full **coupled homogeneous semidiscrete** physical-energy estimate
+\[
+\boxed{E_3'(T)\le(5+16t)\,E_3(T),\quad \Delta y\le1/(4t).}
+\]
+The exact nonzero original compact \(3\)D TT Israel modal source \(\epsilon=.04\) is lifted via \(\Lambda_M=-2G\chi/(1-v)\), with the **correct unweighted** \(D_y\Lambda_M\) residual, giving
+\[
+\boxed{\widetilde E_3'(T)\le(6+16t)\widetilde E_3(T)
++\frac12\|F(T)\|_E^2.}
+\]
+The actual Numba stage and original \(t=1,4/3,2,12\) compact TT cell source were checked; the \(F\)-norm includes **radial derivatives** and the local smooth \(G_T\). On original \(1\le t\le12\), coefficients \(197\) and \(198\) are valid (conservative). **Fully discrete coupled SSPRK3 stability is still OPEN**, despite exactly preserved interior constraints through its stages.
+
+**Boundary SAT cannot be silently promoted:** at the original weak wall and remote normal boundary,
+\[
+\dot C_{h,0}=[(1+v)P_0-(1-v)M_0-2G]/\Delta y,\qquad
+\dot C_{h,N}=(1+v)P_N/\Delta y.
+\]
+The physically constrained initial finite-grid state \(U=y/2,\ P=1,\ M=0,\ G=0\) has **zero C on all nodes**, yet at original \(t=4/3\), boundary \(\dot C=0.4/\Delta y\): **10,20,40** for \(\Delta y=.04,.02,.01\), interior zero. This is a **true source-specific discrete boundary counterexample** to global exact constraint propagation, NOT a physical gravity effect or a failure of smooth continuum Israel theory. \`ads5OriginalWeakIsraelGlobalConstraintBoundaryWeld\` remains OPEN and needs a boundary-compatible SAT or uniform boundary-error estimate.
+
+**New finite high-regularity hierarchy:** because all original moving \(b(T),v(T),3/z\) and weak Israel normal SAT coefficients are independent of the physical radial \(r\), the positive radial FV stiffness \(A_\ell=-L_{3+2\ell}\) commutes with the complete **linear semidiscrete** moving generator, provided actual compact source \(G\) is also transformed. \([A_\ell^k,\mathcal L_h]=0\) for all integer \(k\ge0\); \(E_k=E(A^kU,A^kP,A^kM)\) inherits the **same** coupled energy constants. Actual original compact \(\epsilon=.04\) three-mode sourced stage checked for \(k=0,1,2,3\), both weak-SAT modes 3 and 4, and \(t=1,4/3,2,12\): worst relative commutator \(\sim5.6\times10^{-16}\). New generic Agda all-power induction is **source-only**, pinned Agda kernel unrun. This is **NOT** a complete spatial/normal/time \(H^{4+\epsilon}\) pointwise Weyl trace; high compact source norms and the actual Israel boundary compatibility remain open.
+
+**Source ownership and regression:** \`DASHI/Physics/Gravity/KSW668AdS5OriginalTTCharacteristicConstraintRationalExact.agda\`, \`DASHI/Physics/Gravity/KSW668AdS5OriginalRadialSobolevPowerReuseExact.agda\` (both imported into canonical Agda owner); three new \`scripts/ksw668_f8_*.py\` producers plus tests and one explicit weak-boundary negative control. Local source-equivalent acceptance **326/326 PASS**: prior 284 +24 physical constraint/forced+6 boundary no-go+12 radial Sobolev. Exact connected PR-head tests and pinned Agda kernel still unverified.
+
+**Top exact gates after IX:** (1) \`ads5OriginalWeakIsraelGlobalConstraintBoundaryWeld\`; (2) \`ads5OriginalMovingSBP3FullCoupledSSPRK3CFLAndError\`; (3) \`ads5OriginalCompactTTFullH4PlusEpsilonNeumannBoundarySourceBudget\`; (4) \`ads5OriginalMovingH4PlusEpsilonNeumannToBothWeylTrace\`; (5) \`ads5OriginalMovingTTThreeMultipoleThreeObservableConvergence\`; (6) independently accepted original \(t=2\) FIO compact-source both-Weyl proof; (7) F9 matter-generating action/all-mode stability/cylinder, F10 scale calibration, F11 pinned Agda and semantic observer, D1 controlled physical observation. **All these endpoints remain OPEN; no early gravity observation or free-energy claim is established.**
+
+
+---
+
+## 16 November 2026 F8 maximum-cut X — user-origin 0,2,4 -> 2×[0,1,2] Base369 consumer, actual signed two-Weyl channel error
+
+**Canonical new full report:** [KSW668F8Base369TernaryThreeHarmonicWeylMaxCut20261116.md](KSW668F8Base369TernaryThreeHarmonicWeylMaxCut20261116.md). **Owner:** the existing active KSW PR #1520; merged #1512 and its original \(t=2\) FIO Markdown are untouched. Machine evidence \`Artifacts/ksw668/ads5_f8_base369_three_harmonic_signed_weyl_maxcut_x_20261116.json\`. **Origin of the mapping: user.** The KSW gravity, 369 crosspollination, TOE and Unifier import graphs now consume the exact new \`KSW668AdS5TTUnbalancedTernary369ConsumerExact.agda\` using \`Base369.TriTruth\`; no duplicate ternary foundations constructed.
+
+The original axial spin-2 \(H_{yy}\) compact fourth-order TT source has **exactly** three nonzero Legendre harmonics:
+\[
+(\mu^4+6\mu^2+1)/8=(2/5)P_0(\mu)+(4/7)P_2(\mu)+(1/35)P_4(\mu).
+\]
+The native unbalanced ternary \`Base369.tri-index\` is a bidirectional **index codec** \(q=0,1,2\leftrightarrow \ell=2q=0,2,4\), with corresponding independent effective FV radial dimensions \(d=3+4q=(3,7,11)\). It is **not** a 3-valued physical amplitude or a 3/6/9-dimensional gravity theorem. Exact \`Base369.rotateTri\` label cycling **fails** physical radial operator equivariance: \(\Delta_d(r^2)=2d\) gives \(6\to14\), mismatch **8**. The \(\omega^3=1\) DFT basis is invertible but yields nonzero off-diagonal \(-2\pm 2i\sqrt3/3\) entries after conjugating \(\operatorname{diag}(3,7,11)\), so no C3/Monster/j-invariant/TOE physical symmetry follows.
+
+The actual original \(t=12\), compact \(\epsilon=.04\), pulse .065, constraint-preserving \`normal_order=3\` tensor receiver now returns **separate exact per-channel** \(H_{yy,q},E^{(4)}_{yy,q},E^{(5)}_{yy,q}\) at the original receiver AND outside-bulk-cone control. All three observable sums exactly reproduce the original aggregate. Two-grid signed coarse-to-medium differences:
+\[
+\begin{array}{c|rrr}
+\ell&\Delta H_q&\Delta E4_q&\Delta E5_q\\
+0&+5.604e-6&+7.232e-5&+2.969e-6\\
+2&-6.558e-6&-3.214e-5&-2.290e-6\\
+4&-1.219e-7&-9.156e-7&-7.485e-8
+\end{array}
+\]
+The aggregate signed grid changes conceal larger opposite-signed **channel** errors: \(\sum_q|\Delta O_q|/|\sum_q\Delta O_q|\) = **11.41** for H, **2.684** for E4, **8.829** for E5. **New priority:** certify \(\ell=0\) and \(\ell=2\) temporal and second-derivative curvature estimates per channel first; the highest-stiffness \(\ell=4\) is NOT the leading signed Weyl-drift contributor. Per-channel error sum is an exact *finite two-grid triangle inequality*, NOT continuum convergence.
+
+A third original t12 fine grid \((dr,dy,dt)=(.006,.009,.0012)\) was attempted but **timed out before a usable receiver receipt**. **No three-grid convergence claim** is made. New tracked tests 20 angular/369 +13 actual original two-Weyl receiver +7 signed error control = **40/40 local PASS**. Combined reconstructed F8 replay **371/371 local PASS**; this is NOT an exact connected GitHub-head or pinned Agda 2.9 kernel certificate.
+
+**Exact remaining F8 mathematical cut:** \`ads5OriginalTTPerChannelThreeObservableConvergence\`, physically compatible original weak-Israel boundary constraint, fully discrete time-dependent coupled SSPRK3, mesh-uniform compact TT H^(4+epsilon) normal/time/radial trace and BOTH Weyl receiver errors. Original \(t=2\) FIO independent theorem acceptance, F9 source-generating matter and backreaction/cylinder, F10 calibrated source/receiver, F11 kernel/semantic weld and D1 physical observation remain **OPEN**. The 369 presentation bridge closes a finite exact consumer, **not** the original gravity endpoint.
+
+
+**F8 X root-of-unity refinement:** The user's three-harmonic receiver sum equals the **trivial-character row** of the unnormalised three-point \(F_{jk}=\omega^{jk}\) Fourier transform. The **correct full** commuting square \(FA=(FAF^{-1})F\) holds for \(A=\operatorname{diag}(L_3,L_7,L_{11})\), but off-diagonal terms mean its trivial Fourier coordinate is NOT a closed original TT PDE subsystem. The exact radial quadratic test \(u=(1,-1,0)\) has zero aggregate but physical \(A u=(6,-14,0)\) aggregate **−8**. Hence discarding the two other 369 sectors is mathematically unsound. Added five tests; reconstructed combined local acceptance **371/371 PASS**, pinned Agda kernel and all original physical both-Weyl endpoints still OPEN.
+
+
+---
+
+## 16 November 2026 F8 maximum-cut XI — original complete radial \(C_3\) no-go; third-grid dual-Weyl FAIL; independent radial/normal cut
+
+**Full new derivation:** [KSW668F8FullC3ThreeGridRadialMaxCut20261116.md](KSW668F8FullC3ThreeGridRadialMaxCut20261116.md). **Canonical machine receipt:** \`Artifacts/ksw668/ads5_f8_threegrid_per_channel_radial_normal_factorial_maxcut_xi_20261116.json\`. **Owner remains active KSW PR #1520**, follows merged #1512, historical original \(t=2\) FIO Markdown preserved. The prior X "fine original full-box execution timed out" was historically correct; it is now SUPERSEDED as a current availability statement by an actually completed \`t=12\` fine **smaller physical-causally-screened box** original solver run. Never substitute a guessed full-box fine parity: it remains unverified.
+
+**Physical \(C_3\) test stronger than \(r^2\):** construct original exact conservative FV three radial matrices \(L_3,L_7,L_{11}\) with their distinct positive shell measures \(V_q\). Normalize \(S_q=V_q^{1/2}L_qV_q^{-1/2}\) so the natural label cycle is truly unitary on the weighted direct sum. Its entire matrix commutator with \(\operatorname{diag}(S_3,S_7,S_{11})\) is nonzero (Frobenius **93,318.94** for the 12-cell \(\Delta r=.015\) negative control), and radial eigenvalue lists differ. Therefore the natural Base369 cyclic label action **is NOT** a physical original radial evolution symmetry **even after accounting for proper measures**; no claim about every exotic nonlocal continuum intertwiner.
+
+**Actual original three-grid data, F8 still fails.** Same physical moving \(a=t\) AdS₅, compact TT support \(\epsilon=.04\), Poincaré pulse .065, fixed photon-dark \(t=12\) receiver, \`normal_order=3\` interior constraint-preserving weak Israel SAT, spatial grids \((dr,dy)=(.012,.016),(.008,.012),(.006,.009)\). Separate exact \(q=0,1,2\) H/E4/E5 reader, original source FV moments and beyond-bulk null:
+\[
+\begin{array}{c|rrr}
+{\rm grid}&H_{yy}&E4_{yy}&E5_{yy}\\
+c&-5.13978759e{-6}&-6.73168679e{-5}&-2.93029492e{-6}\\
+m&-6.21637547e{-6}&-2.80531162e{-5}&-2.32621569e{-6}\\
+f&-2.54488883e{-5}&-6.33841188e{-4}&-1.93196045e{-5}
+\end{array}
+\]
+Each original \(q=0,1,2\) curvature component has **larger** medium→fine drift than coarse→medium; ell0 intrinsic Weyl difference grows **9.52×**, ell2 **2.62×**, ell4 **1.87×**; projected Weyl **8.31×/3.46×/3.12×**. Far/bulk-null controls remain nonzero (fine aggregate E4 **+6.5714e−6**). Receiver **NUMERICAL CONVERGENCE FAILED**, not a physical early graviton result.
+
+**Numerical-geometry qualification:** optimized three-mode independent \`prange\` loop and finite box \(r_{\max}=3.01,y_{\max}=2.01\). Physical radial-wall source-to-face lower bound **2.967** and normal-reflection-to-final-brane lower bound **3.103** exceed Poincaré travel span **2.709**; coarse and medium original receiver data match the old larger box. Since an explicit finite-difference stencil can have a wider numerical propagation cone, **fine large-box parity and fully discrete causality are still OPEN**.
+
+**The two Weyl temporal readouts are not the apparent dominant error.** Original per-channel temporal second differences vs differentiated original PDE stage agree on fine ell0 intrinsic Weyl to **1.43e−7**, versus medium→fine ell0 difference **6.883e−4**. A same-medium-spatial-grid \(\Delta T\) halving yields ell0 E4 shift **2.82e−8**. A fine-grid half-\(\Delta T\) attempt timed out and has no receipt; temporal consistency is diagnostic only, **not** an analytic continuum error bound.
+
+**New same-\(\Delta T\) independent 2×2 \((dr,dy)\) factorial:** four original \(t=12\) mesh arms \((.008,.012),(.008,.009),(.006,.012),(.006,.009)\), each with the identical physical Poincaré step **.00119980478**. Decompose any signed channel change EXACTLY into radial-only + normal-only + interaction. Intrinsic \(\ell=0\) E4 radial-only **−6.78984e−4**, normal-only **+1.05690e−7**, mixed **−9.49057e−6**, so radial-only is **98.64%** of the signed combined change. For \(\ell=2\), radial-only is **101.7%** due opposing interaction. The high-alpha next physical numerical gate is **source-cell vs radial FV wavefront/dispersion curvature error separation** in \(\ell=0\) and \(\ell=2\), not an \(\ell=4\)-only stiffness hypothesis. A factorial contrast is finite data, **not** a guaranteed continuum truncation error.
+
+**New original global constraint boundary NO-GO:** original centered normal SBP2 derivative has exact left null \(\ell_0=(-1)^{n-1},\ell_j=2(-1)^{n-1-j},\ell_{n-1}=1\). If the original independent \(P,M\) weak Israel/outgoing SAT penalties are fixed, an auxiliary correction to \(U_T\) alone can produce global \(C'_h=0\) **iff** \((-1)^{n-1}g_{\rm wall}+g_{\rm far}=0\). Independent arbitrary wall/far residuals violate this. Source-only Agda rational n3/n4 column certificates in \`KSW668AdS5TTWeakIsraelSBPLeftNullParityExact.agda\`; generic recurrence checked by executable SymPy for \(n=3\ldots13\), pinned Agda kernel **UNRUN**. This does NOT refute a joint energy-compatible \(P,M,U\) SAT or nonlocal boundary weld; that gate stays OPEN.
+
+**Regression:** local reconstructed source-equivalent F8 suite **410/410 PASS**, including parallel tensor solver, but **not** a connected PR-head checkout, pinned Agda run, true 3-grid physical convergence, matter action or D1 detector. New owner scripts \`ksw668_f8_c3_weighted_operator_no_go.py\`, \`ksw668_f8_weak_sat_left_null_obstruction.py\`, \`ksw668_f8_threegrid_signed_failclosed.py\` and tests. \`scripts/check_ksw668_f8_maxcut.sh --threegrid-XI-audit\` checks and preserves negative evidence; \`--threegrid-XI-fine\` reproduces actual original fine data then **fails closed** on physical acceptance.
+
+**Updated priority gates:** (1) \`ads5OriginalTTCompactSourceVsConservativeRadialPropagationErrorSeparation\`; (2) fully independent \`ads5OriginalTTPerChannelThreeObservableConvergence\`; (3) \`ads5OriginalWeakIsraelJointEnergyConstraintCompatibleSAT\`; (4) full coupled moving SSPRK3 stability; (5) compact source/normal/time/radial \(H^{4+\epsilon}\) both-Weyl trace; (6) independently accepted original \(t=2\) compact FIO actual Neumann-to-dual-Weyl; (7) F9 real matter/cylinder, F10 source/detector calibration, F11 Agda kernel and semantic weld, D1 independent physical observation. **All original physical endpoints remain OPEN.**
+
+
+---
+
+## 16 November 2026 F8 maximum-cut XII — modular Weil YES (chosen carrier), direct Monster NO (on 3 channels), true continuum 3→7→11 radial ladder YES
+
+**Origin:** user query "Sporadic maybe, modular yes/no?" **Full proof and failclosed physics ledger:** [KSW668F8ModularSporadicRadialLadderMaxCut20261116.md](KSW668F8ModularSporadicRadialLadderMaxCut20261116.md). **Machine:** Artifacts/ksw668/ads5_f8_modular_sporadic_radial_ladder_maxcut_xii_20261116.json. This stays in the existing draft PR #1520 following merged #1512. It imports already existing Base369, original spin-2 TT, modular SL2Z/B3, Moonshine/Weil and Monster/AdS3 prior art; no replacement of the original moving a=t AdS5 physical object.
+
+**Critical KK correction:** the radial coordinate **r** in the original ell0/2/4 L3/L7/L11 FV matrices is the radius of ordinary 3-space. The **extra AdS coordinate is z**. Those r-spectral values are NOT KK masses; any actual z-KK eigenproblem requires the moving wall, z^-3 measure and normal Israel conditions. The prior description of the XI 98.64% radial numerical sensitivity as necessarily "excitation of high-mass KK modes" was unsupported. XI's actual negative original three-grid E4/E5 data stay valid and do not transform into a physical discovery.
+
+**True positive continuum INTERTWINER:** for L_d=∂r²+(d-1)/r ∂r and J=(1/r)∂r, exact calculus gives L_(d+2) J=J L_d, hence L7 J²=J² L3 and L11 J²=J² L7. The 3-channel nilpotent shift N(f0,f1,f2)=(0,J² f0,J² f1) commutes with the smooth radial direct-sum differential expression and has N³=0. It is neither invertible nor a unitary physical C3 symmetry; J² annihilates constants, the finite radial box Dirichlet domain is not automatically transported, and the three actual compact TT source modes are NOT a common ladder orbit. In the exact eps=.04 smooth compact source, dimensionless eps^4 J²G0/G1 at r/eps=.3/.5/.7 is approximately −97.55/+289.71/+146.25. Generic polynomial f=r^10 separately refutes a universal equality. Existing KSW XI full finite FV natural C3 negative control and this continuum positive differential ladder are COMPATIBLE.
+
+**Modular finite carrier:** a CHOSEN Z3 quadratic form Q(q)=q²/3 mod1 equips Base369 unsigned q0/q1/q2 with a genuine Weil SL2Z representation S=(-i/sqrt3)[omega^(jk)], T=diag(1,omega,omega), omega³=1. Exact SymPy verifies S⁴=I, S²=(ST)³=−charge-conjugation and T³=I, with unitarity. But modular S DOES NOT commute with the original radial dimension matrix diag(3,7,11), and the Q charge/modular weight/physical VOA boundary field is NOT derived. This is a mathematically valid abstract three-component presentation, **not a modular symmetry of the original bulk dynamics**. Reuse DASHI Moonshine PenumbralVectorValuedForm, JInvariantPuncturedLatticeReindexExact and Physics Closure TriadicEisensteinTransformationTheorem as existing owners.
+
+**Sporadic/Monster boundary:** an order-three Monster subgroup may have a nontrivial action on a chosen abstract q chart, but a nontrivial complex three-dimensional representation of the WHOLE Monster is IMPOSSIBLE (smallest nontrivial complex irrep dimension 196883). Distinguish 3A/3B and avoid promoting the conjectural Witten AdS3/c24 Monster CFT to a theorem about the original physical AdS5 F8 receiver. A graded/auxiliary VOA fibre and genuine metric, source, operator and observer identifications would be mandatory.
+
+**Source and verification:** scripts/ksw668_f8_modular_radial_ladder_crosswalk.py + tests; Agda source-only generic triple commuting ladder KSW668AdS5TTModularRadialLadderConsumerExact.agda imported into KSW, 369 crosspollination, TOE and Unifier. The SymPy source-equivalent local suite **13/13 PASS**; actual original compact bump high-precision sample checked separately. Exact PR-head test and pinned Agda 2.9 kernel NOT RUN; previously recorded XI **410/410** suite NOT rerun here.
+
+**New best next exact cut:** construct finite FV discrete defect (L7,h J2,h − J2,h L3,h) with proper radial volume and axis closure; use an exact continuum manufactured ladder solution and the actual physical compact source to isolate (i) source cell quadrature/projection, (ii) radial propagation/wavefront dispersion, and (iii) both-Weyl derivative readout. Separately construct true z-normal KK problem if needed. Weak Israel joint constraint/SSPRK3, H4+epsilon Weyl trace, original t2 FIO, F9–F11 and D1 remain OPEN.
