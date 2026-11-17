@@ -98,7 +98,7 @@ def check(manifest: dict[str, Any], root: Path) -> dict[str, Any]:
         gates[gate] = {
             "status": "AWAITING_ORIGINAL_EVIDENCE" if missing else "READY_FOR_INDEPENDENT_REVIEW_NOT_CLOSED",
             "missing_roles": missing,
-            "raw_records_verified": len(set(roles) & verified),
+            "hash_matched_records": len(set(roles) & verified),
             "total_roles": len(roles),
         }
     return {
