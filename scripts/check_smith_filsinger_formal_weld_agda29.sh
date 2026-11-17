@@ -11,6 +11,7 @@ owners=(
   DASHI/Physics/Motors/SmithFilsingerReplenishedCycleCapExact.agda
   DASHI/Promotion/MaxwellExteriorCalculusAdapter.agda
   DASHI/Physics/Motors/SmithFilsingerSpatialPortChainExact.agda
+  DASHI/Physics/Motors/SmithFilsingerSpatialSourceBoundaryWeldExact.agda
   DASHI/Physics/Motors/SmithFilsingerSourceMaxwellBoundaryWeldExact.agda
   DASHI/Physics/Motors/SmithFilsingerCloudCausalWeldExact.agda
   DASHI/Physics/Motors/SmithFilsingerMaxwellMaterialEnergyCutExact.agda
@@ -18,6 +19,8 @@ owners=(
   DASHI/Physics/Motors/SmithFilsingerDispersiveMaterialWeldExact.agda
 )
 new_owners=(
+  DASHI/Physics/Motors/SmithFilsingerSpatialPortChainExact.agda
+  DASHI/Physics/Motors/SmithFilsingerSpatialSourceBoundaryWeldExact.agda
   DASHI/Physics/Motors/SmithFilsingerSourceMaxwellBoundaryWeldExact.agda
   DASHI/Physics/Motors/SmithFilsingerCloudCausalWeldExact.agda
   DASHI/Physics/Motors/SmithFilsingerMaxwellMaterialEnergyCutExact.agda
