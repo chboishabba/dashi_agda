@@ -32,3 +32,15 @@ import DASHI.Foundations.BishopMachinPiDoubleAngleAlgebraExact
 -- True selected Round11 sine/cosine and Machin pi; analytic quarter input open.
 import DASHI.Foundations.BishopMachinPiPeriodFromQuarterExact
   as BishopMachinSameSourcePeriod
+
+-- Positive finite Bishop Wilson construction; original periodic Haar still OPEN.
+import DASHI.Physics.YangMills.YMClayBishopWilsonGibbsPositiveExact
+  as BishopWilsonGibbsPositiveExact
+
+-- Positive finite Bishop Wilson construction; original periodic Haar still OPEN.
+import DASHI.Physics.YangMills.YMClayBishopSU2WilsonDeficitPositiveExact
+  as BishopSU2WilsonDeficitPositiveExact
+
+-- Positive finite Bishop Wilson construction; original periodic Haar still OPEN.
+import DASHI.Physics.YangMills.YMClayBishopSU2FiniteGibbsPartitionExact
+  as BishopSU2FiniteGibbsPartitionExact
