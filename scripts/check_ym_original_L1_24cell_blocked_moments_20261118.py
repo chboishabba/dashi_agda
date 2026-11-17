@@ -33,4 +33,11 @@ for actual, target in expected:
     assert actual == target, (actual, target)
 assert variance > 0
 assert sum(counts) == 24
-print("PASS: 6/6 exact blocked partition/moment identities; positive variance")
+def expectation(f):
+    return sum(c * w * f(t) for c, w, t in zip(counts, weights, t_values)) / (24 * z)
+
+assert expectation(lambda t: Q(1)) == 1
+assert expectation(lambda t: t) == mean
+assert expectation(lambda t: t * t) == second_normalized
+assert expectation(lambda t: Q(7) + Q(3) * t) == 7 + 3 * mean
+print("PASS: 10/10 exact blocked partition, moments, positive variance and finite-expectation identities")
