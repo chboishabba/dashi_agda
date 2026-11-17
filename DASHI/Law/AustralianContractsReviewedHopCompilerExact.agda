@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)
+open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 open import Data.Maybe using (Maybe; just; nothing)
@@ -14,6 +15,16 @@ import DASHI.Law.WaltonsReviewedPropositionPaymentExact as WaltonsReview
 import DASHI.Law.MannPatersonUnseenMatterExact as Mann
 import DASHI.Law.SensibLawCitationUsePropositionExact as CitationUse
 import DASHI.Law.SensibLawOALCLegalFollowAttributionSnowballExact as OALC
+import DASHI.Core.AuthorityNonPromotionCore as Authority
+import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowball
+import DASHI.Unified.FleetFormalGapTargetTOEExact as Fleet
+import DASHI.Law.ReviewedTreatmentBundleSemanticDedupExact as Dedup
+import DASHI.Law.ReviewedWorkFrontierClosureExact as Closure
+import DASHI.Law.ConsumerDirectedLegalFollowAdequacyExact as Adequacy
+import DASHI.Law.ConsumerAdequacyRuntimeTheoremBridgeExact as AdequacyBridge
+import DASHI.Law.ClosedIsNotAdequateExact as ClosedNotAdequate
+import DASHI.Law.GenericRecursiveLegalFollowCampaignExact as Recursive
+import DASHI.Law.GenericReviewedDeltaCampaignKernelExact as Kernel
 
 ------------------------------------------------------------------------
 -- REVIEWED RECEIPT -> S14 ADAPTIVE HOP COMPILER
@@ -356,3 +367,332 @@ canonicalAustralianContractsReviewedHopCompilerBoundary =
     true refl
     false refl
     false refl
+
+
+------------------------------------------------------------------------
+-- TOE / fleet normalization.
+--
+-- The current problem is one formal residual lane:
+--
+-- retained primary source
+--   -> reviewed source identity
+--   -> reviewed proposition or treatment
+--   -> candidate adaptive delta
+--   -> recomputed residual frontier
+--
+-- No earlier carrier may skip a later review gate.
+------------------------------------------------------------------------
+
+reviewedContractsAuthorityBundle :
+  Authority.AuthorityNonPromotionBundle
+reviewedContractsAuthorityBundle =
+  Authority.mkClosedAuthorityNonPromotionBundle
+    "Australian contracts reviewed-hop compiler"
+
+reviewedContractsAuthorityStillClosed :
+  Authority.promotesAnyAuthority reviewedContractsAuthorityBundle ≡ false
+reviewedContractsAuthorityStillClosed =
+  Authority.promotesAnyAuthorityIsFalse reviewedContractsAuthorityBundle
+
+reviewedContractsPromotesAnyAuthority : Bool
+reviewedContractsPromotesAnyAuthority =
+  Authority.promotesAnyAuthority reviewedContractsAuthorityBundle
+
+reviewedContractsPromotesAnyAuthorityIsFalse :
+  reviewedContractsPromotesAnyAuthority ≡ false
+reviewedContractsPromotesAnyAuthorityIsFalse =
+  reviewedContractsAuthorityStillClosed
+
+reviewedContractsFleetTarget :
+  Fleet.FleetFormalGapTargetReceipt
+reviewedContractsFleetTarget =
+  Fleet.canonicalFleetFormalGapTargetReceipt
+
+reviewedContractsTargetsOnlyFormalGaps :
+  Fleet.targetOnlyUnformalisedFormalGaps reviewedContractsFleetTarget ≡ true
+reviewedContractsTargetsOnlyFormalGaps =
+  Fleet.fleetTargetsOnlyUnformalisedFormalGaps
+
+reviewedContractsDischargedFibresRemainDischarged :
+  Fleet.dischargedCoreKnowledgeFibres reviewedContractsFleetTarget ≡ 584
+reviewedContractsDischargedFibresRemainDischarged =
+  Fleet.fleetRecordedDischargedCountIs584
+
+reviewedContractsFormalGapBudgetIs58 :
+  Fleet.unformalisedFormalGaps reviewedContractsFleetTarget ≡ 58
+reviewedContractsFormalGapBudgetIs58 =
+  Fleet.fleetRecordedUnformalisedGapCountIs58
+
+reviewedContractsDischargedFibreCount : Nat
+reviewedContractsDischargedFibreCount =
+  Fleet.dischargedCoreKnowledgeFibres reviewedContractsFleetTarget
+
+reviewedContractsDischargedFibreCountIs584 :
+  reviewedContractsDischargedFibreCount ≡ 584
+reviewedContractsDischargedFibreCountIs584 =
+  reviewedContractsDischargedFibresRemainDischarged
+
+reviewedContractsFormalGapCount : Nat
+reviewedContractsFormalGapCount =
+  Fleet.unformalisedFormalGaps reviewedContractsFleetTarget
+
+reviewedContractsFormalGapCountIs58 :
+  reviewedContractsFormalGapCount ≡ 58
+reviewedContractsFormalGapCountIs58 =
+  reviewedContractsFormalGapBudgetIs58
+
+ReviewedContractsTOEZKPFrame : Set
+ReviewedContractsTOEZKPFrame =
+  ParetoSnowball.TOEZKPFrame
+
+reviewedContractsZKPFrame :
+  ReviewedContractsTOEZKPFrame
+reviewedContractsZKPFrame =
+  ParetoSnowball.toe-zkp-frame
+    "O: close the reviewed legal-follow handoff from pinned Australian primary source to adaptive S14 residual recomputation"
+    "R: reuse existing OALC, review, non-promotion, adaptive residual, Pareto, snowball, attribution and fleet-gap owners"
+    "C: require reviewed source identity before canonical trace alias; require reviewed proposition or citation use before positive trace edge"
+    "S: raw acquisition, lexical match, QID, citation occurrence, ranking and unresolved identity remain candidate or residual state"
+    "L: one disjoint legal reviewed-hop lane; accepted hops append provenance and force a fresh frontier without freezing prior conclusions"
+    "P: exact source revision and document identity exist; reviewer and evidence receipts exist; the 584 discharged fibres remain excluded"
+    "G: preserve original source authors, DASHI theorem owners, Ibrahim ownership and meta-introspector attribution; ESD surfaces remain read-only"
+    "F: output only candidate nodes or treatment/support edges plus explicit residuals; never legal authority or current-law conclusion"
+    "verify duplicate search, exact identity binding, no shortcut promotion, residual preservation, TOE reachability, trust-escape scan and kernel check"
+    false
+    false
+    false
+    false
+
+record ReviewedContractsMaxCutBoundary : Set where
+  constructor reviewed-contracts-max-cut-boundary
+  field
+    rawSourceNeedsIdentityReview : Bool
+    rawSourceNeedsIdentityReviewIsTrue :
+      rawSourceNeedsIdentityReview ≡ true
+
+    sourceIdentityNeedsExactRevisionBinding : Bool
+    sourceIdentityNeedsExactRevisionBindingIsTrue :
+      sourceIdentityNeedsExactRevisionBinding ≡ true
+
+    propositionSupportNeedsReviewedPayment : Bool
+    propositionSupportNeedsReviewedPaymentIsTrue :
+      propositionSupportNeedsReviewedPayment ≡ true
+
+    citationTreatmentNeedsReviewedUse : Bool
+    citationTreatmentNeedsReviewedUseIsTrue :
+      citationTreatmentNeedsReviewedUse ≡ true
+
+    contestedAndContextRemainResidual : Bool
+    contestedAndContextRemainResidualIsTrue :
+      contestedAndContextRemainResidual ≡ true
+
+    reviewedResidualsSurviveTrajectory : Bool
+    reviewedResidualsSurviveTrajectoryIsTrue :
+      reviewedResidualsSurviveTrajectory ≡ true
+
+    acceptedHopForcesFrontierRecompute : Bool
+    acceptedHopForcesFrontierRecomputeIsTrue :
+      acceptedHopForcesFrontierRecompute ≡ true
+
+    qidMayScheduleButCannotPromote : Bool
+    qidMayScheduleButCannotPromoteIsTrue :
+      qidMayScheduleButCannotPromote ≡ true
+
+    createsLegalAuthority : Bool
+    createsLegalAuthorityIsFalse :
+      createsLegalAuthority ≡ false
+
+    createsCurrentLawConclusion : Bool
+    createsCurrentLawConclusionIsFalse :
+      createsCurrentLawConclusion ≡ false
+
+canonicalReviewedContractsMaxCutBoundary :
+  ReviewedContractsMaxCutBoundary
+canonicalReviewedContractsMaxCutBoundary =
+  reviewed-contracts-max-cut-boundary
+    true refl
+    true refl
+    true refl
+    true refl
+    true refl
+    true refl
+    true refl
+    true refl
+    false refl
+    false refl
+
+
+
+------------------------------------------------------------------------
+-- Current SLR runtime parity.
+--
+-- These are aliases to existing theorem owners.
+-- This file does not duplicate their constructions.
+------------------------------------------------------------------------
+
+reviewedTreatmentDedupBoundary :
+  Dedup.ReviewedTreatmentBundleBoundary
+reviewedTreatmentDedupBoundary =
+  Dedup.canonicalReviewedTreatmentBundleBoundary
+
+reviewedWorkClosureBoundary :
+  Closure.ReviewedWorkFrontierClosureBoundary
+reviewedWorkClosureBoundary =
+  Closure.canonicalReviewedWorkFrontierClosureBoundary
+
+consumerLegalFollowAdequacyBoundary :
+  Adequacy.ConsumerDirectedLegalFollowAdequacyBoundary
+consumerLegalFollowAdequacyBoundary =
+  Adequacy.canonicalConsumerDirectedLegalFollowAdequacyBoundary
+
+consumerAdequacyRuntimeBridgeBoundary :
+  AdequacyBridge.ConsumerAdequacyRuntimeTheoremBridgeBoundary
+consumerAdequacyRuntimeBridgeBoundary =
+  AdequacyBridge.canonicalConsumerAdequacyRuntimeTheoremBridgeBoundary
+
+genericRecursiveCampaignBoundary :
+  Recursive.GenericRecursiveCampaignBoundary
+genericRecursiveCampaignBoundary =
+  Recursive.canonicalGenericRecursiveCampaignBoundary
+
+genericReviewedDeltaKernelBoundary :
+  Kernel.GenericReviewedDeltaCampaignKernelBoundary
+genericReviewedDeltaKernelBoundary =
+  Kernel.canonicalGenericReviewedDeltaCampaignKernelBoundary
+
+record ReviewedContractsRuntimeParityBoundary : Set where
+  constructor reviewed-contracts-runtime-parity-boundary
+  field
+    corroboratingReviewUnitsMayDeduplicateToOneSemanticHop : Bool
+    corroboratingReviewUnitsMayDeduplicateToOneSemanticHopIsTrue :
+      corroboratingReviewUnitsMayDeduplicateToOneSemanticHop ≡ true
+
+    allSupportingReviewProvenanceIsRetained : Bool
+    allSupportingReviewProvenanceIsRetainedIsTrue :
+      allSupportingReviewProvenanceIsRetained ≡ true
+
+    unsupportedReviewedResidualsSurviveDeduplication : Bool
+    unsupportedReviewedResidualsSurviveDeduplicationIsTrue :
+      unsupportedReviewedResidualsSurviveDeduplication ≡ true
+
+    paidIdentityWorkMayResurrectAsFreshSourceWork : Bool
+    paidIdentityWorkMayResurrectAsFreshSourceWorkIsFalse :
+      paidIdentityWorkMayResurrectAsFreshSourceWork ≡ false
+
+    paidTreatmentWorkMayResurrectAsFreshTreatmentWork : Bool
+    paidTreatmentWorkMayResurrectAsFreshTreatmentWorkIsFalse :
+      paidTreatmentWorkMayResurrectAsFreshTreatmentWork ≡ false
+
+    frontierClosureMeansFormalConsumerAdequacy : Bool
+    frontierClosureMeansFormalConsumerAdequacyIsFalse :
+      frontierClosureMeansFormalConsumerAdequacy ≡ false
+
+    runtimeCoverageIsFormalFactorsThroughProof : Bool
+    runtimeCoverageIsFormalFactorsThroughProofIsFalse :
+      runtimeCoverageIsFormalFactorsThroughProof ≡ false
+
+    theoremBackedAdequacyRequiresActualAdequateFor : Bool
+    theoremBackedAdequacyRequiresActualAdequateForIsTrue :
+      theoremBackedAdequacyRequiresActualAdequateFor ≡ true
+
+    genericKernelAcceptsOnlyReviewedDelta : Bool
+    genericKernelAcceptsOnlyReviewedDeltaIsTrue :
+      genericKernelAcceptsOnlyReviewedDelta ≡ true
+
+    genericKernelMayConvertRawSourceToReviewedDelta : Bool
+    genericKernelMayConvertRawSourceToReviewedDeltaIsFalse :
+      genericKernelMayConvertRawSourceToReviewedDelta ≡ false
+
+    recursiveCampaignRecomputesAfterAcceptedHop : Bool
+    recursiveCampaignRecomputesAfterAcceptedHopIsTrue :
+      recursiveCampaignRecomputesAfterAcceptedHop ≡ true
+
+    recursiveCampaignUsesFixedUpfrontQueue : Bool
+    recursiveCampaignUsesFixedUpfrontQueueIsFalse :
+      recursiveCampaignUsesFixedUpfrontQueue ≡ false
+
+    recursiveResearchPriorityIsLegalTruthRank : Bool
+    recursiveResearchPriorityIsLegalTruthRankIsFalse :
+      recursiveResearchPriorityIsLegalTruthRank ≡ false
+
+    recursiveCampaignIsBudgetBounded : Bool
+    recursiveCampaignIsBudgetBoundedIsTrue :
+      recursiveCampaignIsBudgetBounded ≡ true
+
+    runtimeParityCreatesLegalAuthority : Bool
+    runtimeParityCreatesLegalAuthorityIsFalse :
+      runtimeParityCreatesLegalAuthority ≡ false
+
+    runtimeParityCreatesCurrentLawConclusion : Bool
+    runtimeParityCreatesCurrentLawConclusionIsFalse :
+      runtimeParityCreatesCurrentLawConclusion ≡ false
+
+canonicalReviewedContractsRuntimeParityBoundary :
+  ReviewedContractsRuntimeParityBoundary
+canonicalReviewedContractsRuntimeParityBoundary =
+  reviewed-contracts-runtime-parity-boundary
+    true refl
+    true refl
+    true refl
+    false refl
+    false refl
+    false refl
+    false refl
+    true refl
+    true refl
+    false refl
+    true refl
+    false refl
+    false refl
+    true refl
+    false refl
+    false refl
+
+reviewedContractsDedupProvenanceOwnerProof :
+  Dedup.allSupportingReviewUnitProvenanceRetained
+    reviewedTreatmentDedupBoundary
+  ≡ true
+reviewedContractsDedupProvenanceOwnerProof =
+  Dedup.allSupportingReviewUnitProvenanceRetainedIsTrue
+    reviewedTreatmentDedupBoundary
+
+reviewedContractsPaidTreatmentDoesNotResurrectOwnerProof :
+  Closure.acceptedReviewedTreatmentMayReopenItselfAsFreshTreatment
+    reviewedWorkClosureBoundary
+  ≡ false
+reviewedContractsPaidTreatmentDoesNotResurrectOwnerProof =
+  Closure.acceptedReviewedTreatmentMayReopenItselfAsFreshTreatmentIsFalse
+    reviewedWorkClosureBoundary
+
+reviewedContractsFrontierClosedNotAdequateOwnerProof :
+  Closure.currentFrontierClosedImpliesConsumerAdequacyProved
+    reviewedWorkClosureBoundary
+  ≡ false
+reviewedContractsFrontierClosedNotAdequateOwnerProof =
+  Closure.currentFrontierClosedImpliesConsumerAdequacyProvedIsFalse
+    reviewedWorkClosureBoundary
+
+reviewedContractsRuntimeCoverageNotFactorsThroughOwnerProof :
+  Adequacy.runtimeCoverageReceiptIsFormalFactorsThroughProof
+    consumerLegalFollowAdequacyBoundary
+  ≡ false
+reviewedContractsRuntimeCoverageNotFactorsThroughOwnerProof =
+  Adequacy.runtimeCoverageReceiptIsFormalFactorsThroughProofIsFalse
+    consumerLegalFollowAdequacyBoundary
+
+reviewedContractsKernelReviewedOnlyOwnerProof :
+  Kernel.kernelAcceptsOnlyReviewedDeltaInterface
+    genericReviewedDeltaKernelBoundary
+  ≡ true
+reviewedContractsKernelReviewedOnlyOwnerProof =
+  Kernel.kernelAcceptsOnlyReviewedDeltaInterfaceIsTrue
+    genericReviewedDeltaKernelBoundary
+
+reviewedContractsRecursiveRecomputeOwnerProof :
+  Recursive.freshFrontierRecomputedAfterAcceptedHop
+    genericRecursiveCampaignBoundary
+  ≡ true
+reviewedContractsRecursiveRecomputeOwnerProof =
+  Recursive.freshFrontierRecomputedAfterAcceptedHopIsTrue
+    genericRecursiveCampaignBoundary
+

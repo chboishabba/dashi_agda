@@ -103,3 +103,95 @@ mannFixtureIsCandidateOnly :
   Compiler.candidateOnly Compiler.mannRepudiationReviewedPropositionFixture
     ≡ true
 mannFixtureIsCandidateOnly = refl
+
+
+reviewedContractsFormalGapBudgetStill58 :
+  Compiler.reviewedContractsFormalGapCount
+  ≡ 58
+reviewedContractsFormalGapBudgetStill58 =
+  Compiler.reviewedContractsFormalGapBudgetIs58
+
+reviewedContractsDischargedFibresStill584 :
+  Compiler.reviewedContractsDischargedFibreCount
+  ≡ 584
+reviewedContractsDischargedFibresStill584 =
+  Compiler.reviewedContractsDischargedFibresRemainDischarged
+
+reviewedContractsAuthorityStillNonPromoting :
+  Compiler.reviewedContractsPromotesAnyAuthority
+  ≡ false
+reviewedContractsAuthorityStillNonPromoting =
+  Compiler.reviewedContractsAuthorityStillClosed
+
+reviewedResidualsRemainInTrajectory :
+  Compiler.ReviewedContractsMaxCutBoundary.reviewedResidualsSurviveTrajectory
+    Compiler.canonicalReviewedContractsMaxCutBoundary
+  ≡ true
+reviewedResidualsRemainInTrajectory =
+  Compiler.ReviewedContractsMaxCutBoundary.reviewedResidualsSurviveTrajectoryIsTrue
+    Compiler.canonicalReviewedContractsMaxCutBoundary
+
+acceptedReviewedHopStillForcesRecompute :
+  Compiler.ReviewedContractsMaxCutBoundary.acceptedHopForcesFrontierRecompute
+    Compiler.canonicalReviewedContractsMaxCutBoundary
+  ≡ true
+acceptedReviewedHopStillForcesRecompute =
+  Compiler.ReviewedContractsMaxCutBoundary.acceptedHopForcesFrontierRecomputeIsTrue
+    Compiler.canonicalReviewedContractsMaxCutBoundary
+
+reviewedHopStillCreatesNoLegalAuthority :
+  Compiler.ReviewedContractsMaxCutBoundary.createsLegalAuthority
+    Compiler.canonicalReviewedContractsMaxCutBoundary
+  ≡ false
+reviewedHopStillCreatesNoLegalAuthority =
+  Compiler.ReviewedContractsMaxCutBoundary.createsLegalAuthorityIsFalse
+    Compiler.canonicalReviewedContractsMaxCutBoundary
+
+
+reviewedContractsDedupStillRetainsAllProvenance :
+  Compiler.ReviewedContractsRuntimeParityBoundary.allSupportingReviewProvenanceIsRetained
+    Compiler.canonicalReviewedContractsRuntimeParityBoundary
+  ≡ true
+reviewedContractsDedupStillRetainsAllProvenance =
+  Compiler.ReviewedContractsRuntimeParityBoundary.allSupportingReviewProvenanceIsRetainedIsTrue
+    Compiler.canonicalReviewedContractsRuntimeParityBoundary
+
+reviewedContractsPaidTreatmentStillCannotResurrect :
+  Compiler.ReviewedContractsRuntimeParityBoundary.paidTreatmentWorkMayResurrectAsFreshTreatmentWork
+    Compiler.canonicalReviewedContractsRuntimeParityBoundary
+  ≡ false
+reviewedContractsPaidTreatmentStillCannotResurrect =
+  Compiler.ReviewedContractsRuntimeParityBoundary.paidTreatmentWorkMayResurrectAsFreshTreatmentWorkIsFalse
+    Compiler.canonicalReviewedContractsRuntimeParityBoundary
+
+reviewedContractsClosedStillDoesNotMeanAdequate :
+  Compiler.ReviewedContractsRuntimeParityBoundary.frontierClosureMeansFormalConsumerAdequacy
+    Compiler.canonicalReviewedContractsRuntimeParityBoundary
+  ≡ false
+reviewedContractsClosedStillDoesNotMeanAdequate =
+  Compiler.ReviewedContractsRuntimeParityBoundary.frontierClosureMeansFormalConsumerAdequacyIsFalse
+    Compiler.canonicalReviewedContractsRuntimeParityBoundary
+
+reviewedContractsRuntimeCoverageStillNotFactorsThrough :
+  Compiler.ReviewedContractsRuntimeParityBoundary.runtimeCoverageIsFormalFactorsThroughProof
+    Compiler.canonicalReviewedContractsRuntimeParityBoundary
+  ≡ false
+reviewedContractsRuntimeCoverageStillNotFactorsThrough =
+  Compiler.ReviewedContractsRuntimeParityBoundary.runtimeCoverageIsFormalFactorsThroughProofIsFalse
+    Compiler.canonicalReviewedContractsRuntimeParityBoundary
+
+reviewedContractsKernelStillAcceptsReviewedDeltaOnly :
+  Compiler.ReviewedContractsRuntimeParityBoundary.genericKernelAcceptsOnlyReviewedDelta
+    Compiler.canonicalReviewedContractsRuntimeParityBoundary
+  ≡ true
+reviewedContractsKernelStillAcceptsReviewedDeltaOnly =
+  Compiler.ReviewedContractsRuntimeParityBoundary.genericKernelAcceptsOnlyReviewedDeltaIsTrue
+    Compiler.canonicalReviewedContractsRuntimeParityBoundary
+
+reviewedContractsRecursiveCampaignStillRecomputes :
+  Compiler.ReviewedContractsRuntimeParityBoundary.recursiveCampaignRecomputesAfterAcceptedHop
+    Compiler.canonicalReviewedContractsRuntimeParityBoundary
+  ≡ true
+reviewedContractsRecursiveCampaignStillRecomputes =
+  Compiler.ReviewedContractsRuntimeParityBoundary.recursiveCampaignRecomputesAfterAcceptedHopIsTrue
+    Compiler.canonicalReviewedContractsRuntimeParityBoundary

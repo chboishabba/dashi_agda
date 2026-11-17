@@ -167,3 +167,47 @@ small gate; they are not replaced by it.
 - `neither` is not falsity; it is the fail-closed absence of promotable structural
   evidence.
 - This module does not certify spaCy accuracy or a particular parser profile.
+
+
+## Australian contracts reviewed-hop max-cut
+
+The golden owner is `DASHI.Law.AustralianContractsReviewedHopCompilerExact`.
+
+The current SLR campaign uses one reviewed-hop cut.
+
+O — Objective. Close the handoff from a pinned Australian primary source to a recomputed legal research frontier.
+
+R — Reuse. Reuse OALC source receipts, reviewed identity, reviewed proposition and treatment receipts, the generic reviewed-delta kernel, recursive LegalFollow, consumer adequacy, Pareto scheduling, snowball attribution, and authority non-promotion.
+
+C — Contract. A raw source cannot create a canonical authority identity. A citation occurrence cannot create treatment. A proposition support edge needs reviewed evidence payment. A treatment edge needs reviewed citation use.
+
+S — Safety. Contested and context-only review stays residual. Unsupported citation use stays residual. QID lookup may schedule identity work. It cannot create legal authority, applicability, or current-law truth.
+
+L — Lane. The legal reviewed-hop lane is disjoint from the fleet planning lane. An accepted hop appends provenance. It forces a fresh frontier. It does not freeze an earlier conclusion.
+
+P — Preconditions. The source revision and document identity remain exact. Reviewer and evidence receipts remain present. The fleet receipt keeps 584 discharged fibres out of scope. It keeps 44 contradiction gaps separate. It targets only the 58 unformalised formal gaps.
+
+G — Governance. Original legal and mathematical source authors keep attribution. Existing DASHI modules keep theorem ownership. Ibrahim ownership stays unchanged. The meta-introspector repositories remain reference sources only unless a separate proof receipt says otherwise. ESD surfaces are read-only.
+
+F — Postconditions. The compiler emits candidate nodes, reviewed support or treatment edges, and explicit residuals. It emits no legal authority. It emits no current-law conclusion.
+
+The current runtime parity also reuses these exact owners:
+
+- `ReviewedTreatmentBundleSemanticDedupExact` for one semantic hop from corroborating reviewed units.
+- `ReviewedWorkFrontierClosureExact` for paid-work non-resurrection and operational closure.
+- `GenericReviewedDeltaCampaignKernelExact` for reviewed-delta-only recursion.
+- `GenericRecursiveLegalFollowCampaignExact` for bounded recursive continuation.
+- `ConsumerDirectedLegalFollowAdequacyExact` and `ConsumerAdequacyRuntimeTheoremBridgeExact` for the distinction between runtime coverage and a formal `FactorsThrough` witness.
+- `ClosedIsNotAdequateExact` for the rule that no selectable residual does not prove semantic completeness.
+
+The canonical TOE roots expose the same owner:
+
+- `DASHI/EverythingTOESymmetryResolved369.agda`
+- `DASHI/Unifier.agda`
+- `DASHI/Unified/Everything.agda`
+
+The Lean mirror is `AgdaMirror/Law/AustralianContractsReviewedHopCompiler.lean`. Agda remains the golden policy owner.
+
+The C4-style PlantUML view is `Docs/architecture/SensibLawReviewedLegalFollow.puml`. The diagram is documentation only. It creates no proof or legal authority.
+
+The process lenses named by the project, including ITIL, ISO 9000, ISO/IEC 42001, ISO/IEC 27001, ISO/IEC 27701, ISO/IEC 23894, ISO 9241, NIST AI RMF, Six Sigma, C4, and PlantUML, organize review and traceability. They do not certify legal truth or theorem authority.
