@@ -99,6 +99,6 @@ H_cv (Eg I6 - Hv)^(-1) H_vc
  = Ep * [2/(3 Eg) + 1/(3(Eg+Delta)] * epsilon I2 .
 ```
 
-Consequently `m0/m*=1+2F+(Ep/3)[2/Eg+1/(Eg+Delta)]`, for all momentum directions in this isotropic truncation. An independent numerical 8×8 eigenspectrum check for [100], [010], [001], [111] at both 0K and 300K fixed-F inputs confirms the analytical curvature. **15/15 local checks PASS**; no Agda kernel proof of this complex-spinful matrix yet.
+Consequently `m0/m*=1+2F+(Ep/3)[2/Eg+1/(Eg+Delta)]`, for all momentum directions in this isotropic truncation. An independent numerical 8×8 eigenspectrum check for [100], [010], [001], [111] at both 0K and 300K fixed-F inputs confirms the analytical curvature. **17/17 local checks PASS**; no Agda kernel proof of this complex-spinful matrix yet.
 
 This is a **near-Γ 8-state curvature model**, not a full finite-k fitted 8-band material device model. It omits the full valence Luttinger k² terms, real heterointerface boundary conditions, Bir–Pikus strain, conduction/valence field-driven confinement, screening, doping, recombination and measured PV efficiency; and the parameter F summarizes remote bands rather than resolving them as physical states. These are physical producer gates, not proofs to fabricate by selecting scalar data.
