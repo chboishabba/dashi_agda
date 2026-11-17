@@ -202,3 +202,51 @@ def test_load_omission_breaks_full_source_balance():
     assert (S.factor(r['energy_change']-r['natural_work']
                     -r['controller_work']+r['ohmic']+r['relaxation'])
             == -r['useful_load'])
+
+
+def test_exact_five_step_closed_material_and_field_cycle_from_supplied_source():
+    from smith_filsinger_lorentz_ade_sympy import synthetic_cycle_work_receipt
+    A,B,M=generator(1,load_conductance=S.Rational(1,3))
+    h=S.Rational(1,5); ident=S.eye(4)
+    transition=(ident-h*A/2).inv()*(ident+h*A/2)
+    impulse=(ident-h*A/2).inv()*h*B
+    z0=S.Matrix([1,0,0,0])
+    sources=S.symbols('j0:5')
+    zend=transition**5*z0
+    for i,j in enumerate(sources):
+        zend += transition**(4-i)*impulse*j
+    solved=S.solve(list(zend-z0),sources[:-1],dict=True)
+    assert len(solved)==1
+    jvals=[S.simplify(solved[0][j].subs(sources[-1],1)) for j in sources[:-1]]+[S.Integer(1)]
+    z=z0;steps=[]
+    for j in jvals:
+        receipt=exact_midpoint(z,S.Matrix([j]),S.Matrix([0]),h,A,B,M,
+                               load_conductance=S.Rational(1,3))
+        steps.append(receipt);z=receipt['z']
+    audit=synthetic_cycle_work_receipt(z0,steps,M)
+    assert audit['restored_all_4n_states']
+    assert audit['storage_delta']==0
+    assert audit['conservation_residual']==0
+    assert audit['useful_load']>0 and audit['ohmic_loss']>0
+    assert audit['natural_work']==(audit['useful_load']+
+                                    audit['ohmic_loss']+audit['relaxation_loss'])
+    assert not audit['physically_replenished_source_certified']
+
+
+def test_energy_return_is_not_full_state_restoration():
+    from smith_filsinger_lorentz_ade_sympy import synthetic_cycle_work_receipt
+    A,B,M=generator(1,load_conductance=S.Rational(1,4))
+    z=S.Matrix([1,0,0,0]);step=exact_midpoint(z,S.Matrix([1]),S.Matrix([0]),
+       S.Rational(1,5),A,B,M,load_conductance=S.Rational(1,4))
+    audit=synthetic_cycle_work_receipt(z,[step],M)
+    assert not audit['restored_all_4n_states']
+    assert audit['conservation_residual']==0
+    assert not audit['original_source_meter_present']
+
+
+def test_nonconsecutive_source_trace_is_rejected():
+    from smith_filsinger_lorentz_ade_sympy import synthetic_cycle_work_receipt
+    A,B,M=generator(1);start=S.zeros(4,1)
+    r=exact_midpoint(start,S.Matrix([1]),S.Matrix([0]),S.Rational(1,5),A,B,M)
+    with pytest.raises(ValueError,match='nonconsecutive'):
+        synthetic_cycle_work_receipt(start,[r,r],M)
