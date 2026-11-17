@@ -22,10 +22,6 @@ These are the only active manuscript homes in the current paper corpus:
 - `Docs/papers/live/Paper3YangMillsClayDraft.md`
 - `Docs/papers/live/Paper8UnificationDraft.md`
 
-Publication sequencing and satellite status are routed through:
-
-- `Docs/papers/PublicationRoadmap.md`
-
 These are the shared live support surfaces for that corpus:
 
 - `Docs/support/live/SupportCompendium.md`
@@ -51,9 +47,6 @@ Use these as current support routers rather than browsing all of `Docs/`:
 - `Docs/support/reference/ClosurePipeline.md`
 - `Docs/support/reference/CanonicalProofSpine.md`
 - `Docs/roadmaps/CompleteVerifiedPhysicsUnificationRoadmap.md`
-- `Docs/support/reference/Y443JMDVNaturalMaxCut20261106.md`:
-  active 2026-11-08 VOA phases, original-source deliverables and exact remaining lemmas;
-  see PR #1472. Separate from the physics-unification roadmap.
 
 ## What Is Not A Live Entry Surface
 

@@ -67,7 +67,7 @@ record YML3TightnessBoundedCandidateReceipt : Setω where
       KRunning.kRunningRequirementRecorded kRunningReceipt ≡ true
 
     kRunningTightnessStillFalse :
-      KRunning.ymL3TightnessConstructed kRunningReceipt ≡ true
+      KRunning.ymL3TightnessConstructed kRunningReceipt ≡ false
 
     inheritedCandidateReceipt :
       Inhabited.YML3TightnessInhabitedReceipt
@@ -100,13 +100,13 @@ record YML3TightnessBoundedCandidateReceipt : Setω where
       Bool
 
     fullTightnessConstructedIsFalse :
-      fullTightnessConstructed ≡ true
+      fullTightnessConstructed ≡ false
 
     continuumYangMillsConstructed :
       Bool
 
     continuumYangMillsConstructedIsFalse :
-      continuumYangMillsConstructed ≡ true
+      continuumYangMillsConstructed ≡ false
 
     clayYangMillsPromoted :
       Bool
@@ -168,11 +168,11 @@ canonicalYML3TightnessBoundedCandidateReceipt =
     ; boundedCandidateRecordedIsTrue =
         refl
     ; fullTightnessConstructed =
-        true
+        false
     ; fullTightnessConstructedIsFalse =
         refl
     ; continuumYangMillsConstructed =
-        true
+        false
     ; continuumYangMillsConstructedIsFalse =
         refl
     ; clayYangMillsPromoted =

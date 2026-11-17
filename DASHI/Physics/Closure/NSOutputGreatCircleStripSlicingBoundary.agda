@@ -32,16 +32,11 @@ import DASHI.Physics.Closure.NSWhitneyFubiniDisintegrationBoundary
 -- The intended analytic theorem is a uniform strip slicing estimate for
 -- c-hat = normalize(theta1 + theta2), away from the antipodal and rank-drop
 -- exceptional sets, with constants stable across bounded-overlap Whitney caps
--- and Type-I rescalings.  The second-round A4.3 integration in this file
--- promotes the local coarea/strip-slicing theorem and the directly local
--- output-support flag only.  It records the Federer coarea route and the
--- quantitative pushforward bound
---
---   Phi_* mu_phys(B_epsilon(n)) <= C_coa delta_F^2 c_J^-1 epsilon^2,
---
--- which is stronger than the epsilon^(1/2) target.  It does not promote
--- the imported parent Sard/Whitney theorems, downstream no-collapse theorem,
--- Navier-Stokes Clay, or terminal authority.
+-- and Type-I rescalings.  This module records the proof contract only.  It
+-- does not construct a strip atlas, does not estimate preimage measures, does
+-- not prove the coarea/Jacobian-fed uniform constants, does not discharge the
+-- no-collapse consumer, does not complete A4, and does not promote
+-- Navier-Stokes Clay.
 
 listLength : {A : Set} → List A → Nat
 listLength [] =
@@ -479,6 +474,14 @@ data OutputGreatCircleStripSlicingBlocker : Set where
     OutputGreatCircleStripSlicingBlocker
   missingA4-4ExactStripHittingRichnessConstant :
     OutputGreatCircleStripSlicingBlocker
+  missingA4-3WhitneyCapUniformStripConstants :
+    OutputGreatCircleStripSlicingBlocker
+  missingA4-3PhiJacobianCoareaFeedThrough :
+    OutputGreatCircleStripSlicingBlocker
+  missingA4-4PushforwardDensityFeedThrough :
+    OutputGreatCircleStripSlicingBlocker
+  missingA4-4ExactStripHittingRichnessConstant :
+    OutputGreatCircleStripSlicingBlocker
   missingA4-5TypeIRescalingFamilyUniformStripConstant :
     OutputGreatCircleStripSlicingBlocker
   missingNoCollapseConsumerProof :
@@ -495,7 +498,11 @@ data OutputGreatCircleStripSlicingBlocker : Set where
 canonicalOutputGreatCircleStripSlicingBlockers :
   List OutputGreatCircleStripSlicingBlocker
 canonicalOutputGreatCircleStripSlicingBlockers =
-  missingA4-4PushforwardDensityFeedThrough
+  missingStripAtlas
+  ∷ missingPreimageMeasureEstimate
+  ∷ missingA4-3WhitneyCapUniformStripConstants
+  ∷ missingA4-3PhiJacobianCoareaFeedThrough
+  ∷ missingA4-4PushforwardDensityFeedThrough
   ∷ missingA4-4ExactStripHittingRichnessConstant
   ∷ missingA4-5TypeIRescalingFamilyUniformStripConstant
   ∷ missingNoCollapseConsumerProof
@@ -509,9 +516,9 @@ outputGreatCircleStripSlicingBlockerCount : Nat
 outputGreatCircleStripSlicingBlockerCount =
   listLength canonicalOutputGreatCircleStripSlicingBlockers
 
-outputGreatCircleStripSlicingBlockerCountIs8 :
-  outputGreatCircleStripSlicingBlockerCount ≡ 8
-outputGreatCircleStripSlicingBlockerCountIs8 =
+outputGreatCircleStripSlicingBlockerCountIs13 :
+  outputGreatCircleStripSlicingBlockerCount ≡ 13
+outputGreatCircleStripSlicingBlockerCountIs13 =
   refl
 
 data OutputGreatCircleStripSlicingStatusRow : Set where
@@ -526,8 +533,6 @@ data OutputGreatCircleStripSlicingStatusRow : Set where
   WhitneyCapSlicingRecordedStatus :
     OutputGreatCircleStripSlicingStatusRow
   PhiJacobianCoareaFeedThroughRecordedStatus :
-    OutputGreatCircleStripSlicingStatusRow
-  A4-3CoareaStripSlicingTheoremProvedStatus :
     OutputGreatCircleStripSlicingStatusRow
   pushforwardDensityAttemptRecordedStatus :
     OutputGreatCircleStripSlicingStatusRow
@@ -555,7 +560,6 @@ canonicalOutputGreatCircleStripSlicingStatusRows =
   ∷ PhiPreimageSliceRecordedStatus
   ∷ WhitneyCapSlicingRecordedStatus
   ∷ PhiJacobianCoareaFeedThroughRecordedStatus
-  ∷ A4-3CoareaStripSlicingTheoremProvedStatus
   ∷ pushforwardDensityAttemptRecordedStatus
   ∷ stripHittingConsequenceGapRecordedStatus
   ∷ typeIRescalingUniformityTargetRecordedStatus
@@ -570,9 +574,9 @@ outputGreatCircleStripSlicingStatusRowCount : Nat
 outputGreatCircleStripSlicingStatusRowCount =
   listLength canonicalOutputGreatCircleStripSlicingStatusRows
 
-outputGreatCircleStripSlicingStatusRowCountIs15 :
-  outputGreatCircleStripSlicingStatusRowCount ≡ 15
-outputGreatCircleStripSlicingStatusRowCountIs15 =
+outputGreatCircleStripSlicingStatusRowCountIs14 :
+  outputGreatCircleStripSlicingStatusRowCount ≡ 14
+outputGreatCircleStripSlicingStatusRowCountIs14 =
   refl
 
 ------------------------------------------------------------------------
@@ -813,7 +817,7 @@ organizationString =
 
 requirementString : String
 requirementString =
-  "R: Integrate A4.3 coarea propagation into output strip slices, promote the local strip-slicing theorem and direct output-support flag, and leave A4.4/A4.5, Clay, and terminal authority unpromoted."
+  "R: Record the exact A4 strip-slicing subladder: A4.3 coarea propagation into strip slices, A4.4 strip-hitting / pushforward richness, and A4.5 uniformity across the Type-I rescaling family, while proving nothing."
 
 codeArtifactString : String
 codeArtifactString =
@@ -821,7 +825,7 @@ codeArtifactString =
 
 stateString : String
 stateString =
-  "S: A4.3 is locally promoted: Federer coarea gives the strip preimage estimate and Phi_* mu_phys(B_epsilon(n)) <= C_coa delta_F^2 c_J^-1 epsilon^2, stronger than epsilon^(1/2); A4.4/A4.5/no-collapse, imported parents, Clay, and terminal remain unpromoted."
+  "S: Boundary is checked only; strip atlas, preimage measure estimate, the A4.3 Phi-Jacobian/coarea feed-through, the A4.4 strip-hitting richness step, the A4.5 Type-I-rescaling-family-uniform strip constant, no-collapse consumer, A4, and Clay promotion are absent."
 
 latticeString : String
 latticeString =
@@ -829,7 +833,7 @@ latticeString =
 
 proposalString : String
 proposalString =
-  "P: Use the local A4.3 coarea/strip-slicing theorem as the output-support input, then discharge A4.4 strip-hitting richness, exceptional-set routing, and A4.5 Type-I-rescaling-family uniformity before any downstream Clay-facing step."
+  "P: Promote the parent A4 step only after A4.3 strip-slicing coarea propagation, A4.4 strip-hitting richness, exceptional-set routing, and the A4.5 Type-I-rescaling-family-uniform strip lower bound are proved together."
 
 governanceString : String
 governanceString =
@@ -837,7 +841,7 @@ governanceString =
 
 gapString : String
 gapString =
-  "F: Remaining gaps are A4.4 pushforward strip-hitting richness, A4.5 Type-I-rescaling-family uniformity, no-collapse consumer proof, exceptional-set routing proof, Whitney-cap summability, Sard/Fubini feed-through, and Clay promotion."
+  "F: Missing strip atlas, preimage-measure estimate, A4.3 Whitney-cap-uniform strip constants, A4.3 Phi-Jacobian/coarea feed-through, A4.4 strip-hitting richness constant, A4.5 Type-I-rescaling-family-uniform strip constant, no-collapse consumer proof, and Sard/Fubini feed-through."
 
 ------------------------------------------------------------------------
 -- Canonical receipt.

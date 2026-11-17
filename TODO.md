@@ -1598,57 +1598,6 @@ Current reconciled NS status for `2026-06-15`:
 
 # P0 BLOCKERS
 
-• Six-lane weak-coupling polymer convergence tranche is implemented.
-
-  Status:
-
-  - adds
-    `DASHI.Physics.Closure.YMLatticeAnimalCountingBoundReceipt`,
-    `DASHI.Physics.Closure.YMWeakCouplingRatioBoundReceipt`,
-    `DASHI.Physics.Closure.YMGeometricTailHalfBoundReceipt`,
-    `DASHI.Physics.Closure.YMPolymerWeakCouplingSumBoundReceipt`,
-    `DASHI.Physics.Closure.YMP7WeakCouplingPolymerConvergenceReceipt`,
-    and `scripts/ym_weak_coupling_polymer_sum_bound.py`;
-  - threads the weak-coupling package into
-    `DASHI.Physics.Closure.YMActualP7WilsonPolymerActivityReceipt`;
-  - records the `d=4` lattice-animal count surface `N_n <= (8e)^n`, the
-    tuned ratio surface `a = c_K / (4 g^2)` plus the corrected p=7
-    threshold `c_K >= (4/3) log(24e)`, the
-    geometric-tail `<= 1/2` surface, the grouped weighted origin-containing
-    polymer sum surface, and the bridge back into the same-prime `p=7`
-    Wilson activity lane;
-  - now closes the exact lane-local `p=7` local KP surface in
-    `DASHI.Physics.Closure.YMActualP7WilsonPolymerActivityReceipt` with
-    target `rho = 1/2`, while keeping continuum YM, mass gap, Clay YM, and
-    terminal promotion false/open;
-  - next YM action: keep pushing downstream from the now-closed p=7 local KP
-    surface into the real continuum H3a/H3b intake chain instead of widening
-    support-only weak-coupling surfaces.
-
-• Six-lane Balaban YM boundary tranche is implemented.
-
-  Status:
-
-  - adds
-    `DASHI.Physics.Closure.YMActualPolymerActivityCandidateReceipt`,
-    `DASHI.Physics.Closure.YMPolymerActivityStrictAbsorptionBridgeReceipt`,
-    `DASHI.Physics.Closure.YMKPUniformVolumeInductionBoundaryReceipt`,
-    `DASHI.Physics.Closure.YMBalabanRGInductionCandidateReceipt`,
-    `DASHI.Physics.Closure.YMH3bVacuumProjectorNoSpectralPollutionBoundaryReceipt`,
-    and
-    `DASHI.Physics.Closure.YMThermodynamicOSWightmanOperatorBoundaryReceipt`;
-  - extends `DASHI.Physics.Closure.Paper3YMDependencyGraphReceipt` and
-    `DASHI.Physics.Closure.YMFinalStateReceipt` with those fail-closed YM/Balaban
-    surfaces;
-  - now records lane-local closure for the strict-absorption bridge, the
-    uniform-volume KP lane, and the Balaban RG transfer lane, while keeping
-    H3a/H3b continuum transfer, thermodynamic limit, OS/Wightman/operator
-    convergence, uniform mass gap, continuum uniqueness, Clay YM, and terminal
-    promotion false/open;
-  - next Balaban action: spend the next six lanes on the true H3a/H3b,
-    thermodynamic-limit, and OS/reflection-positivity gates instead of adding
-    more receipt-only Balaban packaging.
-
 • Candidate-receipt / probe-hygiene tranche is implemented.
 
   Status:

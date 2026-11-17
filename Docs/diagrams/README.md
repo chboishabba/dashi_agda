@@ -13,16 +13,3 @@ Rendered Agda dependency graphs currently checked in here:
 - `UnifiedPhysicsTheorem.svg`
 
 They can be regenerated with `./scripts/render_agda_dependency_graph.sh <module>`.
-
-Canonical interpretive-stack diagram source:
-
-- `TaoQiPolarityMetasystem.puml`
-  This is the normalized textual metasystem view for the Tao -> symbol
-  geometry -> yin/yang -> Betti support -> Qi -> polarity/phase/field stack.
-  It is a
-  governance/support diagram, not a promoted theorem surface.
-
-Publication-routing smoke checks:
-
-- `python scripts/check_diagram_reproducibility.py`
-- `python scripts/check_publication_readiness.py`

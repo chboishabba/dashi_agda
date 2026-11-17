@@ -1,62 +1,39 @@
 # Agda Validation Targets
 
 Purpose: keep the validation manifest aligned with the live NS/YM/unification
-frontiers and the current aggregate/focused-check policy.
+frontiers and the current aggregate check policy.
 
-Updated: `2026-09-13`
-
-## Reading rule
+## Reading Rule 2026-06-12
 
 This manifest distinguishes:
 
-- current canonical frontiers;
-- downstream consumer/compiler surfaces;
+- current canonical frontiers
+- downstream consumer surfaces
 - historical route receipts that should still typecheck but are no longer the
-  best statement of the live frontier;
-- workflow wiring from observed commit-specific kernel receipts.
+  best statement of the live frontier
 
 Current canonical reading:
 
-- **NS:** `C_direct` is constructed; P3/same-output debt payment is the current
-  local producer search; R568 is the live cutoff-uniform commutator-only
-  spacetime producer; R572 and R503 are downstream compiler/consumer surfaces.
-  A1-A9 remains a historical/alternative route.
-- **Unification:** the live wall remains the current UCT/U-1a-H chain, with
-  downstream consumers kept fail-closed.
-- **YM:** the genuine missing-content burden remains the current
-  Balaban-centered transfer/continuum authority cutset.
+- NS: explicit candidate self-contained packet is recorded; live burden is
+  promotion evidence / referee-grade acceptance around the exact consumed
+  `A1/A3` and `A4` inputs, not missing theorem-shape grammar.
+- Unification: explicit candidate `UCT.1-UCT.8` package is recorded; the live
+  wall is `UCT.1-UCT.4`, with `UCT.5-UCT.8` as structured downstream
+  consumers.
+- YM: the genuine remaining missing-content burden is the Balaban-centered
+  `H3a` cluster if internal closure is demanded.
 
-## Certification firewall
+## Aggregate Check Policy
 
-For every proof-critical owner record three separate facts:
+Use two tiers only:
 
-```text
-validation root exists?
-workflow targets it?
-observed commit-specific Agda success receipt?
-```
-
-A source module can be mathematically constructed without an observed current
-CI receipt.  A workflow can target a root without having produced a successful
-run for the commit under discussion.  Neither source prose nor CI wiring may be
-promoted into a kernel receipt.
-
-## Aggregate check policy
-
-Preferred pinned focused runner:
-
-```bash
-nix develop .# --command \
-  bash scripts/run_agda29_parallel_check.sh <module>.agda
-```
-
-The older direct smoke command remains useful when appropriate:
+1. Targeted heavy-frontier smoke checks:
 
 ```bash
 timeout 15s agda -i . <module>.agda
 ```
 
-Aggregate integration surface:
+2. Aggregate repo check:
 
 ```bash
 agda -i . DASHI/Everything.agda
@@ -64,156 +41,21 @@ agda -i . DASHI/Everything.agda
 
 Interpretation:
 
-- Exit `124` on a timeout-based targeted check means budget exceeded, not a
-  type error.
-- A targeted pass checks only the requested dependency closure.
-- The aggregate check is a compile-integration signal; it does not change
-  theorem-promotion flags.
-- No successful result should be claimed without observing the corresponding
-  command/run for the commit being described.
+- Exit `124` on a targeted check means budget exceeded, not a type error.
+- A targeted pass does not promote any theorem or clear any authority blocker.
+- The aggregate check is green only when `DASHI/Everything.agda` passes.
+- The aggregate check is a compile-integration signal only; it does not change
+  fail-closed promotion flags.
 
-## Focused NS workflow
+## Promotion Probes
 
-Canonical workflow:
-
-```text
-.github/workflows/ns-triad-concrete-retained-fiber-agda.yml
-```
-
-It performs, in order:
-
-1. anti-hole/postulate checking via `scripts/check_ns_triad_clay_frontier.py`;
-2. the exact signed finite laboratory;
-3. completion-identity checks;
-4. pinned Agda checks for selected cumulative proof-frontier roots;
-5. after the Paper-1 migration, the canonical paper-interface validation root.
-
-The workflow explicitly targets selected roots in R101-R132, then R185, R193,
-R200, R201, and R202.  This is evidence of deliberate kernel-checkability of
-that proof spine.  It is not by itself evidence that every historical PR head
-received a successful run.
-
-Canonical Paper-1 validation root:
-
-```text
-DASHI/Papers/NavierStokes/TheoremInterfaceValidation.agda
-```
-
-This root is intentionally fail-closed: it requires the direct companion and
-compiler surfaces to remain constructed while R568, P3, same-output debt
-payment, and Clay terminal promotion remain false until their authoritative
-owners change.
-
-## Canonical frontier targets
-
-### NS wall: P3 same-output payment, then R568
-
-Current paper/interface surface:
-
-- `DASHI/Papers/NavierStokes/TheoremInterface.agda`
-- `DASHI/Papers/NavierStokes/TheoremInterfaceValidation.agda`
-- `Docs/papers/live/Paper1NavierStokesClayDraft.md`
-
-Current local same-output frontier:
-
-- `DASHI/Physics/Closure/NSTriadKNComparableFixedOutputCarrierRound207Exact.agda`
-- `DASHI/Physics/Closure/NSTriadKNComparableOutputGramTelescopeRound209Exact.agda`
-- `DASHI/Physics/Closure/NSTriadKNComparableOutputResidualPaymentRound211Exact.agda`
-- `DASHI/Physics/Closure/NSTriadKNComparableConstantBandGramNoGoRound214Exact.agda`
-
-Current modern direct chain:
-
-- `DASHI/Physics/Closure/NSTriadKNDirectResolventIntegratedCompanionRound500Exact.agda`
-- `DASHI/Physics/Closure/NSTriadKNDirectResolventSignedCrossToR415Round503Exact.agda`
-- `DASHI/Physics/Closure/NSTriadKNLiveCommutatorOnlyLeafABoundaryRound568Exact.agda`
-- `DASHI/Physics/Closure/NSTriadKNDirectLeafACompilerRound572Exact.agda`
-
-Operational reading:
-
-- `C_direct` / the integrated direct companion is constructed modulo the
-  explicit standard integration authority already named by R500.
-- R209 gives the exact same-output debt telescope; R211 is the existing payment
-  socket.  The current P3 producer must pay that socket rather than introduce a
-  parallel residual API.
-- R214 is a negative control: fixed shell width/localization alone does not pay
-  same-output Gram debt.
-- R568 is the live novel cutoff-uniform PDE producer on the modern direct route.
-- R572 compiles a paid R568 budget plus separated temporal/order receipts into
-  the pre-existing R503 consumer surface.
-- R503's R500-to-R415 compiler is closed, but its analytic direct-off-diagonal
-  budget is not automatically paid.
-
-Selected cumulative certification roots already wired in the focused workflow:
-
-```text
-R101 R102 R103 R104 R105 R106 R107 R108 R109 R110
-R111 R112 R113 R114 R115 R117 R120 R121 R123
-R126 R128 R130 R132
-R185 R193 R200 R201 R202
-```
-
-The interval R133-R178 contains substantial theorem-bearing construction used
-by later roots (helicity slots, normalized curl, homogeneity, quadratic kernel,
-raw-curl weld, dual defect, low-output mass) but does not currently have the
-same dense set of individually named workflow checkpoints.  Its certification
-status should therefore be derived from actual transitive checked roots or
-future dedicated receipts, not assumed from source existence alone.
-
-### YM wall: transfer/continuum authority then no-spectral-pollution
-
-- `DASHI/Physics/Closure/YMSprint109NoBottomSpectrumPollutionCompactness.agda`
-- `DASHI/Physics/Closure/YMSprint109MoscoSpectralLiminfAssembly.agda`
-- `DASHI/Physics/Closure/YMSprint119MoscoAllObligationsReducer.agda`
-- `DASHI/Physics/Closure/YMSprint119TransferCalculusAllObligationsReducer.agda`
-- `DASHI/Physics/Closure/YMBruhatTitsToOSLatticeTransferBoundary.agda`
-- `DASHI/Physics/Closure/YMSpectralMarginToContinuumTransferCompositeLightweightBoundary.agda`
-- `DASHI/Physics/Closure/YMContinuumTransferToNoSpectralPollutionSocketCompositeLightweightBoundary.agda`
-- `DASHI/Physics/Closure/YMNoSpectralPollutionToOSWightmanSocketCompositeLightweightBoundary.agda`
-- `DASHI/Physics/Closure/YMReflectionPositivityFullTheoremAssemblyBoundary.agda`
-- `DASHI/Physics/Closure/YMContinuumMassGapFinalAssemblyBoundary.agda`
-- `DASHI/Physics/Closure/YMOnlyRemainingAuthorityBlockersBoundary.agda`
-- `DASHI/Physics/Closure/YMStandardLanguageWriteupReadinessBoundary.agda`
-- `DASHI/Physics/Closure/YMPaperSubmissionPacketBoundary.agda`
-- `DASHI/Physics/Closure/YMExternalAcceptanceBoundary.agda`
-- `DASHI/Physics/Closure/YMFinalAuthorityPackagingCompositeLightweightBoundary.agda`
-
-Operational reading:
-
-- Mosco/liminf compactness is necessary but not itself the complete wall.
-- Transfer/no-spectral-pollution and RP/OS/Wightman authority remain explicit
-  fail-closed coordinates.
-- Historical acceptance/readiness ledgers remain useful, but do not substitute
-  for the current mathematical/authority cutset.
-
-### Unification wall: U-1a-H through Jordan-von Neumann, then authority
-
-- `DASHI/Physics/Closure/UnificationScaleInvariantCrossTermHypothesisBoundary.agda`
-- `DASHI/Physics/Closure/UnificationU1aHJustificationNSLaneBoundary.agda`
-- `DASHI/Physics/Closure/UnificationU1aHJustificationYMLaneBoundary.agda`
-- `DASHI/Physics/Closure/UnificationU1aHJustificationGlobalBoundary.agda`
-- `DASHI/Physics/Closure/UnificationU1aHPerLaneCompositeBoundary.agda`
-- `DASHI/Physics/Closure/UnificationCrossTermNullityDiscriminantBoundary.agda`
-- `DASHI/Physics/Closure/UnificationNullClassSubspaceCompleteBoundary.agda`
-- `DASHI/Physics/Closure/UnificationParallelogramFromBilinearBoundary.agda`
-- `DASHI/Physics/Closure/UnificationParallelogramToJordanVonNeumannSocketCompositeLightweightBoundary.agda`
-- `DASHI/Physics/Closure/UnificationSignatureCliffordConsumerSocketBoundary.agda`
-- `DASHI/Physics/Closure/UnificationLaneJustificationAuthorityBoundary.agda`
-- `DASHI/Physics/Closure/UnificationConsumerAuthorityAssemblyBoundary.agda`
-- `DASHI/Physics/Closure/UnificationAuthorityReviewPacketBoundary.agda`
-
-Operational reading:
-
-- The live unification wall is not generic full unification.
-- The first real theorem burden is the scale-invariant cross-term / U-1a-H
-  route into cross-term nullity.
-- Nullity must feed the actual four-point/parallelogram/Jordan-von Neumann
-  chain before signature/Clifford consumers.
-- Authority packet surfaces stay fail-closed.
-
-## Promotion probes
+Use the probe layer to extract the minimal root-level blocker cutset without
+mass-flipping receipt booleans across the repo.
 
 Probe modules live under `DASHI/Physics/Probes/` and are intentionally not
 imported by `DASHI/Everything.agda`.
+
+Compile surfaces:
 
 ```bash
 agda -i . DASHI/Physics/Probes/NSPromotionProbe.agda
@@ -233,42 +75,110 @@ python3 scripts/promotion_probe_cutset_harness.py --json
 Interpretation:
 
 - `DASHI/Everything.agda` should stay green.
-- Probe modules are allowed to fail at the first strengthened root assertion
-  not currently satisfied.
-- Probes reduce the search space; they do not promote the theorem they probe.
+- The probe modules are allowed to fail.
+- Each probe is designed to fail at the first strengthened root assertion that
+  the current canonical receipt does not yet satisfy.
+- This reduces the search space from many historical `false` witnesses to a
+  small root-level blocker map.
 
-## Historical validation ring
+## Canonical Frontier Targets
 
-### NS historical A1-A9 / CKN / ESS route
+Validate these in routine loops because they sit on the current walls.
 
-Retain the old A1-A9 packet and CKN-route receipts for regression, provenance,
-and alternative-strategy analysis.  They are not the canonical current NS
-frontier after the 2026-09-13 Paper-1 migration.
-
-Representative surfaces include:
+### NS wall: coupled `A1/A3` bootstrap plus quantitative `A4`
 
 - `DASHI/Physics/Closure/NSAbelTriadicDefectMeasureConstructionBoundary.agda`
 - `DASHI/Physics/Closure/NSAbelTriadicStationarityConstructionBoundary.agda`
 - `DASHI/Physics/Closure/NSBoundedAbelMassEstimateBoundary.agda`
 - `DASHI/Physics/Closure/NSQuantitativeStationarityRateBoundary.agda`
 - `DASHI/Physics/Closure/NSLeiRenTianOutputSupportTransferBoundary.agda`
+- `DASHI/Physics/Closure/NSLeiRenTianFourierOutputCouplingBoundary.agda`
 - `DASHI/Physics/Closure/NSA5KappaBiasVanishingFromA4StationarityBoundary.agda`
 - `DASHI/Physics/Closure/NSPointwiseToAbelCompositeA6Boundary.agda`
 - `DASHI/Physics/Closure/NSA7ResidualDepletionGronwallBoundary.agda`
 - `DASHI/Physics/Closure/NSA8A9MonotonicityClosureTheoremLadderBoundary.agda`
+- `DASHI/Physics/Closure/NSWriteupAndConstantsReadinessBoundary.agda`
+- `DASHI/Physics/Closure/NSStandardPDEWriteupAssemblyBoundary.agda`
+- `DASHI/Physics/Closure/NSPaperSubmissionPacketBoundary.agda`
+
+Operational reading:
+
+- The live mathematics is `A1/A3` plus the uniform `A4` transfer.
+- `A5-A9` are downstream consumers and should stay checked as dependency
+  integrity, not as independent closure claims.
+- NS writeup/packet surfaces may be authority-audited or submission-ready
+  while `Proved = false` and Clay promotion remains false.
+- Older Sprint 64-67 CKN-route receipts remain useful regression/history
+  surfaces, but they are not the canonical current statement of the NS
+  frontier and should not displace the packet surfaces above.
+
+### YM wall: `H3a` transfer, then `H3b`, then no-spectral-pollution
+
+- `DASHI/Physics/Closure/YMSprint109NoBottomSpectrumPollutionCompactness.agda`
+- `DASHI/Physics/Closure/YMSprint109MoscoSpectralLiminfAssembly.agda`
+- `DASHI/Physics/Closure/YMSprint119MoscoAllObligationsReducer.agda`
+- `DASHI/Physics/Closure/YMSprint119TransferCalculusAllObligationsReducer.agda`
+- `DASHI/Physics/Closure/YMBruhatTitsToOSLatticeTransferBoundary.agda`
+- `DASHI/Physics/Closure/YMSpectralMarginToContinuumTransferCompositeLightweightBoundary.agda`
+- `DASHI/Physics/Closure/YMContinuumTransferToNoSpectralPollutionSocketCompositeLightweightBoundary.agda`
+- `DASHI/Physics/Closure/YMNoSpectralPollutionToOSWightmanSocketCompositeLightweightBoundary.agda`
+- `DASHI/Physics/Closure/YMReflectionPositivityFullTheoremAssemblyBoundary.agda`
+- `DASHI/Physics/Closure/YMContinuumMassGapFinalAssemblyBoundary.agda`
+- `DASHI/Physics/Closure/YMOnlyRemainingAuthorityBlockersBoundary.agda`
+- `DASHI/Physics/Closure/YMStandardLanguageWriteupReadinessBoundary.agda`
+- `DASHI/Physics/Closure/YMPaperSubmissionPacketBoundary.agda`
+- `DASHI/Physics/Closure/YMExternalAcceptanceBoundary.agda`
+- `DASHI/Physics/Closure/YMFinalAuthorityPackagingCompositeLightweightBoundary.agda`
+
+Operational reading:
+
+- Mosco/liminf compactness is necessary but not the wall.
+- `H3a` is the load-bearing transfer input.
+- `H3b` and no-spectral-pollution are downstream of `H3a`.
+- RP/OS/Wightman remain explicit authority-side blockers even where theorem
+  assembly and packet surfaces are audited or submission-ready.
+- Older Sprint 88/89/99/126/127 ledgers remain useful historical route and
+  acceptance surfaces, but they are not the best current statement of the YM
+  frontier.
+
+### Unification wall: `U-1a-H` through Jordan-von Neumann, then authority
+
+- `DASHI/Physics/Closure/UnificationScaleInvariantCrossTermHypothesisBoundary.agda`
+- `DASHI/Physics/Closure/UnificationU1aHJustificationNSLaneBoundary.agda`
+- `DASHI/Physics/Closure/UnificationU1aHJustificationYMLaneBoundary.agda`
+- `DASHI/Physics/Closure/UnificationU1aHJustificationGlobalBoundary.agda`
+- `DASHI/Physics/Closure/UnificationU1aHPerLaneCompositeBoundary.agda`
+- `DASHI/Physics/Closure/UnificationCrossTermNullityDiscriminantBoundary.agda`
+- `DASHI/Physics/Closure/UnificationNullClassSubspaceCompleteBoundary.agda`
+- `DASHI/Physics/Closure/UnificationParallelogramFromBilinearBoundary.agda`
+- `DASHI/Physics/Closure/UnificationParallelogramToJordanVonNeumannSocketCompositeLightweightBoundary.agda`
+- `DASHI/Physics/Closure/UnificationSignatureCliffordConsumerSocketBoundary.agda`
+- `DASHI/Physics/Closure/UnificationLaneJustificationAuthorityBoundary.agda`
+- `DASHI/Physics/Closure/UnificationConsumerAuthorityAssemblyBoundary.agda`
+- `DASHI/Physics/Closure/UnificationAuthorityReviewPacketBoundary.agda`
+
+Operational reading:
+
+- The live unification wall is not "generic full unification".
+- The first real theorem burden is `U-1a-H`: the scale-invariant cross-term
+  decomposition that can feed cross-term nullity.
+- Cross-term nullity must feed modulo-null linearity, four-point cancellation,
+  parallelogram, and Jordan-von Neumann before signature/Clifford consumers.
+- Authority packet surfaces stay fail-closed and do not stand in for the
+  missing four-point/parallelogram theorem.
+
+## Historical Validation Ring
+
+These surfaces still matter for compile integrity, but should be read as
+historical route/packet receipts rather than as canonical frontier surfaces.
+
+### NS historical CKN-route ring
+
 - `DASHI/Physics/Closure/ClaySprintSixtyFourNSSourceBudgetExhaustionCKNRouteReceipt.agda`
 - `DASHI/Physics/Closure/ClaySprintSixtyFiveNSPressureReconstructionCKNContractReceipt.agda`
 - `DASHI/Physics/Closure/ClaySprintSixtySixNSCKNRSweepCalibrationReceipt.agda`
 - `DASHI/Physics/Closure/ClaySprintSixtySevenNSCKNLemmaTestLadderReceipt.agda`
 - `DASHI/Physics/Closure/ClaySprintSixtySevenNSCKNUniformityAuditReceipt.agda`
-
-Historical interpretation:
-
-- these were serious earlier theorem/reduction attempts;
-- their unresolved coordinates remain historical facts;
-- useful donor mathematics should be retained and attributed;
-- their existence does not imply either failure or success of the modern direct
-  route.
 
 ### YM historical authority/acceptance ring
 

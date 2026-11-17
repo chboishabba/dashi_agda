@@ -35,14 +35,13 @@ import DASHI.Physics.Closure.NSWhitneyCouplingInequalityBoundary
 --     -> cap-uniform output strip lower bound
 --     -> degenerate-triad absorption into lower-order budget.
 --
--- This module is intentionally promotion-closed.  It records the exact
+-- This module is intentionally fail-closed.  It records the exact
 -- proof-contract structure needed by NSWhitneyCouplingInequalityBoundary and
--- the A4 uniform-in-rescaling transfer lane.  Second-round A4.2 supplies the
--- local quantitative Phi-Jacobian lower-bound theorem on frame-packet support:
--- after antipodal exclusion, c_J(kappa_F)>0 and
--- Jac(Phi) >= c_J(kappa_F) / delta_F^2 on regular Whitney chart rectangles.
--- This does not prove the full A4 output-coupling theorem, does not close
--- downstream Type-I uniformity, and does not promote Navier-Stokes Clay.
+-- the A4 uniform-in-rescaling transfer lane.  It does not compute the chart
+-- derivative, does not prove quantitative constants, does not prove the
+-- coarea/Jacobian lower bound uniform across Type-I rescalings, does not
+-- discharge degenerate-triad absorption, does not prove A4, and does not
+-- promote Navier-Stokes Clay.
 
 listLength : {A : Set} → List A → Nat
 listLength [] =
@@ -194,15 +193,6 @@ data PhiJacobianLowerBoundTarget : Set where
     OutputStripWidthRelationCarrier →
     PhiJacobianLowerBoundTarget
 
-data PhiJacobianA4-2FramePacketReceipt : Set where
-  framePacketAntipodalPositiveCJAndDeltaScaleJacobianReceipt :
-    WhitneyPackets.FrameVariationControl →
-    WhitneyPackets.WhitneyAngularCapCover →
-    Pushforward.AntipodalExclusionCarrier →
-    OffAntipodalSeparationParameter →
-    PhiJacobianLowerBoundCarrier →
-    PhiJacobianA4-2FramePacketReceipt
-
 data PhiRegularityToCoareaAttemptCarrier : Set where
   coareaPropagationA4-3StartsFromA4-1RegularityAndA4-2JacobianRoute :
     PhiDerivativeFormulaCarrier →
@@ -292,16 +282,6 @@ canonicalPhiJacobianLowerBoundTarget =
     canonicalWhitneyCapUniformConstantCarrier
     canonicalOutputStripWidthRelationCarrier
 
-canonicalPhiJacobianA4-2FramePacketReceipt :
-  PhiJacobianA4-2FramePacketReceipt
-canonicalPhiJacobianA4-2FramePacketReceipt =
-  framePacketAntipodalPositiveCJAndDeltaScaleJacobianReceipt
-    WhitneyPackets.canonicalFrameVariationControl
-    WhitneyPackets.canonicalWhitneyAngularCapCover
-    Pushforward.canonicalAntipodalExclusionCarrier
-    canonicalOffAntipodalSeparationParameter
-    canonicalPhiJacobianLowerBoundCarrier
-
 canonicalPhiRegularityToCoareaAttemptCarrier :
   PhiRegularityToCoareaAttemptCarrier
 canonicalPhiRegularityToCoareaAttemptCarrier =
@@ -379,6 +359,10 @@ phiJacobianObligationCountIs11 =
 data PhiJacobianBlocker : Set where
   missingA4-1DirectionMapRegularityChartDerivativeComputation :
     PhiJacobianBlocker
+  missingA4-2QuantitativeJacobianLowerBound :
+    PhiJacobianBlocker
+  missingA4-2WhitneyCapUniformConstants :
+    PhiJacobianBlocker
   missingA4-3CoareaPropagationFromJacobianLowerBound :
     PhiJacobianBlocker
   missingA4-5TypeIRescalingFamilyUniformJacobianConstant :
@@ -394,6 +378,8 @@ canonicalPhiJacobianBlockers :
   List PhiJacobianBlocker
 canonicalPhiJacobianBlockers =
   missingA4-1DirectionMapRegularityChartDerivativeComputation
+  ∷ missingA4-2QuantitativeJacobianLowerBound
+  ∷ missingA4-2WhitneyCapUniformConstants
   ∷ missingA4-3CoareaPropagationFromJacobianLowerBound
   ∷ missingA4-5TypeIRescalingFamilyUniformJacobianConstant
   ∷ missingDegenerateTriadAbsorptionIntoLowerOrderBudget
@@ -405,9 +391,9 @@ phiJacobianBlockerCount : Nat
 phiJacobianBlockerCount =
   listLength canonicalPhiJacobianBlockers
 
-phiJacobianBlockerCountIs6 :
-  phiJacobianBlockerCount ≡ 6
-phiJacobianBlockerCountIs6 =
+phiJacobianBlockerCountIs9 :
+  phiJacobianBlockerCount ≡ 9
+phiJacobianBlockerCountIs9 =
   refl
 
 data PhiJacobianStatusRow : Set where
@@ -475,9 +461,9 @@ phiJacobianStatusRowCount : Nat
 phiJacobianStatusRowCount =
   listLength canonicalPhiJacobianStatusRows
 
-phiJacobianStatusRowCountIs18 :
-  phiJacobianStatusRowCount ≡ 18
-phiJacobianStatusRowCountIs18 =
+phiJacobianStatusRowCountIs12 :
+  phiJacobianStatusRowCount ≡ 12
+phiJacobianStatusRowCountIs12 =
   refl
 
 ------------------------------------------------------------------------
@@ -667,8 +653,6 @@ record NSPhiJacobianLowerBoundBoundary : Set where
       WhitneyCapUniformConstantCarrier
     outputStripRelation :
       OutputStripWidthRelationCarrier
-    A4-2FramePacketReceipt :
-      PhiJacobianA4-2FramePacketReceipt
     regularityToCoareaAttempt :
       PhiRegularityToCoareaAttemptCarrier
     explicitCoareaGap :
@@ -734,8 +718,6 @@ canonicalNSPhiJacobianLowerBoundBoundary =
         canonicalWhitneyCapUniformConstantCarrier
     ; outputStripRelation =
         canonicalOutputStripWidthRelationCarrier
-    ; A4-2FramePacketReceipt =
-        canonicalPhiJacobianA4-2FramePacketReceipt
     ; regularityToCoareaAttempt =
         canonicalPhiRegularityToCoareaAttemptCarrier
     ; explicitCoareaGap =

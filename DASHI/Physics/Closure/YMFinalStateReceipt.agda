@@ -13,17 +13,6 @@ import DASHI.Physics.Closure.YMActualP7WilsonPolymerActivityReceipt as ActualP7
 import DASHI.Physics.Closure.YML1StatusReceipt as L1
 import DASHI.Physics.Closure.YML2CorrectedStatusReceipt as L2C
 import DASHI.Physics.Closure.YML2StatusReceipt as L2
-import DASHI.Physics.Closure.Gate3NoSpectralPollutionConstructedReceipt as Gate3NSP
-import DASHI.Physics.Closure.YMBalabanRGInductionCandidateReceipt as RGI
-import DASHI.Physics.Closure.YMH3aContinuumIntakeReceipt as H3A
-import DASHI.Physics.Closure.YMH3bVacuumProjectorNoSpectralPollutionBoundaryReceipt as H3B
-import DASHI.Physics.Closure.YMKPUniformVolumeInductionBoundaryReceipt as UV
-import DASHI.Physics.Closure.YMThermodynamicOSWightmanOperatorBoundaryReceipt as TD
-import DASHI.Physics.Closure.YML7L8MassGapInhabitedReceipt as MG
-import DASHI.Physics.Closure.YMContinuumUniquenessReceipt as CU
-import DASHI.Physics.Closure.YMBRSTGaugeFixedOS3PhysicalSectorReceipt as BRST
-import DASHI.Physics.Closure.YMGhostTimeReflectionGradedSignReceipt as Ghost
-import DASHI.Physics.Closure.YMContinuumGribovResolutionReceipt as Gribov
 import DASHI.Physics.Closure.YML3TightnessBoundedCandidateReceipt as L3B
 import DASHI.Physics.Closure.YML3TightnessFromKRunningReceipt as L3
 import DASHI.Physics.Closure.YMPolymerActivityStrictAbsorptionBridgeReceipt as Strict
@@ -132,7 +121,21 @@ data YMFinalStateOpenBlocker : Set where
 canonicalYMFinalStateOpenBlockers :
   List YMFinalStateOpenBlocker
 canonicalYMFinalStateOpenBlockers =
-  clayYangMillsOpen
+  balabanH3aContinuumIntakeOpen
+  ∷ balabanH3bVacuumProjectionContinuityOpen
+  ∷ noSpectralPollutionFromH3aH3bOpen
+  ∷ thermodynamicLimitFromBalabanClusterOpen
+  ∷ gaugeSectorOSContinuumOpen
+  ∷ continuumReflectionPositivityOpen
+  ∷ brstGaugeFixedReflectionPositivityObstructionOpen
+  ∷ ghostTimeReflectionGradedSignOpen
+  ∷ continuumGribovCopyBoundaryOpen
+  ∷ infiniteVolumeLimitOpen
+  ∷ osToWightmanOpen
+  ∷ operatorConvergenceOpen
+  ∷ uniformMassGapOpen
+  ∷ continuumUniquenessOpen
+  ∷ clayYangMillsOpen
   ∷ []
 
 data YMFinalStatePromotion : Set where
@@ -144,15 +147,7 @@ ymFinalStatePromotionImpossibleHere ()
 
 ymFinalStateStatement : String
 ymFinalStateStatement =
-  "YM final state: NS and unification are tracked elsewhere as candidate-complete packages pending promotion evidence, while YM remains the live Clay-promotion frontier only. L1 is inhabited at finite lattice scope, L2 is partial strong coupling, and the Paper 3 spine now records the actual p=7 polymer-activity supply, exact local KP closure, strict absorption, uniform-volume KP, Balaban RG transfer, H3a continuum intake, H3b vacuum-projector continuity, no-spectral-pollution, thermodynamic limit, OS/reflection-positivity, Wightman reconstruction, operator convergence, uniform mass gap, continuum uniqueness, BRST gauge-fixed physical-sector OS3, ghost graded-sign control, and continuum Gribov handling as true at their owning theorem surfaces. Clay promotion remains the only canonical YM final-state blocker."
-
-ymFinalStateOs1GateClause : String
-ymFinalStateOs1GateClause =
-  "OS1 is held until OS2, OS3, OS4, and OS5 are all held together."
-
-ymFinalStateMassGapDependencyClause : String
-ymFinalStateMassGapDependencyClause =
-  "Uniform mass gap is held on the OS/Wightman transfer with Gate3 separation plus Lambda_YM extraction."
+  "YM final state: NS and unification are tracked elsewhere as candidate-complete packages pending promotion evidence, while YM remains the live external-content frontier. L1 is inhabited at finite lattice scope, L2 is partial strong coupling, L3 now exposes a bounded candidate/tightness receipt over the blocked k-running audit, and L4-L8 remain conditional; the live external intake is still the Balaban-side H3a continuum cluster with downstream H3b/no-spectral-pollution, thermodynamic-limit, OS/reflection-positivity, BRST gauge-fixed OS3, ghost graded-sign, Gribov, operator-convergence, uniform-mass-gap, and uniqueness gates still open."
 
 record YMFinalStateReceipt : Setω where
   field
@@ -214,154 +209,10 @@ record YMFinalStateReceipt : Setω where
       l3BoundedCandidateRecorded ≡ true
 
     l3BoundedCandidateKeepsTightnessFalse :
-      L3B.fullTightnessConstructed l3BoundedCandidateReceipt ≡ true
+      L3B.fullTightnessConstructed l3BoundedCandidateReceipt ≡ false
 
     l3BoundedCandidateKeepsClayFalse :
       L3B.clayYangMillsPromoted l3BoundedCandidateReceipt ≡ false
-
-    actualP7Receipt :
-      ActualP7.YMActualP7WilsonPolymerActivityReceipt
-
-    actualP7LocalKPCloseRecorded :
-      ActualP7.localKPSumBelowOneProved actualP7Receipt ≡ true
-
-    actualActivityDefinitionReceipt :
-      ActualDef.YMActualPolymerActivityDefinitionReceipt
-
-    actualActivitySuppliedRecorded :
-      ActualDef.actualPolymerActivitySupplied actualActivityDefinitionReceipt
-      ≡
-      true
-
-    strictAbsorptionReceipt :
-      Strict.YMPolymerActivityStrictAbsorptionBridgeReceipt
-
-    strictAbsorptionRecorded :
-      Strict.strictAbsorptionControlPromoted strictAbsorptionReceipt ≡ true
-
-    uniformVolumeKPReceipt :
-      UV.YMKPUniformVolumeInductionBoundaryReceipt
-
-    uniformVolumeKPRecorded :
-      UV.uniformVolumeKPProved uniformVolumeKPReceipt ≡ true
-
-    balabanRGInductionCandidateReceipt :
-      RGI.YMBalabanRGInductionCandidateReceipt
-
-    balabanRGTransferRecorded :
-      RGI.balabanRGTransferProved balabanRGInductionCandidateReceipt ≡ true
-
-    balabanRGInductionCandidateKeepsContinuumFalse :
-      RGI.continuumYangMillsPromoted balabanRGInductionCandidateReceipt ≡ false
-
-    balabanRGInductionCandidateKeepsClayFalse :
-      RGI.clayYangMillsPromoted balabanRGInductionCandidateReceipt ≡ false
-
-    h3aContinuumIntakeReceipt :
-      H3A.YMH3aContinuumIntakeReceipt
-
-    h3aContinuumIntakeRecorded :
-      H3A.h3aContinuumIntakeClosed h3aContinuumIntakeReceipt ≡ true
-
-    h3bBoundaryReceipt :
-      H3B.YMH3bVacuumProjectorNoSpectralPollutionBoundaryReceipt
-
-    h3bBoundaryRecorded :
-      H3B.YMH3bVacuumProjectorNoSpectralPollutionBoundaryReceipt.vacuumProjectorContinuityTargetRecordedFlag
-        h3bBoundaryReceipt
-      ≡
-      true
-
-    gate3NoSpectralPollutionReceipt :
-      Gate3NSP.Gate3NoSpectralPollutionConstructedReceipt
-
-    gate3NoSpectralPollutionConstructed :
-      Gate3NSP.noSpectralPollutionConstructed gate3NoSpectralPollutionReceipt
-      ≡
-      true
-
-    h3bVacuumProjectorContinuity :
-      H3B.YMH3bVacuumProjectorNoSpectralPollutionBoundaryReceipt.vacuumProjectorContinuityProved
-        h3bBoundaryReceipt
-      ≡
-      true
-
-    h3bBoundaryDischarged :
-      H3B.YMH3bVacuumProjectorNoSpectralPollutionBoundaryReceipt.h3bDischarged
-        h3bBoundaryReceipt
-      ≡
-      true
-
-    thermodynamicBundleReceipt :
-      TD.YMThermodynamicOSWightmanOperatorBoundaryReceipt
-
-    thermodynamicBoundaryRecorded :
-      TD.boundaryRecorded thermodynamicBundleReceipt ≡ true
-
-    thermodynamicLimitRecorded :
-      TD.thermodynamicLimitConstructed thermodynamicBundleReceipt ≡ true
-
-    osContinuumRecorded :
-      TD.osPositivityConstructed thermodynamicBundleReceipt ≡ true
-
-    wightmanRecorded :
-      TD.wightmanReconstructionConstructed thermodynamicBundleReceipt ≡ true
-
-    operatorConvergenceRecorded :
-      TD.operatorConvergenceConstructed thermodynamicBundleReceipt ≡ true
-
-    thermodynamicBundleKeepsUniquenessFalse :
-      TD.continuumUniquenessConstructed thermodynamicBundleReceipt ≡ true
-
-    thermodynamicBundleKeepsClayFalse :
-      TD.clayPromotionConstructed thermodynamicBundleReceipt ≡ false
-
-    uniformMassGapReceipt :
-      MG.YML7L8MassGapInhabitedReceipt
-
-    uniformMassGapRecorded :
-      MG.continuumMassGapConstructed uniformMassGapReceipt ≡ true
-
-    continuumUniquenessReceipt :
-      CU.YMContinuumUniquenessReceipt
-
-    continuumUniquenessRecorded :
-      CU.continuumUniquenessProved continuumUniquenessReceipt ≡ true
-
-    brstPhysicalSectorReceipt :
-      BRST.YMBRSTGaugeFixedOS3PhysicalSectorReceipt
-
-    brstPhysicalSectorRecorded :
-      BRST.physicalSectorOS3PositivityAvailable brstPhysicalSectorReceipt
-      ≡
-      true
-
-    brstPhysicalSectorBlockerClosed :
-      BRST.brstGaugeFixedReflectionPositivityObstructionOpen
-        brstPhysicalSectorReceipt
-      ≡
-      false
-
-    ghostGradedSignReceipt :
-      Ghost.YMGhostTimeReflectionGradedSignReceipt
-
-    ghostGradedSignRecorded :
-      Ghost.ghostTimeReflectionGradedSignBlockerClosed
-        ghostGradedSignReceipt
-      ≡
-      true
-
-    ghostUngradedPositiveFormStillFalse :
-      Ghost.ungradedGhostPositiveFormAvailable ghostGradedSignReceipt ≡ false
-
-    continuumGribovReceipt :
-      Gribov.YMContinuumGribovResolutionReceipt
-
-    continuumGribovRecorded :
-      Gribov.continuumGribovResolutionProved continuumGribovReceipt ≡ true
-
-    continuumGribovBoundaryClosed :
-      Gribov.continuumGribovCopyBoundaryOpen continuumGribovReceipt ≡ false
 
     layers :
       List YMFinalStateLayer
@@ -540,88 +391,6 @@ canonicalYMFinalStateReceipt =
         refl
     ; l3BoundedCandidateKeepsClayFalse =
         refl
-    ; actualP7Receipt =
-        ActualP7.canonicalYMActualP7WilsonPolymerActivityReceipt
-    ; actualP7LocalKPCloseRecorded =
-        refl
-    ; actualActivityDefinitionReceipt =
-        ActualDef.canonicalYMActualPolymerActivityDefinitionReceipt
-    ; actualActivitySuppliedRecorded =
-        refl
-    ; strictAbsorptionReceipt =
-        Strict.canonicalYMPolymerActivityStrictAbsorptionBridgeReceipt
-    ; strictAbsorptionRecorded =
-        refl
-    ; uniformVolumeKPReceipt =
-        UV.canonicalYMKPUniformVolumeInductionBoundaryReceipt
-    ; uniformVolumeKPRecorded =
-        refl
-    ; balabanRGInductionCandidateReceipt =
-        RGI.canonicalYMBalabanRGInductionCandidateReceipt
-    ; balabanRGTransferRecorded =
-        refl
-    ; balabanRGInductionCandidateKeepsContinuumFalse =
-        refl
-    ; balabanRGInductionCandidateKeepsClayFalse =
-        refl
-    ; h3aContinuumIntakeReceipt =
-        H3A.canonicalYMH3aContinuumIntakeReceipt
-    ; h3aContinuumIntakeRecorded =
-        refl
-    ; h3bBoundaryReceipt =
-        H3B.canonicalYMH3bVacuumProjectorNoSpectralPollutionBoundaryReceipt
-    ; h3bBoundaryRecorded =
-        refl
-    ; gate3NoSpectralPollutionReceipt =
-        Gate3NSP.canonicalGate3NoSpectralPollutionConstructedReceipt
-    ; gate3NoSpectralPollutionConstructed =
-        refl
-    ; h3bVacuumProjectorContinuity =
-        refl
-    ; h3bBoundaryDischarged =
-        refl
-    ; thermodynamicBundleReceipt =
-        TD.canonicalYMThermodynamicOSWightmanOperatorBoundaryReceipt
-    ; thermodynamicBoundaryRecorded =
-        refl
-    ; thermodynamicLimitRecorded =
-        refl
-    ; osContinuumRecorded =
-        refl
-    ; wightmanRecorded =
-        refl
-    ; operatorConvergenceRecorded =
-        refl
-    ; thermodynamicBundleKeepsUniquenessFalse =
-        refl
-    ; thermodynamicBundleKeepsClayFalse =
-        refl
-    ; uniformMassGapReceipt =
-        MG.canonicalYML7L8MassGapInhabitedReceipt
-    ; uniformMassGapRecorded =
-        refl
-    ; continuumUniquenessReceipt =
-        CU.canonicalYMContinuumUniquenessReceipt
-    ; continuumUniquenessRecorded =
-        refl
-    ; brstPhysicalSectorReceipt =
-        BRST.canonicalYMBRSTGaugeFixedOS3PhysicalSectorReceipt
-    ; brstPhysicalSectorRecorded =
-        refl
-    ; brstPhysicalSectorBlockerClosed =
-        refl
-    ; ghostGradedSignReceipt =
-        Ghost.canonicalYMGhostTimeReflectionGradedSignReceipt
-    ; ghostGradedSignRecorded =
-        refl
-    ; ghostUngradedPositiveFormStillFalse =
-        refl
-    ; continuumGribovReceipt =
-        Gribov.canonicalYMContinuumGribovResolutionReceipt
-    ; continuumGribovRecorded =
-        refl
-    ; continuumGribovBoundaryClosed =
-        refl
     ; layers =
         canonicalYMFinalStateLayers
     ; layersAreCanonical =
@@ -713,17 +482,11 @@ canonicalYMFinalStateReceipt =
         ∷ "Finite carrier spectral gaps stay finite-lattice evidence only, not continuum or Clay Yang-Mills"
         ∷ "L3 is partial as a dimensional-transmutation/CS k-running audit; full tightness itself is not constructed"
         ∷ "L4-L8 remain conditional chain entries, not unconditional continuum or mass-gap proofs"
-        ∷ "The exact p=7 polymer-activity supply, strict-absorption bridge, uniform-volume KP lane, and Balaban RG transfer lane are now recorded true at their owning theorem surfaces"
-        ∷ "The H3a continuum intake receipt now records the continuum triple as constructed while keeping Clay promotion false"
-        ∷ "The H3b/vacuum-projector/no-spectral-pollution branch now records vacuum-projector continuity and no-spectral-pollution as closed under positive m_infty, with Gate3 NSP construction also recorded"
+        ∷ "The leading external intake is the Balaban-side H3a continuum cluster, followed by H3b vacuum-projection continuity and no-spectral-pollution"
         ∷ "L3 also now carries a bounded candidate/tightness receipt over the blocked k-running route, but full tightness remains false"
-        ∷ "The thermodynamic-limit -> OS/Wightman/operator-convergence bundle is now recorded true at its theorem-wire surface"
-        ∷ "OS5 clustering is held to open only after thermodynamic-limit and gap+RP inputs are carried into the OS/Wightman route"
-        ∷ ymFinalStateOs1GateClause
-        ∷ "Uniform mass gap and continuum uniqueness are now recorded true at dedicated theorem surfaces while Clay and terminal promotion remain false"
-        ∷ ymFinalStateMassGapDependencyClause
-        ∷ "OS3 remains sector-separated in meaning, but the BRST physical-sector positivity surface, ghost graded-sign surface, and continuum Gribov boundary surface are now recorded true at their owning theorem receipts"
-        ∷ "Clay Yang-Mills and terminal Clay promotion remain false; the canonical root YM blocker list now collapses to Clay-promotion authority only"
+        ∷ "Thermodynamic-limit, gauge-sector OS continuum, reflection positivity, infinite-volume limit, and operator convergence are not proved"
+        ∷ "OS3 is separated into finite ungauge-fixed Wilson positivity, BRST gauge-fixed obstruction, ghost graded-sign boundary, and carrier-only Gribov representative boundary"
+        ∷ "Gauge-sector OS continuum, uniqueness, Clay Yang-Mills, and terminal Clay promotion remain false"
         ∷ []
     }
 
