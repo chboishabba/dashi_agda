@@ -63,6 +63,21 @@ record FormalFieldToPort (b : SelectedBoundary) : Set₂ where
     symbolicField : Maxwell.MaxwellExteriorCalculusAdapter
     causalFlight : Time.RetardedFlight
     portWindow : Port.MidpointTwoPortWorkWindow
+
+    -- A real member of the original typed time-indexed graph is included,
+    -- with its source owner tied to the selected historical configuration.
+    selectedMember : Time.MemberState
+    memberSourceIsSelected :
+      Time.MemberState.sourceOwner selectedMember
+        ≡ SelectedBoundary.originalSource b
+
+    -- Maxwell's symbolic curvature carrier must refer to the SAME
+    -- explicitly selected member; do not equate arbitrary audio phases.
+    selectedSymbolicCurvature : Maxwell.TwoForm
+    memberFieldIsSelectedCurvature :
+      Time.MemberState.symbolicField selectedMember
+        ≡ selectedSymbolicCurvature
+
     originalMaxwellSourceCurrent : Set
     originalRetardedMaterialResponse : Set
     originalPortFieldFluxEquality : Set
