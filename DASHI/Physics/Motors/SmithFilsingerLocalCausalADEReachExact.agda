@@ -132,6 +132,104 @@ noSignalOutsideDynamicCone z (g ∷ gs) s R initially =
     (reachStep (GuardedPrimitive.primitive g) R)
     (oneStepOutsideZero z g s R initially)
 
+-- Real source events are NOT zero-preserving. Their own cell is a
+-- new root even when no prior signal reaches it. A source label alone
+-- never certifies that its work came from the Sun–Earth environment.
+data SourceOwner : Set where
+  naturalSource : SourceOwner
+  controllerSource : SourceOwner
+
+data LocalEvent (A : Set) (z : A) : Set where
+  propagate : GuardedPrimitive A z → LocalEvent A z
+  injectAt : SourceOwner → Nat → (A → A) → LocalEvent A z
+
+data Ticket : Set where
+  ticket : Ticket
+
+absurdElim : ∀ {X : Set} → Absurd → X
+absurdElim ()
+
+applyInjection :
+  ∀ {A : Set} → Nat → (A → A) → Frame.State A → Frame.State A
+applyInjection sourceID change s k with Indexed.sameID k sourceID
+... | true = change (s k)
+... | false = s k
+
+-- At the source coordinate the reachability type is inhabited
+-- unconditionally; everywhere else it stays precisely the old type.
+seedReach : Nat → (Nat → Set) → Nat → Set
+seedReach sourceID R k with Indexed.sameID k sourceID
+... | true = Ticket
+... | false = R k
+
+injectionOutsideZero :
+  ∀ {A : Set} (z : A) (sourceID : Nat) (change : A → A)
+  (s : Frame.State A) (R : Nat → Set) →
+  OutsideZero z s R →
+  OutsideZero z (applyInjection sourceID change s)
+    (seedReach sourceID R)
+injectionOutsideZero z sourceID change s R initial k outside with
+    Indexed.sameID k sourceID
+... | true = absurdElim (outside ticket)
+... | false = initial k outside
+
+runEvent :
+  ∀ {A : Set} {z : A} →
+  LocalEvent A z → Frame.State A → Frame.State A
+runEvent (propagate g) s =
+  Frame.applyPrimitive (GuardedPrimitive.primitive g) s
+runEvent (injectAt owner sourceID change) s =
+  applyInjection sourceID change s
+
+reachEvent :
+  ∀ {A : Set} {z : A} →
+  LocalEvent A z → (Nat → Set) → Nat → Set
+reachEvent (propagate g) R =
+  reachStep (GuardedPrimitive.primitive g) R
+reachEvent (injectAt owner sourceID change) R =
+  seedReach sourceID R
+
+eventOutsideZero :
+  ∀ {A : Set} (z : A) (event : LocalEvent A z)
+  (s : Frame.State A) (R : Nat → Set) →
+  OutsideZero z s R →
+  OutsideZero z (runEvent event s) (reachEvent event R)
+eventOutsideZero z (propagate g) s R initial =
+  oneStepOutsideZero z g s R initial
+eventOutsideZero z (injectAt owner sourceID change) s R initial =
+  injectionOutsideZero z sourceID change s R initial
+
+runEvents :
+  ∀ {A : Set} {z : A} →
+  List (LocalEvent A z) → Frame.State A → Frame.State A
+runEvents [] s = s
+runEvents (event ∷ events) s =
+  runEvents events (runEvent event s)
+
+reachEvents :
+  ∀ {A : Set} {z : A} →
+  List (LocalEvent A z) → (Nat → Set) → Nat → Set
+reachEvents [] R = R
+reachEvents (event ∷ events) R =
+  reachEvents events (reachEvent event R)
+
+-- Strong all-N result: any finite interleaving of ordinary local
+-- propagation, natural-source injections and controller injections
+-- has no nonzero response outside its EXACT dynamic dependency set.
+-- This prevents the prior source-seeding bug in an Agda theorem,
+-- conditional on real zero-preserving primitive receipts.
+noSignalOutsideInterleavedSourceCone :
+  ∀ {A : Set} (z : A)
+  (events : List (LocalEvent A z))
+  (s : Frame.State A) (R : Nat → Set) →
+  OutsideZero z s R →
+  OutsideZero z (runEvents events s) (reachEvents events R)
+noSignalOutsideInterleavedSourceCone z [] s R initially = initially
+noSignalOutsideInterleavedSourceCone z (event ∷ events) s R initially =
+  noSignalOutsideInterleavedSourceCone z events
+    (runEvent event s) (reachEvent event R)
+    (eventOutsideZero z event s R initially)
+
 -- This theorem does not claim a physical Maxwell front. In particular,
 -- a macro step containing N sequential edges can cross N edges at
 -- the *same named* macro-step. Propagation speed requires independent
