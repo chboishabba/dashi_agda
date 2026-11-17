@@ -56,8 +56,8 @@ dotReversedNormal :
 dotReversedNormal F normal poynting =
   R.solve 6
     (λ nx ny nz sx sy sz →
-      (((R.⊝ nx R.⊗ sx) R.⊕ (R.⊝ ny R.⊗ sy))
-         R.⊕ (R.⊝ nz R.⊗ sz))
+      ((((R.⊝ nx) R.⊗ sx) R.⊕ ((R.⊝ ny) R.⊗ sy))
+         R.⊕ ((R.⊝ nz) R.⊗ sz))
       R.⊜
       (R.⊝ (((nx R.⊗ sx) R.⊕ (ny R.⊗ sy))
          R.⊕ (nz R.⊗ sz))))
