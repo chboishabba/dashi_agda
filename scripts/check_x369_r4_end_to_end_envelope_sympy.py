@@ -237,7 +237,7 @@ require("gaussian derivative extremum at |t|=1",
     S.simplify(S.diff(T*phi,T).subs(T,1))==0)
 Lg=1+1/S.sqrt(2*S.pi*S.E)
 require("positive admitted GELU global Lipschitz coefficient",
-    bool(S.N(Lg>1)))
+    bool(Lg>1))
 # For fixed selected IDs and stable orientation charts, Euclidean
 # FFN bound Y_e <= ||W2||2 * Lg * ||W1||2
 #                  * sqrt(dx²+dh²) + eta_FFN_e
