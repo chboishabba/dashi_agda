@@ -22,6 +22,8 @@ ROOTS = (
     "DASHI.Physics.YangMills.YMClayBishopSU2UnitarityExact",
     "DASHI.Physics.YangMills.YMClayBishopSU2HaarSeriesLimitExact",
     "DASHI.Physics.YangMills.YMClayBishopFiniteWilsonNormalizedExact",
+    "DASHI.Foundations.BishopMachinPiDoubleAngleAlgebraExact",
+    "DASHI.Foundations.BishopMachinPiPeriodFromQuarterExact",
     "DASHI.Physics.YangMills.YMClayNativeFiniteGaugeVectorNaturalitySafeExact",
     "DASHI.Physics.YangMills.YMClaySUNConstructedPeriodicGaugeCodecExact",
     "DASHI.Physics.YangMills.YMClaySUNVariablePhysicalCutoffFamilyExact",
