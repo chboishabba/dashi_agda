@@ -226,223 +226,44 @@ unifiedCurrentValidityIsNotApplicability :
 unifiedCurrentValidityIsNotApplicability =
   LegalGovernanceTOE.toeCurrentValidityDoesNotAutomaticallyEstablishApplicability
 
+unifiedBalabanScaleTransferNonPromotion :
+  BalabanR559TOE.ScaleTransferPromotion → ⊥
+unifiedBalabanScaleTransferNonPromotion =
+  BalabanR559TOE.scaleTransferPromotionEliminator
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+------------------------------------------------------------------------
+-- Governed legal-source authority handoff.
+------------------------------------------------------------------------
+
+import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalGovernanceTOE
+
+unifiedGovernedLegalWorkflowAuthorityInvariantHandoff :
+  LegalGovernanceTOE.GovernedLegalWorkflowAuthorityInvariantHandoff
+unifiedGovernedLegalWorkflowAuthorityInvariantHandoff =
+  LegalGovernanceTOE.canonicalGovernedLegalWorkflowAuthorityInvariantHandoff
+
+unifiedCandidateSourceIsNotLegalAuthority :
+  LegalGovernanceTOE.CandidateSourceIsAuthoritative → ⊥
+unifiedCandidateSourceIsNotLegalAuthority =
+  LegalGovernanceTOE.toeCandidateSourceDoesNotCloseAuthority
+
+unifiedSameLegalSystemIsNotLegalAuthority :
+  LegalGovernanceTOE.SameLegalSystemAutomaticallyMeansAuthority → ⊥
+unifiedSameLegalSystemIsNotLegalAuthority =
+  LegalGovernanceTOE.toeSameSystemDoesNotAutomaticallyCloseAuthority
+
+unifiedCurrentValidityIsNotApplicability :
+  LegalGovernanceTOE.CurrentValidityAutomaticallyMeansApplicability → ⊥
+unifiedCurrentValidityIsNotApplicability =
+  LegalGovernanceTOE.toeCurrentValidityDoesNotAutomaticallyEstablishApplicability
+
 unifiedSemanticAdmissionIsNotLegalAuthority :
-  LegalGovernanceTOE.SemanticAdmissionAuthorityIsLegalSourceAuthority → UnifiedEmpty.⊥
+  LegalGovernanceTOE.SemanticAdmissionAuthorityIsLegalSourceAuthority → ⊥
 unifiedSemanticAdmissionIsNotLegalAuthority =
   LegalGovernanceTOE.toeSemanticAdmissionDoesNotBecomeLegalSourceAuthority
 
 unifiedDocumentRoleIsNotLegalAuthority :
-  LegalGovernanceTOE.DocumentRoleSuppliesLegalSourceAuthority → UnifiedEmpty.⊥
+  LegalGovernanceTOE.DocumentRoleSuppliesLegalSourceAuthority → ⊥
 unifiedDocumentRoleIsNotLegalAuthority =
   LegalGovernanceTOE.toeDocumentRoleDoesNotSupplyLegalSourceAuthority
-
-unifiedIbrahimRecognitionParetoBoundary =
-  IbrahimTOE.ibrahimRecognitionParetoBoundary
-
-unifiedIbrahimCharacterExecutionFrontier =
-  IbrahimTOE.ibrahimCharacterExecutionFrontier
-
-unifiedIbrahimPhaseResolutionFrontier =
-  IbrahimTOE.ibrahimPhaseResolutionFrontier
-
-unifiedIbrahimHistoricalDiscriminatorBoundary =
-  IbrahimTOE.ibrahimHistoricalDiscriminatorBoundary
-
-unifiedFleetFormalGapTargetReceipt :
-  FleetTOE.FleetFormalGapTargetReceipt
-unifiedFleetFormalGapTargetReceipt =
-  FleetTOE.canonicalFleetFormalGapTargetReceipt
-
-unifiedFleetDischargedCoreKnowledgeFibresIs584 :
-  FleetTOE.dischargedCoreKnowledgeFibres unifiedFleetFormalGapTargetReceipt ≡ 584
-unifiedFleetDischargedCoreKnowledgeFibresIs584 = refl
-
-governedExactReuseDoesNotCreateClaimTruth :
-  LegalGovernance.ExactReuseCreatesClaimTruth → ⊥
-governedExactReuseDoesNotCreateClaimTruth =
-  LegalGovernance.toeExactReuseDoesNotCreateClaimTruth
-
-
-------------------------------------------------------------------------
--- Governance + max-cut/Pareto/snowball convergence facade.
-------------------------------------------------------------------------
-
-unifiedGovernanceMaxCutParetoSnowballReceipt :
-  GovernanceMaxCut.GovernanceMaxCutParetoSnowballTOEReceipt
-unifiedGovernanceMaxCutParetoSnowballReceipt =
-  GovernanceMaxCut.canonicalGovernanceMaxCutParetoSnowballTOEReceipt
-
-unifiedGovernanceMaxCutParetoSnowballZKPFrame :
-  GovernanceMaxCut.GovernanceMaxCutParetoSnowballZKPFrame
-unifiedGovernanceMaxCutParetoSnowballZKPFrame =
-  GovernanceMaxCut.canonicalGovernanceMaxCutParetoSnowballZKPFrame
-
-unifiedGovernanceMaxCutBalabanScaleTransferImpossible :
-  GovernanceMaxCut.BalabanScaleTransferPromotion → ⊥
-unifiedGovernanceMaxCutBalabanScaleTransferImpossible =
-  GovernanceMaxCut.balabanScaleTransferPromotionImpossible
-
-unifiedFleetRelatedSymbolsRequired :
-  FleetGapTOE.fleetRelatedSymbolsRequired ≡ true
-unifiedFleetRelatedSymbolsRequired =
-  FleetGapTOE.fleetRelatedSymbolsRequiredIsTrue
-
-unifiedFleetDiscoverRequired :
-  FleetGapTOE.fleetDiscoverRequired ≡ true
-unifiedFleetDiscoverRequired =
-  FleetGapTOE.fleetDiscoverRequiredIsTrue
-
-unifiedFleetRoundLineageRequired :
-  FleetGapTOE.fleetRoundLineageRequired ≡ true
-unifiedFleetRoundLineageRequired =
-  FleetGapTOE.fleetRoundLineageRequiredIsTrue
-
-unifiedFleetCountDoesNotCreateNamedManifest :
-  FleetGapTOE.CountCreatesNamedManifest → ⊥
-unifiedFleetCountDoesNotCreateNamedManifest =
-  FleetGapTOE.fleetCountDoesNotCreateNamedManifest
-
-------------------------------------------------------------------------
--- Direct Pareto / snowball / Ibrahim and ternary-27 non-promotion surface.
-------------------------------------------------------------------------
-
-unifiedIbrahimSearchPriorityDoesNotCreateProof :
-  ParetoSnowballTOE.SearchPriorityCreatesProof → ⊥
-unifiedIbrahimSearchPriorityDoesNotCreateProof =
-  ParetoSnowballTOE.searchPriorityDoesNotCreateProof
-
-unifiedIbrahimProducerSourceDoesNotCreateRunReceipt :
-  ParetoSnowballTOE.ProducerSourceCreatesRunReceipt → ⊥
-unifiedIbrahimProducerSourceDoesNotCreateRunReceipt =
-  ParetoSnowballTOE.producerSourceDoesNotCreateRunReceipt
-
-unifiedIbrahimDegree729DoesNotCreateMonsterHZetaRecognition :
-  ParetoSnowballTOE.Degree729CreatesMonsterHZetaRecognition → ⊥
-unifiedIbrahimDegree729DoesNotCreateMonsterHZetaRecognition =
-  ParetoSnowballTOE.degree729DoesNotCreateMonsterHZetaRecognition
-
-unifiedIbrahimPaperOracleDoesNotIdentifyHistoricalDump :
-  ParetoSnowballTOE.PaperOracleIdentifiesDump → ⊥
-unifiedIbrahimPaperOracleDoesNotIdentifyHistoricalDump =
-  ParetoSnowballTOE.paperOracleDoesNotIdentifyHistoricalDump
-
-unifiedIbrahimRoutePreferenceDoesNotCreateExecutionReceipt :
-  ParetoSnowballTOE.RoutePreferenceCreatesExecutionReceipt → ⊥
-unifiedIbrahimRoutePreferenceDoesNotCreateExecutionReceipt =
-  ParetoSnowballTOE.routePreferenceDoesNotCreateExecutionReceipt
-
-unifiedIbrahimMergedLeanSourceDoesNotCreateKernelReceipt :
-  ParetoSnowballTOE.MergedLeanSourceCreatesKernelReceipt → ⊥
-unifiedIbrahimMergedLeanSourceDoesNotCreateKernelReceipt =
-  ParetoSnowballTOE.mergedLeanSourceDoesNotCreateKernelReceipt
-
-unifiedIbrahimOEISDoesNotCreateMultiplicityAction :
-  ParetoSnowballTOE.NinetyOEISEqualityCreatesMultiplicityAction → ⊥
-unifiedIbrahimOEISDoesNotCreateMultiplicityAction =
-  ParetoSnowballTOE.oeisDoesNotCreateMultiplicityAction
-
-unifiedIbrahimFiniteIrreducibilityDoesNotCreateMonsterHZetaRecognition :
-  ParetoSnowballTOE.FiniteIrreducibilityCreatesMonsterHZetaRecognition → ⊥
-unifiedIbrahimFiniteIrreducibilityDoesNotCreateMonsterHZetaRecognition =
-  ParetoSnowballTOE.finiteIrreducibilityDoesNotCreateMonsterHZetaRecognition
-
-unifiedIbrahimCurrentQidDoesNotIdentifyHistoricalTitle :
-  ParetoSnowballTOE.CurrentQidIdentifiesHistoricalTitle → ⊥
-unifiedIbrahimCurrentQidDoesNotIdentifyHistoricalTitle =
-  ParetoSnowballTOE.currentQidDoesNotIdentifyHistoricalTitle
-
-unified369Ternary27MonsterRepresentationNotPromoted =
-  MaxCut369.toe27MonsterRepresentationNotPromoted
-
-unified369Ternary27MonsterEmbeddingNotPromoted =
-  MaxCut369.toe27MonsterEmbeddingNotPromoted
-
-
-import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalGovernance
-import DASHI.Unified.PNFSourceBoundaryTOEExact as PNFSource
-import DASHI.Unified.PNFDistilledNonPromotionTOEExact as PNFDistilled
-import DASHI.Unified.SCALEEvidenceReviewTOEConvergenceExact as SCALEReview
-import DASHI.Unified.GovernedFleetResidualTOEHandoffExact as GovernedFleet
-import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifest
-
-
-------------------------------------------------------------------------
--- Governed Fleet residual handoff.
-------------------------------------------------------------------------
-
-unifiedGovernedFleetResidualTOEHandoff :
-  GovernedFleet.GovernedFleetResidualTOEHandoff
-unifiedGovernedFleetResidualTOEHandoff =
-  GovernedFleet.canonicalGovernedFleetResidualTOEHandoff
-
-governedLegalWorkflowTOEBoundary :
-  LegalGovernance.GovernedLegalWorkflowTOEBoundary
-governedLegalWorkflowTOEBoundary =
-  LegalGovernance.canonicalGovernedLegalWorkflowTOEBoundary
-
-governedLegalWorkflowTOEInvariantHandoff :
-  LegalGovernance.GovernedLegalWorkflowTOEInvariantHandoff
-governedLegalWorkflowTOEInvariantHandoff =
-  LegalGovernance.canonicalGovernedLegalWorkflowTOEInvariantHandoff
-
-governedLegalWorkflowIntrospectiveZKPFrame :
-  LegalGovernance.GovernedLegalWorkflowIntrospectiveZKPFrame
-governedLegalWorkflowIntrospectiveZKPFrame =
-  LegalGovernance.canonicalGovernedLegalWorkflowIntrospectiveZKPFrame
-
-unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
-  FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
-unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
-  FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
-
-
-
-------------------------------------------------------------------------
--- Technical-service safety non-promotion.
--- Re-export the canonical cross-domain owner. No product-specific safety
--- claim and no Fleet-gap discharge is introduced here.
-------------------------------------------------------------------------
-
-unifiedTechnicalServiceSafetyBoundary :
-  TechnicalSafety.TechnicalServiceSafetyBoundary
-unifiedTechnicalServiceSafetyBoundary =
-  TechnicalSafety.canonicalTechnicalServiceSafetyBoundary
-
-unifiedInterfaceCompatibilityDoesNotPromoteContinuousService :
-  TechnicalSafety.InterfaceCompatibilityCreatesContinuousServiceSuitability →
-  ⊥
-unifiedInterfaceCompatibilityDoesNotPromoteContinuousService =
-  TechnicalSafety.interfaceCompatibilityDoesNotPromoteContinuousService
-
-unifiedNominalPressureRatingDoesNotPromoteContinuousService :
-  TechnicalSafety.NominalPressureRatingCreatesContinuousServiceSuitability →
-  ⊥
-unifiedNominalPressureRatingDoesNotPromoteContinuousService =
-  TechnicalSafety.nominalPressureRatingDoesNotPromoteContinuousService
-
-unifiedObservedOpenFlowDoesNotPromoteBackflowSafety :
-  TechnicalSafety.ObservedOpenFlowCreatesBackflowSafety →
-  ⊥
-unifiedObservedOpenFlowDoesNotPromoteBackflowSafety =
-  TechnicalSafety.observedOpenFlowDoesNotPromoteBackflowSafety
-
-unifiedTechnicalServiceContinuousServiceReceiptRequired :
-  TechnicalSafety.continuousServiceAuthorityReceiptRequired
-    TechnicalSafety.canonicalTechnicalServiceSafetyBoundary
-  ≡ true
-unifiedTechnicalServiceContinuousServiceReceiptRequired =
-  TechnicalSafety.technicalServiceContinuousServiceReceiptRequired
-
-unifiedTechnicalServiceBackflowReceiptRequired :
-  TechnicalSafety.backflowSafetyAuthorityReceiptRequired
-    TechnicalSafety.canonicalTechnicalServiceSafetyBoundary
-  ≡ true
-unifiedTechnicalServiceBackflowReceiptRequired =
-  TechnicalSafety.technicalServiceBackflowReceiptRequired
-
-unifiedTechnicalServiceProductSpecificClaimStillBlocked :
-  TechnicalSafety.productSpecificSafetyClaimMade
-    TechnicalSafety.canonicalTechnicalServiceSafetyBoundary
-  ≡ false
-unifiedTechnicalServiceProductSpecificClaimStillBlocked =
-  TechnicalSafety.technicalServiceProductSpecificClaimStillBlocked
