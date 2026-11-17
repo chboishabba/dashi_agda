@@ -6,6 +6,13 @@ module DASHI.EverythingTOESymmetryResolved369 where
 -- and Agda kernel acceptance remain separate gates.
 import DASHI.Cognition.PNF.X369R4TopKSourceKinkWitnessExact as X369R4Kink
 open X369R4Kink public using (r4FiniteKinkSourceShape)
+-- SAME-CLOCK source-shaped R4 history quotient obstruction.
+-- Reuse the existing generic NonFactorability theorem, not a
+-- duplicate recurrent-observability mathematical owner.
+import DASHI.Cognition.PNF.X369R4HistoryLoadNonFactorabilityExact as X369R4History
+open X369R4History public using
+  (sourceFixtureResponseCannotFactorThroughLoad
+  ; sourceFixtureLoadRechartCannotRecoverHistory)
 import DASHI.Unified.AdelicSpectralPaperTOEExact as AdelicSpectralTOE
 
 -- September 2026 source-typed finite spectral closure and fail-closed gates.
