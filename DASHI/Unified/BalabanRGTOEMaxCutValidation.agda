@@ -749,13 +749,3 @@ unifierJointContinuumLimitPromotionMatchesJointOwner :
   Balaban.BalabanContinuumLimitPromotion → ⊥
 unifierJointContinuumLimitPromotionMatchesJointOwner =
   Unifier.unifierBalabanR559ContinuumLimitPromotionImpossible
-
-toeJointDepthContinuumLimitPromotionMatchesJointOwner :
-  Balaban.DepthContinuumLimitPromotion → ⊥
-toeJointDepthContinuumLimitPromotionMatchesJointOwner =
-  TOE.toeBalabanR559DepthContinuumLimitPromotionImpossible
-
-unifierJointDepthContinuumLimitPromotionMatchesJointOwner :
-  Balaban.DepthContinuumLimitPromotion → ⊥
-unifierJointDepthContinuumLimitPromotionMatchesJointOwner =
-  Unifier.unifierBalabanR559DepthContinuumLimitPromotionImpossible

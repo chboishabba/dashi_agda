@@ -321,6 +321,23 @@ unifiedFleetR5OrdinalCutReceipt :
 unifiedFleetR5OrdinalCutReceipt =
   FleetGapTOE.canonicalFleetR5OrdinalCutReceipt
 
+unifiedNavierStokesBM2ZKPFrame :
+  NSBM2TOE.NavierStokesBM2TOEZKPFrame
+unifiedNavierStokesBM2ZKPFrame =
+  NSBM2TOE.canonicalNavierStokesBM2TOEZKPFrame
+
+
+------------------------------------------------------------------------
+-- Fleet R5 exact ordinal max-cut.
+-- The ordinal carrier targets exactly 58 slots.
+-- It does not claim persisted R5 row identity.
+------------------------------------------------------------------------
+
+unifiedFleetR5OrdinalCutReceipt :
+  FleetGapTOE.FleetR5OrdinalCutReceipt
+unifiedFleetR5OrdinalCutReceipt =
+  FleetGapTOE.canonicalFleetR5OrdinalCutReceipt
+
 unifiedFleetFormalGapOrdinalCountIs58 :
   FleetGapTOE.fleetFormalGapOrdinalCount ≡ 58
 unifiedFleetFormalGapOrdinalCountIs58 =

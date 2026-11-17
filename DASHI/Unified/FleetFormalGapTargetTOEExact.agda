@@ -386,10 +386,6 @@ fleetContradictionOrdinalCountIs44 :
 fleetContradictionOrdinalCountIs44 =
   fleetRecordedContradictionCountIs44
 
--- The checked-in R5 sources currently supply the partition cardinalities.
--- They do not supply a named row-to-ordinal bijection.
--- Keep this distinction explicit at the theorem boundary.
-
 fleetOrdinalCarriesPersistedRowIdentity : Bool
 fleetOrdinalCarriesPersistedRowIdentity = false
 
@@ -419,7 +415,7 @@ fleetSharedCardinalityDoesNotCreateIdentity =
 -- F: Per-row dispatch still requires a checked row-identity attachment.
 ------------------------------------------------------------------------
 
-record FleetR5OrdinalCutReceipt : Set where
+record FleetR5OrdinalCutReceipt : Set₁ where
   constructor fleet-r5-ordinal-cut-receipt
   field
     dischargedOrdinal : Set

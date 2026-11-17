@@ -1260,6 +1260,172 @@ toeBalabanR559ContinuumLimitPromotionImpossible =
   BalabanR559TOE.continuumLimitPromotionEliminator
     BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
+toeNavierStokesSharedWeightedExactlyTwoLeavesIsTrue :
+  toeNavierStokesSharedWeightedExactlyTwoLeaves ≡ true
+toeNavierStokesSharedWeightedExactlyTwoLeavesIsTrue =
+  NSClayTOE.currentSharedWeightedExactlyTwoLeavesIsTrue
+
+toeNavierStokesSharedWeightedSameCarrier : Bool
+toeNavierStokesSharedWeightedSameCarrier =
+  NSClayTOE.currentSharedWeightedSameCarrier
+
+toeNavierStokesSharedWeightedSameCarrierIsTrue :
+  toeNavierStokesSharedWeightedSameCarrier ≡ true
+toeNavierStokesSharedWeightedSameCarrierIsTrue =
+  NSClayTOE.currentSharedWeightedSameCarrierIsTrue
+
+toeNavierStokesSharedWeightedCarrierIsInputLaplacian : Bool
+toeNavierStokesSharedWeightedCarrierIsInputLaplacian =
+  NSClayTOE.currentSharedWeightedCarrierIsInputLaplacian
+
+toeNavierStokesWeightedPlusEndpointClosed : Bool
+toeNavierStokesWeightedPlusEndpointClosed =
+  NSClayTOE.currentWeightedPlusEndpointClosed
+
+toeNavierStokesWeightedPlusEndpointStillOpen :
+  toeNavierStokesWeightedPlusEndpointClosed ≡ false
+toeNavierStokesWeightedPlusEndpointStillOpen =
+  NSClayTOE.currentWeightedPlusEndpointStillOpen
+
+toeNavierStokesAugmentedCriticalWeightedClosed : Bool
+toeNavierStokesAugmentedCriticalWeightedClosed =
+  NSClayTOE.currentAugmentedCriticalWeightedClosed
+
+toeNavierStokesAugmentedCriticalWeightedStillOpen :
+  toeNavierStokesAugmentedCriticalWeightedClosed ≡ false
+toeNavierStokesAugmentedCriticalWeightedStillOpen =
+  NSClayTOE.currentAugmentedCriticalWeightedStillOpen
+
+toeNavierStokesSharedWeightedLeavesBuildBarrier : Bool
+toeNavierStokesSharedWeightedLeavesBuildBarrier =
+  NSClayTOE.currentSharedWeightedLeavesBuildBarrier
+
+toeNavierStokesSharedWeightedLeavesBuildBarrierIsTrue :
+  toeNavierStokesSharedWeightedLeavesBuildBarrier ≡ true
+toeNavierStokesSharedWeightedLeavesBuildBarrierIsTrue =
+  NSClayTOE.currentSharedWeightedLeavesBuildBarrierIsTrue
+
+toeNavierStokesR726IndependentLeafRequired : Bool
+toeNavierStokesR726IndependentLeafRequired =
+  NSClayTOE.legacyR726IndependentLeafRequired
+
+toeNavierStokesR726IndependentLeafNotRequired :
+  toeNavierStokesR726IndependentLeafRequired ≡ false
+toeNavierStokesR726IndependentLeafNotRequired =
+  NSClayTOE.legacyR726IndependentLeafNotRequired
+
+toeNavierStokesStrictMarginR406IndependentLeafRequired : Bool
+toeNavierStokesStrictMarginR406IndependentLeafRequired =
+  NSClayTOE.legacyStrictMarginR406IndependentLeafRequired
+
+toeNavierStokesStrictMarginR406IndependentLeafNotRequired :
+  toeNavierStokesStrictMarginR406IndependentLeafRequired ≡ false
+toeNavierStokesStrictMarginR406IndependentLeafNotRequired =
+  NSClayTOE.legacyStrictMarginR406IndependentLeafNotRequired
+
+toeNavierStokesBarrierDependentQPlusMinusShortcutAdmissible : Bool
+toeNavierStokesBarrierDependentQPlusMinusShortcutAdmissible =
+  NSClayTOE.barrierDependentQPlusMinusShortcutAdmissible
+
+toeNavierStokesBarrierDependentQPlusMinusShortcutStillCircular :
+  toeNavierStokesBarrierDependentQPlusMinusShortcutAdmissible ≡ false
+toeNavierStokesBarrierDependentQPlusMinusShortcutStillCircular =
+  NSClayTOE.barrierDependentQPlusMinusShortcutStillCircular
+
+toeNavierStokesSharedWeightedClayPromotion : Bool
+toeNavierStokesSharedWeightedClayPromotion =
+  NSClayTOE.currentSharedWeightedClayPromotion
+
+toeNavierStokesSharedWeightedClayPromotionStillFalse :
+  toeNavierStokesSharedWeightedClayPromotion ≡ false
+toeNavierStokesSharedWeightedClayPromotionStillFalse =
+  NSClayTOE.currentSharedWeightedClayPromotionStillFalse
+
+toeNavierStokesContinuumBKMPassageConstructed : Bool
+toeNavierStokesContinuumBKMPassageConstructed =
+  NSClayTOE.continuumBKMPassageConstructed
+
+toeNavierStokesContinuumBKMPassageStillOpen :
+  toeNavierStokesContinuumBKMPassageConstructed ≡ false
+toeNavierStokesContinuumBKMPassageStillOpen =
+  NSClayTOE.continuumBKMPassageStillOpen
+
+toeNavierStokesAllDataBridgeConstructed : Bool
+toeNavierStokesAllDataBridgeConstructed =
+  NSClayTOE.allDataBridgeConstructed
+
+toeNavierStokesAllDataBridgeStillOpen :
+  toeNavierStokesAllDataBridgeConstructed ≡ false
+toeNavierStokesAllDataBridgeStillOpen =
+  NSClayTOE.allDataBridgeStillOpen
+
+toeNavierStokesSubmissionPacketReady : Bool
+toeNavierStokesSubmissionPacketReady =
+  NSClayTOE.submissionPacketReady
+
+toeNavierStokesSubmissionPacketStillNotReady :
+  toeNavierStokesSubmissionPacketReady ≡ false
+toeNavierStokesSubmissionPacketStillNotReady =
+  NSClayTOE.submissionPacketStillNotReady
+
+toeNavierStokesClayEligible : Bool
+toeNavierStokesClayEligible =
+  NSClayTOE.clayEligible
+
+toeNavierStokesClayEligibilityStillFalse :
+  toeNavierStokesClayEligible ≡ false
+toeNavierStokesClayEligibilityStillFalse =
+  NSClayTOE.clayEligibilityStillFalse
+
+
+------------------------------------------------------------------------
+-- Fleet R5 exact ordinal max-cut.
+-- The ordinal carrier targets exactly 58 slots.
+-- It does not claim persisted R5 row identity.
+------------------------------------------------------------------------
+
+toeFleetR5OrdinalCutReceipt :
+  FleetGapTOE.FleetR5OrdinalCutReceipt
+toeFleetR5OrdinalCutReceipt =
+  FleetGapTOE.canonicalFleetR5OrdinalCutReceipt
+
+toeFleetFormalGapOrdinalCountIs58 :
+  FleetGapTOE.fleetFormalGapOrdinalCount ≡ 58
+toeFleetFormalGapOrdinalCountIs58 =
+  FleetGapTOE.fleetFormalGapOrdinalCountIs58
+
+toeFleetDischargedOrdinalCountIs584 :
+  FleetGapTOE.fleetDischargedOrdinalCount ≡ 584
+toeFleetDischargedOrdinalCountIs584 =
+  FleetGapTOE.fleetDischargedOrdinalCountIs584
+
+toeFleetContradictionOrdinalCountIs44 :
+  FleetGapTOE.fleetContradictionOrdinalCount ≡ 44
+toeFleetContradictionOrdinalCountIs44 =
+  FleetGapTOE.fleetContradictionOrdinalCountIs44
+
+toeFleetOrdinalRowIdentityStillUnattached :
+  FleetGapTOE.fleetOrdinalCarriesPersistedRowIdentity ≡ false
+toeFleetOrdinalRowIdentityStillUnattached =
+  FleetGapTOE.fleetOrdinalCarriesPersistedRowIdentityIsFalse
+
+toeFleetSharedCardinalityDoesNotCreateIdentity :
+  FleetGapTOE.FleetSharedCardinalityCreatesIdentity → ⊥
+toeFleetSharedCardinalityDoesNotCreateIdentity =
+  FleetGapTOE.fleetSharedCardinalityDoesNotCreateIdentity
+
+
+------------------------------------------------------------------------
+-- Joint Balaban/R559 typed continuum non-promotion.
+-- Reuse the source-owned typed eliminators carried by the canonical max-cut.
+------------------------------------------------------------------------
+
+toeBalabanR559ContinuumLimitPromotionImpossible :
+  BalabanRGTOE.BalabanContinuumLimitPromotion → ⊥
+toeBalabanR559ContinuumLimitPromotionImpossible =
+  BalabanR559TOE.continuumLimitPromotionEliminator
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
 toeBalabanR559DepthContinuumLimitPromotionImpossible :
   BalabanRGTOE.DepthContinuumLimitPromotion → ⊥
 toeBalabanR559DepthContinuumLimitPromotionImpossible =

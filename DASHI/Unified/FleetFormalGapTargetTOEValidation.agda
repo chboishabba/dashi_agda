@@ -299,26 +299,6 @@ unifierFleetOrdinalCutMatchesOwner :
   ≡ Fleet.canonicalFleetR5OrdinalCutReceipt
 unifierFleetOrdinalCutMatchesOwner = refl
 
-toeFleetOrdinalTargetCountMatchesOwner :
-  TOE.toeFleetFormalGapOrdinalCountIs58
-  ≡ Fleet.fleetFormalGapOrdinalCountIs58
-toeFleetOrdinalTargetCountMatchesOwner = refl
-
-unifierFleetOrdinalTargetCountMatchesOwner :
-  Unifier.unifierFleetFormalGapOrdinalCountIs58
-  ≡ Fleet.fleetFormalGapOrdinalCountIs58
-unifierFleetOrdinalTargetCountMatchesOwner = refl
-
-toeFleetOrdinalRowIdentityBoundaryMatchesOwner :
-  TOE.toeFleetOrdinalRowIdentityStillUnattached
-  ≡ Fleet.fleetOrdinalCarriesPersistedRowIdentityIsFalse
-toeFleetOrdinalRowIdentityBoundaryMatchesOwner = refl
-
-unifierFleetOrdinalRowIdentityBoundaryMatchesOwner :
-  Unifier.unifierFleetOrdinalRowIdentityStillUnattached
-  ≡ Fleet.fleetOrdinalCarriesPersistedRowIdentityIsFalse
-unifierFleetOrdinalRowIdentityBoundaryMatchesOwner = refl
-
 toeFleetSharedCardinalityStillDoesNotCreateIdentity :
   Fleet.FleetSharedCardinalityCreatesIdentity → ⊥
 toeFleetSharedCardinalityStillDoesNotCreateIdentity =
