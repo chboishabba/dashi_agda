@@ -1834,3 +1834,55 @@ Bishop continuous Haar or universal arbitrary-degree theorem.
 The all-degree rational convex-interior producer and native
 Bishop fast-Cauchy witness remain OPEN. Pinned Agda/Nix
 kernel acceptance was not available.
+
+
+### 2026-11-18 finite S3 Reynolds averaging: arbitrary-degree signed-orbit cancellation
+
+New source owner:
+DASHI/Physics/YangMills/YMClayRationalS3OddSignOrbitCancellationExact.agda
+(a safe-source candidate). It proves by Nat induction that the
+rational even-power operation is invariant under x to -x, the
+odd-power operation changes sign, and every pair f(x)+f(-x)
+vanishes for an odd function. It then enumerates the actual
+sixteen sign choices as a MULTISET (important when a rational
+coordinate is zero) and proves the sum vanishes whenever the
+first coordinate exponent is odd.
+There is NO degree cutoff, implicit Haar positivity input,
+square root, pi or abstract cubature-exactness field.
+
+Independent checker:
+scripts/check_ym_s3_sign_orbit_universal_parity_20261118.py
+passed 16384/16384 exact fraction checks for all exponent
+vectors in {0,...,7}^4 at four rational coordinate vectors,
+including zeros and non-unit inputs as a robustness control.
+The source theorem is universal over rational inputs, not
+derived from these finite examples.
+
+The first-coordinate theorem can be extended to oddness at
+any coordinate by the existing original B4 adjacent-swap
+generators. The remaining Agda lemma must establish that
+the full 16-signed multiset sum is invariant under swaps
+(including stabilizers/duplicates), then combine that with
+the existing degree-15 eleven-invariant source equations
+and a constructive four-variable elementary symmetric
+basis reduction.
+
+Current five-gate status:
+- All-degree rational cubature: universal odd-sign
+  cancellation source added; all-degree positive rational
+  design termination, complete permutation averaging
+  and symmetric basis remain OPEN.
+- Effective b_n and Bishop: native modulus/order and full
+  _isCauchy witness remain OPEN; rational schedules alone
+  are not native proof objects.
+- Haar: full two-sided Bishop invariant limit and positivity
+  completion remain OPEN.
+- SU2 matrix: original rational-to-Bishop source written;
+  kernel acceptance/full selected SUN identity OPEN.
+- Wilson/RG: actual positive L1 quadratic-Taylor finite
+  coarse law and 24^4 certificate stand; kernel
+  instantiation and full exponential/physical cross-cutoff
+  transfer OPEN.
+
+No pinned Agda/Nix toolchain or CI acceptance was available.
+Do not mark YM.REAL closed on SymPy or a source pragma alone.
