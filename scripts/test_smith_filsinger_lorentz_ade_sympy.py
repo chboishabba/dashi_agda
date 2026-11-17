@@ -157,3 +157,48 @@ def test_undamped_or_unstable_is_not_certified_as_dissipative():
     from smith_filsinger_lorentz_ade_sympy import lorentz_poles
     with pytest.raises(ValueError):lorentz_poles(replace(LorentzMaterial(),gamma=0))
     with pytest.raises(ValueError):lorentz_poles(replace(LorentzMaterial(),gamma=5))
+
+
+@pytest.mark.parametrize('n',[1,2,3])
+def test_actual_useful_load_separate_from_ohmic_material_losses(n):
+    g=S.Rational(3,7)
+    A,B,M=generator(n,load_conductance=g)
+    z=S.zeros(4*n,1)
+    source=S.Matrix([S.Rational(j+1,2) for j in range(n)])
+    ctrl=S.Matrix([S.Rational(1,5) for j in range(n)])
+    r=exact_midpoint(z,source,ctrl,S.Rational(1,8),A,B,M,
+                     load_conductance=g)
+    assert r['residual']==0
+    assert r['useful_load']>0 and r['ohmic']>0 and r['relaxation']>0
+    assert S.factor(r['energy_change'] + r['useful_load']+r['ohmic']
+        +r['relaxation']-r['natural_work']-r['controller_work'])==0
+
+
+def test_invented_useful_load_without_conductance_fails():
+    A,B,M=generator(1,load_conductance=S.Rational(1,4))
+    z=S.zeros(4,1)
+    with pytest.raises(ValueError):
+        exact_midpoint(z,S.Matrix([1]),S.Matrix([0]),S.Rational(1,8),
+                       A,B,M,load_conductance=S.Rational(3))
+
+
+def test_source_off_storage_can_pay_load_transiently_but_not_repeatably():
+    g=S.Rational(1,2)
+    A,B,M=generator(1,load_conductance=g)
+    z=S.Matrix([S.Rational(1),0,0,0])
+    zero=S.Matrix([0]);u0=energy(z,M)
+    r=exact_midpoint(z,zero,zero,S.Rational(1,4),A,B,M,
+                     load_conductance=g)
+    assert r['useful_load']>0
+    assert r['energy_change']==-(r['useful_load']+r['ohmic']+r['relaxation'])
+    assert energy(r['z'],M)<u0
+
+
+def test_load_omission_breaks_full_source_balance():
+    g=S.Rational(1,3);A,B,M=generator(1,load_conductance=g)
+    z=S.zeros(4,1);r=exact_midpoint(z,S.Matrix([1]),S.Matrix([0]),
+        S.Rational(1,5),A,B,M,load_conductance=g)
+    assert r['residual']==0
+    assert (S.factor(r['energy_change']-r['natural_work']
+                    -r['controller_work']+r['ohmic']+r['relaxation'])
+            == -r['useful_load'])
