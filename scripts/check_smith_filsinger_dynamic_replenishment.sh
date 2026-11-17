@@ -20,6 +20,7 @@ python_tests=(
   scripts/test_smith_filsinger_spatial_chain_exact.py
   scripts/test_smith_filsinger_finite_volume_face_incidence_exact.py
   scripts/test_smith_filsinger_indexed_face_incidence_exact.py
+  scripts/test_smith_filsinger_indexed_signed_cell_stokes_exact.py
   scripts/test_smith_filsinger_full_vector_indexed_face_sample_exact.py
 )
 test -s "$target"
