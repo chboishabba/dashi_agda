@@ -48,3 +48,6 @@ import DASHI.Physics.Photovoltaic.PV369MatchedDevicePhysicalAdvantageExact
 
 -- P5/P7 same-G173 2T/4T model loss thresholds; strict above-half accounting.
 import DASHI.Physics.Photovoltaic.PV369G173MultiJunctionLossFrontierExact
+
+-- P5/P7 measured 4T/ideal 2T source-matched spectral optical/EQE/JV weld.
+import DASHI.Physics.Photovoltaic.PV369FourJunctionOpticsToMeasuredIVExact
