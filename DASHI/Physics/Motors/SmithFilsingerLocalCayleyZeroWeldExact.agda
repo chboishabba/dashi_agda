@@ -126,6 +126,43 @@ diagonalCayleyZero d =
     (CertifiedDiagonalCayley.dampingStep d)
     (CertifiedDiagonalCayley.generator d)
 
+-- Reuse the selected edge's certified, distinct original IDs
+-- instead of allowing the same coordinate as both matrix endpoints.
+guardedDistinctCayleyEdge :
+  (edge : DistinctCayleyEdge) → Reach.GuardedPrimitive ℚ 0ℚ
+guardedDistinctCayleyEdge edge =
+  sameCayleyGuarded
+    (DistinctCayleyEdge.firstID edge)
+    (DistinctCayleyEdge.secondID edge)
+    (DistinctCayleyEdge.coefficients edge)
+
+-- The original one-coordinate local damping step is represented as
+-- the first output of a two-coordinate frame; second output is an
+-- unchanged coordinate. Its endpoint IDs must be distinct.
+diagonalFramePrimitive :
+  Nat → Nat → CertifiedDiagonalCayley → Frame.LocalPrimitive ℚ
+diagonalFramePrimitive i j d =
+  Frame.localPrimitive i j
+    (λ x y → diagonalCayley d x)
+    (λ x y → y)
+
+diagonalFrameZeroPreserving :
+  (i j : Nat) (d : CertifiedDiagonalCayley) →
+  Reach.ZeroPreserving 0ℚ (diagonalFramePrimitive i j d)
+diagonalFrameZeroPreserving i j d = record
+  { firstZero = diagonalCayleyZero d
+  ; secondZero = refl
+  }
+
+diagonalFrameReachEvent :
+  (i j : Nat) (d : CertifiedDiagonalCayley) →
+  Reach.LocalEvent ℚ 0ℚ
+diagonalFrameReachEvent i j d =
+  Reach.propagate
+    (Reach.guardedPrimitive
+      (diagonalFramePrimitive i j d)
+      (diagonalFrameZeroPreserving i j d))
+
 -- Explicit SAME-object dependent consumer of the prior all-N theorem.
 -- An arbitrary finite list may interleave actual two-coordinate Cayley
 -- updates with independently tagged external source/current injections.
@@ -141,3 +178,30 @@ sameCayleySourceCone :
     (Reach.runEvents events s) (Reach.reachEvents events R)
 sameCayleySourceCone events s R initial =
   Reach.noSignalOutsideInterleavedSourceCone 0ℚ events s R initial
+
+-- A concrete source-to-Cayley sequence. The source ID is not
+-- permitted to appear from a passive Green/Cayley stage: it is
+-- injected by an explicit event owned as natural or controller.
+open import Agda.Builtin.List using ([]; _∷_)
+
+singleCayleyWithSource :
+  Reach.SourceOwner → Nat → (ℚ → ℚ) →
+  DistinctCayleyEdge → List (Reach.LocalEvent ℚ 0ℚ)
+singleCayleyWithSource owner sourceID source edge =
+  Reach.injectAt owner sourceID source ∷
+    Reach.propagate (guardedDistinctCayleyEdge edge) ∷ []
+
+singleCayleyWithSourceNoSignalOutsideReach :
+  (owner : Reach.SourceOwner)
+  (sourceID : Nat) (source : ℚ → ℚ)
+  (edge : DistinctCayleyEdge)
+  (s : Frame.State ℚ) (R : Nat → Set) →
+  Reach.OutsideZero 0ℚ s R →
+  Reach.OutsideZero 0ℚ
+    (Reach.runEvents (singleCayleyWithSource owner sourceID source edge) s)
+    (Reach.reachEvents (singleCayleyWithSource owner sourceID source edge) R)
+singleCayleyWithSourceNoSignalOutsideReach
+  owner sourceID source edge s R initial =
+  Reach.noSignalOutsideInterleavedSourceCone
+    0ℚ (singleCayleyWithSource owner sourceID source edge)
+    s R initial
