@@ -7,6 +7,7 @@ open import Agda.Builtin.String using (String)
 open import Agda.Builtin.Unit using (⊤; tt)
 open import Data.Empty using (⊥)
 open import Data.List.Base using (List; _∷_; [])
+open import Data.Nat using (_≤_)
 
 open import DASHI.Physics.Closure.BalancedTernaryContinuousEnvelope as Envelope
 open import DASHI.Physics.Closure.FixedPointAnalyticRGTargets as Targets
@@ -203,7 +204,7 @@ ScalingTransportAcrossDepth : Set
 ScalingTransportAcrossDepth =
   (p : Tangent.ShiftFinitePerturbation) →
   Normed.finiteNorm (Tangent.finiteDerivativeStep p)
-    Data.Nat.≤
+    ≤
   Normed.finiteNorm p
 
 scalingTransportAcrossDepth : ScalingTransportAcrossDepth

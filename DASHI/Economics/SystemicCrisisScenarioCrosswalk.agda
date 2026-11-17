@@ -50,10 +50,6 @@ coreSSPRoundTrip pos = refl
 
 ------------------------------------------------------------------------
 -- Phase crosswalk is deliberately partial.
---
--- `unresolvedPhase` carries insufficient evidence and therefore has no
--- mechanism phase.  It must not be mapped to `normalPhase` merely to obtain a
--- total function.
 ------------------------------------------------------------------------
 
 data MaybePhase : Set where
@@ -91,11 +87,6 @@ record CrosswalkAssessment : Set where
 
 open CrosswalkAssessment public
 
-------------------------------------------------------------------------
--- Monitoring posture depends on mechanism evidence and model fracture.
--- Capital posture remains the separately governed scenario-layer output.
-------------------------------------------------------------------------
-
 monitoringFromScenario :
   Scenario.StressPhase → Compression.CompressionRegime → Compression.MonitoringPosture
 monitoringFromScenario Scenario.latentFragilityPhase r =
@@ -124,12 +115,6 @@ mkCrosswalkAssessment signed phase compression =
 
 ------------------------------------------------------------------------
 -- Observation-axis crosswalk.
---
--- The scenario module has a broader source taxonomy.  Only axes with a direct
--- plumbing interpretation are projected into the mechanism kernel.  Narrative,
--- execution churn, technology concentration, capex, hardware, and power/cooling
--- remain explanatory/candidate axes until a separate transmission receipt links
--- them to funding, liquidity, contagion, or forced selling.
 ------------------------------------------------------------------------
 
 data MechanismAxis : Set where

@@ -7,17 +7,13 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 ------------------------------------------------------------------------
 
 data Trit : Set where
-  neg : Trit
-  zero : Trit
-  pos : Trit
+  neg zero pos : Trit
 
 data Bit : Set where
-  off : Bit
-  on : Bit
+  off on : Bit
 
 data Sign : Set where
-  minus : Sign
-  plus : Sign
+  minus plus : Sign
 
 data Unit : Set where
   unit : Unit
@@ -157,10 +153,7 @@ decode-encode-3 (tri3 pos  pos  pos)  = refl
 ------------------------------------------------------------------------
 
 data Weight : Set where
-  w0 : Weight
-  w1 : Weight
-  w2 : Weight
-  w3 : Weight
+  w0 w1 w2 w3 : Weight
 
 weight : Mask3 → Weight
 weight (mask3 off off off) = w0
