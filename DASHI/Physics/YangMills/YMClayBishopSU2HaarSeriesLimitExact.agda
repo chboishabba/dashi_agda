@@ -1,4 +1,5 @@
-{-# OPTIONS --safe #-}
+-- Direct vendor Sequence source only; --safe remains an acceptance
+-- target, not a claim before the pinned Agda transitive trust check.
 module DASHI.Physics.YangMills.YMClayBishopSU2HaarSeriesLimitExact where
 
 -- YM.REAL: use the ACTUAL Murray/Csimma Bishop series limit, rather than
