@@ -103,7 +103,7 @@ def audit(manifest,root):
     check(bool(overlap), 'no paired station/product files')
     unpaired=sorted(old_sets ^ new_sets)
     check(not unpaired, 'unpaired station/product archive: '+repr(unpaired[:10]))
-    counts=Counter(); removals=Counter(); events=[]
+    counts=Counter(); removals=Counter(); lost_values=Counter(); events=[]
     for station,day,var in sorted(set(before)|set(after)):
         oldrow=before.get((station,day,var));newrow=after.get((station,day,var))
         if oldrow is None or newrow is None:
@@ -118,18 +118,28 @@ def audit(manifest,root):
             else: continue
         counts[kind]+=1
         if kind=='value_removed':removals[(station,var)]+=1
+        # A removed calendar row may contain a lost observation. Preserve
+        # both the structural row change and the measured-data loss.
+        if (oldrow is not None and oldrow[0] is not None and
+            (newrow is None or newrow[0] is None)):
+            lost_values[(station,var)]+=1
         events.append({'station':station,'date':day,'variable':var,'kind':kind,
                        'before':list(map(str,oldrow)) if oldrow else None,
                        'after':list(map(str,newrow)) if newrow else None})
-    historical={station:sum(1 for x in events if x['station']==station and x['kind']=='value_removed'
-                            and x['date']<'2000-01-01') for station,_ in removals}
+    historical={station:sum(1 for x in events
+                            if x['station']==station and x['date']<'2000-01-01'
+                            and x['before'] is not None and x['before'][0]!='None'
+                            and (x['after'] is None or x['after'][0]=='None'))
+                for station,_ in lost_values}
     historical={k:v for k,v in sorted(historical.items()) if v}
     return {'schema':'dashi.bom.cdo.native_revision_result.v1',
             'before_receipts':old,'after_receipts':new,
             'before_rows':len(before),'after_rows':len(after),
             'counts':dict(sorted(counts.items())),
             'value_removals_by_station_product':{f'{s}:{v}':n for (s,v),n in sorted(removals.items())},
-            'pre2000_value_removals_by_station':historical,
+            'pre2000_observed_values_lost_by_station':historical,
+            'values_lost_including_disappearing_calendar_rows':
+                {f'{s}:{v}':n for (s,v),n in sorted(lost_values.items())},
             'author_reported_target_only':{'pre2000_total':571,'066062':515,
                                             '044022_or_044021':56},
             'pre2000_target_matched':sum(historical.values())==571
