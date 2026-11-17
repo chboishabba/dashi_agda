@@ -36,10 +36,17 @@ new_owners=(
   DASHI/Physics/Motors/SmithFilsingerMaxwellTimedSpatialWeldExact.agda
 )
 for f in "${owners[@]}"; do test -s "$f"; done
-if grep -nE '^[[:space:]]*postulate([[:space:]]|$)|\\{!!\\}' "${new_owners[@]}"; then
-  echo "REJECT: explicit postulate or proof hole" >&2
+# Do not use a regex for Agda's literal {!!} hole. The old
+# double-escaped ERE failed to match it and could silently admit a hole.
+# grep -F tests the exact concrete token; the optional source guard rejects
+# explicit postulates and compiler-escape pragmas in all new owners.
+if grep -nE '^[[:space:]]*postulate([[:space:]]|$)' "${new_owners[@]}" \
+   || grep -nF '{!!}' "${new_owners[@]}" \
+   || grep -nE '^[[:space:]]*\{-# *(TERMINATING|NON_TERMINATING|OPTIONS[^}]*--(allow-unsolved-metas|type-in-type|no-termination-check|no-positivity-check|no-coverage-check))' "${new_owners[@]}"; then
+  echo "REJECT: postulate, explicit proof hole, or unsafe Agda pragma" >&2
   exit 1
 fi
+
 # No Python surrogate or simulation: require actual pinned Agda type-check.
 scripts/run_agda29_parallel_check.sh "${new_owners[@]}"
 echo "PASS pinned Agda 2.9 on all designated Maxwell/material/cloud/timed-spatial formal welds"
