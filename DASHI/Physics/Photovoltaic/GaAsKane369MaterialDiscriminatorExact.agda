@@ -20,6 +20,8 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369MagneticC3PhysicalRealizationExact as P
 import DASHI.Physics.Photovoltaic.Atomic369C3DipoleSelectionExact as Optical
+import DASHI.Algebra.TriadicDepthOneCharacters as Characters
+import DASHI.Physics.Photovoltaic.Atomic369GaAs111TrigonalCharacterExact as Trigonal
 
 -- Scale and temperature are explicit, so eV and meV never get silently mixed.
 record GaAsKaneParameterSource : Set where
@@ -67,10 +69,28 @@ record GaAsAtomic369ToKaneWeld : Set₁ where
     mapOriginalP : P.MagneticState -> ValenceBlochState
     mapKaneConduction : MaterialState -> ConductionBlochState
 
+    -- A physical spatial C3 rotation changes an eigenstate by a phase;
+    -- it does NOT permute its eigenstate labels.
+    phaseMultiply : Characters.C3Phase -> ValenceBlochState -> ValenceBlochState
+    phaseIdentity :
+      (v : ValenceBlochState) ->
+      phaseMultiply Characters.phase0 v ≡ v
+    phaseComposition :
+      (a b : Characters.C3Phase) (v : ValenceBlochState) ->
+      phaseMultiply (Characters.multiplyPhase a b) v
+      ≡ phaseMultiply a (phaseMultiply b v)
+
     crystalC3Rotation : ValenceBlochState -> ValenceBlochState
     sourceToCrystalC3Intertwiner :
       (m : P.MagneticState) ->
       crystalC3Rotation (mapOriginalP m)
+      ≡ phaseMultiply (P.rotationPhase m) (mapOriginalP m)
+
+    -- Independent residue/charge permutation: NOT physical rotation.
+    chargeSectorTransport : ValenceBlochState -> ValenceBlochState
+    sourceToCrystalChargeStepIntertwiner :
+      (m : P.MagneticState) ->
+      chargeSectorTransport (mapOriginalP m)
       ≡ mapOriginalP (P.chargePositiveStep m)
 
     kaneOpticalMomentum : ValenceBlochState -> ConductionBlochState -> MomentumAmplitude
@@ -80,6 +100,28 @@ record GaAsAtomic369ToKaneWeld : Set₁ where
     measuredUnbiasedJVSource : String
     independentMaterialAndC3Control : String
 
--- A character-transport (P.chargePositiveStep) is not automatically the
--- crystal's physical spatial rotation! To inhabit the above record one
--- must supply a correct basis-change/Fourier intertwiner, not conflate them.
+-- Separate exact finite character/sector witnesses exist in the imported
+-- Trigonal module; the analytic U is checked separately in SymPy. Neither
+-- inhabits this SAME-MATERIAL GaAs Bloch/8-band optical record.
+-- Zincblende Td has no inversion centre: 's-like' and 'p-like' are
+-- orbital representation types, not exact even/odd parity eigenlabels.
+
+record GaAsKaneTemperatureConsistency : Set where
+  constructor gaasKaneTemperatureConsistency
+  field
+    gap0KmeV : Nat
+    gap300KmeV : Nat
+    kaneEnergyTenthsEV : Nat
+    spinOrbitmeV : Nat
+    remoteFNegativeHundredths : Nat
+    sourceDOI : String
+
+-- Vurgaftman/Meyer/Ram-Mohan 2001 Table I supplies recommended
+-- Eg(0K)=1.519 eV and F=-1.94. Reusing the 0K F and Kane E_P with the
+-- 300K gap changes the derived effective mass: m*/m0=0.06224,
+-- not the incorrectly quoted 0.0664. The 0K calculation gives 0.06702.
+gaasKaneTemperatureReceipt : GaAsKaneTemperatureConsistency
+gaasKaneTemperatureReceipt =
+  gaasKaneTemperatureConsistency
+    1519 1422 288 341 194
+    "10.1063/1.1368156; 0K and 300K gap+mass comparisons"
