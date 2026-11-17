@@ -60,10 +60,16 @@ def bound_receipt(data,unc):
     for p in per:
         v=number(p["gross_mpp_W_m2"],"gross",0)
         eta=number(p["converter_eta"],"converter",0,1)
+        delivered=number(p["delivered_mpp_W_m2"],"delivered",0)
+        if abs(delivered-v*eta)>1e-8*max(1,delivered,v):
+            raise ValueError("source gross MPP and converter-delivered power disagree")
         gross+=v*eta
         lower+=v*(1-vErr)*(1-iErr)*max(0,eta-etaErr)
         upper+=v*(1+vErr)*(1+iErr)*min(1,eta+etaErr)
     nominalNet=gross-aux-drive+recovered
+    sourceNet=number(data["four_terminal_net_W_m2"],"source nominal net",-1e12)
+    if abs(nominalNet-sourceNet)>1e-8*max(1,abs(sourceNet),abs(nominalNet)):
+        raise ValueError("uncertainty costs changed the original P5 signed electrical ledger")
     lowerNet=lower-(aux+auxErr)-(drive+driveErr)+max(0,recovered-recoveryErr)
     upperNet=upper-max(0,aux-auxErr)-max(0,drive-driveErr)+(recovered+recoveryErr)
     if lowerNet>nominalNet+1e-8 or upperNet<nominalNet-1e-8:
@@ -113,7 +119,8 @@ def selftest():
             "declared_provenance":{"sample_id":sample,"source_document":"same-simulator-session",
               "temperature_K":298.15,"input_sha256":{"spectrum":"hash"}},
             "incident_solar_W_m2":solar,
-            "four_terminal_per_junction":[{"gross_mpp_W_m2":net/4,"converter_eta":1.} for _ in range(4)]}
+            "four_terminal_net_W_m2":net,
+            "four_terminal_per_junction":[{"gross_mpp_W_m2":net/4,"converter_eta":1.,"delivered_mpp_W_m2":net/4} for _ in range(4)]}
     def err(rel=0.,aux=0., solar=.0):
         return {"solar_rel_bound":solar,"voltage_rel_bound":rel,
           "current_rel_bound":rel,"converter_efficiency_abs_bound":0.,
@@ -142,6 +149,10 @@ def selftest():
         except (ValueError,KeyError):return True
         return False
     ck("missing source hashes fail",rejected(lambda:bound_receipt({**receipt(),"declared_provenance":{}},err())))
+    ck("cannot erase original declared auxiliary cost",rejected(lambda:bound_receipt(receipt(),err(aux=2))))
+    ck("cannot forge more gross converter delivery",rejected(lambda:bound_receipt(
+        {**receipt(),"four_terminal_per_junction":[{"gross_mpp_W_m2":127.5,
+           "converter_eta":1.,"delivered_mpp_W_m2":150.} for _ in range(4)]},err())))
     ck("same sample cannot be control",rejected(lambda:compare(a,a)))
     ck("different solar provenance cannot be matched",rejected(lambda:compare(a,{**base,"declared_source":"different"})))
     ck("different spectrum bytes cannot be matched",rejected(lambda:compare(a,{**base,"input_sha256":{"spectrum":"another"}})))
