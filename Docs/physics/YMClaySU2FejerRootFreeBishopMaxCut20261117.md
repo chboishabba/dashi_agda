@@ -78,3 +78,24 @@ The pinned vendor Bishop real itself does not define all sin/cos/exp/log operati
 * scripts/check_ym_su2_fejer_rootfree_20261117.py: **1,132** exact rational assertions across degrees 7 and 9, normalized Fejer moments, telescoping positive weight floor, and circle Fourier coefficient arithmetic. The code uses mathematically derived DCT moments; it is not a kernel proof of the DCT identities.
 
 **Verdict:** Mathematical root-free cubature construction and reference checks advance YM.REAL; the all-m trigonometric producer, Bishop completion and exact original Wilson/Haar source attachment are still OPEN. Do not change the 19/28 expanded count.
+
+
+## Source-first continuation on 17 November 2026 (no kernel acceptance claim)
+
+Five additional theorem owners were attached to the SAME TOE import graph, using existing Bishop and finite Wilson source:
+- YMClayBishopFiniteWeightedIntegralLawsExact: recursive finite weighted sum; proves congruence, normalized constant-one and preservation of nonnegativity from actual finite weights.
+- YMClayBishopSU2QuaternionTraceWeldExact: native Bishop 2×2 quaternion matrix trace and proved concrete half cancellation using BP.ℝ-Solver.
+- YMClayBishopSU2DeterminantExact: determinant algebra is norm-square, and a norm-one quaternion gives determinant one; explicit unit norm is the physical domain condition.
+- YMClayBishopSU2UnitarityExact: entrywise 2×2 U(q)†U(q) matrix identity, reduced to the original Bishop real solver. Local SymPy checks validate the 8 component polynomial expressions, not an Agda receipt.
+- YMClayBishopSU2HaarSeriesLimitExact: selects the ACTUAL Bishop.bishopSeriesLimit of a finite polynomial integral telescope, proves limit convergence/uniqueness from the original Bridge API; the absolute-telescope convergence certificate remains a mathematical producer and must be inhabited by the b_n approximation schedule.
+- YMClayBishopFiniteWilsonNormalizedExact: uses actual Inv._⁻¹ on positive finite partition, proves expectation-of-one and extensionality. This does not construct the positive partition from physical exponential/Haar.
+
+Acceptance scripts and trust scanner were extended for these source modules. The numerical and symbolic reference verifiers are not Agda kernel acceptance. Existing imported Bishop complex/bridge owners may also carry non-safe transitive dependencies, and must be checked by the pinned compiler before asserting --safe.
+
+**Outstanding after this continuation:**
+1. Inhabit all-m Bishop Fejer/Chebyshev-II/circle trigonometric nodes/weights and prove exact cubature equals Pochhammer moments in Agda.
+2. Transport effective b_n approximation bounds to real setoid inequalities, produce dyadic n(k), and prove the telescoping series absolutely convergent, rather than merely consuming a record.
+3. Establish the same physical original SU2 compact group/link map and six-plane action, Bishop exponential positivity, actual completed product Haar and positive finite partition, then original cylinder identity.
+4. Run pinned Nix/Agda source checks and transitive postulate audit; no such run happened in this environment.
+
+**Status remains YM.REAL OPEN; 19/28 expanded gates OPEN.** Do not replace the legacy RealAnalysisAxioms.ℝ by a propositional equality, and do not relabel a Bishop-safe consumer as an original source producer.
