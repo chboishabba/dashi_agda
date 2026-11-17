@@ -312,3 +312,44 @@ presentConsumerSufficientFutureConsumerNot sufficient =
 -- A local residual carrying the discarded tag would remove this
 -- particular failure, but its cost and minimality are independent
 -- MDL/resource questions delegated to the existing compression ladder.
+
+
+------------------------------------------------------------------------
+-- P0g: positive encoder-transition BIDI criterion.
+-- A compressed dynamical state is sound when the ORIGINAL transition
+-- descends to a transition on the code. This supplies exactly the
+-- fibre-stability hypothesis needed by futureConsumerSufficiency.
+------------------------------------------------------------------------
+
+encodedTransitionWeldImpliesFibreStability :
+  ∀ {X Code : Set}
+  (step : X → X) (encode : X → Code)
+  (stepCode : Code → Code) →
+  ((x : X) → encode (step x) ≡ stepCode (encode x)) →
+  (x y : X) → encode x ≡ encode y →
+  encode (step x) ≡ encode (step y)
+encodedTransitionWeldImpliesFibreStability step encode stepCode weld
+  x y same =
+  trans
+    (weld x)
+    (trans (cong stepCode same) (sym (weld y)))
+
+compressedTransitionPreservesEveryFutureConsumer :
+  ∀ {X Code Outcome : Set}
+  (step : X → X) (encode : X → Code)
+  (stepCode : Code → Code) (consumer : X → Outcome) →
+  Descent.ConsumerSufficient encode consumer →
+  ((x : X) → encode (step x) ≡ stepCode (encode x)) →
+  (n : Nat) →
+  Descent.ConsumerSufficient encode (λ x → consumer (iterate n step x))
+compressedTransitionPreservesEveryFutureConsumer
+  step encode stepCode consumer sufficient weld n =
+  futureConsumerSufficiency
+    step encode consumer sufficient
+    (encodedTransitionWeldImpliesFibreStability
+       step encode stepCode weld)
+    n
+
+-- Converse caution: equal current consumer observations do not
+-- construct stepCode. The tagSensitiveStep witness above exhibits
+-- the obstruction: two equal codes have different next codes.
