@@ -21,6 +21,7 @@ import DASHI.Cognition.PNF.RelationDeltaReconciliationExact as RelationDeltaExac
 import DASHI.Core.AuthorityNonPromotionCore as Authority
 import DASHI.Interop.IntrospectiveProofLoopExact as Introspective
 
+import DASHI.Promotion.CrossDomainClaimPromotionBoundary as CrossDomainBoundary
 
 import DASHI.Unified.SensibLawGovernanceTOEExact as GovernanceTOE
 import DASHI.Core.AuthorityNonPromotionCore as Authority
@@ -1025,34 +1026,45 @@ toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
 
 
 ------------------------------------------------------------------------
--- SensibLaw direct-delta reconciliation boundary.
---
--- The TOE aggregate consumes one golden candidate mutation owner. It does not
--- promote runtime execution evidence into semantic or theorem authority.
+-- Fermentation control observation and non-promotion surface.
 ------------------------------------------------------------------------
 
-toeCandidateRelationOwnerRouting :
-  RelationDeltaExact.RelationDeltaOwnerRouting
-toeCandidateRelationOwnerRouting =
-  UnifiedPNF.unifiedCandidateRelationOwnerRouting
+toeFermentationControlBoundary :
+  CrossDomainBoundary.FermentationControlBoundary
+toeFermentationControlBoundary =
+  CrossDomainBoundary.canonicalFermentationControlBoundary
 
+toeFermentationControlZKPFrame :
+  CrossDomainBoundary.FermentationControlZKPFrame
+toeFermentationControlZKPFrame =
+  CrossDomainBoundary.canonicalFermentationControlZKPFrame
 
-toeCandidateRelationExecutionBoundary :
-  RelationDeltaExact.RelationDeltaAuthorityBoundary
-toeCandidateRelationExecutionBoundary =
-  UnifiedPNF.unifiedCandidateRelationExecutionBoundary
+toeClockElapsedDoesNotCreateFeedReadiness :
+  CrossDomainBoundary.ClockElapsedCreatesFeedReadiness → ⊥
+toeClockElapsedDoesNotCreateFeedReadiness =
+  CrossDomainBoundary.clockElapsedDoesNotCreateFeedReadiness
 
-toeCandidateRelationRuntimeAuthorityStillFalse :
-  Authority.runtimeAuthorityFlag
-    (RelationDeltaExact.executionNonPromotion
-      toeCandidateRelationExecutionBoundary)
-  ≡ false
-toeCandidateRelationRuntimeAuthorityStillFalse =
-  Authority.bundleRuntimeAuthorityIsFalse
-    (RelationDeltaExact.executionNonPromotion
-      toeCandidateRelationExecutionBoundary)
+toeVisibleVolumeDoesNotCreateSubstrateDepletion :
+  CrossDomainBoundary.VisibleVolumeCreatesSubstrateDepletion → ⊥
+toeVisibleVolumeDoesNotCreateSubstrateDepletion =
+  CrossDomainBoundary.visibleVolumeDoesNotCreateSubstrateDepletion
 
+toePHDoesNotCreateTotalTitratableAcidity :
+  CrossDomainBoundary.PHCreatesTotalTitratableAcidity → ⊥
+toePHDoesNotCreateTotalTitratableAcidity =
+  CrossDomainBoundary.pHDoesNotCreateTotalTitratableAcidity
 
-toeCandidateRelationZKPFrame : Introspective.ZKPFrame
-toeCandidateRelationZKPFrame =
-  UnifiedPNF.unifiedCandidateRelationZKPFrame
+toeActivationProtocolDoesNotCreateMaintenancePolicy :
+  CrossDomainBoundary.ActivationProtocolCreatesMaintenancePolicy → ⊥
+toeActivationProtocolDoesNotCreateMaintenancePolicy =
+  CrossDomainBoundary.activationProtocolDoesNotCreateMaintenancePolicy
+
+toeHighHydrationPreferenceDoesNotCreateMachineAdmissibility :
+  CrossDomainBoundary.HighHydrationPreferenceCreatesMachineAdmissibility → ⊥
+toeHighHydrationPreferenceDoesNotCreateMachineAdmissibility =
+  CrossDomainBoundary.highHydrationPreferenceDoesNotCreateMachineAdmissibility
+
+toeSingleTrajectoryDoesNotCreateOptimalFeedPolicy :
+  CrossDomainBoundary.SingleTrajectoryCreatesOptimalFeedPolicy → ⊥
+toeSingleTrajectoryDoesNotCreateOptimalFeedPolicy =
+  CrossDomainBoundary.singleTrajectoryDoesNotCreateOptimalFeedPolicy

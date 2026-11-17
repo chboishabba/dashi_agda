@@ -5,6 +5,7 @@ import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 import DASHI.Unified.RiemannRHMaxCutTOEExact as RiemannRHTOE
 
+import DASHI.Promotion.CrossDomainClaimPromotionBoundary as CrossDomainBoundary
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -252,15 +253,45 @@ unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
 
 
 ------------------------------------------------------------------------
--- Numeric PNF delta-fed projection aliases.
+-- Fermentation control observation and non-promotion surface.
 ------------------------------------------------------------------------
 
-unifiedPNFAnaphorSurfaceIdentityPromotionImpossible :
-  PNFHyperfabric.PNFAnaphorSurfaceIdentityPromotion → ⊥
-unifiedPNFAnaphorSurfaceIdentityPromotionImpossible =
-  PNFHyperfabric.pnfAnaphorSurfaceIdentityPromotionImpossible
+unifiedFermentationControlBoundary :
+  CrossDomainBoundary.FermentationControlBoundary
+unifiedFermentationControlBoundary =
+  CrossDomainBoundary.canonicalFermentationControlBoundary
 
-unifiedPNFAnaphorCandidateResolutionPromotionImpossible :
-  PNFHyperfabric.PNFAnaphorCandidateResolutionPromotion → ⊥
-unifiedPNFAnaphorCandidateResolutionPromotionImpossible =
-  PNFHyperfabric.pnfAnaphorCandidateResolutionPromotionImpossible
+unifiedFermentationControlZKPFrame :
+  CrossDomainBoundary.FermentationControlZKPFrame
+unifiedFermentationControlZKPFrame =
+  CrossDomainBoundary.canonicalFermentationControlZKPFrame
+
+unifiedClockElapsedDoesNotCreateFeedReadiness :
+  CrossDomainBoundary.ClockElapsedCreatesFeedReadiness → ⊥
+unifiedClockElapsedDoesNotCreateFeedReadiness =
+  CrossDomainBoundary.clockElapsedDoesNotCreateFeedReadiness
+
+unifiedVisibleVolumeDoesNotCreateSubstrateDepletion :
+  CrossDomainBoundary.VisibleVolumeCreatesSubstrateDepletion → ⊥
+unifiedVisibleVolumeDoesNotCreateSubstrateDepletion =
+  CrossDomainBoundary.visibleVolumeDoesNotCreateSubstrateDepletion
+
+unifiedPHDoesNotCreateTotalTitratableAcidity :
+  CrossDomainBoundary.PHCreatesTotalTitratableAcidity → ⊥
+unifiedPHDoesNotCreateTotalTitratableAcidity =
+  CrossDomainBoundary.pHDoesNotCreateTotalTitratableAcidity
+
+unifiedActivationProtocolDoesNotCreateMaintenancePolicy :
+  CrossDomainBoundary.ActivationProtocolCreatesMaintenancePolicy → ⊥
+unifiedActivationProtocolDoesNotCreateMaintenancePolicy =
+  CrossDomainBoundary.activationProtocolDoesNotCreateMaintenancePolicy
+
+unifiedHighHydrationPreferenceDoesNotCreateMachineAdmissibility :
+  CrossDomainBoundary.HighHydrationPreferenceCreatesMachineAdmissibility → ⊥
+unifiedHighHydrationPreferenceDoesNotCreateMachineAdmissibility =
+  CrossDomainBoundary.highHydrationPreferenceDoesNotCreateMachineAdmissibility
+
+unifiedSingleTrajectoryDoesNotCreateOptimalFeedPolicy :
+  CrossDomainBoundary.SingleTrajectoryCreatesOptimalFeedPolicy → ⊥
+unifiedSingleTrajectoryDoesNotCreateOptimalFeedPolicy =
+  CrossDomainBoundary.singleTrajectoryDoesNotCreateOptimalFeedPolicy
