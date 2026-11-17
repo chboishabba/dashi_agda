@@ -102,3 +102,36 @@ def test_wrong_load_makes_original_dissipation_ledger_fail():
     ledger=full_ledger(spec,initial,[hit,step])
     assert ledger['residual']==0 and ledger['useful_load']>0
     assert S.factor(ledger['energy_change']-ledger['natural']) == -ledger['useful_load']
+
+
+@pytest.mark.parametrize('n',[3,4,5])
+def test_heterogeneous_soil_air_ionosphere_material_ports(n):
+    from smith_filsinger_lorentz_ade_sympy import LorentzMaterial
+    from dataclasses import replace
+    base=LorentzMaterial()
+    layers=[replace(base,eps=S.Rational(i+2,2),mu=S.Rational(i+3,2),
+                    sigma=S.Rational(i+1,7),alpha=S.Rational(i+2,3),
+                    gamma=S.Rational(i+1,5),omega0sq=S.Rational(i+4))
+            for i in range(n)]
+    spec=local_spec(n,layers=layers,load=S.Rational(1,3))
+    assert spec['materials']==tuple(layers)
+    z=S.Matrix([S.Rational(k+1,9) for k in range(4*n)])
+    for edge in edge_updates(spec):
+        step=cayley_edge_step(spec,z,edge,S.Rational(1,7))
+        assert step['energy_change']<=0
+        if edge[0] in ('curl','polar_E_V','polar_P_V'):
+            assert step['energy_change']==0
+        z=step['z']
+    first=S.zeros(4*n,1);sourced=source_kick(spec,first,n-1,2)
+    ledger=full_ledger(spec,first,[sourced])
+    assert ledger['residual']==0 and ledger['natural']>0
+    assert not ledger['physical_source_meter']
+
+def test_missing_layer_or_negative_layer_damping_fail_closed():
+    from smith_filsinger_lorentz_ade_sympy import LorentzMaterial
+    from dataclasses import replace
+    with pytest.raises(ValueError,match='one material per cell'):
+        local_spec(3,layers=[LorentzMaterial()]*2)
+    with pytest.raises(ValueError):
+        local_spec(3,layers=[LorentzMaterial(),LorentzMaterial(),
+          replace(LorentzMaterial(),gamma=-1)])
