@@ -49,3 +49,25 @@ The 32/32 preexisting regression tests passed. R0 to RY4: E4 magnitude -9.56%, E
 7. **G6 original FIO, matter action and detector:** remain OPEN; no physical graviton evidence or superluminal inference.
 
 **Firewall:** source-written ≠ kernel accepted ≠ analytical physical theorem ≠ detected signal. No modification to ESD code or other external attribution owners.
+
+
+## XXIX same-object maximum-cut — 2026-11-17
+
+This round **did not close G1--G6 as physical/continuum theorems**. It added and independently tested concrete original-geometry algebra, isolated exact SAT source coefficients and a stability negative control, and made required cross-programme witnesses explicit. Neither the Agda kernel nor a full new moving PDE evolution was run here.
+
+**G1 concrete advance:** For original Poincare AdS5 g=z^-2 diag(-1,1,1,1,1), original z=1/t and T'(t)=sqrt(1+t²)/t², the induced metric is exactly -dt²+t² dX². At t=4/3: z=3/4, z'=-9/16, T'=15/16, induced proper-time metric=-1. A direct, independent SymPy calculation constructed all 13 nonzero Christoffel entries and checked all 625 Riemann components against constant sectional curvature -1; Ricci=-4g, scalar=-20, unperturbed Weyl=0 (all 625 components). The *linearised* Weyl of original sourced H and its moving-normal electric projection are **not** obtained by the background Weyl=0 result. Agda source owner `KSW668F8OriginalAdS5EmbeddingSliceExact.agda` proves just the rational proper-time/scale factors and a scalar trace algebra at original t=4/3; kernel OPEN.
+
+**G2 concrete advance:** Original `normal_order=3` SAT at t=4/3, v=-3/5 and dy=3/250:
+`target = -5 amp S/4 + P/4` and `SAT_M= -1000 amp S/3 + 200 P/3 - 800 M/3`. This expands the ACTUAL original boundary correction, including the TT source coefficient. `KSW668F8WeakIsraelSATSliceExact.agda` has finite rational proofs, while the non-SAT normal derivative and coupled radial/warp terms still need the joint energy theorem.
+
+**G3 concrete advance:** For `R(z)=1+z+z²/2+z³/6`, the scalar dissipative mode at `z=-3` has `R(-3)=-2`, `|R(-3)|²=4`. Thus even scalar damping is not unconditionally SSPRK3 stable. `KSW668F8SSPRK3FullStabilityPrerequisiteExact.agda` is a finite rational counterexample. It supplies no coupled admissible CFL.
+
+**G4 OPEN:** Existing `scripts/test_ksw668_f8_original_energy_weyl_trace_no_go.py` and source-derived H1→pointwise second-derivative no-go exclude promotion from a first-order energy bound; high-order Sobolev estimate with uniform constants for the actual moving domain / SAT / observer is missing. General Sobolev embedding alone does not give a PDE solution bound.
+
+**G5 OPEN:** Replayed XXVII `factorial_summary.json` data, 6/6 local checks: fixed original source norms across R0/RT/RY/RY4, independent normal/time variation, exact numerical curvature recomposition; R0→RY4 changes E4=9.56%, E5=11.38% in magnitude, but not independently radial/normal/time convergent. Original dr=.004 outputs still differ strongly from dr=.008 even though an independent forward–adjoint parity check passed.
+
+**G6 OPEN:** No same-source physical matter action, signal source/receiver coupling, original retarded FIO nonzero witness, actual calibrated detector or observed graviton was newly derived. Do not promote scalar-probe bulk-shortcut examples into a sourced tensor gravitational wave. Keep original Caldwell--Langlois and related citations and DASHI original author attribution.
+
+**Reused authority seam:** `KSW668F8SameObjectWeylAuthorityBoundary.agda` imports the existing `ContinuumCurvatureSourceSpinTwo.DiscreteCurvatureApproximation` type and concrete original KSW algebra owners; its G1--G6 proof fields are **not instantiated**. This is typed accounting, not a completed physical theorem.
+
+**Acceptance:** independent local SymPy passes all 625 AdS curvature component equalities, 25 Ricci equations, 625 vanishing background Weyl equations, proper-time embedding, SAT identity, readout cancellation and SSPRK3 negative control. New Agda owners are source-written; pinned Agda kernel **OPEN**. The local verification is saved in an XXIX reproducibility bundle. No ESD surfaces edited, and no claim of 369/Monster gravity equivalence.
