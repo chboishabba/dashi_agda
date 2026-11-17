@@ -66,6 +66,55 @@ data Every {A : Set} (P : A → Set) : List A → Set where
   everyNil : Every P []
   everyCons : ∀ {x xs} → P x → Every P xs → Every P (x ∷ xs)
 
+everyMap :
+  ∀ {A : Set} {P Q : A → Set} {xs : List A} →
+  (∀ x → P x → Q x) → Every P xs → Every Q xs
+everyMap fn everyNil = everyNil
+everyMap fn (everyCons {x = x} p ps) =
+  everyCons (fn x p) (everyMap fn ps)
+
+-- Exactly-one incidence IMPLIES exactly one weighted-face contribution.
+-- Even zero-valued faces remain required by the separate count receipts.
+sumMarkedWeight :
+  ∀ {A : Set} (xs : List A) (flag : A → Bool) (w : Nat) →
+  Face.sumOf (λ x → chooseWork (flag x) w) xs
+    ≡ (Face.sumOf (λ x → chooseWork (flag x) (suc zero)) xs) * w
+sumMarkedWeight [] flag w = refl
+sumMarkedWeight (x ∷ xs) flag w with flag x
+... | true = cong (λ z → w + z) (sumMarkedWeight xs flag w)
+... | false = sumMarkedWeight xs flag w
+
+addZeroRight : (n : Nat) → n + zero ≡ n
+addZeroRight zero = refl
+addZeroRight (suc n) = cong suc (addZeroRight n)
+
+sumMarkedOnce :
+  ∀ {A : Set} (xs : List A) (flag : A → Bool) (w : Nat) →
+  Face.sumOf (λ x → chooseWork (flag x) (suc zero)) xs
+    ≡ suc zero →
+  Face.sumOf (λ x → chooseWork (flag x) w) xs ≡ w
+sumMarkedOnce xs flag w once =
+  trans (sumMarkedWeight xs flag w)
+    (trans (cong (λ n → n * w) once) (addZeroRight w))
+
+sourceWorkFromCount :
+  (cs : List IndexedCell) (f : DirectedFace) →
+  Face.sumOf (λ c → sourceCount c f) cs ≡ suc zero →
+  Face.sumOf (λ c → sourceWork c f) cs ≡ DirectedFace.work f
+sourceWorkFromCount cs f p =
+  sumMarkedOnce cs
+    (λ c → sameID (IndexedCell.id c) (DirectedFace.source f))
+    (DirectedFace.work f) p
+
+targetWorkFromCount :
+  (cs : List IndexedCell) (f : DirectedFace) →
+  Face.sumOf (λ c → targetCount c f) cs ≡ suc zero →
+  Face.sumOf (λ c → targetWork c f) cs ≡ DirectedFace.work f
+targetWorkFromCount cs f p =
+  sumMarkedOnce cs
+    (λ c → sameID (IndexedCell.id c) (DirectedFace.target f))
+    (DirectedFace.work f) p
+
 sumEvery :
   ∀ {A : Set} {xs : List A} {f g : A → Nat} →
   Every (λ x → f x ≡ g x) xs →
@@ -162,15 +211,7 @@ record IndexedMesh : Set where
       (λ f → Face.sumOf (λ c → targetCount c f) cells
         ≡ suc zero) faces
 
-    -- Explicit directed face-work receipts: same face ID and same
-    -- magnitude at both opposite orientations.
-    sourceWorkOnce : Every
-      (λ f → Face.sumOf (λ c → sourceWork c f) cells
-        ≡ DirectedFace.work f) faces
-    targetWorkOnce : Every
-      (λ f → Face.sumOf (λ c → targetWork c f) cells
-        ≡ DirectedFace.work f) faces
-
+    -- Oriented face-work receipts are derived from count=1 below.
     -- Per-CELL, not aggregate, matching of the physical local work
     -- budgets to the directed face endpoint contributions.
     outgoingIsSourceWork : Every
@@ -182,6 +223,26 @@ record IndexedMesh : Set where
         (IndexedCell.budget c)
         ≡ Face.sumOf (targetWork c) faces) cells
 
+sourceWorkReceipts :
+  (m : IndexedMesh) →
+  Every (λ f → Face.sumOf
+    (λ c → sourceWork c f) (IndexedMesh.cells m)
+      ≡ DirectedFace.work f) (IndexedMesh.faces m)
+sourceWorkReceipts m =
+  everyMap
+    (λ face p → sourceWorkFromCount (IndexedMesh.cells m) face p)
+    (IndexedMesh.sourceExactlyOnce m)
+
+targetWorkReceipts :
+  (m : IndexedMesh) →
+  Every (λ f → Face.sumOf
+    (λ c → targetWork c f) (IndexedMesh.cells m)
+      ≡ DirectedFace.work f) (IndexedMesh.faces m)
+targetWorkReceipts m =
+  everyMap
+    (λ face p → targetWorkFromCount (IndexedMesh.cells m) face p)
+    (IndexedMesh.targetExactlyOnce m)
+
 -- Existing aggregate evidence is now a DERIVED projection. Every face
 -- contributes once at its unique source and once at its unique target.
 outgoingFromIndexedFaces :
@@ -192,7 +253,7 @@ outgoingFromIndexedFaces m =
   trans (sumEraseOutgoing cs)
     (trans (sumEvery (IndexedMesh.outgoingIsSourceWork m))
       (trans (sumSwap cs fs sourceWork)
-        (sumEvery (IndexedMesh.sourceWorkOnce m))))
+        (sumEvery (sourceWorkReceipts m))))
   where
     cs = IndexedMesh.cells m
     fs = IndexedMesh.faces m
@@ -205,7 +266,7 @@ incomingFromIndexedFaces m =
   trans (sumEraseIncoming cs)
     (trans (sumEvery (IndexedMesh.incomingIsTargetWork m))
       (trans (sumSwap cs fs targetWork)
-        (sumEvery (IndexedMesh.targetWorkOnce m))))
+        (sumEvery (targetWorkReceipts m))))
   where
     cs = IndexedMesh.cells m
     fs = IndexedMesh.faces m
@@ -266,8 +327,6 @@ exampleIndexedMesh =
       ∷ [])
     (directedFace 7 0 1 3 ∷ [])
     (everyCons refl (everyCons refl everyNil))
-    (everyCons refl everyNil)
-    (everyCons refl everyNil)
     (everyCons refl everyNil)
     (everyCons refl everyNil)
     (everyCons refl everyNil)
