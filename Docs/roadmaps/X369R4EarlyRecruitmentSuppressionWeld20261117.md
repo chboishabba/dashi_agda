@@ -175,3 +175,35 @@ response trace, Agda kernel or GPU runtime receipt.
 This corrects the attribution and turns the early
 Agda contract into a reusable R4 evidence consumer,
 rather than replacing it with later parity algebra.
+
+
+## Source-receipt acceptance surface
+
+`scripts/check_x369_r4_kink_source_receipt.py` is a read-only
+exact-rational interval checker for the old original
+`ResponseKink` three inequalities. It requires four
+strictly ascending source loads, stage IDs, a common
+declared checkpoint SHA and original history revision,
+one explicitly typed response observable, and
+source-state/export/error provenance flags. All three
+strict response orders must be separated even after
+admitted interval uncertainty. The script refuses
+overlapping response intervals, ties, mixed source
+revisions, mixed observables, and missing evidence.
+It explicitly does **not** hash checkpoint bytes
+or certify original source execution.
+
+`scripts/check_x369_r4_kink_source_receipt_selftest.py`
+adds **14 synthetic cases**: one accepted rational
+envelope and 13 adversarial rejected variants.
+These are regression fixtures, not authenticated
+original R4 experiments. `selected` in the
+old four-stage response profile means a qualitative
+coherence regime, not necessarily membership in
+the source model's `torch.topk` selected expert IDs.
+
+Source Agda file:
+`DASHI/Cognition/PNF/X369R4EarlyKinkSourceWeldExact.agda`,
+which imports existing canonical `ResponseKink`
+without copying the profile owner. Kernel
+acceptance remains unclaimed.
