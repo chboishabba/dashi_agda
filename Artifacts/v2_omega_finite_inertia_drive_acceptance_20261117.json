@@ -1,0 +1,9 @@
+{
+  "suite": "test_v2_omega_*.py",
+  "passed": 58,
+  "new": 11,
+  "old_magnetic": 47,
+  "result": "PASS",
+  "scope": "local magnetic source set, not entire PR or Agda/CI",
+  "note": "original physical V2 gates remain open"
+}
