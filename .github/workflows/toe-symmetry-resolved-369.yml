@@ -32,14 +32,7 @@ on:
       - 'DASHI/Unified/Physics.agda'
       - 'DASHI/Unifier.agda'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
-      - 'DASHI/Moonshine/OggSSPP2F4CurveShearReflectionExact.agda'
-      - 'DASHI/Unified/ArithmeticMoonshine.agda'
-      - 'DASHI/Reasoning/ClaimAuditManifestExact.agda'
-      - 'DASHI/Law/SensibLawGovernedLegalNetworkStrategyExact.agda'
-      - 'DASHI/Law/SensibLawITIRParityEverything.agda'
-      - 'DASHI/Interop/SensibLawSemanticPromotionPolicy.agda'
-      - 'DASHI/Unified/TOELegalGovernanceHandoffExact.agda'
-      - 'DASHI/Unified/TOE369InvariantRegressionExact.agda'
+      - 'scripts/toe_369_import_graph_guard.py'
       - 'DASHI/Physics/Closure/Everything.agda'
       - 'DASHI/Physics/YangMills/YangMillsClayCriticalPathRound578Validation.agda'
       - 'DASHI/Physics/YangMills/YangMillsClayCriticalPathRound578Exact.agda'
@@ -142,22 +135,8 @@ jobs:
           agda-version: '2.6.4.3'
           agda-stdlib-version: '2.1'
 
-      - name: Install DASHI Agda preflight
-        run: python -m pip install -e tools/agda_preflight
-
-      - name: Run DASHI Agda preflight
-        run: |
-          modules=(
-            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
-            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
-            DASHI/Physics/YangMills/YangMillsClayCriticalPathRound578Exact.agda
-            DASHI/Physics/YangMills/YangMillsClayCriticalPathRound578Validation.agda
-            DASHI/EverythingTOESymmetryResolved369.agda
-            DASHI/Unifier.agda
-          )
-          for module in "${modules[@]}"; do
-            dashi-agda-preflight --root . "$module"
-          done
+      - name: Deterministic TOE import graph and ESD scope check
+        run: python3 scripts/toe_369_import_graph_guard.py
 
       - name: Reject trust escapes
         run: |

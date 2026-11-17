@@ -1,0 +1,1210 @@
+# Exotic topology: Ibrahim first-link / snowball / Pareto max-cut — 2026-10-25
+
+Companion work: [Agda #1254](https://github.com/chboishabba/dashi_agda/pull/1254) stacked on horned-sphere [#1244](https://github.com/chboishabba/dashi_agda/pull/1244);
+native Lean [#86](https://github.com/chboishabba/dashi_lean4/pull/86).
+This document is a source-genealogy and exact-residual ledger, not a claim
+that twenty difficult geometric classifications were formalised.
+
+## Method (reuse existing source provenance owners)
+
+- **Ibrahim first-link**: begin at the original named mathematical object
+  or consumer proof obligation; traverse the shortest documented
+  predecessor/implementation links. A link is a retrieval route, not evidence
+  of theorem correctness. Neither approximate match nor "same terminology"
+  is a proof edge.
+- **Snowball**: original article -> explicitly cited predecessor ->
+  verified implementation donor -> actual same-object construction ->
+  independent contrary/negative discriminator. Keep authors, publication
+  context, DOI, venue, exact version and unresolved identifiers.
+- **Pareto**: order actions by dependency fan-out, concrete reduction of the
+  current residual, cost and incompatibilities. Rankings do not transfer
+  citation authority, rewrite original authorship or imply proof completion.
+- **Typed owner**:
+  `DASHI/Core/AttributedSourceCore.agda` +
+  `SnowballAttributionProvenanceInvariantExact.agda`. New
+  `ExoticSourceGenealogyParetoExact.agda` imports both and uses their
+  source records and nonpromoting receipt. There is no competing source
+  ontology. Uninspected QID and Dewey numbers explicitly remain unresolved.
+
+## Source roots and actual genealogy
+
+| Source | Original status / dates | Stable identifier | Consumer and graph-edge meaning |
+| --- | --- | --- | --- |
+| H. R. Brahana, *Systems of Circuits on Two-Dimensional Manifolds* | Ann. Math. 23 (1921), 144–168 | DOI [10.2307/1968030](https://doi.org/10.2307/1968030) | Richards **explicitly credits** the compact bordered-surface Euler/boundary/orientability classification to Brahana; source for our finite PL checks |
+| B. Kerékjártó, *Vorlesungen über Topologie, I: Flächentopologie* | **1923 printed work**, 2013 electronic edition | eBook DOI [10.1007/978-3-642-50825-7](https://doi.org/10.1007/978-3-642-50825-7) | Richards credits earlier ideal-boundary approach, notes gaps, provides later argument. The DOI belongs to the reissue, not the original print object |
+| Ian Richards, *On the Classification of Noncompact Surfaces* | Trans. AMS 106 (1963), 259–269 | DOI [10.2307/1993768](https://doi.org/10.2307/1993768) | Original 1963 proof/completion and realisation of decorated end spaces; not a finite mesh theorem. [Primary PDF](https://people.dm.unipi.it/benedett/Richards.pdf) |
+| Ralph H. Fox and Emil Artin, *Some Wild Cells and Spheres in Three-Dimensional Space* | Ann. Math. 49 (1948), 979–990 | DOI [10.2307/1969408](https://doi.org/10.2307/1969408) | Exact source-selected wild arcs. Paper **explicitly notes cases where global complement fundamental group cannot detect wildness**. [Primary PDF](https://www.maths.gla.ac.uk/~mpowell/fox-artin.pdf) |
+| Kunizô Yoneyama, *Theory of Continuous Set of Points (not finished)* | Tohoku Math. J. 12 (1917), 43–158 | [J-STAGE original](https://www.jstage.jst.go.jp/article/tmj1911/12/0/12_0_43/_article) | Historical publication carrying Wada's common-boundary lakes example. Publisher records 1918 continuation in vol. 13. No DOI claimed |
+| Sibe Mardešić, *Shape Theory* | ICM Helsinki (1978), survey | [Scanned survey](https://citeseerx.ist.psu.edu/document?doi=1689fd7674a0d927b89aad5f68c1cfa6456d01d4&repid=rep1&type=pdf) | Historical survey explaining Warsaw-circle weak homotopy vs noncontractibility; **not** falsely attributed as originator of Borsuk's shape theory |
+| E. Bombieri, E. De Giorgi, E. Giusti, *Minimal Cones and the Bernstein Problem* | Invent. Math. 7 (1969), 243–268 | DOI [10.1007/BF01404309](https://doi.org/10.1007/BF01404309) | The GMT area-minimisation result; the algebraic cone/gradient/link checks do not import its proof |
+| Allen Hatcher, *Algebraic Topology* | Textbook (2002) | [Author PDF](https://pi.math.cornell.edu/~hatcher/AT/AT.pdf) | Source of CW, van Kampen and sphere background; source text does not supply a Lean theorem |
+| Jack McCarthy, `Hatcher/Sphere/Homology.lean` | Hatcher-at implementation, inspected 2026-10-25 | [Original Lean module](https://github.com/Deicyde/hatcher-at/blob/main/Hatcher/Sphere/Homology.lean) | Genuine reduced sphere homology on literal `TopCat.sphere`, but external Lean/Mathlib v4.34.1 source not directly importable into DASHI's pinned Mathlib v4.28.0 without a compatible exact-graph build |
+
+Cross-links **known from original text**, not invented: Richards -> Brahana;
+Richards -> Kerékjártó; Fox–Artin -> Alexander/Antoine historical context;
+current Hatcher-at -> Hatcher and Mathlib. Other juxtaposed sources above
+are investigative cousins, **not** mutually citing papers or evidence of
+mathematical equivalence.
+
+## Largest concrete geometric payment this round
+
+New source:
+`scripts/exotic_topology_pl_surface_gluings.py`.
+
+It constructs **actual finite oriented simplicial complexes**:
+- an oriented subdivided-cube sphere with two holes (annulus) or three
+  separated holes (pair of pants);
+- a periodic 6×6 triangulated torus with two separated triangular holes
+  (one-handle, two-boundary collar);
+- a triangulated disk;
+- gluing through full matched boundary cycles by **orientation reversal**,
+  using a disjoint-set quotient of vertices and recomputed faces.
+
+It verifies at every constructed stage:
+1. all triangles have distinct vertices and every edge has one or two
+   incident faces;
+2. every interior shared edge has opposite induced orientations;
+3. triangle adjacency is connected via the one-skeleton;
+4. **every vertex link** is connected and has degree 2 (interior circle)
+   or exactly two degree-1 endpoints (boundary interval);
+5. each boundary edge belongs to precisely one oriented boundary loop;
+6. `chi=V−E+F=2−2g−b` for an integer nonnegative genus.
+
+Distinctive new result: up to stage **4**, not merely numerical profile
+consistency, the actual finite PL manifold tests pass:
+
+| Family | Stages 0–4 genus | Stages 0–4 boundary circles |
+| --- | --- | --- |
+| Cantor-tree | 0,0,0,0,0 | 1,2,4,8,16 |
+| Loch Ness monster | 0,1,2,3,4 | 1,1,1,1,1 |
+| Jacob's ladder | 0,2,4,6,8 | 2,2,2,2,2 |
+
+Independent local Python implementation passed these finite manifold
+tests, plus a **negative control**: two triangles with the same induced
+shared-edge orientation are correctly rejected. The new GitHub file
+and two regression tests are committed. This is NOT Agda or Lean
+kernel certification; the pushed script still requires exact-head
+execution to be called a passing GitHub receipt.
+
+## What the finite PL result *does* and *does not* settle
+
+Each finite mesh is a triangulated connected orientable compact surface
+with boundary (using the standard PL link criterion), so we have now
+provided substantially more than `g,b,chi` numerology.
+
+To construct the ACTUAL infinite surfaces, still prove all of:
+- compatible choice of PL collars along each outgoing boundary circle,
+  ensuring old frontier circles become interior in the next stage;
+- existence, Hausdorffness, second-countability, connectedness,
+  orientability and boundarylessness of the resulting direct-limit
+  topological 2-manifold;
+- that each tail component of the complements of compact exhaustion
+  stages agrees exactly with the corresponding nested binary prefix
+  for Cantor, the unique Loch Ness tail, and the two Jacob tails;
+- the decorated end space equals Cantor with no nonplanar ends, a
+  singleton accumulated by genus, and a two-point discrete space with
+  both ends accumulated by genus, respectively;
+- THEN apply a correctly formalised version of Richards, retaining
+  Brahana/Kerékjártó attribution to the older component theorems.
+
+The bare assertion that Euler/genus data agree cannot replace any of
+these global topology obligations.
+
+## Recursive Pareto frontier after constructive payment
+
+| Rank | Supplier/root | Current accepted state | Remaining exact object |
+| --- | --- | --- | --- |
+| 1 | McCarthy/Hatcher + native CP¹/S² | Actual homeomorphism & categorical transport already owned; external reduced sphere H₂ found | One mathlib-revision-matched reduced/ordinary rational H₂ object and kernel receipt |
+| 2 | Brahana -> Kerékjártó -> Richards | **Finite PL stages actual geometry verified locally** | Collared direct-limit surface and homeomorphic decorated end spaces |
+| 3 | Fox–Artin + horned #1244 | Horn address/linking finite source machinery | Literal source-selected Fox–Artin nested embedding and non-1-LCC/local wildness witness |
+| 4 | Borsuk/Mardešić | Literal Warsaw sine-closure subset in Lean #86 | Vertical closure, local topology, all homotopy groups and noncontractibility/shape distinction |
+| 5 | Wada/Yoneyama | Literal Wada frontier predicate and C3 non-go | Real three planar connected disjoint domains with the same frontier |
+| 6 | Bombieri/De Giorgi/Giusti | Literal Simons cone/link and gradient algebra | Geometric-measure area-minimality and calibrated/varifold theorem |
+
+The ranking measures tractable dependency fan-out, not importance,
+citation volume, historical priority, or confidence. Follow the first
+remaining exact primary object at each leaf; stop literature snowballing
+when further derivatives add no independent theorem, construction,
+negative control or compatible proof source.
+
+## Validation boundary
+
+- Local SymPy and finite PL calculations have been executed;
+  the latter includes 15 tested surface stages plus four independent
+  starter pieces and an orientation-rejection negative control.
+- GitHub source files were written/read by connector; the new
+  Agda/Lean modules remain UNTYPECHECKED, as does the canonical PL
+  script at the exact pushed SHA.
+- No entire twenty-object theorem bundle is promoted complete.
+- DOI is source identity, QID/DDC may be unknown, citation is not a
+  mathematical proof, and Pareto rank is not a proof-status certificate.
+
+
+## Fox–Artin original example disambiguation — decisive negative control
+
+Read the 1948 primary paper directly, not secondary summaries or figure labels.
+
+- **Example 1.1\***, pp. 982–983: the arc pictured in the original
+  user's prompt. Fox–Artin explicitly says its complement is
+  **NOT simply connected**. Its source-specific iterated *chain
+  stitch* and nontrivial group relations are the proper positive
+  construction target; do not misattribute the simply-connected
+  contrast to this exact diagram.
+- **Example 1.2**, pp. 983–985: a **wild** arc whose complement **IS
+  an open 3-cell**. Consequently the entire ambient complement's
+  homeomorphism type, not just its global fundamental group, is
+  insufficient to decide tameness. The paper instead uses a
+  **local inverse system of punctured neighborhoods at the endpoint**.
+- **Example 1.3**, pp. 985–987: the complement is simply connected,
+  yet is **NOT an open 3-cell**. The proof uses an additional
+  disjoint closed curve and a nontrivial fundamental group of its
+  complement with the arc; global `pi1(S3 - arc)` alone again fails.
+
+This gives a **three-way source-derived acceptance discriminator**,
+rather than one generic "wild arc" Boolean:
+`nontrivial global pi1` / `global complement is an open cell but local
+wildness remains` / `global pi1 trivial yet complement not an open cell`.
+
+The existing horned-complement finite group pipeline may address the
+first case, but **cannot by itself** settle the other two. Next
+source-specific proof must formalise the actual nested local
+complement inclusions and tameness test from Example 1.2,
+then its Example 1.3 witness. Do not call the subject of Figure 6
+an Example 1.3 simply-connected arc.
+
+Primary source: Fox and Artin, Annals of Mathematics 49 (1948),
+979–990, DOI 10.2307/1969408;
+https://www.maths.gla.ac.uk/~mpowell/fox-artin.pdf
+
+
+### Positive finite group payment for Figure 6 / Example 1.1*
+
+The companion native Lean
+`Synthesis/ExoticTopologyFoxArtinS5Witness.lean`
+and independent script
+`scripts/exotic_topology_fox_artin_s5.py`
+in **dashi_lean4 PR #86** reconstruct Fox--Artin's exact page-983
+equation (2_n*) and its three-periodic 5-cycle representations.
+The independently executed Python solver checks all three
+residue classes (and 603 consecutive integer indices including
+negative n); every relation holds, and each source cycle is
+nontrivial of order 5.
+
+Accepted status: **actual finite S5-valued model of the source
+group presentation**, plus source-written Lean `by decide`
+statements. This strictly improves the prior-art audit for the
+user's specific figure. It is not yet a homomorphism out of the
+ACTUAL topological complement `pi1` without the geometric
+colimit/VK theorem. Nor does it decide the local endpoint
+wildness of source Examples 1.2 and 1.3.
+
+
+## 2026-10-25 lineage correction: finite manifold != Cantor end construction
+
+A subtle implementation defect in the earlier `exotic_topology_pl_surface_gluings.py`
+was uncovered: its Cantor scheduler iterated
+`range(len(boundary_loops(mesh)[0]))` but repeatedly called
+`glue(mesh, pants)` on **boundary index zero**. After the first
+attachment that index can denote a NEWBORN frontier circle.
+Therefore its passed genus/Euler/vertex-link and `2^n` boundary
+count fixtures did **not** certify that every PREVIOUS stage
+branch had split exactly once. The old `audit` is retained as
+a mesh-integrity audit, but its end-lineage inference is superseded.
+
+Repairs committed:
+- `exotic_topology_pl_surface_gluings.py:glue(...,with_transport=True)`
+  now optionally returns **actual vertex maps** from both input
+  triangulations through the orientation-reversing quotient.
+  Original callers and mathematical triangulation are unchanged.
+- `exotic_topology_pl_frontier_lineage.py` reuses the original
+  disk, three-holed sphere/pants, punctured torus/handle, gluing,
+  link validator and boundary-cycle detector. It labels every
+  live geometric boundary circle and transports all labels through
+  vertex identifications; at a new stage it snapshots the full old
+  frontier, attaches to each old label **once only**, and compares
+  resulting labels against the exact binary child set.
+  Cantor: prefix `p -> p0,p1`; Loch: sole label persists after
+  one handle; Jacob: each of L/R persists after its own handle.
+  Every live label must match exactly one actual geometric boundary
+  loop, not merely an address in a separate registry.
+- Three additional unit tests check exact labelled stages, a
+  count-only false-positive, and an **actual legal oriented
+  4-boundary triangulated surface** obtained by repeatedly
+  splitting the same left branch while leaving the right one
+  unsplit. Thus topology stage integrity, Euler/genus and b=4
+  do not imply correct Cantor-tree ancestry.
+- `dashi_lean4` #86 adds
+  `Synthesis/ExoticTopologyCantorInverseLimit.lean`, sourcing
+  finite stage functions from **existing** `Integration.Address.Addr`.
+  It defines coherent infinite towers and a two-sided stream/tower
+  equivalence. This is not yet kernel-checked or a claim about the
+  Freudenthal/Richards end topology of the literal 2-manifold.
+
+**Important outstanding bridge:** the infinite collared union and
+its actual space of proper nested unbounded-region classes must be
+identified with this coherent prefix space, including continuity
+in the Richards ideal-boundary topology. The 1963 paper defines
+ends by nested connected unbounded regions with compact frontier
+and the properness condition, not simply by arbitrarily labelled
+triangular boundary circles (Richards pp.261--262).
+The PL lineage repair supplies the correct **finite incidence
+input** for this global theorem and no more.
+
+Fresh execution at the exact pushed SHA: NOT YET AVAILABLE.
+The tests and construction are source-written and committed;
+the earlier 8/8 + mesh receipts predate the lineage repair and
+must not be cited as having executed these new tests.
+
+
+## 2026-10-25 newest-PR snowball and stronger clopen discriminator
+
+### Relevant latest branch owners, not a bibliography popularity poll
+
+| Donor PR / original root | Reuse paid | What is *not* promoted |
+| --- | --- | --- |
+| [#1244](https://github.com/chboishabba/dashi_agda/pull/1244), Alexander (1924), Hatcher Example 2B.2 | Existing `ThreeArmCollarCoverAssembly.lean` derives path-connected cover and van Kampen free-product consumer from source-specific **central region / satellite** hypotheses; `AlexanderHornedBinaryTernaryExistingCodecWeldExact` already uses two older DASHI digit codecs and mixed 2/3 resolution | Horn symbolic addresses or one typed conditional collar contract do NOT identify the actual Fox--Artin arc complement; no geometric wildness or unproven smooth equivariant embedding |
+| [#1239](https://github.com/chboishabba/dashi_agda/pull/1239), Artin (1925, 1947) | Actual existing finite modular `B3→SL2(Z)` calculations and punctured T9 shadow, plus separate `C3BraidFramingInformationLossExact` | (S_3) endpoints, (SL_2(ℤ)) monodromy, (B_3) isotopy and ribbon framing are *four different objects*; their kernels are not interchangeable |
+| [#1259](https://github.com/chboishabba/dashi_agda/pull/1259), canonical `QueryIndexedProjectionAdequacyExact` | Existing `IntersectionalNonFactorability` and query-dependent adequacy let the horn-address no-go reuse the *general proof* of nonfactorability and survival under all downstream recharts | Blackwell (1953) and Crenshaw (1991) are conceptual precedents; they did not prove any mathematical Fox--Artin embedding/wildness fact. PR #1259 is an application, not source root |
+| [Lean #86](https://github.com/chboishabba/dashi_lean4/pull/86) | Actual `CantorStage = Integration.Address.Addr n Bool`, coherent tower–stream equivalence source-written; new `ExoticTopologyCantorClopenMeasureNoGo.lean` isolates the universal all-depth divisibility obstruction | Neither finite state equivalence nor the divisibility theorem is the actual Freudenthal end-space homeomorphism or a kernel-certified measure-space classification |
+
+### The braid counterexample with three successive forgetful quotients
+
+The exact original (B_3) generators (sigma_1,sigma_2) have endpoint
+projection to the adjacent transpositions in (S_3). PR #1239 already
+records the modular representation
+(ho(sigma_1)=\begin{pmatrix}1&1\\0&1\end{pmatrix}),
+(ho(sigma_2)=\begin{pmatrix}1&0\\-1&1\end{pmatrix}).
+For (z=(sigma_1sigma_2)^3), its *endpoint permutation* is the
+identity, but (ho(z)=-I), and its braid exponent sum is (6).
+For (z^2), both endpoint and modular images are identities while
+the exponent sum is (12\ne0). This exhibits nonfaithfulness of
+both projections, with no unproved knot isotopy assertion.
+The PR #1239 sample word ((sigma_1^{-1}sigma_2)^3) has exponent
+sum zero but modular image
+(egin{pmatrix}13&-8\\-8&5\end{pmatrix}) of trace 18,
+so the exponent-sum invariant alone is not complete either.
+
+A new source-scoped Python consumer
+`scripts/exotic_topology_braid_crosspr_discriminator.py`
+was committed with a regression test. An independent local SymPy
+replication passed the braid relation, central image, strand
+projection and sample matrix/trace; exact pushed-SHA Python workflow
+execution is NOT claimed.
+
+**Historical attribution:** the original braid source is Artin,
+*Theorie der Zöpfe* (1925), DOI
+[10.1007/BF02950718](https://doi.org/10.1007/BF02950718).
+Artin's *Theory of Braids* (1947), DOI
+[10.2307/1969218](https://doi.org/10.2307/1969218), explicitly
+acknowledges his 1925 work and strengthens the rigorous
+braid-coordinate approach. PR #1239 is a later repository
+*implementation/selected computational donor*, not original
+authorship. `ExoticSourceGenealogyParetoExact.agda` now
+records BOTH sources and a seventh braid/Seifert consumer leaf;
+the source atlas holds eleven independent cited items, without
+fabricated QIDs or library classification numbers.
+
+### New stronger topological measure theorem (mathematical, not kernel claim)
+
+The pre-existing variable-length prefix code `3→0,6→10,9→11`
+already gave one binary/ternary Cantor homeomorphism with nonmatching
+Bernoulli weights. The new source `scripts/exotic_topology_cantor_measure_obstruction.py`
+upgrades the mathematical result: **NO** measure-preserving
+homeomorphism exists between the *fair binary* and *uniform ternary*
+Cantor product measures.
+
+The first ternary-digit cylinder is clopen of measure (1/3).
+The pullback of this cylinder by a homeomorphism must be clopen
+in binary Cantor space. A clopen subset of the compact product
+space is a finite union of prefix cylinders, refinable to a
+single depth (n), and therefore has fair-bit measure (k/2^n).
+If the homeomorphism were measure-preserving,
+(3k=2^n). But (3\nmid 2^n) for every (nge0).
+Contradiction. This does **not** preclude a non-measure-preserving
+homeomorphism, as our codec provides.
+
+Independent local exact rational regression over all binary levels
+0–12 passed; Lean #86 now source-writes the universal
+prime-divisibility theorem `noDyadicClopenMassEqualsOneThird`
+using Mathlib's existing `Nat.Prime.dvd_of_dvd_pow`.
+Neither Lean source has a fresh kernel receipt. This claim is
+about these **specified measures** and these **product topologies**,
+not about arbitrary full-support measures on homeomorphic Cantor spaces.
+
+### Claim-relative projection adequacy, not intrinsic adequacy
+
+`ExoticAmbientLinkingNoGoExact.agda` now imports the EXISTING
+`QueryIndexedProjectionAdequacyExact` and
+`IntersectionalNonFactorability` owners. It supplies:
+- a question about the C3 sector, which *does* factor through the
+  symbolic horn address;
+- a question about a separately marked linking bit, whose two
+  states have the *same* symbolic horn address and different answers;
+- a canonical query defect and general factorisation prohibition;
+- the **all-postrechart obstruction**: any function of only the
+  old symbolic address remains inadequate for the linked-bit query.
+
+This is a reusable exact non-descent proof about marked information,
+NOT a pair of realised tame/wild embeddings and NOT proof of linking
+in Euclidean three-space.
+
+### Updated operational frontier
+
+P0: exact-head Python workflow results and Agda/Lean typecheck
+receipts. The new focused workflow
+`.github/workflows/exotic-topology-focused.yml` follows the
+parent's narrow-test pattern; installation and collection of actual
+run output are separate from adding a YAML file.
+
+P1: locally finite PL surface colimit and actual Freudenthal/Richards
+end homeomorphism (including the corrected parent-child lineage).
+P2: actual Fox--Artin embedded arc, local fundamental group tower,
+and same-object van Kampen certificate using #1244's existing
+three-arm assembly.
+P3: compatible external sphere (H_2) from Hatcher/McCarthy.
+P4: Warsaw, Wada, and geometric Seifert/braid construction.
+The newest whale, media-source and monster PRs supply no proven
+new same-object geometric data for these P0–P4 topology consumers.
+Do not add them merely to make the bibliography large.
+
+
+## Second restack: parent horned exact-cover result changes the true topology Pareto cut
+
+Rebased by NONDESTRUCTIVE MERGE (not a force push) onto inspected
+horned parent #1244 head `34c7ae2741c7849530c4cffba4daa0444f02d9c0`
+in merge commit `f1b1c097767bf085535e48795e49b5e515792c0e`.
+At that snapshot the child was 53 commits ahead, zero behind,
+and all 21 child paths were disjoint from the parent's 5 new
+geometry/collar paths. This source is a merge receipt, NOT a
+successful exact-head kernel or CI run. Future parent commits may
+again advance the base.
+
+NEW source-owned geometric donors now accessible on this branch:
+
+- `proofs/horned_c3_lean/HornedC3/ThreeArmCentralPi1Reduction.lean`.
+  Using already-existing `ThreeArmCollarCoverAssembly` and based
+  `OverlapGroup`, the source-written theorem reduces all off-diagonal
+  overlap fundamental groups to **ONE** trivial-central-`pi1` input.
+  It does not construct an actual wild solid nor discharge that input.
+- `scripts/alexander_horned_c3_explicit_open_cover.py` records
+  rational centres `9e_i`, cut radii `15/4<17/4` and exact
+  separation margins, yielding actual relatively open C,S_i,U_i
+  in a *supplied* chosen exterior E. Open-cover disjointness and
+  coverage follow mathematically from those inequalities.
+- `scripts/alexander_horned_c3_pierced_shell_product.py` already
+  implements the stereographic annular shell coordinate identities
+  for a source-selected straight pierced tube. It has an
+  **867-point** rational finite acceptance audit; it does NOT
+  certify the entire geometric wild exterior or a based `pi1`
+  isomorphism.
+- `Docs/topology/AlexanderHornedC3ExplicitExteriorOpenCover20261025.md`
+  gives the PAPER-LEVEL argument: the common central exterior
+  is the complement of a tame 3-ball *IF* the wild satellites are
+  contained in the original selected unit reference balls and
+  the outside spoke geometry satisfies those exact envelopes.
+  It explicitly does not claim C is contractible in R3:
+  its H2 can be nonzero while pi1(C) is trivial.
+
+The child now has two tests **importing these exact parent scripts**;
+it no longer duplicates the 867-point stereographic fixture or
+silently treats a radius inequality as a direct wild-embedding proof.
+
+**Revised P2 for Alexander:** the explicit three-arm OPEN COVER
+is no longer the blocker at the paper-geometric level. The
+surviving same-object obligations are an actual Lean realisation
+of the open-set/central `pi1` argument on E, the satellite
+homotopy equivalences to the selected Hatcher G_A,
+the induced based maps, and compatible infinite limit.
+
+**Revised P2 for Fox–Artin remains SEPARATE:** the selected arc
+in Figure 6 is Fox–Artin 1.1*, with its own nested arc-complement
+group. The parent Alexander horned solid is NOT that arc; matching
+one (S_5) presentation witness or the same source Hatcher
+commutator recursion does not make their ambient complements
+homeomorphic or identify their fundamental groups.
+Do not promote the parent geometric cover as closing Fox–Artin.
+
+
+## 26 October — actually paid old/new complement incidence + cylinder orientation
+
+This is a second step beyond the 25 October fixed frontier-label counts.
+
+### Exact finite complementary geometry
+
+NEW: `scripts/exotic_topology_pl_complement_components.py` imports
+the **canonical existing** PL geometry and marked-frontier
+implementations. It composes the literal injective vertex maps
+of each old stage through every pair-of-pants or handle attachment.
+It verifies that **each old oriented simplex persists**,
+computes added triangles as a set difference, and computes
+their actual shared-edge dual connected components. Then it
+checks that the interface includes every old boundary edge
+and identifies **precisely one** complementary component for
+each old boundary, with all new outgoing boundary edges in
+the correct component. Cantor: p→p0,p1; Loch: one persistent
+tail; Jacob: two persistent tails.
+
+Independent local reimplementation of the underlying algorithms
+executed and PASSED depths 1–3:
+- Cantor: 1,2,4 new components; surfaces have 2,4,8 outgoing
+  boundary circles, genus zero;
+- Loch: 1,1,1; new genus 1,2,3;
+- Jacob: 2,2,2; new genus 2,4,6;
+- adversarial collapsed old-vertex map and false lineage both
+  rejected, although the false-lineage mesh itself is legal.
+
+This establishes the *finite combinatorial analogue* of
+component-by-boundary compatibility. It does NOT construct
+a proper infinite locally finite PL exhaustion or prove
+homeomorphism of the actual Freudenthal/Richards end spaces.
+The exact pushed GitHub code has newly written tests; no
+executed exact-head check receipt is yet claimed.
+
+### Chronological Cantor cylinder interpretation: nontrivial correction
+
+The PRE-EXISTING
+`DASHI.Foundations.CantorProjectiveCylinderMeasureExact` defines
+`leftChild (cylinder prefix) = cylinder (false :: prefix)`.
+This is an honest reverse-stack word convention: the child
+mass splits exactly because `cylinderMass` depends only on
+word LENGTH. But it is NOT a refinement of the ordinary
+chronological stream-prefix event where list head means
+stream index zero. Example: parent prefix `[true]`, old
+prepended left child `[false,true]`, and stream
+`[false,true,false,...]`: the child matches and its
+supposed parent does not. Thus mass equality is not an
+event-inclusion proof; we must not silently identify those
+two word-order conventions.
+
+NEW: `ExoticCantorCylinderOrientationExact.agda` reuses
+**the actual existing Cantor.BitStream and Cantor.Cylinder**,
+defines stream-prefix event semantics, supplies correctly
+APPENDED children, and proves `appendChildRefines`
+by induction on arbitrary finite prefixes for every stream.
+It also produces an explicit counterexample that blocks
+claiming the original prepended child refines a conventional
+prefix event.
+
+NEW `scripts/exotic_topology_cantor_cylinder_orientation.py`
+independently audits all 2046 prefix-child pairs at depths
+0–9, tests `reverse(p ++ [b]) = b :: reverse(p)` and checks
+the explicit failed old-prepend inclusion. Independent local
+Python mathematical replication PASSED the corresponding
+finite identities; the actual new GitHub script remains
+unexecuted at its pushed SHA. The two finite tree systems
+are related by **finite-word reversal**, but there is no
+claim of a literal terminal-bit reversal operator on
+an infinite sequence.
+
+The original source code and attribution owner are
+preserved unchanged. The new orientation bridge and its
+negative control are implementation-specific DASHI results;
+they are not historical theorems assigned to Richards or Cantor.
+
+### Latest-PR Pareto and same-object boundary
+
+26 October #1266 adds a standalone revisable-observer
+consumer-factorisation file on a separate branch. This
+is useful inspiration, but #1254 already uses the
+canonical `QueryIndexedProjectionAdequacyExact` and
+`IntersectionalNonFactorability`. We therefore do NOT
+import an unmerged branch or duplicate its mathematical
+framework. #1268 models source revision and independence
+for another investigation; it is an attribution workflow
+reference, NOT a topology theorem or primary surface source.
+#1261 provides genuine crystallographic group actions,
+but not a Fox–Artin geometric embedding or Richards
+surface quotient. No unrelated PR is promoted by analogy.
+
+REVISED geometric Pareto:
+P0 run exact-head seven Agda kernel checks and now 29
+Python regression tests (including component/word-order
+negative controls), collect source-specific receipts.
+P1 proper locally finite infinite collared union and
+actual compact-cofinality/connected unbounded complementary
+region theorem for the PL construction.
+P2 identify the genuine Richards end-space topology via
+the now explicit *chronological* prefix cylinder system.
+P3 named Fox–Artin/Whitehead/van Kampen same-object wild
+embedding, Hatcher sphere H₂ supplier, Wada/Warsaw deep
+topology as independently scoped residuals.
+
+No kernel theorem, source attribution, homotopy status
+or geometric reality is auto-promoted by these scripts.
+
+
+### 26 October second parent refresh and final finite receipts
+
+The latest #1244 head `ae805ee8ec4ca23e7eadec28aa5f90855af75844`
+adds source-owned `alexander_horned_c3_equivariant_basing_paths.py`
+and `alexander_horned_c3_same_cover_discriminator.py`.
+The first gives three explicit C₃-permuted straight central paths
+from `x₀=(20,20,20)` to `13e_i`; each distinguished coordinate
+stays at least 13, proving clearance from all radius-15/4 cuts.
+Independent local Fraction replay **PASS 303/303** sampled
+source-equivalent path identities; this is not yet a Lean
+`FundamentalGroup` basepoint-change theorem.
+
+The second shares finite cover observables for tame and
+wild satellite replacements and supplies wrong-radius/no-overlap
+negative controls. This remains a conditional/synthetic
+information-loss discriminator; no tame–wild embedding pair
+or global `pi1` equivalence is thereby kernel-certified.
+The child **imports both parent scripts in focused tests**,
+preserving original implementation custody. The new merge
+`8299b0bd3389c1e2950c87d2e58ea1d4aca2dbdb`
+contains the inspected parent plus the original child,
+without force push or overlapping path mutations.
+
+An independently reimplemented standalone finite audit
+`independent_complement_audit.py` was locally executed:
+nine PL component transitions PASS, with component counts
+(1,2,4)/(1,1,1)/(2,2,2), and two deliberately invalid
+inclusion/lineage cases rejected. The chronological
+prefix/reverse-stack exhaustive local replay PASSed all 2046
+bit-child pairs across depths 0--9. These are independent
+mathematically equivalent reproductions; **neither is an
+exact-GitHub-blob execution receipt**. At last check PR #1254
+contained 24 focused Python test methods and had no
+associated successful kernel/Actions execution.
+
+
+## 26 October evening — native balanced ternary pays a FINITE 1→3 cobordism
+
+**Direct discovery from already-owned repo, not a new topology library.**
+Native source owners, inspected at actual heads:
+
+- `DASHI.Algebra.Trit` (negative, distinguished zero, positive; sign involution);
+  `DASHI.Codec.BalancedTritBitFibre` (zero-fibre vs nonzero support/sign).
+- `DASHI.Geometry.SSP369Ultrametric` (finite 3/6/9 prefix carriers);
+  `DASHI.Foundations.BalancedTernaryUltrametricExact` (prefix
+  agreement and base-3 depth; retains open zero).
+- `DASHI.Topology.TernaryCylinderPantsGeometryExact` and
+  `DASHI.Topology.TernaryPantsFrontierExact` (canonical compositional
+  1→3 output from TWO 1→2 pants, exact arbitrary-depth ternary
+  address/path/append naturality; source cites Atiyah 1988 for
+  cobordism vocabulary, DOI 10.1007/BF02698547).
+- Existing Agda #1254 `ExoticBinaryTernaryPantsCodecExact`,
+  `ExoticCantorCylinderOrientationExact`, finite geometric PL
+  `pl_surface_gluings`, marked frontier `pl_frontier_lineage`,
+  and literal same-triangulation `pl_complement_components`.
+
+**New source-written Agda cross-weld:**
+`ExoticBalancedTernaryPantsWeldExact.agda`.
+It explicitly chooses the slot chart
+`digit3 ↔ neg`, `digit6 ↔ zero`, `digit9 ↔ pos`.
+These are THREE distinct endpoints, with zero preserved as an
+actual fibre. It defines both finite-word maps and both
+inverse-direction round trips; then imports the ORIGINAL
+`TernaryPantsFrontierExact.addressToPantsPathAppend` theorem
+to show that signed-path append maps to 369/pants append
+**at every finite depth**, without another proof system.
+It additionally consumes native
+`BalancedTernaryUltrametricExact.PrefixAgreement` by mapping
+an SSP369 `PrefixMatch` proof into the actual balanced-digit
+prefix-agreement proof. Sign inversion `neg↔pos`, `zero↦zero`
+is an order-two REFLECTION of the 369 labels (3↔9,6 fixed),
+NOT the three-cycle C3 (3→6→9→3).
+It does not turn the selected name map into a theorem
+about numeric 3/6/9 arithmetic or physical crystal symmetry.
+
+**New literal finite PL realisation:**
+`scripts/exotic_topology_balanced_ternary_pl.py`.
+One 1→3 *cobordism* has FOUR boundary circles (1 input,
+3 outputs), Euler characteristic -2, genus 0. We actually
+glue **two** copies of the source-owned 3-holed sphere:
+first parent → (neg, temporary continuation), then temporary
+→ (zero, pos). The temporary circle is internal and does NOT
+become a permanent zero branch. The full attachment has
+three genuine outgoing geometric circles including zero.
+Every old boundary from the PREVIOUS STAGE is processed
+once; the old stage embeds vertexwise/trianglewise, and the
+same authoritative complementary-component verifier checks
+**one connected new exterior component per old boundary**,
+each meeting the entire old boundary and producing exactly
+its three expected signed descendants.
+
+Independent local reproduction, using the earlier
+finite PL triangulation and dual graph (not a code-name
+assertion), **PASS** at depths 0–3:
+`b_n=1,3,9,27`, genus zero throughout,
+attached complementary components `1,3,9`,
+final mesh has 7,723 oriented triangles, all manifold
+vertex-link conditions and old-stage incidence verified.
+This is an independent source-equivalent executed check,
+NOT exact-head execution of the new GitHub script and
+NOT an Agda kernel proof.
+
+The source code `3→0, 6→10, 9→11` is exactly the
+two-pants binary-decision tree flattened into signed
+outputs `neg→0, zero→10, pos→11`; finite roundtrips
+and Kraft sum one have the same original owner.
+Under a fair binary product coin these branches have
+weights (1/2,1/4,1/4), not (1/3,1/3,1/3) as uniform
+ternary product measure; the topological Cantor-space
+homeomorphism does not preserve the specified measures.
+
+**New genuine rejection controls in the 28-method test suite:**
+one ordinary pair of pants gives only TWO outgoing circles
+and is insufficient for the three balanced branches;
+zero must not be erased; both sources must share the exact
+variable-length prefix code; cyclic order-three C3 action
+cannot be confused with order-two balanced reflection.
+Do NOT conflate this 3-ary branching end space with the
+UNRELATED 26-point punctured T³ carrier in #1261,
+the 3⁴×3⁵ Eisenstein quotient's nonsemisimple ADDITIVE
+group in #1260, or a 3D punctured hyperfabric manifold:
+none of those carriers is the 2D PL surface constructed here.
+
+**Pareto update:** source-root literature is unchanged:
+Brahana 1921 owns compact orientable surface classification,
+Kerékjártó 1923 ideal-boundary precursor, Richards 1963
+noncompact classification and realisation. Atiyah (1988)
+owns TQFT/cobordism vocabulary, not this computed mesh.
+Repository-local implementation is a precise new FINITE
+geometric consumer of pre-existing combinatorial owners;
+it has not kernel-proven the infinite collared union,
+topological end homeomorphism, nonplanar-end decoration,
+or Richards classification. #1261/#1260 are useful
+nonidentity/wrong-carrier negative controls, not claims
+of physical or topological equivalence.
+
+
+### Late-26 October exact latest horn and provenance update
+
+Parent #1244 source head `bf77f7c6cda943610a7e6d645178ede34b569044`
+was inspected and merged NONDESTRUCTIVELY in child merge
+`201410e21e58dc5b9698cf7156fa4d065a3c4bf5`
+(no overlapping source paths). It introduces
+`AlexanderHornedC3ChronologicalClopenBridgeExact.agda`:
+the original Horn **newest-first** children are
+converted to true chronological APPENDED Cantor cylinder
+words; C3 rotates external sectors without touching
+the binary end suffix.
+
+NEW child Agda
+`ExoticHornChronologicalCantorConsumerExact.agda`
+then ACTUALLY USES parent proofs
+`leftChildAppendsChronologicalBit` and
+`rightChildAppendsChronologicalBit`, together with
+the child-side arbitrarily-long cylinder event
+`appendChildRefinesAt`, to prove left/right Horn
+chronological event inclusions and C3 endpoint
+event invariance. It does NOT assert a continuous
+partition of the connected wild exterior E: clopen
+endpoint cylinders and clopen ambient R³ subsets
+are different types of geometric statement.
+
+Parent #1244 also adds real tame Euclidean Cantor-ball
+embedding formulas and separated rotated satellites
+in `scripts/alexander_horned_c3_clopen_spatial_realization.py`.
+The child now tests that source-owned tame case over
+31 binary prefixes × three sectors, retaining
+`clopen_in_ambient_R3=False` and
+`Hatcher_wild_exterior_pi1_proved=False`.
+This is a TAME endpoint image, not an Alexander wild
+sphere, Fox–Artin arc or a certification of linking.
+
+The typed source atlas was extended **without cloning
+any attribution framework** to explicitly credit
+Atiyah (1988), DOI 10.1007/BF02698547, for the
+cobordism/TQFT vocabulary already cited by original
+ternary-pants source. Atlas now has 12 records;
+Atiyah is not credited with our PL implementation,
+a physically realised TQFT or any new topological
+classification. The 29-method focused regression
+suite and nine Agda modules now have a bounded workflow
+specification, not a successful exact-head kernel receipt.
+
+The primary new geometry receipt remains independent
+local finite PL (through trit depth 3) on the actual
+composed-two-pants construction. Its mathematical
+restriction is clear: the 3-ary exhaustion has planar
+Cantor ends only *conditionally on actual infinite
+collared realisation*, and is then the SAME Richards
+Cantor-tree type as the binary exhaustion.
+
+
+### 26 October late: 27-frontier ↔ native 27-cube SET bijection, false adjacency rejected
+
+The latest crystallography #1261 and canonical cube original
+`DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact`
+were re-read. Instead of making a duplicate 27 cube,
+NEW `ExoticBalancedDepthThreeCubeSetBridgeExact.agda`
+uses `SSPTritCarrier.fromTrit/toTrit` and its ACTUAL
+two roundtrip proofs to establish a two-sided same-CARRIER
+finite SET bijection
+
+```
+Vec DASHI.Algebra.Trit.Trit 3
+    ↔ Base369Ternary27HypervoxelFabricGeometryExact.Ternary27Point
+```
+
+with an explicit all-zero ↔ native cube origin equation.
+The length-three signed word on the left indexes one of
+the 27 real output frontier CIRCLES of the finite
+two-pants construction, whereas the right is a point
+of a finite 3D GRID. This is a legitimate **set-valued
+coordinate transport**, no more.
+
+The new original-owner-consuming Python exact negative control
+`depth_three_cube_sibling_nonpromotion` establishes:
+- native cube-grid graph: 27 vertices, **54 edges**;
+- optional "share the first two trits" sibling-pair graph
+  on the 27 leaf labels: **27 pairs**;
+- overlap: **18** pairs;
+- **nine** sibling-only non-grid pairs (e.g. last
+  coordinate -1 to +1 is a two-step cube change);
+- **36** native cube edges connect NONsiblings in that
+  particular depth-three tree.
+
+An independent local exact Python enumeration PASSed
+all counts, and a new unit test is committed.
+Thus even this NATURAL coordinatewise 27-set bijection
+does **not** preserve the cube's grid adjacency
+versus the optional sibling-pair relation. No claim
+that every possible graph equivalence is impossible
+is made; the chosen relations have unequal edge counts
+so these particular graphs cannot be isomorphic.
+
+The 26-site punctured cube (#1261) means
+`Trit³\{(zero,zero,zero)}`, not a 26-boundary
+pants cobordism. Its 13 antipodal point directions
+belong to the cubical spatial graph geometry,
+not to the measured three-child end-space
+or its boundary-circle gluing. Nor does the
+exact `3^9` Eisenstein residue model in #1260
+become the infinite tree by sharing a radix.
+This distinction preserves the original native
+cube/SSP authorship and the newer finite 27-frontier
+consumer's user-directed, AI-assisted provenance.
+
+The focused acceptance set now has **30** Python
+test methods and **10** Agda topology module targets;
+still source-written/kernel pending. The 12 original
+and implementation source records remain distinct
+from the actual local PL algebra checks and pending
+infinite geometric proof obligations.
+
+
+## 27 October — highest Pareto cut shifts from finite ends to stable PL stars
+
+### Actual new source-specific implementation payment
+
+* `scripts/exotic_topology_pl_stable_stars.py` imports the
+  **existing original** binary/trit transition functions, real
+  boundary-loop detector, oriented simplex data and old-complement
+  verifier. It tracks actual injected vertex IDs across three
+  consecutive finite stages and asserts that all K_n vertices
+  become interior in K_(n+1) and the full triangle-star of every
+  such vertex is exactly unchanged in K_(n+2).
+  This is much stronger than the earlier 1/2/3 child counts.
+* Original Python transitions gain **backwards-compatible** optional
+  `with_transport=True`: existing `(stage,receipt)` consumer
+  shape remains unchanged, while a new proof consumer obtains
+  the genuine old-stage vertex injection as a third return item.
+* In the balanced-ternary executable the Kraft check is now
+  `Fraction`-exact (no floating point premeasure surrogate).
+* Two new regressions on the same existing suite: eight positive
+  three-stage windows across Cantor, Loch Ness, Jacob and
+  balanced 1→3 surface exhaustions; one deliberately
+  non-injective old-vertex mapping is rejected.
+
+**Independent local executed mathematics (NOT exact GitHub blob):**
+`/mnt/data/exotic_audit/independent_star_audit.py` produced PASS:
+- Cantor old vertices (3, 152), mid/later triangles
+  (298/892, 892/2080);
+- Loch (3, 36), triangles (71/141, 141/211);
+- Jacob (152, 218), triangles (438/578, 578/718);
+- balanced ternary (3, 301), triangles
+  (595/2377, 2377/7723).
+
+All old-vertex links are finite interior circles under the source
+manifold validator, and two stages later every injected old
+star has precisely the same set of actual triangles. These
+are four FINITE PL families, not a compiled statement about
+the countably infinite union.
+
+### Stronger conditional topology theorem, source roots intact
+
+The updated
+`Docs/topology/ExoticInfiniteSurfaceEndSpaceConditionalTheorem20261025.md`
+states a non-tautological mathematical **direct union**
+lemma: for every n, injective oriented simplicial boundary
+gluing to all old frontier circles makes all K_n vertices
+interior at K_(n+1). Because subsequent pieces attach
+only along *current* boundary, no future simplex can
+meet an old now-interior vertex; its link permanently
+stabilises. The countable simplicial direct union is
+locally finite, and its geometric realisation is a
+connected orientable second-countable boundaryless
+PL surface. Compact subsets are cofinally contained in
+finite stages. Uniform no-cross-branch gluing then
+supports the nested proper complementary-region
+identification with the genuine Richards ideal
+boundary — at the conceptual mathematics level.
+
+**The formal/kernel gap is still substantial:** the
+all-n structural induction, abstract simplicial
+direct-union as a native Lean or Agda object,
+geometric realisation topology, compact cofinality,
+actual end-basis homeomorphism and full genus
+decoration are NOT kernel-verified. Finite tests alone
+cannot close them. No repeated assertion that
+`B(S)≅2^ℕ` comes solely from `b_n=2^n`.
+
+Original mathematical provenance:
+- Brahana (1921), finite compact bordered-surface classification;
+- Kerékjártó (1923), early classification principle (with
+  proof gaps discussed by Richards);
+- **Ian Richards (1963)**, Trans. AMS 106 pp.259–269,
+  original Definitions 1–3 on p.261 and Theorem 1
+  pp.262–263, https://people.dm.unipi.it/benedett/Richards.pdf;
+- usual abstract simplicial weak-realisation and
+  locally-finite link criteria are classical donor theorems,
+  e.g. https://ncatlab.org/nlab/show/simplicial%20complex.
+  These are NOT attributed as DASHI original research
+  or as current kernel receipts.
+
+### Latest PR #1244 and Hatcher's stronger geometric interface
+
+The stacked parent advanced again on 27 October and was
+non-destructively merged, bringing the new source-owned
+`ThreeArmRadiusCutGeometry`,
+`ThreeArmRadiusCutHatcherTransport`,
+`ThreeArmHatcherGroupTransport`,
+`ThreeArmHatcherHomotopyTransport` and
+`ThreeArmHatcherPathTransport` modules with the
+original `HornedC3.lean` hub changes.
+They reuse the pinned Deicyde/Hatcher Van Kampen
+wedge free-product theorem, and now supply metric
+OPEN COVER/INTERSECTION algebra via centres in the
+ambient Y rather than mistakenly assuming these
+centres lie in the wild exterior X.
+They still REQUIRE actual source-to-cover
+geometric group/homotopy transport, central pi1,
+connectedness, basepoint coherence and the infinite
+wild embedding. Source-written API inspection is
+not a successful kernel compile.
+
+**Pareto ranking:**
+P0 exact-head pinned Python/Agda/Lean receipts, fix
+concrete reported compile errors if available;
+P1 source-weld a *uniform* old-star stabilisation
+induction to a genuine native geometric-realisation
+direct union, then compact cofinality;
+P2 formal the actual decorated Richards end
+homeomorphism on that same union;
+P3 attack the now narrowed wild satellite/group
+transport inputs using latest parent #1244;
+P4 Hatcher S² homology pin bridge, Warsaw, Wada,
+Fox–Artin separately, and remaining deep geometry.
+Do not improve source counts without adding original
+independent theorem ancestry or a real consumer.
+
+
+### 27 October all-depth incidence lemma: a new kernel-shaped consumer
+
+The standalone abstract Agda
+`ExoticSimplicialStarTransportExact.agda` now
+explicitly proves the formal **inductive step across
+ARBITRARY later finite stages**, conditional on a
+one-step geometric `StarChain` contract. In
+particular `oldStageStarHasNoLaterNewFaces` has
+a constructive earlier-triangle witness, transporting
+actual incidences, not merely an existential status bit.
+
+Prioritized next SAME-OBJECT step:
+instantiate its `Vertex n`, `Triangle n`,
+`nextVertex`, `nextTriangle`,
+`incident` and `interior` from the EXISTING
+source-owned finite PL gluing family. Use the
+general theorem to propagate a one-stage genuine
+collar property through all n. Only then port
+weak geometric-realisation results to identify
+the Richards end space of the direct union.
+
+Source count is UNCHANGED (twelve) because this
+is a new project proof consumer, not a new original
+source root. The relevant modern simplicial
+weak-realisation theory is cited for future exact
+donor lookup; no `abstract StarChain` proof is
+misattributed to Richards. Focused kernel workflow
+now names eleven Agda topology modules.
+
+
+## 27 October 2026 — Stephen C. Power's 2025 constructive triangulation donor
+
+**Original publication:** Stephen C. Power, *Noncompact surfaces,
+triangulations and rigidity*, *Bulletin of the London Mathematical
+Society* **57** (2025), pp. 2097–2115,
+DOI https://doi.org/10.1112/blms.70083.
+Original preprint: https://arxiv.org/abs/2403.11986 (2024).
+These are **versions of one intellectual source**, not independent
+corroboration or independent proofs.
+Power gives a more explicit Kerékjártó/Richards classification
+argument, proves every noncompact surface ADMITs a countable
+`(3,6)`-tight triangulation (Theorem 4.5), and can choose one
+with minimally 3-rigid graph (Theorem 6.4). This is a
+constructive EXISTENCE claim about carefully selected
+triangulations, not a certificate on arbitrary DASHI
+pants meshes, and it does not transfer original priority
+away from Brahana, Kerékjártó or Richards.
+
+**Direct source-mesh discriminator implemented:**
+`scripts/exotic_topology_power_36_tight_nonpromotion.py`
+computes V, E, F, b and the sum L of boundary-edge lengths
+on EXACT finite binary Cantor, balanced ternary, Loch Ness
+and Jacob's ladder meshes from the original PL constructors.
+It verifies per selected stage:
+
+```text
+3F = 2E - L                  oriented triangular-face incidence
+V - E + F = 2 - 2g - b       finite surface Euler equation
+L = 3b                       every outgoing loop is triangular
+3V - E = 3(2 - 2g - b) + L = 6 - 6g.
+```
+
+**NEW all-genus formal arithmetic:**
+companion Lean #86 has
+`Synthesis/ExoticTopologyPLMaxwellGenusNoGo.lean`,
+with `eulerMaxwellWithBoundaryLength`,
+`triangularBoundaryMaxwellGenus`,
+`positiveGenusViolates36WholeGraph`, and
+`zeroGenusHasWholeGraphMaxwellSix`.
+The source uses Mathlib `omega` on integer-valued
+Euler/face-incidence facts, NOT a fake full
+geometric planar embedding or generalised combinatorial
+graph-rigidity theorem. It is not kernel-executed.
+
+**Independent actual local checks:**
+the same source-equivalent PL objects yield
+whole-graph Maxwell values:
+- binary Cantor stages 0–2: `6,6,6`;
+- Loch Ness: `6,0,-6`;
+- Jacob's ladder: `6,-6,-18`;
+- balanced ternary stages 0–2: `6,6,6`.
+All genuses, boundary lengths and the incidence formula
+agreed. NetworkX's independent graph planarity checker
+confirmed the genus-zero selected graphs planar and
+the handled selected graphs nonplanar at positive-genus stages.
+**Positive genus** means `3V-E<6`, so these PARTICULAR
+handled finite graphs fail even the necessary whole-graph
+condition for `(3,6)` sparsity. This does NOT contradict
+Power's existence theorem: he uses appropriate other
+triangulations of the same infinite surfaces.
+
+For the selected genus-zero graphs, an additional
+CLASSICAL graph theorem does strengthen the positive
+mathematical result: they are planar graphs (they embed
+in a genus-zero surface) and so *every* simple
+`n≥3` vertex subgraph has `E'≤3n-6`. Combined
+with `3V-E=6`, each selected genus-zero finite stage
+is mathematically `(3,6)`-tight. It is important not
+to claim this from `3V-E=6` **alone**, or that
+therefore an entire selected noncompact infinite
+triangulation automatically satisfies Power's special
+exhaustion-by-finite-tight-subgraphs property without
+checking the actual relevant inclusions.
+
+The Python source keeps `36_tight_certified = false`
+to distinguish the script's directly checked global
+numbers from the PLANAR GRAPH THEOREM. A full
+formal owner should connect the finite native
+surface genus-zero planar-embedding theorem to
+the `(3,6)` subgraph inequality in the same
+graph carrier, and separately establish a
+Power-style locally finite direct-limit exhaustion.
+
+This newer constructive result is a **stronger donor
+for a future locally finite infinite triangulation**,
+NOT an importable Agda/Lean proof at present.
+The source atlas now records 13 distinct
+original/implementation records, including Power
+once. The regression suite adds three source-specific
+tests, with exact-head execution still pending.
+
+
+## 27 October — actual same-graph spherical caps pay genus-zero finite planarity
+
+NEW `scripts/exotic_topology_genus_zero_sphere_caps.py`
+consumes the ORIGINAL oriented triangle meshes and labelled
+frontiers, with no new triangulation engine. For every
+positive-depth binary Cantor or balanced-ternary source
+stage tested, each outgoing boundary circle has EXACTLY
+three edges. The script adds its REVERSE-ORIENTED
+missing triangle. This does not add a vertex or edge.
+It checks no 2-simplex is duplicated, and runs the
+original full oriented manifold vertex-link checker
+on the resulting CLOSED (g,b)=(0,0) surface.
+
+The result is a genuine same-graph **finite simplicial
+sphere capping witness** at depths one and two:
+- binary original stage counts b=2,4; capped is
+  a closed orientable genus-zero triangulation;
+- balanced original stage counts b=3,9; same result.
+A source-independent locally run reconstruction
+verified all four caps plus unchanged 1-skeleton.
+These are mathematical FINITE receipts, not a Lean/Agda
+kernel result or proof of any infinite realisation.
+
+**Critical negative controls:**
+- The initial disk is ONE 2-simplex. Simply adjoining
+  the opposite-oriented face on the SAME three vertices
+  duplicates a simplex, violating an abstract simplicial
+  complex (though a Δ-complex might allow two face maps).
+  The original 1-skeleton is directly the planar K3;
+  this is treated separately, not called a two-simplex
+  triangulation of S².
+- Performing this operation on a positive-genus handled
+  stage produces a CLOSED genus-g surface, NOT a sphere.
+  The source checker correctly rejects its false
+  genus-zero acceptance.
+
+**Mathematical `(3,6)` conclusion with clearly typed sources:**
+A graph of a finite triangulated genus-zero surface
+with three-edge boundary circles is planar, and its
+same-graph cap supplies an explicit planar embedding
+for positive depths. Every subgraph on v≥3 vertices
+therefore satisfies e≤3v−6 by the classical
+simple planar-graph edge bound. Together with the
+**general** proven-on-paper Euler–Maxwell identity
+3V−E=6−6g and g=0, these selected finite genus-zero
+graphs meet the (3,6)-tight DEFINITION.
+This uses a standard topological planar-subgraph
+inequality beyond the directly checked executable
+numerical formula. No Graph theory kernel theorem
+or Power-style minimal 3D rigidity statement is
+claimed, nor is the all-depth closure established
+by four bounded caps.
+
+**Modern source first:** Stephen C. Power (2025),
+DOI 10.1112/blms.70083, Theorems 4.5/6.4,
+proves existence of specially chosen (3,6)-tight
+and 3-rigid noncompact surface triangulations.
+Our finite same-graph sphere caps are
+user-directed repository-local implementation,
+not authored by Power or a new proof of his
+infinite rigidity theorem. Earlier compact
+surface classification remains Brahana;
+Kerékjártó/Richards own the noncompact genus/end
+classification, and no classification priority
+is revised by citing a newer proof.
+
+The remaining highest-value formal cut is:
+(1) instantiate `ExoticSimplicialStarTransportExact`
+with the ORIGINAL uniform all-n surface gluing;
+(2) construct the countable locally finite
+geometric realisation as a single topological space;
+(3) prove compact exhaustion and Richards actual
+end-cylinders on that same object;
+(4) optionally use Power's more specialised
+vertex-split/0-extension construction to obtain
+its (3,6)-tight/minimally-rigid infinite graph.
+
+The exact-head focused suite has now gained six
+Power/Maxwell/cap regression methods since
+the earlier 32-test count (38 total).
+The local reconstruction is independent;
+the pushed GitHub test suite and new Lean
+source still lack successful kernel/Actions receipts.
+
+
+## 27 October continuation — original twenty-object acceptance and structural Power cut
+
+The **original inquiry** now has its own authoritative phase-and-deliverable
+matrix rather than being summarized by seven higher-fanout subproblems:
+
+- `Docs/topology/ExoticTwentyOriginalInquiryPhaseDeliverables20261027.md`:
+  **exactly 20 named source-selected objects**, each with its
+  strongest honest current evidence and the SAME-OBJECT source-specific
+  missing theorem. Six acceptance phases specify real mathematical
+  and verified kernel gates, from reproducible SHA receipts through
+  locally finite geometry, genuine Richards decorated end classification,
+  to all remaining wild/homotopy/GMT example obligations.
+- `scripts/exotic_topology_twenty_acceptance_ledger.py`:
+  fail-closed original-inquiry inventory validator requiring
+  20 unique names in the original order, six stages and a no-promotion
+  status. A deliberate missing-row regression must fail. A passing
+  bibliography checklist is explicitly NOT a theorem.
+- The original 13-root historical provenance atlas and seven
+  Pareto proof-dependency leaves are NOT replaced by 20 fabricated
+  independent scientific sources or by an invented uniform
+  mathematical proof. They have different jobs.
+
+**NEW mathematical owner: the Power boundary SURPLUS NECESSITY.**
+Power, 2025, `10.1112/blms.70083`, Theorem 4.5 and 6.4 are
+CONSTRUCTIVE EXISTENCE theorems for selected noncompact-surface
+triangulations; 2024 preprint `arXiv:2403.11986` is the same
+intellectual root. Existing `3F=2E-L` and
+`V-E+F=2-2g-b` give:
+
+```text
+3V-E = 6 - 6g - 3b + L
+whole graph Maxwell equality 6  <=>  L = 3b + 6g
+whole graph necessary sparsity >=6  =>  L >= 3b+6g
+```
+
+New Lean #86 source-written exact linear arithmetic theorems:
+`tightWholeGraphIffBoundaryBudget`,
+`sparseWholeGraphRequiresBoundaryBudget`,
+`lochNessNecessaryBoundaryLength`,
+`jacobLadderNecessaryBoundaryLength`.
+These are NOT Agda/Lean kernel receipts. The current source
+finite bordered Loch genus-n, b=1 stage needs L=3+6n;
+Jacob genus-2n, b=2 stage needs L=6+12n to satisfy the global
+Maxwell equality. Source triangles currently enforce L=3b,
+which explains a 6-edge budget per handle.
+
+**A MATERIAL NEGATIVE CONTROL PREVENTS FALSE COMPLETION.**
+`scripts/exotic_topology_power_boundary_surgery_counterexample.py`
+subdivides exactly 6g boundary edges in the original *source*
+PL triangulation, preserving orientability/genus and attaining
+whole-graph Maxwell =6. It then selects the **literal old
+vertex set** and counts only the edges in its induced subgraph.
+This produces a fully finite explicit witness to continued
+(3,6)-sparsity failure:
+
+| Selected stage, at one handle transition | Geometric repair | Whole-graph f | Induced old-core vertex count | Induced old-core edge count | **Core f** |
+| --- | --- | ---: | ---: | ---: | ---: |
+| Loch Ness g=1,b=1 | Six boundary edge subdivisions, L=9 | 6 | 36 | 107 | **1** |
+| Jacob g=2,b=2 | Twelve subdivisions, L=18 | 6 | 218 | 659 | **-5** |
+
+Both selected core subgraphs have at least three vertices, and
+Power's definition requires f>=6 on **EVERY** such subgraph.
+Thus a mere global boundary-length repair cannot imply
+the target theorem. Source-equivalent *independent local
+Python* triangulations actually passed both counts and
+orientable-surface checks. They are NOT execution receipts of
+the exact newly committed GitHub blob.
+
+**Constructive next alternative:** use original Power §4
+vertex-splitting, Henneberg 0-extension, and rigid-subgraph
+substitution with the actual all-subgraph sparsity and
+boundary girth constraints. Extending the present selected
+mesh *only at the boundary* is ruled out by the explicit
+core counterexample; it does NOT contradict the source
+existence theorem or close the finite stage in the desired
+sparse/rigid structure.
+
+**Pareto revised order:** P0 fix/execute exact-head
+kernels; P1 instantiate a genuine uniform gluing
+`StarChain` on the real all-n PL carrier; P2 prove
+countable simplicial realisation/compact cofinality and
+true Richards decorated ends (three of twenty original
+objects); P3 use Power's **selected special**
+triangulation construction only if rigidity is an
+additional deliverable; P4 wild source-geometric
+Alex/Fox/Artin, Hatcher sphere, Wada, Warsaw, and
+remaining source-specific hard theorems. Do not
+let the elegant (3,6)-tightness *subgoal* displace
+the original Richards/topological classification
+goal, which does NOT require rigid frameworks.
+
+Historical rights and source-claim separation remain:
+Richards (1963) classifies noncompact surfaces;
+Power (2025) adds special graph triangulation/rigidity
+constructions and a streamlined argument; these are
+different theorems. No DDC/QID guess, reused paper
+as "independent corroboration", or finite run as
+kernel check is allowed.
