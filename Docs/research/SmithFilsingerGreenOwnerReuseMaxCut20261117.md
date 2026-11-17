@@ -51,3 +51,10 @@ Both new Agda sources included in the existing pinned `scripts/check_smith_filsi
 5. **F16:** atmospheric rain/cooling causal branch remains downstream of proven physical energy transfer.
 
 **Provenance:** Green and finite-coercivity operators are existing Yang–Mills/constructive DASHI owners; Smith/Filsinger direct nonlinear Sun–Earth coupling is the user-origin hypothesis; temporal-source composition is a new derived mathematical consumer. No ESD edits. An elliptic mathematical Green operator plus a stipulated delay is NOT a physically derived causal solar-energy Maxwell Green function.
+
+
+## Final clock and admission strengthening
+
+`selectedOriginalNoUsefulBeforePhysicalArrival` now proves a **zero same-original calibrated sensor readback** for any global time strictly earlier than `RetardedFlight.arrival`, using the genuine original `launch+flight=arrival` proof to transport the bound. This closes a source-level clock-index loophole that a delay-only operator would otherwise leave open. The inference depends on the explicit calibrated `sensorZero` field, not on a claim that static elliptic Green support has finite physical speed.
+
+`selectedGreenArrivalMatchesPhysicalMaxwellResponse` additionally transports the independently supplied `physicalMaxwellGreenMatchesChosenInverse` for the same measured launch vector, and `selectedPhysicalFrontDistanceBound` consumes `CalibratedPhysicalCone` on the same selected flight. These are valuable *typed proof obligations*, not a measured or solved physical operator. Any chosen source data or a trivial physically false speed bound would fail the intended **empirical** qualification even if an abstract Agda record were inhabited.
