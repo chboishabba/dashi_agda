@@ -149,9 +149,46 @@ def check_quantitative_boundary() -> None:
         raise AssertionError("missing-join negative control failed")
 
 
+def check_original_clip_and_media_roster() -> None:
+    zoom = read("AmyEskridgeVideoZoomClipSourceWeldExact.agda")
+    fox = read("AmyEskridgeVideoEleventhMediaRosterWeldExact.agda")
+    weld = read("AmyEskridgeVideoClaimProducerWeldExact.agda")
+    for row, clip in {
+        1: "openingThreat", 2: "nsaFive", 3: "fourSuppressions",
+        5: "lexusSurveillance", 6: "lexusVehicle",
+        7: "lexusPlateChange", 10: "futureP52",
+    }.items():
+        claim = f"claimJoin{row:03d} = video-claim-join"
+        assert claim in weld
+        section = weld.split(claim, 1)[1].split("\n\n", 1)[0]
+        assert f"(clipSource Zoom.{clip})" in section
+
+    for receipt in [
+        "houseProducerListIsOriginal = refl",
+        "elevenArticleKeysMatchNormalizedEnumeration = refl",
+        "foxElevenEqualsHouseTenPlusAmyKeys = refl",
+        "foxReportedElevenCount = refl",
+        "houseContextTenCount = refl",
+    ]:
+        assert receipt in fox
+
+    assert "OSINT.foxDeathCharacterizationSource" in fox
+    assert "OSINT.archivedAmyInterviewSource" in zoom
+    # Original Zoom opening segments source order: 31:02 -> 34:18 -> 35:40.
+    # Edited first 21 seconds: 35:40 -> 31:02 -> 34:18.
+    source = [31 * 60 + 2, 34 * 60 + 18, 35 * 60 + 40]
+    edited = [35 * 60 + 40, 31 * 60 + 2, 34 * 60 + 18]
+    assert all(a < b for a, b in zip(source, source[1:]))
+    assert edited[0] > edited[1]
+    assert sp.Integer(edited[0] - edited[1]) == 278
+    # Edited order must not be promoted to original chronology.
+    assert source != edited
+
+
 if __name__ == "__main__":
     check_claim_welds()
+    check_original_clip_and_media_roster()
     check_scope()
     check_quantitative_boundary()
     print("Amy Eskridge video 86-row / House-10 / research-20 SymPy audit: PASS")
-    print("Includes missing-join, eleven-person ambiguity and citation!=cause controls")
+    print("Includes 7 original clip locators, Fox 11-source weld, editorial reorder, missing-join and citation!=cause controls")
