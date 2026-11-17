@@ -1,3 +1,4 @@
+{-# OPTIONS --safe #-}
 module DASHI.Mathematics.Algebra.CayleyDicksonRationalComplexQuaternionExact where
 
 ------------------------------------------------------------------------

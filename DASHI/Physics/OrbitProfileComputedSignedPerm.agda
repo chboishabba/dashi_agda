@@ -140,21 +140,29 @@ nub dec (x ∷ xs) with member dec x xs
 ... | true  = nub dec xs
 ... | false = x ∷ nub dec xs
 
-orbitSizes :
-  (xs : List (Vec Trit 4)) →
-  List Nat
-{-# TERMINATING #-}
-orbitSizes [] = []
-orbitSizes (x ∷ xs) =
+-- Termination is structural in the original list-length *fuel*.
+-- Every step drops the selected head and only filters the remaining tail.
+-- Consequently the number of orbit representatives is at most length xs;
+-- this computation has the same orbit-removal semantics as the older
+-- TERMINATING-marked version, without trusting a termination pragma.
+orbitSizesFuel :
+  Nat → List (Vec Trit 4) → List Nat
+orbitSizesFuel zero _ = []
+orbitSizesFuel (suc fuel) [] = []
+orbitSizesFuel (suc fuel) (x ∷ xs) =
   let
     orb = nub decEqVec (map (λ sp → actSigned4 sp x) allSignedPerm4)
     rest = filterᵇ (λ z → not (member decEqVec z orb)) xs
   in
-  length orb ∷ orbitSizes rest
+  length orb ∷ orbitSizesFuel fuel rest
   where
     not : Bool → Bool
     not true = false
     not false = true
+
+orbitSizes :
+  List (Vec Trit 4) → List Nat
+orbitSizes xs = orbitSizesFuel (length xs) xs
 
 ------------------------------------------------------------------------
 -- Sort sizes descending (simple insertion sort)
