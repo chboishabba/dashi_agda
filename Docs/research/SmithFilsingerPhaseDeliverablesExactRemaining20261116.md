@@ -488,3 +488,16 @@ New `scripts/test_smith_filsinger_signed_vi_intervals.py` contains 13 source-aut
 The prior original evidence role checker now rejects reusing the same file or identical SHA256 content for multiple independent roles. `scripts/test_smith_filsinger_original_gate_evidence.py` gains two adversarial controls (12 test methods total) and a role-distinct test fixture. Exact raw file identity, origin, sampling and calibration remain separate from physically demonstrated independent environmental work. One valid file cannot automatically satisfy all F10/METER/F15/F16/D1 receipts by being relabelled.
 
 All five physical/kernel science gates still OPEN. In particular a positive conditional V/I integral is NOT a proof that the source was natural, independently replenished, or atmospheric; and a source-authored Agda theorem is NOT D1 kernel acceptance until the pinned compiler actually checks it. F16 requires randomized meteorological intervention, not simply an electric field / rain association.
+
+
+## 17 November — outgoing planar Maxwell source-sheet Green and F15 negative controls
+
+[Detailed exact source/boundary derivation and limits](SmithFilsingerOutgoingRadiationGreenMaxCut20261117.md).
+
+**New F13 consumer:** `scripts/smith_filsinger_radiation_green_sympy.py` reuses the existing 4×4 tangential Maxwell three-layer transfer. Explicit outgoing homogeneous halfspace admittances impose an upper and lower open-wave boundary. A specified tangential current sheet at the upper boundary enforces the correct `R(H_inside-H_outside)=J_sheet` jump. The resulting finite-scheme source-to-bottom/upper electric Green map is an exact 2×2 Schur/boundary inverse with separately returned magnetic field traces; no fictitious source. The lossless Hermitian Hall fixture satisfies exact conserved tangential Poynting `T† F T=F`, including Hall-induced cross polarization. The sheet-source work is exactly outward Poynting plus slab absorption; for lossless tested slabs absorption is zero.
+
+**Evanescent extension:** distinct mathematically exact lossless decaying branch `q_z=+i sqrt(k²-ω²με)` for strict `k²>ω²με`; reactive evanescent field is nonzero but has *zero real outward power* and cannot be sold as F15 energy. Propagating and evanescent branch cutoffs fail closed.
+
+**Verification:** previous 32 exact reduced-layer and tangential Maxwell SymPy tests plus 11 outgoing radiation/source/evanescent and source-free tests: **43/43 local exact pytest PASS**, committed test suite integrated with existing `check_smith_filsinger_dynamic_replenishment.sh` and `check_smith_filsinger_sympy_gate.py`. No pinned Agda kernel run or exact-GitHub-head combined suite. Existing dedicated Agda CI workflow was found; the queried latest-commit workflow/status API returned no kernel receipt.
+
+**Remaining** F13 full 3D *retarded dyadic* including 2D transverse Fourier inversion, absorbing/complex spectral radiation branch, actual geomagnetic conductivity tensor, source backaction and original electrode/ground V,I; F15 measured independent solar-attributed replenished work and fully restored cyclic losses; D1 actual pinned Agda typecheck of source module graph. Do not promote passive slab Green source response to actual solar harvesting, and do not infer a Maxwell light-cone theorem from a finite Cayley spatial transfer.
