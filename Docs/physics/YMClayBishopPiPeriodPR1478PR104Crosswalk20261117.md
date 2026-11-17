@@ -81,3 +81,53 @@ remains 19/28 open.
 Attribution: Machin, Archimedes, Bishop–Bridges, Murray/Csimma,
 Mathlib, Aristotle-Harmonic upstream proof, original DASHI and
 Wilson/Balaban theorem authors.
+
+
+## Direct positive finite SU(2) Gibbs max-cut (this PR continuation)
+
+Existing original SAME Bishop real owners recovered:
+- BishopSquareNonnegativeExact.bishopSquareNonnegative, actual nonnegative every real square.
+- BishopExponentialPositiveOrderExact.bishopExpAtLeastOneOnNonnegative.
+- BishopExponentialCauchyProductExact.bishopExpTimesNegativeIsOne.
+- BishopNegativeExponentialGlobalUnitIntervalExact existing strictly
+  positive exp(-x) for STRICT positive x, plus actual inverse lemmas.
+- YMClayBishopFiniteWilsonNormalizedExact weightedSumStrictPositiveHead,
+  previously source-written and still not Agda-accepted.
+
+New source:
+1. YMClayBishopWilsonGibbsPositiveExact: derives exp_B(-S)>0 for **every
+   NonNegative S**, including zero, without excluded middle or trichotomy:
+   exp_B(S)>=1>0; exp_B(S)exp_B(-S)=1;
+   exp_B(-S)=inverse(exp_B(S))>0 by actual Bishop inverse order.
+   This removes a free strict-positive exponential leaf.
+
+2. YMClayBishopSU2WilsonDeficitPositiveExact: for a norm-one genuine
+   Bishop unit quaternion q,
+   \[
+     \frac12((q_0-1)^2+q_1^2+q_2^2+q_3^2)
+     \simeq 1-q_0.
+   \]
+   Hence 1-q0 is nonnegative from actual Bishop square positivity.
+   Finite lists of these plaquettes at beta>=0 have nonnegative Wilson
+   action, and exp_B(-action) is strictly positive.
+
+3. YMClayBishopSU2FiniteGibbsPartitionExact: on a nonempty finite
+   weighted list of these plaquette configurations, a positive first
+   node weight and nonnegative remaining weights give an ACTUAL
+   strictly positive finite Gibbs partition, and a normalized
+   expectation of 1 equal to 1 with the genuine Bishop inverse.
+   No separate positive-partition axiom is introduced.
+
+4. scripts/check_ym_su2_gibbs_positive_20261117.py: 146 exact rational
+   reference assertions over all 24 rational 24-cell vertices and
+   three nonnegative rational couplings; not an Agda kernel certificate.
+
+These construct the FINITE algebraic/Gibbs side on the Bishop quaternion
+carrier. Crucially they do NOT prove that this configuration list is
+the original 4(n+1)^4-link six-plane lattice Wilson Gibbs/Haar source.
+The same-source link→plaquette map, all-degree Haar cubature, completed
+continuous admissible one-link functional, and gauge-invariant original
+finite cylinder source remain OPEN. Do not mark YM.REAL closed.
+
+All new Agda modules require pinned Agda typechecking, including
+transitive non-safe imports; none has been run here.
