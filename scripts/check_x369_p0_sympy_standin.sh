@@ -29,7 +29,7 @@ check('arbitrary learned head score 3->2+DC', sp.expand(score-reduced)==0)
 check('x-centered exact two-channel score', sp.expand((score-(ws-wr)*s-(wf-wr)*f).subs(c,-a-b))==0)
 check('h-centered exact two-channel score', sp.expand((score-(ws-wr)*s-(wf-wr)*f).subs(C,-A-B))==0)
 check('original source collision at two channels', (s.subs({a:1,b:0,c:0,A:0,B:0,C:0}),f.subs({a:1,b:0,c:0,A:0,B:0,C:0}),r.subs({a:1,b:0,c:0,A:0,B:0,C:0}))==(0,0,0) and (s.subs({a:1,b:0,c:0,A:0,B:0,C:1}),f.subs({a:1,b:0,c:0,A:0,B:0,C:1}),r.subs({a:1,b:0,c:0,A:0,B:0,C:1}))==(0,0,1))
-check('original source surjectivity onto directed triples', all(sp.expand(z-t)==0 for z,t in zip([s,f,r],[A,B,C])) if False else all(sp.expand(z.subs({a:1,b:0,c:0})-t)==0 for z,t in zip([s,f,r],[A,B,C])))
+check('original source surjectivity onto directed triples', all(sp.expand(z.subs({a:1,b:0,c:0})-t)==0 for z,t in zip([s,f,r],[A,B,C])))
 
 P=sp.Matrix([[0,0,1],[1,0,0],[0,1,0]])
 t=sp.Matrix([s,f,r]); w=sp.Matrix([ws,wf,wr])
