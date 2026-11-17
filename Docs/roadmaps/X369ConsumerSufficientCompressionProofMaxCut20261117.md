@@ -1,3 +1,72 @@
+## 17 November — one-entry fitted R4 original-source acceptance workflow
+
+LeechTransformer PR #5 now has a single source
+orchestrator `scripts/run_x369_r4_original_kink_observation.py`
+and runbook `docs/x369_r4_native_kink_probe.md`.
+It does NOT fabricate a complete R4 checkpoint
+or an original source history. It checks the
+repaired bounded guarded C2 checkpoint, original
+repair receipt, exact native SLR JSONL, R1 summary,
+SentencePiece tokenizer, and a saved original
+R4 source-bound fitted delta with actual expected
+SHA256 values BEFORE creating output.
+Then it invokes ORIGINAL producers:
+
+1. `verify_trained_federated_moe.checkpoint_parts`/
+   `infer_config` and
+   `x369_fair_c3_residual.restore_residual_delta`
+   to reconstruct the original full R4 model,
+   retaining the unchanged source geometry SHA;
+2. the native DEVELOPMENT-only original
+   `LeechGPT(student_only=True)` forward,
+   observing a named original MoE layer's
+   actual x and entire pre-step all-E history
+   at a chosen document/token; this is admitted
+   only when the independent reconstructed MoE
+   `step` replay is BITWISE equal;
+3. the original four-load route/FFN response and
+   matched forced-pair counterfactual probe,
+   using a scoped dispatcher topk observer
+   rather than changing original source;
+4. the same-clock two-prefix original
+   recurrent history probe and fixed-pair ablation;
+5. a final byte-bound summary reporting
+   **positive OR negative** fitted-model response
+   outcomes, with exact source module/probe/result
+   SHA256 and explicitly false analytic/physical/
+   semantic/hysteresis/Agda promotion flags.
+
+Both original R4 probes verify the same restored
+layer checkpoint/trace via the shared sidecar
+`verify_x369_r4_source_probe_authority.py`.
+The source trace four load multipliers must include
+**1**—the actually observed original source
+activation. Other chosen activation loads
+are clearly COUNTERFACTUAL, not four naturally
+measured SLR physiological or cognitive states.
+
+Source code/fitted R4 geometry owner:
+`models/history_orbit_moe.py` restored to its
+original byte blob `a2a250462ce8e663591cd8a8f784fad9bde1b15d`.
+A previous optional return_logits mutation is
+reverted; exact R4 source fingerprint
+preservation matters for existing saved deltas.
+
+**Executed independently locally:** the full
+corrected SymPy full-load checker 53/53;
+scoped Torch topk observation 3/3;
+native dtype JSON binary roundtrips 2/2.
+Full source repo native CPU execution,
+real model/restored-delta development
+observation and new Agda imports have
+NOT run in this environment because the
+original owned files are unavailable.
+Therefore the genuine model-shape/quality/
+hysteresis and Agda golden gates remain OPEN.
+No positive fitted result was invented.
+
+---
+
 ## 17 November — latest source-integrity restoration, exact execution and fitted-source producer
 
 **This section SUPERSEDES earlier proposed direct modification of the
