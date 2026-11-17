@@ -129,3 +129,12 @@ Run **scripts/check_smith_filsinger_formal_weld_agda29.sh** at the source-select
 4. **F16:** obtain an independently controlled device→cloud-field receipt and remaining causal precipitation/thermal arrows before asserting local cooling; a global-climate claim needs further independent forcing evidence.
 
 **Takeaway:** the *formal* task is now no longer represented by plots, toy power gain or weather simulation. The missing portions are precisely the type-checked kernel and original-world admission witnesses, and the quantitative physical field/operator itself. Those are not derivable from the presently available corpus alone.
+
+
+### Final F15 source-off theorem
+
+The final Agda owner also proves noNaturalNetSourceMeansLoadAtMostController: on the exact same selected port, if the restored-cycle *net natural* input is zero, useful load work cannot exceed net controller work. This is derived by transporting the **already derived two-port signed bound** through the naturalWork=zero identity, not by postulating an absent source cap. The theorem leaves zero net incoming distinct from zero instantaneous field or lack of audio; and it does not claim an actual Filsinger controller/input measurement.
+
+The SourceOwner relation additionally has absurd-pattern no-confusion witnesses earthReelCannotHavePortableProvenance, portableProposalCannotHaveEarthReelProvenance and smithFigureCannotHaveFilsingerEarthProvenance. These prohibit original-source identity swapping at the type level without equating physical components by anecdote.
+
+**Kernel caveat unchanged:** none of these extra Agda theorem terms is accepted until the pinned repo-owned checker actually runs in an Agda 2.9 environment. Source scans are not a substitute for elaboration.
