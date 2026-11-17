@@ -36,6 +36,8 @@ class CrowleyIsolatedSphere:
              self.local_E_V_m,self.current_density_A_m2)
         if self.height_m < 10*self.diameter_m:
             raise ValueError('isolated sphere needs height >> diameter; h >=10d screening only')
+        if self.atmospheric_potential_V < 1.5*self.local_E_V_m*self.diameter_m:
+            raise ValueError('Crowley Eq25 unidirectional collection condition not satisfied')
 
     @property
     def conductivity_S_m(self):
