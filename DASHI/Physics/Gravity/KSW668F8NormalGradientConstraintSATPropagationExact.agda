@@ -56,7 +56,7 @@ normalDerivativeOfUdot v dp dm =
   half * ((1ℚ + v) * dp + (1ℚ + - v) * dm)
 
 normalConstraintDerivative :
-  ℚ → ℚ → ℚ → ℚ → ℚ → ℚ
+  ℚ → ℚ → ℚ → ℚ → ℚ → ℚ → ℚ
 normalConstraintDerivative v dp dm force satP satM =
   half * (originalPdot v dp force satP
            + - (originalMdot v dm force satM))
