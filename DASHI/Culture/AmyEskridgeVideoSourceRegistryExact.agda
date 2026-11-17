@@ -116,9 +116,35 @@ videoTranscript = scoped-source
   "That the submitted transcript contains narrator statements and quotations at given timestamps"
   "Correct clip identification, original footage integrity, primary scientific validation or an actual eleven-person roster"
 
+-- Thomas Townsend Brown, Electrokinetic apparatus, US 2,949,550,
+-- filed 1957, granted 1960:
+-- https://patents.google.com/patent/US2949550A/en
+-- Henry William Wallace, Method and apparatus for generating a
+-- secondary gravitational force field, US 3,626,605:
+-- https://patents.google.com/patent/US3626605A/en
+--
+brown1960 : ScopedSource
+brown1960 = scoped-source
+  "Thomas Townsend Brown"
+  "Electrokinetic apparatus"
+  "US2949550A; https://patents.google.com/patent/US2949550A/en"
+  patentPrimary metadataAndNamedPassage
+  "A high-voltage electrode patent describes relative movement through a surrounding dielectric medium"
+  "A validated vacuum antigravity effect or reactionless thrust"
+
+wallace1971 : ScopedSource
+wallace1971 = scoped-source
+  "Henry William Wallace"
+  "Method and apparatus for generating a secondary gravitational force field"
+  "US3626605A; https://patents.google.com/patent/US3626605A/en"
+  patentPrimary metadataAndNamedPassage
+  "A granted patent claims a kinemassic rotating nuclear-spin field"
+  "Independent reproducibility or measured gravity modification"
+
 sourceRegistry : List ScopedSource
 sourceRegistry = houseApril2026 ∷ hallgarthChandlerPatent ∷
-  teslaAerialPatent ∷ bem2011 ∷ burischCamelot ∷ videoTranscript ∷ []
+  teslaAerialPatent ∷ brown1960 ∷ wallace1971 ∷
+  bem2011 ∷ burischCamelot ∷ videoTranscript ∷ []
 
 -- Representation gates: an asserted source class is not a proof of its content.
 data SourceMetadataProvesCausalTargeting : Set where
