@@ -624,3 +624,19 @@ python3 scripts/check_smith_filsinger_restored_cycle_intervals.py signed_vi_work
 **D1:** New Agda module included in both pinned checker `owners` and `new_owners`. Independent SymPy gate scans its nonvacuous theorem names **and executes** the new test. No Agda 2.9/Nix executable here and no completed GitHub-head kernel receipt. Agda source is **authored, not accepted**. The Agda full 2x2 matrix midpoint equation remains to be derived using the certified inverse law; cross-checked externally only.
 
 **Physical gates unchanged:** true layered 3D retarded Maxwell Green/physical cone F13 OPEN; original independently measured, replenished environmental natural work and receiver VI F15 OPEN; D1 actual pinned Agda kernel OPEN. No numerical Cayley coefficient can by itself be a solar-energy meter. No ESD edits.
+
+
+## 17 November — reproducible D1/Python exact-head acceptance runner
+
+**Execution bottleneck fixed in-repo, not misrepresented as a kernel PASS.** The focused acceptance GitHub workflow had `pull_request`/manual triggers but no observed workflow runs. Added an explicit `push` event for `research/sun-earth-coupled-source-20261116` on SmithFilsinger source/test/workflow changes. An event trigger cannot force Actions to run if the repository/runner policy prevents execution; check actual statuses.
+
+New `scripts/run_smith_filsinger_acceptance.sh` is one reproducible local command. From a CLEAN checkout of the exact branch head:
+
+```sh
+bash scripts/run_smith_filsinger_acceptance.sh --python-only
+bash scripts/run_smith_filsinger_acceptance.sh --full
+```
+
+The runner rejects uncommitted relevant source/test changes, records `git rev-parse HEAD`, executes the four current suites (original evidence inventory, signed V/I exact intervals, restored first-law intervals, original raw-V/I replay), and under `--full` also invokes **the real** `scripts/check_smith_filsinger_formal_weld_agda29.sh` compiler checker on all 41 designated Agda owners. Shell `set -euo pipefail` makes any Python or Agda failure fatal; the previous `acceptance-pass.txt` marker is deleted before work and only recreated when ALL selected checks return zero. The success status is **`PYTHON_ONLY_NO_AGDA_ACCEPTANCE`** or **`ACCEPTED_PYTHON_AND_PINNED_AGDA`**, never an unqualified physical-success flag. Logs/marker are stored in `.filsinger-acceptance/`, and CI uploads them even if the task fails. CI's pinned Agda step now calls this runner `--full`; its initial Python checks remain a quicker fail-fast stage.
+
+**Current truth:** workflow authored and source committed, but no GitHub Actions run has been observed for the exact latest head and Agda/Nix are not available in the current assistant container. Do not claim D1 kernel PASS, nor convert valid Python meter arithmetic into physical F10, independent sustained F15 replenishment, or F16 controlled atmospheric causality. Original experiment/source authentication and all-store return are still required.
