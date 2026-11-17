@@ -1,0 +1,254 @@
+{
+  "schema": "KSW668F8OriginalTTBase369ThreeHarmonicReceiverMaxCutX",
+  "date": "2026-11-16",
+  "origin": "User-suggested 0,2,4 -> 2*[0,1,2] physical TT 369 consumer bridge",
+  "repo_owner": "chboishabba/dashi_agda",
+  "pr": 1520,
+  "physical_source": "Original a=t Poincare AdS5 moving brane, chosen axial H_yy local 4th-order compact TT source",
+  "source_spatial_support_radius": 0.04,
+  "source_poincare_pulse": 0.065,
+  "original_receiver_time": 12,
+  "encoding": {
+    "canonical_carrier": "Base369.TriTruth with tri-low/tri-mid/tri-high and tri-index 0/1/2",
+    "unbalanced_unsigned_digits": [
+      0,
+      1,
+      2
+    ],
+    "physical_even_harmonics": [
+      0,
+      2,
+      4
+    ],
+    "effective_radial_dimensions": [
+      3,
+      7,
+      11
+    ],
+    "harmonic_map": "ell=2q",
+    "radial_map": "d=3+4q",
+    "arbitrary_real_amplitudes_not_three_valued": true
+  },
+  "angular_symbol": {
+    "original": "(mu^4+6mu^2+1)/8",
+    "exact_Legendre_coefficients": [
+      "2/5",
+      "4/7",
+      "1/35"
+    ],
+    "parity": "even degrees 0,2,4 only for this axial source",
+    "reconstruction_exact": true
+  },
+  "physical_C3_no_go": {
+    "native_Base369_C3_label_rotation_is_legitimate_codec": true,
+    "physical_radial_first_cell_Delta_r2": [
+      6,
+      14,
+      22
+    ],
+    "q0_to_q1_cycle_noncommutator": 8,
+    "C3_rotations_intertwine_original_radial_PDE": false,
+    "omega_Fourier_unitary_inverse": true,
+    "omega_Fourier_conjugated_dim_matrix": {
+      "diagonal": "7",
+      "off_diagonal": "-2 +/- (2i sqrt(3))/3; NONZERO"
+    },
+    "original_5D_matter_VOA_Monster_C3_physics_claimed": false,
+    "full_three_sector_Fourier_commuting_square_exact": true,
+    "original_receiver_is_Fourier_trivial_character": true,
+    "trivial_character_is_dynamically_closed": false,
+    "initial_zero_trivial_character_witness": [
+      1,
+      -1,
+      0
+    ],
+    "physical_radial_image_of_zero_character_witness": [
+      6,
+      -14,
+      0
+    ],
+    "generated_trivial_character_after_radial_image": -8,
+    "discarding_nontrivial_Fourier_sectors_is_sound": false
+  },
+  "original_two_grid": {
+    "scheme": "physical interior constraint-preserving unweighted SBP2-SAT, normal_order=3",
+    "coarse": {
+      "dr": 0.012,
+      "dy": 0.016,
+      "dt": 0.0025
+    },
+    "medium": {
+      "dr": 0.008,
+      "dy": 0.012,
+      "dt": 0.0018
+    },
+    "actual_modewise_both_Weyl_and_field": {
+      "H": {
+        "channels": [
+          {
+            "unsigned_ternary_q": 0,
+            "physical_even_ell": 0,
+            "radial_effective_dimension": 3,
+            "coarse": -0.000005724702278105323,
+            "medium": -1.2094144001507632e-7,
+            "signed_drift": 0.000005603760838090246,
+            "far_medium": 1.8236485711217823e-8
+          },
+          {
+            "unsigned_ternary_q": 1,
+            "physical_even_ell": 2,
+            "radial_effective_dimension": 7,
+            "coarse": 6.60691963238202e-7,
+            "medium": -0.000005897720282223873,
+            "signed_drift": -0.000006558412245462075,
+            "far_medium": 1.1314870648378137e-7
+          },
+          {
+            "unsigned_ternary_q": 2,
+            "physical_even_ell": 4,
+            "radial_effective_dimension": 11,
+            "coarse": -7.577727577436351e-8,
+            "medium": -1.9771374578463734e-7,
+            "signed_drift": -1.2193647001027382e-7,
+            "far_medium": 4.34442550041895e-9
+          }
+        ],
+        "aggregate_coarse": -0.000005139787590641485,
+        "aggregate_medium": -0.000006216375468023587,
+        "signed_aggregate_drift": -0.0000010765878773821024,
+        "absolute_channel_drift_sum": 0.000012284109553562597,
+        "cancellation_ratio": 11.410224665944963,
+        "aggregate_is_sum_exact_at_float_roundoff": true
+      },
+      "E4": {
+        "channels": [
+          {
+            "unsigned_ternary_q": 0,
+            "physical_even_ell": 0,
+            "radial_effective_dimension": 3,
+            "coarse": -0.00006915934473779528,
+            "medium": 0.000003164712641957444,
+            "signed_drift": 0.00007232405737975273,
+            "far_medium": -1.980001522695098e-7
+          },
+          {
+            "unsigned_ternary_q": 1,
+            "physical_even_ell": 2,
+            "radial_effective_dimension": 7,
+            "coarse": 0.000002060636421212136,
+            "medium": -0.000030084118114558453,
+            "signed_drift": -0.00003214475453577059,
+            "far_medium": -9.273535131953642e-7
+          },
+          {
+            "unsigned_ternary_q": 2,
+            "physical_even_ell": 4,
+            "radial_effective_dimension": 11,
+            "coarse": -2.1815956242568365e-7,
+            "medium": -0.0000011337106945390372,
+            "signed_drift": -9.155511321133536e-7,
+            "far_medium": -3.29507793695622e-8
+          }
+        ],
+        "aggregate_coarse": -0.00006731686787900883,
+        "aggregate_medium": -0.000028053116167140046,
+        "signed_aggregate_drift": 0.000039263751711868784,
+        "absolute_channel_drift_sum": 0.00010538436304763666,
+        "cancellation_ratio": 2.6840115488958918,
+        "aggregate_is_sum_exact_at_float_roundoff": true
+      },
+      "E5": {
+        "channels": [
+          {
+            "unsigned_ternary_q": 0,
+            "physical_even_ell": 0,
+            "radial_effective_dimension": 3,
+            "coarse": -0.0000029631294232594324,
+            "medium": 5.660281417401863e-9,
+            "signed_drift": 0.000002968789704676834,
+            "far_medium": -6.816608233557058e-9
+          },
+          {
+            "unsigned_ternary_q": 1,
+            "physical_even_ell": 2,
+            "radial_effective_dimension": 7,
+            "coarse": 3.36584409818217e-8,
+            "medium": -0.000002256201946125279,
+            "signed_drift": -0.0000022898603871071004,
+            "far_medium": -3.163172611217957e-8
+          },
+          {
+            "unsigned_ternary_q": 2,
+            "physical_even_ell": 4,
+            "radial_effective_dimension": 11,
+            "coarse": -8.239414133138939e-10,
+            "medium": -7.567402837884876e-8,
+            "signed_drift": -7.485008696553487e-8,
+            "far_medium": -1.0801497157684226e-9
+          }
+        ],
+        "aggregate_coarse": -0.000002930294923690925,
+        "aggregate_medium": -0.000002326215693086726,
+        "signed_aggregate_drift": 6.040792306041989e-7,
+        "absolute_channel_drift_sum": 0.0000053335001787494694,
+        "cancellation_ratio": 8.829140133513468,
+        "aggregate_is_sum_exact_at_float_roundoff": true
+      }
+    },
+    "three_grid_convergence_certified": false,
+    "outside_bulk_cone_weyl_vanishing": false
+  },
+  "verification": {
+    "new_ternary_algebra_and_source_tests_passed": 20,
+    "new_original_receiver_H_E4_E5_tests_passed": 13,
+    "new_signed_error_budget_tests_passed": 7,
+    "new_total": 45,
+    "reconstructed_local_full_selection": "410/410 PASS (with KSW XI)",
+    "exact_connected_PR_head_runner_run": false,
+    "pinned_Agda_2_9_kernel_run": false,
+    "new_root_unity_square_cases": 5
+  },
+  "phase_gates": {
+    "unsigned_ternary_even_spin2_harmonic_bidi": "exact finite maths PASS; Agda source written kernel unrun",
+    "original_angular_legendre_and_laplacian_weld": "exact maths PASS; numerical/SymPy checked",
+    "actual_receiver_H_E4_E5_linear_channel_sum": "actual original t12 Numba finite-grid PASS",
+    "original_C3_cyclic_label_dynamics": "REFUTED by radial d=3/7/11",
+    "per_channel_uniform_boundary_Weyl_error": "OPEN",
+    "global_original_weak_Israel_constraint": "OPEN",
+    "original_fully_discrete_coupled_SSPRK3": "OPEN",
+    "original_T2_compact_Neumann_FIO_actual_both_Weyl": "OPEN independent acceptance",
+    "matter_action_D1_observation": "OPEN"
+  },
+  "original_fine_grid_attempt": {
+    "parameters": {
+      "dr": 0.006,
+      "dy": 0.009,
+      "dt_requested": 0.0012,
+      "eps": 0.04,
+      "t_receiver": 12,
+      "r_outer": 3.15,
+      "y_outer": 2.6,
+      "normal_order": 3
+    },
+    "state": "TIMED OUT in bounded local execution, no complete verified receiver data",
+    "third_grid_H_E4_E5_available": false,
+    "can_claim_three_grid_convergence": false
+  },
+  "followup_maxcut_xi_20261116": {
+    "current_fine_grid_completed": true,
+    "previous_original_full_box_fine_timeout_retained_as_historical_attempt": true,
+    "new_causally_screened_finite_box": {
+      "r_outer": 3.01,
+      "y_outer": 2.01
+    },
+    "old_coarse_medium_receiver_parity": true,
+    "new_large_fine_box_parity": false,
+    "complete_original_threegrid_dual_weyl_convergence": false,
+    "new_original_fine_E4": -0.0006338411876034484,
+    "new_original_fine_E5": -0.000019319604479653438,
+    "new_native_weighted_full_fv_C3_rotation_is_symmetry": false,
+    "fixed_dt_radial_sensitivity_ell0_E4_fraction": 0.9863664952933835,
+    "full_receipt": "Artifacts/ksw668/ads5_f8_threegrid_per_channel_radial_normal_factorial_maxcut_xi_20261116.json",
+    "local_reconstructed_source_equivalent_tests": "410/410 PASS"
+  }
+}

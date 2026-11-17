@@ -1,0 +1,380 @@
+{
+  "schema": "KSW668_F8_MaxCut_XI_20261116",
+  "source": "Original moving a=t Poincare AdS5 compact 3D TT source eps=.04, pulse=.065",
+  "status": "NEGATIVE; numeric original dual Weyl 3-grid NONCONVERGENT",
+  "original_tensor_three_even_harmonics": [
+    0,
+    2,
+    4
+  ],
+  "native_Base369_unsigned_channel_index": [
+    0,
+    1,
+    2
+  ],
+  "radial_effective_dimensions": [
+    3,
+    7,
+    11
+  ],
+  "physical_constraint_preserving_normal_order": 3,
+  "Poincare_receiver_t": 12,
+  "receiver_r": 2.5373657609619378,
+  "geometric_bulk_radius": 2.549365760961938,
+  "finite_box": {
+    "r_outer": 3.01,
+    "y_outer": 2.01,
+    "radial_oneway_min_from_source": 2.9669999999999996,
+    "normal_boundary_reflected_path_lower_bound": 3.1033333333333326,
+    "source_to_receiver_available_Poincare_span": 2.709159198154073,
+    "independent_old_box_receiver_coarse_medium_parity": true,
+    "boundary_causal_exclusion_condition_satisfied": true
+  },
+  "grids": [
+    {
+      "label": "coarse",
+      "dr": 0.012,
+      "dy": 0.016,
+      "requested_dt": 0.0025
+    },
+    {
+      "label": "medium",
+      "dr": 0.008,
+      "dy": 0.012,
+      "requested_dt": 0.0018
+    },
+    {
+      "label": "fine",
+      "dr": 0.006,
+      "dy": 0.009,
+      "requested_dt": 0.0012,
+      "actual_dt": 0.0011998047821762945
+    }
+  ],
+  "aggregate_source_equivalent_original_receiver_observables": {
+    "H": [
+      -0.000005139787590641485,
+      -0.000006216375468023587,
+      -0.000025448888325464377
+    ],
+    "E4": [
+      -0.00006731686787900883,
+      -0.000028053116167140046,
+      -0.0006338411876034379
+    ],
+    "E5": [
+      -0.000002930294923690925,
+      -0.000002326215693086726,
+      -0.000019319604479632598
+    ]
+  },
+  "per_harmonic_signed_spatial_refinement": {
+    "H": [
+      {
+        "unsigned_ternary_q": 0,
+        "ell": 0,
+        "effective_radial_dim": 3,
+        "coarse": -0.000005724702278105323,
+        "medium": -1.2094144001507632e-7,
+        "fine": -0.00003202808070221289,
+        "medium_minus_coarse": 0.000005603760838090246,
+        "fine_minus_medium": -0.000031907139262197814,
+        "ratio_abs_successive_changes": 5.6938795541231055
+      },
+      {
+        "unsigned_ternary_q": 1,
+        "ell": 2,
+        "effective_radial_dim": 7,
+        "coarse": 6.60691963238202e-7,
+        "medium": -0.000005897720282223873,
+        "fine": 0.000006979800524925522,
+        "medium_minus_coarse": -0.000006558412245462075,
+        "fine_minus_medium": 0.000012877520807149396,
+        "ratio_abs_successive_changes": 1.9635119484993744
+      },
+      {
+        "unsigned_ternary_q": 2,
+        "ell": 4,
+        "effective_radial_dim": 11,
+        "coarse": -7.577727577436351e-8,
+        "medium": -1.9771374578463734e-7,
+        "fine": -4.0060814817700807e-7,
+        "medium_minus_coarse": -1.2193647001027382e-7,
+        "fine_minus_medium": -2.0289440239237072e-7,
+        "ratio_abs_successive_changes": 1.6639353458015944
+      }
+    ],
+    "E4": [
+      {
+        "unsigned_ternary_q": 0,
+        "ell": 0,
+        "effective_radial_dim": 3,
+        "coarse": -0.00006915934473779528,
+        "medium": 0.000003164712641957444,
+        "fine": -0.000685182070260059,
+        "medium_minus_coarse": 0.00007232405737975273,
+        "fine_minus_medium": -0.0006883467829020164,
+        "ratio_abs_successive_changes": 9.517535490130294,
+        "fine_PDE_tangent_readout": -0.0006850387262979828,
+        "fine_time_readout_disagreement": -1.4334396207613554e-7,
+        "medium_dt_half_change": 2.820071528911241e-8
+      },
+      {
+        "unsigned_ternary_q": 1,
+        "ell": 2,
+        "effective_radial_dim": 7,
+        "coarse": 0.000002060636421212136,
+        "medium": -0.000030084118114558453,
+        "fine": 0.00005418895805438504,
+        "medium_minus_coarse": -0.00003214475453577059,
+        "fine_minus_medium": 0.00008427307616894349,
+        "ratio_abs_successive_changes": 2.621674278929853,
+        "fine_PDE_tangent_readout": 0.000054194023772328585,
+        "fine_time_readout_disagreement": -5.065717943542405e-9,
+        "medium_dt_half_change": 4.3450778983517366e-7
+      },
+      {
+        "unsigned_ternary_q": 2,
+        "ell": 4,
+        "effective_radial_dim": 11,
+        "coarse": -2.1815956242568365e-7,
+        "medium": -0.0000011337106945390372,
+        "fine": -0.000002848075397763902,
+        "medium_minus_coarse": -9.155511321133536e-7,
+        "fine_minus_medium": -0.0000017143647032248648,
+        "ratio_abs_successive_changes": 1.8724947663683418,
+        "fine_PDE_tangent_readout": -0.0000028484836824685674,
+        "fine_time_readout_disagreement": 4.082847046653541e-10,
+        "medium_dt_half_change": 1.309743336547273e-8
+      }
+    ],
+    "E5": [
+      {
+        "unsigned_ternary_q": 0,
+        "ell": 0,
+        "effective_radial_dim": 3,
+        "coarse": -0.0000029631294232594324,
+        "medium": 5.660281417401863e-9,
+        "fine": -0.000024668498323628762,
+        "medium_minus_coarse": 0.000002968789704676834,
+        "fine_minus_medium": -0.000024674158605046165,
+        "ratio_abs_successive_changes": 8.311184374621124,
+        "fine_PDE_tangent_readout": -0.000024377508633870266,
+        "fine_time_readout_disagreement": -2.9098968975849643e-7,
+        "medium_dt_half_change": 5.627419526524189e-9
+      },
+      {
+        "unsigned_ternary_q": 1,
+        "ell": 2,
+        "effective_radial_dim": 7,
+        "coarse": 3.36584409818217e-8,
+        "medium": -0.000002256201946125279,
+        "fine": 0.000005657814691882675,
+        "medium_minus_coarse": -0.0000022898603871071004,
+        "fine_minus_medium": 0.000007914016638007953,
+        "ratio_abs_successive_changes": 3.456113168543931,
+        "fine_PDE_tangent_readout": 0.000005664606617626813,
+        "fine_time_readout_disagreement": -6.791925744138685e-9,
+        "medium_dt_half_change": 4.706985155679324e-8
+      },
+      {
+        "unsigned_ternary_q": 2,
+        "ell": 4,
+        "effective_radial_dim": 11,
+        "coarse": -8.239414133138939e-10,
+        "medium": -7.567402837884876e-8,
+        "fine": -3.089208478865091e-7,
+        "medium_minus_coarse": -7.485008696553487e-8,
+        "fine_minus_medium": -2.3324681950766036e-7,
+        "ratio_abs_successive_changes": 3.1161863527968925,
+        "fine_PDE_tangent_readout": -3.095432760643255e-7,
+        "fine_time_readout_disagreement": 6.224281778163905e-10,
+        "medium_dt_half_change": 1.2266071225711257e-9
+      }
+    ]
+  },
+  "fine_far_beyond_bulk_cone": {
+    "H_modes": [
+      -2.3591457958496854e-7,
+      -4.06856552076671e-8,
+      2.2949849419694363e-9
+    ],
+    "E4_modes": [
+      0.000005845783349447331,
+      7.698112489503535e-7,
+      -4.42189138215184e-8
+    ],
+    "E5_modes": [
+      1.7136637535714192e-7,
+      2.7119045651966465e-8,
+      -1.4756570871619784e-9
+    ]
+  },
+  "temporal_separation": {
+    "medium_dt_fixed_dr_dy_halved": [
+      0.0018,
+      0.0009
+    ],
+    "per_mode_medium_halved_Weyl": {
+      "E4": [
+        0.0000031929133572465565,
+        -0.00002964961032472328,
+        -0.0000011206132611735645
+      ],
+      "E5": [
+        1.1287700943926052e-8,
+        -0.0000022091320945684856,
+        -7.444742125627764e-8
+      ]
+    },
+    "fine_temporal_readout": {
+      "E4": [
+        -0.0006850387262979828,
+        0.000054194023772328585,
+        -0.0000028484836824685674
+      ],
+      "E5": [
+        -0.000024377508633870266,
+        0.000005664606617626813,
+        -3.095432760643255e-7
+      ]
+    },
+    "fine_dt_halved_attempt": "TIMED OUT; NO COMPLETE OUTPUT",
+    "comparison_readouts_are_independent_continuum_error_bounds": false
+  },
+  "fixed_dt_radial_normal_factorial": {
+    "common_dt": 0.0011998047821762945,
+    "grid_arms": {
+      "A": "dr=.008,dy=.012",
+      "B": "dr=.008,dy=.009",
+      "C": "dr=.006,dy=.012",
+      "D": "dr=.006,dy=.009"
+    },
+    "signed_modewise": {
+      "E4": [
+        {
+          "q": 0,
+          "ell": 0,
+          "base": 0.0000031871554117941416,
+          "only_normal": 0.0000032928449861794515,
+          "only_radial": -0.0006757971851819718,
+          "both": -0.000685182070260059,
+          "radial_change": -0.0006789843405937659,
+          "normal_change": 1.0568957438530997e-7,
+          "interaction": -0.000009490574652472496,
+          "total_change": -0.000688369225671853,
+          "radial_fraction_of_signed_total": 0.9863664952933835
+        },
+        {
+          "q": 1,
+          "ell": 2,
+          "base": -0.0000297359488807505,
+          "only_normal": -0.000028856413472959704,
+          "only_radial": 0.000055656992068582324,
+          "both": 0.00005418895805438504,
+          "radial_change": 0.00008539294094933283,
+          "normal_change": 8.795354077907951e-7,
+          "interaction": -0.0000023475694219880768,
+          "total_change": 0.00008392490693513554,
+          "radial_fraction_of_signed_total": 1.017492232852065
+        },
+        {
+          "q": 2,
+          "ell": 4,
+          "base": -0.0000011232018536200069,
+          "only_normal": -0.0000010990786691844353,
+          "only_radial": -0.0000029420410772569934,
+          "both": -0.000002848075397763902,
+          "radial_change": -0.0000018188392236369865,
+          "normal_change": 2.4123184435571595e-8,
+          "interaction": 6.984249505751972e-8,
+          "total_change": -0.0000017248735441438952,
+          "radial_fraction_of_signed_total": 1.0544768512521474
+        }
+      ],
+      "E5": [
+        {
+          "q": 0,
+          "ell": 0,
+          "base": 9.946405494905928e-9,
+          "only_normal": 1.7494511742303043e-8,
+          "only_radial": -0.000023942592986372372,
+          "both": -0.000024668498323628762,
+          "radial_change": -0.00002395253939186728,
+          "normal_change": 7.548106247397115e-9,
+          "interaction": -7.334534435037868e-7,
+          "total_change": -0.00002467844472912367,
+          "radial_fraction_of_signed_total": 0.9705854503707955
+        },
+        {
+          "q": 1,
+          "ell": 2,
+          "base": -0.000002219671591710072,
+          "only_normal": -0.0000021387627227976495,
+          "only_radial": 0.000005822451592672454,
+          "both": 0.000005657814691882675,
+          "radial_change": 0.000008042123184382527,
+          "normal_change": 8.090886891242254e-8,
+          "interaction": -2.4554576970220167e-7,
+          "total_change": 0.000007877486283592748,
+          "radial_fraction_of_signed_total": 1.0208996747011398
+        },
+        {
+          "q": 2,
+          "ell": 4,
+          "base": -7.471765399723124e-8,
+          "only_normal": -7.244287249236276e-8,
+          "only_radial": -3.1933276180772633e-7,
+          "both": -3.089208478865091e-7,
+          "radial_change": -2.446151078104951e-7,
+          "normal_change": 2.274781504868481e-9,
+          "interaction": 8.137132416348726e-9,
+          "total_change": -2.3420319388927788e-7,
+          "radial_fraction_of_signed_total": 1.044456754616846
+        }
+      ]
+    },
+    "dominant_effect": "ell=0 and ell=2 E4/E5 changes mostly radial resolution at same dt",
+    "source_vs_FV_wavefront_error_not_yet_separated": true,
+    "is_proven_continuum_error_bound": false
+  },
+  "finite_full_operator_C3_unitary_negative_control": {
+    "radial_cell_count": 12,
+    "dr": 0.015,
+    "radial_dimensions": [
+      3,
+      7,
+      11
+    ],
+    "commutator_frobenius": 93318.94103676137,
+    "eigen_sorted_spectral_gaps_vs_ell0": [
+      33968.31527969352,
+      69481.74420137741
+    ],
+    "original_volume_compensated_C3_is_euclidean_unitary": true,
+    "volume_compensated_C3_intertwines_radial_generator": false,
+    "all_exotic_nonlocal_intertwiners_disproved": false
+  },
+  "finite_SBP2_boundary_Udot_only_repair_no_go": {
+    "normal_nodes": "n>=3",
+    "normal_D_left_kernel": "ell0=(-1)^(n-1), ell_i=2(-1)^(n-1-i), ell_n-1=1",
+    "necessary_sufficient_boundary_source_condition": "(-1)^(n-1) g_wall+g_far=0",
+    "independent_weak_Israel_wall_and_far_source_generically_incompatible": true,
+    "joint_boundary_SAT_or_nonlocal_repair_impossible": false
+  },
+  "closure": {
+    "exact_physical_C3_symmetry": false,
+    "actual_full_matrix_C3_non_intertwiner_numeric": true,
+    "three_grid_original_E4_E5_acceptance": false,
+    "beyond_cone_null_acceptance": false,
+    "full_coupled_RK3_theorem": false,
+    "pointwise_H4epsilon_to_Weyl": false,
+    "original_t2_FIO_independently_accepted": false,
+    "F9_F10_F11_D1": false
+  },
+  "verification": {
+    "reconstructed_local_tests": "400/400 PASS before 10 factorial-specific new tests",
+    "exact_PR_head_checkout_run": false,
+    "pinned_Agda_kernel": false
+  }
+}
