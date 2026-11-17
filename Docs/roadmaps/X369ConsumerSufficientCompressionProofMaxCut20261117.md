@@ -1,3 +1,35 @@
+## 17 November — direct executable full-load SymPy acceptance correction
+
+The exact committed `scripts/check_x369_r4_full_load_kink_envelope_sympy.py`
+was independently reopened and reproduced **as a complete script**
+under SymPy 1.14 and Python 3 in the local container this round.
+The previous script FAILS at the first derivative assertion because
+`simplify(diff(logistic))` rewrites the derivative to `cosh`
+and a second `simplify` fails to prove an otherwise true
+logistic equality. This is a proof-check implementation bug,
+not evidence of a mathematical counterexample.
+
+Repair committed on PR #1526: differentiate without
+premature simplification and certify the exact logistic
+derivative identities via
+`cancel(together(diff(y,t)-a*y*(1-y))) == 0`.
+The complete repaired file was rerun locally:
+
+    X369_R4_FULL_LOAD_ENVELOPE_SYMPY_PASS 53
+    CREST 19/9 response 0.969065029508046
+    FINAL_TOPK_TIE 14/5 left 0.354343693774205 right 0
+
+**53/53 checks PASS**, not the previous **27**-check
+provisional figure. This counts all six strict routing
+regions, selected-score comparisons, source response
+formulas, derivatives, crest, tie cases, Nat sample
+cells and fixed-route monotonicity.
+The next cross-module source receipt and exact original
+PyTorch fixture are separate gates. No Agda kernel
+or fitted checkpoint execution is inferred.
+
+---
+
 
 
 ## 17 Nov exact original full nonnegative-load routing envelope
