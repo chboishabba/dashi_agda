@@ -1,0 +1,162 @@
+# Constructive constants and actual Klein-j max-cut — 18 November 2026
+
+## Exact repo owners reused; no new carrier
+- DASHI/Physics/Closure/TriadicEisensteinTransformationTheorem.agda:
+  all-SL2(Z) transformation from finite lattice-index bijection,
+  plus summand/reindex/factor hypotheses of the analytic model.
+- DASHI/Analysis/SetoidEisensteinTransformationExact.agda:
+  original transformation transported to setoid equality.
+- DASHI/Moonshine/EisensteinDiscriminantWeight12Exact.agda:
+  D = E4^3-E6^2 transforms with weight 12.
+- DASHI/Moonshine/DeltaNormalizedWeight12SameObjectExact.agda:
+  normalized Delta and eta^24 boundary; pinned Lean parity is not
+  an Agda kernel proof of the analytic identity.
+- DASHI/Moonshine/JInvariantAnalyticNormalizedKleinAdapterExact.agda:
+  original standard-j is E4^3/normalizedDelta.
+- DASHI/Moonshine/JInvariantBishopLatticeEisensteinSameObjectCompilerExact.agda:
+  q-series / lattice-sum equality and concrete summation are still
+  explicit missing fields.
+- DASHI/Foundations/BishopNatSquareRootRegularFloorExact.agda and
+  BishopNatSquareRootSemanticSquareExact.agda:
+  original Nat square-root and semantic square identity. Do not
+  replace with a second constructed real.
+
+## New Agda proof surfaces (COMPILER-PENDING)
+1. DASHI/Moonshine/JInvariantEllipticFixedPointCompilerExact.agda
+   derives E6(i)=0 and E4(omega)=0 from the ORIGINAL Eisenstein
+   transformation theorem and explicit fixedpoint/nontrivial-factor
+   cancellation inputs. Neither E4/E6 modularity nor the desired
+   vanishing is assumed as a field.
+2. DASHI/Moonshine/JInvariantEllipticStandardJValuesCompilerExact.agda
+   composes the original normalized standard-j quotient to derive
+   j(omega)=0 and j(i)=1728 with explicit field-cancellation,
+   normalized-1728 and nonzero-discriminant witnesses. Neither j-value
+   is accepted as a hypothesis, and none is asserted unconditionally.
+3. DASHI/Foundations/HypergeometricBSplitIntegerMergeExact.agda
+   integer four-tuple P,Q,B,T merge, associativity ring lemma,
+   structural split tree and tree rotation identity. Finite
+   rational-prefix semantic correctness and Bishop limits remain open.
+4. DASHI/Foundations/BishopPellLucasIntegerInvariantExact.agda
+   Pell norm-one squaring/doubling theorem and D=2,3,6 integer seeds.
+   The existing Bishop sqrt is not redefined. Rational interval
+   soundness, dyadic precision and same-real uniqueness remain open.
+
+NO AGDA COMPILER IS INSTALLED HERE. These files are mathematical
+source implementations, not kernel-accepted theorem claims.
+
+## Exact independent SymPy checks, completed locally
+- Six Legendre/anharmonic orbit maps preserve
+  256*(1-lambda+lambda^2)^3/[lambda^2*(1-lambda)^2].
+- lambda=1/2 yields exactly 1728.
+- lambda=(1 +/- sqrt(-3))/2 yields exactly zero.
+- At elliptic points: i^6=-1; (omega+1)^4 !=1.
+- Exact -640320^3 integer equality holds, but NOT the
+  analytic CM singular-modulus identification.
+- Apéry product ratio must be k/[2(2k-1)] for k>=2,
+  before multiplication by its 1/k^3 coefficient.
+  The proposed k/[4(2k-1)] was wrong by a factor of 2.
+
+The Legendre evaluation still requires the original analytic
+lambda(i)=1/2 and lambda(omega) satisfying
+lambda^2-lambda+1=0 to become an actual j(tau) theorem;
+the E4/E6 fixedpoint approach avoids those lambda identities.
+
+## Generic hypergeometric reference
+scripts/check_bishop_generic_hypergeometric_pell.py tests the integer
+four-tuple split against independent exact rational finite prefixes
+for atan(1/5), exp(1), log(2), and Apery zeta(3), including
+nonzero-start indices and explicit 24-prefix negative controls.
+This is finite arithmetic, not equality of the original Bishop
+Cauchy limits or global series-to-function identification.
+
+Pell recurrence P'=P^2+D*Q^2, Q'=2*P*Q and
+P^2-D*Q^2=1 gives rational brackets [DQ/P,P/Q] of exact
+width 1/(PQ). Exact independent tests for D=2,3,6 pass.
+
+Nine-run median isolated local benchmarks, comparing Pell integer
+recurrence with a dyadic integer-isqrt enclosure at comparable
+*width*, not comparing against Agda's existing Bishop implementation:
+
+| D | Iterations | Certified bits >= | Pell ms | dyadic isqrt ms |
+|---:|---:|---:|---:|---:|
+| 2 | 5 | 160 | 0.0020 | 0.0068 |
+| 2 | 7 | 648 | 0.0047 | 0.0207 |
+| 2 | 9 | 2601 | 0.0193 | 0.1259 |
+| 3 | 5 | 118 | 0.0019 | 0.0058 |
+| 3 | 7 | 483 | 0.0044 | 0.0172 |
+| 3 | 9 | 1942 | 0.0156 | 0.0856 |
+| 6 | 5 | 208 | 0.0020 | 0.0072 |
+| 6 | 7 | 843 | 0.0053 | 0.0256 |
+| 6 | 9 | 3383 | 0.0248 | 0.1788 |
+
+These are tiny run-times and subject to Python timer noise;
+no claim of a measured advantage over the repository's own square
+root producer is made. The recurrence uses n+1 Newton iterations
+starting at 1 for D=2, not 2^n Newton iterations.
+
+## Analytic CM value at discriminant -163 remains separate
+The exact integer -640320^3 is the known class-number-one
+singular modulus, but proving j((1+sqrt(-163))/2) equals it
+requires:
+1. a literal imaginary quadratic point in the original Bishop
+   upper-half-plane carrier;
+2. CM/degree-one class-polynomial evaluation (or equivalent);
+3. q/lattice series same-object and j normalization;
+4. identification and exact polynomial/root witness;
+5. pinned kernel acceptance.
+
+Do not promote a stored integer or numerical q-series agreement
+to a same-function j theorem.
+
+## Primary references
+- J.-P. Serre, A Course in Arithmetic, Springer 1973,
+  DOI 10.1007/978-1-4684-9884-4.
+- T. Miyake, Modular Forms, Springer 2006,
+  DOI 10.1007/3-540-29593-3.
+- J. H. Silverman, Advanced Topics in the Arithmetic of Elliptic
+  Curves (CM background).
+- Notes on Hilbert class polynomials and -163:
+  https://flintlib.org/doc/acb_modular/class-polynomials.html
+- Existing DASHI primary-source/attribution ledger:
+  JInvariantSourceAtlasExact.agda.
+
+## Acceptance next
+A. Run pinned agda --safe on the four new modules; fix ALL type errors.
+B. Discharge concrete S/ST fixedpoint and complex factor cancellation.
+C. Construct concrete E4/E6 q-series/lattice same-carrier input and
+   analytic discriminant nonvanishing, then instantiate j(i),j(omega).
+D. Separately prove the -163 class polynomial same-original j identity.
+E. Connect finite hypergeometric and Pell accelerators to the
+   existing Bishop reals through exact prefix + setoid uniqueness.
+No part of YM.REAL R2-R6 is claimed closed by this work.
+
+
+## 18 Nov max-cut continuation: CM -163 short integer certificate
+
+New source work after the first ledger:
+- scripts/check_cm163_dyadic_j_integer_certificate.py:
+  exact outward dyadic q-series enclosure at 128/160/256 bits and
+  full reduced-form enumeration. At 128 bits j is enclosed to a
+  half-integer interval around -640320^3; at 256 bits width is
+  approximately 1.45e-31. The acceptance path uses NO floats.
+- DASHI/Moonshine/JInvariantCM163DyadicHalfIntegerExact.agda:
+  --safe integer endpoint inequalities, NO analytic-producer promotion.
+- Docs/proofs/JInvariantCM163CertifiedIntegerMaxCut20261118.md:
+  complete reduced-form a<=7 proof and exact tail bounds.
+- DASHI/Moonshine/JInvariantEllipticProofRelevantKleinWeldExact.agda:
+  uses JInvariantProofRelevantKleinJExact's actual proof-relevant
+  quotient. CertifiedPoint includes a same-source normalized-Delta
+  nonzero witness; the original standardJ equivalence is definitional.
+  In particular, no totalized quotient without point-level safety
+  enters the public special-value consumer.
+
+This changes the preferred -163 proof path: compute h(-163)=1
+from reduced forms, appeal to the classical CM *integrality* theorem,
+and combine with a rigorously bounded q-series interval smaller than
+one integer. No explicit enormous class-polynomial coefficient
+calculation is required to establish the classical result.
+
+The CM theorem, same-carrier q/Delta/E4/E6 identification, actual
+Bishop pi period and all newly source-written Agda modules are
+still formal Agda validation/proof obligations. Numeric source
+passes do not automatically discharge these.
