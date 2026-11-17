@@ -247,9 +247,9 @@ balabanStressCauchyPhysicalInsertionLevel =
 ------------------------------------------------------------------------
 -- Canonical same-family Cauchy / Schwinger stress recovery cut.
 --
--- Historical round numbers are provenance only.
--- The source-owned telescope and same-family recovery remove any separate
--- finite-to-continuum stress convergence payment.
+-- Historical Round numbers remain provenance only.
+-- The source-owned telescope and R129 same-family recovery already remove any
+-- separate finite-to-continuum stress convergence payment.
 ------------------------------------------------------------------------
 
 open SameFamilyRecovery public using
