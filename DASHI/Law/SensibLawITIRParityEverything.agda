@@ -15,6 +15,13 @@ import DASHI.Interop.SensibLawHealthEvidenceProcessorParityExact as ProcessorPar
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesNarrativeGovernanceWeldExact as FriendlyjordiesNarrative
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesCompetingNarrativeExact as FriendlyjordiesCompeting
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesSourceTotalityExact as FriendlyjordiesSourceTotality
+import DASHI.Cognition.PNF.SensibLawFriendlyjordiesSouthAustraliaGovernanceWeldExact as FriendlyjordiesGovernanceMaxCut
+import DASHI.Cognition.PNF.SensibLawFriendlyjordiesGovernanceMaxCutExact as FriendlyjordiesRootedMaxCut
+import DASHI.Cognition.PNF.SensibLawFriendlyjordiesWorldEvidenceExact as FriendlyjordiesWorldEvidence
+import DASHI.Cognition.PNF.SensibLawFriendlyjordiesCausalIdentificationMaxCutExact as FriendlyjordiesCausalIdentification
+import DASHI.Cognition.PNF.SensibLawFriendlyjordiesReviewedWorldEvidenceExact as FriendlyjordiesReviewedWorldEvidence
+import DASHI.Cognition.PNF.SensibLawFriendlyjordiesReviewBindingExact as FriendlyjordiesReviewBinding
+import DASHI.Cognition.PNF.SensibLawFriendlyjordiesReviewedCausalIdentificationExact as FriendlyjordiesReviewedCausalIdentification
 
 ------------------------------------------------------------------------
 -- Terminal parity surface for the current housing / ITIR / SensibLaw tranche.
@@ -90,3 +97,38 @@ selectedFriendlyjordiesResidualAcquisitionClosure :
   FriendlyjordiesSourceTotality.ResidualAcquisitionClosure
 selectedFriendlyjordiesResidualAcquisitionClosure =
   FriendlyjordiesSourceTotality.canonicalResidualAcquisitionClosure
+
+selectedFriendlyjordiesSouthAustraliaGovernanceBoundary :
+  FriendlyjordiesGovernanceMaxCut.FriendlyjordiesSouthAustraliaGovernanceBoundary
+selectedFriendlyjordiesSouthAustraliaGovernanceBoundary =
+  FriendlyjordiesGovernanceMaxCut.canonicalFriendlyjordiesSouthAustraliaGovernanceBoundary
+
+selectedFriendlyjordiesRootedGovernanceMaxCutBoundary :
+  FriendlyjordiesRootedMaxCut.FriendlyjordiesGovernanceMaxCutBoundary
+selectedFriendlyjordiesRootedGovernanceMaxCutBoundary =
+  FriendlyjordiesRootedMaxCut.canonicalFriendlyjordiesGovernanceMaxCutBoundary
+
+selectedFriendlyjordiesWorldEvidenceBoundary :
+  FriendlyjordiesWorldEvidence.FriendlyjordiesWorldEvidenceBoundary
+selectedFriendlyjordiesWorldEvidenceBoundary =
+  FriendlyjordiesWorldEvidence.canonicalFriendlyjordiesWorldEvidenceBoundary
+
+selectedFriendlyjordiesCausalIdentificationBoundary :
+  FriendlyjordiesCausalIdentification.FriendlyjordiesCausalIdentificationBoundary
+selectedFriendlyjordiesCausalIdentificationBoundary =
+  FriendlyjordiesCausalIdentification.canonicalFriendlyjordiesCausalIdentificationBoundary
+
+selectedFriendlyjordiesReviewedWorldEvidenceBoundary :
+  FriendlyjordiesReviewedWorldEvidence.FriendlyjordiesReviewedWorldEvidenceBoundary
+selectedFriendlyjordiesReviewedWorldEvidenceBoundary =
+  FriendlyjordiesReviewedWorldEvidence.canonicalFriendlyjordiesReviewedWorldEvidenceBoundary
+
+selectedFriendlyjordiesReviewBindingBoundary :
+  FriendlyjordiesReviewBinding.FriendlyjordiesReviewBindingBoundary
+selectedFriendlyjordiesReviewBindingBoundary =
+  FriendlyjordiesReviewBinding.canonicalFriendlyjordiesReviewBindingBoundary
+
+selectedFriendlyjordiesReviewedCausalIdentificationBoundary :
+  FriendlyjordiesReviewedCausalIdentification.FriendlyjordiesReviewedCausalIdentificationBoundary
+selectedFriendlyjordiesReviewedCausalIdentificationBoundary =
+  FriendlyjordiesReviewedCausalIdentification.canonicalFriendlyjordiesReviewedCausalIdentificationBoundary
