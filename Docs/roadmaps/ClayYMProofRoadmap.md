@@ -1,7 +1,7 @@
 ## 18 November 2026 — exact finite 24-cell blocked expectation / variance
 
 PR #1444 now includes `YMClayOriginalL1Rational24CellBlockedMomentsExact.agda` and `scripts/check_ym_original_L1_24cell_blocked_moments_20261118.py`. From the existing positive three-class quadratic-Taylor blocked density (multiplicities 6/16/2), the Agda source writes a normalized rational functional on arbitrary coarse scalar observables `f(t)`, its constant-one and first/second moment equations, and the strictly positive rational variance of `t=(Re(U0U1))²`:
-`806306942803/12833778905928 > 0`. The exact independent Fraction calculation verifies 10 identities. This proves finite normalized nonconstancy only, not a spectral mass gap.
+`806306942803/12833778905928 > 0`. The exact independent Fraction calculation verifies 12 exact assertions. This proves finite normalized nonconstancy only, not a spectral mass gap.
 
 **Trust boundary:** No Agda compiler is available in the current execution environment, so the source-written Agda proofs are **not kernel accepted**. The exact original 24⁴ source action→conditional-moment theorem remains open in Agda. The full exponential Gibbs/Haar measure and continuum physical RG transfer remain open. Similarly the full Reynolds invariant basis, constructive effective `bn`, Bishop Cauchy/invariance and original SU(2) carrier equality remain open.
 
