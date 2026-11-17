@@ -31,6 +31,7 @@ open import Data.List.Base using (List; _∷_; [])
 open import Data.Empty using (⊥)
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 import DASHI.Unified.ArithmeticMoonshine as ArithmeticMoonshine
+import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
 import DASHI.Unified.BalabanRGTOEMaxCutValidation
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Validation
@@ -54,11 +55,7 @@ import DASHI.Unified.TOE369CoarseFineIntertwinerMaxCutExact as TOE369MaxCut
 import DASHI.Unified.TOE369CoarseFineIntertwinerMaxCutValidation as TOE369MaxCutValidation
 import DASHI.Unified.TOE369RootUnifierConvergenceValidation as TOE369RootUnifierValidation
 import DASHI.Physics.Foundations.Round5CompleteBoundary as Round5
-balabanAntigravityTOEReceipt :
-  BalabanAntiTOE.BalabanAntigravityTOEReceipt
-balabanAntigravityTOEReceipt =
-  BalabanAntiTOE.canonicalBalabanAntigravityTOEReceipt
-
+open MaxCut369 public
 canonicalUnifiedObjects : List Spine.UnifiedObjectInvariant
 canonicalUnifiedObjects =
   CarrierGrammar.carrierGrammarObject
@@ -262,6 +259,99 @@ unifiedCurrentLegalAuthorityDoesNotEstablishApplicability :
   CurrentMaxCut.legalAuthorityCreatesApplicability ≡ false
 unifiedCurrentLegalAuthorityDoesNotEstablishApplicability =
   CurrentMaxCut.legalAuthorityCreatesApplicabilityIsFalse
+
+
+
+unifiedCurrentSemanticAdmissionCannotCreateLegalAuthority :
+  CurrentMaxCut.SemanticAdmissionIsLegalSourceAuthority → ⊥
+unifiedCurrentSemanticAdmissionCannotCreateLegalAuthority =
+  CurrentMaxCut.semanticAdmissionAuthorityNonPromotion
+
+unifiedCurrentDocumentRoleCannotCreateLegalAuthority :
+  CurrentMaxCut.DocumentRoleIsLegalSourceAuthority → ⊥
+unifiedCurrentDocumentRoleCannotCreateLegalAuthority =
+  CurrentMaxCut.documentRoleAuthorityNonPromotion
+
+------------------------------------------------------------------------
+-- Numeric equality is not same-object identification.
+-- Reuse current master's existing theorem owner without a new carrier.
+------------------------------------------------------------------------
+
+unifiedCurrentFleet58CannotPromoteToGate4SameObject :
+  CurrentMaxCut.Fleet58IsGate4SameObject → ⊥
+unifiedCurrentFleet58CannotPromoteToGate4SameObject =
+  CurrentMaxCut.fleet58DoesNotBecomeGate4SameObject
+
+------------------------------------------------------------------------
+-- Direct governed workflow and observer future-safety firewalls.
+------------------------------------------------------------------------
+
+unifiedCurrentTaskCompletionDoesNotCreateTruth :
+  CurrentMaxCut.TaskCompletionCreatesTruth → ⊥
+unifiedCurrentTaskCompletionDoesNotCreateTruth =
+  CurrentMaxCut.taskCompletionCannotCreateTruth
+
+unifiedCurrentAcceptedReviewDoesNotPayApplicability :
+  CurrentMaxCut.AcceptedStatusPaysApplicability → ⊥
+unifiedCurrentAcceptedReviewDoesNotPayApplicability =
+  CurrentMaxCut.acceptedReviewCannotPayApplicability
+
+unifiedCurrentCitationDoesNotRealiseLegalRule :
+  CurrentMaxCut.CitationAloneRealisesLegalRule → ⊥
+unifiedCurrentCitationDoesNotRealiseLegalRule =
+  CurrentMaxCut.citationCannotRealiseLegalRule
+
+unifiedCurrentStaticRefinementDoesNotCreateDynamicSafety :
+  CurrentMaxCut.StaticSeparationCreatesDynamicSafetyPermission → ⊥
+unifiedCurrentStaticRefinementDoesNotCreateDynamicSafety =
+  CurrentMaxCut.staticObserverSeparationStillDoesNotCreateDynamicSafety
+
+unifiedCurrentProvenanceDoesNotCreateTruth :
+  CurrentMaxCut.ProvenanceAxisCreatesTruthPermission → ⊥
+unifiedCurrentProvenanceDoesNotCreateTruth =
+  CurrentMaxCut.provenanceAxisStillDoesNotCreateTruth
+
+
+------------------------------------------------------------------------
+-- Context-indexed 369 sheet/cube/appraisal-fibre Unified handoff.
+------------------------------------------------------------------------
+
+unifiedCurrent369ContextualFibreWeldReceipt :
+  CurrentMaxCut.TOE369ContextualFibreWeldReceipt
+unifiedCurrent369ContextualFibreWeldReceipt =
+  CurrentMaxCut.canonicalTOE369ContextualFibreWeldReceipt
+
+unifiedCurrent369DecisionSheetStates : ℕ
+unifiedCurrent369DecisionSheetStates =
+  CurrentMaxCut.decisionSheetStateCount
+
+unifiedCurrent369DecisionSheetStatesIsNine :
+  unifiedCurrent369DecisionSheetStates ≡ 9
+unifiedCurrent369DecisionSheetStatesIsNine =
+  CurrentMaxCut.decisionSheetStateCountIsNine
+
+unifiedCurrent369InteractionCubeStates : ℕ
+unifiedCurrent369InteractionCubeStates =
+  CurrentMaxCut.interactionCubeStateCount
+
+unifiedCurrent369InteractionCubeStatesIsTwentySeven :
+  unifiedCurrent369InteractionCubeStates ≡ 27
+unifiedCurrent369InteractionCubeStatesIsTwentySeven =
+  CurrentMaxCut.interactionCubeStateCountIsTwentySeven
+
+unifiedCurrent369AppraisalFibreStates : ℕ
+unifiedCurrent369AppraisalFibreStates =
+  CurrentMaxCut.appraisalFibreStateCount
+
+unifiedCurrent369AppraisalFibreStatesIsSevenHundredTwentyNine :
+  unifiedCurrent369AppraisalFibreStates ≡ 729
+unifiedCurrent369AppraisalFibreStatesIsSevenHundredTwentyNine =
+  CurrentMaxCut.appraisalFibreStateCountIsSevenHundredTwentyNine
+
+unifiedCurrent369SynthesisDoesNotEraseComparator :
+  CurrentMaxCut.synthesisErasesComparator ≡ false
+unifiedCurrent369SynthesisDoesNotEraseComparator =
+  CurrentMaxCut.synthesisErasesComparatorIsFalse
 
 ------------------------------------------------------------------------
 -- Current max-cut + generic hyperfabric convergence.

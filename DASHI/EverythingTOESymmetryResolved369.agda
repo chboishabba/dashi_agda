@@ -551,6 +551,12 @@ toe369FullCubeRotationNotFree =
 toe369MonsterPhaseConjugationIntertwiner =
   MaxCut369.toe27MonsterPhaseConjugationIntertwiner
 
+toe369Ternary27MonsterRepresentationNotPromoted =
+  MaxCut369.toe27MonsterRepresentationNotPromoted
+
+toe369Ternary27MonsterEmbeddingNotPromoted =
+  MaxCut369.toe27MonsterEmbeddingNotPromoted
+
 toe369Ternary27PhaseReductionNotGlobalInversion =
   MaxCut369.toe27PhaseReductionNotGlobalInversion
 
@@ -670,6 +676,12 @@ toeFleetNumericABIReceipt =
 
 toeFleetResidualInvariantReceipt =
   FleetGapTOE.fleetResidualInvariantReceipt
+
+toeFleetPlanningBoundary =
+  FleetGapTOE.fleetPlanningBoundary
+
+toeFleetVectorCoordinateDoesNotCreateTruth =
+  FleetGapTOE.fleetVectorCoordinateDoesNotCreateTruth
 
 toeFleetPromotionObligationIndex =
   FleetGapTOE.fleetPromotionObligationIndex
@@ -954,6 +966,99 @@ toeCurrentLegalAuthorityDoesNotEstablishApplicability :
   CurrentMaxCut.legalAuthorityCreatesApplicability ≡ false
 toeCurrentLegalAuthorityDoesNotEstablishApplicability =
   CurrentMaxCut.legalAuthorityCreatesApplicabilityIsFalse
+
+
+
+toeCurrentSemanticAdmissionCannotCreateLegalAuthority :
+  CurrentMaxCut.SemanticAdmissionIsLegalSourceAuthority → ⊥
+toeCurrentSemanticAdmissionCannotCreateLegalAuthority =
+  CurrentMaxCut.semanticAdmissionAuthorityNonPromotion
+
+toeCurrentDocumentRoleCannotCreateLegalAuthority :
+  CurrentMaxCut.DocumentRoleIsLegalSourceAuthority → ⊥
+toeCurrentDocumentRoleCannotCreateLegalAuthority =
+  CurrentMaxCut.documentRoleAuthorityNonPromotion
+
+------------------------------------------------------------------------
+-- Numeric equality is not same-object identification.
+-- Reuse current master's existing theorem owner without a new carrier.
+------------------------------------------------------------------------
+
+toeCurrentFleet58CannotPromoteToGate4SameObject :
+  CurrentMaxCut.Fleet58IsGate4SameObject → ⊥
+toeCurrentFleet58CannotPromoteToGate4SameObject =
+  CurrentMaxCut.fleet58DoesNotBecomeGate4SameObject
+
+------------------------------------------------------------------------
+-- Direct governed workflow and observer future-safety firewalls.
+------------------------------------------------------------------------
+
+toeCurrentTaskCompletionDoesNotCreateTruth :
+  CurrentMaxCut.TaskCompletionCreatesTruth → ⊥
+toeCurrentTaskCompletionDoesNotCreateTruth =
+  CurrentMaxCut.taskCompletionCannotCreateTruth
+
+toeCurrentAcceptedReviewDoesNotPayApplicability :
+  CurrentMaxCut.AcceptedStatusPaysApplicability → ⊥
+toeCurrentAcceptedReviewDoesNotPayApplicability =
+  CurrentMaxCut.acceptedReviewCannotPayApplicability
+
+toeCurrentCitationDoesNotRealiseLegalRule :
+  CurrentMaxCut.CitationAloneRealisesLegalRule → ⊥
+toeCurrentCitationDoesNotRealiseLegalRule =
+  CurrentMaxCut.citationCannotRealiseLegalRule
+
+toeCurrentStaticRefinementDoesNotCreateDynamicSafety :
+  CurrentMaxCut.StaticSeparationCreatesDynamicSafetyPermission → ⊥
+toeCurrentStaticRefinementDoesNotCreateDynamicSafety =
+  CurrentMaxCut.staticObserverSeparationStillDoesNotCreateDynamicSafety
+
+toeCurrentProvenanceDoesNotCreateTruth :
+  CurrentMaxCut.ProvenanceAxisCreatesTruthPermission → ⊥
+toeCurrentProvenanceDoesNotCreateTruth =
+  CurrentMaxCut.provenanceAxisStillDoesNotCreateTruth
+
+
+------------------------------------------------------------------------
+-- Context-indexed 369 sheet/cube/appraisal-fibre TOE handoff.
+------------------------------------------------------------------------
+
+toeCurrent369ContextualFibreWeldReceipt :
+  CurrentMaxCut.TOE369ContextualFibreWeldReceipt
+toeCurrent369ContextualFibreWeldReceipt =
+  CurrentMaxCut.canonicalTOE369ContextualFibreWeldReceipt
+
+toeCurrent369DecisionSheetStates : ℕ
+toeCurrent369DecisionSheetStates =
+  CurrentMaxCut.decisionSheetStateCount
+
+toeCurrent369DecisionSheetStatesIsNine :
+  toeCurrent369DecisionSheetStates ≡ 9
+toeCurrent369DecisionSheetStatesIsNine =
+  CurrentMaxCut.decisionSheetStateCountIsNine
+
+toeCurrent369InteractionCubeStates : ℕ
+toeCurrent369InteractionCubeStates =
+  CurrentMaxCut.interactionCubeStateCount
+
+toeCurrent369InteractionCubeStatesIsTwentySeven :
+  toeCurrent369InteractionCubeStates ≡ 27
+toeCurrent369InteractionCubeStatesIsTwentySeven =
+  CurrentMaxCut.interactionCubeStateCountIsTwentySeven
+
+toeCurrent369AppraisalFibreStates : ℕ
+toeCurrent369AppraisalFibreStates =
+  CurrentMaxCut.appraisalFibreStateCount
+
+toeCurrent369AppraisalFibreStatesIsSevenHundredTwentyNine :
+  toeCurrent369AppraisalFibreStates ≡ 729
+toeCurrent369AppraisalFibreStatesIsSevenHundredTwentyNine =
+  CurrentMaxCut.appraisalFibreStateCountIsSevenHundredTwentyNine
+
+toeCurrent369SynthesisDoesNotEraseComparator :
+  CurrentMaxCut.synthesisErasesComparator ≡ false
+toeCurrent369SynthesisDoesNotEraseComparator =
+  CurrentMaxCut.synthesisErasesComparatorIsFalse
 
 ------------------------------------------------------------------------
 -- Current max-cut + generic hyperfabric convergence.
