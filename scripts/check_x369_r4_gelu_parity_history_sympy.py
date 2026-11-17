@@ -236,4 +236,31 @@ for dimension in (1,2,3,4):
     check("chart jump squared = four times even MSE floor d="+str(dimension),
           S.expand(norm2(gap)-4*norm2(Ev))==0)
 
+# Exact source-shaped adversarial orientation example:
+# the SAME nonzero expert state z=1/100 is scored by one learned
+# orientation coefficient +epsilon and its quantized perturbation
+# -epsilon; strict sign stability FAILS, although the bias-free
+# numerical FFN chart jump is only quadratic in z.
+small_z=R(1,100)
+w_orientation=R(1,4096)
+check("orientation quantizer can cross strict source chart boundary",
+      2*w_orientation*small_z>0
+      and 2*(-w_orientation)*small_z<0)
+small_chart_jump=S.N(g(small_z)+g(-small_z),50)
+small_chart_budget=S.N(2*small_z**2/S.sqrt(2*S.pi),50)
+check("bias-free sign flip is still quadratically bounded",
+      small_chart_jump>0
+      and small_chart_jump<=small_chart_budget)
+# The original affine source transition can copy the restored FFN
+# output to history; with Ty=1 and bT=0, its chart jump equals the
+# same small GELU-even residual. No assertion of actual fitted Ty.
+check("source affine history chart jump follows output residual",
+      S.simplify((Hplus-Hminus).subs({th:0,tx:0,ty:1,bt:0,
+             k:1,b:0,m:1,b2:0,t:small_z})
+         -2*even_g(small_z))==0)
+# Conversely a learned output bias produces a finite jump independent
+# of the small nonzero input, invalidating unconditional safety.
+check("FFN output bias spoils sign flip quadratic smallness",
+      S.simplify((Fp+Fm).subs({m:0,b2:1})-2)==0)
+
 print("X369_GELU_PARITY_HISTORY_SYMPY_PASS",len(checks),"checks")
