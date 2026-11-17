@@ -1797,3 +1797,40 @@ MATHEMATICAL subproblem. It DOES NOT prove the full exponential
 Wilson coarse effective action, native Bishop all-degree/limit
 functional, same-original SUN source equivalence, 4D continuum
 Yang-Mills or Clay mass gap. Those remain OPEN.
+
+
+### 2026-11-17 additional Agda B4 source: original rational SU2 orbit generators
+
+New --safe SOURCE WRITTEN (not kernel-accepted):
+DASHI/Physics/YangMills/YMClayOriginalRationalS3HyperoctahedralGeneratorsExact.agda.
+It reuses the ORIGINAL rational SU2 quaternion record and previous
+e2/e3/e4 source owners. Four coordinate sign flips and adjacent
+swaps 01/12/23 are actual functions on the original unit quaternion,
+with the unit norm proved from source polynomial norm equality.
+The four invariants norm, e2, e3, e4 are proved invariant
+for each generator using exact rational ring equations, not
+just a numerical sample. It imports only the source-safe original
+quaternion and invariant owners and is attached to the canonical
+BalabanRGTOERegression safe-graph and local preflight.
+
+Independent exact symbolic source check:
+scripts/check_ym_original_rational_s3_b4_invariants_20261117.py
+passed 32/32 polynomial identities.
+
+NEXT exact Agda theorem for degree-15:
+1. Define/reuse the complete orbit enumeration of the B4 generator
+   action and prove signed-odd cancellation / uniform orbit
+   reindexing on the 1464-node rational design, not just the
+   representative-to-invariants map.
+2. Formalize the fundamental theorem of symmetric polynomials
+   specialized to four squared coordinates and e1=1 on the
+   original rational S3; derive the 11-dimensional degree-15
+   monomial normal form.
+3. Compose these with the already source-written 11 exact rational
+   moments of YMClayRationalS3DegreeFifteenInvariantCertificateExact.
+
+This is one formal finite exact cubature target, not an assumed
+Bishop continuous Haar or universal arbitrary-degree theorem.
+The all-degree rational convex-interior producer and native
+Bishop fast-Cauchy witness remain OPEN. Pinned Agda/Nix
+kernel acceptance was not available.
