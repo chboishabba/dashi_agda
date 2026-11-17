@@ -22,6 +22,8 @@ import DASHI.Moonshine.MonsterGradedVOASelected3BSameElementBidiExact as Selecte
 import DASHI.Moonshine.Base369Monster3BSingleActionProducerBidiExact as SingleAction
 import DASHI.Wikimedia.IbrahimMonsterTernary27PhasePreservingFiveOrbitReductionExact as TernaryReduction
 import DASHI.Wikimedia.IbrahimMonster3BLinearShortestFrontierCorrectionExact as Ibrahim
+import DASHI.ComputerScience.TriadicFin27Byte256ABIExact as ABI
+import DASHI.ComputerScience.TriadicScalarCompactCodecReferenceExact as CodecRef
 
 ------------------------------------------------------------------------
 -- ZKP O/R/C/S/L/P/G/F.
@@ -228,6 +230,14 @@ toePermutationNoGoDoesNotCreateLinearAction :
 toePermutationNoGoDoesNotCreateLinearAction =
   Ibrahim.noGoDoesNotCreateLinearAction
 
+------------------------------------------------------------------------
+-- Exact finite-27 codec BIDI normalization.
+--
+-- Reuse the canonical ABI functions and both inverse laws. This pays the
+-- finite Agda carrier BIDI coordinate only. Runtime and device promotion are
+-- separate claims and are not inferred here.
+------------------------------------------------------------------------
+
 TernaryEncodedState : Set
 TernaryEncodedState = CodecRef.Encoded3
 
@@ -249,54 +259,3 @@ toe27StateCodeStateDecode :
   (i : TernaryState27) →
   toe27StateCode (toe27StateDecode i) ≡ i
 toe27StateCodeStateDecode = ABI.stateCode-stateDecode
-
-------------------------------------------------------------------------
--- Ternary-27 byte ABI / compiled host boundary.
---
--- Reuse the existing ABI and runtime owners. The finite codec and compiled
--- host byte are paid. Rust, CUDA, ROCm, device equivalence, and Agda-kernel
--- promotion remain unpaid. This is the normalized CFFI/kernel-BIDI boundary.
-------------------------------------------------------------------------
-
-toe27FiniteStateABIExact :
-  ABI.finite27StateIndexPaid ABI.canonicalTriadicByteABIBoundary ≡ true
-toe27FiniteStateABIExact = refl
-
-toe27ByteCarrierABIExact :
-  ABI.byteSizedFiniteCarrierPaid ABI.canonicalTriadicByteABIBoundary ≡ true
-toe27ByteCarrierABIExact = refl
-
-toe27CompiledHostU8Exact :
-  CompiledU8.compiledHostU8Oracle CompiledU8.currentRuntimeRoadmapAdvance ≡ true
-toe27CompiledHostU8Exact = refl
-
-toe27RustBindingStillUnpaid :
-  ABI.rustU8BindingPaid ABI.canonicalTriadicByteABIBoundary ≡ false
-toe27RustBindingStillUnpaid = refl
-
-toe27CUDABindingStillUnpaid :
-  ABI.cudaUint8BindingPaid ABI.canonicalTriadicByteABIBoundary ≡ false
-toe27CUDABindingStillUnpaid = refl
-
-toe27ROCmBindingStillUnpaid :
-  ABI.rocmUint8BindingPaid ABI.canonicalTriadicByteABIBoundary ≡ false
-toe27ROCmBindingStillUnpaid = refl
-
-toe27HostByteDoesNotCreateDeviceByte :
-  HostU8.HostByteImpliesDeviceByte → ⊥
-toe27HostByteDoesNotCreateDeviceByte =
-  HostU8.hostByteDoesNotCreateDeviceByte
-
-toe27RuntimeSourceDoesNotCreateKernelCertification :
-  HostU8.RuntimeSourceImpliesKernelCertification → ⊥
-toe27RuntimeSourceDoesNotCreateKernelCertification =
-  HostU8.runtimeSourceDoesNotCreateKernelCertification
-
-toe27CompilerSuccessDoesNotCreateAgdaKernelSuccess :
-  CompiledU8.CompilerSuccessImpliesAgdaKernelSuccess → ⊥
-toe27CompilerSuccessDoesNotCreateAgdaKernelSuccess =
-  CompiledU8.compilerSuccessDoesNotCreateKernelSuccess
-
-------------------------------------------------------------------------
--- Ibrahim non-promotion partitions.
-------------------------------------------------------------------------
