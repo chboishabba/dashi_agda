@@ -142,3 +142,23 @@ unitQuaternionGram11 u =
 -- The four entry lemmas above are the complete 2x2 matrix equality.
 -- No additional generic matrix extensionality is needed in downstream
 -- consumers; case distinction on Fin 2 reuses these exact owners.
+
+
+unit2 : Fin.Fin 2 → Fin.Fin 2 → C.BishopComplex
+unit2 Fin.zero Fin.zero = C.oneC
+unit2 Fin.zero (Fin.suc Fin.zero) = C.zeroC
+unit2 (Fin.suc Fin.zero) Fin.zero = C.zeroC
+unit2 (Fin.suc Fin.zero) (Fin.suc Fin.zero) = C.oneC
+
+bishopQuaternionUdaggerUIsIdentity :
+  (u : D.UnitQuaternion) → ∀ i j →
+  C._≈C_ (gram (D.quaternion u) i j) (unit2 i j)
+bishopQuaternionUdaggerUIsIdentity u Fin.zero Fin.zero =
+  unitQuaternionGram00 u
+bishopQuaternionUdaggerUIsIdentity u Fin.zero (Fin.suc Fin.zero) =
+  unitQuaternionGram01 u
+bishopQuaternionUdaggerUIsIdentity u (Fin.suc Fin.zero) Fin.zero =
+  unitQuaternionGram10 u
+bishopQuaternionUdaggerUIsIdentity
+  u (Fin.suc Fin.zero) (Fin.suc Fin.zero) =
+  unitQuaternionGram11 u
