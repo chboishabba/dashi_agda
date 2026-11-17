@@ -20,7 +20,8 @@ import DASHI.Physics.Closure.YMFinalStateReceipt as YMFinal
 -- or terminal unification promotion beyond the imported interfaces.
 
 data CoreTheoremAggregateStatus : Set where
-  importedPaperInterfacesAssembled_terminalClaimsFalse : CoreTheoremAggregateStatus
+  importedPaperInterfacesAssembled_terminalClaimsFalse :
+    CoreTheoremAggregateStatus
 
 coreTheoremInterfacesStatement : String
 coreTheoremInterfacesStatement =

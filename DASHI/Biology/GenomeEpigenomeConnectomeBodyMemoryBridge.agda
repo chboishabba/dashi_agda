@@ -30,17 +30,23 @@ import DASHI.Biology.GenomeSensorimotorConnectomeBridge as Genome
 data Never : Set where
 
 data GenomeEpigenomeConnectomeBodyMemoryAxis : Set where
-  genomeDevelopmentAxis : GenomeEpigenomeConnectomeBodyMemoryAxis
+  genomeDevelopmentAxis :
+    GenomeEpigenomeConnectomeBodyMemoryAxis
 
-  epigeneticRegulationAxis : GenomeEpigenomeConnectomeBodyMemoryAxis
+  epigeneticRegulationAxis :
+    GenomeEpigenomeConnectomeBodyMemoryAxis
 
-  connectomeConstraintAxis : GenomeEpigenomeConnectomeBodyMemoryAxis
+  connectomeConstraintAxis :
+    GenomeEpigenomeConnectomeBodyMemoryAxis
 
-  bodyMemoryResidualAxis : GenomeEpigenomeConnectomeBodyMemoryAxis
+  bodyMemoryResidualAxis :
+    GenomeEpigenomeConnectomeBodyMemoryAxis
 
-  boundaryGovernanceAxis : GenomeEpigenomeConnectomeBodyMemoryAxis
+  boundaryGovernanceAxis :
+    GenomeEpigenomeConnectomeBodyMemoryAxis
 
-  canonicalReceiptAxis : GenomeEpigenomeConnectomeBodyMemoryAxis
+  canonicalReceiptAxis :
+    GenomeEpigenomeConnectomeBodyMemoryAxis
 
 canonicalGenomeEpigenomeConnectomeBodyMemoryAxes :
   List GenomeEpigenomeConnectomeBodyMemoryAxis
@@ -54,17 +60,23 @@ canonicalGenomeEpigenomeConnectomeBodyMemoryAxes =
   ∷ []
 
 data GenomeEpigenomeConnectomeBodyMemoryReceipt : Set where
-  genomeDevelopmentReceipt : GenomeEpigenomeConnectomeBodyMemoryReceipt
+  genomeDevelopmentReceipt :
+    GenomeEpigenomeConnectomeBodyMemoryReceipt
 
-  epigeneticRegulationReceipt : GenomeEpigenomeConnectomeBodyMemoryReceipt
+  epigeneticRegulationReceipt :
+    GenomeEpigenomeConnectomeBodyMemoryReceipt
 
-  connectomeConstraintReceipt : GenomeEpigenomeConnectomeBodyMemoryReceipt
+  connectomeConstraintReceipt :
+    GenomeEpigenomeConnectomeBodyMemoryReceipt
 
-  bodyMemoryResidualReceipt : GenomeEpigenomeConnectomeBodyMemoryReceipt
+  bodyMemoryResidualReceipt :
+    GenomeEpigenomeConnectomeBodyMemoryReceipt
 
-  hardGateReceipt : GenomeEpigenomeConnectomeBodyMemoryReceipt
+  hardGateReceipt :
+    GenomeEpigenomeConnectomeBodyMemoryReceipt
 
-  nonPromotionReceipt : GenomeEpigenomeConnectomeBodyMemoryReceipt
+  nonPromotionReceipt :
+    GenomeEpigenomeConnectomeBodyMemoryReceipt
 
 canonicalGenomeEpigenomeConnectomeBodyMemoryReceipts :
   List GenomeEpigenomeConnectomeBodyMemoryReceipt
@@ -78,21 +90,29 @@ canonicalGenomeEpigenomeConnectomeBodyMemoryReceipts =
   ∷ []
 
 data GenomeEpigenomeConnectomeBodyMemoryBoundary : Set where
-  candidateOnlyBoundary : GenomeEpigenomeConnectomeBodyMemoryBoundary
+  candidateOnlyBoundary :
+    GenomeEpigenomeConnectomeBodyMemoryBoundary
 
-  dnaNotDestinyBoundary : GenomeEpigenomeConnectomeBodyMemoryBoundary
+  dnaNotDestinyBoundary :
+    GenomeEpigenomeConnectomeBodyMemoryBoundary
 
-  epigeneticAssociationNotCausationBoundary : GenomeEpigenomeConnectomeBodyMemoryBoundary
+  epigeneticAssociationNotCausationBoundary :
+    GenomeEpigenomeConnectomeBodyMemoryBoundary
 
-  connectomeNotMindBoundary : GenomeEpigenomeConnectomeBodyMemoryBoundary
+  connectomeNotMindBoundary :
+    GenomeEpigenomeConnectomeBodyMemoryBoundary
 
-  bodyMemoryResidualNotTraumaProofBoundary : GenomeEpigenomeConnectomeBodyMemoryBoundary
+  bodyMemoryResidualNotTraumaProofBoundary :
+    GenomeEpigenomeConnectomeBodyMemoryBoundary
 
-  bodyMemoryResidualNotDiagnosisBoundary : GenomeEpigenomeConnectomeBodyMemoryBoundary
+  bodyMemoryResidualNotDiagnosisBoundary :
+    GenomeEpigenomeConnectomeBodyMemoryBoundary
 
-  bodyMemoryResidualNotTreatmentBoundary : GenomeEpigenomeConnectomeBodyMemoryBoundary
+  bodyMemoryResidualNotTreatmentBoundary :
+    GenomeEpigenomeConnectomeBodyMemoryBoundary
 
-  noClinicalAuthorityBoundary : GenomeEpigenomeConnectomeBodyMemoryBoundary
+  noClinicalAuthorityBoundary :
+    GenomeEpigenomeConnectomeBodyMemoryBoundary
 
 canonicalGenomeEpigenomeConnectomeBodyMemoryBoundaries :
   List GenomeEpigenomeConnectomeBodyMemoryBoundary
@@ -108,21 +128,29 @@ canonicalGenomeEpigenomeConnectomeBodyMemoryBoundaries =
   ∷ []
 
 data GenomeEpigenomeConnectomeBodyMemoryRoute : Set where
-  candidateOnlyBridgeRoute : GenomeEpigenomeConnectomeBodyMemoryRoute
+  candidateOnlyBridgeRoute :
+    GenomeEpigenomeConnectomeBodyMemoryRoute
 
-  dnaDestinyRoute : GenomeEpigenomeConnectomeBodyMemoryRoute
+  dnaDestinyRoute :
+    GenomeEpigenomeConnectomeBodyMemoryRoute
 
-  epigeneticCausationRoute : GenomeEpigenomeConnectomeBodyMemoryRoute
+  epigeneticCausationRoute :
+    GenomeEpigenomeConnectomeBodyMemoryRoute
 
-  connectomeMindRoute : GenomeEpigenomeConnectomeBodyMemoryRoute
+  connectomeMindRoute :
+    GenomeEpigenomeConnectomeBodyMemoryRoute
 
-  bodyMemoryTraumaProofRoute : GenomeEpigenomeConnectomeBodyMemoryRoute
+  bodyMemoryTraumaProofRoute :
+    GenomeEpigenomeConnectomeBodyMemoryRoute
 
-  bodyMemoryDiagnosisRoute : GenomeEpigenomeConnectomeBodyMemoryRoute
+  bodyMemoryDiagnosisRoute :
+    GenomeEpigenomeConnectomeBodyMemoryRoute
 
-  bodyMemoryTreatmentRoute : GenomeEpigenomeConnectomeBodyMemoryRoute
+  bodyMemoryTreatmentRoute :
+    GenomeEpigenomeConnectomeBodyMemoryRoute
 
-  clinicalAuthorityRoute : GenomeEpigenomeConnectomeBodyMemoryRoute
+  clinicalAuthorityRoute :
+    GenomeEpigenomeConnectomeBodyMemoryRoute
 
 AdmissibleGenomeEpigenomeConnectomeBodyMemoryRoute :
   GenomeEpigenomeConnectomeBodyMemoryRoute →

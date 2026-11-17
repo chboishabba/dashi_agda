@@ -25,7 +25,8 @@ import DASHI.Interop.QiCarrierFieldBridge as QiBridge
 -- authority.
 
 data BettiQiBridgeStatus : Set where
-  bettiQiBridge_candidateOnly : BettiQiBridgeStatus
+  bettiQiBridge_candidateOnly :
+    BettiQiBridgeStatus
 
 data BettiQiPromotion : Set where
 
@@ -35,19 +36,26 @@ bettiQiPromotionImpossible :
 bettiQiPromotionImpossible ()
 
 data BettiSummaryKind : Set where
-  connectedComponentSummary : BettiSummaryKind
+  connectedComponentSummary :
+    BettiSummaryKind
 
-  cycleSummary : BettiSummaryKind
+  cycleSummary :
+    BettiSummaryKind
 
-  voidSummary : BettiSummaryKind
+  voidSummary :
+    BettiSummaryKind
 
-  bodySummary : BettiSummaryKind
+  bodySummary :
+    BettiSummaryKind
 
-  boundarySummary : BettiSummaryKind
+  boundarySummary :
+    BettiSummaryKind
 
-  seedSummary : BettiSummaryKind
+  seedSummary :
+    BettiSummaryKind
 
-  carrySummary : BettiSummaryKind
+  carrySummary :
+    BettiSummaryKind
 
 canonicalBettiSummaryKinds :
   List BettiSummaryKind

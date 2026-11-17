@@ -111,21 +111,6 @@ import DASHI.Biology.AnimalSenseObservationThreadDischarge
 import DASHI.Biology.AnimalexicAnimalUtteranceSurface
 import DASHI.Biology.AvianCompassSurface
 import DASHI.Biology.AvianCompassExamples
-import DASHI.Biology.MagnetoreceptionSurface
-import DASHI.Biology.AvianCryptochromeMagnetoreceptionInhabitant
-import DASHI.Biology.AvianHepaticMacrophageMagnetoreception
-import DASHI.Biology.AvianMagnetoreceptionSourceRegistry
-import DASHI.Biology.AvianMagneticFieldPerturbationReceipt
-import DASHI.Biology.AvianMagneticPerturbationSourceRegistry
-import DASHI.Biology.AvianRFOverlayMechanismAdapter
-import DASHI.Biology.AvianMagnetoreceptionRFGoniometerPhasedArrayBridge
-import DASHI.Biology.AvianMagnetoreceptionEMExposureTransportExact
-import DASHI.Biology.AvianEngels2014EMExposureReceipt
-import DASHI.Biology.AvianMagnetoreceptionFieldObservationQuotientExact
-import DASHI.Biology.AvianMagnetoreceptionRFAngularObservationQuotientExact
-import DASHI.Biology.AvianMagnetoreceptionCueFusion
-import DASHI.Biology.AvianMagnetoreceptionCrossScaleBridge
-import DASHI.Biology.AvianMagnetoreceptionHardProblemResidualV2
 import DASHI.Biology.AvianHardProblemResidual
 import DASHI.Biology.AvianMagnetoreceptionExtraFibreBoundary
 import DASHI.Biology.AvianRFOverlayManipulationReceipt
@@ -138,7 +123,7 @@ import DASHI.Biology.BodyMemoryBiologyRegression
 import DASHI.Biology.BodyMemoryCompiledInverseBridge
 import DASHI.Biology.BodyMemoryMeasurementProxyBoundary
 import DASHI.Biology.BrainDNABodyMemoryBridge
--- import DASHI.Biology.DevelopmentalWindowBodyMemoryBridge -- Excluded: transitively imports YM/NS Balaban chain
+import DASHI.Biology.DevelopmentalWindowBodyMemoryBridge
 import DASHI.Biology.EpigeneticBodyMemoryBridge
 import DASHI.Biology.EpigeneticTemporalRegulationBridge
 import DASHI.Biology.EducationBodyMemoryBridge
@@ -172,9 +157,9 @@ import DASHI.Biology.RelationalChartDynamicsInterfaceResidualMachine
 import DASHI.Biology.RelationalQiEducationTraumaBridge
 import DASHI.Biology.RelationalQiBodyMemoryBridge
 import DASHI.Biology.RetinalPerturbationObservationBridge
--- import DASHI.Biology.TraumaBodyMemoryCandidateBridge -- Excluded: transitively imports YM/NS Balaban chain
--- import DASHI.Biology.TraumaClinicalGovernanceBoundary -- Excluded: transitively imports YM/NS Balaban chain
--- import Ontology.ClinicalDiagnostics -- Excluded: transitively imports YM/NS Balaban chain
+import DASHI.Biology.TraumaBodyMemoryCandidateBridge
+import DASHI.Biology.TraumaClinicalGovernanceBoundary
+import Ontology.ClinicalDiagnostics
 import DASHI.Combinatorics.Confluence
 import DASHI.Combinatorics.Entropy
 import DASHI.Combinatorics.FractranCOL
@@ -221,8 +206,6 @@ import DASHI.Core.AuthorityNonPromotionCore
 import DASHI.Core.BridgeRequirementCore
 import DASHI.Core.CandidateFunctionalCore
 import DASHI.Core.CandidateOnlyCore
-import DASHI.Core.ComparisonLawCore
-import DASHI.Core.ContactHamiltonian
 import DASHI.Core.ControlCardCore
 import DASHI.Core.ContactHamiltonian
 import DASHI.Core.ComparisonLawCore

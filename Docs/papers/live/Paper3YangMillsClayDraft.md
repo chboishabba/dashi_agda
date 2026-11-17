@@ -1,9 +1,29 @@
 # Paper 3 Draft: Yang–Mills Mass-Gap Reduction on the Literal Wilson Family
 
 Author: Johl Brown
-Date: `2026-09-17`
-Version: `draft 2 — F1/F3/F4 recut`
+Date: `2026-06-09`
+Version: `draft 1`
 Status: live analytic manuscript draft; Clay-facing candidate preprint; non-promoting
+
+## Abstract
+
+This manuscript presents a candidate Yang-Mills mass-gap assembly route from a
+finite nonabelian carrier family to a continuum Hilbert-space theory. The
+finite part proves or packages self-adjointness, fixed-lattice spectral gaps,
+and the uniform finite-margin target; the continuum part isolates the exact
+transfer interface needed to prevent a finite margin from being lost in the
+scaling limit. The load-bearing analytic surface is the `H3a` transfer theorem:
+trace-norm or norm-resolvent control on the vacuum-orthogonal transfer
+operators strong enough to rule out spectral pollution below the finite margin.
+The companion `H3b` vacuum-projection statement and the
+no-spectral-pollution theorem then connect the finite margin to the
+reflection-positive Osterwalder-Schrader reconstruction route.
+
+The paper should be read as a candidate proof package, internally
+DASHI/Agda-receipted where stated, pending independent peer review, external
+authority review, and the applicable Clay Mathematics Institute eligibility
+procedures. It does not claim Clay approval, journal acceptance, or a
+repo-native rederivation of the full Balaban constructive multiscale package.
 
 ## Abstract
 
@@ -16,7 +36,74 @@ F4  equality of the resulting Yang–Mills and Osterwalder–Schrader evolutions
     on the physical common core.
 ```
 
-The finite-side input `F1` admits three equivalent or sufficient normal forms. The most direct is a cutoff-dependent two-slice decorrelation estimate together with
+Finite Gate 3 geometry still matters, but only as setup for the operator and
+Hamiltonian language. The paper is no longer a geometry-first draft. It is a
+mass-gap reduction draft with explicit claim boundaries.
+
+> **Theorem 1.1 (mass-gap assembly from finite carrier to continuum).** Assume
+> the finite carrier Hamiltonians on the selected nonabelian lattice family are
+> self-adjoint with an explicit lower spectral gap, admit domination by a
+> comparison semigroup with a uniform finite spectral margin, and satisfy the
+> cited Balaban multiscale fluctuation-integral and large-field/small-field
+> inputs needed to prove `H3a`, the vacuum-orthogonal transfer theorem of
+> Section 5. If the limiting Euclidean theory satisfies reflection positivity
+> and the Osterwalder-Schrader reconstruction hypotheses, then the reconstructed
+> continuum theory has a positive mass gap. The load-bearing Clay-facing
+> analytic burden is therefore the `H3a` transfer input rather than the mere
+> existence of isolated finite-carrier margins.
+
+This is the honest current target. The draft can state a finite-to-continuum
+assembly route sharply while keeping the constructive multiscale intake
+explicitly cited rather than silently internalized.
+
+**Formal status box.** In the Agda closure surfaces, the main Clay-facing
+Yang-Mills theorems remain `Proved = false` because DASHI does not claim to
+have locally reproved the full Balaban/OS constructive package. The manuscript
+is a candidate preprint package whose internal receipts identify the finite
+operator, transfer-interface, and terminal-guard surfaces. The external
+constructive-QFT intake remains explicit and reviewable; no Clay approval,
+external acceptance, or terminal promotion is asserted.
+
+**Proof scope summary.**
+
+| Manuscript surface | Role | Boundary |
+| --- | --- | --- |
+| finite carrier gap | proves the fixed-lattice operator/gap surface | not a continuum physical mass gap |
+| uniform finite margin | carries domination input into the transfer problem | conditional on the stated domination package |
+| `H3a` transfer | load-bearing continuum intake | cited Balaban/RG authority, not repo-native rederivation |
+| `H3b` and no spectral pollution | vacuum compatibility and gap preservation | depends on RP.4 and the stated norm-resolvent strength |
+| RP/OS reconstruction | Hilbert-space and Wightman bridge | subject to OS/Seiler compatibility and external review |
+
+For the abstract closure grammar that places this reduction inside the wider
+corpus, see Paper 8, *Closure Grammar, Jordan-von Neumann Recovery, and
+Controlled Consumers*. The present paper remains the analytic home of the
+Yang-Mills reduction narrative.
+
+## 2. Finite nonabelian carrier and operator setup
+
+The finite starting point is a selected family of nonabelian carriers for a
+compact simple Lie group `G`, equipped with curvature, Wilson-action
+bookkeeping, and a transfer or Hamiltonian operator at each depth. The older
+finite geometry draft supplies the structural language: Lie brackets,
+curvature witnesses, and selected finite non-flat surfaces. In the present
+manuscript these are used only to justify the existence and domain of the
+operator family `H_N`.
+
+The Hilbert-space operator language used here is developed in detail in the
+support compendium, Section 2, following Paper 4.
+
+What matters analytically is that each `H_N` acts on a finite carrier Hilbert
+space or transfer-matrix space with a distinguished vacuum sector and an
+orthogonal positive-energy complement. The finite objects are real data, but
+they are not yet the continuum Yang-Mills Hamiltonian. This distinction drives
+the whole paper.
+
+## 3. Finite self-adjointness and explicit spectral gap
+
+The first theorem-sized step is finite self-adjointness. On each carrier, the
+selected operator `H_N` is symmetric on its canonical finite domain and closes
+to a self-adjoint operator. This gives meaning to the spectral minimum and to
+gap statements of the form
 
 ```text
 Delta * a_k <= 1 - c_k,
@@ -33,7 +120,13 @@ is sufficient as well. The manuscript distinguishes these checked compiler impli
 
 The Bałaban renormalization-group literature is used at its verified source ceiling. In particular, the repository now identifies the finite beta history with the coupling history of Bałaban's complete-density flow and imports the conditional 1989 ultraviolet-stability theorem on that same trajectory. This is a substantive same-object reduction, but it does not by itself prove the full two-slice `L^infty` density defect or the operator-strength `L^2` mixing estimate required for `F1`.
 
-A separate empirical axis is also recorded. A frozen comparison against CMS-SMP-20-003 / HEPData `ins2079374` below the Z peak gives `chi2/dof = 2.1565191176` over 18 effective degrees of freedom and mean prediction/data `0.9941233097`. This is a bounded collider/QCD contact. It is not used to discharge `F1`, `F3`, or `F4`, and it does not establish zero fitted parameters or the whole canonical theory spine.
+**Section 3 status.** The displayed `SU(2)` bound is finite-volume and
+fixed-`beta`. It is not asserted to be uniform as `a(beta) -> 0` and
+`beta -> infinity`. The continuum physical mass-gap burden begins only when
+Sections 4-5 supply a uniform finite margin and the `H3a` transfer theorem
+preserves that margin through the scaling limit.
+
+## 4. Hamiltonian domination and uniform finite spectral margin
 
 The paper therefore makes a reduction claim, not an unconditional Clay-completion claim.
 
@@ -276,13 +369,61 @@ The current assembly theorem should be read schematically as follows.
 
 This theorem is conditional until the three physical premises are inhabited. It is not weakened by stating those premises explicitly; rather, the purpose of the current proof search is to make them as small, literal, and non-duplicative as possible.
 
-## 9. Bounded empirical contact with CMS Drell–Yan data
+The precise theorem-intake chain is the following. Balaban's block-spin
+renormalization group (`Balaban1987`) supplies the passage to a scale where
+the fluctuation integral is controlled and the effective action is localized. The
+large-field/small-field decomposition suppresses the complementary region.
+Most importantly for the `H3a` norm, the Balaban 1988 cluster expansion
+(`Balaban1988`, Lemma 3 and equations (2.11)-(2.13), with the activity bound
+recorded there as (2.38)) gives exponentially decaying polymer activities:
+
+```text
+|H(Z)| <= C exp(-c d(Z)).
+```
+
+Consequently the polymer sums for boundary-touching and large-diameter
+polymers are absolutely summable. On the vacuum-orthogonal sector the
+nontrivial representation blocks also carry the heat-kernel Casimir
+suppression
+
+```text
+sum_{lambda != 0} d_lambda^2 exp(-a C_lambda) < infinity,
+```
+
+for the compact groups under consideration. The combination of polymer
+summability and Casimir suppression is the cited input that upgrades strong or
+Mosco-style convergence to the trace-norm transfer conclusion of Theorem 5.2.
+This is an authority-backed theorem import, not a repo-native proof of
+Balaban's multiscale estimates.
+
+The repo-native alternative is explicitly deferred. A companion Option-B
+paper would have to reprove, for the specific DASHI lattice families, the
+Casimir suppression, polymer localization, Kotecky-Preiss activity bound,
+trace-norm consequence, and intermediate-`beta` RG induction. Until that
+separate proof exists, Theorem 5.2 remains authority-backed by the Balaban
+intake above.
+
+The reviewer-facing packet is now organized around the same exact chain. The
+finite self-adjointness and domination layers are internal to this manuscript.
+The remaining cited chain is:
+`H3a -> H3b -> no-spectral-pollution -> RP/OS -> Wightman -> continuum mass-gap transfer`.
+The packet surfaces are useful because they tell the reviewer exactly which
+steps are local and which steps remain explicit authority intake. They do not
+convert the cited constructive route into a repo-native proof.
 
 The proof frontier above should be distinguished from an older empirical-contact lane that is already present in the repository.
 
 The source measurement is the CMS Collaboration's 2023 analysis *Measurement of the mass dependence of the transverse momentum of lepton pairs in Drell–Yan production in proton–proton collisions at sqrt(s)=13 TeV*, EPJC 83, 628, DOI `10.1140/epjc/s10052-023-11631-7`, analysis code `CMS-SMP-20-003` / `CERN-EP-2022-053`. The measurement uses 13 TeV proton–proton data and presents ratios of mass-window differential distributions relative to the Z-peak window so that systematic uncertainties partially cancel.
 
-The frozen repository comparison uses HEPData `ins2079374/t43` together with covariance table `t44`, comparing the 50--76 GeV window against the 76--106 GeV Z-peak window. The recorded covariance-aware result is
+**Seiler compatibility note.** The transfer theorem of this section is used to
+place the limiting theory on the path toward the standard
+Osterwalder-Schrader/Wightman framework built in Section 6. Any comparison to
+Seiler's continuum mass-gap conclusions requires an additional compatibility
+check between the constructed limiting objects and the hypotheses of the
+continuum gauge-theory theorem being cited; it is not automatic from finite
+transfer alone.
+
+### 5.2 H3b: vacuum projection continuity
 
 ```text
 chi2                 = 38.8173441173
@@ -292,7 +433,21 @@ mean prediction/data  = 0.9941233097
 freeze commit         = 3205d746639568762c9e97adf4a3672c356bd491
 ```
 
-The repository's bounded W3 criterion is `chi2/dof < 4` together with mean prediction/data in `[0.97,1.03]`, so this t43 lane is recorded as a bounded empirical comparison-law contact. Agda verifies the typed receipt, source binding, digests and claim boundary; the floating-point covariance fit is an external deterministic replay rather than a floating-point calculation rederived inside the Agda kernel.
+Logical-order note. RP.4 is established in Section 6. Lemma 5.3 is stated here
+to keep the continuum-transfer interface in one place; its proof is downstream
+of the reflection-positive vacuum construction.
+
+> **Lemma 5.3 (`H3b` from `H3a` and RP.4).** Assume Theorem 5.2 and suppose the
+> limiting Euclidean theory reconstructed in Section 6 yields a unique vacuum
+> vector `Omega` with positive Hamiltonian gap above the vacuum. Then the finite
+> vacuum projectors converge to the limiting vacuum projector in operator norm:
+>
+> ```text
+> || P_N^Omega - P_infinity^Omega ||_op -> 0.
+> ```
+>
+> Consequently the finite and limiting vacuum-orthogonal sectors are
+> canonically compatible for the purposes of Theorem 5.1.
 
 This result is scientifically interesting because it demonstrates contact with a literal collider observable on QCD data. It is **not** used as evidence for the constructive mass-gap theorem. The formal boundary pins:
 
@@ -325,11 +480,7 @@ or the weaker-but-sufficient state-uniform truncated-correlation operator bound.
 
 Construct the actual literal-Wilson recovery system, including the selected embeddings, continuum Hamiltonian/vacuum, and embedded vacuum-sector graph/Mosco limit. Existing measure/Schwinger/stress convergence infrastructure should be reused only where it proves the same required object.
 
-### 10.3 F4 / common-core same evolution
-
-Identify the physical common invariant core and prove equality of the YM and OS evolutions or their generators there. The downstream uniqueness/compiler machinery already exists.
-
-## 11. Formal support and governance
+## 7. Final mass-gap assembly and claim boundary
 
 The primary focused status surfaces for the 2026-09-17 recut are:
 
@@ -349,29 +500,24 @@ The exact residual brief is `Docs/support/reference/YMAristotleNextRoundExactRes
 
 The paper-facing theorem-variable manifests remain formal-support indices rather than proof substitutes. No terminal `Proved`, `SubmissionReady`, Clay-approval, or external-acceptance status is inferred from a receipt, imported authority, empirical fit, or source-written branch state.
 
-## Appendix A. Claim boundary table
+## Appendix A. Formal-support appendix
+
+The paper-facing theorem-variable manifest is generated by
+`scripts/generate_paper_proof_manifest.py` and recorded at
+`Docs/papers/generated/core_papers_theorem_var_manifest.md`. For Paper 3 it
+indexes the normalized theorem interface
+`DASHI/Papers/YangMills/TheoremInterface.agda` and the associated finite,
+transfer, reflection-positivity, and terminal-guard surfaces. The manifest is a
+formal-support index: it records which Agda/DASHI names are intended to back
+the manuscript interfaces, but it is not a substitute for the analytic
+continuum argument or for external review of the cited constructive inputs.
+
+## Appendix B. Claim boundary table
 
 | Surface | Paid / available | Still open |
 | --- | --- | --- |
-| literal finite SU(2) Wilson measure/form/Hamiltonian/vacuum | finite construction and compiler infrastructure | physical continuum trajectory gap |
-| transfer-operator reduction | decorrelation/phase-separation/form-gap compilers; per-step defect normal form | interacting `c_k` / `Delta` estimate |
-| correlation criterion | truncated correlation -> decorrelator; full density defect -> decorrelator | actual interacting full-slice mixing bound |
-| native KP/Ursell | finite geometric arithmetic and pairwise observable decay assembly | physical tree-graph majorant and observable-to-full-`L^2` upgrade |
-| Bałaban complete-density route | source theorem authority; same beta-history coupling; repository transport compilers | Section-2-density -> literal full-slice mixing theorem |
-| CMP116 route | source/compiler architecture | selected physical localization/application inhabitant |
-| varying carriers | common carrier existence and gap transport compiler | physical embeddings are part of F3 |
-| F3 | generic recovery/compiler surface | actual literal-Wilson embedded graph/Mosco limit |
-| F4 | common-core/generator compiler | actual YM=OS physical evolution equality |
-| CMS t43/t44 | frozen bounded empirical contact, `chi2/dof=2.1565191176` | no promotion to F1/F3/F4 or whole-theory proof |
-
-## Appendix B. Verification boundary
-
-The Lean worker receipts and Agda source state are tracked separately. A completion claim requires fresh exact-head evidence:
-
-1. the relevant Lean project build succeeds on the exact theorem head;
-2. the focused Agda validation/root typechecks on its exact head;
-3. the new tranche contains no unapproved holes/trust escapes;
-4. headline theorem axioms are audited;
-5. the exact remaining hypotheses are displayed.
-
-If any of `F1`, `F3`, or `F4` remains a hypothesis, this manuscript must remain a conditional reduction rather than an unconditional Clay solution.
+| Section 3 identifies the finite self-adjointness and explicit fixed-lattice gap surface. | Character-expansion and constructive lattice-gauge background are cited through `Balaban1988` where used as context. | Any inference that a fixed-lattice finite gap is already the continuum physical mass gap. |
+| Section 4 isolates the uniform finite spectral-margin target conditional on domination. | Balaban/KP-style domination and polymer estimates are cited as the external constructive stress-test surface. | A repo-native first-principles proof of the full domination package in the exact strength consumed here. |
+| Theorem 5.1 states the corrected `H3a`/`H3b` continuum-transfer interface; Theorem 5.2 packages `H3a` from cited multiscale inputs. | The Balaban block-spin/effective-action, fluctuation-integral, large-field/small-field decomposition, and interacting reflection-positive continuum inputs used in the transfer theorem (`Balaban1987`, `Balaban1988`, and surrounding cited constructive work). | Any claim that DASHI has internally rederived the full Balaban multiscale transfer theorem. |
+| Lemma 5.3 derives vacuum-projection continuity from `H3a` and RP.4; Theorem 5.4 derives no spectral pollution below the finite margin. | The existence and compatibility of the reconstructed limiting vacuum are consumed through the RP/OS route. | Spectral-pollution exclusion without the stated norm-resolvent or vacuum-compatibility hypotheses. |
+| Section 6 records the RP.1-RP.4 reconstruction bridge and the Seiler-compatibility boundary; Theorem 7.1 packages the final mass-gap assembly. | Osterwalder-Schrader reconstruction (`OS1973`, `OS1975`), continuum gauge-theory authority boundaries (`Seiler1982`), and asymptotic-freedom background (`GrossWilczek1973`, `Politzer1973`). | Referee/community acceptance, Clay eligibility review, or any terminal claim beyond the candidate proof package stated here. |

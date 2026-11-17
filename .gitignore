@@ -2,9 +2,6 @@ __pycache__/
 *.pyc
 .pytest_cache/
 .venv-fluid/
-.venv/
-*.egg-info/
-media/
 dist/
 build/
 target/
@@ -46,3 +43,4 @@ chatgpt_history*.sqlite*-shm
 codex_history*.sqlite*-wal
 codex_history*.sqlite*-shm
 .repo-index/bench.sqlite3
+.repo-index/index.sqlite3

@@ -18,11 +18,7 @@ onePositive : zero < one
 onePositive = s≤s z≤n
 
 data CompletenessLayer : Set where
-  natDiscrete : CompletenessLayer
-  qqCarrier : CompletenessLayer
-  noCarrier : CompletenessLayer
-  surrealCarrier : CompletenessLayer
-  hilbertCarrier : CompletenessLayer
+  natDiscrete qqCarrier noCarrier surrealCarrier hilbertCarrier : CompletenessLayer
 
 layerCompletenessSupported : CompletenessLayer → Bool
 layerCompletenessSupported natDiscrete = true

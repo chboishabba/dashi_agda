@@ -29,20 +29,27 @@ import DASHI.Interop.PNFPackageCore as PackageCore
 -- quality.
 
 data ArchitectureReceiptStatus : Set where
-  pnfSpectralFieldArchitectureRecorded_intakeOnly : ArchitectureReceiptStatus
+  pnfSpectralFieldArchitectureRecorded_intakeOnly :
+    ArchitectureReceiptStatus
 
 data ArchitectureLayer : Set where
-  coreObjectFibreFieldLayer : ArchitectureLayer
+  coreObjectFibreFieldLayer :
+    ArchitectureLayer
 
-  twoBaseProductBasePNFSummaryLayer : ArchitectureLayer
+  twoBaseProductBasePNFSummaryLayer :
+    ArchitectureLayer
 
-  residualWeightedGraphLaplacianLayer : ArchitectureLayer
+  residualWeightedGraphLaplacianLayer :
+    ArchitectureLayer
 
-  graphDAGTreeProjectionLayer : ArchitectureLayer
+  graphDAGTreeProjectionLayer :
+    ArchitectureLayer
 
-  braidTransportLayer : ArchitectureLayer
+  braidTransportLayer :
+    ArchitectureLayer
 
-  spectralVectorIndexResolverSelectorLayer : ArchitectureLayer
+  spectralVectorIndexResolverSelectorLayer :
+    ArchitectureLayer
 
 canonicalArchitectureLayers : List ArchitectureLayer
 canonicalArchitectureLayers =
@@ -55,35 +62,50 @@ canonicalArchitectureLayers =
   ∷ []
 
 data PipelineStage : Set where
-  rawEvidenceStage : PipelineStage
+  rawEvidenceStage :
+    PipelineStage
 
-  evidenceSpanPNFStage : PipelineStage
+  evidenceSpanPNFStage :
+    PipelineStage
 
-  twoBaseProductBaseCorrectionStage : PipelineStage
+  twoBaseProductBaseCorrectionStage :
+    PipelineStage
 
-  pnfOnlySummaryStage : PipelineStage
+  pnfOnlySummaryStage :
+    PipelineStage
 
-  residualMeetJoinGraphStage : PipelineStage
+  residualMeetJoinGraphStage :
+    PipelineStage
 
-  graphProjectionStage : PipelineStage
+  graphProjectionStage :
+    PipelineStage
 
-  dagProjectionStage : PipelineStage
+  dagProjectionStage :
+    PipelineStage
 
-  treeProjectionStage : PipelineStage
+  treeProjectionStage :
+    PipelineStage
 
-  fibreFieldStage : PipelineStage
+  fibreFieldStage :
+    PipelineStage
 
-  braidTransportStage : PipelineStage
+  braidTransportStage :
+    PipelineStage
 
-  spectralCoordinatesStage : PipelineStage
+  spectralCoordinatesStage :
+    PipelineStage
 
-  vectorIndexOverReferencesStage : PipelineStage
+  vectorIndexOverReferencesStage :
+    PipelineStage
 
-  resolverSelectorStage : PipelineStage
+  resolverSelectorStage :
+    PipelineStage
 
-  itirValidationStage : PipelineStage
+  itirValidationStage :
+    PipelineStage
 
-  supportPacketAnswerSignalStage : PipelineStage
+  supportPacketAnswerSignalStage :
+    PipelineStage
 
 canonicalPipeline : List PipelineStage
 canonicalPipeline =
@@ -105,23 +127,32 @@ canonicalPipeline =
   ∷ []
 
 data GovernanceBoundary : Set where
-  architectureIntakeOnlyBoundary : GovernanceBoundary
+  architectureIntakeOnlyBoundary :
+    GovernanceBoundary
 
-  noRuntimeParserBoundary : GovernanceBoundary
+  noRuntimeParserBoundary :
+    GovernanceBoundary
 
-  noExternalRuntimeImplementationBoundary : GovernanceBoundary
+  noExternalRuntimeImplementationBoundary :
+    GovernanceBoundary
 
-  noANNBackendBoundary : GovernanceBoundary
+  noANNBackendBoundary :
+    GovernanceBoundary
 
-  pnfOnlySummaryBoundary : GovernanceBoundary
+  pnfOnlySummaryBoundary :
+    GovernanceBoundary
 
-  vectorNonAuthorityBoundary : GovernanceBoundary
+  vectorNonAuthorityBoundary :
+    GovernanceBoundary
 
-  noSpectralUtilityProofBoundary : GovernanceBoundary
+  noSpectralUtilityProofBoundary :
+    GovernanceBoundary
 
-  noSemanticTruthBoundary : GovernanceBoundary
+  noSemanticTruthBoundary :
+    GovernanceBoundary
 
-  noTradingTruthBoundary : GovernanceBoundary
+  noTradingTruthBoundary :
+    GovernanceBoundary
 
 canonicalGovernanceBoundaries : List GovernanceBoundary
 canonicalGovernanceBoundaries =
@@ -137,21 +168,29 @@ canonicalGovernanceBoundaries =
   ∷ []
 
 data ReceiptProjectionKind : Set where
-  projectCoreObjectFibreField : ReceiptProjectionKind
+  projectCoreObjectFibreField :
+    ReceiptProjectionKind
 
-  projectTwoBaseProductBasePNFSummary : ReceiptProjectionKind
+  projectTwoBaseProductBasePNFSummary :
+    ReceiptProjectionKind
 
-  projectResidualWeightedGraphLaplacian : ReceiptProjectionKind
+  projectResidualWeightedGraphLaplacian :
+    ReceiptProjectionKind
 
-  projectGraphProjection : ReceiptProjectionKind
+  projectGraphProjection :
+    ReceiptProjectionKind
 
-  projectDAGProjection : ReceiptProjectionKind
+  projectDAGProjection :
+    ReceiptProjectionKind
 
-  projectTreeProjection : ReceiptProjectionKind
+  projectTreeProjection :
+    ReceiptProjectionKind
 
-  projectBraidTransport : ReceiptProjectionKind
+  projectBraidTransport :
+    ReceiptProjectionKind
 
-  projectSpectralVectorIndexResolverSelector : ReceiptProjectionKind
+  projectSpectralVectorIndexResolverSelector :
+    ReceiptProjectionKind
 
 record ComponentReceiptRef : Set where
   field

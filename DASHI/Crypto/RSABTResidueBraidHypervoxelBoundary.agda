@@ -30,7 +30,8 @@ import DASHI.Physics.Closure.GeometryAnalogueClassification as Geo
 -- implementation, or any protocol / implementation authority promotion.
 
 data RSABTResidueBraidHypervoxelBoundaryStatus : Set where
-  rsaBtResidueBraidHypervoxelBoundaryRecordedNoPromotion : RSABTResidueBraidHypervoxelBoundaryStatus
+  rsaBtResidueBraidHypervoxelBoundaryRecordedNoPromotion :
+    RSABTResidueBraidHypervoxelBoundaryStatus
 
 candidateSurfaceLabel : String
 candidateSurfaceLabel =

@@ -11,10 +11,6 @@ import DASHI.Biology.BodyMemoryBiologyRegression as Regression
 import DASHI.Biology.EpigeneticBodyMemoryBridge as Epigenetic
 import DASHI.Biology.FunctionalConnectomeBodyMemoryBridge as Functional
 import DASHI.Biology.TraumaClinicalGovernanceBoundary as Governance
-import DASHI.Interop.BodyKeepsScoreCandidateBoundary as BodyScore
-import DASHI.Interop.BodyKeepsScoreParityCompiledInverseAdapter as ParityAdapter
-import DASHI.Interop.BodyKeepsScoreResidualGeometry as ResidualGeometry
-import DASHI.Interop.BodyKeepsScoreStageCarryBridge as StageCarry
 
 ------------------------------------------------------------------------
 -- Trauma/body-memory candidate integration facade.
@@ -23,46 +19,51 @@ import DASHI.Interop.BodyKeepsScoreStageCarryBridge as StageCarry
 -- together:
 --
 --   - body-state residual fibres from BodyKeepsScoreResidualBridge,
---   - the RSA/compiled-inverse BodyKeepsScoreCandidateBoundary,
---   - the even/odd parity and compiled-inverse adapter,
---   - PNF-style candidate residual geometry,
---   - the Stage 0..11 and j+1 carry bridge,
---   - epigenetic regulation candidates,
---   - fMRI/connectome proxy placement,
+--   - epigenetic regulation candidates from EpigeneticBodyMemoryBridge,
+--   - fMRI/connectome proxy placement from FunctionalConnectomeBodyMemoryBridge,
 --   - the fail-closed clinical governance boundary,
 --   - and the stable body-memory regression registry.
 --
 -- Hard gates are explicit and remain false where authority would otherwise
--- leak in: no hidden factorisation, diagnosis, cure, forced disclosure,
--- treatment prescription, person-as-stage-eight classification, or clinical
--- authority.
-
+-- leak in:
+--
+--   - candidate only,
+--   - public symptom is not hidden factorization,
+--   - plus-one safety seed is not cure/diagnosis/factorization,
+--   - no clinical authority.
 
 data TraumaBodyMemoryIntegrationAxis : Set where
-  residualFibreAxis : TraumaBodyMemoryIntegrationAxis
-  bodyScoreCompiledInverseAxis : TraumaBodyMemoryIntegrationAxis
-  bodyScoreRSAPlusOneAnalogyAxis : TraumaBodyMemoryIntegrationAxis
-  bodyScoreParityAxis : TraumaBodyMemoryIntegrationAxis
-  bodyScoreResidualGeometryAxis : TraumaBodyMemoryIntegrationAxis
-  bodyScoreStageCarryAxis : TraumaBodyMemoryIntegrationAxis
-  epigeneticRegulationAxis : TraumaBodyMemoryIntegrationAxis
-  fmriConnectomeProxyAxis : TraumaBodyMemoryIntegrationAxis
-  governanceBoundaryAxis : TraumaBodyMemoryIntegrationAxis
-  regressionRegistryAxis : TraumaBodyMemoryIntegrationAxis
-  candidateOnlyAxis : TraumaBodyMemoryIntegrationAxis
-  publicSymptomAxis : TraumaBodyMemoryIntegrationAxis
-  safetySeedAxis : TraumaBodyMemoryIntegrationAxis
-  clinicalAuthorityAxis : TraumaBodyMemoryIntegrationAxis
+  residualFibreAxis :
+    TraumaBodyMemoryIntegrationAxis
+
+  epigeneticRegulationAxis :
+    TraumaBodyMemoryIntegrationAxis
+
+  fmriConnectomeProxyAxis :
+    TraumaBodyMemoryIntegrationAxis
+
+  governanceBoundaryAxis :
+    TraumaBodyMemoryIntegrationAxis
+
+  regressionRegistryAxis :
+    TraumaBodyMemoryIntegrationAxis
+
+  candidateOnlyAxis :
+    TraumaBodyMemoryIntegrationAxis
+
+  publicSymptomAxis :
+    TraumaBodyMemoryIntegrationAxis
+
+  safetySeedAxis :
+    TraumaBodyMemoryIntegrationAxis
+
+  clinicalAuthorityAxis :
+    TraumaBodyMemoryIntegrationAxis
 
 canonicalTraumaBodyMemoryIntegrationAxes :
   List TraumaBodyMemoryIntegrationAxis
 canonicalTraumaBodyMemoryIntegrationAxes =
   residualFibreAxis
-  ∷ bodyScoreCompiledInverseAxis
-  ∷ bodyScoreRSAPlusOneAnalogyAxis
-  ∷ bodyScoreParityAxis
-  ∷ bodyScoreResidualGeometryAxis
-  ∷ bodyScoreStageCarryAxis
   ∷ epigeneticRegulationAxis
   ∷ fmriConnectomeProxyAxis
   ∷ governanceBoundaryAxis
@@ -77,12 +78,6 @@ canonicalTraumaBodyMemoryCandidateBridgeNotes :
   List String
 canonicalTraumaBodyMemoryCandidateBridgeNotes =
   "Body-state residual fibres remain candidate-only and do not become diagnosis, treatment, or cure"
-  ∷ "The BodyKeepsScoreCandidateBoundary indexes the RSA +1 identity-section analogy and compiled world inverse reading"
-  ∷ "The parity adapter keeps live self/world in the even separated lane and the compiled inverse in the odd collapsed lane"
-  ∷ "The compiled inverse reading says body-score residuals can be read as old world inverse charts failing to glue to the current world"
-  ∷ "The residual graph is candidate PNF-style geometry; proximity or adjacency does not imply truth or diagnosis"
-  ∷ "Stage 8 is failed gluing and never a person classification"
-  ∷ "The j+1 reading is a candidate re-charting obligation, not a treatment prescription or clinical authority"
   ∷ "Epigenetic regulation is treated as a candidate observation surface, not inherited destiny or clinical authority"
   ∷ "fMRI and connectome are proxy carriers only; reverse inference and mind-reading stay blocked by the imported bridge"
   ∷ "The trauma clinical governance boundary is imported as a fail-closed boundary surface"
@@ -99,48 +94,6 @@ record TraumaBodyMemoryCandidateBridge : Setω where
 
     bodyKeepsScoreResidualBridgeIsCanonical :
       Bool
-
-    bodyKeepsScoreCandidateBoundary :
-      BodyScore.BodyKeepsScoreCandidateBoundary
-
-    bodyKeepsScoreCandidateBoundaryIsCanonical :
-      bodyKeepsScoreCandidateBoundary ≡
-      BodyScore.canonicalBodyKeepsScoreCandidateBoundary
-
-    bodyScoreRSAAnalogy :
-      BodyScore.BodyKeepsScoreRSAAnalogyReceipt
-
-    bodyScoreRSAAnalogyIsCanonical :
-      bodyScoreRSAAnalogy ≡
-      BodyScore.canonicalBodyKeepsScoreRSAAnalogyReceipt
-
-    bodyScorePlusOneSection :
-      BodyScore.BodyPlusOneIdentitySection
-
-    bodyScorePlusOneSectionIsCanonical :
-      bodyScorePlusOneSection ≡
-      BodyScore.canonicalBodyPlusOneIdentitySection
-
-    bodyScoreParityAdapter :
-      ParityAdapter.BodyScoreParityCompiledInverseAdapter
-
-    bodyScoreParityAdapterIsCanonical :
-      bodyScoreParityAdapter ≡
-      ParityAdapter.canonicalBodyScoreParityCompiledInverseAdapter
-
-    bodyScoreResidualGeometry :
-      ResidualGeometry.BodyScoreResidualGeometry
-
-    bodyScoreResidualGeometryIsCanonical :
-      bodyScoreResidualGeometry ≡
-      ResidualGeometry.canonicalBodyScoreResidualGeometry
-
-    bodyScoreStageCarryBridge :
-      StageCarry.BodyScoreStageCarryBridge
-
-    bodyScoreStageCarryBridgeIsCanonical :
-      bodyScoreStageCarryBridge ≡
-      StageCarry.canonicalBodyScoreStageCarryBridge
 
     epigeneticBodyMemoryBridge :
       Epigenetic.EpigeneticBodyMemoryBridge
@@ -191,24 +144,6 @@ record TraumaBodyMemoryCandidateBridge : Setω where
     plusOneSafetySeedIsNotCureDiagnosisFactorizationIsFalse :
       plusOneSafetySeedIsNotCureDiagnosisFactorization ≡ false
 
-    compiledInverseJPlusOneIsNotTreatmentPrescription :
-      Bool
-
-    compiledInverseJPlusOneIsNotTreatmentPrescriptionIsFalse :
-      compiledInverseJPlusOneIsNotTreatmentPrescription ≡ false
-
-    stageEightIsNotPersonClassification :
-      Bool
-
-    stageEightIsNotPersonClassificationIsFalse :
-      stageEightIsNotPersonClassification ≡ false
-
-    residualGeometryIsNotDiagnosis :
-      Bool
-
-    residualGeometryIsNotDiagnosisIsFalse :
-      residualGeometryIsNotDiagnosis ≡ false
-
     noClinicalAuthority :
       Bool
 
@@ -240,30 +175,6 @@ canonicalTraumaBodyMemoryCandidateBridge =
         BK.canonicalBodyKeepsScoreResidualBridge
     ; bodyKeepsScoreResidualBridgeIsCanonical =
         true
-    ; bodyKeepsScoreCandidateBoundary =
-        BodyScore.canonicalBodyKeepsScoreCandidateBoundary
-    ; bodyKeepsScoreCandidateBoundaryIsCanonical =
-        refl
-    ; bodyScoreRSAAnalogy =
-        BodyScore.canonicalBodyKeepsScoreRSAAnalogyReceipt
-    ; bodyScoreRSAAnalogyIsCanonical =
-        refl
-    ; bodyScorePlusOneSection =
-        BodyScore.canonicalBodyPlusOneIdentitySection
-    ; bodyScorePlusOneSectionIsCanonical =
-        refl
-    ; bodyScoreParityAdapter =
-        ParityAdapter.canonicalBodyScoreParityCompiledInverseAdapter
-    ; bodyScoreParityAdapterIsCanonical =
-        refl
-    ; bodyScoreResidualGeometry =
-        ResidualGeometry.canonicalBodyScoreResidualGeometry
-    ; bodyScoreResidualGeometryIsCanonical =
-        refl
-    ; bodyScoreStageCarryBridge =
-        StageCarry.canonicalBodyScoreStageCarryBridge
-    ; bodyScoreStageCarryBridgeIsCanonical =
-        refl
     ; epigeneticBodyMemoryBridge =
         Epigenetic.canonicalEpigeneticBodyMemoryBridge
     ; epigeneticBodyMemoryBridgeIsCanonical =
@@ -296,18 +207,6 @@ canonicalTraumaBodyMemoryCandidateBridge =
         false
     ; plusOneSafetySeedIsNotCureDiagnosisFactorizationIsFalse =
         refl
-    ; compiledInverseJPlusOneIsNotTreatmentPrescription =
-        false
-    ; compiledInverseJPlusOneIsNotTreatmentPrescriptionIsFalse =
-        refl
-    ; stageEightIsNotPersonClassification =
-        false
-    ; stageEightIsNotPersonClassificationIsFalse =
-        refl
-    ; residualGeometryIsNotDiagnosis =
-        false
-    ; residualGeometryIsNotDiagnosisIsFalse =
-        refl
     ; noClinicalAuthority =
         false
     ; noClinicalAuthorityIsFalse =
@@ -321,7 +220,7 @@ canonicalTraumaBodyMemoryCandidateBridge =
     ; integrationNotesAreCanonical =
         refl
     ; integrationReading =
-        "Candidate-only trauma/body-memory facade: residual fibres, RSA +1 identity-section analogy, even/odd compiled inverse transport, PNF-style residual geometry, Stage 0..11 and j+1 carry, epigenetic regulation, fMRI/connectome proxy placement, and governance boundaries are integrated as a fail-closed surface with no hidden-factorization promotion, no cure/diagnosis/factorization from the safety seed, no treatment prescription from j+1, no person-as-stage-eight classification, and no clinical authority."
+        "Candidate-only trauma/body-memory facade: residual fibres, epigenetic regulation, fMRI/connectome proxy placement, and governance boundaries are integrated as a fail-closed surface with no hidden-factorization promotion, no cure/diagnosis/factorization from the safety seed, and no clinical authority."
     }
 
 canonicalTraumaBodyMemoryCandidateBridgeIsCandidateOnly :
@@ -345,33 +244,6 @@ canonicalTraumaBodyMemoryCandidateBridgeSafetySeedIsFalse :
   false
 canonicalTraumaBodyMemoryCandidateBridgeSafetySeedIsFalse =
   plusOneSafetySeedIsNotCureDiagnosisFactorizationIsFalse
-    canonicalTraumaBodyMemoryCandidateBridge
-
-canonicalTraumaBodyMemoryCandidateBridgeCompiledInverseJPlusOneIsFalse :
-  compiledInverseJPlusOneIsNotTreatmentPrescription
-    canonicalTraumaBodyMemoryCandidateBridge
-  ≡
-  false
-canonicalTraumaBodyMemoryCandidateBridgeCompiledInverseJPlusOneIsFalse =
-  compiledInverseJPlusOneIsNotTreatmentPrescriptionIsFalse
-    canonicalTraumaBodyMemoryCandidateBridge
-
-canonicalTraumaBodyMemoryCandidateBridgeStageEightIsFalse :
-  stageEightIsNotPersonClassification
-    canonicalTraumaBodyMemoryCandidateBridge
-  ≡
-  false
-canonicalTraumaBodyMemoryCandidateBridgeStageEightIsFalse =
-  stageEightIsNotPersonClassificationIsFalse
-    canonicalTraumaBodyMemoryCandidateBridge
-
-canonicalTraumaBodyMemoryCandidateBridgeResidualGeometryIsFalse :
-  residualGeometryIsNotDiagnosis
-    canonicalTraumaBodyMemoryCandidateBridge
-  ≡
-  false
-canonicalTraumaBodyMemoryCandidateBridgeResidualGeometryIsFalse =
-  residualGeometryIsNotDiagnosisIsFalse
     canonicalTraumaBodyMemoryCandidateBridge
 
 canonicalTraumaBodyMemoryCandidateBridgeNoClinicalAuthorityIsFalse :

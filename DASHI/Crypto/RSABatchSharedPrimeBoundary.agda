@@ -40,17 +40,23 @@ listCount (_ ∷ xs) =
 -- Boundary vocabulary.
 
 data RSABatchSharedPrimeBoundaryKind : Set where
-  sourceConditionedModulusBatchKind : RSABatchSharedPrimeBoundaryKind
+  sourceConditionedModulusBatchKind :
+    RSABatchSharedPrimeBoundaryKind
 
-  pairwiseModulusPairKind : RSABatchSharedPrimeBoundaryKind
+  pairwiseModulusPairKind :
+    RSABatchSharedPrimeBoundaryKind
 
-  gcdWitnessCandidateKind : RSABatchSharedPrimeBoundaryKind
+  gcdWitnessCandidateKind :
+    RSABatchSharedPrimeBoundaryKind
 
-  sharedPrimeCollapseCandidateKind : RSABatchSharedPrimeBoundaryKind
+  sharedPrimeCollapseCandidateKind :
+    RSABatchSharedPrimeBoundaryKind
 
-  recoveredFactorWitnessBoundaryKind : RSABatchSharedPrimeBoundaryKind
+  recoveredFactorWitnessBoundaryKind :
+    RSABatchSharedPrimeBoundaryKind
 
-  artifactSpecificVulnerabilityReceiptKind : RSABatchSharedPrimeBoundaryKind
+  artifactSpecificVulnerabilityReceiptKind :
+    RSABatchSharedPrimeBoundaryKind
 
   namedRSABatchSharedPrimeBoundaryKind :
     String →
@@ -73,15 +79,20 @@ canonicalRSABatchSharedPrimeBoundaryKindCount =
   listCount canonicalRSABatchSharedPrimeBoundaryKinds
 
 data RSABatchAuthorityClaim : Set where
-  generalRSABreakClaim : RSABatchAuthorityClaim
+  generalRSABreakClaim :
+    RSABatchAuthorityClaim
 
-  factoringOracleClaim : RSABatchAuthorityClaim
+  factoringOracleClaim :
+    RSABatchAuthorityClaim
 
-  sourceWideCompromiseClaim : RSABatchAuthorityClaim
+  sourceWideCompromiseClaim :
+    RSABatchAuthorityClaim
 
-  semanticSecurityBreakClaim : RSABatchAuthorityClaim
+  semanticSecurityBreakClaim :
+    RSABatchAuthorityClaim
 
-  productionAdvisoryAuthorityClaim : RSABatchAuthorityClaim
+  productionAdvisoryAuthorityClaim :
+    RSABatchAuthorityClaim
 
   namedRSABatchAuthorityClaim :
     String →

@@ -53,15 +53,20 @@ canonicalEmptyPromotionFiniteListCountIsZero =
   refl
 
 data EmptyPromotionReceiptComponent : Set where
-  emptyPromotionTokenComponent : EmptyPromotionReceiptComponent
+  emptyPromotionTokenComponent :
+    EmptyPromotionReceiptComponent
 
-  emptyPromotionImpossibleComponent : EmptyPromotionReceiptComponent
+  emptyPromotionImpossibleComponent :
+    EmptyPromotionReceiptComponent
 
-  emptyPromotionListComponent : EmptyPromotionReceiptComponent
+  emptyPromotionListComponent :
+    EmptyPromotionReceiptComponent
 
-  emptyPromotionFiniteListComponent : EmptyPromotionReceiptComponent
+  emptyPromotionFiniteListComponent :
+    EmptyPromotionReceiptComponent
 
-  emptyPromotionGenericReceiptAdapterComponent : EmptyPromotionReceiptComponent
+  emptyPromotionGenericReceiptAdapterComponent :
+    EmptyPromotionReceiptComponent
 
 canonicalEmptyPromotionReceiptComponents :
   List EmptyPromotionReceiptComponent

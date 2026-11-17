@@ -24,7 +24,8 @@ import DASHI.Physics.Closure.YMFinalStateReceipt as Final
 -- terminal promotion fail-closed.
 
 data YangMillsPaperStatus : Set where
-  importedReceiptsAssembled_clayTerminalFalse : YangMillsPaperStatus
+  importedReceiptsAssembled_clayTerminalFalse :
+    YangMillsPaperStatus
 
 record YangMillsPaperTheoremInterface : Setω where
   field

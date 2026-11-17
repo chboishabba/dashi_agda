@@ -21,7 +21,8 @@ import DASHI.Interop.QiCarrierFieldBridge as QiBridge
 -- qualification surfaces while keeping all authority lanes blocked.
 
 data YinYangQiBridgeStatus : Set where
-  yinYangQiBridge_candidateOnly : YinYangQiBridgeStatus
+  yinYangQiBridge_candidateOnly :
+    YinYangQiBridgeStatus
 
 data YinYangQiPromotion : Set where
 
@@ -31,37 +32,53 @@ yinYangQiPromotionImpossible :
 yinYangQiPromotionImpossible ()
 
 data YinYangPolarityRowKind : Set where
-  yinStillness : YinYangPolarityRowKind
+  yinStillness :
+    YinYangPolarityRowKind
 
-  yangMovement : YinYangPolarityRowKind
+  yangMovement :
+    YinYangPolarityRowKind
 
-  balanceThreshold : YinYangPolarityRowKind
+  balanceThreshold :
+    YinYangPolarityRowKind
 
-  breathCirculation : YinYangPolarityRowKind
+  breathCirculation :
+    YinYangPolarityRowKind
 
-  residualQuiet : YinYangPolarityRowKind
+  residualQuiet :
+    YinYangPolarityRowKind
 
-  relationCycle : YinYangPolarityRowKind
+  relationCycle :
+    YinYangPolarityRowKind
 
-  seedAttention : YinYangPolarityRowKind
+  seedAttention :
+    YinYangPolarityRowKind
 
-  seedThreshold : YinYangPolarityRowKind
+  seedThreshold :
+    YinYangPolarityRowKind
 
-  carryBreath : YinYangPolarityRowKind
+  carryBreath :
+    YinYangPolarityRowKind
 
-  carryBody : YinYangPolarityRowKind
+  carryBody :
+    YinYangPolarityRowKind
 
-  carryMemory : YinYangPolarityRowKind
+  carryMemory :
+    YinYangPolarityRowKind
 
-  carryResidual : YinYangPolarityRowKind
+  carryResidual :
+    YinYangPolarityRowKind
 
-  boundaryThreshold : YinYangPolarityRowKind
+  boundaryThreshold :
+    YinYangPolarityRowKind
 
-  boundaryRelation : YinYangPolarityRowKind
+  boundaryRelation :
+    YinYangPolarityRowKind
 
-  bodyMovement : YinYangPolarityRowKind
+  bodyMovement :
+    YinYangPolarityRowKind
 
-  bodyPosture : YinYangPolarityRowKind
+  bodyPosture :
+    YinYangPolarityRowKind
 
 canonicalYinYangPolarityRowKinds :
   List YinYangPolarityRowKind
@@ -85,17 +102,23 @@ canonicalYinYangPolarityRowKinds =
   ∷ []
 
 data YinYangQiLensProfile : Set where
-  genericLensProfile : YinYangQiLensProfile
+  genericLensProfile :
+    YinYangQiLensProfile
 
-  gradientLensProfile : YinYangQiLensProfile
+  gradientLensProfile :
+    YinYangQiLensProfile
 
-  seedLensProfile : YinYangQiLensProfile
+  seedLensProfile :
+    YinYangQiLensProfile
 
-  carryLensProfile : YinYangQiLensProfile
+  carryLensProfile :
+    YinYangQiLensProfile
 
-  boundaryLensProfile : YinYangQiLensProfile
+  boundaryLensProfile :
+    YinYangQiLensProfile
 
-  bodyLensProfile : YinYangQiLensProfile
+  bodyLensProfile :
+    YinYangQiLensProfile
 
 rowKindLensProfile :
   YinYangPolarityRowKind →

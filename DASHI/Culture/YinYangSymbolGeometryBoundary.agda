@@ -25,7 +25,8 @@ listCount (_ ∷ xs) =
   suc (listCount xs)
 
 data YinYangSymbolGeometryBoundaryStatus : Set where
-  candidateOnlyGeometryBoundary : YinYangSymbolGeometryBoundaryStatus
+  candidateOnlyGeometryBoundary :
+    YinYangSymbolGeometryBoundaryStatus
 
 data GeometryAuthorityKind : Set where
   empiricalAuthorityKind : GeometryAuthorityKind

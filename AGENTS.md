@@ -1,51 +1,40 @@
 # Agent Notes
 
-## Source attribution is mandatory repository style
+## Agda And Nix
 
-For any source-derived module, theorem surface, empirical claim, calibration,
-bridge, dataset use, standard, or external construction, attach **recoverable
-source attribution whenever it is available**. Do not leave externally derived
-claims source-free.
+This repository has its own local `flake.nix` and `flake.lock`. Treat them as
+the reproducibility authority for Dashi artifacts and baked references. Do not
+update or rewrite the Dashi flake/lock just to get a newer Agda, unless the user
+explicitly asks for that migration.
 
-Prefer the strongest stable identifier available, roughly in this order:
+There are two Agda tracks. Keep them separate:
 
-1. DOI (and optionally its `https://doi.org/...` resolver URL);
-2. another stable scholarly/standards/archive identifier (arXiv ID/DOI,
-   PMID/PMCID, ISBN, RFC, Handle, dataset ID, etc.);
-3. a canonical publisher, institutional, project, or repository URL;
-4. author + title + venue/year;
-5. any other accurate provenance that lets a reviewer recover the source.
+- **Track A, authoritative:** use the Dashi flake/pinned toolchain for final
+  `DASHI/Everything.agda` promotion checks. This track preserves baked refs and
+  reproducibility, even if it is slower.
+- **Track B, draft worker:** use the neighboring Agda checkout at
+  `/home/c/Documents/code/agda`, which builds Agda 2.9.0 and supports native
+  parallel import checking via `-j[N]` / `--parallel[=N]`. Track B is fast
+  feedback only and must not block promotion by itself.
 
-A missing DOI is **not** permission to omit attribution. A link, author, title,
-theorem/section locator, repository commit, dataset version, or other useful
-provenance is preferable to silence. Never invent metadata that is not known.
+The preferred wrapper for this workflow is:
 
-For source-derived Agda, put provenance near the top of the module and, when
-source identity is structurally important, expose it through a typed
-source/registry/attribution surface rather than only a prose comment. Preserve
-the distinction between:
-
-```text
-external source claim / datum
-        !=
-DASHI formal reconstruction
-        !=
-DASHI cross-source inference
-        !=
-new DASHI theorem / synthetic extension
-        !=
-promotion / external adjudication
+```bash
+scripts/run_agda29_parallel_check.sh
+scripts/run_agda29_parallel_check.sh DASHI/Core/FormalStructureLawCore.agda
+AGDA_JOBS=4 scripts/run_agda29_parallel_check.sh DASHI/Everything.agda
 ```
 
-If a source merely motivates a new DASHI witness or theorem, cite it as source
-calibration and explicitly label the new mathematics as a DASHI extension; do
-not attribute repository mathematics back to the source authors.
+Workers and subagents that are explicitly allowed to run Agda should use that
+wrapper, not `agda` directly and not the old `run_agda29_shadow_check` name.
+For normal focused checks, this is the command to hand to agents:
 
-The normative detailed policy is [`Docs/SourceAttributionPolicy.md`](Docs/SourceAttributionPolicy.md).
-A source-derived change should normally fail review when recoverable provenance
-was available but omitted.
+```bash
+scripts/run_agda29_parallel_check.sh DASHI/Path/To/Target.agda
+```
 
-## Operational notes
+For Python harnesses or sandboxed callers that cannot invoke `nix build`
+inside the wrapper, pre-resolve the binary once and pass it through:
 
 ```bash
 AGDA_BIN="$(nix build --no-link --print-out-paths /home/c/Documents/code/agda#debug.bin)/bin/agda"

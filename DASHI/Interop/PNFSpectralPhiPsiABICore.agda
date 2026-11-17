@@ -19,16 +19,21 @@ import DASHI.Interop.PNFSpectralCoordinateRebuildability as Rebuild
 -- truth, committed support, admissibility, or runtime authority.
 
 data PNFPhiPsiABIStatus : Set where
-  checkedCandidateOnlyPhiPsiSocketNoPromotion : PNFPhiPsiABIStatus
+  checkedCandidateOnlyPhiPsiSocketNoPromotion :
+    PNFPhiPsiABIStatus
 
 data PNFPhiPsiABIComponent : Set where
-  phiCoordinateTableComponent : PNFPhiPsiABIComponent
+  phiCoordinateTableComponent :
+    PNFPhiPsiABIComponent
 
-  psiProbeTableComponent : PNFPhiPsiABIComponent
+  psiProbeTableComponent :
+    PNFPhiPsiABIComponent
 
-  phiPsiPairingComponent : PNFPhiPsiABIComponent
+  phiPsiPairingComponent :
+    PNFPhiPsiABIComponent
 
-  numericABIBoundaryComponent : PNFPhiPsiABIComponent
+  numericABIBoundaryComponent :
+    PNFPhiPsiABIComponent
 
 canonicalPNFPhiPsiABIComponents :
   List PNFPhiPsiABIComponent
@@ -169,13 +174,17 @@ canonicalPhiCoordinateTableIsCanonical =
 -- Psi: probe/query/resolver/selector proposal rows over Phi.
 
 data PsiProposalKind : Set where
-  psiProbeProposal : PsiProposalKind
+  psiProbeProposal :
+    PsiProposalKind
 
-  psiQueryProposal : PsiProposalKind
+  psiQueryProposal :
+    PsiProposalKind
 
-  psiResolverProposal : PsiProposalKind
+  psiResolverProposal :
+    PsiProposalKind
 
-  psiSelectorProposal : PsiProposalKind
+  psiSelectorProposal :
+    PsiProposalKind
 
 canonicalPsiProposalKinds :
   List PsiProposalKind

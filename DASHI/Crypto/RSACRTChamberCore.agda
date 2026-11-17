@@ -49,7 +49,8 @@ canonicalResidueChamberPairCount =
   listCount canonicalResidueChamberPairLabels
 
 data RSACRTChamberCoreStatus : Set where
-  rsaCrtChamberCoreRecordedNoPromotion : RSACRTChamberCoreStatus
+  rsaCrtChamberCoreRecordedNoPromotion :
+    RSACRTChamberCoreStatus
 
 record RSACRTResiduePairRow : Set where
   field

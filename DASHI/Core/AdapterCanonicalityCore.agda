@@ -15,13 +15,17 @@ import DASHI.Core.GenericReceipt as GenericReceipt
 -- does not promote authority.
 
 data AdapterCanonicalityKind : Set where
-  genericAdapterKind : AdapterCanonicalityKind
+  genericAdapterKind :
+    AdapterCanonicalityKind
 
-  receiptAdapterKind : AdapterCanonicalityKind
+  receiptAdapterKind :
+    AdapterCanonicalityKind
 
-  authorityAdapterKind : AdapterCanonicalityKind
+  authorityAdapterKind :
+    AdapterCanonicalityKind
 
-  bridgeAdapterKind : AdapterCanonicalityKind
+  bridgeAdapterKind :
+    AdapterCanonicalityKind
 
   namedAdapterKind :
     String →
@@ -40,13 +44,17 @@ canonicalAdapterCanonicalityKinds =
 -- Concrete canonical adapter surface.
 
 data AdapterSurface : Set where
-  genericAdapter : AdapterSurface
+  genericAdapter :
+    AdapterSurface
 
-  receiptAdapter : AdapterSurface
+  receiptAdapter :
+    AdapterSurface
 
-  authorityAdapter : AdapterSurface
+  authorityAdapter :
+    AdapterSurface
 
-  bridgeAdapter : AdapterSurface
+  bridgeAdapter :
+    AdapterSurface
 
   namedAdapter :
     String →
