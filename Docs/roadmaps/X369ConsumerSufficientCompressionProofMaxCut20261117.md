@@ -1498,3 +1498,49 @@ history reactivation and typed semantic consumers;
 original performance and runtime calibration.
 CI and kernel acceptance are explicitly deferred
 by user instruction, not silently marked passed.
+
+
+## 17 Nov final structural max-cut: original recurrent-history observability rank
+
+New owner:
+`Docs/roadmaps/X369R4HistoryObservabilityRankMaxCut20261117.md`.
+SymPy source:
+`scripts/check_x369_r4_circulant_history_sufficiency_sympy.py`.
+
+The original shared directed head has a C3-circulant
+3×3 history-observation matrix `M_w`, with exact
+factorization
+
+    det(M_w) = (ws+wf+wr) * q(ws,wf,wr)
+
+and squared singular spectrum
+
+    (ws+wf+wr)^2, q(w), q(w).
+
+For an arbitrary future-activation consumer, the
+history observation rank is generically 3,
+drops to 2 for a nonzero zero-sum head, to 1
+for equal nonzero head weights, and 0 only
+for a zero head. This is the precise original
+directed-score compression/no-go boundary.
+The mixed q-gated source action remains
+bijective in exact arithmetic because its
+mask depends only on C3-invariant q energies,
+so it does not evade generic-rank observability.
+
+The original C2 history `abs(h)`, orientation
+scorer, FFN and learned transition may still
+distinguish the directed-null DC history
+component. Full recurrent state sufficiency
+requires the joint consumer and transition
+fibres, not just the directed score's rank.
+A source-compatible finite counterexample
+is documented in the new owner.
+
+Local SymPy exact-rank/Gram checks passed;
+no actual trained checkpoint singular-value
+receipt, model precision or hardware runtime
+was supplied. This is the next high-alpha
+MAX-CUT link between the user's original
+compression/sufficiency conjecture and
+future inactive-history correctness.
