@@ -97,8 +97,11 @@ sameOriginalSpatialExteriorFlux jet a =
   trans
     (Open.originalFullVectorJetOpenBoundaryFlux jet
       (SameOriginalSpaceTimeMaxwellAdmission.originalTrace a))
-    (cong Open.exteriorOrientedPoyntingFlux
-      (SameOriginalSpaceTimeMaxwellAdmission.selectedFacesSame a))
+    (trans
+      (sym (Open.OriginalMaxwellOpenFaceTrace.boundaryFluxIsOriginalPort
+        (SameOriginalSpaceTimeMaxwellAdmission.originalTrace a)))
+      (cong Open.exteriorOrientedPoyntingFlux
+        (SameOriginalSpaceTimeMaxwellAdmission.selectedFacesSame a)))
 
 -- The finite-space-time budget plus source, load and controller
 -- identifications is a proved same-window equality, not a separately
