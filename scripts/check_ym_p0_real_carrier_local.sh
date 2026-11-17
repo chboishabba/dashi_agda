@@ -34,6 +34,7 @@ targets=(
   DASHI/Physics/YangMills/YMClayOriginalRationalSU2ToBishopTraceExact.agda
   DASHI/Physics/YangMills/YMClayOriginalRationalSU2BishopUnitaryWeldExact.agda
   DASHI/Physics/YangMills/YMClaySU2PochhammerMomentNumeratorsExact.agda
+  DASHI/Physics/YangMills/YMClayNativeSixPlaneGaugeSameSourceExact.agda
 )
 
 for target in "${targets[@]}"; do
@@ -52,6 +53,9 @@ python3 scripts/check_ym_bn_cauchy_schedule_20261117.py
 python3 scripts/check_ym_dyadic_cyclotomic_full_20261117.py
 python3 scripts/check_ym_wilson_L1_commutator_20261117.py
 python3 scripts/check_ym_real_sympy_fullchain_20261117.py
+python3 scripts/check_ym_original_wilson_cubic_incidence_20261117.py
+python3 scripts/check_ym_original_L1_cubic_sparse_pochhammer_20261117.py
+python3 scripts/check_ym_original_periodic_gauge_words_20261117.py
 
 if ! command -v nix >/dev/null 2>&1; then
   echo 'Nix unavailable: local P0 Agda acceptance NOT performed' >&2
@@ -66,5 +70,5 @@ for target in "${targets[@]}"; do
     bash scripts/run_agda29_parallel_check.sh "$target"
 done
 
-echo 'PASS: all nineteen isolated P0 scalar/SU2 Agda module checks completed.'
+echo 'PASS: all twenty isolated P0 scalar/SU2 Agda module checks completed.'
 echo 'NOTE: OriginalWilsonToBishopScalarWeld is not thereby inhabited.'
