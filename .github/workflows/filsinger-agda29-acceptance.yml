@@ -20,6 +20,7 @@ on:
       - "scripts/test_smith_filsinger_signed_vi_intervals.py"
       - "scripts/check_smith_filsinger_restored_cycle_intervals.py"
       - "scripts/test_smith_filsinger_restored_cycle_intervals.py"
+      - "scripts/test_smith_filsinger_restored_cycle_raw_replay.py"
   workflow_dispatch:
 
 permissions:
@@ -44,6 +45,8 @@ jobs:
         run: python3 scripts/test_smith_filsinger_signed_vi_intervals.py
       - name: Exact F15 restored-cycle first-law interval tests
         run: python3 scripts/test_smith_filsinger_restored_cycle_intervals.py
+      - name: Original-file F15 raw evidence replay adversarial tests
+        run: python3 scripts/test_smith_filsinger_restored_cycle_raw_replay.py
       - uses: cachix/install-nix-action@v31
         with:
           extra_nix_config: |
