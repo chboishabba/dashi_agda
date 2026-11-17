@@ -24,3 +24,7 @@ import DASHI.Physics.YangMills.YMClayBishopSU2HaarSeriesLimitExact
   as ConstructiveCauchy
 import DASHI.Physics.YangMills.YMClayBishopFiniteWilsonNormalizedExact
   as FiniteWilson
+
+-- Pi: algebraic last-mile of quarter-angle bridge, analytic inputs OPEN.
+import DASHI.Foundations.BishopMachinPiDoubleAngleAlgebraExact
+  as BishopMachinDoubleAngle
