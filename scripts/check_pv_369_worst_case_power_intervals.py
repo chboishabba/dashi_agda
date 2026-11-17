@@ -137,7 +137,8 @@ def selftest():
     ck("0.5 pct V,J error passes",bound_receipt(receipt(),err(.005))["strict_robust_above_half"])
     ck("1 pct solar upper passes zero IV uncertainty",bound_receipt(receipt(),err(solar=.01))["strict_robust_above_half"])
     ck("2 pct solar upper fails",not bound_receipt(receipt(),err(solar=.02))["strict_robust_above_half"])
-    ck("aux cost can erase gain",not bound_receipt(receipt(),err(aux=11))["strict_robust_above_half"])
+    ck("aux cost can erase gain",not bound_receipt(
+        {**receipt(),"four_terminal_net_W_m2":499.},err(aux=11))["strict_robust_above_half"])
     ck("nominal interval enclosure",a["net_lower_W_m2"]<=a["nominal_net_W_m2"]<=a["net_upper_W_m2"])
     base=bound_receipt(receipt(504,"conventional"),err())
     ck("positive robust 369 gain",compare(a,base)["joint_model_gate"])
