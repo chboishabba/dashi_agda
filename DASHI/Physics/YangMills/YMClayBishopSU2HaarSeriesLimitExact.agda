@@ -61,3 +61,43 @@ record EffectiveHaarApproximation (Sphere : Set) : Set₁ where
       candidateConverges
 
 open EffectiveHaarApproximation public
+
+
+------------------------------------------------------------------------
+-- Max-cut: direct Bishop Cauchy completion.
+-- This is strictly weaker/simpler than first certifying a telescope as
+-- absolutely convergent. Direct reuse of the pinned Seq theorem means
+-- no separate absolute-series comparison/majorant is required.
+------------------------------------------------------------------------
+
+record EffectiveHaarCauchyApproximation (Sphere : Set) : Set₁ where
+  field
+    finitePolynomialIntegral : (Sphere → B.ℝ) → Nat → B.ℝ
+    -- Source debt: derived from the *actual* effective b_n modulus and
+    -- polynomial H contractivity, not a fresh limit/measure authority.
+    polynomialIntegralCauchy : ∀ f →
+      Seq._isCauchy (finitePolynomialIntegral f)
+
+  completedCauchyIntegral : (Sphere → B.ℝ) → B.ℝ
+  completedCauchyIntegral f =
+    Seq.lim (Seq.fast-cauchy⇒convergent
+      (polynomialIntegralCauchy f))
+
+  completedCauchyIntegralConverges : ∀ f →
+    Seq._ConvergesTo_
+      (finitePolynomialIntegral f)
+      (completedCauchyIntegral f)
+  completedCauchyIntegralConverges f =
+    proj₂ (Seq.fast-cauchy⇒convergent
+      (polynomialIntegralCauchy f))
+
+  completedCauchyIntegralUnique :
+    ∀ f {candidate : B.ℝ} →
+    Seq._ConvergesTo_ (finitePolynomialIntegral f) candidate →
+    B._≃_ (completedCauchyIntegral f) candidate
+  completedCauchyIntegralUnique f candidate =
+    Seq.uniqueness-of-limits
+      (completedCauchyIntegralConverges f)
+      candidate
+
+open EffectiveHaarCauchyApproximation public
