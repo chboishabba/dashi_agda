@@ -51,6 +51,7 @@ module DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact where
 --
 -- F. Verification.
 -- Source read-back must resolve every owner and alias below.
+-- This comment-only child commit triggers the exact-head verification PR.
 -- Exact-head kernel certification remains a separate receipt.
 ------------------------------------------------------------------------
 
