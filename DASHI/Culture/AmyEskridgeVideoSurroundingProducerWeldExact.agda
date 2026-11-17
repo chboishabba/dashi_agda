@@ -38,27 +38,27 @@ data ExactProducer : Set where
   originalArmy : Army.ArmyOtherTransactionSourceState → ExactProducer
 
 data SourceRole : Set where
-  mediaRoster
-  sourceContext
-  originalDocument
-  patentRecord
-  experimentalConstraint
-  correctivePrimary
-  historicalChronology
-  historicalMention
-  controlledPhysics
-  unpaidFinding
-  originalPaper
-  governmentExperiment
-  uninspectedPrimary
-  secondaryReport
-  authorClaim
-  causalControl
-  contemporaneousReport
-  governmentInventory
-  reportFullText
-  firstPersonSpeech
-  theoryContext
+  mediaRoster : SourceRole
+  sourceContext : SourceRole
+  originalDocument : SourceRole
+  patentRecord : SourceRole
+  experimentalConstraint : SourceRole
+  correctivePrimary : SourceRole
+  historicalChronology : SourceRole
+  historicalMention : SourceRole
+  controlledPhysics : SourceRole
+  unpaidFinding : SourceRole
+  originalPaper : SourceRole
+  governmentExperiment : SourceRole
+  uninspectedPrimary : SourceRole
+  secondaryReport : SourceRole
+  authorClaim : SourceRole
+  causalControl : SourceRole
+  contemporaneousReport : SourceRole
+  governmentInventory : SourceRole
+  reportFullText : SourceRole
+  firstPersonSpeech : SourceRole
+  theoryContext : SourceRole
   disputedScientificClaim : SourceRole
 
 record SourceScopedClaimWeld : Set where
@@ -401,5 +401,6 @@ data TexasAgreementNumberProvesACGravityContract : Set where
 noSourceToExperimentShortcut : SourceMembershipImpliesExperimentSuccess → ⊥
 noSourceToExperimentShortcut ()
 noDuplicateIndependence : MultipleClaimsOnOneSourceImplyMultipleIndependentSources → ⊥
+noDuplicateIndependence ()
 noIdentifierCollisionPromotion : TexasAgreementNumberProvesACGravityContract → ⊥
 noIdentifierCollisionPromotion ()
