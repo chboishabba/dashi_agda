@@ -36,6 +36,7 @@ open import Data.Integer.Base using (+_)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _*_; -_; _/_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 import DASHI.Physics.Gravity.KSW668F8RationalAxialTTCubatureExact as Angular
+import DASHI.Physics.Gravity.KSW668F8TTSymbolDiscreteCompatibilityExact as TT
 
 -- Original 12-node finite angular linearity: exact for arbitrary
 -- rational samples and any common scalar shell mass.
@@ -58,21 +59,21 @@ angularShellAdd f g = solve []
 originalYYProjectedMass :
   (x rho mass : ℚ) →
   Angular.rationalAzimuthalMean
-    (λ y z → mass * Angular.TT.ttYY x (rho * y) (rho * z))
+    (λ y z → mass * TT.ttYY x (rho * y) (rho * z))
     ≡ mass * Angular.axisA0 x rho
 originalYYProjectedMass x rho mass
   rewrite angularShellScale
-    (λ y z → Angular.TT.ttYY x (rho * y) (rho * z)) mass
+    (λ y z → TT.ttYY x (rho * y) (rho * z)) mass
     | Angular.axisAverageYY x rho = refl
 
 originalZZProjectedMass :
   (x rho mass : ℚ) →
   Angular.rationalAzimuthalMean
-    (λ y z → mass * Angular.TT.ttZZ x (rho * y) (rho * z))
+    (λ y z → mass * TT.ttZZ x (rho * y) (rho * z))
     ≡ - (mass * Angular.axisA0 x rho)
 originalZZProjectedMass x rho mass
   rewrite angularShellScale
-    (λ y z → Angular.TT.ttZZ x (rho * y) (rho * z)) mass
+    (λ y z → TT.ttZZ x (rho * y) (rho * z)) mass
     | Angular.axisAverageZZ x rho = solve []
 
 -- Generic additive source-mass primitive telescope, for the exact
