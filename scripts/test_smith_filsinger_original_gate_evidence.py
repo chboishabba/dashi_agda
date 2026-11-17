@@ -29,7 +29,7 @@ class EvidenceGateTests(unittest.TestCase):
         r = check({"original_id": self.original, "records": [
             {**self.rec(role), "kind": "model"} for role in ALL_ROLES
         ]}, self.root)
-        self.assertTrue(all(g["raw_records_verified"] == 0 for g in r["gates"].values()))
+        self.assertTrue(all(g["hash_matched_records"] == 0 for g in r["gates"].values()))
 
     def test_rejects_wrong_original(self):
         rec = {**self.rec("field_flux"), "original_id": "another-machine"}
@@ -64,8 +64,8 @@ class EvidenceGateTests(unittest.TestCase):
     def test_all_gates_require_distinct_roles(self):
         self.assertEqual(len(ALL_ROLES), sum(map(len, ROLES.values())))
         r = check({"original_id": self.original, "records": [self.rec("field_flux")]}, self.root)
-        self.assertEqual(r["gates"]["F10"]["raw_records_verified"], 1)
-        self.assertEqual(r["gates"]["F15"]["raw_records_verified"], 0)
+        self.assertEqual(r["gates"]["F10"]["hash_matched_records"], 1)
+        self.assertEqual(r["gates"]["F15"]["hash_matched_records"], 0)
 
     def test_placeholder_original_is_rejected(self):
         r = check({"original_id": "hypothetical source", "records": []}, self.root)
