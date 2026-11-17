@@ -1,0 +1,42 @@
+name: X369 P0 symbolic stand-in (NOT Agda kernel)
+on:
+  push:
+    branches:
+      - formal/x369-consumer-sufficiency-gauge-20261117
+    paths:
+      - 'DASHI/Cognition/PNF/X369ConsumerSufficientCompressionNoGoExact.agda'
+      - 'DASHI/Cognition/PNF/X369DirectedRouterConditionalCodecExact.agda'
+      - 'DASHI/Cognition/PNF/X369CenteredDirectedConsumerMDLExact.agda'
+      - 'DASHI/Cognition/PNF/X369QuantizedRouterDecisionMarginExact.agda'
+      - 'DASHI/Cognition/PNF/X369SharedHeadFusedScoreExact.agda'
+      - 'scripts/check_x369_p0_sympy_standin.sh'
+      - '.github/workflows/x369-p0-sympy-standin.yml'
+  pull_request:
+    paths:
+      - 'DASHI/Cognition/PNF/X369ConsumerSufficientCompressionNoGoExact.agda'
+      - 'DASHI/Cognition/PNF/X369DirectedRouterConditionalCodecExact.agda'
+      - 'DASHI/Cognition/PNF/X369CenteredDirectedConsumerMDLExact.agda'
+      - 'DASHI/Cognition/PNF/X369QuantizedRouterDecisionMarginExact.agda'
+      - 'DASHI/Cognition/PNF/X369SharedHeadFusedScoreExact.agda'
+      - 'scripts/check_x369_p0_sympy_standin.sh'
+      - '.github/workflows/x369-p0-sympy-standin.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  symbolic-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python3 -m pip install --disable-pip-version-check sympy==1.14.0
+      - name: Verify actual source algebra and finite quotient counterexamples
+        run: bash scripts/check_x369_p0_sympy_standin.sh
+      - name: State the explicit proof boundary
+        run: |
+          echo 'SymPy symbolic and finite CI stand-in only.'
+          echo 'No Agda kernel acceptance, no verified Lean proof, no original trained model run.'
+          echo 'Agda acceptance gate: scripts/run_agda29_parallel_check.sh DASHI/Cognition/PNF/X369ConsumerSufficientCompressionNoGoExact.agda DASHI/Cognition/PNF/X369DirectedRouterConditionalCodecExact.agda'

@@ -1,18 +1,39 @@
 import DASHI.Unified.GovernedLegalWorkflowComplianceTOEExact as LegalCompliance
 module DASHI.EverythingTOESymmetryResolved369 where
-import DASHI.Arithmetic.TwinPrimeSixWheelExact as TwinPrimeSixWheel
-import DASHI.Arithmetic.TwinPrimeFRACDASHReuseExact as TwinPrimeFRACDASH
-import DASHI.Arithmetic.CertifiedPrimePairModulusExact as ArbitraryPrimeCRT
-import DASHI.Arithmetic.CertifiedPrimePairPeriodExact as PairCRTPeriod
-import DASHI.Arithmetic.SignedSSPPrimeOffsetMacroExact as SignedOffsetMacro
-open SignedOffsetMacro public using
-  ( plusTwoFractionMacro
-  ; minusTwoFractionMacro
-  ; plusOutputHasOffsetExponent
-  ; minusOutputHasOffsetExponent
-  ; signedPlusIsForward
-  ; signedMinusIsInverse
-  ; minusIsNegationOfPlus
+
+-- X369 early facilitation-before-suppression source-typed witness:
+-- reuse canonical DASHI.Cognition.ResponseKink through the R4
+-- same-source Nat fixture transport; the real PyTorch source weld
+-- and Agda kernel acceptance remain separate gates.
+import DASHI.Cognition.PNF.X369R4TopKSourceKinkWitnessExact as X369R4Kink
+open X369R4Kink public using (r4FiniteKinkSourceShape)
+-- SAME-CLOCK source-shaped R4 history quotient obstruction.
+-- Reuse the existing generic NonFactorability theorem, not a
+-- duplicate recurrent-observability mathematical owner.
+import DASHI.Cognition.PNF.X369R4HistoryLoadNonFactorabilityExact as X369R4History
+open X369R4History public using
+  (sourceFixtureResponseCannotFactorThroughLoad
+  ; sourceFixtureLoadRechartCannotRecoverHistory
+  ; fixedProbePairDoesFactorThroughCurrentLoad)
+import DASHI.Unified.AdelicSpectralPaperTOEExact as AdelicSpectralTOE
+
+-- September 2026 source-typed finite spectral closure and fail-closed gates.
+-- Reuse the existing NonArchimedean owner; do not rebuild source Lean proofs.
+open AdelicSpectralTOE public using
+  ( toeFiniteSpatialCircleClosed
+  ; toeFiniteTwistedPowerClosed
+  ; toeLiteralSpectrumTowerClosed
+  ; toePrefactoredFiniteMixingClosed
+  ; toeConstructiveFiniteStoppingTailClosed
+  ; toeDirectedSizeSigmaHalfRejected
+  ; toeArbitraryDAGCoverNeedsConstruction
+  ; toeDepthSparsityNeedsQuantitativeBound
+  ; toeBoundaryEntropyNeedsSameObjectWeld
+  ; toeRoPEOptimalityNeedsModelConsumer
+  ; toeMultiPrimeSparsityNonPromotion
+  ; toeHolographySameObjectNonPromotion
+  ; toeNoAutomaticSpectralToRoPETransfer
+  ; toeOriginalAdvertisedChainHasNoLiveProducer
   )
 
 import DASHI.Arithmetic.TwinPrimeCertifiedEnumeratorExact as ExactTwinCounter
