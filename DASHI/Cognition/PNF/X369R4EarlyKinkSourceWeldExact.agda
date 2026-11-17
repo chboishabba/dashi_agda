@@ -16,11 +16,7 @@ module DASHI.Cognition.PNF.X369R4EarlyKinkSourceWeldExact where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
-open import Agda.Builtin.Equality using (_≡_; refl)
 import DASHI.Cognition.ResponseKink as Kink
-
-sym : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
-sym refl = refl
 
 record OriginalR4FourRegimeEvidence (State : Set) : Set₁ where
   field
