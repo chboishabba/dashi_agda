@@ -1,5 +1,5 @@
 module DASHI.Unified.Everything where
-import DASHI.Promotion.CrossDomainClaimPromotionBoundary as TechnicalSafety
+import DASHI.Interop.SLRSemanticWorldClosureExact as LegalSemanticClosure
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
@@ -469,8 +469,114 @@ unifiedLegalSnowballCitationDoesNotCreateAuthority :
   ≡ false
 unifiedLegalSnowballCitationDoesNotCreateAuthority = refl
 
-unifiedLegalSnowballSourceIdentityDoesNotSetClaimStage :
-  SLSnowball.SensibLawSnowballLineageBoundary.sameSourceIdentityDeterminesClaimStage
-    unifiedLegalSnowballBoundary
-  ≡ false
-unifiedLegalSnowballSourceIdentityDoesNotSetClaimStage = refl
+unifiedFleetCountDoesNotCreateNamedManifest :
+  FleetGapTOE.CountCreatesNamedManifest → ⊥
+unifiedFleetCountDoesNotCreateNamedManifest =
+  FleetGapTOE.fleetCountDoesNotCreateNamedManifest
+
+------------------------------------------------------------------------
+-- Direct Pareto / snowball / Ibrahim and ternary-27 non-promotion surface.
+------------------------------------------------------------------------
+
+unifiedIbrahimSearchPriorityDoesNotCreateProof :
+  ParetoSnowballTOE.SearchPriorityCreatesProof → ⊥
+unifiedIbrahimSearchPriorityDoesNotCreateProof =
+  ParetoSnowballTOE.searchPriorityDoesNotCreateProof
+
+unifiedIbrahimProducerSourceDoesNotCreateRunReceipt :
+  ParetoSnowballTOE.ProducerSourceCreatesRunReceipt → ⊥
+unifiedIbrahimProducerSourceDoesNotCreateRunReceipt =
+  ParetoSnowballTOE.producerSourceDoesNotCreateRunReceipt
+
+unifiedIbrahimDegree729DoesNotCreateMonsterHZetaRecognition :
+  ParetoSnowballTOE.Degree729CreatesMonsterHZetaRecognition → ⊥
+unifiedIbrahimDegree729DoesNotCreateMonsterHZetaRecognition =
+  ParetoSnowballTOE.degree729DoesNotCreateMonsterHZetaRecognition
+
+unifiedIbrahimPaperOracleDoesNotIdentifyHistoricalDump :
+  ParetoSnowballTOE.PaperOracleIdentifiesDump → ⊥
+unifiedIbrahimPaperOracleDoesNotIdentifyHistoricalDump =
+  ParetoSnowballTOE.paperOracleDoesNotIdentifyHistoricalDump
+
+unifiedIbrahimRoutePreferenceDoesNotCreateExecutionReceipt :
+  ParetoSnowballTOE.RoutePreferenceCreatesExecutionReceipt → ⊥
+unifiedIbrahimRoutePreferenceDoesNotCreateExecutionReceipt =
+  ParetoSnowballTOE.routePreferenceDoesNotCreateExecutionReceipt
+
+unifiedIbrahimMergedLeanSourceDoesNotCreateKernelReceipt :
+  ParetoSnowballTOE.MergedLeanSourceCreatesKernelReceipt → ⊥
+unifiedIbrahimMergedLeanSourceDoesNotCreateKernelReceipt =
+  ParetoSnowballTOE.mergedLeanSourceDoesNotCreateKernelReceipt
+
+unifiedIbrahimOEISDoesNotCreateMultiplicityAction :
+  ParetoSnowballTOE.NinetyOEISEqualityCreatesMultiplicityAction → ⊥
+unifiedIbrahimOEISDoesNotCreateMultiplicityAction =
+  ParetoSnowballTOE.oeisDoesNotCreateMultiplicityAction
+
+unifiedIbrahimFiniteIrreducibilityDoesNotCreateMonsterHZetaRecognition :
+  ParetoSnowballTOE.FiniteIrreducibilityCreatesMonsterHZetaRecognition → ⊥
+unifiedIbrahimFiniteIrreducibilityDoesNotCreateMonsterHZetaRecognition =
+  ParetoSnowballTOE.finiteIrreducibilityDoesNotCreateMonsterHZetaRecognition
+
+unifiedIbrahimCurrentQidDoesNotIdentifyHistoricalTitle :
+  ParetoSnowballTOE.CurrentQidIdentifiesHistoricalTitle → ⊥
+unifiedIbrahimCurrentQidDoesNotIdentifyHistoricalTitle =
+  ParetoSnowballTOE.currentQidDoesNotIdentifyHistoricalTitle
+
+unified369Ternary27MonsterRepresentationNotPromoted =
+  MaxCut369.toe27MonsterRepresentationNotPromoted
+
+unified369Ternary27MonsterEmbeddingNotPromoted =
+  MaxCut369.toe27MonsterEmbeddingNotPromoted
+
+------------------------------------------------------------------------
+-- Live Gate-4 frontier and Fleet target selection.
+------------------------------------------------------------------------
+
+unifiedCurrentGate4FrontierLedgerLevel : ProofLevel
+unifiedCurrentGate4FrontierLedgerLevel =
+  FleetHyperTOE.currentGate4FrontierLedgerLevel
+
+unifiedCurrentGate4ClusteringToTransferGapLevel : ProofLevel
+unifiedCurrentGate4ClusteringToTransferGapLevel =
+  FleetHyperTOE.currentGate4ClusteringToTransferGapLevel
+
+unifiedFleetFormalGapTargetSelected : Bool
+unifiedFleetFormalGapTargetSelected =
+  FleetHyperTOE.fleetFormalGapTargetSelected
+
+unifiedHistoricalGate4CountSelectedAsFleetTarget : Bool
+unifiedHistoricalGate4CountSelectedAsFleetTarget =
+  FleetHyperTOE.historicalGate4CountSelectedAsFleetTarget
+
+unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
+  FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
+unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
+  FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+
+
+------------------------------------------------------------------------
+-- SensibLaw semantic governance: imported proof ownership stays in SLR.
+-- Propagated QID evidence is not a target-surface assertion or legal truth.
+-- These direct eliminators do not confer legal or external authority.
+------------------------------------------------------------------------
+
+unifiedLegalSourceNonPromotion :
+  LegalSemanticClosure.PropagationRewritesSource → ⊥
+unifiedLegalSourceNonPromotion =
+  LegalSemanticClosure.propagationDoesNotRewriteSource
+
+unifiedLegalIdentityNonPromotion :
+  LegalSemanticClosure.SharedQidCreatesSemanticEquivalence → ⊥
+unifiedLegalIdentityNonPromotion =
+  LegalSemanticClosure.sharedQidDoesNotCreateSemanticEquivalence
+
+unifiedLegalClaimTruthNonPromotion :
+  LegalSemanticClosure.ArticleLinkCreatesClaimTruth → ⊥
+unifiedLegalClaimTruthNonPromotion =
+  LegalSemanticClosure.articleLinkDoesNotCreateClaimTruth
+
+unifiedLegalUnweldedFactNonPromotion :
+  LegalSemanticClosure.UnweldedPnfMayBecomeSharedFact → ⊥
+unifiedLegalUnweldedFactNonPromotion =
+  LegalSemanticClosure.unweldedPnfDoesNotBecomeSharedFact
