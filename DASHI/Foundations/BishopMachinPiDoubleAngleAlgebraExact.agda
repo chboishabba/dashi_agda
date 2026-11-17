@@ -51,7 +51,7 @@ quarterSinCosEqualityGivesDoubleSinOne s c same unit =
          BP.≃-refl c)
       (BP.≃-trans
         (BP.+-cong
-          (BP.*-cong same same)
+          (BP.≃-symm (BP.*-cong same same))
           BP.≃-refl)
         unit))
 
