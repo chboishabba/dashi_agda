@@ -291,7 +291,7 @@ indexedFaceExteriorEnergyBalance :
   ≡ Face.totalExtOut (eraseCells (IndexedMesh.cells m))
     + (Face.totalLoad (eraseCells (IndexedMesh.cells m))
       + (Face.totalLoss (eraseCells (IndexedMesh.cells m))
-      + Face.totalFinal (eraseCells (IndexedMesh.cells m)))
+      + Face.totalFinal (eraseCells (IndexedMesh.cells m))))
 indexedFaceExteriorEnergyBalance m =
   Face.finiteVolumeExteriorEnergyBalance (asExistingMesh m)
 
@@ -341,7 +341,7 @@ exampleIndexedMeshConserves :
   ≡ Face.totalExtOut (eraseCells (IndexedMesh.cells exampleIndexedMesh))
     + (Face.totalLoad (eraseCells (IndexedMesh.cells exampleIndexedMesh))
       + (Face.totalLoss (eraseCells (IndexedMesh.cells exampleIndexedMesh))
-      + Face.totalFinal (eraseCells (IndexedMesh.cells exampleIndexedMesh)))
+      + Face.totalFinal (eraseCells (IndexedMesh.cells exampleIndexedMesh))))
 exampleIndexedMeshConserves =
   indexedFaceExteriorEnergyBalance exampleIndexedMesh
 
