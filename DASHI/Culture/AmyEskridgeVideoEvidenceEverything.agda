@@ -15,6 +15,7 @@ import DASHI.Culture.AmyEskridgeVideoClaimAttributionLedgerExact
 import DASHI.Culture.AmyEskridgeVideoSourceRegistryExact
 import DASHI.Culture.AmyEskridgeVideoClaimProducerWeldExact
 import DASHI.Culture.AmyEskridgeVideoRosterScopeWeldExact
+import DASHI.Culture.AmyEskridgeVideoTypedObligationWeldExact
 
 -- Existing independent producer authorities:
 import DASHI.Culture.AmyEskridgeHAL5AntigravitySourceEntitlementExact
