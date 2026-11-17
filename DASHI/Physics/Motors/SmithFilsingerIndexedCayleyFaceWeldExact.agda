@@ -136,6 +136,58 @@ indexedFaceSourceCone owner sourceID change e s R premise =
   Reach.noSignalOutsideInterleavedSourceCone
     0ℚ (indexedFaceWithSource owner sourceID change e) s R premise
 
+-- A face record alone can be manufactured. This companion requires
+-- a CONSTRUCTIVE membership proof in the SAME original mesh's face list.
+-- It does not accept a merely equivalent face ID from a second mesh.
+data FaceMember (face : Indexed.DirectedFace) :
+  List Indexed.DirectedFace → Set where
+  memberHere :
+    ∀ {faces} → FaceMember face (face ∷ faces)
+  memberThere :
+    ∀ {other faces} → FaceMember face faces →
+      FaceMember face (other ∷ faces)
+
+record MeshSelectedCayleyFace : Set where
+  field
+    mesh : Indexed.IndexedMesh
+    selected : IndexedCayleyFace
+    selectedReallyOccurs :
+      FaceMember (originalFace selected)
+        (Indexed.IndexedMesh.faces mesh)
+
+open MeshSelectedCayleyFace
+
+meshSelectedCayleyEvent :
+  MeshSelectedCayleyFace → Reach.LocalEvent ℚ 0ℚ
+meshSelectedCayleyEvent chosen =
+  indexedCayleyEvent (selected chosen)
+
+meshSelectedFaceMidpointFirst :
+  (chosen : MeshSelectedCayleyFace) (x y : ℚ) →
+  Cayley.sameCayleyFirst
+      (Midpoint.CertifiedHalfStep.cayley (halfStep (selected chosen))) x y
+    - Midpoint.CertifiedHalfStep.p (halfStep (selected chosen))
+      * Cayley.sameCayleySecond
+        (Midpoint.CertifiedHalfStep.cayley (halfStep (selected chosen))) x y
+    ≡ x + Midpoint.CertifiedHalfStep.p (halfStep (selected chosen)) * y
+meshSelectedFaceMidpointFirst chosen x y =
+  indexedFaceFirstMidpoint (selected chosen) x y
+
+meshSelectedFaceMidpointSecond :
+  (chosen : MeshSelectedCayleyFace) (x y : ℚ) →
+  Cayley.sameCayleySecond
+      (Midpoint.CertifiedHalfStep.cayley (halfStep (selected chosen))) x y
+    - Midpoint.CertifiedHalfStep.r (halfStep (selected chosen))
+      * Cayley.sameCayleyFirst
+        (Midpoint.CertifiedHalfStep.cayley (halfStep (selected chosen))) x y
+    ≡ y + Midpoint.CertifiedHalfStep.r (halfStep (selected chosen)) * x
+meshSelectedFaceMidpointSecond chosen x y =
+  indexedFaceSecondMidpoint (selected chosen) x y
+
+-- Membership and distinct endpoints are actual propositions with
+-- checked constructors. Their presence does NOT provide SI calibration,
+-- atmospheric forcing or a signed integrated Poynting face measurement.
+
 -- Still OPEN: indexed electric/magnetic face-cochain identification,
 -- physical propagation distance and timing, boundary normal Poynting
 -- trace to actual receiver V*I, and independent source replenishment.
