@@ -17,8 +17,12 @@ module DASHI.Biology.EisensteinNineRingInterferenceExact where
 -- are identified while the two occupied orientations remain distinct.
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Integer.Base using (+_)
+open import Agda.Builtin.Nat using (Nat) renaming (_*_ to _*ℕ_)
+open import Data.Empty using (⊥)
+open import Data.Integer using (+_)
+open import Data.List using (_∷_; [])
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; _+_; _-_; _*_; _/_)
 import Data.Rational.Tactic.RingSolver as ℚRing
@@ -124,12 +128,18 @@ pairOmegaOmegaSquaredCrossIsMinusOne :
   crossTerm omega omegaSquared ≡ qMinusOne
 pairOmegaOmegaSquaredCrossIsMinusOne = refl
 
+normPolarizationCoeff :
+  ∀ a b c d →
+  (a + c) * (a + c) - (a + c) * (b + d) + (b + d) * (b + d)
+  ≡ (a * a - a * b + b * b) + (c * c - c * d + d * d) + (qTwo * a * c - a * d - b * c + qTwo * b * d)
+normPolarizationCoeff = ℚRing.solve-∀
+
 normPolarization :
   (left right : Eisenstein) →
   norm (add left right)
   ≡ norm left + norm right + crossTerm left right
 normPolarization (eisenstein a b) (eisenstein c d) =
-  ℚRing.solve-∀ a b c d
+  normPolarizationCoeff a b c d
 
 threePhaseDiagonalMass : ℚ
 threePhaseDiagonalMass = norm one + norm omega + norm omegaSquared
@@ -233,7 +243,7 @@ orientationCount : Nat
 orientationCount = 2
 
 localPhaseSymmetryCount : Nat
-localPhaseSymmetryCount = localPhaseCount * orientationCount
+localPhaseSymmetryCount = localPhaseCount *ℕ orientationCount
 
 localPhaseSymmetryCountIsSix : localPhaseSymmetryCount ≡ 6
 localPhaseSymmetryCountIsSix = refl

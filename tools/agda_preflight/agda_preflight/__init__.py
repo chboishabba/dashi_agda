@@ -9,8 +9,10 @@ from .checker import Checker, Diagnostic
 from .boundary_rules import install_checker_boundary_rules
 from .boundary_refinements import install_boundary_refinements
 from .integration_refinements import install_scope_refinements
-from .source_index import SourceIndex
-from .semantic_extension import install_source_index_semantic_extension
+
+install_checker_boundary_rules(Checker)
+install_boundary_refinements(Checker)
+install_scope_refinements()
 
 install_checker_boundary_rules(Checker)
 install_boundary_refinements(Checker)

@@ -31,9 +31,7 @@ module DASHI.Moonshine.OggSSP2BSameObjectMaxCutFrontierExact where
 --      with that carrier.  Then the known C3 transport is automatic.
 --
 --   B' realize one observed M22:2 ten-module (restricting to 10a/10b) as a
---      genuine subquotient of one actual 2B Tate fibre.  The focused CTblLib
---      class-fusion/Brauer-character screen is now the finite test for the
---      M24-duad semisimplified ingress.
+--      genuine subquotient of one actual 2B Tate fibre.
 --
 --   C' prove the sourced M22:2 outer involution action descends to that SAME
 --      Tate subquotient and becomes the Completion10 binary phase.  The finite
@@ -79,7 +77,7 @@ completionTenPerFibre : Nat
 completionTenPerFibre = Three.completionTenPerFibre
 
 transportedSelectedTotal : Nat
-transportedSelectedTotal = threeTwoBFibres * completionTenPerFibre
+transportedSelectedTotal = _*_ threeTwoBFibres completionTenPerFibre
 
 transportedSelectedTotalIsThirty : transportedSelectedTotal ≡ 30
 transportedSelectedTotalIsThirty = Three.threeFibreCompletionCountIsThirty
@@ -202,6 +200,9 @@ data ActualTateTenSubquotientPaid : Set where
 data ActualTateCompletionActionPaid : Set where
 data ActualQ10ModeToOrderStratumRecognitionPaid : Set where
 
+-- Compatibility surface retained for existing downstream code.  After the
+-- M22:2 runtime result this means "the larger Completion10 action is paid on
+-- the actual Tate subquotient", not merely "a finite candidate exists".
 LargerCompletionActionPaid : Set
 LargerCompletionActionPaid = ActualTateCompletionActionPaid
 
@@ -243,7 +244,7 @@ p31To279StillObserverOnly : P31To279PromotedSameObject → ⊥
 p31To279StillObserverOnly ()
 
 ------------------------------------------------------------------------
--- 7. Canonical status after B'-screen construction / C'/D max-cut.
+-- 7. Canonical status after C' max-cut.
 ------------------------------------------------------------------------
 
 record SameObjectMaxCutStatus : Set where
@@ -283,7 +284,7 @@ canonicalSameObjectMaxCutStatus =
   same-object-max-cut-status
     true true true true true
     true true true true true true
-    true true 4 2 true
+    true true
     false false false false
     false false true
-    "B': run the focused 2B-centralizer/M24 2-regular character screen and, if equal, promote the resulting actual Tate semisimplified M22 10a/10b subquotient receipt; C': prove the sourced M22:2 outer J2^5 action acts on that same quotient; D: source exactly two orientation decisions (depth-3 and depth-1); central -1 is ruled out as the Mode5-preserving BinaryPhase shortcut; only then promote 31/279"
+    "A': weld the sourced full integral Monster action to the current 4A/Tate carrier; B': identify one observed M22:2 ten-module as an actual Tate subquotient; C': prove its sourced outer J2^5 involution is the action on that same Tate subquotient; D: identify the actual Q10 Mode5 labels with binary-tetrahedral order strata; only then promote 31/279"

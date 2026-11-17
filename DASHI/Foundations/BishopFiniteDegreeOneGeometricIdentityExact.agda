@@ -78,7 +78,7 @@ finiteDegreeOneGeometricIdentity q zero =
   in solve 1
     (λ q′ →
       ((Κ 1ℚᵘ ⊖ q′) ⊗ (Κ 1ℚᵘ ⊖ q′)) ⊗ Κ 0ℚᵘ
-      ⊜ (q′ ⊖ (Κ 1ℚᵘ ⊗ q′)) ⊕ (Κ 0ℚᵘ ⊗ (q′ ⊗ q′)))
+      ⊜ (q′ ⊖ (Κ 1ℚᵘ ⊗ (Κ 1ℚᵘ ⊗ q′))) ⊕ (Κ 0ℚᵘ ⊗ ((Κ 1ℚᵘ ⊗ q′) ⊗ q′)))
     BishopP.≃-refl q
 finiteDegreeOneGeometricIdentity q (suc count) =
   let
@@ -129,6 +129,27 @@ finiteDegreeOneGeometricIdentity q (suc count) =
         (finiteDegreeOneGeometricIdentity q count)
         BishopP.≃-refl
 
+    cMinus1 : BishopReal._≃_
+      (BishopReal._-_ coefficient BishopReal.1ℝ)
+      (BishopReal._-_ (BishopReal._+_ n BishopReal.1ℝ) BishopReal.1ℝ)
+    cMinus1 = BishopP.+-cong (natRealSuccessor count) BishopP.≃-refl
+
+    nMinus1Plus1 : BishopReal._≃_
+      (BishopReal._-_ (BishopReal._+_ n BishopReal.1ℝ) BishopReal.1ℝ)
+      n
+    nMinus1Plus1 =
+      solve 1
+        (λ n′ → ((n′ ⊕ Κ 1ℚᵘ) ⊖ Κ 1ℚᵘ) ⊜ n′)
+        BishopP.≃-refl n
+
+    nFromC : BishopReal._≃_ n (BishopReal._-_ coefficient BishopReal.1ℝ)
+    nFromC = BishopP.≃-symm (BishopP.≃-trans cMinus1 nMinus1Plus1)
+
+    nProductFromC : BishopReal._≃_
+      (BishopReal._*_ n pq)
+      (BishopReal._*_ (BishopReal._-_ coefficient BishopReal.1ℝ) pq)
+    nProductFromC = BishopP.*-cong nFromC BishopP.≃-refl
+
     algebraBeforeCoefficientTransport :
       BishopReal._≃_
         (BishopReal._+_
@@ -148,13 +169,19 @@ finiteDegreeOneGeometricIdentity q (suc count) =
               pq))
           (BishopReal._*_ coefficient pqq))
     algebraBeforeCoefficientTransport =
-      solve 4
-        (λ q′ n′ c p′ →
-          ((q′ ⊖ (c ⊗ p′)) ⊕ (n′ ⊗ (p′ ⊗ q′)))
-            ⊕ (((Κ 1ℚᵘ ⊖ q′) ⊗ (Κ 1ℚᵘ ⊖ q′)) ⊗ (c ⊗ p′))
-          ⊜ (q′ ⊖ ((c ⊕ Κ 1ℚᵘ) ⊗ (p′ ⊗ q′)))
-            ⊕ (c ⊗ ((p′ ⊗ q′) ⊗ q′)))
-        BishopP.≃-refl q n coefficient p
+      BishopP.≃-trans
+        (BishopP.+-cong
+          (BishopP.+-cong
+            BishopP.≃-refl
+            nProductFromC)
+          BishopP.≃-refl)
+        (solve 3
+          (λ q′ c p′ →
+            ((q′ ⊖ (c ⊗ p′)) ⊕ ((c ⊖ Κ 1ℚᵘ) ⊗ (p′ ⊗ q′)))
+              ⊕ (((Κ 1ℚᵘ ⊖ q′) ⊗ (Κ 1ℚᵘ ⊖ q′)) ⊗ (c ⊗ p′))
+            ⊜ (q′ ⊖ ((c ⊕ Κ 1ℚᵘ) ⊗ (p′ ⊗ q′)))
+              ⊕ (c ⊗ ((p′ ⊗ q′) ⊗ q′)))
+          BishopP.≃-refl q coefficient p)
 
     nextCoefficient :
       BishopReal._≃_

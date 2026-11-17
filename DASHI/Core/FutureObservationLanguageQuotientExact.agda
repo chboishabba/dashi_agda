@@ -21,8 +21,7 @@ record LogicalIff (A B : Set) : Set where
 open LogicalIff public
 
 data FutureObservation
-    {State : Set ℓ}
-    {Action Observation : Set}
+    {State Action Observation : Set}
     (system : Dependency.DependentActionSystem State Action)
     (project : State → Observation)
     (start : State)
@@ -35,8 +34,7 @@ data FutureObservation
     FutureObservation system project start actions observation
 
 record FutureObservationEquivalent
-    {State : Set ℓ}
-    {Action Observation : Set}
+    {State Action Observation : Set}
     (system : Dependency.DependentActionSystem State Action)
     (project : State → Observation)
     (left right : State) : Set₁ where
@@ -97,8 +95,7 @@ futureEquivalentTrans leftMiddle middleRight =
 ------------------------------------------------------------------------
 
 record FutureLanguageSafeProjection
-    {State : Set ℓ}
-    {Action Observation Coarse : Set}
+    {State Action Observation Coarse : Set}
     (system : Dependency.DependentActionSystem State Action)
     (project : State → Observation)
     (coarsen : State → Coarse) : Set₁ where
@@ -112,8 +109,7 @@ record FutureLanguageSafeProjection
 open FutureLanguageSafeProjection public
 
 record KernelSubrelation
-    {State : Set ℓ}
-    {Coarse : Set}
+    {State Coarse : Set}
     (coarsen : State → Coarse)
     (Relation : State → State → Set₁) : Set₁ where
   constructor kernelSubrelation

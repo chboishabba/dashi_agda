@@ -21,6 +21,7 @@ module DASHI.Analysis.ConcreteComplexConjugationProductExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 open import DASHI.Analysis.ConstructiveRealSpine
@@ -97,7 +98,6 @@ record ConcreteComplexConjugationProductBoundary : Set where
     realNegationMultiplicationLeafStillRequired : Bool
     deltaConjugationFollowsFromThisAlone : Bool
 
-open import Agda.Builtin.Bool using (Bool; true; false)
 open ConcreteComplexConjugationProductBoundary public
 
 canonicalConcreteComplexConjugationProductBoundary :

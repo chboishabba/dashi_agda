@@ -26,6 +26,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; suc; _+_; _*_)
 open import Relation.Binary.PropositionalEquality using (sym; trans)
+open import Data.Nat.Base using (NonZero)
 import Data.Nat.Properties as NatP
 
 ------------------------------------------------------------------------

@@ -2,7 +2,6 @@ module DASHI.Core.TypedDependencyCore where
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
-open import Agda.Primitive using (Level)
 
 ------------------------------------------------------------------------
 -- Typed dependency core.
@@ -47,6 +46,7 @@ forgetDependencyToBool :
 forgetDependencyToBool witness = true
 
 record DependencyFamily (Index : Set) : Set₁ where
+  constructor dependencyFamily
   field
     Requirement : Index → Set
     requirementLabel : Index → String
@@ -58,6 +58,7 @@ record FamilyWitness
     {Index : Set}
     (family : DependencyFamily Index)
     (index : Index) : Set where
+  constructor familyWitness
   field
     witness : Requirement family index
     witnessReceipt : String
@@ -69,7 +70,8 @@ open FamilyWitness public
 -- inhabited.  Preconditions and postconditions are indexed by state/action.
 ------------------------------------------------------------------------
 
-record DependentActionSystem {State : Set ℓ} (Action : Set) : Set₁ where
+record DependentActionSystem (State Action : Set) : Set₁ where
+  constructor dependentActionSystem
   field
     Precondition : State → Action → Set
     Postcondition : State → Action → State → Set
@@ -78,11 +80,11 @@ record DependentActionSystem {State : Set ℓ} (Action : Set) : Set₁ where
 open DependentActionSystem public
 
 record AdmissibleAction
-    {State : Set ℓ}
-    {Action : Set}
-    (system : DependentActionSystem {State = State} Action)
+    {State Action : Set}
+    (system : DependentActionSystem State Action)
     (before : State)
-    (action : Action) : Set ℓ where
+    (action : Action) : Set where
+  constructor admissibleAction
   field
     precondition : Precondition system before action
     after : State
@@ -100,6 +102,7 @@ open AdmissibleAction public
 
 record IrreducibleTernaryDependency
     (A B C Joint AB AC BC : Set) : Set where
+  constructor irreducibleTernaryDependency
   field
     leftWitness : A
     middleWitness : B
@@ -113,6 +116,7 @@ record IrreducibleTernaryDependency
 open IrreducibleTernaryDependency public
 
 record DependencyUpgradeBoundary : Set where
+  constructor dependencyUpgradeBoundary
   field
     witnessCarriesMoreThanBoolean : Bool
     booleanProjectionAvailable : Bool

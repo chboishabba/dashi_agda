@@ -32,6 +32,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Relation.Binary.PropositionalEquality
   using (_≡_; refl; cong; sym)
+open Relation.Binary.PropositionalEquality.≡-Reasoning
 
 import DASHI.Physics.Closure.TriadicEisensteinTransformationTheorem as Eisenstein
 import DASHI.Moonshine.EisensteinDiscriminantWeight12Exact as Delta
@@ -105,8 +106,8 @@ jointJConjugationFromAnalyticWeld :
 jointJConjugationFromAnalyticWeld
     {R} {W = W} {M} {A} {Q} {AR} E =
   record
-    { Joint.conjugateValue = conjugateRenderer E
-    ; Joint.jConjugates = proof
+    { conjugateValue = conjugateRenderer E
+    ; jConjugates = proof
     }
   where
   proof :

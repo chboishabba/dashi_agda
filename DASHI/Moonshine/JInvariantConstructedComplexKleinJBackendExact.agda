@@ -64,15 +64,15 @@ constructedComplexKleinJ :
         (Real.real (Complex.realPackage C)) D) →
   ConstructedComplexKleinData C D F →
   Klein.ProofRelevantKleinJAlgebra
-constructedComplexKleinJ C D F data =
+constructedComplexKleinJ C D F kData =
   Klein.proof-relevant-klein-j-algebra
-    (Point data)
+    (Point kData)
     (Complex.ComplexPair (Real.real (Complex.realPackage C)))
-    (g2 data)
-    (delta data)
+    (g2 kData)
+    (delta kData)
     cubeC
     (Polar.NonzeroC F)
-    (deltaNonzero data)
+    (deltaNonzero kData)
     (quotientC F)
 
 ------------------------------------------------------------------------
