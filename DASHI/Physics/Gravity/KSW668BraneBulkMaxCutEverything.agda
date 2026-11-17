@@ -67,3 +67,8 @@ import DASHI.Physics.Gravity.KSW668AdS5MovingNormalFiniteSBPTelescopeExact
 -- spectral CFL, full moving y/r/warp coupling, Agda kernel and Weyl
 -- observations remain independent OPEN gates.
 import DASHI.Physics.Gravity.KSW668AdS5RadialSSPRK3ImaginaryPolynomialExact
+
+-- XXVIII: exact algebraic relation between ORIGINAL E4 and E5 receiver
+-- formulae. This is NOT an AdS5 covariant electric-Weyl identification;
+-- G1 metric/gauge/linearized-curvature and higher-trace gates remain OPEN.
+import DASHI.Physics.Gravity.KSW668F8DualElectricWeylReadoutAlgebraExact
