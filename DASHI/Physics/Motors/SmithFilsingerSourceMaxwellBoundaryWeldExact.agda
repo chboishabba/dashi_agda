@@ -42,7 +42,7 @@ record SelectedBoundary : Set where
 
 -- The connection to existing symbolic field objects and finite flight is
 -- explicit: it is not inferred from matching string labels.
-record FormalFieldToPort (b : SelectedBoundary) : Set₁ where
+record FormalFieldToPort (b : SelectedBoundary) : Set₂ where
   field
     symbolicField : Maxwell.MaxwellExteriorCalculusAdapter
     causalFlight : Time.RetardedFlight
@@ -61,7 +61,7 @@ record FormalFieldToPort (b : SelectedBoundary) : Set₁ where
 -- configuration b.
 record SignedSourceCycleWeld
   (b : SelectedBoundary)
-  (fieldPort : FormalFieldToPort b) : Set₁ where
+  (fieldPort : FormalFieldToPort b) : Set₂ where
   field
     cycleWithSourceCap : Cycle.AdmittedSourceCapCycle
 
