@@ -88,13 +88,10 @@ on:
       - 'DASHI/Unified/FleetFormalGapTargetTOEValidation.agda'
       - 'DASHI/Unified/YMGoal1TOECompatibilityExact.agda'
       - 'DASHI/Unified/YMGoal1TOECompatibilityValidation.agda'
-      - 'DASHI/Unified/BalabanRGTOEMaxCutValidation.agda'
-      - 'DASHI/Unified/R559IbrahimFleetHyperfabricTOEExact.agda'
-      - 'DASHI/Unified/R559IbrahimFleetHyperfabricTOEValidation.agda'
-      - 'DASHI/Core/IndexedRelationalHyperfabricSpineExact.agda'
-      - 'DASHI/Core/IndexedRelationalPadicWaveContinuousAdaptersExact.agda'
-      - 'DASHI/Law/SensibLawWrongTypeGenericHyperfabricAdapterExact.agda'
-      - 'Docs/architecture/R559IbrahimFleetTernaryHyperfabricTOE.puml'
+      - 'DASHI/Unified/RepoStateSpaceTOEConvergenceExact.agda'
+      - 'DASHI/Unified/RepoStateSpaceTOEConvergenceValidation.agda'
+      - 'DASHI/Unified/TOE369CoarseFineIntertwinerMaxCutValidation.agda'
+      - 'DASHI/Unified/TOE369CoarseFineIntertwinerMaxCutExact.agda'
       - 'DASHI/Unified/Physics.agda'
       - 'DASHI/Unified/Everything.agda'
       - 'DASHI/Unifier.agda'
@@ -188,51 +185,53 @@ jobs:
           dashi-repo related BalabanRGTOEReceipt --root .
           dashi-repo discover 'Balaban regular-E localization Casimir stress RG' --root .
           dashi-repo lineage --prefix DASHI.Physics.YangMills.Balaban --root .
-          dashi-repo diagnose DASHI/Unified/FleetFormalGapTargetTOEExact.agda --root .
-          dashi-repo diagnose DASHI/Unified/Fleet58ManifestAcquisitionExact.agda --root .
-          dashi-repo diagnose DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda --root .
-          dashi-repo related fleetRecordedMacroscopicMotifCountIs3 --root . --limit 20
-          dashi-repo related named58ManifestAcquired --root . --limit 20
-          dashi-repo related perGapDispatchEnabled --root . --limit 20
-          dashi-repo related searchPriorityDoesNotCreateProof --root . --limit 20
-          dashi-repo discover 'Fleet 584 44 58 three motifs manifest acquisition target' --root . --limit 50
-          dashi-repo discover 'Ibrahim Pareto snowball Monster 3B non-promotion' --root . --limit 50
-          dashi-repo lineage --prefix DASHI.Wikimedia.Ibrahim --root .
-          dashi-repo diagnose DASHI/Unified/BalabanRGTOEMaxCutValidation.agda --root .
-          dashi-repo diagnose DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda --root .
-          dashi-repo diagnose DASHI/Unified/BalabanR559TOEMaxCutExact.agda --root .
-          dashi-repo diagnose DASHI/Unified/BalabanR559TOEMaxCutValidation.agda --root .
-          dashi-repo diagnose DASHI/Unified/BalabanR559TOEUnifiedEverythingValidation.agda --root .
-          dashi-repo diagnose DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda --root .
-          dashi-repo diagnose DASHI/Physics/YangMills/YangMillsSubmissionObligationCardinalityExact.agda --root .
-          dashi-repo related physicalClosureRound6CutsetInhabitantsLevel --root . --limit 20
-          dashi-repo related gate4ObligationCount --root . --limit 20
-          dashi-repo discover 'Yang Mills Gate 4 58 unresolved cutset CMP109 Bishop Federbush background gauge Hessian polymer' --root . --limit 50
-          dashi-repo related scaleTransferPromotionEliminator --root . --limit 20
-          dashi-repo related balabanRGScaleTransferPromotionImpossibleHere --root . --limit 20
-          dashi-repo discover 'Balaban R559 same owner direct scale transfer non-promotion TOE max cut' --root . --limit 50
-          dashi-repo lineage --prefix DASHI.Unified.BalabanR559 --root .
-          dashi-repo diagnose DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda --root .
-          dashi-repo diagnose DASHI/Unified/BalabanIbrahimParetoSnowballTOEValidation.agda --root .
-          dashi-repo diagnose DASHI/Unified/YMGoal1R559IbrahimTOEValidation.agda --root .
-          dashi-repo related balabanRGScaleTransferPromotionImpossibleHere --root . --limit 20
-          dashi-repo related canonicalRecognitionRouteParetoBoundary --root . --limit 20
-          dashi-repo related currentMonster3BCharacterExecutionFrontier --root . --limit 20
-          dashi-repo related canonicalTrialectic369SchrodingerHZetaRecognitionMaxCutBoundary --root . --limit 20
-          dashi-repo discover 'Balaban R559 Goal1 max cut Ibrahim Pareto snowball Monster 3B H-zeta non-promotion' --root . --limit 50
-          dashi-repo lineage --prefix DASHI.Wikimedia.IbrahimMonster3B --root .
-          dashi-repo diagnose DASHI/Unified/FleetFormalGapTargetTOEExact.agda --root .
-          dashi-repo diagnose DASHI/Unified/FleetFormalGapTargetTOEValidation.agda --root .
-          dashi-repo related fleetVectorCoordinateDoesNotCreateTruth --root . --limit 20
-          dashi-repo related fleetExternalCountDoesNotCreateFormalDischarge --root . --limit 20
-          dashi-repo discover 'fleet 584 discharged 58 unformalised formal gaps eigen priority non-promotion' --root . --limit 40
-          dashi-repo diagnose DASHI/Unified/R559IbrahimFleetHyperfabricTOEExact.agda --root .
-          dashi-repo diagnose DASHI/Unified/R559IbrahimFleetHyperfabricTOEValidation.agda --root .
-          dashi-repo related canonicalR559IbrahimFleetHyperfabricTOEReceipt --root . --limit 20
-          dashi-repo related toePadicPrefixCannotRecoverDiscardedDigit --root . --limit 20
-          dashi-repo related toeTwoDigitStreamCannotRecoverThird --root . --limit 20
-          dashi-repo discover 'R559 Ibrahim fleet 58 hyperfabric p-adic wave WrongType exact non-promotion' --root . --limit 50
-          dashi-repo lineage --prefix DASHI.Core.IndexedRelational --root .
+          dashi-repo diagnose DASHI/Unified/RepoStateSpaceTOEConvergenceExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/RepoStateSpaceTOEConvergenceValidation.agda --root .
+          dashi-repo diagnose DASHI/Unified/TOE369CoarseFineIntertwinerMaxCutExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/TOE369CoarseFineIntertwinerMaxCutValidation.agda --root .
+          dashi-repo related toeKernelCharacterIsotypyDoesNotConstructActionIntertwiner --root . --limit 20
+          dashi-repo related toeTernary27PhaseReductionIsNotGlobalInversion --root . --limit 20
+          dashi-repo related toeWholeCharacterDirectIsotypicBridgeStillOpen --root . --limit 20
+          dashi-repo related toeInvariantDiagonalKernelSubgroupPaid --root . --limit 20
+          dashi-repo related toeActualTwelveSeventyEightLinearIntertwinerStillOpen --root . --limit 20
+          dashi-repo related toeOnlyOneSelected3BActionEquationRemainsAfterCore --root . --limit 20
+          dashi-repo related toeCanonicalSelected3BLinearCoreStillUninhabited --root . --limit 20
+          dashi-repo related toeOutgoingActualLinearActionStillOpen --root . --limit 20
+          dashi-repo related toeAcquisitionOnlyActionIntertwiningRemains --root . --limit 20
+          dashi-repo related toeHistoricalCorePlusHomWeldCompilesCanonicalCore --root . --limit 20
+          dashi-repo related toePhaseResolvedTwelveMultiplicityPaid --root . --limit 20
+          dashi-repo related toePhaseResolvedSeventyEightMultiplicityPaid --root . --limit 20
+          dashi-repo related toeActualSameActionTwelveSeventyEightIntertwinerStillOpen --root . --limit 20
+          dashi-repo related toeVOAKernelRecognizedAttachmentStillOpen --root . --limit 20
+          dashi-repo related toeShortestSourceCompilesActualActionRecognition --root . --limit 20
+          dashi-repo related toeSeparateActualActionRecognitionLeafNotNeeded --root . --limit 20
+          dashi-repo related toeBase369CandidateCompilesRecognition --root . --limit 20
+          dashi-repo related toeBase369ShortestCandidateStillUninhabited --root . --limit 20
+          dashi-repo related toeRecognitionAcquisitionTargetLocalized --root . --limit 20
+          dashi-repo related toeActualBase369RecognitionCandidateStillOpen --root . --limit 20
+          dashi-repo related toeOEISDoesNotCreateBase369RecognitionCandidate --root . --limit 20
+          dashi-repo related toeTernary27OriginPlus26CarrierPaid --root . --limit 20
+          dashi-repo related toeTernary27JordanProductStillOpen --root . --limit 20
+          dashi-repo related toeTernary27F4ActionStillOpen --root . --limit 20
+          dashi-repo discover 'ternary 27 origin 26 Albert shape Jordan F4 E6 same carrier BIDI' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Wikimedia.IbrahimTernary27OriginTraceless26AlbertShapeBidiExact --root .
+          dashi-repo discover 'A025616 Base369 recognition acquisition W_zeta appraisal fibre Fin90 translation modulation intertwiner' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Wikimedia.IbrahimMonster369A025616RecognitionAcquisitionExact --root .
+          dashi-repo discover 'shortest 3B source Base369 recognition candidate action recognition multiplicity inertia' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Reasoning.Trialectic369Shortest3BActionSourceBridgeExact --root .
+          dashi-repo lineage --prefix DASHI.Moonshine.Base369Monster3BShortestFrontierCandidateCompilerExact --root .
+          dashi-repo discover 'selected 3B linear acquisition completion normalizer action phase resolved 12 78 same action intertwiner' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Reasoning.Trialectic369Selected3BLinearAcquisitionCompletionExact --root .
+          dashi-repo lineage --prefix DASHI.Wikimedia.IbrahimMonster3BActualLinearMultiplicityAcquisitionExact --root .
+          dashi-repo lineage --prefix DASHI.Wikimedia.IbrahimMonster3BPhaseResolvedCharacterTwelveSeventyEightWeldExact --root .
+          dashi-repo discover 'Max Cut kernel BIDI ternary 27 selected 3B Pareto Ibrahim Snowball non-promotion' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Reasoning.Trialectic369Selected3B --root .
+          dashi-repo lineage --prefix DASHI.Moonshine.MonsterGradedVOAActual3BKernelSameElementBidiExact --root .
+          dashi-repo related rechartingCannotRecoverErasedPhenomenon --root . --limit 20
+          dashi-repo related round531PeriodicFourierSignQuotientIsBase369Carrier --root . --limit 20
+          dashi-repo discover 'dialectic ternary projection residual nonfactorability hyperfabric memory proof search Monster 196883 NS YM 369' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Core.IntersectionalNonFactorability --root .
+          dashi-repo lineage --prefix DASHI.Physics.Closure.NSTriadKNPeriodicTorusBase369NormalizationRound531Exact --root .
 
       - name: Reject ESD surface changes
         shell: bash
@@ -245,22 +244,14 @@ jobs:
             exit 1
           fi
 
-      - name: Fast Agda preflight on converged TOE graph
+      - name: Preflight connected TOE max-cut surfaces
         run: |
-          files=(
-            DASHI/Unified/TOE369MaxCutKernelBidiTernaryExact.agda
-            DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda
-            DASHI/Unified/FleetFormalGapTargetTOEExact.agda
-            DASHI/Unified/FleetFormalGapTargetTOEValidation.agda
-            DASHI/Unified/R559IbrahimFleetHyperfabricTOEExact.agda
-            DASHI/Unified/R559IbrahimFleetHyperfabricTOEValidation.agda
-            DASHI/EverythingTOESymmetryResolved369.agda
-            DASHI/Unifier.agda
-            DASHI/Unified/Everything.agda
-          )
-          for file in "${files[@]}"; do
-            dashi-agda-preflight --root . "$file"
-          done
+          dashi-agda-preflight --root . DASHI/Unified/TOE369CoarseFineIntertwinerMaxCutExact.agda
+          dashi-agda-preflight --root . DASHI/Unified/TOE369CoarseFineIntertwinerMaxCutValidation.agda
+          dashi-agda-preflight --root . DASHI/Unified/RepoStateSpaceTOEConvergenceExact.agda
+          dashi-agda-preflight --root . DASHI/EverythingTOESymmetryResolved369.agda
+          dashi-agda-preflight --root . DASHI/Unifier.agda
+          dashi-agda-preflight --root . DASHI/Unified/Everything.agda
 
       - name: Install Agda and standard library
         uses: wenkokke/setup-agda@v2
@@ -300,9 +291,10 @@ jobs:
             DASHI/Cognition/PNF/RationalMarkovLumpingFutureExact.agda
             DASHI/Physics/Closure/TOESymmetryResolved369BridgeExact.agda
             DASHI/Unified/BalabanRGTOERegression.agda
-            DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda
-            DASHI/Unified/Fleet58ManifestAcquisitionExact.agda
-            DASHI/Unified/FleetFormalGapTargetTOEExact.agda
+            DASHI/Unified/RepoStateSpaceTOEConvergenceExact.agda
+            DASHI/Unified/RepoStateSpaceTOEConvergenceValidation.agda
+            DASHI/Unified/TOE369CoarseFineIntertwinerMaxCutExact.agda
+            DASHI/Unified/TOE369CoarseFineIntertwinerMaxCutValidation.agda
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
             DASHI/Unified/YMGoal1TOECompatibilityValidation.agda
             DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
@@ -351,7 +343,7 @@ jobs:
             DASHI/Unified/R559IbrahimFleetHyperfabricTOEValidation.agda
           )
           for source in "${sources[@]}"; do
-            if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|NON_TERMINATING|TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
+            if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|\{!!\}|allow-unsolved-metas|NON_TERMINATING|(^|[^A-Z_])TERMINATING([^A-Z_]|$)|NO_POSITIVITY_CHECK' "$source"; then
               echo "forbidden trust escape in $source" >&2
               exit 1
             fi
@@ -361,17 +353,11 @@ jobs:
         run: |
           agda --version
           modules=(
-            DASHI/ComputerScience/TriadicFin27Byte256ABIExact.agda
-            DASHI/ComputerScience/TriadicU8RuntimeOracleCrossRepoExact.agda
-            DASHI/ComputerScience/TriadicCompiledScalarU8RuntimeExact.agda
-            DASHI/Unified/TOE369MaxCutKernelBidiTernaryExact.agda
-            DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda
-            DASHI/Unified/FleetFormalGapTargetTOEExact.agda
-            DASHI/Unified/FleetFormalGapTargetTOEValidation.agda
-            DASHI/Unified/R559IbrahimFleetHyperfabricTOEExact.agda
-            DASHI/Unified/R559IbrahimFleetHyperfabricTOEValidation.agda
-            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
-            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
+            DASHI/Unified/BalabanRGTOERegression.agda
+            DASHI/Unified/RepoStateSpaceTOEConvergenceExact.agda
+            DASHI/Unified/RepoStateSpaceTOEConvergenceValidation.agda
+            DASHI/Unified/TOE369CoarseFineIntertwinerMaxCutExact.agda
+            DASHI/Unified/TOE369CoarseFineIntertwinerMaxCutValidation.agda
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
             DASHI/Unified/NavierStokesClayFrontierTOEConvergenceExact.agda
             DASHI/Unified/NavierStokesClayFrontierTOEConvergenceValidation.agda

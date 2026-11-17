@@ -84,6 +84,15 @@ import DASHI.Wikimedia.IbrahimMonster3BWholeCharacterSimpleSubobjectClassificati
 import DASHI.Wikimedia.IbrahimMonsterCharacterToTwoIsotypicBlocksMathlibSnowballExact as TwoIsotypic
 import DASHI.Reasoning.Trialectic369CanonicalSelected3BLinearCoreExact as LinearCore
 import DASHI.Reasoning.Trialectic369OutgoingLinearAcquisitionBridgeExact as LinearAcquisition
+import DASHI.Reasoning.Trialectic369Selected3BLinearAcquisitionCompletionExact as AcquisitionCompletion
+import DASHI.Reasoning.Trialectic369Selected3BLinearCoreCompatibilityExact as CoreCompatibility
+import DASHI.Wikimedia.IbrahimMonster3BActualLinearMultiplicityAcquisitionExact as ActualAcquisition
+import DASHI.Wikimedia.IbrahimMonster3BPhaseResolvedCharacterTwelveSeventyEightWeldExact as PhaseWeld
+import DASHI.Wikimedia.IbrahimMonster3BActualVOASelected3BCompositionExact as VOAComposition
+import DASHI.Reasoning.Trialectic369Shortest3BActionSourceBridgeExact as ShortestAction
+import DASHI.Moonshine.Base369Monster3BShortestFrontierCandidateCompilerExact as ShortestCandidate
+import DASHI.Wikimedia.IbrahimMonster369A025616RecognitionAcquisitionExact as RecognitionAcquisition
+import DASHI.Wikimedia.IbrahimTernary27OriginTraceless26AlbertShapeBidiExact as Albert27
 
 ------------------------------------------------------------------------
 -- 1. Canonical coarse/fine reopening.
@@ -582,7 +591,280 @@ toeOutgoingTwelveSeventyEightIntertwinerStillOpen :
 toeOutgoingTwelveSeventyEightIntertwinerStillOpen = refl
 
 ------------------------------------------------------------------------
--- 13. Typed ZKP O/R/C/S/L/P/G/F convergence receipt.
+-- 13. Reused selected-3B acquisition compiler and phase-resolved 12+78 cut.
+--
+-- The compiler debt is paid in existing owners.
+-- The action-level inhabitant is not paid.
+------------------------------------------------------------------------
+
+toeAcquisitionCoreCompilerAlreadyOwned :
+  AcquisitionCompletion.Trialectic369Selected3BLinearAcquisitionCompletionBoundary.acquisitionCoreCompilerOwned
+    AcquisitionCompletion.canonicalTrialectic369Selected3BLinearAcquisitionCompletionBoundary
+  ≡ true
+toeAcquisitionCoreCompilerAlreadyOwned = refl
+
+toeAcquisitionCoreCompilesSameElementComposition :
+  AcquisitionCompletion.Trialectic369Selected3BLinearAcquisitionCompletionBoundary.coreCompilesSameElementComposition
+    AcquisitionCompletion.canonicalTrialectic369Selected3BLinearAcquisitionCompletionBoundary
+  ≡ true
+toeAcquisitionCoreCompilesSameElementComposition = refl
+
+toeAcquisitionNormalizerCarrierBidiCompilerPaid :
+  AcquisitionCompletion.Trialectic369Selected3BLinearAcquisitionCompletionBoundary.normalizerMonsterCarrierBidiCompilerOutput
+    AcquisitionCompletion.canonicalTrialectic369Selected3BLinearAcquisitionCompletionBoundary
+  ≡ true
+toeAcquisitionNormalizerCarrierBidiCompilerPaid = refl
+
+toeAcquisitionOnlyActionIntertwiningRemains :
+  AcquisitionCompletion.Trialectic369Selected3BLinearAcquisitionCompletionBoundary.onlyActionIntertwiningRemainsAfterScaffold
+    AcquisitionCompletion.canonicalTrialectic369Selected3BLinearAcquisitionCompletionBoundary
+  ≡ true
+toeAcquisitionOnlyActionIntertwiningRemains = refl
+
+toeAcquisitionSourceNativePayloadRetained :
+  AcquisitionCompletion.Trialectic369Selected3BLinearAcquisitionCompletionBoundary.sourceNativeInertiaPayloadRetained
+    AcquisitionCompletion.canonicalTrialectic369Selected3BLinearAcquisitionCompletionBoundary
+  ≡ true
+toeAcquisitionSourceNativePayloadRetained = refl
+
+toeAcquisitionTwelveSeventyEightPayloadRetained :
+  AcquisitionCompletion.Trialectic369Selected3BLinearAcquisitionCompletionBoundary.twelveSeventyEightIntertwinerPayloadRetained
+    AcquisitionCompletion.canonicalTrialectic369Selected3BLinearAcquisitionCompletionBoundary
+  ≡ true
+toeAcquisitionTwelveSeventyEightPayloadRetained = refl
+
+toeAcquisitionCoreStillUninhabited :
+  AcquisitionCompletion.Trialectic369Selected3BLinearAcquisitionCompletionBoundary.acquisitionCoreInhabitedHere
+    AcquisitionCompletion.canonicalTrialectic369Selected3BLinearAcquisitionCompletionBoundary
+  ≡ false
+toeAcquisitionCoreStillUninhabited = refl
+
+toeAcquisitionActionIntertwiningStillUninhabited :
+  AcquisitionCompletion.Trialectic369Selected3BLinearAcquisitionCompletionBoundary.actionIntertwiningInhabitedHere
+    AcquisitionCompletion.canonicalTrialectic369Selected3BLinearAcquisitionCompletionBoundary
+  ≡ false
+toeAcquisitionActionIntertwiningStillUninhabited = refl
+
+toeHistoricalCoreNeedsExplicitHomWeld :
+  CoreCompatibility.Trialectic369Selected3BLinearCoreCompatibilityBoundary.historicalCoreAloneSufficesForCanonicalCore
+    CoreCompatibility.canonicalTrialectic369Selected3BLinearCoreCompatibilityBoundary
+  ≡ false
+toeHistoricalCoreNeedsExplicitHomWeld = refl
+
+toeHistoricalCorePlusHomWeldCompilesCanonicalCore :
+  CoreCompatibility.Trialectic369Selected3BLinearCoreCompatibilityBoundary.historicalCorePlusHomWeldCompilesCanonicalCore
+    CoreCompatibility.canonicalTrialectic369Selected3BLinearCoreCompatibilityBoundary
+  ≡ true
+toeHistoricalCorePlusHomWeldCompilesCanonicalCore = refl
+
+toeHistoricalActionEquationCompilesCanonicalAction :
+  CoreCompatibility.Trialectic369Selected3BLinearCoreCompatibilityBoundary.historicalActionEquationCompilesCanonicalAction
+    CoreCompatibility.canonicalTrialectic369Selected3BLinearCoreCompatibilityBoundary
+  ≡ true
+toeHistoricalActionEquationCompilesCanonicalAction = refl
+
+toePhaseResolvedTwelveMultiplicityPaid :
+  PhaseWeld.PhaseCharacterWeldFrontier.twelveMultiplicityAtCharacterLevelPaid
+    PhaseWeld.currentPhaseCharacterWeldFrontier
+  ≡ true
+toePhaseResolvedTwelveMultiplicityPaid = refl
+
+toePhaseResolvedSeventyEightMultiplicityPaid :
+  PhaseWeld.PhaseCharacterWeldFrontier.seventyEightMultiplicityAtCharacterLevelPaid
+    PhaseWeld.currentPhaseCharacterWeldFrontier
+  ≡ true
+toePhaseResolvedSeventyEightMultiplicityPaid = refl
+
+toePhaseResolvedMatricesStillOpen :
+  PhaseWeld.PhaseCharacterWeldFrontier.concretePhaseResolvedMatricesPaid
+    PhaseWeld.currentPhaseCharacterWeldFrontier
+  ≡ false
+toePhaseResolvedMatricesStillOpen = refl
+
+toePhaseResolvedSameActionIntertwinerStillOpen :
+  PhaseWeld.PhaseCharacterWeldFrontier.sameActionTwelveSeventyEightIntertwinerPaid
+    PhaseWeld.currentPhaseCharacterWeldFrontier
+  ≡ false
+toePhaseResolvedSameActionIntertwinerStillOpen = refl
+
+toeActualLinearActionStillOpen :
+  ActualAcquisition.ActualLinearMultiplicityAcquisitionFrontier.actualLinearActionPaid
+    ActualAcquisition.currentActualLinearMultiplicityAcquisitionFrontier
+  ≡ false
+toeActualLinearActionStillOpen = refl
+
+toeActualSourceNativeInertiaSameActionStillOpen :
+  ActualAcquisition.ActualLinearMultiplicityAcquisitionFrontier.sourceNativeInertiaSameActionPaid
+    ActualAcquisition.currentActualLinearMultiplicityAcquisitionFrontier
+  ≡ false
+toeActualSourceNativeInertiaSameActionStillOpen = refl
+
+toeActualSameActionTwelveSeventyEightIntertwinerStillOpen :
+  ActualAcquisition.ActualLinearMultiplicityAcquisitionFrontier.actualTwelveSeventyEightIntertwinerPaid
+    ActualAcquisition.currentActualLinearMultiplicityAcquisitionFrontier
+  ≡ false
+toeActualSameActionTwelveSeventyEightIntertwinerStillOpen = refl
+
+toeVOAKernelRecognizedAttachmentStillOpen :
+  VOAComposition.ActualVOASelected3BCompositionFrontier.kernelRecognizedAttachmentInhabitedHere
+    VOAComposition.currentActualVOASelected3BCompositionFrontier
+  ≡ false
+toeVOAKernelRecognizedAttachmentStillOpen = refl
+
+toeVOANormalizerMonsterActionWeldStillOpen :
+  VOAComposition.ActualVOASelected3BCompositionFrontier.normalizerMonsterActionWeldPaidHere
+    VOAComposition.currentActualVOASelected3BCompositionFrontier
+  ≡ false
+toeVOANormalizerMonsterActionWeldStillOpen = refl
+
+toeVOATwelveSeventyEightIntertwinerStillOpen :
+  VOAComposition.ActualVOASelected3BCompositionFrontier.twelveSeventyEightIntertwinerPaidHere
+    VOAComposition.currentActualVOASelected3BCompositionFrontier
+  ≡ false
+toeVOATwelveSeventyEightIntertwinerStillOpen = refl
+
+
+------------------------------------------------------------------------
+-- 14. Shortest-source action-recognition compiler max cut.
+--
+-- Recognition is compiler output once the shortest source is inhabited.
+-- The upstream Base369 candidate and downstream Fin90 inertia action remain
+-- distinct payments.
+------------------------------------------------------------------------
+
+toeShortestSourceContainsActualZetaRecognition :
+  ShortestAction.Trialectic369Shortest3BActionSourceBridgeBoundary.shortestSourceContainsActualZetaRecognition
+    ShortestAction.canonicalTrialectic369Shortest3BActionSourceBridgeBoundary
+  ≡ true
+toeShortestSourceContainsActualZetaRecognition = refl
+
+toeShortestSourceCompilesSingleActionProducer :
+  ShortestAction.Trialectic369Shortest3BActionSourceBridgeBoundary.singleActionProducerCompiled
+    ShortestAction.canonicalTrialectic369Shortest3BActionSourceBridgeBoundary
+  ≡ true
+toeShortestSourceCompilesSingleActionProducer = refl
+
+toeShortestSourceCompilesActualActionRecognition :
+  ShortestAction.Trialectic369Shortest3BActionSourceBridgeBoundary.actualActionRecognitionCompiled
+    ShortestAction.canonicalTrialectic369Shortest3BActionSourceBridgeBoundary
+  ≡ true
+toeShortestSourceCompilesActualActionRecognition = refl
+
+toeSeparateActualActionRecognitionLeafNotNeeded :
+  ShortestAction.Trialectic369Shortest3BActionSourceBridgeBoundary.separateTrialecticActualActionRecognitionLeafNeeded
+    ShortestAction.canonicalTrialectic369Shortest3BActionSourceBridgeBoundary
+  ≡ false
+toeSeparateActualActionRecognitionLeafNotNeeded = refl
+
+toeRecognitionDoesNotCompileMultiplicityInertia :
+  ShortestAction.Trialectic369Shortest3BActionSourceBridgeBoundary.multiplicityInertiaAttachmentCompiledFromRecognitionAlone
+    ShortestAction.canonicalTrialectic369Shortest3BActionSourceBridgeBoundary
+  ≡ false
+toeRecognitionDoesNotCompileMultiplicityInertia = refl
+
+toeBase369CandidateCompilesRecognition :
+  ShortestCandidate.Base369ShortestFrontierCandidateBoundary.base369CandidateCompilesRecognition
+    ShortestCandidate.canonicalBase369ShortestFrontierCandidateBoundary
+  ≡ true
+toeBase369CandidateCompilesRecognition = refl
+
+toeBase369CandidateCompilesCapstoneTail :
+  ShortestCandidate.Base369ShortestFrontierCandidateBoundary.capstoneTailBecomesCompilerOutput
+    ShortestCandidate.canonicalBase369ShortestFrontierCandidateBoundary
+  ≡ true
+toeBase369CandidateCompilesCapstoneTail = refl
+
+toeBase369ShortestCandidateStillUninhabited :
+  ShortestCandidate.Base369ShortestFrontierCandidateBoundary.base369CandidateInhabitedHere
+    ShortestCandidate.canonicalBase369ShortestFrontierCandidateBoundary
+  ≡ false
+toeBase369ShortestCandidateStillUninhabited = refl
+
+toeCharacterIsotypyDoesNotCreateBase369Candidate :
+  ShortestCandidate.CharacterIsotypyCreatesBase369Candidate → ⊥
+toeCharacterIsotypyDoesNotCreateBase369Candidate =
+  ShortestCandidate.characterIsotypyDoesNotCreateBase369Candidate
+
+
+------------------------------------------------------------------------
+-- 15. Exact Base369 recognition acquisition wall.
+------------------------------------------------------------------------
+
+toeRecognitionAcquisitionTargetLocalized :
+  RecognitionAcquisition.A025616RecognitionAcquisitionBoundary.exactAcquisitionTargetLocalized
+    RecognitionAcquisition.currentA025616RecognitionAcquisitionBoundary
+  ≡ true
+toeRecognitionAcquisitionTargetLocalized = refl
+
+toeRecognitionCompilerAvailableAtWall :
+  RecognitionAcquisition.A025616RecognitionAcquisitionBoundary.base369RecognitionCompilerAvailable
+    RecognitionAcquisition.currentA025616RecognitionAcquisitionBoundary
+  ≡ true
+toeRecognitionCompilerAvailableAtWall = refl
+
+toeActualBase369RecognitionCandidateStillOpen :
+  RecognitionAcquisition.A025616RecognitionAcquisitionBoundary.actualBase369RecognitionCandidatePaid
+    RecognitionAcquisition.currentA025616RecognitionAcquisitionBoundary
+  ≡ false
+toeActualBase369RecognitionCandidateStillOpen = refl
+
+toeOEISDoesNotCreateBase369RecognitionCandidate :
+  RecognitionAcquisition.OEISCreatesBase369RecognitionCandidate → ⊥
+toeOEISDoesNotCreateBase369RecognitionCandidate =
+  RecognitionAcquisition.oeisDoesNotCreateBase369RecognitionCandidate
+
+toeDimensionDoesNotCreateRecognitionIntertwiners :
+  RecognitionAcquisition.DimensionMatchCreatesOperatorIntertwiners → ⊥
+toeDimensionDoesNotCreateRecognitionIntertwiners =
+  RecognitionAcquisition.dimensionMatchDoesNotCreateOperatorIntertwiners
+
+
+------------------------------------------------------------------------
+-- 16. Ternary-27 origin + 26 Albert-shape BIDI max cut.
+--
+-- The carrier bijection is paid on the same ternary-27 object.
+-- Jordan product and exceptional actions are not paid by the shape.
+------------------------------------------------------------------------
+
+toeTernary27OriginPlus26CarrierPaid :
+  Albert27.Ternary27AlbertShapeFrontier.originPlus26BijectionPaid
+    Albert27.currentTernary27AlbertShapeFrontier
+  ≡ true
+toeTernary27OriginPlus26CarrierPaid = refl
+
+toeTernary27AlbertShapeSameCarrierPaid :
+  Albert27.Ternary27AlbertShapeFrontier.albert27ShapeInstantiatedOnSameCarrier
+    Albert27.currentTernary27AlbertShapeFrontier
+  ≡ true
+toeTernary27AlbertShapeSameCarrierPaid = refl
+
+toeTernary27OriginMapsToScalarSummand :
+  Albert27.Ternary27AlbertShapeFrontier.originMapsToScalarSummand
+    Albert27.currentTernary27AlbertShapeFrontier
+  ≡ true
+toeTernary27OriginMapsToScalarSummand = refl
+
+toeTernary27JordanProductStillOpen :
+  Albert27.Ternary27AlbertShapeFrontier.jordanProductPaid
+    Albert27.currentTernary27AlbertShapeFrontier
+  ≡ false
+toeTernary27JordanProductStillOpen = refl
+
+toeTernary27F4ActionStillOpen :
+  Albert27.Ternary27AlbertShapeFrontier.f4ActionPaid
+    Albert27.currentTernary27AlbertShapeFrontier
+  ≡ false
+toeTernary27F4ActionStillOpen = refl
+
+toeTernary27E6ActionStillOpen :
+  Albert27.Ternary27AlbertShapeFrontier.e6ActionPaid
+    Albert27.currentTernary27AlbertShapeFrontier
+  ≡ false
+toeTernary27E6ActionStillOpen = refl
+
+
+------------------------------------------------------------------------
+-- 17. Typed ZKP O/R/C/S/L/P/G/F convergence receipt.
 ------------------------------------------------------------------------
 
 record TOE369MaxCutZKPFrame : Set where
@@ -603,13 +885,13 @@ canonicalTOE369MaxCutZKPFrame : TOE369MaxCutZKPFrame
 canonicalTOE369MaxCutZKPFrame =
   toe369-max-cut-zkp-frame
     "Converge Base369 coarse/fine, ternary-27, selected-3B max-cut, kernel-BIDI, Pareto, Snowball, and Ibrahim theorem owners onto one acyclic TOE surface."
-    "Reuse the existing coarse/fine reopening, C3 symmetry, signed phase intertwiner, selected-3B max-cut, same-element BIDI, single-action producer, H-zeta recognition, whole-character Pareto, class-20 kernel Snowball, and Ibrahim reduction owners."
-    "Expose aliases only. Remove the legacy Unifier import from the theorem-bearing core so every TOE facade can consume the same owner without an import cycle."
+    "Reuse the existing coarse/fine reopening, C3 symmetry, signed phase intertwiner, selected-3B max-cut, same-element BIDI, linear-acquisition compiler, shortest-source action-recognition compiler, phase-resolved 12+78 character weld, Base369 recognition acquisition wall, whole-character Pareto, class-20 kernel Snowball, and Ibrahim owners."
+    "Expose aliases only. Reconcile stale frontier splits: action recognition is compiler output from a shortest source; the first constructive recognition wall is the same-source Base369RecognitionCandidate; the same-action Fin90 inertia and 12+78 intertwiner remain downstream."
     "Keep dimension, character, carrier equality, phase reduction, and finite indexing non-promoting. Do not invent a CFFI theorem. Do not edit ESD or digital_esd surfaces."
     "This lane owns only TOE normalization of the existing Max Cut and kernel-BIDI surfaces."
     "All donor owners exist. The requested CFFI label has no literal repository theorem owner, so the exact existing kernel-BIDI owners are the only admissible proof authority."
     "One result keeps one canonical owner. A character does not create an action. A finite chart does not create a representation. A phase-preserving reduction is not global inversion. Same dimension is not same object."
-    "The focused TOE root, Unifier, and Unified aggregate reach the same exact non-promotion and open-frontier terms with no legacy import cycle."
+    "The focused TOE root, Unifier, and Unified aggregate reach the same paid compiler terms and the same exact Base369-recognition and same-action open frontiers with no legacy import cycle."
     "Original mathematical authors and repository theorem owners retain attribution. Meta-introspector repositories remain source context and do not gain DASHI theorem ownership."
     "Run related-symbol, discover, lineage, preflight, trust-escape, ESD-diff, validation, and focused Agda checks. Claim kernel success only from an observed exact-head receipt."
 

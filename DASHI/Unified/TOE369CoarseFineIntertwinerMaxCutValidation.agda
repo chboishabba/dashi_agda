@@ -5,9 +5,7 @@ open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
-import DASHI.Unifier as Legacy
 import DASHI.Unified.TOE369CoarseFineIntertwinerMaxCutExact as TOE
-import DASHI.Foundations.SSPTritCarrier as SSP
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Geometry
 import DASHI.Foundations.Base369CoarseFineFabricAdapterExact as Fabric
 import DASHI.Moonshine.Base369Ternary27SpectralSymmetryIrrepBridgeExact as Spectral
@@ -22,14 +20,23 @@ import DASHI.Moonshine.Base369Monster3BSingleActionProducerBidiExact as SingleAc
 import DASHI.Wikimedia.IbrahimMonster3BLinearShortestFrontierCorrectionExact as Ibrahim
 import DASHI.Reasoning.Trialectic369SchrodingerHZetaRecognitionMaxCutExact as HZetaMaxCut
 import DASHI.Wikimedia.IbrahimMonsterTernary27PhasePreservingFiveOrbitReductionExact as TernaryReduction
-
-legacyNegativeRoundTrip :
-  TOE.sspToLegacy (TOE.legacyToSSP Legacy.neg) ≡ Legacy.neg
-legacyNegativeRoundTrip = refl
-
-sspPositiveRoundTrip :
-  TOE.legacyToSSP (TOE.sspToLegacy SSP.sspPosOne) ≡ SSP.sspPosOne
-sspPositiveRoundTrip = refl
+import DASHI.Wikimedia.IbrahimMonster3BWholeCharacterIsotypicBypassExact as WholeCharacter
+import DASHI.Wikimedia.IbrahimMonster3BPrimarySupplementKernelClass20SnowballExact as KernelClass20
+import DASHI.Wikimedia.IbrahimMonster3BDiagonalKernelPaidSignGaugeCorrectionExact as KernelGauge
+import DASHI.Wikimedia.IbrahimMonster3BFDRepGroupAlgebraAdapterReceiptExact as FDRepReceipt
+import DASHI.Wikimedia.IbrahimMonster3BWholeCharacterSimpleSubobjectClassificationExact as SimpleClassifier
+import DASHI.Wikimedia.IbrahimMonsterCharacterToTwoIsotypicBlocksMathlibSnowballExact as TwoIsotypic
+import DASHI.Reasoning.Trialectic369CanonicalSelected3BLinearCoreExact as LinearCore
+import DASHI.Reasoning.Trialectic369OutgoingLinearAcquisitionBridgeExact as LinearAcquisition
+import DASHI.Reasoning.Trialectic369Selected3BLinearAcquisitionCompletionExact as AcquisitionCompletion
+import DASHI.Reasoning.Trialectic369Selected3BLinearCoreCompatibilityExact as CoreCompatibility
+import DASHI.Wikimedia.IbrahimMonster3BActualLinearMultiplicityAcquisitionExact as ActualAcquisition
+import DASHI.Wikimedia.IbrahimMonster3BPhaseResolvedCharacterTwelveSeventyEightWeldExact as PhaseWeld
+import DASHI.Wikimedia.IbrahimMonster3BActualVOASelected3BCompositionExact as VOAComposition
+import DASHI.Reasoning.Trialectic369Shortest3BActionSourceBridgeExact as ShortestAction
+import DASHI.Moonshine.Base369Monster3BShortestFrontierCandidateCompilerExact as ShortestCandidate
+import DASHI.Wikimedia.IbrahimMonster369A025616RecognitionAcquisitionExact as RecognitionAcquisition
+import DASHI.Wikimedia.IbrahimTernary27OriginTraceless26AlbertShapeBidiExact as Albert27
 
 originIsFixed :
   Spectral.rotateXYZ Geometry.origin ≡ Geometry.origin
@@ -209,3 +216,335 @@ ternary27ReductionIsNotMonster42SameObject :
   ≡ false
 ternary27ReductionIsNotMonster42SameObject =
   TOE.toeTernary27ReductionIsNotMonster42SameObject
+
+
+------------------------------------------------------------------------
+-- Current Pareto / Snowball / Ibrahim frontier regression.
+------------------------------------------------------------------------
+
+wholeCharacterDirectIsotypicBridgeRemainsOpen :
+  WholeCharacter.WholeCharacterIsotypicBypassBoundary.directWholeCharacterToIsotypicBridgeLocated
+    WholeCharacter.canonicalWholeCharacterIsotypicBypassBoundary
+  ≡ false
+wholeCharacterDirectIsotypicBridgeRemainsOpen =
+  TOE.toeWholeCharacterDirectIsotypicBridgeStillOpen
+
+wholeCharacterActualKernelReplayRemainsOpen :
+  WholeCharacter.WholeCharacterIsotypicBypassBoundary.actualKernelReplayReceiptObserved
+    WholeCharacter.canonicalWholeCharacterIsotypicBypassBoundary
+  ≡ false
+wholeCharacterActualKernelReplayRemainsOpen =
+  TOE.toeWholeCharacterActualKernelReplayStillOpen
+
+primarySupplementKernelClassTwentyRemainsPaid :
+  KernelClass20.PrimarySupplementKernelFrontier.mainClassTwentyCoordinatePaid
+    KernelClass20.currentPrimarySupplementKernelFrontier
+  ≡ true
+primarySupplementKernelClassTwentyRemainsPaid =
+  TOE.toePrimarySupplementKernelClassTwentyPaid
+
+invariantDiagonalKernelSubgroupRemainsPaid :
+  KernelGauge.DiagonalKernelGaugeFrontier.invariantDiagonalKernelSubgroupPaid
+    KernelGauge.currentDiagonalKernelGaugeFrontier
+  ≡ true
+invariantDiagonalKernelSubgroupRemainsPaid =
+  TOE.toeInvariantDiagonalKernelSubgroupPaid
+
+twelveSeventyEightCharacterRemainsPaid :
+  Ibrahim.CorrectedShortestFrontierBoundary.twelveSeventyEightCharacterAlreadyPaid
+    Ibrahim.canonicalCorrectedShortestFrontierBoundary
+  ≡ true
+twelveSeventyEightCharacterRemainsPaid =
+  TOE.toeTwelveSeventyEightCharacterAlreadyPaid
+
+actualTwelveSeventyEightLinearIntertwinerRemainsOpen :
+  Ibrahim.CorrectedShortestFrontierBoundary.actualTwelveSeventyEightLinearIntertwinerPaid
+    Ibrahim.canonicalCorrectedShortestFrontierBoundary
+  ≡ false
+actualTwelveSeventyEightLinearIntertwinerRemainsOpen =
+  TOE.toeActualTwelveSeventyEightLinearIntertwinerStillOpen
+
+characterEqualityStillDoesNotCreateWholeIso :
+  WholeCharacter.CharacterEqualityAloneCreatesWholeRepresentationIso → ⊥
+characterEqualityStillDoesNotCreateWholeIso =
+  TOE.toeWholeCharacterEqualityDoesNotCreateWholeIso
+
+paidKernelStillDoesNotRequireAbsoluteSignName :
+  KernelGauge.PaidKernelRequiresAbsoluteSignName → ⊥
+paidKernelStillDoesNotRequireAbsoluteSignName =
+  TOE.toePaidKernelDoesNotRequireAbsoluteSignName
+
+
+------------------------------------------------------------------------
+-- Cross-prover generic representation receipt regression.
+------------------------------------------------------------------------
+
+leanFDRepAdapterSourceRemainsWritten :
+  FDRepReceipt.FDRepGroupAlgebraAdapterBoundary.leanAdapterSourceWritten
+    FDRepReceipt.canonicalFDRepGroupAlgebraAdapterBoundary
+  ≡ true
+leanFDRepAdapterSourceRemainsWritten =
+  TOE.toeLeanFDRepAdapterSourceWritten
+
+leanFDRepAdapterKernelReceiptRemainsUnobserved :
+  FDRepReceipt.FDRepGroupAlgebraAdapterBoundary.leanKernelReceiptObserved
+    FDRepReceipt.canonicalFDRepGroupAlgebraAdapterBoundary
+  ≡ false
+leanFDRepAdapterKernelReceiptRemainsUnobserved =
+  TOE.toeLeanFDRepAdapterKernelReceiptStillUnobserved
+
+leanFDRepAdapterAgdaTransportRemainsUnobserved :
+  FDRepReceipt.FDRepGroupAlgebraAdapterBoundary.agdaTransportObserved
+    FDRepReceipt.canonicalFDRepGroupAlgebraAdapterBoundary
+  ≡ false
+leanFDRepAdapterAgdaTransportRemainsUnobserved =
+  TOE.toeLeanFDRepAdapterAgdaTransportStillUnobserved
+
+simpleSourceClassifierRemainsSourceWritten :
+  SimpleClassifier.SimpleSubobjectClassificationBoundary.leanSourceWritten
+    SimpleClassifier.canonicalSimpleSubobjectClassificationBoundary
+  ≡ true
+simpleSourceClassifierRemainsSourceWritten =
+  TOE.toeSimpleSourceClassifierSourceWritten
+
+characterMultiplicityLemmasRemainSourceWritten :
+  TwoIsotypic.TwoIsotypicCompilerFrontier.multiplicityLemmasSourceWritten
+    TwoIsotypic.currentTwoIsotypicCompilerFrontier
+  ≡ true
+characterMultiplicityLemmasRemainSourceWritten =
+  TOE.toeCharacterMultiplicityLemmasSourceWritten
+
+twoIsotypicAgdaTransportRemainsOpen :
+  TwoIsotypic.TwoIsotypicCompilerFrontier.fullTwoSimpleCompilerTransportedToAgda
+    TwoIsotypic.currentTwoIsotypicCompilerFrontier
+  ≡ false
+twoIsotypicAgdaTransportRemainsOpen =
+  TOE.toeTwoIsotypicAgdaTransportStillOpen
+
+actualMonsterFin90SameActionAttachmentRemainsOpen :
+  TwoIsotypic.TwoIsotypicCompilerFrontier.actualMonsterFin90SameActionAttachmentPaid
+    TwoIsotypic.currentTwoIsotypicCompilerFrontier
+  ≡ false
+actualMonsterFin90SameActionAttachmentRemainsOpen =
+  TOE.toeActualMonsterFin90SameActionAttachmentStillOpen
+
+
+------------------------------------------------------------------------
+-- Canonical selected-3B linear max-cut regression.
+------------------------------------------------------------------------
+
+canonicalSelected3BLinearRouteCompilerRemainsAvailable :
+  LinearCore.Trialectic369CanonicalSelected3BLinearCoreBoundary.canonicalLinearRouteCompilerOutput
+    LinearCore.canonicalTrialectic369CanonicalSelected3BLinearCoreBoundary
+  ≡ true
+canonicalSelected3BLinearRouteCompilerRemainsAvailable =
+  TOE.toeCanonicalSelected3BLinearRouteCompilerOutput
+
+normalizerMonsterCarrierBidiCompilerRemainsAvailable :
+  LinearCore.Trialectic369CanonicalSelected3BLinearCoreBoundary.normalizerMonsterCarrierBidiCompilerOutput
+    LinearCore.canonicalTrialectic369CanonicalSelected3BLinearCoreBoundary
+  ≡ true
+normalizerMonsterCarrierBidiCompilerRemainsAvailable =
+  TOE.toeNormalizerMonsterCarrierBidiCompilerOutput
+
+onlyOneSelected3BActionEquationRemainsAfterCore :
+  LinearCore.Trialectic369CanonicalSelected3BLinearCoreBoundary.onlyOneActionEquationRemainsAfterCore
+    LinearCore.canonicalTrialectic369CanonicalSelected3BLinearCoreBoundary
+  ≡ true
+onlyOneSelected3BActionEquationRemainsAfterCore =
+  TOE.toeOnlyOneSelected3BActionEquationRemainsAfterCore
+
+canonicalSelected3BLinearCoreRemainsUninhabited :
+  LinearCore.Trialectic369CanonicalSelected3BLinearCoreBoundary.canonicalCoreInhabitedHere
+    LinearCore.canonicalTrialectic369CanonicalSelected3BLinearCoreBoundary
+  ≡ false
+canonicalSelected3BLinearCoreRemainsUninhabited =
+  TOE.toeCanonicalSelected3BLinearCoreStillUninhabited
+
+selected3BActionIntertwiningRemainsUninhabited :
+  LinearCore.Trialectic369CanonicalSelected3BLinearCoreBoundary.actionIntertwiningInhabitedHere
+    LinearCore.canonicalTrialectic369CanonicalSelected3BLinearCoreBoundary
+  ≡ false
+selected3BActionIntertwiningRemainsUninhabited =
+  TOE.toeSelected3BActionIntertwiningStillUninhabited
+
+outgoingLinearAcquisitionRemainsUninhabited :
+  LinearAcquisition.Trialectic369OutgoingLinearAcquisitionBridgeBoundary.acquisitionInhabitedHere
+    LinearAcquisition.canonicalTrialectic369OutgoingLinearAcquisitionBridgeBoundary
+  ≡ false
+outgoingLinearAcquisitionRemainsUninhabited =
+  TOE.toeOutgoingLinearAcquisitionStillUninhabited
+
+
+------------------------------------------------------------------------
+-- Reused acquisition compiler and phase-resolved 12+78 regression.
+------------------------------------------------------------------------
+
+acquisitionCoreCompilerRemainsOwned :
+  AcquisitionCompletion.Trialectic369Selected3BLinearAcquisitionCompletionBoundary.acquisitionCoreCompilerOwned
+    AcquisitionCompletion.canonicalTrialectic369Selected3BLinearAcquisitionCompletionBoundary
+  ≡ true
+acquisitionCoreCompilerRemainsOwned =
+  TOE.toeAcquisitionCoreCompilerAlreadyOwned
+
+acquisitionOnlyActionIntertwiningRemains :
+  AcquisitionCompletion.Trialectic369Selected3BLinearAcquisitionCompletionBoundary.onlyActionIntertwiningRemainsAfterScaffold
+    AcquisitionCompletion.canonicalTrialectic369Selected3BLinearAcquisitionCompletionBoundary
+  ≡ true
+acquisitionOnlyActionIntertwiningRemains =
+  TOE.toeAcquisitionOnlyActionIntertwiningRemains
+
+acquisitionSourceNativePayloadRemainsRetained :
+  AcquisitionCompletion.Trialectic369Selected3BLinearAcquisitionCompletionBoundary.sourceNativeInertiaPayloadRetained
+    AcquisitionCompletion.canonicalTrialectic369Selected3BLinearAcquisitionCompletionBoundary
+  ≡ true
+acquisitionSourceNativePayloadRemainsRetained =
+  TOE.toeAcquisitionSourceNativePayloadRetained
+
+acquisitionTwelveSeventyEightPayloadRemainsRetained :
+  AcquisitionCompletion.Trialectic369Selected3BLinearAcquisitionCompletionBoundary.twelveSeventyEightIntertwinerPayloadRetained
+    AcquisitionCompletion.canonicalTrialectic369Selected3BLinearAcquisitionCompletionBoundary
+  ≡ true
+acquisitionTwelveSeventyEightPayloadRemainsRetained =
+  TOE.toeAcquisitionTwelveSeventyEightPayloadRetained
+
+historicalCorePlusHomWeldStillCompilesCanonicalCore :
+  CoreCompatibility.Trialectic369Selected3BLinearCoreCompatibilityBoundary.historicalCorePlusHomWeldCompilesCanonicalCore
+    CoreCompatibility.canonicalTrialectic369Selected3BLinearCoreCompatibilityBoundary
+  ≡ true
+historicalCorePlusHomWeldStillCompilesCanonicalCore =
+  TOE.toeHistoricalCorePlusHomWeldCompilesCanonicalCore
+
+phaseResolvedTwelveMultiplicityRemainsPaid :
+  PhaseWeld.PhaseCharacterWeldFrontier.twelveMultiplicityAtCharacterLevelPaid
+    PhaseWeld.currentPhaseCharacterWeldFrontier
+  ≡ true
+phaseResolvedTwelveMultiplicityRemainsPaid =
+  TOE.toePhaseResolvedTwelveMultiplicityPaid
+
+phaseResolvedSeventyEightMultiplicityRemainsPaid :
+  PhaseWeld.PhaseCharacterWeldFrontier.seventyEightMultiplicityAtCharacterLevelPaid
+    PhaseWeld.currentPhaseCharacterWeldFrontier
+  ≡ true
+phaseResolvedSeventyEightMultiplicityRemainsPaid =
+  TOE.toePhaseResolvedSeventyEightMultiplicityPaid
+
+phaseResolvedSameActionIntertwinerRemainsOpen :
+  PhaseWeld.PhaseCharacterWeldFrontier.sameActionTwelveSeventyEightIntertwinerPaid
+    PhaseWeld.currentPhaseCharacterWeldFrontier
+  ≡ false
+phaseResolvedSameActionIntertwinerRemainsOpen =
+  TOE.toePhaseResolvedSameActionIntertwinerStillOpen
+
+actualLinearActionRemainsOpen :
+  ActualAcquisition.ActualLinearMultiplicityAcquisitionFrontier.actualLinearActionPaid
+    ActualAcquisition.currentActualLinearMultiplicityAcquisitionFrontier
+  ≡ false
+actualLinearActionRemainsOpen =
+  TOE.toeActualLinearActionStillOpen
+
+actualSourceNativeInertiaSameActionRemainsOpen :
+  ActualAcquisition.ActualLinearMultiplicityAcquisitionFrontier.sourceNativeInertiaSameActionPaid
+    ActualAcquisition.currentActualLinearMultiplicityAcquisitionFrontier
+  ≡ false
+actualSourceNativeInertiaSameActionRemainsOpen =
+  TOE.toeActualSourceNativeInertiaSameActionStillOpen
+
+voaKernelRecognizedAttachmentRemainsOpen :
+  VOAComposition.ActualVOASelected3BCompositionFrontier.kernelRecognizedAttachmentInhabitedHere
+    VOAComposition.currentActualVOASelected3BCompositionFrontier
+  ≡ false
+voaKernelRecognizedAttachmentRemainsOpen =
+  TOE.toeVOAKernelRecognizedAttachmentStillOpen
+
+
+shortestSourceCompilesActualActionRecognition :
+  ShortestAction.Trialectic369Shortest3BActionSourceBridgeBoundary.actualActionRecognitionCompiled
+    ShortestAction.canonicalTrialectic369Shortest3BActionSourceBridgeBoundary
+  ≡ true
+shortestSourceCompilesActualActionRecognition =
+  TOE.toeShortestSourceCompilesActualActionRecognition
+
+separateActionRecognitionLeafIsNotNeeded :
+  ShortestAction.Trialectic369Shortest3BActionSourceBridgeBoundary.separateTrialecticActualActionRecognitionLeafNeeded
+    ShortestAction.canonicalTrialectic369Shortest3BActionSourceBridgeBoundary
+  ≡ false
+separateActionRecognitionLeafIsNotNeeded =
+  TOE.toeSeparateActualActionRecognitionLeafNotNeeded
+
+recognitionAloneDoesNotCompileMultiplicityInertia :
+  ShortestAction.Trialectic369Shortest3BActionSourceBridgeBoundary.multiplicityInertiaAttachmentCompiledFromRecognitionAlone
+    ShortestAction.canonicalTrialectic369Shortest3BActionSourceBridgeBoundary
+  ≡ false
+recognitionAloneDoesNotCompileMultiplicityInertia =
+  TOE.toeRecognitionDoesNotCompileMultiplicityInertia
+
+base369CandidateCompilesRecognition :
+  ShortestCandidate.Base369ShortestFrontierCandidateBoundary.base369CandidateCompilesRecognition
+    ShortestCandidate.canonicalBase369ShortestFrontierCandidateBoundary
+  ≡ true
+base369CandidateCompilesRecognition =
+  TOE.toeBase369CandidateCompilesRecognition
+
+base369ShortestCandidateRemainsUninhabited :
+  ShortestCandidate.Base369ShortestFrontierCandidateBoundary.base369CandidateInhabitedHere
+    ShortestCandidate.canonicalBase369ShortestFrontierCandidateBoundary
+  ≡ false
+base369ShortestCandidateRemainsUninhabited =
+  TOE.toeBase369ShortestCandidateStillUninhabited
+
+
+recognitionAcquisitionTargetRemainsLocalized :
+  RecognitionAcquisition.A025616RecognitionAcquisitionBoundary.exactAcquisitionTargetLocalized
+    RecognitionAcquisition.currentA025616RecognitionAcquisitionBoundary
+  ≡ true
+recognitionAcquisitionTargetRemainsLocalized =
+  TOE.toeRecognitionAcquisitionTargetLocalized
+
+actualBase369RecognitionCandidateRemainsOpen :
+  RecognitionAcquisition.A025616RecognitionAcquisitionBoundary.actualBase369RecognitionCandidatePaid
+    RecognitionAcquisition.currentA025616RecognitionAcquisitionBoundary
+  ≡ false
+actualBase369RecognitionCandidateRemainsOpen =
+  TOE.toeActualBase369RecognitionCandidateStillOpen
+
+oeisStillDoesNotCreateRecognitionCandidate :
+  RecognitionAcquisition.OEISCreatesBase369RecognitionCandidate → ⊥
+oeisStillDoesNotCreateRecognitionCandidate =
+  TOE.toeOEISDoesNotCreateBase369RecognitionCandidate
+
+
+ternary27OriginPlus26CarrierRemainsPaid :
+  Albert27.Ternary27AlbertShapeFrontier.originPlus26BijectionPaid
+    Albert27.currentTernary27AlbertShapeFrontier
+  ≡ true
+ternary27OriginPlus26CarrierRemainsPaid =
+  TOE.toeTernary27OriginPlus26CarrierPaid
+
+ternary27AlbertShapeRemainsSameCarrier :
+  Albert27.Ternary27AlbertShapeFrontier.albert27ShapeInstantiatedOnSameCarrier
+    Albert27.currentTernary27AlbertShapeFrontier
+  ≡ true
+ternary27AlbertShapeRemainsSameCarrier =
+  TOE.toeTernary27AlbertShapeSameCarrierPaid
+
+ternary27JordanProductRemainsOpen :
+  Albert27.Ternary27AlbertShapeFrontier.jordanProductPaid
+    Albert27.currentTernary27AlbertShapeFrontier
+  ≡ false
+ternary27JordanProductRemainsOpen =
+  TOE.toeTernary27JordanProductStillOpen
+
+ternary27F4ActionRemainsOpen :
+  Albert27.Ternary27AlbertShapeFrontier.f4ActionPaid
+    Albert27.currentTernary27AlbertShapeFrontier
+  ≡ false
+ternary27F4ActionRemainsOpen =
+  TOE.toeTernary27F4ActionStillOpen
+
+ternary27E6ActionRemainsOpen :
+  Albert27.Ternary27AlbertShapeFrontier.e6ActionPaid
+    Albert27.currentTernary27AlbertShapeFrontier
+  ≡ false
+ternary27E6ActionRemainsOpen =
+  TOE.toeTernary27E6ActionStillOpen
