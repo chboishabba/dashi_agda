@@ -13,6 +13,7 @@ module DASHI.Physics.YangMills.YMClayBishopSU2HaarSeriesLimitExact where
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 import Real as B
+import Sequence as Seq
 import DASHI.Foundations.BishopConstructiveRealBridgeExact as Bridge
 
 record EffectiveHaarApproximation (Sphere : Set) : Set₁ where
@@ -39,3 +40,25 @@ record EffectiveHaarApproximation (Sphere : Set) : Set₁ where
     Bridge.bishopSeriesLimit
       (difference f)
       (absoluteDyadicTelescope f)
+
+
+  completedIntegralConvergence : ∀ f →
+    Bridge.BishopConvergesTo
+      (Seq.SeriesOf (difference f))
+      (completedIntegral f)
+  completedIntegralConvergence f =
+    Bridge.bishopSeriesLimitConvergence
+      (difference f)
+      (absoluteDyadicTelescope f)
+
+  completedIntegralUnique : ∀ f {candidate : B.ℝ} →
+    Bridge.BishopConvergesTo
+      (Seq.SeriesOf (difference f)) candidate →
+    Bridge.BishopEquivalent (completedIntegral f) candidate
+  completedIntegralUnique f candidateConverges =
+    Bridge.bishopSeriesLimitUnique
+      (difference f)
+      (absoluteDyadicTelescope f)
+      candidateConverges
+
+open EffectiveHaarApproximation public
