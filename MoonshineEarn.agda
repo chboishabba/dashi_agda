@@ -2,7 +2,7 @@
 -- via FRACTRAN fractions 47/23, 59/7, 71/11 in 3 steps.
 module MoonshineEarn where
 
-open import Data.Nat.Base using (_+_; _*_; _/_; _%_; NonZero; nonZero) renaming (ℕ to Nat)
+open import Agda.Builtin.Nat
 open import Agda.Builtin.Equality
 
 -- Perf counter primes
