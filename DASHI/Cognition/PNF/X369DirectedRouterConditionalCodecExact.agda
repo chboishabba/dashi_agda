@@ -477,3 +477,75 @@ originalSameDCRelativeScoreFactors ws wf wr
 -- must have identical DC sums (or the shared activation has
 -- zero DC) on the source states being routed. Shared learned
 -- weights alone DO NOT imply D_e identical across experts.
+
+
+------------------------------------------------------------------------
+-- Original shared-activation centering is a sufficient way to
+-- obtain equal DC across ALL candidate expert histories.
+-- This is stronger than requiring each expert's history centered:
+-- if a+b+c=0, the product DC(x)DC(h_e)=0 independently of h_e.
+-- The source implementation does NOT guarantee input centering;
+-- use only after a source-backed centering receipt.
+------------------------------------------------------------------------
+
+zeroLeftProduct :
+  (z : ℤ) → ((+ 0) * z) ≡ (+ 0)
+zeroLeftProduct z =
+  solve 1 (λ z → ((con (+ 0) :* z) := con (+ 0))) refl z
+
+zeroRightProduct :
+  (z : ℤ) → (z * (+ 0)) ≡ (+ 0)
+zeroRightProduct z =
+  solve 1 (λ z → ((z :* con (+ 0)) := con (+ 0))) refl z
+
+sourceDCZeroFromCenteredActivation :
+  (a b c A B C : ℤ) →
+  ((a + b) + c) ≡ (+ 0) →
+  sourceDC a b c A B C ≡ (+ 0)
+sourceDCZeroFromCenteredActivation a b c A B C centered =
+  trans
+    (cong
+      (λ xsum → xsum * ((A + B) + C))
+      centered)
+    (zeroLeftProduct ((A + B) + C))
+  where
+    trans : ∀ {X : Set}{x y z : X} → x ≡ y → y ≡ z → x ≡ z
+    trans refl eq = eq
+    cong : ∀ {X Y : Set}{x y : X} →
+      (fn : X → Y) → x ≡ y → fn x ≡ fn y
+    cong fn refl = refl
+
+sourceDCZeroFromCenteredHistory :
+  (a b c A B C : ℤ) →
+  ((A + B) + C) ≡ (+ 0) →
+  sourceDC a b c A B C ≡ (+ 0)
+sourceDCZeroFromCenteredHistory a b c A B C centered =
+  trans
+    (cong (λ hsum → ((a + b) + c) * hsum) centered)
+    (zeroRightProduct ((a + b) + c))
+  where
+    trans : ∀ {X : Set}{x y z : X} → x ≡ y → y ≡ z → x ≡ z
+    trans refl eq = eq
+    cong : ∀ {X Y : Set}{x y : X} →
+      (fn : X → Y) → x ≡ y → fn x ≡ fn y
+    cong fn refl = refl
+
+sourceDCEqualForAnyTwoHistoriesWhenActivationCentered :
+  (a b c Ai Bi Ci Aj Bj Cj : ℤ) →
+  ((a + b) + c) ≡ (+ 0) →
+  sourceDC a b c Ai Bi Ci ≡ sourceDC a b c Aj Bj Cj
+sourceDCEqualForAnyTwoHistoriesWhenActivationCentered
+  a b c Ai Bi Ci Aj Bj Cj centered =
+  trans
+    (sourceDCZeroFromCenteredActivation
+      a b c Ai Bi Ci centered)
+    (sym (sourceDCZeroFromCenteredActivation
+      a b c Aj Bj Cj centered))
+  where
+    sym : ∀ {X : Set}{x y : X} → x ≡ y → y ≡ x
+    sym refl = refl
+    trans : ∀ {X : Set}{x y z : X} → x ≡ y → y ≡ z → x ≡ z
+    trans refl eq = eq
+
+-- For an arbitrary original activation not known centered, expert
+-- history DC sums may differ and the common-DC premise is OPEN.
