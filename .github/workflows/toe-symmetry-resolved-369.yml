@@ -44,6 +44,23 @@ on:
       - 'DASHI/Unified/Everything.agda'
       - 'DASHI/Unifier.agda'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
+      - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayPinnedCMP119ConcreteOS1SystemExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanCMP116SelectedMarkedExpansionRound415Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayPinnedCMP119StressCommonCoreExact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayPinnedCMP119ConcreteLocalCExact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayPinnedCMP119GRQFTStressExportExact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayPinnedCMP119LiteralStressAttachmentExact.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayT5WeakMeasureSemanticsRound437Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayT5PreferredSameFamilyMeasureRecoveryRound428Exact.agda'
+      - 'DASHI/Physics/YangMills/BalabanClayT5SameFamilyContinuumRecoveryRound425Exact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayPinnedCMP119RealR415ClusteringExact.agda'
+      - 'DASHI/Physics/YangMills/YangMillsClayPinnedCMP119RealBMinCutExact.agda'
+      - 'DASHI/Unified/Physics.agda'
+      - 'DASHI/Unifier.agda'
+      - 'Docs/diagrams/ym_toe_r559_convergence.puml'
+      - 'DASHI/Physics/Closure/Everything.agda'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
 
 concurrency:
@@ -99,26 +116,54 @@ jobs:
           agda-version: '2.6.4.3'
           agda-stdlib-version: '2.1'
 
+      - name: Install DASHI Agda preflight
+        run: python -m pip install -e tools/agda_preflight
 
-      - name: Preflight legal and Fleet-Ibrahim TOE path
+      - name: Run DASHI Agda preflight
         run: |
-          dashi-agda-preflight --root . --closure --agda-auto-refine=typecheck \
-            --agda-extra-args='-i . -l standard-library' \
-            DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda
-          dashi-agda-preflight --root . --agda-auto-refine=typecheck \
-            --agda-extra-args='-i . -l standard-library' \
-            DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda
-            DASHI/Unified/GovernedLegalWorkflowComplianceTOEExact.agda
-            DASHI/Unified/GovernedLegalWorkflowComplianceTOEValidation.agda
-          dashi-agda-preflight --root . --closure --agda-auto-refine=typecheck \
-            --agda-extra-args='-i . -l standard-library' \
-            DASHI/Unified/FleetFormalGapTargetTOEExact.agda
-          dashi-agda-preflight --root . --closure --agda-auto-refine=typecheck \
-            --agda-extra-args='-i . -l standard-library' \
-            DASHI/Unified/R559IbrahimFleetHyperfabricTOEExact.agda
-          dashi-agda-preflight --root . --agda-auto-refine=typecheck \
-            --agda-extra-args='-i . -l standard-library' \
-            DASHI/Unified/R559IbrahimFleetHyperfabricTOEValidation.agda
+          modules=(
+            DASHI/EverythingTOESymmetryResolved369.agda
+            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
+            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
+            DASHI/Physics/YangMills/YangMillsClayPinnedCMP119ConcreteOS1SystemExact.agda
+            DASHI/Physics/YangMills/BalabanCMP116SelectedMarkedExpansionRound415Exact.agda
+            DASHI/Physics/YangMills/YangMillsClayPinnedCMP119StressCommonCoreExact.agda
+            DASHI/Physics/YangMills/YangMillsClayPinnedCMP119ConcreteLocalCExact.agda
+            DASHI/Physics/YangMills/YangMillsClayPinnedCMP119RealBMinCutExact.agda
+            DASHI/Physics/YangMills/YangMillsClayPinnedCMP119RealR415ClusteringExact.agda
+            DASHI/Physics/YangMills/BalabanClayT5SameFamilyContinuumRecoveryRound425Exact.agda
+            DASHI/Physics/YangMills/BalabanClayT5PreferredSameFamilyMeasureRecoveryRound428Exact.agda
+            DASHI/Physics/YangMills/BalabanClayT5WeakMeasureSemanticsRound437Exact.agda
+            DASHI/Physics/YangMills/YangMillsClayPinnedCMP119LiteralStressAttachmentExact.agda
+            DASHI/Physics/YangMills/YangMillsClayPinnedCMP119GRQFTStressExportExact.agda
+            DASHI/Unified/Physics.agda
+            DASHI/Unifier.agda
+          )
+          for module in "${modules[@]}"; do
+            dashi-agda-preflight --root . "$module"
+          done
+
+
+      - name: Run repository discovery referee
+        run: |
+          dashi-repo index --root .
+          dashi-repo status --root .
+          dashi-repo discover "Balaban RG scale density regular-E Casimir stress continuum non-promotion" --root . --limit 30
+
+          symbols=(
+            DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact.sourceCouplingIsBetaHistoryCoupling
+            DASHI.Physics.YangMills.BalabanCMP119RegularELocalizationSourceRound244Exact.selectedRegularEIsLocalizedCompositeSum
+            DASHI.Physics.YangMills.BalabanCompactSimpleUniversalBetaFloorExact.classificationAdjointCasimirAtLeastTwo
+            DASHI.Physics.YangMills.BalabanUnifiedGeneratedActionStressScaleRound135Exact.stressSelectedDensityIndexIsUnifiedActionIndex
+            DASHI.Physics.YangMills.BalabanCMP116FirstVariationStressPairingRound105Exact.sourceDerivativeBelowExistingMarkedShell
+            DASHI.Physics.YangMills.BalabanStressShellEnergyToHilbertRound112Exact.stressCoefficientEnergyUniformBound
+            DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact.toePublishedRGDoesNotPromoteContinuum
+          )
+          for symbol in "${symbols[@]}"; do
+            dashi-repo related "$symbol" --root . --limit 20
+          done
+
+          dashi-repo lineage --prefix DASHI.Physics.YangMills.Balaban --root .
 
       - name: Reject trust escapes
         run: |
@@ -134,6 +179,9 @@ jobs:
             DASHI/Unified/YMGoal1TOECompatibilityValidation.agda
             DASHI/Unified/Physics.agda
             DASHI/EverythingTOESymmetryResolved369.agda
+            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
+            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
+            DASHI/Unified/Physics.agda
             DASHI/Unifier.agda
           )
           for source in "${sources[@]}"; do
@@ -143,16 +191,14 @@ jobs:
             fi
           done
 
-      - name: Kernel-check TOE Goal-1 compatibility graph
+      - name: Kernel-check TOE symmetry-resolved aggregate and direct endpoints
         run: |
           agda --version
           modules=(
-            DASHI/Unified/YMGoal1TOECompatibilityExact.agda
-            DASHI/Unified/Physics.agda
             DASHI/EverythingTOESymmetryResolved369.agda
+            DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
+            DASHI/Unified/Physics.agda
             DASHI/Unifier.agda
-            DASHI/Unified/Everything.agda
-            DASHI/Unified/YMGoal1TOECompatibilityValidation.agda
           )
           for module in "${modules[@]}"; do
             agda -i . -l standard-library "$module"

@@ -44,6 +44,12 @@ import DASHI.Unified.SensibLawGovernanceTOEExact as SensibLawGovTOE
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 
+-- Import exact theorem owners only.  Do not use the historical axiom-shaped
+-- interfaces below as promotion authority.
+import DASHI.Physics.YangMills.YangMillsPlaquetteTOEBridgeExact
+import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as YMTOE
+open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
+
 open import Agda.Primitive using (Level; lzero; lsuc)
 open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -489,145 +495,154 @@ record DASHIUnificationAxiom : Set₁ where
 DASHI-Unification-Theorem : Set₁
 DASHI-Unification-Theorem = DASHIUnificationAxiom
 
-------------------------------------------------------------------------
--- Exact Yang-Mills Goal-1 compatibility exports.
--- Unifier is a consumer. It is not the proof authority.
-------------------------------------------------------------------------
-
-unifierYangMillsGoal1FiniteASourceLevel : ProofLevel
-unifierYangMillsGoal1FiniteASourceLevel =
-  YMGoal1TOE.goal1FiniteASourceLevel
-
-unifierYangMillsGoal1CanonicalSelectedBSourceLevel : ProofLevel
-unifierYangMillsGoal1CanonicalSelectedBSourceLevel =
-  YMGoal1TOE.goal1CanonicalSelectedBSourceLevel
-
-unifierYangMillsGoal1LiteralCMP116RateSourceLevel : ProofLevel
-unifierYangMillsGoal1LiteralCMP116RateSourceLevel =
-  YMGoal1TOE.goal1LiteralCMP116RateSourceLevel
-
-unifierYangMillsGoal1LocalQFTCSourceLevel : ProofLevel
-unifierYangMillsGoal1LocalQFTCSourceLevel =
-  YMGoal1TOE.goal1LocalQFTCSourceLevel
-
-unifierYangMillsGoal1SameHNontrivialityLevel : ProofLevel
-unifierYangMillsGoal1SameHNontrivialityLevel =
-  YMGoal1TOE.goal1SameHNontrivialitySemanticBridgeLevel
-
-unifierYangMillsFlat4DContinuumStillOpen :
-  YMGoal1TOE.flat4DContinuumTransferProvedHere ≡ false
-unifierYangMillsFlat4DContinuumStillOpen =
-  YMGoal1TOE.flat4DContinuumTransferStillOpen
-
-unifierYangMillsContinuumMassGapStillNotPromoted :
-  YMGoal1TOE.continuumMassGapPromoted ≡ false
-unifierYangMillsContinuumMassGapStillNotPromoted =
-  YMGoal1TOE.continuumMassGapStillNotPromoted
-
-unifierYangMillsClayStillNotPromoted :
-  YMGoal1TOE.clayYangMillsPromoted ≡ false
-unifierYangMillsClayStillNotPromoted =
-  YMGoal1TOE.clayYangMillsStillNotPromoted
-
 
 ------------------------------------------------------------------------
--- Preferred R440--R444 Goal-1 source cuts.
+-- Normalized Yang-Mills TOE convergence facade.
+--
+-- Legacy placeholder records above remain non-authoritative.
+-- These aliases point only to exact theorem owners in the YM source lane.
 ------------------------------------------------------------------------
 
-unifierYangMillsGoal1FiniteA1WilsonActionInvarianceLevel : ProofLevel
-unifierYangMillsGoal1FiniteA1WilsonActionInvarianceLevel =
-  YMGoal1TOE.goal1FiniteA1WilsonActionInvarianceLevel
+open YMTOE public using
+  ( sourceCouplingIsBetaHistoryCoupling
+  ; sourceSmallnessIsDerivedFromBetaHistory
+  ; betaHistoryGivesRepositoryCouplingCap
+  ; canonicalStateRunningCouplingIsBetaHistory
+  ; betaHistoryAndSourceTheoremGiveLiteralInvariantRegion
+  ; selectedDensityRepresentsExactBC1Potential
+  ; selectedDensityRepresentsBC2InitialPotential
+  ; stressSelectedDensityIndexIsUnifiedActionIndex
+  ; sourceDerivativeBelowExistingMarkedShell
+  ; stressCoefficientEnergyUniformBound
+  ; stressPairingSquaredCauchyFromShellEnergy
+  ; selectedRegularEIsLocalizedCompositeSum
+  ; universalCompactSimpleCasimirFloor
+  ; universalCompactSimpleBetaFloor
+  ; classificationAdjointCasimirAtLeastTwo
+  ; classificationGroupUniversalCoefficientAtLeastElevenTwelfths
+  ; uniformRemainderBelowEveryCompactSimpleCoefficient
+  )
 
-unifierYangMillsGoal1FiniteA1ProductHaarInvarianceLevel : ProofLevel
-unifierYangMillsGoal1FiniteA1ProductHaarInvarianceLevel =
-  YMGoal1TOE.goal1FiniteA1ProductHaarInvarianceLevel
+unifierYangMillsPublishedRGDoesNotPromoteContinuum :
+  YMTOE.toeFlat4DContinuumTransferProvedHere ≡ false
+unifierYangMillsPublishedRGDoesNotPromoteContinuum =
+  YMTOE.toePublishedRGDoesNotPromoteContinuum
 
-unifierYangMillsGoal1FiniteA1DensityInvariantCompilerLevel : ProofLevel
-unifierYangMillsGoal1FiniteA1DensityInvariantCompilerLevel =
-  YMGoal1TOE.goal1FiniteA1DensityInvariantCompilerLevel
+unifierYangMillsGeneratedActionDensityDoesNotPromoteContinuum :
+  YMTOE.toeFlat4DContinuumTransferProvedHere ≡ false
+unifierYangMillsGeneratedActionDensityDoesNotPromoteContinuum =
+  YMTOE.toeGeneratedActionDensityDoesNotPromoteContinuum
 
-unifierYangMillsGoal1FiniteA2PeterWeylWilsonIdentificationLevel : ProofLevel
-unifierYangMillsGoal1FiniteA2PeterWeylWilsonIdentificationLevel =
-  YMGoal1TOE.goal1FiniteA2PeterWeylWilsonIdentificationLevel
+unifierYangMillsCombinedRGUnifiedActionDoesNotPromoteContinuum :
+  YMTOE.toeFlat4DContinuumTransferProvedHere ≡ false
+unifierYangMillsCombinedRGUnifiedActionDoesNotPromoteContinuum =
+  YMTOE.toeCombinedRGUnifiedActionDoesNotPromoteContinuum
 
-unifierYangMillsGoal1FiniteA2SquareCompilerLevel : ProofLevel
-unifierYangMillsGoal1FiniteA2SquareCompilerLevel =
-  YMGoal1TOE.goal1FiniteA2SquareCompilerLevel
+unifierYangMillsContinuumMassGapNotPromoted :
+  YMTOE.toeContinuumMassGapPromoted ≡ false
+unifierYangMillsContinuumMassGapNotPromoted =
+  YMTOE.toeContinuumMassGapPromotedIsFalse
 
-unifierYangMillsGoal1PreferredVariableDomainBSourceLevel : ProofLevel
-unifierYangMillsGoal1PreferredVariableDomainBSourceLevel =
-  YMGoal1TOE.goal1PreferredVariableDomainBSourceLevel
+unifierYangMillsClayNotPromoted :
+  YMTOE.toeClayYangMillsPromoted ≡ false
+unifierYangMillsClayNotPromoted =
+  YMTOE.toeClayYangMillsPromotedIsFalse
 
-unifierYangMillsGoal1R429RootedTraceEncodingLevel : ProofLevel
-unifierYangMillsGoal1R429RootedTraceEncodingLevel =
-  YMGoal1TOE.goal1R429RootedTraceEncodingLevel
+unifierYangMillsBetaHistorySameStateCouplingLevel : ProofLevel
+unifierYangMillsBetaHistorySameStateCouplingLevel =
+  YMTOE.toeBetaHistorySameStateCouplingLevel
 
-unifierYangMillsGoal1R429RootedTraceCountCompilerLevel : ProofLevel
-unifierYangMillsGoal1R429RootedTraceCountCompilerLevel =
-  YMGoal1TOE.goal1R429RootedTraceCountCompilerLevel
+unifierYangMillsGeneratedActionDensityCompilerLevel : ProofLevel
+unifierYangMillsGeneratedActionDensityCompilerLevel =
+  YMTOE.toeUnifiedGeneratedActionDensityCompilerLevel
 
-unifierYangMillsGoal1R429SourceDecayReserveLevel : ProofLevel
-unifierYangMillsGoal1R429SourceDecayReserveLevel =
-  YMGoal1TOE.goal1R429SourceDecayReserveLevel
+unifierYangMillsCombinedRGUnifiedActionCompilerLevel : ProofLevel
+unifierYangMillsCombinedRGUnifiedActionCompilerLevel =
+  YMTOE.toeCompleteDensityEffectiveActionRealizationCompilerLevel
 
-unifierYangMillsGoal1R429EntropyBudgetCompilerLevel : ProofLevel
-unifierYangMillsGoal1R429EntropyBudgetCompilerLevel =
-  YMGoal1TOE.goal1R429EntropyBudgetCompilerLevel
+unifierYangMillsRegularEProjectionCompilerLevel : ProofLevel
+unifierYangMillsRegularEProjectionCompilerLevel =
+  YMTOE.toePublishedFlowToRegularEProjectionCompilerLevel
 
-unifierYangMillsGoal1LegacyGlobalTreeMetricNotPreferred :
-  YMGoal1TOE.legacyGlobalTreeMetricPreferred ≡ false
-unifierYangMillsGoal1LegacyGlobalTreeMetricNotPreferred =
-  YMGoal1TOE.legacyGlobalTreeMetricPreferredIsFalse
+unifierYangMillsStressScaleCompilerLevel : ProofLevel
+unifierYangMillsStressScaleCompilerLevel =
+  YMTOE.toeUnifiedGeneratedActionStressScaleCompilerLevel
+
+unifierYangMillsStrictCasimirCarrierLevel : ProofLevel
+unifierYangMillsStrictCasimirCarrierLevel =
+  YMTOE.toeStrictCasimirCarrierCompilerLevel
+
+unifierYangMillsUniversalBetaFloorLevel : ProofLevel
+unifierYangMillsUniversalBetaFloorLevel =
+  YMTOE.toeCompactSimpleUniversalBetaFloorLevel
+
+unifierYangMillsLiteralUniformRemainderFloorLevel : ProofLevel
+unifierYangMillsLiteralUniformRemainderFloorLevel =
+  YMTOE.toeLiteralUniformRegularRemainderBelowUniversalFloorLevel
+
+unifierYangMillsStressMarkedShellBoundLevel : ProofLevel
+unifierYangMillsStressMarkedShellBoundLevel =
+  YMTOE.toeStressFirstVariationMarkedShellBoundLevel
+
+unifierYangMillsStressShellEnergyHilbertLevel : ProofLevel
+unifierYangMillsStressShellEnergyHilbertLevel =
+  YMTOE.toeStressShellEnergyToHilbertCompilerLevel
+
+unifierYangMillsOSWightmanContinuumNotConstructed :
+  YMTOE.toeOSWightmanContinuumConstructionProvedHere ≡ false
+unifierYangMillsOSWightmanContinuumNotConstructed =
+  YMTOE.toeOSWightmanContinuumConstructionProvedHereIsFalse
+
+unifierYangMillsPinnedAOS1CompilerLevel : ProofLevel
+unifierYangMillsPinnedAOS1CompilerLevel =
+  YMTOE.toePinnedAOS1LimitCompilerLevel
+
+unifierYangMillsSelectedBSourceDecayCompilerLevel : ProofLevel
+unifierYangMillsSelectedBSourceDecayCompilerLevel =
+  YMTOE.toeSelectedCMP116SourceDecayCompilerLevel
+
+unifierYangMillsPinnedCStressSameHamiltonianCompilerLevel : ProofLevel
+unifierYangMillsPinnedCStressSameHamiltonianCompilerLevel =
+  YMTOE.toePinnedConcreteStressSameHamiltonianAdapterLevel
 
 
 ------------------------------------------------------------------------
--- Reused A3/A4/A5 and C3/C4 canonical owner exports.
+-- Later preferred A/B/C convergence aliases.
 ------------------------------------------------------------------------
 
-unifierYangMillsGoal1A3UniformCompactContainmentLevel : ProofLevel
-unifierYangMillsGoal1A3UniformCompactContainmentLevel =
-  YMGoal1TOE.goal1A3UniformCompactContainmentLevel
+unifierYangMillsPinnedRealBPostCoordinateCompilerLevel : ProofLevel
+unifierYangMillsPinnedRealBPostCoordinateCompilerLevel =
+  YMTOE.toePinnedRealBPostCoordinateCompilerLevel
 
-unifierYangMillsGoal1A3ExtractedClusterCylinderAgreementLevel : ProofLevel
-unifierYangMillsGoal1A3ExtractedClusterCylinderAgreementLevel =
-  YMGoal1TOE.goal1A3ExtractedClusterCylinderAgreementLevel
+unifierYangMillsR415ToContinuumPhysicalClusteringCompilerLevel : ProofLevel
+unifierYangMillsR415ToContinuumPhysicalClusteringCompilerLevel =
+  YMTOE.toeR415ToContinuumPhysicalClusteringCompilerLevel
 
-unifierYangMillsGoal1A3TightnessSubsequenceCompilerLevel : ProofLevel
-unifierYangMillsGoal1A3TightnessSubsequenceCompilerLevel =
-  YMGoal1TOE.goal1A3TightnessSubsequenceCompilerLevel
+unifierYangMillsSameFamilyContinuumCoreRecoveryCompilerLevel : ProofLevel
+unifierYangMillsSameFamilyContinuumCoreRecoveryCompilerLevel =
+  YMTOE.toeSameFamilyContinuumCoreRecoveryCompilerLevel
 
-unifierYangMillsGoal1A4FiniteRegularityLevel : ProofLevel
-unifierYangMillsGoal1A4FiniteRegularityLevel =
-  YMGoal1TOE.goal1A4FiniteRegularityLevel
+unifierYangMillsPreferredSameFamilyMeasureCompilerLevel : ProofLevel
+unifierYangMillsPreferredSameFamilyMeasureCompilerLevel =
+  YMTOE.toePreferredSameFamilyMeasureCompilerLevel
 
-unifierYangMillsGoal1A5FiniteGrowthControlLevel : ProofLevel
-unifierYangMillsGoal1A5FiniteGrowthControlLevel =
-  YMGoal1TOE.goal1A5FiniteGrowthControlLevel
+unifierYangMillsWeakMeasureFullConvergenceLevel : ProofLevel
+unifierYangMillsWeakMeasureFullConvergenceLevel =
+  YMTOE.toeWeakMeasureFullConvergenceLevel
 
-unifierYangMillsGoal1A45OSLimitCompilerLevel : ProofLevel
-unifierYangMillsGoal1A45OSLimitCompilerLevel =
-  YMGoal1TOE.goal1A45OSLimitCompilerLevel
+unifierYangMillsWeakMeasurePreGapCoreCompilerLevel : ProofLevel
+unifierYangMillsWeakMeasurePreGapCoreCompilerLevel =
+  YMTOE.toeWeakMeasurePreGapCoreCompilerLevel
 
-unifierYangMillsGoal1C3OneStepAFIdentificationLevel : ProofLevel
-unifierYangMillsGoal1C3OneStepAFIdentificationLevel =
-  YMGoal1TOE.goal1C3OneStepAFIdentificationLevel
+unifierYangMillsPinnedLiteralStressAttachmentCompilerLevel : ProofLevel
+unifierYangMillsPinnedLiteralStressAttachmentCompilerLevel =
+  YMTOE.toePinnedLiteralStressAttachmentCompilerLevel
 
-unifierYangMillsGoal1C3AllDepthCoefficientCompilerLevel : ProofLevel
-unifierYangMillsGoal1C3AllDepthCoefficientCompilerLevel =
-  YMGoal1TOE.goal1C3AllDepthCoefficientCompilerLevel
+unifierYangMillsPinnedGRQFTStressExportLevel : ProofLevel
+unifierYangMillsPinnedGRQFTStressExportLevel =
+  YMTOE.toePinnedGRQFTStressExportLevel
 
-unifierYangMillsGoal1C4DensityAnchoredStressInstantiationLevel : ProofLevel
-unifierYangMillsGoal1C4DensityAnchoredStressInstantiationLevel =
-  YMGoal1TOE.goal1C4DensityAnchoredStressInstantiationLevel
-
-unifierYangMillsGoal1C4SectorRecoveryCompilerLevel : ProofLevel
-unifierYangMillsGoal1C4SectorRecoveryCompilerLevel =
-  YMGoal1TOE.goal1C4SectorRecoveryCompilerLevel
-
-unifierYangMillsGoal1C4LiteralSectorRecoveryLevel : ProofLevel
-unifierYangMillsGoal1C4LiteralSectorRecoveryLevel =
-  YMGoal1TOE.goal1C4LiteralSectorRecoveryLevel
-
-unifierYangMillsGoal1C4CommonMetricCompilerLevel : ProofLevel
-unifierYangMillsGoal1C4CommonMetricCompilerLevel =
-  YMGoal1TOE.goal1C4CommonMetricCompilerLevel
+unifierYangMillsGRQFTStressWeldNotPromoted :
+  YMTOE.toeGRQFTStressWeldPromoted ≡ false
+unifierYangMillsGRQFTStressWeldNotPromoted =
+  YMTOE.toeGRQFTStressWeldPromotedIsFalse

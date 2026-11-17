@@ -577,6 +577,25 @@ d2BareTransportABIPaysPhysicalMixingIsFalse :
 d2BareTransportABIPaysPhysicalMixingIsFalse =
   D2Sound.bareTransportInhabitantPaysPhysicalD2aIsFalse
 
+
+d2PublishedSourceEntryPaysInsertionNaturality : Bool
+d2PublishedSourceEntryPaysInsertionNaturality =
+  D2.publishedSourceEntryPaysD2aInsertionNaturality
+
+d2PublishedSourceEntryPaysInsertionNaturalityIsFalse :
+  d2PublishedSourceEntryPaysInsertionNaturality ≡ false
+d2PublishedSourceEntryPaysInsertionNaturalityIsFalse =
+  D2.publishedSourceEntryPaysD2aInsertionNaturalityIsFalse
+
+d2PublishedSourceEntryDeterminesCompositeInsertion : Bool
+d2PublishedSourceEntryDeterminesCompositeInsertion =
+  D2.publishedSourceEntryDeterminesCompositeInsertionValue
+
+d2PublishedSourceEntryDeterminesCompositeInsertionIsFalse :
+  d2PublishedSourceEntryDeterminesCompositeInsertion ≡ false
+d2PublishedSourceEntryDeterminesCompositeInsertionIsFalse =
+  D2.publishedSourceEntryDeterminesCompositeInsertionValueIsFalse
+
 d2FiniteDepthEqualsCompletedCompositeRequired : Bool
 d2FiniteDepthEqualsCompletedCompositeRequired =
   D2Conv.finiteDepthEqualsCompletedCompositeRequired

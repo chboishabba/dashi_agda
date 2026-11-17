@@ -2,8 +2,7 @@ module DASHI.Unified.Physics where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Nat.Base using (ℕ)
-open import Data.Empty using (⊥)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.List.Base using (List; _∷_; [])
 import Data.Empty
 
@@ -13,7 +12,9 @@ import DASHI.Interop.UnifiedMathLanguageSpine as Unified
 import DASHI.Physics.Closure.ClayNSProofRoadmapReceipt as NSRoadmap
 import DASHI.Physics.Closure.ClayYMProofRoadmapReceipt as YMRoadmap
 import DASHI.Physics.Closure.YMClayPromotionBoundary as YMBoundary
-import DASHI.Physics.Closure.NSABCDMaxCut20261002Exact as NSMaxCut
+import DASHI.Physics.YangMills.YangMillsPlaquetteTOEBridgeExact as PlaquetteTOE
+import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as YMTOE
+open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 import DASHI.Unified.InvariantSpine as Spine
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
@@ -72,63 +73,171 @@ yangMillsPostureIsApproaching :
 yangMillsPostureIsApproaching =
   refl
 
-
 ------------------------------------------------------------------------
--- Canonical Yang-Mills Goal-1 TOE facade.
--- Proof ownership remains in the imported Yang-Mills owners.
+-- Exact Yang-Mills plaquette-to-TOE non-promotion projections.
 ------------------------------------------------------------------------
 
-yangMillsGoal1PreferredVariableDomainBSourceLevel : ProofLevel
-yangMillsGoal1PreferredVariableDomainBSourceLevel =
-  YMGoal1TOE.goal1PreferredVariableDomainBSourceLevel
+yangMillsPlaquetteTOEMassGapPromotionBlocked :
+  PlaquetteTOE.toeMassGapPromoted ≡ false
+yangMillsPlaquetteTOEMassGapPromotionBlocked =
+  PlaquetteTOE.toeMassGapPromotedIsFalse
 
-yangMillsGoal1FiniteA1WilsonActionInvarianceLevel : ProofLevel
-yangMillsGoal1FiniteA1WilsonActionInvarianceLevel =
-  YMGoal1TOE.goal1FiniteA1WilsonActionInvarianceLevel
+yangMillsPlaquetteTOEClayPromotionBlocked :
+  PlaquetteTOE.toeClayYangMillsPromoted ≡ false
+yangMillsPlaquetteTOEClayPromotionBlocked =
+  PlaquetteTOE.toeClayYangMillsPromotedIsFalse
 
-yangMillsGoal1FiniteA2PeterWeylWilsonIdentificationLevel : ProofLevel
-yangMillsGoal1FiniteA2PeterWeylWilsonIdentificationLevel =
-  YMGoal1TOE.goal1FiniteA2PeterWeylWilsonIdentificationLevel
+yangMillsPlaquetteTOEBridgeAddsNoNewPhysicalTheorem :
+  PlaquetteTOE.plaquetteTOEBridgeAddsNewPhysicalTheorem ≡ false
+yangMillsPlaquetteTOEBridgeAddsNoNewPhysicalTheorem =
+  PlaquetteTOE.plaquetteTOEBridgeAddsNewPhysicalTheoremIsFalse
 
-yangMillsGoal1A3UniformCompactContainmentLevel : ProofLevel
-yangMillsGoal1A3UniformCompactContainmentLevel =
-  YMGoal1TOE.goal1A3UniformCompactContainmentLevel
 
-yangMillsGoal1A4FiniteRegularityLevel : ProofLevel
-yangMillsGoal1A4FiniteRegularityLevel =
-  YMGoal1TOE.goal1A4FiniteRegularityLevel
+yangMillsRouteSCrossProverPhysicalCutHasExactlyThreeClasses :
+  PlaquetteTOE.toeRouteSCrossProverPhysicalCutHasExactlyThreeClasses ≡ true
+yangMillsRouteSCrossProverPhysicalCutHasExactlyThreeClasses =
+  PlaquetteTOE.toeRouteSCrossProverPhysicalCutHasExactlyThreeClassesIsTrue
 
-yangMillsGoal1A5FiniteGrowthControlLevel : ProofLevel
-yangMillsGoal1A5FiniteGrowthControlLevel =
-  YMGoal1TOE.goal1A5FiniteGrowthControlLevel
+yangMillsD2PublishedSourceEntryDoesNotPayInsertionNaturality :
+  PlaquetteTOE.toeD2PublishedSourceEntryPaysInsertionNaturality ≡ false
+yangMillsD2PublishedSourceEntryDoesNotPayInsertionNaturality =
+  PlaquetteTOE.toeD2PublishedSourceEntryPaysInsertionNaturalityIsFalse
 
-yangMillsGoal1LocalQFTCSourceLevel : ProofLevel
-yangMillsGoal1LocalQFTCSourceLevel =
-  YMGoal1TOE.goal1LocalQFTCSourceLevel
 
-yangMillsGoal1C3OneStepAFIdentificationLevel : ProofLevel
-yangMillsGoal1C3OneStepAFIdentificationLevel =
-  YMGoal1TOE.goal1C3OneStepAFIdentificationLevel
+------------------------------------------------------------------------
+-- Normalized Yang-Mills TOE convergence facade.
+------------------------------------------------------------------------
 
-yangMillsGoal1C4SectorRecoveryCompilerLevel : ProofLevel
-yangMillsGoal1C4SectorRecoveryCompilerLevel =
-  YMGoal1TOE.goal1C4SectorRecoveryCompilerLevel
+open YMTOE public using
+  ( sourceCouplingIsBetaHistoryCoupling
+  ; sourceSmallnessIsDerivedFromBetaHistory
+  ; betaHistoryGivesRepositoryCouplingCap
+  ; canonicalStateRunningCouplingIsBetaHistory
+  ; betaHistoryAndSourceTheoremGiveLiteralInvariantRegion
+  ; selectedDensityRepresentsExactBC1Potential
+  ; selectedDensityRepresentsBC2InitialPotential
+  ; stressSelectedDensityIndexIsUnifiedActionIndex
+  ; sourceDerivativeBelowExistingMarkedShell
+  ; stressCoefficientEnergyUniformBound
+  ; stressPairingSquaredCauchyFromShellEnergy
+  ; selectedRegularEIsLocalizedCompositeSum
+  ; universalCompactSimpleCasimirFloor
+  ; universalCompactSimpleBetaFloor
+  ; classificationAdjointCasimirAtLeastTwo
+  ; classificationGroupUniversalCoefficientAtLeastElevenTwelfths
+  ; uniformRemainderBelowEveryCompactSimpleCoefficient
+  )
 
-yangMillsGoal1SameHNontrivialityLevel : ProofLevel
-yangMillsGoal1SameHNontrivialityLevel =
-  YMGoal1TOE.goal1SameHNontrivialitySemanticBridgeLevel
+yangMillsTOEPublishedRGDoesNotPromoteContinuum :
+  YMTOE.toeFlat4DContinuumTransferProvedHere ≡ false
+yangMillsTOEPublishedRGDoesNotPromoteContinuum =
+  YMTOE.toePublishedRGDoesNotPromoteContinuum
 
-yangMillsGoal1ContinuumStillOpen :
-  YMGoal1TOE.flat4DContinuumTransferProvedHere ≡ false
-yangMillsGoal1ContinuumStillOpen =
-  YMGoal1TOE.flat4DContinuumTransferStillOpen
+yangMillsTOEContinuumMassGapBlocked :
+  YMTOE.toeContinuumMassGapPromoted ≡ false
+yangMillsTOEContinuumMassGapBlocked =
+  YMTOE.toeContinuumMassGapPromotedIsFalse
 
-yangMillsGoal1ContinuumMassGapStillBlocked :
-  YMGoal1TOE.continuumMassGapPromoted ≡ false
-yangMillsGoal1ContinuumMassGapStillBlocked =
-  YMGoal1TOE.continuumMassGapStillNotPromoted
+yangMillsTOEClayPromotionBlocked :
+  YMTOE.toeClayYangMillsPromoted ≡ false
+yangMillsTOEClayPromotionBlocked =
+  YMTOE.toeClayYangMillsPromotedIsFalse
 
-yangMillsGoal1ClayStillBlocked :
-  YMGoal1TOE.clayYangMillsPromoted ≡ false
-yangMillsGoal1ClayStillBlocked =
-  YMGoal1TOE.clayYangMillsStillNotPromoted
+yangMillsTOEBetaHistorySameStateCouplingLevel : ProofLevel
+yangMillsTOEBetaHistorySameStateCouplingLevel =
+  YMTOE.toeBetaHistorySameStateCouplingLevel
+
+yangMillsTOEGeneratedActionDensityCompilerLevel : ProofLevel
+yangMillsTOEGeneratedActionDensityCompilerLevel =
+  YMTOE.toeUnifiedGeneratedActionDensityCompilerLevel
+
+yangMillsTOECombinedRGUnifiedActionCompilerLevel : ProofLevel
+yangMillsTOECombinedRGUnifiedActionCompilerLevel =
+  YMTOE.toeCompleteDensityEffectiveActionRealizationCompilerLevel
+
+yangMillsTOERegularEProjectionCompilerLevel : ProofLevel
+yangMillsTOERegularEProjectionCompilerLevel =
+  YMTOE.toePublishedFlowToRegularEProjectionCompilerLevel
+
+yangMillsTOEStressScaleCompilerLevel : ProofLevel
+yangMillsTOEStressScaleCompilerLevel =
+  YMTOE.toeUnifiedGeneratedActionStressScaleCompilerLevel
+
+yangMillsTOEStrictCasimirCarrierLevel : ProofLevel
+yangMillsTOEStrictCasimirCarrierLevel =
+  YMTOE.toeStrictCasimirCarrierCompilerLevel
+
+yangMillsTOEUniversalBetaFloorLevel : ProofLevel
+yangMillsTOEUniversalBetaFloorLevel =
+  YMTOE.toeCompactSimpleUniversalBetaFloorLevel
+
+yangMillsTOELiteralUniformRemainderFloorLevel : ProofLevel
+yangMillsTOELiteralUniformRemainderFloorLevel =
+  YMTOE.toeLiteralUniformRegularRemainderBelowUniversalFloorLevel
+
+yangMillsTOEStressMarkedShellBoundLevel : ProofLevel
+yangMillsTOEStressMarkedShellBoundLevel =
+  YMTOE.toeStressFirstVariationMarkedShellBoundLevel
+
+yangMillsTOEStressShellEnergyHilbertLevel : ProofLevel
+yangMillsTOEStressShellEnergyHilbertLevel =
+  YMTOE.toeStressShellEnergyToHilbertCompilerLevel
+
+yangMillsTOEOSWightmanContinuumBlocked :
+  YMTOE.toeOSWightmanContinuumConstructionProvedHere ≡ false
+yangMillsTOEOSWightmanContinuumBlocked =
+  YMTOE.toeOSWightmanContinuumConstructionProvedHereIsFalse
+
+yangMillsTOEPinnedAOS1CompilerLevel : ProofLevel
+yangMillsTOEPinnedAOS1CompilerLevel =
+  YMTOE.toePinnedAOS1LimitCompilerLevel
+
+yangMillsTOESelectedBSourceDecayCompilerLevel : ProofLevel
+yangMillsTOESelectedBSourceDecayCompilerLevel =
+  YMTOE.toeSelectedCMP116SourceDecayCompilerLevel
+
+yangMillsTOEPinnedCStressSameHamiltonianCompilerLevel : ProofLevel
+yangMillsTOEPinnedCStressSameHamiltonianCompilerLevel =
+  YMTOE.toePinnedConcreteStressSameHamiltonianAdapterLevel
+
+
+------------------------------------------------------------------------
+-- Later preferred A/B/C convergence aliases.
+------------------------------------------------------------------------
+
+yangMillsTOEPinnedRealBPostCoordinateCompilerLevel : ProofLevel
+yangMillsTOEPinnedRealBPostCoordinateCompilerLevel =
+  YMTOE.toePinnedRealBPostCoordinateCompilerLevel
+
+yangMillsTOER415ToContinuumPhysicalClusteringCompilerLevel : ProofLevel
+yangMillsTOER415ToContinuumPhysicalClusteringCompilerLevel =
+  YMTOE.toeR415ToContinuumPhysicalClusteringCompilerLevel
+
+yangMillsTOESameFamilyContinuumCoreRecoveryCompilerLevel : ProofLevel
+yangMillsTOESameFamilyContinuumCoreRecoveryCompilerLevel =
+  YMTOE.toeSameFamilyContinuumCoreRecoveryCompilerLevel
+
+yangMillsTOEPreferredSameFamilyMeasureCompilerLevel : ProofLevel
+yangMillsTOEPreferredSameFamilyMeasureCompilerLevel =
+  YMTOE.toePreferredSameFamilyMeasureCompilerLevel
+
+yangMillsTOEWeakMeasureFullConvergenceLevel : ProofLevel
+yangMillsTOEWeakMeasureFullConvergenceLevel =
+  YMTOE.toeWeakMeasureFullConvergenceLevel
+
+yangMillsTOEWeakMeasurePreGapCoreCompilerLevel : ProofLevel
+yangMillsTOEWeakMeasurePreGapCoreCompilerLevel =
+  YMTOE.toeWeakMeasurePreGapCoreCompilerLevel
+
+yangMillsTOEPinnedLiteralStressAttachmentCompilerLevel : ProofLevel
+yangMillsTOEPinnedLiteralStressAttachmentCompilerLevel =
+  YMTOE.toePinnedLiteralStressAttachmentCompilerLevel
+
+yangMillsTOEPinnedGRQFTStressExportLevel : ProofLevel
+yangMillsTOEPinnedGRQFTStressExportLevel =
+  YMTOE.toePinnedGRQFTStressExportLevel
+
+yangMillsTOEGRQFTStressWeldNotPromoted :
+  YMTOE.toeGRQFTStressWeldPromoted ≡ false
+yangMillsTOEGRQFTStressWeldNotPromoted =
+  YMTOE.toeGRQFTStressWeldPromotedIsFalse

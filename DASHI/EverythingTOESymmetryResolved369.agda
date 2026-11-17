@@ -45,6 +45,10 @@ open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_)
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 
+open import Agda.Builtin.Bool using (false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+import Data.Empty
+
 ------------------------------------------------------------------------
 -- Focused TOE aggregate: generic symmetry-resolved fibre calculus plus the
 -- existing SSP/369 representation-reduction and physics instances.
@@ -54,151 +58,60 @@ import DASHI.Core.SymmetryResolvedFibreExact
 import DASHI.EverythingSSPRepresentationReductionRound9
 import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
 
-import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
+-- Exact Yang-Mills finite plaquette and non-promotion convergence.
+import DASHI.Physics.YangMills.YangMillsPlaquetteTOEBridgeExact
+import DASHI.Physics.YangMills.YangMillsPlaquetteTOEBridgeValidation
 
-------------------------------------------------------------------------
--- Current-branch Yang-Mills Goal-1 compatibility exports.
--- The theorem owners remain R435--R439 and the closure boundaries.
-------------------------------------------------------------------------
 
-toe369YangMillsGoal1FiniteASourceLevel : ProofLevel
-toe369YangMillsGoal1FiniteASourceLevel =
-  YMGoal1TOE.goal1FiniteASourceLevel
+-- Normalized Balaban RG, regular-E, Casimir, stress, A/B/C, and non-promotion TOE surface.
+import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact
+import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Validation
 
-toe369YangMillsGoal1CanonicalSelectedBSourceLevel : ProofLevel
-toe369YangMillsGoal1CanonicalSelectedBSourceLevel =
-  YMGoal1TOE.goal1CanonicalSelectedBSourceLevel
 
-toe369YangMillsGoal1LiteralCMP116RateSourceLevel : ProofLevel
-toe369YangMillsGoal1LiteralCMP116RateSourceLevel =
-  YMGoal1TOE.goal1LiteralCMP116RateSourceLevel
-
-toe369YangMillsGoal1LocalQFTCSourceLevel : ProofLevel
-toe369YangMillsGoal1LocalQFTCSourceLevel =
-  YMGoal1TOE.goal1LocalQFTCSourceLevel
-
-toe369YangMillsGoal1SameHNontrivialityLevel : ProofLevel
-toe369YangMillsGoal1SameHNontrivialityLevel =
-  YMGoal1TOE.goal1SameHNontrivialitySemanticBridgeLevel
-
-toe369YangMillsFlat4DContinuumStillOpen :
-  YMGoal1TOE.flat4DContinuumTransferProvedHere ≡ false
-toe369YangMillsFlat4DContinuumStillOpen =
-  YMGoal1TOE.flat4DContinuumTransferStillOpen
-
-toe369YangMillsContinuumMassGapStillNotPromoted :
-  YMGoal1TOE.continuumMassGapPromoted ≡ false
-toe369YangMillsContinuumMassGapStillNotPromoted =
-  YMGoal1TOE.continuumMassGapStillNotPromoted
-
-toe369YangMillsClayStillNotPromoted :
-  YMGoal1TOE.clayYangMillsPromoted ≡ false
-toe369YangMillsClayStillNotPromoted =
-  YMGoal1TOE.clayYangMillsStillNotPromoted
-
-toe369YangMillsGoal1ZKPFrame : YMGoal1TOE.YMGoal1TOEZKPFrame
-toe369YangMillsGoal1ZKPFrame =
-  YMGoal1TOE.canonicalYMGoal1TOEZKPFrame
+-- Existing Ibrahim/Monster selected-3B non-promotion owners.
+import DASHI.Moonshine.MonsterGradedVOAActual3BKernelSameElementBidiExact as KernelSame
+import DASHI.Moonshine.Base369Monster3BSingleActionProducerBidiExact as SingleAction
+import DASHI.Wikimedia.IbrahimMonster3BLinearShortestFrontierCorrectionExact as Ibrahim
+import DASHI.Wikimedia.IbrahimMonsterTernary27PhasePreservingFiveOrbitReductionExact as Ternary27
 
 
 ------------------------------------------------------------------------
--- Preferred R440--R444 Goal-1 source cuts.
+-- Ibrahim / selected-3B fail-closed TOE aliases.
 ------------------------------------------------------------------------
 
-toe369YangMillsGoal1FiniteA1WilsonActionInvarianceLevel : ProofLevel
-toe369YangMillsGoal1FiniteA1WilsonActionInvarianceLevel =
-  YMGoal1TOE.goal1FiniteA1WilsonActionInvarianceLevel
+toe369KernelTrace53DoesNotIdentify3B :
+  KernelSame.Actual3BKernelSameElementBoundary.trace53AloneIdentifiesMonster3B
+    KernelSame.canonicalActual3BKernelSameElementBoundary
+  ≡ false
+toe369KernelTrace53DoesNotIdentify3B = refl
 
-toe369YangMillsGoal1FiniteA1ProductHaarInvarianceLevel : ProofLevel
-toe369YangMillsGoal1FiniteA1ProductHaarInvarianceLevel =
-  YMGoal1TOE.goal1FiniteA1ProductHaarInvarianceLevel
+toe369KernelCharacterIsotypyDoesNotCreateAction :
+  KernelSame.Actual3BKernelSameElementBoundary.characterIsotypyConstructsActionIntertwiner
+    KernelSame.canonicalActual3BKernelSameElementBoundary
+  ≡ false
+toe369KernelCharacterIsotypyDoesNotCreateAction = refl
 
-toe369YangMillsGoal1FiniteA1DensityInvariantCompilerLevel : ProofLevel
-toe369YangMillsGoal1FiniteA1DensityInvariantCompilerLevel =
-  YMGoal1TOE.goal1FiniteA1DensityInvariantCompilerLevel
+toe369SingleActionProducerStillOpen :
+  SingleAction.SingleActionProducerBoundary.actualSingleProducerInhabitedHere
+    SingleAction.canonicalSingleActionProducerBoundary
+  ≡ false
+toe369SingleActionProducerStillOpen = refl
 
-toe369YangMillsGoal1FiniteA2PeterWeylWilsonIdentificationLevel : ProofLevel
-toe369YangMillsGoal1FiniteA2PeterWeylWilsonIdentificationLevel =
-  YMGoal1TOE.goal1FiniteA2PeterWeylWilsonIdentificationLevel
+toe369FiniteChartDoesNotCreateLinearMultiplicityAction :
+  Ibrahim.FiniteChartCreatesLinearMultiplicityAction → Data.Empty.⊥
+toe369FiniteChartDoesNotCreateLinearMultiplicityAction =
+  Ibrahim.finiteChartDoesNotCreateLinearMultiplicityAction
 
-toe369YangMillsGoal1FiniteA2SquareCompilerLevel : ProofLevel
-toe369YangMillsGoal1FiniteA2SquareCompilerLevel =
-  YMGoal1TOE.goal1FiniteA2SquareCompilerLevel
+toe369Ternary27PhaseReductionIsNotGlobalInversion :
+  Ternary27.phasePreservingReductionEqualsFullGlobalInversion
+    Ternary27.currentTernary27ReductionBoundary
+  ≡ false
+toe369Ternary27PhaseReductionIsNotGlobalInversion =
+  Ternary27.phasePreservingReductionEqualsFullGlobalInversionIsFalse
 
-toe369YangMillsGoal1PreferredVariableDomainBSourceLevel : ProofLevel
-toe369YangMillsGoal1PreferredVariableDomainBSourceLevel =
-  YMGoal1TOE.goal1PreferredVariableDomainBSourceLevel
-
-toe369YangMillsGoal1R429RootedTraceEncodingLevel : ProofLevel
-toe369YangMillsGoal1R429RootedTraceEncodingLevel =
-  YMGoal1TOE.goal1R429RootedTraceEncodingLevel
-
-toe369YangMillsGoal1R429RootedTraceCountCompilerLevel : ProofLevel
-toe369YangMillsGoal1R429RootedTraceCountCompilerLevel =
-  YMGoal1TOE.goal1R429RootedTraceCountCompilerLevel
-
-toe369YangMillsGoal1R429SourceDecayReserveLevel : ProofLevel
-toe369YangMillsGoal1R429SourceDecayReserveLevel =
-  YMGoal1TOE.goal1R429SourceDecayReserveLevel
-
-toe369YangMillsGoal1R429EntropyBudgetCompilerLevel : ProofLevel
-toe369YangMillsGoal1R429EntropyBudgetCompilerLevel =
-  YMGoal1TOE.goal1R429EntropyBudgetCompilerLevel
-
-toe369YangMillsGoal1LegacyGlobalTreeMetricNotPreferred :
-  YMGoal1TOE.legacyGlobalTreeMetricPreferred ≡ false
-toe369YangMillsGoal1LegacyGlobalTreeMetricNotPreferred =
-  YMGoal1TOE.legacyGlobalTreeMetricPreferredIsFalse
-
-
-------------------------------------------------------------------------
--- Reused A3/A4/A5 and C3/C4 canonical owner exports.
-------------------------------------------------------------------------
-
-toe369YangMillsGoal1A3UniformCompactContainmentLevel : ProofLevel
-toe369YangMillsGoal1A3UniformCompactContainmentLevel =
-  YMGoal1TOE.goal1A3UniformCompactContainmentLevel
-
-toe369YangMillsGoal1A3ExtractedClusterCylinderAgreementLevel : ProofLevel
-toe369YangMillsGoal1A3ExtractedClusterCylinderAgreementLevel =
-  YMGoal1TOE.goal1A3ExtractedClusterCylinderAgreementLevel
-
-toe369YangMillsGoal1A3TightnessSubsequenceCompilerLevel : ProofLevel
-toe369YangMillsGoal1A3TightnessSubsequenceCompilerLevel =
-  YMGoal1TOE.goal1A3TightnessSubsequenceCompilerLevel
-
-toe369YangMillsGoal1A4FiniteRegularityLevel : ProofLevel
-toe369YangMillsGoal1A4FiniteRegularityLevel =
-  YMGoal1TOE.goal1A4FiniteRegularityLevel
-
-toe369YangMillsGoal1A5FiniteGrowthControlLevel : ProofLevel
-toe369YangMillsGoal1A5FiniteGrowthControlLevel =
-  YMGoal1TOE.goal1A5FiniteGrowthControlLevel
-
-toe369YangMillsGoal1A45OSLimitCompilerLevel : ProofLevel
-toe369YangMillsGoal1A45OSLimitCompilerLevel =
-  YMGoal1TOE.goal1A45OSLimitCompilerLevel
-
-toe369YangMillsGoal1C3OneStepAFIdentificationLevel : ProofLevel
-toe369YangMillsGoal1C3OneStepAFIdentificationLevel =
-  YMGoal1TOE.goal1C3OneStepAFIdentificationLevel
-
-toe369YangMillsGoal1C3AllDepthCoefficientCompilerLevel : ProofLevel
-toe369YangMillsGoal1C3AllDepthCoefficientCompilerLevel =
-  YMGoal1TOE.goal1C3AllDepthCoefficientCompilerLevel
-
-toe369YangMillsGoal1C4DensityAnchoredStressInstantiationLevel : ProofLevel
-toe369YangMillsGoal1C4DensityAnchoredStressInstantiationLevel =
-  YMGoal1TOE.goal1C4DensityAnchoredStressInstantiationLevel
-
-toe369YangMillsGoal1C4SectorRecoveryCompilerLevel : ProofLevel
-toe369YangMillsGoal1C4SectorRecoveryCompilerLevel =
-  YMGoal1TOE.goal1C4SectorRecoveryCompilerLevel
-
-toe369YangMillsGoal1C4LiteralSectorRecoveryLevel : ProofLevel
-toe369YangMillsGoal1C4LiteralSectorRecoveryLevel =
-  YMGoal1TOE.goal1C4LiteralSectorRecoveryLevel
-
-toe369YangMillsGoal1C4CommonMetricCompilerLevel : ProofLevel
-toe369YangMillsGoal1C4CommonMetricCompilerLevel =
-  YMGoal1TOE.goal1C4CommonMetricCompilerLevel
+toe369Ternary27ReductionIsNotMonster42SameObject :
+  Ternary27.reducedFifteenIsMonster42dSameObject
+    Ternary27.currentTernary27ReductionBoundary
+  ≡ false
+toe369Ternary27ReductionIsNotMonster42SameObject =
+  Ternary27.reducedFifteenIsMonster42dSameObjectIsFalse
