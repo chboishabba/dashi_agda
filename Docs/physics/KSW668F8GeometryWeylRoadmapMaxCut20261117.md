@@ -411,3 +411,34 @@ New Agda rational source owner `KSW668F8RationalAxialTTCubatureExact.agda` state
 - **G6:** original matter action, retarded tensor FIO, physical detector and independent replenishment/evidence OPEN.
 
 **Acceptance/provenance:** exact SymPy polynomial and rational finite cubature checks PASS; pinned Agda kernel NOT RUN. User-directed maximum-cut continuation and original mathematical derivations separated from original DASHI/Caldwell–Langlois/Thorne prior art. No ESD modifications; no Monster/369 physical equivalence; no detected graviton claim.
+
+
+## Maximum-cut XXXV — original angular source projection and conservative radial cell carrier (2026-11-17)
+
+**Reused original same-object source code:** `scripts/ksw668_f8_tt_multipole.py` (three regularized sources `G_l=S_l/u^l`, effective `d=3+2l`, normal_order=3) and `scripts/ksw668_f8_fv_source_flux.py` (original endpoint primitives `p0,p2,p4`, smooth l4 rest integral, finite source cell mass) plus the XXXIV 12-node exact rational tensor axial projector. Original source/papers/attribution intact.
+
+**Positive finite commuting result (G1 source angular stage):** the **original** 12-node angular operator `A_12` is linear for arbitrary rational angular samples. For every source shell mass `M` and full original tensor Fourier polynomial `T(k)` at fixed longitudinal x and transverse rho,
+```
+A_12[M T_yy(x,rho y,rho z)] = M A(x,rho);
+A_12[M T_zz(x,rho y,rho z)] = - M A(x,rho).
+```
+The other projected tensor components vanish as already proved in XXXIV. This ensures that **multiplication by an already-computed scalar source mass** can be performed before or after the finite angular projector. It is an exact discrete angular/source scalar-multiplication relation, NOT an integral interchanger for an arbitrary radial tensor field or the complete tensor-to-FV commuting diagram.
+
+**Original source-cell mass carrier:** for each ell=0,2,4, `d=3+2ell`, and `u=r/eps`, the original solver computes
+```
+M_(ell,j) = eps^d * integral_(u_a)^(u_b) u^(d-1) G_ell(u) du;
+W_(ell,j) = (r_hi^d-r_lo^d)/d;
+source_(ell,j) = M_(ell,j)/W_(ell,j).
+```
+Source code `cell_mass` uses endpoint derivatives `p_ell(u_b)-p_ell(u_a)`; for ell=4 it also adds the `27 integral u² f(u) du` rest term. The new `KSW668F8AxialProjectionSourceShellTransferExact.agda` proves the algebraic finite telescope of arbitrary endpoint primitives and finite angular scaling/additivity. It does NOT prove that the analytic compact bump derivatives admit these primitives, which remains original SymPy/analytic source ownership.
+
+**Critical origin counterexample for any naive alternative transfer:** the physical `yy` source before regularization is `S_ell(u)=u^ell G_ell(u)`. Averaging it with ordinary 3D volume `u²du` is not the same as taking the original effective-dimensional average of `G_ell` then multiplying by `u_center^ell`. Take manufactured `G_ell(u)=1` and the actual original resolution ratio `h/eps=.008/.04=1/5`, first half-cell `[0,h/(2eps)]=[0,1/10]`. Then
+```
+ordinary 3D first-cell mean of S_0 = 1,
+ordinary 3D first-cell mean of S_2 = 3/500,
+ordinary 3D first-cell mean of S_4 = 3/70000;
+centre-evaluated u_center^ell * mean_eff G_ell = 0 (ell>0).
+```
+The original code does **NOT** perform that naive centre reconstruction as its source integration. Thus this is a guardrail for future tensor/real-space source transfer, not a detected bug. The finite source-cell weighted masses are additive over arbitrary subdivisions; a local exact-Fraction randomized partition audit found **63/63** passing controls. The committed combined regression `scripts/test_ksw668_f8_source_shell_projection_transfer.py` additionally checks the angular tensor/mass multiplier for both yy and zz.
+
+**Next max-cut G1:** a **nontrivial tensor-mode-to-source FV map** must compare the projected full 3D Cartesian TT differential source before radial averaging with the original exact `G_l` primitives under proper `r^{2+2l}` measure, prove the requisite differential projection/integration commutators and handle r=0 plus moving characteristic SAT. The existing algebraic angular/mass commutation only covers multiplying a precomputed shell mass by an angle-independent tensor multiplier. Do not claim all-dimensional tensor evolution or electric-Weyl convergence from this. G2 joint SAT energy, G3 moving SSPRK3, G4 moving high-Sobolev both-Weyl trace, G5 independent three-axis convergence, G6 physical FIO/matter/detector remain OPEN. Pinned Agda 2.9 kernel NOT RUN. No ESD edits, no false Monster/369 geometry promotion.
