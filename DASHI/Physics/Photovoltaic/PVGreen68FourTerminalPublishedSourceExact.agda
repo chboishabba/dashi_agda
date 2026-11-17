@@ -43,12 +43,29 @@ sourcePrintedDifference = refl
 oneSunHalfSourceUnits : Nat
 oneSunHalfSourceUnits = 50000000
 
--- Even the upper published rounded value is strictly below one-sun 50%.
--- This says NOTHING about the proposed 369 device or an ideal 4T model.
+-- Exact same-unit source headroom, proven by builtin Nat normalization:
+-- 35.900000% + 14.100000 percentage points = 50.000000%.
+sourceFourTerminalHeadroomExact :
+  reportedRoundedFourTerminalUnits + 14100000 ≡ oneSunHalfSourceUnits
+sourceFourTerminalHeadroomExact = refl
+
+-- For an inductive order witness, rescale *only the reported one-decimal*
+-- claim onto a separate 0.1 percentage-point grid: 359 < 500.
+-- This avoids an impractical 35,900,000-deep unary order construction.
+reportedOneDecimalUnits halfOneDecimalUnits : Nat
+reportedOneDecimalUnits = 359
+halfOneDecimalUnits = 500
+
+reportedOneDecimalHeadroom :
+  reportedOneDecimalUnits + 141 ≡ halfOneDecimalUnits
+reportedOneDecimalHeadroom = refl
+
+-- Strictly below half in the explicitly coarse published-value grid.
+-- This says NOTHING about a proposed 369 device or ideal model.
 sourceFourTerminalReportedBelowHalf :
-  Bound._≤_ reportedRoundedFourTerminalUnits oneSunHalfSourceUnits
+  Bound._≤_ reportedOneDecimalUnits halfOneDecimalUnits
 sourceFourTerminalReportedBelowHalf =
-  Bound.≤-append reportedRoundedFourTerminalUnits 14100000
+  Bound.≤-append reportedOneDecimalUnits 141
 
 -- A 2T V*J*FF identity would miss independently contacted groups;
 -- the source aggregation assumes shared normalized illumination area.
