@@ -1530,3 +1530,6 @@ import DASHI.Physics.YangMills.YMClayOriginalWilsonSecondOrderCombinatoricsExact
 
 -- Exact all-degree finite SU2 moments; analytic Haar/positivity still OPEN.
 import DASHI.Physics.YangMills.YMClaySU2PochhammerMomentNumeratorsExact as SU2ExactMoments
+
+-- Original Fejer/SU2 all-degree finite character block cancellation.
+import DASHI.Physics.YangMills.YMClayDyadicCharacterPairCancellationExact as SU2DyadicFourierPairs
