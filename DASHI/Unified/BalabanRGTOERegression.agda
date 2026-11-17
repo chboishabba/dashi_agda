@@ -1539,3 +1539,6 @@ import DASHI.Physics.YangMills.YMClayRationalS3StereographicNodeExact as S3Ratio
 
 -- Exact positive rational degree-seven S3 orbit moment certificate.
 import DASHI.Physics.YangMills.YMClayRationalS3DegreeSevenOrbitMomentsExact as S3RationalDegreeSeven
+
+-- Compact exact rational SU2 degree-13 nine-invariant source certificate.
+import DASHI.Physics.YangMills.YMClayRationalS3DegreeThirteenInvariantCertificateExact as RationalS3Degree13
