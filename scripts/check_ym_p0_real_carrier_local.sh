@@ -56,6 +56,8 @@ python3 scripts/check_ym_wilson_L1_commutator_20261117.py
 python3 scripts/check_ym_real_sympy_fullchain_20261117.py
 python3 scripts/check_ym_universal_cubature_producer_20261117.py --degree 9
 python3 scripts/check_ym_dyadic_character_bitpair_20261117.py --max-power 8
+python3 scripts/check_ym_wilson_all_cutoffs_interval_20261117.py
+python3 scripts/check_ym_naive_cylinder_negative_control_20261117.py
 python3 scripts/check_ym_su2_o4_invariance_20261117.py
 python3 scripts/check_ym_effective_cauchy_general_20261117.py --levels 16
 python3 scripts/check_ym_original_wilson_polynomial_cylinder_20261117.py --side 1 --order 2
