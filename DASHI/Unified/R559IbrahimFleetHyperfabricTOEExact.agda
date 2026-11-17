@@ -62,6 +62,10 @@ import DASHI.Core.IndexedRelationalHyperfabricSpineExact as Fabric
 import DASHI.Core.IndexedRelationalPadicWaveContinuousAdaptersExact as PadicWave
 import DASHI.Law.SensibLawWrongTypeGenericHyperfabricAdapterExact as WrongType
 import DASHI.Physics.Closure.BalancedTernaryContinuousEnvelope as Stream
+import DASHI.Unified.BalabanRGTOERegression as Balaban
+import DASHI.Biology.EqualCardinalityStructureBoundaryExact as EqualCardinality
+import DASHI.Physics.YangMills.BalabanClayGate4CurrentFrontierReceipt as Gate4Current
+import DASHI.Physics.YangMills.CompactLieProofLevel as Proof
 import DASHI.Core.RelationalTrialecticDisambiguationExact as IdentityFirewall
 import DASHI.Unified.BalabanRGTOERegression as Balaban
 import DASHI.Biology.EqualCardinalityStructureBoundaryExact as EqualCardinality
@@ -148,6 +152,85 @@ historicalGate4CountSelectedAsFleetTarget = false
 historicalGate4CountSelectedAsFleetTargetIsFalse :
   historicalGate4CountSelectedAsFleetTarget ≡ false
 historicalGate4CountSelectedAsFleetTargetIsFalse = refl
+
+
+------------------------------------------------------------------------
+-- Current Gate-4 frontier and Fleet target-selection boundary.
+------------------------------------------------------------------------
+
+historicalGate4GapCount : Nat
+historicalGate4GapCount =
+  YM.gate4UnresolvedCount YM.canonicalBalabanR559TOEMaxCutReceipt
+
+historicalGate4GapCountIs58 : historicalGate4GapCount ≡ 58
+historicalGate4GapCountIs58 =
+  YM.gate4UnresolvedCountIs58 YM.canonicalBalabanR559TOEMaxCutReceipt
+
+fleetFormalGapCountEqualsHistoricalGate4Count :
+  fleetFormalGaps ≡ historicalGate4GapCount
+fleetFormalGapCountEqualsHistoricalGate4Count =
+  trans fleetFormalGapsAre58 (sym historicalGate4GapCountIs58)
+
+fleetGate4EqualCardinalityBoundary :
+  EqualCardinality.EqualCardinalityBoundary
+fleetGate4EqualCardinalityBoundary =
+  EqualCardinality.canonicalEqualCardinalityBoundary
+
+fleetGate4EqualCardinalitySelectsCanonicalMap : Bool
+fleetGate4EqualCardinalitySelectsCanonicalMap =
+  EqualCardinality.equalCardinalitySelectsCanonicalMap
+    fleetGate4EqualCardinalityBoundary
+
+fleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
+  fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
+fleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
+  EqualCardinality.equalCardinalitySelectsCanonicalMapIsFalse
+    fleetGate4EqualCardinalityBoundary
+
+fleetFormalGapTargetSelected : Bool
+fleetFormalGapTargetSelected = true
+
+fleetFormalGapTargetSelectedIsTrue :
+  fleetFormalGapTargetSelected ≡ true
+fleetFormalGapTargetSelectedIsTrue = refl
+
+historicalGate4CountSelectedAsFleetTarget : Bool
+historicalGate4CountSelectedAsFleetTarget = false
+
+historicalGate4CountSelectedAsFleetTargetIsFalse :
+  historicalGate4CountSelectedAsFleetTarget ≡ false
+historicalGate4CountSelectedAsFleetTargetIsFalse = refl
+
+BalabanContinuumPromotion : Set
+BalabanContinuumPromotion =
+  Balaban.BalabanContinuumLimitPromotion
+
+DepthContinuumPromotion : Set
+DepthContinuumPromotion =
+  Balaban.DepthContinuumLimitPromotion
+
+toeBalabanContinuumPromotionImpossible :
+  BalabanContinuumPromotion → ⊥
+toeBalabanContinuumPromotionImpossible =
+  Balaban.balabanContinuumLimitPromotionImpossible
+
+toeDepthContinuumPromotionImpossible :
+  DepthContinuumPromotion → ⊥
+toeDepthContinuumPromotionImpossible =
+  Balaban.depthContinuumLimitPromotionImpossible
+
+currentGate4FrontierLedgerLevel : Proof.ProofLevel
+currentGate4FrontierLedgerLevel =
+  Gate4Current.currentFrontierLedgerTypecheckLevel
+
+currentGate4ClusteringToTransferGapLevel : Proof.ProofLevel
+currentGate4ClusteringToTransferGapLevel =
+  Gate4Current.clusteringToTransferGapReductionTypecheckLevel
+
+currentGate4FrontierDoesNotSelfPromote :
+  Proof.promotable currentGate4FrontierLedgerLevel ≡ false
+currentGate4FrontierDoesNotSelfPromote =
+  Proof.conditionalDoesNotSelfPromote
 
 
 ymGate4FormalGaps : Nat
