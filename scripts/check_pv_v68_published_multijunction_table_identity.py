@@ -104,7 +104,7 @@ def compute():
     four_delta=summed-F(four["reported_pce"])
     check("4T source two separate IV groups",len(components)==2)
     check("4T top power 29.988%",components[0]==F("29.988"))
-    check("4T bottom power 5.879? source check",abs(components[1]-F("5.879"))<F("0.1"))
+    check("4T bottom power 5.880435%",components[1]==F("5.880435"))
     check("4T same-area contributions reproduce report",abs(four_delta)<F("0.05"))
     check("4T original raw IV remains unavailable",four["original_raw_IV_available"] is False)
     four_reconstruction={
