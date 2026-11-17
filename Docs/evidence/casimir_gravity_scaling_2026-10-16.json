@@ -1,0 +1,20 @@
+{
+  "script": "scripts/casimir_gravity_scaling.py",
+  "script_sha256": "2327d5479f83757d5337cb79be89b6dd0e6bd72161dfd22f92aad195f3dcecdd",
+  "execution_environment": "ChatGPT analysis Python runtime",
+  "source": "10.1103/PhysRev.184.1272",
+  "model": "ideal parallel-plate Brown-Maclay scaling plus DASHI weak-field sheet proxy",
+  "rows": {
+    "1e-6_m": {"energy_density_J_m3": -0.0004333752574825846, "equivalent_mass_density_kg_m3": -4.821950045302491e-21, "sheet_g_m_s2": -2.0221263984732166e-36, "fraction_g": -2.0619950732138056e-37},
+    "1e-7_m": {"energy_density_J_m3": -4.333752574825845, "equivalent_mass_density_kg_m3": -4.8219500453024903e-17, "sheet_g_m_s2": -2.0221263984732167e-33, "fraction_g": -2.0619950732138056e-34},
+    "1e-8_m": {"energy_density_J_m3": -43337.52574825844, "equivalent_mass_density_kg_m3": -4.821950045302489e-13, "sheet_g_m_s2": -2.0221263984732164e-30, "fraction_g": -2.0619950732138054e-31}
+  },
+  "assertions_passed": true,
+  "promotion_boundaries": {
+    "finite_plate_gr_solution": false,
+    "measured_gravitational_backreaction": false,
+    "macroscopic_scaling_demonstrated": false,
+    "warp_or_wormhole_capability": false,
+    "agda_kernel_receipt": false
+  }
+}

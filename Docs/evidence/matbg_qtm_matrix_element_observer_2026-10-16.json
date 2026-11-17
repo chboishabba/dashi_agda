@@ -1,0 +1,34 @@
+{
+  "assertions_passed": true,
+  "factor_max": 0.7546836020406058,
+  "factor_min": 0.22349333217160083,
+  "model_source_doi": "10.1073/pnas.1108174108",
+  "observer": "central-conduction-band wavefunction factor Pt(k)*Ps(k), with Ps from I+sigma_x on the selected top-layer component",
+  "promotion_boundaries": {
+    "agda_kernel_receipt": false,
+    "experimental_fit": false,
+    "interacting_self_energy": false,
+    "probe_spectral_function_replayed": false,
+    "qtm_electrostatics_replayed": false,
+    "raw_qtm_data_used": false,
+    "same_sample_entropy": false
+  },
+  "samples": [
+    {"Pt_times_Ps": 0.46567764340097606, "conditional_sublattice_Ps": 0.9915368985941436, "energy_eV": -0.001413367109065487, "q_along_b1": 0.0, "top_layer_weight_Pt": 0.46965235894018653},
+    {"Pt_times_Ps": 0.6240918521385963, "conditional_sublattice_Ps": 1.311438054830506, "energy_eV": 6.496755444778628e-05, "q_along_b1": 0.125, "top_layer_weight_Pt": 0.4758835919392744},
+    {"Pt_times_Ps": 0.5721669630068007, "conditional_sublattice_Ps": 1.1674994239693468, "energy_eV": 0.0007170439117241266, "q_along_b1": 0.25, "top_layer_weight_Pt": 0.49007901096987877},
+    {"Pt_times_Ps": 0.4362556137064391, "conditional_sublattice_Ps": 0.8640498027221064, "energy_eV": 0.000821457812633132, "q_along_b1": 0.375, "top_layer_weight_Pt": 0.5048963755700857},
+    {"Pt_times_Ps": 0.22349333217160083, "conditional_sublattice_Ps": 0.4279594641174948, "energy_eV": 0.0019404911073158898, "q_along_b1": 0.5, "top_layer_weight_Pt": 0.5222301430638335},
+    {"Pt_times_Ps": 0.3219623530891972, "conditional_sublattice_Ps": 0.6305159086573134, "energy_eV": 0.00391179609054766, "q_along_b1": 0.625, "top_layer_weight_Pt": 0.5106331952429519},
+    {"Pt_times_Ps": 0.38232807030871624, "conditional_sublattice_Ps": 0.7922987253222724, "energy_eV": 0.002637414265352147, "q_along_b1": 0.75, "top_layer_weight_Pt": 0.48255545299937463},
+    {"Pt_times_Ps": 0.3461817386112532, "conditional_sublattice_Ps": 0.7343305997906919, "energy_eV": 0.0003814395710104582, "q_along_b1": 0.875, "top_layer_weight_Pt": 0.47142491230778916},
+    {"Pt_times_Ps": 0.7546836020406058, "conditional_sublattice_Ps": 1.606722016120633, "energy_eV": -0.0014002528686641066, "q_along_b1": 1.0, "top_layer_weight_Pt": 0.4697039030203617}
+  ],
+  "script": "scripts/matbg_qtm_matrix_element_observer.py",
+  "script_sha256": "cad222054d173be33855801df1d8092f06b171498bf590cfe72dcf75b257255a",
+  "shells": 3,
+  "source_doi": "10.1038/s41586-026-10378-x",
+  "theta_deg_fixture": 1.1,
+  "w0_over_w1_source_ratio": 0.6,
+  "wAB_eV_generic_reference": 0.11
+}

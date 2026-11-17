@@ -1,0 +1,18 @@
+{
+  "assertions_passed": true,
+  "axis_z_m": 0.001,
+  "disk_radius_m": 0.01,
+  "energy_density_J_m3": -4.333752574825845,
+  "equivalent_mass_density_kg_m3": -4.8219500453024903e-17,
+  "equivalent_surface_mass_density_kg_m2": -4.82195004530249e-24,
+  "finite_disk_acceleration_m_s2": -1.8209173014945933e-33,
+  "finite_disk_factor": 0.9004962809790011,
+  "finite_disk_fraction_g": -1.8568188948260551e-34,
+  "infinite_sheet_acceleration_m_s2": -2.0221263984732167e-33,
+  "model": "Brown-Maclay ideal Casimir energy with finite-disk Newtonian weak-field proxy",
+  "promotion_boundaries": {"agda_kernel_receipt": false, "finite_plate_gr_solution": false, "macroscopic_scaling": false, "measured_gravity": false, "warp_capability": false, "wormhole_capability": false},
+  "script": "scripts/casimir_finite_disk_gravity_proxy.py",
+  "script_sha256": "a951135281bd6fd8e0c49941d25d940300736d3bb7e4595c01960a1538205b7e",
+  "separation_m": 1e-07,
+  "source_doi": "10.1103/PhysRev.184.1272"
+}

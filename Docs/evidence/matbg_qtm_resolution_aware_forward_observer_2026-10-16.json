@@ -1,0 +1,40 @@
+{
+  "assertions_passed": true,
+  "model": {
+    "b1_norm_inv_nm": 0.5662099702530637,
+    "q_samples": 41,
+    "shells": 3,
+    "theta_deg": 1.1,
+    "w0_over_w1_source_ratio": 0.6,
+    "wAB_eV_generic_reference": 0.11
+  },
+  "promotion_boundaries": {
+    "absolute_wAB_sample_calibrated": false,
+    "experimental_arrays_used": false,
+    "experimental_fit_paid": false,
+    "gaussian_response_source_measured": false,
+    "interacting_self_energy_included": false
+  },
+  "resolution": {
+    "energy_fwhm_upper_bound_meV": 10.0,
+    "gaussian_energy_sigma_meV": 4.2466090014400955,
+    "gaussian_momentum_sigma_inv_nm": 0.012739827004320286,
+    "momentum_fwhm_inv_nm": 0.03
+  },
+  "script": "scripts/matbg_qtm_resolution_aware_forward_observer.py",
+  "script_sha256": "14af008f022803299c657ff4ee2c24c4616d5755cc17593d7734dbe8213e1a22",
+  "sources": {
+    "bm2011": "10.1073/pnas.1108174108",
+    "xiao2026": "10.1038/s41586-026-10378-x"
+  },
+  "synthetic_surface": {
+    "central_band_energy_max_meV": 3.91179609054766,
+    "central_band_energy_min_meV": -1.413367109065487,
+    "factor_max": 0.7546836020406059,
+    "factor_min": 0.21856460242533168,
+    "integrated_intensity": 17.659947828215955,
+    "peak_energy_meV": -0.5,
+    "peak_momentum_inv_nm": 0.03993834598416361,
+    "unbroadened_total_matrix_element_weight": 17.66000159143856
+  }
+}
