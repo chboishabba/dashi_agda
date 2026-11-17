@@ -62,8 +62,23 @@ import DASHI.Core.SymmetryResolvedFibreExact
 import DASHI.EverythingSSPRepresentationReductionRound9
 import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
 
--- Reuse exact 369/tetration/corner/S3 proofs and explicit non-promotion gates.
-import DASHI.Unified.TOE369TetratedCornerCocycleConvergenceExact
+-- Reuse the existing TOE parents. Do not replace their carriers.
+import DASHI.Unifier
+import DASHI.Unified.PNFHyperfabric
+import DASHI.Unified.Physics
 
--- Original Bishop analytical J phase imported as actual Pickover signed-history consumer.
-import DASHI.Analysis.PickoverAnalyticJHistoricalPhaseConsumerExact as PickoverAnalyticJHistory
+-- Existing exact finite source obligations. These imports do not claim
+-- a wild exterior equivalence, Euclidean meridian bound, or physical W.
+-- Alexander/Hatcher are the topology roots. The stage/ribbon sources
+-- belong to the existing hyperfabric PR. PL surface donors belong to
+-- the separate exotic-topology PR; they are not copied here.
+import DASHI.Unified.HornStageClearanceC3SourceCutExact
+import DASHI.Mathematics.Topology.HatcherRibbonPeripheralBoundaryExact
+
+-- Reuse the original native cube and source-specific non-promotion proofs.
+-- These imports do not identify finite sites, Albert J0, Monster VOA,
+-- or measured spacetime. All original authors and source owners remain.
+import DASHI.Unified.Hyperfabric27MinusOneAntipodalSameCarrierCutExact
+import DASHI.Unified.Hyperfabric27MinusOneOriginalPathInvariantNoGoExact
+import DASHI.Unified.HyperfabricPunctured27Projective13OrientationExact
+import DASHI.Unified.HyperfabricMonsterBosonicWorldsheetExistingOwnerCutExact
