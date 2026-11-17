@@ -765,83 +765,71 @@ unifierNavierStokesAugmentedCriticalWeightedStillOpen :
 unifierNavierStokesAugmentedCriticalWeightedStillOpen =
   NSClayTOE.currentAugmentedCriticalWeightedStillOpen
 
-unifierNavierStokesSharedWeightedLeavesBuildBarrier : Bool
-unifierNavierStokesSharedWeightedLeavesBuildBarrier =
-  NSClayTOE.currentSharedWeightedLeavesBuildBarrier
+unifierBalabanPhysicalPromotionCut :
+  (BalabanR559TOE.balabanBlockSpinTransfer
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false)
+  × (BalabanR559TOE.balabanUniformKPAbsorption
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false)
+  × (BalabanR559TOE.balabanOSWightmanConstruction
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false)
+unifierBalabanPhysicalPromotionCut =
+  unifierBalabanBlockSpinStillBlocked ,
+  (unifierBalabanUniformKPStillBlocked ,
+   unifierBalabanOSWightmanStillBlocked)
 
-unifierNavierStokesSharedWeightedLeavesBuildBarrierIsTrue :
-  unifierNavierStokesSharedWeightedLeavesBuildBarrier ≡ true
-unifierNavierStokesSharedWeightedLeavesBuildBarrierIsTrue =
-  NSClayTOE.currentSharedWeightedLeavesBuildBarrierIsTrue
 
-unifierNavierStokesR726IndependentLeafRequired : Bool
-unifierNavierStokesR726IndependentLeafRequired =
-  NSClayTOE.legacyR726IndependentLeafRequired
+------------------------------------------------------------------------
+-- Current-master cross-domain max-cut and contextual 369 handoff.
+------------------------------------------------------------------------
 
-unifierNavierStokesR726IndependentLeafNotRequired :
-  unifierNavierStokesR726IndependentLeafRequired ≡ false
-unifierNavierStokesR726IndependentLeafNotRequired =
-  NSClayTOE.legacyR726IndependentLeafNotRequired
+import DASHI.Unified.TOECurrentMaxCutGovernanceFleetExact as CurrentMaxCut
+import DASHI.Unified.TOECurrentMaxCutGovernanceFleetRegression
+import DASHI.Core.GovernanceTrajectoryRealisationExact as CurrentTrajectory
+import DASHI.Foundations.SSPTritCarrier as CurrentSSP
 
-unifierNavierStokesStrictMarginR406IndependentLeafRequired : Bool
-unifierNavierStokesStrictMarginR406IndependentLeafRequired =
-  NSClayTOE.legacyStrictMarginR406IndependentLeafRequired
+unifierCurrentMaxCutGovernanceFleetReceipt :
+  CurrentMaxCut.TOECurrentMaxCutGovernanceFleetReceipt
+unifierCurrentMaxCutGovernanceFleetReceipt =
+  CurrentMaxCut.canonicalTOECurrentMaxCutGovernanceFleetReceipt
 
-unifierNavierStokesStrictMarginR406IndependentLeafNotRequired :
-  unifierNavierStokesStrictMarginR406IndependentLeafRequired ≡ false
-unifierNavierStokesStrictMarginR406IndependentLeafNotRequired =
-  NSClayTOE.legacyStrictMarginR406IndependentLeafNotRequired
+unifierCurrent369ContextualFibreWeldReceipt :
+  CurrentMaxCut.TOE369ContextualFibreWeldReceipt
+unifierCurrent369ContextualFibreWeldReceipt =
+  CurrentMaxCut.canonicalTOE369ContextualFibreWeldReceipt
 
-unifierNavierStokesBarrierDependentQPlusMinusShortcutAdmissible : Bool
-unifierNavierStokesBarrierDependentQPlusMinusShortcutAdmissible =
-  NSClayTOE.barrierDependentQPlusMinusShortcutAdmissible
+unifierCurrent369DecisionSheetStatesIsNine :
+  CurrentMaxCut.decisionSheetStateCount ≡ 9
+unifierCurrent369DecisionSheetStatesIsNine =
+  CurrentMaxCut.decisionSheetStateCountIsNine
 
-unifierNavierStokesBarrierDependentQPlusMinusShortcutStillCircular :
-  unifierNavierStokesBarrierDependentQPlusMinusShortcutAdmissible ≡ false
-unifierNavierStokesBarrierDependentQPlusMinusShortcutStillCircular =
-  NSClayTOE.barrierDependentQPlusMinusShortcutStillCircular
+unifierCurrent369InteractionCubeStatesIsTwentySeven :
+  CurrentMaxCut.interactionCubeStateCount ≡ 27
+unifierCurrent369InteractionCubeStatesIsTwentySeven =
+  CurrentMaxCut.interactionCubeStateCountIsTwentySeven
 
-unifierNavierStokesSharedWeightedClayPromotion : Bool
-unifierNavierStokesSharedWeightedClayPromotion =
-  NSClayTOE.currentSharedWeightedClayPromotion
+unifierCurrent369AppraisalFibreStatesIsSevenHundredTwentyNine :
+  CurrentMaxCut.appraisalFibreStateCount ≡ 729
+unifierCurrent369AppraisalFibreStatesIsSevenHundredTwentyNine =
+  CurrentMaxCut.appraisalFibreStateCountIsSevenHundredTwentyNine
 
-unifierNavierStokesSharedWeightedClayPromotionStillFalse :
-  unifierNavierStokesSharedWeightedClayPromotion ≡ false
-unifierNavierStokesSharedWeightedClayPromotionStillFalse =
-  NSClayTOE.currentSharedWeightedClayPromotionStillFalse
+unifierCurrent369SupportIsPositive :
+  CurrentMaxCut.relativeOrientationTrit CurrentTrajectory.supports
+  ≡ CurrentSSP.sspPosOne
+unifierCurrent369SupportIsPositive =
+  CurrentMaxCut.supportOrientationIsPositive
 
-unifierNavierStokesContinuumBKMPassageConstructed : Bool
-unifierNavierStokesContinuumBKMPassageConstructed =
-  NSClayTOE.continuumBKMPassageConstructed
+unifierCurrent369CounterIsNegative :
+  CurrentMaxCut.relativeOrientationTrit CurrentTrajectory.counters
+  ≡ CurrentSSP.sspNegOne
+unifierCurrent369CounterIsNegative =
+  CurrentMaxCut.counterOrientationIsNegative
 
-unifierNavierStokesContinuumBKMPassageStillOpen :
-  unifierNavierStokesContinuumBKMPassageConstructed ≡ false
-unifierNavierStokesContinuumBKMPassageStillOpen =
-  NSClayTOE.continuumBKMPassageStillOpen
+unifierCurrent369SynthesisDoesNotEraseComparator :
+  CurrentMaxCut.synthesisErasesComparator ≡ false
+unifierCurrent369SynthesisDoesNotEraseComparator =
+  CurrentMaxCut.synthesisErasesComparatorIsFalse
 
-unifierNavierStokesAllDataBridgeConstructed : Bool
-unifierNavierStokesAllDataBridgeConstructed =
-  NSClayTOE.allDataBridgeConstructed
-
-unifierNavierStokesAllDataBridgeStillOpen :
-  unifierNavierStokesAllDataBridgeConstructed ≡ false
-unifierNavierStokesAllDataBridgeStillOpen =
-  NSClayTOE.allDataBridgeStillOpen
-
-unifierNavierStokesSubmissionPacketReady : Bool
-unifierNavierStokesSubmissionPacketReady =
-  NSClayTOE.submissionPacketReady
-
-unifierNavierStokesSubmissionPacketStillNotReady :
-  unifierNavierStokesSubmissionPacketReady ≡ false
-unifierNavierStokesSubmissionPacketStillNotReady =
-  NSClayTOE.submissionPacketStillNotReady
-
-unifierNavierStokesClayEligible : Bool
-unifierNavierStokesClayEligible =
-  NSClayTOE.clayEligible
-
-unifierNavierStokesClayEligibilityStillFalse :
-  unifierNavierStokesClayEligible ≡ false
-unifierNavierStokesClayEligibilityStillFalse =
-  NSClayTOE.clayEligibilityStillFalse
+unifierCurrentFiniteRGStillDoesNotPromoteContinuum :
+  CurrentMaxCut.finiteRGCreatesContinuumPromotion ≡ false
+unifierCurrentFiniteRGStillDoesNotPromoteContinuum =
+  CurrentMaxCut.finiteRGCreatesContinuumPromotionIsFalse

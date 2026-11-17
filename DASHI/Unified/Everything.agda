@@ -232,7 +232,99 @@ unifiedNavierStokesBM2Receipt :
 unifiedNavierStokesBM2Receipt =
   NSBM2TOE.canonicalNavierStokesBM2TOEReceipt
 
-unifiedNavierStokesBM2ZKPFrame :
-  NSBM2TOE.NavierStokesBM2TOEZKPFrame
-unifiedNavierStokesBM2ZKPFrame =
-  NSBM2TOE.canonicalNavierStokesBM2TOEZKPFrame
+unifiedR559IbrahimFleetHyperfabricReceipt :
+  FleetHyperTOE.R559IbrahimFleetHyperfabricTOEReceipt
+unifiedR559IbrahimFleetHyperfabricReceipt =
+  FleetHyperTOE.canonicalR559IbrahimFleetHyperfabricTOEReceipt
+
+unifiedYMGate4FormalGapsAre58 :
+  FleetHyperTOE.ymGate4FormalGaps ≡ 58
+unifiedYMGate4FormalGapsAre58 =
+  FleetHyperTOE.ymGate4FormalGapsAre58
+
+unifiedYMGate4PaidReductionLevel : ProofLevel
+unifiedYMGate4PaidReductionLevel =
+  FleetHyperTOE.ymGate4PaidReductionLevel
+
+unifiedYMGate4InhabitantsLevel : ProofLevel
+unifiedYMGate4InhabitantsLevel =
+  FleetHyperTOE.ymGate4InhabitantsLevel
+
+unifiedFleet58DoesNotIdentifyYMGate4 :
+  FleetHyperTOE.Fleet58EqualsYMGate4SameObject → ⊥
+unifiedFleet58DoesNotIdentifyYMGate4 =
+  FleetHyperTOE.fleet58CardinalityDoesNotProveYMGate4Identity
+
+unifiedFleetFormalGapsAre58 :
+  FleetHyperTOE.fleetFormalGaps ≡ 58
+unifiedFleetFormalGapsAre58 =
+  FleetHyperTOE.fleetFormalGapsAre58
+
+------------------------------------------------------------------------
+-- Implement-A-to-D terminal unified validation.
+------------------------------------------------------------------------
+
+import DASHI.Unified.YMImplementAToDTOEMaxCutExact as YMAD
+import DASHI.Unified.YMImplementAToDTOEMaxCutValidation
+
+unifiedYMImplementAToDMaxCutReceipt :
+  YMAD.YMImplementAToDTOEMaxCutReceipt
+unifiedYMImplementAToDMaxCutReceipt =
+  YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+
+------------------------------------------------------------------------
+-- Current-master cross-domain max-cut and contextual 369 handoff.
+------------------------------------------------------------------------
+
+import DASHI.Unified.TOECurrentMaxCutGovernanceFleetExact as CurrentMaxCut
+import DASHI.Unified.TOECurrentMaxCutGovernanceFleetRegression
+import DASHI.Core.GovernanceTrajectoryRealisationExact as CurrentTrajectory
+import DASHI.Foundations.SSPTritCarrier as CurrentSSP
+
+unifiedCurrentMaxCutGovernanceFleetReceipt :
+  CurrentMaxCut.TOECurrentMaxCutGovernanceFleetReceipt
+unifiedCurrentMaxCutGovernanceFleetReceipt =
+  CurrentMaxCut.canonicalTOECurrentMaxCutGovernanceFleetReceipt
+
+unifiedCurrent369ContextualFibreWeldReceipt :
+  CurrentMaxCut.TOE369ContextualFibreWeldReceipt
+unifiedCurrent369ContextualFibreWeldReceipt =
+  CurrentMaxCut.canonicalTOE369ContextualFibreWeldReceipt
+
+unifiedCurrent369DecisionSheetStatesIsNine :
+  CurrentMaxCut.decisionSheetStateCount ≡ 9
+unifiedCurrent369DecisionSheetStatesIsNine =
+  CurrentMaxCut.decisionSheetStateCountIsNine
+
+unifiedCurrent369InteractionCubeStatesIsTwentySeven :
+  CurrentMaxCut.interactionCubeStateCount ≡ 27
+unifiedCurrent369InteractionCubeStatesIsTwentySeven =
+  CurrentMaxCut.interactionCubeStateCountIsTwentySeven
+
+unifiedCurrent369AppraisalFibreStatesIsSevenHundredTwentyNine :
+  CurrentMaxCut.appraisalFibreStateCount ≡ 729
+unifiedCurrent369AppraisalFibreStatesIsSevenHundredTwentyNine =
+  CurrentMaxCut.appraisalFibreStateCountIsSevenHundredTwentyNine
+
+unifiedCurrent369SupportIsPositive :
+  CurrentMaxCut.relativeOrientationTrit CurrentTrajectory.supports
+  ≡ CurrentSSP.sspPosOne
+unifiedCurrent369SupportIsPositive =
+  CurrentMaxCut.supportOrientationIsPositive
+
+unifiedCurrent369CounterIsNegative :
+  CurrentMaxCut.relativeOrientationTrit CurrentTrajectory.counters
+  ≡ CurrentSSP.sspNegOne
+unifiedCurrent369CounterIsNegative =
+  CurrentMaxCut.counterOrientationIsNegative
+
+unifiedCurrent369SynthesisDoesNotEraseComparator :
+  CurrentMaxCut.synthesisErasesComparator ≡ false
+unifiedCurrent369SynthesisDoesNotEraseComparator =
+  CurrentMaxCut.synthesisErasesComparatorIsFalse
+
+unifiedCurrentFiniteRGStillDoesNotPromoteContinuum :
+  CurrentMaxCut.finiteRGCreatesContinuumPromotion ≡ false
+unifiedCurrentFiniteRGStillDoesNotPromoteContinuum =
+  CurrentMaxCut.finiteRGCreatesContinuumPromotionIsFalse

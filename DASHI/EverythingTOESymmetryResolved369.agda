@@ -944,83 +944,71 @@ toeNavierStokesAugmentedCriticalWeightedStillOpen :
 toeNavierStokesAugmentedCriticalWeightedStillOpen =
   NSClayTOE.currentAugmentedCriticalWeightedStillOpen
 
-toeNavierStokesSharedWeightedLeavesBuildBarrier : Bool
-toeNavierStokesSharedWeightedLeavesBuildBarrier =
-  NSClayTOE.currentSharedWeightedLeavesBuildBarrier
+toeBalabanPhysicalPromotionCut :
+  (BalabanR559TOE.balabanBlockSpinTransfer
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false)
+  × (BalabanR559TOE.balabanUniformKPAbsorption
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false)
+  × (BalabanR559TOE.balabanOSWightmanConstruction
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false)
+toeBalabanPhysicalPromotionCut =
+  toeBalabanBlockSpinStillBlocked ,
+  (toeBalabanUniformKPStillBlocked ,
+   toeBalabanOSWightmanStillBlocked)
 
-toeNavierStokesSharedWeightedLeavesBuildBarrierIsTrue :
-  toeNavierStokesSharedWeightedLeavesBuildBarrier ≡ true
-toeNavierStokesSharedWeightedLeavesBuildBarrierIsTrue =
-  NSClayTOE.currentSharedWeightedLeavesBuildBarrierIsTrue
 
-toeNavierStokesR726IndependentLeafRequired : Bool
-toeNavierStokesR726IndependentLeafRequired =
-  NSClayTOE.legacyR726IndependentLeafRequired
+------------------------------------------------------------------------
+-- Current-master cross-domain max-cut and contextual 369 handoff.
+------------------------------------------------------------------------
 
-toeNavierStokesR726IndependentLeafNotRequired :
-  toeNavierStokesR726IndependentLeafRequired ≡ false
-toeNavierStokesR726IndependentLeafNotRequired =
-  NSClayTOE.legacyR726IndependentLeafNotRequired
+import DASHI.Unified.TOECurrentMaxCutGovernanceFleetExact as CurrentMaxCut
+import DASHI.Unified.TOECurrentMaxCutGovernanceFleetRegression
+import DASHI.Core.GovernanceTrajectoryRealisationExact as CurrentTrajectory
+import DASHI.Foundations.SSPTritCarrier as CurrentSSP
 
-toeNavierStokesStrictMarginR406IndependentLeafRequired : Bool
-toeNavierStokesStrictMarginR406IndependentLeafRequired =
-  NSClayTOE.legacyStrictMarginR406IndependentLeafRequired
+toeCurrentMaxCutGovernanceFleetReceipt :
+  CurrentMaxCut.TOECurrentMaxCutGovernanceFleetReceipt
+toeCurrentMaxCutGovernanceFleetReceipt =
+  CurrentMaxCut.canonicalTOECurrentMaxCutGovernanceFleetReceipt
 
-toeNavierStokesStrictMarginR406IndependentLeafNotRequired :
-  toeNavierStokesStrictMarginR406IndependentLeafRequired ≡ false
-toeNavierStokesStrictMarginR406IndependentLeafNotRequired =
-  NSClayTOE.legacyStrictMarginR406IndependentLeafNotRequired
+toeCurrent369ContextualFibreWeldReceipt :
+  CurrentMaxCut.TOE369ContextualFibreWeldReceipt
+toeCurrent369ContextualFibreWeldReceipt =
+  CurrentMaxCut.canonicalTOE369ContextualFibreWeldReceipt
 
-toeNavierStokesBarrierDependentQPlusMinusShortcutAdmissible : Bool
-toeNavierStokesBarrierDependentQPlusMinusShortcutAdmissible =
-  NSClayTOE.barrierDependentQPlusMinusShortcutAdmissible
+toeCurrent369DecisionSheetStatesIsNine :
+  CurrentMaxCut.decisionSheetStateCount ≡ 9
+toeCurrent369DecisionSheetStatesIsNine =
+  CurrentMaxCut.decisionSheetStateCountIsNine
 
-toeNavierStokesBarrierDependentQPlusMinusShortcutStillCircular :
-  toeNavierStokesBarrierDependentQPlusMinusShortcutAdmissible ≡ false
-toeNavierStokesBarrierDependentQPlusMinusShortcutStillCircular =
-  NSClayTOE.barrierDependentQPlusMinusShortcutStillCircular
+toeCurrent369InteractionCubeStatesIsTwentySeven :
+  CurrentMaxCut.interactionCubeStateCount ≡ 27
+toeCurrent369InteractionCubeStatesIsTwentySeven =
+  CurrentMaxCut.interactionCubeStateCountIsTwentySeven
 
-toeNavierStokesSharedWeightedClayPromotion : Bool
-toeNavierStokesSharedWeightedClayPromotion =
-  NSClayTOE.currentSharedWeightedClayPromotion
+toeCurrent369AppraisalFibreStatesIsSevenHundredTwentyNine :
+  CurrentMaxCut.appraisalFibreStateCount ≡ 729
+toeCurrent369AppraisalFibreStatesIsSevenHundredTwentyNine =
+  CurrentMaxCut.appraisalFibreStateCountIsSevenHundredTwentyNine
 
-toeNavierStokesSharedWeightedClayPromotionStillFalse :
-  toeNavierStokesSharedWeightedClayPromotion ≡ false
-toeNavierStokesSharedWeightedClayPromotionStillFalse =
-  NSClayTOE.currentSharedWeightedClayPromotionStillFalse
+toeCurrent369SupportIsPositive :
+  CurrentMaxCut.relativeOrientationTrit CurrentTrajectory.supports
+  ≡ CurrentSSP.sspPosOne
+toeCurrent369SupportIsPositive =
+  CurrentMaxCut.supportOrientationIsPositive
 
-toeNavierStokesContinuumBKMPassageConstructed : Bool
-toeNavierStokesContinuumBKMPassageConstructed =
-  NSClayTOE.continuumBKMPassageConstructed
+toeCurrent369CounterIsNegative :
+  CurrentMaxCut.relativeOrientationTrit CurrentTrajectory.counters
+  ≡ CurrentSSP.sspNegOne
+toeCurrent369CounterIsNegative =
+  CurrentMaxCut.counterOrientationIsNegative
 
-toeNavierStokesContinuumBKMPassageStillOpen :
-  toeNavierStokesContinuumBKMPassageConstructed ≡ false
-toeNavierStokesContinuumBKMPassageStillOpen =
-  NSClayTOE.continuumBKMPassageStillOpen
+toeCurrent369SynthesisDoesNotEraseComparator :
+  CurrentMaxCut.synthesisErasesComparator ≡ false
+toeCurrent369SynthesisDoesNotEraseComparator =
+  CurrentMaxCut.synthesisErasesComparatorIsFalse
 
-toeNavierStokesAllDataBridgeConstructed : Bool
-toeNavierStokesAllDataBridgeConstructed =
-  NSClayTOE.allDataBridgeConstructed
-
-toeNavierStokesAllDataBridgeStillOpen :
-  toeNavierStokesAllDataBridgeConstructed ≡ false
-toeNavierStokesAllDataBridgeStillOpen =
-  NSClayTOE.allDataBridgeStillOpen
-
-toeNavierStokesSubmissionPacketReady : Bool
-toeNavierStokesSubmissionPacketReady =
-  NSClayTOE.submissionPacketReady
-
-toeNavierStokesSubmissionPacketStillNotReady :
-  toeNavierStokesSubmissionPacketReady ≡ false
-toeNavierStokesSubmissionPacketStillNotReady =
-  NSClayTOE.submissionPacketStillNotReady
-
-toeNavierStokesClayEligible : Bool
-toeNavierStokesClayEligible =
-  NSClayTOE.clayEligible
-
-toeNavierStokesClayEligibilityStillFalse :
-  toeNavierStokesClayEligible ≡ false
-toeNavierStokesClayEligibilityStillFalse =
-  NSClayTOE.clayEligibilityStillFalse
+toeCurrentFiniteRGStillDoesNotPromoteContinuum :
+  CurrentMaxCut.finiteRGCreatesContinuumPromotion ≡ false
+toeCurrentFiniteRGStillDoesNotPromoteContinuum =
+  CurrentMaxCut.finiteRGCreatesContinuumPromotionIsFalse
