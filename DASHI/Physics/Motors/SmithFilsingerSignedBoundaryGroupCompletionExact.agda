@@ -15,7 +15,7 @@ module DASHI.Physics.Motors.SmithFilsingerSignedBoundaryGroupCompletionExact whe
 open import Agda.Builtin.Nat using (Nat; zero; _+_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Nat.Solver using (module +-*-Solver)
-open +-*-Solver using (solve; _:+_; _:=_)
+open +-*-Solver using (solve; _:+_; con; _:=_)
 
 import DASHI.Physics.Motors.SmithFilsingerMidpointPhaseWorkExact as Port
 import DASHI.Physics.Motors.SmithFilsingerReplenishedCycleCapExact as Cycle
@@ -102,6 +102,61 @@ combinedPorts a b =
   directedSignedWork
     (DirectedSignedWork.incoming a + DirectedSignedWork.incoming b)
     (DirectedSignedWork.outgoing a + DirectedSignedWork.outgoing b)
+
+
+-- Additive inverse is a SWAP of directed natural-work streams,
+-- never an invalid Nat subtraction. The following is equivalence in
+-- cross-sum work, not literal equality of record representatives.
+negativeSignedWork : DirectedSignedWork → DirectedSignedWork
+negativeSignedWork a =
+  directedSignedWork
+    (DirectedSignedWork.outgoing a)
+    (DirectedSignedWork.incoming a)
+
+signedWorkZero : DirectedSignedWork
+signedWorkZero = directedSignedWork zero zero
+
+signedWorkInverseCancels :
+  (a : DirectedSignedWork) →
+  sameSignedWork (combinedPorts a (negativeSignedWork a)) signedWorkZero
+signedWorkInverseCancels a =
+  solve 2
+    (λ x y →
+      ((x :+ y) :+ con 0) := (con 0 :+ (y :+ x)))
+    refl (DirectedSignedWork.incoming a)
+         (DirectedSignedWork.outgoing a)
+
+sameSignedAddCongruenceRight :
+  (a b c : DirectedSignedWork) →
+  sameSignedWork a b →
+  sameSignedWork (combinedPorts a c) (combinedPorts b c)
+sameSignedAddCongruenceRight a b c ab =
+  Cycle.trans
+    (solve 4
+      (λ ai ao bi bo →
+        ((ai :+ ci) :+ (bo :+ co))
+          := ((ai :+ bo) :+ (ci :+ co)))
+      refl ai ao bi bo)
+    (Cycle.trans
+      (Cycle.cong (λ z → z + (ci + co)) ab)
+      (solve 4
+        (λ ai ao bi bo →
+          ((bi :+ ao) :+ (ci :+ co))
+            := ((bi :+ ci) :+ (ao :+ co)))
+        refl ai ao bi bo))
+  where
+    ai : Nat
+    ai = DirectedSignedWork.incoming a
+    ao : Nat
+    ao = DirectedSignedWork.outgoing a
+    bi : Nat
+    bi = DirectedSignedWork.incoming b
+    bo : Nat
+    bo = DirectedSignedWork.outgoing b
+    ci : Nat
+    ci = DirectedSignedWork.incoming c
+    co : Nat
+    co = DirectedSignedWork.outgoing c
 
 paidLoadAndLoss : Port.MidpointTwoPortWorkWindow → DirectedSignedWork
 paidLoadAndLoss p =
