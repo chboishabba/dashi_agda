@@ -725,15 +725,37 @@ validationZKPFrame =
 
 
 ------------------------------------------------------------------------
--- Direct canonical scale-transfer eliminator reachability.
+-- Joint Balaban/R559 receipt carries the typed continuum firewalls.
 ------------------------------------------------------------------------
 
-toeDirectScaleTransferPromotionImpossible :
-  Balaban.BalabanRGScaleTransferPromotion → ⊥
-toeDirectScaleTransferPromotionImpossible =
-  TOE.toeBalabanScaleTransferPromotionImpossible
+jointBalabanR559ContinuumLimitPromotionImpossible :
+  Balaban.BalabanContinuumLimitPromotion → ⊥
+jointBalabanR559ContinuumLimitPromotionImpossible =
+  BalabanR559.continuumLimitPromotionEliminator
+    BalabanR559.canonicalBalabanR559TOEMaxCutReceipt
 
-unifierDirectScaleTransferPromotionImpossible :
-  Balaban.BalabanRGScaleTransferPromotion → ⊥
-unifierDirectScaleTransferPromotionImpossible =
-  Unifier.unifierBalabanScaleTransferPromotionImpossible
+jointBalabanR559DepthContinuumLimitPromotionImpossible :
+  Balaban.DepthContinuumLimitPromotion → ⊥
+jointBalabanR559DepthContinuumLimitPromotionImpossible =
+  BalabanR559.depthContinuumLimitPromotionEliminator
+    BalabanR559.canonicalBalabanR559TOEMaxCutReceipt
+
+toeJointContinuumLimitPromotionMatchesJointOwner :
+  Balaban.BalabanContinuumLimitPromotion → ⊥
+toeJointContinuumLimitPromotionMatchesJointOwner =
+  TOE.toeBalabanR559ContinuumLimitPromotionImpossible
+
+unifierJointContinuumLimitPromotionMatchesJointOwner :
+  Balaban.BalabanContinuumLimitPromotion → ⊥
+unifierJointContinuumLimitPromotionMatchesJointOwner =
+  Unifier.unifierBalabanR559ContinuumLimitPromotionImpossible
+
+toeJointDepthContinuumLimitPromotionMatchesJointOwner :
+  Balaban.DepthContinuumLimitPromotion → ⊥
+toeJointDepthContinuumLimitPromotionMatchesJointOwner =
+  TOE.toeBalabanR559DepthContinuumLimitPromotionImpossible
+
+unifierJointDepthContinuumLimitPromotionMatchesJointOwner :
+  Balaban.DepthContinuumLimitPromotion → ⊥
+unifierJointDepthContinuumLimitPromotionMatchesJointOwner =
+  Unifier.unifierBalabanR559DepthContinuumLimitPromotionImpossible
