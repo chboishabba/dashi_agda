@@ -40,3 +40,6 @@ import DASHI.Physics.ExoticGravity.NingLiNASACooperativeAgreementNCC8124Exact
 -- Original edited-video/clip lineage and inspected primary-source refinements.
 import DASHI.Culture.AmyEskridgeVideoOriginalClipLineageExact
 import DASHI.Culture.AmyEskridgeVideoPrimaryInspectionExact
+
+-- Original Podkletnov experiment, GAO 1969/1970 law, Boeing 2002 reporting.
+import DASHI.Culture.AmyEskridgeVideoHistoricalPrimaryControlsExact
