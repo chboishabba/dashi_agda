@@ -137,6 +137,14 @@ def check_quantitative_boundary() -> None:
     narrated = sp.Rational(2, 100)       # 2 percent
     assert sp.simplify(narrated / earlier_upper - sp.Rational(20, 3)) == 0
     assert earlier_upper < narrated
+    # 1997 Li et al. cite later reports up to 2.1%; this is a source-
+    # lineage distinction, not a contradiction with the 1992 0.3% article.
+    later_reported_upper = sp.Rational(21, 1000)
+    assert narrated <= later_reported_upper
+    # NASA's separate static test resolution must NOT be called a direct
+    # refutation of Podkletnov's other rotating apparatus.
+    static_test_limit = sp.Rational(2, 10**8)
+    assert sp.simplify(narrated / static_test_limit) == 10**6
     has_citation, has_causal_evidence = sp.symbols("has_citation has_causal_evidence")
     assert sp.satisfiable(sp.And(has_citation, sp.Not(has_causal_evidence))) is not False
 
@@ -185,10 +193,38 @@ def check_original_clip_and_media_roster() -> None:
     assert source != edited
 
 
+
+def check_primary_inspection_and_clip_lineage() -> None:
+    primary = read("AmyEskridgeVideoPrimaryInspectionExact.agda")
+    clips = read("AmyEskridgeVideoOriginalClipLineageExact.agda")
+    agg = read("AmyEskridgeVideoEvidenceEverything.agda")
+    registry = read("AmyEskridgeVideoSourceRegistryExact.agda")
+    rows = re.findall(r'(?m)^\w+\s*=\s*primary-document-reading\b', primary)
+    sources = re.findall(r'(?m)^clip\d{2}\s*=\s*clip-lineage\b', clips)
+    assert len(rows) == 10
+    assert len(sources) == 16
+    assert "all86SourceAssociationRetained = Existing.all86RowsAccountedFor" in primary
+    assert "acw16d6CCnY" in registry and "acw16d6CCnY" in clips
+    for needle in ["20000038203", "19990039542", "19990019627",
+                   "FOIA-00159-2018", "DIA-08-1003-018",
+                   "DIA-08-1004-001", "DIA-08-1003-015", "DIA-08-1004-004",
+                   "10.1037/a0021524", "10.1016/0921-4534(92)90055-H"]:
+        assert needle in primary, needle
+    assert "videoTime" in clips
+    assert "voiceAttributedOriginalUnlocated" in clips
+    assert "AmyEskridgeVideoPrimaryInspectionExact" in agg
+    assert "AmyEskridgeVideoOriginalClipLineageExact" in agg
+    # The speaker quotation and original publication are source metadata,
+    # never an independent scientific proof.
+    for escape in ["postulate", "trustMe", "TERMINATING", "NON_COVERING"]:
+        assert not re.search(r"\b" + escape + r"\b", primary + clips)
+
+
 if __name__ == "__main__":
     check_claim_welds()
     check_original_clip_and_media_roster()
     check_scope()
     check_quantitative_boundary()
+    check_primary_inspection_and_clip_lineage()
     print("Amy Eskridge video 86-row / House-10 / research-20 SymPy audit: PASS")
-    print("Includes 7 original clip locators, Fox 11-source weld, editorial reorder, missing-join and citation!=cause controls")
+    print("Includes 7 earlier Zoom locators, 16 edited-clip lineages, 10 primary inspection records, and negative controls")
