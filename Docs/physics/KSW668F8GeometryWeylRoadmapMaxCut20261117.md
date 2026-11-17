@@ -773,3 +773,29 @@ Here `D_y Δ_r U=Δ_r D_y U` holds for the tensor-product first differences at e
 **Implementation:** new `KSW668F8NormalGradientConstraintSATPropagationExact.agda` supplies all three original stage identities, interior and lower/upper SAT production, tensor-product four-corner commutation, and exact shift decomposition; imported by the existing `KSW668F8SameObjectWeylAuthorityBoundary.agda` in the KSW/TOE graph. `scripts/test_ksw668_f8_normal_gradient_constraint.py` validates the native SBP2 full-grid algebra, actual SAT locations, and signed shift decomposition in **2,500/2,500** independent Fraction checks. This arithmetic result is **source-written Agda, pinned Agda kernel NOT RUN**.
 
 **Next highest-alpha coupled G3:** assemble `E_char +E_radial` with the original effective-d shell volumes and `z^-3` normal weight; apply the exact `Q` identity to the radial-shift term and the XXXVIII/XXXIX weighted normal SBP2 results to the derivative of every radial-face gradient. Prove nonpositive/controlled radial-origin and outer-face terms with the unchanged native Dirichlet closure. Derive a trace estimate for SAT-driven `Q` at both normal endpoints without an inverse power of `dr`, then a uniform coupled semidiscrete Gronwall bound. A fully time-discrete SSPRK3 CFL, higher-Sobolev dual-Weyl trace and independent dr/dy/dt convergence remain open; no physical G6 detector witness introduced.
+
+
+## Maximum-cut XL (2026-11-18) — YM S³ vs S3/C3 cross-pollination, positive normal donor and original radial obstruction
+
+**Source readback:** `DASHI/Physics/YangMills/YMClayRationalS3DegreeFifteenInvariantCertificateExact.agda` (independent YM branch; 11 degree-15 quaternion-sphere invariant moment certificates); default-branch `DASHI/Foundations/TernaryPermutationS3LawsExact.agda`, `DASHI/Foundations/PolynomialC3S3OrbitSamplingProjectionExact.agda`, `scripts/check_polynomial_c3_s3_reynolds_character_exact.py` and `Docs/research/zipf_ternary27_s3_c3_orbit_heaps_crosspollination_20261028.md`; plus original F8 `scripts/ksw668_f8_tt_multipole.py`, d3/d7/d11 radial FV and XXXIX normal energy. **Do not identify** SU2 unit quaternion S³, finite permutation group S3, C3 cyclic subgroup or physical F8 angular S²/S¹.
+
+**Real positive reuse (G2/G3):** the original moving normal/warp/SAT block is mode-independent as a formula once radial source and source amplitude are supplied. Reuse one universal generic `map3 f` theorem for all six source-owned S3 mode relabelings, and a C3 rational Reynolds projector `(x0,x2,x4)↦(mean,mean,mean)`, idempotent. Apply XXXIX single-mode `|R_ell,j|<=12 E_ell,j/b` with each mode's OWN positive radial FV shell volume `W_(3+2ell,j)`. Sum to obtain
+```
+|Σ_(ell,j) W_(3+2ell,j) R_(ell,j)|
+ <=12/b Σ_(ell,j) W_(3+2ell,j) E_(ell,j),
+ell=0,2,4, 0<dy<=b(T), -1<v<0.
+```
+This extends the normal+warp bound to the original **entire three-mode, all-radial-node direct sum** while deliberately EXCLUDING radial forcing, moving radial shift and normal-gradient SAT constraint coupling. Agda source-written algebraic weighted aggregation/positive shell mass is NOT an Agda kernel-checked inequality. There is proof-schema compression (three otherwise duplicated normal-block proofs → one generic mode-index proof), not a reduction of the actual simulation's three radial operations.
+
+**Exact symmetry BREAKING (mandatory acceptance firewall):** the original radial origin stencil in grid units is `diag(6,14,22)`. Its C3-Reynolds invariant mean coefficient is 14, and its irreducible deviations are `diag(-8,0,8)`. Under mode-label cycle R,
+```
+[L_origin,R](x0,x2,x4)=(-8 x2,-8 x4,16 x0) !=0
+mean(L_origin x)=14 mean(x)+(8/3)(x4-x0).
+```
+The true first-shell mass triple at h=1 is `(1/24,1/896,1/22528)`: rotating the physical F8 fields **without** the dimension-dependent masses does not preserve their weighted energy. The actual first interior radial coefficients also differ: (27/13,3/13), (5103/1093,7/1093), (649539/88573,11/88573). Hence C3/S3 is a mode-*relabeling* symmetry of the COMMON normal formula, not a symmetry of the FULL physical evolution; source physics must retain distinct effective dimensions and original FV coefficients.
+
+**YM S³ relevance:** signed-permutation orbit averaging can compress a genuinely invariant polynomial proof (as in YM degree15's 11 invariants); it cannot establish pointwise F8 quadratic-form positivity from its average. The rational unit S³ polynomial `q0²-q1²` already has both +1/-1 witnesses. A later energy SOS/invariant cut may use YM's *certificate pattern* only after verifying a true invariance of the native weighted state. Do NOT import YM's quaternion measure as the F8 angular measure.
+
+**New committed source:** `KSW668F8C3S3ModeReynoldsRadialObstructionExact.agda`, `KSW668F8ThreeModeWeightedNormalEnergyReynoldsExact.agda`, `scripts/test_ksw668_f8_c3_s3_mode_reynolds.py`, canonical F8 authority imports, and [full source crosswalk](KSW668F8C3S3YMReynoldsCrosswalkMaxCutXL20261118.md). Independent local exact-rational regression **4,556/4,556 PASS**; pinned Agda kernel **NOT RUN**.
+
+**Next concrete G3 theorem:** assemble original **radial-gradient + characteristic** full time-dependent weighted energy, not merely the normal direct sum. Use source XXXIX normal-gradient constraint `Q=(P-M)/2-D_yU` to rewrite moving radial shift as normal SBP2 face + Q defect; include exact origin V0, radial outer Dirichlet, all-mode unequal shell volumes and original lower weak-Israel source cap. Prove the Q boundary trace bound with no growing inverse mesh constants; then uniform semidiscrete Gronwall, then SSPRK3 CFL, then G4/G5 receiver derivatives and both-Weyl convergence. G1 physical tensor-gauge evolution, full G2/G3, G4, G5 and G6 remain OPEN. Keep original DASHI/YM/C3 authorship, no ESD edits, no unrelated physical group identification.
