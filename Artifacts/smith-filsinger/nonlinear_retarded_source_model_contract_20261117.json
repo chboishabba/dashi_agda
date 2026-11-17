@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-17",
+  "title": "F10/F13 nonlinear retarded source-port model / fail-closed original evidence crosswalk",
+  "status": "MODEL_ONLY_NOT_ORIGINAL_EVIDENCE",
+  "source_contract": "Artifacts/smith-filsinger/source_first_original_evidence_contract_20261117.json",
+  "source_contract_unchanged": true,
+  "original_source_selected": null,
+  "same_original_v_i": null,
+  "independently_measured_solar_or_ionosphere_current": null,
+  "original_source_port_impedance": null,
+  "measured_dynamic_gain": null,
+  "source_and_receiver_storage_return": null,
+  "real_world_gate_F15": "OPEN",
+  "model": {
+    "code": "scripts/check_smith_filsinger_nonlinear_retarded_source_port.py",
+    "tests": "scripts/test_smith_filsinger_nonlinear_retarded_source_port.py",
+    "assumptions": [
+      "exogenous delayed driver waveform supplied by unmeasured source",
+      "passive LTI rational admittance with strictly positive Debye/Lorentz rates",
+      "nonlinear electron continuity toy kinetics",
+      "ion creation powered separately and explicitly",
+      "finite upstream source reservoir and recharge supply",
+      "series exterior resistance limits current"
+    ],
+    "mathematical_checks": [
+      "Debye state storage and positive loss",
+      "Lorentz state storage and positive loss",
+      "positive real frequency axis for positive coefficients",
+      "cubic differential versus secant admittance",
+      "pair creation minus recombination storage identity",
+      "exact series channel exterior conductance identity"
+    ],
+    "independent_mathematical_checks": "SymPy selected symbolic identities checked independently; committed full Python tests not executed exact-head",
+    "hundredfold_gain_rule": "W_load >= 100*(W_controller_aux+W_ion_creation_pump) is a MODEL metric, not measured solar extraction; full-state restoration and source identification additionally required"
+  },
+  "safety": "Simulation and research only; no high-voltage, laser-plasma or atmospheric intervention recipe"
+}
