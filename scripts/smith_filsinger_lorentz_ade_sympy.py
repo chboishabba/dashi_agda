@@ -93,7 +93,7 @@ def exact_midpoint(z,jn,jc,dt,A,B,mass,load_conductance=0):
     useful_load=S.expand(dt*load_conductance*(e.T*e)[0])
     change=S.expand(energy(z1,mass)-energy(z,mass))
     residual=S.factor(change-natural-controller+ohmic+relaxation+useful_load)
-    return dict(z=z1,mid=mid,energy_change=change,natural_work=natural,
+    return dict(initial_state=z,z=z1,mid=mid,energy_change=change,natural_work=natural,
                 controller_work=controller,ohmic=ohmic,
                 relaxation=relaxation,useful_load=useful_load,residual=residual)
 
@@ -151,3 +151,38 @@ def retarded_impulse(t,m=None):
     if t.is_negative is True:return S.Integer(0)
     if t.is_nonnegative is True:return post
     return S.Piecewise((S.Integer(0),t<0),(post,True))
+
+
+def synthetic_cycle_work_receipt(initial_state, steps, mass):
+    """Full state and per-step work auditor for SYNTHETIC data.
+
+    Each step must be from exact_midpoint and in a consecutive timeline.
+    An exact algebraic receipt is NOT an independent environmental meter.
+    """
+    if not steps:raise ValueError('at least one sourced timestep required')
+    if any('z' not in entry or 'residual' not in entry
+           or 'initial_state' not in entry for entry in steps):
+        raise ValueError('missing exact source step receipt')
+    if any(S.simplify(entry['residual'])!=0 for entry in steps):
+        raise ValueError('broken finite Maxwell/material work identity')
+    previous=initial_state
+    for entry in steps:
+        if entry['initial_state']!=previous:
+            raise ValueError('nonconsecutive source/receiver state history')
+        previous=entry['z']
+    ending=steps[-1]['z']
+    natural=S.expand(sum((t['natural_work'] for t in steps),S.Integer(0)))
+    controller=S.expand(sum((t['controller_work'] for t in steps),S.Integer(0)))
+    load=S.expand(sum((t['useful_load'] for t in steps),S.Integer(0)))
+    ohmic=S.expand(sum((t['ohmic'] for t in steps),S.Integer(0)))
+    relax=S.expand(sum((t['relaxation'] for t in steps),S.Integer(0)))
+    storage=S.expand(energy(ending,mass)-energy(initial_state,mass))
+    balance=S.factor(storage+load+ohmic+relax-natural-controller)
+    if balance!=0:raise ValueError('incompatible cycle state/work accumulation')
+    restored=ending==initial_state
+    return dict(restored_all_4n_states=restored,storage_delta=storage,
+                natural_work=natural,controller_work=controller,
+                useful_load=load,ohmic_loss=ohmic,relaxation_loss=relax,
+                conservation_residual=balance,
+                original_source_meter_present=False,
+                physically_replenished_source_certified=False)
