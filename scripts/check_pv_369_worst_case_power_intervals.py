@@ -196,12 +196,32 @@ def main():
     else:
         if not x.candidate or not x.candidate_uncertainty:
             p.error("candidate receipt and externally sourced bound JSON required")
-        r={"candidate":bound_receipt(json.loads(x.candidate.read_text()),json.loads(x.candidate_uncertainty.read_text()))}
-        if x.control or x.control_uncertainty:
-            if not x.control or not x.control_uncertainty:
-                p.error("control requires BOTH original receipt and bound JSON")
-            r["control"]=bound_receipt(json.loads(x.control.read_text()),json.loads(x.control_uncertainty.read_text()))
-            r["comparison"]=compare(r["candidate"],r["control"])
+        if not x.candidate_iv:
+            p.error("robust acceptance requires source-hashed candidate raw IV sweeps")
+        cd=json.loads(x.candidate.read_text())
+        cu=json.loads(x.candidate_uncertainty.read_text())
+        cand=bound_receipt(cd,cu)
+        sc=sweep_certificate(cd,cu,x.candidate_iv)
+        cand["net_lower_W_m2"]=sc["net_lower_W_m2"]
+        cand["net_upper_W_m2"]=sc["net_upper_W_m2"]
+        cand["strict_robust_above_half"]=sc["strict_robust_over_50"]
+        cand["worst_case_net_eta_pct"]=sc["worst_case_eta_pct"]
+        cand["sweep_conditional_evidence"]=sc
+        r={"candidate":cand}
+        if x.control or x.control_uncertainty or x.control_iv:
+            if not x.control or not x.control_uncertainty or not x.control_iv:
+                p.error("control needs receipt, bounded uncertainties and hashed raw IV sweeps")
+            bd=json.loads(x.control.read_text())
+            bu=json.loads(x.control_uncertainty.read_text())
+            base=bound_receipt(bd,bu)
+            sb=sweep_certificate(bd,bu,x.control_iv)
+            base["net_lower_W_m2"]=sb["net_lower_W_m2"]
+            base["net_upper_W_m2"]=sb["net_upper_W_m2"]
+            base["strict_robust_above_half"]=sb["strict_robust_over_50"]
+            base["worst_case_net_eta_pct"]=sb["worst_case_eta_pct"]
+            base["sweep_conditional_evidence"]=sb
+            r["control"]=base
+            r["comparison"]=compare(cand,base)
         r["independent_certification_claim"]=False
     if x.output:x.output.write_text(json.dumps(r,indent=2)+"\n")
     print(json.dumps(r,indent=2))
