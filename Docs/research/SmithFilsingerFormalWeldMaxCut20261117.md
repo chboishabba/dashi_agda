@@ -138,3 +138,26 @@ The final Agda owner also proves noNaturalNetSourceMeansLoadAtMostController: on
 The SourceOwner relation additionally has absurd-pattern no-confusion witnesses earthReelCannotHavePortableProvenance, portableProposalCannotHaveEarthReelProvenance and smithFigureCannotHaveFilsingerEarthProvenance. These prohibit original-source identity swapping at the type level without equating physical components by anecdote.
 
 **Kernel caveat unchanged:** none of these extra Agda theorem terms is accepted until the pinned repo-owned checker actually runs in an Agda 2.9 environment. Source scans are not a substitute for elaboration.
+
+
+## Second Agda formal cut: Maxwell/material interface cancellation
+
+**Task scope:** actual proof composition, not additional numerical simulations. New module [SmithFilsingerMaxwellMaterialEnergyCutExact.agda](../../DASHI/Physics/Motors/SmithFilsingerMaxwellMaterialEnergyCutExact.agda) reuses the already source-indexed Maxwell, signed port and cycle-cap owners. The #1521 dispersive material module is still a DIFFERENT unmerged branch and is NOT imported deceptively.
+
+The dependent FieldMaterialEnergyWeld b f sourceCycle requires TWO independently supplied conservation witnesses on the SAME selected original source and receiver:
+- FIELD: natural **net** source work + driver **net** work + field initial storage = field/material interface work + radiation/field loss + field final storage.
+- MATERIAL: exact SAME internal field/material interface + separately paid material modulation + material initial storage = useful load + material dissipation + modulation recovery + final material storage.
+- Equals the EXISTING sourceCycle natural **net** work, controller net work and same-original receiver load; additionally requires physical current/metric, retarded material Poynting and same physical pins/coefficients. None are inferred from phase, acoustic evidence or an arbitrary source parameter.
+
+**Actual source-authored proof chain:**
+1. cancelSharedInterface establishes the algebraic internal-port cancellation: if a=i+b and i+c=d then a+c=b+d, without double-counting field/material transfer.
+2. fieldMaterialCombinedWork instantiates both separate energy identities and normalises the complete external system ledger.
+3. fieldMaterialRepeatableWork cancels SUM OF field+material stored energy, requiring a full-store return, not simply a charged output capacitor.
+4. fieldMaterialLoadBoundOnRepeatableCycle preserves both field and material loss and recovered modulation energy on the output side.
+5. netNaturalUnderExistingAdmittedCap imports the existing actual-source cap and proves its transfer to the selected field natural net work.
+6. fieldMaterialLoadBelowAdmittedCapPlusPaidModulation and sameOriginalMaterialCapWithControllerAndModulator combine these deductions and transport to the selected original load:
+   W_original_load <= W_admitted_natural_cap + W_controller_net + W_paid_modulation.
+
+No new physical fields or energy constants are invented. This is stronger than the earlier Nat cycle bound because the field/material interface is **proved to cancel** using two separately evidenced equations, and material modulation cannot masquerade as natural input.
+
+**Kernel still OPEN:** scripts/check_smith_filsinger_formal_weld_agda29.sh now includes the third theorem owner. Agda 2.9/Nix unavailable in this environment: source authored and dependency signatures audited, but NO kernel acceptance. A physically calibrated Maxwell material/Poynting identity and the same-original #1521 source/receiver weld remain uninhabited; physical F10/F13/F14/F15/F16 remain OPEN. No ESD editing or TOE promotion.
