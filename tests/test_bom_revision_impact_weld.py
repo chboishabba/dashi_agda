@@ -85,7 +85,7 @@ class WeldTest(unittest.TestCase):
 
     def test_quality_flags_reported_without_claim_of_accuracy(self):
         before=month_rows(1910,2)
-        after=before.replace(',1,Y\\n',',1,N\\n',1)
+        after=before.replace(',1,Y\n',',1,N\n',1)
         m=self.run_pair(before,after)['months'][0]
         self.assertEqual(m['before_quality_flag_counts'],{'Y':28})
         self.assertEqual(m['after_quality_flag_counts'],{'N':1,'Y':27})
