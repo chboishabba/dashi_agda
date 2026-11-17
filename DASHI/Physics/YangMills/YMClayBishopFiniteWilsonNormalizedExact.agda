@@ -110,3 +110,71 @@ module _ {Node : Set} where
 -- Wilson exponential and an actually positive normalized product Haar.
 -- The source must also identify its finite function-space carrier with
 -- the finite Bishop quaternion link enumeration. Neither is asserted.
+
+
+------------------------------------------------------------------------
+-- Constructive finite partition positivity from a POSITIVE FIRST TERM.
+-- This closes the finite nonempty-list algebra, not the physical problem
+-- of proving the original exp(-Wilson action) and source Haar laws.
+------------------------------------------------------------------------
+
+data All {A : Set} (P : A → Set) : List A → Set where
+  allNil : All P []
+  allCons : ∀ {x xs} → P x → All P xs → All P (x ∷ xs)
+
+module _ {Node : Set} where
+
+  weightedSumNonnegative :
+    ∀ (nodes : List (WeightedConfiguration Node)) f →
+    All (λ node → B.NonNegative (weight node)) nodes →
+    (∀ node → B.NonNegative (f node)) →
+    B.NonNegative (weightedSum nodes f)
+  weightedSumNonnegative [] f allNil positive =
+    P.0≤x⇒nonNegx (P.≤-refl B.0ℝ)
+  weightedSumNonnegative (x ∷ xs) f
+    (allCons weightNN rest) positive =
+    P.nonNegx,y⇒nonNegx+y
+      (P.nonNegx,y⇒nonNegx*y
+        weightNN
+        (positive (point x)))
+      (weightedSumNonnegative xs f rest positive)
+
+  weightedSumStrictPositiveHead :
+    (first : WeightedConfiguration Node) →
+    (rest : List (WeightedConfiguration Node)) →
+    (f : Node → B.ℝ) →
+    B._<_ B.0ℝ (weight first) →
+    B._<_ B.0ℝ (f (point first)) →
+    All (λ node → B.NonNegative (weight node)) rest →
+    (∀ node → B.NonNegative (f node)) →
+    B._<_ B.0ℝ (weightedSum (first ∷ rest) f)
+  weightedSumStrictPositiveHead first rest f
+      weightPos valuePos restNN fNN =
+    let
+      head = B._*_ (weight first) (f (point first))
+      tail = weightedSum rest f
+
+      headPositive : B._<_ B.0ℝ head
+      headPositive =
+        P.posx⇒0<x
+          (P.posx,y⇒posx*y
+            (P.0<x⇒posx weightPos)
+            (P.0<x⇒posx valuePos))
+
+      tailNonnegative : B.NonNegative tail
+      tailNonnegative = weightedSumNonnegative rest f restNN fNN
+
+      headBelowTotal : B._≤_ head (B._+_ head tail)
+      headBelowTotal =
+        P.≤-respˡ-≃
+          (P.≃-symm (P.+-identityʳ head))
+          (P.+-monoʳ-≤ head
+            (P.nonNegx⇒0≤x tailNonnegative))
+    in
+    P.<-≤-trans headPositive headBelowTotal
+
+  -- The true original Wilson source can now prove its finite partition
+  -- strictly positive solely by supplying the *physical* positive weights
+  -- and the actually constructed strictly positive Gibbs density at one
+  -- original finite configuration.  There is no free "partitionPositive"
+  -- authority field in this theorem.
