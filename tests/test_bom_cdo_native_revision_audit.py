@@ -32,8 +32,8 @@ class NativeTest(unittest.TestCase):
     def test_removed(self):
         r=self.run_native(line(),line(value=''))
         self.assertEqual(r['counts'],{'value_removed':1})
-        self.assertEqual(r['pre2000_observed_values_lost_by_station'],{'066062':1})
-        self.assertFalse(r['pre2000_target_matched'])
+        self.assertEqual(r['before2025_observed_values_lost_by_station'],{'066062':1})
+        self.assertFalse(r['before2025_target_numeric_match_only'])
     def test_quality_change(self):
         self.assertEqual(self.run_native(line(),line(flag='N'))['counts'],{'quality_flag_changed':1})
     def test_station_not_interchangeable(self):
@@ -46,7 +46,7 @@ class NativeTest(unittest.TestCase):
     def test_zero_events_not_571(self):
         r=self.run_native(line(),line())
         self.assertEqual(r['counts'],{})
-        self.assertFalse(r['pre2000_target_matched'])
+        self.assertFalse(r['before2025_target_numeric_match_only'])
     def test_numeric_format(self):
         self.assertEqual(self.run_native(line(),line(value='16.20'))['counts'],{})
     def test_bad_hash(self):
@@ -81,8 +81,8 @@ class NativeTest(unittest.TestCase):
                       'capture_utc':('2026-05-19T09:00:00+10:00' if snapshot=='before'
                                      else '2026-10-30T09:00:00+10:00')})
             out=native.audit(manifest,root)
-            self.assertEqual(out['pre2000_observed_values_lost_by_station'],{'066062':2})
-            self.assertEqual(out['pre2000_observed_values_lost_by_station_product'],
+            self.assertEqual(out['before2025_observed_values_lost_by_station'],{'066062':2})
+            self.assertEqual(out['before2025_observed_values_lost_by_station_product'],
                              {'066062:tmax':1,'066062:tmin':1})
     def test_blank_accumulation_is_one_day_for_present_temperature(self):
         self.assertEqual(self.run_native(line(accum=''),line(accum='1'))['counts'],{})
@@ -97,6 +97,18 @@ class NativeTest(unittest.TestCase):
                          {'observed_value':1,'quality_flag':1})
         self.assertEqual(out['events'][0]['changed_fields'],
                          ['observed_value','quality_flag'])
+
+    def test_historical_includes_2000_through_2024(self):
+        old='IDCJAC0010,66062,2024,12,31,23.2,1,Y\n'
+        new='IDCJAC0010,66062,2024,12,31,,1,Y\n'
+        result=self.run_native(old,new)
+        self.assertEqual(result['before2025_observed_values_lost_by_station'],{'066062':1})
+
+    def test_recent_2025_excluded_from_historical(self):
+        old='IDCJAC0010,66062,2025,01,01,23.2,1,Y\n'
+        new='IDCJAC0010,66062,2025,01,01,,1,Y\n'
+        result=self.run_native(old,new)
+        self.assertEqual(result['before2025_observed_values_lost_by_station'],{})
 
     def test_accumulation_change(self):
         self.assertEqual(self.run_native(line(),line(accum='2'))['counts'],{'accumulation_changed':1})
