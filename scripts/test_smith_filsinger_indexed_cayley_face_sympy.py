@@ -75,3 +75,40 @@ def test_original_source_root_and_indexed_edge_in_sequence():
     assert set(step['support']).issubset(receipt['cone'])
     assert not receipt['original_source_meter']
     assert not receipt['physical_maxwell_front']
+
+
+def certified_mesh_face_edge(edge, selected_face, mesh_faces):
+    """Model-level audit: selection is in the ORIGINAL typed face list."""
+    ids=[f['id'] for f in mesh_faces]
+    if len(ids)!=len(set(ids)):
+        raise ValueError('duplicate face ID, invalid indexed mesh')
+    if selected_face not in mesh_faces:
+        raise ValueError('selected face absent from original mesh')
+    return certified_face_edge(edge,selected_face)
+
+def test_selected_face_must_occur_in_original_mesh():
+    spec=local_spec(3)
+    edge=next(e for e in edge_updates(spec) if e[0]=='curl')
+    _,i,j,a,b=edge
+    face={'id':9,'source':i,'target':j,'work':0}
+    other={'id':10,'source':i,'target':j,'work':0}
+    assert certified_mesh_face_edge(edge,face,[other,face])==(a,b)
+    with pytest.raises(ValueError,match='absent'):
+        certified_mesh_face_edge(edge,face,[other])
+
+def test_same_id_different_endpoint_is_not_same_face_member():
+    spec=local_spec(3)
+    edge=next(e for e in edge_updates(spec) if e[0]=='curl')
+    _,i,j,_,_=edge
+    chosen={'id':9,'source':i,'target':j,'work':0}
+    altered={'id':9,'source':j,'target':i,'work':0}
+    with pytest.raises(ValueError,match='absent'):
+        certified_mesh_face_edge(edge,chosen,[altered])
+
+def test_duplicate_face_id_fails_closed_even_if_present():
+    spec=local_spec(3)
+    edge=next(e for e in edge_updates(spec) if e[0]=='curl')
+    _,i,j,_,_=edge
+    face={'id':4,'source':i,'target':j,'work':0}
+    with pytest.raises(ValueError,match='duplicate'):
+        certified_mesh_face_edge(edge,face,[face,dict(face)])
