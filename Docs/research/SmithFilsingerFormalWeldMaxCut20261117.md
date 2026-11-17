@@ -204,3 +204,39 @@ This cuts the dependency chain in a materially stronger way:
   SAME selected original useful load <= natural cap + controller + modulator.
 
 **All source/current, constitutive PDE, original material and physical net power receipts remain obligations**, not inferred. This is a conditional formal mathematical connection that still requires pinned Agda 2.9 type-checking and empirical boundary admission.
+
+
+## Max-cut continuation: reuse original 3-component Maxwell and all-N spatial port owners
+
+**17 November 2026; specifically requested formalisation/welds, NOT simulations.** A repo-wide search found two existing higher-value mathematically explicit Agda owners which the initial Smith/Filsinger proof graph had failed to import:
+
+- DASHI/Physics/Plasma/KSW668FullVectorMaxwellJetExact.agda, original KSW 668 B1 producer. It defines an actual three-component electric/magnetic/current derivative jet with Faraday and Ampere equations; exact pointwise fullVectorMaxwellPoyntingIdentity proves time-field-energy derivative + spatial Poynting divergence + J dot E = zero. This is a **genuine vector curl-jet algebraic theorem**, not a Maxwell PDE existence/uniqueness or a physical surface integral.
+- DASHI/Physics/Motors/SmithFilsingerSpatialPortChainExact.agda, concurrent original all-N spatial chain producer. Its spatialChainWorkBalance proves conservation for arbitrary connected cells with shared internal source/receiver transfers canceled. Internal outgoing edges are not counted as independent natural energy, and the exterior positive/negative budget distinction is retained.
+
+**New actual proof consumer 1:** DASHI/Physics/Motors/SmithFilsingerFullVectorPoyntingPortWeldExact.agda. It imports the *original* KSW vector theorem and the existing selected source/work algebra; it does NOT invent a new Maxwell jet.
+- threeComponentPoyntingFromOriginalMaxwell: exact delegated source proof from the original curl-jet owner.
+- MaxwellJetToSelectedFieldWork: a deliberately separate, **uninhabited physically integrated boundary implication** from pointwise local conservation to actual selected natural/controller net source work, field-to-material transfer and field outgoing loss. Spatial/time integration, orientation, constitutive currents, actual source identity and radiation need evidence; not an unproved immediate implication.
+- fieldWorkFromMaxwellJetAndIntegration: applies the original pointwise theorem to that independently supplied physical field/port map.
+- fullVectorMaxwellToMaterialCompleteLedger: composes the selected vector Maxwell identity plus a separately proved material/receiver energy equation and imports the existing cancelSharedInterface, eliminating internal transfer and deriving full combined external work including material modulation/recovery and all stored energy.
+- sameOriginalFullVectorPoyntingNaturalCap: derives the original-port useful-load bound from the Maxwell bridge, material work, complete storage return and an independent natural cap.
+- selectedSourceFullVectorMaxwellCap: **tightens** the general theorem to the same already-selected SignedSourceCycleWeld, fixing natural and controller input to its actual **net** source ledger and natural cap to its existing independently admitted value. No generic arbitrary source power can be silently instantiated.
+
+**New actual proof consumer 2:** DASHI/Physics/Motors/SmithFilsingerSpatialSourceCapWeldExact.agda.
+- reorderSpatialInput and reorderSpatialOutput use the canonical Data.Nat.Solver.
+- spatialChainNetSourceWork derives NATURAL NET input + all distributed controller inputs = all useful loads + all dissipation for arbitrary N, from the original all-N chain theorem, the first/last net boundary equation and **full chain stored-state restoration**. All internal transfers cancel exactly.
+- spatialChainLoadBelowNetSourceAndController and selectedOriginalAllSpatialCellsBelowNaturalCap transport this derived bound to the *same* source-selected original receiver, admitted natural source cap and original controller net work. Original empirical input/output equality and source identity are explicitly demanded, not guessed.
+
+### Gate audit after proof reuse
+
+| Gate | New formal advancement | Strict still-open bridge |
+|---|---|---|
+| **F10** | original three-component Maxwell curl-jet and exact pointwise Poynting imported, no duplicated vector PDE algebra | Real field with spatiotemporal regularity, constitutive polarization/plasma currents, PDE existence and Poynting surface/time integration |
+| **F13** | physical Maxwell-jet-to-source/terminal *typed implication*; all-N interior port cancellation | Same-original calibrated net exterior source work, source current, outgoing flux, geometry |
+| **F14** | selected original net source/driver/load identities in all-N and vector Maxwell consumers | Actual original netlist, measured electrical clock and original joint acoustic/electrical states |
+| **F15** | conditional cap on SAME selected useful output from both (1) differential pointwise full-vector + material work and (2) all-N spatial source chain; no internal flux double count | Physical source replenishment and storage-return readings, physically justified source cap |
+| **F16** | prior observational-versus-causal formal obstruction retained; no weather-source promotion | Actual measured controller→cloud→rain effects |
+| **D1** | pinned runner now lists SIX actual formal consumers plus existing vector Maxwell and all-N owners | No Agda/Nix executable available in this session; NO Agda-kernel acceptance or CI receipt |
+
+**Numerical tests are not proof acceptance**. New source terms have no added postulate, but neither code-scan nor Git blob parity substitutes for pinned kernel checking; conditional field-operator and original-apparatus premises remain OPEN.
+
+**Maximum-cut priority after this:** (a) pinned Agda compile/fix of six consumers; (b) physically valid spacetime/surface Poynting integration from KSW jet + real material field response into the same original electrode/receiver port; (c) source-selected fully replenished net work; (d) if original cloud-control interpretation is pursued, independent causal atmospheric interventions. Do NOT solve a new full 3D Maxwell PDE just to rederive an already-proven pointwise vector identity. No ESD edits, attribution to the original KSW vector producer and Smith/Filsinger source owners, no premature TOE promotion.
