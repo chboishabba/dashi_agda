@@ -104,6 +104,8 @@ def bound_receipt(data,unc):
 def compare(candidate,control):
     if candidate["declared_sample_id"]==control["declared_sample_id"]:
         raise ValueError("a distinct physical no-369 control sample must be identified")
+    if candidate["temperature_K"]!=control["temperature_K"]:
+        raise ValueError("candidate/control specimen temperature mismatch")
     if candidate["declared_source"]!=control["declared_source"]:
         raise ValueError("matched source provenance mismatch")
     if candidate["incident_spectrum_sha256"]!=control["incident_spectrum_sha256"]:
@@ -164,6 +166,7 @@ def selftest():
            "converter_eta":1.,"delivered_mpp_W_m2":150.} for _ in range(4)]},err())))
     ck("same sample cannot be control",rejected(lambda:compare(a,a)))
     ck("different solar provenance cannot be matched",rejected(lambda:compare(a,{**base,"declared_source":"different"})))
+    ck("different sample temperatures cannot be matched",rejected(lambda:compare(a,{**base,"temperature_K":299.15})))
     ck("different spectrum bytes cannot be matched",rejected(lambda:compare(a,{**base,"incident_spectrum_sha256":"b"*64})))
     ck("spectrum hash must occur in original source manifest",rejected(lambda:bound_receipt(
         {**receipt(),"declared_provenance":{**receipt()["declared_provenance"],"incident_spectrum_sha256":"b"*64}},err())))
