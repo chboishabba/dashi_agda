@@ -1,0 +1,128 @@
+{
+  "schema": "DASHI.V2.magnetic-tracking-conditional.v1",
+  "controller_identity": "di_dt - dr_dt = -gain*(i-r), when unsaturated and Hessian invertible",
+  "modelled_targets": {
+    "memory_aware": {
+      "nominal_exact_reference": {
+        "sufficient_voltage_bound_v": 288.82707601073764,
+        "limit_v": 320.0,
+        "voltage_certified": true,
+        "min_incremental_inductance_bound_h": 0.03818300667270081,
+        "invertibility_certified": true,
+        "sufficient_peak_current_a": 4.12069813531998,
+        "current_certified": true,
+        "speed_tube_rpm": 1.0,
+        "current_initial_error_bound_a": 0.0,
+        "gain_hz": 2500.0,
+        "memory_tube_bound_a": 0.0,
+        "memory_tube_invariant_sufficient": false,
+        "memory_tube_required_a": 0.00011290046422388384
+      },
+      "tracking_tube": {
+        "sufficient_voltage_bound_v": 299.67983946302587,
+        "limit_v": 320.0,
+        "voltage_certified": true,
+        "min_incremental_inductance_bound_h": 0.03816440728109187,
+        "invertibility_certified": true,
+        "sufficient_peak_current_a": 4.14569813531998,
+        "current_certified": true,
+        "speed_tube_rpm": 1.0,
+        "current_initial_error_bound_a": 0.025,
+        "gain_hz": 2500.0,
+        "memory_tube_bound_a": 0.026,
+        "memory_tube_invariant_sufficient": true,
+        "memory_tube_required_a": 0.025112900464223886
+      },
+      "sampled_diagnostic": {
+        "sampled_max_voltage_v": 151.77143389953562,
+        "sampled_min_incremental_h": 0.04921732569903191
+      }
+    },
+    "copper_only": {
+      "nominal_exact_reference": {
+        "sufficient_voltage_bound_v": 275.9640355750595,
+        "limit_v": 320.0,
+        "voltage_certified": true,
+        "min_incremental_inductance_bound_h": 0.038656518509612485,
+        "invertibility_certified": true,
+        "sufficient_peak_current_a": 3.423289425403233,
+        "current_certified": true,
+        "speed_tube_rpm": 1.0,
+        "current_initial_error_bound_a": 0.0,
+        "gain_hz": 2500.0,
+        "memory_tube_bound_a": 0.0,
+        "memory_tube_invariant_sufficient": false,
+        "memory_tube_required_a": 0.00031483874558151803
+      },
+      "tracking_tube": {
+        "sufficient_voltage_bound_v": 286.7649846755093,
+        "limit_v": 320.0,
+        "voltage_certified": true,
+        "min_incremental_inductance_bound_h": 0.038641057457198175,
+        "invertibility_certified": true,
+        "sufficient_peak_current_a": 3.448289425403233,
+        "current_certified": true,
+        "speed_tube_rpm": 1.0,
+        "current_initial_error_bound_a": 0.025,
+        "gain_hz": 2500.0,
+        "memory_tube_bound_a": 0.026,
+        "memory_tube_invariant_sufficient": true,
+        "memory_tube_required_a": 0.02531483874558152
+      },
+      "sampled_diagnostic": {
+        "sampled_max_voltage_v": 117.34611292034516,
+        "sampled_min_incremental_h": 0.04914960822124181
+      }
+    }
+  },
+  "open_gates": [
+    "closed-loop coupled rotor periodic-orbit theorem",
+    "real switched PWM tracking",
+    "hardware voltage transients",
+    "motor torque sufficiency for original V2",
+    "source-selected material and thermal map"
+  ],
+  "scope": "hypothetical continuous voltage actuator, fixed recovery, no original V2 measurements",
+  "coupled_numerical": {
+    "memory_aware": {
+      "schema": "DASHI.V2.coupled-drive-current-tracking.numerical.v1",
+      "aware": true,
+      "last_cycle_drive_w": 30.451202993646277,
+      "last_cycle_export_bus_w": 19.999893433764555,
+      "copper_w": 4.802563672788041,
+      "memory_w": 0.9258383334667548,
+      "friction_w": 3.64602658934068,
+      "rotor_storage_rate_w": 0.0242068701477972,
+      "magnetic_storage_rate_w": -2.0756195100995825e-08,
+      "balance_residual_j": 1.2271397707208425e-06,
+      "peak_command_voltage_v": 151.77843541938776,
+      "peak_current_error_a": 9.007614654166218e-08,
+      "peak_abs_reaction_nm": 0.4884271771264301,
+      "max_speed_deviation_rpm": 0.13653334150353236,
+      "voltage_clipped_fraction": 0.0,
+      "torque_saturated_fraction": 0.0,
+      "last_cycle_duration_s": 0.025488576306960053,
+      "status": "numerical trajectory, not rigorously certified periodic orbit or switched PWM"
+    },
+    "copper_only": {
+      "schema": "DASHI.V2.coupled-drive-current-tracking.numerical.v1",
+      "aware": false,
+      "last_cycle_drive_w": 32.70330681892528,
+      "last_cycle_export_bus_w": 19.999913448263186,
+      "copper_w": 4.654810054375668,
+      "memory_w": 3.325844238170068,
+      "friction_w": 3.6460266714384506,
+      "rotor_storage_rate_w": 0.02404986373287911,
+      "magnetic_storage_rate_w": -2.2140559410306964e-07,
+      "balance_residual_j": 9.109810226192762e-07,
+      "peak_command_voltage_v": 117.35237348769064,
+      "peak_current_error_a": 8.50605184066211e-08,
+      "peak_abs_reaction_nm": 0.5086715698417729,
+      "max_speed_deviation_rpm": 0.13885399369516285,
+      "voltage_clipped_fraction": 0.0,
+      "torque_saturated_fraction": 0.0,
+      "last_cycle_duration_s": 0.02548857602045468,
+      "status": "numerical trajectory, not rigorously certified periodic orbit or switched PWM"
+    }
+  }
+}
