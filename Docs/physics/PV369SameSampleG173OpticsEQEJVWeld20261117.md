@@ -17,6 +17,9 @@ Run on a genuine sample using:
 
 ```sh
 python scripts/check_pv_g173_same_sample_optics_eqe_iv_weld.py \
+  --sample-id "wafer-identifier-and-device" \
+  --temperature-k 298.15 \
+  --source-provenance "original-lab-dataset-record" \
   --spectrum /path/to/astm_G173_2002_row.csv \
   --optics /path/to/same_sample_R_A1_A2_A3_A4_T.csv \
   --eqe /path/to/same_sample_EQE1_EQE2_EQE3_EQE4.csv \
@@ -33,7 +36,7 @@ The optical file is a per-wavelength exclusive partition `R+A1+A2+A3+A4+T=1`; `0
 
 For **4T**, use each curve's exact piecewise-linear `max_V (V J_i(V))`, multiply by each specified converter efficiency between zero and one, then subtract actual reported auxiliary/drive input and add recovered electrical drive subject to `0<=recovered<=drive`. For **2T**, invert the **same individual** J-V curves and compute `max_I I*Σ_i V_i(I)`, with each piecewise-linear segment's quadratic extremum included. This is an IDEAL lossless series *prediction*: individual 4T measurements do not establish performance of an assembled two-terminal stack. Contacts/interconnect losses for the 2T assembly are not sourced and must be added, not inferred. Neither is a measured terminal Pmax until verified device provenance and voltmeter/currentmeter sources are independently checked.
 
-The adapter refuses missing input families, nonmonotone/negative JV, inconsistent Jsc, unphysical fractions, recovered drive greater than input and efficiencies above 1. The output field `real_world_certified=false` is always false: an independently attested physical claim must be attached externally, not self-issued by a numerical model.
+The adapter additionally requires a declared sample identity, finite positive temperature and original-source provenance string in real-data mode, then hashes every supplied spectrum, optical, EQE and IV file by SHA-256 in the result. These declaration/hashes enable repeatability, not proof that the declared provenance is authentic. The adapter refuses missing input families, nonmonotone/negative JV, inconsistent Jsc, unphysical fractions, recovered drive greater than input and efficiencies above 1. The output field `real_world_certified=false` is always false: an independently attested physical claim must be attached externally, not self-issued by a numerical model.
 
 **Independent executed local validation:** `scripts/check_pv_g173_same_sample_weld_independent_fixture.py` (exact reproduced test file), **25/25 PASS** on synthetic 4J data and adversarial predicates. Its perfectly flat synthetic spectrum 400–1000nm, per-wavelength R=0.1, each Ai=0.2, T=0.1, EQE_i=0.16, and linear 1V J-V curves give gross four-terminal power **54.200455 W/m²**, net **50.574442 W/m²** after illustrative 97% converters and 2 W/m² auxiliaries, under 600 W/m² incident: **8.429% synthetic net**, NOT a device. This is deliberately a negative control, not a successful >50 result. The full committed measured-data adapter itself was source-written and has not been executed from a fresh GitHub checkout; independent local receipt checks exercise its mathematical contract and rejection conditions.
 
