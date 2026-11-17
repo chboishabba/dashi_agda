@@ -345,322 +345,207 @@ unifiedCurrentGate4FrontierLedgerLevel : ProofLevel
 unifiedCurrentGate4FrontierLedgerLevel =
   FleetHyperTOE.currentGate4FrontierLedgerLevel
 
-unifiedCurrentGate4ClusteringToTransferGapLevel : ProofLevel
-unifiedCurrentGate4ClusteringToTransferGapLevel =
-  FleetHyperTOE.currentGate4ClusteringToTransferGapLevel
+unifiedNavierStokesBM2ZKPFrame :
+  NSBM2TOE.NavierStokesBM2TOEZKPFrame
+unifiedNavierStokesBM2ZKPFrame =
+  NSBM2TOE.canonicalNavierStokesBM2TOEZKPFrame
 
-unifiedFleetFormalGapTargetSelected : Bool
-unifiedFleetFormalGapTargetSelected =
-  FleetHyperTOE.fleetFormalGapTargetSelected
+------------------------------------------------------------------------
+-- SensibLaw / governance direct non-promotion handoff.
+------------------------------------------------------------------------
 
-unifiedHistoricalGate4CountSelectedAsFleetTarget : Bool
-unifiedHistoricalGate4CountSelectedAsFleetTarget =
-  FleetHyperTOE.historicalGate4CountSelectedAsFleetTarget
+open import DASHI.Governance.PromotionSpineTests public using
+  ( candidateExampleQuarantines
+  ; candidateExampleAbstains
+  ; citationExampleCannotCloseIdentity
+  ; citationExampleQuarantines
+  ; artifactExamplePromotesWhenAllFiveClose
+  ; artifactExampleAuthorizesGovernedPromotion
+  )
 
-unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
-  FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
-unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
-  FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+open import DASHI.Law.SensibLawITIRParityEverything public using
+  ( selectedLegalRuntimeContract
+  ; selectedITIRNormalizedParity
+  ; selectedStageParityWitness
+  ; selectedOwnerParityWitness
+  ; SemanticPromotionPolicySurface
+  ; semanticPromotionPolicySurface
+  ; heuristic-only-abstains
+  ; promotion-ignores-heuristic-bits
+  ; semantic-promotion-truth-authority-closed
+  ; semantic-promotion-legal-authority-closed
+  ; semantic-promotion-all-authority-closed
+  ; LegalCitationBoundary
+  ; canonicalLegalCitationBoundary
+  ; CompositeCompliance
+  ; composeCertifiedStages
+  )
 
+------------------------------------------------------------------------
+-- Fleet formal-gap cut. Reuse the canonical fleet owner.
+------------------------------------------------------------------------
 
-import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalGovernance
-import DASHI.Unified.PNFSourceBoundaryTOEExact as PNFSource
-import DASHI.Unified.PNFDistilledNonPromotionTOEExact as PNFDistilled
-import DASHI.Unified.SCALEEvidenceReviewTOEConvergenceExact as SCALEReview
-import DASHI.Unified.GovernedFleetResidualTOEHandoffExact as GovernedFleet
-import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifest
+unifiedFleetRecordedDischargedCountIs584 :
+  FleetGapTOE.dischargedCoreKnowledgeFibres
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 584
+unifiedFleetRecordedDischargedCountIs584 =
+  FleetGapTOE.fleetRecordedDischargedCountIs584
+
+unifiedFleetRecordedUnformalisedGapCountIs58 :
+  FleetGapTOE.unformalisedFormalGaps
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 58
+unifiedFleetRecordedUnformalisedGapCountIs58 =
+  FleetGapTOE.fleetRecordedUnformalisedGapCountIs58
+
+unifiedFleetRecordedContradictionCountIs44 :
+  FleetGapTOE.polarityContradictionGaps
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 44
+unifiedFleetRecordedContradictionCountIs44 =
+  FleetGapTOE.fleetRecordedContradictionCountIs44
+
+unifiedFleetRecordedMacroscopicMotifCountIs3 :
+  FleetGapTOE.macroscopicEigenMotifCount
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 3
+unifiedFleetRecordedMacroscopicMotifCountIs3 =
+  FleetGapTOE.fleetRecordedMacroscopicMotifCountIs3
+
+unifiedFleetTargetsOnlyUnformalisedFormalGaps :
+  FleetGapTOE.targetOnlyUnformalisedFormalGaps
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
+unifiedFleetTargetsOnlyUnformalisedFormalGaps =
+  FleetGapTOE.fleetTargetsOnlyUnformalisedFormalGaps
+
+unifiedFleetDischargedFibresRemainOutOfTarget :
+  FleetGapTOE.dischargedFibresRemainDischarged
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
+unifiedFleetDischargedFibresRemainOutOfTarget =
+  FleetGapTOE.fleetDischargedFibresRemainOutOfTarget
+
+unifiedFleetSpectralLabelsDoNotIdentifyTheoremOwners :
+  FleetGapTOE.spectralLabelsIdentifyTheoremOwners
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+unifiedFleetSpectralLabelsDoNotIdentifyTheoremOwners =
+  FleetGapTOE.fleetSpectralLabelDoesNotIdentifyTheoremOwner
+
+unifiedFleetMetaIntrospectorAttributionPreserved :
+  FleetGapTOE.metaIntrospectorAttributionPreserved
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
+unifiedFleetMetaIntrospectorAttributionPreserved = refl
+
+unifiedFleetMetaIntrospectorProofNotBorrowed :
+  FleetGapTOE.metaIntrospectorProofBorrowed
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+unifiedFleetMetaIntrospectorProofNotBorrowed = refl
+
+------------------------------------------------------------------------
+-- Source-owned SLR evidence non-promotion; reused from PR #1343.
+-- No Digital ESD implementation is modified.
+------------------------------------------------------------------------
+
+import DASHI.Interop.SLRCanonicalEvidenceSubstrateExact as SLREvidence
+
+unifiedEvidenceManifestationDoesNotCreateSemanticAuthority :
+  SLREvidence.ManifestationCreatesSemanticAuthority → ⊥
+unifiedEvidenceManifestationDoesNotCreateSemanticAuthority =
+  SLREvidence.manifestationDoesNotCreateSemanticAuthority
+
+unifiedEvidenceObservationDoesNotCreateClaimTruth :
+  SLREvidence.ObservationCreatesClaimTruth → ⊥
+unifiedEvidenceObservationDoesNotCreateClaimTruth =
+  SLREvidence.observationDoesNotCreateClaimTruth
+
+unifiedEvidenceObservationDoesNotPromoteApplicability :
+  SLREvidence.ObservationPromotesApplicability → ⊥
+unifiedEvidenceObservationDoesNotPromoteApplicability =
+  SLREvidence.observationDoesNotPromoteApplicability
+
+unifiedEvidenceDoesNotCreateDigitalESDAdmission :
+  SLREvidence.CanonicalEvidenceCreatesDigitalESDAdmission → ⊥
+unifiedEvidenceDoesNotCreateDigitalESDAdmission =
+  SLREvidence.canonicalEvidenceDoesNotCreateDigitalESDAdmission
+
+------------------------------------------------------------------------
+-- Source-owned SensibLaw governance firewalls.
+-- Re-export one existing parity surface. Do not duplicate theorem owners.
+------------------------------------------------------------------------
+
+open import DASHI.Law.SensibLawITIRParityEverything public using
+  ( selectedLegalSourceAuthorityBoundary
+  ; selectedDomainTransportReceipt
+  ; selectedAttributionSnowballBoundary
+  ; selectedSnowballLineageBoundary
+  ; selectedNativeLegalFollowBoundary
+  ; selectedProviderFailureCalibration
+  ; selectedExpertProductionBoundary
+  ; selectedCanonicalEvidenceBoundary
+  ; selectedFrozenProvenanceDynamicBoundary
+  ; governanceCandidateSourceDoesNotCloseAuthority
+  ; governanceSameSystemDoesNotCloseAuthority
+  ; governanceCurrentValidityDoesNotEstablishApplicability
+  ; governanceSemanticAdmissionDoesNotCreateLegalAuthority
+  ; governanceDocumentRoleDoesNotCreateLegalAuthority
+  ; governanceRuntimeCannotInventLegalSemantics
+  ; governanceSourceFollowCannotBecomeAuthorityByTransport
+  ; governanceRepresentationEqualityDoesNotCreateLegalAuthority
+  ; governanceVendorIdentityDoesNotCreateAuthority
+  ; governanceTargetDomainNeedsOwnAuthorityWitness
+  ; governanceSnowballCitationDoesNotCreateAuthority
+  ; governanceSnowballCitationDoesNotCreateLegalAuthority
+  ; governanceParetoDirectiveIsNotLegalAuthority
+  ; governanceParetoFrontierDoesNotPrejudgeRetrieval
+  ; governanceNativeCliDoesNotCreateLegalAuthority
+  ; governanceProviderFailureDoesNotMakePropositionFalse
+  ; governanceExpertProductionPromotesNoAuthority
+  ; governanceMultipleReportsDoNotCreateIndependence
+  ; governanceManifestationDoesNotCreateSemanticAuthority
+  ; governanceObservationDoesNotCreateClaimTruth
+  ; governanceObservationDoesNotPromoteApplicability
+  ; governanceCanonicalEvidenceDoesNotCreateDigitalESDAdmission
+  ; governanceStaticSeparationDoesNotCreateDynamicSafety
+  ; governanceFrozenSelectionDoesNotCreateDynamicSafety
+  ; governanceProvenanceAxisDoesNotCreateTruth
+  ; governanceCrossPollinationDoesNotTransferAuthorship
+  )
+
+------------------------------------------------------------------------
+-- Institutional normativity direct TOE handoff.
+-- Source theorem ownership remains in the canonical SensibLaw/Core modules.
+------------------------------------------------------------------------
+
+open import DASHI.Law.SensibLawITIRParityEverything public using
+  ( selectedInstitutionalNormProductionBoundary
+  ; selectedStatusSignalBoundary
+  ; selectedProximityInfluenceBoundary
+  ; selectedLegalReasonablenessNormativityBoundary
+  ; selectedOperationalLegalityBoundary
+  ; selectedInstitutionalResponsibilityBoundary
+  ; selectedEpistemicConsequenceBoundary
+  ; governanceBaselineDoesNotRecoverProductionHistory
+  ; governanceStatusDoesNotRecoverSubstantiveAdequacy
+  ; governanceProximityDoesNotCreateInfluence
+  ; governanceLegalValidityDoesNotCreatePoliticalNeutrality
+  ; governanceStatusSignalDoesNotCreateSubstantiveAdequacy
+  ; governanceLawfulRangeDoesNotCreatePoliticalNeutrality
+  ; governanceFormalProhibitionDoesNotCreateEffectivePrevention
+  ; governanceAuthorisationDoesNotCreateJustification
+  ; governanceHighUncertaintyDoesNotAutomaticallyEstablishIllegality
+  )
 
 
 ------------------------------------------------------------------------
--- Governed Fleet residual handoff.
+-- Fleet 58 named-manifest fail-closed handoff.
+-- Count equality does not create row identity.
 ------------------------------------------------------------------------
 
-unifiedGovernedFleetResidualTOEHandoff :
-  GovernedFleet.GovernedFleetResidualTOEHandoff
-unifiedGovernedFleetResidualTOEHandoff =
-  GovernedFleet.canonicalGovernedFleetResidualTOEHandoff
-
-governedLegalWorkflowTOEBoundary :
-  LegalGovernance.GovernedLegalWorkflowTOEBoundary
-governedLegalWorkflowTOEBoundary =
-  LegalGovernance.canonicalGovernedLegalWorkflowTOEBoundary
-
-governedLegalWorkflowTOEInvariantHandoff :
-  LegalGovernance.GovernedLegalWorkflowTOEInvariantHandoff
-governedLegalWorkflowTOEInvariantHandoff =
-  LegalGovernance.canonicalGovernedLegalWorkflowTOEInvariantHandoff
-
-governedLegalWorkflowIntrospectiveZKPFrame :
-  LegalGovernance.GovernedLegalWorkflowIntrospectiveZKPFrame
-governedLegalWorkflowIntrospectiveZKPFrame =
-  LegalGovernance.canonicalGovernedLegalWorkflowIntrospectiveZKPFrame
-
-
-governedSemanticPromotionTruthAuthorityClosed :
-  LegalGovernance.SemanticPromotionTruthAuthorityClosed
-governedSemanticPromotionTruthAuthorityClosed =
-  LegalGovernance.toeSemanticPromotionTruthAuthorityClosed
-
-governedSemanticPromotionLegalAuthorityClosed :
-  LegalGovernance.SemanticPromotionLegalAuthorityClosed
-governedSemanticPromotionLegalAuthorityClosed =
-  LegalGovernance.toeSemanticPromotionLegalAuthorityClosed
-
-governedSemanticPromotionAllAuthorityClosed :
-  LegalGovernance.SemanticPromotionAllAuthorityClosed
-governedSemanticPromotionAllAuthorityClosed =
-  LegalGovernance.toeSemanticPromotionAllAuthorityClosed
-
-governedBoundAcquisitionDoesNotPayRequirement :
-  LegalGovernance.BoundDemandAutomaticallyPaysRequirement → ⊥
-governedBoundAcquisitionDoesNotPayRequirement =
-  LegalGovernance.toeBoundAcquisitionDoesNotPayRequirement
-
-governedBoundAcquisitionDoesNotCloseConsumer :
-  LegalGovernance.BoundDemandAutomaticallyClosesConsumer → ⊥
-governedBoundAcquisitionDoesNotCloseConsumer =
-  LegalGovernance.toeBoundAcquisitionDoesNotCloseConsumer
-
-governedProducerIdentityDoesNotIdentifyResidual :
-  LegalGovernance.SameProducerIdentifiesResidual → ⊥
-governedProducerIdentityDoesNotIdentifyResidual =
-  LegalGovernance.toeProducerIdentityDoesNotIdentifyResidual
-
-pnfSourceBoundaryReceipt :
-  PNFSource.PNFSourceBoundaryTOEReceipt
-pnfSourceBoundaryReceipt =
-  PNFSource.canonicalPNFSourceBoundaryTOEReceipt
-
-pnfGluingProxyDoesNotProveTrueLinearity =
-  PNFSource.gluingProxyDoesNotProveTrueLinearity
-
-pnfSelfAdjointProxyDoesNotProveFiniteTheorem =
-  PNFSource.selfAdjointProxyDoesNotProveFiniteTheorem
-
-pnfDominationProxyDoesNotProveHamiltonianTheorem =
-  PNFSource.dominationProxyDoesNotProveHamiltonianTheorem
-
-pnfFungalNetworkClaimsRequireSpeciesEvidence =
-  PNFSource.fungalNetworkClaimsRequireSpeciesEvidence
-
-pnfIdenticalWordsDoNotPayPredicate :
-  PNFSource.IdenticalWordsProveSamePredicate → ⊥
-pnfIdenticalWordsDoNotPayPredicate =
-  PNFSource.identicalWordsDoNotPayPredicate
-
-pnfCommonFingerprintDoesNotCreateTruth :
-  PNFSource.CommonPnfFingerprintProvesClaimTruth → ⊥
-pnfCommonFingerprintDoesNotCreateTruth =
-  PNFSource.commonPnfFingerprintDoesNotCreateClaimTruth
-
-pnfPerceivedIndependenceDoesNotCreateProvenanceIndependence :
-  PNFSource.PerceivedIndependenceMeansActualIndependence → ⊥
-pnfPerceivedIndependenceDoesNotCreateProvenanceIndependence =
-  PNFSource.perceivedIndependenceDoesNotCreateProvenanceIndependence
-
-pnfRepetitionDoesNotCreateIndependentEvidence :
-  PNFSource.RepetitionMeansIndependentEvidence → ⊥
-pnfRepetitionDoesNotCreateIndependentEvidence =
-  PNFSource.repetitionDoesNotCreateIndependentEvidence
-
-pnfCommonSourceDoesNotEraseEvidence :
-  PNFSource.CommonSourceMeansNoEvidence → ⊥
-pnfCommonSourceDoesNotEraseEvidence =
-  PNFSource.commonSourceDoesNotEraseEvidence
-
-pnfDistilledNonPromotionBoundary :
-  PNFDistilled.PNFDistilledNonPromotionBoundary
-pnfDistilledNonPromotionBoundary =
-  PNFDistilled.canonicalPNFDistilledNonPromotionBoundary
-
-pnfDistilledReuseZKPReceipt :
-  PNFDistilled.PNFDistilledReuseZKPReceipt
-pnfDistilledReuseZKPReceipt =
-  PNFDistilled.canonicalPNFDistilledReuseZKPReceipt
-
-scaleEvidenceReviewTOEReceipt :
-  SCALEReview.SCALEEvidenceReviewTOEReceipt
-scaleEvidenceReviewTOEReceipt =
-  SCALEReview.canonicalSCALEEvidenceReviewTOEReceipt
-
-scaleEvidenceReviewDoesNotPromoteSemanticTruth :
-  SCALEReview.ReplayEconomyReceiptPromotesSemanticTruth → ⊥
-scaleEvidenceReviewDoesNotPromoteSemanticTruth =
-  SCALEReview.scaleReplayDoesNotPromoteSemanticTruth
-
-scaleEvidenceReviewDoesNotAuthorizeFromFrontier :
-  SCALEReview.FrontierRouteMeansAuthorized → ⊥
-scaleEvidenceReviewDoesNotAuthorizeFromFrontier =
-  SCALEReview.frontierRouteDoesNotGrantAuthorization
-
-canonicalUnifiedObjects : List Spine.UnifiedObjectInvariant
-canonicalUnifiedObjects =
-  CarrierGrammar.carrierGrammarObject
-  ∷ ChemistrySupervoxel.chemistryObject
-  ∷ ChemistrySupervoxel.supervoxelChemistryObject
-  ∷ PNFHyperfabric.pnfHyperfabricObject
-  ∷ BrainFMRI.brainFMRIObject
-  ∷ ArithmeticMoonshine.arithmeticMoonshineObject
-  ∷ Physics.navierStokesObject
-  ∷ Physics.yangMillsObject
-  ∷ CrossScaleMatterPhysics.crossScaleMatterPhysicsObject
-  ∷ []
-record UnifiedObjectTable : Setω where
-  field
-    objects :
-      List Spine.UnifiedObjectInvariant
-    objectsAreCanonical :
-      objects ≡ canonicalUnifiedObjects
-    allJProjectionExternalPromotion :
-      Spine.UnifiedObjectInvariant → Bool
-    allJProjectionExternalPromotionIsFalse :
-      ∀ object → allJProjectionExternalPromotion object ≡ false
-    allFormalProjectionExternalPromotion :
-      Spine.UnifiedObjectInvariant → Spine.UniversalProjectionKind → Bool
-    allFormalProjectionExternalPromotionIsFalse :
-      ∀ object kind → allFormalProjectionExternalPromotion object kind ≡ false
-    formalObjectParentSurface :
-      FormalObjectParents.FormalObjectParentSurface
-    crossScaleMatterPhysicsSurface :
-      CrossScaleMatterPhysics.CrossScaleMatterPhysicsSurface
-    round5FoundationsBoundary :
-      Round5.Round5CompleteBoundary
-    plainPolicy :
-      String
-canonicalUnifiedObjectTable : UnifiedObjectTable
-canonicalUnifiedObjectTable =
-  record
-    { objects =
-        canonicalUnifiedObjects
-    ; objectsAreCanonical =
-        refl
-    ; allJProjectionExternalPromotion =
-        Spine.objectExternalJPromotion
-    ; allJProjectionExternalPromotionIsFalse =
-        Spine.objectExternalJPromotionIsFalse
-    ; allFormalProjectionExternalPromotion =
-        Spine.objectProjectionPromotion
-    ; allFormalProjectionExternalPromotionIsFalse =
-        Spine.canonicalInvariantObjectsDoNotPromoteFormalProjections
-    ; formalObjectParentSurface =
-        FormalObjectParents.canonicalFormalObjectParentSurface
-    ; crossScaleMatterPhysicsSurface =
-        CrossScaleMatterPhysics.canonicalCrossScaleMatterPhysicsSurface
-    ; round5FoundationsBoundary =
-        Round5.canonicalRound5CompleteBoundary
-    ; plainPolicy =
-        "Every unified facade object exposes observation, projection, carrier/role vector, residual, proof posture, invariant strength, and the required formal parent projection bundle. The bundle includes modular-j, Hecke, Bott, Kolmogorov, category, quotient, lattice, and operator projections. Literal authority is lane-specific; every formal projection has externalPromotion = false. The cross-scale matter/physics parent records the atoms-to-stellar composition ladder as structural and receipt-gated, with quantitative solar-style counterfactual prediction still blocked. The complete Round Five imports the PR 399 ternary/Yijing/natural-system theorem surface and adds fail-closed constants, dimension, atomic, nuclear, cosmological-observation, GR-QFT, hidden-sector collider, connected tri-to-bi junction, affine-slice, renderer-parity, low-precision search, and graph-to-field boundaries without promoting terminal unification or visual geometry to source ontology."
-    }
-brainFMRIRemainsNonPromoting :
-  Spine.objectExternalJPromotion BrainFMRI.brainFMRIObject ≡ false
-brainFMRIRemainsNonPromoting =
-  refl
-
-scaleEvidenceReviewDoesNotPromoteSemanticTruth :
-  SCALEReview.ReplayEconomyReceiptPromotesSemanticTruth → ⊥
-scaleEvidenceReviewDoesNotPromoteSemanticTruth =
-  SCALEReview.scaleReplayDoesNotPromoteSemanticTruth
-
-scaleEvidenceReviewDoesNotAuthorizeFromFrontier :
-  SCALEReview.FrontierRouteMeansAuthorized → ⊥
-scaleEvidenceReviewDoesNotAuthorizeFromFrontier =
-  SCALEReview.frontierRouteDoesNotGrantAuthorization
-
--- Legal authority remains independent of matter workflow and semantic admission.
-unifiedLegalCandidateIsNotAuthority :
-  LegalGovernance.CandidateSourceIsAuthoritative → ⊥
-unifiedLegalCandidateIsNotAuthority =
-  LegalGovernance.toeCandidateSourceDoesNotCloseAuthority
-
-unifiedLegalValidityIsNotApplicability :
-  LegalGovernance.CurrentValidityAutomaticallyMeansApplicability → ⊥
-unifiedLegalValidityIsNotApplicability =
-  LegalGovernance.toeCurrentValidityDoesNotAutomaticallyEstablishApplicability
-
-unifiedSemanticAdmissionIsNotLegalAuthority :
-  LegalGovernance.SemanticAdmissionAuthorityIsLegalSourceAuthority → ⊥
-unifiedSemanticAdmissionIsNotLegalAuthority =
-  LegalGovernance.toeSemanticAdmissionDoesNotBecomeLegalSourceAuthority
-
-
-unifiedGovernedLegalWorkflowAuthorityInvariantHandoff :
-  LegalGovernance.GovernedLegalWorkflowAuthorityInvariantHandoff
-unifiedGovernedLegalWorkflowAuthorityInvariantHandoff =
-  LegalGovernance.canonicalGovernedLegalWorkflowAuthorityInvariantHandoff
-
-unifiedCanonicalLegalSourceAuthorityBoundary :
-  LegalGovernance.LegalSourceAuthorityBoundary
-unifiedCanonicalLegalSourceAuthorityBoundary =
-  LegalGovernance.toeCanonicalLegalSourceAuthorityBoundary
-
-unifiedSameSystemIsNotLegalAuthority :
-  LegalGovernance.SameLegalSystemAutomaticallyMeansAuthority → ⊥
-unifiedSameSystemIsNotLegalAuthority =
-  LegalGovernance.toeSameSystemDoesNotAutomaticallyCloseAuthority
-
-unifiedDocumentRoleIsNotLegalAuthority :
-  LegalGovernance.DocumentRoleSuppliesLegalSourceAuthority → ⊥
-unifiedDocumentRoleIsNotLegalAuthority =
-  LegalGovernance.toeDocumentRoleDoesNotSupplyLegalSourceAuthority
-
-------------------------------------------------------------------------
--- SCALE evidence genealogy firewalls.
-------------------------------------------------------------------------
-
-scaleEvidenceReviewPerceivedIndependenceDoesNotCreateProvenanceIndependence :
-  SCALEReview.PerceivedIndependenceMeansActualIndependence → ⊥
-scaleEvidenceReviewPerceivedIndependenceDoesNotCreateProvenanceIndependence =
-  SCALEReview.perceivedIndependenceDoesNotCreateProvenanceIndependence
-
-scaleEvidenceReviewRepetitionDoesNotCreateIndependentEvidence :
-  SCALEReview.RepetitionMeansIndependentEvidence → ⊥
-scaleEvidenceReviewRepetitionDoesNotCreateIndependentEvidence =
-  SCALEReview.repetitionDoesNotCreateIndependentEvidence
-
-
-------------------------------------------------------------------------
--- SCALE physical-economy non-promotion firewalls.
-------------------------------------------------------------------------
-
-scaleEvidenceReviewReviewProjectionReuseDoesNotCreateClaimTruth :
-  SCALEReview.ReviewProjectionReuseCreatesClaimTruth → ⊥
-scaleEvidenceReviewReviewProjectionReuseDoesNotCreateClaimTruth =
-  SCALEReview.reviewProjectionReuseDoesNotCreateClaimTruth
-
-scaleEvidenceReviewCommitCoalescingDoesNotCreateSemanticAuthority :
-  SCALEReview.CommitCoalescingCreatesSemanticAuthority → ⊥
-scaleEvidenceReviewCommitCoalescingDoesNotCreateSemanticAuthority =
-  SCALEReview.commitCoalescingDoesNotCreateSemanticAuthority
-
-scaleEvidenceReviewFewCommitBarriersDoNotProveSemanticIndependence :
-  SCALEReview.FewCommitBarriersProveSemanticIndependence → ⊥
-scaleEvidenceReviewFewCommitBarriersDoNotProveSemanticIndependence =
-  SCALEReview.fewCommitBarriersDoNotProveSemanticIndependence
-
-
-------------------------------------------------------------------------
--- SCALE Evidence Review ZKP frame.
-------------------------------------------------------------------------
-
-scaleEvidenceReviewTOEZKPFrame :
-  SCALEReview.SCALEEvidenceReviewTOEZKPFrame
-scaleEvidenceReviewTOEZKPFrame =
-  SCALEReview.canonicalSCALEEvidenceReviewTOEZKPFrame
-
-
-------------------------------------------------------------------------
--- Governance + exact 58-gap + Balaban/Ibrahim TOE convergence.
-------------------------------------------------------------------------
-
-import DASHI.Unified.GovernanceBalabanIbrahim58GapTOEExact as GBI58
-import DASHI.Unified.GovernanceBalabanIbrahim58GapTOEValidation
-
-unifiedGovernanceBalabanIbrahim58GapReceipt :
-  GBI58.GovernanceBalabanIbrahim58GapTOEReceipt
-unifiedGovernanceBalabanIbrahim58GapReceipt =
-  GBI58.canonicalGovernanceBalabanIbrahim58GapTOEReceipt
-
-unifiedGovernanceBalabanIbrahim58GapZKPFrame :
-  GBI58.GovernanceBalabanIbrahim58GapZKPFrame
-unifiedGovernanceBalabanIbrahim58GapZKPFrame =
-  GBI58.canonicalGovernanceBalabanIbrahim58GapZKPFrame
+open import DASHI.Unified.Fleet58ManifestAcquisitionExact public using
+  ( Fleet58ManifestAcquisitionReceipt
+  ; canonicalFleet58ManifestAcquisitionReceipt
+  ; named58ManifestAcquiredIsFalse
+  ; perGapDispatchEnabledIsFalse
+  ; manifestAcquisitionRouteBoundIsTrue
+  ; relatedSymbolsRequiredIsTrue
+  ; discoverRequiredIsTrue
+  ; roundLineageRequiredIsTrue
+  ; count58DoesNotCreateNamedRows
+  ; attributionBoundary
+  )
