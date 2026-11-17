@@ -50,3 +50,18 @@ Illustrative normalized N=5, horizon T=10, source exogenous DC=2, small AC envel
 5. F16: controller-to-cloud microphysics and cold-pool causal chain remains separate; no evidence of actual climatic influence supplied.
 
 **Acceptance note:** The local numerical/symbolic check was executed on a standalone copy before committing GitHub text. The integrated repository shell runner now includes the test, but the **exact GitHub-head combined suite and Agda kernel were not executed** here. Physical S0/P1/P2/R1/R2/R3/D1/D2 remain OPEN; provenance/attribution preserved and ESD untouched.
+
+## Complementary topology cut — series access versus lossy shunt
+
+After the first 12/12 tests, the selected finite model was extended with a **series channel** on one LC link as a direct architectural comparator to the existing dissipative shunt. In the series branch the link law includes an extra carrier-dependent `R_channel=1/G_channel(n)`; the energy ledger adds `I_link² R_channel` explicitly. The algebraic telescoping energy check now verifies **both** shunt and series variants for N=3,5,8; local regression **16/16 PASS**.
+
+| Model topology (T=10; normalized) | Base channel conductance | Controlled conductance | Base load work | Controlled load work | Outcome |
+|---|---:|---:|---:|---:|---|
+| Shunt (`g_n=.02`) | .00632937 | .02717360 | .03674219 | .03591523 | −2.25% load |
+| Series (`g_n=2`) | .63293717 | 2.71736044 | .01310441 | .02755956 | +110.31% load |
+
+All scenarios use independently stipulated delayed exogenous input; both controllers have the specified increased ionization expenditure **1 → 5** plus controller auxiliary **0 → 0.2**. Both models have **negative** net load after subtracting these counted expenses, and their final storage is **not** equal to their initial storage, hence **no F15 sustained natural energy acceptance**.
+
+**Why this is important:** identical carrier-density amplification can either decrease or increase useful output depending on whether the controlled plasma is placed as a parasitic shunt or as a source-to-receiver access path. But higher load work does not imply a positive overall energy return. This establishes a useful **topology-sensitive conditional model result**, not that the actual proposed portable plate is a series conduit or that ambient solar currents can enter it. Any physical weld requires collector and return geometry, plasma material budget, independently sourced source admittance and complete-cycle comparison.
+
+**Acceptance correction:** initial CLI had a NumPy boolean JSON serialization issue, corrected before 12/12 and then 16/16 local tests were rerun; the distributed-model committed path is included in the original consolidated Python acceptance runner. Full combined exact GitHub-head suite and pinned Agda kernel remain unverified. No original-world evidence contract was modified.
