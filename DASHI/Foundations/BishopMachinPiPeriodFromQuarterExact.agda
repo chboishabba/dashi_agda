@@ -105,7 +105,7 @@ module _ (inputs : Round11.Round11BishopCutset) where
       (BP.≃-trans
         (doubleSinAtTwoQuarter w)
         (BP.≃-trans
-          (BP.*-cong
+          (BP.*-congʳ (BP.*-cong
             (BP.≃-trans (doubleSinAtQuarter w)
               (Algebra.quarterSinCosEqualityGivesDoubleSinOne
                 (sin quarter) (cos quarter)
@@ -113,7 +113,7 @@ module _ (inputs : Round11.Round11BishopCutset) where
             (BP.≃-trans (doubleCosAtQuarter w)
               (Algebra.quarterSinCosEqualityGivesDoubleCosZero
                 (sin quarter) (cos quarter)
-                (sinEqualsCos w))))
+                (sinEqualsCos w)))))
           (Algebra.doubleAngleSinFourZero B.1ℝ B.0ℝ
             BP.≃-refl BP.≃-refl)))
 
