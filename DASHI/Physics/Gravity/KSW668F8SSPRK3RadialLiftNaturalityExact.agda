@@ -41,7 +41,7 @@ ssprk3First : ℚ → ℚ → ℚ → ℚ → ℚ
 ssprk3First dt a src y = y + dt * linearStage a src y
 
 ssprk3Second :
-  ℚ → ℚ → ℚ → ℚ → ℚ → ℚ → ℚ → ℚ
+  ℚ → ℚ → ℚ → ℚ → ℚ → ℚ → ℚ
 ssprk3Second dt a0 a1 src0 src1 y =
   let y1 = ssprk3First dt a0 src0 y
   in threeQuarters * y
