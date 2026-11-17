@@ -2111,3 +2111,132 @@ development/heldout provenance, and true
 on-policy recurrent hysteresis (not a
 reset-history comparison). No
 clinical/endocrine claims.
+
+
+## 17 Nov continuation: source-native checkpoint runner repair + original R4 same-clock history gate
+
+Original Leech PR #5 updated, with:
+- `models/history_orbit_moe.py`: default original
+  `select_source_experts(x,h)` tuple unchanged; explicit
+  opt-in `return_logits=True` returns SAME
+  calculated original source logits (not a
+  separately computed router).
+- `scripts/probe_x369_r4_kink_checkpoint.py`:
+  original checkpoint-byte-hashed same-reset
+  four-load source execution and matched
+  source-logit forced selection.
+  **Repaired actual runnable blocker:** its
+  JSON input uses numeric strings, which
+  `torch.tensor(["1","0"],dtype=...)`
+  rejects. The original producer now
+  recursively parses only finite
+  numeric scalar strings/integers/floats
+  into the requested exact source tensor
+  shape and rejects NaN, Inf, Bool and
+  invalid shapes, plus disallows
+  implicit dtype or coerced Nat scale.
+  Added original repo-root source
+  package path handling for
+  `python scripts/...py`.
+  The forced-route comparator now
+  checks its **same Nat projection**
+  separately from continuous shape;
+  the result explicitly marks that a
+  fitted causal mechanism is NOT
+  certified.
+- `scripts/check_x369_r4_native_topk_kink.py`:
+  synthetic native model/FFN/topk test
+  now verifies default API and opt-in
+  logits agree, emits source state_dict,
+  reloads the exact bytes with
+  `strict=True`, replays source step
+  and selected-only execution, and
+  rejects malformed JSON arrays.
+- `scripts/probe_x369_r4_history_path_dependence.py`:
+  NEW same-checkpoint, same initial
+  full history, same second-step load
+  and clock, different one-step
+  *prefix interventions* followed by
+  the original source `step`.
+  Unlike a four-load RESET curve,
+  this tests a genuinely updated
+  ORIGINAL recurrent history state.
+  It records full-history hashes and
+  selected scores/IDs/weights/signs.
+
+**Exact independent history-path source mathematics:**
+the previous source-legal d=6,
+E=4 synthetic parameter fixture
+has original coherent routing
+
+    L_e(t)=b_e+s_e*t,
+    b=(8,3,-11,-13),
+    s=(0,4,9,10).
+
+After a prefix load 0, original
+topk selects (0,1) and ZERO source
+transitions replace their histories
+with zero; at the common second-step
+load t=2 the logits are
+`(8,3,7,7)`, selected (0,2),
+output Nat 0.
+After a prefix load 3, topk
+selects (3,2), whose histories
+are replaced with zero; at the
+SAME second-step t=2 and same
+clock index 1 the logits are
+`(8,11,-11,-13)`, selected (1,0),
+output Nat 9.
+An independent exact-source-formula
+local run checked **4/4** finite
+history-path facts. This is a
+counterexample to inferring a
+same-load source response from the
+load scalar ALONE when the active
+retained histories may differ.
+
+**Existing mathematical reuse:**
+new `DASHI/Cognition/PNF/X369R4HistoryLoadNonFactorabilityExact.agda`
+imports `DASHI.Core.IntersectionalNonFactorability`
+(not a duplicate quotient constructor).
+It defines a two-prefix same-load
+finite witness and exposes the
+already-proved generic
+`witnessRulesOutEveryFlatFactorisation`
+and recharting no-recovery laws:
+the declared Nat response 0 vs 9
+does not factor through the common
+second-step load. This source-written
+Agda result is exposed from BOTH
+`DASHI/EverythingTOESymmetryResolved369.agda`
+and `DASHI/Unified/Everything.agda`.
+
+**Local verification performed this round:**
+- exact rational/symbolic source
+  four-load scores, selected experts,
+  native-response Nat 0,2,9,0,
+  frozen-route monotonic response:
+  **17 independent source-formula checks PASS**;
+- original PyTorch numeric-string
+  deserialization defect reproduced
+  with installed CPU Torch; corrected
+  parsing function independently
+  reproduced and passed **7 CPU checks**;
+- exact same-clock path dependence:
+  **4 independent source-formula checks PASS**.
+
+**Still open:** executing exact GitHub
+native Torch fixture/probe scripts,
+kernel-checking new Agda/TOE imports,
+same-source actual R4 checkpoint/history
+provenance, independent true
+source floating-error bounds across
+Nat observation thresholds,
+experimentally selected four-load
+family, heldout generalisation,
+and genuine on-policy recurrent
+hysteresis. The current same-clock
+two-prefix inequality is
+history-dependence, not proof of a
+hysteresis loop or biological
+allostatic mechanism.
