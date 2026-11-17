@@ -43,9 +43,9 @@ MaxwellJetToSelectedFieldWork :
   (jet : Vector.FullVectorMaxwellJet F) →
   (naturalNet controllerNet initialField interfaceWork
    fieldOutgoing finalField : Nat) →
-  Set
-MaxwellJetToSelectedFieldWork jet n d fi i l ff =
-  Vector.fullVectorSignedBudget jet ≡ C3.zero _ →
+  Set r
+MaxwellJetToSelectedFieldWork {F = F} jet n d fi i l ff =
+  Vector.fullVectorSignedBudget jet ≡ C3.zero F →
   (n + d) + fi ≡ i + (l + ff)
 
 -- The bridge is an implication whose INPUT is the already proven pointwise
