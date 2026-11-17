@@ -367,3 +367,96 @@ survives exactly on the admitted subspace; whether
 the trained model's histories live there remains open.
 No bit/compute savings or neural-semantic C3 theorem
 is implied by this structural result.
+
+
+## 17 Nov second P0 cut: quantized top-k margin and common-DC router quotient
+
+**New finite decision proof file:**
+`DASHI/Cognition/PNF/X369QuantizedRouterDecisionMarginExact.agda`.
+
+It reuses the source weighted-score/quantization-error owner
+and the existing approximate consumer-fidelity owner.
+For every finite expert index `e : Fin E`, a score
+certificate explicitly supplies its admitted original
+source score, quantized score and enclosing interval
+`[lowerEnvelope(e),upperEnvelope(e)]`.
+It also supplies the original admitted TopK selection mask.
+If, for every selected `i` and unselected `j`,
+
+    upperEnvelope(j) < lowerEnvelope(i),
+
+then the quantized score of `i` remains STRICTLY above
+that of `j`. The same certificate also protects the
+original scores' cross-boundary ordering. This is
+an interval/sort theorem only: its sufficient inequality
+does not imply identical mixture weights, intermediate
+expert outputs, retained histories, future semantics
+or the availability of an actual quantizer bound.
+Finite witness (original scores 1,0, quantized 0,1)
+shows ranking can reverse without strict margins.
+
+The original source weight-error law already proved
+symbolically is
+
+    error_e = (ws-wr)*es_e + (wf-wr)*ef_e + wr*eD_e.
+
+For admitted scalar absolute errors, the triangle
+envelope is
+
+    B_e = |ws-wr| eps_s_e + |wf-wr| eps_f_e
+          + |wr| eps_D_e.
+
+The current Agda interval theorem expects an actual
+checked envelope as input. Supplying this bound for
+the source model (floating point, rounding, and all
+real expert candidates) remains OPEN; it must not
+be inferred from the algebraic identity alone.
+
+**Stronger exact consumer-relative compression.**
+The original shared-head router score factors as
+`L_e=(ws-wr)*s_e+(wf-wr)*f_e+wr*D_e`.
+When `D_i=D_j` across candidates, their relative
+score equals
+
+    L_i - L_j = (ws-wr)*(s_i-s_j)
+                + (wf-wr)*(f_i-f_j).
+
+This holds for nonzero DC too: the *shared* DC term
+cancels. Hence the two-channel code can suffice for
+ranking/softmax relative scores without reconstructing
+each full triple; the encoder still must prove equal DC
+across original experts. Different DC is a decisive
+original-source counterexample: two identical retained
+(s,f)=(0,0) may have r=0 versus r=1, and a DC-sensitive
+head distinguishes them. Shared learned weights
+alone do NOT imply shared expert-history DC.
+
+The new exact Agda declarations in
+`X369DirectedRouterConditionalCodecExact` are
+`twoChannelRelativeScore`,
+`rawCommonDCCancels`, and
+`originalSameDCRelativeScoreFactors`.
+No change to the original Leech/PyTorch model was made.
+
+**SymPy stand-in continuation.**
+`scripts/check_x369_p0_sympy_standin.sh` adds exhaustive
+finite checking of 2- and 3-expert strict score envelopes,
+coefficient-weighted quantization-error triangle bounds,
+and source common-DC score cancellation plus negative
+control. Independent local SymPy validation in this
+session checked 141 strict 2-expert cases, 207 strict
+three-expert top-1 cases, 3375 coefficient/error cases,
+plus exact original DC-score polynomial identities.
+The complete updated GitHub shell/workflow remains
+pending an actual current-head CI run; those smaller
+local checks are not an Agda kernel receipt.
+
+**Remaining P0:** typed source quantizer error-to-Nat
+interval weld, all top-k (not just top1) source tie/slot
+semantics, softmax/retained-history consumer discrepancy,
+and actual source-history DC admission. Reuse existing
+`ConsumerRelativeApproximateFidelityBridgeExact`,
+`LeechJointStateConsumerQuotientExact` and
+`FibreRoutingCompressionLadderExact`, rather than
+recreating their generic carriers. Remain blocked on
+Agda 2.9 kernel until external proof runner available.
