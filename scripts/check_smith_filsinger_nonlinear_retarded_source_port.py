@@ -189,6 +189,70 @@ def simulate(p=Parameters(), duration_s=1., samples=160):
                     abs(residual_at(t,sol.y[:2,k],p)) for k,t in enumerate(sol.t)),
                 valid='synthetic model, not source identity / measured solar work')
 
+
+@dataclass(frozen=True)
+class DynamicUpstream:
+    # Finite upstream capacitor + causal external recharge driver.
+    capacitance_F:float=1e-6
+    recharge_conductance_S:float=2e-5
+    initial_voltage_V:float=1000.
+
+def simulate_backreacting_source(
+        p=Parameters(), d=DynamicUpstream(), duration_s=.1, samples=160):
+    """Causal 3-state solar-*analogue*; no actual magnetosphere parameters.
+
+    C_s V_s' = g_recharge*(V_exogenous(t-delay)-V_s) - I
+    C_r v' = I - G_load*v
+    n' = pair creation - attachment - recombination
+    I = (V_s-v)/(R_external+R_channel(n)).
+    Source reservoir, receiver capacitor and ion energy all paid.
+    """
+    check_parameters(p)
+    if min(d.capacitance_F,d.recharge_conductance_S)<=0:
+        raise ValueError("positive source storage/recharge required")
+    from scipy.integrate import solve_ivp
+    def derivative(t,y):
+        vs,v,n=y[:3]
+        if n<0:raise ValueError("negative carriers")
+        gc=channel_conductance(n,p)
+        rch=math.inf if gc==0 else 1/gc
+        i=0. if not math.isfinite(rch) else (vs-v)/(p.exterior_resistance_ohm+rch)
+        ext=source_voltage(t,p)
+        i_recharge=d.recharge_conductance_S*(ext-vs)
+        vd=(i-p.load_conductance_S*v)/p.capacitance_F
+        vsd=(i_recharge-i)/d.capacitance_F
+        ion_create=p.spontaneous_pairs_m3_s+p.ionization_rate_s*n
+        ion_remove=p.attachment_s*n+p.recombination_m3_s*n*n
+        iond=ion_create-ion_remove
+        rates=(ext*i_recharge, d.recharge_conductance_S*(ext-vs)**2,
+               p.load_conductance_S*v*v, i*i*p.exterior_resistance_ohm,
+               0. if gc==0 else i*i/gc,
+               p.volume*p.ion_pair_energy_J*ion_create,
+               p.volume*p.ion_pair_energy_J*ion_remove,
+               p.controller_W)
+        return [vsd,vd,iond,*rates]
+    y0=[d.initial_voltage_V,0.,p.n_initial_m3]+[0.]*8
+    sol=solve_ivp(derivative,(0,duration_s),y0,rtol=1e-8,atol=1e-8,
+                  max_step=duration_s/samples)
+    if not sol.success:raise ArithmeticError(sol.message)
+    end=sol.y[:,-1]
+    initial=(d.capacitance_F*d.initial_voltage_V**2/2+
+             p.volume*p.ion_pair_energy_J*p.n_initial_m3)
+    vs,v,n=end[:3]
+    final=(d.capacitance_F*vs**2/2+p.capacitance_F*v**2/2+
+           p.volume*p.ion_pair_energy_J*n)
+    upstream,feed_heat,load,ext_heat,channel_heat,ion_pump,ion_loss,ctrl=end[3:]
+    residual=(upstream+ion_pump+ctrl-load-feed_heat-ext_heat-
+              channel_heat-ion_loss-ctrl-(final-initial))
+    return dict(source_voltage_initial=d.initial_voltage_V,
+       source_voltage_final=vs,source_storage_initial_J=initial,
+       source_storage_final_J=final,upstream_replenishment_signed_J=upstream,
+       upstream_feed_heat_J=feed_heat,load_J=load,exterior_heat_J=ext_heat,
+       channel_heat_J=channel_heat,ion_creation_pump_J=ion_pump,
+       ion_loss_J=ion_loss,controller_J=ctrl,storage_delta_J=final-initial,
+       full_cycle_return_verified=False,energy_residual_J=residual,
+       source_status="independently specified exogenous wave, finite reservoir, no solar calibration")
+
 def run():
     exact_identity_checks()
     finite_passive_admittance_test()
@@ -197,7 +261,7 @@ def run():
     return dict(signed_ledger='Wnatural+Wion_creation+Wcontroller = Wload+Wchannel+Wexterior+Wion_loss+Wcontroller_aux+DeltaU',
        passive_foster='Debye g*s/(s+w), Lorentz alpha*s/(s²+gamma*s+Omega²): positive real for positive coefficients on real frequency; *not fitted waveguide*',
        source_condition='active source voltage explicitly specified, may be solar driven but NOT measured; delayed feedback is not automatically passive',
-       no_added_ionization=simulate(base), controlled_ionization=simulate(controlled),
+       no_added_ionization=simulate(base), controlled_ionization=simulate(controlled),\n       finite_source_backaction=simulate_backreacting_source(base),
        hard_gates=['source_first P1/P2 R2/R3 still null','F10 full Maxwell PDE open',
                    'F13 actual multilayer waveguide and nonlinear plasma parameters open',
                    'F15 positive source-derived net over restored cycles open'])
