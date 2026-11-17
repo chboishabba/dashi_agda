@@ -199,10 +199,12 @@ def check_primary_inspection_and_clip_lineage() -> None:
     clips = read("AmyEskridgeVideoOriginalClipLineageExact.agda")
     agg = read("AmyEskridgeVideoEvidenceEverything.agda")
     registry = read("AmyEskridgeVideoSourceRegistryExact.agda")
+    historical = read("AmyEskridgeVideoHistoricalPrimaryControlsExact.agda")
     rows = re.findall(r'(?m)^\w+\s*=\s*primary-document-reading\b', primary)
     sources = re.findall(r'(?m)^clip\d{2}\s*=\s*clip-lineage\b', clips)
     assert len(rows) == 10
     assert len(sources) == 16
+    assert len(re.findall(r'(?m)^\\w+\\s*=\\s*historical-control\\b', historical)) == 3
     assert "all86SourceAssociationRetained = Existing.all86RowsAccountedFor" in primary
     assert "acw16d6CCnY" in registry and "acw16d6CCnY" in clips
     for needle in ["20000038203", "19990039542", "19990019627",
@@ -214,6 +216,9 @@ def check_primary_inspection_and_clip_lineage() -> None:
     assert "voiceAttributedOriginalUnlocated" in clips
     assert "AmyEskridgeVideoPrimaryInspectionExact" in agg
     assert "AmyEskridgeVideoOriginalClipLineageExact" in agg
+    assert "AmyEskridgeVideoHistoricalPrimaryControlsExact" in agg
+    for target in ["Video.claim043", "Video.claim049", "Video.claim053", "Public Law 91-121", "145 mm"]:
+        assert target in historical, target
     # The speaker quotation and original publication are source metadata,
     # never an independent scientific proof.
     for escape in ["postulate", "trustMe", "TERMINATING", "NON_COVERING"]:
