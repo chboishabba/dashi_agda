@@ -14,7 +14,6 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
-open import Data.Unit using (⊤; tt)
 
 import DASHI.Core.FriendlyjordiesGovernanceQuestionExact as March
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesSouthAustraliaGovernanceWeldExact as Base
@@ -266,7 +265,8 @@ open TransitionAdmission public
 
 ------------------------------------------------------------------------
 -- Compiler into the existing world-transition evidence carrier.
--- Construction requires the separately reviewed causal bridge.
+-- Construction requires the separately reviewed causal bridge, and the exact
+-- reviewed premise is retained rather than replaced by a trivial inhabitant.
 ------------------------------------------------------------------------
 
 cprsWorldTransitionEvidenceFromAdmission :
@@ -280,9 +280,20 @@ cprsWorldTransitionEvidenceFromAdmission admission =
     (ReviewedCausalBridge.reviewRef
       (TransitionAdmission.causalBridge admission))
     true refl
-    ⊤
-    tt
+    (ReviewedCausalBridge.CausalPremise
+      (TransitionAdmission.causalBridge admission))
+    (ReviewedCausalBridge.causalPremiseWitness
+      (TransitionAdmission.causalBridge admission))
     false refl
+
+cprsCompilerPreservesCausalPremise :
+  (admission :
+    TransitionAdmission March.cprs2009 cprsExternalWorldBundle) →
+  Base.WorldTransitionEvidence.TransitionPremise
+    (cprsWorldTransitionEvidenceFromAdmission admission)
+  ≡ ReviewedCausalBridge.CausalPremise
+      (TransitionAdmission.causalBridge admission)
+cprsCompilerPreservesCausalPremise admission = refl
 
 ------------------------------------------------------------------------
 -- South Australia currently has independent world substrate but still lacks
