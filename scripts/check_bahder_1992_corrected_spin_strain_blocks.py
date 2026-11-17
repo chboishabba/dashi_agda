@@ -88,6 +88,19 @@ t('Eq30 a mismatched alternative except special parameters',s.simplify(afix-awro
 t('Eq42 hbar squared dimensional homogeneity',s.simplify(Rfix/hbar**2).has(hbar)==False)
 t('Eq42 missing hbar factor not equivalent',s.simplify(Rfix.subs(hbar,1)-Rfix)!=0)
 
+# The magnitude of the OMITTED strain-SO operator for one coherent-film
+# source example is an evidence-quality sensitivity bound, not a fitted gap.
+import numpy as np
+numbers={axial:-s.Rational(269,580)*s.Rational(5,1000),
+         trans:s.Rational(5,1000),Delta:s.Rational(341,1000)}
+N_example=np.array(N111.subs(numbers).evalf(),dtype=complex)
+vals=np.linalg.eigvalsh(N_example)
+normmev=float(np.max(np.abs(vals))*1000)
+t('coherent 111 omitted SO matrix Hermitian numeric',np.allclose(N_example,N_example.conj().T))
+t('coherent 111 omitted SO matrix trace zero',abs(np.trace(N_example))<1e-12)
+t('coherent 111 omitted SO Kramers double pairs',np.max(abs(vals[0::2]-vals[1::2]))<1e-12)
+t('coherent 111 omitted SO norm about 1.28 meV',1.27<normmev<1.29)
+
 print(json.dumps({'checks':len(tests),'all_passed':True,
  'source':'Bahder PRB 46 9913 (1992) one-page erratum, corrected spin-orbit strain blocks only',
  'Gamma_basis':'Gamma8 (4) + Gamma7 (2), as published in erratum',
@@ -95,4 +108,6 @@ print(json.dumps({'checks':len(tests),'all_passed':True,
  'other_erratum_items_symbolically_checked':['eq30 valence a sign','eq16 R','eq42 hbar squared'],
  'same_basis_8band_assembly_and_original_source_fit':'OPEN',
  'full_Bahder_8band':'OPEN',
+ 'corrected_SO_norm_at_0p5pct_coherent_111_meV':normmev,
+ 'spectrum_stability':'Weyl <= operator norm IF assembled on same Hilbert basis; full original model OPEN',
  'tests':tests},indent=2))
