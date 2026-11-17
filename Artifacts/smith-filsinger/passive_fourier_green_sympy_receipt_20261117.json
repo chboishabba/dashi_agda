@@ -1,0 +1,42 @@
+{
+  "date": "2026-11-17",
+  "pr_number": 1524,
+  "formal_goal": "F13 passive absorbing 4x4 tangential Maxwell Schur Green + finite 2D periodic inverse Fourier/Parseval; F15 original-source fail-closed; D1 independent SymPy mathematical verification",
+  "source_owners": [
+    "scripts/smith_filsinger_passive_radiation_sympy.py",
+    "scripts/test_smith_filsinger_passive_radiation_sympy.py",
+    "scripts/smith_filsinger_periodic_fourier_green_sympy.py",
+    "scripts/test_smith_filsinger_periodic_fourier_green_sympy.py",
+    ".github/workflows/filsinger-sympy-exact.yml"
+  ],
+  "verification": {
+    "local_sympy_version": "1.14.0",
+    "local_pytest_version": "9.0.2",
+    "local_six_file_suite": "68/68 PASS",
+    "prior_four_files": 51,
+    "passive_absorbing_radiation_new": 10,
+    "finite_fourier_parseval_new": 7,
+    "exact_branch_ci_run": "NOT OBSERVED",
+    "pinned_agda29_kernel": "NOT RUN; no Agda/Nix in runtime",
+    "github_head_other_tests": "NOT RUN"
+  },
+  "mathematical_results": [
+    "Outgoing real-frequency passive complex epsilon root q with Re(q)>=0 Im(q)>=0, cutoff/active/uncertified rejection",
+    "Cayley finite slab: T†FT-F=d(I-dM/2)^-†(M†F+FM)(I-dM/2)^-1",
+    "absorbing isotropic dielectric epsilon=1+i/2 at omega=2 gives M†FM+FM=diag(-1,-1,0,0)",
+    "sheet-source work = outward radiation + strictly positive slab absorption in nontrivial test",
+    "zero source and evanescent lossless fields cannot be relabelled as useful replenished power",
+    "four-mode 2x2 periodic Fourier exact orthogonality, forward/inverse reconstruction",
+    "mode sum source work matches mean physical-grid work (Parseval); 4x wrong normalisation rejected"
+  ],
+  "physical_boundary": {
+    "F13_full_3d_retarded_dyadic": "OPEN",
+    "F13_continuous_transverse_fourier_inversion": "OPEN; four-mode periodic is a finite toy",
+    "F13_complex_frequency_analytic_causality": "OPEN",
+    "F13_source_geometry_terminal_calibration": "OPEN",
+    "F15_independently_metered_natural_source": "OPEN",
+    "F15_all_states_restored": "OPEN",
+    "D1_Agda_kernel": "OPEN"
+  },
+  "provenance": "Existing DASHI Green Maxwell source/port and cycle owners reused; user-origin direct Sun-Earth power hypothesis unverified. No ESD file modified."
+}
