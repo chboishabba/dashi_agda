@@ -114,8 +114,14 @@ def calculate(manifest: dict[str, Any], root: Path) -> dict[str, Any]:
     bounds: dict[str, tuple[Fraction, Fraction]] = {}
     for role in PORTS:
         entry = ports[role]
-        if not isinstance(entry, dict) or set(entry) != {"file", "sha256", "clock_id"}:
-            raise ValueError(f"{role}: expected file, sha256 and clock_id")
+        if not isinstance(entry, dict) or set(entry) != {
+            "file", "sha256", "clock_id", "integration_error_bound_J",
+            "integration_error_certificate", "integration_error_certificate_sha256"
+        }:
+            raise ValueError(
+                f"{role}: expected file, sha256, clock_id and independently "
+                "traceable integration-error bound/certificate"
+            )
         if entry["clock_id"] != manifest["clock_id"]:
             raise ValueError(f"{role}: clock mismatch")
         path = _file(root, entry["file"])
@@ -124,12 +130,28 @@ def calculate(manifest: dict[str, Any], root: Path) -> dict[str, Any]:
             raise ValueError(f"{role}: wrong SHA256, duplicate file, or duplicate evidence bytes")
         seen_paths.add(path)
         seen_hashes.add(sha)
+        # The finite grid does not bound the real between-sample energy:
+        # high-frequency V/I switching could evade the sampled envelope.
+        # Require a separately archived bound, then widen the work interval.
+        remainder = fraction(entry["integration_error_bound_J"])
+        if remainder < 0:
+            raise ValueError(f"{role}: negative integration remainder radius")
+        remainder_file = _file(root, entry["integration_error_certificate"])
+        remainder_sha = hashlib.sha256(remainder_file.read_bytes()).hexdigest()
+        if (remainder_sha != entry["integration_error_certificate_sha256"]
+                or remainder_file in seen_paths or remainder_sha in seen_hashes):
+            raise ValueError(
+                f"{role}: invalid or reused integration-error certificate"
+            )
+        seen_paths.add(remainder_file)
+        seen_hashes.add(remainder_sha)
         t, p = parse_port(path)
         if grid is None:
             grid = t
         if t != grid:
             raise ValueError(f"{role}: nonidentical original time grid")
-        bounds[role] = integrate_trapezoid(t, p)
+        trap = integrate_trapezoid(t, p)
+        bounds[role] = (trap[0] - remainder, trap[1] + remainder)
     natural = minus_interval(bounds["natural_incident"], bounds["natural_outgoing"])
     controller = minus_interval(bounds["controller_incident"], bounds["controller_outgoing"])
     receiver = bounds["load_output"]
@@ -141,6 +163,7 @@ def calculate(manifest: dict[str, Any], root: Path) -> dict[str, Any]:
     return {
         "original_id": manifest["original_id"], "clock_id": manifest["clock_id"],
         "sample_count": len(grid), "integration_rule": manifest["integration_rule"],
+        "integration_remainder_certificate_required": True,
         "conditional_port_work": {role: serialize(v) for role, v in bounds.items()},
         "net_environmental_work": serialize(natural),
         "net_controller_work": serialize(controller),
@@ -152,7 +175,7 @@ def calculate(manifest: dict[str, Any], root: Path) -> dict[str, Any]:
         "reasons_not_acceptance": [
             "CSV numeric and calibration radii are not authenticated original SI measurements",
             "no independent source identification/replenishment certificate",
-            "no validated sub-sample waveform/bandwidth error",
+            "integration remainder bounds are supplied by external certificates, not independently validated by this reader",
             "no all-storage return, material/ionisation/thermal/radiation loss audit",
             "no proof of the original full-vector Maxwell-to-terminal port equality",
         ],
