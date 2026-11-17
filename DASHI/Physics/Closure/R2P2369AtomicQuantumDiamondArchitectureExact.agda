@@ -1,0 +1,981 @@
+module DASHI.Physics.Closure.R2P2369AtomicQuantumDiamondArchitectureExact where
+import DASHI.Physics.Closure.R2P227729PairOrbit365CanonicalSymmetryExact as Pair365
+import DASHI.Physics.Closure.R2P227729FourierObserverIncidenceExact as Pairs365Owner
+
+open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.String using (String)
+
+import DASHI.Physics.Closure.R2P2MountainOpticalClockComparisonExact as R2P2
+import DASHI.Physics.Closure.R2P2369WaveOpticalCombInformationCutExact as WaveCut
+import DASHI.Foundations.Base369WaveContinuousSymbolicCodingExact as SymbolicR2P2
+import DASHI.Core.IndexedRelationalHyperfabricSpineExact as CoreR2P2
+import Data.Empty as EmptyR2P2
+import DASHI.Physics.Closure.R2P2ClockBiasIdentifiabilityMaxCutExact as Bias
+import DASHI.Physics.Closure.R2P2ThreeClockLoopClosure369Exact as Loop
+import DASHI.Physics.Closure.R2P2OpticalLattice369HamiltonianCutExact as Lattice
+import DASHI.Physics.Closure.R2P2ThreeModeBinaryTernaryNSAliasingCutExact as ModeCut
+import DASHI.Physics.Closure.R2P227729FiniteQuadraticConvolutionExact as FiniteConv
+import DASHI.Physics.Closure.R2P227729BilinearCyclotomicPadCutExact as BilinearPareto
+import DASHI.Foundations.BalancedTernaryAntipodalOrbitExact as Orbit729Owner
+import DASHI.Physics.Closure.R2P227729HermitianThirteenPairFourierCodecExact as Hermitian729
+import DASHI.Physics.Closure.R2P227729HermitianConvolutionTransportExact as HermitianConv729
+import DASHI.Physics.Closure.R2P281PlaneHermitianFiveOrbitConvolutionExact as HermitianPlane81
+import DASHI.Physics.Closure.R2P2C4C5NyquistAntipodalFixedPointExact as Nyquist729
+import DASHI.Physics.Closure.R2P227729AntipodalThirteenFiveOrbitFourierCutExact as Antipodal729
+import DASHI.Physics.Closure.R2P227729FourGridRetainedQuadraticParetoExact as FourPareto
+import DASHI.Physics.Closure.R2P227729ExistingC3FourierConvolutionReuseExact as C3Fourier
+import DASHI.Biology.Physical.C3CubeCyclotomicFourierExact as FourierOwner
+import DASHI.Physics.Closure.R2P227729PairSixTritFibreBidiExact as SixTritPairs
+import DASHI.Physics.Closure.R2P227729FourierObserverIncidenceExact as ModePairs
+import DASHI.ComputerScience.BinaryThreeBitTwoTritAntipodalCodecExact as BlockBitsR2P2
+import DASHI.ComputerScience.BinaryThreeBitTrit27FibreLiftExact as Codec27R2P2
+import DASHI.Physics.Closure.QuantumClockProperTimeRedshiftBridge as Redshift
+import DASHI.Physics.Closure.AtomicClockSISecondCalibrationBridge as SI
+import DASHI.Physics.Closure.QuantumClockSuperpositionReceipt as Superposition
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369GenerativeExact as Atomic
+import DASHI.Core.SuperSSP369Field as Field369
+import DASHI.Foundations.Base369BinaryTernaryRefinement as Refine
+import DASHI.Foundations.Base369PolyphaseCharacters as C3
+import DASHI.Physics.Closure.Base369PolyphaseKernelBoundary as Kernel
+import DASHI.Geometry.FiniteCausalDiamond as Diamond
+import DASHI.Algebra.Quantum.QutritWeyl as Qutrit
+import DASHI.Physics.Optics.OpticalPhenomenaKernelBridge as Optics
+
+------------------------------------------------------------------------
+-- O: Model the full *logical* pipeline from atomic species to gravity
+--    comparison, using existing 369 and diamond constructors.
+-- R: Reuse owners; never identify a 3-state classical index with Yb atom
+--    physics, 369 field with an actual EM field, or finite causal poset with
+--    a measured Lorentz metric. Neither constructor produces a device.
+-- C: Construct indexed stages, model fields, exact finite refinement,
+--    source identities, and documented conditional data dependencies.
+-- S: Keep physical hardware, calibration, link reciprocity, geopotential,
+--    measured frequency ratios and QG discrimination external.
+-- P: Theorems below are definitional finite model statements only.
+-- G: Einstein, Hall/Haensch/Diddams, R2P2 collaboration and earlier DASHI
+--    module and PR owners retain priority.
+-- F: This file must be Agda-kernel-checked before calling it verified.
+------------------------------------------------------------------------
+
+data PipelineStage : Set where
+  sourceAndStandards : PipelineStage
+  atomicIdentity : PipelineStage
+  coolingAndTrap : PipelineStage
+  opticalInterrogation : PipelineStage
+  frequencyCombReadout : PipelineStage
+  hybridPhaseTransfer : PipelineStage
+  geopotentialComparison : PipelineStage
+  uncertaintyAnalysis : PipelineStage
+  gravityDecision : PipelineStage
+
+data StageStep : PipelineStage → PipelineStage → Set where
+  standardsToAtomic : StageStep sourceAndStandards atomicIdentity
+  atomicToPreparation : StageStep atomicIdentity coolingAndTrap
+  preparationToInterrogation : StageStep coolingAndTrap opticalInterrogation
+  interrogationToComb : StageStep opticalInterrogation frequencyCombReadout
+  combToTransfer : StageStep frequencyCombReadout hybridPhaseTransfer
+  transferToGeopotential : StageStep hybridPhaseTransfer geopotentialComparison
+  geopotentialToUncertainty : StageStep geopotentialComparison uncertaintyAnalysis
+  uncertaintyToDecision : StageStep uncertaintyAnalysis gravityDecision
+
+record ClockPipelinePath : Set where
+  field
+    stage1 : StageStep sourceAndStandards atomicIdentity
+    stage2 : StageStep atomicIdentity coolingAndTrap
+    stage3 : StageStep coolingAndTrap opticalInterrogation
+    stage4 : StageStep opticalInterrogation frequencyCombReadout
+    stage5 : StageStep frequencyCombReadout hybridPhaseTransfer
+    stage6 : StageStep hybridPhaseTransfer geopotentialComparison
+    stage7 : StageStep geopotentialComparison uncertaintyAnalysis
+    stage8 : StageStep uncertaintyAnalysis gravityDecision
+
+canonicalClockPipelinePath : ClockPipelinePath
+canonicalClockPipelinePath = record
+  { stage1 = standardsToAtomic
+  ; stage2 = atomicToPreparation
+  ; stage3 = preparationToInterrogation
+  ; stage4 = interrogationToComb
+  ; stage5 = combToTransfer
+  ; stage6 = transferToGeopotential
+  ; stage7 = geopotentialToUncertainty
+  ; stage8 = uncertaintyToDecision
+  }
+
+------------------------------------------------------------------------
+-- Selected *isotope model* identities, not two verified instrument records.
+-- Video gives 171Yb for the atomic lattice-clock explanation, while the
+-- APS R2P2 abstract only states neutral ytterbium without isotope IDs.
+-- 171Yb: atomic Z=70, N=101. Cs133: Z=55, N=78.
+-- Neither isotope selection nor neutrality derives an optical transition.
+------------------------------------------------------------------------
+
+record AtomicClockIdentities : Set where
+  field
+    mountainYb171 : Atomic.AtomicIndex
+    mountainIsYb171 : mountainYb171 ≡ Atomic.neutralAt 70 101
+    mountainNeutral : Atomic.Neutral mountainYb171
+
+    boulderYb171 : Atomic.AtomicIndex
+    boulderIsYb171 : boulderYb171 ≡ Atomic.neutralAt 70 101
+    boulderNeutral : Atomic.Neutral boulderYb171
+
+    siCs133 : Atomic.AtomicIndex
+    cesiumIs133 : siCs133 ≡ Atomic.neutralAt 55 78
+    cesiumNeutral : Atomic.Neutral siCs133
+
+    cesiumSecond : SI.Cs133SISecondAnchor
+    cesiumSecondCanonical :
+      cesiumSecond ≡ SI.canonicalCs133SISecondAnchor
+
+    bothR2P2IsotopesIndependentlyVerifiedFromAPS : Bool
+    bothIsotopesNotVerifiedByAPS :
+      bothR2P2IsotopesIndependentlyVerifiedFromAPS ≡ false
+
+    isotopeIdentityDerivesOpticalTransition : Bool
+    isotopeIdentityDoesNotDeriveOpticalTransition :
+      isotopeIdentityDerivesOpticalTransition ≡ false
+
+open AtomicClockIdentities public
+
+canonicalAtomicClockIdentities : AtomicClockIdentities
+canonicalAtomicClockIdentities = record
+  { mountainYb171 = Atomic.neutralAt 70 101
+  ; mountainIsYb171 = refl
+  ; mountainNeutral = Atomic.neutralAtIsNeutral 70 101
+  ; boulderYb171 = Atomic.neutralAt 70 101
+  ; boulderIsYb171 = refl
+  ; boulderNeutral = Atomic.neutralAtIsNeutral 70 101
+  ; siCs133 = Atomic.neutralAt 55 78
+  ; cesiumIs133 = refl
+  ; cesiumNeutral = Atomic.neutralAtIsNeutral 55 78
+  ; cesiumSecond = SI.canonicalCs133SISecondAnchor
+  ; cesiumSecondCanonical = refl
+  ; bothR2P2IsotopesIndependentlyVerifiedFromAPS = false
+  ; bothIsotopesNotVerifiedByAPS = refl
+  ; isotopeIdentityDerivesOpticalTransition = false
+  ; isotopeIdentityDoesNotDeriveOpticalTransition = refl
+  }
+
+canonicalMountainClockIsNeutral :
+  Atomic.Neutral (mountainYb171 canonicalAtomicClockIdentities)
+canonicalMountainClockIsNeutral =
+  mountainNeutral canonicalAtomicClockIdentities
+
+canonicalCs133RemainsDefiningReference :
+  cesiumSecond canonicalAtomicClockIdentities ≡ SI.canonicalCs133SISecondAnchor
+canonicalCs133RemainsDefiningReference = refl
+
+------------------------------------------------------------------------
+-- 369 constructs are typed *observation indices*. They carry neither
+-- calibrated atomic Hamiltonian nor physical field strengths. In particular,
+-- a C3 qutrit phase is not a Yb-171 spectroscopy frequency.
+------------------------------------------------------------------------
+
+data ObservationKind : Set where
+  atomicStateIndex : ObservationKind
+  opticalPhaseIndex : ObservationKind
+  spacetimeIndex : ObservationKind
+  evidenceIndex : ObservationKind
+
+record Indexed369Observation (depth : Nat) : Set where
+  field
+    kind : ObservationKind
+    indexField : Field369.SuperSSP369Field depth
+    physicalFieldStrengthDerived : Bool
+    noPhysicalFieldStrengthDerived :
+      physicalFieldStrengthDerived ≡ false
+
+open Indexed369Observation public
+
+rootAtomicIndex : Indexed369Observation zero
+rootAtomicIndex = record
+  { kind = atomicStateIndex
+  ; indexField = Field369.rootField
+  ; physicalFieldStrengthDerived = false
+  ; noPhysicalFieldStrengthDerived = refl
+  }
+
+fineOpticalIndex : Indexed369Observation (suc (suc (suc zero)))
+fineOpticalIndex = record
+  { kind = opticalPhaseIndex
+  ; indexField = Field369.depth3Field
+  ; physicalFieldStrengthDerived = false
+  ; noPhysicalFieldStrengthDerived = refl
+  }
+
+rootGravityIndex : Indexed369Observation zero
+rootGravityIndex = record
+  { kind = spacetimeIndex
+  ; indexField = Field369.rootField
+  ; physicalFieldStrengthDerived = false
+  ; noPhysicalFieldStrengthDerived = refl
+  }
+
+fineEvidenceIndex : Indexed369Observation (suc (suc (suc zero)))
+fineEvidenceIndex = record
+  { kind = evidenceIndex
+  ; indexField = Field369.depth3Field
+  ; physicalFieldStrengthDerived = false
+  ; noPhysicalFieldStrengthDerived = refl
+  }
+
+------------------------------------------------------------------------
+-- Exact 3->6/9->18 refinement square, reused from the existing module.
+-- The graph labels resolve bookkeeping; they do NOT split optical Hz into
+-- preferred three/six/nine physical states.
+------------------------------------------------------------------------
+
+record R2P2ResolutionDiamond : Set where
+  field
+    three : Refine.Resolution23
+    six : Refine.Resolution23
+    nine : Refine.Resolution23
+    eighteen : Refine.Resolution23
+
+    threeCanonical : three ≡ Refine.phase3Resolution
+    sixCanonical : six ≡ Refine.phase6Resolution
+    nineCanonical : nine ≡ Refine.phase9Resolution
+    eighteenCanonical : eighteen ≡ Refine.phase18Resolution
+
+    viaSix : Refine.ternaryRefine six ≡ eighteen
+    viaNine : Refine.binaryRefine nine ≡ eighteen
+    refinementCommutes :
+      Refine.binaryRefine (Refine.ternaryRefine three)
+      ≡ Refine.ternaryRefine (Refine.binaryRefine three)
+
+open R2P2ResolutionDiamond public
+
+canonicalR2P2ResolutionDiamond : R2P2ResolutionDiamond
+canonicalR2P2ResolutionDiamond = record
+  { three = Refine.phase3Resolution
+  ; six = Refine.phase6Resolution
+  ; nine = Refine.phase9Resolution
+  ; eighteen = Refine.phase18Resolution
+  ; threeCanonical = refl
+  ; sixCanonical = refl
+  ; nineCanonical = refl
+  ; eighteenCanonical = refl
+  ; viaSix = Refine.phase6-ternary-refines-to-phase18
+  ; viaNine = Refine.phase9-binary-refines-to-phase18
+  ; refinementCommutes =
+      Refine.binary-ternary-refinement-commutes Refine.phase3Resolution
+  }
+
+resolutionDiamondAgrees :
+  Refine.binaryRefine (Refine.ternaryRefine Refine.phase3Resolution)
+  ≡ Refine.ternaryRefine (Refine.binaryRefine Refine.phase3Resolution)
+resolutionDiamondAgrees =
+  refinementCommutes canonicalR2P2ResolutionDiamond
+
+------------------------------------------------------------------------
+-- This causal diamond has five *abstract* events. Its three spatial labels
+-- are not three measured clock paths or evidence of 3+1 physical geometry.
+------------------------------------------------------------------------
+
+record R2P2FiniteCausalModel : Set where
+  field
+    finiteChain : Diamond.Chain Diamond.past Diamond.future
+    chainDepthTwo :
+      Diamond.chainDepth Diamond.past Diamond.future ≡ 2
+    antichainWidthThree :
+      Diamond.antichainWidth Diamond.past Diamond.future ≡ 3
+    rotatedChainDepth :
+      Diamond.chainDepth
+        (Diamond.transportEvent Diamond.rotateXYZ Diamond.past)
+        (Diamond.transportEvent Diamond.rotateXYZ Diamond.future)
+      ≡ Diamond.chainDepth Diamond.past Diamond.future
+    physicalLorentzMetricMeasuredByDiamond : Bool
+    physicalLorentzMetricMeasuredByDiamondIsFalse :
+      physicalLorentzMetricMeasuredByDiamond ≡ false
+
+open R2P2FiniteCausalModel public
+
+canonicalR2P2FiniteCausalModel : R2P2FiniteCausalModel
+canonicalR2P2FiniteCausalModel = record
+  { finiteChain = Diamond.chain-via-x
+  ; chainDepthTwo = refl
+  ; antichainWidthThree = refl
+  ; rotatedChainDepth =
+      Diamond.chainDepthInvariant Diamond.rotateXYZ Diamond.past Diamond.future
+  ; physicalLorentzMetricMeasuredByDiamond = false
+  ; physicalLorentzMetricMeasuredByDiamondIsFalse = refl
+  }
+
+------------------------------------------------------------------------
+-- Finite qutrit and C3 character structures are existing mathematical
+-- test models. They do not assert coherent Yb qutrit control in R2P2.
+------------------------------------------------------------------------
+
+record R2P2PhaseIndex : Set where
+  field
+    finiteQutrit : Qutrit.FiniteQutritWeylCertificate
+    qutritIsCanonical :
+      finiteQutrit ≡ Qutrit.canonicalFiniteQutritWeylCertificate
+    c3Mode : C3.C3CharacterReceipt
+    c3ModeIsCanonical : c3Mode ≡ C3.positiveSequenceReceipt
+    c3Kernel : Kernel.C3KernelModeReceipt
+    c3KernelIsCanonical :
+      c3Kernel ≡ Kernel.positiveSequenceKernelReceipt
+    physicalOpticalPhaseReadoutDerived : Bool
+    noPhysicalOpticalPhaseReadoutDerived :
+      physicalOpticalPhaseReadoutDerived ≡ false
+
+open R2P2PhaseIndex public
+
+canonicalR2P2PhaseIndex : R2P2PhaseIndex
+canonicalR2P2PhaseIndex = record
+  { finiteQutrit = Qutrit.canonicalFiniteQutritWeylCertificate
+  ; qutritIsCanonical = refl
+  ; c3Mode = C3.positiveSequenceReceipt
+  ; c3ModeIsCanonical = refl
+  ; c3Kernel = Kernel.positiveSequenceKernelReceipt
+  ; c3KernelIsCanonical = refl
+  ; physicalOpticalPhaseReadoutDerived = false
+  ; noPhysicalOpticalPhaseReadoutDerived = refl
+  }
+
+------------------------------------------------------------------------
+-- A separate finite quantum-proper-time *candidate* is inherited from an
+-- optical-ion-clock source lane. R2P2 neutral-Yb redshift comparison does NOT
+-- thereby implement proper-time superposition/interferometry. Physically
+-- testing quantumness of gravity needs distinct protocols and observables.
+------------------------------------------------------------------------
+
+record QuantumProperTimeComparatorBoundary : Set where
+  field
+    sourceQuantumModel : Superposition.QuantumClockSuperpositionReceipt
+    sourceQuantumModelIsCanonical :
+      sourceQuantumModel ≡ Superposition.canonicalQuantumClockSuperpositionReceipt
+    r2p2ImplementsQuantumProperTimeSuperposition : Bool
+    implementationNotEstablished :
+      r2p2ImplementsQuantumProperTimeSuperposition ≡ false
+    classicalRedshiftImpliesQuantumGravity : Bool
+    noQuantumGravityConsequence :
+      classicalRedshiftImpliesQuantumGravity ≡ false
+
+open QuantumProperTimeComparatorBoundary public
+
+canonicalQuantumProperTimeComparatorBoundary :
+  QuantumProperTimeComparatorBoundary
+canonicalQuantumProperTimeComparatorBoundary = record
+  { sourceQuantumModel = Superposition.canonicalQuantumClockSuperpositionReceipt
+  ; sourceQuantumModelIsCanonical = refl
+  ; r2p2ImplementsQuantumProperTimeSuperposition = false
+  ; implementationNotEstablished = refl
+  ; classicalRedshiftImpliesQuantumGravity = false
+  ; noQuantumGravityConsequence = refl
+  }
+
+------------------------------------------------------------------------
+-- Optical transfer is explicitly a two-medium, two-way requirement, not an
+-- assertion that the link has calibrated reciprocity or a full residual.
+------------------------------------------------------------------------
+
+data TransferMedium : Set where
+  atmosphericFreeSpace : TransferMedium
+  opticalFibre : TransferMedium
+
+data TransferDirection : Set where
+  peakToPlains : TransferDirection
+  plainsToPeak : TransferDirection
+
+record OpticalTransferLeg : Set where
+  field
+    medium : TransferMedium
+    direction : TransferDirection
+    nominalLengthKm : Nat
+    reciprocityCalibrated : Bool
+    reciprocityCalibratedIsFalse : reciprocityCalibrated ≡ false
+
+open OpticalTransferLeg public
+
+uncalibratedTransferLeg :
+  TransferMedium → TransferDirection → Nat → OpticalTransferLeg
+uncalibratedTransferLeg path direction length = record
+  { medium = path
+  ; direction = direction
+  ; nominalLengthKm = length
+  ; reciprocityCalibrated = false
+  ; reciprocityCalibratedIsFalse = refl
+  }
+
+-- Four *required* directional contacts, not independently checked links.
+-- The APS abstract reports two physical media and full-network shakedown.
+-- The video describes optical transfer in both directions, without
+-- providing calibrations for each individual directional path.
+requiredDirectionalTransferLegs : List OpticalTransferLeg
+requiredDirectionalTransferLegs =
+  uncalibratedTransferLeg atmosphericFreeSpace peakToPlains 69
+  ∷ uncalibratedTransferLeg atmosphericFreeSpace plainsToPeak 69
+  ∷ uncalibratedTransferLeg opticalFibre peakToPlains 81
+  ∷ uncalibratedTransferLeg opticalFibre plainsToPeak 81
+  ∷ []
+
+record R2P2OpticalPhysicsBoundary : Set where
+  field
+    requiredFourDirectionalLegs : List OpticalTransferLeg
+    requiredFourDirectionalLegsAreDeclared :
+      requiredFourDirectionalLegs ≡ requiredDirectionalTransferLegs
+    vacuumLaw : Optics.KernelLawBridge
+    vacuumLawCanonical : vacuumLaw ≡ Optics.maxwellPhaseTransport
+    reportedNetwork : R2P2.R2P2PrimarySource
+    reportedNetworkIsCanonical :
+      reportedNetwork ≡ R2P2.canonicalR2P2PrimarySource
+    aboveToothSynthetic : R2P2.AboveCombTooth
+    aboveToothIsFiniteExample :
+      aboveToothSynthetic ≡ R2P2.exampleAboveCombTooth
+    belowToothSynthetic : R2P2.BelowCombTooth
+    belowToothIsFiniteExample :
+      belowToothSynthetic ≡ R2P2.exampleBelowCombTooth
+    twoWayTransferCalibrationDerived : Bool
+    noTwoWayTransferCalibrationDerived :
+      twoWayTransferCalibrationDerived ≡ false
+
+open R2P2OpticalPhysicsBoundary public
+
+canonicalR2P2OpticalPhysicsBoundary : R2P2OpticalPhysicsBoundary
+canonicalR2P2OpticalPhysicsBoundary = record
+  { requiredFourDirectionalLegs = requiredDirectionalTransferLegs
+  ; requiredFourDirectionalLegsAreDeclared = refl
+  ; vacuumLaw = Optics.maxwellPhaseTransport
+  ; vacuumLawCanonical = refl
+  ; reportedNetwork = R2P2.canonicalR2P2PrimarySource
+  ; reportedNetworkIsCanonical = refl
+  ; aboveToothSynthetic = R2P2.exampleAboveCombTooth
+  ; aboveToothIsFiniteExample = refl
+  ; belowToothSynthetic = R2P2.exampleBelowCombTooth
+  ; belowToothIsFiniteExample = refl
+  ; twoWayTransferCalibrationDerived = false
+  ; noTwoWayTransferCalibrationDerived = refl
+  }
+
+------------------------------------------------------------------------
+-- Convergence of the actual repository owners at a typed architecture.
+-- Every external evidence item remains a request. This is not a device
+-- construction or a proof of Einstein's equations.
+------------------------------------------------------------------------
+
+record R2P2369FullLogicalArchitecture : Set where
+  field
+    video : R2P2.Veritasium2026Source
+    videoCanonical : video ≡ R2P2.canonicalVeritasium2026Source
+    sourceBoundary : R2P2.R2P2ClockComparisonBoundary
+    sourceBoundaryCanonical :
+      sourceBoundary ≡ R2P2.canonicalR2P2ClockComparisonBoundary
+    biasIdentifiability : Bias.R2P2BiasIdentifiabilityMaxCut
+    biasIdentifiabilityCanonical :
+      biasIdentifiability ≡ Bias.canonicalR2P2BiasIdentifiabilityMaxCut
+    loopAudit : Loop.ThreeClockLoopSourceBoundary
+    loopAuditCanonical : loopAudit ≡ Loop.canonicalThreeClockLoopSourceBoundary
+    workflow : ClockPipelinePath
+    workflowCanonical : workflow ≡ canonicalClockPipelinePath
+    atoms : AtomicClockIdentities
+    atomsCanonical : atoms ≡ canonicalAtomicClockIdentities
+    lattice : Lattice.OpticalLattice369PhysicalAuthority
+    latticeCanonical :
+      lattice ≡ Lattice.canonicalOpticalLattice369PhysicalAuthority
+    modeAliasingCut : ModeCut.ThreeModeCodecNSAuthority
+    modeAliasingCutCanonical :
+      modeAliasingCut ≡ ModeCut.canonicalThreeModeCodecNSAuthority
+    indexedAtomic : Indexed369Observation zero
+    indexedAtomicCanonical : indexedAtomic ≡ rootAtomicIndex
+    indexedOptical : Indexed369Observation (suc (suc (suc zero)))
+    indexedOpticalCanonical : indexedOptical ≡ fineOpticalIndex
+    indexedGravity : Indexed369Observation zero
+    indexedGravityCanonical : indexedGravity ≡ rootGravityIndex
+    indexedEvidence : Indexed369Observation (suc (suc (suc zero)))
+    indexedEvidenceCanonical : indexedEvidence ≡ fineEvidenceIndex
+    refinement : R2P2ResolutionDiamond
+    refinementCanonical : refinement ≡ canonicalR2P2ResolutionDiamond
+    causal : R2P2FiniteCausalModel
+    causalCanonical : causal ≡ canonicalR2P2FiniteCausalModel
+    phase : R2P2PhaseIndex
+    phaseCanonical : phase ≡ canonicalR2P2PhaseIndex
+    signedBeatWaveCut : WaveCut.WaveCombAuthorityBoundary
+    signedBeatWaveCutCanonical :
+      signedBeatWaveCut ≡ WaveCut.canonicalWaveCombAuthorityBoundary
+    quantumProperTimeComparator : QuantumProperTimeComparatorBoundary
+    comparatorCanonical :
+      quantumProperTimeComparator ≡ canonicalQuantumProperTimeComparatorBoundary
+    optical : R2P2OpticalPhysicsBoundary
+    opticalCanonical : optical ≡ canonicalR2P2OpticalPhysicsBoundary
+    properTime : Redshift.QuantumClockProperTimeRedshiftBridge
+    properTimeCanonical :
+      properTime ≡ Redshift.canonicalQuantumClockProperTimeRedshiftBridge
+    externalMeasurementsIngested : Bool
+    measurementsNotIngested :
+      externalMeasurementsIngested ≡ false
+    fullGRDeviationProved : Bool
+    noGRDeviationProof : fullGRDeviationProved ≡ false
+    fullQGClaimProved : Bool
+    noQGProof : fullQGClaimProved ≡ false
+    pendingPhysicalConstruction : List String
+
+open R2P2369FullLogicalArchitecture public
+
+canonicalR2P2369FullLogicalArchitecture : R2P2369FullLogicalArchitecture
+canonicalR2P2369FullLogicalArchitecture = record
+  { video = R2P2.canonicalVeritasium2026Source
+  ; videoCanonical = refl
+  ; sourceBoundary = R2P2.canonicalR2P2ClockComparisonBoundary
+  ; sourceBoundaryCanonical = refl
+  ; biasIdentifiability = Bias.canonicalR2P2BiasIdentifiabilityMaxCut
+  ; biasIdentifiabilityCanonical = refl
+  ; loopAudit = Loop.canonicalThreeClockLoopSourceBoundary
+  ; loopAuditCanonical = refl
+  ; workflow = canonicalClockPipelinePath
+  ; workflowCanonical = refl
+  ; atoms = canonicalAtomicClockIdentities
+  ; atomsCanonical = refl
+  ; lattice = Lattice.canonicalOpticalLattice369PhysicalAuthority
+  ; latticeCanonical = refl
+  ; modeAliasingCut = ModeCut.canonicalThreeModeCodecNSAuthority
+  ; modeAliasingCutCanonical = refl
+  ; indexedAtomic = rootAtomicIndex
+  ; indexedAtomicCanonical = refl
+  ; indexedOptical = fineOpticalIndex
+  ; indexedOpticalCanonical = refl
+  ; indexedGravity = rootGravityIndex
+  ; indexedGravityCanonical = refl
+  ; indexedEvidence = fineEvidenceIndex
+  ; indexedEvidenceCanonical = refl
+  ; refinement = canonicalR2P2ResolutionDiamond
+  ; refinementCanonical = refl
+  ; causal = canonicalR2P2FiniteCausalModel
+  ; causalCanonical = refl
+  ; phase = canonicalR2P2PhaseIndex
+  ; phaseCanonical = refl
+  ; signedBeatWaveCut = WaveCut.canonicalWaveCombAuthorityBoundary
+  ; signedBeatWaveCutCanonical = refl
+  ; quantumProperTimeComparator = canonicalQuantumProperTimeComparatorBoundary
+  ; comparatorCanonical = refl
+  ; optical = canonicalR2P2OpticalPhysicsBoundary
+  ; opticalCanonical = refl
+  ; properTime = Redshift.canonicalQuantumClockProperTimeRedshiftBridge
+  ; properTimeCanonical = refl
+  ; externalMeasurementsIngested = false
+  ; measurementsNotIngested = refl
+  ; fullGRDeviationProved = false
+  ; noGRDeviationProof = refl
+  ; fullQGClaimProved = false
+  ; noQGProof = refl
+  ; pendingPhysicalConstruction =
+      "R2P2 neutral-Yb isotope/transition identity must be verified before specific cooling, lattice trapping and interrogation calibration"
+      ∷ "two independent optical clocks: systematic shifts, line-shape fits and traceable SI ratios"
+      ∷ "comb f_rep and f_CEO, tooth index, signed beat, cycle slips and phase detector"
+      ∷ "bidirectional 69 km atmospheric and 81 km fibre link calibration and clocks"
+      ∷ "surveyed local geopotential including tides, geodetic datums and worldline convention"
+      ∷ "raw time series, uncertainty covariance, fitted fractional shift, blinded comparator and independent replay"
+      ∷ "new-physics discriminant beyond a redshift agreement test, if separately justified"
+      ∷ []
+  }
+
+finiteRefinementConverges :
+  refinementCommutes
+    (refinement canonicalR2P2369FullLogicalArchitecture)
+  ≡ Refine.binary-ternary-refinement-commutes Refine.phase3Resolution
+finiteRefinementConverges = refl
+
+fullArchitectureDoesNotProveEinsteinWrong :
+  fullGRDeviationProved canonicalR2P2369FullLogicalArchitecture ≡ false
+fullArchitectureDoesNotProveEinsteinWrong =
+  noGRDeviationProof canonicalR2P2369FullLogicalArchitecture
+
+fullArchitectureDoesNotConstructQuantumGravity :
+  fullQGClaimProved canonicalR2P2369FullLogicalArchitecture ≡ false
+fullArchitectureDoesNotConstructQuantumGravity =
+  noQGProof canonicalR2P2369FullLogicalArchitecture
+
+fullArchitectureDoesNotIngestMeasurements :
+  externalMeasurementsIngested canonicalR2P2369FullLogicalArchitecture ≡ false
+fullArchitectureDoesNotIngestMeasurements =
+  measurementsNotIngested canonicalR2P2369FullLogicalArchitecture
+
+-- A single synthetic height does not identify a slope independently of a
+-- nuisance bias. Two selected finite heights separate this candidate pair.
+fullArchitectureReusesBiasAmbiguity :
+  Bias.syntheticRate Bias.baselineWithLargeBias 3
+  ≡ Bias.syntheticRate Bias.doubledSlopeWithSmallBias 3
+fullArchitectureReusesBiasAmbiguity =
+  Bias.oneHeightCannotDiscriminate
+
+fullArchitectureReusesSecondHeightDiscriminator :
+  Bias.syntheticRate Bias.baselineWithLargeBias 9
+  ≡ Bias.syntheticRate Bias.doubledSlopeWithSmallBias 9 → Bias.⊥
+fullArchitectureReusesSecondHeightDiscriminator =
+  Bias.secondHeightDiscriminatesTheseCandidates
+
+-- A third real clock was not introduced by the finite 369 loop construction.
+fullArchitectureHasNoObservedTriangle :
+  Loop.r2p2ThirdRealClockProvided
+    (loopAudit canonicalR2P2369FullLogicalArchitecture) ≡ false
+fullArchitectureHasNoObservedTriangle =
+  Loop.twoClockR2P2DoesNotSupplyTriangle
+
+fullArchitectureNoCurvatureFromLoopNull :
+  Loop.threeClockLoopNullImpliesCurvature
+    (loopAudit canonicalR2P2369FullLogicalArchitecture) ≡ false
+fullArchitectureNoCurvatureFromLoopNull =
+  Loop.threeClockLoopCannotClaimCurvature
+
+------------------------------------------------------------------------
+-- Existing 369/wave exact-state witness retained at the TOE root.
+-- No 3/6/9 trit rechart can recreate erased signed comb frequency.
+------------------------------------------------------------------------
+
+fullArchitectureRetainsSignedBeatInFibre :
+  (branch : WaveCut.BeatBranch) →
+  SymbolicR2P2.decode
+    (SymbolicR2P2.encode WaveCut.signedBeatWaveCoding branch) ≡ branch
+fullArchitectureRetainsSignedBeatInFibre =
+  WaveCut.signedBeatEncodeDecode
+
+fullArchitectureWaveTruncationCannotDetermineOpticalHz :
+  CoreR2P2.ConsumerSufficient
+    WaveCut.absoluteBeatOrientation WaveCut.branchOpticalHz → EmptyR2P2.⊥
+fullArchitectureWaveTruncationCannotDetermineOpticalHz =
+  WaveCut.absoluteBeatTritCannotRecoverOpticalHz
+
+fullArchitectureWaveCutIsNotPhaseCalibration :
+  WaveCut.c3ProvesOpticalCarrierPhaseCalibration
+    (signedBeatWaveCut canonicalR2P2369FullLogicalArchitecture) ≡ false
+fullArchitectureWaveCutIsNotPhaseCalibration =
+  WaveCut.waveBridgeDoesNotCalibratePhysicalPhase
+
+------------------------------------------------------------------------
+-- Source-distinct 369 atomic optical-lattice control and wave/comb model.
+-- A three-site noncommutation witness is NOT the irrational AA transition.
+------------------------------------------------------------------------
+
+fullArchitectureFiniteLatticeHoppingDoesNotCommuteWithSitePotential :
+  Lattice.nearestNeighbourAdjacency
+    (Lattice.siteDependentPotential Lattice.leftBasisState)
+    ≡
+  Lattice.siteDependentPotential
+    (Lattice.nearestNeighbourAdjacency Lattice.leftBasisState)
+    →
+  EmptyR2P2.⊥
+fullArchitectureFiniteLatticeHoppingDoesNotCommuteWithSitePotential =
+  Lattice.finiteLatticeOperatorsFailToCommute
+
+fullArchitectureLatticeIsNotInfiniteAAProof :
+  Lattice.finiteP3ProvesInfiniteAAThreshold
+    (lattice canonicalR2P2369FullLogicalArchitecture) ≡ false
+fullArchitectureLatticeIsNotInfiniteAAProof =
+  Lattice.latticeCannotProveInfiniteAAThreshold
+
+fullArchitectureDoesNotIdentifyMaStrontiumWithR2P2Ytterbium :
+  Lattice.maBichromaticSr87 ≡ Lattice.trianaMountainYb → EmptyR2P2.⊥
+fullArchitectureDoesNotIdentifyMaStrontiumWithR2P2Ytterbium =
+  Lattice.maIsNotTheR2P2Clock
+
+-- The original Ma 18:11 supercell number and DASHI C18 phase count
+-- happen to match as Nat; no carrier/observable map is provided.
+fullArchitectureSupercell18NominalCrossProduct :
+  Lattice.maFirst813Periods * Lattice.nominal813Nm + 3
+  ≡ Lattice.maFirst497Periods * Lattice.nominal497Nm
+fullArchitectureSupercell18NominalCrossProduct =
+  Lattice.maFirstNominalSupercellOffset
+
+fullArchitectureSupercell18IsNotIdentifiedC18 :
+  Lattice.paperSupercell18EqualsPhysicalC18Realization
+    (lattice canonicalR2P2369FullLogicalArchitecture) ≡ false
+fullArchitectureSupercell18IsNotIdentifiedC18 =
+  Lattice.maSupercell18IsNotAnIdentifiedC18PhysicsRealization
+
+-- At Fourier indices -1,0,+1, Ma S6 offsets ±11, ±18 cannot couple
+-- distinct modes. The P3 site-graph toy is therefore not the S6 Fourier
+-- operator under a naive identity-of-three-modes identification.
+fullArchitectureMaS6ThreeModeHasNoSideband :
+  (a b : Lattice.ThreePlaneWaveMode) →
+  Lattice.MaS6Sideband (Lattice.modeSeparation a b) →
+  EmptyR2P2.⊥
+fullArchitectureMaS6ThreeModeHasNoSideband =
+  Lattice.noMaS6SidebandInThreeModeFourierTruncation
+
+------------------------------------------------------------------------
+-- Reused binary-in-ternary mode codec and NS exact Z^3 source owner.
+-- Lossless two-bit mode encoding is not lossless quadratic convolution.
+------------------------------------------------------------------------
+
+fullArchitectureExactPlusPlusVersusC3AliasedMinus :
+  ModeCut.exactQuadraticModeSum ModeCut.modePlus ModeCut.modePlus
+    ≡ ModeCut.widePlusTwo
+fullArchitectureExactPlusPlusVersusC3AliasedMinus =
+  ModeCut.positivePositiveLeavesThreeModeWindow
+
+fullArchitectureThreePointConvolutionAliasesOutput :
+  ModeCut.periodicQuadraticModeSum ModeCut.modePlus ModeCut.modePlus
+    ≡ ModeCut.modeMinus
+fullArchitectureThreePointConvolutionAliasesOutput =
+  ModeCut.positivePositiveAliasesToNegative
+
+fullArchitectureThreePointModeDoesNotRecoverIntegerLabel :
+  CoreR2P2.ConsumerSufficient ModeCut.periodicThreePointFold
+    (λ w → w) → EmptyR2P2.⊥
+fullArchitectureThreePointModeDoesNotRecoverIntegerLabel =
+  ModeCut.foldedThreePointModeCannotRecoverExactFourierIndex
+
+fullArchitectureDoesNotPromoteThreeModeToNSClay :
+  ModeCut.nsClayRegularityProved
+    (modeAliasingCut canonicalR2P2369FullLogicalArchitecture) ≡ false
+fullArchitectureDoesNotPromoteThreeModeToNSClay =
+  ModeCut.threeModeCodecIsNotAnNSProof
+
+-- Three signed Fourier labels per axis give a 27-site C3^3 INDEX cube.
+-- The original NS Fourier carrier is Z^3, and k=(2,0,0) does not vanish
+-- merely because its sampled 27-grid residue is (-1,0,0).
+fullArchitectureC3CubedAliasingIsNotNSZCubed :
+  ModeCut.threeAxisPeriodicallyAliasedPlusXSquare
+    ≡ ModeCut.threeAxisBalancedModeCube
+         ModeCut.modeMinus ModeCut.modeZero ModeCut.modeZero
+fullArchitectureC3CubedAliasingIsNotNSZCubed =
+  ModeCut.periodicThreeAxisPositiveXSquareWrapsToNegativeX
+
+fullArchitectureReusesThreeBitFramed27Payload :
+  (bits : BlockBitsR2P2.Bit3) →
+  Codec27R2P2.decodeBit3From27Payload
+    (Codec27R2P2.encodeBit3To27 bits) ≡ bits
+fullArchitectureReusesThreeBitFramed27Payload =
+  ModeCut.inheritedThreeBitToFramed27RoundTrip
+
+------------------------------------------------------------------------
+-- Strong finite 27×27 owner: mathematical Fourier mode-pair incidence.
+-- No new Monster/Heisenberg/GF729 action or physical NS solution.
+------------------------------------------------------------------------
+
+fullArchitecture343PairClassification :
+  ModePairs.countWhereL ModePairs.insidePair27 ModePairs.pair729 ≡ 343
+fullArchitecture343PairClassification =
+  ModePairs.exact343InWindowPairs
+
+fullArchitecture386PairClassification :
+  ModePairs.countWhereL (λ pair → ModePairs.notB (ModePairs.insidePair27 pair))
+    ModePairs.pair729 ≡ 386
+fullArchitecture386PairClassification =
+  ModePairs.exact386OutOfWindowPairs
+
+fullArchitecture27PairsSixTritRoundTrip :
+  (p : SixTritPairs.OrderedPair729) →
+  SixTritPairs.sixTritsToOrderedPair (SixTritPairs.orderedPairToSixTrits p)
+    ≡ p
+fullArchitecture27PairsSixTritRoundTrip =
+  SixTritPairs.sixTritsAfterOrderedPairRoundTrip
+
+fullArchitectureFinite27x27Convolution :
+  (amplitude : ModePairs.ModeCube27 → Nat) (target : FiniteConv.WideCube125) →
+  FiniteConv.fiveIndexRecoveredConvolutionAt amplitude target
+    ≡ FiniteConv.exactConvolutionAt amplitude target
+fullArchitectureFinite27x27Convolution =
+  FiniteConv.all729PairsFiveIndexRecoveryIsExact
+
+fullArchitectureFiniteConvolutionDoesNotEstablishNSRegularity :
+  ModeCut.nsClayRegularityProved
+    ModeCut.canonicalThreeModeCodecNSAuthority ≡ false
+fullArchitectureFiniteConvolutionDoesNotEstablishNSRegularity =
+  ModeCut.threeModeCodecIsNotAnNSProof
+
+------------------------------------------------------------------------
+-- ORIGINAL exact full C3^3 Fourier/inverse/Parseval/convolution owners.
+-- C3 cyclic convolution does NOT establish Z3 integer Galerkin identity.
+------------------------------------------------------------------------
+
+fullArchitectureReusesExactC3FourierInversion :
+  (f : C3Fourier.ModeCoefficient27) (mode : ModePairs.ModeCube27) →
+  C3Fourier.unpackModeSignal
+    (FourierOwner.inverseFourier27
+      (FourierOwner.fourier27 (C3Fourier.packModeSignal f))) mode
+    ≡ f mode
+fullArchitectureReusesExactC3FourierInversion =
+  C3Fourier.existingPeriodic27FourierRoundTrip
+
+fullArchitectureReusesExactC3PeriodicConvolution :
+  (f g : C3Fourier.ModeCoefficient27) (mode : ModePairs.ModeCube27) →
+  C3Fourier.periodicC3ConvolutionOfModeCoefficients f g mode
+    ≡ C3Fourier.spectralC3ConvolutionOfModeCoefficients f g mode
+fullArchitectureReusesExactC3PeriodicConvolution =
+  C3Fourier.periodic27DirectEqualsSpectralAtEveryMode
+
+-- Original generic non-factorability is instantiated to TWO real integer
+-- output labels sharing the same C3^3 residue. Exact periodic DFT inversion
+-- does not invent the lost Z3 high-frequency output.
+fullArchitectureCyclic27DoesNotRecoverExactWideIntegerMode :
+  CoreR2P2.ConsumerSufficient
+    FiniteConv.wideIntegerOutputToThreeResidues (λ w → w)
+    → EmptyR2P2.⊥
+fullArchitectureCyclic27DoesNotRecoverExactWideIntegerMode =
+  FiniteConv.noDecoderOfActualWideModeFromCyclic27
+
+------------------------------------------------------------------------
+-- Stronger operator-pair Pareto: arbitrary signed/cyclotomic amplitudes
+-- and two independent Fourier inputs, not only Nat self-convolutions.
+-- Four INDEX classes/axis recover retained, five recover full support.
+-- These are not actual sampled-field DFT4/DFT5/NS continuum theorems.
+------------------------------------------------------------------------
+
+fullArchitectureFourGridBilinearRetained :
+  (f g : ModePairs.ModeCube27 → FourierOwner.Cyclotomic3)
+  (target : ModePairs.ModeCube27) →
+  BilinearPareto.fourGridBilinearRetainedAt BilinearPareto.cyclotomicOps
+    f g target
+  ≡ BilinearPareto.trueBilinearConvolutionAt BilinearPareto.cyclotomicOps
+      f g (FiniteConv.retainedToWide target)
+fullArchitectureFourGridBilinearRetained =
+  BilinearPareto.cyclotomicFourGridRetainedBilinearExact
+
+fullArchitectureFiveGridBilinearFull :
+  (f g : ModePairs.ModeCube27 → FourierOwner.Cyclotomic3)
+  (target : FiniteConv.WideCube125) →
+  BilinearPareto.fiveGridBilinearFullAt BilinearPareto.cyclotomicOps
+    f g target
+  ≡ BilinearPareto.trueBilinearConvolutionAt BilinearPareto.cyclotomicOps
+      f g target
+fullArchitectureFiveGridBilinearFull =
+  BilinearPareto.cyclotomicFiveGridFullBilinearExact
+
+fullArchitectureFourOuterModeCollision :
+  FourPareto.foldFour ModeCut.wideMinusTwo
+    ≡ FourPareto.foldFour ModeCut.widePlusTwo
+fullArchitectureFourOuterModeCollision =
+  FourPareto.outerFrequencyCollisionAtFour
+
+
+------------------------------------------------------------------------
+-- Reuse source 13 nonzero antipodal pairs in 27 and 5 classes in 9.
+-- For REAL Fourier fields, one rational real centre + 13 Q(omega)
+-- conjugate pairs stores all 27 scalar real degrees of freedom.
+-- Raw orbit labels alone still cannot compute integer pair sums.
+------------------------------------------------------------------------
+
+fullArchitectureFiveNineAntipodalClasses :
+  Orbit729Owner.antipodalClass9Count ≡ 5
+fullArchitectureFiveNineAntipodalClasses =
+  Antipodal729.sourceFiveNineOrbitCount
+
+fullArchitectureThirteenPairsInTwentySeven :
+  27 ≡ 1 + 13 * 2
+fullArchitectureThirteenPairsInTwentySeven =
+  Antipodal729.sourceThirteenNonzeroPairs
+
+fullArchitectureNineClassToTwentySevenClass :
+  (plane : Antipodal729.Plane9) →
+  Antipodal729.antipodalClass27
+    (Antipodal729.plane9ToCube27 plane)
+    ≡ Antipodal729.planeOrbitClassToCubeOrbit
+        (Antipodal729.antipodalClass9 plane)
+fullArchitectureNineClassToTwentySevenClass =
+  Antipodal729.planeClassInclusionCommutes
+
+fullArchitectureHermitianThirteenPairRoundTrip :
+  (s : Hermitian729.Hermitian27)
+  (mode : ModePairs.ModeCube27) →
+  Hermitian729.packedMode (Hermitian729.packHermitian27 s) mode
+    ≡ Hermitian729.coefficient s mode
+fullArchitectureHermitianThirteenPairRoundTrip =
+  Hermitian729.decodeAfterEncodeHermitian27
+
+fullArchitectureHermitianFiveNineRoundTrip :
+  (s : Hermitian729.Hermitian9)
+  (plane : Antipodal729.Plane9) →
+  Hermitian729.packedPlane9 (Hermitian729.packHermitian9 s) plane
+    ≡ Hermitian729.coefficient9 s plane
+fullArchitectureHermitianFiveNineRoundTrip =
+  Hermitian729.decodeAfterEncodeHermitian9
+
+fullArchitectureTrueQuadraticPairNegation :
+  (p q : ModePairs.ModeCube27) →
+  FiniteConv.exactPairOutput
+    (Antipodal729.negateCube p) (Antipodal729.negateCube q)
+    ≡ Antipodal729.negateWideCube (FiniteConv.exactPairOutput p q)
+fullArchitectureTrueQuadraticPairNegation =
+  Antipodal729.trueIntegerQuadraticPairSumNegationEquivariance
+
+
+------------------------------------------------------------------------
+-- Lossless compact real-Fourier 13-pair storage transported through the
+-- actual full integer 729 bilinear convolution. We STILL decode for
+-- arithmetic: no 13-only fast algorithm, NS PDE/Clay, or Yb clock claim.
+------------------------------------------------------------------------
+
+fullArchitectureCompact13PairsPreserveExact125Convolution :
+  (a b : Hermitian729.Hermitian27)
+  (target : FiniteConv.WideCube125) →
+  HermitianConv729.compactFullBilinearAt
+    (Hermitian729.packHermitian27 a)
+    (Hermitian729.packHermitian27 b) target
+    ≡ HermitianConv729.originalFullBilinearAt a b target
+fullArchitectureCompact13PairsPreserveExact125Convolution =
+  HermitianConv729.compact13PairTransportPreservesAll125IntegerOutputs
+
+fullArchitectureCompact13PairsPreserveFourGridRetained :
+  (a b : Hermitian729.Hermitian27) (target : ModePairs.ModeCube27) →
+  HermitianConv729.compactFourGridRetainedAt
+    (Hermitian729.packHermitian27 a)
+    (Hermitian729.packHermitian27 b) target
+    ≡ HermitianConv729.originalFullBilinearAt a b
+        (FiniteConv.retainedToWide target)
+fullArchitectureCompact13PairsPreserveFourGridRetained =
+  HermitianConv729.compact13PairsPreserveFourGridRetainedQuadratic
+
+fullArchitectureCompact13PairsPreserveFiveGridFull :
+  (a b : Hermitian729.Hermitian27) (target : FiniteConv.WideCube125) →
+  HermitianConv729.compactFiveGridFullAt
+    (Hermitian729.packHermitian27 a)
+    (Hermitian729.packHermitian27 b) target
+    ≡ HermitianConv729.originalFullBilinearAt a b target
+fullArchitectureCompact13PairsPreserveFiveGridFull =
+  HermitianConv729.compact13PairsPreserveFiveGridFullQuadratic
+
+
+------------------------------------------------------------------------
+-- Source five antipodal classes of the 9-plane: one real centre
+-- plus FOUR complex Qω conjugate pairs; all 81 ordered input products.
+-- Original D4 nine-cell irrep decomposition remains independent.
+------------------------------------------------------------------------
+
+fullArchitectureFiveInNineHermitian81PairConvolution :
+  (a b : Hermitian729.Hermitian9)
+  (target : HermitianPlane81.WidePlane25) →
+  HermitianPlane81.packedFivePlaneBilinearAt
+    (Hermitian729.packHermitian9 a)
+    (Hermitian729.packHermitian9 b) target
+    ≡ HermitianPlane81.truePlaneBilinearAt
+        (Hermitian729.coefficient9 a)
+        (Hermitian729.coefficient9 b) target
+fullArchitectureFiveInNineHermitian81PairConvolution =
+  HermitianPlane81.fiveOrbitPlaneCodecPreservesAll25QuadraticOutputs
+
+
+------------------------------------------------------------------------
+-- Even-vs-odd padded Fourier-grid antipode boundary. The 4³
+-- retained-output grid has EIGHT self-negative Nyquist corners,
+-- unlike the unique-centre C3³ 13-pair and C5³ 62-pair quotients.
+-- This is exact cyclic INDEX symmetry, not a new C4 sampled DFT.
+------------------------------------------------------------------------
+
+fullArchitectureFourGridNyquistEightFixed :
+  ModePairs.countWhereL Nyquist729.fourFixedCube
+    Nyquist729.allFourGridCubes ≡ 8
+fullArchitectureFourGridNyquistEightFixed =
+  Nyquist729.fourCubeHasEightFixedAntipodes
+
+fullArchitectureFiveGridOnlyCentreFixed :
+  ModePairs.countWhereL Nyquist729.fiveFixedCube
+    Nyquist729.allFiveGridCubes ≡ 1
+fullArchitectureFiveGridOnlyCentreFixed =
+  Nyquist729.fiveCubeHasOneFixedAntipode
+
+fullArchitectureFourGridNyquistIsSelfNegative :
+  Nyquist729.fourGroupAntipode FourPareto.fourOuterTwo
+    ≡ FourPareto.fourOuterTwo
+fullArchitectureFourGridNyquistIsSelfNegative =
+  Nyquist729.fourNyquistResidueIsSelfAntipodal
+
+-- Simultaneous inversion of ordered pair labels: 729 -> 365 classes.
+-- This is NOT independent antipodal quotienting of either input mode.
+architectureActual729PositivePairOrbitCount :
+  Pairs365Owner.countWhereL Pair365.positivePair Pairs365Owner.pair729 ≡ 365
+architectureActual729PositivePairOrbitCount = Pair365.actualPositivePairRepresentatives

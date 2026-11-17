@@ -1,9 +1,31 @@
 module DASHI.Unifier where
-import DASHI.ComputerScience.TekumDASHIRoundingAssemblyExact
-import DASHI.ComputerScience.TekumDASHIRoundingBoundaryExact as TekumRoundingTOE
-import DASHI.ComputerScience.TekumProposition5FiniteNearestNoGoExact as TekumP5
-import DASHI.ComputerScience.TekumRawNearestCorrectionExact as TekumRaw
-import DASHI.ComputerScience.TekumNearestNoDoubleRoundingExact as TekumNoDouble
+import DASHI.Physics.Closure.R2P227729PairOrbit365CanonicalSymmetryExact as Pair365
+import DASHI.Physics.Closure.R2P227729FourierObserverIncidenceExact as Pairs365Owner
+open import Agda.Builtin.Nat using (Nat)
+open import Data.Maybe using (just)
+import DASHI.Physics.Closure.R2P2ThreeModeBinaryTernaryNSAliasingCutExact as ModeNSCut
+import DASHI.Physics.Closure.R2P227729FiniteQuadraticConvolutionExact as Convolution729
+import DASHI.Physics.Closure.R2P227729BilinearCyclotomicPadCutExact as Bilinear729
+import DASHI.Foundations.BalancedTernaryAntipodalOrbitExact as OriginalAntipodalSym729
+import DASHI.Physics.Closure.R2P227729HermitianThirteenPairFourierCodecExact as HermitianSym729
+import DASHI.Physics.Closure.R2P227729HermitianConvolutionTransportExact as HermitianConv729
+import DASHI.Physics.Closure.R2P281PlaneHermitianFiveOrbitConvolutionExact as HermitianPlane81
+import DASHI.Physics.Closure.R2P2C4C5NyquistAntipodalFixedPointExact as NyquistSym729
+import DASHI.Physics.Closure.R2P227729AntipodalThirteenFiveOrbitFourierCutExact as AntipodalSym729
+import DASHI.Physics.Closure.R2P227729FourGridRetainedQuadraticParetoExact as FourGridPareto729
+import DASHI.Core.IndexedRelationalHyperfabricSpineExact as Fourier729Core
+import DASHI.Physics.Closure.R2P227729ExistingC3FourierConvolutionReuseExact as PeriodicFourier729
+import DASHI.Biology.Physical.C3CubeCyclotomicFourierExact as Fourier729Owner
+import DASHI.Physics.Closure.R2P227729PairSixTritFibreBidiExact as Pair729
+import DASHI.Physics.Closure.R2P227729FourierObserverIncidenceExact as Fourier729
+import DASHI.Physics.Closure.R2P2OpticalLattice369HamiltonianCutExact as R2P2Lattice
+import DASHI.Foundations.Base369WaveContinuousSymbolicCodingExact as R2P2Symbolic
+import DASHI.Physics.Closure.R2P2369WaveOpticalCombInformationCutExact as R2P2Wave
+import DASHI.Physics.Closure.R2P2ThreeClockLoopClosure369Exact as R2P2Loop
+import DASHI.Physics.Closure.R2P2ClockBiasIdentifiabilityMaxCutExact as R2P2Bias
+import DASHI.Physics.Closure.R2P2369AtomicQuantumDiamondArchitectureExact as R2P2369
+import DASHI.Foundations.Base369BinaryTernaryRefinement as RefineR2P2
+import DASHI.Physics.Closure.R2P2MountainOpticalClockComparisonExact as R2P2
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
@@ -57,7 +79,8 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 open import Agda.Primitive using (Level; lzero; lsuc)
 open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Bool using (false)
+open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Nat using (_+_)
 open import Data.Empty using (⊥)
 open import Data.Nat as Nat using (ℕ; _*_; _≤_; _<_; _⊔_; _∸_)
 open import Data.Integer using (ℤ)
@@ -554,25 +577,1950 @@ record DASHIUnificationAxiom : Set₁ where
 DASHI-Unification-Theorem : Set₁
 DASHI-Unification-Theorem = DASHIUnificationAxiom
 
--- Reuse graphene fibre obstruction and source-bounded physical non-promotion.
-import DASHI.Unified.GraphenePhysicalNonPromotionTOEExact
-import DASHI.Unified.GraphenePhysicalNonPromotionTOEValidation
+------------------------------------------------------------------------
+-- Exact Yang-Mills Goal-1 compatibility exports.
+-- Unifier is a consumer. It is not the proof authority.
+------------------------------------------------------------------------
 
--- Direct TOE consumers of existing non-promotion proofs.
--- These proofs remain owned by the graphene/physical validation modules.
-import DASHI.Unified.GraphenePhysicalNonPromotionTOEExact as GraphenePhysicalTOE
+unifierYangMillsGoal1FiniteASourceLevel : ProofLevel
+unifierYangMillsGoal1FiniteASourceLevel =
+  YMGoal1TOE.goal1FiniteASourceLevel
 
-toeSyntheticQTMIsNotMeasured :
-  GraphenePhysicalTOE.syntheticQTMCountsAsMeasuredFit ≡ false
-toeSyntheticQTMIsNotMeasured =
-  GraphenePhysicalTOE.syntheticQTMRemainsNonPromoting
+unifierYangMillsGoal1CanonicalSelectedBSourceLevel : ProofLevel
+unifierYangMillsGoal1CanonicalSelectedBSourceLevel =
+  YMGoal1TOE.goal1CanonicalSelectedBSourceLevel
 
-toeSyntheticEntropyIsNotMeasured :
-  GraphenePhysicalTOE.syntheticMaxwellCountsAsMeasuredEntropy ≡ false
-toeSyntheticEntropyIsNotMeasured =
-  GraphenePhysicalTOE.syntheticMaxwellRemainsNonPromoting
+unifierYangMillsGoal1LiteralCMP116RateSourceLevel : ProofLevel
+unifierYangMillsGoal1LiteralCMP116RateSourceLevel =
+  YMGoal1TOE.goal1LiteralCMP116RateSourceLevel
 
-toePositiveEulerianIsNotFullWEC :
-  GraphenePhysicalTOE.positiveEulerianCountsAsFullWEC ≡ false
-toePositiveEulerianIsNotFullWEC =
-  GraphenePhysicalTOE.positiveEulerianRemainsNonPromoting
+unifierYangMillsGoal1LocalQFTCSourceLevel : ProofLevel
+unifierYangMillsGoal1LocalQFTCSourceLevel =
+  YMGoal1TOE.goal1LocalQFTCSourceLevel
+
+unifierYangMillsGoal1SameHNontrivialityLevel : ProofLevel
+unifierYangMillsGoal1SameHNontrivialityLevel =
+  YMGoal1TOE.goal1SameHNontrivialitySemanticBridgeLevel
+
+unifierYangMillsFlat4DContinuumStillOpen :
+  YMGoal1TOE.flat4DContinuumTransferProvedHere ≡ false
+unifierYangMillsFlat4DContinuumStillOpen =
+  YMGoal1TOE.flat4DContinuumTransferStillOpen
+
+unifierYangMillsContinuumMassGapStillNotPromoted :
+  YMGoal1TOE.continuumMassGapPromoted ≡ false
+unifierYangMillsContinuumMassGapStillNotPromoted =
+  YMGoal1TOE.continuumMassGapStillNotPromoted
+
+unifierYangMillsClayStillNotPromoted :
+  YMGoal1TOE.clayYangMillsPromoted ≡ false
+unifierYangMillsClayStillNotPromoted =
+  YMGoal1TOE.clayYangMillsStillNotPromoted
+
+
+------------------------------------------------------------------------
+-- Preferred R440--R444 Goal-1 source cuts.
+------------------------------------------------------------------------
+
+unifierYangMillsGoal1FiniteA1WilsonActionInvarianceLevel : ProofLevel
+unifierYangMillsGoal1FiniteA1WilsonActionInvarianceLevel =
+  YMGoal1TOE.goal1FiniteA1WilsonActionInvarianceLevel
+
+unifierYangMillsGoal1FiniteA1ProductHaarInvarianceLevel : ProofLevel
+unifierYangMillsGoal1FiniteA1ProductHaarInvarianceLevel =
+  YMGoal1TOE.goal1FiniteA1ProductHaarInvarianceLevel
+
+unifierYangMillsGoal1FiniteA1DensityInvariantCompilerLevel : ProofLevel
+unifierYangMillsGoal1FiniteA1DensityInvariantCompilerLevel =
+  YMGoal1TOE.goal1FiniteA1DensityInvariantCompilerLevel
+
+unifierYangMillsGoal1FiniteA2PeterWeylWilsonIdentificationLevel : ProofLevel
+unifierYangMillsGoal1FiniteA2PeterWeylWilsonIdentificationLevel =
+  YMGoal1TOE.goal1FiniteA2PeterWeylWilsonIdentificationLevel
+
+unifierYangMillsGoal1FiniteA2SquareCompilerLevel : ProofLevel
+unifierYangMillsGoal1FiniteA2SquareCompilerLevel =
+  YMGoal1TOE.goal1FiniteA2SquareCompilerLevel
+
+unifierYangMillsGoal1PreferredVariableDomainBSourceLevel : ProofLevel
+unifierYangMillsGoal1PreferredVariableDomainBSourceLevel =
+  YMGoal1TOE.goal1PreferredVariableDomainBSourceLevel
+
+unifierYangMillsGoal1R429RootedTraceEncodingLevel : ProofLevel
+unifierYangMillsGoal1R429RootedTraceEncodingLevel =
+  YMGoal1TOE.goal1R429RootedTraceEncodingLevel
+
+unifierYangMillsGoal1R429RootedTraceCountCompilerLevel : ProofLevel
+unifierYangMillsGoal1R429RootedTraceCountCompilerLevel =
+  YMGoal1TOE.goal1R429RootedTraceCountCompilerLevel
+
+unifierYangMillsGoal1R429SourceDecayReserveLevel : ProofLevel
+unifierYangMillsGoal1R429SourceDecayReserveLevel =
+  YMGoal1TOE.goal1R429SourceDecayReserveLevel
+
+unifierYangMillsGoal1R429EntropyBudgetCompilerLevel : ProofLevel
+unifierYangMillsGoal1R429EntropyBudgetCompilerLevel =
+  YMGoal1TOE.goal1R429EntropyBudgetCompilerLevel
+
+unifierYangMillsGoal1LegacyGlobalTreeMetricNotPreferred :
+  YMGoal1TOE.legacyGlobalTreeMetricPreferred ≡ false
+unifierYangMillsGoal1LegacyGlobalTreeMetricNotPreferred =
+  YMGoal1TOE.legacyGlobalTreeMetricPreferredIsFalse
+
+
+------------------------------------------------------------------------
+-- Reused A3/A4/A5 and C3/C4 canonical owner exports.
+------------------------------------------------------------------------
+
+unifierYangMillsGoal1A3UniformCompactContainmentLevel : ProofLevel
+unifierYangMillsGoal1A3UniformCompactContainmentLevel =
+  YMGoal1TOE.goal1A3UniformCompactContainmentLevel
+
+unifierYangMillsGoal1A3ExtractedClusterCylinderAgreementLevel : ProofLevel
+unifierYangMillsGoal1A3ExtractedClusterCylinderAgreementLevel =
+  YMGoal1TOE.goal1A3ExtractedClusterCylinderAgreementLevel
+
+unifierYangMillsGoal1A3TightnessSubsequenceCompilerLevel : ProofLevel
+unifierYangMillsGoal1A3TightnessSubsequenceCompilerLevel =
+  YMGoal1TOE.goal1A3TightnessSubsequenceCompilerLevel
+
+unifierYangMillsGoal1A4FiniteRegularityLevel : ProofLevel
+unifierYangMillsGoal1A4FiniteRegularityLevel =
+  YMGoal1TOE.goal1A4FiniteRegularityLevel
+
+unifierYangMillsGoal1A5FiniteGrowthControlLevel : ProofLevel
+unifierYangMillsGoal1A5FiniteGrowthControlLevel =
+  YMGoal1TOE.goal1A5FiniteGrowthControlLevel
+
+unifierYangMillsGoal1A45OSLimitCompilerLevel : ProofLevel
+unifierYangMillsGoal1A45OSLimitCompilerLevel =
+  YMGoal1TOE.goal1A45OSLimitCompilerLevel
+
+unifierYangMillsGoal1C3OneStepAFIdentificationLevel : ProofLevel
+unifierYangMillsGoal1C3OneStepAFIdentificationLevel =
+  YMGoal1TOE.goal1C3OneStepAFIdentificationLevel
+
+unifierYangMillsGoal1C3AllDepthCoefficientCompilerLevel : ProofLevel
+unifierYangMillsGoal1C3AllDepthCoefficientCompilerLevel =
+  YMGoal1TOE.goal1C3AllDepthCoefficientCompilerLevel
+
+unifierYangMillsGoal1C4DensityAnchoredStressInstantiationLevel : ProofLevel
+unifierYangMillsGoal1C4DensityAnchoredStressInstantiationLevel =
+  YMGoal1TOE.goal1C4DensityAnchoredStressInstantiationLevel
+
+unifierYangMillsGoal1C4SectorRecoveryCompilerLevel : ProofLevel
+unifierYangMillsGoal1C4SectorRecoveryCompilerLevel =
+  YMGoal1TOE.goal1C4SectorRecoveryCompilerLevel
+
+unifierYangMillsGoal1C4LiteralSectorRecoveryLevel : ProofLevel
+unifierYangMillsGoal1C4LiteralSectorRecoveryLevel =
+  YMGoal1TOE.goal1C4LiteralSectorRecoveryLevel
+
+unifierYangMillsGoal1C4CommonMetricCompilerLevel : ProofLevel
+unifierYangMillsGoal1C4CommonMetricCompilerLevel =
+  YMGoal1TOE.goal1C4CommonMetricCompilerLevel
+
+
+unifierYangMillsGoal1ParetoZKPFrame : YMMaxCut.Goal1ParetoTOEZKPFrame
+unifierYangMillsGoal1ParetoZKPFrame = YMMaxCut.canonicalGoal1ParetoTOEZKPFrame
+
+------------------------------------------------------------------------
+-- Direct RG non-promotion and Pareto/snowball/Ibrahim facade.
+------------------------------------------------------------------------
+
+unifierBalabanScaleTransferPromotionImpossible :
+  ParetoSnowballTOE.BalabanScaleTransferPromotion → ⊥
+unifierBalabanScaleTransferPromotionImpossible =
+  ParetoSnowballTOE.balabanScaleTransferPromotionImpossible
+
+unifierIbrahimRecognitionParetoBoundary =
+  ParetoSnowballTOE.ibrahimRecognitionParetoBoundary
+
+unifierIbrahimCharacterExecutionFrontier =
+  ParetoSnowballTOE.ibrahimCharacterExecutionFrontier
+
+unifierIbrahimPhaseResolutionFrontier =
+  ParetoSnowballTOE.ibrahimPhaseResolutionFrontier
+
+unifierIbrahimSchrodingerHZetaMaxCutBoundary =
+  ParetoSnowballTOE.ibrahimSchrodingerHZetaMaxCutBoundary
+
+unifierIbrahimHistoricalDiscriminatorBoundary =
+  ParetoSnowballTOE.ibrahimHistoricalDiscriminatorBoundary
+
+unifierBalabanIbrahimParetoSnowballZKPFrame =
+  ParetoSnowballTOE.canonicalTOEZKPFrame
+
+
+unifierIbrahimSearchPriorityDoesNotCreateProof :
+  ParetoSnowballTOE.SearchPriorityCreatesProof → ⊥
+unifierIbrahimSearchPriorityDoesNotCreateProof =
+  ParetoSnowballTOE.searchPriorityDoesNotCreateProof
+
+unifierIbrahimProducerSourceDoesNotCreateRunReceipt :
+  ParetoSnowballTOE.ProducerSourceCreatesRunReceipt → ⊥
+unifierIbrahimProducerSourceDoesNotCreateRunReceipt =
+  ParetoSnowballTOE.producerSourceDoesNotCreateRunReceipt
+
+unifierIbrahimDegree729DoesNotCreateMonsterHZetaRecognition :
+  ParetoSnowballTOE.Degree729CreatesMonsterHZetaRecognition → ⊥
+unifierIbrahimDegree729DoesNotCreateMonsterHZetaRecognition =
+  ParetoSnowballTOE.degree729DoesNotCreateMonsterHZetaRecognition
+
+unifierIbrahimPaperOracleDoesNotIdentifyHistoricalDump :
+  ParetoSnowballTOE.PaperOracleIdentifiesDump → ⊥
+unifierIbrahimPaperOracleDoesNotIdentifyHistoricalDump =
+  ParetoSnowballTOE.paperOracleDoesNotIdentifyHistoricalDump
+
+------------------------------------------------------------------------
+-- Joint non-promotion: two independent blocked proof routes.
+-- Do not infer either proof from a search score, a source alias, or
+-- the other's conditional result. Reuse both canonical owner proofs.
+------------------------------------------------------------------------
+
+unifierRGAndIbrahimJointPromotionImpossible :
+  ParetoSnowballTOE.BalabanScaleTransferPromotion →
+  ParetoSnowballTOE.SearchPriorityCreatesProof → ⊥
+unifierRGAndIbrahimJointPromotionImpossible rg sourcePriority =
+  unifierBalabanScaleTransferPromotionImpossible rg
+
+unifierRGAndIbrahimSearchPromotionImpossible :
+  ParetoSnowballTOE.SearchPriorityCreatesProof →
+  ParetoSnowballTOE.BalabanScaleTransferPromotion → ⊥
+unifierRGAndIbrahimSearchPromotionImpossible sourcePriority rg =
+  unifierIbrahimSearchPriorityDoesNotCreateProof sourcePriority
+
+
+------------------------------------------------------------------------
+-- Complete direct Balaban/Ibrahim Pareto-snowball exports.
+------------------------------------------------------------------------
+
+unifierBalabanScaleTransferFrontier :
+  ParetoSnowballTOE.BalabanScaleTransferFrontierReceipt
+unifierBalabanScaleTransferFrontier =
+  ParetoSnowballTOE.balabanScaleTransferFrontier
+
+unifierIbrahimRoutePreferenceDoesNotCreateExecutionReceipt :
+  ParetoSnowballTOE.RoutePreferenceCreatesExecutionReceipt → ⊥
+unifierIbrahimRoutePreferenceDoesNotCreateExecutionReceipt =
+  ParetoSnowballTOE.routePreferenceDoesNotCreateExecutionReceipt
+
+unifierIbrahimMergedLeanSourceDoesNotCreateKernelReceipt :
+  ParetoSnowballTOE.MergedLeanSourceCreatesKernelReceipt → ⊥
+unifierIbrahimMergedLeanSourceDoesNotCreateKernelReceipt =
+  ParetoSnowballTOE.mergedLeanSourceDoesNotCreateKernelReceipt
+
+unifierIbrahimOEISDoesNotCreateMultiplicityAction :
+  ParetoSnowballTOE.NinetyOEISEqualityCreatesMultiplicityAction → ⊥
+unifierIbrahimOEISDoesNotCreateMultiplicityAction =
+  ParetoSnowballTOE.oeisDoesNotCreateMultiplicityAction
+
+unifierIbrahimFiniteIrreducibilityDoesNotCreateMonsterHZetaRecognition :
+  ParetoSnowballTOE.FiniteIrreducibilityCreatesMonsterHZetaRecognition → ⊥
+unifierIbrahimFiniteIrreducibilityDoesNotCreateMonsterHZetaRecognition =
+  ParetoSnowballTOE.finiteIrreducibilityDoesNotCreateMonsterHZetaRecognition
+
+unifierIbrahimCurrentQidDoesNotIdentifyHistoricalTitle :
+  ParetoSnowballTOE.CurrentQidIdentifiesHistoricalTitle → ⊥
+unifierIbrahimCurrentQidDoesNotIdentifyHistoricalTitle =
+  ParetoSnowballTOE.currentQidDoesNotIdentifyHistoricalTitle
+
+
+------------------------------------------------------------------------
+-- 369 max-cut / kernel-BIDI / ternary-27 consumer facade.
+------------------------------------------------------------------------
+
+unifier369Ternary27RotationOrderThree =
+  MaxCut369.toe27RotationOrderThree
+
+unifier369Ternary27OriginFixed =
+  MaxCut369.toe27OriginFixed
+
+unifier369FullCubeRotationNotFree :
+  MaxCut369.FullCubeRotationFree → ⊥
+unifier369FullCubeRotationNotFree =
+  MaxCut369.toe27FullCubeRotationNotFree
+
+unifier369MonsterPhaseConjugationIntertwiner =
+  MaxCut369.toe27MonsterPhaseConjugationIntertwiner
+
+unifier369Ternary27MonsterRepresentationNotPromoted =
+  MaxCut369.toe27MonsterRepresentationNotPromoted
+
+unifier369Ternary27MonsterEmbeddingNotPromoted =
+  MaxCut369.toe27MonsterEmbeddingNotPromoted
+
+unifier369Ternary27PhaseReductionNotGlobalInversion =
+  MaxCut369.toe27PhaseReductionNotGlobalInversion
+
+unifier369Ternary27OrbitIndexingNotSemanticIdentity =
+  MaxCut369.toe27OrbitIndexingNotSemanticIdentity
+
+unifier369Ternary27ReductionNotMonster42SameObject =
+  MaxCut369.toe27ReductionNotMonster42SameObject
+
+unifier369FullGradeDimensionDoesNotCreateFaithfulness =
+  MaxCut369.toeFullGradeDimensionDoesNotCreateFaithfulness
+
+unifier369FullGradeSameCarrierDoesNotCreateActionAgreement =
+  MaxCut369.toeFullGradeSameCarrierDoesNotCreateActionAgreement
+
+unifier369FullGradeCharacterDoesNotCreateActionAgreement =
+  MaxCut369.toeFullGradeCharacterDoesNotCreateActionAgreement
+
+unifier369ProjectedDimensionDoesNotCreateAction =
+  MaxCut369.toeProjectedDimensionDoesNotCreateAction
+
+unifier369CoordinateRetractionDoesNotCreateProjectedAction =
+  MaxCut369.toeCoordinateRetractionDoesNotCreateProjectedAction
+
+unifier369ProjectedCharacterDoesNotCreateAction =
+  MaxCut369.toeProjectedCharacterDoesNotCreateAction
+
+unifier369KernelTrace53DoesNotIdentify3B =
+  MaxCut369.toeKernelTrace53DoesNotIdentify3B
+
+unifier369KernelCharacterIsotypyDoesNotConstructActionIntertwiner =
+  MaxCut369.toeKernelCharacterIsotypyDoesNotConstructActionIntertwiner
+
+unifier369KernelActualZetaRecognitionStillOpen =
+  MaxCut369.toeKernelActualZetaRecognitionStillOpen
+
+unifier369KernelFullHyperformalActionStillOpen =
+  MaxCut369.toeKernelFullHyperformalActionStillOpen
+
+unifier369SelectedSameElementClass3BStillOpen =
+  MaxCut369.toeSelectedSameElementClass3BStillOpen
+
+unifier369SingleActionProducerStillOpen =
+  MaxCut369.toeSingleActionProducerStillOpen
+
+unifier369FiniteChartDoesNotCreateLinearMultiplicityAction =
+  MaxCut369.toeFiniteChartDoesNotCreateLinearMultiplicityAction
+
+unifier369NinetySlicesDoNotCreatePermutationRepresentation =
+  MaxCut369.toeNinetySlicesDoNotCreatePermutationRepresentation
+
+unifier369CharacterDoesNotCreateHomEvaluation =
+  MaxCut369.toeCharacterDoesNotCreateHomEvaluation
+
+unifier369PermutationNoGoDoesNotCreateLinearAction =
+  MaxCut369.toePermutationNoGoDoesNotCreateLinearAction
+
+
+------------------------------------------------------------------------
+-- Singular-basin / coarse-RG obstruction consumer facade.
+------------------------------------------------------------------------
+
+unifierSingularBasinFiniteReduction =
+  SingularBasinTOE.finiteReduction
+
+unifierSingularBasinFiniteReductionNotBasinPreserving =
+  SingularBasinTOE.finiteReductionNotBasinPreserving
+
+unifierSingularBasinFiniteFullBasinDoesNotFactor =
+  SingularBasinTOE.finiteFullBasinDoesNotFactorThroughReduction
+
+unifierSingularBasinSelectedResolutionNotRobust =
+  SingularBasinTOE.selectedResolutionNotRobust
+
+unifierSingularBasinSelectedProjectionNotResolutionAdequate =
+  SingularBasinTOE.selectedProjectionNotResolutionAdequate
+
+unifierSingularBasinSelectedResolutionRefutesGlobalFactorisation =
+  SingularBasinTOE.selectedResolutionAlsoRefutesGlobalFactorisation
+
+unifierYanchukIntervalODECheckerStillMissing =
+  SingularBasinTOE.intervalODECheckerStillMissing
+
+unifierYanchukCheckerSoundStillMissing =
+  SingularBasinTOE.checkerSoundToBasinCertificateStillMissing
+
+unifierYanchukAnalyticGlobalWidthLawStillMissing =
+  SingularBasinTOE.analyticGlobalWidthLawStillMissing
+
+unifierYanchukIntervalStableManifoldTubeStillMissing =
+  SingularBasinTOE.intervalStableManifoldTubeStillMissing
+
+unifierYanchukBasinSeparationTheoremStillMissing =
+  SingularBasinTOE.basinSeparationTheoremStillMissing
+
+unifierSingularBasinZKPFrame :
+  SingularBasinTOE.SingularBasinTOEZKPFrame
+unifierSingularBasinZKPFrame =
+  SingularBasinTOE.canonicalSingularBasinTOEZKPFrame
+
+
+------------------------------------------------------------------------
+-- Fleet R4/R5 formal-gap selection boundary.
+-- Unifier consumes the normalized owner. It does not own fleet evidence.
+------------------------------------------------------------------------
+
+unifierFleetFormalGapTargetReceipt :
+  FleetGapTOE.FleetFormalGapTargetReceipt
+unifierFleetFormalGapTargetReceipt =
+  FleetGapTOE.canonicalFleetFormalGapTargetReceipt
+
+unifierFleetCoordinateRebuildabilityReceipt =
+  FleetGapTOE.fleetCoordinateRebuildabilityReceipt
+
+unifierFleetNumericABIReceipt =
+  FleetGapTOE.fleetNumericABIReceipt
+
+unifierFleetResidualInvariantReceipt =
+  FleetGapTOE.fleetResidualInvariantReceipt
+
+unifierFleetPromotionObligationIndex =
+  FleetGapTOE.fleetPromotionObligationIndex
+
+unifierFleetFormalGapZKPFrame :
+  ParetoSnowballTOE.TOEZKPFrame
+unifierFleetFormalGapZKPFrame =
+  FleetGapTOE.canonicalFleetFormalGapZKPFrame
+
+unifierFleetEigenPriorityDoesNotCreateProof :
+  FleetGapTOE.eigenvalueMagnitudeCreatesProofAuthority
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+unifierFleetEigenPriorityDoesNotCreateProof =
+  FleetGapTOE.fleetEigenPriorityDoesNotCreateProof
+
+unifierFleetExternalCountDoesNotCreateFormalDischarge :
+  FleetGapTOE.externalCountCreatesFormalProof
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+unifierFleetExternalCountDoesNotCreateFormalDischarge =
+  FleetGapTOE.fleetExternalCountDoesNotCreateFormalDischarge
+
+unifierFleetDischargedFibresRemainOutOfTarget :
+  FleetGapTOE.dischargedFibresRemainDischarged
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
+unifierFleetDischargedFibresRemainOutOfTarget =
+  FleetGapTOE.fleetDischargedFibresRemainOutOfTarget
+
+unifierFleetContradictionGapsRemainSeparate :
+  FleetGapTOE.contradictionGapsRemainSeparate
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
+unifierFleetContradictionGapsRemainSeparate =
+  FleetGapTOE.fleetContradictionGapsRemainSeparate
+
+unifierFleetPlanningTextDoesNotCreateFormalResidual :
+  FleetGapTOE.externalPlanningTextCreatesFormalResidual
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+unifierFleetPlanningTextDoesNotCreateFormalResidual =
+  FleetGapTOE.fleetExternalPlanningTextDoesNotCreateFormalResidual
+
+unifierFleetSpectralLabelDoesNotIdentifyTheoremOwner :
+  FleetGapTOE.spectralLabelsIdentifyTheoremOwners
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+unifierFleetSpectralLabelDoesNotIdentifyTheoremOwner =
+  FleetGapTOE.fleetSpectralLabelDoesNotIdentifyTheoremOwner
+
+
+------------------------------------------------------------------------
+-- Direct canonical PNF firewalls for fleet R4/R5 selection.
+------------------------------------------------------------------------
+
+unifierFleetNonRebuildableCoordinatePromotionImpossible :
+  FleetGapTOE.NonRebuildableCoordinatePromotion → ⊥
+unifierFleetNonRebuildableCoordinatePromotionImpossible =
+  FleetGapTOE.fleetNonRebuildableCoordinatePromotionImpossible
+
+unifierFleetVectorSpectralAuthorityPromotionImpossible :
+  FleetGapTOE.VectorSpectralAuthorityPromotion → ⊥
+unifierFleetVectorSpectralAuthorityPromotionImpossible =
+  FleetGapTOE.fleetVectorSpectralAuthorityPromotionImpossible
+
+unifierFleetSpectralNumericABIPromotionImpossible :
+  FleetGapTOE.SpectralNumericABIPromotion → ⊥
+unifierFleetSpectralNumericABIPromotionImpossible =
+  FleetGapTOE.fleetSpectralNumericABIPromotionImpossible
+
+unifierFleetResidualFieldPromotionImpossible :
+  FleetGapTOE.ResidualFieldPromotion → ⊥
+unifierFleetResidualFieldPromotionImpossible =
+  FleetGapTOE.fleetResidualFieldPromotionImpossible
+
+unifierFleetVectorCoordinateTruthStillFalse =
+  FleetGapTOE.fleetVectorCoordinateTruthStillFalse
+
+unifierFleetVectorCoordinateSupportStillFalse =
+  FleetGapTOE.fleetVectorCoordinateSupportStillFalse
+
+unifierFleetVectorCoordinateAdmissibilityStillFalse =
+  FleetGapTOE.fleetVectorCoordinateAdmissibilityStillFalse
+
+unifierFleetTextFallbackAuthorityStillFalse =
+  FleetGapTOE.fleetTextFallbackAuthorityStillFalse
+
+
+unifierFleetBalabanDischargedOwnerReceipt :
+  FleetGapTOE.BalabanDischargedOwnerReceipt
+unifierFleetBalabanDischargedOwnerReceipt =
+  FleetGapTOE.fleetBalabanDischargedOwnerReceipt
+
+unifierFleetNSPhysicalM2SummationCompilerStatus :
+  Bool
+unifierFleetNSPhysicalM2SummationCompilerStatus =
+  FleetGapTOE.fleetNSPhysicalM2SummationCompilerStatus
+
+unifierFleetNSM2ToR568CompilerStatus :
+  Bool
+unifierFleetNSM2ToR568CompilerStatus =
+  FleetGapTOE.fleetNSM2ToR568CompilerStatus
+
+unifierFleetQuantumMereologyBoundary :
+  FleetGapTOE.QuantumMereologyDischargedBoundary
+unifierFleetQuantumMereologyBoundary =
+  FleetGapTOE.fleetQuantumMereologyBoundary
+
+unifierFleetQuantumMereologyAttributionBoundary :
+  FleetGapTOE.QuantumMereologyAttributionBoundary
+unifierFleetQuantumMereologyAttributionBoundary =
+  FleetGapTOE.fleetQuantumMereologyAttributionBoundary
+
+------------------------------------------------------------------------
+-- Fleet 58 named-manifest acquisition wall.
+------------------------------------------------------------------------
+
+unifierFleet58ManifestAcquisitionReceipt :
+  FleetManifestTOE.Fleet58ManifestAcquisitionReceipt
+unifierFleet58ManifestAcquisitionReceipt =
+  FleetManifestTOE.canonicalFleet58ManifestAcquisitionReceipt
+
+unifierFleet58ManifestPresent :
+  Bool
+unifierFleet58ManifestPresent =
+  FleetManifestTOE.named58ManifestAcquired
+
+unifierFleet58CountIdentifiesNamedRows :
+  Bool
+unifierFleet58CountIdentifiesNamedRows =
+  FleetManifestTOE.countIdentifiesNamedRows
+
+unifierFleet58PerGapDispatchEnabled :
+  Bool
+unifierFleet58PerGapDispatchEnabled =
+  FleetManifestTOE.perGapDispatchEnabled
+
+unifierFleet58ManifestZKPFrame :
+  ParetoSnowballTOE.TOEZKPFrame
+unifierFleet58ManifestZKPFrame =
+  FleetManifestTOE.canonicalFleet58ManifestZKPFrame
+
+unifierFleet58AcquisitionDoesNotPayRequirement :
+  FleetManifestTOE.BoundDemandAutomaticallyPaysRequirement → ⊥
+unifierFleet58AcquisitionDoesNotPayRequirement =
+  FleetManifestTOE.acquisitionDoesNotPayRequirement
+
+unifierFleet58SearchPriorityDoesNotCreateProof :
+  FleetManifestTOE.SearchPriorityCreatesProof → ⊥
+unifierFleet58SearchPriorityDoesNotCreateProof =
+  FleetManifestTOE.searchPriorityDoesNotCreateProof
+
+------------------------------------------------------------------------
+-- Joint Balaban RG + R559 same-owner max-cut facade.
+------------------------------------------------------------------------
+
+import DASHI.Unified.BalabanR559TOEMaxCutExact as BalabanR559TOE
+
+unifierBalabanR559MaxCutReceipt :
+  BalabanR559TOE.BalabanR559TOEMaxCutReceipt
+unifierBalabanR559MaxCutReceipt =
+  BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifierBalabanR559PublishedContinuumStillOpen :
+  BalabanR559TOE.publishedContinuumPromotion
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ false
+unifierBalabanR559PublishedContinuumStillOpen =
+  BalabanR559TOE.publishedContinuumPromotionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifierBalabanR559ContinuumMassGapStillBlocked :
+  BalabanR559TOE.continuumMassGapPromotion
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ false
+unifierBalabanR559ContinuumMassGapStillBlocked =
+  BalabanR559TOE.continuumMassGapPromotionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifierBalabanR559ClayPromotionStillBlocked :
+  BalabanR559TOE.clayPromotion
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ false
+unifierBalabanR559ClayPromotionStillBlocked =
+  BalabanR559TOE.clayPromotionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+
+------------------------------------------------------------------------
+-- Direct constructive Balaban RG scale-transfer non-promotion.
+-- The joint receipt is the normalized facade path.
+------------------------------------------------------------------------
+
+unifierBalabanR559Gate4UnresolvedCount : ℕ
+unifierBalabanR559Gate4UnresolvedCount =
+  BalabanR559TOE.gate4UnresolvedCount
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifierBalabanR559Gate4UnresolvedCountIs58 :
+  unifierBalabanR559Gate4UnresolvedCount ≡ 58
+unifierBalabanR559Gate4UnresolvedCountIs58 =
+  BalabanR559TOE.gate4UnresolvedCountIs58
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifierBalabanR559Gate4DefinitionLevel : ProofLevel
+unifierBalabanR559Gate4DefinitionLevel =
+  BalabanR559TOE.gate4DefinitionLevel
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifierBalabanR559Gate4InhabitantsLevel : ProofLevel
+unifierBalabanR559Gate4InhabitantsLevel =
+  BalabanR559TOE.gate4InhabitantsLevel
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifierBalabanScaleTransferNonPromotion :
+  BalabanR559TOE.ScaleTransferPromotion → ⊥
+unifierBalabanScaleTransferNonPromotion =
+  BalabanR559TOE.scaleTransferPromotionEliminator
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+------------------------------------------------------------------------
+-- R559 / Ibrahim / fleet-58 / generic-hyperfabric TOE convergence.
+------------------------------------------------------------------------
+
+import DASHI.Unified.R559IbrahimFleetHyperfabricTOEExact as FleetHyperTOE
+
+unifierR559IbrahimFleetHyperfabricReceipt :
+  FleetHyperTOE.R559IbrahimFleetHyperfabricTOEReceipt
+unifierR559IbrahimFleetHyperfabricReceipt =
+  FleetHyperTOE.canonicalR559IbrahimFleetHyperfabricTOEReceipt
+
+unifierFleetFormalGapsAre58 :
+  FleetHyperTOE.fleetFormalGaps ≡ 58
+unifierFleetFormalGapsAre58 =
+  FleetHyperTOE.fleetFormalGapsAre58
+
+unifierYMGate4FormalGapsAre58 :
+  FleetHyperTOE.ymGate4FormalGaps ≡ 58
+unifierYMGate4FormalGapsAre58 =
+  FleetHyperTOE.ymGate4FormalGapsAre58
+
+unifierYMGate4PaidReductionLevel : ProofLevel
+unifierYMGate4PaidReductionLevel =
+  FleetHyperTOE.ymGate4PaidReductionLevel
+
+unifierYMGate4InhabitantsLevel : ProofLevel
+unifierYMGate4InhabitantsLevel =
+  FleetHyperTOE.ymGate4InhabitantsLevel
+
+unifierFleet58DoesNotIdentifyYMGate4 :
+  FleetHyperTOE.Fleet58EqualsYMGate4SameObject → ⊥
+unifierFleet58DoesNotIdentifyYMGate4 =
+  FleetHyperTOE.fleet58CardinalityDoesNotProveYMGate4Identity
+
+unifierFleetDischargedFibresAre584 :
+  FleetHyperTOE.fleetDischargedFibres ≡ 584
+unifierFleetDischargedFibresAre584 =
+  FleetHyperTOE.fleetDischargedFibresAre584
+
+unifierFleetContradictionGapsAre44 :
+  FleetHyperTOE.fleetContradictionGaps ≡ 44
+unifierFleetContradictionGapsAre44 =
+  FleetHyperTOE.fleetContradictionGapsAre44
+
+unifierPadicPrefixCannotRecoverDiscardedDigit :
+  FleetHyperTOE.PadicPrefixRecovery → ⊥
+unifierPadicPrefixCannotRecoverDiscardedDigit =
+  FleetHyperTOE.toePadicPrefixCannotRecoverDiscardedDigit
+
+unifierTwoDigitStreamCannotRecoverThird :
+  FleetHyperTOE.StreamThirdPrefixRecovery → ⊥
+unifierTwoDigitStreamCannotRecoverThird =
+  FleetHyperTOE.toeTwoDigitStreamCannotRecoverThird
+
+------------------------------------------------------------------------
+-- Reuse existing byte-ABI and host execution boundary.
+-- A finite 27-state carrier and a Python uint8 receipt do not prove a
+-- Rust/CUDA/ROCm binding. Keep this boundary aligned with the TOE root.
+-- The original source modules own all proof terms.
+------------------------------------------------------------------------
+
+import DASHI.ComputerScience.TriadicFin27Byte256ABIExact as TriadicABI
+import DASHI.ComputerScience.TriadicU8RuntimeOracleCrossRepoExact as TriadicHost
+
+unifierTriadicRustBindingStillUnpaid :
+  TriadicABI.rustU8BindingPaid TriadicABI.canonicalTriadicByteABIBoundary
+  ≡ false
+unifierTriadicRustBindingStillUnpaid = refl
+
+unifierTriadicHostRustBindingStillUnpaid :
+  TriadicHost.rustU8BindingPaid TriadicHost.currentU8RuntimeBoundary
+  ≡ false
+unifierTriadicHostRustBindingStillUnpaid = refl
+
+unifierTriadicHostByteDoesNotCreateDeviceByte :
+  TriadicHost.HostByteImpliesDeviceByte → ⊥
+unifierTriadicHostByteDoesNotCreateDeviceByte =
+  TriadicHost.hostByteDoesNotCreateDeviceByte
+
+unifierTriadicRuntimeSourceDoesNotCreateKernelCertification :
+  TriadicHost.RuntimeSourceImpliesKernelCertification → ⊥
+unifierTriadicRuntimeSourceDoesNotCreateKernelCertification =
+  TriadicHost.runtimeSourceDoesNotCreateKernelCertification
+
+unifierTriadicFiniteABIImpliesRustImpossible :
+  TriadicABI.BoundedABIImpliesRustImplementation → ⊥
+unifierTriadicFiniteABIImpliesRustImpossible =
+  TriadicABI.abiDoesNotCreateRust
+
+------------------------------------------------------------------------
+-- Implement-A-to-D reuse-only TOE facade.
+------------------------------------------------------------------------
+
+import DASHI.Unified.YMImplementAToDTOEMaxCutExact as YMAD
+
+unifierYMImplementAToDMaxCutReceipt :
+  YMAD.YMImplementAToDTOEMaxCutReceipt
+unifierYMImplementAToDMaxCutReceipt =
+  YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+unifierYMImplementAToDZKPFrame : YMAD.YMImplementAToDZKPFrame
+unifierYMImplementAToDZKPFrame =
+  YMAD.canonicalYMImplementAToDZKPFrame
+
+unifierYMImplementAToDPublishedContinuumStillBlocked :
+  YMAD.publishedContinuumPromotion YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+  ≡ false
+unifierYMImplementAToDPublishedContinuumStillBlocked =
+  YMAD.publishedContinuumPromotionIsFalse
+    YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+unifierYMImplementAToDContinuumMassGapStillBlocked :
+  YMAD.continuumMassGapPromotion YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+  ≡ false
+unifierYMImplementAToDContinuumMassGapStillBlocked =
+  YMAD.continuumMassGapPromotionIsFalse
+    YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+unifierYMImplementAToDClayStillBlocked :
+  YMAD.clayPromotion YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+  ≡ false
+unifierYMImplementAToDClayStillBlocked =
+  YMAD.clayPromotionIsFalse YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+unifierYMImplementAToDScaleTransferNonPromotion :
+  BalabanR559TOE.ScaleTransferPromotion → ⊥
+unifierYMImplementAToDScaleTransferNonPromotion =
+  YMAD.scaleTransferPromotionEliminator
+    YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+
+------------------------------------------------------------------------
+-- Canonical Balaban RG / R559 same-owner and non-promotion projection.
+-- No new physical theorem. The joint owner supplies these proofs.
+-- Fleet 584/58 refers to the separate inventory, not a YM same-object proof.
+------------------------------------------------------------------------
+
+unifierBalabanDensityOwnerAgreement :
+  BalabanR559TOE.balabanDensityFlow
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ BalabanR559TOE.r559DensityFlow
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+unifierBalabanDensityOwnerAgreement =
+  BalabanR559TOE.densityOwnerAgreement
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifierBalabanRegularEOwnerAgreement :
+  BalabanR559TOE.balabanRegularELocalization
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ BalabanR559TOE.r559RegularELocalization
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+unifierBalabanRegularEOwnerAgreement =
+  BalabanR559TOE.regularEOwnerAgreement
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifierBalabanStressMarkedShellOwnerAgreement :
+  BalabanR559TOE.balabanStressMarkedShell
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ BalabanR559TOE.r559StressMarkedShell
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+unifierBalabanStressMarkedShellOwnerAgreement =
+  BalabanR559TOE.stressMarkedShellOwnerAgreement
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifierBalabanStressHilbertOwnerAgreement :
+  BalabanR559TOE.balabanStressHilbertCompiler
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ BalabanR559TOE.r559StressHilbertCompiler
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+unifierBalabanStressHilbertOwnerAgreement =
+  BalabanR559TOE.stressHilbertOwnerAgreement
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifierBalabanBlockSpinStillBlocked :
+  BalabanR559TOE.balabanBlockSpinTransfer
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false
+unifierBalabanBlockSpinStillBlocked =
+  BalabanR559TOE.balabanBlockSpinTransferIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifierBalabanUniformKPStillBlocked :
+  BalabanR559TOE.balabanUniformKPAbsorption
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false
+unifierBalabanUniformKPStillBlocked =
+  BalabanR559TOE.balabanUniformKPAbsorptionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifierBalabanOSWightmanStillBlocked :
+  BalabanR559TOE.balabanOSWightmanConstruction
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false
+unifierBalabanOSWightmanStillBlocked =
+  BalabanR559TOE.balabanOSWightmanConstructionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+
+------------------------------------------------------------------------
+-- Direct TOE conjunctive closure: the three missing physical producers
+-- remain blocked together. No Boolean flag becomes proof authority.
+-- Reuse R559 source-owned proofs without adding a model or an axiom.
+------------------------------------------------------------------------
+
+unifierBalabanPhysicalPromotionCut :
+  (BalabanR559TOE.balabanBlockSpinTransfer
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false)
+  × (BalabanR559TOE.balabanUniformKPAbsorption
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false)
+  × (BalabanR559TOE.balabanOSWightmanConstruction
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false)
+unifierBalabanPhysicalPromotionCut =
+  unifierBalabanBlockSpinStillBlocked ,
+  (unifierBalabanUniformKPStillBlocked ,
+   unifierBalabanOSWightmanStillBlocked)
+
+import DASHI.Unified.NavierStokesBM2TOEConvergenceExact as NSBM2TOE
+
+open NSBM2TOE public using
+  ( LiteralR571DissipationFold
+  ; ExactLiteralR571DissipationFold
+  ; literalR571M2BelowPhysicalDissipation
+  ; exactLiteralR571M2BelowPhysicalDissipation
+  )
+------------------------------------------------------------------------
+-- Navier-Stokes B / R571 M2 producer-strategy facade.
+------------------------------------------------------------------------
+
+unifierNavierStokesBM2FiniteFoldClosed : Bool
+unifierNavierStokesBM2FiniteFoldClosed =
+  NSBM2TOE.cardinalityFreeFiniteFoldClosed
+
+unifierNavierStokesBM2SamplewisePaymentStillAnalytic :
+  NSBM2TOE.samplewisePhysicalPaymentStillAnalytic ≡ true
+unifierNavierStokesBM2SamplewisePaymentStillAnalytic =
+  NSBM2TOE.samplewisePhysicalPaymentStillAnalyticIsTrue
+
+unifierNavierStokesBM2GalerkinFoldStillAnalytic :
+  NSBM2TOE.literalFoldIntoGalerkinDissipationStillAnalytic ≡ true
+unifierNavierStokesBM2GalerkinFoldStillAnalytic =
+  NSBM2TOE.literalFoldIntoGalerkinDissipationStillAnalyticIsTrue
+
+unifierNavierStokesBM2OldPDFB1B2B3B4NotMandatory :
+  NSBM2TOE.oldPDFB1B2B3B4Mandatory ≡ false
+unifierNavierStokesBM2OldPDFB1B2B3B4NotMandatory =
+  NSBM2TOE.oldPDFB1B2B3B4MandatoryIsFalse
+
+unifierNavierStokesBM2OldPDFB7NotMandatory :
+  NSBM2TOE.oldPDFB7DirectCovarianceEqualityMandatory ≡ false
+unifierNavierStokesBM2OldPDFB7NotMandatory =
+  NSBM2TOE.oldPDFB7DirectCovarianceEqualityMandatoryIsFalse
+
+unifierNavierStokesBM2ClayPromotion : Bool
+unifierNavierStokesBM2ClayPromotion =
+  NSBM2TOE.modernNSClayPromotion
+
+unifierNavierStokesBM2ClayPromotionStillFalse :
+  unifierNavierStokesBM2ClayPromotion ≡ false
+unifierNavierStokesBM2ClayPromotionStillFalse =
+  NSBM2TOE.modernNSClayPromotionStillFalse
+
+unifierNavierStokesBM2Receipt :
+  NSBM2TOE.NavierStokesBM2TOEReceipt
+unifierNavierStokesBM2Receipt =
+  NSBM2TOE.canonicalNavierStokesBM2TOEReceipt
+
+unifierNavierStokesBM2ZKPFrame :
+  NSBM2TOE.NavierStokesBM2TOEZKPFrame
+unifierNavierStokesBM2ZKPFrame =
+  NSBM2TOE.canonicalNavierStokesBM2TOEZKPFrame
+
+------------------------------------------------------------------------
+-- Canonical Navier-Stokes Clay frontier.
+-- Unifier consumes theorem-bearing owners through the normalized facade.
+------------------------------------------------------------------------
+
+import DASHI.Unified.NavierStokesClayFrontierTOEConvergenceExact as NSClayTOE
+
+unifierNavierStokesClayPromotion : Bool
+unifierNavierStokesClayPromotion =
+  NSClayTOE.navierStokesABCDClayPromotion
+
+unifierNavierStokesClayPromotionStillFalse :
+  unifierNavierStokesClayPromotion ≡ false
+unifierNavierStokesClayPromotionStillFalse =
+  NSClayTOE.navierStokesABCDClayPromotionStillFalse
+
+unifierNavierStokesGeneralRegularityComplete : Bool
+unifierNavierStokesGeneralRegularityComplete =
+  NSClayTOE.generalNSGlobalRegularityComplete
+
+unifierNavierStokesGeneralRegularityStillOpen :
+  unifierNavierStokesGeneralRegularityComplete ≡ false
+unifierNavierStokesGeneralRegularityStillOpen =
+  NSClayTOE.generalNSGlobalRegularityStillOpen
+
+unifierNavierStokesCarrierToGeneralImplicationProved : Bool
+unifierNavierStokesCarrierToGeneralImplicationProved =
+  NSClayTOE.carrierToGeneralNSImplicationProved
+
+unifierNavierStokesCarrierToGeneralImplicationStillOpen :
+  unifierNavierStokesCarrierToGeneralImplicationProved ≡ false
+unifierNavierStokesCarrierToGeneralImplicationStillOpen =
+  NSClayTOE.carrierToGeneralNSImplicationStillOpen
+
+unifierNavierStokesAuthorityPromotionGuard : Bool
+unifierNavierStokesAuthorityPromotionGuard =
+  NSClayTOE.navierStokesPromotionGuard
+
+unifierNavierStokesAuthorityPromotionGuardStillFalse :
+  unifierNavierStokesAuthorityPromotionGuard ≡ false
+unifierNavierStokesAuthorityPromotionGuardStillFalse =
+  NSClayTOE.navierStokesPromotionGuardStillFalse
+
+unifierNavierStokesClayFrontierZKPFrame :
+  NSClayTOE.NavierStokesClayFrontierTOEZKPFrame
+unifierNavierStokesClayFrontierZKPFrame =
+  NSClayTOE.canonicalNavierStokesClayFrontierTOEZKPFrame
+
+unifierNavierStokesTerminalPromotionImpossible :
+  NSClayTOE.NSClayDistanceFinalPromotion → ⊥
+unifierNavierStokesTerminalPromotionImpossible =
+  NSClayTOE.terminalClayPromotionImpossible
+
+
+------------------------------------------------------------------------
+-- Current periodic-B shared weighted wall from R736.
+-- Proof ownership remains in R736 through the canonical NS Clay facade.
+------------------------------------------------------------------------
+
+unifierNavierStokesSharedWeightedExactlyTwoLeaves : Bool
+unifierNavierStokesSharedWeightedExactlyTwoLeaves =
+  NSClayTOE.currentSharedWeightedExactlyTwoLeaves
+
+unifierNavierStokesSharedWeightedExactlyTwoLeavesIsTrue :
+  unifierNavierStokesSharedWeightedExactlyTwoLeaves ≡ true
+unifierNavierStokesSharedWeightedExactlyTwoLeavesIsTrue =
+  NSClayTOE.currentSharedWeightedExactlyTwoLeavesIsTrue
+
+unifierNavierStokesSharedWeightedSameCarrier : Bool
+unifierNavierStokesSharedWeightedSameCarrier =
+  NSClayTOE.currentSharedWeightedSameCarrier
+
+unifierNavierStokesSharedWeightedSameCarrierIsTrue :
+  unifierNavierStokesSharedWeightedSameCarrier ≡ true
+unifierNavierStokesSharedWeightedSameCarrierIsTrue =
+  NSClayTOE.currentSharedWeightedSameCarrierIsTrue
+
+unifierNavierStokesSharedWeightedCarrierIsInputLaplacian : Bool
+unifierNavierStokesSharedWeightedCarrierIsInputLaplacian =
+  NSClayTOE.currentSharedWeightedCarrierIsInputLaplacian
+
+unifierNavierStokesWeightedPlusEndpointClosed : Bool
+unifierNavierStokesWeightedPlusEndpointClosed =
+  NSClayTOE.currentWeightedPlusEndpointClosed
+
+unifierNavierStokesWeightedPlusEndpointStillOpen :
+  unifierNavierStokesWeightedPlusEndpointClosed ≡ false
+unifierNavierStokesWeightedPlusEndpointStillOpen =
+  NSClayTOE.currentWeightedPlusEndpointStillOpen
+
+unifierNavierStokesAugmentedCriticalWeightedClosed : Bool
+unifierNavierStokesAugmentedCriticalWeightedClosed =
+  NSClayTOE.currentAugmentedCriticalWeightedClosed
+
+unifierNavierStokesAugmentedCriticalWeightedStillOpen :
+  unifierNavierStokesAugmentedCriticalWeightedClosed ≡ false
+unifierNavierStokesAugmentedCriticalWeightedStillOpen =
+  NSClayTOE.currentAugmentedCriticalWeightedStillOpen
+
+unifierNavierStokesSharedWeightedLeavesBuildBarrier : Bool
+unifierNavierStokesSharedWeightedLeavesBuildBarrier =
+  NSClayTOE.currentSharedWeightedLeavesBuildBarrier
+
+unifierNavierStokesSharedWeightedLeavesBuildBarrierIsTrue :
+  unifierNavierStokesSharedWeightedLeavesBuildBarrier ≡ true
+unifierNavierStokesSharedWeightedLeavesBuildBarrierIsTrue =
+  NSClayTOE.currentSharedWeightedLeavesBuildBarrierIsTrue
+
+unifierNavierStokesR726IndependentLeafRequired : Bool
+unifierNavierStokesR726IndependentLeafRequired =
+  NSClayTOE.legacyR726IndependentLeafRequired
+
+unifierNavierStokesR726IndependentLeafNotRequired :
+  unifierNavierStokesR726IndependentLeafRequired ≡ false
+unifierNavierStokesR726IndependentLeafNotRequired =
+  NSClayTOE.legacyR726IndependentLeafNotRequired
+
+unifierNavierStokesStrictMarginR406IndependentLeafRequired : Bool
+unifierNavierStokesStrictMarginR406IndependentLeafRequired =
+  NSClayTOE.legacyStrictMarginR406IndependentLeafRequired
+
+unifierNavierStokesStrictMarginR406IndependentLeafNotRequired :
+  unifierNavierStokesStrictMarginR406IndependentLeafRequired ≡ false
+unifierNavierStokesStrictMarginR406IndependentLeafNotRequired =
+  NSClayTOE.legacyStrictMarginR406IndependentLeafNotRequired
+
+unifierNavierStokesBarrierDependentQPlusMinusShortcutAdmissible : Bool
+unifierNavierStokesBarrierDependentQPlusMinusShortcutAdmissible =
+  NSClayTOE.barrierDependentQPlusMinusShortcutAdmissible
+
+unifierNavierStokesBarrierDependentQPlusMinusShortcutStillCircular :
+  unifierNavierStokesBarrierDependentQPlusMinusShortcutAdmissible ≡ false
+unifierNavierStokesBarrierDependentQPlusMinusShortcutStillCircular =
+  NSClayTOE.barrierDependentQPlusMinusShortcutStillCircular
+
+unifierNavierStokesSharedWeightedClayPromotion : Bool
+unifierNavierStokesSharedWeightedClayPromotion =
+  NSClayTOE.currentSharedWeightedClayPromotion
+
+unifierNavierStokesSharedWeightedClayPromotionStillFalse :
+  unifierNavierStokesSharedWeightedClayPromotion ≡ false
+unifierNavierStokesSharedWeightedClayPromotionStillFalse =
+  NSClayTOE.currentSharedWeightedClayPromotionStillFalse
+
+unifierNavierStokesContinuumBKMPassageConstructed : Bool
+unifierNavierStokesContinuumBKMPassageConstructed =
+  NSClayTOE.continuumBKMPassageConstructed
+
+unifierNavierStokesContinuumBKMPassageStillOpen :
+  unifierNavierStokesContinuumBKMPassageConstructed ≡ false
+unifierNavierStokesContinuumBKMPassageStillOpen =
+  NSClayTOE.continuumBKMPassageStillOpen
+
+unifierNavierStokesAllDataBridgeConstructed : Bool
+unifierNavierStokesAllDataBridgeConstructed =
+  NSClayTOE.allDataBridgeConstructed
+
+unifierNavierStokesAllDataBridgeStillOpen :
+  unifierNavierStokesAllDataBridgeConstructed ≡ false
+unifierNavierStokesAllDataBridgeStillOpen =
+  NSClayTOE.allDataBridgeStillOpen
+
+unifierNavierStokesSubmissionPacketReady : Bool
+unifierNavierStokesSubmissionPacketReady =
+  NSClayTOE.submissionPacketReady
+
+unifierNavierStokesSubmissionPacketStillNotReady :
+  unifierNavierStokesSubmissionPacketReady ≡ false
+unifierNavierStokesSubmissionPacketStillNotReady =
+  NSClayTOE.submissionPacketStillNotReady
+
+unifierNavierStokesClayEligible : Bool
+unifierNavierStokesClayEligible =
+  NSClayTOE.clayEligible
+
+unifierNavierStokesClayEligibilityStillFalse :
+  unifierNavierStokesClayEligible ≡ false
+unifierNavierStokesClayEligibilityStillFalse =
+  NSClayTOE.clayEligibilityStillFalse
+
+------------------------------------------------------------------------
+-- Canonical Pareto / Ibrahim / fleet non-promotion gates.
+-- These are direct aliases of proof owners. No new theorem authority.
+------------------------------------------------------------------------
+
+toeParetoSearchPriorityCannotPayProof :
+  ParetoSnowballTOE.SearchPriorityCreatesProof → ⊥
+toeParetoSearchPriorityCannotPayProof =
+  ParetoSnowballTOE.searchPriorityDoesNotCreateProof
+
+toeIbrahimDegree729CannotPayMonsterRecognition :
+  ParetoSnowballTOE.Degree729CreatesMonsterHZetaRecognition → ⊥
+toeIbrahimDegree729CannotPayMonsterRecognition =
+  ParetoSnowballTOE.degree729DoesNotCreateMonsterHZetaRecognition
+
+toeFleetSpectralRankCannotPayAuthority :
+  FleetGapTOE.VectorSpectralAuthorityPromotion → ⊥
+toeFleetSpectralRankCannotPayAuthority =
+  FleetGapTOE.fleetVectorSpectralAuthorityPromotionImpossible
+
+toeFleetNumericABIRequiresIndependentEvidence :
+  FleetGapTOE.SpectralNumericABIPromotion → ⊥
+toeFleetNumericABIRequiresIndependentEvidence =
+  FleetGapTOE.fleetSpectralNumericABIPromotionImpossible
+
+------------------------------------------------------------------------
+-- Canonical brain/connectome/fMRI quotient boundary.
+-- The observation owners retain authority. This facade adds no empirical proof.
+------------------------------------------------------------------------
+
+toeBrainFirstMissing : BrainObservation.BrainObservationFirstMissing
+toeBrainFirstMissing = BrainFMRI.brainFirstMissing
+
+toeBrainBidirectionalFirstMissing :
+  BrainBidirectional.BidirectionalObservationFirstMissing
+toeBrainBidirectionalFirstMissing = BrainFMRI.bidirectionalFirstMissing
+
+toeBrainObservationNonPromotion :
+  BrainBidirectional.NonPromotionBoundary
+toeBrainObservationNonPromotion = BrainFMRI.brainNonPromotionBoundary
+
+toeBrainJPromotionBlocked :
+  BrainSpine.objectExternalJPromotion BrainFMRI.brainFMRIObject ≡ false
+toeBrainJPromotionBlocked = BrainFMRI.brainFMRIJPromotionBlocked
+
+------------------------------------------------------------------------
+-- Live Gate-4 frontier and Fleet target selection.
+------------------------------------------------------------------------
+
+unifierCurrentGate4FrontierLedgerLevel : ProofLevel
+unifierCurrentGate4FrontierLedgerLevel =
+  FleetHyperTOE.currentGate4FrontierLedgerLevel
+
+unifierCurrentGate4ClusteringToTransferGapLevel : ProofLevel
+unifierCurrentGate4ClusteringToTransferGapLevel =
+  FleetHyperTOE.currentGate4ClusteringToTransferGapLevel
+
+unifierFleetFormalGapTargetSelected : Bool
+unifierFleetFormalGapTargetSelected =
+  FleetHyperTOE.fleetFormalGapTargetSelected
+
+unifierHistoricalGate4CountSelectedAsFleetTarget : Bool
+unifierHistoricalGate4CountSelectedAsFleetTarget =
+  FleetHyperTOE.historicalGate4CountSelectedAsFleetTarget
+
+unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
+  FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
+unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
+  FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+
+------------------------------------------------------------------------
+-- R2P2 source-typed optical-clock comparison; do not promote quantum gravity.
+------------------------------------------------------------------------
+
+unifierR2P2NoQGDiscovery :
+  R2P2.quantumGravityEstablishedHere R2P2.canonicalR2P2ClockComparisonBoundary ≡ false
+unifierR2P2NoQGDiscovery =
+  R2P2.r2p2HasNoClaimedQGDiscovery
+
+unifierR2P2NoAcceptedClockRatio :
+  R2P2.fullClockComparisonUncertaintyAcceptedHere R2P2.canonicalR2P2ClockComparisonBoundary ≡ false
+unifierR2P2NoAcceptedClockRatio =
+  R2P2.r2p2HasNoAcceptedClockRatio
+
+------------------------------------------------------------------------
+-- R2P2 369/atomic/quantum/diamond source-typed composition.
+-- Exact finite index and graph assertions; no promoted GR/QG measurement.
+------------------------------------------------------------------------
+
+unifierR2P2369Architecture :
+  R2P2369.R2P2369FullLogicalArchitecture
+unifierR2P2369Architecture =
+  R2P2369.canonicalR2P2369FullLogicalArchitecture
+
+unifierR2P2369RefinementDiamond :
+  RefineR2P2.binaryRefine
+    (RefineR2P2.ternaryRefine
+      RefineR2P2.phase3Resolution)
+  ≡ RefineR2P2.ternaryRefine
+      (RefineR2P2.binaryRefine
+        RefineR2P2.phase3Resolution)
+unifierR2P2369RefinementDiamond =
+  R2P2369.resolutionDiamondAgrees
+
+unifierR2P2369NoQGPromotion :
+  R2P2369.fullQGClaimProved unifierR2P2369Architecture ≡ false
+unifierR2P2369NoQGPromotion =
+  R2P2369.fullArchitectureDoesNotConstructQuantumGravity
+
+unifierR2P2369NoMeasurements :
+  R2P2369.externalMeasurementsIngested unifierR2P2369Architecture ≡ false
+unifierR2P2369NoMeasurements =
+  R2P2369.fullArchitectureDoesNotIngestMeasurements
+
+------------------------------------------------------------------------
+-- Independent R2P2 max-cut: one-height clock-bias confounding is exact.
+-- The second finite height separates only this selected candidate pair.
+------------------------------------------------------------------------
+
+unifierR2P2BiasFiniteAmbiguity :
+  R2P2Bias.syntheticRate R2P2Bias.baselineWithLargeBias 3
+  ≡ R2P2Bias.syntheticRate R2P2Bias.doubledSlopeWithSmallBias 3
+unifierR2P2BiasFiniteAmbiguity =
+  R2P2Bias.oneHeightCannotDiscriminate
+
+unifierR2P2BiasNoQuantumGravity :
+  R2P2Bias.physicalQuantumGravityIdentified
+    R2P2Bias.canonicalR2P2BiasIdentifiabilityMaxCut ≡ false
+unifierR2P2BiasNoQuantumGravity =
+  R2P2Bias.thisExampleDoesNotProveQuantumGravity
+
+------------------------------------------------------------------------
+-- Three-clock ratio-loop integrity: conditional 369 finite witness only.
+------------------------------------------------------------------------
+
+unifierR2P2LoopSyntheticClosure :
+  R2P2Loop.loopNumerator ≡ R2P2Loop.loopDenominator
+unifierR2P2LoopSyntheticClosure =
+  R2P2Loop.syntheticCycleCloses
+
+unifierR2P2LoopNullCannotProveCurvature :
+  R2P2Loop.threeClockLoopNullImpliesCurvature
+    R2P2Loop.canonicalThreeClockLoopSourceBoundary ≡ false
+unifierR2P2LoopNullCannotProveCurvature =
+  R2P2Loop.threeClockLoopCannotClaimCurvature
+
+------------------------------------------------------------------------
+-- R2P2 / existing 369 wave constructor: exact fibre vs lossy trit.
+-- This is not a measured optical phase, unitarity or gravity theorem.
+------------------------------------------------------------------------
+
+unifierR2P2WaveSignedBeatRetained :
+  (branch : R2P2Wave.BeatBranch) →
+  R2P2Symbolic.decode
+    (R2P2Symbolic.encode R2P2Wave.signedBeatWaveCoding branch)
+    ≡ branch
+unifierR2P2WaveSignedBeatRetained =
+  R2P2Wave.signedBeatEncodeDecode
+
+unifierR2P2WaveNoPhysicalPhasePromotion :
+  R2P2Wave.c3ProvesOpticalCarrierPhaseCalibration
+    R2P2Wave.canonicalWaveCombAuthorityBoundary ≡ false
+unifierR2P2WaveNoPhysicalPhasePromotion =
+  R2P2Wave.waveBridgeDoesNotCalibratePhysicalPhase
+
+------------------------------------------------------------------------
+-- Same-clock optical-lattice control boundary: imported finite witness.
+-- Ma 87Sr AA, Bothwell/Ye Sr and R2P2 Yb remain distinct instruments.
+------------------------------------------------------------------------
+
+unifierR2P2FiniteLatticeNoncommuting :
+  R2P2Lattice.nearestNeighbourAdjacency
+    (R2P2Lattice.siteDependentPotential R2P2Lattice.leftBasisState)
+  ≡ R2P2Lattice.siteDependentPotential
+    (R2P2Lattice.nearestNeighbourAdjacency R2P2Lattice.leftBasisState)
+  → ⊥
+unifierR2P2FiniteLatticeNoncommuting =
+  R2P2Lattice.finiteLatticeOperatorsFailToCommute
+
+unifierR2P2NoInfiniteAAFromFinite3 :
+  R2P2Lattice.finiteP3ProvesInfiniteAAThreshold
+    R2P2Lattice.canonicalOpticalLattice369PhysicalAuthority ≡ false
+unifierR2P2NoInfiniteAAFromFinite3 =
+  R2P2Lattice.latticeCannotProveInfiniteAAThreshold
+
+unifierR2P2OpticalLatticeNotQuantumGravity :
+  R2P2Lattice.measuredQuantumGravityObserved
+    R2P2Lattice.canonicalOpticalLattice369PhysicalAuthority ≡ false
+unifierR2P2OpticalLatticeNotQuantumGravity =
+  R2P2Lattice.latticeDoesNotObserveQuantumGravity
+
+------------------------------------------------------------------------
+-- Ma 2026 S4 supercell N497=18, N813=11, nominal cross-product.
+-- Equal number 18 does not identify a physical R2P2/369 wave carrier.
+------------------------------------------------------------------------
+
+unifierMaSupercellNominal18to11 :
+  R2P2Lattice.maFirst813Periods * R2P2Lattice.nominal813Nm + 3
+  ≡ R2P2Lattice.maFirst497Periods * R2P2Lattice.nominal497Nm
+unifierMaSupercellNominal18to11 =
+  R2P2Lattice.maFirstNominalSupercellOffset
+
+unifierMaSupercell18NotPhysicalC18 :
+  R2P2Lattice.paperSupercell18EqualsPhysicalC18Realization
+    R2P2Lattice.canonicalOpticalLattice369PhysicalAuthority ≡ false
+unifierMaSupercell18NotPhysicalC18 =
+  R2P2Lattice.maSupercell18IsNotAnIdentifiedC18PhysicsRealization
+
+------------------------------------------------------------------------
+-- Reused exact balanced trit/binary codec and C3 aliasing NS cut.
+-- Mathematical modes are labels. Codec inversion is not quadratic
+-- Fourier fidelity, a Yb clock measurement, or a Clay NS theorem.
+------------------------------------------------------------------------
+
+unifierThreeModeBinaryTernaryCodecRoundTrip :
+  (m : ModeNSCut.ThreeMode) →
+  ModeNSCut.twoBitsToThreeMode (ModeNSCut.threeModeToTwoBits m)
+    ≡ just m
+unifierThreeModeBinaryTernaryCodecRoundTrip =
+  ModeNSCut.threeModeTwoBitRoundTrip
+
+unifierThreeModeFourierQuadraticAlias :
+  ModeNSCut.periodicQuadraticModeSum ModeNSCut.modePlus ModeNSCut.modePlus
+    ≡ ModeNSCut.modeMinus
+unifierThreeModeFourierQuadraticAlias =
+  ModeNSCut.positivePositiveAliasesToNegative
+
+unifierThreeModeBinaryTernaryDoesNotProveNS :
+  ModeNSCut.nsClayRegularityProved
+    ModeNSCut.canonicalThreeModeCodecNSAuthority ≡ false
+unifierThreeModeBinaryTernaryDoesNotProveNS =
+  ModeNSCut.threeModeCodecIsNotAnNSProof
+
+-- Existing framed-27 trit codec is a basis-label representation.
+-- Exact NS k in Z^3 must not be confused with its C3^3 sample residue.
+unifierNS27ModeCubeQuadraticAlias :
+  ModeNSCut.threeAxisPeriodicallyAliasedPlusXSquare
+    ≡ ModeNSCut.threeAxisBalancedModeCube
+        ModeNSCut.modeMinus ModeNSCut.modeZero ModeNSCut.modeZero
+unifierNS27ModeCubeQuadraticAlias =
+  ModeNSCut.periodicThreeAxisPositiveXSquareWrapsToNegativeX
+
+------------------------------------------------------------------------
+-- 27x27 original ternary pair reused as source T^6, not GF(729).
+-- Numeric pair incidence, exact integer-frequency output and five-point
+-- index recovery are separate from original NS analytic and optical claims.
+------------------------------------------------------------------------
+
+unifier729ActualInsidePairs :
+  Fourier729.countWhereL Fourier729.insidePair27 Fourier729.pair729 ≡ 343
+unifier729ActualInsidePairs = Fourier729.exact343InWindowPairs
+
+unifier729ActualOutsidePairs :
+  Fourier729.countWhereL
+    (λ pair → Fourier729.notB (Fourier729.insidePair27 pair))
+    Fourier729.pair729 ≡ 386
+unifier729ActualOutsidePairs = Fourier729.exact386OutOfWindowPairs
+
+unifier729SixTritPairBidi :
+  (pair : Pair729.OrderedPair729) →
+  Pair729.sixTritsToOrderedPair (Pair729.orderedPairToSixTrits pair) ≡ pair
+unifier729SixTritPairBidi =
+  Pair729.sixTritsAfterOrderedPairRoundTrip
+
+unifier729PairExactConvolution :
+  (amplitude : Fourier729.ModeCube27 → Nat)
+  (target : Convolution729.WideCube125) →
+  Convolution729.fiveIndexRecoveredConvolutionAt amplitude target
+    ≡ Convolution729.exactConvolutionAt amplitude target
+unifier729PairExactConvolution =
+  Convolution729.all729PairsFiveIndexRecoveryIsExact
+
+------------------------------------------------------------------------
+-- Original exact C3^3 cyclotomic DFT and Parseval are source-owned.
+-- This carrier is cyclic; integer NS/Galerkin sums remain separate.
+------------------------------------------------------------------------
+
+unifierExistingC3FourierInverse :
+  (f : PeriodicFourier729.ModeCoefficient27)
+  (m : Fourier729.ModeCube27) →
+  PeriodicFourier729.unpackModeSignal
+    (Fourier729Owner.inverseFourier27
+      (Fourier729Owner.fourier27 (PeriodicFourier729.packModeSignal f))) m
+    ≡ f m
+unifierExistingC3FourierInverse =
+  PeriodicFourier729.existingPeriodic27FourierRoundTrip
+
+unifierExistingC3CyclicConvolution :
+  (f g : PeriodicFourier729.ModeCoefficient27)
+  (m : Fourier729.ModeCube27) →
+  PeriodicFourier729.periodicC3ConvolutionOfModeCoefficients f g m
+    ≡ PeriodicFourier729.spectralC3ConvolutionOfModeCoefficients f g m
+unifierExistingC3CyclicConvolution =
+  PeriodicFourier729.periodic27DirectEqualsSpectralAtEveryMode
+
+-- Original C3^3 DFT is exact ON THE CYCLIC QUOTIENT. Integer outputs
+-- (2,0,0) and (-1,0,0) collide on that quotient.
+unifierCyclic27CannotRecoverTrueWideFourierMode :
+  Fourier729Core.ConsumerSufficient
+    Convolution729.wideIntegerOutputToThreeResidues (λ w → w)
+    → ⊥
+unifierCyclic27CannotRecoverTrueWideFourierMode =
+  Convolution729.noDecoderOfActualWideModeFromCyclic27
+
+------------------------------------------------------------------------
+-- 4³ = 64 retained-output Pareto vs 5³ = 125 full-output labels.
+-- Source-inherited Q(omega) arithmetic, arbitrary distinct inputs.
+-- No 4-grid sampled-physical-space DFT/NS/clock/Monster identity.
+------------------------------------------------------------------------
+
+unifierFourGridBilinearRetained :
+  (f g : Fourier729.ModeCube27 → Fourier729Owner.Cyclotomic3)
+  (target : Fourier729.ModeCube27) →
+  Bilinear729.fourGridBilinearRetainedAt Bilinear729.cyclotomicOps f g target
+    ≡ Bilinear729.trueBilinearConvolutionAt Bilinear729.cyclotomicOps
+        f g (Convolution729.retainedToWide target)
+unifierFourGridBilinearRetained =
+  Bilinear729.cyclotomicFourGridRetainedBilinearExact
+
+unifierFiveGridBilinearFull :
+  (f g : Fourier729.ModeCube27 → Fourier729Owner.Cyclotomic3)
+  (target : Convolution729.WideCube125) →
+  Bilinear729.fiveGridBilinearFullAt Bilinear729.cyclotomicOps f g target
+    ≡ Bilinear729.trueBilinearConvolutionAt Bilinear729.cyclotomicOps f g target
+unifierFiveGridBilinearFull =
+  Bilinear729.cyclotomicFiveGridFullBilinearExact
+
+unifierFourGridDoesNotIdentifyOuterTwoFrequencies :
+  FourGridPareto729.foldFour ModeNSCut.wideMinusTwo
+    ≡ FourGridPareto729.foldFour ModeNSCut.widePlusTwo
+unifierFourGridDoesNotIdentifyOuterTwoFrequencies =
+  FourGridPareto729.outerFrequencyCollisionAtFour
+
+------------------------------------------------------------------------
+-- Original strict global antipodes: 27=centre+13 pairs and
+-- 9=centre+4 pairs. Source Q(omega) Hermitian real-field packing
+-- is invertible, but bare orbit labels cannot encode convolution.
+-- This is NOT the D4 irreducible-character count or Monster3B action.
+------------------------------------------------------------------------
+
+unifierFiveOrbitNineSymmetry :
+  OriginalAntipodalSym729.antipodalClass9Count ≡ 5
+unifierFiveOrbitNineSymmetry =
+  AntipodalSym729.sourceFiveNineOrbitCount
+
+unifierThirteenPairsTwentySevenSymmetry :
+  27 ≡ 1 + 13 * 2
+unifierThirteenPairsTwentySevenSymmetry =
+  AntipodalSym729.sourceThirteenNonzeroPairs
+
+unifierHermitianThirteenPairRoundTrip :
+  (s : HermitianSym729.Hermitian27)
+  (mode : Fourier729.ModeCube27) →
+  HermitianSym729.packedMode
+    (HermitianSym729.packHermitian27 s) mode
+    ≡ HermitianSym729.coefficient s mode
+unifierHermitianThirteenPairRoundTrip =
+  HermitianSym729.decodeAfterEncodeHermitian27
+
+unifierHermitianFiveNineRoundTrip :
+  (s : HermitianSym729.Hermitian9)
+  (plane : AntipodalSym729.Plane9) →
+  HermitianSym729.packedPlane9
+    (HermitianSym729.packHermitian9 s) plane
+    ≡ HermitianSym729.coefficient9 s plane
+unifierHermitianFiveNineRoundTrip =
+  HermitianSym729.decodeAfterEncodeHermitian9
+
+unifierTrueIntegerPairNegationCovariance :
+  (p q : Fourier729.ModeCube27) →
+  Convolution729.exactPairOutput
+    (AntipodalSym729.negateCube p)
+    (AntipodalSym729.negateCube q)
+    ≡ AntipodalSym729.negateWideCube
+        (Convolution729.exactPairOutput p q)
+unifierTrueIntegerPairNegationCovariance =
+  AntipodalSym729.trueIntegerQuadraticPairSumNegationEquivariance
+
+------------------------------------------------------------------------
+-- True Hermitian compact Fourier carrier BIDI through the original
+-- 729 ordered integer Z3 coefficient interaction consumer. This does
+-- not assert a faster 13-only algorithm or global NS/Monster physics.
+------------------------------------------------------------------------
+
+unifierCompact13PairsExactIntegerConvolution :
+  (a b : HermitianSym729.Hermitian27)
+  (target : Convolution729.WideCube125) →
+  HermitianConv729.compactFullBilinearAt
+    (HermitianSym729.packHermitian27 a)
+    (HermitianSym729.packHermitian27 b) target
+    ≡ HermitianConv729.originalFullBilinearAt a b target
+unifierCompact13PairsExactIntegerConvolution =
+  HermitianConv729.compact13PairTransportPreservesAll125IntegerOutputs
+
+unifierCompact13PairsFourGridRetained :
+  (a b : HermitianSym729.Hermitian27)
+  (target : Fourier729.ModeCube27) →
+  HermitianConv729.compactFourGridRetainedAt
+    (HermitianSym729.packHermitian27 a)
+    (HermitianSym729.packHermitian27 b) target
+    ≡ HermitianConv729.originalFullBilinearAt a b
+      (Convolution729.retainedToWide target)
+unifierCompact13PairsFourGridRetained =
+  HermitianConv729.compact13PairsPreserveFourGridRetainedQuadratic
+
+unifierCompact13PairsFiveGridFull :
+  (a b : HermitianSym729.Hermitian27)
+  (target : Convolution729.WideCube125) →
+  HermitianConv729.compactFiveGridFullAt
+    (HermitianSym729.packHermitian27 a)
+    (HermitianSym729.packHermitian27 b) target
+    ≡ HermitianConv729.originalFullBilinearAt a b target
+unifierCompact13PairsFiveGridFull =
+  HermitianConv729.compact13PairsPreserveFiveGridFullQuadratic
+
+------------------------------------------------------------------------
+-- Source-owned five antipodal classes in 9 are a REAL Fourier plane
+-- codec with 1 real centre + 4 complex conjugate pairs. All 81
+-- ordered quadratic pair coefficients and 25 wide outputs preserved.
+------------------------------------------------------------------------
+
+unifierFiveInNineHermitian81PairConvolution :
+  (a b : HermitianSym729.Hermitian9)
+  (target : HermitianPlane81.WidePlane25) →
+  HermitianPlane81.packedFivePlaneBilinearAt
+    (HermitianSym729.packHermitian9 a)
+    (HermitianSym729.packHermitian9 b) target
+    ≡ HermitianPlane81.truePlaneBilinearAt
+        (HermitianSym729.coefficient9 a)
+        (HermitianSym729.coefficient9 b) target
+unifierFiveInNineHermitian81PairConvolution =
+  HermitianPlane81.fiveOrbitPlaneCodecPreservesAll25QuadraticOutputs
+
+------------------------------------------------------------------------
+-- Four-grid cyclic Fourier has eight self-antipodal frequency corners
+-- (0 or Nyquist 2 in each axis). Odd C3/5 grids have only one centre.
+-- Actual 4th/5th root FFT field transport remains a separate producer.
+------------------------------------------------------------------------
+
+unifierFourGridEightFixedNyquist :
+  Fourier729.countWhereL NyquistSym729.fourFixedCube
+    NyquistSym729.allFourGridCubes ≡ 8
+unifierFourGridEightFixedNyquist =
+  NyquistSym729.fourCubeHasEightFixedAntipodes
+
+unifierFiveGridOneFixedCentre :
+  Fourier729.countWhereL NyquistSym729.fiveFixedCube
+    NyquistSym729.allFiveGridCubes ≡ 1
+unifierFiveGridOneFixedCentre =
+  NyquistSym729.fiveCubeHasOneFixedAntipode
+
+unifierFourGrid36OrbitClasses :
+  8 + 28 ≡ 36
+unifierFourGrid36OrbitClasses =
+  NyquistSym729.fourCubeOrbitClasses36
+
+unifierFiveGrid63OrbitClasses :
+  1 + 62 ≡ 63
+unifierFiveGrid63OrbitClasses =
+  NyquistSym729.fiveCubeOrbitClasses63
+
+-- Simultaneous inversion of ordered pair labels: 729 -> 365 classes.
+-- This is NOT independent antipodal quotienting of either input mode.
+unifierActual729PositivePairOrbitCount :
+  Pairs365Owner.countWhereL Pair365.positivePair Pairs365Owner.pair729 ≡ 365
+unifierActual729PositivePairOrbitCount = Pair365.actualPositivePairRepresentatives
+
+
+------------------------------------------------------------------------
+-- 365 canonical pair events: exact reflected contribution and counts.
+-- Global permutation/sum equivalence to all 729 ordered terms is open.
+------------------------------------------------------------------------
+import DASHI.Physics.Closure.R2P227729OrbitWeighted365ConvolutionExact as OrbitWeighted365
+
+unifierOrbit365CanonicalPairCount :
+  Pairs365Owner.lengthL OrbitWeighted365.canonicalOrderedPairs ≡ 365
+unifierOrbit365CanonicalPairCount =
+  OrbitWeighted365.actual365CanonicalPairEntries
+
+unifierOrbit365EventCount :
+  (a b : HermitianSym729.Hermitian27) →
+  Pairs365Owner.lengthL (OrbitWeighted365.orbitWeightedEvents a b) ≡ 729
+unifierOrbit365EventCount =
+  OrbitWeighted365.actual729WeightedEvents
+
+unifierOrbit365ReflectedEventExact :
+  (a b : HermitianSym729.Hermitian27)
+  (pair : Pairs365Owner.ModePair729) →
+  OrbitWeighted365.sourceEvent a b
+    (AntipodalSym729.simultaneouslyNegateOrderedPair pair)
+  ≡ OrbitWeighted365.invertedEvent (OrbitWeighted365.sourceEvent a b pair)
+unifierOrbit365ReflectedEventExact =
+  OrbitWeighted365.reflectedEventIsConjugate
+
+
+-- Five-in-nine plane -> 41 actual ordered pair orbits -> 81 events.
+unifierPlane41CanonicalCount :
+  Pairs365Owner.lengthL OrbitWeighted365.canonicalPlaneOrderedPairs ≡ 41
+unifierPlane41CanonicalCount =
+  OrbitWeighted365.actual41PlanePairOrbits
+
+unifierPlane41Emits81Events :
+  (a b : HermitianSym729.Hermitian9) →
+  Pairs365Owner.lengthL (OrbitWeighted365.orbitWeightedPlaneEvents a b) ≡ 81
+unifierPlane41Emits81Events =
+  OrbitWeighted365.actual81WeightedPlaneEvents
+
+unifierPlane41ConjugateEvent :
+  (a b : HermitianSym729.Hermitian9)
+  (pair : HermitianPlane81.PlanePair81) →
+  OrbitWeighted365.planeSourceEvent a b
+    (OrbitWeighted365.negatePlaneOrderedPair pair)
+  ≡ OrbitWeighted365.invertedPlaneEvent
+      (OrbitWeighted365.planeSourceEvent a b pair)
+unifierPlane41ConjugateEvent =
+  OrbitWeighted365.reflectedPlaneEventIsConjugate
+
+
+------------------------------------------------------------------------
+-- New independent Gaussian Q(i) C4³ Fourier character orthogonality.
+-- Do not substitute the source-owned Q(omega) C3³ FFT for fourth roots.
+-- A fully normalized sampled-product Agda theorem still remains open.
+------------------------------------------------------------------------
+import DASHI.Physics.Closure.R2P2C4GaussianFourierCharacterExact as C4Gaussian
+
+unifierC4GaussianOneDimOrthogonality :
+  (k l : FourGridPareto729.FourGridMode) →
+  C4Gaussian.inner4 k l ≡ C4Gaussian.delta4 k l
+unifierC4GaussianOneDimOrthogonality =
+  C4Gaussian.oneDimensionalCharacterOrthogonality
+
+unifierC4GaussianCubeOrthogonality :
+  (k l : C4Gaussian.Cube4) →
+  C4Gaussian.cubeInner4 k l ≡ C4Gaussian.cubeDelta4 k l
+unifierC4GaussianCubeOrthogonality =
+  C4Gaussian.cubeCharacterOrthogonality
+
+
+------------------------------------------------------------------------
+-- C4 Gaussian exact 64-sample tensor DFT: both inverse directions.
+-- Reuses the C4 Q(i) character owner and the C3 tensor-proof method.
+-- No projected quadratic product claim is promoted here.
+------------------------------------------------------------------------
+import DASHI.Physics.Closure.R2P2C4GaussianSampledFourierBidiExact as C4Sampled64
+
+unifierC4SampledForwardInverse :
+  (s : C4Sampled64.CubeSignal64) →
+  C4Sampled64.fourier64 (C4Sampled64.inverseFourier64 s) ≡ s
+unifierC4SampledForwardInverse =
+  C4Sampled64.cubeFourierForwardInverse
+
+unifierC4SampledInverseForward :
+  (s : C4Sampled64.CubeSignal64) →
+  C4Sampled64.inverseFourier64 (C4Sampled64.fourier64 s) ≡ s
+unifierC4SampledInverseForward =
+  C4Sampled64.cubeFourierInversion
+
+
+------------------------------------------------------------------------
+-- Explicit 27 signed integer Fourier modes -> zero-pad 64 -> C4^3
+-- unscaled synthesis -> pointwise sampled product -> normalized forward
+-- -> 27 retained outputs. No silent same-object NS promotion.
+------------------------------------------------------------------------
+import DASHI.Physics.Closure.R2P2C4RetainedSampledOperatorExact as C4Retained
+
+unifierC4Pad27RoundTrip :
+  (f : Fourier729.ModeCube27 → C4Gaussian.Gaussian4)
+  (mode : Fourier729.ModeCube27) →
+  C4Retained.readRetained (C4Retained.pad27To64 f) mode ≡ f mode
+unifierC4Pad27RoundTrip = C4Retained.paddingRetainsAll27
+
+unifierC4RetainedSampledBilinear :
+  (Fourier729.ModeCube27 → C4Gaussian.Gaussian4) →
+  (Fourier729.ModeCube27 → C4Gaussian.Gaussian4) →
+  Fourier729.ModeCube27 → C4Gaussian.Gaussian4
+unifierC4RetainedSampledBilinear =
+  C4Retained.retainedSampledBilinear
+
+
+-- Original polymorphic true integer 729-pair theorem, now at exactly
+-- the same Q(i) scalar carrier as the new C4 64-sample FFT.
+unifierC4GaussianIndexPreservesTrueIntegerConvolution :
+  (f g : Fourier729.ModeCube27 → C4Gaussian.Gaussian4)
+  (target : Fourier729.ModeCube27) →
+  C4Retained.fourGridGaussianIndexConvolutionAt f g target
+  ≡ C4Retained.trueGaussianIntegerConvolutionAt f g
+      (Convolution729.retainedToWide target)
+unifierC4GaussianIndexPreservesTrueIntegerConvolution =
+  C4Retained.fourGridGaussianIndexIsTrueIntegerConvolution
+
+
+------------------------------------------------------------------------
+-- Reuse original finite weighted reindexing and physical NS permutation
+-- METHOD for the distinct 365/729 simultaneous-inversion action.
+-- This is explicitly CONDITIONAL on the actual ordered address
+-- permutation; its concrete unique/membership proof remains open.
+------------------------------------------------------------------------
+import Data.List.Relation.Binary.Permutation.Propositional as PairPerm365
+import DASHI.Physics.Closure.R2P227729Orbit365PermutationReductionExact as Orbit365Perm
+
+unifierExpanded365Has729OrderedAddresses :
+  Pairs365Owner.lengthL Orbit365Perm.expandedCanonicalPairs ≡ 729
+unifierExpanded365Has729OrderedAddresses =
+  Orbit365Perm.expandedCanonicalPairCount
+
+unifierFull365HermitianSumGivenAddressPermutation :
+  (a b : HermitianSym729.Hermitian27)
+  (target : Convolution729.WideCube125) →
+  Pairs365Owner.pair729 PairPerm365.↭ Orbit365Perm.expandedCanonicalPairs →
+  OrbitWeighted365.unreducedConvolutionAt a b target
+    ≡ OrbitWeighted365.orbitWeightedConvolutionAt a b target
+unifierFull365HermitianSumGivenAddressPermutation =
+  Orbit365Perm.fullPairSumEqualsOrbitSumGivenPermutation
+
+
+------------------------------------------------------------------------
+-- Source-written unconditional 365 / 729 finite convolution theorem:
+-- exact dense rank-sorted 729 address permutation; the prior
+-- hypothesis-bearing permutation boundary is now supplied in source.
+-- Exact-head Agda kernel validation remains necessary.
+------------------------------------------------------------------------
+import DASHI.Physics.Closure.R2P227729Orbit365RankSortPermutationExact as Orbit365Rank
+
+unifierActual729AddressesPermuteFrom365 :
+  Pairs365Owner.pair729 PairPerm365.↭ Orbit365Perm.expandedCanonicalPairs
+unifierActual729AddressesPermuteFrom365 =
+  Orbit365Rank.actualOriginal729PermutesToExpanded365
+
+unifierOrbit365FullHermitianConvolutionMatches729 :
+  (a b : HermitianSym729.Hermitian27)
+  (k : Convolution729.WideCube125) →
+  OrbitWeighted365.unreducedConvolutionAt a b k
+    ≡ OrbitWeighted365.orbitWeightedConvolutionAt a b k
+unifierOrbit365FullHermitianConvolutionMatches729 =
+  Orbit365Rank.orbit365FullHermitianConvolutionEquals729
+
+
+------------------------------------------------------------------------
+-- Independently source-written complete five-in-nine / 41-in-81 plane
+-- Hermitian Q(omega) operator identity for the original 25 integer
+-- outputs. Uses the SAME generic rank-sort permutation proof as 3D.
+-- Kernel execution pending. Does not imply D4 or physical NS.
+------------------------------------------------------------------------
+import DASHI.Physics.Closure.R2P281PlaneOrbit41RankSortConvolutionExact as Plane41Rank
+
+unifierOriginal81PlanePermutesFrom41 :
+  HermitianPlane81.planePairs81 PairPerm365.↭ Plane41Rank.expanded41PlanePairs
+unifierOriginal81PlanePermutesFrom41 =
+  Plane41Rank.originalPlanePairsPermuteToExpanded41
+
+unifierOriginalFiveInNineConvolutionMatches41 :
+  (a b : HermitianSym729.Hermitian9)
+  (target : HermitianPlane81.WidePlane25) →
+  HermitianPlane81.truePlaneBilinearAt
+    (HermitianSym729.coefficient9 a)
+    (HermitianSym729.coefficient9 b) target
+  ≡ OrbitWeighted365.orbitWeightedPlaneConvolutionAt a b target
+unifierOriginalFiveInNineConvolutionMatches41 =
+  Plane41Rank.sourceFiveInNineTrueConvolutionEqualsOrbit41
+
+
+------------------------------------------------------------------------
+-- Original C5 group indexed at real five-point residues, with NEW
+-- exact Q(zeta_5) character algebra and 125-point tensor orthogonality.
+-- No imported C3/4 character or Monster same-object shortcut.
+------------------------------------------------------------------------
+import DASHI.Physics.Closure.R2P2C5CyclotomicFullFourierCharacterExact as C5Character125
+
+unifierC5FifthRootExact :
+  C5Character125._*5_ C5Character125.zetaFourth C5Character125.zeta5
+  ≡ C5Character125.one5
+unifierC5FifthRootExact = C5Character125.zetaFifthLaw
+
+unifierC5Full125CharacterOrthogonality :
+  (k l : Convolution729.GridCube125) →
+  C5Character125.cubeInner5 k l ≡ C5Character125.cubeDelta5 k l
+unifierC5Full125CharacterOrthogonality =
+  C5Character125.cubeCharacterOrthogonality
+
+
+------------------------------------------------------------------------
+-- Full 125-sample Q(zeta5) actual finite FFT, input 27-to-125 padding,
+-- pointwise spectral multiplication and original coefficient-polymorphic
+-- 729 pair / 125 exact integer outputs. SAME scalar carrier only.
+-- The sample-to-index equation is still a separate analytic-algebraic
+-- finite kernel obligation; never replace it by a synthetic receipt.
+------------------------------------------------------------------------
+import DASHI.Physics.Closure.R2P2C5FullSampledFourierBidiExact as C5Sampled125
+import DASHI.Physics.Closure.R2P2C5FullSampledIntegerOperatorExact as C5FullOperator
+
+unifierC5Actual125SampledForwardInverse :
+  (s : C5Sampled125.CubeSignal125) →
+  C5Sampled125.fourier125 (C5Sampled125.inverseFourier125 s) ≡ s
+unifierC5Actual125SampledForwardInverse =
+  C5Sampled125.cubeFourierForwardInverse
+
+unifierC5Actual125SampledInverseForward :
+  (s : C5Sampled125.CubeSignal125) →
+  C5Sampled125.inverseFourier125 (C5Sampled125.fourier125 s) ≡ s
+unifierC5Actual125SampledInverseForward =
+  C5Sampled125.cubeFourierInversion
+
+unifierC5Pad27RetainsCoefficients :
+  (f : Fourier729.ModeCube27 → C5Character125.Cyclotomic5)
+  (k : Fourier729.ModeCube27) →
+  C5FullOperator.readRetained (C5FullOperator.pad27To125 f) k ≡ f k
+unifierC5Pad27RetainsCoefficients =
+  C5FullOperator.paddingRetainsAll27
+
+unifierC5FullIndexedEqualsOriginalInteger :
+  (f g : Fourier729.ModeCube27 → C5Character125.Cyclotomic5)
+  (k : Convolution729.WideCube125) →
+  C5FullOperator.indexedFiveGridBilinearAt f g k
+    ≡ C5FullOperator.originalTrue125BilinearAt f g k
+unifierC5FullIndexedEqualsOriginalInteger =
+  C5FullOperator.indexedFiveGridEqualsTrueFullInteger
+
+unifierC5ActualFull125SampledOperator :
+  (Fourier729.ModeCube27 → C5Character125.Cyclotomic5) →
+  (Fourier729.ModeCube27 → C5Character125.Cyclotomic5) →
+  Convolution729.WideCube125 → C5Character125.Cyclotomic5
+unifierC5ActualFull125SampledOperator =
+  C5FullOperator.fullSampledBilinear125
+
+
+------------------------------------------------------------------------
+-- Source-written C5 Q(zeta5) one-axis ACTUAL sampled multiplication
+-- equals original five-group cyclic convolution, arbitrary inputs.
+-- Preserves the three-axis sampled/index and NS analytic gates.
+------------------------------------------------------------------------
+unifierC5OneAxisSampledConvolutionEqualsIndexed :
+  (a b : C5Sampled125.Quint C5Character125.Cyclotomic5) →
+  C5Sampled125.sampledConvolution5 a b
+    ≡ C5Sampled125.cyclicConvolution5 a b
+unifierC5OneAxisSampledConvolutionEqualsIndexed =
+  C5Sampled125.oneAxisSampledConvolutionIsCyclic
+
+
+------------------------------------------------------------------------
+-- New actual 27-by-27 distributive expansion on 729 ORIGINAL ordered
+-- Fourier pairs, instantiated separately over the existing Q(i)
+-- and Q(zeta5) scalar owners. Proves a finite source-level step toward
+-- sampled/index equality; DOES NOT claim the missing character sum step.
+------------------------------------------------------------------------
+import Data.Product as FourierPairProjection
+
+unifierC4Actual729ProductExpansion :
+  (f g : Fourier729.ModeCube27 → C4Gaussian.Gaussian4) →
+  C4Gaussian._*G_
+    (Bilinear729.sumAll C4Retained.gaussianCoefficientOps Fourier729.cube27 f)
+    (Bilinear729.sumAll C4Retained.gaussianCoefficientOps Fourier729.cube27 g)
+  ≡ Bilinear729.sumAll C4Retained.gaussianCoefficientOps Fourier729.pair729
+    (λ pair → C4Gaussian._*G_
+      (f (FourierPairProjection.proj₁ pair))
+      (g (FourierPairProjection.proj₂ pair)))
+unifierC4Actual729ProductExpansion =
+  C4Retained.gaussianActual729InputProductExpansion
+
+unifierC5Actual729ProductExpansion :
+  (f g : Fourier729.ModeCube27 → C5Character125.Cyclotomic5) →
+  C5Character125._*5_
+    (Bilinear729.sumAll C5FullOperator.cyclotomicFiveOps Fourier729.cube27 f)
+    (Bilinear729.sumAll C5FullOperator.cyclotomicFiveOps Fourier729.cube27 g)
+  ≡ Bilinear729.sumAll C5FullOperator.cyclotomicFiveOps Fourier729.pair729
+    (λ pair → C5Character125._*5_
+      (f (FourierPairProjection.proj₁ pair))
+      (g (FourierPairProjection.proj₂ pair)))
+unifierC5Actual729ProductExpansion =
+  C5FullOperator.cyclotomicFiveActual729InputProductExpansion
+
+
+------------------------------------------------------------------------
+-- Literal 27-into-729 Fourier CHARACTER-WEIGHTED product at each sample.
+-- Source Fubini + original character-addition law; no premature
+-- normalized sampled→indexed/physical NS promotion.
+------------------------------------------------------------------------
+import DASHI.Physics.Closure.R2P227729FourGridRetainedQuadraticParetoExact as SampledC4Group
+
+unifierC4Source729CharacterWeightedSample :
+  (f g : Fourier729.ModeCube27 → C4Gaussian.Gaussian4)
+  (x : SampledC4Group.FourGridCube64) →
+  C4Gaussian._*G_
+    (C4Retained.gaussianOriginal27UnscaledSynthesisAt f x)
+    (C4Retained.gaussianOriginal27UnscaledSynthesisAt g x)
+  ≡ Bilinear729.sumAll C4Retained.gaussianCoefficientOps Fourier729.pair729
+      (C4Retained.gaussianOriginal729PhaseContribution f g x)
+unifierC4Source729CharacterWeightedSample =
+  C4Retained.gaussianSourceSampledProductExpands729
+
+unifierC5Source729CharacterWeightedSample :
+  (f g : Fourier729.ModeCube27 → C5Character125.Cyclotomic5)
+  (x : Convolution729.GridCube125) →
+  C5Character125._*5_
+    (C5FullOperator.cyclotomicFiveOriginal27UnscaledSynthesisAt f x)
+    (C5FullOperator.cyclotomicFiveOriginal27UnscaledSynthesisAt g x)
+  ≡ Bilinear729.sumAll C5FullOperator.cyclotomicFiveOps Fourier729.pair729
+      (C5FullOperator.cyclotomicFiveOriginal729PhaseContribution f g x)
+unifierC5Source729CharacterWeightedSample =
+  C5FullOperator.cyclotomicFiveSourceSampledProductExpands729
+
+
+------------------------------------------------------------------------
+-- CONDITIONAL extraction is deliberately typed with an unresolved
+-- C4/C5 finite character-resolution payment, not an inferred proof.
+-- This isolates the remaining source sample-sum/index step before the
+-- independently open actual FFT tensor-array identification.
+------------------------------------------------------------------------
+
+unifierC4CharacterResolutionExtractsSourceIndexed :
+  (f g : Fourier729.ModeCube27 → C4Gaussian.Gaussian4)
+  (k : Fourier729.ModeCube27) →
+  C4Retained.gaussianActualCharacterResolution k →
+  C4Retained.gaussianSourceNormalizedSampledAt f g k
+    ≡ C4Retained.fourGridGaussianIndexConvolutionAt f g k
+unifierC4CharacterResolutionExtractsSourceIndexed =
+  C4Retained.gaussianSourceSampledEqualsIndexedGivenResolution
+
+unifierC5CharacterResolutionExtractsSourceIndexed :
+  (f g : Fourier729.ModeCube27 → C5Character125.Cyclotomic5)
+  (k : Convolution729.WideCube125) →
+  C5FullOperator.cyclotomicFiveActualCharacterResolution k →
+  C5FullOperator.cyclotomicFiveSourceNormalizedSampledAt f g k
+    ≡ C5FullOperator.indexedFiveGridBilinearAt f g k
+unifierC5CharacterResolutionExtractsSourceIndexed =
+  C5FullOperator.cyclotomicFiveSourceSampledEqualsIndexedGivenResolution
+
+
+------------------------------------------------------------------------
+-- FIRST UNCONDITIONAL C4(27 retained) / C5(125 full) ORIGINAL SOURCE
+-- CHARACTER-SUM CONVOLUTION, WITHOUT AN ABSTRACT RESOLUTION PREMISE.
+-- EXACT sampled tensor-FFT arrays have a separate transport obligation.
+-- These source-written terms remain kernel-pending, not machine-green.
+------------------------------------------------------------------------
+
+unifierC4OriginalNyquistAxisResolution :
+  (a b : SampledC4Group.FourGridMode) →
+  C4Retained.gaussianSourceAxisCharacterKernel a b
+    ≡ Bilinear729.choose C4Gaussian.zeroG
+        (SampledC4Group.eqFour a b) C4Gaussian.oneG
+unifierC4OriginalNyquistAxisResolution =
+  C4Retained.gaussianOriginalAxisCharacterResolution
+
+unifierC5OriginalNyquistAxisResolution :
+  (a b : Fourier729.FiveGridMode) →
+  C5FullOperator.cyclotomicFiveSourceAxisCharacterKernel a b
+    ≡ Bilinear729.choose C5Character125.zero5
+        (C5Character125.eq5 a b) C5Character125.one5
+unifierC5OriginalNyquistAxisResolution =
+  C5FullOperator.cyclotomicFiveOriginalAxisCharacterResolution
+
+unifierC4ActualSourceCharacterIndexedEquality :
+  (f g : Fourier729.ModeCube27 → C4Gaussian.Gaussian4)
+  (k : Fourier729.ModeCube27) →
+  C4Retained.gaussianSourceNormalizedSampledAt f g k
+    ≡ C4Retained.fourGridGaussianIndexConvolutionAt f g k
+unifierC4ActualSourceCharacterIndexedEquality =
+  C4Retained.gaussianSourceSampledEqualsIndexed
+
+unifierC5ActualSourceCharacterIndexedEquality :
+  (f g : Fourier729.ModeCube27 → C5Character125.Cyclotomic5)
+  (k : Convolution729.WideCube125) →
+  C5FullOperator.cyclotomicFiveSourceNormalizedSampledAt f g k
+    ≡ C5FullOperator.indexedFiveGridBilinearAt f g k
+unifierC5ActualSourceCharacterIndexedEquality =
+  C5FullOperator.cyclotomicFiveSourceSampledEqualsIndexed
+
+
+------------------------------------------------------------------------
+-- ORIGINAL INTEGER-FREQUENCY C4/C5 SOURCE CHARACTER-SUM THEOREMS.
+-- One-axis Nyquist and 3-axis normalized character deltas are
+-- source-written. The 729 indexed pair consumer is original.
+-- DO NOT PROMOTE to actual padded tensor FFT array or physical NS.
+------------------------------------------------------------------------
+
+unifierC4OriginalIntegerSourceCharacterClosure :
+  (f g : Fourier729.ModeCube27 → C4Gaussian.Gaussian4)
+  (k : Fourier729.ModeCube27) →
+  C4Retained.gaussianSourceNormalizedSampledAt f g k
+    ≡ C4Retained.trueGaussianIntegerConvolutionAt
+        f g (Convolution729.retainedToWide k)
+unifierC4OriginalIntegerSourceCharacterClosure =
+  C4Retained.gaussianSourceCharacterSumRecoversTrueIntegerRetained
+
+unifierC5OriginalIntegerSourceCharacterClosure :
+  (f g : Fourier729.ModeCube27 → C5Character125.Cyclotomic5)
+  (k : Convolution729.WideCube125) →
+  C5FullOperator.cyclotomicFiveSourceNormalizedSampledAt f g k
+    ≡ C5FullOperator.originalTrue125BilinearAt f g k
+unifierC5OriginalIntegerSourceCharacterClosure =
+  C5FullOperator.cyclotomicFiveSourceCharacterSumRecoversTrueIntegerFull
+
+-- Kernel status PENDING; actual array source transport still open.

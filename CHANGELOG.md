@@ -622,53 +622,37 @@ monitor surface.
   `DASHI/Physics/YangMills/GraphCombinatorics.agda`.
 
 
-## 2026-11-01 — native Yang–Mills SU2 Wilson/C3 source max-cut
+## 2026-10-30 — PR #1407 source-identical finite Fourier 729-product Fubini (kernel pending)
 
-- Explicit source search across continuum A/OS3/R443/R431/R445 and the actual pre-existing periodic rational SU2 group, n=3 physical side-four carrier, quaternion trace and native signed-word Wilson path.
-- Source-wrote actual physical side-four C3 gauge transport and rational SU2 class-function Wilson theorem, plus a bidirectional pointwise native rational bond graph codec and positive-word holonomy/Wilson trace same-object equality, linked to canonical Balaban TOE.
-- No rational quaternion group = full physical compact SU2 Haar measure, no tangent su2 = nonlinear unit link, no arbitrary 369 hyperfabric = physical source, no finite-source = 4D continuum/Clay promotion.
-- Still **UNVERIFIED** by exact-head Agda kernel; docs/roadmap/TODO explicitly retain R443 Haar/finite action, R445 tail, R320/R333 physical spectrum and all continuum gates.
-
-
-
-## 2026-11-01 — native inverse-link C3 Wilson and full finite ordered action
-
-- Added literal n=3 rational SU2 unit-quaternion **all-signed** path and Wilson C3 naturality, including the previously open inverse-bond gauge-field transport.
-- Added all 16 *ordered* 4D plaquette words and actual 256-site nested rational Wilson trace sum; source-written C3 action invariance via reindexing.
-- Independent exact Fraction arithmetic PASS on 4096 full signed plaquettes and total 23384/25 = 23384/25 under C3 in a nonconstant rational quaternion sample. No Agda compile, committed blob replay or physical Haar normalization.
-- Remaining R443-six canonical six-plane comparison, actual physical SU2/SU(N) Haar / Gibbs / measure family, R445 uniform tails, R320 decay/R333 OS-Hamiltonian spectral gap and full continuum remain open.
+- Directly audited actual `dashi_agda` C3/C4/C5 Fourier, 27/729 pair/orbit, original coefficient-polymorphic convolution, Yang–Mills Fubini and NS rank/permutation code; directly read `dashi_lean4` NS semantic contract and zero-padding adversary. Checked new PR #1437/#1438 Agda owner files and #1433 NS boundary.
+- Added **source-written** C4/Q(i) and C5/Q(ζ5) ring algebra laws plus finite source-group character-addition lemmas; original C3 Fourier source correctly flags that diagonalization is **not** already the group-convolution theorem.
+- Added `FiniteSumAlgebra` and generic finite-sum add, scale, swap, append, map, concat-map and 27×27→729 pair-product expansion to **existing** `R2P227729BilinearCyclotomicPadCutExact.agda` instead of duplicating the original indexed operator. Instantiated over both scalar carriers and exposed named theorem candidates in all three TOE roots.
+- Independently checked the original Agda C4/C5 scalar-group tables (64 and 125 cases, zero mismatch); local exact `Fraction` verified 8 Gaussian and 64 fifth-cyclotomic ring basis triples and five distinct dense 729-pair inputs per carrier. Extended existing Python diagnostics in place, without claiming an exact-checkout run.
+- Updated `.planning/ROADMAP.md`, `TODO.md` and paper §5j. **Agda kernel was not run and CI was neither changed nor run**; source-written proofs are not certified. Remaining C4/C5 3D sampled↔indexed identities, NS physical R440/R736/B4, original external forced C/D attribution, R2P2 calibration and Ibrahim Monster 3B same-object evidence remain strictly separate.
 
 
-## 2026-11-01 — canonical six-positive-plane source identified
-
-- Reused actual `PositivePlane4`, original native `plaquetteBoundaryDirections` and `rationalSU2PlaquetteHolonomy` for a source-written definitionally same-object native six-plane signed Wilson group/real-trace theorem; the source six-plane trace action is now an actual native module term.
-- Independent exact Fraction test on same field: six-plane before=after `-1108/25`, and the 16-term sum equals 2×six + four diagonals/site. The **universal Agda** orientation/normalization and selected Haar measure still need mathematical proof/verified code.
-
-
-## 2026-11-01 — native norm-one SU2 universal four-factor Wilson reverse trace
-
-- Reused existing actual rational-unit SU2 inverse-product/involutive group theorems to derive real-trace equality between arbitrary forward and reverse Wilson four-factor plaquette products. Distinct physical four-site contour geometry and source 16ordered↔6positive sum identification retained as remaining obligations.
+### 2026-10-30 — PR #1407 sampled Fourier phase-sum intermediate proof (kernel pending)
+- Extended original coefficient-polymorphic Fubini algebra with `productShuffle4/productShuffleSix` and concrete scalar multiplication-associativity/commutativity laws. Added actual Q(i) C4 and Q(ζ5) C5 character-weighted `Original27UnscaledSynthesisAt`/ `Original729PhaseContribution` and `SourceSampledProductExpands729` in existing operator owners, with typed projections into all three TOE roots.
+- Independently executed exact arithmetic checks on full 64/125 sample sets, each involving the original 729 input-pair phases, and extended existing regression scripts. Pinned repository checkout/Agda/Lean kernels and CI not run.
+- Remains open: actual padded tensor FFT-to-source character identification, normalized forward orthogonality collapse, sampled/index equality, native physical NS/analytic B4, R2P2 data and separate Ibrahim Monster 3B same-object evidence. No ESD or CI modifications in this tranche.
 
 
-## 2026-11-01 — narrow R443/R445 and physical mass-gap source max-cut
-
-- Lowered original `BalabanClayGate4RationalSU2BondCarrierExact.RationalSU2BondData` from Set1 to Set; its two function fields are Set-level. This repairs the literal same-carrier incompatibility with `RationalWilsonObservable n : Set` and physical finite measures, without changing any mathematical content or constructors. Kernel verification outstanding.
-- Proved *in source-written Agda* original native six-plane Wilson C3 action invariance from the already-owned exact reverse-opposite path holonomy and periodic six-plane closure; no artificial 16ordered↔6 normalisation is now required for C3.
-- Built source-specific R443 six-plane finite Gibbs/Haar numerator compiler using original R443/R431, with actual compact Haar and Gibbs-density source hypotheses still explicit; composed through finite-normalized and selected scalar-limit C3 invariance under those inputs.
-- Matched R443 and R445 configuration/observable types definitionally on actual native rational SU2 record after universe fix and specialized existing native P2 finite cylinder convergence.
-- Re-read canonical Route-S/R320, physical R333 and R281/H2 same OS Hamiltonian owners; genuine selected decay, continuum tails and uniform nonzero physical gap remain open. No new Clay theorem and no Agda exact-head compile.
+### 2026-10-30 — PR #1407 exact C4/C5 normalized resolution extraction boundary (kernel pending)
+- Reused the ORIGINAL `R2P227729BilinearCyclotomicPadCutExact` with generic `finiteFourierExtractionFromOriginal729GivenResolution`. Its sole premise is the explicitly required normalized character-resolution identity; proof terms use inherited finite sum swap, scale, membership case split, not hidden postulates.
+- Extended existing C4/C5 operators with actual normalized character phase, original 64/125 Nyquist sample lists, source selected-pair kernels, and resolution-hypothesis-bearing `SourceSampledEqualsIndexedGivenResolution`. Projected these correctly conditional theorems in TOE, Unifier, Unified.Everything.
+- Independently checked full actual source-order finite characters: C4 4096 group comparisons/19683 original pair-targets and C5 15625 group comparisons/91125 original pair-targets, pure exact arithmetic. A preliminary 1D-vs-3D N/N³ diagnostic was fixed before complete passing run. Added source-order checks to existing universal Python certificate. Exact checkout Python suite and Agda/Lean kernels NOT run.
+- Remaining independent golden kernel obligations: actual normalized 3D character resolution, sample-array FFT/source character equivalence, final C4/C5 sampled→indexed, physical NS R440/R736/B4/real time, clock calibration, original Ibrahim Monster 3B; no ESD/CI modifications.
 
 
-## 2026-11-01 — finish finite six-plane physical Wilson convention
-
-- Added source-written universal original native rational SU2 group proof: 16 ordered plaquette traces = twice original six positive traces plus four identity traces per site; all diagonal paths use existing inverse-path theorem, remaining six reverse orientations reuse source path closure. Corresponding Wilson deficits have exact factor two.
-- R443 now consumes the **actual six-positive 1−normalized real trace Wilson deficit** instead of raw Wilson trace, retaining unproved source beta/Gibbs density, compact Haar and physical UV cutoff. Independent exact arithmetic PASS, but Agda not compiled.
-
-
-- R445 n=3 selected source Wilson **deficit** is now an actual native R445 observable on the same original SU2 bond record; boundedness of the complete six-plane sum and actual R445 continuum tail remain unproved distinct obligations.
+### 2026-10-30 — exact spectral primary sources and `--safe` admission boundary
+- Verified historical Orszag (1971 J. Atmos. Sci.), Patterson/Orszag (1971 Phys. Fluids) and Orszag (1971 Galerkin spectral) primary-source authorship; kept finite method inheritance, branch-owned Agda proof terms and executed exact checks separate.
+- Source-audited original `Core.Prelude`, observer incidence and new C4/C5/bilinear modules: `{-# OPTIONS --safe #-}` is not declared in these files. Static hole/postulate scans do not certify safe mode. Recorded transitive `--safe` import closure and exact-head Agda checking as mandatory before golden certification; no ESD change and no CI run.
+- Made C4 four-point source rational normalization explicit with `normalize 4 1`.
 
 
-## 2026-11-02 — selected CMP119 Gibbs/NZDNDZ canonical owner reconciliation
+## 2026-10-30 — original Nyquist 3D character to true 729 integer convolution (kernel pending)
 
-- Inspected existing source-level `CMP119WilsonGibbsFiniteMeasureSameObjectExact` and `CMP119SelectedWilsonGibbsAnchorExact` and identified their actual selected R124 beta-driven density/metric-insertion input as the unreplaced physical bridge. Wrote `Docs/physics/YMClaySourceOwnerReuseAndProofGate20261102.md` to prevent redundant compilers and separate finite native C3 arithmetic, real compact Haar and continuum source semantics.
-- R445 marked-moment source/finite bounded Wilson alone still does not supply physical uniform tails; R320 uniform selected connected source estimate and R333 same OS uniform spectral gap remain open. No kernel or CI run.
+- Audited actual Agda source, the dashi_lean4 NS source, latest PR #1441 governance/#1440 YM/#1438 trialectics/#1437 max-cut; QID/Ibrahim same-object guards already in the existing Pareto snowball owner.
+- Reused existing C4/C5 cyclotomic scalars and original Nyquist axes. Source-wrote 16/25 exact normalized 1-axis character equality cases; generic triple Cartesian sum/Fubini and source Boolean multiplication; exact three-factor scale/conjugate normalizations; and three-axis C4/C5 delta on original 64/125 point lists. C5 source integer-label equivalence uses 25 explicit group/wide equality cases and the original `wideFiveRoundTrip` proof.
+- Replaced abstract character-resolution payment with source-written `gaussianActualCharacterResolutionPaid` and `cyclotomicFiveActualCharacterResolutionPaid`. Source-written unconditional `SourceSampledEqualsIndexed` theorems and original `trueInteger` 729-pair convolution transport are reachable from three TOE roots; the term `SourceSampled` denotes finite **character sums**, not the actual padded tensor FFT.
+- Independently executed exact tests: 16/25 one-axis roots and 19,683/91,125 original pair→target selector comparisons passed. Exact branch Agda/Lean kernel, `--safe` closure, CI and pinned checkout testing were not run. No protected ESD changes; original R440/R736/B4, real-time physical NS, clock measurements, Ibrahim historical dump and Monster same-object promotion remain open.
