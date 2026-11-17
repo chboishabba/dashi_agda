@@ -107,3 +107,19 @@ canonicalCompletedTraceCrossPollinationBoundary =
     "An explicit-formula identity identifying the selected UNMARKED signed fifth-cap terminal with an independently sourced completed arithmetic trace, preserving zero multiplicities, poles, Gamma and horizontal/local corrections"
     "Prove the selected unmarked completed trace identity and a noncircular strict lower bound, or obtain the selected signed RvM correlation estimate directly"
     refl refl refl refl refl refl refl
+
+
+selectedUnmarkedTerminalStillNotIdentifiedWithMarkedArithmetic :
+  CompletedTraceCrossPollinationBoundary.selectedUnmarkedTerminalEqualsMarkedArithmetic
+    canonicalCompletedTraceCrossPollinationBoundary ≡ false
+selectedUnmarkedTerminalStillNotIdentifiedWithMarkedArithmetic = refl
+
+independentArithmeticDiagonalProducerStillAbsent :
+  CompletedTraceCrossPollinationBoundary.independentArithmeticDiagonalProducer
+    canonicalCompletedTraceCrossPollinationBoundary ≡ false
+independentArithmeticDiagonalProducerStillAbsent = refl
+
+terminalStrictSignedEstimateStillOpen :
+  CompletedTraceCrossPollinationBoundary.terminalStrictSignedEstimatePaid
+    canonicalCompletedTraceCrossPollinationBoundary ≡ false
+terminalStrictSignedEstimateStillOpen = refl
