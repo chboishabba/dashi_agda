@@ -128,6 +128,16 @@ def conditional_annual_trend_bounds(months):
             hi = Fraction(y['upper_exact_C'])
             lower += leverage * (lo if leverage >= 0 else hi)
             upper += leverage * (hi if leverage >= 0 else lo)
+        # For point intervals, cross-check directly against the existing
+        # annual-panel OLS owner rather than trusting a duplicate computation.
+        if all(Fraction(y['lower_exact_C']) == Fraction(y['upper_exact_C'])
+               for y in rows):
+            point_rows = [
+                (y['year'], Fraction(y['days']), Fraction(),
+                 Fraction(y['lower_exact_C'])) for y in rows
+            ]
+            existing = analyze_annual_panel(sorted(point_rows))
+            assert Fraction(existing['exact_difference_C_per_decade']) == lower == upper
         trends.append({
             'station': station, 'variable': variable, 'years': len(rows),
             'first_year': min(y['year'] for y in rows),
@@ -286,6 +296,16 @@ def summarize(manifest, root, temperature_min=None, temperature_max=None):
             trend_panels[(annual['station'], annual['variable'])].append(
                 (yy, weight, Fraction(annual['before_exact']),
                  Fraction(annual['after_exact'])))
+    # Full observed annual means MUST fall within the conditional bounds.
+    # These stronger self-checks detect incorrect leap-day weights and source
+    # product mixing even if independent synthetic test cases happen to pass.
+    full_year = {(r['station'], r['variable'], r['year']): Fraction(r['delta_exact'])
+                 for r in years if r['variable'] in ('tmax', 'tmin')}
+    for bound in conditional_annual:
+        key = (bound['station'], bound['variable'], bound['year'])
+        if key in full_year:
+            assert Fraction(bound['lower_exact_C']) == full_year[key]
+            assert Fraction(bound['upper_exact_C']) == full_year[key]
     station_trends = []
     for (station, variable), data in sorted(trend_panels.items()):
         if len(data) < 2:
