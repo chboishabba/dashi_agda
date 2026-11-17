@@ -93,6 +93,8 @@ def compare(candidate,control):
         raise ValueError("a distinct physical no-369 control sample must be identified")
     if candidate["declared_source"]!=control["declared_source"]:
         raise ValueError("matched source provenance mismatch")
+    if candidate["input_sha256"].get("spectrum")!=control["input_sha256"].get("spectrum"):
+        raise ValueError("actual calibrated incident spectrum digest differs across controls")
     if candidate["solar_lower_W_m2"]>control["solar_upper_W_m2"] or control["solar_lower_W_m2"]>candidate["solar_upper_W_m2"]:
         raise ValueError("disjoint same-source solar conditions")
     return {"strict_369_gain_worst_case":candidate["net_lower_W_m2"]>control["net_upper_W_m2"],
@@ -142,6 +144,7 @@ def selftest():
     ck("missing source hashes fail",rejected(lambda:bound_receipt({**receipt(),"declared_provenance":{}},err())))
     ck("same sample cannot be control",rejected(lambda:compare(a,a)))
     ck("different solar provenance cannot be matched",rejected(lambda:compare(a,{**base,"declared_source":"different"})))
+    ck("different spectrum bytes cannot be matched",rejected(lambda:compare(a,{**base,"input_sha256":{"spectrum":"another"}})))
     ck("missing relative bound fails",rejected(lambda:bound_receipt(receipt(),{k:v for k,v in err().items() if k!="solar_rel_bound"})))
     ck("invalid negative interval fails",rejected(lambda:bound_receipt(receipt(),{**err(),"current_rel_bound":-.1})))
     ck("invalid relative error >100% fails",rejected(lambda:bound_receipt(receipt(),{**err(),"current_rel_bound":1.2})))
