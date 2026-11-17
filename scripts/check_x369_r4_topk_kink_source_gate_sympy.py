@@ -16,8 +16,8 @@ def check(name,p):
     global check_count
     if not bool(p):raise AssertionError("R4_KINK_JOINT_FAIL "+name)
     check_count+=1
-slopes=(0,4,9,10)
-bias=(8,3,-11,-13)
+slopes=(0,4,9,11)
+bias=(8,3,-11,-16)
 histories=[["1","0",str(s),"0","0","0"] for s in slopes]
 eps="1/65536"
 errors={
