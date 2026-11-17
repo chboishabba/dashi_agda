@@ -174,7 +174,7 @@ fieldMaterialRepeatableWork b f sourceCycle w restored =
           (λ l fl ml rec fs ms →
             (l :+ (fl :+ (ml :+ (rec :+ (fs :+ ms)))))
               := ((l :+ (fl :+ (ml :+ rec))) :+ (fs :+ ms)))
-          refl load fieldLoss matLoss recovery fieldFinal matFinal))
+          refl load fieldLoss matLoss recovery fieldFinal matFinal)))
   where
     open FieldMaterialEnergyWeld w renaming
       (naturalInput to n; driverInput to d;
