@@ -12,8 +12,6 @@ module DASHI.Cognition.PNF.X369R4TopKSourceKinkWitnessExact where
 -- Original Leech-LILA attribution: Anatolii Kornienko.
 
 open import DASHI.Core.Prelude
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Nat using (z≤n; s≤s)
 import DASHI.Cognition.ResponseKink as Kink
 import DASHI.Cognition.PNF.X369R4EarlyKinkSourceWeldExact as Weld
 
