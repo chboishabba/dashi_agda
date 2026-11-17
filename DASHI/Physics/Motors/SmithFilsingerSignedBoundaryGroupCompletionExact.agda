@@ -86,6 +86,25 @@ sameSignedTransitive a b c ab bc =
     cOut = DirectedSignedWork.outgoing c
 
 
+netNaturalPort : Port.MidpointTwoPortWorkWindow → DirectedSignedWork
+netNaturalPort p =
+  directedSignedWork
+    (Port.MidpointTwoPortWorkWindow.naturalIncident p)
+    (Port.MidpointTwoPortWorkWindow.naturalOutgoing p)
+
+netControllerPort : Port.MidpointTwoPortWorkWindow → DirectedSignedWork
+netControllerPort p =
+  directedSignedWork
+    (Port.MidpointTwoPortWorkWindow.controllerIncident p)
+    (Port.MidpointTwoPortWorkWindow.controllerOutgoing p)
+
+combinedPorts : DirectedSignedWork → DirectedSignedWork → DirectedSignedWork
+combinedPorts a b =
+  directedSignedWork
+    (DirectedSignedWork.incoming a + DirectedSignedWork.incoming b)
+    (DirectedSignedWork.outgoing a + DirectedSignedWork.outgoing b)
+
+
 -- Exact quantisation obstruction: one integer energy quantum has NO
 -- two equal signed-Nat-pair halves. A nontrivial universal lossless
 -- rational/real-field -> integer-meter additive map must not be assumed.
@@ -127,25 +146,6 @@ oneWorkQuantumHasNoExactSignedHalf a b claimed =
         (Bound.sym (Cycle.+-zeroRight (a + a)))
         (Cycle.trans claimed
           (Cycle.cong suc (doubleNatNormalization b)))))
-
-netNaturalPort : Port.MidpointTwoPortWorkWindow → DirectedSignedWork
-netNaturalPort p =
-  directedSignedWork
-    (Port.MidpointTwoPortWorkWindow.naturalIncident p)
-    (Port.MidpointTwoPortWorkWindow.naturalOutgoing p)
-
-netControllerPort : Port.MidpointTwoPortWorkWindow → DirectedSignedWork
-netControllerPort p =
-  directedSignedWork
-    (Port.MidpointTwoPortWorkWindow.controllerIncident p)
-    (Port.MidpointTwoPortWorkWindow.controllerOutgoing p)
-
-combinedPorts : DirectedSignedWork → DirectedSignedWork → DirectedSignedWork
-combinedPorts a b =
-  directedSignedWork
-    (DirectedSignedWork.incoming a + DirectedSignedWork.incoming b)
-    (DirectedSignedWork.outgoing a + DirectedSignedWork.outgoing b)
-
 
 -- Additive inverse is a SWAP of directed natural-work streams,
 -- never an invalid Nat subtraction. The following is equivalence in
