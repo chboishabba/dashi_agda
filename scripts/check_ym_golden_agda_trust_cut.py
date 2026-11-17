@@ -33,6 +33,7 @@ ROOTS = (
     "DASHI.Physics.YangMills.YMClaySU2PochhammerMomentNumeratorsExact",
     "DASHI.Physics.YangMills.YMClayDyadicCharacterPairCancellationExact",
     "DASHI.Physics.YangMills.YMClayRationalS3StereographicNodeExact",
+    "DASHI.Physics.YangMills.YMClayRationalS3DegreeSevenOrbitMomentsExact",
     "DASHI.Physics.YangMills.YMClayRationalS3StereographicConcreteExact",
     "DASHI.Physics.YangMills.YMClayRationalS3PositiveWeightedNodesExact",
     "DASHI.Physics.YangMills.YMClayNativeSixPlaneGaugeSameSourceExact",
