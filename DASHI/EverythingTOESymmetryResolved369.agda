@@ -861,10 +861,20 @@ toeIbrahimKernelCharacterDoesNotCreateConstituentList :
 toeIbrahimKernelCharacterDoesNotCreateConstituentList =
   ParetoSnowballTOE.kernelCharacterEqualityDoesNotCreateConstituentList
 
-toeIbrahimAgdaConsumerDoesNotCreateExternalTheorem :
-  ParetoSnowballTOE.AgdaConsumerRecordCreatesExternalTheorem → ⊥
-toeIbrahimAgdaConsumerDoesNotCreateExternalTheorem =
-  ParetoSnowballTOE.agdaConsumerRecordDoesNotCreateExternalTheorem
+toeBalabanR559Gate4InhabitantsLevel : ProofLevel
+toeBalabanR559Gate4InhabitantsLevel =
+  BalabanR559TOE.gate4InhabitantsLevel
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+toeBalabanR559CurrentGate4FrontierLedgerLevel : ProofLevel
+toeBalabanR559CurrentGate4FrontierLedgerLevel =
+  BalabanR559TOE.currentGate4FrontierLedgerLevel
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+toeBalabanR559CurrentGate4PostulateFreeSurfaceLevel : ProofLevel
+toeBalabanR559CurrentGate4PostulateFreeSurfaceLevel =
+  BalabanR559TOE.currentGate4PostulateFreeSurfaceLevel
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
 
 toeIbrahimPairDegreeDoesNotCreatePhaseOrientation :
   ParetoSnowballTOE.PairDegreeCreatesPhaseOrientation → ⊥
