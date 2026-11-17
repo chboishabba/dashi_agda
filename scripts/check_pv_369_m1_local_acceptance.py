@@ -25,6 +25,7 @@ SCRIPTS = (
     "check_pv_369_unsampled_iv_mpp_envelope.py",
     "check_pv_g173_multijunction_net_loss_frontier.py",
     "check_pv_v68_published_multijunction_table_identity.py",
+    "check_pv_v68_printed_4t_rounding_interval.py",
 )
 AGDA = (
     "DASHI/Physics/Photovoltaic/PV369NetHalfThresholdExact.agda",
@@ -91,7 +92,7 @@ def main():
     agda=shutil.which("agda")
     if not agda:
         result["native_agda_status"]="UNAVAILABLE"
-        if args.require_agda:result["errors"].append("Agda kernel unavailable; no Golden acceptance")
+        result["errors"].append("Agda kernel unavailable; no Golden acceptance")
     else:
         result["native_agda_status"]="RUNNING"
         for name in AGDA:
@@ -115,7 +116,7 @@ def main():
         result["native_agda_status"]="PASS" if not any(
             e["acceptance"]!="PASS" for e in result["agda"]) else "FAIL"
 
-    result["exact_checked_out_python_passed"]=not result["errors"] and all(
+    result["exact_checked_out_python_passed"]=all(
         x["parse"]=="PASS" and x["selftest"]=="PASS" for x in result["python"])
     result["all_formal_gates_passed"]=(
         result["exact_checked_out_python_passed"] and result["native_agda_status"]=="PASS")
