@@ -170,6 +170,44 @@ decomposedSpaceTimeExteriorBudget w d
         | sym (DecomposedSpaceTimeWork.actualControlSplit d) =
   spaceTimeExteriorEnergyBalance w
 
+-- Explicit source/receiver boundary bookkeeping. A natural current
+-- entering through an exterior Maxwell/Poynting face is ALREADY in the
+-- oriented face divergence. It must NOT be inserted into naturalSigned
+-- again as a fictional independent volume injection.
+record DisjointExteriorPowerPartition
+  (w : FiniteSpaceTimeWindow) : Set where
+  field
+    naturalFaceIncoming naturalFaceOutgoing : ℚ.ℚ
+    controllerFaceIncoming controllerFaceOutgoing : ℚ.ℚ
+    otherRadiatedExteriorWork : ℚ.ℚ
+
+    -- Actual signed face work, with the chosen physical normals,
+    -- must be partitioned into these mutually accounted ports.
+    sameExteriorFacePartition :
+      Open.exteriorOrientedPoyntingFlux (faces w)
+      ≡ ((naturalFaceOutgoing ℚ.+ controllerFaceOutgoing)
+          ℚ.+ otherRadiatedExteriorWork)
+         ℚ.- (naturalFaceIncoming ℚ.+ controllerFaceIncoming)
+
+-- The exact boundary-aware theorem retains both the exterior source
+-- traffic AND any separately paid volume source/controller driving.
+-- This prevents the common error of treating an incident natural face
+-- as an additional unexplained independent incoming work.
+partitionedSpaceTimeExteriorBudget :
+  (w : FiniteSpaceTimeWindow)
+  (p : DisjointExteriorPowerPartition w) →
+  (((storedEnergy w (steps w) ℚ.- storedEnergy w zero)
+       ℚ.+ (((DisjointExteriorPowerPartition.naturalFaceOutgoing p
+                ℚ.+ DisjointExteriorPowerPartition.controllerFaceOutgoing p)
+             ℚ.+ DisjointExteriorPowerPartition.otherRadiatedExteriorWork p)
+            ℚ.- (DisjointExteriorPowerPartition.naturalFaceIncoming p
+              ℚ.+ DisjointExteriorPowerPartition.controllerFaceIncoming p)))
+       ℚ.+ (materialAndIonLoss w ℚ.+ usefulReceiverWork w))
+    ≡ naturalSigned w ℚ.+ controllerSigned w
+partitionedSpaceTimeExteriorBudget w p
+  rewrite sym (DisjointExteriorPowerPartition.sameExteriorFacePartition p) =
+  spaceTimeExteriorEnergyBalance w
+
 -- Remaining OPEN in physical/analytic sense:
 -- 1. Global C¹ / weak Maxwell distribution and actual signed quadrature
 --    proving finiteDifferenceEnergyLaw from real E,H,J and materials.
