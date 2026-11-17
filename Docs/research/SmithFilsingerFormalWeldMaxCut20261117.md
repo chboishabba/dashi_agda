@@ -182,3 +182,25 @@ These are genuine formal join points, not a numerical source scenario. The origi
 **Kernel:** the pinned formal checker now targets FOUR consumers (source Maxwell, cloud causal, Maxwell material interface cut, canonical dispersive material weld) and checks original donor import. Agda 2.9/Nix unavailable to run here; all added theorem bodies are SOURCE-AUTHORED, not kernel-accepted. The unchanged donor's matching blob is evidence of attribution and reproducibility, not proof correctness. Physical F10/F13/F14/F15/F16 and D1 remain OPEN.
 
 **Max-cut next:** a physically parameterised original Maxwell/material/port construction must inhabit the exact same-source field energy, nonlinear constitutive and signed flux equations, not choose their numeric values. The two mathematical joins are now authored; pin-level and environmental source measurements and actual Maxwell Hodge/inhomogeneous field source law still cannot be derived from the repository's symbolic exterior-calculus inventory.
+
+
+### Strongest joint theorem: transfer the actual donor storage receipts
+
+The canonical cross-PR record now additionally equates **both initial and final** upstream environment storage and local material storage with the selected #1524 field/material split. This blocks false "same-object" matches that equate only total output while silently changing a donor state.
+
+New exact Agda source terms:
+- donorStorageReturnTransfersToSplit: derives simultaneous return of the field and material inventories using the **actual** #1521 environment/local storage returns and four same-original identity witnesses. It does NOT ask the caller to separately assert the split restoration.
+- canonicalDispersiveFieldLoadBelowNaturalCap: directly instantiates the two-law Maxwell/material internal-interface cancellation and independent natural-source cap using this *derived* field/material storage return. Inferred selected original load is bounded by natural cap + net powered work + paid modulator work.
+
+This cuts the dependency chain in a materially stronger way:
+
+  ORIGINAL #1521 MemoryMaterialPortLedger fullBalance
+  + its environmental and material storage restoration
+  + 4 cross-ledger storage identity witnesses
+  + 3 separate source/driver/load identity witnesses
+  + #1524 Maxwell field/material internal work cancellation
+  + source-selected independently admitted net natural cap
+  -----------------------------------------------------------------
+  SAME selected original useful load <= natural cap + controller + modulator.
+
+**All source/current, constitutive PDE, original material and physical net power receipts remain obligations**, not inferred. This is a conditional formal mathematical connection that still requires pinned Agda 2.9 type-checking and empirical boundary admission.
