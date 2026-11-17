@@ -34,6 +34,13 @@ def certify(data):
     observable=data.get("response_observable")
     if not isinstance(observable,str) or not observable:
         refuse("missing typed response observable")
+    # Canonical ResponseKink.agda uses Input -> Nat, NOT real values.
+    # A raw continuous source response needs a separately verified
+    # real-to-Nat observation map and strict cell-margin evidence.
+    if data.get("response_codomain")!="Nat":
+        refuse("canonical response codomain must be Nat")
+    if data.get("nat_observation_source_verified") is not True:
+        refuse("Nat response projection lacks original source proof")
     states=data.get("stages")
     if not isinstance(states,list) or len(states)!=4:
         refuse("exactly four ordered comparable source states required")
@@ -52,6 +59,11 @@ def certify(data):
         low=rational(st.get("response_lower"))
         high=rational(st.get("response_upper"))
         if low>high:refuse("inverted response interval")
+        observed_nat=st.get("response_nat")
+        if type(observed_nat) is not int or observed_nat<0:
+            refuse("source response is not Nat")
+        if not low<=Q(observed_nat)<=high:
+            refuse("Nat response not enclosed by source interval")
         loads.append(load)
         bounds.append((low,high))
     if not all(a<b for a,b in zip(loads,loads[1:])):
