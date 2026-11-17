@@ -41,6 +41,7 @@ owners=(
   DASHI/Physics/Motors/SmithFilsingerSignedBoundaryGroupCompletionExact.agda
   DASHI/Physics/Motors/SmithFilsingerSignedMeterQuantisationNoGoExact.agda
   DASHI/Physics/Motors/SmithFilsingerCertifiedSignedMeterResidualExact.agda
+  DASHI/Physics/Motors/SmithFilsingerCertifiedSignedMeterTwoSidedExact.agda
 )
 new_owners=(
   DASHI/Physics/Motors/SmithFilsingerSpatialPortChainExact.agda
@@ -70,6 +71,7 @@ new_owners=(
   DASHI/Physics/Motors/SmithFilsingerSignedBoundaryGroupCompletionExact.agda
   DASHI/Physics/Motors/SmithFilsingerSignedMeterQuantisationNoGoExact.agda
   DASHI/Physics/Motors/SmithFilsingerCertifiedSignedMeterResidualExact.agda
+  DASHI/Physics/Motors/SmithFilsingerCertifiedSignedMeterTwoSidedExact.agda
 )
 for f in "${owners[@]}"; do test -s "$f"; done
 # Do not use a regex for Agda's literal {!!} hole. The old
