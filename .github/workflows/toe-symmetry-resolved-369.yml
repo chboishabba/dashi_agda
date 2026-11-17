@@ -27,9 +27,7 @@ on:
       - 'Docs/diagrams/ym_toe_r559_current_master_convergence.puml'
       - 'Docs/diagrams/contextual_semantic_fractran_toe_maxcut.puml'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
-      - 'DASHI/Mathematics/CrossPollination/MillenniumLeanAssistReceiptExact.agda'
-      - 'DASHI/Mathematics/CrossPollination/MillenniumResidualDescentClassifierExact.agda'
-      - 'DASHI/Mathematics/CrossPollination/MillenniumThreeLaneContinuationValidation.agda'
+      - 'DASHI/Geo/EarthEmbedding*.agda'
       - 'DASHI/Unified/**'
       - 'DASHI/Unifier.agda'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
@@ -47,9 +45,7 @@ on:
       - 'Docs/diagrams/ym_toe_r559_current_master_convergence.puml'
       - 'Docs/diagrams/contextual_semantic_fractran_toe_maxcut.puml'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
-      - 'DASHI/Mathematics/CrossPollination/MillenniumLeanAssistReceiptExact.agda'
-      - 'DASHI/Mathematics/CrossPollination/MillenniumResidualDescentClassifierExact.agda'
-      - 'DASHI/Mathematics/CrossPollination/MillenniumThreeLaneContinuationValidation.agda'
+      - 'DASHI/Geo/EarthEmbedding*.agda'
       - 'DASHI/Unified/BalabanRGTOERegression.agda'
       - 'DASHI/Unified/Everything.agda'
       - 'DASHI/Unifier.agda'
@@ -140,6 +136,12 @@ jobs:
           dashi-repo related balabanDensityAnchoredStressLaneCompilerLevel --root . --limit 20
           dashi-repo discover 'Balaban scale density regular-E localization Casimir stress Cauchy telescope Schwinger same-family summable increment dyadic RG continuum non-promotion' --root .
           dashi-repo lineage --prefix DASHI.Physics.YangMills.Balaban --root .
+          dashi-repo related canonicalEarthEmbeddingTOEReceipt --root . --limit 20
+          dashi-repo related learnedCoordinateDoesNotCreatePhysicalIdentity --root . --limit 20
+          dashi-repo related gradientDoesNotCreateCausalEnvironmentalEffect --root . --limit 20
+          dashi-repo discover 'Earth embedding TESSERA AlphaEarth learned coordinates gradients physical interpretation Woogaroo non-promotion' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Geo.EarthEmbedding --root .
+          dashi-repo diagnose DASHI/Geo/EarthEmbeddingAcquisitionExact.agda --root .
           dashi-repo diagnose DASHI/Unified/BalabanRGTOEMaxCutValidation.agda --root .
           dashi-repo diagnose DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda --root .
           dashi-repo diagnose DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda --root .
@@ -253,9 +255,11 @@ jobs:
             DASHI/Unified/PNFHyperfabric.agda
             DASHI/Unified/YMGoal1TOECompatibilityValidation.agda
             DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
-            DASHI/Unified/ContextualSemanticFractranTOEMaxCutExact.agda
-            DASHI/Unified/ContextualSemanticFractranTOEMaxCutValidation.agda
-            DASHI/Unified/PNFHyperfabric.agda
+            DASHI/Geo/EarthEmbeddingWoogarooExact.agda
+            DASHI/Geo/EarthEmbeddingGeometryExact.agda
+            DASHI/Geo/EarthEmbeddingAttributedSourcesExact.agda
+            DASHI/Geo/EarthEmbeddingInterpretabilityExact.agda
+            DASHI/Geo/EarthEmbeddingAcquisitionExact.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Exact.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
             DASHI/Unified/Physics.agda
@@ -298,6 +302,7 @@ jobs:
             DASHI/Unified/NavierStokesClayFrontierTOEConvergenceExact.agda
             DASHI/Unified/NavierStokesClayFrontierTOEConvergenceValidation.agda
             DASHI/Unified/Physics.agda
+            DASHI/Geo/EarthEmbeddingAcquisitionExact.agda
             DASHI/EverythingTOESymmetryResolved369.agda
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
             DASHI/Unified/Physics.agda
