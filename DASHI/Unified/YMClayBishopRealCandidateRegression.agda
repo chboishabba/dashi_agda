@@ -52,3 +52,8 @@ import DASHI.Physics.YangMills.YMClayOriginalRationalSU2ToBishopTraceExact
 -- Actual original rational norm -> Bishop unit matrix, pending Agda acceptance.
 import DASHI.Physics.YangMills.YMClayOriginalRationalSU2BishopUnitaryWeldExact
   as OriginalRationalSU2BishopUnitary
+
+-- Original all-side rational plaquette conjugacy + side-four six-plane trace.
+-- Reuses native gauge and Wilson class-function theorem owners.
+import DASHI.Physics.YangMills.YMClayNativeSixPlaneGaugeSameSourceExact
+  as NativeSixPlaneGaugeSameSource
