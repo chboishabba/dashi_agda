@@ -10,9 +10,9 @@ import DASHI.Interop.SensibLawResidualLattice as Residual
 import DASHI.Interop.UnifiedMathLanguageAssertedProofs as Asserted
 import DASHI.Interop.UnifiedMathLanguageSpine as Unified
 import DASHI.Unified.InvariantSpine as Spine
-import DASHI.Cognition.PNF.SetwiseGroupedFibreProjectionExact as DeltaProjection
-import DASHI.Cognition.PNF.AffectedBoundaryLocalReductionExact as LocalReduction
-import DASHI.Cognition.PNF.SentenceAnaphorSetwiseProjectionExact as Anaphor
+import DASHI.Cognition.PNF.RelationDeltaReconciliationExact as RelationDeltaExact
+import DASHI.Cognition.PNF.RelationDeltaReconciliationRegression as RelationDelta
+import DASHI.Interop.IntrospectiveProofLoopExact as Introspective
 
 pnfHyperfabricSurface : Hyperfabric.PNFHyperfabric369Surface
 pnfHyperfabricSurface =
@@ -44,44 +44,24 @@ pnfHyperfabricJPromotionBlocked =
 
 
 ------------------------------------------------------------------------
--- SensibLaw delta-fed PNF execution surface.
+-- SensibLaw relation-delta authority routing.
 --
--- The unified layer is a consumer.  The theorem owners remain in
--- DASHI.Cognition.PNF.
+-- The unified surface consumes the golden PNF reconciliation theorem. It does
+-- not become an independent candidate mutation authority.
 ------------------------------------------------------------------------
 
-PNFAnaphorSurfaceIdentityPromotion : Set
-PNFAnaphorSurfaceIdentityPromotion =
-  Anaphor.SurfaceSpellingIsWitnessIdentity
+unifiedCandidateRelationOwnerRouting :
+  RelationDeltaExact.RelationDeltaOwnerRouting
+unifiedCandidateRelationOwnerRouting =
+  RelationDelta.singleCandidateRelationOwner
 
-PNFAnaphorCandidateResolutionPromotion : Set
-PNFAnaphorCandidateResolutionPromotion =
-  Anaphor.CandidateEvidenceResolvesProjectedAnaphor
 
-PNFAnaphorRecursiveSelfUpdate : Set
-PNFAnaphorRecursiveSelfUpdate =
-  Anaphor.SetwiseProjectionRequiresRecursiveDemandUpdate
+unifiedCandidateRelationExecutionBoundary :
+  RelationDeltaExact.RelationDeltaAuthorityBoundary
+unifiedCandidateRelationExecutionBoundary =
+  RelationDelta.candidateRelationExecutionBoundary
 
-PNFAnaphorProceduralProjectionClaim : Set
-PNFAnaphorProceduralProjectionClaim =
-  Anaphor.ProceduralPerOccurrenceProjectionIsSetBased
 
-pnfAnaphorSurfaceIdentityPromotionImpossible :
-  PNFAnaphorSurfaceIdentityPromotion → ⊥
-pnfAnaphorSurfaceIdentityPromotionImpossible =
-  Anaphor.surfaceSpellingIsNotWitnessIdentity
-
-pnfAnaphorCandidateResolutionPromotionImpossible :
-  PNFAnaphorCandidateResolutionPromotion → ⊥
-pnfAnaphorCandidateResolutionPromotionImpossible =
-  Anaphor.candidateEvidenceCannotResolveProjection
-
-pnfAnaphorRecursiveSelfUpdateImpossible :
-  PNFAnaphorRecursiveSelfUpdate → ⊥
-pnfAnaphorRecursiveSelfUpdateImpossible =
-  Anaphor.setwiseProjectionNeedsNoRecursiveDemandRewrite
-
-pnfAnaphorProceduralProjectionCannotClaimSetBased :
-  PNFAnaphorProceduralProjectionClaim → ⊥
-pnfAnaphorProceduralProjectionCannotClaimSetBased =
-  Anaphor.perOccurrenceProceduralProjectionIsNotSetBased
+unifiedCandidateRelationZKPFrame : Introspective.ZKPFrame
+unifiedCandidateRelationZKPFrame =
+  RelationDelta.candidateRelationZKPFrame

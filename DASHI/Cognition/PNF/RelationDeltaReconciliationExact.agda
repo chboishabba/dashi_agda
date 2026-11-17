@@ -5,6 +5,8 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Data.Empty using (⊥)
 
+import DASHI.Core.AuthorityNonPromotionCore as Authority
+
 ------------------------------------------------------------------------
 -- Desired/current keyed relation reconciliation.
 --
@@ -77,81 +79,57 @@ physicalWritesAreNotSemanticAuthority ()
 desiredMustCompareCurrent : DesiredRelationMaySkipCurrentComparison → ⊥
 desiredMustCompareCurrent ()
 
-
 ------------------------------------------------------------------------
--- Durable runtime certification.
+-- Single-owner authority routing.
 --
--- A transaction-local reconciliation observation is not a surviving runtime
--- receipt. Runtime certification requires a persisted receipt after commit.
+-- A desired/current reconciler is not active merely because it exists.
+-- The hot path must route candidate membership mutation through exactly one
+-- owner.  Private delete/reinsert paths are forbidden.
 ------------------------------------------------------------------------
 
-record PersistedRelationDeltaReceipt : Set where
-  constructor persistedRelationDeltaReceipt
+record RelationDeltaOwnerRouting : Set where
+  constructor relationDeltaOwnerRouting
   field
-    persistedReconciliation : RelationDeltaReceipt
-    persisted : Bool
-    persistedIsTrue : persisted ≡ true
+    candidateMutationOwnerCount : Nat
+    privateCandidateMutationBypassCount : Nat
+    hotPathReconcilerOwnerCount : Nat
+    reconciliationReceiptOwnerCount : Nat
 
-open PersistedRelationDeltaReceipt public
+    candidateMutationOwnerUnique :
+      candidateMutationOwnerCount ≡ 1
 
-data RolledBackReconciliationReceiptSurvives : Set where
+    privateCandidateMutationBypassZero :
+      privateCandidateMutationBypassCount ≡ 0
 
-rolledBackReconciliationCannotCertify :
-  RolledBackReconciliationReceiptSurvives → ⊥
-rolledBackReconciliationCannotCertify ()
+    hotPathReconcilerOwnerUnique :
+      hotPathReconcilerOwnerCount ≡ 1
+
+    reconciliationReceiptOwnerMatchesHotPath :
+      reconciliationReceiptOwnerCount ≡ hotPathReconcilerOwnerCount
+
+open RelationDeltaOwnerRouting public
+
+data DuplicateCandidateMutationAuthority : Set where
+
+data HotPathMayBypassRelationDeltaOwner : Set where
+
+duplicateCandidateMutationAuthorityImpossible :
+  DuplicateCandidateMutationAuthority → ⊥
+duplicateCandidateMutationAuthorityImpossible ()
+
+hotPathBypassImpossible :
+  HotPathMayBypassRelationDeltaOwner → ⊥
+hotPathBypassImpossible ()
+
 
 ------------------------------------------------------------------------
--- Fixed-point replay witness.
+-- Execution ownership does not promote authority.
 ------------------------------------------------------------------------
 
-noOpRelationDeltaReceipt : Nat → RelationDeltaReceipt
-noOpRelationDeltaReceipt rows =
-  relationDeltaReceipt
-    rows
-    rows
-    0
-    0
-    0
-    rows
-    0
-    refl
-    refl
-    refl
+record RelationDeltaAuthorityBoundary : Set where
+  constructor relationDeltaAuthorityBoundary
+  field
+    ownerRouting : RelationDeltaOwnerRouting
+    executionNonPromotion : Authority.AuthorityNonPromotionBundle
 
-persistedNoOpRelationDeltaReceipt :
-  Nat → PersistedRelationDeltaReceipt
-persistedNoOpRelationDeltaReceipt rows =
-  persistedRelationDeltaReceipt
-    (noOpRelationDeltaReceipt rows)
-    true
-    refl
-
-persistedNoOpPhysicalMutationsAreZero :
-  ∀ rows →
-  physicalRowMutations
-    (persistedReconciliation
-      (persistedNoOpRelationDeltaReceipt rows))
-  ≡ 0
-persistedNoOpPhysicalMutationsAreZero rows = refl
-
-persistedNoOpDesiredPartitionExact :
-  ∀ rows →
-  desiredRows
-    (persistedReconciliation
-      (persistedNoOpRelationDeltaReceipt rows))
-  ≡
-  addedRows
-    (persistedReconciliation
-      (persistedNoOpRelationDeltaReceipt rows))
-  +
-  replacedRows
-    (persistedReconciliation
-      (persistedNoOpRelationDeltaReceipt rows))
-  +
-  unchangedRowsSkipped
-    (persistedReconciliation
-      (persistedNoOpRelationDeltaReceipt rows))
-persistedNoOpDesiredPartitionExact rows =
-  desiredPartitionExact
-    (persistedReconciliation
-      (persistedNoOpRelationDeltaReceipt rows))
+open RelationDeltaAuthorityBoundary public
