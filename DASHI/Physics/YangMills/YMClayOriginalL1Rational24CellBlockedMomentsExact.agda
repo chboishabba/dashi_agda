@@ -17,8 +17,10 @@ module DASHI.Physics.YangMills.YMClayOriginalL1Rational24CellBlockedMomentsExact
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 open import Data.Integer.Base using (+_)
-open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _/_)
+open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _/_; Positive)
+import Data.Rational.Properties as ℚP
 import DASHI.Physics.YangMills.YMClayOriginalL1Rational24CellEffectiveRGExact as RG
 
 weightedFirst : ℚ
@@ -74,3 +76,37 @@ varianceTExact = refl
 -- This is a genuinely nonzero normalized coarse variance, but
 -- positivity as an Agda order theorem should be imported separately
 -- if used by a future spectral or nontriviality consumer.
+
+-- A reusable finite expectation functional on arbitrary rational
+-- coarse observables f(t). The class counts are group-multiset counts;
+-- these are *not* assumed to be a continuum Haar quadrature rule.
+coarseNumerator : (ℚ → ℚ) → ℚ
+coarseNumerator f =
+  (((+ 6 / 1) * RG.effectiveWeight RG.classZero * f RG.classZero
+     + (+ 16 / 1) * RG.effectiveWeight RG.classQuarter *
+         f RG.classQuarter)
+     + (+ 2 / 1) * RG.effectiveWeight RG.classOne *
+         f RG.classOne)
+    * (+ 1 / 24)
+
+coarseExpectation : (ℚ → ℚ) → ℚ
+coarseExpectation f = coarseNumerator f * reciprocalPartition
+
+coarseConstantOneExact :
+  coarseExpectation (λ _ → 1ℚ) ≡ 1ℚ
+coarseConstantOneExact = refl
+
+coarseFirstMomentExact :
+  coarseExpectation (λ t → t) ≡ (+ 634945 / 2533158)
+coarseFirstMomentExact = refl
+
+coarseSecondMomentExact :
+  coarseExpectation (λ t → t * t) ≡ (+ 1273207 / 10132632)
+coarseSecondMomentExact = refl
+
+-- A nonconstant observable for this positive finite probability law.
+-- This strictly positive second central moment is not a mass gap.
+varianceTPositive : Positive varianceT
+varianceTPositive =
+  subst Positive (sym varianceTExact)
+    (ℚP.normalize-pos 806306942803 12833778905928)
