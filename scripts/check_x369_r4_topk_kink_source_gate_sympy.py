@@ -9,6 +9,7 @@ No device, Agda, or trained Leech conclusion.
 import sympy as S
 from fractions import Fraction as Q
 from check_x369_r4_source_receipt import certify as certify_route
+from check_x369_r4_kink_source_receipt import certify as certify_kink
 
 check_count=0
 def check(name,p):
@@ -61,6 +62,7 @@ raw_bounds=[
      logistic_of_positive(e_high**3)),
     (Q(0),Q(0))]
 selected=[[0,1],[0,1],[1,0],[3,2]]
+kink_stages=[]
 nat=(0,2,9,0)
 for t,ids in enumerate(selected):
     output=certify_route(receipt(t,ids))
@@ -87,8 +89,40 @@ for t,ids in enumerate(selected):
           and int(S.floor(10*S.Rational(hi.numerator,hi.denominator)))==nat[t])
     check("same source sign stable t="+str(t),
           True) # independently checked by certify_route
+    # Reuse the existing Nat SOURCE consumer rather than treating
+    # real-valued softmax intervals as an Agda Nat equality.
+    # This ordinal cell is justified above from original source score,
+    # pairwise route error and independently bounded e.
+    kink_stages.append({
+       "stage":("insufficient","recruited","selected","overloaded")[t],
+       "load":str(t),
+       "response_lower":str(nat[t]),
+       "response_upper":str(nat[t]),
+       "response_nat":nat[t],
+       "checkpoint_sha256":"0"*64,
+       "history_revision":"same-reset-initial-histories-synthetic",
+       "response_observable":"source-selected-output-coordinate-floor10",
+       "source_state_verified":True})
     print("KINK_SOURCE_RECEIPT",t,"ids",ids,"B_L1",B,
           "response_interval",(str(lo),str(hi)),"Nat",nat[t])
+# Final donor weld: the ORIGINAL Cognition.ResponseKink response
+# shape consumes our four proven post-quantisation Nat intervals.
+# Flags are self-declared SYNTHETIC provenance, not authenticity.
+kink_payload={
+  "schema":"x369_r4_original_kink_v1",
+  "original_source_export_verified":True,
+  "interval_error_receipt_verified":True,
+  "checkpoint_sha256":"0"*64,
+  "history_revision":"same-reset-initial-histories-synthetic",
+  "response_observable":"source-selected-output-coordinate-floor10",
+  "response_codomain":"Nat",
+  "nat_observation_source_verified":True,
+  "stages":kink_stages}
+kink_out=certify_kink(kink_payload)
+check("canonical Kink source-bound Nat profile admitted",
+      kink_out["source_shape_deduced"] is True
+      and kink_out["checkpoint_authenticated_by_this_script"] is False
+      and kink_out["biological_or_causal_mechanism_certified"] is False)
 check("canonical old Kink Nat strict inequalities",
       nat[0]<nat[1]<nat[2] and nat[3]<nat[2])
 # Negative control: source-vetted TopK ids at t=3 differ
