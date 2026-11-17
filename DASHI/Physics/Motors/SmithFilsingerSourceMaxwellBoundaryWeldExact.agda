@@ -353,3 +353,31 @@ smithFigureCannotHaveFilsingerEarthProvenance :
   SourceOwner Bidi.smithSuitcaseFigureTen Time.filsingerEarth →
   Port.Contradiction
 smithFigureCannotHaveFilsingerEarthProvenance ()
+
+
+-- Strong F15 negative control derived from the welded original ports:
+-- when ALL storage is restored and the selected natural port contributes
+-- zero *net* real work, useful load is bounded by net controller work.
+-- This consumes the derived signed-port result, not a guessed source cap.
+noNaturalNetSourceMeansLoadAtMostController :
+  (b : SelectedBoundary)
+  (f : FormalFieldToPort b)
+  (w : SignedSourceCycleWeld b f) →
+  Cycle.RepeatableSourceCycle.naturalSourceWork
+    (Cycle.AdmittedSourceCapCycle.repeatable
+      (SignedSourceCycleWeld.cycleWithSourceCap w)) ≡ zero →
+  Bound._≤_
+    (Port.MidpointTwoPortWorkWindow.usefulWork
+      (FormalFieldToPort.portWindow f))
+    (Cycle.RepeatableSourceCycle.controllerWork
+      (Cycle.AdmittedSourceCapCycle.repeatable
+        (SignedSourceCycleWeld.cycleWithSourceCap w)))
+noNaturalNetSourceMeansLoadAtMostController b f w noNaturalWork =
+  Bound.transportUpper
+    (Cycle.cong (λ x → x + ctrl) noNaturalWork)
+    (signedPortLoadBoundAfterStoreReturn b f w)
+  where
+    ctrl : Nat
+    ctrl = Cycle.RepeatableSourceCycle.controllerWork
+      (Cycle.AdmittedSourceCapCycle.repeatable
+        (SignedSourceCycleWeld.cycleWithSourceCap w))
