@@ -688,33 +688,49 @@ import DASHI.Core.SymmetryResolvedFibreExact
 import DASHI.EverythingSSPRepresentationReductionRound9
 import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
 
--- Original investigative source-lineage and explicit non-promotion proofs.
--- Reuse the existing kernel-level claims. Do not infer physical events.
-import DASHI.Wikimedia.IbrahimSnowballInvestigativeClaimSourceLineageBidiExact as SourceGenealogy
-import DASHI.Cognition.HardtIbrahimSourceRootMaxCutExact as HardtCase
-import DASHI.Cognition.HardtBrainInterventionNonidentifiabilityExact as NeuralCausality
 
--- Exact non-promotion results exposed at the TOE aggregate.
--- Their proofs belong to the imported canonical source and causal modules.
-open import DASHI.Core.Prelude
-open import Data.Empty using (⊥)
+------------------------------------------------------------------------
+-- Canonical Monster/Hyperfabric cut.
+-- Reuse #1098 ATLAS source, #1250 Suzuki conditional class owners and
+-- pre-existing fine-hyperfabric nonpromotion. ESD surfaces remain untouched.
+-- Do not identify these source objects with physical bosonic worldsheets.
+------------------------------------------------------------------------
 
-toeCitationIsNotInspection :
-  SourceGenealogy.CitationMeansInspected → ⊥
-toeCitationIsNotInspection = SourceGenealogy.citationDoesNotMeanInspected
+open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Bool using (false)
+open import Agda.Builtin.List using ([]; _∷_)
+import DASHI.Unified.GRQuantumProofTermRegression
+import DASHI.Moonshine.HyperfabricMonsterConjugacyActionAuditExact as MonsterFabric
+import DASHI.Moonshine.Base369MonsterFineCarrierEquivarianceAuditExact as Fine
+import DASHI.Moonshine.Monster3BAtlasSourceD4OrderTwelvePhaseSieveExact as MonsterSieve
+import DASHI.Moonshine.Monster3BSuzukiSelectedFaithful78C2Exact as Suzuki78
 
-toePrimaryIsNotTruth :
-  SourceGenealogy.PrimaryMeansTrue → ⊥
-toePrimaryIsNotTruth = SourceGenealogy.primaryDoesNotMeanTrue
+toeEqualCardinalityDoesNotGiveMonsterAction :
+  Fine.FineCarrierBidiBoundary.fullMonsterActionOnHyperfabricEstablished
+    Fine.canonicalFineCarrierBidiBoundary ≡ false
+toeEqualCardinalityDoesNotGiveMonsterAction =
+  MonsterFabric.sameCardinalityDoesNotSupplyMonsterAction
 
-toeMentionsAreNotIndependentEvidence :
-  SourceGenealogy.MentionCountMeansIndependentEvidence → ⊥
-toeMentionsAreNotIndependentEvidence =
-  SourceGenealogy.mentionCountDoesNotMeanIndependentEvidence
+toeSuzukiTwoBExcludesHypotheticalFourB :
+  MonsterSieve.possibleSourceD4Rows MonsterSieve.fourB ≡ []
+toeSuzukiTwoBExcludesHypotheticalFourB =
+  MonsterSieve.sourceFourBIncompatibleWithTwoBHalfTurn
 
-toeNoPassiveObservationDecoder :
-  (decoder : Bool × Bool → Bool × Bool) →
-  ((w : NeuralCausality.TrialWorld) →
-    NeuralCausality.causalResponse w true ≡
-    decoder (NeuralCausality.passiveObservation w)) → ⊥
-toeNoPassiveObservationDecoder = NeuralCausality.noUniversalDoDecoder
+toeFourDRequiresSixBSixtySix :
+  MonsterSieve.possibleSourceD4Rows MonsterSieve.fourD
+  ≡ (MonsterSieve.sourcePhaseRow MonsterSieve.twelveF MonsterSieve.sixB
+    66 MonsterSieve.nonfaithful78CentrePlus MonsterSieve.positiveParity ∷ [])
+toeFourDRequiresSixBSixtySix =
+  MonsterSieve.sourceFourDForcesSixBSixtySix
+
+
+
+-- Reuse PR #1278's governance source. Do not copy its proof.
+import DASHI.Governance.FormalisationGovernanceCapstoneExact as Governance
+import DASHI.Core.KernelSemanticClosureBoundaryExact as SemanticBoundary
+
+toeKernelProofDoesNotEstablishSourceSemantics :
+  SemanticBoundary.semanticallyExhaustive
+    SemanticBoundary.criticalCapstoneStatus ≡ false
+toeKernelProofDoesNotEstablishSourceSemantics =
+  Governance.kernelClosureIsNotSemanticExhaustiveness

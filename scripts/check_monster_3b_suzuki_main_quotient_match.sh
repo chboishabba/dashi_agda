@@ -30,6 +30,7 @@ assert p["main_table"] == "3^1+12:6.Suz.2"
 assert p["six_suz_table"] == "6.Suz"
 assert p["six_suz_outer_table"] == "6.Suz.2"
 assert p["base_1458_central_trace"] == -729
+assert p["base_1458_outer_centre_inverting_trace_zero"] is True
 assert isinstance(p["base_1458_extraspecial_central_class_position"], int)
 assert p["base_1458_extraspecial_central_class_position"] > 0
 assert isinstance(p["qg_to_n3b_kernel_order_three_class_position"], int)
@@ -54,6 +55,45 @@ assert p["outer_pair_restriction_full_character_match"] is True
 assert p["main_product_split_full_character_decomposition"] is True
 assert p["quotient_descent_full_character_match"] is True
 assert p["restricted_monster_same_object_match"] is True
+assert p["six_suz_group_order"] == 2690072985600
+assert p["six_suz_class_count"] == 210
+for key in ("six_suz_degree12_positions","six_suz_degree78_positions"):
+    rows=p[key]
+    assert isinstance(rows,list) and len(rows)==2
+    assert all(type(x) is int and 1<=x<=210 for x in rows)
+    assert len(set(rows))==2
+assert not (
+    set(p["six_suz_degree12_positions"]) &
+    set(p["six_suz_degree78_positions"])
+)
+
+# Source-selected 78 is now chosen by full 6.Suz -> main -> MN3B -> Monster
+# character matching, NOT by requiring a faithful degree78 in advance.
+assert type(p["source_selected_degree_78_faithful_to_6Suz"]) is bool
+assert type(p["suzuki_central_involution_class_position"]) is int
+assert p["suzuki_central_involution_class_position"] > 0
+assert p["source_selected_S90_central_C2_trace"] in (-90, 66)
+assert p["sym2_candidate_S90_central_C2_trace"] == 66
+assert p["selected_78_direct_sym2_full_character_pair_count"] in (0, 2)
+assert p["selected_78_dual_sym2_full_character_pair_count"] in (0, 2)
+assert type(p["selected_78_is_nebe_sym2_family_full_character_equal"]) is bool
+assert p["selected_78_is_nebe_sym2_family_full_character_equal"] is (
+    p["selected_78_direct_sym2_full_character_pair_count"] == 2
+    and p["selected_78_dual_sym2_full_character_pair_count"] == 2
+)
+assert p["common_729_necessary_equal_C3_phase_pair_count"] in (0, 1, 2)
+assert type(p["suzuki_central_order_three_class_position"]) is int
+assert p["suzuki_central_order_three_class_position"] > 0
+if p["selected_78_is_nebe_sym2_family_full_character_equal"]:
+    assert p["source_selected_c2_compatible_with_sym2_faithful12"] is True
+    assert p["source_selected_degree_78_faithful_to_6Suz"] is False
+assert type(p["source_selected_c2_compatible_with_sym2_faithful12"]) is bool
+assert p["source_selected_c2_compatible_with_sym2_faithful12"] is (
+    p["source_selected_S90_central_C2_trace"] == 66
+)
+if p["source_selected_degree_78_faithful_to_6Suz"]:
+    assert p["source_selected_S90_central_C2_trace"] == -90
+
 assert p["diagonal_kernel_orientation_paid"] is False
 assert p["individual_zeta_label_orientation_paid"] is False
 PY

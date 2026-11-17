@@ -35,29 +35,44 @@ assert p["monster_same_object_match_paid"] is False
 
 assert len(p["faithful_degree_12_positions"]) == 2
 assert len(set(p["faithful_degree_12_positions"])) == 2
-assert len(p["faithful_degree_78_positions"]) == 2
-assert len(set(p["faithful_degree_78_positions"])) == 2
+assert len(p["degree_78_positions"]) >= 2
+assert len(set(p["degree_78_positions"])) == len(p["degree_78_positions"])
+assert p["degree_78_family_filter"] == "all_character_degrees_no_faithfulness_filter"
+assert set(p["degree_78_positions"]) == set(p["all_degree_78_positions"])
+assert set(p["degree_78_positions"]) == (
+    set(p["nonfaithful_degree_78_positions"]) | set(p["faithful_degree_78_positions"])
+)
+assert not (set(p["nonfaithful_degree_78_positions"]) & set(p["faithful_degree_78_positions"]))
 assert len(p["faithful_degree_12_atlas_labels"]) == 2
 assert len(set(p["faithful_degree_12_atlas_labels"])) == 2
-assert len(p["faithful_degree_78_atlas_labels"]) == 2
-assert len(set(p["faithful_degree_78_atlas_labels"])) == 2
+assert len(p["degree_78_atlas_labels"]) == len(p["degree_78_positions"])
+assert len(set(p["degree_78_atlas_labels"])) == len(p["degree_78_positions"])
 
 for rows, degree, labels in (
     (p["degree_12_rows"], 12, p["faithful_degree_12_atlas_labels"]),
-    (p["degree_78_rows"], 78, p["faithful_degree_78_atlas_labels"]),
+    (p["degree_78_rows"], 78, p["degree_78_atlas_labels"]),
 ):
-    assert len(rows) == 2
+    assert len(rows) == len(labels)
     assert sorted(r["atlas_label"] for r in rows) == sorted(labels)
     for r in rows:
         assert r["degree"] == degree
         assert isinstance(r["position"], int) and r["position"] > 0
         assert isinstance(r["atlas_label"], str) and r["atlas_label"]
-        assert {r["first_central_phase"], r["second_central_phase"]} == {"zeta", "zetaSquared"}
+        phases = {r["first_central_phase"], r["second_central_phase"]}
+        assert phases in ({"zeta", "zetaSquared"}, {"trivial"})
+        assert type(r.get("faithful_to_6Suz")) is bool
+        if degree == 12:
+            assert r["faithful_to_6Suz"] is True
+            assert phases == {"zeta", "zetaSquared"}
+        else:
+            assert r["faithful_to_6Suz"] == (
+                r["position"] in p["faithful_degree_78_positions"]
+            )
 PY
 
 grep -F 'faithfulDegree12AtlasLabels' \
   build/generated/DASHI/Moonshine/Generated/Monster3BSuzukiMultiplicityCharacterCertificate.agda >/dev/null
-grep -F 'faithfulDegree78AtlasLabels' \
+grep -F 'degree78AtlasLabels' \
   build/generated/DASHI/Moonshine/Generated/Monster3BSuzukiMultiplicityCharacterCertificate.agda >/dev/null
 grep -F 'monsterSameObjectMatchPaid = false' \
   build/generated/DASHI/Moonshine/Generated/Monster3BSuzukiMultiplicityCharacterCertificate.agda >/dev/null

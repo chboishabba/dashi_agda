@@ -9,6 +9,15 @@ import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannMultiplicityExact as StoneC
 import DASHI.Moonshine.Monster3BMultiplicityEvaluationExact as Existing
 import DASHI.Moonshine.Monster3BActualMultiplicityEvaluationFromRecognitionExact as Evaluation
 import DASHI.Moonshine.Monster3BNormalizerCocycleCancellationExact as Cocycle
+import DASHI.Moonshine.Monster3BJFineGeometricD4InvolutionNoGoExact as JFineNoGo
+import DASHI.Moonshine.Monster3BJFineD4CandidateMultiplicityExact as JFineRepair
+import DASHI.Moonshine.Monster3BJFineD4OrientedResidualCutExact as OrientedResidual
+import DASHI.Moonshine.Monster3BJFineNineCellSymmetricSquareD4Exact as SymTwelve
+import DASHI.Moonshine.Monster3BZetaSuzukiDiagonalNormCutsetExact as ZetaDiagonal
+import DASHI.Moonshine.Monster3BZeroZetaSquaredC3SeparationExact as PhaseZero
+import DASHI.Moonshine.Monster3BSuzukiSelectedFaithful78C2Exact as Faithful78C2
+import DASHI.Moonshine.Monster3BAtlasSourceD4OrderTwelvePhaseSieveExact as SourceD4ClassSieve
+import DASHI.Moonshine.Monster3BPointed720729AffineProjectorCutExact as Pointed729Cut
 import DASHI.Moonshine.Monster3BMultiplicityCharacterSafeReconstructionExact as Safe
 import DASHI.Moonshine.MoonshineOrbifoldMasslessStateRemovalExact as Gap
 import DASHI.Wikimedia.IbrahimMonsterSSP14GlobalInversionOrbitWeldValidation
@@ -108,3 +117,58 @@ projectiveTensorCancellationAvailable :
       (Cocycle.pureTensor action h s)
 projectiveTensorCancellationAvailable =
   Cocycle.compensatedTensorActionIsHonestOnPureTensors
+
+------------------------------------------------------------------------
+-- Added selected-3B JFine character obstruction and finite linear repair.
+-- The source-character inputs and actual group embedding retain distinct
+-- status; these proofs assert no actual Monster D4 subgroup exists.
+------------------------------------------------------------------------
+
+geometricJFineD4HalfTurnCannotBeMonsterSelectedPhase :
+  JFineNoGo.GeometricD4HalfTurnSourceWitness → ⊥
+geometricJFineD4HalfTurnCannotBeMonsterSelectedPhase =
+  JFineNoGo.noSelectedMonster3BGeometricD4HalfTurn
+
+signedJFineD4CorrectedHalfTurnTrace : 81 * 18 ≡ 1458
+signedJFineD4CorrectedHalfTurnTrace =
+  JFineRepair.fibreTensorHalfTurn
+
+signedJFineD4CorrectedQuarterTrace : 9 * 2 ≡ 18
+signedJFineD4CorrectedQuarterTrace =
+  JFineRepair.fibreTensorQuarterTurn
+
+------------------------------------------------------------------------
+-- Cross-pollinated nine-cell / Suzuki dimension owner:
+-- valid D4 9+3->12, symmetric square ->78, character-compatible 90.
+-- Central C2 false-promotion gate excludes faithful 78 = Sym² faithful12.
+------------------------------------------------------------------------
+
+nineCellSymmetricSquareSourceDegree :
+  12 + 78 ≡ 90
+nineCellSymmetricSquareSourceDegree = SymTwelve.signedRepairIdentity
+
+nineCellSymmetricSquareSourceQuarterTrace :
+  9 * 2 ≡ 18
+nineCellSymmetricSquareSourceQuarterTrace =
+  SymTwelve.sourceNecessaryQuarterTurn
+
+faithfulSuzukiSymSquareCannotBeFaithfulSeventyEight :
+  SymTwelve._*sign_ SymTwelve.negative SymTwelve.negative
+  ≡ SymTwelve.negative → ⊥
+faithfulSuzukiSymSquareCannotBeFaithfulSeventyEight =
+  SymTwelve.symmetricSquareCannotHaveFaithfulCentralMinus
+
+------------------------------------------------------------------------
+-- 6.Suz source-family no-go on the CENTRAL INVOLUTION, independent
+-- of C3 norm and unaffected by the earlier phase-label gauge choice.
+-- This is not a real GAP execution receipt or Monster intertwiner.
+------------------------------------------------------------------------
+
+hypotheticalFaithful78NotNebeSymSquared78 :
+  Faithful78C2.faithfulFamilyMultiplicityCentreTrace
+  ≡ Faithful78C2.nebeSymSquareMultiplicityCentreTrace → ⊥
+hypotheticalFaithful78NotNebeSymSquared78 =
+  Faithful78C2.faithfulFamilyNotNebeAsSixSuz
+
+centralC2TraceDiscriminator : 66 + 90 ≡ 2 * 78
+centralC2TraceDiscriminator = Faithful78C2.centralTraceDifference

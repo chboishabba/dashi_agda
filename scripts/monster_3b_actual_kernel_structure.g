@@ -254,4 +254,9 @@ Print("|E| = ", Size(E), ", |Z(E)| = ", Size(Z),
   ", |E/Z(E)| = ", Size(Q), "\n");
 Print("central class position = ", centralClass,
   ", Monster fusion = 3B\n");
-QUIT;
+# Reuse the exact checked E and G in a downstream source-specific screen.
+# Standalone execution still terminates by default.
+if not IsBound(MONSTER3B_REUSE_CHECKED_GROUP) or
+   MONSTER3B_REUSE_CHECKED_GROUP <> true then
+  QUIT;
+fi;
