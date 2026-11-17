@@ -96,3 +96,8 @@ def test_cloud_zero_coupling_zero_effect():
 def test_unknown_other_source_not_ruled_out():
     # Spherical fair-weather source model does not apply to non-fair-weather sources.
     assert 'sphere' in CrowleyIsolatedSphere.__name__.lower()
+
+
+def test_ion_collection_direction_condition_25():
+    with pytest.raises(ValueError):
+        CrowleyIsolatedSphere(10, .1, 1, 100)
