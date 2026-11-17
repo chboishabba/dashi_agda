@@ -15,7 +15,7 @@ module DASHI.Physics.Motors.SmithFilsingerCoerciveGreenRetardedWeldExact where
 
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans; subst)
 
 import DASHI.Physics.YangMills.BalabanFiniteCoerciveGreen as Green
 import DASHI.Physics.Motors.SmithFilsingerTimeIndexedTransferExact as Time
@@ -393,6 +393,51 @@ selectedPhysicalFrontDistanceBound authority b f a =
     (Time.RetardedFlight.flight
       (Original.FormalFieldToPort.causalFlight f))
     (OriginalSelectedRetardedGreen.originalPhysicalCone a)
+
+-- Same original absolute clock no-load statement, with the
+-- ORIGINAL RetardedFlight.travelLaw used to transport the strict
+-- earlier-than-arrival hypothesis. A local relative delay is not enough.
+selectedOriginalNoUsefulBeforePhysicalArrival :
+  ∀ {Vector Scalar BoundValue : Set}
+    {coercive : Green.CoerciveFiniteOperator Vector Scalar BoundValue}
+    (authority : Green.FiniteCoerciveInverseAuthority coercive)
+    (b : Original.SelectedBoundary)
+    (f : Original.FormalFieldToPort b)
+    (a : OriginalSelectedRetardedGreen coercive authority b f)
+    (time : Nat) →
+  StrictEarlier time
+    (Time.RetardedFlight.arrival
+      (Original.FormalFieldToPort.causalFlight f)) →
+  let flight = Original.FormalFieldToPort.causalFlight f in
+  OriginalSelectedRetardedGreen.sensor a
+    (stampedGreen authority
+      (OriginalSelectedRetardedGreen.zeroVector a)
+      (OriginalSelectedRetardedGreen.sourceHistory a)
+      (Time.RetardedFlight.launch flight)
+      (Time.RetardedFlight.flight flight) time)
+  ≡ zero
+selectedOriginalNoUsefulBeforePhysicalArrival
+  authority b f a time earlier =
+  trans
+    (cong (OriginalSelectedRetardedGreen.sensor a)
+      (stampedGreenIsZeroBeforeActualArrival authority
+        (OriginalSelectedRetardedGreen.zeroVector a)
+        (OriginalSelectedRetardedGreen.sourceHistory a)
+        (Time.RetardedFlight.launch flight)
+        (Time.RetardedFlight.flight flight)
+        time earlierAtTotalDelay))
+    (OriginalSelectedRetardedGreen.sensorZero a)
+  where
+    flight : Time.RetardedFlight
+    flight = Original.FormalFieldToPort.causalFlight f
+    earlierAtTotalDelay :
+      StrictEarlier time
+        (Time.RetardedFlight.launch flight
+           + Time.RetardedFlight.flight flight)
+    earlierAtTotalDelay =
+      subst (StrictEarlier time)
+        (sym (Time.RetardedFlight.travelLaw flight))
+        earlier
 
 -- F02/ F13 high-alpha physical remainder: real Maxwell dyadic Green,
 -- causal support and dispersive memory, exact exterior boundary/return,
