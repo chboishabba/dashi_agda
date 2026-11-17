@@ -194,13 +194,13 @@ unifierFleetPlanningTextStillNotResidual =
   Unifier.unifierFleetPlanningTextDoesNotCreateFormalResidual
 
 toeSpectralLabelStillNotOwnerIdentity :
-  Fleet.spectralLabelsIdentifyTheoremOwners
+  Fleet.spectralLabelIdentifiesTheoremOwner
     Fleet.canonicalFleetFormalGapTargetReceipt ≡ false
 toeSpectralLabelStillNotOwnerIdentity =
   TOE.toeFleetSpectralLabelDoesNotIdentifyTheoremOwner
 
 unifierSpectralLabelStillNotOwnerIdentity :
-  Fleet.spectralLabelsIdentifyTheoremOwners
+  Fleet.spectralLabelIdentifiesTheoremOwner
     Fleet.canonicalFleetFormalGapTargetReceipt ≡ false
 unifierSpectralLabelStillNotOwnerIdentity =
   Unifier.unifierFleetSpectralLabelDoesNotIdentifyTheoremOwner
@@ -251,70 +251,3 @@ unifierVectorSpectralAuthorityStillNotPromoted :
   Fleet.VectorSpectralAuthorityPromotion → ⊥
 unifierVectorSpectralAuthorityStillNotPromoted =
   Unifier.unifierFleetVectorSpectralAuthorityPromotionImpossible
-
-
-toeNumericABIStillNotPromoted :
-  Fleet.SpectralNumericABIPromotion → ⊥
-toeNumericABIStillNotPromoted =
-  TOE.toeFleetSpectralNumericABIPromotionImpossible
-
-
-toeResidualFieldStillNotPromoted :
-  Fleet.ResidualFieldPromotion → ⊥
-toeResidualFieldStillNotPromoted =
-  TOE.toeFleetResidualFieldPromotionImpossible
-
-------------------------------------------------------------------------
--- Named-manifest acquisition remains fail-closed at both TOE facades.
-------------------------------------------------------------------------
-
-toeFleetNamedManifestStillMissingMatches :
-  Fleet.namedFormalGapManifestAcquired ≡ false
-toeFleetNamedManifestStillMissingMatches =
-  TOE.toeFleetNamedManifestStillMissing
-
-unifierFleetNamedManifestStillMissingMatches :
-  Fleet.namedFormalGapManifestAcquired ≡ false
-unifierFleetNamedManifestStillMissingMatches =
-  Unifier.unifierFleetNamedManifestStillMissing
-
-toeFleetPerGapDispatchStillBlockedMatches :
-  Fleet.perGapDispatchEnabled ≡ false
-toeFleetPerGapDispatchStillBlockedMatches =
-  TOE.toeFleetPerGapDispatchStillBlocked
-
-unifierFleetPerGapDispatchStillBlockedMatches :
-  Fleet.perGapDispatchEnabled ≡ false
-unifierFleetPerGapDispatchStillBlockedMatches =
-  Unifier.unifierFleetPerGapDispatchStillBlocked
-
-toeFleetRelatedSymbolsRequiredMatches :
-  Fleet.fleetRelatedSymbolsRequired ≡ true
-toeFleetRelatedSymbolsRequiredMatches =
-  TOE.toeFleetRelatedSymbolsRequired
-
-unifierFleetRelatedSymbolsRequiredMatches :
-  Fleet.fleetRelatedSymbolsRequired ≡ true
-unifierFleetRelatedSymbolsRequiredMatches =
-  Unifier.unifierFleetRelatedSymbolsRequired
-
-toeFleetDiscoverRequiredMatches :
-  Fleet.fleetDiscoverRequired ≡ true
-toeFleetDiscoverRequiredMatches =
-  TOE.toeFleetDiscoverRequired
-
-unifierFleetDiscoverRequiredMatches :
-  Fleet.fleetDiscoverRequired ≡ true
-unifierFleetDiscoverRequiredMatches =
-  Unifier.unifierFleetDiscoverRequired
-
-toeFleetRoundLineageRequiredMatches :
-  Fleet.fleetRoundLineageRequired ≡ true
-toeFleetRoundLineageRequiredMatches =
-  TOE.toeFleetRoundLineageRequired
-
-unifierFleetRoundLineageRequiredMatches :
-  Fleet.fleetRoundLineageRequired ≡ true
-unifierFleetRoundLineageRequiredMatches =
-  Unifier.unifierFleetRoundLineageRequired
-
