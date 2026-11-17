@@ -36,3 +36,9 @@ import DASHI.Physics.Photovoltaic.GaAs111PseudomorphicElasticExact
 import DASHI.Physics.Photovoltaic.GroundCondensateActiveCoolingExact
 import DASHI.Physics.Photovoltaic.ConditionalStageDispatchExact
 import DASHI.Physics.Photovoltaic.HeatReuseReverseORCExact
+
+-- P1d quantum-well source confinement and strict P7 net solar-electric gate.
+import DASHI.Physics.Photovoltaic.GaAs111QuantumWellConfinementExact
+
+-- P1d quantum-well source confinement and strict P7 net solar-electric gate.
+import DASHI.Physics.Photovoltaic.PV369NetHalfThresholdExact
