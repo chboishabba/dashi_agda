@@ -460,3 +460,48 @@ and actual source-history DC admission. Reuse existing
 `FibreRoutingCompressionLadderExact`, rather than
 recreating their generic carriers. Remain blocked on
 Agda 2.9 kernel until external proof runner available.
+
+
+### P0 third cut: what actually suffices for shared expert DC
+
+The `sourceDCEqualForAnyTwoHistoriesWhenActivationCentered`
+theorem makes a useful SOURCE-BASED sufficient condition
+explicit: when a shared triad has `a+b+c=0`, all original
+per-expert products
+`D_e=(a+b+c)(A_e+B_e+C_e)` are equal to zero,
+no matter how the independent histories differ.
+`sourceDCZeroFromCenteredHistory` is the alternative
+per-expert condition. `zeroLeftProduct` and
+`zeroRightProduct` are separately supplied typed
+integer solver proofs, not floating-point assumptions.
+
+Combined with `originalSameDCRelativeScoreFactors`,
+this shows that a centred shared activation admits
+an exact **two-directed-coordinate score difference**
+for EVERY original expert candidate under the one
+shared trained head. A weaker nonzero common-DC
+condition also suffices for relative score preservation.
+The latter is useful even if reconstructing the
+entire original directed triple remains impossible
+from the two channels alone.
+
+**Critical implementation guard:** layer-normalisation
+over all `d_model` coordinates does NOT certify each
+of the individual 3-coordinate triads has zero mean.
+The exact source-specific centering / equal-DC
+admission must be checked, or a correction/residual
+DC value retained. Neither a global-layer mean
+nor the word `invariant` supplies this premise.
+
+Symbolic stand-in now also checks the original
+activation-centering identity, equality across
+independent expert histories, and a counterexample
+for noncentred x. Only original-source reference
+identities and local SymPy are admitted; no new
+PyTorch model implementation was introduced.
+
+Source P0 is now blocked mainly on actual original
+floating-point activations/weights, explicit scalar
+quantizer error budgets, Agda kernel checking,
+and future expert reactivation. Do not label
+new sympy checks as accepted kernel theorems.
