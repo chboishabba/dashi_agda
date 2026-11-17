@@ -42,7 +42,7 @@ depthOneMultiplicity = 2
 
 defectCompatibleChartCount : Nat
 defectCompatibleChartCount =
-  depthThreeMultiplicity * depthTwoMultiplicity * depthOneMultiplicity
+  _*_ (_*_ depthThreeMultiplicity depthTwoMultiplicity) depthOneMultiplicity
 
 defectCompatibleChartCountIsFour : defectCompatibleChartCount ≡ 4
 defectCompatibleChartCountIsFour = refl
