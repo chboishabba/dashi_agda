@@ -92,8 +92,7 @@ check("source oriented transition factors via external FFN output",
 check("source history chart difference even and transition bias",
       S.simplify(Hplus-Hminus-2*(ty*even+bt))==0)
 check("history chart invariant if even FFN and transition bias vanish",
-      S.simplify((Hplus-Hminus).subs({even:0,bt:0}))==0
-      if False else S.simplify((Hplus-Hminus)-2*(ty*even+bt))==0)
+      S.simplify((Hplus-Hminus).subs({m:0,b2:0,bt:0}))==0)
 # Source radial history_cap is Euclidean projection onto a ball.
 # It is 1-Lipschitz in exact Euclidean geometry and thus bounds
 # the post-cap chart discrepancy by pre-cap difference; actual
@@ -108,7 +107,9 @@ for p,qv in [(R(3),R(-2)),(R(1,2),R(4)),(R(-5),R(-7))]:
 # it is exactly 2||even(F)||. With b1=0, b2=0,
 # |even_g(a)| <= min(|a|/2, a²/sqrt(2pi)).
 # The latter is useful near zero; source trained W norms still OPEN.
-check("even GELU quadratic near-origin symbolic expansion",
-      S.series(even_g(t),t,0,5)
-       == S.series(t*t/S.sqrt(2*S.pi),t,0,5))
+check("even GELU quadratic leading term",
+      S.simplify(S.limit(even_g(t)/t**2,t,0)
+                 -1/S.sqrt(2*S.pi))==0)
+check("even GELU has nonzero fourth-order correction",
+      S.simplify(S.diff(even_g(t),t,4).subs(t,0))!=0)
 print("X369_GELU_PARITY_HISTORY_SYMPY_PASS",len(checks),"checks")
