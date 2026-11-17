@@ -1,49 +1,53 @@
-# V2 Ω finite-inertia magnetic-memory motor weld — 17 November 2026
+# Ω — finite-inertia motor and magnetic-memory weld (17 November 2026)
 
-**Physical objective.** Establish whether the magnetic-memory current-placement gain survives load-dependent shaft dynamics, without treating improved converter recovery as the explanation.
+## Scope and reuse
 
-## Reused model
+Uses existing `v2_omega_coupled_magnetic_torque.Model` and `v2_omega_nonlinear_memory_torque.Memory`, `periodic_state`, and `match_output`. The magnetic geometry, current waveforms and converter boundary are unchanged. No source-selected V2 component values are available. This is a **numerical** finite-inertia dynamic extension, not an Agda kernel proof, physical measurement, PWM controller or thermal stability proof.
 
-Existing two-winding rotor-angle coenergy, nonlinear reversible saturation and passive current-following memory from `v2_omega_coupled_magnetic_torque.py` and `v2_omega_nonlinear_memory_torque.py`. Magnetic geometry and nominal 95% signed net converter boundary are unchanged. Winding currents are imposed as smooth functions of rotor angle; no transistor-resolved tracking is established.
+## Mathematical identity and sign discipline
 
-A finite-inertia rotor follows `J ω̇ = T_motor + T_magnetic − b ω`, with an ideal motor shaft-torque actuator constrained to `|T_motor| ≤ T_max`, speed-proportional feedback and fixed feedforward. The magnetic memory remains governed by `τ ż=i−z`. The actual mechanical-cycle storage endpoints, not assumed closed states, are included.
+Let `i(theta)` be the *commanded* two-winding current, `z` the magnetic-memory state, `tau z_dot = i-z`, `lambda = L(theta)i-beta*i³+k z`, and `Tmag = partial_theta W'`. Current enters the electrical winding, so positive signed terminal work is electrical *input*; `-i·v` is raw electrical export. Magnetic energy obeys
 
-The integrated signed identity is:
+`dEmag/dt = i·lambda_dot - Tmag*omega - Dmem`.
 
-```
-W_motor_shaft =
-  W_electrical_export_raw
-+ W_copper + W_magnetic_memory + W_viscous
-+ ΔE_rotor + ΔE_magnetic
-```
+The actual motor and rotor satisfy
 
-It holds without assuming constant rotor speed or vanishing motor-side stored energy. Net bus output quoted below is calculated with a fixed ideal signed factor, *not* a physical bidirectional converter loss map.
+`J*omega_dot = Tmotor + Tmag - b*omega`.
 
-## Illustrative result (not original V2)
+Therefore, for **any** complete integration interval,
 
-Assume rotor inertia 0.02 kg·m², motor torque limit 0.65 N·m, viscous coefficient 0.00006 N·m/(rad/s), nominal 2354 RPM, 30 mechanical revolutions. Controllers are matched to 20 W net output in the earlier fixed-speed model.
+`Wmotor = Wexport_raw + Wcopper + Wmemory + Wfriction + DeltaErotor + DeltaEmagnetic`,
 
-| Last cycle | Memory-aware timing | Copper-only timing |
-|---|---:|---:|
-| Motor shaft mechanical supply | 30.427 W | 32.679 W |
-| Modeled bus output | 20.00005 W | 19.99999 W |
-| Rotor energy-rate correction | +0.000156 W | +0.000155 W |
-| Speed ripple | 0.263 RPM | 0.267 RPM |
-| Complete per-cycle ledger residual | −1.32 μJ | +0.32 μJ |
+where `Erotor=J*omega²/2`; there is **no** uncharged flywheel, auxiliary source or assumed zero magnetic storage. The raw signed conversion to nominal bus export is `eta*Wexport_raw` as a *deliberately idealised* fixed boundary; this is not a bidirectional power-electronics loss theorem. The motor input is shaft mechanical power from a **torque-limited ideal actuator**, not a metered mains motor electrical input.
 
-Thus the same-machine dynamic comparison retains approximately **2.252 W less motor shaft demand** at effectively matched export. That saving is completely accountable as magnetic-memory loss redistribution, not an anomalous output.
+## Added dynamics
 
-## Independent negative controls
+`i(theta) = c + u sin(p theta) + v cos(p theta)` is prescribed as a current-tracking assumption, not derived from a feasible PWM regulator. Motor torque is limited by `|Tmotor|<=Tmax` and follows a proportional speed controller around nominal 2354 RPM with fixed average-reaction feedforward. Finite inertia, viscous loss, passive magnetic lag and both energy stores are integrated together with signed work integrators. The rotor is not artificially constrained to constant speed. Ordinary recovery efficiency is held fixed. Endpoints are evaluated at the same **rotor-angle cycles**, rather than equal wall-clock times.
 
-- Motor torque cap 0.08 N·m causes persistent saturation and kinetic-energy depletion; **stationarity fails**.
-- Inertia 0.0002 kg·m² creates more than 10 RPM speed ripple despite a closing energy ledger; mean power alone is insufficient.
-- The voltage/current checks on the dynamic trajectory are **sampled**, not certified between samples or at transistor edges.
-- The last-cycle rotor storage rate is small but nonzero; numerical approach to a periodic solution is **not a certified nonlinear periodic orbit**.
+## Results — invented design parameters
 
-**Local acceptance:** 58/58 magnetic priority tests passed: 47 reused, 11 new. The complete tested source, tests, runner and machine-readable receipts are supplied in the conversation package `v2_omega_finite_inertia_magnetic_shaft_maxcut_20261117.zip`. **New executable files not yet committed to GitHub**; this report and canonical roadmap are the repository-backed results of this round.
+Baseline: `J=0.02 kg·m²`, `Tmax=0.65 N·m`, `b=0.00006 N·m/(rad/s)`; 30 mechanical rotor turns; model RPM 2354. The two controllers were previously calibrated to **20 W exported** at fixed RPM. With finite-inertia tracking, each produces approximately 20 W on the final cycle while the memory-aware controller requires approximately **2.25 W less motor shaft supply**. The reduction is explained by reduced magnetic-memory dissipation despite slightly higher copper loss; viscous friction is explicitly included. The final-cycle energy residual is on the order of microjoules and rotor storage-rate trends toward zero (last-cycle ~1e-4 W). Speed ripple remains finite (~0.26 RPM in this assumed inertia). Current and voltage are **sampled** under the prescribed tracking trajectory; no continuous switching voltage proof is claimed.
 
-## Roadmap boundaries
+## Negative controls and acceptance
 
-Open: source-selected original V2 coenergy and material hysteresis, physical winding current tracking and electrical-drive losses, real shaft inertia and motor electrical input, rigorous hybrid periodic orbit and thermal feasibility, original all-port load-intervention measurements, pinned Agda kernel and connected-head CI. All original **16 strict P0–P4 gates remain OPEN**.
+1. Capping motor torque at `0.08 N·m` produces persistent saturation and negative kinetic-energy rate; reject stationary operation.
+2. Reducing inertia to `0.0002 kg·m²` yields >10 RPM ripple despite power-ledger closure; show that mean-power improvement alone does not certify speed quality.
+3. Omitting `DeltaErotor` or `DeltaEmagnetic` breaks the full-state ledger whenever those stores drift.
+4. Original V2 torque, real current-tracking, converter losses, winding parameters, rotor inertia and core-temperature data **not measured**.
+5. Agda/Nix and full connected-head CI **not run**. This numerical model establishes neither an original-material hysteresis law nor a theorem of global periodic stability.
 
-Highest-alpha next step: true same-machine current-tracking and motor efficiency map, followed by calibrated torque/load intervention. Converter recovery remains a *fixed secondary boundary*, not the primary claimed mechanism.
+### Status against A–H / Ω
+
+| Gate | Status |
+|---|---|
+| A×B coenergy and two-winding memory reused | Model established; no hardware identification |
+| A×E×F finite rotor inertia + motor torque actuator + friction | Numerical source-independent producer, local tests passed |
+| Same-machine, same-export current-timing saving under dynamic rotor | Conditional numerical result; storage rates explicitly accounted |
+| Finite torque and speed ripple negative controls | Passed on illustrated parameter set |
+| True bounded-voltage current controller with switching | OPEN |
+| Certified nonlinear periodic orbit, uncertainty envelope | OPEN |
+| Calibrated motor electrical input / shaft torque | OPEN |
+| Original V2 material and load-response measurements | OPEN |
+| Pinned Agda acceptance and original 16 P0–P4 strict gates | OPEN |
+
+Prioritise actual magnetic maps, flux/torque identification, and current tracking before further recovery-converter sweeps. No physical excess energy claimed.
