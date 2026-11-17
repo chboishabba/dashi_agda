@@ -15,9 +15,7 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 import DASHI.Unified.ArithmeticMoonshine as ArithmeticMoonshine
 import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
 import DASHI.Unified.BalabanRGTOEMaxCutValidation
-import DASHI.Unified.SensibLawGovernanceTOEExact as SensibLawGovernanceTOE
-import DASHI.Unified.SensibLawGovernanceTOEValidation
-import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Validation
+import DASHI.Unified.BalabanAntigravityTOEConvergenceExact as BalabanAntiTOE
 import DASHI.Unified.BrainFMRI as BrainFMRI
 import DASHI.Reasoning.TrialecticBraidedTwoEyedCoordinationExact as BraidedTransferTOE
 import DASHI.Reasoning.TrialecticThreeStrandBraidHistoryExact as BraidedHistoryTOE
@@ -32,7 +30,11 @@ import DASHI.Unified.TOE369CoarseFineIntertwinerMaxCutExact as TOE369MaxCut
 import DASHI.Unified.TOE369CoarseFineIntertwinerMaxCutValidation as TOE369MaxCutValidation
 import DASHI.Unified.TOE369RootUnifierConvergenceValidation as TOE369RootUnifierValidation
 import DASHI.Physics.Foundations.Round5CompleteBoundary as Round5
-import DASHI.Physics.Foundations.Round5FullBoundary as Round5Full
+balabanAntigravityTOEReceipt :
+  BalabanAntiTOE.BalabanAntigravityTOEReceipt
+balabanAntigravityTOEReceipt =
+  BalabanAntiTOE.canonicalBalabanAntigravityTOEReceipt
+
 canonicalUnifiedObjects : List Spine.UnifiedObjectInvariant
 canonicalUnifiedObjects =
   CarrierGrammar.carrierGrammarObject

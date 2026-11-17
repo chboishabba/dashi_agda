@@ -171,11 +171,7 @@ unifierSensibLawParentBudgetZKPFrame =
 
 -- Keep theorem-bearing Balaban RG results outside the placeholder axioms below.
 import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
-import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as YMMaxCut
-
--- Current-master R485/R546/R558 Goal-1/Pareto normalization.
--- The imported source owners remain theorem authority.
-open YMMaxCut public
+import DASHI.Unified.BalabanAntigravityTOEConvergenceExact as BalabanAntiTOE
 
 open BalabanRGTOE public using
   ( sourceCouplingIsBetaHistoryCoupling
@@ -229,26 +225,18 @@ balabanRGClayPromotionStillFalse =
   BalabanRGTOE.balabanRGClayPromotionStillFalse
 
 
-unifierBalabanContinuumLimitReceipt :
-  BalabanRGTOE.BalabanContinuumLimitReceipt
-unifierBalabanContinuumLimitReceipt =
-  BalabanRGTOE.balabanContinuumLimitReceipt
+balabanAntigravityTOEReceipt :
+  BalabanAntiTOE.BalabanAntigravityTOEReceipt
+balabanAntigravityTOEReceipt =
+  BalabanAntiTOE.canonicalBalabanAntigravityTOEReceipt
 
-unifierBalabanContinuumLimitPromotionImpossible :
-  BalabanRGTOE.BalabanContinuumLimitPromotion → ⊥
-unifierBalabanContinuumLimitPromotionImpossible =
-  BalabanRGTOE.balabanContinuumLimitPromotionImpossible
+balabanAntigravityS4CompilerLevel : ProofLevel
+balabanAntigravityS4CompilerLevel =
+  BalabanAntiTOE.balabanAntigravityS4CompilerLevel
 
-unifierDepthContinuumLimitReceipt :
-  BalabanRGTOE.DepthContinuumLimitReceipt
-unifierDepthContinuumLimitReceipt =
-  BalabanRGTOE.depthContinuumLimitReceipt
-
-unifierDepthContinuumLimitPromotionImpossible :
-  BalabanRGTOE.DepthContinuumLimitPromotion → ⊥
-unifierDepthContinuumLimitPromotionImpossible =
-  BalabanRGTOE.depthContinuumLimitPromotionImpossible
-
+balabanAntigravityP3GCompilerLevel : ProofLevel
+balabanAntigravityP3GCompilerLevel =
+  BalabanAntiTOE.balabanAntigravityP3GCompilerLevel
 
 balabanRGTOEReceipt : BalabanRGTOE.BalabanRGTOEReceipt
 balabanRGTOEReceipt =
