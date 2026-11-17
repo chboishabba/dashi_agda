@@ -43,8 +43,5 @@ import DASHI.Core.SymmetryResolvedFibreExact
 import DASHI.EverythingSSPRepresentationReductionRound9
 import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
 
--- Source-typed banking, Palantir, and systemic-incidence non-promotion.
-import DASHI.Unified.RescueFinancePalantirTOENonPromotionExact
-
--- Exact MAPS/Epstein source and governance non-promotion adapter.
-import DASHI.Unified.MAPSEpsteinTOENonPromotionExact
+-- Source-owned Occupy non-factorability and proof-relevant non-domination gate.
+import DASHI.Unified.OccupyNonDominationTOEExact

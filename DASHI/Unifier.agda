@@ -585,8 +585,5 @@ record DASHIUnificationAxiom : Set₁ where
 DASHI-Unification-Theorem : Set₁
 DASHI-Unification-Theorem = DASHIUnificationAxiom
 
--- Evidence and governance proof boundary. Does not discharge placeholder QG axioms.
-import DASHI.Unified.RescueFinancePalantirTOENonPromotionExact
-
--- Exact MAPS/Epstein source and governance non-promotion adapter.
-import DASHI.Unified.MAPSEpsteinTOENonPromotionExact
+-- Source-owned Occupy non-factorability and proof-relevant non-domination gate.
+import DASHI.Unified.OccupyNonDominationTOEExact
