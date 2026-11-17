@@ -40,54 +40,16 @@ import DASHI.Core.SymmetryResolvedFibreExact
 import DASHI.EverythingSSPRepresentationReductionRound9
 import DASHI.Physics.Closure.TOESymmetryResolved369BridgeExact
 
-import DASHI.Unified.SensibLawActionstepGovernanceTOEExact as SensibLawActionstep
+-- Reuse the existing exact finite GR/quantum proof-term regression.
+-- It contains a terminal physical non-promotion theorem.
+-- Do not replace this import with DASHI.Unifier placeholder axioms.
+import DASHI.Unified.GRQuantumProofTermRegression
 
-SensibLawActionstepGovernanceTOEReceipt : Set₁
-SensibLawActionstepGovernanceTOEReceipt =
-  SensibLawActionstep.SensibLawActionstepGovernanceTOEReceipt
+-- Exact antigravity fail-closed convergence.
+-- The imported receipt is theorem-owned outside DASHI.Unifier.
+import DASHI.Unified.AntigravityTOENonPromotionBridgeExact as AntigravityTOE
 
-sensibLawActionstepGovernanceTOEReceipt :
-  SensibLawActionstepGovernanceTOEReceipt
-sensibLawActionstepGovernanceTOEReceipt =
-  SensibLawActionstep.canonicalSensibLawActionstepGovernanceTOEReceipt
-
-sensibLawSemanticPromotionDoesNotCreateLegalAuthority :
-  SensibLawActionstep.SemanticPromotionLegalAuthorityClosed
-sensibLawSemanticPromotionDoesNotCreateLegalAuthority =
-  SensibLawActionstep.semanticPromotionDoesNotCreateLegalAuthority
-
-actionstepWorkflowDoesNotCreateLegalApplicability :
-  SensibLawActionstep.ActionstepWorkflowCreatesLegalApplicability → Data.Empty.⊥
-actionstepWorkflowDoesNotCreateLegalApplicability =
-  SensibLawActionstep.actionstepWorkflowDoesNotCreateLegalApplicability
-
-actionstepVendorClaimDoesNotProveFirmCompliance :
-  SensibLawActionstep.ActionstepVendorComplianceClaimProvesFirmCompliance → Data.Empty.⊥
-actionstepVendorClaimDoesNotProveFirmCompliance =
-  SensibLawActionstep.actionstepVendorClaimDoesNotProveFirmCompliance
-
-------------------------------------------------------------------------
--- Missing/deceased scientist Ibrahim/Dewey investigative Pareto TOE handoff.
-------------------------------------------------------------------------
-
-import DASHI.Unified.MissingDeceasedIbrahimDeweyParetoTOEExact as MissingDeceasedIbrahimDewey
-
-missingDeceasedIbrahimDeweyBoundary :
-  MissingDeceasedIbrahimDewey.IbrahimDeweyConvergenceBoundary
-missingDeceasedIbrahimDeweyBoundary =
-  MissingDeceasedIbrahimDewey.canonicalIbrahimDeweyConvergenceBoundary
-
-missingDeceasedAmyIbrahimDeweyConvergence :
-  MissingDeceasedIbrahimDewey.IbrahimDeweyConvergenceReceipt
-missingDeceasedAmyIbrahimDeweyConvergence =
-  MissingDeceasedIbrahimDewey.amyConvergence
-
-missingDeceasedMaiwaldIbrahimDeweyConvergence :
-  MissingDeceasedIbrahimDewey.IbrahimDeweyConvergenceReceipt
-missingDeceasedMaiwaldIbrahimDeweyConvergence =
-  MissingDeceasedIbrahimDewey.maiwaldConvergence
-
-missingDeceasedDualRouteCreatesAuthorityFalse :
-  MissingDeceasedIbrahimDewey.dualRouteAgreementCreatesAuthority ≡ false
-missingDeceasedDualRouteCreatesAuthorityFalse =
-  MissingDeceasedIbrahimDewey.dualRouteAgreementCreatesAuthorityIsFalse
+antigravityTOEConvergenceReceipt :
+  AntigravityTOE.AntigravityTOEConvergenceReceipt
+antigravityTOEConvergenceReceipt =
+  AntigravityTOE.canonicalAntigravityTOEConvergenceReceipt

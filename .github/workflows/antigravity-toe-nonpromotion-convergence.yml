@@ -1,0 +1,94 @@
+name: antigravity-toe-nonpromotion-convergence
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'DASHI/Unified/AntigravityTOENonPromotionBridgeExact.agda'
+      - 'DASHI/Unified/AntigravityTOENonPromotionBridgeValidation.agda'
+      - 'DASHI/EverythingTOESymmetryResolved369.agda'
+      - 'DASHI/Unifier.agda'
+      - 'DASHI/Unified/Physics.agda'
+      - 'DASHI/Physics/ExoticGravity/AntigravityMaterialBidiCrossPollinationExact.agda'
+      - 'DASHI/Physics/ExoticGravity/AntigravityUnificationInteractionExact.agda'
+      - 'DASHI/Physics/ExoticGravity/AntigravityResearchPromotionCutExact.agda'
+      - 'DASHI/Physics/ExoticGravity/AntigravityStrongestConditionalTheoremExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119AntigravityTraceVsActiveStressFirewallExact.agda'
+      - 'DASHI/Physics/Foundations/GRQFTMereologyBridgeExact.agda'
+      - 'tests/test_antigravity_toe_nonpromotion_convergence.py'
+      - '.github/workflows/antigravity-toe-nonpromotion-convergence.yml'
+
+concurrency:
+  group: antigravity-toe-nonpromotion-convergence-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  focused-kernel:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Agda and standard library
+        uses: wenkokke/setup-agda@v2
+        with:
+          agda-version: '2.6.4.3'
+          agda-stdlib-version: '2.1'
+
+      - name: Install DASHI repository intelligence
+        run: python -m pip install -e tools/agda_preflight
+
+      - name: Search related symbols and lineage
+        run: |
+          dashi-repo index --root .
+          dashi-repo related canonicalAntigravityTOEConvergenceReceipt --root .
+          dashi-repo related negativeTraceAloneDoesNotCloseActiveStress --root .
+          dashi-repo related antigravityAnomalyDoesNotPromoteTerminalUnification --root .
+          dashi-repo discover 'antigravity TOE non promotion trace active stress' --root .
+          dashi-repo lineage --prefix DASHI.Physics.ExoticGravity.Antigravity --root .
+          dashi-repo lineage --prefix DASHI.Physics.Foundations.CMP119Antigravity --root .
+          dashi-repo lineage --prefix DASHI.Unified.AntigravityTOE --root .
+
+      - name: Run deterministic static contract
+        run: python -m pytest -q tests/test_antigravity_toe_nonpromotion_convergence.py
+
+      - name: Run structural preflight
+        run: |
+          dashi-agda-preflight --root . --closure --agda-auto-refine=typecheck \
+            --agda-extra-args='-i . -l standard-library' \
+            DASHI/Unified/AntigravityTOENonPromotionBridgeExact.agda
+          dashi-agda-preflight --root . --agda-auto-refine=typecheck \
+            --agda-extra-args='-i . -l standard-library' \
+            DASHI/Unified/AntigravityTOENonPromotionBridgeValidation.agda
+          dashi-agda-preflight --root . --agda-auto-refine=typecheck \
+            --agda-extra-args='-i . -l standard-library' \
+            DASHI/EverythingTOESymmetryResolved369.agda
+
+      - name: Reject trust escapes and ESD edits
+        run: |
+          sources=(
+            DASHI/Unified/AntigravityTOENonPromotionBridgeExact.agda
+            DASHI/Unified/AntigravityTOENonPromotionBridgeValidation.agda
+            DASHI/EverythingTOESymmetryResolved369.agda
+            DASHI/Unifier.agda
+            DASHI/Unified/Physics.agda
+          )
+          for source in "${sources[@]}"; do
+            if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|TERMINATING|NO_POSITIVITY_CHECK' "$source"; then
+              echo "forbidden trust escape in $source" >&2
+              exit 1
+            fi
+          done
+          if git diff --name-only origin/master...HEAD | grep -Ei '(^|/)(dashi_digital_esd|[^/]*digital_esd[^/]*|[^/]*ESD[^/]*)'; then
+            echo "ESD surface changed" >&2
+            exit 1
+          fi
+
+      - name: Kernel-check antigravity TOE path
+        run: |
+          agda --version
+          agda -i . -l standard-library DASHI/Unified/AntigravityTOENonPromotionBridgeExact.agda
+          agda -i . -l standard-library DASHI/Unified/AntigravityTOENonPromotionBridgeValidation.agda
+          agda -i . -l standard-library DASHI/Unified/Physics.agda
+          agda -i . -l standard-library DASHI/EverythingTOESymmetryResolved369.agda
+          agda -i . -l standard-library DASHI/Unifier.agda
