@@ -309,3 +309,44 @@ The pinned formal acceptance script previously contained a double-escaped grep E
 The checker now uses grep -nF for literal {!!} and separately rejects explicit postulates and unsafe compiler pragmas that weaken proof obligations. A local fixture test was 4/4: clean source accepted; explicit hole, postulate and allow-unsolved-metas flag each rejected. This is proof-source integrity validation, not physical simulation and NOT Agda kernel checking.
 
 The pinned runner still requires actual repo-owned Agda 2.9, with no Python proof substitute. No Agda/Nix binary is available in this environment and no exact-head GitHub workflow run has been verified; D1 remains OPEN. The local fixture result does NOT prove any theorem type-correct.
+
+
+## 17 Nov highest-alpha correction: prove finite open Gauss and derive timed cells
+
+The audit uncovered two specific mathematical and proof-checking issues, addressed on PR #1524 without numerical simulation:
+
+1. **Syntax blocker** in SmithFilsingerMaxwellMaterialEnergyCutExact.agda: an unmatched closing parenthesis in the fieldMaterialRepeatableWork proof term. Fixed after a whole-file token/delimiter scan. The previously claimed source-level hole scan alone was not sufficient to establish syntactic readiness. Recheck of three modified modules found delimiter balance with no explicit postulates/holes; Agda elaboration is STILL NOT run.
+2. **Vacuous integration interface** in MaxwellTimedSpatialWeldExact: the previous throughField accepted a function returning an already-assembled CausalSpatialCell, which could obscure where its work equation came from. Replaced with IntegratedFieldCell, an actual typed numeric signed work equation conditioned on the KSW pointwise Poynting identity, and a separate buildCausalCellFromMaxwell constructor that derives SpatialCell.work and the timed cell from that premise and the original flight receipt.
+
+### New physically relevant *mathematical* finite Gauss cut
+
+The source-first search discovered a pre-existing, exact rational forward-difference telescoping theorem in DASHI/Physics/YangMills/YangMillsLatticeStressWardSliceConservationExact.agda: differencePartialTelescopes. The Filsinger programme now reuses that canonical owner directly in:
+
+**DASHI/Physics/Motors/SmithFilsingerOpenBoundaryPoyntingGaussExact.agda**
+
+- OpenRectangularPoyntingFaces carries **cross-section-aggregated** signed rational face fluxes along x, y, z. This is *not* a claim that a scalar profile represents an arbitrary 3D physical vector field; the cross-section aggregation and metric orientation need source evidence.
+- threeAxisFiniteDivergence is the sum of finite forward differences, NOT a continuous derivative.
+- exteriorOrientedPoyntingFlux keeps the actual differences between the opposite external faces, with NO fictitious periodic-box cancellation.
+- **finiteOpenBoundaryPoyntingGauss** proves the exact identity sum of discrete divergence = outward right-face flux minus left-face flux, summed for all three axes, simply by invoking the pre-existing Yang–Mills telescoping lemma once per axis. This is new cross-programme mathematical reuse; it is source-authored and still awaits pinned Agda acceptance.
+- **originalFullVectorJetOpenBoundaryFlux** composes the existing KSW full-vector pointwise Poynting identity with the exact finite Gauss identity, requiring TWO independent physically meaningful receipts: the actual field/time spatial integration into the finite face divergence, and calibrated signed exterior flux to the same-original source port.
+- **No field solution, actual atmosphere/soil source-current or real-device power can be inferred from these mathematical identities.** The KSW jet is pointwise, while the finite faces are rational sums. Their equality in the actual measurement units is a separately required physical integration/trace law.
+
+### Direct continuation of the all-N timed physical chain
+
+SmithFilsingerMaxwellTimedSpatialWeldExact.agda now also imports the open-Gauss owner. IntegratedOpenGaussCell has a real 3-vector Maxwell jet and OriginalMaxwellOpenFaceTrace, discrete retarded flight, local driver/stored/load/loss work and a **separate** rational exterior-flux-to-Nat work/unit calibration implication. **buildCausalCellFromOpenGauss** uses the original KSW pointwise result and original Yang–Mills finite Gauss proof to derive the required local SpatialCell.work and timed path. throughOpenGauss is a new constructor of MaxwellTimedPath; eraseMaxwellToTimedSpatial consumes it, and the existing all-N energy, causal-arrival and selected-original source-cap theorems apply without duplicate proof of the chain algebra.
+
+This is a real proof *weld* but does NOT complete full F10 physical source-to-port: every cell's divergence-to-face quadrature and signed rational-to-original terminal calibration remain physical premises, as does full source replenishment. It is deliberately limited to cross-section-aggregated finite face fluxes; continuous Maxwell PDE, geometry, constitutive material relaxation and time integration are not proved by this Nat/ℚ algebra.
+
+### Updated gate distinctions
+
+| Target | New mathematical result | Open physical / kernel obstruction |
+|---|---|---|
+| F10a pointwise local vector Maxwell | Reuse canonical KSW FullVectorMaxwellJet exact identity | Real continuum source-current and constitutive field solution |
+| F10b finite spatial divergence → exterior flux | NEW finiteOpenBoundaryPoyntingGauss reusing canonical YM Ward difference telescoping | Exact Agda 2.9 kernel acceptance; physical cross-section face trace and continuum integral |
+| F10c exterior flux → physical terminal work | New typed OriginalMaxwellOpenFaceTrace + IntegratedOpenGaussCell + buildCausalCellFromOpenGauss | Physically justified signed port mapping and rational-to-Nat energy calibration |
+| F13 all-N exterior net source | Existing SpatialPortChain, strengthened all-N cap and timed Maxwell path | Source identity, outgoing boundary flux, independently admitted natural source cap |
+| F15 material/returned cycle | Exact field/material cancellation, #1521 donor reuse, materialModulationReconcilesOriginalCycleLoss; delimiter bug fixed | Actual all-state return and paid modulation/source evidence |
+| F14/F16 original apparatus & weather | Existing source-indexed same-object and causal-arrow obligations remain | Original electrical work and independent atmosphere intervention |
+| D1 | Source-integrity guard corrected, finite Gauss added to pinned checker, delimiter audit on three changed modules | Agda/Nix unavailable locally, no current kernel/CI acceptance |
+
+**Highest-alpha remaining formal target:** independently justified field-to-boundary integration at the actual selected geometry and material law, with consistent units/signs and no implicit 3D continuum promotion. Do not reprove the YM finite difference telescope or KSW 3D curl jet. Verify this source with the repo-owned Agda 2.9 toolchain before naming any new kernel-closed theorem.
