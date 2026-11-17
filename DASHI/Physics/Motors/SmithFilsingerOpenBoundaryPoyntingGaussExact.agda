@@ -96,3 +96,57 @@ admittedLocalPoyntingEqualsOriginalExteriorPort a =
   where
     ℚPtrans : ∀ {x y z : ℚ.ℚ} → x ≡ y → y ≡ z → x ≡ z
     ℚPtrans refl second = second
+
+
+-- The original THREE-COMPONENT KSW jet and the original Yang-Mills
+-- telescoping identity now meet at one explicitly typed boundary.
+-- This does NOT identify one pointwise jet with a volume integral:
+-- the input integrationFromPhysicalField is a separately admitted
+-- field, domain, metric, quadrature and orientation theorem.
+import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
+import DASHI.Physics.Plasma.KSW668FullVectorMaxwellJetExact as Vector
+open import Agda.Primitive using (Level; lsuc)
+
+record OriginalMaxwellOpenFaceTrace
+  {r : Level} {F : C3.RealField r}
+  (jet : Vector.FullVectorMaxwellJet F) : Set (lsuc r) where
+  field
+    faces : OpenRectangularPoyntingFaces
+    integratedSpatialPoyntingDivergence : ℚ.ℚ
+    originalSignedExteriorPortFlux : ℚ.ℚ
+
+    -- Physical (NOT finite arithmetic): actually integrate the vector
+    -- field represented by the selected Maxwell jet on the selected
+    -- oriented domain and time window. No kernel proof supplied here.
+    integrationFromPhysicalField :
+      Vector.fullVectorSignedBudget jet ≡ C3.zero F →
+      integratedSpatialPoyntingDivergence
+        ≡ threeAxisFiniteDivergence faces
+
+    -- Physical (NOT finite arithmetic): match the signed exterior face
+    -- flux to the original same-object electrode/ground/source terminals.
+    boundaryFluxIsOriginalPort :
+      exteriorOrientedPoyntingFlux faces
+        ≡ originalSignedExteriorPortFlux
+
+-- Genuine mathematical composition of two original proof owners:
+-- KSW 3D Ampere/Faraday pointwise identity + Yang-Mills exact finite
+-- open divergence theorem, with only the genuine continuum/source
+-- identification steps left as independently required hypotheses.
+originalFullVectorJetOpenBoundaryFlux :
+  ∀ {r} {F : C3.RealField r}
+    (jet : Vector.FullVectorMaxwellJet F)
+    (trace : OriginalMaxwellOpenFaceTrace jet) →
+  OriginalMaxwellOpenFaceTrace.integratedSpatialPoyntingDivergence trace
+    ≡ OriginalMaxwellOpenFaceTrace.originalSignedExteriorPortFlux trace
+originalFullVectorJetOpenBoundaryFlux jet trace =
+  trans
+    (OriginalMaxwellOpenFaceTrace.integrationFromPhysicalField trace
+      (Vector.fullVectorMaxwellPoyntingIdentity jet))
+    (trans
+      (finiteOpenBoundaryPoyntingGauss
+        (OriginalMaxwellOpenFaceTrace.faces trace))
+      (OriginalMaxwellOpenFaceTrace.boundaryFluxIsOriginalPort trace))
+  where
+    trans : ∀ {x y z : ℚ.ℚ} → x ≡ y → y ≡ z → x ≡ z
+    trans refl second = second
