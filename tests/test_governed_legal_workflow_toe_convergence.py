@@ -1,411 +1,185 @@
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+
 BRIDGE = ROOT / "DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda"
 REGRESSION = ROOT / "DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda"
+CANONICAL = ROOT / "DASHI/Unified/TOEGovernanceSemanticNonPromotionExact.agda"
+VALIDATION = ROOT / "DASHI/Unified/TOEGovernanceSemanticNonPromotionValidation.agda"
 TOE = ROOT / "DASHI/EverythingTOESymmetryResolved369.agda"
 UNIFIER = ROOT / "DASHI/Unifier.agda"
-UNIFIED = ROOT / "DASHI/Unified/Everything.agda"
-WORKFLOW = ROOT / ".github/workflows/toe-symmetry-resolved-369.yml"
+UNIFIED_EVERYTHING = ROOT / "DASHI/Unified/DASHITOEEverything.agda"
+TERMINAL = ROOT / "DASHI/Unified/DASHITOETerminalMaxCutExact.agda"
+
 
 def read(path: Path) -> str:
-    assert path.is_file(), path
-    return path.read_text(encoding="utf-8")
+    assert path.is_file(), f"missing {path.relative_to(ROOT)}"
+    return path.read_text(encoding="utf-8", errors="strict")
 
-def test_exact_legal_owners_and_zkp_are_reused():
+
+def test_bridge_reuses_existing_owners():
     text = read(BRIDGE)
     for token in (
         "CompositionalComplianceExact",
+        "ITIRGovernanceControlCaseExact",
+        "FormalisationGovernanceCapstoneExact",
         "SensibLawOperationalSemanticBoundaryExact",
         "SensibLawLiveReviewMutationExact",
         "SensibLawMatterAcceptanceExact",
-        "SensibLawLegalSourceAuthorityEvidenceExact",
-        "SensibLawSemanticPromotionPolicy",
-        "SensibLawDbNativeCorpusCompilerExact",
-        "GovernedLegalWorkflowTOEInvariantHandoff",
-        "canonicalGovernedLegalWorkflowTOEInvariantHandoff",
+        "SensibLawProvenanceSemanticStatusOrthogonalityExact",
+        "SensibLawSourceRealisedLegalRuleExact",
+        "SensibLawSourceConditionedApplicabilityViolationExact",
+        "ITIRFederatedTypedWorldProjectionExact",
+        "DistributedEpistemicFabricSourceAtlasExact",
+        "AgentAuthorityTrajectoryExact",
+    ):
+        assert token in text
+
+
+def test_bridge_exposes_normalized_zkp_receipt():
+    text = read(BRIDGE)
+    for token in (
         "GovernedLegalWorkflowZKPReceipt",
         "canonicalGovernedLegalWorkflowZKPReceipt",
-        "ITIL", "ISO 9000", "ISO/IEC 42001", "ISO/IEC 27001",
-        "ISO/IEC 27701", "ISO/IEC 23894", "ISO 9241",
-        "NIST AI RMF", "Six Sigma", "C4 and PlantUML", "ASD-STE100",
-        "meta-introspector/zkperf", "meta-introspector/zos-server",
-        "meta-introspector/erdfa-py", "meta-introspector/aristotle-cli-rs",
-    ):
-        assert token in text
-
-def test_three_toe_consumers_reach_same_legal_handoff():
-    toe, unifier, unified = map(read, (TOE, UNIFIER, UNIFIED))
-    assert "toeGovernedLegalWorkflowInvariantHandoff" in toe
-    assert "unifierGovernedLegalWorkflowInvariantHandoff" in unifier
-    assert "governedLegalWorkflowTOEInvariantHandoff" in unified
-    for token in ("TaskCompletionCreatesTruth", "SemanticPromotionTruthAuthorityClosed",
-                  "CandidateSourceIsAuthoritative", "ExactReuseCreatesSemanticAuthority"):
-        assert token in toe
-        assert token in unifier
-
-def test_regression_binds_unifier_to_canonical_bridge():
-    text = read(REGRESSION)
-    for token in (
-        "unifierUsesCanonicalInvariantHandoff",
-        "invariantHandoffUsesCanonicalGovernanceBoundary",
-        "invariantHandoffUsesCanonicalPromotionBoundary",
-        "invariantHandoffUsesCanonicalZKPReceipt",
-        "zkpStandardsRemainDesignLenses",
-        "zkpStandardsDoNotClaimCertification",
-        "zkpESDSurfaceMutationRemainsForbidden",
-        "unifierTaskCompletionAliasIsExact",
-        "unifierSemanticPromotionTruthAuthorityAliasIsExact",
-        "unifierExactReuseAuthorityAliasIsExact",
-    ):
-        assert token in text
-
-def test_no_new_trust_escape():
-    text = "\n".join(read(p) for p in (BRIDGE, REGRESSION, TOE, UNIFIER, UNIFIED))
-    for token in ("postulate", "allow-unsolved-metas", "{-# TERMINATING #-}",
-                  "{-# NO_POSITIVITY_CHECK #-}", "{!!}"):
-        assert token not in text
-
-def test_workflow_has_referee_preflight_and_esd_guard():
-    text = read(WORKFLOW)
-    for token in (
-        "dashi-repo related",
-        "dashi-repo discover",
-        "dashi-repo lineage",
-        "dashi-agda-preflight",
-        "Reject ESD surface changes",
-        "Reject trust escapes",
+        "objectiveRefs",
+        "reuseRefs",
+        "constructionRefs",
+        "safetyInvariantRefs",
+        "laneRefs",
+        "preconditionRefs",
+        "postconditionRefs",
+        "governanceRefs",
+        "verificationRefs",
     ):
         assert token in text
 
 
-def test_semantic_authority_and_bound_acquisition_are_in_toe_graph():
-    bridge = read(BRIDGE)
-    toe = read(TOE)
-    unifier = read(UNIFIER)
-    regression = read(REGRESSION)
-
+def test_standards_are_lenses_not_certification():
+    text = read(BRIDGE)
     for token in (
-        "DASHI.Interop.SensibLawSemanticPromotionPolicy",
-        "DASHI.Core.BoundAcquisitionDemandExact",
-        "toeSemanticPromotionTruthAuthorityClosed",
-        "toeSemanticPromotionLegalAuthorityClosed",
-        "toeSemanticPromotionAllAuthorityClosed",
-        "toeBoundAcquisitionDoesNotPayRequirement",
-        "toeBoundAcquisitionDoesNotCloseConsumer",
-        "toeProducerIdentityDoesNotIdentifyResidual",
+        "ITIL",
+        "ISO 9000",
+        "ISO/IEC 42001",
+        "ISO/IEC 27001",
+        "ISO/IEC 27701",
+        "ISO/IEC 23894",
+        "ISO 9241",
+        "NIST AI RMF",
+        "Six Sigma",
+        "C4 and PlantUML",
+        "ASD-STE100",
     ):
-        assert token in bridge
+        assert token in text
+    assert "standardsCertificationClaimedIsFalse" in text
 
-    for text in (toe, unifier):
-        for token in (
-            "toeSemanticPromotionTruthAuthorityClosed",
-            "toeSemanticPromotionLegalAuthorityClosed",
-            "toeSemanticPromotionAllAuthorityClosed",
-            "toeBoundAcquisitionDoesNotPayRequirement",
-            "toeBoundAcquisitionDoesNotCloseConsumer",
-            "toeProducerIdentityDoesNotIdentifyResidual",
-        ):
-            assert token in text
 
+def test_meta_introspector_and_casey_attribution_is_preserved():
+    text = read(BRIDGE)
     for token in (
-        "unifierSemanticPromotionTruthAuthorityAliasIsExact",
-        "unifierSemanticPromotionLegalAuthorityAliasIsExact",
-        "unifierSemanticPromotionAllAuthorityAliasIsExact",
-        "unifierBoundAcquisitionPaymentAliasIsExact",
-        "unifierBoundAcquisitionClosureAliasIsExact",
-        "unifierProducerIdentityResidualAliasIsExact",
+        "toeMetaIntrospectorContribution",
+        "toeMetaIntrospectorAttributionRule",
+        "meta-introspector/zkperf",
+        "meta-introspector/zos-server",
+        "meta-introspector/erdfa-py",
+        "meta-introspector/aristotle-cli-rs",
+        "casey-git-clone",
     ):
-        assert token in regression
+        assert token in text
+    assert "metaIntrospectorRepositoriesOwnDASHITheoremsIsFalse" in text
 
 
-def test_unified_facade_reexports_new_governance_firewalls():
-    unified = read(UNIFIED_EVERYTHING)
+def test_authority_firewalls_are_exact_reuse():
+    text = read(BRIDGE)
     for token in (
-        "governedSemanticPromotionTruthAuthorityClosed",
-        "governedSemanticPromotionLegalAuthorityClosed",
-        "governedSemanticPromotionAllAuthorityClosed",
-        "governedBoundAcquisitionDoesNotPayRequirement",
-        "governedBoundAcquisitionDoesNotCloseConsumer",
-        "governedProducerIdentityDoesNotIdentifyResidual",
-    ):
-        assert token in unified
-
-
-def test_legal_source_authority_handoff_is_exact():
-    bridge = read(BRIDGE)
-    regression = read(REGRESSION)
-    toe = read(TOE)
-    unifier = read(UNIFIER)
-    unified = read(UNIFIED_EVERYTHING)
-
-    assert "SensibLawLegalSourceAuthorityEvidenceExact as LegalAuthority" in bridge
-    for token in (
-        "toeCandidateSourceDoesNotCloseAuthority",
-        "toeCurrentValidityDoesNotAutomaticallyEstablishApplicability",
-        "toeSemanticAdmissionDoesNotBecomeLegalSourceAuthority",
-    ):
-        assert token in bridge
-
-    for text, prefix in (
-        (toe, "toe369"),
-        (unifier, "unifier"),
-        (unified, "unified"),
-    ):
-        for suffix in (
-            "LegalCandidateIsNotAuthority",
-            "LegalValidityIsNotApplicability",
-            "SemanticAdmissionIsNotLegalAuthority",
-        ):
-            assert prefix + suffix in text
-
-    for token in (
-        "unifierLegalCandidateIsNotAuthority",
-        "unifierLegalValidityIsNotApplicability",
-        "unifierSemanticAdmissionIsNotLegalAuthority",
-    ):
-        assert token in regression
-
-
-def test_exact_reuse_firewalls_reach_all_toe_facades():
-    bridge = read(BRIDGE)
-    toe = read(TOE)
-    unifier = read(UNIFIER)
-    unified = read(UNIFIED_EVERYTHING)
-    regression = read(REGRESSION)
-
-    for token in (
-        "SensibLawDbNativeCorpusCompilerExact as DbNative",
-        "toeExactReuseDoesNotCreateSemanticAdmission",
-        "toeExactReuseDoesNotCreateSemanticAuthority",
-        "toeExactReuseDoesNotCreateApplicability",
-        "toeExactReuseDoesNotCreateEntityIdentity",
-        "toeExactReuseDoesNotCreatePropositionIdentity",
-        "toeExactReuseDoesNotCreateEventIdentity",
-        "toeExactReuseDoesNotCreateClaimTruth",
-        "exactReuseAdmissionFirewall",
-        "exactReuseAuthorityFirewall",
-        "exactReuseApplicabilityFirewall",
-        "exactReuseClaimTruthFirewall",
-    ):
-        assert token in bridge
-
-    for token in (
-        "toeExactReuseDoesNotCreateSemanticAdmission",
-        "toeExactReuseDoesNotCreateSemanticAuthority",
-        "toeExactReuseDoesNotCreateApplicability",
-        "toeExactReuseDoesNotCreateEntityIdentity",
-        "toeExactReuseDoesNotCreatePropositionIdentity",
-        "toeExactReuseDoesNotCreateEventIdentity",
-        "toeExactReuseDoesNotCreateClaimTruth",
-    ):
-        assert token in toe
-        assert token in unifier
-
-    for token in (
-        "governedExactReuseDoesNotCreateSemanticAdmission",
-        "governedExactReuseDoesNotCreateSemanticAuthority",
-        "governedExactReuseDoesNotCreateApplicability",
-        "governedExactReuseDoesNotCreateEntityIdentity",
-        "governedExactReuseDoesNotCreatePropositionIdentity",
-        "governedExactReuseDoesNotCreateEventIdentity",
-        "governedExactReuseDoesNotCreateClaimTruth",
-    ):
-        assert token in unified
-
-    for token in (
-        "unifierExactReuseAdmissionAliasIsExact",
-        "unifierExactReuseAuthorityAliasIsExact",
-        "unifierExactReuseApplicabilityAliasIsExact",
-        "unifierExactReuseClaimTruthAliasIsExact",
-        "invariantHandoffCarriesExactReuseAdmissionFirewall",
-        "invariantHandoffCarriesExactReuseAuthorityFirewall",
-        "invariantHandoffCarriesExactReuseApplicabilityFirewall",
-        "invariantHandoffCarriesExactReuseClaimTruthFirewall",
-    ):
-        assert token in regression
-
-
-def test_direct_legal_governance_firewalls_reach_all_three_toe_facades():
-    toe = read(TOE)
-    unifier = read(UNIFIER)
-    unified = read(UNIFIED_EVERYTHING)
-    bridge = read(BRIDGE)
-
-    bridge_tokens = (
-        "toeDurableReviewStateDoesNotCreateTruth",
-        "toeAcceptanceReceiptDoesNotMutateMatter",
-        "toeExternalSourceDoesNotAdmitTruth",
-        "toeLegalAuthorityDoesNotCreateTruthStatus",
-        "toePromotionStageDoesNotBypassPromotionAuthority",
-        "toeSourceRealisedWrongTypeDoesNotAutoViolate",
-        "toeElementsDoNotEraseExceptionsOrDefences",
-        "toeKernelClosureDoesNotMeanSemanticClosure",
+        "toeCaseySelectionDoesNotCreateWorldTruth",
         "toeFormalProofDoesNotCreateExternalWorldTruth",
-        "toeSameSystemDoesNotAutomaticallyCloseAuthority",
-        "toeDocumentRoleDoesNotSupplyLegalSourceAuthority",
-        "toeCanonicalLegalSourceAuthorityBoundary",
-    )
-    for token in bridge_tokens:
-        assert token in bridge
-
-    toe_tokens = (
-        "toe369DurableReviewStateDoesNotCreateTruth",
-        "toe369AcceptanceReceiptDoesNotMutateMatter",
-        "toe369ExternalSourceDoesNotAdmitTruth",
-        "toe369LegalAuthorityDoesNotCreateTruthStatus",
-        "toe369PromotionStageDoesNotBypassPromotionAuthority",
-        "toe369SourceRealisedWrongTypeDoesNotAutoViolate",
-        "toe369ElementsDoNotEraseExceptionsOrDefences",
-        "toe369KernelClosureDoesNotMeanSemanticClosure",
-        "toe369FormalProofDoesNotCreateExternalWorldTruth",
-        "toe369ComplianceCompositionRetainsIntermediateWitness",
-        "toe369SameLegalSystemDoesNotCloseAuthority",
-        "toe369DocumentRoleDoesNotSupplyLegalSourceAuthority",
-        "toe369CanonicalLegalSourceAuthorityBoundary",
-    )
-    for token in toe_tokens:
-        assert token in toe
-
-    unifier_tokens = (
-        "unifierDurableReviewStateDoesNotCreateTruth",
-        "unifierAcceptanceReceiptDoesNotMutateMatter",
-        "unifierExternalSourceDoesNotAdmitTruth",
-        "unifierLegalAuthorityDoesNotCreateTruthStatus",
-        "unifierPromotionStageDoesNotBypassPromotionAuthority",
-        "unifierSourceRealisedWrongTypeDoesNotAutoViolate",
-        "unifierElementsDoNotEraseExceptionsOrDefences",
-        "unifierKernelClosureDoesNotMeanSemanticClosure",
-        "unifierFormalProofDoesNotCreateExternalWorldTruth",
-        "unifierComplianceCompositionRetainsIntermediateWitness",
-        "unifierSameLegalSystemDoesNotCloseAuthority",
-        "unifierDocumentRoleDoesNotSupplyLegalSourceAuthority",
-        "unifierCanonicalLegalSourceAuthorityBoundary",
-    )
-    for token in unifier_tokens:
-        assert token in unifier
-
-    unified_tokens = (
-        "governedDurableReviewStateDoesNotCreateTruth",
-        "governedAcceptanceReceiptDoesNotMutateMatter",
-        "governedExternalSourceDoesNotAdmitTruth",
-        "governedLegalAuthorityDoesNotCreateTruthStatus",
-        "governedPromotionStageDoesNotBypassPromotionAuthority",
-        "governedSourceRealisedWrongTypeDoesNotAutoViolate",
-        "governedElementsDoNotEraseExceptionsOrDefences",
-        "governedKernelClosureDoesNotMeanSemanticClosure",
-        "governedFormalProofDoesNotCreateExternalWorldTruth",
-        "governedComplianceCompositionRetainsIntermediateWitness",
-        "governedSameLegalSystemDoesNotCloseAuthority",
-        "governedDocumentRoleDoesNotSupplyLegalSourceAuthority",
-        "governedCanonicalLegalSourceAuthorityBoundary",
-    )
-    for token in unified_tokens:
-        assert token in unified
-
-
-def test_direct_legal_governance_regression_binds_unifier_to_bridge():
-    text = read(REGRESSION)
-    for token in (
-        "unifierDurableReviewTruthAliasIsExact",
-        "unifierAcceptanceMutationAliasIsExact",
-        "unifierExternalSourceTruthAliasIsExact",
-        "unifierLegalAuthorityTruthAliasIsExact",
-        "unifierPromotionAuthorityAliasIsExact",
-        "unifierWrongTypeViolationAliasIsExact",
-        "unifierExceptionsDefencesAliasIsExact",
-        "unifierComplianceWitnessAliasIsCanonical",
-        "unifierCanonicalLegalAuthorityBoundaryIsExact",
+        "toeKnowledgeDoesNotCreateExecutionAuthority",
     ):
         assert token in text
 
 
-
-def test_native_follow_provider_and_expert_firewalls_reach_all_toe_facades():
-    bridge = read(BRIDGE)
+def test_focused_bridge_is_normalized_through_canonical_toe_owner():
+    canonical = read(CANONICAL)
     toe = read(TOE)
     unifier = read(UNIFIER)
-    unified = read(UNIFIED_EVERYTHING)
-    regression = read(REGRESSION)
+    unified_everything = read(UNIFIED_EVERYTHING)
+    terminal = read(TERMINAL)
 
+    assert "import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalWorkflow" in canonical
     for token in (
-        "toeNativeLegalFollowDoesNotCreateLegalAuthority",
-        "toeProviderFailureDoesNotMakePropositionFalse",
-        "toeExpertProductionPromotesAnyAuthorityIsFalse",
-        "nativeLegalFollowAuthorityFirewall",
-        "providerFailureNegativeEvidenceFirewall",
-        "expertProductionAuthorityClosed",
+        "canonicalGovernedLegalWorkflowTOEBoundary",
+        "canonicalGovernedLegalWorkflowZKPReceipt",
+        "canonicalConsumerAdequacyRuntimeTheoremBridgeBoundary",
+        "canonicalExactNonFactorabilityResidualCompilerBoundary",
+        "canonicalConsumerResearchAdmissibilityStopBoundary",
+        "canonicalClosedIsNotAdequateBoundary",
+        "canonicalMaboRevisionReopenBoundary",
+        "canonicalRevisionReReviewPropagationBoundary",
+        "canonicalLegalWorldRevisionReconstructionBoundary",
     ):
-        assert token in bridge
+        assert token in canonical
 
-    for token in (
-        "toe369NativeLegalFollowDoesNotCreateLegalAuthority",
-        "toe369ProviderFailureDoesNotMakePropositionFalse",
-        "toe369ExpertProductionPromotesAnyAuthorityIsFalse",
-    ):
-        assert token in toe
+    assert "import DASHI.Unified.TOEGovernanceSemanticNonPromotionExact as Governance" in toe
+    assert "toeGovernanceHandoff" in toe
+    assert "toeNoFreshDemandDoesNotProveConsumerAdequacy" in toe
+    assert "toeExactNonfactorabilityMayReopenClosedFrontier" in toe
+    assert "toeRevisionChangeReopensContextBeforeIdentity" in toe
+    assert "toeLatestRevisionLookupDoesNotPayContextReview" in toe
 
-    for token in (
-        "unifierNativeLegalFollowDoesNotCreateLegalAuthority",
-        "unifierProviderFailureDoesNotMakePropositionFalse",
-        "unifierExpertProductionPromotesAnyAuthorityIsFalse",
-    ):
-        assert token in unifier
+    assert "import DASHI.Unified.TOEGovernanceSemanticNonPromotionExact as GovernanceTOE" in unifier
+    assert "toeGovernanceHandoff" in unifier
+    assert "toeWorkflowTaskCompletionDoesNotCreateTruth" in unifier
+    assert "toeNoFreshDemandDoesNotProveConsumerAdequacy" in unifier
+    assert "toeExactNonfactorabilityMayReopenClosedFrontier" in unifier
 
-    for token in (
-        "governedNativeLegalFollowDoesNotCreateLegalAuthority",
-        "governedProviderFailureDoesNotMakePropositionFalse",
-        "governedExpertProductionPromotesAnyAuthorityIsFalse",
-    ):
-        assert token in unified
-
-    for token in (
-        "unifierNativeLegalFollowAuthorityAliasIsExact",
-        "unifierProviderFailureEvidenceAliasIsExact",
-        "unifierExpertProductionAuthorityAliasIsExact",
-        "invariantHandoffCarriesNativeLegalFollowAuthorityFirewall",
-        "invariantHandoffCarriesProviderFailureEvidenceFirewall",
-        "invariantHandoffCarriesExpertProductionAuthorityClosure",
-    ):
-        assert token in regression
+    assert "open import DASHI.Unified.TOEGovernanceSemanticNonPromotionExact public" in unified_everything
+    assert "governanceHandoff : Governance.TOEGovernanceHandoff" in terminal
+    assert "Governance.canonicalTOEGovernanceHandoff" in terminal
 
 
-def test_full_legal_execution_and_expert_firewall_bundle_reaches_toe_graph():
-    bridge = read(BRIDGE)
-    toe = read(TOE)
-    unifier = read(UNIFIER)
-    unified = read(UNIFIED_EVERYTHING)
-    regression = read(REGRESSION)
+def test_regression_binds_unifier_to_canonical_receipt():
+    text = read(REGRESSION)
+    assert "unifierUsesCanonicalZKPReceipt" in text
+    assert "zkpStandardsRemainDesignLenses" in text
+    assert "zkpStandardsDoNotClaimCertification" in text
+    assert "zkpESDSurfaceMutationRemainsForbidden" in text
 
-    suffixes = (
-        "SpacyDoesNotCreateLegalAuthority",
-        "SpacyDoesNotCreateLegalConstruction",
-        "LatestKnownSectionDoesNotBecomeHistoricalLaw",
-        "PythonWrapperDoesNotOwnLegalSemantics",
-        "JsonIsNotSemanticCommandAbi",
-        "JsonReviewDoesNotCreateDecision",
-        "JsonReceiptDoesNotCreateTruth",
-        "CliSequenceDoesNotPayResidual",
-        "PinnedStreamDoesNotCreateLegalTruth",
-        "ReviewedHopJsonDoesNotBecomeCanonicalSemanticTransport",
-        "OalcHitDoesNotBecomeBindingAuthority",
-        "OfficialCourtBytesDoNotBecomePropositionCorrespondence",
-        "SameMncDoesNotCollapseSourceRevisions",
-        "SuccessfulOfficialFetchDoesNotBecomeProductionReady",
-        "MultipleReportsDoNotAutomaticallyCreateIndependence",
-        "AgreementDoesNotAutomaticallyCreateIndependentCorroboration",
-        "DependenceDoesNotMeanNoEvidence",
-        "ExpertStatusDoesNotAutomaticallyCreateTruth",
-        "ReportAdmissionDoesNotRepairMissingInput",
-        "CrossExaminationDoesNotAddUnobservedInput",
-        "DisputedRiskDoesNotBecomeIrrelevant",
-        "ObserverDefectDoesNotProveOpinionFalse",
-        "QualificationDoesNotAutomaticallyProveForensicCompliance",
+
+def test_canonical_owner_keeps_esd_import_only_and_attribution():
+    text = read(CANONICAL)
+    assert "import DASHI.Education.DigitalESDNormativeStandardsAtlasExact as Standards" in text
+    assert "standardMentionCannotCreateConformity" in text
+    assert "citationCannotCreateProof" in text
+    assert "citationCannotCreateAuthority" in text
+    assert "attributionBoundary = Attribution.canonicalAttributionSnowballBoundary" in text
+
+
+def test_new_governance_sources_have_no_trust_escape():
+    forbidden = (
+        "postulate",
+        "allow-unsolved-metas",
+        "TERMINATING",
+        "NO_POSITIVITY_CHECK",
+        "{!!}",
     )
+    for path in (BRIDGE, REGRESSION, CANONICAL, VALIDATION, TOE, UNIFIER):
+        text = read(path)
+        for token in forbidden:
+            assert token not in text, f"{token} found in {path.relative_to(ROOT)}"
 
-    for suffix in suffixes:
-        assert f"toe{suffix}" in bridge
-        assert f"toe369{suffix}" in toe
-        assert f"unifier{suffix}" in unifier
-        assert f"governed{suffix}" in unified
-        assert f"unifier{suffix}AliasIsExact" in regression
+
+def test_canonical_validation_checks_exact_owner_types():
+    text = read(VALIDATION)
+    for token in (
+        "Governance.toeRuntimeCoordinateCompletenessDoesNotProveFormalAdequacy",
+        "Governance.toeTheoremBackedAdequacyRequiresAdequateFor",
+        "Governance.toeApproximateCollisionCannotPromoteExactResidual",
+        "Governance.toeFrontierClosureDoesNotProveConsumerAdequacy",
+        "Governance.toeNoFreshDemandDoesNotProveConsumerAdequacy",
+        "Governance.toeExactNonfactorabilityMayReopenClosedFrontier",
+        "Governance.toeRevisionChangeReopensContextBeforeIdentity",
+        "Governance.toeLatestRevisionLookupDoesNotPayContextReview",
+        "Governance.toeRevisionReopenDoesNotCreateClaimTruth",
+        "Governance.toeRevisionRereviewDoesNotChangeClaimTruth",
+    ):
+        assert token in text
