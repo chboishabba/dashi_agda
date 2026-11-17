@@ -37,8 +37,6 @@ import DASHI.Unified.FormalObjectParents as FormalObjectParents
 import DASHI.Unified.InvariantSpine as Spine
 import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as LegalGovernance
 import DASHI.Unified.GovernedLegalWorkflowTOEBridgeRegression
-import DASHI.Unified.FleetFormalGapTOEExact as FleetFormalGap
-import DASHI.Unified.FleetFormalGapTOERegression
 import DASHI.Unified.PNFHyperfabric as PNFHyperfabric
 import DASHI.Unified.PNFSourceBoundaryTOEExact as PNFSource
 import DASHI.Unified.PNFDistilledNonPromotionTOEExact as PNFDistilled
@@ -50,7 +48,7 @@ import DASHI.Unified.TOE369RootUnifierConvergenceValidation as TOE369RootUnifier
 import DASHI.Physics.Foundations.Round5CompleteBoundary as Round5
 
 ------------------------------------------------------------------------
--- Governed legal-workflow and Fleet residual convergence.
+-- Governed legal-workflow convergence.
 ------------------------------------------------------------------------
 
 governedLegalWorkflowTOEInvariantHandoff :
@@ -72,28 +70,6 @@ governedExactReuseDoesNotCreateSemanticAuthority :
   LegalGovernance.ExactReuseCreatesSemanticAuthority → ⊥
 governedExactReuseDoesNotCreateSemanticAuthority =
   LegalGovernance.toeExactReuseDoesNotCreateSemanticAuthority
-
-fleetFormalGapTOEReceipt :
-  FleetFormalGap.FleetFormalGapTOEReceipt
-fleetFormalGapTOEReceipt =
-  FleetFormalGap.canonicalFleetFormalGapReceipt
-
-fleetFormalGapMaxCut :
-  FleetFormalGap.FleetFormalGapMaxCut
-fleetFormalGapMaxCut =
-  FleetFormalGap.canonicalFleetFormalGapMaxCut
-
-fleetOnlyFormalResidualDispatches :
-  FleetFormalGap.dispatchAllowed FleetFormalGap.unformalisedFormalGap ≡ true
-fleetOnlyFormalResidualDispatches = refl
-
-fleetDischargedFibresDoNotRedispatch :
-  FleetFormalGap.dispatchAllowed FleetFormalGap.dischargedCoreKnowledge ≡ false
-fleetDischargedFibresDoNotRedispatch = refl
-
-fleetContradictionsRemainSeparate :
-  FleetFormalGap.dispatchAllowed FleetFormalGap.polarityContradictionGap ≡ false
-fleetContradictionsRemainSeparate = refl
 
 canonicalUnifiedObjects : List Spine.UnifiedObjectInvariant
 canonicalUnifiedObjects =
@@ -329,78 +305,6 @@ unifiedYMImplementAToDMaxCutReceipt :
   YMAD.YMImplementAToDTOEMaxCutReceipt
 unifiedYMImplementAToDMaxCutReceipt =
   YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
-
-
-------------------------------------------------------------------------
--- Fleet R5 exact ordinal max-cut.
--- The ordinal carrier targets exactly 58 slots.
--- It does not claim persisted R5 row identity.
-------------------------------------------------------------------------
-
-unifiedFleetR5OrdinalCutReceipt :
-  FleetGapTOE.FleetR5OrdinalCutReceipt
-unifiedFleetR5OrdinalCutReceipt =
-  FleetGapTOE.canonicalFleetR5OrdinalCutReceipt
-
-unifiedNavierStokesBM2ZKPFrame :
-  NSBM2TOE.NavierStokesBM2TOEZKPFrame
-unifiedNavierStokesBM2ZKPFrame =
-  NSBM2TOE.canonicalNavierStokesBM2TOEZKPFrame
-
-
-------------------------------------------------------------------------
--- Fleet R5 exact ordinal max-cut.
--- The ordinal carrier targets exactly 58 slots.
--- It does not claim persisted R5 row identity.
-------------------------------------------------------------------------
-
-unifiedFleetR5OrdinalCutReceipt :
-  FleetGapTOE.FleetR5OrdinalCutReceipt
-unifiedFleetR5OrdinalCutReceipt =
-  FleetGapTOE.canonicalFleetR5OrdinalCutReceipt
-
-unifiedFleetFormalGapOrdinalCountIs58 :
-  FleetGapTOE.fleetFormalGapOrdinalCount ≡ 58
-unifiedFleetFormalGapOrdinalCountIs58 =
-  FleetGapTOE.fleetFormalGapOrdinalCountIs58
-
-unifiedFleetDischargedOrdinalCountIs584 :
-  FleetGapTOE.fleetDischargedOrdinalCount ≡ 584
-unifiedFleetDischargedOrdinalCountIs584 =
-  FleetGapTOE.fleetDischargedOrdinalCountIs584
-
-unifiedFleetContradictionOrdinalCountIs44 :
-  FleetGapTOE.fleetContradictionOrdinalCount ≡ 44
-unifiedFleetContradictionOrdinalCountIs44 =
-  FleetGapTOE.fleetContradictionOrdinalCountIs44
-
-unifiedFleetOrdinalRowIdentityStillUnattached :
-  FleetGapTOE.fleetOrdinalCarriesPersistedRowIdentity ≡ false
-unifiedFleetOrdinalRowIdentityStillUnattached =
-  FleetGapTOE.fleetOrdinalCarriesPersistedRowIdentityIsFalse
-
-unifiedFleetSharedCardinalityDoesNotCreateIdentity :
-  FleetGapTOE.FleetSharedCardinalityCreatesIdentity → ⊥
-unifiedFleetSharedCardinalityDoesNotCreateIdentity =
-  FleetGapTOE.fleetSharedCardinalityDoesNotCreateIdentity
-
-
-------------------------------------------------------------------------
--- Joint Balaban/R559 typed continuum non-promotion.
--- Reuse the source-owned typed eliminators carried by the canonical max-cut.
-------------------------------------------------------------------------
-
-unifiedBalabanR559ContinuumLimitPromotionImpossible :
-  BalabanRGTOE.BalabanContinuumLimitPromotion → ⊥
-unifiedBalabanR559ContinuumLimitPromotionImpossible =
-  BalabanR559TOE.continuumLimitPromotionEliminator
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-unifiedBalabanR559DepthContinuumLimitPromotionImpossible :
-  BalabanRGTOE.DepthContinuumLimitPromotion → ⊥
-unifiedBalabanR559DepthContinuumLimitPromotionImpossible =
-  BalabanR559TOE.depthContinuumLimitPromotionEliminator
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
 
 ------------------------------------------------------------------------

@@ -21,13 +21,11 @@ on:
       - 'DASHI/Unifier.agda'
       - 'DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda'
       - 'DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda'
-      - 'DASHI/Unified/FleetFormalGapTOEExact.agda'
-      - 'DASHI/Unified/FleetFormalGapTOERegression.agda'
+      - 'DASHI/Unified/FleetFormalGapTargetTOEExact.agda'
+      - 'DASHI/Unified/R559IbrahimFleetHyperfabricTOEExact.agda'
+      - 'DASHI/Unified/R559IbrahimFleetHyperfabricTOEValidation.agda'
       - 'tests/test_governed_legal_workflow_toe_convergence.py'
-      - 'tests/test_fleet_formal_gap_toe_convergence.py'
-      - 'scripts/check_fleet_formal_gap_toe.py'
       - 'Docs/architecture/GovernedLegalWorkflowTOEDirectFirewalls.puml'
-      - 'Docs/architecture/FleetFormalGapTOE.puml'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
   push:
     paths:
@@ -63,13 +61,11 @@ on:
       - 'DASHI/Unifier.agda'
       - 'DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda'
       - 'DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda'
-      - 'DASHI/Unified/FleetFormalGapTOEExact.agda'
-      - 'DASHI/Unified/FleetFormalGapTOERegression.agda'
+      - 'DASHI/Unified/FleetFormalGapTargetTOEExact.agda'
+      - 'DASHI/Unified/R559IbrahimFleetHyperfabricTOEExact.agda'
+      - 'DASHI/Unified/R559IbrahimFleetHyperfabricTOEValidation.agda'
       - 'tests/test_governed_legal_workflow_toe_convergence.py'
-      - 'tests/test_fleet_formal_gap_toe_convergence.py'
-      - 'scripts/check_fleet_formal_gap_toe.py'
       - 'Docs/architecture/GovernedLegalWorkflowTOEDirectFirewalls.puml'
-      - 'Docs/architecture/FleetFormalGapTOE.puml'
       - 'DASHI/Physics/Closure/Everything.agda'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
 
@@ -124,13 +120,15 @@ jobs:
           dashi-repo discover 'SensibLaw Actionstep legal compliance governance semantic non promotion TOE' --root . --limit 40
           dashi-repo lineage --prefix DASHI.Cognition.PNF.SensibLaw --root .
           dashi-repo lineage --prefix DASHI.Unified.GovernedLegalWorkflowTOE --root .
-          dashi-repo diagnose DASHI/Unified/FleetFormalGapTOEExact.agda --root .
-          dashi-repo related canonicalFleetFormalGapReceipt --root . --limit 20
-          dashi-repo related canonicalPNFSpectralNumericABICoreReceipt --root . --limit 20
-          dashi-repo related bM2ToR568CompilerClosedIsTrue --root . --limit 20
-          dashi-repo related canonicalQuantumMereologyBoundary --root . --limit 20
-          dashi-repo discover 'Fleet formal gap PNF Hecke spectral Balaban Navier Stokes quantum mereology TOE' --root . --limit 40
-          dashi-repo lineage --prefix DASHI.Unified.FleetFormalGapTOE --root .
+          dashi-repo diagnose DASHI/Unified/FleetFormalGapTargetTOEExact.agda --root .
+          dashi-repo related canonicalFleetFormalGapTargetReceipt --root . --limit 20
+          dashi-repo discover 'Fleet 58 formal gaps spectral PNF Balaban NS quantum mereology owner attribution' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Unified.FleetFormalGapTargetTOE --root .
+          dashi-repo diagnose DASHI/Unified/R559IbrahimFleetHyperfabricTOEExact.agda --root .
+          dashi-repo related canonicalR559IbrahimFleetHyperfabricTOEReceipt --root . --limit 20
+          dashi-repo related canonicalTOEZKPFrame --root . --limit 20
+          dashi-repo discover 'R559 Ibrahim Fleet hyperfabric Pareto snowball non promotion' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Unified.R559IbrahimFleetHyperfabricTOE --root .
 
       - name: Reject ESD surface changes
         shell: bash
@@ -144,11 +142,8 @@ jobs:
           fi
 
 
-      - name: Verify legal governance and Fleet source surfaces
-        run: |
-          python -m pytest -q tests/test_governed_legal_workflow_toe_convergence.py
-          python -m pytest -q tests/test_fleet_formal_gap_toe_convergence.py
-          python scripts/check_fleet_formal_gap_toe.py
+      - name: Verify governed legal-workflow source surface
+        run: python -m pytest -q tests/test_governed_legal_workflow_toe_convergence.py
 
       - name: Install Agda and standard library
         uses: wenkokke/setup-agda@v2
@@ -157,7 +152,7 @@ jobs:
           agda-stdlib-version: '2.1'
 
 
-      - name: Preflight legal governance and Fleet TOE path
+      - name: Preflight legal and Fleet-Ibrahim TOE path
         run: |
           dashi-agda-preflight --root . --closure --agda-auto-refine=typecheck \
             --agda-extra-args='-i . -l standard-library' \
@@ -167,10 +162,13 @@ jobs:
             DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda
           dashi-agda-preflight --root . --closure --agda-auto-refine=typecheck \
             --agda-extra-args='-i . -l standard-library' \
-            DASHI/Unified/FleetFormalGapTOEExact.agda
+            DASHI/Unified/FleetFormalGapTargetTOEExact.agda
+          dashi-agda-preflight --root . --closure --agda-auto-refine=typecheck \
+            --agda-extra-args='-i . -l standard-library' \
+            DASHI/Unified/R559IbrahimFleetHyperfabricTOEExact.agda
           dashi-agda-preflight --root . --agda-auto-refine=typecheck \
             --agda-extra-args='-i . -l standard-library' \
-            DASHI/Unified/FleetFormalGapTOERegression.agda
+            DASHI/Unified/R559IbrahimFleetHyperfabricTOEValidation.agda
 
       - name: Reject trust escapes
         run: |
@@ -189,8 +187,9 @@ jobs:
             DASHI/Unified/Everything.agda
             DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda
             DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda
-            DASHI/Unified/FleetFormalGapTOEExact.agda
-            DASHI/Unified/FleetFormalGapTOERegression.agda
+            DASHI/Unified/FleetFormalGapTargetTOEExact.agda
+            DASHI/Unified/R559IbrahimFleetHyperfabricTOEExact.agda
+            DASHI/Unified/R559IbrahimFleetHyperfabricTOEValidation.agda
             DASHI/Unifier.agda
             DASHI/EverythingTOESymmetryResolved369.agda
             DASHI/Reasoning/Trialectic369Selected3BFullGradeActionMaxCutExact.agda
@@ -220,8 +219,9 @@ jobs:
             DASHI/Unifier.agda
             DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda
             DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda
-            DASHI/Unified/FleetFormalGapTOEExact.agda
-            DASHI/Unified/FleetFormalGapTOERegression.agda
+            DASHI/Unified/FleetFormalGapTargetTOEExact.agda
+            DASHI/Unified/R559IbrahimFleetHyperfabricTOEExact.agda
+            DASHI/Unified/R559IbrahimFleetHyperfabricTOEValidation.agda
             DASHI/Unified/Everything.agda
             DASHI/Unified/YMGoal1TOECompatibilityValidation.agda
           )

@@ -20,7 +20,6 @@ import DASHI.Unified.InvariantSpine as BrainSpine
 
 
 import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as GovernanceTOE
-import DASHI.Unified.FleetFormalGapTOEExact as FleetFormalGap
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
 
 open import Agda.Primitive using (Level; lzero; lsuc)
@@ -1058,6 +1057,87 @@ unifierFleetGapCountDoesNotDetermineIdentity :
   FleetFormalGap.GapCountDeterminesGapIdentity → ⊥
 unifierFleetGapCountDoesNotDetermineIdentity =
   FleetFormalGap.gapCountDoesNotDetermineGapIdentity
+
+
+------------------------------------------------------------------------
+-- Fleet 58 named-manifest acquisition gate.
+------------------------------------------------------------------------
+
+import DASHI.Unified.Fleet58ManifestAcquisitionExact as Fleet58Manifest
+import DASHI.Unified.Fleet58ManifestAcquisitionRegression
+
+unifierFleet58ManifestAcquisitionReceipt :
+  Fleet58Manifest.Fleet58ManifestAcquisitionReceipt
+unifierFleet58ManifestAcquisitionReceipt =
+  Fleet58Manifest.canonicalFleet58ManifestAcquisitionReceipt
+
+unifierFleet58ManifestStillMissing :
+  Fleet58Manifest.named58ManifestAcquired ≡ false
+unifierFleet58ManifestStillMissing =
+  Fleet58Manifest.named58ManifestAcquiredIsFalse
+
+unifierFleet58PerGapDispatchStillBlocked :
+  Fleet58Manifest.perGapDispatchEnabled ≡ false
+unifierFleet58PerGapDispatchStillBlocked =
+  Fleet58Manifest.perGapDispatchEnabledIsFalse
+
+unifierYMImplementAToDContinuumMassGapStillBlocked :
+  YMAD.continuumMassGapPromotion YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+  ≡ false
+unifierYMImplementAToDContinuumMassGapStillBlocked =
+  YMAD.continuumMassGapPromotionIsFalse
+    YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+unifierYMImplementAToDClayStillBlocked :
+  YMAD.clayPromotion YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+  ≡ false
+unifierYMImplementAToDClayStillBlocked =
+  YMAD.clayPromotionIsFalse YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+unifierYMImplementAToDScaleTransferNonPromotion :
+  BalabanR559TOE.ScaleTransferPromotion → ⊥
+unifierYMImplementAToDScaleTransferNonPromotion =
+  YMAD.scaleTransferPromotionEliminator
+    YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+------------------------------------------------------------------------
+-- Governed legal-workflow convergence.
+------------------------------------------------------------------------
+
+unifierGovernedLegalWorkflowInvariantHandoff :
+  GovernanceTOE.GovernedLegalWorkflowTOEInvariantHandoff
+unifierGovernedLegalWorkflowInvariantHandoff =
+  GovernanceTOE.canonicalGovernedLegalWorkflowTOEInvariantHandoff
+
+unifierTaskCompletionDoesNotCreateTruth :
+  GovernanceTOE.TaskCompletionCreatesTruth → ⊥
+unifierTaskCompletionDoesNotCreateTruth =
+  GovernanceTOE.toeTaskCompletionDoesNotCreateTruth
+
+unifierDatabaseCommitDoesNotCreateSemanticAuthority :
+  GovernanceTOE.DatabaseCommitCreatesSemanticAuthority → ⊥
+unifierDatabaseCommitDoesNotCreateSemanticAuthority =
+  GovernanceTOE.toeDatabaseCommitDoesNotCreateSemanticAuthority
+
+unifierAcceptedReviewDoesNotPayApplicability :
+  GovernanceTOE.AcceptedStatusPaysApplicability → ⊥
+unifierAcceptedReviewDoesNotPayApplicability =
+  GovernanceTOE.toeAcceptedReviewDoesNotPayApplicability
+
+unifierSemanticPromotionTruthAuthorityClosed :
+  GovernanceTOE.SemanticPromotionTruthAuthorityClosed
+unifierSemanticPromotionTruthAuthorityClosed =
+  GovernanceTOE.toeSemanticPromotionTruthAuthorityClosed
+
+unifierLegalCandidateSourceDoesNotCloseAuthority :
+  GovernanceTOE.CandidateSourceIsAuthoritative → ⊥
+unifierLegalCandidateSourceDoesNotCloseAuthority =
+  GovernanceTOE.toeCandidateSourceDoesNotCloseAuthority
+
+unifierExactReuseDoesNotCreateSemanticAuthority :
+  GovernanceTOE.ExactReuseCreatesSemanticAuthority → ⊥
+unifierExactReuseDoesNotCreateSemanticAuthority =
+  GovernanceTOE.toeExactReuseDoesNotCreateSemanticAuthority
 
 
 ------------------------------------------------------------------------

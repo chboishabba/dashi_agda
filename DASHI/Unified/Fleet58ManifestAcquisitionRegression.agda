@@ -34,6 +34,18 @@ searchPriorityStillNotProof :
   Manifest.searchPriorityCreatesProof ≡ false
 searchPriorityStillNotProof = refl
 
+fleetTargetStill58 :
+  Manifest.fleetRecordedFormalGapCount ≡ 58
+fleetTargetStill58 = Manifest.fleetRecordedFormalGapCountIs58
+
+dischargedStill584 :
+  Manifest.fleetRecordedDischargedCount ≡ 584
+dischargedStill584 = Manifest.fleetRecordedDischargedCountIs584
+
+contradictionsStill44 :
+  Manifest.fleetRecordedContradictionCount ≡ 44
+contradictionsStill44 = Manifest.fleetRecordedContradictionCountIs44
+
 esdStillReadOnly :
   Manifest.esdSurfaceEdited ≡ false
 esdStillReadOnly = refl

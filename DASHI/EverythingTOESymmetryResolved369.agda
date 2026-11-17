@@ -1122,6 +1122,163 @@ toeFleet58PerGapDispatchStillBlocked :
 toeFleet58PerGapDispatchStillBlocked =
   Fleet58Manifest.perGapDispatchEnabledIsFalse
 
+toeYMImplementAToDGate4UnresolvedCountIs58 :
+  toeYMImplementAToDGate4UnresolvedCount ≡ 58
+toeYMImplementAToDGate4UnresolvedCountIs58 =
+  YMAD.gate4UnresolvedCountIs58 YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+toeYMImplementAToDPublishedContinuumStillBlocked :
+  YMAD.publishedContinuumPromotion YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+  ≡ false
+toeYMImplementAToDPublishedContinuumStillBlocked =
+  YMAD.publishedContinuumPromotionIsFalse
+    YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+toeYMImplementAToDContinuumMassGapStillBlocked :
+  YMAD.continuumMassGapPromotion YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+  ≡ false
+toeYMImplementAToDContinuumMassGapStillBlocked =
+  YMAD.continuumMassGapPromotionIsFalse
+    YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+toeYMImplementAToDClayStillBlocked :
+  YMAD.clayPromotion YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+  ≡ false
+toeYMImplementAToDClayStillBlocked =
+  YMAD.clayPromotionIsFalse YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+toeYMImplementAToDScaleTransferNonPromotion :
+  BalabanR559TOE.ScaleTransferPromotion → ⊥
+toeYMImplementAToDScaleTransferNonPromotion =
+  YMAD.scaleTransferPromotionEliminator
+    YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+------------------------------------------------------------------------
+-- Kernel-bidi / ternary-27 / byte-ABI max-cut convergence.
+------------------------------------------------------------------------
+
+import DASHI.Unified.R559IbrahimFleetKernelBidiTernary27TOEExact as Kernel27TOE
+
+toeR559IbrahimFleetKernelBidiTernary27Receipt :
+  Kernel27TOE.R559IbrahimFleetKernelBidiTernary27TOEReceipt
+toeR559IbrahimFleetKernelBidiTernary27Receipt =
+  Kernel27TOE.canonicalR559IbrahimFleetKernelBidiTernary27TOEReceipt
+
+toeTriadicRustBindingStillUnpaid :
+  Kernel27TOE.ABI.rustU8BindingPaid Kernel27TOE.triadicByteBoundary ≡ false
+toeTriadicRustBindingStillUnpaid =
+  Kernel27TOE.rustU8BindingStillUnpaid
+
+toeKernelCharacterIsotypyStillDoesNotConstructActionIntertwiner :
+  Kernel27TOE.KernelBidi.characterIsotypyConstructsActionIntertwiner
+    Kernel27TOE.kernelBidiBoundary ≡ false
+toeKernelCharacterIsotypyStillDoesNotConstructActionIntertwiner =
+  Kernel27TOE.kernelCharacterIsotypyStillDoesNotConstructActionIntertwiner
+
+toeSelected3BSingleActionProducerStillUninhabited :
+  Kernel27TOE.SingleProducer.actualSingleProducerInhabitedHere
+    Kernel27TOE.singleProducerBoundary ≡ false
+toeSelected3BSingleActionProducerStillUninhabited =
+  Kernel27TOE.singleActionProducerStillUninhabited
+
+------------------------------------------------------------------------
+-- Governed legal-workflow convergence.
+-- Proof authority remains in the imported owners.
+------------------------------------------------------------------------
+
+toeGovernedLegalWorkflowInvariantHandoff :
+  LegalGovernance.GovernedLegalWorkflowTOEInvariantHandoff
+toeGovernedLegalWorkflowInvariantHandoff =
+  LegalGovernance.canonicalGovernedLegalWorkflowTOEInvariantHandoff
+
+toeGovernedLegalWorkflowZKPReceipt :
+  LegalGovernance.GovernedLegalWorkflowZKPReceipt
+toeGovernedLegalWorkflowZKPReceipt =
+  LegalGovernance.canonicalGovernedLegalWorkflowZKPReceipt
+
+toeWorkflowTaskCompletionDoesNotCreateTruth :
+  LegalGovernance.TaskCompletionCreatesTruth → ⊥
+toeWorkflowTaskCompletionDoesNotCreateTruth =
+  LegalGovernance.toeTaskCompletionDoesNotCreateTruth
+
+toeDatabaseCommitDoesNotCreateSemanticAuthority :
+  LegalGovernance.DatabaseCommitCreatesSemanticAuthority → ⊥
+toeDatabaseCommitDoesNotCreateSemanticAuthority =
+  LegalGovernance.toeDatabaseCommitDoesNotCreateSemanticAuthority
+
+toeAcceptedReviewDoesNotPayApplicability :
+  LegalGovernance.AcceptedStatusPaysApplicability → ⊥
+toeAcceptedReviewDoesNotPayApplicability =
+  LegalGovernance.toeAcceptedReviewDoesNotPayApplicability
+
+toeCitationAloneDoesNotRealiseLegalRule :
+  LegalGovernance.CitationAloneRealisesLegalRule → ⊥
+toeCitationAloneDoesNotRealiseLegalRule =
+  LegalGovernance.toeCitationAloneDoesNotRealiseLegalRule
+
+toeSemanticMeetDoesNotProveLegalApplicability :
+  LegalGovernance.SemanticMeetAloneProvesLegalApplicability → ⊥
+toeSemanticMeetDoesNotProveLegalApplicability =
+  LegalGovernance.toeSemanticMeetDoesNotProveLegalApplicability
+
+toeSemanticPromotionTruthAuthorityClosed :
+  LegalGovernance.SemanticPromotionTruthAuthorityClosed
+toeSemanticPromotionTruthAuthorityClosed =
+  LegalGovernance.toeSemanticPromotionTruthAuthorityClosed
+
+toeSemanticPromotionLegalAuthorityClosed :
+  LegalGovernance.SemanticPromotionLegalAuthorityClosed
+toeSemanticPromotionLegalAuthorityClosed =
+  LegalGovernance.toeSemanticPromotionLegalAuthorityClosed
+
+toeLegalCandidateSourceDoesNotCloseAuthority :
+  LegalGovernance.CandidateSourceIsAuthoritative → ⊥
+toeLegalCandidateSourceDoesNotCloseAuthority =
+  LegalGovernance.toeCandidateSourceDoesNotCloseAuthority
+
+toeCurrentValidityDoesNotEstablishApplicability :
+  LegalGovernance.CurrentValidityAutomaticallyMeansApplicability → ⊥
+toeCurrentValidityDoesNotEstablishApplicability =
+  LegalGovernance.toeCurrentValidityDoesNotAutomaticallyEstablishApplicability
+
+toeExactReuseDoesNotCreateSemanticAdmission :
+  LegalGovernance.ExactReuseCreatesSemanticAdmission → ⊥
+toeExactReuseDoesNotCreateSemanticAdmission =
+  LegalGovernance.toeExactReuseDoesNotCreateSemanticAdmission
+
+toeExactReuseDoesNotCreateSemanticAuthority :
+  LegalGovernance.ExactReuseCreatesSemanticAuthority → ⊥
+toeExactReuseDoesNotCreateSemanticAuthority =
+  LegalGovernance.toeExactReuseDoesNotCreateSemanticAuthority
+
+toeExactReuseDoesNotCreateClaimTruth :
+  LegalGovernance.ExactReuseCreatesClaimTruth → ⊥
+toeExactReuseDoesNotCreateClaimTruth =
+  LegalGovernance.toeExactReuseDoesNotCreateClaimTruth
+
+
+------------------------------------------------------------------------
+-- Fleet 58 named-manifest acquisition gate.
+------------------------------------------------------------------------
+
+import DASHI.Unified.Fleet58ManifestAcquisitionExact as Fleet58Manifest
+import DASHI.Unified.Fleet58ManifestAcquisitionRegression
+
+toeFleet58ManifestAcquisitionReceipt :
+  Fleet58Manifest.Fleet58ManifestAcquisitionReceipt
+toeFleet58ManifestAcquisitionReceipt =
+  Fleet58Manifest.canonicalFleet58ManifestAcquisitionReceipt
+
+toeFleet58ManifestStillMissing :
+  Fleet58Manifest.named58ManifestAcquired ≡ false
+toeFleet58ManifestStillMissing =
+  Fleet58Manifest.named58ManifestAcquiredIsFalse
+
+toeFleet58PerGapDispatchStillBlocked :
+  Fleet58Manifest.perGapDispatchEnabled ≡ false
+toeFleet58PerGapDispatchStillBlocked =
+  Fleet58Manifest.perGapDispatchEnabledIsFalse
+
 toeFleet58SearchPriorityDoesNotCreateProof :
   Fleet58Manifest.SearchPriorityCreatesProof → ⊥
 toeFleet58SearchPriorityDoesNotCreateProof =
