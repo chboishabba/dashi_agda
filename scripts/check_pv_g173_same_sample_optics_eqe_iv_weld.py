@@ -134,6 +134,20 @@ def weld(spec,optic,eqe,ivs,eta,aux=0,drive=0,recovered=0,jsc_tolerance=.02):
     if any(abs(a-b)>jsc_tolerance*max(a,b) for a,b in zip(expected,measured)):
         raise ValueError("optical EQE Jsc disagrees with the SAME-JV short circuit")
     independent=max_4terminal(ivs,eta)
+
+    # P5 PASSIVE-OPTICAL FIRST LAW: electrical output from each passive
+    # electrically separated photojunction cannot exceed its incident
+    # absorbed solar energy. A real RF/externally driven device needs a
+    # separately measured same-junction external-work input ledger; it
+    # must not silently promote a passive P5 source receipt.
+    wavelength=spec[:,0]
+    incident_spectral=spec[:,2] if spec.shape[1]==4 else spec[:,1]
+    absorbed=np.trapezoid(
+        incident_spectral[:,None]*optic[:,2:2+n],wavelength,axis=0)
+    incident_power=float(np.trapezoid(incident_spectral,wavelength))
+    if any(x["gross_mpp_W_m2"] > a+1e-7*max(1,incident_power)
+           for x,a in zip(independent,absorbed)):
+        raise ValueError("PASSIVE P5 first law: terminal MPP exceeds source absorbed energy")
     series=series_max(ivs)
     gross4=sum(j["delivered_mpp_W_m2"] for j in independent)
     net4=gross4-aux-drive+recovered
@@ -142,6 +156,8 @@ def weld(spec,optic,eqe,ivs,eta,aux=0,drive=0,recovered=0,jsc_tolerance=.02):
     return {"incident_solar_W_m2":incident,"expected_optical_Jsc_A_m2":expected,
             "iv_measured_Jsc_A_m2":list(map(float,measured)),
             "four_terminal_per_junction":independent,
+            "per_junction_absorbed_solar_W_m2":absorbed.tolist(),
+            "passive_mpp_le_absorbed_solar_checked":True,
             "four_terminal_net_W_m2":net4,"four_terminal_net_PCE":net4/incident,
             "four_terminal_strictly_above_half":2*net4>incident,
             "two_terminal_ideal_series":series,
@@ -174,6 +190,10 @@ def selftest():
     ck("synthetic 2T series MPP",result["two_terminal_ideal_series"]["gross_mpp_W_m2"]>0)
     ck("synthetic 4T <= gross",sum(x["delivered_mpp_W_m2"] for x in result["four_terminal_per_junction"])<=sum(x["gross_mpp_W_m2"] for x in result["four_terminal_per_junction"]))
     ck("selftest not certified",result["real_world_certified"] is False)
+    ck("passive absorbed solar bound",all(
+        p["gross_mpp_W_m2"]<=a+1e-8
+        for p,a in zip(result["four_terminal_per_junction"],
+                       result["per_junction_absorbed_solar_W_m2"])))
     def rejected(fn):
         try:fn()
         except ValueError:return True
@@ -184,6 +204,10 @@ def selftest():
     ck("reject incomplete 4-column G173",rejected(lambda:strict_spectrum(np.column_stack([wl,wl,wl,wl]),optical,eqe,n)))
     ck("reject Jsc mismatch",rejected(lambda:weld(S,optical,eqe,[np.column_stack([i[:,0],i[:,1]*.1]) for i in iv],[.97]*n)))
     ck("reject converter eta >1",rejected(lambda:weld(S,optical,eqe,iv,[1.2]*n)))
+    ck("reject impossible passive IV that creates electrical energy",
+       rejected(lambda:weld(S,optical,eqe,
+          [np.column_stack([i[:,0]*20,i[:,1]]) for i in iv],
+          [1.]*n)))
     ck("reject recovered work > drive",rejected(lambda:weld(S,optical,eqe,iv,[1.]*n,drive=1,recovered=2)))
     ck("reject non-monotonic IV",rejected(lambda:validate_iv(np.array([[0,1],[1,2]]))))
     ck("pure 1J piecewise MPP is V=Voc/2",abs(segment_power_max(*validate_iv(iv[0]))[1]-.5)<1e-12)
