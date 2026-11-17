@@ -145,27 +145,25 @@ The common kernel proves structural facts about abstraction, finite future behav
 
 ## TOE safe-and-just legal governance convergence
 
-This section records the current golden Agda handoff.
+The golden implementation reuses existing Agda owners.
 
-The implementation reuses DASHI.Core.CompositionalComplianceExact.
+It reuses DASHI.Core.CompositionalComplianceExact.
 
-The implementation reuses DASHI.Governance.Fanning2022LiteralSituatedQualifiedUseBridgeExact.
+It reuses DASHI.Governance.Fanning2022LiteralSituatedQualifiedUseBridgeExact.
 
-The implementation reuses DASHI.Unified.FleetFormalGapTargetTOEExact.
+It reuses DASHI.Unified.FleetFormalGapTargetTOEExact.
 
-The implementation exports the same receipts through DASHI.EverythingTOESymmetryResolved369 and DASHI.Unifier.
+DASHI.EverythingTOESymmetryResolved369 and DASHI.Unifier export the same receipts.
 
-Fanning et al. retain source ownership for the 2022 empirical study.
-
-The paper is The social shortfall and ecological overshoot of nations.
+Fanning et al. retain source ownership for The social shortfall and ecological overshoot of nations.
 
 The DOI is 10.1038/s41893-021-00799-z.
 
-Necula retains source attribution for the proof-carrying-code reference.
+Necula retains source attribution for Compiling with Proofs.
 
-The canonical source record is CMU-CS-98-154.
+The source record is CMU-CS-98-154.
 
-No DOI is asserted for that thesis in this repository.
+This repository does not assert a DOI for that thesis.
 
 Bitansky, Canetti, Chiesa, and Tromer retain source attribution for recursive proof-carrying-data composition.
 
@@ -185,7 +183,7 @@ A literal Fanning source row does not create causal authority.
 
 A literal Fanning source row does not create policy decision authority.
 
-A downstream compliance proof must retain the typed intermediate witness.
+A downstream compliance proof retains the typed intermediate witness.
 
 Endpoint equality alone does not replace that witness.
 
@@ -193,35 +191,35 @@ Endpoint equality alone does not replace that witness.
 
 O is the objective.
 
-The objective is to attach the existing literal-data and legal-compliance semantics to the DASHI TOE.
+The objective is TOE convergence for literal evidence and legal compliance handoffs.
 
 R is reuse.
 
-Reuse the canonical Agda owners before any extension.
+Reuse canonical Agda owners before extension.
 
 C is construction.
 
-Add only aliases and exact boundary receipts.
+Add aliases and exact boundary receipts only.
 
 S is the safety invariant.
 
-Evidence, citation, operational records, and endpoint equality do not self-promote into legal or policy authority.
+Evidence and operational records do not self-promote into legal, causal, or decision authority.
 
 L is the lane.
 
 Use one disjoint governance-convergence lane.
 
-The 584 discharged fibres remain discharged.
+The 584 discharged fibres stay discharged.
 
-Only the 58 unformalised formal gaps remain in the fleet target.
+Only the 58 unformalised formal gaps remain targeted.
 
 P is the precondition set.
 
-The canonical Agda owners must exist.
+Golden Agda owners exist.
 
-The source identifiers must remain unchanged.
+Source identifiers remain stable.
 
-ESD surfaces are read-only.
+ESD surfaces remain read-only.
 
 G is governance.
 
@@ -237,43 +235,27 @@ ISO/IEC 27701:2025 is a privacy-information management lens.
 
 ISO/IEC 23894:2023 is an AI risk-management lens.
 
-ISO 9241 interaction and human-centred-design standards are usability lenses.
+ISO 9241 standards are usability and human-centred-design lenses.
 
-NIST AI RMF 1.0 and NIST AI 600-1 are risk-management lenses.
+NIST AI RMF is a risk-management lens.
 
 C4 and PlantUML are architecture documentation lenses.
 
-None of these statements claim certification.
+These statements do not claim certification.
 
 F is the postcondition set.
 
 The TOE root and Unifier expose the same governance receipts.
 
-The operational-record non-promotion proofs remain exact.
-
 The literal-data non-promotion proofs remain exact.
+
+The operational-record non-promotion proofs remain exact.
 
 The compositional-compliance invariant remains exact.
 
-### C4 view
-
-The source layer contains empirical papers and operational records.
-
-The proof layer contains golden Agda theorem owners.
-
-The TOE layer imports proof owners.
-
-The Lean layer mirrors only the stable exported theorem surface.
-
-The ESD layer remains read-only.
-
 ### Verification
 
-Run duplicate and related-symbol discovery before writing.
-
-Run the repository preflight referee when it is available locally.
-
-Scan the changed Agda files for trust escapes.
+Run related_symbols, discover, and round_lineage before new construction.
 
 Reject postulate.
 
@@ -285,4 +267,4 @@ Reject NO_POSITIVITY_CHECK.
 
 Check that no ESD path changed.
 
-Run the focused Agda kernel check on the exact head before claiming kernel success.
+Run the exact-head Agda kernel check before claiming kernel success.

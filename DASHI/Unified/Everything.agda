@@ -255,36 +255,119 @@ unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
 unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
   FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
 
+
 ------------------------------------------------------------------------
--- Riemann / RH current max-cut TOE surface.
+-- Safe/just paper-chain normalization through Unified.Everything.
 ------------------------------------------------------------------------
 
-unifiedRiemannRHCurrentFrontier :
-  RiemannRHTOE.CurrentThreeTapFrontier
-unifiedRiemannRHCurrentFrontier =
-  RiemannRHTOE.currentThreeTapFrontier
+unifiedSafeJustPaperChainBoundary :
+  FleetGapTOE.SafeJustPaperChainBoundary
+unifiedSafeJustPaperChainBoundary =
+  FleetGapTOE.canonicalSafeJustPaperChainBoundary
 
-unifiedRiemannRHZKPFrame :
-  RiemannRHTOE.RiemannRHTOEZKPFrame
-unifiedRiemannRHZKPFrame =
-  RiemannRHTOE.canonicalRiemannRHTOEZKPFrame
+unifiedSafeJustPaperChainZKPFrame :
+  FleetGapTOE.SafeJustPaperChainZKPFrame
+unifiedSafeJustPaperChainZKPFrame =
+  FleetGapTOE.canonicalSafeJustPaperChainZKPFrame
 
-unifiedRiemannRHA1CarrierStillOpen :
-  RiemannRHTOE.currentA1CarrierSummationPaid ≡ false
-unifiedRiemannRHA1CarrierStillOpen =
-  RiemannRHTOE.a1CarrierSummationStillOpen
+unifiedONeillCountProjectionBoundary :
+  FleetGapTOE.ONeillCountProjectionBoundary
+unifiedONeillCountProjectionBoundary =
+  FleetGapTOE.fleetONeillCountProjectionBoundary
 
-unifiedRiemannRHA2ScalarStillOpen :
-  RiemannRHTOE.currentA2StrictScalarPaid ≡ false
-unifiedRiemannRHA2ScalarStillOpen =
-  RiemannRHTOE.a2StrictScalarStillOpen
+unifiedONeillObservedResultDoesNotCreateUniversalImpossibility :
+  FleetGapTOE.ONeillUniversalImpossibilityPromotion → ⊥
+unifiedONeillObservedResultDoesNotCreateUniversalImpossibility =
+  FleetGapTOE.fleetONeillObservedResultDoesNotCreateUniversalImpossibility
 
-unifiedRiemannRHRouteBStillOpen :
-  RiemannRHTOE.currentRouteBEventualGapPaid ≡ false
-unifiedRiemannRHRouteBStillOpen =
-  RiemannRHTOE.routeBEventualGapStillOpen
+unifiedObservedProvisioningResidualDoesNotIdentifyTreatmentEffect :
+  FleetGapTOE.ProvisioningTreatmentEffectPromotion → ⊥
+unifiedObservedProvisioningResidualDoesNotIdentifyTreatmentEffect =
+  FleetGapTOE.fleetObservedProvisioningResidualDoesNotIdentifyTreatmentEffect
 
-unifiedRiemannRHStillOpen :
-  RiemannRHTOE.currentRHDerived ≡ false
-unifiedRiemannRHStillOpen =
-  RiemannRHTOE.riemannHypothesisStillOpen
+unifiedFanningProjectionBoundary :
+  FleetGapTOE.FanningProjectionBoundary
+unifiedFanningProjectionBoundary =
+  FleetGapTOE.fleetFanningProjectionBoundary
+
+unifiedFanningBAUProjectionIsNotObserved2050Outcome :
+  FleetGapTOE.FanningBAUNotObservationReceipt
+unifiedFanningBAUProjectionIsNotObserved2050Outcome =
+  FleetGapTOE.fleetFanningBAUProjectionIsNotObserved2050Outcome
+
+unifiedGDP15000UpstreamBoundary :
+  FleetGapTOE.GDP15000UpstreamBoundary
+unifiedGDP15000UpstreamBoundary =
+  FleetGapTOE.fleetGDP15000UpstreamBoundary
+
+unifiedGDP15000DoesNotOpenCausalConsumer :
+  FleetGapTOE.GDP15000CausalConsumerPromotion → ⊥
+unifiedGDP15000DoesNotOpenCausalConsumer =
+  FleetGapTOE.fleetGDP15000DoesNotOpenCausalConsumer
+
+
+------------------------------------------------------------------------
+-- Institutional settlement / norm-transmission governance surface.
+------------------------------------------------------------------------
+
+unifiedSettlementTransmissionBoundary :
+  FleetGapTOE.SettlementTransmissionBoundary
+unifiedSettlementTransmissionBoundary =
+  FleetGapTOE.fleetSettlementTransmissionBoundary
+
+unifiedSettlementNormTransmissionZKPFrame :
+  FleetGapTOE.SettlementNormTransmissionZKPFrame
+unifiedSettlementNormTransmissionZKPFrame =
+  FleetGapTOE.canonicalSettlementNormTransmissionZKPFrame
+
+unifiedIndustryConventionDoesNotCreateFederalLaw :
+  FleetGapTOE.IndustryConventionCreatesFederalLaw → ⊥
+unifiedIndustryConventionDoesNotCreateFederalLaw =
+  FleetGapTOE.fleetIndustryConventionDoesNotCreateFederalLaw
+
+unifiedSettlementDoesNotCreateSupremeCourtHolding :
+  FleetGapTOE.SettlementCreatesSupremeCourtHolding → ⊥
+unifiedSettlementDoesNotCreateSupremeCourtHolding =
+  FleetGapTOE.fleetSettlementDoesNotCreateSupremeCourtHolding
+
+unifiedSettlementDoesNotCreateConstitutionalPrecedent :
+  FleetGapTOE.SettlementCreatesConstitutionalPrecedent → ⊥
+unifiedSettlementDoesNotCreateConstitutionalPrecedent =
+  FleetGapTOE.fleetSettlementDoesNotCreateConstitutionalPrecedent
+
+unifiedSameVisiblePolicyDoesNotImplySameAuthoritySource :
+  FleetGapTOE.SameVisiblePolicyImpliesSameAuthoritySource → ⊥
+unifiedSameVisiblePolicyDoesNotImplySameAuthoritySource =
+  FleetGapTOE.fleetSameVisiblePolicyDoesNotImplySameAuthoritySource
+
+unifiedMeta2026SettlementNormCalibration :
+  FleetGapTOE.Meta2026SettlementNormCalibration
+unifiedMeta2026SettlementNormCalibration =
+  FleetGapTOE.fleetMeta2026SettlementNormCalibration
+
+unifiedMetaSettlementAloneLegallyBindsCompetitors : Bool
+unifiedMetaSettlementAloneLegallyBindsCompetitors =
+  FleetGapTOE.fleetMetaSettlementAloneLegallyBindsCompetitors
+
+unifiedMetaSettlementDoesNotBindCompetitors :
+  unifiedMetaSettlementAloneLegallyBindsCompetitors ≡ false
+unifiedMetaSettlementDoesNotBindCompetitors =
+  FleetGapTOE.fleetMetaSettlementDoesNotBindCompetitors
+
+unifiedMetaSettlementCreatesFederalStatute : Bool
+unifiedMetaSettlementCreatesFederalStatute =
+  FleetGapTOE.fleetMetaSettlementCreatesFederalStatute
+
+unifiedMetaSettlementDoesNotCreateFederalStatute :
+  unifiedMetaSettlementCreatesFederalStatute ≡ false
+unifiedMetaSettlementDoesNotCreateFederalStatute =
+  FleetGapTOE.fleetMetaSettlementDoesNotCreateFederalStatute
+
+unifiedJMDPosterCreatesLegalAuthority : Bool
+unifiedJMDPosterCreatesLegalAuthority =
+  FleetGapTOE.fleetJMDPosterCreatesLegalAuthority
+
+unifiedJMDPosterDoesNotCreateLegalAuthority :
+  unifiedJMDPosterCreatesLegalAuthority ≡ false
+unifiedJMDPosterDoesNotCreateLegalAuthority =
+  FleetGapTOE.fleetJMDPosterDoesNotCreateLegalAuthority

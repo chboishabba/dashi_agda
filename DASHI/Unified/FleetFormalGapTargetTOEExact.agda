@@ -18,7 +18,15 @@ import DASHI.Physics.Closure.NSABCDConcentratedCompletionCutExact as NS
 import DASHI.Quantum.QuantumMereologyExact as QM
 import DASHI.Quantum.QuantumMereologySourceAtlasExact as QMSources
 import DASHI.Core.CompositionalComplianceExact as Compliance
+import DASHI.Core.InstitutionalNormProductionExact as InstitutionalNorm
+import DASHI.Law.SensibLawLegalReasonablenessNormativityBridgeExact as LegalNorm
 import DASHI.Governance.Fanning2022LiteralSituatedQualifiedUseBridgeExact as FanningLiteral
+import DASHI.Governance.SafeJustIndicatorSystemExact as ONeillIndicators
+import DASHI.Governance.ProvisioningGeometryExact as Provisioning
+import DASHI.Governance.ONeill2018MethodsBoundaryExact as ONeillMethods
+import DASHI.Governance.Fanning2022ProjectionBoundaryExact as FanningProjection
+import DASHI.Governance.Kallis2025ClaimByClaimEvidenceRealizationExact as KallisClaims
+import DASHI.Governance.Kallis2025GDP15000UpstreamStudyBridgeExact as KallisGDP
 
 ------------------------------------------------------------------------
 -- Fleet R4/R5 selection boundary.
@@ -341,32 +349,12 @@ fleetTextFallbackAuthorityStillFalse =
 
 ------------------------------------------------------------------------
 -- SAFE/JUST + LEGAL COMPLIANCE TOE HANDOFF
---
--- The 584 discharged fibres remain discharged.
--- This lane only attaches existing golden governance proofs to the 58-gap TOE
--- target surface. It creates no new empirical row and no legal mandate.
---
--- Fanning source:
--- Andrew L. Fanning, Daniel W. O'Neill, Jason Hickel, Nicolas Roux,
--- "The social shortfall and ecological overshoot of nations",
--- Nature Sustainability 5 (2022), 26--36.
--- DOI 10.1038/s41893-021-00799-z.
---
--- Proof-carrying compliance sources retained by the canonical Core owner:
--- George C. Necula, "Compiling with Proofs", CMU-CS-98-154 (1998).
--- No DOI recorded in the canonical owner.
--- Bitansky, Canetti, Chiesa, Tromer, STOC 2013.
--- DOI 10.1145/2488608.2488623.
---
--- The theorem products below are DASHI constructions.
 ------------------------------------------------------------------------
 
 FanningLiteralSituatedAuthorityBoundary : Set
-FanningLiteralSituatedAuthorityBoundary =
-  FanningLiteral.LiteralSituatedAuthorityBoundary
+FanningLiteralSituatedAuthorityBoundary = FanningLiteral.LiteralSituatedAuthorityBoundary
 
-fleetFanningLiteralSituatedAuthorityBoundary :
-  FanningLiteralSituatedAuthorityBoundary
+fleetFanningLiteralSituatedAuthorityBoundary : FanningLiteralSituatedAuthorityBoundary
 fleetFanningLiteralSituatedAuthorityBoundary =
   FanningLiteral.canonicalLiteralSituatedAuthorityBoundary
 
@@ -396,12 +384,10 @@ fleetDoesNotClaimFanningWorkbookAlreadyIngested :
 fleetDoesNotClaimFanningWorkbookAlreadyIngested = refl
 
 CompositionalComplianceBoundary : Set
-CompositionalComplianceBoundary =
-  Compliance.CompositionalComplianceBoundary
+CompositionalComplianceBoundary = Compliance.CompositionalComplianceBoundary
 
 fleetCompositionalComplianceBoundary : CompositionalComplianceBoundary
-fleetCompositionalComplianceBoundary =
-  Compliance.canonicalCompositionalComplianceBoundary
+fleetCompositionalComplianceBoundary = Compliance.canonicalCompositionalComplianceBoundary
 
 fleetComplianceRetainsIntermediateWitness :
   Compliance.CompositionalComplianceBoundary.downstreamReceiptRetainsIntermediateWitness
@@ -412,11 +398,6 @@ fleetEndpointEqualityDoesNotCreateCompliance :
   Compliance.CompositionalComplianceBoundary.endpointEqualityAloneCreatesCompliance
     Compliance.canonicalCompositionalComplianceBoundary ≡ false
 fleetEndpointEqualityDoesNotCreateCompliance = refl
-
-fleetOperationalRecordDoesNotCreateLegalAuthority :
-  Compliance.OperationalRecordCreatesLegalAuthority → ⊥
-fleetOperationalRecordDoesNotCreateLegalAuthority =
-  Compliance.operationalRecordDoesNotCreateLegalAuthority
 
 data SensibLawRecordCreatesLegalAuthority : Set where
 
@@ -448,32 +429,22 @@ record SafeJustLegalGovernanceBoundary : Set where
     literalDataReceiptCreatesPolicyMandateIsFalse :
       literalDataReceiptCreatesPolicyMandate ≡ false
     discharged584FibresRetargeted : Bool
-    discharged584FibresRetargetedIsFalse :
-      discharged584FibresRetargeted ≡ false
+    discharged584FibresRetargetedIsFalse : discharged584FibresRetargeted ≡ false
     only58UnformalisedFormalGapsRemainTargeted : Bool
     only58UnformalisedFormalGapsRemainTargetedIsTrue :
       only58UnformalisedFormalGapsRemainTargeted ≡ true
     esdSurfaceEditedByThisLane : Bool
-    esdSurfaceEditedByThisLaneIsFalse :
-      esdSurfaceEditedByThisLane ≡ false
+    esdSurfaceEditedByThisLaneIsFalse : esdSurfaceEditedByThisLane ≡ false
 
 canonicalSafeJustLegalGovernanceBoundary : SafeJustLegalGovernanceBoundary
 canonicalSafeJustLegalGovernanceBoundary =
   safe-just-legal-governance-boundary
-    true refl
-    false refl
-    false refl
-    true refl
-    false refl
-    false refl
-    true refl
-    false refl
+    true refl false refl false refl true refl false refl false refl true refl false refl
 
 SafeJustLegalGovernanceZKPFrame : Set
 SafeJustLegalGovernanceZKPFrame = ParetoSnowball.TOEZKPFrame
 
-canonicalSafeJustLegalGovernanceZKPFrame :
-  SafeJustLegalGovernanceZKPFrame
+canonicalSafeJustLegalGovernanceZKPFrame : SafeJustLegalGovernanceZKPFrame
 canonicalSafeJustLegalGovernanceZKPFrame =
   ParetoSnowball.toe-zkp-frame
     "O: converge literal safe-and-just evidence, legal compliance handoffs, and semantic non-promotion into the existing DASHI TOE"
@@ -481,11 +452,268 @@ canonicalSafeJustLegalGovernanceZKPFrame =
     "C: attach aliases and exact boundary receipts only; do not add a second authority or compliance calculus"
     "S: literal data does not create causal or decision authority; operational case records do not create legal authority; endpoint equality does not replace a typed intermediate witness"
     "L: one disjoint nonblocking governance-convergence lane; the 584 discharged fibres remain outside the 58-gap target"
-    "P: canonical golden Agda owners exist; Fanning DOI and proof-carrying-compliance attribution remain intact; ESD surfaces are read-only"
-    "G: ITIL, ISO 9000, ISO/IEC 42001:2023, ISO/IEC 27001:2022, ISO/IEC 27701:2025, ISO/IEC 23894:2023, ISO 9241 interaction/HCD standards, NIST AI RMF, Six Sigma, and C4/PlantUML are process lenses only; meta-introspector attribution remains separate"
+    "P: canonical golden Agda owners exist; source attribution remains intact; ESD surfaces are read-only"
+    "G: ITIL, ISO 9000/42001/27001/27701/23894/9241, NIST AI RMF, Six Sigma, and C4/PlantUML are process lenses only; meta-introspector attribution remains separate"
     "F: TOE root and Unifier expose the same literal-data, compliance, and operational-record non-promotion receipts"
-    "verification: repository duplicate search; exact branch read-back; zero-trust escape scan; ESD diff scan; Agda kernel check when available"
-    false
-    false
-    false
-    false
+    "verification: related_symbols/discover/round_lineage locally; trust-escape scan; ESD diff scan; exact-head Agda kernel check"
+    false false false false
+
+
+------------------------------------------------------------------------
+-- INSTITUTIONAL NORM TRANSMISSION TOE HANDOFF
+------------------------------------------------------------------------
+
+SettlementTransmissionBoundary : Set
+SettlementTransmissionBoundary = InstitutionalNorm.SettlementTransmissionBoundary
+
+IndustryConventionCreatesFederalLaw : Set
+IndustryConventionCreatesFederalLaw =
+  InstitutionalNorm.IndustryConventionCreatesFederalLaw
+
+SettlementCreatesSupremeCourtHolding : Set
+SettlementCreatesSupremeCourtHolding =
+  InstitutionalNorm.SettlementCreatesSupremeCourtHolding
+
+SettlementCreatesConstitutionalPrecedent : Set
+SettlementCreatesConstitutionalPrecedent =
+  InstitutionalNorm.SettlementCreatesConstitutionalPrecedent
+
+SameVisiblePolicyImpliesSameAuthoritySource : Set
+SameVisiblePolicyImpliesSameAuthoritySource =
+  InstitutionalNorm.SameVisiblePolicyImpliesSameAuthoritySource
+
+fleetSettlementTransmissionBoundary : SettlementTransmissionBoundary
+fleetSettlementTransmissionBoundary =
+  InstitutionalNorm.canonicalSettlementTransmissionBoundary
+
+fleetIndustryConventionDoesNotCreateFederalLaw :
+  InstitutionalNorm.IndustryConventionCreatesFederalLaw → ⊥
+fleetIndustryConventionDoesNotCreateFederalLaw =
+  InstitutionalNorm.industryConventionDoesNotCreateFederalLaw
+
+fleetSettlementDoesNotCreateSupremeCourtHolding :
+  InstitutionalNorm.SettlementCreatesSupremeCourtHolding → ⊥
+fleetSettlementDoesNotCreateSupremeCourtHolding =
+  InstitutionalNorm.settlementDoesNotCreateSupremeCourtHolding
+
+fleetSettlementDoesNotCreateConstitutionalPrecedent :
+  InstitutionalNorm.SettlementCreatesConstitutionalPrecedent → ⊥
+fleetSettlementDoesNotCreateConstitutionalPrecedent =
+  InstitutionalNorm.settlementDoesNotCreateConstitutionalPrecedent
+
+fleetSameVisiblePolicyDoesNotImplySameAuthoritySource :
+  InstitutionalNorm.SameVisiblePolicyImpliesSameAuthoritySource → ⊥
+fleetSameVisiblePolicyDoesNotImplySameAuthoritySource =
+  InstitutionalNorm.sameVisiblePolicyDoesNotImplySameAuthoritySource
+
+SettlementNormTransmissionZKPFrame : Set
+SettlementNormTransmissionZKPFrame = ParetoSnowball.TOEZKPFrame
+
+canonicalSettlementNormTransmissionZKPFrame :
+  SettlementNormTransmissionZKPFrame
+canonicalSettlementNormTransmissionZKPFrame =
+  ParetoSnowball.toe-zkp-frame
+    "O: formalize settlement-mediated norm transmission without promoting convergence into generally binding law"
+    "R: reuse InstitutionalNormProductionExact, query-indexed adequacy, authority routing, and the existing TOE handoff"
+    "C: extend the canonical institutional-norm owner and expose aliases only; do not create a parallel settlement calculus"
+    "S: party obligation, platform policy, competitor adoption, industry convention, and generally binding law remain distinct"
+    "L: one disjoint governance lane; the 584 discharged fibres remain outside the 58-gap target"
+    "P: a settlement source, party scope, policy surface, and authority source must be typed before downstream claims"
+    "G: ITIL, ISO 9000/42001/27001/27701/23894/9241, NIST AI RMF, Six Sigma, and C4/PlantUML are process lenses only"
+    "F: TOE and Unifier export non-promotion receipts; same visible policy does not imply the same authority source"
+    "verification: reuse-first code search; trust-escape scan; ESD diff scan; exact-head Agda kernel check"
+    false false false false
+
+
+------------------------------------------------------------------------
+-- SAFE/JUST PAPER-CHAIN TOE NORMALIZATION
+--
+-- Golden source chain:
+--   O'Neill et al. 2018 -> Fanning et al. 2022 -> Kallis et al. 2025.
+--
+-- This facade does not own the domain mathematics.  It only makes the
+-- canonical non-promotion boundaries reachable from the Fleet/TOE surface.
+------------------------------------------------------------------------
+
+ONeillCountProjectionBoundary : Set
+ONeillCountProjectionBoundary = ONeillIndicators.CountProjectionBoundary
+
+fleetONeillCountProjectionBoundary : ONeillCountProjectionBoundary
+fleetONeillCountProjectionBoundary =
+  ONeillIndicators.canonicalCountProjectionBoundary
+
+fleetONeillSameBioCountDoesNotRecoverCO2 :
+  ONeillIndicators.co2Over ONeillIndicators.bioA ≡
+  ONeillIndicators.co2Over ONeillIndicators.bioB → ⊥
+fleetONeillSameBioCountDoesNotRecoverCO2 =
+  ONeillIndicators.sameBioCountDoesNotRecoverCO2
+
+ONeillUniversalImpossibilityPromotion : Set
+ONeillUniversalImpossibilityPromotion =
+  ONeillMethods.UniversalImpossibilityCertificate
+
+fleetONeillObservedResultDoesNotCreateUniversalImpossibility :
+  ONeillUniversalImpossibilityPromotion → ⊥
+fleetONeillObservedResultDoesNotCreateUniversalImpossibility =
+  ONeillMethods.paperDoesNotSupplyUniversalImpossibility
+
+ProvisioningBoundary : Set
+ProvisioningBoundary = Provisioning.ProvisioningBoundary
+
+fleetProvisioningBoundary : ProvisioningBoundary
+fleetProvisioningBoundary =
+  Provisioning.canonicalProvisioningBoundary
+
+ProvisioningTreatmentEffectPromotion : Set
+ProvisioningTreatmentEffectPromotion =
+  Provisioning.IdentifiedProvisioningTreatmentEffect
+
+fleetObservedProvisioningResidualDoesNotIdentifyTreatmentEffect :
+  ProvisioningTreatmentEffectPromotion → ⊥
+fleetObservedProvisioningResidualDoesNotIdentifyTreatmentEffect =
+  Provisioning.observedResidualDoesNotSupplyTreatmentIdentification
+
+FanningProjectionBoundary : Set
+FanningProjectionBoundary = FanningProjection.FanningProjectionBoundary
+
+fleetFanningProjectionBoundary : FanningProjectionBoundary
+fleetFanningProjectionBoundary =
+  FanningProjection.canonicalFanningProjectionBoundary
+
+fleetFanningExtentDoesNotRecoverIndicatorVector :
+  FanningProjection.FanningProjectionBoundary.extentViewRecoversIndicatorVector
+    FanningProjection.canonicalFanningProjectionBoundary ≡ false
+fleetFanningExtentDoesNotRecoverIndicatorVector = refl
+
+FanningBAUNotObservationReceipt : Set
+FanningBAUNotObservationReceipt =
+  FanningProjection.FanningProjectionBoundary.BAUProjectionIsObserved2050Outcome
+    FanningProjection.canonicalFanningProjectionBoundary ≡ false
+
+fleetFanningBAUProjectionIsNotObserved2050Outcome :
+  FanningBAUNotObservationReceipt
+fleetFanningBAUProjectionIsNotObserved2050Outcome = refl
+
+GDP15000UpstreamBoundary : Set
+GDP15000UpstreamBoundary = KallisGDP.GDP15000UpstreamBoundary
+
+fleetGDP15000UpstreamBoundary : GDP15000UpstreamBoundary
+fleetGDP15000UpstreamBoundary =
+  KallisGDP.canonicalGDP15000UpstreamBoundary
+
+GDP15000CausalConsumerPromotion : Set
+GDP15000CausalConsumerPromotion =
+  KallisClaims.AdequateFor
+    KallisClaims.gdp15000Realization
+    KallisClaims.causalMechanismConsumer
+
+fleetGDP15000DoesNotOpenCausalConsumer :
+  GDP15000CausalConsumerPromotion → ⊥
+fleetGDP15000DoesNotOpenCausalConsumer =
+  KallisGDP.upstreamStudyDoesNotOpenCausalConsumer
+
+record SafeJustPaperChainBoundary : Set where
+  constructor safe-just-paper-chain-boundary
+  field
+    agdaIsGoldenFormalAuthority : Bool
+    agdaIsGoldenFormalAuthorityIsTrue :
+      agdaIsGoldenFormalAuthority ≡ true
+    countProjectionRecoversIndicatorCoordinates : Bool
+    countProjectionRecoversIndicatorCoordinatesIsFalse :
+      countProjectionRecoversIndicatorCoordinates ≡ false
+    observedCountryResultCreatesUniversalImpossibility : Bool
+    observedCountryResultCreatesUniversalImpossibilityIsFalse :
+      observedCountryResultCreatesUniversalImpossibility ≡ false
+    resourceQuantityAloneDeterminesNeedOutcome : Bool
+    resourceQuantityAloneDeterminesNeedOutcomeIsFalse :
+      resourceQuantityAloneDeterminesNeedOutcome ≡ false
+    observedProvisioningGapIdentifiesCausalTreatmentEffect : Bool
+    observedProvisioningGapIdentifiesCausalTreatmentEffectIsFalse :
+      observedProvisioningGapIdentifiesCausalTreatmentEffect ≡ false
+    fanningAggregateExtentRecoversIndicatorVector : Bool
+    fanningAggregateExtentRecoversIndicatorVectorIsFalse :
+      fanningAggregateExtentRecoversIndicatorVector ≡ false
+    fanningBAUProjectionIsObservedFutureOutcome : Bool
+    fanningBAUProjectionIsObservedFutureOutcomeIsFalse :
+      fanningBAUProjectionIsObservedFutureOutcome ≡ false
+    gdp15000PatternIsUniversalCausalThreshold : Bool
+    gdp15000PatternIsUniversalCausalThresholdIsFalse :
+      gdp15000PatternIsUniversalCausalThreshold ≡ false
+    descriptiveEvidenceCreatesPolicyMandate : Bool
+    descriptiveEvidenceCreatesPolicyMandateIsFalse :
+      descriptiveEvidenceCreatesPolicyMandate ≡ false
+    leanMirrorCreatesAgdaAuthority : Bool
+    leanMirrorCreatesAgdaAuthorityIsFalse :
+      leanMirrorCreatesAgdaAuthority ≡ false
+    existingLiteralLegalGovernanceBoundaryPreserved : Bool
+    existingLiteralLegalGovernanceBoundaryPreservedIsTrue :
+      existingLiteralLegalGovernanceBoundaryPreserved ≡ true
+
+canonicalSafeJustPaperChainBoundary : SafeJustPaperChainBoundary
+canonicalSafeJustPaperChainBoundary =
+  safe-just-paper-chain-boundary
+    true refl
+    false refl
+    false refl
+    false refl
+    false refl
+    false refl
+    false refl
+    false refl
+    false refl
+    false refl
+    true refl
+
+SafeJustPaperChainZKPFrame : Set
+SafeJustPaperChainZKPFrame = ParetoSnowball.TOEZKPFrame
+
+canonicalSafeJustPaperChainZKPFrame : SafeJustPaperChainZKPFrame
+canonicalSafeJustPaperChainZKPFrame =
+  ParetoSnowball.toe-zkp-frame
+    "O: normalize the O'Neill 2018 -> Fanning 2022 -> Kallis 2025 safe-and-just evidence chain into the existing DASHI TOE"
+    "R: reuse canonical indicator, provisioning, methods, projection, claim-authority, literal-data, compliance, and Fleet owners"
+    "C: expose exact aliases and non-promotion receipts; do not create a second safe-and-just calculus"
+    "S: count summaries, aggregate extents, forecasts, descriptive GDP associations, operational records, and Lean mirrors do not self-promote"
+    "L: one governance normalization lane; the 584 discharged fibres remain discharged and the 44 contradiction gaps remain separate"
+    "P: the three source papers and canonical Agda owners exist; source attribution remains attached; ESD surfaces are read-only"
+    "G: ITIL, ISO 9000/42001/27001/27701/23894/9241, NIST AI RMF, Six Sigma, and C4/PlantUML are process lenses only"
+    "F: TOE, Unifier, and Unified.Everything expose the same paper-chain and legal-governance boundaries"
+    "verification: search/reuse first; local related/discover/lineage when available; trust-escape scan; ESD diff scan; exact-head Agda kernel receipt"
+    false false false false
+
+
+Meta2026SettlementNormCalibration : Set
+Meta2026SettlementNormCalibration =
+  LegalNorm.Meta2026SettlementNormCalibration
+
+fleetMeta2026SettlementNormCalibration :
+  Meta2026SettlementNormCalibration
+fleetMeta2026SettlementNormCalibration =
+  LegalNorm.canonicalMeta2026SettlementNormCalibration
+
+fleetMetaSettlementAloneLegallyBindsCompetitors : Bool
+fleetMetaSettlementAloneLegallyBindsCompetitors =
+  LegalNorm.settlementAloneLegallyBindsTikTokOrYouTube
+    LegalNorm.canonicalMeta2026SettlementNormCalibration
+
+fleetMetaSettlementDoesNotBindCompetitors :
+  fleetMetaSettlementAloneLegallyBindsCompetitors ≡ false
+fleetMetaSettlementDoesNotBindCompetitors = refl
+
+fleetMetaSettlementCreatesFederalStatute : Bool
+fleetMetaSettlementCreatesFederalStatute =
+  LegalNorm.settlementCreatesFederalStatute
+    LegalNorm.canonicalMeta2026SettlementNormCalibration
+
+fleetMetaSettlementDoesNotCreateFederalStatute :
+  fleetMetaSettlementCreatesFederalStatute ≡ false
+fleetMetaSettlementDoesNotCreateFederalStatute = refl
+
+fleetJMDPosterCreatesLegalAuthority : Bool
+fleetJMDPosterCreatesLegalAuthority =
+  LegalNorm.jmdPosterCreatesLegalAuthority
+    LegalNorm.canonicalMeta2026SettlementNormCalibration
+
+fleetJMDPosterDoesNotCreateLegalAuthority :
+  fleetJMDPosterCreatesLegalAuthority ≡ false
+fleetJMDPosterDoesNotCreateLegalAuthority = refl

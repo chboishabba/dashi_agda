@@ -456,3 +456,48 @@ It must not claim:
 - that structurally similar mechanisms make historical cases equivalent;
 - that any cited news report proves an allegation;
 - that source citation imports proof or authority.
+
+
+## Settlement-mediated norm transmission
+
+The implementation reuses the canonical institutional norm-production owner.
+
+A settlement can bind its parties.
+
+A settlement can change a platform policy.
+
+A platform policy can pressure competitors.
+
+Competitor adoption can produce an industry convention.
+
+An industry convention is not federal law.
+
+A settlement is not a Supreme Court holding.
+
+A settlement is not constitutional precedent.
+
+The same visible policy can have different authority sources.
+
+Production history remains a separate query coordinate.
+
+The Meta 2026 settlement is a source-bounded calibration.
+
+The official Meta release is the primary platform source.
+
+The California Attorney General release is the public legal source.
+
+The JMD poster is interpretive provenance.
+
+The JMD poster does not create legal authority.
+
+The Fleet facade carries the boundary into the TOE root.
+
+The same boundary is exposed by Unifier and Unified.Everything.
+
+The ESD surfaces remain read-only.
+
+The ZKP frame keeps O/R/C/S/L/P/G/F explicit.
+
+The standards named in the ZKP frame are process lenses.
+
+They do not create certification or legal authority.

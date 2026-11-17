@@ -1272,7 +1272,163 @@ toeSensibLawRecordDoesNotCreateLegalAuthority :
 toeSensibLawRecordDoesNotCreateLegalAuthority =
   FleetGapTOE.sensibLawRecordDoesNotCreateLegalAuthority
 
+toeYMA1CompletionDoesNotSelfPromote :
+  Proof.promotable
+    (YMA1Frontier.rowACompletion
+      YMA1Frontier.canonicalYMA1SourceFrontierReceipt)
+  ≡ false
+toeYMA1CompletionDoesNotSelfPromote =
+  YMA1Frontier.rowACompletionDoesNotSelfPromote
+
+
+------------------------------------------------------------------------
+-- Safe/just and legal-compliance governance handoff.
+------------------------------------------------------------------------
+
+toeFanningLiteralSituatedAuthorityBoundary :
+  FleetGapTOE.FanningLiteralSituatedAuthorityBoundary
+toeFanningLiteralSituatedAuthorityBoundary =
+  FleetGapTOE.fleetFanningLiteralSituatedAuthorityBoundary
+
+toeCompositionalComplianceBoundary :
+  FleetGapTOE.CompositionalComplianceBoundary
+toeCompositionalComplianceBoundary =
+  FleetGapTOE.fleetCompositionalComplianceBoundary
+
+toeSafeJustLegalGovernanceBoundary :
+  FleetGapTOE.SafeJustLegalGovernanceBoundary
+toeSafeJustLegalGovernanceBoundary =
+  FleetGapTOE.canonicalSafeJustLegalGovernanceBoundary
+
+toeSafeJustLegalGovernanceZKPFrame :
+  FleetGapTOE.SafeJustLegalGovernanceZKPFrame
+toeSafeJustLegalGovernanceZKPFrame =
+  FleetGapTOE.canonicalSafeJustLegalGovernanceZKPFrame
+
+toeSensibLawRecordDoesNotCreateLegalAuthority :
+  FleetGapTOE.SensibLawRecordCreatesLegalAuthority → ⊥
+toeSensibLawRecordDoesNotCreateLegalAuthority =
+  FleetGapTOE.sensibLawRecordDoesNotCreateLegalAuthority
+
 toeActionstepRecordDoesNotCreateLegalAuthority :
   FleetGapTOE.ActionstepRecordCreatesLegalAuthority → ⊥
 toeActionstepRecordDoesNotCreateLegalAuthority =
   FleetGapTOE.actionstepRecordDoesNotCreateLegalAuthority
+
+
+------------------------------------------------------------------------
+-- Institutional settlement / norm-transmission non-promotion.
+------------------------------------------------------------------------
+
+toeSettlementTransmissionBoundary :
+  FleetGapTOE.SettlementTransmissionBoundary
+toeSettlementTransmissionBoundary =
+  FleetGapTOE.fleetSettlementTransmissionBoundary
+
+toeSettlementNormTransmissionZKPFrame :
+  FleetGapTOE.SettlementNormTransmissionZKPFrame
+toeSettlementNormTransmissionZKPFrame =
+  FleetGapTOE.canonicalSettlementNormTransmissionZKPFrame
+
+toeIndustryConventionDoesNotCreateFederalLaw :
+  FleetGapTOE.IndustryConventionCreatesFederalLaw → ⊥
+toeIndustryConventionDoesNotCreateFederalLaw =
+  FleetGapTOE.fleetIndustryConventionDoesNotCreateFederalLaw
+
+toeSettlementDoesNotCreateSupremeCourtHolding :
+  FleetGapTOE.SettlementCreatesSupremeCourtHolding → ⊥
+toeSettlementDoesNotCreateSupremeCourtHolding =
+  FleetGapTOE.fleetSettlementDoesNotCreateSupremeCourtHolding
+
+toeSettlementDoesNotCreateConstitutionalPrecedent :
+  FleetGapTOE.SettlementCreatesConstitutionalPrecedent → ⊥
+toeSettlementDoesNotCreateConstitutionalPrecedent =
+  FleetGapTOE.fleetSettlementDoesNotCreateConstitutionalPrecedent
+
+toeSameVisiblePolicyDoesNotImplySameAuthoritySource :
+  FleetGapTOE.SameVisiblePolicyImpliesSameAuthoritySource → ⊥
+toeSameVisiblePolicyDoesNotImplySameAuthoritySource =
+  FleetGapTOE.fleetSameVisiblePolicyDoesNotImplySameAuthoritySource
+
+
+------------------------------------------------------------------------
+-- Safe/just paper-chain normalization.
+------------------------------------------------------------------------
+
+toeSafeJustPaperChainBoundary :
+  FleetGapTOE.SafeJustPaperChainBoundary
+toeSafeJustPaperChainBoundary =
+  FleetGapTOE.canonicalSafeJustPaperChainBoundary
+
+toeSafeJustPaperChainZKPFrame :
+  FleetGapTOE.SafeJustPaperChainZKPFrame
+toeSafeJustPaperChainZKPFrame =
+  FleetGapTOE.canonicalSafeJustPaperChainZKPFrame
+
+toeONeillCountProjectionBoundary :
+  FleetGapTOE.ONeillCountProjectionBoundary
+toeONeillCountProjectionBoundary =
+  FleetGapTOE.fleetONeillCountProjectionBoundary
+
+toeONeillObservedResultDoesNotCreateUniversalImpossibility :
+  FleetGapTOE.ONeillUniversalImpossibilityPromotion → ⊥
+toeONeillObservedResultDoesNotCreateUniversalImpossibility =
+  FleetGapTOE.fleetONeillObservedResultDoesNotCreateUniversalImpossibility
+
+toeObservedProvisioningResidualDoesNotIdentifyTreatmentEffect :
+  FleetGapTOE.ProvisioningTreatmentEffectPromotion → ⊥
+toeObservedProvisioningResidualDoesNotIdentifyTreatmentEffect =
+  FleetGapTOE.fleetObservedProvisioningResidualDoesNotIdentifyTreatmentEffect
+
+toeFanningProjectionBoundary :
+  FleetGapTOE.FanningProjectionBoundary
+toeFanningProjectionBoundary =
+  FleetGapTOE.fleetFanningProjectionBoundary
+
+toeFanningBAUProjectionIsNotObserved2050Outcome :
+  FleetGapTOE.FanningBAUNotObservationReceipt
+toeFanningBAUProjectionIsNotObserved2050Outcome =
+  FleetGapTOE.fleetFanningBAUProjectionIsNotObserved2050Outcome
+
+toeGDP15000UpstreamBoundary :
+  FleetGapTOE.GDP15000UpstreamBoundary
+toeGDP15000UpstreamBoundary =
+  FleetGapTOE.fleetGDP15000UpstreamBoundary
+
+toeGDP15000DoesNotOpenCausalConsumer :
+  FleetGapTOE.GDP15000CausalConsumerPromotion → ⊥
+toeGDP15000DoesNotOpenCausalConsumer =
+  FleetGapTOE.fleetGDP15000DoesNotOpenCausalConsumer
+
+
+toeMeta2026SettlementNormCalibration :
+  FleetGapTOE.Meta2026SettlementNormCalibration
+toeMeta2026SettlementNormCalibration =
+  FleetGapTOE.fleetMeta2026SettlementNormCalibration
+
+toeMetaSettlementAloneLegallyBindsCompetitors : Bool
+toeMetaSettlementAloneLegallyBindsCompetitors =
+  FleetGapTOE.fleetMetaSettlementAloneLegallyBindsCompetitors
+
+toeMetaSettlementDoesNotBindCompetitors :
+  toeMetaSettlementAloneLegallyBindsCompetitors ≡ false
+toeMetaSettlementDoesNotBindCompetitors =
+  FleetGapTOE.fleetMetaSettlementDoesNotBindCompetitors
+
+toeMetaSettlementCreatesFederalStatute : Bool
+toeMetaSettlementCreatesFederalStatute =
+  FleetGapTOE.fleetMetaSettlementCreatesFederalStatute
+
+toeMetaSettlementDoesNotCreateFederalStatute :
+  toeMetaSettlementCreatesFederalStatute ≡ false
+toeMetaSettlementDoesNotCreateFederalStatute =
+  FleetGapTOE.fleetMetaSettlementDoesNotCreateFederalStatute
+
+toeJMDPosterCreatesLegalAuthority : Bool
+toeJMDPosterCreatesLegalAuthority =
+  FleetGapTOE.fleetJMDPosterCreatesLegalAuthority
+
+toeJMDPosterDoesNotCreateLegalAuthority :
+  toeJMDPosterCreatesLegalAuthority ≡ false
+toeJMDPosterDoesNotCreateLegalAuthority =
+  FleetGapTOE.fleetJMDPosterDoesNotCreateLegalAuthority

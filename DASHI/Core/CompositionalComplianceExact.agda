@@ -99,9 +99,6 @@ open DependentCertifiedStage public
 
 ------------------------------------------------------------------------
 -- Canonical handoff boundary.
---
--- This is a DASHI theorem surface. It does not assert that a case-management
--- record, source citation, or endpoint hash is a legal-authority proof.
 ------------------------------------------------------------------------
 
 data EndpointOnlyCompositionCreatesCompliance : Set where
@@ -134,8 +131,4 @@ record CompositionalComplianceBoundary : Set where
 
 canonicalCompositionalComplianceBoundary : CompositionalComplianceBoundary
 canonicalCompositionalComplianceBoundary =
-  compositionalComplianceBoundary
-    true refl
-    false refl
-    false refl
-    false refl
+  compositionalComplianceBoundary true refl false refl false refl false refl
