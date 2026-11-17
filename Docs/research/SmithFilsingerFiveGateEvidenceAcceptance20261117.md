@@ -115,3 +115,20 @@ F10 physical calibration, actual instrument uncertainty calibration, F15 indepen
 **Execution distinction**: actually ran the two older **locally mounted** source-evidence and original Maxwell/replenishment suites in this session: 10/10 `unittest` and 45/45 selected `pytest` tests passed. These are *not* the latest connected GitHub branch tests. The PR branch now contains 12 source-evidence methods and 19 signed V/I interval methods (31 authored total); none of those exact-head 31 can be claimed PASS without execution. No available local Agda/Nix binaries and no successful exact-head Agda workflow receipt. Thus F10 original field-to-port physical admission, authentic meter calibration and error records, F15 independent sustained natural replenishment, F16 atmospheric causal intervention and D1 kernel acceptance remain OPEN.
 
 **Next Pareto cut:** run the 31 source-authored branch tests on the checked-out PR and fix actual failures; then obtain pinned Agda 2.9 compiler acceptance for the same commit; separately require independently authenticated original electrical/waveform records to instantiate F10/F15. No ESD edits or unsupported TOE promotion.
+
+
+## 17 Nov F15 follow-up — exact-branch, locally executed restored-cycle first-law discriminator
+
+Reused the existing signed V/I port interval receipt rather than inventing a Maxwell source. Added `scripts/check_smith_filsinger_restored_cycle_intervals.py`, which consumes the previous measured/source-labelled work interval output together with an **independently supplied** (not scientifically authenticated by this script) signed total stored-energy change interval and all dissipative/outgoing-loss interval. The programme's exact first-law discriminator is
+
+`R = natural_net + controller_net − useful_load − independently_supplied_losses − (U_final − U_initial)`.
+
+All operations use standard-library `Fraction` with outward conservative interval arithmetic: if `0 ∉ R`, the asserted complete same-window budget is inconsistent; if `0 ∈ R`, the supplied intervals are merely **compatible**, not sufficient proof of a power source. A `[0,0]` storage-change interval is a *claimed exact* restoration, not proof that original device stores were completely enumerated. A signed negative natural interval is retained as an environmental sink. `f15_closed` and `physical_claim_closed` are always false, including on a mathematically compatible example. The code guards same original ID, same clock, previous interpolation remainder admission, valid ordered rational endpoints, and nonnegative aggregate loss lower bound.
+
+Added `scripts/test_smith_filsinger_restored_cycle_intervals.py` with 12 adversarial exact-rational test methods. **This round actually executed 12/12 PASS** on the local exact source files, and verified the local `git hash-object` identifiers equal the GitHub branch blob hashes:
+- consumer `0678622bee219188999ecf1b979b43b22f4bec15`;
+- test suite `1197828f45641082f9087c0e597b2b142f42243f`.
+
+Tests cover exact zero residual with F15 still false, environmental sink rejection, stored-energy drawdown falsely implying restoration, conservative uncertainty, wrong original ID, wrong clock, absent integration remainder admission, invalid/reversed intervals, negative physical loss, floating-point endpoints, and incomplete interval endpoints. Both new files are wired into `.github/workflows/filsinger-agda29-acceptance.yml`.
+
+**Acceptance boundary:** these 12 local source-matched passing tests are a verified Python audit, not calibrated original experiment data nor Agda 2.9 kernel acceptance. The 31 previously committed GitHub-branch V/I and role-evidence tests remain unexecuted in this container; no pinned Agda 2.9 run is shown for the exact PR head. Physical F10, authentic metering/calibration, F15 independently replenished natural work, F16 atmospheric intervention and D1 remain OPEN. Do not classify an input merely named `natural` as independent source work without a separately established origin certificate. Original ESD material remains import-only.
