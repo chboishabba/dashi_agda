@@ -39,7 +39,7 @@ Reuse existing controls: `Docs/SourceAttributionPolicy.md`, `DASHI/Biology/Attri
 
 - **Speaker vs narrator:** The narrator's economic, physics, and disappearance inferences are not retroactively the speaker's statements. Do not describe Burisch's 2007 claims as separate independent government documents.
 - **Source vs truth:** Research *being funded*, a patent *being granted*, or an interview *being recorded* are not experimental confirmation of any proposed mechanism.
-- **Causal leap:** The alleged “11 scientists” and the NSA list have no enumerated primary roster in this transcript. No murder/suppression inference can be promoted until event records, exact programme connections, common cause, competing explanations and denominator/matched-controls are supplied.
+- **Causal leap:** The original transcript does not enumerate the eleven people, but the April 17 Fox News Digital reporting, already attributed in `AmyEskridgeOSINTSnowballExact.agda`, explicitly enumerates Amy Eskridge plus ten named cases. This closes a **secondary media list provenance** seam, not the primary institutional roster or the NASA/NSA suppression claims. No murder/suppression inference can be promoted until event records, exact programme connections, common cause, competing explanations and denominator/matched-controls are supplied.
 - **Classification leap:** The Mansfield Amendment does not by itself yield an antigravity classified-budget mandate; absence of public outcome documentation does not prove suppression.
 - **Technology leap:** Conventional electromagnetic/geophysical anomaly does not prove wormhole access; quantum many-worlds and speculative papers do not prove looking-glass hardware.
 - **Chronology tests:** Correct the purported Tesla patent identity; check Mansfield 1969/1973 distinction; compare 2002 Boeing reporting to narrator's 2014 formulation.
@@ -50,7 +50,7 @@ Reuse existing controls: `Docs/SourceAttributionPolicy.md`, `DASHI/Biology/Attri
 
 1. Recover original video URL/upload metadata and identify **every source clip** including the opening speaker, Amy Eskridge interview, Deutsch footage and Bem/presentiment interview.
 2. Acquire HAL5 slide PDF and exact primary research bibliography referenced on each slide; maintain a two-way `transcript time -> slide number -> original reference` table.
-3. Disaggregate the alleged eleven-person roster and NSA list: names, baseline population, incident dates, source records, actual employer/programme correspondence, alternative explanations.
+3. Reuse the Fox 2026-04-17 *eleven-person media list* (Morgan Phillips and Michael Dorgan; existing OSINT source producers) and `AmyEskridgeVideoEleventhMediaRosterWeldExact.agda`; test whether the video actually uses that source, then inspect member-specific official roles/events, baseline population, control explanations and the still-unlocated alleged NSA list.
 4. Recover original primary patents/papers/contracts for Brown, Wallace, Dean, Li/Torr, Podkletnov, Poher, Woodward and Boeing; determine which predicted observables were independently tested.
 5. Inspect DIA study PDFs and initial DIA FOIA release rather than merely titles. Separate assessment of feasibility from demonstration and the AAWSAP/AATIP labels.
 6. Establish exact Project Camelot recording time offsets, count independent interview witnesses, and test any externally falsifiable device/organisation/custody details.
@@ -66,3 +66,15 @@ DASHI_NO_TMUX=1 scripts/run_agda29_parallel_check.sh DASHI/Culture/AmyEskridgeVi
 ```
 
 No kernel acceptance is asserted until the above passes on the exact commit. The transcript itself is *not* committed because its redistribution license and original video identification are unknown; the reproducible input remains the user-supplied file, and the ledger preserves timestamp-to-paraphrase pointers.
+
+## Recovered source: original April 17 Fox eleven-person journalistic list
+
+The original **secondary** source is now located in the existing repo producer `AmyEskridgeOSINTSnowballExact.agda`, not inferred from 10+1 arithmetic:
+
+- **Morgan Phillips**, *11th scientist death emerges in string of missing, dead officials with access to US secrets*, **Fox News Digital**, **2026-04-17 at 11:37 EDT**, https://www.foxnews.com/politics/11th-scientist-death-emerges-string-missing-dead-officials-access-us-secrets.amp.
+- **Michael Dorgan**, *White House reviewing cases of missing, dead scientists for possible links as 11th person identified*, **Fox News Digital**, **2026-04-17 at 15:02 EDT**, https://www.foxnews.com/politics/white-house-reviewing-cases-missing-dead-scientists-possible-links-11th-person-identified.amp.
+
+Phillips' named report lists **Eskridge plus Hicks, Reza, McCasland, Maiwald, Grillmair, Loureiro, Chavez, Thomas, Casias and Garcia**. This matches the repo-reconstructed ten-person reporting/House-context set plus Amy. This explicit source closes the **secondary-media attribution and named-list identity** gate that was previously open; `AmyEskridgeVideoEleventhMediaRosterWeldExact.agda` makes the eleven-name typed comparison with the earlier House ten, proves its finite list normalization with `refl`, and retains role distinctions. It **does not** establish the video narrator's actual source, case inclusion endorsed by a primary government agency, all-scientist status, government targeting or common-cause evidence.
+
+Both Fox articles are the **same outlet's reporting**, not two independent forensic witnesses. The April 20 House primary letter (which is later) calls its underlying news reports **unconfirmed** and does not itself add Amy or assert an eleven-person official roster. Fox explicitly reports no publicly available evidence linking Eskridge's death to the others, and no authority-established tie from her research to her death.
+
