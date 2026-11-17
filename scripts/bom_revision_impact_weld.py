@@ -1,0 +1,162 @@
+#!/usr/bin/env python3
+"""Source-bounded publication-version station/month impact from native BOM exports.
+
+Uses the existing native integrity parser and the existing exact annual-panel
+trend owner. A missing daily value, missing calendar row or multi-day rainfall
+accumulation precludes a full-month observed difference. NO imputation.
+Does NOT certify original paper observations, ACORN-SAT or national trends.
+"""
+from __future__ import annotations
+import argparse
+from collections import defaultdict
+from fractions import Fraction
+from calendar import isleap, monthrange
+import json
+from pathlib import Path
+
+from bom_cdo_native_revision_audit import audit, read_set
+from bom_panel_trend_sensitivity import analyze as analyze_annual_panel
+
+
+def exact(d):
+    return Fraction(str(d))
+
+
+def fraction_text(x):
+    return str(x.numerator) if x.denominator == 1 else f'{x.numerator}/{x.denominator}'
+
+
+def summarize(manifest, root):
+    ledger = audit(manifest, root)
+    before, _ = read_set(manifest['before'], root)
+    after, _ = read_set(manifest['after'], root)
+    groups = defaultdict(set)
+    for station, day, variable in set(before) | set(after):
+        groups[(station, variable, day[:7])].add(day)
+    months = []
+    annual_groups = defaultdict(dict)
+    for (station, variable, month), _ in sorted(groups.items()):
+        yy, mm = map(int, month.split('-'))
+        expected = monthrange(yy, mm)[1]
+        missing_days = []
+        missing_values = []
+        accum_mismatch = []
+        comparable = []
+        changed = 0
+        for d in range(1, expected + 1):
+            day = f'{month}-{d:02d}'
+            key = (station, day, variable)
+            b, a = before.get(key), after.get(key)
+            if b is None or a is None:
+                missing_days.append(day)
+            elif b[0] is None or a[0] is None:
+                missing_values.append(day)
+            elif b[1] != 1 or a[1] != 1:
+                accum_mismatch.append(day)
+            else:
+                bv, av = exact(b[0]), exact(a[0])
+                comparable.append((bv, av))
+                changed += int(bv != av)
+        complete = not (missing_days or missing_values or accum_mismatch)
+        record = {
+            'station': station, 'variable': variable, 'month': month,
+            'expected_calendar_days': expected,
+            'paired_numeric_one_day_values': len(comparable),
+            'changed_paired_daily_values': changed,
+            'missing_calendar_days': len(missing_days),
+            'missing_numeric_values': len(missing_values),
+            'multi_day_or_unknown_accumulations': len(accum_mismatch),
+            'complete_same_day_month': complete,
+            'true_original_observation_verified': False,
+        }
+        if comparable:
+            pairdelta = sum((a - b for b, a in comparable), Fraction())
+            record['paired_day_delta_sum_exact'] = fraction_text(pairdelta)
+            record['paired_day_delta_average_exact'] = fraction_text(pairdelta/len(comparable))
+            record['paired_day_summary_is_full_month'] = complete
+        if complete:
+            assert len(comparable) == expected
+            total_before = sum((b for b, _ in comparable), Fraction())
+            total_after = sum((a for _, a in comparable), Fraction())
+            divisor = expected if variable != 'rain' else 1
+            record['full_month_before_exact'] = fraction_text(total_before / divisor)
+            record['full_month_after_exact'] = fraction_text(total_after / divisor)
+            record['full_month_delta_exact'] = fraction_text((total_after-total_before)/divisor)
+            record['statistic'] = ('daily-mean temperature C' if variable != 'rain'
+                                   else 'total rainfall mm')
+            annual_groups[(station, variable, yy)][mm] = (total_before, total_after, expected)
+        else:
+            record['full_month_delta_exact'] = None
+            record['statistic'] = 'UNRESOLVED: full-month quantity unavailable'
+        months.append(record)
+    years = []
+    for (station, variable, year), monthly in sorted(annual_groups.items()):
+        if set(monthly) != set(range(1, 13)):
+            continue
+        before_total = sum((b for b, _, _ in monthly.values()), Fraction())
+        after_total = sum((a for _, a, _ in monthly.values()), Fraction())
+        days = sum(d for _, _, d in monthly.values())
+        assert days in (365, 366)
+        divisor = days if variable != 'rain' else 1
+        years.append({
+            'station': station, 'variable': variable, 'year': year,
+            'before_exact': fraction_text(before_total / divisor),
+            'after_exact': fraction_text(after_total / divisor),
+            'delta_exact': fraction_text((after_total-before_total)/divisor),
+            'statistic': ('daily-mean temperature C' if variable != 'rain'
+                          else 'total rainfall mm'),
+            'complete_same_day_annual_panel': True,
+        })
+    trend_panels = defaultdict(list)
+    for annual in years:
+        if annual['variable'] in ('tmax', 'tmin'):
+            yy = annual['year']
+            weight = Fraction(366 if isleap(yy) else 365)
+            trend_panels[(annual['station'], annual['variable'])].append(
+                (yy, weight, Fraction(annual['before_exact']),
+                 Fraction(annual['after_exact'])))
+    station_trends = []
+    for (station, variable), data in sorted(trend_panels.items()):
+        if len(data) < 2:
+            continue
+        result = analyze_annual_panel(sorted(data))
+        station_trends.append({
+            'station': station, 'variable': variable,
+            'scope': 'complete native station-years only; not ACORN-SAT',
+            'annual_panel': result,
+        })
+    return {
+        'schema': 'dashi.bom.cdo.paired_publication_impact.v1',
+        'source_receipts': {'before': ledger['before_receipts'],
+                            'after': ledger['after_receipts']},
+        'status': 'publication-version comparison; not original-correction or national trend',
+        'original_archive_coverage_verified': False,
+        'paper_original_authenticated': False,
+        'acorn_homogenisation_recomputed': False,
+        'counts': {
+            'months_seen': len(months),
+            'complete_months': sum(x['complete_same_day_month'] for x in months),
+            'incomplete_months': sum(not x['complete_same_day_month'] for x in months),
+            'complete_station_years': len(years),
+        },
+        'months': months, 'years': years, 'station_trends': station_trends,
+        'native_revision_counts': ledger['counts'],
+    }
+
+
+def main():
+    p = argparse.ArgumentParser(description=__doc__)
+    p.add_argument('--manifest', type=Path, required=True)
+    p.add_argument('--output', type=Path)
+    a = p.parse_args()
+    manifest = json.loads(a.manifest.read_text(encoding='utf-8'))
+    result = summarize(manifest, a.manifest.parent)
+    data = json.dumps(result, indent=2, sort_keys=True) + '\n'
+    if a.output:
+        a.output.write_text(data, encoding='utf-8')
+    else:
+        print(data, end='')
+
+
+if __name__ == '__main__':
+    main()
