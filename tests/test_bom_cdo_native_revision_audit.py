@@ -90,6 +90,14 @@ class NativeTest(unittest.TestCase):
     def test_missing_value_with_blank_accumulation_stays_missing(self):
         self.assertEqual(self.run_native(line(value='',accum=''),line(value='',accum=''))['counts'],{})
 
+    def test_simultaneous_removed_value_and_quality_change(self):
+        out=self.run_native(line(),line(value='',flag='N'))
+        self.assertEqual(out['counts'],{'value_removed':1})
+        self.assertEqual(out['field_change_counts'],
+                         {'observed_value':1,'quality_flag':1})
+        self.assertEqual(out['events'][0]['changed_fields'],
+                         ['observed_value','quality_flag'])
+
     def test_accumulation_change(self):
         self.assertEqual(self.run_native(line(),line(accum='2'))['counts'],{'accumulation_changed':1})
 
