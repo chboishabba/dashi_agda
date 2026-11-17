@@ -63,3 +63,29 @@ The 800 windows plus selected adversarial cases were run locally as an **indepen
 7. **F14/F16:** original actual phase/electrical/acoustic and rainfall/cold-pool chain remain separate, OPEN.
 
 **Attribution:** classical Maxwell/Poynting/Gauss/Yee are external; Yang–Mills finite algebra and KSW668 original physical jet are reused DASHI theorem owners. The Sun–Earth Smith/Filsinger solar-source harvesting steelman is user-origin and not attributed to these external authors. ESD surfaces untouched, no premature TOE import graph promotion.
+
+
+## Exact Maxwell field witness, not merely a chosen energy ledger
+
+New `SmithFilsingerPlaneWaveSpaceTimeWitnessExact.agda` uses the existing `Rational.rationalRealField` and the actual KSW668 three-component curl jet. It constructs the smooth affine travelling vacuum solution (in normalized units)
+
+[
+ E=(0,A,0),\quad B=(0,0,A),\quad
+ A=a+b(x-t),\quad J=0 .
+]
+
+The authored `planeAmpere` and `planeFaraday` rational polynomial proofs establish its Maxwell differential jet conditions; `planeJetSatisfiesOriginalMaxwell` consumes the canonical full-vector Poynting theorem. `planePoyntingXFromFullVector` equates the real three-vector cross-product face flux with `A²`, where the electric+magnetic energy density is also `A²`.
+
+For a **selected discrete, matched-width** time/space control, `planeWaveExactSpaceTimeCell` proves
+
+[
+U(x,t+h)-U(x,t) + S_x(x,t)-S_x(x-h,t)=0 .
+]
+
+The result is a nontrivial finite sample/flux control with changing storage and opposite signed flux. `planeWaveFiniteSpaceTimeWindow` constructs the canonical four-direction record, `planeWaveSamplesMeetFourDirectionOwner` **actually applies** `SpaceTime.spaceTimeExteriorEnergyBalance`, and the right/left field-face readbacks use `Sample.poyntingFaceSample`. Unlike a proof `P=P` by `refl`, this is a concrete constructed local work identity fed into the prior Stokes owner.
+
+**Scope:** an affine travelling plane wave has unbounded energy when extended to all space; it is a smooth control on a bounded observation domain, not a finite-energy environmental generator or original device. The discrete time/face sample law is not the general physically integrated Yee/Poynting theorem; nonlinear plasma, Hall/Pedersen, Maxwell retarded waveguide, atmospheric Green kernel and real source data remain independent. CFL stability does not alone imply physical support.
+
+New independent exact rational regression `scripts/test_smith_filsinger_plane_wave_spacetime_exact.py`: **1,200/1,200** rational characteristic and changing-energy cell identities PASS, with a mismatched time/space stride negative control. Source-authored theorem has **no pinned Agda kernel receipt**. Both new formal and Python owners are part of the existing check scripts.
+
+Additional source-paid negative controls added to the 4-axis test: four units of natural work entering through an outward-negative face cannot also be counted as four units of natural volume injection; omitting separately counted ionization work breaks the same-window equality. They are pure arithmetic tests and not observations.
