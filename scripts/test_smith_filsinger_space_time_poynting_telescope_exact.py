@@ -77,3 +77,32 @@ def test_face_sample_does_not_identify_real_original_solar_input():
     zero=[Q(0),Q(0)]
     assert space_time_balance(e,zero,zero,zero,Q(0),Q(0),Q(0),Q(0))
     assert not space_time_balance(e,zero,zero,zero,Q(0),Q(3),Q(0),Q(0))
+
+def test_natural_boundary_input_not_double_counted_as_volume_source():
+    e=[Q(0),Q(0)]
+    # Negative outward Poynting means 4 work units ENTER the exterior face.
+    x=[Q(0),Q(-4)]
+    z=[Q(0),Q(0)]
+    # Correct: the 4-unit load is paid by the signed boundary, with no
+    # extra fictitious natural volume current.
+    assert space_time_balance(e,x,z,z,Q(0),Q(4),Q(0),Q(0))
+    # Incorrect: claiming ANOTHER 4 units of independent solar volume
+    # input double counts the same incoming 4 boundary units.
+    assert not space_time_balance(e,x,z,z,Q(0),Q(4),Q(4),Q(0))
+
+def test_explicit_material_controller_cost_split():
+    e=[Q(0),Q(0)]
+    x=[Q(0),Q(-5)]
+    z=[Q(0),Q(0)]
+    ohmic,ADE,chemical=Q(1,2),Q(1,3),Q(1,6)
+    controller,modulator,ion_pump,neutral=Q(1,4),Q(1,2),Q(1),Q(-1,4)
+    assert ohmic+ADE+chemical==Q(1)
+    assert controller+modulator+ion_pump+neutral==Q(3,2)
+    # Load of 5.5 is paid by natural face 5 plus volume pump 1.5
+    # minus 1 of physical loss, not by nominal natural face alone.
+    assert space_time_balance(
+        e,x,z,z,ohmic+ADE+chemical,Q(11,2),Q(0),
+        controller+modulator+ion_pump+neutral)
+    assert not space_time_balance(
+        e,x,z,z,ohmic+ADE+chemical,Q(11,2),Q(0),
+        controller+modulator+neutral) # dropped ion pump
