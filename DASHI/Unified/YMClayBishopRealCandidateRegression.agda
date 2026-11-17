@@ -65,3 +65,6 @@ import DASHI.Physics.YangMills.YMClayRationalS3StereographicConcreteExact
 -- Real ORIGINAL rational S3 nodes/weights; existing non-safe rational proofs.
 import DASHI.Physics.YangMills.YMClayRationalS3PositiveWeightedNodesExact
   as YMClayRationalS3PositiveWeightedNodesExact
+
+-- Strictly positive rational original Wilson T2 finite Gibbs source.
+import DASHI.Physics.YangMills.YMClayOriginalRationalWilsonTaylor2PositiveExact as RationalWilsonTaylor2
