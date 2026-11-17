@@ -9,7 +9,7 @@ Reuse:
 - BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact.PositivePlane4, six a<b axes
 - YMClayNativeRationalSU2SixPlaneSameSourceExact and YMClayNativeSixPlaneOrderedIdentityExact, genuine native boundary/trace and distinction from the **16 ordered-axis** convention.
 
-At L=4 the canonical source has 4*4^4=1024 positive bonds and P=6*4^4=1536 positive plaquettes. The new exact script builds every 4-link plaquette in periodic Z/LZ, and checks distinct link supports and their symmetric differences for L=3,4. All different plaquette pairs have at least one link appearing only once, so the independent-link central sign involution sends t_p t_q to its negative, giving expectation zero when p!=q.
+At L=4 the canonical source has 4*4^4=1024 positive bonds and P=6*4^4=1536 positive plaquettes. The new exact script builds every 4-link plaquette in periodic Z/LZ, and checks distinct link supports and their symmetric differences for L=2,3,4. All different plaquette pairs have at least one link appearing only once, so the independent-link central sign involution sends t_p t_q to its negative, giving expectation zero when p!=q.
 
 On the true normalized SU2 one-link moment functional H, H(t_p)=0, H(t_p^2)=1/4. The latter follows by integrating one independently Haar-distributed link and using the exact S3 coordinate moment H(q0^2)=1/4. Because each Taylor coefficient up to beta^2 has degree <=2 in each link, any per-link cubature that matches SU2 Haar moments through degree 2, including the positive rational 24-cell, yields the SAME coefficients.
 
@@ -27,7 +27,7 @@ At L=4:
 \[
 \boxed{Z_4(\beta)=1-1536\beta+1179840\beta^2+O(\beta^3).}
 \]
-At L=3: P=486 and beta^2 coefficient=472635/4.
+At L=2: P=96 and beta^2 coefficient=4620. At L=3: P=486 and beta^2 coefficient=472635/4. This coefficient formula requires L>=2: at L=1 the plaquette loops reuse links and are commutators, so H(t_p)=0 cannot be assumed. The original variable family L=n+1 includes L=1 at n=0; that cutoff must be handled separately.
 
 The new safe arithmetic owner YMClayOriginalWilsonSecondOrderCombinatoricsExact.agda pins the canonical side-four 1024-link count and exact numerator 8*(1179840)=4*1536^2+1536. It does **not** prove measure integration or any unknown coefficient. The geometry and 24-cell degree-two link moments are covered in the exact Python reference. In particular, this is NOT a proof of all-degree Haar and not a physical continuum solution.
 
@@ -81,3 +81,7 @@ Reference: scripts/check_ym_dyadic_cyclotomic_full_20261117.py, 1,374/1,374 exac
 6. Original Wilson exponential/Haar/cylinder: Bishop finite Gibbs positivity/normalization and now original second-order Wilson coefficient checks; full source-product Haar, same-carrier cylinder and original real migration open.
 
 There is no license to mark YM.REAL closed. Maintain 19/28 expanded open count until independent kernel and source verification. Attribution: Wilson, Bałaban, Fejer, Stroud, Pizzetti/Folland, Bishop/Bridges, Murray/Csimma, and preceding DASHI original source owners.
+
+## Same-original rational SU2 to Bishop matrix cut
+
+`YMClayOriginalRationalSU2ToBishopTraceExact.agda` now embeds the existing original `BalabanSU2RationalWilsonLargeFieldGapExact.RationalUnitQuaternion` coordinates into the real Bishop quaternion using canonical `Data.Rational.Base.toℚᵘ` and the actual vendor `Real._⋆`. Its normalized 2×2 real trace equals the image of the original `realPart`, using the earlier Bishop trace theorem. `YMClayOriginalRationalSU2BishopUnitaryWeldExact.agda` then uses the existing reduced-to-unnormalized rational +/* homomorphisms, native Bishop +/* homomorphisms and the original rational unit-norm equality to construct a genuine Bishop `UnitQuaternion`, and passes it to the determinant-one and entrywise `U†U=I` theorems. These are source-written and NOT kernel accepted; no compactness, surjectivity, full original SU(N) identity or Haar is implied.
