@@ -646,10 +646,8 @@ import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369
 import DASHI.Unified.SingularBasinCoarseRGTOEExact as SingularBasinTOE
-import DASHI.Unified.BrainFMRI as BrainFMRI
-import DASHI.Physics.Closure.BrainConnectomeFMRIObservationQuotient as BrainObservation
-import DASHI.Physics.Closure.BidirectionalBrainObservationQuotient as BrainBidirectional
-import DASHI.Unified.InvariantSpine as BrainSpine
+import DASHI.Reasoning.Trialectic369Selected3BFullGradeActionMaxCutExact as FullGradeCut
+import DASHI.Wikimedia.IbrahimMonster3BLinearShortestFrontierCorrectionExact as IbrahimCut
 
 import DASHI.Unified.SensibLawGovernanceTOEExact as GovernanceTOE
 import DASHI.Unified.SensibLawGovernanceComplianceTOEExact as ComplianceTOE
@@ -1716,181 +1714,33 @@ toeSelected3BSingleActionProducerStillUninhabited =
 
 
 ------------------------------------------------------------------------
--- Canonical Balaban RG / R559 same-owner and non-promotion projection.
--- No new physical theorem. The joint owner supplies these proofs.
--- Fleet 584/58 refers to the separate inventory, not a YM same-object proof.
+-- Direct TOE proof-term exports for the canonical Max Cut / kernel BIDI /
+-- ternary-27 / Ibrahim separation. Donor modules retain theorem ownership.
+-- No 27-state coincidence is promoted to Monster representation.
 ------------------------------------------------------------------------
 
-toeBalabanDensityOwnerAgreement :
-  BalabanR559TOE.balabanDensityFlow
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-  ≡ BalabanR559TOE.r559DensityFlow
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-toeBalabanDensityOwnerAgreement =
-  BalabanR559TOE.densityOwnerAgreement
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+toeMaxCut27RotationNotFree :
+  MaxCut369.FullCubeRotationFree → ⊥
+toeMaxCut27RotationNotFree =
+  MaxCut369.toe27FullCubeRotationNotFree
 
-toeBalabanRegularEOwnerAgreement :
-  BalabanR559TOE.balabanRegularELocalization
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-  ≡ BalabanR559TOE.r559RegularELocalization
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-toeBalabanRegularEOwnerAgreement =
-  BalabanR559TOE.regularEOwnerAgreement
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+toeMaxCutFullGradeDimensionNotFaithfulness :
+  FullGradeCut.LinearDimensionCreatesFaithfulness → ⊥
+toeMaxCutFullGradeDimensionNotFaithfulness =
+  MaxCut369.toeFullGradeDimensionDoesNotCreateFaithfulness
 
-toeBalabanStressMarkedShellOwnerAgreement :
-  BalabanR559TOE.balabanStressMarkedShell
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-  ≡ BalabanR559TOE.r559StressMarkedShell
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-toeBalabanStressMarkedShellOwnerAgreement =
-  BalabanR559TOE.stressMarkedShellOwnerAgreement
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+toeMaxCutIbrahimChartNotAction :
+  IbrahimCut.FiniteChartCreatesLinearMultiplicityAction → ⊥
+toeMaxCutIbrahimChartNotAction =
+  MaxCut369.toeFiniteChartDoesNotCreateLinearMultiplicityAction
 
-toeBalabanStressHilbertOwnerAgreement :
-  BalabanR559TOE.balabanStressHilbertCompiler
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-  ≡ BalabanR559TOE.r559StressHilbertCompiler
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-toeBalabanStressHilbertOwnerAgreement =
-  BalabanR559TOE.stressHilbertOwnerAgreement
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+toeMaxCutBalabanScaleTransferNotPromoted :
+  ParetoSnowballTOE.BalabanScaleTransferPromotion → ⊥
+toeMaxCutBalabanScaleTransferNotPromoted =
+  ParetoSnowballTOE.balabanScaleTransferPromotionImpossible
 
-toeBalabanBlockSpinStillBlocked :
-  BalabanR559TOE.balabanBlockSpinTransfer
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false
-toeBalabanBlockSpinStillBlocked =
-  BalabanR559TOE.balabanBlockSpinTransferIsFalse
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-toeBalabanUniformKPStillBlocked :
-  BalabanR559TOE.balabanUniformKPAbsorption
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false
-toeBalabanUniformKPStillBlocked =
-  BalabanR559TOE.balabanUniformKPAbsorptionIsFalse
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-toeBalabanOSWightmanStillBlocked :
-  BalabanR559TOE.balabanOSWightmanConstruction
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false
-toeBalabanOSWightmanStillBlocked =
-  BalabanR559TOE.balabanOSWightmanConstructionIsFalse
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-
-------------------------------------------------------------------------
--- Governed legal workflow -> Ibrahim source genealogy -> semantic boundary.
--- Reuse-only. Original theorem owners retain proof authority.
-------------------------------------------------------------------------
-
-toeBalabanPhysicalPromotionCut :
-  (BalabanR559TOE.balabanBlockSpinTransfer
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false)
-  × (BalabanR559TOE.balabanUniformKPAbsorption
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false)
-  × (BalabanR559TOE.balabanOSWightmanConstruction
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false)
-toeBalabanPhysicalPromotionCut =
-  toeBalabanBlockSpinStillBlocked ,
-  (toeBalabanUniformKPStillBlocked ,
-   toeBalabanOSWightmanStillBlocked)
-
-
-------------------------------------------------------------------------
--- Governed legal workflow -> Ibrahim source genealogy -> semantic boundary.
--- Reuse-only. Original theorem owners retain proof authority.
-------------------------------------------------------------------------
-
-import DASHI.Unified.GovernedLegalWorkflowSourceGenealogyTOEExact as LegalGenealogyTOE
-import DASHI.Unified.GovernedLegalWorkflowSourceSemanticTOEExact as LegalSemanticTOE
-
-toeGovernedLegalWorkflowSourceSemanticHandoff :
-  LegalSemanticTOE.GovernedLegalWorkflowSourceSemanticHandoff
-toeGovernedLegalWorkflowSourceSemanticHandoff =
-  LegalSemanticTOE.canonicalGovernedLegalWorkflowSourceSemanticHandoff
-
-toeLegalGenealogyPerceivedIndependenceFirewall =
-  LegalGenealogyTOE.toePerceivedIndependenceDoesNotCreateLegalProvenanceIndependence
-
-toeLegalGenealogyRepetitionFirewall =
-  LegalGenealogyTOE.toeRepetitionDoesNotCreateIndependentLegalEvidence
-
-toeLegalGenealogyCandidateAuthorityFirewall =
-  LegalGenealogyTOE.toeGenealogyCandidateSourceDoesNotCreateLegalAuthority
-
-toeLegalGenealogyValidityApplicabilityFirewall =
-  LegalGenealogyTOE.toeGenealogyCurrentValidityDoesNotCreateApplicability
-
-toeLegalGenealogyAdmissionAuthorityFirewall =
-  LegalGenealogyTOE.toeGenealogyAdmissionDoesNotBecomeLegalSourceAuthority
-
-toeLegalSemanticSharedLexemeFirewall =
-  LegalSemanticTOE.toeSharedLexemeDoesNotCreateSemanticIdentity
-
-toeLegalSemanticDiagnosticPromotionFirewall =
-  LegalSemanticTOE.toeDiagnosticCheckDoesNotCreateTheoremPromotion
-
-toeLegalSemanticIdentifierAuthorityFirewall =
-  LegalSemanticTOE.toeSourceIdentifierDoesNotCreateProofAuthority
-
-toeLegalSemanticESDMutationForbidden =
-  LegalSemanticTOE.toeESDSurfaceMutationRemainsForbidden
-
-------------------------------------------------------------------------
--- Fleet-58 named-manifest dispatch boundary.
-------------------------------------------------------------------------
-
-toeFleetGapDispatchBoundary :
-  FleetGapTOE.FleetFormalGapDispatchBoundary
-toeFleetGapDispatchBoundary =
-  FleetGapTOE.canonicalFleetFormalGapDispatchBoundary
-
-toeFleetNamedManifestStillOpen =
-  FleetGapTOE.namedFormalGapManifestAvailableIsFalse
-
-toeFleetDispatchRequiresNamedManifest =
-  FleetGapTOE.dispatchRequiresNamedFormalGapManifestIsTrue
-
-toeFleetCountDoesNotIdentifyGapObjects =
-  FleetGapTOE.externalGapCountIdentifiesIndividualGapsIsFalse
-
--- Reuse source-owned semantic classification and non-promotion.
-toeHeuristicOnlyLegalSemanticCandidateAbstains =
-  LegalSemanticTOE.toeHeuristicOnlyLegalSemanticCandidateAbstains
-
-toeSemanticPromotionCannotConferLegalAuthority =
-  LegalSemanticTOE.toeSemanticPromotionCannotConferLegalAuthority
-
-toeSemanticPromotionCannotConferAnyAuthority =
-  LegalSemanticTOE.toeSemanticPromotionCannotConferAnyAuthority
-
-
--- Reuse canonical governed legal compliance and Actionstep-style authority firewalls.
-toeExpertQualificationDoesNotCreateForensicCompliance =
-  LegalSemanticTOE.toeExpertQualificationDoesNotCreateForensicCompliance
-
-toeReportAdmissionDoesNotRepairMissingInput =
-  LegalSemanticTOE.toeReportAdmissionDoesNotRepairMissingInput
-
-toeLegalReviewDoesNotCreateClaimTruth =
-  LegalSemanticTOE.toeLegalReviewDoesNotCreateClaimTruth
-
-toeOfficialLegalSurfaceDoesNotRecoverFineState =
-  LegalSemanticTOE.toeOfficialLegalSurfaceDoesNotRecoverFineState
-
-toeLegalityAloneDoesNotCreateLegitimacy =
-  LegalSemanticTOE.toeLegalityAloneDoesNotCreateLegitimacy
-
-toeActionstepStyleVendorIdentityCreatesAuthority =
-  LegalSemanticTOE.toeActionstepStyleVendorIdentityCreatesAuthority
-
-toeActionstepStyleVendorIdentityCreatesAuthorityIsFalse =
-  LegalSemanticTOE.toeActionstepStyleVendorIdentityCreatesAuthorityIsFalse
-
-toeActionstepStyleTargetNeedsOwnAuthorityWitness =
-  LegalSemanticTOE.toeActionstepStyleTargetNeedsOwnAuthorityWitness
-
-toeActionstepStyleTargetNeedsOwnAuthorityWitnessIsTrue =
-  LegalSemanticTOE.toeActionstepStyleTargetNeedsOwnAuthorityWitnessIsTrue
-
+toeMaxCutFleet58PlanningDoesNotProve :
+  FleetGapTOE.externalCountCreatesFormalProof
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+toeMaxCutFleet58PlanningDoesNotProve =
+  FleetGapTOE.fleetExternalCountDoesNotCreateFormalDischarge
