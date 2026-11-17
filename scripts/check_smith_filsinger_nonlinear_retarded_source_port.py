@@ -54,6 +54,31 @@ def exact_identity_checks():
     return True
 
 
+
+def passive_admittance(frequency_hz, g_dc, cap, debye=(), lorentz=()):
+    """Positive-real finite-state trial port; not fitted Earth-ionosphere."""
+    if frequency_hz<0 or g_dc<0 or cap<0:
+        raise ValueError("passive nonnegative parameters required")
+    z=2j*math.pi*frequency_hz
+    y=g_dc+z*cap
+    for g,pole in debye:
+        if g<=0 or pole<=0:raise ValueError("Debye g,pole positive")
+        y+=g*z/(z+pole)
+    for alpha,gamma,omega in lorentz:
+        if min(alpha,gamma,omega)<=0:
+            raise ValueError("Lorentz alpha,gamma,omega positive")
+        y+=alpha*z/(z*z+gamma*z+omega*omega)
+    return y
+
+def finite_passive_admittance_test():
+    """Numerically sample the positive-real axis; symbolic proof above."""
+    y0=passive_admittance(0,1e-12,1e-9,[(.2,10.)],[(.4,2.,20.)])
+    assert abs(y0.real-1e-12)<1e-15
+    for f in (0.,.001,.1,1.,3.,10.,100.,1e4):
+        assert passive_admittance(f,1e-12,1e-9,[(.2,10.)],
+                                 [(.4,2.,20.)]).real>=-1e-13
+    return True
+
 @dataclass(frozen=True)
 class Parameters:
     # Dimensionally physical but deliberately synthetic reference circuit.
@@ -166,6 +191,7 @@ def simulate(p=Parameters(), duration_s=1., samples=160):
 
 def run():
     exact_identity_checks()
+    finite_passive_admittance_test()
     base=Parameters()
     controlled=Parameters(ionization_rate_s=5.,controller_W=2.)
     return dict(signed_ledger='Wnatural+Wion_creation+Wcontroller = Wload+Wchannel+Wexterior+Wion_loss+Wcontroller_aux+DeltaU',
