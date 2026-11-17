@@ -343,6 +343,23 @@ def main() -> int:
             or not (ROOT / "Docs/roadmaps/ClayBSDOriginalS5StrongBSDRubinClassicalClosure20261117.md").is_file()
             or not (ROOT / "scripts/check_bsd_s5_selected_curve_rubin_20261117.py").is_file()):
         problems.append("BSD_S5_RUBIN_CLASSICAL_SELECTED_CURVE_NATIVE_OR_UNIVERSAL_FIREWALL_MISSING")
+    # The official Clay formulation states universal rank equality; Wiles
+    # places the all-prime leading coefficient formula in the REFINED remark.
+    s6 = next((g for g in added if g.get("id") == "S6"), None)
+    if (s6 is None
+            or s6.get("settled") is not False
+            or s6.get("status") != "OPEN"
+            or s6.get("official_clay_prize_formal_statement") != "UNIVERSAL_RANK_EQUALITY"
+            or s6.get("refined_strong_bsd_status") != "OPEN_SEPARATE_REFINEMENT"
+            or s6.get("universal_rank_equality_proved") is not False
+            or s6.get("universal_sha_finiteness_proved") is not False
+            or s6.get("universal_strong_leading_coefficient_proved") is not False
+            or s6.get("native_universal_scope_typechecked") is not False
+            or s6.get("native_kernel_acceptance") is not False
+            or s6.get("original_endpoint_proved") is not False
+            or not (ROOT / "DASHI/Mathematics/Arithmetic/BSDUniversalScopeFirewallExact.agda").is_file()
+            or not (ROOT / "Docs/roadmaps/ClayBSDUniversalPrizeVersusStrongScopeExact20261117.md").is_file()):
+        problems.append("BSD_S6_CLAY_RANK_VS_REFINED_STRONG_UNIVERSAL_SCOPE_FALSELY_ACCEPTED")
     for leaf in ("S1","S3","S6"):
         g = next((g for g in added if g.get("id") == leaf), None)
         if g is None or g.get("settled") is not False:
