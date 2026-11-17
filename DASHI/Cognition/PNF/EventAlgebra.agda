@@ -135,9 +135,66 @@ comparePNF left right =
   comparisonFromResidual
     (Residual.computeResidual (algebraicAtom left) (algebraicAtom right))
 
+------------------------------------------------------------------------
+-- Pair-bound named incompatibility.
+--
+-- A noTypedMeet at the root join/composition surface is not emitted as a
+-- shared string-only residual.  It carries the exact left/right EventPNF pair,
+-- both structural signatures, an operation-local name, the canonical code,
+-- and a proof that its residual is noTypedMeet.
+--
+-- This preserves strict pairwise independence: each failed pair owns its own
+-- incompatibility value.  No join of separate noTypedMeet pairs is performed.
+------------------------------------------------------------------------
+
+record NamedIncompatibility : Set where
+  constructor namedIncompatibility
+  field
+    incompatibilityName : String
+    incompatibilityCode : String
+    incompatibilityLeft : EventPNF
+    incompatibilityRight : EventPNF
+    leftStructuralSignature : Residual.StructuralSignature
+    rightStructuralSignature : Residual.StructuralSignature
+    incompatibilityResidual : Residual.ResidualLevel
+    incompatibilityResidualIsNoTypedMeet :
+      incompatibilityResidual ≡ Residual.noTypedMeet
+
+open NamedIncompatibility public
+
+namedNoTypedMeet :
+  EventPNF → EventPNF → String → NamedIncompatibility
+namedNoTypedMeet left right name =
+  namedIncompatibility
+    name
+    "NO_TYPED_MEET"
+    left
+    right
+    (Residual.PredicatePNF.structuralSignature (algebraicAtom left))
+    (Residual.PredicatePNF.structuralSignature (algebraicAtom right))
+    Residual.noTypedMeet
+    refl
+
+namedNoTypedMeetLeftIsInput :
+  ∀ left right name →
+  incompatibilityLeft (namedNoTypedMeet left right name) ≡ left
+namedNoTypedMeetLeftIsInput left right name = refl
+
+namedNoTypedMeetRightIsInput :
+  ∀ left right name →
+  incompatibilityRight (namedNoTypedMeet left right name) ≡ right
+namedNoTypedMeetRightIsInput left right name = refl
+
+namedNoTypedMeetResidualIsCanonical :
+  ∀ left right name →
+  incompatibilityResidual (namedNoTypedMeet left right name)
+    ≡ Residual.noTypedMeet
+namedNoTypedMeetResidualIsCanonical left right name = refl
+
 data PNFOperationResult : Set where
   operationSuccess : EventPNF → PNFOperationResult
   operationResidual : Residual.ResidualLevel → String → PNFOperationResult
+  operationIncompatibility : NamedIncompatibility → PNFOperationResult
   operationUndetermined : String → PNFOperationResult
   operationInapplicable : String → PNFOperationResult
 
@@ -165,9 +222,19 @@ composeByResidual left right receipt with
 ... | Residual.partial = typedComposition left right
     (operationResidual Residual.partial "partial typed composition") receipt
 ... | Residual.noTypedMeet = typedComposition left right
-    (operationResidual Residual.noTypedMeet "NO_TYPED_MEET") receipt
+    (operationIncompatibility (namedNoTypedMeet left right receipt)) receipt
 ... | Residual.contradiction = typedComposition left right
     (operationResidual Residual.contradiction "contradictory composition") receipt
+
+noTypedMeetCompositionEmitsStructuredNamedIncompatibility :
+  ∀ left right receipt →
+  Residual.computeResidual (algebraicAtom left) (algebraicAtom right)
+    ≡ Residual.noTypedMeet →
+  result (composeByResidual left right receipt)
+    ≡ operationIncompatibility (namedNoTypedMeet left right receipt)
+noTypedMeetCompositionEmitsStructuredNamedIncompatibility
+  left right receipt residualIsNoTypedMeet
+  rewrite residualIsNoTypedMeet = refl
 
 record ScopedNegationReceipt : Set where
   constructor scopedNegationReceipt
@@ -208,6 +275,28 @@ left ⊗ right = composeByResidual left right "contextual fibre-product composit
 
 _∘p_ : EventPNF → EventPNF → TypedComposition
 later ∘p earlier = composeByResidual earlier later "temporal/causal PNF composition"
+
+contextualNoTypedMeetEmitsNamedIncompatibility :
+  ∀ left right →
+  Residual.computeResidual (algebraicAtom left) (algebraicAtom right)
+    ≡ Residual.noTypedMeet →
+  result (left ⊗ right)
+    ≡ operationIncompatibility
+        (namedNoTypedMeet left right "contextual fibre-product composition")
+contextualNoTypedMeetEmitsNamedIncompatibility left right residualIsNoTypedMeet =
+  noTypedMeetCompositionEmitsStructuredNamedIncompatibility
+    left right "contextual fibre-product composition" residualIsNoTypedMeet
+
+temporalNoTypedMeetEmitsNamedIncompatibility :
+  ∀ later earlier →
+  Residual.computeResidual (algebraicAtom earlier) (algebraicAtom later)
+    ≡ Residual.noTypedMeet →
+  result (later ∘p earlier)
+    ≡ operationIncompatibility
+        (namedNoTypedMeet earlier later "temporal/causal PNF composition")
+temporalNoTypedMeetEmitsNamedIncompatibility later earlier residualIsNoTypedMeet =
+  noTypedMeetCompositionEmitsStructuredNamedIncompatibility
+    earlier later "temporal/causal PNF composition" residualIsNoTypedMeet
 
 negateScoped : EventPNF → String → ScopedNegationReceipt
 negateScoped source scope =
