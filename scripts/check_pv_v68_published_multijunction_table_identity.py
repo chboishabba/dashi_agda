@@ -40,6 +40,23 @@ ROWS=[
      "area_cm2":"0.242","area_class":"aperture",
      "site":"NREL (09/2021)","material":"GaInP/GaAs(mqw)/GaInAs"},
 ]
+# Independently certified SINGLE APERTURE 4T stack from Table 4.
+# NREL (02/2017), GaInP/GaAs//Si mechanical stack; values are two
+# component groups under the designated 1.002 cm² illumination area.
+# Unlike the AIST module-group exception below, the Table 4 4T entry
+# provides both electrically separated contributions on the same basis.
+FOUR_TERMINAL_ONE_SUN_2017={
+    "id":"NREL_GaInP_GaAs_Si_mechanical_4T_2017",
+    "reported_pce":"35.9","quoted_uncertainty_pp":"0.5",
+    "area_cm2":"1.002","area_class":"designated illumination area",
+    "voc_components_V":["2.52","0.681"],
+    "jsc_components_mAcm2":["13.6","11.0"],
+    "ff_components_pct":["87.5","78.5"],
+    "site":"NREL (02/2017)",
+    "same_source_reported_area":True,
+    "original_raw_IV_available":False,
+    "verified_under_one_sun":"1000 W/m2 global AM1.5",
+}
 FOUR_TERMINAL_SOURCED={
  "id":"AIST_InGaP_GaAs_doubleSlash_Si_4T",
  "reported_pce":"33.7","quoted_uncertainty_pp":"0.7",
@@ -76,6 +93,30 @@ def compute():
           "source_normalization_conventions_reconciled":False,
           "source":"Green et al. 2026, DOI 10.1016/j.joule.2026.102494; Table 4",
         })
+    four=FOUR_TERMINAL_ONE_SUN_2017
+    components=[
+      F(v)*F(j)*F(ff)/100
+      for v,j,ff in zip(
+          four["voc_components_V"],four["jsc_components_mAcm2"],
+          four["ff_components_pct"])
+    ]
+    summed=sum(components)
+    four_delta=summed-F(four["reported_pce"])
+    check("4T source two separate IV groups",len(components)==2)
+    check("4T top power 29.988%",components[0]==F("29.988"))
+    check("4T bottom power 5.879? source check",abs(components[1]-F("5.879"))<F("0.1"))
+    check("4T same-area contributions reproduce report",abs(four_delta)<F("0.05"))
+    check("4T original raw IV remains unavailable",four["original_raw_IV_available"] is False)
+    four_reconstruction={
+      "id":four["id"],"published_PCE_percent":float(F(four["reported_pce"])),
+      "reconstructed_top_pp":float(components[0]),
+      "reconstructed_Si_pp":float(components[1]),
+      "summed_4T_one_sun_same_aperture_PCE_percent":float(summed),
+      "difference_reconstructed_minus_published_pp":float(four_delta),
+      "independently_published_uncertainty_pp":float(F(four["quoted_uncertainty_pp"])),
+      "original_IV_sweep_stabilized_source_verified":False,
+      "source":"Green et al., Joule 2026 version 68 table 4, NREL (02/2017)",
+    }
     check("GaAs 2J printed identity close",abs(out[1]["printed_reconstruction_minus_published_percentage_points"])<.05)
     check("GaAs QW 3J printed identity close",abs(out[2]["printed_reconstruction_minus_published_percentage_points"])<.05)
     check("2026 ESTI printed fields show mismatch greater than 0.1pp",
@@ -87,6 +128,7 @@ def compute():
        "calibration_note":"published values and reported uncertainty are NOT raw per-sample meter bounds",
        "source_url":SOURCE,"two_terminal_reconciliation":out,
        "four_terminal_metadata":FOUR_TERMINAL_SOURCED,
+       "four_terminal_same_aperture_2017_reconstruction":four_reconstruction,
        "same_specimen_original_IV_data_available":False,
        "true_IV_stabilized_measured_MPP_verified":False,
        "369_specific_operator_measured":False,
