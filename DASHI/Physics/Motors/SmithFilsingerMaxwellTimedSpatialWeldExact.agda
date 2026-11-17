@@ -23,6 +23,7 @@ import DASHI.Physics.Motors.SmithFilsingerTimedSpatialPortChainExact as Timed
 import DASHI.Physics.Motors.SmithFilsingerTimeIndexedTransferExact as Time
 import DASHI.Physics.Motors.SmithFilsingerSpatialPortChainExact as Spatial
 import DASHI.Physics.Motors.SmithFilsingerSpatialSourceCapWeldExact as Cap
+import DASHI.Physics.Motors.SmithFilsingerOpenBoundaryPoyntingGaussExact as Gauss
 import DASHI.Physics.Motors.SmithFilsingerSourceMaxwellBoundaryWeldExact as Weld
 import DASHI.Physics.Motors.SmithFilsingerMidpointPhaseWorkExact as Port
 import DASHI.Physics.Motors.SmithFilsingerReplenishedCycleCapExact as Cycle
@@ -75,6 +76,58 @@ buildCausalCellFromMaxwell jet receipt =
     (IntegratedFieldCell.startsAt receipt)
     (IntegratedFieldCell.finishesAt receipt)
 
+-- Stronger open-Gauss cell: the KSW pointwise vector theorem is
+-- FIRST integrated to signed rational exterior face flux using the exact
+-- finite YM-Ward telescoping theorem. Only the final calibrated signed
+-- rational-flux -> finite Nat work equality remains physical.
+-- This does not silently use a periodic zero-exterior-flux boundary.
+record IntegratedOpenGaussCell
+  {r : Level} {F : C3.RealField r}
+  (jet : Vector.FullVectorMaxwellJet F)
+  (first shared start middle : Nat) : Set (lsuc r) where
+  field
+    faceTrace : Gauss.OriginalMaxwellOpenFaceTrace jet
+    controllerWork initiallyStored usefulLoad lossAndRadiation
+      finallyStored : Nat
+    flight : Time.RetardedFlight
+    startsAt : Time.RetardedFlight.launch flight ≡ start
+    finishesAt : Time.RetardedFlight.arrival flight ≡ middle
+
+    -- One remaining calibrated conversion obligation. It explicitly
+    -- witnesses that the signed rational exterior flux corresponds to
+    -- the same original input/output finite-grid port work and units.
+    originalRationalFluxToNatWork :
+      Gauss.OriginalMaxwellOpenFaceTrace.integratedSpatialPoyntingDivergence
+        faceTrace
+      ≡ Gauss.OriginalMaxwellOpenFaceTrace.originalSignedExteriorPortFlux
+          faceTrace →
+      first + (controllerWork + initiallyStored)
+        ≡ shared + (usefulLoad + (lossAndRadiation + finallyStored))
+
+-- Derive a real CausalSpatialCell from KSW vector Poynting, exact
+-- nonperiodic 3-axis Gauss, physical field/face integral, and calibrated
+-- original terminal equality. The latter is NOT filled by a dummy proof.
+buildCausalCellFromOpenGauss :
+  ∀ {r} {F : C3.RealField r}
+    {first shared start middle} →
+  (jet : Vector.FullVectorMaxwellJet F) →
+  (receipt : IntegratedOpenGaussCell jet first shared start middle) →
+  Timed.CausalSpatialCell first shared start middle
+buildCausalCellFromOpenGauss jet receipt =
+  Timed.causalSpatialCell
+    (Spatial.spatialCell
+      (IntegratedOpenGaussCell.controllerWork receipt)
+      (IntegratedOpenGaussCell.initiallyStored receipt)
+      (IntegratedOpenGaussCell.usefulLoad receipt)
+      (IntegratedOpenGaussCell.lossAndRadiation receipt)
+      (IntegratedOpenGaussCell.finallyStored receipt)
+      (IntegratedOpenGaussCell.originalRationalFluxToNatWork receipt
+        (Gauss.originalFullVectorJetOpenBoundaryFlux jet
+          (IntegratedOpenGaussCell.faceTrace receipt))))
+    (IntegratedOpenGaussCell.flight receipt)
+    (IntegratedOpenGaussCell.startsAt receipt)
+    (IntegratedOpenGaussCell.finishesAt receipt)
+
 -- Every link carries an actual FULL VECTOR Maxwell jet and a separate
 -- physically integrated field-to-port work receipt; one original
 -- selected source b/f/s is preserved across the entire dependent path.
@@ -96,6 +149,13 @@ data MaxwellTimedPath
       MaxwellTimedPath b f s shared last middle finish →
       MaxwellTimedPath b f s first last start finish
 
+    throughOpenGauss :
+      ∀ {first shared last start middle finish} →
+      (jet : Vector.FullVectorMaxwellJet F) →
+      IntegratedOpenGaussCell jet first shared start middle →
+      MaxwellTimedPath b f s shared last middle finish →
+      MaxwellTimedPath b f s first last start finish
+
 eraseMaxwellToTimedSpatial :
   ∀ {r} {F : C3.RealField r}
     {b : Weld.SelectedBoundary}
@@ -109,6 +169,10 @@ eraseMaxwellToTimedSpatial (atBoundary boundary time) =
 eraseMaxwellToTimedSpatial (throughField jet receipt rest) =
   Timed.thenTimed
     (buildCausalCellFromMaxwell jet receipt)
+    (eraseMaxwellToTimedSpatial rest)
+eraseMaxwellToTimedSpatial (throughOpenGauss jet receipt rest) =
+  Timed.thenTimed
+    (buildCausalCellFromOpenGauss jet receipt)
     (eraseMaxwellToTimedSpatial rest)
 
 -- Original all-N timed conservation and no-early-arrival are reused.
