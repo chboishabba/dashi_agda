@@ -232,6 +232,7 @@ def check_surrounding_source_coverage() -> None:
     inventory = read("AmyEskridgeVideoDIAFullInventoryExact.agda")
     atlas = read("AmyEskridgeVideoSurroundingSourceAtlasExact.agda")
     weld = read("AmyEskridgeVideoSurroundingProducerWeldExact.agda")
+    omitted = read("AmyEskridgeVideoOmittedOriginalResearchWeldExact.agda")
     everything = read("AmyEskridgeVideoEvidenceEverything.agda")
 
     slide_ids = [int(n) for n in re.findall(
@@ -247,12 +248,14 @@ def check_surrounding_source_coverage() -> None:
     assert dird_ids == list(range(1, 38)), "one or more original DIA inventory entries missing/reordered"
     assert len(source_names) == 42 and len(set(source_names)) == 42
     assert len(weld_ids) == 39 and len(set(weld_ids)) == 39
+    assert len(re.findall(r"(?m)^\w+\s*=\s*surrounding-primary\b", omitted)) == 8
     assert "entireOriginalDeckCovered = refl" in slides
     assert "exactInventoryCount = refl" in inventory
     assert "exactInventoryListedPageTotal = refl" in inventory
     assert "onlyFourOriginalReportsInspected = refl" in inventory
     assert "sourceFamilyCount = refl" in atlas
     assert "exactSourceScopedWeldCount = refl" in weld
+    assert "allAdditionalSourcesIndexed = refl" in omitted
 
     declared = set(source_names)
     required = set(re.findall(r'\bAtlas\.([A-Za-z]\w+)\b', weld))
@@ -271,7 +274,8 @@ def check_surrounding_source_coverage() -> None:
     for module in ("AmyEskridgeVideoDIAFullInventoryExact",
                    "AmyEskridgeVideoHAL5AllSlidesExact",
                    "AmyEskridgeVideoSurroundingSourceAtlasExact",
-                   "AmyEskridgeVideoSurroundingProducerWeldExact"):
+                   "AmyEskridgeVideoSurroundingProducerWeldExact",
+                   "AmyEskridgeVideoOmittedOriginalResearchWeldExact"):
         assert f"import DASHI.Culture.{module}" in everything, module
 
     pages = [30,20,37,32,27,56,29,35,72,27,37,36,33,16,17,32,19,42,44,
@@ -286,12 +290,12 @@ def check_surrounding_source_coverage() -> None:
     assert "noFourToFullInspection ()" in inventory
 
     for name, source in (("slides", slides), ("DIA", inventory),
-                         ("atlas", atlas), ("weld", weld)):
+                         ("atlas", atlas), ("weld", weld), ("omitted", omitted)):
         assert not re.search(r"\b(?:postulate|trustMe|NON_COVERING|TERMINATING)\b", source), name
 
     # Strong negative control: deleting one inventor/source identity must fail coverage.
     assert set(source_names[:-1]) != set(source_names)
-    print("HAL5 35-page / DIA 37-document 1473-page / 42-source / 39-producer-weld static audit: PASS")
+    print("HAL5 35-page / DIA 37-document 1473-page / 42-source / 39-producer-weld / 8 extra-original static audit: PASS")
 
 
 if __name__ == "__main__":
