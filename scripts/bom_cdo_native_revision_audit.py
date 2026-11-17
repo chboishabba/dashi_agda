@@ -81,6 +81,10 @@ def read_set(specs, root):
                 day=date(y,m,d).isoformat()
             except (ValueError,OverflowError) as e: raise AuditError(f'bad date at {path}:{lineno}') from e
             val=canon_num(line[value_col]); accum=canon_num(line[days_col])
+            # A populated reading with empty accumulation-days means one day
+            # in native CDO products; it is not a missing measurement.
+            if val is not None and accum is None:
+                accum=Decimal(1)
             if accum is not None:
                 check(accum>0 and accum==accum.to_integral_value(), 'invalid accumulation days')
             quality=line['Quality'].strip()
