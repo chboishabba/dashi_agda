@@ -1,5 +1,13 @@
 module DASHI.Unifier where
-import DASHI.Analysis.RiemannG21StrictTP2TrancheReceipt as RHFrontier
+
+import DASHI.Unified.SensibLawGovernanceTOEExact as GovernanceTOE
+import DASHI.Unified.SensibLawGovernanceComplianceTOEExact as ComplianceTOE
+import DASHI.Core.AuthorityNonPromotionCore as Authority
+import DASHI.Promotion.AuthorityBoundaryCore as AuthorityBoundary
+import DASHI.Law.SensibLawAgdaFirstLegalRuntimeEverything as LegalRuntime
+import DASHI.Governance.DomainPermeabilityAuthorityTransport as Domain
+
+open import Agda.Builtin.Bool using (false; true)
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Physics.Closure.NSABCDConcentratedCompletionCutExact as NSCut
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
@@ -719,7 +727,209 @@ unifierSCALECommitCoalescingDoesNotCreateSemanticAuthority :
 unifierSCALECommitCoalescingDoesNotCreateSemanticAuthority =
   SCALEReview.commitCoalescingDoesNotCreateSemanticAuthority
 
-unifierSCALEFewCommitBarriersDoNotProveSemanticIndependence :
-  SCALEReview.FewCommitBarriersProveSemanticIndependence → ⊥
-unifierSCALEFewCommitBarriersDoNotProveSemanticIndependence =
-  SCALEReview.fewCommitBarriersDoNotProveSemanticIndependence
+unifierFleetNumericABIReceipt =
+  FleetGapTOE.fleetNumericABIReceipt
+
+unifierFleetResidualInvariantReceipt =
+  FleetGapTOE.fleetResidualInvariantReceipt
+
+unifierFleetPromotionObligationIndex =
+  FleetGapTOE.fleetPromotionObligationIndex
+
+unifierFleetFormalGapZKPFrame :
+  ParetoSnowballTOE.TOEZKPFrame
+unifierFleetFormalGapZKPFrame =
+  FleetGapTOE.canonicalFleetFormalGapZKPFrame
+
+unifierFleetEigenPriorityDoesNotCreateProof :
+  FleetGapTOE.FleetEigenPriorityCreatesProof → ⊥
+unifierFleetEigenPriorityDoesNotCreateProof =
+  FleetGapTOE.fleetEigenPriorityDoesNotCreateProof
+
+unifierFleetExternalCountDoesNotCreateFormalDischarge :
+  FleetGapTOE.FleetExternalCountCreatesFormalDischarge → ⊥
+unifierFleetExternalCountDoesNotCreateFormalDischarge =
+  FleetGapTOE.fleetExternalCountDoesNotCreateFormalDischarge
+
+unifierFleetDischargedFibresRemainOutOfTarget :
+  FleetGapTOE.FleetDischargedFibreRetargetPermission → ⊥
+unifierFleetDischargedFibresRemainOutOfTarget =
+  FleetGapTOE.fleetDischargedFibresCannotBeRetargetedByThisBoundary
+
+unifierFleetContradictionGapsRemainSeparate :
+  FleetGapTOE.FleetContradictionGapReclassificationPermission → ⊥
+unifierFleetContradictionGapsRemainSeparate =
+  FleetGapTOE.fleetContradictionsCannotBeRelabelledAsFormalGaps
+
+
+unifierFleetPlanningTextDoesNotCreateFormalResidual :
+  FleetGapTOE.PlanningSourceTextFormalResidualFlag
+unifierFleetPlanningTextDoesNotCreateFormalResidual =
+  FleetGapTOE.fleetPlanningTextDoesNotCreateFormalResidual
+
+------------------------------------------------------------------------
+-- Joint Balaban RG + R559 same-owner max-cut facade.
+------------------------------------------------------------------------
+
+import DASHI.Unified.BalabanR559TOEMaxCutExact as BalabanR559TOE
+
+unifierBalabanR559MaxCutReceipt :
+  BalabanR559TOE.BalabanR559TOEMaxCutReceipt
+unifierBalabanR559MaxCutReceipt =
+  BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifierBalabanR559PublishedContinuumStillOpen :
+  BalabanR559TOE.publishedContinuumPromotion
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ false
+unifierBalabanR559PublishedContinuumStillOpen =
+  BalabanR559TOE.publishedContinuumPromotionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifierBalabanR559ContinuumMassGapStillBlocked :
+  BalabanR559TOE.continuumMassGapPromotion
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ false
+unifierBalabanR559ContinuumMassGapStillBlocked =
+  BalabanR559TOE.continuumMassGapPromotionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifierBalabanR559ClayPromotionStillBlocked :
+  BalabanR559TOE.clayPromotion
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ false
+unifierBalabanR559ClayPromotionStillBlocked =
+  BalabanR559TOE.clayPromotionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+
+------------------------------------------------------------------------
+-- Direct constructive Balaban RG scale-transfer non-promotion.
+-- The joint receipt is the normalized facade path.
+------------------------------------------------------------------------
+
+unifierBalabanR559Gate4UnresolvedCount : ℕ
+unifierBalabanR559Gate4UnresolvedCount =
+  BalabanR559TOE.gate4UnresolvedCount
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifierBalabanR559Gate4UnresolvedCountIs58 :
+  unifierBalabanR559Gate4UnresolvedCount ≡ 58
+unifierBalabanR559Gate4UnresolvedCountIs58 =
+  BalabanR559TOE.gate4UnresolvedCountIs58
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifierBalabanR559Gate4DefinitionLevel : ProofLevel
+unifierBalabanR559Gate4DefinitionLevel =
+  BalabanR559TOE.gate4DefinitionLevel
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifierBalabanR559Gate4InhabitantsLevel : ProofLevel
+unifierBalabanR559Gate4InhabitantsLevel =
+  BalabanR559TOE.gate4InhabitantsLevel
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+unifierBalabanScaleTransferNonPromotion :
+  BalabanR559TOE.ScaleTransferPromotion → ⊥
+unifierBalabanScaleTransferNonPromotion =
+  BalabanR559TOE.scaleTransferPromotionEliminator
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+------------------------------------------------------------------------
+-- SensibLaw / legal governance TOE normalization.
+-- Unifier consumes the theorem owner.  It does not create authority.
+------------------------------------------------------------------------
+
+unifierSensibLawGovernanceSemanticBoundary :
+  Authority.AuthorityNonPromotionBundle
+unifierSensibLawGovernanceSemanticBoundary =
+  GovernanceTOE.governanceSemanticAuthorityBoundary
+
+unifierSensibLawSemanticTruthAuthorityStillClosed :
+  Authority.truthAuthorityFlag unifierSensibLawGovernanceSemanticBoundary ≡ false
+unifierSensibLawSemanticTruthAuthorityStillClosed =
+  GovernanceTOE.governanceSemanticTruthAuthorityStillClosed
+
+unifierSensibLawSemanticLegalAuthorityStillClosed :
+  Authority.legalAuthorityFlag unifierSensibLawGovernanceSemanticBoundary ≡ false
+unifierSensibLawSemanticLegalAuthorityStillClosed =
+  GovernanceTOE.governanceSemanticLegalAuthorityStillClosed
+
+unifierSensibLawSemanticAllAuthorityStillClosed :
+  Authority.promotesAnyAuthority unifierSensibLawGovernanceSemanticBoundary ≡ false
+unifierSensibLawSemanticAllAuthorityStillClosed =
+  GovernanceTOE.governanceSemanticAllAuthorityStillClosed
+
+unifierSensibLawLegalAuthorityBoundaryReceipt :
+  AuthorityBoundary.AuthorityBoundaryReceipt
+unifierSensibLawLegalAuthorityBoundaryReceipt =
+  GovernanceTOE.governanceLegalAuthorityBoundaryReceipt
+
+unifierSensibLawLegalRuntimeContract :
+  LegalRuntime.AgdaFirstLegalRuntimeContract
+unifierSensibLawLegalRuntimeContract =
+  GovernanceTOE.governanceLegalRuntimeContract
+
+unifierSensibLawDomainTransportReceipt :
+  Domain.DomainTransportReceipt
+unifierSensibLawDomainTransportReceipt =
+  GovernanceTOE.governanceDomainTransportReceipt
+
+unifierSensibLawRepresentationEqualityDoesNotCreateLegalAuthority :
+  Domain.DomainTransportReceipt.representationEqualityCreatesLegalAuthority
+    unifierSensibLawDomainTransportReceipt
+  ≡ false
+unifierSensibLawRepresentationEqualityDoesNotCreateLegalAuthority =
+  GovernanceTOE.governanceRepresentationEqualityDoesNotCreateLegalAuthority
+
+unifierSensibLawVendorIdentityDoesNotCreateAuthority :
+  Domain.DomainTransportReceipt.vendorIdentityCreatesAuthority unifierSensibLawDomainTransportReceipt
+  ≡ false
+unifierSensibLawVendorIdentityDoesNotCreateAuthority =
+  GovernanceTOE.governanceVendorIdentityDoesNotCreateAuthority
+
+unifierSensibLawTargetDomainNeedsOwnAuthorityWitness :
+  Domain.DomainTransportReceipt.targetDomainNeedsOwnAuthorityWitness unifierSensibLawDomainTransportReceipt
+  ≡ true
+unifierSensibLawTargetDomainNeedsOwnAuthorityWitness =
+  GovernanceTOE.governanceTargetDomainNeedsOwnAuthorityWitness
+
+unifierSensibLawGovernanceZKPFrame :
+  GovernanceTOE.SensibLawGovernanceTOEZKPFrame
+unifierSensibLawGovernanceZKPFrame =
+  GovernanceTOE.canonicalSensibLawGovernanceTOEZKPFrame
+
+
+------------------------------------------------------------------------
+-- Direct SensibLaw legal-compliance firewalls.
+------------------------------------------------------------------------
+
+unifierSensibLawGovernanceComplianceReceipt :
+  ComplianceTOE.SensibLawGovernanceComplianceTOEReceipt
+unifierSensibLawGovernanceComplianceReceipt =
+  ComplianceTOE.canonicalSensibLawGovernanceComplianceReceipt
+
+unifierSensibLawQualificationDoesNotCreateForensicCompliance :
+  ComplianceTOE.QualificationAutomaticallyForensicCompliance → ⊥
+unifierSensibLawQualificationDoesNotCreateForensicCompliance =
+  ComplianceTOE.sensibLawQualificationDoesNotCreateForensicCompliance
+
+unifierSensibLawReviewDoesNotCreateApplicability :
+  ComplianceTOE.LegalReviewDecisionCreatesApplicability → ⊥
+unifierSensibLawReviewDoesNotCreateApplicability =
+  ComplianceTOE.sensibLawReviewDoesNotCreateApplicability
+
+unifierSensibLawParserCandidateDoesNotAuthorizeAdmission :
+  ComplianceTOE.ParserCandidateAloneAuthorizesAdmission → ⊥
+unifierSensibLawParserCandidateDoesNotAuthorizeAdmission =
+  ComplianceTOE.sensibLawParserCandidateDoesNotAuthorizeAdmission
+
+unifierSensibLawOfficialSurfaceDoesNotRecoverFineLegalState :
+  ComplianceTOE.OfficialLegalSurfaceRecoversFineState → ⊥
+unifierSensibLawOfficialSurfaceDoesNotRecoverFineLegalState =
+  ComplianceTOE.sensibLawOfficialSurfaceDoesNotRecoverFineLegalState
+
+unifierSensibLawLegalityAloneDoesNotCreateLegitimacy :
+  ComplianceTOE.LegalOnlyCreatesLegitimacy → ⊥
+unifierSensibLawLegalityAloneDoesNotCreateLegitimacy =
+  ComplianceTOE.sensibLawLegalityAloneDoesNotCreateLegitimacy

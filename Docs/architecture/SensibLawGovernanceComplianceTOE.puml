@@ -1,0 +1,72 @@
+@startuml SensibLawGovernanceComplianceTOE
+title SensibLaw governance and compliance firewalls at DASHI TOE
+
+skinparam componentStyle rectangle
+
+package "Canonical #1323 governance facade" {
+  [SensibLawGovernanceTOEExact] as Governance
+}
+
+package "Existing source-owned compliance proofs" {
+  [ExpertEvidenceProductionIntegrity] as Expert
+  [RealMatterReviewDecision] as Review
+  [LegalSemanticAdmissionFrontier] as Admission
+  [PromotionSpine] as Promotion
+  [LegalDecisionDoubleProjection] as LegalDecision
+  [LegitimacyEvidenceSeparation] as Legitimacy
+  [FleetFormalGapTargetTOEExact] as Fleet
+}
+
+package "Thin extension" {
+  [SensibLawGovernanceComplianceTOEExact] as Compliance
+  [SensibLawGovernanceComplianceTOEValidation] as Validation
+}
+
+package "TOE roots" {
+  [EverythingTOESymmetryResolved369] as TOE
+  [Unifier] as Unifier
+  [Unified.Everything] as Unified
+}
+
+Governance --> Compliance : vendor-neutral governance
+Expert --> Compliance : qualification != forensic compliance
+Review --> Compliance : review != applicability or truth
+Admission --> Compliance : candidate != admission authority
+Promotion --> Compliance : missing gates -> abstain
+LegalDecision --> Compliance : official surface loses fine state
+Legitimacy --> Compliance : legality != legitimacy
+Fleet --> Compliance : target 58 only
+584 discharged, 44 separate
+
+Compliance --> TOE
+Compliance --> Unifier
+Compliance --> Validation
+TOE --> Validation
+Unifier --> Validation
+Compliance --> Unified
+Validation --> Unified
+
+note right of Governance
+Actionstep is not a theorem owner here.
+Vendor identity does not create authority.
+A target domain needs its own authority witness.
+end note
+
+note bottom of Fleet
+The external fleet receipt is scheduling context.
+Eigenvalue magnitude and external counts do not create proof.
+Independent equal cardinalities do not create same-object identity.
+end note
+
+note left of Compliance
+O: close the missing compliance firewall seam
+R: reuse #1323 and canonical proof owners
+C: add one receipt and facade aliases
+S: preserve non-promotion and non-factorability
+L: one disjoint legal-compliance lane
+P: current owners exist; ESD stays read-only
+G: standards are process lenses, not certification
+F: exact-owner validation, trust scan, ESD scan, referee/preflight
+end note
+
+@enduml

@@ -1,6 +1,12 @@
 import DASHI.Unified.GovernedLegalWorkflowComplianceTOEExact as LegalCompliance
 module DASHI.EverythingTOESymmetryResolved369 where
-import DASHI.Analysis.RiemannG21StrictTP2TrancheReceipt as RHFrontier
+
+import DASHI.Unified.SensibLawGovernanceTOEExact as GovernanceTOE
+import DASHI.Unified.SensibLawGovernanceComplianceTOEExact as ComplianceTOE
+import DASHI.Core.AuthorityNonPromotionCore as Authority
+import DASHI.Promotion.AuthorityBoundaryCore as AuthorityBoundary
+import DASHI.Law.SensibLawAgdaFirstLegalRuntimeEverything as LegalRuntime
+import DASHI.Governance.DomainPermeabilityAuthorityTransport as Domain
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Physics.Closure.NSABCDConcentratedCompletionCutExact as NSCut
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
@@ -827,17 +833,339 @@ toe369SCALERepetitionDoesNotCreateIndependentEvidence =
 -- SCALE physical-economy non-promotion firewalls.
 ------------------------------------------------------------------------
 
-toe369SCALEReviewProjectionReuseDoesNotCreateClaimTruth :
-  SCALEReview.ReviewProjectionReuseCreatesClaimTruth → ⊥
-toe369SCALEReviewProjectionReuseDoesNotCreateClaimTruth =
-  SCALEReview.reviewProjectionReuseDoesNotCreateClaimTruth
+toe369Ternary27RotationOrderThree =
+  MaxCut369.toe27RotationOrderThree
 
-toe369SCALECommitCoalescingDoesNotCreateSemanticAuthority :
-  SCALEReview.CommitCoalescingCreatesSemanticAuthority → ⊥
-toe369SCALECommitCoalescingDoesNotCreateSemanticAuthority =
-  SCALEReview.commitCoalescingDoesNotCreateSemanticAuthority
+toe369Ternary27OriginFixed =
+  MaxCut369.toe27OriginFixed
 
-toe369SCALEFewCommitBarriersDoNotProveSemanticIndependence :
-  SCALEReview.FewCommitBarriersProveSemanticIndependence → ⊥
-toe369SCALEFewCommitBarriersDoNotProveSemanticIndependence =
-  SCALEReview.fewCommitBarriersDoNotProveSemanticIndependence
+toe369FullCubeRotationNotFree :
+  MaxCut369.FullCubeRotationFree → ⊥
+toe369FullCubeRotationNotFree =
+  MaxCut369.toe27FullCubeRotationNotFree
+
+toe369MonsterPhaseConjugationIntertwiner =
+  MaxCut369.toe27MonsterPhaseConjugationIntertwiner
+
+toe369Ternary27PhaseReductionNotGlobalInversion =
+  MaxCut369.toe27PhaseReductionNotGlobalInversion
+
+toe369Ternary27OrbitIndexingNotSemanticIdentity =
+  MaxCut369.toe27OrbitIndexingNotSemanticIdentity
+
+toe369Ternary27ReductionNotMonster42SameObject =
+  MaxCut369.toe27ReductionNotMonster42SameObject
+
+toe369FullGradeDimensionDoesNotCreateFaithfulness =
+  MaxCut369.toeFullGradeDimensionDoesNotCreateFaithfulness
+
+toe369FullGradeSameCarrierDoesNotCreateActionAgreement =
+  MaxCut369.toeFullGradeSameCarrierDoesNotCreateActionAgreement
+
+toe369FullGradeCharacterDoesNotCreateActionAgreement =
+  MaxCut369.toeFullGradeCharacterDoesNotCreateActionAgreement
+
+toe369ProjectedDimensionDoesNotCreateAction =
+  MaxCut369.toeProjectedDimensionDoesNotCreateAction
+
+toe369CoordinateRetractionDoesNotCreateProjectedAction =
+  MaxCut369.toeCoordinateRetractionDoesNotCreateProjectedAction
+
+toe369ProjectedCharacterDoesNotCreateAction =
+  MaxCut369.toeProjectedCharacterDoesNotCreateAction
+
+toe369KernelTrace53DoesNotIdentify3B =
+  MaxCut369.toeKernelTrace53DoesNotIdentify3B
+
+toe369KernelCharacterIsotypyDoesNotConstructActionIntertwiner =
+  MaxCut369.toeKernelCharacterIsotypyDoesNotConstructActionIntertwiner
+
+toe369KernelActualZetaRecognitionStillOpen =
+  MaxCut369.toeKernelActualZetaRecognitionStillOpen
+
+toe369KernelFullHyperformalActionStillOpen =
+  MaxCut369.toeKernelFullHyperformalActionStillOpen
+
+toe369SelectedSameElementClass3BStillOpen =
+  MaxCut369.toeSelectedSameElementClass3BStillOpen
+
+toe369SingleActionProducerStillOpen =
+  MaxCut369.toeSingleActionProducerStillOpen
+
+toe369FiniteChartDoesNotCreateLinearMultiplicityAction =
+  MaxCut369.toeFiniteChartDoesNotCreateLinearMultiplicityAction
+
+toe369NinetySlicesDoNotCreatePermutationRepresentation =
+  MaxCut369.toeNinetySlicesDoNotCreatePermutationRepresentation
+
+toe369CharacterDoesNotCreateHomEvaluation =
+  MaxCut369.toeCharacterDoesNotCreateHomEvaluation
+
+toe369PermutationNoGoDoesNotCreateLinearAction =
+  MaxCut369.toePermutationNoGoDoesNotCreateLinearAction
+
+
+------------------------------------------------------------------------
+-- Singular-basin / coarse-RG obstruction convergence.
+------------------------------------------------------------------------
+
+toeSingularBasinFiniteReduction =
+  SingularBasinTOE.finiteReduction
+
+toeSingularBasinFiniteReductionNotBasinPreserving =
+  SingularBasinTOE.finiteReductionNotBasinPreserving
+
+toeSingularBasinFiniteFullBasinDoesNotFactor =
+  SingularBasinTOE.finiteFullBasinDoesNotFactorThroughReduction
+
+toeSingularBasinSelectedResolutionNotRobust =
+  SingularBasinTOE.selectedResolutionNotRobust
+
+toeSingularBasinSelectedProjectionNotResolutionAdequate =
+  SingularBasinTOE.selectedProjectionNotResolutionAdequate
+
+toeSingularBasinSelectedResolutionRefutesGlobalFactorisation =
+  SingularBasinTOE.selectedResolutionAlsoRefutesGlobalFactorisation
+
+toeYanchukIntervalODECheckerStillMissing =
+  SingularBasinTOE.intervalODECheckerStillMissing
+
+toeYanchukCheckerSoundStillMissing =
+  SingularBasinTOE.checkerSoundToBasinCertificateStillMissing
+
+toeYanchukAnalyticGlobalWidthLawStillMissing =
+  SingularBasinTOE.analyticGlobalWidthLawStillMissing
+
+toeYanchukIntervalStableManifoldTubeStillMissing =
+  SingularBasinTOE.intervalStableManifoldTubeStillMissing
+
+toeYanchukBasinSeparationTheoremStillMissing =
+  SingularBasinTOE.basinSeparationTheoremStillMissing
+
+toeSingularBasinZKPFrame :
+  SingularBasinTOE.SingularBasinTOEZKPFrame
+toeSingularBasinZKPFrame =
+  SingularBasinTOE.canonicalSingularBasinTOEZKPFrame
+
+
+------------------------------------------------------------------------
+-- Fleet R4/R5 formal-gap selection boundary.
+-- External spectral priority is planning context only.
+------------------------------------------------------------------------
+
+toeFleetFormalGapTargetReceipt :
+  FleetGapTOE.FleetFormalGapTargetReceipt
+toeFleetFormalGapTargetReceipt =
+  FleetGapTOE.canonicalFleetFormalGapTargetReceipt
+
+toeFleetCoordinateRebuildabilityReceipt =
+  FleetGapTOE.fleetCoordinateRebuildabilityReceipt
+
+toeFleetNumericABIReceipt =
+  FleetGapTOE.fleetNumericABIReceipt
+
+toeFleetResidualInvariantReceipt =
+  FleetGapTOE.fleetResidualInvariantReceipt
+
+toeFleetPromotionObligationIndex =
+  FleetGapTOE.fleetPromotionObligationIndex
+
+toeFleetFormalGapZKPFrame :
+  ParetoSnowballTOE.TOEZKPFrame
+toeFleetFormalGapZKPFrame =
+  FleetGapTOE.canonicalFleetFormalGapZKPFrame
+
+toeFleetEigenPriorityDoesNotCreateProof :
+  FleetGapTOE.FleetEigenPriorityCreatesProof → ⊥
+toeFleetEigenPriorityDoesNotCreateProof =
+  FleetGapTOE.fleetEigenPriorityDoesNotCreateProof
+
+toeFleetExternalCountDoesNotCreateFormalDischarge :
+  FleetGapTOE.FleetExternalCountCreatesFormalDischarge → ⊥
+toeFleetExternalCountDoesNotCreateFormalDischarge =
+  FleetGapTOE.fleetExternalCountDoesNotCreateFormalDischarge
+
+toeFleetDischargedFibresRemainOutOfTarget :
+  FleetGapTOE.FleetDischargedFibreRetargetPermission → ⊥
+toeFleetDischargedFibresRemainOutOfTarget =
+  FleetGapTOE.fleetDischargedFibresCannotBeRetargetedByThisBoundary
+
+toeFleetContradictionGapsRemainSeparate :
+  FleetGapTOE.FleetContradictionGapReclassificationPermission → ⊥
+toeFleetContradictionGapsRemainSeparate =
+  FleetGapTOE.fleetContradictionsCannotBeRelabelledAsFormalGaps
+
+toeFleetPlanningTextDoesNotCreateFormalResidual :
+  FleetGapTOE.PlanningSourceTextFormalResidualFlag
+toeFleetPlanningTextDoesNotCreateFormalResidual =
+  FleetGapTOE.fleetPlanningTextDoesNotCreateFormalResidual
+
+------------------------------------------------------------------------
+-- Joint Balaban RG + R559 same-owner max-cut receipt.
+------------------------------------------------------------------------
+
+import DASHI.Unified.BalabanR559TOEMaxCutExact as BalabanR559TOE
+
+toeBalabanR559MaxCutReceipt :
+  BalabanR559TOE.BalabanR559TOEMaxCutReceipt
+toeBalabanR559MaxCutReceipt =
+  BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+toeBalabanR559PublishedContinuumStillOpen :
+  BalabanR559TOE.publishedContinuumPromotion
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ false
+toeBalabanR559PublishedContinuumStillOpen =
+  BalabanR559TOE.publishedContinuumPromotionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+toeBalabanR559ContinuumMassGapStillBlocked :
+  BalabanR559TOE.continuumMassGapPromotion
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ false
+toeBalabanR559ContinuumMassGapStillBlocked =
+  BalabanR559TOE.continuumMassGapPromotionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+toeBalabanR559ClayPromotionStillBlocked :
+  BalabanR559TOE.clayPromotion
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ false
+toeBalabanR559ClayPromotionStillBlocked =
+  BalabanR559TOE.clayPromotionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+
+------------------------------------------------------------------------
+-- Direct constructive Balaban RG scale-transfer non-promotion.
+-- The theorem owner remains the scale-transfer frontier.
+-- The joint receipt is the normalized TOE path.
+------------------------------------------------------------------------
+
+import Data.Empty using (⊥)
+
+toeBalabanR559Gate4UnresolvedCount : ℕ
+toeBalabanR559Gate4UnresolvedCount =
+  BalabanR559TOE.gate4UnresolvedCount
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+toeBalabanR559Gate4UnresolvedCountIs58 :
+  toeBalabanR559Gate4UnresolvedCount ≡ 58
+toeBalabanR559Gate4UnresolvedCountIs58 =
+  BalabanR559TOE.gate4UnresolvedCountIs58
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+toeBalabanR559Gate4DefinitionLevel : ProofLevel
+toeBalabanR559Gate4DefinitionLevel =
+  BalabanR559TOE.gate4DefinitionLevel
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+toeBalabanR559Gate4InhabitantsLevel : ProofLevel
+toeBalabanR559Gate4InhabitantsLevel =
+  BalabanR559TOE.gate4InhabitantsLevel
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+toeBalabanScaleTransferNonPromotion :
+  BalabanR559TOE.ScaleTransferPromotion → ⊥
+toeBalabanScaleTransferNonPromotion =
+  BalabanR559TOE.scaleTransferPromotionEliminator
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+------------------------------------------------------------------------
+-- SensibLaw / legal governance TOE normalization.
+-- The imported governance owner remains the theorem authority.
+------------------------------------------------------------------------
+
+toeSensibLawGovernanceSemanticBoundary :
+  Authority.AuthorityNonPromotionBundle
+toeSensibLawGovernanceSemanticBoundary =
+  GovernanceTOE.governanceSemanticAuthorityBoundary
+
+toeSensibLawSemanticTruthAuthorityStillClosed :
+  Authority.truthAuthorityFlag toeSensibLawGovernanceSemanticBoundary ≡ false
+toeSensibLawSemanticTruthAuthorityStillClosed =
+  GovernanceTOE.governanceSemanticTruthAuthorityStillClosed
+
+toeSensibLawSemanticLegalAuthorityStillClosed :
+  Authority.legalAuthorityFlag toeSensibLawGovernanceSemanticBoundary ≡ false
+toeSensibLawSemanticLegalAuthorityStillClosed =
+  GovernanceTOE.governanceSemanticLegalAuthorityStillClosed
+
+toeSensibLawSemanticAllAuthorityStillClosed :
+  Authority.promotesAnyAuthority toeSensibLawGovernanceSemanticBoundary ≡ false
+toeSensibLawSemanticAllAuthorityStillClosed =
+  GovernanceTOE.governanceSemanticAllAuthorityStillClosed
+
+toeSensibLawLegalAuthorityBoundaryReceipt :
+  AuthorityBoundary.AuthorityBoundaryReceipt
+toeSensibLawLegalAuthorityBoundaryReceipt =
+  GovernanceTOE.governanceLegalAuthorityBoundaryReceipt
+
+toeSensibLawLegalRuntimeContract :
+  LegalRuntime.AgdaFirstLegalRuntimeContract
+toeSensibLawLegalRuntimeContract =
+  GovernanceTOE.governanceLegalRuntimeContract
+
+toeSensibLawDomainTransportReceipt :
+  Domain.DomainTransportReceipt
+toeSensibLawDomainTransportReceipt =
+  GovernanceTOE.governanceDomainTransportReceipt
+
+toeSensibLawRepresentationEqualityDoesNotCreateLegalAuthority :
+  Domain.DomainTransportReceipt.representationEqualityCreatesLegalAuthority
+    toeSensibLawDomainTransportReceipt
+  ≡ false
+toeSensibLawRepresentationEqualityDoesNotCreateLegalAuthority =
+  GovernanceTOE.governanceRepresentationEqualityDoesNotCreateLegalAuthority
+
+toeSensibLawVendorIdentityDoesNotCreateAuthority :
+  Domain.DomainTransportReceipt.vendorIdentityCreatesAuthority toeSensibLawDomainTransportReceipt
+  ≡ false
+toeSensibLawVendorIdentityDoesNotCreateAuthority =
+  GovernanceTOE.governanceVendorIdentityDoesNotCreateAuthority
+
+toeSensibLawTargetDomainNeedsOwnAuthorityWitness :
+  Domain.DomainTransportReceipt.targetDomainNeedsOwnAuthorityWitness toeSensibLawDomainTransportReceipt
+  ≡ true
+toeSensibLawTargetDomainNeedsOwnAuthorityWitness =
+  GovernanceTOE.governanceTargetDomainNeedsOwnAuthorityWitness
+
+toeSensibLawGovernanceZKPFrame :
+  GovernanceTOE.SensibLawGovernanceTOEZKPFrame
+toeSensibLawGovernanceZKPFrame =
+  GovernanceTOE.canonicalSensibLawGovernanceTOEZKPFrame
+
+
+------------------------------------------------------------------------
+-- Direct SensibLaw legal-compliance firewalls.
+------------------------------------------------------------------------
+
+toeSensibLawGovernanceComplianceReceipt :
+  ComplianceTOE.SensibLawGovernanceComplianceTOEReceipt
+toeSensibLawGovernanceComplianceReceipt =
+  ComplianceTOE.canonicalSensibLawGovernanceComplianceReceipt
+
+toeSensibLawQualificationDoesNotCreateForensicCompliance :
+  ComplianceTOE.QualificationAutomaticallyForensicCompliance → ⊥
+toeSensibLawQualificationDoesNotCreateForensicCompliance =
+  ComplianceTOE.sensibLawQualificationDoesNotCreateForensicCompliance
+
+toeSensibLawReviewDoesNotCreateApplicability :
+  ComplianceTOE.LegalReviewDecisionCreatesApplicability → ⊥
+toeSensibLawReviewDoesNotCreateApplicability =
+  ComplianceTOE.sensibLawReviewDoesNotCreateApplicability
+
+toeSensibLawParserCandidateDoesNotAuthorizeAdmission :
+  ComplianceTOE.ParserCandidateAloneAuthorizesAdmission → ⊥
+toeSensibLawParserCandidateDoesNotAuthorizeAdmission =
+  ComplianceTOE.sensibLawParserCandidateDoesNotAuthorizeAdmission
+
+toeSensibLawOfficialSurfaceDoesNotRecoverFineLegalState :
+  ComplianceTOE.OfficialLegalSurfaceRecoversFineState → ⊥
+toeSensibLawOfficialSurfaceDoesNotRecoverFineLegalState =
+  ComplianceTOE.sensibLawOfficialSurfaceDoesNotRecoverFineLegalState
+
+toeSensibLawLegalityAloneDoesNotCreateLegitimacy :
+  ComplianceTOE.LegalOnlyCreatesLegitimacy → ⊥
+toeSensibLawLegalityAloneDoesNotCreateLegitimacy =
+  ComplianceTOE.sensibLawLegalityAloneDoesNotCreateLegitimacy
