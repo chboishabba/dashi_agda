@@ -57,6 +57,11 @@ def check(manifest: dict[str, Any], root: Path) -> dict[str, Any]:
         errors.append("records must be a list")
     seen: set[str] = set()
     verified: set[str] = set()
+    # A single valid file/hash cannot be relabelled as 24 independent receipts.
+    # Multi-channel acquisitions must provide separately hashed, role-specific
+    # extracts with a provenance link, rather than counting the identical bytes.
+    used_files: dict[Path, str] = {}
+    used_digests: dict[str, str] = {}
     for i, record in enumerate(record_list):
         if not isinstance(record, dict):
             errors.append(f"record {i}: not an object")
@@ -91,6 +96,14 @@ def check(manifest: dict[str, Any], root: Path) -> dict[str, Any]:
         if not isinstance(supplied, str) or len(supplied) != 64 or supplied.lower() != _digest(path):
             errors.append(f"record {i}: hash mismatch or absent hash for {role}")
             continue
+        if path in used_files:
+            errors.append(f"record {i}: same evidence file re-used for {used_files[path]} and {role}")
+            continue
+        if supplied.lower() in used_digests:
+            errors.append(f"record {i}: identical evidence bytes re-labelled for {used_digests[supplied.lower()]} and {role}")
+            continue
+        used_files[path] = role
+        used_digests[supplied.lower()] = role
         verified.add(role)
     gates: dict[str, Any] = {}
     for gate, roles in ROLES.items():
