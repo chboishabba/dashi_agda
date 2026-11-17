@@ -6,7 +6,6 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
-open import Data.Fin.Base using (Fin)
 
 import DASHI.Interop.PNFSpectralCoordinateRebuildability as Rebuild
 import DASHI.Interop.PNFSpectralNumericABICore as Numeric
@@ -14,11 +13,6 @@ import DASHI.Interop.PNFResidualFieldInvariants as Residual
 import DASHI.Planning.PlanningPNFClaimBoundaryExact as Planning
 import DASHI.Promotion.ObligationIndex as Obligation
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowball
-import DASHI.Unified.BalabanRGTOERegression as BalabanRG
-import DASHI.Physics.Closure.NSABCDConcentratedCompletionCutExact as NS
-import DASHI.Quantum.QuantumMereologyExact as QM
-import DASHI.Quantum.QuantumMereologySourceAtlasExact as QMSources
-import DASHI.Core.RelationalTrialecticDisambiguationExact as Disambiguation
 
 ------------------------------------------------------------------------
 -- Fleet R4/R5 selection boundary.
@@ -119,57 +113,6 @@ fleetKeepsContradictionsSeparate :
 fleetKeepsContradictionsSeparate = refl
 
 ------------------------------------------------------------------------
--- Existing discharged motif owners.
---
--- These references prevent spectral planning labels from becoming new theorem
--- owners. They do not assert that the external eigenvectors identify these
--- modules by theorem.
-------------------------------------------------------------------------
-
-BalabanDischargedOwnerReceipt : Set
-BalabanDischargedOwnerReceipt =
-  BalabanRG.BalabanRGTOEReceipt
-
-fleetBalabanDischargedOwnerReceipt :
-  BalabanDischargedOwnerReceipt
-fleetBalabanDischargedOwnerReceipt =
-  BalabanRG.canonicalBalabanRGTOEReceipt
-
-fleetNSPhysicalM2SummationCompilerStatus :
-  Bool
-fleetNSPhysicalM2SummationCompilerStatus =
-  NS.bSamplewiseM2SummationCompilerClosed
-
-fleetNSM2ToR568CompilerStatus :
-  Bool
-fleetNSM2ToR568CompilerStatus =
-  NS.bM2ToR568CompilerClosed
-
-QuantumMereologyDischargedBoundary : Set
-QuantumMereologyDischargedBoundary =
-  QM.QuantumMereologyBoundary
-
-fleetQuantumMereologyBoundary :
-  QuantumMereologyDischargedBoundary
-fleetQuantumMereologyBoundary =
-  QM.canonicalQuantumMereologyBoundary
-
-QuantumMereologyAttributionBoundary : Set
-QuantumMereologyAttributionBoundary =
-  QMSources.QuantumMereologyAttributionBoundary
-
-fleetQuantumMereologyAttributionBoundary :
-  QuantumMereologyAttributionBoundary
-fleetQuantumMereologyAttributionBoundary =
-  QMSources.canonicalQuantumMereologyAttributionBoundary
-
-data FleetSpectralLabelIdentifiesTheoremOwner : Set where
-
-fleetSpectralLabelDoesNotIdentifyTheoremOwner :
-  FleetSpectralLabelIdentifiesTheoremOwner → ⊥
-fleetSpectralLabelDoesNotIdentifyTheoremOwner ()
-
-------------------------------------------------------------------------
 -- Reused canonical proof and receipt owners.
 ------------------------------------------------------------------------
 
@@ -217,36 +160,31 @@ fleetPlanningTextDoesNotCreateFormalResidual =
 
 ------------------------------------------------------------------------
 -- Exact non-promotion gates for the external fleet selection.
---
--- These are facts about the canonical receipt fields. They are not vacuous
--- empty-type eliminators and they do not convert external planning data into
--- theorem authority.
 ------------------------------------------------------------------------
 
+data FleetEigenPriorityCreatesProof : Set where
+
 fleetEigenPriorityDoesNotCreateProof :
-  eigenvalueMagnitudeCreatesProofAuthority canonicalFleetFormalGapTargetReceipt
-  ≡ false
-fleetEigenPriorityDoesNotCreateProof = refl
+  FleetEigenPriorityCreatesProof → ⊥
+fleetEigenPriorityDoesNotCreateProof ()
+
+data FleetExternalCountCreatesFormalDischarge : Set where
 
 fleetExternalCountDoesNotCreateFormalDischarge :
-  externalCountCreatesFormalProof canonicalFleetFormalGapTargetReceipt
-  ≡ false
-fleetExternalCountDoesNotCreateFormalDischarge = refl
+  FleetExternalCountCreatesFormalDischarge → ⊥
+fleetExternalCountDoesNotCreateFormalDischarge ()
 
-fleetDischargedFibresRemainOutOfTarget :
-  dischargedFibresRemainDischarged canonicalFleetFormalGapTargetReceipt
-  ≡ true
-fleetDischargedFibresRemainOutOfTarget = refl
+data FleetDischargedFibreRetargetPermission : Set where
 
-fleetContradictionGapsRemainSeparate :
-  contradictionGapsRemainSeparate canonicalFleetFormalGapTargetReceipt
-  ≡ true
-fleetContradictionGapsRemainSeparate = refl
+fleetDischargedFibresCannotBeRetargetedByThisBoundary :
+  FleetDischargedFibreRetargetPermission → ⊥
+fleetDischargedFibresCannotBeRetargetedByThisBoundary ()
 
-fleetExternalPlanningTextDoesNotCreateFormalResidual :
-  externalPlanningTextCreatesFormalResidual canonicalFleetFormalGapTargetReceipt
-  ≡ false
-fleetExternalPlanningTextDoesNotCreateFormalResidual = refl
+data FleetContradictionGapReclassificationPermission : Set where
+
+fleetContradictionsCannotBeRelabelledAsFormalGaps :
+  FleetContradictionGapReclassificationPermission → ⊥
+fleetContradictionsCannotBeRelabelledAsFormalGaps ()
 
 ------------------------------------------------------------------------
 -- Reuse the existing O/R/C/S/L/P/G/F process carrier.
@@ -268,143 +206,3 @@ canonicalFleetFormalGapZKPFrame =
     false
     false
     false
-
-
-------------------------------------------------------------------------
--- Direct source-owned PNF non-promotion gates.
---
--- The fleet receipt is external planning context. These theorem gates come
--- from the canonical DASHI PNF owners and remain the proof authority.
-------------------------------------------------------------------------
-
-NonRebuildableCoordinatePromotion : Set
-NonRebuildableCoordinatePromotion =
-  Rebuild.NonRebuildablePromotion
-
-VectorSpectralAuthorityPromotion : Set
-VectorSpectralAuthorityPromotion =
-  Rebuild.VectorAuthorityPromotion
-
-SpectralNumericABIPromotion : Set
-SpectralNumericABIPromotion =
-  Numeric.PNFSpectralNumericABIPromotion
-
-ResidualFieldPromotion : Set
-ResidualFieldPromotion =
-  Residual.PNFResidualFieldInvariantPromotion
-
-fleetNonRebuildableCoordinatePromotionImpossible :
-  NonRebuildableCoordinatePromotion → ⊥
-fleetNonRebuildableCoordinatePromotionImpossible =
-  Rebuild.nonRebuildablePromotionImpossible
-
-fleetVectorSpectralAuthorityPromotionImpossible :
-  VectorSpectralAuthorityPromotion → ⊥
-fleetVectorSpectralAuthorityPromotionImpossible =
-  Rebuild.vectorAuthorityPromotionImpossible
-
-fleetSpectralNumericABIPromotionImpossible :
-  SpectralNumericABIPromotion → ⊥
-fleetSpectralNumericABIPromotionImpossible =
-  Numeric.pnfSpectralNumericABIPromotionImpossible
-
-fleetResidualFieldPromotionImpossible :
-  ResidualFieldPromotion → ⊥
-fleetResidualFieldPromotionImpossible =
-  Residual.pnfResidualFieldInvariantPromotionImpossible
-
-fleetVectorCoordinateTruthStillFalse :
-  Rebuild.vectorCoordinateIsTruth ≡ false
-fleetVectorCoordinateTruthStillFalse =
-  Rebuild.vectorCoordinateTruthFalse
-
-fleetVectorCoordinateSupportStillFalse :
-  Rebuild.vectorCoordinateIsCommittedSupport ≡ false
-fleetVectorCoordinateSupportStillFalse =
-  Rebuild.vectorCoordinateCommittedSupportFalse
-
-fleetVectorCoordinateAdmissibilityStillFalse :
-  Rebuild.vectorCoordinateIsAdmissibility ≡ false
-fleetVectorCoordinateAdmissibilityStillFalse =
-  Rebuild.vectorCoordinateAdmissibilityFalse
-
-fleetTextFallbackAuthorityStillFalse :
-  Rebuild.textFallbackIsCoordinateAuthority ≡ false
-fleetTextFallbackAuthorityStillFalse =
-  Rebuild.textFallbackCoordinateAuthorityFalse
-
-
-------------------------------------------------------------------------
--- Named Fleet-58 dispatch boundary.
---
--- The external producer pays the count class. It does not provide a named
--- 58-row manifest on the verified source surface. Count equality is not
--- object identity. Dispatch therefore remains closed.
-------------------------------------------------------------------------
-
-record FleetFormalGapDispatchBoundary : Set where
-  constructor fleet-formal-gap-dispatch-boundary
-  field
-    countedFormalGapClassAvailable : Bool
-    namedFormalGapManifestAvailable : Bool
-    dispatchRequiresNamedFormalGapManifest : Bool
-    externalGapCountIdentifiesIndividualGaps : Bool
-    dischargedFibresEligibleForGapDispatch : Bool
-    contradictionGapsEligibleForFormalGapDispatch : Bool
-
-open FleetFormalGapDispatchBoundary public
-
-canonicalFleetFormalGapDispatchBoundary : FleetFormalGapDispatchBoundary
-canonicalFleetFormalGapDispatchBoundary =
-  fleet-formal-gap-dispatch-boundary
-    true
-    false
-    true
-    false
-    false
-    false
-
-namedFormalGapManifestAvailable : Bool
-namedFormalGapManifestAvailable =
-  FleetFormalGapDispatchBoundary.namedFormalGapManifestAvailable
-    canonicalFleetFormalGapDispatchBoundary
-
-namedFormalGapManifestAvailableIsFalse :
-  namedFormalGapManifestAvailable ≡ false
-namedFormalGapManifestAvailableIsFalse = refl
-
-dispatchRequiresNamedFormalGapManifest : Bool
-dispatchRequiresNamedFormalGapManifest =
-  FleetFormalGapDispatchBoundary.dispatchRequiresNamedFormalGapManifest
-    canonicalFleetFormalGapDispatchBoundary
-
-dispatchRequiresNamedFormalGapManifestIsTrue :
-  dispatchRequiresNamedFormalGapManifest ≡ true
-dispatchRequiresNamedFormalGapManifestIsTrue = refl
-
-externalGapCountIdentifiesIndividualGaps : Bool
-externalGapCountIdentifiesIndividualGaps =
-  FleetFormalGapDispatchBoundary.externalGapCountIdentifiesIndividualGaps
-    canonicalFleetFormalGapDispatchBoundary
-
-externalGapCountIdentifiesIndividualGapsIsFalse :
-  externalGapCountIdentifiesIndividualGaps ≡ false
-externalGapCountIdentifiesIndividualGapsIsFalse = refl
-
-dischargedFibresEligibleForGapDispatch : Bool
-dischargedFibresEligibleForGapDispatch =
-  FleetFormalGapDispatchBoundary.dischargedFibresEligibleForGapDispatch
-    canonicalFleetFormalGapDispatchBoundary
-
-dischargedFibresEligibleForGapDispatchIsFalse :
-  dischargedFibresEligibleForGapDispatch ≡ false
-dischargedFibresEligibleForGapDispatchIsFalse = refl
-
-contradictionGapsEligibleForFormalGapDispatch : Bool
-contradictionGapsEligibleForFormalGapDispatch =
-  FleetFormalGapDispatchBoundary.contradictionGapsEligibleForFormalGapDispatch
-    canonicalFleetFormalGapDispatchBoundary
-
-contradictionGapsEligibleForFormalGapDispatchIsFalse :
-  contradictionGapsEligibleForFormalGapDispatch ≡ false
-contradictionGapsEligibleForFormalGapDispatchIsFalse = refl

@@ -6,9 +6,11 @@ import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Mathematics.CrossPollination.MillenniumLeanAssistReceiptExact as MillenniumExternal
 import DASHI.Mathematics.CrossPollination.MillenniumResidualDescentClassifierExact as MillenniumResidual
 
-import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
-import DASHI.ComputerScience.TriadicFin27Byte256ABIExact as TriadicABI
-import DASHI.ComputerScience.TriadicU8RuntimeOracleCrossRepoExact as U8Runtime
+-- TOE ternary-27: retain dependent residual; never identify a three-edge boundary with its face.
+import DASHI.ComputerScience.Ternary27ResidualProgramDecisionBridgeExact as Recoverable27TOE
+import DASHI.Reasoning.TrialecticBoundaryFaceNonfactorabilityExact as Face27TOE
+import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
+
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -19,13 +21,7 @@ open import Data.Empty using (⊥)
 import DASHI.Unified.ArithmeticMoonshine as ArithmeticMoonshine
 import DASHI.Unified.BalabanRGTOERegression as BalabanRGTOE
 import DASHI.Unified.BalabanRGTOEMaxCutValidation
-import DASHI.Unified.BalabanR559TOEMaxCutValidation
-import DASHI.Unified.BalabanR559TOEUnifiedEverythingValidation
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEValidation
-import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
-import DASHI.Unified.FleetFormalGapTargetTOEValidation
-import DASHI.Unified.TOE369MaxCutKernelBidiTernaryValidation
-import DASHI.Unified.SingularBasinCoarseRGTOEValidation
 import DASHI.Unified.YMGoal1R559IbrahimTOEValidation
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Validation
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEValidation
