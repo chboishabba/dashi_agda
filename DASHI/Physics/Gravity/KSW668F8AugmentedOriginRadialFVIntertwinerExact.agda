@@ -189,3 +189,21 @@ originalPSATOuterScales :
   originalPSATOuter v invdy (lambda * p)
     ≡ lambda * originalPSATOuter v invdy p
 originalPSATOuterScales lambda v invdy p = solve []
+
+-- Quantitative origin-trace error: two reconstructed physical H
+-- vectors can agree everywhere, yet the first-shell radial force
+-- differs if their hidden regularized origin traces differ.
+-- Restore the explicit physical h^-2 factor outside this identity.
+firstShellOriginTraceError :
+  (cp cm ellFactor lambda v0 v0Prime h1 h2 : ℚ) →
+  physicalFirstRowWithOrigin cp cm ellFactor lambda v0 h1 h2
+    + - (physicalFirstRowWithOrigin
+           cp cm ellFactor lambda v0Prime h1 h2)
+  ≡ cm * lambda * (v0 + - v0Prime)
+firstShellOriginTraceError cp cm ellFactor lambda v0 v0Prime
+  h1 h2 = solve []
+
+-- With physical h and eps, lambda=(h/eps)^ell and radial force
+-- is divided by h². Therefore an exact strong/pointwise bound must
+-- control V0 (or an equivalent origin derivative jet), not just
+-- the reconstructed H nodal difference.
