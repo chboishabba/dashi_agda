@@ -220,7 +220,7 @@ signedRawPortBalance :
 signedRawPortBalance ni ci no co initial final load loss
   restored originalBalance =
   Cycle.trans
-    (Bound.sym (Cycle.+-zeroRight (ni + ci)))
+    (Cycle.+-zeroRight (ni + ci))
     (Cycle.+-cancelRight _ _ final
       (Cycle.trans
         (Bound.sym
