@@ -4,6 +4,7 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 
 owners=(
+  DASHI/Core/ProofCarryingFiniteSumEnclosureExact.agda
   DASHI/Physics/YangMills/YangMillsLatticeStressWardSliceConservationExact.agda
   DASHI/Physics/Plasma/KSW668FullVectorMaxwellJetExact.agda
   DASHI/Physics/Motors/Circuit36927RecoveryEnergyBoundExact.agda
@@ -39,6 +40,7 @@ owners=(
   DASHI/Physics/Motors/SmithFilsingerPlaneWaveSpaceTimeWitnessExact.agda
   DASHI/Physics/Motors/SmithFilsingerSignedBoundaryGroupCompletionExact.agda
   DASHI/Physics/Motors/SmithFilsingerSignedMeterQuantisationNoGoExact.agda
+  DASHI/Physics/Motors/SmithFilsingerCertifiedSignedMeterResidualExact.agda
 )
 new_owners=(
   DASHI/Physics/Motors/SmithFilsingerSpatialPortChainExact.agda
@@ -67,6 +69,7 @@ new_owners=(
   DASHI/Physics/Motors/SmithFilsingerPlaneWaveSpaceTimeWitnessExact.agda
   DASHI/Physics/Motors/SmithFilsingerSignedBoundaryGroupCompletionExact.agda
   DASHI/Physics/Motors/SmithFilsingerSignedMeterQuantisationNoGoExact.agda
+  DASHI/Physics/Motors/SmithFilsingerCertifiedSignedMeterResidualExact.agda
 )
 for f in "${owners[@]}"; do test -s "$f"; done
 # Do not use a regex for Agda's literal {!!} hole. The old
