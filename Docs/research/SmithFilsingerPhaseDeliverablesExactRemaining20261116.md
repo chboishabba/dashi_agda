@@ -592,3 +592,22 @@ Added `scripts/check_smith_filsinger_restored_cycle_intervals.py` + `scripts/tes
 **Independent verification:** prior 131 exact tests plus 7 newly parametrized/adversarial source-root and trace checks = **138/138 PASS** from the runnable source-equivalent local package (SymPy 1.14.0, pytest 9.0.2). Both source/test changes are in the existing consolidated Python runner and independent SymPy gate. This does not imply a completed GitHub-head CI or the Agda kernel.
 
 **Next high-alpha:** (i) pinned typecheck/repair of the Agda dynamic theorem; (ii) formal coefficient-level proof that *the existing heterogeneous rational two-coordinate Cayley update* supplies the `ZeroPreserving` fields and matches the declared graph IDs; (iii) original physical 3D Maxwell retarded light cone with calibrated material distances and timing; (iv) original independently replenished natural work, electrode/return VI and all-restored source/controller/material cycles. None is closed by a numerical reachability theorem or synthetically sourced load.
+
+
+## 17 Nov F15 acceptance hardening — mandatory original-file replay
+
+**High-alpha fix:** F15 previously recomputed the claimed five-port net from five JSON intervals, which still permitted a malicious or stale upstream `conditional_port_work` and four summary fields to be edited *consistently*. `scripts/check_smith_filsinger_restored_cycle_intervals.py` now has `analyze_from_original_files`, which calls the original `check_smith_filsinger_signed_vi_intervals.calculate(vi_manifest, vi_root)` against the **raw five V/I CSV files, individual SHA256 identities, calibration/intersample-error certificates and the declared common clock**. It compares every original signed producer field (original ID, clock, port intervals, natural/controller/load net, unassigned sum, and both acceptance flags) with the supplied V/I JSON receipt, rejecting any mismatch **before** applying the independent all-loss/storage first-law interval audit.
+
+The F15 CLI is intentionally fail-closed: `--vi-manifest ORIGINAL_VI_MANIFEST.json --vi-root RAW_ORIGINAL_PORTS` are now mandatory. The old invocation accepting two self-described JSON receipts alone is not an accepted F15 check. This binds arithmetic consistency back to the exact source files, though **hashes and copied certificate text cannot establish meter truth or environmental independence**.
+
+New `scripts/test_smith_filsinger_restored_cycle_raw_replay.py` adds seven adversarial raw-file checks: replay-compatible-but-not-physical, self-consistent forgery of signed port data and summaries, stale raw CSV hashes, wrong original acquisition clock, absent integration-error evidence, mismatched original apparatus and load-only tampering. Included in `.github/workflows/filsinger-agda29-acceptance.yml`. These seven tests are source-authored and **not yet executed in this session**. Previous F15 17/17 locally executed matches its earlier exact commit but must be rerun with changes. D1 pinned Agda kernel acceptance continues to require actual compiler execution; GitHub workflow execution must be confirmed at the exact PR head.
+
+The independent `all_dissipative_and_outgoing_loss_J` and `total_stored_energy_final_minus_initial_J` remain *submitted intervals* (not independently authenticated observations). F10 original Maxwell→terminal calibration, physical error provenance, F15 independently replenished source and fully restored original stores, F16 causal atmospheric experiment, and D1 kernel PASS remain **OPEN**. The proof owners and ESD modules are unchanged.
+
+Reproducible invocation after obtaining authentic original files:
+
+```bash
+python3 scripts/test_smith_filsinger_restored_cycle_raw_replay.py
+python3 scripts/check_smith_filsinger_signed_vi_intervals.py original_vi_manifest.json --root raw_original_ports --out signed_vi_work.json
+python3 scripts/check_smith_filsinger_restored_cycle_intervals.py signed_vi_work.json independent_loss_and_storage.json --vi-manifest original_vi_manifest.json --vi-root raw_original_ports --out first_law_audit.json
+```
