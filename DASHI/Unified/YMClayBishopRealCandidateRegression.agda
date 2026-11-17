@@ -57,3 +57,11 @@ import DASHI.Physics.YangMills.YMClayOriginalRationalSU2BishopUnitaryWeldExact
 -- Reuses native gauge and Wilson class-function theorem owners.
 import DASHI.Physics.YangMills.YMClayNativeSixPlaneGaugeSameSourceExact
   as NativeSixPlaneGaugeSameSource
+
+-- Real ORIGINAL rational S3 nodes/weights; existing non-safe rational proofs.
+import DASHI.Physics.YangMills.YMClayRationalS3StereographicConcreteExact
+  as YMClayRationalS3StereographicConcreteExact
+
+-- Real ORIGINAL rational S3 nodes/weights; existing non-safe rational proofs.
+import DASHI.Physics.YangMills.YMClayRationalS3PositiveWeightedNodesExact
+  as YMClayRationalS3PositiveWeightedNodesExact
