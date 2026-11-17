@@ -18,6 +18,7 @@ python_tests=(
   scripts/test_smith_filsinger_nonlinear_retarded_source_port.py
   scripts/test_smith_filsinger_distributed_causal_energy.py
   scripts/test_smith_filsinger_spatial_chain_exact.py
+  scripts/test_smith_filsinger_finite_volume_face_incidence_exact.py
 )
 test -s "$target"
 test -s "$phase_owner"
