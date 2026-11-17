@@ -371,3 +371,20 @@ This is a genuine negative control. It prevents the earlier nonnegative-natural-
 **Source-first deduplication audit:** other concurrent modules in #1524 now include SmithFilsingerSignedIndexedFaceFluxExact and SmithFilsingerIndexedSignedCellStokesExact (actual C3.RealField additive inverse with face IDs), plus SmithFilsingerSpaceTimePoyntingTelescopeExact (rational four-direction finite Poynting flux). These are MORE GENERAL at field-space and mesh-incidence levels; do not duplicate their real-field additive algebra. The newly introduced Nat-pair carrier is only the nonnegative metering/port interface needed to derive the original reverse-flow bound. The next remaining formal weld should carry an actual calibrated signed real-field / rational exterior flux to that discrete original terminal receipt with chosen units, not assert that the same numerical flux was measured.
 
 **Verification gates:** new Agda source is hole/postulate-free by inspection, delimiter-balanced and Nat Solver arities are matched in a static audit. This is NOT a substitute for pinned Agda kernel elaboration. Strict F10/F13/F14/F15/F16 original physical and D1 verification gates remain open.
+
+
+## Quantisation obstruction: exact integer signed meter cannot encode half a work quantum
+
+The field/port sources in the same PR now include a mathematically signed C3.RealField indexed-face flux owner, a signed rational finite spacetime Poynting owner and the original Nat-grid terminal-work owner. A tempting but INVALID weld would require an exact globally additive conversion from all rational/real field work to an integer Nat-pair signed meter, with no rounding uncertainty.
+
+**New Agda negative-control proof source:** in SmithFilsingerSignedBoundaryGroupCompletionExact.agda, doubleNatNormalization derives n+n = 2n for the canonical inductively defined doubleNat; doubleCannotBeOdd rules out 2a = 2b+1 by constructor induction; oneWorkQuantumHasNoExactSignedHalf lifts that impossibility to arbitrary signed directed-work pairs using cross-sum equality. This is a concrete obstruction: a nonzero field source quantum cannot be split into two equal rational halves and exactly encoded as two integer half-quanta while preserving addition. The theorem is **source-authored, not kernel-accepted**.
+
+It does NOT prohibit accurate measurement. The valid next weld must either:
+- retain signed rational/real energy through the exact spatial and temporal source flux algebra and introduce an explicitly stated discrete quantum lattice for the meter, OR
+- construct interval/rounding-error receipts for the signed physical terminal measurement, where the total error accumulates under all-N conservation rather than being magically zero.
+
+A trivially zero conversion from reals to integer work would be additive but would NOT preserve nonzero observed physical source power. Do not use it to claim source admission. A measured original source/port V-I integral is a separate physical witness.
+
+The signed work branch also imports the actual original driverOnlyCanRadiateIntoEnvironment record, proving originalDriverOnlyReverseFlowIsPaid and originalDriverOnlySinkBound without constructing a new toy example. Source/field real-domain algebra stays owned by SignedIndexedFaceFluxExact, IndexedSignedCellStokesExact and SpaceTimePoyntingTelescopeExact. No duplicate real-field solver.
+
+Agda/Nix and exact-head CI are still unavailable in this session. No new source-level mathematical theorem is claimed kernel accepted or a physical proof of Filsinger Earth power, an actual surface integral or cloud/rain intervention.
