@@ -20,11 +20,7 @@ import DASHI.Unified.InvariantSpine as BrainSpine
 
 
 import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as GovernanceTOE
-import DASHI.Unified.GovernanceMaxCutParetoSnowballTOEConvergenceExact as GovernanceMaxCut
-import DASHI.Unified.PNFSourceBoundaryTOEExact as PNFSource
-import DASHI.Unified.PNFDistilledNonPromotionTOEExact as PNFDistilled
-import DASHI.Unified.SCALEEvidenceReviewTOEConvergenceExact as SCALEReview
-
+import DASHI.Unified.GovernedLegalWorkflowComplianceTOEExact as LegalCompliance
 import DASHI.Unified.YMGoal1TOECompatibilityExact as YMGoal1TOE
 
 import DASHI.Unified.ForecastComparativeNonPromotionTOEBridgeExact as ForecastTOE
@@ -562,563 +558,70 @@ unifierBalabanOSWightmanStillBlocked =
     BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
 ------------------------------------------------------------------------
--- Governed legal workflow x provenance-aware future-safety convergence.
--- Reuse existing theorem owners. No Actionstep-specific ontology is added.
+-- Governed legal-workflow convergence.
 ------------------------------------------------------------------------
 
-import DASHI.Cognition.PNF.SensibLawOperationalSemanticBoundaryExact as unifierOperational
-import DASHI.Cognition.PNF.SensibLawLiveReviewMutationExact as unifierReview
-import DASHI.Cognition.PNF.SensibLawSourceRealisedLegalRuleExact as unifierSourceRule
-import DASHI.Cognition.PNF.SensibLawSourceConditionedApplicabilityViolationExact as unifierApplicability
-import DASHI.Core.ITIRGovernanceControlCaseExact as unifierControl
-import DASHI.Governance.FormalisationGovernanceCapstoneExact as unifierFormalisation
-import DASHI.Core.FrozenProvenanceDynamicRefinementExact as unifierFrozen
-
-unifierTaskCompletionDoesNotCreateTruth :
-  unifierOperational.TaskCompletionCreatesTruth → ⊥
-unifierTaskCompletionDoesNotCreateTruth =
-  unifierOperational.taskCompletionDoesNotCreateTruth
-
-unifierAcceptedReviewDoesNotPayApplicability :
-  unifierReview.AcceptedStatusPaysApplicability → ⊥
-unifierAcceptedReviewDoesNotPayApplicability =
-  unifierReview.acceptedStatusDoesNotPayApplicability
-
-unifierCitationDoesNotRealiseLegalRule :
-  unifierSourceRule.CitationAloneRealisesLegalRule → ⊥
-unifierCitationDoesNotRealiseLegalRule =
-  unifierSourceRule.citationAloneDoesNotRealiseLegalRule
-
-unifierSemanticMeetDoesNotPayApplicability :
-  unifierApplicability.SemanticMeetAloneProvesLegalApplicability → ⊥
-unifierSemanticMeetDoesNotPayApplicability =
-  unifierApplicability.semanticMeetDoesNotAloneProveLegalApplicability
-
-unifierYangMillsGoal1ParetoZKPFrame : YMMaxCut.Goal1ParetoTOEZKPFrame
-unifierYangMillsGoal1ParetoZKPFrame = YMMaxCut.canonicalGoal1ParetoTOEZKPFrame
-
-
-------------------------------------------------------------------------
--- Governed legal workflow + Ibrahim Pareto/snowball + fleet-gap facade.
---
--- Proof authority remains in the imported exact owners.
-------------------------------------------------------------------------
-
-import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as GovernanceTOE
-import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as IbrahimTOE
-import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetTOE
-
-unifierGovernedLegalWorkflowAuthorityInvariantHandoff :
-  GovernanceTOE.GovernedLegalWorkflowAuthorityInvariantHandoff
-unifierGovernedLegalWorkflowAuthorityInvariantHandoff =
-  GovernanceTOE.canonicalGovernedLegalWorkflowAuthorityInvariantHandoff
-
-unifierCanonicalLegalSourceAuthorityBoundary :
-  GovernanceTOE.LegalSourceAuthorityBoundary
-unifierCanonicalLegalSourceAuthorityBoundary =
-  GovernanceTOE.toeCanonicalLegalSourceAuthorityBoundary
-
-unifierCandidateSourceIsNotLegalAuthority :
-  GovernanceTOE.CandidateSourceIsAuthoritative → ⊥
-unifierCandidateSourceIsNotLegalAuthority =
-  GovernanceTOE.toeCandidateSourceDoesNotCloseAuthority
-
-unifierSameLegalSystemIsNotLegalAuthority :
-  GovernanceTOE.SameLegalSystemAutomaticallyMeansAuthority → ⊥
-unifierSameLegalSystemIsNotLegalAuthority =
-  GovernanceTOE.toeSameSystemDoesNotAutomaticallyCloseAuthority
-
-unifierCurrentValidityIsNotApplicability :
-  GovernanceTOE.CurrentValidityAutomaticallyMeansApplicability → ⊥
-unifierCurrentValidityIsNotApplicability =
-  GovernanceTOE.toeCurrentValidityDoesNotAutomaticallyEstablishApplicability
-
-unifierSemanticAdmissionIsNotLegalAuthority :
-  GovernanceTOE.SemanticAdmissionAuthorityIsLegalSourceAuthority → ⊥
-unifierSemanticAdmissionIsNotLegalAuthority =
-  GovernanceTOE.toeSemanticAdmissionDoesNotBecomeLegalSourceAuthority
-
-unifierDocumentRoleIsNotLegalAuthority :
-  GovernanceTOE.DocumentRoleSuppliesLegalSourceAuthority → ⊥
-unifierDocumentRoleIsNotLegalAuthority =
-  GovernanceTOE.toeDocumentRoleDoesNotSupplyLegalSourceAuthority
-
-unifierIbrahimRecognitionParetoBoundary =
-  IbrahimTOE.ibrahimRecognitionParetoBoundary
-
-unifierIbrahimCharacterExecutionFrontier =
-  IbrahimTOE.ibrahimCharacterExecutionFrontier
-
-unifierIbrahimPhaseResolutionFrontier =
-  IbrahimTOE.ibrahimPhaseResolutionFrontier
-
-unifierIbrahimSchrodingerHZetaMaxCutBoundary =
-  IbrahimTOE.ibrahimSchrodingerHZetaMaxCutBoundary
-
-unifierIbrahimHistoricalDiscriminatorBoundary =
-  IbrahimTOE.ibrahimHistoricalDiscriminatorBoundary
-
-unifierIbrahimSearchPriorityDoesNotCreateProof :
-  IbrahimTOE.SearchPriorityCreatesProof → ⊥
-unifierIbrahimSearchPriorityDoesNotCreateProof =
-  IbrahimTOE.searchPriorityDoesNotCreateProof
-
-toeExactReuseDoesNotCreateClaimTruth :
-  LegalGovernance.ExactReuseCreatesClaimTruth → ⊥
-toeExactReuseDoesNotCreateClaimTruth =
-  LegalGovernance.toeExactReuseDoesNotCreateClaimTruth
-
-
-------------------------------------------------------------------------
--- Governance + max-cut/Pareto/snowball convergence facade.
-------------------------------------------------------------------------
-
-unifierGovernanceMaxCutParetoSnowballReceipt :
-  GovernanceMaxCut.GovernanceMaxCutParetoSnowballTOEReceipt
-unifierGovernanceMaxCutParetoSnowballReceipt =
-  GovernanceMaxCut.canonicalGovernanceMaxCutParetoSnowballTOEReceipt
-
-unifierGovernanceMaxCutParetoSnowballZKPFrame :
-  GovernanceMaxCut.GovernanceMaxCutParetoSnowballZKPFrame
-unifierGovernanceMaxCutParetoSnowballZKPFrame =
-  GovernanceMaxCut.canonicalGovernanceMaxCutParetoSnowballZKPFrame
-
-unifierGovernanceMaxCutBalabanScaleTransferImpossible :
-  GovernanceMaxCut.BalabanScaleTransferPromotion → ⊥
-unifierGovernanceMaxCutBalabanScaleTransferImpossible =
-  GovernanceMaxCut.balabanScaleTransferPromotionImpossible
-
-toeFleetNumericABIRequiresIndependentEvidence :
-  FleetGapTOE.SpectralNumericABIPromotion → ⊥
-toeFleetNumericABIRequiresIndependentEvidence =
-  FleetGapTOE.fleetSpectralNumericABIPromotionImpossible
-
-import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as GovernanceTOE
-import DASHI.Unified.PNFSourceBoundaryTOEExact as PNFSource
-import DASHI.Unified.PNFDistilledNonPromotionTOEExact as PNFDistilled
-import DASHI.Unified.SCALEEvidenceReviewTOEConvergenceExact as SCALEReview
-import DASHI.Unified.GovernedFleetResidualTOEHandoffExact as GovernedFleet
-
-------------------------------------------------------------------------
-
-toePNFSourceBoundaryReceipt :
-  PNFSource.PNFSourceBoundaryTOEReceipt
-toePNFSourceBoundaryReceipt =
-  PNFSource.canonicalPNFSourceBoundaryTOEReceipt
-
-toePNFGluingProxyDoesNotProveTrueLinearity =
-  PNFSource.gluingProxyDoesNotProveTrueLinearity
-
-toePNFSelfAdjointProxyDoesNotProveFiniteTheorem =
-  PNFSource.selfAdjointProxyDoesNotProveFiniteTheorem
-
-toeBrainJPromotionBlocked :
-  BrainSpine.objectExternalJPromotion BrainFMRI.brainFMRIObject ≡ false
-toeBrainJPromotionBlocked = BrainFMRI.brainFMRIJPromotionBlocked
-
-import DASHI.Unified.GovernedLegalWorkflowTOEBridgeExact as GovernanceTOE
-import DASHI.Unified.PNFSourceBoundaryTOEExact as PNFSource
-import DASHI.Unified.PNFDistilledNonPromotionTOEExact as PNFDistilled
-import DASHI.Unified.SCALEEvidenceReviewTOEConvergenceExact as SCALEReview
-import DASHI.Unified.GovernedFleetResidualTOEHandoffExact as GovernedFleet
-
-------------------------------------------------------------------------
-
-toePNFSourceBoundaryReceipt :
-  PNFSource.PNFSourceBoundaryTOEReceipt
-toePNFSourceBoundaryReceipt =
-  PNFSource.canonicalPNFSourceBoundaryTOEReceipt
-
-toePNFGluingProxyDoesNotProveTrueLinearity =
-  PNFSource.gluingProxyDoesNotProveTrueLinearity
-
-toePNFSelfAdjointProxyDoesNotProveFiniteTheorem =
-  PNFSource.selfAdjointProxyDoesNotProveFiniteTheorem
-
-toePNFDominationProxyDoesNotProveHamiltonianTheorem =
-  PNFSource.dominationProxyDoesNotProveHamiltonianTheorem
-
-toePNFFungalNetworkClaimsRequireSpeciesEvidence =
-  PNFSource.fungalNetworkClaimsRequireSpeciesEvidence
-
-toePNFKluverCobwebForm =
-  PNFSource.kluverCobwebForm
-
-toePNFKluverFormDoesNotPromoteUniversalSymbol =
-  PNFSource.kluverFormDoesNotPromoteUniversalSymbol
-
-toePNFKluverFormDoesNotPromoteRecoveredMemory =
-  PNFSource.kluverFormDoesNotPromoteRecoveredMemory
-
-toePNFPsychogeographyWebIdentifierKind =
-  PNFSource.psychogeographyWebIdentifierKind
-
-toePNFIdenticalWordsDoNotPayPredicate :
-  PNFSource.IdenticalWordsProveSamePredicate → ⊥
-toePNFIdenticalWordsDoNotPayPredicate =
-  PNFSource.identicalWordsDoNotPayPredicate
-
-toePNFCommonFingerprintDoesNotCreateTruth :
-  PNFSource.CommonPnfFingerprintProvesClaimTruth → ⊥
-toePNFCommonFingerprintDoesNotCreateTruth =
-  PNFSource.commonPnfFingerprintDoesNotCreateClaimTruth
-
-toePNFPerceivedIndependenceDoesNotCreateProvenanceIndependence :
-  PNFSource.PerceivedIndependenceMeansActualIndependence → ⊥
-toePNFPerceivedIndependenceDoesNotCreateProvenanceIndependence =
-  PNFSource.perceivedIndependenceDoesNotCreateProvenanceIndependence
-
-toePNFRepetitionDoesNotCreateIndependentEvidence :
-  PNFSource.RepetitionMeansIndependentEvidence → ⊥
-toePNFRepetitionDoesNotCreateIndependentEvidence =
-  PNFSource.repetitionDoesNotCreateIndependentEvidence
-
-toePNFCommonSourceDoesNotEraseEvidence :
-  PNFSource.CommonSourceMeansNoEvidence → ⊥
-toePNFCommonSourceDoesNotEraseEvidence =
-  PNFSource.commonSourceDoesNotEraseEvidence
-
-------------------------------------------------------------------------
--- PNF-distilled fail-closed reuse aliases.
--- Exact proof authority remains in the imported native owners.
-
-------------------------------------------------------------------------
-
-toePNFDistilledNonPromotionBoundary :
-  PNFDistilled.PNFDistilledNonPromotionBoundary
-toePNFDistilledNonPromotionBoundary =
-  PNFDistilled.canonicalPNFDistilledNonPromotionBoundary
-
-toePNFDistilledReuseZKPReceipt :
-  PNFDistilled.PNFDistilledReuseZKPReceipt
-toePNFDistilledReuseZKPReceipt =
-  PNFDistilled.canonicalPNFDistilledReuseZKPReceipt
-
-------------------------------------------------------------------------
--- Governed legal-workflow TOE aliases.
--- Exact proof authority remains in GovernedLegalWorkflowTOEBridgeExact.
-
-------------------------------------------------------------------------
-
-toeGovernedLegalWorkflowBoundary :
-  GovernanceTOE.GovernedLegalWorkflowTOEBoundary
-toeGovernedLegalWorkflowBoundary =
-  GovernanceTOE.canonicalGovernedLegalWorkflowTOEBoundary
-
-toeWorkflowTaskCompletionDoesNotCreateTruth :
-  GovernanceTOE.TaskCompletionCreatesTruth → ⊥
-toeWorkflowTaskCompletionDoesNotCreateTruth =
-  GovernanceTOE.toeTaskCompletionDoesNotCreateTruth
-
-toeReviewActivityNeedsSeparateAdmission :
-  GovernanceTOE.ReviewActivityCreatesAdmission → ⊥
-toeReviewActivityNeedsSeparateAdmission =
-  GovernanceTOE.toeReviewActivityNeedsSeparateAdmissionReceipt
-
-toeDatabaseCommitDoesNotCreateSemanticAuthority :
-  GovernanceTOE.DatabaseCommitCreatesSemanticAuthority → ⊥
-toeDatabaseCommitDoesNotCreateSemanticAuthority =
-  GovernanceTOE.toeDatabaseCommitDoesNotCreateSemanticAuthority
-
-toeAcceptedReviewDoesNotPayApplicability :
-  GovernanceTOE.AcceptedStatusPaysApplicability → ⊥
-toeAcceptedReviewDoesNotPayApplicability =
-  GovernanceTOE.toeAcceptedReviewDoesNotPayApplicability
-
-toeControlEvidenceDoesNotCreateTruth :
-  GovernanceTOE.ControlEvidenceCreatesTruth → ⊥
-toeControlEvidenceDoesNotCreateTruth =
-  GovernanceTOE.toeControlEvidenceDoesNotCreateTruth
-
-toePassingControlDoesNotMeanCertified :
-  GovernanceTOE.PassingControlMeansCertified → ⊥
-toePassingControlDoesNotMeanCertified =
-  GovernanceTOE.toePassingControlDoesNotMeanCertified
-
-toeCitationAloneDoesNotRealiseLegalRule :
-  GovernanceTOE.CitationAloneRealisesLegalRule → ⊥
-toeCitationAloneDoesNotRealiseLegalRule =
-  GovernanceTOE.toeCitationAloneDoesNotRealiseLegalRule
-
-toeSemanticMeetDoesNotProveLegalApplicability :
-  GovernanceTOE.SemanticMeetAloneProvesLegalApplicability → ⊥
-toeSemanticMeetDoesNotProveLegalApplicability =
-  GovernanceTOE.toeSemanticMeetDoesNotProveLegalApplicability
-
-
-
-toeGovernedLegalWorkflowInvariantHandoff :
+unifierGovernedLegalWorkflowInvariantHandoff :
   GovernanceTOE.GovernedLegalWorkflowTOEInvariantHandoff
-toeGovernedLegalWorkflowInvariantHandoff =
+unifierGovernedLegalWorkflowInvariantHandoff =
   GovernanceTOE.canonicalGovernedLegalWorkflowTOEInvariantHandoff
 
-toeGovernedLegalWorkflowZKPReceipt :
-  GovernanceTOE.GovernedLegalWorkflowZKPReceipt
-toeGovernedLegalWorkflowZKPReceipt =
-  GovernanceTOE.canonicalGovernedLegalWorkflowZKPReceipt
+unifierTaskCompletionDoesNotCreateTruth :
+  GovernanceTOE.TaskCompletionCreatesTruth → ⊥
+unifierTaskCompletionDoesNotCreateTruth =
+  GovernanceTOE.toeTaskCompletionDoesNotCreateTruth
 
-toeGovernedLegalWorkflowIntrospectiveZKPFrame :
-  GovernanceTOE.GovernedLegalWorkflowIntrospectiveZKPFrame
-toeGovernedLegalWorkflowIntrospectiveZKPFrame =
-  GovernanceTOE.canonicalGovernedLegalWorkflowIntrospectiveZKPFrame
+unifierDatabaseCommitDoesNotCreateSemanticAuthority :
+  GovernanceTOE.DatabaseCommitCreatesSemanticAuthority → ⊥
+unifierDatabaseCommitDoesNotCreateSemanticAuthority =
+  GovernanceTOE.toeDatabaseCommitDoesNotCreateSemanticAuthority
 
-toeCaseySelectionDoesNotCreateWorldTruth :
-  GovernanceTOE.CaseySelectionCreatesWorldTruth → ⊥
-toeCaseySelectionDoesNotCreateWorldTruth =
-  GovernanceTOE.toeCaseySelectionDoesNotCreateWorldTruth
+unifierAcceptedReviewDoesNotPayApplicability :
+  GovernanceTOE.AcceptedStatusPaysApplicability → ⊥
+unifierAcceptedReviewDoesNotPayApplicability =
+  GovernanceTOE.toeAcceptedReviewDoesNotPayApplicability
 
-toeKnowledgeDoesNotCreateExecutionAuthority :
-  GovernanceTOE.KnowledgeIsAuthority → ⊥
-toeKnowledgeDoesNotCreateExecutionAuthority =
-  GovernanceTOE.toeKnowledgeDoesNotCreateExecutionAuthority
-
-------------------------------------------------------------------------
--- Promotion, runtime-validation, and semantic-admission governance aliases.
-
-------------------------------------------------------------------------
-
-toeGovernedLegalWorkflowPromotionBoundary :
-  GovernanceTOE.GovernedLegalWorkflowPromotionBoundary
-toeGovernedLegalWorkflowPromotionBoundary =
-  GovernanceTOE.canonicalGovernedLegalWorkflowPromotionBoundary
-
-toeReviewEligibilityDoesNotCreatePromotion :
-  GovernanceTOE.ReviewEligibilityCreatesPromotionReceipt → ⊥
-toeReviewEligibilityDoesNotCreatePromotion =
-  GovernanceTOE.toeReviewEligibilityDoesNotCreatePromotion
-
-toeReviewEligibilityDoesNotCreateTruth :
-  GovernanceTOE.EligibilityMeansTruth → ⊥
-toeReviewEligibilityDoesNotCreateTruth =
-  GovernanceTOE.toeReviewEligibilityDoesNotCreateTruth
-
-toeRuntimeParityDoesNotCreateWorldTruth :
-  GovernanceTOE.ZeroParityFailuresMeansWorldTruth → ⊥
-toeRuntimeParityDoesNotCreateWorldTruth =
-  GovernanceTOE.toeRuntimeParityDoesNotCreateWorldTruth
-
-toeDiagnosticStreamDoesNotCreateLegalCertification :
-  GovernanceTOE.DiagnosticLegalStreamMeansLegalCertification → ⊥
-toeDiagnosticStreamDoesNotCreateLegalCertification =
-  GovernanceTOE.toeDiagnosticStreamDoesNotCreateLegalCertification
-
-toeProjectionDoesNotCreateClaimTruth :
-  GovernanceTOE.CanonicalClaimProjectionPaysClaimTruth → ⊥
-toeProjectionDoesNotCreateClaimTruth =
-  GovernanceTOE.toeProjectionDoesNotCreateClaimTruth
-
-toeReviewRouterDoesNotCreateConsumerAdequacy :
-  GovernanceTOE.ReviewRouterImplementationPaysConsumerAdequacy → ⊥
-toeReviewRouterDoesNotCreateConsumerAdequacy =
-  GovernanceTOE.toeReviewRouterDoesNotCreateConsumerAdequacy
-
-toeParserCandidateDoesNotAuthorizeAdmission :
-  GovernanceTOE.ParserCandidateAloneAuthorizesAdmission → ⊥
-toeParserCandidateDoesNotAuthorizeAdmission =
-  GovernanceTOE.toeParserCandidateDoesNotAuthorizeAdmission
-
-toeResidualPriorityDoesNotCreateTruthConfidence :
-  GovernanceTOE.ResidualPriorityScoreIsTruthConfidence → ⊥
-toeResidualPriorityDoesNotCreateTruthConfidence =
-  GovernanceTOE.toeResidualPriorityDoesNotCreateTruthConfidence
-
-toeAdmissionReceiptDoesNotPublishGeneration :
-  GovernanceTOE.AdmissionReceiptPublishesGeneration → ⊥
-toeAdmissionReceiptDoesNotPublishGeneration =
-  GovernanceTOE.toeAdmissionReceiptDoesNotPublishGeneration
-
-toeSoftwareValidationDoesNotAuthorizePublication :
-  GovernanceTOE.SoftwareValidationAuthorizesPublication → ⊥
-toeSoftwareValidationDoesNotAuthorizePublication =
-  GovernanceTOE.toeSoftwareValidationDoesNotAuthorizePublication
-
-toeLaterValidationDoesNotRewriteCertifiedBaseline :
-  GovernanceTOE.LaterValidatedHeadRetroactivelyChangesCertifiedBaseline → ⊥
-toeLaterValidationDoesNotRewriteCertifiedBaseline =
-  GovernanceTOE.toeLaterValidationDoesNotRewriteCertifiedBaseline
-
-------------------------------------------------------------------------
--- Canonical semantic-authority and exact-live acquisition firewalls.
--- Exact proof authority remains in GovernedLegalWorkflowTOEBridgeExact.
-
-------------------------------------------------------------------------
-
-toeSemanticPromotionTruthAuthorityClosed :
+unifierSemanticPromotionTruthAuthorityClosed :
   GovernanceTOE.SemanticPromotionTruthAuthorityClosed
-toeSemanticPromotionTruthAuthorityClosed =
+unifierSemanticPromotionTruthAuthorityClosed =
   GovernanceTOE.toeSemanticPromotionTruthAuthorityClosed
 
-toeSemanticPromotionLegalAuthorityClosed :
-  GovernanceTOE.SemanticPromotionLegalAuthorityClosed
-toeSemanticPromotionLegalAuthorityClosed =
-  GovernanceTOE.toeSemanticPromotionLegalAuthorityClosed
-
-toeSemanticPromotionAllAuthorityClosed :
-  GovernanceTOE.SemanticPromotionAllAuthorityClosed
-toeSemanticPromotionAllAuthorityClosed =
-  GovernanceTOE.toeSemanticPromotionAllAuthorityClosed
-
-toeBoundAcquisitionDoesNotPayRequirement :
-  GovernanceTOE.BoundDemandAutomaticallyPaysRequirement → ⊥
-toeBoundAcquisitionDoesNotPayRequirement =
-  GovernanceTOE.toeBoundAcquisitionDoesNotPayRequirement
-
-toeBoundAcquisitionDoesNotCloseConsumer :
-  GovernanceTOE.BoundDemandAutomaticallyClosesConsumer → ⊥
-toeBoundAcquisitionDoesNotCloseConsumer =
-  GovernanceTOE.toeBoundAcquisitionDoesNotCloseConsumer
-
-toeProducerIdentityDoesNotIdentifyResidual :
-  GovernanceTOE.SameProducerIdentifiesResidual → ⊥
-toeProducerIdentityDoesNotIdentifyResidual =
-  GovernanceTOE.toeProducerIdentityDoesNotIdentifyResidual
-
-
-
--- Legal authority remains independent of matter workflow and semantic admission.
-unifierLegalCandidateIsNotAuthority :
+unifierLegalCandidateSourceDoesNotCloseAuthority :
   GovernanceTOE.CandidateSourceIsAuthoritative → ⊥
-unifierLegalCandidateIsNotAuthority =
+unifierLegalCandidateSourceDoesNotCloseAuthority =
   GovernanceTOE.toeCandidateSourceDoesNotCloseAuthority
 
-unifierLegalValidityIsNotApplicability :
-  GovernanceTOE.CurrentValidityAutomaticallyMeansApplicability → ⊥
-unifierLegalValidityIsNotApplicability =
-  GovernanceTOE.toeCurrentValidityDoesNotAutomaticallyEstablishApplicability
-
-unifierSemanticAdmissionIsNotLegalAuthority :
-  GovernanceTOE.SemanticAdmissionAuthorityIsLegalSourceAuthority → ⊥
-unifierSemanticAdmissionIsNotLegalAuthority =
-  GovernanceTOE.toeSemanticAdmissionDoesNotBecomeLegalSourceAuthority
-
-
-unifierGovernedLegalWorkflowAuthorityInvariantHandoff :
-  GovernanceTOE.GovernedLegalWorkflowAuthorityInvariantHandoff
-unifierGovernedLegalWorkflowAuthorityInvariantHandoff =
-  GovernanceTOE.canonicalGovernedLegalWorkflowAuthorityInvariantHandoff
-
-unifierCanonicalLegalSourceAuthorityBoundary :
-  GovernanceTOE.LegalSourceAuthorityBoundary
-unifierCanonicalLegalSourceAuthorityBoundary =
-  GovernanceTOE.toeCanonicalLegalSourceAuthorityBoundary
-
-unifierSameSystemIsNotLegalAuthority :
-  GovernanceTOE.SameLegalSystemAutomaticallyMeansAuthority → ⊥
-unifierSameSystemIsNotLegalAuthority =
-  GovernanceTOE.toeSameSystemDoesNotAutomaticallyCloseAuthority
-
-unifierDocumentRoleIsNotLegalAuthority :
-  GovernanceTOE.DocumentRoleSuppliesLegalSourceAuthority → ⊥
-unifierDocumentRoleIsNotLegalAuthority =
-  GovernanceTOE.toeDocumentRoleDoesNotSupplyLegalSourceAuthority
-
-------------------------------------------------------------------------
--- SCALE Evidence Review exact facade.
--- Proof authority remains in the normalized bridge and original donors.
-
-------------------------------------------------------------------------
-
-unifierSCALEEvidenceReviewTOEReceipt :
-  SCALEReview.SCALEEvidenceReviewTOEReceipt
-unifierSCALEEvidenceReviewTOEReceipt =
-  SCALEReview.canonicalSCALEEvidenceReviewTOEReceipt
-
-unifierSCALEReplayDoesNotPromoteSemanticTruth :
-  SCALEReview.ReplayEconomyReceiptPromotesSemanticTruth → ⊥
-unifierSCALEReplayDoesNotPromoteSemanticTruth =
-  SCALEReview.scaleReplayDoesNotPromoteSemanticTruth
-
-unifierSCALEProductionDoesNotCreateSemanticAuthority :
-  SCALEReview.PerformanceClosureCreatesSemanticAuthority → ⊥
-unifierSCALEProductionDoesNotCreateSemanticAuthority =
-  SCALEReview.productionScaleDoesNotCreateSemanticAuthority
-
-unifierSCALEPNFFingerprintDoesNotCreateClaimTruth :
-  SCALEReview.CommonPnfFingerprintProvesClaimTruth → ⊥
-unifierSCALEPNFFingerprintDoesNotCreateClaimTruth =
-  SCALEReview.commonPnfFingerprintDoesNotCreateClaimTruth
-
-unifierSCALEReviewDoesNotCreateClaimTruth :
-  SCALEReview.EvidenceReviewCreatesClaimTruth → ⊥
-unifierSCALEReviewDoesNotCreateClaimTruth =
-  SCALEReview.reviewedEvidenceDoesNotCreateClaimTruth
-
-unifierSCALEPassingControlDoesNotMeanCertified :
-  SCALEReview.PassingControlMeansCertified → ⊥
-unifierSCALEPassingControlDoesNotMeanCertified =
-  SCALEReview.passingControlDoesNotMeanCertified
-
-unifierSCALEFrontierDoesNotGrantAuthorization :
-  SCALEReview.FrontierRouteMeansAuthorized → ⊥
-unifierSCALEFrontierDoesNotGrantAuthorization =
-  SCALEReview.frontierRouteDoesNotGrantAuthorization
-
-unifierSCALEUICannotGeneratePresentSource :
-  SCALEReview.UIGeneratesPresentSource → ⊥
-unifierSCALEUICannotGeneratePresentSource =
-  SCALEReview.uiCannotGeneratePresentSource
-
-------------------------------------------------------------------------
--- SCALE evidence genealogy firewalls.
-
-------------------------------------------------------------------------
-
-unifierSCALEPerceivedIndependenceDoesNotCreateProvenanceIndependence :
-  SCALEReview.PerceivedIndependenceMeansActualIndependence → ⊥
-unifierSCALEPerceivedIndependenceDoesNotCreateProvenanceIndependence =
-  SCALEReview.perceivedIndependenceDoesNotCreateProvenanceIndependence
-
-unifierSCALERepetitionDoesNotCreateIndependentEvidence :
-  SCALEReview.RepetitionMeansIndependentEvidence → ⊥
-unifierSCALERepetitionDoesNotCreateIndependentEvidence =
-  SCALEReview.repetitionDoesNotCreateIndependentEvidence
-
-------------------------------------------------------------------------
--- SCALE physical-economy non-promotion firewalls.
-
-------------------------------------------------------------------------
-
-unifierSCALEReviewProjectionReuseDoesNotCreateClaimTruth :
-  SCALEReview.ReviewProjectionReuseCreatesClaimTruth → ⊥
-unifierSCALEReviewProjectionReuseDoesNotCreateClaimTruth =
-  SCALEReview.reviewProjectionReuseDoesNotCreateClaimTruth
-
-unifierSCALECommitCoalescingDoesNotCreateSemanticAuthority :
-  SCALEReview.CommitCoalescingCreatesSemanticAuthority → ⊥
-unifierSCALECommitCoalescingDoesNotCreateSemanticAuthority =
-  SCALEReview.commitCoalescingDoesNotCreateSemanticAuthority
-
-unifierSCALEFewCommitBarriersDoNotProveSemanticIndependence :
-  SCALEReview.FewCommitBarriersProveSemanticIndependence → ⊥
-unifierSCALEFewCommitBarriersDoNotProveSemanticIndependence =
-  SCALEReview.fewCommitBarriersDoNotProveSemanticIndependence
-
-------------------------------------------------------------------------
--- SCALE Evidence Review ZKP frame.
-
-------------------------------------------------------------------------
-
-unifierSCALEEvidenceReviewTOEZKPFrame :
-  SCALEReview.SCALEEvidenceReviewTOEZKPFrame
-unifierSCALEEvidenceReviewTOEZKPFrame =
-  SCALEReview.canonicalSCALEEvidenceReviewTOEZKPFrame
+unifierExactReuseDoesNotCreateSemanticAuthority :
+  GovernanceTOE.ExactReuseCreatesSemanticAuthority → ⊥
+unifierExactReuseDoesNotCreateSemanticAuthority =
+  GovernanceTOE.toeExactReuseDoesNotCreateSemanticAuthority
 
 
 ------------------------------------------------------------------------
--- Governed Fleet residual handoff.
+-- Governed legal-workflow compliance extension.
 ------------------------------------------------------------------------
 
-unifierGovernedFleetResidualTOEHandoff :
-  GovernedFleet.GovernedFleetResidualTOEHandoff
-unifierGovernedFleetResidualTOEHandoff =
-  GovernedFleet.canonicalGovernedFleetResidualTOEHandoff
+unifierGovernedLegalWorkflowComplianceReceipt :
+  LegalCompliance.GovernedLegalWorkflowComplianceTOEReceipt
+unifierGovernedLegalWorkflowComplianceReceipt =
+  LegalCompliance.canonicalGovernedLegalWorkflowComplianceReceipt
 
-unifierFleetNamedManifestStillMissing :
-  FleetManifest.named58ManifestAcquired ≡ false
-unifierFleetNamedManifestStillMissing =
-  GovernedFleet.namedManifestStillMissing
+unifierExpertQualificationDoesNotCreateForensicCompliance :
+  LegalCompliance.QualificationAutomaticallyForensicCompliance → ⊥
+unifierExpertQualificationDoesNotCreateForensicCompliance =
+  LegalCompliance.expertQualificationDoesNotCreateForensicCompliance
 
-unifierFleetPerGapDispatchStillDisabled :
-  FleetManifest.perGapDispatchEnabled ≡ false
-unifierFleetPerGapDispatchStillDisabled =
-  GovernedFleet.perGapDispatchStillDisabled
+unifierLegalReviewDoesNotCreateClaimTruth :
+  LegalCompliance.LegalReviewDecisionCreatesClaimTruth → ⊥
+unifierLegalReviewDoesNotCreateClaimTruth =
+  LegalCompliance.legalReviewDoesNotCreateClaimTruth
+
+unifierOfficialLegalSurfaceDoesNotRecoverFineState :
+  LegalCompliance.OfficialLegalSurfaceRecoversFineState → ⊥
+unifierOfficialLegalSurfaceDoesNotRecoverFineState =
+  LegalCompliance.officialLegalSurfaceDoesNotRecoverFineState
+
+unifierLegalityAloneDoesNotCreateLegitimacy :
+  LegalCompliance.LegalOnlyCreatesLegitimacy → ⊥
+unifierLegalityAloneDoesNotCreateLegitimacy =
+  LegalCompliance.legalityAloneDoesNotCreateLegitimacy
