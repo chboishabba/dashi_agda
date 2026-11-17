@@ -233,44 +233,37 @@ unifiedR559IbrahimFleetHyperfabricReceipt :
 unifiedR559IbrahimFleetHyperfabricReceipt =
   FleetHyperTOE.canonicalR559IbrahimFleetHyperfabricTOEReceipt
 
-unifiedYMGate4FormalGapsAre58 :
-  FleetHyperTOE.ymGate4FormalGaps ≡ 58
-unifiedYMGate4FormalGapsAre58 =
-  FleetHyperTOE.ymGate4FormalGapsAre58
+unifiedBalabanScaleTransferNonPromotion :
+  BalabanR559TOE.ScaleTransferPromotion → ⊥
+unifiedBalabanScaleTransferNonPromotion =
+  BalabanR559TOE.scaleTransferPromotionEliminator
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
-unifiedYMGate4PaidReductionLevel : ProofLevel
-unifiedYMGate4PaidReductionLevel =
-  FleetHyperTOE.ymGate4PaidReductionLevel
+------------------------------------------------------------------------
+-- R559 / Ibrahim / fleet-58 / generic-hyperfabric TOE convergence.
+------------------------------------------------------------------------
 
-unifiedYMGate4InhabitantsLevel : ProofLevel
-unifiedYMGate4InhabitantsLevel =
-  FleetHyperTOE.ymGate4InhabitantsLevel
-
-unifiedFleet58DoesNotIdentifyYMGate4 :
-  FleetHyperTOE.Fleet58EqualsYMGate4SameObject → ⊥
-unifiedFleet58DoesNotIdentifyYMGate4 =
-  FleetHyperTOE.fleet58CardinalityDoesNotProveYMGate4Identity
+import DASHI.Unified.R559IbrahimFleetHyperfabricTOEExact as FleetHyperTOE
+unifiedR559IbrahimFleetHyperfabricReceipt :
+  FleetHyperTOE.R559IbrahimFleetHyperfabricTOEReceipt
+unifiedR559IbrahimFleetHyperfabricReceipt =
+  FleetHyperTOE.canonicalR559IbrahimFleetHyperfabricTOEReceipt
 
 unifiedFleetFormalGapsAre58 :
   FleetHyperTOE.fleetFormalGaps ≡ 58
 unifiedFleetFormalGapsAre58 =
   FleetHyperTOE.fleetFormalGapsAre58
 
-------------------------------------------------------------------------
--- Implement-A-to-D terminal unified validation.
-------------------------------------------------------------------------
-
-import DASHI.Unified.YMImplementAToDTOEMaxCutExact as YMAD
-import DASHI.Unified.YMImplementAToDTOEMaxCutValidation
-
-unifiedYMImplementAToDMaxCutReceipt :
-  YMAD.YMImplementAToDTOEMaxCutReceipt
-unifiedYMImplementAToDMaxCutReceipt =
-  YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+unifiedFleetGate4CountAgreement :
+  FleetHyperTOE.fleetFormalGaps
+  ≡ BalabanR559TOE.gate4UnresolvedCount
+      BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+unifiedFleetGate4CountAgreement =
+  FleetHyperTOE.fleetFormalGapCountEqualsGate4Count
 
 
 ------------------------------------------------------------------------
--- Current Gate-4 frontier and typed continuum non-promotion.
+-- Typed Balaban continuum no-go and live Gate-4 frontier.
 ------------------------------------------------------------------------
 
 unifiedBalabanContinuumPromotionImpossible :
@@ -298,8 +291,3 @@ unifiedFleetFormalGapTargetSelected =
 unifiedHistoricalGate4CountSelectedAsFleetTarget : Bool
 unifiedHistoricalGate4CountSelectedAsFleetTarget =
   FleetHyperTOE.historicalGate4CountSelectedAsFleetTarget
-
-unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
-  FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
-unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
-  FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap

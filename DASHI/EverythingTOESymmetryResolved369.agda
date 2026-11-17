@@ -953,77 +953,88 @@ toeBalabanScaleTransferPromotionImpossible :
 toeBalabanScaleTransferPromotionImpossible =
   ParetoSnowballTOE.balabanScaleTransferPromotionImpossible
 
-toeIbrahimRecognitionParetoBoundary :
-  ParetoSnowballTOE.RecognitionRouteParetoBoundary
-toeIbrahimRecognitionParetoBoundary =
-  ParetoSnowballTOE.ibrahimRecognitionParetoBoundary
+toeBalabanScaleTransferNonPromotion :
+  BalabanR559TOE.ScaleTransferPromotion → ⊥
+toeBalabanScaleTransferNonPromotion =
+  BalabanR559TOE.scaleTransferPromotionEliminator
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
-toeIbrahimCharacterExecutionFrontier :
-  ParetoSnowballTOE.Monster3BCharacterExecutionFrontier
-toeIbrahimCharacterExecutionFrontier =
-  ParetoSnowballTOE.ibrahimCharacterExecutionFrontier
+------------------------------------------------------------------------
+-- R559 / Ibrahim / fleet-58 / generic-hyperfabric TOE convergence.
+-- The theorem owners remain in DASHI.Unified.R559IbrahimFleetHyperfabricTOEExact.
+------------------------------------------------------------------------
 
-toeIbrahimPhaseResolutionFrontier :
-  ParetoSnowballTOE.InertiaPhaseResolutionFrontier
-toeIbrahimPhaseResolutionFrontier =
-  ParetoSnowballTOE.ibrahimPhaseResolutionFrontier
+import DASHI.Unified.R559IbrahimFleetHyperfabricTOEExact as FleetHyperTOE
 
-toeIbrahimSchrodingerHZetaMaxCutBoundary :
-  ParetoSnowballTOE.SchrodingerHZetaRecognitionMaxCutBoundary
-toeIbrahimSchrodingerHZetaMaxCutBoundary =
-  ParetoSnowballTOE.ibrahimSchrodingerHZetaMaxCutBoundary
+toeR559IbrahimFleetHyperfabricReceipt :
+  FleetHyperTOE.R559IbrahimFleetHyperfabricTOEReceipt
+toeR559IbrahimFleetHyperfabricReceipt =
+  FleetHyperTOE.canonicalR559IbrahimFleetHyperfabricTOEReceipt
 
-toeIbrahimHistoricalDiscriminatorBoundary :
-  ParetoSnowballTOE.HistoricalDiscriminatorBoundary
-toeIbrahimHistoricalDiscriminatorBoundary =
-  ParetoSnowballTOE.ibrahimHistoricalDiscriminatorBoundary
+toeFleetFormalGapsAre58 :
+  FleetHyperTOE.fleetFormalGaps ≡ 58
+toeFleetFormalGapsAre58 =
+  FleetHyperTOE.fleetFormalGapsAre58
 
-toeBalabanIbrahimParetoSnowballZKPFrame :
-  ParetoSnowballTOE.TOEZKPFrame
-toeBalabanIbrahimParetoSnowballZKPFrame =
-  ParetoSnowballTOE.canonicalTOEZKPFrame
+toeFleetDischargedFibresAre584 :
+  FleetHyperTOE.fleetDischargedFibres ≡ 584
+toeFleetDischargedFibresAre584 =
+  FleetHyperTOE.fleetDischargedFibresAre584
 
-toeIbrahimSearchPriorityDoesNotCreateProof :
-  ParetoSnowballTOE.SearchPriorityCreatesProof → ⊥
-toeIbrahimSearchPriorityDoesNotCreateProof =
-  ParetoSnowballTOE.searchPriorityDoesNotCreateProof
+toeFleetContradictionGapsAre44 :
+  FleetHyperTOE.fleetContradictionGaps ≡ 44
+toeFleetContradictionGapsAre44 =
+  FleetHyperTOE.fleetContradictionGapsAre44
 
-toeIbrahimProducerSourceDoesNotCreateRunReceipt :
-  ParetoSnowballTOE.ProducerSourceCreatesRunReceipt → ⊥
-toeIbrahimProducerSourceDoesNotCreateRunReceipt =
-  ParetoSnowballTOE.producerSourceDoesNotCreateRunReceipt
+toePadicPrefixCannotRecoverDiscardedDigit :
+  FleetHyperTOE.PadicPrefixRecovery → ⊥
+toePadicPrefixCannotRecoverDiscardedDigit =
+  FleetHyperTOE.toePadicPrefixCannotRecoverDiscardedDigit
 
-toeIbrahimDegree729DoesNotCreateMonsterHZetaRecognition :
-  ParetoSnowballTOE.Degree729CreatesMonsterHZetaRecognition → ⊥
-toeIbrahimDegree729DoesNotCreateMonsterHZetaRecognition =
-  ParetoSnowballTOE.degree729DoesNotCreateMonsterHZetaRecognition
+toeTwoDigitStreamCannotRecoverThird :
+  FleetHyperTOE.StreamThirdPrefixRecovery → ⊥
+toeTwoDigitStreamCannotRecoverThird =
+  FleetHyperTOE.toeTwoDigitStreamCannotRecoverThird
 
-toeIbrahimPaperOracleDoesNotIdentifyHistoricalDump :
-  ParetoSnowballTOE.PaperOracleIdentifiesDump → ⊥
-toeIbrahimPaperOracleDoesNotIdentifyHistoricalDump =
-  ParetoSnowballTOE.paperOracleDoesNotIdentifyHistoricalDump
+toeFleetGate4CountAgreement :
+  FleetHyperTOE.fleetFormalGaps
+  ≡ BalabanR559TOE.gate4UnresolvedCount
+      BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+toeFleetGate4CountAgreement =
+  FleetHyperTOE.fleetFormalGapCountEqualsGate4Count
 
-toeRGAndIbrahimJointPromotionImpossible :
-  ParetoSnowballTOE.BalabanScaleTransferPromotion →
-  ParetoSnowballTOE.SearchPriorityCreatesProof → ⊥
-toeRGAndIbrahimJointPromotionImpossible rg sourcePriority =
-  toeBalabanScaleTransferPromotionImpossible rg
+toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
+  FleetHyperTOE.fleetGate4CountEqualitySelectsCanonicalMap ≡ false
+toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
+  FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
 
-toeRGAndIbrahimSearchPromotionImpossible :
-  ParetoSnowballTOE.SearchPriorityCreatesProof →
-  ParetoSnowballTOE.BalabanScaleTransferPromotion → ⊥
-toeRGAndIbrahimSearchPromotionImpossible sourcePriority rg =
-  toeIbrahimSearchPriorityDoesNotCreateProof sourcePriority
 
--- These are two independent 27-state owners. No same-carrier assertion follows.
-import DASHI.Core.ConsumerDescentMinimalObserverExact as TOE27Descent
-import Data.Empty as TOE27Empty
+------------------------------------------------------------------------
+-- Typed Balaban continuum no-go and live Gate-4 frontier.
+------------------------------------------------------------------------
 
-toeTernary27FaceCannotDescend :
-  TOE27Descent.FactorsThrough Face27TOE.boundaryObserver Face27TOE.faceConsumer → TOE27Empty.⊥
-toeTernary27FaceCannotDescend = Face27TOE.triadicFaceCannotFactorThroughThreeEdges
+toeBalabanContinuumPromotionImpossible :
+  FleetHyperTOE.BalabanContinuumPromotion → ⊥
+toeBalabanContinuumPromotionImpossible =
+  FleetHyperTOE.toeBalabanContinuumPromotionImpossible
 
-toeTernary27DependentCodePreservesConsumer :
-  ∀ {Outcome : Set} → (consumer : Recoverable27TOE.Orbit.TritTriple → Outcome) →
-  Recoverable27TOE.Descent.ConsumerSufficient Recoverable27TOE.ternary27ExactCodeObserver consumer
-toeTernary27DependentCodePreservesConsumer = Recoverable27TOE.ternary27ExactCodeAdequateForEveryConsumer
+toeDepthContinuumPromotionImpossible :
+  FleetHyperTOE.DepthContinuumPromotion → ⊥
+toeDepthContinuumPromotionImpossible =
+  FleetHyperTOE.toeDepthContinuumPromotionImpossible
+
+toeCurrentGate4FrontierLedgerLevel : ProofLevel
+toeCurrentGate4FrontierLedgerLevel =
+  FleetHyperTOE.currentGate4FrontierLedgerLevel
+
+toeCurrentGate4ClusteringToTransferGapLevel : ProofLevel
+toeCurrentGate4ClusteringToTransferGapLevel =
+  FleetHyperTOE.currentGate4ClusteringToTransferGapLevel
+
+toeFleetFormalGapTargetSelected : Bool
+toeFleetFormalGapTargetSelected =
+  FleetHyperTOE.fleetFormalGapTargetSelected
+
+toeHistoricalGate4CountSelectedAsFleetTarget : Bool
+toeHistoricalGate4CountSelectedAsFleetTarget =
+  FleetHyperTOE.historicalGate4CountSelectedAsFleetTarget

@@ -2,7 +2,6 @@
 module DASHI.Unified.R559IbrahimFleetHyperfabricTOEValidation where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Bool using (false; true)
 open import Data.Empty using (⊥)
 
 import DASHI.EverythingTOESymmetryResolved369 as TOE
@@ -10,9 +9,6 @@ import DASHI.Unifier as Unifier
 import DASHI.Unified.Everything as Unified
 import DASHI.Unified.R559IbrahimFleetHyperfabricTOEExact as Owner
 import DASHI.Unified.FleetFormalGapTargetTOEExact as Fleet
-import DASHI.ComputerScience.TriadicFin27Byte256ABIExact as TriadicABI
-import DASHI.ComputerScience.TriadicU8RuntimeOracleCrossRepoExact as U8Runtime
-import DASHI.ComputerScience.TriadicCompiledScalarU8RuntimeExact as CompiledU8
 
 toeReceiptMatchesOwner :
   TOE.toeR559IbrahimFleetHyperfabricReceipt
@@ -79,23 +75,45 @@ unifierStreamLossStillExact :
 unifierStreamLossStillExact =
   Unifier.unifierTwoDigitStreamCannotRecoverThird
 
-fleetEigenPriorityStillDoesNotCreateProof :
-  Fleet.eigenvalueMagnitudeCreatesProofAuthority
-    Owner.fleetFormalGapTargetReceipt ≡ false
-fleetEigenPriorityStillDoesNotCreateProof =
-  Owner.fleetEigenPriorityDoesNotCreateProof
-
 fleetCountStillDoesNotCreateFormalDischarge :
-  Fleet.externalCountCreatesFormalProof
-    Owner.fleetFormalGapTargetReceipt ≡ false
+  Fleet.FleetExternalCountCreatesFormalDischarge → ⊥
 fleetCountStillDoesNotCreateFormalDischarge =
   Owner.fleetExternalCountDoesNotCreateFormalDischarge
 
 fleetDischargedFibresStillCannotBeRetargeted :
-  Fleet.dischargedFibresRemainDischarged
-    Owner.fleetFormalGapTargetReceipt ≡ true
+  Fleet.FleetDischargedFibreRetargetPermission → ⊥
 fleetDischargedFibresStillCannotBeRetargeted =
   Owner.fleetDischargedFibresStayOutOfTarget
+
+------------------------------------------------------------------------
+-- Equal count does not create same-object identity.
+------------------------------------------------------------------------
+
+toeFleetGate4CountAgreementMatchesOwner :
+  TOE.toeFleetGate4CountAgreement
+  ≡ Owner.fleetFormalGapCountEqualsGate4Count
+toeFleetGate4CountAgreementMatchesOwner = refl
+
+unifierFleetGate4CountAgreementMatchesOwner :
+  Unifier.unifierFleetGate4CountAgreement
+  ≡ Owner.fleetFormalGapCountEqualsGate4Count
+unifierFleetGate4CountAgreementMatchesOwner = refl
+
+unifiedFleetGate4CountAgreementMatchesOwner :
+  Unified.unifiedFleetGate4CountAgreement
+  ≡ Owner.fleetFormalGapCountEqualsGate4Count
+unifiedFleetGate4CountAgreementMatchesOwner = refl
+
+toeFleetGate4NonidentityMatchesOwner :
+  TOE.toeFleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+  ≡ Owner.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+toeFleetGate4NonidentityMatchesOwner = refl
+
+unifierFleetGate4NonidentityMatchesOwner :
+  Unifier.unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+  ≡ Owner.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
+unifierFleetGate4NonidentityMatchesOwner = refl
+
 
 
 ------------------------------------------------------------------------

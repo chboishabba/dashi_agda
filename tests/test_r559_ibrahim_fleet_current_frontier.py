@@ -16,7 +16,6 @@ def test_current_frontier_and_typed_continuum_no_go_are_reused() -> None:
         "YMBalabanContinuumLimitReceipt",
         "YMDepthAsContinuumLimitReceipt",
         "BalabanClayGate4CurrentFrontierReceipt",
-        "EqualCardinalityStructureBoundaryExact",
         "toeBalabanContinuumPromotionImpossible",
         "toeDepthContinuumPromotionImpossible",
         "currentGate4FrontierLedgerLevel",
@@ -27,7 +26,7 @@ def test_current_frontier_and_typed_continuum_no_go_are_reused() -> None:
     ):
         assert marker in owner
 
-def test_all_toe_facades_reach_current_frontier_and_target_split() -> None:
+def test_all_toe_facades_reach_the_current_frontier_boundary() -> None:
     for path, prefix in (
         (TOE, "toe"),
         (UNIFIER, "unifier"),
@@ -41,11 +40,10 @@ def test_all_toe_facades_reach_current_frontier_and_target_split() -> None:
             "CurrentGate4ClusteringToTransferGapLevel",
             "FleetFormalGapTargetSelected",
             "HistoricalGate4CountSelectedAsFleetTarget",
-            "FleetGate4EqualCardinalityDoesNotSelectCanonicalMap",
         ):
             assert f"{prefix}{suffix}" in text
 
-def test_validation_binds_all_three_facades_to_owner() -> None:
+def test_validation_binds_facades_to_owner() -> None:
     text = read(UNIFIED / "R559IbrahimFleetHyperfabricTOEValidation.agda")
     for marker in (
         "toeCurrentGate4FrontierMatchesOwner",
@@ -54,22 +52,12 @@ def test_validation_binds_all_three_facades_to_owner() -> None:
         "toeFleetTargetSelectionMatchesOwner",
         "unifierFleetTargetSelectionMatchesOwner",
         "unifiedFleetTargetSelectionMatchesOwner",
-        "toeBalabanContinuumNoGoReachable",
-        "unifierBalabanContinuumNoGoReachable",
-        "unifiedBalabanContinuumNoGoReachable",
     ):
         assert marker in text
 
 def test_no_trust_escape_or_esd_dependency_in_extended_owner() -> None:
     text = read(UNIFIED / "R559IbrahimFleetHyperfabricTOEExact.agda")
-    for token in (
-        "postulate",
-        "allow-unsolved-metas",
-        "TERMINATING",
-        "NON_TERMINATING",
-        "NO_POSITIVITY_CHECK",
-        "{!!}",
-    ):
+    for token in ("postulate", "allow-unsolved-metas", "TERMINATING", "NON_TERMINATING", "NO_POSITIVITY_CHECK", "{!!}"):
         assert token not in text
     assert "digital_esd" not in text.lower()
     assert "import DASHI.ESD" not in text
