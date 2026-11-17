@@ -102,3 +102,59 @@ H_cv (Eg I6 - Hv)^(-1) H_vc
 Consequently `m0/m*=1+2F+(Ep/3)[2/Eg+1/(Eg+Delta)]`, for all momentum directions in this isotropic truncation. An independent numerical 8×8 eigenspectrum check for [100], [010], [001], [111] at both 0K and 300K fixed-F inputs confirms the analytical curvature. **17/17 local checks PASS**; no Agda kernel proof of this complex-spinful matrix yet.
 
 This is a **near-Γ 8-state curvature model**, not a full finite-k fitted 8-band material device model. It omits the full valence Luttinger k² terms, real heterointerface boundary conditions, Bir–Pikus strain, conduction/valence field-driven confinement, screening, doping, recombination and measured PV efficiency; and the parameter F summarizes remote bands rather than resolving them as physical states. These are physical producer gates, not proofs to fabricate by selecting scalar data.
+
+
+## 17 Nov continuation: source-qualified [111] Bir-Pikus matrix and spinful optical response
+
+**Owner:** \`scripts/check_gaas_111_kane_birpikus_maxcut.py\` and \`DASHI/Physics/Photovoltaic/GaAs111BirPikusC3vFiniteExact.agda\`; imported into \`DASHI/Unified/PVPrimaryTOESpliceExact.agda\`. **94/94 locally executed numeric/model checks PASS**. Source-written Agda has no native kernel acceptance. The local script's exact committed GitHub copy has not been independently rerun from a branch checkout.
+
+**Original sources and limits:** Bir–Pikus original strain formalism; [Vurgaftman et al., GaAs parameters, JAP 89 (2001)](https://doi.org/10.1063/1.1368156); [Bahder, strained zincblende eight-band, PRB 41 (1990)](https://doi.org/10.1103/PhysRevB.41.11992); [OghmaNano, explicit Cartesian XYZ Bir–Pikus convention](https://www.oghma-nano.com/manual/bir-pikus.html). Bahder's FULL operator also has conduction shear deformation and k×strain interband coupling missing from the present **near-Γ truncation**, therefore do NOT label the present model a complete Bahder implementation.
+
+### Exact strain-model and source conventions
+
+Using a **prescribed homogeneous symmetric strain tensor** ε and 3×3 orbital basis (X,Y,Z), define the following specified Cartesian convention:
+
+\`\`\`
+(H_BP)ii = av_eff Tr ε + b(3 εii - Tr ε)
+(H_BP)ij = sqrt(3) d εij, i≠j .
+\`\`\`
+
+GaAs illustrative constants: ac=-7.17 eV; effective valence energy coefficient av_eff=-1.16 eV; b=-2.0 eV; d=-4.8 eV; Eg(300 K)=1.422 eV, Δ_so=0.341 eV, Ep=28.8 eV. **Vurgaftman's valence a_v sign convention is not directly the Oghma matrix convention**; av_eff=-1.16 means an actual valence shift -1.16 Tr ε. This is declared, not silently equated to a source's +1.16 magnitude. F=-1.94 is reused from the zero-temperature mass parameter set solely in the conduction-curvature truncation. Uncertainty and temperature fit remain open.
+
+For a generic [111] axial strain with n=(1,1,1)/sqrt(3), ε = ε_perp I+(ε_parallel-ε_perp)nn^T, δ=ε_parallel-ε_perp:
+
+\`\`\`
+H_BP,[111] = av_eff Tr ε I3 + (d δ / sqrt(3))(J3 - I3).
+E_A1 = av_eff Tr ε + 2 d δ/sqrt(3)
+E_E  = av_eff Tr ε - d δ/sqrt(3)  (twofold spinless).
+E_A1 - E_E = sqrt(3) d δ.
+\`\`\`
+
+This algebra is checked by direct 3×3 matrix-eigenvalue computations at ±0.8%, ±0.5%, +0.3% and zero strain, including C3 rotations and compatible mirrors, and the *same entry covariance* is encoded by finite Agda case exhaustion. The [001] comparator ε=δ zz^T gives orbital splitting |3 b δ| and breaks the [111] C3 action. A zero (pure hydrostatic) strain component does not lift valence spin-orbit degeneracy.
+
+The **spinful** valence part is \`H_v=2Δ/3 L·S-Δ I6/3+H_BP⊗I2\`; conduction \`H_c=Eg+ac Tr ε+(1+2F)ε_k\` and Kane interband \`sqrt(Ep) k_tilde_j\`. The numeric model is eight-state and Hermitian but omits the full Luttinger valence dispersion, Bahder's k×strain mixing, actual boundary strain, confinement, piezoelectric polarization, and wavefunction-derived absorption or electric extraction. The relevant [111] rotation is orbital R⊗spin SU2(120°), whose third power is −I6 (spinorial double group); [001] strain fails that C3 test. Time reversal is conserved and every listed Γ level remains Kramers degenerate.
+
+### Spinful numeric diagnostic: exact source parameters, illustrative tensor
+
+At **0.5% axial [111] strain** with \`ε_perp=0\`, the Γ transitions from three Kramers valence pairs into the conduction-edge doublet are:
+
+| E_transition (eV) | longitudinal ([111]) Kane strength/Ep | each transverse strength/Ep |
+|---:|---:|---:|
+| 1.378094 | 0.000000 | 1.000000 |
+| 1.404637 | 1.218820 | 0.390590 |
+| 1.734120 | 0.781180 | 0.609410 |
+| **sum** | **2.000000** | **2.000000** |
+
+For opposite prescribed −0.5% [111] axial strain: transition edges 1.437115, 1.465906, 1.794129 eV; longitudinal strengths 1.434817, 0, 0.565183 respectively and transverse strengths 0.282591, 1, 0.717409. Unstrained [111] spectrum: Γ8 fourfold 1.422 eV, Γ7 doublet 1.763 eV. At **zero strain**, the original eigensolver can choose an arbitrary basis inside the fourfold Γ8 subspace: calculating intensities separately for arbitrary two-state subsets is NOT invariant. The checker was corrected to group **all exactly degenerate multiplets by spectral projector**; the correct polarization-invariant Γ8 and Γ7 strengths are 4/3 and 2/3 per polarization.
+
+For the [001] comparator at +0.5% prescribed axial strain, energies are 1.381950, 1.401347 and 1.733553 eV, with a different direction-dependent optical decomposition. The numerical results are **spectral matrix-element weights**, not absorption coefficients, EQE, power conversion or proof of photovoltaic gain.
+
+**Conservation:** summing over every valence state and both conduction spin states for any normalized light polarization gives 2 Ep, independent of strain. This holds because the spin-independent Kane momentum tensor is a complete orbital-spin isometry and does not rely on fitted experimental spectra. It is not an upper bound on actual absorption of a designed device with different thickness or optical modes. Longitudinal [111] polarization is a mathematically useful component; for a plane wave propagating **along [111]**, E must be transverse, so a longitudinal excitation is not a directly realizable collinear far-field optical setting.
+
+### Adversarial acceptance and candidate controls
+
+1. **PASS under stipulated model:** +/−strain, 111↔001, C3v rotation/mirror, spinorial triple rotation, Kramers/time reversal, Hermiticity, complete projector dipole sum, non-symmetric input rejection. 94/94.
+2. **OPEN as FULL material physics:** source-calibrated and physically relaxed ε_ij(r), finite-k Luttinger parameters and Bahder k×strain couplings, atomistic/alloy/defect mixing, strain temperature and measurement uncertainty.
+3. **OPEN as optical experiment:** measured [111] vs [001] reflectance/absorptance/EQE at specified spectral flux and controlled strain, resolved Γ-valence polarization and extraction at the same two-terminal MPP.
+4. **OPEN as 369-specific claim:** evidence that the original ternary/369 construction restricts or predicts a measurable material parameter or operation *beyond* conventional Td→C3v group theory. A group representation equivalence is not evidence of net extra harvested energy.
+5. **OPEN as benchmark:** actual AM1.5G/G173 photovoltaic efficiency, standard aperture normalization, stability/controls, and >50% independent confirmation. Heat remains a separate auxiliary coproduct.
