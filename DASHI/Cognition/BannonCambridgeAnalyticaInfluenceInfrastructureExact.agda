@@ -33,6 +33,11 @@ data InfluenceEdgeKind : Set where
   fecCoordinationAllegationDisposition : InfluenceEdgeKind
   bannonLeaveEUIntroduction : InfluenceEdgeKind
   aiqSclCambridgeAnalyticaWorkingRelation : InfluenceEdgeKind
+  canadianJointPrivacyRegulatorAIQFinding : InfluenceEdgeKind
+  ftcKoganNixSeparateIndividualConsents : InfluenceEdgeKind
+  ftc2020BannonCivilDemandInvestigation : InfluenceEdgeKind
+  ftc2020BannonJudicialShowCauseOrder : InfluenceEdgeKind
+  ukElectoralAIQActualCampaignPayments : InfluenceEdgeKind
   breitbartDataConfigIntersection : InfluenceEdgeKind
   psychographicEffectivenessUnresolved : InfluenceEdgeKind
   electionOutcomeCausationUnresolved : InfluenceEdgeKind
@@ -139,6 +144,73 @@ aiqWorkingRelationReceipt = influence-receipt
   "The Committee found clear evidence of a close working relationship among Cambridge Analytica, SCL and AggregateIQ, including software/data infrastructure and contractual relations."
   true true false false
 
+
+canadianJointRegulatorAIQReceipt : InfluenceReceipt
+canadianJointRegulatorAIQReceipt = influence-receipt
+  canadianJointPrivacyRegulatorAIQFinding
+  "Canada OPC + BC OIPC ONE joint investigation 2019-11-26, PIPEDA Findings 2019-004, paras 25-32, 68-70, 94, 95-107"
+  "independent joint privacy-regulator findings (one investigation, not two)"
+  "Canadian regulators concluded AIQ received and used OCEAN psychographic scores for millions of US voters, derived at least in part from data collected by Aleksandr Kogan; reviewed documents indicated AIQ knew of the Kogan source. Investigators found inadequate consent and data safeguards. This pays aggregate score supply and scoped privacy noncompliance, not raw Facebook dataset custody, a particular scored row/version, political efficacy, Aquino origin or Epstein funding."
+  true false false true
+
+
+ftcKoganNixIndividualConsentReceipt : InfluenceReceipt
+ftcKoganNixIndividualConsentReceipt = influence-receipt
+  ftcKoganNixSeparateIndividualConsents
+  "FTC personal consent dockets C-4693 (Kogan) / C-4694 (Nix), Matter 182-3106/182-3107, final 2019-12-18; https://www.ftc.gov/legal-library/browse/cases-proceedings/182-3106-182-3107-aleksandr-kogan-alexander-nix-matter"
+  "two separately issued final CONSENT orders within one FTC investigation; not a corporate default finding or independent second investigative team"
+  "FTC final individual orders prohibit covered-data misrepresentation and require recipient statements and destruction of GSRApp data and derivative models, subject to preservation rules. Kogan/Nix did not admit complaint allegations, except jurisdiction facts; order publication does not show actual compliance or adjudication of personal allegations."
+  true false false false
+
+ukElectoralAiqPaymentsReceipt : InfluenceReceipt
+ukElectoralAiqPaymentsReceipt = influence-receipt
+  ukElectoralAIQActualCampaignPayments
+  "UK Electoral Commission original Vote Leave/BeLeave/Veterans for Britain investigation, 2018, with 2019-08-14 appeal update and 2020-05-07 litigation-cost update; https://www.electoralcommission.org.uk/cy/node/619"
+  "independent UK statutory campaign-finance regulator with subsequently corrected judicial/civil enforcement dispositions"
+  "Regulator lists five June 2016 payments for AIQ campaign services: three Vote Leave-sourced payments reported in Grimes' returns totalling GBP675315.18, a separate GBP50000 Clake payment, and a GBP100000 Vote Leave-to-Veterans for Britain payment. Vote Leave paid GBP61000 fines and withdrew its appeal; Grimes successfully appealed his GBP20000 sanction in July 2019. This does not identify Facebook/GSR source files or prove electoral outcome effects."
+  true false false false
+
+
+------------------------------------------------------------------------
+-- FTC v. BANNON 2020 DISTINCT ORIGINAL FEDERAL COURT PROCEEDING
+-- Federal FTC petition and reply are ONE government litigant/root.
+-- Bannon's response is a separate *adversarial* litigant statement,
+-- neither a judicial finding nor an independent examination of his data.
+------------------------------------------------------------------------
+
+ftc2020BannonCIDPetitionReceipt : InfluenceReceipt
+ftc2020BannonCIDPetitionReceipt = influence-receipt
+  ftc2020BannonCivilDemandInvestigation
+  "FTC v. Stephen K. Bannon, DDC 1:20-mc-00111-CRC, FTC petition ECF1 2020-11-09; https://www.ftc.gov/system/files/documents/cases/01_redacted_petition_memo_iso_exhibits_proposed_order.pdf"
+  "original FTC court pleading / agency investigative allegation, NOT civil or criminal merits judgment"
+  "FTC formally sought to enforce Bannon's 2019 civil investigative demand for a hearing about possible individual responsibility for Cambridge Analytica's data practices. FTC petition says he answered interrogatories and supplied documents during January-February 2020 but contested his later hearing attendance. Neither those underlying responses nor a final merits disposition is authenticated here."
+  true false false false
+
+ftc2020BannonRespondentOppositionReceipt : InfluenceReceipt
+ftc2020BannonRespondentOppositionReceipt = influence-receipt
+  ftc2020BannonCivilDemandInvestigation
+  "FTC v. Stephen K. Bannon, DDC 1:20-mc-00111-CRC, Bannon opposition ECF12 2020-12-09; https://www.ftc.gov/system/files/documents/cases/12_bannon_opposition_to_petition_to_enforce_cid.pdf"
+  "original independent opposing litigant pleading / attributed defence, NOT judicial exoneration"
+  "Bannon denied involvement in or knowledge of Cambridge Analytica's alleged Facebook data wrongdoing and asserted prior document production and Fifth Amendment burdens. His sworn interrogatories and the case's ultimate outcome were not independently audited; his denial and the FTC's assertions must both remain visible."
+  true false false false
+
+
+ftc2020BannonJudicialShowCauseReceipt : InfluenceReceipt
+ftc2020BannonJudicialShowCauseReceipt = influence-receipt
+  ftc2020BannonJudicialShowCauseOrder
+  "FTC v. Stephen K. Bannon, DDC 1:20-mc-00111-CRC, Judge Christopher R. Cooper, 2020-11-18 ECF5; https://www.ftc.gov/system/files/documents/cases/05_order_to_show_cause_0.pdf"
+  "signed original federal judicial PROCEDURAL order, separate court producer from FTC litigant"
+  "Court found good cause to schedule an order-to-show-cause hearing about enforcing the 2019 FTC civil investigative demand, not to adjudicate consumer-privacy misconduct or enter a final enforcement disposition. The original November 18 order is visibly signed as the judge's court order; the outcome of later hearings is not authenticated in this acquisition."
+  true false false false
+
+ftc2020BannonReplyReceipt : InfluenceReceipt
+ftc2020BannonReplyReceipt = influence-receipt
+  ftc2020BannonCivilDemandInvestigation
+  "FTC v. Stephen K. Bannon, DDC 1:20-mc-00111-CRC, FTC reply ECF13 2020-12-18; https://www.ftc.gov/system/files/documents/cases/13_ftcs_reply_iso_petition.pdf"
+  "same FTC prosecutor root as original petition; reply is not independent corroboration"
+  "FTC disputed the respondent's delay, Fifth Amendment and duplicative-testimony arguments and again requested enforcement of the hearing demand. Pleadings establish litigants' positions and procedural requests, not a resolved personal-liability finding or a Bannon-to-Epstein technology transfer."
+  true false false false
+
 breitbartConfigReceipt : InfluenceReceipt
 breitbartConfigReceipt = influence-receipt
   breitbartDataConfigIntersection
@@ -183,6 +255,13 @@ canonicalInfluenceReceipts =
   ∷ fecDispositionReceipt
   ∷ leaveEUIntroductionReceipt
   ∷ aiqWorkingRelationReceipt
+  ∷ canadianJointRegulatorAIQReceipt
+  ∷ ftcKoganNixIndividualConsentReceipt
+  ∷ ftc2020BannonCIDPetitionReceipt
+  ∷ ftc2020BannonJudicialShowCauseReceipt
+  ∷ ftc2020BannonRespondentOppositionReceipt
+  ∷ ftc2020BannonReplyReceipt
+  ∷ ukElectoralAiqPaymentsReceipt
   ∷ breitbartConfigReceipt
   ∷ psychographicEffectivenessReceipt
   ∷ electionOutcomeBoundaryReceipt
@@ -281,3 +360,71 @@ bannonContinuityDoesNotCreateTechniqueReuse ()
 
 cambridgeAnalyticaDoesNotCreateEpsteinCoordination : CambridgeAnalyticaImpliesEpsteinCoordination → ⊥
 cambridgeAnalyticaDoesNotCreateEpsteinCoordination ()
+
+
+------------------------------------------------------------------------
+-- 2026-10-27: MUR 7351 / FTC CID source-identity, disposition and
+-- corroboration ceilings. See original FEC legal record, separate FTC
+-- original docket and Jose Pagliery's 2021 firsthand reporting.
+-- Source attribution: original FEC commissioners, FTC agency/counsel,
+-- district judge and reporter separately; Johl Brown directs analytic
+-- boundary, OpenAI ChatGPT assists reconstruction.
+------------------------------------------------------------------------
+
+data BannonCAMatter : Set where
+  fecMUR7351ForeignNationalContributions : BannonCAMatter
+  ftcCID20mc00111CooperProcedure : BannonCAMatter
+  ftcCAMatter9389CompanyMerits : BannonCAMatter
+
+data UnavailableMatterIdentity : Set where
+
+fecClosureCannotCloseFTCBannonCID :
+  fecMUR7351ForeignNationalContributions ≡ ftcCID20mc00111CooperProcedure →
+  UnavailableMatterIdentity
+fecClosureCannotCloseFTCBannonCID ()
+
+ftcCACorporateOrderIsNotBannonCIDDisposition :
+  ftcCAMatter9389CompanyMerits ≡ ftcCID20mc00111CooperProcedure →
+  UnavailableMatterIdentity
+ftcCACorporateOrderIsNotBannonCIDDisposition ()
+
+data OriginalProceedingSourceRole : Set where
+  federalElectionCommissionCaseRecord : OriginalProceedingSourceRole
+  federalTradeCommissionCaseRecord : OriginalProceedingSourceRole
+  contemporaneousOriginalReporter : OriginalProceedingSourceRole
+
+record BannonCASeparateLegalReceipt : Set where
+  constructor bannon-ca-legal-receipt
+  field
+    producerRole : OriginalProceedingSourceRole
+    sourceName : String
+    originalLocator : String
+    evidentialCeiling : String
+    sourceShowsFileClosed : Bool
+    signedFTCCIDFinalOrderInspected : Bool
+    provesBannonPersonalPrivacyWrongdoing : Bool
+open BannonCASeparateLegalReceipt public
+
+fecMUR7351OriginalClosureReceipt : BannonCASeparateLegalReceipt
+fecMUR7351OriginalClosureReceipt = bannon-ca-legal-receipt
+  federalElectionCommissionCaseRecord
+  "US Federal Election Commission MUR #7351 original disposition, Cambridge Analytica LLC and separately listed respondents including Stephen K. Bannon"
+  "https://www.fec.gov/data/legal/matter-under-review/7351/"
+  "Official FEC HTML reports 5-0 vote to CLOSE FEC file; Bannon listed Dismissed-Other. Earlier reason-to-believe votes regarding some named respondents are preliminary and NOT an adjudication. 7350/7351 shared FEC acts are not independent investigations; closure is NOT the distinct FTC CID judicial disposition."
+  true false false
+
+ftcBannonDocketOriginalPublicIndexReceipt : BannonCASeparateLegalReceipt
+ftcBannonDocketOriginalPublicIndexReceipt = bannon-ca-legal-receipt
+  federalTradeCommissionCaseRecord
+  "Federal Trade Commission v Stephen K Bannon, District of Columbia 1:20-mc-00111-CRC; FTC publisher original case chronology"
+  "https://www.ftc.gov/legal-library/browse/cases-proceedings/bannon-stephen-k"
+  "FTC public index lists original petition, respondent defence, judge's show-cause order, agency reply to 18 Dec 2020. Original signed Jan 2021 petition-grant/order and compliance/closure NOT inspected here."
+  false false false
+
+paglieryJan2021CourtRulingReporting : BannonCASeparateLegalReceipt
+paglieryJan2021CourtRulingReporting = bannon-ca-legal-receipt
+  contemporaneousOriginalReporter
+  "Jose Pagliery, The Daily Beast, October 2021 originally reported judicial grant of the FTC CID petition"
+  "https://www.thedailybeast.com/jan-6-committee-plans-to-hold-steve-bannon-in-criminal-contempt"
+  "Contemporaneous reporter asserts Judge Christopher Cooper granted petition in January 2021; this is NOT signed court-order authentication or verification that compelled testimony occurred. Distinct from Jan 6 congressional subpoena and federal border-wall pardon."
+  false false false

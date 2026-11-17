@@ -1,0 +1,946 @@
+{
+  "schema_version": "aquino-epstein-source-world-2",
+  "as_of": "2026-10-26",
+  "method_donor": "PR #1268 data shape and claim-relative target discipline only; sibling code is NOT vendored or imported; generic attribution and Pareto owners remain on canonical DASHI master/parent",
+  "attribution_policy": "Original agency and individual authors retain original statements; Johl Brown directs independent hypothesis/consumer framing, AI-assisted source-world encoding. Source-reported != reproduced/established independently; missing != false; no cross-cluster command inferred.",
+  "sources": [
+    {
+      "id": "canada_joint_2019",
+      "producer": "Office of the Privacy Commissioner of Canada and BC OIPC (ONE joint investigative producer)",
+      "role": "privacy_regulatory_finding",
+      "original": "https://www.priv.gc.ca/en/opc-actions-and-decisions/investigations/investigations-into-businesses/2019/pipeda-2019-004/"
+    },
+    {
+      "id": "ftc_2019_2020",
+      "producer": "Federal Trade Commission, separate respondent-specific corporate, individual and CID legal products, ONE agency producer",
+      "role": "federal_agency_investigator",
+      "original": "https://www.ftc.gov/legal-library/browse/cases-proceedings/bannon-stephen-k"
+    },
+    {
+      "id": "bannon_defence_2020",
+      "producer": "Steve Bannon through his legal counsel",
+      "role": "adversarial_respondent_pleading",
+      "original": "https://www.ftc.gov/system/files/documents/cases/12_bannon_opposition_to_petition_to_enforce_cid.pdf"
+    },
+    {
+      "id": "ddc_judge_2020",
+      "producer": "Judge Christopher R. Cooper, US District Court for the District of Columbia",
+      "role": "procedural_judicial_order",
+      "original": "https://www.ftc.gov/system/files/documents/cases/05_order_to_show_cause_0.pdf"
+    },
+    {
+      "id": "uk_electoral",
+      "producer": "UK Electoral Commission",
+      "role": "original_campaign_finance_regulator",
+      "original": "https://www.electoralcommission.org.uk/cy/node/619"
+    },
+    {
+      "id": "dea_ocdetf_2015",
+      "producer": "DEA/OCDETF original investigating programme",
+      "role": "indexed_native_intelligence_lead_not_page_authenticated",
+      "original": "https://www.justice.gov/epstein/files/DataSet%209/EFTA00173953.pdf"
+    },
+    {
+      "id": "hsi_ipr_2011",
+      "producer": "HSI/ICE IPR Center anti-counterfeit programme",
+      "role": "distinct_original_institutional_operation",
+      "original": "https://www.iprcenter.gov/file-repository/ipu-operation-chain-reaction.pdf"
+    },
+    {
+      "id": "wyden_senate_2026",
+      "producer": "Senator Ron Wyden/Senate Finance oversight team (Feb and Mar ONE inquiry root)",
+      "role": "subsequent_senate_allegation",
+      "original": "https://www.finance.senate.gov/ranking-members-news/wyden-questions-dea-over-mystery-epstein-investigation"
+    },
+    {
+      "id": "black_dechert_2021",
+      "producer": "Dechert LLP, Apollo corporate investigation, financial scope",
+      "role": "reported_corporate_service_fee_scope",
+      "original": "https://www.sec.gov/Archives/edgar/data/1411494/000119312521016405/d118102dex991.htm"
+    },
+    {
+      "id": "future_undetermined_source",
+      "producer": "Unidentified original future source (not yet attributed to any person/institution)",
+      "role": "acquisition_placeholder_not_a_real_source",
+      "original": ""
+    }
+  ],
+  "evidence": [
+    {
+      "id": "canada_aiq_kogan_finding",
+      "root": "canada_joint_2019",
+      "status": "present",
+      "locator": "https://www.priv.gc.ca/en/opc-actions-and-decisions/investigations/investigations-into-businesses/2019/pipeda-2019-004/",
+      "scope": "Regulators' AGGREGATE scores-derived-from-Kogan data finding; not original score-file bytes",
+      "carrier": "Original ONE joint regulator report"
+    },
+    {
+      "id": "ftc_personal_consents",
+      "root": "ftc_2019_2020",
+      "status": "present",
+      "locator": "https://www.ftc.gov/legal-library/browse/cases-proceedings/182-3106-182-3107-aleksandr-kogan-alexander-nix-matter",
+      "scope": "FTC personal consent orders vs company default distinguish personal non-admission"
+    },
+    {
+      "id": "uk_aiq_payments",
+      "root": "uk_electoral",
+      "status": "present",
+      "locator": "https://www.electoralcommission.org.uk/cy/node/619",
+      "scope": "Campaign service payments, appeal corrections, not exact voter model file",
+      "carrier": "Original UK Electoral Commission reporting and subsequent appeal chronology"
+    },
+    {
+      "id": "ftc_bannon_petition_2020",
+      "root": "ftc_2019_2020",
+      "status": "present",
+      "locator": "https://www.ftc.gov/system/files/documents/cases/01_redacted_petition_memo_iso_exhibits_proposed_order.pdf",
+      "carrier": "Original 2020-11-09 FTC petition with Sept-2019 CID exhibit",
+      "scope": "FTC legal request, not merits finding, agency litigant root"
+    },
+    {
+      "id": "ftc_bannon_reply_2020",
+      "root": "ftc_2019_2020",
+      "status": "present",
+      "locator": "https://www.ftc.gov/system/files/documents/cases/13_ftcs_reply_iso_petition.pdf",
+      "carrier": "Original 2020-12-18 FTC reply",
+      "scope": "Same FTC producer as petition, not independent investigation"
+    },
+    {
+      "id": "bannon_opposition_2020",
+      "root": "bannon_defence_2020",
+      "status": "present",
+      "locator": "https://www.ftc.gov/system/files/documents/cases/12_bannon_opposition_to_petition_to_enforce_cid.pdf",
+      "carrier": "Original 2020-12-09 respondent pleading",
+      "scope": "Adversarial participant argument and denial, not judicial exoneration"
+    },
+    {
+      "id": "ddc_show_cause_2020",
+      "root": "ddc_judge_2020",
+      "status": "present",
+      "locator": "https://www.ftc.gov/system/files/documents/cases/05_order_to_show_cause_0.pdf",
+      "carrier": "Original signed 2020-11-18 judicial order",
+      "scope": "Procedural hearing order, not merits finding"
+    },
+    {
+      "id": "hsi_dea_name_distinction",
+      "root": "hsi_ipr_2011",
+      "status": "present",
+      "locator": "https://www.iprcenter.gov/file-repository/ipu-operation-chain-reaction.pdf",
+      "scope": "HSI counterfeit microelectronics 2011 vs DEA narcotics-finance 2010 named Chain Reaction; HSI not DEA investigation"
+    },
+    {
+      "id": "ocdetf_derivative_lead_index",
+      "root": "dea_ocdetf_2015",
+      "status": "present",
+      "locator": "https://tommycarstensen.com/epstein/data/documents/set9/00173/EFTA00173953.html",
+      "scope": "OCR/index carrier of same DEA source, NOT independently verified native page image",
+      "carrier": "Derivative third-party OCR rendition of DEA-origin document; not a separate DEA witness"
+    },
+    {
+      "id": "bannon_ftc_final_judgment",
+      "root": "future_undetermined_source",
+      "status": "notLocated",
+      "scope": "Final DDC civil-demand enforcement procedural disposition, not equivalent to an FTC finding of Bannon personal deceptive-data wrongdoing"
+    },
+    {
+      "id": "ocdetf_final_disposition",
+      "root": "dea_ocdetf_2015",
+      "status": "notLocated",
+      "scope": "Final DEA case status/closure/recommendation native original; second-hand June 2023 date not authenticated"
+    },
+    {
+      "id": "black_2016_bank_identity",
+      "root": "future_undetermined_source",
+      "status": "notLocated",
+      "scope": "Bank-origin individual transaction characterization and same-object identity for 2016 Black ledger; not difference of totals"
+    },
+    {
+      "id": "signed_bannon_film_agreement",
+      "root": "future_undetermined_source",
+      "status": "notLocated",
+      "scope": "Separate 2019 documentary producer-rights document; FTC is NOT source of film. Source root used here only as nonmatching existing lead and must not be promoted."
+    },
+    {
+      "id": "gsr_to_ripon_exact_nonpii_version",
+      "root": "future_undetermined_source",
+      "status": "notLocated",
+      "scope": "Non-personal versioned source/provenance file mapping; raw voter dataset prohibited"
+    },
+    {
+      "id": "aquino_promis_scl_transfer_native",
+      "root": "future_undetermined_source",
+      "status": "notLocated",
+      "scope": "No original source-identical transfer across named objects. DEA is NOT attributed as author of Aquino/PROMIS work."
+    },
+    {
+      "id": "cross_network_tasking_original",
+      "root": "future_undetermined_source",
+      "status": "notLocated",
+      "scope": "Original dated common instruction naming material actors and target across clusters; no known source"
+    },
+    {
+      "id": "cross_network_sponsor_budget_original",
+      "root": "future_undetermined_source",
+      "status": "notLocated",
+      "scope": "Original matching budget/payment under shared sponsor, same transaction identity required"
+    },
+    {
+      "id": "cross_network_shared_workproduct_original",
+      "root": "future_undetermined_source",
+      "status": "notLocated",
+      "scope": "Source-identical technical/method/data work product with documented transfer; similarity alone excluded"
+    }
+  ],
+  "claims": [
+    {
+      "id": "C_CA_AGGREGATE",
+      "statement": "Canadian joint regulator concluded aggregate Kogan-derived scores reached AIQ",
+      "scope": "original regulator finding, US SCL campaigning",
+      "level": "sourceReported",
+      "supports": [
+        "canada_aiq_kogan_finding"
+      ],
+      "requires": [
+        "canada_aiq_kogan_finding"
+      ],
+      "severe_test": {
+        "would_narrow": "Original data-producer or privacy-regulator correction showing AIQ did not receive ANY Kogan-derived score material in the scoped US work would narrow the claimed lineage; denial of raw Facebook app access alone does not.",
+        "would_strengthen": "Regulator-authenticated non-personal derivation or distribution records tying specified GSR outputs to AIQ would strengthen specific lineage; no raw voters or outcome claim.",
+        "test_status": "sourceChecked"
+      }
+    },
+    {
+      "id": "C_UK_PAYMENTS",
+      "statement": "UK regulator reports actual AIQ campaign payments and distinct appeal outcomes",
+      "scope": "Vote Leave/BeLeave/Veterans 2016 service payments",
+      "level": "sourceReported",
+      "supports": [
+        "uk_aiq_payments"
+      ],
+      "requires": [
+        "uk_aiq_payments"
+      ],
+      "severe_test": {
+        "would_narrow": "Original amended UK Electoral Commission dispositions removing or correcting specific AIQ service payments, recipient classification or campaign return would narrow the asserted accounting; Grimes' successful appeal already limits the earlier sanction.",
+        "would_strengthen": "Original matching payment invoices, bank-origin refs and judicial appeal dispositions would strengthen transaction-level identification, not GSR/score-file content.",
+        "test_status": "sourceChecked"
+      }
+    },
+    {
+      "id": "C_FTC_BANNON_PROCEDURE",
+      "statement": "Original FTC v Bannon CID pleadings and DDC show-cause proceeding exist; no resolved personal wrongdoing inferred",
+      "scope": "DDC 1:20-mc-00111-CRC procedure only",
+      "level": "sourceReported",
+      "supports": [
+        "ftc_bannon_petition_2020",
+        "ftc_bannon_reply_2020",
+        "bannon_opposition_2020",
+        "ddc_show_cause_2020"
+      ],
+      "requires": [
+        "ftc_bannon_petition_2020",
+        "ftc_bannon_reply_2020",
+        "bannon_opposition_2020",
+        "ddc_show_cause_2020"
+      ],
+      "severe_test": {
+        "would_narrow": "An original court record correcting docket identity or rescinding the described procedural hearing would narrow the procedural claim; Bannon's defence is already retained separately.",
+        "would_strengthen": "The signed court show-cause order, FTC petition/reply and independently authored Bannon response jointly establish adversarial procedure only; original final docket would resolve procedural outcome.",
+        "test_status": "sourceChecked"
+      }
+    },
+    {
+      "id": "C_FTC_BANNON_FINAL",
+      "statement": "Final procedural disposition of the FTC civil investigative demand enforcement petition against Bannon",
+      "scope": "Original final court order or FTC withdrawal, not a merits adjudication of Bannon personal CA-data liability",
+      "level": "unresolved",
+      "supports": [
+        "ftc_bannon_petition_2020",
+        "ftc_bannon_reply_2020",
+        "bannon_opposition_2020",
+        "ddc_show_cause_2020"
+      ],
+      "requires": [
+        "bannon_ftc_final_judgment"
+      ],
+      "severe_test": {
+        "would_narrow": "An original case closing/withdrawal order would narrow hypotheses of later compelled CID hearing; neither hypothetical route decides personal privacy liability.",
+        "would_strengthen": "Original final signed court order, authenticated dismissal/withdrawal or FTC docket disposition would settle what happened to the demand, without converting a hearing decision into personal guilt.",
+        "test_status": "notRun"
+      }
+    },
+    {
+      "id": "C_OCDETF_FINAL",
+      "statement": "Final historical outcome of DEA OCDETF NY-NYS-0829",
+      "scope": "original signed or agency-authenticated final record",
+      "level": "unresolved",
+      "supports": [
+        "ocdetf_derivative_lead_index"
+      ],
+      "requires": [
+        "ocdetf_final_disposition"
+      ],
+      "severe_test": {
+        "would_narrow": "Signed agency closure/declination or case-status record showing no charges or a different disposition would narrow hypotheses of prosecution or intervention; no original is inspected.",
+        "would_strengthen": "Authenticated original DEA/OCDETF NY-NYS-0829 final outcome naming the actual status would resolve the administrative outcome, not independently establish every allegation in the 2015 lead.",
+        "test_status": "notRun"
+      }
+    },
+    {
+      "id": "C_BLACK_2016",
+      "statement": "Exact original bank transaction classification in Black-to-Epstein 2016 ledger",
+      "scope": "lawfully redacted origin bank record",
+      "level": "unresolved",
+      "supports": [],
+      "requires": [
+        "black_2016_bank_identity"
+      ],
+      "severe_test": {
+        "would_narrow": "Bank-origin evidence that the 2016 USD difference reflects an asset, internal movement, unrelated recipient or another explicitly classified scope would narrow hidden-fee claims; total arithmetic alone does not discriminate.",
+        "would_strengthen": "Lawfully redacted originating bank wire and same-object accounting/invoice/legal classification would strengthen a particular transaction interpretation.",
+        "test_status": "notRun"
+      }
+    },
+    {
+      "id": "C_NAME_COLLISION",
+      "statement": "Two different federal operations share Chain Reaction name",
+      "scope": "HSI anti-counterfeit vs DEA OCDETF narcotics",
+      "level": "sourceReported",
+      "supports": [
+        "hsi_dea_name_distinction",
+        "ocdetf_derivative_lead_index"
+      ],
+      "requires": [
+        "hsi_dea_name_distinction",
+        "ocdetf_derivative_lead_index"
+      ],
+      "severe_test": {
+        "would_narrow": "An original joint case-ID/source record showing these are the exact same legal investigative operation would narrow the present distinct-case model; generic agency overlap or title cannot.",
+        "would_strengthen": "Original HSI contemporaneous anti-counterfeit agency records and DEA NY-NYS-0829 narcotics lead independently identifying agency/case purpose strengthen separation; DEA native scan still pending.",
+        "test_status": "sourceChecked"
+      }
+    },
+    {
+      "id": "C_BANNON_MEDIA_TRANSFER",
+      "statement": "Signed 2019 producer agreement connects distinct original media work to a specific transfer",
+      "scope": "legal work/rights, not FTC cause or hidden programme",
+      "level": "unresolved",
+      "supports": [],
+      "requires": [
+        "signed_bannon_film_agreement"
+      ],
+      "severe_test": {
+        "would_narrow": "Executed rights/producer agreements explicitly excluding a proposed service or identifying different legal production partners would narrow that contractual transfer; no missing contract implies absence.",
+        "would_strengthen": "Original dated signed 2019 media production/work-product/counterparty record, with actual work and payer identity, would support a narrow transaction only.",
+        "test_status": "notRun"
+      }
+    },
+    {
+      "id": "C_GSR_ROW",
+      "statement": "A specific GSR output version maps to named Ripon input/build",
+      "scope": "non-personal provenance metadata only",
+      "level": "unresolved",
+      "supports": [
+        "canada_aiq_kogan_finding"
+      ],
+      "requires": [
+        "gsr_to_ripon_exact_nonpii_version"
+      ],
+      "severe_test": {
+        "would_narrow": "Versioned original parser/build evidence showing disjoint model provenance or different campaign build would narrow a SPECIFIC claimed GSR score-to-Ripon row; no change to aggregate regulator finding.",
+        "would_strengthen": "Non-personal hashes, schema version, distribution and named build import proof from two original software custodians would strengthen exact lineage.",
+        "test_status": "notRun"
+      }
+    },
+    {
+      "id": "C_AQUINO_SCL_TRANSFER",
+      "statement": "Dated same-object technical handoff from historical Aquino/PROMIS claim to deployed SCL work",
+      "scope": "one particular source-authenticated build/transfer, not vocabulary",
+      "level": "unresolved",
+      "supports": [],
+      "requires": [
+        "aquino_promis_scl_transfer_native"
+      ],
+      "severe_test": {
+        "would_narrow": "Contemporaneous original provenance showing a proposed method came from other authors or entered SCL independently would narrow one particular transfer claim; literary similarity cannot pay it.",
+        "would_strengthen": "A dated same-object technical document with original source code/license or instruction and receiving SCL build would establish a narrow historical transfer.",
+        "test_status": "notRun"
+      }
+    },
+    {
+      "id": "C_UNIFIED_H3",
+      "statement": "One original tasking/payment/technical common operation joins Aquino, Maxwell/PROMIS, Epstein, and CA",
+      "scope": "no original common source now; must not infer from overlapping people, words or institutional interests",
+      "level": "unresolved",
+      "supports": [],
+      "requires": [
+        "aquino_promis_scl_transfer_native",
+        "cross_network_tasking_original",
+        "cross_network_sponsor_budget_original",
+        "cross_network_shared_workproduct_original"
+      ],
+      "severe_test": {
+        "would_narrow": "Independent original project budget/tasking and technical provenance demonstrating separate scopes or incompatible dates would narrow particular unified-command models, not rule out all undiscovered operations.",
+        "would_strengthen": "Genuinely independent dated cross-organisation common tasking AND matching sponsor/budget AND actual source-identical workproduct AND authenticated technical transfer would strengthen a specified global command claim.",
+        "test_status": "notRun"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "id": "A_FTC_DISPOSITION",
+      "targets": [
+        "bannon_ftc_final_judgment"
+      ],
+      "cost": [
+        2,
+        2,
+        1
+      ],
+      "description": "Locate original post-2020 procedural enforcement disposition or withdrawal; do not infer personal liability"
+    },
+    {
+      "id": "B_DEA_OUTCOME",
+      "targets": [
+        "ocdetf_final_disposition"
+      ],
+      "cost": [
+        3,
+        4,
+        2
+      ],
+      "description": "Request/find precise NY-NYS-0829/C1-11-0049 original closing disposition, never another HSI counterfeit report"
+    },
+    {
+      "id": "C_BLACK_BANK",
+      "targets": [
+        "black_2016_bank_identity"
+      ],
+      "cost": [
+        4,
+        4,
+        3
+      ],
+      "description": "Original lawful bank-origin transaction ref, distinct from Dechert service denominator"
+    },
+    {
+      "id": "D_FILM_EXECUTED",
+      "targets": [
+        "signed_bannon_film_agreement"
+      ],
+      "cost": [
+        3,
+        3,
+        2
+      ],
+      "description": "Executed 2019 film legal source, not transcript paraphrases"
+    },
+    {
+      "id": "E_GSR_RIPON_VERSION",
+      "targets": [
+        "gsr_to_ripon_exact_nonpii_version"
+      ],
+      "cost": [
+        4,
+        4,
+        4
+      ],
+      "description": "Non-PII version/custody digest only; do not seek leaks"
+    },
+    {
+      "id": "F_AQUINO_PROMIS",
+      "targets": [
+        "aquino_promis_scl_transfer_native"
+      ],
+      "cost": [
+        5,
+        5,
+        5
+      ],
+      "description": "Original same-object dated methodological/software transfer, not analogical MindWar vocabulary"
+    },
+    {
+      "id": "G_SHARED_PROGRAMME",
+      "targets": [
+        "cross_network_tasking_original",
+        "cross_network_sponsor_budget_original",
+        "cross_network_shared_workproduct_original"
+      ],
+      "cost": [
+        5,
+        5,
+        5
+      ],
+      "description": "Only if independent original dated instruction, budget AND same-workproduct exist; cost is planning ordinal, not probability."
+    }
+  ],
+  "latest_sibling_contract": "PR #1268 head 12f0ba7005572d60152f304863afbf1c7ffa5b8b: requires severe_test per claim, computes producer source_roots and declared independent_root_count. Zero runtime integration; do not treat differing producer labels as independent empirical samples.",
+  "source_root_independence_ceiling": "independent_root_count measures distinct declared original producers supporting a claim, NOT independent datasets, independent findings, reliability, or a proof of the external claim. FTC petition/reply same root; Bannon opposition and court procedure separate author roles but not independent truth confirmations.",
+  "original_root_count": 9,
+  "unattributed_future_source_placeholders": 1,
+  "root_relations": [
+    {
+      "left": "ftc_2019_2020",
+      "right": "bannon_defence_2020",
+      "relation": "opposing_litigants_same_2020_cid_docket",
+      "independence": "separate author roles, NOT independent empirical replications of Bannon conduct",
+      "case_ref": "DDC 1:20-mc-00111-CRC"
+    },
+    {
+      "left": "ftc_2019_2020",
+      "right": "ddc_judge_2020",
+      "relation": "agency_petition_versus_court_procedural_order_same_docket",
+      "independence": "separate original producers, judicial order establishes show-cause procedure not FTC allegations",
+      "case_ref": "DDC 1:20-mc-00111-CRC"
+    },
+    {
+      "left": "hsi_ipr_2011",
+      "right": "dea_ocdetf_2015",
+      "relation": "same_historical_operation_title_distinct_agency_case_purpose",
+      "independence": "different original government programmes, no common case identity",
+      "case_ref": "HSI IPR counterfeits since 2011 vs DEA OCDETF NY-NYS-0829"
+    },
+    {
+      "left": "canada_joint_2019",
+      "right": "ftc_2019_2020",
+      "relation": "independent_regulatory_institutions_potential_common_upstream_vendor_documents",
+      "independence": "separate legal regulators but may overlap source contracts/scores, not independent raw-file audits",
+      "case_ref": "Canada PIPEDA 2019-004 vs FTC CA Docket 9383"
+    },
+    {
+      "left": "black_dechert_2021",
+      "right": "future_undetermined_source",
+      "relation": "known_report_scope_versus_unknown_original_bank_creator",
+      "independence": "Dechert service fee aggregate must not be substituted as bank-origin individual USD wire",
+      "case_ref": "2016 Black transaction class not authenticated"
+    }
+  ],
+  "australian_crosspollination": {
+    "as_of": "2026-10-26",
+    "thin_owner": "DASHI/Cognition/AustraliaPoliticalEconomySameObjectCrosswalk20261026Exact.agda",
+    "source_audit": "docs/research/AustralianPoliticalEconomyCrossNetworkMaxCut20261026.md",
+    "original_sources_not_added_to_existing_9_root_ca_counter": "Australian source producers are separately accounted for in a reviewed crosswalk; not newly counted as independent CA/Epstein proof witnesses.",
+    "positive_paths": [
+      {
+        "id": "AUS_HANSON_2025_HOSPITALITY",
+        "original": "Senator Pauline Hanson Senate interests declaration 2025-12-16",
+        "carrier": "official indexed Senate Form A",
+        "status": "original_indexed_not_pdf_face_inspected",
+        "evidence": "Hancock-sponsored US flights and Rinehart hospitality as personally declared",
+        "not_pays": "private donor settlement or unlawful gift"
+      },
+      {
+        "id": "AUS_RINEHART_COMPANY_AIRCRAFT",
+        "original": "Hancock Prospecting company spokesperson to ABC 2026-04-29",
+        "carrier": "ABC interview/news article",
+        "status": "source_attributed_original_spokesperson_report",
+        "evidence": "Rinehart company aircraft gifted to One Nation",
+        "not_pays": "the identity of individual Aitken/Giles/Plimer donors or an independently inspected final invoice"
+      },
+      {
+        "id": "AUS_HANSON_RINEHART_POLICY",
+        "original": "Hanson first-person ABC Perth policy discussion replayed in Four Corners 2026-09-28 transcript",
+        "carrier": "ABC original published transcript",
+        "status": "first_person_attributed",
+        "evidence": "Hanson in 2026 attributes her already-published specific pensioner-hours proposal to Rinehart; party itself published 2025-01-15 original election policy. Chronology gives a policy-publication date, not an original Rinehart-to-Hanson advice timestamp or legislation.",
+        "not_pays": "Documented first-party publication does not authenticate Rinehart's actual pre-2025 authored instruction or enactment of proposed law."
+      },
+      {
+        "id": "AUS_2016_2017_HPPL_IPA",
+        "original": "Rinehart v Rinehart [2018] NSWSC 1102 para 25 re court-evidenced HPPL schedule",
+        "carrier": "published judgment reprint, not native judicial site",
+        "status": "judicially_reported_original_schedule_reprint",
+        "evidence": "A$2.3m 2016 plus A$2.2m 2017 paid or provided by HPPL to IPA",
+        "not_pays": "same-object IPA article or 2026 One Nation campaigning"
+      },
+      {
+        "id": "AUS_BANNON_PALMER",
+        "original": "DOJ released Bannon to Epstein message EFTA01615861, Palmer early and revised statements",
+        "carrier": "DOJ original text indexed and 2026 ABC/New Daily quoting separate actor statements",
+        "status": "statement_and_later_denial_revision",
+        "evidence": "Bannon claimed advertising direction; Palmer initially denied all contact but later acknowledged one unsolicited call while denying operational direction",
+        "not_pays": "creative brief, vendor contract, payment, control or UK/US CA analytics deployment"
+      },
+      {
+        "id": "AUS_MANDELSON_XSTRATA_EPSTEIN",
+        "original": "2010 Mandelson/Xstrata strategy forwarded to Epstein in released email as reported",
+        "carrier": "2026 Guardian report of released correspondence, exact Bates bytes not reauthenticated",
+        "status": "source_reported_released_email",
+        "evidence": "Epstein was an attributed recipient of anti-mining-tax strategy",
+        "not_pays": "Rudd removal caused by Epstein or tactical orders to Australian campaign"
+      },
+      {
+        "id": "AUS_CRISAFULLI_RESOURCE",
+        "original": "Queensland parliament resource-project act as reported August 2026",
+        "carrier": "ABC source to existing Queensland owner",
+        "status": "reported_enacted_legislation",
+        "evidence": "resource fast-tracking enacted under Queensland government",
+        "not_pays": "Rinehart privately commissioned a named clause or brokered premier Trump access"
+      },
+      {
+        "id": "AUS_GINA_EPSTEIN_DIRECT",
+        "original": "Existing EpsteinAustraliaEliteNetworkAcquisitionExact source census",
+        "carrier": "case-specific bounded missing direct receipt",
+        "status": "not_located_not_universally_absent",
+        "evidence": "no original Rinehart–Epstein direct receipt identified in inspected case corpus",
+        "not_pays": "universal never-met/noncontact theorem"
+      },
+      {
+        "id": "AUS_ONE_NATION_PENSION_POLICY_JAN2025",
+        "original": "Pauline Hanson's One Nation, original 2025-01-15 federal-election policy release",
+        "carrier": "https://www.onenation.org.au/one-nation-to-remove-limits-on-pensioners-veterans-earnings",
+        "status": "original_party_document_published",
+        "evidence": "Party-origin publication publicly committed proposed unlimited pensioner/veteran employment earnings without payment reduction for 2025 election; distinct from Hanson's June 2026 public retrospective attribution of idea to Rinehart.",
+        "not_pays": "Actual Rinehart pre-Jan2025 instruction, enacted statute, causal effects, party capture, or a signed commissioning deal."
+      },
+      {
+        "id": "AUS_RINEHART_2021_POLICY_FIRST_PERSON",
+        "original": "Gina Rinehart 2021-11-22 original Mining and Related Industries Day signed/speaker-authored five-page PDF, page 2",
+        "carrier": "https://www.ginarinehart.com.au/wp-content/uploads/2021/11/FINALV2-Speech-by-Mrs-Gina-Rinehart-to-2021-National-Mining-Related-Industries-Day.pdf",
+        "status": "first_person_original_pdf_page_visually_inspected",
+        "evidence": "Rinehart publicly proposes reforming pension work penalties; dated prior to 2025 One Nation party proposal and her 2026 attribution by Hanson.",
+        "not_pays": "Exclusive origination of a policy already circulating publicly, direct private communication to Hanson, particular legislative effect or 2026 funding use."
+      },
+      {
+        "id": "AUS_HANCOCK_IPA_2022_POLICY_ADVOCACY",
+        "original": "Hancock Prospecting 2022-08-16 Senate Submission 3 and Institute of Public Affairs 2022 Senate Submission 6, separate original source producers",
+        "carrier": "https://www.aph.gov.au/Parliamentary_Business/Bills_Legislation/bd/bd2223a/23bd024",
+        "status": "parliamentary_library_quotes_original_submissions_native_submissions_not_inspected",
+        "evidence": "Australian Parliamentary Library describes both HPPL and IPA separately supporting an unlimited Work Bonus; common policy argument does not alone document commissioned IPA transfer.",
+        "not_pays": "Original submissions' visually authenticated pages; a money-to-specified-brief join, unique Rinehart authorship or direct 2025 One Nation instructions."
+      },
+      {
+        "id": "AUS_WORK_BONUS_2022_CAPPED_LAW",
+        "original": "Australian Government, Minister for Social Services 2022-11-22 statement of enacted 2022 Workforce Incentive Act",
+        "carrier": "https://formerministers.dss.gov.au/20779/giving-older-australians-the-choice-and-flexibility-to-work/",
+        "status": "original_government_limited_enactment",
+        "evidence": "Labor government enacted temporary $4000 additional Work Bonus pensioner-income bank, which is distinct from proposed removal of all working income penalties in One Nation's 2025 pledge.",
+        "not_pays": "One Nation policy was enacted as law or exclusive direct causation by Rinehart/IPA; government enacted same unlimited proposal."
+      },
+      {
+        "id": "AUS_ONE_NATION_HQ_PROSPECTIVE_RENT",
+        "original": "One Nation and Hancock statements to journalists, Barnaby Joyce 2026-10-05 first-person lease-rate claim",
+        "carrier": "https://www.abc.net.au/news/2026-10-05/federal-politics-live-blog-albanese-pre-cop/107228246",
+        "status": "primary_party_and_landlord_statements_reported_by_press_no_executed_lease",
+        "evidence": "Proposed HQ relocation to 160 Wharf Street under Rinehart/Hanrine ownership; party and owner both say tenancy at commercial market rent, not free or discounted.",
+        "not_pays": "Authenticated signed lease, actual market-rate comparators, payer of renovations, company title or any unlawful gift/hidden subsidy."
+      },
+      {
+        "id": "AUS_NATIONAL_SENIORS_2022_ORIGINAL_MEMBER_SURVEY",
+        "original": "National Seniors Australia, Feb 2022 10th Social Survey/Let Pensioners Work first-party flyer",
+        "carrier": "https://nationalseniors.com.au/uploads/LetPensionersWork-A4FlyerApril13.pdf",
+        "status": "original_first_party_survey_flyer_pdf_face_visually_inspected",
+        "evidence": "National Seniors recorded 3937 older people in its own survey, 1249 age pension cohort, and advocated exempting work income from Age Pension means test.",
+        "not_pays": "A representative national causal effect, Rinehart-exclusive policy intellectual ownership, a private One Nation handoff or proof legislation was caused by this survey."
+      },
+      {
+        "id": "AUS_NATIONAL_SENIORS_DELOITTE_2022_ORIGINAL_COMMISSION",
+        "original": "Deloitte Touche Tohmatsu, signed first-person professional letter 2022-09-02 to NSA chief advocate Ian Henschke",
+        "carrier": "https://nationalseniors.com.au/uploads/NSA-Let-Pensioners-Work-Age-Pension-Modelling-FINAL-14112022.pdf",
+        "status": "original_client_named_commission_pdf_pages_1_and_5_visually_inspected",
+        "evidence": "Deloitte states NSA engaged it to model a specific opt-in pension earnings exemption; page 5's ~8.3% modelled neutral break-even uses scenarios and assumptions, not observed uptake. This is a TRUE identified client+model work-product example.",
+        "not_pays": "Actual Deloitte invoice settlement, original 2022 Labor law solely caused by NSA, National Seniors model source code reproduced, or an HPPL-paid IPA study with same receipt."
+      }
+    ],
+    "sibling_reviews": [
+      {
+        "pr": 1251,
+        "owner": "DASHI/Governance/ClimateGenealogyTypedCasesExact.agda",
+        "integration": "review_only_unmerged_sibling",
+        "use": "court-based HPPL IPA finance; historical API/GCC climate-communications and original commissioning/evidence scope",
+        "no_join": "historical funding != later specific editorial instructions or Australian CA work"
+      },
+      {
+        "pr": 1251,
+        "owner": "DASHI/Governance/AustralianPoliticalRadioInfluence2026Exact.agda",
+        "integration": "review_only_unmerged_sibling",
+        "use": "media ownership and redistribution provenance",
+        "no_join": "radio ownership/contact != unproved Gina/Bannon editorial command"
+      }
+    ],
+    "decisive_remaining_same_object": [
+      {
+        "id": "AUS_FY2025_26_AEC",
+        "kind": "official_public_election_finance",
+        "availability": "AEC old FY2025-26 annual party/donor returns due Oct20/Nov17 2026, published 2027-02-01; separately old-regime TRANSITION July-Dec 2026 returns due 2027-03-11 and published 2027-04-22; distinct from new 2027 scheme.",
+        "claim_reopened": "Official finance origin/payer and in-kind treatment split into two non-overlapping disclosure periods, never treat the February FY release as containing Jul-Dec2026 gifts.",
+        "not_pays": "policy control or hidden sponsor without same original"
+      },
+      {
+        "id": "AUS_POLICY_ADVICE_TIMESTAMP_AND_ENACTMENT",
+        "kind": "original_private_policy_advice_and_authoritative_enactment",
+        "availability": "PARTY PUBLICATION CLOSED at 2025-01-15 original One Nation release. Original communication establishing Rinehart proposal date and parliamentary bill/vote/enactment status still not located.",
+        "claim_reopened": "Date and content of Rinehart's attributed advice before official party release, and a distinct bill/Parliament/enacted-law question.",
+        "not_pays": "Retrospective policy-origin assertion plus 2025 publication alone does not demonstrate passage in Commonwealth legislation or control of the party."
+      },
+      {
+        "id": "AUS_BANNON_VENDOR",
+        "kind": "dated_original_campaign_approval",
+        "availability": "no original signed 2019 Bannon–Palmer creative order inspected",
+        "claim_reopened": "who originated or approved particular Palmer anti-China/climate ad",
+        "not_pays": "Epstein command unless separate original transfer"
+      },
+      {
+        "id": "AUS_MANDELSON_DOWNSTREAM",
+        "kind": "same_object_communication_to_campaign_execution",
+        "availability": "released email reported, specific campaign deployment unverified",
+        "claim_reopened": "what material was actually adopted by Australian mining-tax campaign",
+        "not_pays": "Rudd leadership causation without independent counterfactual evidence"
+      },
+      {
+        "id": "AUS_GINA_IPA_SPECIFIC_COMMISSION",
+        "kind": "original_contract_workproduct_join",
+        "availability": "court-reported HPPL aggregate funding, no named policy-communication instructions",
+        "claim_reopened": "named commissioned Australian document and delivered content",
+        "not_pays": "1988-1998 API historical transfer by analogy"
+      },
+      {
+        "id": "AUS_HQ_EXECUTED_LEASE",
+        "kind": "executed_original_commercial_lease_and_comparator",
+        "availability": "Political party and landlord statements reported Oct 5 2026; exact signed lease, dates, rents, discounts, actual fitout payment and title original uninspected.",
+        "claim_reopened": "Whether 2026 One Nation HQ arrangement is prospective arm's-length rent or confers a quantifiable in-kind electoral benefit.",
+        "not_pays": "A claim of wrongdoing or Rinehart campaign command merely because she owns or may lease building."
+      }
+    ],
+    "causal_boundary": "One original business donor, travel supporter and policy adviser can be real at the same time; none proves a universal hidden chain. A campaign-effect claim additionally needs delivered-message, exposed-audience, outcome and counterfactual evidence.",
+    "provenance_boundary": "A source origin (e.g. senator's disclosure) is distinct from ABC's copy, a related owner's source-written Bool, a court judgment reprint, an AEC future disclosure and actual external-world correctness.",
+    "statutory_time_boundary": "Federal July 2025-June 2026 financial-year donation scheme and Jan 2027 calendar-year reform are separate regimes; February 2027 future publication cannot be retroactively claimed inspected October 2026.",
+    "original_party_policy_first_party": "https://www.onenation.org.au/one-nation-to-remove-limits-on-pensioners-veterans-earnings",
+    "aec_transitional_original": "https://www.aec.gov.au/FADTransitionalRules/",
+    "original_policy_transmission_ceiling": "One Nation's 2025 official publication is a policy producer original; Hanson's 2026 first-person attribution is a different later statement. Neither is a dated original Rinehart instruction or independent proof of downstream legislative adoption.",
+    "electoral_period_boundary": "OLD FY 2025-07-01 to 2026-06-30 releases 2027-02-01; OLD TRANSITION 2026-07-01 to 2026-12-31 releases 2027-04-22; NEW 2027 calendar-year reporting/expedited donor notifications follows its own law.",
+    "policy_genealogy_same_object_chain": [
+      {
+        "date": "2021-11-22",
+        "producer": "Gina Rinehart",
+        "object": "original 5-page public speech page 2",
+        "source_role": "first_person_original_pdf_visually_inspected",
+        "policy_scope": "easing pensioner income work penalties",
+        "same_object_transfer_to_next": "NOT authenticated",
+        "same_source_family_with_other": false
+      },
+      {
+        "date": "2022-02",
+        "producer": "National Seniors Australia",
+        "object": "own-member survey and campaign original three-page flyer",
+        "source_role": "first_party_advocacy_survey_pdf_page_one_visually_checked",
+        "policy_scope": "exempt work income from Age Pension income test",
+        "same_object_transfer_to_next": "no independent direct Rinehart transfer evidenced"
+      },
+      {
+        "date": "2022-08",
+        "producer": "Institute of Public Affairs",
+        "object": "Senate submission 6 indexed in same bill digest",
+        "source_role": "different_advocacy_producer_same_government_analyst_carrier",
+        "policy_scope": "unlimited Work Bonus",
+        "same_object_transfer_to_next": "NOT authenticated",
+        "same_source_family_with_other": false
+      },
+      {
+        "date": "2022-08-16",
+        "producer": "Hancock Prospecting Pty Ltd",
+        "object": "Senate submission 3 indexed in Parliamentary Library bill digest",
+        "source_role": "government_index_quote_native_original_403",
+        "policy_scope": "unlimited Work Bonus",
+        "same_object_transfer_to_next": "NOT authenticated",
+        "same_source_family_with_other": false
+      },
+      {
+        "date": "2022-09-02",
+        "producer": "Deloitte Touche Tohmatsu commissioned by National Seniors Australia",
+        "object": "original nine-page Deloitte signed commissioned modelling letter to Ian Henschke",
+        "source_role": "original_professional_workproduct_client_identified_two_pages_visually_checked",
+        "policy_scope": "opt-in work-income means-test exemption; conditional neutral 8.3% worker uptake scenario",
+        "same_object_transfer_to_next": "client-to-Deloitte task/model documented, but government/party implementation not proved"
+      },
+      {
+        "date": "2022-11-22",
+        "producer": "Albanese Government / Minister Amanda Rishworth",
+        "object": "original government report of enacted Work Bonus Act",
+        "source_role": "government_enactment_claim",
+        "policy_scope": "limited additional $4000 income bank",
+        "same_object_transfer_to_next": "NOT identical policy specification",
+        "same_source_family_with_other": false
+      },
+      {
+        "date": "2025-01-15",
+        "producer": "Pauline Hanson's One Nation",
+        "object": "party policy release, original publisher",
+        "source_role": "first_party_policy_publication",
+        "policy_scope": "unlimited earnings without reducing pension",
+        "same_object_transfer_to_next": "dated party original"
+      },
+      {
+        "date": "2026-06-11",
+        "producer": "Pauline Hanson, ABC radio as published",
+        "object": "first-person retrospectively attributes pensioner work policy idea to Rinehart",
+        "source_role": "first_person_statement_in_journalistic_carrier",
+        "policy_scope": "unlimited earnings without payment or health-card loss",
+        "same_object_transfer_to_next": "not an original dated instruction"
+      }
+    ],
+    "policy_bidi_severe_test": {
+      "would_strengthen": "A dated original pre-2025 Rinehart-Hanson communication containing this particular proposed policy text, optionally alongside original party drafting decisions, would establish a *specific advice transmission*, not necessarily exclusive authorship or election effect.",
+      "would_narrow": "Contemporaneous original party drafts showing independent origination, other named source, or an earlier adoption before any communication would narrow Hanson's retrospective attribution as an account of the party's actual drafting, without denying Rinehart's public 2021 advocacy.",
+      "alternative_mechanism": "Gina Rinehart's 2021 speech; independently named National Seniors 2022 member survey / Deloitte 2 September 2022 commissioned modelling; separate Hancock and IPA 2022 Senate submissions; and the limited 2022 Labor reform demonstrate multiple real producer/scope pathways. Rhetorical overlap cannot establish exclusive authorship or a private Hanson drafting instruction.",
+      "status": "sourceChecked_chronology_transfer_unresolved",
+      "private_message_found": false
+    },
+    "commercial_lease_bidi_severe_test": {
+      "would_strengthen": "An original executed lease, payer/fit-out provisions, comparable independently evaluated rental, landlord beneficial ownership and actual payment records would classify material concessions if any.",
+      "would_narrow": "A properly executed commercial lease with actual independently comparable rent and tenant-funded fit-out would narrow allegations of discounted in-kind subsidy, without erasing landlord-to-party economic dependence.",
+      "actor_denial": "One Nation and Hancock Prospecting separately asserted commercial rents and no discounts in original press interviews; two represented parties, not independent appraisals.",
+      "status": "public_planned_tenancy_landlord_original_lease_not_inspected",
+      "material_subsidy_established": false
+    },
+    "independence_nontransfer": "Rinehart 2021 speech and HPPL 2022 submission may be same corporate advocacy channel; IPA 2022 submission is separately authored but shares one Parliamentary Library summary carrier. Party release 2025 and Hanson retrospective 2026 are separate dated party-side products; article copies of their quotes are NOT independent attestations. Labor 2022 capped law is an independently originating policy alternative, not identical to One Nation unlimited pledge. National Seniors original survey/flyer and Deloitte commissioned model share NSA commissioning input; they are separate produced artifacts, NOT two independent proofs of law causality. The named original Deloitte client/model is a positive control for what a genuine commissioned expert report looks like, unlike unclassified aggregate HPPL/IPA cash.",
+    "sibling_climate_claim_family_crosswalk": {
+      "owner_pr": 1251,
+      "owner_head_reviewed": "68415b469b4cff67f452fb8c8c1d69476cc5a2ce",
+      "original_source_ledger": "Docs/support/reference/climate_repeated_claim_families_20261026.csv",
+      "shared_rinehart2021_original": "Rinehart's original 22 Nov 2021 five-page speech page 2 combines public pension-work proposal and criticisms of net-zero/mining regulation in ONE first-party document; original page screenshot checked. Same writer/medium pays authored co-occurrence, not evidence of empirical truth, paid climate denial or instructions to IPA/One Nation.",
+      "sibling_related_claims": [
+        {
+          "receipt": "G15",
+          "authored_by": "Stephen Johnson, The Nightly",
+          "hosted_by": "Hancock Energy",
+          "date": "2026-04-22",
+          "originality": "explicit credited republication",
+          "claim": "reported investment-supply-price gas tax narrative",
+          "not_pays": "a separate original model or editorial order by Rinehart"
+        },
+        {
+          "receipt": "G16",
+          "authored_by": "Senator Pauline Hanson",
+          "hosted_by": "OpenAustralia Hansard transcript mirror",
+          "date": "2026-08-12",
+          "originality": "named senator parliamentary speech in archival mirror, not native Senate audio or document",
+          "claim": "less investment -> less supply -> higher prices under 25% gas export tax",
+          "not_pays": "a copied script from Rinehart/IPA/Hancock, or model independence/economic accuracy"
+        }
+      ],
+      "stopping_rule": "Syntactically similar policy arguments across Hancock, industry spokespeople and Hanson do not prove common commissioning. Demand a dated original briefing, script, contract, draft with direct provenance, or actual named end-use for a same-object transfer. No extra grant/donor attribution to Epstein or CA from this motif.",
+      "sibling_code_imported": false
+    },
+    "policy_original_commission_positive_control": {
+      "original_document": "https://nationalseniors.com.au/uploads/NSA-Let-Pensioners-Work-Age-Pension-Modelling-FINAL-14112022.pdf",
+      "producer": "Deloitte Touche Tohmatsu",
+      "client": "National Seniors Australia (Ian Henschke, Chief Advocate)",
+      "date": "2022-09-02",
+      "object": "Let Pensioners Work Age Pension Modelling, original 9-page signed letter",
+      "image_checks": "PDF page index 0 and page index 4 visual screenshots checked",
+      "model_assumptions": "DSS 2021 cohort summaries; opt-in pension mechanism; excluded Veteran Service Pension population; no input spreadsheet recomputation; client-supplied assumptions.",
+      "relevant_quantitative_claim": "Model estimates net fiscal cost neutral at ~8.3% uptake IN THEIR MODELLING SCENARIO, not measured real-world uptake.",
+      "positive_control": "Actual original names a commissioning client, independent named research producer, defined commissioned output and methods. Contrast: HPPL→IPA FY2016/17 court-reported aggregate finances have no inspected directed commission of a SPECIFIC 2022 IPA pension policy product.",
+      "what_not_proved": "Invoice settlement/payment, independence of DSS inputs, actual influence on 2022 Labor limited Act, exclusive authorship of idea, or Australian covert network."
+    },
+    "policy_2022_three_inquiry_docket_cut": {
+      "as_of": "2026-10-27",
+      "source_owner": "DASHI/Cognition/AustraliaPoliticalEconomySameObjectCrosswalk20261026Exact.agda",
+      "original_docket_roots": [
+        {
+          "id": "feb_2022_coalition",
+          "bill": "Social Services Legislation Amendment (Workforce Incentive) Bill 2022",
+          "sponsor": "Coalition Government",
+          "introduced": "2022-02-10",
+          "inquiry_register": "https://www.aph.gov.au/Parliamentary_Business/Committees/Senate/Community_Affairs/WorkforceIncentiveBill/Submissions",
+          "register_count": 6,
+          "dated_scope": "referred 2022-02-10; due 2022-03-04",
+          "selected_original_document_index": [
+            {
+              "producer": "National Seniors Australia",
+              "submission_no": 3,
+              "document_id": "df5522d8-50d8-4ebb-ad5d-6d7cfd367158"
+            }
+          ]
+        },
+        {
+          "id": "aug_2022_smith",
+          "bill": "Social Services Legislation Amendment (Enhancing Pensioner and Veteran Workforce Participation) Bill 2022",
+          "sponsor": "Senator Dean Smith, private senator's bill",
+          "introduced": "2022-08-03",
+          "inquiry_register": "https://www.aph.gov.au/Parliamentary_Business/Committees/Senate/Community_Affairs/WorkforceParticipation/Submissions",
+          "register_count": 14,
+          "dated_scope": "referred 2022-08-04; due 2022-08-17",
+          "selected_original_document_index": [
+            {
+              "producer": "Hancock Prospecting",
+              "submission_no": 3,
+              "document_id": "dfaa59de-73b8-4409-ab06-4527c2c6cfd3"
+            },
+            {
+              "producer": "Institute of Public Affairs",
+              "submission_no": 6,
+              "document_id": "8f9cfa11-5287-40b3-8287-4fbff1f88b80",
+              "additional_attachment_id": "450b4df8-2d79-47d4-823e-e40593e7cba5"
+            },
+            {
+              "producer": "National Seniors Australia",
+              "submission_no": 7,
+              "document_id": "b202b377-58e6-4c7f-97b8-73ef42e74882"
+            }
+          ]
+        },
+        {
+          "id": "oct_2022_albanese",
+          "bill": "Social Services and Other Legislation Amendment (Workforce Incentive) Bill 2022",
+          "sponsor": "Albanese Government",
+          "introduced": "2022-09-28",
+          "inquiry_register": "https://www.aph.gov.au/Parliamentary_Business/Committees/Senate/Community_Affairs/WorkforceIncentive2022/Submissions",
+          "register_count": 11,
+          "dated_scope": "referred 2022-09-28; due 2022-10-13",
+          "selected_original_document_index": [
+            {
+              "producer": "National Seniors Australia",
+              "submission_no": 3,
+              "document_id": "146b77ac-abc8-42c9-a937-8f5a45b40c3f"
+            },
+            {
+              "producer": "Hancock Prospecting",
+              "submission_no": 9,
+              "document_id": "7596775e-a631-40bd-be57-abe6b5efd5a1"
+            },
+            {
+              "producer": "Institute of Public Affairs",
+              "submission_no": 10,
+              "document_id": "85a023f4-e99a-45b0-8cf7-785af6302d45"
+            }
+          ]
+        }
+      ],
+      "distinct_selected_docket_document_ids": 7,
+      "source_interpretation_ceiling": "One Parliament indexed three separate inquiry registers, not three independent verifications of private sponsor instruction; named producer repeats across inquiry filings. Published register excludes HPPL and IPA in February list ONLY; not proof of no off-register advocacy. Original individual native PDFs were not visually inspected during this continuation (403/timeout); HPPL October 13 letter text was available via official web search index but full page was not authenticated. No file content hash or text reuse across filings asserted.",
+      "temporal_noncausation": "October 13 Hancock submission postdates government September 28 introduction; August 2022 submissions postdate February 10 government bill introduction. These chronological exclusions do not rule out earlier advocacy, later amendments, committee influence, or a separate original communication.",
+      "typed_fact": "Pension2022IndexedSubmission is a finite model of seven indexed selected entries, not a complete census of private consultation; no factorisation of the inquiry ID through National Seniors producer ID alone."
+    },
+    "policy_2022_public_research_citation_cut": {
+      "original_analyst_carrier": "https://www.aph.gov.au/Parliamentary_Business/Committees/Senate/Community_Affairs/WorkforceIncentive2022/Report/section?id=committees%2Freportsen%2F024985%2F80109",
+      "source_report_location": "November 2022 Senate Committee report chapter 2 paragraphs 2.15-2.16; 2.27-2.31; 2.45-2.51",
+      "first_research_producer": "National Seniors Australia (2022 survey), own published data and report; methodology not independently repeated",
+      "attributed_downstream_user": "Institute of Public Affairs October 2022 submission, as reported by Senate Committee",
+      "reported_use": "IPA specifically cited National Seniors 20% pensioner return-to-work survey/estimated 510000 figure, via one parliamentary analytic carrier; attribution to reported IPA text, PDF full page not independently authenticated",
+      "alternative_submissions": "ACCI annual Work Bonus 15600; Victorian Chamber additional 10000; National Seniors 6000 biannual; HPPL October 2022 indexed original letter seeks unlimited permanent; distinct scoped recommendations. Senate committee recommended government's narrower proposal.",
+      "same_object_status": "original_author_cited_in_distinct_submitter_per_committee_report",
+      "financial_commissioning_established": false,
+      "same_campaign_causal_influence_established": false,
+      "quote_is_not_independent_reproduction": true,
+      "reopens_on": "Exact IPA submission PDF paragraph, original NSA survey version and same-object financing/contract receipt if any; reject inferred HPPL editorial instruction absent commissioned deliverable."
+    },
+    "policy_2022_related_smith_amendment_attempt": {
+      "original_parliamentary_analyst": "https://www.aph.gov.au/Parliamentary_Business/Committees/Senate/Community_Affairs/WorkforceIncentive2022/Report/section?id=committees%2Freportsen%2F024985%2F80108",
+      "original_scope": "Senate Community Affairs 2022 Nov report Chapter 1 paragraphs 1.41-1.46",
+      "smith_bill_committee_recommendation": "Smith 3 Aug private bill; 30 Sep committee recommended against passage, not approved",
+      "senior_health_card_bill_amendment": "28 Sep 2022 Senate passed amendments to different Seniors Health Card bill incorporating key Smith-style provisions (committee-reported)",
+      "house_response": "House did not accept the Senate-added provisions; Senate did not insist",
+      "adoption_status": "unsuccessful_related_bill_amendment_attempt",
+      "not_to_conflate_with": "later Albanese-government Workforce Incentive Act No 55 assented 23 Nov 2022, which is a distinct statute",
+      "hancock_repeat_producer_dates": {
+        "smith_submission_3": "2022-08-16",
+        "government_submission_9": "2022-10-13",
+        "original_pdf_status": "official search-index text visible; native PDF page images 403/not inspected"
+      },
+      "private_direction_causation_established": false,
+      "evidence_note": "Observed Parliament procedure supports stage-specific policy transmission but no HPPL/IPA instruction-to-legislator identity or measured effectiveness. Identical sponsor names in two docket files do not make independent producer roots."
+    }
+  }
+}
