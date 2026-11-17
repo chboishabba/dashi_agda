@@ -333,6 +333,27 @@ check("one-step selected history transition ignores mixture weight",
 check("one-step selected mixture output depends on mixture weight",
       sp.diff(pw*expert_response,pw)==expert_response)
 
+# Source R4 scalar operation PLAN, rather than an observed runtime.
+# Per triad and expert: 3 correlations each with 3 multiplies,
+# 2 adds; weighted 3-channel score: 3 multiplies, 2 adds.
+# Fused K_w x: 9 multiplies +6 adds once; h_e dot: 3
+# multiplies +2 adds per expert.
+N=384//3
+for E in (1,2,4,8):
+    naive_mul=N*12*E
+    fused_mul=N*(9+3*E)
+    naive_add=N*8*E
+    fused_add=N*(6+2*E)
+    check("fused source scalar operation plan E="+str(E),
+          naive_mul-fused_mul==9*N*(E-1) and
+          naive_add-fused_add==6*N*(E-1))
+check("source E4 d384 multiplication count 6144 vs 2688",
+      12*4*N==6144 and (9+3*4)*N==2688)
+check("source E4 d384 elementary operation count 10240 vs 4480",
+      20*4*N==10240 and (15+5*4)*N==4480)
+check("original directed intermediate vs shared K f32 bytes at E4",
+      4*384*4==6144 and 384*4==1536)
+
 print("X369_SOURCE_FOUR_GATES_SYMPY_PASS",len(checks),
       "grouped checks; strict_top2=",top2_certificates,
       "same_order=",top2_ordered)
