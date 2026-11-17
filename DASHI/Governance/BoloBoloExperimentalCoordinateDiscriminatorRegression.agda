@@ -1,0 +1,25 @@
+module DASHI.Governance.BoloBoloExperimentalCoordinateDiscriminatorRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Governance.BoloBoloExperimentalCoordinateDiscriminatorExact as Coordinate
+
+sameDurationCollisionPaid :
+  Coordinate.sameDurationCollisionPaid Coordinate.canonicalGovernanceCoordinateBoundary ≡ true
+sameDurationCollisionPaid = refl
+
+capacitySeparatesPaid :
+  Coordinate.capacityCoordinateSeparatesCollisionPaid Coordinate.canonicalGovernanceCoordinateBoundary ≡ true
+capacitySeparatesPaid = refl
+
+backlogSeparatesPaid :
+  Coordinate.backlogCoordinateSeparatesCollisionPaid Coordinate.canonicalGovernanceCoordinateBoundary ≡ true
+backlogSeparatesPaid = refl
+
+durationAloneNotEnough :
+  Coordinate.durationOnlyObserverSufficientForCapacityConsumer Coordinate.canonicalGovernanceCoordinateBoundary ≡ false
+durationAloneNotEnough = refl
+
+syntheticWitnessNotEmpirical :
+  Coordinate.syntheticCollisionIsEmpiricalPerformanceResult Coordinate.canonicalGovernanceCoordinateBoundary ≡ false
+syntheticWitnessNotEmpirical = refl

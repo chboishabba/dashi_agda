@@ -1,0 +1,53 @@
+module DASHI.Governance.AnarchistLeadershipNonDominationTSFVRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Governance.AnarchistAntiLeadershipSourceAtlasExact as Sources
+import DASHI.Governance.ITIRNonDominationReappropriationExact as NonDom
+import DASHI.Governance.ITIRPluralViabilityTSFVExact as Plural
+
+sotaDistributedCoordinationPresent :
+  Sources.sotaDistributedCoordinationPresent Sources.canonicalAnarchistLeadershipSourceBoundary ≡ true
+sotaDistributedCoordinationPresent = refl
+
+structurelessnessAndHierarchyTensionsBothRetained :
+  Sources.structurelessnessCritiquePresent Sources.canonicalAnarchistLeadershipSourceBoundary ≡ true
+  × Sources.formalHierarchyCritiquePresent Sources.canonicalAnarchistLeadershipSourceBoundary ≡ true
+structurelessnessAndHierarchyTensionsBothRetained = refl , refl
+
+leaderlessDoesNotMeanLeadershipless :
+  Sources.leaderlessMeansLeadershipless Sources.canonicalAnarchistLeadershipSourceBoundary ≡ false
+leaderlessDoesNotMeanLeadershipless = refl
+
+controllerIdentityDoesNotPayNonDomination :
+  NonDom.controllerIdentityPaysNonDomination NonDom.canonicalReappropriationBoundary ≡ false
+controllerIdentityDoesNotPayNonDomination = refl
+
+leadershipFunctionDoesNotEqualDurableController :
+  NonDom.leadershipFunctionEqualsDurableController NonDom.canonicalReappropriationBoundary ≡ false
+leadershipFunctionDoesNotEqualDurableController = refl
+
+accountabilityTargetsConsequentialPower :
+  NonDom.accountabilityTargetsConsequentialPower NonDom.canonicalReappropriationBoundary ≡ true
+accountabilityTargetsConsequentialPower = refl
+
+bareObligationTypesDoNotCountAsPaid :
+  NonDom.obligationTypesWithoutWitnessesCountAsPaid NonDom.canonicalReappropriationBoundary ≡ false
+bareObligationTypesDoNotCountAsPaid = refl
+
+futureViabilityIsNotPredictionOrRetrocausality :
+  Plural.futureViabilityIsPrediction Plural.canonicalPluralViabilityBoundary ≡ false
+  × Plural.futureViabilityIsRetrocausalSignal Plural.canonicalPluralViabilityBoundary ≡ false
+futureViabilityIsNotPredictionOrRetrocausality = refl , refl
+
+coarsePresentDoesNotDeterminePluralFuture :
+  Plural.coarsePresentDeterminesPluralFuture Plural.canonicalPluralViabilityBoundary ≡ false
+coarsePresentDoesNotDeterminePluralFuture = refl
+
+cybersynPeopleSteerIdentityLayerRetained :
+  Plural.cybersynPeopleSteerIdentityLayerRetained Plural.canonicalPluralViabilityBoundary ≡ true
+cybersynPeopleSteerIdentityLayerRetained = refl
+
+triadicRepresentationDoesNotCreatePoliticalAuthority :
+  Plural.triadicRepresentationCreatesPoliticalAuthority Plural.canonicalPluralViabilityBoundary ≡ false
+triadicRepresentationDoesNotCreatePoliticalAuthority = refl

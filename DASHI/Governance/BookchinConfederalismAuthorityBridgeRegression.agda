@@ -1,0 +1,21 @@
+module DASHI.Governance.BookchinConfederalismAuthorityBridgeRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Governance.BookchinConfederalismAuthorityBridgeExact as Bridge
+
+assembliesOwnPolicyInSourceModel :
+  Bridge.localAssembliesFormulatePolicy Bridge.canonicalBookchinConfederalismSourceBoundary ≡ true
+assembliesOwnPolicyInSourceModel = refl
+
+delegatesAreMandatedAndRecallable :
+  Bridge.confederalDelegatesMandatedRecallable Bridge.canonicalBookchinConfederalismSourceBoundary ≡ true
+delegatesAreMandatedAndRecallable = refl
+
+councilsCoordinateRatherThanReplacePolicy :
+  Bridge.confederalCouncilsCoordinateAndAdminister Bridge.canonicalBookchinConfederalismSourceBoundary ≡ true
+councilsCoordinateRatherThanReplacePolicy = refl
+
+sourceModelDoesNotCreateActualLegitimacy :
+  Bridge.sourceModelCreatesActualPoliticalLegitimacy Bridge.canonicalBookchinConfederalismBridgeBoundary ≡ false
+sourceModelDoesNotCreateActualLegitimacy = refl

@@ -1,0 +1,29 @@
+module DASHI.Governance.BoloBoloExternalPrivateControlCrossPollinationRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Governance.BoloBoloExternalPrivateControlCrossPollinationExact as X
+
+sourceBoundaryPaid : X.sourceRolesRemainDistinct X.canonicalExternalPrivateControlBoundary ≡ true
+sourceBoundaryPaid = refl
+
+internalObserverInsufficient : X.internalControlObserverConsumerSufficient X.canonicalExternalPrivateControlBoundary ≡ false
+internalObserverInsufficient = refl
+
+adjacencyDoesNotPayDomination : X.externalChannelEvidencePaysDomination X.canonicalExternalPrivateControlBoundary ≡ false
+adjacencyDoesNotPayDomination = refl
+
+sameActorDoesNotPayCommonControl : X.sameActorOrFirmRelationPaysCommonController X.canonicalExternalPrivateControlBoundary ≡ false
+sameActorDoesNotPayCommonControl = refl
+
+platformCapabilityDoesNotPayDeploymentAuthority : X.platformCapabilityPaysDeploymentDecisionAuthority X.canonicalExternalPrivateControlBoundary ≡ false
+platformCapabilityDoesNotPayDeploymentAuthority = refl
+
+financingDoesNotPayControl : X.financingParticipationPaysInstitutionalControl X.canonicalExternalPrivateControlBoundary ≡ false
+financingDoesNotPayControl = refl
+
+networkPathDoesNotPayInfluence : X.networkReachabilityPaysDirectInfluence X.canonicalExternalPrivateControlBoundary ≡ false
+networkPathDoesNotPayInfluence = refl
+
+externalAuditStillRequired : X.targetExternalAutonomyAuditRequired X.canonicalExternalPrivateControlBoundary ≡ true
+externalAuditStillRequired = refl

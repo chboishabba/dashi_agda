@@ -1,0 +1,55 @@
+module DASHI.Governance.DeliberativeViableNonDominationLoopRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Governance.CybersynVSMSourceAtlasExact as Sources
+import DASHI.Governance.DeliberativeViableNonDominationLoopExact as Loop
+import DASHI.Governance.OccupyRealizedControlAcquisitionExact as Occupy
+
+vsmFiveSystemSourcePresent :
+  Sources.vsmFiveSystemSourcePresent Sources.canonicalCybersynVSMSourceBoundary ≡ true
+vsmFiveSystemSourcePresent = refl
+
+cybersynOperationalComponentsSourcePresent :
+  Sources.cybersynOperationalComponentsSourcePresent Sources.canonicalCybersynVSMSourceBoundary ≡ true
+cybersynOperationalComponentsSourcePresent = refl
+
+vsmDoesNotCreatePoliticalLegitimacy :
+  Sources.vsmCreatesPoliticalLegitimacy Sources.canonicalCybersynVSMSourceBoundary ≡ false
+vsmDoesNotCreatePoliticalLegitimacy = refl
+
+observationDoesNotAuthoriseAction :
+  Loop.observationAuthorisesAction Loop.canonicalDeliberativeViableNonDominationBoundary ≡ false
+observationDoesNotAuthoriseAction = refl
+
+deliberationDoesNotAuthoriseAction :
+  Loop.deliberationAuthorisesAction Loop.canonicalDeliberativeViableNonDominationBoundary ≡ false
+deliberationDoesNotAuthoriseAction = refl
+
+controllerIdentityDoesNotPayActionGate :
+  Loop.controllerIdentityPaysActionGate Loop.canonicalDeliberativeViableNonDominationBoundary ≡ false
+controllerIdentityDoesNotPayActionGate = refl
+
+samePhysicalActionMustCarryNonDominationReceipt :
+  Loop.sameActionCarriesNonDominationReceipt Loop.canonicalDeliberativeViableNonDominationBoundary ≡ true
+samePhysicalActionMustCarryNonDominationReceipt = refl
+
+realizedBehaviourOutranksDeclaredPurposeForDescription :
+  Loop.realizedBehaviourRetained Loop.canonicalDeliberativeViableNonDominationBoundary ≡ true
+realizedBehaviourOutranksDeclaredPurposeForDescription = refl
+
+futureViabilityRemainsConstraintNotPrediction :
+  Loop.futureViabilityIsPrediction Loop.canonicalDeliberativeViableNonDominationBoundary ≡ false
+futureViabilityRemainsConstraintNotPrediction = refl
+
+occupyControlPanelIncludesRoleRotation :
+  Occupy.roleRotationObserved Occupy.canonicalRealizedControlAcquisitionBoundary ≡ true
+occupyControlPanelIncludesRoleRotation = refl
+
+occupyControlPanelIncludesCorrectionHandling :
+  Occupy.correctionHandlingObserved Occupy.canonicalRealizedControlAcquisitionBoundary ≡ true
+occupyControlPanelIncludesCorrectionHandling = refl
+
+occupyObservedInfluenceDoesNotProveLegitimacy :
+  Occupy.realizedInfluenceProvesLegitimacy Occupy.canonicalRealizedControlAcquisitionBoundary ≡ false
+occupyObservedInfluenceDoesNotProveLegitimacy = refl

@@ -1,0 +1,23 @@
+module DASHI.Governance.BoloBoloExternalControlProvenanceWeldRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Governance.BoloBoloExternalControlProvenanceWeldExact as X
+
+releaseNotTruth : X.officialReleasePaysEmbeddedClaimTruth X.canonicalExternalControlProvenanceBoundary ≡ false
+releaseNotTruth = refl
+
+releaseNotEndorsement : X.officialReleasePaysInstitutionalEndorsement X.canonicalExternalControlProvenanceBoundary ≡ false
+releaseNotEndorsement = refl
+
+relationNotInfluence : X.relationReachabilityPaysInfluence X.canonicalExternalControlProvenanceBoundary ≡ false
+relationNotInfluence = refl
+
+corporateRoleNotDeployment : X.corporateRolePaysDeploymentAuthority X.canonicalExternalControlProvenanceBoundary ≡ false
+corporateRoleNotDeployment = refl
+
+financingNotCommonControl : X.financingParticipationPaysCommonControl X.canonicalExternalControlProvenanceBoundary ≡ false
+financingNotCommonControl = refl
+
+sameObjectReceiptsRequired : X.sameObjectAuthorityAndTransportReceiptsRequired X.canonicalExternalControlProvenanceBoundary ≡ true
+sameObjectReceiptsRequired = refl

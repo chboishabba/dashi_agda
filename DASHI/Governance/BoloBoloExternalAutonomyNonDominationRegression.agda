@@ -1,0 +1,26 @@
+module DASHI.Governance.BoloBoloExternalAutonomyNonDominationRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Governance.BoloBoloExternalAutonomyNonDominationExact as X
+
+sameTargetRequired : X.sameTargetExternalAuditRequired X.canonicalExternalAutonomyNonDominationBoundary ≡ true
+sameTargetRequired = refl
+
+internalDoesNotPayExternal : X.internalNonDominationPaysExternalAutonomy X.canonicalExternalAutonomyNonDominationBoundary ≡ false
+internalDoesNotPayExternal = refl
+
+externalDoesNotPayInternal : X.externalAutonomyPaysInternalNonDomination X.canonicalExternalAutonomyNonDominationBoundary ≡ false
+externalDoesNotPayInternal = refl
+
+capitalPresenceDoesNotPayControl : X.capitalDependencyPresencePaysExternalControl X.canonicalExternalAutonomyNonDominationBoundary ≡ false
+capitalPresenceDoesNotPayControl = refl
+
+platformPresenceDoesNotPayControl : X.informationDependencyPresencePaysExternalControl X.canonicalExternalAutonomyNonDominationBoundary ≡ false
+platformPresenceDoesNotPayControl = refl
+
+networkPresenceDoesNotPayControl : X.relationshipExposurePaysExternalControl X.canonicalExternalAutonomyNonDominationBoundary ≡ false
+networkPresenceDoesNotPayControl = refl
+
+externalAutonomyStillEmpirical : X.targetExternalAutonomyReceiptStillRequired X.canonicalExternalAutonomyNonDominationBoundary ≡ true
+externalAutonomyStillEmpirical = refl

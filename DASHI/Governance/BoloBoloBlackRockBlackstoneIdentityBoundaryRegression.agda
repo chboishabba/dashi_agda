@@ -1,0 +1,17 @@
+module DASHI.Governance.BoloBoloBlackRockBlackstoneIdentityBoundaryRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Governance.BoloBoloBlackRockBlackstoneIdentityBoundaryExact as X
+
+historicalLineagePaid : X.historicalLineageSourcePresent X.canonicalBlackRockBlackstoneIdentityBoundary ≡ true
+historicalLineagePaid = refl
+
+currentIdentityNotCollapsed : X.historicalLineagePaysCurrentEntityIdentity X.canonicalBlackRockBlackstoneIdentityBoundary ≡ false
+currentIdentityNotCollapsed = refl
+
+financingDoesNotMergeActors : X.sharedFinancingPlatformPaysCommonControl X.canonicalBlackRockBlackstoneIdentityBoundary ≡ false
+financingDoesNotMergeActors = refl
+
+crossFirmEvidenceNotTransferred : X.oneFirmGovernanceEvidenceTransfersToOtherFirm X.canonicalBlackRockBlackstoneIdentityBoundary ≡ false
+crossFirmEvidenceNotTransferred = refl

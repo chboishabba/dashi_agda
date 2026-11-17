@@ -1,0 +1,21 @@
+module DASHI.Governance.BoloBoloPairedExperimentMetricTypingRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Governance.BoloBoloPairedExperimentMetricTypingExact as Typed
+
+rawFieldsNeedTypedRoles :
+  Typed.rawNatFieldsAreSemanticallyInterchangeable Typed.canonicalPairedExperimentMetricTypingBoundary ≡ false
+rawFieldsNeedTypedRoles = refl
+
+measurementProvenanceRequired :
+  Typed.measurementProvenanceRequired Typed.canonicalPairedExperimentMetricTypingBoundary ≡ true
+measurementProvenanceRequired = refl
+
+sameScalarCannotPayAnotherRole :
+  Typed.sameScalarCanPayDifferentRoleWithoutReceipt Typed.canonicalPairedExperimentMetricTypingBoundary ≡ false
+sameScalarCannotPayAnotherRole = refl
+
+typingDoesNotCreateObservation :
+  Typed.typedWrapperCreatesEmpiricalObservation Typed.canonicalPairedExperimentMetricTypingBoundary ≡ false
+typingDoesNotCreateObservation = refl

@@ -1,0 +1,21 @@
+module DASHI.Governance.BoloBoloModelClassRobustnessRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Governance.BoloBoloModelClassRobustnessExact as Robustness
+
+singleFavouredModelNotEnough :
+  Robustness.singleFavouredModelEstablishesFamilyRobustness Robustness.canonicalModelClassRobustnessBoundary ≡ false
+singleFavouredModelNotEnough = refl
+
+familyMustBePredeclared :
+  Robustness.admissibleModelFamilyMustBePredeclared Robustness.canonicalModelClassRobustnessBoundary ≡ true
+familyMustBePredeclared = refl
+
+uniformFamilyWinNotUniversalPolitics :
+  Robustness.uniformMeaningfulAdvantageCreatesUniversalPoliticalOptimality Robustness.canonicalModelClassRobustnessBoundary ≡ false
+uniformFamilyWinNotUniversalPolitics = refl
+
+familyFailureIsSensitivitySignal :
+  Robustness.failureInOneAdmissibleModelBlocksUniformAdvantage Robustness.canonicalModelClassRobustnessBoundary ≡ true
+familyFailureIsSensitivitySignal = refl

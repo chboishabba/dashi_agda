@@ -1,0 +1,49 @@
+module DASHI.Governance.BoloBoloLongitudinalPromotionGateRegression where
+
+open import DASHI.Core.Prelude
+
+import DASHI.Governance.BoloBoloLongitudinalPromotionGateExact as Longitudinal
+
+snapshotWinNotLongRunWin :
+  Longitudinal.snapshotMeaningfulWinAutomaticallyEstablishesLongRunWin Longitudinal.canonicalLongitudinalPromotionBoundary ≡ false
+snapshotWinNotLongRunWin = refl
+
+snapshotLossNotLongRunLoss :
+  Longitudinal.snapshotMeaningfulLossAutomaticallyEstablishesLongRunLoss Longitudinal.canonicalLongitudinalPromotionBoundary ≡ false
+snapshotLossNotLongRunLoss = refl
+
+atLeastTwoPeriodsRequired :
+  Longitudinal.atLeastTwoCertifiedPeriodsRequired Longitudinal.canonicalLongitudinalPromotionBoundary ≡ true
+atLeastTwoPeriodsRequired = refl
+
+samePolarityRequired :
+  Longitudinal.repeatedSamePolarityRequired Longitudinal.canonicalLongitudinalPromotionBoundary ≡ true
+samePolarityRequired = refl
+
+repeatedMeasurementRequired :
+  Longitudinal.repeatedMeasurementRequired Longitudinal.canonicalLongitudinalPromotionBoundary ≡ true
+repeatedMeasurementRequired = refl
+
+realisedTopologyRequired :
+  Longitudinal.realisedTopologyAuditRequired Longitudinal.canonicalLongitudinalPromotionBoundary ≡ true
+realisedTopologyRequired = refl
+
+actorAdaptationRequired :
+  Longitudinal.actorAdaptationAuditRequired Longitudinal.canonicalLongitudinalPromotionBoundary ≡ true
+actorAdaptationRequired = refl
+
+versionAuditRequired :
+  Longitudinal.institutionalVersionAuditRequired Longitudinal.canonicalLongitudinalPromotionBoundary ≡ true
+versionAuditRequired = refl
+
+modelReopeningRequired :
+  Longitudinal.evidenceTriggeredModelReopeningRequired Longitudinal.canonicalLongitudinalPromotionBoundary ≡ true
+modelReopeningRequired = refl
+
+windowPredeclared :
+  Longitudinal.longitudinalWindowMustBePredeclared Longitudinal.canonicalLongitudinalPromotionBoundary ≡ true
+windowPredeclared = refl
+
+longRunAdvantageNotLegitimacy :
+  Longitudinal.longRunAdvantageCreatesPoliticalLegitimacy Longitudinal.canonicalLongitudinalPromotionBoundary ≡ false
+longRunAdvantageNotLegitimacy = refl
