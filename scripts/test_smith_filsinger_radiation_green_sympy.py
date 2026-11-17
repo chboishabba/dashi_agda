@@ -78,3 +78,20 @@ def test_lossless_source_sheet_cannot_pay_positive_load_without_source():
     assert work["source"]==0
     hypothetical_positive_load=S.Rational(100)
     assert work["source"] != hypothetical_positive_load
+
+def test_evanescent_branch_decays_without_real_outgoing_work():
+    from smith_filsinger_radiation_green_sympy import (
+        evanescent_outgoing_admittance,evanescent_sheet_green_zero_thickness)
+    Eg,Y=evanescent_sheet_green_zero_thickness(2,3)
+    j=S.Matrix([S.Rational(1),S.Rational(2)])
+    e=Eg*j
+    assert e!=S.zeros(2,1)
+    assert S.simplify(-2*R*Y*e-j)==S.zeros(2,1)
+    assert S.simplify(S.re(flux_z(e,Y*e)))==0
+    assert S.simplify(S.re(flux_z(e,-Y*e)))==0
+    assert S.simplify(S.re((e.conjugate().T*j)[0]))==0
+
+def test_evanescent_cutoff_wrong_branch_rejected():
+    from smith_filsinger_radiation_green_sympy import evanescent_outgoing_admittance
+    with pytest.raises(ValueError):evanescent_outgoing_admittance(2,2,1,1)
+    with pytest.raises(ValueError):evanescent_outgoing_admittance(2,1,1,1)
