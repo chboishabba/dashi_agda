@@ -23,7 +23,7 @@ module DASHI.Physics.YangMills.YMClayRationalS3StereographicNodeExact where
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
-open import Data.Rational using (ℚ; 1ℚ; _+_; _-_; _*_)
+open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; -_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 import DASHI.Physics.YangMills.BalabanSU2RationalWilsonLargeFieldGapExact as Original
 
@@ -109,3 +109,18 @@ originalSU2RationalStereographicNode x y z inv inverseLaw =
 -- The remaining scalar step is NOT an assumed sphere node:
 -- instantiate inv via the pre-existing stdlib rational reciprocal
 -- and prove 1+x²+y²+z² positive from squares.
+
+
+-- The sole missing stereographic chart point is an actual original
+-- rational SU2 record, NOT an abstract sphere-point assumption.
+originalSouthPole : Original.RationalUnitQuaternion
+originalSouthPole =
+  Original.rationalUnitQuaternion
+    (- 1ℚ) 0ℚ 0ℚ 0ℚ
+    (ℚRing.solve [])
+
+originalNorthPole : Original.RationalUnitQuaternion
+originalNorthPole =
+  Original.rationalUnitQuaternion
+    1ℚ 0ℚ 0ℚ 0ℚ
+    (ℚRing.solve [])
