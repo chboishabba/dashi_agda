@@ -170,12 +170,11 @@ fieldMaterialRepeatableWork b f sourceCycle w restored =
       (Bound.sym (Cycle.cong (λ z → input + z) restored))
       (Cycle.trans
         (fieldMaterialCombinedWork b f sourceCycle w)
-        (Bound.sym
-          (solve 6
-            (λ l fl ml rec fs ms →
-              (l :+ (fl :+ (ml :+ (rec :+ (fs :+ ms)))))
+        (solve 6
+          (λ l fl ml rec fs ms →
+            (l :+ (fl :+ (ml :+ (rec :+ (fs :+ ms)))))
               := ((l :+ (fl :+ (ml :+ rec))) :+ (fs :+ ms)))
-            refl load fieldLoss matLoss recovery fieldFinal matFinal)))
+          refl load fieldLoss matLoss recovery fieldFinal matFinal))
   where
     open FieldMaterialEnergyWeld w renaming
       (naturalInput to n; driverInput to d;
