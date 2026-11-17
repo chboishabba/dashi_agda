@@ -20,6 +20,7 @@ open import Agda.Builtin.Equality using (_≡_)
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Plasma.KSW668FullVectorMaxwellJetExact as Vector
 import DASHI.Physics.Motors.SmithFilsingerTimedSpatialPortChainExact as Timed
+import DASHI.Physics.Motors.SmithFilsingerTimeIndexedTransferExact as Time
 import DASHI.Physics.Motors.SmithFilsingerSpatialPortChainExact as Spatial
 import DASHI.Physics.Motors.SmithFilsingerSpatialSourceCapWeldExact as Cap
 import DASHI.Physics.Motors.SmithFilsingerSourceMaxwellBoundaryWeldExact as Weld
@@ -27,10 +28,56 @@ import DASHI.Physics.Motors.SmithFilsingerMidpointPhaseWorkExact as Port
 import DASHI.Physics.Motors.SmithFilsingerReplenishedCycleCapExact as Cycle
 import DASHI.Physics.Motors.Circuit36927RecoveryEnergyBoundExact as Bound
 
--- Every physically integrated electromagnetic link has a genuine
--- ORIGINAL full-vector jet and its independent causal/spatial port map.
--- The source b, field f and signed source cycle s are the SAME through
--- every link by dependent typing, not merely equal file labels.
+-- A measured/sourced pointwise-to-interval theorem is a work law
+-- on the SAME two directed exterior terminals. It is not a preconstructed
+-- CausalSpatialCell: the latter is DERIVED from this physical law below.
+-- Field-to-boundary integration, orientation and trace are separate
+-- premises. A bare three-vector curl jet cannot supply the integral.
+record IntegratedFieldCell
+  {r : Level} {F : C3.RealField r}
+  (jet : Vector.FullVectorMaxwellJet F)
+  (first shared start middle : Nat) : Set (lsuc r) where
+  field
+    controllerWork initiallyStored usefulLoad lossAndRadiation
+      finallyStored : Nat
+    flight : Time.RetardedFlight
+    startsAt : Time.RetardedFlight.launch flight ≡ start
+    finishesAt : Time.RetardedFlight.arrival flight ≡ middle
+
+    -- This particular field must be integrated over the actual selected
+    -- time/space boundary. The implication itself is a physical premise.
+    -- Its CONCLUSION is a numeric work equality, not a ready-made cell.
+    integratedLocalPoynting :
+      Vector.fullVectorSignedBudget jet ≡ C3.zero F →
+      first + (controllerWork + initiallyStored)
+        ≡ shared + (usefulLoad + (lossAndRadiation + finallyStored))
+
+-- Concrete Agda construction from a Maxwell pointwise theorem and the
+-- independent physically integrated local equality. The proof of local
+-- SpatialCell.work is not accepted wholesale as an arbitrary cell.
+buildCausalCellFromMaxwell :
+  ∀ {r} {F : C3.RealField r}
+    {first shared start middle} →
+  (jet : Vector.FullVectorMaxwellJet F) →
+  (receipt : IntegratedFieldCell jet first shared start middle) →
+  Timed.CausalSpatialCell first shared start middle
+buildCausalCellFromMaxwell jet receipt =
+  Timed.causalSpatialCell
+    (Spatial.spatialCell
+      (IntegratedFieldCell.controllerWork receipt)
+      (IntegratedFieldCell.initiallyStored receipt)
+      (IntegratedFieldCell.usefulLoad receipt)
+      (IntegratedFieldCell.lossAndRadiation receipt)
+      (IntegratedFieldCell.finallyStored receipt)
+      (IntegratedFieldCell.integratedLocalPoynting receipt
+        (Vector.fullVectorMaxwellPoyntingIdentity jet)))
+    (IntegratedFieldCell.flight receipt)
+    (IntegratedFieldCell.startsAt receipt)
+    (IntegratedFieldCell.finishesAt receipt)
+
+-- Every link carries an actual FULL VECTOR Maxwell jet and a separate
+-- physically integrated field-to-port work receipt; one original
+-- selected source b/f/s is preserved across the entire dependent path.
 data MaxwellTimedPath
   {r : Level} {F : C3.RealField r}
   (b : Weld.SelectedBoundary)
@@ -45,15 +92,10 @@ data MaxwellTimedPath
     throughField :
       ∀ {first shared last start middle finish} →
       (jet : Vector.FullVectorMaxwellJet F) →
-      (physicalPoyntingToCausalCell :
-        Vector.fullVectorSignedBudget jet ≡ C3.zero F →
-        Timed.CausalSpatialCell first shared start middle) →
+      IntegratedFieldCell jet first shared start middle →
       MaxwellTimedPath b f s shared last middle finish →
       MaxwellTimedPath b f s first last start finish
 
--- This is the exact computationally normalising PROOF compilers' fold,
--- not a physical Maxwell solver. Every cell's physical integration must
--- have been separately established to construct a nonempty path.
 eraseMaxwellToTimedSpatial :
   ∀ {r} {F : C3.RealField r}
     {b : Weld.SelectedBoundary}
@@ -64,9 +106,9 @@ eraseMaxwellToTimedSpatial :
   Timed.TimedSpatialChain first last start finish
 eraseMaxwellToTimedSpatial (atBoundary boundary time) =
   Timed.emptyTimed boundary time
-eraseMaxwellToTimedSpatial (throughField jet integrated rest) =
+eraseMaxwellToTimedSpatial (throughField jet receipt rest) =
   Timed.thenTimed
-    (integrated (Vector.fullVectorMaxwellPoyntingIdentity jet))
+    (buildCausalCellFromMaxwell jet receipt)
     (eraseMaxwellToTimedSpatial rest)
 
 -- Original all-N timed conservation and no-early-arrival are reused.
