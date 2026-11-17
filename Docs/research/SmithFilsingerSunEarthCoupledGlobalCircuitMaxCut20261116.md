@@ -447,3 +447,12 @@ The Agda source provides cancelSharedInterface, fieldMaterialCombinedWork, field
 Original physical Poynting/current and nonlinear material conservation identities are still uninhabited physical hypotheses. The separate #1521 DispersiveMaterialPortExact donor is not present on #1524's branch; avoid a fake import and perform exact cross-branch join after the source trees converge. Full F10/R2 Maxwell, F13/P2 source operator, F14/R1 original history, F15/R3 replenished natural work, F16 actual cloud intervention remain OPEN.
 
 Pinned Agda acceptance script scripts/check_smith_filsinger_formal_weld_agda29.sh now targets **three** formal modules; **Agda/Nix unavailable here**, so none of the new source-authored proofs is claimed kernel-checked. Full detailed signature/proof dependency in SmithFilsingerFormalWeldMaxCut20261117.md.
+
+
+## 17 Nov Agda direct donor-to-field/material typed weld
+
+The original #1521 canonical DispersiveMaterialPortExact.agda source has been *reused byte-for-byte unchanged* on #1524: same Git blob fb4039927678b370f359b3151c1fc2a2286c33ab on both branches. All extensions are in new DASHI/Physics/Motors/SmithFilsingerDispersiveMaterialWeldExact.agda, which imports the actual donor, not an abstract surrogate or numerical simulation.
+
+The new Agda proofs derive originalDispersiveRepeatableWork from the existing MemoryMaterialPortLedger.fullBalance with **environment and material storage individually restored**, then prove originalDispersiveLoadBound. CanonicalDispersiveSameObject ties the donor's natural recharge to **net** natural work, driver work, paid modulation, returned modulation, real load, field+material loss, and all four initial/final source and material storage identities on one selected original configuration. donorOriginalLoadBelowAdmittedNaturalCap proves the donor's same-original load cap. Crucially, donorStorageReturnTransfersToSplit derives the split full-store return from donor receipts and matched storage states; canonicalDispersiveFieldLoadBelowNaturalCap instantiates the F10 field/material shared-work cancellation and resulting F15 bound **without re-assuming storage restoration**.
+
+**Formal acceptance:** pinned script check_smith_filsinger_formal_weld_agda29.sh now includes FOUR new proof consumers and the original material donor; no Agda/Nix executable is available here, so source-authored theorems are NOT yet kernel checked. Physical F10/F13/F14/F15/F16 original-world gates remain OPEN and no empirical natural source is fabricated.
