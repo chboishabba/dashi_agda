@@ -2465,83 +2465,32 @@ ftcBannonCIDDoesNotPayWholeNetworkH3 = refl
 
 
 ------------------------------------------------------------------------
--- BANKING OWNER REUSE: ORIGINAL FEDERAL "CHAIN REACTION" NAME COLLISION
--- Reuse the specific already-owned DEA/HSI attribution discriminator.
--- No imported HSI counterfeit action may automatically pay a DEA
--- narcotics outcome or 2015 Black/Epstein same-transaction identity.
+-- ZORRO PETROGLYPH / TSFV EVIDENCE CONSUMER -- 25 OCT 2026
+--
+-- A distinct bounded heritage case; existing Aquino/CA dispositions are
+-- unchanged. Documentary source-root identity and physical temporal
+-- implication are separate. The imported finite construction is CLASSICAL.
+-- Neither source identity proves an operational occult programme nor
+-- TSFV postselection proves a controllable earlier-event intervention.
 ------------------------------------------------------------------------
 
-canonicalFederalChainReactionHomonymOwner : Banking.ChainReactionFederalNameCollisionCut
-canonicalFederalChainReactionHomonymOwner =
-  Banking.canonicalChainReactionFederalNameCollisionCut
+import DASHI.Cognition.ZorroPetroglyphSourceCutExact as ZorroHeritage
+import DASHI.Quantum.ZorroTSFVPostselectionNoSignalExact as ZorroTemporal
 
-chainReactionOriginalNameCollisionNotOneOperation :
-  Banking.sameNameMeansSameInvestigation
-    canonicalFederalChainReactionHomonymOwner ≡ false
-chainReactionOriginalNameCollisionNotOneOperation = refl
+zorroTwo2014DocumentsOneCorrespondenceRoot :
+  ZorroHeritage.sourceRoot ZorroHeritage.myhrvoldOutgoing2014 ≡
+  ZorroHeritage.sourceRoot ZorroHeritage.myhrvoldReply2014
+zorroTwo2014DocumentsOneCorrespondenceRoot =
+  ZorroHeritage.same2014ThreadRoot
 
-hsiCounterfeitProceedingsNotEpsteinDrugDisposition :
-  Banking.hsiCounterfeitCasesAreDEADrugOffenceDispositions
-    canonicalFederalChainReactionHomonymOwner ≡ false
-hsiCounterfeitProceedingsNotEpsteinDrugDisposition = refl
+zorroReportedMovementIsNotPolishing :
+  ZorroHeritage.taskListReportsOneRockMoved ≡
+  ZorroHeritage.physicalPolishingCompleted → ⊥
+zorroReportedMovementIsNotPolishing =
+  ZorroHeritage.reportedMovementNotPolishing
 
-reported2023DEAClosureStillNeedsOriginalInstrument :
-  Banking.reportedJune2023DEAClosureHasSignedNativeInstrumentHere
-    canonicalFederalChainReactionHomonymOwner ≡ false
-reported2023DEAClosureStillNeedsOriginalInstrument = refl
-
-
-------------------------------------------------------------------------
--- 26 OCT: PROOF-RELEVANT NAME COLLISION CROSS-POLLINATION, REUSE-ONLY
--- Existing nonfactorability module owns the theorem. The banking owner
--- supplies this exact finite input carrier. Neither is a new historical
--- source; agency-case identities still need independent source custody.
-------------------------------------------------------------------------
-
-caseTitleAloneCannotRecoverFederalCase :
-  Banking.casePublicHeadline Banking.deaOCDETFNYNYS0829 ≡
-  Banking.casePublicHeadline Banking.hsiIPRCounterfeit2011
-caseTitleAloneCannotRecoverFederalCase = refl
-
-bankingNameOnlyCaseDecoderNoGo :
-  NonFactor.FactorsThrough Banking.casePublicHeadline Banking.caseIsDEA → ⊥
-bankingNameOnlyCaseDecoderNoGo = Banking.nameOnlyFederalCaseIdentityImpossible
-
-bankingAgencyCaseKeyRestoresFiniteConsumer :
-  NonFactor.FactorsThrough Banking.originalFederalCaseKey Banking.caseIsDEA
-bankingAgencyCaseKeyRestoresFiniteConsumer = Banking.originalCaseKeyConsumerFactors
-
-
-------------------------------------------------------------------------
--- AUSPOL EXPANSION: THIN CASE CONSUMER, NO IMPORT OF #1251 SIBLING.
--- Source: existing Rinehart/Hanson/QLD/Palmer/Mandelson/Australia owners,
--- official indexed Senate disclosure and published NSWSC document.
-------------------------------------------------------------------------
-
-canonicalAuspolSameObjectOwner : Auspol.AustralianPowerPipelineFrontier
-canonicalAuspolSameObjectOwner = Auspol.canonicalAustralianPowerPipelineFrontier
-
-auspolMaterialSupportActuallyPaidAtReportedScope :
-  Auspol.materialSupportAndFirstPersonPolicyAdvicePresent
-    canonicalAuspolSameObjectOwner ≡ true
-auspolMaterialSupportActuallyPaidAtReportedScope = refl
-
-auspolSpecificIPAEditorialOrderNotPaid :
-  Auspol.specificIPAContentBoughtByCourtReportedPayments
-    canonicalAuspolSameObjectOwner ≡ false
-auspolSpecificIPAEditorialOrderNotPaid = refl
-
-auspolRinehartEpsteinDirectEdgeNotPaid :
-  Auspol.directRinehartEpsteinRelationProven
-    canonicalAuspolSameObjectOwner ≡ false
-auspolRinehartEpsteinDirectEdgeNotPaid = refl
-
-auspolKoganUKUSScoresNotAssumedAustralianDeployment :
-  Auspol.AustralianCampaignUsedKoganRiponScoresProven
-    canonicalAuspolSameObjectOwner ≡ false
-auspolKoganUKUSScoresNotAssumedAustralianDeployment = refl
-
-auspolNoCommonGlobalCommand :
-  Auspol.wholeAustraliaUSCovertCommandProven
-    canonicalAuspolSameObjectOwner ≡ false
-auspolNoCommonGlobalCommand = refl
+zorroTSFVPostselectionIsNotPastIntervention :
+  ZorroTemporal.backwardConditioning ≡
+  ZorroTemporal.freelyControlledEarlierIntervention → ⊥
+zorroTSFVPostselectionIsNotPastIntervention =
+  ZorroTemporal.conditioningNotIntervention
