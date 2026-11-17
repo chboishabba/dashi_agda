@@ -1,0 +1,42 @@
+{
+  "date": "2026-11-17",
+  "pr": 1524,
+  "scope": "Restricted planar layered tangential Maxwell Fourier radiation/source sheet Green, extension to kx,ky and fully anisotropic complex permittivity; conditional F15 source work",
+  "checked_locally": {
+    "sympy_pytest": "51/51 PASS",
+    "old_reduced_layer_and_tangential": 32,
+    "outgoing_evanescent_and_source_off": 11,
+    "oblique_tilted_hall": 8,
+    "method": "exact SymPy rational+algebraic source-equivalent local files, not CI"
+  },
+  "canonical_producers": [
+    "scripts/smith_filsinger_layered_green_sympy.py",
+    "scripts/smith_filsinger_tangential_maxwell_sympy.py",
+    "scripts/smith_filsinger_radiation_green_sympy.py",
+    "scripts/smith_filsinger_oblique_maxwell_sympy.py",
+    "scripts/test_smith_filsinger_radiation_green_sympy.py",
+    "scripts/test_smith_filsinger_oblique_maxwell_sympy.py"
+  ],
+  "identities": [
+    "outgoing-sheet Schur Green from R*(H_inside-H_outside)=J",
+    "exact source work=exterior Poynting+slab absorption",
+    "lossless tilted-Hall M^H F+F M=0 and Cayley transfer T^H F T=F",
+    "evanescent lossless q=+i kappa reactive field with zero real outward power",
+    "oblique kx,ky longitudinal Hz and Ez eliminated from original curl Maxwell",
+    "strictly positive propagating branch and evanescent cutoff rejection",
+    "zero source implies zero Green field and cannot pay positive F15 useful load"
+  ],
+  "strict_unverified": {
+    "F13_full_3d_retarded_dyadic": "OPEN; Fourier inversion, complex dissipative radiation, source calibrated material and geometry absent",
+    "F15_original_independent_replenished_net": "OPEN; no original measured meter and restored source cycle",
+    "D1_pinned_agda_kernel": "OPEN; no Agda/Nix in current session and no checked GitHub workflow receipt",
+    "github_head_full_python_runner": "NOT RUN; existing 51 checks run against local source-equivalent copy"
+  },
+  "original_owner_reuse": [
+    "BalabanFiniteCoerciveGreen",
+    "SmithFilsingerCoerciveGreenRetardedWeldExact",
+    "SmithFilsingerReplenishedCycleCapExact",
+    "SmithFilsingerSpaceTimePoyntingTelescopeExact"
+  ],
+  "attribution": "User's original Smith/Filsinger steelman preserved; classical Maxwell and Hall conductivities; no ESD edits."
+}
