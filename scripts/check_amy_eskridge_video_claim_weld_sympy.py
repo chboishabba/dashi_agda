@@ -75,6 +75,14 @@ def check_claim_welds() -> None:
     list_ids = [int(x) for x in re.findall(r'\bclaimJoin(\d{3})\b', weld[start:end])]
     verify_ids(claim_ids, join_ids, list_ids)
     assert "all86RowsAccountedFor = refl" in weld
+    gates = read("AmyEskridgeVideoTypedObligationWeldExact.agda")
+    gate_ids = [int(x) for x in re.findall(r'(?m)^gate(\d{3})\s*=\s*typed-claim-gate\s', gates)]
+    gate_start = gates.index("allVideoGates =")
+    gate_end = gates.index("\n\nforgetOpenGates", gate_start)
+    gate_list_ids = [int(x) for x in re.findall(r'\bgate(\d{3})\b', gates[gate_start:gate_end])]
+    assert gate_ids == list(range(1, 87))
+    assert gate_list_ids == gate_ids
+    assert "gateCoverage = refl" in gates
     for row_id, existing_producer in [
         (4, "Source.houseApril2026"),
         (15, "Hal5.canonicalHAL5TalkSourceReceipt"),
