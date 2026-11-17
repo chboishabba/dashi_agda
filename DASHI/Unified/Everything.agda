@@ -274,57 +274,36 @@ unifiedYMImplementAToDMaxCutReceipt =
 
 
 ------------------------------------------------------------------------
--- Current-master cross-domain max-cut and contextual 369 handoff.
+-- Current Gate-4 frontier and typed continuum non-promotion.
 ------------------------------------------------------------------------
 
-import DASHI.Unified.TOECurrentMaxCutGovernanceFleetExact as CurrentMaxCut
-import DASHI.Unified.TOECurrentMaxCutGovernanceFleetRegression
-import DASHI.Core.GovernanceTrajectoryRealisationExact as CurrentTrajectory
-import DASHI.Foundations.SSPTritCarrier as CurrentSSP
+unifiedBalabanContinuumPromotionImpossible :
+  FleetHyperTOE.BalabanContinuumPromotion → ⊥
+unifiedBalabanContinuumPromotionImpossible =
+  FleetHyperTOE.toeBalabanContinuumPromotionImpossible
 
-unifiedCurrentMaxCutGovernanceFleetReceipt :
-  CurrentMaxCut.TOECurrentMaxCutGovernanceFleetReceipt
-unifiedCurrentMaxCutGovernanceFleetReceipt =
-  CurrentMaxCut.canonicalTOECurrentMaxCutGovernanceFleetReceipt
+unifiedDepthContinuumPromotionImpossible :
+  FleetHyperTOE.DepthContinuumPromotion → ⊥
+unifiedDepthContinuumPromotionImpossible =
+  FleetHyperTOE.toeDepthContinuumPromotionImpossible
 
-unifiedCurrent369ContextualFibreWeldReceipt :
-  CurrentMaxCut.TOE369ContextualFibreWeldReceipt
-unifiedCurrent369ContextualFibreWeldReceipt =
-  CurrentMaxCut.canonicalTOE369ContextualFibreWeldReceipt
+unifiedCurrentGate4FrontierLedgerLevel : ProofLevel
+unifiedCurrentGate4FrontierLedgerLevel =
+  FleetHyperTOE.currentGate4FrontierLedgerLevel
 
-unifiedCurrent369DecisionSheetStatesIsNine :
-  CurrentMaxCut.decisionSheetStateCount ≡ 9
-unifiedCurrent369DecisionSheetStatesIsNine =
-  CurrentMaxCut.decisionSheetStateCountIsNine
+unifiedCurrentGate4ClusteringToTransferGapLevel : ProofLevel
+unifiedCurrentGate4ClusteringToTransferGapLevel =
+  FleetHyperTOE.currentGate4ClusteringToTransferGapLevel
 
-unifiedCurrent369InteractionCubeStatesIsTwentySeven :
-  CurrentMaxCut.interactionCubeStateCount ≡ 27
-unifiedCurrent369InteractionCubeStatesIsTwentySeven =
-  CurrentMaxCut.interactionCubeStateCountIsTwentySeven
+unifiedFleetFormalGapTargetSelected : Bool
+unifiedFleetFormalGapTargetSelected =
+  FleetHyperTOE.fleetFormalGapTargetSelected
 
-unifiedCurrent369AppraisalFibreStatesIsSevenHundredTwentyNine :
-  CurrentMaxCut.appraisalFibreStateCount ≡ 729
-unifiedCurrent369AppraisalFibreStatesIsSevenHundredTwentyNine =
-  CurrentMaxCut.appraisalFibreStateCountIsSevenHundredTwentyNine
+unifiedHistoricalGate4CountSelectedAsFleetTarget : Bool
+unifiedHistoricalGate4CountSelectedAsFleetTarget =
+  FleetHyperTOE.historicalGate4CountSelectedAsFleetTarget
 
-unifiedCurrent369SupportIsPositive :
-  CurrentMaxCut.relativeOrientationTrit CurrentTrajectory.supports
-  ≡ CurrentSSP.sspPosOne
-unifiedCurrent369SupportIsPositive =
-  CurrentMaxCut.supportOrientationIsPositive
-
-unifiedCurrent369CounterIsNegative :
-  CurrentMaxCut.relativeOrientationTrit CurrentTrajectory.counters
-  ≡ CurrentSSP.sspNegOne
-unifiedCurrent369CounterIsNegative =
-  CurrentMaxCut.counterOrientationIsNegative
-
-unifiedCurrent369SynthesisDoesNotEraseComparator :
-  CurrentMaxCut.synthesisErasesComparator ≡ false
-unifiedCurrent369SynthesisDoesNotEraseComparator =
-  CurrentMaxCut.synthesisErasesComparatorIsFalse
-
-unifiedCurrentFiniteRGStillDoesNotPromoteContinuum :
-  CurrentMaxCut.finiteRGCreatesContinuumPromotion ≡ false
-unifiedCurrentFiniteRGStillDoesNotPromoteContinuum =
-  CurrentMaxCut.finiteRGCreatesContinuumPromotionIsFalse
+unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
+  FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
+unifiedFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
+  FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap

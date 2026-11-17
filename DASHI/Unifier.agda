@@ -751,80 +751,45 @@ unifierNavierStokesWeightedPlusEndpointClosed : Bool
 unifierNavierStokesWeightedPlusEndpointClosed =
   NSClayTOE.currentWeightedPlusEndpointClosed
 
-unifierNavierStokesWeightedPlusEndpointStillOpen :
-  unifierNavierStokesWeightedPlusEndpointClosed ≡ false
-unifierNavierStokesWeightedPlusEndpointStillOpen =
-  NSClayTOE.currentWeightedPlusEndpointStillOpen
-
-unifierNavierStokesAugmentedCriticalWeightedClosed : Bool
-unifierNavierStokesAugmentedCriticalWeightedClosed =
-  NSClayTOE.currentAugmentedCriticalWeightedClosed
-
-unifierNavierStokesAugmentedCriticalWeightedStillOpen :
-  unifierNavierStokesAugmentedCriticalWeightedClosed ≡ false
-unifierNavierStokesAugmentedCriticalWeightedStillOpen =
-  NSClayTOE.currentAugmentedCriticalWeightedStillOpen
-
-unifierBalabanPhysicalPromotionCut :
-  (BalabanR559TOE.balabanBlockSpinTransfer
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false)
-  × (BalabanR559TOE.balabanUniformKPAbsorption
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false)
-  × (BalabanR559TOE.balabanOSWightmanConstruction
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false)
-unifierBalabanPhysicalPromotionCut =
-  unifierBalabanBlockSpinStillBlocked ,
-  (unifierBalabanUniformKPStillBlocked ,
-   unifierBalabanOSWightmanStillBlocked)
+unifierBalabanOSWightmanStillBlocked :
+  BalabanR559TOE.balabanOSWightmanConstruction
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false
+unifierBalabanOSWightmanStillBlocked =
+  BalabanR559TOE.balabanOSWightmanConstructionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
 
 ------------------------------------------------------------------------
--- Current-master cross-domain max-cut and contextual 369 handoff.
+-- Current Gate-4 frontier and typed continuum non-promotion.
 ------------------------------------------------------------------------
 
-import DASHI.Unified.TOECurrentMaxCutGovernanceFleetExact as CurrentMaxCut
-import DASHI.Unified.TOECurrentMaxCutGovernanceFleetRegression
-import DASHI.Core.GovernanceTrajectoryRealisationExact as CurrentTrajectory
-import DASHI.Foundations.SSPTritCarrier as CurrentSSP
+unifierBalabanContinuumPromotionImpossible :
+  FleetHyperTOE.BalabanContinuumPromotion → ⊥
+unifierBalabanContinuumPromotionImpossible =
+  FleetHyperTOE.toeBalabanContinuumPromotionImpossible
 
-unifierCurrentMaxCutGovernanceFleetReceipt :
-  CurrentMaxCut.TOECurrentMaxCutGovernanceFleetReceipt
-unifierCurrentMaxCutGovernanceFleetReceipt =
-  CurrentMaxCut.canonicalTOECurrentMaxCutGovernanceFleetReceipt
+unifierDepthContinuumPromotionImpossible :
+  FleetHyperTOE.DepthContinuumPromotion → ⊥
+unifierDepthContinuumPromotionImpossible =
+  FleetHyperTOE.toeDepthContinuumPromotionImpossible
 
-unifierCurrent369ContextualFibreWeldReceipt :
-  CurrentMaxCut.TOE369ContextualFibreWeldReceipt
-unifierCurrent369ContextualFibreWeldReceipt =
-  CurrentMaxCut.canonicalTOE369ContextualFibreWeldReceipt
+unifierCurrentGate4FrontierLedgerLevel : ProofLevel
+unifierCurrentGate4FrontierLedgerLevel =
+  FleetHyperTOE.currentGate4FrontierLedgerLevel
 
-toeFleetNumericABIRequiresIndependentEvidence :
-  FleetGapTOE.SpectralNumericABIPromotion → ⊥
-toeFleetNumericABIRequiresIndependentEvidence =
-  FleetGapTOE.fleetSpectralNumericABIPromotionImpossible
+unifierCurrentGate4ClusteringToTransferGapLevel : ProofLevel
+unifierCurrentGate4ClusteringToTransferGapLevel =
+  FleetHyperTOE.currentGate4ClusteringToTransferGapLevel
 
-------------------------------------------------------------------------
--- Quantum-mereology selected-atlas / g-TPS terminal boundary.
-------------------------------------------------------------------------
+unifierFleetFormalGapTargetSelected : Bool
+unifierFleetFormalGapTargetSelected =
+  FleetHyperTOE.fleetFormalGapTargetSelected
 
-import DASHI.Unified.QuantumMereologyTOEConvergenceExact as QMT
+unifierHistoricalGate4CountSelectedAsFleetTarget : Bool
+unifierHistoricalGate4CountSelectedAsFleetTarget =
+  FleetHyperTOE.historicalGate4CountSelectedAsFleetTarget
 
-open QMT public using
-  ( physicalSourceGTPSStillOpen
-  ; physicalHamiltonianAttachmentStillOpen
-  ; physicalPointerWeldStillOpen
-  ; minimizerPullbackStillOpen
-  ; algebraSusceptibilityStillOpen
-  ; thermodynamicMQPTStillOpen
-  ; sameStateHolographicWeldStillOpen
-  ; lorentzianEinsteinPromotionStillOpen
-  ; fleetEigenPriorityStillNonPromoting
-  ; fleetSpectralLabelStillDoesNotIdentifyOwner
-  )
-
-unifierQuantumMereologyTOEReceipt : QMT.QuantumMereologyTOEReceipt
-unifierQuantumMereologyTOEReceipt =
-  QMT.canonicalQuantumMereologyTOEReceipt
-
-unifierQuantumMereologyTOEReceiptZKPFrame : ParetoSnowballTOE.TOEZKPFrame
-unifierQuantumMereologyTOEReceiptZKPFrame =
-  QMT.canonicalQuantumMereologyTOEZKPFrame
+unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap :
+  FleetHyperTOE.fleetGate4EqualCardinalitySelectsCanonicalMap ≡ false
+unifierFleetGate4EqualCardinalityDoesNotSelectCanonicalMap =
+  FleetHyperTOE.fleetGate4EqualCardinalityDoesNotSelectCanonicalMap
