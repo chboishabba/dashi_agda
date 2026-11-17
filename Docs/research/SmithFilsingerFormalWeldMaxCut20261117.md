@@ -424,7 +424,7 @@ DASHI/Physics/Motors/SmithFilsingerCertifiedSignedMeterResidualExact.agda:
 DASHI/Physics/Motors/SmithFilsingerCertifiedSignedMeterTwoSidedExact.agda:
 
 - TwoSidedMeterCertificate w reuses the existing original certificate and independently supplies the canonical ProofCarryingFiniteSumEnclosure + ProofCarryingFiniteSumUpperEnclosure for the NEGATIVE residual.
-- exactOppositeErrorSum forces the negative certificate's total to be the additive inverse of the SAME original signed-error total. It cannot be an arbitrary second experiment's error interval.
+- exactOppositeErrorSum forces the negative certificate's total to be the additive inverse of the SAME original aggregate signed-error total. It must satisfy the same aggregate residual equality, but need not have a term-by-term sample bijection; provenance remains an independent admission.
 - positiveUpperIsRationalOrder, negativeUpperIsRationalOrder, negativeReversesOrder and translateOrder demand the actual rational-order transport laws; an arbitrary relation labelled LessOrEqual cannot silently become a usable physical inequality.
 - twoSidedOriginalReceiverUpper and twoSidedOriginalReceiverLower derive both physical-source indexed receiver-work bounds:
 
