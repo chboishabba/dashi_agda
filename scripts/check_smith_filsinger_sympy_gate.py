@@ -24,6 +24,10 @@ REQUIRED={
       ("ZeroPreserving","oneStepOutsideZero",
        "noSignalOutsideDynamicCone","seedReach",
        "noSignalOutsideInterleavedSourceCone","additiveZeroPreserving"),
+    "SmithFilsingerLocalCayleyZeroWeldExact.agda":
+      ("CertifiedCayley","sameCayleyFirstZero","sameCayleySecondZero",
+       "sameCayleyZeroPreserving","guardedDistinctCayleyEdge",
+       "diagonalCayleyZero","singleCayleyWithSourceNoSignalOutsideReach"),
 }
 TESTS=[str(ROOT/"scripts/test_smith_filsinger_layered_green_sympy.py"),
        str(ROOT/"scripts/test_smith_filsinger_tangential_maxwell_sympy.py"),
