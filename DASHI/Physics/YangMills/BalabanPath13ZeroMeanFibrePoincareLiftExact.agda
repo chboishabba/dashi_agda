@@ -25,22 +25,22 @@ import DASHI.Physics.YangMills.BalabanPath13ZeroMeanFibrePoincareExact as Fibre1
 import DASHI.Physics.YangMills.BalabanFiniteSumRelationFibreLiftExact as SumLift
 
 sumZeroMeanFibrePoincareViaFibre :
-  ∀ axis fld
+  ∀ axis field
     (transverses : List (Triple (CyclicIndex Fibre13.side13))) →
-  (∀ transverse → physicalFibreSum fld axis transverse ≡ 0ℚ) →
+  (∀ transverse → physicalFibreSum field axis transverse ≡ 0ℚ) →
   sumRational transverses
     (λ transverse →
-      LDL.oneEighteenth * physicalFibreNormSq fld axis transverse)
-  ≤ sumRational transverses (physicalFibreEdgeEnergy fld axis)
-sumZeroMeanFibrePoincareViaFibre axis fld transverses zeroMean =
+      LDL.oneEighteenth * physicalFibreNormSq field axis transverse)
+  ≤ sumRational transverses (physicalFibreEdgeEnergy field axis)
+sumZeroMeanFibrePoincareViaFibre axis field transverses zeroMean =
   SumLift.sumRationalMonotoneViaFibre
     transverses
     (λ transverse →
-      LDL.oneEighteenth * physicalFibreNormSq fld axis transverse)
-    (physicalFibreEdgeEnergy fld axis)
+      LDL.oneEighteenth * physicalFibreNormSq field axis transverse)
+    (physicalFibreEdgeEnergy field axis)
     (λ transverse →
       Fibre13.zeroMeanPhysicalFibrePoincare13
-        fld axis transverse (zeroMean transverse))
+        field axis transverse (zeroMean transverse))
 
 ------------------------------------------------------------------------
 -- Boundary receipt: the theorem above contains no recursion over transverses.

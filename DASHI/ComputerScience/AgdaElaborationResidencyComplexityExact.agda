@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.ComputerScience.AgdaElaborationResidencyComplexityExact where
 
 ------------------------------------------------------------------------
@@ -52,27 +51,22 @@ record ElaborationObservation : Set where
 open ElaborationObservation public
 
 data ElaborationIntervention : Set where
-  stageEqualityOrConversion : ElaborationIntervention
-  exposeIndicesAndSplitInference : ElaborationIntervention
-  nameAndShareIntermediateTerms : ElaborationIntervention
-  performInterfaceConeSurgery : ElaborationIntervention
-  noElaborationSurgerySelected : ElaborationIntervention
+  stageEqualityOrConversion          : ElaborationIntervention
+  exposeIndicesAndSplitInference     : ElaborationIntervention
+  nameAndShareIntermediateTerms      : ElaborationIntervention
+  performInterfaceConeSurgery        : ElaborationIntervention
+  noElaborationSurgerySelected       : ElaborationIntervention
 
 selectIntervention : ElaborationObservation -> ElaborationIntervention
-selectIntervention observation with residencyHeavy observation | conversionHeavy observation
-... | true | true = stageEqualityOrConversion
-... | true | false with constraintOrMetaHeavy observation
-...   | true = exposeIndicesAndSplitInference
-...   | false with repeatedNormalizationOrPoorSharing observation
-...     | true = nameAndShareIntermediateTerms
-...     | false with importedStateHeavy observation
-...       | true = performInterfaceConeSurgery
-...       | false = noElaborationSurgerySelected
-... | false | _ with repeatedNormalizationOrPoorSharing observation
-...   | true = nameAndShareIntermediateTerms
-...   | false with importedStateHeavy observation
-...     | true = performInterfaceConeSurgery
-...     | false = noElaborationSurgerySelected
+selectIntervention obs with residencyHeavy obs | conversionHeavy obs | constraintOrMetaHeavy obs | repeatedNormalizationOrPoorSharing obs | importedStateHeavy obs
+... | true  | true  | _     | _     | _     = stageEqualityOrConversion
+... | true  | false | true  | _     | _     = exposeIndicesAndSplitInference
+... | true  | false | false | true  | _     = nameAndShareIntermediateTerms
+... | true  | false | false | false | true  = performInterfaceConeSurgery
+... | true  | false | false | false | false = noElaborationSurgerySelected
+... | false | _     | _     | true  | _     = nameAndShareIntermediateTerms
+... | false | _     | _     | false | true  = performInterfaceConeSurgery
+... | false | _     | _     | false | false = noElaborationSurgerySelected
 
 ------------------------------------------------------------------------
 -- Non-collapse boundary.

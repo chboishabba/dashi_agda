@@ -6,20 +6,50 @@ Source-audited `VNaturalOrbifoldConstruction`: `originalVOAZeroCannotBeBothSumma
 
 # Changelog
 
-## 2026-10-29 — AO fleet spectral, W20, and combinatorial Max Cut convergence
+## 2026-09-11 — Yang–Mills Path-13 elaboration profiling and RingSolver analysis
 
-- Normalized the existing world/macro/sub-eigen/fibre, hierarchical Pareto, and topic-conductor donors onto current master.
-- Added the authoritative five-level AO distinction: MP eigenspace, primary topic, subtopic, complete-link fibre, and typed unblocked goal.
-- Added explicit K=50 and K=100 spectral truncation choices and an MP spectral-basis receipt with an explicit empirical `(1/M) A A^T` same-object obligation, above-bulk-edge evidence, and orthonormality obligations.
-- Added typed rejection boundaries for hexadecimal literals, memory-address noise, raw UI tokens, and raw DOM tokens.
-- Added a total `Fin 20` conductor schedule. Every slot requires an unblocked, Pareto-eligible, top-ranked goal. Distinct slots require distinct goals and `noTypedMeet` evidence.
-- Recorded that a serial modulo-eight loop is not full W=20 concurrency.
-- Added a literal combinatorial Max Cut surface with two-side partitions, crossing edges, boundary vertices, a discrete-Laplacian cut witness, and a Goemans-Williamson SDP receipt boundary.
-- Reused existing Yang-Mills gauge/coarse residual and Navier-Stokes exact commutator owners through explicit same-object/non-promotion gates.
-- Wired the new surfaces through `DASHI.Interop.Everything`, `FleetFormalGapTargetTOEExact`, `EverythingTOESymmetryResolved369`, and `DASHI.Unified.Everything`.
-- Added a focused exact-head Agda workflow. Local Agda is unavailable in this runtime, so kernel status remains pending until that workflow reports.
-- No ESD or digital_esd surface is edited.
+- Completed directional energy contraction profiling (`ym-path13-directional`)
+  for `BalabanPath13DirectionalEnergyContractionExact.agda` with Exit 0 in
+  261.8s, max residency 5.72 GB (down from OOM >32 GB), 425 metas, and max open
+  constraints 2. Replaced 12 distinct-axis reflection solvers with the structural
+  lemma `scaleSumSubtractCommutes` and `OpaqueAlgebra.scaleSubFactor`.
+- Documented the two long-running Poincare-13 elaboration profiling jobs in
+  `docs/ym_path13_elaboration_residency_records.md`:
+  * Job 1 (2026-09-09 21:47 to 2026-09-10 10:45): ran for 12h 58m 20s before
+    terminating on `path13LDLDecompositionRaw = ℚRing.solve-∀` in
+    `BalabanPath13GeneratedLDLCertificate.agda`.
+  * Job 2 (2026-09-10 11:30 to present): actively running at 20h 20m elapsed
+    (20h 05m CPU time, 98.7% CPU, 1.71 GB RSS), having cleared all upstream
+    averaging and martingale modules and currently progressing through the
+    same 12-variable rational polynomial reflection step.
+- Established that memory exhaustion (OOM) is completely eliminated across the
+  entire upstream pipeline (held under 1.7 GB RSS), leaving single-core Horner
+  polynomial reflection on 12 variables with large rational denominators as the
+  sole CPU bottleneck.
 
+## 2026-09-10 — NS literal outer signed-cross decomposition
+
+- Added R590's deep-FL/complement decomposition on R545's literal spectator
+  forcing half. Preserves its single resolvent factor and fixed spectator,
+  avoiding an unsupported identification with R440's two weighted aggregates.
+  Integrated the draft into R569; no analytic payment or Agda check claimed.
+
+- Constructed the conditional R589→R588 producer and its common-cross bound.
+  The exact scalar identity is now derived internally from literal masses;
+  physical inequalities, quantity identification, and uniformity remain inputs.
+
+- Extended R589 with actual dyadic deep/shoulder masks, complementary finite
+  fold recombination, and the exact signed critical-cone decomposition. HH
+  uses the minimum input shell conservatively. Physical estimates on these
+  masks and Agda elaboration remain outstanding.
+
+- Continued the fetched NS R588 checkpoint `6cd63dcd7` on the isolated branch
+  `agent/ns-bidi-r588-continuation`.
+- Added R589's literal R440 outer signed-cross decomposition using R581 finite
+  routing and R291 additivity, retaining the full amplitude in each class.
+  Integrated the draft into the focused R569 frontier.
+- Static dependency and whitespace checks pass. No Agda was run. Physical
+  uniform payments, R588's full weld, and Clay remain open.
 
 This changelog is append-only. Older mentions of `false` are historical wave
 records unless the entry explicitly states it is describing the current live
