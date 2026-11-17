@@ -754,7 +754,6 @@ unifierNavierStokesBW1StillOpen =
 unifierNavierStokesBContinuationStillOpen =
   NSABCDTerminal.toeBContinuationStillOpen
 
-
 ------------------------------------------------------------------------
 -- R559 / Ibrahim / fleet-58 / generic-hyperfabric TOE convergence.
 ------------------------------------------------------------------------

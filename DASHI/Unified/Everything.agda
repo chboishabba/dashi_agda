@@ -263,7 +263,6 @@ unifiedNavierStokesABCDTerminalZKPFrame :
 unifiedNavierStokesABCDTerminalZKPFrame =
   NSABCDTerminal.canonicalNSABCDTerminalZKPFrame
 
-
 ------------------------------------------------------------------------
 -- R559 / Ibrahim / fleet-58 / generic-hyperfabric TOE convergence.
 ------------------------------------------------------------------------
