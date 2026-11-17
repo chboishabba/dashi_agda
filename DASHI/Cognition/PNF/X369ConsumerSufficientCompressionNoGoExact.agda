@@ -271,3 +271,44 @@ futureConsumerSufficiency step encode consumer sufficient stable n
 -- The converse claim is deliberately not made: a compression that
 -- preserves one observed target but NOT its transition-stable fibres
 -- can still lose information needed by a later target.
+
+
+------------------------------------------------------------------------
+-- P0f: the SAME smaller quotient is exact for a present consumer
+-- but UNSOUND for a future consumer if the discarded tag can alter
+-- the transition. This is the formal future-memory/steering issue:
+-- current-surface fidelity != future-sufficient compression.
+------------------------------------------------------------------------
+
+tagSensitiveStep : TaggedPhase → TaggedPhase
+tagSensitiveStep (tagged p true) =
+  tagged (Task.advancePhase p) true
+tagSensitiveStep (tagged p false) = tagged p false
+
+sameCodeBeforeTagSensitiveStep :
+  phaseCodec (tagged Wheel.phase-0 true)
+  ≡ phaseCodec (tagged Wheel.phase-0 false)
+sameCodeBeforeTagSensitiveStep = refl
+
+tagSensitiveStepBreaksPhaseFibre :
+  phaseCodec (tagSensitiveStep (tagged Wheel.phase-0 true))
+  ≡ phaseCodec (tagSensitiveStep (tagged Wheel.phase-0 false)) →
+  ⊥
+tagSensitiveStepBreaksPhaseFibre sameAfter =
+  phaseAdvanceHasNoFixedPoint Wheel.phase-0 sameAfter
+
+presentConsumerSufficientFutureConsumerNot :
+  Descent.ConsumerSufficient
+    phaseCodec
+    (λ state → phaseConsumer (tagSensitiveStep state)) →
+  ⊥
+presentConsumerSufficientFutureConsumerNot sufficient =
+  tagSensitiveStepBreaksPhaseFibre
+    (sufficient
+      (tagged Wheel.phase-0 true)
+      (tagged Wheel.phase-0 false)
+      sameCodeBeforeTagSensitiveStep)
+
+-- A local residual carrying the discarded tag would remove this
+-- particular failure, but its cost and minimality are independent
+-- MDL/resource questions delegated to the existing compression ladder.
