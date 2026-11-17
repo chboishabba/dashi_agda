@@ -1,317 +1,395 @@
 {-# OPTIONS --safe #-}
 module DASHI.Unified.SensibLawGovernanceTOEExact where
 
-------------------------------------------------------------------------
--- SENSIBLAW / LEGAL GOVERNANCE TOE NORMALIZATION
---
--- This module reuses existing theorem owners.
--- It does not create legal authority.
--- It does not create vendor authority.
--- It does not replace source attribution.
--- It does not identify a case-management implementation with legal doctrine.
---
--- Historical SensibLaw ownership stays with the imported SensibLaw modules.
--- Legal-runtime ownership stays with the imported legal runtime modules.
--- Generic authority transport stays with the governance owner.
--- External meta-introspector repositories retain separate authorship and
--- theorem authority.  This module imports no theorem from those repositories.
-------------------------------------------------------------------------
-
+open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.AuthorityNonPromotionCore as Authority
-import DASHI.Promotion.AuthorityBoundaryCore as Boundary
+import DASHI.Core.IntersectionalNonFactorability as NF
+import DASHI.Foundations.CanonicalProvenancePromotion as Canonical
+import DASHI.Governance.GovernedArtifactCore as Governed
+import DASHI.Governance.PromotionSpine as Promotion
+import DASHI.Governance.LegalDecisionDoubleProjectionExact as LegalDecision
+import DASHI.Governance.LegitimacyEvidenceSeparationExact as Legitimacy
 import DASHI.Interop.SensibLawSemanticPromotionPolicy as Semantic
-import DASHI.Law.SensibLawAgdaFirstLegalRuntimeEverything as LegalRuntime
-import DASHI.Law.SensibLawITIRParityEverything as Parity
-import DASHI.Governance.DomainPermeabilityAuthorityTransport as Domain
-import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Snowball
-import DASHI.Interop.SensibLawSnowballAttributionLineageAdapterExact as SnowballLineage
-import DASHI.Law.SensibLawParetoProofDirectedCorpusSearchEverything as ParetoSearch
+import DASHI.Interop.SensibLawSnowballAttributionLineageAdapterExact as Snowball
+import DASHI.Law.SensibLawExpertEvidenceProductionIntegrityExact as Expert
+import DASHI.Law.SensibLawRealMatterReviewDecisionExact as Review
+import DASHI.Law.SensibLawRealMatterReviewedResumeExact as Resume
+import DASHI.Cognition.PNF.SensibLawLegalSemanticAdmissionFrontierExact as Admission
+import DASHI.Cognition.PNF.PackedNormativeSparseAdmissionExact as Sparse
+import DASHI.Cognition.PNF.SensibLawFiniteRequirementParetoFrontierContractExact as RequirementPareto
+import DASHI.Unified.FleetFormalGapTargetTOEExact as Fleet
+import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as TOEFrame
 
 ------------------------------------------------------------------------
--- Reused canonical owners.
+-- SENSIBLAW / LEGAL GOVERNANCE TOE CONVERGENCE
+--
+-- This module owns only the normalization facade.
+--
+-- Existing SensibLaw, governance, Pareto, snowball, legal-decision and fleet
+-- modules remain theorem owners.  The facade does not create legal truth,
+-- legal authority, legitimacy, forensic compliance, admission authority, or
+-- an Actionstep-specific integration that is not present in the source graph.
+--
+-- ESD surfaces are not imported as proof authority and are never edited here.
 ------------------------------------------------------------------------
 
-governanceSemanticAuthorityBoundary :
-  Authority.AuthorityNonPromotionBundle
-governanceSemanticAuthorityBoundary =
-  Semantic.semanticPromotionAuthorityBoundary
+SemanticPromotionPolicySurface : Set₁
+SemanticPromotionPolicySurface = Semantic.SemanticPromotionPolicySurface
 
-governanceSemanticTruthAuthorityStillClosed :
-  Authority.truthAuthorityFlag governanceSemanticAuthorityBoundary ≡ false
-governanceSemanticTruthAuthorityStillClosed =
-  Semantic.semantic-promotion-truth-authority-closed
+ExpertProductionBoundary : Set
+ExpertProductionBoundary = Expert.ExpertProductionBoundary
 
-governanceSemanticLegalAuthorityStillClosed :
-  Authority.legalAuthorityFlag governanceSemanticAuthorityBoundary ≡ false
-governanceSemanticLegalAuthorityStillClosed =
+RealMatterReviewBoundary : Set
+RealMatterReviewBoundary = Review.RealMatterReviewBoundary
+
+ReviewedResumeBoundary : Set
+ReviewedResumeBoundary = Resume.ReviewedResumeBoundary
+
+LegalSemanticAdmissionFrontier : Set
+LegalSemanticAdmissionFrontier = Admission.LegalSemanticAdmissionFrontier
+
+FiniteRequirementParetoContract : Set
+FiniteRequirementParetoContract = RequirementPareto.FiniteRequirementParetoContract
+
+SensibLawSnowballLineageBoundary : Set
+SensibLawSnowballLineageBoundary = Snowball.SensibLawSnowballLineageBoundary
+
+LegitimacyBoundary : Set
+LegitimacyBoundary = Legitimacy.LegitimacyBoundary
+
+FleetFormalGapTargetReceipt : Set
+FleetFormalGapTargetReceipt = Fleet.FleetFormalGapTargetReceipt
+
+sensibLawSemanticPromotionPolicySurface :
+  Semantic.SemanticPromotionPolicySurface
+sensibLawSemanticPromotionPolicySurface =
+  Semantic.semanticPromotionPolicySurface
+
+sensibLawExpertProductionBoundary :
+  Expert.ExpertProductionBoundary
+sensibLawExpertProductionBoundary =
+  Expert.canonicalExpertProductionBoundary
+
+sensibLawRealMatterReviewBoundary :
+  Review.RealMatterReviewBoundary
+sensibLawRealMatterReviewBoundary =
+  Review.canonicalRealMatterReviewBoundary
+
+sensibLawReviewedResumeBoundary :
+  Resume.ReviewedResumeBoundary
+sensibLawReviewedResumeBoundary =
+  Resume.canonicalReviewedResumeBoundary
+
+sensibLawLegalSemanticAdmissionFrontier :
+  Admission.LegalSemanticAdmissionFrontier
+sensibLawLegalSemanticAdmissionFrontier =
+  Admission.currentLegalSemanticAdmissionFrontier
+
+sensibLawRequirementParetoContract :
+  RequirementPareto.FiniteRequirementParetoContract
+sensibLawRequirementParetoContract =
+  RequirementPareto.canonicalFiniteRequirementParetoContract
+
+sensibLawSnowballLineageBoundary :
+  Snowball.SensibLawSnowballLineageBoundary
+sensibLawSnowballLineageBoundary =
+  Snowball.canonicalSensibLawSnowballLineageBoundary
+
+sensibLawLegitimacyBoundary :
+  Legitimacy.LegitimacyBoundary
+sensibLawLegitimacyBoundary =
+  Legitimacy.canonicalLegitimacyBoundary
+
+sensibLawFleetFormalGapTargetReceipt :
+  Fleet.FleetFormalGapTargetReceipt
+sensibLawFleetFormalGapTargetReceipt =
+  Fleet.canonicalFleetFormalGapTargetReceipt
+
+------------------------------------------------------------------------
+-- Canonical semantic non-promotion.
+------------------------------------------------------------------------
+
+sensibLawSemanticPromotionLegalAuthorityFlag : Bool
+sensibLawSemanticPromotionLegalAuthorityFlag =
+  Authority.legalAuthorityFlag Semantic.semanticPromotionAuthorityBoundary
+
+sensibLawSemanticPromotionLegalAuthorityClosed :
+  sensibLawSemanticPromotionLegalAuthorityFlag ≡ false
+sensibLawSemanticPromotionLegalAuthorityClosed =
   Semantic.semantic-promotion-legal-authority-closed
 
-governanceSemanticAllAuthorityStillClosed :
-  Authority.promotesAnyAuthority governanceSemanticAuthorityBoundary ≡ false
-governanceSemanticAllAuthorityStillClosed =
+sensibLawSemanticPromotionTruthAuthorityClosed :
+  Authority.truthAuthorityFlag Semantic.semanticPromotionAuthorityBoundary
+  ≡ false
+sensibLawSemanticPromotionTruthAuthorityClosed =
+  Semantic.semantic-promotion-truth-authority-closed
+
+sensibLawSemanticPromotionAllAuthorityClosed :
+  Authority.promotesAnyAuthority Semantic.semanticPromotionAuthorityBoundary
+  ≡ false
+sensibLawSemanticPromotionAllAuthorityClosed =
   Semantic.semantic-promotion-all-authority-closed
 
-governanceLegalAuthorityBoundaryReceipt :
-  Boundary.AuthorityBoundaryReceipt
-governanceLegalAuthorityBoundaryReceipt =
-  Boundary.canonicalLegalAuthorityBoundaryReceipt
+------------------------------------------------------------------------
+-- Expert-evidence production integrity.
+------------------------------------------------------------------------
 
-governanceLegalAuthorityBoundaryStillFailClosed :
-  Authority.promotesAnyAuthority
-    (Boundary.receiptAuthorityBundle governanceLegalAuthorityBoundaryReceipt)
-  ≡ false
-governanceLegalAuthorityBoundaryStillFailClosed =
-  Boundary.authorityBoundaryBundlePromotesAnyAuthorityIsFalse
-    governanceLegalAuthorityBoundaryReceipt
+sensibLawExpertProductionPromotesAnyAuthority : Bool
+sensibLawExpertProductionPromotesAnyAuthority =
+  Expert.expertProductionPromotesAnyAuthority
 
-governanceLegalRuntimeContract :
-  LegalRuntime.AgdaFirstLegalRuntimeContract
-governanceLegalRuntimeContract =
-  LegalRuntime.canonicalAgdaFirstLegalRuntimeContract
+sensibLawExpertProductionAuthorityClosed :
+  sensibLawExpertProductionPromotesAnyAuthority ≡ false
+sensibLawExpertProductionAuthorityClosed =
+  Expert.expertProductionPromotesAnyAuthorityIsFalse
 
-governanceRuntimeCannotInventLegalSemantics :
-  LegalRuntime.AgdaFirstLegalRuntimeContract.runtimeMayInventMissingFormalLegalSemantics
-    governanceLegalRuntimeContract
-  ≡ false
-governanceRuntimeCannotInventLegalSemantics =
-  LegalRuntime.AgdaFirstLegalRuntimeContract.runtimeMayInventMissingFormalLegalSemanticsIsFalse
-    governanceLegalRuntimeContract
+QualificationAutomaticallyForensicCompliance : Set
+QualificationAutomaticallyForensicCompliance =
+  Expert.QualificationAutomaticallyForensicCompliance
 
-governanceParserCandidateCannotBecomeTruthByTransport :
-  LegalRuntime.AgdaFirstLegalRuntimeContract.parserCandidateMayBecomeTruthByTransport
-    governanceLegalRuntimeContract
-  ≡ false
-governanceParserCandidateCannotBecomeTruthByTransport =
-  LegalRuntime.AgdaFirstLegalRuntimeContract.parserCandidateMayBecomeTruthByTransportIsFalse
-    governanceLegalRuntimeContract
+sensibLawQualificationDoesNotProveForensicCompliance :
+  QualificationAutomaticallyForensicCompliance → ⊥
+sensibLawQualificationDoesNotProveForensicCompliance =
+  Expert.qualificationDoesNotAutomaticallyProveForensicCompliance
 
-governanceSourceFollowCannotBecomeAuthorityByTransport :
-  LegalRuntime.AgdaFirstLegalRuntimeContract.sourceFollowMayBecomeAuthorityByTransport
-    governanceLegalRuntimeContract
-  ≡ false
-governanceSourceFollowCannotBecomeAuthorityByTransport =
-  LegalRuntime.AgdaFirstLegalRuntimeContract.sourceFollowMayBecomeAuthorityByTransportIsFalse
-    governanceLegalRuntimeContract
+sensibLawReportAdmissionDoesNotRepairMissingInput :
+  Expert.ReportAdmissionRepairsMissingInput → ⊥
+sensibLawReportAdmissionDoesNotRepairMissingInput =
+  Expert.reportAdmissionDoesNotRepairMissingInput
 
-governanceTypedMeetCannotBecomeViolationByTransport :
-  LegalRuntime.AgdaFirstLegalRuntimeContract.typedMeetMayBecomeViolationByTransport
-    governanceLegalRuntimeContract
-  ≡ false
-governanceTypedMeetCannotBecomeViolationByTransport =
-  LegalRuntime.AgdaFirstLegalRuntimeContract.typedMeetMayBecomeViolationByTransportIsFalse
-    governanceLegalRuntimeContract
-
-governanceElementPaymentCannotBecomeLiabilityByTransport :
-  LegalRuntime.AgdaFirstLegalRuntimeContract.wrongTypeElementPaymentMayBecomeLiabilityByTransport
-    governanceLegalRuntimeContract
-  ≡ false
-governanceElementPaymentCannotBecomeLiabilityByTransport =
-  LegalRuntime.AgdaFirstLegalRuntimeContract.wrongTypeElementPaymentMayBecomeLiabilityByTransportIsFalse
-    governanceLegalRuntimeContract
-
-governanceITIRParityLegalRuntimeContract :
-  LegalRuntime.AgdaFirstLegalRuntimeContract
-governanceITIRParityLegalRuntimeContract =
-  Parity.selectedLegalRuntimeContract
-
-governanceITIRParityUsesCanonicalLegalRuntime :
-  governanceITIRParityLegalRuntimeContract
-  ≡ governanceLegalRuntimeContract
-governanceITIRParityUsesCanonicalLegalRuntime =
-  refl
+sensibLawMultipleReportsDoNotCreateIndependence :
+  Expert.MultipleReportsAutomaticallyIndependent → ⊥
+sensibLawMultipleReportsDoNotCreateIndependence =
+  Expert.multipleReportsDoNotAutomaticallyCreateIndependence
 
 ------------------------------------------------------------------------
--- Generic case-management and workflow transport boundary.
+-- Real-matter human review remains non-promoting.
+------------------------------------------------------------------------
+
+LegalReviewDecisionCreatesApplicability : Set
+LegalReviewDecisionCreatesApplicability =
+  Review.LegalReviewDecisionCreatesApplicability
+
+LegalReviewDecisionCreatesClaimTruth : Set
+LegalReviewDecisionCreatesClaimTruth =
+  Review.LegalReviewDecisionCreatesClaimTruth
+
+sensibLawReviewDoesNotCreateApplicability :
+  LegalReviewDecisionCreatesApplicability → ⊥
+sensibLawReviewDoesNotCreateApplicability =
+  Review.legalReviewDecisionDoesNotCreateApplicability
+
+sensibLawReviewDoesNotCreateClaimTruth :
+  LegalReviewDecisionCreatesClaimTruth → ⊥
+sensibLawReviewDoesNotCreateClaimTruth =
+  Review.legalReviewDecisionDoesNotCreateClaimTruth
+
+sensibLawDownstreamCannotRestateEvidenceRole :
+  Review.DownstreamMayRestateEvidenceRole → ⊥
+sensibLawDownstreamCannotRestateEvidenceRole =
+  Review.downstreamCannotRestateEvidenceRole
+
+sensibLawDownstreamCannotRestateNormativeOrder :
+  Review.DownstreamMayRestateNormativeOrder → ⊥
+sensibLawDownstreamCannotRestateNormativeOrder =
+  Review.downstreamCannotRestateNormativeOrder
+
+sensibLawReviewedEvidenceDoesNotCreateRelComparison :
+  Resume.ReviewedEvidenceEqualsRelComparison → ⊥
+sensibLawReviewedEvidenceDoesNotCreateRelComparison =
+  Resume.reviewedEvidenceDoesNotEqualRelComparison
+
+------------------------------------------------------------------------
+-- Legal semantic admission remains receipt-gated.
+------------------------------------------------------------------------
+
+ParserCandidateAloneAuthorizesAdmission : Set
+ParserCandidateAloneAuthorizesAdmission =
+  Admission.ParserCandidateAloneAuthorizesAdmission
+
+sensibLawParserCandidateCannotAuthorizeAdmission :
+  ParserCandidateAloneAuthorizesAdmission → ⊥
+sensibLawParserCandidateCannotAuthorizeAdmission =
+  Admission.parserCandidateAloneCannotAuthorizeAdmission
+
+sensibLawSparseAdmissionCannotCreateAuthority :
+  Sparse.SparseAdmissionChangesSemanticAuthority → ⊥
+sensibLawSparseAdmissionCannotCreateAuthority =
+  Admission.sparseAdmissionStillCannotCreateAuthority
+
+sensibLawResidualPriorityIsNotTruthConfidence :
+  Admission.ResidualPriorityScoreIsTruthConfidence → ⊥
+sensibLawResidualPriorityIsNotTruthConfidence =
+  Admission.residualPriorityIsNotTruthConfidence
+
+sensibLawGoldFixtureDoesNotProveUniversalLegalCorrectness :
+  Admission.GoldConformanceV01ProvesUniversalLegalCorrectness → ⊥
+sensibLawGoldFixtureDoesNotProveUniversalLegalCorrectness =
+  Admission.goldV01DoesNotProveUniversalLegalCorrectness
+
+------------------------------------------------------------------------
+-- Pareto and snowball remain schedulers/provenance, not discharge.
+------------------------------------------------------------------------
+
+sensibLawParetoFrontierMembershipDoesNotSatisfyRequirement :
+  RequirementPareto.frontierMembershipDoesNotSatisfyRequirement
+    RequirementPareto.canonicalFiniteRequirementParetoContract
+  ≡ false
+sensibLawParetoFrontierMembershipDoesNotSatisfyRequirement =
+  RequirementPareto.frontierMembershipDoesNotSatisfyRequirementIsFalse
+    RequirementPareto.canonicalFiniteRequirementParetoContract
+
+sensibLawCitationDoesNotCreateLegalAuthority :
+  Snowball.citationCreatesLegalAuthority
+    Snowball.canonicalSensibLawSnowballLineageBoundary
+  ≡ false
+sensibLawCitationDoesNotCreateLegalAuthority = refl
+
+sensibLawRepositoryReconstructionDoesNotBecomeExternalSourceClaim :
+  Snowball.repositoryReconstructionBecomesExternalSourceClaim
+    Snowball.canonicalSensibLawSnowballLineageBoundary
+  ≡ false
+sensibLawRepositoryReconstructionDoesNotBecomeExternalSourceClaim = refl
+
+------------------------------------------------------------------------
+-- Canonical promotion governance remains fail-closed.
+------------------------------------------------------------------------
+
+sensibLawMissingAdmissibilityAbstains :
+  Promotion.authorizationFromObligations
+    (Canonical.promotionObligations true false true true true)
+  ≡ Governed.abstain
+sensibLawMissingAdmissibilityAbstains =
+  Promotion.missingAdmissibilityAbstains
+
+sensibLawMissingValidationAbstains :
+  Promotion.authorizationFromObligations
+    (Canonical.promotionObligations true true true true false)
+  ≡ Governed.abstain
+sensibLawMissingValidationAbstains =
+  Promotion.missingValidationAbstains
+
+------------------------------------------------------------------------
+-- Official legal surfaces do not reconstruct hidden decision/authority state.
+------------------------------------------------------------------------
+
+OfficialLegalSurfaceRecoversFineState : Set
+OfficialLegalSurfaceRecoversFineState =
+  NF.FactorsThrough LegalDecision.officialSurface LegalDecision.fineLegalStateOf
+
+sensibLawOfficialLegalSurfaceCannotRecoverFineState :
+  OfficialLegalSurfaceRecoversFineState → ⊥
+sensibLawOfficialLegalSurfaceCannotRecoverFineState =
+  LegalDecision.officialSurfaceCannotRecoverFineLegalState
+
+sensibLawOfficialActionCannotRecoverAutonomyAndAuthority :
+  NF.FactorsThrough
+    LegalDecision.autonomyOfficialSurface
+    LegalDecision.fineAutonomyLegalStateOf
+  → ⊥
+sensibLawOfficialActionCannotRecoverAutonomyAndAuthority =
+  LegalDecision.officialActionCannotRecoverAutonomyAndAuthority
+
+------------------------------------------------------------------------
+-- Legality is one evidence coordinate.  It is not legitimacy.
+------------------------------------------------------------------------
+
+LegalOnlyCreatesLegitimacy : Set₁
+LegalOnlyCreatesLegitimacy =
+  Legitimacy.AdmittedLegitimacy Legitimacy.demoEvidence Legitimacy.legalOnly
+
+sensibLawLegalOnlyDoesNotCreateLegitimacy :
+  LegalOnlyCreatesLegitimacy → ⊥
+sensibLawLegalOnlyDoesNotCreateLegitimacy =
+  Legitimacy.legalOnlyIsNotAdmittedLegitimacy
+
+sensibLawLegalityAloneImpliesLegitimacyStillFalse :
+  Legitimacy.legalityAloneImpliesLegitimacy
+    Legitimacy.canonicalLegitimacyBoundary
+  ≡ false
+sensibLawLegalityAloneImpliesLegitimacyStillFalse =
+  Legitimacy.legalityAloneImpliesLegitimacyIsFalse
+    Legitimacy.canonicalLegitimacyBoundary
+
+------------------------------------------------------------------------
+-- Fleet target discipline.
 --
--- This is the existing reusable owner for vendor-neutral case-management
--- transport.  No named vendor gains authority from representation reuse.
+-- The external fleet receipt schedules 58 unformalised gaps.  This bridge does
+-- not claim that the legal lane is one numbered gap.  It only preserves the
+-- global rule that the 584 discharged fibres remain outside the target.
 ------------------------------------------------------------------------
 
-governanceDomainTransportReceipt :
-  Domain.DomainTransportReceipt
-governanceDomainTransportReceipt =
-  Domain.canonicalDomainTransportReceipt
+legalGovernanceLaneRetargetsDischargedFleetFibres : Bool
+legalGovernanceLaneRetargetsDischargedFleetFibres = false
 
-governanceSameTechnicalGrammarDoesNotImplySameMandate :
-  Domain.DomainTransportReceipt.sameTechnicalGrammarImpliesSameMandate governanceDomainTransportReceipt
-  ≡ false
-governanceSameTechnicalGrammarDoesNotImplySameMandate =
-  refl
+sensibLawLegalLaneDoesNotRetargetDischargedFleetFibres :
+  legalGovernanceLaneRetargetsDischargedFleetFibres ≡ false
+sensibLawLegalLaneDoesNotRetargetDischargedFleetFibres = refl
 
-governanceTargetDomainNeedsOwnAuthorityWitness :
-  Domain.DomainTransportReceipt.targetDomainNeedsOwnAuthorityWitness governanceDomainTransportReceipt
+sensibLawFleetDischargedFibresRemainDischarged :
+  Fleet.dischargedFibresRemainDischarged
+    Fleet.canonicalFleetFormalGapTargetReceipt
   ≡ true
-governanceTargetDomainNeedsOwnAuthorityWitness =
-  refl
+sensibLawFleetDischargedFibresRemainDischarged =
+  Fleet.fleetDoesNotRetargetDischargedFibres
 
-governanceRepresentationEqualityDoesNotCreateLegalAuthority :
-  Domain.DomainTransportReceipt.representationEqualityCreatesLegalAuthority governanceDomainTransportReceipt
+sensibLawFleetExternalCountDoesNotCreateFormalProof :
+  Fleet.externalCountCreatesFormalProof
+    Fleet.canonicalFleetFormalGapTargetReceipt
   ≡ false
-governanceRepresentationEqualityDoesNotCreateLegalAuthority =
-  refl
-
-governanceVendorIdentityDoesNotCreateAuthority :
-  Domain.DomainTransportReceipt.vendorIdentityCreatesAuthority governanceDomainTransportReceipt
-  ≡ false
-governanceVendorIdentityDoesNotCreateAuthority =
-  refl
-
-governanceDomainPermeabilityRequiresReview :
-  Domain.DomainTransportReceipt.domainPermeabilityRequiresGovernanceReview governanceDomainTransportReceipt
-  ≡ true
-governanceDomainPermeabilityRequiresReview =
-  refl
-
-governanceSameMachineryDoesNotTransportAuthority :
-  (Domain.represent Domain.exampleMachinery Domain.sourceDomain Domain.subject
-    ≡
-   Domain.represent Domain.exampleMachinery Domain.targetDomain Domain.subject →
-   Domain.authorised
-     Domain.exampleAuthority Domain.sourceDomain Domain.subject →
-   Domain.authorised
-     Domain.exampleAuthority Domain.targetDomain Domain.subject) →
-  ⊥
-governanceSameMachineryDoesNotTransportAuthority =
-  Domain.sameMachineryDoesNotTransportAuthority
+sensibLawFleetExternalCountDoesNotCreateFormalProof =
+  Fleet.fleetExternalCountDoesNotCreateFormalDischarge
 
 ------------------------------------------------------------------------
--- Pareto / snowball governance reuse.
+-- Actionstep boundary.
 --
--- These owners are already used across SensibLaw and Ibrahim snowball lanes.
--- This normalization keeps attribution and legal authority separate.
+-- No Actionstep-specific Agda adapter is imported by this facade.  We therefore
+-- do not manufacture Actionstep semantics from generic SensibLaw governance.
+-- A future exact adapter may consume this boundary without changing its source
+-- owners.
 ------------------------------------------------------------------------
 
-governanceAttributionSnowballBoundary :
-  Snowball.AttributionSnowballBoundary
-governanceAttributionSnowballBoundary =
-  Snowball.canonicalAttributionSnowballBoundary
-
-governanceSnowballCitationDoesNotPromoteProof :
-  Snowball.citationMayPromoteProof governanceAttributionSnowballBoundary
-  ≡ false
-governanceSnowballCitationDoesNotPromoteProof =
-  refl
-
-governanceSnowballCitationDoesNotCreateAuthority :
-  Snowball.citationMayCreateAuthority governanceAttributionSnowballBoundary
-  ≡ false
-governanceSnowballCitationDoesNotCreateAuthority =
-  refl
-
-governanceSensibLawSnowballLineageBoundary :
-  SnowballLineage.SensibLawSnowballLineageBoundary
-governanceSensibLawSnowballLineageBoundary =
-  SnowballLineage.canonicalSensibLawSnowballLineageBoundary
-
-governanceSnowballCitationDoesNotCreateLegalAuthority :
-  SnowballLineage.SensibLawSnowballLineageBoundary.citationCreatesLegalAuthority
-    governanceSensibLawSnowballLineageBoundary
-  ≡ false
-governanceSnowballCitationDoesNotCreateLegalAuthority =
-  refl
-
-governanceSnowballSameSourceIdentityDoesNotDetermineClaimStage :
-  SnowballLineage.SensibLawSnowballLineageBoundary.sameSourceIdentityDeterminesClaimStage
-    governanceSensibLawSnowballLineageBoundary
-  ≡ false
-governanceSnowballSameSourceIdentityDoesNotDetermineClaimStage =
-  refl
-
-governanceParetoDirectiveIsNotLegalAuthority :
-  ParetoSearch.SearchDirectiveIsLegalAuthority → ⊥
-governanceParetoDirectiveIsNotLegalAuthority =
-  ParetoSearch.directiveIsNotAuthority
-
-governanceParetoFrontierDoesNotPrejudgeRetrieval :
-  ParetoSearch.FrontierCertificateMakesRetrievedSourceTrue → ⊥
-governanceParetoFrontierDoesNotPrejudgeRetrieval =
-  ParetoSearch.frontierCertificateDoesNotPrejudgeRetrieval
-
-governanceParetoFeedbackClosureStillNeedsActionAuthority :
-  ParetoSearch.FeedbackClosureAutomaticallyAuthorisesAction → ⊥
-governanceParetoFeedbackClosureStillNeedsActionAuthority =
-  ParetoSearch.feedbackClosureStillNeedsActionAuthority
-
-------------------------------------------------------------------------
--- ZKP O/R/C/S/L/P/G/F control frame.
-------------------------------------------------------------------------
-
-record SensibLawGovernanceTOEZKPFrame : Set where
+record ActionstepTOEBoundary : Set where
+  constructor actionstep-toe-boundary
   field
-    O-objective : String
-    R-reuse : String
-    C-construction : String
-    S-safety : String
-    L-lane : String
-    P-postcondition : String
-    G-governance : String
-    F-verification : String
+    actionstepSpecificAdapterImportedHere : Bool
+    actionstepSpecificAdapterImportedHereIsFalse :
+      actionstepSpecificAdapterImportedHere ≡ false
+    genericSensibLawProofCreatesActionstepAuthority : Bool
+    genericSensibLawProofCreatesActionstepAuthorityIsFalse :
+      genericSensibLawProofCreatesActionstepAuthority ≡ false
+    actionstepReference : String
 
-    preconditionCanonicalOwnersPresent : Bool
-    preconditionCanonicalOwnersPresentIsTrue :
-      preconditionCanonicalOwnersPresent ≡ true
+open ActionstepTOEBoundary public
 
-    invariantSemanticPromotionDoesNotGrantAuthority : Bool
-    invariantSemanticPromotionDoesNotGrantAuthorityIsTrue :
-      invariantSemanticPromotionDoesNotGrantAuthority ≡ true
+canonicalActionstepTOEBoundary : ActionstepTOEBoundary
+canonicalActionstepTOEBoundary =
+  actionstep-toe-boundary
+    false refl
+    false refl
+    "No Actionstep-specific Agda owner is imported by this TOE facade. Exact external-system identity and authority require a separate source-owned adapter."
 
-    invariantRuntimeTransportDoesNotCreateLegalTruth : Bool
-    invariantRuntimeTransportDoesNotCreateLegalTruthIsTrue :
-      invariantRuntimeTransportDoesNotCreateLegalTruth ≡ true
+------------------------------------------------------------------------
+-- O/R/C/S/L/P/G/F process receipt.
+------------------------------------------------------------------------
 
-    invariantCaseManagementReuseDoesNotTransportAuthority : Bool
-    invariantCaseManagementReuseDoesNotTransportAuthorityIsTrue :
-      invariantCaseManagementReuseDoesNotTransportAuthority ≡ true
-
-    invariantSnowballCitationDoesNotCreateAuthority : Bool
-    invariantSnowballCitationDoesNotCreateAuthorityIsTrue :
-      invariantSnowballCitationDoesNotCreateAuthority ≡ true
-
-    invariantParetoSchedulingDoesNotCreateLegalAuthority : Bool
-    invariantParetoSchedulingDoesNotCreateLegalAuthorityIsTrue :
-      invariantParetoSchedulingDoesNotCreateLegalAuthority ≡ true
-
-    postconditionTOENormalizationOnly : Bool
-    postconditionTOENormalizationOnlyIsTrue :
-      postconditionTOENormalizationOnly ≡ true
-
-canonicalSensibLawGovernanceTOEZKPFrame :
-  SensibLawGovernanceTOEZKPFrame
-canonicalSensibLawGovernanceTOEZKPFrame =
-  record
-    { O-objective =
-        "Normalize existing SensibLaw, legal-runtime, parity, and authority non-promotion proofs into the DASHI TOE graph."
-    ; R-reuse =
-        "Reuse AuthorityNonPromotionCore, AuthorityBoundaryCore, SensibLawSemanticPromotionPolicy, SensibLawAgdaFirstLegalRuntimeEverything, SensibLawITIRParityEverything, DomainPermeabilityAuthorityTransport, SnowballAttributionProvenanceInvariantExact, SensibLawSnowballAttributionLineageAdapterExact, and SensibLawParetoProofDirectedCorpusSearchEverything."
-    ; C-construction =
-        "Add only a theorem-thin normalization owner and facade agreement. Do not duplicate semantic or legal proofs."
-    ; S-safety =
-        "Keep truth, legal authority, runtime authority, liability, mandate, and vendor identity as separate typed obligations. Keep ESD surfaces import-only."
-    ; L-lane =
-        "One disjoint governance normalization lane. It does not alter physics, ESD, or external repository theorem ownership."
-    ; P-postcondition =
-        "The TOE root, Unifier, and Unified facade consume the same canonical fail-closed governance owners."
-    ; G-governance =
-        "Use ITIL, ISO 9000, ISO/IEC 42001, ISO/IEC 27001, ISO/IEC 27701, ISO/IEC 23894, ISO 9241, NIST AI RMF, Six Sigma, and C4/PlantUML as process lenses only. Make no certification claim."
-    ; F-verification =
-        "Require repository-referee discovery and lineage checks, zero trust escapes, ESD isolation, facade regression, and Agda kernel checking."
-    ; preconditionCanonicalOwnersPresent = true
-    ; preconditionCanonicalOwnersPresentIsTrue = refl
-    ; invariantSemanticPromotionDoesNotGrantAuthority = true
-    ; invariantSemanticPromotionDoesNotGrantAuthorityIsTrue = refl
-    ; invariantRuntimeTransportDoesNotCreateLegalTruth = true
-    ; invariantRuntimeTransportDoesNotCreateLegalTruthIsTrue = refl
-    ; invariantCaseManagementReuseDoesNotTransportAuthority = true
-    ; invariantCaseManagementReuseDoesNotTransportAuthorityIsTrue = refl
-    ; invariantSnowballCitationDoesNotCreateAuthority = true
-    ; invariantSnowballCitationDoesNotCreateAuthorityIsTrue = refl
-    ; invariantParetoSchedulingDoesNotCreateLegalAuthority = true
-    ; invariantParetoSchedulingDoesNotCreateLegalAuthorityIsTrue = refl
-    ; postconditionTOENormalizationOnly = true
-    ; postconditionTOENormalizationOnlyIsTrue = refl
-    }
+canonicalSensibLawGovernanceZKPFrame : TOEFrame.TOEZKPFrame
+canonicalSensibLawGovernanceZKPFrame =
+  TOEFrame.toe-zkp-frame
+    "converge existing SensibLaw semantic, review, expert, admission, Pareto, snowball, legal-decision and governance non-promotion proofs into the DASHI TOE"
+    "reuse current canonical owners; do not create a second semantic promotion, legal authority, Pareto, snowball, review or governance calculus"
+    "add one normalization facade, direct root aliases, validation, and one import-graph attachment"
+    "heuristics, parser candidates, review, expert status, report admission, Pareto membership, citations, official action surfaces and legality do not create blocked authority or hidden-state conclusions"
+    "one legal-governance normalization lane disjoint from Balaban, Ibrahim, bidi, singular-basin and ESD lanes"
+    "PR #1304 owners exist; the fleet 584 discharged fibres remain excluded; the external 58-gap count remains scheduling context; ESD surfaces are read-only"
+    "ITIL, ISO 9000/42001/27001/27701/23894/9241, NIST AI RMF, Six Sigma and C4/PlantUML are process lenses only; source authors and meta-introspector repositories retain attribution"
+    "EverythingTOESymmetryResolved369, Unifier and Unified.Everything reach the same exact legal-governance owners and non-promotion proofs"
+    "code-search reuse audit, source-order regression, root alias validation, trust-escape scan, ESD diff scan, preflight related/discover/lineage, and Agda kernel check when an executor is available"
+    false
+    false
+    false
+    false

@@ -1,234 +1,162 @@
 {-# OPTIONS --safe #-}
 module DASHI.Unified.SensibLawGovernanceTOEValidation where
 
-------------------------------------------------------------------------
--- Focused facade regression for SensibLaw / legal governance TOE wiring.
---
--- The normalization owner is authoritative for this adapter layer.
--- The imported semantic, legal, parity, and governance modules remain the
--- mathematical and domain theorem owners.
-------------------------------------------------------------------------
-
+open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (false; true)
-open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
-import DASHI.Unified.SensibLawGovernanceTOEExact as Governance
+import DASHI.Unified.SensibLawGovernanceTOEExact as GovTOE
 import DASHI.EverythingTOESymmetryResolved369 as TOE
 import DASHI.Unifier as Unifier
-import DASHI.Unified.Physics as UnifiedPhysics
-import DASHI.Core.AuthorityNonPromotionCore as Authority
-import DASHI.Governance.DomainPermeabilityAuthorityTransport as Domain
-import DASHI.Law.SensibLawAgdaFirstLegalRuntimeEverything as LegalRuntime
-import DASHI.Core.SnowballAttributionProvenanceInvariantExact as Snowball
-import DASHI.Interop.SensibLawSnowballAttributionLineageAdapterExact as SnowballLineage
-import DASHI.Law.SensibLawParetoProofDirectedCorpusSearchEverything as ParetoSearch
 
 ------------------------------------------------------------------------
--- Root agreement.
+-- Same-owner agreement.
 ------------------------------------------------------------------------
 
-toeSemanticBoundaryMatchesOwner :
-  TOE.toeSensibLawGovernanceSemanticBoundary
-  ≡ Governance.governanceSemanticAuthorityBoundary
-toeSemanticBoundaryMatchesOwner =
-  refl
+toeSemanticPromotionSurfaceMatchesOwner :
+  TOE.toeSensibLawSemanticPromotionPolicySurface
+  ≡ GovTOE.sensibLawSemanticPromotionPolicySurface
+toeSemanticPromotionSurfaceMatchesOwner = refl
 
-toeLegalRuntimeMatchesOwner :
-  TOE.toeSensibLawLegalRuntimeContract
-  ≡ Governance.governanceLegalRuntimeContract
-toeLegalRuntimeMatchesOwner =
-  refl
+unifierSemanticPromotionSurfaceMatchesOwner :
+  Unifier.unifierSensibLawSemanticPromotionPolicySurface
+  ≡ GovTOE.sensibLawSemanticPromotionPolicySurface
+unifierSemanticPromotionSurfaceMatchesOwner = refl
 
-toeDomainTransportMatchesOwner :
-  TOE.toeSensibLawDomainTransportReceipt
-  ≡ Governance.governanceDomainTransportReceipt
-toeDomainTransportMatchesOwner =
-  refl
+toeExpertBoundaryMatchesOwner :
+  TOE.toeSensibLawExpertProductionBoundary
+  ≡ GovTOE.sensibLawExpertProductionBoundary
+toeExpertBoundaryMatchesOwner = refl
 
-toeZKPFrameMatchesOwner :
+unifierExpertBoundaryMatchesOwner :
+  Unifier.unifierSensibLawExpertProductionBoundary
+  ≡ GovTOE.sensibLawExpertProductionBoundary
+unifierExpertBoundaryMatchesOwner = refl
+
+toeReviewBoundaryMatchesOwner :
+  TOE.toeSensibLawRealMatterReviewBoundary
+  ≡ GovTOE.sensibLawRealMatterReviewBoundary
+toeReviewBoundaryMatchesOwner = refl
+
+unifierReviewBoundaryMatchesOwner :
+  Unifier.unifierSensibLawRealMatterReviewBoundary
+  ≡ GovTOE.sensibLawRealMatterReviewBoundary
+unifierReviewBoundaryMatchesOwner = refl
+
+toeRequirementParetoMatchesOwner :
+  TOE.toeSensibLawRequirementParetoContract
+  ≡ GovTOE.sensibLawRequirementParetoContract
+toeRequirementParetoMatchesOwner = refl
+
+unifierRequirementParetoMatchesOwner :
+  Unifier.unifierSensibLawRequirementParetoContract
+  ≡ GovTOE.sensibLawRequirementParetoContract
+unifierRequirementParetoMatchesOwner = refl
+
+toeSnowballBoundaryMatchesOwner :
+  TOE.toeSensibLawSnowballLineageBoundary
+  ≡ GovTOE.sensibLawSnowballLineageBoundary
+toeSnowballBoundaryMatchesOwner = refl
+
+unifierSnowballBoundaryMatchesOwner :
+  Unifier.unifierSensibLawSnowballLineageBoundary
+  ≡ GovTOE.sensibLawSnowballLineageBoundary
+unifierSnowballBoundaryMatchesOwner = refl
+
+toeGovernanceZKPFrameMatchesOwner :
   TOE.toeSensibLawGovernanceZKPFrame
-  ≡ Governance.canonicalSensibLawGovernanceTOEZKPFrame
-toeZKPFrameMatchesOwner =
-  refl
+  ≡ GovTOE.canonicalSensibLawGovernanceZKPFrame
+toeGovernanceZKPFrameMatchesOwner = refl
 
-toeLegalAuthorityStillClosed :
-  Authority.legalAuthorityFlag
-    TOE.toeSensibLawGovernanceSemanticBoundary
-  ≡ false
-toeLegalAuthorityStillClosed =
-  TOE.toeSensibLawSemanticLegalAuthorityStillClosed
-
-toeAllAuthorityStillClosed :
-  Authority.promotesAnyAuthority
-    TOE.toeSensibLawGovernanceSemanticBoundary
-  ≡ false
-toeAllAuthorityStillClosed =
-  TOE.toeSensibLawSemanticAllAuthorityStillClosed
-
-toeRepresentationEqualityDoesNotCreateLegalAuthority :
-  Domain.DomainTransportReceipt.representationEqualityCreatesLegalAuthority
-    TOE.toeSensibLawDomainTransportReceipt
-  ≡ false
-toeRepresentationEqualityDoesNotCreateLegalAuthority =
-  TOE.toeSensibLawRepresentationEqualityDoesNotCreateLegalAuthority
-
-toeTargetDomainNeedsOwnAuthorityWitness :
-  Domain.DomainTransportReceipt.targetDomainNeedsOwnAuthorityWitness
-    TOE.toeSensibLawDomainTransportReceipt
-  ≡ true
-toeTargetDomainNeedsOwnAuthorityWitness =
-  TOE.toeSensibLawTargetDomainNeedsOwnAuthorityWitness
-
-------------------------------------------------------------------------
--- Unifier agreement.
-------------------------------------------------------------------------
-
-unifierSemanticBoundaryMatchesOwner :
-  Unifier.unifierSensibLawGovernanceSemanticBoundary
-  ≡ Governance.governanceSemanticAuthorityBoundary
-unifierSemanticBoundaryMatchesOwner =
-  refl
-
-unifierLegalRuntimeMatchesOwner :
-  Unifier.unifierSensibLawLegalRuntimeContract
-  ≡ Governance.governanceLegalRuntimeContract
-unifierLegalRuntimeMatchesOwner =
-  refl
-
-unifierDomainTransportMatchesOwner :
-  Unifier.unifierSensibLawDomainTransportReceipt
-  ≡ Governance.governanceDomainTransportReceipt
-unifierDomainTransportMatchesOwner =
-  refl
-
-unifierZKPFrameMatchesOwner :
+unifierGovernanceZKPFrameMatchesOwner :
   Unifier.unifierSensibLawGovernanceZKPFrame
-  ≡ Governance.canonicalSensibLawGovernanceTOEZKPFrame
-unifierZKPFrameMatchesOwner =
-  refl
-
-unifierLegalAuthorityStillClosed :
-  Authority.legalAuthorityFlag
-    Unifier.unifierSensibLawGovernanceSemanticBoundary
-  ≡ false
-unifierLegalAuthorityStillClosed =
-  Unifier.unifierSensibLawSemanticLegalAuthorityStillClosed
-
-unifierAllAuthorityStillClosed :
-  Authority.promotesAnyAuthority
-    Unifier.unifierSensibLawGovernanceSemanticBoundary
-  ≡ false
-unifierAllAuthorityStillClosed =
-  Unifier.unifierSensibLawSemanticAllAuthorityStillClosed
-
-unifierVendorIdentityDoesNotCreateAuthority :
-  Domain.DomainTransportReceipt.vendorIdentityCreatesAuthority
-    Unifier.unifierSensibLawDomainTransportReceipt
-  ≡ false
-unifierVendorIdentityDoesNotCreateAuthority =
-  Unifier.unifierSensibLawVendorIdentityDoesNotCreateAuthority
+  ≡ GovTOE.canonicalSensibLawGovernanceZKPFrame
+unifierGovernanceZKPFrameMatchesOwner = refl
 
 ------------------------------------------------------------------------
--- Unified facade agreement.
+-- Direct semantic and authority firewalls.
 ------------------------------------------------------------------------
 
-unifiedSemanticBoundaryMatchesOwner :
-  UnifiedPhysics.governanceSensibLawSemanticBoundary
-  ≡ Governance.governanceSemanticAuthorityBoundary
-unifiedSemanticBoundaryMatchesOwner =
-  refl
+toeSemanticPromotionLegalAuthorityClosed :
+  GovTOE.sensibLawSemanticPromotionLegalAuthorityFlag ≡ false
+toeSemanticPromotionLegalAuthorityClosed =
+  TOE.toeSensibLawSemanticPromotionLegalAuthorityClosed
 
-unifiedLegalRuntimeMatchesOwner :
-  UnifiedPhysics.governanceSensibLawLegalRuntimeContract
-  ≡ Governance.governanceLegalRuntimeContract
-unifiedLegalRuntimeMatchesOwner =
-  refl
+unifierSemanticPromotionLegalAuthorityClosed :
+  GovTOE.sensibLawSemanticPromotionLegalAuthorityFlag ≡ false
+unifierSemanticPromotionLegalAuthorityClosed =
+  Unifier.unifierSensibLawSemanticPromotionLegalAuthorityClosed
 
-unifiedDomainTransportMatchesOwner :
-  UnifiedPhysics.governanceSensibLawDomainTransportReceipt
-  ≡ Governance.governanceDomainTransportReceipt
-unifiedDomainTransportMatchesOwner =
-  refl
+toeExpertProductionAuthorityClosed :
+  GovTOE.sensibLawExpertProductionPromotesAnyAuthority ≡ false
+toeExpertProductionAuthorityClosed =
+  TOE.toeSensibLawExpertProductionAuthorityClosed
 
-unifiedZKPFrameMatchesOwner :
-  UnifiedPhysics.governanceSensibLawZKPFrame
-  ≡ Governance.canonicalSensibLawGovernanceTOEZKPFrame
-unifiedZKPFrameMatchesOwner =
-  refl
+unifierExpertProductionAuthorityClosed :
+  GovTOE.sensibLawExpertProductionPromotesAnyAuthority ≡ false
+unifierExpertProductionAuthorityClosed =
+  Unifier.unifierSensibLawExpertProductionAuthorityClosed
 
-unifiedLegalAuthorityStillClosed :
-  Authority.legalAuthorityFlag
-    UnifiedPhysics.governanceSensibLawSemanticBoundary
-  ≡ false
-unifiedLegalAuthorityStillClosed =
-  UnifiedPhysics.governanceSensibLawSemanticLegalAuthorityStillClosed
+toeReviewDoesNotCreateClaimTruth :
+  GovTOE.LegalReviewDecisionCreatesClaimTruth → ⊥
+toeReviewDoesNotCreateClaimTruth =
+  TOE.toeSensibLawReviewDoesNotCreateClaimTruth
 
-unifiedAllAuthorityStillClosed :
-  Authority.promotesAnyAuthority
-    UnifiedPhysics.governanceSensibLawSemanticBoundary
-  ≡ false
-unifiedAllAuthorityStillClosed =
-  UnifiedPhysics.governanceSensibLawSemanticAllAuthorityStillClosed
+unifierReviewDoesNotCreateClaimTruth :
+  GovTOE.LegalReviewDecisionCreatesClaimTruth → ⊥
+unifierReviewDoesNotCreateClaimTruth =
+  Unifier.unifierSensibLawReviewDoesNotCreateClaimTruth
 
-unifiedRepresentationEqualityDoesNotCreateLegalAuthority :
-  Domain.DomainTransportReceipt.representationEqualityCreatesLegalAuthority
-    UnifiedPhysics.governanceSensibLawDomainTransportReceipt
-  ≡ false
-unifiedRepresentationEqualityDoesNotCreateLegalAuthority =
-  UnifiedPhysics.governanceSensibLawRepresentationEqualityDoesNotCreateLegalAuthority
+toeParserCandidateCannotAuthorizeAdmission :
+  GovTOE.ParserCandidateAloneAuthorizesAdmission → ⊥
+toeParserCandidateCannotAuthorizeAdmission =
+  TOE.toeSensibLawParserCandidateCannotAuthorizeAdmission
+
+unifierParserCandidateCannotAuthorizeAdmission :
+  GovTOE.ParserCandidateAloneAuthorizesAdmission → ⊥
+unifierParserCandidateCannotAuthorizeAdmission =
+  Unifier.unifierSensibLawParserCandidateCannotAuthorizeAdmission
+
+toeQualificationDoesNotProveForensicCompliance :
+  GovTOE.QualificationAutomaticallyForensicCompliance → ⊥
+toeQualificationDoesNotProveForensicCompliance =
+  TOE.toeSensibLawQualificationDoesNotProveForensicCompliance
+
+unifierQualificationDoesNotProveForensicCompliance :
+  GovTOE.QualificationAutomaticallyForensicCompliance → ⊥
+unifierQualificationDoesNotProveForensicCompliance =
+  Unifier.unifierSensibLawQualificationDoesNotProveForensicCompliance
+
+toeOfficialLegalSurfaceCannotRecoverFineState :
+  GovTOE.OfficialLegalSurfaceRecoversFineState → ⊥
+toeOfficialLegalSurfaceCannotRecoverFineState =
+  TOE.toeSensibLawOfficialLegalSurfaceCannotRecoverFineState
+
+unifierOfficialLegalSurfaceCannotRecoverFineState :
+  GovTOE.OfficialLegalSurfaceRecoversFineState → ⊥
+unifierOfficialLegalSurfaceCannotRecoverFineState =
+  Unifier.unifierSensibLawOfficialLegalSurfaceCannotRecoverFineState
+
+toeLegalOnlyDoesNotCreateLegitimacy :
+  GovTOE.LegalOnlyCreatesLegitimacy → ⊥
+toeLegalOnlyDoesNotCreateLegitimacy =
+  TOE.toeSensibLawLegalOnlyDoesNotCreateLegitimacy
+
+unifierLegalOnlyDoesNotCreateLegitimacy :
+  GovTOE.LegalOnlyCreatesLegitimacy → ⊥
+unifierLegalOnlyDoesNotCreateLegitimacy =
+  Unifier.unifierSensibLawLegalOnlyDoesNotCreateLegitimacy
 
 ------------------------------------------------------------------------
--- Owner-level invariant pins.
+-- Fleet and scheduling boundary.
 ------------------------------------------------------------------------
 
-semanticPromotionCannotGrantLegalAuthority :
-  Authority.legalAuthorityFlag
-    Governance.governanceSemanticAuthorityBoundary
-  ≡ false
-semanticPromotionCannotGrantLegalAuthority =
-  Governance.governanceSemanticLegalAuthorityStillClosed
+toeLegalLaneDoesNotRetargetDischargedFleetFibres :
+  GovTOE.legalGovernanceLaneRetargetsDischargedFleetFibres ≡ false
+toeLegalLaneDoesNotRetargetDischargedFleetFibres =
+  TOE.toeSensibLawLegalLaneDoesNotRetargetDischargedFleetFibres
 
-runtimeTransportCannotPromoteTruth :
-  LegalRuntime.AgdaFirstLegalRuntimeContract.parserCandidateMayBecomeTruthByTransport
-    Governance.governanceLegalRuntimeContract
-  ≡ false
-runtimeTransportCannotPromoteTruth =
-  Governance.governanceParserCandidateCannotBecomeTruthByTransport
-
-caseManagementReuseRequiresTargetAuthority :
-  Domain.DomainTransportReceipt.targetDomainNeedsOwnAuthorityWitness
-    Governance.governanceDomainTransportReceipt
-  ≡ true
-caseManagementReuseRequiresTargetAuthority =
-  Governance.governanceTargetDomainNeedsOwnAuthorityWitness
-
-
-snowballCitationDoesNotCreateAuthority :
-  Snowball.citationMayCreateAuthority
-    Governance.governanceAttributionSnowballBoundary
-  ≡ false
-snowballCitationDoesNotCreateAuthority =
-  Governance.governanceSnowballCitationDoesNotCreateAuthority
-
-snowballCitationDoesNotCreateLegalAuthority :
-  SnowballLineage.SensibLawSnowballLineageBoundary.citationCreatesLegalAuthority
-    Governance.governanceSensibLawSnowballLineageBoundary
-  ≡ false
-snowballCitationDoesNotCreateLegalAuthority =
-  Governance.governanceSnowballCitationDoesNotCreateLegalAuthority
-
-paretoDirectiveIsNotLegalAuthority :
-  ParetoSearch.SearchDirectiveIsLegalAuthority → ⊥
-paretoDirectiveIsNotLegalAuthority =
-  Governance.governanceParetoDirectiveIsNotLegalAuthority
-
-paretoFrontierDoesNotPrejudgeRetrieval :
-  ParetoSearch.FrontierCertificateMakesRetrievedSourceTrue → ⊥
-paretoFrontierDoesNotPrejudgeRetrieval =
-  Governance.governanceParetoFrontierDoesNotPrejudgeRetrieval
-
-paretoFeedbackClosureStillNeedsActionAuthority :
-  ParetoSearch.FeedbackClosureAutomaticallyAuthorisesAction → ⊥
-paretoFeedbackClosureStillNeedsActionAuthority =
-  Governance.governanceParetoFeedbackClosureStillNeedsActionAuthority
+unifierLegalLaneDoesNotRetargetDischargedFleetFibres :
+  GovTOE.legalGovernanceLaneRetargetsDischargedFleetFibres ≡ false
+unifierLegalLaneDoesNotRetargetDischargedFleetFibres =
+  Unifier.unifierSensibLawLegalLaneDoesNotRetargetDischargedFleetFibres

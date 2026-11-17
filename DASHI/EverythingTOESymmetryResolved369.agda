@@ -15,16 +15,7 @@ import DASHI.Analysis.RiemannMarkedCompletedTraceArithmeticAuditExact as RHPrime
 import DASHI.Analysis.RiemannThreeTapCurrentLeanFrontierExact as RHThreeTapFrontier
 import DASHI.Analysis.RiemannThreeTapTerminalCompletionLeanDonorExact as RHTerminal
 import DASHI.Unified.SingularBasinCoarseRGTOEExact as SingularBasinTOE
-import DASHI.Analysis.RiemannMarkedCompletedTraceArithmeticAuditExact as RHPrimeAudit
-import DASHI.Analysis.RiemannThreeTapCurrentLeanFrontierExact as RHThreeTapFrontier
-import DASHI.Analysis.RiemannThreeTapTerminalCompletionLeanDonorExact as RHTerminal
-
-
--- TOE ternary-27: retain dependent residual; never identify a three-edge boundary with its face.
-import DASHI.ComputerScience.Ternary27ResidualProgramDecisionBridgeExact as Recoverable27TOE
-import DASHI.Reasoning.TrialecticBoundaryFaceNonfactorabilityExact as Face27TOE
-
-import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
+import DASHI.Unified.SensibLawGovernanceTOEExact as SensibLawGovTOE
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -1111,138 +1102,81 @@ toeSensibLawDomainTransportReceipt :
 toeSensibLawDomainTransportReceipt =
   GovernanceTOE.governanceDomainTransportReceipt
 
-toeSensibLawRepresentationEqualityDoesNotCreateLegalAuthority :
-  Domain.DomainTransportReceipt.representationEqualityCreatesLegalAuthority
-    toeSensibLawDomainTransportReceipt
-  ≡ false
-toeSensibLawRepresentationEqualityDoesNotCreateLegalAuthority =
-  GovernanceTOE.governanceRepresentationEqualityDoesNotCreateLegalAuthority
+toeFleetTextFallbackAuthorityStillFalse =
+  FleetGapTOE.fleetTextFallbackAuthorityStillFalse
 
-toeSensibLawVendorIdentityDoesNotCreateAuthority :
-  Domain.DomainTransportReceipt.vendorIdentityCreatesAuthority toeSensibLawDomainTransportReceipt
-  ≡ false
-toeSensibLawVendorIdentityDoesNotCreateAuthority =
-  GovernanceTOE.governanceVendorIdentityDoesNotCreateAuthority
 
-toeSensibLawTargetDomainNeedsOwnAuthorityWitness :
-  Domain.DomainTransportReceipt.targetDomainNeedsOwnAuthorityWitness toeSensibLawDomainTransportReceipt
-  ≡ true
-toeSensibLawTargetDomainNeedsOwnAuthorityWitness =
-  GovernanceTOE.governanceTargetDomainNeedsOwnAuthorityWitness
+------------------------------------------------------------------------
+-- SensibLaw / legal-governance non-promotion facade.
+-- The source modules remain theorem owners.
+------------------------------------------------------------------------
+
+toeSensibLawSemanticPromotionPolicySurface :
+  SensibLawGovTOE.SemanticPromotionPolicySurface
+toeSensibLawSemanticPromotionPolicySurface =
+  SensibLawGovTOE.sensibLawSemanticPromotionPolicySurface
+
+toeSensibLawExpertProductionBoundary :
+  SensibLawGovTOE.ExpertProductionBoundary
+toeSensibLawExpertProductionBoundary =
+  SensibLawGovTOE.sensibLawExpertProductionBoundary
+
+toeSensibLawRealMatterReviewBoundary :
+  SensibLawGovTOE.RealMatterReviewBoundary
+toeSensibLawRealMatterReviewBoundary =
+  SensibLawGovTOE.sensibLawRealMatterReviewBoundary
+
+toeSensibLawRequirementParetoContract :
+  SensibLawGovTOE.FiniteRequirementParetoContract
+toeSensibLawRequirementParetoContract =
+  SensibLawGovTOE.sensibLawRequirementParetoContract
+
+toeSensibLawSnowballLineageBoundary :
+  SensibLawGovTOE.SensibLawSnowballLineageBoundary
+toeSensibLawSnowballLineageBoundary =
+  SensibLawGovTOE.sensibLawSnowballLineageBoundary
 
 toeSensibLawGovernanceZKPFrame :
-  GovernanceTOE.SensibLawGovernanceTOEZKPFrame
+  ParetoSnowballTOE.TOEZKPFrame
 toeSensibLawGovernanceZKPFrame =
-  GovernanceTOE.canonicalSensibLawGovernanceTOEZKPFrame
+  SensibLawGovTOE.canonicalSensibLawGovernanceZKPFrame
 
+toeSensibLawSemanticPromotionLegalAuthorityClosed :
+  SensibLawGovTOE.sensibLawSemanticPromotionLegalAuthorityFlag ≡ false
+toeSensibLawSemanticPromotionLegalAuthorityClosed =
+  SensibLawGovTOE.sensibLawSemanticPromotionLegalAuthorityClosed
 
-------------------------------------------------------------------------
--- Direct SensibLaw legal-compliance firewalls.
-------------------------------------------------------------------------
+toeSensibLawExpertProductionAuthorityClosed :
+  SensibLawGovTOE.sensibLawExpertProductionPromotesAnyAuthority ≡ false
+toeSensibLawExpertProductionAuthorityClosed =
+  SensibLawGovTOE.sensibLawExpertProductionAuthorityClosed
 
-toeSensibLawGovernanceComplianceReceipt :
-  ComplianceTOE.SensibLawGovernanceComplianceTOEReceipt
-toeSensibLawGovernanceComplianceReceipt =
-  ComplianceTOE.canonicalSensibLawGovernanceComplianceReceipt
+toeSensibLawReviewDoesNotCreateClaimTruth :
+  SensibLawGovTOE.LegalReviewDecisionCreatesClaimTruth → ⊥
+toeSensibLawReviewDoesNotCreateClaimTruth =
+  SensibLawGovTOE.sensibLawReviewDoesNotCreateClaimTruth
 
-toeSensibLawQualificationDoesNotCreateForensicCompliance :
-  ComplianceTOE.QualificationAutomaticallyForensicCompliance → ⊥
-toeSensibLawQualificationDoesNotCreateForensicCompliance =
-  ComplianceTOE.sensibLawQualificationDoesNotCreateForensicCompliance
+toeSensibLawParserCandidateCannotAuthorizeAdmission :
+  SensibLawGovTOE.ParserCandidateAloneAuthorizesAdmission → ⊥
+toeSensibLawParserCandidateCannotAuthorizeAdmission =
+  SensibLawGovTOE.sensibLawParserCandidateCannotAuthorizeAdmission
 
-toeSensibLawReviewDoesNotCreateApplicability :
-  ComplianceTOE.LegalReviewDecisionCreatesApplicability → ⊥
-toeSensibLawReviewDoesNotCreateApplicability =
-  ComplianceTOE.sensibLawReviewDoesNotCreateApplicability
+toeSensibLawQualificationDoesNotProveForensicCompliance :
+  SensibLawGovTOE.QualificationAutomaticallyForensicCompliance → ⊥
+toeSensibLawQualificationDoesNotProveForensicCompliance =
+  SensibLawGovTOE.sensibLawQualificationDoesNotProveForensicCompliance
 
-toeSensibLawParserCandidateDoesNotAuthorizeAdmission :
-  ComplianceTOE.ParserCandidateAloneAuthorizesAdmission → ⊥
-toeSensibLawParserCandidateDoesNotAuthorizeAdmission =
-  ComplianceTOE.sensibLawParserCandidateDoesNotAuthorizeAdmission
+toeSensibLawOfficialLegalSurfaceCannotRecoverFineState :
+  SensibLawGovTOE.OfficialLegalSurfaceRecoversFineState → ⊥
+toeSensibLawOfficialLegalSurfaceCannotRecoverFineState =
+  SensibLawGovTOE.sensibLawOfficialLegalSurfaceCannotRecoverFineState
 
-toeSelected3BSingleActionProducerStillUninhabited :
-  Kernel27TOE.SingleProducer.actualSingleProducerInhabitedHere
-    Kernel27TOE.singleProducerBoundary ≡ false
-toeSelected3BSingleActionProducerStillUninhabited =
-  Kernel27TOE.singleActionProducerStillUninhabited
+toeSensibLawLegalOnlyDoesNotCreateLegitimacy :
+  SensibLawGovTOE.LegalOnlyCreatesLegitimacy → ⊥
+toeSensibLawLegalOnlyDoesNotCreateLegitimacy =
+  SensibLawGovTOE.sensibLawLegalOnlyDoesNotCreateLegitimacy
 
-
-------------------------------------------------------------------------
--- Current-master SensibLaw governance / fleet target normalization.
-------------------------------------------------------------------------
-
-import DASHI.Unified.SensibLawGovernanceFleetTOEExact as GovernanceFleet
-
-toeSensibLawGovernanceFleetReceipt :
-  GovernanceFleet.SensibLawGovernanceFleetTOEReceipt
-toeSensibLawGovernanceFleetReceipt =
-  GovernanceFleet.canonicalSensibLawGovernanceFleetTOEReceipt
-
-toeSensibLawSemanticAuthorityRemainsClosed =
-  GovernanceFleet.governanceSemanticAllAuthorityStillClosed
-
-toeSensibLawCandidateSourceDoesNotCreateAuthority =
-  GovernanceFleet.governanceCandidateSourceDoesNotCloseAuthority
-
-toeSensibLawCurrentValidityDoesNotCreateApplicability =
-  GovernanceFleet.governanceCurrentValidityDoesNotEstablishApplicability
-
-toeSensibLawRuntimeDoesNotInventLegalSemantics =
-  GovernanceFleet.governanceRuntimeCannotInventLegalSemantics
-
-toeBalabanOSWightmanStillBlocked :
-  BalabanR559TOE.balabanOSWightmanConstruction
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt ≡ false
-toeBalabanOSWightmanStillBlocked =
-  BalabanR559TOE.balabanOSWightmanConstructionIsFalse
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
-------------------------------------------------------------------------
--- Current-master SensibLaw governance / fleet target normalization.
-------------------------------------------------------------------------
-
-import DASHI.Unified.SensibLawGovernanceFleetTOEExact as GovernanceFleet
-
-toeSensibLawGovernanceFleetReceipt :
-  GovernanceFleet.SensibLawGovernanceFleetTOEReceipt
-toeSensibLawGovernanceFleetReceipt =
-  GovernanceFleet.canonicalSensibLawGovernanceFleetTOEReceipt
-
-toeSensibLawSemanticAuthorityRemainsClosed =
-  GovernanceFleet.governanceSemanticAllAuthorityStillClosed
-
-toeSensibLawCandidateSourceDoesNotCreateAuthority =
-  GovernanceFleet.governanceCandidateSourceDoesNotCloseAuthority
-
-toeSensibLawCurrentValidityDoesNotCreateApplicability =
-  GovernanceFleet.governanceCurrentValidityDoesNotEstablishApplicability
-
-toeSensibLawRuntimeDoesNotInventLegalSemantics =
-  GovernanceFleet.governanceRuntimeCannotInventLegalSemantics
-
-toeSensibLawRepresentationDoesNotCreateLegalAuthority =
-  GovernanceFleet.governanceRepresentationEqualityDoesNotCreateLegalAuthority
-
-toeSensibLawSnowballCitationDoesNotCreateAuthority =
-  GovernanceFleet.governanceSnowballCitationDoesNotCreateAuthority
-
-toeSensibLawParetoDirectiveIsNotLegalAuthority =
-  GovernanceFleet.governanceParetoDirectiveIsNotLegalAuthority
-
-toeSensibLawProviderFailureDoesNotCreateNegativeEvidence =
-  GovernanceFleet.governanceProviderFailureDoesNotMakePropositionFalse
-
-toeSensibLawExpertProductionPromotesNoAuthority =
-  GovernanceFleet.governanceExpertProductionPromotesNoAuthority
-
-toeGovernanceFleetDischargedFibresAre584 =
-  GovernanceFleet.governanceFleetDischargedFibresAre584
-
-toeGovernanceFleetContradictionGapsAre44 =
-  GovernanceFleet.governanceFleetContradictionGapsAre44
-
-toeGovernanceFleetFormalGapsAre58 =
-  GovernanceFleet.governanceFleetFormalGapsAre58
-
-toeGovernanceFleetSpectralLabelsDoNotIdentifyTheoremOwners =
-  GovernanceFleet.governanceFleetSpectralLabelsDoNotIdentifyTheoremOwners
+toeSensibLawLegalLaneDoesNotRetargetDischargedFleetFibres :
+  SensibLawGovTOE.legalGovernanceLaneRetargetsDischargedFleetFibres ≡ false
+toeSensibLawLegalLaneDoesNotRetargetDischargedFleetFibres =
+  SensibLawGovTOE.sensibLawLegalLaneDoesNotRetargetDischargedFleetFibres

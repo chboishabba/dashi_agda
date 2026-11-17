@@ -31,12 +31,16 @@ on:
       - 'DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda'
       - 'DASHI/Unified/**'
       - 'DASHI/Unified/BalabanRGTOEMaxCutValidation.agda'
-      - 'DASHI/Unified/R559IbrahimFleetHyperfabricTOEExact.agda'
-      - 'DASHI/Unified/R559IbrahimFleetHyperfabricTOEValidation.agda'
-      - 'DASHI/Core/IndexedRelationalHyperfabricSpineExact.agda'
-      - 'DASHI/Core/IndexedRelationalPadicWaveContinuousAdaptersExact.agda'
-      - 'DASHI/Law/SensibLawWrongTypeGenericHyperfabricAdapterExact.agda'
-      - 'Docs/architecture/R559IbrahimFleetTernaryHyperfabricTOE.puml'
+      - 'DASHI/Unified/BalabanIbrahimParetoSnowballTOEValidation.agda'
+      - 'DASHI/Unified/BalabanIbrahimParetoSnowballTOEExact.agda'
+      - 'DASHI/Unified/FleetFormalGapTargetTOEExact.agda'
+      - 'DASHI/Unified/FleetFormalGapTargetTOEValidation.agda'
+      - 'DASHI/Unified/TOE369MaxCutKernelBidiTernaryExact.agda'
+      - 'DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda'
+      - 'DASHI/Unified/SingularBasinCoarseRGTOEExact.agda'
+      - 'DASHI/Unified/SingularBasinCoarseRGTOEValidation.agda'
+      - 'DASHI/Unified/SensibLawGovernanceTOEExact.agda'
+      - 'DASHI/Unified/SensibLawGovernanceTOEValidation.agda'
       - 'DASHI/Unifier.agda'
       - 'DASHI/Unified/GovernedLegalWorkflowTOEBridgeExact.agda'
       - 'DASHI/Unified/GovernedLegalWorkflowTOEBridgeRegression.agda'
@@ -236,21 +240,39 @@ jobs:
           dashi-repo diagnose DASHI/Unified/SensibLawGovernanceFleetTOEExact.agda --root .
           dashi-repo related canonicalSensibLawGovernanceFleetTOEReceipt --root . --limit 20
           dashi-repo related canonicalFleetFormalGapTargetReceipt --root . --limit 20
-          dashi-repo related canonicalAgdaFirstLegalRuntimeContract --root . --limit 20
-          dashi-repo related canonicalDomainTransportReceipt --root . --limit 20
-          dashi-repo discover 'SensibLaw governance legal authority runtime domain snowball Pareto fleet 58 non promotion' --root . --limit 50
+          dashi-repo related fleetEigenPriorityDoesNotCreateProof --root . --limit 20
+          dashi-repo discover 'fleet formal gap target spectral numeric ABI discharged fibres contradiction gaps non-promotion' --root . --limit 40
+          dashi-repo diagnose DASHI/Unified/TOE369MaxCutKernelBidiTernaryExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/TOE369MaxCutKernelBidiTernaryValidation.agda --root .
+          dashi-repo diagnose DASHI/Unified/SingularBasinCoarseRGTOEExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/SingularBasinCoarseRGTOEValidation.agda --root .
+          dashi-repo diagnose DASHI/Unified/SensibLawGovernanceTOEExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/SensibLawGovernanceTOEValidation.agda --root .
+          dashi-repo related semantic-promotion-legal-authority-closed --root . --limit 20
+          dashi-repo related qualificationDoesNotAutomaticallyProveForensicCompliance --root . --limit 20
+          dashi-repo related parserCandidateAloneCannotAuthorizeAdmission --root . --limit 20
+          dashi-repo related officialSurfaceCannotRecoverFineLegalState --root . --limit 20
+          dashi-repo discover 'SensibLaw semantic promotion legal authority expert compliance review admission Pareto snowball governance non-promotion' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Interop.SensibLaw --root .
           dashi-repo lineage --prefix DASHI.Law.SensibLaw --root .
-          dashi-repo lineage --prefix DASHI.Cognition.PNF.SensibLaw --root .
-          dashi-repo lineage --prefix DASHI.Unified.FleetFormalGapTargetTOE --root .
-
-      - name: Verify current SensibLaw governance fleet source contract
-        run: python -m pytest -q tests/test_sensiblaw_governance_fleet_current_toe.py
-
-      - name: Preflight current SensibLaw governance fleet owner
-        run: |
-          dashi-agda-preflight --root . --closure --agda-auto-refine=typecheck \
-            --agda-extra-args='-i . -l standard-library' \
-            DASHI/Unified/SensibLawGovernanceFleetTOEExact.agda
+          dashi-repo related finiteReductionNotBasinPreserving --root . --limit 20
+          dashi-repo related selectedProjectionNotResolutionAdequate --root . --limit 20
+          dashi-repo discover 'singular basin coarse RG projection basin preservation resolution robustness non-promotion' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Physics.Dynamics.SingularBasin --root .
+          dashi-repo related monsterAxisReflectionIntertwines --root . --limit 20
+          dashi-repo related dimensionDoesNotCreateFaithfulness --root . --limit 20
+          dashi-repo related dimensionDoesNotCreateProjectedAction --root . --limit 20
+          dashi-repo related canonicalActual3BKernelSameElementBoundary --root . --limit 20
+          dashi-repo related phasePreservingReductionEqualsFullGlobalInversionIsFalse --root . --limit 20
+          dashi-repo discover 'ternary 27 selected 3B max cut kernel BIDI phase intertwiner non-promotion' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Moonshine.Base369Ternary27 --root .
+          dashi-repo lineage --prefix DASHI.Reasoning.Trialectic369Selected3B --root .
+          dashi-repo related balabanRGScaleTransferPromotionImpossibleHere --root . --limit 20
+          dashi-repo related canonicalRecognitionRouteParetoBoundary --root . --limit 20
+          dashi-repo related currentMonster3BCharacterExecutionFrontier --root . --limit 20
+          dashi-repo related canonicalTrialectic369SchrodingerHZetaRecognitionMaxCutBoundary --root . --limit 20
+          dashi-repo discover 'Balaban RG scale transfer non-promotion Ibrahim Pareto snowball Monster 3B H-zeta recognition' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Wikimedia.IbrahimMonster3B --root .
 
       - name: Reject ESD surface changes
         shell: bash

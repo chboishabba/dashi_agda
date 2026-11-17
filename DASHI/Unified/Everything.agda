@@ -35,7 +35,8 @@ import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
 import DASHI.Unified.Fleet58ManifestAcquisitionRegression
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryValidation
 import DASHI.Unified.SingularBasinCoarseRGTOEValidation
-import DASHI.Unified.YMGoal1R559IbrahimTOEValidation
+import DASHI.Unified.SensibLawGovernanceTOEExact
+import DASHI.Unified.SensibLawGovernanceTOEValidation
 import DASHI.Unified.BrainFMRI as BrainFMRI
 import DASHI.Reasoning.TrialecticBraidedTwoEyedCoordinationExact as BraidedTransferTOE
 import DASHI.Reasoning.TrialecticThreeStrandBraidHistoryExact as BraidedHistoryTOE
