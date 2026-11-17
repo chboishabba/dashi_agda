@@ -8,7 +8,8 @@ import DASHI.Governance.DomainPermeabilityAuthorityTransport as Domain
 
 open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Data.Nat.Base using (ℕ)
+open import Data.Empty using (⊥)
 open import Data.List.Base using (List; _∷_; [])
 
 import DASHI.Interop.SensibLawResidualLattice as Residual
@@ -551,64 +552,39 @@ yangMillsGoal1ParetoZKPFrame = YMMaxCut.canonicalGoal1ParetoTOEZKPFrame
 
 
 ------------------------------------------------------------------------
--- Cross-domain governance facade.
--- This exposes governance non-promotion beside physics.
--- It does not turn governance evidence into physics or legal authority.
+-- Joint Balaban RG + R559 same-owner max-cut physics facade.
 ------------------------------------------------------------------------
 
-governanceSensibLawSemanticBoundary :
-  Authority.AuthorityNonPromotionBundle
-governanceSensibLawSemanticBoundary =
-  GovernanceTOE.governanceSemanticAuthorityBoundary
+import DASHI.Unified.BalabanR559TOEMaxCutExact as BalabanR559TOE
 
-governanceSensibLawSemanticTruthAuthorityStillClosed :
-  Authority.truthAuthorityFlag governanceSensibLawSemanticBoundary ≡ false
-governanceSensibLawSemanticTruthAuthorityStillClosed =
-  GovernanceTOE.governanceSemanticTruthAuthorityStillClosed
+yangMillsBalabanR559MaxCutReceipt :
+  BalabanR559TOE.BalabanR559TOEMaxCutReceipt
+yangMillsBalabanR559MaxCutReceipt =
+  BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
-governanceSensibLawSemanticLegalAuthorityStillClosed :
-  Authority.legalAuthorityFlag governanceSensibLawSemanticBoundary ≡ false
-governanceSensibLawSemanticLegalAuthorityStillClosed =
-  GovernanceTOE.governanceSemanticLegalAuthorityStillClosed
-
-governanceSensibLawSemanticAllAuthorityStillClosed :
-  Authority.promotesAnyAuthority governanceSensibLawSemanticBoundary ≡ false
-governanceSensibLawSemanticAllAuthorityStillClosed =
-  GovernanceTOE.governanceSemanticAllAuthorityStillClosed
-
-governanceSensibLawLegalAuthorityBoundaryReceipt :
-  AuthorityBoundary.AuthorityBoundaryReceipt
-governanceSensibLawLegalAuthorityBoundaryReceipt =
-  GovernanceTOE.governanceLegalAuthorityBoundaryReceipt
-
-governanceSensibLawLegalRuntimeContract :
-  LegalRuntime.AgdaFirstLegalRuntimeContract
-governanceSensibLawLegalRuntimeContract =
-  GovernanceTOE.governanceLegalRuntimeContract
-
-governanceSensibLawDomainTransportReceipt :
-  Domain.DomainTransportReceipt
-governanceSensibLawDomainTransportReceipt =
-  GovernanceTOE.governanceDomainTransportReceipt
-
-governanceSensibLawRepresentationEqualityDoesNotCreateLegalAuthority :
-  Domain.DomainTransportReceipt.representationEqualityCreatesLegalAuthority
-    governanceSensibLawDomainTransportReceipt
+yangMillsBalabanR559PublishedContinuumStillOpen :
+  BalabanR559TOE.publishedContinuumPromotion
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
   ≡ false
-governanceSensibLawRepresentationEqualityDoesNotCreateLegalAuthority =
-  GovernanceTOE.governanceRepresentationEqualityDoesNotCreateLegalAuthority
+yangMillsBalabanR559PublishedContinuumStillOpen =
+  BalabanR559TOE.publishedContinuumPromotionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
-governanceSensibLawVendorIdentityDoesNotCreateAuthority :
-  Domain.DomainTransportReceipt.vendorIdentityCreatesAuthority governanceSensibLawDomainTransportReceipt
+yangMillsBalabanR559ContinuumMassGapStillBlocked :
+  BalabanR559TOE.continuumMassGapPromotion
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
   ≡ false
-governanceSensibLawVendorIdentityDoesNotCreateAuthority =
-  GovernanceTOE.governanceVendorIdentityDoesNotCreateAuthority
+yangMillsBalabanR559ContinuumMassGapStillBlocked =
+  BalabanR559TOE.continuumMassGapPromotionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
-governanceSensibLawTargetDomainNeedsOwnAuthorityWitness :
-  Domain.DomainTransportReceipt.targetDomainNeedsOwnAuthorityWitness governanceSensibLawDomainTransportReceipt
-  ≡ true
-governanceSensibLawTargetDomainNeedsOwnAuthorityWitness =
-  GovernanceTOE.governanceTargetDomainNeedsOwnAuthorityWitness
+yangMillsBalabanR559ClayPromotionStillBlocked :
+  BalabanR559TOE.clayPromotion
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ false
+yangMillsBalabanR559ClayPromotionStillBlocked =
+  BalabanR559TOE.clayPromotionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
 yangMillsBalabanR559Gate4UnresolvedCount : ℕ
 yangMillsBalabanR559Gate4UnresolvedCount =
@@ -630,16 +606,11 @@ yangMillsBalabanR559Gate4InhabitantsLevel : ProofLevel
 yangMillsBalabanR559Gate4InhabitantsLevel =
   BalabanR559TOE.gate4InhabitantsLevel
     BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-yangMillsBalabanR559CurrentGate4FrontierLedgerLevel : ProofLevel
-yangMillsBalabanR559CurrentGate4FrontierLedgerLevel =
-  BalabanR559TOE.currentGate4FrontierLedgerLevel
-    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
-yangMillsBalabanR559CurrentGate4PostulateFreeSurfaceLevel : ProofLevel
-yangMillsBalabanR559CurrentGate4PostulateFreeSurfaceLevel =
-  BalabanR559TOE.currentGate4PostulateFreeSurfaceLevel
+yangMillsBalabanR559Gate4PaidReductionLedgerLevel : ProofLevel
+yangMillsBalabanR559Gate4PaidReductionLedgerLevel =
+  BalabanR559TOE.gate4PaidReductionLevel
     BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
-
 
 yangMillsBalabanScaleTransferNonPromotion :
   BalabanR559TOE.ScaleTransferPromotion → ⊥
@@ -648,64 +619,39 @@ yangMillsBalabanScaleTransferNonPromotion =
     BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
 
 ------------------------------------------------------------------------
--- Cross-domain governance facade.
--- This exposes governance non-promotion beside physics.
--- It does not turn governance evidence into physics or legal authority.
+-- Implement-A-to-D reuse-only Yang-Mills physics facade.
 ------------------------------------------------------------------------
 
-governanceSensibLawSemanticBoundary :
-  Authority.AuthorityNonPromotionBundle
-governanceSensibLawSemanticBoundary =
-  GovernanceTOE.governanceSemanticAuthorityBoundary
+import DASHI.Unified.YMImplementAToDTOEMaxCutExact as YMAD
 
-governanceSensibLawSemanticTruthAuthorityStillClosed :
-  Authority.truthAuthorityFlag governanceSensibLawSemanticBoundary ≡ false
-governanceSensibLawSemanticTruthAuthorityStillClosed =
-  GovernanceTOE.governanceSemanticTruthAuthorityStillClosed
+yangMillsImplementAToDMaxCutReceipt :
+  YMAD.YMImplementAToDTOEMaxCutReceipt
+yangMillsImplementAToDMaxCutReceipt =
+  YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
 
-governanceSensibLawSemanticLegalAuthorityStillClosed :
-  Authority.legalAuthorityFlag governanceSensibLawSemanticBoundary ≡ false
-governanceSensibLawSemanticLegalAuthorityStillClosed =
-  GovernanceTOE.governanceSemanticLegalAuthorityStillClosed
+yangMillsImplementAToDZKPFrame : YMAD.YMImplementAToDZKPFrame
+yangMillsImplementAToDZKPFrame =
+  YMAD.canonicalYMImplementAToDZKPFrame
 
-governanceSensibLawSemanticAllAuthorityStillClosed :
-  Authority.promotesAnyAuthority governanceSensibLawSemanticBoundary ≡ false
-governanceSensibLawSemanticAllAuthorityStillClosed =
-  GovernanceTOE.governanceSemanticAllAuthorityStillClosed
-
-governanceSensibLawLegalAuthorityBoundaryReceipt :
-  AuthorityBoundary.AuthorityBoundaryReceipt
-governanceSensibLawLegalAuthorityBoundaryReceipt =
-  GovernanceTOE.governanceLegalAuthorityBoundaryReceipt
-
-governanceSensibLawLegalRuntimeContract :
-  LegalRuntime.AgdaFirstLegalRuntimeContract
-governanceSensibLawLegalRuntimeContract =
-  GovernanceTOE.governanceLegalRuntimeContract
-
-governanceSensibLawDomainTransportReceipt :
-  Domain.DomainTransportReceipt
-governanceSensibLawDomainTransportReceipt =
-  GovernanceTOE.governanceDomainTransportReceipt
-
-governanceSensibLawRepresentationEqualityDoesNotCreateLegalAuthority :
-  Domain.DomainTransportReceipt.representationEqualityCreatesLegalAuthority
-    governanceSensibLawDomainTransportReceipt
+yangMillsImplementAToDPublishedContinuumStillBlocked :
+  YMAD.publishedContinuumPromotion YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
   ≡ false
-governanceSensibLawRepresentationEqualityDoesNotCreateLegalAuthority =
-  GovernanceTOE.governanceRepresentationEqualityDoesNotCreateLegalAuthority
+yangMillsImplementAToDPublishedContinuumStillBlocked =
+  YMAD.publishedContinuumPromotionIsFalse
+    YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
 
-governanceSensibLawVendorIdentityDoesNotCreateAuthority :
-  Domain.DomainTransportReceipt.vendorIdentityCreatesAuthority governanceSensibLawDomainTransportReceipt
+yangMillsImplementAToDContinuumMassGapStillBlocked :
+  YMAD.continuumMassGapPromotion YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
   ≡ false
-governanceSensibLawVendorIdentityDoesNotCreateAuthority =
-  GovernanceTOE.governanceVendorIdentityDoesNotCreateAuthority
+yangMillsImplementAToDContinuumMassGapStillBlocked =
+  YMAD.continuumMassGapPromotionIsFalse
+    YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
 
-governanceSensibLawTargetDomainNeedsOwnAuthorityWitness :
-  Domain.DomainTransportReceipt.targetDomainNeedsOwnAuthorityWitness governanceSensibLawDomainTransportReceipt
-  ≡ true
-governanceSensibLawTargetDomainNeedsOwnAuthorityWitness =
-  GovernanceTOE.governanceTargetDomainNeedsOwnAuthorityWitness
+yangMillsImplementAToDClayStillBlocked :
+  YMAD.clayPromotion YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+  ≡ false
+yangMillsImplementAToDClayStillBlocked =
+  YMAD.clayPromotionIsFalse YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
 
 yangMillsImplementAToDScaleTransferNonPromotion :
   BalabanR559TOE.ScaleTransferPromotion → ⊥
@@ -713,47 +659,3 @@ yangMillsImplementAToDScaleTransferNonPromotion =
   YMAD.scaleTransferPromotionEliminator
     YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
 
-
-------------------------------------------------------------------------
--- Computational-imaging observer facade.
--- Reuse the existing optics owners. Do not duplicate their proofs.
-------------------------------------------------------------------------
-
-import DASHI.Physics.Optics.DiffuserImagingObserverDynamicRangeExact as DiffuserImaging
-import DASHI.Physics.Optics.DiffuserRedundantRecoveryExact as DiffuserRecovery
-import DASHI.Physics.Optics.DiffuserNoiseStableRecoveryExact as DiffuserStability
-import DASHI.Physics.Optics.FresnelZonePlateDiffuserCodecBridgeExact as ZonePlate
-
-diffuserImagingZKPFrame :
-  DiffuserImaging.DiffuserImagingTOEZKPFrame
-diffuserImagingZKPFrame =
-  DiffuserImaging.canonicalDiffuserImagingTOEZKPFrame
-
-open DiffuserImaging public using
-  ( DiffuserImagingTOEZKPFrame
-  ; roundTripImpliesIdentifiable
-  ; noUniversalDecoderAfterClip
-  ; saturatedCollision
-  ; overlapThenClip
-  )
-
-open DiffuserRecovery public using
-  ( redundantRecovery
-  ; recordedCodeInjective
-  ; firstPixelOnlyCannotRecoverDepth
-  ; depthRecoveryReceipt
-  ; recordedCollisionWouldContradictDepth
-  )
-
-open DiffuserStability public using
-  ( RestrictedInverseBudget
-  ; MeasuredReconstruction
-  ; stableReconstructionBound
-  ; stableWithMatchedResidual
-  )
-
-open ZonePlate public using
-  ( codedDepthRoundTrip
-  ; noUniversalDepthDecoder
-  ; noRechartRepairsSaturatedDepth
-  )

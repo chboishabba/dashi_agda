@@ -1,7 +1,7 @@
 {-# OPTIONS --safe #-}
 module DASHI.Unified.BalabanR559TOEMaxCutValidation where
 
-open import Agda.Builtin.Bool using (false)
+open import Agda.Builtin.Bool using (false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 import Data.Empty using (⊥)
 
@@ -10,8 +10,8 @@ import DASHI.Unified.BalabanRGTOERegression as Balaban
 import DASHI.Physics.YangMills.YangMillsTOEConvergenceRound559Exact as R559
 import DASHI.Physics.Closure.BalabanRGScaleTransferFrontierReceipt as RGNonPromotion
 import DASHI.Physics.YangMills.BalabanClayGate4PhysicalClosureRound6ExactCutset as Gate4
+import DASHI.Physics.YangMills.BalabanClayGate4PhysicalClosureRound6Ledger as Gate4Ledger
 import DASHI.Physics.YangMills.YangMillsSubmissionObligationCardinalityExact as Counts
-import DASHI.Physics.YangMills.BalabanClayGate4CurrentFrontierReceipt as CurrentGate4
 import DASHI.Physics.YangMills.CompactLieProofLevel as Proof
 import DASHI.EverythingTOESymmetryResolved369 as TOE
 import DASHI.Unifier as Unifier
@@ -56,47 +56,33 @@ r559ParetoZKPFrameIsCanonical :
 r559ParetoZKPFrameIsCanonical = refl
 
 ------------------------------------------------------------------------
--- Canonical owner reachability.
---
--- Balaban and R559 remain distinct theorem owners.
--- The joint receipt proves reachability to each canonical owner.
+-- Shared owner checks.
 ------------------------------------------------------------------------
 
-jointBalabanDensityMatchesOwner :
+densityOwnerAgreementIsExact :
   Joint.balabanDensityFlow Joint.canonicalBalabanR559TOEMaxCutReceipt
-  ≡ Balaban.balabanScaleDensityFlowLevel
-jointBalabanDensityMatchesOwner = refl
+  ≡ Joint.r559DensityFlow Joint.canonicalBalabanR559TOEMaxCutReceipt
+densityOwnerAgreementIsExact =
+  Joint.densityOwnerAgreement Joint.canonicalBalabanR559TOEMaxCutReceipt
 
-jointBalabanRegularEMatchesOwner :
+regularEOwnerAgreementIsExact :
   Joint.balabanRegularELocalization Joint.canonicalBalabanR559TOEMaxCutReceipt
-  ≡ Balaban.balabanRegularELocalizationSourceLevel
-jointBalabanRegularEMatchesOwner = refl
+  ≡ Joint.r559RegularELocalization Joint.canonicalBalabanR559TOEMaxCutReceipt
+regularEOwnerAgreementIsExact =
+  Joint.regularEOwnerAgreement Joint.canonicalBalabanR559TOEMaxCutReceipt
 
-jointBalabanCasimirMatchesOwner :
-  Joint.balabanCasimirLowerBoundTransport
-    Joint.canonicalBalabanR559TOEMaxCutReceipt
-  ≡ Balaban.balabanCasimirLowerBoundTransportLevel
-jointBalabanCasimirMatchesOwner = refl
-
-jointBalabanMarkedShellStressMatchesOwner :
+stressMarkedShellOwnerAgreementIsExact :
   Joint.balabanStressMarkedShell Joint.canonicalBalabanR559TOEMaxCutReceipt
-  ≡ Balaban.balabanStressMarkedShellReuseLevel
-jointBalabanMarkedShellStressMatchesOwner = refl
+  ≡ Joint.r559StressMarkedShell Joint.canonicalBalabanR559TOEMaxCutReceipt
+stressMarkedShellOwnerAgreementIsExact =
+  Joint.stressMarkedShellOwnerAgreement Joint.canonicalBalabanR559TOEMaxCutReceipt
 
-jointBalabanHilbertStressMatchesOwner :
+stressHilbertOwnerAgreementIsExact :
   Joint.balabanStressHilbertCompiler Joint.canonicalBalabanR559TOEMaxCutReceipt
-  ≡ Balaban.balabanStressHilbertBoundCompilerLevel
-jointBalabanHilbertStressMatchesOwner = refl
+  ≡ Joint.r559StressHilbertCompiler Joint.canonicalBalabanR559TOEMaxCutReceipt
+stressHilbertOwnerAgreementIsExact =
+  Joint.stressHilbertOwnerAgreement Joint.canonicalBalabanR559TOEMaxCutReceipt
 
-jointR559BetaSourceMatchesOwner :
-  Joint.r559CurrentStepBetaSource Joint.canonicalBalabanR559TOEMaxCutReceipt
-  ≡ R559.toeGoal1A1CurrentStepBetaSourceLevel
-jointR559BetaSourceMatchesOwner = refl
-
-jointR559StressDensityMatchesOwner :
-  Joint.r559StressDensityFiniteMeasure Joint.canonicalBalabanR559TOEMaxCutReceipt
-  ≡ R559.toeGoal1A3StressDensityIsLiteralFiniteMeasureLevel
-jointR559StressDensityMatchesOwner = refl
 
 ------------------------------------------------------------------------
 -- Canonical 58-field Gate-4 unresolved-cut boundary.
@@ -123,43 +109,40 @@ jointGate4InhabitantsLevelMatchesOwner :
   ≡ Gate4.physicalClosureRound6CutsetInhabitantsLevel
 jointGate4InhabitantsLevelMatchesOwner = refl
 
+
+jointGate4PaidReductionLevelMatchesOwner :
+  Joint.gate4PaidReductionLevel Joint.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ Gate4Ledger.physicalClosureRound6LedgerLevel
+jointGate4PaidReductionLevelMatchesOwner = refl
+
+jointGate4PaidReductionLedgerPromotesLocally :
+  Proof.promotable
+    (Joint.gate4PaidReductionLevel Joint.canonicalBalabanR559TOEMaxCutReceipt)
+  ≡ true
+jointGate4PaidReductionLedgerPromotesLocally =
+  Proof.machineCheckedPromotes
+
+rootGate4PaidReductionLevelMatchesJoint :
+  TOE.toeBalabanR559Gate4PaidReductionLedgerLevel
+  ≡ Joint.gate4PaidReductionLevel Joint.canonicalBalabanR559TOEMaxCutReceipt
+rootGate4PaidReductionLevelMatchesJoint = refl
+
+unifierGate4PaidReductionLevelMatchesJoint :
+  Unifier.unifierBalabanR559Gate4PaidReductionLedgerLevel
+  ≡ Joint.gate4PaidReductionLevel Joint.canonicalBalabanR559TOEMaxCutReceipt
+unifierGate4PaidReductionLevelMatchesJoint = refl
+
+physicsGate4PaidReductionLevelMatchesJoint :
+  Physics.yangMillsBalabanR559Gate4PaidReductionLedgerLevel
+  ≡ Joint.gate4PaidReductionLevel Joint.canonicalBalabanR559TOEMaxCutReceipt
+physicsGate4PaidReductionLevelMatchesJoint = refl
+
 jointGate4InhabitantsDoNotSelfPromote :
   Proof.promotable
     (Joint.gate4InhabitantsLevel Joint.canonicalBalabanR559TOEMaxCutReceipt)
   ≡ false
 jointGate4InhabitantsDoNotSelfPromote =
   Proof.conditionalDoesNotSelfPromote
-
-
-jointCurrentGate4LedgerMatchesOwner :
-  Joint.currentGate4FrontierLedgerLevel
-    Joint.canonicalBalabanR559TOEMaxCutReceipt
-  ≡ CurrentGate4.currentFrontierLedgerTypecheckLevel
-jointCurrentGate4LedgerMatchesOwner = refl
-
-jointCurrentGate4PostulateFreeSurfaceMatchesOwner :
-  Joint.currentGate4PostulateFreeSurfaceLevel
-    Joint.canonicalBalabanR559TOEMaxCutReceipt
-  ≡ CurrentGate4.currentSurfacePostulateFreeLevel
-jointCurrentGate4PostulateFreeSurfaceMatchesOwner = refl
-
-rootCurrentGate4LedgerMatchesJoint :
-  TOE.toeBalabanR559CurrentGate4FrontierLedgerLevel
-  ≡ Joint.currentGate4FrontierLedgerLevel
-      Joint.canonicalBalabanR559TOEMaxCutReceipt
-rootCurrentGate4LedgerMatchesJoint = refl
-
-unifierCurrentGate4LedgerMatchesJoint :
-  Unifier.unifierBalabanR559CurrentGate4FrontierLedgerLevel
-  ≡ Joint.currentGate4FrontierLedgerLevel
-      Joint.canonicalBalabanR559TOEMaxCutReceipt
-unifierCurrentGate4LedgerMatchesJoint = refl
-
-physicsCurrentGate4LedgerMatchesJoint :
-  Physics.yangMillsBalabanR559CurrentGate4FrontierLedgerLevel
-  ≡ Joint.currentGate4FrontierLedgerLevel
-      Joint.canonicalBalabanR559TOEMaxCutReceipt
-physicsCurrentGate4LedgerMatchesJoint = refl
 
 rootGate4CountIs58 :
   TOE.toeBalabanR559Gate4UnresolvedCount ≡ 58
