@@ -18,7 +18,7 @@ module DASHI.Physics.YangMills.YMClayOriginalL1Rational24CellBlockedMomentsExact
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer.Base using (+_)
-open import Data.Rational using (ℚ; 0ℚ; _+_; _-_; _*_; _/_)
+open import Data.Rational using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _/_)
 import DASHI.Physics.YangMills.YMClayOriginalL1Rational24CellEffectiveRGExact as RG
 
 weightedFirst : ℚ
