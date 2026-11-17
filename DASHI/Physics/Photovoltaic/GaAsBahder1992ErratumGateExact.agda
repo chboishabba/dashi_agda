@@ -21,12 +21,12 @@ data ErratumObligation : Set where
   SourcePaidDeviceStrain : ErratumObligation
 
 -- Existing exact/abstract or symbolic status of THIS REPO BRANCH;
--- numeric symbolic script checks 1992 N1/N2/N3 matrix formula but
+-- numeric symbolic script checks the corrected N blocks, valence-a and R but
 -- has not been welded to original 8band Hamiltonian in the SAME basis.
 erratumImplementedInSource : ErratumObligation -> Bool
 erratumImplementedInSource Corrected1992SpinOrbitN1N2N3 = true
-erratumImplementedInSource Corrected1992ValenceHydrostaticA = false
-erratumImplementedInSource Corrected1992ValenceMixingR = false
+erratumImplementedInSource Corrected1992ValenceHydrostaticA = true
+erratumImplementedInSource Corrected1992ValenceMixingR = true
 erratumImplementedInSource Corrected1992PQRSPlanckSquare = false
 erratumImplementedInSource Original1990InterbandKStrain = false
 erratumImplementedInSource SameGammaEightSixBasis = false
@@ -38,9 +38,15 @@ spinOrbitAlgebraSourceWritten = refl
 
 data False : Set where
 
-erratumRCorrectionCannotBeAssumed :
-  erratumImplementedInSource Corrected1992ValenceMixingR ≡ true -> False
-erratumRCorrectionCannotBeAssumed ()
+correctedValenceRSourceWritten :
+  erratumImplementedInSource Corrected1992ValenceMixingR ≡ true
+correctedValenceRSourceWritten = refl
+
+-- Only the corrected R hbar² factor has been checked symbolically.
+-- The four P,Q,R,S definitions have NOT all been source-assembled.
+uncorrectedPQRSFullPowerCannotBeAssumed :
+  erratumImplementedInSource Corrected1992PQRSPlanckSquare ≡ true -> False
+uncorrectedPQRSFullPowerCannotBeAssumed ()
 
 fullBahderCannotBeClaimedFromCurrentStatus :
   erratumImplementedInSource SameGammaEightSixBasis ≡ true -> False
