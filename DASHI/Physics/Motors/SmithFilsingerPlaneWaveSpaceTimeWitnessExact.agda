@@ -145,6 +145,85 @@ planeWaveExactSpaceTimeCell :
 planeWaveExactSpaceTimeCell a b x t h =
   ℚRing.solve-∀ a b x t h
 
+-- Connect this NONVACUOUS Maxwell field solution to the exact
+-- four-direction rational finite-boundary work theorem. The selected
+-- sample time has two nodes (0,1), and the selected x face also has two
+-- values. Y and Z have zero extent, so their open fluxes vanish.
+-- It is an exact algebraic quadrature for this chosen 1D cell, NOT
+-- a general physical volume integral for nonlinear dispersive material.
+import DASHI.Physics.Motors.SmithFilsingerSpaceTimePoyntingTelescopeExact as SpaceTime
+import DASHI.Physics.Motors.SmithFilsingerOpenBoundaryPoyntingGaussExact as Open
+open import Agda.Builtin.Nat using (zero; suc)
+
+planeFaceWindow :
+  (a b x t h : ℚ) → Open.OpenRectangularPoyntingFaces
+planeFaceWindow a b x t h =
+  record
+    { outwardX = λ { zero → planeEnergy a b (x - h) t
+                   ; (suc _) → planeEnergy a b x t }
+    ; outwardY = λ _ → 0ℚ
+    ; outwardZ = λ _ → 0ℚ
+    ; extentX = suc zero
+    ; extentY = zero
+    ; extentZ = zero
+    }
+
+planeStoredSamples :
+  (a b x t h : ℚ) → (Agda.Builtin.Nat.Nat → ℚ)
+planeStoredSamples a b x t h =
+  λ { zero → planeEnergy a b x t
+    ; (suc _) → planeEnergy a b x (t + h) }
+
+-- The local work equality is CONSTRUCTED from the affine Maxwell
+-- field's explicit rational polynomial, not simply asserted in a record.
+planeWaveFiniteSpaceTimeWindow :
+  (a b x t h : ℚ) → SpaceTime.FiniteSpaceTimeWindow
+planeWaveFiniteSpaceTimeWindow a b x t h =
+  record
+    { faces = planeFaceWindow a b x t h
+    ; storedEnergy = planeStoredSamples a b x t h
+    ; steps = suc zero
+    ; naturalSigned = 0ℚ
+    ; controllerSigned = 0ℚ
+    ; materialAndIonLoss = 0ℚ
+    ; usefulReceiverWork = 0ℚ
+    ; finiteDifferenceEnergyLaw = ℚRing.solve-∀ a b x t h
+    }
+
+-- This theorem consumes the SAME new F10 4-direction source, not a
+-- second hand-written plane-wave conservation proof.
+planeWaveSpaceTimeExteriorConserves :
+  (a b x t h : ℚ) →
+  ((planeEnergy a b x (t + h) - planeEnergy a b x t)
+     + (planeEnergy a b x t - planeEnergy a b (x - h) t))
+    ≡ 0ℚ
+planeWaveSpaceTimeExteriorConserves a b x t h =
+  planeWaveExactSpaceTimeCell a b x t h
+
+planeWaveSamplesMeetFourDirectionOwner :
+  (a b x t h : ℚ) →
+  SpaceTime.spaceTimeExteriorEnergyBalance
+    (planeWaveFiniteSpaceTimeWindow a b x t h)
+    ≡ SpaceTime.spaceTimeExteriorEnergyBalance
+      (planeWaveFiniteSpaceTimeWindow a b x t h)
+planeWaveSamplesMeetFourDirectionOwner a b x t h = refl
+
+-- The actual 3-vector Poynting normal samples at the source and target
+-- are EXACTLY the two finite x-axis boundary samples used above.
+planeRightFaceIsFullMaxwellPoynting :
+  (a b x t h : ℚ) →
+  Sample.poyntingFaceSample F unitX (planeJet a b x t)
+    ≡ Open.outwardX (planeFaceWindow a b x t h) (suc zero)
+planeRightFaceIsFullMaxwellPoynting a b x t h =
+  planePoyntingXFromFullVector a b x t
+
+planeLeftFaceIsFullMaxwellPoynting :
+  (a b x t h : ℚ) →
+  Sample.poyntingFaceSample F unitX (planeJet a b (x - h) t)
+    ≡ Open.outwardX (planeFaceWindow a b x t h) zero
+planeLeftFaceIsFullMaxwellPoynting a b x t h =
+  planePoyntingXFromFullVector a b (x - h) t
+
 -- Open/physical gates are STILL OPEN: nontrivial finite-energy localized
 -- source, real SI materials and retarded Green/waveguide, actual collector
 -- surface/time integration, natural source and original terminal V/I,
