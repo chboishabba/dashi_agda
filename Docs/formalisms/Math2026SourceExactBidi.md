@@ -199,3 +199,41 @@ exact consumer sufficiency
 ```
 
 Prime-gap source reconstruction remains intentionally gated: the current repo has the claim/provenance surface, but no exact new manuscript plus Alexeev Lean artifact has yet been recovered into this tranche, so no theorem statement is invented.
+
+## Balaban categorical fibre normalization
+
+The current categorical analogue uses existing Balaban RG machinery.
+
+The fine state projects to a coarse RG state.
+
+The finite reopening kernel keeps the residual fibre explicit.
+
+`BalabanFiniteRGObservableReopeningExact` proves exact observable transport through that kernel.
+
+`BalabanFiniteRGTotalCovarianceExact` proves that connected two-point information splits into a coarse covariance term and a conditional fibre covariance term.
+
+`BalabanSourceResidualConsumerNonDescent369Exact` gives a concrete consumer non-descent witness.
+
+A coarse source label therefore cannot recover every fine recovery decision.
+
+This is the relevant replacement for a bare “fixed leg” analogy.
+
+The formal TOE normalization lives in `DASHI.Unified.BalabanRGTOERegression`.
+
+`DASHI.EverythingTOESymmetryResolved369`, `DASHI.Unifier`, `DASHI.Unified.Physics`, and `DASHI.Unified.Everything` re-export the normalized surface.
+
+The ZKP frame reuses the existing `physicalUniformRGStep` preconditions, postconditions, and invariants.
+
+The following invariants remain active.
+
+- Finite reopening does not imply a continuum limit.
+- Conditional structure does not become machine-checked authority.
+- Consumer non-descent does not prove a physical Yang-Mills theorem.
+- Pi, Phi, and Psi name structural roles over existing carriers.
+- Tau and zeta remain domain-specific coordinates unless a typed crosswalk exists.
+- ESD surfaces remain import-only.
+- Source attribution remains with Balaban and the cited source owners.
+
+The postcondition remains fail-closed.
+
+Continuum Yang-Mills, continuum mass gap, terminal promotion, and Clay promotion remain false on this route.
