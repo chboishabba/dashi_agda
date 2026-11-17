@@ -204,13 +204,13 @@ everyScoreListConsumerExactlyPreserved
 -- register pressure/derivatives are NOT included.
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Nat using (_+_; _*_)
+import Data.Nat as NatOps
 
 sourceNaiveMultiplications : Nat → Nat
-sourceNaiveMultiplications experts = 12 * experts
+sourceNaiveMultiplications experts = NatOps._*_ 12 experts
 
 sharedFusedMultiplications : Nat → Nat
-sharedFusedMultiplications experts = 9 + 3 * experts
+sharedFusedMultiplications experts = NatOps._+_ 9 (NatOps._*_ 3 experts)
 
 oneExpertArithmeticParity :
   sourceNaiveMultiplications 1 ≡ sharedFusedMultiplications 1
