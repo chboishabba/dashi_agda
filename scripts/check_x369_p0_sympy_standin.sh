@@ -112,6 +112,16 @@ check('nonzero common-DC exact two-channel relative score',
 check('different-DC source feature collision can change relative score',
     sp.expand((source_difference-two_difference).subs({
         si:0,fi:0,ri:1,sj:0,fj:0,rj:0,ws:1,wf:1,wr:1}))==1)
+check('centered shared activation zeroes every expert DC',
+    sp.expand(D.subs(c,-a-b))==0)
+history_alt=sp.symbols('H_alt0 H_alt1 H_alt2')
+check('source activation centering ensures equal DC across histories',
+    sp.expand(((a+b+c)*(A+B+C)-(a+b+c)*sum(history_alt)).subs(c,-a-b))==0)
+check('non-centered activation can retain unequal expert DC',
+    sp.expand(((a+b+c)*(A+B+C)-(a+b+c)*sum(history_alt)).subs({
+        a:1,b:0,c:0,A:0,B:0,C:1,
+        history_alt[0]:0,history_alt[1]:0,history_alt[2]:0}))==1)
+
 
 # Exact source-head quantization safety needs BOTH a bound and a
 # strict selected-vs-unselected margin. This is finite stand-in for
