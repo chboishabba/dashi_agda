@@ -165,6 +165,9 @@ jobs:
             DASHI/Unified/NavierStokesClayFrontierTOEConvergenceExact.agda
             DASHI/Unified/NavierStokesClayFrontierTOEConvergenceValidation.agda
             DASHI/Unified/YMGoal1TOECompatibilityExact.agda
+            DASHI/Unified/ContextualSemanticFractranTOEMaxCutExact.agda
+            DASHI/Unified/ContextualSemanticFractranTOEMaxCutValidation.agda
+            DASHI/Unified/PNFHyperfabric.agda
             DASHI/Unified/YMGoal1TOECompatibilityValidation.agda
             DASHI/Unified/BalabanRGTOEMaxCutValidation.agda
             DASHI/Unified/ContextualSemanticFractranTOEMaxCutExact.agda

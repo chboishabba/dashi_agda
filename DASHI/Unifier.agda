@@ -869,6 +869,102 @@ unifierContextualParetoChartDoesNotCreateMonsterRepresentation :
 unifierContextualParetoChartDoesNotCreateMonsterRepresentation =
   ContextualTOE.paretoTernaryChartDoesNotCreateMonsterRepresentation
 
+unifierYMGate4InhabitantsLevel : ProofLevel
+unifierYMGate4InhabitantsLevel =
+  FleetHyperTOE.ymGate4InhabitantsLevel
+
+unifierFleet58DoesNotIdentifyYMGate4 :
+  FleetHyperTOE.Fleet58EqualsYMGate4SameObject → ⊥
+unifierFleet58DoesNotIdentifyYMGate4 =
+  FleetHyperTOE.fleet58CardinalityDoesNotProveYMGate4Identity
+
+unifierFleetDischargedFibresAre584 :
+  FleetHyperTOE.fleetDischargedFibres ≡ 584
+unifierFleetDischargedFibresAre584 =
+  FleetHyperTOE.fleetDischargedFibresAre584
+
+unifierFleetContradictionGapsAre44 :
+  FleetHyperTOE.fleetContradictionGaps ≡ 44
+unifierFleetContradictionGapsAre44 =
+  FleetHyperTOE.fleetContradictionGapsAre44
+
+unifierPadicPrefixCannotRecoverDiscardedDigit :
+  FleetHyperTOE.PadicPrefixRecovery → ⊥
+unifierPadicPrefixCannotRecoverDiscardedDigit =
+  FleetHyperTOE.toePadicPrefixCannotRecoverDiscardedDigit
+
+unifierTwoDigitStreamCannotRecoverThird :
+  FleetHyperTOE.StreamThirdPrefixRecovery → ⊥
+unifierTwoDigitStreamCannotRecoverThird =
+  FleetHyperTOE.toeTwoDigitStreamCannotRecoverThird
+
+------------------------------------------------------------------------
+-- Implement-A-to-D reuse-only TOE facade.
+------------------------------------------------------------------------
+
+import DASHI.Unified.YMImplementAToDTOEMaxCutExact as YMAD
+
+unifierYMImplementAToDMaxCutReceipt :
+  YMAD.YMImplementAToDTOEMaxCutReceipt
+unifierYMImplementAToDMaxCutReceipt =
+  YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+unifierYMImplementAToDZKPFrame : YMAD.YMImplementAToDZKPFrame
+unifierYMImplementAToDZKPFrame =
+  YMAD.canonicalYMImplementAToDZKPFrame
+
+unifierYMImplementAToDPublishedContinuumStillBlocked :
+  YMAD.publishedContinuumPromotion YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+  ≡ false
+unifierYMImplementAToDPublishedContinuumStillBlocked =
+  YMAD.publishedContinuumPromotionIsFalse
+    YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+unifierYMImplementAToDContinuumMassGapStillBlocked :
+  YMAD.continuumMassGapPromotion YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+  ≡ false
+unifierYMImplementAToDContinuumMassGapStillBlocked =
+  YMAD.continuumMassGapPromotionIsFalse
+    YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+unifierYMImplementAToDClayStillBlocked :
+  YMAD.clayPromotion YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+  ≡ false
+unifierYMImplementAToDClayStillBlocked =
+  YMAD.clayPromotionIsFalse YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+unifierYMImplementAToDScaleTransferNonPromotion :
+  BalabanR559TOE.ScaleTransferPromotion → ⊥
+unifierYMImplementAToDScaleTransferNonPromotion =
+  YMAD.scaleTransferPromotionEliminator
+    YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+------------------------------------------------------------------------
+-- CONTEXTUAL-SEMANTIC-FRACTRAN-TOE-MAXCUT
+------------------------------------------------------------------------
+
+import DASHI.Unified.ContextualSemanticFractranTOEMaxCutExact as ContextualTOE
+
+unifierContextualSemanticFractranMaxCutReceipt :
+  ContextualTOE.ContextualSemanticFractranTOEMaxCutReceipt
+unifierContextualSemanticFractranMaxCutReceipt =
+  ContextualTOE.canonicalContextualSemanticFractranTOEMaxCutReceipt
+
+unifierContextualSemanticFractranZKPFrame :
+  ParetoSnowballTOE.TOEZKPFrame
+unifierContextualSemanticFractranZKPFrame =
+  ContextualTOE.canonicalContextualSemanticFractranTOEZKPFrame
+
+unifierContextualCoverageDoesNotCreateMonsterRepresentation :
+  ContextualTOE.CoverageMonsterRepresentationPromotion → ⊥
+unifierContextualCoverageDoesNotCreateMonsterRepresentation =
+  ContextualTOE.coverageDoesNotCreateMonsterRepresentation
+
+unifierContextualParetoChartDoesNotCreateMonsterRepresentation :
+  ContextualTOE.ParetoTernaryMonsterRepresentationPromotion → ⊥
+unifierContextualParetoChartDoesNotCreateMonsterRepresentation =
+  ContextualTOE.paretoTernaryChartDoesNotCreateMonsterRepresentation
+
 unifierContextualFleetDischargedFibresRemainOutOfTarget :
   FleetGapTOE.FleetDischargedFibreRetargetPermission → ⊥
 unifierContextualFleetDischargedFibresRemainOutOfTarget =
