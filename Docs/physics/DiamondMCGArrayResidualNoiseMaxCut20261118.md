@@ -563,3 +563,12 @@ At 5000rpm physical spin is ~83.3Hz and reported preferred RF ~3.5MHz, **42,000�
 **Question 'how many RPM does it need?':** Without a physically established gravity or new source-to-observable law there is **no uniquely derivable required RPM**. Under a descriptive *fixed-2MHz* linear fit, 0.3% corresponds to ~6192rpm and 2% to ~35942rpm; this is deliberately marked extrapolation and is invalid to explain the *different* decelerating regime. A real RPM threshold would come from `J_c`, rotational torque/matched RF/slip or flux instability calculations after original source calibration, not from choosing a target anomaly and solving an unconstrained gain parameter. Rotor strength and stability then supply separate bounds, even under levitation.
 
 Attribution: original historical measurements are claims owned by original authors; literature materials/quantum results remain respective experimental authors' work; the user's requested strongest nonlinear RPM/levitation steelman is a distinct hypothesis; exact rational arithmetic and sympy mathematical orchestration in this PR are new computational analysis, not experimental verification.
+
+
+### Minimal ordered-material physics gate, rather than unsupported material strength
+
+New exact checked `scripts/check_sc_driven_order_parameter_energy.py`: scalar Landau/relaxational `F=a(T-Tc)x²/2+b x⁴/4-k u x`, `xdot=-Gamma ∂F/∂x`, with
+```
+ dF/dt = -Gamma(∂F/∂x)² + (∂F/∂T) Tdot + (∂F/∂u) udot.
+```
+With positive `a,b,Gamma` and `T<Tc`, source-free ordered amplitude magnitude satisfies `x²=a(Tc-T)/b`. The work-port terms are exact and map into existing Filsinger signed source/material changes. **The potential has NO mechanical RPM dependence until a physically derived and calibrated `u(omega,B,geometry)` is supplied.** Nor does it have an external gravitational response equation. This tiny GL order-parameter truncation is *not* a complete charged/multi-band anisotropic YBCO Ginzburg–Landau / vortex pinning PDE; it merely proves why a superconducting transition and driven material state do not, on their own, determine a critical rotor RPM or gravitational force. The subsequent required weld is gauge-covariant material current/stress tensor plus Maxwell, measured pinning/critical current and constitutive/source constraints. User's existing atomic 369 hydrogenic C3 projected Hamiltonian is not a YBCO material Hamiltonian. Full SI sourcing of magnetic drive and coherent lattice parameters remains OPEN.
