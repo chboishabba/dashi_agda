@@ -128,3 +128,38 @@ A broader repository and PR audit confirms pre-existing concrete/proof-bearing S
 **Exact executed local checks:** existing SymPy scripts `check_diamond_mcg_array_detection_exact.py` and `check_diamond_mcg_schur_increment_exact.py` both PASS. A locally executed matching cross-spectrum acceptance prototype passed synthetic SPD/correlation negative controls. GitHub version was committed but not independently executed from a checked-out exact Git blob in this runtime. The Agda executable is unavailable here, so the new Agda source remains **source-authored, not kernel-verified**.
 
 **P1 status:** now has a concrete finite rational matrix inverse -> diamond source-response reuse weld, plus a fail-closed path for future real cross-spectral measurements. Remains **OPEN** pending (i) Agda exact-head check, (ii) a calibrated SI-to-rational/complex cross-spectrum interpretation with uncertainties and spectral normalization, (iii) SPD/inverse construction on measured covariance, and (iv) proof that the physical frequency-domain matched-filter objective agrees with the finite model. P2–P6 remain OPEN. The next prioritised action is testing this actual bridge in the pinned Agda toolchain, followed by P2 anatomical source response and independent empirical cross-spectra acquisition.
+
+
+## 18 November P2 exact finite-extent source / array geometry cut (SymPy, no CI)
+
+**Committed producer:** `scripts/check_diamond_mcg_finite_source_geometry_exact.py`.
+
+**Independent local SymPy execution:** PASS for exact finite-pair field, point-dipole error, dimensionless expansion, derivative/monotonicity, far-field limit, two-sensor gradient and target-signal projection loss; exact-rational geometry fixtures at 1 m, 10 m and 1000 m PASS. The local checker reproduces the committed formulas and cases; it is not an independently fetched source-blob replay.
+
+The first constrained finite-extent source **test fixture** is two equal, aligned magnetic dipoles centred at axial offsets `+a` and `-a`, measured at `r>a`. Absorb the common angular factor and total moment into `K`. Then:
+
+```
+B_pair/K = (1/2)[(r-a)^(-3)+(r+a)^(-3)]
+         = r(r²+3a²)/(r²-a²)³
+B_point/K = r^(-3)
+B_pair/B_point = (1+3x²)/(1-x²)³,  x=a/r
+(B_pair/B_point)-1 = x²(x⁴-3x²+6)/(1-x²)³
+d/dx (B_pair/B_point) = 12x(1+x²)/(1-x²)^4 > 0, 0<x<1
+lim_(x→0) (B_pair/B_point-1)/x² = 6
+```
+
+The exact relative error is nonnegative over `0<x<1`, and monotonic; hence for `a/r<=1/10` it is bounded by `59701/970299 ≈ 0.06153`. For `a/r<=1/2` a looser exact bound is `85/27`. These are specific symmetric axial test-source bounds **not** universal human-heart finite-size bounds, anatomical calibration or a continuum Biot–Savart volume-conductor theorem.
+
+Two sensors at `r-h`, `r+h` observe point-dipole responses whose exact difference is
+
+```
+G = (r-h)^(-3) - (r+h)^(-3)
+  = 2h(3r²+h²)/(r²-h²)³,
+lim_(h→0) G/h = 6r^(-4).
+```
+
+With the two-sensor uniform-mode projector `P=I-11ᵀ/2`, the **cardiac signal** power retained is `G²/2`. At a fixed physical baseline `h` and increasing range, differential cardiac amplitude decays as `r^-4`, not `r^-3`. If residual differential-noise amplitude spectral density remains range-independent and coherent integration is admissible, this implies a conditional `T ∝ r^8` time scaling, versus `T ∝ r^6` for a retained direct dipole mode. A gradiometer must be selected by actual post-filter signal-to-noise, not noise rejection alone.
+
+This is a **P2 mathematical partial closure** of one finite-source axial test case and spatial negative control. It does not establish general source orientation, tissue return currents, Maxwell boundary conditions, finite-heart current bounds, finite source support across all cardiac morphologies, or a measured array. The existing `DiamondMCGFiniteBridgeExact` Fourier finite-mode owner is preserved, but free-space point/finite-dipole fields are not falsely identified with its periodic Fourier model.
+
+**Next P2 highest-alpha cut:** finite vector-dipole source family, explicit sensor 3D position/orientation, per-sensor axial projection and actual anatomical multipole remainder bound over a bounded source/current family; then link the resulting array response to the already-implemented covariance GLS acceptance. P3 resource-matched 100/1000-element array tests only after this source geometry is represented. P1 Agda kernel acceptance and measured covariance remain open.
