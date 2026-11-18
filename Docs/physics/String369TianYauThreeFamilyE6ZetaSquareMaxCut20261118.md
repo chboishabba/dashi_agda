@@ -47,3 +47,15 @@ The same module reuses original physical hypercharge source: up charge +4/6, ele
 ## Attribution rules
 
 Historical Tian, Yau, Candelas, Lutken, Schimmrigk, Atiyah-Singer and heterotic theory original work retains its source authors. Johl Brown/DASHI retains original first-Tits E6/27, chosen Higgs/KK charge and 369/TSFV and zeta-square proof ownership. This round adds a conditional CICY Euler verification, source-joined checker, source-backed central-square reuse, independent bare-KK-charge obstruction, and this audit; no original physical 3-family or SM unification discovery is claimed.
+
+## New explicit invariant representative: freeness independently checked
+
+The extra source-aligned script scripts/check_string369_tian_yau_selected_free_c3_equations.py selects concrete homogeneous equations of bidegrees (3,0),(0,3),(1,1):
+
+G(x)=x0³-x1x2x3+x1³+x2³+x3³,
+H(y)=y0³-y1y2y3+y1³+y2³+y3³,
+F(x,y)=x0y0+x1y1+x2y2+x3y3.
+
+They are exactly preserved by simultaneous cyclic permutations x1→x2→x3→x1 and y1→y2→y3→y1. A projective fixed point for each factor lies either in its invariant projective line [a:t:t:t] or one of its two nontrivial eigenlines. On a nontrivial eigenline the corresponding cubic has value 2 (in a normalized coordinate), so cannot meet the intersection. On the invariant lines the equations reduce to a³+2t³=0, b³+2u³=0, ab+3tu=0. Eliminating a by the resultant gives t³(-2b³+27u³); using b³=-2u³ forces 31t³u³=0. Both t,u must be nonzero for valid projective zeros of the cubics, contradiction. This is an EXACT freeness witness for this selected algebraic complete intersection in characteristic zero, beyond merely assuming the historical existence of a free action.
+
+Crucial boundary: smoothness/transversality of this VERY SAME selected triple remains UNPROVED (and cannot be inferred from generic smoothness or freeness). Until a no-singular-points Jacobian/saturation proof is produced, it cannot be promoted as an independently certified smooth CY3 or physical three-generation vacuum. The original literature independently establishes existence of smooth invariant free-action members; do not silently identify these with the above particularly simple coefficients. Next high-alpha task is the full projective Jacobian/transversality calculation or replace with published exact smooth coefficient data.
