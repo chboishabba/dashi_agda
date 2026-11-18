@@ -76,3 +76,11 @@ import DASHI.Culture.AmyEskridgeBemSteelmanRealisticIdentifiabilityExact
 -- discriminator owners; actual original historical correspondence 2018.
 import DASHI.Culture.AmyEskridgeBemNativeStatisticsDiscriminatorWeldExact
 import DASHI.Culture.AmyEskridgeBemOriginalProtocolCorrespondenceWeldExact
+
+-- New genuine statistics and Aristotle experiment-discriminator consumers.
+-- Tukey IQR fences remain separate from Tukey-Kramer HSD. The latter is
+-- post-hoc only, conditional on sourced pooled ANOVA and quantile bounds.
+import DASHI.Statistics.OneWayANOVAPooledMSEExact
+import DASHI.Statistics.TukeyKramerPostHocExact
+import DASHI.Statistics.TukeyKramerIntervalCalibrationExact
+import DASHI.Culture.AmyEskridgeBemAristotleExperimentalProofSearchWeldExact
