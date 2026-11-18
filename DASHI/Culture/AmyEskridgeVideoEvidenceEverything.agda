@@ -61,3 +61,9 @@ import DASHI.Culture.AmyEskridgeVideoOmittedOriginalResearchWeldExact
 -- Exact 11-US research cohort versus 11-person Fox media roster and
 -- pre-existing R68-R88 programme/custody/FOIA gates; no guessed identity.
 import DASHI.Culture.AmyEskridgeVideoUS11PriorArtReconciliationExact
+
+-- Specific 16:02-32:04 original-source BIDI to already-built temporal
+-- experimental evidence fibres, Mandela-memory controls and conditional
+-- prediction scoring; no new physical-device authority.
+import DASHI.Culture.AmyEskridgeVideoLateSectionEvidenceBidiExact
+import DASHI.Culture.AmyEskridgeVideoTemporalForecastAndPsiMaxCutExact
