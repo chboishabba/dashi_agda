@@ -86,3 +86,25 @@ The regression also verifies the block inverse and a **negative control** in whi
 **P1 exact open proof obligations:** (i) instantiate a concrete SPD matrix over the repo ordered-real/complex finite carrier, (ii) build the block inverse and Schur-variance positivity in Agda, (iii) derive the gain equality rather than pass it as a field, (iv) prove target-preservation versus covariance reduction for spatially filtered arrays, (v) establish calibrated frequency-dependent covariance from raw measured channels. Prior-art complex finite CS owner itself explicitly leaves its concrete ordered-real instance open.
 
 **Phase status:** P0 prior art inventoried, P1 symbolic Schur identity and conditional Agda receipts implemented but **P1 NOT CLOSED**; P2–P6 remain OPEN. No claim of kilometre-scale heartbeat detection, new instrument capability or sourced target attribution is promoted by this cut.
+
+
+## 18 November P1/W1 prior-art correction: do not reinvent Schur
+
+A broader repository and PR audit confirms pre-existing concrete/proof-bearing Schur mathematics:
+
+| Existing owner | What it actually supplies | Applicability boundary |
+| --- | --- | --- |
+| `DASHI/Physics/YangMills/BalabanConstructiveRationalMatrixInverseExact.agda` | Finite rational coordinates, matrix action/product, proved product-action identity and further rational matrix inverse construction | Does not by itself certify an empirical magnetic cross-spectrum or SPD property |
+| `DASHI/Physics/YangMills/BalabanP33FiniteKKTBlockInverseExact.agda` | Specific constrained KKT inverse after coercivity/uniqueness; real matrix work, not merely a label | Geometry and operator not automatically equal to cardiac sensor covariance |
+| `DASHI/Physics/YangMills/BalabanSU2ConditionalCovarianceFormula.agda` | Conditional covariance operator, exact coarse constraint annihilation, and lifted-mode annihilation under explicit compatibility | **Direct reusable** projector logic; maps to actual interference only after physical identification |
+| `DASHI/Physics/YangMills/BalabanFiniteConstraintCovariance.agda` | All-depth inductive `Q C Q*` covariance transport | Physical noise covariance measurements not contained in theorem |
+| `DASHI/Analysis/BlockSchurStructure.agda` | Abstract Schur block definition and determinant socket | Not a constructed inverse or positivity certificate |
+| `DASHI/Physics/YangMills/BalabanSU2ConditionalCovarianceConcrete.agda` | Inverse identities supplied through finite covariance certificate | Does not imply white-noise assumption or measured transfer |
+| `DASHI/Physics/Closure/NSTriadKNRationalCauchySchurComplementRound443Exact.agda` | Rational Cauchy–Schur donor | Check proof signature before transfer to actual covariance |
+| PRs #125, #371, #393 | Generic extraction and finite Schur/KKT/Combes–Thomas development | Not automatically a measured diamond array |
+
+**New thin reuse module:** `DASHI/Physics/QuantumSensors/DiamondMCGExistingSchurCovarianceReuseExact.agda` imports `BalabanSU2ConditionalCovarianceFormula` and directly exports its already-established zero-coarse-response and zero-lifted-mode theorems. A second alias demonstrates the negative control: **a cardiac mode in the rejected lifted sector is erased as well**. These are structural consequences, not a calibration claim. This means the former roadmap statement that DASHI lacked general Schur definitions/operators was too broad.
+
+**Changed max-cut:** avoid proving Schur itself again. Remaining high-value work is (a) the concrete *same-carrier* mapping from sensor cross-spectral covariance to existing finite rational/complex matrix structures, with units; (b) transfer of the actual Schur block inverse/positivity and heart-response vector, without changing its interpretation; (c) information increment proof using those operators; (d) measured `C_n(f)` and held-out source discrimination. Do not use unconditional squared-SNR claims where the physical covariance or target response is uncalibrated.
+
+**Verification:** Existing local exact symbolic scripts rerun with PASS; new Agda module source-authored and uploaded to PR #1530. No Agda executable is available in the current container; **no kernel-checked result for the new module is claimed**. The existing owner's proof is imported rather than paraphrased as a newly proved theorem. P1 remains OPEN pending actual same-object covariance-to-magnetometer identification and new-module Agda checking.
