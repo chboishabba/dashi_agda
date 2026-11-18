@@ -27,7 +27,7 @@ import DASHI.Physics.YangMills.SU2Bracket369OrientationBridgeExact as Bracket
 import DASHI.Physics.YangMills.BalabanCMP109SpatialC3ActionExact as Spatial
 import DASHI.Physics.YangMills.BalabanClayT4GeneratedBrillouinGridExact as Grid
 import DASHI.Physics.YangMills.BalabanSU2LieBracket as Lie
-import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier as Q
+open import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier using\n  (_+R_; _*R_; -R_)
 import DASHI.Mathematics.Topology.HopfQuaternionAxisProjectionExact as Hopf
 import DASHI.Mathematics.Topology.HopfU1CosetOrbitExact as Orbit
 import DASHI.Physics.Electromagnetism.U1SU2GroupTorusExact as U1
@@ -44,7 +44,7 @@ ym369SourceXYZCycleCubed = Spatial.spatialCycle123Cubed
 ym369SourceSU2BracketX :
   ∀ y₁ z₁ y₂ z₂ →
   Lie.bracket1R y₁ z₁ y₂ z₂
-  ≡ Lie.twoR Q.*R ((y₁ Q.*R z₂) Q.+R (Q.-R (z₁ Q.*R y₂)))
+  ≡ Lie.twoR *R ((y₁ *R z₂) +R (-R (z₁ *R y₂)))
 ym369SourceSU2BracketX = Bracket.su2Bracket1IsTwoCrossMinor
 
 -- On a separate real SU2 quaternion carrier, Hopf's axis projection
