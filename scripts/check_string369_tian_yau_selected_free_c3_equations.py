@@ -36,7 +36,9 @@ assert Ft==a*b+3*t*u
 assert s.expand((a**3)*(b**3)-
     ((-2*t**3)*(-2*u**3)))==a**3*b**3-4*t**3*u**3
 assert (-3)**3-(-2)*(-2)==-31
-assert s.resultant(a**3+2,b**3+2 if False else a+3,b)==0 if False else True
+res=s.factor(s.resultant(Gt,Ft,a))
+assert s.simplify(res-t**3*(-2*b**3+27*u**3))==0
+assert s.simplify(res.subs(b**3,-2*u**3)-31*t**3*u**3)==0
 print("PASS: C3 invariance of selected (3,0),(0,3),(1,1) equations")
 print("PASS: no fixed point on nontrivial projective eigenlines")
 print("PASS: trivial-eigenspace equations force impossible 31 t³u³=0")
