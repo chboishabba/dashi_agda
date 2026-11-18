@@ -59,9 +59,28 @@ fixed_curve_genus=(5-1)*(5-2)//2
 assert fixed_curve_genus==6
 isolated_projective_eigenpoints=2
 assert isolated_projective_eigenpoints==2
+# Euler of C3 fixed locus: genus-six curve plus two isolated points.
+euler_fixed=(2-2*fixed_curve_genus)+isolated_projective_eigenpoints
+assert euler_fixed==-8
+euler_original=-200
+# Euler of ordinary topological quotient by Burnside:
+euler_coarse=(euler_original+2*euler_fixed)//3
+assert euler_coarse==-72
+# Orbifold-stringy Euler for an abelian order-three group:
+# (1/|G|)*sum_{commuting (g,h)} chi(X^(g,h)).
+# Of 9 ordered pairs, (e,e) gives chi(X); other 8 give chi(X^C3).
+euler_orbifold=(euler_original+8*euler_fixed)//3
+assert euler_orbifold==-88
+# Traces on degree-5 deformation quotient:
+trace_nonidentity=fixed_poly-fixed_jac
+assert trace_nonidentity==5
+assert (101+2*trace_nonidentity)//3==h21_invariant
+assert (101-h21_invariant)//2==32
 print('PASS: 126 degree-five quintic monomials, 9 fixed, 48 invariant orbits')
 print('PASS: 25 independent degree-five Jacobian ideal monomials, 4 fixed, 11 orbits')
 print('PASS: 37 C3-invariant complex deformations, 1 invariant Kahler class')
+print('PASS: C3 deformation representation splits 37 + 32 + 32')
 print('PASS: untwisted invariant difference 36 != 3; NOT a full orbifold chiral index')
 print('PASS: fixed locus = genus-6 plane quintic curve + two isolated points')
+print('PASS: fixed Euler -8, ordinary quotient Euler -72, orbifold Euler -88')
 print('OPEN: C3 equivariant gauge bundle, full Dirac spectrum, twisted sectors and actual SM')
