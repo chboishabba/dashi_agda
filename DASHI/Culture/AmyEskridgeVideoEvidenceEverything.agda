@@ -71,3 +71,8 @@ import DASHI.Culture.AmyEskridgeVideoTemporalForecastAndPsiMaxCutExact
 -- Bem steelman-v-realistic null: recorded scalar nonidentifiability,
 -- conditional selection bias, distinct source-specific historical receipts.
 import DASHI.Culture.AmyEskridgeBemSteelmanRealisticIdentifiabilityExact
+
+-- Existing DASHI classical statistical/scaffold and canonical experiment
+-- discriminator owners; actual original historical correspondence 2018.
+import DASHI.Culture.AmyEskridgeBemNativeStatisticsDiscriminatorWeldExact
+import DASHI.Culture.AmyEskridgeBemOriginalProtocolCorrespondenceWeldExact
