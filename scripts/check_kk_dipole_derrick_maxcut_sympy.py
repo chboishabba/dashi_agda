@@ -3,7 +3,7 @@
 
 CLASSICAL SOURCES:
  - Static magnetic dipole formula: standard Maxwell magnetostatics.
- - G. H. Derrick, J. Math. Phys. 5 (1964), 1252-1254:
+ - G. H. Derrick, J. Math. Phys. 5 (1964), 1252-1254,\n   DOI:10.1063/1.1704233:
    original static-scalar scaling obstruction, not this script's novelty.
  - T. H. R. Skyrme: quartic derivative stabilization, historical mechanism.
 DASHI NEW: this paired exact symbolic check and explicit scope boundary.
