@@ -7,7 +7,7 @@ Sources:
   Bem (2011), DOI 10.1037/a0021524, reported 53.07%, n=1560 erotic trials.
   Kekecs et al (2023), DOI 10.1098/rsos.191375: 49.89%, n=37836
   (2115 participants, confidence interval 49.11–50.67%; model-dependent).
-  Bem et al (2015), DOI 10.12688/f1000research.9286.2: meta-analysis steelman.
+  Bem et al (2015), DOI 10.12688/f1000research.7177.2: meta-analysis steelman.
   Original source + comparison in the two existing Agda producer files.
 Run: python scripts/check_amy_eskridge_bem_steelman_realistic_sympy.py
 """
