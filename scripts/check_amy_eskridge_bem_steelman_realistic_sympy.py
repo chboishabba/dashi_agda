@@ -47,6 +47,32 @@ def check_exact():
     assert family05 > sp.Rational(36,100)
     assert family05 < sp.Rational(38,100)
 
+    # Extremely important: an 8/9 significant pattern is NOT explained by
+    # the "at least one significant result among nine" calculation.
+    # Under nine *independent predeclared valid* alpha=.05 tests, getting >=8
+    # is tiny, but independence/complete selection are not historical facts.
+    eight_of_nine = sum(
+        sp.binomial(9, k) * sp.Rational(5, 100)**k *
+        sp.Rational(95, 100)**(9-k) for k in (8, 9)
+    )
+    assert eight_of_nine == sp.Rational(3359375, 10**16)
+    assert eight_of_nine < sp.Rational(1, 10**8)
+
+    # Two SYNTHETIC 2x2 tables with identical 828/1560 marginal mean;
+    # one has a strong cohort-rate contrast, the other no cohort contrast.
+    # This actually demonstrates what the marginal percentage cannot infer.
+    hetero = ((430, 350), (398, 382))
+    homogeneous = ((414, 366), (414, 366))
+    assert all(
+        sum(row[0] for row in table) == 828 and
+        sum(sum(row) for row in table) == 1560
+        for table in (hetero, homogeneous)
+    )
+    def cohort_rates(table):
+        return [sp.Rational(a, a+b) for a,b in table]
+    assert cohort_rates(hetero)[0] != cohort_rates(hetero)[1]
+    assert cohort_rates(homogeneous)[0] == cohort_rates(homogeneous)[1]
+
     # There is *no forced* analytic fault: an unselected chance model can
     # generate any given finite outcome with nonzero probability, and an
     # effect model can generate the same outcome; a selected model can too.
@@ -76,6 +102,8 @@ def check_exact():
     print("PASS exact conditional iid tail k>=828 / 1560: %.9f" % float(tail))
     print("PASS independent 9-test alpha=.01 family-wise rate: %.8f" % float(family01))
     print("PASS independent 9-test alpha=.05 family-wise rate: %.8f" % float(family05))
+    print("PASS 8/9 pattern NOT explained by independent 9-test any-hit probability")
+    print("PASS two different 2x2 cohort constructions with exactly 828/1560")
     print("PASS 2023 model-specific CI and 2.40pp gap from Bem")
     return tail, family01, family05
 
@@ -98,6 +126,32 @@ def check_producers():
     assert "sameReportedRate" in bem
     print("PASS original producer reuse and mandatory open source-identity gates")
 
+def check_native_prior_art_and_original_correspondence():
+    native = (ROOT / "DASHI/Culture/AmyEskridgeBemNativeStatisticsDiscriminatorWeldExact.agda").read_text()
+    correspondence = (ROOT / "DASHI/Culture/AmyEskridgeBemOriginalProtocolCorrespondenceWeldExact.agda").read_text()
+    robust = (ROOT / "DASHI/Statistics/Vec15Robust.agda").read_text()
+    inference = (ROOT / "DASHI/Statistics/Vec15Inference.agda").read_text()
+    discriminator = (ROOT / "DASHI/Core/DiscriminatorSynthesisExact.agda").read_text()
+    aggregator = (ROOT / "DASHI/Culture/AmyEskridgeVideoEvidenceEverything.agda").read_text()
+    assert "tukeyOutlierMask15" in robust
+    assert "tukeyFence15" in robust and "iqr15" in robust
+    assert "pValue = countNonZero15 xs" in inference
+    assert "record DiscriminatingLanguageExtension" in discriminator
+    assert "extensionJoinSeparates" in discriminator
+    for name in ["publishedAggregateCollision", "sameReportedNumberNeedsNewDiscriminator",
+                 "joinedOriginalEvidenceCanSeparate", "noTukeyHSDByName"]:
+        assert name in native, name
+    for x in ["bemOriginalFirstExp1PhasesTotal = refl",
+              "bemOriginalExp6PhasesTotal = refl",
+              "criticClarifiedTestMismatch = refl",
+              "noIncorrectCriticTestAsProof"]:
+        assert x in correspondence, x
+    for x in ["AmyEskridgeBemNativeStatisticsDiscriminatorWeldExact",
+              "AmyEskridgeBemOriginalProtocolCorrespondenceWeldExact"]:
+        assert x in aggregator, x
+    print("PASS genuine native discriminator, Tukey robust-v-HSD split and 2018 correspondence")
+
 if __name__ == "__main__":
     check_exact()
     check_producers()
+    check_native_prior_art_and_original_correspondence()
