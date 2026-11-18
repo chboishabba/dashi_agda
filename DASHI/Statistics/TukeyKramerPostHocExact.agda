@@ -119,9 +119,10 @@ validPooled p =
 
 validThreshold : CalibratedRangeThreshold → Bool
 validThreshold t =
-  andBool (lt zero (qSquaredDenominator t))
-  (andBool (lt zero (familyCount t))
-           (independentlyCheckedCalibration t))
+  andBool (lt zero (qSquaredNumerator t))
+  (andBool (lt zero (qSquaredDenominator t))
+  (andBool (lt 1 (familyCount t))
+           (independentlyCheckedCalibration t)))
 
 validAssumptions : ExperimentAssumptions → Bool
 validAssumptions a =
