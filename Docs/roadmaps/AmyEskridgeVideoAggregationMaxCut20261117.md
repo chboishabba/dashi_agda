@@ -10,6 +10,63 @@ This PR is a **new video-source aggregator over existing producers**, not a new 
 
 The transcript provided by the user is titled *She Researched Something THEY DON'T ALLOW. Then She Died* and ends at 32:44. **Original edited video identified:** Be Inspired / `@beinspiredchannel`, 12 May 2026 in channel indexes, `https://www.youtube.com/watch?v=acw16d6CCnY` (video ~32:47). The narrator's personal name, upload timezone and some original clip offsets are still unresolved; do not fabricate them. The 86 itemized claims are source-content paraphrases with timestamp pointers; they are not 86 independently verified findings or 86 source documents.
 
+## 18 November 2026 — TRANSPARENT PSI published-R audit, corrected Bem prior and genuine seeking discriminator
+
+**Highest-alpha source cut** after original Bem EXP1 reproduction: the ACTUAL published final Transparent Psi R analysis `https://github.com/kekecsz/Transparent_psi_RR_materials/blob/master/TPP_Statistical_analysis_script_FINAL.R`, SHA `4ec79f47bf11f73a6094dac1f3860a65f26e7a5d`, has now been retrieved and inspected directly. Its inputs and decisions are not guessed:
+- erotic trials/session **18**; preregistered stop points **37,836; 62,388; 86,958; 111,528; 136,080**; chance point **0.5**; replicate BF01 threshold **25**; smallest effect threshold **+1 percentage point**; ROPE **+0.6 percentage points**.
+- source code `mod_mixed = glmer(sides_match_numeric ~ 1 + (1|participant_ID), family="binomial")`, with 99.75% first-stop CI, **three** restricted one-sided Bayes factors (replication prior, uniform prior, BUJ prior), and agreement across all four primary tests before stopping. The original report says **2,115 people, 37,836 erotic trials, 49.89%** and mixed-model 99.75% **[49.11%,50.67%]**. Original published code and report are different source objects. **A simple pooled binomial or HC3 participant model does not reproduce this exact lme4 GLMM.**
+- source R code **sets `y_prior=828; N_prior=1560`** (lines 176–179), while the original uploaded Bem EXP1 workbook reconstructs **826/1560 pooled erotic hits** and **53.1388889% participant-unweighted**. This propagates the source count discrepancy into the **replication Bayes factor**. Do not overlook it merely because the aggregate inference is insensitive.
+
+### Actually executed independent restricted-beta Bayes-factor sensitivity
+
+Using the original paper's 49.89% **rounded to two decimal percentage points**, stop N=37,836 and the actual source-beta-restriction code, the unrounded integer successes can be **18,875, 18,876, 18,877 or 18,878**, not one magically determined count.
+
+Numerical evaluation with SciPy `betaln` and beta survival probabilities for all four admissible hit totals:
+
+| Transparent Psi possible success count | BF01 using published prior 828/1560 | BF01 using source-original Bem 826/1560 |
+|---|---:|---:|
+| 18,875 | 183.600 | 146.286 |
+| 18,876 | 182.092 | 145.096 |
+| 18,877 | 180.590 | 143.910 |
+| 18,878 | 179.093 | 142.728 |
+
+**Result**: source reconciliation lowers this particular BF01 by ~20.3%, but ALL four possible cases **remain above preregistered BF01>=25**. This is a **source-faithful independent sensitivity** under the exact published restricted-beta likelihood, NOT a raw-data reproduction of the exact original 2023 successes/GLMM/all four sequential stopping rules. `DASHI/Culture/AmyEskridgeTransparentPsiOriginalCodePriorSensitivityExact.agda` proves the integer prior discrepancy and finite rounding-admissibility for each candidate; `scripts/check_transparent_psi_bem_prior_sensitivity.py` calculates and prints these numeric BFs (independently executed local Python equivalent; standalone committed script not run in local checkout).
+
+### Source-specific moderator: TWO ORIGINAL ITEMS, NOT ANALYSED AS PRIMARY HYPOTHESIS
+
+The original Bem (2011) paper, p.410, defines two stimulus-seeking prompts, **“I am easily bored”** and **“I often enjoy seeing movies I've seen before”** (reverse-scored), on five-point scales averaged into one score. Transparent Psi authors state their questionnaire was administered to **match Bem's original**, but data from those questionnaires **were not used in confirmatory hypothesis testing**. The final authors' R code directly verifies:
+- `SS_Q_item_1` + `SS_Q_item_2` are recorded in raw 22-column per-trial data;
+- item 1 is reversed via `6-x`, item 2 remains direct, then the mean is calculated (R lines 416–422);
+- neither `SS_Q` item appears in the `glmer` formula or three primary Bayes factors;
+- the separate *sheep-goat* exploratory script tests ESP **belief** and experimenter/site ASGS, **not the two-item stimulus-seeking × hit-rate moderator**.
+
+**Critical epistemic separation:** the large overall null **rules against a strong general rate increase under the target protocol**, but does not *by itself* evaluate Bem's originally strong in-sample **>2.5 high-stimulus-seeking group**. The two questionnaire structures are likely comparable; original source measure texts, translated administered variants, item order and scoring must be audited before claiming fully interchangeable source constructs. Any test of the high-seeking subgroup now run on known 2023 outcomes is **retrospective exploratory analysis**, not preregistered. Future independent preregistered replication must freeze the threshold, language and interaction beforehand.
+
+**New runnable original-source acquisition/replay command**: `scripts/replay_transparent_psi_original_erotic_and_seeking.py` supports **all 11 original born-open dated CSV shards** (source R sorting rule and dual header format), or **single OSF combined CSV**; applies exact published test account lab exclusions, retains partial sessions, cuts first **37,836** erotic trials, verifies 2,115 unique participants and 49.89% rounded source endpoint, rescales the 2 questionnaire items exactly per published R, calculates exploratory high/low hit rates, correlation and participant-aggregated HC3 binomial regression, with explicit `NOT original preregistered GLMM` warnings and **no participant ID release**. Its **full raw replay remains UNRUN**, because public Github 11 originals are 118 KB–8.8 MB each and the connector imposes oversized-file limits; OSF combined raw file and internet in the local runtime did not resolve. **Google Drive/Sheets not used or modified** (LAST RESORT per user).
+
+### 2023 original independent audit corrections are not optional
+
+Published correction: Kekecs et al, August 2023, DOI **10.1098/rsos.231080**, https://pmc.ncbi.nlm.nih.gov/articles/PMC10427810/. The authors explicitly concede five audit findings: remote automated GitLab code mirrors did not operate as preregistered; server access logs were overwritten; auditor independence criterion was relaxed; at least **5** sessions were restarted; and **2** test-account IDs added ten days after data collection began (**81** raw records, **19** erotic trial rows), subsequently excluded. This requires a provenance-correct code-version audit and cannot be replaced by the original 2023 paper's stronger unqualified claims about real-time auditability. The authors argue these deviations do not alter the substantive negative result; the numeric impact of 19/37,836 is at most ~0.050% of the analytic sample as a simple record-fraction bound, **not a proof that all possible software-integrity errors are that small**. `AmyEskridgeTransparentPsiCorrectionAndModeratorWeldExact.agda` encodes source-specific correction/negative controls, not fictional empirical closeout.
+
+### 69-replication steelman has an ORIGINAL BF SOURCE CONFLICT
+
+The original 2015/2016 meta-analysis **Table 1** reports the independent 69-study Bayes factor **3,853**. However, **Bem's January 25, 2018 email** transcribed by Schimmack explicitly states **3.85**. Distinct source identities, difference of approximately three orders of magnitude; **do not silently harmonise**. Both source figures must be independently checked against the meta-analysis statistical model and the 90-study data, available as `FFMADatabase.xlsx`, https://zenodo.org/records/14171311 . The stable database MD5 reported on Zenodo is `ebf029d8aef26c9760de2184be173c86`; **workbook bytes not acquired**, so numerical 69-study meta-replay is still OPEN. A quoted letter is not the table's mathematical source.
+
+### Additional direct Bem original-source robustness checks executed
+
+Independent HC3 analyses on actual uploaded `exp1.xlsx` 100 participant records (N=100, **not** synthetic):
+- original Pearson source r=.182149, one-sided p=.034855 reproduced;
+- HC3 OLS `hit_pct ~ seeking`: +3.177 percentage points per scale point, **two-sided** p=.06715 (95% CI [-0.224,6.579]); phase+sex adjusted +3.205, **two-sided** p=.06478 (95% CI [-0.196,6.607]); adding non-erotic controls p=.06461;
+- HC3 source `seeking × session-phase` interaction p=.11184 (two-sided), i.e. no established differential slope between the 40/60 session regimes;
+- stratified (session phase × sex) **20,000** Monte Carlo permutations, fixed seed 27717, **one-sided** p=.042998 for original source Pearson r;
+- high-seeking mean 57.92% versus low 50.83% in first phase; high 57.32% versus low 49.42% in second phase. All are IN-SAMPLE and EXPLORATORY.
+
+These results **do not prove the effect has disappeared**: two-sided HC3 p≈.065 is not comparable without directional correction to the original *one-sided* hypothesis, and Monte Carlo stratified one-sided permutation remains near .043. They illustrate genuine method sensitivity and the need for an independent held-out moderator trial. Reproducible source-aware script: `scripts/check_bem_exp1_moderator_covariate_robustness.py`; local equivalent was executed on the original uploaded XLSX; no participant rows uploaded to GitHub.
+
+**Reprioritisation after this round:** P1a source-backed Bem primary test **CLOSED**; **P1b highest action = obtain Transparent Psi complete original 11 raw shards / OSF CSV and actually execute script + original authors' R lme4 + 3 BFs with updated correction-aware exclusions**; **P1c = assess 2023 stimulus-seeking interaction as explicitly exploratory, document questionnaire item equivalence, then design new independently preregistered interaction test**; **P1d = 69-study database and exact original statistical/selection robustness**. Stop adding generic statistical abstractions; preserve source roles and model assumptions. Agda kernel remains **NOT RUN**.
+
+---
+
 ## 18 November 2026 — primary EXP1 XLSX ACQUIRED and 2011 participant-level statistic REPRODUCED
 
 **Source acquired in this conversation:** original `exp1.xlsx`, 100-row `#1 Precog Detection of Erotica` worksheet, 10 source columns including session, 2006 date, erotic/control hit percentages and stimulus-seeking score. Source SHA-256:
