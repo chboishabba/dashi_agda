@@ -12,6 +12,7 @@ module DASHI.Physics.QuantumSensors.SuperconductingRotorSIExperimentRegimeExact 
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Int using (pos)
 open import Agda.Builtin.String using (String)
 import DASHI.Physics.Units.SI as SI
 
@@ -26,7 +27,7 @@ AngularAcceleration =
 
 MomentOfInertia : SI.Dimension
 MomentOfInertia =
-  SI.dim (SI.pos 2) SI.one SI.zeroI SI.zeroI
+  SI.dim (pos 2) SI.one SI.zeroI SI.zeroI
          SI.zeroI SI.zeroI SI.zeroI
 
 -- Reading rotation, RF pump, trapped flux, cryogenic phase and mechanical
