@@ -13,11 +13,11 @@ module DASHI.Culture.AmyEskridgeVideoTemporalForecastAndPsiMaxCutExact where
 --
 -- Psychology and PAA must not be conflated:
 -- Bem (2011) 9 cognitive-affective experiments DOI 10.1037/a0021524;
--- Kekecs et al (2023) Royal Society Open Science DOI 10.1098/rsos.221380
+-- Kekecs et al (2023) Royal Society Open Science DOI 10.1098/rsos.191375
 -- https://pmc.ncbi.nlm.nih.gov/articles/PMC9890107/
 -- 10 labs/2115 valid people, 49.89% correct vs 53.07% in Bem Exp 1;
 -- Walleczek et al (2025) PLOS ONE DOI 10.1371/journal.pone.0335330
--- Study 2 claimed confirmatory success; later Study 3 had 50.07%,
+-- Study 2 reported confirmatory below-chance guessing (49.65%, p=0.013); later Study 3 had 50.07%,
 -- N=217800, p=0.496, failed to reproduce Study 2.
 -- Distinct physiology families:
 -- Mossbridge/Tressoldi/Utts (2012) DOI 10.3389/fpsyg.2012.00390;
@@ -171,9 +171,9 @@ transparentPsi2023Source : Attribution.AttributedSource
 transparentPsi2023Source = Attribution.mkDOISource
   "Zoltan Kekecs and collaborators"
   "Raising the value of research studies in psychological science by increasing the credibility of research reports: the transparent Psi project"
-  "Royal Society Open Science 10:221380"
+  "Royal Society Open Science 10(2):191375"
   "2023"
-  "10.1098/rsos.221380"
+  "10.1098/rsos.191375"
   "https://pmc.ncbi.nlm.nih.gov/articles/PMC9890107/"
   Attribution.academicArticleSource
   "Multi-laboratory, preregistered Bem Experiment 1 replication: 10 labs, 2115 valid participants, 49.89% correct; original comparator 53.07%"
@@ -188,7 +188,7 @@ walleczek2025Source = Attribution.mkDOISource
   "10.1371/journal.pone.0335330"
   "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0335330"
   Attribution.academicArticleSource
-  "Study 2 claimed a positive confirmatory result under its protocol; Study 3 failed to reproduce: 50.07%, 217800 trials, reported p=0.496"
+  "Study 2 reported 49.65% erotic-trial successes (below chance, p=0.013); Study 3 did not replicate: 50.07%, 217800 erotic trials, p=0.496"
   Attribution.publicAttribution
 
 mossbridge2012Source : Attribution.AttributedSource
