@@ -64,3 +64,25 @@ New source: `DASHI/Physics/QuantumSensors/DiamondMCGArrayInformationWeldExact.ag
 **Gate change:** P1/W1 moves from symbolic two-channel analysis to source-authored general finite-support theorem interfaces and a genuine abstract monotonicity proof, with exact-head kernel validation, inverse-covariance whitening construction, and instance-specific optimality still OPEN. P2–P6 remain OPEN.
 
 **Highest-value next cut:** construct an actual positive-definite complex/real covariance-to-whitening owner (not an unexplained isometry), then instantiate all-N norm/score identities; prove covariance block extension via Schur complement, and quantify signal loss for spatial nulling using a projection theorem. Only then promote P1 to kernel-checked optimal linear detection.
+
+
+## P1/W1 continuation: Schur-complement marginal information, 18 November 2026
+
+**New evidence-bearing exact regression:** `scripts/check_diamond_mcg_schur_increment_exact.py`. Run with `python3 scripts/check_diamond_mcg_schur_increment_exact.py`; SymPy local check PASS for exactly rational positive-definite covariances built from `LLᵀ` with 1, 2, 3, 4, 6 and 10 existing channels; also checks symbolic arbitrary 2-channel covariance and the common-mode-null target-loss case.
+
+For old covariance `C`, old signal `s`, new-channel cross covariance `c`, scalar new noise variance `d`, and new-channel cardiac response `t`, define:
+```
+v = d - cᵀ C⁻¹ c
+u = t - cᵀ C⁻¹ s
+I_old = sᵀ C⁻¹ s
+I_new - I_old = u² / v
+```
+For jointly positive-definite covariance, `v>0`; hence information cannot decrease. A sensor gives **zero new information exactly when its conditional cardiac innovation is zero**. This corrects the naive idea that an individually sensitive added channel necessarily improves cardiac detection. All of these expressions are conditional on the same noise model and jointly calibrated physical response.
+
+The regression also verifies the block inverse and a **negative control** in which `t=cᵀ C⁻¹ s` (the extra channel contributes exactly zero information), rather than just testing positive examples. Rational regressions do not constitute an all-N Agda proof.
+
+**New Agda source:** `DASHI/Physics/QuantumSensors/DiamondMCGSchurInformationIncrementExact.agda`. This is an explicitly conditional information-identity and positivity *certificate consumer*, not a derivation of the Schur block inverse from matrix algebra. It supplies `schurAdditionDoesNotDecreaseInformation` and `redundantSensorAddsNoInformation` from the named premises. Source committed, **Agda executable unavailable, kernel verification not claimed**.
+
+**P1 exact open proof obligations:** (i) instantiate a concrete SPD matrix over the repo ordered-real/complex finite carrier, (ii) build the block inverse and Schur-variance positivity in Agda, (iii) derive the gain equality rather than pass it as a field, (iv) prove target-preservation versus covariance reduction for spatially filtered arrays, (v) establish calibrated frequency-dependent covariance from raw measured channels. Prior-art complex finite CS owner itself explicitly leaves its concrete ordered-real instance open.
+
+**Phase status:** P0 prior art inventoried, P1 symbolic Schur identity and conditional Agda receipts implemented but **P1 NOT CLOSED**; P2–P6 remain OPEN. No claim of kilometre-scale heartbeat detection, new instrument capability or sourced target attribution is promoted by this cut.
