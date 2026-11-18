@@ -59,3 +59,14 @@ Under invertible congruence the inertia is `inertia(G)=inertia(g)+(1,0)`. Theref
 - [ ] Exact kernel and original-source script runtime receipts on pinned heads; no new Agda kernel proof claimed for this document.
 
 **Result:** The earlier exploratory model search should be restored as competing signature candidates, with (3,1) a **conditional physically selected interpretation**, not an unconditional unique output of the original numerical signatures. This does not weaken the mathematical conditional Lorentz uniqueness lemma; it clarifies its premises and removes circular source-to-physics promotion.
+
+## Mandatory further pre-existing exact KK owner (found during audit)
+
+Do NOT construct a new pointwise KK shear or horizontal Schur theorem:
+- `DASHI/Physics/Foundations/TSFVKKSelectedHorizontalMetricSchurExact.agda` has `actualKKHorizontalReductionIsOriginalFourMetric`, `KK5ExpandedBlocks`, `KK5GaugeShiftPreservesBilinear`.
+- `DASHI/Physics/Foundations/TSFVKKFiveMetricInvertibleShearExact.agda` has literal `kkMetricShear`, `kkMetricUnShear`, left/right inverse identities and `kkActualFiveBilinearIsInvertibleShearPullback`. It proves the pulled-back KK 5D quadratic is exactly the horizontal g4 plus fibre square *for every supplied base form*, not just an assumed 3+1 mask. It is tagged Agda `--safe` but a new pinned exact-head compiler receipt has not been obtained here.
+- Existing parent modules correctly leave real inertia/Sylvester theorem, positive radion, nondegenerate physically measured base, global circle bundle and original 5D Einstein field equations open.
+
+These prove the **algebraic same-metric bridge for both competing base options**. Under independent positive-fibre and real-inertia hypotheses, `(3,1)->(4,1)` and `(4,0)->(5,0)` are equal-status consequences; selecting one requires physical base-source measurements. Neither branch is eliminated by group U1↪SU2. A hypothetical six-dimensional (5,1) requires another positive fibre or a different six-metric, not this five-dimensional shear alone.
+
+The revised implementation priority is **not** a generic Schur proof or U1 subgroup reimplementation. It is actual original observer/closure samples -> metrically calibrated base `g4` -> source-derived physically meaningful signature and circle/radion positivity -> SAME KK metric owner -> SAME selected 369/Wilson YM field. The original signature selection must not be smuggled into `g4`.
