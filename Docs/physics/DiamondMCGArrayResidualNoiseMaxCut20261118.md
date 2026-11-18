@@ -163,3 +163,14 @@ With the two-sensor uniform-mode projector `P=I-11ᵀ/2`, the **cardiac signal**
 This is a **P2 mathematical partial closure** of one finite-source axial test case and spatial negative control. It does not establish general source orientation, tissue return currents, Maxwell boundary conditions, finite-heart current bounds, finite source support across all cardiac morphologies, or a measured array. The existing `DiamondMCGFiniteBridgeExact` Fourier finite-mode owner is preserved, but free-space point/finite-dipole fields are not falsely identified with its periodic Fourier model.
 
 **Next P2 highest-alpha cut:** finite vector-dipole source family, explicit sensor 3D position/orientation, per-sensor axial projection and actual anatomical multipole remainder bound over a bounded source/current family; then link the resulting array response to the already-implemented covariance GLS acceptance. P3 resource-matched 100/1000-element array tests only after this source geometry is represented. P1 Agda kernel acceptance and measured covariance remain open.
+
+
+### P2 3D orientation / directional readout continuation
+
+Added `scripts/check_diamond_mcg_3d_source_response_exact.py`, independently executed locally with SymPy: **PASS**. It checks the *classical free-space magnetic dipole* geometric field `B=(mu0/4pi)[3(m·R)R-|R|²m]/|R|^5`; symmetric trace-free dipole tensor, proper rotation covariance, axial and equatorial field values, a zero-response NV axis when orthogonal to the field, recovery on a transverse measurement axis, and consistent reduction to the symmetric finite axial pair already tested.
+
+**Important domain repair discovered during checking:** an observer at `r-a` must satisfy `r>a>0`; naive simplification of `(r-a)^2` to `(r-a)` under a square root without this premise is invalid. The checker establishes the positive-separation identity before substituting the domain-constrained coordinate. No unqualified absolute-value elimination is permitted.
+
+This demonstrates that simply increasing channel count is insufficient if every NV axis is blind to the physically possible source orientation. P3 must optimize angular sensing response *jointly* with noise/cost and spatial positions. Both P2 scripts use **magnetostatic test fixtures**, not experimental or anatomical heart-current distributions, not actual human cardiac moments, and not a proven equivalence to the existing periodic Fourier Biot–Savart representation.
+
+Executed SymPy controls now include finite-extent axial source field, exact finite-size error and asymptotics, two-sensor gradiometry `r^-4` field decay, 3D rotation covariance, and directional detection nulls. **P2 is partially advanced but NOT closed.** Anatomical 3D source geometry, tissue conductivity, return-current closure and uniform multipole bounds across the source family remain open. No CI or Agda kernel acceptance is claimed per this round's SymPy-only instruction.
