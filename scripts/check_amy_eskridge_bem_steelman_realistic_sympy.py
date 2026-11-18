@@ -135,6 +135,9 @@ def check_native_prior_art_and_original_correspondence():
     aggregator = (ROOT / "DASHI/Culture/AmyEskridgeVideoEvidenceEverything.agda").read_text()
     assert "tukeyOutlierMask15" in robust
     assert "tukeyFence15" in robust and "iqr15" in robust
+    assert "https://replicationindex.com/wp-content/uploads/2018/01/exp1.xlsx" in correspondence
+    assert "https://replicationindex.com/wp-content/uploads/2018/01/exp6.xlsx" in correspondence
+    assert "bemJanuary2018MetaReply = published-steelman-reply\\n  69 31 38 false true" in correspondence
     assert "pValue = countNonZero15 xs" in inference
     assert "record DiscriminatingLanguageExtension" in discriminator
     assert "extensionJoinSeparates" in discriminator
@@ -144,7 +147,10 @@ def check_native_prior_art_and_original_correspondence():
     for x in ["bemOriginalFirstExp1PhasesTotal = refl",
               "bemOriginalExp6PhasesTotal = refl",
               "criticClarifiedTestMismatch = refl",
-              "noIncorrectCriticTestAsProof"]:
+              "noIncorrectCriticTestAsProof",
+              "independentStudyPartitionCount = refl",
+              "noIndependentSourceReplayYet = refl",
+              "noUnfetchedDataAsReproduction"]:
         assert x in correspondence, x
     for x in ["AmyEskridgeBemNativeStatisticsDiscriminatorWeldExact",
               "AmyEskridgeBemOriginalProtocolCorrespondenceWeldExact"]:
