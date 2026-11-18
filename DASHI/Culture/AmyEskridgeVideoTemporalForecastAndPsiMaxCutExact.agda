@@ -36,6 +36,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.String using (String)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Maybe using (Maybe; nothing; just)
 open import DASHI.Core.Prelude using (⊥)
 import DASHI.Core.AttributedSourceCore as Attribution
 import DASHI.Culture.AmyEskridgeVideoOriginalClipLineageExact as Clips
@@ -73,7 +74,7 @@ record ForecastProvenance : Set where
     predictedEarliestYear : Nat
     predictedLatestYear : Nat
     predictionKind : ReportModality
-    exactProbabilityRecorded : Bool
+    frozenProbabilityPerThousand : Maybe Nat
     fixedEventDefinitionRecorded : Bool
     eventSourceIndependentlyAuthenticated : Bool
     originalPublicSource : String
@@ -84,7 +85,7 @@ burischConditionalReassembly2007 = forecast-provenance
   Clips.clip15
   2007 2016 2017
   quotedConditionalExpectation
-  false false false
+  nothing false false
   "Burisch expected that separated alleged device components would probably be reassembled sometime around 2016/2017; no independent outcome record supplied"
 
 precedesPredictionWindow :
@@ -93,14 +94,27 @@ precedesPredictionWindow :
     ≡ true
 precedesPredictionWindow = refl
 
+validProbability : Maybe Nat → Bool
+validProbability nothing = false
+validProbability (just p) = atMost p 1000
+
 isScorable : ForecastProvenance → Bool
 isScorable f =
-  and (exactProbabilityRecorded f)
+  and (validProbability (frozenProbabilityPerThousand f))
   (and (fixedEventDefinitionRecorded f)
        (eventSourceIndependentlyAuthenticated f))
 
 burischIsUnscorable : isScorable burischConditionalReassembly2007 ≡ false
 burischIsUnscorable = refl
+
+-- A synthetic fully frozen forecast illustrates a valid evidence contract;
+-- its originalClip field is an EXAMPLE LOCATOR ONLY, not attributed testimony.
+syntheticPrecommittedFixture : ForecastProvenance
+syntheticPrecommittedFixture = forecast-provenance
+  Clips.clip15 2007 2016 2017
+  precommittedSpecificEvent
+  (just 900) true true
+  "SYNTHETIC unit test, not Dan Burisch or actual experimental evidence"
 
 -- A mathematically proper Brier score applies ONLY AFTER a dated, frozen
 -- probability and independently decided binary target are available.
@@ -122,6 +136,22 @@ syntheticWrongHighConfidence = refl
 syntheticCoinFlip :
   brierMilliSquared 500 true ≡ 250000
 syntheticCoinFlip = refl
+
+-- Score application is uncallable with a raw unregistered claim: returning
+-- nothing is a typed absence of scoring evidence, NOT an event nonoccurrence.
+applyFrozenBrier :
+  ForecastProvenance → Bool → Maybe Nat
+applyFrozenBrier forecast observed with isScorable forecast | frozenProbabilityPerThousand forecast
+... | true | just p = just (brierMilliSquared p observed)
+... | _ | _ = nothing
+
+burischOriginalCannotBeAssignedForecastScore :
+  applyFrozenBrier burischConditionalReassembly2007 true ≡ nothing
+burischOriginalCannotBeAssignedForecastScore = refl
+
+syntheticFrozenForecastIsScoreable :
+  applyFrozenBrier syntheticPrecommittedFixture true ≡ just 10000
+syntheticFrozenForecastIsScoreable = refl
 
 -- The score operator does not permit data-dependent cherry-picking.
 data ScorableStatus : Set where
