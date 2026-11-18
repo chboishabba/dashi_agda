@@ -27,7 +27,8 @@ import DASHI.Physics.YangMills.SU2Bracket369OrientationBridgeExact as Bracket
 import DASHI.Physics.YangMills.BalabanCMP109SpatialC3ActionExact as Spatial
 import DASHI.Physics.YangMills.BalabanClayT4GeneratedBrillouinGridExact as Grid
 import DASHI.Physics.YangMills.BalabanSU2LieBracket as Lie
-open import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier using\n  (_+R_; _*R_; -R_)
+open import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier using
+  (_+R_; _*R_; -R_)
 import DASHI.Mathematics.Topology.HopfQuaternionAxisProjectionExact as Hopf
 import DASHI.Mathematics.Topology.HopfU1CosetOrbitExact as Orbit
 import DASHI.Physics.Electromagnetism.U1SU2GroupTorusExact as U1
