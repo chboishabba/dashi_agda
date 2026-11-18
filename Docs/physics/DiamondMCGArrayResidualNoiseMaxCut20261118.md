@@ -266,3 +266,30 @@ Under correlated-noise cases the optimizer convergence flag is false at its iter
 **Next gates in strict steelman order:** (1) replace model-only `C` by measured frequency-dependent residual cross-spectral covariance and include NV transfer/readout costs; (2) extend from two planar macro-groups to full finite array positions/axis distributions with physically allowed NV crystal orientations; (3) optimize over the strongest source geometry/current waveform consistent with primary cardiac evidence, including sensor-to-source geometry and anatomy; (4) optimize spectral template and finite coherent/partially coherent integration under validated phase stability; (5) only then report range and statistical detection/attribution. Worst-case eigenvalue and minimax FOV coverage remain separate *secondary* robustness gates.
 
 **Verification scope:** exact theoretical identities and comparable numerical cases were executed locally with SymPy/NumPy/SciPy before commit; this is **not** an exact Git-blob replay or an Agda kernel check. No CI requested.
+
+
+## 18 November: CRYOGENIC RECEIVER / ABSOLUTE-ZERO PRIOR ART (steelmanned)
+
+**Why this is a separate high-alpha branch, not more banal array geometry:** Omar et al., *Science Advances* 2026 (DOI 10.1126/sciadv.aeg5281) demonstrated room-temperature NV-diamond cardiac magnetic recording, reported sensitivity 6–26 pT/sqrt(Hz). Cooler sensors may be a different hardware class (e.g. superconducting quantum interference devices), not simply NV diamond with a lower scalar noise knob. The physical upper-limit steelman must compare receiver architectures and their measured cardiac-band noise rather than repeatedly discussing covariance/spacing.
+
+**Existing Agda owner:** PR #701, `DASHI/Physics/QuantumVacuum/ZeroPointModeHyperfabricExact.agda`, `HarmonicOscillatorDoubledEnergyExact.agda`, `ZeroPointExtractionFirewallExact.agda`. The oscillator law `E_n=(n+1/2)hf` distinguishes ground energy from thermal excitations and forbids interpreting nonzero vacuum energy as extractable work. This is the relevant formal spine; it does *not* imply a universal magnetic instrument PSD or a 0-Kelvin noise-free detector.
+
+**New exact SymPy/model checker:** `scripts/check_diamond_mcg_cryo_zero_point_steelman.py`. Tests ground/excitation split, symmetrized equilibrium harmonic-mode `coth(hf/2kT)` identity, extra sensor standoff scaling, and conditional coherent threshold time. In local SymPy, `coth` must be rewritten as exponentials before simplification to zero; fixed in commit 158ee49b. Exact committed blob not independently run in this runtime. No Agda kernel acceptance, measured cryogenic PSD or SQUID-array demonstration is claimed.
+
+For `f=1 Hz`, the crossover `hf/k_B ≈ 4.799×10^-11 K`. Thus a 4-K magnetic receiver has *enormous* thermal occupancy of **an ideal equilibrium 1-Hz oscillator**. This does not equate all cardiac-band external magnetic interference to blackbody noise: electrical/magnetic receiver noise physics must be separated by mechanism (spin projection, photon readout, Johnson currents, superconductor flux fluctuations, mechanical vibration, drift, environmental and room-temperature human/body fluctuations). Cryogenic NV spin `T2` improvements with dynamic decoupling cannot simply be carried to quasi-DC heartbeat sensing because the pulse filter may suppress the heart frequency too.
+
+**Receiver sensitivity scenario, not a physical prediction:** retain the illustrative 50 pT amplitude at 0.1 m, ideal dipole `r^-3`, 1000 statistically independent identical channels, coherent SNR threshold 5, and unrealistically unlimited phase stability. For single-channel ASD 7 pT/sqrt(Hz), 1 fT/sqrt(Hz), or 0.01 fT/sqrt(Hz), conditional integration time scales with noise ASD squared. Reference results:
+
+| Per-channel ASD | 10 m time | 100 m time | 1 km time |
+| --- | ---: | ---: | ---: |
+| 7 pT/sqrt(Hz) | 15.53 years | 15.53 million years | 15.53 trillion years |
+| 1 fT/sqrt(Hz) (SQUID-like receiver scenario) | ~10 seconds | ~116 days | ~316,881 years |
+| 0.01 fT/sqrt(Hz) (extreme hypothesis) | ~1 ms | ~17 minutes | ~31.7 years |
+
+The 1000 independent per-channel sensitivities assume **1000× hardware**, not fixed total resources; 0.01 fT/sqrt(Hz) is an extreme mathematical input, not an empirically established diamond or SQUID MCG sensor. These numbers do not account for 1/f noise, coherence loss, source variability, environmental fields, or look-elsewhere search thresholds. A stronger source/hardware model can shift these; present as conditional envelope only, not impossibility theorem.
+
+Cooling incurs cryostat vacuum windows, optical/microwave power and cooling-budget penalties. For a dipole at sensor distance `r`, additional cold-stage standoff `d` reduces amplitude by `(r/(r+d))^3` and increases same-ASD ideal integration time by `(1+d/r)^6`; a marginally stronger receiver might lose the gain at close range. The *human source remains near physiological temperature*, not near 0 K. Body thermal current and dynamic biological signals are independent environmental source terms.
+
+**Revised steelman priority:** P3/P5 compare **room NV, cryogenic NV, SQUID, alternative atomic receivers** against actual sensitivity PSD across ~0.5–40 Hz and measured environmental covariance, including stand-off, total readout/cooling resources, quantum readout floor and signal coherence. Only after a receiver architecture survives these comparisons is detailed spatial/FOV layout optimisation worth doing. P4 needs realistic noncoherent/semicoherent heartbeat integration; no 1-km detection promoted.
+
+**Primary references used in analysis:** Omar et al. 2026 DOI 10.1126/sciadv.aeg5281; *Spin Readout Techniques of the Nitrogen-Vacancy Center in Diamond* (2018); *Diamond surface engineering for molecular sensing with nitrogen—vacancy centers* (2022); NIST cryogenic SQUID sources. Source search and publications do not supply a measured best receiver-plus-human-heart 1-km error budget.
