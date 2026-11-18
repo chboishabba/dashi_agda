@@ -5,9 +5,12 @@ module DASHI.Culture.AmyEskridgeBemSteelmanRealisticIdentifiabilityExact where
 -- Bem used selective analysis, manipulated data, or falsified results.
 --
 -- Original: Daryl J. Bem, JPSP 2011, DOI 10.1037/a0021524.
--- Reported comparison: 53.07% of 1560 erotic trials in Bem Experiment 1
--- (published percentage may not be an integer raw count: the reported
--- percentage is used only as the reported comparison).
+-- Legacy secondary Transparent Psi comparison uses 53.07% for Bem.
+-- The actual uploaded original EXP1.xlsx reproduces Bem's 2011 53.1%
+-- unweighted participant mean as 53.1388889% (t(99)=2.5133) and yields
+-- 826/1560 pooled erotic successes. Therefore the earlier 53.07%
+-- scalar model below is a SECONDARY COMPARATOR, not original-source
+-- trial-level data. The new OriginalWorkbookReplayExact is authoritative.
 -- Replication: Kekecs et al 2023, Royal Society Open Science,
 -- DOI 10.1098/rsos.191375, 49.89% of 37836 erotic trials.
 -- Source: https://pmc.ncbi.nlm.nih.gov/articles/PMC9890107/
@@ -72,6 +75,8 @@ record ReportedExp1 : Set where
     reportedTrialCount : Nat
 open ReportedExp1 public
 
+-- Legacy secondary comparator only; direct workbook authority is in
+-- AmyEskridgeBemExp1OriginalWorkbookReplayExact.
 publicExperimentOneReport : ReportedExp1
 publicExperimentOneReport = report 5307 1560
 
