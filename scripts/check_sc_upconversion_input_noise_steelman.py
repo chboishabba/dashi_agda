@@ -21,6 +21,12 @@ def main():
     q=s.symbols("q",positive=True)
     assert s.simplify(s.solve(s.Eq(improvement2,q**2),nread)[0]-
       (q**2*(nin+(nside+npump)/eta**2)-nin))==0
+    # Ideal single-pole parametric gain-bandwidth tradeoff:
+    gamma,k=s.symbols('gamma k',positive=True)
+    linewidth=gamma-k
+    ideal_gain=gamma/linewidth
+    assert s.simplify(ideal_gain*linewidth-gamma)==0
+    assert s.simplify(linewidth.subs(k,gamma*(1-s.Rational(1,1076)))/gamma-s.Rational(1,1076))==0
     target=1076
     assert target**2==1157776
     assert 1/s.sqrt(s.Rational(1,1_000_000))<target
