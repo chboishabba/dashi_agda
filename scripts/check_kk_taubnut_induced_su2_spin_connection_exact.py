@@ -82,3 +82,24 @@ print("PASS: one chiral su2 curvature sector vanishes")
 print("PASS: other chiral sector self-dual and genuinely nonabelian")
 print("PASS: commutator (-1/16,0,0) with [u,v]=2 cross")
 print("OPEN: global spin bundle/connection, YM identification, stability")
+
+# Generator normalization bridge to Dunajski (2013), section 2:
+# his [t_i,t_j]=-(1/2) eps_ijk t_k; native DASHI has [e_i,e_j]=2 eps e_k.
+# One exact isomorphism is t_i = -e_i/4 (for matched epsilon orientation).
+basis=s.eye(3)
+def native_bracket(u,v):
+    return 2*u.cross(v)
+t=[-basis[:,i]/4 for i in range(3)]
+for i,j,k in ((0,1,2),(1,2,0),(2,0,1)):
+    assert native_bracket(t[i],t[j])==-s.Rational(1,2)*t[k]
+# Under the explicitly stated R_23=R_14 self-dual index convention:
+# C_i = R_jk + R_i4 = 2 R_jk, so paper's curvature coefficient
+# F^i=(1/2)eps_ijk R_jk=C_i/2 in t_i, hence -C_i/8 in native e_i.
+normalized12=-chi(1,0,1)/8
+normalized13=-chi(1,0,2)/8
+assert normalized12==s.Matrix([0,0,-s.Rational(1,32)])
+assert normalized13==s.Matrix([0,-s.Rational(1,64),0])
+assert native_bracket(normalized12,normalized13)==s.Matrix([-s.Rational(1,1024),0,0])
+print("PASS: Dunajski t_i=-e_i/4 matches native quaternion [e_i,e_j]=2 eps e_k")
+print("PASS: matched chiral curvature generator-scaled bracket = -e1/1024")
+print("CAUTION: generator normalization does not yet fix physical YM coupling/trace")
