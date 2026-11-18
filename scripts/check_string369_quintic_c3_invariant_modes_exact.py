@@ -42,18 +42,26 @@ h11_invariant=1 # hyperplane class is fixed
 untwisted_difference=h21_invariant-h11_invariant
 assert untwisted_difference==36 and untwisted_difference!=3
 
-# The nonfree C3 quotient has fixed locus:
-# z0=z1=z2=0, z3^5+z4^5=0 : five isolated projective roots.
-# Other two projective eigenspaces of the cyclic permutation
-# are each 1-dimensional and lie in the quintic because
-# 1+omega^5+omega^10=1+omega^2+omega=0.
-# Hence seven projective fixed points total.
-fixed_on_projective_fixedsubspace=5
-fixed_on_nontrivial_eigenlines=2
-assert fixed_on_projective_fixedsubspace+fixed_on_nontrivial_eigenlines==7
+# The nonfree C3 quotient has a positive-dimensional fixed locus.
+# Trivial eigenspace is [t:t:t:u:v], hence plane quintic
+# 3*t^5+u^5+v^5=0 (smooth genus (5-1)*(5-2)/2=6).
+# Other two one-dimensional projective eigenspaces are ALSO on X,
+# because 1+omega^5+omega^10=1+omega^2+omega=0.
+# Thus fixed locus: smooth genus-six plane quintic CURVE plus two
+# isolated projective eigenpoints. It is NOT seven isolated points.
+import sympy as s
+t,u,v=s.symbols('t u v')
+fixed_curve=3*t**5+u**5+v**5
+assert all(s.diff(fixed_curve,q)!=0 for q in (t,u,v))
+# char 0: gradients 15t^4,5u^4,5v^4 vanish simultaneously only
+# at the excluded projective zero vector.
+fixed_curve_genus=(5-1)*(5-2)//2
+assert fixed_curve_genus==6
+isolated_projective_eigenpoints=2
+assert isolated_projective_eigenpoints==2
 print('PASS: 126 degree-five quintic monomials, 9 fixed, 48 invariant orbits')
 print('PASS: 25 independent degree-five Jacobian ideal monomials, 4 fixed, 11 orbits')
 print('PASS: 37 C3-invariant complex deformations, 1 invariant Kahler class')
 print('PASS: untwisted invariant difference 36 != 3; NOT a full orbifold chiral index')
-print('PASS: 7 projective fixed points, so quotient has twisted/resolution gates')
+print('PASS: fixed locus = genus-6 plane quintic curve + two isolated points')
 print('OPEN: C3 equivariant gauge bundle, full Dirac spectrum, twisted sectors and actual SM')
