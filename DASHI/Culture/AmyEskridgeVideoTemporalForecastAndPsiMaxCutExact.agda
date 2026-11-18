@@ -245,8 +245,22 @@ duggan2018Source = Attribution.mkDOISource
   "2018 meta-analytic update retains a contested physiological-effects literature; not a verified mechanism"
   Attribution.publicAttribution
 
+-- HISTORICAL SECONDARY COMPARATOR from Transparent Psi and subsequent
+-- presentations: 53.07% ≈ 828/1560. It is NOT the original Bem 2011
+-- participant-mean estimator. Direct uploaded EXP1.xlsx reproduces the
+-- original 2011 53.1% participant mean as 53.1388889% and gives 826/1560
+-- trial-pooled. Kept under legacy API name for older consumer stability.
 originalBemExp1ReportedRate : Nat
 originalBemExp1ReportedRate = 5307
+
+originalExp1DirectParticipantMeanNumerator : Nat
+originalExp1DirectParticipantMeanNumerator = 1913
+
+originalExp1DirectParticipantMeanDenominator : Nat
+originalExp1DirectParticipantMeanDenominator = 36
+
+originalExp1DirectPooledSuccesses : Nat
+originalExp1DirectPooledSuccesses = 826
 
 transparentPsi2023ReportedRate : Nat
 transparentPsi2023ReportedRate = 4989
