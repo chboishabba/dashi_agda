@@ -572,3 +572,72 @@ New exact checked `scripts/check_sc_driven_order_parameter_energy.py`: scalar La
  dF/dt = -Gamma(∂F/∂x)² + (∂F/∂T) Tdot + (∂F/∂u) udot.
 ```
 With positive `a,b,Gamma` and `T<Tc`, source-free ordered amplitude magnitude satisfies `x²=a(Tc-T)/b`. The work-port terms are exact and map into existing Filsinger signed source/material changes. **The potential has NO mechanical RPM dependence until a physically derived and calibrated `u(omega,B,geometry)` is supplied.** Nor does it have an external gravitational response equation. This tiny GL order-parameter truncation is *not* a complete charged/multi-band anisotropic YBCO Ginzburg–Landau / vortex pinning PDE; it merely proves why a superconducting transition and driven material state do not, on their own, determine a critical rotor RPM or gravitational force. The subsequent required weld is gauge-covariant material current/stress tensor plus Maxwell, measured pinning/critical current and constitutive/source constraints. User's existing atomic 369 hydrogenic C3 projected Hamiltonian is not a YBCO material Hamiltonian. Full SI sourcing of magnetic drive and coherent lattice parameters remains OPEN.
+
+
+## 18 November — explicit gravity-sector coupling steelman and NASA decelerating field
+
+**Question:** Can one build a physically specified extension of Maxwell + superconductivity that could in principle modify weight during braking, and ask whether NASA's rotating-field experiment tests it? **Yes as a conditional effective-field model; no derivation of an anomalous physical coupling from the standard superconducting Hamiltonian has been achieved.** The original Li–Torr paper is a *theory claim*, not a measured giant amplification. Kowitt's critique targets the interpretative identification of a bulk Meissner permeability with a microscopic gravitomagnetic constitutive coefficient.
+
+### Two distinct gravitation/source claims
+
+(A) **Local source-generated acceleration:** standard weak-field GR responds to stress–energy of disk, RF field, pump, pinning and mechanics. For approximate 0.8 kg at 0.1m, ordinary Newtonian rotor contribution `G m/(g_earth r²) ≈5.44e−10`. To obtain `|delta g|/g_earth=0.02` by boosting this local-source response at the same geometry would require an **extra factor ≈3.67×10⁷** relative to *the whole rotor's ordinary Newtonian field*, and much larger relative to the *increment from rotational kinetic energy*. This is not an exclusion of a *different coupling to ambient Earth's field*; it is the local-source inverse requirement.
+
+(B) **External terrestrial field modification:** hypothetical composition-universal scalar contribution to test-body acceleration with effective action of the form
+```
+ S_scalar = integral d4x sqrt(-g) [
+  -(1/2)(partial phi)^2
+  -(1/2)(m0² + lambda |psi_SC|²) phi²
+  + beta phi J_matter
+ ].
+```
+This is a **new proposed scalar degree of freedom and couplings**, not the known Earth gravitational potential, not Li–Torr's established prediction, and not derived from the repository's hydrogenic atomic 369 Hamiltonian. One must define the units, kinetic normalization, covariant matter coupling and appropriate source `J_matter` before any physical numbers. Its bulk superconducting state increases a hypothetical scalar effective mass `m_eff²=m0²+lambda |psi_SC|²`; the scalar mode's slab transfer *could* change under a material transition. Whether this yields a negative change in *measured weight*, and whether it evades fifth-force/equivalence-principle constraints, is OPEN. A scalar mass barrier does NOT screen standard Newtonian or Einstein gravitational attraction. A scalar model affecting only a fraction `f_phi` of apparent acceleration can reduce weight by at most `f_phi`; a 2% attenuation already requires `f_phi≥0.02`.
+
+**Exact finite mathematics:** `scripts/check_sc_gravity_coupling_braking.py` locally executed mathematical equivalent PASS; GitHub new script committed in 946cbf5. For a 1D static Fourier component in the scalar sector with effective wavenumber `q>0`, the exact finite slab transfer for state `(phi,partial_z phi)` is
+```
+  [cosh(q d)     sinh(q d)/q]
+  [q sinh(q d)   cosh(q d)  ]
+```
+and its determinant is identically 1. Transmission amplitude depends on exterior boundary/source matching. Merely writing `exp(-q d)` is a **conditional single decaying-branch model**, not the actual slab transmission ratio in a static Earth geometry. In that simplified limit, if **all** measured gravity were assigned to this scalar branch, 2% attenuation over 10mm corresponds to `q≈2.0203 m^-1`. This illustrative number does not determine the coupling `lambda`, Earth source, material order parameter or lab observable. It is not an experimental fitted parameter or a field-theory prediction.
+
+**Filsinger paid material/state work:** a finite Landau + scalar energy density,
+```
+ F = a(T-Tc)x²/2 + b x⁴/4 - u x
+     + (m0²+lambda x²) phi²/2
+```
+has *exact* chain rule
+```
+ dF/dt = F_x xdot + F_phi phidot + F_T Tdot + F_u udot + F_lambda lambdadot.
+```
+`F_u=-x`, `F_lambda=x² phi²/2`. Under selected gradient-flow relaxational dynamics, `F_x xdot` is a dissipative term; the other terms belong to pump/temperature/field work and cannot be attributed to gravity or unexplained extraction. The physical scalar gradient/kinetic energy and full Maxwell Poynting stress must also be included to claim global conservation. This is a *minimal conditional local free-energy model*, not a Lorentz-covariant full superconductor-gravity dynamical solution.
+
+### NASA rotating-field deceleration vs Podkletnov disk deceleration
+
+Canonical pre-existing NASA owner: `DASHI/Physics/ExoticGravity/NingLiYBCORotatingFieldConstraintExact.agda` (Noever/Koczor/Robertson AIAA-98-3139, NASA https://ntrs.nasa.gov/citations/19990019627 ). Their rotating **applied magnetic field** ran up to 12000 RPM equivalent, in a ~15cm YBCO assembly with and without DC-field levitation; NTRS says no rotating-field/thermal effect observed. This is not evidence that the actual ceramic disk mechanically spun and braked at 12000 RPM. NTRS summary does **not** establish the waveform or angular acceleration during any ramp.
+
+Use field phase `theta_field(t)`, rotor angle `theta_disk(t)`, pole multiplicity `p`. Define *slip phase* `psi=theta_field-p theta_disk` and
+```
+ omega_slip = omega_field - p omega_disk
+ alpha_slip = alpha_field - p alpha_disk .
+```
+Three distinct candidate mechanisms:
+
+| Hypothesis | Dependence | NASA driven field at stationary disk | Podkletnov braking disk |
+| --- | --- | --- | --- |
+| Moving mass/stress-energy / mechanical braking | `alpha_disk`, `I_disk omega_disk alpha_disk`, actual rotor currents | zero mechanical source if disk remains stationary | mechanically nonzero during braking |
+| Field-acceleration constitutive response | `alpha_field`, field waveform, induced E and superconducting currents | can be driven by a field ramp, must know NASA time series | can also appear if RF/stator drive varied |
+| Flux-slip/vortex history | `alpha_field-p alpha_disk`, field B amplitude, pinning, hysteresis | can be driven with disk stationary | can be driven by mechanical deceleration and RF modulation |
+
+Purely *hypothetical*, if NASA's 12000RPM **field** went to rest in 25–30s, average `|alpha_field|=41.89–50.27rad/s²`; Podkletnov reported a **disk** slowing by 1500RPM in 25–30s, giving `|alpha_disk|=5.24–6.28rad/s²`. Ratio of speed changes `8×`, but **no** equal-source, equal-field, equal-sample inference: different disk state, B, geometry, RF, inertia, pinning, phase and probes. This is not evidence NASA performed a comparable deceleration. Even field-only response lacks a numerical prediction until a measured susceptibility/transfer is derived. Physical rotating-field NASA data can constrain that subclass; it cannot automatically exclude a moving-mass-only effect.
+
+One additional NASA donor important for sources: NASA RF-illuminated (1–15MHz) YBCO tests https://ntrs.nasa.gov/search.jsp?R=19990064220 reported a tiny *apparent increase* in gravitational reading, not a 2% mass-independent shielding; keep as attributed observation, not independent replication or a positive force discovery. NASA static/rotating constrained experiments also report ~2×10^-8 g bounds in specific static geometries https://ntrs.nasa.gov/citations/19990023209. Do not apply that exact bound to a different original RF/mechanical source without transfer.
+
+**Typed provenance:** new `DASHI/Physics/QuantumSensors/SuperconductingGravityBrakingCouplingDiscriminatorExact.agda` imports original Li–Torr, Kowitt, NASA and source-vs-constitutive owners; keeps separate mechanism and probe constructors. It proves only constructor separation and provides source-owned experimental witness interfaces. **No Agda kernel check was run**, and named receipts marked false indicate records not independently acquired here, not necessarily missing instruments in the historical lab.
+
+### Highest-alpha physics gate still open
+
+The *real* strong model must derive at least one of:
+- A standard, universal coupling route (stress-energy to metric via Einstein constraints) producing the requested external-probe response under the actual disk/field pump; current scale estimate says simple rotor gravity is far too weak.
+- A nonstandard **dynamical field** with explicit microscopic source operator, constitutive response `chi_phi(k,omega,T,Jc,...)`, exterior boundary conditions and independent measurable force/clock/gyro output. This must be tested against existing fifth-force/equivalence-principle bounds and the historical original NASA/Hathaway/Graham/Tajmar geometries. Choosing a numerical `lambda` to fit 2% does not derive it.
+- A conventional **instrumental force mechanism** with comparable dependence on RF/motion/temperature and genuinely measured force. This is a competing world, not evidence of new gravity.
+
+A stronger phenomenological steelman may use Filsinger's causal nonlinear material state and signed work ledger to predict an actual transient response shape *conditional on* physically specified source coefficients, then fit all original same-drive observations jointly. Without the original raw source histories, a perfect synthetic fit is not original experimental validation. A future unknown/undisclosed mechanism is not bounded by published component SOTA, but a theory needs nonarbitrary dynamics and quantitative discriminators.
