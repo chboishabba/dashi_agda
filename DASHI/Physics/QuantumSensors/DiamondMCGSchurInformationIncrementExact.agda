@@ -1,15 +1,11 @@
 module DASHI.Physics.QuantumSensors.DiamondMCGSchurInformationIncrementExact where
 
 ------------------------------------------------------------------------
--- Phase P1/W1: covariance-block information accounting for one extra sensor.
--- Mathematical origin: classical Schur complement / GLS block inversion.
--- Reuses detector objective of DiamondMCGArrayInformationWeldExact,
--- existing covariance GLS and finite complex Cauchy-Schwarz owners.
---
--- IMPORTANT: the exact block inversion and positivity need a separately
--- supplied covariance certificate. This module proves the conditional
--- information monotonicity, not physical covariance calibration and not
--- arbitrary covariance invertibility by fiat.
+-- P1/W1 conditional Schur information addition.
+-- Classical mathematical prior art: Schur complement / block inverse.
+-- Explicit certificate boundary: the owning covariance model must produce
+-- the Schur identity and positive conditional variance independently.
+-- Neither anatomy, NV hardware, nor experiment is certified here.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Level; lsuc)
@@ -18,25 +14,18 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 record SchurIncrementCertificate {ℓ : Level} (Scalar : Set ℓ) :
     Set (lsuc ℓ) where
   field
-    _+_ : Scalar → Scalar → Scalar
+    add : Scalar → Scalar → Scalar
     _≤_ : Scalar → Scalar → Set ℓ
     oldInformation : Scalar
     newInformation : Scalar
-    conditionalInnovation : Scalar
-    conditionalVariance : Scalar
     conditionalGain : Scalar
-
-    -- The same-array covariance block law supplies the exact numerical
-    -- identity gain = innovation² / variance. Invertibility, units,
-    -- calibration and positive variance are evidence-specific obligations.
-    gainFromInnovation :
-      conditionalGain ≡ conditionalInnovation
-    -- The 'conditionalInnovation' here is a precomputed nonnegative
-    -- *information gain*, not a raw signed magnetic innovation; the
-    -- calibration owner must establish the squared/variance expression.
+    innovationSquaredOverVariance : Scalar
+    gainEqualsSchurQuotient :
+      conditionalGain ≡ innovationSquaredOverVariance
     schurBlockIdentity :
-      newInformation ≡ oldInformation + conditionalGain
-    nonnegativeGain : oldInformation ≤ oldInformation + conditionalGain
+      newInformation ≡ add oldInformation conditionalGain
+    nonnegativeGain :
+      oldInformation ≤ add oldInformation conditionalGain
 open SchurIncrementCertificate public
 
 schurAdditionDoesNotDecreaseInformation :
@@ -49,16 +38,14 @@ schurAdditionDoesNotDecreaseInformation certificate
   rewrite schurBlockIdentity certificate =
     nonnegativeGain certificate
 
--- The innovation-zero case is explicitly a *score* equality, not an
--- assertion of independent readout or increased physical sensitivity.
 record ZeroInnovationCertificate {ℓ : Level} (Scalar : Set ℓ) :
     Set (lsuc ℓ) where
   field
     parent : SchurIncrementCertificate Scalar
     zero : Scalar
     gainIsZero : conditionalGain parent ≡ zero
-    rightIdentity : oldInformation parent + zero ≡ oldInformation parent
-  open SchurIncrementCertificate parent using (_+_)
+    rightIdentity :
+      add parent (oldInformation parent) zero ≡ oldInformation parent
 open ZeroInnovationCertificate public
 
 redundantSensorAddsNoInformation :
