@@ -92,3 +92,34 @@ CRITICAL SYMBOL HYGIENE: `C3` is a cyclic group (order three); `S3` in code can 
 - Reel caption attributes talk to Jason Reza Jorjani, *The Meaning of Close Encounters*, June 7 2021 (attribution not independently verified here).
 
 No theorem about particles-as-universal-ether-vortices, hidden craft, free energy, antigravity, or suppressed physics follows merely from these established donors.
+
+## 6. Spin-1/2 prior-art reconciliation (2026-11-18 next roadmap round)
+
+The former P5 plan was overbroad: the repository already proves several structural spin facts.
+
+**Existing exact Agda owners:**
+- `DASHI/Foundations/SU2SO3IrrepDimensionExact.agda`: SU2 highest weight 1 has dimension 2; `spinorHighestWeightOneDoesNotDescend` rules out an even-highest-weight (ordinary SO3) representation. This is a type-theoretic exclusion, not an independently constructed Hilbert representation.
+- `DASHI/Algebra/FiniteQuaternionDoubleCover.agda`: concrete Q8→V4 double cover, exact central sign and quotient.
+- `DASHI/Mathematics/Topology/AlexanderHornedSpin360720Exact.agda`: finite `spinAt360IsNotSpinIdentity`, `spinAt720ReturnsToIdentity`, `spinHalfDoesNotDescendToSO3`, and selected 120-degree rotor calculations. The module itself warns that this is not a continuous SU2 path-lift construction.
+- `DASHI/Mathematics/Topology/AlexanderHornedC3SpinLiftSplitExact.agda`: selected C3 preimage splits (C6 ≅ C3×C2), its path-selected lift is order 6 while a coherent C3 generator lift is order 3; a central carry 2-cocycle is explicitly a coboundary.
+- `DASHI/Algebra/ContinuousSpin31LorentzCover.agda`: genuine topology/smoothness/cover claims are **fields in a prerequisite record**, not evidence of a populated continuous Spin(3,1) theorem.
+- `DASHI/Physics/QFT/NonAbelianFusionFromSpin.agda`: spin-half doublet and Clebsch–Gordan decomposition conditional on identification of the spin sector with Rep(SU2); this explicitly does not close full Standard Model reconstruction.
+- `DASHI/Mathematics/Topology/HopfQuaternionAxisProjectionExact.agda`: `canonicalAxisPhaseInvariant` proves exact SU2/U1 phase invariance of the quaternion axis map.
+- NEW `DASHI/Mathematics/Topology/KKHopfSpinExistingOwnerWeldExact.agda`: imports the actual Hopf and spin owners and packages their independently proved laws without coercing the Hopf fibre or C3 carrier into a physical spinor.
+
+**Revised P5 (remaining work, not duplicate SU2 theory):**
+- [x] Finite Q8 central sign, 360/720 finite witness (existing repository sources).
+- [x] SU2 highest-weight spin-half dimension and non-SO3-descent (existing source).
+- [x] Finite selected C3 split and coboundary (existing source).
+- [x] Quaternionic Hopf axis phase invariance (existing source).
+- [ ] Give the *actual candidate KK soliton* configuration space Q, including the allowed boundary conditions and gauge transformations.
+- [ ] Construct the actual class of the 2π physical-rotation loop inside π1(Q), rather than importing SO3's π1 or finite Q8.
+- [ ] Establish whether that class is nontrivial/order 2 and how it relates to two-soliton exchange.
+- [ ] Construct a unitary quantum representation of the soliton sector whose rotational action is compatible with the existing spin-half doublet, and prove exchange-statistics consistency.
+- [ ] Prove the resulting sector is dynamically realized by a finite-energy solution of the selected parent KK action.
+
+**Updated interpretation:** A first Chern number, finite C3 period or Hopf winding is NOT automatically a half-spin theorem; however, concrete SU2 spin-half and finite 360/720 mathematics are already in the repo. The genuinely new question is the *same-object mapping from a physical soliton* to that existing representation.
+
+**Rotating KK reuse:** `scripts/check_boosted_kerr_kk.py` and `Docs/physics/KKEMHiggsEarthSourceBridge20261024.md` are already specific rotating/boosted KK donors. They do not yet supply a rotating finite-energy non-black-hole particle soliton or an anomalous acceleration law.
+
+**Verification status:** changes written through GitHub connector and code inspected by file fetch. This session has no local Agda compiler; new source is not kernel-certified. Do not promote it past that gate.
