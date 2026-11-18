@@ -13,10 +13,16 @@ def main():
  assert s.simplify(beta**2-s.Rational(1,6))==0
  assert s.simplify(2*beta**2-s.Rational(1,3))==0
  assert s.simplify(s.diff(-Z*F2/4,v).subs(v,0)+s.sqrt(6)*F2/(4*M))==0
- loss=s.Rational(2,100)/s.Rational(1,3)
+ alpha=s.Rational(1,3)
+ delta=s.Rational(2,100)
+ loss=delta/alpha   # if target percent normalized to g_N only
+ loss_total=delta*(1+alpha)/alpha # if normalized to measured g_N+g_phi
  depth=-s.log(1-loss)
+ depth_total=-s.log(1-loss_total)
  assert loss==s.Rational(3,50)
+ assert loss_total==s.Rational(2,25)
  assert s.simplify(s.exp(-depth)-s.Rational(47,50))==0
+ assert s.simplify(s.exp(-depth_total)-s.Rational(23,25))==0
  Of,Od,p,af,ad=s.symbols("Of Od p af ad",real=True)
  slip=Of-p*Od
  assert s.diff(slip,Of)*af+s.diff(slip,Od)*ad==af-p*ad
@@ -29,6 +35,7 @@ def main():
  assert s.diff(larmor,a,2)==q*q/(3*s.pi*eps0*c**3)
  print("PASS geometric radion beta²=1/6, Maxwell scalar source, slip, source-work, Larmor")
  print("2% total weight requires attenuation of unscreened scalar fraction:",loss)
- print("Ideal one-branch decay optical depth:",s.N(depth,10))
+ print("For 2% of total g_N+g_phi, scalar attenuation:",loss_total)
+ print("Ideal optical depths normalized g_N vs total g:",s.N(depth,10),s.N(depth_total,10))
  print("OPEN 5D matter stabilisation, Earth scalar BVP, fifth-force limits and YBCO response")
 if __name__=="__main__":main()
