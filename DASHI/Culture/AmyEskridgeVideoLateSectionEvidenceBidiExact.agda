@@ -23,6 +23,7 @@ module DASHI.Culture.AmyEskridgeVideoLateSectionEvidenceBidiExact where
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import DASHI.Core.Prelude using (⊥)
 
@@ -38,7 +39,7 @@ data OriginalResearchOwner : Set where
   recordedClip : Clips.ClipLineage → OriginalResearchOwner
   originalExperiment : Sources.ScopedSource → OriginalResearchOwner
   temporalEvidence : Trajectory.EvidenceMoment → OriginalResearchOwner
-  experimentalRoute : Admission.ExperimentRoute → OriginalResearchOwner
+  experimentCandidate : Admission.CandidateExperiment → OriginalResearchOwner
   reportedResearch : Attribution.AttributedSource → OriginalResearchOwner
   quotedVideo : Sources.ScopedSource → OriginalResearchOwner
 
@@ -129,7 +130,7 @@ late69 = late-weld Weld.claimJoin69
 
 late70 : SameClaimOriginalEvidenceWeld
 late70 = late-weld Weld.claimJoin70
-  ((recordedClip Clips.clip09) ∷ (originalExperiment Sources.bem2011) ∷ (temporalEvidence Trajectory.transparentPsi2025) ∷ (temporalEvidence Trajectory.presentimentUpdate2018) ∷ (experimentalRoute Admission.presentimentRoute) ∷ [])
+  ((recordedClip Clips.clip09) ∷ (originalExperiment Sources.bem2011) ∷ (temporalEvidence Trajectory.transparentPsi2025) ∷ (temporalEvidence Trajectory.presentimentUpdate2018) ∷ (experimentCandidate Admission.presentimentPreregisteredReplication) ∷ [])
   mixedScienceConflation
   preregisteredPhysiology
   "Original 18:35 speaker footage not located; Bem 2011 cognitive tasks not same as physiological Mossbridge/Duggan paradigms; 2025 Bem replication negative"
