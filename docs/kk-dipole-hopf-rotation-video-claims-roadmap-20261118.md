@@ -153,3 +153,15 @@ The former P5 plan was overbroad: the repository already proves several structur
 ### Outstanding gate ordering
 
 P2 actual smooth Hopf/KK principal fibre geometry → P3 original parent-action solution → P4 full perturbation energy → P5 soliton configuration-space π1 and FR sign → P6 rotating source and gravitational response. The prior finite sign and scale tests are necessary audit inputs, not replacements for this chain.
+
+## 8. P3 executed in two nonconflated original-action candidates (2026-11-18)
+
+See `Docs/physics/KKYM369SingleCentreMonopoleSpinConfigurationMaxCut20261118.md` for explicit metrics, actions, source provenance, exact formulas and open gates.
+
+- **G: Pure five-dimensional Einstein vacuum / Gross–Perry–Sorkin:** explicit 5D metric \(ds_5^2=-dt^2+V d\mathbf x^2+V^{-1}(d\psi+A)^2\), \(V=1+m/r\), \(A=m\cos\theta d\phi\), fibre period \(4\pi m\). The classical Gibbons–Hawking theorem supplies Ricci flatness from harmonic V and monopole \(dA=*dV\). The exact symbolic checker verifies the hypotheses, normalized Chern \(-1\), local smooth-nut expansion and physical spatial XYZ C3. Global mass normalization/Agda original-metric Ricci proof remain open.
+- **Y: Five-dimensional SU2 Yang–Mills on a fixed 4+1 background / BPST:** time-independent 4-spatial-dimensional self-dual charge-one instanton gives an explicit finite-energy 5D static gauge-field solution with mass \(8\pi^2/g_5^2\). Its energy is independent of size \(\rho\): a concrete stability obstruction/scale zero mode, not a Skyrme-selected minimum. The original Agda SU2 quaternion and 369 YM sources are appropriate algebraic donors, but same-field continuum identification, R3×S1 caloron, and gravity coupling are NOT proven.
+- **Restricted configuration family:** G's translated one-nut family is parameterized by R3 with a fixed asymptotic framing. Translational degrees alone cannot establish a spin-half rotation loop. The full gauge/diffeomorphism-reduced configuration space remains open. Y has centre, scale and framed gauge-orientation moduli; quotient and physical rotation/exchange loops require precise definitions.
+- **New Agda import weld:** `DASHI/Physics/YangMills/YM369KKHopfC3DonorWeldExact.agda` directly consumes the original Balaban source xyz C3 and SU2 bracket witnesses together with the Hopf quaternion-axis U1 invariance, without assuming YM=KK.
+- **New exact fixtures:** `scripts/check_kk_gross_perry_sorkin_c3_monopole_sympy.py` and `scripts/check_kk_ym369_bpst_instanton_particle_energy_sympy.py`.
+
+P3 is **partially met at the classical source-example level**, not closed as an original same-theory gravitating SU2 particle or a derived fermion. The highest-alpha next proof is the original YM quaternion-carrier BPST connection/self-duality plus its spatially compact caloron/KK reduction, while independently kernel-certifying the KK metric and global bundle transitions. This deliberately replaces abstract 'look for some soliton' with two specified and discriminating constructions.
