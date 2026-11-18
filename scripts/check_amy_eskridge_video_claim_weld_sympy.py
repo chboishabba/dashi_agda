@@ -299,12 +299,73 @@ def check_surrounding_source_coverage() -> None:
     print("HAL5 35-page / DIA 37-document 1473-page / 42-source / 39-producer-weld / 8 extra-original static audit: PASS")
 
 
+def check_original_research_us11_prior_art() -> None:
+    # Distinct sets with the same count; NEVER infer cohort identity by "11".
+    research = source_names(
+        "MissingDeceasedTwentyScientistRoundRobinProgressExact.agda",
+        "scientist-round-progress",
+    )
+    assert len(research) == 20
+    research_us, research_china = research[:11], research[11:]
+    fox_code = read("AmyEskridgeVideoEleventhMediaRosterWeldExact.agda")
+    fox_names = re.findall(
+        r'secondary-reported-roster-member\s+\w+\s+"([^"]+)"',
+        fox_code,
+    )
+    assert len(research_us) == 11 and len(research_china) == 9
+    assert len(fox_names) == 11
+    us = set(map(canonical, research_us))
+    fox = set(map(canonical, fox_names))
+    assert len(us) == len(fox) == 11
+    assert us & fox == {
+        "nuno", "maiwald", "reza", "grillmair", "hicks",
+        "mccasland", "chavez", "thomas", "amy",
+    }
+    assert us - fox == {"leblanc", "ning"}
+    assert fox - us == {"casias", "garcia"}
+    assert sp.Integer(len(us | fox)) == 13
+    assert sp.Integer(len(us & fox) + len(us - fox)) == 11
+    assert sp.Integer(len(us & fox) + len(fox - us)) == 11
+
+    weld = read("AmyEskridgeVideoUS11PriorArtReconciliationExact.agda")
+    agg = read("AmyEskridgeVideoEvidenceEverything.agda")
+    assert "entireExistingResearchCohort = refl" in weld
+    assert "nineNamedOverlaps = refl" in weld
+    assert "researchOnlyCount = refl" in weld
+    assert "mediaOnlyCount = refl" in weld
+    assert "distinctNamesAcrossBothDenominators = refl" in weld
+    assert "AmyEskridgeVideoUS11PriorArtReconciliationExact" in agg
+    for original in [
+        "MissingDeceasedTwentyScientistRoundRobinProgressExact",
+        "AmyEskridgeVideoEleventhMediaRosterWeldExact",
+        "MissingDeceasedTwentyScientistRound44OfficialInquiryCohortExact",
+        "MissingDeceasedTwentyScientistRound68HCBDOITechnicalLineageExact",
+        "MissingDeceasedTwentyScientistRound70HCBTaskLevelBoundedExhaustionExact",
+        "MissingDeceasedTwentyScientistRound75POAMSSpaceActSubagreementExact",
+        "MissingDeceasedTwentyScientistRound77POAMSNamedPrivateSponsorExact",
+        "MissingDeceasedTwentyScientistRound79AmyPOAMSTransferBoundedExhaustionExact",
+        "MissingDeceasedTwentyScientistRound83LeBlancExactWBSRetainedSweepExact",
+        "MissingDeceasedTwentyScientistRound85NingFOIAProceduralClosureExact",
+        "MissingDeceasedTwentyScientistRound86NingDODOIGFOIALogBoundaryExact",
+        "MissingDeceasedTwentyScientistRound88NingAMCOMPrimaryAcquisitionContractExact",
+    ]:
+        assert original in weld, original
+    for denied_promotion in [
+        "noFoxAllScientistsCoercion",
+        "noChavezIdentityCoercion",
+        "noElevenDenominatorCoercion",
+        "noCausalityCoercion",
+    ]:
+        assert denied_promotion in weld
+
+
 if __name__ == "__main__":
     check_claim_welds()
     check_original_clip_and_media_roster()
     check_scope()
+    check_original_research_us11_prior_art()
     check_quantitative_boundary()
     check_primary_inspection_and_clip_lineage()
     check_surrounding_source_coverage()
-    print("Amy Eskridge video 86-row / House-10 / research-20 SymPy audit: PASS")
+    print("Amy Eskridge video 86-row / Fox-11 / U.S. research-11 / House-10 / research-20 SymPy audit: PASS")
     print("Includes 7 earlier Zoom locators, 16 edited-clip lineages, 10 primary inspection records, and negative controls")
