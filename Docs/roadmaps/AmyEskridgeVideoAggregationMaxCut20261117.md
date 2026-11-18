@@ -10,6 +10,52 @@ This PR is a **new video-source aggregator over existing producers**, not a new 
 
 The transcript provided by the user is titled *She Researched Something THEY DON'T ALLOW. Then She Died* and ends at 32:44. **Original edited video identified:** Be Inspired / `@beinspiredchannel`, 12 May 2026 in channel indexes, `https://www.youtube.com/watch?v=acw16d6CCnY` (video ~32:47). The narrator's personal name, upload timezone and some original clip offsets are still unresolved; do not fabricate them. The 86 itemized claims are source-content paraphrases with timestamp pointers; they are not 86 independently verified findings or 86 source documents.
 
+## 18 November 2026 — primary EXP1 XLSX ACQUIRED and 2011 participant-level statistic REPRODUCED
+
+**Source acquired in this conversation:** original `exp1.xlsx`, 100-row `#1 Precog Detection of Erotica` worksheet, 10 source columns including session, 2006 date, erotic/control hit percentages and stimulus-seeking score. Source SHA-256:
+
+`feadd752a26f997327f12921eb916d9154b9907e27205aca64b9a22a0ea2df45`
+
+**Data privacy:** the original participant workbook is not committed to public GitHub. We commit only aggregate quantitative receipts, the source digest and a locally reproducible analysis script, `scripts/replay_bem_exp1_original_workbook.py`. Independently computed full results: local `/mnt/data/bem_exp1_replay.json`. Reference original manuscript: Bem JPSP (2011), DOI 10.1037/a0021524, `https://gwern.net/doc/psychology/parapsychology/2011-bem.pdf` (pp. 408–410, Fig. 1/Exp 1); original XLSX public source `https://replicationindex.com/wp-content/uploads/2018/01/exp1.xlsx`.
+
+**Critical finding: the original positive result is EXACTLY reproducible** with the correct participant-level one-sample (t) analysis, rather than the previous conditional iid-binomial proxy:
+
+| Original-source endpoint | From uploaded EXP1 session rows | Original 2011 paper |
+|---|---:|---:|
+| Participants | **100** | 100 |
+| Erotic *unweighted participant* hit average | **53.1388889%** | 53.1% rounded |
+| Participant (t) vs 50% | **t(99) = 2.5132683** | t(99) = 2.51 |
+| One-sided (p) | **0.0067878272** | p = .01 rounded |
+| Nonerotic controls | 49.8333333%; t(99)=-0.14575; one-sided p=.55779 | 49.8%; t(99)=-0.15; p=.56 |
+| Paired erotic minus control | +3.3055556pp; t(99)=1.8563, one-sided p=.03319 | source t_diff(99)=1.85; p=.031 |
+| Stimulus seeking *strictly >2.5*, 42 participants | **57.6058201%; t(41)=4.5701353; one-sided p=0.00002209** | 57.6%; t(41)=4.57; p=.00002 |
+| Low stimulus seeking <=2.5, 58 participants | 49.9042146%; t(57)=-0.0573 | 49.9%; t(57)=-0.06 |
+| Correlation erotic hit % ~ stimulus seeking | r=.1821491, one-sided p=.0348546 | r=.18, p=.035 |
+
+**Important source-specific discrepancy:** the original 100 rows and source correspondence have **two trial-count regimes**:
+- Sessions 1–40: 12 erotic trials each, **261/480** correct; 40-person mean 54.375%, one-sided participant t p=.01744.
+- Sessions 41–100: 18 erotic trials each, **565/1080** correct; 60-person mean 52.314815%, one-sided participant t p=.07696.
+- Combined original **826/1,560**, or **52.948718% trial-weighted**. This is different from **53.138889% participant-unweighted** (Bem's original reported estimator). A later PLOS ONE 2025 article reports **828/1,560 =53.076923%**. Our original XLSX does **NOT** reproduce the latter count. The different estimators and an apparent 2-hit *cross-source* discrepancy must be isolated; this is NOT evidence that Bem's original participant (t) is wrong.
+
+**Exploratory discrimination, not a claim of causal attribution:** First-40 versus last-60 percentage means differ by 2.0602 percentage points, but Welch two-sided p=.4240. The positive effect in first 40 and weaker later 60 is **not proof of a changing effect or a significant protocol interaction**. Stimulus seeking high (>2.5) vs low has Welch two-sided p=.00152; this specific 2011 reported moderator is source-reproducible but was part of the publication's own analysis and is **not yet an independently held-out replication**. The XLSX contains per-participant summary hit rates, not raw target-left/right events, PRNG outputs or original dated analysis-preregistration. Thus exact recording-bias, optional stopping, trial selection and post-hoc analytic history still require other source objects.
+
+**Formal files and actual acceptance:**
+- `DASHI/Culture/AmyEskridgeBemExp1OriginalWorkbookReplayExact.agda`: source digest, exact 40×12+60×18=1,560 trial and 261+565=826 hit totals, original 40+60 session correspondence equality, 42+58 stimulus-seeking subgroup counts, exact distinction between 826 and later-cited 828; no kernel proof of continuous (t)-distribution.
+- `scripts/replay_bem_exp1_original_workbook.py` and executed local `/mnt/data/replay_bem_exp1.py`: directly read XLSX with `artifact_tool`, calculate participant-level (t) and sourcespecific exploratory contrasts with SciPy, and assert published t/sample matches. **The local script was actually executed successfully** on uploaded XLSX; the public GitHub-script version is source-written and not independently executed in the checkout. Raw workbook itself is not uploaded to GitHub.
+
+**Roadmap gate changes**:
+- **B0 source calibration:** **CLOSED for Experiment 1 source rows and primary published (t)**; the former claim the original dataset was unavailable is obsolete.
+- **B1 aggregate nonidentifiability:** retained as a true mathematical boundary; physical mechanism / analytic malpractice still unproved.
+- **B2 participant-level one-sample t:** **CLOSED for primary 2011 published endpoint**; binomial analysis secondary and integer-hit accounting discrepancy now explicit.
+- **B4 source-authentic steelman moderator:** **CLOSED for 2011 in-sample subgroup reproduction**, **OPEN for preregistered held-out replication / meta-analysis**.
+- **B5 experiment chronology:** **CLOSED for observed 40/60 phase comparison**, **OPEN for target-side PRNG/response trial traces and documentary reasons for changing test setup**.
+- **B6 original source acquisition:** **CLOSED for original EXP1 published workbook**; **OPEN for raw trial-level records, independent Transparent Psi original CSV replay and source-exact 69-independent study meta-analysis**.
+- **B7 decision:** original statistical signal is real *as a computation on the supplied source data*; it remains **nonreplicated at that magnitude in Transparent Psi**, and the data are insufficient to assign the historical reason. A significant participant-level test is not proof of actual retrocausality.
+
+**NEXT P1 priority:** Because the EXP1 download and original main statistic are now paid, move immediately to **Transparent Psi original trial/participant CSV and preregistration replay**, then exact 69-study meta-analysis provenance. The two-hit mismatch and test-epoch/source-definition issue deserve a bounded source-diff, but no further toy theoretical statistics or duplicate Aristotle abstractions.
+
+---
+
 ## 18 November 2026 — Aristotle search and actual Tukey HSD / pooled ANOVA implementation
 
 **User-directed prior-art follow-up:** `Tukey` in `DASHI/Statistics/Vec15Robust.agda` only refers to **Tukey's IQR robust outlier fence**, not the post-hoc **Tukey HSD** family-wise error procedure. `Vec15Inference.anova15`, `tTest15` and `chiSquared15` are deterministic 15-vector scoring scaffolds; their `pValue` is a count, not a calibrated classical probability. Source consumers must not inadvertently treat them as inferential statistics.
