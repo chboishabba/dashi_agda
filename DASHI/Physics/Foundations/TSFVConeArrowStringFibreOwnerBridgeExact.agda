@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.Foundations.TSFVConeArrowStringFibreOwnerBridgeExact where
 
 -- Attribution, 2026-11-18:
@@ -24,6 +23,7 @@ import DASHI.Physics.Foundations.Lorentz31DirectionalProbeExact as Probe
 import DASHI.Physics.Foundations.TSFVFiltrationArrowLorentzBridgeExact as TSFV
 import DASHI.Physics.Foundations.TSFVKKSameMetricTransportExact as Metric
 import DASHI.Geometry.CalabiYau369CompactFibreBridge as Fibre
+import DASHI.Physics.YangMills.YMClayLorentz31DirectionalKKHodgeExact as KK
 
 -- The existing TSFV proof does not assume a literal 31 mask,
 -- but requires a selected measured-arrow probe and physical calibration.
@@ -42,7 +42,7 @@ sourceTSFVMeasuredQuadraticIs31 =
 sameMetricObserverSelectionIs31 :
   (w : Metric.SameMetricTSFVKK) →
   Probe.actualAxisCounts
-    (DASHI.Physics.YangMills.YMClayLorentz31DirectionalKKHodgeExact.SameSourceKKYMContinuation.signatureSigns
+    (KK.SameSourceKKYMContinuation.signatureSigns
       (Metric.SameMetricTSFVKK.kkSource w))
     ≡ Probe.signature 3 1
 sameMetricObserverSelectionIs31 =
