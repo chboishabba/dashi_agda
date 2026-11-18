@@ -11,7 +11,7 @@ module DASHI.Mathematics.Topology.KKDipoleVortexSpinBoundaryExact where
 -- a full rotation is additional data; integer topological winding alone
 -- does not constitute a proof of fermionic spin or exchange statistics.
 
-open import Agda.Primitive using (Level; lsuc; _⊔_)
+open import Agda.Primitive using (Level; lsuc)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 record AdditiveAzimuth {ℓ : Level} : Set (lsuc ℓ) where
@@ -31,15 +31,22 @@ module NoCompulsorySpiral {ℓ : Level} (A : AdditiveAzimuth {ℓ}) where
       dipolePhiZero : dipolePhi ≡ zero
       imposedPhiZero : imposedPhi ≡ zero
 
+  cong : {x y : Carrier} (f : Carrier → Carrier) →
+         x ≡ y → f x ≡ f y
+  cong f refl = refl
+
+  trans : {x y z : Carrier} → x ≡ y → y ≡ z → x ≡ z
+  trans refl q = q
+
   noInducedAzimuthFromZeroSummands :
     (p : AxisymmetricPair) →
     (AxisymmetricPair.dipolePhi p ⊕ AxisymmetricPair.imposedPhi p) ≡ zero
-  noInducedAzimuthFromZeroSummands record
-    { dipolePhi = .zero
-    ; imposedPhi = .zero
-    ; dipolePhiZero = refl
-    ; imposedPhiZero = refl
-    } = zeroPlusZero
+  noInducedAzimuthFromZeroSummands p =
+    trans (cong (λ x → x ⊕ AxisymmetricPair.imposedPhi p)
+                (AxisymmetricPair.dipolePhiZero p))
+          (trans (cong (λ y → zero ⊕ y)
+                       (AxisymmetricPair.imposedPhiZero p))
+                 zeroPlusZero)
 
 -- Quantization needs a genuine rotation action on a physical configuration
 -- space, not just an integer winding label. This data record deliberately
