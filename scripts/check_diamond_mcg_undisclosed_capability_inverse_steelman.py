@@ -18,7 +18,7 @@ def main():
     needed_T=s.solve(s.Eq(snr,rho),T)[0]
     assert s.simplify(threshold-A0*(r0/r)**3*g*s.sqrt(N*T)/rho)==0
     assert s.simplify(needed_T-(rho*S/(A*g*s.sqrt(N)))**2)==0
-    assert s.simplify(needed_A*S/rho*r0**3*g*s.sqrt(N*T)-r**3*S**2/rho**2*r0**3)==0 if False else True
+    assert s.simplify(needed_A-rho*S*(r/r0)**3/(g*s.sqrt(N*T)))==0
     print("PASS exact conditional inverse ASD/source/time equations")
     A0v=s.Rational(50) # pT, unvalidated cardiac benchmark
     r0v=s.Rational(1,10) # metres
