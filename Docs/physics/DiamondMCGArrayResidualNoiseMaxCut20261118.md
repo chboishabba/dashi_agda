@@ -751,3 +751,24 @@ Natural response scale `sqrt(K/I_s)`, damping `eta/I_s`. Exact symbolic tests PA
 From exactly the same `Omega_l(t),Omega_s(t),psi(t),T_RF(t)`, predict magnetic output through a **separately calibrated** `J_s,A,B,mu0` map and a London limit, then calculate Maxwell Poynting and Lorentz stress tensor, rotor mechanical stress-energy including the lattice/condensate internal coupling, and feed `T_mu_nu` into GR and `F_mu_nu F^mu_nu` and Jordan matter stress into the existing KK radion action. The KK fixed zero-mode electromagnetic source derivative is `∂[-Z(phi)F²/4]/∂phi|0=-sqrt6 F²/(4M_Pl)`; mass threshold for propagating modes must be compared to actual braking/RF/flux frequencies (1–4MHz pump may emit EM sidebands but not automatically light radion radiation). **No external measured gravitational force has been calculated**: finite compactification/source boundary-value solution, microscopic parameters, time-dependent Maxwell/TDGL fields and probe geometry remain OPEN.
 
 **Attribution and non-promotion:** original London and TDGL work is credited to original researchers; conditional coherent-mass hypothesis comes from user; finite symbolic dynamics/new code is our computational contribution; existing DASHI Filsinger/KK owner remains canonical. Do not count coherent Cooper-pair number as N² rest mass or mistake collective radiation amplitude for new energy.
+
+
+### Rotating fluxoid ring: more constrained than generic angular phase mode (same round)
+
+The exact locally executed source `scripts/check_sc_rotating_fluxoid_braking.py` (committed) models a simplified uniform superconducting ring with **quantized fluxoid n** and Cooper-pair mass/charge `m,q`, loop area `A`, kinetic inductance `Lk`, geometric inductance `Lg`, applied external flux `Phi_ext` and actual ring flux `Phi`. This is a finite reduced-circuit London model: microscopic gauge phase, superconducting winding, and mechanical angle have separate meanings. The assumed rotating-ring constraint `Lk*I+Phi+(2m/q)*A*Omega=n*Phi0` gives
+```
+ I = [n Phi0 - (2m/q) A Omega - Phi]/Lk
+ U = (n Phi0 - (2m/q) A Omega - Phi)^2/(2Lk)
+     + (Phi-Phi_ext)^2/(2Lg)
+ Phi_eq = [Lg (n Phi0-(2m/q) A Omega)+Lk Phi_ext]/(Lg+Lk).
+```
+At `n=0, Phi_ext=0`, `B_eq=Phi_eq/A=-(2m/q) Omega Lg/(Lg+Lk)`, the ideal London form for `Lg>>Lk`. **Do not claim exact homogeneous bulk YBCO from this loop limit.** Changing Ω induces current/flux changes even without changing n. Phase slip `n→n+1` changes the on-shell energy by exactly `Phi0[2(nPhi0-(2m/q)A Omega-Phi_ext)+Phi0]/[2(Lg+Lk)]`; a real phase slip has barriers, activation and energy-balance terms not calculated here.
+
+With a separate overdamped *flux* relaxation `Phi_dot=-U_Phi/eta`, exact paid source work is
+```
+ U_dot = U_Omega Omega_dot + U_Phi_ext Phi_ext_dot
+       - U_Phi²/eta.
+```
+The relaxation time `tau=eta Lk Lg/(Lk+Lg)` is derived for this **assumed effective dissipative dynamics**, not measured or inferred for YBCO. Braking, applied RF flux, trapped integer winding and relaxational dissipation now coexist in one explicitly sourced energy function. Its spatial field, vortex pinning and emission require the same-original gauge-covariant Maxwell/TDGL source; KK receives no arbitrary extra coefficient and would use the derived `F²` and full stress-energy.
+
+**Three independently executed local exact checks** in this implementation round: `check_sc_braking_coherent_dynamics.py` (two-inertia energy, ramp/hold, ideal London/KK source), `check_sc_coupled_rotor_frequency_response.py` (K>0 stiffness vs K=0 lag frequency response), and `check_sc_rotating_fluxoid_braking.py` (fixed-winding current/flux, phase-slip energy, signed flux/driving work). Committed files are named `scripts/check_sc_coherent_braking_same_source_dynamics.py`, `scripts/check_sc_coupled_rotor_frequency_response.py`, `scripts/check_sc_rotating_fluxoid_braking.py`. Corresponding code passed in local container before GitHub commit; exact remote HEAD replay and Agda kernel remain NOT VERIFIED. Scientific limitations: user-proposed coherent-charge braking mechanism is conditional; London/fluxoid results belong to original superconductor physics; finite energy/transfer identities are new computational synthesis, not 2% gravitational-force prediction.
