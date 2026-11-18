@@ -89,3 +89,7 @@ import DASHI.Culture.AmyEskridgeBemAristotleExperimentalProofSearchWeldExact
 -- 40+60 trial denominators, 826/1560 source versus 828 later citation.
 -- No participant rows uploaded to the public repository.
 import DASHI.Culture.AmyEskridgeBemExp1OriginalWorkbookReplayExact
+
+import DASHI.Culture.AmyEskridgeTransparentPsiOriginalCodePriorSensitivityExact
+
+import DASHI.Culture.AmyEskridgeTransparentPsiCorrectionAndModeratorWeldExact
