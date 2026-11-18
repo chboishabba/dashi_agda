@@ -17,7 +17,7 @@ def exact():
     assert s.simplify(E.subs(n,0)-q/2)==0
     assert s.simplify(E-E.subs(n,0)-n*q)==0
     u=s.symbols('u',positive=True)
-    assert s.simplify(s.coth(u/2)-(1+2/(s.exp(u)-1)))==0
+    assert s.simplify(s.coth(u/2).rewrite(s.exp)-(1+2/(s.exp(u)-1)))==0
     r,d=s.symbols('r d',positive=True)
     attenuation=(r/(r+d))**3
     assert s.simplify(attenuation**(-2)-((r+d)/r)**6)==0
