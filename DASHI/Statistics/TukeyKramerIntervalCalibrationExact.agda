@@ -55,17 +55,15 @@ decideConservatively :
   HSD.PostHocDesign → RangeQuantileBracket →
   HSD.GroupSummary → HSD.GroupSummary → ConservativeDecision
 decideConservatively design bracket a b
-  with HSD.andBool (HSD.admitted design a b) (validBracket bracket)
-... | false = notAdmitted
-... | true with
-    HSD.lt
-      (HSD.statisticDenominator design a b * upperNumerator bracket)
-      (HSD.statisticNumerator design a b * upperDenominator bracket)
-... | true | true = definitelyReject
-... | true | false with
-    HSD.leq
-      (HSD.statisticNumerator design a b * lowerDenominator bracket)
-      (HSD.statisticDenominator design a b * lowerNumerator bracket)
+  with HSD.andBool (HSD.admitted design a b) (validBracket bracket) |
+       HSD.lt
+         (HSD.statisticDenominator design a b * upperNumerator bracket)
+         (HSD.statisticNumerator design a b * upperDenominator bracket) |
+       HSD.leq
+         (HSD.statisticNumerator design a b * lowerDenominator bracket)
+         (HSD.statisticDenominator design a b * lowerNumerator bracket)
+... | false | _ | _ = notAdmitted
+... | true | true | _ = definitelyReject
 ... | true | false | true = definitelyNotReject
 ... | true | false | false = quantilePrecisionInsufficient
 
