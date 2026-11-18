@@ -31,6 +31,21 @@ The new native discriminator builds **two explicitly counterfactual worlds** wit
 
 The exact correspondences and 40+60, 91+19+40 finite totals are in `AmyEskridgeBemOriginalProtocolCorrespondenceWeldExact.agda`, with a negative control for the retracted accusation based on the wrong paired test. Historical person-specific alleged misconduct remains unproved.
 
+### Raw-data availability and the genuinely strong 69-study steelman (new original-source acquisition)
+
+A previously missed **20 January 2018 original public data release** is directly linked on the primary correspondence page:
+https://replicationindex.com/2018/01/20/bemcorrespondence/
+
+Schimmack's article says Bem authorised him to distribute all nine study datafiles, and includes individual original workbook links **EXP1 through EXP9**; exact first and sixth:
+- **Original Experiment 1** https://replicationindex.com/wp-content/uploads/2018/01/exp1.xlsx
+- **Original Experiment 6** https://replicationindex.com/wp-content/uploads/2018/01/exp6.xlsx
+
+**Status changed:** These workbooks are *located public primary data*, not inaccessible research records. The current model runtime's web reader identified the attachment URLs but rejected the binary XLSX response, and the isolated local container cannot resolve the host. Accordingly, the original workbook **contents have not been inspected or reproduced**. No analysis based on guessed contents is permissible. Source identity and permission are encoded in `AmyEskridgeBemOriginalProtocolCorrespondenceWeldExact.agda`, and acquisition is the **immediate P1a gate**. User or a network-capable checkout can download the precise source bytes. When retrieved, preserve original XLSX, checksums and the recorded header/participant/session coverage; separately decode via the data pipeline and reproduce the exact one-sample fixed-50%-null t tests **before** contrasting with the critic's paired-control alternative.
+
+The **25 January 2018 author reply** is an especially important steelman: Bem claims the 90-study meta-analysis separately evaluated **69 independent studies** (33 laboratories, 14 countries), including **31 exact computer-program replications** and **38 modified replications**; he reports **z=4.16, p=1.2×10^-5, Bayes factor 3.85** for the independent subset. The public reply also denies result-based study discard and explains changes to earlier pilot procedures. These are attributable *original author statements*, **not independently replicated calculations or proof of no bias**. A serious adjudication must reproduce the 69-study subset and quality/selection, not dismiss the steelman simply by excluding the original Bem papers. The RCT/consensus 2023 null is strong *for its specific target design* but does not algebraically contradict a heterogeneous meta-analytic positive value without matching experimental protocols/strata.
+
+`AmyEskridgeBemOriginalProtocolCorrespondenceWeldExact.agda` now carries the exact workbook locators and the 31+38=69 source-count witness (the latter proves only the arithmetic of the published assertion). This is a higher-yield source cut than more toy family-wise rates.
+
 ### Additional exact-statistical control that changes the interpretation
 
 The original paper reports **eight of nine experiments significant**, not merely *at least one of nine*. Under the **strictly hypothetical** model of nine independent, preregistered, calibrated alpha=.05 tests all under the null,
@@ -48,7 +63,7 @@ The Transparent Psi 2023 original paper has an **internal inconsistency**: its s
 
 Original data leads:
 - Transparent Psi raw consolidated `final_combined_live_data_for_analysis.csv`: **https://osf.io/24qkr**; born-open recordings: https://github.com/kekecsz/transparent-psi-results/tree/master/live_data . Original paper confirms **2115 participants / 37836 erotic trials**, 25 incomplete sessions, 192 absent trials; 3 additional sessions truncated at preregistered stopping threshold. Mixed-logistic clustered Wald 99.75% CI **49.11–50.67%**; 3 Bayes factors plus one mixed logistic simultaneously triggered preregistered stopping at the first analysis boundary.
-- Bem original 2011 Experiment 1 participant/session records remain **not retrieved in this turn**. For Experiments 5/6, the 2018 correspondence reports Bem sharing 250 chronological CSV sessions, but original attachment bytes and a direct public reproduction remain to be acquired. The contemporaneous data provenance should not be replaced with data reconstructed from narrative.
+- Bem original 2011 Experiment 1 and 6 data files are now **located as linked original XLSX attachments**, but bytes were **not retrievable in this execution environment**; original session-level reproductions remain open. The 2018 correspondence also reports Bem sharing 250 chronological CSV sessions for Experiments 5/6, but its precise original bytes remain uninspected. The contemporaneous data provenance should not be replaced with data reconstructed from narrative.
 - Unpaid: direct 2011 data and scripts; original blinded RNG/session controls; precise participant/trial strata; original author preregistration/analysis chronology; independently audited moderation test with held-out predictions.
 
 **Acceptance:** the existing `scripts/check_amy_eskridge_bem_steelman_realistic_sympy.py` now checks the genuine DASHI discriminator/Tukey/ANOVA source identity, exact 8-of-9 conditional probability and synthetic nonidentifiability as well as the original literature/protocol correction. Repo source-blob checks may be run without CI; full Agda kernel and full checker in a local checkout remain separate.
