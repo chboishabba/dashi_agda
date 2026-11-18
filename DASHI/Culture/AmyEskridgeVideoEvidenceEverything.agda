@@ -57,3 +57,7 @@ import DASHI.Culture.AmyEskridgeVideoSurroundingProducerWeldExact
 -- Primary reports omitted by the edited video but present in HAL5's original
 -- scientific/source genealogy; ownership retained by report authors.
 import DASHI.Culture.AmyEskridgeVideoOmittedOriginalResearchWeldExact
+
+-- Exact 11-US research cohort versus 11-person Fox media roster and
+-- pre-existing R68-R88 programme/custody/FOIA gates; no guessed identity.
+import DASHI.Culture.AmyEskridgeVideoUS11PriorArtReconciliationExact
