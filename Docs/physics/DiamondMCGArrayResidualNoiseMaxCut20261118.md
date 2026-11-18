@@ -334,3 +334,37 @@ New checker: `scripts/check_diamond_mcg_squid_sota_source_steelman.py`, with exa
 **Quantum/absolute-zero rule:** existing PR #701 oscillator and ground-state theorems are reused as conceptual ownership. A zero-temperature oscillator has nonzero ground energy, but its symmetrized noise is not a universal magnetic SQUID/NV noise floor, nor an assertion that 0.1 fT sensors run at 0K. Neither temperature lowering nor vacuum fluctuation suppression proves a physically usable kilometric cardiac receiver.
 
 **P4/P5 next hard physical discriminator:** obtain source paper noise spectral curves at 0.5,1,3,10,30 Hz for each *full receiver system*, plus measured cardiac moment/source spectrum, pickup standoff, SQUID flux-transfer and noise budgets, 1/f/drift, and inter-channel covariance. Then integrate frequency-bin matched-filter information with realistic phase decorrelation and periodicity searches. Explicitly mark reported white noise vs measured 1Hz vs projected hardware. No more generic spatial-array statements should be presented as novel physics.
+
+
+## 18 November: eleven-reported-scientists source audit vs undisclosed MCG receiver capability
+
+**Repo prior art actually inspected**, not guessed:
+- `Docs/roadmaps/AmyEskridgeVideoAggregationMaxCut20261117.md`, PR #1528: the source-attributed media **11** comes from the 17 April 2026 Fox list, whereas the 20 April House committee letter discusses **at least ten** cases and describes reports as **unconfirmed**. Amy's 2022 death is separate from the House letter's 2023-onward sequence. The edited video has **86 attributed claims**, not 86 independent source receipts.
+- `DASHI/Culture/MissingDeceasedCommonObjectProgrammeInvestigationExact.agda`, PR #915: the retained cross-person owner has `literalCrossPersonReceiptCount = 0`, with 6 institutional/thematic adjacency receipts and multiple candidate capability hypotheses. This is an **evidence-search ledger**, not a proof that no programme exists.
+- `docs/research/psychotronics-missing-scientists-physics-crosswalk-20261024.md`, PR #1242: engineering and original-science crosswalk; it specifically distinguishes Li/Torr superconducting-gravity theory, Podkletnov/Nieminen reported shielding, NASA/Quantum Machines POAMS, and standard electromagnetic/cryogenic metrology. Distinct speculative mechanisms must not be silently promoted to a demonstrated SQUID, cardiac sensing system, gravitational source enhancement or intelligence capability.
+
+The eleven-person reporting cannot independently supply a quantitative instrument performance claim; the absence of a public technical receipt **does not** impose an upper bound on an undisclosed receiver. A maximally favourable capability hypothesis is valid as a *conditional inverse design problem*: what cardiac moment, receiver ASD, array gain and coherent integration would make a claimed range possible? No need to infer motive, secrecy or involvement of any person.
+
+**New exact inverse-envelope checker:** `scripts/check_diamond_mcg_undisclosed_capability_inverse_steelman.py` uses exact SymPy solution of `rho = A0 (r0/r)^3 g sqrt(N T)/S`. The effective transfer factor `g` cannot be identified with independent-sensor count a second time. The 50 pT @ 0.1m amplitude, 1000 independent sensors, r^-3 static dipole, coherent SNR 5 benchmark is deliberately retained here to expose required *additional* performance—not because 50 pT is the universal strongest human cardiac moment.
+
+Under these assumptions at `r=1000m`, the **required PER-CHANNEL equivalent ASD** is
+
+| Fully coherent observation time | Required ASD (fT/sqrtHz), upper threshold |
+| --- | ---: |
+| 1 second | 3.1623e-7 |
+| 1 minute | 2.4495e-6 |
+| 1 hour | 1.8974e-5 |
+| 1 day | 9.2952e-5 |
+| 1 year (365.25 days) | ~1.776e-3 |
+
+These are requirements, **not achieved or physical lower bounds**. Inverse source-moment constraints can be computed with `needed_A0 = rho S (r/r0)^3/[g sqrt(NT)]`. Stronger source moment, better flux coupling, different propagation or longer coherent integration change this quantitative requirement; any such claim must independently source its gain mechanism and noise floor.
+
+### Updated high-alpha decision sequence
+
+1. **Primary source strength:** seek maximum *measured* remote cardiac magnetic moments/spectra and geometry, with separation from source movement, metal/implant artifacts or technical fields. A powerful source mechanism changes the premise; no arbitrary upper bound is granted.
+2. **Best receiver transfer:** construct SQUID/superconducting pickup flux-to-field conversion `S_B = S_Phi/|A_eff|` including mutual inductance, standoff, impedance, amplifier backaction and measured 0.5-40Hz spectra. Large loops average the source spatially and capture correlated ambient fields.
+3. **Temporal information:** test whether long-term cardiac phase is usable. False-alarm-corrected periodicity detection can integrate power without a stable waveform but with a different time law; do NOT treat year-long coherence as a free receiver gain.
+4. **Hypothesis discrimination:** compare a conventional public SOTA system, an engineering-extrapolated system, and an **explicit hypothetical undisclosed** capability envelope without conflating these categories.
+5. **Attribution separate from detection:** a magnetically correlated periodic signal is not yet proof of a human heartbeat or identity. Hold-out spatial/spectral/human/technical negatives remain mandatory.
+
+**Current milestone:** zero hidden-technology inference was needed to compute the inverse requirements. No empirically calibrated 1-km system or universal impossibility theorem is established. The repo source genealogy informs the evidence and owner search, not the numerical field sensitivity. P4/P5 and physical validation remain OPEN; synthetic inverse algebra alone does not close them.
