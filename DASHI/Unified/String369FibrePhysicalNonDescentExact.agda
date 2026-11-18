@@ -24,6 +24,7 @@ module DASHI.Unified.String369FibrePhysicalNonDescentExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Data.Unit using (⊤; tt)
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
@@ -71,9 +72,13 @@ noUniversalInternalRecoveryFromBase :
   ((p : total) →
     decode (CY.BaseCompactFibreBundle.projectBase productFibre p)
       ≡ proj₂ p) → ⊥
-noUniversalInternalRecoveryFromBase decode correct
-  with correct internalStateFalse | correct internalStateTrue
-... | refl | ()
+noUniversalInternalRecoveryFromBase decode correct =
+  falseNotTrue
+    (trans (sym (correct internalStateFalse))
+      (correct internalStateTrue))
+  where
+    falseNotTrue : false ≡ true → ⊥
+    falseNotTrue ()
 
 -- The original QED/QCD theorem provides a physically relevant, distinct
 -- non-descent example, not an identification with these two Boolean
