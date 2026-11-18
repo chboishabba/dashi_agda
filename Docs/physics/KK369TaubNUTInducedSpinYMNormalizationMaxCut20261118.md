@@ -195,3 +195,26 @@ ChatGPT-assisted work, dated 2026-11-18, consists ONLY of the local
 symbolic tensor checker, 4D/5D stress discriminator and source-to-source
 integration/audit ledger. No invention of the known spin/YM/Taub–NUT
 or Skyrme mechanisms is claimed.
+
+## Supplemental exact generator and curvature normalization
+
+Dunajski (2013) Eq. (2.7) uses `[t_i,t_j]=-(1/2)epsilon_ijk t_k`.
+The original DASHI SU2 quaternion basis uses
+`[e_i,e_j]=2epsilon_ijk e_k`. For the SAME Levi-Civita orientation
+and epsilon conventions the exact embedding is
+`t_i=-e_i/4`, checked in the committed SymPy script.
+
+Our raw Lie-index chiral vector `C_i=R_jk+R_i4`, in this self-dual
+frame, is `2R_jk`, while Dunajski's `F^i=(1/2)epsilon_ijk R_jk`
+has numerical coefficient `C_i/2`. Therefore the full generator
+coefficient expressed in native `e_i` is `-C_i/8`. At the selected
+point the resulting two native-basis curvature vectors are
+`(0,0,-1/32)` and `(0,-1/64,0)`, with quaternion Lie bracket
+`(-1/1024,0,0)`. These exact normalized finite computations PASS
+in the revised script.
+
+This is a chosen *generator convention* matching the published
+spin-connection construction. It still does not assign the YM action's
+physical coupling `g5`, trace normalization or gauge-bundle global
+identification. If an alternate 't Hooft eta convention is selected,
+the signs/factors must be transported explicitly, not copied blindly.
