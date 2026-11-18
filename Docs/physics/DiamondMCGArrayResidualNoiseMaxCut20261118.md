@@ -49,3 +49,18 @@ For `A(r)=A₀(r₀/r)³`, coherent ideal matched-filter observation time scales
 | A6: kilometre-scale heartbeat detection | NOT established | Same-device measured residual noise and attributable target signal |
 
 This is an exact mathematical negative/positive-control cut, NOT a demonstration of kilometre-scale sensing. No live array data were accessed. Neither external authors' scientific results nor preexisting owner proofs are claimed as new.
+
+
+## 18 November continuation: P1/W1 finite-array detector weld
+
+New source: `DASHI/Physics/QuantumSensors/DiamondMCGArrayInformationWeldExact.agda`.
+
+1. `allNWhitenedInformationUpperBound` imports the **existing** `NSTriadKNExactFiniteComplexCauchySchwarzRound65` owner and transfers its finite complex inequality to a noise-whitened sensor/filter response indexed by any finite support. The premise `ExactFiniteComplexCauchySchwarz` remains explicit: repo owner itself declares the concrete ordered-real instantiation open. This is not falsely marked a unconditional Agda theorem over physical reals.
+2. `addedSensorsCannotReduceAttainableInformation` is a new generic score-monotonicity proof: if an old score-optimal detector is representable on the expanded array with exactly preserved score, then the attained expanded optimum is no smaller. It does **not** assume independent noise or claim that purchasing another diamond element yields any gain. Requires an exact preservation witness for the physical resource model.
+3. `SignalPreservationReceipt` records both target response and filtered noise before promotion of any claimed SNR benefit. It is a receipt interface, not a proved inequality for a physical projector.
+
+**Verification receipt:** `python3 /mnt/data/check_diamond_mcg_array_detection_exact.py` (local copy of committed `scripts/check_diamond_mcg_array_detection_exact.py`) completed successfully, concluding `All exact symbolic identities passed`. Agda executable unavailable in the current runtime; **no Agda kernel acceptance claimed**.
+
+**Gate change:** P1/W1 moves from symbolic two-channel analysis to source-authored general finite-support theorem interfaces and a genuine abstract monotonicity proof, with exact-head kernel validation, inverse-covariance whitening construction, and instance-specific optimality still OPEN. P2–P6 remain OPEN.
+
+**Highest-value next cut:** construct an actual positive-definite complex/real covariance-to-whitening owner (not an unexplained isometry), then instantiate all-N norm/score identities; prove covariance block extension via Schur complement, and quantify signal loss for spatial nulling using a projection theorem. Only then promote P1 to kernel-checked optimal linear detection.
