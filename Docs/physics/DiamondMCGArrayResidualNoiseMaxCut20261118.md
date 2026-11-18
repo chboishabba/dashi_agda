@@ -715,3 +715,39 @@ then for *assumed* vortex drift velocity `v_vortex` and ideal lattice scale `a�
 **Relation to KK:** Under the existing geometric KK zero mode, the coherent source changes Maxwell `F²` and material `T_mu_nu`; the radion couples at fixed Planck-suppressed strength with no free coherent `N²` mass multiplier. A physically viable *extra collective excitation* could appear as a new effective field or KK mode only after deriving its 5D matter Hamiltonian, compactification, source/observable map, stabilisation and fifth-force bounds. The above is a coherent-mass hypothesis suitable for falsifiable dynamic modeling, not a reported experiment or a proof of an exotic field.
 
 **Attribution:** Original London/fluxoid/BCS and KK theoretical results remain attributed to published sources; DASHI existing Li–Torr, Filsinger, quantum and atomic owners reused. User originated the 'macroscopic coherent charged mass under braking' hypothesis here. New symbolic checks are computational identities only.
+
+
+## 18 Nov — One-source coherent lattice/condensate braking (exact dynamics, no empirically claimed gravity)
+
+**Original research lineage:** London moment measured for rotating superconductors (Phys Rev 184,460 (1969) https://doi.org/10.1103/PhysRev.184.460); rotating vortex energetics (Phys Rev B 62,9740 https://doi.org/10.1103/PhysRevB.62.9740); time-dependent GL for accelerating/rotating superconductors (Physica C 496, 17–22 (2014) https://www.sciencedirect.com/science/article/abs/pii/S0921453413003213); time-dependent London moving-vortex dissipation (Phys Rev B 97,094510 https://doi.org/10.1103/PhysRevB.97.094510). **User-origin idea:** coherent mass/charge state during abrupt braking. **New mathematical calculation:** finite coupled angular-mode equations and matched London/KK source observables; **not** a microscopic BCS/TDGL derivation or gravity experiment.
+
+### Signed common-source angular model
+
+`Omega_l`: ionic-lattice rotation rate; `Omega_s`: effective condensate angular-mode rate; `psi`: *relative mechanical angular displacement* (NOT automatically microscopic Cooper-pair U(1) gauge phase); effective inertias `I_l,I_s`; coupling stiffness `K>=0`, viscous drag `eta>=0`; possible condensate damping `D_s>=0`; independently funded torques `T_brake,T_RF`. A testable finite-mode constitutive truncation:
+```
+ psi_dot = Omega_l-Omega_s
+ T_c = K psi + eta (Omega_l-Omega_s)
+ I_l Omega_l_dot = T_brake - T_c
+ I_s Omega_s_dot = T_RF + T_c - D_s Omega_s .
+ E = (I_l Omega_l² + I_s Omega_s² + K psi²)/2
+ dE/dt = T_brake Omega_l + T_RF Omega_s
+         - eta (Omega_l-Omega_s)² - D_s Omega_s².
+```
+The identity is EXACT algebra, not an imposed free output port. This includes braking power (potentially extracted or dissipated externally), RF work (source paid) and collective elastic storage. An RF *torque* is only a phenomenological interface unless calculated from coupled Maxwell currents and drive phase; a real YBCO vortex ensemble has many internal modes, current-induced forces and hysteresis. Static constant-speed differential vanishes in the reduced drag-only, initially equilibrated case; braking transient requires actual source history.
+
+**Exact verified local script and committed source:** `scripts/check_sc_coherent_braking_same_source_dynamics.py` PASS in this turn using Python/SymPy: proves two-inertia ledger, analytic one-pole braking ramp `Omega_s-Omega_l=a tau(1-exp(-t/tau))`, post-ramp relaxation, ideal London field `B_L=-2(m/q)Omega`, exact magnetic energy `delta(B²)/(2mu0)`, KK reduced `Z(phi)=exp(sqrt6 phi/M_Pl)` field-invariant source derivative, and radion-mode propagating threshold `omega=m_phi c²/hbar` at zero spatial momentum. The scalar dispersion relation by itself does not derive coherent radion emission or percent weight effect. Tau is unmeasured, so illustrations for a 27.5-second 5000→3500rpm ramp yield 0.057/0.571/5.712/53.47 rad/s lag for tau=0.01/0.1/1/10 seconds respectively. If one **extrapolates the ideal London field to a condensate effective angular velocity**, the tau=1s lag implies ~6.50×10^-11 T extra field. This extrapolation must **not** be presented as a direct microscopic London theorem for a non-equilibrium pinned vortex medium. Total B includes applied RF, trapped flux and boundary currents.
+
+### Why the finite elastic mode corrects the tau-only picture
+
+In `scripts/check_sc_coupled_rotor_frequency_response.py`, the same-source linearized *prescribed Omega_l* transfer with `D_s=0,T_RF=0` is
+```
+ H_s(z)=Omega_s(z)/Omega_l(z) = (K+eta z)/(I_s z²+eta z+K)
+ H_lag(z)=(Omega_l-Omega_s)/Omega_l=I_s z²/(I_s z²+eta z+K).
+```
+Natural response scale `sqrt(K/I_s)`, damping `eta/I_s`. Exact symbolic tests PASS. In the `K=0` fluid relaxation limit, constant acceleration leaves an asymptotic velocity lag `Omega_l-Omega_s=-I_s a/eta`; with `K>0`, the relative **velocity** lag instead tends to zero during an arbitrarily prolonged linear ramp, while finite phase/angular displacement tends to `-I_s a/K`. This is a genuine qualitative distinction with a time-resolved experimental discriminator, not a fitted Podkletnov peak. The transfer model is a simplified modal response; a real sample's K must come from fluxoid/pinning or Josephson phase physics and cannot be identified with mechanical inertia by assertion.
+
+### Matched Maxwell, standard gravitational and KK source
+
+From exactly the same `Omega_l(t),Omega_s(t),psi(t),T_RF(t)`, predict magnetic output through a **separately calibrated** `J_s,A,B,mu0` map and a London limit, then calculate Maxwell Poynting and Lorentz stress tensor, rotor mechanical stress-energy including the lattice/condensate internal coupling, and feed `T_mu_nu` into GR and `F_mu_nu F^mu_nu` and Jordan matter stress into the existing KK radion action. The KK fixed zero-mode electromagnetic source derivative is `∂[-Z(phi)F²/4]/∂phi|0=-sqrt6 F²/(4M_Pl)`; mass threshold for propagating modes must be compared to actual braking/RF/flux frequencies (1–4MHz pump may emit EM sidebands but not automatically light radion radiation). **No external measured gravitational force has been calculated**: finite compactification/source boundary-value solution, microscopic parameters, time-dependent Maxwell/TDGL fields and probe geometry remain OPEN.
+
+**Attribution and non-promotion:** original London and TDGL work is credited to original researchers; conditional coherent-mass hypothesis comes from user; finite symbolic dynamics/new code is our computational contribution; existing DASHI Filsinger/KK owner remains canonical. Do not count coherent Cooper-pair number as N² rest mass or mistake collective radiation amplitude for new energy.
