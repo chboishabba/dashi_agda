@@ -5,7 +5,7 @@ module DASHI.Mathematics.Topology.KKHopfSpinSelectionCounterexampleExact where
 -- H. Hopf (1931), Math. Ann. 104, 637-665, DOI:10.1007/BF01457962.
 -- D. Finkelstein and J. Rubinstein (1968), "Connection between Spin,
 -- Statistics, and Kinks", J. Math. Phys. 9, 1762-1779,
--- DOI:10.1063/1.1664490.
+-- DOI:10.1063/1.1664510.
 -- Spin(3) = SU(2) -> SO(3) and the central sign are standard.
 --
 -- EXISTING DASHI OWNERS (REUSED, NOT CLAIMED AS NEW):
