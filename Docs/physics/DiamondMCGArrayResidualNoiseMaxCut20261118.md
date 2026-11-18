@@ -204,3 +204,35 @@ At 2 cm disk diameter, the 1000-channel x/y/z array improves **worst-orientation
 **Source-validation boundaries:** no optical photon statistics, diamond material resource model, spectral transfer, tissue-return currents, NV-axis constraints/selection rules, sensor crosstalk, measured `C_n(f)`, cardio-dynamic source, or multiple-hypothesis false-alarm model was available. A 50 cm disk is a mathematical layout, not an installed apparatus. The 1 km row is only an extrapolation of the point-dipole model, not detection evidence.
 
 **P3 status: mathematical architecture benchmark implemented, physical design optimisation remains OPEN.** The highest-alpha next cut is (i) a measured frequency-resolved covariance and readout resource law; (ii) joint axis/baseline/range optimisation with unknown-source orientation and location, not just these hand-picked designs; (iii) P4 variable-heartbeat detection/attribution and time/false-alarm acceptance. Reuse the existing covariance and Biot-Savart owners; no extra Schur algebra required.
+
+
+## P3/P5 — Source-FOV optimal axis allocation and steelman (18 November 2026)
+
+**Committed checker:** `scripts/check_diamond_mcg_fov_steelman_p3.py`. Exact SymPy axial split and locally evaluated numerical angular-cone grid; numerical grid results rounded and subject to discretisation tolerance. Source committed through GitHub; exact-blob local replay was not available in this session. No Agda kernel or experimental claim.
+
+For a fixed look direction along `z`, the normalized far-field dipole map is `D=diag(-1,-1,2)`. For independent-noise, co-located axis measurements with normalized total resource `p_x+p_y+p_z=1`, information is `Dᵀ diag(p_x,p_y,p_z) D`. An E-optimal (maximum minimum eigenvalue) allocation sets `p_x=p_y=4/9`, `p_z=1/9`; `lambda_min=4/9`, compared to `1/3` for equal-axis allocation. This is an **exact on-axis mathematical optimum**, not an installed NV allocation or a spatial baseline optimum.
+
+For a look-direction cone `0<=theta<=theta_max`, every azimuth is reduced by rotational symmetry; numerically maximize `min_{look,moment} mᵀ D(n)ᵀ W D(n)m / ||m||²` over axis allocation `W=diag((1-p_z)/2,(1-p_z)/2,p_z)`. Grid result:
+
+| Cone half-angle | Approx optimal p_z | Worst-case normalized information | Gain over equal axes |
+|---:|---:|---:|---:|
+| 0 deg | 1/9 exact | 4/9 exact | 33.3% exact |
+| 10 deg | 0.176 | 0.3861 | 15.8% |
+| 20 deg | 0.239 | 0.3516 | 5.5% |
+| 30 deg | 0.300 | 0.3355 | 0.6% |
+| >=45 deg | 1/3 | 1/3 | 0% |
+
+These **conditional** values assume point dipole, fixed distance and budget, co-located sensors, no correlated nuisance, exact axes, and no spatial position uncertainty or finite-source cancellation. They should not be misrepresented as a result for finite-heart current families. A fixed global axis allocation for an off-axis look direction need not remain optimal if full environmental covariance breaks axial rotational symmetry.
+
+**Optimistic distance steelman with transparently assumed empirical reference:** `A_0=50 pT at r_0=0.1 m`, `S_B=7 pT/sqrt(Hz)`, all N channels independent at this sensitivity, coherent known-phase/known-source integration, target threshold 5, dipole amplitude decay `r^-3`. Conditional `T=(5S_B/(A_0 sqrt(N)))²(r/r_0)^6`, subject to spectral/phase normalization conventions and no look-elsewhere/false-alarm adjustment.
+
+| Assumptions | 10 m required time | 100 m required time | 1000 m required time |
+| --- | ---: | ---: | ---: |
+| N=1000, 7 pT/sqrt(Hz) per channel | 15.53 yr | 15.53 million yr | 15.53 trillion yr |
+| N=1000, 1 pT/sqrt(Hz) per channel | 0.317 yr (~116 days) | 316,881 yr | 316.9 billion yr |
+
+This is not a lower bound against every possible future sensor technology, nor proof of impossible remote biomagnetometry. It is a steelman calculation **conditional** on this benchmark signal, fixed per-sensor sensitivity and coherent idealizations. It is also **not the fixed-total-resource P3 comparison**; achieving the same per-element sensitivity for N=1000 incurs more resources. The calibration reference at 10 cm should not be promoted to a validated 10m–1km human cardiac dipole law: source orientation, multipoles, body-current closure and spatial environmental attenuation are unverified.
+
+**True worst-case issue:** A source family with no lower bound on measured magnetic cardiac moment admits arbitrarily weak or cancelling observable signals, so minimax source information can be **zero regardless of array geometry**. Worst-orientation eigenvalue for a fixed *nonzero dipole moment* does not solve worst-case anatomical source, unknown location, interference, human identification or sensor stability. An honest certified positive range needs a bounded and nonvanishing target source class (or a probability distribution with specified detection quantile) and measured cross-spectral covariance.
+
+**New spatial-optimisation gate:** jointly optimize true 3D sensor positions, 3D axes, source location within the requested angular cone and range interval, resource costs, common nuisance modes, robust cardiac source family and finite-aperture constraints. Test a single-source matched filter and held-out source-versus-nuisance discriminator with multiplicity-corrected false-alarm/detection rates. The current result is *axis allocation for an ideal FOV*, not an optimal physical sensor spread.
