@@ -103,9 +103,10 @@ unweightedMeanNumerator :
   unweightedParticipantMeanNumerator ≡ 1913
 unweightedMeanNumerator = refl
 
--- 1913/36 is 53.1388889 percent; 1913/36 = 9565/180.
+-- 1913/36 is 53.1388889 percent, i.e. probability 1913/3600.
+-- Compare it to 826/1560 as a PROBABILITY, not to its percent scale.
 weightedPercentageIsNotParticipantMean :
-  826 * 36 ≡ 1913 * 1560 → ⊥
+  826 * 3600 ≡ 1913 * 1560 → ⊥
 weightedPercentageIsNotParticipantMean ()
 
 laterPublished828IsDifferentFromUploaded826 :
