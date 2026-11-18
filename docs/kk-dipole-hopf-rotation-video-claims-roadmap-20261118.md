@@ -123,3 +123,33 @@ The former P5 plan was overbroad: the repository already proves several structur
 **Rotating KK reuse:** `scripts/check_boosted_kerr_kk.py` and `Docs/physics/KKEMHiggsEarthSourceBridge20261024.md` are already specific rotating/boosted KK donors. They do not yet supply a rotating finite-energy non-black-hole particle soliton or an anomalous acceleration law.
 
 **Verification status:** changes written through GitHub connector and code inspected by file fetch. This session has no local Agda compiler; new source is not kernel-certified. Do not promote it past that gate.
+
+## 7. P1/P4/P5 next maximum-cut (2026-11-18): exact sign counterexample and Derrick fixture
+
+### Source identity → exact object → version → relation → bounded promotion
+
+1. **Historical/classical:**
+   - Heinz Hopf, *Über die Abbildungen der dreidimensionalen Sphäre auf die Kugelfläche*, Math. Ann. 104 (1931), 637–665. DOI: `10.1007/BF01457962`. Classical sphere-to-sphere map; **not** a physical KK spinor.
+   - David Finkelstein and Julio Rubinstein, *Connection between Spin, Statistics, and Kinks*, J. Math. Phys. 9 (1968), 1762–1779. DOI: `10.1063/1.1664510`. Classical configuration-space quantization mechanism. Publisher DOI independently checked for this round; **not** a claim those authors proved a KK-vortex particle theory.
+   - G. H. Derrick, *Comments on Nonlinear Wave Equations as Models for Elementary Particles*, J. Math. Phys. 5 (1964), 1252–1254. DOI: `10.1063/1.1704233`. Classical scaling obstruction under its assumptions; the simple two-term scale minimum is a classical algebraic observation, not a proof of a physical soliton.
+   - Standard source: Maxwell static dipole in an applied uniform field. The chosen aligned representative is an exact mathematical negative control, not a universal electromagnetic classification.
+2. **Existing DASHI proof owners:** `FiniteQuaternionDoubleCover`, `AlexanderHornedSpin360720Exact`, `SU2SO3IrrepDimensionExact`, `HopfQuaternionAxisProjectionExact`, `SpinStatisticsConnectionReceipt`. The last explicitly states that selected finite p2/p3/p5 braiding is bosonic and *does not produce fundamental fermionic representations*.
+3. **Current original synthesis and code:** `KKHopfSpinSelectionCounterexampleExact.agda` proves two distinct Q8 signed lifts of the same spatial identity and nonuniqueness of the sign from a spatial rotation. `scripts/check_kk_dipole_derrick_maxcut_sympy.py` checks the exact collinear dipole azimuthal null statement, exterior curl, and positive two-term Derrick/Skyrme-type scale defect. Their contribution is a **bounded comparison and regression**, not an original discovery of spin/Maxwell/Skyrme physics.
+4. **User-originated research questions:** whether a dipole in flux generates spherical/toroidal structures; whether KK/Hopf/C3/369 produces 1/2-spin, and whether rotation changes gravitational response. These are motivating hypotheses/questions; no paper priority, authorship or experimental evidence is inferred from them.
+5. **Assistance and receipt:** ChatGPT-assisted code/document drafting and GitHub connector commits on branch `chatgpt/kk-dipole-hopf-video-claims-roadmap-20261118`, November 18 2026. Exact new commit SHAs are available from GitHub history. The lack of Agda executable blocks exact-head kernel acceptance of new modules; symbolic checks were independently reproduced with SymPy in this conversation, but the committed checker has no independently executed checkout receipt in this session.
+6. **No promotion:** Same spatial projection ≠ same spin lift. Hopf invariant ≠ FR quantum representation. Symbolic radius extremum ≠ full 3D PDE stability. Existing QFT spin-statistics receipt ≠ fundamental-fermion construction for this KK soliton.
+
+### New proved/certified-within-scope deliverables
+
+- [x] **Finite counterexample**: Q8 `+1` and `-1` have the same identity image under `rho`, are unequal, and give opposite signed choices; this is sourced from the exact preexisting Q8 proof and newly wrapped in an explicit no-unique-lift theorem.
+- [x] **Existing Hopf phase invariance**: imported and reused; does not choose one of the Q8 signed lifts.
+- [x] **Exact symbolic dipole negative control**: axis-aligned point dipole in constant axial background has azimuthal field component zero and curl zero outside the point singularity (within the idealized static source model).
+- [x] **Exact positive two-term scale defect**: for a,b,R>0, E(R)-2√(ab)=(√(aR)-√(b/R))²≥0, minimum at R=√(b/a). Establishes radial scaling stability only in the specified toy energy family.
+- [ ] **First actual KK soliton**: pin an asymptotically specified five-dimensional Einstein–matter action and an exact localized finite-energy solution; prove it has a normalized Hopf/topological sector. Do not use the rotating black-string fixture as if it were a particle soliton.
+- [ ] **Same-object FR theorem**: construct the physical configuration space quotient by gauge with boundary data; its 2π rotation loop; a nontrivial class in π1; and the two-particle exchange-loop relationship. Reuse existing spin-½ representation only after these are derived.
+- [ ] **Full stability**: constrained Hessian, nonradial modes, compact S¹ fibre fluctuations, gauge fixing, energy coercivity and nonlinear perturbation control.
+- [ ] **Measurement**: complete conserved energy-momentum and external-force ledger, including ordinary frame dragging and EM confounders.
+
+### Outstanding gate ordering
+
+P2 actual smooth Hopf/KK principal fibre geometry → P3 original parent-action solution → P4 full perturbation energy → P5 soliton configuration-space π1 and FR sign → P6 rotating source and gravitational response. The prior finite sign and scale tests are necessary audit inputs, not replacements for this chain.
