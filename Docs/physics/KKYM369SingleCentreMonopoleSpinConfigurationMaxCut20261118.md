@@ -128,3 +128,88 @@ separate gates.
 - **New bounded implementation:** this original-carrier comparison, explicit source solution register, SymPy check script `check_kk_gross_perry_sorkin_c3_monopole_sympy.py`, and Agda imported-source donor weld `YM369KKHopfC3DonorWeldExact.agda`; ChatGPT-assisted.
 - **Verification:** identities checked in-session using SymPy; the committed exact source checkout and Agda kernel have NOT been executed in this environment. Global Ricci flatness invokes the historical GH theorem rather than a new machine-checked curvature derivation.
 - **Nonpromotion:** geometric monopole ≠ electron, Hopf Chern ≠ half-spin, 369 finite YM ≠ smooth KK gravity, and ADM mass ≠ controlled anomalous propulsion.
+
+## 7. Companion *same original SU(2) theory family* candidate: static BPST instanton particle
+
+One route uses **5D SU(2) Yang–Mills on a fixed Lorentzian 4+1
+background**, rather than replacing the 369/YM connection by the
+*gravitational* U1 KK monopole. The original action is
+\[
+S_{5,YM}=-{1\over4g_5^2}\int d^5x\,F^a_{AB}F^{aAB}.
+\]
+Take \(A_0=0\), \(A_i(x)\) independent of time with
+\(i=1,\ldots,4\) and the **classical charge-one BPST instanton**
+on Euclidean \(\mathbb R^4\). Its self-dual field curvature satisfies
+the Yang–Mills equations (by Bianchi/self duality), giving an explicit
+time-independent 4+1-dimensional solution on that fixed background.
+The standard convention has
+\[
+F^a_{ij}F^a_{ij}={192\rho^4\over(r^2+\rho^2)^4},\qquad
+E={1\over4g_5^2}\int_{\mathbb R^4}F^a_{ij}F^a_{ij}
+={8\pi^2\over g_5^2}.
+\]
+The radial integral uses \(\mathrm{vol}(S^3)=2\pi^2\) and equals
+\(\int_0^\infty r^3 F^2dr=16\). This is finite energy and
+nonzero instanton number, not an arbitrary hypothetical soliton.
+
+**High-value negative control:** \(E\) is exactly independent of the
+BPST size \(\rho>0\). Thus unlike the illustrative Skyrme
+\(aR+b/R\) energy, ordinary 4+1-dimensional pure Yang–Mills
+does not pick a preferred soliton radius at the classical level.
+A topological energy bound and a size-zero mode are not full nonlinear
+stability. Finite-energy does not mean a dynamically selected size.
+The moduli of the charge-one framed instanton include at least
+4 centre coordinates, positive scale, and an SU2-gauge-orientation
+structure **whose quotient depends on framing and allowed gauge
+transformations**. Neither a SO3 orientation coordinate nor spin-half
+may be inserted without that choice.
+
+For an asymptotic **KK compact dimension** (space \(\mathbb R^3\times S^1\))
+a BPST configuration on \(\mathbb R^4\) is not automatically periodic:
+one must use an actual caloron or other periodic solution with selected
+holonomy and compactification radius. For **coupled 5D Einstein–YM**,
+flat space plus this nonzero-energy YM field is NOT a solution of the
+complete Einstein equations without gravitational backreaction.
+These remain physical gates. We now have TWO separate explicit parent
+actions, not one fabricated cross-theory identity:
+
+1. Pure 5D Einstein vacuum → known KK magnetic monopole (gravity).
+2. 5D SU2 YM on fixed Minkowski4+1 → known BPST instanton particle
+   (gauge field, topological finite energy, scale modulus).
+
+The new checker
+`scripts/check_kk_ym369_bpst_instanton_particle_energy_sympy.py`
+independently confirms the exact density integral and scale
+degeneracy. It does not reconstruct the BPST connection in the
+Agda-native bond carrier nor compute a coupled gravitational metric.
+
+### Literature and contribution attribution for this extension
+
+- **Original source:** A. A. Belavin, A. M. Polyakov, A. S. Schwartz,
+  Yu. S. Tyupkin, *Pseudoparticle solutions of the Yang–Mills equations*,
+  Phys. Lett. B 59 (1975) 85–87. The self-dual instanton and finite-action
+  mechanism are classical, not DASHI inventions.
+- **DASHI predecessors:** `BalabanSU2QuaternionCarrier`,
+  `SU2Bracket369OrientationBridgeExact`, `CompactLieLatticeGauge`,
+  and the native YM/C3 Wilson source constructors.
+- **User original question:** test whether existing 369/YM makes the
+  KK/Hopf soliton programme more concrete, while requiring original
+  field/source identity.
+- **Current original contribution:** side-by-side physical model
+  separation and exact scale-neutrality countercontrol, with
+  ChatGPT-assisted symbolic verification. No physical particle-spin
+  inference or claim that the 369 finite YM construction is the
+  classical BPST continuum solution.
+
+### Revised maximum-cut choice
+
+- **Route G (geometry):** prove exact source-metric KK monopole bundle and
+  classical Ricci flatness with formal global energy; then study framed
+  gravitational configuration-space rotation loops.
+- **Route Y (Yang–Mills):** construct the actual BPST gauge field in the
+  *existing SU2 quaternion carrier*, prove self-duality/Bianchi and
+  normalize instanton number; then connect to R3×S1 caloron holonomy
+  and a genuine gauge-configuration-space \(\pi_1\).
+- **Weld G↔Y:** only after specifying a 5D Einstein–YM action, constructing
+  nontrivial backreacted geometry, checking matching topology/source
+  under reduction, and proving any proposed spin-fermion selection.
