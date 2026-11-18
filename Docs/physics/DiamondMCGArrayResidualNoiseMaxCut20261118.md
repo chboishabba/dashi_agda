@@ -236,3 +236,33 @@ This is not a lower bound against every possible future sensor technology, nor p
 **True worst-case issue:** A source family with no lower bound on measured magnetic cardiac moment admits arbitrarily weak or cancelling observable signals, so minimax source information can be **zero regardless of array geometry**. Worst-orientation eigenvalue for a fixed *nonzero dipole moment* does not solve worst-case anatomical source, unknown location, interference, human identification or sensor stability. An honest certified positive range needs a bounded and nonvanishing target source class (or a probability distribution with specified detection quantile) and measured cross-spectral covariance.
 
 **New spatial-optimisation gate:** jointly optimize true 3D sensor positions, 3D axes, source location within the requested angular cone and range interval, resource costs, common nuisance modes, robust cardiac source family and finite-aperture constraints. Test a single-source matched filter and held-out source-versus-nuisance discriminator with multiplicity-corrected false-alarm/detection rates. The current result is *axis allocation for an ideal FOV*, not an optimal physical sensor spread.
+
+
+## 18 November correction: prioritize BEST-CASE steelman, not E-optimal worst orientation
+
+**Correction:** Prior P3 FOV axis allocation maximized the *smallest* eigenvalue of the Fisher matrix. That is a defensible ROBUSTNESS result, **not** a best-case steelman. It must not be promoted as the primary best-case array optimization. For a known look direction, ideal co-located free-space dipole response `D = diag(-1,-1,2)/r³` and fixed independent-noise resource, maximum source-direction information is `4/r⁶` by choosing the line-of-sight moment and matching the sensor-axis orientation. The earlier `4:4:1` allocation optimizes the *minimum*, not the maximum, eigenvalue; its `4/9` minimum is not a best-case result.
+
+**New implementation:** `scripts/check_diamond_mcg_bestcase_steelman_p3.py` replaces the optimization target with the **largest eigenvalue** of the source Fisher Gram `Sᵀ C⁻¹ S`, optimizing source moment analytically and two independently weighted sensor macro-group positions/axes numerically. It optionally maximizes over source bearing in a viewing cone (not the minimum across that cone). The model uses the exact point-dipole tensor and a simple correlated uniform two-component ambient field. A fixed aggregate independent sensing resource makes group coadded variance independent of splitting each of the two macro-groups into 50 or 500 identical channels: the same best-case objective applies at 100 or 1000 channels under **this particular assumed resource law**, not universally.
+
+For source distance `r`, sensors in the planar disk and a fixed total independent-noise budget, the spectral norm of the free-space dipole tensor gives a rigorous model upper bound:
+```
+I_best <= 4/(sigma² * d_min^6)
+```
+where `d_min` is the nearest geometrically allowed sensor-to-source separation; here `sigma²=1` is the dimensionless total resource noise variance. This bound remains valid with added positive semidefinite ambient covariance. In no-ambient cases, co-located aligned sensor groups attain it exactly for an on-axis source (in the ideal point-sensor limit). This gives a **provable model optimum**, not merely an arbitrary local numerical search result. With correlated ambient noise the differential-evolution result is only a feasible lower witness, possibly suboptimal: the bound-to-witness gap is reported and global optimality is **not claimed**.
+
+**Local exact SymPy checks and numerical witnesses, 50-cm aperture** (all normalized, not physical SNR; `tau` is the common-field standard deviation relative to normalized independent-noise scale):
+
+| Source distance | tau | viewing-cone half-angle | feasible best-case information | rigorous loose upper bound | fraction of upper |
+| ---: | ---: | ---: | ---: | ---: | ---: |
+| 2 m | 0 | 0 deg | 0.062500 | 0.062500 | approximately 1 |
+| 2 m | 10 | 0 deg | 0.0025971 | 0.062500 | 4.16% |
+| 10 m | 0 | 0 deg | 4.0000e-6 | 4.0000e-6 | approximately 1 |
+| 10 m | 10 | 0 deg | 4.5063e-8 | 4.0000e-6 | 1.13% |
+| 10 m | 10 | 20 deg | 4.5063e-8 | 4.0000e-6 | 1.13% |
+| 100 m | 10 | 0 deg | 3.9659e-14 | 4.0000e-12 | 0.991% |
+
+Under correlated-noise cases the optimizer convergence flag is false at its iteration limit: **these are feasible designs only, not certified maxima**. This is an explicit optimization residual, not a hidden success flag. No output here is an empirical NV or human-heart sensitivity/range claim. The prior 7 pT/√Hz / 1000-sensor range table remains an illustrative independent-*per-channel*-resource reference and is not the fixed-total-budget output here.
+
+**Next gates in strict steelman order:** (1) replace model-only `C` by measured frequency-dependent residual cross-spectral covariance and include NV transfer/readout costs; (2) extend from two planar macro-groups to full finite array positions/axis distributions with physically allowed NV crystal orientations; (3) optimize over the strongest source geometry/current waveform consistent with primary cardiac evidence, including sensor-to-source geometry and anatomy; (4) optimize spectral template and finite coherent/partially coherent integration under validated phase stability; (5) only then report range and statistical detection/attribution. Worst-case eigenvalue and minimax FOV coverage remain separate *secondary* robustness gates.
+
+**Verification scope:** exact theoretical identities and comparable numerical cases were executed locally with SymPy/NumPy/SciPy before commit; this is **not** an exact Git-blob replay or an Agda kernel check. No CI requested.
