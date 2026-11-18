@@ -10,6 +10,44 @@ This PR is a **new video-source aggregator over existing producers**, not a new 
 
 The transcript provided by the user is titled *She Researched Something THEY DON'T ALLOW. Then She Died* and ends at 32:44. **Original edited video identified:** Be Inspired / `@beinspiredchannel`, 12 May 2026 in channel indexes, `https://www.youtube.com/watch?v=acw16d6CCnY` (video ~32:47). The narrator's personal name, upload timezone and some original clip offsets are still unresolved; do not fabricate them. The 86 itemized claims are source-content paraphrases with timestamp pointers; they are not 86 independently verified findings or 86 source documents.
 
+## 18 November 2026 — Aristotle search and actual Tukey HSD / pooled ANOVA implementation
+
+**User-directed prior-art follow-up:** `Tukey` in `DASHI/Statistics/Vec15Robust.agda` only refers to **Tukey's IQR robust outlier fence**, not the post-hoc **Tukey HSD** family-wise error procedure. `Vec15Inference.anova15`, `tTest15` and `chiSquared15` are deterministic 15-vector scoring scaffolds; their `pValue` is a count, not a calibrated classical probability. Source consumers must not inadvertently treat them as inferential statistics.
+
+**Actual original Aristotle proof-search prior art**:
+- `DASHI/Reasoning/AristotleMergeExperimentDesignExact.agda`: visible observer collision, dependency/provenance experiment bundles, source-bearing `DiscriminatingLanguageExtension`, and an outcome-dependent sequential consumer plan.
+- `DASHI/Reasoning/AristotleActiveExperimentalProofSearchLoopExact.agda`: proof-bearing active iterative loop with guarded compatible merges and selective reopening.
+- `DASHI/Reasoning/AristotleActiveExperimentalProofSearchDynamicsExact.agda`: the actual `canonicalOneIterationCycle` and `canonicalClosurePath`, and possibility of consumer-relative early closure.
+- `DASHI/Core/DiscriminatorSynthesisExact.agda`: original `extensionJoinSeparates` and nuisance-robust consumer separation.
+We **import original values** rather than rebuild these search mechanisms. `AmyEskridgeBemAristotleExperimentalProofSearchWeldExact.agda` defines a *source-dependent next-step compiler*: absent raw XLSX bytes -> **acquire EXP1**; then reproduce the original published statistic -> reanalyse Transparent Psi per preregistration -> specify testable moderators and nuisance/variance conditions -> only then admit appropriate secondary Tukey comparisons. The original Aristotle search-cycle and closure-path proofs are linked directly. A synthetic final research state tests the decision logic; it is not a claim of obtaining raw Bem data.
+
+### New actual classical-statistics implementations (reusable outside Bem)
+
+| New native source | Exact computation | What is *not* certified |
+|---|---|---|
+| `DASHI/Statistics/OneWayANOVAPooledMSEExact.agda` | Three-group source summaries `(n,sum,sumSquares)`; exact within SSE: `sumSquares - sum²/n`, common-denominator pooling and residual df `N-3`; synthetic within-MSE=10, df=27 proofs | Normality, actual independent randomisation, group validity, source checksums, any original Bem one-sample t |
+| `DASHI/Statistics/TukeyKramerPostHocExact.agda` | Unequal-sample Tukey–Kramer **q²** in integer cross-multiplied form with externally supplied alpha, k, df family-critical quantile; source guards, normality/common-variance/independence flags; synthetic reject/nonreject and missing-assumption refusals | Original studentized-range quantile proof, source authenticity, all-real normality, mixed-model/clustered analysis, post-hoc applicability without predeclared family |
+| `DASHI/Statistics/TukeyKramerIntervalCalibrationExact.agda` | Conservatively compare integer/rational statistic with **lower/upper certified qcrit² bracket**: above upper -> reject, below lower -> fail, in between -> unresolved | Certified enclosing quantile by Agda alone; the user-supplied “calibrated” Boolean is a receipt claim and requires externally audited distribution-computation evidence |
+| `DASHI/Culture/AmyEskridgeBemAristotleExperimentalProofSearchWeldExact.agda` | Source-stage gated next research discriminator and direct existing Aristotle cycle/closure-proof imports | Original datasets or actual experimental outcomes |
+
+**Classical formula implemented**, for group samples `n_i,n_j`, sums `s_i,s_j`, and pooled `MSE = MSEnum/MSEden`:
+
+```
+D = abs(s_i*n_j - s_j*n_i)
+q² = 2 * D² * MSEden / (MSEnum * n_i*n_j*(n_i+n_j))
+reject only if q² exceeds a valid family-specific studentized-range critical q².
+```
+
+For *n* equal, this reduces to standard Tukey HSD; for unequal *n*, Tukey–Kramer. **It is post-hoc**, not the original primary Bem Experiment 1 one-sample null test, and blindly treating thousands of within-participant trials as independent groups is explicitly forbidden.
+
+**Numerical acceptance actually executed locally:** SciPy `studentized_range.ppf(.95,3,27)=3.506426123354149`, squared **12.295024158540405**. On synthetic pooled `MSE=10`, three groups with `n=10`, means 10/16/11: exact `q²=36` rejects 10-v-16, `q²=1` does not reject 10-v-11. Unequal `n=6/12`, means 10/16: exact `q²=28.8` rejects. Source-level refusal of uncalibrated cutoff and non-independent units are represented as negative fixtures. An interval `[12.295, 12.296]` demonstrates a conservative decision with a borderline result remaining **unresolved**, but it was checked against SciPy *numerically*, not formally certified against the exact distribution (Agda proof of range inclusion still OPEN). The independent local script for this arithmetic passed; committed reusable checker `scripts/check_tukey_kramer_aristotle_bem_maxcut.py` implements the calculation plus source-owner checks. Original Agda kernel and committed checker have not been run against a locally checked-out repo, so do **not** report kernel green.
+
+**Raw-data acquisition attempts:** Direct HTTPS request to `https://replicationindex.com/wp-content/uploads/2018/01/exp1.xlsx` failed in the container with DNS resolution error, and direct file downloader failed. **Google Drive/Sheets intentionally NOT touched**, per user's instruction to use them as a LAST RESORT only; there is currently no original XLSX in Google Drive established by user or source. No replacement/synthetic Bem dataset was imported or passed off as real.
+
+**Priority outcome:** do NOT spend more research time implementing additional named classical stats without sourced experimental need. The ANOVA/Tukey infrastructure is now present as a **reusable conditional design operator**, but neither is the correct first test for Bem's Experiment 1. **P1a remains the original EXP1 XLSX acquisition and exact participant-level one-sample 50% analysis**, followed by predeclared 40+60 chronology tests; P1b Transparent Psi original mixed logistic/preregistration; P1c proponent 69-study meta-analysis and independently held-out moderator discrimination. The Aristotle active loop can adapt these next cuts based on results, and HSD/Tukey–Kramer is admitted only for a genuine predeclared multi-group post-hoc consumer.
+
+---
+
 ## 18 November 2026 — native statistics + experimental-discriminator weld, actual author–critic chronology
 
 ### Existing prior art was much more relevant than generic scalar counterexamples
