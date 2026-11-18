@@ -253,3 +253,29 @@ derive the complete Standard Model or prove physical string/GRQFT
 unification. Its main productive consequence is a precise observer-
 indexed **observable subalgebra and mode-cutoff question** for the
 existing 369/TSFV/g-TPS TOE, with explicit spectral aliasing controls.
+
+## F. One finite QUANTUM observer-sector state/observable discriminator
+
+The same exact free KK tower admits a low-excitation finite Fock truncation
+for a *test* of observer information loss. Use two bosonic occupation
+registers (one for n=0; one for n=+1), each restricted here to 0 or 1.
+The two states `|0>₀⊗|0>₁` and `|0>₀⊗|1>₁` have:
+- EXACTLY the same density matrix after tracing out the n=+1 register:
+  `Tr_charge |ψ0><ψ0|=Tr_charge |ψ1><ψ1|=|0><0|`.
+- Different expectation for the genuine internal occupation operator
+  `I⊗diag(0,1)`: 0 versus 1.
+- The corresponding selected KK energy differs by the n=+1 oscillator
+  quantum at `ω=√(k²+μ²+R^-2)` for a specified 4D spatial momentum k.
+  Ground energy must be handled by a common subtraction/regulator.
+
+The exact matrix/partial-trace witness is now part of
+`scripts/check_string369_observer_kk_action_exact.py` and passed in
+source-equivalent local form. This demonstrates an actual
+observer-indexed *quantum state and observable* difference for the
+reduced free KK sector, not an identification with DASHI's full
+source-specific g-TPS, Hamiltonian, original SM quark Hilbert spaces,
+Born-rule physical measurements or interacting quantum gravity.
+
+A measurement accessing the internal KK occupation distinguishes the
+states; a base-only observer cannot. There is no change of spacetime
+dimensionality, just a change of accessible observable algebra.
