@@ -293,3 +293,44 @@ Cooling incurs cryostat vacuum windows, optical/microwave power and cooling-budg
 **Revised steelman priority:** P3/P5 compare **room NV, cryogenic NV, SQUID, alternative atomic receivers** against actual sensitivity PSD across ~0.5–40 Hz and measured environmental covariance, including stand-off, total readout/cooling resources, quantum readout floor and signal coherence. Only after a receiver architecture survives these comparisons is detailed spatial/FOV layout optimisation worth doing. P4 needs realistic noncoherent/semicoherent heartbeat integration; no 1-km detection promoted.
 
 **Primary references used in analysis:** Omar et al. 2026 DOI 10.1126/sciadv.aeg5281; *Spin Readout Techniques of the Nitrogen-Vacancy Center in Diamond* (2018); *Diamond surface engineering for molecular sensing with nitrogen—vacancy centers* (2022); NIST cryogenic SQUID sources. Source search and publications do not supply a measured best receiver-plus-human-heart 1-km error budget.
+
+
+## 18 November 2026 — SOURCE-CLASSIFIED SQUID / CRYOGENIC SUPERCONDUCTOR STEELMAN
+
+Previous 1 fT and 0.01 fT rows were **arbitrary receiver substitutions**, not an SOTA scientific benchmark. This source-backed cut corrects that: neither an isolated sub-fT white-noise component nor a SQUID under magnetic shielding implies that the same noise spectrum is available to each of 1000 independent sensors outside a lab at a cardiac frequency.
+
+New checker: `scripts/check_diamond_mcg_squid_sota_source_steelman.py`, with exact SymPy rational `T ∝ S_B²r⁶/N` controls. Local equivalent checker executed PASS (range^6, ASD^2, N^-1, 0.1fT-vs-1fT=1/100 time). GitHub script committed, not independently replayed by exact Git blob. No CI or Agda kernel check.
+
+| Receiver / publication | Reported source sensitivity | Critical domain limitation |
+| --- | --- | --- |
+| *Human cardiac measurements with diamond magnetometers* (Omar et al., Science Advances 2026; https://pmc.ncbi.nlm.nih.gov/articles/PMC13580569/) | 7 pT/sqrtHz is one tested configuration; 6-26 pT/sqrtHz across systems | Measured near-body NV cardiac detection, not far-field or 1000 channels |
+| *SQUID Magnetometers for Natural EM Signals* (Kawai et al., 2024; https://www.jstage.jst.go.jp/article/jcsj/59/1/59_19/_article/-char/en) | ~25 fT/sqrtHz over 0.5-100Hz | **Actual cardiac-band-relevant system** but geomagnetic/ELF setting, not clinical cardiac source attribution |
+| *Low-frequency noise characterization of high-swing multi-loop SQUIDs* (2026; https://www.sciencedirect.com/science/article/pii/S0921453426001036) | 4.15 fT/sqrtHz white; **1/f corner ~10Hz** and reported extra 0.1-10 Hz spectral terms | The white result must NOT be copied into 1 Hz and treated as measured low-frequency noise |
+| *Superconducting Quantum Magnetometers for Brain Investigations* (2025; https://pmc.ncbi.nlm.nih.gov/articles/PMC12349212/) | Nominal 1.5 and 3 fT/sqrtHz flux transformer instruments | Pickup coil, mutual inductance and ambient system conditions are part of sensitivity |
+| *SQUIDs in biomagnetism: a roadmap towards improved healthcare* (2016; https://doi.org/10.1088/0953-2048/29/11/113001) | Historical ~0.5 fT/sqrtHz lowest system noise; ~2 fT/sqrtHz common low-Tc MEG system | Shielded system benchmark; measured 1 Hz per-channel performance and 1000 arrays not established by number |
+| *Neuromuscular Magnetic Field Measurement Based on Superconducting Bio-Sensors* (2023; https://pmc.ncbi.nlm.nih.gov/articles/PMC10535156/) | Literature table notes ~0.1 fT/sqrtHz **white noise** for IPHT magnetometer component | Component white-noise metric, NOT cardiac-band installed system |
+
+**Two separate superconducting routes:**
+
+1. **Low-Tc SQUID with a superconducting pickup/flux transformer**, in which a large-area field pickup, superconducting inductance/mutual coupling, SQUID flux sensitivity and room-temperature electronics set field sensitivity. White flux noise and effective area alone do not establish low-frequency magnetic sensitivity, or unlimited scaling of area (nonuniform cardiac field and ambient pickup).
+2. **Cryogenic superconducting pickup arrays / multiloop geometries** where coupling area, standoff and channel placement are a genuine device-level optimisation, including superconducting Johnson/shield noise, 1/f critical-current/flux noise, shielding, vibration, cryostat costs and correlated ambient fluctuations. Modern direct-coupled/multiloop designs may avoid transformer parasitics but do not universally beat transformer-coupled SQUIDs. These are physically distinct hardware designs, not necessarily independent sensors with equal figures of merit.
+
+**Same-source ideal range sensitivity substitution, intentionally optimistic:**
+- Assumed heart: 50 pT at 0.1m, ideal r^-3 fixed-moment amplitude.
+- 1000 *independent* per-channel sensors at reported ASD, infinite coherence, zero nuisance, perfect source axis, SNR threshold 5, T = [5S_B/(A(r)sqrt(1000))]^2.
+- Values below are **not** experimentally demonstrated range or optimal system performance:
+
+| Receiver ASD | 10m ideal T | 100m ideal T | 1000m ideal T |
+| --- | ---: | ---: | ---: |
+| 25 fT/sqrtHz (ELF measured system) | ~1.74 h | ~198 years | ~198 million years |
+| 4.15 fT/sqrtHz (white multiloop only) | ~172 s | ~5.46 years | ~5.46 million years |
+| 1.5 fT/sqrtHz (nominal transformer) | ~22.5 s | ~0.713 years | ~713,000 years |
+| 0.5 fT/sqrtHz (historical system) | ~2.50 s | ~28.9 days | ~79,200 years |
+| 0.1 fT/sqrtHz (ultra-low component white floor) | ~0.100 s | ~1.16 days | ~3,169 years |
+| 0.01 fT/sqrtHz (unsupported extreme hypothesis) | ~0.001 s | ~16.7 minutes | ~31.7 years |
+
+**Important calibration vulnerability:** benchmark source amplitude was *assumed*, not traced to an anatomically validated upper bound on cardiac magnetic moment. These are conditional detector-time calculations, not a universal no-go theorem. In fact, a stronger source moment, source-motion/gradient processing, longer baseline or different modality can alter the model. Conversely actual magnetic shielding at remote observation points, 1/f drifts, line noise and heartbeat-phase decoherence can make detection dramatically less favourable.
+
+**Quantum/absolute-zero rule:** existing PR #701 oscillator and ground-state theorems are reused as conceptual ownership. A zero-temperature oscillator has nonzero ground energy, but its symmetrized noise is not a universal magnetic SQUID/NV noise floor, nor an assertion that 0.1 fT sensors run at 0K. Neither temperature lowering nor vacuum fluctuation suppression proves a physically usable kilometric cardiac receiver.
+
+**P4/P5 next hard physical discriminator:** obtain source paper noise spectral curves at 0.5,1,3,10,30 Hz for each *full receiver system*, plus measured cardiac moment/source spectrum, pickup standoff, SQUID flux-transfer and noise budgets, 1/f/drift, and inter-channel covariance. Then integrate frequency-bin matched-filter information with realistic phase decorrelation and periodicity searches. Explicitly mark reported white noise vs measured 1Hz vs projected hardware. No more generic spatial-array statements should be presented as novel physics.
