@@ -67,3 +67,7 @@ import DASHI.Culture.AmyEskridgeVideoUS11PriorArtReconciliationExact
 -- prediction scoring; no new physical-device authority.
 import DASHI.Culture.AmyEskridgeVideoLateSectionEvidenceBidiExact
 import DASHI.Culture.AmyEskridgeVideoTemporalForecastAndPsiMaxCutExact
+
+-- Bem steelman-v-realistic null: recorded scalar nonidentifiability,
+-- conditional selection bias, distinct source-specific historical receipts.
+import DASHI.Culture.AmyEskridgeBemSteelmanRealisticIdentifiabilityExact
