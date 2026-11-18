@@ -21,6 +21,7 @@ open import Data.Rational.Base using (ℚ; _+_; _-_; _*_)
 import Data.Rational.Tactic.RingSolver as Ring
 import DASHI.Biology.BalancedTernaryFourierModeExact as Fourier
 import DASHI.Physics.Common.FiniteThreeCycleTorusExact as Torus
+import DASHI.Algebra.TriadicDepthOneCharacters as Characters
 
 -- Real unnormalized 3-site inverse C3 Fourier coordinates.
 -- v,w span the two nonzero modes; u is the invariant zero mode.
@@ -82,7 +83,7 @@ finiteC3GradientExact u v w = Ring.solve-∀ u v w
 originalFirstC3Eigenlaw :
   (mode point : Fourier.Mode3x3) →
   Fourier.firstCharacter mode (Torus.translateFirst point)
-    ≡ Fourier.multiplyPhase (Fourier.firstCharacter mode point)
+    ≡ Characters.multiplyPhase (Fourier.firstCharacter mode point)
          (Fourier.firstEigenphase mode)
 originalFirstC3Eigenlaw = Fourier.firstTranslationEigen
 
