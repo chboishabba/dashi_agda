@@ -123,3 +123,87 @@ noIncorrectCriticTestAsProof ()
 noChronologyModerationWithoutData :
   ChronologicalSplitProvesEffectModeration → ⊥
 noChronologyModerationWithoutData ()
+
+-- Public experiment files were PUBLISHED with the 20 Jan 2018
+-- correspondence. This converts the earlier "missing files" into a
+-- known precise download target, NOT an inspected-data receipt.
+-- The current tool could follow links but could not retrieve .xlsx bytes.
+data AcquisitionState : Set where
+  publicExactURLLocated : AcquisitionState
+  workbookBytesRetrievedAndAudited : AcquisitionState
+
+record PrimaryWorkbookLocator : Set where
+  constructor primary-workbook-locator
+  field
+    originalExperimentNumber : Nat
+    exactDownloadURL : String
+    sourceWhoPublishedIt : String
+    acquisition : AcquisitionState
+open PrimaryWorkbookLocator public
+
+experiment1PublicWorkbook : PrimaryWorkbookLocator
+experiment1PublicWorkbook = primary-workbook-locator
+  1 "https://replicationindex.com/wp-content/uploads/2018/01/exp1.xlsx"
+  "Schimmack 20 January 2018, published with Bem's authorization in the same correspondence" publicExactURLLocated
+
+experiment6PublicWorkbook : PrimaryWorkbookLocator
+experiment6PublicWorkbook = primary-workbook-locator
+  6 "https://replicationindex.com/wp-content/uploads/2018/01/exp6.xlsx"
+  "Schimmack 20 January 2018, published with Bem's authorization in the same correspondence" publicExactURLLocated
+
+-- All nine are individually linked on that same source page; no
+-- fake common dataset or supplementary effect witness is constructed.
+data PostedWorkbookFamily : Set where
+  originalsEXP1ThroughEXP9 : PostedWorkbookFamily
+
+originalNineFilesPublicationIsSourcePayable : Bool
+originalNineFilesPublicationIsSourcePayable = true
+
+originalNineFilesReproducedHere : Bool
+originalNineFilesReproducedHere = false
+
+-- Most important part of the STEELMAN response, not an external finding:
+-- 20 and 25 January emails in the same exchange contain Bem's statements
+-- denying result-based disposal and his claims for a separately analyzed
+-- subset of 69 independent replications, including 31 "exact" with his
+-- computer programs and 38 "modified". These are author ASSERTIONS until
+-- the 90-study data provenance and pre/post-study selection are inspected.
+record PublishedSteelmanReply : Set where
+  constructor published-steelman-reply
+  field
+    claimedIndependentReplications : Nat
+    claimedExactProgramReplications : Nat
+    claimedModifiedReplications : Nat
+    independentOriginalStudiesReanalysedHere : Bool
+    deniedResultBasedDiscarding : Bool
+    citationAndBoundary : String
+open PublishedSteelmanReply public
+
+bemJanuary2018MetaReply : PublishedSteelmanReply
+bemJanuary2018MetaReply = published-steelman-reply
+  69 31 38 false true
+  "Bem 25 Jan 2018 email hosted by Schimmack: reports independent-subset z=4.16, p=1.2e-5, BF=3.85; no independent data replay in current module"
+
+independentStudyPartitionCount :
+  claimedExactProgramReplications bemJanuary2018MetaReply +
+  claimedModifiedReplications bemJanuary2018MetaReply ≡
+  claimedIndependentReplications bemJanuary2018MetaReply
+independentStudyPartitionCount = refl
+
+noIndependentSourceReplayYet :
+  independentOriginalStudiesReanalysedHere bemJanuary2018MetaReply ≡ false
+noIndependentSourceReplayYet = refl
+
+data DownloadLinkEstablishesOriginalDataReproduction : Set where
+data QuotedMetaReplyProvesNoSelectivePublishing : Set where
+data PublishedAllegationProvesDiscardedExperiments : Set where
+
+noUnfetchedDataAsReproduction :
+  DownloadLinkEstablishesOriginalDataReproduction → ⊥
+noUnfetchedDataAsReproduction ()
+noMetaStatementAsCausalProof :
+  QuotedMetaReplyProvesNoSelectivePublishing → ⊥
+noMetaStatementAsCausalProof ()
+noAccusationAsProofOfDiscarding :
+  PublishedAllegationProvesDiscardedExperiments → ⊥
+noAccusationAsProofOfDiscarding ()
