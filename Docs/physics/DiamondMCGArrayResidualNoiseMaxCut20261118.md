@@ -174,3 +174,33 @@ Added `scripts/check_diamond_mcg_3d_source_response_exact.py`, independently exe
 This demonstrates that simply increasing channel count is insufficient if every NV axis is blind to the physically possible source orientation. P3 must optimize angular sensing response *jointly* with noise/cost and spatial positions. Both P2 scripts use **magnetostatic test fixtures**, not experimental or anatomical heart-current distributions, not actual human cardiac moments, and not a proven equivalence to the existing periodic Fourier Biot–Savart representation.
 
 Executed SymPy controls now include finite-extent axial source field, exact finite-size error and asymptotics, two-sensor gradiometry `r^-4` field decay, 3D rotation covariance, and directional detection nulls. **P2 is partially advanced but NOT closed.** Anatomical 3D source geometry, tissue conductivity, return-current closure and uniform multipole bounds across the source family remain open. No CI or Agda kernel acceptance is claimed per this round's SymPy-only instruction.
+
+
+## P3 — Array geometry and resource comparison (18 November 2026)
+
+**New code:** `scripts/check_diamond_mcg_array_resource_p3.py`; locally executed matching SymPy/NumPy experiment **PASS**. It compares `N∈{1,100,1000}`, two planar disk diameters (2 cm, 50 cm), single-z vs interleaved x/y/z axes, two budget regimes, and detection ranges 2, 10, 100, 1000 m. Results are **synthetic mathematical fixtures, not human MCG measurements**.
+
+**Model:** each sensor measures its sensing-axis projection of the free-space vector dipole tensor `(3rrᵀ/|r|²-I)/|r|³`. Target information for three unknown dipole moment coordinates is the finite GLS Gram `F = Sᵀ C⁻¹ S`, evaluated without a dense 1000×1000 inverse using the **Woodbury identity** on `C = D+UUᵀ`. `U` contains three common 3-vector magnetic field modes and six planar gradient modes; `D` has independent channel noise. `lambda_min(F)` is the worst-orientation detection information; `trace(F)` sums information across all orientations but **does not guarantee target orientation coverage**. All quantities below are normalized information units, not T²/Hz or calibrated probabilities.
+
+**Resource fairness:** `fixed-total` assumes allocating a fixed photon/readout resource to N independent channels raises each channel's variance as `N`; `per-channel` holds individual noise variance fixed and therefore increases aggregate sensing resources with N. The first is a deliberately constrained comparison, not a universal NV physics law. Common field and gradient nuisance amplitudes are also synthetic fixed inputs (0.5, 0.15 in dimensionless units).
+
+### Reproducible result at 10 m, fixed aggregate independent-channel resource
+
+| N | Disk diameter | Sensor axes | trace(F) | min eigenvalue(F) |
+|---:|---:|---|---:|---:|
+| 100 | 2 cm | z only | 3.19999490e-6 | 2.21645483e-12 |
+| 1000 | 2 cm | z only | 3.19999490e-6 | 2.24665981e-12 |
+| 100 | 2 cm | x/y/z | 1.83761091e-6 | 3.04849735e-7 |
+| 1000 | 2 cm | x/y/z | 1.84529904e-6 | 3.07408090e-7 |
+| 100 | 50 cm | z only | 3.19681420e-6 | 1.38195081e-9 |
+| 1000 | 50 cm | z only | 3.19681432e-6 | 1.40075705e-9 |
+| 100 | 50 cm | x/y/z | 1.83601174e-6 | 3.04756019e-7 |
+| 1000 | 50 cm | x/y/z | 1.84371716e-6 | 3.07300558e-7 |
+
+At 2 cm disk diameter, the 1000-channel x/y/z array improves **worst-orientation information only about 0.84%** over 100 channels under this fixed resource model. With per-channel resources held constant, the 1000-channel x/y/z model instead has worst-orientation information `3.95326107e-6` versus `3.56763146e-6` for 100 channels, reflecting both new sensor resources and correlated nuisance limitations. These are **not** detector SNR or range multipliers.
+
+**Two important negative controls:** all 100 co-located z-axis sensors have zero information for orthogonal source moments (rank-one information), regardless of perfect magnetic sensitivity; and co-located identical sensors with fixed total photon budget and no ambient interference satisfy the exact identity `N/(N sigma²)=1/sigma²`, so splitting a fixed resource cannot magically produce `sqrt(N)` SNR growth. The exact 2x2 low-rank Woodbury identity was independently SymPy-checked.
+
+**Source-validation boundaries:** no optical photon statistics, diamond material resource model, spectral transfer, tissue-return currents, NV-axis constraints/selection rules, sensor crosstalk, measured `C_n(f)`, cardio-dynamic source, or multiple-hypothesis false-alarm model was available. A 50 cm disk is a mathematical layout, not an installed apparatus. The 1 km row is only an extrapolation of the point-dipole model, not detection evidence.
+
+**P3 status: mathematical architecture benchmark implemented, physical design optimisation remains OPEN.** The highest-alpha next cut is (i) a measured frequency-resolved covariance and readout resource law; (ii) joint axis/baseline/range optimisation with unknown-source orientation and location, not just these hand-picked designs; (iii) P4 variable-heartbeat detection/attribution and time/false-alarm acceptance. Reuse the existing covariance and Biot-Savart owners; no extra Schur algebra required.
