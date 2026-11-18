@@ -52,3 +52,19 @@ print('PASS: 4D masses mu², mu²+R^-2 and charge rotation algebra')
 print('PASS: C3 Parseval, graph Laplacian eigenvalue 3 and first-band match')
 print('PASS: n versus n+3 alias proves finite 369 loses high KK modes')
 print('OPEN: physical CY3/string, SM chirality, GRQFT same-action, observer calibration')
+
+# Exact two-mode finite Fock truncation of the SAME free-field tower.
+# We retain occupation 0 or 1 for n=0 and n=+1, purely as a
+# proof of observer-relative accessible observables, not interacting QFT.
+vac=s.Matrix([1,0])
+occupied=s.Matrix([0,1])
+psi0=s.kronecker_product(vac,vac)
+psi1=s.kronecker_product(vac,occupied)
+def base_density(psi):
+    return s.Matrix(2,2,lambda i,j:
+        sum(psi[2*i+k]*psi[2*j+k] for k in range(2)))
+assert base_density(psi0)==base_density(psi1)
+Ncharge=s.kronecker_product(s.eye(2),s.diag(0,1))
+assert (psi0.T*Ncharge*psi0)[0]==0
+assert (psi1.T*Ncharge*psi1)[0]==1
+print('PASS: zero-mode-only quantum observer has equal reduced states, fine observer different KK occupation')
