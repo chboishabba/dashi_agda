@@ -10,6 +10,53 @@ This PR is a **new video-source aggregator over existing producers**, not a new 
 
 The transcript provided by the user is titled *She Researched Something THEY DON'T ALLOW. Then She Died* and ends at 32:44. **Original edited video identified:** Be Inspired / `@beinspiredchannel`, 12 May 2026 in channel indexes, `https://www.youtube.com/watch?v=acw16d6CCnY` (video ~32:47). The narrator's personal name, upload timezone and some original clip offsets are still unresolved; do not fabricate them. The 86 itemized claims are source-content paraphrases with timestamp pointers; they are not 86 independently verified findings or 86 source documents.
 
+## 18 November 2026 — native statistics + experimental-discriminator weld, actual author–critic chronology
+
+### Existing prior art was much more relevant than generic scalar counterexamples
+
+**Re-audited original code:** `DASHI/Core/DiscriminatorSynthesisExact.agda` supplies `CurrentObserverCollision`, `DiscriminatingLanguageExtension`, `ExperimentBundle`, `BundleSeparates`, `extensionJoinSeparates`, prospective consumer closure and nuisance-robust discrimination. `DASHI/Core/ExperimentalCoordinateDesignExact.agda`, `ActiveBidiDiscriminatorLoopExact.agda`, and `AnomalousTemporalProofSearchExperimentAdmissionExact.agda` already govern selective measurement, experimental intervention/admission and evidence-fibre refinement. We now use those **actual value-level original theorems** in `AmyEskridgeBemNativeStatisticsDiscriminatorWeldExact.agda`.
+
+`DASHI/Statistics/Vec15Robust.agda` implements **Tukey IQR outlier fences**, Hampel MAD, winsorization and trimming on **15 natural-number prime-profile values**, **not Tukey HSD post-hoc pairwise inference** on arbitrary participant trials. `Vec15Inference.agda` and `PrimeProfileStatsSuite.agda` contain named ANOVA/t-test/chi-squared interfaces, but the current deterministic `pValue` field is `countNonZero15`, **not** a classical calibrated p-value. We import the real producer objects and retain their original domain; we cannot legitimately claim Bem statistical correctness by calling the similarly named scaffold. On actual data use SciPy/SymPy, hierarchical logistic models, participant-level t statistics, predeclared multiplicity and a trial-level source audit.
+
+The new native discriminator builds **two explicitly counterfactual worlds** with the same published rate, then an independently authenticated historic-analysis-fork coordinate that separates them under the existing `Disc.extensionJoinSeparates` theorem. This is a **well-typed potential discriminator**, not a claim that a documentation fork has been discovered.
+
+### New original-source evidence: Bem ↔ Schimmack correspondence, January 2018
+
+**Primary participant correspondence as transcribed/hosted by Schimmack**, https://replicationindex.com/2018/01/20/bemcorrespondence/ (dated January 2018 exchanges; transcript not independently authenticated email-header bytes). This moves research beyond generic null-model conjecture:
+
+- **10 January:** Bem states Experiments 5 and 6 draw from **100** negative/neutral-only sessions and an additional **150** negative/erotic/control sessions in 2002. He supplied a chronological CSV containing 250 sessions (the attachment bytes are **not yet inspected here**).
+- **10 January:** Schimmack initially saw mismatched significant results in Experiment 6 when he used **paired comparisons with the neutral controls**; one paired test yielded t(149)=1.4057, two-sided p=.1619 and another t(149)=-1.3095, p=.1924, rather than published one-sample comparisons. **Crucial exculpatory control:** on **12 January he acknowledged that his test differed from Bem's published one-sample fixed-50%-null test** and Bem confirmed it. Do not call that methodological mismatch fabricated published statistics or an unresolved scientific discrepancy.
+- **12 January:** Bem confirms **actual chronological Exp 6 interventions**: **91 sessions** with 16 negative/16 erotic/16 neutral; **19 sessions** with 12 negative/12 *stronger* erotic/24 neutral; **40 sessions** with 15 negative/15 stronger erotic/30 neutral. This is genuine documented within-experiment protocol change and therefore a valuable time/heterogeneity variable, **not proof that any specific change caused a positive result**.
+- **15 January:** Bem's own chronological table splits **Experiment 1 into 40 + 60** sessions in 2006; do not assume 100 identical session conditions without checking original source. Experiment 1 chronology and Experiment 6 interventions **must not be merged as the same treatment change**.
+
+The exact correspondences and 40+60, 91+19+40 finite totals are in `AmyEskridgeBemOriginalProtocolCorrespondenceWeldExact.agda`, with a negative control for the retracted accusation based on the wrong paired test. Historical person-specific alleged misconduct remains unproved.
+
+### Additional exact-statistical control that changes the interpretation
+
+The original paper reports **eight of nine experiments significant**, not merely *at least one of nine*. Under the **strictly hypothetical** model of nine independent, preregistered, calibrated alpha=.05 tests all under the null,
+
+- P(**at least one**) = 1 - .95^9 = **0.36975059**, an ordinary multiple-testing illustration.
+- P(**at least eight**) = 9(.05)^8(.95) + (.05)^9 = **3.359375 × 10^-10**.
+
+**Neither number is a valid probability of Bem's actual publication event without the experiment dependence, selection/search universe, directionality, reporting and source provenance.** In particular the toy “at least one” number is *not* an explanation for eight positive original papers. The reanalysis must test effective analysis count, original chronological stopping, internal protocol evolution, study-specific participant structure and independent source replications, with competing effect model preserved.
+
+Two **synthetic** 2×2 contingency tables with 828/1560 total successes but different subgroup patterns (430+398 versus 414+414 successes, each across two 780-trial groups) demonstrate exactly why marginal success rate cannot identify a historical moderator. They are **not fabricated Bem observations**.
+
+### Source-count correction and data acquisitions
+
+The Transparent Psi 2023 original paper has an **internal inconsistency**: its study-design discussion says Bem had **1650** erotic trials, but the same paper's results comparison explicitly says **1560** erotic trials; the 2025 PLOS ONE paper also says 828/1560. Retain the conflict in the source registry and independently inspect the complete original Bem 2011 Table/experiment text and session-level data before promoting the numerator. **The distinction doesn't materially change its null-replication finding, but it matters for exact test reconstruction.**
+
+Original data leads:
+- Transparent Psi raw consolidated `final_combined_live_data_for_analysis.csv`: **https://osf.io/24qkr**; born-open recordings: https://github.com/kekecsz/transparent-psi-results/tree/master/live_data . Original paper confirms **2115 participants / 37836 erotic trials**, 25 incomplete sessions, 192 absent trials; 3 additional sessions truncated at preregistered stopping threshold. Mixed-logistic clustered Wald 99.75% CI **49.11–50.67%**; 3 Bayes factors plus one mixed logistic simultaneously triggered preregistered stopping at the first analysis boundary.
+- Bem original 2011 Experiment 1 participant/session records remain **not retrieved in this turn**. For Experiments 5/6, the 2018 correspondence reports Bem sharing 250 chronological CSV sessions, but original attachment bytes and a direct public reproduction remain to be acquired. The contemporaneous data provenance should not be replaced with data reconstructed from narrative.
+- Unpaid: direct 2011 data and scripts; original blinded RNG/session controls; precise participant/trial strata; original author preregistration/analysis chronology; independently audited moderation test with held-out predictions.
+
+**Acceptance:** the existing `scripts/check_amy_eskridge_bem_steelman_realistic_sympy.py` now checks the genuine DASHI discriminator/Tukey/ANOVA source identity, exact 8-of-9 conditional probability and synthetic nonidentifiability as well as the original literature/protocol correction. Repo source-blob checks may be run without CI; full Agda kernel and full checker in a local checkout remain separate.
+
+**Priority now:** **P1a** original Bem Experiment 1 records and independent author-admitted protocol strata; **P1b** Transparent Psi raw participant-data/analysis replay; **P1c** rigorous moderator-v-null preregistered comparison using native discriminator/coordinate contracts. Do not spend another round on generic statistical constructors, simulation-only work or p-hack accusations.
+
+---
+
 ## 18 November 2026 — Bem Experiment 1 steelman-versus-realistic identification audit
 
 **Task:** preserve Bem's strongest admissible hypothesis and the most realistic null/selection explanations; mathematically prove the attainable consequences of each and discriminate them with exact original evidence. **DO NOT assert that Bem "must have p-hacked", selectively published, violated the protocol or fabricated results.** A scalar reported percentage cannot logically identify which causal/statistical mechanism generated it. The null model with genuine nonzero sampling probability is a counterexample to the universal "must have suffered analytical malpractice" conclusion.
