@@ -24,9 +24,38 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import DASHI.Core.Prelude using (⊥)
+import DASHI.Core.AttributedSourceCore as Attribution
 import DASHI.Governance.AnomalousPhenomenonTemporalEvidenceTrajectoriesExact as Trajectory
 import DASHI.Culture.AmyEskridgeVideoTemporalForecastAndPsiMaxCutExact as Psi
 import DASHI.Culture.AmyEskridgeVideoClaimProducerWeldExact as Video
+
+-- Opposing published source families, authors retained:
+-- original 2015 paper released version 2 in January 2016.
+-- These sources CANNOT be counted as independent confirmation of an
+-- experiment merely by appearing in a meta-analysis or a critique.
+steelman90StudyMeta : Attribution.AttributedSource
+steelman90StudyMeta = Attribution.mkDOISource
+  "Daryl Bem; Patrizio Tressoldi; Thomas Rabeyron; Michael Duggan"
+  "Feeling the future: A meta-analysis of 90 experiments on the anomalous anticipation of random future events"
+  "F1000Research 4:1188, first published 2015, version 2 Jan 2016"
+  "2016"
+  "10.12688/f1000research.7177.2"
+  "https://f1000research.com/articles/4-1188/v2"
+  Attribution.academicArticleSource
+  "Proponent analysis reports a positive small aggregate signal; selection, dependence, study-quality interactions and replicability remain independent gates"
+  Attribution.publicAttribution
+
+criticalRouderMorey2011 : Attribution.AttributedSource
+criticalRouderMorey2011 = Attribution.mkDOISource
+  "Jeffrey N. Rouder; Richard D. Morey"
+  "A Bayes factor meta-analysis of Bem's ESP claim"
+  "Psychonomic Bulletin & Review 18:682-689"
+  "2011"
+  "10.3758/s13423-011-0088-7"
+  "https://pubmed.ncbi.nlm.nih.gov/21573926/"
+  Attribution.academicArticleSource
+  "Alternative statistical interpretation of Bem's evidence; does not establish intentional analysis selection or misconduct"
+  Attribution.publicAttribution
 
 data CompetingExplanation : Set where
   prospectiveStableEffect : CompetingExplanation
