@@ -159,11 +159,11 @@ data InferenceDisposition : Set where
   familyAdjustedFailToReject : InferenceDisposition
 
 decide : PostHocDesign → GroupSummary → GroupSummary → InferenceDisposition
-decide d a b with admitted d a b
-... | false = comparisonNotAdmitted
-... | true with lt
-  (statisticDenominator d a b * qSquaredNumerator (threshold d))
-  (statisticNumerator d a b * qSquaredDenominator (threshold d))
+decide d a b with admitted d a b |
+  lt
+    (statisticDenominator d a b * qSquaredNumerator (threshold d))
+    (statisticNumerator d a b * qSquaredDenominator (threshold d))
+... | false | _ = comparisonNotAdmitted
 ... | true | true = familyAdjustedReject
 ... | true | false = familyAdjustedFailToReject
 
