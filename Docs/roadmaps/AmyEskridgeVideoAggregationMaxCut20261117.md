@@ -10,6 +10,73 @@ This PR is a **new video-source aggregator over existing producers**, not a new 
 
 The transcript provided by the user is titled *She Researched Something THEY DON'T ALLOW. Then She Died* and ends at 32:44. **Original edited video identified:** Be Inspired / `@beinspiredchannel`, 12 May 2026 in channel indexes, `https://www.youtube.com/watch?v=acw16d6CCnY` (video ~32:47). The narrator's personal name, upload timezone and some original clip offsets are still unresolved; do not fabricate them. The 86 itemized claims are source-content paraphrases with timestamp pointers; they are not 86 independently verified findings or 86 source documents.
 
+## 18 November 2026 — late-video claim 064–085 implementation: exact original/source/experimental cut
+
+### One original interview does not give twenty-two independent witnesses
+
+The late section of the 2026 Be Inspired 32:44 transcript (edited **16:02–32:04**) now has all **22** claim objects individually welded to actual source-role owners in `DASHI/Culture/AmyEskridgeVideoLateSectionEvidenceBidiExact.agda`. This **reuses** `AmyEskridgeVideoOriginalClipLineageExact`, `AmyEskridgeVideoClaimProducerWeldExact`, the pre-existing governance anomaly temporal fibre, experimental-admission framework, and the pre-existing Mandela-memory scientific producer.
+
+| Claim IDs | Family | What we can now say | What CANNOT be inferred |
+|---|---|---|---|
+| 064–065, 069, 071–074, 076–077, 079–080, 082–085 (15) | Burisch first-person original June-2007 interview clips, with exact/family source location | Dated speaker assertion and its editing relationship to the supplied video | Actual Looking Glass, multiple timelines, wormhole operation, NATO/EU/UN custody, facility history |
+| 066–067 (2) | Philip K. Dick 1977 Metz speech and Deutsch 1995 Noorderlicht interview | Original philosophical/scholarly quotation provenance | Quantum-mechanical proof of historical changes or technical operation |
+| 068, 075, 078, 081 (4) | Be Inspired original 2026 narrator synthesis | The narrator said/inferred it; the original upload is identifiable | Underlying independent confirmation, genuine calibrated forecast, geophysical portal or government anomaly mapping |
+| 070 (1) | Narrator's Bem 2011 attribution and **unidentified** physiological-clip audio | Distinct psychology and physiological literature, explicit original-video source gap | A Bem 2011 *physiological* experiment, general ESP proof or actual time-machine source |
+
+The core `AmyEskridgeVideoClaimProducerWeldExact.agda` itself was repaired so **066, 067 are no longer marked unlocated**; narrator-only claims 068/075/078/081 explicitly reference `Source.videoTranscript` rather than fictional missing third-party footage. 070 now carries both the authentic Bem publication and the still-unidentified clip-09 source lead. Original 2007 Burisch statements use exact relevant 2007 clip-family objects; a speaker's claims are not independently observed hardware.
+
+One source-role correction changes the temporal interpretation of **claim 084**: the sentence “not being used right now” refers to **June 2007**, NOT November 2026. Do not convert it into current operations or a universal lifetime shutdown.
+
+### Conditional prediction max-cut (published 2007, referring to ~2016–17)
+
+**Original primary transcript:** Dan Burisch / Kerry Cassidy, *Stargate Secrets*, Project Camelot, Las Vegas **June 2007**, part-1 text:
+https://projectavalon.net/lang/en/dan_burisch_stargate_secrets_interview_transcript_1_en.html
+
+The exact exchange around lines 635–667 has Burisch saying that he *expects/probably* the allegedly separated equipment might be reassembled *about 2016–2017*, followed by an unverified EU/UN/NATO tri-custody claim. This is a source-backed **dated conditional expectation**, not a scored operational forecast. Critically, no frozen explicit probability, unambiguous observable target, independently authenticated event/outcome or predeclared verification/scoring rule accompanies that claim. Mere passage of 2017 is NOT a verified failure or success.
+
+`AmyEskridgeVideoTemporalForecastAndPsiMaxCutExact.agda` now contains:
+- Exact `ForecastProvenance` holding source clip, publication year, forecast interval, `Maybe Nat` frozen probability and original event/outcome gates; published **2007 <= 2016–17** proof.
+- Admission `isScorable` requiring **bounded frozen probability (0–1000), fixed event definition, and an independently authenticated outcome**, so Burisch's actual item yields `notScorable` and `applyFrozenBrier ... ≡ nothing`.
+- A genuinely mathematical **finite Brier score** with proper integer exact arithmetic; three explicitly **synthetic** 0.9/0.5 fixture checks (0.01/0.81/0.25 squared error), plus one admitted synthetic forecast. None is presented as an original Looking Glass reading.
+- Invalid producer coercions (dated interview -> operating device; shared false memory -> altered history; CIA STARGATE remote-viewing files -> alleged mechanical Stargate) explicitly prohibited.
+
+### Already-existing predictive / physiological formalism reused — not reinvented
+
+Before this PR, `DASHI.Governance.AnomalousPhenomenonTemporalEvidenceTrajectoriesExact` had typed distinct `bemPrecognition` (2011/2025), `presentimentPhysiology` (2012/2018), and `stargateRemoteViewing` (CIA experimental / 1995 operational review). `AnomalousTemporalProofSearchExperimentAdmissionExact.presentimentRoute` already admits a preregistered, fixed-stopping/scoring physiological experiment; the remote-viewing historical-source route is blocked as proof of operational utility. `IbrahimSnowballMandelaReligionIndigenousMemoryBraidingBidiExact.prasadBainbridgeMandelaSource` already owns the 2022 peer-reviewed visual memory controls (DOI 10.1177/09567976221108944).
+
+The video-specific adapter **imports those exact original objects**, not a new generic hypothesis engine; no direct same-object edge is permitted between the CIA remote-viewing programme called STARGATE and Burisch's unverified claim of mechanical gates.
+
+**New inspected primary studies, with explicit protocol differences:**
+- Bem, JPSP **2011**, DOI 10.1037/a0021524: nine cognitive/affective experiments, **not** the exact physiology demonstration at 18:39.
+- Kekecs et al., Royal Society Open Science **2023**, DOI **10.1098/rsos.191375** (correct original article identifier): adversarial consensus multicentre replication of Bem's Experiment 1, **10 laboratories, 2,115 valid people, 49.89%** successful choices, original Bem **53.07%**, random chance 50%. Published finding: did not replicate Bem's original effect. DOI and number sourced to https://pmc.ncbi.nlm.nih.gov/articles/PMC9890107/.
+- Walleczek et al., PLOS ONE **2025**, DOI **10.1371/journal.pone.0335330**: their **Study 2** reported a significant **below-chance** erotic-trial result **49.65%, p=0.013**, a positive finding only in the paper's own *anomalous lower-than-chance* interpretation. Larger **Study 3** produced **50.07%, p=0.496, N=217,800 erotic trials**, failing to reproduce Study 2. **This does not count as 217,800 independent participants**. https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0335330.
+- Mossbridge/Tressoldi/Utts **2012** DOI 10.3389/fpsyg.2012.00390, and Duggan/Tressoldi **2018** DOI 10.12688/f1000research.14330.2, are *pre-stimulus physiology* meta-analysis families; they remain contested and scientifically distinct. Original physiology speaker/footage at **18:39** unlocated.
+- The original Mandela-effect control (Prasad/Bainbridge **2022** DOI 10.1177/09567976221108944) directly investigates confident shared visual errors; it does NOT prove either changed history or the universal falsehood of recollection.
+
+### Tests and acceptance
+
+Committed new source-driven checker `scripts/check_amy_eskridge_video_late_maxcut_sympy.py`; same-turn GitHub-blob structural check **PASS 15/15 source/coverage/producer conditions** (86 baseline retained, exactly 22 late claims, 16 source clips, corrected Dick/Deutsch/Bem source roles, 2007 time bounds, pre-existing governance source owners, correct DOI strings, no unintended duplicate `originalPaper` constructors). Independently executed exact Python/SymPy arithmetic for 2011/2023/2025 reported rates and the synthetic Brier fixtures (**PASS**), with no invented real event record. `AmyEskridgeVideoTypedObligationWeldExact` gates 066/067/068/070/072/075/084/085 now have specific unpaid context/replication/future-prediction/custody obligations, rather than generic apparatus checks.
+
+The **full committed script was NOT run against a local repository checkout** because this runtime has no network access to GitHub; the original Agda kernel admission was also **not run** (Agda executable unavailable). Do not substitute source parsing or model-side `refl` text for a typechecked proof.
+
+Reproduce in repository:
+
+```bash
+python scripts/check_amy_eskridge_video_claim_weld_sympy.py
+python scripts/check_amy_eskridge_video_late_maxcut_sympy.py
+DASHI_NO_TMUX=1 scripts/run_agda29_parallel_check.sh DASHI/Culture/AmyEskridgeVideoEvidenceEverything.agda
+```
+
+**Next high-alpha frontier is narrowed to exact receipts**, not additional speculative ontology:
+1. Locate/authenticate the actual **18:39 physiological speaker and original edited footage**; keep Bem 2011 and physiological studies separate in the consumer.
+2. Acquire preregistered physiological experiment data/protocol or independently audit a recent full high-rigour source dataset; report robustness, leakage, baseline time locking and optional stopping, distinguishing from cognitive guessing.
+3. Identify a **predated, publicly inspectable Looking Glass forecast with fixed outcome and independently authenticated observed result**, or an identifiable machine/document record. Without those, neither Brier score nor a physical mechanism test is admitted.
+4. Locate exact **EU/UN/NATO component inventory/serial/custody record**, if it exists; otherwise keep speaker testimony as a source object only, not an accusation or absence finding.
+5. For Frenchman Mountain, specify and measure a physically discriminating traversability effect beyond conventional magnetic/gravity/geological anomalies; the speaker's label is not evidence.
+6. Run Agda/kernel and full committed script, resolve source-level errors if any. Continue the previously developed cohort H2/H3 lanes **only** when exact new original material advances the already specified 88-round promotion gates.
+
+---
+
 ## Prior-art correction: TWO distinct eleven-person rosters and eighty-eight rounds
 
 **Re-audit 18 Nov 2026:** The repo has considerably more work on eleven scientists than this video PR originally acknowledged. Original source-of-truth modules:
