@@ -94,4 +94,4 @@ bareKKMomentumCannotDetermineAllSMCharges :
   ⊥
 bareKKMomentumCannotDetermineAllSMCharges q forQuark forElectron =
   originalQuarkLeptonHyperchargesDiffer
-    (sym (forQuark 0) \u003b)
+    (trans (sym (forQuark 0)) (forElectron 0))
