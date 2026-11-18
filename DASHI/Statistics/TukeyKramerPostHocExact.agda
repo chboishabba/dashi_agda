@@ -164,8 +164,8 @@ decide d a b with admitted d a b
 ... | true with lt
   (statisticDenominator d a b * qSquaredNumerator (threshold d))
   (statisticNumerator d a b * qSquaredDenominator (threshold d))
-...   | true = familyAdjustedReject
-...   | false = familyAdjustedFailToReject
+... | true | true = familyAdjustedReject
+... | true | false = familyAdjustedFailToReject
 
 -- FINITE SYNTHETIC arithmetic fixtures, not real Bem participants.
 -- Three equal-n groups with pooled MSE=10, df=27, groups=3,
