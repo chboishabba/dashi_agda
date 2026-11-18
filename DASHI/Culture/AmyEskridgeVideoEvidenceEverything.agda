@@ -84,3 +84,8 @@ import DASHI.Statistics.OneWayANOVAPooledMSEExact
 import DASHI.Statistics.TukeyKramerPostHocExact
 import DASHI.Statistics.TukeyKramerIntervalCalibrationExact
 import DASHI.Culture.AmyEskridgeBemAristotleExperimentalProofSearchWeldExact
+
+-- Original received EXP1.xlsx: actual 100-person 2011 main t endpoint replay,
+-- 40+60 trial denominators, 826/1560 source versus 828 later citation.
+-- No participant rows uploaded to the public repository.
+import DASHI.Culture.AmyEskridgeBemExp1OriginalWorkbookReplayExact
