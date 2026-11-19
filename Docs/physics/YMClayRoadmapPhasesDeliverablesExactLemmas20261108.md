@@ -37,6 +37,10 @@ Commit `95d0e1e190c9d215a958df8ab877ec6fffcba5a2` adds `scripts/check_ym_p33_fou
 
 P0.1 has an executable finite bare Wilson cubic/quartic producer, not a proof of the full constrained background Fourier vertex or continuum momentum limit. Next use these indexed vertex coefficients in the gauge-fixed constrained CMP109 bubble/tadpole trace contractions and attach the original reduced FP and Haar source, before R471 receipt quadrature. All four physical receipt integrals, uniform beta enclosure and E1/D1/D2/N1/G1 remain open. No Agda kernel receipt. Do not re-add factorization/normalization adapters instead of performing physical source calculations.
 
+### 19 November — original finite contractions and Ward discriminator
+
+Recovered original fourth-jet, Haar and combined Wilson/FP/Haar owners (3c664f9, deeea09 and preceding recovery). Executable configured Green AAqq/Haar f9fd038 and bubble f1eab57 retained. FP 7c5a0018e68d556ba01d223197f5a670769f3a60: actual anchored reduced inverse from configured Green; four selected momentum two-jets -145912/245, -63356/105, 0, -72956/245, exact anchor comparison and reduced inverse identity. Polarization factorials checked against derivative Leibniz source (not Taylor coefficients). The new Ward audit uses the original executables: longitudinal T=2458/35, B=20728/35, FP=0, bare Haar Hessian=512/3; naive half(T-B)+FP+Haar=-271/3. This is a negative control, not the physical tensor. SymPy trace-log cancellation for a conjugated configured H and 256 exact selected momentum-pair checks pass. Actual constrained background CMP109 Hessian derivatives, gauge-fixing/constraint transport and background Haar rather than vacuum trace must be identified before Ward/physical beta extraction. No kernel receipt or Clay promotion. Do not rerun bare vertex/contraction work.
+
 ### Execution order and acceptance
 
 | Cut | Existing producer/consumer | Exact next payment |
