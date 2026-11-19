@@ -37,6 +37,7 @@ open import Data.Rational.Base using (ℚ)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
+import DASHI.Physics.YangMills.BalabanCMP98Equation120QSourceRecoveryRound215Exact as R215
 import DASHI.Physics.YangMills.BalabanCMP98MultiscaleAveragingDerivativeRound126Exact as R126
 import DASHI.Physics.YangMills.BalabanCMP98Equation119OneStepDerivativeRound146Exact as R146
 import DASHI.Physics.YangMills.BalabanCMP98Equation119LiteralPathRound147Exact as R147
@@ -316,3 +317,63 @@ cmp98Equation119TwoCarrierSelectedBondLevel = machineChecked
 
 cmp98Equation119TwoCarrierFieldAssemblyLevel : ProofLevel
 cmp98Equation119TwoCarrierFieldAssemblyLevel = machineChecked
+
+------------------------------------------------------------------------
+-- Eq. (120)/(121) on the SAME two-carrier source, with no qSource input.
+-- R215 owns the one-carrier formula and the inverse-L normalization.
+------------------------------------------------------------------------
+
+transportAlongWord :
+  ∀ {Local Global Value n group} →
+  TwoCarrierEquation119PathData Local Global Value n group →
+  Nat → Blocks.PeriodicBlock n → List Word.SignedAxis4 →
+  R126.Vector (R146.additive Local) →
+  R126.Vector (R146.additive Local)
+transportAlongWord dataSet step site [] value = value
+transportAlongWord dataSet step site (direction ∷ directions) value =
+  adjointLink dataSet step
+    (Bond.orientedLink (realization dataSet step) site direction)
+    (transportAlongWord dataSet step
+      (Bond.walkStep site direction) directions value)
+
+weightedFaceSum :
+  ∀ {Local Global Value n group} →
+  TwoCarrierEquation119PathData Local Global Value n group →
+  (Centered.CenteredBlockPoint4 6 → R126.Vector (R146.additive Local)) →
+  List (Centered.CenteredBlockPoint4 6) →
+  R126.Vector (R146.additive Local)
+weightedFaceSum {Local} dataSet term [] =
+  R126.zeroV (R146.additive Local)
+weightedFaceSum {Local} dataSet term (point ∷ points) =
+  R126.addV (R146.additive Local)
+    (scaleV dataSet R147.siteWeightℚ (term point))
+    (weightedFaceSum dataSet term points)
+
+selectedEquation120QSource :
+  ∀ {Local Global Value n group} →
+  TwoCarrierEquation119PathData Local Global Value n group →
+  Nat → Global → R126.Vector (R146.additive Local)
+selectedEquation120QSource {Local} dataSet step A =
+  let points = Carrier.elements (Centered.centeredBlockFinite 6)
+      minus = Embed.embeddingCentre (minusEmbedding dataSet step)
+      plus = Embed.embeddingCentre (plusEmbedding dataSet step)
+      minusAvg = weightedFaceSum dataSet
+        (λ point → r0Path dataSet step A minus
+          (Embed.canonicalCenteredContourWord point)) points
+      plusAvg = weightedFaceSum dataSet
+        (λ point → transportAlongWord dataSet step minus
+          (coarseWord dataSet step)
+          (r0Path dataSet step A plus
+            (Embed.canonicalCenteredContourWord (plusOffset dataSet step point))))
+        points
+  in scaleV dataSet R215.sourceInverseLℚ
+       (R126.addV (R146.additive Local) (R146.negV Local minusAvg)
+         (R126.addV (R146.additive Local)
+           (selectedEquation119QPrime dataSet step A) plusAvg))
+
+assembledEquation120QSource :
+  ∀ {Local Global CoarseBond Value n group} →
+  TwoCarrierEquation119FieldFamily Local Global CoarseBond Value n group →
+  Nat → Global → CoarseBond → R126.Vector (R146.additive Local)
+assembledEquation120QSource family step A coarseBond =
+  selectedEquation120QSource (sourceAt family coarseBond) step A
