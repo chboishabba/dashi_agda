@@ -11,6 +11,10 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base using (ℚ)
 import Real as B
 import RealProperties as BP
+import DASHI.Physics.YangMills.BalabanCMP109BishopPrincipalLogAdPolynomialExact as Poly
+open import Data.Product using (_,_; proj₁; proj₂)
+open import Data.Integer.Base using (+_)
+open import Data.Rational.Unnormalised using (_/_)
 import DASHI.Physics.YangMills.BalabanPhysicalSU2FiniteCoordinatesExact as P
 import DASHI.Physics.YangMills.YMClayOriginalRationalSU2ToBishopTraceExact as Scalar
 import DASHI.Physics.YangMills.BalabanCMP109FederbushNormalizedJacobianExact as J
@@ -159,3 +163,85 @@ pointInverse : ∀ {C} (inputs : Inputs C) bond step point v →
 pointInverse inputs bond step point =
   inverseOnChart (chart inputs) (pointY inputs bond step point)
     (pointRelevant inputs bond step point)
+
+------------------------------------------------------------------------
+-- Native reduced-polynomial operations, with explicit pure-quaternion
+-- normalization. Reuse the existing Bishop Vec3 and ad-polynomial owner.
+------------------------------------------------------------------------
+
+toVec3 : BishopLie → Poly.Vec3B
+toVec3 v = Poly.vec3B
+  (v P.coordinateX) (v P.coordinateY) (v P.coordinateZ)
+
+fromVec3 : Poly.Vec3B → BishopLie
+fromVec3 v P.coordinateX = Poly.x v
+fromVec3 v P.coordinateY = Poly.y v
+fromVec3 v P.coordinateZ = Poly.z v
+
+twoB : B.ℝ
+twoB = B._⋆ (+ 2 / 1)
+
+halfB : B.ℝ
+halfB = B._⋆ (+ 1 / 2)
+
+ad : BishopLie → BishopLie → BishopLie
+ad y v = fromVec3
+  (Poly.bracket3 (Poly.scale3 twoB (toVec3 y)) (toVec3 v))
+
+reducedApply : B.ℝ → B.ℝ → BishopLie → BishopLie → BishopLie
+reducedApply a b y v = fromVec3
+  (Poly.principalLogAdApply a b (Poly.scale3 twoB (toVec3 y)) (toVec3 v))
+
+-- D+ = I + A ad + B ad^2.
+rootFreeDexp : (BishopLie → B.ℝ) → (BishopLie → B.ℝ) →
+  BishopLie → BishopLie → BishopLie
+rootFreeDexp a b y = reducedApply (a y) (b y) y
+
+-- Ad(exp Y) = I + (1-w B) ad + A ad^2,
+-- where w = 4||Y||^2. No separate trigonometric coefficient authority.
+adRadiusSquared : BishopLie → B.ℝ
+adRadiusSquared y =
+  B._*_ (B._⋆ (+ 4 / 1))
+    (sumBishop P.lieCoordinates3 (λ c → B._*_ (y c) (y c)))
+
+rootFreeAdjointExp : (BishopLie → B.ℝ) → (BishopLie → B.ℝ) →
+  BishopLie → BishopLie → BishopLie
+rootFreeAdjointExp a b y =
+  reducedApply
+    (B._-_ B.1ℝ (B._*_ (adRadiusSquared y) (b y)))
+    (a y) y
+
+-- J+ = I - ad/2 + beta ad^2, with beta on the SAME Bishop carrier.
+rootFreeJplus : (BishopLie → B.ℝ) →
+  BishopLie → BishopLie → BishopLie
+rootFreeJplus beta y = reducedApply (B.- halfB) (beta y) y
+
+-- Existing coefficient telescope now applies directly to this native carrier.
+inverseCoefficientTelescope :
+  ∀ beta beta0 y v →
+  Poly.vec3Congruent
+    (Poly.sub3 (toVec3 (rootFreeJplus (λ _ → beta) y v))
+               (toVec3 (rootFreeJplus (λ _ → beta0) y v)))
+    (Poly.scale3 (B._-_ beta beta0)
+      (Poly.adSquare3 (Poly.scale3 twoB (toVec3 y)) (toVec3 v)))
+inverseCoefficientTelescope beta beta0 y v =
+  Poly.principalLogCoefficientTelescope
+    (B.- halfB) beta beta0 (Poly.scale3 twoB (toVec3 y)) (toVec3 v)
+
+-- Assemble only on the selected chart. The analytic coefficient producer
+-- still owes inverse cancellation, not a new arbitrary matrix family.
+fromReducedChart :
+  (log : SU2.RationalUnitQuaternion → BishopLie) →
+  (a b beta : BishopLie → B.ℝ) →
+  (relevant : BishopLie → Set) →
+  (∀ y → relevant y → ∀ v →
+    rootFreeJplus beta y (rootFreeDexp a b y v) ≈v v) →
+  LocalChart
+fromReducedChart log a b beta relevant inverse = record
+  { principalLog = log
+  ; dexpPlus = rootFreeDexp a b
+  ; jPlus = rootFreeJplus beta
+  ; adjointExp = rootFreeAdjointExp a b
+  ; Relevant = relevant
+  ; inverseOnChart = inverse
+  }
