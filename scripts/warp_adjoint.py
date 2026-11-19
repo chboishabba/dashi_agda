@@ -47,7 +47,7 @@ def run(dr=.04,dy=.06,dt=.008,eps=.16,final=3.,pulse=.15):
   J=np.zeros(3*n);J[2*n:2*n+nr]=-4*src[q]/dy;J[-n+nr-1]=0
   return eye(3*n,format='csr')+dt*A,dt*J
  # source value at each half step independently; same spatial source all modes
- times=np.arange(2*(nt+1)+1)*dt/2; active=times<pulse; f0=np.zeros(len(times));f0[active]=np.exp(1-1/np.maximum(1-(2*times[active]/pulse-1)**2,1e-300));
+ times=np.arange(2*(nt+1)+1)*dt/2; active=(times>0)&(times<pulse); f0=np.zeros(len(times));f0[active]=np.exp(1-1/np.maximum(1-(2*times[active]/pulse-1)**2,1e-300));
  # use actual temporal amplitude normalization -6 sqrt(1-v²)/b
  for j in np.flatnonzero(active):
   t,v,b=coeff(j/2);f0[j]*=-6*sqrt(1-v*v)/b
@@ -75,7 +75,25 @@ def run(dr=.04,dy=.06,dt=.008,eps=.16,final=3.,pulse=.15):
    gain[2*k+1]+=2/3*(jh@lam);gain[2*k+2]+=.25*(j1@l2);gain[2*k]+=j0@l1
    lam=lam/3+.75*l2+B0.T@l1+obs(q,k)
  gain[~active]=0
- opt=gain*np.linalg.norm(f0)/np.linalg.norm(gain); a=forward(f0);b=forward(opt);pred=gain@f0;pred2=gain@opt
- print('grid',nr,ny,nt,'receiver',rx,'photon margin',rx-eps-np.log(final),'original',a,'adjoint',pred,'optimized',b,'predicted',pred2,'amplitude gain',abs(b/a),'cost',np.linalg.norm(f0)**2,flush=True)
+ # Integrate the Israel boundary-energy bound in conformal time using
+ # the SSPRK3 stage quadrature (shared endpoint samples accumulate).
+ weights=np.zeros_like(times)
+ for k in range(nt+1):
+  weights[2*k:2*k+3]+=dt*np.array([1/6,2/3,1/6])
+ for j in range(len(times)):
+  t,v,b=coeff(j/2)
+  weights[j]*=1/(-v*b**3)
+ assert np.all(weights>0)
+ budget=np.dot(weights,f0*f0)
+ compliance=np.dot(gain,gain/weights)
+ assert budget>0 and compliance>0
+ opt=gain/weights*np.sqrt(budget/compliance)
+ assert np.isclose(np.dot(weights,opt*opt),budget,rtol=1e-12,atol=0)
+ a=forward(f0);b=forward(opt);pred=gain@f0;pred2=gain@opt
+ assert np.isclose(pred2,np.sqrt(budget*compliance),rtol=1e-12,atol=0)
+ print('Israel upper-bound cost',budget,'optimized cost',np.dot(weights,opt*opt),'squared response gain',(pred2/pred)**2,'compliance',compliance,flush=True)
+ print('grid',nr,ny,nt,'receiver',rx,'photon margin',rx-eps-np.log(final),'original',a,'adjoint',pred,'optimized',b,'predicted',pred2,'amplitude gain',abs(b/a),'weighted cost',budget,flush=True)
  assert np.isclose(a,pred,rtol=1e-7,atol=1e-9) and np.isclose(b,pred2,rtol=1e-7,atol=1e-9)
-if __name__=='__main__':run()
+if __name__=='__main__':
+ import sys,json
+ run(**(json.loads(sys.argv[1]) if len(sys.argv)>1 else {}))
