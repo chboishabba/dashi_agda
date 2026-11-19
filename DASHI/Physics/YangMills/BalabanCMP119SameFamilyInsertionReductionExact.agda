@@ -154,6 +154,66 @@ sameFamilyResponseTailFromAdjacent expectation increment adjacent kind =
   responseBelowGeneratedTailFromAdjacent
     (expectation kind) increment (adjacent kind)
 
+
+-- Construct the existing R82 record from the source's selected insertion
+-- values. The scalar readout is explicitly tied to the dependent source
+-- expectation, rather than supplied as an unrelated response sequence.
+module _
+    {source : Source.CMP119AnchoredNormalizedExpectationSource}
+    (Insertion : ResponseKind → Set)
+    (anchor : ∀ kind → Insertion kind → Source.Anchor source)
+    (analytic : ∀ kind → Insertion kind → Set)
+    (normalized : ∀ kind (scale : Source.Scale source)
+       (insertion : Insertion kind) →
+       Source.NormalizedExpectation source scale (anchor kind insertion))
+    (represented : ∀ kind scale insertion → analytic kind insertion →
+       Source.representedByAnchoredTerms source scale
+         (anchor kind insertion) (normalized kind scale insertion))
+    (scaleAt : Nat → Source.Scale source)
+    (selected : ∀ kind → Insertion kind)
+    (readout : ∀ {scale anchor} →
+       Source.NormalizedExpectation source scale anchor → ℚ)
+  where
+
+  selectedNormalizedResponse : ResponseKind → Nat → ℚ
+  selectedNormalizedResponse kind k =
+    readout (normalized kind (scaleAt k) (selected kind))
+
+  selectedResponseDifference : ResponseKind → Nat → Nat → ℚ
+  selectedResponseDifference kind start count =
+    ∣ selectedNormalizedResponse kind start -
+      selectedNormalizedResponse kind (N._+_ start count) ∣
+
+  selectedInsertionReductionFromAdjacent :
+    (increment : Nat → ℚ) →
+    (∀ k → 0ℚ ≤ increment k) →
+    (c : ℚ) → 0ℚ ≤ c →
+    (∀ k → increment k ≤ c * (Ursell.quarter * Geo.halfPower k)) →
+    (∀ kind k →
+      ∣ selectedNormalizedResponse kind k -
+        selectedNormalizedResponse kind (suc k) ∣ ≤ increment k) →
+    SameFamilyCMP119InsertionReduction source
+  selectedInsertionReductionFromAdjacent
+      increment incrementNN c cNN dyadic adjacent = record
+    { RepositoryInsertion = Insertion
+    ; insertionAnchor = anchor
+    ; sourceLocalAnalytic = analytic
+    ; normalizedExpectation = normalized
+    ; sourceRepresentation = represented
+    ; generatedIncrement = increment
+    ; generatedIncrementNonnegative = incrementNN
+    ; coefficient = c
+    ; coefficientNonnegative = cNN
+    ; generatedIncrementDyadic = dyadic
+    ; responseDifference = selectedResponseDifference
+    ; responseDifferenceNonnegative = λ kind start count →
+        ℚP.0≤∣p∣ (selectedNormalizedResponse kind start -
+          selectedNormalizedResponse kind (N._+_ start count))
+    ; responseBelowGeneratedTail =
+        sameFamilyResponseTailFromAdjacent
+          selectedNormalizedResponse increment adjacent
+    }
+
 sameFamilyInsertionReductionCompilerLevel : ProofLevel
 sameFamilyInsertionReductionCompilerLevel = machineChecked
 
