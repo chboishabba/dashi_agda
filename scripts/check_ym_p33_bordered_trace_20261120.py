@@ -83,12 +83,32 @@ def gauge_pair(site1,site2,fixed=False):
     tad=trace_one(dst);bubble=trace_two(ds,dt)
     return tad,bubble,(tad-bubble)/2
 
+def normal_motion():
+    # Independent physical-size rank-one normal constraint motion: change the
+    # first row by (s+t)(e_x-e_y)^T while holding the configured A fixed.
+    # This is a diagnostic family, NOT the CMP98 transported path operator.
+    v=basis([0]) - basis([idx[(1,0,0,0)]])
+    e=basis([M]); U=np.concatenate((v,e),axis=1)
+    V=N*np.concatenate((e.T,v.T),axis=0)
+    f=(U,V)
+    k_mixed=-trace_two(f,f)
+    gram_mixed=F(4,N) # ||v||^2=2 and mixed second derivative of (s+t)^2
+    induced=(k_mixed-gram_mixed)/2
+    delta=k_mixed/2
+    # Schur complement using the independently evaluated scalar G kernel.
+    schur=2*(green(O)-green((1,0,0,0)))
+    assert delta==schur/N
+    assert induced==(schur-2)/N
+    assert induced!=0 and delta!=0
+    print('normal row motion: bordered vs Schur exact; induced=',induced,'delta=',delta)
+
 def main():
     print('P33 state/multiplier dimensions:',M,12,'inverse scaling',D)
     print('PASS 256 scalar and 257 representative bordered columns, both inverse orders')
     for site in [O,(1,0,0,0),(2,0,0,0),(0,1,1,0)]:
         t,b,r=gauge_pair(O,site);assert r==0
         print('transport Q',site,'T=',t,'B=',b,'mixed=',r)
+    normal_motion()
     t,b,r=gauge_pair(O,O, fixed=True);assert r!=0
     print('freeze Q negative control T=',t,'B=',b,'mixed=',r)
     # Row scaling does not change ker Q or induced-volume Gaussian, but
