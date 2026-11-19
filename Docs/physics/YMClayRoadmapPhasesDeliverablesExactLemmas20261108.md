@@ -2,6 +2,12 @@
 
 Audited exact #1444 head `ff1cd1dfabf2fd18296d7f0f2210e3cba1facd30`. The #1440 direct mass-gap root and #1503 F19/P0/common-OS root are already present, with identical Git blobs `f94bcf270f58de263f6202b8679610ba3d6cd464` and `8eb78d7f1fb5a343824d3516592f220248df1924` respectively. The latter has 18 direct source imports. Do not transplant or recreate these roots, finite push/pull, normalized state laws, Wilson word algebra, or the spectral compiler.
 
+### 19 November continuation — R82 finite-tail assumption elimination
+
+Commit `2ba4167450988b03e8990e460909c045f235603a` extends the existing R82 owner `BalabanCMP119SameFamilyInsertionReductionExact.agda` with `responseBelowGeneratedTailFromAdjacent` and `sameFamilyResponseTailFromAdjacent`. These derive the generated finite-tail bound for a rational scalar expectation sequence by induction on count, using `CanonicalRationalMetric.absDifferenceTriangle`, `BalabanClayDyadicCutoffTailExact.startPlusZero/startSuccessorCount`, and R81's existing `generatedTail`. Both response kinds share one adjacent increment envelope.
+
+Status: source-written, not kernel-checked. This supplies a proof route for the old responseBelowGeneratedTail field when the response is the actual absolute expectation difference; the record itself remains unchanged, and no physical instance is claimed. Next: attach the actual original normalized anchored insertion expectations (including faithful real/rational representation where necessary), establish their adjacent physical bound and dyadic envelope, and consume R81. No additional independent finite telescoping assumption is needed. E1/D1/D2/N1/G1 remain open.
+
 ### Execution order and acceptance
 
 | Cut | Existing producer/consumer | Exact next payment |
