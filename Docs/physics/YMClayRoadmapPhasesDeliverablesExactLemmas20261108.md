@@ -1,3 +1,28 @@
+## 19 November 2026 — canonical weld-first maximum cut (supersedes redundant source-search work)
+
+Audited exact #1444 head `ff1cd1dfabf2fd18296d7f0f2210e3cba1facd30`. The #1440 direct mass-gap root and #1503 F19/P0/common-OS root are already present, with identical Git blobs `f94bcf270f58de263f6202b8679610ba3d6cd464` and `8eb78d7f1fb5a343824d3516592f220248df1924` respectively. The latter has 18 direct source imports. Do not transplant or recreate these roots, finite push/pull, normalized state laws, Wilson word algebra, or the spectral compiler.
+
+### Execution order and acceptance
+
+| Cut | Existing producer/consumer | Exact next payment |
+|---|---|---|
+| E1-A | YMClayF19OriginalAllCoarseCylinderNormalizationExact; YMClayE1A3OriginalR445CrossCutoffSourceExact | Identify native coarse maps after original codec/reindex; identify actual renormalized target, not bare beta(1). |
+| E1-B | YMClayR445OneLocalTVThreeMomentsSourceWeldExact; weighted exterior influence note (14 Nov) | On actual compatible target flow, derive local TV <= a_k(X)+b_k(X), with conditional-kernel TV and a single exterior coupling weighted by site influence. |
+| E1-C | BalabanCMP119SameFamilyInsertionReductionExact -> BalabanTopDownSummableRGIncrementExact | Prefer existing anchored normalized insertion route if cheaper: prove generatedIncrementDyadic and responseBelowGeneratedTail on actual ordinary/characteristic insertions. Otherwise sum actual projectively compatible local TV increments. Do not require both routes. |
+| E1-D | YMClayE1OriginalSUNFiniteCylinderLawsExact | Supply originalWilsonCylinderConverges on selected physical cylinders, not arbitrary cutoff sections; normalization, addition, scaling and positivity already derived. |
+| D1 | YMClayD1OriginalCovarianceToR320Exact | Supply actual full-Wilson connected covariance rooted-shell estimate, including physical unit calibration and full large-field control where needed. selectedHessianMagnitudeIsOriginalCovarianceMagnitude already proves the identity in both directions with R320 bound. |
+| D2 | YMClayOriginalWilsonNativeOSPullbackExact; R461/R582; YMClayDirectSourceOSMassGapFrontierExact | Use published fine Wilson RP on actual selected admissible algebra; same continuum reflected products, reconstructed H, dense centered physical autocorrelation with common positive physical exponent. No second H or independent finite spectral convergence required. |
+| N1 | Existing original conditional variance and noncollapse owners | Transport an actual local renormalized nonvacuum witness using the SAME E1 error modulus; nonlinear finite cumulant alone is not interacting continuum evidence. |
+| G1 | R569–R571 actual group constructors | Apply the same physical bounds per compact simple group; no need for uniform constants across all groups, but actual per-group evidence is required. |
+
+For [0,1] tests the existing local TV consumer gives three moment errors <= d and covariance error <= 3d (TV = supremum over events). For signed unit tests the corresponding elementary bound is 6d. Neither gives spatial clustering from TV alone. The weighted exterior comparison and the anchored CMP119 insertion route are alternative routes to continuum convergence, not duplicate mandatory gates. Fixed block factor 1/16 is not a scale-summable envelope; compare genuinely successive laws on common observation algebras. Do not equate effective action to bare coarse Wilson action.
+
+The latest source changes `6f96d89fb9307598d4c0af6575e86ee3262f2cbb` and `ff1cd1dfabf2fd18296d7f0f2210e3cba1facd30` add published fine RP transport and index R461 authority by cutoff. These are source-written, not kernel-accepted or inhabited physical RP certificates. The R461 fixed Configuration carrier still requires faithful interpretation of changing-cutoff cylinders. Prior finite SymPy regressions are non-promotional controls.
+
+**Acceptance policy:** existing inhabited producers first, only descend on actual type/carrier mismatch; classical published theorem use with explicit same-object identification; no new conditional wrappers. Record exact local Agda receipt (not CI) and actual source proof separately. E1/D1/D2/N1/G1 remain OPEN at audited head. This audit does not claim exhaustive absence of other donors.
+
+---
+
 **Fail-closed static ledger guard:** `python3 scripts/check_ym_clay_23_physical_producers_20261109.py` checks the actual 23 E1/D1/D2/N1/G1 producer IDs, distinct YM01–YM10 owner manifest, PH0–PH4 phase coverage, original all-word Wilson gauge/marked source declarations and physical regression import. It is a source/roadmap audit, not an Agda typecheck, not an E1 or D1 proof and not a mass-gap certificate. Run it before the exact-head `parallel_checker` with Nix/Agda 2.9; terminal physical facts must be independently proved. 
 
 ## 9 November 2026 — authoritative 23-lemma / 10-owner / five-phase crosswalk
