@@ -7,7 +7,7 @@ import numpy as np
 from scipy.integrate import solve_ivp
 from scipy.linalg import null_space
 
-def model(N=6):
+def model(N=6, capture=False):
     edges=[]; rot=[]; idx={}
     for i in range(N):
         for j in range(N):
@@ -47,9 +47,12 @@ def model(N=6):
         for t,z in zip(ts,sol.y.T):
             e,_,_,B=calc(z,.12-b*.08*min(t/10,1)); p,A,v=unpack(z); E.append(e); inv.append(2*(B@B-v@v)); rho.append(np.mean(abs(p)**2))
         Wb,Wr,diss=sol.y[-3:]; res=max(abs(np.array(E)-E0-Wb-Wr+diss)); assert res<2e-6
+        if capture: traces[(b,pump)]=(ts,np.array(inv))
         return np.array([Wb[-1],Wr[-1],diss[-1],E[-1]-E0,res,max(abs(np.array(inv)-inv[0])),min(rho)])
+    traces={}
     out={}
     for name,b,pump in [('hold',0,0),('brake',1,0),('rf',0,1),('combined',1,1)]:
         a=run(b,pump,1e-8); c=run(b,pump,1e-10); assert max(abs(a-c))<1e-5; out[name]=c; print(name,c)
     print('interaction',out['combined']-out['brake']-out['rf']+out['hold']); print('PASS gauge GL, curl grad, transverse dynamics, work ledger and tolerance checks')
+    return traces if capture else out
 if __name__=='__main__': model()
