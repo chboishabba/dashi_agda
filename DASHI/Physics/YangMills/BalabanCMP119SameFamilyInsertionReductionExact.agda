@@ -22,8 +22,12 @@ module DASHI.Physics.YangMills.BalabanCMP119SameFamilyInsertionReductionExact wh
 -- common scale-tail estimate.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _≤_; _*_)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _≤_; _*_; _-_; ∣_∣)
+import Data.Nat.Base as N
+import Data.Rational.Properties as ℚP
+import DASHI.Analysis.CanonicalRationalMetric as Metric
+import DASHI.Physics.YangMills.BalabanClayDyadicCutoffTailExact as Cutoff
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanCMP119AnchoredNormalizedExpectationSourceExact as Source
@@ -110,6 +114,45 @@ asPublishedTailToCommonIncrement dataSet = record
   ; Sum.PublishedTailToCommonIncrement.characteristicResponseBelowGeneratedTail =
       responseBelowGeneratedTail dataSet characteristic
   }
+
+
+-- Derive R82's finite response-tail field from literal successive scalar
+-- expectations, rather than ask for a second independent multiscale estimate.
+-- Reuse the canonical rational metric and existing cutoff-index identities.
+-- The adjacent bound must still be proved on the actual physical insertion.
+responseBelowGeneratedTailFromAdjacent :
+  (expectation : Nat → ℚ) (increment : Nat → ℚ) →
+  (∀ k → ∣ expectation k - expectation (suc k) ∣ ≤ increment k) →
+  ∀ start count →
+  ∣ expectation start - expectation (N._+_ start count) ∣
+    ≤ Sum.generatedTail increment start count
+responseBelowGeneratedTailFromAdjacent expectation increment adjacent start zero
+  rewrite Cutoff.startPlusZero start
+        | Metric.subSelfℚ (expectation start)
+        | Metric.absZeroℚ = ℚP.≤-refl
+responseBelowGeneratedTailFromAdjacent expectation increment adjacent start (suc count)
+  rewrite Cutoff.startSuccessorCount start count =
+  ℚP.≤-trans
+    (Metric.absDifferenceTriangle
+      (expectation start) (expectation (suc start))
+      (expectation (N._+_ (suc start) count)))
+    (ℚP.+-mono-≤
+      (adjacent start)
+      (responseBelowGeneratedTailFromAdjacent
+        expectation increment adjacent (suc start) count))
+
+-- Both insertion kinds share the same generated increment; no separate
+-- finite-tail estimate for characteristic response is needed.
+sameFamilyResponseTailFromAdjacent :
+  (expectation : ResponseKind → Nat → ℚ) (increment : Nat → ℚ) →
+  (∀ kind k → ∣ expectation kind k - expectation kind (suc k) ∣
+    ≤ increment k) →
+  ∀ kind start count →
+  ∣ expectation kind start - expectation kind (N._+_ start count) ∣
+    ≤ Sum.generatedTail increment start count
+sameFamilyResponseTailFromAdjacent expectation increment adjacent kind =
+  responseBelowGeneratedTailFromAdjacent
+    (expectation kind) increment (adjacent kind)
 
 sameFamilyInsertionReductionCompilerLevel : ProofLevel
 sameFamilyInsertionReductionCompilerLevel = machineChecked
