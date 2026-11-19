@@ -20,6 +20,10 @@ Source commits:
 
 Next execution: migrate actual finite histories to the corrected flow (including functional density and original CMP119 source consumers), prove source-compatible positive beta on physical active scales and actual original marked localization, then consume the existing R82 published-source route and R342/R479/R482. No further dyadic arithmetic or generic covariance compiler. All changes source-written, no Agda kernel receipt, E1/D1/D2/N1/G1 OPEN.
 
+### 19 November continuation — finite functional density entry point
+
+Commit `eac0cafd7b49f0904f2af17b3fc411464734e251` adds finiteFunctionalDensityFlow, finiteFunctionalDensityAgrees and finiteFunctionalCouplingAgrees to Balaban1989BetaDrivenFunctionalDensityExact. The literal SlowField -> Real carrier now has a direct finite-history constructor independent of the contradictory historical record. The original Eq. 2.18 factorized functional density and BetaHistorySection2Coordinates still expose all-Nat activity premises; these must be migrated at their actual source boundaries, with physical index restriction preserved. No kernel receipt or actual original physical beta/localization estimate claimed. E1/D1/D2/N1/G1 remain OPEN.
+
 ### Execution order and acceptance
 
 | Cut | Existing producer/consumer | Exact next payment |
