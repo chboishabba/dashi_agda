@@ -24,6 +24,13 @@ Next execution: migrate actual finite histories to the corrected flow (including
 
 Commit `eac0cafd7b49f0904f2af17b3fc411464734e251` adds finiteFunctionalDensityFlow, finiteFunctionalDensityAgrees and finiteFunctionalCouplingAgrees to Balaban1989BetaDrivenFunctionalDensityExact. The literal SlowField -> Real carrier now has a direct finite-history constructor independent of the contradictory historical record. The original Eq. 2.18 factorized functional density and BetaHistorySection2Coordinates still expose all-Nat activity premises; these must be migrated at their actual source boundaries, with physical index restriction preserved. No kernel receipt or actual original physical beta/localization estimate claimed. E1/D1/D2/N1/G1 remain OPEN.
 
+### 19 November continuation — finite Eq. 2.18 and canonical Section 2 entry points
+
+- `01de23f73fbdc850f0cca308d4acc46cd73ef610` adds finiteEquation218Density, finiteEquation218Flow, finiteEquation218PhysicalDensity to the existing Eq. 2.18 owner. Reuses realSum and realProduct; no legacy all-Nat activity input. Literal source lists, step functions, residuals and bounds are still inputs.
+- `d536b55898143fb4e193dfa419748b616879cc2c` adds finiteCoordinates, finiteCanonicalStateAgrees, finiteCanonicalInvariantRegion to the existing canonical beta-history owner. All six coordinates selected at the same min(k,K) index as the density and coupling. Existing Section 2-to-invariant-region theorem consumed, given actual Theorem 1 witness and quantitative bounds.
+
+Both changes are source-written alternative entry points, not migration of every historical caller or kernel acceptance. Before further extension, inspect section parameter elaboration and exact local Agda receipt; terminal padding must not be interpreted as physical time evolution. Next attach actual source lists and positive beta enclosure plus the same-source CMP119 expectation/marked response. All five physical gates remain OPEN.
+
 ### Execution order and acceptance
 
 | Cut | Existing producer/consumer | Exact next payment |
