@@ -6,7 +6,7 @@ import time,json,sys
 from numba import set_num_threads
 from pathlib import Path
 
-def run(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12.,pulse=.065,r_outer=4.3,y_outer=3.,order=4,threads=4,mode=None,phase="both",checkpoint="warp_temporal_checkpoint"):
+def run(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12.,pulse=.065,r_outer=4.3,y_outer=3.,order=4,threads=4,mode=None,phase="both",checkpoint="warp_temporal_checkpoint",setup_only=False):
     assert order in (3,4) and phase in ('both','adjoint','forward')
     assert mode is None or (0<=mode<3 and phase!='both')
     set_num_threads(threads);F=lambda t:asinh(t)-sqrt(1+t*t)/t
@@ -41,6 +41,11 @@ def run(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12.,pulse=.065,r_outer=4.3,y_ou
                     obs[ch,i,1,q,0,ir-1:ir+3]+=a*(1+v[2*n])/2
                     obs[ch,i,2,q,0,ir-1:ir+3]+=a*(1-v[2*n])/2
     print('grid',nr,ny,nt,'photon margin',rx-eps-log(final_t)-dr/2,flush=True)
+    if setup_only:
+        return dict(dr=dr,dy=dy,dt=dt,eps=eps,final_t=final_t,pulse=pulse,
+                    r_outer=r_outer,y_outer=y_outer,order=order,h=h,nt=nt,rx=rx,
+                    r=r,src=src,t=t,coeff=C,R=R,RT=RT,active=active,
+                    baseline=baseline,obs=obs)
     checkpoint=Path(checkpoint);checkpoint.mkdir(exist_ok=True,parents=True)
     config=dict(dr=dr,dy=dy,dt=dt,eps=eps,final_t=final_t,pulse=pulse,
                 r_outer=r_outer,y_outer=y_outer,order=order,nr=nr,ny=ny,nt=nt)
