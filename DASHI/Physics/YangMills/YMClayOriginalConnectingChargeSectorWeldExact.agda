@@ -113,3 +113,44 @@ nativeConnectingSectorBudget {family = family} charge cutoff left right tag =
 -- The prior theorem is the exact type of the charge-sum field when
 -- bound is instantiated with Shell.rootedShell on the original payment.
 -- No claim that the supplied bad mask is already the physical RG mask.
+
+------------------------------------------------------------------------
+-- Consume the existing proof-bearing literal Wilson bad-block predicate.
+------------------------------------------------------------------------
+import DASHI.Physics.YangMills.BalabanClayGate4LiteralWilsonLargeFieldPredicateExact as LF
+open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (yes; no)
+
+literalBadMask : ∀ {Scale Configuration Gauge Block Plaquette}
+  (dataSet : LF.LiteralWilsonLargeFieldData Scale Configuration Gauge Block Plaquette) →
+  Scale → Configuration → Block → Bool
+literalBadMask dataSet scale config block
+  with LF.largeFieldBlockDecidable dataSet scale config block
+... | yes _ = true
+... | no _ = false
+
+literalBadMaskGaugeInvariant : ∀ {Scale Configuration Gauge Block Plaquette}
+  (dataSet : LF.LiteralWilsonLargeFieldData Scale Configuration Gauge Block Plaquette)
+  gauge scale config block →
+  literalBadMask dataSet scale (LF.transform dataSet gauge config) block
+    ≡ literalBadMask dataSet scale config block
+literalBadMaskGaugeInvariant dataSet gauge scale config block
+  with LF.largeFieldBlockDecidable dataSet scale config block
+     | LF.largeFieldBlockDecidable dataSet scale (LF.transform dataSet gauge config) block
+... | yes p | yes q = refl
+... | no p | no q = refl
+... | yes p | no q with q (LF.largeFieldBlockGaugeForward dataSet gauge scale config block p)
+...   | ()
+literalBadMaskGaugeInvariant dataSet gauge scale config block
+  | no p | yes q with p (LF.largeFieldBlockGaugeBackward dataSet gauge scale config block q)
+...   | ()
+
+literalClusterSector : ∀ {n Scale Configuration Gauge Plaquette Cluster}
+  (dataSet : LF.LiteralWilsonLargeFieldData Scale Configuration Gauge (P.PeriodicBlock n) Plaquette) →
+  Scale → Configuration → (Cluster → P.PeriodicPolymer n) → Cluster → Sector
+literalClusterSector dataSet scale config support cluster =
+  classifyNativeSupport (literalBadMask dataSet scale config) (support cluster)
+
+-- IMPORTANT: a fixed configuration classifier does not classify an integrated
+-- activity unless the selected activity is restricted to that sector or its
+-- integration domain has been decomposed accordingly. The supplied support
+-- map and the activity/domain identity remain genuine source obligations.
