@@ -154,3 +154,69 @@ literalClusterSector dataSet scale config support cluster =
 -- activity unless the selected activity is restricted to that sector or its
 -- integration domain has been decomposed accordingly. The supplied support
 -- map and the activity/domain identity remain genuine source obligations.
+
+------------------------------------------------------------------------
+-- Integrated activities: one cluster may contribute to every sector.
+-- Do not classify an integrated charge using one sampled configuration.
+------------------------------------------------------------------------
+open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier using (_∈_)
+
+sumThreeCharges : ∀ {A : Set} (s l m : A → ℚ) (xs : List A) →
+  T.sumℚ (T.map (λ x → (s x + l x) + m x) xs) ≡
+  (T.sumℚ (T.map s xs) + T.sumℚ (T.map l xs)) + T.sumℚ (T.map m xs)
+sumThreeCharges s l m [] = refl
+sumThreeCharges s l m (x ∷ xs) rewrite sumThreeCharges s l m xs =
+  Ring.solve-∀ (s x) (l x) (m x)
+    (T.sumℚ (T.map s xs)) (T.sumℚ (T.map l xs)) (T.sumℚ (T.map m xs))
+
+integratedChargeBelowShell : ∀ {A : Set} (w s l m : A → ℚ) (xs : List A)
+  (boundS boundL boundM bound : ℚ) →
+  (∀ x → w x ≤ (s x + l x) + m x) →
+  T.sumℚ (T.map s xs) ≤ boundS →
+  T.sumℚ (T.map l xs) ≤ boundL →
+  T.sumℚ (T.map m xs) ≤ boundM →
+  (boundS + boundL) + boundM ≤ bound →
+  T.sumℚ (T.map w xs) ≤ bound
+integratedChargeBelowShell w s l m xs bs bl bm bound pointwise ps pl pm budget =
+  Q.≤-trans (C.finiteSumMonotone xs w (λ x → (s x + l x) + m x) pointwise)
+    (subst (λ x → x ≤ bound) (sym (sumThreeCharges s l m xs))
+      (Q.≤-trans (Q.+-mono-≤ (Q.+-mono-≤ ps pl) pm) budget))
+
+-- Construct the EXISTING payment, not a replacement record. Geometry
+-- arguments retain the original API (its Set-valued fields are not proofs).
+-- s/l/m must be derived integrated charge majorants, not arbitrary masks.
+physicalShellPaymentFromIntegratedSectors :
+  ∀ {Observable Source Polymer Cluster Volume Scale Root : Set}
+    {family : M.TwoWilsonSourceParameterizedKP Observable Source Polymer Cluster Volume}
+    {differentiable : M.DifferentiableTwoWilsonKP family}
+    (charge : M.TwoWilsonCMP116ClusterCharge differentiable)
+    (shell : Shell.TraversalShellData Scale Volume Root)
+    (scale : Nat → Scale) (root : Nat → Observable → Observable → Root)
+    (separation : Observable → Observable → Nat) (diameter : Cluster → Nat)
+    (connects diameterWitness injection :
+      ∀ k f g y → y ∈ C.connectingClusters family k f g → Set)
+    (s l m : Nat → Observable → Observable → Cluster → ℚ)
+    (bs bl bm : Nat → Observable → Observable → ℚ) →
+    (∀ k f g y → M.shellCharge charge k f g y ≤ (s k f g y + l k f g y) + m k f g y) →
+    (∀ k f g → T.sumℚ (T.map (s k f g) (C.connectingClusters family k f g)) ≤ bs k f g) →
+    (∀ k f g → T.sumℚ (T.map (l k f g) (C.connectingClusters family k f g)) ≤ bl k f g) →
+    (∀ k f g → T.sumℚ (T.map (m k f g) (C.connectingClusters family k f g)) ≤ bm k f g) →
+    (∀ k f g → (bs k f g + bl k f g) + bm k f g ≤
+      Shell.rootedShell shell (scale k) (M.volumeOfCutoff family k) (root k f g) (separation f g)) →
+    C.TwoWilsonCMP116PhysicalShellPayment differentiable charge
+physicalShellPaymentFromIntegratedSectors {family = family} charge shell scale root separation diameter
+    connects diameterWitness injection s l m bs bl bm pointwise ps pl pm budget = record
+  { shellData = shell
+  ; scaleOfCutoff = scale
+  ; connectingRoot = root
+  ; supportSeparation = separation
+  ; clusterDiameter = diameter
+  ; contributingClusterConnectsBothSupports = connects
+  ; connectingClusterDiameterAtLeastSeparation = diameterWitness
+  ; connectingClusterRootedShellInjection = injection
+  ; chargeSumBelowPhysicalRootedShell = λ k f g →
+      integratedChargeBelowShell (M.shellCharge charge k f g)
+        (s k f g) (l k f g) (m k f g) (C.connectingClusters family k f g)
+        (bs k f g) (bl k f g) (bm k f g) _
+        (pointwise k f g) (ps k f g) (pl k f g) (pm k f g) (budget k f g)
+  }
