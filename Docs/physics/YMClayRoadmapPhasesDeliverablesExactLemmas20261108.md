@@ -8,6 +8,10 @@ Commit `2ba4167450988b03e8990e460909c045f235603a` extends the existing R82 owner
 
 Status: source-written, not kernel-checked. This supplies a proof route for the old responseBelowGeneratedTail field when the response is the actual absolute expectation difference; the record itself remains unchanged, and no physical instance is claimed. Next: attach the actual original normalized anchored insertion expectations (including faithful real/rational representation where necessary), establish their adjacent physical bound and dyadic envelope, and consume R81. No additional independent finite telescoping assumption is needed. E1/D1/D2/N1/G1 remain open.
 
+### R82 selected normalized insertion constructor (19 November continuation)
+
+Commit `323856294974ec3a11e2544b908195b2606281a3` adds `selectedInsertionReductionFromAdjacent` inside the existing R82 owner. It constructs the existing record: selectedNormalizedResponse is the readout of the dependent source normalizedExpectation at scaleAt k and selected insertion; responseDifference is its actual absolute scalar difference; nonnegativity and finite tail are derived. No independent response sequence or finite-tail premise. R81 consumes this record via existing asPublishedTailToCommonIncrement. Remaining inputs: actual original source readout (faithful scalar interpretation, not arbitrary rational surrogate), selected admissible insertions and scale history, original adjacent estimate and dyadic bound. Existing BalabanCMP119CompatibleLocalExpectationFlowExact offers the alternative published sourceSummablePairResponse route given the actual small effective coupling history and source-local analytic pair; its authority is a field, not an inhabited physical witness. No kernel receipt or physical closure claimed. All five physical gates remain open.
+
 ### Execution order and acceptance
 
 | Cut | Existing producer/consumer | Exact next payment |
