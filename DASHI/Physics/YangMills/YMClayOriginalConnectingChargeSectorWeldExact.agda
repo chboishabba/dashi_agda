@@ -220,3 +220,65 @@ physicalShellPaymentFromIntegratedSectors {family = family} charge shell scale r
         (bs k f g) (bl k f g) (bm k f g) _
         (pointwise k f g) (ps k f g) (pl k f g) (pm k f g) (budget k f g)
   }
+
+------------------------------------------------------------------------
+-- Six-factor producer -> terminal base norm -> original affine marking.
+-- The equality is the only representation hypothesis in this adapter;
+-- the analytic six-factor input is retained, not manufactured.
+------------------------------------------------------------------------
+open import Data.Rational.Base using (1ℚ; ∣_∣)
+import DASHI.Physics.YangMills.BalabanClayT2LiteralWilsonSixFactorProducerExact as Six
+import DASHI.Physics.YangMills.BalabanClayT5PublishedTerminalCriterionReuseExact as Terminal
+import DASHI.Physics.YangMills.BalabanClayT5MarkedFernandezProcacciExact as FP
+import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonAffineMarkedActivityExact as Mark
+import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonAffineSourceBoundExact as Affine
+
+terminalBaseBelowOneSixteenthFromSixFactors :
+  ∀ {Scale Volume Root Polymer Link Traversal : Set}
+    (terminal : Terminal.PhysicalTerminalRootedSumIdentification
+      Scale Volume Root Polymer Link)
+    (factors : Six.LiteralWilsonSixFactorData Scale Traversal)
+    (traceOf : Polymer → Traversal) →
+    (∀ p → Terminal.activityNorm terminal p ≡
+      Six.activity factors (Terminal.selectedScale terminal) (traceOf p)) →
+    ∀ p → Terminal.activityNorm terminal p ≤ FP.rhoBase
+terminalBaseBelowOneSixteenthFromSixFactors terminal factors traceOf same p =
+  subst (λ x → x ≤ FP.rhoBase) (sym (same p))
+    (Six.literalWilsonActivityPerTraversalBelowOneSixteenth
+      factors (Terminal.selectedScale terminal) (traceOf p))
+
+terminalAffineMarkFromSixFactors :
+  ∀ {Scale Volume Root Polymer Link Traversal : Set}
+    (terminal : Terminal.PhysicalTerminalRootedSumIdentification
+      Scale Volume Root Polymer Link)
+    (factors : Six.LiteralWilsonSixFactorData Scale Traversal)
+    (traceOf : Polymer → Traversal) →
+    (∀ p → Terminal.activityNorm terminal p ≡
+      Six.activity factors (Terminal.selectedScale terminal) (traceOf p)) →
+    (∀ p → 0ℚ ≤ Terminal.activityNorm terminal p) →
+    (left right : Polymer → ℚ) →
+    (∀ p → ∣ left p ∣ ≤ 1ℚ) →
+    (∀ p → ∣ right p ∣ ≤ 1ℚ) →
+    (s t : ℚ) → Affine.SourceInsideRadius s → Affine.SourceInsideRadius t →
+    Mark.LiteralTwoWilsonAffinePolymerMark Polymer
+terminalAffineMarkFromSixFactors terminal factors traceOf same nonnegative
+    left right leftBound rightBound s t sBound tBound = record
+  { baseActivity = Terminal.activityNorm terminal
+  ; baseActivityNonnegative = nonnegative
+  ; baseActivityBelowOneSixteenth =
+      terminalBaseBelowOneSixteenthFromSixFactors terminal factors traceOf same
+  ; leftWilsonValue = left
+  ; rightWilsonValue = right
+  ; leftWilsonUnitBound = leftBound
+  ; rightWilsonUnitBound = rightBound
+  ; leftSource = s
+  ; rightSource = t
+  ; leftSourceInsideRadius = sBound
+  ; rightSourceInsideRadius = tBound
+  }
+
+-- A per-polymer absolute cap is NOT the relative shell-step cap
+-- extensionActivity <= (1/16)*rootedShell. Use the original rooted
+-- enumeration and weighted incompatibility estimates for the latter.
+-- FP.rhoFPMax belongs to the eight-clique criterion, not all degree-eight
+-- graphs. No claim of physical FP applicability follows from this adapter.
