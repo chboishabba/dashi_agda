@@ -103,7 +103,7 @@ def orbit(t):
             tuple(sorted(phase(phase(i)) for i in t))}
 triples=list(combinations_with_replacement(range(n),3))
 reps={min(orbit(t)) for t in triples}
-assert len(reps)==776
+assert len(reps)==774 # Burnside: (2300 + 2*(7+4))/3
 # Store nonzero orbit entries; zeros are implicit under a specified
 # support map. Not a claimed compressed byte count.
 payload={}
