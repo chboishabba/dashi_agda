@@ -33,7 +33,7 @@ def resume_mode(path,obs,h,dy,RT,coeff,bank,active,deadline,max_steps=None):
             n=int(f['next_n']);x=f['x'];g=f['g']
         if n==-1:return g
     else:
-        n=nt;x=np.ascontiguousarray(obs[:,2]);g=np.zeros((len(bank),nb,len(ts)))
+        n=nt;x=np.array(obs[:,2],copy=True,order="C");g=np.zeros((len(bank),nb,len(ts)))
     s1=np.empty_like(x);s2=np.empty_like(x);tmp=np.empty_like(x);zero=np.zeros(nb)
     J=-4*h*bank[:,0]/dy;J[:,-1]=0
     def B(z,out,k):stage_into(z,out,RT,DT[k],v[k],Z[k],dy,h,bank[0],zero,True)
