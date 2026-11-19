@@ -31,6 +31,12 @@ Commit `eac0cafd7b49f0904f2af17b3fc411464734e251` adds finiteFunctionalDensityFl
 
 Both changes are source-written alternative entry points, not migration of every historical caller or kernel acceptance. Before further extension, inspect section parameter elaboration and exact local Agda receipt; terminal padding must not be interpreted as physical time evolution. Next attach actual source lists and positive beta enclosure plus the same-source CMP119 expectation/marked response. All five physical gates remain OPEN.
 
+### 19 November continuation — executed original P33 Fourier Wilson vertices
+
+Commit `95d0e1e190c9d215a958df8ab877ec6fffcba5a2` adds `scripts/check_ym_p33_fourier_vertices_20261119.py`. This implements the original side-four P33 SU2 oriented plaquette geometry (256 sites, six planes), pure-quaternion exponential, and exact labelled mixed derivatives through order four. Fourier phases are Gaussian integers in the positive-link-start convention; inverse occurrences carry minus signs and correct displaced starts. The coordinate-space nilpotent polynomial evaluation is independently compared with the slot-allocation momentum vertex, including momentum conservation and all permutations of the selected external legs. Local Python execution PASS six cases: scaled by 24, (12288,0), (-12288,-12288), (49152,0), (49152,0), (0,0), (-24576,0). The constant commutator mixed fourth derivative is 8 per site; the transverse free two-jet is 2 per site at p=(pi/2,0,0,0). No floating point or proxy integrals.
+
+P0.1 has an executable finite bare Wilson cubic/quartic producer, not a proof of the full constrained background Fourier vertex or continuum momentum limit. Next use these indexed vertex coefficients in the gauge-fixed constrained CMP109 bubble/tadpole trace contractions and attach the original reduced FP and Haar source, before R471 receipt quadrature. All four physical receipt integrals, uniform beta enclosure and E1/D1/D2/N1/G1 remain open. No Agda kernel receipt. Do not re-add factorization/normalization adapters instead of performing physical source calculations.
+
 ### Execution order and acceptance
 
 | Cut | Existing producer/consumer | Exact next payment |
