@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.YMClayOriginalConnectingChargeSectorWeldExact where
 
 -- Attachment to the original CMP116 connecting charge sum.
@@ -61,3 +60,56 @@ sectorChargeBelowShell tag w as s l m shell ps pl pm budget =
 -- Instantiate as with BalabanLiteralTwoWilsonCMP116ConnectingTailExact.connectingClusters
 -- and w with BalabanLiteralTwoWilsonMarkedPolymerExpansionExact.shellCharge.
 -- The physical tag and three sector estimates are NOT constructed here.
+
+------------------------------------------------------------------------
+-- Native support classifier and direct attachment to literal CMP116.
+------------------------------------------------------------------------
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Nat using (Nat)
+import DASHI.Physics.YangMills.BalabanClayT2PeriodicBlockPolymerCarrierExact as P
+import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonMarkedPolymerExpansionExact as M
+import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonCMP116ConnectingTailExact as C
+import DASHI.Physics.YangMills.BalabanClayT2TraversalRootedShellExact as Shell
+
+extendSector : Bool → Sector → Sector
+extendSector false small = small
+extendSector false large = mixed
+extendSector false mixed = mixed
+extendSector true small = mixed
+extendSector true large = large
+extendSector true mixed = mixed
+
+-- Empty support is small by convention, not a large-field witness.
+classifyNativeSupport : ∀ {n} → (P.PeriodicBlock n → Bool) →
+  P.PeriodicPolymer n → Sector
+classifyNativeSupport bad [] = small
+classifyNativeSupport bad (b ∷ []) with bad b
+... | true = large
+... | false = small
+classifyNativeSupport bad (b ∷ c ∷ cs) =
+  extendSector (bad b) (classifyNativeSupport bad (c ∷ cs))
+
+-- Literal existing charge and cluster list, no alternative sum.
+nativeConnectingSectorBudget :
+  ∀ {Observable Source Polymer Cluster Volume}
+    {family : M.TwoWilsonSourceParameterizedKP Observable Source Polymer Cluster Volume}
+    {differentiable : M.DifferentiableTwoWilsonKP family}
+    (charge : M.TwoWilsonCMP116ClusterCharge differentiable)
+    (cutoff : Nat) (left right : Observable)
+    (tag : Cluster → Sector) (s l m bound : ℚ) →
+    smallCharge tag (M.shellCharge charge cutoff left right)
+      (C.connectingClusters family cutoff left right) ≤ s →
+    largeCharge tag (M.shellCharge charge cutoff left right)
+      (C.connectingClusters family cutoff left right) ≤ l →
+    mixedCharge tag (M.shellCharge charge cutoff left right)
+      (C.connectingClusters family cutoff left right) ≤ m →
+    (s + l) + m ≤ bound →
+    T.sumℚ (T.map (M.shellCharge charge cutoff left right)
+      (C.connectingClusters family cutoff left right)) ≤ bound
+nativeConnectingSectorBudget {family = family} charge cutoff left right tag =
+  sectorChargeBelowShell tag (M.shellCharge charge cutoff left right)
+    (C.connectingClusters family cutoff left right)
+
+-- The prior theorem is the exact type of the charge-sum field when
+-- bound is instantiated with Shell.rootedShell on the original payment.
+-- No claim that the supplied bad mask is already the physical RG mask.
