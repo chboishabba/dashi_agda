@@ -107,3 +107,56 @@ print('PASS 272 nonzero unordered cubic coefficients; all C3 equivariance identi
 print('PASS invariant slices on nontrivial sector ranks',ranks)
 print('PASS sum slice determinant',M.det())
 print('OPEN geometric residue comparison, matter metric, full F/D-flat vacuum')
+
+# 2026-11-19: user-directed zero/null-class and T18/codec cut.
+# Exact Q degree-two pairing, not just a modular dimension.
+m2,f2,r2=quotient(2,rational(2))
+assert len(f2)==24
+B=s.Matrix([[r3[idx3[tuple(a+b for a,b in zip(m1[i],m2[j]))]][0]
+             for j in f2] for i in f1])
+assert B.rank()==23
+K=B.nullspace()
+assert len(K)==1
+idx2={m:i for i,m in enumerate(m2)}
+P2=s.Matrix.hstack(*(s.Matrix(r2[idx2[cyc(m2[j])]]) for j in f2))
+assert P2**3==s.eye(24) and P2.trace()==3
+assert P2*K[0]==K[0]
+assert K[0]*1773==s.Matrix([-1650,1518,0,0,0,0,0,0,0,-1157,0,0,0,3273,0,0,0,0,0,0,0,0,0,1773])
+# R0=Q; R2/K gives perfect pairing with R1 into R3.
+assert len(mons(0,0,0))==1
+assert [len(f1),len(f2)-len(K),len(f3)]==[23,23,1]
+# Original T18 cyclic action rotates two triples of three-coordinate cells.
+# Six regular representations, not 18 invariant scalar coordinates.
+R=s.Matrix([[0,0,1],[1,0,0],[0,1,0]])
+T18=s.diag(*([R]*6))
+assert T18**3==s.eye(18)
+assert ((s.eye(18)+T18+T18**2)/3).rank()==6
+# Target R1=(9,7,7), nontrivial sector=(0,7,7).
+# A linear equivariant subquotient of T18 cannot contain seven copies
+# of either nontrivial character (semisimplicity in char zero).
+assert 7>6
+# Positive alternative: entire R1 is six regular reps plus a 5d
+# complement (3,1,1)=regular+two trivial. Construct explicit basis.
+cols=[]
+for j in range(n):
+    e=s.eye(n)[:,j]
+    trial=cols+[e,P*e,P**2*e]
+    if s.Matrix.hstack(*trial).rank()==len(trial):cols=trial
+    if len(cols)==21:break
+assert len(cols)==21
+for e in I:
+    if s.Matrix.hstack(*(cols+[e])).rank()==len(cols)+1:cols.append(e)
+assert len(cols)==23
+S=s.Matrix.hstack(*cols)
+assert S.det()!=0
+assert P*S==S*s.diag(*([R]*7),s.eye(2))
+# 101 inert in the Eisenstein integers: no F101 primitive cubic phase.
+assert all((a*a+a+1)%101 for a in range(101))
+# In F3, the cyclotomic polynomial is (x-1)^2; distinct eigenphase
+# division/averaging is unavailable. Balanced ternary is an encoding,
+# not permission to substitute arithmetic modulo 3 for exact Q.
+assert s.Poly((s.Symbol('z')-1)**2-(s.Symbol('z')**2+s.Symbol('z')+1),modulus=3).is_zero
+print('PASS Q pairing R1 x R2 -> R3: rank 23; 1d invariant radical')
+print('PASS explicit R1 = 7 regular C3 modules + 2 trivial lines')
+print('PASS T18 equivariant summand plus 5d complement; no T18-only nontrivial-14 subquotient')
+print('PASS F101 inert / F3 ramified distinction')
