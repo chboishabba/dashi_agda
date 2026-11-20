@@ -191,3 +191,7 @@ Run `python scripts/check_bh4_catecholamine_sympy.py` for S2a: selected Rhea 15-
 ## Joint reaction/transfer observer (2026-11-20)
 
 Run `python scripts/check_bh4_joint_observer_sympy.py` for selected S3b/S4a: exact joint rank/nullspace, 33 cardinality-minimal panels among 126 five-row subsets, repeated feasible silent circulation histories, explicit exchange negative control and native 369 incidence aggregation. Local replay uses recovered literal upstream definitions; full-module/Agda acceptance and physical source/kinetic payment remain OPEN. See [BH4DifferentialStimulantObservationMaxCut.md](BH4DifferentialStimulantObservationMaxCut.md).
+
+## Conditional flux reconstruction
+
+Run `python scripts/check_bh4_flux_observer_sympy.py` for S4b: exact target-specific minimal flux panels, native weighted cycle closure, 54-rank reconstruction, and changing-conductance countermodel. Uses recovered native geometry and inspected SG sign; physical conductances, time histories, boundary exchanges and original source payment remain OPEN. See [BH4DifferentialStimulantObservationMaxCut.md](BH4DifferentialStimulantObservationMaxCut.md).
