@@ -26,7 +26,7 @@ import DASHI.Physics.YangMills.BalabanCMP98Path13PerturbationCarrierWeldExact as
 import DASHI.Physics.YangMills.BalabanCMP98Path13TwoCarrierSourceFamilyExact as Family
 import DASHI.Physics.YangMills.BalabanPath13BackgroundGaugeAdjointDefectExact as Background
 import DASHI.Physics.YangMills.BalabanPath13CanonicalBondCenteredEmbeddingExact as Canonical
-import DASHI.Physics.YangMills.BalabanClayGate4CMP109CenteredTorusBijectionExact as Bijection
+import DASHI.Physics.YangMills.BalabanPath13RadiusSixWalkAgreementExact as Walk
 import DASHI.Physics.YangMills.BalabanCMP98Equation119CanonicalCoarseSegmentRound158Exact as R158
 import DASHI.Physics.YangMills.BalabanClayGate4BackgroundFieldVariationalTheoremExact as Variational
 import DASHI.Physics.YangMills.BalabanRationalUnitQuaternionRealLieAdjointExact as Adj
@@ -95,7 +95,6 @@ record NativeGeometry (C : Set) : Set₁ where
     variational : Path13Variational C
     coarse : C
     small : Variational.CoarseSmallField variational coarse
-    walkCertificate : Bijection.CenteredTorusWalkAgreementCertificate R158.sourceRadius
 open NativeGeometry public
 
 nativeBackground : ∀ {C} → NativeGeometry C → Background.RationalSU2Background13
@@ -108,7 +107,7 @@ nativeGeometryAt g bond = record
   { Geometry.Equation119GeometrySource.realization =
       λ _ → R192.path13PhysicalPeriodicRealization (nativeBackground g)
   ; Geometry.Equation119GeometrySource.minusEmbedding =
-      λ _ → Canonical.canonicalEmbeddingAtSite (walkCertificate g) (Carrier.first bond)
+      λ _ → Canonical.canonicalEmbeddingAtSite Walk.radiusSixWalkAgreement (Carrier.first bond)
   ; Geometry.Equation119GeometrySource.coarseSegment = λ _ → Family.coarseSegmentFor bond
   }
 
