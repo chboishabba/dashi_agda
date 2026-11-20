@@ -1,3 +1,11 @@
+## 20 November 2026 — R559 same-family and SZZ typed terminal weld implementation
+
+- R559 commit 510f57d75d9b2642fee870403cc37af2623cf578: added preOSToSameOSMoments / sameOSToPreOSMoments and definitional producer-preservation proofs in the existing YangMillsLiteralCMP119QuantitativeMomentsRound559Exact owner. The OS interface reuses the pre-OS producer on A.family and A.observableAlgebra; no second moment selection.
+- SZZ commit 415210fc567ac692c9bfc590b5e5d5c2bdf76b5f: terminalCriterionFromCrossover constructs SZZPerturbedTerminalCriterion directly from crossover drift and positive target margin, without Set-valued stochastic/OS predicates; actualTerminalCriterion preserves actual trajectory coupling and remainder cost definitionally.
+- Exact boundary: R444/R445 and Physical.MarkedMomentClosure use rational scalars, R559 uses real expectations. Do not assume definitional equality. Next weld must transport the actual marked observable operations, expectations, inequalities and uniform integrability to the original real family, or locate a native real producer. The current polynomial bound divides by lambda rather than lambda^degree; verify normalization or correct before promotion. Pre/post weld does not discharge source estimates.
+- SZZ arithmetic criterion is not proof of actual effective density, physical curvature, or OS-time gap. Verify source applicability and common physical gap separately.
+- Status: SOURCE_WRITTEN / KERNEL_PENDING. No new physical endpoint closure. Existing theorem owners extended; roadmaps synchronized in the same PR. Next: native real marked moment transport and actual crossover source cost.
+
 ## 19 November 2026 — canonical weld-first maximum cut (supersedes redundant source-search work)
 
 Audited exact #1444 head `ff1cd1dfabf2fd18296d7f0f2210e3cba1facd30`. The #1440 direct mass-gap root and #1503 F19/P0/common-OS root are already present, with identical Git blobs `f94bcf270f58de263f6202b8679610ba3d6cd464` and `8eb78d7f1fb5a343824d3516592f220248df1924` respectively. The latter has 18 direct source imports. Do not transplant or recreate these roots, finite push/pull, normalized state laws, Wilson word algebra, or the spectral compiler.
