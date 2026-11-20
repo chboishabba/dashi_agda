@@ -797,3 +797,69 @@ limit and exact modular correspondence certificate transport.
 Classical attribution: Hecke modular correspondence, Ramanujan
 differential system, Chudnovsky brothers; this computation uses
 the existing DASHI cyclic norm diagonal and a fixed univariate slice.
+
+
+## 20 November — SymPy execution of original Machin/Chudnovsky semantic seam
+
+Prior head 720199ed0c547ebe69d9a8b0df6bbde16fb4a52f.
+New scripts/check_chudnovsky_bishop_semantics.py commit
+45432b70f245f5a12c8cf75505254ee58091cc3d. Identical local source
+executed with existing check_chudnovsky_exact.py. Exact Gaussian
+phase identity, 771 Ramanujan prefix residual coefficients (three
+equations, degrees 0..256), four exact interval comparisons PASS.
+No compiler run; SymPy in lieu of Agda for executable algebra.
+
+All-degree analytic argument for Ramanujan: use existing normalized
+E4/E6 modular forms and Delta=eta^24 nonzero. For D=q d/dq,
+D log Delta=1-24 sum sigma1(n) q^n=E2 by normally convergent
+logarithmic differentiation of the product (on compact subdisks
+|q|<=rho<1 the derivative sum is bounded by
+sum n rho^n/(1-rho)). The weight-12 transformation of Delta
+gives the weight-2 quasimodular law for E2 upon differentiation.
+For a weight-k form f, Df-k E2 f/12 transforms in weight k+2
+and is holomorphic including at the cusp. For E4 and E6 the
+normalized constant terms therefore give
+DE4-E2 E4/3=-E6/3 and DE6-E2 E6/2=-E4^2/2, using the classical
+one-dimensional spaces M6 and M8. Differentiating the E2
+transformation gives DE2-E2^2/12 a weight-4 modular form,
+whose constant term is -1/12, hence -E4/12. These space dimensions
+follow e.g. from the classical valence formula (nonzero cusp
+forms have weight >=12). This is an ordinary analytic derivation
+with explicit classical modularity/valence inputs, not a theorem
+proved by finite prefix checking. The native Bishop transport
+remains open. Existing normalized Delta and eta owners preferred.
+
+Machin phase exact identity (5+i)^4(239-i)=i(5-i)^4(239+i).
+For theta=4 atan(1/5)-atan(1/239), this gives exp(2i theta)=i.
+Bounds atan(x)<=x and atan(x)>=x-x^3/3 at chosen positive x
+give 0<theta<4/5<pi/2, identifying theta=pi/4 with the classical
+phase convention. Existing Bishop Machin quarter-angle and first-zero
+owners supply intended native transport. No numerical pi oracle.
+
+All-precision mathematical Cauchy comparison: alternating arctan
+brackets converge with width 1/((2n+1)q^(2n+1)). The Chudnovsky
+weighted terms have absolute ratio <=42*1728/C<1 (C=640320^3),
+strictly positive limiting sum from first alternating bracket.
+Dyadic sqrt10005 brackets have width 2^-bits, and positive
+denominator reciprocal interval widths tend to zero. Thus both
+adaptive precision loops terminate for every positive integer d.
+Using the classical Chudnovsky derivation in the preceding packet
+and Machin phase identity, both enclose the same classical pi,
+so they intersect for every d; union diameter <=2*10^-d. This
+is not an inference from four finite runs; equality uses the
+stated analytic theorem inputs, and native Bishop setoid identity
+is not established by the Python checker.
+
+Measured single-run (ms, excluding interpreter startup):
+d=100: Machin 100 terms 0.225, CH 9 terms 0.105;
+d=1000: Machin 1000 terms 2.327, CH 73 terms 1.076;
+d=3000: Machin 3000 terms 14.741, CH 216 terms 5.232;
+d=10000: Machin 10000 terms 125.069, CH 716 terms 46.374.
+Matched width <=10^-d, exact intersection and union bound.
+Machin cutoff conservative (not optimized); measured ratio not
+an asymptotic or universal speedup. No new Kolmogorov claim.
+Both use binary split; exact integer arithmetic, Fraction endpoints.
+Next: source-native equality/phase/limit transport and formal
+certificate replay remain OPEN, but no additional classical CM
+constant is required. Classical attribution: Machin, Ramanujan,
+Chudnovsky, modular-form valence formula and original repo owners.
