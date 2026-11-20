@@ -80,6 +80,7 @@ module DASHI.Physics.YangMills.BalabanCMP109DirectBetaSourceRegression where
 
 open import Agda.Builtin.Nat using (Nat)
 import DASHI.Physics.YangMills.BalabanCMP98Path13BishopNativeSourceExact as Native
+import DASHI.Physics.YangMills.BalabanPath13BackgroundGaugeAdjointDefectExact as NativeBackground
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 open import DASHI.Physics.YangMills.BalabanCMP109SourceTranscriptionExact
 open import DASHI.Physics.YangMills.BalabanCMP109DirectBetaSourceCutsetExact
@@ -269,3 +270,19 @@ currentFrozenResearchCountRegression = currentFrozenResearchCount
 -- Contour admission and printed analytic semantics remain separate.
 nativePath13SeriesChart : Native.LocalChart
 nativePath13SeriesChart = Native.nativeSeriesChart
+
+-- All selected chart admissions are now produced from the physical radius,
+-- on the same native geometry as the Eq119/120 compiler.
+nativePath13InputsFromPhysicalRadius :
+  ∀ {C} (g : Native.NativeGeometry C) →
+  NativeBackground.SelectedInverseLinkRadius13 (Native.nativeBackground g) →
+  Native.Inputs C
+nativePath13InputsFromPhysicalRadius = Native.nativeInputsFromPhysicalRadius
+
+-- Full finite numerical/exact regression:
+-- scripts/check_ym_path13_hessian_gaussian.py
+-- scripts/check_ym_path13_exact_trace.py
+-- scripts/check_ym_path13_multiblock_flat.py
+-- The actual multi-block flat Gram and constrained Hessian floors are in
+-- Paper3 section 5.6. A one-block trace has no nonzero coarse momentum;
+-- it does not prove the normalized physical beta or selected-family weld.
