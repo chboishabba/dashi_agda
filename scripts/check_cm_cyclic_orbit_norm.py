@@ -42,6 +42,47 @@ def cyclic_norm(h,p,n,r,z,mul):
     assert not any(x for i,x in enumerate(out) if i%p)
     return out[::p]
 
+def diagonal_valuation_norm(h,j,p,n,r,mul):
+    """Projected formal log; denominators must be units, no split root needed."""
+    from math import gcd
+    M=p*n
+    v=p-1
+    top=M//v
+    if any(gcd(k,r)!=1 for k in range(1,max(n,top)+1)):
+        raise ValueError("valuation log requires unit denominators")
+    A=[x%r for x in j[:n+1]]
+    assert A[0]==1
+    lifted=[0]*(M+1)
+    for i,a in enumerate(A):lifted[p*i]=a
+    # Recover B from the actual source H, not a substitute J producer.
+    assert all((lifted[i]-h[i])%r==0 for i in range(v))
+    B=[(lifted[i]-h[i])%r for i in range(v,M+1)]
+    assert B[0]==1
+    inv=[1]
+    for k in range(1,n+1):
+        inv.append(-sum(A[i]*inv[k-i] for i in range(1,k+1))%r)
+    log=[0]*(n+1)
+    power=[1]; ip=[1]
+    for k in range(1,top+1):
+        degree=M-k*v
+        power=mul(power,B,degree,r)
+        offset=(k*v+p-1)//p
+        precision=n-offset
+        ip=mul(ip,inv,precision,r)
+        projected=power[offset*p-k*v::p]
+        term=mul(projected,ip,precision,r)
+        scale=-p*pow(k,-1,r)%r
+        for i,a in enumerate(term):log[offset+i]=(log[offset+i]+scale*a)%r
+    exp=[1]
+    for k in range(1,n+1):
+        exp.append(sum(i*log[i]*exp[k-i] for i in range(1,k+1))*pow(k,-1,r)%r)
+    ap=[1]; base=A; e=p
+    while e:
+        if e&1:ap=mul(ap,base,n,r)
+        e//=2
+        if e:base=mul(base,base,n,r)
+    return mul(ap,exp,n,r)
+
 def normalized_product(p,inputs,r,z):
     from check_cm163_residue_swar import mul
     h,g,j,n=inputs[:4]
@@ -73,6 +114,13 @@ def main():
                 t=perf_counter();a=normalized_product(p,inputs,r,z);dt=perf_counter()-t
                 t=perf_counter();b=oracle(p,inputs,r);ot=perf_counter()-t
                 assert a==b
+                if diagonal:
+                    from math import gcd
+                    from check_cm163_residue_swar import mul
+                    h,g,j,n=inputs[:4]
+                    if all(gcd(k,r)==1 for k in range(1,max(n,p*n//(p-1))+1)):
+                        vn=diagonal_valuation_norm(h,j,p,n,r,mul)
+                        assert mul([x%r for x in g],vn,n,r)==b[0]
                 count+=1
                 print(p,ell,diagonal,dt,ot,flush=True)
     print('PASS original normalized product and short inverse',count)
