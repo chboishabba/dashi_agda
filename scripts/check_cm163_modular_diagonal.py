@@ -29,7 +29,7 @@ def j_unit(n):
         a,b=divmod(v,k);assert b==0;inv.append(a)
     return convolution(convolution(convolution(e,e,n),e,n),inv,n)
 
-def diagonal(p):
+def diagonal(p, logder_fn=None):
     n=2*p; M=p*n
     # H(t)=J(t^p)-t^(p-1)J(t) = t^p (j(t^p)-j(t)).
     J=j_unit(M-p+1)
@@ -38,14 +38,17 @@ def diagonal(p):
     for i in range(M-p+2):H[i+p-1]-=J[i]
     assert H[0]==1
     # L=t H'/H, computed exactly; use sparse leading support.
-    support=[(i,h) for i,h in enumerate(H) if i and h]
-    L=[0]*(M+1)
-    for k in range(1,M+1):
-        v=k*H[k]
-        for i,h in support:
-            if i>=k:break
-            v-=h*L[k-i]
-        L[k]=v
+    if logder_fn is None:
+        support=[(i,h) for i,h in enumerate(H) if i and h]
+        L=[0]*(M+1)
+        for k in range(1,M+1):
+            v=k*H[k]
+            for i,h in support:
+                if i>=k:break
+                v-=h*L[k-i]
+            L[k]=v
+    else:
+        L=logder_fn(H)
     N=[1]
     for k in range(1,n+1):
         v=sum(L[p*i]*N[k-i] for i in range(1,k+1))
