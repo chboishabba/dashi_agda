@@ -677,3 +677,51 @@ modular-correspondence identity/root isolation remain OPEN; no
 Agda/Lean kernel receipt. CH2 (same-original-pi Chudnovsky hypergeometric
 identity, including derivative/period constants) is the next major
 mathematical cut. Do not infer CH2 from the singular modulus alone.
+
+
+## 20 November — CH2 Ramanujan differential weld
+
+New executable scripts/check_chudnovsky_differential_weld.py commit
+58d337b41316a1a8051e8cef3127cc410816279b; identical local source
+executed PASS, 0.252766808 s excluding startup. Uses exact SymPy rational
+function cancellation and 24 factorial recurrence checks. Existing
+HypergeometricBSplitIntegerMergeExact and generic evaluator retained.
+Search of indexed Agda/Lean default branches for PicardFuchs,
+RamanujanDifferential, EisensteinDerivative, Quasimodular found no
+concrete Ramanujan system donor; not an exhaustive branch audit.
+
+Classical analytic input (not derived by script): Ramanujan differential
+identities for D=q d/dq, DE2=(E2^2-E4)/12, DE4=(E2 E4-E6)/3,
+DE6=(E2 E6-E4^2)/2. Let z=1728/j=1-E6^2/E4^3, F=sqrt(E4)
+with cusp branch F(0)=1. Exact algebra verifies Dz=z E6/E4,
+theta=z d/dz=(E4/E6)D, and theta(F f)/F=(E4/E6)D(f)+
+(E2 E4/E6-1)f/6. Three applications verify
+theta^3 F=z(theta+1/6)(theta+1/2)(theta+5/6)F.
+Analytic uniqueness at the regular power-series branch gives
+F=sum (6n)!/((3n)!(n!)^3)*(z/1728)^n.
+Universal factorial ratio follows by cancellation; 24 finite checks.
+At selected CM point the cusp branch must be continued along the
+negative real q segment, with E4,E6 positive and z locally invertible;
+existing tiny-q majorants supply positivity, native transport open.
+
+Define s2=(E4/E6)(E2-3/(pi Im tau)).
+theta F+(1-s2)F/6=F E4/E6/(2 pi Im tau)
+=1/(2 pi Im tau sqrt(1-z)) on positive real branch.
+For tau163, z=-1728/C^3, C=640320, 2 Im tau=sqrt163.
+Set A=13591409, B=545140134. Exact checks:
+(1-77265280/90856689)/6=A/B,
+144 B^2=163(C^3+1728), B>0.
+Hence if s2(tau163)=77265280/90856689 then
+sum (6n)!/( (3n)!(n!)^3 )*(A+B n)*(-1/C^3)^n
+=C^(3/2)/(12 pi), giving Chudnovsky.
+This isolates actual outstanding arithmetic to exact s2 CM value;
+the value is a target, not derived here. Prior degree-41 diagonal
+P41 gives j value but does NOT determine off-diagonal derivative jets.
+Next: construct partial derivatives of Phi41 at (K,K) or use Masser
+Phi163 derivative formula; account for double root on diagonal.
+No numerical rational recognition as proof. Ramanujan analytic donor
+and native Bishop transport remain open; no kernel execution.
+Attribution: Ramanujan differential identities, classical hypergeometric
+modular equation, Chudnovsky brothers; Masser CM derivative method
+(see https://mathoverflow.net/questions/300640/how-to-compute-coefficients-in-chudnovskys-formula
+and https://mathoverflow.net/questions/300385/why-does-this-quasi-modular-function-have-integral-values/300776).
