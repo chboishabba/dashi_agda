@@ -195,3 +195,7 @@ Run `python scripts/check_bh4_joint_observer_sympy.py` for selected S3b/S4a: exa
 ## Conditional flux reconstruction
 
 Run `python scripts/check_bh4_flux_observer_sympy.py` for S4b: exact target-specific minimal flux panels, native weighted cycle closure, 54-rank reconstruction, and changing-conductance countermodel. Uses recovered native geometry and inspected SG sign; physical conductances, time histories, boundary exchanges and original source payment remain OPEN. See [BH4DifferentialStimulantObservationMaxCut.md](BH4DifferentialStimulantObservationMaxCut.md).
+
+## Conductance-history compression
+
+Run `python scripts/check_bh4_conductance_history_sympy.py` for S4c: exact cycle-class ratio rank, rank-one updates, streaming residual decomposition, and two same-mass self-consistent Poisson states with inequivalent SG flux spaces. Selected positive-support algebra; physical trajectories and source payment OPEN. See [BH4DifferentialStimulantObservationMaxCut.md](BH4DifferentialStimulantObservationMaxCut.md).
