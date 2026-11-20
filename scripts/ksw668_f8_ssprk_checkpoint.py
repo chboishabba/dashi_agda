@@ -10,6 +10,8 @@ class NativeCheckpoint:
         self.path=Path(path);self.dims=dims;self.nt=config['nt']
         root=Path(__file__).resolve().parent
         files=('ksw668_f8_ssprk_checkpoint.py','ksw668_f8_tt_multipole.py','ksw668_f8_fv_source_flux.py')
+        if config.get('weak_source_load'):
+            files=files+('ksw668_f8_weak_source.py',)
         self.identity=json.dumps(dict(schema=1,config=config,dims=dims,
             versions=[np.__version__,numba.__version__,sympy.__version__],
             source={n:hashlib.sha256((root/n).read_bytes()).hexdigest() for n in files},
