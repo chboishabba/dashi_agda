@@ -25,7 +25,7 @@ open import Relation.Binary.PropositionalEquality using
   (cong; sym; trans; subst)
 open import DASHI.Foundations.RealAnalysisAxioms using
   (ℝ; 0ℝ; 1ℝ; _+ℝ_; _*ℝ_; _<ℝ_; _≤ℝ_;
-   ≤ℝ-refl; +-mono-≤; +-identityʳ)
+   ≤ℝ-refl; +-mono-≤; +-identityʳ; mulOneʳ)
 
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
 import DASHI.Physics.YangMills.YMClaySUNMatrixWilsonTraceGaugeExact as Trace
@@ -225,3 +225,54 @@ module _
       (divideOrder
         (originalWilsonPartitionStrictlyPositive strict n)
         (originalWilsonNumeratorPositive n test testNonnegative))
+
+  -- Native constant-majorant transport on the original real family.
+  -- In particular choose test = exp(lambda * abs F), majorant =
+  -- exp(lambda * B), given the pointwise exponential/order authority.
+  originalWilsonNumeratorConstant :
+    (n : Nat) (bound : ℝ) →
+    wilsonNumerator n (λ _ → bound)
+    ≡ bound *ℝ Physical.partitionFunction (wilsonMeasure n)
+  originalWilsonNumeratorConstant n bound =
+    trans
+      (originalWilsonNumeratorCongruent n
+        (λ _ → bound)
+        (Finite.scaleObservable bound (λ _ → 1ℝ))
+        (λ _ → sym (mulOneʳ bound)))
+      (trans
+        (Finite.numeratorScale (sourceIntegration n) bound (λ _ → 1ℝ))
+        (cong (λ value → bound *ℝ value)
+          (Original.originalWilsonUnitNumeratorIsPartition
+            theory traceData exponential beta oneLink bilateral divide
+            ordered strictToWeak n)))
+
+  originalWilsonNormalizedBelowConstant :
+    (strict : Ordered.OneLinkStrictlyPositiveIntegration oneLink)
+    (divideOrder :
+      ∀ {a b denominator : ℝ} →
+      0ℝ <ℝ denominator →
+      a ≤ℝ b →
+      divide a denominator ≤ℝ divide b denominator)
+    (divideCancelRight :
+      ∀ bound denominator →
+      0ℝ <ℝ denominator →
+      divide (bound *ℝ denominator) denominator ≡ bound)
+    (n : Nat) (test slack : WilsonTest n) (bound : ℝ) →
+    (∀ links → 0ℝ ≤ℝ slack links) →
+    (∀ links → test links +ℝ slack links ≡ bound) →
+    Physical.normalizedExpectation (wilsonMeasure n) test ≤ℝ bound
+  originalWilsonNormalizedBelowConstant
+    strict divideOrder divideCancelRight n test slack bound nn complete =
+    let
+      part = Physical.partitionFunction (wilsonMeasure n)
+      pos = originalWilsonPartitionStrictlyPositive strict n
+      numBound : wilsonNumerator n test ≤ℝ bound *ℝ part
+      numBound = subst (λ upper → wilsonNumerator n test ≤ℝ upper)
+        (originalWilsonNumeratorConstant n bound)
+        (originalWilsonNumeratorMonotoneFromSlack n test (λ _ → bound)
+          slack nn complete)
+    in
+    subst (λ upper →
+      Physical.normalizedExpectation (wilsonMeasure n) test ≤ℝ upper)
+      (divideCancelRight bound part pos)
+      (divideOrder pos numBound)

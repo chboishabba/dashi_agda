@@ -561,6 +561,12 @@ R444/R445 -> R559: BalabanRationalRealConnectedCovarianceExact provides a scalar
 
 Status: SYMBOLIC_PASS / SOURCE_WRITTEN / KERNEL_PENDING. No E1/D1/D2/N1/G1 promotion. Next: find actual real marked activity inputs and source-valid active crossover. Maintain Paper 3 and both roadmaps with each implementation.
 
+### 20 November 2026 — normalized native-real bounded-observable route
+
+Historical round identifiers (R444, R559, etc.) are provenance, not independent proof phases. Prefer the normalized original Wilson owners in PR #1444. Extended YMClayOriginalWilsonFiniteNumeratorOrderExact with originalWilsonNumeratorConstant and originalWilsonNormalizedBelowConstant, using existing source Haar scale, positivity, and partition lemmas. Given pointwise nonnegative slack to a constant B and ordered division cancellation, E_n(test)<=B on the actual original Wilson family. For a bounded word |F|<=b and lambda>0, choose test=exp(lambda |F|), B=exp(lambda b); pointwise exponential monotonicity supplies the slack. For a sum of m bounded nonnegative insertions this gives exp(lambda b m), without rational-to-real measure substitution. This elementary bound does not provide a useful rare-event exponent if b grows at the same rate as the bad-field threshold, nor does it establish moments for unbounded renormalized fields. Original signed Wilson word and three-moment cutoff owners already exist; do not duplicate them.
+
+Local SymPy regression scripts/check_ym_native_real_bounded_moments.py executed 333 exact rational assertions on a positive polynomial-weight fixture (not the physical exponential Haar measure). The earlier factorial/SZZ regression formulas were also locally replayed (25 assertions in the full prior script, not the previously reported 26). Native constant bound source-written, kernel pending; no physical endpoint promoted. Next locate actual normalized blocked-energy mark envelope and source-uniform nontrivial moment costs, then active-window/terminal curvature receipts. Preserve original-source distinctions and attribution.
+
 ## 6. F3: the physical embedded continuum limit
 
 The old common-carrier obligation has been recut into the correct place. Embeddings are data of `F3`, because the physical graph/Mosco limit is defined along them.
