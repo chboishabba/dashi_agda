@@ -77,10 +77,11 @@ unitAdjoint u = matrixAction (Adj.unitAdjointRationalMatrix u)
 record LocalChart : Set₁ where
   field
     principalLog : SU2.RationalUnitQuaternion → BishopLie
-    dexpPlus jPlus adjointExp : BishopLie → BishopLie → BishopLie
+    dexpPlus adjointExp : BishopLie → BishopLie → BishopLie
     Relevant : BishopLie → Set
-    inverseOnChart : ∀ y → Relevant y → ∀ v →
-      jPlus y (dexpPlus y v) ≈v v
+    jPlus : (y : BishopLie) → Relevant y → BishopLie → BishopLie
+    inverseOnChart : ∀ y (inChart : Relevant y) v →
+      jPlus y inChart (dexpPlus y v) ≈v v
 open LocalChart public
 
 -- Avoid the legacy Path13FamilyGeometry record: it contains a legacy-real
@@ -167,6 +168,7 @@ sourceAt inputs bond = record
       λ step → dexpPlus (chart inputs) (outerY inputs bond step)
   ; Two.TwoCarrierEquation119PathData.inverseDexpMinusAt =
       λ step point → jPlus (chart inputs) (pointY inputs bond step point)
+        (pointRelevant inputs bond step point)
   ; Two.TwoCarrierEquation119PathData.adjointExpAt =
       λ step point → adjointExp (chart inputs) (pointY inputs bond step point)
   ; Two.TwoCarrierEquation119PathData.adjointExpOuter =
@@ -190,6 +192,7 @@ equation120 inputs = Two.assembledEquation120QSource (fieldFamily inputs)
 
 pointInverse : ∀ {C} (inputs : Inputs C) bond step point v →
   jPlus (chart inputs) (pointY inputs bond step point)
+    (pointRelevant inputs bond step point)
     (dexpPlus (chart inputs) (pointY inputs bond step point) v) ≈v v
 pointInverse inputs bond step point =
   inverseOnChart (chart inputs) (pointY inputs bond step point)
@@ -271,8 +274,46 @@ fromReducedChart :
 fromReducedChart log a b beta relevant inverse = record
   { principalLog = log
   ; dexpPlus = rootFreeDexp a b
-  ; jPlus = rootFreeJplus beta
+  ; jPlus = λ y _ → rootFreeJplus beta y
   ; adjointExp = rootFreeAdjointExp a b
   ; Relevant = relevant
   ; inverseOnChart = inverse
+  }
+
+-- Use the actual denominator-cleared polynomial theorem. This path does
+-- not require an externally supplied beta coefficient or inverse identity.
+physicalGenerator : BishopLie → Poly.Vec3B
+physicalGenerator y = Poly.scale3 twoB (toVec3 y)
+
+positiveReducedChart :
+  (a b : BishopLie → B.ℝ) → BishopLie → Set
+positiveReducedChart a b y =
+  B._<_ B.0ℝ (Poly.reducedDelta (physicalGenerator y) (a y) (b y))
+
+nativeReducedInverse :
+  (a b : BishopLie → B.ℝ) → (y : BishopLie) →
+  positiveReducedChart a b y → BishopLie → BishopLie
+nativeReducedInverse a b y p v =
+  fromVec3 (Poly.reducedInverse (physicalGenerator y) (a y) (b y) p (toVec3 v))
+
+nativeReducedInverseCancels :
+  ∀ a b y (p : positiveReducedChart a b y) v →
+  nativeReducedInverse a b y p (rootFreeDexp a b y v) ≈v v
+nativeReducedInverseCancels a b y p v P.coordinateX =
+  proj₁ (Poly.reducedLeftInverse (physicalGenerator y) (a y) (b y) p (toVec3 v))
+nativeReducedInverseCancels a b y p v P.coordinateY =
+  proj₁ (proj₂ (Poly.reducedLeftInverse (physicalGenerator y) (a y) (b y) p (toVec3 v)))
+nativeReducedInverseCancels a b y p v P.coordinateZ =
+  proj₂ (proj₂ (Poly.reducedLeftInverse (physicalGenerator y) (a y) (b y) p (toVec3 v)))
+
+fromPositiveReducedChart :
+  (SU2.RationalUnitQuaternion → BishopLie) →
+  (a b : BishopLie → B.ℝ) → LocalChart
+fromPositiveReducedChart log a b = record
+  { principalLog = log
+  ; dexpPlus = rootFreeDexp a b
+  ; adjointExp = rootFreeAdjointExp a b
+  ; Relevant = positiveReducedChart a b
+  ; jPlus = nativeReducedInverse a b
+  ; inverseOnChart = nativeReducedInverseCancels a b
   }
