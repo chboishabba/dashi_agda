@@ -29,12 +29,12 @@ Tetration: I_0=unit, I_(n+1)=I_n -> Fin 9, N_(n+1)=9^N_n; separate from product 
 | Gate | Target | Evidence / next acceptance |
 |---|---|---|
 | H01-H04 | Governed square, codec, tetration, history-time fibre | Existing source owners; check at target head before importing |
-| H05 | GovernedIndexedResidualCubeExact | Reference probe reported 19683 addresses / 118098 endpoints; archive exact producer, rerun and kernel-check six faces and endpoints |
+| H05 | GovernedIndexedResidualCubeExact | Source-written at 34a0d823; committed symbolic regression independently executed at 5227aa7a: 6/6 faces and 6/6 endpoints. Original finite address producer still to archive; kernel OPEN |
 | H06 | Route A | Reported finite rotation checks; independent frame and continuous lift OPEN |
 | H07 | Route B | Reported 196830 roundtrips; independently rerun chart census, canonical marked inverse and observer invariance |
 | H08 | Route C | Reported finite normal basis probe; selected field weld and actual action OPEN |
 | H09 | Stacked notation | Proposed; define semantics explicitly, no new physical dimension inferred |
-| H10 | Predictor/frame residual | Algebraic derivation; implement exact time-index transport and noncommuting negative control |
+| H10 | Predictor/frame residual | Concrete exact rotation/translation defect and time-frame residual regression PASS at 5227aa7a; indexed general reconstruction contract OPEN |
 | H11 | CMYKA | Algebraic moments and ordered monoid; original renderer weld OPEN |
 | H12 | Sparse tetration | OPEN; exact demanded-observation evaluator, typed MDL and clock |
 | H13 | Monster | OPEN; literal marked-carrier equivariance, not counts; spatial rotation has fixed points unlike free phase action |
@@ -50,3 +50,10 @@ Reported reference results above are conversation-level receipts, not committed 
 4. Attach CMYKA moments/ordered segment composition to original renderer and video predictor; lossless and consumer-only modes separately.
 5. Sparse tetration and typed program/residual clock, then Monster and domain-specific geometric reduction density.
 6. For each cut update this ledger with exact source path, commit, local command, environment and result; distinguish proposed, source-written, reference-executed, kernel-accepted and physical/analytic realization. Reconcile cross-PR owners before duplicate code. Never promote an open gate from counts or matching names. Keep existing roadmap history and negative controls.
+
+## 2026-11-20 maintenance receipt
+- Target head inspected: 5227aa7a5e880035218fdf29adf42025f42060bc (PR #1291 open).
+- H05: DASHI/Core/GovernedIndexedResidualCubeExact.agda, introduced at 34a0d8234df9d075b2f6723487e8a42bd0774208, blob 42b70ebb7376813076934f2245ce6011b76f10c8. Reuses GovernedDiagramCore; eight typed vertices, twelve edges, six witnesses, six path expressions and two routes to zyx. Index keeps history/time/depth/iteration/version separate. ResidualFaces supplies witnesses, not correction or proof-path coherence. Generic Agda kernel remains unverified.
+- H05/H10: scripts/check_indexed_residual_cube.py at 5227aa7a5e880035218fdf29adf42025f42060bc, reconstructed locally with exact Git blob match e1de01f8bcf7b80b375e091c5e5c769bc7a91520. Ran timeout 90s python on reconstructed script with SymPy 1.14.0; exit 0: 6/6 faces; 6/6 endpoints; nonzero defect and reconstruction PASS; time-frame residual PASS. Concrete affine charts, not a generic proof or exhaustive ternary producer. No CI or Agda execution. Use local SymPy in lieu of CI/Agda for executable acceptance; preserve separate kernel status.
+- Cross-PR candidate inventory (PR descriptions inspected, no new donor execution or gate promotion): #1350 c8d1795dfdd39e3293ace0198cf3a733c4ae9d04, IndexedRelationalHyperfabricSpineExact and IndexedRelationalPadicWaveContinuousAdaptersExact for consumer-relative prefix loss (H02/H04); #1301 decba66ffa72b5307f8a99afde86f434fe72d54f, RepoStateSpaceTOEConvergenceExact for coarse/fine reopening and no recovery of erased consumer distinction; #1249 2e5276736848618c39d00f9c4922c7963b2f6b4f, HyperfabricSignedZeroWaveGeometryCutExact for path cube 54 versus periodic torus 81 edge negative control (H06/H13); #1522 56a9b3fed71a4f3cfdf1fe999369a8505bfad218, reported zero-glued 53 alternative (not original asymmetric deletion or Monster representation; H13). #1529 and #1530 descriptions inspected, no direct new gate evidence admitted.
+- Next: original codec attachment and archive/rerun finite address producer; then Routes A/B/C. Preserve independent indices and distinguish correction residuals from bare obstruction witnesses. No changes to implementation in this maintenance commit.
