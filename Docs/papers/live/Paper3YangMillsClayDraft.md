@@ -567,6 +567,10 @@ Historical round identifiers (R444, R559, etc.) are provenance, not independent 
 
 Local SymPy regression scripts/check_ym_native_real_bounded_moments.py executed 333 exact rational assertions on a positive polynomial-weight fixture (not the physical exponential Haar measure). The earlier factorial/SZZ regression formulas were also locally replayed (25 assertions in the full prior script, not the previously reported 26). Native constant bound source-written, kernel pending; no physical endpoint promoted. Next locate actual normalized blocked-energy mark envelope and source-uniform nontrivial moment costs, then active-window/terminal curvature receipts. Preserve original-source distinctions and attribution.
 
+### 20 November — sparse microscopic Wilson energy / chessboard reduction
+
+New source-specific analytic note: Docs/physics/YMClayOriginalWilsonSparseChessboard20261120.md. Reuse the original Wilson pressure, site-plane Haar factorization and standard chessboard inequality (Biskup arXiv:math-ph/0610025, Theorem 5.8). Closed unit cubes: 24 orientation/transverse parity classes, each dissemination marks V/4 plaquettes four times. For theta<=1/96, joint moment E exp(theta beta sum_A d_p)<=exp(C(beta)|A|/4), hence sparse plaquette event rate beta epsilon/96-C(beta)/4. Frustrated links use six witness choices and four-link multiplicity; mixed contours use partition union, then existing rooted animal entropy. This is an analytic microscopic UV bound, with standard chessboard input, on even reflection-compatible SU2 tori; no fixed-physical-block/nonlinear renormalized moment, IR, or Clay endpoint promotion. Local SymPy exact combinatorial regression executed: 3 period fixtures, 72 orbit classes, incidence, one symbolic rate identity and 999 ceiling checks. Agda kernel pending; next identify native site-plane all-direction chessboard weld and true blocked-energy source. Historical rounds are provenance only.
+
 ## 6. F3: the physical embedded continuum limit
 
 The old common-carrier obligation has been recut into the correct place. Embeddings are data of `F3`, because the physical graph/Mosco limit is defined along them.
