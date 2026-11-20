@@ -152,3 +152,30 @@ th-involution-2a-remainder = refl
 
 th-involution-2b-remainder : 54 * 5 + 6 ≡ 276
 th-involution-2b-remainder = refl
+
+-- Reuse the original signed-fibre codec and dihedral action, not a binary
+-- support-only surrogate. This is a local action theorem, not Monster H1-H5.
+import DASHI.ComputerScience.BalancedTernaryC2C3DihedralCodecBridgeExact as D
+import DASHI.Codec.BalancedTritBitFibre as F
+import DASHI.Foundations.SSPTritCarrier as S
+
+binary-forgets-orientation :
+  (t : S.SSPTrit) →
+  F.supportBit (D.binaryPresentation (D.antipode t))
+  ≡ F.supportBit (D.binaryPresentation t)
+binary-forgets-orientation = D.binarySupportForgetsOnlyOrientation
+
+signed-fibre-retains-state :
+  (t : S.SSPTrit) → D.binaryDecode (D.binaryPresentation t) ≡ t
+signed-fibre-retains-state = D.binaryDecodeEncode
+
+dihedral-coupling :
+  (t : S.SSPTrit) →
+  D.antipode (D.cycle (D.antipode t)) ≡ D.cycleInverse t
+dihedral-coupling = D.antipodeConjugatesCycleToInverse
+
+-- Equal support does not imply equal support after a cyclic shift.
+support-collision :
+  F.supportBit (D.binaryPresentation S.sspNegOne)
+  ≡ F.supportBit (D.binaryPresentation S.sspPosOne)
+support-collision = refl
