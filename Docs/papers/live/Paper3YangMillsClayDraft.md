@@ -1085,3 +1085,14 @@ It reuses finiteExponentialCauchyCoefficient, expTermCongruent, expTermZeroAtPos
 Independent local Python Fraction regression: 128 inclusive parity checks, 128 omitted-endpoint negative controls and 128 shifted bracket coefficients passed (degrees 0..127). The corresponding reference is scripts/check_cmp102_signed_factorial_normalization.py. This is a finite reference, not a proof of the Agda source.
 
 For the actual signed shifted aSeries/bSeries, the next Agda cut must identify every parity summand with the original shifted factorial coefficient, including degree zero and the two boundary terms, then transport through the same-series Cauchy limits. The bracket coefficient is (-1)^(n+1) times the inclusive signed convolution at degree 2n+2. Shifted Agda identity, analytic normalization, native unit norm/chord, alternating bound and physical CMP102 attachment remain OPEN. Agda executable unavailable locally; no kernel or CI acceptance. No Clay promotion.
+
+
+### 2026-11-20 — CMP102 original positive-coefficient endpoint cut
+
+Actual root-free series owner: BalabanCMP109BishopRootFreeSeriesExact, with positive aCoefficient(n)=1/(2n+2)! and bCoefficient(n)=1/(2n+3)!; term c X n carries X=-w_q. Added aBelowOneHalf by specializing the existing alternatingLimitBelowFirst on the same limit; aNonnegative already exists. No radius change.
+
+New source-written BalabanCMP102BishopShiftedCoefficientExact defines the actual positive-coefficient evenPart and oddPart using original Row.cauchyCoefficient and original aCoefficient/bCoefficient, handles the singleton odd row at degree zero, and gives finiteTwoEndpointSplit, shiftedBracketBaseZero, signedRowsCancel, and shiftedBracketZeroFromOriginalRows. The last theorem is explicitly conditional on the two original signed-row boundary/interior identifications; these are NOT proved by the consumer. The desired polynomial is G(X)=1-2A-XA^2+2XB+X^2B^2. Its coefficient is oddPart-evenPart, i.e. minus the inclusive signed convolution of degree 2n+2. Existing Bishop/Murray/Csimma and DASHI factorial, parity, ring and Cauchy owners retained; no new carrier, new postulate or division by radius.
+
+Local independent Python Fraction reference executed: 128 even boundary/interior, 128 odd boundary/interior (including singleton n=0), 128 shifted cancellation and 128 missing-final-endpoint negative controls, 512/512 total. Script: scripts/check_cmp102_native_shifted_coefficient.py. This is finite arithmetic, not an Agda receipt.
+
+NEXT: prove the actual signedEvenRow ~= evenPart and signedOddRow ~= -oddPart, including natural complementary indices, and attach existing convergence to the original coefficient polynomials. Analytic G=0, unit quaternion, chord and physical CMP102 remain OPEN. Agda executable not found locally, so all new theorem bodies are source-written only; no CI or Clay promotion.

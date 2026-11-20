@@ -293,6 +293,11 @@ bNonnegative : ∀ w (wn : B.NonNegative w) inside →
   B._≤_ B.0ℝ (bSeries (B.- w) inside)
 bNonnegative w wn inside = alternatingLimitNonnegative bCoefficient w bNN bStep wn inside
 
+aBelowOneHalf : ∀ w (wn : B.NonNegative w) inside →
+  B._≤_ (aSeries (B.- w) inside) (B._⋆ (+ 1 / 2))
+aBelowOneHalf w wn inside =
+  alternatingLimitBelowFirst aCoefficient w aNN aStep wn inside
+
 bBelowOneSixth : ∀ w (wn : B.NonNegative w) inside →
   B._≤_ (bSeries (B.- w) inside) (B._⋆ (+ 1 / 6))
 bBelowOneSixth w wn inside =
