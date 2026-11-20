@@ -425,3 +425,57 @@ analytic j from representation dimensions.
 Classical sources: Eisenstein series, cotangent partial fractions,
 Euler even zeta values, Legendre elliptic invariant. Original DASHI
 owners above retained; no attribution of classical identities to DASHI.
+
+
+## 20 November — existing five-orbit half-chart / Eisenstein coefficient weld
+
+Prior head edb76666ce8614e7e46682bb7d0ccbdc68b2ae55.
+Executable scripts/check_369_five_orbit_coefficient.py committed at
+1b501306c2d52cb10ce5745444f39089fa341fa4; locally executed exact source
+PASS, 0.224091847 seconds excluding interpreter startup. 13 Delta
+coefficients agree with q product (1-q^n)^24; independent quotient
+recurrence gives j Laurent prefix 1,744,196884,21493760,864299970.
+First four already owned by MoonshineModularFormCoefficientExact and
+JInvariantOEISExactPrefixSameObjectSnowballExact; q^3 already recorded
+in YMT7RademacherActivityIdentificationReceipt and
+scripts/monster369_oeis_acquisition_snapshot.py. Do not claim novelty
+for these coefficients. This script incorporates the previous uncommitted
+coefficient regression and checks the fifth prefix value explicitly.
+
+Reuse actual Monster196884FibreInterferenceExact: fineChartCount is
+HalfChartNineRingQuotientExact.unfoldedCount=10; finePhaseFieldCount is
+EisensteinNineRingInterferenceExact.nineAddressFieldCount=19683;
+coarsePhaseSymmetryCount=6, coarseAddressCount=9. Its factorizedIdentity
+already gives (5*2)*3^9+(3*2)*9=196884. New independent arithmetic
+connection: E4^3/Delta coefficient q^1 = 179280+17280+324
+=54*(3320+320+6)=54*(1+5*3^6). Thus modular coefficient arithmetic
+agrees with existing typed count from independent inputs. With the known
+3B trace 54, the C3 balanced character regular multiplicity is
+(196884-54)/3=65610=2*5*3^8; after removing conformal line trace is 53.
+Reuse Monster3BC3RepresentationRingEvaluationExact. Trace 54 is an
+independent input from existing 3B owner, not derived from identity coefficient.
+
+Actual NineSheet quotient by central inversion in
+Monster369SignedPairNineOrbitExact has one singleton and four pairs;
+SymPy verifies permutation P, complementary projectors (I+P)/2 and
+(I-P)/2, ranks 5 and 4, idempotence, mutual orthogonality and commutation
+with D4 quarter turn and axis reflection. HalfChartNineRingQuotientExact
+owns separate Half5 x Orientation2=10 and gluing of the two base endpoints
+to Quotient9. Base369P2FiveOrbitOrientationGroupoidsExact separately
+owns OrientationPolarity x NineOrbit with gauge/retained semantics.
+Equal count alone does not identify Half5, NineOrbit and D4 irrep kinds.
+The 10 oriented points must not be confused with 9 distinct glued states.
+A chosen set-level correspondence between the two pointed five charts is
+available; no actual Monster/VOA equivariant identification claimed.
+The factor 5 is the rank of the even inversion projector on the nine-sheet;
+this is independent of the D4 irrep count.
+Attribution: Conway–Norton (1979), classical Eisenstein/eta and finite
+group projectors; original DASHI half-chart, NineOrbit and 3B owners above.
+AbelE8RootE4FirstCoefficientExact already welds first original Bishop E4
+coefficient to generated E8 root count, and AbelE8RootTriadic243CountComparisonExact
+owns 240=3*(3^4-1); retain their scope (not all-degree theta identity).
+
+Current cut: finite coefficient and five-orbit linear checks PASS;
+full analytic Bishop transport, genuine representation recognition,
+CM integrality and CH2 remain OPEN. Agda kernel acceptance not attempted
+in this SymPy packet. No new analytic theorem or physical gate promotion.
