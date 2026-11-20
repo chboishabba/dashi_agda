@@ -725,3 +725,75 @@ Attribution: Ramanujan differential identities, classical hypergeometric
 modular equation, Chudnovsky brothers; Masser CM derivative method
 (see https://mathoverflow.net/questions/300640/how-to-compute-coefficients-in-chudnovskys-formula
 and https://mathoverflow.net/questions/300385/why-does-this-quasi-modular-function-have-integral-values/300776).
+
+
+## 20 November — CH2 exact s2 from degree-41 diagonal and one slice
+
+New executable scripts/check_cm163_derivative_slice.py, commit
+7a97686931c0265220c51245947dba8271af3714. Local identical source run:
+diagonal 8.878331697 s, cumulative slice 31.866559174 s, total
+31.910040951 s. Reuses j_unit, convolution and diagonal from
+check_cm163_modular_diagonal.py. No stored bivariate polynomial or
+numerical recognition. K=-640320^3 is the preceding certified CM value.
+
+Let P(X)=Phi_41(X,X), S(X)=Phi_41(X,K), with the standard monic
+symmetric modular polynomial. Compute S via the same cyclic norm
+recurrence with H(t)=J(t)-K*t, J=q*j, and t^41=q. For odd p=41,
+q^(p+1) S(j(q))=(J(q^p)-K*q^p)*Norm(H(t)).
+The invariant function has pole order p+1, so principal-part plus
+constant subtraction in powers of j recovers all 43 coefficients.
+Compute norm through q^42, J through t^1722. P has 83 coefficients.
+This uses 126 total polynomial slots vs 1849 dense bivariate slots;
+not a measured comparison to full bivariate construction.
+
+Taylor expansion Phi(K+x,K+y) has vanishing constant and linear
+coefficients (checked in both slices). Symmetry yields c20=c02=S_2,
+c30=c03=S_3, c11=P_2-2*S_2, c21=c12=P_3/2-S_3, where subscripts
+denote coefficients after shifting by K. c20 !=0 verified.
+
+At tau=(-1+i sqrt163)/2 the branch h(tau)=-41/(tau+1) fixes tau;
+j(h(t))=j((t+1)/41) by S-invariance and hence Phi(j(t),j(h(t)))=0.
+j'(tau) !=0 by Ramanujan Dj=-j E6/E4 and existing CM positivity.
+In local coordinates x=j(t)-K, y=j(h(t))-K, write
+y=alpha*x+beta*x^2+O(x^3). alpha=h'(tau)=41/(tau+1)^2,
+41 alpha^2+81 alpha+41=0. Quadratic relation
+c20*(1+alpha^2)+c11*alpha=0 checked over QQ[alpha].
+Cubic relation
+(c11+2*c20*alpha)*beta+c30*(1+alpha^3)+c21*(alpha+alpha^2)=0
+determines beta. Compute kappa=2*beta/(alpha^2-alpha) by exact
+polynomial inversion modulo 41 X^2+81 X+41; denominator invertible.
+Remainder has degree zero:
+kappa=-77859659565707/19943834790540897829879824384000.
+
+Chain rule gives
+kappa=j''/j'^2+h''/((alpha^2-alpha)*j')
+=j''/j'^2+2/((2*tau+1)*j').
+With D=(2 pi i)^-1 d/dtau and Dj=-j E6/E4, Ramanujan gives
+D log(Dj)=E2/6-2 E6/(3 E4)-E4^2/(2 E6).
+Substituting 2*tau+1=i sqrt163=2i Im(tau) gives
+kappa=-(s2/6-2/3-1/(2*(1-z)))/K,
+z=1728/K, s2=(E4/E6)*(E2-3/(pi Im tau)).
+Thus s2=4+3*K/(K-1728)-6*K*kappa.
+Exact computed result 77265280/90856689, not supplied to the
+polynomial reconstruction. Final assertion verifies target and
+(1-s2)/6=13591409/545140134.
+
+Together with previous Ramanujan hypergeometric equation and
+144 B^2=163(C^3+1728), this completes the ordinary mathematical
+Chudnovsky derivation conditional on classical modularity, symmetric
+prime modular correspondence, compactness of X(1), normalized
+Eisenstein Fourier and eta identities, Ramanujan system, and exact
+CM enclosure/source semantics. For continuation from cusp along
+negative real q, earlier tiny-q bounds give E4>0 and E6>0 and
+z is locally invertible, with |z|<1 along the segment; analytic
+uniqueness gives the same normalized hypergeometric branch.
+No Masser formula or general CM class-degree theorem needed.
+Native Bishop/Agda theorem and kernel replay remain open; no
+compiler run here. CH2 classical mathematical arithmetic gate
+discharged, not native same-original-pi acceptance. Next concrete
+cut: audited original Machin pi/exp/phase semantics, Ramanujan
+series differentiation transport, original Bishop hypergeometric
+limit and exact modular correspondence certificate transport.
+Classical attribution: Hecke modular correspondence, Ramanujan
+differential system, Chudnovsky brothers; this computation uses
+the existing DASHI cyclic norm diagonal and a fixed univariate slice.
