@@ -660,3 +660,7 @@ The runner rejects uncommitted relevant source/test changes, records `git rev-pa
 Local exact original-solver regression: **175/175 PASS** (164 previous + 11 new source-indexed and membership cases), SymPy 1.14.0 / pytest 9.0.2. Checks heterogeneous E/H/P/V edges n=2..5, both midpoint equations, no out-of-support mutation, later source roots, reversed/missing/self-loop/wrong face IDs and duplicate mesh IDs. Registered new test in existing consolidated Python and independent fail-closed SymPy gates; Agda module in both pinned checker lists. **Pinned Agda 2.9 kernel still unrun**.
 
 **Formal limitation:** `DirectedFace` indexes a finite-volume geometric cell face; a Cayley `edge_updates` edge indexes a state-coordinate coupling. Passing a record that assigns equal numeric IDs does not itself establish geometric-to-E/H/P/V field-cochain mapping, true signed Poynting normal surface integral, material/ion/controller pump accounting, physical retarded Maxwell front or independent natural work. That next **same-world cochain/projection/port** weld remains open, as do physical F13, measured F15 and D1 kernel.
+
+
+## 20 November continuation — Earth multirate/C3 reverse-solve
+See [MR01–MR15 roadmap](SmithFilsingerEarthMultirateC3ReverseRoadmap20261120.md) for half-Schumann candidate, sparse phase geometry, temporal/spacetime diffraction, switched ADE/Floquet, Earth-source optimization and KK/YM/TSVF attachments. All original physical gates remain in force; 21 local symbolic checks are finite donor receipts only.
