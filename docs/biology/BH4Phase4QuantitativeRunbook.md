@@ -203,3 +203,7 @@ Run `python scripts/check_bh4_conductance_history_sympy.py` for S4c: exact cycle
 ## Accepted implicit trajectory streaming
 
 Run `OPENBLAS_NUM_THREADS=1 python scripts/check_bh4_pnp_streaming_sympy.py` for S4c.5. Exact chord codec plus independent reaction-adjusted stock divergence, accepted implicit PNP steps, accumulated cycle residual and solver-defect bound. 48 local reconstructed-solver steps passed; exact full-module replay, original biochemical source payment and physical discrimination remain OPEN. See [BH4DifferentialStimulantObservationMaxCut.md](BH4DifferentialStimulantObservationMaxCut.md).
+
+## Situated consumer residual
+
+Run `python scripts/check_bh4_situated_observer_sympy.py` for S4c.6: exact conditional consumer-specific linear minimality, window-specific adjoints, chronology collisions and spatial net-flux cut. Local SymPy replay uses recovered native geometry only; existing included Agda countermodel imports original residual/descent owners for the finite release chronology witness (source-written, no kernel receipt). See [BH4DifferentialStimulantObservationMaxCut.md](BH4DifferentialStimulantObservationMaxCut.md).

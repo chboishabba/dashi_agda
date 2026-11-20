@@ -202,3 +202,44 @@ terminalVesSplitsGrossWitness :
   vesicular (after (baselineStep resolvedLow)) ≡
     vesicular (after (baselineStep resolvedGross)) → ⊥
 terminalVesSplitsGrossWitness ()
+
+-- S4c.6 situated finite release witness: same integrated count, distinct
+-- chronological consumer. These are event counts, not physical kinetics.
+-- Reuse the original generic residual and descent owners.
+import DASHI.Core.ConsumerIndexedResidualRefinementExact as SituatedResidual
+import DASHI.Core.ConsumerDescentMinimalObserverExact as SituatedDescent
+
+record OrderedReleaseWindows : Set where
+  constructor ordered-release-windows
+  field
+    earlyRelease lateRelease : Nat
+
+open OrderedReleaseWindows public
+
+integratedRelease : OrderedReleaseWindows → Nat
+integratedRelease x = earlyRelease x + lateRelease x
+
+earlyHistory lateHistory : OrderedReleaseWindows
+earlyHistory = ordered-release-windows 1 0
+lateHistory = ordered-release-windows 0 1
+
+sameIntegratedRelease : integratedRelease earlyHistory ≡ integratedRelease lateHistory
+sameIntegratedRelease = refl
+
+differentEarlyRelease : earlyRelease earlyHistory ≡ earlyRelease lateHistory → ⊥
+differentEarlyRelease ()
+
+earlyReleaseCollision :
+  SituatedResidual.ConsumerRelevantCollision integratedRelease earlyRelease
+earlyReleaseCollision = SituatedResidual.consumer-relevant-collision
+  earlyHistory lateHistory sameIntegratedRelease differentEarlyRelease
+
+integratedReleaseAdequateForTotal :
+  SituatedDescent.ConsumerSufficient integratedRelease integratedRelease
+integratedReleaseAdequateForTotal =
+  SituatedDescent.consumerObserverIsSufficient integratedRelease
+
+integratedReleaseNotAdequateForEarly :
+  SituatedResidual.ConsumerSufficient integratedRelease earlyRelease → ⊥
+integratedReleaseNotAdequateForEarly =
+  SituatedResidual.coarseCollisionBlocksSufficiency earlyReleaseCollision
