@@ -1517,3 +1517,34 @@ Next: replay committed reference; compare original small-prime inputs,
 then implement truncation-aware structured elimination or norm descent,
 preserve existing packed backend as oracle. Do not claim a speedup from
 residue decomposition alone. No CI or Agda execution.
+
+
+## 20 November — P9.M15g split-prime cyclic orbit doubling
+
+Candidate source scripts/check_cm_cyclic_orbit_norm.py, commit
+a14e3d6c35d3eb57ed1b704cc867c35c87253f3a. Classical cyclic norm and
+binary powering/orbit composition, no novelty claim. Choose prime
+ell=1 mod p, ell>n, r=ell^e, prime p. Euler exponent projects onto
+order p; require z^p=1 and gcd(z^k-1,r)=1 for 1<=k<p. These unit
+conditions imply that the orbit product has zero coefficients outside
+multiples of p, even over non-field Z/r. CRT still requires pairwise
+coprime moduli and the original deterministic height bound; new split
+modulus family has not been integrated into CRT yet. F_a(t)F_b(z^a t)
+=F_(a+b)(t); all products truncate at pn. For p=41 five doublings and
+two composition products suffice. No long inverse or logder needed;
+short inverse retained for existing direct-jet contract. Current code
+stores logarithmically many full blocks, so no memory improvement claim.
+Independent local scalar transcription checked 30 randomized cases:
+p=3,5,11,17,41; prime and cube modulus; n=1,2,3; complete projected
+norm equality to scalar logder and all off-residue coefficients zero.
+Not exact committed source replay, not original modular input parity.
+New script runs original diagonal/fixed inputs and existing packed
+oracle at identical split moduli, reporting per-slice times.
+P9.M15g candidate source implemented, synthetic parity PASS;
+original modular input replay, eight-jet/CRT transport, matched
+performance and Agda kernel weld OPEN. Run:
+python scripts/check_cm_cyclic_orbit_norm.py --bits 384
+Next compare memory streaming via recursive binary prefix (double
+accumulator then append H for a set bit), eliminating stored blocks;
+consider diagonal H=J(q)-t^(p-1)J(t) valuation filtration and
+truncated binomial/log expansion separately. No CI/Agda execution.
