@@ -984,3 +984,26 @@ At equality the large predicate holds. Scope is the exact rational
 holonomy and unadjusted threshold; mixed-scale Bishop source attachment
 and scaleAdjustedThreshold identification remain open. Source-written,
 Agda kernel pending; no CI or physical gate promotion.
+
+
+### 2026-11-20 — literal bad-component complement weld
+
+Source commit 4303ce641148: BalabanClayGate4LiteralWilsonLargeFieldPredicateExact
+now exposes OutsideWilsonComponents, outsideWilsonComponentsImpliesGood,
+goodImpliesOutsideWilsonComponents, outsideWilsonComponentsOwnedSmall and
+allOwnedSmallImpliesOutsideWilsonComponents. The forward direction constructs
+the original Geometry.component and Geometry.root from any large witness;
+the reverse consumes Geometry.pathEndBad. Thus absence from every original
+bad component is equivalent to strict smallness of every owned plaquette,
+on the SAME rational configuration, scale and unadjusted threshold.
+No new component allocator, geometric predicate authority, radius or axiom.
+
+Next gate: identify the actual preceding-scale good domain with this
+component complement, including any additional collars/exclusions in that
+domain (do not assume equality). Transport actual mixed-scale boundary
+incidence to the owned plaquettes; separately identify the scale-adjusted
+threshold and Bishop-real averaged holonomy. The rational result is not
+a decidable strict dichotomy for Bishop reals. CMP102 physical minimizer,
+weighted quaternion same-series specialization and CMP99 same corrected
+propagator remain open. Source-written only; exact-head Agda pending,
+no CI and no physical gate promotion.
