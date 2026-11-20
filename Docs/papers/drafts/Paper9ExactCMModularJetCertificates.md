@@ -736,3 +736,33 @@ Paper 3 / PR #1444 commit 1cf86519fd571b091301c864297a160de1a6d3eb transfers the
 A shared mathematical observation, not a new CM theorem or performance claim: for the rank-two algebra R[t]/(t^2-z), conjugation sends t to -t, and the multiplication matrix of a+bt is [[a,zb],[b,a]]. Its determinant is a^2-zb^2. For the factorial series C(z)=sum z^n/(2n)! and S(z)=sum z^n/(2n+1)!, exp(T_z)=C I+S T_z with T_z=[[0,z],[1,0]], giving determinant C^2-zS^2=1 by complementary signed binomial coefficients. At z=0, T_z is nilpotent. The Monster cyclotomic norm a^2-ab+b^2 is a related rank-two determinant, with different defining polynomial. This illustrates the multiplication-operator norm and complementary fibre viewpoint without identifying the quadratic algebra with Paper 9's general cyclic quotient, or transferring analytic convergence to a modular residue ring.
 
 For CMP102, shift the vanishing positive-degree coefficients before limit evaluation to avoid division by z; actual Bishop convergence, native unit quaternion and physical attachment remain OPEN. No new Paper 9 analytic, CRT, performance or kernel gate is promoted. Keep existing projected-product/inverse verification and M15k obligations unchanged.
+
+
+## 20 November — scope clarification and valuation-filtered binary repetition
+
+User objective clarified: SOTA specifically means fast certified pi. CM/modular-j
+and cyclic norm arithmetic remain active complementary research, not a required
+world-record claim. For pi prioritize matched end-to-end comparisons (including
+constant generation, precision certificate, and output) against established
+fast pi implementations; no new pi benchmark in this packet.
+
+For original diagonal H=A(q)-t^(p-1)J(t), A=J(q), set U=t^(p-1)J(t)/A.
+Then val U=p-1 and (1-U)^(-1)=prod_(k>=0)(1+U^(2^k)), truncated when
+2^k(p-1)>pn. The projected derivative is p*q*A'/A-Pi_p(tU'/(1-U)).
+Compute successive powers with shifted leading support, retain full inverse
+verification, and reconstruct norm by the original q-logder recurrence.
+Requires units only through n for norm reconstruction, not through
+floor(pn/(p-1)) as the earlier valuation-log route did.
+Independent local Python/GMP harness /tmp/p9/filtered.py using previously
+transcribed original raw-input formulas and modular J generator:
+10/10 exact diagonal norm comparisons with Newton logder, 10/10 full
+(1-U)*G=1 verification; p=3,5,11,17,41, two split prime-power rings
+per p, >=384 bits. Includes previously inadmissible valuation-log p=41
+prime base 83. Level 41 single norm-only timing pairs (Newton, filtered):
+83 (.08962,.19454) s; 739 (.08852,.19045) s. Shared J setup excluded.
+Both routes use same independent nonnegative GMP convolution; no production
+byte replay, statistical speedup, external benchmark, or Agda receipt.
+Filtered repetition is slower; keep default Newton unchanged. Source
+harness not yet persisted to repo in this packet. Sweetgrass retained-strand
+motif remains attributed to Robin Wall Kimmerer, not mathematical authority.
+Native selected extraction, contour optimization, full CRT and level 163 OPEN.
