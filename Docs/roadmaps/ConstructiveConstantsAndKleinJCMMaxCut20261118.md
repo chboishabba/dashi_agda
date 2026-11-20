@@ -160,3 +160,86 @@ The CM theorem, same-carrier q/Delta/E4/E6 identification, actual
 Bishop pi period and all newly source-written Agda modules are
 still formal Agda validation/proof obligations. Numeric source
 passes do not automatically discharge these.
+
+
+## 20 November 2026 — controlling max-cut update (supersedes older gate lists)
+
+Audited master 116cd7de01b8a0da03703b3bb8db79c67fd15b50 and PR #1529
+head 41dae3b4ac39cec95da028d753db9cf365b3d863 before this packet.
+Do not reopen source owners simply because they are absent on an older
+research branch. Integrate their dependency closure, preserving provenance.
+
+### K05: concrete total-degree route, no infinite derivative interchange
+
+Use BishopMachinOriginalCayleyFormalSeriesExact and
+BishopMachinCayleyEquationForcesCoefficientsExact on the original rational
+complex carrier. BishopMachinExistingCayleyReuseExact already proves the
+rational phase composition; BishopMachinOppositeCayleyConventionExact
+already handles conjugate convention. The terminal consumer is
+BishopMachinTwoPointCayleyCompositionExact. Only the two original Bishop
+atan evaluations are inputs. The earlier derivative route is optional.
+
+Put Y=iX. Then 2i atan(X)=2 sum_{k odd >=1} Y^k/k. In the formal
+factorial exponential composition let c_n denote the coefficient of Y^n.
+Finite polynomial differentiation and product rule give
+n c_n = 2 sum_{k odd,1<=k<=n} c_(n-k), c_0=1.
+Induction gives c_n=2 for n>=1: at n=2m the sum has m terms each 2;
+at n=2m+1 the sum has m terms each 2 and the constant 1.
+Thus (1-iX) F=1+iX coefficientwise. This matches the existing
+Cayley owner, not a new series definition.
+
+For rho=3/4 the *absolute* nested sum at rho is bounded by
+exp(2 rho/(1-rho^2))=exp(24/7)<exp(4)<81 (e<3 by factorial tail).
+At any |t|<=1/2, the portion with total degree >N is bounded
+by 81*(|t|/rho)^(N+1) <=81*(2/3)^(N+1).
+This bound follows termwise on every finite rectangle of the nested
+sum: a monomial of degree d>N contributes at most (|t|/rho)^(N+1)
+times its positive weight at rho. No new derivative interchange,
+integration theorem, or unrestricted summation axiom is required.
+The original rectangular partials containing every monomial of
+degree <=N differ from that finite total-degree polynomial by at
+most this bound. Original factorial-exp convergence and continuity
+at the original atan limit, plus native Sequence uniqueness, suffice
+once these finite combinatorial bounds are transported. The geometric
+Cayley tail is <=2 |t|^(N+1)/(1-|t|).
+
+Committed scripts/check_cayley_composition_tail.py at
+061c8fdbddf028ac6bfe84f96e1a0d08550618f7. Local execution:
+independent nested factorial convolution equals recurrence and canonical
+coefficients through degrees 0,1,2,8,16,32. Exact rational geometric
+tail checks and 10^-40 budget at t=1/2,1/5,1/239 passed.
+Selected doubling cutoffs N=256,128,32 respectively. Whole script
+wall time 0.03579 seconds in this run (not a benchmark median).
+This is a finite executable reference and all-degree mathematical
+argument; NOT a kernel proof of formal differentiation or evaluation
+transport. No claim that original Cayley equality is already inhabited.
+
+### Reconciled producer ledger (current priorities)
+
+| Gate | State | Actual owner / required next deliverable |
+|---|---|---|
+| K04d | SOURCE IMPLEMENTED on master | BishopOriginalNegativeLogTerminalFromMeshExact.originalBishopNegativeLogExponentialGap; integrate original dependency closure |
+| K05.01-04 | SOURCE EXISTS | BishopRound11SignedFactorialDegreeBinomialExact, BishopK04dK05NativeProductDischargeExact, original Cayley coefficient owners |
+| K05.05 | SOURCE EXISTS, derivative series only | BishopOriginalLogAtanDerivativeLimitValuesExact; derivative of limit not required by preferred total-degree route |
+| K05.06 | OPEN Agda | Literal nested factorial composition coefficient recurrence and all-degree identification |
+| K05.07 | OPEN Agda | finite rectangle/total-degree bound, native Sequence limit transport; reuse original exp continuity and atan tails |
+| K05.08-10 | DOWNSTREAM | instantiate two original atan values, existing first-positive-zero consumer |
+| J1 | SOURCE EXISTS | JInvariantBishopQFromUnitPhaseExact and JInvariantBishopTrigUnitPhaseExact; actual phase and radius inputs |
+| J2 | SOURCE EXISTS | JInvariantEisensteinBishopSetoidSeriesExact and JInvariantEisensteinSameCarrierLimitKleinJExact |
+| J3 | OPEN | original q/lattice equality, literal modular fixed points and local nonzero discriminant |
+| CM1 | INTERFACE EXISTS | TraceOfSingularModuliBridge.CMArithmetic; actual reduced-class carrier and reduction equivalence |
+| CM2 | OPEN | classical CM algebraic integrality and degree/class-number theorem on original j |
+| CM3 | FINITE CERTIFICATE | existing -163 dyadic checker; analytic interval transport still open |
+| CH1 | EXECUTABLE REFERENCE | scripts/check_chudnovsky_exact.py, commit 41dae3b4ac39cec95da028d753db9cf365b3d863; finite prefix and alternating tail |
+| CH2 | OPEN | Chudnovsky modular hypergeometric and derivative identity, same original pi; CM value alone does not suffice |
+| A1 | OPEN | exact-head pinned local Agda --safe acceptance; no compiler or Nix in current runtime |
+
+Chudnovsky search included name and constants 13591409, 545140134, 640320
+in the indexed Agda/Lean defaults; no older concrete implementation
+recovered, not an exhaustive historical-branch exclusion.
+Keep YM.REAL independent; no physical or Clay gate promotion.
+Attribution: original Bishop/Bridges and Murray/Csimma; Machin, Cauchy,
+D. V. and G. V. Chudnovsky; actual DASHI owners above and
+Docs/proofs/BishopK04dK05TerminalCompositionExactProof20261106.md
+(the prior formal-composition strategy). This packet tightens the
+finite total-degree majorant, not authorship of the classical identity.
