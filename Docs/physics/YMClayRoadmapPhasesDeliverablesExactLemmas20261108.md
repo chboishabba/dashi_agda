@@ -898,3 +898,42 @@ bound. Compose with the same coarseBackgroundHolonomy and existing plaquette
 consumer. Actual CMP102 mixed-scale incidence, Eq(7) strict witness, gauge
 section, real minimizer and propagator remain OPEN. No radius shrink,
 new kernel acceptance, CI or Clay endpoint promotion.
+
+
+### 2026-11-20 — CMP102 Eq(7) and Bishop donor reconciliation
+
+Exact donor heads inspected: #1478 fb374e50e59a98e2b8a1eee215c77428c5728b68,
+#1529 0626c465c2721525f432bfef57d96f02d24fbe3d,
+#1499 251b567d5242185b81dfdcd036889ca3b434f899,
+#1503 b93909a044960a90690393fdadcb9f6692a139c0.
+#1478 actual BishopComplexExpFactEqualsNativeExpExact proves source-written
+coordinate convergence of factorial series to configured native expC.
+BishopComplexCauchyTriangleLimitTransportExact transports Cartesian rectangle
+limits with vanishing upper-wing residuals; specialized factorial donor is
+for real and imaginary axis streams. BishopOriginalNativeComplexExpAdditionFromTrigExact
+still takes OriginalCosineAddition and OriginalSineAddition; do not claim
+unconditional addition from that owner. No donor kernel replay or transplant.
+For root-free quaternion use weighted pair multiplication (ac-sbd,ad+bc);
+at s=0 this formal algebra is dual numbers, not the complex field. Reuse
+coordinate limit architecture or scalar coefficient cancellation; no division
+by radius or unit imaginary direction.
+
+Eq(7) audit: distinguish CMP102 pp255–275 DOI BF01229380 (local extract,
+characteristic-function decomposition) from pp277–309 DOI BF01229381
+(variational theorem). BalabanSelectedBackgroundVariationalChartBridgeExact
+has incorrect page metadata 605–636 in header; DOI is correct.
+FiveChannelSmallFieldRadius is conditional linear-budget compiler;
+CommonSmallFieldRadius assembles input certificates; SmallFieldNonlinearConstants
+assembles input coefficient bounds; PlaquetteBoundaryStateNormChargeExact
+proves perturbation projector charge identity, not group plaquette smallness.
+BalabanClayGate4BackgroundFieldVariationalTheoremExact consumes supplied
+CoarseSmallField coarse before producing selected background and fine-bond
+estimate. BalabanPath13VariationalSpecializationExact and
+BalabanCMP98Path13VariationalRadiusSourceFamilyExact remove redundant
+same-object/radius inputs conditional on this source. Do not use downstream
+fineBondSmallness to prove its own coarse input: trace previous-scale
+admissible domain and actual mixed-scale boundary incidence instead.
+Eq(7) normalization established; producer prior-art search remains open,
+not a claim of mathematical absence. Physical same-object attachment open.
+Root-free analytic weld remains open; no new kernel acceptance, CI, radius
+reduction or Clay promotion. Constructor/geometry audit before changing math.
