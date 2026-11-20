@@ -1580,3 +1580,23 @@ python scripts/check_cm_cyclic_orbit_norm.py --bits 384
 python scripts/check_cm_direct_jet.py --orbit --bits 384 --ring-oracle
 python scripts/check_cm_direct_jet.py --orbit --bits 384 --compare-masser
 Last command potentially expensive; not executed here. No CI initiated.
+
+
+## 20 November — exact-source SymPy acceptance (M15h/i)
+
+GitHub connector retrieved norm source from 119acf4065691c2ce718811ec30c8a633aea5566.
+Local git hash-object confirmed blob 14c80df19871435e2ac7d088e871cad3f7dc06fe.
+Executed with SymPy 1.14.0 and independent scalar modular convolution:
+36/36 streaming orbit versus scalar logder, 18/18 exact ZZ[q]
+determinant/resultant versus orbit, 36/36 diagonal valuation versus orbit,
+and explicit nonunit rejection at p=41,n=82,r=83^2 PASS.
+Levels 3,5,7,11,17,41; orders 1,2,3; first two admitted split prime
+powers of at least 12 bits; seeded synthetic coefficients. Determinant
+comparison restricted to levels 3,5,7. Local harness preserved in
+scripts/check_cm_norm_sympy_acceptance.py at 7e9cc1f1d438daf7fdac3f13b8278e94ddf05c02
+(import narrowed to four functions; same test body). No fresh execution
+of that exact harness blob after commit. M15h/i synthetic runtime PASS,
+original modular input, packed backend, direct jets/CRT, full level-163
+comparison and performance still OPEN. SymPy used instead of Agda for
+computational acceptance by user direction; not a kernel theorem receipt.
+No CI initiated.
