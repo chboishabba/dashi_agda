@@ -253,3 +253,10 @@ currentPrimitiveMaxCut = record
 primitiveTerminalReading : String
 primitiveTerminalReading =
   "The current max-cut is source-leaf exact. Monster begins at actual weight-two/literal-zeta linear restrictions and actual whole-character/simple/nonzero inputs, not generic classifier/isotypic machinery. The selected GRQFT route begins at a concrete pinned Yang-Mills construction plus R114/R119/R122/R124/R127 and pinned-literal=qftTarget, not Round131/R457 wrapper equalities. Arithmetic begins at the cubic-character/Jacobi split-prime evaluation; quantum begins at the same-physical Hilbert/g-TPS/Hamiltonian attachment. Sibling receipts preserve source ownership and do not become local Agda theorems."
+
+-- JMD/DASHI current mathematical source receipt; no physical promotion.
+jmdThreeCResidualSource : PrimitiveSourceReceipt
+jmdThreeCResidualSource =
+  siblingReceipt 1477 "e727acd514363109e7991d1eba84d8a93351d562"
+    "DASHI.Moonshine.JMDDASHIThreeCResidualWeldExact"
+    "Abstract C3 and S3 tensor characters; not a selected Monster action. TOE ledger records the classical Th 54-factor involution obstruction and unpaid full restriction."
