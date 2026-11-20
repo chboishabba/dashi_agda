@@ -1055,3 +1055,20 @@ additional exclusions) with a subset of this list, and recover the literal
 mixed-scale boundary incidence. Adjusted threshold and Bishop averaged
 holonomy remain separate. Source-written, kernel pending; no CI, radius
 reduction, or physical gate promotion.
+
+
+### 2026-11-20 — native root-free quaternion specialization
+
+BalabanCMP98Path13BishopNativeSourceExact now constructs quaternionW from
+the unscaled native Lie vector, proves quaternionWQuarterAdjoint and
+quaternionWBelowSixteenth from existing SmallLie admission, and derives
+quaternionSignedWInside. The convergent existing aSeries/bSeries are evaluated
+at the quaternion argument, not the fourfold adjoint argument.
+rootFreeQuaternionCandidate uses the existing QuaternionB carrier and
+nativeAveragedQuaternionCandidate consumes the actual outerY and outerRelevant
+from nativeInputsFromPhysicalRadius, with the original selected radius witness.
+This is a candidate coordinate constructor, not yet a certified unit
+quaternion or a proved exponential identification. Same-series unit norm,
+Cauchy product/exp-log identification, strict chord transport, actual CMP102
+preceding-scale domain and mixed-scale incidence remain OPEN.
+No radius reduction or new analytic authority. Source-written; kernel pending.

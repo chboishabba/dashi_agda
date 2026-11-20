@@ -34,6 +34,7 @@ import Real as B
 import RealProperties as BP
 import DASHI.Physics.YangMills.BalabanCMP109BishopPrincipalLogAdPolynomialExact as Poly
 import DASHI.Physics.YangMills.BalabanCMP109BishopRootFreeSeriesExact as Series
+import DASHI.Physics.YangMills.BalabanClayT2BishopQuaternionNormalizationExact as Quaternion
 import DASHI.Physics.YangMills.BalabanBishopConcreteHalfBallSquareExact as Half
 open import Data.Unit using (⊤)
 open import Data.Product using (_,_; proj₁; proj₂)
@@ -836,3 +837,68 @@ nativeInputsFromPhysicalRadius g radius =
           (outerYFrom g nativeSeriesChart admission bond step)
           (outerBound bond step)
     }
+
+------------------------------------------------------------------------
+-- Root-free quaternion candidate on the SAME native averaged vector.
+-- The adjoint generator is 2y: do not evaluate quaternion coefficients
+-- at physicalW y. Unit norm and exp/log semantic identification are
+-- separate theorems, not fields installed by this constructor.
+------------------------------------------------------------------------
+
+quaternionW : BishopLie → B.ℝ
+quaternionW y = Poly.generatorSq (toVec3 y)
+
+quaternionWQuarterAdjoint : ∀ y →
+  B._≃_ (quaternionW y) (B._*_ (B._⋆ (+ 1 / 4)) (physicalW y))
+quaternionWQuarterAdjoint y =
+  let open BP.ℝ-Solver in
+  solve 3
+    (λ x y z →
+      (x ⊗ x) ⊕ ((y ⊗ y) ⊕ (z ⊗ z))
+      ⊜ Κ (+ 1 / 4) ⊗
+        (((Κ (+ 2 / 1) ⊗ x) ⊗ (Κ (+ 2 / 1) ⊗ x))
+        ⊕ (((Κ (+ 2 / 1) ⊗ y) ⊗ (Κ (+ 2 / 1) ⊗ y))
+        ⊕ ((Κ (+ 2 / 1) ⊗ z) ⊗ (Κ (+ 2 / 1) ⊗ z)))))
+    BP.≃-refl (y P.coordinateX) (y P.coordinateY) (y P.coordinateZ)
+
+quaternionWBelowSixteenth : ∀ y → SmallLie y →
+  B._≤_ (quaternionW y) (B._⋆ (+ 1 / 16))
+quaternionWBelowSixteenth y p =
+  BP.≤-respˡ-≃ (BP.≃-symm (quaternionWQuarterAdjoint y))
+    (BP.≤-respʳ-≃
+      (let open BP.ℝ-Solver in
+       solve 0 (Κ (+ 1 / 4) ⊗ Κ (+ 1 / 4) ⊜ Κ (+ 1 / 16)) BP.≃-refl)
+      (BP.*-monoʳ-≤-nonNeg (wBelowQuarter p)
+        (BP.0≤x⇒nonNegx
+          (Cast.bishopEmbedOrder (RP.nonNegative⁻¹ (+ 1 /q 4))))))
+
+quaternionSignedWInside : ∀ y → SmallLie y →
+  B._≤_ (B.∣_∣ (B.- (quaternionW y))) Half.bishopQuarter
+quaternionSignedWInside y p =
+  BP.≤-respˡ-≃
+    (BP.≃-symm (BP.≃-trans BP.∣-x∣≃∣x∣
+      (BP.nonNegx⇒∣x∣≃x (vectorSqNonnegative y))))
+    (BP.≤-trans (quaternionWBelowSixteenth y p)
+      (Cast.bishopEmbedOrder
+        (RP.<⇒≤ (RP.positive⁻¹ ((+ 1 /q 4) - (+ 1 /q 16))))))
+
+quaternionA quaternionB : (y : BishopLie) → SmallLie y → B.ℝ
+quaternionA y p = Series.aSeries (B.- (quaternionW y)) (quaternionSignedWInside y p)
+quaternionB y p = Series.bSeries (B.- (quaternionW y)) (quaternionSignedWInside y p)
+
+rootFreeQuaternionCandidate : (y : BishopLie) → SmallLie y → Quaternion.QuaternionB
+rootFreeQuaternionCandidate y p =
+  Quaternion.quaternionB
+    (B._-_ B.1ℝ (B._*_ (quaternionW y) (quaternionA y p)))
+    (Quaternion.scaleVecB
+      (B._-_ B.1ℝ (B._*_ (quaternionW y) (quaternionB y p)))
+      (Quaternion.vec3B (y P.coordinateX) (y P.coordinateY) (y P.coordinateZ)))
+
+nativeAveragedQuaternionCandidate :
+  ∀ {C} (g : NativeGeometry C) →
+  Background.SelectedInverseLinkRadius13 (nativeBackground g) →
+  Family.Path13PositiveBond → Nat → Quaternion.QuaternionB
+nativeAveragedQuaternionCandidate g radius bond step =
+  let inputs = nativeInputsFromPhysicalRadius g radius
+  in rootFreeQuaternionCandidate (outerY inputs bond step)
+       (outerRelevant inputs bond step)
