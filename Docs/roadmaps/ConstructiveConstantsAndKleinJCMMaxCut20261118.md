@@ -339,3 +339,89 @@ This is not analytic j(omega) identification.
 Next: actual rational proof-relevant quotient, integer-to-rational
 embedding consistency, analytic lambda identification. K05, CM and CH2
 remain open. No duplicate cyclotomic carrier or physical claims.
+
+
+## 20 November — executable analytic lattice / 369 ramification weld
+
+Current head before packet: 9a1d41677029b7c07a19fae4ab5b6849784ac045.
+Executable SymPy/Fraction reference scripts/check_369_j_analytic_weld.py
+committed at fc5bef5d38234827da62fed3ed3709298c24d410. Local execution
+PASS: 4352 reciprocal points, 64 shells (128 weight-specific bounds),
+128 Lambert coefficients, symbolic coercivity and telescoping inequalities,
+Legendre ramification identity, exponential bound and normalization factors.
+Single local run 0.1151 s, excluding interpreter startup.
+No new Agda kernel acceptance.
+
+### Lattice tail and same-function Fourier expansion
+
+Reuse JInvariantBishopLatticeReciprocalShellMajorantExact
+(blob b37264957cefa18cccc223ac212c9b5ab9ac02c1), whose actual
+reciprocalNormSquareShellUpper already establishes |m tau+n|^-2
+<= C/r^2, C=(1+x^2+y^2)/y^2, y>0.
+For k=4,6, power k/2 gives |m tau+n|^-k <= C^(k/2)/r^k.
+There are exactly 8r points in square shell r>=1. Thus the sum
+of absolute values on that shell is bounded by 8 C^(k/2)/r^(k-1).
+For r>=2 and p=k-2, (r-1)^-p-r^-p >= p/r^(p+1)
+(positive polynomial cross multiplication checked in SymPy).
+Summing telescopically gives tail <= 8 C^(k/2)/((k-2)R^(k-2)).
+This proves ordinary absolute convergence and unrestricted bijective
+reindexing; transport to original Bishop finite folds and Sequence remains open.
+
+The actual punctured lattice G_k=sum' (m tau+n)^-k has classical
+Fourier identity G_k=2 zeta(k) + 2(-2 pi i)^k/(k-1)! sum_{j>=1} sigma_(k-1)(j) q^j.
+Derivation: the classical cotangent partial fraction expansion, differentiated
+k-1 times, gives sum_{n in Z}(z+n)^-k =
+(-2 pi i)^k/(k-1)! sum_{d>=1} d^(k-1) exp(2 pi i d z) for Im z>0.
+Split m=0, pair m with -m (even k), then collect md=j using absolute
+convergence. Lambert absolute convergence follows from
+sum_d d^(k-1) |q|^d/(1-|q|^d) <= (1-|q|)^-1 sum_d d^(k-1)|q|^d.
+Normalize G_k by 2 zeta(k); with Euler zeta(4)=pi^4/90,
+zeta(6)=pi^6/945, SymPy verifies multipliers 240,-504 exactly.
+The cotangent partial fraction theorem and Euler even-zeta evaluation
+are classical imported mathematical facts here, NOT new kernel proofs.
+Important normalization audit: JInvariantBishopLatticeEisensteinSameObjectCompilerExact
+(blob 9f0be2e9e018f4dadbf786f3dcf754d16779c4f7) has e4SameObject/e6SameObject
+against its model latticeSum. The concrete instance must compare E_k
+with G_k/(2 zeta(k)), not the unnormalized inverse-power sum. Weight
+covariance passes through the fixed nonzero normalizing scalar.
+
+### Elliptic value math without global Delta nonvanishing
+
+At i, S fixes i and i^6=-1, so G6=0. At omega=(-1+i sqrt(3))/2,
+ST fixes omega and (omega+1)^4=omega^2!=1, so G4=0.
+By normalized Fourier equality these give E6(i)=0 and E4(omega)=0.
+E4(i)>1 by positive q series. At omega, q=-r, r=exp(-pi sqrt(3))
+<1/128 because pi sqrt(3)>5 and exp(5)>128 (exact finite lower
+bound checked). E6(omega)>=1+504r-504 sum_{n>=2} n^6 r^n >1:
+the geometric ratio is bounded by (3/2)^6 r<1/2 and the tail
+is <=128 r^2<r. Thus Delta is nonzero locally and the classical
+normalized quotient gives j(i)=1728, j(omega)=0. No global eta
+nonvanishing is required for these two points. Original Bishop
+phase, normalization and quotient transports remain open.
+
+### Binary / ternary algebra
+
+Q=a^2-ab+b^2, V=ab(b-a), W=(a+b)(2a-b)(a-2b).
+Universal polynomial identity 4Q^3-27V^2=W^2 checked exactly.
+Hence j_lambda=2^8 Q^3/V^2 and j_lambda-1728=2^6 W^2/V^2,
+1728=2^6*3^3. This is the classical cubic/quadratic ramification
+identity. It does not identify the fine-frequency 3^9 with 2^8.
+Original JFineCoarseRelativeScaleExact owns 3^9 relative scale,
+3^2*3^9=3^11, and reciprocal spatial/frequency product.
+10*3^9+54=196884 is exact arithmetic; not a derivation of
+analytic j from representation dimensions.
+
+### Updated acceptance cut
+- Reciprocal bound: original source exists. Shell fold and convergence:
+  ordinary proof + exact executable checks; native transport OPEN.
+- Fourier normalization: classical proof with explicit named inputs,
+  exact coefficients checked; native cotangent/Euler/phase transport OPEN.
+- Elliptic special values: ordinary proof complete with those inputs;
+  original proof-relevant Bishop readout OPEN.
+- Lambda ramification: universal polynomial identity exact; analytic
+  lambda(tau) identification OPEN.
+- CM integrality, Chudnovsky same-original-pi, K05 transport OPEN.
+- No duplicate analytic carrier or replacement of golden Agda by a test.
+Classical sources: Eisenstein series, cotangent partial fractions,
+Euler even zeta values, Legendre elliptic invariant. Original DASHI
+owners above retained; no attribution of classical identities to DASHI.
