@@ -69,3 +69,4 @@ import DASHI.Moonshine.JInvariant369SSP15OggAddressCodecExact
 
 import DASHI.Moonshine.JInvariant369SSP15PrimeInternalFibreExact
 import DASHI.Moonshine.JInvariant369OggAddressResidualFibreExact
+import DASHI.Moonshine.JMDDASHIThreeCResidualWeldExact
