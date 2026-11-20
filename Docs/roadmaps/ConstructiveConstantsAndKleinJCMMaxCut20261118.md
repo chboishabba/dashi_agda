@@ -243,3 +243,47 @@ D. V. and G. V. Chudnovsky; actual DASHI owners above and
 Docs/proofs/BishopK04dK05TerminalCompositionExactProof20261106.md
 (the prior formal-composition strategy). This packet tightens the
 finite total-degree majorant, not authorship of the classical identity.
+
+
+## 20 November: native 369 / Monster reconciliation (preferred over duplicate FLM construction)
+
+Actual existing owner JInvariant369NormalizedAnalyticRendererExact
+(blob ab27df5e025df09037c1efc7a4a07bcab2a2e166):
+standardRendererJValueIsStandardJ A N Q O tau = refl.
+Point and scalar carriers are also definitionally identical. This is a
+same-object compiler for standard j, NOT an instantiated Bishop analytic model.
+Its boundary explicitly marks concrete readout and reflection alignment false.
+JInvariantFormulaic369ModularReplicationExact consumes jInvariant as a field;
+it proves observer invariance from that field, not its analytic inhabitant.
+JInvariant369ConsolidatedNextStageExact retains independent C6 phase,
+principal-level C27 and signed multiplicity; scalar j non-descent is essential.
+
+Monster369ZetaSameObjectWeldExact (blob 21714177659928bf7ed90989b785d709751bd60a)
+already identifies Fourier zeta, Monster 3B selected phase, inertia scalar,
+and finite Schrodinger modulation with the same exact cyclotomic scalar.
+Literal VOA eigenspace identity is definitional on an inhabited source.
+Actual H_zeta/W_zeta recognition and linear multiplicity intertwiner remain open.
+JInvariant369Zeta6561MonsterCrosswalkExact (blob 669c3379cc8e563e26d87617ee69aa0bcbcb7fd8)
+connects 6561, 65610, 196830, 196883 and 196884 with exact finite witnesses;
+it explicitly separates cyclotomic zeta from Riemann zeta and marks the
+Riemann-zeta/divisor-series/Eisenstein weld unpaid here.
+JInvariantLambdaOrbitBase369BridgeExact (blob a226f222f57fb192c5e32a96c968dc5c152711b6)
+already owns the six lambda orbit labels, three complement pairs and orientation
+involution with Base369 HexTruth. Its rational-function invariance and actual
+analytic lambda identification are distinct gaps.
+
+Reuse #1029 (consolidated 369), #1472 (selected FLM/Y443), and
+docs/j369-b3-existing-voa-modular-fine-level-crosspollination-maxcut.md
+for exact B3 generator orientation, finite orbifold sector action and
+principal-level non-descent. Do not promote finite sector action into analytic
+twisted modularity. JMDArchimedesDelta369FixedLocusBridgeExact already
+consumes pinned Lean eta24/Delta/reflection receipts; retain JMD attribution
+and separate Lean proof from Bishop/Agda carrier transport.
+
+J3 split: (a) normalized renderer same-object compiler EXISTS;
+(b) original analytic modular model, q/lattice equality and nonzero Delta
+remain to instantiate; (c) phase/reflection readout alignment remains open.
+Monster full Aut, 194 traces and FLM construction are NOT prerequisites
+for evaluating the existing standard-j quotient. CM2 remains open unless
+actual integral modular-polynomial or CM integrality/class-degree proof is
+found. K05.06/07 remain open in Agda. No kernel execution in this packet.
