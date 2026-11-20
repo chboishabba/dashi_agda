@@ -183,3 +183,7 @@ The aggregate checker includes acquisition, ranking, payment-preparation and joi
 ## Adjacent differential stimulant observer (2026-11-20)
 
 See [BH4DifferentialStimulantObservationMaxCut.md](BH4DifferentialStimulantObservationMaxCut.md), S1 and S3a: existing included finite observer owner now records matched initial stocks, distinct cytosolic/vesicular/extracellular balance witnesses, and endpoint non-identification of pool, synthesis and gross release. Synthetic only; exact-head Agda, real reaction/transport source evidence and empirical discrimination OPEN. This does not alter original 29x12 or P0–P3 payment.
+
+## Selected catecholamine source cut (2026-11-20)
+
+Run `python scripts/check_bh4_catecholamine_sympy.py` for S2a: selected Rhea 15-species/5-reaction chemistry with existing finite matrix producer, exact CHNOP/charge, pterin recycling, and feasible turnover-observer collision. See [BH4DifferentialStimulantObservationMaxCut.md](BH4DifferentialStimulantObservationMaxCut.md) for attribution and S2b remaining source/369/physical boundary gates. This is local SymPy acceptance, not archived original panel payment, clinical inference or Agda kernel acceptance.
