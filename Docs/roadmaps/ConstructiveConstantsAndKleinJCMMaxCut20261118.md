@@ -1471,3 +1471,49 @@ python scripts/check_cm_direct_jet.py --family
 Next: exploit sublinear-in-full-output norm consumer / tighter height
 bounds, compare equal residue widths at different levels, run level 163
 where resources permit. No CI or Agda run in this packet.
+
+
+## 20 November — P9.M15 quotient norm reference and ring-solver boundary
+
+Reference: scripts/check_cm_quotient_norm.py, implementation commits
+561b7bcb406650efec54764ef80fb45b568deef9 and
+00c29732aba34287fb3b4836baa20340ed2dd8b5.
+Classical norm/resultant identity, not a novelty claim.
+For R_n=R[q]/(q^(n+1)), A=R_n[t]/(t^p-q), split H into
+H_r(q)=sum_k h_(pk+r) q^k. The multiplication matrix in the ordered
+basis 1,t,...,t^(p-1) has entries H_(i-j) if i>=j and q H_(p+i-j)
+otherwise (row i, column j). Its determinant is Res_t(t^p-q,H).
+Terms beyond t^(pn) cannot contribute to the norm through q^n.
+Normalized H(0)=1 implies norm(0)=1. Logarithmic route uses
+L=t H' H^{-1}, not t H' H. The new reference uses exact ZZ[q]
+determinant before coefficient reduction, so no division in the
+possibly non-field residue ring is required. It is NOT a bounded-memory
+production algorithm. Reduce H modulo the monic t^p-q before calling
+SymPy resultant: a direct high-degree call exhibited a global sign
+discrepancy at p=3, degree 9; preserve determinant orientation and
+constant coefficient control. Local independently transcribed test:
+48 determinant/reduced-resultant comparisons PASS (p=2,3,5,7;
+n=1,2,3; moduli 4,9,25,121). Initial expanded Berkowitz test timed out;
+exact polynomial DomainMatrix determinant used instead. Committed script
+also includes scalar logarithmic recurrence where k is invertible;
+exact committed script replay not yet performed, no PASS claimed for it.
+
+Ring-solver reuse candidates: BalabanCanonicalRealPolynomialSolver,
+BalabanRealPolynomialRing, NSTriadKNExactRingSolverBridge and
+scripts/audit_agda_solver_fibre_boundaries.sh. Prior donor recovery
+reported in preceding discussion; no new kernel receipt. Use abstract
+commutative-ring scalar normalization, quotient interpretation and
+determinant multiplicativity before instantiated coefficient transport.
+P9.M14 unchanged PASS (previous receipt).
+P9.M15a donor identification recorded; same-ring adapter OPEN.
+P9.M15b quotient formulation derived.
+P9.M15c small reference source implemented; production structured norm OPEN.
+P9.M15d small independently transcribed parity PASS; original normalized
+product and all eight translated jets parity OPEN.
+P9.M15e runtime/RSS production comparison OPEN.
+P9.M15f Agda quotient and determinant/logder same-object weld OPEN.
+P9.M16 full level-163 Masser comparison OPEN.
+Next: replay committed reference; compare original small-prime inputs,
+then implement truncation-aware structured elimination or norm descent,
+preserve existing packed backend as oracle. Do not claim a speedup from
+residue decomposition alone. No CI or Agda execution.
