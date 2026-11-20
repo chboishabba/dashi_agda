@@ -1903,3 +1903,79 @@ Current five-gate status:
 
 No pinned Agda/Nix toolchain or CI acceptance was available.
 Do not mark YM.REAL closed on SymPy or a source pragma alone.
+
+
+## 20 November 2026 — current #1444 implementation and manuscript crosswalk
+
+Source baseline: `16924e8b8b15be75938e142c2bc8c37267d452a2`.
+Rounds R are chronological iterations; reuse later concrete producers before
+reopening an older obligation. The following are committed source changes,
+not new kernel acceptance receipts.
+
+| Work | Commit / source | Status |
+| --- | --- | --- |
+| Root-free SU2 dexp and exact rational reference | d182ad5, scripts/check_ym_path13_dexp_20261120.py | Prior reported SymPy execution; no Agda proof |
+| Same two-carrier Eq119/Eq120 | 761cdba, 88daca8 | Source-written |
+| Native Bishop Lie coordinates and signed path source | 9ee4f5a | Source-written |
+| Reused Bishop reduced polynomial, physical factor two | 1785cf2 | Source-written |
+| Direct variational selection, canonical geometry; no legacy chart input | 16924e8 | Source-written |
+| Configured P33 bordered trace, moving normal constraint and measure distinction | bdbffd9, a3b5d9a; scripts/check_ym_p33_bordered_trace_20261120.py | Prior exact rational execution; not physical CMP109 beta |
+
+### Current execution cut (not a new set of gate IDs)
+
+1. In `BalabanCMP98Path13BishopNativeSourceExact`, construct A(w), B(w) as native
+   Bishop limits of the root-free factorial series, w=4||Y||². Construct
+   positive-scalar quaternion log via arcsin(r)/r series in r², with an actual
+   Cauchy witness and same-object exp/log identity. Reuse the existing Bishop
+   completion and polynomial owners. For inverse use h=1-wB,
+   Delta=h²+wA², J=I-(A/Delta)ad+((A²-hB)/Delta)ad²; prove the inverse
+   on w≤1/4, not globally. The bound Delta≥529/576 is mathematical, not an
+   accepted native Bishop theorem. Do not assume decidable real zero.
+2. Instantiate the original Path13 variational theorem on the literal
+   fine/coarse action and gauge constraint; use the canonical radius-six
+   walk agreement and direct 74-link telescope (37/1024 threshold).
+   Source theorem existence/uniqueness can be standard-imported, but the
+   actual source identification and its hypotheses must be inhabited.
+   Existing NativeGeometry remains conditional on those inputs.
+3. Feed same-source Eq120 Q and its actual background derivative (do not
+   equate Eq119 intermediate QPrime with DQ by notation) to the CMP99
+   iterated/pivot solve, then the actual Wilson/background Hessian and
+   gauge-fixing mixed jets. Use the original CMP109 change-of-variables
+   Jacobian: distinguish induced volume from ambient delta measure.
+   Bordered trace algebra is reusable; a configured side-four transport
+   test is not a physical source-normalized beta calculation.
+4. Establish the uniform normalized Fourier/Brillouin beta enclosure,
+   including normal subspace motion and the actual measure contribution;
+   then consume it through the existing finite RG recurrence, full Wilson
+   clustering and same-source OS endpoints. No arbitrary all-Nat active
+   positive-beta history. No physical gate is promoted by a finite fixture.
+
+Authoritative Clay endpoint IDs unchanged: E1.01–07, D1.01–04, D2.01–05,
+N1.01–03, G1.01–04. E1/D1/D2/N1/G1 remain OPEN; retain full interacting
+fixed-support continuum, uniform physical covariance, common dense-core
+OS gap, noncollapse and compact-simple generality. Local Agda golden
+verification preferred; no new Agda/Nix acceptance observed in this session.
+
+### Existing manuscript corpus (verified on this branch)
+
+The original eight lanes and Paper 0 are retained. The publication router
+is [PublicationRoadmap](../papers/PublicationRoadmap.md); the active
+manuscripts are Paper 3 (first priority), Paper 1, and Paper 8. The remaining
+old lanes are legacy/support, not deleted. Do not create replacement drafts.
+
+- [Paper 0 — Shared Margin Grammar](../papers/legacy/Paper0SubmissionDraft.md)
+- [Paper 1 — Navier–Stokes](../papers/live/Paper1NavierStokesClayDraft.md)
+- [Paper 2 — GR geometry](../papers/legacy/Paper2GRGeometryDraft.md)
+- [Paper 3 — literal Wilson mass-gap reduction](../papers/live/Paper3YangMillsClayDraft.md)
+- [Paper 4 — Physical Hilbert space](../papers/legacy/Paper4PhysicalHilbertSkeleton.md)
+- [Paper 5 — DHR](../papers/legacy/Paper5DHRSkeleton.md)
+- [Paper 6 — Yukawa/CKM](../papers/legacy/Paper6MatterYukawaCKMSkeleton.md)
+- [Paper 7 — Terminal composition](../papers/legacy/Paper7TerminalCompositionDraft.md)
+- [Paper 8 — Unification](../papers/live/Paper8UnificationDraft.md)
+- [Paper 3 finite geometry draft](../papers/drafts/Paper3YangMillsGeometryDraft.md)
+- [Eriksson–Balaban source intake audit](../papers/drafts/YangMillsClayTrackAuditManuscript.md)
+  ([TeX](../papers/drafts/YangMillsClayTrackAuditManuscript.tex))
+- [YM / Unification theorem navigation](../support/reference/YMUnificationPaperToProofMap.md)
+
+The older source intake manuscript's P33-closed label is scoped to its
+historical reduction, not the current physical beta or Clay endpoint.
