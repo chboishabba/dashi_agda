@@ -126,7 +126,7 @@ def F(t):return math.asinh(t)-math.sqrt(1+t*t)/t
 
 def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
               pulse=.065,inside_chord=.012,r_outer=4.3,y_outer=3.0,drive=1.,
-              conservative_source=True,normal_order=2):
+              conservative_source=True,normal_order=2,checkpoint=None,budget=75.,checkpoint_every=8):
     if normal_order not in (1,2,3):raise ValueError('normal order must be 1 SBP, 2 legacy, 3 SBP2 SAT')
     if not(2<final_t<=20 and 0<dr<eps/3 and 0<dy<=.03
             and 0<dt<min(dr*math.sqrt(3/44),dy*.45) and 0<eps<.08
@@ -190,7 +190,18 @@ def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
     now_wall=None
     prev_walldot=None
     now_walldot=None
-    for it in range(nt+1):
+    start_it=0
+    if checkpoint is not None:
+        from ksw668_f8_ssprk_checkpoint import NativeCheckpoint
+        ck=NativeCheckpoint(checkpoint,dict(dr=dr,dy=dy,dt=dt,eps=eps,final_t=final_t,
+            pulse=pulse,inside_chord=inside_chord,r_outer=r_outer,y_outer=y_outer,drive=drive,
+            conservative_source=conservative_source,normal_order=normal_order,nt=nt),
+            dims,src,cp,cm)
+        saved=ck.load()
+        if saved is not None:
+            start_it,U,P,M,prev_wall,now_wall,prev_walldot,now_walldot=saved
+        ck.start()
+    for it in range(start_it,nt+1):
         if it==nt-1:prev_wall=U[:,0,:].copy()
         if it==nt:now_wall=U[:,0,:].copy()
         T=T0+it*dt
@@ -212,6 +223,12 @@ def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
         U[:]=(U+2*(U2+dt*dU))/3
         P[:]=(P+2*(P2+dt*dP))/3
         M[:]=(M+2*(M2+dt*dM))/3
+        if checkpoint is not None:
+            cursor=it+1
+            if cursor%checkpoint_every==0 or cursor==nt+1 or ck.expired(budget):
+                ck.save(cursor,U,P,M,prev_wall,now_wall,prev_walldot,now_walldot)
+                if cursor<nt+1 and ck.expired(budget):
+                    raise InterruptedError(f'checkpoint saved at step {cursor}/{nt+1}')
     next_wall=U[:,0,:].copy()
     v,b,amp=coeff(T0+(nt+1)*dt)
     enforce(U,P,M,v,amp,src,normal_order)
