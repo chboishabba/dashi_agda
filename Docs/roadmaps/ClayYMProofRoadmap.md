@@ -1907,7 +1907,7 @@ Do not mark YM.REAL closed on SymPy or a source pragma alone.
 
 ## 20 November 2026 — current #1444 implementation and manuscript crosswalk
 
-Source baseline: `16924e8b8b15be75938e142c2bc8c37267d452a2`.
+Source baseline: `9af34466bb2689f4f6c05ca92563060bdc76e642`.
 Rounds R are chronological iterations; reuse later concrete producers before
 reopening an older obligation. The following are committed source changes,
 not new kernel acceptance receipts.
@@ -1919,42 +1919,84 @@ not new kernel acceptance receipts.
 | Native Bishop Lie coordinates and signed path source | 9ee4f5a | Source-written |
 | Reused Bishop reduced polynomial, physical factor two | 1785cf2 | Source-written |
 | Direct variational selection, canonical geometry; no legacy chart input | 16924e8 | Source-written |
+| Inhabited canonical radius-six walk certificate attached | 9af3446 | Source-written; no independent geometry input |
 | Configured P33 bordered trace, moving normal constraint and measure distinction | bdbffd9, a3b5d9a; scripts/check_ym_p33_bordered_trace_20261120.py | Prior exact rational execution; not physical CMP109 beta |
 
-### Current execution cut (not a new set of gate IDs)
+### Current execution cut (supersedes older packet lists; not new gate IDs)
 
-1. In `BalabanCMP98Path13BishopNativeSourceExact`, construct A(w), B(w) as native
-   Bishop limits of the root-free factorial series, w=4||Y||². Construct
-   positive-scalar quaternion log via arcsin(r)/r series in r², with an actual
-   Cauchy witness and same-object exp/log identity. Reuse the existing Bishop
-   completion and polynomial owners. For inverse use h=1-wB,
-   Delta=h²+wA², J=I-(A/Delta)ad+((A²-hB)/Delta)ad²; prove the inverse
-   on w≤1/4, not globally. The bound Delta≥529/576 is mathematical, not an
-   accepted native Bishop theorem. Do not assume decidable real zero.
-2. Instantiate the original Path13 variational theorem on the literal
-   fine/coarse action and gauge constraint; use the canonical radius-six
-   walk agreement and direct 74-link telescope (37/1024 threshold).
-   Source theorem existence/uniqueness can be standard-imported, but the
-   actual source identification and its hypotheses must be inhabited.
-   Existing NativeGeometry remains conditional on those inputs.
-3. Feed same-source Eq120 Q and its actual background derivative (do not
-   equate Eq119 intermediate QPrime with DQ by notation) to the CMP99
-   iterated/pivot solve, then the actual Wilson/background Hessian and
-   gauge-fixing mixed jets. Use the original CMP109 change-of-variables
-   Jacobian: distinguish induced volume from ambient delta measure.
-   Bordered trace algebra is reusable; a configured side-four transport
-   test is not a physical source-normalized beta calculation.
-4. Establish the uniform normalized Fourier/Brillouin beta enclosure,
-   including normal subspace motion and the actual measure contribution;
-   then consume it through the existing finite RG recurrence, full Wilson
-   clustering and same-source OS endpoints. No arbitrary all-Nat active
-   positive-beta history. No physical gate is promoted by a finite fixture.
+The active local cut is the **four remaining Path13/CMP109 attachments**, not
+a request to reconstruct the downstream RG, clustering and OS mathematics.
+The distinction between an existing theorem/compiler and its application to
+the selected original physical family is essential. R numbers are dates/order
+of research iterations, not independent theorem authorities.
 
-Authoritative Clay endpoint IDs unchanged: E1.01–07, D1.01–04, D2.01–05,
-N1.01–03, G1.01–04. E1/D1/D2/N1/G1 remain OPEN; retain full interacting
-fixed-support continuum, uniform physical covariance, common dense-core
-OS gap, noncollapse and compact-simple generality. Local Agda golden
-verification preferred; no new Agda/Nix acceptance observed in this session.
+**Already constructed / reuse first:**
+- Native Bishop real backend, rational coordinate embedding, signed bond
+  projection, literal quaternion adjoint action, physical factor-two
+  bracket, reduced polynomial operations, and Eq119/Eq120 on the same
+  two-carrier source (`BalabanCMP98Path13BishopNativeSourceExact`).
+- **Radius-six walk agreement is inhabited**:
+  `BalabanPath13RadiusSixWalkAgreementExact.radiusSixWalkAgreement`.
+  Commit 9af34466bb2689f4f6c05ca92563060bdc76e642 attaches it directly;
+  no per-bond embedding or walk-certificate input is outstanding.
+- Direct selection from the variational theorem and canonical geometry
+  are implemented; no independent selected-background equality or legacy
+  real principal-chart record is needed on the native route.
+- Existing Bishop coefficient modulus and ad-polynomial telescope, finite
+  Wilson 64-atom mixed jet, left/right trivialization, CMP99 pivot algebra,
+  restricted trace cancellation, positive-patch arithmetic and finite
+  remainder absorption are reusable. See `BalabanCMP109DirectBetaSourceRegression`.
+- Existing downstream RG/moment/clustering/OS compilers are not fresh
+  mathematical tasks merely because their inputs are conditional.
+
+| Remaining local attachment | Exact acceptance test |
+| --- | --- |
+| A. Native chart | Inhabit LocalChart and pointRelevant from the original contour family, reusing Bishop series limits and existing analytic identities. Supply only missing coefficient/log limit or chart-restricted inverse proof, not a fresh real carrier. |
+| B. Physical variational input | Supply NativeGeometry.variational, coarse and small on the literal Path13 fine action/constraints. Reuse Bałaban's existing theorem and attach its hypotheses; do not rebuild canonical geometry or assume rational minimizers without justification. |
+| C. Source-normalized restricted Gaussian | Attach Eq120 Q and the actual DQ to the existing CMP99 iterated/pivot and Wilson/gauge Hessian owners; identify the literal CMP109 Jacobian and normal subspace response on the same object. Eq119 QPrime alone is not proof of DQ. |
+| D. Uniform physical beta | Consume the existing trace/patch/remainder lemmas with the actual normalized physical Fourier enclosure, including the normal contribution and measure. A finite configured reference is not a uniform enclosure. |
+
+For A, the root-free fallback is A(w), B(w) factorial series, w=4||Y||²,
+and positive-scalar quaternion log via the arcsin(r)/r series in r².
+With h=1-wB, Delta=h²+wA² the inverse is
+J=I-(A/Delta)ad+((A²-hB)/Delta)ad²; on 0≤w≤1/4 the mathematical lower
+bound is Delta≥529/576. This is a fallback proof route, not a requirement
+to reproduce any already-existing Bishop limit or analytic identity.
+Do not impose global inverse-dexp or a decidable Bishop-real zero split.
+
+For B, reuse the direct 74-link telescope (37/1024 threshold) wherever
+its defect normalization matches the actual source. Squared chord and
+operator norm are different quantities; do not equate them by notation.
+For C, induced volume and ambient delta measure differ by the Gram
+determinant; use the actual source measure rather than selecting either
+by convenience. For D, use finite active-scale history, not an all-Nat
+positive-beta recurrence.
+
+### Downstream integration and endpoint acceptance (not additional local packets)
+
+Use the current R578 source-native route:
+R566/R568 selected projective Wilson projection and path factorization;
+R545 finite OS source; R559/R560 CMP119 moments to OS05;
+R576 original Wilson WEXT; R577 same reconstructed-H transfer;
+R571 compact-simple source; R563 same-family Ward kernel.
+The direct R333 route in `YMClayDirectSourceOSMassGapFrontierExact`
+already composes H1/R295/R313/R296 with physical OS transfer.
+The stronger historical F1/F3/F4/Mosco/trace-norm route is not mandatory.
+Do not schedule it as another prerequisite.
+
+After A–D, run the existing downstream consumers on the same original
+family and inspect their actual remaining typed inputs; reuse any later
+inhabitants before scheduling new proofs. This is an integration/acceptance
+checkpoint, not evidence that A–D alone imply every downstream hypothesis,
+nor a claim that all downstream physical inputs are absent. No exhaustive
+cross-branch inhabitant audit has been completed.
+
+Authoritative Clay endpoint IDs E1.01–07, D1.01–04, D2.01–05, N1.01–03,
+G1.01–04 remain acceptance criteria, not a count of independent new tasks.
+No new complete physical endpoint or exact-head Agda acceptance has been
+observed. Keep mathematical status, source implementation, same-object
+attachment and kernel certification separate. Local Agda is golden;
+SymPy is supplemental executable verification where Agda is unavailable.
 
 ### Existing manuscript corpus (verified on this branch)
 
