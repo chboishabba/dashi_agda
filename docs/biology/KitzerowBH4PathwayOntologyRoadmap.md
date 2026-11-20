@@ -835,3 +835,20 @@ Original geometric/cubical companion PR #1471 has now source-written exact execu
 Companion biology PR #1471 now has a source-written original 27-voxel/54-bond/6-face ionic history theorem candidate `original369LocalSignedContinuityExact` in new `Biological369MixedNativeFaceSignedContinuityExact.agda`, imported into its Round-23 Golden and acceptance script. It consumes original geometric incident edges and actual face-selected exchange currents, derives signed charge from separate cation/anion ledgers and proves chronological balance by natural-number induction in source. No exact-head Agda checker has run: mark as **kernel pending**.
 
 The high-value P0 source obligation is still to recover/execute the original byte-pinned 29×12 Rhea certificate, carry its 3 nonfinite residuals and all 29 separately measured exchange rates into a physical 3D model; then construct `sameSourcePhysicalReactionTransportStep`. P1–P3 phenotype, stochastic quotient, empirical evidence and the stacked root remain OPEN. Do not confuse source-written transport conservation with measured permeability or a proved clinical Kitzerow allocation mechanism.
+
+
+## 2026-11-21 atomic geometry / KK / proteomics extension (MG01–MG09)
+
+User-directed explanatory order: native atomic geometry, quantum state and proper-frame symmetry first; molecular observables second. Reuse merged #901 same-sequence 4AKE/1AKE separating pair, #1159 original BH4 panel (16 proteins, 38 PDB structures, 526 SIFTS mappings, 932 kinetic parameter objects), #1471 native spatial transport, and #1241/#1460 conditional KK/observer donors. These are donor references, not verified cross-branch imports. Preserve KPO and D0–D6 gates.
+
+- MG01 OPEN: recover original atomic carrier and its precise geometric-to-electronic observable map; separate representation from physical derivation.
+- MG02 OPEN: byte-pinned nonpathogenic 4AKE/1AKE coordinate replay with explicit units, missing atoms and frame provenance.
+- MG03 OPEN: proper-frame invariant distances, signed tetrahedral chirality and orientation; reflection negative control; no identification of a spatial coordinate with the KK fibre.
+- MG04 OPEN: same-inventory/different-conformation separating pair and observer-specific geometric residual; certify reconstruction cost against unreduced coordinates.
+- MG05 OPEN: distinguish chemical bond, interaction and functional observation graphs; demonstrate nonfactorability using original adenylate kinase pair.
+- MG06 OPEN: conditional KK metric/connection reduction to the same physical quantum Hamiltonian, then independently justified electronic-to-molecular energy surface. Retain #1241/#1460 physical metric, coupling, radion and same-H gates; no atomic spectra inferred merely from 369 counts.
+- MG07 OPEN: proteomics observation operators for peptide identity/abundance, intact proteoforms, and structural observations; peptide-to-protein ambiguity and missingness negative controls. Reuse BH4 SIFTS identity and assay-context gates; no claim of existing LC-MS acceptance.
+- MG08 OPEN: same-object BH4 abundance/compartment/time context to existing original reaction and PNP carriers; no invented fluxes.
+- MG09 OPEN: held-out nonpathogenic structure/measurement comparison, compression and reconstruction bounds and exact-head safe Agda local acceptance.
+
+The November 2026 adaptive-impermeability report motivates the abstract distinction of structural versus functional observations; antibiotic mechanisms are literature examples, not a pathogen-specific predictive or optimization workstream. First implementation tranche: general proper-frame/chirality and observation nonfactorability fixtures on nonpathogenic or synthetic geometry. No resistance engineering, atomistic pathogen simulation, physical KK closure, or clinical promotion. All MG gates remain OPEN until source and local execution receipts are recorded.
