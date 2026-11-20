@@ -24,6 +24,11 @@ import DASHI.Physics.YangMills.BalabanCMP98Equation119LiteralPathRound147Exact a
 import DASHI.Physics.YangMills.BalabanCMP98Equation119TwoCarrierSelectedBondExact as Two
 import DASHI.Physics.YangMills.BalabanCMP98Path13PerturbationCarrierWeldExact as Pert
 import DASHI.Physics.YangMills.BalabanCMP98Path13TwoCarrierSourceFamilyExact as Family
+import DASHI.Physics.YangMills.BalabanPath13BackgroundGaugeAdjointDefectExact as Background
+import DASHI.Physics.YangMills.BalabanPath13CanonicalBondCenteredEmbeddingExact as Canonical
+import DASHI.Physics.YangMills.BalabanClayGate4CMP109CenteredTorusBijectionExact as Bijection
+import DASHI.Physics.YangMills.BalabanCMP98Equation119CanonicalCoarseSegmentRound158Exact as R158
+import DASHI.Physics.YangMills.BalabanClayGate4BackgroundFieldVariationalTheoremExact as Variational
 import DASHI.Physics.YangMills.BalabanRationalUnitQuaternionRealLieAdjointExact as Adj
 import DASHI.Physics.YangMills.BalabanCMP98Path13PhysicalPeriodicRealizationRound192Exact as R192
 import DASHI.Physics.YangMills.BalabanSU2RationalWilsonLargeFieldGapExact as SU2
@@ -78,19 +83,46 @@ record LocalChart : Set₁ where
       jPlus y (dexpPlus y v) ≈v v
 open LocalChart public
 
+-- Avoid the legacy Path13FamilyGeometry record: it contains a legacy-real
+-- principal chart even though the contour construction never reads it.
+-- Select the original variational background and canonical geometry directly.
+Path13Variational : Set → Set₁
+Path13Variational C = Variational.BackgroundFieldVariationalTheorem
+  C Background.RationalSU2Background13 Family.Path13PositiveBond ℚ
+
+record NativeGeometry (C : Set) : Set₁ where
+  field
+    variational : Path13Variational C
+    coarse : C
+    small : Variational.CoarseSmallField variational coarse
+    walkCertificate : Bijection.CenteredTorusWalkAgreementCertificate R158.sourceRadius
+open NativeGeometry public
+
+nativeBackground : ∀ {C} → NativeGeometry C → Background.RationalSU2Background13
+nativeBackground g = Variational.background (variational g) (coarse g) (small g)
+
+nativeGeometryAt : ∀ {C} → NativeGeometry C → Family.Path13PositiveBond →
+  Geometry.Equation119GeometrySource R192.path13PeriodicIndex
+    SU2.RationalUnitQuaternion Group.rationalSU2ExactLinkGroup
+nativeGeometryAt g bond = record
+  { Geometry.Equation119GeometrySource.realization =
+      λ _ → R192.path13PhysicalPeriodicRealization (nativeBackground g)
+  ; Geometry.Equation119GeometrySource.minusEmbedding =
+      λ _ → Canonical.canonicalEmbeddingAtSite (walkCertificate g) (Carrier.first bond)
+  ; Geometry.Equation119GeometrySource.coarseSegment = λ _ → Family.coarseSegmentFor bond
+  }
+
 relativeUnit :
-  ∀ {CoarseField} → Family.Path13FamilyGeometry CoarseField →
+  ∀ {CoarseField} → NativeGeometry CoarseField →
   Family.Path13PositiveBond → Nat → Centered.CenteredBlockPoint4 6 →
   SU2.RationalUnitQuaternion
 relativeUnit geometry bond = Geometry.relativeContourElement
-  (Family.geometrySourceAt geometry bond)
+  (nativeGeometryAt geometry bond)
 
 record Inputs (CoarseField : Set) : Set₁ where
   field
-    geometry : Family.Path13FamilyGeometry CoarseField
+    geometry : NativeGeometry CoarseField
     chart : LocalChart
-    -- The source geometry is reused; this is the remaining actual chart
-    -- admission at the literal relative contour.
     pointRelevant : ∀ bond step point →
       Relevant chart
         (principalLog chart
@@ -114,18 +146,18 @@ sourceAt : ∀ {C} → Inputs C → Family.Path13PositiveBond →
 sourceAt inputs bond = record
   { Two.TwoCarrierEquation119PathData.realization =
       λ _ → R192.path13PhysicalPeriodicRealization
-        (Family.familyBackground (geometry inputs))
+        (nativeBackground (geometry inputs))
   ; Two.TwoCarrierEquation119PathData.bondComponent =
       λ _ perturbation site direction →
         embedLie (Pert.rationalSignedBondLie3
-          (Family.familyBackground (geometry inputs)) perturbation site direction)
+          (nativeBackground (geometry inputs)) perturbation site direction)
   ; Two.TwoCarrierEquation119PathData.adjointLink = λ _ → unitAdjoint
   ; Two.TwoCarrierEquation119PathData.scaleV = scale
   ; Two.TwoCarrierEquation119PathData.minusEmbedding =
-      Family.minusEmbeddingFor (geometry inputs) bond
+      Geometry.minusEmbedding (nativeGeometryAt (geometry inputs) bond)
   ; Two.TwoCarrierEquation119PathData.plusEmbedding =
       λ step → R163.translatedEmbedding
-        (Family.minusEmbeddingFor (geometry inputs) bond step)
+        (Geometry.minusEmbedding (nativeGeometryAt (geometry inputs) bond) step)
         (Family.coarseSegmentFor bond)
   ; Two.TwoCarrierEquation119PathData.coarseSegment =
       λ _ → Family.coarseSegmentFor bond
