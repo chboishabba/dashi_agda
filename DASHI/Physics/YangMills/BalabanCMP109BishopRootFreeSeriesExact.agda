@@ -23,6 +23,10 @@ import DASHI.Physics.YangMills.BalabanClayGate4BishopHalfRadiusRealEstimatesExac
 import DASHI.Physics.YangMills.BalabanBishopConcreteHalfBallSquareExact as Half
 import DASHI.Physics.YangMills.BalabanBishopFactorialPowerRecurrenceExact as Fact
 import DASHI.Mathematics.NumberTheory.FiniteNatFractionOrderExact as Frac
+import DASHI.Physics.YangMills.BalabanBishopConcreteSineCosineTermParityExact as Signs
+import DASHI.Physics.YangMills.BalabanBishopConcreteSineCosineInterlacingExact as Concrete
+import DASHI.Physics.YangMills.BalabanBishopAlternatingInterlacingFromDecreasingTermsExact as Alt
+import DASHI.Physics.YangMills.BalabanBishopAlternatingBracketFromMonotoneLimitsExact as Bracket
 
 term : (Nat → B.ℝ) → B.ℝ → Nat → B.ℝ
 term c x n = B._*_ (c n) (B.pow x n)
@@ -187,3 +191,109 @@ arcSeriesConverges : ∀ s inside →
   Seq._ConvergesTo_ (Seq.SeriesOf (term arcCoefficient s)) (arcSeries s inside)
 arcSeriesConverges s inside =
   proj₂ (convergent arcCoefficient s arcNN arcStep inside)
+
+------------------------------------------------------------------------
+-- Bounds on the SAME limits, using the existing alternating-limit theorem.
+------------------------------------------------------------------------
+
+powNegEven : ∀ w n →
+  B._≃_ (B.pow (B.- w) (Alt.double n)) (B.pow w (Alt.double n))
+powNegEven w zero = BP.≃-refl
+powNegEven w (suc n) =
+  BP.≃-trans (Fact.powTwoStep (B.- w) (Alt.double n))
+    (BP.≃-trans
+      (BP.*-cong (powNegEven w n) (Signs.negatedSquareEquivalentSquare w))
+      (BP.≃-symm (Fact.powTwoStep w (Alt.double n))))
+
+powNegOdd : ∀ w n →
+  B._≃_ (B.pow (B.- w) (suc (Alt.double n)))
+          (B.- (B.pow w (suc (Alt.double n))))
+powNegOdd w n =
+  BP.≃-trans (BP.*-congʳ (powNegEven w n))
+    (let open BP.ℝ-Solver
+     in solve 2 (λ p x → p ⊗ (⊝ x) ⊜ ⊝ (p ⊗ x))
+       BP.≃-refl (B.pow w (Alt.double n)) w)
+
+evenSigned : ∀ c w n →
+  B._≃_ (term c (B.- w) (Alt.double n)) (term c w (Alt.double n))
+evenSigned c w n = BP.*-congˡ (powNegEven w n)
+
+oddSigned : ∀ c w n →
+  B._≃_ (term c (B.- w) (suc (Alt.double n)))
+    (B.- (term c w (suc (Alt.double n))))
+oddSigned c w n =
+  BP.≃-trans (BP.*-congˡ (powNegOdd w n))
+    (let open BP.ℝ-Solver
+     in solve 2 (λ a p → a ⊗ (⊝ p) ⊜ ⊝ (a ⊗ p))
+       BP.≃-refl (c (suc (Alt.double n))) (B.pow w (suc (Alt.double n))))
+
+positiveTermNN : ∀ c w n →
+  (∀ k → B.NonNegative (c k)) → B.NonNegative w →
+  B.NonNegative (term c w n)
+positiveTermNN c w n cn wn =
+  BP.nonNegx,y⇒nonNegx*y (cn n) (Concrete.powNonnegative wn n)
+
+quarterLeOne : B._≤_ Half.bishopQuarter B.1ℝ
+quarterLeOne = BP.p≤q⇒p⋆≤q⋆ Half.quarter 1ℚᵘ
+  (Extra.q≤r⇒+p/r≤+p/q 1 1 4 (s≤s z≤n))
+
+alternatingData :
+  ∀ c w (cn : ∀ k → B.NonNegative (c k))
+    (cs : ∀ k → B._≤_ (c (suc k)) (c k)) →
+  B.NonNegative w →
+  B._≤_ (B.∣_∣ (B.- w)) Half.bishopQuarter →
+  Alt.AlternatingDecreasingSeriesData
+alternatingData c w cn cs wn inside = record
+  { term = term c (B.- w)
+  ; magnitude = λ n → B.∣_∣ (term c (B.- w) n)
+  ; representedLimit = Seq.lim (convergent c (B.- w) cn cs inside)
+  ; magnitudeNonnegative = λ n → BP.nonNeg∣x∣ (term c (B.- w) n)
+  ; magnitudeDecreasing = λ n →
+      BP.≤-trans (termRatio c (B.- w) n cn cs inside)
+        (BP.≤-respʳ-≃ (BP.*-identityˡ (B.∣_∣ (term c (B.- w) n)))
+          (BP.*-monoʳ-≤-nonNeg quarterLeOne (BP.nonNeg∣x∣ (term c (B.- w) n))))
+  ; evenTermIsPositiveMagnitude = λ n →
+      let eq = evenSigned c w n
+          absEq = BP.≃-trans (BP.∣-∣-cong eq)
+            (BP.nonNegx⇒∣x∣≃x (positiveTermNN c w (Alt.double n) cn wn))
+      in BP.≃-trans eq (BP.≃-symm absEq)
+  ; oddTermIsNegativeMagnitude = λ n →
+      let eq = oddSigned c w n
+          absEq = BP.≃-trans (BP.∣-∣-cong eq)
+            (BP.≃-trans BP.∣-x∣≃∣x∣
+              (BP.nonNegx⇒∣x∣≃x
+                (positiveTermNN c w (suc (Alt.double n)) cn wn)))
+      in BP.≃-trans eq (BP.-‿cong (BP.≃-symm absEq))
+  ; seriesConvergesToRepresentedLimit =
+      proj₂ (convergent c (B.- w) cn cs inside)
+  }
+
+alternatingLimitNonnegative :
+  ∀ c w cn cs wn inside →
+  B._≤_ B.0ℝ (Seq.lim (convergent c (B.- w) cn cs inside))
+alternatingLimitNonnegative c w cn cs wn inside =
+  Bracket.lowerPartialBelowRepresentedLimit
+    (Alt.alternatingInterlacingData (alternatingData c w cn cs wn inside)) zero
+
+alternatingLimitBelowFirst :
+  ∀ c w cn cs wn inside →
+  B._≤_ (Seq.lim (convergent c (B.- w) cn cs inside)) (c zero)
+alternatingLimitBelowFirst c w cn cs wn inside =
+  BP.≤-respʳ-≃
+    (BP.≃-trans (BP.+-identityˡ (term c (B.- w) zero))
+      (BP.*-identityʳ (c zero)))
+    (Bracket.representedLimitBelowUpperPartial
+      (Alt.alternatingInterlacingData (alternatingData c w cn cs wn inside)) zero)
+
+aNonnegative : ∀ w (wn : B.NonNegative w) inside →
+  B._≤_ B.0ℝ (aSeries (B.- w) inside)
+aNonnegative w wn inside = alternatingLimitNonnegative aCoefficient w aNN aStep wn inside
+
+bNonnegative : ∀ w (wn : B.NonNegative w) inside →
+  B._≤_ B.0ℝ (bSeries (B.- w) inside)
+bNonnegative w wn inside = alternatingLimitNonnegative bCoefficient w bNN bStep wn inside
+
+bBelowOneSixth : ∀ w (wn : B.NonNegative w) inside →
+  B._≤_ (bSeries (B.- w) inside) (B._⋆ (+ 1 / 6))
+bBelowOneSixth w wn inside =
+  alternatingLimitBelowFirst bCoefficient w bNN bStep wn inside
