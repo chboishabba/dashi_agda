@@ -12,6 +12,9 @@ open import Data.Rational.Base using (ℚ)
 import Real as B
 import RealProperties as BP
 import DASHI.Physics.YangMills.BalabanCMP109BishopPrincipalLogAdPolynomialExact as Poly
+import DASHI.Physics.YangMills.BalabanCMP109BishopRootFreeSeriesExact as Series
+import DASHI.Physics.YangMills.BalabanBishopConcreteHalfBallSquareExact as Half
+open import Data.Unit using (⊤)
 open import Data.Product using (_,_; proj₁; proj₂)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Unnormalised using (_/_)
@@ -76,12 +79,12 @@ unitAdjoint u = matrixAction (Adj.unitAdjointRationalMatrix u)
 -- A chart-specific local calculus, not an assertion of global invertibility.
 record LocalChart : Set₁ where
   field
-    principalLog : SU2.RationalUnitQuaternion → BishopLie
-    dexpPlus adjointExp : BishopLie → BishopLie → BishopLie
+    LogAdmissible : SU2.RationalUnitQuaternion → Set
+    principalLog : (q : SU2.RationalUnitQuaternion) → LogAdmissible q → BishopLie
     Relevant : BishopLie → Set
-    jPlus : (y : BishopLie) → Relevant y → BishopLie → BishopLie
+    dexpPlus adjointExp jPlus : (y : BishopLie) → Relevant y → BishopLie → BishopLie
     inverseOnChart : ∀ y (inChart : Relevant y) v →
-      jPlus y inChart (dexpPlus y v) ≈v v
+      jPlus y inChart (dexpPlus y inChart v) ≈v v
 open LocalChart public
 
 -- Avoid the legacy Path13FamilyGeometry record: it contains a legacy-real
@@ -119,25 +122,38 @@ relativeUnit :
 relativeUnit geometry bond = Geometry.relativeContourElement
   (nativeGeometryAt geometry bond)
 
+PointAdmission : ∀ {C} → NativeGeometry C → LocalChart → Set
+PointAdmission g ch = ∀ bond step point → LogAdmissible ch (relativeUnit g bond step point)
+
+pointYFrom : ∀ {C} (g : NativeGeometry C) (ch : LocalChart) →
+  PointAdmission g ch → Family.Path13PositiveBond → Nat →
+  Centered.CenteredBlockPoint4 6 → BishopLie
+pointYFrom g ch admission bond step point =
+  principalLog ch (relativeUnit g bond step point) (admission bond step point)
+
+outerYFrom : ∀ {C} (g : NativeGeometry C) (ch : LocalChart) →
+  PointAdmission g ch → Family.Path13PositiveBond → Nat → BishopLie
+outerYFrom g ch admission bond step c =
+  sumBishop (Carrier.elements (Centered.centeredBlockFinite 6))
+    (λ point → scale R147.siteWeightℚ (pointYFrom g ch admission bond step point) c)
+
 record Inputs (CoarseField : Set) : Set₁ where
   field
     geometry : NativeGeometry CoarseField
     chart : LocalChart
+    pointLogAdmissible : PointAdmission geometry chart
     pointRelevant : ∀ bond step point →
-      Relevant chart
-        (principalLog chart
-          (relativeUnit geometry bond step point))
+      Relevant chart (pointYFrom geometry chart pointLogAdmissible bond step point)
+    outerRelevant : ∀ bond step →
+      Relevant chart (outerYFrom geometry chart pointLogAdmissible bond step)
 open Inputs public
 
 pointY : ∀ {C} → Inputs C → Family.Path13PositiveBond → Nat →
   Centered.CenteredBlockPoint4 6 → BishopLie
-pointY inputs bond step point =
-  principalLog (chart inputs) (relativeUnit (geometry inputs) bond step point)
+pointY inputs = pointYFrom (geometry inputs) (chart inputs) (pointLogAdmissible inputs)
 
 outerY : ∀ {C} → Inputs C → Family.Path13PositiveBond → Nat → BishopLie
-outerY inputs bond step c =
-  sumBishop (Carrier.elements (Centered.centeredBlockFinite 6))
-    (λ point → scale R147.siteWeightℚ (pointY inputs bond step point) c)
+outerY inputs = outerYFrom (geometry inputs) (chart inputs) (pointLogAdmissible inputs)
 
 sourceAt : ∀ {C} → Inputs C → Family.Path13PositiveBond →
   Two.TwoCarrierEquation119PathData bishopSignedCarrier
@@ -166,13 +182,16 @@ sourceAt inputs bond = record
       R162.periodicSegmentCommutation R192.path13PeriodicIndex
   ; Two.TwoCarrierEquation119PathData.dexpMinusOuter =
       λ step → dexpPlus (chart inputs) (outerY inputs bond step)
+        (outerRelevant inputs bond step)
   ; Two.TwoCarrierEquation119PathData.inverseDexpMinusAt =
       λ step point → jPlus (chart inputs) (pointY inputs bond step point)
         (pointRelevant inputs bond step point)
   ; Two.TwoCarrierEquation119PathData.adjointExpAt =
       λ step point → adjointExp (chart inputs) (pointY inputs bond step point)
+        (pointRelevant inputs bond step point)
   ; Two.TwoCarrierEquation119PathData.adjointExpOuter =
       λ step → adjointExp (chart inputs) (outerY inputs bond step)
+        (outerRelevant inputs bond step)
   }
 
 fieldFamily : ∀ {C} → Inputs C →
@@ -193,7 +212,8 @@ equation120 inputs = Two.assembledEquation120QSource (fieldFamily inputs)
 pointInverse : ∀ {C} (inputs : Inputs C) bond step point v →
   jPlus (chart inputs) (pointY inputs bond step point)
     (pointRelevant inputs bond step point)
-    (dexpPlus (chart inputs) (pointY inputs bond step point) v) ≈v v
+    (dexpPlus (chart inputs) (pointY inputs bond step point)
+      (pointRelevant inputs bond step point) v) ≈v v
 pointInverse inputs bond step point =
   inverseOnChart (chart inputs) (pointY inputs bond step point)
     (pointRelevant inputs bond step point)
@@ -272,10 +292,11 @@ fromReducedChart :
     rootFreeJplus beta y (rootFreeDexp a b y v) ≈v v) →
   LocalChart
 fromReducedChart log a b beta relevant inverse = record
-  { principalLog = log
-  ; dexpPlus = rootFreeDexp a b
+  { LogAdmissible = λ _ → ⊤
+  ; principalLog = λ q _ → log q
+  ; dexpPlus = λ y _ → rootFreeDexp a b y
   ; jPlus = λ y _ → rootFreeJplus beta y
-  ; adjointExp = rootFreeAdjointExp a b
+  ; adjointExp = λ y _ → rootFreeAdjointExp a b y
   ; Relevant = relevant
   ; inverseOnChart = inverse
   }
@@ -310,10 +331,104 @@ fromPositiveReducedChart :
   (SU2.RationalUnitQuaternion → BishopLie) →
   (a b : BishopLie → B.ℝ) → LocalChart
 fromPositiveReducedChart log a b = record
-  { principalLog = log
-  ; dexpPlus = rootFreeDexp a b
-  ; adjointExp = rootFreeAdjointExp a b
+  { LogAdmissible = λ _ → ⊤
+  ; principalLog = λ q _ → log q
+  ; dexpPlus = λ y _ → rootFreeDexp a b y
+  ; adjointExp = λ y _ → rootFreeAdjointExp a b y
   ; Relevant = positiveReducedChart a b
   ; jPlus = nativeReducedInverse a b
   ; inverseOnChart = nativeReducedInverseCancels a b
+  }
+
+------------------------------------------------------------------------
+-- Fully constructed coefficient values, bounds and inverse cancellation
+-- on the selected small-radius chart. Only geometric chart admission
+-- remains an input. Functional identification with the source Frechet
+-- derivative and the exp-log identity are separate semantic theorems.
+------------------------------------------------------------------------
+
+contourImaginary : SU2.RationalUnitQuaternion → Poly.Vec3B
+contourImaginary q =
+  Poly.vec3B (Scalar.rationalCoordinateToBishop (SU2.imagI q))
+    (Scalar.rationalCoordinateToBishop (SU2.imagJ q))
+    (Scalar.rationalCoordinateToBishop (SU2.imagK q))
+
+contourImagSq : SU2.RationalUnitQuaternion → B.ℝ
+contourImagSq q = Poly.generatorSq (contourImaginary q)
+
+record SmallContour (q : SU2.RationalUnitQuaternion) : Set where
+  field
+    positiveScalar : B._<_ B.0ℝ (Scalar.rationalCoordinateToBishop (SU2.realPart q))
+    imaginarySqInside : B._≤_ (B.∣_∣ (contourImagSq q)) Half.bishopQuarter
+open SmallContour public
+
+seriesPrincipalLog : (q : SU2.RationalUnitQuaternion) → SmallContour q → BishopLie
+seriesPrincipalLog q p =
+  fromVec3 (Poly.scale3 (Series.arcSeries (contourImagSq q) (imaginarySqInside p))
+    (contourImaginary q))
+
+physicalW : BishopLie → B.ℝ
+physicalW y = Poly.generatorSq (physicalGenerator y)
+
+record SmallLie (y : BishopLie) : Set where
+  field
+    wNonnegative : B._≤_ B.0ℝ (physicalW y)
+    wBelowQuarter : B._≤_ (physicalW y) Half.bishopQuarter
+open SmallLie public
+
+signedWInside : ∀ y → SmallLie y →
+  B._≤_ (B.∣_∣ (B.- (physicalW y))) Half.bishopQuarter
+signedWInside y p =
+  BP.≤-respˡ-≃
+    (BP.≃-trans BP.∣-x∣≃∣x∣ (BP.0≤x⇒∣x∣≃x (wNonnegative p)))
+    (wBelowQuarter p)
+
+aAt bAt : (y : BishopLie) → SmallLie y → B.ℝ
+aAt y p = Series.aSeries (B.- (physicalW y)) (signedWInside y p)
+bAt y p = Series.bSeries (B.- (physicalW y)) (signedWInside y p)
+
+seriesDexp : (y : BishopLie) → SmallLie y → BishopLie → BishopLie
+seriesDexp y p = reducedApply (aAt y p) (bAt y p) y
+
+seriesAdjoint : (y : BishopLie) → SmallLie y → BishopLie → BishopLie
+seriesAdjoint y p =
+  reducedApply (Poly.reducedH (physicalGenerator y) (bAt y p)) (aAt y p) y
+
+seriesDeltaPositive : ∀ y (p : SmallLie y) →
+  B._<_ B.0ℝ (Poly.reducedDelta (physicalGenerator y) (aAt y p) (bAt y p))
+seriesDeltaPositive y p =
+  let wn = BP.0≤x⇒nonNegx (wNonnegative p)
+      inside = signedWInside y p
+  in Poly.reducedDeltaPositiveFromBounds (physicalGenerator y) (aAt y p) (bAt y p)
+    (wNonnegative p) (wBelowQuarter p)
+    (Series.aNonnegative (physicalW y) wn inside)
+    (Series.bNonnegative (physicalW y) wn inside)
+    (Series.bBelowOneSixth (physicalW y) wn inside)
+
+seriesInverse : (y : BishopLie) → SmallLie y → BishopLie → BishopLie
+seriesInverse y p v =
+  fromVec3 (Poly.reducedInverse (physicalGenerator y) (aAt y p) (bAt y p)
+    (seriesDeltaPositive y p) (toVec3 v))
+
+seriesInverseCancels : ∀ y (p : SmallLie y) v →
+  seriesInverse y p (seriesDexp y p v) ≈v v
+seriesInverseCancels y p v P.coordinateX =
+  proj₁ (Poly.reducedLeftInverse (physicalGenerator y) (aAt y p) (bAt y p)
+    (seriesDeltaPositive y p) (toVec3 v))
+seriesInverseCancels y p v P.coordinateY =
+  proj₁ (proj₂ (Poly.reducedLeftInverse (physicalGenerator y) (aAt y p) (bAt y p)
+    (seriesDeltaPositive y p) (toVec3 v)))
+seriesInverseCancels y p v P.coordinateZ =
+  proj₂ (proj₂ (Poly.reducedLeftInverse (physicalGenerator y) (aAt y p) (bAt y p)
+    (seriesDeltaPositive y p) (toVec3 v)))
+
+nativeSeriesChart : LocalChart
+nativeSeriesChart = record
+  { LogAdmissible = SmallContour
+  ; principalLog = seriesPrincipalLog
+  ; Relevant = SmallLie
+  ; dexpPlus = seriesDexp
+  ; adjointExp = seriesAdjoint
+  ; jPlus = seriesInverse
+  ; inverseOnChart = seriesInverseCancels
   }
