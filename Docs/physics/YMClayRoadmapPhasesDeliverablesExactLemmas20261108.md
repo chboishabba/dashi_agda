@@ -1072,3 +1072,14 @@ quaternion or a proved exponential identification. Same-series unit norm,
 Cauchy product/exp-log identification, strict chord transport, actual CMP102
 preceding-scale domain and mixed-scale incidence remain OPEN.
 No radius reduction or new analytic authority. Source-written; kernel pending.
+
+
+### 2026-11-20 — CMP102 complementary factorial coefficient reconciliation
+
+Pinned donor: PR #1529 8fd6176551c643e72700a1410fb32d9b69e0480f, DASHI/Foundations/BishopFiniteEvenOddSeriesReindexExact.agda (originalBishopFiniteEvenOddSumReindex). Its only repository-module dependency, BalabanClayGate4BishopHalfRadiusRealEstimatesExact, has identical blob e5a4cf2f871fb4ce2892ed7a0183257b331b5848 on both branches. Transfer the donor unchanged. PR #1478 is merged; do not assume its complete dependency closure is present on this older YM branch. The local BishopExponentialBinomialCoefficientExact already supplies embeddedInverseFactorialProductBinomial and expConvolutionTermBinomial; prefer these real owners to importing the complex capstone.
+
+Write z=-w_q, C=1+za, S=1+zb using the actual shifted aSeries/bSeries. For n>=1 the coefficient of C^2-zS^2 is the signed factorial convolution at degree 2n, hence zero by (1-1)^(2n). The finite parity split has 2n+1 terms: apply the donor at n and append the final even endpoint. Shift the zero positive-degree coefficients down BEFORE limit transport; never divide by z. This proves the intended scalar identity 1-2A+w_q(A^2-2B)+w_q^2 B^2=0 including w_q=0, once the original same-series Cauchy product and shifted limit are attached. Unit norm then yields chord squared = 2w_q A. Alternating bound 0<=A<=1/2 on the admitted w_q<=1/16 is a separate proof target.
+
+Shared Paper 9 observation: multiplication by t in R[t]/(t^2-z) has matrix [[0,z],[1,0]], and conjugate norm a^2-zb^2. The exponential matrix has determinant C^2-zS^2=1. At z=0 the generator is nilpotent. Monster cyclotomic norm a^2-ab+b^2 is the analogous quadratic norm, not a representation-specific proof dependency. No new carrier required.
+
+Acceptance: unchanged parity donor source transfer only; signed specialization, shifted Cauchy limit, native quaternion unit norm, chord, exponential identification and actual physical CMP102 domain attachment OPEN. No kernel/CI acceptance or Clay promotion; original physical radius retained.
