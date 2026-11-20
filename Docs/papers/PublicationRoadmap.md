@@ -335,3 +335,8 @@ External promotion requires:
 - independent peer review;
 - journal or equivalent external acceptance where relevant;
 - the applicable Clay Mathematics Institute waiting and eligibility procedures.
+
+
+## LXXVII Paper 2 status (2026-11-20)
+
+Independent local refinement screen completed (12/12 finite diagnostic executions, both normal orders). Temporal and joint-domain changes are relatively small, but radial/normal and joint grid changes in curvature are large; strong trace convergence is not established. The canonical physics ledger owns numeric receipts and next staged source/field/jet refinement. Paper 2 remains a standalone working draft, not live-core promotion; see `drafts/Paper2ConservativeMovingBoundaryDraft.md`. Paper 8 may cite only the finite incidence/adjoint architecture, not continuum physics.

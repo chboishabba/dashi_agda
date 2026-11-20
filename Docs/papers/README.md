@@ -109,3 +109,5 @@ Suggested arXiv primary classifications:
 
 Everything else under `papers/` is support, draft, or legacy material unless a
 later router explicitly promotes it.
+
+Paper 2 working manuscript: `drafts/Paper2ConservativeMovingBoundaryDraft.md` (LXXVII finite diagnostic and refinement boundary; not live-core promotion).
