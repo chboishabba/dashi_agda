@@ -561,3 +561,43 @@ Reopened actual master source blobs:
 - JInvariantAnalyticNormalizedKleinAdapterExact 2fb21df27a4b26c8d9ede85dbbe444b968011d36: standardJInvariant, standardJReflects, standardJConjugationFixed, standardAnalyticKleinJIsStandardJ. No duplicate quotient or renderer needed.
 
 scripts/check_klein_quotient_weld.py committed at e9d105f5dd5042d22c14b1356c83356e319801ae. Executed locally: 4 universal symbolic identities and 240 exact nonsingular homogeneous integer quotient cases PASS, 0.053072872 s (single run). Integral Legendre normalization (16Q)^3/(16V^2)=256Q^3/V^2; weight-12 scale cancellation; exact quotient perturbation identity; inverse witness uniqueness algebra u-v=u(1-dv)-v(1-du). Identities are on commutative fields with stated nonzero denominators, not an Agda proof of field authority or carrier equivalence. Existing Klein construction is not a missing abstraction. Remaining concrete cut: instantiate the native Bishop proof-relevant quotient using its own inverse laws and actual series limits, transport apartness from quantitative native certificates or verified classical semantic reflection, connect to existing normalized renderer. ConstructedComplex and vendor Bishop are not definitionally the same. Lean Route B classical target and native Agda replay stay distinct. CM integrality/class degree and CH2 still OPEN. No compiler receipt acquired.
+
+
+## 20 November — native Bishop Klein consumer and CM163 relative apartness
+Prior head ac5b235afca0. Actual source donors at ref:
+BishopComplexNonzeroFromComponentExact ef7859e39d264f69924fbf2aef021ae1bd9b5492,
+JInvariantBishopUnitDiskEisensteinCompletionExact ad240520b86b33cdfa9a2ca90facfac1a8bc8ddb,
+JInvariantEisensteinBishopSetoidSeriesExact 2c0ef9515e4c1dfd278feaf6f71bc607e2a8350c.
+Native reciprocal and multiplyReciprocal already exist in
+BishopComplexReciprocalExact. Existing CM dyadic script blob
+8581a684cfb6ba6bfbfa45adbf6bfe01e9617258 already checks disc.hi<0 and
+half-integer enclosure; do not claim that result as new.
+
+New source JInvariantBishopNativeProofRelevantKleinExact.agda
+commit f796c6eb3505fa3aa0afe290c6e70353d6cca2ef directly composes
+completeBishopUnitDiskEisenstein, scale by embedded 1/1728, original
+reciprocalC, and ProofRelevantKleinJAlgebra. Disk data fixed in module
+parameters so Point remains Set (a witness of nonzero Delta). No
+constructed-complex carrier conversion. negativeDeltaWitness uses
+complexNonzeroFromRealApart (inj1 negative); jFromNegativeDelta consumes
+literal real component negativity. Source-written, uncompiled.
+
+New scripts/check_cm163_delta_apartness.py commit
+3f23203b7a91195ad352202e2e6dc8acff240e60 locally executed identical
+source PASS 0.02353068 s. For q=-r, 0<r<2^-36 follows from pi>3,
+sqrt163>12, exp(1)>2. For n>=2 sigma_k(n)<=n^(k+1), successive
+majorant ratio <=(3/2)^(k+1)r<1/2. Thus u=E4-1, v=E6-1 satisfy
+|u+240r|<=7680r^2, |v-504r|<=64512r^2, |u|<=241r, |v|<=505r.
+Expand 1728 Delta=3u-2v+3u^2+u^3-v^2. Relative remainder
+|Delta+r|/r <= K*r/1728 with K=3*7680+2*64512+3*241^2+
+241^3/2^36+505^2<600000. Exact rational checks prove bound <1/2;
+uniform upper value approximately 4.896e-9. Real Delta<-r/2.
+This is an ordinary mathematical uniform apartness proof conditional on
+original q=-exp(-pi sqrt163) and the actual series semantics. No eta
+identity or high-precision subtraction needed. SymPy verifies polynomial
+expansion and rational side conditions, not native order transport.
+Next native gates: instantiate original q point/radius, prove real phase
+and tail inequalities on original Bishop limits, apply negativeDeltaWitness.
+CM class-number-one enumeration and half-integer window already exist;
+CM integrality/class polynomial theorem and CH2 remain open.
+No new kernel receipt, no CI. Classical series/CM attribution retained.
