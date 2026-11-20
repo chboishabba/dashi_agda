@@ -574,3 +574,62 @@ Local gp/sage absent, ldconfig no libpari/libflint, FriCAS absent;
 no external runtime benchmark. Next generalize CRT radius for small
 p and root enclosure, compare Masser formula and run pinned external
 baseline in user environment. No Agda/CI execution.
+
+
+## 20 November — Masser normalization and rational-only cubic jet
+
+Primary text inspected: Bruinier, Ono, Sutherland, Class polynomials for
+nonholomorphic modular functions, arXiv:1301.5672v3 (28 Jan 2015),
+pp.2,9–10, eqs. (1.2), (2.6)–(2.9), Lemma 2.3. The authors credit
+David Masser, Elliptic Functions and Transcendence, LNM 437 (1975),
+p.118 and Lemma A2. Masser's original book not directly inspected.
+Their gamma = s2/(6K) -(7K-6912)/(6K(K-1728)) equals -kappa by
+our earlier normalization. Prior art owns this invariant, not DASHI.
+
+Their formula at level |D| is gamma=(2 beta02-beta11)/beta01,
+with beta01!=0 under their hypotheses D<-4, D != -3d^2.
+For translated diagonal P and fixed slice S, symmetry gives beta02=S2,
+beta11=P2-2S2, beta01=S1, hence gamma=(4S2-P2)/S1.
+This two-slice rewriting is an elementary consequence of their formula,
+not an independent discovery of Masser's theorem.
+
+At lower prime level p=(1-D)/4, for the nodal cubic jet set
+a=S2, b=S3, c=P2-2a, d=P3/2-b. The nonzero tangent alpha
+obeys a(1+alpha^2)+c alpha=0. Assume a!=0, simple nonreal tangent
+(alpha!= +/-1), and the established chain-rule relation
+kappa=2beta/(alpha^2-alpha).
+The cubic equation gives
+kappa=-2[b(1+alpha^3)+d(alpha+alpha^2)]/
+((c+2a alpha)alpha(alpha-1)).
+Using c=-a(alpha+alpha^-1), denominator becomes
+a(alpha+1)(alpha-1)^2; numerator is
+-2(alpha+1)[b(alpha^2-alpha+1)+d alpha].
+Since (alpha-1)^2=-(c/a+2)alpha and alpha^2-alpha+1=-(c/a+1)alpha,
+cancel to get kappa=2[d-b(c/a+1)]/(c+2a)
+=P3/P2-2S3/S2. Thus gamma=2S3/S2-P3/P2.
+All divisions licensed by the stated hypotheses. This rational-only
+consumer eliminates quadratic field inversion, not the need to establish
+the analytic branch/tangent hypotheses. It is a specific alternative
+lower-level computational route; novelty relative to other CM derivative
+methods remains open. For D=-163 levels 41 vs 163, degrees in each
+variable 42 vs 164; no implied measured speedup.
+
+New executable scripts/check_cm_masser_weld.py at 152d7148f72d7f480ac928326bff402479729922,
+locally executed exact Git blob e79b21cbe0e485b2b40502d53359afb8fa852d6b.
+Run from repository:
+python scripts/check_cm163_residue_swar.py --fast-j --bits 384 --output coeffs.json
+python scripts/check_cm_masser_weld.py --coeffs coeffs.json
+Local replay used existing cm_fast_j_coeffs.json; no fresh CM163
+construction in this packet. Independent lower/higher polynomial
+construction using original GMP backend:
+D=-11 levels 3/11 gamma=289/8830976, 0.043565546 s;
+D=-19 levels 5/19 gamma=275/226934784, 0.377458157 s.
+Both exact parity PASS. Stored CM163 slice gamma=
+77859659565707/19943834790540897829879824384000 and s2
+77265280/90856689 PASS. Single execution observations, not comparative
+benchmarks. Classical K supplied for smaller cases. No higher-level
+163 reconstruction, original Masser book inspection, external benchmark,
+or Agda/CI acceptance. Keep original quadratic field consumer as oracle.
+Next: cross-level 43/67 and bounded CRT for 163, compare direct jet
+competitors rather than only full polynomial reconstruction, integrate
+rational consumer after parity on all supported CM cases.
