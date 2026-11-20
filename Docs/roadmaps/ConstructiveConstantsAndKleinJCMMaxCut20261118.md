@@ -314,3 +314,28 @@ lambda(tau) identification with original normalized E4^3/Delta, local
 apartness and selected modular fixed points; K05.06/07, CM integrality,
 CH2 and local pinned acceptance unchanged. Do not confuse this
 homogeneous integer result with concrete analytic modularity.
+
+
+## 20 November — binary/ternary Eisenstein norm and S3 sign weld
+New source JInvariantLambdaCyclotomicParityExact.agda, commit
+7b65c67158ce7700b28d165e47f782af105bd4ac, imports original
+C3CyclotomicAmplitudeAlgebraExact and LambdaOrbitBase369BridgeExact.
+Q is the original rational Eisenstein norm. R(a,b)=(-b,a-b)
+is multiplication by zeta; S(a,b)=(b,a) is zeta times conjugation.
+Source proves R^3=S^2=I, SRS=R^2, norm invariance, and all six
+normalised action representatives agree with raw orbit representatives
+up to sign. V=ab(b-a) has V(Rx)=V(x), V(Sx)=-V(x).
+D=V^2. Thus j=2^8 Q^3/V^2. C6 phase indexing is not the
+nonabelian S3 action; exponent 3 alone does not prove symmetry.
+Local independent SymPy execution: 22 scalar polynomial checks PASS,
+22.26 ms single run; no Agda executable. No kernel promotion.
+Prior art: Washington Introduction to Cyclotomic Fields; classical
+Legendre invariant and Vandermonde sign; repository
+Base369BinaryTernaryRefinement, PolynomialC3S3RationalCharacterAlgebraExact,
+PolynomialVandermondeOrbitSignCharacterExact, C3CyclotomicAmplitudeAlgebraExact.
+Also see EisensteinLeanJZeroCMOrderActionReceiptExact: Lean PR #69
+native algebraic j=0 and CM endomorphism source, kernel pending per receipt.
+This is not analytic j(omega) identification.
+Next: actual rational proof-relevant quotient, integer-to-rational
+embedding consistency, analytic lambda identification. K05, CM and CH2
+remain open. No duplicate cyclotomic carrier or physical claims.
