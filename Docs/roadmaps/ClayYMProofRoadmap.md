@@ -2389,3 +2389,22 @@ a decidable strict dichotomy for Bishop reals. CMP102 physical minimizer,
 weighted quaternion same-series specialization and CMP99 same corrected
 propagator remain open. Source-written only; exact-head Agda pending,
 no CI and no physical gate promotion.
+
+
+### 2026-11-20 — enlarged-component complement and boundary support
+
+BalabanClayGate4RBoundarySupportExtractionExact now defines
+OutsideAllWilsonEnlargements on the original Wilson bad components and
+Collar.Enlarged, with outsideAllEnlargementsImpliesOutsideComponents
+using regionIncludedInEnlargement. outsideAllEnlargementsOwnedSmall
+consumes the existing rational strict complement. boundarySupportOwnedPlaquettesSmall
+and regularDomainSupportOwnedSmall reuse everyWeaken on the original
+LocalizedSupport list. The latter consumes a forward inclusion of the
+selected regular domain, not an assumed equality. A single component's
+collar does not exclude other bad components.
+
+Source-written finite consumer; actual preceding-scale regular membership
+and global exclusion producer, selected mixed-scale plaquette incidence,
+Bishop-real averaged holonomy and adjusted threshold remain OPEN.
+No new analytic assumptions, reduced radii, or physical gate promotion.
+Agda kernel and CI not run.

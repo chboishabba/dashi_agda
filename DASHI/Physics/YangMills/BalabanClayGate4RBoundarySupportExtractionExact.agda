@@ -9,9 +9,11 @@ open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
-  using (_∈_; here; there)
+  using (_∈_; here; there; Not)
 
 import DASHI.Physics.YangMills.BalabanClayGate4FiniteEnlargementCollarOwnershipExact as Collar
+import DASHI.Physics.YangMills.BalabanClayP2BadComponentGeometryExact as Geometry
+import DASHI.Physics.YangMills.BalabanClayGate4LiteralWilsonLargeFieldPredicateExact as Wilson
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicReachCollarEnumerationExact as Reach
 import DASHI.Physics.YangMills.BalabanClayGate4FiniteROperationAndDecayAssemblyExact as R
 
@@ -154,3 +156,84 @@ rBoundarySourceCollarClassificationInputsLevel = conditional
 
 nextDeterminingSetContainsCollarInputsLevel : ProofLevel
 nextDeterminingSetContainsCollarInputsLevel = conditional
+
+------------------------------------------------------------------------
+-- Literal Wilson complement of ALL enlarged bad components.  A collar
+-- of one component alone is not a certificate of global smallness.
+------------------------------------------------------------------------
+
+OutsideAllWilsonEnlargements :
+  ∀ {Scale Configuration Gauge Block Plaquette}
+    (dataSet : Wilson.LiteralWilsonLargeFieldData Scale Configuration Gauge Block Plaquette)
+    (scale : Scale) (configuration : Configuration)
+    (enlargement : Collar.EnlargementData Block) (radius : Nat)
+    (block : Block) → Set
+OutsideAllWilsonEnlargements dataSet scale configuration enlargement radius block =
+  (polymer : Geometry.BadComponent (Wilson.literalWilsonBadBlockGeometry dataSet scale)
+    configuration) →
+  Not (Collar.Enlarged enlargement
+    (Collar.badComponentRegion polymer) radius block)
+
+outsideAllEnlargementsImpliesOutsideComponents :
+  ∀ {Scale Configuration Gauge Block Plaquette}
+    (dataSet : Wilson.LiteralWilsonLargeFieldData Scale Configuration Gauge Block Plaquette)
+    scale configuration enlargement radius block →
+  OutsideAllWilsonEnlargements dataSet scale configuration enlargement radius block →
+  Wilson.OutsideWilsonComponents dataSet scale configuration block
+outsideAllEnlargementsImpliesOutsideComponents
+    dataSet scale configuration enlargement radius block outside polymer member =
+  outside polymer (Collar.regionIncludedInEnlargement enlargement
+    (Collar.badComponentRegion polymer) radius block member)
+
+outsideAllEnlargementsOwnedSmall :
+  ∀ {Scale Configuration Gauge Block Plaquette}
+    (dataSet : Wilson.LiteralWilsonLargeFieldData Scale Configuration Gauge Block Plaquette)
+    scale configuration enlargement radius block →
+  OutsideAllWilsonEnlargements dataSet scale configuration enlargement radius block →
+  ∀ plaquette → Wilson._∈_ plaquette (Wilson.ownedPlaquettes dataSet block) →
+  Wilson.SmallPlaquette dataSet scale configuration plaquette
+outsideAllEnlargementsOwnedSmall dataSet scale configuration enlargement radius block outside =
+  Wilson.outsideWilsonComponentsOwnedSmall dataSet scale configuration block
+    (outsideAllEnlargementsImpliesOutsideComponents
+      dataSet scale configuration enlargement radius block outside)
+
+-- Consume the original support list, not a reconstructed set of blocks.
+-- The source must provide global exclusion over that exact list.
+boundarySupportOwnedPlaquettesSmall :
+  ∀ {Scale Configuration Gauge Block Plaquette Term}
+    (dataSet : Wilson.LiteralWilsonLargeFieldData Scale Configuration Gauge Block Plaquette)
+    scale configuration enlargement radius
+    (supportData : Collar.LocalizedSupport Term Block) term →
+  Collar.Every
+    (OutsideAllWilsonEnlargements dataSet scale configuration enlargement radius)
+    (Collar.support supportData term) →
+  Collar.Every
+    (λ block → ∀ plaquette →
+      Wilson._∈_ plaquette (Wilson.ownedPlaquettes dataSet block) →
+      Wilson.SmallPlaquette dataSet scale configuration plaquette)
+    (Collar.support supportData term)
+boundarySupportOwnedPlaquettesSmall dataSet scale configuration enlargement radius
+    supportData term =
+  everyWeaken
+    (outsideAllEnlargementsOwnedSmall dataSet scale configuration enlargement radius)
+
+-- A source-owned regular domain may be smaller than the global complement.
+-- Only the forward inclusion is consumed; no equality is imposed.
+regularDomainSupportOwnedSmall :
+  ∀ {Scale Configuration Gauge Block Plaquette Term}
+    (dataSet : Wilson.LiteralWilsonLargeFieldData Scale Configuration Gauge Block Plaquette)
+    scale configuration enlargement radius
+    (supportData : Collar.LocalizedSupport Term Block) term
+    (Regular : Block → Set) →
+  (∀ block → Regular block →
+    OutsideAllWilsonEnlargements dataSet scale configuration enlargement radius block) →
+  Collar.Every Regular (Collar.support supportData term) →
+  Collar.Every
+    (λ block → ∀ plaquette →
+      Wilson._∈_ plaquette (Wilson.ownedPlaquettes dataSet block) →
+      Wilson.SmallPlaquette dataSet scale configuration plaquette)
+    (Collar.support supportData term)
+regularDomainSupportOwnedSmall dataSet scale configuration enlargement radius
+    supportData term Regular inclusion members =
+  boundarySupportOwnedPlaquettesSmall dataSet scale configuration enlargement radius
+    supportData term (everyWeaken inclusion members)
