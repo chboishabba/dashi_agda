@@ -103,6 +103,14 @@ def check(order=4, geometric=False, **params):
         for channels in zip(*receipts):
             terms=np.stack((channels[2],-channels[3],(1/t+1/(2*t**3))*channels[4],channels[5]/(3*t*t)))
             assert np.max(np.abs(terms.sum(0)))<=1e-10*max(1.,np.max(np.abs(terms).sum(0)))
+        from warp_israel_affine import radial_source_at_receiver, offsets, forced_identity
+        # Centre slot is the start of the second synthetic step (amplitude .013).
+        # Receiver is outside source support in the original guarded setup.
+        g=radial_source_at_receiver(src,.013,s['rx'],s['eps'],dr)
+        actual=np.stack([r[0] for r in receipts]);forced=actual+offsets(g)
+        err,scale=forced_identity(forced,g,t)
+        assert np.all(np.abs(err)<=1e-10*np.maximum(1.,scale))
+        print('forced wall receiver',forced[4],'prescribed source offset',-g,flush=True)
         print('PASS off-shell identity through all signed ledger channels',flush=True)
 
 if __name__=='__main__':
