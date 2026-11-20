@@ -1,3 +1,9 @@
+## 20 November — R1 repository recovery update
+
+Leech PR #5 now at `678b5e7dda932e56f10626ecc7ece6719f202494`. Detached `a77bf4d` was unavailable (GitHub 422); documented corrections reconstructed in commits 506680b8, 139fc645 and 678b5e7d. Original model blob verified `a2a250462ce8e663591cd8a8f784fad9bde1b15d`. R1 repository recovery complete for documented changes; exact detached-tree identity and fresh execution remain unverified. Original fitted artifacts not present in the inspected tracked Leech tree. R2 remains OPEN pending owned checkpoint, repair receipt, native R1 JSONL/summary, tokenizer, config and fitted delta. SLR C4.04a relation/mention integration is separate upstream work, not replacement input or semantic admission for R4. No F5 access or kernel claim.
+
+---
+
 ## 20 November 2026 — CURRENT acceptance ledger (supersedes historical status below)
 
 Source: supplied local execution report, lines 168–196; results reported by local operator, not independently rerun by this documentation update. DASHI base `5283e6db84eafb5bdabfd066c3ac422c15f67286`; LeechTransformer tested base `8d8f627f8bac4d7c7440fe23beea2d21d7818719`. Precision/doc fix reported committed on detached HEAD `a77bf4d`; PR #5 still on tested base when audited. Do not claim detached commit is landed.
