@@ -44,7 +44,7 @@ open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _+_; _-_; -_; _*_; _≤_; _<_; _/_)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
-open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; trans; refl)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
@@ -267,6 +267,50 @@ actualTerminalPerturbedSZZMarginPositive handoff =
   ℚP.<-≤-trans
     (targetLeavesPositivePerturbedSZZMargin handoff)
     (actualTerminalMarginAtLeastTarget handoff)
+
+-- Construct the typed arithmetic criterion without the older handoff's
+-- Set-valued stochastic/OS predicates.
+terminalCriterionFromCrossover :
+  ∀ {rank trajectory bounds} →
+  (target : CrossoverTarget trajectory bounds) →
+  (cost : ℚ) →
+  0ℚ < perturbedSZZCurvatureMargin rank
+    (targetInverseCoupling target) cost →
+  SZZPerturbedTerminalCriterion rank
+terminalCriterionFromCrossover {rank} {trajectory} target cost positive =
+  record
+    { inverseCoupling = Flow.inverseCoupling trajectory (depth target)
+    ; remainderHessianCost = cost
+    ; positiveEffectiveCurvature = ℚP.<-≤-trans positive
+        (perturbedSZZMarginAntitone rank
+          (crossoverInverseCouplingAtOrBelowTarget target))
+    }
+
+actualTerminalCriterion :
+  ∀ {rank trajectory bounds} →
+  BalabanToSZZTerminalHandoff rank trajectory bounds →
+  SZZPerturbedTerminalCriterion rank
+actualTerminalCriterion handoff =
+  terminalCriterionFromCrossover (crossover handoff)
+    (BalabanToSZZTerminalHandoff.remainderHessianCost handoff)
+    (targetLeavesPositivePerturbedSZZMargin handoff)
+
+actualTerminalCriterionKeepsCoupling :
+  ∀ {rank trajectory bounds}
+    (handoff : BalabanToSZZTerminalHandoff rank trajectory bounds) →
+  SZZPerturbedTerminalCriterion.inverseCoupling
+    (actualTerminalCriterion handoff)
+  ≡ Flow.inverseCoupling trajectory (depth (crossover handoff))
+actualTerminalCriterionKeepsCoupling handoff = refl
+
+actualTerminalCriterionKeepsRemainder :
+  ∀ {rank trajectory bounds}
+    (handoff : BalabanToSZZTerminalHandoff rank trajectory bounds) →
+  SZZPerturbedTerminalCriterion.remainderHessianCost
+    (actualTerminalCriterion handoff)
+  ≡ BalabanToSZZTerminalHandoff.remainderHessianCost handoff
+actualTerminalCriterionKeepsRemainder handoff = refl
+
 
 balabanSZZNormalizationBridgeLevel : ProofLevel
 balabanSZZNormalizationBridgeLevel = machineChecked
