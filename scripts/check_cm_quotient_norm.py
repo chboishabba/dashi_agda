@@ -2,6 +2,7 @@
 import argparse
 from random import Random
 from sympy import Matrix, Poly, resultant, symbols, ZZ
+from sympy.polys.matrices import DomainMatrix
 
 t,q=symbols("t q")
 
@@ -11,7 +12,7 @@ def quotient_norm(h,p,n,r):
     h=h[:p*n+1]
     a=[sum(h[i]*q**(i//p) for i in range(j,len(h),p)) for j in range(p)]
     m=Matrix(p,p,lambda i,j:a[(i-j)%p]*(q if i<j else 1))
-    d=Poly(m.det(method="berkowitz"),q,domain=ZZ)
+    d=Poly(DomainMatrix.from_Matrix(m).det().as_expr(),q,domain=ZZ)
     assert d.nth(0)==1
     return [int(d.nth(i))%r for i in range(n+1)]
 
