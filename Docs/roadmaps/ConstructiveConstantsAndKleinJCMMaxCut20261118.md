@@ -1548,3 +1548,35 @@ Next compare memory streaming via recursive binary prefix (double
 accumulator then append H for a set bit), eliminating stored blocks;
 consider diagonal H=J(q)-t^(p-1)J(t) valuation filtration and
 truncated binomial/log expansion separately. No CI/Agda execution.
+
+
+## 20 November — P9.M15h streaming orbit and diagonal valuation, CRT transport
+
+Source commits 4d2b733befc3eea2d1cbe887635486638aae28df (streaming
+binary prefix), de55af0622bd0ce450c20baf08fea59b1148e068 (opt-in direct
+jet split CRT), 47b932e6c5bb3561f25fae5522099b2c1622464d (diagonal
+valuation candidate). All source-written, no fresh execution receipt.
+Prefix update F_(2m+b)=F_m(t)F_m(z^m t)H(z^(2m)t)^b, b in {0,1}.
+Constant number of full series arrays, not constant total memory.
+Original logder remains default and unchanged. --orbit selects split
+moduli with pairwise coprime prime bases, retains original height
+certificate, short H inverse and original jet consumer; --ring-oracle
+compares every selected coefficient at the same modulus to old full slice.
+For diagonal H=A(q)-t^(p-1)B(t), recover B from actual H and A=J(q).
+log(N(H)/A^p)=-p sum_{k=1}^{floor(pn/(p-1))}
+Pi_p(t^(k(p-1))B^k)/(k A^k). Truncate B^k at pn-k(p-1),
+and A^-k at n-ceil(k(p-1)/p). Restore via short formal exp and A^p.
+At p=41,n=82, top=84. Need units through max(n,top), not merely
+through n: split prime 83 is a negative admission control at p=41.
+Harness skips valuation candidate when this condition fails; orbit
+itself has no such log denominator requirement. Valuation candidate
+not default or wired into CRT. Classical formal log/exp and norm
+identities, no novelty claim. M15h streaming source implemented;
+M15i valuation source implemented; M15j orbit CRT transport source
+implemented; all exact-head runtime, production parity, timing/RSS and
+Agda kernel gates OPEN. M16 full level 163 remains OPEN.
+Reproduce:
+python scripts/check_cm_cyclic_orbit_norm.py --bits 384
+python scripts/check_cm_direct_jet.py --orbit --bits 384 --ring-oracle
+python scripts/check_cm_direct_jet.py --orbit --bits 384 --compare-masser
+Last command potentially expensive; not executed here. No CI initiated.
