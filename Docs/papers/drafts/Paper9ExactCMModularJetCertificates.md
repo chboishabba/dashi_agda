@@ -288,3 +288,58 @@ Next: block or height-adaptive packing/CRT, charge repacking and all
 GMP/Python temporary buffers, preserve exact parity; retain scalar
 backend for memory-constrained runs. Generalization and external
 baselines remain open. No new formal analytic or kernel closure.
+
+
+## 20 November — codec-inspired support-window Newton backend
+
+Implemented scripts/check_cm163_window.py at commit
+245dd9739108f80b296f304316642355b8026601, exact local Git blob
+f5f578445d1ac1bfa4f46a0de62f72cc9320428f verified after connector write.
+Reuses original GMP mul and unchanged diagonal/specialized polynomial consumers.
+Donor inspiration: TriadicResidualMaskSignCodec, TriadicExplodedTransformCodecFormalism,
+BalancedTritBitFibre, DNACarrierFibre, DNAProductionCodec and the actual
+run_triadic_flagship_benchmark.py. These are structural analogies, not a claim
+of literal ternary entropy coding or DNA execution.
+
+For H(0)=1 and HG=1 mod t^m, define r=-[t^m,...,t^(k-1)]HG,
+k=min(2m,N). Then G_new=G+t^m*(G*r mod t^(k-m)); the known
+prefix stays unchanged. Partition operands into blocks of 256 coefficients.
+Omit all-zero blocks and pairs outside requested output window; choose
+forward or reversed truncated multiplication according to the shorter
+local output prefix. Reversal is exact since rev_(a+b)(AB)=rev_a(A)rev_b(B).
+Accumulate each pair at its exact index offset. Existing GMP mul chooses
+a safe local signed radix per pair. If individual coefficient heights
+are bounded by B, a packed operand uses O(s(B+log s)) bits for block
+size s, rather than O(M(B+log M)) for a uniform full operand; source,
+output, copies, allocation and multiplication workspace are separate.
+No global peak-memory theorem asserted. The 256 block length is a
+selected experimental constant, not an optimized parameter.
+
+Local Python execution: 128 random signed window comparisons against
+scalar convolution; 128 logder comparisons against dense fast backend;
+8 full small-prime polynomial comparisons against scalar (p=3,5,7,11).
+All PASS. Full degree-41 window derivative run PASS with exact H*G=1
+and H*L=tH' at full truncation, kappa and s2 unchanged.
+Window diagonal 5.738555279 s, cumulative construction 18.666320395 s,
+total derivative 18.706544707 s, max RSS 223188 KiB, 579 packed calls,
+max operand 22816464 bits. This process included small regressions.
+Separate window construction/serialization run 18.577457777 s,
+RSS 221560 KiB, saved signed hexadecimal coefficient arrays.
+Fresh dense fast runner: diagonal 4.524124461 s, construction
+17.555023721 s, total 17.608450256 s, RSS 521212 KiB,
+52 calls, max operand 204771028 bits.
+Byte comparison of both complete serialized arrays PASS (126 slots).
+Fresh scalar comparison attempt exceeded 120 s tool limit (after window
+construction); do not claim direct fresh scalar p=41 comparison in this
+packet. Transitive scalar parity uses previous recorded dense/scalar
+receipt. These single process observations are not a controlled
+statistical benchmark. Historical scalar timings retained as historical.
+
+P9.M1-M4 implemented together; no ablation yet. Largest packed operand
+8.97x smaller; full-run RSS 57.2% smaller vs fresh dense run, with roughly
+6% construction-time overhead. Different process scopes explicitly noted.
+Next: geometric predictor as exact factorization or quotient, not merely
+subtracting a large leading power; triadic/height-adaptive block sizes,
+ablation and repeated sequential memory/runtime measurements, then CRT.
+Native ternary coding, FRACDASH execution, dyadic enclosure replay and
+additional CM discriminants remain OPEN. No Agda or CI execution.
