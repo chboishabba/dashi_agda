@@ -479,3 +479,74 @@ Current cut: finite coefficient and five-orbit linear checks PASS;
 full analytic Bishop transport, genuine representation recognition,
 CM integrality and CH2 remain OPEN. Agda kernel acceptance not attempted
 in this SymPy packet. No new analytic theorem or physical gate promotion.
+
+
+## 20 November — cross-PR correction: canonical Bishop analytic Route B
+
+Actual recent PR heads inspected: Agda #1478 fb374e50e59a98e2b8a1eee215c77428c5728b68
+(merged), #1022 68dfcbf05842aed9696f1640cedd6b36302f5cc8 (merged),
+#1444 ed2f8e1b34b3588455d0042004e8b52db17a5777 (open),
+#1497 f213b5bfb893e49ae9b29b2915257884b3b0e14e (merged).
+Lean #13 3c3b00aa5177fd14fcb46c1bf976c00308212b4b and #104
+dbda83aec4b6aa07746d5c692d2d99440872bda1 are merged. Source readback
+rather than title-based promotion:
+
+* Lean #13 Integration/BishopRound11MachinCanonicalBinding.lean
+  (blob c23e4e42e524a5ada6a967b6daccd01646dafeeb) constructs
+  canonicalBinding from encode/eval and Mathlib series convergence;
+  exp/sin/cos and both atan limits are uniquely determined up to
+  Bishop equivalence. This is an inhabited Lean mirror, not an
+  arbitrary assumed convergence record.
+* Integration/MoonshineEisensteinAgdaTarget.lean (blob
+  9f0310c1e750a1a0b0662c69861293de16b18256) proves the literal
+  shifted source recurrences converge to actual normalized Mathlib E4/E6,
+  using E4_qExpansion/E6_qExpansion and Bernoulli 4=-1/30, 6=1/42.
+  Do NOT rebuild cotangent or Euler-even-zeta identities for this route.
+* Integration/MoonshineEisensteinRound11CanonicalRouteB.lean (blob
+  acdb8817773460a959ef5baa93d3c89aa7e612b1) fixes concrete arithmetic
+  and canonical binding. Its mapped_sourceE4_tendsto_mathlib_E4,
+  mapped_sourceE6_tendsto_mathlib_E6, mapped_sourceNormalizedDelta_tendsto
+  require only the source point mapping hTau, not a free source binding.
+* Integration/BishopRound11MachinReplayIrrelevance.lean (blob
+  c006b3e7326298f32f7c9440b3da4cfadd10ed6f) proves mapped q, E4, E6
+  and normalized Delta independent of admissible binding choice.
+* Integration/MoonshineDeltaFinalMinCut.lean (blob
+  ffec688273e1dca65fa837a5a5d0d904ff5d9a5d0)
+  contains canonicalEta24NormalizedDeltaSameObject and
+  normalizedDelta_ne_zero_canonical, sixfold phase and arg-congruence
+  theorems. Global nonvanishing is already a declared classical donor.
+* Lean #104 Integration/BishopRound11OriginalArctanCayleyExact.lean
+  (blob 1280e6f8e0053eceade3a07525a2cbf83faaf501) gives
+  realArctanExponentialCayley and both original Bishop atan evaluations
+  under a source binding; #13 canonical binding supplies that shape.
+  Native Agda K05 remains distinct.
+
+### Short mathematical endpoint (no second analytic j)
+Let A_N be the mapped canonical source E4 partial and D_N the mapped
+source normalized Delta partial. These converge to A=E4(tau) and
+D=eta(tau)^24 !=0 by the existing source declarations. Eventually
+|D_N-D|<|D|/2, hence |D_N|>|D|/2. Then
+|A_N^3/D_N-A^3/D| <=
+2 |A_N-A| (|A_N|^2+|A_N||A|+|A|^2)/|D|
++2 |A|^3 |D_N-D|/|D|^2 ->0.
+This is an ordinary analytic consequence of the already declared
+donors, not a new Lean or Agda proof object. The existing normalized
+369 renderer is the correct downstream j consumer. Reuse eta24 global
+nonvanishing instead of paying a new lattice-sum or local apartness proof
+where the Lean semantic route suffices.
+
+### Revised acceptance seam
+Lean canonical mirror source and classical normalization donor FOUND;
+exact-head Lean kernel receipt and generated Agda replay explicitly
+false in the canonical Route B boundary. PR #13 description reports
+prior local proof; no fresh receipt acquired here. Lean #104 likewise
+states kernel receipt absent. A merged PR does not imply native Agda
+acceptance. Native Agda transport remains OPEN; do not mark it closed
+by importing the Lean receipt as an Agda proof object.
+Next: concrete proof-relevant quotient transport on actual native Bishop
+carrier, reuse the canonical semantic route for the classical j target,
+then CM integrality/class degree and Chudnovsky identity. No new
+finite coefficient evaluator required. Attribution: Mathlib owns
+analytic modular series and transcendental facts; DASHI owns the
+source mirror and transport, JMD owns the Delta/phase acquisition
+as recorded in Agda #1022. No kernel execution in this audit.
