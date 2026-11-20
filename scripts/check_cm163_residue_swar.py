@@ -72,9 +72,13 @@ def moduli(n,bits):
 
 def main():
     ap=argparse.ArgumentParser();ap.add_argument('--bits',type=int,default=768)
-    ap.add_argument('--reference');ap.add_argument('--output');args=ap.parse_args()
+    ap.add_argument('--fast-j',action='store_true');ap.add_argument('--reference');ap.add_argument('--output');args=ap.parse_args()
     start=perf_counter();p=41;K=-640320**3
-    J=base.j_unit(2*p*p-p+1)
+    if args.fast_j:
+        from check_cm163_fast_j import j_unit
+    else:
+        j_unit=base.j_unit
+    J=j_unit(2*p*p-p+1)
     inp=[construct_inputs(p,K,J,d) for d in (True,False)]
     bounds=[x[-1] for x in inp];print('certified coefficient height exponents',bounds,'J/setup seconds',perf_counter()-start,flush=True)
     acc=[[0]*(x[3]+1) for x in inp]; Q=1;count=0
