@@ -492,3 +492,85 @@ no libflint in ldconfig). Need cold/warm matched outputs, exact height
 guarantees, identical hardware, repeated time and RSS, general levels
 and comparison against direct derivative/jet methods as well as full Phi.
 No new Agda/CI run.
+
+## 20 November — attribution-first source ledger and odd-prime family replay
+
+Standing PR #1444 attribution policy: preserve original authors, exact primary
+source, earlier DASHI producer and revision; distinguish quotation, theorem
+intake, conceptual analogy, independent rediscovery, implementation, extension,
+execution, formalization, kernel acceptance and external validation. Cite
+external researchers, do not imply collaboration or co-authorship unless
+actually evidenced. Missing metadata is an explicit residual. Reuse before
+construct. No provenance inferred from a similar formula.
+
+Primary bibliographic records checked 20 November 2026:
+- Andrew V. Sutherland, On the evaluation of modular polynomials (2013),
+  DOI 10.2140/obs.2013.1.531, arXiv:1202.3985. Direct specialization,
+  CRT evaluation; established prior art, not implemented here.
+- Maria Corte-Real Santos, Jonathan Komada Eriksen, Antonin Leroux,
+  Michael Meyer, Lorenz Panny, Evaluation of Modular Polynomials from
+  Supersingular Elliptic Curves, arXiv:2506.15429 (2025), proceedings
+  DOI 10.1090/conm/840/16823 (2026). Supersingular evaluation and memory
+  complexity under their stated model; no comparative run yet.
+- Ralf Hemmecke, Peter Paule, Cristian-Silviu Radu, Computer-assisted
+  construction of Ramanujan–Sato series for 1/pi, Ramanujan Journal 69,
+  article 73 (2026), DOI 10.1007/s11139-026-01352-2. MultiSamba and
+  ModFormDE, with lineage to Radu (2015), Hemmecke (2018), Paule and
+  Radu (2021); author supplement
+  https://www3.risc.jku.at/people/hemmecke/papers/oneoverpi/.
+  No FriCAS execution or reuse of their code claimed.
+- Reinier Bröker, Andrew V. Sutherland, An explicit height bound for
+  the classical modular polynomial (2010), DOI 10.1007/s11139-010-9231-8,
+  arXiv:0909.3442. Prior explicit height bounds; compare our slice bound
+  with specialization of their bound before claiming improved theory.
+- Reinier Bröker, Kristin Lauter, Andrew V. Sutherland, Modular polynomials
+  via isogeny volcanoes (2012), DOI 10.1090/S0025-5718-2011-02508-1,
+  arXiv:1001.0402. CRT isogeny-graph construction, established prior art.
+- David Masser, Elliptic Functions and Transcendence (1975), original
+  CM derivative observation; exact original lemma inspection pending
+  (identified through cited Bruinier/Ono/Sutherland paper, not independently
+  read from Masser's book). Jan Hendrik Bruinier, Ken Ono, Andrew V.
+  Sutherland, Class polynomials for nonholomorphic modular functions,
+  arXiv:1301.5672, CRT algorithm building on Masser's observation.
+  Our chain-rule derivation is an independently constructed route,
+  not discovery of the modular derivative/CM relation. Compare both
+  normalization conventions and derivative orders explicitly.
+- FLINT: David Harvey, William Hart (founders), Sebastian Pancratz,
+  Fredrik Johansson and all relevant contributors; official
+  https://flintlib.org/authors.html and https://flintlib.org/citation.html.
+  External baseline, not executed or linked in current code.
+- Classical Machin, Euler pentagonal theorem, Eisenstein, Dedekind eta,
+  Klein j, Ramanujan, Serre derivative, Chudnovsky brothers, Newton
+  inversion, Kronecker substitution, CRT and Bishop completion retain
+  their historical attribution. Exact original edition/page ledger
+  remains pending where not verified. Lorenz Milla arXiv:1809.00533
+  remains related derivation lead. Do not claim classical results new.
+
+Evidence boundary: bibliographic records and abstracts inspected; detailed
+theorem-by-theorem comparison and benchmark replication still OPEN.
+No claim that cited authors collaborated, no co-authorship trailers for
+citation alone. Existing Aristotle/Harmonic attribution retained on actual
+donor artifacts. Original DASHI codec, SWAR and Karp owners preserved.
+Our candidate contribution is the specific two-slice cubic-jet execution,
+cyclic-norm reconstruction and explicit slice certificate integration,
+subject to prior-art review. SOTA remains OPEN.
+
+New source scripts/check_cm_prime_family.py commit
+ef295d0d7390475f1c4cd417be28866b04f5ff0b. Executed locally with SymPy
+and original scalar/GMP constructors; classical K supplied, not derived.
+For odd prime p, tau=(-1+i sqrt(4p-1))/2, h=-p/(tau+1),
+alpha satisfies p alpha^2+(2p-1) alpha+p=0. Same cubic formula
+and s2 normalization as CM163. Exact P/S parity at p=3,5,11,17,
+double-point conditions, quadratic tangent and invertible denominator,
+rational kappa verified. Results (one local run, seconds include both
+backends):
+D=-11 p=3 K=-32768 s2=32/77 0.030947798;
+D=-19 p=5 K=-884736 s2=32/57 0.010402145;
+D=-43 p=11 K=-884736000 s2=640/903 0.084691348;
+D=-67 p=17 K=-147197952000 s2=33440/43617 0.521738573.
+No independent analytic CM value or root isolation for these four cases
+yet. p=2 (D=-7) excluded by odd-prime sign convention. P9.M13 partial PASS.
+Local gp/sage absent, ldconfig no libpari/libflint, FriCAS absent;
+no external runtime benchmark. Next generalize CRT radius for small
+p and root enclosure, compare Masser formula and run pinned external
+baseline in user environment. No Agda/CI execution.
