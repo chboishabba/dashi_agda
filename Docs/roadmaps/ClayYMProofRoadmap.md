@@ -1,3 +1,11 @@
+## 20 November 2026 — R559 same-family and SZZ typed terminal weld implementation
+
+- R559 commit 510f57d75d9b2642fee870403cc37af2623cf578: added preOSToSameOSMoments / sameOSToPreOSMoments and definitional producer-preservation proofs in the existing YangMillsLiteralCMP119QuantitativeMomentsRound559Exact owner. The OS interface reuses the pre-OS producer on A.family and A.observableAlgebra; no second moment selection.
+- SZZ commit 415210fc567ac692c9bfc590b5e5d5c2bdf76b5f: terminalCriterionFromCrossover constructs SZZPerturbedTerminalCriterion directly from crossover drift and positive target margin, without Set-valued stochastic/OS predicates; actualTerminalCriterion preserves actual trajectory coupling and remainder cost definitionally.
+- Exact boundary: R444/R445 and Physical.MarkedMomentClosure use rational scalars, R559 uses real expectations. Do not assume definitional equality. Next weld must transport the actual marked observable operations, expectations, inequalities and uniform integrability to the original real family, or locate a native real producer. The current polynomial bound divides by lambda rather than lambda^degree; verify normalization or correct before promotion. Pre/post weld does not discharge source estimates.
+- SZZ arithmetic criterion is not proof of actual effective density, physical curvature, or OS-time gap. Verify source applicability and common physical gap separately.
+- Status: SOURCE_WRITTEN / KERNEL_PENDING. No new physical endpoint closure. Existing theorem owners extended; roadmaps synchronized in the same PR. Next: native real marked moment transport and actual crossover source cost.
+
 ## 20 November 2026 — reuse-first UV/IR/OS weld reconciliation (audit of 62fe5287)
 
 **Policy:** assume a candidate existing producer until the relevant historical/current owners have been searched. Do not reopen generic mathematics or declare entire work packages unimplemented. Distinguish SOURCE_OWNED, WELD_REQUIRED (existing producer/consumer with exact same-object or typed realization outstanding), SOURCE_ESTIMATE_UNVERIFIED (a quantitative input whose actual producer has not yet been identified), and KERNEL_PENDING. A weld may itself contain a substantive mathematical obligation. Neither a status label nor an assumed completed producer is evidence of physical closure.
