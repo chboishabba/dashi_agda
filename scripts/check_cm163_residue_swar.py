@@ -13,7 +13,7 @@ def size_bound(a, shift):
     v=sum(abs(x) << (shift*(m-i)) for i,x in enumerate(a))
     return max(0,(v-1).bit_length()-shift*m)
 
-def construct_inputs(p,K,J,diagonal):
+def raw_inputs(p,K,J,diagonal):
     n=2*p if diagonal else p+1
     M=p*n
     if diagonal:
@@ -27,6 +27,10 @@ def construct_inputs(p,K,J,diagonal):
         h=J[:M+1];h[1]-=K
         g=[0]*(n+1);g[0]=1;g[p]=J[1]-K
     j=J[:n+1]
+    return h,g,j,n
+
+def construct_inputs(p,K,J,diagonal):
+    h,g,j,n=raw_inputs(p,K,J,diagonal)
     t=1<<(p*n)
     assert 4*sum(abs(j[i])<<(p*(n-i)) for i in range(1,n+1))<=t
     assert 4*sum(i*abs(j[i])<<(p*(n-i)) for i in range(1,n+1))<=t
@@ -37,8 +41,8 @@ def construct_inputs(p,K,J,diagonal):
 def mul(a,b,n,r):
     return [x%r for x in fast.mul(a,b,n)]
 
-def mod_slice(p,inputs,r):
-    h,g,j,n,_=inputs
+def normalized_product(p,inputs,r):
+    h,g,j,n=inputs[:4]
     h=[x%r for x in h];g=[x%r for x in g];j=[x%r for x in j]
     N=len(h); inv=[1]
     while len(inv)<N:
@@ -53,7 +57,12 @@ def mod_slice(p,inputs,r):
     norm=[1]
     for k in range(1,n+1):
         norm.append(sum(l[p*i]*norm[k-i] for i in range(1,k+1))*pow(k,-1,r)%r)
-    rem=mul(g,norm,n,r)
+    return mul(g,norm,n,r),inv[:n+1]
+
+def mod_slice(p,inputs,r):
+    j,n=inputs[2:4]
+    j=[x%r for x in j]
+    rem,_=normalized_product(p,inputs,r)
     powers=[[1]+[0]*n]
     for k in range(n):powers.append(mul(powers[-1],j,n,r))
     coeff=[]
