@@ -505,6 +505,50 @@ A separate nontrivial constant commuting rational link fixture has identity plaq
 
 Executable sources: scripts/check_ym_path13_full_mixed_jet.py, scripts/check_ym_path13_full_q_matrix.py, scripts/check_ym_path13_chart_source_semantics.py. All three executed locally with exact arithmetic (integer arrays guarded against overflow). Agda source additions are not kernel-verified.
 
+### 5.6 Full finite bordered trace and arbitrary-volume flat base
+
+The full side-13 Hessian is now assembled from the six original positive Wilson plaquettes in the left chart \(\exp(h)U\), plus the chosen covariant divergence quadratic form \(\frac12\|D_Uh\|^2\). Background variations are the same ordered test paths used in Section 5.5. All 84 local stencil blocks satisfy mixed-jet transpose relations; at the flat point \(A_0\) is exactly the componentwise periodic scalar Laplacian. This is an explicitly specified finite quadratic form, not a claim that the complete CMP109 operator or its density has been identified.
+
+For \(N=13^4\), the scalar Green convolution solves
+\[
+8G(x)-\sum_\mu[G(x+e_\mu)+G(x-e_\mu)]=\delta_{x0}-1/N,\qquad\sum_xG(x)=0 .
+\]
+Signed coordinate permutations reduce this to 210 orbits. The rational solution has a common denominator of 326 bits; all 28561 original equations were verified exactly. With \(Q_0\) the actual one-block averaging row and \(L_0\) the constant extension, \(K_0^{-1}=\begin{pmatrix}G&L_0\\L_0^*&0\end{pmatrix}\). Matrix multiplication then gives the finite ordinary-delta response:
+\[
+\begin{split}
+2\Gamma_{st}={}&\operatorname{Tr}(GA_{st}-GA_sGA_t)\\
+&+2\operatorname{Tr}(Q_{st}L_0-Q_sL_0Q_tL_0)\\
+&-2\operatorname{Tr}(Q_tGA_sL_0+Q_sGA_tL_0).
+\end{split}
+\]
+All terms have now been evaluated on the same literal Hessian and full averaging jets. For the bubble, grouping local shifts \(d,e\) reduces the trace to cyclic correlations of coefficient fields against \(G(z+e)G(z-d)\). At the flat point all first-jet color blocks are skew. Exact separable length-13 transforms modulo primes 100000213 and 100000421, followed by signed CRT with magnitude bounds, recover the 165 displacement-pair correlations. The same transforms recover both moving-constraint Green cross-contractions. Rational results independently agree with a floating Fourier evaluation:
+\[
+\begin{array}{lr}
+\operatorname{Tr}(GA_{st})&4903151.497038194\\
+\operatorname{Tr}(GA_sGA_t)&-398451.58857549424\\
+\text{moving constraint correction}&-3646.911086686921\\
+2\Gamma_{st,\delta}&5297956.174527001
+\end{array}
+\]
+Displayed decimals are summaries of exact rational integers, not the certificate. The induced-volume variant subtracts the earlier exact Gram response \(3328816224672/815730721\), yielding approximately 5293875.396227281. Scripts: check_ym_path13_hessian_gaussian.py and check_ym_path13_exact_trace.py. This is not the normalized physical beta, because the background curves are not yet the selected minimizer derivatives, the full printed measure is unidentified, and a single coarse block has no nonzero coarse momentum.
+
+**Arbitrary-volume flat construction.** Let the fine torus have side \(13m\) and the coarse centers be separated by 13. At the flat background Eq. (119) reduces to the difference of its two path integrals plus the center integral. On substituting into Eq. (120), both face legs cancel. Thus \(Q_0\) is the centered block average of the forward 13-link directional average. Its weight in the bond direction is the convolution of two length-13 boxes, supported at offsets \(-6,\ldots,18\), with multiplicities \(1,\ldots,13,\ldots,1\). The transverse weights are the three uniform box factors. Counting gives selected center and next-center coefficients 7 and 6, and squared and adjacent-overlap counts 1469 and 364. Hence, with \(T_\mu\) a cyclic coarse shift, each independent color/direction Gram and pivot is
+\[
+P_0=(7I+6T_\mu)/13^5,\qquad
+Q_0Q_0^*=(113I+28(T_\mu+T_\mu^*))/13^6 .
+\]
+This includes the one- and two-site wraps by combining repeated cyclic shifts. The pivot is invertible, with its inverse from the finite geometric series for \((-6/7)T_\mu\); \(P_0^{-1}\) has norm at most \(13^5\) in each of the induced 1, 2 and infinity norms. The Gram floor is \(57/13^6\), since
+\(113\|v\|^2+56\operatorname{Re}\langle v,Tv\rangle-57\|v\|^2=28\|v+Tv\|^2\). After multiplying the constraint by 169 its Gram floor is \(57/169\).
+
+For one scalar fine component let \(M\) denote orthogonal block averaging with constant extension, and \(S\) the length-13 forward directional average. \(Q_0 h=0\) means \(MSh=0\). The elementary open 13-path variance inequality follows from
+\(\sum_i|h_i-\bar h|^2=13^{-1}\sum_{i<j}|h_i-h_j|^2\), telescoping and Cauchy--Schwarz: the coefficient of edge \(k\) is at most \((k+1)(12-k)/2\le21\). The four commuting axis block projections tensorize this via orthogonal martingale differences, so \(\|(I-M)h\|^2\le21\sum_\nu\|\nabla_\nu h\|^2\). Further,
+\(\|Mh\|=\|M(h-Sh)\|\le\|h-Sh\|\le6\|\nabla_\mu h\|\) by unitary periodic translations and the length-13 telescoping average. Orthogonality yields \(\|h\|^2\le57\langle h,A_0h\rangle\), uniform in \(m\).
+The source owner BalabanCMP109L13BlockAverageAdjointFloorExact now contains the literal triangular count and arbitrary cyclic Gram inequality. The global finite path-to-multiblock Agda weld remains to be checked; this is not the interacting selected Hessian bound.
+
+For coarse momentum \(k\), fine aliases \(p=(k+2\pi a)/13\), \(a\in\{0,\ldots,12\}^4\), give scalar Laplacian \(\lambda(p)=\sum_\nu(2-2\cos p_\nu)\) and normalized constraint row \(q_\mu(p)\) equal to the product of the four centered box factors times the forward box factor in direction \(\mu\). The nonzero-momentum bordered inverse is \(z=(qD^{-1}f-r)/(qD^{-1}q^*)\), \(u=D^{-1}(f-q^*z)\); at zero coarse momentum the only nonzero constraint component is the constant alias. The script check_ym_path13_multiblock_flat.py checks exact cyclic pivots and Gram matrices on nine coarse sizes and all 98 coarse momenta of one-, two- and three-side coarse tori in all directions, with maximum numerical inverse residual \(4.48\cdot10^{-14}\). This replaces an unjustified use of the one-block inverse on other coarse volumes.
+
+**Variational carrier boundary.** The native constructor now supplies the actual point and outer chart witnesses from the existing selected inverse-link radius, via the Bishop square-reflection and finite sum owners. It is source-written, not kernel-verified. General physical variational attachment cannot assume closure of rational unit quaternions under the necessary root operations. For example the small rational unit \(q=(1073741823+65536i)/1073741825\) has chord-square \(4/1073741825\) but no rational thirteenth root. Any root commutes with \(q\), hence has the same complex axis. A primitive rational complex unit \((a+ib)/d\) has odd denominator; for any prime dividing \(d\), both coordinates are nonzero modulo that prime and \((a+ib)^2\equiv2a(a+ib)\) modulo it. Thus the reduced common denominator of the thirteenth power is \(d^{13}\), whereas the displayed denominator lies strictly between \(4^{13}\) and \(5^{13}\). The exact witness is checked in check_ym_path13_rational_root_obstruction.py. This refutes rational-root closure in the constant sector, not existence of a general nonconstant rational minimizer. It motivates a setoid-real physical background carrier or an exact density/limit theorem; selecting an arbitrary rational minimizer is not a valid replacement for Bałaban's variational theorem.
+
 ## 6. F3: the physical embedded continuum limit
 
 The old common-carrier obligation has been recut into the correct place. Embeddings are data of `F3`, because the physical graph/Mosco limit is defined along them.
@@ -598,10 +642,10 @@ Current local implementation cut:
 
 | Packet | Current source-level status and exact remaining attachment |
 | --- | --- |
-| A — constructive chart | Direct squared-chord point admission and arcsinc upper bound source-written; Section 5.5 derives point/outer bounds and exp/log/Fréchet semantics mathematically. Finish the Bishop order and semantic weld; verify Agda. |
-| B — variational background | Exact nontrivial commuting flat minimizer fixture verified. General literal physical constrained variational theorem attachment and selected-radius hypotheses remain; no rationality assumption for arbitrary minimizers. |
-| C — Gaussian | Full finite Path13 Q mixed jets and pivot/Gram responses executed at the flat reference. Attach general selected-family derivatives, physical A/Hessian and CMP109 measure normalization. |
-| D — beta | Consume existing trace, Fourier, patch and remainder results on the literal physical source; actual uniform beta enclosure not yet established by these receipts. |
+| A — constructive chart | All native point/outer admission witnesses now constructed from the selected inverse-link radius; source-written and API order fixes applied. Complete native exp/log and Fréchet semantics and Agda acceptance. |
+| B — variational background | Exact flat fixture and near-identity rational root obstruction. Attach genuine real-carrier selected variational theorem, actual constraint/gauge/action and its radius; no rationality assumption. |
+| C — Gaussian | Full finite Hessian + Q jets, exact CRT bordered Gaussian, actual multiblock flat pivot and inverse. Attach the general selected minimizer derivatives, complete CMP109 operator and production measure normalization. |
+| D — beta | Uniform multiblock flat constrained Hessian floor 1/57 and normalized Gram floor 57/169 established mathematically; exact finite and Fourier checks. Selected interacting trace, source momentum normalization and uniform physical beta enclosure remain. |
 
 Then apply the existing downstream consumers and validate same-source
 interacting continuum existence, uniform physical clustering, the common
