@@ -52,8 +52,8 @@ def jet_bounds(p,inputs,K,order):
     return B,bounds
 
 
-def direct_jet(p,inputs,K,r,order=3):
-    q,inv_h=normalized_product(p,inputs,r)
+def direct_jet(p,inputs,K,r,order=3,product=normalized_product):
+    q,inv_h=product(p,inputs,r)
     j,n=inputs[2:4]
     v=[x%r for x in j];v[1]=(v[1]-K)%r
     # V=H for fixed slice; use its existing inverse when licensed.
@@ -79,7 +79,7 @@ def translated_coeffs(coeff,K,order):
     return [sum(c*comb(n-i,m)*K**(n-i-m) for i,c in enumerate(coeff) if n-i>=m) for m in range(order+1)]
 
 
-def construct(p,K,bits=384,order=3,ring_oracle=False):
+def construct(p,K,bits=384,order=3,ring_oracle=False,orbit=False):
     assert p>=3 and p%2 and all(p%d for d in range(2,isqrt(p)+1))
     assert bits>=1 and 0<=order<=p+1
     J=j_unit(2*p*p-p+1)
@@ -87,10 +87,19 @@ def construct(p,K,bits=384,order=3,ring_oracle=False):
     radius,bounds=zip(*(jet_bounds(p,x,K,order) for x in inputs))
     maxbound=max(map(max,bounds));Q=1;count=0
     acc=[[0]*(order+1) for x in inputs]
-    for r in moduli(2*p,bits):
+    if orbit:
+        from check_cm_cyclic_orbit_norm import split_moduli, root, normalized_product as orbit_product
+        rings=split_moduli(p,2*p,bits)
+    else:
+        rings=((None,r) for r in moduli(2*p,bits))
+    for ell,r in rings:
+        product=normalized_product
+        if orbit:
+            z=root(p,ell,r)
+            product=lambda p,x,r: orbit_product(p,x,r,z)
         qi=pow(Q,-1,r)
         for i,x in enumerate(inputs):
-            residues=direct_jet(p,x,K,r,order)
+            residues=direct_jet(p,x,K,r,order,product)
             if ring_oracle:
                 expected=translated_coeffs(mod_slice(p,x,r),K,order)
                 assert residues==[c%r for c in expected]
@@ -129,12 +138,13 @@ def family():
 def main():
     ap=argparse.ArgumentParser();ap.add_argument('--p',type=int,default=41);ap.add_argument('--bits',type=int,default=384)
     ap.add_argument('--reference',type=Path);ap.add_argument('--ring-oracle',action='store_true');ap.add_argument('--output',type=Path)
-    ap.add_argument('--family',action='store_true');ap.add_argument('--compare-masser',action='store_true')
+    ap.add_argument('--orbit',action='store_true');ap.add_argument('--family',action='store_true');ap.add_argument('--compare-masser',action='store_true')
     args=ap.parse_args()
     if args.family:
+        if args.orbit:ap.error('--orbit with --family is not supported; use individual --p runs')
         family();return
     p=args.p;K=CASES[p];start=perf_counter()
-    rows,receipt=construct(p,K,args.bits,ring_oracle=args.ring_oracle)
+    rows,receipt=construct(p,K,args.bits,ring_oracle=args.ring_oracle,orbit=args.orbit)
     gamma=cubic_gamma(rows);s2=4+Fraction(3*K,K-1728)+6*K*gamma
     if args.reference:
         original=json.loads(args.reference.read_text())
@@ -144,7 +154,7 @@ def main():
     receipt.update(p=p,gamma=str(gamma),s2=str(s2),seconds=perf_counter()-start,peak_rss_kib=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,packed_calls=fast.calls,packed_operand_bits=fast.peak,reconstructed_slots=8)
     print(json.dumps(receipt),flush=True)
     if args.compare_masser:
-        t=perf_counter();other,meta=construct(4*p-1,K,args.bits,order=2)
+        t=perf_counter();other,meta=construct(4*p-1,K,args.bits,order=2,orbit=args.orbit)
         assert gamma==masser_gamma(other)
         print(json.dumps(dict(masser_level=4*p-1,gamma=str(gamma),seconds=perf_counter()-t,**meta)),flush=True)
 
