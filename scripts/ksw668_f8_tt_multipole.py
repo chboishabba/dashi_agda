@@ -253,12 +253,15 @@ def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
         Heta=S*HT
         Hetaeta=S*S*HTT-HT/(final_t*math.sqrt(1+final_t*final_t))
         Hetaeta_tangent=S*S*HTT_from_tangent-HT_from_tangent/(final_t*math.sqrt(1+final_t*final_t))
-        E4=-(Hetaeta+sum(derivxx))/(4*final_t**2)
-        E4_tangent=-(Hetaeta_tangent+sum(derivxx))/(4*final_t**2)
+        E4_legacy=-(Hetaeta+sum(derivxx))/(4*final_t**2)
+        E4=-(Hetaeta+sum(lapieces))/(4*final_t**2)
+        E4_tangent_legacy=-(Hetaeta_tangent+sum(derivxx))/(4*final_t**2)
+        E4_tangent=-(Hetaeta_tangent+sum(lapieces))/(4*final_t**2)
         # Source-free receiver: SMS projected 5D Weyl=-delta G4 TT.
         E5=-(Hetaeta+2*Heta-sum(lapieces))/(2*final_t**2)
         E5_tangent=-(Hetaeta_tangent+2*S*HT_from_tangent-sum(lapieces))/(2*final_t**2)
         return dict(E4_tangent=E4_tangent,E5_tangent=E5_tangent,
+           E4_legacy=E4_legacy,E4_tangent_legacy=E4_tangent_legacy,
            HT_from_tangent=HT_from_tangent,HTT_from_tangent=HTT_from_tangent,
            r=r,mode_values=pieces,H=H,Hxx=sum(derivxx),
            Delta3H=sum(lapieces),HT=HT,HTT=HTT,
@@ -301,8 +304,12 @@ def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
         far_intrinsic_4D_electric_Weyl=far['intrinsic4D_Eyy'],
         far_projected_5D_electric_Weyl=far['projected5D_Eyy'],
         receiver_intrinsic_4D_electric_Weyl_tangent=rec['E4_tangent'],
+         receiver_intrinsic_4D_electric_Weyl_legacy_axial=rec['E4_legacy'],
+         receiver_intrinsic_4D_electric_Weyl_tangent_legacy_axial=rec['E4_tangent_legacy'],
         receiver_projected_5D_electric_Weyl_tangent=rec['E5_tangent'],
         far_intrinsic_4D_electric_Weyl_tangent=far['E4_tangent'],
+         far_intrinsic_4D_electric_Weyl_legacy_axial=far['E4_legacy'],
+         far_intrinsic_4D_electric_Weyl_tangent_legacy_axial=far['E4_tangent_legacy'],
         far_projected_5D_electric_Weyl_tangent=far['E5_tangent'],
         second_order_spatial_radial_readout=True,
         no_post_evolution_spatial_derivatives=False,
