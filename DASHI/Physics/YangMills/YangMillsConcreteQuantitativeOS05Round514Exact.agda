@@ -127,7 +127,7 @@ FiniteMomentRegularity inputs expectation =
               (T5.exponentialMomentBound
                 (T5.moments (quantitative inputs))
                 observable)
-              (T5.lambda (T5.moments (quantitative inputs)))))))
+              (T5.scalarNatPower (T5.one (T5.moments (quantitative inputs))) (T5.multiply (T5.moments (quantitative inputs))) (T5.lambda (T5.moments (quantitative inputs))) degree)))))
 
 FiniteExponentialGrowth :
   ∀ {Configuration Measure sequenceLimit limitLaws quotient division family} →
@@ -194,7 +194,7 @@ finiteMomentRegularity inputs cutoff =
                   (T5.exponentialMomentBound
                     (T5.moments (quantitative inputs))
                     observable)
-                  (T5.lambda (T5.moments (quantitative inputs))))))
+                  (T5.scalarNatPower (T5.one (T5.moments (quantitative inputs))) (T5.multiply (T5.moments (quantitative inputs))) (T5.lambda (T5.moments (quantitative inputs))) degree))))
           (sameFiniteExpectation inputs cutoff
             (T5.powerObservable
               (T5.moments (quantitative inputs))

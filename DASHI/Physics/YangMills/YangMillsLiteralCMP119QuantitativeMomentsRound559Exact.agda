@@ -96,7 +96,7 @@ preOSLiteralFiniteMomentBound :
       (T5.factorial (moments source) degree)
       (T5.divide (moments source)
         (T5.exponentialMomentBound (moments source) observable)
-        (T5.lambda (moments source))))
+        (T5.scalarNatPower (T5.one (moments source)) (T5.multiply (moments source)) (T5.lambda (moments source)) degree)))
 preOSLiteralFiniteMomentBound source degree observable cutoff =
   T5.singleScaleInsertionMomentBound
     (moments source)
@@ -182,7 +182,7 @@ literalFiniteMomentBound :
       (T5.factorial (moments source) degree)
       (T5.divide (moments source)
         (T5.exponentialMomentBound (moments source) observable)
-        (T5.lambda (moments source))))
+        (T5.scalarNatPower (T5.one (moments source)) (T5.multiply (moments source)) (T5.lambda (moments source)) degree)))
 literalFiniteMomentBound source degree observable cutoff =
   T5.singleScaleInsertionMomentBound
     (moments source)

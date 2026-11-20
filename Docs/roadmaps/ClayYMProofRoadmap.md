@@ -1,3 +1,15 @@
+## 20 November 2026 — exact symbolic moment normalization and source-native IR audit
+
+Local SymPy execution of scripts/check_ym_moment_szz_weld_20261120.py passed: 25 assertions (including nine factorial scalings and nine positive Taylor bounds). This is mathematical regression evidence, not Agda elaboration or actual Wilson continuum acceptance.
+
+The exponential-to-polynomial normalization is corrected at T5, R444, R559, R560, R514 and moment compact containment: for lambda>0 the bound is n! M/lambda^n, not n! M/lambda. Counterexample to the former declaration: X=20, lambda=1/10, n=2; 400>20 exp(2). A shared scalarNatPower avoids an independent radius choice. Positivity and actual moment-production hypotheses still need source realization; no universal claim for arbitrary record operations.
+
+Recovered existing IR source owners: BalabanSZZSourceNativeHessianHandoffExact already welds the effective Hessian margin to the running coupling; BalabanSZZActiveWindowOverlapNecessaryExact already proves the necessary UV/SZZ window overlap. The perturbed threshold is u<N^2/48-N rho/24. SymPy verifies its algebra and curvature slack subtraction. The original active scale must lie in the overlap, with the actual remainder Hessian norm; a positive target does not supply that fact. Stochastic and OS physical time remain distinct.
+
+R444/R445 -> R559: BalabanRationalRealConnectedCovarianceExact provides a scalar embedding and selected-expectation identity pattern, not an exponential expectation identity. YangMillsLiteralCMP119ExponentialMomentTheoremExact is a native-real constructor consuming the actual moment producer. The finite rational fixture checks normalized expectation and polynomial scaling only. The missing transport is actual marked exponential observable/expectation equality (or native-real bounds), positivity and uniform integrability, not a second generic moment compiler.
+
+Status: SYMBOLIC_PASS / SOURCE_WRITTEN / KERNEL_PENDING. No E1/D1/D2/N1/G1 promotion. Next: find actual real marked activity inputs and source-valid active crossover. Maintain Paper 3 and both roadmaps with each implementation.
+
 ## 20 November 2026 — R559 same-family and SZZ typed terminal weld implementation
 
 - R559 commit 510f57d75d9b2642fee870403cc37af2623cf578: added preOSToSameOSMoments / sameOSToPreOSMoments and definitional producer-preservation proofs in the existing YangMillsLiteralCMP119QuantitativeMomentsRound559Exact owner. The OS interface reuses the pre-OS producer on A.family and A.observableAlgebra; no second moment selection.

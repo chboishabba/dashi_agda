@@ -549,6 +549,18 @@ For coarse momentum \(k\), fine aliases \(p=(k+2\pi a)/13\), \(a\in\{0,\ldots,12
 
 **Variational carrier boundary.** The native constructor now supplies the actual point and outer chart witnesses from the existing selected inverse-link radius, via the Bishop square-reflection and finite sum owners. It is source-written, not kernel-verified. General physical variational attachment cannot assume closure of rational unit quaternions under the necessary root operations. For example the small rational unit \(q=(1073741823+65536i)/1073741825\) has chord-square \(4/1073741825\) but no rational thirteenth root. Any root commutes with \(q\), hence has the same complex axis. A primitive rational complex unit \((a+ib)/d\) has odd denominator; for any prime dividing \(d\), both coordinates are nonzero modulo that prime and \((a+ib)^2\equiv2a(a+ib)\) modulo it. Thus the reduced common denominator of the thirteenth power is \(d^{13}\), whereas the displayed denominator lies strictly between \(4^{13}\) and \(5^{13}\). The exact witness is checked in check_ym_path13_rational_root_obstruction.py. This refutes rational-root closure in the constant sector, not existence of a general nonconstant rational minimizer. It motivates a setoid-real physical background carrier or an exact density/limit theorem; selecting an arbitrary rational minimizer is not a valid replacement for Bałaban's variational theorem.
 
+## 20 November 2026 — exact symbolic moment normalization and source-native IR audit
+
+Local SymPy execution of scripts/check_ym_moment_szz_weld_20261120.py passed: 25 assertions (including nine factorial scalings and nine positive Taylor bounds). This is mathematical regression evidence, not Agda elaboration or actual Wilson continuum acceptance.
+
+The exponential-to-polynomial normalization is corrected at T5, R444, R559, R560, R514 and moment compact containment: for lambda>0 the bound is n! M/lambda^n, not n! M/lambda. Counterexample to the former declaration: X=20, lambda=1/10, n=2; 400>20 exp(2). A shared scalarNatPower avoids an independent radius choice. Positivity and actual moment-production hypotheses still need source realization; no universal claim for arbitrary record operations.
+
+Recovered existing IR source owners: BalabanSZZSourceNativeHessianHandoffExact already welds the effective Hessian margin to the running coupling; BalabanSZZActiveWindowOverlapNecessaryExact already proves the necessary UV/SZZ window overlap. The perturbed threshold is u<N^2/48-N rho/24. SymPy verifies its algebra and curvature slack subtraction. The original active scale must lie in the overlap, with the actual remainder Hessian norm; a positive target does not supply that fact. Stochastic and OS physical time remain distinct.
+
+R444/R445 -> R559: BalabanRationalRealConnectedCovarianceExact provides a scalar embedding and selected-expectation identity pattern, not an exponential expectation identity. YangMillsLiteralCMP119ExponentialMomentTheoremExact is a native-real constructor consuming the actual moment producer. The finite rational fixture checks normalized expectation and polynomial scaling only. The missing transport is actual marked exponential observable/expectation equality (or native-real bounds), positivity and uniform integrability, not a second generic moment compiler.
+
+Status: SYMBOLIC_PASS / SOURCE_WRITTEN / KERNEL_PENDING. No E1/D1/D2/N1/G1 promotion. Next: find actual real marked activity inputs and source-valid active crossover. Maintain Paper 3 and both roadmaps with each implementation.
+
 ## 6. F3: the physical embedded continuum limit
 
 The old common-carrier obligation has been recut into the correct place. Embeddings are data of `F3`, because the physical graph/Mosco limit is defined along them.
