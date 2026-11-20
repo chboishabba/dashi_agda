@@ -601,3 +601,79 @@ and tail inequalities on original Bishop limits, apply negativeDeltaWitness.
 CM class-number-one enumeration and half-integer window already exist;
 CM integrality/class polynomial theorem and CH2 remain open.
 No new kernel receipt, no CI. Classical series/CM attribution retained.
+
+
+## 20 November — CM163 modular-diagonal root isolation (class-number-free route)
+
+Prior head 74c4f7a36776b61f4d086e5f0df943499ec7c052.
+New executable scripts/check_cm163_modular_diagonal.py commit
+93407324d2a6584ee5dee99ad40e79227865cdd6. Independently constructs
+the classical degree-41 modular correspondence diagonal from exact
+Eisenstein/eta coefficients. No stored Hilbert class polynomial,
+CM integrality theorem, or class-degree theorem used.
+
+Mathematical proof (classical modularity and q-expansion inputs):
+tau=(-1+i sqrt(163))/2 satisfies tau^2+tau+41=0. Multiplication by
+tau on lattice basis (1,tau) has matrix [[0,-41],[1,-1]], determinant
+41, cyclic cokernel (prime index). Thus tau gives a degree-41 cyclic
+self-isogeny. Equivalently -1/tau=(tau+1)/41, so modular invariance
+gives j(tau)=j((tau+1)/41), a literal factor of the correspondence.
+
+For p=41, define
+F_p(tau)=(j(tau)-j(p tau)) product_{k=0}^{p-1}
+(j(tau)-j((tau+k)/p)).
+The cyclic index-p sublattices are permuted by SL2(Z), so F_p is
+invariant. It is holomorphic in the upper half-plane (global Delta
+nonvanishing), with only a cusp pole of order 2p and leading -1.
+The polynomial representation follows WITHOUT invoking CM or an
+integral modular polynomial theorem: subtract multiples of powers
+of j to cancel all Laurent terms through the constant, leaving an
+invariant holomorphic function vanishing at the cusp. Compactness of
+X(1) makes it identically zero. Therefore F_p=P_p(j), deg P_p=2p.
+The integer expansion and triangular coefficient extraction prove
+P_p in Z[X], leading -1. In particular self-isogeny implies monic
+integer equation, but root isolation below is stronger than integrality.
+
+Exact implementation:
+Let J(q)=q*j(q)=E4(q)^3 / product_{m>=1}(1-q^m)^24,
+t^p=q, H(t)=J(t^p)-t^(p-1)*J(t).
+N(q)=product_{k=0}^{p-1}H(zeta_p^k t).
+L=t H'/H, L_n=n H_n-sum_{i=1}^{n-1} H_i L_(n-i).
+Root-of-unity filtering gives q N'/N=sum_{k>=1} L_(pk) q^k,
+so N_0=1, n N_n=sum_{k=1}^n L_(pk) N_(n-k).
+The normalized diagonal satisfies q^(2p) F_p=
+(q^(p-1)J(q)-J(q^p))*N(q). Compute through q^82 inclusive,
+requiring J through t^3322. Inverse eta product coefficients
+are obtained by exact division in recurrence n B_n=24 sum_{i=1}^n
+sigma1(i) B_(n-i). All arithmetic integer; polynomial calculations
+and division in SymPy ZZ. Triangular leading-power subtraction
+recovers full degree-82 diagonal. No floating-point acceptance.
+
+Executed local source: degree 82, K=-640320^3=-262537412640768000
+is exact root of multiplicity 2, exact division by (X-K)^2 leaves
+degree 80 polynomial S. For coefficients a_i of S(K+z), exact
+integer check 2^80 |a_0| > sum_{i=1}^80 2^(80-i)|a_i| proves
+S nonzero for |z|<=1/2 (even complex disk). Dominance floor ratio
+6593105375567751. Local wall time 8.670737622 s (excluding startup).
+Existing CM dyadic half-integer window is consumed as mathematical
+premise; no fresh rerun of that donor in this packet. Together with
+self-isogeny relation, the enclosure identifies j(tau)=K exactly,
+without class number or integrality hypotheses. This is a classical
+mathematical proof conditional only on analytic modularity/q series,
+compactness of X(1), and the existing enclosure's source semantics.
+Attribution: classical modular correspondences/Hecke double cosets,
+modular curve compactness, Eisenstein/eta product; DASHI's existing
+normalized j and coefficient/interval owners. No claim of new
+classical CM theorem. HeckeCorrOnX021Receipt and
+TraceOfSingularModuliBridge found in search, but no concrete
+Phi41 evaluator located; use the direct prime correspondence rather
+than another abstract CM interface.
+
+Revised cut: selected CM163 classical integrality and exact value
+discharged by modular diagonal route; general CM integrality/class
+degree remain separate, no longer on selected Chudnovsky path. Native
+Bishop same-object/phase/strict apartness transport and formal
+modular-correspondence identity/root isolation remain OPEN; no
+Agda/Lean kernel receipt. CH2 (same-original-pi Chudnovsky hypergeometric
+identity, including derivative/period constants) is the next major
+mathematical cut. Do not infer CH2 from the singular modulus alone.
