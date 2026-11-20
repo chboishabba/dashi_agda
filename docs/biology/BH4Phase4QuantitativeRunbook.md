@@ -199,3 +199,7 @@ Run `python scripts/check_bh4_flux_observer_sympy.py` for S4b: exact target-spec
 ## Conductance-history compression
 
 Run `python scripts/check_bh4_conductance_history_sympy.py` for S4c: exact cycle-class ratio rank, rank-one updates, streaming residual decomposition, and two same-mass self-consistent Poisson states with inequivalent SG flux spaces. Selected positive-support algebra; physical trajectories and source payment OPEN. See [BH4DifferentialStimulantObservationMaxCut.md](BH4DifferentialStimulantObservationMaxCut.md).
+
+## Accepted implicit trajectory streaming
+
+Run `OPENBLAS_NUM_THREADS=1 python scripts/check_bh4_pnp_streaming_sympy.py` for S4c.5. Exact chord codec plus independent reaction-adjusted stock divergence, accepted implicit PNP steps, accumulated cycle residual and solver-defect bound. 48 local reconstructed-solver steps passed; exact full-module replay, original biochemical source payment and physical discrimination remain OPEN. See [BH4DifferentialStimulantObservationMaxCut.md](BH4DifferentialStimulantObservationMaxCut.md).
