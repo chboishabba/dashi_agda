@@ -4,18 +4,20 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Sigma using (Σ) renaming (_,_ to _,Σ_)
-open import Data.Product using (_×_; _,_)
+open import Data.Product using (_×_; _,_; proj₁; proj₂)
 open import Relation.Binary.PropositionalEquality using (cong; subst; trans)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 open import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier
-  using (_∈_; here; there; Not)
+  using (_∈_; here; there; Not; Dec; yes; no)
 
 import DASHI.Physics.YangMills.BalabanClayGate4FiniteEnlargementCollarOwnershipExact as Collar
 import DASHI.Physics.YangMills.BalabanClayP2BadComponentGeometryExact as Geometry
 import DASHI.Physics.YangMills.BalabanClayGate4LiteralWilsonLargeFieldPredicateExact as Wilson
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicReachCollarEnumerationExact as Reach
 import DASHI.Physics.YangMills.BalabanClayGate4FiniteROperationAndDecayAssemblyExact as R
+import DASHI.Physics.YangMills.BalabanClayGate4PeriodicPhysicalAdjacencyAndBadReachExact as Physical
+import DASHI.Physics.YangMills.BalabanClayT2PeriodicBlockPolymerCarrierExact as Periodic
 
 ------------------------------------------------------------------------
 -- Primary provenance.
@@ -237,3 +239,106 @@ regularDomainSupportOwnedSmall dataSet scale configuration enlargement radius
     supportData term Regular inclusion members =
   boundarySupportOwnedPlaquettesSmall dataSet scale configuration enlargement radius
     supportData term (everyWeaken inclusion members)
+
+------------------------------------------------------------------------
+-- Finite producer: the union of enlarged components equals the union of
+-- bounded physical neighbourhoods of bad seeds.  No component enumeration.
+------------------------------------------------------------------------
+
+module PeriodicRegularProducer
+    {n : Nat} {Scale Configuration Gauge Plaquette : Set}
+    (dataSet : Wilson.LiteralWilsonLargeFieldData
+      Scale Configuration Gauge (Periodic.PeriodicBlock n) Plaquette)
+    (scale : Scale) (configuration : Configuration) (radius : Nat) where
+
+  Block = Periodic.PeriodicBlock n
+
+  carrier : Reach.FiniteReachCarrier Block
+  carrier = Physical.periodicPhysicalFiniteReachCarrier n
+
+  enlargement : Collar.EnlargementData Block
+  enlargement = Reach.enlargementData (Physical.periodicPhysicalSymmetricReachCarrier n)
+
+  BadSeedWithin : Block → Block → Set
+  BadSeedWithin block seed =
+    Wilson.LargeFieldBlock dataSet scale configuration seed ×
+    Collar.ReachWithin (Reach.Adjacent carrier) radius seed block
+
+  badSeedWithinDecidable : ∀ block seed → Dec (BadSeedWithin block seed)
+  badSeedWithinDecidable block seed
+    with Wilson.largeFieldBlockDecidable dataSet scale configuration seed
+       | Reach.reachWithinDecidable carrier radius seed block
+  ... | yes bad | yes reaches = yes (bad , reaches)
+  ... | no notBad | _ = no (λ witness → notBad (proj₁ witness))
+  ... | yes _ | no notReach = no (λ witness → notReach (proj₂ witness))
+
+  NoBadSeed : Block → Set
+  NoBadSeed block = ∀ seed → Not (BadSeedWithin block seed)
+
+  noBadSeedImpliesOutsideAllEnlargements :
+    ∀ block → NoBadSeed block →
+    OutsideAllWilsonEnlargements dataSet scale configuration enlargement radius block
+  noBadSeedImpliesOutsideAllEnlargements block reject polymer
+      (seed ,Σ (member , reaches)) =
+    reject seed
+      (Geometry.pathEndBad
+        {dataSet = Wilson.literalWilsonBadBlockGeometry dataSet scale} member
+      , reaches)
+
+  outsideAllEnlargementsImpliesNoBadSeed :
+    ∀ block →
+    OutsideAllWilsonEnlargements dataSet scale configuration enlargement radius block →
+    NoBadSeed block
+  outsideAllEnlargementsImpliesNoBadSeed block outside seed (bad , reaches) =
+    outside (Geometry.component seed bad)
+      (seed ,Σ (Geometry.root bad , reaches))
+
+  noBadSeedDecidable : ∀ block → Dec (NoBadSeed block)
+  noBadSeedDecidable block
+    with Reach.decideAny (badSeedWithinDecidable block) (Reach.allBlocks carrier)
+  ... | yes witness with Reach.anyWitnessMembership witness
+  ... | seed ,Σ (member , badReach) = no (λ reject → reject seed badReach)
+  noBadSeedDecidable block | no absent =
+    yes (λ seed badReach → absent
+      (Reach.anyFromMembership (Reach.allBlocksComplete carrier seed) badReach))
+
+  periodicRegularBlocks : List Block
+  periodicRegularBlocks =
+    Reach.filterDec noBadSeedDecidable (Reach.allBlocks carrier)
+
+  periodicRegularBlocksSound :
+    ∀ block → block ∈ periodicRegularBlocks →
+    OutsideAllWilsonEnlargements dataSet scale configuration enlargement radius block
+  periodicRegularBlocksSound block member =
+    noBadSeedImpliesOutsideAllEnlargements block
+      (Reach.filterDecSound noBadSeedDecidable
+        {values = Reach.allBlocks carrier} member)
+
+  periodicRegularBlocksComplete :
+    ∀ block →
+    OutsideAllWilsonEnlargements dataSet scale configuration enlargement radius block →
+    block ∈ periodicRegularBlocks
+  periodicRegularBlocksComplete block outside =
+    Reach.filterDecComplete noBadSeedDecidable
+      (Reach.allBlocksComplete carrier block)
+      (outsideAllEnlargementsImpliesNoBadSeed block outside)
+
+  periodicRegularBlocksOwnedSmall :
+    ∀ block → block ∈ periodicRegularBlocks →
+    ∀ plaquette → Wilson._∈_ plaquette (Wilson.ownedPlaquettes dataSet block) →
+    Wilson.SmallPlaquette dataSet scale configuration plaquette
+  periodicRegularBlocksOwnedSmall block member =
+    outsideAllEnlargementsOwnedSmall dataSet scale configuration enlargement radius block
+      (periodicRegularBlocksSound block member)
+
+  periodicRegularSupportOwnedSmall :
+    ∀ {Term} (supportData : Collar.LocalizedSupport Term Block) term →
+    Collar.Every (λ block → block ∈ periodicRegularBlocks)
+      (Collar.support supportData term) →
+    Collar.Every
+      (λ block → ∀ plaquette →
+        Wilson._∈_ plaquette (Wilson.ownedPlaquettes dataSet block) →
+        Wilson.SmallPlaquette dataSet scale configuration plaquette)
+      (Collar.support supportData term)
+  periodicRegularSupportOwnedSmall supportData term =
+    everyWeaken periodicRegularBlocksOwnedSmall

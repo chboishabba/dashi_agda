@@ -1026,3 +1026,24 @@ and global exclusion producer, selected mixed-scale plaquette incidence,
 Bishop-real averaged holonomy and adjusted threshold remain OPEN.
 No new analytic assumptions, reduced radii, or physical gate promotion.
 Agda kernel and CI not run.
+
+
+### 2026-11-20 — finite periodic regular-domain producer
+
+The existing RBoundarySupportExtraction owner now contains PeriodicRegularProducer.
+BadSeedWithin combines original Wilson badness and bounded reach on the original
+periodic physical carrier. noBadSeedDecidable searches the complete finite block
+list with decideAny; no component enumeration or path-length bound is required.
+Both directions of the global enlargement exclusion use original pathEndBad
+and component/root, respectively. periodicRegularBlocks filters the original
+enumeration; soundness and completeness use existing filterDec theorems.
+periodicRegularBlocksOwnedSmall and periodicRegularSupportOwnedSmall produce
+strict rational plaquette smallness from actual filtered-list membership.
+The component adjacency need not match the enlargement adjacency for this
+union identity; the enlargement itself is fixed to physical periodic reach.
+
+Next: identify the actual preceding-scale CMP102 regular domain (including
+additional exclusions) with a subset of this list, and recover the literal
+mixed-scale boundary incidence. Adjusted threshold and Bishop averaged
+holonomy remain separate. Source-written, kernel pending; no CI, radius
+reduction, or physical gate promotion.
