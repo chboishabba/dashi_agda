@@ -348,3 +348,40 @@ External promotion requires:
 - independent peer review;
 - journal or equivalent external acceptance where relevant;
 - the applicable Clay Mathematics Institute waiting and eligibility procedures.
+
+
+## 20 November 2026 addendum — independent Paper 9 candidate
+
+Paper 9, **Exact CM Derivative Certificates from Modular Polynomial Slices:
+A Constructive Derivation and Verification of Chudnovsky-Type Series**, is
+an independent computational mathematics working manuscript. Prepare now
+in parallel with core Papers 1, 3 and 8; it is not a fourth Clay-facing
+core paper and does not wait for physical or unification gates. Existing
+core sequencing and satellite dependencies remain unchanged.
+
+Working manuscript: `Docs/papers/drafts/Paper9ExactCMModularJetCertificates.md`.
+Technical roadmap:
+`Docs/roadmaps/ConstructiveConstantsAndKleinJCMMaxCut20261118.md`.
+PR #1529, initial working manuscript commit 5ea80fe8729f8c421c7f369fc88b4b03582c7700.
+
+Candidate contribution: two-slice local cubic modular jet extraction,
+integer cyclic-norm recurrence, CM root isolation and reconstructive
+rational certificates, using Chudnovsky as a worked example. No claim of
+novelty of classical Chudnovsky, binary splitting, modular specialization
+or general CM theory. Independent reproduction and prior-art comparison
+are required before submission.
+
+Complexity section reuses the existing classical execution-fibre,
+recoverable-quotient and Karp-21 physical bit-cost infrastructure, with
+separate quantum cost vocabulary; no P=NP, SAT hardness, quantum speedup
+or physical-cost conclusion. Output coefficient slot count is not bit
+complexity or peak memory. Measure operand sizes, primitive operations,
+scratch, stack, peak payload/RSS, construction and verification costs.
+
+Submission prerequisites: reproduce the exact committed scripts, generalize
+the jet lemma and validate additional CM cases, prove bit-height and
+time/space bounds in numeric level and input bitlength, benchmark against
+established algorithms, and conduct external mathematics and novelty
+review. Initial computational paper can use local SymPy/integer certificates;
+native Bishop/Agda kernel supplement is optional for that paper but required
+for any formal-verification claim. Paper 8 may cite Paper 9 after stabilization.
