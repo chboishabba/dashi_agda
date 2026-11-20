@@ -384,11 +384,12 @@ reducedHLower g b wn wu bn bu =
       (BishopProperties.neg-mono-≤ productBound)
   in
   BishopProperties.≤-respˡ-≃
-    (let open BishopProperties.ℝ-Solver
-     in solve 0
-       (Κ (+ 23 / 24) ⊜ Κ (+ 1 / 1) ⊕
-         (⊝ (Κ (+ 1 / 4) ⊗ Κ (+ 1 / 6))))
-       BishopProperties.≃-refl)
+    (BishopProperties.≃-symm
+      (let open BishopProperties.ℝ-Solver
+       in solve 0
+         (Κ (+ 23 / 24) ⊜ Κ (+ 1 / 1) ⊕
+           (⊝ (Κ (+ 1 / 4) ⊗ Κ (+ 1 / 6))))
+         BishopProperties.≃-refl))
     (BishopProperties.≤-respʳ-≃
       (let open BishopProperties.ℝ-Solver
        in solve 2 (λ w b → Κ (+ 1 / 1) ⊕ (⊝ (w ⊗ b))
@@ -412,10 +413,11 @@ reducedDeltaLower g a b wn wu an bn bu =
     cNonnegative = BishopProperties.pos⇒nonNeg
       (BishopProperties.0<x⇒posx cPositive)
     hSqFloor = BishopProperties.≤-respˡ-≃
-      (let open BishopProperties.ℝ-Solver
-       in solve 0
-         (Κ (+ 529 / 576) ⊜ Κ (+ 23 / 24) ⊗ Κ (+ 23 / 24))
-         BishopProperties.≃-refl)
+      (BishopProperties.≃-symm
+        (let open BishopProperties.ℝ-Solver
+         in solve 0
+           (Κ (+ 529 / 576) ⊜ Κ (+ 23 / 24) ⊗ Κ (+ 23 / 24))
+           BishopProperties.≃-refl))
       (BishopProperties.*-mono-≤ cNonnegative cNonnegative hl hl)
     tailNN = BishopProperties.nonNegx,y⇒nonNegx*y
       (BishopProperties.0≤x⇒nonNegx wn)
@@ -423,8 +425,7 @@ reducedDeltaLower g a b wn wu an bn bu =
         (BishopProperties.0≤x⇒nonNegx an)
         (BishopProperties.0≤x⇒nonNegx an))
     hSqBelowDelta = BishopProperties.≤-respˡ-≃
-      (BishopProperties.≃-symm
-        (BishopProperties.+-identityʳ (BishopReal._*_ h h)))
+      (BishopProperties.+-identityʳ (BishopReal._*_ h h))
       (BishopProperties.+-monoʳ-≤ (BishopReal._*_ h h)
         (BishopProperties.nonNegx⇒0≤x tailNN))
   in BishopProperties.≤-trans hSqFloor hSqBelowDelta
