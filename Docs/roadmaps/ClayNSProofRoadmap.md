@@ -322,3 +322,12 @@ never restart broad archaeology as a proof step;
 search forward from a named unpaid field while retaining old attempts as
 historical/provenance evidence.
 ```
+
+
+## 2026-11-20 — canonical #1444 reconciliation (NS)
+
+All new Clay proof work is routed to PR #1444; older PRs and numbered rounds are historical theorem donors, not competing endpoints. Steelman the literal endpoint, BIDI, reverse solve, weld existing producers, then local verification. Use SymPy for exact independent arithmetic/physical controls; this is not Agda kernel acceptance.
+
+The R664/R665/R685 collinear heat-flow regression, originally committed at 08996708ed951abcd3b21bd89b8c63646fc17c05, is preserved at `scripts/check_ns_collinear_rate_kernel.py`. Local SymPy execution was repeated: N=5, K=2, k=(5,0,0), 726 ordered incidences, two active mixed cells, W(0)=-56 nu, n W(0)=-40656 nu, and W=-d|M|²/dt for this exact unforced real Fourier heat flow. This is only a historical signed-kernel positivity negative control, not a new current collar gate, not a C2 refutation, and not the original rational Agda trajectory weld.
+
+The later R737–R752 cancellation and R828–R853 selected reserve decision supersede that local route. `NSTriadKNR650CanonicalSelectedRateNormalFormRound853Exact` provides the same-object general selected rate 6(12 C_coh - P + (2 nu - delta) D). The selected negative reserve decision still requires the original real trajectory attachment and verified authority; do not revive an unconditional reserve assumption. The positive-B alternative `NSClayFacingBLiteralRowAnalyticMaxCut20261004Exact` consumes four literal row inequalities B1/B2/B3/B4 on the original R236 graph; `NSClayFacingBLocalEDCompilerMaxCut20261004Exact` already aggregates c1+c2+c3+c4 on the common ED currency. Local-ED allocation is not a fifth analytic leaf. This updates routing of older sections without deleting their historical provenance. No new universal estimate, continuum theorem, or Clay promotion follows.
