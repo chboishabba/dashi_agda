@@ -365,7 +365,7 @@ arcPrefixReserveBound s sn inside (suc n) =
   let partial = Seq.SeriesOf (term arcCoefficient s) n
       p = B.pow Half.bishopHalf n
       t = term arcCoefficient s n
-      stepEq = BP.+-congˡ (B._+_ partial t) (arcReserveSuccessor n)
+      stepEq = BP.+-congʳ (B._+_ partial t) (arcReserveSuccessor n)
       bound = BP.+-mono-≤
         (BP.+-monoʳ-≤ partial (arcTermBelowHalfPower s sn inside n))
         BP.≤-refl
