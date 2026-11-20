@@ -124,9 +124,30 @@ def enforce(U,P,M,v,amp,sources,normal_order=2):
 
 def F(t):return math.asinh(t)-math.sqrt(1+t*t)/t
 
+def affine_mode3_stage(stage,U,P,M,outU,outP,outM,dr,dy,b,v,amp,src,cp,cm,normal_order):
+    if normal_order!=3: raise ValueError('affine lift requires mode 3')
+    if amp==0:
+        stage(U,P,M,outU,outP,outM,dr,dy,b,v,amp,src,cp,cm,normal_order)
+        return
+    y=np.arange(U.shape[1])*dy
+    chi=np.maximum(1-y/.12,0.)**4
+    chi[-1]=0.
+    L=(amp/v)*src[:,None,:]*chi[None,:,None]
+    L[:,:,-1]=0.
+    DL=np.empty_like(L)
+    DL[:,0,:]=(L[:,1,:]-L[:,0,:])/dy
+    DL[:,-1,:]=(L[:,-1,:]-L[:,-2,:])/dy
+    DL[:,1:-1,:]=(L[:,2:,:]-L[:,:-2,:])/(2*dy)
+    stage(U,P-L,M-L,outU,outP,outM,dr,dy,b,v,0.,src,cp,cm,normal_order)
+    outU+=L
+    outP+=(1+v)*DL
+    outM+=(v-1)*DL
+
 def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
               pulse=.065,inside_chord=.012,r_outer=4.3,y_outer=3.0,drive=1.,
-              conservative_source=True,normal_order=2,checkpoint=None,budget=75.,checkpoint_every=8):
+              conservative_source=True,normal_order=2,checkpoint=None,budget=75.,checkpoint_every=8,affine_stage=False):
+    if affine_stage and normal_order!=3:raise ValueError('affine stage requires mode 3')
+    stage_run=functools.partial(affine_mode3_stage,stage) if affine_stage else stage
     if normal_order not in (1,2,3):raise ValueError('normal order must be 1 SBP, 2 legacy, 3 SBP2 SAT')
     if not(2<final_t<=20 and 0<dr<eps/3 and 0<dy<=.03
             and 0<dt<min(dr*math.sqrt(3/44),dy*.45) and 0<eps<.08
@@ -195,7 +216,7 @@ def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
         from ksw668_f8_ssprk_checkpoint import NativeCheckpoint
         ck=NativeCheckpoint(checkpoint,dict(dr=dr,dy=dy,dt=dt,eps=eps,final_t=final_t,
             pulse=pulse,inside_chord=inside_chord,r_outer=r_outer,y_outer=y_outer,drive=drive,
-            conservative_source=conservative_source,normal_order=normal_order,nt=nt),
+            conservative_source=conservative_source,normal_order=normal_order,nt=nt,affine_stage=affine_stage),
             dims,src,cp,cm)
         saved=ck.load()
         if saved is not None:
@@ -207,19 +228,19 @@ def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
         T=T0+it*dt
         v,b,amp=coeff(T)
         enforce(U,P,M,v,amp,src,normal_order)
-        stage(U,P,M,dU,dP,dM,dr,dy,b,v,amp,src,cp,cm,normal_order)
+        stage_run(U,P,M,dU,dP,dM,dr,dy,b,v,amp,src,cp,cm,normal_order)
         if it==nt-1:prev_walldot=dU[:,0,:].copy()
         if it==nt:now_walldot=dU[:,0,:].copy()
         U1[:]=U+dt*dU;P1[:]=P+dt*dP;M1[:]=M+dt*dM
         v,b,amp=coeff(T+dt)
         enforce(U1,P1,M1,v,amp,src,normal_order)
-        stage(U1,P1,M1,dU,dP,dM,dr,dy,b,v,amp,src,cp,cm,normal_order)
+        stage_run(U1,P1,M1,dU,dP,dM,dr,dy,b,v,amp,src,cp,cm,normal_order)
         U2[:]=.75*U+.25*(U1+dt*dU)
         P2[:]=.75*P+.25*(P1+dt*dP)
         M2[:]=.75*M+.25*(M1+dt*dM)
         v,b,amp=coeff(T+dt/2)
         enforce(U2,P2,M2,v,amp,src,normal_order)
-        stage(U2,P2,M2,dU,dP,dM,dr,dy,b,v,amp,src,cp,cm,normal_order)
+        stage_run(U2,P2,M2,dU,dP,dM,dr,dy,b,v,amp,src,cp,cm,normal_order)
         U[:]=(U+2*(U2+dt*dU))/3
         P[:]=(P+2*(P2+dt*dP))/3
         M[:]=(M+2*(M2+dt*dM))/3
@@ -232,7 +253,7 @@ def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
     next_wall=U[:,0,:].copy()
     v,b,amp=coeff(T0+(nt+1)*dt)
     enforce(U,P,M,v,amp,src,normal_order)
-    stage(U,P,M,dU,dP,dM,dr,dy,b,v,amp,src,cp,cm,normal_order)
+    stage_run(U,P,M,dU,dP,dM,dr,dy,b,v,amp,src,cp,cm,normal_order)
     next_walldot=dU[:,0,:].copy()
     def read_all(r):
         x=r/dr;ir=int(math.floor(x));q=x-ir
@@ -327,6 +348,7 @@ def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
     return dict(model='original moving AdS5 a=t Neumann compact TT',
         original_radial_multipoles=[0,2,4],
         normal_order=normal_order,
+        affine_stage_homogenized=affine_stage,
         normal_only_characteristic_SBP_closed=(normal_order==1),
         normal_second_order_SBP_SAT_weak_neumann=(normal_order==3),
         strong_wall_neumann_enforced=(normal_order!=3),

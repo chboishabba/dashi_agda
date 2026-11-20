@@ -45,13 +45,13 @@ def verify():
     assert d['finite_SBP2_boundary_Udot_only_repair_no_go']['independent_weak_Israel_wall_and_far_source_generically_incompatible']
     return d
 
-def replay_grid(label,checkpoint=None,budget=75.,checkpoint_every=8):
+def replay_grid(label,checkpoint=None,budget=75.,checkpoint_every=8,affine_stage=False):
     if label not in GRID:raise ValueError('choose one named original mesh')
     from ksw668_f8_tt_multipole import propagate
     dr,dy,dt=GRID[label]
     result=propagate(dr=dr,dy=dy,dt=dt,eps=.04,final_t=12.,
         pulse=.065,inside_chord=.012,r_outer=3.01,y_outer=2.01,
-        normal_order=3,conservative_source=True,checkpoint=checkpoint,budget=budget,checkpoint_every=checkpoint_every)
+        normal_order=3,conservative_source=True,checkpoint=checkpoint,budget=budget,checkpoint_every=checkpoint_every,affine_stage=affine_stage)
     from ksw668_f8_ternary_channel_drift import require_corrected
     require_corrected([result])
     keys=('intrinsic_4D_weyl_spatial_operator','step_radial','step_bulk','step_time','raw_mode_values',
@@ -71,7 +71,7 @@ def replay_grid(label,checkpoint=None,budget=75.,checkpoint_every=8):
     report['receiver_receipt_schema']='XLIX-full-spatial-v2'
     report.update(grid=label,physical_early_Weyl_acceptance=False,
         same_original_adS5_model=True)
-    outfile=REPO/'Artifacts/ksw668'/('ads5_f8_XLIX_corrected_replay_'+label+'.json')
+    outfile=REPO/'Artifacts/ksw668'/('ads5_f8_XLIX_corrected_replay_'+label+('_affine' if affine_stage else '')+'.json')
     outfile.parent.mkdir(parents=True,exist_ok=True)
     outfile.write_text(json.dumps(report,indent=2)+'\n')
     return outfile
@@ -83,10 +83,11 @@ if __name__=='__main__':
     ap.add_argument('--checkpoint',type=Path)
     ap.add_argument('--budget',type=float,default=75.)
     ap.add_argument('--checkpoint-every',type=int,default=8)
+    ap.add_argument('--affine-stage',action='store_true')
     args=ap.parse_args()
     if args.budget<=0 or args.checkpoint_every<=0:ap.error('positive budget and checkpoint interval required')
     if args.run_grid:
-        try:print('Completed numerical mesh only:',replay_grid(args.run_grid,args.checkpoint,args.budget,args.checkpoint_every))
+        try:print('Completed numerical mesh only:',replay_grid(args.run_grid,args.checkpoint,args.budget,args.checkpoint_every,args.affine_stage))
         except InterruptedError as exc:
             print(str(exc));raise SystemExit(75)
     else:print('Historical LEGACY AXIAL negative receipt checked:',verify()['schema'])
