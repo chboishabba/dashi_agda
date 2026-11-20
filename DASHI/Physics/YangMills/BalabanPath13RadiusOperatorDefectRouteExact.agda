@@ -24,7 +24,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Nat.Base using (_≤_; s≤s)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _-_; _≤_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _+_; _*_; _-_; _≤_; _<_)
 import Data.Rational.Tactic.RingSolver as Ring
 import DASHI.Physics.YangMills.BalabanSU2RationalWilsonLargeFieldGapExact as SU2
 import DASHI.Physics.YangMills.BalabanClayGate4RationalSU2ExactGroupLaws as Group
