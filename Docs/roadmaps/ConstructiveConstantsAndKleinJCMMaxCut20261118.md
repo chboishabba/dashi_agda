@@ -1377,3 +1377,97 @@ or Agda/CI acceptance. Keep original quadratic field consumer as oracle.
 Next: cross-level 43/67 and bounded CRT for 163, compare direct jet
 competitors rather than only full polynomial reconstruction, integrate
 rational consumer after parity on all supported CM cases.
+
+
+## 20 November — direct consumer-selected translated jets (P9.M14)
+
+Refactor scripts/check_cm163_residue_swar.py at bc4a24b9513ac57479f4b16d2295b247c9bd1197
+(blob 16675c15d6617454e9cb3e5f15bb2a2807f4c70a) exposes raw_inputs and
+normalized_product; original full-slice constructor remains an oracle.
+New scripts/check_cm_direct_jet.py at 5aa4f5310f1db891ae8b4227e7181c61ce7fc606
+(blob 6e1b83d5ff38d1cc42095b31f8a24b3ff17cbf62). Local Git hashes match.
+Reuse existing cyclic norm, modular inverse and fast J producers; no
+new classical modularity assumption. Preserve Masser attribution through
+Bruinier–Ono–Sutherland arXiv:1301.5672 Lemma 2.3; classical formal residue
+change of variable is not novel. Candidate contribution is the specific
+consumer-selected implementation, its bounds and lower-level jet weld.
+No actual co-authorship inferred from citations.
+
+Let F be either polynomial slice of degree n, Q=q^n F(j(q)), V=J-Kq,
+w=q/V. Formal residue of w^(m-1) F(K+1/w) dw after substitution is
+[q^(n-m)] Q V^-m (1-qV'/V). This gives translated coefficient m
+directly over residue rings, without reconstructing any full polynomial
+or subsequent translation. V has constant coefficient 1. Substitution
+identity holds over integers and hence descends to all residue rings.
+Compute Z=Q(1-qV'/V), then multiply successively by V^-1 at decreasing
+truncations n-m; select one coefficient at each order. Fixed-slice
+V inverse is a prefix of the already computed H inverse, reused after
+exact input equality check. Diagonal uses a small unit inverse recurrence.
+This is conditional on existing integral slice and normalized product
+identity and analytic branch hypotheses; not a fresh modularity proof.
+
+Height proof: choose least integer B>=2 satisfying exact absolute sums
+|V-1|<=1/4, |qV'|<=1/4 on |q|=B^-p; monotone exponential search/bisection.
+On |t|=B^-1 bound H by 2^h using finite absolute coefficient sum,
+bound g on q circle by 2^a. Norm invariant under t->zeta*t gives
+|Q|<=2^(ph+a); |V^-m|<=2^m and |1-qV'/V|<=2.
+Cauchy implies |translated c_m|<=2^E_m, E_m=ph+a+1+m+
+ceil(log2(B^(p(n-m)))). All ceilings via integer arithmetic. Finite
+truncation suffices because only coefficients through n enter.
+CRT product >2^(max E_m+1) certifies unique signed reconstruction.
+For CM163 B=3 for both slices, E arrays [5372,5308,5244,5180] and
+[5069,5005,4941,4877], 14 rings, product 5413 bits.
+Reconstruct eight integers (four zero witnesses, four nonzero
+consumer coefficients); no full-polynomial recovery on normal path.
+Optional --ring-oracle invokes full slice reconstruction per ring and
+checks translated residue equality; --reference checks existing
+signed-hex full coefficient file after reconstruction only.
+CRT maintains O(1) reconstructed integer slots at fixed jet order,
+not an O(1) total working-memory theorem. Series M=O(p^2) unchanged.
+Old full power table O(p^2) residue slots replaced by constant number
+of length O(p) arrays in extraction. Norm/series dominate overall memory.
+
+Local final source Python 3.13.5/SymPy 1.14.0, serial subprocess runs
+including construction, exact verification, final rational normalization:
+- full slices (refactored original --fast-j --bits 384 --reference):
+  3.697450925 s; RSS 138272 KiB; 2526 packed calls; 3721676 max operand bits.
+- direct (--bits 384 --reference --output):
+  3.352723950 s; RSS 138416 KiB; 958 packed calls; same max operand bits.
+- direct with --ring-oracle: 6.346344054 s; RSS 138680 KiB;
+  3450 packed calls; all 14 rings x 8 translated coefficients PASS.
+Earlier prototype 3.123610317 s, RSS 138156 KiB, not used for matched comparison.
+Both final normal paths exact s2=77265280/90856689,
+gamma=77859659565707/19943834790540897829879824384000.
+All eight direct coefficients match stored full slice translation.
+Full payload 241632 bits, 61113 JSON bytes vs direct 18425 bits,
+4664 JSON bytes (different JSON whitespace conventions, payload counts
+independent). Direct nonzero bit lengths [4631,4580,4629,4577].
+15.75x fewer reconstructed slots, 62.1% fewer packed calls, 9.3%
+less elapsed time in one sequential pair, no observed RSS reduction.
+No statistical benchmark or external SOTA claim.
+
+Final --family replay: independently construct low cubic and high
+Masser quadratic jets, low ring oracle enabled, different moduli target
+widths 128 and 384, so times NOT a matched level speed benchmark.
+| D | low/high levels | gamma | low/high seconds |
+| --- | --- | --- | --- |
+| -11 | 3/11 | 289/8830976 | .003908/.042307 |
+| -19 | 5/19 | 275/226934784 | .011166/.228938 |
+| -43 | 11/43 | 268427/226492858368000 | .088244/3.211053 |
+| -67 | 17/67 | 44248307/6269455245182976000 | .357782/16.550388 |
+All PASS same rational gamma and known s2; lower ring comparisons
+1+2+6+11 rings. Classical K supplied. Higher cases use direct jets,
+not full independently reconstructed polynomials. Both levels share
+arithmetic backend, so not independent software implementations.
+Level 163 Masser comparison still OPEN; optional --compare-masser
+command exists but level 163 has not been run. Independent root
+enclosures, external PARI/FLINT/FriCAS comparison, native SWAR full
+backend, and proof/kernel acceptance remain OPEN.
+Reproduce from repository:
+python scripts/check_cm163_residue_swar.py --fast-j --bits 384 --output full.json
+python scripts/check_cm_direct_jet.py --bits 384 --reference full.json --output jets.json
+python scripts/check_cm_direct_jet.py --bits 384 --reference full.json --ring-oracle
+python scripts/check_cm_direct_jet.py --family
+Next: exploit sublinear-in-full-output norm consumer / tighter height
+bounds, compare equal residue widths at different levels, run level 163
+where resources permit. No CI or Agda run in this packet.
