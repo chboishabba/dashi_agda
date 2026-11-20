@@ -1087,3 +1087,84 @@ subtracting a large leading power; triadic/height-adaptive block sizes,
 ablation and repeated sequential memory/runtime measurements, then CRT.
 Native ternary coding, FRACDASH execution, dyadic enclosure replay and
 additional CM discriminants remain OPEN. No Agda or CI execution.
+
+
+## 20 November — bounded residue SWAR-inspired execution and deterministic CRT
+
+Source commit ab90beec7eeadb73489bfc5ecad253cd53086b05:
+scripts/check_cm163_residue_swar.py, local and committed Git blob
+2feac81f52f2b9b941444e2e8b3e260004a0e4f2. Dependencies checked locally:
+fast 6c1a051c2832d9afd549680b3a6401383023989e,
+diagonal add8e35866aa1e9f379b4a57059c4487e4c7241c,
+derivative 0c1f7d04618943d6b9941f433ceed8c5cd9fd590.
+Python 3.13.5, SymPy 1.14.0, x86_64. No CI/kernel run.
+
+Reuse provenance: TriadicSupportMaskSWARExecutionExact has a receipt for
+eight independent byte lanes and 8^8 exhaustive packed words;
+TriadicSignCompactionSWARExecutionExact has eight lane factorized encode
+and 27^5 core product receipt; TriadicCodecSWARPortableKernelCrossPollinationExact
+separates representation from execution; RSA260TriadicSWARExecutionRoadmapCrossPollinationExact
+supplies bounded ABI / scalar oracle / exact source / lane execution /
+domain parity pattern. This new backend uses GMP Kronecker coefficient
+lanes and serial residue rings, NOT fixed-word hardware SWAR or SIMD.
+No claim of reusing the actual C byte-popcount kernel for big-integer multiplication.
+
+Reduce every coefficient mod r after each convolution; use carry-isolated
+packing via original fast.mul. For operand sizes m,n and residues <r,
+the signed radix bound R>2 min(m,n)(r-1)^2 suffices. For b_r=bitlength(r),
+packed operand size O(M(b_r+log M)) rather than O(M B_max).
+Use Newton active residual update and check HG=1, HL=tH' in every ring.
+Norm division by k is modular inversion, legal because moduli are powers
+of distinct small primes >82 (trial division establishes primality).
+Reconstruct only the two final polynomial vectors by incremental CRT,
+not the high-height intermediate inverse series. J generated once using
+original exact j_unit; both slices use prefixes of that same series.
+
+Deterministic height proof (not historical output width):
+Let n be slice degree, H finite truncated input in t with t^p=q, g the
+normalized prefactor in q, J the unit series truncated to degree n.
+Define Q=g*Norm(H), whose first n+1 coefficients agree with the original
+construction. Norm is invariant under t -> zeta*t, a polynomial in q,
+and on |q|=2^-p its magnitude is <= (sum_i |H_i|2^-i)^p.
+For formal coordinate w=q/J, residue change of variable gives the recovered
+coefficient c_d=[q^(n-d)] Q J^-d (1-qJ'/J), 0<=d<=n:
+take the residue of w^(d-1) P(1/w) dw and substitute w=q/J.
+Only first n+1 coefficients enter. Exact dyadic inequalities in code prove
+|J-1|<=1/4 and |qJ'|<=1/4 on the circle; hence |J^-d|<=2^d and
+|1-qJ'/J|<=2. If H_abs<=2^h and g_abs<=2^a from exact coefficient
+sums, Cauchy gives |c_d|<=2^(p*h+a+1+d+p(n-d))<=2^E,
+E=p*h+a+1+pn. For both CM163 inputs computed E=5086.
+CRT product strictly >2^(E+1) makes centered reconstruction unique;
+no reliance on historical coefficient list or probabilistic stopping.
+The optional reference argument only compares after reconstruction.
+This is a mathematical bound conditional on the existing slice construction;
+no fresh proof of classical modularity is asserted. The dyadic checks
+are specific to p=41, not a uniform small-prime theorem.
+
+Observed separate live local runs, including original J generation,
+all modular inverse/logder checks, CRT, byte serialization, optional
+reference equality and exact derivative consumer:
+| Target modulus bits | CRT rings | Final product bits | Time s | RSS KiB | Largest packed operand bits | Packed calls |
+| ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 768 | 7 | 5396 | 6.693572904 | 143340 | 5245493 | 1246 |
+| 384 | 14 | 5413 | 6.625785951 | 137292 | 2689990 | 2492 |
+Both PASS all 126 exact coefficients against the existing local
+cm_fast_coeffs.json, and kappa=-77859659565707/19943834790540897829879824384000,
+s2=77265280/90856689. First output file also independently cmp-equal to
+the reference. J/setup times 3.090534929 and 2.898582786 s.
+Reproduce without a reference:
+python scripts/check_cm163_residue_swar.py --bits 384 --output coeffs.json
+Reference optional: --reference existing signed-hex JSON.
+Reported historical scalar 31.649 s /143412 KiB and dense 16.208 s /
+533716 KiB are separate prior runs, not controlled fresh comparisons.
+384 target is ~134.07 MiB RSS, ~76x smaller largest packed operand than
+historical dense; runtime ~6.63 s. Only two single observations; no
+statistical, general peak-heap or hardware-throughput claim.
+P9.M7 deterministic streamed CRT implemented and full CM163 parity PASS.
+P9.M5 geometric compression remains open and is no longer prerequisite.
+P9.M10 fixed-width SWAR lane reduction / SIMD implementation OPEN:
+derive overflow-safe packed modular add/sub/mul, compile scalar oracle,
+exhaustively test feasible domains and compare full same-source residues.
+Next optimize shared J construction (~3s), width/block ablations,
+native fixed-width lanes and generalization; charge all intermediate
+storage/CRT reconstruction, retain original scalar and dense oracles.
