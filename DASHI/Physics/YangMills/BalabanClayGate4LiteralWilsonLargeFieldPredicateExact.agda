@@ -307,6 +307,60 @@ literalWilsonBadBlockGeometry dataSet scale = record
       largeFieldBlockGaugeBackward dataSet gauge scale configuration block
   }
 
+
+------------------------------------------------------------------------
+-- Component complement on the literal Wilson geometry.  No allocator:
+-- a bad block is already a seed, and a member is bad at the path endpoint.
+------------------------------------------------------------------------
+
+OutsideWilsonComponents :
+  ∀ {Scale Configuration Gauge Block Plaquette}
+    (dataSet : LiteralWilsonLargeFieldData Scale Configuration Gauge Block Plaquette)
+    scale configuration block → Set
+OutsideWilsonComponents dataSet scale configuration block =
+  (polymer : Geometry.BadComponent (literalWilsonBadBlockGeometry dataSet scale)
+    configuration) → Geometry.Contains polymer block → Empty
+
+outsideWilsonComponentsImpliesGood :
+  ∀ {Scale Configuration Gauge Block Plaquette}
+    (dataSet : LiteralWilsonLargeFieldData Scale Configuration Gauge Block Plaquette)
+    scale configuration block →
+  OutsideWilsonComponents dataSet scale configuration block →
+  LargeFieldBlock dataSet scale configuration block → Empty
+outsideWilsonComponentsImpliesGood dataSet scale configuration block outside bad =
+  outside (Geometry.component block bad) (Geometry.root bad)
+
+goodImpliesOutsideWilsonComponents :
+  ∀ {Scale Configuration Gauge Block Plaquette}
+    (dataSet : LiteralWilsonLargeFieldData Scale Configuration Gauge Block Plaquette)
+    scale configuration block →
+  (LargeFieldBlock dataSet scale configuration block → Empty) →
+  OutsideWilsonComponents dataSet scale configuration block
+goodImpliesOutsideWilsonComponents dataSet scale configuration block good polymer member =
+  good (Geometry.pathEndBad {dataSet = literalWilsonBadBlockGeometry dataSet scale} member)
+
+outsideWilsonComponentsOwnedSmall :
+  ∀ {Scale Configuration Gauge Block Plaquette}
+    (dataSet : LiteralWilsonLargeFieldData Scale Configuration Gauge Block Plaquette)
+    scale configuration block →
+  OutsideWilsonComponents dataSet scale configuration block →
+  ∀ plaquette → plaquette ∈ ownedPlaquettes dataSet block →
+  SmallPlaquette dataSet scale configuration plaquette
+outsideWilsonComponentsOwnedSmall dataSet scale configuration block outside plaquette member =
+  goodBlockOwnedPlaquetteSmall dataSet scale configuration block plaquette member
+    (outsideWilsonComponentsImpliesGood dataSet scale configuration block outside)
+
+allOwnedSmallImpliesOutsideWilsonComponents :
+  ∀ {Scale Configuration Gauge Block Plaquette}
+    (dataSet : LiteralWilsonLargeFieldData Scale Configuration Gauge Block Plaquette)
+    scale configuration block →
+  (∀ plaquette → plaquette ∈ ownedPlaquettes dataSet block →
+    SmallPlaquette dataSet scale configuration plaquette) →
+  OutsideWilsonComponents dataSet scale configuration block
+allOwnedSmallImpliesOutsideWilsonComponents dataSet scale configuration block small =
+  goodImpliesOutsideWilsonComponents dataSet scale configuration block
+    (allOwnedSmallImpliesGoodBlock dataSet scale configuration block small)
+
 ------------------------------------------------------------------------
 -- Exact local Wilson cost bridge, reusing the existing SU(2) theorem.
 ------------------------------------------------------------------------
