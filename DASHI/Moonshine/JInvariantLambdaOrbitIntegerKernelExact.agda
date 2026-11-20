@@ -7,7 +7,7 @@ module DASHI.Moonshine.JInvariantLambdaOrbitIntegerKernelExact where
 -- Prior owner: JInvariantLambdaOrbitBase369BridgeExact.
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Integer using (ℤ; _+_; _-_; _*_)
+open import Data.Integer using (ℤ; +_; _+_; _-_; _*_)
 open import Data.Integer.Solver using (module +-*-Solver)
 open +-*-Solver
 open import Base369 using (HexTruth)
@@ -37,7 +37,7 @@ denominator : Homogeneous → ℤ
 denominator (pair a b) = (a * b * (b - a)) * (a * b * (b - a))
 
 numerator : Homogeneous → ℤ
-numerator x = 256 * quadratic x * quadratic x * quadratic x
+numerator x = (+ 256) * quadratic x * quadratic x * quadratic x
 
 quadraticInvariant : (t : LambdaOrbitTag) (x : Homogeneous) →
   quadratic (orbit t x) ≡ quadratic x
