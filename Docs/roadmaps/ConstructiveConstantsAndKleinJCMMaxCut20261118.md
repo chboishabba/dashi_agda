@@ -287,3 +287,30 @@ Monster full Aut, 194 traces and FLM construction are NOT prerequisites
 for evaluating the existing standard-j quotient. CM2 remains open unless
 actual integral modular-polynomial or CM integrality/class-degree proof is
 found. K05.06/07 remain open in Agda. No kernel execution in this packet.
+
+
+## 20 November — 369 homogeneous lambda integer kernel implementation
+
+JInvariantLambdaOrbitIntegerKernelExact.agda (implementation 7c4d817d2ffb,
+integer constructor alignment 991e2223b54b) imports the original
+LambdaOrbitTag and hexToLambdaOrbit. No duplicate orbit carrier.
+For lambda=a/b, homogeneously j=256 Q^3/D where
+Q=a^2-ab+b^2 and D=(ab(b-a))^2. Both Q and D are individually
+invariant under all six existing tag transforms:
+(a,b), (b,b-a), (a-b,a), (b-a,b), (a,a-b), (b,a).
+Source implements 12 integer ring proofs, numerator equality,
+nonzero denominator transport and HexTruth-indexed numerator/denominator
+theorems. No division by zero or analytic lambda assertion.
+Independent local SymPy expansion of all 12 identities PASS (41.25 ms);
+Fraction regression over -32<=a,b<=32, D!=0: 24,192 orbit checks PASS
+(50.68 ms). Single-run timings, not compiler timings. Agda and Nix
+not available locally; exact-head kernel acceptance OPEN.
+Primary mathematical attribution: classical Legendre elliptic curve
+j-invariant, Serre A Course in Arithmetic (1973); original repo
+JInvariantLambdaOrbitBase369BridgeExact, JInvariantSourceAtlasExact.
+J3 algebraic lambda orbit subgate: source implemented, compiler pending.
+Remaining: actual rational quotient/field interpretation, analytic
+lambda(tau) identification with original normalized E4^3/Delta, local
+apartness and selected modular fixed points; K05.06/07, CM integrality,
+CH2 and local pinned acceptance unchanged. Do not confuse this
+homogeneous integer result with concrete analytic modularity.
