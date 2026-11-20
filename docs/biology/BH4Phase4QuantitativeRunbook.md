@@ -187,3 +187,7 @@ See [BH4DifferentialStimulantObservationMaxCut.md](BH4DifferentialStimulantObser
 ## Selected catecholamine source cut (2026-11-20)
 
 Run `python scripts/check_bh4_catecholamine_sympy.py` for S2a: selected Rhea 15-species/5-reaction chemistry with existing finite matrix producer, exact CHNOP/charge, pterin recycling, and feasible turnover-observer collision. See [BH4DifferentialStimulantObservationMaxCut.md](BH4DifferentialStimulantObservationMaxCut.md) for attribution and S2b remaining source/369/physical boundary gates. This is local SymPy acceptance, not archived original panel payment, clinical inference or Agda kernel acceptance.
+
+## Joint reaction/transfer observer (2026-11-20)
+
+Run `python scripts/check_bh4_joint_observer_sympy.py` for selected S3b/S4a: exact joint rank/nullspace, 33 cardinality-minimal panels among 126 five-row subsets, repeated feasible silent circulation histories, explicit exchange negative control and native 369 incidence aggregation. Local replay uses recovered literal upstream definitions; full-module/Agda acceptance and physical source/kinetic payment remain OPEN. See [BH4DifferentialStimulantObservationMaxCut.md](BH4DifferentialStimulantObservationMaxCut.md).
