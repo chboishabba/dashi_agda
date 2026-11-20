@@ -929,3 +929,44 @@ Eq(7) normalization established; producer prior-art search remains open,
 not a claim of mathematical absence. Physical same-object attachment open.
 Root-free analytic weld remains open; no new kernel acceptance, CI, radius
 reduction or Clay promotion. Constructor/geometry audit before changing math.
+
+
+### 2026-11-20 — reuse CMP99/CMP102/Cauchy and literal small-field complement
+
+At e746c117 the actual BalabanClayGate4LiteralWilsonLargeFieldPredicateExact
+defines LargePlaquette as threshold² <= literalChordalDistanceSq of the
+supplied rational unit plaquette holonomy. For an owned plaquette, the
+negative LargeFieldBlock witness excludes largeWitness; rational strict
+order then gives chord² < threshold². This is a direct complement
+specialization, not a new physical smallness estimate. Equality is large,
+not small. Preserve ownedPlaquettes membership, exact selected configuration,
+threshold vs scaleAdjustedThreshold, and rational vs Bishop-real carrier.
+Do not infer a decidable strict dichotomy for arbitrary Bishop reals.
+Actual mixed-scale shell membership and threshold/source identification
+remain open. BalabanC2SmallLargeAllScaleExact packages supplied curvature
+and one-step coercivity hypotheses; no unconditional Eq(7) producer there.
+
+CMP99 already has BalabanClayGate4BackgroundPropagatorDecayTheoremsExact
+(Theorems 3.1–3.4 source authority), BalabanCMP99CovarianceLocalityToRGStateExact
+(cmp99CovarianceCapForNextState), and BalabanCMP99PathDerivativeSourceReplayRound413Exact
+(asR408StageDifference, asR410CanonicalPathReplay,
+cmp99PathDefectBelowResolventBudget). R413 fixes the changed pathDerivativeStage
+definitionally and consumes the existing resolvent budget. Reuse R408/R409/R410
+and R360; remaining inputs are same actual perturbed/reference inverse,
+norm/order, unchanged outer dexp/log inverse/transport derivative, distance
+and regular background. Do not reconstruct CMP99 decay or marked comparison.
+BalabanPropagatorSourceLedger.md already identifies CMP99 regular configurations
+DOI BF01466594 separately from propagators DOI BF01240355, and CMP102
+variational Theorem 1 / Proposition 9 DOI BF01229381.
+CMP102 R367 consumes source critical-map contraction and same argument
+distances; source C-Lipschitz not a separate scalar primitive.
+Cauchy already has BishopExponentialFiniteCauchyCoefficientExact,
+BishopFiniteCauchyRowReindexExact, BishopFiniteCauchyTriangleInsideRectangleExact,
+BishopFiniteRectangleInsideCauchyTriangleExact, BishopFiniteCauchyWingAbsoluteBoundExact,
+BishopExponentialCauchyProductExact (bishopExpTimesNegativeIsOne).
+Reuse these scalar finite and limit owners and #1478 complex donor; only
+weighted pair same-series specialization remains, not general Cauchy theory.
+Next implement explicit rational complement consumer on existing predicate,
+then connect previous-scale mixed geometry and actual Bishop-real boundary
+links. This audit does not assert new formal complement code, donor transplant,
+kernel acceptance, radius reduction, CI or physical gate closure.
