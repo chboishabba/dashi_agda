@@ -855,3 +855,46 @@ old lanes are legacy/support, not deleted. Do not create replacement drafts.
 The active Paper 3 at d22154d supersedes its older local task list; Sections 5.5–5.6 record the full finite Q, exact bordered trace, source-semantic chart and physical multi-block flat base.
 The older source intake manuscript's P33-closed label is scoped to its
 historical reduction, not the current physical beta or Clay endpoint.
+
+
+### 2026-11-20 — CMP102 constructor-first root-free boundary reconstruction
+
+Mandatory attribution rule: on apparent errors, audit actual constructor, carrier,
+coordinate normalization, multiplication order, path endpoints, scale and gauge
+anchors before changing equations, shrinking radii or adding hypotheses.
+Separate algebraic, analytic, geometric and physical acceptance.
+
+At d88d709c the native CMP98 Path13 owner exposes outerY and nativeInputsFromPhysicalRadius,
+with SmallLie giving 0 <= w = 4||Y||² <= 1/4 for the native series chart.
+The quaternion exponential uses s = ||Y||², not the adjoint radius w.
+BalabanCMP98Equation119GeometryRelativeContourExact.coarseBackgroundHolonomy
+is the reference bond from the same nativeGeometryAt, and relativeContourElement
+is Gamma times inverse(coarse), not the reverse order. Hence the candidate
+boundary link is exp(Y) times coarse on the right. Mixed-scale endpoint and
+multi-anchor compatibility still require actual source identification.
+
+Reuse BalabanCMP109BishopRootFreeSeriesExact.aSeries and bSeries:
+C(s)=1-s A(-s), S(s)=1-s B(-s), exp(Y)=(C(s), S(s)Y).
+No zero/positive radius decision is needed; s <= 1/16 is already inside the
+series domain. BalabanP33BishopLiteralQuaternionExponentialChordExact is an
+existing conditional radius-case consumer, not a total real-radius compiler.
+Reuse BalabanClayT2BishopQuaternionNormalizationExact.multiplyQuaternionB
+and fourProductB. Do not assume the rational unit carrier is closed under exp.
+
+For n>=1 the coefficient of s^n in C²+sS² is (-1)^n/(2n)! times
+(sum of even binomial coefficients minus sum of odd coefficients at 2n);
+both sums equal 2^(2n-1). Constant term is one. Absolute convergence gives
+the classical identity. Local exact Python/SymPy execution checked coefficients
+1..40, Hamilton norm multiplicativity and right-product displacement.
+The reproducible script is scripts/check_ym_cmp102_root_free_exp.py.
+This is not native Agda acceptance.
+
+Next: formalize the same-series Cauchy product and parity-limit weld using
+BishopExponentialCauchyProductExact and existing finite parity machinery.
+JInvariantBishopTrigUnitPhaseExact consumes a Pythagorean certificate; it
+does not prove one. Prove unit norm of actual root-free exp and identify
+it with source exponential, then derive chord²=2s A(-s)<=s using alternating
+bound. Compose with the same coarseBackgroundHolonomy and existing plaquette
+consumer. Actual CMP102 mixed-scale incidence, Eq(7) strict witness, gauge
+section, real minimizer and propagator remain OPEN. No radius shrink,
+new kernel acceptance, CI or Clay endpoint promotion.

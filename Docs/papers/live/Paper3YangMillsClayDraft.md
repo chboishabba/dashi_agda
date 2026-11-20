@@ -847,3 +847,46 @@ Inspected ScaledFilteredEstimateExact (scale algebra), GradedLocalCompatibilityS
 Supersedes broad "missing plaquette" and "missing gauge representative" labels in preceding history. Existing BalabanPeriodicPlaquetteHolonomy supplies six oriented positive planes and endpoint covariance; BalabanSU2RationalWilsonLargeFieldGapExact already proves unitChordalEqualsTwiceTraceDeficit, and BalabanClayGate4LiteralPeriodicPlaquetteHolonomyGaugeExact proves conjugationPreservesChordalDistanceSq. No new plaquette or chord theorem needed. YMClaySUNSideFourBlockedWilsonGaugeExact supplies coarse plaquette consumer for straight 2-link blocking, NOT nonlinear CMP98 averaging. CMP102 printed pp277–278 (1),(7) visually checked: on interface replace missing bond with one-step averaged finer V, with actual endpoints and ordering; source plaquettes include at least one corner in shell. CMP98 extract pp19–21 (15),(17)–(19) defines nonlinear exp(mean log relative contour) times central holonomy and distinguishes normalized trace norm from operator norm. In SU2 quaternion matrix coordinates M=P-I, M* M=||P-I||_quat² I; thus operator norm and normalized Hilbert-Schmidt norm both equal quaternion chord, and unit norm gives chord²=2(1-ReTr_normalized P). Local SymPy script scripts/check_ym_cmp102_plaquette_norm.py actually executed PASS for symbolic M* M and polynomial deficit identity. This supplies exact normalization, not an estimate of actual mixed-scale plaquette deficit. Eq7 equivalent to per-source-plaquette deficit < epsilon1²/2 in this convention; total action or fine-link radius alone not same hypothesis.
 
 BalabanCMP98Path13BishopNativeSourceExact owns relativeUnit, principalLog, outerYFrom and actual differential route; use same nonlinear group average, not straight-path blocking. Need concrete source boundary endpoint membership and group-valued reconstruction on actual mixed-scale V; targeted default-branch searches did not locate completed same-object interface, not proof of absence. BalabanRootedCoarseAnchoredOrbitSectionRound194Exact and BalabanFinitePhysicalGaugeQuotientCarrierRound196Exact supply rooted based orbit representative uniqueness and preservation of selected average under existing gauge action/root restriction inputs. Source CMP102 Eq4 fixes all mixed-scale coarse sites, so single-root section must not be assumed to preserve multi-anchor condition; use actual compatible section/quotient. BalabanCMP98SelectedPhysicalUnitCarrierErasureBridgeExact is rational-to-rational group word erasure; YMClayOriginalRationalSU2BishopUnitaryWeldExact explicitly only forward embedding into Bishop unit group, not surjective. Retain actual physical minimizer in real carrier; rational fixtures do not establish existence of rational representative. Path13 specialization's selectedBackgroundIsPath13 and selectedBondGroupIsPath13Link already refl once source instance supplied. BackgroundFieldVariationalTheorem.backgroundUnique literal equality requires identified gauge section, not just published unique critical orbit. No new generic adapter, no radius shrink, no Agda or Clay gate promotion. Next actual work: concrete mixed-scale shell V boundary link input using same CMP98 nonlinear group average, actual per-plaquette Eq7 witness and physical minimizer carrier specialization. Prior source authority remains unchanged.
+
+
+### 2026-11-20 — CMP102 constructor-first root-free boundary reconstruction
+
+Mandatory attribution rule: on apparent errors, audit actual constructor, carrier,
+coordinate normalization, multiplication order, path endpoints, scale and gauge
+anchors before changing equations, shrinking radii or adding hypotheses.
+Separate algebraic, analytic, geometric and physical acceptance.
+
+At d88d709c the native CMP98 Path13 owner exposes outerY and nativeInputsFromPhysicalRadius,
+with SmallLie giving 0 <= w = 4||Y||² <= 1/4 for the native series chart.
+The quaternion exponential uses s = ||Y||², not the adjoint radius w.
+BalabanCMP98Equation119GeometryRelativeContourExact.coarseBackgroundHolonomy
+is the reference bond from the same nativeGeometryAt, and relativeContourElement
+is Gamma times inverse(coarse), not the reverse order. Hence the candidate
+boundary link is exp(Y) times coarse on the right. Mixed-scale endpoint and
+multi-anchor compatibility still require actual source identification.
+
+Reuse BalabanCMP109BishopRootFreeSeriesExact.aSeries and bSeries:
+C(s)=1-s A(-s), S(s)=1-s B(-s), exp(Y)=(C(s), S(s)Y).
+No zero/positive radius decision is needed; s <= 1/16 is already inside the
+series domain. BalabanP33BishopLiteralQuaternionExponentialChordExact is an
+existing conditional radius-case consumer, not a total real-radius compiler.
+Reuse BalabanClayT2BishopQuaternionNormalizationExact.multiplyQuaternionB
+and fourProductB. Do not assume the rational unit carrier is closed under exp.
+
+For n>=1 the coefficient of s^n in C²+sS² is (-1)^n/(2n)! times
+(sum of even binomial coefficients minus sum of odd coefficients at 2n);
+both sums equal 2^(2n-1). Constant term is one. Absolute convergence gives
+the classical identity. Local exact Python/SymPy execution checked coefficients
+1..40, Hamilton norm multiplicativity and right-product displacement.
+The reproducible script is scripts/check_ym_cmp102_root_free_exp.py.
+This is not native Agda acceptance.
+
+Next: formalize the same-series Cauchy product and parity-limit weld using
+BishopExponentialCauchyProductExact and existing finite parity machinery.
+JInvariantBishopTrigUnitPhaseExact consumes a Pythagorean certificate; it
+does not prove one. Prove unit norm of actual root-free exp and identify
+it with source exponential, then derive chord²=2s A(-s)<=s using alternating
+bound. Compose with the same coarseBackgroundHolonomy and existing plaquette
+consumer. Actual CMP102 mixed-scale incidence, Eq(7) strict witness, gauge
+section, real minimizer and propagator remain OPEN. No radius shrink,
+new kernel acceptance, CI or Clay endpoint promotion.
