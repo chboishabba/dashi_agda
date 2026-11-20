@@ -1,5 +1,5 @@
 """Receiver-time attribution on original SSPRK3 computational fibres.
-Donor observations are native Cartesian stencil channels, NOT full tensor E4/E5.
+Default observations are legacy native Cartesian stencil channels. Opt-in geometric diagnostic uses independently reconstructed wall jets; no strong trace claim.
 Short window regression, no production-duration or continuum claim.
 """
 import numpy as np
@@ -7,13 +7,16 @@ from warp_temporal_weighted_adjoint import run as setup
 from ksw668_f8_tt_multipole import stage
 from warp_frame_attribution import project, metric, lower, raise_dual, native_reverse
 
-def check(order=4, **params):
+def check(order=4, geometric=False, **params):
     s=setup(order=order,setup_only=True,**params)
     dr,dy,h,nt,src=(s[k] for k in ('dr','dy','h','nt','src'))
     _,vel,b,*_=s['coeff']
     obs=s['obs']
     shape=obs.shape[2:]
     nr,ny=shape[-1],shape[-2]
+    if geometric:
+        from warp_native_geometric_receiver import receiver_bank
+        obs=receiver_bank(s['final_t'],s['rx'],s['eps'],dr,dy,h,vel,nt,nr,ny)
     cp=np.zeros((3,nr));cm=cp.copy()
     for q,d in enumerate((3,7,11)):
         j=np.arange(1,nr);den=(j+.5)**d-(j-.5)**d
@@ -60,7 +63,8 @@ def check(order=4, **params):
         x=y;states.append(x.copy())
     # One continuous mask family is needed for regional telescoping.
     # Per-step cut thresholds differ, so retain explicit handoff residuals.
-    for ch in range(4):
+    receipts=[]
+    for ch in range(len(obs)):
         p=project(obs[ch,2]);initial=None
         signed=np.zeros((2,3,3));interface=np.zeros((2,5,3))
         regional=np.zeros((2,3,3));handoff=np.zeros(3)
@@ -89,9 +93,17 @@ def check(order=4, **params):
         expected=bymode(p,region_masks[0]*states[0])+regional.sum(axis=(0,1))+interface.sum(axis=(0,1))+handoff
         scale=np.abs(bymode(p,region_masks[0]*states[0]))+np.abs(regional).sum(axis=(0,1))+np.abs(interface).sum(axis=(0,1))+np.abs(handoff)
         assert_ledger(retained,expected,scale)
+        receipts.append((actual,retained,initial,signed,regional,interface,handoff))
         print('order',order,'channel',ch,'actual',actual,'retained',retained,
               'source signed',signed.sum(axis=(0,1)),'interface signed',interface.sum(axis=(0,1)),
               'handoff',handoff,flush=True)
+
+    if geometric:
+        t=s['final_t']
+        for channels in zip(*receipts):
+            terms=np.stack((channels[2],-channels[3],(1/t+1/(2*t**3))*channels[4],channels[5]/(3*t*t)))
+            assert np.max(np.abs(terms.sum(0)))<=1e-10*max(1.,np.max(np.abs(terms).sum(0)))
+        print('PASS off-shell identity through all signed ledger channels',flush=True)
 
 if __name__=='__main__':
     import sys,json
