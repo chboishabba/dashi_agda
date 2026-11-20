@@ -2,7 +2,7 @@
 
 Author: Johl Brown
 Date: `2026-09-17`
-Version: `draft 2 — F1/F3/F4 recut`
+Version: `draft 3 — source-native 20 November 2026 reconciliation`
 Status: live analytic manuscript draft; Clay-facing candidate preprint; non-promoting
 
 
@@ -80,35 +80,49 @@ Status: live analytic manuscript draft; Clay-facing candidate preprint; non-prom
 
 ## Abstract
 
-This manuscript presents a reduction of the four-dimensional Yang–Mills mass-gap problem on a literal finite SU(2) Wilson–Gibbs family to three physical inputs, denoted `F1`, `F3`, and `F4`. The finite lattice theory, transfer-form algebra, varying-Hilbert-space transport, vacuum-sector spectral consequences, and final continuum gap compiler are treated as already-paid mathematical infrastructure where stated. The surviving physical obligations are:
+We develop source-native reductions of the four-dimensional Yang–Mills
+mass-gap problem on the original Wilson–Gibbs family. Two sufficient routes
+are distinguished: the stronger F1/F3/F4 transfer/recovery formulation and
+the direct selected-source covariance-to-Osterwalder–Schrader (OS) spectral
+formulation. The latter does not require an independently selected finite
+Hamiltonian Mosco limit or a trace-norm transfer theorem. The repository's
+R578 critical path organizes the direct route around selected projective
+Wilson projections, finite OS applicability, literal CMP119 moment bounds,
+original Wilson clustering (WEXT), the transfer coordinate of the
+reconstructed Hamiltonian, compact-simple quantitative source data, and a
+same-family nontrivial Ward kernel. These are chronological formal
+constructions, not claims that all physical inputs are already inhabited.
 
-```text
-F1  a positive transfer defect on the interacting Wilson continuum trajectory;
-F3  an actual embedded vacuum-sector graph/Mosco limit for the same Wilson family;
-F4  equality of the resulting Yang–Mills and Osterwalder–Schrader evolutions
-    on the physical common core.
-```
+On the constructive finite/analytic side, we reuse the native Bishop real
+and rational SU(2) carriers, canonical centered side-thirteen geometry,
+signed perturbation path recursion, and the same dual-carrier compiler for
+Bałaban CMP98 equations (119)–(121). We construct root-free local
+quaternion logarithm and differential-exponential series using actual
+Bishop limit operations, and an explicit reduced inverse on the small
+chart. Independent exact rational interval computations verify the local
+inverse and logarithm/exponential enclosures, including the removable
+zero-radius endpoint. For the constrained Gaussian we distinguish the
+original ambient delta elimination from induced subspace volume. An
+explicit pivot determinant identity reduces the former to the bordered
+operator trace; the latter has a separate Gram determinant correction.
+Finite Wilson mixed jets, pivot derivative algebra and quartic
+remainder absorption are reused, not reintroduced as new hypotheses.
 
-The finite-side input `F1` admits three equivalent or sufficient normal forms. The most direct is a cutoff-dependent two-slice decorrelation estimate together with
+The remaining local physical source attachments are the selected
+variational theorem, geometric and Fréchet identification of the native
+chart, the true background derivative of the recovered averaging operator,
+the literal CMP109 measure/quadratic form, and a uniform normalized
+physical beta enclosure. The later RG and OS consumers must be applied
+to the same original family; no inference from a finite configuration
+or a source-written proof to full interacting continuum existence is
+made. We retain historical sufficient routes and explicit counterexamples
+to invalid measure, carrier, and spectral transfers.
 
-```text
-Delta * a_k <= 1 - c_k,
-```
-
-so no trajectory-uniform constant `c < 1` is required. A state-uniform truncated two-slice correlation bound supplies the same decorrelator, and a still-stronger uniform joint-slice density estimate
-
-```text
-d nu_01 / d (nu_0 x nu_1) = 1 + h_k,
-||h_k||_infty <= c_k
-```
-
-is sufficient as well. The manuscript distinguishes these checked compiler implications from the still-open interacting physical estimate itself.
-
-The Bałaban renormalization-group literature is used at its verified source ceiling. In particular, the repository now identifies the finite beta history with the coupling history of Bałaban's complete-density flow and imports the conditional 1989 ultraviolet-stability theorem on that same trajectory. This is a substantive same-object reduction, but it does not by itself prove the full two-slice `L^infty` density defect or the operator-strength `L^2` mixing estimate required for `F1`.
-
-A separate empirical axis is also recorded. A frozen comparison against CMS-SMP-20-003 / HEPData `ins2079374` below the Z peak gives `chi2/dof = 2.1565191176` over 18 effective degrees of freedom and mean prediction/data `0.9941233097`. This is a bounded collider/QCD contact. It is not used to discharge `F1`, `F3`, or `F4`, and it does not establish zero fitted parameters or the whole canonical theory spine.
-
-The paper therefore makes a reduction claim, not an unconditional Clay-completion claim.
+The resulting manuscript is a conditional mathematical reduction with
+a rapidly developing formal supplement, not an unconditional Clay
+completion. The older frozen CMS Drell–Yan comparison remains a bounded
+empirical contact, independent of the proof. No new exact-head Agda
+acceptance is asserted for the November 20 source additions.
 
 ## 1. Current theorem grammar
 
@@ -303,6 +317,162 @@ CanonicalCommonDomainCMP116Source
 
 The lower-level R346 selected-spectral route removes arbitrary source-root/source-distance presentation, but still requires literal selected differentiated localization and the equality between selected physical support distance and Euclidean time. This remains a genuine alternate F1 producer; neither route is currently identified with the full-slice mixing route.
 
+### 5.3 Constructive native SU(2) chart and same-object averaging
+
+Let \(Y\) be a pure quaternion, \(X=\operatorname{ad}_Y=2[Y]_\times\)
+and \(w=4\|Y\|^2\). Quaternion multiplication gives \(X^3=-wX\).
+The left-trivialized differential exponential is
+\[
+D_+=I+A(w)X+B(w)X^2,\quad
+A(w)=\sum_{n\ge0}\frac{(-w)^n}{(2n+2)!},\qquad
+B(w)=\sum_{n\ge0}\frac{(-w)^n}{(2n+3)!}.
+\]
+Write \(h=1-wB,\ \Delta=h^2+wA^2\). Polynomial reduction gives
+\[
+(\Delta I-AX+(A^2-hB)X^2)D_+=\Delta I,
+\]
+and the factors commute. For \(0\le w\le1/4\), alternating series
+interlacing gives \(0\le A\) and \(0\le B\le1/6\); hence
+\(h\ge23/24,\ \Delta\ge529/576>0\).
+The inverse is therefore \(\Delta^{-1}\) times the displayed polynomial;
+no division by the radius and no decidable real zero split are involved.
+The same coefficients give \(\operatorname{Ad}_{\exp Y}=I+hX+AX^2\).
+
+For a unit quaternion \(u=(u_0,\mathbf u)\) with \(u_0>0\), put
+\(s=\|\mathbf u\|^2\). The local principal logarithm is
+\[
+\mathbf u\,L(s),\qquad
+L(s)=\sum_{n\ge0}c_ns^n,\qquad
+c_0=1,\quad c_{n+1}=c_n
+\frac{2n+1}{2n+2}\frac{2n+1}{2n+3}.
+\]
+The coefficients are positive, nonincreasing and equal to
+\(\binom{2n}{n}/[4^n(2n+1)]\). On \(s\le1/4\) the series has explicit
+geometric tail at most \(s^N/(1-s)\). As a mathematical identity this is
+\(\arcsin(\sqrt{s})/\sqrt{s}\), extended continuously at zero.
+The positive scalar condition selects the correct branch, so
+\(\exp(\mathbf u L(s))=u\). This analytic identity and the actual
+Fréchet/source identification still require their native theorem
+attachments; the series and inverse construction alone do not assert
+them.
+
+Formal owners (all new November 20 additions are source-written, pending
+pinned Agda acceptance):
+- `BalabanCMP109BishopRootFreeSeriesExact`: actual native ratio-test
+  convergence, factorial coefficients, arcsinc coefficient recurrence,
+  limit bounds by the existing alternating interlacing theorem.
+- `BalabanCMP109BishopPrincipalLogAdPolynomialExact`:
+  `reducedScaledLeftInverse`, `reducedLeftInverse`,
+  `reducedDeltaLower`, `reducedDeltaPositiveFromBounds`.
+- `BalabanCMP98Path13BishopNativeSourceExact`: `nativeSeriesChart`
+  supplies the log, differential exponential, adjoint and inverse functions
+  on explicit chart domains, with derived inverse cancellation;
+  `Inputs` still requires admission of each relative contour and its
+  averaged Lie generator. The actual variational background remains an
+  input. There is no legacy-real equality or global inverse assumption.
+- `BalabanPath13RadiusSixWalkAgreementExact.radiusSixWalkAgreement` is
+  actually inhabited and consumed by the canonical native geometry.
+- `BalabanCMP98Equation119TwoCarrierSelectedBondExact` recovers
+  \(Q(V_0)A=L^{-1}[-\operatorname{Avg}_-R_0A+Q'(V_0)A+
+  \operatorname{Avg}_+(R_{0,c}R_{0,c^+}A)]\) at \(L=13\).
+  The two carriers are distinct: global rational perturbations and local
+  Bishop Lie coordinates. Both Eq. (119) and Eq. (120) consume the same
+  background and path compiler. The intermediate primed operator in
+  Eq. (119) is not automatically the background derivative of Eq. (120).
+
+Exact independently executed checks:
+`scripts/check_ym_path13_rootfree_chart.py`: two-sided symbolic inverse,
+adjoint coefficient identity, 16 rational outward-rounded chart certificates
+at four unit quaternions and four truncations, including zero. Earlier
+`scripts/check_ym_path13_dexp_20261120.py` tests the root-free brackets.
+These finite executions validate the specified identities and enclosures,
+not all contour admissions of a physical minimizer.
+
+### 5.4 Source-normalized constrained Gaussian determinant
+
+Bałaban CMP109 §2, equations (2.10)–(2.13), first linearizes the nonlinear
+fluctuation average and then eliminates the selected pivot coordinates
+using the linear delta constraint. The actual remaining covariance is
+\((C^\ast AC)^{-1}\). The normalization of the delta and fluctuation
+density must be retained, rather than replaced by induced subspace
+volume by convention.
+
+For ordinary ambient Lebesgue delta, let \(Q=[P\ R]\) have invertible
+\(m\times m\) pivot \(P\), with \(n-m\) free coordinates. Then
+\[
+ C=\begin{pmatrix}-P^{-1}R\\I\end{pmatrix},\quad
+ \widehat A=C^\ast AC,\quad
+ K=\begin{pmatrix}A&Q^\ast\\Q&0\end{pmatrix}.
+\]
+In the coordinates \(x=(u-P^{-1}Rz,z)\), the Jacobian is one and
+\(Qx=Pu\). Thus the elementary delta change of variables gives
+\[
+ Z_\delta=\frac{(2\pi)^{(n-m)/2}}
+ {|\det P|\sqrt{\det\widehat A}}.
+\]
+More generally any additional source density factor must be carried
+separately. Congruence of \(K\) by the coordinate change and the identity
+on multiplier coordinates replaces \(Q\) by \([P,0]\). Eliminate the
+positive free block \(\widehat A\); the remaining saddle block has
+determinant \((-1)^m(\det P)^2\), independently of its upper-left block.
+This proves
+\[
+ (-1)^m\det K=(\det P)^2\det\widehat A.
+\]
+Also \(QQ^\ast=P(I+P^{-1}RR^\ast P^{-*})P^\ast\). Sylvester's
+determinant identity gives
+\(\det(QQ^\ast)=(\det P)^2\det(C^\ast C)\).
+Consequently induced volume and ambient delta differ by
+\(\sqrt{\det(QQ^\ast)}\), not by a background-independent scalar in
+general.
+
+For \(\Gamma=-\log Z\), at a smooth regular background and two
+variation parameters \(s,t\), the ambient-delta result is
+\[
+ 2\Gamma_{st}=\operatorname{Tr}
+ (K^{-1}K_{st}-K^{-1}K_tK^{-1}K_s).
+\]
+The induced-volume result subtracts the same trace expression for
+\(M=QQ^\ast\). Equivalently the delta result is the trace expression
+for \(\widehat A\) plus **twice** that for \(P\).
+This accounts for genuine motion of the eliminated subspace;
+tangential changes of free coordinates cancel with the corresponding
+coordinate volume. One may use the bordered engine without explicitly
+storing \(C'\) or \(C''\), once \(Q,A\) and their actual derivatives are
+supplied.
+
+The script `scripts/check_ym_cmp109_delta_pivot_measure.py` implements
+the exact mixed-jet product and inverse rules and verifies these identities
+at three rational backgrounds (including tangent reparametrization).
+At the reference point the two normalized responses are
+\(200911/73441\) (delta), \(-10647685/8886361\) (induced), with pivot
+correction \(2\). These are an illustrative exact finite matrix
+calculation, not the physical beta. The previous full configured
+side-four bordered trace implementation
+`scripts/check_ym_p33_bordered_trace_20261120.py` reuses the same
+inverse-action principle.
+
+The source-native physical next step is to attach the actual CMP99
+pivot, the true derivative of the recovered CMP98 averaging operator,
+the literal Wilson/background Hessian and gauge fixing, and the
+specified delta normalization/density from CMP109. The already existing
+64-atom mixed jet and tangent trivialization, trace cancellation,
+patch arithmetic, finite-history uniform remainder and explicit small
+coupling absorption are not independent missing first principles.
+Neither an illustrative matrix nor a finite configured lattice
+calculation is a cutoff-uniform physical beta enclosure.
+
+Source credit: T. Bałaban, CMP 98 (1985) 17–51,
+DOI 10.1007/BF01211042; CMP 99 (1985) 389–434,
+DOI 10.1007/BF01240355; CMP 102 (1985) 277–309,
+DOI 10.1007/BF01229381; CMP 109 (1987) 249–301,
+DOI 10.1007/BF01215223. Bishop/Murray/Csimma constructive-real
+implementations and the DASHI native source owners are credited above.
+The determinant and series reductions are independent mathematical
+derivations; no attribution to a new proof of Bałaban's published
+variational theorem or to an unobserved kernel result is made.
+
+
 ## 6. F3: the physical embedded continuum limit
 
 The old common-carrier obligation has been recut into the correct place. Embeddings are data of `F3`, because the physical graph/Mosco limit is defined along them.
@@ -380,27 +550,33 @@ whole canonical theory spine proved               false
 
 The empirical and constructive axes can therefore be reported together without confusing validation with proof.
 
-## 10. Current proof-search priorities
+## 10. Current proof-search priorities (20 November 2026)
 
-The highest-information next questions are now narrow.
+The shortest source-first path is R578 / direct R333, not the stronger
+F1/F3/F4 route treated in Sections 3, 6 and 7. Reuse the existing
+selected projective Wilson path factorization (R566/R568), finite OS
+source (R545), moment-to-OS05 compiler (R559/R560), original Wilson WEXT
+(R576), reconstructed-Hamiltonian transfer (R577), compact-simple
+source data (R571), and same-family Ward kernel (R563).
+The R333 direct OS compiler consumes the existing selected finite
+magnitude route H1/R295/R313/R296. The stronger recovery/Mosco route
+remains a valid sufficient alternative; it is not a mandatory debt.
 
-### 10.1 F1 / complete-density-to-mixing bridge
+Current local implementation cut:
 
-Inspect Bałaban's Section-2 complete-density bounds and the exact repository dictionary to determine whether they control the adjacent-slice joint density strongly enough to derive either:
+| Packet | Current source-level status and exact remaining attachment |
+| --- | --- |
+| A — constructive chart | Native series and inverse chart are now constructed. Prove actual selected contour/outer generator admission, exp/log, and Fréchet/source equality; verify pinned Agda. |
+| B — variational background | The native chart selects the existing variational theorem's background directly. Instantiate the theorem on the literal physical action and constraints; do not assume a general real-valued minimizer is rational. No geometry construction remains. |
+| C — Gaussian | Constructed same-family Eq119/Eq120, pivot algebra and exact delta/Gram/bordered identity. Attach actual DQ, physical A and source measure normalization. |
+| D — beta | Consume existing trace, Fourier, patch and remainder results on the literal physical source; actual uniform beta enclosure not yet established by these receipts. |
 
-```text
-|| d nu_01 / d(nu_0 x nu_1) - 1 ||_infty <= c_k
-```
-
-or the weaker-but-sufficient state-uniform truncated-correlation operator bound. If not, expose the missing source/analytic theorem explicitly rather than treating generic cluster convergence as sufficient.
-
-### 10.2 F3 / graph-limit inhabitant
-
-Construct the actual literal-Wilson recovery system, including the selected embeddings, continuum Hamiltonian/vacuum, and embedded vacuum-sector graph/Mosco limit. Existing measure/Schwinger/stress convergence infrastructure should be reused only where it proves the same required object.
-
-### 10.3 F4 / common-core same evolution
-
-Identify the physical common invariant core and prove equality of the YM and OS evolutions or their generators there. The downstream uniqueness/compiler machinery already exists.
+Then apply the existing downstream consumers and validate same-source
+interacting continuum existence, uniform physical clustering, the common
+OS spectral gap, noncollapse, and compact-simple coverage. These are
+acceptance criteria; inspect actual typed inputs and reuse later
+inhabitants rather than starting over. No new unconditional endpoint
+receipt has been recovered in the present audit.
 
 ## 11. Formal support and governance
 
@@ -423,6 +599,8 @@ The exact residual brief is `Docs/support/reference/YMAristotleNextRoundExactRes
 The paper-facing theorem-variable manifests remain formal-support indices rather than proof substitutes. No terminal `Proved`, `SubmissionReady`, Clay-approval, or external-acceptance status is inferred from a receipt, imported authority, empirical fit, or source-written branch state.
 
 ## Appendix A. Claim boundary table
+
+The table below retains the stronger historical F1/F3/F4 sufficient route. It is not the current minimum cut; see Section 10 for direct-source acceptance and Sections 5.3–5.4 for the new local implementations.
 
 | Surface | Paid / available | Still open |
 | --- | --- | --- |
