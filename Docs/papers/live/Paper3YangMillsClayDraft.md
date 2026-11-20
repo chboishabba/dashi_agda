@@ -473,6 +473,38 @@ derivations; no attribution to a new proof of Bałaban's published
 variational theorem or to an unobserved kernel result is made.
 
 
+## 5.5. Source-semantic chart and full finite Path13 jet
+
+The squared-chord bound is now attached directly to the rational quaternion path, without a rational operator-norm representation. For positive radii \(a,b\), the identity
+\[
+(a+b)(bN(u)+aN(v))-abN(u+v)=N(bu-av)
+\]
+gives the weighted triangle bound. The native selected inverse-link radius yields the 61-link gamma and 13-link coarse contour budget \(\delta=37/1024\). The source-written admission uses \(q_0=1-N(q-1)/2\ge1/2\) and \(\|\mathbf q\|^2\le\delta^2\). This is a squared-chord argument, not an equality between a norm and its square.
+
+For a unit quaternion \(q=(a,u)\) in this positive scalar chart, set \(s=u\cdot u\) and \(L(s)=\sum c_n s^n\), with \(c_0=1\) and
+\[
+c_{n+1}/c_n=(2n+1)^2/((2n+2)(2n+3)).
+\]
+On \(0\le s\le1/4\), \(0<L\le2\). The geometric derivative tail bound \(\sum_{n\ge N}nr^{n-1}=Nr^{N-1}/(1-r)+r^N/(1-r)^2\), for \(0<r<1\), justifies differentiating on compact subintervals. Put \(F=L+2sL'\). The coefficient recurrence implies \(2(1-s)F'=F\); hence \((1-s)F^2=1\) by its value at zero. Since \(F>0,a>0,a^2=1-s\), one obtains \(aF=1\).
+
+For the root-free stereographic path \(v=u/(1+a)\),
+\[
+q(t)=((1-t^2|v|^2)/(1+t^2|v|^2),2tv/(1+t^2|v|^2)),\quad0\le t\le1.
+\]
+The right logarithmic velocity \(q'q^{-1}\) equals \(2v/(1+t^2|v|^2)\). The vector \(y=L(s)u\) lies along a fixed axis along this path, and \(y'=u'/a\) equals the same velocity. Thus \(\exp(-y)q\) is constant, initially one, proving \(\exp(L(s)u)=q\). For arbitrary \(q'=zq\) with \(z\) pure, \(u'=az-u\times z\) and \(s'=2a\,u\cdot z\), giving
+\[
+D\log=aLI-L[u]_\times+2aL'uu^T.
+\]
+Writing \(X=2L[u]_\times\), polynomial reduction yields
+\(D\log=I-X/2+(aL'/(2L^2))X^2\), using \(aF=1\).
+The exponential derivative in the same right logarithmic velocity convention is \(\sum_{k\ge0}X^k/(k+1)!\), by termwise differentiation and the exponential product integral. Its reduction is precisely the previously constructed \(I+AX+BX^2\); the chain rule gives the same-object inverse. This derivation does not divide by the radius. Each log coordinate has magnitude at most \(2\delta\). The normalized nonnegative block weights preserve this bound, so both point and outer generators satisfy \(w\le48\delta^2=4107/65536<1/4\). These are mathematical arguments conditional on the selected physical radius; the complete native Bishop order/Fréchet weld and kernel acceptance are still outstanding.
+
+The executed rational flat-reference Path13 regression constructs all 12 by 342732 entries of each of \(Q,Q_s,Q_t,Q_{st}\) (one periodic side-13 block). The ordered background curves are selected test directions, not a general minimizing family. Independent direct quaternion mixed jets agree with contractions of the assembled matrix. At the origin \(P=I_{12}/28561\); mixed log determinant of the selected pivot is \(-19907776794912/4826809\), and the mixed log determinant of \(QQ^*\) is \(3328816224672/815730721\). In particular the normal measure response is not zero in general even at a flat reference. These exact results distinguish induced volume from delta normalization; they are not the physical beta.
+
+A separate nontrivial constant commuting rational link fixture has identity plaquettes, nonidentity coarse holonomies and the required inverse-link radius. Its Wilson deficit is zero, hence globally minimal over any admissible constraint subset containing it. This does not prove the general gauge-fixed variational theorem, its uniqueness, its analytic dependence or rationality of general minimizers.
+
+Executable sources: scripts/check_ym_path13_full_mixed_jet.py, scripts/check_ym_path13_full_q_matrix.py, scripts/check_ym_path13_chart_source_semantics.py. All three executed locally with exact arithmetic (integer arrays guarded against overflow). Agda source additions are not kernel-verified.
+
 ## 6. F3: the physical embedded continuum limit
 
 The old common-carrier obligation has been recut into the correct place. Embeddings are data of `F3`, because the physical graph/Mosco limit is defined along them.
@@ -566,9 +598,9 @@ Current local implementation cut:
 
 | Packet | Current source-level status and exact remaining attachment |
 | --- | --- |
-| A — constructive chart | Native series and inverse chart are now constructed. Prove actual selected contour/outer generator admission, exp/log, and Fréchet/source equality; verify pinned Agda. |
-| B — variational background | The native chart selects the existing variational theorem's background directly. Instantiate the theorem on the literal physical action and constraints; do not assume a general real-valued minimizer is rational. No geometry construction remains. |
-| C — Gaussian | Constructed same-family Eq119/Eq120, pivot algebra and exact delta/Gram/bordered identity. Attach actual DQ, physical A and source measure normalization. |
+| A — constructive chart | Direct squared-chord point admission and arcsinc upper bound source-written; Section 5.5 derives point/outer bounds and exp/log/Fréchet semantics mathematically. Finish the Bishop order and semantic weld; verify Agda. |
+| B — variational background | Exact nontrivial commuting flat minimizer fixture verified. General literal physical constrained variational theorem attachment and selected-radius hypotheses remain; no rationality assumption for arbitrary minimizers. |
+| C — Gaussian | Full finite Path13 Q mixed jets and pivot/Gram responses executed at the flat reference. Attach general selected-family derivatives, physical A/Hessian and CMP109 measure normalization. |
 | D — beta | Consume existing trace, Fourier, patch and remainder results on the literal physical source; actual uniform beta enclosure not yet established by these receipts. |
 
 Then apply the existing downstream consumers and validate same-source
