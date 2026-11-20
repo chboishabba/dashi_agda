@@ -145,7 +145,9 @@ def affine_mode3_stage(stage,U,P,M,outU,outP,outM,dr,dy,b,v,amp,src,cp,cm,normal
 
 def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
               pulse=.065,inside_chord=.012,r_outer=4.3,y_outer=3.0,drive=1.,
-              conservative_source=True,normal_order=2,checkpoint=None,budget=75.,checkpoint_every=8,affine_stage=False):
+              conservative_source=True,normal_order=2,checkpoint=None,budget=75.,checkpoint_every=8,affine_stage=False,weak_source_load=False):
+    if weak_source_load and (not conservative_source or normal_order!=3):
+        raise ValueError('weak source requires conservative mode 3')
     if affine_stage and normal_order!=3:raise ValueError('affine stage requires mode 3')
     stage_run=functools.partial(affine_mode3_stage,stage) if affine_stage else stage
     if normal_order not in (1,2,3):raise ValueError('normal order must be 1 SBP, 2 legacy, 3 SBP2 SAT')
@@ -165,6 +167,9 @@ def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
     # Exact moment-primitive cell integration for local compact TT source.
     src=(exact_cell_averages(eps,rg,dr) if conservative_source
          else normalized_sources(eps,rg))
+    if weak_source_load:
+        from ksw668_f8_weak_source import weak_source
+        src=weak_source(eps,rg,dr)
     source_conservative_moments=None
     if conservative_source:
         source_conservative_moments=[]
@@ -189,6 +194,10 @@ def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
             cm[q,j]=d*(j-.5)**(d-1)/den
     initial_source_support=np.where(np.any(src!=0,axis=0))[0]
     assert len(initial_source_support)>3
+    weak_hat_margin=None
+    if weak_source_load:
+        weak_hat_margin=rx-math.log(final_t)-(rg[initial_source_support[-1]]+dr)
+        if weak_hat_margin<=dr/2:raise ValueError('weak source hat support fails photon guard')
     nt=int(math.ceil(span/dt));dt=span/nt
     dims=(3,ny,nr)
     U=np.zeros(dims);P=U.copy();M=U.copy()
@@ -216,7 +225,7 @@ def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
         from ksw668_f8_ssprk_checkpoint import NativeCheckpoint
         ck=NativeCheckpoint(checkpoint,dict(dr=dr,dy=dy,dt=dt,eps=eps,final_t=final_t,
             pulse=pulse,inside_chord=inside_chord,r_outer=r_outer,y_outer=y_outer,drive=drive,
-            conservative_source=conservative_source,normal_order=normal_order,nt=nt,affine_stage=affine_stage),
+            conservative_source=conservative_source,normal_order=normal_order,nt=nt,affine_stage=affine_stage,weak_source_load=weak_source_load),
             dims,src,cp,cm)
         saved=ck.load()
         if saved is not None:
@@ -360,8 +369,11 @@ def propagate(dr=.008,dy=.012,dt=.0015,eps=.04,final_t=12,
         nominal_receiver_r=rx,receiver_grid_r=rr,
         source_adjusted_brane_photon_margin=gap,
         discrete_support_photon_margin=gap-dr/2,
-        conservative_source_cell_average=conservative_source,
-        source_cell_integration='exact compact TT endpoint primitives' if conservative_source else 'point sampling',
+        conservative_source_cell_average=conservative_source and not weak_source_load,
+        weak_source_load=weak_source_load,
+        weak_source_hat_photon_margin=weak_hat_margin,
+        source_cell_integration=('r-squared weak load / native shell mass' if weak_source_load else
+            ('exact compact TT endpoint primitives' if conservative_source else 'point sampling')),
         normalized_conservative_cell_moments=source_conservative_moments,
         corrected_radial_shell_volume=True,
         radial_polynomial_r2_consistency_exact=True,
