@@ -8,7 +8,15 @@ module DASHI.Physics.YangMills.BalabanCMP98Path13BishopNativeSourceExact where
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Rational.Base using (ℚ)
+open import Data.Rational.Base as Rat using (ℚ; 0ℚ; 1ℚ; _≤_; _+_; _-_; _*_) renaming (_/_ to _/q_)
+import Data.Rational.Properties as RP
+import Data.Rational.Unnormalised.Properties as UP
+import Data.Rational.Tactic.RingSolver as Ring
+open import Relation.Binary.PropositionalEquality using (sym; subst)
+import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as L2
+import DASHI.Physics.Closure.NSTriadKNMurrayBishopDirectCanonicalCarrier as Cast
+import DASHI.Physics.YangMills.YMClayOriginalRationalSU2BishopUnitaryWeldExact as Unit
+import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
 import Real as B
 import RealProperties as BP
 import DASHI.Physics.YangMills.BalabanCMP109BishopPrincipalLogAdPolynomialExact as Poly
@@ -432,3 +440,113 @@ nativeSeriesChart = record
   ; jPlus = seriesInverse
   ; inverseOnChart = seriesInverseCancels
   }
+
+------------------------------------------------------------------------
+-- Actual chord-square admission on the original rational unit carrier.
+-- This accepts the SQUARE of the norm radius, never an identification
+-- of the norm with its square. The selected path telescope must supply
+-- the chord-square bound; no new chart predicate is assumed.
+------------------------------------------------------------------------
+
+relativeChordRadius : ℚ
+relativeChordRadius = + 37 /q 1024
+
+relativeChordRadiusSq : ℚ
+relativeChordRadiusSq = relativeChordRadius * relativeChordRadius
+
+rationalImagSq : SU2.RationalUnitQuaternion → ℚ
+rationalImagSq q =
+  SU2.imagI q * SU2.imagI q
+  + (SU2.imagJ q * SU2.imagJ q + SU2.imagK q * SU2.imagK q)
+
+rationalImagNN : ∀ q → 0ℚ ≤ rationalImagSq q
+rationalImagNN q =
+  L2.addNonnegative (L2.squareNonnegative (SU2.imagI q))
+    (L2.addNonnegative (L2.squareNonnegative (SU2.imagJ q))
+      (L2.squareNonnegative (SU2.imagK q)))
+
+rationalImagBelowChord : ∀ q →
+  rationalImagSq q ≤ SU2.literalChordalDistanceSq q
+rationalImagBelowChord q =
+  Norm.nonnegativeDifferenceImpliesBelow
+    (subst (λ a → 0ℚ ≤ a)
+      (gap (SU2.realPart q) (SU2.imagI q) (SU2.imagJ q) (SU2.imagK q))
+      (L2.squareNonnegative (SU2.realPart q - 1ℚ)))
+  where
+  gap : ∀ a x y z →
+    (a - 1ℚ) * (a - 1ℚ) ≡
+    ((a - 1ℚ) * (a - 1ℚ) + x * x + y * y + z * z)
+    - (x * x + (y * y + z * z))
+  gap = Ring.solve-∀
+
+radiusSqBelowQuarter : relativeChordRadiusSq ≤ + 1 /q 4
+radiusSqBelowQuarter =
+  RP.<⇒≤ (RP.positive⁻¹ ((+ 1 /q 4) - relativeChordRadiusSq))
+
+radiusSqBelowOne : relativeChordRadiusSq ≤ 1ℚ
+radiusSqBelowOne =
+  RP.<⇒≤ (RP.positive⁻¹ (1ℚ - relativeChordRadiusSq))
+
+scalarHalfBelowFromChord : ∀ q →
+  SU2.literalChordalDistanceSq q ≤ relativeChordRadiusSq →
+  (+ 1 /q 2) ≤ SU2.realPart q
+scalarHalfBelowFromChord q bound =
+  let a = SU2.realPart q
+      c = + 2 /q 1
+      traceBound :
+        c * (1ℚ - a) ≤ 1ℚ
+      traceBound = subst (λ u → u ≤ 1ℚ)
+        (SU2.unitChordalEqualsTwiceTraceDeficit q)
+        (RP.≤-trans bound radiusSqBelowOne)
+      shifted = RP.+-monoʳ-≤ (c * a - 1ℚ) traceBound
+      corrected = subst (λ l → l ≤ (c * a - 1ℚ) + 1ℚ)
+        (left a) shifted
+  in RP.*-cancelˡ-≤-pos c
+      (subst (λ rr → c * (+ 1 /q 2) ≤ rr) (right a) corrected)
+  where
+  left : ∀ a → ((+ 2 /q 1) * a - 1ℚ)
+      + (+ 2 /q 1) * (1ℚ - a)
+      ≡ (+ 2 /q 1) * (+ 1 /q 2)
+  left = Ring.solve-∀
+  right : ∀ a → ((+ 2 /q 1) * a - 1ℚ) + 1ℚ ≡ (+ 2 /q 1) * a
+  right = Ring.solve-∀
+
+imagSqEmbed : ∀ q →
+  B._≃_ (Scalar.rationalCoordinateToBishop (rationalImagSq q))
+    (contourImagSq q)
+imagSqEmbed q =
+  let x = SU2.imagI q
+      y = SU2.imagJ q
+      z = SU2.imagK q
+  in BP.≃-trans (Unit.embedSum (x * x) (y * y + z * z))
+    (BP.+-cong (Unit.embedProd x x)
+      (BP.≃-trans (Unit.embedSum (y * y) (z * z))
+        (BP.+-cong (Unit.embedProd y y) (Unit.embedProd z z))))
+
+smallContourFromChordSq : ∀ q →
+  SU2.literalChordalDistanceSq q ≤ relativeChordRadiusSq →
+  SmallContour q
+smallContourFromChordSq q bound =
+  let nn = BP.≤-respʳ-≃ (imagSqEmbed q)
+        (Cast.bishopEmbedOrder (rationalImagNN q))
+      upper = BP.≤-respˡ-≃ (BP.≃-symm (imagSqEmbed q))
+        (Cast.bishopEmbedOrder
+          (RP.≤-trans (rationalImagBelowChord q)
+            (RP.≤-trans bound radiusSqBelowQuarter)))
+  in record
+    { positiveScalar = BP.<-≤-trans
+        (BP.p<q⇒p⋆<q⋆ (+ 0 / 1) (+ 1 / 2) (UP.positive⁻¹ (+ 1 / 2)))
+        (Cast.bishopEmbedOrder (scalarHalfBelowFromChord q bound))
+    ; imaginarySqInside = BP.≤-respˡ-≃ (BP.0≤x⇒∣x∣≃x nn) upper
+    }
+
+-- Convert a single physical chord-square bound on the selected contour
+-- family to the actual native chart admissions without a legacy chart.
+pointAdmissionFromChordSq :
+  ∀ {C} (g : NativeGeometry C) →
+  (∀ bond step point →
+    SU2.literalChordalDistanceSq (relativeUnit g bond step point)
+      ≤ relativeChordRadiusSq) →
+  PointAdmission g nativeSeriesChart
+pointAdmissionFromChordSq g bound bond step point =
+  smallContourFromChordSq (relativeUnit g bond step point) (bound bond step point)
