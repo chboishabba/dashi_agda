@@ -1168,3 +1168,71 @@ exhaustively test feasible domains and compare full same-source residues.
 Next optimize shared J construction (~3s), width/block ablations,
 native fixed-width lanes and generalization; charge all intermediate
 storage/CRT reconstruction, retain original scalar and dense oracles.
+
+
+## 20 November — fast shared J and native fixed-width SWAR primitive gate
+
+New scripts/check_cm163_fast_j.py commit b808d8f511b0cf1e36a9f3ca4eeecd60ca66ef11
+blob b3b0e21af92c80c38e26ccba811514f7b6ab1bef.
+Use Euler pentagonal theorem P=prod(1-q^m)=1+sum_{k>=1}(-1)^k
+(q^(k(3k-1)/2)+q^(k(3k+1)/2)), exponentiate P^24 by repeated squaring,
+invert by active-residual Newton, multiply by E4^3. Attribution Euler and
+classical eta normalization; no claim of new series identities.
+Exact checks P^24*inv=1 and P^24*J=E4^3 modulo q^(n+1).
+All 3323 coefficients at n=3322 agree with original scalar j_unit.
+One same-process comparison, fast first: 0.202099954 s vs 2.824831598 s;
+34 GMP calls, maximum packed operand 3721676 bits. Six smaller prefixes
+(0,1,2,10,31,64) also PASS. No statistical claim.
+
+Earlier experimental injection of j_unit into unchanged CRT consumer
+completed in 3.442226512 s, RSS 137748 KiB, 126 exact coefficients equal.
+Committed explicit --fast-j option in check_cm163_residue_swar.py at
+45b4c6bee64889f152c951d33905ec46c2957450, blob cc611e4540eaa07cda9062425ad42382672ecb76.
+Exact committed source replay (verified local blob):
+python scripts/check_cm163_residue_swar.py --bits 384 --fast-j --reference cm_residue_coeffs.json --output cm_fast_j_coeffs.json
+J/setup 0.212358979 s, total 3.541941401 s, RSS 138372 KiB,
+14 CRT rings, modulus 5413 bits, certified E=[5086,5086],
+2526 packed calls, max operand 3721676 bits. All 126 coefficient
+bytes match previous local residue arrays, same kappa and s2.
+Reference optional; not used for stopping or reconstruction.
+The fast-j option leaves scalar default unchanged. Historical scalar
+31.649 s comparison is cross-run only; latest exact committed replay
+~8.94x historical speed, RSS ~135.13 MiB.
+
+Native SWAR primitive source scripts/check_cm163_swar_lanes.c commit
+95dedf01e3e0eb23560ec978de89f82d55de47d8, blob
+dcfd038bee6d26385a6f0cf71b36aa154de38446.
+Four 16-bit lanes in uint64_t, 14-bit residue payload, common modulus
+2<=p<=16384, inputs canonical. Addition: s=a+b <2p per lane, guard
+bit 15 prevents cross-lane borrow in (s|GUARD)-p; guard predicate
+selects s or s-p with a replicated full-lane mask. Subtraction uses
+a+(p-b), whose maximum <=2p-1 and hence still below guard.
+Multiplication uses 14 bounded double-and-add iterations, bit selection
+via disjoint full-lane masks. This proves lane isolation under the
+stated preconditions; no hardware SIMD or constant-time claim.
+Compiled locally gcc -std=c11 -O3 -Wall -Wextra -pedantic.
+Executed 6889 exhaustive scalar pair cases p=83 embedded in four
+correlated lanes, plus 100000 pseudorandom four-lane words p=16381;
+all 4 lanes x 3 operations checked per case. Not exhaustive over all
+independent four-lane words. This C primitive is NOT integrated into
+the 384-bit CRT backend; no end-to-end native SWAR speed claim.
+P9.M10 primitive PASS, full modular-polynomial SWAR backend OPEN.
+P9.M11 shared J generation PASS. Dyadic replay and other CM cases
+remain open.
+
+External SOTA/novelty boundary: compare Sutherland, On the Evaluation
+of Modular Polynomials (2013), https://mathweb.ucsd.edu/~kedlaya/ants10/sutherland/paper.pdf;
+Evaluation of Modular Polynomials from Supersingular Elliptic Curves
+(2025), https://portal.fis.tum.de/en/publications/evaluation-of-modular-polynomial-from-supersingular-elliptic-curv/;
+Hemmecke, Paule, Radu, Computer-assisted construction of Ramanujan-Sato
+series for 1/pi (2026), DOI 10.1007/s11139-026-01352-2;
+FLINT polynomial algorithms https://flintlib.org/doc/algorithms/polynomials/overview.html.
+Existing efficient evaluation, CRT and automated series derivation
+preclude novelty claims for those techniques alone. Our proposed scope
+is direct certified CM cubic jet with two slices and exact height bound.
+SOTA not established: no matched external execution baseline yet;
+PARI/Sage/FLINT not installed in this local environment (gp absent,
+no libflint in ldconfig). Need cold/warm matched outputs, exact height
+guarantees, identical hardware, repeated time and RSS, general levels
+and comparison against direct derivative/jet methods as well as full Phi.
+No new Agda/CI run.
