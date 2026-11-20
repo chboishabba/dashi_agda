@@ -1,3 +1,29 @@
+## 20 November 2026 — CURRENT acceptance ledger (supersedes historical status below)
+
+Source: supplied local execution report, lines 168–196; results reported by local operator, not independently rerun by this documentation update. DASHI base `5283e6db84eafb5bdabfd066c3ac422c15f67286`; LeechTransformer tested base `8d8f627f8bac4d7c7440fe23beea2d21d7818719`. Precision/doc fix reported committed on detached HEAD `a77bf4d`; PR #5 still on tested base when audited. Do not claim detached commit is landed.
+
+| Gate | Current status |
+|---|---|
+| Exact full-load SymPy envelope | PASS 53/53 reported |
+| Original-source native synthetic CPU fixture | PASS reported; 10/10 strict boundary probes and former tied-fixture rejection |
+| Four-load reset / fixed-route control | PASS reported; native Nat [0,2,9,0], fixed route monotone |
+| Same-clock two-prefix history probe | PASS reported; native Nat [0,9] |
+| Both standalone synthetic checkpoint probe CLIs | PASS reported |
+| Projected router score weld | PASS 6/6 reported after double().mean() precision fix |
+| C2 quality max-cut and portable CPU source contracts | PASS reported, exit 0 |
+| Actual repaired C2 + fitted R4 delta restoration and native SLR development replay | OPEN |
+| Independently certified score/response floating error intervals and Nat margins | OPEN |
+| Agda 2.9 transitive kernel/TOE acceptance | OPEN |
+| Fitted-model response, heldout semantics and general on-policy hysteresis | OPEN |
+
+Active source API: unchanged two-value `select_source_experts`, original blob `a2a250462ce8e663591cd8a8f784fad9bde1b15d`; scoped `TorchDispatchMode` observer only. Corrected synthetic expert 3 slope/bias = (11,-16); former (10,-13) is a negative control, not an accepted deterministic history witness. Collapse is for t > 14/5; at equality the cutoff tie is ambiguous. The crest is at 19/9. Fixed-route intervention establishes fixture-specific mechanism discrimination only, not a universal fitted-model causal theorem. The double-precision mean fix improves the audit computation; it is not a general proof of floating-point exactness.
+
+Next cut: land/verify the detached Leech fix without overwriting branch work; recover the original owned input assets; execute the strict fitted-delta orchestrator and independent replay; certify numerical margins; kernel-check the actual Agda imports. Preserve Anatolii Kornienko attribution, development-only admission and F5 exclusion.
+
+All dated sections below are historical evidence, not alternative active instructions. Earlier OPEN native-synthetic execution statuses are superseded by this ledger; fitted-source and kernel gates remain open.
+
+---
+
 ## 17 November — one-entry fitted R4 original-source acceptance workflow
 
 LeechTransformer PR #5 now has a single source
@@ -1083,7 +1109,9 @@ causation; keep those as separate
 evidence branches.
 
 
-## 17 November source-execution max-cut — original Leech producer now implemented
+## 17 November source-execution max-cut — historical (SUPERSEDED API and execution status)
+
+> **SUPERSEDED:** The optional three-value `return_logits` API below was reverted. Use the unchanged original two-value API and scoped dispatcher observer. Native synthetic execution status is superseded by the current ledger.
 
 Original repository: `chboishabba/LeechTransformer`, existing PR #5,
 branch `experiment/x369-r4-fair-c2c3-residual-20261115`.
@@ -1198,7 +1226,9 @@ reset-history comparison). No
 clinical/endocrine claims.
 
 
-## 17 Nov continuation: source-native checkpoint runner repair + original R4 same-clock history gate
+## 17 Nov continuation — historical (SUPERSEDED API, tied fixture and execution status)
+
+> **SUPERSEDED:** The optional logits API and old expert-3 parameters (10,-13) below are not active. The old (8,3,7,7) cutoff is tied and cannot certify a selected pair; use (11,-16) and the corrected strict fixture. See current acceptance ledger.
 
 Original Leech PR #5 updated, with:
 - `models/history_orbit_moe.py`: default original
@@ -1249,7 +1279,7 @@ Original Leech PR #5 updated, with:
   It records full-history hashes and
   selected scores/IDs/weights/signs.
 
-**Exact independent history-path source mathematics:**
+**SUPERSEDED tied-fixture history (retained solely for provenance; not a valid deterministic witness):**
 the previous source-legal d=6,
 E=4 synthetic parameter fixture
 has original coherent routing
