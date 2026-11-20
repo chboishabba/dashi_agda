@@ -550,3 +550,14 @@ finite coefficient evaluator required. Attribution: Mathlib owns
 analytic modular series and transcendental facts; DASHI owns the
 source mirror and transport, JMD owns the Delta/phase acquisition
 as recorded in Agda #1022. No kernel execution in this audit.
+
+
+## 20 November — existing Klein quotient owners, exact algebra regression
+Reopened actual master source blobs:
+- JInvariantEisensteinSameCarrierLimitKleinJExact bd864f0b3b40aa5fd0eb727acfcc77596ff845b0: e4Limit/e6Limit, limitNormalizedDelta, CertifiedEisensteinLimitPoint, eisensteinLimitKleinData and eisensteinLimitKlein. Explicit Cauchy and both nonzero witnesses remain inputs.
+- JInvariantEisensteinSameCarrierLimitCompilerExact f30edb9ae3fff60aade03054c91b62ae7ab1bcd6: original finite recurrence on ConcreteComplex.ComplexPair, not vendored Bishop carrier.
+- JInvariantConstructedComplexKleinJBackendExact f6de94ce3055a5572e9903a835e188a89aabbd69: quotientC F n d nz = n * inverseC F d nz.
+- JInvariantProofRelevantKleinJExact 93af6fd7440a0bb47f506ffa3d73794fd3b87f74: TotalQuotientExtension explicitly requires agreement on every nonzero witness; legacyKleinJAgreesOnConstructedPoint already exists.
+- JInvariantAnalyticNormalizedKleinAdapterExact 2fb21df27a4b26c8d9ede85dbbe444b968011d36: standardJInvariant, standardJReflects, standardJConjugationFixed, standardAnalyticKleinJIsStandardJ. No duplicate quotient or renderer needed.
+
+scripts/check_klein_quotient_weld.py committed at e9d105f5dd5042d22c14b1356c83356e319801ae. Executed locally: 4 universal symbolic identities and 240 exact nonsingular homogeneous integer quotient cases PASS, 0.053072872 s (single run). Integral Legendre normalization (16Q)^3/(16V^2)=256Q^3/V^2; weight-12 scale cancellation; exact quotient perturbation identity; inverse witness uniqueness algebra u-v=u(1-dv)-v(1-du). Identities are on commutative fields with stated nonzero denominators, not an Agda proof of field authority or carrier equivalence. Existing Klein construction is not a missing abstraction. Remaining concrete cut: instantiate the native Bishop proof-relevant quotient using its own inverse laws and actual series limits, transport apartness from quantitative native certificates or verified classical semantic reflection, connect to existing normalized renderer. ConstructedComplex and vendor Bishop are not definitionally the same. Lean Route B classical target and native Agda replay stay distinct. CM integrality/class degree and CH2 still OPEN. No compiler receipt acquired.
