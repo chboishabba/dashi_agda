@@ -159,3 +159,61 @@ Prior-art leads (bibliographic and novelty verification pending): Chudnovsky bro
 ## 12. Submission gates
 
 Working draft only. Required: independent local reproduction (including previous reported wall times treated as historical), general lemma exposition and validation, additional CM examples, explicit bit-height/time/peak-memory analysis, baseline comparisons, external literature audit and independent mathematical review. Preserve native Bishop/kernel gaps in formal supplement. No Clay or unification promotion. Paper 8 may cite the completed computational example but is not a prerequisite.
+
+
+## 20 November — independent replay and preliminary uniform bit-height lemma
+
+Local Python 3.13.5, SymPy 1.14.0. Exact Git blob readback at
+7d5be142d881f810740b5f8de4cf858e7cffc905 matches five mounted scripts.
+The local check_chudnovsky_exact.py initially lacked the committed
+positive precision assertion; restored it and verified blob
+eb58d9dd1d0a2e0d62e9ef16a0ad1ee9703e0e6b before rerunning.
+Exact-source results: CM163 delta apartness PASS (0.02539 s),
+hypergeometric differential weld and 24 ratios PASS (0.19618 s),
+degree-82 diagonal root isolation PASS (9.0771 s internal,
+10.41 s process elapsed, max RSS 130884 KiB via GNU time).
+Root K multiplicity 2, dominance floor 6593105375567751.
+Gaussian phase, 771 Ramanujan coefficients, 4 matched intervals
+PASS after dependency correction. Single-run Machin/CH milliseconds:
+100: 0.229/0.174; 1000: 2.255/1.068; 3000: 16.281/5.027;
+10000: 119.085/48.259. CH standalone seven-run medians in ms:
+0.051575, 0.744255, 5.472865, 33.064358.
+Full derivative slice replay timed out (120 s limit) after diagonal
+stage printed 9.2683 s; prior 31.910 s receipt NOT independently
+reproduced. Dyadic enclosure not rerun in this packet. No CI/kernel.
+
+### Uniform bit-height bound for the integer construction (proof candidate)
+
+Let b=max(1,bitlength(|K|)), M<=2p^2. J=q*j has nonnegative integer
+coefficients. On q=1/2, E4<=1+240 sum n^4/2^n=36001<2^16.
+The inverse eta product has logarithm <=24 sum 2^-n/(1-2^-n)
+<=48; exp(48)<2^96. Hence J(1/2)<2^144, and J_m<=2^(144+m).
+All positive inverse-eta recurrence partial sums are bounded by
+their final numerator; nonnegative convolutions likewise. For either
+H construction, |H_m|<=A^m for m>=1 with A=2^(b+150).
+The formal inverse coefficients obey |[t^m]1/H|<=2^(m-1) A^m
+for m>=1 by ordered compositions (constant coefficient 1).
+Absolute sums of the products in the logarithmic derivative recurrence
+are bounded by O(m (2A)^m) using that same inverse majorant.
+Consequently all L recurrence terms and partial accumulators have
+O(M(b+1)) bits. For N, its p-factor product gives
+|N_n|<=A^(pn) binom(pn+p-1,p-1)<= A^(pn) 2^(pn+p).
+The recurrence intermediates L_(pi)*N_(n-i), their sums and exact
+division numerators retain O(pn(b+1)+p+log(n+1)) bits.
+Normalized correspondence products inherit O(p^2(b+1)) bits.
+
+For the triangular extraction, [q^k]J^d <= 2^(144d+k)
+binom(k+d-1,d-1) for d>=1, so all power table entries for d,k<=2p
+have O(p) bits. At each leading-coefficient elimination the maximum
+absolute residual can grow by at most 1+max coefficient of J^d,
+i.e. a factor 2^O(p). Across at most 2p+1 eliminations this adds
+O(p^2) bits. Thus B_max=O(p^2(b+1)) for the actual integer series
+and triangular reconstruction, including scalar accumulators.
+This does not yet cover SymPy's general internal shift/exquo/invert
+temporaries, allocator overhead or a physical tape simulation.
+The existing O(p^4) scalar operation and O(p^2) payload slots
+then imply O(p^4(b+1)) live integer payload bits for that stage.
+With schoolbook arithmetic, a conservative construction time bound
+is O(p^8(b+1)^2), not a bound polynomial in log p.
+General proof should be reviewed, and actual operand instrumentation,
+full derivative replay, dyadic replay and allocator accounting remain open.
