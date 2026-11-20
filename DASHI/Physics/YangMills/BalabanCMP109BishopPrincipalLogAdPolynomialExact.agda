@@ -43,7 +43,8 @@ module DASHI.Physics.YangMills.BalabanCMP109BishopPrincipalLogAdPolynomialExact 
 
 open import Data.Integer.Base using (+_)
 open import Data.Product using (_×_; _,_)
-open import Data.Rational.Unnormalised as ℚ using (ℚᵘ; _/_)
+open import Data.Rational.Unnormalised as ℚ using (ℚᵘ; _/_; 0ℚᵘ)
+import Data.Rational.Unnormalised.Properties as ℚP
 
 import Real as BishopReal
 import RealProperties as BishopProperties
@@ -363,3 +364,81 @@ reducedLeftInverse g a b positive v
   cancelPositiveScale d positive (x u) (x v) ex ,
   (cancelPositiveScale d positive (y u) (y v) ey ,
    cancelPositiveScale d positive (z u) (z v) ez)
+
+-- Small-radius denominator floor. A positive coefficient is not needed;
+-- its nonnegativity suffices for the square term. These bounds are the
+-- elementary alternating factorial-series bounds on 0 <= w <= 1/4.
+reducedHLower :
+  ∀ g b →
+  BishopReal._≤_ BishopReal.0ℝ (generatorSq g) →
+  BishopReal._≤_ (generatorSq g) (embed (+ 1 / 4)) →
+  BishopReal._≤_ BishopReal.0ℝ b →
+  BishopReal._≤_ b (embed (+ 1 / 6)) →
+  BishopReal._≤_ (embed (+ 23 / 24)) (reducedH g b)
+reducedHLower g b wn wu bn bu =
+  let
+    productBound = BishopProperties.*-mono-≤
+      (BishopProperties.0≤x⇒nonNegx wn)
+      (BishopProperties.0≤x⇒nonNegx bn) wu bu
+    shifted = BishopProperties.+-monoʳ-≤ BishopReal.1ℝ
+      (BishopProperties.neg-mono-≤ productBound)
+  in
+  BishopProperties.≤-respˡ-≃
+    (let open BishopProperties.ℝ-Solver
+     in solve 0
+       (Κ (+ 23 / 24) ⊜ Κ (+ 1 / 1) ⊕
+         (⊝ (Κ (+ 1 / 4) ⊗ Κ (+ 1 / 6))))
+       BishopProperties.≃-refl)
+    (BishopProperties.≤-respʳ-≃
+      (let open BishopProperties.ℝ-Solver
+       in solve 2 (λ w b → Κ (+ 1 / 1) ⊕ (⊝ (w ⊗ b))
+                         ⊜ Κ (+ 1 / 1) ⊖ (w ⊗ b))
+         BishopProperties.≃-refl (generatorSq g) b)
+      shifted)
+
+reducedDeltaLower :
+  ∀ g a b →
+  BishopReal._≤_ BishopReal.0ℝ (generatorSq g) →
+  BishopReal._≤_ (generatorSq g) (embed (+ 1 / 4)) →
+  BishopReal._≤_ BishopReal.0ℝ a →
+  BishopReal._≤_ BishopReal.0ℝ b →
+  BishopReal._≤_ b (embed (+ 1 / 6)) →
+  BishopReal._≤_ (embed (+ 529 / 576)) (reducedDelta g a b)
+reducedDeltaLower g a b wn wu an bn bu =
+  let
+    h = reducedH g b
+    hl = reducedHLower g b wn wu bn bu
+    cPositive = Positive.positiveTwentyThreeTwentyFourth
+    cNonnegative = BishopProperties.pos⇒nonNeg
+      (BishopProperties.0<x⇒posx cPositive)
+    hSqFloor = BishopProperties.≤-respˡ-≃
+      (let open BishopProperties.ℝ-Solver
+       in solve 0
+         (Κ (+ 529 / 576) ⊜ Κ (+ 23 / 24) ⊗ Κ (+ 23 / 24))
+         BishopProperties.≃-refl)
+      (BishopProperties.*-mono-≤ cNonnegative cNonnegative hl hl)
+    tailNN = BishopProperties.nonNegx,y⇒nonNegx*y
+      (BishopProperties.0≤x⇒nonNegx wn)
+      (BishopProperties.nonNegx,y⇒nonNegx*y
+        (BishopProperties.0≤x⇒nonNegx an)
+        (BishopProperties.0≤x⇒nonNegx an))
+    hSqBelowDelta = BishopProperties.≤-respˡ-≃
+      (BishopProperties.≃-symm
+        (BishopProperties.+-identityʳ (BishopReal._*_ h h)))
+      (BishopProperties.+-monoʳ-≤ (BishopReal._*_ h h)
+        (BishopProperties.nonNegx⇒0≤x tailNN))
+  in BishopProperties.≤-trans hSqFloor hSqBelowDelta
+
+reducedDeltaPositiveFromBounds :
+  ∀ g a b →
+  BishopReal._≤_ BishopReal.0ℝ (generatorSq g) →
+  BishopReal._≤_ (generatorSq g) (embed (+ 1 / 4)) →
+  BishopReal._≤_ BishopReal.0ℝ a →
+  BishopReal._≤_ BishopReal.0ℝ b →
+  BishopReal._≤_ b (embed (+ 1 / 6)) →
+  BishopReal._<_ BishopReal.0ℝ (reducedDelta g a b)
+reducedDeltaPositiveFromBounds g a b wn wu an bn bu =
+  BishopProperties.<-≤-trans
+    (BishopProperties.p<q⇒p⋆<q⋆ 0ℚᵘ (+ 529 / 576)
+      (ℚP.positive⁻¹ (+ 529 / 576)))
+    (reducedDeltaLower g a b wn wu an bn bu)
