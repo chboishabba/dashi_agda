@@ -766,3 +766,71 @@ Filtered repetition is slower; keep default Newton unchanged. Source
 harness not yet persisted to repo in this packet. Sweetgrass retained-strand
 motif remains attributed to Robin Wall Kimmerer, not mathematical authority.
 Native selected extraction, contour optimization, full CRT and level 163 OPEN.
+
+
+## 20 November — COMP1/2: projective binary splitting and shared compression programme
+
+Fast certified pi remains the SOTA benchmark target; compression remains a
+first-class cross-programme research objective, including CM, Monster/VOA,
+FRACTRAN/FRACDASH and TOE. Do not demote wheel/holonomy, connectedness,
+primitive repetition or retained-strand consumer sufficiency to discarded
+ideas merely because a prototype is slower.
+
+Reuse scripts/check_chudnovsky_exact.py (blob
+eb58d9dd1d0a2e0d62e9ef16a0ad1ee9703e0e6b) and the existing
+HypergeometricBSplitIntegerMergeExact owner. For Chudnovsky only the generic
+extra denominator is 1. Triple (P,Q,T) represents [[P,T],[0,Q]].
+Merge (pP,qQ,tQ+pT) is associative. Common nonzero scaling is
+compatible with both left and right composition, preserving P/Q,T/Q
+over Q with Q nonzero. Canonical primitive integer triple with Q>0
+is sufficient for these rational observations, not for absolute
+integer scale or arbitrary unrelated consumers. Do not transfer
+this quotient into a residue ring where canceled factors are nonunits.
+Tail enclosure retains original alternating bound and integer-isqrt
+sqrt(10005) bracket, conditional on classical Chudnovsky identity.
+
+Implementation scripts/check_pi_projective.py, commit
+1055652c4a91a70aef8a607f3060a69fbfed9846; local git hash-object and
+connector readback match blob 19c01fff2ff1326b47119a44c930ce7ed1fa1df2.
+Actual local Python/SymPy 1.14.0: symbolic scalar-matrix compatibility,
+400/400 interval split comparisons (a=0..19,b=a..a+19), 14/14 independent
+factorial prefix sums. All three tested rational pi intervals identical
+between modes and width <=10^(-digits). No new Agda proof.
+Three-run sequential median interval computation, same specialized
+triple constructor, CPython integer/Fraction arithmetic, normalization
+at every leaf/internal node versus none:
+
+| digits | terms | plain ms | normalized ms | plain final bits | normalized final bits |
+|---:|---:|---:|---:|---:|---:|
+| 1000 | 73 | 0.550 | 0.575 | 12222 | 9017 |
+| 10000 | 716 | 28.915 | 26.835 | 142231 | 90212 |
+| 50000 | 3573 | 616.538 | 539.675 | 784923 | 451516 |
+
+At 50000 digits ~42.5% final carrier size and ~12.5% elapsed reduction.
+Final summed bit lengths are NOT peak RSS. Width bound is NOT a proof
+that decimal endpoint rounding agrees; add identical floor(10^d*L)
+and floor(10^d*U) with adaptive refinement and actual output timing.
+No external SOTA comparison; normalization may be costly at other scales.
+Classical prior art includes Chudnovsky binary splitting and rational
+common-factor removal; no novelty claim before review.
+
+COMP1 algebraic projective composition derived and finite PASS.
+COMP2 exact normalized split prototype PASS, production/native GMP OPEN.
+COMP3 predictive prime valuation cancellation: seek gcd(P_left,Q_right)
+which divides both numerator addends AND both products; cancel before
+large products, compare residual post-merge gcd; prime-factor sieve
+and factorial valuations as alternative. COMP4 operand-balanced tree
+and empirical thresholds OPEN. COMP5 native GMP/MPFR/FLINT and
+established fast pi external benchmark, certified output and peak RSS OPEN.
+COMP6 Monster/VOA orbit/stabilizer, multiplicity and action compression:
+reuse #1250, #1179, #1472 and actual Monster369ZetaSameObjectWeldExact,
+JInvariant369Zeta6561MonsterCrosswalkExact, JInvariantLambdaOrbitBase369BridgeExact,
+JInvariant369ConsolidatedNextStageExact. Graded trace/character parity
+does not certify literal vertex operators, intertwiners or full action.
+COMP7 FRACTRAN/FRACDASH shared program and exact reconstruction OPEN.
+COMP8 general contextual consumer-preserving quotient/factorization
+reuse canonical TOE owner, retain negative controls for projected
+carrier non-descent. Sweetgrass/Robin Wall Kimmerer (2013) remains
+cultural/methodological attribution, not mathematical proof authority.
+All earlier CM gates, including projected GMP, contour, primitive
+necklaces and level-163 Masser, remain active and unchanged. No CI initiated.
