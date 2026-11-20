@@ -6,6 +6,13 @@ module DASHI.Physics.YangMills.BalabanCMP98Path13BishopNativeSourceExact where
 -- The chart and selected physical background remain explicit source inputs.
 
 open import Agda.Builtin.Nat using (Nat)
+import Data.Nat.Base as Nat
+import Data.Nat.Properties as NP
+import DASHI.Physics.YangMills.BalabanPath13RadiusOperatorDefectRouteExact as Radius
+import DASHI.Physics.YangMills.BalabanCMP98Path13RelativeContourPrincipalImageExact as Length
+import DASHI.Physics.YangMills.BalabanCMP98Equation119LiteralRelativeDefectRound164Exact as R164
+import DASHI.Physics.YangMills.BalabanClayGate4CMP109CenteredPeriodicEmbeddingExact as Embed
+import DASHI.Physics.YangMills.BalabanClayGate4CMP109PeriodicContourFamilyInstantiationExact as Periodic
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Rational.Base as Rat using (ℚ; 0ℚ; 1ℚ; _≤_; _+_; _-_; _*_) renaming (_/_ to _/q_)
@@ -550,3 +557,58 @@ pointAdmissionFromChordSq :
   PointAdmission g nativeSeriesChart
 pointAdmissionFromChordSq g bound bond step point =
   smallContourFromChordSq (relativeUnit g bond step point) (bound bond step point)
+
+-- Native relative contour: bound the actual gamma and coarse holonomies
+-- separately and use the squared-chord triangle on their product.
+-- This avoids both the legacy chart and the independent rational-valued
+-- operator-norm representation. The physical inverse-link radius is
+-- the same selected-source input already used by Path13 coercivity.
+relativeContourChordSqFromRadius :
+  ∀ {C} (g : NativeGeometry C) →
+  Background.SelectedInverseLinkRadius13 (nativeBackground g) →
+  ∀ bond step point →
+  SU2.literalChordalDistanceSq (relativeUnit g bond step point)
+    ≤ relativeChordRadiusSq
+relativeContourChordSqFromRadius g radius bond step point =
+  let
+    source = nativeGeometryAt g bond
+    start = Embed.embeddingCentre (Geometry.minusEmbedding source step)
+    gamma = Geometry.literalGammaWord source step point
+    coarseWord = Periodic.segmentWord (Geometry.coarseSegment source step)
+    gammaValue = Geometry.literalGammaHolonomy source step point
+    coarseValue = Geometry.coarseBackgroundHolonomy source step
+    coarseLength = Length.path13CoarseWordLengthIs13 bond
+    gammaBound = Radius.pathChordSqBelowLengthBudget
+      (nativeBackground g) radius start gamma 61
+      (Length.gammaWordLengthAtMost61 source step point coarseLength)
+    coarseBound = Radius.pathChordSqBelowLengthBudget
+      (nativeBackground g) radius start coarseWord 13
+      (subst (λ n → n Nat.≤ 13) (sym coarseLength) NP.≤-refl)
+    inverseCoarseBound =
+      subst (λ d → d ≤ Radius.chordBudget 13 * Radius.chordBudget 13)
+        (sym (Radius.chordInverseExact coarseValue)) coarseBound
+    productBound = Radius.unitProductChordBound gammaValue
+      (Group.inverseRationalSU2 coarseValue)
+      (Radius.chordBudget 61) (Radius.chordBudget 13)
+      (Radius.chordBudgetPositive 60) (Radius.chordBudgetPositive 12)
+      gammaBound inverseCoarseBound
+    budgetExact :
+      (Radius.chordBudget 61 + Radius.chordBudget 13)
+        * (Radius.chordBudget 61 + Radius.chordBudget 13)
+      ≡ relativeChordRadiusSq
+    budgetExact = Ring.solve []
+  in subst (λ upper →
+      SU2.literalChordalDistanceSq (relativeUnit g bond step point) ≤ upper)
+      budgetExact
+      (subst (λ d → d ≤
+        (Radius.chordBudget 61 + Radius.chordBudget 13)
+        * (Radius.chordBudget 61 + Radius.chordBudget 13))
+        (Radius.chordRadiusSqIsLiteral (relativeUnit g bond step point))
+        productBound)
+
+nativePointAdmissionFromPhysicalRadius :
+  ∀ {C} (g : NativeGeometry C) →
+  Background.SelectedInverseLinkRadius13 (nativeBackground g) →
+  PointAdmission g nativeSeriesChart
+nativePointAdmissionFromPhysicalRadius g radius =
+  pointAdmissionFromChordSq g (relativeContourChordSqFromRadius g radius)
