@@ -1676,3 +1676,41 @@ Paper 3 / PR #1444 commit 1cf86519fd571b091301c864297a160de1a6d3eb transfers the
 A shared mathematical observation, not a new CM theorem or performance claim: for the rank-two algebra R[t]/(t^2-z), conjugation sends t to -t, and the multiplication matrix of a+bt is [[a,zb],[b,a]]. Its determinant is a^2-zb^2. For the factorial series C(z)=sum z^n/(2n)! and S(z)=sum z^n/(2n+1)!, exp(T_z)=C I+S T_z with T_z=[[0,z],[1,0]], giving determinant C^2-zS^2=1 by complementary signed binomial coefficients. At z=0, T_z is nilpotent. The Monster cyclotomic norm a^2-ab+b^2 is a related rank-two determinant, with different defining polynomial. This illustrates the multiplication-operator norm and complementary fibre viewpoint without identifying the quadratic algebra with Paper 9's general cyclic quotient, or transferring analytic convergence to a modular residue ring.
 
 For CMP102, shift the vanishing positive-degree coefficients before limit evaluation to avoid division by z; actual Bishop convergence, native unit quaternion and physical attachment remain OPEN. No new Paper 9 analytic, CRT, performance or kernel gate is promoted. Keep existing projected-product/inverse verification and M15k obligations unchanged.
+
+
+## 20 November — retained-strand carry, joint-observer separation and aggregate norm
+
+Reconciled c6cee9cd47978acc18d788a8846efbd0738c71a6: intervening
+CMP102 commit changes only Paper 9 and roadmap, preserved.
+SweetgrassCarrierSpine, JPlusOne369FibreCarryHyperformalismExact
+(lowerResiduePersistsAcrossCarry, carryRequiresJAndJPlusOneReading)
+and KimmererNarrativeMetaphorCalibrationExact are methodological
+donors, not mathematical proof owners. Robin Wall Kimmerer (2013)
+retains cultural attribution; no cultural-to-mathematical authority promotion.
+For residues r,s,u in [0,p), carry omega(r,s)=floor((r+s)/p)
+satisfies cocycle identity by associativity of integer addition.
+Joint observer separation: on R[t]/(t^(pn+1)), Pi_p(t^j H) for
+0<=j<p jointly distinguish H; for coefficient i choose j=(-i) mod p,
+then i+j<=pn and the selected coefficient is H_i. Thus universal
+future complementary observers do not admit a nontrivial quotient
+identifying distinct polynomial states. Restricted actual consumers
+may permit further compression; representation compression is distinct.
+Aggregate A_k=[X^k] truncated at M=pn for H=1-X, X(0)=0.
+Projected q-logder coefficient L_i=-sum_k p*i*A_k[pi]/k.
+Exact rational recurrence N_i=sum_(j=1)^i L_j N_(i-j)/i.
+This is ordinary word aggregation, not primitive-necklace extraction,
+and not a complexity improvement over production Newton logder.
+Local SymPy 1.14.0 execution of scripts/check_cm_winding_geometry.py:
+PASS carry, reachability, trace, aggregate norm: [75668, 537, 54, 54].
+Carry ranks 2,3,5,7,11,17,41; reachability orders 1,2,3.
+Trace and determinant ranks 2,3,4,5,6,7; trace powers 1..2p;
+three signed/sparse X fixtures and orders 1,2,3. Exact ZZ[q]
+DomainMatrix determinant oracle. Local git hash-object and connector
+readback agree at blob 7ec8e7e0efdedf90f38ebdb947cf9b33841a45ab,
+implementation commit 58019ca7622906de429ee386b8a2935bf57dd5e3.
+M15l weighted wheel/trace finite PASS; M15n aggregate norm finite
+PASS; carry cocycle and joint observer theorem algebraically derived
+with finite controls. M15m block-factorization runtime, M15o efficient
+primitive repetition aggregation, original modular production parity,
+GMP selection, contour, CRT, level 163, external SOTA OPEN.
+No new CI or Agda execution. Default algorithm unchanged.
