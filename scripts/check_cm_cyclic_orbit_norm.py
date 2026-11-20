@@ -31,17 +31,13 @@ def cyclic_norm(h,p,n,r,z,mul):
         return [x*phases[(i*k)%p]%r for i,x in enumerate(a)]
     def product(a,b):
         return mul(a,b,M,r)
-    blocks={1:h}
-    k=1
-    while 2*k<=p:
-        blocks[2*k]=product(blocks[k],shift(blocks[k],k))
-        k*=2
-    out=blocks[k]; length=k
-    while k>1:
-        k//=2
-        if p&k:
-            out=product(out,shift(blocks[k],length))
-            length+=k
+    out=h; length=1
+    for bit in bin(p)[3:]:
+        out=product(out,shift(out,length))
+        length*=2
+        if bit=="1":
+            out=product(out,shift(h,length))
+            length+=1
     assert length==p and out[0]==1
     assert not any(x for i,x in enumerate(out) if i%p)
     return out[::p]
