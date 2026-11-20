@@ -45,13 +45,13 @@ def verify():
     assert d['finite_SBP2_boundary_Udot_only_repair_no_go']['independent_weak_Israel_wall_and_far_source_generically_incompatible']
     return d
 
-def replay_grid(label):
+def replay_grid(label,checkpoint=None,budget=75.,checkpoint_every=8):
     if label not in GRID:raise ValueError('choose one named original mesh')
     from ksw668_f8_tt_multipole import propagate
     dr,dy,dt=GRID[label]
     result=propagate(dr=dr,dy=dy,dt=dt,eps=.04,final_t=12.,
         pulse=.065,inside_chord=.012,r_outer=3.01,y_outer=2.01,
-        normal_order=3,conservative_source=True)
+        normal_order=3,conservative_source=True,checkpoint=checkpoint,budget=budget,checkpoint_every=checkpoint_every)
     from ksw668_f8_ternary_channel_drift import require_corrected
     require_corrected([result])
     keys=('intrinsic_4D_weyl_spatial_operator','step_radial','step_bulk','step_time','raw_mode_values',
@@ -80,7 +80,14 @@ if __name__=='__main__':
     ap=argparse.ArgumentParser()
     ap.add_argument('--run-grid',choices=tuple(GRID))
     ap.add_argument('--accept',action='store_true',help='fail closed for physical Weyl convergence')
+    ap.add_argument('--checkpoint',type=Path)
+    ap.add_argument('--budget',type=float,default=75.)
+    ap.add_argument('--checkpoint-every',type=int,default=8)
     args=ap.parse_args()
-    if args.run_grid:print('Completed numerical mesh only:',replay_grid(args.run_grid))
+    if args.budget<=0 or args.checkpoint_every<=0:ap.error('positive budget and checkpoint interval required')
+    if args.run_grid:
+        try:print('Completed numerical mesh only:',replay_grid(args.run_grid,args.checkpoint,args.budget,args.checkpoint_every))
+        except InterruptedError as exc:
+            print(str(exc));raise SystemExit(75)
     else:print('Historical LEGACY AXIAL negative receipt checked:',verify()['schema'])
     if args.accept:raise SystemExit(42)
