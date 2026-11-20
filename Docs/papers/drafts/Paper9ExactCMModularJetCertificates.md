@@ -834,3 +834,49 @@ carrier non-descent. Sweetgrass/Robin Wall Kimmerer (2013) remains
 cultural/methodological attribution, not mathematical proof authority.
 All earlier CM gates, including projected GMP, contour, primitive
 necklaces and level-163 Masser, remain active and unchanged. No CI initiated.
+
+
+## 20 November — COMP3a: complementary pre-multiplication cancellation
+
+For triples (p,q,t),(P,Q,T), g=gcd(p,Q)>0, write p=g*p0,Q=g*Q0.
+The merge equals g*(p0*P,q*Q0,t*Q0+p0*T). Cancel before materializing
+all three outputs. Works over integers with nonzero Q, including signed p.
+This is classical rational cross cancellation, not novelty claimed.
+Cross-only mode need not return a primitive triple; sufficient rational
+consumer is preserved despite residual common scale.
+
+Exact local run of scripts/check_pi_cross_cancel.py, commit
+6e3a7236c5b521b53612ff0206e1f493dfb3886f; local git hash-object and
+connector readback identical blob 3ccd75ca55528965d4f69ec207305d8ac33b5b8c.
+SymPy symbolic matrix identity PASS; 1200/1200 subinterval comparisons
+(400 intervals, three modes against plain), including canonical gcd
+checks for modes 1/2. Four modes: 0 plain, 1 post-gcd, 2 cross+post-gcd,
+3 cross only. Exact common decimal floor of rational endpoints certified
+for each mode, all modes match at each precision, conditional on classical
+Chudnovsky identity and alternating tail. No refinement needed.
+Three-run sequential medians include interval computation, scaled endpoint
+floors and decimal string conversion, exclude hash and separate carrier
+measurement. CPython standard integers; SymPy only symbolic oracle.
+
+| decimal places | terms | bits | plain ms | post gcd ms | cross+gcd ms | cross only ms |
+|---:|---:|---:|---:|---:|---:|---:|
+| 1000 | 73 | 4032 | .622 | .708 | .663 | .586 |
+| 10000 | 716 | 40032 | 34.370 | 29.647 | 30.068 | 28.475 |
+| 50000 | 3573 | 200032 | 675.993 | 590.620 | 602.470 | 553.565 |
+
+Final triple summed bit lengths by mode:
+1000 [12222,9017,9017,9030]; 10000 [142231,90212,90212,90233];
+50000 [784923,451516,451516,451549]. Not peak RSS.
+SHA256 of decimal integer string floor(10^d*pi), no dot:
+1000 8a84d58d47f78c42a200ebfbbe7346426d4cdf4f2803d45c3590162865fcc0d2
+10000 ab03bf7037718e1525340a0c43f0049ddbe99c6067ad3e08a4de5c591fedc524
+50000 c330a1682b2ecb5907a1e4819b49b9a920223b3318c4dab73243d0afe2cc2ac1
+Cross-only ~18.1% faster than plain at 50000 places, ~42.5% final
+carrier reduction, only 33 bits more than fully primitive. Choose as
+candidate, not production default or external SOTA. COMP3a PASS reference;
+COMP3b factor-sieve predictive cancellation, COMP4 balanced tree and
+thresholds, COMP5 native library/external matched benchmark all OPEN.
+Preserve COMP6-8 and CM gates: minimal canonical form can be more costly
+than sufficient noncanonical carrier; test this separately for Monster/VOA
+orbit/action and FRACDASH reconstruction, do not infer equivalences.
+No CI initiated or Agda kernel receipt.
