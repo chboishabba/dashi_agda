@@ -62,7 +62,13 @@ def replay_grid(label):
         'far_mode_intrinsic_4D_electric_Weyl',
         'far_mode_projected_5D_electric_Weyl',
         'discrete_support_photon_margin')
-    report={k:result[k] for k in keys}
+    # Preserve the complete original receiver and geometry receipt so downstream
+    # signed comparisons do not lose axial controls, tangent or aggregate data.
+    for k in keys:
+        if k not in result: raise ValueError('missing required receiver field: '+k)
+    report=dict(result)
+    report['requested_mesh']={'dr':dr,'dy':dy,'dt':dt}
+    report['receiver_receipt_schema']='XLIX-full-spatial-v2'
     report.update(grid=label,physical_early_Weyl_acceptance=False,
         same_original_adS5_model=True)
     outfile=REPO/'Artifacts/ksw668'/('ads5_f8_XLIX_corrected_replay_'+label+'.json')
