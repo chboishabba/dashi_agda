@@ -8,15 +8,18 @@ from sympy import Poly, symbols, ZZ, QQ, Rational, invert
 from check_cm163_modular_diagonal import j_unit, convolution, diagonal
 
 
-def slice_poly(p, K):
+def slice_poly(p, K, logder_fn=None):
     n = p+1
     M = p*n
     J = j_unit(M)
     H = J[:]
     H[1] -= K
-    L = [0]*(M+1)
-    for k in range(1,M+1):
-        L[k] = k*H[k]-sum(H[i]*L[k-i] for i in range(1,k))
+    if logder_fn is None:
+        L = [0]*(M+1)
+        for k in range(1,M+1):
+            L[k] = k*H[k]-sum(H[i]*L[k-i] for i in range(1,k))
+    else:
+        L=logder_fn(H)
     N = [1]
     for k in range(1,n+1):
         v = sum(L[p*i]*N[k-i] for i in range(1,k+1))
@@ -38,12 +41,12 @@ def slice_poly(p, K):
     return Poly.from_list(coeff[::-1],symbols('X'),domain=ZZ)
 
 
-def main():
+def main(diagonal_fn=diagonal, slice_fn=slice_poly):
     start=perf_counter()
     p=41; K=-640320**3
-    P=diagonal(p).shift(K)
+    P=diagonal_fn(p).shift(K)
     print('diagonal seconds',perf_counter()-start,flush=True)
-    S=slice_poly(p,K).shift(K)
+    S=slice_fn(p,K).shift(K)
     print('slice seconds cumulative',perf_counter()-start,flush=True)
     assert P.nth(0)==P.nth(1)==S.nth(0)==S.nth(1)==0
     c20=S.nth(2); c30=S.nth(3)
