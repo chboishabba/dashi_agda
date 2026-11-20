@@ -47,6 +47,8 @@ open import Data.Rational.Unnormalised as ℚ using (ℚᵘ; _/_)
 
 import Real as BishopReal
 import RealProperties as BishopProperties
+import Inverse as BishopInverse
+open import Data.Sum.Base using (inj₂)
 
 import DASHI.Physics.YangMills.BalabanBishopConcreteSineCosineInterlacingExact as Concrete
 import DASHI.Physics.YangMills.BalabanP33BishopInverseDexpPositiveDenominatorExact as Positive
@@ -317,3 +319,47 @@ reducedScaledLeftInverse (vec3B gx gy gz) a b (vec3B vx vy vz) =
          ((d ⊗ r2) ⊕ (((⊝ a) ⊗ s2) ⊕ (k ⊗ t2)))
          ⊜ (d ⊗ vz))
      BishopProperties.≃-refl gx gy gz a b vx vy vz))
+
+-- An actual inverse from denominator positivity alone.  No analytic
+-- operator-cancellation hypothesis is accepted by this construction.
+reducedInverse : ∀ g a b →
+  BishopReal._<_ BishopReal.0ℝ (reducedDelta g a b) →
+  Vec3B → Vec3B
+reducedInverse g a b positive v =
+  scale3
+    (BishopInverse._⁻¹ (reducedDelta g a b) (inj₂ positive))
+    (reducedNumerator g a b v)
+
+cancelPositiveScale : ∀ d → (positive : BishopReal._<_ BishopReal.0ℝ d) →
+  ∀ u v → BishopReal._≃_ u (BishopReal._*_ d v) →
+  BishopReal._≃_
+    (BishopReal._*_ (BishopInverse._⁻¹ d (inj₂ positive)) u) v
+cancelPositiveScale d positive u v equal =
+  let
+    dinv = BishopInverse._⁻¹ d (inj₂ positive)
+    inverseLeft =
+      BishopProperties.≃-trans
+        (BishopProperties.*-comm dinv d)
+        (BishopInverse.*-inverseʳ d (inj₂ positive))
+  in
+  BishopProperties.≃-trans
+    (BishopProperties.*-congˡ equal)
+    (BishopProperties.≃-trans
+      (BishopProperties.≃-symm (BishopProperties.*-assoc dinv d v))
+      (BishopProperties.≃-trans
+        (BishopProperties.*-congʳ inverseLeft)
+        (BishopProperties.*-identityˡ v)))
+
+reducedLeftInverse :
+  ∀ g a b (positive : BishopReal._<_ BishopReal.0ℝ (reducedDelta g a b)) v →
+  vec3Congruent
+    (reducedInverse g a b positive (principalLogAdApply a b g v)) v
+reducedLeftInverse g a b positive v
+  with reducedScaledLeftInverse g a b v
+... | ex , (ey , ez) =
+  let d = reducedDelta g a b
+      u = reducedNumerator g a b (principalLogAdApply a b g v)
+  in
+  cancelPositiveScale d positive (x u) (x v) ex ,
+  (cancelPositiveScale d positive (y u) (y v) ey ,
+   cancelPositiveScale d positive (z u) (z v) ez)
