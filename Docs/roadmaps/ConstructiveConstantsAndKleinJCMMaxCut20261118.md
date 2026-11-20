@@ -863,3 +863,43 @@ Next: source-native equality/phase/limit transport and formal
 certificate replay remain OPEN, but no additional classical CM
 constant is required. Classical attribution: Machin, Ramanujan,
 Chudnovsky, modular-form valence formula and original repo owners.
+
+
+## 20 November — Paper 9 working manuscript and cost-model cross-pollination
+
+User-approved independent Paper 9 candidate (math.NT/math.NA/cs.SC).
+Working draft `Docs/papers/drafts/Paper9ExactCMModularJetCertificates.md`
+created at 5ea80fe8729f8c421c7f369fc88b4b03582c7700. Publication router
+and papers index updated in this packet. Not a fourth Clay-facing core
+paper; no dependence on Papers 1–8 or wider 369 physical interpretations.
+
+Cost-model donor readbacks: EfficientRecoverableQuotientExact
+050e3c36d14bfe86e77ce6ef7ccb3ccd4565e201,
+ShorClassicalQuantumFibreComparisonExact
+36b90475a1f76a2c16ed820741706c29949eb703,
+QuantumExecutionFibreAdapterExact
+e2694328b8455d51ca86a1bbac591b5f3edc03f0,
+FibreProgramComplexityExact (actual path/sum/peak/head consumers),
+Karp21N21PhysicalF3F4CompileWeld20261114.md
+57ea16b449e2860d966f6e4086d388f7588721a2,
+Karp21FRACDASHMachineMaxCut20261109.md
+94a6c3fda664d3f78a7fa71731fbf400a1c1dc0d.
+Reuse cost discipline, not open P-vs-NP/physical bit-machine conclusions.
+Classical transition and quantum gate costs are distinct.
+
+Draft contains the two-slice cubic-jet lemma, CM163 derivation, constructive
+interval methodology, and parameterized preliminary arithmetic/time and
+payload-space bounds. 126 vs 1849 coefficient slots is not a RAM or bit-time
+ratio. Current p^4 arithmetic count and p^2 live coefficient-slot bound
+must be combined with proved intermediate bit-height, actual bigint
+temporary storage, translation/verification, and representation overhead.
+Binary-split bounds parameterized by multiplication cost and d; no
+unit-cost unbounded integers. Numeric p versus log(p) explicit.
+
+Next publication gates: independently rerun historical committed scripts and
+receipts; instrument bitwidth, operation counts, peak payload/RSS,
+serialized certificate and verification cost; generalize additional CM
+discriminants; baseline and bibliographic novelty comparison. Local SymPy
+in lieu of Agda for computational packet. No fresh execution or kernel
+receipt in manuscript-authoring turn. Keep draft updated with actual
+results as they land.
