@@ -217,3 +217,74 @@ With schoolbook arithmetic, a conservative construction time bound
 is O(p^8(b+1)^2), not a bound polynomial in log p.
 General proof should be reviewed, and actual operand instrumentation,
 full derivative replay, dyadic replay and allocator accounting remain open.
+
+
+## 20 November — GMP/Newton exact construction and complete CM163 replay
+
+Prior head 3b32bcb374cfd52cc2fe0e824f6b05d04f9f6cce.
+Scalar defaults preserved in check_cm163_modular_diagonal.py and
+check_cm163_derivative_slice.py, with explicit optional logder_fn hooks
+(commits 50d40405b26dbf2620270c7f5b18b8206250f932 and
+2f8b5e594e95a4b487d376e701c19fd909445c27).
+New check_cm163_fast.py fc51d0f1636bcc2cc7b71f95225304aa2a86ed08
+uses native GMP signed Kronecker multiplication via ctypes (Linux GMP
+ABI), Newton inversion of H with constant coefficient 1 and exact
+checks H*G=1 and H*L=tH' modulo the requested truncation.
+For operand coefficient counts m,n and maxima U,V, choose byte-aligned
+radix R>2 min(m,n) U V. The signed coefficient of the true product
+lies strictly inside (-R/2,R/2). Evaluating at R, multiplying
+integers and centered digit extraction with carry recovers each
+coefficient inductively. Truncation uses the low bits of the product.
+Newton identity 1-HG_new=(1-HG)^2 gives doubling and uniqueness of L
+from H*L=tH'. This proves equality to the scalar recurrence for
+unit H, not a claim of independent analytic modularity.
+The original other construction and derivative consumer are unchanged.
+64/64 signed convolution and 64/64 inverse/logder scalar comparisons,
+8/8 complete polynomial comparisons at p=3,5,7,11 passed locally.
+An initial proof-of-concept run timed out with large Python modulo;
+using a bit mask resolved the truncation issue. Final code uses explicit
+hooks, no dynamic source substitution. A separate unmodified scalar
+replay also completed, 33.01158858 s while concurrently running other
+tests; do not use that as a controlled speed benchmark.
+
+Sequential reproduction runner check_cm163_backend_parity.py
+9adb75153854c4a8a019c6a05f8e8fb3b6313940 runs independent subprocesses
+and checks exact byte equality of both unshifted polynomial arrays
+serialized as signed hexadecimal JSON, not just hashes or final s2.
+Executed locally with Python 3.13.5, SymPy 1.14.0, GMP 6.3.0,
+Linux x86_64 glibc 2.41, Intel Xeon Platinum 8573C.
+All exact source blobs matched: diagonal add8e35866aa1e9f379b4a57059c4487e4c7241c,
+slice 0c1f7d04618943d6b9941f433ceed8c5cd9fd590,
+fast 6c1a051c2832d9afd549680b3a6401383023989e,
+runner d737ef34938ee5c1557e08ee322f785c5d2ec7d8.
+Both full p=41 runs PASS, s2=77265280/90856689 and
+kappa=-77859659565707/19943834790540897829879824384000.
+126 output coefficient slots, aggregate signed-magnitude payload
+241632 bits (one sign bit per slot), max output coefficient 3371 bits,
+61113 serialized bytes; full byte-for-byte coefficient parity PASS.
+Measured single sequential run (seconds; imports excluded):
+
+| Backend | Diagonal | Construction total | Complete incl. derivative/serialization | Peak RSS KiB |
+| --- | ---: | ---: | ---: | ---: |
+| Scalar | 8.899486372 | 31.606400973 | 31.649009698 | 143412 |
+| GMP/Newton | 4.252409969 | 16.159672922 | 16.208337047 | 533716 |
+
+Speed ratio 1.95x; RSS ratio 3.72x. 52 packed multiplication calls
+on the fast full construction; maximum packed operand 204771028 bits.
+This is distinct from maximum individual coefficient width, final
+certificate size or live integer payload. Resource receipt:
+Artifacts/paper9/cm163_backend_parity_20261120.json (commit 684059f458297ed9dbb7e158d83f895cc4bfec45).
+Reproduce: python scripts/check_cm163_fast.py for regressions and
+full fast derivative, then python scripts/check_cm163_backend_parity.py
+for sequential full exact comparison. No CI/kernel required.
+Historical derivative result now independently reproduced. Dyadic
+enclosure replay remains open; P9.03 partial for entire suite.
+P9.04 partial (packed counts/operand width and output coefficient
+heights, not every scalar intermediate); P9.06 measured two backend
+RSS and serialized slice size, not a general memory theorem or
+full certificate size. No claim of an unconditional speedup, statistical
+benchmark, smaller peak memory, or asymptotic improvement for all stages.
+Next: block or height-adaptive packing/CRT, charge repacking and all
+GMP/Python temporary buffers, preserve exact parity; retain scalar
+backend for memory-constrained runs. Generalization and external
+baselines remain open. No new formal analytic or kernel closure.
