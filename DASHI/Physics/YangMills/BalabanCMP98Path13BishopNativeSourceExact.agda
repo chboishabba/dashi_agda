@@ -15,6 +15,12 @@ import DASHI.Physics.YangMills.BalabanClayGate4CMP109CenteredPeriodicEmbeddingEx
 import DASHI.Physics.YangMills.BalabanClayGate4CMP109PeriodicContourFamilyInstantiationExact as Periodic
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.List.Base using (length)
+import Sequence as Seq
+import DASHI.Foundations.BishopSquareNonnegativeExact as SquareNN
+import DASHI.Foundations.BishopNonnegativeSquareReflectionExact as Reflect
+import DASHI.Analysis.BishopComplexNormSquarePowerEnvelopeExact as AbsSquare
+import DASHI.Foundations.BishopCubicTranslationIteratedExact as Iter
 open import Data.Rational.Base as Rat using (ℚ; 0ℚ; 1ℚ; _≤_; _+_; _-_; _*_) renaming (_/_ to _/q_)
 import Data.Rational.Properties as RP
 import Data.Rational.Unnormalised.Properties as UP
@@ -395,7 +401,7 @@ signedWInside : ∀ y → SmallLie y →
   B._≤_ (B.∣_∣ (B.- (physicalW y))) Half.bishopQuarter
 signedWInside y p =
   BP.≤-respˡ-≃
-    (BP.≃-trans BP.∣-x∣≃∣x∣ (BP.0≤x⇒∣x∣≃x (wNonnegative p)))
+    (BP.≃-symm (BP.≃-trans BP.∣-x∣≃∣x∣ (Seq.0≤x⇒∣x∣≃x (wNonnegative p))))
     (wBelowQuarter p)
 
 aAt bAt : (y : BishopLie) → SmallLie y → B.ℝ
@@ -536,7 +542,7 @@ smallContourFromChordSq : ∀ q →
 smallContourFromChordSq q bound =
   let nn = BP.≤-respʳ-≃ (imagSqEmbed q)
         (Cast.bishopEmbedOrder (rationalImagNN q))
-      upper = BP.≤-respˡ-≃ (BP.≃-symm (imagSqEmbed q))
+      upper = BP.≤-respˡ-≃ (imagSqEmbed q)
         (Cast.bishopEmbedOrder
           (RP.≤-trans (rationalImagBelowChord q)
             (RP.≤-trans bound radiusSqBelowQuarter)))
@@ -544,7 +550,7 @@ smallContourFromChordSq q bound =
     { positiveScalar = BP.<-≤-trans
         (BP.p<q⇒p⋆<q⋆ (+ 0 / 1) (+ 1 / 2) (UP.positive⁻¹ (+ 1 / 2)))
         (Cast.bishopEmbedOrder (scalarHalfBelowFromChord q bound))
-    ; imaginarySqInside = BP.≤-respˡ-≃ (BP.0≤x⇒∣x∣≃x nn) upper
+    ; imaginarySqInside = BP.≤-respˡ-≃ (BP.≃-symm (Seq.0≤x⇒∣x∣≃x nn)) upper
     }
 
 -- Convert a single physical chord-square bound on the selected contour
@@ -612,3 +618,221 @@ nativePointAdmissionFromPhysicalRadius :
   PointAdmission g nativeSeriesChart
 nativePointAdmissionFromPhysicalRadius g radius =
   pointAdmissionFromChordSq g (relativeContourChordSqFromRadius g radius)
+
+------------------------------------------------------------------------
+-- Point AND outer selected chart relevance.  Reuse the original Bishop
+-- square-reflection theorem and finite nat scaling.  No norm, convexity,
+-- coefficient or independent outer-radius input is required.
+------------------------------------------------------------------------
+
+squareB : B.ℝ → B.ℝ
+squareB x = B._*_ x x
+
+vectorSqNonnegative : ∀ v → B.NonNegative (Poly.generatorSq (toVec3 v))
+vectorSqNonnegative v =
+  BP.nonNegx,y⇒nonNegx+y
+    (SquareNN.bishopSquareNonnegative (v P.coordinateX))
+    (BP.nonNegx,y⇒nonNegx+y
+      (SquareNN.bishopSquareNonnegative (v P.coordinateY))
+      (SquareNN.bishopSquareNonnegative (v P.coordinateZ)))
+
+componentSqBelow : ∀ v k →
+  B._≤_ (squareB (v k)) (Poly.generatorSq (toVec3 v))
+componentSqBelow v P.coordinateX =
+  BP.0≤y-x⇒x≤y
+    (BP.≤-respʳ-≃
+      (let open BP.ℝ-Solver in
+       solve 3 (λ x y z → (y ⊕ z) ⊜ (x ⊕ (y ⊕ z)) ⊖ x)
+         BP.≃-refl (squareB (v P.coordinateX))
+           (squareB (v P.coordinateY)) (squareB (v P.coordinateZ)))
+      (BP.nonNegx⇒0≤x (BP.nonNegx,y⇒nonNegx+y
+        (SquareNN.bishopSquareNonnegative (v P.coordinateY))
+        (SquareNN.bishopSquareNonnegative (v P.coordinateZ)))))
+componentSqBelow v P.coordinateY =
+  BP.0≤y-x⇒x≤y
+    (BP.≤-respʳ-≃
+      (let open BP.ℝ-Solver in
+       solve 3 (λ x y z → (x ⊕ z) ⊜ (x ⊕ (y ⊕ z)) ⊖ y)
+         BP.≃-refl (squareB (v P.coordinateX))
+           (squareB (v P.coordinateY)) (squareB (v P.coordinateZ)))
+      (BP.nonNegx⇒0≤x (BP.nonNegx,y⇒nonNegx+y
+        (SquareNN.bishopSquareNonnegative (v P.coordinateX))
+        (SquareNN.bishopSquareNonnegative (v P.coordinateZ)))))
+componentSqBelow v P.coordinateZ =
+  BP.0≤y-x⇒x≤y
+    (BP.≤-respʳ-≃
+      (let open BP.ℝ-Solver in
+       solve 3 (λ x y z → (x ⊕ y) ⊜ (x ⊕ (y ⊕ z)) ⊖ z)
+         BP.≃-refl (squareB (v P.coordinateX))
+           (squareB (v P.coordinateY)) (squareB (v P.coordinateZ)))
+      (BP.nonNegx⇒0≤x (BP.nonNegx,y⇒nonNegx+y
+        (SquareNN.bishopSquareNonnegative (v P.coordinateX))
+        (SquareNN.bishopSquareNonnegative (v P.coordinateY)))))
+
+chordB : B.ℝ
+chordB = Scalar.rationalCoordinateToBishop relativeChordRadius
+
+logCoordBound : B.ℝ
+logCoordBound = B._*_ twoB chordB
+
+chordBNN : B.NonNegative chordB
+chordBNN = BP.0≤x⇒nonNegx
+  (Cast.bishopEmbedOrder (RP.nonNegative⁻¹ relativeChordRadius))
+
+twoBNN : B.NonNegative twoB
+twoBNN = BP.0≤x⇒nonNegx
+  (Cast.bishopEmbedOrder (RP.nonNegative⁻¹ (+ 2 /q 1)))
+
+logCoordBoundNN : B.NonNegative logCoordBound
+logCoordBoundNN = BP.nonNegx,y⇒nonNegx*y twoBNN chordBNN
+
+imaginaryAbsBound : ∀ q →
+  SU2.literalChordalDistanceSq q ≤ relativeChordRadiusSq →
+  ∀ k → B._≤_ (B.∣_∣ (fromVec3 (contourImaginary q) k)) chordB
+imaginaryAbsBound q bound k =
+  let
+    v = fromVec3 (contourImaginary q)
+    sqBound : B._≤_ (contourImagSq q) (squareB chordB)
+    sqBound = BP.≤-respʳ-≃ (Unit.embedProd relativeChordRadius relativeChordRadius)
+      (BP.≤-respˡ-≃ (imagSqEmbed q)
+        (Cast.bishopEmbedOrder (RP.≤-trans (rationalImagBelowChord q) bound)))
+  in Reflect.squareReflectsOnNonnegative
+    (BP.nonNeg∣x∣ (v k)) chordBNN
+    (BP.≤-respˡ-≃ (BP.≃-symm (AbsSquare.absoluteSquare (v k)))
+      (BP.≤-trans (componentSqBelow v k) sqBound))
+
+pointLogAbsBound : ∀ q (admission : SmallContour q) →
+  SU2.literalChordalDistanceSq q ≤ relativeChordRadiusSq →
+  ∀ k → B._≤_ (B.∣_∣ (seriesPrincipalLog q admission k)) logCoordBound
+pointLogAbsBound q admission chord k =
+  let
+    s = contourImagSq q
+    inside = imaginarySqInside admission
+    v = fromVec3 (contourImaginary q)
+    a = Series.arcSeries s inside
+    sn = vectorSqNonnegative v
+    an = BP.0≤x⇒nonNegx (Series.arcSeriesNonnegative s sn inside)
+    absMul = BP.≃-trans (BP.∣x*y∣≃∣x∣*∣y∣ a (v k))
+      (BP.*-congʳ (BP.nonNegx⇒∣x∣≃x an))
+    ub = BP.*-mono-≤ an (BP.nonNeg∣x∣ (v k))
+      (Series.arcSeriesBelowTwo s sn inside)
+      (imaginaryAbsBound q chord k)
+    coordinate : B._≃_ (seriesPrincipalLog q admission k) (B._*_ a (v k))
+    coordinate = logCoordinate q admission k
+  in BP.≤-respˡ-≃
+    (BP.≃-symm (BP.≃-trans (BP.∣-∣-cong coordinate) absMul)) ub
+  where
+  logCoordinate : ∀ q (admission : SmallContour q) k →
+    B._≃_ (seriesPrincipalLog q admission k)
+      (B._*_ (Series.arcSeries (contourImagSq q) (imaginarySqInside admission))
+        (fromVec3 (contourImaginary q) k))
+  logCoordinate q admission P.coordinateX = BP.≃-refl
+  logCoordinate q admission P.coordinateY = BP.≃-refl
+  logCoordinate q admission P.coordinateZ = BP.≃-refl
+
+squareFromAbsBound : ∀ x r → B._≤_ (B.∣_∣ x) r →
+  B._≤_ (squareB x) (squareB r)
+squareFromAbsBound x r bound =
+  BP.≤-respˡ-≃ (AbsSquare.absoluteSquare x)
+    (BP.*-mono-≤ (BP.nonNeg∣x∣ x) (BP.nonNeg∣x∣ x) bound bound)
+
+scaledCoordinateSquareBound : ∀ x →
+  B._≤_ (B.∣_∣ x) logCoordBound →
+  B._≤_ (squareB (B._*_ twoB x)) (squareB (B._*_ twoB logCoordBound))
+scaledCoordinateSquareBound x bound =
+  squareFromAbsBound (B._*_ twoB x) (B._*_ twoB logCoordBound)
+    (BP.≤-respˡ-≃
+      (BP.≃-symm
+        (BP.≃-trans (BP.∣x*y∣≃∣x∣*∣y∣ twoB x)
+          (BP.*-congʳ (BP.nonNegx⇒∣x∣≃x twoBNN))))
+      (BP.*-monoˡ-≤-nonNeg bound twoBNN))
+
+coordinateBoundImpliesSmallLie : ∀ v →
+  (∀ k → B._≤_ (B.∣_∣ (v k)) logCoordBound) → SmallLie v
+coordinateBoundImpliesSmallLie v bound = record
+  { wNonnegative = BP.nonNegx⇒0≤x
+      (vectorSqNonnegative (λ k → B._*_ twoB (v k)))
+  ; wBelowQuarter =
+      BP.≤-trans
+        (BP.≤-respʳ-≃
+          (let open BP.ℝ-Solver in
+           solve 0
+             (let x = Κ (+ 2 / 1) ⊗ (Κ (+ 2 / 1) ⊗ Κ (+ 37 / 1024))
+                  x2 = x ⊗ x
+              in (x2 ⊕ (x2 ⊕ x2)) ⊜ Κ (+ 4107 / 65536))
+             BP.≃-refl)
+          (BP.+-mono-≤
+            (scaledCoordinateSquareBound (v P.coordinateX) (bound P.coordinateX))
+            (BP.+-mono-≤
+              (scaledCoordinateSquareBound (v P.coordinateY) (bound P.coordinateY))
+              (scaledCoordinateSquareBound (v P.coordinateZ) (bound P.coordinateZ)))))
+        (Cast.bishopEmbedOrder
+          (RP.<⇒≤ (RP.positive⁻¹ ((+ 1 /q 4) - (+ 4107 /q 65536)))))
+  }
+
+sumAbsUniform : ∀ {I : Set} (xs : List I) f r →
+  (∀ i → B._≤_ (B.∣_∣ (f i)) r) →
+  B._≤_ (B.∣_∣ (sumBishop xs f)) (Iter.natScale (length xs) r)
+sumAbsUniform [] f r bound =
+  BP.≤-reflexive (BP.nonNegx⇒∣x∣≃x BP.nonNeg0)
+sumAbsUniform (i ∷ xs) f r bound =
+  BP.≤-respʳ-≃ (BP.+-comm r (Iter.natScale (length xs) r))
+    (BP.≤-trans (BP.∣x+y∣≤∣x∣+∣y∣ (f i) (sumBishop xs f))
+      (BP.+-mono-≤ (bound i) (sumAbsUniform xs f r bound)))
+
+weightB : B.ℝ
+weightB = Scalar.rationalCoordinateToBishop R147.siteWeightℚ
+
+weightBNN : B.NonNegative weightB
+weightBNN = BP.0≤x⇒nonNegx
+  (Cast.bishopEmbedOrder (RP.nonNegative⁻¹ R147.siteWeightℚ))
+
+weightedPointLogAbsBound : ∀ v k →
+  B._≤_ (B.∣_∣ (v k)) logCoordBound →
+  B._≤_ (B.∣_∣ (scale R147.siteWeightℚ v k)) (B._*_ weightB logCoordBound)
+weightedPointLogAbsBound v k bound =
+  BP.≤-respˡ-≃
+    (BP.≃-symm (BP.≃-trans (BP.∣x*y∣≃∣x∣*∣y∣ weightB (v k))
+      (BP.*-congʳ (BP.nonNegx⇒∣x∣≃x weightBNN))))
+    (BP.*-monoˡ-≤-nonNeg bound weightBNN)
+
+blockWeightNormalized : B._≃_
+  (Iter.natScale (length (Carrier.elements (Centered.centeredBlockFinite 6)))
+    (B._*_ weightB logCoordBound)) logCoordBound
+blockWeightNormalized rewrite Centered.centeredBlockEnumerationLength 6 =
+  BP.≃-trans (Iter.natScaleAsEmbeddedNatMul 28561 (B._*_ weightB logCoordBound))
+    (let open BP.ℝ-Solver in
+     solve 1 (λ x → Κ (+ 28561 / 1) ⊗ (Κ (+ 1 / 28561) ⊗ x) ⊜ x)
+       BP.≃-refl logCoordBound)
+
+nativeInputsFromPhysicalRadius :
+  ∀ {C} (g : NativeGeometry C) →
+  Background.SelectedInverseLinkRadius13 (nativeBackground g) → Inputs C
+nativeInputsFromPhysicalRadius g radius =
+  let
+    admission = nativePointAdmissionFromPhysicalRadius g radius
+    pointBound = λ bond step point k →
+      pointLogAbsBound (relativeUnit g bond step point) (admission bond step point)
+        (relativeContourChordSqFromRadius g radius bond step point) k
+    outerBound = λ bond step k →
+      BP.≤-respʳ-≃ blockWeightNormalized
+        (sumAbsUniform (Carrier.elements (Centered.centeredBlockFinite 6))
+          (λ point → scale R147.siteWeightℚ
+            (pointYFrom g nativeSeriesChart admission bond step point) k)
+          (B._*_ weightB logCoordBound)
+          (λ point → weightedPointLogAbsBound
+            (pointYFrom g nativeSeriesChart admission bond step point) k
+            (pointBound bond step point k)))
+  in record
+    { geometry = g
+    ; chart = nativeSeriesChart
+    ; pointLogAdmissible = admission
+    ; pointRelevant = λ bond step point →
+        coordinateBoundImpliesSmallLie
+          (pointYFrom g nativeSeriesChart admission bond step point)
+          (pointBound bond step point)
+    ; outerRelevant = λ bond step →
+        coordinateBoundImpliesSmallLie
+          (outerYFrom g nativeSeriesChart admission bond step)
+          (outerBound bond step)
+    }
