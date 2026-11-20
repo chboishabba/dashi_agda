@@ -175,13 +175,19 @@ claim boundaries are governed.
 | Old paper | Current role | Publication disposition |
 | --- | --- | --- |
 | Paper 1, NS | core Paper 1 | Clay-facing candidate; prepare now |
-| Paper 2, GR bridge | support / later satellite | mine into Paper 8 and possible finite-geometry satellite |
+| Paper 2, GR bridge | revived standalone research satellite | owns KSW668/Israel moving-boundary geometry; scoped reuse in Papers 1, 3, 8 |
 | Paper 3, YM | core Paper 3 | Clay-facing candidate; prepare first |
 | Paper 4, Hilbert/Stone | support / later satellite | operator or quantum-methods paper after core |
 | Paper 5, DHR | support / later satellite | sector-reconstruction paper after YM context stabilizes |
 | Paper 6, Yukawa/CKM | diagnostic support | do not publish as theorem paper yet |
 | Paper 7, terminal composition | folded into Paper 8 | claim-boundary and governance material |
 | Paper 8, unification | core Paper 8 | submit after Papers 1 and 3 are public drafts |
+
+## November 20, 2026 — Paper 2 revival and ten-track numbering
+
+Paper 2 is the standalone preparation lane for *Conservative Moving-Boundary Geometry and Adjoint Curvature Attribution in Five-Dimensional Braneworld Dynamics*. Retain the three-paper core and existing submission priorities. No Paper 11 is needed. Paper 2 owns original action/junction geometry, conservative radial sources, moving state pairings, discrete adjoints, excision, geometric E4/E5 and independent numerical refinement. Paper 1/3 remain independently readable; transfer only lemmas proved on their own carriers. Paper 8 owns generic constructor grammar; Papers 4/7 may reuse dual transport and same-object composition. Paper 10 finite Heisenberg polarization is a comparison only until an explicit commuting weld exists. Paper 9 CM derivative certificates (#1529) and Paper 10 Monster/Heisenberg (#1217) retain independent numbering; manuscript readiness not audited here.
+
+Implementation ledger: `../physics/KSW668F8YMNSNonlinearCurvatureRoadmap20261120.md`. Finite identities do not certify continuum GR, physical accuracy, NS collar coercivity, YM mass gap or unification.
 
 ## Satellite Pipeline
 
@@ -246,7 +252,7 @@ Publication posture:
   satellite. It should be framed as observer quotient reconstruction and
   phenomenal non-recovery, not as a consciousness solution.
 
-### Satellite C: GR / Finite Geometry / DCHoTT
+### Satellite C: Paper 2 / GR / Finite Geometry / DCHoTT
 
 Topic:
 
