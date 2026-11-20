@@ -60,3 +60,30 @@ normalizer-label = N.threeCLaneIsDistinct
 
 -- The normalizer label is source data, not a constructed embedding.
 -- No same-object H1-H5 or Thompson module promotion is made.
+
+-- Published 2A reflection source: Breuer, Magaard, Wilson,
+-- arXiv:2412.12182, Fact 1 (product of 2A involutions in class 3C).
+-- Arithmetic consequences only; no subgroup embedding constructed here.
+s3-trivial : Nat
+s3-trivial = 35000
+
+s3-sign : Nat
+s3-sign = 30628
+
+s3-standard : Nat
+s3-standard = 65628
+
+s3-dimension : s3-trivial + s3-sign + 2 * s3-standard ≡ 196884
+s3-dimension = refl
+
+s3-reflection : s3-sign + 4372 ≡ s3-trivial
+s3-reflection = refl
+
+s3-rotation-zero : s3-trivial + s3-sign ≡ s3-standard
+s3-rotation-zero = refl
+
+s3-regular-core-and-ternary-residual : 6 * s3-sign + 3 * 4372 ≡ 196884
+s3-regular-core-and-ternary-residual = refl
+
+s3-standard-split : 2 * s3-sign + 4372 ≡ s3-standard
+s3-standard-split = refl

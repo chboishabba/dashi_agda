@@ -6,7 +6,7 @@ def check():
     pts=list(product(range(3),repeat=2))
     neg=lambda x: tuple(-a%3 for a in x)
     Q=sorted({min(x,neg(x)) for x in pts})
-    assert sorted(Counter(min(x,neg(x)) for x in pts).values())==[1,2,2,2]
+    assert sorted(Counter(min(x,neg(x)) for x in pts).values())==[1,2,2,2,2]
     B=list(product(Q,range(2),range(3**8),range(3)))
     pairs=list(permutations(range(3),2))
     R=list(product(pairs,range(3),range(3)))
