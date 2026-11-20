@@ -1600,3 +1600,38 @@ original modular input, packed backend, direct jets/CRT, full level-163
 comparison and performance still OPEN. SymPy used instead of Agda for
 computational acceptance by user direction; not a kernel theorem receipt.
 No CI initiated.
+
+
+## 20 November — original-input residue acceptance and comparative negative result
+
+Local execution at f5e6dd37492a0808503ec9be5d8bdcd223085be9:
+norm module exact Git blob 14c80df19871435e2ac7d088e871cad3f7dc06fe.
+Independent nonnegative GMP Kronecker convolution, original raw input
+formulas transcribed, J generated modulo r from the original Euler
+pentagonal/E4^3/eta^24 identities, Newton inverse and delta*J=E4^3
+checked. Independent logder recurrence with H*L=tH' check.
+SymPy 1.14.0 Poly.shift(K) over ZZ on full residue polynomial
+representatives compared modulo r with direct translated jet formula.
+Levels 3,5,11,17,41; two split prime powers per level, >=384 bits.
+Prime bases respectively (7,13),(11,31),(23,67),(103,137),(83,739).
+20/20 orbit/logder norm cases, 6/6 admitted valuation cases, 80/80
+translated coefficients PASS. Four diagonal valuation cases excluded
+by nonunit denominator condition, not failures. Peak combined process
+RSS 136460 KiB, not a backend-specific memory comparison.
+Level 41 observed norm-only seconds (orbit, logder):
+83 diagonal (.122159,.084985), fixed (.056417,.041607);
+739 diagonal (.121342,.089824), fixed (.061263,.042790).
+739 diagonal valuation .608603 s. Shared modular J setup .180391
+and .163600 s for the two rings respectively. Single observations,
+not statistical timings. Same independent multiplication backend,
+not exact production GMP implementation comparison. No SOTA claim:
+logder wins these level-41 observations. Keep default unchanged.
+M15d.2 original mathematical input parity PASS on this residue sample;
+M15d.3 modular jet parity PASS, full integer CRT still OPEN.
+Production source-byte replay, repeated matched timings/RSS, level
+163, external competitors, Agda kernel acceptance remain OPEN.
+Next prioritize projected logder arithmetic and tighter height bounds,
+compare modular J generation against shared integer J including all
+CRT rings, and benchmark best internal route against direct specialized
+external methods. Do not equate outperforming a full modular polynomial
+construction with SOTA for CM derivative evaluation.
