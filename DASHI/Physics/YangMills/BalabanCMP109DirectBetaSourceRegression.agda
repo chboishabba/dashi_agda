@@ -57,7 +57,13 @@ module DASHI.Physics.YangMills.BalabanCMP109DirectBetaSourceRegression where
 --
 --     b_fixed = b_middle - B_normal,
 --
--- not b_W - |Q|-|R|.
+-- not b_W - |Q|-|R|, under the induced-volume identification only.
+-- For ordinary ambient delta elimination Q=[P R], the actual coordinate
+-- density is |det P|^-1, and (-1)^m det bordered(A,Q) is
+-- (det P)^2 det(C*AC).  Induced volume instead includes sqrt(det(C*C)).
+-- Do not substitute one measure for the other.  The exact rational mixed
+-- jet check is scripts/check_ym_cmp109_delta_pivot_measure.py; the literal
+-- CMP109 normalization and any additional density remain source inputs.
 --
 -- On the finite-g side, if the five-channel betaInt bound is uniform over the
 -- admissible preceding-coupling history, history is an argument of the CURRENT
@@ -73,6 +79,7 @@ module DASHI.Physics.YangMills.BalabanCMP109DirectBetaSourceRegression where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
+import DASHI.Physics.YangMills.BalabanCMP98Path13BishopNativeSourceExact as Native
 open import DASHI.Physics.YangMills.CompactLieProofLevel using (ProofLevel)
 open import DASHI.Physics.YangMills.BalabanCMP109SourceTranscriptionExact
 open import DASHI.Physics.YangMills.BalabanCMP109DirectBetaSourceCutsetExact
@@ -257,3 +264,8 @@ round82HistoricalLeafCountRegression = round82ActualNewAnalyticLeafCount
 -- Current frozen research scoreboard remains A/B/C/D = 4.
 currentFrozenResearchCountRegression : Nat
 currentFrozenResearchCountRegression = currentFrozenResearchCount
+
+-- Constructed native chart, not a caller-supplied inverse identity.
+-- Contour admission and printed analytic semantics remain separate.
+nativePath13SeriesChart : Native.LocalChart
+nativePath13SeriesChart = Native.nativeSeriesChart
