@@ -1083,3 +1083,13 @@ Write z=-w_q, C=1+za, S=1+zb using the actual shifted aSeries/bSeries. For n>=1 
 Shared Paper 9 observation: multiplication by t in R[t]/(t^2-z) has matrix [[0,z],[1,0]], and conjugate norm a^2-zb^2. The exponential matrix has determinant C^2-zS^2=1. At z=0 the generator is nilpotent. Monster cyclotomic norm a^2-ab+b^2 is the analogous quadratic norm, not a representation-specific proof dependency. No new carrier required.
 
 Acceptance: unchanged parity donor source transfer only; signed specialization, shifted Cauchy limit, native quaternion unit norm, chord, exponential identification and actual physical CMP102 domain attachment OPEN. No kernel/CI acceptance or Clay promotion; original physical radius retained.
+
+
+### 2026-11-20 — CMP102 signed finite convolution specialization
+
+New source-written owner: DASHI/Foundations/BishopSignedFactorialConvolutionExact.agda.
+It reuses finiteExponentialCauchyCoefficient, expTermCongruent, expTermZeroAtPositive, finSumIsSeriesOf and originalBishopFiniteEvenOddSumReindex. signedPositiveDegreeZero specializes at (1,-1); inclusiveParity retains the final endpoint; signedInclusiveEvenDegreeZero joins these on the original Bishop sum. Existing vendor/Bishop and DASHI donor attribution retained. No new carrier, axiom, radius division or representation-specific Monster dependency.
+
+Independent local Python Fraction regression: 128 inclusive parity checks, 128 omitted-endpoint negative controls and 128 shifted bracket coefficients passed (degrees 0..127). The corresponding reference is scripts/check_cmp102_signed_factorial_normalization.py. This is a finite reference, not a proof of the Agda source.
+
+For the actual signed shifted aSeries/bSeries, the next Agda cut must identify every parity summand with the original shifted factorial coefficient, including degree zero and the two boundary terms, then transport through the same-series Cauchy limits. The bracket coefficient is (-1)^(n+1) times the inclusive signed convolution at degree 2n+2. Shifted Agda identity, analytic normalization, native unit norm/chord, alternating bound and physical CMP102 attachment remain OPEN. Agda executable unavailable locally; no kernel or CI acceptance. No Clay promotion.
