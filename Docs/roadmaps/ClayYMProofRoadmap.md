@@ -1927,7 +1927,12 @@ not new kernel acceptance receipts.
 | Constructed native LocalChart | 14fd22f, 7941c56, 33a8783 | Source-written and attached to focused regression; admission and semantic identity remain |
 | Root-free chart exact executable checks | 854c1d3, scripts/check_ym_path13_rootfree_chart.py | Symbolic two-sided inverse and 16 rational contour certificates |
 | Delta/pivot determinant and mixed jet | 576daf3, scripts/check_ym_cmp109_delta_pivot_measure.py | Exact rational checks; literal CMP109 normalization not yet identified |
-| Paper 3 draft 3 | 6f890b0 | Current mathematical derivation and source crosswalk |
+| Full selected Path13 mixed jet | 4ea9811 | Exact local execution: 114244 contour projections |
+| Full finite Q matrix and pivot/Gram jets | 6f69482 | Exact local execution: 12 x 342732, four jets, flat reference |
+| Squared-chord path and direct contour admission | 10e2a4a, 066d5cf, 812e06a, f2bf18a, 4de7e33 | Source-written; consumes selected inverse-link radius, no independent norm representation |
+| Bishop arcsinc positive upper bound | 80fb1ae, 915f147 | Source-written; kernel pending |
+| Chart semantics and nontrivial commuting flat minimum | 38f9852 | Symbolic identities and exact rational fixture executed |
+| Paper 3 source semantics and matrix receipts | 9612990 | Mathematical derivation in section 5.5; explicit claim boundaries |
 
 ### Current execution cut (supersedes older packet lists; not new gate IDs)
 
@@ -1958,9 +1963,9 @@ of research iterations, not independent theorem authorities.
 
 | Remaining local attachment | Exact acceptance test |
 | --- | --- |
-| A. Native chart | LocalChart is now constructed as nativeSeriesChart. Supply pointLogAdmissible, pointRelevant and outerRelevant on the actual contours, and identify the exponential/log and Fréchet derivative with the printed source. Verify the new source by Agda. No independent series or inverse input. |
-| B. Physical variational input | Supply NativeGeometry.variational, coarse and small on the literal Path13 fine action/constraints. Reuse Bałaban's existing theorem and attach its hypotheses; do not rebuild canonical geometry or assume rational minimizers without justification. |
-| C. Source-normalized restricted Gaussian | Attach Eq120 Q and the actual DQ to the existing CMP99 iterated/pivot and Wilson/gauge Hessian owners; identify the literal CMP109 Jacobian and normal subspace response on the same object. Eq119 QPrime alone is not proof of DQ. |
+| A. Native chart | nativeSeriesChart and point admission from selected inverse-link radius are source-written. Paper 3 sec. 5.5 proves w <= 4107/65536 for point and outer generators and derives exp/log/Fréchet semantics mathematically. Complete native Bishop order/Fréchet attachment and verify Agda. No independent chart or norm representation input. |
+| B. Physical variational input | Nontrivial rational commuting flat constrained-minimum fixture executed. General NativeGeometry.variational, coarse and small on the literal physical fine action/constraints remain. Reuse Bałaban's theorem; do not assume general rational minimizers or promote the fixture to uniqueness/analyticity. |
+| C. Source-normalized restricted Gaussian | All entries of Q,Q_s,Q_t,Q_st on one periodic side-13 flat-reference block computed exactly. Selected pivot mixed log determinant -19907776794912/4826809; QQ* mixed log determinant 3328816224672/815730721. Attach general selected-family derivatives, actual physical A/H1/J Hessian and CMP109 normalization, including the moving normal contribution. |
 | D. Uniform physical beta | Consume the existing trace/patch/remainder lemmas with the actual normalized physical Fourier enclosure, including the normal contribution and measure. A finite configured reference is not a uniform enclosure. |
 
 For A, the implemented root-free construction is A(w), B(w) factorial series, w=4||Y||²,
@@ -2029,6 +2034,6 @@ old lanes are legacy/support, not deleted. Do not create replacement drafts.
   ([TeX](../papers/drafts/YangMillsClayTrackAuditManuscript.tex))
 - [YM / Unification theorem navigation](../support/reference/YMUnificationPaperToProofMap.md)
 
-The active Paper 3 draft 3 at 6f890b0 supersedes its older local task list.
+The active Paper 3 at 9612990 supersedes its older local task list; section 5.5 records the full finite Q and source-semantic chart results.
 The older source intake manuscript's P33-closed label is scoped to its
 historical reduction, not the current physical beta or Clay endpoint.
