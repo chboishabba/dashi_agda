@@ -39,7 +39,7 @@ termAbs : ∀ c x n → B.NonNegative (c n) →
 termAbs c x n cn =
   BP.≃-trans
     (BP.∣x*y∣≃∣x∣*∣y∣ (c n) (B.pow x n))
-    (BP.*-congʳ (BP.0≤x⇒∣x∣≃x (BP.nonNegx⇒0≤x cn)))
+    (BP.*-congʳ (Seq.0≤x⇒∣x∣≃x (BP.nonNegx⇒0≤x cn)))
 
 magnitudeSuccessor :
   ∀ c x n →
@@ -65,7 +65,7 @@ termRatio :
 termRatio c x n cn cs inside =
   BP.≤-respʳ-≃
     (BP.*-congˡ (BP.≃-symm (termAbs c x n (cn n))))
-    (BP.≤-respˡ-≃ (termAbs c x (suc n) (cn (suc n)))
+    (BP.≤-respˡ-≃ (BP.≃-symm (termAbs c x (suc n) (cn (suc n))))
       (BP.≤-trans (magnitudeSuccessor c x n cn cs)
         (BP.*-monoʳ-≤-nonNeg inside
           (BP.nonNegx,y⇒nonNegx*y (cn n) (BP.nonNeg∣x∣ (B.pow x n))))))
@@ -323,7 +323,7 @@ arcTermBelowHalfPower :
   ∀ n → B._≤_ (term arcCoefficient s n) (B.pow Half.bishopHalf n)
 arcTermBelowHalfPower s sn inside n =
   let sBound = BP.≤-trans
-        (BP.≤-respˡ-≃ (BP.≃-symm (BP.nonNegx⇒∣x∣≃x sn)) inside)
+        (BP.≤-respˡ-≃ (BP.nonNegx⇒∣x∣≃x sn) inside)
         quarterBelowHalf
       powerBound = Seq.x≤y∧nonNegx⇒xⁿ≤yⁿ n sBound sn
   in BP.≤-respʳ-≃ (BP.*-identityˡ (B.pow Half.bishopHalf n))
@@ -375,7 +375,7 @@ arcPrefixReserveBound s sn inside (suc n) =
           (λ a p → (a ⊕ p) ⊕ p ⊜ a ⊕ (Κ (+ 2 / 1) ⊗ p))
           BP.≃-refl partial p
   in BP.≤-trans
-      (BP.≤-respʳ-≃ shape (BP.≤-respˡ-≃ stepEq bound))
+      (BP.≤-respʳ-≃ shape (BP.≤-respˡ-≃ (BP.≃-symm stepEq) bound))
       (arcPrefixReserveBound s sn inside n)
 
 arcPrefixBelowTwo : ∀ s → B.NonNegative s →
@@ -384,7 +384,7 @@ arcPrefixBelowTwo : ∀ s → B.NonNegative s →
 arcPrefixBelowTwo s sn inside n =
   let partial = Seq.SeriesOf (term arcCoefficient s) n
   in BP.≤-trans
-    (BP.≤-respˡ-≃ (BP.≃-symm (BP.+-identityʳ partial))
+    (BP.≤-respˡ-≃ (BP.+-identityʳ partial)
       (BP.+-monoʳ-≤ partial (BP.nonNegx⇒0≤x (arcReserveNonnegative n))))
     (arcPrefixReserveBound s sn inside n)
 
