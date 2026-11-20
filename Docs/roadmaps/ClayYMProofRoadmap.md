@@ -1907,7 +1907,7 @@ Do not mark YM.REAL closed on SymPy or a source pragma alone.
 
 ## 20 November 2026 — current #1444 implementation and manuscript crosswalk
 
-Source baseline: `9af34466bb2689f4f6c05ca92563060bdc76e642`.
+Source baseline: `33a87830df1dbc64fef7689d93150de54d602fcd`.
 Rounds R are chronological iterations; reuse later concrete producers before
 reopening an older obligation. The following are committed source changes,
 not new kernel acceptance receipts.
@@ -1921,6 +1921,13 @@ not new kernel acceptance receipts.
 | Direct variational selection, canonical geometry; no legacy chart input | 16924e8 | Source-written |
 | Inhabited canonical radius-six walk certificate attached | 9af3446 | Source-written; no independent geometry input |
 | Configured P33 bordered trace, moving normal constraint and measure distinction | bdbffd9, a3b5d9a; scripts/check_ym_p33_bordered_trace_20261120.py | Prior exact rational execution; not physical CMP109 beta |
+
+| Root-free scaled inverse and positivity | cb0f8f9, 1252e6f, 3ce4195 | Source-written, kernel pending |
+| Actual Bishop factorial/arcsinc series and bounds | 16ca148, de796db | Source-written, kernel pending |
+| Constructed native LocalChart | 14fd22f, 7941c56, 33a8783 | Source-written and attached to focused regression; admission and semantic identity remain |
+| Root-free chart exact executable checks | 854c1d3, scripts/check_ym_path13_rootfree_chart.py | Symbolic two-sided inverse and 16 rational contour certificates |
+| Delta/pivot determinant and mixed jet | 576daf3, scripts/check_ym_cmp109_delta_pivot_measure.py | Exact rational checks; literal CMP109 normalization not yet identified |
+| Paper 3 draft 3 | 6f890b0 | Current mathematical derivation and source crosswalk |
 
 ### Current execution cut (supersedes older packet lists; not new gate IDs)
 
@@ -1951,25 +1958,28 @@ of research iterations, not independent theorem authorities.
 
 | Remaining local attachment | Exact acceptance test |
 | --- | --- |
-| A. Native chart | Inhabit LocalChart and pointRelevant from the original contour family, reusing Bishop series limits and existing analytic identities. Supply only missing coefficient/log limit or chart-restricted inverse proof, not a fresh real carrier. |
+| A. Native chart | LocalChart is now constructed as nativeSeriesChart. Supply pointLogAdmissible, pointRelevant and outerRelevant on the actual contours, and identify the exponential/log and Fréchet derivative with the printed source. Verify the new source by Agda. No independent series or inverse input. |
 | B. Physical variational input | Supply NativeGeometry.variational, coarse and small on the literal Path13 fine action/constraints. Reuse Bałaban's existing theorem and attach its hypotheses; do not rebuild canonical geometry or assume rational minimizers without justification. |
 | C. Source-normalized restricted Gaussian | Attach Eq120 Q and the actual DQ to the existing CMP99 iterated/pivot and Wilson/gauge Hessian owners; identify the literal CMP109 Jacobian and normal subspace response on the same object. Eq119 QPrime alone is not proof of DQ. |
 | D. Uniform physical beta | Consume the existing trace/patch/remainder lemmas with the actual normalized physical Fourier enclosure, including the normal contribution and measure. A finite configured reference is not a uniform enclosure. |
 
-For A, the root-free fallback is A(w), B(w) factorial series, w=4||Y||²,
+For A, the implemented root-free construction is A(w), B(w) factorial series, w=4||Y||²,
 and positive-scalar quaternion log via the arcsin(r)/r series in r².
 With h=1-wB, Delta=h²+wA² the inverse is
 J=I-(A/Delta)ad+((A²-hB)/Delta)ad²; on 0≤w≤1/4 the mathematical lower
-bound is Delta≥529/576. This is a fallback proof route, not a requirement
-to reproduce any already-existing Bishop limit or analytic identity.
+bound is Delta≥529/576. The coefficient convergence, interlacing and inverse cancellation are now
+source-written using the existing Bishop limits; do not re-open them absent
+a kernel failure. The executable rational certificates are not kernel receipts.
 Do not impose global inverse-dexp or a decidable Bishop-real zero split.
 
 For B, reuse the direct 74-link telescope (37/1024 threshold) wherever
 its defect normalization matches the actual source. Squared chord and
 operator norm are different quantities; do not equate them by notation.
-For C, induced volume and ambient delta measure differ by the Gram
-determinant; use the actual source measure rather than selecting either
-by convenience. For D, use finite active-scale history, not an all-Nat
+For C, the new determinant reduction gives ordinary delta pivot density
+1/|det P| and (-1)^m det bordered(A,Q)=(det P)^2 det(C*AC).
+Induced volume differs by sqrt(det(QQ^T)); the exact mixed jets are tested.
+Attach actual CMP109 normalization and any additional density before using
+these results in the physical beta floor. For D, use finite active-scale history, not an all-Nat
 positive-beta recurrence.
 
 ### Downstream integration and endpoint acceptance (not additional local packets)
@@ -2019,5 +2029,6 @@ old lanes are legacy/support, not deleted. Do not create replacement drafts.
   ([TeX](../papers/drafts/YangMillsClayTrackAuditManuscript.tex))
 - [YM / Unification theorem navigation](../support/reference/YMUnificationPaperToProofMap.md)
 
+The active Paper 3 draft 3 at 6f890b0 supersedes its older local task list.
 The older source intake manuscript's P33-closed label is scoped to its
 historical reduction, not the current physical beta or Clay endpoint.
