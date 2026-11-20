@@ -1933,6 +1933,12 @@ not new kernel acceptance receipts.
 | Bishop arcsinc positive upper bound | 80fb1ae, 915f147 | Source-written; kernel pending |
 | Chart semantics and nontrivial commuting flat minimum | 38f9852 | Symbolic identities and exact rational fixture executed |
 | Paper 3 source semantics and matrix receipts | 9612990 | Mathematical derivation in section 5.5; explicit claim boundaries |
+| Full side-13 Wilson+covariant divergence Hessian and Green | 00e7d64 | Executed 84 stencil blocks, exact flat reduction and all 28561 Green equations; 326-bit denominator |
+| Full finite exact bordered Gaussian | 277cf8d | Executed all 165 displacement pairs and two Q cross-contractions via signed CRT |
+| Point/outer chart admission from chosen physical radius | fd89a34, 93919ea, b90e58d, 56519c7 | Source-written, pinned Bishop API checked statically; kernel pending |
+| Actual multi-block flat pivot/Gram/propagator | 42a688f, caa29fc | Exact counts and finite cyclic tests; mathematical all-volume floor; source-written cyclic Gram proof |
+| Rational near-identity root obstruction | 42b869e | Exact constant-sector counterexample, not general rational minimizer no-go |
+| Paper 3 full finite trace and multiblock proof | d22154d | Section 5.6, all mathematical and executed claims scoped |
 
 ### Current execution cut (supersedes older packet lists; not new gate IDs)
 
@@ -1963,10 +1969,10 @@ of research iterations, not independent theorem authorities.
 
 | Remaining local attachment | Exact acceptance test |
 | --- | --- |
-| A. Native chart | nativeSeriesChart and point admission from selected inverse-link radius are source-written. Paper 3 sec. 5.5 proves w <= 4107/65536 for point and outer generators and derives exp/log/Fréchet semantics mathematically. Complete native Bishop order/Fréchet attachment and verify Agda. No independent chart or norm representation input. |
-| B. Physical variational input | Nontrivial rational commuting flat constrained-minimum fixture executed. General NativeGeometry.variational, coarse and small on the literal physical fine action/constraints remain. Reuse Bałaban's theorem; do not assume general rational minimizers or promote the fixture to uniqueness/analyticity. |
-| C. Source-normalized restricted Gaussian | All entries of Q,Q_s,Q_t,Q_st on one periodic side-13 flat-reference block computed exactly. Selected pivot mixed log determinant -19907776794912/4826809; QQ* mixed log determinant 3328816224672/815730721. Attach general selected-family derivatives, actual physical A/H1/J Hessian and CMP109 normalization, including the moving normal contribution. |
-| D. Uniform physical beta | Consume the existing trace/patch/remainder lemmas with the actual normalized physical Fourier enclosure, including the normal contribution and measure. A finite configured reference is not a uniform enclosure. |
+| A. Native chart | nativeInputsFromPhysicalRadius now constructs pointLogAdmissible, pointRelevant and outerRelevant on the same native series chart. Bishop square-reflection and normalized sum donors reused; API order transports corrected. Complete native exp/log/Fréchet identification and verify pinned Agda. No independent admission input. |
+| B. Physical variational input | Nontrivial rational commuting flat fixture and exact near-identity rational 13th-root obstruction. General selected real-carrier variational theorem, actual action/constraint/gauge and physical radius remain. Reuse Bałaban; do not assert general rational minimizers, or promote the constant-sector obstruction to a general no-go. |
+| C. Source-normalized restricted Gaussian | Full Q and chosen six-plane Wilson+covariant-divergence Hessian mixed jets, all finite delta trace terms computed exactly (CRT). Multiblock flat pivot and Green fiber inverse implemented. Attach actual selected minimizer derivatives, full printed A/H1/J and additional CMP109 measure density; a one-block trace is not the physical beta. |
+| D. Uniform physical beta | All-volume flat Q0 Gram floor 57/13^6 (57/169 preconditioned), ker Q0 Hessian floor 1/57, with source-written cyclic Gram and exact stencil counts. Use existing patch/remainder and source-specific selected perturbation control, actual coarse momentum/normalization and uniform physical beta enclosure. No interacting beta claim. |
 
 For A, the implemented root-free construction is A(w), B(w) factorial series, w=4||Y||²,
 and positive-scalar quaternion log via the arcsin(r)/r series in r².
@@ -1986,6 +1992,23 @@ Induced volume differs by sqrt(det(QQ^T)); the exact mixed jets are tested.
 Attach actual CMP109 normalization and any additional density before using
 these results in the physical beta floor. For D, use finite active-scale history, not an all-Nat
 positive-beta recurrence.
+
+
+Current exact arithmetic executed receipt (one-block, chosen background paths, no physical beta):
+
+```
+Green denominator bits = 326; all 28561 equations PASS
+exact finite 2 Gamma_st delta = 216322732729731037306399416467101947565702264504255432442831129938831157590086114944025745589515026330695342921918722859720533813302962357884707554671488525967748893665917497385415791464168273322246877/40831355640469077924296754159149697139903068972616389940473557569519290498175868526730955293070750301779577272128081390546952400138950539138107665343598731913478057839270326725044030505628195025
+approx delta = 5297956.174527001
+induced correction = -3328816224672/815730721
+approx induced = 5293875.396227281
+```
+
+The exact trace scripts have byte-identical local and repository blobs
+(bbef5abc0ee2b7c3504c444b6f5e191787729220;
+f7fb2c9d8e9fe4a8b3028d442f94fd7f8329de0b). The finite multi-block flat
+operator is the true two-box stencil, not merely the one-block constant
+row. Agda and Nix were unavailable; no kernel or CI result is claimed.
 
 ### Downstream integration and endpoint acceptance (not additional local packets)
 
@@ -2034,6 +2057,6 @@ old lanes are legacy/support, not deleted. Do not create replacement drafts.
   ([TeX](../papers/drafts/YangMillsClayTrackAuditManuscript.tex))
 - [YM / Unification theorem navigation](../support/reference/YMUnificationPaperToProofMap.md)
 
-The active Paper 3 at 9612990 supersedes its older local task list; section 5.5 records the full finite Q and source-semantic chart results.
+The active Paper 3 at d22154d supersedes its older local task list; Sections 5.5–5.6 record the full finite Q, exact bordered trace, source-semantic chart and physical multi-block flat base.
 The older source intake manuscript's P33-closed label is scoped to its
 historical reduction, not the current physical beta or Clay endpoint.
