@@ -297,3 +297,117 @@ bBelowOneSixth : ∀ w (wn : B.NonNegative w) inside →
   B._≤_ (bSeries (B.- w) inside) (B._⋆ (+ 1 / 6))
 bBelowOneSixth w wn inside =
   alternatingLimitBelowFirst bCoefficient w bNN bStep wn inside
+
+------------------------------------------------------------------------
+-- Positive arcsinc majorant on the same limit. A loose bound 2 is enough
+-- for Path13 even after componentwise averaging; no extra analytic chart
+-- radius premise or separate series approximation is needed.
+------------------------------------------------------------------------
+
+twoB : B.ℝ
+twoB = B._⋆ (+ 2 / 1)
+
+arcCoefficientBelowOne : ∀ n → B._≤_ (arcCoefficient n) B.1ℝ
+arcCoefficientBelowOne zero = BP.≤-refl
+arcCoefficientBelowOne (suc n) =
+  BP.≤-trans (arcStep n) (arcCoefficientBelowOne n)
+
+quarterBelowHalf : B._≤_ Half.bishopQuarter Half.bishopHalf
+quarterBelowHalf =
+  BP.p≤q⇒p⋆≤q⋆ Half.quarter Half.half
+    (Extra.q≤r⇒+p/r≤+p/q 1 2 4 (s≤s (s≤s z≤n)))
+
+arcTermBelowHalfPower :
+  ∀ s → B.NonNegative s →
+  B._≤_ (B.∣_∣ s) Half.bishopQuarter →
+  ∀ n → B._≤_ (term arcCoefficient s n) (B.pow Half.bishopHalf n)
+arcTermBelowHalfPower s sn inside n =
+  let sBound = BP.≤-trans
+        (BP.≤-respˡ-≃ (BP.≃-symm (BP.nonNegx⇒∣x∣≃x sn)) inside)
+        quarterBelowHalf
+      powerBound = Seq.x≤y∧nonNegx⇒xⁿ≤yⁿ n sBound sn
+  in BP.≤-respʳ-≃ (BP.*-identityˡ (B.pow Half.bishopHalf n))
+      (BP.*-mono-≤ (arcNN n) (Concrete.powNonnegative sn n)
+        (arcCoefficientBelowOne n) powerBound)
+
+arcReserve : Nat → B.ℝ
+arcReserve n = B._*_ twoB (B.pow Half.bishopHalf n)
+
+arcReserveNonnegative : ∀ n → B.NonNegative (arcReserve n)
+arcReserveNonnegative n =
+  BP.nonNegx,y⇒nonNegx*y
+    (BP.0≤x⇒nonNegx (BP.p≤q⇒p⋆≤q⋆ 0ℚᵘ (+ 2 / 1)
+      (Q.*≤* (Z.+≤+ z≤n))))
+    (Concrete.powNonnegative
+      (BP.0≤x⇒nonNegx (BP.p≤q⇒p⋆≤q⋆ 0ℚᵘ Half.half
+        (Q.*≤* (Z.+≤+ z≤n)))) n)
+
+arcReserveSuccessor : ∀ n →
+  B._≃_ (arcReserve (suc n)) (B.pow Half.bishopHalf n)
+arcReserveSuccessor n =
+  let open BP.ℝ-Solver
+  in solve 1
+    (λ p → Κ (+ 2 / 1) ⊗ (p ⊗ Κ (+ 1 / 2)) ⊜ p)
+    BP.≃-refl (B.pow Half.bishopHalf n)
+
+arcPrefixReserveBound :
+  ∀ s → B.NonNegative s →
+  B._≤_ (B.∣_∣ s) Half.bishopQuarter →
+  ∀ n →
+  B._≤_ (B._+_ (Seq.SeriesOf (term arcCoefficient s) n) (arcReserve n)) twoB
+arcPrefixReserveBound s sn inside zero =
+  BP.≤-reflexive
+    (let open BP.ℝ-Solver
+     in solve 0
+        (Κ 0ℚᵘ ⊕ (Κ (+ 2 / 1) ⊗ Κ 1ℚᵘ) ⊜ Κ (+ 2 / 1))
+        BP.≃-refl)
+arcPrefixReserveBound s sn inside (suc n) =
+  let partial = Seq.SeriesOf (term arcCoefficient s) n
+      p = B.pow Half.bishopHalf n
+      t = term arcCoefficient s n
+      stepEq = BP.+-congˡ (B._+_ partial t) (arcReserveSuccessor n)
+      bound = BP.+-mono-≤
+        (BP.+-monoʳ-≤ partial (arcTermBelowHalfPower s sn inside n))
+        BP.≤-refl
+      shape =
+        let open BP.ℝ-Solver
+        in solve 2
+          (λ a p → (a ⊕ p) ⊕ p ⊜ a ⊕ (Κ (+ 2 / 1) ⊗ p))
+          BP.≃-refl partial p
+  in BP.≤-trans
+      (BP.≤-respʳ-≃ shape (BP.≤-respˡ-≃ stepEq bound))
+      (arcPrefixReserveBound s sn inside n)
+
+arcPrefixBelowTwo : ∀ s → B.NonNegative s →
+  B._≤_ (B.∣_∣ s) Half.bishopQuarter →
+  ∀ n → B._≤_ (Seq.SeriesOf (term arcCoefficient s) n) twoB
+arcPrefixBelowTwo s sn inside n =
+  let partial = Seq.SeriesOf (term arcCoefficient s) n
+  in BP.≤-trans
+    (BP.≤-respˡ-≃ (BP.≃-symm (BP.+-identityʳ partial))
+      (BP.+-monoʳ-≤ partial (BP.nonNegx⇒0≤x (arcReserveNonnegative n))))
+    (arcPrefixReserveBound s sn inside n)
+
+arcSeriesBelowTwo :
+  ∀ s → B.NonNegative s →
+  (inside : B._≤_ (B.∣_∣ s) Half.bishopQuarter) →
+  B._≤_ (arcSeries s inside) twoB
+arcSeriesBelowTwo s sn inside =
+  Seq.xₙ≤yₙ⇒limxₙ≤limyₙ
+    (arcPrefixBelowTwo s sn inside)
+    (convergent arcCoefficient s arcNN arcStep inside)
+    (twoB , Seq.xₙ≃c⇒xₙ→c (λ _ → BP.≃-refl))
+
+arcSeriesNonnegative :
+  ∀ s → B.NonNegative s →
+  (inside : B._≤_ (B.∣_∣ s) Half.bishopQuarter) →
+  B._≤_ B.0ℝ (arcSeries s inside)
+arcSeriesNonnegative s sn inside =
+  Seq.xₙisIncreasing⇒xₙ≤limxₙ
+    (λ n →
+      let partial = Seq.SeriesOf (term arcCoefficient s) n
+      in BP.≤-respˡ-≃ (BP.≃-symm (BP.+-identityʳ partial))
+        (BP.+-monoʳ-≤ partial
+          (BP.nonNegx⇒0≤x (positiveTermNN arcCoefficient s n arcNN sn))))
+    (convergent arcCoefficient s arcNN arcStep inside)
+    zero
