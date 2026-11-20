@@ -970,3 +970,17 @@ Next implement explicit rational complement consumer on existing predicate,
 then connect previous-scale mixed geometry and actual Bishop-real boundary
 links. This audit does not assert new formal complement code, donor transplant,
 kernel acceptance, radius reduction, CI or physical gate closure.
+
+
+### 2026-11-20 — literal rational small-field complement implemented
+
+In BalabanClayGate4LiteralWilsonLargeFieldPredicateExact, add SmallPlaquette,
+notLargeImpliesSmall, smallImpliesNotLarge, goodBlockOwnedPlaquetteSmall,
+allOwnedSmallImpliesGoodBlock, and gauge forward/backward transport.
+The two directions consume the original LargePlaquette and largeWitness;
+no new field, radius, or membership authority. The repository Empty is
+explicitly eliminated into stdlib bottom when applying rational strict order.
+At equality the large predicate holds. Scope is the exact rational
+holonomy and unadjusted threshold; mixed-scale Bishop source attachment
+and scaleAdjustedThreshold identification remain open. Source-written,
+Agda kernel pending; no CI or physical gate promotion.

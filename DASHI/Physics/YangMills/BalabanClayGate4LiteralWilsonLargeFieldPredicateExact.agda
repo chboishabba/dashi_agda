@@ -2,7 +2,8 @@ module DASHI.Physics.YangMills.BalabanClayGate4LiteralWilsonLargeFieldPredicateE
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Rational using (ℚ; 0ℚ; _*_; _≤_)
+open import Data.Rational using (ℚ; 0ℚ; _*_; _≤_; _<_)
+import Data.Rational.Properties as ℚP
 open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
@@ -203,6 +204,89 @@ largeFieldBlockGaugeBackward dataSet gauge scale configuration block
   (largeWitness plaquette member large) =
   largeWitness plaquette member
     (largePlaquetteGaugeBackward dataSet gauge scale configuration plaquette large)
+
+
+------------------------------------------------------------------------
+-- Strict small-field complement on the SAME owned rational plaquettes.
+-- The repository Empty is distinct from stdlib bottom: eliminate it
+-- explicitly rather than assuming the two negation types are identical.
+------------------------------------------------------------------------
+
+SmallPlaquette :
+  ∀ {Scale Configuration Gauge Block Plaquette} →
+  LiteralWilsonLargeFieldData Scale Configuration Gauge Block Plaquette →
+  Scale → Configuration → Plaquette → Set
+SmallPlaquette dataSet scale configuration plaquette =
+  Gap.literalChordalDistanceSq
+    (plaquetteHolonomy dataSet configuration plaquette)
+  < Gap.squareℚ (threshold dataSet scale)
+
+notLargeImpliesSmall :
+  ∀ {Scale Configuration Gauge Block Plaquette}
+    (dataSet : LiteralWilsonLargeFieldData Scale Configuration Gauge Block Plaquette)
+    scale configuration plaquette →
+  (LargePlaquette dataSet scale configuration plaquette → Empty) →
+  SmallPlaquette dataSet scale configuration plaquette
+notLargeImpliesSmall dataSet scale configuration plaquette reject =
+  ℚP.≰⇒> (λ large → eliminate (reject large))
+  where
+  eliminate : ∀ {A : Set} → Empty → A
+  eliminate ()
+
+smallImpliesNotLarge :
+  ∀ {Scale Configuration Gauge Block Plaquette}
+    (dataSet : LiteralWilsonLargeFieldData Scale Configuration Gauge Block Plaquette)
+    scale configuration plaquette →
+  SmallPlaquette dataSet scale configuration plaquette →
+  LargePlaquette dataSet scale configuration plaquette → Empty
+smallImpliesNotLarge dataSet scale configuration plaquette small large
+  with ℚP.<⇒≱ small large
+... | ()
+
+goodBlockOwnedPlaquetteSmall :
+  ∀ {Scale Configuration Gauge Block Plaquette}
+    (dataSet : LiteralWilsonLargeFieldData Scale Configuration Gauge Block Plaquette)
+    scale configuration block plaquette →
+  plaquette ∈ ownedPlaquettes dataSet block →
+  (LargeFieldBlock dataSet scale configuration block → Empty) →
+  SmallPlaquette dataSet scale configuration plaquette
+goodBlockOwnedPlaquetteSmall dataSet scale configuration block plaquette member good =
+  notLargeImpliesSmall dataSet scale configuration plaquette
+    (λ large → good (largeWitness plaquette member large))
+
+allOwnedSmallImpliesGoodBlock :
+  ∀ {Scale Configuration Gauge Block Plaquette}
+    (dataSet : LiteralWilsonLargeFieldData Scale Configuration Gauge Block Plaquette)
+    scale configuration block →
+  (∀ plaquette → plaquette ∈ ownedPlaquettes dataSet block →
+    SmallPlaquette dataSet scale configuration plaquette) →
+  LargeFieldBlock dataSet scale configuration block → Empty
+allOwnedSmallImpliesGoodBlock dataSet scale configuration block small
+    (largeWitness plaquette member large) =
+  smallImpliesNotLarge dataSet scale configuration plaquette
+    (small plaquette member) large
+
+smallPlaquetteGaugeForward :
+  ∀ {Scale Configuration Gauge Block Plaquette}
+    (dataSet : LiteralWilsonLargeFieldData Scale Configuration Gauge Block Plaquette)
+    gauge scale configuration plaquette →
+  SmallPlaquette dataSet scale configuration plaquette →
+  SmallPlaquette dataSet scale (transform dataSet gauge configuration) plaquette
+smallPlaquetteGaugeForward dataSet gauge scale configuration plaquette small =
+  subst (λ chord → chord < Gap.squareℚ (threshold dataSet scale))
+    (sym (plaquetteDistanceGaugeInvariant dataSet gauge configuration plaquette))
+    small
+
+smallPlaquetteGaugeBackward :
+  ∀ {Scale Configuration Gauge Block Plaquette}
+    (dataSet : LiteralWilsonLargeFieldData Scale Configuration Gauge Block Plaquette)
+    gauge scale configuration plaquette →
+  SmallPlaquette dataSet scale (transform dataSet gauge configuration) plaquette →
+  SmallPlaquette dataSet scale configuration plaquette
+smallPlaquetteGaugeBackward dataSet gauge scale configuration plaquette small =
+  subst (λ chord → chord < Gap.squareℚ (threshold dataSet scale))
+    (plaquetteDistanceGaugeInvariant dataSet gauge configuration plaquette)
+    small
 
 literalWilsonBadBlockGeometry :
   ∀ {Scale Configuration Gauge Block Plaquette}
