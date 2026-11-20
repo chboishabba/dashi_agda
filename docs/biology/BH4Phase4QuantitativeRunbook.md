@@ -207,3 +207,7 @@ Run `OPENBLAS_NUM_THREADS=1 python scripts/check_bh4_pnp_streaming_sympy.py` for
 ## Situated consumer residual
 
 Run `python scripts/check_bh4_situated_observer_sympy.py` for S4c.6: exact conditional consumer-specific linear minimality, window-specific adjoints, chronology collisions and spatial net-flux cut. Local SymPy replay uses recovered native geometry only; existing included Agda countermodel imports original residual/descent owners for the finite release chronology witness (source-written, no kernel receipt). See [BH4DifferentialStimulantObservationMaxCut.md](BH4DifferentialStimulantObservationMaxCut.md).
+
+## Finite admissible-future observer
+
+Run `python scripts/check_bh4_admissible_future_sympy.py` for S4c.7: chronological enabled histories, exact admissible-fibre difference spans, minimal linear residual/coordinate panels and a release-budget future-cone collision. Local SymPy execution only; synthetic masks and entitlement are not medication or measured physiology. See [BH4DifferentialStimulantObservationMaxCut.md](BH4DifferentialStimulantObservationMaxCut.md).
