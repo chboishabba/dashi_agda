@@ -1635,3 +1635,35 @@ compare modular J generation against shared integer J including all
 CRT rings, and benchmark best internal route against direct specialized
 external methods. Do not equate outperforming a full modular polynomial
 construction with SOTA for CM derivative evaluation.
+
+
+## 20 November — P9.M15k complementary cyclic receiver and selected packing
+
+Source scripts/check_cm_projected_product.py commit
+7127ee4eac9af4014ee7774b73f132603b1ab797. For D=tH', G=H^-1,
+write D=sum t^i D_i(q), G=sum t^i G_i(q), q=t^p.
+Pi_p(DG)=D_0G_0+q sum_(i=1)^(p-1) D_i G_(p-i).
+This is the exact complementary-residue contraction, not a claim that
+projection is a ring homomorphism. The q carry is essential.
+Nonnegative Kronecker packing canonicalizes residues modulo r and
+chooses byte width w with 256^w > min(len(a),len(b))*max(a)*max(b).
+No interlane carry; decode only indices 0,p,...,pn. Reference uses
+Python integer multiplication, NOT the native GMP production backend.
+It still computes the full packed integer product and materializes its
+bytes; only coefficient decoding and reduction are reduced.
+Local SymPy 1.14.0 execution of independently written source and
+scalar convolution: 72/72 three-way exact selected-packed vs
+complementary-fibre vs ZZ polynomial multiplication comparisons.
+Levels 3,5,7,11,17,41; n=1,2,3; moduli 83,83^2,739^3,2^384;
+seed 9, signed inputs. Committed harness is equivalent but not yet
+byte-identical replayed. No timing or memory improvement claimed.
+M15k reference and synthetic parity PASS; native GMP selective
+unpack, original modular input/jet integration and matched benchmark OPEN.
+Retain full inverse verification: projected H*G=1 alone is not
+sufficient to certify G. Do not weaken original full H*G check.
+Next compare selective native export/unpack against original packed
+convolution and p short complementary products, with shared inverse.
+For height geometry, optimize rational circle radius per slice/order,
+rather than least admissible integer B alone, and stop each slice at
+its own deterministic CRT threshold; preserve centered uniqueness.
+Full CRT, level 163 and external SOTA comparison remain OPEN.
