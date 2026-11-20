@@ -106,11 +106,29 @@ def check(order=4, geometric=False, **params):
         from warp_israel_affine import radial_source_at_receiver, offsets, forced_identity
         # Centre slot is the start of the second synthetic step (amplitude .013).
         # Receiver is outside source support in the original guarded setup.
-        g=radial_source_at_receiver(src,.013,s['rx'],s['eps'],dr)
+        dg=radial_source_at_receiver(src,1.,s['rx'],s['eps'],dr)
+        g=.013*dg
         actual=np.stack([r[0] for r in receipts]);forced=actual+offsets(g)
         err,scale=forced_identity(forced,g,t)
         assert np.all(np.abs(err)<=1e-10*np.maximum(1.,scale))
-        print('forced wall receiver',forced[4],'prescribed source offset',-g,flush=True)
+        # Shared centre event: step 0 B and step 1 A use the same time slot.
+        # Synthetic stage amplitudes remain independent; the direct receiver
+        # control is explicitly owned by step 1 A, not by both stages.
+        unit=euler(np.zeros(shape),2*nt,1.)
+        # Source contributions were stored with amplitude .013 for step 1 A.
+        propagated=np.stack([r[3][1,0]/.013 for r in receipts])
+        direct=offsets(dg)
+        delta=1e-4
+        _,_,perturbed=step(states[1],nt,[records[1][0][0]+delta*unit,*records[1][0][1:]])
+        finite=np.array([bymode(project(o[2]),perturbed-states[2])/delta for o in obs])+direct
+        np.testing.assert_allclose(finite,propagated+direct,rtol=1e-6,atol=1e-6)
+        # Receiver offset ownership is at the physical wall node, not the
+        # derivative stencil or the number of stages touching the event.
+        owner=float(region_masks[1][0,0,0,0]); regional_offset=owner*offsets(g)
+        complement_offset=(1-owner)*offsets(g)
+        np.testing.assert_array_equal(regional_offset+complement_offset,offsets(g))
+        print('forced wall receiver',forced[4],'prescribed source offset',-g,
+              'direct gradient',direct[4],'regional offset',regional_offset[4],flush=True)
         print('PASS off-shell identity through all signed ledger channels',flush=True)
 
 if __name__=='__main__':
