@@ -179,3 +179,7 @@ python3 scripts/check_bh4_xpollenation.py
 ```
 
 The aggregate checker includes acquisition, ranking, payment-preparation and joint-payment firewalls. CI is not the completion gate for this tranche.
+
+## Adjacent differential stimulant observer (2026-11-20)
+
+See [BH4DifferentialStimulantObservationMaxCut.md](BH4DifferentialStimulantObservationMaxCut.md), S1 and S3a: existing included finite observer owner now records matched initial stocks, distinct cytosolic/vesicular/extracellular balance witnesses, and endpoint non-identification of pool, synthesis and gross release. Synthetic only; exact-head Agda, real reaction/transport source evidence and empirical discrimination OPEN. This does not alter original 29x12 or P0–P3 payment.
