@@ -93,9 +93,29 @@ record OriginalSelectedLevel32K4P0
 
 open OriginalSelectedLevel32K4P0 public
 
--- Once a GENUINE dimension-one modularity receipt is present,
--- every coefficient follows on the SAME selected BSD curve.
--- The statement does not synthesize the missing modularity receipt.
+-- WARNING: the normalized q-series record's f and g are ARBITRARY
+-- functions. The curve-indexed EllipticLFunctionData has Set-valued
+-- semantic fields and does not itself compute actual Fourier coefficients.
+-- No theorem below identifies these arbitrary f/g functions with the
+-- original E32 all-n analytic L-series. The p=5 datum is only a single row.
+-- The following explicit constant-1 normalized source is a negative
+-- control: a normalized all-n agreement is easy to inhabit even without
+-- selecting the original E32 modular form (whose a_5 is -2).
+--
+-- This is a proof of *underidentification*, not a new modularity theorem.
+constantUnitCoefficients : Nat → ℚ
+constantUnitCoefficients _ = 1ℚ
+
+constantUnitNormalizedReceipt :
+  Normalized.NormalizedOneDimensionalQSeries
+    constantUnitCoefficients constantUnitCoefficients
+constantUnitNormalizedReceipt =
+  normalizedAllNBuildsOneDimensionalReceipt
+    refl refl (λ _ → refl)
+
+-- Once a GENUINE dimension-one modularity receipt AND genuine original
+-- Fourier coefficient identification are available, every coefficient
+-- follows. The statement here only proves abstract function equality.
 originalSelectedLevel32AllNCoefficientsAgree :
   ∀ {f g : Nat → ℚ}
     (source : OriginalSelectedLevel32K4P0 f g)
