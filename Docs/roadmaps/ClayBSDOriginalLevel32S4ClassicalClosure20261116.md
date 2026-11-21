@@ -1,5 +1,19 @@
 # BSD S4 original E:y²=x³−x — same-source 2-isogeny, level-32 newform, Mellin and central positivity
 
+## 21 November 2026 — master-native Agda BSD P0 source weld
+
+**Reconciliation:** the source-identified original Agda golden BSD K1–K5 and conductor-32 K4 modules from historical #1500 already exist on `master` (key matching blob SHA checked). #1500 diverges substantially from current `master`; no 49,000-commit historical branch replay or second Kummer/eta/Hecke stack is warranted. The active P0 integration is a NEW `master`-based branch, `agent/bsd-p0-original-level32-samecurve-weld-20261121`.
+
+**New original proof candidate:** `DASHI/Mathematics/Arithmetic/EllipticBSDOriginalLevel32SameCurveP0BIDIExact.agda`. It reuses original `curveY2EqualsX3MinusX`, original `BirchSwinnertonDyerBoundary.EllipticLFunctionData` at precisely that curve, its literal original p=5 datum, and the ALREADY proved normalized-one-dimensional-q-series all-n forward theorem. It adds an explicit inverse normalization construction (given all-n equality and f₁=g₁=1, construct the one-dimensional proportionality record with c=1) and a no-definitionally-identical-j=0-model negative control. The same-source record's **actual modularity/dimension-one premise is not constructed**, and its `EllipticLFunctionData` is a typed interface rather than a realized global analytic function. The module is imported by the original BSD K1–K5 root and checker. Source-written; native kernel **not run**.
+
+**New exact independent local checks:** `scripts/check_bsd_original_level32_samecurve_p0.py` constructs f32=q∏(1−q⁴ⁿ)²(1−q⁸ⁿ)² to q^512 and compares every p<400 good-prime Fourier coefficient to direct original E:y²=x³−x point counts: 76/76 PASS. Distinct-curve counterexample at p=5: original E32 a₅=−2 while Lean #114 j=0 E36 a₅=0. This validates a finite signature, **not** same-curve analytic modularity or infinite Euler convergence.
+
+**Highest-value K4 P0 remaining:** genuinely instantiate the original level-32 eta product as a holomorphic weight-two cusp form via Dedekind/Newman/Ligozat and actual genus/dimension-one theorem; attach the ORIGINAL E32 modularity, including isogeny-invariant L(E,s) with optimal E':y²=x³+4x; establish exact source-level Mellin/Fricke equality to the same original analytic L(E,1) and strict positive real eta tail; run pinned Agda/Lean kernels and transitive axiom audit. The CLASSICAL S4 closure recorded earlier in this document is not a native proof receipt. Selected K1–K3/K5 and universal S6 remain separately OPEN.
+
+**YM separation:** #1444 original finite source owners and master-based #1536 P0 F19/R445 source permutations are distinct from this BSD selected-curve proof. Sharing original-source BIDI / constructive convergence methods does not identify their measures, Hamiltonians or L-functions.
+
+
+
 **16 November 2026. Exact gate S4: CLOSED in the user-authorized CLASSICAL MATHEMATICAL protocol, using previously established external modularity/eta theorems and new explicit same-selected-curve reduction; NOT Agda or Lean native kernel acceptance.** This is the rank-zero analytic L-value for the SINGLE selected conductor-32 curve. It is not the universal Birch–Swinnerton-Dyer conjecture, not the odd-primary Sha theorem, not selected MW rank=0, and does not close S3/S5/S6 or any of the six original Clay endpoints.
 
 ## Exact owner and source identity
