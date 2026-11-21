@@ -1,3 +1,100 @@
+## 21 November 2026 — CURRENT GRH P0: exact local SymPy weld-forward (no CI)
+
+**User-directed execution mode: local SymPy instead of Lean/Agda CI.**
+Preserve this ALREADY ESTABLISHED controlling roadmap;
+do not open a parallel GRH plan. Historical R445/F19/CMP/numbered
+rounds are iterations/donors, not a theorem-progress counter.
+
+**Already-existing original source owner:** user's pinned external
+`chboishabba/riemann-hypothesis-lean@7cbf7a0c32fca1badf05931879a37c3f8a2b03b4`,
+real `src/Main.lean`, `src/Statements.lean`;
+already-existing Lean #113 direct `proofs/alpoge-lean433/RHAdmission.lean`
+consumes all five original theorem declarations without creating
+another L-function or new zero predicate. `UpperTheory.EveryCharacter`
+and source RowSrc refinements are optional donor routes, not the primary
+external-proof identity.
+
+**New committed mathematical acceptance producer (Lean #113):**
+`proofs/alpoge-lean433/check_grh_p0_original_all_characters_sympy.py`,
+exact locally tested Git blob SHA
+`3317d544f6e8d6ab50e92a652b6c304edd7af0a6`.
+Runs LOCAL SymPy 1.14, no CI/kernel, using the full finite character
+group of every modulus N=1,...,64. It enumerates exactly φ(N) distinct
+complex characters via prime-power factors, reconstructs primitive
+conductor d via literal unit-class fibres, and verifies the source
+induction / missing Euler polynomial by coefficientwise exact
+cyclotomic quotient `Q[z]/Φ_m(z)` calculations.
+
+**Fresh exact local results (executed and observed):**
+- **1,260/1,260** characters, all 64 moduli, including genuinely
+  complex-valued characters at composite moduli;
+- **1,415,034/1,415,034** finite unit-character
+  multiplication identities;
+- **757** characters primitive at their modulus, recovered by
+  original-unit fibre independence; other minimal conductors
+  independently determined;
+- **496** omitted Euler-factor instances and
+  **226,800/226,800** exact coefficient equalities through n=180;
+- additional independent real/quadratic and genuine-complex
+  prime-modulus reference implementations: **104,040/104,040**
+  coefficient instances;
+- exact source-pinned mode: **2/2** original author Main/Statements
+  Git blobs, **5/5** original Main→existing Lean RHAdmission mappings,
+  primitive qualifier and trivial-character pole exception present;
+  **3/3** deliberately mutated source/adapter tests fail as intended.
+
+To rerun on Lean #113 checkout:
+
+```sh
+python3 proofs/alpoge-lean433/check_grh_p0_original_all_characters_sympy.py
+```
+
+Optional when ORIGINAL source is locally available
+(no checkout/network initiated by this test):
+
+```sh
+python3 proofs/alpoge-lean433/check_grh_p0_original_all_characters_sympy.py \
+  --source-root .local/alpoge-rh-v4331 \
+  --adapter proofs/alpoge-lean433/RHAdmission.lean
+```
+
+Without optional source paths, provenance checking explicitly prints
+`SKIPPED`; math is still checked. Direct
+`check_original_p0_admission.sh` remains an optional genuine Lean
+kernel replay, NOT part of the active SymPy acceptance, and was not
+run. **No CI, Lean or Agda kernel was invoked** for these numbers.
+
+### Exact mathematical P0 implication — and its boundary
+
+For the original Dirichlet characters, if χ_N is induced from a
+primitive χ_d of conductor d|N, the genuine analytic identity
+`L(s,χ_N) = L(s,χ_d) × ∏_{p|N,p∤d}(1−χ_d(p)p^(−s))`
+is the primitive/imprimitive correspondence. Each omitted factor
+is NONZERO for Re(s)>0 since
+`|χ_d(p)p^(−s)| ≤ p^(−Re(s)) < 1`.
+Consequently the nontrivial critical-strip zeros agree once the
+original global analytic L-function identity is established.
+This is **known classical mathematics**, not a new proof of GRH.
+The local SymPy test establishes its finite algebraic components
+for bounded modulus/coefficient, not the infinite identity itself.
+
+**Actual next original main-proof payments:**
+(1) retain the externally verified, source-pinned original ALL
+Dirichlet character theorem with its exact five targets; maintain
+provenance/statement correspondence without another wrapper;
+(2) build verified SAME-CHARACTER `DirichletCharacter.LFunction`
+analytic/zero predicate transport to Agda (do not substitute finite
+Jacobi, CM elliptic, or zeta-only data);
+(3) root Lean 4.33.1↔root Mathlib trust/identity remains a
+separate formal admission issue, not paid by SymPy;
+(4) keep existing Mellin/Gamma-Mellin/Weil original owners
+and standard primitive-to-imprimitive analytic transfer as
+weld donors only when their actual required assumptions are met.
+No claimed Agda/Lean kernel acceptance, universal GRH completion,
+BSD completion or YM mass gap.
+
+---
+
 ## 21 Nov 2026 — current local harness acceptance receipt (not Lean)
 
 Verified on the **exact blob** of the committed Lean #113 script
