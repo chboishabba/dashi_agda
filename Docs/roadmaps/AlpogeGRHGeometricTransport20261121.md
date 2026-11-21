@@ -1,3 +1,69 @@
+## 21 Nov 2026 — P0 original RH root repaired; imprimitive Euler strip weld (CURRENT)
+
+**Weld, not another roadmap or a new zero carrier.**
+In Lean #113, the **existing** `MillenniumExternal/AlpogeRHBoundaryExact.lean`
+had an incorrect Lean `/-! ... -/-` block comment terminator; the
+literal fix to `-/` is committed as `4b45d7ef`. This is a
+source-level parsing repair on the already-original Mathlib RH ↔ exact
+Clay RH consumer; it does NOT import the external proof, and no
+Lean kernel accepted it in this runtime.
+
+The EXISTING SymPy all-modulus source/finite audit
+`proofs/alpoge-lean433/check_grh_p0_original_all_characters_sympy.py`
+on Lean #113 was **extended** in `2e6ecdc1`, rather than
+creating a redundant regression. Its `audit_open_strip_euler_factor_weld`
+symbolically checks the universal finite omitted-Euler-factor
+identity for an induced character:
+```text
+L(s,χ_N) = L(s,χ_f) · ∏_{p|N, p∤f} (1 - χ_f(p) p^{-s})
+```
+as a formal Dirichlet-coefficient identity (the full existing test
+already handles character conductors and exact cyclotomic values).
+For `σ=Re(s)>0`, each omitted factor is STRICTLY nonzero because
+`r=p^{-σ}∈(0,1)`, `z=χ_f(p)` has `|z|=1`, and
+`|1-rz|²=(1-r)²+2r(1-Re z) ≥ (1-r)²>0`.
+The polynomial identity was checked exactly by local SymPy 1.14,
+with a positive exact critical-line bound
+`(1-1/√2)²=3/2-√2>0` at the worst smallest p=2.
+The selected **original** primitive quadratic χ₅ → imprimitive
+χ₁₀ has `χ₅(2)=-1`: **1000/1000** exact formal coefficients
+match the `(1+2^{-s})` Euler factor. There are explicit
+negative controls: factors MAY vanish at `σ=0`, and the
+nonzero bound fails for non-unit values. This prevents
+illegitimately claiming zero equivalence on the boundary.
+
+**Fresh locally executed whole existing test subset**:
+moduli **1–16**, 80/80 complex characters,
+8,000/8,000 cyclotomic coefficient comparisons,
+4,682 exact multiplicativity instances, and 45 primitive
+characters; all PASS. Exact unit-circle symbolic certificate and
+1,000 additional selected coefficient comparisons PASS.
+The prior broader 1–64 count remains a separate earlier run;
+do not claim the freshly extended script was rerun over all 64
+without such a new execution. No CI, Lean or Agda kernel executed.
+
+**Analytic transfer scope:** From the classical Dirichlet series
+identity on `Re(s)>1`, the meromorphic identity theorem extends
+the induced/primitive relation where these L-functions possess
+their genuine analytic continuations. SymPy does not construct or
+certify that continuation. Given it, the omitted factors cannot
+create critical-strip zeros, so the original *primitive* and
+*imprimitive* zero predicates agree on `0<Re(s)<1`.
+This is a useful source identification for Agda P0 but is
+STRICTLY weaker than the external original published GRH theorem;
+the original Lean `Statements.lean` already quantifies over all
+N and all χ. Do NOT assume GRH from coefficient identities.
+
+**Remaining P0 discharge:** (1) local original v4.33.1 direct
+`RHAdmission.lean` kernel and axiom receipt; (2) compatible
+root Mathlib/Clay proof import (a source correction alone is not
+admission); (3) type-correct all-moduli/all-character analytic
+L-function/zero/critical-line transport in Agda. Preserve
+source/mathlib/author provenance. Use SymPy only for local
+mathematical audits, never as Lean/Agda CI or theorem kernel.
+
+---
+
 ## 21 November 2026 — GRH P0 newest weld: original admission typo repaired; 3 pinned sources
 
 **This is an update to the established controlling roadmap**, not
