@@ -1,6 +1,15 @@
 # Alpöge/Claude RH–GRH × DASHI geometric transport (21 November 2026)
 
 
+## 21 November — recovered original universal CM normalization (#73) and Frobenius modulo-six next theorem
+
+Latest cross-branch source audit found **Lean #73** `Integration/EisensteinJZeroPrimaryNormalizationExact.splitPrime_primary_associate_existsUnique`: every split norm-p original Eisenstein element has an already source-written **unique** six-unit *primary* associate. `IsJZeroPrimary` is `Even im ∧ Tr≡2 mod3`. New #73 `Integration/EisensteinJZeroPrimaryRayModulusBidiExact.lean` source-writes the exact **primary↔ray congruence** BIDI `z≡1 mod 2√−3` and transfers original unique unit to this actual modulus for **ALL split primes**, not merely 148 samples. Different question: original #69 canonical `J_p` chooses *specifically* −1 as unit. Its source (a_p=−Tr(J_p)) means `a_p≡2 mod6` is sufficient; the source #73 new `neg_one_is_unique_ray_unit_of_trace_mod_six` expresses exactly that reduction.
+
+Independent exact finite acceptance: 301/301 `#E(F_p)≡0 mod6` over rational primes 3<p<2000, 148/148 split trace (a_p≡2 mod6), and 1776/1776 (12 elements per split p) original norm-p `IsJZeroPrimary↔ray-one` and unique six-unit normalization. Relevant mathematical source next is genuine rational 2/3 torsion on (E:y²=x³+1) **over the SAME Fp curve**, not another independent complex/CM character sum; formalize `6 | #E(F_p)` then `a_p` congruence and cross-branch original source import. Current #73 actual point-group action over `Q(ω)` does not automatically imply all finite Fp cardinalities. The #69 Jacobi and #73 primary theorems remain **different branch owners**, so do not claim merged/compiled.
+
+P0 retains original `UpperTheory.EveryCharacter` all Dirichlet characters and pinned Lean 4.33.1 kernel admission with root/Agda transport. New Lean source is written, not kernel verified; no global Hecke ideal character or universal GRH inference; no CI.
+
+
 ## 21 November — CURRENT exact Hecke local source factor and GRH P0 priority
 
 Inspecting up-to-date Lean #69 source confirmed the original **all-p>3** `GoodPrimeLocalData`, split norm-p original Jacobi/Eisenstein element and actual j=0 trace, together with inert a_p=0. New #69 source `EisensteinJZeroSplitPrimeConjugateEulerFactorExact.lean` consumes those originals and factorizes the chosen split local polynomial into ((1+zT)(1+\bar zT)); it explicitly preserves `a_p=-(2z.re-z.im)`. Exact local arithmetic independently passes 10 split norm/trace/conjugate factorizations, seven inert zero traces, and 17 negative controls showing quadratic Dirichlet/Dedekind Euler factors are **not equal** to elliptic ones.
