@@ -49,6 +49,34 @@ kappa_L = 8 (L even), 12 (L odd).
 
 This improves exponent 1/19 to 1/12 *uniformly* over all original changing cutoffs L>=3; for even L, to 1/8.
 
+## New two-channel mixed-contour inequality: adaptive coherent-class selection (no binomial entropy)
+
+Let S be **any fixed original set of n distinct positive Wilson links**, let B_l be the original one-link misalignment event, A_l(r)={R_l>=r} the coherent-staple event, and let N_fru(S)=sum_{l in S} 1_{R_l<r}. For every integer 0<=h<=n and K=4*k(L) (=8 for even L and 12 for odd L), set m=ceil((n-h)/K). On the **original fully interacting Wilson probability law**:
+
+```
+P_mu( all_{l in S} B_l )
+  <= P_mu( N_fru(S)>h ) + K*q_(beta,r)^ceil((n-h)/K).
+```
+
+**Proof from the exact same Wilson conditional, no new independent-link assumption.** Fix the K geometric color classes S_i; their partition is deterministic, not data-dependent. If N_fru(S)<=h, at least n-h links are coherent, so at least one class S_i contains >=m coherent links. Let C_i be that class-coherence-count event. Each R_l and A_l(r) for l in S_i depend only on links *outside S_i*, because there are no plaquettes containing two S_i-links. Hence C_i is measurable when conditioning on all outside bonds. The original full Wilson conditional of the S_i bonds is a product of authentic one-link Haar Gibbs laws. On C_i, all-B occurrence in S_i has conditional probability at most q_(beta,r)^(number of coherent links in S_i) <= q_(beta,r)^m, while the unconstrained frustrated links contribute factors <=1. Union over the **K fixed classes**, not over choose(n,h) coherent subsets:
+
+```
+{all B in S} intersect {N_fru(S)<=h}
+  subset union_{i=1}^K ( C_i intersect {all B in S_i} ).
+```
+
+Integrate these conditional bounds and add P(N_fru>h). The factor is K (8/12), **not the binomial coefficient choose(n,h)**. This is a valid bridge for arbitrarily mixed coherent/frustrated original Wilson contours; the original coherent-only bound above is sharper when all of S is known coherent, so keep both lemmas.
+
+**Revised minimal physical input D1-FRU-01b:** an original-source *fixed-contour sparse-frustration count tail*, e.g. for a selected fraction 0<theta<1
+
+```
+P_mu(N_fru(S)>floor(theta*|S|)) <= C_f * rho_f^|S|
+```
+
+with C_f and rho_f independent of original UV cutoff, volume and contour, and quantitative rates strong enough to beat the existing rooted-animal growth of 196. Then the exact mixed-contour inequality provides an all-B connected-animal tail as soon as both 196*rho_f<1 and 196*q_(beta,r)^((1-theta)/K)<1 (with finite rounding handled explicitly). This is an IF/THEN statement: the **fixed-contour sparse-frustration probability bound has not been proved**. In particular, original extensive-density pressure estimates cannot be substituted. Nor is an all-B misalignment contour *itself* yet the actual marked W1/W3 covariance cluster weight or a full Gibbs small/large decomposition; both source identities remain open.
+
+The local exact-rational test additionally checks adaptive coherent-class extraction across 100 random marked-set sizes for L=3,4,5,6, with frustration patterns and exact q-power monotonicity. The mathematical proof above applies to arbitrary finite L>=3 and arbitrary S, and reuses the original Wilson source one-link conditional.
+
 ## Connected coherent-bad animals: rate and explicit threshold
 
 The original endpoint-adjacency degree <=14 and root-animal count <=14^{2(n-1)} = 196^{n-1} are unchanged. Put kappa=kappa_L, a_kappa=196*q_(beta,r)^(1/kappa). When a_kappa<1,
