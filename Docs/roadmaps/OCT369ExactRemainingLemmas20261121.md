@@ -172,3 +172,10 @@ Important: symbolic 1+omega+omega²=0 with sum omega^(3j)=3 is only a C3 angular
 | P0.30-q | Finite 3-cell Fourier source O_q transfers k→k+q, uniform O is k-diagonal; exact C3 DFT cross-check | Exact 3x3 SymPy + finite 18D Kubo; q=1/3 source is NOT long-wave B-Hessian |
 | P0.30-Maxwell | Same finite 18D H with site-resolved locally harmonic cubic Phi, mixed grand potential Maxwell relation dM/dmu=dN/dG | PASS residual 8.73e-8; finite dimensionless source, NOT original Sato-Hayami Eq11 or literal film |
 | P0.30-next | Original full 18-component periodic-kh spin octupole and same-material source-calibrated B gradient, surface, controller, gravity | OPEN |
+
+| P0.31-original-eq11 | Literal published Sato/Hayami Eqs 11–18: both spin-diagonal and off-diagonal 3-band terms, applied on original 24-bond Mn3 trial H in full 18D tensor | **115/115 local assertions**, exact uploaded/executed Git blob, original theory NOT DASHI |
+| P0.31-Bloch-gauge | Orbital embedding W(k) requires physical D_iH=∂_iH-i[X_i,H]; 2nd derivatives likewise; corrected full 18-component Eq11 same both gauges | maximum 4.60e-13; naive uncorrected differs ~.011–.013 (critical negative control) |
+| P0.31-symmetry | Eq11 U(1) per band, C3 3-index tensor, opposite magnetic-domain TR, full 18=7+5+3+3 reconstructed | residuals ≤8.9e-13 at four generic momenta; local mathematical consistency ONLY |
+| P0.31-BZ | Symmetric coarse 81/192/375 orbital-k source samples: mean tensor norms .009045/.005960/.003722 | **NOT CONVERGED**; no bulk octupole value admitted |
+| P0.31-degeneracy | High-symmetry exact degeneracies rejected under nondegenerate Eq11 formula | fail-closed; published full Methods degeneracy-safe original formula still OPEN |
+| P0.31-physical | Source PtMn3 refined magnetic domain, literal Wannier bands/H(k,h), SI spin Zeeman, converged 18D bulk M, Maxwell coil/SC/film and Tmunu/gravity measurement | OPEN |
