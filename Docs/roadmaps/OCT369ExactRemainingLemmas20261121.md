@@ -1,0 +1,22 @@
+# OCT369 exact remaining lemmas and consumers — 2026-11-21
+
+| Gate | Statement / consumer | Status | Required evidence |
+|---|---|---|---|
+| A01 | Full T² decomposes into one centre + punctured 8, with original positions | finite script / existing native owner; kernel not rerun | same Agda original source and compile |
+| A02 | Punctured T³ = 9+8+9, original centre removed exactly once | finite script / existing owner; kernel not rerun | same-object chart inverse and adjacency |
+| A03 | 26 nonzero points have 13 antipodal pairs, stratified 3+6+4 | finite script / existing owner; kernel not rerun | quotient and signed B3-equivariance |
+| A04 | Atomic C3 cyclic K order 3, Fourier equivalence and exterior powers | existing checked-in numerical receipt | Agda original proof, source-specific Hilbert identification |
+| A05 | Crystal spin/sublattice C3 equivariance (not square D4 rotation identity) | OPEN | actual PtMn3 magnetic symmetry data |
+| B01-B03 | Material cluster octupole tensor, origin and group covariance | OPEN | primary paper crystal sites and multipole definitions |
+| B04-B06 | Same-H spin transport, torque, switching and 363% TMR | OPEN | SOC/exchange/Hamiltonian/barrier plus measurements |
+| C01 | External-field superconducting/maglev levitation with stiffness | OPEN | force surface, guideway, stable 3D response |
+| C02 | Direct human-scale diamagnetic levitation | OPEN | field gradients, susceptibility, safety |
+| C03 | Octupole-assisted mechanical/field levitation | OPEN | measured material response, external traction/force |
+| C04 | Weight benchmark F=70*9.80665=686.4655 N | finite numerical arithmetic | actual person+apparatus total mass for physical case |
+| C05-C08 | Full momentum, stability, thermal and safety | OPEN | body, field, structure and environment controls |
+| D01-D04 | Same-action physical Tmunu and real field/metric response | OPEN | material stress and metric variation and GR solve |
+| D05-D07 | Typed gravitational observables, superconducting RF/Amy source tests and replication | OPEN | primary measurements; blinded nulls and independent replication |
+| E01-E05 | Schumann field/access, nonlinear converter and measured port work | OPEN | measured local E/B, source/drive/load and synchronized electrical signals |
+| F01-F06 | primary-data, formal and experimental validation | OPEN | independent source data and local executions |
+
+Important: symbolic 1+omega+omega²=0 with sum omega^(3j)=3 is only a C3 angular-harmonic toy. It neither computes the real magnetic octupole nor generates an external force. The paper's observed 363% TMR is an electrical resistance ratio, not 363% efficiency, net environmental gain, or torque enhancement.

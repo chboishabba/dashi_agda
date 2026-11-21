@@ -1,0 +1,51 @@
+# OCT369 physical-octupole / 369 atomic-quantum / gravity-field / Schumann programme
+Date: 2026-11-21
+Status: first source-specific finite acceptance; physical bridge and human levitation OPEN
+Base: chboishabba/dashi_agda master 116cd7de01b8a0da03703b3bb8db79c67fd15b50
+Scope: new cross-lane consumer, no modification of existing theorem owners.
+
+## O / Objective
+Steelman both directions: (A) published PtMn3 octupolar antiferromagnetic transport -> native DASHI atomic, quantum, crystallographic, hyperfabric and gravitational models; (B) native 369/27/13 symmetry and Hamiltonian producers -> candidate physical order, spin transport, field stress, force and power measurements. Keep three distinct human-levitation routes and Filsinger-Schumann as explicit consumers. Source is Nature DOI 10.1038/s41586-026-11172-5, supporting reportage https://phys.org/news/2026-11-unexpected-effect-electric-currents-antiferromagnets.html . Do not attribute schematic cubic harmonics or source-independent fixture models to published PtMn3 measurements.
+
+## Source-owner graph and exact carrier distinctions
+* Full nine sheet T^2 = {-1,0,1}^2, **9 sites**, centre included; punctured T^2* = T^2\{0}, **8 sites** = four antipodal pairs. Original OggSSPP2BalancedTernaryPuncturedPlaneExact.
+* Full spatial cube T^3 = 3 x 3 x 3 = **27 sites**; punctured T^3* has **26** = 9 lower + 8 central + 9 upper, NOT 3 x 8. Native Base369Ternary27HypervoxelFabricGeometryExact / Punctured27NineSheetBridgeExact.
+* Inversion on 26 nonzero cube sites gives **13** unoriented axes, stratified **3 coordinate + 6 face diagonal + 4 body diagonal**. Full and punctured geometries are separate from periodic additive C3^3; graph adjacency is not inferred from matching counts.
+* AtomicPeriodicTable369GenerativeExact supplies actual atomic species/index; atomic_369_manybody_c3_hamiltonian.py supplies cyclic C3 Fourier and exterior-power checks, but explicitly not a PtMn3 Hamiltonian.
+* CoQuarterTaSeTwoBlochRepresentationBoundaryExact supplies magnetic Seitz / antiunitary sewing acceptance patterns, not PtMn3-specific bands.
+* Gravity owners: AntigravityMaterialBidiCrossPollinationExact; AntigravityTOENonPromotionBridgeExact; CMP119AntigravityTraceVsActiveStressFirewallExact; quantum/GRQFT source-stress-metric and source-comparison owners. The gravitational field must be represented independently of laboratory EM support.
+* Superconducting antigravity, pulse-RF, Amy Eskridge attribution and gravity-as-field materials are **source-hypothesis and independent-replication lanes**, not measured PtMn3 effects. Compare evidence at individual experiment/device level before integration.
+* Filsinger owners: SmithFilsingerSchumannPhysicalSourceMaxCut20261112, SmithFilsingerJointCarrierAMFMFSKSourceCut20261115, smith_filsinger_lorentz_ade_sympy, earth_admittance_access. Acoustic ~7.8 kHz is not a measured electrical oscillator and not Schumann ~7.83 Hz.
+
+## Physical octupole: source-first definition
+A cluster magnetic octupole is a symmetry-defined, time-reversal-odd magnetic multipole built from real crystal-site positions, local moments, and the appropriate irreducible-tensor convention. The cubic harmonic sum z_a^3 for roots of unity is a **toy angular-order discriminator**, NOT by itself the physical rank-3 multipole tensor. The experiment reports room-temperature octupolar switching and 363% TMR; reproduce from original methods/data and retain error bars/geometry/current conditions before attaching a calibrated source receipt.
+For material sites a and bonds ab, require crystal positions r_a, species, ordered spin s_a, electronic H(k), magnetic Seitz actions, spin current J_ab, torque tau_a, and measured resistance R(state). Spin neutral total current does not force all sublattice-resolved transfer currents or torques to vanish.
+
+## Steelman BIDI / precise paid obligations
+Forward: physical PtMn3 cell + genuine order -> space/magnetic group -> equivariant atomic species and spin-decoration -> material-specific Bloch H(k) -> spin-resolved inter-/intra-sublattice currents -> torque -> switching and TMR -> bounded measurement uncertainty.
+Reverse: exact native nine/27/26/13 and C3 representations -> source-compatible decorated sublattices -> symmetry-allowed octupole tensors and transport operators -> Hamiltonian covariance and phase -> forward predictions. Search for material-compatible nonzero order at zero dipole and calibrated torque, while allowing negative results. Keep same-object identity through both directions.
+
+## Delivery phases and exact remaining lemmas
+### Phase A — geometry / atomic quantum [PARTIAL: first finite script]
+A01 exact 9 -> 8+centre partition; A02 exact 27 -> 9+8+9+centre partition as punctured 26; A03 26 -> 13 antipodal involution, orbit counts 3+6+4; A04 signed C3 Fourier equivalence and p-shell wedge^2, wedge^3 existing owner reuse; A05 theorem that any proposed PtMn3 physical site map respects **actual** 120-degree action and species, not D4 square action; A06 centre/adjacency/nonperiodic/periodic semantic nonidentification. First script only checks A01-A03 finite counts and basic C3 invariant, not Agda kernel.
+### Phase B — actual octupole [OPEN]
+B01 primary-source atomic positions, spin motif, tensor definition and magnetic space group; B02 calculate full time-odd cluster multipole and its origin/tensor convention; B03 prove covariance / irreducible representation under physically correct magnetic group; B04 construct material Hamiltonian with SOC/exchange; B05 derive intra vs inter current and spin torque from SAME H and barrier; B06 recover the reported resistance contrast and switching including uncertainty; B07 reverse-search native carrier with signed orientation and reject equivariance failures.
+### Phase C — electromagnetic levitation [OPEN, distinct engineering routes]
+C01 superconducting/maglev external-guideway support model with force Fz and vertical/lateral stiffness; C02 human-body diamagnetism model with realistic susceptibility and spatial B grad B, size/safety; C03 octupole-controlled actuators and field gradient with same-body force not confused with internal torque; C04 common 70 kg gravity load 686.4655 N at g=9.80665, adjustable mass; C05 full force/torque/momentum balance with supporting infrastructure; C06 static and dynamic stability; C07 thermal, exposure and engineering envelopes; C08 do not infer free-space thrust from internal spin-current exchange.
+### Phase D — gravity as physical field / antigravity [OPEN]
+D01 source-derived complete electromagnetic+matter+octupole action S[g,A,O,psi]; D02 same-action metric variation defines conserved Tmunu, including support/coil/field apparatus when evaluating total force; D03 distinguish Lorentzian trace -rho+sum(p) from active stress rho+sum(p), requiring timelike density control; D04 solve linearized Einstein field response for actual physical source, bounded by realistic energy/stress; D05 independently compare passive weight, free fall, inertial response, test-mass field, vacuum thrust and clock/metric; D06 superconducting pulsed-RF and Amy Eskridge claims/source audit with specimen, waveforms, shield/null controls and replication; D07 strongest possible anomalous field claim remains gated by same-apparatus independent measurement.
+### Phase E — Filsinger / Schumann [OPEN]
+E01 keep ELF environmental field, earth electrochemical, drive, antenna and load ports distinct; E02 derive causal octupole-to-effective-impedance converter and correct drive/work balance; E03 measure or bound PtMn3-like ELF susceptibility, not infer high-frequency switching from low-frequency field; E04 compare measured 7.8kHz acoustic AM/FM/PM/FSK features to electrical signals and independent ELF input; E05 demonstrate incremental environmental real power after same-load and storage controls, not mere reactive resonance.
+### Phase F — validation / ownership [OPEN]
+F01 original paper source-data workbook ingest with real column/unit provenance; F02 native Agda theorem owners imported without axiom or trust escape; F03 first executable finite script and JSON receipt; F04 held-out physical data with uncertainty and negative controls; F05 physical result graded separately from finite SymPy and Agda kernel acceptance; F06 update both roadmap and remaining-lemmas doc with genuine closed/open status for each commit.
+
+## Cross-lane acceptance priorities
+1. Reproduce true PtMn3 octupole tensor (B01-B03), not the polynomial toy.
+2. Same-Hamiltonian torque and electrical readout (B04-B06).
+3. Same apparatus force and momentum accounting for three levitation routes (C01-C08).
+4. Physical stress/metric predictions and independent antigravity comparisons (D01-D07).
+5. Schumann/ELF vs acoustic carrier, source work (E01-E05).
+6. Only then claim physical TOE-sector calibration. Do not manufacture kernel passes or field evidence from source-written documentation.
+
+## Source evidence and guardrails
+Phys.org news and primary DOI as above; public DASHI original owners and original papers remain separate provenance. Existing schematic 369, quantum C3 and punch/reduction proofs are real mathematical assets but cannot establish atomic PtMn3 phase, human levitation device, gravity modification, or Schumann gain without material-specific physical source evidence. Negative results are valuable and retained.
