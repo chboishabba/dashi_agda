@@ -1,3 +1,171 @@
+## 22 November 2026 — uniform pole radius and actual-zeta logarithmic two-sided tail
+
+**Source FIRST; original named finite analytic target mathematically
+reduced; kernel acceptance pending.** This adds to the 22 Nov source
+correction that the literal selected signed-W integral identity is
+already theorem-bearing in Lean main.
+
+### Original same-source owners recovered
+
+- Synthesis/RiemannProjectiveQuarticFourWindowUniformPoleWeight.lean
+  (blob 065baf7769b121c05611f92f5be55386e38e0074):
+  actual high-t normalized pole weights have t-uniform
+  Lipschitz K = 19 cosh(1) on [-6,6], t>=200, c=1,2.
+- Synthesis/RiemannQuantitativeSymBumpLocalization.lean
+  (blob f5ec98fa832e91b661193ae45259b0444c370201):
+  positive normalized exact-mass symmetric radius-R bump.
+- Synthesis/RiemannProjectiveQuarticFourWindowLocalization.lean
+  (blob 28eaab93e1d05c214bc2b9541b5f12ef6379bba1):
+  coefficient rectangle 1/2<=lambda<=2/3, |mu|<=1/10.
+- Synthesis/RiemannProjectiveQuarticFourWindowPoleSameObject.lean
+  (blob 60cc239d3968e25b8a42cebc18bf4744907facd3):
+  actual signed pole coordinate is the determinant of four
+  normalized source pairings, not a synthetic test.
+- Synthesis/RiemannProjectiveQuarticFourWindowPoleLocalization.lean
+  (blob 45eeecdd828d903b6c3d7406ea1c616d4852e9ae):
+  each atomic determinant coordinate has abs <= 5 for t>=200.
+- Synthesis/RiemannProjectiveQuarticThreeWindowRobustness.lean
+  (blob 53bc06356d778d52582244bf5dc4b3af1b9c79f7):
+  existing exact determinant perturbation theorem
+  |D-D0| <= (4M+2)*xi for entry errors <=xi<=1.
+- Synthesis/RiemannProjectiveQuarticFourWindowUniformPoleLocalization.lean
+  (blob 2fbcdf785511ffc064d393d7f62d6c6de5ad212d):
+  conditional fixed-width selected-W core compiler already exists.
+  Its named remaining input, UniformQuarticFourPoleDeterminantCompilerTarget,
+  remains UNINHABITED in UniformPoleLocalizationPaid.lean.
+  Never count this mathematical source derivation as a kernel receipt.
+
+### Explicit uniform determinant localization
+
+For every source normalized bump, nonnegativity, exact mass and
+support within R imply that the normalized pairing of an even
+K-Lipschitz weight differs from its atomic-center evaluation by
+at most K*R. This applies also to on-line cos(cx), c=1,2,
+since Lipschitz <=2 <=K. The original FOUR-window absolute
+coefficient sum is B=1+1+2/3+1/10=83/30.
+Thus each of the four original smooth determinant entries differs
+from the source atomic entry by at most xi=B*K*R.
+Using M=5 and source perturbation theorem (4M+2)=22,
+the determinant error <=22*B*K*R, for xi<=1.
+
+The ORIGINAL determinant tolerance is
+  eta0 = min(1, (7*pi^4/800)/(2*(4*(10+pi^4)+2))).
+Consequently an explicit positive radius INDEPENDENT OF t is
+  delta* = eta0 / [22*(83/30)*19*cosh(1)]
+         = 5.53270840772e-7 approximately.
+For every t>=200, 0<R<delta*, allowed lambda,mu,
+the smooth/atomic determinant difference is <=eta0.
+This is an exact mathematical derivation from original source
+premises, not a newly admitted Lean theorem. Once its named
+Lean statement is kernel-checked, the EXISTING source compiler
+constructs one fixed R and selected muHalf/muTwo with original
+signed target strength floor for every t>=200.
+
+### Actual selected W full horizontal weighted C4 control
+
+Let b_j = ||unitBump^(j)||_1 / ||unitBump||_1, b_0=1.
+These are finite but numerically UNMEASURED source Mathlib
+ContDiffBump values. For B=83/30, the original profile
+  G = [B_0 - B_{pi/3} + lambda*B_{pi/2} + mu*B_pi]/(2R*B0)
+satisfies ||G^(j)||_1 <= B*b_j/R^j.
+The existing source profile is
+  P_G(x)=4G(x)[A1*cos(2x)-A2*cos(x)],
+with |A1|, |A2| <= B.
+For original signed selected combination
+  P_W = pTwo*P_half - pHalf*P_two,
+the determinant pole coefficients are each <=72 in abs
+(smooth response entries <=5+xi<6).
+Therefore, for j=0..4,
+  M_j(W)=||P_W^(j)||_1
+    <= Mstar_j(R)
+     = 576*B^2 * sum_{k=0}^j binom(j,k)
+                   *(2^(j-k)+1)*b_k/R^k.
+In particular Mstar_0=1152*B^2=220448/25.
+
+At source t>=200, the true horizontal parameter
+alpha=(Re(s)-1/2)/(t/16) satisfies |alpha|<=8/t<=1/25,
+both sides of the half line; original support L<=pi+R<pi+1.
+Define
+  Dstar(R)= exp((pi+1)/25) *
+    sum_{j=0}^4 binom(4,j)(1/25)^(4-j) Mstar_j(R).
+Then the existing actual selected-W cosh-cos Fourier identity and
+four integration by parts give
+  |K_W(alpha,q)| <= Dstar(R)/|q|^4
+for q!=0 and the true source alpha.
+The literal actual-zero summand carries its exact multiplicity:
+  |sourceTerm(sigma)| <= mult(sigma)*(t/16)^2*Dstar(R)
+                         /|Im(sigma)-t|^4.
+Dstar is finite and t-independent GIVEN the fixed-width core;
+it is not a practical numerical constant and is not signed.
+
+### Sharper ACTUAL zeta, both positive and negative ordinate tails
+
+Do NOT reuse the obsolete A=160 total-count upper bound when
+the stronger original source already exists:
+  Synthesis/RiemannZeta23RvMArbitraryEndpointCountBound.lean
+  (blob 5fcf3260c204e873ae4cb91de04b34d8c4d1e669)
+proves existence of C_N>=0 such that
+  N(A,B) <= C_N*(B-A+1)*log(B+4), 5<=A<B
+on actual zeta zeros WITH multiplicity.
+Synthesis/RiemannZeta23RvMTwoSidedDiscrepancy.lean
+(blob c4a78b921820a0a3846659fbcb98662d4f7e8a51)
+preserves count/multiplicity for negative heights by conjugation.
+
+For t>=200, choose an integer cofinal cutoff n>=t+7.
+Right original half-open shell (t+k,t+k+1] has at most
+2*C_N*log(t+k+5) multiplicity. The left shell
+(t-k-1,t-k] reflects into a subset of
+(k-t-1,k-t+1] of width 2, including all boundary multiplicity,
+so its count <=3*C_N*log(k-t+5).
+For every integer k>=n, total both sides <=
+5*C_N*log(t+k+5) <= 5*C_N*log(2k).
+Thus the *complete positive+negative height* ABSOLUTE far tail obeys
+  sum_far |literalSourceTerm(sigma)| <=
+  5*C_N*(t/16)^2*Dstar(R)*[
+    log(2n)/n^4 + log(2n)/(3*n^3) + 1/(9*n^3)].
+The exact antiderivative is
+  int_n^infinity log(2x)/x^4 dx =
+    log(2n)/(3*n^3)+1/(9*n^3).
+For n(t)=ceil(t+7), the RHS is O(C_N*Dstar(R)*log(t)/t)
+and tends to zero as t tends to infinity.
+This is a new source-grounded t-VARYING cutoff tail; it is NOT
+uniform in t at fixed n. It is NOT a signed cofinal surplus,
+nor a theorem forbidding an actual off-line zero.
+
+### Tested local receipt; comparison with external theorem
+
+Source-specific script newly committed on Agda #1533:
+  scripts/check_rh_r2_uniform_pole_and_two_sided_tail_20261122.py
+  commit 98eaf7e62db888fd04803888d9d49e1dfcf8e0c8,
+  readback blob 76073cd50eb9befd03cb57bd61f771fef9b098a5.
+Local SymPy 1.14: 256/256 exact determinant corner adversaries;
+12,010/12,010 source pole-weight derivative numerical stresses;
+exact coefficient algebra, full cosh-weighted 4th Leibniz derivative,
+logarithmic tail antiderivative, and t^2 F(t+7)->0 PASS.
+Negative controls deliberately reject dropping quadratic determinant
+error and fixed-cutoff t-uniform estimates.
+Locally executed mathematically matching script; committed text
+was read back but not byte-compared with local test.
+Original all-character source checked syntactically in
+pinned MainTheorems.lean + MainConclusion.lean:
+  allChi := UpperTheory.FinalTheorems.everyCharacter,
+  rhOfAll := Formalism.VW.rh_of_every allChi,
+  root Main.lean has unconditional *declared* RH/Dirichlet GRH
+  theorem signatures. The original claim is stronger in stated
+  quantification; *trusted kernel admission* is NOT established
+  by any of these symbolic/finite tests. The existing DASHI
+  signed compensation is still literally an assumed premise.
+
+**P0 REMAINS:** kernel-implement uniform determinant lemma on original
+Lean source; obtain an effective source bump norm witness or accept
+finite symbolic constants; prove the actual signed cofinal
+UniformSignedCompensationGap rho (or sharpened exact same-source variant)
+including original zero multiplicities, source target threshold and
+quantifier order. There is no RH/GRH claim from these tests.
+No Lean/Agda or GitHub CI was run.
+
+---
+
 ## 22 November 2026 — selected-W FULL horizontal-weighted q^-4 formula (symbolically discharged, constants/uniformity OPEN)
 
 Following the source correction, the original Lean theorem
