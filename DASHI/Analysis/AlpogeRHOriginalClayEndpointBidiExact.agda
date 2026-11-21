@@ -91,3 +91,35 @@ alpogeExternalToOriginalClayWitness :
 alpogeExternalToOriginalClayWitness analytic strip ext weld =
   analyticRHToClayWitness analytic strip weld
     (External.externalRHImpliesDashiRH analytic ext)
+
+
+-- COMPLETE original Clay-record reverse direction. The pre-existing
+-- clayWitnessToAnalyticRH demanded the witness's predicate function
+-- separately. Here consume the REAL original Clay witness projection:
+-- no new strip, synthetic zeta, or replacement critical-line predicate.
+--
+-- This is an RH-only same-target weld. A Clay RH witness does NOT
+-- establish GRH for every nontrivial Dirichlet character. That P0
+-- authority must come from the original all-character external proof.
+originalClayWitnessToAnalyticRH :
+  (analytic : AnalyticSubstrate)
+  (witness : Clay.RiemannHypothesisWitness) →
+  OriginalRHClayEndpointWeld analytic (W.strip witness) →
+  RiemannHypothesisFor analytic
+originalClayWitnessToAnalyticRH analytic witness weld =
+  clayWitnessToAnalyticRH analytic (W.strip witness) weld
+    (W.everyNontrivialZeroOnCriticalLine witness)
+
+-- Existing external theorem, once EXACT original proof/zero carriers are
+-- admitted, already projects to both analytical RH and original Clay RH.
+-- This is the literal typed reverse consumer for an original Clay record;
+-- it is NOT a reverse implication ordinary RH -> all-character GRH.
+originalClayWitnessToSameOriginalRH :
+  (analytic : AnalyticSubstrate)
+  (strip : Clay.CriticalStripWitness)
+  (weld : OriginalRHClayEndpointWeld analytic strip)
+  (witness : Clay.RiemannHypothesisWitness) →
+  W.strip witness ≡ strip →
+  RiemannHypothesisFor analytic
+originalClayWitnessToSameOriginalRH analytic strip weld witness refl =
+  originalClayWitnessToAnalyticRH analytic witness weld
