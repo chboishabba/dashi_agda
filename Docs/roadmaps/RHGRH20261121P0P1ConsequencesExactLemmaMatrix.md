@@ -1,3 +1,9 @@
+## 21 Nov 2026 P1 j=0 H0 candidate extended, kernel deferred
+
+Lean #114 has extended `EisensteinJZeroHasseEulerConvergenceWeldExact` beyond the earlier conditional `hlocal` compiler: source-written original-curve local perturbation norm bound, original denominator `Multipliable`, summability, local nonvanishing and denominator `tprod` nonvanishing for Re(s)>3/2. This **supersedes** the following chronological section's wording that `hlocal` still needs source-writing; it does **not** convert source text into Lean acceptance. No Lean kernel/toolchain/CI run. Still open/unchecked: trusted certificate for this exact H0 candidate, source-consistent reciprocal `tprod`, full same-curve elliptic/Hecke analytic L-function, completion, zero-location. Dirichlet GRH external proof admission P0 and independent signed RH route remain logically separate.
+
+---
+
 ## 21 Nov 2026 P0/CM source-first correction: all-prime owners already on Lean main
 
 **P0 distinction:** original externally checked all-character Dirichlet GRH (`UpperTheory.EveryCharacter`) and its ordinary RH implication remain **external proof-admission work**, not deductions from our selected CM elliptic curve. Exact pinned Lean 4.33.1 statement/kernel/Mathlib root match, and Agda same-object semantic transfer remain DEFERRED, not silently assumed. Lean #113 is the original source-adapter branch; this Agda #1533 tracks admission/geometry, not reproof or source copying. The separate signed G2/G3 original analytic sign inequalities are not thereby inhabited.
