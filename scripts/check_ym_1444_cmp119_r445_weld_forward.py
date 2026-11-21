@@ -28,6 +28,11 @@ OWNERS = {
         "Source.originalN3LiteralMixedLogJetIsActualR320PushforwardCovariance",
         "R320.connectedCovarianceOfActualPushforward",
     ],
+    "DASHI/Unified/YMClayOriginalWilsonPhysicalRegression.agda": [
+        "YMClayR445SelectedTimeReflectionForwardExact",
+        "YMClayOriginalR445ReflectedPointwiseWordWeldExact",
+        "YMClayOriginalR445ReflectedWordCMP116BIDIExact",
+    ],
     "DASHI/Physics/YangMills/YMClayNativeR445TemporalReversalExact.agda": [
         "originalSUNTimeReversalTwoLink",
     ],
@@ -82,6 +87,7 @@ def main():
         print("RUN", name, flush=True)
         subprocess.run([sys.executable, str(file)], cwd=ROOT, check=True)
     print("PASS source identity + finite non-Abelian tests")
+    print("KERNEL LOCAL: bash scripts/check_ym_original_rg_p0_kernel.sh")
     print("OPEN native Agda geometry kernel, original physical analytic CMP estimates, "
           "fine published RP/source identification, E1/D1/D2/N1/G1")
 if __name__ == "__main__":
