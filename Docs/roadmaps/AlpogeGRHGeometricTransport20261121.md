@@ -1,5 +1,14 @@
 # Alpöge/Claude RH–GRH × DASHI geometric transport (21 November 2026)
 
+## 21 November — CURRENT P1-F02B: nonzero residual flux + original selected theta IsLift consumer
+
+The exact indexed k-transition now admits source-accounted **nonzero** residual increments instead of hardcoding an unchanged residual. `DASHI/Analysis/RHGRHIndexedZeroZetaResidualFluxExact.agda` reuses the original indexed zero/ζ₃/ζ₃² frame and preserves mode, sign, observed-zero and ordered source (r↦r+δ) ledger under a phase-conjugate commuting transition. A concrete ζ₃ observed-zero instance retains mode and sign while changing residual (9↦13). **Local Python 1,728/1,728 PASS**, actual execution of `scripts/check_rh_indexed_residual_flux_20261121.py`; these are finite numeric controls, not Agda kernel acceptance.
+
+The fork's real `UpperTheory.TP.TLiftK` was read back verbatim. New Lean #113 `proofs/alpoge-lean433/RHSelectedThetaLiftConsumer.lean` consumes the original `UpperTheory.TP.K.tLiftK` and extracts the **exact** (E,B,n,X) selected CM/Hecke automorphic-threshold-and-`IsLift` telescope. This is the proper source target for an eventual indexed phase/sign/residual Hecke fibre. **This does not identify a C3 phase with a Hecke character, prove an original automorphic lift independently, or establish any RH theorem.** Source-written only; Lean 4.33.1 check OPEN.
+
+**Next P1 source cut:** find an **actual order-3 restriction** of a selected source `χX/χW` (if any), then build/negatively classify the commuting observation of original `IsLift` under that order-3 action, preserving (k), true source signed residual and zero mode. No arbitrary finite (C3→TP.TLiftK) promotion. Detailed [current indexed/Galois ledger](RHGRHIndexedZeroZetaFilsingerGaloisStarMaxCut20261121.md#21-november--p1-f02b-nonzero-indexed-residual-flux-acceptance-and-original-theta-fibre-latest). P0 terminal original RH import remains independent, no CI/world/PG.
+
+
 ## 21 November — CURRENT F02: composable k-transition/reflection square
 
 Agda #1533 now includes `DASHI/Analysis/RHGRHIndexedZeroZetaTransitionSquareExact.agda`: a concrete `k↦suc k` transition on the **existing** indexed frame, a source-premise `SourceIndexedPhaseStep` expressing index-advance/zero-mode/sign/residual/observed-zero conservation plus **true one-step reflection commutation**, and a theorem composing two steps. This adds actual transition structure over the earlier reflection-only object without a duplicate phase ontology.
