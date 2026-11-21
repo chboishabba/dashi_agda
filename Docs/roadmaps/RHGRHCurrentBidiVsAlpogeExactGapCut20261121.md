@@ -1,5 +1,25 @@
 # Current DASHI RH BIDI vs Alpöge RH / GRH — exact gap-directed depth cut
 
+## 21 November — LATEST original DASHI Dirichlet-owner audit, P0 source correction
+
+The user correctly noted our repo already has Dirichlet content. Exact source readback `DASHI/Physics/QFT/ConductorVsDiscriminantReceipt.agda` provides ORIGINAL six discriminant rows `D=-3,-4,-7,-8,-11,-12`, with separate order conductor, field discriminant, primitive **quadratic Dirichlet character conductor**, modular/order level and proof-relevant row consistency. These are real finite Dirichlet arithmetic data, not an opaque new character ontology. P0 must not replace them with a duplicate modulus table.
+
+New original-owner Agda source `DASHI/Analysis/RHGRHDirichletConductorP0SourceCutExact.agda` consumes the existing rows and source-written proves:
+- `D=-3`: order conductor **1**, primitive quadratic Dirichlet character conductor **3**.
+- `D=-8`: order conductor **1**, primitive Dirichlet conductor **8**.
+- `D=-12`: order conductor **2**, primitive Dirichlet conductor **3**, modular/order level **12**; the character conductor is **not** 12.
+- `D=-3` and `D=-12` share a primitive quadratic character conductor **3** but have different order conductors. This protects against fake same-object identification of CM order, level and character, especially at j=0/ω.
+
+**Important mathematical distinction:** the quadratic primitive conductor-3 character associated to `D=-3` is NOT the same character as the **order-three cubic finite-field** `MulChar` used at split primes (p\equiv1\bmod3); character order, modulus/conductor, codomain, action and analytic L-function are separate typed requirements. The pinned fork's all-character target quantifies over `DirichletCharacter ℂ N` and source `DirichletCharacter.LFunction χ s` for arbitrary `N,χ,s`, including primitive and imprimitive. These six CM rows provide finite input checks only, not an all-moduli character proof.
+
+Separate exact source inspection:
+- `DASHI/Analysis/RiemannAnalyticSubstrate.agda` already has a source `ZetaHalfPlaneLayer` with named Dirichlet-series equality and Euler product **interface**, but does not construct `DirichletCharacter ℂ N` or its genuine L-function.
+- `DASHI/Analysis/RiemannOpaqueZetaHalfPlaneCountermodelExact.agda` proves the warning is substantive: the opaque `ZetaEqualsDirichletSeries` field does not force selected function-value identity.
+- `DASHI/Mathematics/Automorphic/EllipticInfiniteLFunctionRoadExact.agda` has a genuinely separate elliptic L-function Euler/Dirichlet interface, with analytic continuation, functional equation and completed analytic rank still OPEN.
+- Original P0 **Lean #113** `RHGRHP0DirectionalSourceCut` already consumes the fork's actual all-character `EveryCharacter` and its exact Dirichlet right-half/strip/primitive-strip conclusions. This is the strongest P0 terminal proof owner, rather than elevating finite quadratic conductor rows to GRH.
+
+**Next P0 cut:** local Lean 4.33.1 source-closed kernel/axiom acceptance of **original all-character** theorem and all three Dirichlet published targets, followed by same-character/codomain/analytic L-function transport if exporting to Agda. A specific quadratic CM character can test a selected case only AFTER an actual `DirichletCharacter` is constructed with correct primitive modulus and proven equal to the original source character. Explicitly do **not** identify a finite field cubic character with the quadratic conductor-3 character from (D=-3), nor claim that this selected case proves global GRH. New Agda source **not kernel checked**, no CI.
+
 ## 21 November — LATEST P0 is GRH first; original source directional BIDI now explicit
 
 The user clarified **P0 GRH is controlling**, so prioritize the exact original **all-Dirichlet-character** terminal, not P1 geometric construction. New [Lean PR #113 `proofs/alpoge-lean433/RHGRHP0DirectionalSourceCut.lean`](https://github.com/chboishabba/dashi_lean4/blob/research/alpoge-rh-source-admission-20261121/proofs/alpoge-lean433/RHGRHP0DirectionalSourceCut.lean) composes source-pinned original `RowSrc.galoisLocalGlobalStrong_recParameter` → `vwin_of_row` → `every_character_of_literature_of_vWin` → `UpperTheory.EveryCharacter`, and **then** original `Formalism.VW.rh_of_every`, `Claim.strip`, `Formalism.VW.critLine` to all original published RH/Dirichlet targets.
