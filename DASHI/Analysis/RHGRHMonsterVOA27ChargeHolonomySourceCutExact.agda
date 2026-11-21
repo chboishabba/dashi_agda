@@ -106,8 +106,8 @@ selectedPositiveXChargeIsNative :
   Chart.encodeCubeDigits
     (Cube.ternary27Point
       SSP.sspPosOne
-      ModeCharge.SSP.sspZero
-      ModeCharge.SSP.sspZero)
+      SSP.sspZero
+      SSP.sspZero)
   ≡ ModeCharge.positiveXCharge
 selectedPositiveXChargeIsNative = ModeCharge.positiveXAxisSite
 
