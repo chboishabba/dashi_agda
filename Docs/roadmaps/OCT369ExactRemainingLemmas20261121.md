@@ -159,3 +159,10 @@ Important: symbolic 1+omega+omega²=0 with sum omega^(3j)=3 is only a C3 angular
 | P0.28-source-commute | Same fixed P0.27 physical Pt-inversion 6-site sample and P0.26 harmonic potential: thermodynamic conjugacy gives F=-3a²mu k4 | Exact identical magnetic-source force; not a calibrated bulk observable, no gravitational claim |
 | P0.28-lattice | Non-orthogonal direct lattice U and reciprocal U^-T preserve Fourier pairing but are distinct; relabelled fixed finite body has invariant force | Exact algebra; native geometry not same as ternary 27 address chart |
 | P0.28-real-quantum | Implement original Oike et al 2025 and Sato/Hayami Eq11 gauge-invariant Berry/Kubo terms on published PtMn3 Wannier bands, correct domains & surfaces | OPEN; original papers retain priority and credit |
+
+| P0.29-native-Bloch/Kubo | Existing CoTaSe2 Wannier H(R), analytic dH/dk, band Berry Kubo, non-Abelian P/dP, Wilson polar loop and MMP causal response, imported rather than reinvented | **54/54 local checks; Agda owner-source consumer written but no Agda compilation** |
+| P0.29-periodic-basis | Exact cell H(k) vs P0.18 embedding H(k) site-phase unitary; direct/reciprocal k and C3 sewing; actual derivative | numerical <=1.94e-15 covariance, 1.56e-8 derivative; trial no fitted material |
+| P0.29-static-Kubo | SAME six-band H(h)=H-hO, chi=d<O>/dh=-d²Omega/dh²=spectral finite-T response | four k tests PASS; selected O trial, not bulk magnetic octupole |
+| P0.29-topology | Existing band Berry Kubo vs projective curvature, arbitrary per-band phase and rank-two Wilson U(2) gauge | numerical PASS with proper isolated gap/negative control |
+| P0.29-retarded | Causal finite pulse response vs independently time-propagated finite difference and future-source no-response | PASS to 7.58e-6 at 500 midpoint steps; not static equilibrated Kubo or real switching |
+| P0.29-Sato-Hayami | Original full M_ijk gauge-invariant Eq.11 with mixed k/h geometry, energy/occupation and original material same-gauge Wannier | OPEN; ordinary Berry/linear susceptibility insufficient |

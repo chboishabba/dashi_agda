@@ -1,0 +1,55 @@
+{
+  "scope": "P0.18 6band same-H order conjugacy + existing CoTaSe2 band-Kubo/non-Abelian and MMP retarded donor; no Sato-Hayami full spin octupole or PtMn3 fit",
+  "checks_passed": 54,
+  "verified_local": true,
+  "executed_local_script_blob_sha": "dfe452e55e3fea7b0e3cb146cb1e8339519182da",
+  "local_execution_note": "Main consumer run locally with exact selected computational functions transcribed from named existing donor modules; complete repository modules not locally mounted. Committed consumer blob matched separately where possible.",
+  "metrics": {
+    "max_hermiticity": 6.317823841911506e-16,
+    "max_site_cell_unitary_equivalence": 1.2773028919215125e-15,
+    "max_analytic_derivative_error": 1.5624987071378644e-8,
+    "max_C3_sewing": 1.9431885269969897e-15,
+    "max_C3_order_covariance": 8.728676222655933e-16,
+    "thermal_T_fixture_units": 0.55,
+    "order_static_susceptibilities": [
+      0.7638734113104289,
+      0.9272748272404965,
+      0.7716156707382913,
+      0.8033158142502719
+    ],
+    "minimum_band_gaps": [
+      0.1993309832703014,
+      0.521412798291014,
+      0.04961379104797148,
+      0.44373153453279857
+    ],
+    "retarded_response": -0.7400809501909587,
+    "retarded_finite_difference": -0.7400733710936636,
+    "retarded_error": 0.000007579097295096204,
+    "Wilson_loop_phases": [
+      -0.001226192314610484,
+      0.0009895569497860776
+    ],
+    "max_Wilson_U2_error": 5.553283527470754e-16
+  },
+  "native_producers": [
+    "scripts/check_oct369_p018_periodic_tunnel_stress.py",
+    "scripts/co_tase2_wannier3d_diagnostics.py",
+    "scripts/co_tase2_nonabelian_topology.py",
+    "scripts/check_mmp_three_independent_retarded_source_ports_20261025.py"
+  ],
+  "original_PtMn3_Wannier_H_not_supplied": true,
+  "original_Sato_Hayami_2026_Eq11_not_implemented": true,
+  "full_k_and_Zeeman_space_spin_octupole_not_computed": true,
+  "original_Oike_2025_thermodynamic_bulk_formula_not_implemented": true,
+  "Kang_2026_experimental_torque_not_reproduced": true,
+  "calibrated_external_field_gradient_or_MgO_barrier_not_supplied": true,
+  "real_gravity_or_levitation_observed": false,
+  "attribution": {
+    "established": "Bloch, Fermi/Kubo response, band geometry, projectors, Wilson",
+    "native_DASHI": "P0.18+ CoTaSe2 + MMP owners",
+    "theory": "Oike et al PRB 2025; Sato/Hayami npj Quantum Materials 2026",
+    "experiment": "Kang et al Nature 2026",
+    "new": "OCT369 order-conjugate conditional regression"
+  }
+}
