@@ -153,6 +153,17 @@ ordinaryEMSupportCanHaveWeightSignal :
   Four.supportWeightChannel ordinaryForceSignature ≡ true
 ordinaryEMSupportCanHaveWeightSignal = refl
 
+-- This is a stronger finite no-go than merely saying weight-only fails:
+-- the original five-component signature has the SAME Boolean vector for
+-- an ordinary force and its inertia-only rival. Therefore no test
+-- restricted to these selected Boolean signatures can distinguish them.
+-- The original altered-inertial-response claim needs an independent
+-- acceleration/force or inertial-comparator receipt.
+originalForceAndInertiaOnlyFiveChannelCollision :
+  Four.signature Four.ordinaryForceConfounder
+    ≡ Four.signature Four.inertiaOnlyCandidate
+originalForceAndInertiaOnlyFiveChannelCollision = refl
+
 ordinaryEMSupportDoesNotByItselfSupplyFreeFall :
   Four.freeFallMetricChannel ordinaryForceSignature ≡ false
 ordinaryEMSupportDoesNotByItselfSupplyFreeFall = refl
