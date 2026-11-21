@@ -98,3 +98,8 @@ Important: symbolic 1+omega+omega²=0 with sum omega^(3j)=3 is only a C3 angular
 | P0.18b-levitation-3routes | 70kg weight, ideal magnetostatic boundary pressure, water-like diamagnetic gradient, symbolic octupole per-cell-force requirement | 14/14 local checks PASS; none experimentally demonstrated |
 | P0.18b-minimal-gravity | Reverse standard weak field for 1g at 1m to added localized energy ≈1.32e28J | source-equation benchmark PASS; nonminimal physical coupling still OPEN |
 | P0.18b-experiment | Spatially stable field engineering, body compatibility, calibrated octupole current/force, independent gravimeter/clock and no-field controls | OPEN |
+
+| P0.19-oh | O_h 48 axial transformations: no invariant linear T1g order scalar; quadratic |O|² and O·B (co-reversing B) allowed | **21/21 locally verified symbolic checks**, representation selection only |
+| P0.19-curvature | Hypothetical F(O,B)R/2 with F=M²+2ξ|O|²+2η(O·B), sign/parity and inverse homogeneous G_eff | conditional exact algebra; unknown ξ,η, physical interaction OPEN |
+| P0.19-domains | Quadratic-only term cannot distinguish ±O at fixed magnitude; external T-odd B and spatial order gradients may | exact parity, NOT physical gravimetric evidence |
+| P0.19-field | Covariant O field, B observer construction, metric variation, Ward identity, F>0, boundary and Earth-field response | OPEN |
