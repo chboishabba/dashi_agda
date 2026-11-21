@@ -103,3 +103,10 @@ Important: symbolic 1+omega+omega²=0 with sum omega^(3j)=3 is only a C3 angular
 | P0.19-curvature | Hypothetical F(O,B)R/2 with F=M²+2ξ|O|²+2η(O·B), sign/parity and inverse homogeneous G_eff | conditional exact algebra; unknown ξ,η, physical interaction OPEN |
 | P0.19-domains | Quadratic-only term cannot distinguish ±O at fixed magnitude; external T-odd B and spatial order gradients may | exact parity, NOT physical gravimetric evidence |
 | P0.19-field | Covariant O field, B observer construction, metric variation, Ward identity, F>0, boundary and Earth-field response | OPEN |
+
+| P0.20a-quaternion | Existing exact DASHI q=(1+i+j+k)/2, q³=-1, (-q)³=1, spatial xyz C3; cross-check SU2 Pauli spinor U, central sign | **57/57 local SymPy checks, 9 signed cocycle cases**; reuses original source theorem owners |
+| P0.20b-spin-observable | Spinor U³=-I2 is compatible with UσU† invariant under central -1; domain reversal is physically distinct | Exact finite control PASS; actual PtMn3 octupole spinor/Hamiltonian mapping OPEN |
+| P0.20c-gauge-connection | Nonzero pure gauge SU2 basis connection can be flat, nonzero internal SU2 F need not be Lorentz R | Exact finite control PASS; GR tetrad/spin connection/Einstein equations OPEN |
+| P0.20d-signature | Distinguish Q8->V4 finite cover, Spin3=SU2 full, Spin(3,1) Lorentz cover and 3x3x3 physical address | Existing owners explicitly separate them, real same-object bundle/metric map OPEN |
+| P0.20e-gravity | Vierbein, Lorentz connection, gamma matrices, covariant Dirac action, metric variation and apparatus T_munu, positive physical source | OPEN |
+| P0.20f-physical | Spin torque -> external actuator force vs curvature; measured x_i coupling and 70kg human lift across 3 routes | OPEN; no gravity inference from spinor winding |
