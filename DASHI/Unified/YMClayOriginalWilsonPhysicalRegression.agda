@@ -103,6 +103,15 @@ import DASHI.Physics.YangMills.YMClayOriginalF19R445Full1024LabelsP0Exact as Ori
 -- All 896 original interacting spectators remain present.
 import DASHI.Physics.YangMills.YMClayOriginalF19R445EveryLinkValueBIDIExact as OriginalF19R445Values
 import DASHI.Physics.YangMills.YMClayOriginalF19R445ActualSortedVectorBIDIExact as OriginalF19R445SortSquare
+
+-- Actual finite decoder commuting square (all 1024 original bonds):
+-- canonical field --original F19 adjacent swap--> selected128+residual896
+--       |                                            |
+-- original canonical decoder                   original R445 decoder
+--       |                                            |
+-- original bond field ----------------identity--> original bond field.
+-- Also both original inverse vector round-trips. Not a physical OS square.
+import DASHI.Physics.YangMills.YMClayOriginalF19R445DecoderCommutingSquareExact as OriginalF19R445DecoderSquare
 import DASHI.Physics.YangMills.YMClayOriginalF19NativeR445SelectedOrderBIDIExact as OriginalF19R445SelectedOrder
 
 import DASHI.Physics.YangMills.YMClayD1OriginalCovarianceToR320Exact as D1OriginalCovariance
