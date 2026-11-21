@@ -135,6 +135,12 @@ import DASHI.Physics.YangMills.YMClayOriginalF19R445PureHaarReceiverCandidateExa
 -- from ORIGINAL complete 1024-link Gibbs F19 weighted effective density.
 -- Do not infer the interacting Wilson source from unweighted pure-Haar.
 import DASHI.Physics.YangMills.YMClayOriginalR445NativeF19WeightedPhysicalSourceBIDIExact as OriginalNativeWeightedF19BIDI
+
+-- E1 cutoff-3 physical source is already the SAME original n=3
+-- native Wilson Gibbs R445 pushforward. Composes original F19 weighted
+-- all-observable source with E1A3, then the same E1/R445 F,G,FG
+-- three-moment covariance error. Genuine analytic uniformity OPEN.
+import DASHI.Physics.YangMills.YMClayOriginalE1A3NativeF19WeightedBIDIExact as OriginalE1F19ThreeMomentBIDI
 import DASHI.Physics.YangMills.YMClayOriginalF19NativeR445SelectedOrderBIDIExact as OriginalF19R445SelectedOrder
 
 import DASHI.Physics.YangMills.YMClayD1OriginalCovarianceToR320Exact as D1OriginalCovariance
