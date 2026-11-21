@@ -41,6 +41,9 @@ import DASHI.Physics.YangMills.YMClayR445OriginalNativeParityPairWeldExact as Or
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicBondPathBianchiExact as OriginalBond
 import DASHI.Physics.YangMills.YMClayNativeBlockedPositiveHolonomyGaugeExact as OriginalBlock
 import DASHI.Physics.WaveAlgorithmLift as Wave
+import DASHI.Physics.YangMills.YMClayR445CanonicalBondPermutationCodecExact as OriginalBondResiduals
+import DASHI.Physics.ShiftDiscreteWaveStep as FiniteWave
+
 
 C2 : Set
 C2 = Geo.C2
@@ -220,6 +223,29 @@ waveSignedOrientationIsInvolutive :
   Wave.tritInvolution (Wave.tritInvolution sign) ≡ sign
 waveSignedOrientationIsInvolutive =
   Wave.tritInvolution²
+
+-- This is the FULL ORIGINAL SOURCE residual-bond enumeration, not
+-- merely a parity address and not a new approximation to the Yang-Mills
+-- Gibbs measure. The original owner proves 128 selected+896 residual
+-- fine positive bonds are disjoint, duplicate-free and complete.
+originalAllFineBondSelectedResidual :
+  Torus.FiniteEnumeration (Torus.PositiveBond 4)
+originalAllFineBondSelectedResidual =
+  OriginalBondResiduals.originalR445PairResidualFinite
+
+-- Native finite symbolic wave encoding is a separate producer.
+-- It includes the actual zero-amplitude mode and both signs.
+-- We do NOT infer that this finite trit encodes the original SU(N)
+-- physical Wilson wavefunction or its analytic continuum limit.
+indexedFiniteWave : TimeKFiniteWaveCell → FiniteWave.DiscreteWave
+indexedFiniteWave cell =
+  Wave.encodeTritWave (signedPhase cell)
+
+indexedZeroModeIsExactFiniteZeroWave :
+  indexedFiniteWave
+    (timeKFiniteWaveCell zero zero zero₄ Wave.zero)
+  ≡ Wave.zeroWave
+indexedZeroModeIsExactFiniteZeroWave = refl
 
 -- The original generically scale-indexed residual codec ALREADY
 -- proves exact reconstruction at EVERY k, with no assumption that
