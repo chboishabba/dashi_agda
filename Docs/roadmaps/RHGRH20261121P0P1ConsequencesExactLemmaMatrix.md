@@ -1,3 +1,15 @@
+## 21 Nov 2026 P0/CM source-first correction: all-prime owners already on Lean main
+
+**P0 distinction:** original externally checked all-character Dirichlet GRH (`UpperTheory.EveryCharacter`) and its ordinary RH implication remain **external proof-admission work**, not deductions from our selected CM elliptic curve. Exact pinned Lean 4.33.1 statement/kernel/Mathlib root match, and Agda same-object semantic transfer remain DEFERRED, not silently assumed. Lean #113 is the original source-adapter branch; this Agda #1533 tracks admission/geometry, not reproof or source copying. The separate signed G2/G3 original analytic sign inequalities are not thereby inhabited.
+
+**P1 same-curve CM already owns more than finite tests:** current `dashi_lean4@main` has `EisensteinJZeroIntegralHeckeCharacterExact.integralHeckeCharacter` (actual conductor-coprime integral ideal monoid character and multiplicativity), `EisensteinJZeroHeckeLocalAgreementExact.hecke_elliptic_goodPrime_local_agreement` (all rational good primes), `EisensteinJZeroAllPrimeLocalExact.allPrimeLocalEulerPolynomial` (p=2,3 and all good primes), and `EisensteinJZeroConditionalAnalyticEulerExact.conditionalAnalyticEulerProduct_agreement` (all s **conditional on Multipliable**). These main-native declarations were inspected; they do NOT require rebuilding the ideal-normalization/Euler factor engine. Distinguish integral coprime ideal character from full fractional/infinite type analytic Hecke character.
+
+**New #114 source-written original j=0 Hasse weld:** `EisensteinJZeroHasseEulerConvergenceWeldExact` supplies the norm/trace identity and same-jZero good-prime Hasse bound, plus `Nat.Primes.summable_rpow` majorant at Re(s)>3/2. The final original-denominator `Multipliable` theorem **still explicitly takes the pointwise local perturbation norm bound `hlocal`**. Reciprocal Euler multipliability, nonvanishing and original global L-series analytic equality/continuation remain payments, as does elliptic Hecke GRH itself. Different BSD curve `y²=x³−x` Hasse/Euler machinery is a *donor only*, not a proof for `y²=x³+1`.
+
+**Execution/trust:** independent SymPy 1.14.0 symbolic 4N−trace²=3b² and 107/107 good-prime original-curve checks PASS, but no new Lean/Agda kernel, local exact committed bytes or CI acceptance. No blanket implication from Dirichlet GRH to weight-two CM elliptic GRH; no new consequence rows S01–S22 declared proved.
+
+---
+
 # RH / Dirichlet GRH — original screenshots, P0/P1 exact deliverables and consequence matrix
 
 **Date:** 21 November 2026. **Canonical integration:** [PR #1533](https://github.com/chboishabba/dashi_agda/pull/1533), `Docs/roadmaps/AlpogeGRHGeometricTransport20261121.md`. Agda remains the golden programme owner; external Lean claims require statement- and version-locked proof admission. **No CI runs.** Local SymPy is only a finite-arithmetic regression, never a Lean/Agda kernel or an analytic RH proof.
