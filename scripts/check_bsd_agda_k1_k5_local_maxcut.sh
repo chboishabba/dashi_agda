@@ -6,6 +6,7 @@ cd "$root"
 export AGDA_JOBS="${AGDA_JOBS:-1}"
 
 files=(
+  DASHI/Mathematics/Arithmetic/EllipticBSDOriginalLevel32SameCurveP0BIDIExact.agda
   DASHI/Mathematics/Arithmetic/EllipticSupportedSquareClassSieveExact.agda
   DASHI/Mathematics/Arithmetic/EllipticActualDyadicPrimePlaceExact.agda
   DASHI/Mathematics/Arithmetic/EllipticCubicValuationParityExact.agda
@@ -37,6 +38,9 @@ done
 # Make the exact original theorem names part of the local preflight,
 # without confusing textual presence with kernel proof acceptance.
 required=(
+  'EllipticBSDOriginalLevel32SameCurveP0BIDIExact.agda:originalSelectedCurveIsNotJZeroModel'
+  'EllipticBSDOriginalLevel32SameCurveP0BIDIExact.agda:originalSelectedLevel32AllNCoefficientsAgree'
+  'EllipticBSDOriginalLevel32SameCurveP0BIDIExact.agda:normalizedAllNBuildsOneDimensionalReceipt'
   'EllipticSupportedSquareClassSieveExact.agda:filteredCodeRationalRepresentativeIsOriginalTorsion'
   'EllipticActualDyadicPrimePlaceExact.agda:actualTwoIsPrimeNat'
   'EllipticCubicValuationParityExact.agda:originalCubicValuationRegimeEven'
