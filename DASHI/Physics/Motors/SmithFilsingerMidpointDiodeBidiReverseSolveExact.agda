@@ -103,6 +103,12 @@ bridgePositivePotential : ActiveHalfCycle → PotentialLevel
 bridgePositivePotential AaboveB = highHalf
 bridgePositivePotential BaboveA = highHalf
 
+-- WARNING: ONLY THE IDEAL FIXED-VOLTAGE BRIDGE is excluded here.
+-- A physically finite-resistance transformer with N hard bonded M would
+-- clamp the negative end each active half cycle, causing source-fed
+-- current/heat; see SmithFilsingerMidpointReturnClampBacksolveExact.
+-- The original transcript ALSO says two diodes off cap, two off here,
+-- so four diodes need not even form a conventional bridge.
 -- Conditional nonzero-winding counterexample: a conventional four-diode
 -- full bridge has DC-negative at -x relative to centre, not at centre.
 -- Therefore ordinary bridge N=M is NOT an ideal nonzero-winding solution.
