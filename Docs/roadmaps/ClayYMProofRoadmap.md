@@ -1,3 +1,37 @@
+## 21 Nov 2026 — current P0 cross-lane discipline: reuse Mellin, GRH stays P0
+
+**YM remains one physical main theorem**, not a count of R445/F19/CMP
+iterations: actual nontrivial interacting 4D Wilson/OS continuum,
+strict positive full nonvacuum gap for the SAME reconstructed H,
+surviving observables and all compact simple gauge groups. Already
+proved finite 1024-link permutations, time reflections and algebraic
+finite→limit compilers are evidence only. No cutoff/volume-uniform
+Wilson decay or continuum positivity/strict gap follows automatically.
+
+**Cross-lane P0, not postponed:** all-character **Dirichlet GRH**
+source admission in Lean #113 / Agda #1533, with independent
+external proof verification and the unclosed root/Agda same-character
+analytic transfer. Its controlling
+`Docs/roadmaps/GRHP0OriginalEveryCharacterMellinForwardWeld20261121.md`
+is in PR #1533. Ordinary RH is weaker; a finite CM/Monster example
+is not a substitute for `UpperTheory.EveryCharacter`.
+
+**Mellin already exists**, both original
+`MellinSplitFunctionalEquationExact`/BSD `EllipticCMLevel32FrickeMellinExact`
+and RH's Gamma/Mellin↔Weil proof-relevant action transport.
+Those analytic carriers are not interchangeable with the original
+Wilson Euclidean time/H_OS or with arbitrary Dirichlet L-functions.
+Use proved same-object transport, never a new generic Mellin or
+independent auxiliary Hamiltonian.
+
+**Execution direction:** seek genuine physical YM W1/W3 and E1/D2
+source inequalities; keep R445 label/root proof candidates on pinned
+Agda kernel gate. GRH P0 independently enters the original all-character
+consumer; BSD P0 independently enters original E32 same-curve eta
+Mellin/newform. No default branch change or theorem completion claimed.
+
+---
+
 ## 21 November 2026 — controlling YM P0 theorem-first directive
 
 
