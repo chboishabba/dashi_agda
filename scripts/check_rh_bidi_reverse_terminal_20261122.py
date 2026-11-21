@@ -117,3 +117,31 @@ print('PASS four selected atomic moments / q-sign geometry and quartic two-sided
 print('PASS source level variable margin does not give uniform global epsilon')
 print('LITERAL NEW MINIMAL LEAF: H_W+S_W < 4*d_W(rho)+I_W')
 print('UNPAID: any same-zero signed margin, Agda analytic carrier weld, native Lean/Agda kernel, external original axioms')
+
+# REVERSE-SOLVED SINGLE FINITE SIGNED CERTIFICATE (source centered zero finset):
+# H_n is a real signed sum over original (t-n,t+n] zeros with multiplicity;
+# E_n is an ABSOLUTE tail upper bound, E_n>=|H-H_n| and E_n->0.
+# Then (H+S<T) iff (exists an n with H_n+E_n+S<T).
+# This is a quantifier-equivalent *criterion* under the exact tail bound;
+# it does not provide the finite signed H_n or the necessary numeric margin.
+from fractions import Fraction as F
+for hn_error in (F(-1,8),F(0),F(1,8)):
+    trueH=F(5,4); slack=F(1,3); threshold=F(2)
+    hn=trueH+hn_error; En=F(1,8)
+    assert abs(trueH-hn)<=En
+    assert hn+En+slack < threshold
+# Reverse implication under source tail hypothesis is exact:
+# H <= H_n+E_n, so any certified strict inequality is terminal.
+assert s.simplify((H+S-T)-((H-I)/2+S/2-2*d)*2)==0
+# Terminal <= not enough: strict positivity of margin is essential.
+for n0 in (0,1,2,5,20,200):
+    hh=F(5,3); ss=F(1,3); tt=F(2)
+    e=F(1,(n0+1)**3); hn=hh+(-1)**n0*e
+    assert abs(hh-hn)<=e
+    assert not hn+e+ss < tt
+# Nor does cone/good/far sharpened budget equivalence hold: its upper
+# bound may discard a favorable negative good remainder.
+assert F(-2)+F(0)<F(0) and not F(3)+F(0)<F(0)
+print('PASS: source half-open finite cutoff + absolute tail is an exact BIDI')
+print('criterion for the full post-sixth inequality, WITH local slack')
+print('OPEN: finite actual-zeta signed certificate for every off-line rho')
