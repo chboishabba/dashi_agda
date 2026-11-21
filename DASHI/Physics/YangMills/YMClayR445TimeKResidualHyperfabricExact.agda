@@ -10,7 +10,9 @@ module DASHI.Physics.YangMills.YMClayR445TimeKResidualHyperfabricExact where
 --
 -- The ALREADY ORIGINAL #1444 selected side-four -> side-two time chart is
 --    C4  <-> C2(coarse phase) × C2(fine even/odd remainder)
--- with explicit zero and reversible carry. This is a BIJECTION OF\n-- FINITE INDEX SETS, NOT a product-group isomorphism: bitwise C2 x C2\n-- time translation would lose the nontrivial C4 carry. In particular a ONE-fine-
+-- with explicit zero and reversible carry. This is a BIJECTION OF
+-- FINITE INDEX SETS, NOT a product-group isomorphism: bitwise C2 x C2
+-- time translation would lose the nontrivial C4 carry. In particular a ONE-fine-
 -- site step retains the second component; it is not a failed block
 -- identity once this residual is kept. A TWO-step shift descends.
 --
