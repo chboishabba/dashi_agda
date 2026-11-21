@@ -8,6 +8,63 @@ does not promote any theorem, Clay claim, external authority claim, or peer
 review status. It records how the current paper corpus should be prepared from
 the repository's proof-first surfaces.
 
+## 21 November 2026 — current paper-corpus review and committed updates
+
+The **original eight numbered paper families** remain tracked here.
+The **live three-paper core** is still Paper 3 (YM), Paper 1 (NS),
+and Paper 8 (closure/receipt grammar), NOT eight currently
+submission-ready mathematical theorems. This review also recognizes
+other separately authored or repository-local research manuscripts,
+including the atomic/periodic-table draft
+`Docs/papers/drafts/DASHIAtomicPeriodicTable369Formalism.tex`
+and the separately scoped
+`Docs/papers/drafts/YangMillsClayTrackAuditManuscript.tex`.
+Those are not automatically promoted to the three-paper core.
+
+**Update ranking for the November proof corpus:**
+
+| Priority | Paper and source owner | Editorial decision and mathematical reason |
+| --- | --- | --- |
+| **P0 / committed** | **Paper 3** `live/Paper3YangMillsClayDraft.md`; active Agda YM #1536 | Unified duplicate abstracts; replaced old single-`H3a` main theorem emphasis with conditional same-original `F1/F3/F4` source obligations. Added finite F19/R445 original Wilson 1,024=128+896 spectator/wilson-action counterexample and explicit no-physical-gap firewall. The live draft is revised on #1536; do not infer master publication readiness. |
+| **P0 / committed** | **Paper 8** `live/Paper8UnificationDraft.md`; active Agda GRH #1533 | Added original Dirichlet GRH five-theorem authority, independently reported source verification, Lean v4.33.1 adapter, Mathlib-to-Clay root, Agda RH-only conditional same-object boundary, and exact primitive/imprimitive Euler-factor donor as a *case study* of four-layer receipt governance. This does not convert Paper 8 into a GRH proof manuscript. |
+| **P1 / no manuscript edit from GRH** | **Paper 1** `live/Paper1NavierStokesClayDraft.md` | Already records its R752 W1/W2 integrated signed physical PDE gate and separates periodic B from whole-space A/forced C,D. Next paper edit must follow its own most recent NS source/constant and four-lane proof audit, not import GRH or cosmetic numbered milestones. |
+| **P2 / retain as satellites** | **Papers 2,4,5,6** in `legacy/` | GR/DCHoTT, Hilbert/Stone, DHR, and Yukawa/CKM remain limited or diagnostic. Reopen only when new physical, analytic or carrier-level statements are genuinely proved and source-authority checked. |
+| **P2 / folded, not separate terminal proof** | **Paper 7** `legacy/Paper7TerminalCompositionDraft.md` | Retain its obligation-map role in Paper 8; no promoted unified-physics theorem. |
+| **Separate research drafts** | Atomic/periodic-table TeX, YM audit TeX, selected Monster/TOE studies | Audit attribution and intended venue/claims independently; do not silently renumber as Paper 9/10 or treat them as current active core without a source-based publication decision. |
+
+**Source-first mathematical claim boundary (November):**
+- Original 4D YM physical E1 and full nonvacuum D2 gap, required
+  continuum/volume uniform estimates, N1 nontriviality and all compact
+  simple G remain OPEN. F19/R445/CMP and finite 128+896
+  Wilson block-fibre geometry are iterative proof donors only.
+- External original all-Dirichlet-character GRH (five published Lean
+  statements; externally reported kernel verification) is distinct
+  from DASHI-local Lean toolchain-compatible admission and Agda
+  per-character analytic identity, both still OPEN. Ordinary zeta RH
+  does **not** provide the reverse all-character GRH implication.
+- Selected conductor-32 BSD has an original Mellin split and a
+  conditional positive eta tail bound; same original E32 analytic
+  L-function/newform/eta identification and universal BSD remain OPEN.
+- Paper 1 NS W1/W2 or its updated original physical frontier
+  requires its own PDE source proofs; cross-domain algebra is no
+  substitute.
+- Preserve original author, independent verifier and DASHI
+  adapter attribution separately. Local SymPy arithmetic and
+  source readback are **not** Lean/Agda kernel acceptance. No paper
+  claims Clay solution, publication approval or proof-completion
+  from a commit count.
+
+**Next editorial implementation:** synchronize each revised
+manuscript with its theorem-variable manifest and source
+citation ledger, review current YM/NS physical assumptions and
+the original GRH pinned source statements, and select any satellite
+only after a source-owned theorem/publication purpose is identified.
+The old June 2026 priority descriptions below remain historical
+publication staging guidance; this dated section governs current
+source-critical edits.
+
+---
+
 ## Claim Boundary
 
 The publication language for Clay-facing papers is:
