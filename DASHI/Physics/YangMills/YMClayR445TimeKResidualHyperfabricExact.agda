@@ -8,7 +8,7 @@ module DASHI.Physics.YangMills.YMClayR445TimeKResidualHyperfabricExact where
 -- Euclidean-source label, and k is an INDEPENDENT refinement-stage
 -- label. Neither is a coordinate of the finite C4/C2 periodic torus.
 --
--- The exact selected side-four -> side-two native time chart is
+-- The ALREADY ORIGINAL #1444 selected side-four -> side-two time chart is
 --    C4  <-> C2(coarse phase) × C2(fine even/odd remainder)
 -- with explicit zero and reversible carry. In particular a ONE-fine-
 -- site step retains the second component; it is not a failed block
@@ -31,10 +31,15 @@ module DASHI.Physics.YangMills.YMClayR445TimeKResidualHyperfabricExact where
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (trans)
 
 import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Torus
 import DASHI.Physics.YangMills.YMClayR445SelectedTimeReflectionForwardExact as Geo
 import DASHI.Core.MultiscaleMDL as MDL
+import DASHI.Physics.YangMills.YMClayR445OriginalAxialBondParityInjectiveExact as OriginalCodec
+import DASHI.Physics.YangMills.YMClayR445OriginalNativeParityPairWeldExact as OriginalNativeOrigin
+import DASHI.Physics.YangMills.BalabanClayGate4PeriodicBondPathBianchiExact as OriginalBond
+import DASHI.Physics.YangMills.YMClayNativeBlockedPositiveHolonomyGaugeExact as OriginalBlock
 import DASHI.Physics.WaveAlgorithmLift as Wave
 
 C2 : Set
@@ -66,25 +71,15 @@ three₄ = Torus.sucᵢ (Torus.sucᵢ (Torus.sucᵢ Torus.zeroᵢ))
 NativeTimeResidual : Set
 NativeTimeResidual = Torus.Product C2 C2
 
+-- The coordinate maps are the ORIGINAL R445 proof owners already on
+-- master/#1444, NOT a second invented parity calculation.
 splitNativeTime : C4 → NativeTimeResidual
-splitNativeTime Torus.zeroᵢ = Torus.pair zero₂ zero₂
-splitNativeTime (Torus.sucᵢ Torus.zeroᵢ) =
-  Torus.pair zero₂ one₂
-splitNativeTime (Torus.sucᵢ (Torus.sucᵢ Torus.zeroᵢ)) =
-  Torus.pair one₂ zero₂
-splitNativeTime
-  (Torus.sucᵢ (Torus.sucᵢ (Torus.sucᵢ Torus.zeroᵢ))) =
-  Torus.pair one₂ one₂
+splitNativeTime fine =
+  Torus.pair (OriginalCodec.coarse fine) (OriginalCodec.phase fine)
 
 joinNativeTime : NativeTimeResidual → C4
-joinNativeTime (Torus.pair Torus.zeroᵢ Torus.zeroᵢ) = zero₄
-joinNativeTime (Torus.pair Torus.zeroᵢ (Torus.sucᵢ Torus.zeroᵢ)) =
-  one₄
-joinNativeTime (Torus.pair (Torus.sucᵢ Torus.zeroᵢ) Torus.zeroᵢ) =
-  two₄
-joinNativeTime
-  (Torus.pair (Torus.sucᵢ Torus.zeroᵢ)
-              (Torus.sucᵢ Torus.zeroᵢ)) = three₄
+joinNativeTime (Torus.pair coarse residue) =
+  OriginalCodec.coord coarse residue
 
 joinSplitNativeTime : ∀ fine →
   joinNativeTime (splitNativeTime fine) ≡ fine
@@ -115,6 +110,36 @@ evenOriginHasZeroRemainder :
 evenOriginHasZeroRemainder Torus.zeroᵢ = refl
 evenOriginHasZeroRemainder
   (Torus.sucᵢ Torus.zeroᵢ) = refl
+
+-- First reuse the already-original native 16-site Fin.combine theorem.
+-- In particular, this is NOT a fresh outstanding original-R445 block
+-- origin proof. The only payment below is matching the two separately
+-- named original even-origin coordinate presentations.
+originalEvenMatchesSelectedEven :
+  ∀ coarse → OriginalCodec.even coarse ≡ Geo.evenTime coarse
+originalEvenMatchesSelectedEven Torus.zeroᵢ = refl
+originalEvenMatchesSelectedEven (Torus.sucᵢ Torus.zeroᵢ) = refl
+
+originalEvenSiteMatchesGeometry :
+  ∀ site →
+  OriginalNativeOrigin.originalR445EvenFineSite site ≡
+  Geo.evenCoarseOrigin site
+originalEvenSiteMatchesGeometry
+  (Torus.pair (Torus.pair t x) (Torus.pair y z))
+  rewrite originalEvenMatchesSelectedEven t
+        | originalEvenMatchesSelectedEven x
+        | originalEvenMatchesSelectedEven y
+        | originalEvenMatchesSelectedEven z = refl
+
+originalNativeBlockOriginIsSelectedGeometry :
+  ∀ {Value : Set} (group : OriginalBond.ExactLinkGroup Value)
+    (site : Geo.CoarseSite) →
+  OriginalBlock.fineBlockOrigin {m = 1} {l = 1} group site ≡
+  Geo.evenCoarseOrigin site
+originalNativeBlockOriginIsSelectedGeometry group site =
+  trans
+    (OriginalNativeOrigin.originalR445NativeOriginIsEvenSite site group)
+    (originalEvenSiteMatchesGeometry site)
 
 -- Even/odd is an ACTUAL residual bit of C4/C2, distinct from
 -- signed/zero ternary evidence. Do not identify it with SU(N) phase.
