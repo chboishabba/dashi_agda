@@ -32,7 +32,7 @@ module DASHI.Physics.YangMills.YMClayR445TimeKResidualHyperfabricExact where
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (trans)
+open import Relation.Binary.PropositionalEquality using (trans; sym)
 
 import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Torus
 import DASHI.Physics.YangMills.YMClayR445SelectedTimeReflectionForwardExact as Geo
@@ -174,6 +174,23 @@ oneFineStepKeepsCarryAndResidual
   (Torus.sucᵢ (Torus.sucᵢ Torus.zeroᵢ)) = refl
 oneFineStepKeepsCarryAndResidual
   (Torus.sucᵢ (Torus.sucᵢ (Torus.sucᵢ Torus.zeroᵢ))) = refl
+
+-- Formal negative control, stronger than a numerical failed comparison:
+-- there is NO coarse-only map f : C2 -> C2 which models the original
+-- ONE-fine-site step for all C4 source coordinates. Two fine times
+-- with identical coarse address (0 and 1) have DISTINCT next coarse
+-- addresses; retaining the original C2 remainder resolves it.
+oddFineStepCannotFactorThroughCoarseOnly :
+  (coarseOnlyStep : C2 → C2) →
+  ((fine : C4) →
+    coarseOnlyStep (OriginalCodec.coarse fine)
+      ≡ OriginalCodec.coarse (shiftFineTimeByOne fine)) →
+  Torus.Empty
+oddFineStepCannotFactorThroughCoarseOnly coarseOnlyStep proof =
+  Torus.zeroNotSuc
+    (trans
+      (sym (proof zero₄))
+      (proof one₄))
 
 twoFineStepsExactlyDescend :
   ∀ pair →
