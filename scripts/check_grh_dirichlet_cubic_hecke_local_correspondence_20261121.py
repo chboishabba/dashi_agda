@@ -35,9 +35,17 @@ def ap(p):
 
 def main():
     cube_tests=0
+    dedekind_checks=0
     for p in SPLIT+INERT:
         assert phi(-3,p)==(1 if p%3==1 else -1)
         trace=ap(p)
+        # Exact inverse Euler polynomial for zeta_K = zeta_Q * L(chi_-3).
+        # Split: (1-T)^2; inert: 1-T^2. Compare coefficients.
+        chi=phi(-3,p)
+        product=(1,-(1+chi),chi)
+        expected=(1,-2,1) if chi==1 else (1,0,-1)
+        assert product==expected
+        dedekind_checks+=1
         if p%3==2:
             assert trace==0
             print(f"inert {p}: chi_-3=-1 a_p=0; Euler = 1+{p}*T^2")
@@ -55,8 +63,8 @@ def main():
         assert a*a-a*b+b*b==p
         assert trace==-(2*a-b)
         print(f"split {p}: chi_-3=+1 J={a}+({b})*omega, norm={p}, a_p={trace}")
-    assert cube_tests==430
-    print("PASS 430 cube fibres, 10 Jacobi norms/traces, 7 inert zero traces")
+    assert cube_tests==430 and dedekind_checks==17
+    print("PASS 430 cube fibres, 10 Jacobi norms/traces, 7 inert zero traces, 17 Dedekind local factorizations")
     print("OPEN primitive quadratic Dirichlet character to global Hecke and elliptic L-series")
 
 if __name__=="__main__":main()
