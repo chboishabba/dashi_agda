@@ -76,6 +76,21 @@ def selected_plaquette_time_starts(site, i, j):
     return {t for pos, axis in sides
             for t in native_coarse_time_starts(pos, axis)}
 
+
+def native_coarse_edge_fine_bonds(site, axis):
+    even = tuple(2 * t for t in site)
+    return ((even, axis), (step(even, axis, 4), axis))
+
+def native_coarse_plaquette_fine_support(site, i, j):
+    sides = ((site, i), (step(site, i, 2), j),
+             (step(site, j, 2), i), (site, j))
+    return {bond for x, axis in sides
+            for bond in native_coarse_edge_fine_bonds(x, axis)}
+
+def in_selected_positive_fine_half(bond):
+    site, axis = bond
+    return site[0] in ({0, 1} if axis == 0 else {0, 1, 2})
+
 def main():
     fine = list(product(range(4), repeat=D))
     coarse = list(product(range(2), repeat=D))
@@ -108,12 +123,20 @@ def main():
     assert len(positive_time_plaquettes) == 24
     assert all(selected_plaquette_time_starts(x, i, j) == {0, 1}
                for x, i, j in positive_time_plaquettes)
+    # Check COMPLETE fine bond support, including spatial boundary links,
+    # for all selected positive coarse plaquettes at coarse T=0.
+    selected_plaquettes = [(x, i, j) for x in coarse if x[0] == 0
+                           for i, j in combinations(range(D), 2)]
+    assert len(selected_plaquettes) == 48
+    assert all(all(in_selected_positive_fine_half(b)
+                   for b in native_coarse_plaquette_fine_support(x, i, j))
+               for x, i, j in selected_plaquettes)
     # The old shift-2 mirror fixes t=1,3 and splits both two-link paths.
     assert all(not set(native_coarse_time_starts(x, 0)).issubset({1, 2})
                for x in coarse)
     print('PASS both source reflection planes: 64/64 ordered R445 links each')
     print('PASS both planes: 1536/1536 original reflected plaquette real traces each')
-    print('PASS 8/8 positive coarse time bonds, 24/24 temporal plaquettes in fine positive half')
+    print('PASS 8/8 time bonds, 24/24 temporal and 48/48 full coarse plaquettes pull back to fine positive half')
     print('PASS source geometry identifies old shift-2 half-space mismatch')
     print('OPEN Agda whole native block/reflection, positive-time word/RP, E1/D1/D2')
 
