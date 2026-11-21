@@ -27,7 +27,7 @@ All new Agda source is committed/readable on #1536 but remains UNCOMPILED; local
 
 **Independent indices**: `t ∈ ℕ` = chronological Euclidean translation from the original OS1/R332 source; `k ∈ ℕ` = changing-cutoff/RG *scale* index (not the source file number R445); `a ∈ C₄` = concrete finite-side-four periodic time coordinate; `σ ∈ {−1,0,+1}` = OPTIONAL original finite-wave signed/zero phase code; `r ∈ C₂` = actual original time parity residual. **Never treat R443/R445/R320 theorem labels as `k`**, nor conflate a C2 parity with ternary signed zero, nor collapse the full 896-link physical residual.
 
-Existing original `coord/coarse/phase` gives exact `C₄ ≅ C₂ × C₂` with `a = 2c + r`, including zero `(c,r)=(0,0)`. Native one-step time transport in these coordinates is
+Existing original `coord/coarse/phase` gives an exact **set-coordinate bijection**, not a time-translation group isomorphism, `C₄ ↔ C₂ × C₂` with `a = 2c + r`, including zero `(c,r)=(0,0)`. Native one-step time transport in these coordinates is
 `(c,0) → (c,1)`, `(c,1) → ((c+1) mod 2,0)`.
 Thus **a one-step fine translation does not descend through coarse-only C2**, but with *original phase residual retained* it transports **exactly** with nontrivial carry. Two fine steps give `(c,r) → ((c+1) mod 2,r)`, recovering the existing commuting square; NO discarded odd shift or erased residual. The finite C2 time periodicity `T_c² = id` is real, so only the SOURCE changing-cutoff/OS1 family, not that fixed torus, represents all physical times.
 
