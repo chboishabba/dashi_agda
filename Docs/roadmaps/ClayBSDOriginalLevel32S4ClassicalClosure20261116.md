@@ -1,3 +1,41 @@
+## 21 November 2026 — Mellin source correction / weld-forward (latest)
+
+The **original Mellin compiler is ALREADY PRESENT** in
+`DASHI/Mathematics/Automorphic/MellinSplitFunctionalEquationExact.agda`:
+`MellinSplitData`, `completedTransform`, and the proved
+`mellinSplitFunctionalEquation`. The selected E32 owner
+`EllipticCMLevel32FrickeMellinExact` ALREADY imports it directly
+and proves `mellinCentralLowerEqualsUpper` and
+`mellinCentralValueIsTwiceTail` under the actual corresponding
+substitution and fixed-point premises. **Do not invent another Mellin
+split, eta transform skeleton, or anonymous analytic value.**
+
+The exact remaining P0 gap is to instantiate this existing source
+with the **actual original E:y²=x³−x analytic elliptic L(E,s)**
+and genuine infinite `eta(4z)^2 eta(8z)^2` form, with
+actual normalized modularity and change-of-variable proofs.
+The existing real positive-tail estimate is mathematically available
+conditional on the classical analytic identity; it does not supply
+the original function identity by itself. On the current Agda branch,
+`constantUnitNormalizedReceipt` demonstrates that an arbitrary
+`NormalizedOneDimensionalQSeries` is NOT a proof that the actual
+original E32 Fourier coefficients have been selected.
+
+**GRH also remains P0**, not postponed as a consequence of this
+selected-curve BSD work: original Lean #113 all-Dirichlet
+`UpperTheory.EveryCharacter` and independent full-source formal
+verification, then v4.33.1→root/Agda same-function admission.
+The active Agda #1533
+`Docs/roadmaps/GRHP0OriginalEveryCharacterMellinForwardWeld20261121.md`
+controls that separate P0. Existing G2 Gamma/Mellin/Weil
+proof-relevant transport is a reusable theorem owner, not new
+analytic Dirichlet GRH by name matching.
+
+All R445/F19, K4/S4 and iteration numbers are method names, not
+main proof endpoints. No Agda kernel or analytic endpoint is promoted.
+
+---
+
 # BSD S4 original E:y²=x³−x — same-source 2-isogeny, level-32 newform, Mellin and central positivity
 
 ## 21 November 2026 — P0 theorem-first correction (supersedes iteration-ledgers)
