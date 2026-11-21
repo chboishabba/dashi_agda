@@ -95,7 +95,7 @@ Iinferred=Preported/Vreported
 Rinferred=Vreported**2/Preported
 ok('conditional same-port 0.4W/3.8V would require 2/19A',Iinferred==Q(2,19))
 ok('conditional same-port equivalent resistive load would be 36.1 ohms',Rinferred==Q(361,10))
-ok('reported 3.8V and 0.4W separately imply no current without shared-port premise',Iinferred!=0)
+ok('same 3.8V display is compatible with zero or conditional same-port load current',Q(0)!=Iinferred and Vreported==Q(19,5))
 C=symbols('C',positive=True)
 Eparallel=2*(C*Vcap**2/2)
 Eseries=(C/2)*Vcap**2/2
@@ -103,7 +103,7 @@ ok('two capacitors each at 48V carry C*48² energy',simplify(Eparallel-C*Vcap**2
 ok('two identical series caps with 48V total carry C*48²/4',simplify(Eseries-C*Vcap**2/4)==0)
 ok('same display 48V gives fourfold different capacitor-bank energy',simplify(Eparallel/Eseries)==4)
 ok('unknown capacitance prevents numeric storage inference',Eparallel.has(C) and Eseries.has(C))
-ok('no voltage-only measurement implies source replenishment',simplify(Eparallel.subs(C,1)-Eseries.subs(C,1))>0)
+ok('same 48V display permits distinct capacitor energy states',simplify(Eparallel.subs(C,1)-Eseries.subs(C,1))>0)
 
 print(f'{len(checks)}/{len(checks)} PASS — exact 3-Earth-terminal reference, hidden return, role/rank, original reading conditionals')
 print('source gate: 0/24 original F10–F16 roles filled in existing repository audit; not a new physical measurement')
