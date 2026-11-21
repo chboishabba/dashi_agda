@@ -79,10 +79,15 @@ is not a periodic regularity proof.
   R752 compilers retained with attribution.
 - `scripts/check_ns_paper1_w2_nogo_sympy_20261121.py` —
   local SymPy 1.14 mathematical regression, verified exact Git
-  blob `e39877526c97b90555079561f10c3b1ced5d7a2c`.
+  blob `261766b264b5f5f81e8148b4f49f4341d6b31f75`.
   PASS selected R853 rate, exact R820=R823=R825
   algebra, original R854 rational strict negativity,
   positive/negative sign and continuity countercontrols.
+  Fresh local SymPy 1.14.0 script execution PASS and exact
+  local Git blob hash matched connector readback.
+  The Paper 1 manuscript status needles (one abstract,
+  R734/R823/R751 distinctions, four-lane firewall)
+  were independently checked against the live draft source.
   These tests check algebra/arithmetical implications,
   **not** the finite ODE source proof or any Agda/Lean kernel.
 - Original source/physical proofs remain with
