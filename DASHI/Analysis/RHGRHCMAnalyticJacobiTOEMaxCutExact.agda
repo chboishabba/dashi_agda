@@ -22,6 +22,11 @@ import DASHI.Moonshine.JInvariantAnalyticNormalizedKleinAdapterExact as Analytic
 import DASHI.Mathematics.CrossPollination.EisensteinLeanInertPrimeLocalFactorReceiptExact as Jacobi
 import DASHI.Unified.TOEArithmeticCMRealizationExact as TOE
 import DASHI.Moonshine.Monster369SignedPairNineOrbitExact as Five
+import DASHI.Moonshine.MonsterFiveArithmeticSourceRecognitionFrontierExact as MonsterP5
+import DASHI.Moonshine.MonsterOrderExponentCorrectionExact as MonsterOrder
+import DASHI.Physics.Closure.MoonshinePrimeLaneReceiptSurface as PrimeLane
+import DASHI.Moonshine.PrimeRepresentationFrickeCouplingExact as Coupling
+import DASHI.Moonshine.OggPrimeControlMatrixExact as Matrix
 import DASHI.Analysis.RHGRHCubicCharacterCMTOEConsumerExact as CMInterop
 
 -- The existing conditional limit-level E4/E6 -> normalized Delta -> j
@@ -91,3 +96,15 @@ fiveOrbitDoesNotProduceMonsterAction :
   Five.SignedPairQuotientCreatesMonsterAction → ⊥
 fiveOrbitDoesNotProduceMonsterAction =
   Five.signedPairQuotientDoesNotCreateMonsterAction
+
+-- Genuine Monster p=5 receipts are different from the five-orbit quotient.
+-- The source provides this exact paid p=5 exponent arithmetic.
+actualMonsterP5ExponentNine :
+  MonsterOrder.monsterOrderExponent
+    PrimeLane.p5 ≡ 9
+actualMonsterP5ExponentNine = MonsterOrder.p5ExponentIsNine
+
+actualMonsterP5FrickeClosure :
+  Coupling.representationArithmeticFrickeClosed
+    Matrix.prime5 ≡ true
+actualMonsterP5FrickeClosure = MonsterP5.p5RepresentationFrickeClosed
