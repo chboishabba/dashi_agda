@@ -128,17 +128,17 @@ module _
   -- 128 original labels are literally cartesian(CoarseBond,phase),
   -- and the suffix is the identical 896 original physical spectators.
   --
-  -- We transport the already established full-1024 F19 target
-  -- equality, then ask source definitions to normalize the 64
-  -- original adjacent pair-products to the same parity products.
+  -- The full-1024 F19 target equality is consumed upstream by the
+  -- actual F19->R445 vector weld. Here the F19 block acts on the
+  -- ALREADY REORDERED R445 128+896 vector; the candidate below
+  -- requests exact kernel normalization of the ORIGINAL 64 selected
+  -- parity pairs. No rewrite of an absent F19 label expression.
   originalF19Sorted64AreNativeParity64 :
     ∀ (original : Vec.Vec Link Native.Count) →
     originalF19SortedCoarse64 original
     ≡
     originalExplicitParityCoarse64 original
-  originalF19Sorted64AreNativeParity64 original
-    rewrite SameLabels.originalF19Complete1024LabelOrderMatchesR445
-      theory = refl
+  originalF19Sorted64AreNativeParity64 original = refl
 
   -- Finish the ORIGINAL source-valued F19/R445 block comparison:
   -- pair-product equality from selected F19 labels, then native
