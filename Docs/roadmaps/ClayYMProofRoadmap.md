@@ -1,3 +1,25 @@
+### 21 Nov 2026 — Paper 3 live manuscript synchronized with physical-source P0
+
+`Docs/papers/live/Paper3YangMillsClayDraft.md` was updated
+**on this same YM PR #1536** (commit `99e02a45`). The live
+manuscript no longer contains two competing abstracts and
+its leading conditional theorem now identifies F1/F3/F4
+as **unproved physical input obligations** on the
+original SU(2) Wilson family. The 1024=128+896 F19/R445
+source-weld and one-spectator `I→−I` plaquette-action
+counterexample appear with exact source/physical limits.
+No physical continuum/mass gap or all-compact-simple-group
+claim is inferred; no Agda kernel was run. This is an
+editorial claim-boundary update, not a new YM proof.
+
+The existing publication router `Docs/papers/PublicationRoadmap.md`
+is being revised on the active Agda GRH #1533 documentation
+branch; it still maps original Papers 1–8 to the
+current Paper 3/1/8 live core. Paper 3's proof owner is
+this YM P0 roadmap, not the publication router.
+
+---
+
 ## 21 November 2026 — controlling YM P0 theorem-first directive
 
 
