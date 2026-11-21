@@ -1,3 +1,92 @@
+## 22 November 2026 — selected-W FULL horizontal-weighted q^-4 formula (symbolically discharged, constants/uniformity OPEN)
+
+Following the source correction, the original Lean theorem
+`QuarticFourSignedPolePair.signedNormalizedPairKernel_eq_combinedIntegral`
+and the original actual selected-W compact-`C⁴` theorem
+give a concrete **human-level symbolic full-horizontal kernel
+tail** at any fixed selected `W` and `t`, not just the
+unweighted base channel.
+
+Let `P_W=quarticFourSignedPoleCombinedProfile
+W.R W.muHalf W.muTwo t`, supported in
+`[-L,L]` (take `L=π+W.R` from the
+source four-center bump support), and define
+`M_j(W)=∫ |∂_x^j P_W(x)| dx` for `0≤j≤4`.
+For `q≠0`, `|α|≤a`, put
+`P_{W,α}(x)=P_W(x)cosh(αx)`. Product
+differentiation gives the **exact formula**
+```text
+(P_W cosh(αx))'''' =
+    P_W'''' cosh(αx)
+  + 4α P_W''' sinh(αx)
+  + 6α² P_W'' cosh(αx)
+  + 4α³ P_W' sinh(αx)
+  + α⁴ P_W cosh(αx).
+```
+On `|x|≤L`,
+`|cosh(αx)|,|sinh(αx)|≤exp(aL)`.
+The already source-proved compact Fourier
+fourfold integration-by-parts lemma therefore
+yields the precise conditional-norm inequality
+```text
+|W.signedNormalizedPairKernel(α,q)|
+ ≤ exp(aL)/|q|^4
+    ·[M4 + 4a M3 + 6a² M2 + 4a³ M1 + a⁴ M0].
+```
+For an actual off-ordinate zero `σ` in the
+critical strip, the source identifies
+`r=t/16`, `α=(Re σ−1/2)/r`,
+`q=(Im σ−t)/r`. Hence for `t>0`,
+`|α|<8/t`, and
+```text
+|W.signedLiteralPairSourceTerm σ|
+ ≤ mult(σ) (t/16)^2 exp(8L/t)
+   · [M4+4(8/t)M3+6(8/t)^2M2
+        +4(8/t)^3M1+(8/t)^4M0]
+   / |Im σ−t|^4.
+```
+The `mult(σ)` is the actual original zeta
+zero multiplicity, NOT dropped for a
+scalar surrogate. The estimate applies to
+**both horizontal sides** because the
+kernel is cosh-even in `α`; it is
+an ABSOLUTE tail envelope and proves
+NO desired signed surplus by itself.
+
+**Local executable mathematical check:** the EXISTING
+`scripts/check_rh_r2_explicit_zero_shell_fourier_20261117.py`
+was extended in place (commit `e3c25a13`) to audit
+the exact source identity status, the five-term
+weighted fourth Leibniz derivative,
+horizontal reflection, `α=0` base recovery
+and true strip `8/t` radius. Independently
+executed local SymPy 1.14.0: **7/7**
+new exact derivative/normalization assertions
+PASS. The full revised file has been
+committed and source-readback verified but
+not executed end-to-end in this runtime;
+do not state a complete script receipt
+or native Lean kernel result.
+
+**Precisely UNPAID:** obtain numerical/source-quantified
+uniform bounds for the **actual**
+`W.R,W.muHalf,W.muTwo,W.poleHalf,W.poleTwo`
+and `M_j(W)`; prove those are strong enough,
+with actual two-sided ζ-zero counts and
+tail/cutoff quantifiers, to pay the
+correct-polarity cofinal
+`W.UniformSignedCompensationGap rho`.
+An arbitrary fixed-t positive finite-core
+estimate, absolute convergence, symbolic
+`q^-4` formula or same-ordinate local
+positive signal does not imply the
+universal strict RH inequality. This
+update is a proof-of-algebraic-estimate
+at paper level, **not** a new kernel-accepted
+original analytic GRH/RH result.
+
+---
+
 ## 22 November 2026 — SELECTED-W SOURCE WELD ALREADY PAID: next original RH cut reclassified
 
 **Important correction to the preceding inventory:** the
