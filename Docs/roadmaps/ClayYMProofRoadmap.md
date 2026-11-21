@@ -57,6 +57,43 @@ DASHI exact source owners retain their original ownership. No
 new Clay YM proof or pinned Agda 2.9 kernel result is claimed here.
 
 
+## 2026-11-21 — NEW P0 F19 → **actual native R445 64 SU(N) block** commuting square, existing pure-Haar interface identified
+
+**User-directed method:** check newest original #1444 and #1536, weld *forward* from existing finite source and *backward* from physical E1/D1/D2 onto the SAME Wilson field. Do not reconstruct parity/measure; preserve all 896 original spectators and the independently indexed physical time `t`, cutoff `k`, signed zero/residual hyperfabric. R445/F19 names are chronology of proof construction, not physical indices.
+
+### The real square, not just a sorted-label equality
+
+```
+                 original canonical SU(N) links (all 1024)
+                  /                                 \
+  actual F19 adjacent-swap into 128+896       original native fine field decoder
+           |                                            |
+  original F19 pair/spectator decoder           original native R445 2-link holonomy
+           |                                            |
+  F19.coarseFromSortedOriginal                 SUNBlock.nativeSUNBlockLinks m=l=1
+           \                                            /
+                SAME 64 original ordered coarse SU(N) links
+                           | any original Wilson coarse test
+                   SAME finite observable value
+```
+
+**Original master sources directly inspected:** `YMClayR445OriginalNativeParityPairWeldExact.originalR445NativeBlockAgreesExplicitParity` proves for **each original coarse bond** the ordered native SU(N) blocked holonomy is the multiplication of original phase-zero and phase-one fine link values; `YMClayNativeSideFourTwoLinkPairSameObjectExact.originalSUNBlockIsLiteralTwoLinkProduct` independently owns the exact path-vs-pair native identity. `YMClayR445CanonicalBondPermutationCodecExact` preserves full **128 selected + 896 original residual** and true two-way original vector codec. `YMClayOriginalWilsonCanonicalBlockedMarkF19Exact.coarseFromSortedOriginal` builds the **actual F19 64 pair product** from the original adjacent swap, pair+896 spectator decoder; its `originalCanonicalBlockedNormalizedEqualsPhysicalEffective` already owns same-original-Wilson weighted all-observable normalized expectation, **not bare coarse n=1 Wilson**. The original `YMClayR445OriginalPureHaarBlockWeldExact.OriginalR445PermutationAndNativeBlockWeld` already specifies the **actual** two needed source identities `permutationIsOriginalReorder` and `actualNativeBlockIsFlatPairBlock`; do not replace it with invented Haar assumptions. Existing #1536 F19/R445 full label/field/vector/decoder source remains Agda uncompiled.
+
+**New source-written #1536 native block owner:** `DASHI/Physics/YangMills/YMClayOriginalF19R445Native64HolonomySquareExact.agda`, initial commit `3d769d3ffa7534c9a955fa1a0b3542da2a5d1260` and corrected source `303f2b5ebdf36e5a11a7a7e30532711e4f95277a`, coarse-observable extension `4708a364a988505a9dc2b61631d3aa34a30838d9`. Its `originalNativeCoarse64` encodes the **actual original nativeSUNBlockLinks** on the actual 64 positive-bond enumeration; `originalExplicitParityCoarse64` uses the original two signed-phase source bond lookups; `originalNative64IsExplicitParity64` is a genuine use of **existing source `NativeParity.originalR445NativeBlockAgreesExplicitParity` and `Codec.originalBondsEncodePointwise`**. `originalF19SortedCoarse64` uses the actual F19 `coarseFromSortedOriginal` on the whole R445 128+896 vector. **Precisely one remaining candidate finite computation** `originalF19Sorted64AreNativeParity64` asks for kernel normalization of these exact 64 selected pair products; it is source-written as `refl`, **not compiler accepted**, so if elaboration fails recheck original vector count transport/definitional equality and original pair/64-order proofs, not add axiom. `originalPhysicalF19Blocked64EqualsNativeR445`, `originalF19AndNativeR445Actual64CommutingSquare` and `originalF19CoarseWilsonObservableEqualsNativeR445` compose actual F19 adjacent-sort vector/64 blocked output with original native field, producing **every coarse Wilson test** pointwise **conditional on the closed normalization candidate type-checking**. No synthetic SU(N) block/clock/measure.
+
+**Independent local exact noncommutative test:** `/mnt/data/check_ym_native64_f19_r445_local.py` run against actual original 4D side-four/coarse side-two source-shaped labels and Q8 subgroup of SU(2) (not a Yang-Mills integral), five configurations: **320/320 original native vs F19 pair block products**, **480/480 original coarse plaquette traces**, **160** deliberately reversed two-link products differ, **5/5** spectator modifications change original FINE Wilson plaquette traces while leaving the chosen 64 coarse blocks unchanged. This is a key physical warning: spectators do not enter the 64 two-link holonomies but DO enter the full original Wilson action and cannot be deleted from the interacting measure. The existing #1536 `scripts/check_ym_f19_r445_full1024_labels_p0.py` was committed with independent native/endpoints and fine-spectator Wilson tests as commit `c4632d3aba65d7f7d7809470613f0755d02d1e66`; its exact checkout was NOT run. #1536 golden regression root imports the new Agda owner (`f82f391aab8f3f8af2c8e6de6b4ed93e6c358d53`) and fail-closed source checker requires eight new native/64-source theorem identifiers (`d866a4f67438ce706c976b9aa87010a89923885a`). None is an Agda 2.9 kernel receipt.
+
+### BIDI status / next payment
+
+- **F0 exact finite:** original F19/1024 effective measure and R445 128+896 code/16-site native parity are already provided by `master`; F19↔R445 sorted vectors, pointwise decoder and native 64-block are now *closed Agda proof candidates* on #1536, **not accepted proofs**. Run pinned `bash scripts/check_ym_original_rg_p0_kernel.sh`; repair genuine Agda errors against source definitions. After kernel acceptance, instantiate the already-existing original `OriginalR445PermutationAndNativeBlockWeld` with the actual F19 adjacent-sort and native 64 theorem; avoid another Haar theorem.
+- **F1/R1 physics:** original actual compact `SU(N)` Wilson all-size changing-cutoff interacting Gibbs/E1 (not one side-four sample), original W1/W3 **literal Wilson-loop** small/large field marked locality and cutoff/volume uniform exponent, actual original CMP119/122/116 sources and same real/rational carrier interpretation. Existing conditional generic CMP theorem machinery DOES NOT supply the physical data automatically.
+- **F2/R2 OS time:** original positive-time Wilson words, reflection-compatible actual link source, published Wilson reflection positivity **complex-star** source; R332 OS1 time and R556/R278 actual same-source cutoff-indexed covariance. Preserve original `t×k` + residual and real physical units.
+- **F3/R3:** original E1 interacting continuum/nontriviality + one **actual same reconstructed H_OS**, dense vacuum-orthogonal cylinder family, uniform positive mass (m), G1 group scope. No finite commuting square or Q8 check proves Clay mass gap. P0 YM first; P1 antigravity second.
+
+**Branch discipline:** roadmaps updated DIRECTLY on historical stacked draft #1444 and independent master-based draft #1536. This entry is source-specific implementation status, not a merge into `master`.
+
+---
+
 ## 21 November 2026 — P0 F19↔R445: a TRUE *finite decoder* commuting square, plus the physical blocked-observable corollary
 
 **Question answered precisely:** the earlier `P_F19(U) = Encode_R445(U)` is an equality of parallel routes from ONE original canonical 1024-link vector to ONE complete 128-selected+896-spectator vector. It is **not itself a four-arrow commuting square**, and it is **not yet** a Yang–Mills OS/continuum/RG commuting theorem. The genuine square is now stated explicitly, with original source-owned maps only:
