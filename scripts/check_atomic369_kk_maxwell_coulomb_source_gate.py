@@ -28,17 +28,19 @@ def check():
     assert s.simplify(mode0 - m5) == 0
     assert s.simplify(mode1 - m5) != 0
 
+    e4symbol = s.symbols("e4", positive=True, real=True)
     # Independent external static nucleus: 4D Gauss law
     # div E = Z*e4*delta_3; Phi = Z*e4/(4*pi*r) outside source.
     # The electron is assigned q_e=-e4, so V=q_e*Phi.
-    phi = Z * e4 / (4 * s.pi * radius)
-    coulomb = s.simplify(-e4 * phi)
-    assert s.simplify(coulomb + Z * e4**2 / (4 * s.pi * radius)) == 0
-    assert s.simplify(coulomb.subs(e4**2, 4*s.pi) + Z / radius) == 0
+    phi = Z * e4symbol / (4 * s.pi * radius)
+    coulomb = s.simplify(-e4symbol * phi)
+    assert s.simplify(coulomb + Z * e4symbol**2 / (4 * s.pi * radius)) == 0
+    assert s.simplify(coulomb.subs(e4symbol**2, 4*s.pi) + Z / radius) == 0
     assert s.simplify(coulomb.subs(Z, 0)) == 0  # no nuclear source, no atom
-    assert s.simplify(coulomb.subs(e4, -e4) - coulomb) == 0  # simultaneous charge convention
+    assert s.simplify(coulomb.subs(e4symbol, -e4symbol) - coulomb) == 0  # both source and electron reverse
     # Distinguish coupling-matched from an alleged predicted electron charge.
     assert e4.free_symbols == {e5, L}
+    assert s.simplify(coulomb.subs(e4symbol, e4) + Z*e5**2/(4*s.pi*L*radius)) == 0
     print("PASS zero-mode matter/photon normalizations; Maxwell coupling; mode 0/1 source-mass audit")
     print("PASS conditional Coulomb source and charge/normalization negative controls")
     print("OPEN independent KK graviphoton-to-QED identification; electron mass, e5, source, spin and same-H")
