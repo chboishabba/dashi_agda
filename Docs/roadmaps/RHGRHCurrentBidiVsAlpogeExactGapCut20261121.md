@@ -1,3 +1,9 @@
+## 21 Nov 2026 — P0 exact theorem identity and reused Mellin (current)
+
+For the latest direct source-first audit and independent external receipt, see `Docs/roadmaps/GRHP0OriginalEveryCharacterMellinForwardWeld20261121.md`. The original `UpperTheory.EveryCharacter` -> Dirichlet half-plane / all-strip / primitive-strip -> ordinary RH route is already source-written in Lean #113 and is the FIRST P0 admission task; external MIT reports independent original proof checks, while this repository's v4.33.1 adapter and Agda per-character transport have no local kernel receipt. The existing `MellinSplitFunctionalEquationExact` and the RH `RiemannG2GammaMellinProofRelevantActionCompilerExact` are genuine donors, not missing generic machinery. The new Agda reverse direct Clay `RiemannHypothesisWitness` projection handles only **zeta RH**, not general Dirichlet GRH. Preserve P1 special j=0 and BSD E32 as unrelated analytic L-functions, and do not count numbered iteration sources as theorem milestones.
+
+---
+
 ## 21 Nov — H0 original j=0 source candidate advanced (not kernel accepted)
 
 Correction to earlier H0 remaining-label chronology: #114 now contains same-curve source-written `jZeroOriginalEulerPerturbation_norm_le_majorant`, unconditional denominator `Multipliable` proof candidate, sum and local/infinite product nonvanishing. The prior `_of_bound` `hlocal` remains as an abstract BIDI interface but is discharged by this *source-written* j=0 candidate; **no compatible Lean kernel/Mathlib acceptance has occurred**. Semantic P1 remains reciprocal Euler product + source-consistent global elliptic/Hecke L-series and analytic continuation. External all-character Dirichlet GRH P0 trusted statement/admission and original internal RH G2/G3 remain independent. Local SymPy 107/107 good-prime original curve finite checks are supporting evidence only.
