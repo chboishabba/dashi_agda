@@ -116,3 +116,11 @@ Important: symbolic 1+omega+omega²=0 with sum omega^(3j)=3 is only a C3 angular
 | P0.21-curved | A=1+beta*x² has R=-4beta/(1+beta*x²), transverse G_yy=G_zz=2beta/(1+beta*x²) | Exact Einstein tensor and Bianchi PASS; physical stress source OPEN |
 | P0.21-real-source | Actual PtMn3 T1g spinor+Dirac+SOC H, tetrad/metric-dependent action, kinetic spin-connection and tensor variation | OPEN |
 | P0.21-antigravity | Matter/controller/EM/SC T_munu, ξ coupling measured, Earth-field perturbation and gravimeter/clock/force counterfactual | OPEN |
+
+| P0.22-Dirac | 4×4 Clifford(3,1) matrices + P0.21 tetrad, explicit spin connection, gamma compatibility, massless mode and conserved current | **42/42 local SymPy checks**, free spinor on selected geometry; no PtMn3 identification |
+| P0.23-scalar-Ward | Effective nonminimal scalar-order action F(O)R/2; metric variation with Hessian F and 4-component Ward exchange | **33/33 local SymPy checks**; controller J nondynamical, not physically closed |
+| P0.23-positive-stress-no-go | Restricted metric diag(-A²,1,1,1) Gtt=0 incompatible with nontrivial positive minimal scalar Ttt | exact selected-ansatz obstruction, NOT universal antigravity no-go |
+| P0.23-compact-profile | Spherical scalar amplitude, inverse J(r), positive intrinsic energy and attractive Newtonian weak-field contribution | exact conditional formula, controller and real octupole tensor OPEN |
+| P0.24-material | Real experimental PtMn3 T1g order tensor, spinor tunnelling source, calibrated SOC/drive and metric-dependent matter+EM+SC+controller action | OPEN |
+| P0.24-Ward | True dynamic closed stress Tmunu total with positive units and covariant conservation (no prescribed driver leftovers) | OPEN |
+| P0.25-gravity | Source-resolved Einstein/alternative metric solution, bounded nonminimal coupling, measured external force/free-fall/clock and stable lift | OPEN |
