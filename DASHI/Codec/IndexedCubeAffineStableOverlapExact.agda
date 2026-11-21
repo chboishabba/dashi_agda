@@ -87,15 +87,14 @@ forgetFactSplit (stableSplit u v b) =
 
 forgetCodec : (x : StableBlocks Trit) →
   forgetFact (encodeBlocks x) ≡ C.encode (forgetRaw x)
-forgetCodec (stableBlocks u (M.triple M.negative M.negative M.negative) b) =
-  primitiveForgetCodec u b
-  where
-  primitiveForgetCodec : (u b : M.Triple Trit) →
-    C.blocks (M.encodeTriple u)
-      (M.triple (M.active M.negative) (M.active M.negative) (M.active M.negative))
-      (M.encodeTriple b)
-      ≡ C.encode (C.blocks u (M.triple neg neg neg) b)
-  primitiveForgetCodec u b = refl
+forgetCodec (stableBlocks u (M.triple M.negative M.negative M.negative) r) = refl
+forgetCodec (stableBlocks u (M.triple M.negative M.negative M.positive) r) = refl
+forgetCodec (stableBlocks u (M.triple M.negative M.positive M.negative) r) = refl
+forgetCodec (stableBlocks u (M.triple M.negative M.positive M.positive) r) = refl
+forgetCodec (stableBlocks u (M.triple M.positive M.negative M.negative) r) = refl
+forgetCodec (stableBlocks u (M.triple M.positive M.negative M.positive) r) = refl
+forgetCodec (stableBlocks u (M.triple M.positive M.positive M.negative) r) = refl
+forgetCodec (stableBlocks u (M.triple M.positive M.positive M.positive) r) = refl
 
 -- This exact commuting cube contains the selected rotation-stable
 -- affine slope domain AT EVERY VERTEX, including factorized vertices.
@@ -151,10 +150,7 @@ signNonzero M.negative = P.negative
 signNonzero M.positive = P.positive
 
 toAffine : StableBlocks Trit → Aff.Affine9 Trit
-toAffine = Aff.fromBlocks ∘ forgetRaw
-  where
-  _∘_ : ∀ {X Y Z : Set} → (Y → Z) → (X → Y) → X → Z
-  (f ∘ g) x = f (g x)
+toAffine x = Aff.fromBlocks (forgetRaw x)
 
 pivotWitness : (x : StableBlocks Trit) →
   P.Overlap01to02 (toAffine x)
