@@ -2,6 +2,47 @@
 
 **Date:** 21 November 2026. Agda golden integration PR [#1533](https://github.com/chboishabba/dashi_agda/pull/1533). Lean source-admission PR [#113](https://github.com/chboishabba/dashi_lean4/pull/113). This is the *consolidation plan and verified source inventory* for existing owners, not a new claimed RH proof.
 
+## 21 November — CURRENT SHALLOW P0 CUT / P1 GEOMETRIC IMPROVEMENT (supersedes world ingestion priority)
+
+**User directive:** import only as far **downward from the five terminal claims** as needed to attach their *genuine* theorem types to DASHI's already-existing Lean/Clay BIDI; then try to improve/consolidate the mathematical engine with native geometric producers. Do not ingest or reconstruct 175187 Lean modules, do not prioritise OpenAI/world/PostgreSQL, do not create another Riemann zeta ontology. Steelman → BIDI → reverse-solve, source first. No CI.
+
+### Confirmed fork theorem spine (actual pinned-source readbacks)
+
+| Original path @ `7cbf7a0c` | Actual proof edge or import | Reuse disposition |
+|---|---|---|
+| `src/Main.lean` | 5 public declarations consume `rhOfAll`, `allChi`, `claimAll.2.1`, `critAll`; imports `MainTheoremsAll` | original source reference, not mandatory integration import |
+| `src/Supplements/Kernels/MainTheoremsAll.lean` | imports `MainTheoremsCritical` and `SmallClassNumbers.CorGKOf` | **prune wrapper from RH top-cut**; no displayed Main theorem term references CorGKOf |
+| `src/Supplements/Kernels/MainTheoremsCritical.lean` | imports `MainTheorems` plus SmallClassNumbers ClassNumberThree/LenEqZeroIff/OnePoint | don't import the critical wrapper merely to reach the five endpoints |
+| `src/Supplements/Kernels/MainTheorems.lean` | `allChi := UpperTheory.FinalTheorems.everyCharacter`; `rhOfAll := Formalism.VW.rh_of_every allChi`; `critAll := Formalism.VW.critLine allChi …`; `claimAll := ⟨allChi, Claim.strip allChi, Claim.zeta allChi⟩` | **source-original minimal confirmed top-cut** |
+| `src/Formalism/GammaFactorNonvanishing/CritLine.lean` | original RH from `UpperTheory.EveryCharacter` by specialization to trivial character mod 1 and `LFunction_modOne_eq`; primitive strip uses completed L functional equation and gamma-factor nonzero | preserve as real exact BIDI / analytic carrier weld donor |
+| `src/Development/AutomorphicArithmetic/CharacterBoxes/ClaimStrip.lean` | `Claim.strip` turns right-half-plane nonvanishing into GRH strip using primitive-character reduction and reflection; `Claim.zeta` handles explicit classical zeta zeros | use these **genuine existing reverse implications**, don't reopen basic complex half-plane proofs |
+| `src/Development/AutomorphicArithmetic/CharacterBoxes/MainConclusion.lean` | `UpperTheory.FinalTheorems.everyCharacter := everyCharacter_of_row UpperTheory.Gal.Int.galoisLocalGlobalStrong_recParameter` | first **genuinely deep** branch to inspect selectively for P1 math improvement; not needed to identify terminal RH type |
+| `src/Development/AutomorphicArithmetic/AutomorphicVarieties/SmallClassNumbers/CorGKOf.lean` | distinct automorphic class-number theorem chain, imported by `MainTheoremsAll` but not referenced by the five Main terminal terms | can be excluded at top entry. No claim about all transitive imports without a compiler-generated closure |
+
+**New Lean [#113](https://github.com/chboishabba/dashi_lean4/pull/113) `proofs/alpoge-lean433/RHTopCut.lean`:** imports `Statements` + `Supplements.Kernels.MainTheorems` **without** `MainTheoremsAll`; re-exposes all 5 exact upstream theorems using `rhOfAll`, `allChi`, `claimAll.2.1`, and `critAll`. This is source-written and **not compiled**, and the underlying dependency closure of `MainTheorems` is not measured. The original fork's 175187-module Main import closure does **not** imply these five particular theorem imports require all 175187 modules. Do not assert a measured speedup absent local compilation.
+
+### P0 reverse-solve: smallest unpaid weld
+
+1. **P0.A** source original `RHTopCut.lean` exact same theorem types + kernel/axiom receipt in fork's own **Lean 4.33.1**. Build its actual `Supplements.Kernels.MainTheorems` closure, *not automatically `Main` or `MainTheoremsAll`*. **OPEN execution**.
+2. **P0.B** original DASHI `MillenniumExternal.ExactTargetSurface.clayRiemannHypothesis_iff_mathlib` already provides Mathlib `RiemannHypothesis ↔ Millennium.ClayRiemannHypothesis`. Bridge toolchain 4.33.1 source and 4.35.0-rc3 root in one checked environment by re-elaborating compatible source or by explicit trusted statement/proof translation. **OPEN version weld; BIDI proof ALREADY SOURCE EXISTS**.
+3. **P0.C** Agda golden `RiemannAnalyticSubstrate.RiemannHypothesisFor` and `RiemannZetaProgramBoundary.RiemannHypothesisWitness` already connected conditionally by `AlpogeRHOriginalClayEndpointBidiExact`. Pay the actual complex/ζ/zero/line predicate identification and proof import. **OPEN trusted Agda proof**.
+4. **P0.D** Dirichlet `EveryCharacter` and `Claim.strip` / `Claim.zeta` are genuine original producers. Preserve these direct implications; verify scope for S01–S22 consumers only after theorem admission. **OPEN downstream conditional algorithms**.
+
+### P1 improvement: steelman the original geometrics BEFORE adding new constructions
+
+1. **First source candidate:** the original `UpperTheory.FinalTheorems.everyCharacter_of_row` and the deep `UpperTheory.Gal.Int.galoisLocalGlobalStrong_recParameter` producer. Inspect the precise actual source function, types and theorems the source author consumes, not the names of all 200k modules.
+2. **Most relevant true DASHI producer:** `RiemannG2DeterminantConsumerQuotient369Exact.determinantResponseSufficientForFixedKernel`, already paid for the fixed-kernel 3×3 determinant `q(u)=det3(n1,n2,h(u))`. Determine whether the specific source proof's orthogonal determinant observable admits exactly that factorization. **Required lemma** `sourceThetaDeterminantFactorsThroughOriginalG2Q` or constructive **counterexample**. Don't promote from similar notation.
+3. **Finite symmetric geometry:** `TernaryPermutationS3LawsExact`, `C3CubeFourier27Exact`, original #1291 6-face indexed residual cube. Actual bidirectional intertwiner signatures between source character/Fourier/theta observables and geometrically marked 27 carrier; consumer-conditioned exact equality or controlled face residual, not blanket dimension/phase equivalence.
+4. **Theta/automorphic:** existing `PenumbralSingularThetaIntegral` and `SingularThetaBorcherdsBridge` are only candidates. Match weight, orthogonal signature, representation, integration measure, regularization, Hecke/Galois source **before** the claim of a same-object lift. Negative result is a useful P1 pruning certificate.
+5. **Monster/Griess:** original `Monster369ZetaSameObjectWeldExact`, `Griess1990RationalAlbertTrialityTransportExact` and #1472 Y443 are possible exact same-action/trace consumers; retain cyclotomic ζ₃ vs analytic Riemann ζ separation and 27D Jordan algebra vs theta determinant separation. No new theorem from analogy.
+6. **Measured improvement gate:** accepted source-identical mathematical object + Lean proof type preserved + shorter actual checked dependency closure or more efficient exact local certificate, *not* merely a better-looking correspondence. If a geometric donor does not contribute to the real `EveryCharacter` proof path, leave it in independent P1 investigation rather than the RH critical path.
+
+### Lower-priority explicit deferral
+
+The previously added `scripts/lean_world_alpoge_rh_fork_manifest_20261121.json` remains a provenance convenience only; **world/PG ingestion is deferred and not a P0/P1 prerequisite**. No huge source upload to DASHI, no new mathematical-world database and no broad semantic nearest-neighbor ingest until the source theorem adapter is actually admitted.
+
+**Receipt:** direct readbacks of the precise fork paths above and source-written Lean top cut; no CI, no original Lean build, no Agda kernel acceptance, no transitive dependency counts or executable geometric theorem transport claimed.
+
 ## 21 November 2026, 11:45 Brisbane — CORRECTION: user fork is the vendor source (current controlling P0)
 
 **The user explicitly provided an already-existing fork**: [chboishabba/riemann-hypothesis-lean](https://github.com/chboishabba/riemann-hypothesis-lean). Readback confirms the fork is publicly accessible and contains the entire upstream source with the original `src/Main.lean`; the fork's selected `Main.lean` Git blob is **exactly** `dbd5db70bc11b35f18fa5751216ab335321e7bfc`, matching the independent checker mirror. The pinned fork commit is `7cbf7a0c32fca1badf05931879a37c3f8a2b03b4`. Also checked the fork's original `src/Statements.lean` blob `1cd1bce93344065936b2b392b23306254e0785ef`, `lean-toolchain=leanprover/lean4:v4.33.1`, Mathlib commit `0df444a360eaa60ab8c11dca51a86af692955474` in its `lake-manifest.json`. DASHI Lean root currently pins **4.35.0-rc3**, so the exact external theorem package must first be kept in its own v4.33.1 world.
