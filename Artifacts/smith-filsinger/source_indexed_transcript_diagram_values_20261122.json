@@ -1,0 +1,315 @@
+{
+  "title": "Smith/Filsinger source-indexed transcript numerals, diagram identities and incomplete pin graph",
+  "date": "2026-11-22",
+  "base": "master",
+  "scope": "Source transcriptions + compiled Smith/Kelly/Darrer figure descriptions; no original recorded V/I traces or circuit photographs reattached in this turn.",
+  "source_attribution": "Original speaker reports, user-observed frames, original 147-page Kelly/Darrer compilation and mathematical reconstructions kept distinct.",
+  "reel_source_status": "No independently verified physical netlist, simultaneous port powers, natural-source input, or electrode geolocation; component specification and voltage indication are not a calibrated same-time energy receipt.",
+  "reconstructed_complete_netlist": false,
+  "original_empirical_role_count": "0/24 in 2026-11-17 original-evidence audit",
+  "owners": [
+    {
+      "key": "FZVS",
+      "type": "filmed_shunt_zvs_reel",
+      "identifier": "DfiqPnkPnP5",
+      "source_doc": "Docs/research/SmithFilsingerSourcePortShuntMaxCut20261115.md",
+      "facts": [
+        [
+          "cap_white",
+          "3.33",
+          "uF",
+          "narrated_component_nominal"
+        ],
+        [
+          "shunt_1",
+          "1",
+          "MOhm",
+          "narrated_shunt_candidate"
+        ],
+        [
+          "shunt_2",
+          "2",
+          "MOhm",
+          "narrated_shunt_alternative"
+        ],
+        [
+          "shunt_4",
+          "4",
+          "MOhm",
+          "narrated_shunt_alternative"
+        ],
+        [
+          "voltage_1500",
+          "1500",
+          "V",
+          "indicated_cap_voltage_other_occasion"
+        ],
+        [
+          "input_voltage",
+          "15",
+          "V",
+          "reported_driver_indication"
+        ],
+        [
+          "input_power_low",
+          "6",
+          "W",
+          "reported_driver_indication"
+        ],
+        [
+          "input_power_high",
+          "7.3",
+          "W",
+          "reported_driver_indication"
+        ],
+        [
+          "acoustic_carrier",
+          "7800",
+          "Hz",
+          "audio_observation_not_electrical"
+        ]
+      ],
+      "edges": []
+    },
+    {
+      "key": "FE",
+      "type": "filmed_earth_three_electrode_reel",
+      "identifier": "Dfi1D7CPzyM",
+      "source_doc": "Docs/research/FilsingerEarthThreeElectrodesZVSFrequencyPull20261110.md",
+      "facts": [
+        [
+          "earth_contact_count",
+          "3",
+          "count",
+          "speaker_reported"
+        ],
+        [
+          "meter_voltage",
+          "3.8",
+          "V",
+          "reported_display"
+        ],
+        [
+          "meter_power",
+          "0.4",
+          "W",
+          "reported_display_not_synchronised"
+        ],
+        [
+          "capacitor_pair_voltage",
+          "48",
+          "V",
+          "reported_two_capacitors_voltage_reference_unknown"
+        ]
+      ],
+      "edges": []
+    },
+    {
+      "key": "FW",
+      "type": "earlier_white_cap_earth_narration",
+      "identifier": "not_assigned_to_one_verified_reel",
+      "source_doc": "Docs/research/FilsingerLydenEarthPortMaxCut20261110.md",
+      "facts": [
+        [
+          "white_cap",
+          "3.33",
+          "uF",
+          "narrated_component_nominal"
+        ],
+        [
+          "part_of_bridge",
+          "1",
+          "qualitative",
+          "bridge_incomplete"
+        ]
+      ],
+      "edges": [
+        {
+          "from": "white_3.33uF_hot_terminal",
+          "to": "Earth_negative_contact",
+          "basis": "narrated_direction_not_probed",
+          "proven_continuity": false
+        }
+      ]
+    },
+    {
+      "key": "FM",
+      "type": "commercial_midpoint_spark_gap_reel",
+      "identifier": "Dfu9Jseviz9",
+      "source_doc": "Docs/research/SmithFilsingerSourcePortShuntMaxCut20261115.md",
+      "facts": [
+        [
+          "nst_midpoint",
+          "1",
+          "qualitative",
+          "user_transcribed_midpoint_available"
+        ],
+        [
+          "diodes",
+          "4",
+          "count",
+          "user_transcribed_two_per_secondary_wire"
+        ],
+        [
+          "capacitor_option_A_voltage",
+          "20000",
+          "V",
+          "user_transcribed_component_example_not_operating_voltage"
+        ],
+        [
+          "capacitor_option_A_capacitance",
+          "1",
+          "uF",
+          "user_transcribed_component_example"
+        ],
+        [
+          "capacitor_option_B_voltage",
+          "10000",
+          "V",
+          "user_transcribed_component_alternative_not_operating_voltage"
+        ],
+        [
+          "capacitor_option_B_capacitance",
+          "2",
+          "uF",
+          "user_transcribed_component_alternative"
+        ],
+        [
+          "later_voltage_description",
+          "4000",
+          "V",
+          "user_transcribed_approx_output_description"
+        ]
+      ],
+      "edges": [
+        {
+          "from": "transformer_secondary",
+          "to": "midpoint_accessible",
+          "basis": "user_transcribed_topology_no_pin_graph",
+          "proven_continuity": false
+        },
+        {
+          "from": "selected_coil",
+          "to": "shunt_capacitor",
+          "basis": "user_transcribed_capacitor_across_coil_no_pin_graph",
+          "proven_continuity": false
+        },
+        {
+          "from": "rectifier_branch_positive_A",
+          "to": "rectifier_branch_positive_B",
+          "basis": "user_transcribed_positives_ganged_not_photographically_pin_traced",
+          "proven_continuity": false
+        },
+        {
+          "from": "rectified_return",
+          "to": "center_tap_or_Earth_ground",
+          "basis": "user_transcribed_alternatives_not_traced",
+          "proven_continuity": false
+        }
+      ]
+    },
+    {
+      "key": "SPDF",
+      "type": "smith_kelly_darrer_compiled_diagrams",
+      "identifier": "uploaded_2022_147page_pdf",
+      "source_doc": "Docs/research/DonSmithHighPowerDevices147PageOriginalPDFMaxCut20261112.md",
+      "facts": [
+        [
+          "figure_10_page",
+          "28",
+          "pdf_page",
+          "figure_identifier"
+        ],
+        [
+          "figure_11_page",
+          "29",
+          "pdf_page",
+          "different_figure_identifier"
+        ],
+        [
+          "figure_40_page",
+          "65",
+          "pdf_page",
+          "editorial_different_topology"
+        ],
+        [
+          "winding_wire_length_ratio",
+          "1:4",
+          "ratio",
+          "Kelly_Darrer_compilation_not_turn_ratio"
+        ],
+        [
+          "secondary_split_A",
+          "17",
+          "turns",
+          "compiled_figure"
+        ],
+        [
+          "secondary_split_B",
+          "17",
+          "turns",
+          "compiled_figure"
+        ],
+        [
+          "geometric_example_turns",
+          "5 2/3",
+          "turns",
+          "compiled_geometry_not_electrical_phase"
+        ],
+        [
+          "geometric_angle",
+          "240",
+          "degrees",
+          "compiled_geometry_not_electrical_phase"
+        ],
+        [
+          "figure_6_reported_output_voltage",
+          "8000",
+          "V",
+          "historical_unverified_power_claim"
+        ],
+        [
+          "figure_6_reported_output_current",
+          "20",
+          "A",
+          "historical_unverified_power_claim"
+        ],
+        [
+          "figure_6_reported_input_voltage",
+          "12",
+          "V",
+          "historical_unverified_power_claim"
+        ],
+        [
+          "figure_6_reported_input_current",
+          "1",
+          "A",
+          "historical_unverified_power_claim"
+        ],
+        [
+          "reactance_example_frequency",
+          "30000",
+          "Hz",
+          "compiled_example_not_filsinger"
+        ],
+        [
+          "reactance_example_capacitance",
+          "100",
+          "nF",
+          "compiled_example_not_filsinger"
+        ]
+      ],
+      "edges": []
+    }
+  ],
+  "hard_boundaries": [
+    "Do not merge shunt/ZVS DfiqPnkPnP5, three-ground Dfi1D7CPzyM, midpoint/spark Dfu9Jseviz9 and user-supplied Smith figures by circuit or time.",
+    "Three Earth contacts reported do not establish three Earth electrode return wires or source-active port.",
+    "Reported display voltage and power are not jointly calibrated real work; do not multiply across reels or terminals.",
+    "20kV 1uF and 10kV 2uF are narrated examples/alternative capacitor ratings, not achieved operating voltages.",
+    "Kelly/Darrer 1:4 is wire-length guidance, not asserted L1:L2 turns ratio or measured secondary voltage gain.",
+    "Split 17+17 turns and 240-degree geometric winding do not establish 90-degree current quadrature.",
+    "Partial narrated white-cap hot to Earth-negative is not same as full pin-to-node proof.",
+    "No high-voltage experiment or construction prescription."
+  ]
+}
