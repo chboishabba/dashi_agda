@@ -24,6 +24,8 @@ open import Agda.Primitive using (Level; _⊔_; lsuc; lzero)
 
 import DASHI.Physics.Electromagnetism.U1AsSU2AbelianRestrictionExact as U1
 import DASHI.Physics.Electromagnetism.U1ElectromagneticApplicationExact as EM
+import DASHI.Physics.Electromagnetism.RightHandRule369Exact as RightEM
+import DASHI.Physics.Foundations.OrientedBracketEMYMNS369Regression as SharedOrientation
 import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier as SU2
 import DASHI.Physics.YangMills.BalabanSU2LieBracket as Bracket
 import DASHI.Physics.ExoticGravity.AntigravitySameStateFourChannelDiscriminatorExact as Four
@@ -212,3 +214,23 @@ ordinaryEMRealCalibrationStillRequired :
     EM.canonicalU1ElectromagneticBoundary ≡ true
 ordinaryEMRealCalibrationStillRequired =
   EM.U1ElectromagneticBoundary.applicationReductionNeedsIndependentValidationIsTrue
+
+
+-- The actual 369 EM/YM orientation owner is a more informative reuse than
+-- another nominal "EM is YM" statement.  Poynting E×H, Lorentz qv×B,
+-- current-force Iℓ×B and magnetic torque μ×B share a signed skeleton;
+-- they are NOT the same physical observable or field source.
+sourceNativeEMYMRightHandOrientation :
+  RightEM.RightHandRule369Boundary.rightHandRuleUsesShared369Orientation
+    RightEM.canonicalRightHandRule369Boundary ≡ true
+sourceNativeEMYMRightHandOrientation = refl
+
+sourceNativeSharedOrientationDoesNotIdentifyForceAndFlux :
+  RightEM.RightHandRule369Boundary.sharedOrientationIdentifiesPhysicalObservable
+    RightEM.canonicalRightHandRule369Boundary ≡ false
+sourceNativeSharedOrientationDoesNotIdentifyForceAndFlux = refl
+
+sourceNativeYMStillHasUnpaidRecoveryC3Seam :
+  SharedOrientation.ymUnifiedRecoveryC3StillGated ≡ false
+sourceNativeYMStillHasUnpaidRecoveryC3Seam =
+  SharedOrientation.ymUnifiedRecoveryC3StillGated
