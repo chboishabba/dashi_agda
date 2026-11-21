@@ -64,6 +64,37 @@ OWNERS = {
         "originalEverySortedValueConsumerAgrees",
         "Labels.originalF19Complete1024LabelOrderMatchesR445",
     ],
+    "DASHI/Physics/YangMills/YMClayD1OriginalFullWilsonSmallLargeFieldExact.agda": [
+        "record OriginalSmallLargePhysicalSource",
+        "originalFullCovarianceBelowSmallPlusLarge",
+        "smallFieldEnvelopeCalibration",
+        "largeFieldErrorCalibration",
+        "originalFullWilsonUniformGeometricClustering",
+    ],
+    "DASHI/Physics/YangMills/YMClayD1OriginalRealCMP116VariableCutoffExact.agda": [
+        "record OriginalRealCMP116PhysicalSelection",
+        "sourceResponseIsActualOriginalWilsonJet",
+        "uniformSourceEnvelope",
+        "originalWilsonRealCovarianceGeometricBound",
+    ],
+    "DASHI/Physics/YangMills/BalabanLiteralTwoWilsonCMP116ConnectingTailExact.agda": [
+        "record TwoWilsonCMP116PhysicalShellPayment",
+        "chargeSumBelowPhysicalRootedShell",
+        "twoWilsonMixedLogBelowPhysicalRootedShell",
+    ],
+    "DASHI/Physics/YangMills/BalabanWilsonTwoInsertionConnectedShellRound491Exact.agda": [
+        "record WilsonTwoInsertionConnectedShell",
+        "wilsonConnectedCovarianceBelowConnectingShell",
+        "wilsonCorrelationDecayTrajectory",
+    ],
+    "DASHI/Physics/YangMills/YMClayOriginalD1FullWilsonE1F19EstimateBIDIExact.agda": [
+        "originalNativeWilsonCutoff3CovarianceIsE1",
+        "record SelectedOriginalD1FullWilsonForNativeF19",
+        "originalD1SelectedCovarianceIsNativeWilson",
+        "originalF19EffectiveCovarianceFromFullWilsonD1",
+        "D1.originalFullWilsonUniformGeometricClustering",
+        "Wilson.originalWilsonExpectationExtensional",
+    ],
     "DASHI/Physics/YangMills/YMClayOriginalE1A3NativeF19WeightedBIDIExact.agda": [
         "coarseVectorTestAsNative",
         "originalE1Cutoff3IsNativeR445VectorExpectation",
@@ -275,6 +306,7 @@ CHECKS = [
     "scripts/check_ym_f19_r445_sympy_purehaar_weld.py",
     "scripts/check_ym_native_f19_weighted_slice_sympy.py",
     "scripts/check_ym_e1a3_f19_three_moment_sympy.py",
+    "scripts/check_ym_d1_full_wilson_f19_source_weld_sympy.py",
 ]
 
 def main():
