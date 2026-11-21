@@ -61,6 +61,14 @@ import DASHI.Physics.YangMills.YMClayOriginalR445ReflectedWordCMP116BIDIExact as
 -- The physical WEXT, scalar ℚ↔original ℝ, same-H and E1 are still open.
 import DASHI.Physics.YangMills.YMClayOriginalWilsonAllTimesOS1R556R281BIDIExact as OriginalAllTimesOS1Weld
 
+-- Correct original WEXT source geometry and W1/W3->OS1->R556->R551->R281 producer route.
+-- The old arbitrary-metric time axiom was vacuous; its safe negative control
+-- and both corrected original source consumers are imported here.
+import DASHI.Physics.YangMills.YMClayWilsonWEXTSelectedDistanceNonVacuityExact as OriginalWEXTNonVacuity
+import DASHI.Physics.YangMills.BalabanLiteralWilsonMarkedLocalizationSourceExact as OriginalMarkedWEXT
+import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonR556CompletionExact as OriginalTwiceWilsonWEXT
+import DASHI.Physics.YangMills.YMClayOriginalWilsonMarkedOS1AllTimesProducerWeldExact as OriginalMarkedOS1BIDI
+
 import DASHI.Physics.YangMills.YMClayD1OriginalCovarianceToR320Exact as D1OriginalCovariance
 
 import DASHI.Physics.YangMills.YMClayE1VariableCutoffCylinderLimitExact as E1VariableCutoffCylinder
