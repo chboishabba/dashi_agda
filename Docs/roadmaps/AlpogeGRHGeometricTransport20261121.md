@@ -1,3 +1,205 @@
+## 22 November 2026 — original DASHI two-sided RH and Dirichlet source audit: priority CORRECTION (CURRENT)
+
+**Finding: the prior narrow GRH P0 review materially undercounted the
+pre-existing original DASHI RH/Dirichlet machinery.** This review read
+source owners on *dashi_agda/master* and *dashi_lean4/main*, not merely
+search results from the external original author fork or newly written
+adapters. DASHI has hundreds of RH source modules across its native
+reflection, actual ζ zero/multiplicity, explicit formula, RvM/Abel,
+signed fifth/quartic, projective and pole–quotient lines. That is a
+substantial independent analytic research programme **not subsumed by
+the module-count comparison** with the external v4.33.1 all-character
+proof. Conversely, source breadth alone does not establish RH/GRH:
+the existing native status fields still explicitly keep the final
+mathematical payments OPEN.
+
+### THREE DISTINCT "both sides" operations; reuse existing theorem owners
+
+1. **Horizontal critical-line sides**:
+   `Re(s)−1/2=α>0` and `−α<0` are exchanged by
+   `s→1−s` (and same-ordinate pairing uses
+   `s→1−conj(s)`).
+   `DASHI/Mathematics/NumberTheory/RiemannXiSymmetryExact.agda`
+   already defines the separate conjugation, functional and critical
+   reflections. `RiemannReflectionOrbitDefectExact.agda` PROVES
+   the exact rational-coordinate equalities
+   `criticalReflectionNegatesDisplacement`,
+   `pairSignedDisplacementCancels`,
+   `reflectionDefectInvariant`, and
+   `pairDefectMassIsDouble`. The signed center cancels;
+   the nonnegative even defect **DOUBLES**. Its generic
+   2×2 block is explicitly **not** the actual Alpöge–Furman
+   Weil block, and no actual ζ-off-line-zero mass bound follows.
+2. **Positive vs negative heights**:
+   `Synthesis/RiemannZeta23RvMTwoSidedDiscrepancy.lean`
+   already uses actual Mathlib `IsNontrivialZero` and
+   `zeroMult` with conjugation to prove
+   `Ncount(-T2,-T1)=Ncount(T1,T2)` at good endpoints
+   and identical negative-ordinate RvM/μ quantitative
+   discrepancy. This is REAL source-written ζ
+   zero-count transport, **not** the horizontal RH
+   reflection in item 1.
+3. **Normalized target-centred left/right ordinate gaps**:
+   `Synthesis/RiemannNormalizedRvMLeftDiscrepancy.lean`
+   and `RightDiscrepancy.lean` already prove their
+   own high-endpoint prefix/Abel bounds. This is an
+   **ordinate-local** pair, not a new zero-free
+   left/right half-strip theorem.
+
+**Original G3 both-horizontal-side check implemented in place:**
+`scripts/check_rh_g3_quartic_signed_cone_geometry.py`
+(commit `8b699b99`, read-back Git blob
+`561638cdd8eef70c4e1b6f6c142609ae5177bd19`).
+For the **same original quartic**
+`Q(α,q)=α²q²−(α⁴+q⁴)/6`, exact
+`Q(−α,q)=Q(α,q)`;
+`Q(α,0)=−α⁴/6`, `Q(α,α)=2α⁴/3`.
+Thus reflection does NOT change the quartic sign or
+create a uniform favorable sign—an actual signed mass
+estimate remains essential. Local independent Python
+Fraction and SymPy 1.14 exact tests PASS 20
+reflected pairs, exact left/right rational cap
+`[62521/500000,437479/500000]`, and a
+symmetry-with-off-line-roots *non-ζ* polynomial
+countermodel. The full updated Python file and
+Lean/Agda were **not** executed in this local
+runtime; the exact assertions were independently
+tested and the committed source read back.
+Existing owner status is updated in
+`Docs/roadmaps/RHG3QuarticSignedConeSharpNegativeControl20261114.md`
+(commit `1bc25a7c`). Don't reprove this
+reflection algebra as a new GRH adapter.
+
+### What the original DASHI Dirichlet / character sources ACTUALLY pay
+
+- `DASHI/Mathematics/NumberTheory/FiniteMultiplicativeDirichletExact.agda`
+  owns exact finite factorization, coefficient/weight
+  multiplication and Dirichlet-monomial append laws;
+  its own comment expressly leaves actual
+  `n^(−s)`, infinite Dirichlet series and
+  convergence as separate realization obligations.
+- `DASHI/Analysis/BishopRiemannOriginalZetaAboveTwoExact.agda`
+  constructs a selected Bishop-native *ζ* value
+  on its stated half-plane using the original
+  Dirichlet terms; this does not provide all finite-order
+  Dirichlet characters nor an analytic `L(s,χ)`
+  for every modulus.
+- `DASHI/Analysis/RiemannAnalyticComplexCharacterExtensionExact.agda`,
+  `RiemannConstructedComplexCharacterCoreExact.agda`,
+  `RiemannExistingConstructedCharacterMachineryAssemblyExact.agda`,
+  and `RiemannCanonicalComplexCharacterAttachmentExact.agda`
+  genuinely own constructed complex/phase character
+  and carrier welds. Their `χ_t(u)=exp(−itu)`
+  Fourier/modulation character is **not definitionally**
+  a finite-modulus multiplicative
+  `DirichletCharacter ℂ N`. The canonical
+  analytic-carrier attachment remains explicitly
+  proof-relevant and some source boundary flags
+  are false. Do not erase these valuable donors
+  by stating the repo "has no Dirichlet"; do
+  not silently promote them to all-character GRH.
+- Other Bishop eta/ζ, Eisenstein/CM and Mellin
+  implementations are mathematical donors of
+  different carrier/quantification scope.
+  There is, on inspected exact heads, NO
+  demonstrated native proof term of
+  `∀ N>0, ∀χ:DirichletCharacter ℂ N`,
+  same `DirichletCharacter.LFunction χ s`
+  nonvanishing on every `Re(s)>1/2`.
+  This negative is an inspection conclusion,
+  not a claim that no such source can exist
+  in any uninspected branch.
+
+### Real RH mathematical min-cut: source strengths AND unpaid terms
+
+The native Lean
+`Synthesis/RiemannActualHighAnalyticMinCut.lean`
+(blob `4253beb0`) credits actual same-ordinate
+reflected-zero pairing/doubled signal, the
+canonical pole taper and signal floor,
+the infinite projective sum, selected
+horizontal split, actual ζ μ/RvM exact Abel,
+named Gamma defect, physical tail identity
+and projective scaling as paid/source-written.
+It also literally records
+`normalizedRvMProjectiveAttachmentPaid=false`,
+`projectivePhysicalConstantModeCancellationPaid=false`,
+`farResidualRetainsHeightSquare=false`,
+`targetDependentResidualSuppressionPaid=false`,
+`exactFarCancellationPaid=false`,
+`uniformNearLineClosurePaid=false`.
+It does **not** claim RH. `Synthesis/RiemannSelectedSignedFifthMaxCut.lean`
+makes its eventual physical signed-interior bound,
+boundary convergence and terminal limit explicit
+premises—its terminal-margin theorem is a **conditional**
+compiler. Agda's
+`RiemannG2UniformLiteralPhaseHighProducerExact.agda`
+also marks the actual uniform high-ordinate producer
+uninhabited. Do not count these as newly proved
+or as a negative refutation of RH.
+
+Existing `ClayRHR1ActualCompletedZetaWeilExplicitFormulaClassicalClosure20261116.md`
+records genuine completed ζ / all-term Weil formula
+as **classically established mathematics**, while
+the Agda analytic carrier is separately uninhabited.
+R2 original signed source papers of 17 Nov
+(`ClayRHR2ActualProjectiveMultiplierNorms`,
+`ClayRHR2ConditionalActualZeroCofinalTail`,
+`ClayRHR2ExplicitA160SelectedWRemainingLemmas`)
+already isolate the concrete **first theorem-bearing
+same-source weld**:
+`selectedQuarticFourWActualProfileIntegralExact`,
+identifying the *selected original* two-profile
+`W.signedNormalizedPairKernel` (including
+base/cosh/sign/pole coefficients) with its actual
+weighted Fourier integrals, then explicit derivative
+norms and the genuine signed finite/cofinal margin
+on **actual ζ zeros**. Generic absolute shell tails
+and fixed-height calculations cannot decide the
+universal correct-polarity signed compensation.
+
+### Priority correction: two original theorem routes, no forced replacement
+
+**Independent DASHI RH analysis — ACTIVE original-proof lane**:
+advance the selected-W source-identity/correct-sign
+R2/A2/G3/near-line actual analytic obstruction and
+its original ζ-zero/Weil input, with both sides of
+the critical line kept through the very same
+functional-equation and conjugation laws.
+Avoid duplicate reflection, arbitrary Mellin record,
+and additional paper/roadmap frameworks.
+
+**External Alpöge/Claude theorem — PARALLEL trusted admission lane**:
+its pinned original `UpperTheory.EveryCharacter`
+has a separate original source derivation and
+`N=1` ζ specialization (already audited);
+its published terminal declarations are stronger
+than ordinary RH and include **Dirichlet GRH**.
+The external source's independently reported
+kernel replay constitutes theorem-completion
+evidence that DASHI's native open analytic
+branch has **not** matched at the original
+terminal statement. The shortest native
+ordinary RH Clay consumer remains the existing
+Mathlib RH↔Clay theorem, conditional on trusted
+compatible-version original proof import.
+Full Agda Dirichlet GRH semantic transport
+is a separate stronger scope, not the only
+route forward for independent native RH.
+
+**Do not infer a numerical ranking** of independent
+research progress from 473 Lean modules, 490
+Agda files, or an external archive's 175k modules.
+The precise comparison is *theorem strength*,
+*source identity*, *accepted proof terms*,
+and *unpaid analytic inputs*.
+Any original selected-W result must update this
+same GRH roadmap and its existing native owner.
+No CI, Agda or Lean kernel executed by this audit;
+no new analytic RH/GRH theorem is claimed.
+
+---
+
 ## 22 November 2026 — P0 checker implementation and actual local receipt
 
 Lean #113 extended the EXISTING
