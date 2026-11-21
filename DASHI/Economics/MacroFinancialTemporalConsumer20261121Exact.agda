@@ -10,6 +10,7 @@ import DASHI.Economics.ChinaRetailGoldMarketTopology2026Exact as Gold
 import DASHI.Economics.AICapitalBurdenRelocation20261012Exact as Burden
 import DASHI.Economics.JPYTreasuryOpposingFlow20261121Exact as Treasury
 import DASHI.Economics.JPYTreasuryInterventionOfficialReceipts20261121Exact as FX
+import DASHI.Economics.TreasuryParYieldEventWindow20261121Exact as CMT
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 
 -- Relative clock ticks on a common declared timeline, not calendar parsing.
@@ -150,3 +151,16 @@ originalJapanQuarterTotal = FX.japanTotalMatchesOfficial
 
 originalUSSpotYen : FX.yenBoughtTenthsBillion FX.usJuly31 ≡ 794
 originalUSSpotYen = refl
+
+-- Original fixed-maturity CMT rates (historical research observations) are
+-- independent of the actor's contemporaneous information and the auction
+-- actual stop-out yield. No intervention response is causally isolated.
+actualWindowTenYearThreeBpHigher :
+  CMT.tenYearBasisPoints CMT.july29 + 3 ≡
+  CMT.tenYearBasisPoints CMT.august03
+actualWindowTenYearThreeBpHigher = CMT.windowTenYearThreeBpHigher
+
+actualWindowThirtyYearThreeBpHigher :
+  CMT.thirtyYearBasisPoints CMT.july29 + 3 ≡
+  CMT.thirtyYearBasisPoints CMT.august03
+actualWindowThirtyYearThreeBpHigher = CMT.windowThirtyYearThreeBpHigher
