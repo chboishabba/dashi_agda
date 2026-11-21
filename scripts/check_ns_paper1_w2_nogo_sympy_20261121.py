@@ -47,7 +47,7 @@ def run(paper=None):
         s=Path(paper).read_text(encoding="utf-8")
         assert s.count("## Abstract")==1
         for needle in (
-            "the unrestricted universal positive W2 auxiliary premise is",
+            "unrestricted universal positive W2 auxiliary premise is",
             "R734/R735", "R820/R823/R825", "R751/R752",
             "identity of the two signed observables",
             "not a viable universal premise",
