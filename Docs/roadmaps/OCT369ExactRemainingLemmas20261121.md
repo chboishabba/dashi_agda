@@ -60,3 +60,9 @@ Important: symbolic 1+omega+omega²=0 with sum omega^(3j)=3 is only a C3 angular
 | P0.14a | Match source paper domain and T1g basis/projector normalization to measured state | OPEN |
 | P0.14b | Material k-Bloch SOC/exchange and full magnetic sewing; MgO inter/intra transport | OPEN |
 | P0.14c | Conserve same-drive total Tmunu and compare EM/mechanical versus gravitational observables | OPEN |
+
+| P0.15-sector-energy | Original cubic projectors composed into invariant quadratic nine-component energy; homogeneous order-reversal even | 18/18 local symbolic checks; synthetic Hamiltonian only |
+| P0.15-interface | Distinct body and apparatus forces; total work-transfer W cancels from complete selected energy and Newtonian monopole proxy | 18/18 local symbolic checks; full physical source OPEN |
+| P0.15-attribution | Explicit publication/established theorem/repo-original/reconstruction/physical-claim source classes and evidential non-promotion | documentary ledger present; new scientific claim OPEN |
+| P0.16 | Actual PtMn3 SOC Bloch+tunnel Hamiltonian and experimentally calibrated external force | OPEN |
+| P0.17 | Locally covariant matter+EM+controller stress tensor with GR/KK physical source mapping | OPEN |
