@@ -55,3 +55,8 @@ Important: symbolic 1+omega+omega²=0 with sum omega^(3j)=3 is only a C3 angular
 | P0.13c | Same-source PtMn3 exchange/SOC H(k) and full Bloch sewing, not CoTaSe2 fixture | OPEN |
 | P0.13d | Same MgO barrier tunnelling channels, spin torque and TMR under measured current | OPEN |
 | P0.13e | Real covariant total stress including source and field, metric and levitation observables | OPEN |
+
+| P0.14 | L12 Mn 3c site x axial spin: 24 proper cubic operators, exact T1g dipole + T1g AFM + T2g AFM projector resolution 3+3+3; chosen trial texture in AFM T1g | **21/21 local exact SymPy checks**; crystal representation, not measured material |
+| P0.14a | Match source paper domain and T1g basis/projector normalization to measured state | OPEN |
+| P0.14b | Material k-Bloch SOC/exchange and full magnetic sewing; MgO inter/intra transport | OPEN |
+| P0.14c | Conserve same-drive total Tmunu and compare EM/mechanical versus gravitational observables | OPEN |
