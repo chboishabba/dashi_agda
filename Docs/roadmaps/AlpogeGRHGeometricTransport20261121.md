@@ -1,3 +1,95 @@
+## 22 November 2026 — original all-character → zeta descent verified; RH manuscript recovered (current)
+
+**Priority correction, not a new theorem wrapper.** The original author source
+already contains the complete *logical* specialization from its stronger
+all-character zero-free theorem to Mathlib RH. At pinned external original
+commit `7cbf7a0c32fca1badf05931879a37c3f8a2b03b4`, the literal source
+dependency is:
+
+```text
+UpperTheory.FinalTheorems.everyCharacter
+  : UpperTheory.EveryCharacter
+       (original MainConclusion.lean, derived from Gal.Int RowSrc)
+  -> allChi : UpperTheory.EveryCharacter
+       (Supplements/Kernels/MainTheorems.lean)
+  -> Formalism.VW.rh_of_every allChi : RiemannHypothesis
+       (CritLine.lean uses h 1 (1 : DirichletCharacter ℂ 1)
+        and the ORIGINAL LFunction_modOne_eq)
+  -> rhOfAll -> Main.riemannHypothesis
+  -> existing Lean #113 RHAdmission.original_mathlib_rh
+  -> existing compatible-version root Millennium RH <-> Mathlib RH consumer
+       (trusted version-crossing proof admission remains OPEN)
+
+SAME allChi -> Claim.strip allChi -> Main.LFunction_eq_zero_re
+            -> Claim.zeta allChi -> original zeta zero location;
+          -> primitive critAll through original gamma/reflection logic.
+```
+
+This is **GRH/all-character → ζ/RH**, not the invalid converse
+ordinary ζ RH → GRH for every character. The proof *methods* may
+involve zeta-style analytic ideas, but the exact terminal dependency
+is on `UpperTheory.EveryCharacter`, not on a completed ordinary RH
+proof as a sufficient premise. Thus the ordinary **Clay RH**
+root target needs its own compatible, trusted import of the
+already-existing original `riemannHypothesis`, **not** a newly
+invented all-character Agda L-function family as a prerequisite.
+A separate native Agda claim of **Dirichlet GRH** would still
+need actual `DirichletCharacter.LFunction` values, all N/χ zero
+and real-part semantics; the current Agda
+`AlpogeGRHGeometricTransportExact` is RH-only and cannot make
+this stronger statement.
+
+**Fresh exact-source audit** read the following **six pinned original
+Lean files** with exact Git blob IDs: `Main.lean` (dbd5db70),
+`Supplements/Kernels/MainTheorems.lean` (6a542d7c),
+`CharacterBoxes/EveryCharacter.lean` (6ac76956),
+`CharacterBoxes/MainConclusion.lean` (ee340012),
+`Formalism/GammaFactorNonvanishing/CritLine.lean` (95fa4da5),
+and `CharacterBoxes/ClaimStrip.lean` (60b3e96d).
+**10/10** declaration/dependency/ζ-specialisation source checks
+PASS; **3/3** adversarial substitutions (change RH source to
+self-reference, change N=1 to N=2, replace mod-one equality)
+detected. This is trusted *source readback and syntactic
+dependency auditing*, **NOT** a fresh Lean proof kernel, Lean
+typecheck, formal correctness of the whole author archive,
+or a fresh proof of RH/GRH.
+
+**Original, separate DASHI M-RH manuscript recovered:**
+`Riemann_Pole_Quotient_Reduction_2026.tex` and matching
+`Riemann_Pole_Quotient_Reduction_2026.pdf`
+in the user's existing ChatGPT file Library. Full title:
+*A Pole–Quotient Reduction for the Riemann Hypothesis*,
+working revision 21 September 2026, DASHI Collaboration.
+It is an independent M-RH manuscript **outside**
+the numbered old eight-paper and live 3-paper core.
+Its literal pole–quotient, Platt–Trudgian low region,
+normalized taper, adaptive near/far and Gamma route is
+a conditional reduction. The remaining same-source
+near-representation identity and uniform strict inequality
+`D_near+B_far+D_Gamma<C_cluster` for every high
+off-critical-line zero are **UNPAID** in that route.
+Do not treat the author's separate November all-character
+theorem as retroactive proof of this *different*
+September analytic argument. Also do not upload a
+replacement paper or overwrite the archived Library
+draft simply to document the external work.
+
+**Corrected next P0 step:** (1) directly accept pinned original
+`Main.riemannHypothesis` and the other four published
+`Main` theorems with the EXISTING fail-closed Lean
+4.33.1 script and actual kernel/axioms; (2) solve only
+the version-compatibility/root `Mathlib RH` proof import
+before consuming the existing exact Clay theorem;
+(3) treat native Agda all-character GRH semantics as
+a **distinct optional stronger formalization goal**,
+not a blocker to RH→Clay in the Lean root;
+(4) independently retain/review the M-RH high-ordinate
+analytic wall as a mathematically unsolved research route.
+No CI, Lean/Agda kernel, new RH theorem, or completed
+pole–quotient proof is claimed by this clarification.
+
+---
+
 ## 21 November 2026 — PROOF-FIRST NORTH STAR (current controlling priorities)
 
 **This is the controlling original GRH P0 roadmap, not a publication
