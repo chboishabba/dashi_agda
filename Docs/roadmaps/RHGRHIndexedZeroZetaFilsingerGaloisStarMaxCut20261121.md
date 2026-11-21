@@ -69,3 +69,31 @@ This is the source-faithful way to exploit recent Filsinger polarity and time-in
 - **OPEN full spectral/analytic square:** a proof that source-selected `consume (step (reflect f)) = consume (reflect (step f))` with the SAME source `consume` and `Residual`, and equality or accounted discrepancy relative to the actual Galois/Hecke/Weil operator. Merely postulating `SourceIndexedPhaseStep` does not instantiate it for an upstream automorphic field.
 
 **Next maximum cut:** inspect **one selected actual** original `TP.TLiftK` source subcondition involving an `IsHecke` or `IsLift` witness and test whether our source-zero/phase/sign/residual chart is a *valid fibre* of that target, not an abstract replacement. The original `TP.TLiftK` quantifies over all CM fields, Hermitian data and automorphic representations, so no finite 4-mode theorem by itself proves that theorem. Use the existing native Galois/star and typed hyperfabric owners to build the smallest same-object weld, or record a concrete counterexample. P0 RH/GRH import remains independent, no world/PG and no CI.
+
+
+## 21 November — P1-F02B nonzero indexed residual-flux acceptance and ORIGINAL theta fibre (latest)
+
+The earlier `SourceIndexedPhaseStep` assumed a **constant residual**. That is an exact fixture for some transitions, but it is too restrictive for a Filsinger-style source/sink ledger and for future nontrivial Hecke/theta remainders. Do not erase residual increments to force a commuting square.
+
+### New finite source / actual local receipt
+
+- `DASHI/Analysis/RHGRHIndexedZeroZetaResidualFluxExact.agda` **reuses** `RHGRHIndexedZeroZetaPhaseResidualWeldExact.IndexedZeroPhaseFrame`. For a source-provided natural-number increment δ, it defines `appendResidualFlux δ` with (k\mapsto k+1, r\mapsto r+δ), while retaining the actual original tagged zero / unity / ζ₃ / ζ₃² mode, sign and observed-zero flag. This does not conflate signed flux with positive residual. It proves field-by-field preservation, `appendResidualFluxLedger`, `appendResidualFluxReflects`, `twoFluxStepsLedger`, `twoFluxStepsReflect` and a literal ζ₃ zero-observation specimen with (r=9\mapsto13) for δ=4. **Source-written, Agda not checked**.
+- `scripts/check_rh_indexed_residual_flux_20261121.py`: **1,728/1,728 PASS** via actual local Python execution across 4 k-indices, 4 modes, 2 signs, 3 initial residuals, 2 observation flags, and two independently chosen increments (3×3). One and two-step square equality, source-order residual accumulation and zero/mode/sign preservation verified. Explicit check rejects pretending nonzero δ preserves a constant residual. This is a finite model check, not a general Agda kernel receipt or actual automorphic check.
+
+### The genuinely original `IsLift` proof interface
+
+The full `UpperTheory.TP.TLiftK : Prop` is **actually read from pinned original fork** at `src/Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/ThetaParseval/HalfIndexLattices/TLiftK.lean`. It universally quantifies `E [Field E] [NumberField E] [IsCMField E]`, `B`, `W.GoodK`, `n,X`, then produces `∃ d₀, ∀ d≥d₀` and, for *the actual source* `W,δ,χX,χW,mX,mW,U,lam` and all the named IsHecke/ResEtaPow/HasExp/weight and automorphy premises, an actual `∃ U', IsLift B χX χW mX mW lam U U'`.
+
+New Lean [#113 `RHSelectedThetaLiftConsumer.lean`](https://github.com/chboishabba/dashi_lean4/blob/research/alpoge-rh-source-admission-20261121/proofs/alpoge-lean433/RHSelectedThetaLiftConsumer.lean) imports the pinned source theorem `UpperTheory.TP.K.tLiftK` and exposes that **same telescope** for a chosen original `E,B,n,X`. It proves the selected conclusion by applying `UpperTheory.TP.K.tLiftK E B hgood n hn X hJ hHerm`. **This is only a faithful original source-theorem consumer**; it does not narrow the original theorem's transitive imports, construct a new Hecke character or show the finite three-mode C3 observer is a real `IsLift` datum. No original Lean 4.33.1 kernel check yet.
+
+### Revised maximum-cut acceptance
+
+1. **P0 priority unaffected**: original RH/GRH imports still stop at author theorem + paid root Mathlib↔Clay BIDI; no world/PG/CI.
+2. **P1-F02B finite**: exact (r↦r+δ) indexed source ledger and conjugation-commuting transition source-written, 1,728 finite examples passed. Open: general signed residual semiring/group and actual source-accounting law. The current choice `Nat` represents additive unsigned residual contributions with a **separate** sign label; it does **not** implement arbitrary signed cancellation.
+3. **P1-F04 original fibre**: an actual source `E,B,X,W,χX,χW,U,lam` and checked `IsLift` witness exists as a **theorem claim of the upstream author**. Our adapter exposes its exact type; the original upstream theorem still needs compatible Lean-kernel verification. Open: any source-extracted character/weight/zero mode or actual `k`-indexed family, and an observable/phase/residual intertwiner on this `IsLift` instance.
+4. **P1-F05 Galois/star**: consume `galoisRepresentations_of_thetaLift` with source `GeoOne` and a **proved** original same-fibre observer, not a generalized `C3→TP.TLiftK` inference.
+5. **Negative controls**: phase conjugation does not imply `IsHecke`; balanced zero does not imply empty phase carrier, zero L-function, or RH; exact signed residual must be evaluated against a genuine source observable, not created by a desired conclusion.
+
+**Next smallest unpaid seam:** select one actual source Hecke character in the chosen upstream telescope and identify its restriction to a finite order-3 subgroup if it exists. The certificate must provide source-defined C3 action, character/inverse relations and index/residual observable, then prove that the source theta lift and the Galois/star consumer preserve that SAME observation. An arbitrary finite character table is not yet such a restriction.
+
+**Trust:** 1,728 Python local exact cases are executed; both new Agda and original-version Lean source modules are written but uncompiled. No CI, Agda or Lean kernel receipts; no RH, GRH or universality acceptance claim.
