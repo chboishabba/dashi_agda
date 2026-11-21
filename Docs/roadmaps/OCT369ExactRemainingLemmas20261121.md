@@ -110,3 +110,9 @@ Important: symbolic 1+omega+omega²=0 with sum omega^(3j)=3 is only a C3 angular
 | P0.20d-signature | Distinguish Q8->V4 finite cover, Spin3=SU2 full, Spin(3,1) Lorentz cover and 3x3x3 physical address | Existing owners explicitly separate them, real same-object bundle/metric map OPEN |
 | P0.20e-gravity | Vierbein, Lorentz connection, gamma matrices, covariant Dirac action, metric variation and apparatus T_munu, positive physical source | OPEN |
 | P0.20f-physical | Spin torque -> external actuator force vs curvature; measured x_i coupling and 70kg human lift across 3 routes | OPEN; no gravity inference from spinor winding |
+
+| P0.21-tetrad | 3+1 metric diag(-A²,1,1,1), exact first-order spin connection and full Riemann/Ricci/Einstein | **33/33 locally executed symbolic checks**; independent geometric test case |
+| P0.21-flat-negative | Rindler A=1+alpha*x has nonzero Lorentz spin connection yet flat Riemann | Exact 4D zero curvature PASS |
+| P0.21-curved | A=1+beta*x² has R=-4beta/(1+beta*x²), transverse G_yy=G_zz=2beta/(1+beta*x²) | Exact Einstein tensor and Bianchi PASS; physical stress source OPEN |
+| P0.21-real-source | Actual PtMn3 T1g spinor+Dirac+SOC H, tetrad/metric-dependent action, kinetic spin-connection and tensor variation | OPEN |
+| P0.21-antigravity | Matter/controller/EM/SC T_munu, ξ coupling measured, Earth-field perturbation and gravimeter/clock/force counterfactual | OPEN |
