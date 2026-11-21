@@ -136,3 +136,5 @@ Important: symbolic 1+omega+omega²=0 with sum omega^(3j)=3 is only a C3 angular
 | P0.25-gravity-end | Minimal Newtonian remote response reverse |DeltaM_active|=g r²/G; positive-energy addition not repulsive | exact symbolic inverse; physical active stress, metric and anomaly OPEN |
 | P0.25-identifiability | Load+remote 2x3 rank 2; with calibrated pickup third channel 3x3 invertible; rank-null direction (-mk-1,-k,1) | exact SymPy rank and inversion PASS, empirical calibrated sensors OPEN |
 | P0.25-realweld | From actual PtMn3 OTT/MgO original data and superconducting/EM source to same-unit alpha, complete Tmunu, metric/clock/freefall, 70kg lift | OPEN |
+
+| P0.25.1-native13 | Three selected native Axis13 face pairs faceXZpm/faceXYpm/faceYZpm × two canonical orientation bits; original encode/decode commute on selected original Ternary27Point | New Agda source-written six-case proofs; original 26↔13×sign owner reused, **Agda kernel not run** |

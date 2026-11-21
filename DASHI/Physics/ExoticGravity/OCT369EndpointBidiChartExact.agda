@@ -6,10 +6,13 @@ module DASHI.Physics.ExoticGravity.OCT369EndpointBidiChartExact where
 -- identity or metric equivalence. Native geometry and typed antigravity
 -- discriminator owners retain provenance. No experimental claim follows.
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Bool using (false)
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Data.Product using (_×_; _,_)
 open import Agda.Builtin.Maybe using (Maybe; just; nothing)
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Cube
 import DASHI.Foundations.SSPTritCarrier as SSP
+import DASHI.Unified.Hyperfabric27MinusOneAntipodalSameCarrierCutExact as Native
+import DASHI.Unified.HyperfabricPunctured27Projective13OrientationExact as Q13
 import DASHI.Physics.ExoticGravity.AntigravityMaterialBidiCrossPollinationExact as Anti
 
 data MnSite : Set where mn0 mn1 mn2 : MnSite
@@ -72,13 +75,10 @@ encodeCommutesWithC3 (labelled mn2 magMinus) = refl
 rotateCubeThree : (a : Address) → rotate (rotate (rotate a)) ≡ a
 rotateCubeThree (Cube.ternary27Point a b c) = refl
 
-negateTrit : SSP.SSPTrit → SSP.SSPTrit
-negateTrit SSP.sspNegOne = SSP.sspPosOne
-negateTrit SSP.sspZero = SSP.sspZero
-negateTrit SSP.sspPosOne = SSP.sspNegOne
+-- Reuse the ORIGINAL signed antipode, no second definition.
 antipode : Address → Address
-antipode (Cube.ternary27Point a b c) =
-  Cube.ternary27Point (negateTrit a) (negateTrit b) (negateTrit c)
+antipode = Native.antipode
+
 flipDomain : Domain → Domain
 flipDomain magPlus = magMinus
 flipDomain magMinus = magPlus
@@ -93,14 +93,37 @@ encodeCommutesWithAntipode (labelled mn0 magMinus) = refl
 encodeCommutesWithAntipode (labelled mn1 magMinus) = refl
 encodeCommutesWithAntipode (labelled mn2 magMinus) = refl
 
-negateTritTwice : (t : SSP.SSPTrit) → negateTrit (negateTrit t) ≡ t
-negateTritTwice SSP.sspNegOne = refl
-negateTritTwice SSP.sspZero = refl
-negateTritTwice SSP.sspPosOne = refl
-
 antipodeTwice : (a : Address) → antipode (antipode a) ≡ a
-antipodeTwice (Cube.ternary27Point a b c)
-  rewrite negateTritTwice a | negateTritTwice b | negateTritTwice c = refl
+antipodeTwice = Native.antipodeInvolutive
+
+-- THIS is the native 13 × orientation decoding of the *same* six addresses.
+-- The orientation Bool depends on Q13's canonical representative, not on
+-- a globally fixed reinterpretation of physical magnetic domain signs.
+projectiveAddress : Label → Q13.Axis13 × Bool
+projectiveAddress (labelled mn0 magPlus) = Q13.faceXZpm , true
+projectiveAddress (labelled mn1 magPlus) = Q13.faceXYpm , false
+projectiveAddress (labelled mn2 magPlus) = Q13.faceYZpm , false
+projectiveAddress (labelled mn0 magMinus) = Q13.faceXZpm , false
+projectiveAddress (labelled mn1 magMinus) = Q13.faceXYpm , true
+projectiveAddress (labelled mn2 magMinus) = Q13.faceYZpm , true
+
+nativeProjectiveDecodeCommutes :
+  (label : Label) → Q13.decode (projectiveAddress label) ≡ encode label
+nativeProjectiveDecodeCommutes (labelled mn0 magPlus) = refl
+nativeProjectiveDecodeCommutes (labelled mn1 magPlus) = refl
+nativeProjectiveDecodeCommutes (labelled mn2 magPlus) = refl
+nativeProjectiveDecodeCommutes (labelled mn0 magMinus) = refl
+nativeProjectiveDecodeCommutes (labelled mn1 magMinus) = refl
+nativeProjectiveDecodeCommutes (labelled mn2 magMinus) = refl
+
+nativeProjectiveEncodeCommutes :
+  (label : Label) → Q13.encode (encode label) ≡ just (projectiveAddress label)
+nativeProjectiveEncodeCommutes (labelled mn0 magPlus) = refl
+nativeProjectiveEncodeCommutes (labelled mn1 magPlus) = refl
+nativeProjectiveEncodeCommutes (labelled mn2 magPlus) = refl
+nativeProjectiveEncodeCommutes (labelled mn0 magMinus) = refl
+nativeProjectiveEncodeCommutes (labelled mn1 magMinus) = refl
+nativeProjectiveEncodeCommutes (labelled mn2 magMinus) = refl
 
 -- These are DIRECT projections of original six anti-gravity endpoints.
 loadEndpoint :
