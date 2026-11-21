@@ -1,5 +1,51 @@
 # BSD S4 original E:y²=x³−x — same-source 2-isogeny, level-32 newform, Mellin and central positivity
 
+## 21 November 2026 — P0 theorem-first correction (supersedes iteration-ledgers)
+
+**Proof target, not a round number:** for the original selected E32 curve,
+realize the actual analytic L(E,s), its exact same-curve modular/eta
+identity, and a genuine nonzero central value in a pinned formal carrier.
+Separately, pay selected Mordell-Weil/Selmer/Sha and eventually the
+universal BSD rank equality. K1–K5, S1–S6, source files and PR numbers
+are attempts/donors, never milestones on the main theorem by themselves.
+
+**Substantive mathematical P0 progress:** the original S4 classical
+Mellin/Fricke argument admits the explicit positive lower bound
+`L(E,1) >= 2*(64428653584/66556260225)*exp(-pi/(2*sqrt(2)))`
+(about **0.637588175627469**), conditional on the genuine original
+Dedekind eta product and the ORIGINAL E32 level-32 modular/Mellin
+identification. Proof: for t≥1/√32, r=exp(-8πt)<1/64 by the exact
+degree-eight Taylor rational certificate for exp(21/5)>64. The two
+positive infinite eta products are uniformly ≥62/63 and ≥4094/4095.
+The full proof and authority ledger:
+`Docs/roadmaps/BSDOriginalLevel32P0PositiveTailLowerBound20261121.md`.
+Independent exact-rational regression:
+`scripts/check_bsd_level32_original_positive_tail_bound_p0.py`.
+**This improves an explicit selected S4 classical estimate; it is NOT
+a native Agda proof, nor a proof of its imported Mellin identity.**
+
+**Critical same-object correction:** the new P0
+`NormalizedOneDimensionalQSeries f g` still accepts arbitrary f and g,
+even constant-one functions. Its source-written
+`constantUnitNormalizedReceipt` is a deliberate countermodel showing
+that abstract normalized all-n equality does **not** prove f is the
+actual original E32 elliptic newform. The `BSD.EllipticLFunctionData`
+record is indexed by E32 but its `eulerProduct : Set` and
+`analyticContinuation : Set` fields are *uninhabited semantic
+requirements*, not computed analytic L-functions. A p=5 original row
+does not fix all-n coefficients. The pending native theorem must
+identify the **actual original coefficients** and analytic function
+with the level-32 eta coefficients, then transfer the same Mellin value.
+
+**Next source proof payments:** actual analytic eta product and
+imaginary-axis positivity in the selected carrier; Newman/Ligozat
+analytic theorem and `dim S₂(Γ₀(32))=1` on a genuine form space;
+a verified E32 modularity/2-isogeny L-series equality for **all n**;
+typed Fricke/Mellin source equality; transitive kernel acceptance.
+No rank-zero selected BSD strong formula follows from a p5 receipt
+or from this improved positive-tail inequality alone.
+
+
 ## 21 November 2026 — master-native Agda BSD P0 source weld
 
 **Reconciliation:** the source-identified original Agda golden BSD K1–K5 and conductor-32 K4 modules from historical #1500 already exist on `master` (key matching blob SHA checked). #1500 diverges substantially from current `master`; no 49,000-commit historical branch replay or second Kummer/eta/Hecke stack is warranted. The active P0 integration is a NEW `master`-based branch, `agent/bsd-p0-original-level32-samecurve-weld-20261121`.
