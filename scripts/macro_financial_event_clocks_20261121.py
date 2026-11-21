@@ -89,3 +89,38 @@ def sentiment_available(score: float | None, published_at: str, as_of: str) -> f
     if not isfinite(score) or not 0 <= score <= 100:
         raise ValueError("fear-greed index outside 0..100")
     return score
+
+
+@dataclass(frozen=True)
+class QuotedPrice:
+    observed_at: str
+    price: float
+    source_id: str
+
+    def validate(self) -> None:
+        utc(self.observed_at)
+        if not self.source_id.strip() or not isfinite(self.price) or self.price <= 0:
+            raise ValueError("invalid quoted price or source")
+
+
+def threshold_transitions(quotes: Iterable[QuotedPrice], level: float, as_of: str) -> tuple[str, ...]:
+    """Classify crossings; support/resistance requires separate depth evidence."""
+    if not isfinite(level) or level <= 0:
+        raise ValueError("invalid threshold")
+    cutoff = utc(as_of)
+    eligible = []
+    for q in quotes:
+        q.validate()
+        if utc(q.observed_at) <= cutoff:
+            eligible.append(q)
+    eligible.sort(key=lambda q: (utc(q.observed_at), q.source_id))
+    def relation(q: QuotedPrice) -> int:
+        return (q.price > level) - (q.price < level)
+    return tuple(
+        "touch" if relation(curr) == 0
+        else "cross-up" if relation(prev) < 0 and relation(curr) > 0
+        else "cross-down" if relation(prev) > 0 and relation(curr) < 0
+        else "leave-touch" if relation(prev) == 0 else "unchanged"
+        for prev, curr in zip(eligible, eligible[1:])
+        if relation(prev) != relation(curr)
+    )
