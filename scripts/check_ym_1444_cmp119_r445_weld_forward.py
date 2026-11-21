@@ -64,6 +64,16 @@ OWNERS = {
         "originalEverySortedValueConsumerAgrees",
         "Labels.originalF19Complete1024LabelOrderMatchesR445",
     ],
+    "DASHI/Physics/YangMills/YMClayOriginalF19R445PureHaarReceiverCandidateExact.agda": [
+        "transportPermutationAction",
+        "originalF19ProgramAsOriginal1024",
+        "originalF19PermutationIsR445Reorder",
+        "originalF19FlatPairBlockAgreement",
+        "originalNativeBlockIsOriginalFlatPairBlock",
+        "originalActualF19PureHaarReceiver",
+        "originalNativePureHaarBlockedIsCoarseProductHaar",
+        "Receiver.originalR445PureHaarBlockedIsOriginalCoarseHaar",
+    ],
     "DASHI/Physics/YangMills/YMClayOriginalF19R445Native64HolonomySquareExact.agda": [
         "originalNativeCoarse64",
         "originalExplicitParityCoarse64",
@@ -244,6 +254,7 @@ CHECKS = [
     "scripts/check_ym_r445_time_k_residual_hyperfabric.py",
     "scripts/check_ym_original_f19_r445_selected_residual_source.py",
     "scripts/check_ym_f19_r445_full1024_labels_p0.py",
+    "scripts/check_ym_f19_r445_sympy_purehaar_weld.py",
 ]
 
 def main():
