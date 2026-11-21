@@ -18,6 +18,7 @@ import numpy as np
 from itertools import product
 import check_oct369_p018_periodic_tunnel_stress as material
 import check_oct369_p029_bloch_kubo_reuse as native
+from oct369_covariant_bloch_geometry import physical_cell_jets
 
 T=0.55
 CHEM=0.07
@@ -149,16 +150,11 @@ def cell_tensors(kf,corrected=True):
             DC[j]+=1j*R[j]*h
             for k in range(3): DDC[j,k]-=R[j]*R[k]*h
     if not corrected:return HC,DC,DDC
-    # D_i = partial_i - i [X_i, *] for X_i the on-site position in lattice units.
-    Dcov=np.zeros_like(DC)
-    DDcov=np.zeros_like(DDC)
-    def comm(X,Y):return X@Y-Y@X
-    for j in range(3):
-        Dcov[j]=DC[j]-1j*comm(POSITION[j],HC)
-        for k in range(3):
-            DDcov[j,k]=(DDC[j,k]-1j*comm(POSITION[j],DC[k])
-                         -1j*comm(POSITION[k],DC[j])
-                         -comm(POSITION[j],comm(POSITION[k],HC)))
+    # This physical-cell geometry adapter is the original crystal-accounting
+    # contract specialized to B=I, p_cart=2*pi*k_frac. It carries the
+    # orbital-position commutators in both first and second derivatives.
+    # P0.32 checks nonorthogonal lattice basis changes independently.
+    Dcov,DDcov=physical_cell_jets(HC,DC,DDC,POSITION)
     return HC,Dcov,DDcov
 
 

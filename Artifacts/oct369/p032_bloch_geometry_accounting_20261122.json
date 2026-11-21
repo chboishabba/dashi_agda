@@ -1,0 +1,60 @@
+{
+  "scope": "BIDI crystal direct/reciprocal reindex, basis-covariant physical first/second Bloch derivatives and generic SU2 pure-gauge controls; P0.18 unfitted 24-bond model reconstructed exactly",
+  "local_assertions_passed": 56,
+  "executed_git_script_blob_sha": "40e60da16a099a92cff8ef84ae8b40a540929745",
+  "executed_git_helper_blob_sha": "c65886d0d3bacba1f955a4861010514ec7b27c39",
+  "local_execution": "Local Python 3 NumPy 2.3.5/SymPy 1.14: source-matched 56/56 PASS, py_compile PASS; Agda/CI not run",
+  "original_p031_refactored_source_blob": "9884d70d33d892a829ea4141c9824f380e7c1e04",
+  "original_p031_full_115_replay_after_refactor": false,
+  "max_hamiltonian_gauge_residual": 6.661338147750939e-16,
+  "max_first_covariant_derivative_residual": 3.0531133177191805e-16,
+  "max_second_covariant_derivative_residual": 3.7238012298709097e-16,
+  "max_crystal_primitive_basis_relabelling_residual": 5.551115123125783e-16,
+  "min_naive_missing_connection_discrepancy": 1.0353363950432262,
+  "sheared_direct_lattice": [
+    [
+      0.8,
+      0.12,
+      0
+    ],
+    [
+      0,
+      1.1,
+      0.17
+    ],
+    [
+      0,
+      0,
+      0.6
+    ]
+  ],
+  "integral_gl3_change": [
+    [
+      1,
+      1,
+      0
+    ],
+    [
+      0,
+      1,
+      1
+    ],
+    [
+      0,
+      0,
+      1
+    ]
+  ],
+  "arbitrary_smooth_SU2_basis": "exact rational Cayley transform, noncommuting Ω_x/Ω_y, D_i and D_iD_j equivariant, pure-gauge curvature zero",
+  "physical_photon_velocity_units_calibrated": false,
+  "same_material_PtMn3_Wannier_source": false,
+  "original_Sato_Hayami_bulk_integral_converged": false,
+  "coil_EM_controller_stress": false,
+  "metric_gravity_or_lift": false,
+  "attribution": {
+    "original_math": "Bloch/Wannier gauge and bundle connections, IUCr direct/reciprocal crystallography, non-Abelian pure-gauge identities",
+    "original_external": "Sato and Hayami 2026 Eq11-18 original spin magnetic octupole; Oike/Peters/Shinada 2025 bulk thermodynamics; Kang et al Nature 2026 PtMn3 OTT/TMR",
+    "DASHI_donors": "crystallography_native_lattice_hyperfabric_reuse.md; CrystalRealizationConsumerContractExact; TetragonalAtomicFourierRealizationExact; P0.18, P0.29 and P0.31",
+    "DASHI_new": "reusable physical first/second Bloch jets, sheared lattice source-relabel checks, arbitrary SU2 connection null controls"
+  }
+}

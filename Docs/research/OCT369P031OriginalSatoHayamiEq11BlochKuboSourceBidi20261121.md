@@ -20,3 +20,7 @@ Checks over four generic k include band U1 rephasing gauge, C3 axial covariance 
 
 ## Next endpoint-first owner payments
 Read/implement original published Sato/Hayami Methods degeneracy limits *without hiding divergent band terms*, plus a literal PtMn3 Wannier H(k,h) with validated crystal basis, magnetic domain/Zeeman/spin normalization and source DOI/input deck. Test full BZ mesh/gap convergence and reproduce a SOURCE original published benchmark value before associating physical units. Apply fixed film sample and Maxwell coil with a measured B second-derivative tensor, retain 18D vs 7D accessible rank, source reaction, controller energy and all P0.25 endpoint discriminators. A nonzero numerical octupole in a schematic band model is NOT new physical evidence, gravitational mass control, superconducting lift or demonstration of human levitation.
+
+
+## P0.32 crystallographic connection refactor — 2026-11-22
+P0.31's old inline orbital-position commutator correction was replaced by `oct369_covariant_bloch_geometry.physical_cell_jets`. The helper is the standard Bloch/Wannier connection, not a new theory. The independent P0.32 non-orthogonal crystal and general SU2 smooth frame check passed 56/56; current refactored full P0.31 source blob is `9884d70d33d892a829ea4141c9824f380e7c1e04`. The original 115-check P0.31 run belongs to historical `f859a519864f8750312490d209d4d0244b92262a`; it is not a new full-suite replay. Source attribution to original theory, crystal and existing DASHI producers unchanged.

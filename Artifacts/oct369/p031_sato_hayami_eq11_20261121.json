@@ -92,5 +92,9 @@
     "Kang": "DOI 10.1038/s41586-026-11172-5 experimental torque"
   },
   "native_DASHI": "P0.18 and P0.29 original producers, CoTaSe2 original Bloch/Kubo and crystal source",
-  "new_DASHI": "published Eq11 numerical consumer and basis-dependent source nonpromotion/negative controls"
+  "new_DASHI": "published Eq11 numerical consumer and basis-dependent source nonpromotion/negative controls",
+  "historical_full_115_suite_passed_on_blob": "f859a519864f8750312490d209d4d0244b92262a",
+  "current_p031_geometry_refactor_blob": "9884d70d33d892a829ea4141c9824f380e7c1e04",
+  "current_p031_full_115_suite_replayed_after_refactor": false,
+  "note_after_p032": "Historical 115/115 source verified for f859a519... P0.32 rewires only the geometry correction to shared helper; independent 56/56 geometry tests passed on exact new script and helper, full Eq11 suite needs replay against refactored file."
 }

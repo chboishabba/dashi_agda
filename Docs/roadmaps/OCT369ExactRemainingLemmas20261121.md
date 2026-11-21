@@ -179,3 +179,9 @@ Important: symbolic 1+omega+omega²=0 with sum omega^(3j)=3 is only a C3 angular
 | P0.31-BZ | Symmetric coarse 81/192/375 orbital-k source samples: mean tensor norms .009045/.005960/.003722 | **NOT CONVERGED**; no bulk octupole value admitted |
 | P0.31-degeneracy | High-symmetry exact degeneracies rejected under nondegenerate Eq11 formula | fail-closed; published full Methods degeneracy-safe original formula still OPEN |
 | P0.31-physical | Source PtMn3 refined magnetic domain, literal Wannier bands/H(k,h), SI spin Zeeman, converged 18D bulk M, Maxwell coil/SC/film and Tmunu/gravity measurement | OPEN |
+
+| P0.32-crystal-BIDI | Exact direct basis B vs reciprocal k, GL(3,Z) U with B'=BU, r'=U^-1r, R'=U^-1R, k'=U^Tk, same 24-bond crystal and source operator | **56/56 local assertions**, max relabel residual 5.55e-16; no Agda kernel |
+| P0.32-physical-jets | Orbital-position covariant first/second Cartesian p derivative reconciles cell H and embedded H, with a missing-connection negative control | 3.05e-16 and 3.72e-16 errors; naive >1.035 model units |
+| P0.32-general-frame | Exact noncommuting k-dependent rational SU2 Cayley frame, Ω=(dU)U†, pure-gauge flatness and D_i/D_iD_j covariance | Exact SymPy identities PASS; NOT spacetime Lorentz curvature |
+| P0.32-P031-refactor | Reuse shared helper within original Sato/Hayami Eq11 P0.31 `cell_tensors` rather than duplicate geometry | Old 115 tests historical for old blob; full current P0.31 executable **not independently replayed** |
+| P0.32-material/GR | Real PtMn3 Wannier/domain, converged original octupole, Maxwell/SC/controller source, metric/gravimetry | OPEN |
