@@ -1,0 +1,162 @@
+{
+  "schema": "dashi.ym-steelman-bidi-reverse-consumer.v1",
+  "source_pr": 1536,
+  "source_head": "4ad47fafb11b96c4a28a614be458dfb5eefc2c00",
+  "method": "reverse solve from original physical consumer; no parallel Hamiltonian, clock, measure or published RP theorem",
+  "owners": [
+    {
+      "file": "DASHI/Physics/YangMills/YMClayOriginalR445ReflectedWordCMP116BIDIExact.agda",
+      "symbols": [
+        "originalCenteredReflectedOSIsOriginalR320",
+        "originalMixedJIsSameCenteredReflectedOS"
+      ],
+      "role": "finite original Wilson n=3 centered OS/CMP116 same-source covariance",
+      "blob_sha": "43a9ba94c93307e7b1a2a0259bd2b62d5233dc34",
+      "symbol_receipts": [
+        {
+          "symbol": "originalCenteredReflectedOSIsOriginalR320",
+          "present": true
+        },
+        {
+          "symbol": "originalMixedJIsSameCenteredReflectedOS",
+          "present": true
+        }
+      ]
+    },
+    {
+      "file": "DASHI/Physics/YangMills/YMClayOriginalWilsonMarkedOS1AllTimesProducerWeldExact.agda",
+      "symbols": [
+        "OriginalWilsonMarkedOS1PhysicalInputs",
+        "originalWEXTDownstreamFromOS1",
+        "originalMarkedOS1CompilesToR556",
+        "originalMarkedOS1SameSpectrumClustering"
+      ],
+      "role": "marked W1/W3, selected geometry and original R556 producer",
+      "blob_sha": "011a089d435aeb418eb1ca2b5da2585da3e374a4",
+      "symbol_receipts": [
+        {
+          "symbol": "OriginalWilsonMarkedOS1PhysicalInputs",
+          "present": true
+        },
+        {
+          "symbol": "originalWEXTDownstreamFromOS1",
+          "present": true
+        },
+        {
+          "symbol": "originalMarkedOS1CompilesToR556",
+          "present": true
+        },
+        {
+          "symbol": "originalMarkedOS1SameSpectrumClustering",
+          "present": true
+        }
+      ]
+    },
+    {
+      "file": "DASHI/Physics/YangMills/YMClayOriginalWilsonAllTimesOS1R556R281BIDIExact.agda",
+      "symbols": [
+        "originalAllWilsonPairsTimesTests",
+        "SameOSAllWilsonPairsTimesSpectrum",
+        "SameOriginalOS1R556TimeGeometry",
+        "originalWilsonSourceDistanceIsSameOS1Time"
+      ],
+      "role": "single all-pair/all-time covariance and R281 spectral consumer",
+      "blob_sha": "7a62a5b1eb48966cfe651c36817a545d4f8de57b",
+      "symbol_receipts": [
+        {
+          "symbol": "originalAllWilsonPairsTimesTests",
+          "present": true
+        },
+        {
+          "symbol": "SameOSAllWilsonPairsTimesSpectrum",
+          "present": true
+        },
+        {
+          "symbol": "SameOriginalOS1R556TimeGeometry",
+          "present": true
+        },
+        {
+          "symbol": "originalWilsonSourceDistanceIsSameOS1Time",
+          "present": true
+        }
+      ]
+    },
+    {
+      "file": "DASHI/Physics/YangMills/YMClayOriginalWilsonOS1R556R281CommutingSquareExact.agda",
+      "symbols": [
+        "originalWilsonTimeTranslationSquare",
+        "originalFiniteCovarianceSquare",
+        "originalContinuumCovarianceSquare",
+        "originalOS1SquareEndsInSameR281Spectrum"
+      ],
+      "role": "same original OS1/R556/R278/R281 commuting square",
+      "blob_sha": "47bf7b665dcff123611033fd4952a2ddece10a0b",
+      "symbol_receipts": [
+        {
+          "symbol": "originalWilsonTimeTranslationSquare",
+          "present": true
+        },
+        {
+          "symbol": "originalFiniteCovarianceSquare",
+          "present": true
+        },
+        {
+          "symbol": "originalContinuumCovarianceSquare",
+          "present": true
+        },
+        {
+          "symbol": "originalOS1SquareEndsInSameR281Spectrum",
+          "present": true
+        }
+      ]
+    }
+  ],
+  "consumer_chain": [
+    {
+      "rank": 1,
+      "consumer": "actual continuum OS H spectral gap",
+      "existing": "R281 / P3 / R333 same-H spectral compiler",
+      "admission": "physical one-H identification, norm-dense nonvacuum Wilson test vectors, strict positive physical-time decay",
+      "status": "open_physical"
+    },
+    {
+      "rank": 2,
+      "consumer": "original same-family all-word all-time R281 covariance/correlation",
+      "existing": "SameOSAllWilsonPairsTimesSpectrum / originalOS1SquareEndsInSameR281Spectrum",
+      "admission": "one physical R281 spectrum indexed by ((original Wilson left,right),time) and same selected OS1 time translation",
+      "status": "conditional_compiler_available"
+    },
+    {
+      "rank": 3,
+      "consumer": "R556/R551/R278 original physical covariance convergence and clustering",
+      "existing": "originalMarkedOS1CompilesToR556 / originalMarkedOS1SameSpectrumClustering",
+      "admission": "original literal W1/W3 physical estimates, bounded Wilson F/G/FG, selected R304 source distance and finite-continuum law",
+      "status": "conditional_compiler_available"
+    },
+    {
+      "rank": 4,
+      "consumer": "native R445 fine/coarse reflected original Wilson observable",
+      "existing": "originalCenteredReflectedOSIsOriginalR320 / originalMixedJIsSameCenteredReflectedOS; published Wilson RP owner",
+      "admission": "real Wilson R445 to rational CMP119/T5 source scalar/measure compatibility, native reflection-positive-time and published expectation convention",
+      "status": "open_same_source"
+    }
+  ],
+  "geometric_consumers": [
+    "originalOS1TimeTranslate",
+    "R332.supportDistanceIsTime",
+    "R304.physicalDistance",
+    "originalWilsonTimeTranslationSquare",
+    "originalFiniteCovarianceSquare"
+  ],
+  "nonpromotion": [
+    "finite centered covariance != uncentered OS Gram",
+    "real R445 expectation != rational R575 CMP119/T5 without comparison",
+    "published Wilson RP available != same-original all-word application inhabited",
+    "one R281 correlation producer != reconstructed physical H_OS without identification",
+    "optical temporal reflection != Euclidean OS reflection",
+    "Maxwell Cartan U1 != interacting SU(N) Clay YM gap"
+  ],
+  "kernel_checked": false,
+  "local_test": "source symbol/blob validation only",
+  "CI": false
+}
