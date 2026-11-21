@@ -100,7 +100,8 @@
       "dcNegativeIsMidpoint": false,
       "idealOutput": "P-M=abs(v); M-N=abs(v); P-N=2abs(v)",
       "compatibility": "if midpoint is mid-rail and half-potential refers P-to-M",
-      "weakness": "requires actual separately wired negative rail; all-forward strict literal reading does not match"
+      "weakness": "requires actual separately wired negative rail; all-forward strict literal reading does not match",
+      "modelClassificationCorrection": "Same four-diode bridge skeleton as BRIDGE4; differs by midpoint-referenced output loads/return rather than diode orientations."
     },
     {
       "id": "BRIDGE_N_EQ_M",
@@ -115,7 +116,8 @@
       "dcNegativeIsMidpoint": true,
       "idealOutput": "ordinary bridge imposes N-M=-abs(v) and hard bond imposes N-M=0",
       "compatibility": "contradiction for nonzero v in ideal symmetric-winding model",
-      "weakness": "real current/clamping depends on finite transformer/diode impedance; does not assert actual original wired this way"
+      "weakness": "real current/clamping depends on finite transformer/diode impedance; does not assert actual original wired this way",
+      "nonidealCorrection": "With real finite winding resistance, active half-cycle loop M=N -> diode N->negative winding end -> winding series resistance -> M can conduct; clamp I approx |v|/Rs, heat |v|²/Rs. This is not proof original was wired that way."
     }
   ],
   "idealModel": {
@@ -171,5 +173,13 @@
     "DASHI.Physics.Motors.SmithFilsingerOriginalMaxwellMeterIntervalWeldExact",
     "DASHI.Physics.Motors.SmithFilsingerOriginalMaxwellRestoredMeterFundingExact"
   ],
-  "safety": "analysis of existing transcripts only; no high-voltage construction or electrical intervention instructions"
+  "safety": "analysis of existing transcripts only; no high-voltage construction or electrical intervention instructions",
+  "amendment20261122": {
+    "status": "Prior four-hypothesis list NOT exhaustive; superseded by explicit source-worded cap/coil input grouping, direct-clamp loop and finite R/C/LC return.",
+    "newLedger": "Artifacts/smith-filsinger/midpoint_return_clamp_capcoil_bidi_20261122.json",
+    "sourceWordingMissingPreviously": "two diodes come off the cap, two diodes come off here",
+    "classificationCorrection": "Split rails and an isolated full bridge can be the same four-diode skeleton with different load/return referencing; an ordinary bridge N hard bonded to M is NOT impossible real hardware, only incompatible with a fixed ideal nonzero winding voltage without source sag. With finite resistance it conducts through a clamped negative half-winding and costs real input work.",
+    "localModel": "/mnt/data/check_filsinger_midpoint_return_backsolve_sympy.py, 65/65 executed source-equivalent checks",
+    "realWorldStatus": "Unverified source pin mapping and electric power"
+  }
 }
