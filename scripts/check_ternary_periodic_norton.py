@@ -24,7 +24,7 @@ def symbolic_norton():
     return 2
 
 
-def fixture(dim,beta,amplitude):
+def fixture(dim,beta,amplitude,return_states=False):
     B=np.asarray(incidence(dim),dtype=float)
     nv,ne=B.shape; N=2*nv+ne
     src=np.zeros(nv);src[0]=1.
@@ -99,7 +99,9 @@ def fixture(dim,beta,amplitude):
         assert np.max(np.ptp(nodes[:,nv:nv+ne],axis=0))>1e-7
         assert np.max(np.ptp(nodes[:,nv+ne:],axis=0))>1e-7
     assert works[0]>0 and works[1]>=0 and works[2]>0 and works[3]>=0
-    return dict(dim=dim,beta=beta,amplitude=amplitude,residual=res,source_input=works[0],source_loss=works[1],load=works[2],relaxation=works[3],storage_change=works[4],state_span=float(np.max(np.ptp(nodes,axis=0))))
+    result=dict(dim=dim,beta=beta,amplitude=amplitude,residual=res,source_input=works[0],source_loss=works[1],load=works[2],relaxation=works[3],storage_change=works[4],state_span=float(np.max(np.ptp(nodes,axis=0))))
+    if return_states: result["states"]=nodes.copy()
+    return result
 
 
 def run():
