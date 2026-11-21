@@ -1,3 +1,11 @@
+## 22 November 2026 — original Wilson chessboard source correction / four-axis R445 audit
+
+**Actual correction:** #1444's original 20-Nov microscopic chessboard donor used an off-unit-cube transverse parity formula. Corrected owning source commit [76802c60](https://github.com/chboishabba/dashi_agda/commit/76802c60ff135ed5083f9b06b59bb387852fd403) replaces `x+(x mod 2)+s` by `x+((s-x) mod 2)` for `s=0,1`. The corrected 24 classes still cover `V/4` distinct plaquettes four times, but now select actual cube faces; local exact L=4/6/8 audit found 3,072/15,552/49,152 old off-cube transverse assignments, zero corrected.
+
+**Original Wilson/R445 source:** [four-axis site-plane and BIDI audit](../../scripts/check_ym_original_wilson_four_axis_chessboard_bidi_20261122.py) and [source comparison](../physics/YMClayOriginalWilsonPeriodicConflictColoring12R44520261121.md). Independent local integer checks at L=4/6 verified real-trace noncommutative plaquette-word reflection, boundary/halfspace separation and native side-four 128 selected + 896 spectators retained, with 64 blocked two-link inverse/order identities. Repo script committed/read back but exact checkout not independently executed; no Agda kernel acceptance.
+
+**P0 physical cut stays W1/W3:** Site-plane geometry is a finite prerequisite, not full iterated Wilson chessboard Cauchy-Schwarz on the actual boundary-link observable algebra. The 19/20-Nov sparse microscopic bad-contour donor is conditional on that applicability. Even if accepted, it does not establish the original CMP119/122/116 marked-J cluster-charge identity, good-field propagator, full small/large Wilson covariance, cutoff-independent physical rate, original E1 continuum OS/same-H D2, N1 or all compact simple G. Do not reimplement 12/8 coloring or reclassify the chessboard microscopic donor as absent.
+
 ## 21 November 2026 — controlling YM P0 theorem-first directive
 
 
