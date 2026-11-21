@@ -1,5 +1,11 @@
 # Alpöge/Claude RH–GRH × DASHI geometric transport (21 November 2026)
 
+## 21 Nov — main-native CM conductor integration: draft Lean #114 supersedes stale cross-branch blocker
+
+Live `chboishabba/dashi_lean4@main` contains old #69 canonical cubic/Jacobi original `splitJacobiEisensteinElement` and old #73 original `splitPrime_primary_associate_existsUnique`, **byte-identical** to original branch owners. New [draft Lean PR #114](https://github.com/chboishabba/dashi_lean4/pull/114) based on `main` imports both and directly proves source-written all-split-prime `originalJacobi_primary_unit_existsUnique` and, via small NEW ported `EisensteinJZeroPrimaryRayModulusBidiExact.lean`, `originalJacobi_ray_unit_existsUnique`. This eliminates the bogus blocker “need to merge 69+73 original files”. It **does not** prove the specific normalizing unit is −1; that is explicitly conditional on original same-curve Frobenius `a_p≡2 mod6`, requiring original finite-field 6-torsion/cardinality proof. Global ideal-theoretic Hecke and universal GRH remain separate open gates.
+
+Main-branch source README/roadmap: `Docs/roadmaps/JZeroMainNativeOwnerIntegration20261121.md` on draft #114. No kernel/axiom/CI execution in this session, so source-written theorems must stay pending. GRH P0 original `EveryCharacter` remains highest priority.
+
 ## 21 November — main-first CM/Hecke owner convergence and actual integrator PR #114
 
 Live `chboishabba/dashi_lean4@main` already includes BOTH former PR #69 Jacobi/Euler source and PR #73 universal Eisenstein primary-unit normalization, **byte-identical** to their old topic versions. Earlier “need merge #69 with #73 first” statements applied to stale topic branches, not main. New [main-derived Lean PR #114](https://github.com/chboishabba/dashi_lean4/pull/114) now applies the ORIGINAL `splitPrime_primary_associate_existsUnique` directly to the ORIGINAL `splitJacobiEisensteinElement` of norm p (all p>3, p%3=1), with the same source Frobenius trace and a typed open mod-six consumer. No copied primary constructor/character and no new norm-p proxy. Main-based branch ahead 3 / behind 0 at PR creation. Only newer source-written #73 primary↔ray and #69 ray/conjugate/coordinate bridge modules are absent from main.
