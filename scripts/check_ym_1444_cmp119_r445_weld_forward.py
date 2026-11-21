@@ -64,6 +64,18 @@ OWNERS = {
         "originalEverySortedValueConsumerAgrees",
         "Labels.originalF19Complete1024LabelOrderMatchesR445",
     ],
+    "DASHI/Physics/YangMills/YMClayOriginalF19R445Native64HolonomySquareExact.agda": [
+        "originalNativeCoarse64",
+        "originalExplicitParityCoarse64",
+        "originalNative64IsExplicitParity64",
+        "originalF19SortedCoarse64",
+        "originalF19Sorted64AreNativeParity64",
+        "originalPhysicalF19Blocked64EqualsNativeR445",
+        "originalF19AndNativeR445Actual64CommutingSquare",
+        "originalF19CoarseWilsonObservableEqualsNativeR445",
+        "NativeParity.originalR445NativeBlockAgreesExplicitParity",
+        "F19Block.originalF19BlockedLinksOnR445Coordinates",
+    ],
     "DASHI/Physics/YangMills/YMClayOriginalF19R445PhysicalBlockedObservableSquareExact.agda": [
         "originalF19BlockedLinksOnR445Coordinates",
         "originalF19BlockedWilsonObservableSquare",
