@@ -36,3 +36,9 @@ Important: symbolic 1+omega+omega²=0 with sum omega^(3j)=3 is only a C3 angular
 | P0.08 | Back-solve measured/target force and gravity field to source tensor/field/currents | OPEN |
 | P0.09 | Blind calibrated EM, seismic, buoyancy, thermal, electrostatic negative controls | OPEN |
 | P0.10 | Independent replication, mechanism class, same-object authority | OPEN |
+
+| P0.11 | Toy energy -> weak-field gravitational source by differentiation; 1-J field benchmark | **8 symbolic assertions locally PASS**; material source OPEN |
+| P0.12 | Material-specific PtMn3 O tensor -> SAME H and energy change | OPEN |
+| P0.13 | Complete controller, magnet, field, supports and environment stress energy | OPEN |
+| P0.14 | Metric variation / nonminimal coupling symmetry and empirical bounds | OPEN |
+| P0.15 | Same-apparatus gravimetric vs electromagnetic force identification | OPEN |
