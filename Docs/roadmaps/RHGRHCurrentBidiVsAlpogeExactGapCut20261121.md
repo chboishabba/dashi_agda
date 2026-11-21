@@ -105,3 +105,9 @@ Counterexample: with (m=1), (b=t=0), (u\in[-1,1]), and (q=+1) versus (q=-1), the
 | Geometric improvement to fork itself | actual `TP.TLiftK` / `GalStar.Row0b recT` are deeper source-typed targets | descend selectively to those **only** after testing exact geometric producer eligibility |
 
 No new postulate is asserted, no unconditional algebraic `RiemannHypothesis` witness is fabricated and no stronger analytic theorem is claimed. No CI, no local Lean or Agda kernel run. The exact symbolic test is a finite regression, not completion of RH.
+
+### Logical direction / vacuity warning (mandatory)
+
+**This collapse is a forward consumer of an already admitted RH theorem, not a step toward proving RH.** In the original G2 setup, `nearOff` may select *off-critical-line zeros*. Under RH there are no such actual zeros; quantification over the selected off-line carrier is then vacuous. Treating the hypothesis that all selected zero horizontal displacements vanish as an assumption within a proof by contradiction would be circular if that assumption is precisely the RH conclusion being sought. The result is useful for *post-RH simplification and checking the same-object weld*, or potentially for proving a conditional consequence in a broader zero population, **not for paying an independent G2 contradiction or replacing the original fork proof**. The signed `+8/-8` test illustrates nonentailment in an abstract scalar model, not an actual off-line zero under RH.
+
+For an **independent geometric improvement to the external RH proof**, return to the *upstream original source* `TP.TLiftK → GalStar.Row0b recT → EveryCharacter` and prove the same typed producer from existing DASHI geometry without assuming `RiemannHypothesis` or `Claim.Zeta`. Mark any geometric route requiring zero-horizontal RH as circular for RH-proof purposes.
