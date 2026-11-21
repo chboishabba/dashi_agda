@@ -21,6 +21,17 @@ OWNERS = {
         "originalVariableN3IsNativeR445FineMeasure",
         "originalN3LiteralMixedLogJetIsActualR320PushforwardCovariance",
     ],
+    "DASHI/Physics/YangMills/YMClayOriginalWilsonAllTimesOS1R556R281BIDIExact.agda": [
+        "originalAllTimesWilsonTests",
+        "originalAllTimesSourceCovarianceConverges",
+        "originalAllTimesSourceContinuumHalfRate",
+        "originalAllTimesSameR281Correlation",
+        "originalAllTimesSameR281SpectrumHasClustering",
+        "SameOriginalOS1R556TimeGeometry",
+        "originalWilsonSourceDistanceIsSameOS1Time",
+        "R556.indexedAsContinuumClustering",
+        "R332.supportDistanceIsTime",
+    ],
     "DASHI/Physics/YangMills/YMClayOriginalR445ReflectedWordCMP116BIDIExact.agda": [
         "originalSameFineSourceN3",
         "originalCenteredReflectedOSIsOriginalR320",
@@ -32,6 +43,7 @@ OWNERS = {
         "YMClayR445SelectedTimeReflectionForwardExact",
         "YMClayOriginalR445ReflectedPointwiseWordWeldExact",
         "YMClayOriginalR445ReflectedWordCMP116BIDIExact",
+        "YMClayOriginalWilsonAllTimesOS1R556R281BIDIExact",
     ],
     "DASHI/Physics/YangMills/YMClayNativeR445TemporalReversalExact.agda": [
         "originalSUNTimeReversalTwoLink",
