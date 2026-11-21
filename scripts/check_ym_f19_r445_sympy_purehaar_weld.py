@@ -156,3 +156,41 @@ assert sum(incidence[b] for b in selected_f19) == 768
 print("PASS original fine Wilson plaquettes: 1536")
 print("PASS each original fine positive link has 6 plaquette incidences")
 print("PASS all 896 original spectators retain 5376 fine-action incidences")
+
+
+# Finite Q8 analogue of source-owned PURE-HAAR two-link convolution:
+# for all 8x8 input pairs, every Q8 product occurs eight times.
+# This is NOT continuous SU(N) Haar existence or interacting YM Gibbs.
+q8_products = Counter(tuple(u*v) for u in q8 for v in q8)
+assert len(q8_products) == 8 and set(q8_products.values()) == {8}
+
+# Exact full original Wilson fine-action COUNTEREXAMPLE to assuming
+# the 64-link block alone determines the original fine Gibbs weight:
+# full identity field vs one unselected spectator flipped to -I
+# have the same 64 native blocks but six changed plaquette traces.
+spectator = spectators_f19[0]
+all_identity = {bond: one for bond in fine}
+changed_identity = dict(all_identity)
+changed_identity[spectator] = -one
+assert all(all_identity[x]*all_identity[y] ==
+           changed_identity[x]*changed_identity[y]
+           for c in coarse for x,y in (native_pair(*c),))
+
+def fine_su2_plaquette_trace(field, site, a, b):
+    w = field[(site,a)]*field[(step(site,a,4),b)]
+    w = w*field[(step(site,b,4),a)].conjugate().T
+    return sp.trace(w*field[(site,b)].conjugate().T)
+
+trace_differences = []
+for site in product(range(4), repeat=4):
+    for a,b in combinations(range(4),2):
+        before = fine_su2_plaquette_trace(all_identity,site,a,b)
+        after = fine_su2_plaquette_trace(changed_identity,site,a,b)
+        assert before == 2
+        if before != after:
+            assert after == -2
+            trace_differences.append(before-after)
+assert len(trace_differences) == 6
+assert sum(trace_differences) == 24
+print("PASS exact Q8 two-link uniform convolution: every output 8/64 inputs")
+print("COUNTEREXAMPLE identical 64 native coarse SU2 links but fine plaquette trace sum differs by 24")
