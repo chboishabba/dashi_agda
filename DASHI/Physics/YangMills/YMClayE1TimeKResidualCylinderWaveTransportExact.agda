@@ -44,13 +44,13 @@ module _
     (timeTranslate : Observable → Nat → Observable)
   where
 
-  -- k and t are independent; the fine source is at cutoff suc k
-  -- and the ORIGINAL finite configuration is never projected away.
+  -- k and t are independent; the ORIGINAL physical E1 source is at
+  -- cutoff k and its configuration is never projected away.
   timeKOriginalCylinder :
     (t k : Nat) (word : Observable) →
-    MDL.Carrier tower (suc k) → Scalar
+    MDL.Carrier tower k → Scalar
   timeKOriginalCylinder t k word fine =
-    E1.realization realization (suc k) (timeTranslate word t) fine
+    E1.realization realization k (timeTranslate word t) fine
 
   -- EXACT finite wave/refinement-side path independence:
   -- first split original source state into coarse+residual, then
@@ -58,18 +58,18 @@ module _
   -- The result equals original direct evaluation at that cutoff.
   timeKOriginalCylinderRetainsResidual :
     ∀ t k word (fine : MDL.Carrier tower (suc k)) →
-    timeKOriginalCylinder t k word
+    timeKOriginalCylinder t (suc k) word
       (MDL.join codec (MDL.split codec fine))
-    ≡ timeKOriginalCylinder t k word fine
+    ≡ timeKOriginalCylinder t (suc k) word fine
   timeKOriginalCylinderRetainsResidual t k word fine =
-    cong (timeKOriginalCylinder t k word)
+    cong (timeKOriginalCylinder t (suc k) word)
       (MDL.join-split codec fine)
 
   -- Existing original E1 concrete n-dependent PHYSICAL Wilson
   -- expectation, not a new abstract measure nor bare-coarse source.
   timeKOriginalWilsonExpectation : Nat → Nat → Observable → Scalar
   timeKOriginalWilsonExpectation t k word =
-    E1.finiteExpectation original (suc k) (timeTranslate word t)
+    E1.finiteExpectation original k (timeTranslate word t)
 
   timeKOriginalContinuumExpectation : Nat → Observable → Scalar
   timeKOriginalContinuumExpectation t word =
@@ -86,9 +86,7 @@ module _
   timeKOriginalFiniteToContinuum t word =
     E1.originalWilsonConverges original (timeTranslate word t)
 
-  -- The cutoff index starts at suc k here to match the exact fine
-  -- tower interface. E1's original convergence is for n:Nat,
-  -- including n=zero. A tail-index lemma is NOT forced by arbitrary
-  -- E1.Converges; it needs the source's tail-stability law. We leave
-  -- that physical scalar-convergence property explicit rather than
-  -- falsely presenting the above as definitional convergence.
+  -- k ranges over the EXACT original E1 Nat cutoff family,
+  -- including cutoff zero. The residual split/join statement is
+  -- stated only at successor stages (suc k). Therefore no unjustified
+  -- tail-stability property of arbitrary Converges was assumed.
