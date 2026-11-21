@@ -67,6 +67,10 @@ def run():
         assert len({transverse_colour(b) for b in plaq})==4
         plaquette_count+=1
     assert plaquette_count==6*4**4==1536
+    # Negative control: all 128 selected bonds DO interact across orientations.
+    # Conditioning on only 896 spectators does NOT factorize 128 links.
+    selected_plaquette_occupancy=Counter(len(set(plaq)&selected) for plaq in plaquettes())
+    assert selected_plaquette_occupancy==Counter({0:1152,2:384})
     # Literal three-bit cube (8 vertices, 12 edges, 6 square faces)
     edges={tuple(sorted((s,toggle(s,i)))) for s in T for i in range(3)}
     faces={(i,j,k,v) for i in range(3) for j in range(i+1,3)
@@ -94,6 +98,7 @@ def run():
     print('PASS 1024/1024 native full-bond roundtrips; 8/8 residual sheets ×128')
     print('PASS selected 128 = 4 orientations ×32; 896 spectators = 7×128')
     print(f'PASS {plaquette_count}/{plaquette_count} plaquettes have four distinct orientation/parity colors')
+    print('PASS negative control: 384 original plaquettes contain TWO selected links; only 32-per-orientation classes factorize')
     print('PASS 3-bit cube: 8 vertices, 12 edges, 6 commuting faces')
     print('PASS balanced trit 27 = 8 corners + 12 edges + 6 face centres + 1 centre')
     print('PASS 369 refinement 2^a 3^b commutation; no sign/zero or physical-law promotion')
