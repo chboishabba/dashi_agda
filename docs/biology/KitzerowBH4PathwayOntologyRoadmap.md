@@ -911,3 +911,20 @@ User correction: the correct question is not simply 'which parameters remain inp
 Test the research hypothesis 'apparent errors predominantly come from wrong geometry' by a preregistered residual decomposition across independent consumers and held-out measurements. **Do not assume all physical error vanishes under geometric refinement**; residuals can reflect omitted physics, approximations or genuine data limitations. For selected #1241 KK electron, the independent Maxwell field, chosen coupling, supplied bare mass and absent physical nuclear source remain explicit; proving an observer lift or changing dimension does not by itself derive them.
 
 **Next highest-alpha physical work**: construct observer-indexed commuting square with `O_(d,c)`, physically selected state `X`, projected operator `H_(d,c)` and reconstruction residual `R_(d,c)`, prove precise sufficient-consumer conditions and concrete separating pairs using the original owners; then test same-selected 5D action to 4D electron/nuclear source without inserting the target Coulomb operator. MG06 dimensional/observer finite checks PASS, same-source physical realization OPEN, MG07 proteomics and Golden OPEN.
+
+
+### 2026-11-21 MG06 observer-indexed Schur/Feshbach exact reduction
+
+New source `scripts/check_mg06_observer_schur_residual.py` committed at `ac5f6789763cb74db6e79b362c5c92a6bebe22c5`. The same source was run locally with SymPy after correcting a test-only resolvent sampling point that landed on a hidden-sector pole. **48/48 exact rational model cases PASS**, plus explicit decoupled case, same visible A and D with different interaction B (distinct full characteristic polynomials), nonconstant energy self-energy, and hidden-orthogonal-frame invariance. The independently executed source is the one committed; GitHub remote execution/Agda kernel are not claimed.
+
+Let H=[[A,B],[B†,D]] and let P select the visible block. Away from poles, `P(zI-H)^{-1}P† = (zI-A-B(zI-D)^{-1}B†)^{-1}`. The exact consumer-specific residual is the Schur/Feshbach self-energy `Sigma(z)=B(zI-D)^{-1}B†`. It is unnecessary for a fully decoupled sector B=0; for B≠0, simply keeping PHP=A generally fails. This is a mathematically meaningful geometry/observer distinction, not a newly discovered effect or a proof that any actual electron interaction is hidden KK geometry.
+
+**New highest-alpha gates**:
+- MG06.O1 FINITE PASS: identify visible observer and correct projected-resolvent consumer.
+- MG06.O2 FINITE PASS: preserve hidden-mode self-energy as exact residual where coupled; test two states with same visible observation but different B.
+- MG06.O3 FINITE PASS: verify hidden-frame invariance and decoupled negative control.
+- MG06.O4 OPEN: replace synthetic A/B/D with independently selected native 369/KK source operators and actual observer maps, preserving Hilbert-domain and unitarity.
+- MG06.O5 OPEN: compare recovered physical atom/protein observables and held-out data, not just finite algebra.
+- MG06.GOLDEN OPEN: original canonical Agda observer/claim-transport theorem reuse and exact-head kernel acceptance.
+
+**Scientific firewall**: A Schur complement transforms a *given* microscopic operator. The current construction does NOT derive a selected physical Hamiltonian, electron coupling/mass/spin, Maxwell/nuclear source, molecular forces or proteomic assay predictions; neither must every empirical error vanish after geometric refinement. No substitution of the original Coulomb Hamiltonian into a supposedly independent KK source is allowed. Continue from same-source KK + 369 physical operator before invoking this observer reduction.
