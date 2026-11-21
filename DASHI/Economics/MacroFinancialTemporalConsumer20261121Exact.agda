@@ -12,6 +12,7 @@ import DASHI.Economics.JPYTreasuryOpposingFlow20261121Exact as Treasury
 import DASHI.Economics.JPYTreasuryInterventionOfficialReceipts20261121Exact as FX
 import DASHI.Economics.TreasuryParYieldEventWindow20261121Exact as CMT
 import DASHI.Economics.TreasuryAuctionJapanFlow20261121Exact as AuctionFlow
+import DASHI.Economics.MacroRivalMultiFactor20261121Exact as Multi
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 
 -- Relative clock ticks on a common declared timeline, not calendar parsing.
@@ -181,3 +182,9 @@ japanJulyNetPurchasesExact = AuctionFlow.julyNetExact
 japanAugustRoundingExact :
   AuctionFlow.reportedNetMagnitudeTenthsBillionJPY AuctionFlow.augustResidentForeignDebt + 1 ≡ 1431
 japanAugustRoundingExact = AuctionFlow.augustReportedRoundingDifference
+
+-- Source-neutral multifactor rival observer: the original eight-axis model
+-- remains a separate consumer. Identical economics never selects H0 vs H1.
+macroH0H1NoDescent :
+  Descent.FactorsThrough Multi.observation Multi.regime → ⊥
+macroH0H1NoDescent = Multi.noTotalIntentClassifier
