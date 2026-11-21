@@ -1,3 +1,31 @@
+## 21 Nov 2026 — Paper 8 publication case study updated without promoting GRH
+
+The live `Docs/papers/live/Paper8UnificationDraft.md`
+was updated **on this original GRH PR #1533**
+(commit `39002a54`). It uses the externally verified
+original five-theorem Dirichlet GRH source, the existing
+Lean #113 direct `Main` adapter, the root RH↔Clay
+boundary, and the existing conditional Agda RH transports
+as a proof-governance *case study*. It distinguishes
+external proof checking, local source-readback and finite
+SymPy arithmetic, version-compatible kernel admission,
+and all-character actual analytic zero semantics. No
+Dirichlet GRH, BSD, YM, NS, or UCT theorem is re-proved
+or promoted by the manuscript. Original work attribution
+is separated from independent validation and DASHI's
+adapter contribution.
+
+The existing `Docs/papers/PublicationRoadmap.md`
+now records the old numbered eight-paper mapping,
+the three-paper live core, the active Paper 3/8
+revision decisions, and Paper 1's independent NS
+PDE review. Other drafts (including atomic and YM audit)
+remain independent, not automatically numbered
+Paper 9/10 or elevated to core. This is editorial
+source alignment only, not a GRH P0 theorem closure.
+
+---
+
 ## 21 Nov 2026 — direct ORIGINAL theorem name fixed and source-only verification closed
 
 Lean #113 `MillenniumExternal/AlpogeRHBoundaryExact.lean`
