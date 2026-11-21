@@ -150,3 +150,13 @@ This is an evidence-scope distinction, not a denial that another repository file
 **Correct maximum-cut now:** use native Bishop E4/E6 componentwise convergence only if the `q(τ)` literal radius/phase object is attached; use the existing standard normalized-(j) same-carrier quotient only once the *same* selected discriminant is nonzero and modularity is proved on that actual tau/CM elliptic input; then connect j=0 elliptic and finite CubicCharacterCertificate at a **source-chosen same curve/prime**. The analytic modular (j) map, the curve's CM Hecke Grössencharacter and the external fork's `IsHecke`/theta `IsLift` are three distinct gates. A finite Monster C3 or 5-orbit count is not a substitute.
 
 User's Shor/RSA/elliptic and quantum-Heisenberg suggestion remains a **donor inventory**, not proof: no source theorem in this audit yet connects a particular circuit or operator's eigenvalue/character to the selected global Hecke/TLiftK object. Investigate only after a specific source-typed consumer emerges.
+
+
+### Additional Monster p=5 source correction: real p=5 arithmetic exists
+
+The five-orbit quotient negative control above is **not** the full repository's Monster p=5 programme. A targeted source read also recovered:
+- `DASHI/Moonshine/MonsterFiveArithmeticSourceRecognitionFrontierExact.agda`: source `p5RepresentationFrickeClosed`, `p5PrimaryDepthIsNine` and `p5HasTwoInversePhasePairs`; its original `P5MonsterTrialecticSourceLift` requires an *actual* state-level Monster/Ogg observer, pointed source/recognition and distinguished transport. These are stronger data than five coarse signed-pair orbits.
+- `DASHI/Moonshine/MonsterOrderExponentCorrectionExact.agda`: source `p5ExponentIsNine` proves (v_5(|M|)=9) and exposes explicit modular valuation (3+5+1=9). Valuation is not a selected order-five group element/action, nor any `IsHecke` witness.
+- `DASHI/Moonshine/Y443JMDBetaFiveSemanticCompilerExact.agda`: a conditional group-valued `β^5=1` compiler derived from a 35-step finite rewrite, requiring specific source Coxeter cancellation/commutation/braid interpretation. It is more relevant to order-five group dynamics than the nine-to-five signed orbit count, but does not independently attach the Monster selected state to the CM/Hecke fibre.
+
+The new `RHGRHCMAnalyticJacobiTOEMaxCutExact.agda` now also imports original Monster p=5 arithmetic and exposes exact (v_5=9) and p=5 Fricke-closure source projections, alongside the separate five-orbit nonpromotion proof. **No claim** that a p=5 Monster character, original `TP.TLiftK` Hecke character, and `ζ₃` cubic character are the same original object. This distinction is the candidate future indexed 9DOF/TOE donor, not a shortcut to analytic RH.
