@@ -127,3 +127,65 @@ module _ {Value : Set} (group : Bond.ExactLinkGroup Value) where
 -- OPEN: prove original SUN native field reflection (all four axes),
 -- NativeBlockReflectsExactly for ALL original coarse observables,
 -- physical positive-time support, and published Wilson fine RP.
+
+
+-- Actual source codec, not a second artificially chosen even-origin map:
+-- this consumes the ORIGINAL Fin.combine R445 native block origin.
+-- Finite 2^4 coordinate normalization (16 selected original coarse sites).
+originalR445NativeOriginIsEven :
+  ∀ {Value : Set} (group : Bond.ExactLinkGroup Value)
+    (site : CoarseSite) →
+  Native.fineBlockOrigin {m = 1} {l = 1} group site
+  ≡ evenCoarseOrigin site
+originalR445NativeOriginIsEven group
+  (Torus.pair (Torus.pair Torus.zeroᵢ Torus.zeroᵢ)
+              (Torus.pair Torus.zeroᵢ Torus.zeroᵢ)) = refl
+originalR445NativeOriginIsEven group
+  (Torus.pair (Torus.pair Torus.zeroᵢ Torus.zeroᵢ)
+              (Torus.pair Torus.zeroᵢ (Torus.sucᵢ Torus.zeroᵢ))) = refl
+originalR445NativeOriginIsEven group
+  (Torus.pair (Torus.pair Torus.zeroᵢ Torus.zeroᵢ)
+              (Torus.pair (Torus.sucᵢ Torus.zeroᵢ) Torus.zeroᵢ)) = refl
+originalR445NativeOriginIsEven group
+  (Torus.pair (Torus.pair Torus.zeroᵢ Torus.zeroᵢ)
+              (Torus.pair (Torus.sucᵢ Torus.zeroᵢ) (Torus.sucᵢ Torus.zeroᵢ))) = refl
+originalR445NativeOriginIsEven group
+  (Torus.pair (Torus.pair Torus.zeroᵢ (Torus.sucᵢ Torus.zeroᵢ))
+              (Torus.pair Torus.zeroᵢ Torus.zeroᵢ)) = refl
+originalR445NativeOriginIsEven group
+  (Torus.pair (Torus.pair Torus.zeroᵢ (Torus.sucᵢ Torus.zeroᵢ))
+              (Torus.pair Torus.zeroᵢ (Torus.sucᵢ Torus.zeroᵢ))) = refl
+originalR445NativeOriginIsEven group
+  (Torus.pair (Torus.pair Torus.zeroᵢ (Torus.sucᵢ Torus.zeroᵢ))
+              (Torus.pair (Torus.sucᵢ Torus.zeroᵢ) Torus.zeroᵢ)) = refl
+originalR445NativeOriginIsEven group
+  (Torus.pair (Torus.pair Torus.zeroᵢ (Torus.sucᵢ Torus.zeroᵢ))
+              (Torus.pair (Torus.sucᵢ Torus.zeroᵢ) (Torus.sucᵢ Torus.zeroᵢ))) = refl
+originalR445NativeOriginIsEven group
+  (Torus.pair (Torus.pair (Torus.sucᵢ Torus.zeroᵢ) Torus.zeroᵢ)
+              (Torus.pair Torus.zeroᵢ Torus.zeroᵢ)) = refl
+originalR445NativeOriginIsEven group
+  (Torus.pair (Torus.pair (Torus.sucᵢ Torus.zeroᵢ) Torus.zeroᵢ)
+              (Torus.pair Torus.zeroᵢ (Torus.sucᵢ Torus.zeroᵢ))) = refl
+originalR445NativeOriginIsEven group
+  (Torus.pair (Torus.pair (Torus.sucᵢ Torus.zeroᵢ) Torus.zeroᵢ)
+              (Torus.pair (Torus.sucᵢ Torus.zeroᵢ) Torus.zeroᵢ)) = refl
+originalR445NativeOriginIsEven group
+  (Torus.pair (Torus.pair (Torus.sucᵢ Torus.zeroᵢ) Torus.zeroᵢ)
+              (Torus.pair (Torus.sucᵢ Torus.zeroᵢ) (Torus.sucᵢ Torus.zeroᵢ))) = refl
+originalR445NativeOriginIsEven group
+  (Torus.pair (Torus.pair (Torus.sucᵢ Torus.zeroᵢ) (Torus.sucᵢ Torus.zeroᵢ))
+              (Torus.pair Torus.zeroᵢ Torus.zeroᵢ)) = refl
+originalR445NativeOriginIsEven group
+  (Torus.pair (Torus.pair (Torus.sucᵢ Torus.zeroᵢ) (Torus.sucᵢ Torus.zeroᵢ))
+              (Torus.pair Torus.zeroᵢ (Torus.sucᵢ Torus.zeroᵢ))) = refl
+originalR445NativeOriginIsEven group
+  (Torus.pair (Torus.pair (Torus.sucᵢ Torus.zeroᵢ) (Torus.sucᵢ Torus.zeroᵢ))
+              (Torus.pair (Torus.sucᵢ Torus.zeroᵢ) Torus.zeroᵢ)) = refl
+originalR445NativeOriginIsEven group
+  (Torus.pair (Torus.pair (Torus.sucᵢ Torus.zeroᵢ) (Torus.sucᵢ Torus.zeroᵢ))
+              (Torus.pair (Torus.sucᵢ Torus.zeroᵢ) (Torus.sucᵢ Torus.zeroᵢ))) = refl
+
+-- The exact 16-case original-source origin normal form is necessary
+-- before deriving the full 64-bond reflection equality. It is not the
+-- full NativeBlockReflectsExactly proof and requires Agda acceptance.
