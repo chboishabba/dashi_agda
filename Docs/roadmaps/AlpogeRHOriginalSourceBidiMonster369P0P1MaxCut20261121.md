@@ -97,3 +97,28 @@ Original author explicitly highlights **Stepanov-type multiplicity, Fourier-anal
 - The source snippets above are derived from direct file readbacks, not inferred only from PR titles. PR heads are the latest connector-reported values **at this audit time**, not immutable future heads.
 - The original fourth user screenshot is social commentary, not an independent source for any theorem; the original 4-page announcement is provenance, not the underlying Lean proof itself.
 - **No CI, no Lean, no Agda**, local finite SymPy only if actually run and specifically reported.
+
+## 21 November second original theorem-body inspection — paid RH termination spine
+
+Beyond just `Main`, direct-read original files (not guessed from metadata):
+
+- `src/Supplements/Kernels/MainTheorems.lean`: `allChi : UpperTheory.EveryCharacter := UpperTheory.FinalTheorems.everyCharacter`; `rhOfAll : RiemannHypothesis := Formalism.VW.rh_of_every allChi`; `critAll` and `claimAll` are the other Dirichlet consumer hooks.
+- `src/Formalism/GammaFactorNonvanishing/CritLine.lean`: `rh_of_every` specializes `UpperTheory.EveryCharacter` to the trivial character mod 1, using the *actual* `LFunction_modOne_eq`; `critLine` uses primitive-character functional equation, gamma-factor nonvanishing and contradiction away from the critical line. **This is an explicit source-proved mathematical RH ↔ Dirichlet bridge**, not a DASHI speculative analogue.
+- `src/Development/AutomorphicArithmetic/CharacterBoxes/MainConclusion.lean`: `UpperTheory.FinalTheorems.everyCharacter` is obtained from `everyCharacter_of_row UpperTheory.Gal.Int.galoisLocalGlobalStrong_recParameter` (the actual immediately-used source theorem).
+- `src/Development/AutomorphicArithmetic/CharacterBoxes/EveryCharacter.lean`: `UpperTheory.EveryCharacter` is the same precise nonvanishing statement for all characters; `plugAll` invokes original imprimitive-character extension.
+- `src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/EveryCharacterOfLiteratureOfVWin.lean`: very large and high-level source with explicit theta, automorphic, Galois, published-theorem and archimedean dependencies; reading its import list **does not** establish that any particular DASHI `PenumbralSingularThetaIntegral` map equals the source.
+
+**Exact reverse-solve dependency chain now grounded by original code:**
+
+```text
+Main.riemannHypothesis
+  ← Supplements.Kernels.MainTheorems.rhOfAll
+  ← Formalism.VW.rh_of_every (allChi)
+  ← UpperTheory.FinalTheorems.everyCharacter
+  ← UpperTheory.FinalTheorems.everyCharacter_of_row
+  ← UpperTheory.Gal.Int.galoisLocalGlobalStrong_recParameter
+     + UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+     + UpperTheory.One.vwin_of_row
+```
+
+This directly localizes the *mathematical source admission* at `EveryCharacter`, and the *exact Clay handoff* at root `RiemannHypothesis`. No need to synthesize an RH-equivalent G3 proof to use the source theorem. The imported package's full, transitive proofs remain enormous and subject to license + local trusted-kernel verification. Future geometric work can compare the real higher-rank source machinery at those earlier owners, not simply the surname `theta`.
