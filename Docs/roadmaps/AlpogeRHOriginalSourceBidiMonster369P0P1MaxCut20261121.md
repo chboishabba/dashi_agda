@@ -2,6 +2,32 @@
 
 **Date:** 21 November 2026. Agda golden integration PR [#1533](https://github.com/chboishabba/dashi_agda/pull/1533). Lean source-admission PR [#113](https://github.com/chboishabba/dashi_lean4/pull/113). This is the *consolidation plan and verified source inventory* for existing owners, not a new claimed RH proof.
 
+## 21 November 2026, 11:45 Brisbane — CORRECTION: user fork is the vendor source (current controlling P0)
+
+**The user explicitly provided an already-existing fork**: [chboishabba/riemann-hypothesis-lean](https://github.com/chboishabba/riemann-hypothesis-lean). Readback confirms the fork is publicly accessible and contains the entire upstream source with the original `src/Main.lean`; the fork's selected `Main.lean` Git blob is **exactly** `dbd5db70bc11b35f18fa5751216ab335321e7bfc`, matching the independent checker mirror. The pinned fork commit is `7cbf7a0c32fca1badf05931879a37c3f8a2b03b4`. Also checked the fork's original `src/Statements.lean` blob `1cd1bce93344065936b2b392b23306254e0785ef`, `lean-toolchain=leanprover/lean4:v4.33.1`, Mathlib commit `0df444a360eaa60ab8c11dca51a86af692955474` in its `lake-manifest.json`. DASHI Lean root currently pins **4.35.0-rc3**, so the exact external theorem package must first be kept in its own v4.33.1 world.
+
+**Prior error superseded:** an unlicensed external archive need not be copied again to consume it. **Reference the user-owned fork as an external immutable Git dependency**, do not transplant 175187 source files into `dashi_agda` or `dashi_lean4`. No claim that a fork itself grants additional redistribution rights; preserve source authorship. Source possession/ingestion is now a concrete ready-to-run local workflow, **not a legal/math P0 proof obstacle**. The remaining obstacles are *actual elaborated proof certificate at the exact original dependency revision* and *version-coherent and then cross-language theorem transport*.
+
+New concrete implementation:
+- **Lean [#113](https://github.com/chboishabba/dashi_lean4/pull/113):** `proofs/alpoge-lean433/fork_pin.json` + `checkout_fork_source.sh`, original `RHAdmission.lean`, root `MillenniumExternal/AlpogeRHBoundaryExact.lean`. Checkout script clones only if necessary and verifies commit/selected Git blobs/toolchain/Mathlib. No CI or kernel build automatically.
+- **Agda [#1533](https://github.com/chboishabba/dashi_agda/pull/1533):** `scripts/lean_world_alpoge_rh_fork_manifest_20261121.json` feeds the *existing* `scripts/run_lean_world_original_dependency_ingest.py`. The path is an immutable source occurrence in PostgreSQL, not a second parser, separate theorem database, or fake proof registration. Ingesting one source snapshot has 0 per-file REST reads by design; source world remains `source-complete-not-elaborated` and `kernel_certified=false`, **until genuine Lean native export and authoritative DAG verification**.
+
+### Steelman / BIDI / reverse solve P0 concrete execution chain
+
+1. **P0.0-FORK-SOURCE (READY-TO-RUN, NOT EXECUTED):** `bash proofs/alpoge-lean433/checkout_fork_source.sh` inside `dashi_lean4`; pin exact fork Git SHA, Main/Statements bytes, toolchain and Mathlib. Existing source fork directly supplies the full theorem producers; no new mathematics.
+2. **P0.1-ORIGINAL-LEAN-ADMISSION (OPEN):** `cd .local/alpoge-rh-v4331 && lake exe cache get && lake build Main`; then `lake env lean ../../proofs/alpoge-lean433/RHAdmission.lean` using the fork's exact toolchain. Record a local kernel/axiom/statement receipt **if executed**. No CI.
+3. **P0.2-DASHI-MATHLIB-CLAY-BIDI (STATEMENT EQUIVALENCE PAID, VERSION WELD OPEN):** consume existing exact `MillenniumExternal.ExactTargetSurface.clayRiemannHypothesis_iff_mathlib`, not a new theorem. Achieve a source-compatible theorem import/translation across v4.33.1 and 4.35.0-rc3; cannot use stale oleans, source text alone, nor assume package migration preserves proof elaboration.
+4. **P0.3-ORIGINAL-AGDA-RH (CONDITIONAL CODE WRITTEN, ACTUAL CERTIFICATE OPEN):** existing `AlpogeGRHGeometricTransportExact` + `AlpogeRHOriginalClayEndpointBidiExact`; genuine `RiemannAnalyticSubstrate` complex/zero/critical-line predicate agreement and trusted cross-language proof transfer. Agda cannot import Lean theorems natively by naming them. Maintain precise trust boundary.
+5. **P0.4-LEAN-WORLD REUSE (SOURCE-ONLY PATH IMPLEMENTED):** run existing `run_lean_world_original_dependency_ingest.py --manifest scripts/lean_world_alpoge_rh_fork_manifest_20261121.json --schema lean_world_source_pilot` *only with explicit local PostgreSQL operator environment*. Follow original native export / authoritative validator H01–H08; import whole source DAG by content address as needed, not 175k REST calls, never equate source ingestion with a checked theorem.
+6. **P1 geometry (AFTER AND ALONGSIDE P0):** use original 369 determinant, S3, C3, Monster, theta and Wilson/Weil modules as consumers and independent explanations; do not use geometric welds to block already accepted external RH zero-location.
+
+### OpenAI source ingest reuse: precise distinction
+
+The original `DASHI/Research/OpenAIMath/OpenAIMathLiteralCodeTransportExact.agda` demonstrates a **source-index/polarity exact transport** against a selected OpenAI math source while retaining the actual Lean-to-Agda admission as separate. That is the right methodology for this RH source too: preserve statement semantics and source version rather than reconstructing the author's proof. The cross-repository world architecture in `docs/roadmaps/LeanWorldProofSearchCompressionMaxCut20261112.md` already owns **original source snapshot ingestion** (#1484), native v3 export/validator (#1495), content-addressed DAG, proof-transport edge and provenance. Do not create duplicate systems.
+
+**Pending:** the selected fork's 175187-file original has **not been locally cloned here**; source-ingestion manifest is committed but **not executed**; no full Lean build, no cross-version Clay kernel receipt, no Agda kernel receipt. This section supersedes prior statements calling copyright the main P0 blocker, or instructing a fresh unrelated external archive download.
+
+
 ## 1. Exact original external producer (P0.00)
 
 Levent Alpöge announced the original RH and Dirichlet GRH formalization on 2026-11-20: https://alpo.ge/remark.pdf . Its public byte-exact mirror: https://github.com/Deicyde/riemann-hypothesis . Independent audit: https://math.mit.edu/~drew/grh/ (20 Nov 22:05 UTC).
