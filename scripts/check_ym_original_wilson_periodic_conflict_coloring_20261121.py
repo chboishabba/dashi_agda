@@ -95,9 +95,26 @@ def check_adaptive_mixed_contour():
     print("PASS: adaptive mixed-contour 8/12-class selection, no binomial factor")
 
 
+def check_existing_chessboard_rate_comparison():
+    # Existing #1444 November 19/20 original Wilson microscopic donor formulae.
+    # Their native site-reflection chessboard applicability is NOT tested here.
+    from sympy import symbols, exp, nsolve
+    beta=symbols("beta",positive=True)
+    C=8+Rational(2,3)*log(24)+log(beta)
+    epsilon=Rational(1,2) # r=3, (6-r)/6
+    u_cube=6*exp(C/4-beta*epsilon/96)
+    u_plaq=6*exp(C/16-beta*epsilon/384)
+    root_cube=nsolve(log(196*u_cube),2300)
+    root_plaq=nsolve(log(196*u_plaq),6000)
+    assert abs(float(root_cube)-2212.810452)<0.001
+    assert abs(float(root_plaq)-6335.549783)<0.001
+    print("PASS: existing chessboard u formulas (r=3), beta thresholds",root_cube.evalf(10),root_plaq.evalf(10))
+
+
 def main():
     check_r445()
     check_adaptive_mixed_contour()
+    check_existing_chessboard_rate_comparison()
     for L in range(3,12):
         print("PASS L/colors/links/plaquettes/min/max",check_L(L))
     q=Rational(1,10**6)
