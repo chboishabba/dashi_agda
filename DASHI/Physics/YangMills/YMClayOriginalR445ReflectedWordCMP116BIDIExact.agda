@@ -62,6 +62,19 @@ module _
     Words.PlaquetteWord
       theory traceData exponential beta oneLink bilateral divide 1
 
+  -- Source-identity witness BEFORE the BIDI join: the exact
+  -- changing-cutoff original Wilson n=3 measure is the ORIGINAL
+  -- native fine R445 Wilson-Gibbs law, not another coarse kernel.
+  originalSameFineSourceN3 :
+    Jet.originalWilsonMeasure
+      theory traceData exponential beta oneLink bilateral divide 3
+    ≡ R320.originalFineGibbsMeasure
+        theory traceData exponential (beta 3)
+        oneLink bilateral divide
+  originalSameFineSourceN3 =
+    Source.originalVariableN3IsNativeR445FineMeasure
+      theory traceData exponential beta oneLink bilateral divide
+
   -- Same original n=1 geometry observable, BUT the law used below
   -- is the R445 pushforward of the original n=3 Gibbs measure.
   -- NEVER replace the latter by the independent bare n=1 Gibbs law.
