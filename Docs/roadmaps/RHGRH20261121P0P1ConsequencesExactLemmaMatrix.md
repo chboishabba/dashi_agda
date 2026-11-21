@@ -211,3 +211,22 @@ A concrete geometric bridge is already present: #1408's exact affine 27-point ch
 5. **P2 S06:** totient oracle original reduction theorem, separate from a new unconditional factorization breakthrough.
 6. **Review gates:** no CI; locally executable finite SymPy only; no Agda/Lean acceptance unless separately actually checked. The cross-PR review **does not** claim any newly discharged mathematical theorem.
 
+
+## 21 November — updated P0-first reverse-solve ownership, with exact source integrations
+
+**This supersedes earlier requests to prove the entire old G3/A2 route before importing RH**. Source original `Main.lean` in the externally audited v4.33.1 Alpöge/Claude package already exports Mathlib `RiemannHypothesis`. Our existing Lean `MillenniumExternal.ExactTargetSurface.clayRiemannHypothesis_iff_mathlib` is a literal proof of the needed equivalence, so source-admission rather than a fresh analytic zero-location contradiction is the immediate minimum cut. See [AlpogeRHOriginalSourceBidiMonster369P0P1MaxCut20261121.md](AlpogeRHOriginalSourceBidiMonster369P0P1MaxCut20261121.md).
+
+| New/updated gate | Priority | Already-paid producer / new source | Exact remaining lemma/acceptance |
+|---|---|---|---|
+| P0.00 author source admission | P0 highest | original 5 theorems in `Main.lean`; independently accepted export; Lean [#113](https://github.com/chboishabba/dashi_lean4/pull/113) pinned source adapter | `alpogeOriginalArchiveLicensedMaterialization`, `alpogeMainNoAxiomSameKernel` — source no redistribution licence; independent full source not downloaded or recompiled in DASHI |
+| P0.01 Clay root terminal BIDI | P0 high | existing `MillenniumExternal.ExactTargetSurface`, and #113 original `AlpogeRHBoundaryExact` | `alpogeMainRHIntoSameVersionClayKernel` — actual cross-version coherent import; **the statement equivalence itself is already paid** |
+| P0.02 Agda original RH endpoint BIDI | P0 high | original `RiemannAnalyticSubstrate`, original `RiemannZetaProgramBoundary`, source-written `AlpogeRHOriginalClayEndpointBidiExact` | `originalAnalyticStripZeroIff`, `originalAnalyticStripCriticalLineIff`, actual external proof admitted and compatible trusted Agda transport; abstract records still uninhabited |
+| P0.03 Dirichlet GRH scope | P0 high | exact external original `LFunction_ne_zero_of_half_lt_re`, `LFunction_eq_zero_re`, `LFunction_eq_zero_re_of_isPrimitive` | same-definition Dirichlet character / L-function proof import and no wider automorphic/number-field claim |
+| P1.11 G2 determinant consumer | P1 highest geometry | `RiemannG2DeterminantConsumerQuotient369Exact.determinantResponseSufficientForFixedKernel` | `originalThetaO2nDeterminantEqualsG2eSourceQ` or typed no-go; fixed-kernel scalar sufficiency is **paid**, not general theta equality |
+| P1.12 genuine theta mechanism | P1 high | original `PenumbralSingularThetaIntegral`, `SingularThetaBorcherdsBridge` | `originalThetaLiftWeightSignatureRegularizationBidi`: compare source author's genuine O(2,n) theta chain against this different Borcherds source; no inferred isomorphism |
+| P1.13 finite symmetry / Fourier | P1 high | `C3CubeFourier27Exact`, `TernaryPermutationS3LawsExact`, `C3RiemannConjugationBridgeExact`, #1510, #1527 | `originalC3S3XiCharacterConsumerSixFace`: actual source maps, 6 face laws or residuals; cyclotomic ζ3 distinct from Riemann ζ |
+| P1.14 Monster and Albert | P1 conditional | #1472 Y443, `Monster369ZetaSameObjectWeldExact`, `Griess1990RationalAlbertTrialityTransportExact`, #1489 | `originalGriessThetaRepresentationActionIdentification` *only if* source matching found; otherwise explicit negative control; does not block RH endpoint |
+
+**Steelman** = preserve original proof's exact spectral, analytic, finite-character and theta directions rather than collapsing them into one generic 'positivity' label. **BIDI** = prove forward and reverse on the same named carrier with the existing actual theorem owners. **Reverse-solve** = walk backwards from the already-paid Lean Clay terminal equivalence; don't allocate work to Riemann G2/G3 unless the external proof's actual audited dependency graph needs it.
+
+No CI, no Lean/Agda native acceptance claimed in this update. Existing finite SymPy checks are P1 regressions, not external proof import evidence.
