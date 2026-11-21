@@ -216,7 +216,34 @@
           "proven_continuity": false
         }
       ],
-      "transcript_original_occasion_verified": false
+      "transcript_original_occasion_verified": false,
+      "expandedEarlierSpokenTranscript": [
+        {
+          "quoteOrParaphrase": "two [diodes] off of this wire, two off of that wire",
+          "tier": "prior user-provided literal transcription; exact reel time still provisional"
+        },
+        {
+          "quoteOrParaphrase": "all forward facing, positives ganging together",
+          "tier": "prior literal source; cathode/anode diagram not verified"
+        },
+        {
+          "quoteOrParaphrase": "half the potential of the big coil",
+          "tier": "source language; not a referenced SI voltage measurement"
+        },
+        {
+          "quoteOrParaphrase": "return to midpoint/Earth/ground",
+          "tier": "source words; M, bridge DC negative and Earth node equality not established"
+        },
+        {
+          "quoteOrParaphrase": "capacitor across selected coil; causes a pole shift",
+          "tier": "source explanation; actual phase and signed current unknown"
+        },
+        {
+          "quoteOrParaphrase": "spark-gap dump and harvest amperage coil",
+          "tier": "source claim; useful output current and discharge energy unmeasured"
+        }
+      ],
+      "bidiHypothesisOwner": "Artifacts/smith-filsinger/midpoint_four_diode_bidi_reverse_cuts_20261122.json"
     },
     {
       "key": "SPDF",
@@ -385,6 +412,8 @@
     "No high-voltage experiment or construction prescription.",
     "Some midpoint/rectifier figures come from a prior user-supplied spoken transcript, whose exact on-video occasion is not reattested by the current source inventory.",
     "The optional Kelly/Darrer 47nF capacitor and 2kV/6kW description must not be assigned to the filmed Filsinger Earth or ZVS reels.",
-    "40-inch L1 wire vs 160-inch selected L2 section wire is a geometric example, not 4:1 electrical transformer voltage or power gain."
+    "40-inch L1 wire vs 160-inch selected L2 section wire is a geometric example, not 4:1 electrical transformer voltage or power gain.",
+    "An ordinary 4-diode whole-winding bridge hard-bonded DC-negative to centre tap conflicts with ideal nonzero half-winding voltage; this is a CONDITIONAL topology no-go and does not establish original pins.",
+    "20kV*1uF and 10kV*2uF nominal alternatives have the same 20mC nominal charge but different 200J/100J stored energies if operated at those voltages."
   ]
 }
