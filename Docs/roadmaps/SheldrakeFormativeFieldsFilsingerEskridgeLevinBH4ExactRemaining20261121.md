@@ -43,6 +43,51 @@ This is the **phase/deliverable/remaining-lemma ledger committed with the implem
 
 ---
 
+
+## 21 November continuation — Monster original 27/54 and BH4 same-state paid-energy weld (W10–W16)
+
+**This update supersedes the earlier suggestion to write a new generic "form" or "field" ontology.** Source-weld forward instead: original cube incidence → original physical PNP/tissue source → original BH4 same-source energy owner → accurately scoped Monster representation/locality comparison → Filsinger actual E/H face, as separately certified. A matching **integer is neither the same object nor an intertwiner**.
+
+### Monster source audit (actual master owners, no unmerged import)
+
+| Native owner | Exact source result | Interpretation, without laundering |
+| --- | --- | --- |
+| `DASHI/Foundations/Base369Ternary27HypervoxelFabricGeometryExact.agda`, `DASHI/Biology/Physical/BiologicalFullCubeIncidenceExact.agda` | `Ternary27Point = {-1,0,+1}³`; **27** sites, **54** nearest-neighbour positive bonds, **36** elementary square plaquettes, six external cube faces | Actual physical-style *combinatorial* adjacency. Not a 27-cycle, modular `Z/27` translation or automatically an electromagnetic device |
+| `DASHI/Moonshine/Monster27VOAOnsiteCube369BridgeExact.agda` | `Monster27VOAOnCubeSource` conditionally supplies a literal Monster element `g27`, selected same-source 3B element with `g27^9 = 3B`, the actual grade-two `196883` action at each cube site, and a `54` source trace; onsite action commutes with pointwise site relabelling | An **uninhabited source contract here**, not constructed Monster 27-action on the biological bonds. Site relabelling commutation does **not** prove preservation of the 54-bond Hamiltonian |
+| `DASHI/Moonshine/Monster3BCyclicFourierDyadicBridgeExact.agda`, `Monster3BRegularC3BulkResidualFiftyThreeBidiExact.agda` | `W|C3 = 53*1 + 65610*Reg(C3)`; exact **196830 + 53 = 196883**, regular character split, selected residual 53 | Character arithmetic/phase multiplicities, **literal same-action submodule and Albert recognition remain open** |
+| `DASHI/Moonshine/Monster196884FibreInterferenceExact.agda` | Exact **196830 + 54 = 196884**; coarse term **54** matches selected weight-two 3B trace numerically | Numerical compatibility; *does not construct* representation isomorphism or identify 54 trace with 54 spatial bond basis |
+| `DASHI/Moonshine/MonsterReducedNonaryBoundaryExact.agda`, `Base369MonsterFiftyFourFiveModeResidualActionBidiExact.agda` | **54=6×9=5×9+9**, reduced **53=5×9+8**, distinguished pointed sector | Candidate 54/53 *mode-state carrier*, NOT the 54 native bonds or a built Monster module |
+| `DASHI/Foundations/Base369Completion54SituatedTriadBridgeExact.agda` | Another **54=(2×3)×9** local completion fibre | Distinct semantics again. Finite count equality does not identify it with graph edges or Monster subrepresentation |
+| `DASHI/Moonshine/JInvariant369Cube27CuspCodecNonIsometryExact.agda` and `JInvariant369Cube27ModularLocalityObstructionExact.agda` | Cube digits ↔ cyclic residue chart bijective but not adjacency preserving; `+1` wraps +++ to ---; selected modular `M(x,y,z)=(x+y,x−y,z) mod3` does **not** preserve all native edges | Existing formal obstruction is stronger than a chart/cardinality comparison. Real organization depends on what *local operator* the intervention actually preserves |
+
+### New exact W10–W16 deliverables and remaining proofs
+
+| Gate | Exact code target / source owner | State and remaining payment |
+| --- | --- | --- |
+| **W10** distinct 54 roles | New `Monster27Native54OrganizingFieldWeldExact.nativePositiveBondCountIs54`, `monsterWeightTwoCoarseSectorIs54`, `monsterReducedCandidateResidualIs53`, `monsterExact3BBulkIs196830`, `monsterFullWeightTwo196884`, plus typed `FiftyFourRole` discriminator | **Source-written** as reuses of actual master theorems; no identification of carrier objects |
+| **W11** actual selected 3B trace matches COUNT | `sameCountUnderActuallySelected3BSource` conditionally proves source-certified grade-two trace equals `countList allPositiveBonds` | **Source-written**; `Monster27VOAOnCubeSource` must supply the actual `g27`, 3B source action and trace. NO canonical inhabitant in this PR; mere numeric coincidence does not produce a bond intertwiner |
+| **W12** modular site-to-edge no-go | `selectedModularMapCannotPreserveAll54PositiveBonds` takes a purported map of *every actual positive bond* to another native positive bond with both transformed endpoints and derives contradiction via the original `+x` edge; `cyclicCarryNotNearestNeighbour` reuses residue-corner obstruction | **New theorem source-written**, Agda kernel OPEN. **Do not** conflate this selected modular map with the actual Monster `g27` action: the two must be linked by a separately supplied source/action identification |
+| **W13** onsite Monster vs biological field | `JointOriginalTissueAndMonsterWave`, `originalBondPatternUnaffectedByPureMonsterOnsite` | **Source-written product/canonical action**. Pure onsite action changes the wave coordinate only; identical tissue readout by construction. *Actual cross-system interaction or morphogenetic influence is not derived*. **W13a [OPEN]:** `actualMonsterSourceIntertwinesOriginalBondTransfer` requires real 27-site Monster action, native edge-support preservation (or separately priced nonlocal edges), observable/energy transport and source-data |
+| **W14** BH4 energy already present | Existing `BH4PNPSamePhysicalHistoryBridgeExact.SameSourceBH4PNPModel`, `BH4PNPSameSourcePaidEnergyExact.SameSourcePaidEnergyModel`, `allSameSourceBH4PNPRouteAndPaidEnergy` | Existing **conditional** same-state chemistry/PNP/route/**ordered-energy** proof. Its `exactPhysicalEnergyStep` and `physicalResidualAndExteriorWorkPaid` are genuine source inputs, not constructed measured kinetics; **do not create another independent energy ledger** |
+| **W15** strongest BH4 → native 54-bond state weld | New `BH4NativeTissueSamePaidHistoryWeldExact.BH4NativeTissueReadoutWeld`, `toExistingTissuePhysicalSimulation`, `theTwoPhysicalRunsAreTheSame`, `allOriginalBH4PNPTissueGeometryAndPaidEnergy`, `everyOriginalBondReadoutAtSameBH4History`. One original `BH4.PhysicalState (Paid.source M)`; one original PNP receipt, specimen and energy preorder; native bond readout after *same* selected history | **Source-written composition**; Agda kernel OPEN. **W15a [OPEN]** original 29×12 Rhea/kinetic certificate and `SameSourcePaidEnergyModel` actual physical inhabitant; **W15b [OPEN]** source-specific `originalTissueReadout` and `physicalTissueOneStep`; **W15c [OPEN]** justified mapping from the five `Bio.Intervention` actions to BH4's two Bool challenges. Mapping is NOT injective and cannot silently assert five experimentally distinct controls; empirical original readout/protocol still missing |
+| **W16** full physical/Monster geometry weld | `Monster3B54TraceToNative54EdgeActionBidi` / `sourcePaidBH4TissueEHHistoricalIntertwining` **PROPOSED ONLY** | Need an actual same-object Monster representation-to-spatial-bond action intertwiner (unlikely from current data), a measured physical field/permitted local transport and a source-specific analogue; no Sheldrake nonlocality or antigravity promotion. When W12 no-go applies, report impossibility for that map rather than adding 36 fictional edges to force equality |
+
+### Locally executed exact negative controls — no Agda or CI
+
+Committed `scripts/check_monster_native_27_54_organizing_sympy.py` **Git blob `65b40e70a0fdf788ad41d92890f2e4c970f8c05e` is byte-for-byte the executed local script**. **27/27 PASS** with SymPy 1.14: literal 27-site/54-bond degree stratification 8/12/6/1; original 3B W/V arithmetic 53/54 residual versus trace; candidate 6×9 completion; exact modular bond image intersection **18**, union **90**, symmetric difference **72**; original native Laplacian `tr(L)=108`, `rank([L,P_M])=24`, squared commutator Frobenius norm **168**; 48 signed coordinate permutation automorphisms; explicitly cyclic +++/--- nonadjacency.
+
+**This finite test does not establish the whole cube automorphism group is exactly 48 merely by constructing 48 actions**; the separate older source disambiguation document gives the upper-bound argument by unique graph signatures. Nor does the 27/54 count mean the Monster 54 trace acts on the 54 native bonds. **Kernel receipt remains OPEN** because the available local environment does not have Agda. Existing 19 + 18 + 22 test receipts come from earlier work; only 27 new exact-head tests executed freshly for this extension. No compounded same-head aggregate is claimed.
+
+### Critical ordering, amended
+
+1. **Do not start with a new physical field or Monster basis.** Finish exact-head Agda typechecking of W0–W15, repair direct old-owner imports as required. Inspect any existing source-specific original 29×12 evidence before inventing one.
+2. Use W15 with real `SameSourcePaidEnergyModel` (including original paid energy and source rates) plus `BH4NativeTissueReadoutWeld.physicalTissueOneStep` on the same actual organism/device, with a genuine action-protocol mapping. Then W3/W4 native 54-bond readouts are automatically transportable for selected histories.
+3. Use W12 as a **locality discriminator**: if the selected Monster/modular action doesn't preserve native edges, either it acts only on an internal fibre, or new nonlocal physical interactions require separate original evidence, energy and timing. Never conflate `C3` regular representation with the finite spatial graph.
+4. Only when an original Maxwell/geometry source supplies E/H face projection into Filsinger and signed energy/momentum work may those source-receiver claims be compared. Antigravity/Eskridge remains a claim-scoped independent gravitational residual gate.
+5. Last, Sheldrake similarity-history nonlocal candidate only if independent controlled populations supply distinguishing interventions, original data, no communication/local field confounds and replication.
+
+---
+
 ## 0. Exact Sheldrake reading: the 17th-century challenge
 
 **Direct transcript, not an independently verified scientific source** (`Rupert Sheldrake Explains Morphic Resonance (With a Galton Board).txt` supplied by the user):
