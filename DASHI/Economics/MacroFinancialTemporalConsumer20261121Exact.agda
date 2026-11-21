@@ -8,6 +8,7 @@ import DASHI.Economics.AICapitalObservedStateTimeSeries2026Exact as Capital
 import DASHI.Economics.AICapitalOutcomeCompatibility20261016Exact as Outcome
 import DASHI.Economics.ChinaRetailGoldMarketTopology2026Exact as Gold
 import DASHI.Economics.AICapitalBurdenRelocation20261012Exact as Burden
+import DASHI.Economics.JPYTreasuryOpposingFlow20261121Exact as Treasury
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 
 -- Relative clock ticks on a common declared timeline, not calendar parsing.
@@ -50,6 +51,7 @@ record ExistingStateAttachment (asOf : Nat) : Set where
     capitalPoint : Capital.ObservedCapitalStatePoint
     goldBoundary : Gold.ChinaRetailGoldTopologyBoundary
     burdenState : Burden.CapitalBurdenState
+    treasuryFlow : Treasury.TreasuryOpposingPressure
 
 -- The intent coordinate is deliberately a synthetic rival-world discriminator.
 -- Identical observed economics can coexist with distinct intended objectives.
@@ -121,3 +123,21 @@ existingRefinancingFit = Outcome.refinancingStressFit
 
 existingYenBridge : Yen.CrossMarketFundingBridge
 existingYenBridge = Yen.candidateCrossMarketBridge
+
+-- Public dashiTRADE adapter counterpart: signals/treasury_opposing_flow_20261121.py
+-- These structural calculations share the exact synthetic 8/2/3/2/1 and
+-- 1/1/3/2/1 vectors. Do not interpret these as calibrated financial values.
+-- Source, window, units, and market-as-of authority remain independent gates.
+syntheticLowerPressure : Treasury.downward Treasury.flightFixture ≡ 10
+syntheticLowerPressure = refl
+
+syntheticHigherPressure : Treasury.upward Treasury.repatriationFixture ≡ 6
+syntheticHigherPressure = refl
+
+syntheticRepatriationDownward : Treasury.downward Treasury.repatriationFixture ≡ 2
+syntheticRepatriationDownward = refl
+
+sameJPYOppositeYieldDirection :
+  (Treasury.outcome Treasury.flightLower ≡ Treasury.lowerYield) ×
+  (Treasury.outcome Treasury.repatriationHigher ≡ Treasury.higherYield)
+sameJPYOppositeYieldDirection = Treasury.oppositeOutcomeDespiteSameJPY
