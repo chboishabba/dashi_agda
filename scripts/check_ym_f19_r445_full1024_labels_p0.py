@@ -58,7 +58,42 @@ def qm(left,right):
     if ba==bb: return (-sa*sb,0)
     sign,basis=MUL[(ba,bb)]
     return (sa*sb*sign,basis)
+def native_pair_endpoints(coarse_site, axis):
+    # Independent original native M=L=2 positiveBlock path:
+    # fineBlockOrigin is even (already proved in original R445 Agda).
+    origin = tuple(2 * v for v in coarse_site)
+    next_site = list(origin)
+    next_site[axis] = (next_site[axis] + 1) % 4
+    return (origin, axis), (tuple(next_site), axis)
+
+def qinv(x):
+    sign, basis = x
+    return x if basis == 0 else (-sign, basis)
+
+def qtrace(x):
+    return 2*x[0] if x[1] == 0 else 0
+
+def coarse_next(site, axis):
+    dest = list(site)
+    dest[axis] = (dest[axis] + 1) % 2
+    return tuple(dest)
+
+def fine_next(site, axis):
+    dest = list(site)
+    dest[axis] = (dest[axis] + 1) % 4
+    return tuple(dest)
+
+def qplaquette(field, site, a, b, nxt):
+    p=qm(field[(site,a)],field[(nxt(site,a),b)])
+    p=qm(p,qinv(field[(nxt(site,b),a)]))
+    return qtrace(qm(p,qinv(field[(site,b)])))
+
+from itertools import combinations
+
 reverse_products_differ=0
+native_products_checked=0
+coarse_plaquettes_checked=0
+original_spectator_wilson_changed=0
 for config in range(5):
     values=[]
     for i,(site,axis) in enumerate(canonical):
@@ -75,11 +110,42 @@ for config in range(5):
         assert forward_product==qm(f19_values[j],f19_values[j+1])
         reverse_products_differ+=(
             forward_product!=qm(r445_values[j+1],r445_values[j]))
+    # INDEPENDENT physical source paths, not the same selected-label
+    # list in different names: the native path walks from the original
+    # even block origin, while F19 decodes the sorted adjacent pairs.
+    fine_field={bond:values[i] for i,bond in enumerate(canonical)}
+    native={}
+    f19_coarse={}
+    for j,(site,axis) in enumerate(coarse):
+        first,second=native_pair_endpoints(site,axis)
+        native[(site,axis)]=qm(fine_field[first],fine_field[second])
+        f19_coarse[(site,axis)]=qm(f19_values[2*j],f19_values[2*j+1])
+    assert native==f19_coarse
+    native_products_checked+=len(coarse)
+    for site in product(range(2),repeat=4):
+        for a,b in combinations(range(4),2):
+            assert qplaquette(native,site,a,b,coarse_next)==qplaquette(
+                f19_coarse,site,a,b,coarse_next)
+            coarse_plaquettes_checked+=1
     changed=list(r445_values)
     changed[128+config]=(1,0) if changed[128+config]!=(1,0) else (-1,0)
     assert sum(a!=b for a,b in zip(
         values,[changed[inverse[i]] for i in range(1024)]))==1
+    changed_fine={b:changed[inverse[i]] for i,b in enumerate(canonical)}
+    assert all(qm(changed_fine[native_pair_endpoints(site,axis)[0]],
+                  changed_fine[native_pair_endpoints(site,axis)[1]]) ==
+               native[(site,axis)] for site,axis in coarse)
+    if any(qplaquette(fine_field,site,a,b,fine_next) !=
+           qplaquette(changed_fine,site,a,b,fine_next)
+           for site in product(range(4),repeat=4)
+           for a,b in combinations(range(4),2)):
+        original_spectator_wilson_changed+=1
 assert reverse_products_differ>0
+assert native_products_checked==320 and coarse_plaquettes_checked==480
+assert original_spectator_wilson_changed==5
+print("PASS original native R445 vs physical F19 ordered 64 SU(N) Q8 blocks: 320/320")
+print("PASS original coarse 4D plaquette traces: 480/480")
+print("NEGATIVE spectator changes fine Wilson plaquettes but not blocked links: 5/5")
 print("PASS original F19/R445 actual arbitrary Q8 link values: 5 x 1024")
 print("PASS original noncommutative Q8 blocked products: 320/320")
 print("NEGATIVE reversed Q8 pair order:",reverse_products_differ,"different")
