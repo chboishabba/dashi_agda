@@ -1,5 +1,17 @@
 # Alpöge/Claude RH–GRH × DASHI geometric transport (21 November 2026)
 
+## 21 Nov 2026 — existing fork as P0 vendor, no proof rewrite (CURRENT)
+
+**Authoritative external source:** [chboishabba/riemann-hypothesis-lean](https://github.com/chboishabba/riemann-hypothesis-lean) @ `7cbf7a0c32fca1badf05931879a37c3f8a2b03b4`. Original `src/Main.lean` Git blob `dbd5db70bc11b35f18fa5751216ab335321e7bfc` matches the checker mirror. Lean v4.33.1, Mathlib `0df444a360eaa60ab8c11dca51a86af692955474`. DASHI Lean root is v4.35.0-rc3: **different kernel/toolchain pin**.
+
+The fork **is the desired vendor dependency**. We do NOT need to rewrite Alpöge's 175187 Lean files or recopy them into DASHI. Rather than call a missing licence an obstacle to *local dependency use*, lock a Git source reference and preserve original authorship (while recognizing a fork creates no new redistribution licence).
+
+**Implemented**: Lean [#113](https://github.com/chboishabba/dashi_lean4/pull/113) `fork_pin.json` and `checkout_fork_source.sh` check source Git commit, two precise blob IDs, Lean and Mathlib; `RHAdmission.lean` consumes all five original theorem declarations, and `AlpogeRHBoundaryExact.lean` reuses the existing `MillenniumExternal.clayRiemannHypothesis_iff_mathlib`. Agda [#1533](https://github.com/chboishabba/dashi_agda/pull/1533) now has `scripts/lean_world_alpoge_rh_fork_manifest_20261121.json` for the already implemented original-source streaming PostgreSQL ingester; neither project includes a redundant source database or theorem reimplementation.
+
+**Still OPEN**: run actual local v4.33.1 source build and exact five-theorem admission; bridge root 4.35.0-rc3 Clay endpoint in a compatible checked kernel (no .olean mixing); exact Agda analytic zero/line identification and a real trusted Lean→Agda proof transfer. Neither a Git fork, a SQL source row, nor a conditional Agda BIDI proves the Agda terminal theorem. **No CI / no Lean / no Agda compilation this turn.**
+
+Detailed steelman / BIDI / reverse-solve and OpenAI-world-ingest donor map: [AlpogeRHOriginalSourceBidiMonster369P0P1MaxCut20261121.md](AlpogeRHOriginalSourceBidiMonster369P0P1MaxCut20261121.md#21-november-2026-1145-brisbane--correction-user-fork-is-the-vendor-source-current-controlling-p0).
+
 ## 21 November 2026 — P0 actual original RH source handoff / P1 Monster–369 reverse solve (LATEST)
 
 **P0 source-first priority is now explicit and implemented across both repositories.** See [full original-source BIDI / reverse-solve audit](AlpogeRHOriginalSourceBidiMonster369P0P1MaxCut20261121.md), source-readback audited from the external actual `Main.lean`, independent `Challenge.lean`, published verification notes, native Lean `MillenniumExternal/ExactTargetSurface.lean` and original Agda `RiemannAnalyticSubstrate` / `RiemannZetaProgramBoundary`.
