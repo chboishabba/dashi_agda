@@ -40,7 +40,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using
   (cong; cong₂; sym; trans; subst)
 open import DASHI.Foundations.RealAnalysisAxioms using
-  (ℝ; _*ℝ_; _-ℝ_; absℝ; _≤ℝ_)
+  (ℝ; _+ℝ_; _*ℝ_; _-ℝ_; absℝ; _≤ℝ_)
 
 import Data.Vec.Base as Vec
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
@@ -185,7 +185,7 @@ module _
         ordered (leftCoarse selected) (rightCoarse selected))
     ≤ℝ
     (D1.smallAmplitude (fullWilson selected)
-      D1.+ℝ
+       +ℝ 
      D1.largeAmplitude (fullWilson selected)) *ℝ
     D1.pow (D1.commonQ (fullWilson selected))
       (D1.physicalBlockDistance (fullWilson selected)
@@ -209,7 +209,7 @@ module _
     in
     subst (λ covariance →
       absℝ covariance ≤ℝ
-      (D1.smallAmplitude full D1.+ℝ D1.largeAmplitude full) *ℝ
+      (D1.smallAmplitude full  +ℝ  D1.largeAmplitude full) *ℝ
        D1.pow (D1.commonQ full)
          (D1.physicalBlockDistance full
            (left selected) (right selected)))
