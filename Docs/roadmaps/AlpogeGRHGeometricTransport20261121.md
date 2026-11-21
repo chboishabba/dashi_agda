@@ -1,5 +1,11 @@
 # Alpöge/Claude RH–GRH × DASHI geometric transport (21 November 2026)
 
+## 21 November — main-first CM/Hecke owner convergence and actual integrator PR #114
+
+Live `chboishabba/dashi_lean4@main` already includes BOTH former PR #69 Jacobi/Euler source and PR #73 universal Eisenstein primary-unit normalization, **byte-identical** to their old topic versions. Earlier “need merge #69 with #73 first” statements applied to stale topic branches, not main. New [main-derived Lean PR #114](https://github.com/chboishabba/dashi_lean4/pull/114) now applies the ORIGINAL `splitPrime_primary_associate_existsUnique` directly to the ORIGINAL `splitJacobiEisensteinElement` of norm p (all p>3, p%3=1), with the same source Frobenius trace and a typed open mod-six consumer. No copied primary constructor/character and no new norm-p proxy. Main-based branch ahead 3 / behind 0 at PR creation. Only newer source-written #73 primary↔ray and #69 ray/conjugate/coordinate bridge modules are absent from main.
+
+**Actual acceptance now:** kernel/axiom check `Integration/EisensteinJZeroMainJacobiPrimaryWeldExact.lean` on main-resolved compatible Lean/Mathlib, then port the small ray BIDI and prove the literal same-curve finite-field point count `6 | #E(F_p)`, selecting `u=-1` on the specific original canonical Jacobi (not just existence of a unit). Preserve independent original all-character GRH P0 from #113 as highest priority. No CI; no global Hecke L-series.
+
 
 ## 21 November — recovered original universal CM normalization (#73) and Frobenius modulo-six next theorem
 
