@@ -28,6 +28,7 @@ module DASHI.Physics.YangMills.YMClayOriginalF19R445EveryLinkValueBIDIExact wher
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
 open import Relation.Binary.PropositionalEquality using (cong; subst)
 import Data.Vec.Base as Vec
 
@@ -38,7 +39,7 @@ import DASHI.Physics.YangMills.YMClayR445CanonicalBondPermutationCodecExact as R
 import DASHI.Physics.YangMills.YMClayNativePositiveBondEnumerationVectorExact as Codec
 
 module _
-  {Matrix Complex : Set} {N : Agda.Builtin.Nat.Nat}
+  {Matrix Complex : Set} {N : Nat}
   (theory : SUN.CertifiedSUNMatrixTheory N Matrix Complex)
   where
 
