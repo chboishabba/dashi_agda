@@ -2,7 +2,7 @@
 
 **21 November 2026 | PR #1537 | base `master` | stage: source-written, Agda kernel pending.**
 
-This is the **phase/deliverable/remaining-lemma ledger committed with the implementation**, not a description of future work that has already been done. The primary scientific chain is **physical fields / conservation → Filsinger dynamic source response → Eskridge claim-scoped gravity discrimination → Levin bioelectric morphogenesis → BH4 electrodiffusion / reaction history**. A hypothetical Sheldrake nonlocal mechanism is an *extra rival* rather than a premise. SLR/ITIR are secondary evidence adapters and cannot promote a physical claim. Retain original author/first-implementation credit per `Docs/SourceAttributionPolicy.md`.
+This is the **phase/deliverable/remaining-lemma ledger committed with the implementation**, not a description of future work that has already been done. The primary *endpoint-first* scientific chain is **field topology/attractor and control leverage → (a) Filsinger ambient source access and receiver coupling, (b) antigravity/Eskridge static force versus independent gravitational response, and (c) Levin target-form selection**, with BH4 as a biology-specific physical-state instantiation. **Energy, momentum, source identity and causal history are mandatory consistency/promotion tests, not replacements for modeling controllability or accessible reservoirs.** A hypothetical Sheldrake nonlocal mechanism is an *extra rival* rather than a premise. SLR/ITIR are secondary evidence adapters and cannot promote a physical claim. Retain original author/first-implementation credit per `Docs/SourceAttributionPolicy.md`.
 
 
 
