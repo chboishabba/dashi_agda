@@ -39,7 +39,7 @@ cubeFibreCharacterStillNeedsCanonicalCertificate :
 cubeFibreCharacterStillNeedsCanonicalCertificate = refl
 
 sameCurveGlobalHeckeStillOpen :
-  CM.sameCurveHeckeGroessencharacterPaid CM.currentArithmeticCMPayment
+  CM.ArithmeticCMPayment.sameCurveHeckeGroessencharacterPaid CM.currentArithmeticCMPayment
     ≡ false
 sameCurveGlobalHeckeStillOpen = refl
 
@@ -70,7 +70,7 @@ probeNonzeroResidualRetained = refl
 -- A real source-to-TOE weld must identify the finite-field cubic character
 -- with the chosen original CM number-field/Hecke character on an actual
 -- source restriction, then its theta/Galois action and indexed residual.
--- The opaque obligations are intentionally uninhabited here.
+-- The schematic obligations are NOT a source-specific inhabited certificate.
 record ActualCubicHeckeTOESourceWeld : Set₁ where
   field
     SourceFiniteFieldMulChar : Set
@@ -87,5 +87,7 @@ record ActualCubicHeckeTOESourceWeld : Set₁ where
     thetaActionProof : SameOriginalThetaIsLiftAction
     indexedCompatibilityProof : SourceIndexedModeSignResidualCompatibility
 
--- No constructor here: source-defined character types and maps must
--- replace these abstract slots before asserting any theorem transfer.
+-- IMPORTANT: arbitrary Set-valued fields can be instantiated trivially.
+-- This record alone is NOT a meaningful proof of the original Hecke theorem.
+-- Replace the six abstract sets with exact original source definitions
+-- before using it as proof authority; no compiler from it to TLiftK exists.
