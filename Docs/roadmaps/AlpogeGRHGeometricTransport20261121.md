@@ -1,5 +1,12 @@
 # Alpöge/Claude RH–GRH × DASHI geometric transport (21 November 2026)
 
+
+## 21 November — CURRENT exact Hecke local source factor and GRH P0 priority
+
+Inspecting up-to-date Lean #69 source confirmed the original **all-p>3** `GoodPrimeLocalData`, split norm-p original Jacobi/Eisenstein element and actual j=0 trace, together with inert a_p=0. New #69 source `EisensteinJZeroSplitPrimeConjugateEulerFactorExact.lean` consumes those originals and factorizes the chosen split local polynomial into ((1+zT)(1+\bar zT)); it explicitly preserves `a_p=-(2z.re-z.im)`. Exact local arithmetic independently passes 10 split norm/trace/conjugate factorizations, seven inert zero traces, and 17 negative controls showing quadratic Dirichlet/Dedekind Euler factors are **not equal** to elliptic ones.
+
+This is the strongest actual `χ_{-3} ↔ cubic Jacobi ↔ local Hecke shape` correspondence yet, and the shortest promising **global special-case CM** next cut is compatible ideal-multiplicativity/conductor/infinity type followed by bad p=3 and global Euler/product L-series identity. It is NOT automatically an original fork `IsHecke` on `Chr`, `IsLift` or `EveryCharacter`. **Universal GRH P0 remains** Lean #113 original source/kernel admission of all Dirichlet characters and genuine proof transport; the special CM construction is a separate, optional global proof donor and may not delay P0. The original Monster/VOA/369 C3 construction is still an optional source geometry aid, not a character equality. New Lean #69 source uncompiled, no CI.
+
 ## 21 November — latest concrete quadratic Dirichlet / cubic Jacobi / CM Hecke P0 correspondence
 
 **Source-first correction:** newer `EisensteinLeanSplitPrimeLocalClosureReceiptExact` links the original Lean #69 canonical cubic certificate, split Jacobi norm and EisensteinQA transport, complete good-prime E:y²=x³+1 local factors; old early `EisensteinLeanInertPrimeLocalFactorReceiptExact` and TOE historical flags must be treated as **dated snapshots**, not current closure gates. Actual original Lean source was fetched for `EisensteinJZeroCanonicalCubicCharacterExact`, `EisensteinJZeroSplitPrimeEisensteinCarrierExact`, `EisensteinJZeroAllGoodPrimeLocalExact`; all source-written, Lean kernel acceptance not performed.
