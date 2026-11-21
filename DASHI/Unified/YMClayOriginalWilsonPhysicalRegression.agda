@@ -47,6 +47,14 @@ import DASHI.Physics.YangMills.YMClayP0FGeneratedTwoSourceInteractionNegativeCon
 
 import DASHI.Physics.YangMills.YMClayNativeR445TemporalReversalExact as NativeTimeReflection
 
+-- P0 BIDI same original native SU(N) source: R445 even-time reflected
+-- bond fields, original finite plaquette words, and the exact centered
+-- original n=3 Wilson mixed-J == actual R320 reflected-covariance seam.
+-- Physical time, CMP116 uniform-rate estimate and OS mass gap remain open.
+import DASHI.Physics.YangMills.YMClayR445SelectedTimeReflectionForwardExact as NativeSelectedTimeReflection
+import DASHI.Physics.YangMills.YMClayOriginalR445ReflectedPointwiseWordWeldExact as NativeWordPointwiseReflection
+import DASHI.Physics.YangMills.YMClayOriginalR445ReflectedWordCMP116BIDIExact as OriginalReflectedWordBIDI
+
 import DASHI.Physics.YangMills.YMClayD1OriginalCovarianceToR320Exact as D1OriginalCovariance
 
 import DASHI.Physics.YangMills.YMClayE1VariableCutoffCylinderLimitExact as E1VariableCutoffCylinder
