@@ -1858,3 +1858,21 @@ Preserve COMP6-8 and CM gates: minimal canonical form can be more costly
 than sufficient noncanonical carrier; test this separately for Monster/VOA
 orbit/action and FRACDASH reconstruction, do not infer equivalences.
 No CI initiated or Agda kernel receipt.
+
+
+## 21 November — P1 369 projective λ sign / punctured-27 holonomy maximum cut (LATEST)
+
+**This week's constructive π work is mathematically more relevant to RH/369 than a speed-only π-digit benchmark.** Reopened original `JInvariantLambdaCyclotomicParityExact.agda` and `JInvariantLambdaOrbitIntegerKernelExact.agda`:
+- On source `C3CyclotomicAmplitudeAlgebraExact.Cyclotomic3`, order-three `rotate` and order-two `reflect` satisfy `rotateCubed`, `reflectSquared`, `dihedralRelation`; Eisenstein norm `Q=a²-ab+b²` is invariant.
+- **Retained oriented quantity** `V=ab(b-a)` obeys `V(rotate x)=V(x)`, `V(reflect x)=-V(x)`. The scalar Legendre numerator (256Q³) and denominator (V²) forget that sign. All six raw vs normalized λ-orbit representatives are certified equal after their explicit `signedRaw` correction. These are exact rational/polynomial original-source proofs, not yet full analytic `λ(τ)` or classical modular j.
+- `scripts/check_369_j_analytic_weld.py` is already an original π PR reference that checks shell convergence and Lambert/divisor coefficients; its original source notes the Bishop same-object finite-to-lattice transport remains open.
+- `JInvariantEllipticFixedPointCompilerExact` and `JInvariantEllipticStandardJValuesCompilerExact` already compile conditional (E_6(i)=0,E_4(ω)=0,j(i)=1728,j(ω)=0) from native modular S/ST and nonzero Delta. CM -163 has exact 128-bit half-integer endpoint **integer** check `JInvariantCM163DyadicHalfIntegerExact`, with analytic q/π/CM-integrality link OPEN. Hypergeometric P/Q/B/T binary splitting is an acceleration for the same π/complex analytic branch, **not** an independent analytic proof.
+- This avoids falsely solving the analytic (j) problem from the first E8 root coefficient. E8→E4 root coefficient 240 remains a true first-shell equality; higher-shell `theta_E8=E4` and selected lattice analytic same-object remain open.
+
+**New source module in this PR:** `DASHI/Moonshine/JInvariantLambdaPunctured27SignMaxCutExact.agda` imports and reuses the actual existing rational cyclic λ and punctured-27 sources. It restates exact original `rotateEven`, `reflectOdd`, `reflectNorm` on the original cyclotomic carrier; on the independent native punctured cube it reuses `decodeEncode` and the **actual native four-cycle** `noEdgeCompatibleOrientation`. This is **two source-typed sign obstructions**, NOT an invented same-object map between λ and 13-axis geometry. Agda compiler pending; no CI.
+
+**Independent local check:** exact SymPy `Q(Rx)=Q(Sx)=Q(x)`, `V(Rx)=V(x)`, `V(Sx)=-V(x)` PASS. On original ternary point-set analogue, exact local Python shows 26 nonzero / 13 projective axes, all 16 four-cycle bit assignments impossible; 3^5 separate index tuples give 3888 sign-obstruction regressions. These are arithmetic experiments, NOT new Agda kernel checks.
+
+**Cross-PR integration:** RH #1533 now owns `RHGRHIndexedPunctured27HolonomyExact.agda`, which attaches the original same five-coordinate (h,t,k,j,v) to the native 13-axis orientation/sign/residual, with the original no-global-edge-section obstruction. TOE #1291 keeps ownership of the governed six-face indexed residual cube; no source theorem implies arbitrary six-face commutation by changing the index. Link the five-axis **same-object** λ phase/CM operator only if one can construct original selected operator/observer and prove commuting edge correction. An *invariant scalar j* cannot restore the forgotten (V) sign or cure spatial holonomy without new information.
+
+**Next priorities:** (1) original Bishop (λ(τ)) / weight-4/6 Eisenstein-to-standard-j normalized analytic SAME carrier and selected nonzero Delta; (2) source-typed sign/residual correction on the original #1291 cube, not forced equality across nontrivial holonomy; (3) selected j=0/CM cubic Jacobi and global Hecke original character if constructible; (4) P0 original RH/GRH imports remain separate. No new Monster representation, Hecke theta or RH claim.
