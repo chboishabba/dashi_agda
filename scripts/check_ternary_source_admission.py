@@ -60,7 +60,8 @@ def main():
                 print(f'dim={dim} beta={beta} known_controller={known} residual={value:.3g}')
     for dim in (2,3):
         for beta in (0.,.45):
-            assert evolve(dim,beta)['max_ledger_error'] < 1e-10
+            result = evolve(dim,beta)
+            assert (result['max_ledger_error'] if isinstance(result,dict) else result) < 1e-10
             tests += 1
     print(f'{tests}/{tests} configurations PASS (8 inverse fixtures; 4 committed multi-step trajectories)')
 
