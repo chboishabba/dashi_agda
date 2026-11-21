@@ -59,6 +59,20 @@ OWNERS = {
         "originalR445PairResidualFinite",
         "originalR445PairResidualComplete",
     ],
+    "DASHI/Physics/YangMills/YMClayE1VariableCutoffCylinderLimitExact.agda": [
+        "record ActualVariableCutoffCylinderFamily",
+        "originalWilsonConverges",
+        "continuumExpectation",
+    ],
+    "DASHI/Physics/YangMills/YMClayE1TimeKResidualCylinderWaveTransportExact.agda": [
+        "timeKOriginalCylinder",
+        "timeKOriginalCylinderRetainsResidual",
+        "timeKOriginalWilsonExpectation",
+        "timeKOriginalContinuumExpectation",
+        "timeKOriginalFiniteToContinuum",
+        "MDL.join-split",
+        "E1.originalWilsonConverges",
+    ],
     "DASHI/Physics/YangMills/YMClayR445TimeKResidualHyperfabricExact.agda": [
         "OriginalCodec.coarse",
         "OriginalCodec.phase",
@@ -66,6 +80,7 @@ OWNERS = {
         "originalNativeBlockOriginIsSelectedGeometry",
         "originalAllFineBondSelectedResidual",
         "oneFineStepKeepsCarryAndResidual",
+        "oddFineStepCannotFactorThroughCoarseOnly",
         "twoFineStepsExactlyDescend",
         "waveZeroIsNotDeleted",
         "indexedZeroModeIsExactFiniteZeroWave",
@@ -115,6 +130,7 @@ OWNERS = {
         "YMClayOriginalWilsonMarkedOS1AllTimesProducerWeldExact",
         "YMClayOriginalWilsonOS1R556R281CommutingSquareExact",
         "YMClayR445TimeKResidualHyperfabricExact",
+        "YMClayE1TimeKResidualCylinderWaveTransportExact",
     ],
     "DASHI/Physics/YangMills/YMClayNativeR445TemporalReversalExact.agda": [
         "originalSUNTimeReversalTwoLink",
