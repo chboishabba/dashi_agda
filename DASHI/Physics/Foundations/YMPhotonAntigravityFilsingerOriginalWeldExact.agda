@@ -68,10 +68,10 @@ ordinaryMaxwellApplicationNeedsSourceValidation =
 -- This is an EXACT source-owner projection, not a claimed measurement.
 ------------------------------------------------------------------------
 
-originalAntigravityPortfolio :
-  Disc.ExperimentBundle SC.HypothesisWorld →
-  Set
-originalAntigravityPortfolio _ = Portfolio.AntigravityExperimentCandidate
+originalAntigravityPortfolioCoverage :
+  Portfolio.AntigravityExperimentCandidate →
+  Portfolio.DiscriminationCoverage
+originalAntigravityPortfolioCoverage = Portfolio.coverage
 
 fourChannelExperimentDiscriminatesMetricVsNonmetric :
   Portfolio.metricVsNonmetric
