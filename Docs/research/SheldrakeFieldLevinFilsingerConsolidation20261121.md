@@ -1,0 +1,57 @@
+# Sheldrake × fields / antigravity / Filsinger × Michael Levin — master-native consolidation
+
+**Date:** 21 November 2026. **Owner:** `chboishabba/dashi_agda`. **Base:** `master`. GitHub has no commit for `main` (explicit ref probe returned 404). This is a reuse-first cross-programme consolidation, not a demonstration of a morphic field or an empirical breakthrough.
+
+## Source genealogy and original Sheldrake owner
+
+- **Rupert Sheldrake:** user-provided transcript `Rupert Sheldrake Explains Morphic Resonance (With a Galton Board).txt`, an interview account rather than an independently validated experiment. At ~03:54–06:00 it describes the Galton board and magnetic skew; at ~06:59–08:00 Sheldrake analogizes this to a hypothetical field biasing random events; ~09:05–10:14 describes inherited species habits; ~19:55–20:49 argues for direct similarity across space and time rather than central storage; ~21:39–22:04 acknowledges insufficient convincing empirical evidence. These are **source claims**, not locally verified physical effects. The subsequent commercial segment is excluded from scientific evidence.
+- **Pre-existing Sheldrake reference on master:** `DASHI/Biology/Levin/FungalCollectiveIntelligenceCore.agda` explicitly has `sheldrakeStyleBoundaryQuestionsRemainScaleIndexed = true`. That is a boundary flag in a fungal competence model, **not a complete Sheldrake mechanism**. Do not duplicate the original owner or inflate its scope.
+- **Michael Levin:** pattern memory, target morphology, bioelectric fields and regenerative competence remain Levin-attributed research. DASHI's formal constructions are repo-native extensions, not the cited scientist's own theorems.
+- **Filsinger and Donald Lee Smith:** reported device claims and graphs must remain source-indexed and distinct. Existing DASHI circuit models are reconstructions. Nothing here verifies extra power or a shared identity between different reported devices.
+- **DASHI contribution:** typed cross-owner consolidation, finite combinatorial Galton-board witness, source-native re-export of already existing work/causality bounds, and synthetic rival-model discrimination. Follow `Docs/SourceAttributionPolicy.md`.
+
+## Scientific priority: field and physical source before semantic producers
+
+| Priority | Directly checked master-native source | Exact role |
+| --- | --- | --- |
+| P0 field/energy | `DASHI/Physics/Foundations/SameObjectConservationLedgerExact.agda`, `FieldGeometryMatterConsumersExact.agda` | Field/force, matter, momentum, boundary flux and unresolved nuisance channels; PR [#1163](https://github.com/chboishabba/dashi_agda/pull/1163) remains an open higher-level integration |
+| P1 Filsinger/source response | `DASHI/Physics/Motors/SmithFilsingerTimeIndexedTransferExact.agda`, `SmithFilsingerSunEarthCoupledSourceExact.agda` | Actual `arrivalNoEarlier`, `loadWorkBound`, `sourceFreeLoadZero`; retarded delay and nonnegative source + stored-work accounting |
+| P2 antigravity | `DASHI/Physics/ExoticGravity/AntigravityClaimScopedExperimentalCutExact.agda`, `AntigravityResearchPromotionCutExact.agda` | Claim-specific original-source calibration, same-apparatus testing, standard alternatives and separate mechanism authority |
+| P3 Levin physiology | `DASHI/Biology/Levin/PatternMemoryCore.agda`, `LevinBioelectricAgencyCore.agda`, `TravelingFieldControl.agda` | Local bioelectric memory, pattern repair, traveling field control, explicit intervention |
+| P3 Levin fungal/history | `DASHI/Biology/Levin/FungalMemoryInterventionBoundary.agda`, `FungalCollectiveIntelligenceCore.agda` | Persistence, stimulus removal, physical/environmental traces, original Sheldrake boundary |
+| P4 biological stochastic | `DASHI/Biology/Physical/BiologicalParametricStochasticLumpingExact.agda` and PR [#1471](https://github.com/chboishabba/dashi_agda/pull/1471) | Exact finite history, outcome quotient, rational branching and future control, not a physical transfer coefficient |
+| Supporting only | `ExperimentalCoordinateDesignExact`, `HistoryConditionedChoiceExact`, `LawlikeRegularityCounterfactualExact`; optional SLR/ITIR | Nuisance, identifiability, provenance and counterfactual design, **not** the scientific organizing centre |
+
+The #99 Levin bioelectric core and #132 fungal branch are **merged**. The #1516 retarded motor line was **merged**. The additional #1524 Filsinger branch is **unmerged**: never treat branch-only source as a mainline theorem. The named source modules above were individually fetched and read from `master`.
+
+## The physical question versus the morphic hypothesis
+
+Permanent magnets can affect the steel Galton-board balls through standard electromagnetic forces. A permanent magnet need not appreciably demagnetize during each deflection; this does not establish an energetically free physical mechanism. An actual test must measure or model field forces, gravitational potential, impact, heat, friction, holding forces and boundary work. In the Filsinger programme, even an apparently source-free electrical output must be reconciled to the same original measured device, controller, storage, ambient source ports and retarded material response. **Static field, energy supply, and field-mediated probability are distinct notions.**
+
+A hypothetical cross-population contribution would be a **new extra coordinate**, not a substitute for Maxwell/Levin physics. Define the competing model families: `H0` local electromagnetic, gravitational, environmental and inherited mechanisms; `H1` endogenous Levin-style bioelectric / morphogenetic history; `H2` physically retarded Filsinger-style waveguide and material-memory/source backaction; `H3` claim-scoped antigravity after a same-object force/stress comparison; `H4` Sheldrake's speculative similarity-conditioned cross-population term beyond traced ordinary channels. Coexisting mechanisms do not imply identity.
+
+A simple two-stage independent Galton idealization with right probability `p` has law `((1-p)^2, 2p(1-p), p^2)`. Reference `p=1/2` gives `(1/4, 1/2, 1/4)`; illustrative biased `p=3/4` gives `(1/16, 3/8, 9/16)`. These are exact probabilities, **not** measured magnetic parameters. The new Agda module uses a **separate** equiprobable four-path combinatorial fixture, `(1,2,1)` before and `(0,3,1)` after one path relabelling. These fixtures are not equivalent physical Galton-board models; both illustrate why distribution changes alone do not diagnose the physical cause.
+
+### Exact synthetic identifiability obstruction
+
+For purely illustrative symbols `B` (measured local field) and `R` (unverified cross-population similarity-history input), consider `p(B,R)=1/2 + alpha B + beta R` with normalized branch weights and valid probability range. When `B=R=1`, the rival coefficients `(alpha,beta)=(1/4,0)` and `(0,1/4)` give the **same** observed histogram. A formal 2×2 factorial design `(B,R) in {0,1}²` with an intercept has rank 3, and can distinguish the *toy parameterization* provided that each coordinate is actually, independently manipulable/measurable. **No physical intervention for R, no calibrated beta and no independent measurement of morphic resonance exist in this PR.**
+
+### The decisive higher-order question
+
+Does exposure to **earlier similar patterns in independent populations** alter a later population's outcomes, conditional on genetics, actual contact/information, equipment, environment, baseline difficulty, chronology and ordinary developmental memories? The study must require independent randomisation, blinded test task IDs, matched difficulty, geographic/site replication, measured local physical fields and a held-out prediction schedule. Retrospective fit, source overlap, temporal learning drift, magnet deflection, epigenetic inheritance or bioelectric regeneration alone is not enough. A single anomalous distribution does not automatically establish H4.
+
+## Deliverables, verification and limits
+
+- `DASHI/Physics/Foundations/SheldrakeFieldLevinFilsingerConsolidationExact.agda`: imports the **actual master-native** Levin/fungal/traveling-field, conservation, Filsinger-retardation/source-bound and antigravity owners. Exact path counts, typed non-identity between cause families, and a *candidate-only* cross-population rival kernel. Re-exports `arrivalNoEarlier`, `loadWorkBound` and `sourceFreeLoadZero` with premises intact.
+- `DASHI/EverythingSheldrakeFieldLevinFilsinger20261121.agda`: narrow discoverability root; avoids retroactively splicing unverified code into the huge global `Everything` root.
+- `scripts/check_sheldrake_field_filsinger_levin_sympy.py`: **19/19 synthetic checks passed locally** with installed SymPy. Checks probability conservation and histogram values; causal-model observational collision, rank under hypothetical variation, an illustrative same-boundary work equality, retarded timing, and noninjective Levin history/morphology observation. No empirical data was fitted.
+- **Agda kernel unverified:** this environment had no Agda executable. Run `agda -i . DASHI/EverythingSheldrakeFieldLevinFilsinger20261121.agda` and exact-head local script replay before claiming a compiled theorem. No GitHub CI was used.
+- No measured magnet field map, Filsinger device proof, environmental energy extraction, antigravity effect, wet-lab Levin organism intervention, original rat-generation dataset replay or replicated nonlocal causal effect was produced.
+
+## Next maximum cut
+
+1. **P0 local source/head check:** exact Agda typecheck, 19/19 exact-head SymPy replay, imported-module provenance and statement audit.
+2. **P1 standard field mechanical ledger:** same-rig magnet distance/orientation/control trials, steel-ball trajectory and energy-force ledger; compare local Maxwell predictions.
+3. **P2 Filsinger/source response:** use the existing retarded Maxwell/ADE and source-separated source–receiver work; preserve measured device identity and storage history.
+4. **P3 Levin morphogenesis:** voltage, tissue topology, environmental source trace, perturbation/removal, persistent hidden pattern and future response; avoid conflating regeneration with remote knowledge transfer.
+5. **P4 independent cross-population discrimination:** preregistered randomizations and negative controls; acquire direct original datasets and independent replication before treating a distinct morphic term as credible.
