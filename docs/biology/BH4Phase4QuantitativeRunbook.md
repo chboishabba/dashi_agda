@@ -51,6 +51,115 @@ For reactions it records whether abundance context exists while retaining `abund
 
 Crucially, `solver_payable` is read only from the existing normalized parameter manifest's `usable_for_joint_flux_witness`. Context coverage never flips a payment gate.
 
+## Creator-chart-first finite comparison
+
+The runner now compares the existing 12-reaction finite panel against
+a bounded **original creator chart Rhea-ID observation index**. Input:
+docs/biology/KitzerowPublishedRheaChartObservedIndex.v1.json.
+Output:
+artifacts/biology/kitzerow-primary-chart-rhea-crosswalk.json.
+
+The source is Kimberly Kitzerow's *BH4/Folate/Cobalamin/Homocysteine
+Pathway* (ResearchGate 377218425); the page dates the work January 2024
+but also reports a distinct 2025-08-08 full-text upload. Its original
+PDF layout and whole proprietary graph are not verified. Literal ID
+intersection does not prove identical reaction context, causal ownership,
+whole-model coverage, or in-vivo flux. Native SensibLaw generic-world
+consumer: https://github.com/chboishabba/SensibLaw/pull/512 .
+
+For source-authorized local text, a second optional route is:
+
+    python3 scripts/run_bh4_phase4_maxcut.py \
+      --creator-source-text YOUR_AUTHORIZED_CHART_TEXT.txt \
+      --creator-source-revision "publisher display 2025-08-08; not independently authenticated"
+
+This indexes all Rhea occurrences in those *supplied* UTF-8 bytes, including
+the observed private-use font glyphs, retains the input SHA-256 and per-line
+coordinates, and compares a separate candidate observation with the original
+manual eight-ID index. No protected chart body is committed. The optional
+source-text candidate cannot replace an independently verified original
+PDF/figure or establish whole-author-network completeness.
+
+Prefer curated Reactome SBML Level 3 and BioPAX Level 3 releases for
+already-published pathways before implementing new standards export.
+
+## Optional creator-selected Rhea/ChEBI acquisition
+
+The same Phase-4 runner also supports
+
+    python3 scripts/run_bh4_phase4_maxcut.py --acquire-creator-chart-reactions
+
+This does **not** enlarge or silently merge the original 12-reaction/29-species
+matrix. It requests the bounded creator-observed Rhea IDs from a separate
+source index, retains errors and source hashes, produces an independent
+source-selected stoichiometric matrix and reuses the same partial ontology
+and review builders for that separate object. A creator source reaction
+in Rhea is evidence of its curated equation and participants; it does not
+supply shared compartment, transport, enzyme abundance, causal direction
+or flux. Source acquisition can fail, and the side-path must not automatically
+invalidate the independent finite-panel run.
+
+Rhea live REST/SPARQL receipts carry acquisition-time details; the exact
+release must be separately verified rather than a previous release label
+being inherited as current. The author original PDF binary and entire
+proprietary BioGene graph are not available in this workflow.
+
+## Source-attributed pathway/ontology interop
+
+The Phase-4 runner also emits a partial BH4 pathway graph from the existing
+Rhea/ChEBI matrix, optional xPollenation evidence, and the separate candidate
+Kitzerow hypothesis ledger:
+
+- artifacts/biology/bh4-pathway-ontology.json
+- artifacts/biology/bh4-pathway-ontology.jsonld
+
+See [KitzerowBH4PathwayOntologyRoadmap.md](KitzerowBH4PathwayOntologyRoadmap.md)
+for exact external ontology targets and the KPO-01 through KPO-12 obligations.
+The updated Rhea REST acquisition requests GO, Reactome, KEGG and MetaCyc columns. The exporter now recognizes well-formed KEGG/MetaCyc reaction IDs as typed review-only candidates and retains unparsed residuals. Reactome mappings are automatically ChEBI-based, unlike the curated Rhea KEGG/MetaCyc mappings. Any observed links are exported with release/source metadata, but do not establish same-context pathway identity. The runner also emits a deterministic, source-reopenable **candidate-only**
+worklist at artifacts/biology/bh4-pathway-review-worklist.json, classified by
+author primary passage, reaction direction/compartment/kinetics, species
+compartment/exchange, ontology mapping and non-finite chemistry.
+The worklist reuses existing DASHI Wikidata repair/PNF and ITIR user-story
+principles; it is neither an SLR S29 receipt nor a Dioxus implementation.
+Optional --source-reopen-packet adds caller-supplied source-envelope references
+but cannot authenticate a historical document. Internal/restricted source
+locators are not copied into the export. Follow
+[BH4ITIRSensibLawWikiRepairCrosswalk.md](BH4ITIRSensibLawWikiRepairCrosswalk.md)
+for exact integration owners and acceptance gates.
+
+The JSON-LD representation is an RDF-importable discovery graph, **not** a
+standards-compliant BioPAX/GO-CAM/SBML model or a paid kinetic simulator.
+It has no fabricated compartments, kinetic laws or exchange rates. Failed
+acquisition must not be reinterpreted as negative biology.
+
+## Why source-paid exchange intervals are the mathematical cut
+
+The source-written Agda `BH4ExchangeIdentifiabilityExact` states the
+elementary but decisive non-identifiability theorem: with unrestricted
+exchange, for any internal S*v choose e = -S*v and obtain exact
+balance. The exact-integer regression shows the resulting algebraic
+identity and demonstrates that imposing an exchange bound can reject
+one particular candidate. This is **not** a global constrained-network
+infeasibility theorem, nor an assertion that real tissue can supply
+that exchange. See KitzerowBH4PathwayOntologyRoadmap.md.
+
+    python3 scripts/check_bh4_exchange_identifiability.py
+
+## Fail-closed interval-evidence validation
+
+The existing parameter normalization and HiGHS solver now reject duplicate
+parameter identifiers, nonfinite/reversed bounds, absent assay/source/context
+references and missing/mismatched flux units. A solver success must survive
+a separate finite S*v+e and interval-bound residual check. Its vector remains
+a **floating-point candidate with stated tolerance**, not an exact algebraic
+proof or independent authentication of biological source measurements.
+
+The regression
+`python3 scripts/check_bh4_numeric_flux_guard.py` includes duplicate,
+NaN/infinity, stale/missing-context, unit mismatch, and an optional synthetic
+HiGHS success case. No synthetic fixture is promoted to a paid clinical
+experimental or tissue-specific measurement.
+
 ## Live max-cut after the v8 run
 
 The run should tell us exactly which reaction columns have abundance context and which exchange species have human metabolomics context. The scientific payment frontier is then:
@@ -70,3 +179,35 @@ python3 scripts/check_bh4_xpollenation.py
 ```
 
 The aggregate checker includes acquisition, ranking, payment-preparation and joint-payment firewalls. CI is not the completion gate for this tranche.
+
+## Adjacent differential stimulant observer (2026-11-20)
+
+See [BH4DifferentialStimulantObservationMaxCut.md](BH4DifferentialStimulantObservationMaxCut.md), S1 and S3a: existing included finite observer owner now records matched initial stocks, distinct cytosolic/vesicular/extracellular balance witnesses, and endpoint non-identification of pool, synthesis and gross release. Synthetic only; exact-head Agda, real reaction/transport source evidence and empirical discrimination OPEN. This does not alter original 29x12 or P0–P3 payment.
+
+## Selected catecholamine source cut (2026-11-20)
+
+Run `python scripts/check_bh4_catecholamine_sympy.py` for S2a: selected Rhea 15-species/5-reaction chemistry with existing finite matrix producer, exact CHNOP/charge, pterin recycling, and feasible turnover-observer collision. See [BH4DifferentialStimulantObservationMaxCut.md](BH4DifferentialStimulantObservationMaxCut.md) for attribution and S2b remaining source/369/physical boundary gates. This is local SymPy acceptance, not archived original panel payment, clinical inference or Agda kernel acceptance.
+
+## Joint reaction/transfer observer (2026-11-20)
+
+Run `python scripts/check_bh4_joint_observer_sympy.py` for selected S3b/S4a: exact joint rank/nullspace, 33 cardinality-minimal panels among 126 five-row subsets, repeated feasible silent circulation histories, explicit exchange negative control and native 369 incidence aggregation. Local replay uses recovered literal upstream definitions; full-module/Agda acceptance and physical source/kinetic payment remain OPEN. See [BH4DifferentialStimulantObservationMaxCut.md](BH4DifferentialStimulantObservationMaxCut.md).
+
+## Conditional flux reconstruction
+
+Run `python scripts/check_bh4_flux_observer_sympy.py` for S4b: exact target-specific minimal flux panels, native weighted cycle closure, 54-rank reconstruction, and changing-conductance countermodel. Uses recovered native geometry and inspected SG sign; physical conductances, time histories, boundary exchanges and original source payment remain OPEN. See [BH4DifferentialStimulantObservationMaxCut.md](BH4DifferentialStimulantObservationMaxCut.md).
+
+## Conductance-history compression
+
+Run `python scripts/check_bh4_conductance_history_sympy.py` for S4c: exact cycle-class ratio rank, rank-one updates, streaming residual decomposition, and two same-mass self-consistent Poisson states with inequivalent SG flux spaces. Selected positive-support algebra; physical trajectories and source payment OPEN. See [BH4DifferentialStimulantObservationMaxCut.md](BH4DifferentialStimulantObservationMaxCut.md).
+
+## Accepted implicit trajectory streaming
+
+Run `OPENBLAS_NUM_THREADS=1 python scripts/check_bh4_pnp_streaming_sympy.py` for S4c.5. Exact chord codec plus independent reaction-adjusted stock divergence, accepted implicit PNP steps, accumulated cycle residual and solver-defect bound. 48 local reconstructed-solver steps passed; exact full-module replay, original biochemical source payment and physical discrimination remain OPEN. See [BH4DifferentialStimulantObservationMaxCut.md](BH4DifferentialStimulantObservationMaxCut.md).
+
+## Situated consumer residual
+
+Run `python scripts/check_bh4_situated_observer_sympy.py` for S4c.6: exact conditional consumer-specific linear minimality, window-specific adjoints, chronology collisions and spatial net-flux cut. Local SymPy replay uses recovered native geometry only; existing included Agda countermodel imports original residual/descent owners for the finite release chronology witness (source-written, no kernel receipt). See [BH4DifferentialStimulantObservationMaxCut.md](BH4DifferentialStimulantObservationMaxCut.md).
+
+## Finite admissible-future observer
+
+Run `python scripts/check_bh4_admissible_future_sympy.py` for S4c.7: chronological enabled histories, exact admissible-fibre difference spans, minimal linear residual/coordinate panels and a release-budget future-cone collision. Local SymPy execution only; synthetic masks and entitlement are not medication or measured physiology. See [BH4DifferentialStimulantObservationMaxCut.md](BH4DifferentialStimulantObservationMaxCut.md).

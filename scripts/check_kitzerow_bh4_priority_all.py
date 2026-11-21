@@ -10,6 +10,21 @@ for name in [
     "check_bh4_flux_candidate_ranking.py",
     "check_bh4_flux_payment_preparation.py",
     "check_bh4_state_payment_acquisition.py",
+    "check_bh4_pathway_ontology.py",
+    "check_bh4_pathway_review.py",
+    "check_kitzerow_primary_chart.py",
+    "check_kitzerow_chart_source_text.py",
+    "check_kitzerow_source_chart_acquisition.py",
+    "check_bh4_numeric_flux_guard.py",
+    "check_bh4_exchange_identifiability.py",
+    "check_bh4_allocator_future_observer.py",
+    "check_bh4_spatial_circulation.py",
+    "check_bh4_shared_redox_dynamics.py",
+    "check_bh4_original_qdpr_spatial_reaction.py",
+    "bh4_original_qdpr_spatial_finite_volume.py",
+    "check_bh4_original_panel_spatial_events.py",
+    "check_bh4_one_molecule_future_minimality.py",
+    "check_bh4_spatial_measurement_payment.py",
 ]:
     runpy.run_path(str(root / "scripts" / name), run_name="__main__")
-print("Kitzerow BH4 aggregate evidence + identity + chemistry + executed-panel + quantitative + flux-ranking + payment-preparation + state-acquisition Phase-4 regression: ok")
+print("Kitzerow BH4 aggregate evidence + identity + chemistry + executed-panel + quantitative + flux-ranking + payment-preparation + state-acquisition + ontology + source-reopening review Phase-4 regression: ok")

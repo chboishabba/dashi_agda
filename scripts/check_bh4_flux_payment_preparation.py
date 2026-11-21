@@ -21,7 +21,7 @@ for token in [
     assert token in s, f"missing payment-preparation token: {token}"
 
 r = runner.read_text()
-for token in ["prepare_bh4_flux_payment.py", "bh4-flux-payment-preparation.json", "sabio_flux_payment", "dashi.bh4-phase4-maxcut-run.v6"]:
+for token in ["prepare_bh4_flux_payment.py", "bh4-flux-payment-preparation.json", "sabio_flux_payment", "dashi.bh4-phase4-maxcut-run.v8"]:
     assert token in r, f"runner missing flux-payment preparation token: {token}"
 
 f = formal.read_text()
