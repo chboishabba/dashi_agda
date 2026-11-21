@@ -30,6 +30,7 @@ import DASHI.Physics.YangMills.BalabanC3MonsterEquivarianceAuditExact as YMC3
 import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier as SU2
 import DASHI.Physics.YangMills.BalabanSU2LieBracket as Bracket
 import DASHI.Physics.ExoticGravity.AntigravitySameStateFourChannelDiscriminatorExact as Four
+import DASHI.Physics.ExoticGravity.AntigravityMaterialBidiCrossPollinationExact as Anti
 import DASHI.Physics.ExoticGravity.AntigravityExperimentPortfolioExact as Portfolio
 import DASHI.Physics.ExoticGravity.SuperconductingGravityExperimentDesignProofSearchCrossPollinationExact as SC
 import DASHI.Physics.ExoticGravity.SuperconductingGravityCouplingResidualBidiExact as Residual
@@ -40,6 +41,7 @@ import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Plasma.KSW668FullVectorMaxwellJetExact as KSW
 import DASHI.Physics.Motors.SmithFilsingerFullVectorPoyntingPortWeldExact as Poynting
 import DASHI.Physics.Motors.SmithFilsingerFiniteVolumeMaxwellBoundaryWeldExact as Finite
+import DASHI.Physics.Motors.SmithFilsingerFiniteVolumeFaceIncidenceExact as Face
 import DASHI.Physics.Motors.SmithFilsingerSpatialSourceBoundaryWeldExact as Spatial
 import DASHI.Physics.Motors.SmithFilsingerSourceMaxwellBoundaryWeldExact as Source
 import DASHI.Physics.Motors.SmithFilsingerMidpointPhaseWorkExact as Port
@@ -246,3 +248,115 @@ sourceNativeYMStillHasUnpaidRecoveryC3Seam :
   YMC3.balabanC3ActionOnSourceSeamsRecovered ≡ false
 sourceNativeYMStillHasUnpaidRecoveryC3Seam =
   SharedOrientation.ymUnifiedRecoveryC3StillGated
+
+
+------------------------------------------------------------------------
+-- F2. ACTUAL missing work-identity in the previous source weld:
+--
+-- Sharing b/f/s does NOT identify an arbitrary finite mesh's load or
+-- initial/final storage with the full-vector Maxwell field work.  Require
+-- contentful equality for EACH independently sourced quantity, on the
+-- exact mesh and exact full-vector physical admission already selected.
+-- These are physical INPUTS, not an automatic Maxwell identity.
+------------------------------------------------------------------------
+
+record MeasuredSameFieldMeshWorkIdentity
+  {r : Level} {F : C3.RealField r}
+  {jet : KSW.FullVectorMaxwellJet F}
+  {b : Source.SelectedBoundary}
+  {f : Source.FormalFieldToPort b}
+  {s : Source.SignedSourceCycleWeld b f}
+  (w : SameOriginalFilsingerFullVectorAndFiniteMesh jet b f s)
+  : Set (lsuc (r ⊔ (lsuc (lsuc lzero)))) where
+  field
+    meshLoadIsIntegratedVectorLoad :
+      Face.totalLoad
+        (Face.OrientedFaceMesh.cells
+          (Finite.OriginalFiniteVolumeAdmission.mesh
+            (realSelectedFiniteMesh w)))
+      ≡ Poynting.SameOriginalPhysicalFieldBoundary.usefulLoad
+          (integratedPhysicalVector w)
+
+    meshInitialStorageIsCombinedFieldAndMaterial :
+      Face.totalInitial
+        (Face.OrientedFaceMesh.cells
+          (Finite.OriginalFiniteVolumeAdmission.mesh
+            (realSelectedFiniteMesh w)))
+      ≡ Poynting.SameOriginalPhysicalFieldBoundary.initialFieldEnergy
+          (integratedPhysicalVector w)
+        + Poynting.SameOriginalPhysicalFieldBoundary.initialMaterialEnergy
+            (integratedPhysicalVector w)
+
+    meshFinalStorageIsCombinedFieldAndMaterial :
+      Face.totalFinal
+        (Face.OrientedFaceMesh.cells
+          (Finite.OriginalFiniteVolumeAdmission.mesh
+            (realSelectedFiniteMesh w)))
+      ≡ Poynting.SameOriginalPhysicalFieldBoundary.finalFieldEnergy
+          (integratedPhysicalVector w)
+        + Poynting.SameOriginalPhysicalFieldBoundary.finalMaterialEnergy
+            (integratedPhysicalVector w)
+
+open MeasuredSameFieldMeshWorkIdentity
+
+-- An actual load->full-vector equality above + the source-owner original
+-- receiver identity, not a numerical comparison with an unrelated port.
+originalMeasuredMeshLoadIsActualSelectedReceiver :
+  ∀ {r} {F : C3.RealField r}
+    {jet : KSW.FullVectorMaxwellJet F}
+    {b : Source.SelectedBoundary}
+    {f : Source.FormalFieldToPort b}
+    {s : Source.SignedSourceCycleWeld b f}
+  (w : SameOriginalFilsingerFullVectorAndFiniteMesh jet b f s) →
+  MeasuredSameFieldMeshWorkIdentity w →
+  Face.totalLoad
+    (Face.OrientedFaceMesh.cells
+      (Finite.OriginalFiniteVolumeAdmission.mesh
+        (realSelectedFiniteMesh w)))
+  ≡ Port.MidpointTwoPortWorkWindow.usefulWork
+      (Source.FormalFieldToPort.portWindow f)
+originalMeasuredMeshLoadIsActualSelectedReceiver w sourceIdentity =
+  trans (meshLoadIsIntegratedVectorLoad sourceIdentity)
+    (Poynting.SameOriginalPhysicalFieldBoundary.originalUsefulPortIdentity
+      (integratedPhysicalVector w))
+
+-- Positive work is still capped by independent source admission and
+-- controller PLUS paid material modulation.  This reuses the original
+-- full-vector physical proof, not the weaker source-only cap.
+originalFullVectorMeshSourceCapWithMaterialModulation :
+  ∀ {r} {F : C3.RealField r}
+  (jet : KSW.FullVectorMaxwellJet F)
+  (b : Source.SelectedBoundary)
+  (f : Source.FormalFieldToPort b)
+  (s : Source.SignedSourceCycleWeld b f)
+  (w : SameOriginalFilsingerFullVectorAndFiniteMesh jet b f s) →
+  Bound._≤_
+    (Port.MidpointTwoPortWorkWindow.usefulWork
+      (Source.FormalFieldToPort.portWindow f))
+    ((Cycle.AdmittedSourceCapCycle.independentlyAdmittedNaturalCap
+       (Source.SignedSourceCycleWeld.cycleWithSourceCap s)
+      + Cycle.RepeatableSourceCycle.controllerWork
+          (Cycle.AdmittedSourceCapCycle.repeatable
+            (Source.SignedSourceCycleWeld.cycleWithSourceCap s)))
+      + Poynting.SameOriginalPhysicalFieldBoundary.paidMaterialModulation
+          (integratedPhysicalVector w))
+originalFullVectorMeshSourceCapWithMaterialModulation jet b f s w =
+  Poynting.selectedFullVectorPhysicalAdmissionCap
+    jet b f s (integratedPhysicalVector w)
+
+-- Original antigravity source owner itself demands this *independent*
+-- discriminator; neither the five Boolean field signatures nor static
+-- support measures carry acceleration under an applied calibrated pulse.
+originalAlteredInertiaRequiresIndependentForceAccelerationComparison :
+  Anti.requiredDiscriminator Anti.alteredInertialResponse
+    ≡ Anti.inertialComparisonDiscriminator
+originalAlteredInertiaRequiresIndependentForceAccelerationComparison = refl
+
+------------------------------------------------------------------------
+-- Stronger limit: an original per-face E/H trace/quadrature, actual
+-- conductor-return geometry, instrument calibration and source time
+-- provenance are NOT supplied by the three measured scalar identities.
+-- The exact travelling TEM cylinder calculation in the separately
+-- executed SymPy comparator is a mathematically controlled reference
+-- geometry; no source claim makes Filsinger's apparatus that cylinder.
+------------------------------------------------------------------------
