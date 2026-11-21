@@ -185,3 +185,12 @@ Important: symbolic 1+omega+omega²=0 with sum omega^(3j)=3 is only a C3 angular
 | P0.32-general-frame | Exact noncommuting k-dependent rational SU2 Cayley frame, Ω=(dU)U†, pure-gauge flatness and D_i/D_iD_j covariance | Exact SymPy identities PASS; NOT spacetime Lorentz curvature |
 | P0.32-P031-refactor | Reuse shared helper within original Sato/Hayami Eq11 P0.31 `cell_tensors` rather than duplicate geometry | Old 115 tests historical for old blob; full current P0.31 executable **not independently replayed** |
 | P0.32-material/GR | Real PtMn3 Wannier/domain, converged original octupole, Maxwell/SC/controller source, metric/gravimetry | OPEN |
+
+
+| P0.33-lift-BIDI | Reverse 70kg (686.4655N) from same Pt-origin fixed moments: F_up=−3Nμa²κ4, κ4=−mg/(3Nμa²) | Full source-independent **66/66 local SymPy**; 23/23 exact compact repo consumer; **material calibration OPEN** |
+| P0.33-harmonic-stability | Maxwell harmonic Φ4 provides fixed force but K=0; harmonic Φ5 adds K=(6,−3,−3)Nμa²κ5; Kz>0 creates both transverse instabilities | Exact source-energy Hessian; additional stabilizer each K_controller>Kz/2 and 6DOF source stress OPEN |
+| P0.33-metric-endpoint | Under ordinary weak-field POINT monopole, outward Δa=f g at r requires ΔM_active=−f g r²/G; metric redshift prediction Δν/ν= f g r/c² | Symbolic inverse PASS; no negative mass, bounded source or physical metric solution established |
+| P0.33-stress-closure | CMP119 trace(T)≠active(T). Closed stationary integrated spatial stress of a total isolated body vanishes under Laue conditions including controller/shells | Exact two-sector algebra; not a sourced GR solution and boundary assumptions mandatory |
+| P0.33-nonmetric-rival | Screened Yukawa fifth-force αY required negative for outward force; test source Jφ=λ(O·B), integrated charge Qφ=λI_OB | Exact conditional inverse and sign reversal; healthy material charges, units, actual φ action OPEN |
+| P0.33-discriminator | Load/remote/clock/pickup conditional 4×4 inverse; without clock rank3 of four unknowns, null metric↔fifth direction | Exact symbolic rank PASS; calibrated real clocks/sensors, shielding, 6 original antigravity typed endpoints OPEN |
+| P0.33-acceptance | Full standalone SymPy 66 locally PASS (conversation source artifact); compact in-repo executable 23 PASS, exact matched Git blob | Both distinguishable; complete full source not yet in GitHub, no Agda or GitHub CI |
