@@ -11,6 +11,7 @@ import DASHI.Economics.AICapitalBurdenRelocation20261012Exact as Burden
 import DASHI.Economics.JPYTreasuryOpposingFlow20261121Exact as Treasury
 import DASHI.Economics.JPYTreasuryInterventionOfficialReceipts20261121Exact as FX
 import DASHI.Economics.TreasuryParYieldEventWindow20261121Exact as CMT
+import DASHI.Economics.TreasuryAuctionJapanFlow20261121Exact as AuctionFlow
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 
 -- Relative clock ticks on a common declared timeline, not calendar parsing.
@@ -164,3 +165,19 @@ actualWindowThirtyYearThreeBpHigher :
   CMT.thirtyYearBasisPoints CMT.july29 + 3 ≡
   CMT.thirtyYearBasisPoints CMT.august03
 actualWindowThirtyYearThreeBpHigher = CMT.windowThirtyYearThreeBpHigher
+
+-- A primary Treasury 10-year auction and a secondary aggregate Japanese
+-- portfolio-flow series are observed, but share no paid security, investor,
+-- custody or execution-window join. Prevent original evidence laundering.
+tenYearAuctionYield :
+  AuctionFlow.highYieldThousandthPercent AuctionFlow.tenYearNovember ≡ 5020
+tenYearAuctionYield = AuctionFlow.tenYearHighYieldExact
+
+japanJulyNetPurchasesExact :
+  AuctionFlow.purchasesTenthsBillionJPY AuctionFlow.julyResidentForeignDebt ≡
+  AuctionFlow.salesTenthsBillionJPY AuctionFlow.julyResidentForeignDebt + 3657
+japanJulyNetPurchasesExact = AuctionFlow.julyNetExact
+
+japanAugustRoundingExact :
+  AuctionFlow.reportedNetMagnitudeTenthsBillionJPY AuctionFlow.augustResidentForeignDebt + 1 ≡ 1431
+japanAugustRoundingExact = AuctionFlow.augustReportedRoundingDifference
