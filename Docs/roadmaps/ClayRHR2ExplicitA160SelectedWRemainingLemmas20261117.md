@@ -1,3 +1,108 @@
+## 22 November 2026 — SOURCE RECLASSIFICATION: selected-W integral already proved
+
+This dated source audit **supersedes the first 17 Nov open
+lemma** `selectedQuarticFourWActualProfileIntegralExact`,
+as phrased there: **the literal same-selected-W
+weighted Fourier/cosh representation is ALREADY
+theorem-bearing in original Lean main**, not an
+unconstructed theorem. Do not write a new replacement
+theorem or copy the same proof into this branch.
+
+Inspected exact source paths and Git blobs:
+
+- `Synthesis/RiemannProjectiveQuarticFourWindowSignedPoleJointHorizontalJet.lean`
+  blob `4d0437ffb058c7e8b6961521a611608b1494ba3f`,
+  **lines 1142–1203**:
+  `QuarticFourSignedPolePair.signedNormalizedPairKernel_eq_combinedIntegral`
+  proves directly, for the ACTUAL selected
+  `QuarticFourSignedPolePair t`,
+  ```text
+  W.signedNormalizedPairKernel α q =
+     ∫ x, quarticFourSignedPoleCombinedProfile
+                W.R W.muHalf W.muTwo t x
+             * cosh(α*x) * cos(q*x)
+  ```
+  including both original signed pole coefficients
+  and the two actual source windows; the proof
+  establishes integrability and expands the true
+  source definitions, not an abstract W.
+- In the **same** source, lines 415–440:
+  `W.signedLiteralPairSourceTerm_eq_normalizedPairKernel`
+  identifies the genuine original non-same-ordinate
+  zero summand with
+  `mult(σ)/(t/16)² * K_W(heightOf σ/(t/16),
+      (Im σ−t)/(t/16))`. The necessary analytic
+  `Re(s)−1/2` reflection is already visible
+  through the cosh-even dependence.
+  `W.signedNormalizedPairKernel_eq_jointJet`
+  and `_eq_quarticJet` also source-write
+  the exact base/horizontal/remainder split.
+- `Synthesis/RiemannProjectiveQuarticFourWindowSignedPoleTarget.lean`
+  blob `16110e433efd16379c6b93bdc13420036b1d6411`
+  defines the **literal** combined profile and
+  exact zero- and second-moment identities.
+- `Synthesis/RiemannProjectiveQuarticFourWindowSignedPoleFourthOrderQuotient.lean`
+  blob `6b30db459d28a2b5707cec004b570ff7061e1a8a`
+  proves source-selected
+  `quarticFourSignedPoleCombinedProfile_contDiff_four`,
+  `compactCosineTransform_abs_le_invPowFour`
+  and the **literal base ordinate channel**
+  `W.signedOrdinateTest_abs_le_gap_four`,
+  ```text
+  |W.signedOrdinateTest x|
+    ≤ (t/16)² * ∫ |P_W''''(u)| du / (x−t)⁴
+  ```
+  for x≠t and t>0. The original proof
+  already uses the actual combined W profile,
+  not an arbitrary test substitute.
+- `Synthesis/RiemannProjectiveQuarticFourWindowSignedPoleConeDecomposition.lean`
+  blob `2fb66d2e7c4345673e1dda82e67823bf2d7e0481`
+  proves the actual cone/good/far
+  **algebraic** split and convergence compiler,
+  but `W.UniformSignedCompensationGap rho`
+  at lines 941–953 remains an **ASSUMED
+  strict eventually quantified inequality**.
+  Its theorem
+  `completedSignedResidual_lt_target_of_uniform_compensation_gap`
+  at lines 960+ consumes, rather than constructs,
+  that analytic payment.
+
+**Revised R2 priority:**
+1. **PAID SOURCE-WRITTEN:** exact selected
+   W ↔ weighted cosh-cos integral,
+   source multiplicity/scaling and both
+   horizontal sides, exact `C^4`/compact
+   selected W, fourth-power base-channel
+   `signedOrdinateTest` decay.
+2. **OPEN QUANTITATIVE:** explicit *selected*
+   `W.R,W.muHalf,W.muTwo,W.poleHalf,W.poleTwo`,
+   actual derivative-norm and
+   horizontal-weighted `P_W(x)cosh(αx)`
+   bounds and their uniformity in t,
+   original ζ zero multiplicities and
+   cutoff. Do not incorrectly promote
+   the `α=0` **base** tail theorem
+   to the full `α≠0` horizontal source.
+3. **OPEN ORIGINAL SIGN:** a **strict
+   correct-polarity cofinal margin**
+   `W.UniformSignedCompensationGap rho`
+   or its source-valid sharpened version,
+   with actual original ζ-zero configurations,
+   completed residual and the exact
+   quantifier order (not test-specific floats).
+4. **OPEN TRUST:** no new exact-head Lean
+   kernel receipt was run by this
+   Git source-readback audit.
+
+**Acceptance distinction:** source declarations, bodies
+and dependency edges were read directly from the current
+`dashi_lean4/main` tree, but no Lean/Agda typechecking
+was executed in this runtime. This corrects a
+stale research-status classification rather
+than newly proving an R2 estimate.
+
+---
+
 # RH R2 — explicit unconditional shell count A=160, parameterized C, exact remaining lemmas (2026-11-17)
 
 **Classification:** classical unconditional external zero-count theorem plus elementary analytic deductions; local SymPy checks of algebra. **R2 OPEN. No new Agda/Lean kernel theorem.** The explicit value A below is universal but deliberately generous.
