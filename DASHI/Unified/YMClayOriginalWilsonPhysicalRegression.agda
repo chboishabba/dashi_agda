@@ -97,6 +97,12 @@ import DASHI.Physics.YangMills.YMClayOriginalF19CanonicalConnectedWilsonBIDIExac
 -- this is by original native first/second parity proof, not an arbitrary
 -- vector bijection, prior to comparing the remaining 896 spectators.
 import DASHI.Physics.YangMills.YMClayOriginalF19R445Full1024LabelsP0Exact as OriginalFullF19R445Labels
+-- Once the original F19 1024-label target is proved, its SAME
+-- original native constructed adjacent-swap permutation agrees on
+-- every arbitrary SU(N) link value with original R445 complete codec.
+-- All 896 original interacting spectators remain present.
+import DASHI.Physics.YangMills.YMClayOriginalF19R445EveryLinkValueBIDIExact as OriginalF19R445Values
+import DASHI.Physics.YangMills.YMClayOriginalF19R445ActualSortedVectorBIDIExact as OriginalF19R445SortSquare
 import DASHI.Physics.YangMills.YMClayOriginalF19NativeR445SelectedOrderBIDIExact as OriginalF19R445SelectedOrder
 
 import DASHI.Physics.YangMills.YMClayD1OriginalCovarianceToR320Exact as D1OriginalCovariance
