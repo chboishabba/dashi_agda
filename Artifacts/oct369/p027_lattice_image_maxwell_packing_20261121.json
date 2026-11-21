@@ -23,11 +23,14 @@
   "model_periodic_gauge_invariant_thermodynamic_octupole": false,
   "real_Maxwell_source_coils_boundaries_power": false,
   "actual_gravity_or_human_lift": false,
-  "execution": "52 exact local SymPy assertions passed, equivalent source stored locally /mnt/data/oct369/check_oct369_p027_lattice_image_maxwell_packing.py; committed source replay outstanding",
+  "execution": "52/52 exact SymPy assertions passed locally on the EXACT GitHub blob; SHA verified with git hash-object; no GitHub CI or Agda execution",
   "attribution": {
     "original_material": "Kang et al., Nature 2026, doi:10.1038/s41586-026-11172-5",
     "original_periodic_theory": "Takumi Sato and Satoru Hayami, npj Quantum Materials 11:32 (2026), doi:10.1038/s41535-026-00865-9",
     "existing_DASHI": "P0.14, P0.25 native 27 BIDI, P0.26 magnetostatic model",
     "new": "Pt-inversion correction, finite-sample image-identification control and field-volume inverse"
-  }
+  },
+  "exact_executed_script_blob_sha": "3a4c372590a6f2b879d28c156bcc0bfdd6d2f70a",
+  "acceptance_verified_at": "2026-11-21",
+  "important_clarification": "Changing the physical finite set of lattice images is not a gauge transformation. A true cell-basis relabel with compensating cell index leaves all positions and forces unchanged."
 }
