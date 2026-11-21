@@ -1,6 +1,21 @@
 # Current DASHI RH BIDI vs Alpöge RH / GRH — exact gap-directed depth cut
 
 
+## 21 November — LATEST exact split-prime local Hecke-shape factor, with global P0 firewall
+
+Direct inspection of latest Lean PR #69 `Integration/EisensteinJZeroAllGoodPrimeLocalExact.lean`, `Integration/EisensteinJZeroSplitPrimeEisensteinCarrierExact.lean` confirms actual original `GoodPrimeLocalData p` and same-curve `goodPrimeLocalEulerPolynomial` for **every prime p>3**, with source norm-p Jacobi Eisenstein element z at split p and a_p=0 at inert p. Norm-p and (a_p=-(2z.re-z.im)) have source-written proofs in Lean #69, **not newly constructed characters**. The curve is `y²=x³+1`; `p=3` is excluded by the source `3<p` good-prime precondition, and bad/local Hecke L-factors remain unpaid.
+
+New **source-dependent** Lean #69 `Integration/EisensteinJZeroSplitPrimeConjugateEulerFactorExact.lean` factors the actual split local candidate as
+[
+ (1+zT)(1+\bar zT) = 1+(z+\bar z)T+z\bar z T²,
+]
+and reuses **original** `splitJacobiEisensteinElement_norm`, `splitPrime_jZero_trace_formula`. **Sign is important:** our actual (a_p=-(2z.re-z.im)), so factors have **plus** (z,\bar z), not minus. This is a local Hecke-shape pair, not a constructed global Hecke character. Its source is committed to #69, Agda did not import Lean proof objects.
+
+Executed independent local Python (exact integer `Z[ω]` arithmetic): split 10/10 conjugate factor matches (1-a_pT+pT²), inert 7/7 (1+pT²), and 17/17 **quadratic Dirichlet/Dedekind factors are NOT the elliptic factors**. A new reproducible #69 `scripts/check_eisenstein_split_conjugate_hecke_factors_20261121.py` encodes these checks; equivalent local script ran and passed. At split p, the Dedekind inverse Euler polynomial is ((1-T)²), at inert p ((1-T²)), unlike elliptic (1-a_pT+pT²). Thus (zeta_K(s)=zeta(s)L(s,chi_{-3})) is **different** from (L(E,s)), though both use K splitting. The global CM `Ψ` must have an **infinity type**, ray modulus/conductor and unit transformation compatible with weight-two elliptic modular form; it cannot be the norm-pullback of quadratic χ.
+
+**NEXT P0 hierarchy:** (i) Lean #113 pinned 4.33.1 original `UpperTheory.EveryCharacter` proof/kernel/axiom/transfer is still the *controlling universal GRH terminal*; (ii) local j=0 ↔ global CM Hecke requires compatible split z prime-ideal assignments, multiplicative ideal character with unit constraints, inert and ramified prime factors, conductor/infinity type, analytic Euler product and functional equation, and actual L(E,s)=L_K(Ψ,s) transport; (iii) global CM character special case does **not** establish GRH for all Dirichlet characters. Source-written local factor Lean module has **no kernel receipt**; no CI.
+
+
 ## 21 November — CURRENT exact χ₋₃ / cubic Jacobi / Dirichlet–Hecke correspondence test
 
 **This test finds a real local correspondence, NOT equality of characters or L-functions.** For K=Q(ω), χ₋₃(p)=(−3/p) splits good p>3 into p≡1 (split) or p≡2 (inert). On the existing original same-curve E:y²=x³+1:
