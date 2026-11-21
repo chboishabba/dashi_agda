@@ -306,3 +306,12 @@ import DASHI.Physics.YangMills.YMClayR445OriginalFullWilsonFiberDensityExact as 
 
 -- P0.D supporting typed finite adjacent-swap schedule compiler. The preferred already-source-written original 1024-label permutation owner is NativeClosedThreeEqualities/M01; both require local kernel acceptance.
 import DASHI.Physics.YangMills.YMClayR445AdjacentHaarPermutationCompilerExact as AdjacentHaarSchedule
+
+
+-- P0 original SOURCE C3 weighted Wilson reflected-Gram BIDI:
+-- exact same native side-four SU(N) Gibbs expectation and partition;
+-- conditional original density/permutation and time-reflection C3
+-- commute imply finite reflected Gram and seminorm-zero preservation.
+-- Full complex OS quotient, same-H completion/semigroup and D1/D2
+-- uniform gap remain OPEN, no Agda kernel receipt.
+import DASHI.Physics.YangMills.YMClayOriginalC3WeightedOSGramBidiExact as OriginalC3OSGram
