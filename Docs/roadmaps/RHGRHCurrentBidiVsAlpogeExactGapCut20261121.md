@@ -1,3 +1,9 @@
+## 21 Nov — H0 original j=0 source candidate advanced (not kernel accepted)
+
+Correction to earlier H0 remaining-label chronology: #114 now contains same-curve source-written `jZeroOriginalEulerPerturbation_norm_le_majorant`, unconditional denominator `Multipliable` proof candidate, sum and local/infinite product nonvanishing. The prior `_of_bound` `hlocal` remains as an abstract BIDI interface but is discharged by this *source-written* j=0 candidate; **no compatible Lean kernel/Mathlib acceptance has occurred**. Semantic P1 remains reciprocal Euler product + source-consistent global elliptic/Hecke L-series and analytic continuation. External all-character Dirichlet GRH P0 trusted statement/admission and original internal RH G2/G3 remain independent. Local SymPy 107/107 good-prime original curve finite checks are supporting evidence only.
+
+---
+
 ## 21 Nov — corrected canonical CM all-prime and analytic max-cut
 
 Latest readback on **dashi_lean4@main** supersedes stale cross-branch missing-owner statements later in this chronological ledger: `EisensteinJZeroIntegralHeckeCharacterExact` already owns an integral conductor-coprime ideal `MonoidHom`; `EisensteinJZeroHeckeLocalAgreementExact` proves good-prime local elliptic/Hecke equality for **all p>3**; `EisensteinJZeroAllPrimeLocalExact` composes both bad prime factors 1 with good split/inert cases; `EisensteinJZeroConditionalAnalyticEulerExact` proves complex factor equality and infinite `tprod` equality **conditioned on Multipliable**. Do not reopen those finite/local/theorem components.
