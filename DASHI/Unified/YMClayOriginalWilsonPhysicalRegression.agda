@@ -130,6 +130,11 @@ import DASHI.Physics.YangMills.YMClayOriginalF19R445Native64HolonomySquareExact 
 -- Distinguish unweighted Haar from interacting Wilson Gibbs 896 spectators.
 -- SymPy exact finite checks PASS; Agda kernel still NOT run.
 import DASHI.Physics.YangMills.YMClayOriginalF19R445PureHaarReceiverCandidateExact as OriginalF19NativePureHaarCandidate
+
+-- Reverse physical Wilson E1 native cutoff-3 expectation, weld FORWARD
+-- from ORIGINAL complete 1024-link Gibbs F19 weighted effective density.
+-- Do not infer the interacting Wilson source from unweighted pure-Haar.
+import DASHI.Physics.YangMills.YMClayOriginalR445NativeF19WeightedPhysicalSourceBIDIExact as OriginalNativeWeightedF19BIDI
 import DASHI.Physics.YangMills.YMClayOriginalF19NativeR445SelectedOrderBIDIExact as OriginalF19R445SelectedOrder
 
 import DASHI.Physics.YangMills.YMClayD1OriginalCovarianceToR320Exact as D1OriginalCovariance
