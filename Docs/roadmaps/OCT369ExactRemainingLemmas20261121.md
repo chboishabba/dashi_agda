@@ -152,3 +152,10 @@ Important: symbolic 1+omega+omega²=0 with sum omega^(3j)=3 is only a C3 angular
 | P0.27-field-packing | For 6 Mn per two L12 formula cells, selected ideal field volume N≈L³/(2a³), k4≈B/L³; F≈3mu B/(2a) if ideal motif tiling and field uniformity hold | Conditional scaling; 1mm and 10T example ~1.04e-12N, not actual device |
 | P0.27-periodic-thermo | Implement Sato-Hayami original gauge-invariant Bloch/thermodynamic magnetic octupole with actual PtMn3 spin texture & bands | **OPEN**; paper's equations and original ownership retained |
 | P0.27-controller-gravity | Same-device bounded Maxwell source, coils/SC/battery/support & real Tmunu, direct force and remote gravity discrimination | OPEN |
+
+| P0.28-crystal-owners | Original IUCr labels, original DASHI 3D direct/reciprocal contract, typed atomic basis/quantum vs signed ternary charts | Reused and attributed; real PtMn3 film structural measurements still OPEN |
+| P0.28-thermodynamic | Finite P0.27 same-site spin octupole conjugate to B second spatial gradient; entire symmetric-jk tensor distinct from STF | **80/80 local SymPy assertions PASS**; not yet Oike/Sato-Hayami original periodic formula |
+| P0.28-Maxwell-rank | Current-free source-free Maxwell field Hessian G_ijk=d_j d_k B_i is 7D symmetric STF; 18D jk-symmetric tensor has 11 unprobed directions | Exact SymPy projector ranks 18 and 7 and 27→7; other field probes may access more |
+| P0.28-source-commute | Same fixed P0.27 physical Pt-inversion 6-site sample and P0.26 harmonic potential: thermodynamic conjugacy gives F=-3a²mu k4 | Exact identical magnetic-source force; not a calibrated bulk observable, no gravitational claim |
+| P0.28-lattice | Non-orthogonal direct lattice U and reciprocal U^-T preserve Fourier pairing but are distinct; relabelled fixed finite body has invariant force | Exact algebra; native geometry not same as ternary 27 address chart |
+| P0.28-real-quantum | Implement original Oike et al 2025 and Sato/Hayami Eq11 gauge-invariant Berry/Kubo terms on published PtMn3 Wannier bands, correct domains & surfaces | OPEN; original papers retain priority and credit |
