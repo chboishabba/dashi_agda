@@ -16,9 +16,9 @@
       "facts": [
         [
           "cap_white",
-          "3.33",
+          "3.3",
           "uF",
-          "narrated_component_nominal"
+          "narrated_approximately_3_3uF_shunt_reel_not_necessarily_3_33uF_white"
         ],
         [
           "shunt_1",
@@ -37,7 +37,16 @@
           "4",
           "MOhm",
           "narrated_shunt_alternative"
-        ],
+        ]
+      ],
+      "edges": []
+    },
+    {
+      "key": "FO",
+      "type": "other_or_earlier_electrical_audio_observations",
+      "identifier": "exact_same_operating_occasion_not_established",
+      "source_doc": "Docs/research/FilsingerLydenEarthPortMaxCut20261110.md",
+      "facts": [
         [
           "voltage_1500",
           "1500",
@@ -135,7 +144,7 @@
     {
       "key": "FM",
       "type": "commercial_midpoint_spark_gap_reel",
-      "identifier": "Dfu9Jseviz9",
+      "identifier": "Dfu9Jseviz9_candidate_reel_identity_transcript_specific_attribution_unverified",
       "source_doc": "Docs/research/SmithFilsingerSourcePortShuntMaxCut20261115.md",
       "facts": [
         [
@@ -206,7 +215,8 @@
           "basis": "user_transcribed_alternatives_not_traced",
           "proven_continuity": false
         }
-      ]
+      ],
+      "transcript_original_occasion_verified": false
     },
     {
       "key": "SPDF",
@@ -310,6 +320,7 @@
     "Kelly/Darrer 1:4 is wire-length guidance, not asserted L1:L2 turns ratio or measured secondary voltage gain.",
     "Split 17+17 turns and 240-degree geometric winding do not establish 90-degree current quadrature.",
     "Partial narrated white-cap hot to Earth-negative is not same as full pin-to-node proof.",
-    "No high-voltage experiment or construction prescription."
+    "No high-voltage experiment or construction prescription.",
+    "Some midpoint/rectifier figures come from a prior user-supplied spoken transcript, whose exact on-video occasion is not reattested by the current source inventory."
   ]
 }
