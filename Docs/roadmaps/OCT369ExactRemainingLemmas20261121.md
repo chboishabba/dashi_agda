@@ -20,3 +20,19 @@
 | F01-F06 | primary-data, formal and experimental validation | OPEN | independent source data and local executions |
 
 Important: symbolic 1+omega+omega²=0 with sum omega^(3j)=3 is only a C3 angular-harmonic toy. It neither computes the real magnetic octupole nor generates an external force. The paper's observed 363% TMR is an electrical resistance ratio, not 363% efficiency, net environmental gain, or torque enhancement.
+
+## P0 octupole-to-antigravity priority (supersedes ordering above)
+| Gate | Exact target | Status |
+|---|---|---|
+| P0.01 | Material position/spin octupole tensor and magnetic group | OPEN |
+| P0.02 | Same-Hamiltonian spin torque to actual external Maxwell/magnetoelastic force | OPEN |
+| P0.03 | Metric variation of same material+EM action with conserved stress and apparatus boundaries | OPEN |
+| P0.04 | Stress-derived actual gravitational field and identifiable measurable signature | OPEN |
+| P0.05a | Superconducting external-guideway lift ≥ mg and stable stiffness | OPEN |
+| P0.05b | Human diamagnetic B grad B lift ≥ mg, practical/safety bounds | OPEN |
+| P0.05c | Octupole actuator net external lift ≥ mg, no internal-force substitution | OPEN |
+| P0.06 | Gravity vs EM discrimination with octupole and field-gradient reversal | exact synthetic SymPy fixture source-written, real-data OPEN |
+| P0.07 | Pulsed-RF superconducting/Amy Eskridge source-specific evidence | OPEN |
+| P0.08 | Back-solve measured/target force and gravity field to source tensor/field/currents | OPEN |
+| P0.09 | Blind calibrated EM, seismic, buoyancy, thermal, electrostatic negative controls | OPEN |
+| P0.10 | Independent replication, mechanism class, same-object authority | OPEN |

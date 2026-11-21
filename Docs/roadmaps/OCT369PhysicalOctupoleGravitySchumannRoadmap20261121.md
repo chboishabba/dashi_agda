@@ -49,3 +49,25 @@ F01 original paper source-data workbook ingest with real column/unit provenance;
 
 ## Source evidence and guardrails
 Phys.org news and primary DOI as above; public DASHI original owners and original papers remain separate provenance. Existing schematic 369, quantum C3 and punch/reduction proofs are real mathematical assets but cannot establish atomic PtMn3 phase, human levitation device, gravity modification, or Schumann gain without material-specific physical source evidence. Negative results are valuable and retained.
+
+## P0 OVERRIDE — OCTUPOLE -> ANTIGRAVITY FIRST (2026-11-21)
+P0 is not a geometry counting exercise or a deferred Phase D. **OCT369-P0 is the direct same-source test of octupole-order -> force/stress -> gravitational-field observable, with the three human-levitation mechanisms as competing physical forward models.** Geometry, atomic 369, quantum C3 and PtMn3 are required P0 producers, not prerequisites that demote antigravity to a later phase.
+
+### P0 forward and reverse acceptance
+* P0.01 reconstruct real PtMn3 cluster-octupole with positions/spins and true magnetic symmetry, preserving zero net dipole versus nonzero time-odd higher order.
+* P0.02 from the SAME material Hamiltonian derive current-induced torque and magnetoelastic / Maxwell force, distinguish internal spin torque from net external force.
+* P0.03 derive complete same-action energy-momentum tensor including EM, medium, superconductors/coils and boundary reaction, with Ward conservation and metric variation.
+* P0.04 derive the actual field response (linearized Einstein then, only if justified, full Einstein/KK/OS), rather than a renamed laboratory field.
+* P0.05 build three **parallel** human-scale tests: superconducting external-field support, biological diamagnetism, and octupolar actuator support. For 70 kg the upward support load is 686.4655 N; include stiffness and materials constraints.
+* P0.06 test genuine gravitational alternatives separately: free-fall change, clock/metric shift, remote test-mass attraction/repulsion, inertial response, all under matched octupole reversal and gradient reversal.
+* P0.07 consume original superconducting pulsed-RF and Amy Eskridge evidence **as independent candidate sources**: primary experimental provenance, true waveform, shielding, sensor reference, apparatus mass/inertia, calibration, controls and replication, without prematurely discarding a mechanism or promoting a report.
+* P0.08 BIDI reverse solve: from desired external lift or non-Newtonian field signature solve backward to required stress tensor, material octupole, field gradient, current and apparatus; independently bound feasibility.
+* P0.09 implement exact finite negative/positive controls: orientation reversal O, field-gradient reversal, controller-off, nonmagnetic sham, simultaneous gravimeter/accelerometer/load cell, cross-device transfer.
+* P0.10 a single source-identity receipt must show whether the result is conventional EM support, a material effective response, an independent gravitational-field anomaly, or unsupported.
+
+### First P0 executable cut
+`scripts/check_oct369_antigravity_p0_sympy.py` models U(z)=mgz - mu O (b0+b1 z) - gamma O mgz. Here gamma is an **unestablished phenomenological gravity modifier**, not a derivation. Exact SymPy proves:
+F_up=-mg+mu O b1+gamma O mg;
+O reversal delta F=2(mu b1+gamma mg);
+gradient-odd part identifies EM coefficient, gradient-even part identifies the assumed gravity-like coefficient. This is a design for discriminating observations, NOT measurement of gamma or a physical octupole Hamiltonian.
+P0 material Hamiltonian, actual stress, true metric source and all physical levitation claims remain OPEN. This is the first executable bridge, not terminal closure.
