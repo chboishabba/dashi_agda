@@ -1,5 +1,19 @@
 # Alpöge/Claude RH–GRH × DASHI geometric transport (21 November 2026)
 
+## 21 November — current BIDI reverse solve: first genuine RH→G2 consumer simplification (LATEST)
+
+The original fork's Mathlib `RiemannHypothesis` gives zero horizontal offset `Re(s)-1/2=0` at the **same actual nontrivial zeta zero**. For our original G2 `LiteralTargetCenteredScalarProblem`, this can remove `cosh(offRealPart(sigma)*u)` from the *actual* integrand, but only after proving the **same-zero/index/horizontal-coordinate** source weld. No signed cosine sum, strict positive margin or final universal Off/Gamma allowance follows.
+
+**New actual source:**
+- Lean [#113](https://github.com/chboishabba/dashi_lean4/pull/113): `proofs/alpoge-lean433/RHZeroHorizontalBridge.lean` proves the elementary same-Mathlib zero-horizontal and cosh-at-zero consequences **conditional on RH**, retaining exclusion of `-2(n+1)` trivial zeros and the (s=1) guard. It does not use a synthetic zero set. **Source-written, uncompiled**.
+- Agda [#1533](https://github.com/chboishabba/dashi_agda/pull/1533): `DASHI/Analysis/RiemannG2AlpogeZeroLineCosineCollapseExact.agda` consumes `RiemannG2TargetCenteredScalarCancellationAssemblyExact.LiteralTargetCenteredScalarProblem` and `dSigmaIsLiteralKernel`, constructs an explicit `SameZeroCarrierCollapse` (uninhabited) and proves the **actual source-indexed `dSigma` cosine-kernel identity** from four stated typed premises. **Source-written, uncompiled**.
+- The original `scripts/check_rh_g2_zero_horizontal_sympy_20261121.py` is committed: **local SymPy PASS** for exact `cosh(0)=1` kernel and two counterexamples (+8,-8) after collapse (signed q=±1). These are symbolic negative controls, **not** real zeta-zero examples or a proof of RH.
+
+**Depth policy:** terminal RH import stops at the original `rhOfAll` and our paid Mathlib↔Clay BIDI; GRH at original `EveryCharacter`. **The G2 bridge stops at the same-zero carrier weld** and does not require descending into 175187 original modules; only search theta/Galois internals to improve an actual original typed P1 geometric producer. The later authoritative universal pole-quotient taper remains different from this G2 determinant taper. Exact gap ledger: [RHGRHCurrentBidiVsAlpogeExactGapCut20261121.md](RHGRHCurrentBidiVsAlpogeExactGapCut20261121.md#21-november--executable-first-bridge-at-the-precise-bidi-gap-zero-horizontal-collapse).
+
+**Next minimum receipts:** (1) Lean compile source theorem in the selected compatible environment, (2) same-original `Mathlib nontrivialZero ↔ G2.ZeroIndex` and `offRealPart=(Re(s)-1/2)` weld, (3) Agda original integrate/real `cosh(0)` laws and kernel admission, (4) actual G2 signed cosine cancellation if independently provable, respecting the existing balance no-go. **No CI, no Lean/Agda kernel check, no world/PG work.**
+
+
 ## 21 November — CURRENT: exact DASHI BIDI gap chooses external import depth
 
 **The precise comparison is now committed:** [RHGRHCurrentBidiVsAlpogeExactGapCut20261121.md](RHGRHCurrentBidiVsAlpogeExactGapCut20261121.md). It reads DASHI's original **authoritative universal pole-quotient Off/Gamma frontier**, the older **G2 determinant scalar-to-Schur** BIDI and the independent **A1/A2/Route B** Lean frontiers *against* the original fork's literal `Claim.HalfPlane ↔ UpperTheory.EveryCharacter`, `Claim.Zeta ↔ RiemannHypothesis`, `Claim.strip` and `Formalism.VW.rh_of_every` exact source theorems.
