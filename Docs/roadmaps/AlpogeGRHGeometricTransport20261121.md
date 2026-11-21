@@ -1,3 +1,108 @@
+## 21 November 2026 — PROOF-FIRST NORTH STAR (current controlling priorities)
+
+**This is the controlling original GRH P0 roadmap, not a publication
+task list.** The work priority remains the **five non-Yang–Mills original
+Clay problems** (RH/GRH, Navier–Stokes, BSD, Hodge, P vs NP), plus the
+separate original Yang–Mills existence-and-mass-gap theorem.
+The agreed Yang–Mills support scope is the *CMP102/source-specific
+weld*, without allowing finite R445/F19/CMP algebra to stand in
+for physical E1/D2, nontriviality or the all-compact-simple-group
+claim. Other useful projects (EM, Filsinger, Monster/369, paper
+drafts) are **supporting producers/consumers**, never a new
+prize-problem goal or a mandatory prerequisite.
+
+**First next theorem-bearing tranche: all-character Dirichlet GRH P0.**
+A source-level check on 21 Nov read the ACTUAL original
+`riemann-hypothesis-lean/src/Statements.lean` and
+`src/Main.lean` (pinned commit
+`7cbf7a0c32fca1badf05931879a37c3f8a2b03b4`),
+the existing direct Lean 4.33.1
+`proofs/alpoge-lean433/RHAdmission.lean`, the root
+`MillenniumExternal/ExactTargetSurface.lean` and
+`AlpogeRHBoundaryExact.lean`, and Agda's actual
+`AlpogeGRHGeometricTransportExact.agda` and
+`RiemannAnalyticSubstrate.agda`.
+
+**Precise original-source obstacle, not another new record:**
+`AlpogeGRHGeometricTransportExact.agda` currently exposes
+`ExternalRHGeometricTransport` on ONE
+`AnalyticSubstrate`/`CompletedRiemannZeta`, with
+`leanRH`, `zeroPreserved`, and
+`criticalLineReflected`: it handles **zeta RH only**.
+`AlpogeRHOriginalClayEndpointBidiExact.agda` likewise
+connects the original RH Clay witness, not all Dirichlet
+characters. An Agda repository-wide default-branch
+source search found no `DirichletLFunction`,
+`DirichletLZerosOnLine` or
+`GeneralizedRiemannHypothesis` owner; this search is
+**not proof of absence on other PR branches**.
+Thus an ordinary RH bridge or existing Gamma/Mellin test
+action is NOT the external original all-character result.
+Do not declare GRH P0 discharged by Paper 8, SymPy
+coefficient counts, reverse RH-to-Clay transport or
+finite Euler factors.
+
+**Exact next checks, in order:**
+1. **Original-author Lean 4.33.1 P0 acceptance:** execute
+   the already-committed `check_original_p0_admission.sh`
+   on the pinned original checkout; require the original
+   five exact `Main` theorems, source hashes, and
+   actual `#print axioms` output. The independently reported
+   original verification and local source audit are
+   distinct from this DASHI adapter kernel receipt.
+2. **Root same-theorem handoff:** do not pretend a
+   v4.33.1 OLean is importable into root v4.35;
+   source-port or replay only in a **compatible trusted
+   toolchain**, with explicit proof term, no axiom/sorry
+   fabrication. Existing root RH↔pinned Clay equivalence
+   is a conditional theorem consumer, not an import
+   of original `Main`.
+3. **Genuine all-character analytic semantics:** recover
+   the **original** all-`N`, all-`χ`
+   `DirichletCharacter.LFunction χ s` objects and
+   `0<Re(s)<1` zero predicate, not merely completed
+   zeta. Prove/transport the exact source expression,
+   zero equivalence and real-part identification for
+   *each character*. Reuse existing Mellin/Gamma,
+   number-theory and finite Euler-factor donors
+   only where their source functions are definitionally
+   or theoremically identified. No synthetic `Set`
+   witness substituting for the analytic L-function.
+4. **Terminal consumption and acceptance:** take the
+   original ALL-character theorem to the exact chosen
+   native target while retaining zeta RH→Clay as
+   a distinct weaker corollary. Claim completion only
+   with the matching source theorem, compatible kernel
+   proof receipt and actual semantic identification.
+
+**Other original theorem lanes remain live in parallel,
+not displaced by publication edits:** NS periodic B
+needs an alternative physical signed estimate after
+R734/R823 no-go and independent W1, with A and
+forced C/D treated separately (NS #1539); BSD needs
+universal same-curve analytic/algebraic statement
+and proof-admission beyond the selected E32 classical
+case (#1538); Hodge requires actual all-variety
+rational cycle surjectivity; P≠NP requires the original
+bit-machine/polytime carrier and universal separating
+lower bound. YM is independently source-first,
+not solved by the 128+896 finite Wilson inventory
+(#1536).
+
+**Execution discipline:** pick the smallest *actual
+original theorem producer*, weld to the literal
+consumer, reverse-solve the only unpaid source
+obligation, check exact algebra locally with
+SymPy where appropriate, keep kernel and external
+authority receipts separate, and commit this
+controlling roadmap with every theorem result.
+Manuscript/paper updates are lower priority
+and report theorem status; they NEVER set it.
+No new proof, kernel run or Clay resolution is
+claimed by this roadmap decision.
+
+---
+
 ## 21 Nov 2026 — Paper 8 publication case study updated without promoting GRH
 
 The live `Docs/papers/live/Paper8UnificationDraft.md`
