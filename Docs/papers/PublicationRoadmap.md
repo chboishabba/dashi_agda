@@ -1,3 +1,45 @@
+## 22 November 2026 — recovered independent M-RH draft, not a ninth numbered paper
+
+The previously missed existing DASHI RH manuscript is
+*A Pole–Quotient Reduction for the Riemann Hypothesis*
+(`Riemann_Pole_Quotient_Reduction_2026.tex` plus matching
+`Riemann_Pole_Quotient_Reduction_2026.pdf`),
+a **21 September 2026 working revision** held in the
+user's ChatGPT file Library. This is the independent
+**M-RH Millennium-Series** manuscript, NOT Paper 1–8,
+not a finished RH proof, and not presumed to exist under
+a GitHub `Docs/papers/` path just because the file
+was found in Library.
+
+Its original normalized-taper / low/high / Gamma
+pole–quotient reduction remains conditional on the
+true final near-representation identity and **uniform
+strict high-ordinate inequality**
+`D_near+B_far+D_Gamma<C_cluster`.
+The November original external Alpöge/Claude
+Lean proof uses a **different** all-character
+source chain: `UpperTheory.EveryCharacter`
+→ `rh_of_every` via the modulus-one
+`DirichletCharacter.LFunction = riemannZeta`
+identity; Dirichlet GRH's remaining character
+consequences are from the same stronger source.
+Source audit 6/6 pinned files, 10/10
+dependency checks, 3/3 tamper controls.
+This does **not** prove the September pole–quotient
+inequality, supply a native Agda theorem, or
+require rewriting this independent archival draft.
+
+**Publication classification:** retain M-RH as an
+existing, separate historical/candidate proof
+manuscript. Further edits only after a genuine
+new mathematical result, direct source
+identity, or explicit publication objective;
+the existing original `AlpogeGRHGeometricTransport20261121.md`
+proof roadmap (PR #1533) controls the current
+trusted RH/GRH admission work, not paper counts.
+
+---
+
 # DASHI Publication Roadmap
 
 Date: `2026-06-14`
