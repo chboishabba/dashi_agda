@@ -80,6 +80,12 @@ import DASHI.Physics.YangMills.YMClayOriginalWilsonOS1R556R281CommutingSquareExa
 -- zero/sign wave symbol. This is NOT a physical continuum limit.
 import DASHI.Physics.YangMills.YMClayR445TimeKResidualHyperfabricExact as OriginalTimeKResidual
 
+-- Original E1 actual cutoff-dependent Wilson cylinders: k indexes the
+-- selected Nat-cutoff family; split/join preserves all residuals at
+-- suc k; original E1 convergence is reused WITHOUT assuming arbitrary
+-- Converges is shift/tail-invariant. OS1 time source identity remains input.
+import DASHI.Physics.YangMills.YMClayE1TimeKResidualCylinderWaveTransportExact as OriginalTimeKE1
+
 import DASHI.Physics.YangMills.YMClayD1OriginalCovarianceToR320Exact as D1OriginalCovariance
 
 import DASHI.Physics.YangMills.YMClayE1VariableCutoffCylinderLimitExact as E1VariableCutoffCylinder
