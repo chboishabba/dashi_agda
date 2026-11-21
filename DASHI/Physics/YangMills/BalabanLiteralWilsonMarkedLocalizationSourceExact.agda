@@ -134,6 +134,7 @@ record WilsonWEXTDownstreamSemantics
     {Measure Observable : Set}
     (dataSet :
       Gram.PhysicalMeasureConvergenceData Measure Observable ℚ)
+    (selectedPhysicalDistance : Observable → Observable → Nat)
     : Set₁ where
   field
     timeTranslate : Observable → Nat → Observable
@@ -152,10 +153,12 @@ record WilsonWEXTDownstreamSemantics
         (Gram.multiplyObservable (Gram.operations dataSet)
           left (timeTranslate right time))
 
+    -- The ORIGINAL selected source distance, not arbitrary metrics.
+    -- The previous forall-distance signature was uninhabitable for any
+    -- nonempty Observable: a constant-zero distance at time one forces 0=1.
     supportDistanceIsEuclideanTime :
-      (physicalDistance : Observable → Observable → Nat) →
       ∀ left right time →
-      physicalDistance left (timeTranslate right time) ≡ time
+      selectedPhysicalDistance left (timeTranslate right time) ≡ time
 
     upperOrderClosed :
       ∀ sequence target upper →
@@ -178,7 +181,7 @@ literalMarkedLocalizationCompilesToR556 :
         {Cluster = Cluster}
         dataSet laws)
     (semantics :
-      WilsonWEXTDownstreamSemantics dataSet) →
+      WilsonWEXTDownstreamSemantics dataSet (physicalDistance source)) →
   R556.IndexedSourceFirstWilsonCovarianceData
     {Measure = Measure}
     {Observable = Observable}
@@ -207,7 +210,7 @@ literalMarkedLocalizationCompilesToR556 source semantics =
     (leftBounded semantics)
     (translatedRightBounded semantics)
     (translatedProductBounded semantics)
-    (supportDistanceIsEuclideanTime semantics (physicalDistance source))
+    (supportDistanceIsEuclideanTime semantics)
     (upperOrderClosed semantics)
 
 ------------------------------------------------------------------------

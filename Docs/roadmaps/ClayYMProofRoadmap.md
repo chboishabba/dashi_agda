@@ -1,3 +1,605 @@
+## 21 November 2026 — controlling YM P0 theorem-first directive
+
+
+
+**The main mathematical goal is the original four-dimensional interacting
+Yang–Mills existence and mass gap, for each compact simple gauge group.**
+R445, F19, R320, CMP116/119, R5xx, source-owner symbols and PR numbers
+denote **iterative attempts and reusable intermediate lemmas**. They
+are neither distinct prize-problem milestones nor a physical time
+coordinate or RG iteration by default. Counting their accepted finite
+identities is NOT a measure of progress toward the continuum proof.
+
+**Physical endpoint theorem, with source obligations:**
+- **E1:** construct a nontrivial interacting 4D original Wilson/Schwinger
+  continuum at a→0 and V→∞, with projective compatibility, Euclidean
+  symmetries, full reflection positivity and the required OS axioms.
+  An abstract `originalWilsonConverges` field or a finite E1 cylinder
+  identity is NOT a source proof of this.
+- **D1 (if using the covariance-decay route):** prove genuinely
+  original full Wilson connected-covariance small+large-field bounds
+  in fixed physical units, uniform in lattice spacing and volume:
+  `|Cov_a(W_x,W_y)| <= C_G exp(-m_G d_phys(x,y))`
+  for original physically dense gauge-invariant word tests, with
+  source constants C_G<∞ and m_G>0, independent of a,V.
+  The direct reconstructed-spectrum route MAY bypass CMP116/D1,
+  but never E1 or D2.
+- **D2:** use ONE `H_OS` reconstructed from that SAME E1
+  reflection-positive Schwinger family. Prove the full nonvacuum
+  spectral projection `1_(0,m_G)(H_OS)|_(Omega^perp)=0`, not just
+  finitely many selected Wilson correlations. Positivity and
+  dense cyclic coverage are physical hypotheses to be paid.
+- **N1/G1:** certify a surviving nontrivial local continuum
+  observable and the original argument for every compact simple G,
+  not just a finite SU2 subgroup or fixed SU(N) sample.
+
+**What #1536 contributes without claiming closure:** finite original
+F19/R445 128+896 source labels, exact weighted finite pushforward,
+finite Wilson marked/covariance algebra, time/reflection commuting
+squares and source interface compilers. These can be used only to
+show that the physical source employed in the ultimate E1/D2 proof
+is the *same* one. They supply neither the missing uniform small/large
+field inequality nor a physical spectral lower bound. Their Agda
+proof candidates remain kernel-pending.
+
+**Immediate P0 maximum cut:** (1) supply actual original Wilson
+physical convergence/cutoff-uniform clustering or an alternative
+spectral-gapped reconstruction with matching density; (2) certify
+continuum RP/OS on the genuine physical word domain; (3) pay the
+same-H full-sector gap and N1; (4) extend group scope G1.
+Do not insert new finite codecs or OS/H wrappers unless a specific
+required original source identification fails. Finish kernel
+acceptance of already-written code without promoting it into a
+physical theorem.
+
+**Source attribution:** Wilson/Balaban, published OS/RP and existing
+DASHI exact source owners retain their original ownership. No
+new Clay YM proof or pinned Agda 2.9 kernel result is claimed here.
+
+
+### 21 Nov P0 source archaeology — the existing CMP116/W1/W3 theorem is NOT the E1/F19 physical record
+
+**New inspected source audit on #1536:** [original CMP116/W1/W3→D1→E1/F19 physical source boundary](https://github.com/chboishabba/dashi_agda/blob/agent/ym-p0-cmp119-r445-master-weld-20261121/Docs/physics/YMClayCMP116W1W3D1E1F19PhysicalSourceAudit20261121.md); audit commit `e7833e2b`. The canonical `OriginalSmallLargePhysicalSource` and `OriginalRealCMP116PhysicalSelection` records are already present and the actual Wilson cutoff-`n=3` BIDI adapter already reuses the full-Wilson estimate. A source-written conditional compiler is **not** evidence that the selected record is inhabited.
+
+**Preferred existing original W1/W3 payment:** `BalabanLiteralTwoWilsonSourceFirstJetLocalizationExact.SourceFirstLiteralWilsonJetLocalization` already owns the normalized cluster jet. Its `pointwiseLiteralWilsonJetLocalization` and `localizedLiteralShellChargeSum` explicitly remain conditional; equivalently the existing `BalabanLiteralTwoWilsonCMP116ConnectingTailExact.TwoWilsonCMP116PhysicalShellPayment.chargeSumBelowPhysicalRootedShell` must be proved on original source-supported spanning clusters. Fill the **already-existing** full-Gibbs D1 `originalFullCovarianceBelowSmallPlusLarge`, `largeFieldErrorCalibration` and both common-physical-distance rate fields, with original cutoff-independent constants and one `0 ≤ commonQ < 1`. Finite one-site plaquette-deficit/one-link-tail suppression is not spatial connected-cluster suppression; an exact Bernoulli counterexample was checked locally with SymPy. #1444-only `naturalPrefactorR342` improves prefactor bookkeeping but still takes selected localization and distance/time calibration as inputs.
+
+**No promotion:** cutoff-3 F19 weighted covariance is not an all-cutoff E1 continuum limit; C₂ time is not arbitrary Euclidean time. Agda kernel unrun. D2 same-`H_OS` dense nonvacuum spectrum, E1 interacting continuum/RP, N1 and G1 remain OPEN. Reuse estimates, do not reconstruct them.
+
+### 21 Nov P0 local SymPy original Wilson action-fibre counterexample and finite Haar distinction
+
+**NEW exact local SymPy 1.14.0 result** (source-shaped original 4D side-four Wilson geometry): enumerated all **1536 original positive-oriented plaquettes**; all **1024 fine positive links** appear in exactly **6** plaquette boundaries, hence the 128 selected links contribute 768 incidences and the **896 retained spectators contribute 5376 original fine-action incidences**. This was executed locally (not Agda or CI) and committed to `scripts/check_ym_f19_r445_sympy_purehaar_weld.py` on #1536 [commit e3dd8f5a](https://github.com/chboishabba/dashi_agda/commit/e3dd8f5ab40702199ef6951a2a3e734bd41e2890); exact committed checkout not independently run in local container.
+
+**Exact counterexample on actual original Wilson plaquettes:** configuration U assigns every original 1024 SU2 link the 2×2 identity; configuration V flips ONE unselected spectator to `-I₂`. They induce **exactly the same 64 original native R445 blocked link matrices** (the changed bond is outside all 128 selected links). Yet exactly **six** original fine plaquette traces switch from `+2` to `-2`, making the original sum of positive-oriented fine plaquette traces differ by **24**. For nonzero Wilson coupling their original fine Boltzmann weights are different. Therefore the fine Wilson **action/weight is NOT a function of these 64 coarse link values alone**. This does not forbid an effective coarse density: it PROVES why the existing F19/R445 weighted fibre integration of the full original 128+896 source is necessary and why pure-Haar coarse invariance is not interacting-Wilson RG closure. All 896 residual links must be retained during fibre integration. No physical continuum claim.
+
+**Finite convolution check**: exact SymPy Q8 ⊂ SU(2) matrix enumeration of all `8×8=64` ordered pair products: each of the eight outputs occurs eight times. This supports the finite-group analogue of the original `YMClayR445OriginalPureHaarBlockWeldExact` unweighted two-link Haar assertion, not the existence of continuous Haar integration or the four-dimensional interacting quantum continuum.
+
+**Remaining native receiver obligations**: #1536's new `YMClayOriginalF19R445PureHaarReceiverCandidateExact.agda` (commit `350273ec`) names the ACTUAL receiver with source-count transport and the exact F19 `Torus.Product` vs R445 pure-Haar `Data.Product` flat pair decoder alignment. It uses `refl` as a **candidate** for this pair decoder normalization, **Agda kernel NOT RUN**. No new axiom, but it must not be reported as an accepted theorem. A kernel failure here should be repaired using the already-original `YMClayOriginalWilsonPairSpectatorDecoderExact` split/join, `YMClaySUNWeightedDisjointPairFibreReparamExact` pair multiplication, and original R445 finite Haar flat-pair lemma, NOT by inventing a new physical measure. The physical maximum-cut remains original W1/W3 interaction/large-field uniformity, E1 genuine changing-cutoff continuum/RP and D2 one actual reconstructed H_OS.
+
+
+### 21 November 2026 — P0 original Wilson finite 12/8-class conflict-color improvement (NEW, not a physical D1 payment)
+
+New original-source analytic finite-lattice proof: [YMClayOriginalWilsonPeriodicConflictColoring12R44520261121.md](../physics/YMClayOriginalWilsonPeriodicConflictColoring12R44520261121.md). The original periodic 4D plaquette-conflict graph admits an exact 12-coloring for **every L>=3** and an 8-coloring for **even L**. Every color class is plaquette-disjoint, hence original SU(2) Haar Wilson single-link conditionals factorize *exactly on that class* upon conditioning on all other links. This improves the pre-existing coherent-only event bound from `q^(ceil(|S|/19))` to `q^(ceil(|S|/12))`, and to `q^(ceil(|S|/8))` for even L. The original 14-degree rooted-animal entropy factor 196 is unchanged; the strict coherent-tail beta*r threshold drops from 202.76558 to 128.87198 uniformly, or 86.64706 for even L. For original n=3 side-four R445, the 128 native selected links occupy four transverse-even/orientation classes of 32 (896 spectators still in original Gibbs conditional). Local exact SymPy/periodic incidence regression L=3..11 passed; `scripts/check_ym_original_wilson_periodic_conflict_coloring_20261121.py` is newly committed; actual checked-out committed script local rerun and Agda kernel pending.
+
+**New two-channel adaptive mixed-contour bound:** for any fixed original marked link set S of n distinct links and 0<=h<=n, with N_fru(S) its frustrated-staple count, the existing original one-link SU(2) Wilson conditional and the explicit K-color classes give
+`P_mu(all B_l on S) <= P_mu(N_fru(S)>h) + K*q^(ceil((n-h)/K))`, K=12 uniformly or 8 when L even. Proof: N_fru<=h implies some fixed color class contains >=ceil((n-h)/K) coherent marks; the count/coherence of that class is measurable in the complement, so condition on the true original Wilson Gibbs exterior, multiply its one-link probabilities, and union over **K classes only** (not choose(n,h) coherent subsets). Full explanation/source proof is in PR #1536 `Docs/physics/YMClayOriginalWilsonPeriodicConflictColoring12R44520261121.md`. This reduces the hard D1-FRU-01b target to a **source-derived fixed-contour frustrated-count large deviation** strong enough to beat rooted-animal entropy. No such physical fixed-contour tail or W1/W3 source identification is claimed, so D1 full covariance and E1/D2/N1/G1 remain open; no Agda kernel receipt.
+
+**Correction — reuse pre-existing microscopic chessboard donor before asking for D1-FRU-01b from scratch:** #1444 already has `Docs/physics/YMClayOriginalWilsonSparseChessboardBidi20261119.md` and `Docs/physics/YMClayOriginalWilsonSparseChessboard20261120.md`. The former uses original Wilson site-plane RP + closed-cube chessboard + original pressure lower bound to derive, on reflection-compatible EVEN periodic tori, a **conditional analytic fixed-contour all-bad link bound** `P(all bad on S) <= u_cb^|S|` with `u_cb=6 exp(C(beta)/4-beta*epsilon/96)`, `C(beta)=8+(2/3)log24+log(beta)`, `epsilon=(6-r)/6`; the latter's conservative plaquette-moment donor has `u_plaq=6 exp(C(beta)/16-beta*epsilon/384)`. Local SymPy source-rate comparison at r=3 finds the respective `196*u<1` thresholds beta≈2212.81 and beta≈6335.55. These authors/owners PRECEDE the new 12/8-color coherent-channel improvement; the latter and the K-class adaptive mixed inequality are complementary, not first-ever full bad-contour suppression. The actual remaining D1 payment is: certify native **original gauge Wilson site-reflection/closed-cube chessboard applicability** and physical-scale extension, connect that full-bad event source to true marked CMP119/122/CMP116 small+large interacting covariance/absolute W3 activities and cutoff/volume uniform physical support calibration. A finite microscopic bad-link probability does not equal connected Wilson loop covariance, cannot prove E1 continuum or D2 same-H gap. In #1536 consult `Docs/physics/YMClayOriginalWilsonPeriodicConflictColoring12R44520261121.md` for attribution and comparison. Native Agda kernel receipt remains open.
+
+**Not paid by improved packing:** D1-FRU-01b sparse connected frustrated/mixed Wilson contour probability/charge, D1-FRU-02 full actual marked small/large CMP116/119 original Gibbs source, common cutoff-independent *physical* rate and nonvacuous remote supports. Existing `YMClayD1OriginalFullWilsonSmallLargeFieldExact` and W1/W3/R491/R551/R556 theorem owners remain authoritative. Coherent-only decay is not full connected Wilson covariance, and E1/D2/N1/G1 remain open. Do not silently treat this as a source inhabitant of `OriginalSmallLargePhysicalSource`.
+
+
+## 21 November 2026 — CORRECTED original Wilson ESTIMATE audit: reuse original D1/CMP116 and marked W1/W3, connect SAME E1/F19 physical source
+
+**Correction requested by user:** the repository DOES have substantial **Wilson estimate theorems**, including the complete small-plus-large-field route, the native real CMP116 cutoff-uniform bound, and source-owned marked two-Wilson connecting shell. They must **not** be represented as unbuilt constructs. Direct blob hashes `master` == #1444 for all three:
+- `YMClayD1OriginalFullWilsonSmallLargeFieldExact.agda`: `OriginalSmallLargePhysicalSource`, `originalFullRealCovarianceBelowSmallLargeEnvelopes`, `originalFullWilsonUniformGeometricClustering`. This already **proves** on the literal full interacting original SU(N) Wilson changing-cutoff measure the conditional estimate
+  ```
+  |Cov_originalWilson(n; F_n,G_n)|
+    <= (smallAmplitude + largeAmplitude) * commonQ ^ physicalBlockDistance(F,G),
+     all n, 0 <= commonQ < 1, amplitudes independent of cutoff and volume.
+  ```
+  **Precisely proof-bearing record fields**, not invented missing theorems: `originalFullCovarianceBelowSmallPlusLarge` (TRUE interacting full Wilson vs localized small field + residual), `smallFieldEnvelopeCalibration` on CMP116 admissible pair, `largeFieldErrorCalibration` for true Wilson large fields, and `smallFieldGeometricRate` / `largeFieldGeometricRate` on the SAME selected physical distance and fixed cube length. No verified inhabitant of the complete record for the selected original full Wilson source was found in the searched source owners. Do not infer physical D1 from the existence of a Set-valued record/theorem.
+- `YMClayD1OriginalRealCMP116VariableCutoffExact.agda`: `OriginalRealCMP116PhysicalSelection`, `sourceMagnitudeIsOriginalRealCovariance`, `originalWilsonRealCovarianceUniformBound`, `originalWilsonRealCovarianceGeometricBound` already translate original Wilson literal mixed-log jet and selected CMP116 source into a REAL same-family uniform bound with fixed physical rate, when its selected common-domain `sourceResponseIsActualOriginalWilsonJet`, `uniformSourceEnvelope`, `upperHasUniformGeometricRate` are provided. It is a genuine theorem compiler, not a free analytic estimate.
+- `BalabanLiteralTwoWilsonCMP116ConnectingTailExact.agda` owns the source-first W1/W3 two-support differentiated cluster sum, finite absolute triangle/monotone summation, and `twoWilsonMixedLogBelowPhysicalRootedShell`; `TwoWilsonCMP116PhysicalShellPayment.chargeSumBelowPhysicalRootedShell` is the selected physical bridge. `BalabanLiteralWilsonMarkedLocalizationSourceExact`, `BalabanWilsonTwoInsertionConnectedShellRound491Exact`, `YangMillsWilsonContinuumClusteringRound551Exact`, `YangMillsSourceFirstWilsonCovarianceRound556Exact` ALREADY provide W1/W3→rooted-shell→finite geometric→continuum clustering with the **same CMP119/T5 covariance** chosen by R556. Not a printed Balaban bond-valued J = Wilson loop assumption. The physical W1/W3 marked cluster-charge source, actual localization and bounded-test/convergence/physical time inputs must be instantiated, not rebuilt as new abstract lemmas.
+- #1444 `BalabanCMP116SharedMarkedDirectCalibrationRound344Exact.agda` has a head-only `naturalPrefactorR342` not identical on master, retaining natural selected source prefactor `C_H`. Avoid restricting this branch unnecessarily to the older canonical `C_H <= 1` presentation; this improves source calibration but does not on its own prove literal original Wilson W1/W3 full large-field control.
+
+**NEW source-first WELD on #1536**: `DASHI/Physics/YangMills/YMClayOriginalD1FullWilsonE1F19EstimateBIDIExact.agda`, source-written [commit `f3207243`](https://github.com/chboishabba/dashi_agda/commit/f320724388161ced673363891f63760a1e087e39), NOT Agda kernel accepted. `originalNativeWilsonMark` is actual original n=3 `nativeSUNBlockLinks` → `Codec.encodeOriginalBonds 2` → selected real coarse F/G test. `SelectedOriginalD1FullWilsonForNativeF19` only adds pointwise **original test membership/identity** at cutoff 3 to the **already original** `D1.OriginalSmallLargePhysicalSource` record; it does NOT postulate an extra covariance upper bound, construct another Markov/Gibbs measure, discard 896 spectators or replace all-cutoff original D1. `originalD1SelectedCovarianceIsNativeWilson` derives equality of original Gibbs connected covariance using `Wilson.originalWilsonExpectationExtensional` for F,G,FG, no function extensionality. `originalNativeWilsonCutoff3CovarianceIsE1` is an explicit source-definition **`refl` candidate** from already-original same-measure E1/D1 modules, and the preceding #1536 `originalE1Cutoff3ConnectedCovarianceIsOriginalF19Effective` completes the selected E1/F19 weighted physical source. `originalF19EffectiveCovarianceFromFullWilsonD1` therefore **transports the EXISTING** original full-Wilson small+large field uniform envelope directly onto the same cutoff3 F19 interacting effective covariance, CONDITIONAL on those source records/test identities and on earlier Agda candidates type-checking. It creates no new physical rate or continuum clock. If a kernel failure occurs, fix the precise original n3 field/vector normalization instead of assuming equality of two probability measures.
+  
+**Executed LOCAL SymPy 1.14.0, no CI/Agda:** `scripts/check_ym_d1_full_wilson_f19_source_weld_sympy.py` [commit `88e4fe68`](https://github.com/chboishabba/dashi_agda/commit/88e4fe6889e43293654be6a6a8906f7f86217923) is **byte-verified** against executed `/mnt/data/check_ym_d1_full_wilson_f19_source_weld_sympy.py`: both git blob hash `6e30992591d9ea79421dd06cfaff4a9f1010968b`. It uses the already original source-shaped 4D 1024-link 3-active Q8 conditional Wilson slice: **512/512** exact original native/F19 pointwise blocked source marks and products with 896 spectators influencing the weight; **symbolic exact Z,F,G,FG and centered covariance identity**, four rational coupling comparisons, exact algebraic identity for combining two geometric envelopes (a chosen illustrative rational amplitude, NOT a source Wilson bound), and **fixed-side-two C2 time periodicity negative control** (not actual unbounded Euclidean time). None of this proves source `OriginalSmallLargePhysicalSource` is inhabited for full all-cutoff interacting Wilson or physically reconstructs `H_{OS}`.
+  
+**BIDI roadmap payment NOW:** Original D1 FULL Wilson theorem and R491/R551/R556 marked Wilson shell/continuum compilers are **KNOWN existing producers**; branch #1536 joins their original real Wilson source to E1/R445/F19 physical marked observables at n=3 without duplicating decay or making a new metric. The remaining *source instantiation* is exactly original gauge-invariant `physicalTest n` for the true all-cutoff Wilson W1/W3 field, physical source CMP116 same-J/common-domain response, original small+large-field decomposition and the two calibrated cutoff/volume-independent rates, or a stronger existing original donor that supplies them. Then original selected `t,k` time-scale/OS-positive limit, dense SAME-H source and nonvacuum spectrum (E1/D1/D2/N1/G1). A single fixed side2 C2 coarse time block cannot certify arbitrary Euclidean separation. P0 YM first, P1 antigravity next. NO Clay mass gap claimed.
+
+**Branch/acceptance:** #1444 is stacked and is **roadmap owner**, #1536 independently master-based is source-written code owner; original full-Wilson estimate files already present on master/#1444. #1536 golden `DASHI/Unified/YMClayOriginalWilsonPhysicalRegression.agda` imports new D1/E1/F19 adapter [commit `3cad0322`](https://github.com/chboishabba/dashi_agda/commit/3cad032282f2026c060a8e6e96e4f295c39678bb). Source checker manifest includes original D1, real CMP116, literal W1/W3 and new D1 adapter plus local SymPy [commit `0d525112`](https://github.com/chboishabba/dashi_agda/commit/0d525112d642c4fd5dd70f512ce305328d46d49c). Agda kernel and exact checkout integrated runner NOT RUN; only local SymPy execution accepted.
+
+---
+
+### 21 Nov 2026 — Paper 3 live manuscript synchronized with physical-source P0
+
+`Docs/papers/live/Paper3YangMillsClayDraft.md` was updated
+**on this same YM PR #1536** (commit `99e02a45`). The live
+manuscript no longer contains two competing abstracts and
+its leading conditional theorem now identifies F1/F3/F4
+as **unproved physical input obligations** on the
+original SU(2) Wilson family. The 1024=128+896 F19/R445
+source-weld and one-spectator `I→−I` plaquette-action
+counterexample appear with exact source/physical limits.
+No physical continuum/mass gap or all-compact-simple-group
+claim is inferred; no Agda kernel was run. This is an
+editorial claim-boundary update, not a new YM proof.
+
+The existing publication router `Docs/papers/PublicationRoadmap.md`
+is being revised on the active Agda GRH #1533 documentation
+branch; it still maps original Papers 1–8 to the
+current Paper 3/1/8 live core. Paper 3's proof owner is
+this YM P0 roadmap, not the publication router.
+
+---
+
+## 21 November 2026 — P0 original E1 cutoff-3/1 ↔ F19 effective ↔ three-moment **physical error compiler** (BIDI steelman)
+
+**Forward and reverse ends now identified on the SAME original field/measure.** This source review uses original `master` `YMClaySUNVariablePhysicalCutoffFamilyExact.physicalFiniteCutoffMeasure`, `YMClaySUNConstructedPeriodicGaugeCodecExact.actualPeriodicProductMeasure`, `YMClayNativePositiveBondEnumerationVectorExact.decodeOriginalBonds`, `YMClayE1OriginalSUNDependentCylinderExact.actualOriginalWilsonMeasureAt`, `YMClayE1A3OriginalR445CrossCutoffSourceExact.originalE1FineBlockedIsR445EffectiveCoarse`, `YMClayOriginalWilsonCanonicalBlockedMarkF19Exact.originalCanonicalBlockedNormalizedEqualsPhysicalEffective` and `YMClayE1OriginalR445ThreeMomentCutoffTransportExact.originalE1CovarianceErrorFromThreePhysicalCutoffMoments`. These constructors use ONE selected product-Haar source and the actual n=3 1,024-link six-plane Wilson weight. **No alternate action/clock/measure/regular conditional is added.**
+
+**New master-based #1536 source-written** `YMClayOriginalE1A3NativeF19WeightedBIDIExact.agda` committed [`e2d9f8be`](https://github.com/chboishabba/dashi_agda/commit/e2d9f8be756c46fe8fab040aa3e12812079410c4), then completed at [`d646aa01`](https://github.com/chboishabba/dashi_agda/commit/d646aa011e22d4ce75ba7ae052e41476a87968cb). `coarseVectorTestAsNative` uses the EXISTING `Codec.encodeOriginalBonds 2`, no new observable dictionary. `originalE1Cutoff3IsNativeR445VectorExpectation` is a closed original-definition reduction **candidate** (`refl`, Agda NOT RUN), with identical source density, normalized partition, side-four source decoder and native two-link block. Compose with new original weighted BIDI from prior cut:
+```
+  actual E1 n=3 original blocked Wilson expectation
+     = actual native R445 n=3 vector Wilson Gibbs expectation
+     = original F19 n=3 weighted effective expectation
+```
+for every selected 64-vector coarse Wilson test. **NOT** the independent bare n=1 Wilson state at beta(1). `originalE1Cutoff3ConnectedCovarianceIsOriginalF19Effective` proves F/G/FG covariance congruence on this same original n=3 physical measure, conditional on the two upstream source candidates.
+
+**No new quantitative RG theorem needed**: `originalE1VectorCovarianceIsOriginalThreeMomentE1` source-equals the EXISTING n=3 E1 connected covariance; `originalF19EffectiveCovarianceIsOriginalR445ThreeMoment` composes this with original effective R445 covariance. `originalF19EffectiveCovarianceErrorFromE1ThreePhysicalMoments` then transports the **existing original** `originalE1CovarianceErrorFromThreePhysicalCutoffMoments` to F19. Its precise selected physical bound is
+```
+ |Cov_F19,eff(F,G) − Cov_E1,bare,n=1(F,G)|
+ <= err_FG + err_F * bound_E1,eff(G) + bound_E1,bare(F) * err_G
+```
+where `err_FG`, `err_F`, `err_G`, the magnitude bounds, and their nonnegativity are ALL explicit **original n=3 effective-vs-n=1 bare Wilson** inputs. **No geometric cutoff rate, 1/k decay, uniform Wilson D1, E1 limit or physical mass gap is manufactured.** Keep independent source Euclidean time `t`, RG cutoff stage `k`, zero/phase, and all 896 interacting residual links in the original integrand.
+
+**LOCAL SymPy 1.14 ONLY, no CI/Agda**: uploaded `/mnt/data/check_ym_native_f19_weighted_fibre_sympy.py` was run locally and PASS (the original 4D geometry, 1,536 plaquettes, 1,024 links, 128 chosen + 896 spectators, 512/512 three-active-link exact Q8 conditional Wilson weighted configurations, all eight coarse pair fibres 64 configurations, symbolic weighted partition and three moments and centered covariance). Added and actually ran `/mnt/data/check_ym_e1a3_f19_three_moment_sympy.py`, source-equivalent of [committed `efc527a0`](https://github.com/chboishabba/dashi_agda/commit/efc527a022ead800ef9bbd4fd35e90b22cb42285), using independent original coarse Q8 beta(1)=0 marginal as a **particular bare comparison only**. Symbolic polynomial/rational calculation established the exact three-moment telescope; at `z=1` the effective and bare test marginal coincide; at `z=2`, original conditional effective-minus-bare covariance equals `-50463508331656977/256158079841410082`, nonzero, and the exact source upper bound is `638868999623286135/256158079841410082`; 4/4 rational coupling bounds for `z = 1/2,1,2,3` PASS. **This 3-active-link source-shaped conditional slice is NOT full infinite-dimensional original SU(N) Wilson E1, nor an arbitrary-cutoff physical bound.**
+
+**Critical status and next reverse-payment:** new Agda was written and read back but UNCOMPILED, `originalE1Cutoff3IsNativeR445VectorExpectation = refl` depends on original dependent link field↔1024-vector/source measure definitional reduction. Agda kernel must actually accept both this and earlier F19 native 64-ordered SU(N) `refl` candidates. Original already-existing E1 all-cutoff cylinder limit theorem `YMClayE1VariableCutoffCylinderLimitExact`, CMP119/122/116/W1/W3 marked Wilson source, original physical Wilson RP and one OS H spectral consumer remain DONORS, not missing generic constructions. **Actual remaining physical INPUT:** interacting original cutoff/volume-uniform three-moment error and original Wilson two-support marked-clustering estimates, genuine `t,k` cutoff/volume physical-scale limits and dense same-`H_OS` spectral gap (E1/D1/D2/N1/G1). Don't confuse finite exact comparisons or Q8 tests with continuum mass gap; P0 YM first, P1 antigravity after. Source-writing branch #1536 is independent from #1444 stacked roadmap; no merge claimed.
+
+---
+
+## 21 November 2026 — P0 steelman BIDI **original native R445 Wilson Gibbs → existing F19 weighted effective density**
+
+**Weld forward from the ORIGINAL source, reverse from physical E1/OS.** The latest source audit found the receiver we should use: `YMClayOriginalWilsonCanonicalBlockedMarkF19Exact.originalCanonicalBlockedNormalizedEqualsPhysicalEffective` already proves the **same original interacting 1,024-link Wilson-Gibbs** numerator and partition are transported to the full F19 64-coarse-link **weighted effective density**, integrating original selected 128 links and all 896 interacting spectators. We must not replace it with the pure-Haar result or invent another effective action. The preceding native-64 square `YMClayOriginalF19R445Native64HolonomySquareExact.originalF19CoarseWilsonObservableEqualsNativeR445` identifies each original coarse Wilson test at fixed fine U with the F19 original constructed adjacent-swap 64-block test (the latter still has an **Agda-unchecked 64-index `refl`**).
+
+**New #1536 SOURCE-WRITTEN direct BIDI module** `YMClayOriginalR445NativeF19WeightedPhysicalSourceBIDIExact.agda` (latest corrected [commit c0c54b0d](https://github.com/chboishabba/dashi_agda/commit/c0c54b0d9c48dfde94395f4e2bac552217feb04b)) defines exactly the native source mark
+```
+N_native(F) = productHaarIntegral_1024 (λU ->
+               originalWilsonVectorWeight(U) *
+               F(originalNativeCoarse64(U))).
+Z = productHaarIntegral_1024 originalWilsonVectorWeight.
+```
+It first invokes existing `Original.productIntegralCongruent` and original native/F19 pointwise `cong` to show `N_native(F)=N_originalF19(F)` **under the SAME full interacting Gibbs integrand**. Then it invokes the **ALREADY EXISTING** F19 `originalCanonicalBlockedNormalizedEqualsPhysicalEffective` for every `F : Vec SUN 64→ℝ`, obtaining the *finite cutoff side4→side2* normalized equality
+```
+divide(N_native(F),Z) = originalEffectiveBlockedNormalized(divide,F).
+```
+No new quotient axiom (the same caller-supplied `divide`), no new Wilson density or field/Haar space, and no assumption that the effective density equals **bare** side-two Wilson at beta(1). All original 896 spectators remain *inside the full original weight* until the ORIGINAL F19 effective fibre integration. **This Agda source is a proof candidate, NOT KERNEL-ACCEPTED**, and depends on earlier original 64-link/index candidates plus original source imports.
+
+**LOCAL SymPy 1.14.0**, no CI/Agda: ran the supplied `/mnt/data/check_ym_f19_r445_sympy_purehaar_weld.py` successfully (1,024 permutation both inverses, noncommutative 64 original blocks, 96 plaquette words, 5,120 Q8 link values, 320 ordered blocks, 480 traces, original 896 spectators and 5,376 original fine Wilson plaquette incidences). Then constructed and actually ran `/mnt/data/check_ym_native_f19_weighted_fibre_sympy.py`, a STRICTLY **conditional 3-active-link source-shaped slice** of the original 4D 1,024-link Wilson action: fix other 1,021 links to identity, enumerate both selected links and one adjacent original spectator through the eight exact Q8 SU(2) matrices (8³=512). Precisely 16 original fine plaquettes are affected; all 512 configurations reproduce original native 2-link product `W=U·V`. The full original (restricted-slice) Wilson weighted partition, `F(W)` and `G(W)` marks, product mark, and **centered covariance numerator** equal the grouped F19 conditional effective sum as polynomials in positive symbolic coupling `z`. Each of eight coarse Q8 products has 64 preimages; at `z=1` the effective weights are 64 each, while at `z=2` they have THREE distinct values. Script is source-equivalently committed on #1536 as `scripts/check_ym_native_f19_weighted_slice_sympy.py` [commit a6d80a04](https://github.com/chboishabba/dashi_agda/commit/a6d80a040342bcb0eef2f897dd86de0a111fd13f). This is **NOT** the full SU(N) Gibbs/Haar integration over 1,024 active links; it is a local exact falsifier for dropping spectators/assuming pure Haar and a source-shaped test of native/F19 weighted composition. No comparison of physical continuum rates or compact simple G obtained.
+
+**BIDI reverse solve**: the original `YMClayE1A3OriginalR445CrossCutoffSourceExact` already gives fixed original n=3 blocked Wilson vs SAME R445 effective expectation; `YMClayE1OriginalR445ThreeMomentCutoffTransportExact` already converts original three-test physical cutoff residuals to native R445 effective-vs-bare covariance error. The exact `YMClayE1VariableCutoffCylinderLimitExact` and T5 Gram/R278 OS compilers already exist, but need **actual interacting changing-cutoff** source convergence, **literal original Wilson W1/W3** cutoff/volume uniform bounds (or direct spectral construction), published original positive-time RP, and ONE dense reconstructed `H_OS` on nonvacuum physical states with nonzero mass gap. Those are actual E1/D1/D2/N1/G1 physical obligations; no missing finite 1024-link codec, 16-site origin, proof-iteration chronology, or new arbitrary metric/time model. Keep independent physical time `t` and cutoff `k`, actual phase/zero and all 896 physical residual links. P0 YM first; P1 antigravity second.
+
+**Acceptance/branches**: #1536 original golden root imports weighted source [commit 35dadd12](https://github.com/chboishabba/dashi_agda/commit/35dadd12a49902eb7f3cf25ab7b1d06a3e7de55a); `scripts/check_ym_1444_cmp119_r445_weld_forward.py` source owner manifest and local SymPy list updated [commit f37a761a](https://github.com/chboishabba/dashi_agda/commit/f37a761a78415266d8feff7ab87b839a7a85c872). Exact committed script and source-written Agda **not** checked out / kernel executed; independent local equivalent passed. Historical #1444 is stacked; #1536 is master-based, independent; source changes are **not** represented as merged into master or into #1444. Roadmaps updated directly, not replaced.
+
+---
+
+## 2026-11-21 — P0 local SymPy exact F19/native R445, existing PURE-HAAR receiver instantiated as Agda candidate
+
+**Owner-first audit**: newest inspected #1444 historical head `83b2fd9a3ce87b2d91c7b54340183c0723ece965`, latest inspected #1536 master-based head `5e0db1252b1a629642106f5fdfde27bf9bfd98d3`, original `master` `YMClayR445OriginalPureHaarBlockWeldExact`, F19 adjacent-sort, original native 64 SU(N) pair theorem, canonical R445 128+896 full field codec and F19 weighted Wilson effective source. **P0 is the physical 4D interacting mass-gap endpoint E1/D1/D2/N1/G1; finite identity successes are source consistency, not solved continuum analysis.**
+
+**Verified independently in LOCAL SymPy 1.14.0, no CI, no Agda toolchain**: `/mnt/data/check_ym_f19_r445_sympy_purehaar_weld.py`, source-equivalent committed `scripts/check_ym_f19_r445_sympy_purehaar_weld.py` on #1536 ([commit 8e204d70](https://github.com/chboishabba/dashi_agda/commit/8e204d706ccf047749b7719fa6b062faf758205b)). Original side-four 1024 positive bonds, side-two 64 positive coarse bonds, native even origin and two *ordered noncommuting* fine links, original canonical 896-bond spectator filter. Computed **complete 1024-index F19 ↔ R445 permutation**, verified both inverses using SymPy `Permutation`; proved **64/64** original-block equalities in noncommutative symbolic expressions and **96/96** noncommutative coarse plaquette-word equalities; evaluated **5,120/5,120** canonical/sorted exact Q8 (SU2 2×2 matrix) field values, **320/320** ordered pair blocks, **480/480** exact coarse Wilson plaquette traces. Deliberately reversed link ordering differs on **124** of those assigned Q8 blocks; altering one of five original spectators changes an original fine Wilson plaquette word but NONE of the 64 chosen blocked link values. These checks are NOT a full universal SU(N) analytic theorem: the symbolic word equalities are universal in the free-word model; the matrix evaluations are only exact Q8 negative controls. Exact committed GitHub checkout was NOT locally executed (network unavailable from container); local script content follows source-defined geometry but is not byte-verified against committed file.
+
+**Most useful original receiving theorem ALREADY EXISTS**: `YMClayR445OriginalPureHaarBlockWeldExact.OriginalR445PermutationAndNativeBlockWeld` owns (i) actual `Haar.LinkPermutation 1024` matching original R445 complete sorted field and (ii) equality of **original native 64-link SUN holonomy** to its **original flat consecutive 64 ordered SU(N) pair products** on the full 128+896 sorted canonical field. If both are inhabited, its original `originalR445PureHaarBlockedIsOriginalCoarseHaar` proves **unweighted product-Haar pushforward** by existing Haar-invariance and pair-convolution, *not* interacting Wilson Gibbs or bare beta(1) n=1 source equality.
+
+**New source-written, uncompiled direct instantiation candidate** `YMClayOriginalF19R445PureHaarReceiverCandidateExact.agda` ([commit 350273ec](https://github.com/chboishabba/dashi_agda/commit/350273ec3dde467abb6ba8fd3e8d7c10f59a52c9)) plugs in the **actual original `OriginalSort.actualPairProgram`**, transports it through original 1024-count proof by generic exact `transportPermutationAction`, composes #1536 `FullValue.originalPhysicalF19ActualSortIsOriginalR445Codec` for field (i), and composes #1536 `Native.originalPhysicalF19Blocked64EqualsNativeR445` for field (ii). Only remaining source-specific check (not a new axiom) is equality between **F19 `Torus.Product` pairs** from `coarseFromSortedOriginal` and **original pure-Haar `Data.Product` pairs** from `Flat.splitFlatPairs`. Named `originalF19FlatPairBlockAgreement` is currently a **`refl` normalization candidate**, NOT VERIFIED: it might require a source-derived inductive flat-pair decoder bridge and count transport rather than definitional equality. Similarly `originalF19PermutationIsR445Reorder` uses two original count casts that the Agda kernel MUST normalize. The record constructor `originalActualF19PureHaarReceiver` and pure-Haar consequence are **proof candidates**, not accepted theorems. No Agda compiler present; do not call them closed kernel proofs.
+
+**Commuting-square scope**:
+```
+ original 1024 canonical fine links
+    |  original F19 adjacent swaps              | original canonical fine decoder
+    v                                           v
+ sorted selected128 + residual896       original native R445 SU(N) fine field
+    | original 64 ordered F19 pair multiplication | native 2-link selected coarse field
+    +-------------------------- SAME 64 coarse links (symbolic/local) ------------+
+    | full original 896 spectator variables retained in Wilson integrand
+    v
+ original existing pure-Haar receiver (UNWEIGHTED, source-specified)
+    != full interacting Wilson effective Gibbs, nor all-cutoff physical E1/D1/D2
+```
+**BIDI follow-up**: first locally test any suspect count transport or pair structure as exact finite SymPy; when Agda is permitted, kernel-check and correct `originalF19FlatPairBlockAgreement` using the original `YMClayOriginalWilsonPairSpectatorDecoderExact`, `YMClayR445FlatPairedHaarIntegrationExact` and `YMClaySUNWeightedDisjointPairFibreReparamExact` inductive pair-product owners; do NOT invent arbitrary function-extensionality or assert `refl` succeeds. Then use the *already existing* `YMClayOriginalWilsonCanonicalBlockedMarkF19Exact.originalCanonicalBlockedNormalizedEqualsPhysicalEffective` for original full weighted Wilson, preserving 896 interacting spectator links. Physical first-order work still E1 original interacting actual measure source and W1/W3 marked uniform small+large-field source (or independent direct same-H D2 argument), RP complex star/dense same (H_{OS}), N1/G1. Chronological R445/F19 theorem numbers ≠ source time `t` or scale `k`. P0 first, P1 antigravity after.
+
+**Integration:** #1536 `DASHI/Unified/YMClayOriginalWilsonPhysicalRegression.agda` now imports the source-receiver candidate (commit `283b4799`); its fail-closed local source checker includes original receiver symbols and NEW SymPy local test (commit `acdd2940`). Both #1444 documents and #1536 canonical roadmap are updated DIRECTLY on respective draft branches, no merge into `master` asserted; any formal trust must await actual Agda elaboration when allowed.
+
+---
+
+## 2026-11-21 — NEW P0 F19 → **actual native R445 64 SU(N) block** commuting square, existing pure-Haar interface identified
+
+**User-directed method:** check newest original #1444 and #1536, weld *forward* from existing finite source and *backward* from physical E1/D1/D2 onto the SAME Wilson field. Do not reconstruct parity/measure; preserve all 896 original spectators and the independently indexed physical time `t`, cutoff `k`, signed zero/residual hyperfabric. R445/F19 names are chronology of proof construction, not physical indices.
+
+### The real square, not just a sorted-label equality
+
+```
+                 original canonical SU(N) links (all 1024)
+                  /                                 \
+  actual F19 adjacent-swap into 128+896       original native fine field decoder
+           |                                            |
+  original F19 pair/spectator decoder           original native R445 2-link holonomy
+           |                                            |
+  F19.coarseFromSortedOriginal                 SUNBlock.nativeSUNBlockLinks m=l=1
+           \                                            /
+                SAME 64 original ordered coarse SU(N) links
+                           | any original Wilson coarse test
+                   SAME finite observable value
+```
+
+**Original master sources directly inspected:** `YMClayR445OriginalNativeParityPairWeldExact.originalR445NativeBlockAgreesExplicitParity` proves for **each original coarse bond** the ordered native SU(N) blocked holonomy is the multiplication of original phase-zero and phase-one fine link values; `YMClayNativeSideFourTwoLinkPairSameObjectExact.originalSUNBlockIsLiteralTwoLinkProduct` independently owns the exact path-vs-pair native identity. `YMClayR445CanonicalBondPermutationCodecExact` preserves full **128 selected + 896 original residual** and true two-way original vector codec. `YMClayOriginalWilsonCanonicalBlockedMarkF19Exact.coarseFromSortedOriginal` builds the **actual F19 64 pair product** from the original adjacent swap, pair+896 spectator decoder; its `originalCanonicalBlockedNormalizedEqualsPhysicalEffective` already owns same-original-Wilson weighted all-observable normalized expectation, **not bare coarse n=1 Wilson**. The original `YMClayR445OriginalPureHaarBlockWeldExact.OriginalR445PermutationAndNativeBlockWeld` already specifies the **actual** two needed source identities `permutationIsOriginalReorder` and `actualNativeBlockIsFlatPairBlock`; do not replace it with invented Haar assumptions. Existing #1536 F19/R445 full label/field/vector/decoder source remains Agda uncompiled.
+
+**New source-written #1536 native block owner:** `DASHI/Physics/YangMills/YMClayOriginalF19R445Native64HolonomySquareExact.agda`, initial commit `3d769d3ffa7534c9a955fa1a0b3542da2a5d1260` and corrected source `303f2b5ebdf36e5a11a7a7e30532711e4f95277a`, coarse-observable extension `4708a364a988505a9dc2b61631d3aa34a30838d9`. Its `originalNativeCoarse64` encodes the **actual original nativeSUNBlockLinks** on the actual 64 positive-bond enumeration; `originalExplicitParityCoarse64` uses the original two signed-phase source bond lookups; `originalNative64IsExplicitParity64` is a genuine use of **existing source `NativeParity.originalR445NativeBlockAgreesExplicitParity` and `Codec.originalBondsEncodePointwise`**. `originalF19SortedCoarse64` uses the actual F19 `coarseFromSortedOriginal` on the whole R445 128+896 vector. **Precisely one remaining candidate finite computation** `originalF19Sorted64AreNativeParity64` asks for kernel normalization of these exact 64 selected pair products; it is source-written as `refl`, **not compiler accepted**, so if elaboration fails recheck original vector count transport/definitional equality and original pair/64-order proofs, not add axiom. `originalPhysicalF19Blocked64EqualsNativeR445`, `originalF19AndNativeR445Actual64CommutingSquare` and `originalF19CoarseWilsonObservableEqualsNativeR445` compose actual F19 adjacent-sort vector/64 blocked output with original native field, producing **every coarse Wilson test** pointwise **conditional on the closed normalization candidate type-checking**. No synthetic SU(N) block/clock/measure.
+
+**Independent local exact noncommutative test:** `/mnt/data/check_ym_native64_f19_r445_local.py` run against actual original 4D side-four/coarse side-two source-shaped labels and Q8 subgroup of SU(2) (not a Yang-Mills integral), five configurations: **320/320 original native vs F19 pair block products**, **480/480 original coarse plaquette traces**, **160** deliberately reversed two-link products differ, **5/5** spectator modifications change original FINE Wilson plaquette traces while leaving the chosen 64 coarse blocks unchanged. This is a key physical warning: spectators do not enter the 64 two-link holonomies but DO enter the full original Wilson action and cannot be deleted from the interacting measure. The existing #1536 `scripts/check_ym_f19_r445_full1024_labels_p0.py` was committed with independent native/endpoints and fine-spectator Wilson tests as commit `c4632d3aba65d7f7d7809470613f0755d02d1e66`; its exact checkout was NOT run. #1536 golden regression root imports the new Agda owner (`f82f391aab8f3f8af2c8e6de6b4ed93e6c358d53`) and fail-closed source checker requires eight new native/64-source theorem identifiers (`d866a4f67438ce706c976b9aa87010a89923885a`). None is an Agda 2.9 kernel receipt.
+
+### BIDI status / next payment
+
+- **F0 exact finite:** original F19/1024 effective measure and R445 128+896 code/16-site native parity are already provided by `master`; F19↔R445 sorted vectors, pointwise decoder and native 64-block are now *closed Agda proof candidates* on #1536, **not accepted proofs**. Run pinned `bash scripts/check_ym_original_rg_p0_kernel.sh`; repair genuine Agda errors against source definitions. After kernel acceptance, instantiate the already-existing original `OriginalR445PermutationAndNativeBlockWeld` with the actual F19 adjacent-sort and native 64 theorem; avoid another Haar theorem.
+- **F1/R1 physics:** original actual compact `SU(N)` Wilson all-size changing-cutoff interacting Gibbs/E1 (not one side-four sample), original W1/W3 **literal Wilson-loop** small/large field marked locality and cutoff/volume uniform exponent, actual original CMP119/122/116 sources and same real/rational carrier interpretation. Existing conditional generic CMP theorem machinery DOES NOT supply the physical data automatically.
+- **F2/R2 OS time:** original positive-time Wilson words, reflection-compatible actual link source, published Wilson reflection positivity **complex-star** source; R332 OS1 time and R556/R278 actual same-source cutoff-indexed covariance. Preserve original `t×k` + residual and real physical units.
+- **F3/R3:** original E1 interacting continuum/nontriviality + one **actual same reconstructed H_OS**, dense vacuum-orthogonal cylinder family, uniform positive mass (m), G1 group scope. No finite commuting square or Q8 check proves Clay mass gap. P0 YM first; P1 antigravity second.
+
+**Branch discipline:** roadmaps updated DIRECTLY on historical stacked draft #1444 and independent master-based draft #1536. This entry is source-specific implementation status, not a merge into `master`.
+
+---
+
+## 21 November 2026 — P0 F19↔R445: a TRUE *finite decoder* commuting square, plus the physical blocked-observable corollary
+
+**Question answered precisely:** the earlier `P_F19(U) = Encode_R445(U)` is an equality of parallel routes from ONE original canonical 1024-link vector to ONE complete 128-selected+896-spectator vector. It is **not itself a four-arrow commuting square**, and it is **not yet** a Yang–Mills OS/continuum/RG commuting theorem. The genuine square is now stated explicitly, with original source-owned maps only:
+
+```
+       actual original CANONICAL Vec 1024  -- P_F19 original adjacent swap -->  sorted Vec 1024 (128+896)
+                      |                                                            |
+       Codec.decodeOriginalBonds 4                                 Codec.decodeField originalR445PairResidualFinite
+                      |                                                            |
+                      v                                                            v
+             original full fine bond field   ------------ IDENTICAL ------------> original full fine bond field
+```
+
+Precisely **for every original positive fine bond and arbitrary Value**, `decode_R445(P_F19(U),bond) = decodeOriginal(U,bond)`. On **independent draft #1536** this is implemented source-written as `YMClayOriginalF19R445DecoderCommutingSquareExact.originalFull1024DecoderSquare` ([commit 373707dc](https://github.com/chboishabba/dashi_agda/commit/373707dc293f288c7bce156cb4aea6a4243939c9)). It composes existing original master `YMClayNative1024ClosedReindexHaarConsequencesExact.actualPairSpectatorReindexEveryOriginalVector`, `YMClayR445CanonicalBondPermutationCodecExact.decodeEncodeAt`, and #1536 `YMClayOriginalF19R445Full1024LabelsP0Exact` **full label equality candidate**. **Both inverses** are stated: unsort after F19 sort restores original canonical vector, and F19 sort after R445 unsort restores any complete sorted vector. These use already-written R445 original two round-trip theorems. The actual proof body depends on older source-written `refl` candidates and is **NOT Agda kernel accepted**.
+
+A second, physically more meaningful **finite blocked-observable** corollary on #1536 uses the REAL original `YMClayOriginalWilsonCanonicalBlockedMarkF19Exact.coarseFromSortedOriginal` and `canonicalSourceCoarseObservable`: the **same** original canonical Wilson U under the REAL F19 constructed adjacent-swap sort or under the original R445 complete selected+residual coordinate reorder yields the **same 64 physical F19 coarse SU(N) holonomies** and every original F19 coarse Wilson observable. New source `YMClayOriginalF19R445PhysicalBlockedObservableSquareExact.agda` ([commit 4bdc52f7](https://github.com/chboishabba/dashi_agda/commit/4bdc52f73f652e3c56f42216e0f79c6f05fa1f39)) composes original F19 block and preceding vector theorem by `cong`. This is **not** a duplicate measure, alternate block or invented Haar. Full 896 spectators retained in the original 1024-link vector.
+
+**The precise downstream junction is still different:** compare the above original F19 `coarseFromSortedOriginal` **coarse Vec 64** with the already ORIGINAL `YMClayNativeSideFourTwoLinkPairSameObjectExact.originalSUNBlockIsLiteralTwoLinkProduct` and `YMClayR445OriginalNativeParityPairWeldExact.originalR445NativeBlockAgreesExplicitParity` original `nativeSUNBlockLinks` on EACH of 64 coarse bonds, with original enumeration order. This is a **native blocking-square**, not the lossless decoder square, and must be kernel-accepted before claiming full F19 ↔ native-R445 blocked observable identity. Original F19 `originalCanonicalBlockedNormalizedEqualsPhysicalEffective` already gives full finite 1024-link Wilson normalization for every coarse test, but does NOT automatically imply original cutoff-uniform Wilson W1/W3 physical decay, E1 continuum or same-H OS.
+
+**Acceptance and falsifiers:** local independent finite Q8 reference `/mnt/data/check_ym_f19_r445_all_link_values_p0.py` actually executed: 128/128 selected, 896/896 spectators, 2048/2048 inverse, five 1024-link Q8 configurations 5120/5120, 320/320 noncommutative pair holonomies, 7680/7680 original Wilson plaquette-trace invariance. Intentional reversed within-pair order changes 160 blocks; modifying each of five spectators changes the original field (5/5). This is *not exact checked-out head script or Agda kernel acceptance*. New source modules imported in original golden root `DASHI/Unified/YMClayOriginalWilsonPhysicalRegression.agda`, and fail-closed `scripts/check_ym_1444_cmp119_r445_weld_forward.py` manifests both. Existing `master` source was inspected; historical #1444 and master-based #1536 remain **separate draft PRs**.
+
+**P0 theorem-first unchanged**: actual original interacting four-dimensional YM E1 limit/nontriviality, original full Wilson W1/W3 physical small+large-field cutoff/volume-uniform decay (or another direct same-H gapped reconstruction), published fine physical RP, one dense physical OS Hilbert/H generator and full vacuum-complement spectrum D2, N1/G1 group scope all remain OPEN. No finite coordinate-square counts as the Clay mass gap; P1 antigravity after P0. R443/R445/R320 are chronological proof attempts, not physical t or RG k. Preserve zero and all parity and 896 physical residuals.
+
+---
+
+## 21 Nov 2026 — current P0 cross-lane discipline: reuse Mellin, GRH stays P0
+
+**YM remains one physical main theorem**, not a count of R445/F19/CMP
+iterations: actual nontrivial interacting 4D Wilson/OS continuum,
+strict positive full nonvacuum gap for the SAME reconstructed H,
+surviving observables and all compact simple gauge groups. Already
+proved finite 1024-link permutations, time reflections and algebraic
+finite→limit compilers are evidence only. No cutoff/volume-uniform
+Wilson decay or continuum positivity/strict gap follows automatically.
+
+**Cross-lane P0, not postponed:** all-character **Dirichlet GRH**
+source admission in Lean #113 / Agda #1533, with independent
+external proof verification and the unclosed root/Agda same-character
+analytic transfer. Its controlling
+`Docs/roadmaps/GRHP0OriginalEveryCharacterMellinForwardWeld20261121.md`
+is in PR #1533. Ordinary RH is weaker; a finite CM/Monster example
+is not a substitute for `UpperTheory.EveryCharacter`.
+
+**Mellin already exists**, both original
+`MellinSplitFunctionalEquationExact`/BSD `EllipticCMLevel32FrickeMellinExact`
+and RH's Gamma/Mellin↔Weil proof-relevant action transport.
+Those analytic carriers are not interchangeable with the original
+Wilson Euclidean time/H_OS or with arbitrary Dirichlet L-functions.
+Use proved same-object transport, never a new generic Mellin or
+independent auxiliary Hamiltonian.
+
+**Execution direction:** seek genuine physical YM W1/W3 and E1/D2
+source inequalities; keep R445 label/root proof candidates on pinned
+Agda kernel gate. GRH P0 independently enters the original all-character
+consumer; BSD P0 independently enters original E32 same-curve eta
+Mellin/newform. No default branch change or theorem completion claimed.
+
+---
+
+## 21 November 2026 — latest-head P0 F19/R445 *arbitrary original link values* commuting square; physical theorem remains governing target
+
+**Review order actually followed:** checked #1444 head `583b063c5c18b56a046b22749127134c11890d76` and its two existing roadmaps, #1536 master-based starting head `0016ed414b9acfcecafffd4660ac9391a887c221` and its canonical roadmap, plus the exact `master` original F19/R445/vector/Haar owner bodies. #1444 is stacked on `research/ym-route-s-r320-direct-mass-gap-20261030`; #1536 is 64 ahead / 0 behind `master` at inspected prewrite comparison. Other newest #1537/#1538 are different research lanes, **not newer substitutes for the original YM Wilson source**. Re-read current heads before future imports; chronology R445/F19/R320 is theorem iteration, NOT scale k or physical time t.
+
+**Already original master sources, therefore NOT new P0 missing constructions:**
+- `YMClayNativeSideFourPairSpectatorSortProgramExact`: native adjacent-swap F19 target is **original 64 ordered pairs plus canonical 896 spectators**.
+- `YMClayNative1024ClosedReindexHaarConsequencesExact.actualPairSpectatorReindexEveryOriginalVector`: original source-generated F19 adjacent-swap permutation reads **arbitrary original link values** via original 1024-link decoder. Finite product-Haar reindex is likewise source-owned; interacting Wilson weight stays in integrand.
+- `YMClayR445CanonicalBondPermutationCodecExact.originalR445CanonicalToPairResidual` + **two round-trip theorems**: existing original complete selected-128 / residual-896 field reordering.
+- `YMClayOriginalWilsonCanonicalBlockedMarkF19Exact.originalCanonicalBlockedNormalizedEqualsPhysicalEffective`: full original interacting F19 1024-link normalized effective expectation for **every** original coarse observable, already existing. Prior #1536 `YMClayOriginalF19R445Full1024LabelsP0Exact` is a **source-written, not kernel-accepted** full 1024-order candidate.
+
+**New actual vector commuting square on independent draft #1536, not merged onto #1444 or master:** `YMClayOriginalF19R445EveryLinkValueBIDIExact.agda` (`7921880be20f8dc642d05af4d3bb5087633dd8df`) transports original complete F19/R445 label equality through original `Codec.listValues/encodeField` for every value carrier and every original 1024-link canonical vector. `YMClayOriginalF19R445ActualSortedVectorBIDIExact.agda` (`44fbcc4e7203db739017389da3fbe7552e965e6e`) composes **master's actual F19 adjacent-swap `actualPairSpectatorReindexEveryOriginalVector`** with that full-label equality to state:
+```
+Haar.permuteLinks (Sorted.actualPairProgram theory) original1024
+   == R445.originalR445CanonicalToPairResidual original1024
+```
+for **every** link value carrier, then by congruence for every consumer of that sorted vector. This is a SAME original finite source, including all 896 interacting spectators; no new Wilson measure/action/clock/H. Both new files are **Agda proof candidates, UNCOMPILED**, transitive dependencies include earlier closed `refl` candidates and the #1536 896-spectator equality; compiler acceptance is a hard dependency, not inferred from text.
+
+**Regression correction**: old `check_ym_f19_r445_full1024_labels_p0.py` “inverse” wrote each canonical position back to itself (tautology). The updated committed script `4cbf50eae094716a221d86a530e9e65d1dace12e` now computes real **canonical-index→target-index inverse** and checks both permutations. It also exercises full original 1024-link fields over five noncommutative Q8 SU(2)-subgroup assignments, all 64 ordered blocked products, and original interacting spectator negative control. An independently executed, more extensive local source-shaped regression passed **128/128 selected, 896/896 spectators, 2048/2048 forward/inverse, 5120/5120 link values, 320/320 ordered Q8 blocks, 7680/7680 original Wilson plaquette traces**, reversed-pair Q8 difference **160** and five altered-spectator source differences. The exact modified GitHub checkout checker was NOT run; those are **equivalent local reference** results, not pinned Agda or exact-head Python receipts.
+
+**P0 steelman BIDI next payment (theorem-first):** distinguish (A) pending **kernel acceptance** of finite F19↔R445 ordered target/adjacent-swap source equality from (B) genuinely open physical **E1** interacting 4D Wilson continuum and published complex-star reflection positivity, **D1** original full Wilson W1/W3 small+large-field `a,V`-uniform physical covariance rate (or another direct gapped-reconstruction proof), **D2** ONE actual dense vacuum-orthogonal `H_OS` with full nonvacuum positive gap, and **N1/G1**. The next candidate exact handoff is original `YMClayOriginalWilsonCanonicalBlockedMarkF19Exact.coarseFromSortedOriginal` to **original** `nativeSUNBlockLinks` on the same SU(N) field, then instantiate existing real original E1 three-moment residual/W1/W3 producers. Do not build another finite codec or metric. R445 16-site origin, all-coarse normalization, 896 spectator order and E1 limit *interfaces* are already owned; their physical analytic hypotheses remain actual obligations. P1 antigravity second.
+
+**Acceptance:** original 1444 roadmaps updated **in place** and #1536 canonical roadmap synchronized. Changes are committed and read back, but **Agda/Nix kernel not installed; all new Agda is source-written/unverified**. No Clay physical mass-gap completion claimed.
+
+---
+
+## 21 November 2026 — P0 F19/R445 full 1024-label target candidate
+
+**Original source owner check:** original F19 `YMClayNativeSideFourPairSpectatorSortProgramExact` already constructs the REAL adjacent-swap target from the source 64 ordered two-link pairs + canonical-order 896 spectators, and `YMClayNative1024ClosedReindexHaarConsequencesExact` already transports that exact permutation to arbitrary original SU(N) link vectors and original finite product Haar. R445 `YMClayR445CanonicalBondPermutationCodecExact` already supplies its original 128+896 bijective Vec codec. **Do not rebuild any of these.**
+
+**New P0 source-written attempt:** `YMClayOriginalF19R445Full1024LabelsP0Exact.agda` (on master-based #1536) imports the previous original selected-128 order theorem and states the exact equality between F19's original Boolean spectator filter and R445's original constructive-decidable residual filter, then the full 1,024-label order. The proof attempts finite normalization after rewriting the already-owned selected list equality. It is imported into `YMClayOriginalWilsonPhysicalRegression` and the fail-closed `scripts/check_ym_1444_cmp119_r445_weld_forward.py` owner manifest. **No Agda 2.9 kernel was run; these are proof candidates, not verified equalities.** If normalization does not discharge the residual equality in the pinned compiler, replace that one step with a structural F19-Boolean ↔ R445-Dec membership induction on the original 1024-list, never with an arbitrary equality field.
+
+Independent Python exact reference (run locally): original 128/128 selected labels, 896/896 spectators, 1,024/1,024 inverse reordering; reverse first/second link negative control has 128/128 mismatches. Repo regression: `scripts/check_ym_f19_r445_full1024_labels_p0.py`. This finite witness does not discharge Agda kernel acceptance or physical analytic CMP source obligations.
+
+**Next P0 (non-duplicative):** (1) kernel-accept the literal residual/full-label computation and use the ORIGINAL F19/R445 decode/encode to prove the arbitrary-Link sorted observable is the original native R445 blocked word; (2) establish physically selected original Wilson W1/W3 insertion and full small/large-field physical-distance clustering uniformly in UV cutoff/volume, or a valid direct same-H gap proof; (3) transfer the *same interacting* original Wilson measure through E1 noncollapsed continuum and published RP/OS; (4) certify dense full-nonvacuum H_OS spectral exclusion, N1, all compact-simple-group G1. The source-written finite 1024 weld must not be counted as physical D1/D2.
+
+**BSD cross-lane boundary:** the Agda BSD original selected E:y²=x³−x/conductor32 analytic program is distinct from the Lean #114 j=0 E:y²=x³+1/conductor36 Hecke program. Their constructive summability tactics may be compared but **no same-curve L-function identification** follows from shared words “CM/Euler”. Separate master-based BSD P0 PR records this source firewall; neither BSD nor YM physical endpoints are solved.
+
+---
+
+## 21 November 2026 — New original F19/R445 three-moment source weld, ordered label proof and corrected #1444 gates
+
+**Verified directly against master and #1444 SHA-equal source bodies**: original `YMClayOriginalWilsonCanonicalBlockedMarkF19Exact` already proves original full **1024-link** canonical Wilson marked numerator equals F19 original physical effective numerator, for **every original 64-link coarse observable**, and `originalCanonicalBlockedNormalizedEqualsPhysicalEffective` uses original full canonical partition on both sides. `YMClayOriginalWilsonPhysicalF19PartitionExact.originalFinePhysicalPartitionEqualsActualEffectivePartition` and two-mark normalizer on zero sources are existing; **do NOT list original finite F19 all-coarse normalization or same partition as missing**.
+
+**New source-written compiler** `YMClayOriginalF19CanonicalConnectedWilsonBIDIExact.agda` commit `c8663700a540607258648bc24e9df1bc647e7365`: composes that already-master original 1024-link identity at **F, G, FG** with `cong₂` of real multiplication/subtraction, proving all-original coarse-test `canonicalOriginalWilsonConnected F G ≡ originalF19EffectiveWilsonConnected F G` on the SAME original SU(N) Wilson Gibbs source and all 896 interacting spectators. It supplies a precise finite covariance, **not** W1/W3 physical decay, RP or continuum convergence; source-written, new Agda uncompiled.
+
+**New source-written exact selected 128-link ORDER witness** `YMClayOriginalF19NativeR445SelectedOrderBIDIExact.agda` commit `c71a29e722a422003aada57b9232a7cdf99d364d`: for every original coarse bond and true original exact group, `originalR445NativeFirstBondIsParity` and `originalR445NativeSecondBondIsParity` show F19 `selectedFinePairLabels` equals original R445 `originalR445SelectedBondEnumeration` *in order*, through a list induction and original cartesian pair/phase enumeration. The source F19/R445 target lists also include 896 untouched physical fine-link spectators. Independent local exact reference passed 128/128 original selected order, 896/896 residual suffix, 1024 full round-trip, 64/64 pair products; negative reversed pair order 128/128 mismatches. The checked-in executable script is `scripts/check_ym_original_f19_r445_selected_residual_source.py` commit `10e282b975f3ea645b078d21a1535adb74a2c1ad`; original native sorting and full-1024 R445 target vector equality remain the **kernel** handoff.
+
+**Proof BIDI boundary**: the remaining native exact link-field comparison is the original `YMClayNativeSideFourPairSpectatorSortProgramExact.originalPairSpectatorTargetVector` vs `YMClayR445CanonicalBondPermutationCodecExact.originalR445PairResidualBondEnumeration`, including full spectator suffix and actual source decoder. The earlier missing 16-site origin, selected 128 order, normalized F19 all-coarse and 3-moment covariance are repaired/paid at source level. Then use existing `YMClayE1OriginalR445ThreeMomentCutoffTransportExact` for real effective-minus-bare RG error and original CMP119/122/116 source Wilson loop estimates for all k; keep E1 real changing-cutoff convergence and complex OS/H separate. R443/R445/R320 chronological proof names are not t or k. P0 physical gap OPEN, P1 antigravity second.
+
+**Control**: direct #1444 two roadmaps commits `b1afd7140baa1ab27d6eb5b60e65a8eddf3367c2` and `3bb917bc2ca8e84cc5674c2a2f33f42acf536061`; independent #1536 root imports two Agda modules, combined acceptance checks them, **no Agda/Nix kernel receipt**. No automatic merge across branches.
+
+---
+
+## 21 Nov 2026 — source owner equivalence and P0 boundary audit
+
+**Source-first, no YM rebuild:** exact Git blob SHA comparisons against **actual dashi_agda `master`** show these six original theorem-owner files are byte-identical on #1444 and `master`: `YMClayOriginalR445ReflectedAllWordGramExact`, `YMClayOriginalR445PublishedWilsonRPWordWeldExact`, `YMClayOriginalWilsonR445R320TwoSourceSameFamilyExact`, `YMClayD1OriginalCovarianceToR320Exact`, `YangMillsClayCriticalPathRound578Exact`, `YangMillsClayCMP119H1OS4AttachmentRound583Exact`. These are **not missing modules**: native all-word Gram/pushforward, conditional published lattice RP transport, original finite two-source mixed-jet/connected covariance, conditional R320 physical-rooted-shell equivalence, seven-family critical path and selected OS4 compiler are already source-written. The source retains explicit physical conditions; identical files are not compiler receipts.
+
+**#1444 is stacked on historical YM base** `research/ym-route-s-r320-direct-mass-gap-20261030`, while this #1536 is **master-based**. The large #1444/master compare is a diverged-history artifact; do not merge #1444 wholesale, claim every head-only change absent, or recreate these originals. #1536 already owns the actual selected OS1/R556/R278/R281 commuting-square and time×k parity/residual (including 128+896=1024 native bond accounting) work. Its source-written, finite-exact acceptance does NOT close 4D continuum or kernel.
+
+**Unpaid original physical sources:** published Wilson RP mapped to the literal fine selected positive-time action/complex-star test dictionary (the original `sourceIdentifiesActualWilsonReflection` is an INPUT); literal same-original Wilson W1/W3 mixed-source and full small+large-field cutoff/volume **uniform physical** covariance; real Wilson↔rational T5 actual-source interpretation if this consumer is selected; changing-cutoff interacting E1 OS continuum, one dense nonvacuum H_OS and uniform full-sector spectral gap, surviving N1 local observable, G1 each compact simple group. CMP102 remaining work is the **actual nonlinear group average/mixed-scale boundary/per-plaquette Eq7 witness**, not generic Haar, plaquette or group-algebra reconstruction. Published RP finite source theorem and conditional OS4 are already owned. Real physical convergence, spectral detection and noncollapse are not consequences of a finite R445 1024-bond chart.
+
+**Acceptance:** Git exact blob comparisons and connector source inspection PASS for the six owners; existing local symbolic checks are distinct from formal Agda kernel. No pinned Agda 2.9 kernel or CI used in this tranche.
+
+---
+
+## 21 Nov 2026 — NEW original E1 finite→continuum `t×k` residual square; #1444 roadmap reconciled
+
+**Steelman BIDI result:** Original #1444 donor `YMClayR445OriginalAxialBondParityInjectiveExact` already has **`coord/coarse/phase` and original selected-bond injection**; `YMClayR445OriginalNativeParityPairWeldExact` already has the full native **16-site `Fin.combine` proof** and 8 original odd-phase bond-step cases; `YMClayR445CanonicalBondPermutationCodecExact` already preserves the complete original 128 selected+896 residual Wilson fine links; `YMClayR445OriginalFullWilsonFiberDensityExact` uses this whole original interacting weight. Those source-native finite claims are **already paid**, NOT new proof targets. #1536 `YMClayR445TimeKResidualHyperfabricExact` imports all these actual owners, proves selected geometry origin via original theorem, exact **one-fine-step carry with remainder**, two-step descended square, and `oddFineStepCannotFactorThroughCoarseOnly` exact Agda negative control. Zero coarse/fine and original WaveAlgorithmLift `neg/zero/pos` trits remain distinct from the 896 SU(N) field residuals. `t:Nat` is source OS1 physical time, `k:Nat` actual RG stage; theorem labels R443/R445/R320 are **chronological proof iterations**, NOT t or k.
+
+**Finite→continuous original sources were found; do not recreate**:
+- Original `YMClayE1VariableCutoffCylinderLimitExact.ActualVariableCutoffCylinderFamily` already has `Configuration:Nat→Set`, `Measure:Nat→Set`, source exact cutoff-indexed normalized original Wilson expectations, and an actual continuum expectation together with original `Converges` input. It establishes positive/linear/normalized continuum expectation when its physical convergence inputs are inhabited.
+- Original `YMClayE1A3OriginalR445CrossCutoffSourceExact` and `YMClayE1OriginalR445ThreeMomentCutoffTransportExact` already weld same original n=3 R445 effective pushforward with actual E1 original fine source and transfer the **three source-moment errors** into physical covariance error; they never identify bare n=1 with effective n=3 by fiat.
+- Original `BalabanClayT5PhysicalMeasureGramContinuityExact`, `BalabanClayT5LimitAndNontrivialityExact` already contain finite→continuum reflected OS Gram and nontriviality theorem compilers; the SOURCE rates/limit measures remain explicit proof-bearing premises. Generic `DASHI.Physics.WaveAlgorithmLift` owns finite signed zero-inclusive wave-refinement diagrams but specifically does NOT prove a physical YM analytic PDE/H.
+- Original `DASHI.Core.MultiscaleMDL.ResidualCodec` already proves reversible coarse+residual reconstruction at every k. Original `DASHI.Physics.Limits.PhysicsLimitCommutingSquare.AsymptoticCommutation` owns stage-indexed residuals **and requires a real vanishing-to-zero proof**, rather than discarding residuals by projection.
+
+**New actual E1 residual ↔ continuum adapter** on #1536: `YMClayE1TimeKResidualCylinderWaveTransportExact.agda`, commit **`0da5d6d299cd5284502cbb8a963da0e543ef70bf`**, has `timeKOriginalCylinder t k` on selected `Carrier k`, `timeKOriginalCylinderRetainsResidual` on `Carrier (suc k)` by the original `MDL.join-split`, and `timeKOriginalWilsonExpectation t k F = E1.finiteExpectation original k (timeTranslate F t)` with exact same `E1.originalWilsonConverges` to the continuum expectation for that translated original word, if the original physical E1 record is inhabited. This composes the *existing* finite→continuum **k-indexed** theorem with the *existing* wave/residual source chart without inventing a fixed coarse time. Correctness correction: the source's abstract `Converges` need NOT be stable under `k→suc k`; the final adapter keeps convergence at **all original Nat k**, restricting residual split-join to successor k; no false shift-invariance axiom. `timeTranslate` still needs identification with the actual source-owned R332 OS1 assembly on the SAME original Wilson observables.
+
+**Finite reference and negative tests**: locally ran an equivalent Python source reference `check_ym_r445_time_k_residual_hyperfabric.py`: C4↔C2×C2 8/8, one-step carry and two-step 4/4 each, independent t,k,sign/zero and finite time 13,068/13,068, original source bond-count identity 128+896=1024, coarse-only odd-step negative control. New script committed as `scripts/check_ym_r445_time_k_residual_hyperfabric.py` (`4e645547fefa3650f31d27ca26cbb7180d347a01`). **Neither new Agda code nor the exact checked-out integrated runner has been Agda-kernel checked**. The existing physical root now imports both new bridge modules and combined source checker requires their names. No mathematical implication to original complex OS or mass gap from symbolic wave encoding is claimed.
+
+**Live physical proof expenses (not generic missing bridges)**: actual Yang–Mills SU(N) original source in E1 `ActualVariableCutoffCylinderFamily` at ALL k, real original Wilson ↔ rational CMP119/T5 same-source scalar/measure compatibility, literal Wilson loop W1/W3 physically localized marked response on small+large field, fine published Wilson RP on correct site-plane complex-positive-time algebra, full cutoff/volume physical rate and interacting E1, one actual reconstructed H_OS with dense physical vacuum-complement states, G1. A physically finite gap requires a uniform *physical-time* rate, not finite C2 periodic time. **P0 open; P1 antigravity after.**
+
+**#1444 synchronized directly**: canonical `Docs/roadmaps/ClayYMProofRoadmap.md` updated at `4caa2f3551e8af9f09ba21ab879c87e24e65e42f` and `Docs/roadmaps/YMClaySteelmanBidirectionalExactRemainingMaxCut20261104.md` at `34bdbd701eb8fc42272a4bf8fa56adca634733cd`; #1444 is stacked while this #1536 source is master-based; no merge assumed.
+
+---
+
+## 2026-11-21 — P0 time × k hyperfabric; #1444 native parity/finite-to-wave/continuum donors ALREADY OWNED
+
+**New review corrects an important false missing-gate report.** #1444's original `master` contains the FULL `YMClayR445OriginalAxialBondParityInjectiveExact` C4↔C2×C2 original coarse/phase/coord decoder, `YMClayR445OriginalNativeParityPairWeldExact.originalR445NativeOriginIsEvenSite` **16-site exact native Fin.combine identity**, `originalR445EvenSiteOneStepIsOddPhase` **8 axial parity identities**, and `YMClayR445CanonicalBondPermutationCodecExact` **128 selected + 896 residual = 1024 native fine-bond exact disjoint/complete enumeration**. `YMClayR445OriginalFullWilsonFiberDensityExact` already constructs the full original interacting weight on this non-discarding source. **None of these finite source proofs should be re-created or labelled outstanding**. The user correctly identifies R443/R445/R320 etc. as *chronological proof iterations*, NOT numeric physical time or k scale.
+
+**Nontrivial carry / non-group chart:** the original `C4↔C2×C2` coarse/phase codec is a bijection of finite sets, **not** an isomorphism between the cyclic time-translation group `C4` and independent bitwise `C2×C2`. E.g. the coarse component of one fine shift depends on the retained phase; dropping it changes the transport law. Preserve this during wave/continuum gluing.\n\n**Three axes must remain distinct**:
+- `t : Nat` is R332/OS1 physical Euclidean-time argument; `k : Nat` is original E1 cutoff/refinement stage (not a theorem round number); `a : C4` is one selected finite torus coordinate.
+- `OriginalCodec.phase a : C2` is the ORIGINAL even/odd native time residual; `Wave.Trit` is a distinct optional **signed {-1,0,+1} wave symbol** with genuine neutral zero; neither is the collection of 896 original unselected SU(N) links.
+- Actual source `OriginalCodec.coord (OriginalCodec.coarse a) (OriginalCodec.phase a) = a` is proof by four native C4 cases. Thus *with residual preserved* a one-fine-step move has exact carry `(c,0)->(c,1)`, `(c,1)->(c+1 mod2,0)`, while two steps `(c,r)->(c+1 mod2,r)` descends to coarse. The lost-residual projection has no possible one-step coarse-only action, **now proved as Agda contradiction** `oddFineStepCannotFactorThroughCoarseOnly`; the old 64/64 negative control does NOT mean physical one-step time disappears.
+
+**New master-based #1536** `YMClayR445TimeKResidualHyperfabricExact.agda` commits `1a80e8a17af34811c42b6283c47cb6e682504b5a`, `1f1922ccfcc77b2fa38a29cf9773a4ef4290fe9e`, `0c76192330052a5802ef07b572f733fd9f199b40`, `41d35eb68454dfc89ede92136280df9a75a0e297`: uses original native source `coarse/phase/coord`; proves `joinSplitNativeTime`, `splitJoinNativeTime`, `oneFineStepKeepsCarryAndResidual`, `twoFineStepsExactlyDescend`, original `nativeFineBlockOrigin=selectedEven` by the already source-owned 16-site theorem, full original `originalR445PairResidualFinite` **896 not dropped**, zero and signed wave trit via `WaveAlgorithmLift.encodeTritWave`, and the existing `DASHI.Core.MultiscaleMDL.ResidualCodec.join-split` at every separate `(t,k)`. The `Wave.Trit` carrier is finite symbolic and does not automatically identify physical Wilson action/Hamiltonian/analytic continuum PDE. The existing `DASHI.Physics.Limits.PhysicsLimitCommutingSquare.AsymptoticCommutation` already owns a `residualAtScale : Nat→A→Residual` and explicit vanishing-to-zero hypothesis: KEEP genuine scale residuals rather than assume them zero.
+
+**Local independent exact Python** `scripts/check_ym_r445_time_k_residual_hyperfabric.py` committed on #1536; a locally executed equivalent reference reports: **8/8** native 4+4 reciprocal C4/C2 chart cases; **4/4** one-step carry and **4/4** two-step source identities; **13,068/13,068** distinct `(t,k,a,signed)` retained records (t,k 0..32, a C4, signed -1,0,+1); explicit one-step coarse-only negative control; original source arithmetic 128+896=1024. Native Agda source still **NOT kernel checked**, so these are independently run reference results, not an Agda 2.9 acceptance receipt.
+
+**Existing FINITE→WAVE→CONTINUUM DONORS (not missing)**:
+- `DASHI.Physics.WaveAlgorithmLift`: finite signed/zero wave encoder and `WaveRefinementTower` with explicit projection/evolution/observation compatibility; it warns *no analytic Hilbert/PDE continuum theorem inferred*.
+- `BalabanGaugeInvariantWavefunctionFiniteL2Round203Exact`: source-specific gauge-invariant finite rooted-quotient sample pairing; does not claim full Gibbs/Haar L² density.
+- `YMClayE1VariableCutoffCylinderLimitExact`: genuine changing-carrier cutoff-indexed cylinder realization and continuum expectation with proven positivity/normalization/linearity when original source `Converges`, projective consistency and scalar laws are supplied; not a fictitious fixed C2 time torus.
+- `YMClayE1A3OriginalR445CrossCutoffSourceExact`: n=3 fine original Wilson blocked = SAME R445 effective pushed measure, not bare beta(1) n=1; `YMClayE1OriginalR445ThreeMomentCutoffTransportExact`: exact original THREE moment RG residual into cutoff error compiler.
+- `BalabanClayT5PhysicalMeasureGramContinuityExact` + `BalabanClayT5LimitAndNontrivialityExact`: actual reflected Gram finite→continuum closure conditional on a real source convergence and interacting nontriviality witnesses. `R332/R556/R278/R281` already transport selected OS1 Euclidean time and same indexed covariance limit. R443/R445/R320 and CMP119/122/116 are sequential OWNER iterations toward this source, NOT counterexample abstractions.
+
+**Still physical, and ONLY as specified by original producers:** genuine changing-cutoff same-source original Wilson real `ℝ` ↔ CMP119/T5 rational `ℚ` comparison, original W1/W3 Wilson-loop marked cluster source and cutoff-uniform whole small+large Wilson Gibbs estimate, selected fine published Wilson RP on the actual halfspace/complex star, measure tightness/real interacting E1, all-time OS Gram limit, same dense physical (H_{\mathrm{OS}}), rate units/nontriviality G1. The SU(N) R445 original 16-site identity and 896 residual source are **no longer missing**. P0 YM remains OPEN, P1 antigravity after.
+
+**Roadmap synchronization:** BOTH `Docs/roadmaps/ClayYMProofRoadmap.md` and `Docs/roadmaps/YMClaySteelmanBidirectionalExactRemainingMaxCut20261104.md` updated **directly on the #1444 branch** (latest commits there `ad2c2b4e7cfa1283b7a69e2385ae2935c6a0a5d0` and `e1b1beb9df5bda7dfb11f48d72716026e41350b0`); this branch's source is on independent master-based #1536. No PR merge implied. No kernel checked.
+
+---
+
+## 21 November 2026 — Commuting-square BIDI geometry and all-pairs/time OS1/R556/R281 source weld (cross-PR #1444 synced)
+
+**Canonical updates also written DIRECTLY onto #1444**: `Docs/roadmaps/ClayYMProofRoadmap.md` commit `6fa64a29b67cd765e373c1521b18d14e5606166b` and `Docs/roadmaps/YMClaySteelmanBidirectionalExactRemainingMaxCut20261104.md` commit `f1b4492f294ec87064aeff7ef3a3ced49dd50d0a` on branch `research/ym-voyager2026-completeness-crosswalk-20261101`. This #1536 entry is its **master-based source implementation counterpart**. Do not silently assume commits from either PR are on `master` or the other PR.
+
+**Square A: original native 4D Wilson SU(N) block ↔ reflection/translation.**
+```text
+   original fine 4^4 SU(N) links --T_f^(2k) / θ_f--> fine
+                 | B (original ordered 2-link)        | B
+   original coarse 2^4 links ------T_c^k / θ_c-----> coarse
+```
+Exact free-group original non-Abelian reference locally executed on original selected positive-bond two-link block: `B T_f^(2k)=T_c^k B` **576/576**, `B θ_f=θ_c B` **64/64**, `θ_f T_f^(2k)=T_f^(-2k) θ_f` **9216/9216**. Odd shift `T_f^1` fails expected descended coarse shift on **64/64** bonds; finite coarse C2 `T_c²=id`, so an **unbounded Nat-indexed OS1 time cannot be taken from the fixed R445 side-two torus**. Original exact link-transformation source `YMClayNativeR445TemporalReversalExact` remains reused. #1536 new site-level Agda `selectedNativeSiteTimeSquare`, `selectedFineSiteReflectShiftDihedral`, `selectedCoarseSiteShiftHasPeriodTwo` on `YMClayR445SelectedTimeReflectionForwardExact` are **SOURCE-WRITTEN**, and still need native `fineBlockOrigin`/SU(N) field index identification and Agda kernel. Source reference `scripts/check_ym_original_r445_os1_translation_commuting_square.py` commit `a5ac1429445d57a084751014794c52bc68d4541e`.
+
+**Square B: ORIGINAL selected OS1 time → R556 finite CMP119/T5 covariance → R278 continuum → ONE R281 indexed spectrum.**
+```text
+             R556.timeTranslate G t  ==  OS1.translate G t
+                           | R278 SAME physical state
+                  finite connected covariance at cutoff
+                           | R278 convergence (not equality)
+                  SAME continuum connected covariance
+                           | R281 same ((F,G),t) index
+                    ONE spectrum correlation
+```
+#1536 `YMClayOriginalWilsonOS1R556R281CommutingSquareExact.agda` commit `02f7a13c99b23fa38853432464dd756df9b3d8a4` constructs `originalWilsonTimeTranslationSquare`, `originalFiniteCovarianceSquare` on every exact cutoff source, `originalContinuumCovarianceSquare`, original R278 `originalSourceFiniteContinuumConverges`, `originalSelectedSourceDistanceTime`, and `originalOS1SquareEndsInSameR281Spectrum`, via existing R332/R556 selected time geometry + one all-pairs/time R281 index dictionary. The physical H_OS / dense vacuum domain is NOT supplied by construction, nor any new W1/W3 actual analytic estimates. The arbitrary R278 `Gram.Converges` predicate has not been assumed extensional for pointwise-equal function sequences; do not manufacture funext.
+
+**Original WEXT repair**: `WilsonWEXTDownstreamSemantics` was too strong (required distance=time for every possible distance). #1536 fixes it to the already original selected physical metric, with exact `universalTimeForEveryDistanceIsImpossible` negative control. W1/W3 actual original Wilson marked locality and rooted shell, real original R445 ↔ rational R575 same physical scalar/measure, changing-cutoff continuum, published RP, physical time-rate, one actual reconstructed H_OS, N1 and G1 remain **OPEN**. A rational ℚ source bound must be faithfully related through existing rational→real/Bishop donors to real original Wilson; no arbitrary real→rational physical equality.
+
+**Tool/acceptance**: exact source geometry Python locally PASS as above; original existing Q8 2048/2048 and source word pair 9216/9216 PASS. New Agda code source-written/uncompiled, PR remains DRAFT. Source checked via same existing `DASHI/Unified/YMClayOriginalWilsonPhysicalRegression.agda` and `scripts/check_ym_1444_cmp119_r445_weld_forward.py`; local pinned Agda accepted only if `scripts/check_ym_original_rg_p0_kernel.sh` actually runs and exits zero. P0 Clay endpoint remains **OPEN**, P1 antigravity second.
+
+---
+
+## 21 November 2026 — BIDI plug ends into original producer geometry; fix actual WEXT universal-metric vacuity
+
+**User rule: "Plug both BIDI gap ends into known producers / geometry; if an error appears, first check existing formalisms."** This cut does that. **P0 original Yang–Mills** remains before **P1 antigravity**. This source audit does not announce a Clay mass-gap proof.
+
+### Real source-level error found and repaired in existing producer
+
+Original `BalabanLiteralWilsonMarkedLocalizationSourceExact.agda.WilsonWEXTDownstreamSemantics` (on master before this cut) required, literally:
+
+```agda
+supportDistanceIsEuclideanTime :
+  (physicalDistance : Observable → Observable → Nat) →
+  ∀ left right time →
+  physicalDistance left (timeTranslate right time) ≡ time
+```
+
+For ANY inhabited Wilson-observable type this is uninhabitable: choose `physicalDistance = λ _ _ → zero` and `time = suc zero`, then `zero ≡ suc zero`. **This was a vacuous forward theorem interface, not a new physical impossibility, and not a geometry defect of Yang–Mills.** The source had been demanding time separation under *every arbitrary metric* rather than the original selected one.
+
+- **Exact negative control** `YMClayWilsonWEXTSelectedDistanceNonVacuityExact.agda` commit `838607476c9003b0508bae3f2b4f7e11bafd4057` (standard `Data.Empty` fix `bf5fb13406515ffc2fdbfb64309c31b79b51c80a`): `universalTimeForEveryDistanceIsImpossible` derives `⊥` from old field for any concrete Wilson word. Source-written `--safe` proof; local kernel pending.
+- **Surgical existing-owner correction** `BalabanLiteralWilsonMarkedLocalizationSourceExact.agda` commit `9b7f45219acc6d3cbb9bdfc64ce71f6409fda6b8`: add selected metric parameter `(selectedPhysicalDistance : Observable→Observable→Nat)` to `WilsonWEXTDownstreamSemantics`; change time field to `selectedPhysicalDistance left (timeTranslate right time) ≡ time`; instantiate its own source metric in `literalMarkedLocalizationCompilesToR556`. **No source analytic estimate added**.
+- **Only matching existing second consumer** `BalabanLiteralTwoWilsonR556CompletionExact.agda` commit `852e562859ed6f00dc675708c829fc6eb8bbe35c`: `downstream : WilsonWEXTDownstreamSemantics dataSet physicalDistance` and direct selected distance-time proof. Search of original `master` found exactly these two files using the symbol. **No other CMP owner bulk-rewritten.**
+
+### Real NEW BIDI forward proof chain (on #1536 master-based branch)
+
+- `BalabanLiteralWilsonMarkedLocalizationSourceExact.LiteralWilsonMarkedLocalizationSource` already has **original Wilson W1** (common analytic marked Wilson source/derivative/connected-normalized response), original shared physical shell geometry, and **original W3** (two-support pointwise activity bound and rooted-shell sum) as proof-bearing fields. `literalMarkedLocalizationCompilesToR556` already constructs the actual R556 source from W1/W3 and downstream time/test semantics. It is NOT an already-inhabited physical source.
+- **R332** `OSIndexedPairwiseEuclideanSemantics` owns the SAME OS1 `timeTranslation` and `supportDistanceIsTime` on R304 selected Euclidean pair distance. The new `YMClayOriginalWilsonMarkedOS1AllTimesProducerWeldExact.agda` commit `6edae4e5a24b75a25d00a5cc0e0202769bf252a3` constructs `OriginalWilsonMarkedOS1PhysicalInputs` exposing *only* the original observable decoder equality, selected marked source distance = R304 physical distance, original bounded F/G/FG, and scalar order closure. `selectedOriginalMarkedDistanceIsEuclideanTime` derives physical marked distance = OS1 time by **transitivity of existing R332/source geometry**, no second time semantics. `originalWEXTDownstreamFromOS1` inhabits the corrected original WEXT downstream source using these same witnesses.
+- `originalMarkedOS1CompilesToR556` applies the **already written `literalMarkedLocalizationCompilesToR556`** to the original marked W1/W3 source and constructed OS1 time/test semantics. No alternative Wilson cluster expansion or printed bond-valued J is introduced.
+- `originalMarkedOS1ContinuumWilsonClustering` is **existing R556/R551** half-rate continuum clustering (W1/W3 WEXT bound still an actual physical source premise); `originalMarkedOS1AllPairsTimes` delegates to the new all-time BIDI producer; `originalMarkedOS1SameSpectrumClustering` plugs the SAME all-pairs/time covariance into R281.
+- **All pairs across one spectrum, not a spectrum per pair**: `YMClayOriginalWilsonAllTimesOS1R556R281BIDIExact.agda` revised commits `8bafafaa666a1fc1c0178f41a29705d603a87074` and `1a84f3da31f5cbce298d32dfef4bbe710842a554`. `originalAllWilsonPairsTimesTests` now has **ONE `R278.SelectedConnectedCovarianceTests` index = `(Observable × Observable) × Nat`**, not per-time `⊤` nor just Nat for a fixed pair. `originalAllWilsonPairsTimesConverge` reuses R278 on the same `Gram.measureSequence`/continuum. `SameOSAllWilsonPairsTimesSpectrum` requires the already-existing R281 spectrum's `indexFor observable time` equal `((selected left,right), time)`, and `originalAllWilsonPairsTimesSameR281SpectrumHasClustering` transports R551's bound for the SAME spectrum over all selected words and times. **This does not inhabit a physical spectrum or guarantee norm density.**
+
+### Reverse endpoint and exact smallest remaining source producers
+
+1. **Original real Wilson `ℝ` ↔ R575 rational `ℚ` selected field/source**: check `YMClayP0BishopToOriginalWilsonRealWeldExact` and `BalabanCMP109116BishopRealSetoidInstantiationExact` first. Those supply semantics machinery but explicitly DO NOT currently inhabit the faithful **physical same-Gibbs/covariance and changing-cutoff** bridge. R575 `RationalCovarianceContinuityLaws` and rational embedded order also require original carrier. Do NOT coerce `ℝ` to `ℚ` by fiat.
+2. **W1/W3 original physically interacting Wilson marked analytic/localized two-support source**: `BalabanLiteralWilsonMarkedLocalizationSourceExact` and `BalabanLiteralWilsonWEXTTheoremExact` already compile the source once its actual normalized marked local cluster expansion and shell-charge bound are supplied. `BalabanWilsonTwoInsertionConnectedShellRound491Exact` correctly warns the published printed bond-valued J does NOT automatically prove Wilson-loop insertion locality. Use CMP119 anchored normalized insertion and CMP122 boundary-reinjection **on the original source** (including large-field, common analytic domain, cutoff and volume uniformity) to fill those exact source fields, not a parallel estimate.
+3. **Physical geometry**: selected native R445 site reflection/plane/word support and actual published Wilson fine RP, **R332 OS1 translation**, **R304/R349 actual selected shell distance**, original W1/W3 support. These are exact present owners with explicit source-identity bridges, not new geometric carriers. The previous universal distance type was uninhabitable; the corrected selected metric is correct.
+4. **Physical continuum and reverse one-H**: R278 finite-measure expectation/connected-covariance convergence on original E1 interacting family; R281 spectral lower representation and same H_OS, R299/F1-C norm-dense original gauge-invariant positive-time vacuum-complement test family, **one physical-unit** exponent (m>0) independent of cutoff, N1 interactions, G1 all compact simple groups. The all-pairs/time carrier fixes *index coherence*, not those true spectral/analytic lemmas.
+
+**Acceptance**: newly changed Agda source files are **source-written, not compiler/kernel checked**; pin exact local Agda 2.9 from original `scripts/check_ym_original_rg_p0_kernel.sh`. Existing local original Q8 reflection **2048/2048 PASS** (456 negative mismatches) and original free-group 64 bonds/96 plaquettes/9216 ordered word pairs **PASS**. The integrated source checker now **fails closed** if the impossible universal metric quantifier reappears and requires the new W1/W3→OS1→R556→R281 owners. PR #1536 remains DRAFT and must not be merged without kernel and same-source audit. P0 E1/D1/D2/N1/G1 OPEN; P1 antigravity later.
+
+---
+
+## 2026-11-21 — BIDI REVERSE ENDS PLUGGED INTO THE *EXISTING* ALL-TIME / OS1 / CMP119-T5 PRODUCERS
+
+**Source-first repair:** our earlier P0 R445 n=3 finite mixed-J ↔ centered reflected original Wilson covariance was a useful *same-measure finite* identity, but it is **not** a time-indexed OS correlation for a single continuum H. **The repo ALREADY has explicit time/spectrum producers. Reuse their geometry rather than creating another toy clock/estimate.** P0 YM mass gap first, P1 antigravity second.
+
+### Actual donor graph from `master` (all inspected)
+
+- **R332** `BalabanOSIndexedPairwiseEuclideanSemanticsRound332Exact.agda`: `OSIndexedPairwiseEuclideanSemantics` chooses `timeTranslation : Nat→Translation` and uses the **same** `OS1.EuclideanCovarianceAssembly.translate`. Its `supportDistanceIsTime` is still a physical hypothesis; `asR310PairwiseEuclideanTimeSemantics` transports it to the existing R310 consumer. Do not assume an arbitrary `timeTranslate` is OS1.
+- **R349** `BalabanSelectedDistanceCarrierWeldRound349Exact.agda`: `selectedR318DistanceIsTime` already composes **same selected-pair** R318↔R284 distance equality with R304's prior `selectedPairDistanceIsTime`; **no new Euclidean-time theorem** is needed. This donor pertains to a specifically selected R300 pair, not automatically every original Wilson word.
+- **R491** `BalabanWilsonTwoInsertionConnectedShellRound491Exact.agda` is the correct original **Wilson two-insertion WEXT** producer for finite rooted-shell exponential decay. It **explicitly marks** `cmp119122LiterallyProveWilsonLoopExpectationLocalization = false` and the original printed CMP116 J as **not identical** to Wilson loops; a published CMP119/122 boundary result alone does NOT inhabit WEXT. The actual Wilson-local insertion/marked cluster analysis is a proof-bearing extension, not a second abstract kernel.
+- **R556** `YangMillsSourceFirstWilsonCovarianceRound556Exact.agda` constructs finite WEXT covariance as EXACT `R278.connectedCovarianceMagnitude extension (Gram.measureSequence dataSet cutoff)`, so same-family covariance convergence is **already compiler-owned** from R278 given original bounded F/G/FG tests. Its existing `pairTests source left right time` uses **`Index = ⊤` for one fixed time**, which is sufficient to prove each covariance limit but is NOT a single shared time-indexed spectral family.
+- **R551** `YangMillsWilsonContinuumClusteringRound551Exact.agda.continuumWilsonHalfRateBound` already gives `continuumCov(left, τ_t right) ≤ (1/4)(1/2)^t` using R491 finite WEXT + same-family convergence + physical distance=time + scalar order closure.
+- **R281** `BalabanContinuumCovarianceSpectrumConstructorRound281Exact.agda` already makes `continuumCovarianceIsSpectrumCorrelation` **definitional**, once the physically selected single `ContinuumCovarianceSpectrumData` (including subgap spectral representation) is constructed. **P3** `YMClayLiteralWilsonP3SameOSCorrelationExact.agda` correctly retains the identification of that spectrum with the **actual reconstructed H_OS** as physical. There is NO right to replace that with independent abstract spectra per t.
+- **F1-C** `YMClayF1TranslatedPairL2CalibrationExact.agda` already singles out the **translated** two-slice `decode ψ, τ₁ ψ` and one-sided `rootedShell ≤ c_k ∥ψ∥²`. The diagonal identical pair is explicitly insufficient; dense vacuum-orthogonal calibration must still come from the same original Wilson representation.
+
+### New exact native producer connection on #1536
+
+`DASHI/Physics/YangMills/YMClayOriginalWilsonAllTimesOS1R556R281BIDIExact.agda`, commit `4277ba728ad1e788c11dd375cf50667f1d08d881`, constructs the **one same-source `Nat`-indexed `R278.SelectedConnectedCovarianceTests`** from the EXISTING R556 selected Wilson carrier:
+- `originalAllTimesWilsonTests`: `Index=Nat`, `left(t)=F`, `right(t)=R556.timeTranslate G t`, and all three original R556 boundedness proofs reused; unlike fixed-time singleton `R556.pairTests`, no time-dependent choice of measure, test source or Hamiltonian.
+- `originalAllTimesSourceCovarianceConverges`: direct existing **R278** theorem for each index of this ONE Nat-indexed family; no independent continuum covariance-limit assumption.
+- `originalAllTimesSourceContinuumHalfRate`: directly calls **R551** from `R556.indexedAsContinuumClustering source` (which itself consumes genuine R491 WEXT, uniform over cutoff); no duplicate localization analysis.
+- `SameSpectrumAllTimesSelectedIndex` with `indexFor spectrum observable t ≡ t`: keeps **ONE R281 spectrum source** and proves `originalAllTimesSameR281Correlation` and `originalAllTimesSameR281SpectrumHasClustering`. This is a SAME-SOURCE-SPECTRUM conditional compiler, **not proof that the R281 spectrum is the actual reconstructed H**.
+- `SameOriginalOS1R556TimeGeometry`: pairs an original **R332 OS1 assembly** and original R556 family on the **identical** `Measure/Observable/Scalar` index, with only three actual identity witnesses: `R332.decode F ≡ F`, `R556.timeTranslate F t ≡ OS1.translate assembly (R332.timeTranslation t) F`, and `R556.physicalDistance = R304.physicalDistance(R296.asDirectT5TwoSourceShell finite)` on the same pairs. `originalWilsonSourceDistanceIsSameOS1Time` **composes these with R332.supportDistanceIsTime**. No replacement clock. R349 is the already-existing related selected R318↔R284 donor, not automatically identical to the R556 source.
+- Included in the original `DASHI/Unified/YMClayOriginalWilsonPhysicalRegression.agda` golden root and existing #1444 combined source checker. Source-written, **no Agda pinned kernel receipt** and do not infer universal coverage.
+
+### EXACT open ends to plug, rather than invent new proofs
+
+**F0 same source/scalar**: our finite n=3 original real SU(N) R445 Wilson test carrier uses `ℝ`; the R556/CMP119/T5 WEXT carrier uses rational `ℚ`. A genuine source-derived map preserving the SAME Wilson measure expectation, centered covariance and bounds, at all changing cutoffs, is still needed. A mere correspondence of names, or generic `RealAnalysisAxioms`, is insufficient. Check the already present Bishop/R445 source-interpretation donors BEFORE constructing a new scalar model.
+
+**F1 source-local Wilson insertions**: connect actual original `YMClayE1D1OriginalVariablePlaquetteWordsExact.originalWordObservable` and four-positive-bond actual support to R491's **two-insertion connected-shell theorem** using `BalabanLiteralWilsonMarkedLocalizationSourceExact` and `BalabanCMP119AnchoredNormalizedExpectationSourceExact.CMP119LocalInsertionDictionary` on original small+large-field Wilson Gibbs. The CMP122 `R` operation already transports B terms but explicitly does not prove all Wilson-loop insertion estimates. Need the actual source-level W1/W3 marked differentiation and large-field controls.
+**F2 original geometry**: use original `Fin.combine` R445 even-plane site reflection + correct positive-time original Wilson word support, the **existing** temporal reversal theorem, R332 OS1 translation and R349/R304 selected distance for **same tests**. Prove geometrical identity with original source support and no projection that erases time; prove the original published Wilson RP plane matching.
+**F3 physical continuum/D2**: original changing-cutoff E1 nontrivial family, `R278` 3-moment convergence, one all-time R281 spectrum IDENTIFIED WITH one actual E1 reconstructed H, full complex OS and dense vacuum complement, a common positive **physical-scale** exponent (avoid `log(2)/a_n` miscalibration), N1 and G1 all groups. F1-C's translated norm-controlled dense state source is a valid existing route.
+
+**Accepted this turn**: source-level all-time indexed producer composition, no synthetic model, no new CMP theorem; local **Q8 2048/2048** and free-group **64/64 original bonds, 96/96 plaquettes, 9216/9216 word pairs** passed, same original tests; no new Agda kernel acceptance, no direct physical continuum/gap claim.
+
+---
+
+## 2026-11-21 — NEW P0 steelman BIDI exact finite join: original mixed-J = same-source CENTERED reflected Wilson correlation
+
+**Working method**: reverse from the physical theorem, find the weakest missing source obligation, then weld forward through original producer theorems on the **same measure, operator, geometry, observable and coupling**. If a purported obstruction appears, first inspect the existing Agda source/geometry, especially original #1444 and CMP119/122/116, before inventing another abstraction. Never call finite/conditional proofs an interacting 4D continuum Clay completion. **P0 YM mass gap precedes P1 antigravity.**
+
+**Reverse physical endpoint** (not yet inhabited):
+1. An original interacting E1 OS continuum and a SAME physical self-adjoint nonnegative H with unique vacuum.
+2. Dense actual positive-time gauge-invariant cylinder vectors (D\subset Ω^⊥).
+3. A SINGLE n-independent, state-independent physical-time exponent (m>0) controlling `⟨ψ,e^{-tH}ψ⟩` on the same dense domain (constants Cψ may depend on ψ).
+4. To pay (3) from source: identify `⟨[F],e^{-tH}[F]⟩` with the **CENTERED** original Wilson `Cov(θF,τ_tF)`, not an uncentered Gram, and prove uniform physical-distance CMP116 decay at all cutoffs with the actual same Wilson state and correct (a(n)).
+
+**Forward ORIGINAL finite source, now joined at (t=0)**:
+- **Already on master**, `YMClayOriginalWilsonR445R320TwoSourceSameFamilyExact.originalVariableN3IsNativeR445FineMeasure` is a **definitional identity** of original changing-cutoff n=3 Wilson Gibbs and actual 1024-bond native R445 fine Gibbs; `originalN3LiteralMixedLogJetIsActualR320PushforwardCovariance` is the exact same-mixed-J two-marked formal covariance theorem.
+- **Already on master**, `YMClaySUNR445BlockedPushforwardR320CovarianceExact.connectedCovarianceOfActualPushforward` is (E_{B_*μ}[FG]-E_{B_*μ}[F]E_{B_*μ}[G]), using **original pushed measure**, *not independent bare n=1 Wilson Gibbs*. `YMClayE1D1OriginalVariablePlaquetteWordsExact.originalWordObservable` supplies all finite original gauge-invariant plaquette words, on the native periodic signed-path source.
+- **New on master-based draft #1536** `DASHI/Physics/YangMills/YMClayOriginalR445ReflectedWordCMP116BIDIExact.agda` commits `e79326ee497cd442238e1291a2771d878cdb4a6b`, `8b89c25d4c35c6d364aba196bc13ff3de9f073d1`: `originalSameFineSourceN3` directly reuses the master **source equality**; `originalCenteredReflectedOSIsOriginalR320` is by **definitional equality** of the same pushed law and explicitly subtracts the two vacuum/one-point contributions; `originalMixedJIsSameCenteredReflectedOS` applies **existing original n=3 two-marked jet theorem** to the selected physical coarse plaquette word `F` and its source-field reflection `θF`. Thus the SAME finite object joins in both directions:
+`original Wilson n=3 Gibbs ⇒ native ordered R445 block ⇒ original mixed-J derivative = original R320 connected covariance(θF,F) ⇐ centered reflected Wilson pairing`.
+This is the **finite t=0 covariance/OS-form dictionary**, NOT yet `⟨[F],e^{-tH}[F]⟩` for physical (t>0), and `θ` must still satisfy the published original time-plane/positive-support identification. The new module does **not** assert RP nor create any new self-adjoint H. It is source-written, **Agda compiler/kernel not yet run**.
+- `scripts/check_ym_1444_cmp119_r445_weld_forward.py` now fail-closed checks the new original three BIDI theorem names, then runs the existing exact #1444 CMP119/122/116 source checker, Q8 reflection checker and additional free nonabelian Wilson-word regression. Runner revision `2ae8ff8d09b71e3df1b292bbe4ca6c49b1b8ed49`. **New joined Agda source and runner were read back; full repo/Nix/Agda not available in present local runtime**.
+
+**Critical next reverse/forward matching expenses (no duplication)**:
+- **F0/RP** actual `Fin.combine` native link-field reflection pointwise and even-plane positive-time Wilson support, then master `YMClayOriginalR445PublishedWilsonRPWordWeldExact.originalPublishedWilsonRPYieldsNativePositiveWord` with the original Osterwalder–Seiler/Menotti–Pelissetto source action and *correct complex star* (real trace inversion requires its own original SU(N) inverse-trace law).
+- **F1/D1** instantiate original `BalabanCMP119AnchoredNormalizedExpectationSourceExact.CMP119LocalInsertionDictionary`, `BalabanCMP119CMP122BoundaryReinjectionSourceExact`, `YMClayD1OriginalRealCMP116VariableCutoffExact.OriginalRealCMP116PhysicalSelection`, and `YMClayD1OriginalFullWilsonSmallLargeFieldExact` for these **same** changing-cutoff Wilson words. Source-local admissible inserted J/analytic polydisc, large-field remainder and global volume+UV uniform estimate remain substantive proof obligations, even though all their **receiving theorem machinery already exists**. #1444 head adds same-source adjacent-insertion telescoping and natural CMP116 prefactor useful here; do not add duplicate independent estimates.
+- **F2/D2** source time translates `τ_tF` with physically scaled separation, identify the centered reflected time-displaced two-source moment with actual OS semigroup of ONE selected E1 Hilbert/H, prove gauge-invariant cylinder norm density and a common positive m (not simply (\log2/a_n) on one shrinking lattice), then reuse already-proved dense-OS conditional spectral theorem. Physical E1/D1/D2/N1/G1 remain **OPEN**.
+
+**Acceptance status:** exact finite original n=3 Gibbs identity reused **source-level**, n=3 mixed-J/reflected connected covariance dictionary **source-written**, locally tested existing exact Q8 (2048/2048) and free-word reference (64/64, 96/96, 9216/9216) **PASS**; no Agda/Nix kernel acceptance on new modules; physics, published RP identification, all-cutoff time/decay, continuum and OS Hilbert **OPEN**.
+
+---
+
+## 2026-11-21 — P0 #1444 MASTER-BASED CMP119/122/116 × R445 OS weld-forward audit
+
+**User methodology: weld-forward, source-first; grug check the old construction if a geometry relation appears false.** **Priority P0 = original Clay Yang–Mills mass gap; P1 = antigravity.** Do not derive a new arbitrary model, unconnected Hamiltonian, or observer clock in place of the native Wilson source.
+
+### Exactly which #1444 sources were inspected
+
+[PR #1444](https://github.com/chboishabba/dashi_agda/pull/1444), inspected head `7fc2bde918f58cccd83ae31e8b5c6ee8ffe23d67`, is an **OPEN DRAFT stacked** on `research/ym-route-s-r320-direct-mass-gap-20261030`, base SHA `6e9bcb01fd95ed935ee2e40ff7326df7df575f6c`, and reports 483 files changed relative to its *stacked base*. **This does not mean 483 missing from master**. Actual blob-byte comparison shows the following ORIGINAL source owners are already **identical on current `master` and #1444 head**:
+- `YMClayCMP119122116SelectedProducerWeldExact.agda` `ae02657a368131b33314df92c1c9b1871736537d`: same beta-driven density→CMP109/116 effective potential and same literal R342 shared CMP116 source→selected finite covariance/conditional R479 gap. Physical source and rate obligations remain premises.
+- `YMClayNativeR445TemporalReversalExact.agda` `5603fdd44073d3c5e4c5e9f75ac8c64845debf00`: the original **noncommutative SU(N)** inverse of the actually selected native ordered two-link R445 holonomy, NOT a new finite-group claim. **Do NOT reprove this lemma.**
+- `YMClayNativeSideFourTwoLinkPairSameObjectExact.agda` `e7fffcec946b37843cc931e6cc871a95157988fb`: actual native coarse bond→original first/second fine positive link coordinates and same native R445 block.
+- `YMClayOriginalWilsonR445R320TwoSourceSameFamilyExact.agda` `7fdfe08d8d50e5bc4e9d51d398fc0a2f40fe3719`: original changing-cutoff n=3 **1024 native SU(N) Gibbs measure = R445 fine source**, formal original two-marked mixed log jet equals actual blocked-fine/R320 pushforward **connected covariance**, no new J oracle.
+- `BalabanCMP122ROperationReflectionSupportCutExact.agda` `745bab544754a80f07dd7214dac0cdb2b5d33e06`: actual periodic polymer crossing/one-sided class and source equation (1.100); **cross-plane kernel RP not inferred from decay**.
+- `YMClayD1OriginalRealCMP116VariableCutoffExact.agda` `f9c99fd77ef2b3b4d0d22c298f43fc971fe0720d`: real same-original-Wilson connected covariance and source-CMP116 selected physical geometric envelope **conditional on source identity and uniformity**.
+- `YMClayD1OriginalFullWilsonSmallLargeFieldExact.agda` `ab33f58f3543b06f7823a614eb5a9a78eab60376`: source-varying original full Gibbs covariance decomposed into selected small-field CMP116 and large-field remainder, each with actual control requirements.
+- `scripts/check_ym_cmp119116122_same_source_contract.py` and `scripts/check_ym_r445_time_reflection_q8_20261106.py` both already on master; do not copy.
+- The existing `YMClayOriginalWilsonNativeOSPullbackExact` proves the actual Gibbs reflected-form equality and conditional positive-form transport, and `YMClayOriginalR445ReflectedAllWordGramExact` already gives all-words finite pushforward.
+- `YMClaySUNMatrixNativeInversePlaquetteRealTraceExact` distinguishes the SU(N) adjoint-real-trace-under-inverse law from cyclic trace; original matrix/real-part law remains a separate source premise.
+
+**Head-only differences to review before backport, NOT silently merged to master** (file blobs differ):
+- `BalabanCMP119Equation218FactorizedFunctionalDensityExact.agda`: #1444 adds `finiteEquation218Density`, `finiteEquation218Flow`, `finiteEquation218PhysicalDensity` using original finite active-scale density flow and terminal-scale coverage.
+- `BalabanCMP119SameFamilyInsertionReductionExact.agda`: #1444 adds `responseBelowGeneratedTailFromAdjacent` and `sameFamilyResponseTailFromAdjacent`, deriving ordinary/characteristic response telescopes from SAME adjacent source insertion bounds. Actual physical adjacent-increment bound remains necessary.
+- `BalabanCMP116SharedMarkedDirectCalibrationRound344Exact.agda`: #1444 adds `naturalPrefactorR342`, retaining the **actual shared marked-shell prefactor** instead of imposing the avoidable numerical `C_H ≤ 1` presentation. Original literal localization, selected distance=time, physical units and same spectral source still required. Reuse this route when all original analytic hypotheses are paid.
+Check these via code review and exact kernel before any merge; these are local deltas of #1444 relative to its own visible master blobs, not an assertion of complete branch divergence.
+
+### Mainline branch repair
+
+Earlier MG06 PR #1454 (`feat/kitzerow-bh4-pathway-ontology-interop`) does **NOT** include the already-master original `YMClayNativeR445TemporalReversalExact`, `YMClayOriginalWilsonNativeOSPullbackExact`, `YMClayNativeSideFourTwoLinkPairSameObjectExact`, `YMClayCMP119122116SelectedProducerWeldExact` or original CMP checker. Thus its recently source-written Agda reflection adapters cannot be certified there. **Do not bulk copy hundreds of old masters into that branch.** The current fix is a fresh `master`-based branch `agent/ym-p0-cmp119-r445-master-weld-20261121`, using actual master imports. This is an isolated contribution and requires exact-head compiler/kernel acceptance before admitting the new Agda modules.
+
+**New source additions on this fresh branch, with minimal nonpromotion:**
+1. `YMClayR445SelectedTimeReflectionForwardExact.agda` defines the **selected actual C4/C2 site-coordinate** mirror `t↦−t mod4`, even-origin and candidate positive-time support; it deliberately **removes** the older branch's duplicated, uncompiled 16-branch `Fin.combine` origin-normal-form and duplicate non-Abelian reverse two-link lemma. Original #1444 already owns the group reversal, while the ACTUAL finite site-index/Fin origin congruence is still open.
+2. `YMClayOriginalR445ReflectedPointwiseWordWeldExact.agda` constructs original SU(N) fine/coarse reflected bond fields with inverse timelike links, imports `YMClayNativeR445TemporalReversalExact.originalSUNTimeReversalTwoLink` **directly**, and transports a **named original-bondwise reflection obligation** through existing `CoarsePointwiseObservable`, true original local `matrixWilsonValue ∘ periodicSUNPositivePlaquette`, finite word products and original actual fine Gibbs/R445 pushed quadratic. It deliberately **removes** the previous branch's uncompiled eight-case claim to have constructed native bond reflection without proving source index compatibility. The resulting same-source reflected quadratic and conditional positivity compiler remain SOURCE-WRITTEN, **not kernel accepted**.
+3. `scripts/check_ym_r445_original_wilson_words_reflection.py` is the additional exact free non-Abelian 64-bond and original 96-plaquette / 9,216 pair-wise source reference, **distinct from and complementary to** the ORIGINAL master 32-fields Q8 `scripts/check_ym_r445_time_reflection_q8_20261106.py`.
+4. `scripts/check_ym_1444_cmp119_r445_weld_forward.py` runs the ORIGINAL master `check_ym_cmp119116122_same_source_contract.py`, ORIGINAL master Q8 regression and additional word regression in one local fail-closed acceptance, plus checks the original source owner names and conditional-gate status. No CI, fake kernel or alternative mathematical producer.
+
+**Local executed tests:** original master Q8 checker (source `0a462255153faf5dfe3d8cd2665aee1a36ebcb5f`) was independently recreated verbatim and run locally: **2,048/2,048** actual 4D source coarse reflected-bond tests PASS, wrong-orientation controls **456 mismatches**; previously executed same-geometry free-group local reference: **64/64** native ordered coarse block, **96/96** selected original plaquette real-trace words and **9,216/9,216** ordered pairs PASS. The exact new master-branch checkout and integrated CMP runner have not been executed locally (no full repo/Agda/Nix); no kernel green claim.
+
+### Shortest physical remaining chain (do not inflate already built CMP sources)
+
+`#1444 n=3 original Wilson Gibbs + R445 native fine/coarse + original R320 two-marked mixed-J identity`
+→ prove **actual index/positive-time compatibility of `θ_f`, `θ_c`, native block and selected original Wilson positive-halfspace words** (on the SOURCE `Fin.combine` codec), then reuse existing all-word fine RP/pushforward; published fine Wilson RP for same plane is independent
+→ use already existing CMP119 `CMP119LocalInsertionDictionary` and CMP122 reinjection/R class (do not reprove analytic published localization), but **inhabit** the repository's physical insertion and actual `BoundaryAdmissible` identity dictionaries. The anchored-normalized denominator cancellation is an imported published source theorem, but its application to arbitrary original Wilson words remains a source mapping problem
+→ actually bound original full small-field **plus large-field** Gibbs response uniformly in UV cutoff and volume using original `YMClayD1OriginalFullWilsonSmallLargeFieldExact` and selected real `YMClayD1OriginalRealCMP116VariableCutoffExact`
+→ establish same-source continuum E1 with nontriviality N1, actual reflected OS Hilbert and norm-dense cylinder tests, one common **physical-time** exponent for the SAME H and G1 all simple groups. Use original conditional R342/R467/R482 source theorems; do not equate a fixed lattice factor `(1/2)^d` with a finite SI mass scale `Δ` without a source-specific `a(n)` rate.
+**Physical E1/D1/D2/N1/G1 remain OPEN; P1 antigravity remains next.**
+
+---
+
 ## 18 November 2026 — exact 2T conjugation symmetry boundary and Burnside compression
 
 The checker `scripts/check_ym_original_L1_2t_symmetry_boundary_20261118.py` constructs the original 24 rational Hurwitz quaternions, uses the actual pair deficit `2 sum_{1<=a<b<=3}(q_a r_b-q_b r_a)^2`, and verifies exact group closure, inverses, and 13,824 ordered conjugation/pair identities. Simultaneous conjugation of *all four links* preserves the six-commutator action and coarse squared real trace `(Re(U0U1))²`; this is the legitimate symmetry for orbit reindexing. The source action is **not invariant under simultaneous left multiplication**: for `(-1,-1,-1,-i)` and `g=-j`, action changes from `0` to `6`. Hence no one-link gauge fixing by that action has been justified.

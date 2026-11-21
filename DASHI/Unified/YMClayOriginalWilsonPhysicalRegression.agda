@@ -47,6 +47,110 @@ import DASHI.Physics.YangMills.YMClayP0FGeneratedTwoSourceInteractionNegativeCon
 
 import DASHI.Physics.YangMills.YMClayNativeR445TemporalReversalExact as NativeTimeReflection
 
+-- P0 BIDI same original native SU(N) source: R445 even-time reflected
+-- bond fields, original finite plaquette words, and the exact centered
+-- original n=3 Wilson mixed-J == actual R320 reflected-covariance seam.
+-- Physical time, CMP116 uniform-rate estimate and OS mass gap remain open.
+import DASHI.Physics.YangMills.YMClayR445SelectedTimeReflectionForwardExact as NativeSelectedTimeReflection
+import DASHI.Physics.YangMills.YMClayOriginalR445ReflectedPointwiseWordWeldExact as NativeWordPointwiseReflection
+import DASHI.Physics.YangMills.YMClayOriginalR445ReflectedWordCMP116BIDIExact as OriginalReflectedWordBIDI
+
+-- P0 forward/reverse SAME ALL-TIME original Wilson carrier: one Nat-indexed
+-- translated family instead of per-time singleton, R556/R278/R551 + R281,
+-- and R332 original OS1 time plus R304 physical shell-distance identification.
+-- The physical WEXT, scalar ℚ↔original ℝ, same-H and E1 are still open.
+import DASHI.Physics.YangMills.YMClayOriginalWilsonAllTimesOS1R556R281BIDIExact as OriginalAllTimesOS1Weld
+
+-- Correct original WEXT source geometry and W1/W3->OS1->R556->R551->R281 producer route.
+-- The old arbitrary-metric time axiom was vacuous; its safe negative control
+-- and both corrected original source consumers are imported here.
+import DASHI.Physics.YangMills.YMClayWilsonWEXTSelectedDistanceNonVacuityExact as OriginalWEXTNonVacuity
+import DASHI.Physics.YangMills.BalabanLiteralWilsonMarkedLocalizationSourceExact as OriginalMarkedWEXT
+import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonR556CompletionExact as OriginalTwiceWilsonWEXT
+import DASHI.Physics.YangMills.YMClayOriginalWilsonMarkedOS1AllTimesProducerWeldExact as OriginalMarkedOS1BIDI
+
+-- Explicit BIDI same-source square: R556 source vs OS1 translation
+-- commutes on each original finite and continuum R278 covariance,
+-- and closes at one R281 indexed spectrum (not physical H_OS yet).
+import DASHI.Physics.YangMills.YMClayOriginalWilsonOS1R556R281CommutingSquareExact as OriginalOS1CovarianceSquare
+
+-- P0 original t × k residual HYPERFABRIC: native R445 C4 split into
+-- source-owned C2 coarse × parity remainder, original 128+896 bond
+-- complete enumeration, exact odd-step carry and independent ternary
+-- zero/sign wave symbol. This is NOT a physical continuum limit.
+import DASHI.Physics.YangMills.YMClayR445TimeKResidualHyperfabricExact as OriginalTimeKResidual
+
+-- Original E1 actual cutoff-dependent Wilson cylinders: k indexes the
+-- selected Nat-cutoff family; split/join preserves all residuals at
+-- suc k; original E1 convergence is reused WITHOUT assuming arbitrary
+-- Converges is shift/tail-invariant. OS1 time source identity remains input.
+import DASHI.Physics.YangMills.YMClayE1TimeKResidualCylinderWaveTransportExact as OriginalTimeKE1
+
+-- P0 original *already-normalized* full Wilson F19 source:
+-- F,G,FG under same original 1024-link partition (896 spectators)
+-- imply the entire exact finite connected covariance on the canonical
+-- source equals F19 physical effective density. No bare-coarse switch.
+import DASHI.Physics.YangMills.YMClayOriginalF19CanonicalConnectedWilsonBIDIExact as OriginalF19Connected
+
+-- F19 and native R445 first/second positive-bond selected target lists
+-- are the SAME original 128 bonds in the SAME canonical pair order;
+-- this is by original native first/second parity proof, not an arbitrary
+-- vector bijection, prior to comparing the remaining 896 spectators.
+import DASHI.Physics.YangMills.YMClayOriginalF19R445Full1024LabelsP0Exact as OriginalFullF19R445Labels
+-- Once the original F19 1024-label target is proved, its SAME
+-- original native constructed adjacent-swap permutation agrees on
+-- every arbitrary SU(N) link value with original R445 complete codec.
+-- All 896 original interacting spectators remain present.
+import DASHI.Physics.YangMills.YMClayOriginalF19R445EveryLinkValueBIDIExact as OriginalF19R445Values
+import DASHI.Physics.YangMills.YMClayOriginalF19R445ActualSortedVectorBIDIExact as OriginalF19R445SortSquare
+
+-- Actual finite decoder commuting square (all 1024 original bonds):
+-- canonical field --original F19 adjacent swap--> selected128+residual896
+--       |                                            |
+-- original canonical decoder                   original R445 decoder
+--       |                                            |
+-- original bond field ----------------identity--> original bond field.
+-- Also both original inverse vector round-trips. Not a physical OS square.
+import DASHI.Physics.YangMills.YMClayOriginalF19R445DecoderCommutingSquareExact as OriginalF19R445DecoderSquare
+
+-- Separate physical finite BLOCKED-observable square: same original
+-- Wilson 64-pair holonomies, through actual F19 adjacent sort or
+-- the full original R445 128+896 ordered field coordinates.
+-- Distinct from unproved E1/D1/D2 continuum mass-gap obligation.
+import DASHI.Physics.YangMills.YMClayOriginalF19R445PhysicalBlockedObservableSquareExact as OriginalF19R445BlockedObservableSquare
+
+-- Native source-equality payment: original constructed F19 64 pair-block
+-- and ORIGINAL native R445 SUNBlock.nativeSUNBlockLinks at each of the
+-- 64 original coarse bonds, source parity and genuine 1024-link decoder.
+-- Source-written closed 64-order computation requires pinned Agda kernel.
+import DASHI.Physics.YangMills.YMClayOriginalF19R445Native64HolonomySquareExact as OriginalF19NativeR445Square
+
+-- P0 directly instantiates the ALREADY ORIGINAL R445 two-field pure-Haar
+-- receiver using F19 adjacent swaps and native 64-block source candidates.
+-- Distinguish unweighted Haar from interacting Wilson Gibbs 896 spectators.
+-- SymPy exact finite checks PASS; Agda kernel still NOT run.
+import DASHI.Physics.YangMills.YMClayOriginalF19R445PureHaarReceiverCandidateExact as OriginalF19NativePureHaarCandidate
+
+-- Reverse physical Wilson E1 native cutoff-3 expectation, weld FORWARD
+-- from ORIGINAL complete 1024-link Gibbs F19 weighted effective density.
+-- Do not infer the interacting Wilson source from unweighted pure-Haar.
+import DASHI.Physics.YangMills.YMClayOriginalR445NativeF19WeightedPhysicalSourceBIDIExact as OriginalNativeWeightedF19BIDI
+
+-- E1 cutoff-3 physical source is already the SAME original n=3
+-- native Wilson Gibbs R445 pushforward. Composes original F19 weighted
+-- all-observable source with E1A3, then the same E1/R445 F,G,FG
+-- three-moment covariance error. Genuine analytic uniformity OPEN.
+import DASHI.Physics.YangMills.YMClayOriginalE1A3NativeF19WeightedBIDIExact as OriginalE1F19ThreeMomentBIDI
+
+-- Use ORIGINAL D1 full SU(N) Wilson small+large-field cutoff-uniform
+-- covariance theorem. Source-selection demands only pointwise identity
+-- of chosen D1 tests with actual E1/native R445 block F,G; never
+-- restate or postulate the covariance bound or discard large fields.
+-- Fixed cutoff3 F19 face; all-scale physical rates still require a
+-- source-inhabited OriginalSmallLargePhysicalSource and time geometry.
+import DASHI.Physics.YangMills.YMClayOriginalD1FullWilsonE1F19EstimateBIDIExact as OriginalD1F19UniformWeld
+import DASHI.Physics.YangMills.YMClayOriginalF19NativeR445SelectedOrderBIDIExact as OriginalF19R445SelectedOrder
+
 import DASHI.Physics.YangMills.YMClayD1OriginalCovarianceToR320Exact as D1OriginalCovariance
 
 import DASHI.Physics.YangMills.YMClayE1VariableCutoffCylinderLimitExact as E1VariableCutoffCylinder

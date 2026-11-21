@@ -7,27 +7,7 @@ Status: live analytic manuscript draft; Clay-facing candidate preprint; non-prom
 
 ## Abstract
 
-This manuscript presents a candidate Yang-Mills mass-gap assembly route from a
-finite nonabelian carrier family to a continuum Hilbert-space theory. The
-finite part proves or packages self-adjointness, fixed-lattice spectral gaps,
-and the uniform finite-margin target; the continuum part isolates the exact
-transfer interface needed to prevent a finite margin from being lost in the
-scaling limit. The load-bearing analytic surface is the `H3a` transfer theorem:
-trace-norm or norm-resolvent control on the vacuum-orthogonal transfer
-operators strong enough to rule out spectral pollution below the finite margin.
-The companion `H3b` vacuum-projection statement and the
-no-spectral-pollution theorem then connect the finite margin to the
-reflection-positive Osterwalder-Schrader reconstruction route.
-
-The paper should be read as a candidate proof package, internally
-DASHI/Agda-receipted where stated, pending independent peer review, external
-authority review, and the applicable Clay Mathematics Institute eligibility
-procedures. It does not claim Clay approval, journal acceptance, or a
-repo-native rederivation of the full Balaban constructive multiscale package.
-
-## Abstract
-
-This manuscript presents a reduction of the four-dimensional Yang–Mills mass-gap problem on a literal finite SU(2) Wilson–Gibbs family to three physical inputs, denoted `F1`, `F3`, and `F4`. The finite lattice theory, transfer-form algebra, varying-Hilbert-space transport, vacuum-sector spectral consequences, and final continuum gap compiler are treated as already-paid mathematical infrastructure where stated. The surviving physical obligations are:
+This manuscript presents a **conditional** mass-gap reduction for the original four-dimensional SU(2) Wilson–Gibbs family, whose proof compiler takes three distinct, genuinely physical inputs `F1`, `F3`, and `F4`. Fixed-lattice identities, finite reflection/transfer algebra, changing-carrier spectral compilers and exact finite block encodings are *donors*, not proofs of those physical inputs. The final continuum/mass-gap theorem, its nontriviality and the extension from SU(2) to all compact simple gauge groups remain open. The surviving physical obligations in this particular route are:
 
 ```text
 F1  a positive transfer defect on the interacting Wilson continuum trajectory;
@@ -40,21 +20,44 @@ Finite Gate 3 geometry still matters, but only as setup for the operator and
 Hamiltonian language. The paper is no longer a geometry-first draft. It is a
 mass-gap reduction draft with explicit claim boundaries.
 
-> **Theorem 1.1 (mass-gap assembly from finite carrier to continuum).** Assume
-> the finite carrier Hamiltonians on the selected nonabelian lattice family are
-> self-adjoint with an explicit lower spectral gap, admit domination by a
-> comparison semigroup with a uniform finite spectral margin, and satisfy the
-> cited Balaban multiscale fluctuation-integral and large-field/small-field
-> inputs needed to prove `H3a`, the vacuum-orthogonal transfer theorem of
-> Section 5. If the limiting Euclidean theory satisfies reflection positivity
-> and the Osterwalder-Schrader reconstruction hypotheses, then the reconstructed
-> continuum theory has a positive mass gap. The load-bearing Clay-facing
-> analytic burden is therefore the `H3a` transfer input rather than the mere
-> existence of isolated finite-carrier margins.
+> **Theorem 1.1 (conditional same-source mass-gap assembly).** Fix the
+> original interacting four-dimensional SU(2) Wilson–Gibbs cutoff family and
+> its physical time/slice observables. Suppose **(F1)** a physically sourced,
+> cutoff- and volume-uniform vacuum-orthogonal two-slice transfer estimate
+> holds along its continuum trajectory with a positive gap in physical
+> units; **(F3)** the *same* cutoff theory possesses the required nontrivial
+> reflection-positive/OS continuum and a physical embedded graph/Mosco
+> limit preserving that uniform gap; and **(F4)** the limiting Yang–Mills
+> and OS reconstructed evolutions agree on the same dense invariant core.
+> Then the stated spectral-gap compiler produces a positive gap for that
+> reconstructed physical Hamiltonian. These are explicit **premises**, not
+> physical inputs proved by finite F19/R445 encoding, finite RG algebra,
+> abstract transfer estimates or a citation. The SU(2) statement alone
+> does not prove the full compact-simple-group Clay target.
 
 This is the honest current target. The draft can state a finite-to-continuum
 assembly route sharply while keeping the constructive multiscale intake
 explicitly cited rather than silently internalized.
+
+**November 21, 2026 original Wilson-source audit.** The newer
+F19/R445 source-weld program does not supersede the physical assumptions in
+Theorem 1.1. On the actual 4D side-four finite torus it accounts for **1,024
+fine oriented-positive links** as **128 selected links plus 896 spectators**
+(and 64 native blocked coarse links). The original Wilson weight depends on
+the spectator links: changing one unselected SU(2) link from `I` to
+`-I` leaves the blocked selected links unchanged but flips six original
+plaquette traces, changing their sum by 24. Consequently **no** function of
+those blocked coarse links alone equals the original interacting fine action.
+The correct F19 weighted coarse expectation must integrate over the
+spectator fibres with the **original** 1,024-link Gibbs weight. Finite label,
+parity, Haar or weighted-pushforward equalities cannot establish cutoff-uniform
+Wilson covariance bounds, continuum OS existence, a gap on every nonvacuum
+sector of the same physical Hamiltonian, nontriviality or all compact simple
+groups. The relevant Agda #1536 source-written adapters still require native
+kernel validation. Source/physical controlling owner:
+`Docs/roadmaps/ClayYMProofRoadmap.md` on Agda PR #1536; historical
+R445/F19/CMP numbers refer to iterative proof attempts, not separate theorem
+milestones.
 
 **Formal status box.** In the Agda closure surfaces, the main Clay-facing
 Yang-Mills theorems remain `Proved = false` because DASHI does not claim to
