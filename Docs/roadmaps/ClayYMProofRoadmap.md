@@ -57,6 +57,35 @@ DASHI exact source owners retain their original ownership. No
 new Clay YM proof or pinned Agda 2.9 kernel result is claimed here.
 
 
+## 2026-11-21 — P0 local SymPy exact F19/native R445, existing PURE-HAAR receiver instantiated as Agda candidate
+
+**Owner-first audit**: newest inspected #1444 historical head `83b2fd9a3ce87b2d91c7b54340183c0723ece965`, latest inspected #1536 master-based head `5e0db1252b1a629642106f5fdfde27bf9bfd98d3`, original `master` `YMClayR445OriginalPureHaarBlockWeldExact`, F19 adjacent-sort, original native 64 SU(N) pair theorem, canonical R445 128+896 full field codec and F19 weighted Wilson effective source. **P0 is the physical 4D interacting mass-gap endpoint E1/D1/D2/N1/G1; finite identity successes are source consistency, not solved continuum analysis.**
+
+**Verified independently in LOCAL SymPy 1.14.0, no CI, no Agda toolchain**: `/mnt/data/check_ym_f19_r445_sympy_purehaar_weld.py`, source-equivalent committed `scripts/check_ym_f19_r445_sympy_purehaar_weld.py` on #1536 ([commit 8e204d70](https://github.com/chboishabba/dashi_agda/commit/8e204d706ccf047749b7719fa6b062faf758205b)). Original side-four 1024 positive bonds, side-two 64 positive coarse bonds, native even origin and two *ordered noncommuting* fine links, original canonical 896-bond spectator filter. Computed **complete 1024-index F19 ↔ R445 permutation**, verified both inverses using SymPy `Permutation`; proved **64/64** original-block equalities in noncommutative symbolic expressions and **96/96** noncommutative coarse plaquette-word equalities; evaluated **5,120/5,120** canonical/sorted exact Q8 (SU2 2×2 matrix) field values, **320/320** ordered pair blocks, **480/480** exact coarse Wilson plaquette traces. Deliberately reversed link ordering differs on **124** of those assigned Q8 blocks; altering one of five original spectators changes an original fine Wilson plaquette word but NONE of the 64 chosen blocked link values. These checks are NOT a full universal SU(N) analytic theorem: the symbolic word equalities are universal in the free-word model; the matrix evaluations are only exact Q8 negative controls. Exact committed GitHub checkout was NOT locally executed (network unavailable from container); local script content follows source-defined geometry but is not byte-verified against committed file.
+
+**Most useful original receiving theorem ALREADY EXISTS**: `YMClayR445OriginalPureHaarBlockWeldExact.OriginalR445PermutationAndNativeBlockWeld` owns (i) actual `Haar.LinkPermutation 1024` matching original R445 complete sorted field and (ii) equality of **original native 64-link SUN holonomy** to its **original flat consecutive 64 ordered SU(N) pair products** on the full 128+896 sorted canonical field. If both are inhabited, its original `originalR445PureHaarBlockedIsOriginalCoarseHaar` proves **unweighted product-Haar pushforward** by existing Haar-invariance and pair-convolution, *not* interacting Wilson Gibbs or bare beta(1) n=1 source equality.
+
+**New source-written, uncompiled direct instantiation candidate** `YMClayOriginalF19R445PureHaarReceiverCandidateExact.agda` ([commit 350273ec](https://github.com/chboishabba/dashi_agda/commit/350273ec3dde467abb6ba8fd3e8d7c10f59a52c9)) plugs in the **actual original `OriginalSort.actualPairProgram`**, transports it through original 1024-count proof by generic exact `transportPermutationAction`, composes #1536 `FullValue.originalPhysicalF19ActualSortIsOriginalR445Codec` for field (i), and composes #1536 `Native.originalPhysicalF19Blocked64EqualsNativeR445` for field (ii). Only remaining source-specific check (not a new axiom) is equality between **F19 `Torus.Product` pairs** from `coarseFromSortedOriginal` and **original pure-Haar `Data.Product` pairs** from `Flat.splitFlatPairs`. Named `originalF19FlatPairBlockAgreement` is currently a **`refl` normalization candidate**, NOT VERIFIED: it might require a source-derived inductive flat-pair decoder bridge and count transport rather than definitional equality. Similarly `originalF19PermutationIsR445Reorder` uses two original count casts that the Agda kernel MUST normalize. The record constructor `originalActualF19PureHaarReceiver` and pure-Haar consequence are **proof candidates**, not accepted theorems. No Agda compiler present; do not call them closed kernel proofs.
+
+**Commuting-square scope**:
+```
+ original 1024 canonical fine links
+    |  original F19 adjacent swaps              | original canonical fine decoder
+    v                                           v
+ sorted selected128 + residual896       original native R445 SU(N) fine field
+    | original 64 ordered F19 pair multiplication | native 2-link selected coarse field
+    +-------------------------- SAME 64 coarse links (symbolic/local) ------------+
+    | full original 896 spectator variables retained in Wilson integrand
+    v
+ original existing pure-Haar receiver (UNWEIGHTED, source-specified)
+    != full interacting Wilson effective Gibbs, nor all-cutoff physical E1/D1/D2
+```
+**BIDI follow-up**: first locally test any suspect count transport or pair structure as exact finite SymPy; when Agda is permitted, kernel-check and correct `originalF19FlatPairBlockAgreement` using the original `YMClayOriginalWilsonPairSpectatorDecoderExact`, `YMClayR445FlatPairedHaarIntegrationExact` and `YMClaySUNWeightedDisjointPairFibreReparamExact` inductive pair-product owners; do NOT invent arbitrary function-extensionality or assert `refl` succeeds. Then use the *already existing* `YMClayOriginalWilsonCanonicalBlockedMarkF19Exact.originalCanonicalBlockedNormalizedEqualsPhysicalEffective` for original full weighted Wilson, preserving 896 interacting spectator links. Physical first-order work still E1 original interacting actual measure source and W1/W3 marked uniform small+large-field source (or independent direct same-H D2 argument), RP complex star/dense same (H_{OS}), N1/G1. Chronological R445/F19 theorem numbers ≠ source time `t` or scale `k`. P0 first, P1 antigravity after.
+
+**Integration:** #1536 `DASHI/Unified/YMClayOriginalWilsonPhysicalRegression.agda` now imports the source-receiver candidate (commit `283b4799`); its fail-closed local source checker includes original receiver symbols and NEW SymPy local test (commit `acdd2940`). Both #1444 documents and #1536 canonical roadmap are updated DIRECTLY on respective draft branches, no merge into `master` asserted; any formal trust must await actual Agda elaboration when allowed.
+
+---
+
 ## 2026-11-21 — NEW P0 F19 → **actual native R445 64 SU(N) block** commuting square, existing pure-Haar interface identified
 
 **User-directed method:** check newest original #1444 and #1536, weld *forward* from existing finite source and *backward* from physical E1/D1/D2 onto the SAME Wilson field. Do not reconstruct parity/measure; preserve all 896 original spectators and the independently indexed physical time `t`, cutoff `k`, signed zero/residual hyperfabric. R445/F19 names are chronology of proof construction, not physical indices.
