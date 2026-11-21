@@ -1,3 +1,15 @@
+## 21 Nov 2026 — GRH P0 stays first; original Mellin is ALREADY in-repo
+
+**Authoritative weld-forward plan:** `Docs/roadmaps/GRHP0OriginalEveryCharacterMellinForwardWeld20261121.md` (on this same PR #1533). It pins the actually checked external all-Dirichlet `UpperTheory.EveryCharacter` route and reported independent MIT/other kernel checks, then follows original Lean #113 `RHGRHP0DirectionalSourceCut` to the original right-half, strip, primitive and zeta/Clay terminal consumers. It does not turn an RH-only adapter into GRH for every character.
+
+**Existing Mellin NOT missing:** original Agda `MellinSplitFunctionalEquationExact.mellinSplitFunctionalEquation`; BSD `EllipticCMLevel32FrickeMellinExact.mellinCentralValueIsTwiceTail`; RH `RiemannG2GammaMellinProofRelevantActionCompilerExact.toProofRelevantCanonicalTestModulation` and literal Gamma/Mellin ↔ Weil Test transport. The remaining payments are actual selected elliptic eta/newform/integral semantics for BSD and actual per-Dirichlet-character analytic L/zero/critical-line correspondence for GRH. This is a same-object identification gap, not a framework construction gap.
+
+**One direct source improvement:** `AlpogeRHOriginalClayEndpointBidiExact.originalClayWitnessToAnalyticRH` now consumes the *existing original* `Clay.RiemannHypothesisWitness` and its actual critical-line field in the reverse direction. This closes a small **RH endpoint projection**, not the original `UpperTheory.EveryCharacter` all-Dirichlet theorem. Source-written, Agda kernel not run.
+
+P0 order: external original all-character statement/axiom/kernel provenance → local version-compatible original Lean #113 adapter → trusted same-target root admission → Agda per-character same-object transport; and the original analytic G2 Mellin/Weil lane only when its actual test/zero identities are proved. P1 CM/Hecke and Monster/369 are optional methods; they may not delay P0. R445/F19 and all numbered rounds are iterations, not main-proof milestones.
+
+---
+
 ## 21 Nov 2026 P1 j=0 H0 candidate extended, kernel deferred
 
 Lean #114 has extended `EisensteinJZeroHasseEulerConvergenceWeldExact` beyond the earlier conditional `hlocal` compiler: source-written original-curve local perturbation norm bound, original denominator `Multipliable`, summability, local nonvanishing and denominator `tprod` nonvanishing for Re(s)>3/2. This **supersedes** the following chronological section's wording that `hlocal` still needs source-writing; it does **not** convert source text into Lean acceptance. No Lean kernel/toolchain/CI run. Still open/unchecked: trusted certificate for this exact H0 candidate, source-consistent reciprocal `tprod`, full same-curve elliptic/Hecke analytic L-function, completion, zero-location. Dirichlet GRH external proof admission P0 and independent signed RH route remain logically separate.
