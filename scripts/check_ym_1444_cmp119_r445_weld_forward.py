@@ -43,6 +43,34 @@ OWNERS = {
         "originalMarkedOS1AllPairsTimes",
         "originalMarkedOS1SameSpectrumClustering",
     ],
+    "DASHI/Physics/YangMills/YMClayR445OriginalAxialBondParityInjectiveExact.agda": [
+        "coord : Bit → Bit → Quad",
+        "coarse : Quad → Bit",
+        "phase : Quad → Bit",
+        "originalR445SelectedFineBond",
+    ],
+    "DASHI/Physics/YangMills/YMClayR445OriginalNativeParityPairWeldExact.agda": [
+        "originalR445NativeOriginIsEvenSite",
+        "originalR445EvenSiteOneStepIsOddPhase",
+        "originalR445NativeBlockAgreesExplicitParity",
+    ],
+    "DASHI/Physics/YangMills/YMClayR445CanonicalBondPermutationCodecExact.agda": [
+        "originalR445ResidualBondEnumeration",
+        "originalR445PairResidualFinite",
+        "originalR445PairResidualComplete",
+    ],
+    "DASHI/Physics/YangMills/YMClayR445TimeKResidualHyperfabricExact.agda": [
+        "OriginalCodec.coarse",
+        "OriginalCodec.phase",
+        "OriginalCodec.coord",
+        "originalNativeBlockOriginIsSelectedGeometry",
+        "originalAllFineBondSelectedResidual",
+        "oneFineStepKeepsCarryAndResidual",
+        "twoFineStepsExactlyDescend",
+        "waveZeroIsNotDeleted",
+        "indexedZeroModeIsExactFiniteZeroWave",
+        "timeKScaleResidualRoundTrip",
+    ],
     "DASHI/Physics/YangMills/YMClayR445SelectedTimeReflectionForwardExact.agda": [
         "selectedNativeSiteTimeSquare",
         "selectedFineSiteReflectShiftDihedral",
@@ -86,6 +114,7 @@ OWNERS = {
         "YMClayWilsonWEXTSelectedDistanceNonVacuityExact",
         "YMClayOriginalWilsonMarkedOS1AllTimesProducerWeldExact",
         "YMClayOriginalWilsonOS1R556R281CommutingSquareExact",
+        "YMClayR445TimeKResidualHyperfabricExact",
     ],
     "DASHI/Physics/YangMills/YMClayNativeR445TemporalReversalExact.agda": [
         "originalSUNTimeReversalTwoLink",
@@ -123,6 +152,7 @@ CHECKS = [
     "scripts/check_ym_r445_time_reflection_q8_20261106.py",
     "scripts/check_ym_r445_original_wilson_words_reflection.py",
     "scripts/check_ym_original_r445_os1_translation_commuting_square.py",
+    "scripts/check_ym_r445_time_k_residual_hyperfabric.py",
 ]
 
 def main():
