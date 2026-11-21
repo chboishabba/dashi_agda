@@ -1,3 +1,9 @@
+## 21 Nov 2026 — external master-based #1536 full 1024-label candidate
+
+This HISTORICAL #1444 branch already contains the original F19 and R445 source producers; both relevant owners are also on canonical `master`. The separate master-based [YM #1536](https://github.com/chboishabba/dashi_agda/pull/1536) has now added `YMClayOriginalF19R445Full1024LabelsP0Exact.agda`, a new **source-written, NOT KERNEL ACCEPTED** finite proof candidate for F19 original Boolean residual-filter order = R445 original Dec residual-filter order (896/896), followed by full 128+896 original 1024-label equality. It imports the already original selected 128-label BIDI instead of recreating pair geometry. New proof uses finite normalization after rewriting selected labels; if kernel reduction fails, a structural membership bridge remains to be written. The arbitrary-Link source decoder and actual all-scale Wilson W1/W3, E1/OS/H, N1 and G1 physical gates are still OPEN.
+
+The new module is NOT merged into this #1444 branch; do not mark its Agda proof accepted here. Independent equivalent exact local Python model PASS 128/128 selected, 896/896 residual, 1024/1024 inverse, orientation-reversed negative 128 mismatches. #1536 controls this P0 weld. Independent master-based BSD [#1538](https://github.com/chboishabba/dashi_agda/pull/1538) concerns original conductor32 E:y²=x³−x and is not the conductor36 Lean #114 j=0 Hecke curve; BSD proof terms cannot be transplanted as Wilson physical estimates.
+
 ## 21 November 2026 — P0 original F19 canonical Wilson NORMALIZATION/COVARIANCE already paid; source-native R445 ordered-target seam narrowed
 
 **Source-first reverse solve / no reinvention.** Direct GitHub readback of five **exact source Agda files on BOTH** master and #1444 confirms **bytewise/blob-SHA identical**, not merely similar names:
