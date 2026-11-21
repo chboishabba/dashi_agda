@@ -1,3 +1,13 @@
+## 21 Nov 2026 — canonical master cross-check: six original owners
+
+**Correction to missing-theorem language:** exact blob-SHA readback found **6/6 original YM theorem owners byte-identical on this #1444 branch and current `dashi_agda@master`**: `YMClayOriginalR445ReflectedAllWordGramExact`, `YMClayOriginalR445PublishedWilsonRPWordWeldExact`, `YMClayOriginalWilsonR445R320TwoSourceSameFamilyExact`, `YMClayD1OriginalCovarianceToR320Exact`, `YangMillsClayCriticalPathRound578Exact`, `YangMillsClayCMP119H1OS4AttachmentRound583Exact`. Do not relabel original same-measure finite R445/R320, arbitrary finite reflected-word algebra, conditional published RP transfer, R320 finite covariance source, seven-family critical path or H1→OS4 compiler as absent.
+
+**Conditional does not mean inhabited:** `sourceIdentifiesActualWilsonReflection`, physically uniform cutoff/volume full Wilson W1/W3 estimates, actual E1 interacting continuum OS measure, same full H_OS and dense vacuum complement, genuine N1 and all-group G1 remain physical source obligations. CMP102 is limited to actual nonlinear average + mixed-scale shell support and per-plaquette Eq7, not another general Haar/plaquette construction.
+
+**Branch lineage:** this PR is stacked on the historical `research/ym-route-s-r320-direct-mass-gap-20261030`; `master` is the default branch (not `main`). The **master-based** follow-on #1536 owns new OS1/R556 and fine↔coarse time × k residual commuting-square source, not merged here. Keep indexed physical time t, RG scale k, proof-iteration labels, signed zero trits and actual 896 field residuals distinct. No Agda kernel or Clay promotion from source text / finite regression.
+
+---
+
 ## 21 Nov 2026 — P0 R445 **time × RG stage k** reversible hyperfabric; exact original source recheck correcting false outstanding gates
 
 **Latest correction to the earlier BIDI/commuting-square audit**: The original #1444 `master` tree already owns exact **C4 ↔ (C2 coarse, C2 even/odd residual)**, actual native 16-site `Fin.combine` even origin, and **128 selected + 896 residual = 1024 source SU(N) positive links**. These are NOT missing new YM geometry or an unsourced toy carrier. We have now inspected the ORIGINAL source Agda bodies and reattached to their existing owners.
