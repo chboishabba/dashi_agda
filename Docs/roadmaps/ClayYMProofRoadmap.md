@@ -1,5 +1,32 @@
 ## 21 November 2026 — controlling YM P0 theorem-first directive
 
+## 21 November 2026 — latest-head P0 F19/R445 *arbitrary original link values* commuting square; physical theorem remains governing target
+
+**Review order actually followed:** checked #1444 head `583b063c5c18b56a046b22749127134c11890d76` and its two existing roadmaps, #1536 master-based starting head `0016ed414b9acfcecafffd4660ac9391a887c221` and its canonical roadmap, plus the exact `master` original F19/R445/vector/Haar owner bodies. #1444 is stacked on `research/ym-route-s-r320-direct-mass-gap-20261030`; #1536 is 64 ahead / 0 behind `master` at inspected prewrite comparison. Other newest #1537/#1538 are different research lanes, **not newer substitutes for the original YM Wilson source**. Re-read current heads before future imports; chronology R445/F19/R320 is theorem iteration, NOT scale k or physical time t.
+
+**Already original master sources, therefore NOT new P0 missing constructions:**
+- `YMClayNativeSideFourPairSpectatorSortProgramExact`: native adjacent-swap F19 target is **original 64 ordered pairs plus canonical 896 spectators**.
+- `YMClayNative1024ClosedReindexHaarConsequencesExact.actualPairSpectatorReindexEveryOriginalVector`: original source-generated F19 adjacent-swap permutation reads **arbitrary original link values** via original 1024-link decoder. Finite product-Haar reindex is likewise source-owned; interacting Wilson weight stays in integrand.
+- `YMClayR445CanonicalBondPermutationCodecExact.originalR445CanonicalToPairResidual` + **two round-trip theorems**: existing original complete selected-128 / residual-896 field reordering.
+- `YMClayOriginalWilsonCanonicalBlockedMarkF19Exact.originalCanonicalBlockedNormalizedEqualsPhysicalEffective`: full original interacting F19 1024-link normalized effective expectation for **every** original coarse observable, already existing. Prior #1536 `YMClayOriginalF19R445Full1024LabelsP0Exact` is a **source-written, not kernel-accepted** full 1024-order candidate.
+
+**New actual vector commuting square on independent draft #1536, not merged onto #1444 or master:** `YMClayOriginalF19R445EveryLinkValueBIDIExact.agda` (`7921880be20f8dc642d05af4d3bb5087633dd8df`) transports original complete F19/R445 label equality through original `Codec.listValues/encodeField` for every value carrier and every original 1024-link canonical vector. `YMClayOriginalF19R445ActualSortedVectorBIDIExact.agda` (`44fbcc4e7203db739017389da3fbe7552e965e6e`) composes **master's actual F19 adjacent-swap `actualPairSpectatorReindexEveryOriginalVector`** with that full-label equality to state:
+```
+Haar.permuteLinks (Sorted.actualPairProgram theory) original1024
+   == R445.originalR445CanonicalToPairResidual original1024
+```
+for **every** link value carrier, then by congruence for every consumer of that sorted vector. This is a SAME original finite source, including all 896 interacting spectators; no new Wilson measure/action/clock/H. Both new files are **Agda proof candidates, UNCOMPILED**, transitive dependencies include earlier closed `refl` candidates and the #1536 896-spectator equality; compiler acceptance is a hard dependency, not inferred from text.
+
+**Regression correction**: old `check_ym_f19_r445_full1024_labels_p0.py` “inverse” wrote each canonical position back to itself (tautology). The updated committed script `4cbf50eae094716a221d86a530e9e65d1dace12e` now computes real **canonical-index→target-index inverse** and checks both permutations. It also exercises full original 1024-link fields over five noncommutative Q8 SU(2)-subgroup assignments, all 64 ordered blocked products, and original interacting spectator negative control. An independently executed, more extensive local source-shaped regression passed **128/128 selected, 896/896 spectators, 2048/2048 forward/inverse, 5120/5120 link values, 320/320 ordered Q8 blocks, 7680/7680 original Wilson plaquette traces**, reversed-pair Q8 difference **160** and five altered-spectator source differences. The exact modified GitHub checkout checker was NOT run; those are **equivalent local reference** results, not pinned Agda or exact-head Python receipts.
+
+**P0 steelman BIDI next payment (theorem-first):** distinguish (A) pending **kernel acceptance** of finite F19↔R445 ordered target/adjacent-swap source equality from (B) genuinely open physical **E1** interacting 4D Wilson continuum and published complex-star reflection positivity, **D1** original full Wilson W1/W3 small+large-field `a,V`-uniform physical covariance rate (or another direct gapped-reconstruction proof), **D2** ONE actual dense vacuum-orthogonal `H_OS` with full nonvacuum positive gap, and **N1/G1**. The next candidate exact handoff is original `YMClayOriginalWilsonCanonicalBlockedMarkF19Exact.coarseFromSortedOriginal` to **original** `nativeSUNBlockLinks` on the same SU(N) field, then instantiate existing real original E1 three-moment residual/W1/W3 producers. Do not build another finite codec or metric. R445 16-site origin, all-coarse normalization, 896 spectator order and E1 limit *interfaces* are already owned; their physical analytic hypotheses remain actual obligations. P1 antigravity second.
+
+**Acceptance:** original 1444 roadmaps updated **in place** and #1536 canonical roadmap synchronized. Changes are committed and read back, but **Agda/Nix kernel not installed; all new Agda is source-written/unverified**. No Clay physical mass-gap completion claimed.
+
+---
+
+
+
 **The main mathematical goal is the original four-dimensional interacting
 Yang–Mills existence and mass gap, for each compact simple gauge group.**
 R445, F19, R320, CMP116/119, R5xx, source-owner symbols and PR numbers
