@@ -1,5 +1,7 @@
 # Alpöge/Claude RH–GRH × DASHI geometric transport (21 November 2026)
 
+**Monster p=5 extra owner recovered:** beyond the unrelated 9→5 signed-pair quotient, `MonsterFiveArithmeticSourceRecognitionFrontierExact` pays Fricke arithmetic, (v_5(|M|)=9) and two inverse phase pairs, and `Y443JMDBetaFiveSemanticCompilerExact` has conditional `β^5=1` under literal Coxeter rule interpretation. The new RH/CM source compiler imports the p5 arithmetic/valuation owners. Actual pointed Monster action, selected state intertwiners and an original `IsHecke` or `TP.TLiftK` same-object link remain OPEN. This correction is recorded on the owning #1291 9DOF roadmap at commit `65d84231dc8e`.
+
 ## 21 November — CURRENT strongest analytic CM donor after Bishop/modular-j archaeology
 
 Original native Eisenstein/modular-j algebra is not absent. `JInvariantEisensteinSameCarrierLimitKleinJExact` already packages same-ConcreteComplex E4/E6 Cauchy limits, Delta-normalized proof-relevant Klein-j and nonzero-discriminant input. `JInvariantEisensteinBishopConvergenceFrontierExact` already has constructive polynomial-geometric majorant/degree-four/degree-six q-series convergence and a generic unit-disk Bishop backend. `JInvariantAnalyticNormalizedKleinAdapterExact` already has conditional modular weight-zero and reflection compilers for normalized standard (j), preserving the non-normalized (j/1728) distinction. `RankOneHeisenbergFockWindowExact` gives a separate finite commutator/Fock eigenvalue donor, not an automorphic theta/analytic RH result.
