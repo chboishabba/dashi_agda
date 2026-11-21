@@ -70,3 +70,38 @@ This is an **asymmetric BIDI**: their `EveryCharacter` produces RH and GRH, but 
 4. **never claim G2 sign cancellation merely from C3 invariance**; the repository explicitly contains symmetry/Gram/balance no-go controls.
 
 **Scope**: no world ingestion/PG, no CI, no Agda/Lean kernel execution this session. Documentation and Lean BIDI source are current; proofs remain to be checked and the original analytic zero-function/complex weld remains open.
+
+## 21 November — executable first bridge at the precise BIDI gap: zero-horizontal collapse
+
+### Reverse solve results from **actual** source definitions
+
+- The checked fork owner `Claim.zeta_iff : Claim.Zeta ↔ RiemannHypothesis` sits on the existing Mathlib `riemannZeta`, excludes trivial zeros and (s=1), and yields `s.re = 1/2`. On this *same actual zero*, `s.re - 1/2 = 0` and `cosh ((s.re - 1/2) u)=1` for every real (u). These are elementary **consequences** of RH, not a proof of RH.
+- The DASHI G2 **original literal** `LiteralTargetCenteredScalarProblem` specifies `dSigma sigma = integrate (4*q(u)*multiplicity(sigma)*cosh(offRealPart(sigma)*u)*cos((ordinate(sigma)-target)*u))`. This is the exact consumer contract, and `RiemannG2TargetCenteredScalarCancellationAssemblyExact.dSigmaIsLiteralKernel` is its original owner.
+- Therefore **if** `ZeroIndex P` is proved to denote the genuine same Mathlib Riemann nontrivial-zero carrier, and `offRealPart` is literally the real displacement `s.re-1/2`, the cosh factor cancels **without rebuilding G2**. Our signed cosine sum remains mathematically unpaid.
+
+### Implemented source consumers (not compiled yet)
+
+- [Lean #113 `RHZeroHorizontalBridge.lean`](https://github.com/chboishabba/dashi_lean4/blob/research/alpoge-rh-source-admission-20261121/proofs/alpoge-lean433/RHZeroHorizontalBridge.lean): `zero_horizontal_of_mathlib_rh` and `cosh_horizontal_factor_of_mathlib_rh` use **Mathlib's own** `RiemannHypothesis`, `riemannZeta`, original exclusion of `-2(n+1)` and (s≠1), no substitute zeta carrier.
+- [Agda #1533 `RiemannG2AlpogeZeroLineCosineCollapseExact.agda`](https://github.com/chboishabba/dashi_agda/blob/research/alpoge-grh-geometry-bridge-20261121/DASHI/Analysis/RiemannG2AlpogeZeroLineCosineCollapseExact.agda): `SameZeroCarrierCollapse` asks for **four transparent properties**: actual G2 zero index's horizontal displacement is zero, zero·u=zero, cosh(0)=one, and original integral congruence. It defines `sourceCosineCoshKernel`, `collapsedCosineKernel`, and proves pointwise and original `dSigma` integral equality under these premises, using the existing original `dSigmaIsLiteralKernel`.
+
+The **only substantive new mathematical seam** between those new files is `actualMathlibZeroToSelectedG2ZeroIndexWithSameHorizontalDisplacement`, plus the trusted Lean→Agda transport and source-accurate real/integral identities. We must not imply this mapping already exists merely because the indexed zero states have similar coordinates. `SameZeroCarrierCollapse` is still uninhabited.
+
+### Finite exact test (local SymPy 1.14; NOT kernel acceptance)
+
+The full scalar source kernel (4 q m\cosh(a u)\cos((b-t)u)) equals (4 q m\cos((b-t)u)) after (a=0). SymPy reduced the symbolic difference to exactly zero.
+
+Counterexample: with (m=1), (b=t=0), (u\in[-1,1]), and (q=+1) versus (q=-1), the collapsed integral equals respectively (+8) and (-8). Thus **RH zero-horizontal geometry does not force positivity, nonnegativity or cancellation for an unconstrained signed taper q**. An actual G2 q has its own constraints; this is a *logical non-entailment illustration*, not an actual Riemann-zero counterexample. Actual `G2d` / universal pole-quotient taper constraints and Off/Gamma budgets cannot be silently erased.
+
+### Precise remaining BIDI cut, and required external depth
+
+| Need | Current status | Inspect how far into fork? |
+|---|---|---|
+| RH terminal into Lean Clay | original `RiemannHypothesis` plus existing Lean Mathlib↔Clay equivalence | **stop at** `rhOfAll` / `MainTheorems` |
+| Strong Dirichlet GRH | actual `UpperTheory.EveryCharacter`, `Claim.strip`, primitive character proof | **stop at** `allChi` / `EveryCharacter` |
+| Agda original RH theorem | actual analytic zero function/complex carrier identity and trusted import still OPEN | **stop at** actual Mathlib RH theorem; pay Agda object weld |
+| Agda original G2 zero-horizontal cancellation of cosh | source-written conditional exact G2 integral and Mathlib real-offset theorem; actual `zeroIndex↔nontrivialZero` OPEN | **stop at** `Claim.zeta_iff`, `VW.rh_of_every` or imported RH theorem; no need for theta proof dependencies |
+| G2 target-centred signed cancellation | transformed cosine sum still indefinite without q and phase estimates; old balance-breaking premise remains OPEN | **only inspect deeper** if fork contains matching exact q/taper/zero-sum/source operator, otherwise independent |
+| Universal Off+Gamma | different original universal taper, source-checked distinction from G2 determinant | do not reuse determinant-taper payment without real source same-taper transport |
+| Geometric improvement to fork itself | actual `TP.TLiftK` / `GalStar.Row0b recT` are deeper source-typed targets | descend selectively to those **only** after testing exact geometric producer eligibility |
+
+No new postulate is asserted, no unconditional algebraic `RiemannHypothesis` witness is fabricated and no stronger analytic theorem is claimed. No CI, no local Lean or Agda kernel run. The exact symbolic test is a finite regression, not completion of RH.
