@@ -35,7 +35,7 @@ def stf(positions,moments):
     for r,v in zip(positions,moments):
         for i,j,k in product(range(3),repeat=3):
             raw[i,j,k]+=sum(v[ii]*r[jj]*r[kk] for ii,jj,kk in
-                              ((i,j,k),(i,k,j),(j,i,k),(k,i,j),(k,j,i)))/6
+                              ((i,j,k),(i,k,j),(j,i,k),(j,k,i),(k,i,j),(k,j,i)))/6
     traces=[sum(raw[i,j,j] for j in range(3)) for i in range(3)]
     out=sp.MutableDenseNDimArray.zeros(3,3,3)
     for i,j,k in product(range(3),repeat=3):
