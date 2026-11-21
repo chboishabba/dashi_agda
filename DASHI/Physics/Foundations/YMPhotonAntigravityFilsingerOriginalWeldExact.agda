@@ -37,6 +37,9 @@ import DASHI.Physics.ExoticGravity.SuperconductingGravityExperimentDesignProofSe
 import DASHI.Core.DiscriminatorSynthesisExact as Disc
 import DASHI.Culture.AmyEskridgeAntigravityExperimentBindingExact as Amy
 import DASHI.Physics.ExoticGravity.AntigravityClaimScopedExperimentalCutExact as ClaimCut
+import DASHI.Physics.ExoticGravity.AntigravityControlledGWExchangeCrossPollinationExact as Exchange
+import DASHI.Physics.Foundations.CMP119AntigravitySameTOVStressGeodesicIndependenceExact as TOV
+import DASHI.Physics.Foundations.GRQFTFiniteRationalTOVSystemExact as Radial
 import DASHI.Physics.Motors.SmithFilsingerSourceMaxwellBoundaryWeldExact as FSource
 import DASHI.Physics.Motors.SmithFilsingerMaxwellMaterialEnergyCutExact as FEnergy
 
@@ -116,6 +119,24 @@ amyFreeFallAndRemoteMassDemandDifferentChannels :
     → ⊥
 amyFreeFallAndRemoteMassDemandDifferentChannels =
   Amy.freeFallAndRemoteExperimentChannelsDistinct
+
+
+-- Source-owned CMP119/TOV negative control: even a local negative ACTIVE
+-- stress scalar may accompany inward rather than repulsive geodesic
+-- acceleration, for the very same radial fixture.
+-- Thus promoting EM stress, a putative YM gap or trace-sign anomaly to
+-- "antigravity" requires a separate gravity observables/source criterion.
+samePhysicalTOVActiveStressCounterexample :
+  Radial.RationalRadialState
+samePhysicalTOVActiveStressCounterexample =
+  TOV.localNegativeActiveButInward
+
+-- The existing EM<->GW exchange language is NOT a new antigravity
+-- experimental result and a sign-refit is not a new gravitation theory.
+emGWExchangeByItselfDoesNotEstablishChangedGravity :
+  Exchange.AntigravityExchangeBoundary.controlledGWExchangeAloneProvesModifiedGravity
+    Exchange.canonicalAntigravityExchangeBoundary ≡ false
+emGWExchangeByItselfDoesNotEstablishChangedGravity = refl
 
 -- Experimental designs and source/phase model separation DO NOT create
 -- an actually executed, calibrated claim-scoped experimental cut.
