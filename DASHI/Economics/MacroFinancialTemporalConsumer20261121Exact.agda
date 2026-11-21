@@ -54,7 +54,8 @@ record ExistingStateAttachment (asOf : Nat) : Set where
 -- The intent coordinate is deliberately a synthetic rival-world discriminator.
 -- Identical observed economics can coexist with distinct intended objectives.
 data CorrectionObjective : Set where
-  endogenousCorrection deliberateTolerance deliberateInduction : CorrectionObjective
+  endogenousCorrection deliberateTolerance deliberateInduction
+  selectiveCorporateIntervention disorderlyContagion : CorrectionObjective
 
 record RivalWorld (asOf : Nat) : Set where
   constructor rivalWorld
@@ -81,6 +82,38 @@ observationDoesNotDetermineIntent :
 observationDoesNotDetermineIntent s =
   Descent.nonDescentWitnessBlocksFactorization
     (sameObservationDifferentObjective s)
+
+-- Five testable scenario labels need not be mutually exclusive in reality.
+-- Here each is a synthetic observer-consumer label: neither an empirical
+-- classification nor proof of public-actor motive.
+
+data ScenarioIndex : Set where
+  H0 H1 H2 H3 H4 : ScenarioIndex
+
+scenarioObjective : ScenarioIndex → CorrectionObjective
+scenarioObjective H0 = endogenousCorrection
+scenarioObjective H1 = deliberateTolerance
+scenarioObjective H2 = deliberateInduction
+scenarioObjective H3 = selectiveCorporateIntervention
+scenarioObjective H4 = disorderlyContagion
+
+-- Signed evidence and observables cannot be replaced with a statement of intent.
+-- Separate documentary scope/join admission from a common chart projection.
+record SameObjectJoin (asOf : Nat) : Set where
+  field
+    state : ExistingStateAttachment asOf
+    scopeAndSourceCompared : Bool
+    scopeAndSourceComparedIsTrue : scopeAndSourceCompared ≡ true
+    timeUnitsCompared : Bool
+    timeUnitsComparedIsTrue : timeUnitsCompared ≡ true
+    marketQuoteAsOfCompared : Bool
+    marketQuoteAsOfComparedIsTrue : marketQuoteAsOfCompared ≡ true
+
+-- This proves only that all *declared* gate flags hold, not that any real
+-- observations satisfy them. Evidence must be supplied at the input boundary.
+-- The economic value and the policy-intent consumer remain distinct.
+joinRetainsObservation : ∀ {t} (j : SameObjectJoin t) → ExistingStateAttachment t
+joinRetainsObservation = SameObjectJoin.state
 
 -- Existing alternative-regime fits are retained, not assigned to new actors.
 existingRefinancingFit : Outcome.OutcomeFit
