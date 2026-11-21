@@ -124,7 +124,7 @@ record ExactPivotOverlap
         (A.add3 (M.first (A.offset p))
           (A.add3
             (A.mul3 u (M.first (A.slopeU p)))
-            (A.mul3 v (M.first (A.slopeV p))))
+            (A.mul3 v (M.first (A.slopeV p)))))
 
 -- Consumer transport across the overlap is a separate obligation.
 -- In particular rotation of the original Triple can turn a nonzero
