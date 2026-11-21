@@ -1,5 +1,16 @@
 # Alpöge/Claude RH–GRH × DASHI geometric transport (21 November 2026)
 
+## 21 November — latest concrete quadratic Dirichlet / cubic Jacobi / CM Hecke P0 correspondence
+
+**Source-first correction:** newer `EisensteinLeanSplitPrimeLocalClosureReceiptExact` links the original Lean #69 canonical cubic certificate, split Jacobi norm and EisensteinQA transport, complete good-prime E:y²=x³+1 local factors; old early `EisensteinLeanInertPrimeLocalFactorReceiptExact` and TOE historical flags must be treated as **dated snapshots**, not current closure gates. Actual original Lean source was fetched for `EisensteinJZeroCanonicalCubicCharacterExact`, `EisensteinJZeroSplitPrimeEisensteinCarrierExact`, `EisensteinJZeroAllGoodPrimeLocalExact`; all source-written, Lean kernel acceptance not performed.
+
+**Independent exact selected-prime test:** split sample 7,13,19,31,37,43,61,67,73,79: χ₋₃(p)=+1 and with ψ cubic, φ quadratic, J=Σ_t ψ(t)φ(1−t)=a+bω satisfies norm J=p and a_p(E)=−(2a−b); 430 cube fibre counts PASS. Inert sample 5,11,17,23,29,41,47: χ₋₃(p)=−1 and a_p=0. **17/17** local Dedekind quadratic factor equality `(1−T)(1−χ₋₃(p)T)=(1−T)²` split or `1−T²` inert. Script `scripts/check_grh_dirichlet_cubic_hecke_local_correspondence_20261121.py` committed on #1533, independently equivalent Python/SymPy calculation run. New source `DASHI/Analysis/RHGRHDirichletCubicHeckeLocalCorrespondenceExact.agda` records exact old/new receipt flags, conductor-3 quadratic owner and global Hecke still-open.
+
+**Important three-character distinction:** χ₋₃ is a *quadratic Dirichlet/Artin* character and `ζ_K=ζ L(χ₋₃)` (degree-2 induced zeta, verified at tested local factors); finite ψ_p is a *cubic* multiplicative character used to evaluate *elliptic* traces; elliptic CM `Ψ` is a separate *global algebraic Hecke Grössencharacter* with nontrivial infinity type. `χ₋₃∘Norm` does not magically construct elliptic Ψ. The original exact finite local Euler match is NOT an original all-ideals/global L-series or `UpperTheory.TP.TLiftK` proof. Bad prime p=3 and full archimedean/conductor/functional equation remain separate.
+
+**GRH P0 remains top priority:** original pinned Lean all-character `EveryCharacter` and the 3 Dirichlet terminals plus RH, with kernel/axioms and compatible proof transfer open. The correspondence supplies an actual CM finite test and a future Hecke route, not a new GRH solution. No CI/Agda kernel.
+
+
 ## 21 November — CURRENT PRIMARY GRH P0; Monster/369 is optional P1 BIDI donor
 
 **Priority reset:** P0 is source-pinned **GRH / all Dirichlet characters** on the original fork `UpperTheory.EveryCharacter`; not P1 native Monster VOA mode reconstruction. The original selected Galois/theta spine `RowSrc.galoisLocalGlobalStrong_recParameter → LiteratureTheorems.every_character_of_literature_of_vWin → UpperTheory.EveryCharacter` feeds original full Dirichlet half-plane and strip targets, then the ordinary RH target by `Formalism.VW.rh_of_every`. It is one-directional EveryCharacter → RH. Existing exact original BIDI `Claim.HalfPlane ↔ EveryCharacter`, `Claim.Zeta ↔ Mathlib.RH`, `RiemannZetaZerosOnLine ↔ Mathlib.RH`, and independent root `Mathlib.RH ↔ Millennium.ClayRH` are the true same-target two-way surfaces; **RH does not yet come with any original source reverse proof of GRH**.
