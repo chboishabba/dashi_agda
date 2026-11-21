@@ -11,7 +11,7 @@ module DASHI.Physics.Foundations.BH4NativeTissueSamePaidHistoryWeldExact where
 -- same selected PNP receipt and source owner, not independent carriers.
 -- This module does not fill in source-paid 29x12 BH4 kinetics, membrane
 -- currents, cell type, observation or actual empirical energy values.
--- The ONLY physically new input is the same-original readout/one-step
+-- The unfilled physical input is the same-original readout/one-step
 -- observational simulation plus the explicitly selected intervention map.
 -- Five distinct tissue interventions CANNOT be assumed injectable into
 -- Bool; any encoding requires a source-calibrated action meaning.
@@ -37,6 +37,7 @@ record BH4NativeTissueReadoutWeld
   (M : Paid.SameSourcePaidEnergyModel) : Set₁ where
   field
     originalActionToBH4 : Bio.Intervention → Bool
+    originalObservationProtocol : String
     originalTissueReadout :
       BH4.PhysicalState (Paid.source M) → Bio.TissueField
 
@@ -62,7 +63,7 @@ toExistingTissuePhysicalSimulation M W = record
   ; selectedPNP = BH4.selectedPNP (Paid.source M)
   ; assaySource = BH4.selectedPhysicalSource (Paid.source M)
   ; specimenIdentity = BH4.selectedSpecimen (Paid.source M)
-  ; observationProtocol = BH4.selectedMeasurementTime (Paid.source M)
+  ; observationProtocol = originalObservationProtocol W
   ; physicalStep =
       λ action x →
         BH4.physicalStep (Paid.source M)
@@ -132,7 +133,7 @@ bh4PNPTissueAndNative54BondsSameHistory M W actions x =
 -- Reuse (not recreate) the BH4 / PNP / one-state ordered-energy proof.
 -- The ONLY difference is converting the selected tissue control history
 -- into the existing source's explicit list of Bool interventions.
-bh4PNPAndSignedEnergySameSelectedTissueHistory :
+bh4PNPAndPaidOrderedEnergySameSelectedTissueHistory :
   (M : Paid.SameSourcePaidEnergyModel)
   (W : BH4NativeTissueReadoutWeld M)
   (actions : List Bio.Intervention)
@@ -151,7 +152,7 @@ bh4PNPAndSignedEnergySameSelectedTissueHistory :
      (Paid.energyOf M
        (BH4.physicalRun (Paid.source M) (toBH4History W actions) x))
      (Paid.energyOf M x))
-bh4PNPAndSignedEnergySameSelectedTissueHistory M W actions x =
+bh4PNPAndPaidOrderedEnergySameSelectedTissueHistory M W actions x =
   Paid.allSameSourceBH4PNPWithPaidEnergy
     M (toBH4History W actions) x
 
@@ -186,7 +187,7 @@ allOriginalBH4PNPTissueGeometryAndPaidEnergy :
      (Paid.energyOf M x)))
 allOriginalBH4PNPTissueGeometryAndPaidEnergy M W actions x =
   bh4PNPTissueAndNative54BondsSameHistory M W actions x ,
-  bh4PNPAndSignedEnergySameSelectedTissueHistory M W actions x
+  bh4PNPAndPaidOrderedEnergySameSelectedTissueHistory M W actions x
 
 -- Original native bond endpoint observation after the ONE PAID history,
 -- rather than a nominal 54 element chart.
