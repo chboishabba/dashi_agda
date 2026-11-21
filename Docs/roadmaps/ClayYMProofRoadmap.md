@@ -1,3 +1,33 @@
+## 21 November 2026 — Commuting-square BIDI geometry and all-pairs/time OS1/R556/R281 source weld (cross-PR #1444 synced)
+
+**Canonical updates also written DIRECTLY onto #1444**: `Docs/roadmaps/ClayYMProofRoadmap.md` commit `6fa64a29b67cd765e373c1521b18d14e5606166b` and `Docs/roadmaps/YMClaySteelmanBidirectionalExactRemainingMaxCut20261104.md` commit `f1b4492f294ec87064aeff7ef3a3ced49dd50d0a` on branch `research/ym-voyager2026-completeness-crosswalk-20261101`. This #1536 entry is its **master-based source implementation counterpart**. Do not silently assume commits from either PR are on `master` or the other PR.
+
+**Square A: original native 4D Wilson SU(N) block ↔ reflection/translation.**
+```text
+   original fine 4^4 SU(N) links --T_f^(2k) / θ_f--> fine
+                 | B (original ordered 2-link)        | B
+   original coarse 2^4 links ------T_c^k / θ_c-----> coarse
+```
+Exact free-group original non-Abelian reference locally executed on original selected positive-bond two-link block: `B T_f^(2k)=T_c^k B` **576/576**, `B θ_f=θ_c B` **64/64**, `θ_f T_f^(2k)=T_f^(-2k) θ_f` **9216/9216**. Odd shift `T_f^1` fails expected descended coarse shift on **64/64** bonds; finite coarse C2 `T_c²=id`, so an **unbounded Nat-indexed OS1 time cannot be taken from the fixed R445 side-two torus**. Original exact link-transformation source `YMClayNativeR445TemporalReversalExact` remains reused. #1536 new site-level Agda `selectedNativeSiteTimeSquare`, `selectedFineSiteReflectShiftDihedral`, `selectedCoarseSiteShiftHasPeriodTwo` on `YMClayR445SelectedTimeReflectionForwardExact` are **SOURCE-WRITTEN**, and still need native `fineBlockOrigin`/SU(N) field index identification and Agda kernel. Source reference `scripts/check_ym_original_r445_os1_translation_commuting_square.py` commit `a5ac1429445d57a084751014794c52bc68d4541e`.
+
+**Square B: ORIGINAL selected OS1 time → R556 finite CMP119/T5 covariance → R278 continuum → ONE R281 indexed spectrum.**
+```text
+             R556.timeTranslate G t  ==  OS1.translate G t
+                           | R278 SAME physical state
+                  finite connected covariance at cutoff
+                           | R278 convergence (not equality)
+                  SAME continuum connected covariance
+                           | R281 same ((F,G),t) index
+                    ONE spectrum correlation
+```
+#1536 `YMClayOriginalWilsonOS1R556R281CommutingSquareExact.agda` commit `02f7a13c99b23fa38853432464dd756df9b3d8a4` constructs `originalWilsonTimeTranslationSquare`, `originalFiniteCovarianceSquare` on every exact cutoff source, `originalContinuumCovarianceSquare`, original R278 `originalSourceFiniteContinuumConverges`, `originalSelectedSourceDistanceTime`, and `originalOS1SquareEndsInSameR281Spectrum`, via existing R332/R556 selected time geometry + one all-pairs/time R281 index dictionary. The physical H_OS / dense vacuum domain is NOT supplied by construction, nor any new W1/W3 actual analytic estimates. The arbitrary R278 `Gram.Converges` predicate has not been assumed extensional for pointwise-equal function sequences; do not manufacture funext.
+
+**Original WEXT repair**: `WilsonWEXTDownstreamSemantics` was too strong (required distance=time for every possible distance). #1536 fixes it to the already original selected physical metric, with exact `universalTimeForEveryDistanceIsImpossible` negative control. W1/W3 actual original Wilson marked locality and rooted shell, real original R445 ↔ rational R575 same physical scalar/measure, changing-cutoff continuum, published RP, physical time-rate, one actual reconstructed H_OS, N1 and G1 remain **OPEN**. A rational ℚ source bound must be faithfully related through existing rational→real/Bishop donors to real original Wilson; no arbitrary real→rational physical equality.
+
+**Tool/acceptance**: exact source geometry Python locally PASS as above; original existing Q8 2048/2048 and source word pair 9216/9216 PASS. New Agda code source-written/uncompiled, PR remains DRAFT. Source checked via same existing `DASHI/Unified/YMClayOriginalWilsonPhysicalRegression.agda` and `scripts/check_ym_1444_cmp119_r445_weld_forward.py`; local pinned Agda accepted only if `scripts/check_ym_original_rg_p0_kernel.sh` actually runs and exits zero. P0 Clay endpoint remains **OPEN**, P1 antigravity second.
+
+---
+
 ## 21 November 2026 — BIDI plug ends into original producer geometry; fix actual WEXT universal-metric vacuity
 
 **User rule: "Plug both BIDI gap ends into known producers / geometry; if an error appears, first check existing formalisms."** This cut does that. **P0 original Yang–Mills** remains before **P1 antigravity**. This source audit does not announce a Clay mass-gap proof.
