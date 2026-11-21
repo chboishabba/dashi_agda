@@ -138,3 +138,10 @@ Important: symbolic 1+omega+omega²=0 with sum omega^(3j)=3 is only a C3 angular
 | P0.25-realweld | From actual PtMn3 OTT/MgO original data and superconducting/EM source to same-unit alpha, complete Tmunu, metric/clock/freefall, 70kg lift | OPEN |
 
 | P0.25.1-native13 | Three selected native Axis13 face pairs faceXZpm/faceXYpm/faceYZpm × two canonical orientation bits; original encode/decode commute on selected original Ternary27Point | New Agda source-written six-case proofs; original 26↔13×sign owner reused, **Agda kernel not run** |
+
+| P0.26-source-gradient | Actual L12 Mn3c 120° trial positions, Maxwell harmonic quadratic/cubic/quartic scalar B fields and actual site moment energy | **58/58 local SymPy exact checks PASS**, source moment and field magnitude NOT calibrated |
+| P0.26-inversion | Single triangle lower-rank force in cubic scalar potential; explicit inversion-completed six-site motif cancels it, doubles nonzero STF rank3 | Exact 3D tensor control; actual PtMn3 inversion-complete physical cell OPEN |
+| P0.26-bridge-alpha | For selected 6-site motif with harmonic quartic Φ4, F_up=-3N k4 mu a² and P0.25 alpha_eff=-6 k4 mu a² (O²=1/2) | Exact forward-backward and same-H force derivative, conditional source only |
+| P0.26-sign | Upward required k4 = -mg/(3N mu a²), not positive; magnetic domain sign different from inversion and spinor central sign | Exact opposite-domain/inversion discrimination |
+| P0.26-illustrative | Unfitted mu=3 muB, a=.4nm, N=10^24, 10T at 1mm chosen polynomial: F~1.34e-7N vs 686.47N | Illustrative only, NOT universal experimental feasibility bound |
+| P0.26-physical | Real PtMn3 T1g operator/film, applied coil gradient and source reaction, measured moment, current driven OTT, actual total stress, GR/freefall/clock | OPEN |
