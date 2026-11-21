@@ -69,6 +69,11 @@ import DASHI.Physics.YangMills.BalabanLiteralWilsonMarkedLocalizationSourceExact
 import DASHI.Physics.YangMills.BalabanLiteralTwoWilsonR556CompletionExact as OriginalTwiceWilsonWEXT
 import DASHI.Physics.YangMills.YMClayOriginalWilsonMarkedOS1AllTimesProducerWeldExact as OriginalMarkedOS1BIDI
 
+-- Explicit BIDI same-source square: R556 source vs OS1 translation
+-- commutes on each original finite and continuum R278 covariance,
+-- and closes at one R281 indexed spectrum (not physical H_OS yet).
+import DASHI.Physics.YangMills.YMClayOriginalWilsonOS1R556R281CommutingSquareExact as OriginalOS1CovarianceSquare
+
 import DASHI.Physics.YangMills.YMClayD1OriginalCovarianceToR320Exact as D1OriginalCovariance
 
 import DASHI.Physics.YangMills.YMClayE1VariableCutoffCylinderLimitExact as E1VariableCutoffCylinder
