@@ -7,6 +7,47 @@ This is the **phase/deliverable/remaining-lemma ledger committed with the implem
 
 
 
+## P1 original Earth-reel three-electrode maximum cut — topology, return, metering (U0–U8)
+
+**22 November 2026, source-first correction.** The earlier T0–T8 treatment used a mathematically exact *coaxial reference*, not Filsinger's original apparatus. The existing original reel source inventory is more specific about what was **reported** but less complete about the actual wiring than generic Maxwell models: user-supplied Earth-ground reel `Dfi1D7CPzyM` is reported as **three Earth electrodes**, approximately **3.8 V**, **0.4 W**, and **48 V across two capacitors** (`Docs/research/FilsingerEarthThreeElectrodesZVSFrequencyPull20261110.md`). The speaker's own ground-power attribution is a **claim**, not an independently instrumented observation. Electrode spacing, materials, true three-conductor return, meter pin identities and whether any voltage and real-power readings are synchronized remain UNKNOWN. The *proposed portable plate/antenna* is a different source member and must not be conflated with this filmed Earth configuration.
+
+**Existing exact evidence owners previously overlooked:** `SmithFilsingerSelectedSpaceTimePortWeldExact` already carries the original KSW668 field/time boundary and source-specific signed incident-minus-outgoing physical work; `SmithFilsingerOriginalMaxwellMeterIntervalWeldExact` already has exact original-window, **two-sided signed-meter uncertainty bounds**; `SmithFilsingerOriginalMaxwellRestoredMeterFundingExact` already binds the restored source cycle to that same selected original Maxwell receiver with an additive Nat→ℚ calibration. `SmithFilsingerFiveGateEvidenceAcceptance20261117.md` audits **0/24 available original measurement/evidence roles** in its source-first archive; `Artifacts/smith-filsinger/source_first_original_evidence_contract_20261117.json` leaves original pin graph, physical dimensions, return path, true signed natural/driver/load V/I, and independent replenishment null. **Do not recreate** the stronger meter theorem, count a synthetic test as one of these roles, or interpret a source-owned conditional record as an actually collected measurement.
+
+**New source-scoped exact mathematical no-go:** `DASHI/Physics/Motors/SmithFilsingerThreeEarthElectrodeReturnIdentifiabilityExact.agda` reuses the source's `Bidi.filsingerEarthNarration` and proves the filmed Earth and proposed portable configurations are not definitionally interchangeable. It sets up a finite **illustrative** three-contact passive reciprocal conductance graph with exact ℚ currents, KCL, and terminal-to-edge dissipative work identity; the symbolic polynomial leaves are source-written and **Agda kernel-unverified**. Its independently finite `noUniqueWorkMapFromSinglePairDisplay` encodes a constructive no-go: one identical pair-voltage display can coexist with two different total graph-work values (2 versus 3/2, in arbitrary units), when the third contact is unobserved. This is a model ambiguity, not an original-apparatus power measurement.
+
+**Independent locally executed SymPy 1.14.0 reference:** `scripts/check_filsinger_three_electrode_original_sympy.py`, **44/44 exact checks PASS**, committed SHA of exact executed Git blob **`6d0b969ce537ed9b67c844e8fef1b3da901437ef`**. The passive triad has
+
+[
+I=L V,quad L= egin{pmatrix}
+g_{12}+g_{13}&-g_{12}&-g_{13}\\
+-g_{12}&g_{12}+g_{23}&-g_{23}\\
+-g_{13}&-g_{23}&g_{13}+g_{23}
+end{pmatrix},qquad
+Lmathbf 1=0,quadmathbf 1^TI=0,
+]
+
+and (sum_i V_i I_i=sum_{i<j}g_{ij}(V_i-V_j)^2). Common-mode voltage shifts do not change current or work. The 3×3 Laplacian has rank two under positive edge conductances. Holding the displayed (V_1-V_2=1) fixed while changing the unobserved (V_3) from 0 to 1/2 changes total passive work from 2 to 3/2 for unit conductances. **Therefore one pair-voltage cannot determine complete return-network work**; the proof does not imply that the original reel's missing third contact is actually connected by any particular edge.
+
+**Minimal ideal-model experimental observability:** with voltage relative to electrode 3, (v=(V_1-V_3,V_2-V_3)) and (i=(I_1,I_2)), the reduced passive (2\times2) admittance is (Y=\begin{pmatrix}g_{12}+g_{13}&-g_{12}\\-g_{12}&g_{12}+g_{23}\end{pmatrix}). Under one selected excitation (v=(1,0)), two measured currents give rank 2 for three unknown conductances ((g_{23}) remains invisible). Under TWO independently calibrated full (v,i) patterns (v=(1,0)) and (v=(0,1)), rank increases to **3**, permitting all three conductance parameters to be identified **only within this exact linear reciprocal three-edge network hypothesis**. Actual natural-source identity and chemical, driven, RF or atmospheric work remain unidentifiable from passive admittance alone. Any real operating procedure must be appropriately isolated and professionally instrumented; this is a measurement-information model, not HV intervention guidance.
+
+**Original reading ambiguity:** only under the **unverified same-port, same-time, real resistive load premise** would 3.8 V and 0.4 W imply (I=2/19\text{ A}\approx0.1053\text{ A}) and (R=36.1\,\Omega). A displayed 48 V on two capacitors cannot determine stored joules without their capacitance or series/individual terminal reference; even if each had the same (C), two individual capacitors each at 48 V contain **four times** the total energy of the same two capacitors in series with 48 V across the entire pair. Earlier independent ZVS/acoustic +/-5 Hz questions remain distinct and the observed 7.8 kHz is **acoustic**, not established electrical drive.
+
+| Gate | Exact source / minimum observable | Status |
+| --- | --- | --- |
+| **U0 exact identity** | Original three-Earth-contact reel vs independently proposed portable plates, separate original `Bidi.Configuration` | **PAID as source-typed distinction**; neither full netlist established |
+| **U1 pin/return** | Original pin-to-node graph, electrode names/materials and location, all loop/return current paths | **OPEN original evidence**, existing audit pin/return roles absent |
+| **U2 finite geometry law** | Three-contact passive Laplacian/KCL, (V^TI=\sum g\Delta V^2), common-mode invariance | **44/44 exact SymPy PASS**; Agda rational source written, kernel open; **not a 3D soil Maxwell solution** |
+| **U3 meter non-identifiability** | One meter pair voltage does not determine three-terminal work; alternate third-contact worlds | Exact finite Agda no-go written, local SymPy verified; original meter pair unknown |
+| **U4 true measured terminals** | Two independent selected (v,i) conditions with source-independent calibration, full Earth/driver/load signed return | Illustrative admittance rank 2→3; **real physical traces absent** |
+| **U5 receiver and error** | Original `SelectedSpaceTimePortWeld`, `OriginalMaxwellMeterIntervalWeld`, `OriginalMaxwellRestoredMeterFunding` | **ALREADY source-written**; require actual original simultaneous V/I and two-sided calibration; no new generic meter record |
+| **U6 environmental source** | Isolate natural port from ZVS, electrode chemistry, RF, power supplies, reactive storage, return and source backaction | **OPEN**: same measured aggregate current admits differing source decompositions |
+| **U7 real output/stock** | Synchronize 3.8 V, 0.4 W and 48 V to actual terminal/clock/capacitors, losses and restored cycles | **OPEN**; conditional 0.1053 A, 36.1Ω not source observations |
+| **U8 independent empirical and kernel** | Five-gate original evidence archive / exact Agda 2.9 kernel | Audit 0/24 roles; no pinned local Agda compiler, physical gate remains OPEN |
+
+**Next physical maximum cut:** provenance for the exact three observed ground contacts, simultaneous signed port/current and source independence, and using the **already-written** two-sided meter and restored-cycle theorem for that actual source. A new arbitrary nonlinear 3D Maxwell model with unknown geometry would neither solve the original identification problem nor measure more energy. No live HV or atmospheric intervention is advised.
+
+---
+
 ## P1 actual field-to-port mathematical cut — TEM exact source-access donor and independently instrumented inertial response (T0–T8)
 
 **21 November 2026.** The last Z0–Z7 source weld exposed a genuine missing lemma: sharing an original Filsinger boundary \`b\`, field-to-port record \`f\` and source-cycle \`s\` is NOT sufficient to identify the full-vector Maxwell energy work with the finite mesh's work. We therefore strengthen the existing Agda source, not construct a replacement field ontology.
