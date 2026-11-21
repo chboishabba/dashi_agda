@@ -23,10 +23,10 @@ module DASHI.Physics.YangMills.YMClayOriginalR445ReflectedPointwiseWordWeldExact
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
-open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans; subst)
 
 open import DASHI.Foundations.RealAnalysisAxioms
-  using (ℝ; 1ℝ; _*ℝ_)
+  using (ℝ; 0ℝ; 1ℝ; _*ℝ_; _<ℝ_; _≤ℝ_)
 
 import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Torus
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicBondPathBianchiExact as Bond
@@ -41,6 +41,11 @@ import DASHI.Physics.Foundations.CMP119AntigravityRealGibbsDensityPositiveExact 
 import DASHI.Physics.YangMills.YMClaySUNSideFourBlockedFineHaarObservableExact as Word
 import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicBondPointwiseExact as Pointwise
 import DASHI.Physics.YangMills.YMClayR445SelectedTimeReflectionForwardExact as Geometry
+import DASHI.Physics.YangMills.YMClaySUNSideFourBlockedPushforwardCylinderAlgebraExact as Push
+import DASHI.Physics.YangMills.YMClayFiniteProductHaarOrderedAlgebraExact as Ordered
+import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
+import DASHI.Physics.YangMills.YangMillsPhysicalFiniteMeasureCylinderAlgebraExact as Finite
+import DASHI.Physics.YangMills.YMClaySUNMatrixNativeInversePlaquetteRealTraceExact as InverseTrace
 import DASHI.Physics.YangMills.BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact as Plaquette
 
 module _
@@ -330,6 +335,105 @@ module _
   originalNativeReflectionAtEveryBond fine (Torus.pair (Torus.pair (Torus.pair (Torus.sucᵢ Torus.zeroᵢ) x) (Torus.pair y z)) (Torus.sucᵢ (Torus.sucᵢ (Torus.sucᵢ Torus.zeroᵢ))))
     rewrite Geometry.originalR445NativeOriginIsEven originalGroup (Torus.pair (Torus.pair (Torus.sucᵢ Torus.zeroᵢ) x) (Torus.pair y z)) =
     refl
+
+
+  -- Reuse, rather than postulate, the original prior-owner SU(N) matrix
+  -- trace-inverse contract when the actual Hermitian-adjoint trace law
+  -- is supplied. Cyclicity alone does NOT furnish this identity.
+  originalMatrixAdjointTraceDonor :
+    InverseTrace.SUNMatrixAdjointRealTraceLaw theory traceData →
+    InverseTrace.SUNRealTraceInverseOnNative theory traceData
+  originalMatrixAdjointTraceDonor =
+    InverseTrace.matrixAdjointGivesSUNTraceInverse theory traceData
+
+  -- Same actual ORIGINAL fine 1024-link Wilson-Gibbs measure.
+  originalR445FineMeasure :
+    Physical.PhysicalFiniteYMMeasure FineLinks ℝ
+  originalR445FineMeasure =
+    Push.originalFineGibbsMeasure
+      theory traceData exponential betaFine oneLink bilateral divide
+
+  -- The actual native R445 pushed coarse normalised functional,
+  -- with the selected original time-reflected real Wilson word.
+  originalR445CoarseReflectedQuadratic :
+    OriginalWilsonPointwiseWord → ℝ
+  originalR445CoarseReflectedQuadratic word =
+    Push.actualPushforwardNormalized
+      theory traceData exponential betaFine oneLink bilateral divide
+      (λ coarse →
+        observable word (reflectOriginalCoarseLinks coarse)
+        *ℝ observable word coarse)
+
+  -- Use the ORIGINAL fine measure, no external reflection Gram oracle.
+  originalFineReflectedWordQuadratic :
+    OriginalWilsonPointwiseWord → ℝ
+  originalFineReflectedWordQuadratic word =
+    Physical.normalizedExpectation originalR445FineMeasure
+      (λ fine →
+        observable word
+          (originalSourceR445Block (reflectOriginalFineLinks fine))
+        *ℝ
+        observable word (originalSourceR445Block fine))
+
+  -- Source-owner copy of the same original Haar-congruence argument
+  -- as YMClayOriginalWilsonNativeOSPullbackExact, specialized to
+  -- ACTUAL pointwise Wilson-word observables so no funext is assumed.
+  originalWordOSQuadraticIsNativeR445 :
+    (ordered : Ordered.OneLinkOrderedHaarAlgebra oneLink)
+    (strictToWeak : ∀ {value} → 0ℝ <ℝ value → 0ℝ ≤ℝ value) →
+    NativeR445ReflectionPointwise →
+    (word : OriginalWilsonPointwiseWord) →
+    originalFineReflectedWordQuadratic word
+      ≡ originalR445CoarseReflectedQuadratic word
+  originalWordOSQuadraticIsNativeR445
+      ordered strictToWeak source word =
+    cong
+      (λ numerator →
+        divide numerator
+          (Physical.partitionFunction originalR445FineMeasure))
+      (Finite.haarIntegralCongruent
+        (Push.originalFineIntegrationLaws
+          theory traceData exponential betaFine
+          oneLink bilateral divide ordered strictToWeak)
+        (λ fine →
+          Physical.density originalR445FineMeasure fine
+          *ℝ
+          (observable word
+             (originalSourceR445Block (reflectOriginalFineLinks fine))
+           *ℝ
+           observable word (originalSourceR445Block fine)))
+        (λ fine →
+          Physical.density originalR445FineMeasure fine
+          *ℝ
+          (observable word
+             (reflectOriginalCoarseLinks (originalSourceR445Block fine))
+           *ℝ
+           observable word (originalSourceR445Block fine)))
+        (λ fine →
+          cong
+            (λ value →
+              Physical.density originalR445FineMeasure fine *ℝ value)
+            (cong₂ _*ℝ_
+              (originalReflectedWordCommutesWithR445
+                source word fine)
+              refl)))
+
+  -- Conditional POSITIVITY transport, no new positivity axiom:
+  -- its input must be the ACTUAL fine Wilson RP theorem for the
+  -- selected physically admissible positive-time word.
+  originalWordOriginalFineRPYieldsNativePositive :
+    (ordered : Ordered.OneLinkOrderedHaarAlgebra oneLink)
+    (strictToWeak : ∀ {value} → 0ℝ <ℝ value → 0ℝ ≤ℝ value)
+    (source : NativeR445ReflectionPointwise)
+    (word : OriginalWilsonPointwiseWord) →
+    0ℝ ≤ℝ originalFineReflectedWordQuadratic word →
+    0ℝ ≤ℝ originalR445CoarseReflectedQuadratic word
+  originalWordOriginalFineRPYieldsNativePositive
+      ordered strictToWeak source word originalRP =
+    subst (λ value → 0ℝ ≤ℝ value)
+      (originalWordOSQuadraticIsNativeR445
+        ordered strictToWeak source word)
+      originalRP
 
   -- No identification of the published positive-time word predicate,
   -- no Euclidean RP from positive Gibbs density, no continuum limit,
