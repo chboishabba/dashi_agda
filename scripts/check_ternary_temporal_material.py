@@ -27,13 +27,14 @@ def exact():
     assert sp.expand(g*(v-e)*e-g*v*e+g*e*e)==0
     return 2
 
-def solve(dim,beta,mod_amp,phase,period=8,drive_amp=.12):
+def solve(dim,beta,mod_amp,phase,period=8,drive_amp=.12,material_profile=None,return_history=False):
     B=incidence(dim); n,m=B.shape; size=2*n+m
     src=np.zeros(n);src[0]=1.;rec=np.zeros(n);rec[-1]=1.
     ss=np.outer(src,src);rr=np.outer(rec,rec)
     k=np.arange(period); theta=2*np.pi*k/period
     volt=.3+drive_amp*np.sin(theta)
-    a=A+mod_amp*np.sin(theta+phase)
+    a=A+mod_amp*np.sin(theta+phase) if material_profile is None else np.asarray(material_profile,dtype=float)
+    assert a.shape==(period,) and np.all(a>0)
     e=G*.3/(G+LOAD); p=e/A
     rhs=LOAD*e*rec-G*(.3-e)*src
     h=np.linalg.lstsq(B,rhs,rcond=None)[0]
@@ -102,8 +103,14 @@ def solve(dim,beta,mod_amp,phase,period=8,drive_amp=.12):
     Vhat=np.fft.fft(volt)[1]/period
     Phat=np.fft.fft(Psignal)/period
     Ehat=np.fft.fft(Enear)[1]/period
-    return dict(near=Ehat/Vhat,p1=Phat[1],p2=Phat[2],ledger=max_ledger,defect=defect,
+    result=dict(near=Ehat/Vhat,p1=Phat[1],p2=Phat[2],ledger=max_ledger,defect=defect,
                 external=total[0],source_loss=total[1],load=total[2],relax=total[3],modulation=total[4])
+    if return_history:
+        result["states"]=nodes.copy()
+        result["material_profile"]=a.copy()
+        result["midpoints"]=mid.copy()
+        result["source_profile"]=volt.copy()
+    return result
 
 def main():
     checks=exact()
