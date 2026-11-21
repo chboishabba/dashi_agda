@@ -1,5 +1,14 @@
 # Alpöge/Claude RH–GRH × DASHI geometric transport (21 November 2026)
 
+## 21 November — CURRENT original 5/13/196884, E8/E4 and FRACDASH supersingular reconcilation
+
+**Key source owner recovered:** `Monster196884FibreInterferenceExact` already proves (196884=(5·2)3^9+(3·2)3^2), and `JInvariant369Zeta6561MonsterCrosswalkExact` already proves (196830=3·65610=3·90·729) and (196883=196830+53). These are arithmetic/typed-count bridges, not actual Monster module decomposition. Existing `Base369P2FiveOrbitOrientationGroupoidsExact` owns 5 reduced classes of the nine-sheet × orientation (10 states); existing `HyperfabricPunctured27Projective13OrientationExact` owns the exact original (3^3-1=26↔13×2) codec **and a proven original spatial sign-holonomy no-global-edge-section**. Source original p5 primary exponent 9 / Fricke, original E8 generated norm-two roots & first E4 coefficient 240, native E4/E6 Bishop/Klein-j and original 15-lane Ogg/FRACDASH valuation receipts are all present with distinct paid/open scopes.
+
+**Added source-consumer:** `DASHI/Analysis/RHGRHPrimeE8Punctured27MonsterCMSourceCutExact.agda` reuses these exact owner equality/no-go proofs (not fabricated counts or a new representation). Local independent integer and 27-cube antipode enumeration PASS; no Agda kernel acceptance. The earlier ten finite test primes `p≡1 mod3` have summed 430 elements and 24538 ordered multiplicativity pairs; this sampling **is not** a list of Ogg supersingular Monster primes. No analytic Riemann-ζ vs cyclotomic-ζ₃ identification or original `TP.TLiftK` weld.
+
+**Source-first next priorities:** original P3³ adjacency holonomy → #1291 GovernedIndexedResidualCube six-face indexed sign/residual transport; then strengthen theta_E8↔E4 *beyond* first shell with actual lattice and coefficient identity (and separate E6/Delta modular-j analytic package); then original selected finite cubic `MulChar` Jacobi/CM trace/global Hecke. Preserve `h,t,k,j,v`, zero mode, sign, residual, no false smooth/Monster/physics promotion. Detailed [owner matrix](RHGRHIndexedZeroZetaFilsingerGaloisStarMaxCut20261121.md#21-november--latest-fracdashsupersingular-e8e4-and-513196884-original-owners). TOE #1291 controlling roadmap updated at `b21a3116a279`. No CI.
+
+
 **Monster p=5 extra owner recovered:** beyond the unrelated 9→5 signed-pair quotient, `MonsterFiveArithmeticSourceRecognitionFrontierExact` pays Fricke arithmetic, (v_5(|M|)=9) and two inverse phase pairs, and `Y443JMDBetaFiveSemanticCompilerExact` has conditional `β^5=1` under literal Coxeter rule interpretation. The new RH/CM source compiler imports the p5 arithmetic/valuation owners. Actual pointed Monster action, selected state intertwiners and an original `IsHecke` or `TP.TLiftK` same-object link remain OPEN. This correction is recorded on the owning #1291 9DOF roadmap at commit `65d84231dc8e`.
 
 ## 21 November — CURRENT strongest analytic CM donor after Bishop/modular-j archaeology
