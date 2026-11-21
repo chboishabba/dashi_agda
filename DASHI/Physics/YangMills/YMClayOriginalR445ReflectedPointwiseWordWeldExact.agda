@@ -50,7 +50,7 @@ module _
     (betaFine : ℝ)
     (oneLink : Haar.OneLinkProductHaar (SUN.SUNMatrixElement theory))
     (bilateral : Bilateral.OneLinkSUNBilateralHaar theory oneLink)
-    (divide : ℝ → ℝ)
+    (divide : ℝ → ℝ → ℝ)
   where
 
   Link : Set
