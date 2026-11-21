@@ -74,6 +74,15 @@ import DASHI.Physics.YangMills.YMClayOriginalWilsonMarkedOS1AllTimesProducerWeld
 -- and closes at one R281 indexed spectrum (not physical H_OS yet).
 import DASHI.Physics.YangMills.YMClayOriginalWilsonOS1R556R281CommutingSquareExact as OriginalOS1CovarianceSquare
 
+-- Source-written original R445 fine PositiveBond4 <-> (original 64-coarse
+-- bond, two-link axial phase, three transverse parity bits).  Entire
+-- 1024-bond source partitions into 8 reversible 128-bond binary sheets:
+-- selected residual 000 = original R445 128; seven others = original 896.
+-- This uses EXISTING Base369 2^a*3^b and signed-bit donors; binary 000
+-- is the signed corner (-,-,-), NOT the balanced ternary zero fibre.
+-- No Wilson action symmetry, missing Gibbs estimate or Agda receipt claimed.
+import DASHI.Physics.YangMills.YMClayR445Base2ThreeAxis369FibreBIDIExact as OriginalR445Base2ThreeAxis369
+
 -- P0 original t × k residual HYPERFABRIC: native R445 C4 split into
 -- source-owned C2 coarse × parity remainder, original 128+896 bond
 -- complete enumeration, exact odd-step carry and independent ternary
