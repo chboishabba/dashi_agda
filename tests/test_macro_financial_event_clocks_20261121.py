@@ -30,6 +30,24 @@ class ClockTests(unittest.TestCase):
         self.assertEqual(chronology((a,),"2026-11-05T09:20:00Z"), ())
         self.assertEqual(chronology((a,),"2026-11-05T09:35:00Z"), (a,))
 
+
+    def test_psychological_price_threshold_asof(self):
+        from scripts.macro_financial_event_clocks_20261121 import QuotedPrice, threshold_transitions
+        ticks = [
+            QuotedPrice("2026-11-19T10:03:00Z", 98, "venue"),
+            QuotedPrice("2026-11-19T10:02:00Z", 101, "venue"),
+            QuotedPrice("2026-11-19T10:04:00Z", 105, "venue"),
+        ]
+        self.assertEqual(threshold_transitions(ticks,100,"2026-11-19T10:03:30Z"),("cross-down",))
+        self.assertEqual(threshold_transitions(ticks,100,"2026-11-19T10:05:00Z"),("cross-down","cross-up"))
+        self.assertEqual(threshold_transitions(ticks,99,"2026-11-19T10:03:30Z"),("cross-down",))
+
+    def test_threshold_does_not_create_missing_data(self):
+        from scripts.macro_financial_event_clocks_20261121 import QuotedPrice, threshold_transitions
+        self.assertEqual(threshold_transitions([], 100, "2026-11-19T10:05:00Z"), ())
+        with self.assertRaises(ValueError):
+            threshold_transitions([QuotedPrice("2026-11-19T10:04:00Z", -1, "venue")],100,"2026-11-19T10:05:00Z")
+
     def test_missing_move_is_unknown(self):
         a=row("unknown","2026-11-05T08:10:00Z","2026-11-05T08:11:00Z","2026-11-05T08:12:00Z",None)
         self.assertEqual(directional_flips((a,),"2026-11-06T00:00:00Z"),0)
