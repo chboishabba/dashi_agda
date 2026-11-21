@@ -29,7 +29,7 @@ module DASHI.Physics.YangMills.YMClayOriginalR445NativeF19WeightedPhysicalSource
 
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; _*ℝ_)
 import Data.Vec.Base as Vec
 
@@ -44,6 +44,7 @@ import DASHI.Physics.YangMills.YMClayNativeC3SingleVectorPermutationCertificateE
 import DASHI.Physics.YangMills.YMClayNativePositiveBondEnumerationVectorExact as Codec
 import DASHI.Physics.YangMills.YMClayNative1024WeightedWilsonReindexExact as Original
 import DASHI.Physics.YangMills.YMClayOriginalWilsonCanonicalBlockedMarkF19Exact as F19
+import DASHI.Physics.YangMills.YMClayOriginalWilsonCanonicalMarkedReindexExact as Mark
 import DASHI.Physics.YangMills.YMClayOriginalF19R445Native64HolonomySquareExact as NativeWeld
 
 module _
@@ -80,7 +81,7 @@ module _
   originalNativeR445NumeratorIsOriginalF19 :
     ∀ observable →
     originalNativeR445MarkedNumerator observable
-      ≡ F19.Mark.canonicalOriginalMarkedNumerator
+      ≡ Mark.canonicalOriginalMarkedNumerator
           theory traceData exponential beta source
           (F19.sortedSourceCoarseObservable
             theory traceData exponential beta source bilateral ordered
@@ -105,9 +106,9 @@ module _
           (λ mark →
             Original.originalWilsonVectorWeight
               theory traceData exponential beta canonical *ℝ mark)
-          (NativeWeld.originalF19CoarseWilsonObservableEqualsNativeR445
+          (sym (NativeWeld.originalF19CoarseWilsonObservableEqualsNativeR445
             theory traceData exponential beta source bilateral ordered
-            observable canonical))
+            observable canonical)))
 
   originalNativeR445BlockedNormalized :
     (divide : ℝ → ℝ → ℝ) → (Vec.Vec Link 64 → ℝ) → ℝ
