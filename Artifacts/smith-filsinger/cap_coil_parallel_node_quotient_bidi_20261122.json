@@ -1,0 +1,110 @@
+{
+  "title": "Original Filsinger midpoint transcript BIDI cap-across-coil source-node quotient and parallel antiresonance",
+  "date": "2026-11-22",
+  "source": {
+    "reel": "Provisional Dfu9Jseviz9 only; source documentation is earlier user-provided transcribed speech, not a newly viewed original clip",
+    "primary_repositories": [
+      "Docs/research/FilsingerDonSmithGoldenRectangleLissajousMaxCut20261111.md",
+      "Docs/research/SmithFilsingerSourcePortVirtualCircuitMaxCut20261112.md",
+      "Artifacts/smith-filsinger/midpoint_return_clamp_capcoil_bidi_20261122.json"
+    ],
+    "speaker_descriptions": [
+      "two diodes come off the cap, two diodes come off here",
+      "two off this wire, two off that wire",
+      "all forward facing",
+      "positive outputs ganging together",
+      "return to midpoint, earth, ground",
+      "capacitor across selected coil causes pole shift",
+      "half the potential of big coil"
+    ],
+    "caveat": "None of these statements identifies a photographed complete original pin netlist or a signed source-work meter."
+  },
+  "source_to_nodes": {
+    "hypothesis": "a capacitor C physically ACROSS a coil L (parallel circuit)",
+    "physical_terminal_classes": {
+      "U": [
+        "C.first",
+        "L.first"
+      ],
+      "V": [
+        "C.second",
+        "L.second"
+      ],
+      "P": [
+        "common positive bus"
+      ],
+      "M": [
+        "transformer midpoint/possible load return"
+      ]
+    },
+    "interpretation": "The two labelled components are not two independently powered source nodes: C.first=L.first=U and C.second=L.second=V if truly across the same coil.",
+    "diode_end_cases": [
+      {
+        "id": "P-OPP",
+        "physical": [
+          "2 packages anode C.first",
+          "2 packages anode L.second"
+        ],
+        "quotient": [
+          "2 from U to P",
+          "2 from V to P"
+        ],
+        "distinct_electrical_inputs": 2,
+        "physical_source_promotion": false
+      },
+      {
+        "id": "P-SAME",
+        "physical": [
+          "2 packages anode C.first",
+          "2 packages anode L.first"
+        ],
+        "quotient": [
+          "4 from U to P"
+        ],
+        "distinct_electrical_inputs": 1,
+        "physical_source_promotion": false
+      }
+    ],
+    "conditional_anti_phase": "If electrical U-M=+v and V-M=-v, ideal positive diode OR at P-M yields |v|; this does not prove CT, cap/coil, bridge or Filsinger apparatus identity.",
+    "negative_control": "A conventional bridge also produces rectification, but the spoken 'all forward-facing positive ganging' if literal cathode-to-P is better aligned with a positive diode-OR skeleton than with four oriented bridge diodes."
+  },
+  "parallel_lc": {
+    "assumptions": "parallel ideal C and L share both terminals, loss conductance G>=0, positive omega; prescribed sinusoidal terminal voltage phasor V in RMS units",
+    "Y_C": "i omega C",
+    "Y_L": "1/(i omega L) = -i/(omega L)",
+    "Y_terminal": "G+i(omega C -1/(omega L))",
+    "resonant_omega": "1/sqrt(LC)",
+    "at_ideal_antiresonance": "capacitor current = - inductor current; net reactive input current zero; terminal admittance G",
+    "power": "Re[V * conjugate(Y*V)] = G |V|^2; each ideal C/L contributes zero average real work; time-domain reactive state returns over complete period",
+    "external_source_with_series_resistance": "V_tank=V_source/(1+Rs Y); I_source=V_source Y/(1+Rs Y); Re[V_source conjugate(I_source)]=G |V_tank|²+Rs |I_source|²",
+    "forward_observables_at_antiresonance": "with Rs,G>0, terminal voltage amplitude maximum and source current magnitude minimum as function of detuning B, all other model parameters fixed",
+    "important_correction": "A capacitor ACROSS a coil is parallel LC and may produce HIGH impedance antiresonance; prior Z=Rs+i(omega L-1/(omega C)) is a SERIES LC topology, must not represent this literal across-coil interpretation.",
+    "unknowns": "Actual original capacitance/inductance/wire resistance/driver electrical frequency, nonlinear core and magnetically coupled return may invalidate this simple linear model."
+  },
+  "bidi_inverse": {
+    "one_frequency": "B(omega)=omega C- (1/L)/omega is a single row of rank one for unknown C, 1/L; infinite positive C/L pairs can share the same measured B",
+    "two_distinct_electrical_frequencies": "[B1,B2]^T = [[w1,-1/w1],[w2,-1/w2]] [C,1/L]^T; det=(w2²-w1²)/(w1 w2); nonzero for positive unequal measured electrical w1,w2",
+    "additional_conditions": "A terminal admittance estimate requires true synchronized complex electrical V/I, known shunts/load G, same physical branch and unchanged source parameters over sweep; if driver nonlinear or nonstationary, model no longer identifies physical C and L.",
+    "audio_boundary": "The reported 7800Hz +/- 5Hz is ACOUSTIC; cannot be used as actual electrical angular frequencies for source inversion.",
+    "hypothetical_nominal": "If 3.33uF were the coil's actual capacitance and 7800Hz actually electrical, ideal parallel LC resonance requires approx L=125.02787 microhenry; neither premise is established.",
+    "independent_natural_work": "Even unique C and L would not identify external Earth/atmospheric/chemical/RF real-power origins without a separately signed physical port.",
+    "distinct_earth_reel": "The separate Dfi1D7CPzyM 3-ground 3.8V/0.4W/48V displays are not same-time port readouts for this midpoint hypothetical."
+  },
+  "acceptance": {
+    "local_script": "/mnt/data/check_filsinger_parallel_lc_node_bidi_sympy_20261122.py",
+    "locally_executed": "78/78 exact SymPy 1.14 PASS, full source-node quotient + passive Rs,G and inverse rank, local file",
+    "committed_companion": "scripts/check_filsinger_cap_coil_parallel_node_bidi_sympy_20261122.py",
+    "committed_companion_status": "Source-written after full local execution; separately verify byte-exact execution before labeling as such",
+    "agda": "DASHI/Physics/Motors/SmithFilsingerCapCoilParallelNodeQuotientBidiExact.agda",
+    "agda_status": "Source written only; local Agda binary unavailable; original Maxwell/meter physical weld not proved",
+    "source_hardware": "0/24 raw original real-world evidence roles supplied in preexisting audit"
+  },
+  "next_source_specific_discriminators": [
+    "Does filmed cap C actually share both physical terminal nodes with selected coil L? 'Across' is a speaker claim, not a pin proof",
+    "Are cap-labelled diode anodes off C.first/C.second and coil-labelled ones off L.first/L.second? Might be same node or opposite ends after quotient",
+    "Are joined positives really diode cathodes at P, and is M an actual return for the measured load?",
+    "Does frequency-dependent electrical source current dip while terminal voltage peaks and opposing branch reactive currents rise? Requires actual electrical (not acoustic) clock.",
+    "Are all original signed driver/earth/environment/output and storage terms physically sourced and time-matched?"
+  ],
+  "safety": "No exposed kilovolt circuit assembly, probing or unsafe experimental instructions; purely source-stated inverse and ideal finite physical modeling."
+}
