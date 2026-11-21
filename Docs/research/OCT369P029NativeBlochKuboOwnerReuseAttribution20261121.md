@@ -1,4 +1,9 @@
 # OCT369 P0.29 — Existing Bloch, Kubo and topology owner weld
+
+
+## Retrospective correction to P0.29 — prior experimental and computational knowledge
+P0.29's four nonzero momentum-dependent illustrative susceptibilities are **NOT** an experimental discovery, nor a new observation of momentum dependence. Original CoTaSe2 published ARPES constraints already contain measured momentum/temperature band structure; native CoTaSe2 Bloch/Kubo/quantum-geometry consumers and MMP retarded linear-response numerics already compute momentum/frequency response conditionally. Kang et al 2026 independently reported PtMn3 octupole switching/TMR and published k_parallel-projected *theory/transport channels*; do NOT misdescribe those plots as measured static chi_OO(k). P0.29 made a **cross-owner compatibility regression on an unfitted Mn3 model** only. This correction supersedes any suggestion of experimental novelty in P0.29; no established provenance or acceptance numbers are changed.
+
 2026-11-21. Source priority: native original implementations first, before adding any new Bloch or response model.
 
 Native executable owners:

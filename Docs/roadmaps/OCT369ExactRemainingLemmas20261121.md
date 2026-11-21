@@ -166,3 +166,9 @@ Important: symbolic 1+omega+omega²=0 with sum omega^(3j)=3 is only a C3 angular
 | P0.29-topology | Existing band Berry Kubo vs projective curvature, arbitrary per-band phase and rank-two Wilson U(2) gauge | numerical PASS with proper isolated gap/negative control |
 | P0.29-retarded | Causal finite pulse response vs independently time-propagated finite difference and future-source no-response | PASS to 7.58e-6 at 500 midpoint steps; not static equilibrated Kubo or real switching |
 | P0.29-Sato-Hayami | Original full M_ijk gauge-invariant Eq.11 with mixed k/h geometry, energy/occupation and original material same-gauge Wannier | OPEN; ordinary Berry/linear susceptibility insufficient |
+
+| P0.29-correction | Nonzero momentum-dependent response pre-exists in CoTaSe2 original experimental band/source constraints and native Bloch/Kubo/MMP computations, Kang PtMn3 published theoretical k_parallel channels | **NOT new physical response discovery**; retain 54/54 only as P0.29 cross-producer regression |
+| P0.30-domain | Same P0.18 H domain reversal: O expectation odd; chi_OO even under (k,domain)→(-k,-domain) | **59/59 local P0.30 checks overall**, max residual 2e-15; chi alone cannot identify domain |
+| P0.30-q | Finite 3-cell Fourier source O_q transfers k→k+q, uniform O is k-diagonal; exact C3 DFT cross-check | Exact 3x3 SymPy + finite 18D Kubo; q=1/3 source is NOT long-wave B-Hessian |
+| P0.30-Maxwell | Same finite 18D H with site-resolved locally harmonic cubic Phi, mixed grand potential Maxwell relation dM/dmu=dN/dG | PASS residual 8.73e-8; finite dimensionless source, NOT original Sato-Hayami Eq11 or literal film |
+| P0.30-next | Original full 18-component periodic-kh spin octupole and same-material source-calibrated B gradient, surface, controller, gravity | OPEN |

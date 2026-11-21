@@ -51,5 +51,7 @@
     "theory": "Oike et al PRB 2025; Sato/Hayami npj Quantum Materials 2026",
     "experiment": "Kang et al Nature 2026",
     "new": "OCT369 order-conjugate conditional regression"
-  }
+  },
+  "original_experimental_discovery_claim": false,
+  "novelty_correction": "Momentum-dependent nonzero response was known in source literature and earlier DASHI experiments/computation. P0.29 tested cross-producer consistency on an unfitted Mn3 model; not a new empirical effect. See P0.30 audit."
 }
