@@ -1,41 +1,42 @@
 module DASHI.Analysis.GRHNative27ConsumerDescentExact where
 
--- The principal 27 digit chart is explicitly tied to the SAME native
--- 3×3×3 geometric carrier. This is not a mere count-of-27 replacement.
--- Source owners are reused; no new residue or cube datatype is introduced.
+-- Reuse the SAME native geometric 27 via its original reversible digit chart.
+-- The exact consumer-sufficiency owner is QueryFactorisationSufficiency:
+-- do not define a parallel FactorsThrough/Factorisation interface here.
+-- No external GRH theorem is assumed by this finite geometric theorem.
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Unit using (⊤; tt)
 open import Data.Empty using (⊥)
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as G
 import DASHI.Moonshine.JInvariant369Cube27CuspCodecNonIsometryExact as Chart
+import DASHI.Core.QueryFactorisationSufficiency as Query
 
--- Every consumer on original points can be reconstructed from the
--- complete three-coordinate residue chart, using the original inverse.
--- This proves consumer-specific FactorsThrough at this precise granularity.
-record Factorisation {State Surface Outcome : Set}
-    (project : State → Surface)
-    (consumer : State → Outcome) : Set where
-  field
-    recovered : Surface → Outcome
-    factors : (s : State) →
-      consumer s ≡ recovered (project s)
+cong27 : {A B : Set} (f : A → B) {x y : A} → x ≡ y → f x ≡ f y
+cong27 f refl = refl
 
+sym27 : {A : Set} {x y : A} → x ≡ y → y ≡ x
+sym27 refl = refl
+
+pointConsumerQuestions :
+  {Outcome : Set} (consumer : G.Ternary27Point → Outcome) →
+  Query.InquiryQuestionFamily G.Ternary27Point ⊤
+pointConsumerQuestions {Outcome} consumer =
+  Query.inquiryQuestionFamily (λ _ → Outcome) (λ _ point → consumer point)
+
+-- Every complete encoded point is sufficient for its original point-consumer.
+-- This instantiates the canonical theorem record, not a new quotient ontology.
 complete27ChartFactors :
   {Outcome : Set} (consumer : G.Ternary27Point → Outcome) →
-  Factorisation Chart.encodeCubeDigits consumer
-complete27ChartFactors consumer = record
-  { recovered = λ digits → consumer (Chart.decodeCubeDigits digits)
-  ; factors = λ p → sym (cong consumer (Chart.decodeEncodeCube p))
-  }
-  where
-    cong : {A B : Set} (f : A → B) {x y : A} → x ≡ y → f x ≡ f y
-    cong f refl = refl
-    sym : {A : Set} {x y : A} → x ≡ y → y ≡ x
-    sym refl = refl
+  Query.FactorsThrough
+    (pointConsumerQuestions consumer) Chart.encodeCubeDigits tt
+complete27ChartFactors consumer =
+  Query.factorsThrough
+    (λ digits → consumer (Chart.decodeCubeDigits digits))
+    (λ point → sym27 (cong27 consumer (Chart.decodeEncodeCube point)))
 
--- The geometric edge relation is not the cycle's +1 successor.
--- A digit chart is a geometric COORDINATE CHART with transported
--- geometry, not permission to substitute a different edge relation.
+-- A geometrically marked 27 and its residue digits are two complete charts
+-- of the same point set; the cyclic +1 adjacency is NOT the native grid edge.
 carryCornerNotAnEdge :
   G.HypervoxelAdjacent G.positiveCorner G.negativeCorner → ⊥
 carryCornerNotAnEdge = Chart.wrappedCornersAreNotGridAdjacent
