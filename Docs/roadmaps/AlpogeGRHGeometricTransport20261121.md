@@ -1,3 +1,29 @@
+## 21 Nov 2026 — current local harness acceptance receipt (not Lean)
+
+Verified on the **exact blob** of the committed Lean #113 script
+`proofs/alpoge-lean433/check_original_p0_admission.sh`,
+Git content SHA `e08464dcf4c51978d9d6799289d6f4e0f9fe2c0c`:
+the locally materialized byte-for-byte script had the *same*
+`git hash-object`, passed `bash -n`, and without Lean/Lake exited
+fail-closed code **12** before any heavyweight checkout. Its ACTUAL
+embedded `#print axioms` parser passed three local fixtures:
+(1) all FIVE accepted standard-axiom receipts,
+(2) one absent original-target receipt correctly BLOCKED,
+(3) a `sorryAx` unexpected axiom correctly BLOCKED.
+No GitHub CI run. No pinned Lean kernel was installed or run here;
+there is **no legitimate claim** that `RHAdmission.lean` typechecked,
+nor that the root cross-version or Agda character/zero correspondence
+is now discharged.
+
+This receipt advances the **local acceptance harness only**,
+not the original GRH mathematics. Next exact source payment is
+a true local Lean 4.33.1 build/replay using the user's pinned fork,
+followed by root/Agda same-object proof transport. Update THIS
+already-established roadmap and the active PR whenever committing
+the next source result. Additional documents remain evidence annexes.
+
+---
+
 ## 21 Nov 2026 — P0 direct original Main acceptance is the NEXT LOCAL CHECK
 
 **Not another GRH plan or proof wrapper:** the already-existing
