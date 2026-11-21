@@ -1,3 +1,132 @@
+## 22 November 2026 — original RH source mathematical test: fixed-W and actual-zeta tail
+
+**STATUS: nontrivial exact mathematical advance; no native kernel acceptance
+or RH/GRH theorem promotion.** This correction was obtained by source
+inspection of the ORIGINAL main theorem owners, independent local SymPy 1.14,
+and explicit adversarial tests. Detailed source equation, original
+file SHA list and acceptance logs are in the EXISTING R2 owner
+Docs/roadmaps/ClayRHR2ExplicitA160SelectedWRemainingLemmas20261117.md
+(commit ad0dcf69); do not start a separate proof roadmap.
+
+1. **Actual original uniform pole-witness obstacle now has an explicit
+   mathematical solution.** The original
+   RiemannProjectiveQuarticFourWindowUniformPoleWeight.lean has a
+   theorem proving t>=200 pole-weight Lipschitz K=19*cosh(1);
+   the original nonnegative unit-bump localization and 2x2
+   determinant perturbation theorem apply without changing the
+   selected witness. Four-window coefficient sum is 83/30;
+   atomic determinant entries <=5. Consequently each smooth entry
+   varies by <=(83/30)*K*R and determinant varies by
+   <=22*(83/30)*K*R when the entry discrepancy <=1.
+   The exact original determinant tolerance is
+   eta0=min(1,(7*pi^4/800)/(2*(4*(10+pi^4)+2))).
+   Thus one t-independent sufficient selected radius is
+   delta*=eta0/[22*(83/30)*19*cosh(1)]
+          =5.53270840772e-7 approximately.
+   The original source compiler
+   exists_uniformQuarticFourSignedPoleCore_of_uniformPoleLocalization
+   already converts this named uniform determinant input into one
+   fixed R and one selected muHalf/muTwo for all t>=200.
+   Critically, the source property
+   UniformQuarticFourPoleDeterminantCompilerTarget is NOT YET
+   inhabited by a Lean theorem: implement this explicit
+   epsilon-radius proof and kernel check, do not falsely
+   book it as already formally accepted. This sharpens the
+   previous "t-dependent R prevents uniformity" bottleneck.
+
+2. **Complete selected-W horizontally weighted Fourier tail.**
+   The source-already-proved
+   W.signedNormalizedPairKernel_eq_combinedIntegral
+   and signedLiteralPairSourceTerm_eq_normalizedPairKernel
+   preserve original pole signs, full cosh(alpha x) factor,
+   actual zeta zero multiplicity and physical t/16 scaling.
+   With b_j=||source unitBump^(j)||_1/||unitBump||_1,
+   b0=1, and fixed R<delta*, source Fourier and
+   Leibniz algebra gives
+   Mstar_j(R)=576*(83/30)^2*sum_{k=0}^j
+      binom(j,k)*(2^(j-k)+1)*b_k/R^k.
+   For t>=200 and actual |alpha|<=8/t<=1/25,
+   Dstar(R)=exp((pi+1)/25)*sum_{j=0}^4
+       binom(4,j)*(1/25)^(4-j)*Mstar_j(R).
+   Then |K_W(alpha,q)|<=Dstar(R)/|q|^4
+   and each actual off-ordinate zero term is bounded by
+   mult(rho)*(t/16)^2*Dstar(R)/|Im(rho)-t|^4.
+   Dstar is finite/symbolic and independent of t
+   GIVEN fixed width; source actual b1..b4 are not
+   numerically instantiated, and there is no effective
+   finite-t signed estimate from this alone.
+
+3. **Actual zeta zero count, both ordinate signs.**
+   The ORIGINAL Synthesis/RiemannZeta23RvMArbitraryEndpointCountBound.lean
+   already has a literal multiplicity-weighted interval
+   N(A,B)<=C_N*(B-A+1)*log(B+4), 5<=A<B.
+   Original Synthesis/RiemannZeta23RvMTwoSidedDiscrepancy.lean
+   transfers negative heights by actual conjugation.
+   For n (natural) >=t+7, the right unit shell and
+   left conjugated width-two safety envelope give
+   count <=5*C_N*log(2k) at each k>=n. Therefore the
+   source-complete *absolute* far tail is at most
+       5*C_N*(t/16)^2*Dstar(R)*
+       [log(2n)/n^4 + log(2n)/(3*n^3)+1/(9*n^3)].
+   With n(t)=ceil(t+7), RHS=O(log(t)/t) as t->infinity.
+   This is a genuine source-grounded t-dependent cofinal
+   absolute control, NOT a uniform fixed-n result and
+   NOT the necessary strict SIGNED compensation.
+   The old cumulative A=160 shell bound is a weaker
+   valid fallback, not the best original donor.
+
+4. **Executed tests**: local SymPy 1.14.0 generated
+   256/256 exact determinant sign/error corner cases,
+   12,010/12,010 original pole weight derivative numerical
+   stresses, the four-window norm envelope and exact
+   horizontal weighted fourth derivative, the logarithmic
+   tail anti-derivative and t-varying limit.
+   New script committed in same Agda #1533
+   scripts/check_rh_r2_uniform_pole_and_two_sided_tail_20261122.py
+   at commit 98eaf7e6; GitHub source readback SHA
+   76073cd50eb9befd03cb57bd61f771fef9b098a5.
+   A local mathematically matching file was executed,
+   but the exact committed bytes were not separately
+   executed; no native Lean/Agda kernel run.
+
+5. **External proof comparison actually checked, not inferred
+   from breadth**: pinned original Lean source
+   Supplements/Kernels/MainTheorems.lean and
+   CharacterBoxes/MainConclusion.lean explicitly define
+   allChi := UpperTheory.FinalTheorems.everyCharacter,
+   rhOfAll := Formalism.VW.rh_of_every allChi.
+   Formalism/GammaFactorNonvanishing/CritLine.lean
+   specializes this at modulus 1 to Mathlib zeta.
+   CharacterBoxes/ClaimStrip.lean supplies
+   primitive/imprimitive positive-real-half-plane
+   factor nonvanishing and reflection.
+   Hence the author's stated proof chain has
+   *stronger terminal Dirichlet quantification* than
+   the current native DASHI G3 conditional terminal
+   compiler. But source declarations and imported
+   author literature dependencies are NOT the same
+   as verified kernel-accepted derivations in the
+   chosen environment. Without the actual compatible
+   Lean replay / #print axioms, do not promote the
+   external GRH claim as trusted; no logical comparison
+   of native versus external kernel admission has
+   been independently completed.
+
+**Next original RH mathematical leaf**, not a paper/wrapper:
+prove/implement the named uniform pole determinant theorem
+in Lean with the exact radius; then quantify the selected
+source true signed cone/good/far compensation against
+the already exact completed zeta target threshold.
+The current original UniformSignedCompensationGap rho
+is still a premise per (t,W,rho), with its own eps,N
+quantifiers; do NOT silently strengthen it to one
+global eps across all t,W,rho. Other signed-fifth,
+A2 and projective zero-mode independent routes remain
+open producers; no RH claim. External Lean original
+trusted theorem admission is parallel.
+
+---
+
 ## 22 November 2026 — selected-W FULL horizontal-weighted q^-4 formula (symbolically discharged, constants/uniformity OPEN)
 
 Following the source correction, the original Lean theorem
