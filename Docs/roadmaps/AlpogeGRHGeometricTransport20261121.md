@@ -114,3 +114,59 @@ P5: only then promote downstream claims to native Lean/Agda accepted instances.
 **New direct spectral cut `RH-WEIL-02` (OPEN):** use the R1 original completed zeta/explicit formula and independently established RH to obtain the *classical* Weil-square nonnegative form; derive the same form from the native DASHI operator only with an actual unitary/isometric map or a quantified operator discrepancy. Demand finite tests with exact source data and nontrivial negative controls. This is a meaningful stronger geometry target, not automatic from GRH.
 
 The original Lean/Agda checker commands were **not** executed during this PR reconciliation; this tranche reports GitHub connector readback and committed roadmap text only.
+
+
+## 2026-11-21 geometric 27 correction — consumer-indexed factors-through (supersedes generic 'two unrelated 27s' rhetoric)
+
+**User-intended native identity:** the spatial 27 is literally a balanced ternary 3×3×3 cube. `JInvariant369Cube27CuspCodecNonIsometryExact.agda` already supplies an **explicit inverse digit chart** connecting *the same 27 positions* to the `Residue3Pow 3` representation. The correct classification is **same underlying geometric carrier under an exact chart**, with geometry transported along that chart; it is not 'merely 27 values'. Treating the residue as an unrelated 27-element set discards structure and is consumer-incorrect.
+
+What is *not* an equality: the **cyclic addition-by-one graph** in the modular-coordinate presentation and the **native 54-edge nearest-neighbour cube graph**. The existing `residueCarryWrapsSpatialCorners` and `wrappedCornersAreNotGridAdjacent` prove this mismatch: carry takes the +++ corner to ---; a 27-cycle is not a spatial nearest-neighbour walk. Thus a statement about the residue chart (same underlying cube) does **not** assert that all residue arithmetic operations preserve the physical cube adjacency.
+
+The actual consumer question is: `Does the proposed observer retain enough structure for this consumer?` The original `DASHI/Core/QueryFactorisationSufficiency.agda` states `q = qbar ∘ pi`. `DASHI/Core/ConsumerDescentMinimalObserverExact.agda` proves factorization requires the consumer be constant on coarse fibres, with an explicit non-descent collision witness. `DASHI/Core/ConsumerFibreRepairExact.agda` proves any successful refinement separates that collision. A full, invertible 3-trit chart retains **every point-consumer**; an observer retaining only `cardinality = 27`, `n mod 3`, or a chart with erased spatial marking cannot answer geometry-dependent adjacency/transport queries automatically.
+
+**New source-written implementation** `DASHI/Analysis/GRHNative27ConsumerDescentExact.agda`: `complete27ChartFactors` provides the explicit consumer reconstruction from the original `encodeCubeDigits`/`decodeCubeDigits`; `carryCornerNotAnEdge` and `carryMapsCorners` reuse original constructive witnesses. It does not invent a second cube, prime residue carrier or axiom. Source-written only, **Agda typechecking not run**.
+
+**Local SymPy 1.14.0 acceptance (not CI):** 27/27 invertible chart comparisons, 54 native edges, cyclic carry corner counterexample, six permutation-order commuting endpoints on 27 points, noncommuting carry/coordinate map witness, modulo-three collision with changed z consumer, and exact `tr(L),tr(L²)` of spatial/cyclic graph Laplacians (108,558 versus 54,162) passed. This is a finite Python-model receipt and does not typecheck Agda or import external RH.
+
+### Commuting cube is a strictly stronger *diagrammatic* extension of the square
+
+The earlier statement 'there are two different cubes and only the diagrammatic cube matters' is too rigid. An **indexed diagrammatic cube** is an 8-object, 12-arrow, 6-square-face coherence law built from the already-existing commuting squares; its vertices/observables may contain the **same original spatial 27 geometry** and its hyperfabric fibres. This directly extends `ZetaIrrationalFibreCommutingSquareBidiExact.StageCommutingSquare`, `CommutingProvenanceBidiCrossPollination2026Exact.CommutingProjection` and `PhysicsLimitCommutingSquare.ExactCommutation`, preserving all six faced paths with stronger three-way path independence. It does not erase or replace the squares.
+
+Existing `#1291 GovernedIndexedResidualCubeExact` keeps the six individual face witnesses and the six monotone endpoint orderings. For exact faces the six paths cohere at endpoints; for controlled residual faces equality must **not** be fabricated, and an indexed residual holonomy is required. Distinguish equality of terminal *values* from equality of higher proof objects. The diagrammatic cube's 8 objects are **not** a declaration that a spatial cube has 8 positions. They are orthogonal structural levels.
+
+The actual GRH cube should specialize:
+1. Original spatial 27 / residue three-digit chart with native geometry carried by the chart;
+2. the genuine `DASHI.Analysis.ZetaIrrationalFibreCommutingSquareBidiExact` finite zeta/prime-counting square (does **not** establish an analytic limit);
+3. the source original `RiemannAnalyticSubstrate` + classical R1 completed-ζ/Guinand–Weil formula from the Clay rollup;
+4. indexed residual or conditional exact square connections that retain (h,t,k,j,v), and a verifier/corollary only when the **same source** is identified.
+
+No fake analytic square from a finite modular/zeta carrier is allowed.
+
+## C01–C22 repo ownership reconciliation (existing donors, not all finished original algorithms)
+
+This is a search and source-ownership classification for **the claims inventory**, not a conclusion that all 22 conditional complexity claims are already proved. Reuse existing owners first, and only add missing original GRH bounds after checking which consumer is actually unpaid:
+
+| Claim IDs | Existing repository implementation/donor and reuse instruction | Original GRH-bound evidence |
+| --- | --- | --- |
+| C01 | `DASHI/Analysis/NatPrimeCountingInstance.agda`, prime predicate/finite sieve constructors; do not confuse primality predicate with Miller deterministic witness search | Miller/GRH complexity certification **OPEN** |
+| C02–C03 | `DASHI/Mathematics/Arithmetic/EllipticCurveFrobeniusExact.agda` and modular arithmetic / field carrier donors; finite operations are not general deterministic-root complexity | Conditional nonresidue/root algorithm **OPEN** |
+| C04–C05 | `DASHI/Reasoning/GF27CompilerBootstrapIntertwinerBoundaryExact.agda`, `DASHI/Moonshine/OggSSPMonster3BSelectedGF729WeldExact.agda`, `scripts/j369_kernel_field_recognition.py`, #1291 Route C normal-basis/Frobenius; selected field is not arbitrary finite-field construction | General deterministic factoring/construction bounds **OPEN** |
+| C06 | `DASHI/Crypto/FiniteFactorArithmetic.agda` and `ShorFactoring.agda`, plus RSA260 GNFS actual implementation; factoring circuit/complexity source theorem **not** inferred from finite arithmetic | reduction-to-φ proof source audit **OPEN** |
+| C07, C18 | `DASHI/Analysis/PrimeCountingFunction.agda`, `NatPrimeCountingInstance.agda`, `DASHI/Arithmetic/TwinPrimeCertifiedEnumeratorExact.agda`, `SignedSSPTwinPrimeCompletionLemmaMatrix.md` related prime generation; finite sieve is not GRH least-prime/gap bound | explicit analytic GRH/RH bounds **OPEN** |
+| C08–C09 | Karp-21 native checker / Lean Clay and SAT complexity rollups; do not infer Hilbert Nullstellensatz AM membership or VP=VNP from verifier presence | HN→AM, algebraic complexity original source audit **OPEN** |
+| C10 | Formal computational history / bounded machine trace and Karp native machine gates; no identified original 744-state machine or certificate from repository search | exact machine and undecidability-to-GRH reduction **OPEN** |
+| C11–C12 | RH/Clay original analytic substrate and class-group/number-field adjacent arithmetic owners; PARI/GP and Magma are external engines | version/algorithm/required Hecke or Dedekind L scope **OPEN** |
+| C13 | BSD selected CM level-32, `EllipticCurveFrobeniusExact.agda`, modular j/CM scripts | general EC generation runtime theorem **OPEN** |
+| C14–C16 | `DASHI/Crypto/ShorDiscreteLog.agda`, `ShorOrderFinding.agda`, `GeneralShor.agda`, isogeny scripts; quantum Shor implementations do not prove the claimed average-case EC/lattice/isogeny implications | conditional security/attack results **OPEN** |
+| C17 | prime residue/CRT owners and BIKE-specific parameter theorem not located in direct repository search | BIKE prime-bound source audit **OPEN** |
+| C19–C21 | Original P≠NP, RSA260, curve and crypto complexity ledgers; negative-claim controls and practical benchmarking should be distinct | no positive P≠NP/crypto security promotion |
+| C22 | finite-field/Frobenius and modular representation owners, e.g. `OggSSPMonster3BSelectedGF729WeldExact.agda`; published finite-field RH already independent of new Dirichlet GRH | no new RH-dependent theorem claimed |
+
+The phrase '**we have most of them**' is respected as an **owner-reuse direction**, not contradicted by absent keyword hits: named donors exist for most domains. Completeness of *specific algorithms and asymptotic theorems* requires full source tracing, especially across branches and the Lean repository; an absent search hit is **not proof of absence**.
+
+## Updated execution next cut
+
+- Promote **consolidation before duplication**: consume original R1 Guinand–Weil theorem from the existing six-Clay rollup as the source of truth for completed ζ/explicit-formula mathematics, and existing C3/zeta squares as the lower faces.
+- Construct the diagrammatic cube using actual original 27 carrier **through the reversible digit chart** and consumer-indexed factors-through. Maintain exact symmetry/geometry action mismatch receipts and residuals; neither a bare cardinality code nor an unlabelled Z/27 cycle substitutes.
+- Attach a chosen GRH consequence to an existing prime/field algorithm **only** after its original conditional theorem is matched (bound, encoding, complexity, assumptions). Do not assert that every screen consequence follows from Dirichlet GRH.
+- SymPy **local-only** regression receipts for finite diagrams; CI not used or requested. Agda/Lean acceptance stays explicitly OPEN.
