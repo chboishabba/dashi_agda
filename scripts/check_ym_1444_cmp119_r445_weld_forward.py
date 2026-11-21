@@ -58,6 +58,18 @@ OWNERS = {
         "cong₂ _-ℝ_",
         "cong₂ _*ℝ_",
     ],
+    "DASHI/Physics/YangMills/YMClayOriginalF19R445EveryLinkValueBIDIExact.agda": [
+        "originalAllOriginalLinkValuesPreserved",
+        "originalEveryCanonicalVectorAgreesWithR445",
+        "originalEverySortedValueConsumerAgrees",
+        "Labels.originalF19Complete1024LabelOrderMatchesR445",
+    ],
+    "DASHI/Physics/YangMills/YMClayOriginalF19R445ActualSortedVectorBIDIExact.agda": [
+        "originalF19TargetVectorValuesAreR445",
+        "originalPhysicalF19ActualSortIsOriginalR445Codec",
+        "originalEveryActualSortedWilsonConsumerAgrees",
+        "Sorted.actualPairSpectatorReindexEveryOriginalVector",
+    ],
     "DASHI/Physics/YangMills/YMClayOriginalF19R445Full1024LabelsP0Exact.agda": [
         "originalF19SelectedPrefixMatchesR445",
         "originalF19Original896SpectatorsMatchR445",
@@ -161,6 +173,8 @@ OWNERS = {
         "YMClayOriginalF19CanonicalConnectedWilsonBIDIExact",
         "YMClayOriginalF19NativeR445SelectedOrderBIDIExact",
         "YMClayOriginalF19R445Full1024LabelsP0Exact",
+        "YMClayOriginalF19R445EveryLinkValueBIDIExact",
+        "YMClayOriginalF19R445ActualSortedVectorBIDIExact",
     ],
     "DASHI/Physics/YangMills/YMClayNativeR445TemporalReversalExact.agda": [
         "originalSUNTimeReversalTwoLink",
