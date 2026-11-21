@@ -1,0 +1,43 @@
+{
+  "checks_passed": 18,
+  "checks": [
+    "orthogonal_idempotent",
+    "ranks_3_3_3",
+    "identity_resolution",
+    "cubic_Hamiltonian_covariance",
+    "energy_sector_resolves",
+    "energy_even_under_spin_reversal",
+    "interface_action_reaction",
+    "gradient_control",
+    "closed_drive_energy_cancelled",
+    "material_receives_work",
+    "controller_pays_work",
+    "closed_system_gravity_no_internal_work_artifact",
+    "subsystem_vs_total_gravity_distinct",
+    "no_force_without_external_coupling",
+    "body_force_has_equal_reaction",
+    "reversal_sign_force",
+    "gravity_weak_field_source_dE",
+    "minimum_lift_force"
+  ],
+  "sector_ranks": {
+    "T1g_uniform_dipole": 3,
+    "T1g_AFM": 3,
+    "T2g_AFM": 3
+  },
+  "body_force": "-alpha*u",
+  "support_reaction": "alpha*u",
+  "closed_drive_energy_derivative": "0",
+  "gravity_internal_work_derivative": "0",
+  "actual_PtMn3_Hamiltonian_fitted": false,
+  "complete_Tmunu_derived": false,
+  "anomalous_gravity_measured": false,
+  "human_lift_measured": false,
+  "verification_scope": "18 local assertions checked on standalone equivalent source. Exact committed GitHub blob not separately rerun.",
+  "attribution": {
+    "original_experiment": "Kang et al Nature 2026, DOI 10.1038/s41586-026-11172-5",
+    "existing": "classical cubic representations, energy conservation and weak-field GR",
+    "repo": "DASHI P0.14, atomic369, CMP119, NingLi, Amy attribution firewall",
+    "new": "DASHI finite sector and closed energy/force comparator, not a material discovery"
+  }
+}
