@@ -238,3 +238,23 @@ The corresponding dashiTRADE #1 exact source atlas is `signals/jpy_intervention_
 Next acquisition gates: primary US Treasury coupon auctions/issuance and buyback operations at comparable horizons, actual Treasury yield changes around **specific disclosure and intervention clocks**, JPY basis and BoJ rate forecasts, Japanese cross-border securities purchase/sale data, documented GPIF rebalancing rather than market speculation, and AI credit/401(k) exposure at matched intervals. **No calibrated opposing yield elasticities, actual measured refinancing benefit or actor intent yet.**
 
 Verification: 153,993 quarter sum exact by source-written Agda `refl`; original quantities/source URLs independently inspected. Local Agda kernel and exact-head dashiTRADE pytest NOT executed here. These must be checked independently before promotion.
+
+
+### 2026-11-21 — first measured US Treasury yield response, matched to FX dates
+
+US Treasury original daily par yield curve https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value=2026&type=daily_treasury_yield_curve ; this is 10-year/30-year *constant-maturity secondary-market par yield*, sourced from indicative prices around 3:30 PM ET, **not auctions or intraday FX trade timing**. Official rows:
+
+| US day | 10Y | 30Y |
+|---|---:|---:|
+| 2026-07-29 | 4.67% | 5.20% |
+| 2026-07-30 | 4.68% | 5.21% |
+| 2026-07-31 | 4.75% | 5.27% |
+| 2026-08-03 | 4.70% | 5.23% |
+
+Actual observed 10Y and 30Y changes July 29 -> Aug 3 **+3 bp each**, not a sustained fall over the selected observation window. July 30 -> 31 10Y +7 bp/30Y +6 bp; July 31 -> Aug 3 10Y -5 bp/30Y -4 bp. This is a descriptive four-point event-window observation, **not a causally isolated yen-intervention response**. Daily observation times and source publication clock differ from actual FX execution; never infer yen-funded fund leverage or GPIF net US bond sales solely from yields.
+
+New Agda `TreasuryParYieldEventWindow20261121Exact.agda` encodes the original rows in basis points and source-written `refl` for each change; `MacroFinancialTemporalConsumer20261121Exact.agda` imports it. `dashiTRADE` PR #1 `signals/treasury_par_yields_20261121.py` and `tests/test_treasury_par_yields_20261121.py` carry the same exact original observations (Decimal, no binary float drift), a research-as-of 2026-11-21 gate (not an assertion of earlier public availability), and negative controls for future/missing window, tenor mismatch, and no causal inference. Neither Agda nor exact-head Python test suite has been executed for this continuation.
+
+US Treasury original refunding announcement November 4 https://home.treasury.gov/news/press-releases/sb0678 : USD125bn total (3Y USD58bn, 10Y USD42bn, 30Y USD25bn), auctions Nov 9/10/12 and Nov 16 settlement; stated goal lowest-cost financing over time. These are **announced auction sizes**, not awards/clearing yields/low-cost outcome. Retrieve actual awarded auctions with timestamps and CUSIP and distinguish original-issue primary cash raised, secondary CMT benchmark and debt service before any H2 promotion.
+
+Causal residual: July-August benchmark yields rose slightly from pre-intervention day rather than falling; neither disproves an actor's unobserved longer-horizon aim nor pays Treasury-benefit gate. Additional counterfactual controls: oil/inflation shocks, Fed expectation re-pricing, auctions/term premium, yen funding basis, Japanese cross-border portfolio flows, actual holders, and predeclared event windows. No private-system integration performed. Keep both repository roadmaps synchronized as new observations are admitted.
