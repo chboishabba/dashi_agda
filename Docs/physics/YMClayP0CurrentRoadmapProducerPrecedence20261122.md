@@ -2,6 +2,24 @@
 
 22 November 2026. Examined PR #1536 at head 74855bbf35022101fb6ed9e6c63ad728818b83de, stacked PR #1444 at c0019308612ccd3f84f94e49e16ac8bcdbfaa431 and indexed PR #1291 at 214420efad10361551c13e9fcc1454de8401589d. Branches may move. This is a source audit and mathematical negative control, NOT a new continuum Wilson proof, Agda kernel receipt or Clay solution.
 
+## Live follow-up: newer affine original W1/W3 source ahead of the first audit (22-Nov)
+
+**Temporal correction:** After this note's initial inspected head, the current #1536 and #1444 canonical roadmaps gained a higher-priority source entry, [YMClayOriginalWilsonAffineW1W3BadSectorPhysicalRate20261122.md](YMClayOriginalWilsonAffineW1W3BadSectorPhysicalRate20261122.md), at subsequently inspected #1536 head 785c14a16f631caf91ef89f7f079ea0e0b1a3678. This source is **ahead of both the prior exponential-tilt bad-sector note and the first pass of this audit**. Its mathematical status must take precedence. Do not erase or rewrite it as missing.
+
+The existing actual affine Wilson-mark owner applies M_st=(1+sF)(1+tG), distinct from exp(sF+tG) away from the origin. Same ORIGINAL normalized full Wilson Gibbs law, with Z_full=E[M], Z_good=E[1_good M], p=1-Z_good/Z_full. In the source radius |s|,|t|<=9/100, the positive finite probability ratio has bounds p(s,t)<=11881/8281*p(0,0), |p_s|,|p_t|<=200/91*p, |p_st|<=50000/8281*p. The exact mixed **log-partition** error is p_st/(1-p)+p_s*p_t/(1-p)^2, equal at s=t=0 to full Wilson covariance minus conditioned-good covariance. These are already written and tested in the new source note, **not derived anew here**. The note reports two byte-matched locally run exact SymPy scripts: 512 original plaquette-word Q8 conditional configurations, 25 affine source settings, 45 illustrative physical rate grid tests. None is original full SU2 Haar or Agda kernel acceptance.
+
+**Stronger conditional bad-event physical-rate source:** assuming the *actual* original SU2 Wilson chessboard fixed-contour estimate u(a)^n with 196u(a)<=q_*<1 at selected beta(a), actual physically connecting event contained in original rooted animals of size >=ceil(R/a), cutoff/volume-uniform polynomial root bound C_root*a^-D and 0<a<=a0, R>=R_min>0, the existing animal sum and exact calculus give
+
+    kappa=-log(q_*)>0
+    A_bad = C_root/[196(1-q_*)] * [2D/(e*kappa*R_min)]^D
+    m_bad = kappa/(2a0) > 0 in [m^-1],
+    P(B_XY) <= A_bad exp(-m_bad*R).
+
+This is a *conditional* rate for the BAD event alone, **NOT** a selected CMP116 marked W3 cluster charge, actual running beta trajectory, good-field decay, or same-H OS spectral gap. The earlier two-channel acceptance criterion remains valid but now credits this explicit bad-channel physical-rate compiler rather than listing rate conversion as wholly absent.
+
+**Crucial new negative control already source-tested:** a global Wilson joint-occupancy mark need not factor into independent affine one-polymer activity marks. For Z_true=(1+a)(1+b)+s*a*b, matching Z_naive=(1+a(1+s*u))(1+b(1+s*v)) requires u=v=0 from isolated single-polymer coefficients, which loses the s*a*b coefficient. Non-Abelian SU2 trace also fails independent factor multiplication. Therefore the next source work is strictly (i) original conditional GOOD Wilson covariance vs CMP116 small-field J response **with quantitative discrepancy**, (ii) actual original global Wilson two-source marked partition -> full source-first KP cluster-log germ, (iii) physical rooted absolute W3 charge, with closed-cube RP and beta(a) as real inputs. No new finite geometry, SI arithmetic or generic abstract KP needed.
+
+
 ## Source owners ahead of the last summary
 
 - Native R445/F19: original complete 1024 positive-link selected 128 + spectator 896 fine Gibbs source and effective integration, finite same-object Wilson marked source, 64 actual noncommutative native two-link products, eight binary transverse sheet addresses, source-written positive 2a physical axial length. Do not redo this geometry. The 896 links interact; the 128 selected links are NOT jointly independent.
