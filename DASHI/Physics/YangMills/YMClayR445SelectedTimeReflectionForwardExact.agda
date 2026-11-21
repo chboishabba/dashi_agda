@@ -103,3 +103,89 @@ secondFineTimeStartPositive = positive1
 -- producers are already on master. The remaining selected original-field
 -- reflection requires a site-index commuting theorem; see the separate
 -- source-owned word bridge. No false claim of Agda kernel acceptance.
+
+------------------------------------------------------------------------
+-- Exact C4/C2 TIME-TRANSLATION SQUARE on the SELECTED native EVEN sites.
+-- For the original 2-link block, ONE coarse time step corresponds to
+-- TWO original fine time steps. A single fine step is NOT equivariant.
+-- No continuum/unbounded physical time is inferred from finite C2.
+------------------------------------------------------------------------
+
+shiftFineTimeByTwo : C4 → C4
+shiftFineTimeByTwo Torus.zeroᵢ =
+  Torus.sucᵢ (Torus.sucᵢ Torus.zeroᵢ)
+shiftFineTimeByTwo (Torus.sucᵢ Torus.zeroᵢ) =
+  Torus.sucᵢ (Torus.sucᵢ (Torus.sucᵢ Torus.zeroᵢ))
+shiftFineTimeByTwo (Torus.sucᵢ (Torus.sucᵢ Torus.zeroᵢ)) =
+  Torus.zeroᵢ
+shiftFineTimeByTwo
+  (Torus.sucᵢ (Torus.sucᵢ (Torus.sucᵢ Torus.zeroᵢ))) =
+  Torus.sucᵢ Torus.zeroᵢ
+
+shiftCoarseTimeByOne : C2 → C2
+shiftCoarseTimeByOne Torus.zeroᵢ = Torus.sucᵢ Torus.zeroᵢ
+shiftCoarseTimeByOne (Torus.sucᵢ Torus.zeroᵢ) = Torus.zeroᵢ
+
+shiftFineSiteByTwo : FineSite → FineSite
+shiftFineSiteByTwo
+  (Torus.pair (Torus.pair t x) (Torus.pair y z)) =
+  Torus.pair
+    (Torus.pair (shiftFineTimeByTwo t) x)
+    (Torus.pair y z)
+
+shiftCoarseSiteByOne : CoarseSite → CoarseSite
+shiftCoarseSiteByOne
+  (Torus.pair (Torus.pair t x) (Torus.pair y z)) =
+  Torus.pair
+    (Torus.pair (shiftCoarseTimeByOne t) x)
+    (Torus.pair y z)
+
+selectedEvenTimeTranslationCommutes :
+  (time : C2) →
+  shiftFineTimeByTwo (evenTime time) ≡
+  evenTime (shiftCoarseTimeByOne time)
+selectedEvenTimeTranslationCommutes Torus.zeroᵢ = refl
+selectedEvenTimeTranslationCommutes
+  (Torus.sucᵢ Torus.zeroᵢ) = refl
+
+selectedNativeSiteTimeSquare :
+  (site : CoarseSite) →
+  shiftFineSiteByTwo (evenCoarseOrigin site) ≡
+  evenCoarseOrigin (shiftCoarseSiteByOne site)
+selectedNativeSiteTimeSquare
+  (Torus.pair (Torus.pair t x) (Torus.pair y z))
+  rewrite selectedEvenTimeTranslationCommutes t = refl
+
+selectedFineReflectShiftDihedral :
+  (time : C4) →
+  reflectFineTime (shiftFineTimeByTwo time) ≡
+  shiftFineTimeByTwo (reflectFineTime time)
+selectedFineReflectShiftDihedral Torus.zeroᵢ = refl
+selectedFineReflectShiftDihedral
+  (Torus.sucᵢ Torus.zeroᵢ) = refl
+selectedFineReflectShiftDihedral
+  (Torus.sucᵢ (Torus.sucᵢ Torus.zeroᵢ)) = refl
+selectedFineReflectShiftDihedral
+  (Torus.sucᵢ (Torus.sucᵢ (Torus.sucᵢ Torus.zeroᵢ))) = refl
+
+selectedFineSiteReflectShiftDihedral :
+  (site : FineSite) →
+  reflectFineSite (shiftFineSiteByTwo site) ≡
+  shiftFineSiteByTwo (reflectFineSite site)
+selectedFineSiteReflectShiftDihedral
+  (Torus.pair (Torus.pair t x) (Torus.pair y z))
+  rewrite selectedFineReflectShiftDihedral t = refl
+
+selectedCoarseSiteShiftHasPeriodTwo :
+  (site : CoarseSite) →
+  shiftCoarseSiteByOne (shiftCoarseSiteByOne site) ≡ site
+selectedCoarseSiteShiftHasPeriodTwo
+  (Torus.pair (Torus.pair Torus.zeroᵢ x) (Torus.pair y z)) = refl
+selectedCoarseSiteShiftHasPeriodTwo
+  (Torus.pair (Torus.pair (Torus.sucᵢ Torus.zeroᵢ) x)
+              (Torus.pair y z)) = refl
+
+-- Explicit unclosed seam: establish evenCoarseOrigin above equals
+-- source-original Native.fineBlockOrigin on all 16 coarse native sites,
+-- then prove the SAME translated ordered link product intertwines
+-- original nativeSUNBlockLinks, not just these coordinate constructors.
