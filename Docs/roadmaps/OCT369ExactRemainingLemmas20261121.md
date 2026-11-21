@@ -124,3 +124,8 @@ Important: symbolic 1+omega+omega²=0 with sum omega^(3j)=3 is only a C3 angular
 | P0.24-material | Real experimental PtMn3 T1g order tensor, spinor tunnelling source, calibrated SOC/drive and metric-dependent matter+EM+SC+controller action | OPEN |
 | P0.24-Ward | True dynamic closed stress Tmunu total with positive units and covariant conservation (no prescribed driver leftovers) | OPEN |
 | P0.25-gravity | Source-resolved Einstein/alternative metric solution, bounded nonminimal coupling, measured external force/free-fall/clock and stable lift | OPEN |
+
+| P0.24-dynamical-controller | Two scalar fields O,C under ONE nonminimal effective action: four Ward components and opposite subsystem stress exchange | **25/25 local SymPy checks PASS**, joint on-shell closure for effective model |
+| P0.24-stability | Potential Hessian m2*n2-lambda²; example det=27 positive, det=-13 unstable negative control | exact algebra; not PtMn3 parameter fit |
+| P0.24-physical-source | Replace scalar O by physical magnetic T1g vector coupled to same spinful electron H, replace C by actual EM/SC+battery/controller fields and boundary stresses | OPEN |
+| P0.24-first-order | Derive physical tetrad/Dirac stress, local Lorentz and diffeomorphism Ward, single-action Einstein/alternative field with calibrated ξ | OPEN |
