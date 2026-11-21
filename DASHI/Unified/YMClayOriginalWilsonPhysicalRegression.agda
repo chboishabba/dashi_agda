@@ -86,6 +86,12 @@ import DASHI.Physics.YangMills.YMClayR445TimeKResidualHyperfabricExact as Origin
 -- Converges is shift/tail-invariant. OS1 time source identity remains input.
 import DASHI.Physics.YangMills.YMClayE1TimeKResidualCylinderWaveTransportExact as OriginalTimeKE1
 
+-- P0 original *already-normalized* full Wilson F19 source:
+-- F,G,FG under same original 1024-link partition (896 spectators)
+-- imply the entire exact finite connected covariance on the canonical
+-- source equals F19 physical effective density. No bare-coarse switch.
+import DASHI.Physics.YangMills.YMClayOriginalF19CanonicalConnectedWilsonBIDIExact as OriginalF19Connected
+
 import DASHI.Physics.YangMills.YMClayD1OriginalCovarianceToR320Exact as D1OriginalCovariance
 
 import DASHI.Physics.YangMills.YMClayE1VariableCutoffCylinderLimitExact as E1VariableCutoffCylinder
