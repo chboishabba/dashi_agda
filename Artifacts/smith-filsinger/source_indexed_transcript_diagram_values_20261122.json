@@ -2,7 +2,7 @@
   "title": "Smith/Filsinger source-indexed transcript numerals, diagram identities and incomplete pin graph",
   "date": "2026-11-22",
   "base": "master",
-  "scope": "Source transcriptions + compiled Smith/Kelly/Darrer figure descriptions; no original recorded V/I traces or circuit photographs reattached in this turn.",
+  "scope": "Source transcriptions + compiled Smith/Kelly/Darrer figure descriptions; no original recorded V/I traces or circuit photographs reattached in this turn. Independently inspected publicly accessible Kelly chapter PDF page images p.3-44/45/46 for L1/L2 geometry and source-described rectification, not original Filsinger reel frames.",
   "source_attribution": "Original speaker reports, user-observed frames, original 147-page Kelly/Darrer compilation and mathematical reconstructions kept distinct.",
   "reel_source_status": "No independently verified physical netlist, simultaneous port powers, natural-source input, or electrode geolocation; component specification and voltage indication are not a calibrated same-time energy receipt.",
   "reconstructed_complete_netlist": false,
@@ -307,9 +307,71 @@
           "100",
           "nF",
           "compiled_example_not_filsinger"
+        ],
+        [
+          "L2_relevant_half_section_wire_length_example",
+          "160",
+          "inch",
+          "Kelly_compiled_illustrative_dimension_not_filsinger"
+        ],
+        [
+          "L1_wire_length_for_that_example",
+          "40",
+          "inch",
+          "Kelly_compiled_illustrative_dimension_not_filsinger"
+        ],
+        [
+          "L1_effective_winding_diameter",
+          "2.25",
+          "inch",
+          "Kelly_compiled_example_not_measured_original"
+        ],
+        [
+          "L1_example_approx_turn_count",
+          "5.65",
+          "turns",
+          "Kelly_compiled_example_approx_not_exact_full_turns"
+        ],
+        [
+          "L2_optional_parallel_tuning_capacitor",
+          "47",
+          "nF",
+          "Kelly_compiled_described_cap_across_L2_not_filsinger"
+        ],
+        [
+          "Smith_example_claimed_output_voltage",
+          "2000",
+          "V",
+          "Kelly_compiled_historical_claim_not_measured"
+        ],
+        [
+          "Smith_example_claimed_output_power",
+          "6000",
+          "W",
+          "Kelly_compiled_historical_claim_not_measured"
         ]
       ],
-      "edges": []
+      "edges": [
+        {
+          "from": "Kelly_compiled_L2_secondary",
+          "to": "optional_C2_47nF",
+          "basis": "Kelly chapter 3-46 describes capacitor across L2; not the Filsinger apparatus",
+          "proven_continuity": false
+        },
+        {
+          "from": "Kelly_compiled_L2_output_rectifier",
+          "to": "storage_capacitor_bank",
+          "basis": "Kelly chapter 3-46 describes two diodes feeding four large capacitors",
+          "proven_continuity": false
+        },
+        {
+          "from": "Kelly_compiled_battery_charge_rectifier",
+          "to": "inverter_battery",
+          "basis": "Kelly chapter 3-46 schematic has four diodes to battery charging path",
+          "proven_continuity": false
+        }
+      ],
+      "alternate_text_source": "https://www.rexresearch.com/SmithOUDevices/KellySmith.pdf — inspected page images Kelly chapter pp.3-44/45/46; Darrer 147-page edition is separate pagination/edition"
     }
   ],
   "hard_boundaries": [
@@ -321,6 +383,8 @@
     "Split 17+17 turns and 240-degree geometric winding do not establish 90-degree current quadrature.",
     "Partial narrated white-cap hot to Earth-negative is not same as full pin-to-node proof.",
     "No high-voltage experiment or construction prescription.",
-    "Some midpoint/rectifier figures come from a prior user-supplied spoken transcript, whose exact on-video occasion is not reattested by the current source inventory."
+    "Some midpoint/rectifier figures come from a prior user-supplied spoken transcript, whose exact on-video occasion is not reattested by the current source inventory.",
+    "The optional Kelly/Darrer 47nF capacitor and 2kV/6kW description must not be assigned to the filmed Filsinger Earth or ZVS reels.",
+    "40-inch L1 wire vs 160-inch selected L2 section wire is a geometric example, not 4:1 electrical transformer voltage or power gain."
   ]
 }
