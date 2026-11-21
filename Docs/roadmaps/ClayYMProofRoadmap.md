@@ -1,3 +1,28 @@
+## 21 November 2026 — P0 F19↔R445: a TRUE *finite decoder* commuting square, plus the physical blocked-observable corollary
+
+**Question answered precisely:** the earlier `P_F19(U) = Encode_R445(U)` is an equality of parallel routes from ONE original canonical 1024-link vector to ONE complete 128-selected+896-spectator vector. It is **not itself a four-arrow commuting square**, and it is **not yet** a Yang–Mills OS/continuum/RG commuting theorem. The genuine square is now stated explicitly, with original source-owned maps only:
+
+```
+       actual original CANONICAL Vec 1024  -- P_F19 original adjacent swap -->  sorted Vec 1024 (128+896)
+                      |                                                            |
+       Codec.decodeOriginalBonds 4                                 Codec.decodeField originalR445PairResidualFinite
+                      |                                                            |
+                      v                                                            v
+             original full fine bond field   ------------ IDENTICAL ------------> original full fine bond field
+```
+
+Precisely **for every original positive fine bond and arbitrary Value**, `decode_R445(P_F19(U),bond) = decodeOriginal(U,bond)`. On **independent draft #1536** this is implemented source-written as `YMClayOriginalF19R445DecoderCommutingSquareExact.originalFull1024DecoderSquare` ([commit 373707dc](https://github.com/chboishabba/dashi_agda/commit/373707dc293f288c7bce156cb4aea6a4243939c9)). It composes existing original master `YMClayNative1024ClosedReindexHaarConsequencesExact.actualPairSpectatorReindexEveryOriginalVector`, `YMClayR445CanonicalBondPermutationCodecExact.decodeEncodeAt`, and #1536 `YMClayOriginalF19R445Full1024LabelsP0Exact` **full label equality candidate**. **Both inverses** are stated: unsort after F19 sort restores original canonical vector, and F19 sort after R445 unsort restores any complete sorted vector. These use already-written R445 original two round-trip theorems. The actual proof body depends on older source-written `refl` candidates and is **NOT Agda kernel accepted**.
+
+A second, physically more meaningful **finite blocked-observable** corollary on #1536 uses the REAL original `YMClayOriginalWilsonCanonicalBlockedMarkF19Exact.coarseFromSortedOriginal` and `canonicalSourceCoarseObservable`: the **same** original canonical Wilson U under the REAL F19 constructed adjacent-swap sort or under the original R445 complete selected+residual coordinate reorder yields the **same 64 physical F19 coarse SU(N) holonomies** and every original F19 coarse Wilson observable. New source `YMClayOriginalF19R445PhysicalBlockedObservableSquareExact.agda` ([commit 4bdc52f7](https://github.com/chboishabba/dashi_agda/commit/4bdc52f73f652e3c56f42216e0f79c6f05fa1f39)) composes original F19 block and preceding vector theorem by `cong`. This is **not** a duplicate measure, alternate block or invented Haar. Full 896 spectators retained in the original 1024-link vector.
+
+**The precise downstream junction is still different:** compare the above original F19 `coarseFromSortedOriginal` **coarse Vec 64** with the already ORIGINAL `YMClayNativeSideFourTwoLinkPairSameObjectExact.originalSUNBlockIsLiteralTwoLinkProduct` and `YMClayR445OriginalNativeParityPairWeldExact.originalR445NativeBlockAgreesExplicitParity` original `nativeSUNBlockLinks` on EACH of 64 coarse bonds, with original enumeration order. This is a **native blocking-square**, not the lossless decoder square, and must be kernel-accepted before claiming full F19 ↔ native-R445 blocked observable identity. Original F19 `originalCanonicalBlockedNormalizedEqualsPhysicalEffective` already gives full finite 1024-link Wilson normalization for every coarse test, but does NOT automatically imply original cutoff-uniform Wilson W1/W3 physical decay, E1 continuum or same-H OS.
+
+**Acceptance and falsifiers:** local independent finite Q8 reference `/mnt/data/check_ym_f19_r445_all_link_values_p0.py` actually executed: 128/128 selected, 896/896 spectators, 2048/2048 inverse, five 1024-link Q8 configurations 5120/5120, 320/320 noncommutative pair holonomies, 7680/7680 original Wilson plaquette-trace invariance. Intentional reversed within-pair order changes 160 blocks; modifying each of five spectators changes the original field (5/5). This is *not exact checked-out head script or Agda kernel acceptance*. New source modules imported in original golden root `DASHI/Unified/YMClayOriginalWilsonPhysicalRegression.agda`, and fail-closed `scripts/check_ym_1444_cmp119_r445_weld_forward.py` manifests both. Existing `master` source was inspected; historical #1444 and master-based #1536 remain **separate draft PRs**.
+
+**P0 theorem-first unchanged**: actual original interacting four-dimensional YM E1 limit/nontriviality, original full Wilson W1/W3 physical small+large-field cutoff/volume-uniform decay (or another direct same-H gapped reconstruction), published fine physical RP, one dense physical OS Hilbert/H generator and full vacuum-complement spectrum D2, N1/G1 group scope all remain OPEN. No finite coordinate-square counts as the Clay mass gap; P1 antigravity after P0. R443/R445/R320 are chronological proof attempts, not physical t or RG k. Preserve zero and all parity and 896 physical residuals.
+
+---
+
 ## 21 Nov 2026 — current P0 cross-lane discipline: reuse Mellin, GRH stays P0
 
 **YM remains one physical main theorem**, not a count of R445/F19/CMP
