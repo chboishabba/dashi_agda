@@ -24,8 +24,9 @@ module DASHI.Physics.YangMills.YMClayR445TimeKResidualHyperfabricExact where
 -- This module proves a finite EXACT C4 chart and transport coherence;
 -- it does NOT assert the original SU(N) field R445 has been equipped
 -- with a physical finite->continuum wave limit or common H_OS.
--- Original native Fin.combine positive-bond source identity and
--- continuum k-stage measure/semigroup compatibility remain open.
+-- Original native Fin.combine/selected positive-bond identity ALREADY has
+-- source proofs; extending its reflected/translated whole-field square
+-- and continuum k-stage measure/semigroup compatibility remain open.
 -- SOURCE-WRITTEN; local Agda compiler/kernel not available.
 ------------------------------------------------------------------------
 
