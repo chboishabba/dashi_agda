@@ -43,6 +43,28 @@ OWNERS = {
         "originalMarkedOS1AllPairsTimes",
         "originalMarkedOS1SameSpectrumClustering",
     ],
+    "DASHI/Physics/YangMills/YMClayOriginalWilsonCanonicalBlockedMarkF19Exact.agda": [
+        "originalFineCanonicalBlockedNumeratorEqualsPhysicalEffective",
+        "originalCanonicalBlockedNormalizedEqualsPhysicalEffective",
+        "sourceSortedBlockIsOriginalPairs",
+    ],
+    "DASHI/Physics/YangMills/YMClayOriginalWilsonPhysicalF19PartitionExact.agda": [
+        "originalFinePhysicalPartitionEqualsActualEffectivePartition",
+        "originalPhysicalF19TwoMarksNormalizeByCanonicalPartition",
+    ],
+    "DASHI/Physics/YangMills/YMClayOriginalF19CanonicalConnectedWilsonBIDIExact.agda": [
+        "originalF19CanonicalMomentEqualsPhysical",
+        "originalCanonicalF19ConnectedCovarianceSamePhysical",
+        "cong₂ _-ℝ_",
+        "cong₂ _*ℝ_",
+    ],
+    "DASHI/Physics/YangMills/YMClayOriginalF19NativeR445SelectedOrderBIDIExact.agda": [
+        "originalF19PairListIsNativeR445Parity",
+        "originalParityPairsAreNativeR445SelectedEnumeration",
+        "originalF19Selected128AreNativeR445Selected128",
+        "OriginalParityWeld.originalR445NativeFirstBondIsParity",
+        "OriginalParityWeld.originalR445NativeSecondBondIsParity",
+    ],
     "DASHI/Physics/YangMills/YMClayR445OriginalAxialBondParityInjectiveExact.agda": [
         "coord : Bit → Bit → Quad",
         "coarse : Quad → Bit",
@@ -131,6 +153,8 @@ OWNERS = {
         "YMClayOriginalWilsonOS1R556R281CommutingSquareExact",
         "YMClayR445TimeKResidualHyperfabricExact",
         "YMClayE1TimeKResidualCylinderWaveTransportExact",
+        "YMClayOriginalF19CanonicalConnectedWilsonBIDIExact",
+        "YMClayOriginalF19NativeR445SelectedOrderBIDIExact",
     ],
     "DASHI/Physics/YangMills/YMClayNativeR445TemporalReversalExact.agda": [
         "originalSUNTimeReversalTwoLink",
@@ -169,6 +193,7 @@ CHECKS = [
     "scripts/check_ym_r445_original_wilson_words_reflection.py",
     "scripts/check_ym_original_r445_os1_translation_commuting_square.py",
     "scripts/check_ym_r445_time_k_residual_hyperfabric.py",
+    "scripts/check_ym_original_f19_r445_selected_residual_source.py",
 ]
 
 def main():
