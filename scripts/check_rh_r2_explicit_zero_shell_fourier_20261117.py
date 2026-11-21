@@ -41,6 +41,49 @@ assert D==m[4]+4*a*m[3]+6*a*a*m[2]+4*a**3*m[1]+a**4*m[0]
 C=16*r*r*D
 assert s.simplify(C/(16*r*r)-D)==0
 
+# 22 Nov SOURCE CORRECTION: the selected W integral representation is
+# ALREADY a theorem in the ORIGINAL Lean
+# Synthesis/RiemannProjectiveQuarticFourWindowSignedPoleJointHorizontalJet:
+#   W.signedNormalizedPairKernel_eq_combinedIntegral
+#   W.signedLiteralPairSourceTerm_eq_normalizedPairKernel.
+# No separate selected-W representation theorem is newly required.
+#
+# Full horizontal-weighted analytic test uses the same selected
+# combined C^4 compact profile P_W, not its alpha=0 base alone:
+#   P_alpha(u) = P_W(u)*cosh(alpha*u).
+# The previously compiled source fourth-IBP theorem then has its
+# exact Leibniz derivative envelope on |u|<=L and |alpha|<=a.
+u,alpha=s.symbols("u alpha",real=True)
+P=s.Function("P_W")(u)
+product4=s.diff(P*s.cosh(alpha*u),u,4)
+leibniz4=sum(
+    comb(4,j)*alpha**(4-j)*s.diff(P,u,j)
+    * (s.cosh(alpha*u) if (4-j)%2==0 else s.sinh(alpha*u))
+    for j in range(5)
+)
+assert s.simplify(product4-leibniz4)==0
+assert s.simplify(product4.subs(alpha,-alpha)-product4)==0
+assert s.expand(leibniz4.subs(alpha,0)-s.diff(P,u,4))==0
+# Q_W(alpha,q) even in the HORIZONTAL displacement, not necessarily
+# nonnegative: this fact is already exact for the source cosh integral.
+assert s.simplify(s.cosh(-alpha*u)-s.cosh(alpha*u))==0
+# With r=t/16 and true zeta strip displacement |beta-1/2|<=1/2,
+# the normalized horizontal parameter obeys |alpha|<=8/t;
+# the complete literal term carries multiplicity/r^2.
+tr=s.symbols("t_selected",positive=True)
+rad=tr/16
+amax=8/tr
+assert s.simplify((s.Rational(1,2)/rad)-amax)==0
+# A bound with unknown positive derivative norms M_j is valid, but
+# numeric uniform-in-t constants and the signed infinite sum are OPEN.
+weighted_profile_bound=s.exp(amax*L)*sum(comb(4,j)*amax**(4-j)*m[j] for j in range(5))
+assert s.simplify(weighted_profile_bound.subs({L:0,m[0]:0,m[1]:0,m[2]:0,m[3]:0})-m[4])==0
+assert s.simplify(rad**2*weighted_profile_bound/(rad**2)-weighted_profile_bound)==0
+print("PASS: selected-W cosh-weighted full fourth derivative, 5 Leibniz terms")
+print("PASS: both horizontal sides, alpha=0 base recovery, beta-strip scaling")
+print("PAID ORIGINAL SOURCE: selected combined kernel and literal zero term identity")
+print("OPEN: actual selected-W numeric derivative constants, t-uniform signed gap")
+
 # The older tail-majorant used 4*A*C; retain its algebra.
 f=(1+t+x)**2/(1+x)**4
 I=s.integrate(f,(x,n,s.oo))
@@ -52,4 +95,4 @@ print("PASS: unconditional shell constant A=160 arithmetic (using cited zero the
 print("PASS: conditional fourth-derivative Fourier envelope and normalized rescaling")
 print("C(t,W) = 16*(t/16)^2*exp(L*a)*(",D,")")
 print("PASS: symbolic fixed-t cofinal O(1/n) bound")
-print("NOT DONE: selected-W Fourier identity, explicit L and M_j, certified finite signed gap, uniform t/rho margin, native kernel")
+print("NOT DONE: actual W derivative norm constants, complete horizontal physical tail uniformity, certified finite signed gap, uniform t/rho margin, native kernel")
