@@ -66,3 +66,9 @@ Important: symbolic 1+omega+omega²=0 with sum omega^(3j)=3 is only a C3 angular
 | P0.15-attribution | Explicit publication/established theorem/repo-original/reconstruction/physical-claim source classes and evidential non-promotion | documentary ledger present; new scientific claim OPEN |
 | P0.16 | Actual PtMn3 SOC Bloch+tunnel Hamiltonian and experimentally calibrated external force | OPEN |
 | P0.17 | Locally covariant matter+EM+controller stress tensor with GR/KK physical source mapping | OPEN |
+
+| P0.16-spinful-fixture | L12 3c three-site x Pauli spin 6x6 H(k); C3 site×spin covariance, time reversal domain reversal, Hermiticity and negative control | **16/16 locally checked over 54 combinations**; source-site schematic, NOT real PtMn3 bands |
+| P0.16a | Original measured magnetic domain, full fcc lattice and magnetic group | OPEN |
+| P0.16b | Same-original SOC/exchange/Wannier material parameter source and ab-initio band comparison | OPEN |
+| P0.16c | PtMn3/MgO/PtMn3 tunnel barrier currents and quantitative OTT/TMR | OPEN |
+| P0.17 | Local covariant stress and Einstein/KK source with real controllers, source and superconducting boundaries | OPEN |

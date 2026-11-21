@@ -1,0 +1,19 @@
+{
+  "checks_passed": 16,
+  "num_k_samples": 27,
+  "num_domains": 2,
+  "max_hermitian_residual": 0,
+  "max_C3_covariance_residual": 7.214906591997493e-16,
+  "max_time_reversal_residual": 0,
+  "max_spectral_C3_residual": 2.432376777795247e-15,
+  "same_domain_TR_negative_control_norm": 3.9191835884530852,
+  "PtMn3_ab_initio_bands_or_SOC_fit": false,
+  "MgO_tunnel_barrier_and_363percent_TMR_fit": false,
+  "real_T1g_octupole_domain_match": false,
+  "actual_material_stress_or_gravity_prediction": false,
+  "attribution": {
+    "experiment": "Kang et al., Nature 2026, DOI 10.1038/s41586-026-11172-5",
+    "prior": "Pauli, SU2/C3, Bloch, time reversal",
+    "new_DASHI": "L12 source-site spinful symmetry fixture"
+  }
+}
