@@ -7,6 +7,67 @@ This is the **phase/deliverable/remaining-lemma ledger committed with the implem
 
 
 
+## P1 actual field-to-port mathematical cut — TEM exact source-access donor and independently instrumented inertial response (T0–T8)
+
+**21 November 2026.** The last Z0–Z7 source weld exposed a genuine missing lemma: sharing an original Filsinger boundary \`b\`, field-to-port record \`f\` and source-cycle \`s\` is NOT sufficient to identify the full-vector Maxwell energy work with the finite mesh's work. We therefore strengthen the existing Agda source, not construct a replacement field ontology.
+
+### New typed identification of the SAME selected work
+
+\`YMEMForceGravityFilsingerSameOriginalPhysicalCutExact.MeasuredSameFieldMeshWorkIdentity w\` requires three **actual equalities on the exact source-selected mesh and full-vector physical admission**: (1) mesh load = integrated full-vector load, (2) mesh initial stored = vector field+material initial stored, and (3) mesh final stored = vector field+material final stored. These are *independent real physical input requirements*, not derived by merely matching b/f/s names. From (1) and the already-owned \`Poynting.SameOriginalPhysicalFieldBoundary.originalUsefulPortIdentity\`, the new \`originalMeasuredMeshLoadIsActualSelectedReceiver\` uses equality transitivity to derive the selected terminal useful-work identity. The new \`originalFullVectorMeshSourceCapWithMaterialModulation\` consumes the pre-existing \`Poynting.selectedFullVectorPhysicalAdmissionCap\`; unlike the earlier Filsinger cap it retains explicit **paid material modulation**. The original \`Anti.requiredDiscriminator alteredInertialResponse = inertialComparisonDiscriminator\` is now reexported.
+
+This is a stronger **source-written conditional composition**, NOT an Agda kernel receipt. Even the three work/storage equalities are NOT a measured \`E/H\` face/quadrature identity. The exact per-face field, physical normal, surface/line integral, conductor return, original source time/history, measured terminal \`V(t),I(t)\`, material ADE/plasma work and original actual natural-source data **remain OPEN**. The earlier \`OriginalFiniteVolumeAdmission.selectedFullVectorMaxwellFieldToFaces : Set\` is not sufficient evidence if filled with an arbitrary inhabitant; a future physical adapter must replace/justify it with contentful same-field measurements and coordinates.
+
+### Exact local Maxwell PDE → original-form field-to-power reference (not Filsinger hardware)
+
+New committed \`scripts/check_filsinger_maxwell_tem_inertia_original_sympy.py\` was **executed locally: 74/74 PASS**, SymPy 1.14.0, with the **exact executed Git blob** \`c12f5cf44a3ab760dc1e83bc37ddd00e7f0eeb6a\`. It models an *ideal lossless concentric two-conductor TEM line*, not the source-unknown historical Filsinger receiver. A genuinely variable causal waveform \(A(u)\), \(u=t-z/c\), in homogeneous material with \(c=1/\sqrt{\mu\epsilon}\), \(\eta=\sqrt{\mu/\epsilon}\), has
+
+\[
+E_r=A(u)/r,\qquad H_\phi=A(u)/(\eta r),\qquad
+V=A(u)\log(b/a),\qquad I=2\pi A(u)/\eta.
+\]
+
+The explicit vacuum-dielectric Maxwell Gauss, Faraday and displacement-current Ampère equations hold, and a real **oriented annular cross-section** gives
+
+\[
+\boxed{ \int_{a<r<b}(\mathbf E\times\mathbf H)\cdot d\mathbf A
+       = \frac{2\pi A(u)^2}{\eta}\log(b/a)
+       =V I. }
+\]
+
+Five exact radial annular finite-volume partitions (N=1,2,3,5,9) each return that identical work. For a nonstationary waveform and a finite axial/time slab, the **signed Poynting storage identity** holds with unequal start/end storage (normalized demonstration: \(W_\mathrm{in}=1184\pi/45\), \(W_\mathrm{out}=704\pi/45\), \(U_\mathrm{final}-U_\mathrm{initial}=32\pi/3\)). Field energy is thus not automatically useful load output. Forward and backward Maxwell solutions individually satisfy the curl equations; their superposition's integrated signed transfer is proportional to \(A_+^2-A_-^2\): **equal forward and reflected waves mean zero net power in spite of nonzero instantaneous field magnitude**. For a passive real terminal \(R_L\) and line impedance \(Z_0\), \(\Gamma=(R_L-Z_0)/(R_L+Z_0)\) and \(P_\mathrm{load}=P_\mathrm{incident}(1-\Gamma^2)\), maximized at matching. With a fixed useful load, the script checks **series-access versus parasitic shunt**, including an example where an externally powered transfer gain is smaller than the model's controller cost.
+
+**Research significance:** this is the correct mathematical kind of **field → actual geometric flux → \(VI\) terminal** proof absent from the original Filsinger application. But the coax is an independent reference. To promote anything about a Filsinger source, obtain a **source-labelled map** from his actual electrodes, returns, field faces, dielectric/plasma properties and time-varying ports to a comparable solved Maxwell/ADE configuration. Neither \(P=VI\) in this example nor a 369 gauge orientation is proof of his experimental machine's performance.
+
+### Original antigravity five-channel collision — exact independent inertial discriminator
+
+The original \`Four.signature ordinaryForceConfounder\` equals \`Four.signature inertiaOnlyCandidate\`. The new local exact physical *toy* model separates **independent controlled mechanical force pulses** \(F_d\) and **measured magnetic-gradient source modulation** \(G_s\), with selected acceleration
+
+\[
+a(F_d,G_s) =
+\frac{F_d+\beta G_s-m_g g}{m_i},
+\qquad
+a_{\rm inertia\,rival} =
+\frac{F_d+\beta G_s-m_g g}{\kappa m_i}.
+\]
+
+The static support load \(m_gg-\beta G_s\) contains **no \(m_i\)**, so it cannot identify inertial mass. With normalized identical weight/equilibrium and one unit calibrated force pulse the two toy predictions are \(1/2\) versus \(1/4\) acceleration; this is a **rival-model conditional prediction**, not a reported antigravity signal. The observation design \(a=pF_d+qG_s-r\) has rank **1** with only one static measurement and rank **3** with independent field-off, force-on and gradient-on comparisons. It is sensitive to calibration of the real force and field, non-EM backgrounds, specimen mass, phase, temperature, force-pulse reaction path, measurement latency and independent replication. It does not close all possible alternative hypotheses or infer a nonstandard inertial mechanism.
+
+| Gate | New exact source target | Status and what remains |
+| --- | --- | --- |
+| **T0** | Selected original Filsinger full-vector jet **and** finite mesh | Existing Z0 source record; no actual Filsinger Maxwell field or original physical ports inhabited |
+| **T1** | \`MeasuredSameFieldMeshWorkIdentity\` loads and initial/final stores | New contentful *conditional Agda record*; **independent same-field measured identity OPEN** |
+| **T2** | \`originalMeasuredMeshLoadIsActualSelectedReceiver\` | Source-written transitivity from actual mesh/vector work to the original selected terminal, kernel pending |
+| **T3** | \`originalFullVectorMeshSourceCapWithMaterialModulation\` | Source-written reuse of the actual full-vector **paid-material** bound; physical integration, source cap admission and source replenishment OPEN |
+| **T4** | Ideal causal coax TEM geometry → exact \(E\times H\) cross-section → \(VI\), five radial face cuts and finite stored-work history | 74/74 exact local SymPy full suite; **reference mathematical example, not original Filsinger geometry** |
+| **T5** | Forward/backward fields, reflection/matching, source-connected series versus dissipative shunt | Exact independent passive reference; useful load ≠ field magnitude or gross incident work; net-after-pump positive extraction NOT inferred |
+| **T6** | \`Anti.alteredInertialResponse\` → original \`inertialComparisonDiscriminator\`; source force pulse + magnetic-gradient controls | Existing antigravity typed demand re-exported; exact illustrative rank 1→3 identifiability; actual instrumented responses OPEN |
+| **T7** | Original Filsinger source actual E/H faces, conductor return, Maxwell–ADE, same physical energy and terminal SI data | **OPEN**; do not substitute coax or symbolic source cap for actual source work |
+| **T8** | Real antigravity claim-specific GR/freefall/clock/inertia/TT source and ordinary EM/thermal/torque confounder closure | **OPEN**; original Podkletnov, NASA, Hathaway, Tajmar, Amy evidence statuses unaffected |
+
+**Kernel status:** no Agda binary locally. Source-written code is not certified by SymPy. **Independent physical evidence status:** none newly admitted. Preserve original source credit, real historical nulls and no assumption that Filsinger and antigravity refer to one apparatus.
+
+---
+
 ## P1 strongest original-source weld — 3D EM support × antigravity experiments × Filsinger (Z0–Z7)
 
 **21 November 2026 correction.** The actual source of the next mathematics was already on master. SmithFilsingerFullVectorPoyntingPortWeldExact has the KSW668 **full three-component Maxwell jet** and a separate, conditional field-to-terminal spacetime integration implication; SmithFilsingerFiniteVolumeMaxwellBoundaryWeldExact has the **original oriented finite-volume faces** and an exact selected-source terminal balance. The exact gravity owners AntigravitySameStateFourChannelDiscriminatorExact, AntigravityLaboratoryOrdinaryModelClosureWeldExact and SuperconductingGravityCouplingResidualBidiExact already provide the force-versus-gravity signatures, actual conditional laboratory GR/background closure and the first missing source observable. OrientedBracketEMYMNS369Regression and RightHandRule369Exact already connect EM/YM through the original signed 369 orientation, without identifying E×H, qv×B, Iℓ×B and μ×B as one measured physical observable.
