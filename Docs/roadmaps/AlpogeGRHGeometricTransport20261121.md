@@ -1,3 +1,67 @@
+## 22 November 2026 — P0 checker implementation and actual local receipt
+
+Lean #113 extended the EXISTING
+`proofs/alpoge-lean433/check_grh_p0_original_all_characters_sympy.py`
+(commit `30f0b1b2`; Git blob
+`7ff7fb44eff87dabef83e3973f3535793f7b7daf`)
+with **five additional exact author-source Git blob pins**
+and a guarded provenance check for
+`UpperTheory.FinalTheorems.everyCharacter` →
+`allChi` → `Formalism.VW.rh_of_every`
+→ modulus-one `LFunction_modOne_eq` → Mathlib RH.
+This directly reuses the original source theorem; it does
+not fabricate a new theorem or adapter. Mutation controls
+reject changes to the proof-source direction, the character
+modulus `N=1`, and the mod-one source equality.
+
+**Source inspection actually executed:** six pinned
+original GitHub source files, ten declaration/graph
+checks, three adversarial changed-edge controls
+PASS (source-syntax/identity only). **Locally
+executed Python 3 + SymPy 1.14.0**:
+the exact committed checker was reconstructed locally,
+`git hash-object` agrees byte-for-byte with new blob
+`7ff7fb44`, `py_compile` PASS, and
+`--max-modulus 4 --cutoff 20` PASS:
+6/6 characters, 120/120 coefficients, 18 group
+products, 3 primitive characters, 1000/1000
+selected χ5→χ10 coefficients plus all exact
+Euler factor/critical-line boundary controls.
+The newly added `--source-root` author-checkout
+path has **not been run** end-to-end because
+the original source was accessed by the GitHub
+connector, not downloaded into this local
+runtime. That source graph was checked
+independently against the real retrieved
+original files. **No Lean, Agda, CI or trusted
+kernel receipt.**
+
+Lean #113 README updated together with the work
+(commit `5b22b8f8`). Existing source P0
+next gate remains exact isolated pinned original
+Lean v4.33.1 `RHAdmission.lean` acceptance.
+Original Mathlib RH→Clay follows the existing
+root conditional consumer *only once the
+actual compatible theorem term is admitted*.
+Separate native Agda **all-character**
+Dirichlet GRH transport is a stronger
+optional implementation target, not
+a prerequisite to consuming ordinary RH into
+the exact root Clay RH proposition.
+
+This P0 implementation does **not**
+discharge the separate September original
+DASHI pole–quotient M-RH manuscript's
+high-ordinate inequality. The external
+author's all-character proof and this
+earlier independent RH reduction have
+different mathematical provenance and
+different remaining formalization obligations.
+The portfolio remains on original theorem
+endpoints, not paper-production counts.
+
+---
+
 ## 22 November 2026 — original all-character → zeta descent verified; RH manuscript recovered (current)
 
 **Priority correction, not a new theorem wrapper.** The original author source
