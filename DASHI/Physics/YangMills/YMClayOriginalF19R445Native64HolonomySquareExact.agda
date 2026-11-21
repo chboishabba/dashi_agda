@@ -179,6 +179,24 @@ module _
       (originalPhysicalF19Blocked64EqualsNativeR445 original)
 
 
+
+  -- EVERY original F19 gauge/Wilson 64-link coarse observable now sees
+  -- the original actual native R445 blocked SU(N) field. This is
+  -- pointwise at each full original 1024-link configuration, before
+  -- integration; it does NOT assert coarse Wilson *bare* Gibbs equals
+  -- pushed effective Wilson Gibbs.
+  originalF19CoarseWilsonObservableEqualsNativeR445 :
+    (observable : Vec.Vec Link 64 → ℝ)
+    (original : Vec.Vec Link Native.Count) →
+    Physical.canonicalSourceCoarseObservable
+      theory traceData exponential beta source bilateral linear
+      observable original
+    ≡ observable (originalNativeCoarse64 original)
+  originalF19CoarseWilsonObservableEqualsNativeR445
+      observable original =
+    cong observable
+      (originalF19AndNativeR445Actual64CommutingSquare original)
+
 -- The prior original F19 normalized real Wilson Gibbs theorem supplies
 -- the physical finite observable equality ONCE these actual source
 -- 64-link index equalities type-check; it does NOT instantiate the
