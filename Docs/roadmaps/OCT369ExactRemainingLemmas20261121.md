@@ -42,3 +42,9 @@ Important: symbolic 1+omega+omega²=0 with sum omega^(3j)=3 is only a C3 angular
 | P0.13 | Complete controller, magnet, field, supports and environment stress energy | OPEN |
 | P0.14 | Metric variation / nonminimal coupling symmetry and empirical bounds | OPEN |
 | P0.15 | Same-apparatus gravimetric vs electromagnetic force identification | OPEN |
+
+| P0.12-sector | Three-sublattice C3 transport operator: uniform beta1+2beta2, staggered beta1-beta2, zero bulk moment and nonzero collective torque | **17 local SymPy assertions PASS**; illustrative matrix, not actual PtMn3 |
+| P0.12a | Original PtMn3 cluster-octupole tensor with actual sublattice positions, moment directions and irrep | OPEN |
+| P0.12b | Same actual PtMn3 magnetic Seitz/Bloch k-dependent Hamiltonian and intra/inter tunnelling | OPEN |
+| P0.12c | Material-derived beta coefficients and experimental switching/TMR uncertainty | OPEN |
+| P0.13-closure | Complete system stress and energy transfer: drive, barrier, medium, coils/support/environment | OPEN |
