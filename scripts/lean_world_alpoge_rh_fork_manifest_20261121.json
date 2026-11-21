@@ -1,0 +1,8 @@
+{
+  "repositories": [
+    {
+      "repository": "chboishabba/riemann-hypothesis-lean",
+      "revision": "7cbf7a0c32fca1badf05931879a37c3f8a2b03b4"
+    }
+  ]
+}
