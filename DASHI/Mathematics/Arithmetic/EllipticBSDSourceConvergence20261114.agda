@@ -41,3 +41,6 @@ import DASHI.Mathematics.Automorphic.EllipticCMLevel32GenusOneArithmeticExact
 import DASHI.Mathematics.Automorphic.EllipticCMLevel32LigozatCuspArithmeticExact
 import DASHI.Mathematics.Automorphic.EllipticCMNormalizedOneDimensionalQSeriesExact
 import DASHI.Mathematics.Automorphic.EllipticSelectedHeckePrimePowerExact
+
+-- P0 source-typed original level-32 BIDI; no j=0 curve substitution.
+import DASHI.Mathematics.Arithmetic.EllipticBSDOriginalLevel32SameCurveP0BIDIExact
