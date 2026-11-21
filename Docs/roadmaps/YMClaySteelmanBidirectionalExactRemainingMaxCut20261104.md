@@ -1,3 +1,14 @@
+### 21 Nov P0 source archaeology — the existing CMP116/W1/W3 theorem is NOT the E1/F19 physical record
+
+**New inspected source audit on #1536:** [original CMP116/W1/W3→D1→E1/F19 physical source boundary](https://github.com/chboishabba/dashi_agda/blob/agent/ym-p0-cmp119-r445-master-weld-20261121/Docs/physics/YMClayCMP116W1W3D1E1F19PhysicalSourceAudit20261121.md); audit commit `e7833e2b`. The canonical `OriginalSmallLargePhysicalSource` and `OriginalRealCMP116PhysicalSelection` records are already present and the actual Wilson cutoff-`n=3` BIDI adapter already reuses the full-Wilson estimate. A source-written conditional compiler is **not** evidence that the selected record is inhabited.
+
+**Preferred existing original W1/W3 payment:** `BalabanLiteralTwoWilsonSourceFirstJetLocalizationExact.SourceFirstLiteralWilsonJetLocalization` already owns the normalized cluster jet. Its `pointwiseLiteralWilsonJetLocalization` and `localizedLiteralShellChargeSum` explicitly remain conditional; equivalently the existing `BalabanLiteralTwoWilsonCMP116ConnectingTailExact.TwoWilsonCMP116PhysicalShellPayment.chargeSumBelowPhysicalRootedShell` must be proved on original source-supported spanning clusters. Fill the **already-existing** full-Gibbs D1 `originalFullCovarianceBelowSmallPlusLarge`, `largeFieldErrorCalibration` and both common-physical-distance rate fields, with original cutoff-independent constants and one `0 ≤ commonQ < 1`. Finite one-site plaquette-deficit/one-link-tail suppression is not spatial connected-cluster suppression; an exact Bernoulli counterexample was checked locally with SymPy. #1444-only `naturalPrefactorR342` improves prefactor bookkeeping but still takes selected localization and distance/time calibration as inputs.
+
+**No promotion:** cutoff-3 F19 weighted covariance is not an all-cutoff E1 continuum limit; C₂ time is not arbitrary Euclidean time. Agda kernel unrun. D2 same-`H_OS` dense nonvacuum spectrum, E1 interacting continuum/RP, N1 and G1 remain OPEN. Reuse estimates, do not reconstruct them.
+
+
+---
+
 ## 21 November 2026 — CORRECTED original Wilson ESTIMATE audit: reuse original D1/CMP116 and marked W1/W3, connect SAME E1/F19 physical source
 
 **Correction requested by user:** the repository DOES have substantial **Wilson estimate theorems**, including the complete small-plus-large-field route, the native real CMP116 cutoff-uniform bound, and source-owned marked two-Wilson connecting shell. They must **not** be represented as unbuilt constructs. Direct blob hashes `master` == #1444 for all three:
