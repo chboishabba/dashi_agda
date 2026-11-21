@@ -1,3 +1,58 @@
+## 21 November 2026 — GRH P0 newest weld: original admission typo repaired; 3 pinned sources
+
+**This is an update to the established controlling roadmap**, not
+a new plan or a new GRH proof wrapper. The exact source-first
+audit found one real defect in EXISTING Lean #113
+`proofs/alpoge-lean433/RHAdmission.lean`: a stray `-` in its
+doc-comment closing token (`-/-` instead of `-/`).
+It is now repaired directly on Lean #113, commit `69dedf37`,
+corrected Git blob `43a3f106e09a013fada4d1868f3bf9b0ba7dbf87`.
+No Lean compiler was available, so only a source typo correction is
+claimed, not a typecheck.
+
+**Local SymPy acceptance is now byte-identical with the committed
+executable**: `proofs/alpoge-lean433/check_grh_p0_original_all_characters_sympy.py`
+on Lean #113, Git blob `b9ecb9afcf0c41e0e77d8f2b2dbff86dc2b8f1fb`.
+The locally executed file had precisely that same blob; Python
+AST syntax PASS. It additionally pins the *corrected* Lean adapter
+blob as well as original `Main.lean` and `Statements.lean`:
+**3/3 actual original/adapter source identity receipts**.
+The exact source scan checked all **5/5** direct original theorem
+applications with original all-character quantifiers, primitive
+qualifier and trivial-character pole exception. Three corrupted
+source/adapter controls failed closed.
+
+Independent local SymPy 1.14 full finite acceptance:
+- φ(N) characters for EVERY N from 1 through 64:
+  **1,260 / 1,260** original finite character instances;
+- exact 1,415,034 unit character multiplication comparisons;
+- 226,800 exact Dirichlet coefficient comparisons in cyclotomic
+  quotient rings `Q[z]/Φ_m(z)`, including composite-modulus
+  complex-valued characters;
+- 496 omitted finite Euler factors and 757 primitive characters;
+- independently derived 104,040 matching real/quadratic and
+  complex-prime-modulus coefficient comparisons in separate
+  local SymPy reference checks.
+
+The mathematical P0 weld is the original all-character
+`χ_N` to primitive `χ_d` conductor/Euler deletion:
+`L(s,χ_N) = L(s,χ_d) ∏_{p|N,p∤d}(1−χ_d(p)p^(−s))`.
+For Re(s)>0 these missing finite Euler factors cannot vanish;
+a genuine analytic identity would therefore preserve
+nontrivial critical-strip zero sets. This is already-known
+mathematics, not evidence of a new proof of GRH. The complete
+infinite L-series identity, root Lean-version admission and
+Agda original complex/Dirichlet L/same-zero predicate transport
+remain distinct open P0 mathematical/formal obligations.
+
+**Execution policy:** local SymPy in lieu of CI/Agda/Lean testing,
+never treating its PASS as a kernel receipt. No CI or theorem
+compiler was run. Preserve existing Mellin/Gamma-Mellin owners
+and the already-existing external author's formal theorem.
+Next change must update THIS roadmap together with the actual PR.
+
+---
+
 ## 21 November 2026 — CURRENT GRH P0: exact local SymPy weld-forward (no CI)
 
 **User-directed execution mode: local SymPy instead of Lean/Agda CI.**
