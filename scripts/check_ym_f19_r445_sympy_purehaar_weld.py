@@ -133,3 +133,26 @@ print("PASS exact SU2 Q8 coarse plaquette traces: 480/480")
 print("NEGATIVE reversed SU2 link products differ:", reverse_diffs)
 print("NEGATIVE spectators affect original fine words, not blocks: 5/5")
 print("OPEN Agda kernel, real interacting E1, original W1/W3, OS same-H gap")
+
+
+# EXHAUSTIVE original fine Wilson plaquette incidence audit, not an
+# inferred factorization of the interacting 1024-link Gibbs weight.
+# Every one of the 896 unselected links remains a six-plaquette fine
+# action variable even though it does not enter the 64 chosen blocks.
+from collections import Counter
+incidence = Counter()
+plaquettes = 0
+for site in product(range(4), repeat=4):
+    for a, b in combinations(range(4), 2):
+        edges = ((site, a), (step(site, a, 4), b),
+                 (step(site, b, 4), a), (site, b))
+        assert len(set(edges)) == 4
+        incidence.update(edges)
+        plaquettes += 1
+assert plaquettes == 1536 and len(incidence) == 1024
+assert all(incidence[b] == 6 for b in fine)
+assert sum(incidence[b] for b in spectators_f19) == 5376
+assert sum(incidence[b] for b in selected_f19) == 768
+print("PASS original fine Wilson plaquettes: 1536")
+print("PASS each original fine positive link has 6 plaquette incidences")
+print("PASS all 896 original spectators retain 5376 fine-action incidences")
