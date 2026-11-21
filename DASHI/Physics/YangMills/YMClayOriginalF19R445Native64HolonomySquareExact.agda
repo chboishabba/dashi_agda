@@ -140,28 +140,9 @@ module _
     rewrite SameLabels.originalF19Complete1024LabelOrderMatchesR445
       theory = refl
 
-  -- The TWO distinct routes from the SAME ORIGINAL canonical Wilson
-  -- configuration now end at the same original 64 coarse SU(N) values:
-  --
-  --    canonical U --F19 adjacent swaps--> 128+896 --F19 block--> 64
-  --       |                                              |
-  --       | original fine decoder                         | =
-  --       v                                              v
-  --    original native R445 field ------------native block--> 64
-  --
-  -- Both 64-link outputs are original bond-ordered source vectors.
-  originalF19AndNativeR445Actual64CommutingSquare :
-    ∀ (original : Vec.Vec Link Native.Count) →
-    F19Block.originalF19BlockedLinksOnR445Coordinates
-      theory traceData exponential beta source bilateral linear
-      original
-    ≡
-    originalF19SortedCoarse64 original
-  originalF19AndNativeR445Actual64CommutingSquare original =
-    F19Block.originalF19BlockedLinksOnR445Coordinates
-      theory traceData exponential beta source bilateral linear
-      original
-
+  -- Finish the ORIGINAL source-valued F19/R445 block comparison:
+  -- pair-product equality from selected F19 labels, then native
+  -- selected two-link parity lemma (not a second block function).
   originalPhysicalF19Blocked64EqualsNativeR445 :
     ∀ (original : Vec.Vec Link Native.Count) →
     originalF19SortedCoarse64 original
@@ -170,6 +151,33 @@ module _
     trans
       (originalF19Sorted64AreNativeParity64 original)
       (sym (originalNative64IsExplicitParity64 original))
+
+  -- The TWO distinct routes from the SAME ORIGINAL canonical Wilson
+  -- configuration end at the same 64 coarse SU(N) link values:
+  --
+  --  canonical U --actual F19 swaps--> 128+896 --F19 pair block--> 64
+  --     |                                                       |
+  --     | original full field decoder                            | =
+  --     v                                                       v
+  --  original native R445 fine field ------------native block--> 64
+  --
+  -- Both 64-link outputs are original bond-ordered source vectors.
+  originalF19AndNativeR445Actual64CommutingSquare :
+    ∀ (original : Vec.Vec Link Native.Count) →
+    Physical.coarseFromSortedOriginal
+      theory traceData exponential beta source bilateral linear
+      (Haar.permuteLinks
+        (Physical.actualProgram
+          theory traceData exponential beta source bilateral linear)
+        original)
+    ≡ originalNativeCoarse64 original
+  originalF19AndNativeR445Actual64CommutingSquare original =
+    trans
+      (F19Block.originalF19BlockedLinksOnR445Coordinates
+        theory traceData exponential beta source bilateral linear
+        original)
+      (originalPhysicalF19Blocked64EqualsNativeR445 original)
+
 
 -- The prior original F19 normalized real Wilson Gibbs theorem supplies
 -- the physical finite observable equality ONCE these actual source
