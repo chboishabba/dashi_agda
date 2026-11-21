@@ -16,7 +16,7 @@ module DASHI.Analysis.RHGRHPrimeE8Punctured27MonsterCMSourceCutExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Bool using (Bool; true; false)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Agda.Builtin.Maybe using (just; nothing)
 open import Data.Product using (_×_; _,_)
 open import Data.Empty using (⊥)
