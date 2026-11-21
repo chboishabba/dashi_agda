@@ -21,6 +21,13 @@ OWNERS = {
         "originalVariableN3IsNativeR445FineMeasure",
         "originalN3LiteralMixedLogJetIsActualR320PushforwardCovariance",
     ],
+    "DASHI/Physics/YangMills/YMClayOriginalR445ReflectedWordCMP116BIDIExact.agda": [
+        "originalSameFineSourceN3",
+        "originalCenteredReflectedOSIsOriginalR320",
+        "originalMixedJIsSameCenteredReflectedOS",
+        "Source.originalN3LiteralMixedLogJetIsActualR320PushforwardCovariance",
+        "R320.connectedCovarianceOfActualPushforward",
+    ],
     "DASHI/Physics/YangMills/YMClayNativeR445TemporalReversalExact.agda": [
         "originalSUNTimeReversalTwoLink",
     ],
