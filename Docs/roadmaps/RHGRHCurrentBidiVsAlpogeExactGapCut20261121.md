@@ -1,3 +1,11 @@
+## 21 Nov — corrected canonical CM all-prime and analytic max-cut
+
+Latest readback on **dashi_lean4@main** supersedes stale cross-branch missing-owner statements later in this chronological ledger: `EisensteinJZeroIntegralHeckeCharacterExact` already owns an integral conductor-coprime ideal `MonoidHom`; `EisensteinJZeroHeckeLocalAgreementExact` proves good-prime local elliptic/Hecke equality for **all p>3**; `EisensteinJZeroAllPrimeLocalExact` composes both bad prime factors 1 with good split/inert cases; `EisensteinJZeroConditionalAnalyticEulerExact` proves complex factor equality and infinite `tprod` equality **conditioned on Multipliable**. Do not reopen those finite/local/theorem components.
+
+#114 now has `EisensteinJZeroHasseEulerConvergenceWeldExact` using original j=0 norm/trace and Hasse prime majorant, with `hlocal` perturbation inequality as the exact next formal seam. This cannot borrow an unrelated CM BSD curve's `frobeniusCoefficient` proof. Then prove reciprocal-product convergence, same actual curve elliptic/Hecke analytic L-series identification, continuation/completion. The universal external all-Dirichlet `EveryCharacter` source and formal RH equivalence stay independent, Lean #113 / Agda #1533 P0; our internal G2/G3 signed-zero exclusion remains a separate research branch. Exact local SymPy PASS 107/107 original-curve primes; no Lean/Agda kernel or CI.
+
+---
+
 # Current DASHI RH BIDI vs Alpöge RH / GRH — exact gap-directed depth cut
 
 ## 21 Nov — Latest main-based PR #114 actually consumes both original source owners and the new ray BIDI
