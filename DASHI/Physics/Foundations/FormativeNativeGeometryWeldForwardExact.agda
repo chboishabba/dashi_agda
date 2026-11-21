@@ -186,12 +186,12 @@ record NativeBondToSelectedNumericalFace : Set where
     selectedNumericalFace : Cayley.MeshSelectedCayleyFace
     sourceIDMatchesNative :
       Face.DirectedFace.source
-        (Cayley.originalFace
+        (Cayley.IndexedCayleyFace.originalFace
           (Cayley.MeshSelectedCayleyFace.selected selectedNumericalFace))
       ≡ originalNodeID (Grid.bondStart nativeBond)
     targetIDMatchesNative :
       Face.DirectedFace.target
-        (Cayley.originalFace
+        (Cayley.IndexedCayleyFace.originalFace
           (Cayley.MeshSelectedCayleyFace.selected selectedNumericalFace))
       ≡ originalNodeID (Grid.bondEnd nativeBond)
 
