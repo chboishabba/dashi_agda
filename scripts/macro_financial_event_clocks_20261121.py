@@ -56,7 +56,7 @@ def chronology(events: Iterable[Event], as_of: str) -> tuple[Event, ...]:
         if key in seen:
             raise ValueError("duplicate source/arrival receipt")
         seen.add(key)
-        if utc(e.observer_received_at) <= cutoff:
+        if utc(e.observer_received_at) <= cutoff and utc(e.price_observed_at) <= cutoff:
             eligible.append(e)
     return tuple(sorted(eligible, key=lambda e: (
         utc(e.price_observed_at), utc(e.observer_received_at), e.source_id
