@@ -39,7 +39,7 @@ MomentBoundAt {operations = operations} {measureSequence = measureSequence}
         (T5.absoluteObservable producer observable)))
     (T5.multiply producer (T5.factorial producer degree)
       (T5.divide producer (T5.exponentialMomentBound producer observable)
-        (T5.lambda producer)))
+        (T5.scalarNatPower (T5.one producer) (T5.multiply producer) (T5.lambda producer) degree)))
 
 producerMomentBoundAt :
   ∀ {Measure Observable Scalar}

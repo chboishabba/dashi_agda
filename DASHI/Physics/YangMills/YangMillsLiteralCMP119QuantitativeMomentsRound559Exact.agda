@@ -20,6 +20,7 @@ module DASHI.Physics.YangMills.YangMillsLiteralCMP119QuantitativeMomentsRound559
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Unit using (⊤; tt)
 open import Agda.Builtin.Nat using (Nat)
 
@@ -95,7 +96,7 @@ preOSLiteralFiniteMomentBound :
       (T5.factorial (moments source) degree)
       (T5.divide (moments source)
         (T5.exponentialMomentBound (moments source) observable)
-        (T5.lambda (moments source))))
+        (T5.scalarNatPower (T5.one (moments source)) (T5.multiply (moments source)) (T5.lambda (moments source)) degree)))
 preOSLiteralFiniteMomentBound source degree observable cutoff =
   T5.singleScaleInsertionMomentBound
     (moments source)
@@ -181,7 +182,7 @@ literalFiniteMomentBound :
       (T5.factorial (moments source) degree)
       (T5.divide (moments source)
         (T5.exponentialMomentBound (moments source) observable)
-        (T5.lambda (moments source))))
+        (T5.scalarNatPower (T5.one (moments source)) (T5.multiply (moments source)) (T5.lambda (moments source)) degree)))
 literalFiniteMomentBound source degree observable cutoff =
   T5.singleScaleInsertionMomentBound
     (moments source)
@@ -211,6 +212,61 @@ literalFiniteExponentialBound source observable cutoff =
   T5.exponentialMomentUniformBound
     (moments source)
     observable tt cutoff
+
+-- Same-family pre-OS -> OS transport: the carrier reduces definitionally
+-- to A.family and A.observableAlgebra. No second moment selection.
+module _
+    {G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor HilbertSpace Hamiltonian VacuumState : Set}
+    {sequenceLimit : Seq.RealSequenceLimitByVanishingError}
+    {limitLaws : RealLimit.CanonicalRealLimitLaws sequenceLimit}
+    {quotient : Quotient.RealQuotientConvergenceAuthority
+      (RealLimit.Converges sequenceLimit)}
+    {division : Division.RealDivisionAlgebra
+      (RealLimit.canonicalCylinderAlgebra limitLaws) quotient}
+    {S : Top.LiteralYangMillsSemantics
+      (Physical.physicalLiteralCarriers
+        G X Nat Configuration ℝ (Configuration → ℝ) Position
+        CurvaturePolynomial LocalOperator OPECoefficient StressTensor
+        HilbertSpace Hamiltonian VacuumState)}
+    (inputs : A.PinnedCMP119OSAxiomInputs
+      G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor HilbertSpace Hamiltonian VacuumState
+      {sequenceLimit = sequenceLimit} limitLaws quotient division S)
+    (group : G)
+    where
+
+  private
+    PreOSSource = LiteralCMP119PreOSQuantitativeMomentSource
+      Configuration limitLaws quotient division
+      (A.family inputs group) (A.observableAlgebra inputs)
+
+    OSSource = LiteralCMP119QuantitativeMomentSource
+      G X Configuration Position CurvaturePolynomial LocalOperator
+      OPECoefficient StressTensor HilbertSpace Hamiltonian VacuumState
+      limitLaws quotient division S inputs group
+
+  preOSToSameOSMoments : PreOSSource → OSSource
+  preOSToSameOSMoments source = record
+    { moments = LiteralCMP119PreOSQuantitativeMomentSource.moments source }
+
+  sameOSToPreOSMoments : OSSource → PreOSSource
+  sameOSToPreOSMoments source = record
+    { moments = LiteralCMP119QuantitativeMomentSource.moments source }
+
+  preOSToSameOSKeepsProducer : (source : PreOSSource) →
+    LiteralCMP119QuantitativeMomentSource.moments
+      (preOSToSameOSMoments source)
+    ≡ LiteralCMP119PreOSQuantitativeMomentSource.moments source
+  preOSToSameOSKeepsProducer source = refl
+
+  sameOSToPreOSKeepsProducer : (source : OSSource) →
+    LiteralCMP119PreOSQuantitativeMomentSource.moments
+      (sameOSToPreOSMoments source)
+    ≡ LiteralCMP119QuantitativeMomentSource.moments source
+  sameOSToPreOSKeepsProducer source = refl
+
+-- Original real exponential moments remain a physical source obligation.
 
 round559PreOSLiteralCMP119MomentTransportLevel : ProofLevel
 round559PreOSLiteralCMP119MomentTransportLevel = machineChecked

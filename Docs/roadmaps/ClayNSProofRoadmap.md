@@ -322,3 +322,28 @@ never restart broad archaeology as a proof step;
 search forward from a named unpaid field while retaining old attempts as
 historical/provenance evidence.
 ```
+
+
+## 2026-11-20 — canonical #1444 reconciliation (NS)
+
+All new Clay proof work is routed to PR #1444; older PRs and numbered rounds are historical theorem donors, not competing endpoints. Steelman the literal endpoint, BIDI, reverse solve, weld existing producers, then local verification. Use SymPy for exact independent arithmetic/physical controls; this is not Agda kernel acceptance.
+
+The R664/R665/R685 collinear heat-flow regression, originally committed at 08996708ed951abcd3b21bd89b8c63646fc17c05, is preserved at `scripts/check_ns_collinear_rate_kernel.py`. Local SymPy execution was repeated: N=5, K=2, k=(5,0,0), 726 ordered incidences, two active mixed cells, W(0)=-56 nu, n W(0)=-40656 nu, and W=-d|M|²/dt for this exact unforced real Fourier heat flow. This is only a historical signed-kernel positivity negative control, not a new current collar gate, not a C2 refutation, and not the original rational Agda trajectory weld.
+
+The later R737–R752 cancellation and R828–R853 selected reserve decision supersede that local route. `NSTriadKNR650CanonicalSelectedRateNormalFormRound853Exact` provides the same-object general selected rate 6(12 C_coh - P + (2 nu - delta) D). The selected negative reserve decision still requires the original real trajectory attachment and verified authority; do not revive an unconditional reserve assumption. The positive-B alternative `NSClayFacingBLiteralRowAnalyticMaxCut20261004Exact` consumes four literal row inequalities B1/B2/B3/B4 on the original R236 graph; `NSClayFacingBLocalEDCompilerMaxCut20261004Exact` already aggregates c1+c2+c3+c4 on the common ED currency. Local-ED allocation is not a fifth analytic leaf. This updates routing of older sections without deleting their historical provenance. No new universal estimate, continuum theorem, or Clay promotion follows.
+
+
+### 2026-11-20 — R236 signed regional moment execution
+
+The original covariance owners remain authoritative: NSTriadKNFiniteBipartiteCovarianceExact.bipartiteClosedForm, NSTriadKNFixedOutputCoherentCovariancePairDifferenceExact.pairDifferenceClosedForm, and the physical critical-touching bipartite attachment NSTriadKNPhysicalCriticalTouchingDefectBipartite20261007Exact. No replacement Agda owner is introduced.
+
+The B1–B4 signed block consumer uses minus the original pair term. For region A retain (n_A,R_A,W_A,V_A) = (count,sum rate,sum work,sum rate*work). Its diagonal is R_A W_A - n_A V_A; the cross block is R_A W_B + R_B W_A - n_B V_A - n_A V_B. All six blocks can be evaluated in O(n) arithmetic operations and twelve scalar accumulators, given original classified cells, rates and work. This is consumer-sufficient, not a reconstruction of the incidence geometry or a bit-complexity bound. Zero-work cells must retain count and rate: (r,w)=(1,2),(3,0) give signed cross contribution 4, not 0. Do not prune them without preserving those moments. The original row geometry remains needed for analytic estimates.
+
+Local `python scripts/check_ns_r236_moments.py` passed 81 symbolic tag assignments, 520 rational fibres, all six blocks and total, and two negative controls (zero-work pruning and non-injectivity). This is independent exact algebra on supplied tags/rates/work, not a replay of the physical classifier or a cutoff-uniform B1–B4 proof. No Clay promotion or kernel receipt. All work lands in #1444.
+
+
+### 2026-11-20 — exact R236 lattice count and input-mass compression
+
+The source-native physicalOutputFiber is the ordered integer cutoff cube intersected with its reflection about k/2. For cumulative radii a,b, each axis has L=max(-a,k_i-b), U=min(a,k_i+b); empty intersections give zero. Count is the product of interval lengths. Input mass J=sum(|p|²+|q|²) follows from the telescoping polynomials F1(x)=x(x+1)/2, F2(x)=x(x+1)(2x+1)/6: each axis contributes 2ΔF2-2k_iΔF1+k_i² length, multiplied by the other two axis lengths. The two-shell inclusion-exclusion then yields exact count and mass per shell pair; route by existing R236 tags. The actual NSTriadKNPhysicalScaleTrichotomy / Round25/63 comparisons are strict j+3<j', with precedence LH, HL, HH, CC. Shell zero includes zero and unit modes. The final shell is clipped at N; outputs outside N have empty fibres. Existing NSPeriodicFarLowShellIntersectionCount and NSPeriodicNearShellOverlapCount do not replace these exact weighted counts.
+
+Local SymPy 1.14.0 regression scripts/check_ns_r236_lattice_moments.py passed 2600 literal fibre comparisons, three symbolic telescoping identities, all region classes, reflection and strict collar controls. At N=5,k=(5,0,0), core count=726 and input mass=42350. At N=2^20,k=(5,0,0), total count=9223363240747073532 with 441 shell pairs; no explicit large fibre enumeration. O((1+log N)^2) arithmetic operations per output for geometric moments only; no bit-complexity or all-output complexity claim. For physical decay rate multiply mass by viscosity, but the literal R236 row uses input mass prior to viscosity. Counts and mass cover zero-work cells; sparse W,V still depend on the actual mixed-product fold and coherent work. The classifier is a source-transcribed Python consumer, not an Agda execution; both comparison routes share it. No B1–B4 inequality, new Clay endpoint, or kernel acceptance follows. Canonical PR #1444 only.

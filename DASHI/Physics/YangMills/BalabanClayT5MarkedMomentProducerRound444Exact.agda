@@ -76,7 +76,8 @@ record MarkedMomentTypedRealization
           (measureSequence cutoff)
           (powerObservable degree (absoluteObservable observable)))
         (multiply (Physical.factorial closure degree)
-          (divide (Physical.uniformMomentBound closure observable) lambda))
+          (divide (Physical.uniformMomentBound closure observable)
+            (T5.scalarNatPower one multiply lambda degree)))
 
     reflectedProductYoungRealized :
       ∀ left right → Set

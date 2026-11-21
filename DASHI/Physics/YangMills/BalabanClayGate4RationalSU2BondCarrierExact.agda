@@ -45,7 +45,13 @@ RationalSU2SiteGauge : Nat → Set
 RationalSU2SiteGauge n =
   Bond.PeriodicSiteGauge n SU2.RationalUnitQuaternion
 
-record RationalSU2BondData (n : Nat) : Set₁ where
+-- Both fields have Set-level types (finite positive-bond function and
+-- site-gauge function). The previous : Set₁ was an unnecessary universe lift
+-- which made RationalWilsonObservable n : Set and the selected physical
+-- finite-measure Configuration : Set impossible to instantiate on this same
+-- native carrier. Universe lowering is representational only: no constructor,
+-- field, proof witness, group operation or physical theorem is changed.
+record RationalSU2BondData (n : Nat) : Set where
   field
     links : RationalSU2BondField n
     siteGauge : RationalSU2SiteGauge n
