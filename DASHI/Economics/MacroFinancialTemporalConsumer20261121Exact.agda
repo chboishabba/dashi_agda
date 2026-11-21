@@ -9,6 +9,7 @@ import DASHI.Economics.AICapitalOutcomeCompatibility20261016Exact as Outcome
 import DASHI.Economics.ChinaRetailGoldMarketTopology2026Exact as Gold
 import DASHI.Economics.AICapitalBurdenRelocation20261012Exact as Burden
 import DASHI.Economics.JPYTreasuryOpposingFlow20261121Exact as Treasury
+import DASHI.Economics.JPYTreasuryInterventionOfficialReceipts20261121Exact as FX
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 
 -- Relative clock ticks on a common declared timeline, not calendar parsing.
@@ -141,3 +142,11 @@ sameJPYOppositeYieldDirection :
   (Treasury.outcome Treasury.flightLower ≡ Treasury.lowerYield) ×
   (Treasury.outcome Treasury.repatriationHigher ≡ Treasury.higherYield)
 sameJPYOppositeYieldDirection = Treasury.oppositeOutcomeDespiteSameJPY
+
+-- Real operation receipts remain distinct from the wholly synthetic channel
+-- elasticity/pressure fixtures and from the USD-denominated photographed plan.
+originalJapanQuarterTotal : FX.japanQuarterTotal ≡ 153993
+originalJapanQuarterTotal = FX.japanTotalMatchesOfficial
+
+originalUSSpotYen : FX.yenBoughtTenthsBillion FX.usJuly31 ≡ 794
+originalUSSpotYen = refl
