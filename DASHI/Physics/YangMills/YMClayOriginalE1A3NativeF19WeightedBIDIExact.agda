@@ -38,8 +38,8 @@ module DASHI.Physics.YangMills.YMClayOriginalE1A3NativeF19WeightedBIDIExact wher
 
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong₂; sym; trans)
-open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; _*ℝ_; _-ℝ_)
+open import Relation.Binary.PropositionalEquality using (cong₂; subst; sym; trans)
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 0ℝ; _*ℝ_; _-ℝ_; _+ℝ_; absℝ; _≤ℝ_)
 import Data.Vec.Base as Vec
 
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
@@ -194,6 +194,102 @@ module _
           theory traceData exponential beta oneLink bilateral divide
           (coarseVectorTestAsNative left)
           (coarseVectorTestAsNative right)))
+
+  -- A FULL three-moment original WILSON ERROR COMPILER consumed from
+  -- the existing source, now with the F19 *effective* covariance as
+  -- the LHS. The incoming bounds are the EXACT original E1 n=3
+  -- blocked vs independently bare n=1 source F/G/FG errors.
+  -- There are NO invented smallness, UV/IR or 1/k hypotheses.
+  originalF19EffectiveCovarianceErrorFromE1ThreePhysicalMoments :
+    (left right : CoarseVectorTest)
+    (errorProduct errorLeft errorRight
+     boundEffectiveRight boundBareLeft : ℝ) →
+    0ℝ ≤ℝ errorLeft →
+    0ℝ ≤ℝ boundEffectiveRight →
+    0ℝ ≤ℝ boundBareLeft →
+    0ℝ ≤ℝ errorRight →
+    absℝ
+      (ThreeMoment.originalE1FineBlocked
+         theory traceData exponential beta oneLink bilateral divide
+         (ThreeMoment.productTest
+           theory traceData exponential beta oneLink bilateral divide
+           (coarseVectorTestAsNative left)
+           (coarseVectorTestAsNative right))
+       -ℝ
+       ThreeMoment.originalE1BareCoarse
+         theory traceData exponential beta oneLink bilateral divide
+         (ThreeMoment.productTest
+           theory traceData exponential beta oneLink bilateral divide
+           (coarseVectorTestAsNative left)
+           (coarseVectorTestAsNative right)))
+      ≤ℝ errorProduct →
+    absℝ
+      (ThreeMoment.originalE1FineBlocked
+         theory traceData exponential beta oneLink bilateral divide
+         (coarseVectorTestAsNative left)
+       -ℝ
+       ThreeMoment.originalE1BareCoarse
+         theory traceData exponential beta oneLink bilateral divide
+         (coarseVectorTestAsNative left))
+      ≤ℝ errorLeft →
+    absℝ
+      (ThreeMoment.originalR445Effective
+         theory traceData exponential beta oneLink bilateral divide
+         (coarseVectorTestAsNative right))
+      ≤ℝ boundEffectiveRight →
+    absℝ
+      (ThreeMoment.originalR445Bare
+         theory traceData exponential beta oneLink bilateral divide
+         (coarseVectorTestAsNative left))
+      ≤ℝ boundBareLeft →
+    absℝ
+      (ThreeMoment.originalE1FineBlocked
+         theory traceData exponential beta oneLink bilateral divide
+         (coarseVectorTestAsNative right)
+       -ℝ
+       ThreeMoment.originalE1BareCoarse
+         theory traceData exponential beta oneLink bilateral divide
+         (coarseVectorTestAsNative right))
+      ≤ℝ errorRight →
+    absℝ
+      (originalF19EffectiveCovariance left right -ℝ
+       ThreeMoment.originalR445BareCovariance
+         theory traceData exponential beta oneLink bilateral divide
+         (coarseVectorTestAsNative left)
+         (coarseVectorTestAsNative right))
+      ≤ℝ
+      (errorProduct +ℝ
+        ((errorLeft *ℝ boundEffectiveRight)
+          +ℝ (boundBareLeft *ℝ errorRight)))
+  originalF19EffectiveCovarianceErrorFromE1ThreePhysicalMoments
+      left right errP errL errR maxER maxBL
+      errLNN maxERNN maxBLNN errRNN
+      productError leftError rightSize leftSize rightError =
+    let
+      sourceLeft = coarseVectorTestAsNative left
+      sourceRight = coarseVectorTestAsNative right
+      rate = errP +ℝ
+        ((errL *ℝ maxER) +ℝ (maxBL *ℝ errR))
+      originalBare =
+        ThreeMoment.originalR445BareCovariance
+          theory traceData exponential beta oneLink bilateral divide
+          sourceLeft sourceRight
+      samePhysicalCovariance =
+        trans
+          (sym
+            (originalE1Cutoff3ConnectedCovarianceIsOriginalF19Effective
+              left right))
+          (originalE1VectorCovarianceIsOriginalThreeMomentE1 left right)
+    in
+    subst
+      (λ effective →
+        absℝ (effective -ℝ originalBare) ≤ℝ rate)
+      (sym samePhysicalCovariance)
+      (ThreeMoment.originalE1CovarianceErrorFromThreePhysicalCutoffMoments
+        theory traceData exponential beta oneLink bilateral divide
+        sourceLeft sourceRight errP errL errR maxER maxBL
+        errLNN maxERNN maxBLNN errRNN
+        productError leftError rightSize leftSize rightError)
 
   -- Original E1 at n=1 is the *different* independently bare Wilson
   -- measure, whose three F/G/FG comparison errors are already owned by
