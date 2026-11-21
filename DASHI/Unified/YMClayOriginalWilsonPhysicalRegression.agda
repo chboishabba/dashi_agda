@@ -74,6 +74,13 @@ import DASHI.Physics.YangMills.YMClayOriginalWilsonMarkedOS1AllTimesProducerWeld
 -- and closes at one R281 indexed spectrum (not physical H_OS yet).
 import DASHI.Physics.YangMills.YMClayOriginalWilsonOS1R556R281CommutingSquareExact as OriginalOS1CovarianceSquare
 
+-- Canonical SI/metrology source WELD at actual original two-link R445
+-- block: fine spacing [m], native pair length [m], and (under explicit
+-- coarse inverse-spacing calibration) same inverse correlation length
+-- [m^-1]. Existing SI YangMills scaling owns kg/J conversion. This
+-- contains NO inferred W1/W3 physical rate or continuous spectrum proof.
+import DASHI.Physics.YangMills.YMClayR445Base2SIPhysicalRateBIDIExact as OriginalR445SIPhysicalRate
+
 -- Source-written original R445 fine PositiveBond4 <-> (original 64-coarse
 -- bond, two-link axial phase, three transverse parity bits).  Entire
 -- 1024-bond source partitions into 8 reversible 128-bond binary sheets:
