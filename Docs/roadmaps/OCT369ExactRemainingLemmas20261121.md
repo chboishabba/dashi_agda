@@ -87,3 +87,10 @@ Important: symbolic 1+omega+omega²=0 with sum omega^(3j)=3 is only a C3 angular
 | P0.17c-metric | Same locally covariant matter+Maxwell/non-Abelian+controller action, source-derived conserved physical T_munu | OPEN; formal q/t cumulant is not gravitational stress |
 | P0.17d-OS | Exact original R445 real Gibbs vs CMP119 rational T5 same-source scalar/measure, published Wilson RP, E1, same H_OS gap | OPEN per YM #1536; no Clay claim |
 | P0.17e-lift | Measured external force and gravimeter null/positive signal, three routes and 70kg 686.4655N | OPEN |
+
+| P0.18-geometry | Full periodic L12 nearest Mn3c bonds with 24 directed bonds / 8 per Mn; C3 and TR spinful symmetry | Local numerical finite fixture PASS; NOT measured atomic Wannier bands |
+| P0.18-correction | Previous P0.16 intracell Bloch-phase-only spectrum is flat under unitary gauge change; new H has genuine k dispersion | Exact spinless Gamma/X eigenvalues + numerical negative control PASS |
+| P0.18-transport | 12x12 two-layer phenomenological barrier, positive NEGF transmissions, Onsager/domain reversal | Local pass; MgO DFT/layer transmission OPEN |
+| P0.18-force | Same-H finite grand potential gives equilibrium body/support reaction and independent HF/finite difference checks of force & angle torque | Local PASS; not the experimental CURRENT-driven OTT |
+| P0.18-identification | Target 363% TMR yields arbitrary model ratio t_d/t_o=sqrt(1289/200); non-identifiable without source data | Exact symbolic inverse control; no calibrated device fit |
+| P0.18-gravity | Complete covariant same-device stress incl. battery, Maxwell field, ionic lattice, support + physically calibrated gravity observable | OPEN |
