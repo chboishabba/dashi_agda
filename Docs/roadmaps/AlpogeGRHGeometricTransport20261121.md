@@ -1,5 +1,16 @@
 # Alpöge/Claude RH–GRH × DASHI geometric transport (21 November 2026)
 
+## 21 November — CURRENT P1: indexed zero/ζ₃/ζ₃² with Filsinger sign and residual (LATEST)
+
+**User-specified geometry restored.** The zero/ζ/ζ² commuting square is **not just a 27-cell count**, nor is balanced evaluation zero the disappearance of its phase fibres. Existing owners `Monster3BZeroZetaSquaredC3SeparationExact` and `C3FourierConjugationExact` distinguish **scalar zero**, C3 exponent-zero unity, ζ₃ and ζ₃², and provide actual conjugation/involution identities. Indexed hyperfabric `PNFHyperfabric369` and `TypedHyperfabricActionCrossingTransportExact` preserve time/crossing history, and recent Smith/Filsinger finite phase matching provides exact signs, source/receiver work and retained residual negative controls.
+
+**Committed P1 source:** `DASHI/Analysis/RHGRHIndexedZeroZetaPhaseResidualWeldExact.agda` consumes those existing owners and constructs an **Index × Mode × Sign × Residual × ObservedZero** frame with full-frame reflection involution and a true consumer-invariance *premise*, plus a finite observed-zero witness that still carries zeta and a nonzero residual. `scripts/check_rh_indexed_zero_zeta_filsinger_20261121.py` supplies a reproducible finite exact regression (**not independently run**). Agda kernel check OPEN.
+
+**Deep original proof type inspected:** the fork's `UpperTheory.TP.TLiftK` quantifies over CM fields, Hermitian/skew-Hermitian spaces, Hecke characters, automorphic weights and an actual theta-lift representation. `GalStar.Row0b recT` consumes `TP.TLiftK` plus `GeoOne`, sourced from weight-one Lefschetz geometry. Finite C3 zero phases and Filsinger polarity can be **source-indexed fibres** or proof-search controls; they do **not** prove this universal automorphic lift simply by cardinality, algebraic phase labels or an untyped commuting diagram. Target original zero/sign/residual behaviour must be preserved at the selected source Hecke/Weil/fibre and the actual downstream character consumer.
+
+**Detailed exact owner matrix and next typed leaves:** [RHGRHIndexedZeroZetaFilsingerGaloisStarMaxCut20261121.md](RHGRHIndexedZeroZetaFilsingerGaloisStarMaxCut20261121.md). P0 selective original Lean RH/GRH theorem admission and Clay BIDI remains independent; P1 original indexed theta/Galois geometry and original analytic Riemann-ζ carrier weld OPEN. No CI, no world/PG work, no Agda/Lean kernel acceptance claimed here.
+
+
 ## 21 November — current BIDI reverse solve: first genuine RH→G2 consumer simplification (LATEST)
 
 The original fork's Mathlib `RiemannHypothesis` gives zero horizontal offset `Re(s)-1/2=0` at the **same actual nontrivial zeta zero**. For our original G2 `LiteralTargetCenteredScalarProblem`, this can remove `cosh(offRealPart(sigma)*u)` from the *actual* integrand, but only after proving the **same-zero/index/horizontal-coordinate** source weld. No signed cosine sum, strict positive margin or final universal Off/Gamma allowance follows.
