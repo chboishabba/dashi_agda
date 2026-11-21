@@ -32,7 +32,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Empty using (⊥)
-open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _*_)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; -_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Relation.Binary.PropositionalEquality using (sym; trans)
 
@@ -74,14 +74,6 @@ normalizedAllNBuildsOneDimensionalReceipt {g = g} fOne gOne allN =
     ; originalNormalizedFirstCoefficient = fOne
     ; etaNormalizedFirstCoefficient = gOne
     }
-
-normalizedOneDimensionalReceiptIffAllN :
-  ∀ {f g : Nat → ℚ} →
-  f 1 ≡ 1ℚ → g 1 ≡ 1ℚ →
-  ((n : Nat) → f n ≡ g n) →
-  Normalized.NormalizedOneDimensionalQSeries f g
-normalizedOneDimensionalReceiptIffAllN =
-  normalizedAllNBuildsOneDimensionalReceipt
 
 -- The SOURCE-TYPED original BSD local L-data must be indexed by
 -- the exact E:y^2=x^3-x; its p=5 Frobenius must equal the ORIGINAL
