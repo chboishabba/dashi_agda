@@ -230,3 +230,29 @@ A concrete geometric bridge is already present: #1408's exact affine 27-point ch
 **Steelman** = preserve original proof's exact spectral, analytic, finite-character and theta directions rather than collapsing them into one generic 'positivity' label. **BIDI** = prove forward and reverse on the same named carrier with the existing actual theorem owners. **Reverse-solve** = walk backwards from the already-paid Lean Clay terminal equivalence; don't allocate work to Riemann G2/G3 unless the external proof's actual audited dependency graph needs it.
 
 No CI, no Lean/Agda native acceptance claimed in this update. Existing finite SymPy checks are P1 regressions, not external proof import evidence.
+
+## 21 November — selective RH source splice and first genuine theta/geometric producer edge
+
+**P0 target now: source-original 5 public claims, as few unnecessary wrapper imports as the actual code permits.** New Lean #113 `RHTopCut.lean` imports only `Statements` and `Supplements.Kernels.MainTheorems` instead of `MainTheoremsAll`. New `RHSelectiveProducerCut.lean` also bypasses `MainConclusion`, directly composing the *original exact underlying theorem terms* `every_character_of_literature_of_vWin`, `vwin_of_row`, `galoisLocalGlobalStrong_recParameter`, `Formalism.VW.rh_of_every`, `Formalism.VW.critLine`, `Claim.strip`. This is a **selective root-import and proof-composition candidate**, not an original deep theorem reproof. Neither has been Lean checked, and each imported source module may have a large transitive dependency closure.
+
+### Actual first geometric crosswalk from inspected external fork source
+
+- `UpperTheory.FinalTheorems.everyCharacter` is produced from the actual `UpperTheory.Gal.Int.galoisLocalGlobalStrong_recParameter` in `CharacterBoxes/MainConclusion.lean`.
+- The latter is defined by `galoisRepresentations_of_thetaLift UpperTheory.TP.K.tLiftK` in `Foundations/GaloisRepresentations/IntegralStructures/RowSrc.lean`.
+- `galoisRepresentations_of_thetaLift up` is defined by `galoisLocalGlobalStrong_of_geometry_lift UpperTheory.Gal.Int.Geo.geoOne_holds up` in `GaloisRepresentationsOfThetaLift.lean`.
+- `UpperTheory.TP.K.tLiftK` is defined from `UpperTheory.TP.tLift_holds_k` in `ThetaParseval/ThetaKernels/TLiftK.lean`.
+
+These are **source-readback exact producer edges**. They give a much stronger P1 target than 'this resembles our Monster/369 notation': any replacement using native 369, G2, S3, Weil or Monster must furnish an *actual term* for the original `UpperTheory.TP.TLiftK` / `UpperTheory.GalStar.Row0b recT`, or a proven consumer-preserving map into those original types.
+
+| Gate | Priority | Minimal exact deliverable | Status |
+|---|---|---|---|
+| RH-P0-TC1 | highest P0 | locally typecheck `RHTopCut.lean` against original fork v4.33.1, five exact theorem types and axioms | SOURCE WRITTEN, OPEN |
+| RH-P0-TC2 | highest P0 | locally typecheck `RHSelectiveProducerCut.lean` and compare *actual* import closure to TC1 | SOURCE WRITTEN, OPEN |
+| RH-P0-TC3 | P0 | import exact Mathlib root RH into existing Clay BIDI on one accepted Lean toolchain; no stale cross-version OLean | open actual version weld |
+| RH-P0-TC4 | P0 | original Agda complex/Zeta zero predicate and critical-line transport + actual proof admission | open |
+| RH-P1-GEO1 | P1 high | `originalTPtLiftKFromNativeGeometricProducer`: exactly original theta-lift `UpperTheory.TP.TLiftK` with correct range, parameters, measures | OPEN |
+| RH-P1-GEO2 | P1 high | `originalRow0bFromGeometricThetaLift`: actual original `galoisLocalGlobalStrong_of_geometry_lift` and source `geoOne_holds` or typed equivalent | OPEN |
+| RH-P1-GEO3 | P1 medium | `originalG2DeterminantConsumerFactorsThroughRow0b` or explicit mismatch witness; our `determinantResponseSufficientForFixedKernel` alone is insufficient | OPEN |
+| RH-P1-GEO4 | P1 medium | original C3/S3 six-face, Weil test and genuine theta source operator BIDI, fail-closed noncommutation residuals | OPEN |
+
+**World/PG/OpenAI corpus ingestion is postponed**. A source-only manifest exists from an earlier tranche but does not block, accelerate or establish the top-cut theorem. The new cut uses the fork's exact original source in one Lean environment, keeps the old Clay BIDI, and measures actual win only on native local receipts. No CI and no kernel compile occurred during this source inspection.
