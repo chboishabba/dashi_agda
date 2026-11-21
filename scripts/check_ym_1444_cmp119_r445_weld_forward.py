@@ -64,6 +64,15 @@ OWNERS = {
         "originalEverySortedValueConsumerAgrees",
         "Labels.originalF19Complete1024LabelOrderMatchesR445",
     ],
+    "DASHI/Physics/YangMills/YMClayOriginalE1A3NativeF19WeightedBIDIExact.agda": [
+        "coarseVectorTestAsNative",
+        "originalE1Cutoff3IsNativeR445VectorExpectation",
+        "originalE1Cutoff3NativeIsOriginalF19WeightedEffective",
+        "originalE1Cutoff3ConnectedCovarianceIsOriginalF19Effective",
+        "originalE1VectorCovarianceIsOriginalThreeMomentE1",
+        "originalF19EffectiveCovarianceIsOriginalR445ThreeMoment",
+        "ThreeMoment.originalE1FineBlockedCovarianceIsR445Effective",
+    ],
     "DASHI/Physics/YangMills/YMClayOriginalR445NativeF19WeightedPhysicalSourceBIDIExact.agda": [
         "originalNativeR445MarkedNumerator",
         "originalNativeR445NumeratorIsOriginalF19",
@@ -264,6 +273,7 @@ CHECKS = [
     "scripts/check_ym_f19_r445_full1024_labels_p0.py",
     "scripts/check_ym_f19_r445_sympy_purehaar_weld.py",
     "scripts/check_ym_native_f19_weighted_slice_sympy.py",
+    "scripts/check_ym_e1a3_f19_three_moment_sympy.py",
 ]
 
 def main():
