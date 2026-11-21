@@ -55,3 +55,12 @@ Does exposure to **earlier similar patterns in independent populations** alter a
 3. **P2 Filsinger/source response:** use the existing retarded Maxwell/ADE and source-separated source–receiver work; preserve measured device identity and storage history.
 4. **P3 Levin morphogenesis:** voltage, tissue topology, environmental source trace, perturbation/removal, persistent hidden pattern and future response; avoid conflating regeneration with remote knowledge transfer.
 5. **P4 independent cross-population discrimination:** preregistered randomizations and negative controls; acquire direct original datasets and independent replication before treating a distinct morphic term as credible.
+
+
+## 21 November exact phase/lemma consolidation continuation
+
+The authoritative consolidated delivery ledger for this PR is now [SheldrakeFormativeFieldsFilsingerEskridgeLevinBH4ExactRemaining20261121.md](../roadmaps/SheldrakeFormativeFieldsFilsingerEskridgeLevinBH4ExactRemaining20261121.md). It supplies **Q0–Q7 concrete phases, exact remaining lemma declarations, source owners, negative controls and physical/empirical admission gates**, with Filsinger F01–F16 and BH4 G0/S0/P0–P3 identifiers preserved.
+
+A new `FormativeFieldWorkLevinBH4EskridgeBidiExact` module directly consumes the existing BH4 context/NOS3, Eskridge Li–Torr and Levin field owners, proving only typed non-promotion/projection statements and a finite equal-budget/different-form counterexample. The companion `check_formative_field_work_levin_bh4_eskridge_sympy.py` passed **18/18 local synthetic exact SymPy checks**; earlier Galton/control checker passed **19/19**, 37 separate exact synthetic checks in total. Agda kernel and all original physical evidence gates remain OPEN.
+
+The upload's **00:56–03:43** discussion of seventeenth-century mechanistic explanations versus Aristotelian formal/final causes is now explicitly analyzed alongside **05:17–08:45** local magnetic distribution bias. A static field not visibly depleting as fuel does *not* remove conservative potential work, repositioning costs, hidden storage or boundary momentum. The extra remote similarity-history hypothesis remains distinct from conventional field physics and Michael Levin's physically carried pattern memory.
