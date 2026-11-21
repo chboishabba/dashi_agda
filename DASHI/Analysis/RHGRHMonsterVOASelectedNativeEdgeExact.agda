@@ -20,8 +20,6 @@ import DASHI.Unified.HyperfabricPunctured27Projective13OrientationExact as Axis
 import DASHI.Moonshine.Monster27VOACubeWeightedChargeNoGoExact as Charge
 import DASHI.Moonshine.Monster27VOAVertexModeChargeSelectionExact as VOA
 import DASHI.Algebra.TriadicFiniteArithmetic as Arith
-import DASHI.Analysis.RHGRHIndexedPunctured27HolonomyExact as Index
-import DASHI.Moonshine.Monster27VOAOnsiteCube369BridgeExact as Parent
 
 -- This is not a fabricated edge: the original proof term is reused.
 selectedNativeXYEdge :
@@ -65,8 +63,9 @@ localSelectedEdgeParity :
   Axis._xor_ false false ≡ false
 localSelectedEdgeParity = refl
 
--- An explicit five-axis consumer. There is NO attempt to construct a
--- CubeIndex.ExactFaces proof from a noncommuting native 4-cycle.
+-- Five independently supplied scalar labels are not substituted for
+-- the genuine five-coordinate indexed cube source on unmerged #1291.
+-- This theorem is parameter-independent, NOT an Index record theorem.
 selectedEdgeAtEveryIndex :
   (h t k j v : Nat) →
   Cube.HypervoxelAdjacent
@@ -74,11 +73,15 @@ selectedEdgeAtEveryIndex :
     (Axis.representative Axis.faceXYpp)
 selectedEdgeAtEveryIndex h t k j v = selectedNativeXYEdge
 
-noGlobalOrientationOnAnyIndex :
-  (k : Index.AxisIndex) →
-  Index.ClaimedGlobalOrientationAt k → ⊥
-noGlobalOrientationOnAnyIndex =
-  Index.noGlobalEdgeSectionAt
+noGlobalOrientationAtFiveLabels :
+  (h t k j v : Nat) →
+  (x pp y pm : Bool) →
+  Axis._xor_ x pp ≡ false →
+  Axis._xor_ pp y ≡ false →
+  Axis._xor_ y pm ≡ true →
+  Axis._xor_ pm x ≡ false → ⊥
+noGlobalOrientationAtFiveLabels h t k j v =
+  Axis.noEdgeCompatibleOrientation
 
 -- The SOURCE-LITERAL selected VOA edge operator is only present once
 -- Parent.Monster27VOAOnCubeSource and
