@@ -124,6 +124,12 @@ import DASHI.Physics.YangMills.YMClayOriginalF19R445PhysicalBlockedObservableSqu
 -- 64 original coarse bonds, source parity and genuine 1024-link decoder.
 -- Source-written closed 64-order computation requires pinned Agda kernel.
 import DASHI.Physics.YangMills.YMClayOriginalF19R445Native64HolonomySquareExact as OriginalF19NativeR445Square
+
+-- P0 directly instantiates the ALREADY ORIGINAL R445 two-field pure-Haar
+-- receiver using F19 adjacent swaps and native 64-block source candidates.
+-- Distinguish unweighted Haar from interacting Wilson Gibbs 896 spectators.
+-- SymPy exact finite checks PASS; Agda kernel still NOT run.
+import DASHI.Physics.YangMills.YMClayOriginalF19R445PureHaarReceiverCandidateExact as OriginalF19NativePureHaarCandidate
 import DASHI.Physics.YangMills.YMClayOriginalF19NativeR445SelectedOrderBIDIExact as OriginalF19R445SelectedOrder
 
 import DASHI.Physics.YangMills.YMClayD1OriginalCovarianceToR320Exact as D1OriginalCovariance
