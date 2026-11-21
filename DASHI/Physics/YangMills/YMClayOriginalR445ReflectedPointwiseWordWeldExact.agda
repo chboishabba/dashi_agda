@@ -23,7 +23,7 @@ module DASHI.Physics.YangMills.YMClayOriginalR445ReflectedPointwiseWordWeldExact
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
-open import Relation.Binary.PropositionalEquality using (cong₂)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂)
 
 open import DASHI.Foundations.RealAnalysisAxioms
   using (ℝ; 1ℝ; _*ℝ_)
@@ -41,6 +41,7 @@ import DASHI.Physics.Foundations.CMP119AntigravityRealGibbsDensityPositiveExact 
 import DASHI.Physics.YangMills.YMClaySUNSideFourBlockedFineHaarObservableExact as Word
 import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicBondPointwiseExact as Pointwise
 import DASHI.Physics.YangMills.YMClayR445SelectedTimeReflectionForwardExact as Geometry
+import DASHI.Physics.YangMills.BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact as Plaquette
 
 module _
     {Matrix Complex : Set} {N : Nat}
@@ -194,6 +195,50 @@ module _
         (reflectOriginalCoarseLinks (originalSourceR445Block fine))
   originalReflectedAllWordsCommuteWithR445 source words =
     originalReflectedWordCommutesWithR445 source (orderedWord words)
+
+
+  -- SOURCE-WRITTEN ORIGINAL LOCAL SU(N) WILSON PLAQUETTE:
+  -- This is literally the original periodicSUNPositivePlaquette followed
+  -- by the original matrixWilsonValue (see originalLocalPlaquetteTraceAt
+  -- in YMClayOriginalVariableWilsonCovarianceSourceExact).
+  -- We now have a concrete inhabited original pointwise observable,
+  -- rather than a generic oracle or a request for function extensionality.
+  originalLocalPlaquetteWord :
+    Plaquette.PeriodicPlaquette 1 → OriginalWilsonPointwiseWord
+  originalLocalPlaquetteWord plaquette = record
+    { observable = λ links →
+        Trace.matrixWilsonValue traceData
+          (Variable.periodicSUNPositivePlaquette theory 1 links plaquette)
+    ; pointwise = record
+        { Word.sameAtAllBonds = λ left right same →
+            cong (Trace.matrixWilsonValue traceData)
+              (Pointwise.variablePositivePlaquettePointwise
+                theory 1 left right same plaquette)
+        }
+    }
+
+  originalFinitePlaquetteWord :
+    List (Plaquette.PeriodicPlaquette 1) →
+    OriginalWilsonPointwiseWord
+  originalFinitePlaquetteWord [] = unitWord
+  originalFinitePlaquetteWord (plaquette ∷ others) =
+    productWord (originalLocalPlaquetteWord plaquette)
+      (originalFinitePlaquetteWord others)
+
+  -- All finite original gauge-invariant plaquette words are now
+  -- explicitly accepted by the constructive pointwise reflection adapter.
+  originalActualPlaquetteWordsReflectThroughR445 :
+    NativeR445ReflectionPointwise →
+    (word : List (Plaquette.PeriodicPlaquette 1)) →
+    (fine : FineLinks) →
+      observable (originalFinitePlaquetteWord word)
+        (originalSourceR445Block (reflectOriginalFineLinks fine))
+      ≡
+      observable (originalFinitePlaquetteWord word)
+        (reflectOriginalCoarseLinks (originalSourceR445Block fine))
+  originalActualPlaquetteWordsReflectThroughR445 source word =
+    originalReflectedWordCommutesWithR445 source
+      (originalFinitePlaquetteWord word)
 
   -- No identification of the published positive-time word predicate,
   -- no Euclidean RP from positive Gibbs density, no continuum limit,
