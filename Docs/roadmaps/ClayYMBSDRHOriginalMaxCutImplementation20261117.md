@@ -1,3 +1,11 @@
+## 21 Nov 2026 P0 revision: Agda BSD and YM original-owner separation
+
+- **BSD original E32:** K1--K5 producers and selected K4 genus-one/eta/Fricke arithmetic already exist on Agda `master`; do not treat #1500 historical branch as a missing replacement. New master-native `EllipticBSDOriginalLevel32SameCurveP0BIDIExact` sources original curve-typed p5 + q-series normalization and explicit coefficient BIDI, with missing original analytic modularity and Mellin as uninhabited inputs. Independent q-series/point-count finite checks 76/76 PASS, Agda compiler not run. External classical selected S4 analytic proof is not an Agda proof. K1/K2/K3/K5/S6 remain unproved.
+- **YM original Wilson:** #1444 shares original finite R445/F19 owners with `master`. #1536 now has source-written 128+896 full-label equality candidate (pending Agda kernel), and original finite blocked covariance and temporal/rp source welds. No physical original cutoff-uniform W1/W3, noncollapsed E1/OS, full H spectral gap or all-group G1 follows from those.
+- **Lean CM j=0:** PR #114 concerns E:y²=x³+1, conductor36, not original BSD E:y²=x³−x, conductor32. Its analytic convergence bound is a METHOD donor, never the original BSD selected-curve L-function by fiat. No Hecke/automorphic GRH consequence follows from ordinary/Dirichlet GRH.
+- **P0 order:** check native kernels/owner exact heads; finish YM original 1024-vector and Wilson-source interpretation; independently finish BSD E32 modularity/eta/Mellin and same-object L-data; preserve all E1/D1/D2/N1/G1 and K1-K5/S6 fail-closed boundaries. No new generic Wilson, Selmer, eta or L-function stack.
+
+
 # 17 Nov 2026 — BSD / RH source firewall, YM original physical cut
 
 **Implementation and status:** local SymPy checks PASS for the original small+large geometric compiler, a three-state same-H spectral counterexample, the S5 selected-curve scalar identity and two corrections to the pasted RH bump proposal. **No native Lean/Agda toolchain ran; NO physical YM gate was closed.** Expanded Clay portfolio is 14/28 resolved, 14/28 open, original six Clay endpoints 0/6.
