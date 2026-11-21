@@ -175,12 +175,9 @@ module _
         {SpectralObservable = SpectralObservable}
         {Energy = Energy}
         dataSet extension originalAllWilsonPairsTimesTests) →
-    SameOSAllWilsonPairsTimesSpectrum spectrum →
+    (dictionary : SameOSAllWilsonPairsTimesSpectrum spectrum) →
     ∀ observable time →
-    let selected = spectralWilsonPair
-          (SameOSAllWilsonPairsTimesSpectrum spectrum)
-          observable
-    in
+    let selected = spectralWilsonPair dictionary observable in
     R556.continuumCovariance source
       (proj₁ selected) (proj₂ selected) time
     ≡ Gap.connectedCorrelation
