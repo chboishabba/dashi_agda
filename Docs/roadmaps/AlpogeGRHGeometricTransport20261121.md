@@ -1,6 +1,59 @@
+## 21 Nov 2026 — P0 direct original Main acceptance is the NEXT LOCAL CHECK
+
+**Not another GRH plan or proof wrapper:** the already-existing
+`chboishabba/dashi_lean4` #113
+`proofs/alpoge-lean433/RHAdmission.lean` directly imports
+the original pinned `Main` and applies exactly its five published
+theorems to their original `Statements.lean` propositions. That
+source-written adapter PRECEDES the newer selective Galois/RowSrc
+experiment, and is the shorter P0 kernel target. Do not reimplement
+`Main`, Mellin, Dirichlet characters, zero tests, or Galois row proofs.
+
+**New implementation, committed with the work (Lean PR #113):**
+`proofs/alpoge-lean433/check_original_p0_admission.sh`.
+It calls the EXISTING `checkout_fork_source.sh` at pinned commit
+`7cbf7a0c32fca1badf05931879a37c3f8a2b03b4`, which checks
+`Main`, `Statements`, Lean v4.33.1 and Mathlib hashes; refuses dirty
+or wrong-origin source; requires `lake`; builds the untouched
+original `Main`; runs `lake env lean` on original
+`RHAdmission.lean`; and fail-closes unless all FIVE actual kernel
+`#print axioms` outputs are found with no axioms beyond
+`propext`, `Classical.choice`, `Quot.sound`.
+
+Invocation **on the user's local pinned Lean environment**, not
+GitHub CI:
+```sh
+bash proofs/alpoge-lean433/check_original_p0_admission.sh
+```
+Optional, NON-BLOCKING research donor:
+```sh
+GRH_P0_CHECK_DIRECTIONAL=1 bash proofs/alpoge-lean433/check_original_p0_admission.sh
+```
+That flag additionally checks the selective original Galois/RowSrc
+`RHGRHP0DirectionalSourceCut.lean` adapter, but the direct
+published `Main` path remains authoritative. No Lean/Lake
+executable is present in this model's runtime: **script was committed,
+NOT executed or accepted by a local Lean kernel here**.
+Never mark this P0 gate PASS merely from the external author's
+independently reported proof verification.
+
+**Next result-dependent actions:** capture the exact toolchain,
+build logs and five accepted axiom lines; if the source-version
+adapter fails, repair its literal import/statement, not the
+published theorem. Then handle the trusted original 4.33.1 to
+root 4.35/Mathlib proof transport, separately the all-moduli/
+all-characters Agda same-L-function/zero-carrier transport.
+RH-only `AlpogeRHOriginalClayEndpointBidiExact` remains a
+separate weaker endpoint. BSD/YM remain independent P0 lanes.
+This roadmap is maintained **alongside proof commits**.
+`GRHP0OriginalEveryCharacterMellinForwardWeld20261121.md`
+is an evidence/support appendix, not a standalone competing plan.
+
+---
+
 ## 21 Nov 2026 — current GRH P0 same-object admission; Mellin recovered
 
-The controlling source and independently reported verification receipt are now centralized in `Docs/roadmaps/GRHP0OriginalEveryCharacterMellinForwardWeld20261121.md`. GRH P0 means the **original all-Dirichlet-character** statement `UpperTheory.EveryCharacter`, not just zeta RH, a finite cubic/jacobi character, a CM elliptic L-function or a Monster VOA trace. Existing original Lean #113 already writes the directional terminal consumers and root Lean has an RH↔Clay theorem target, but compatible external v4.33.1 proof admission and actual Agda per-character analytic identity are still OPEN. The independently reported original proof checks strengthen confidence in the external formal source; no locally run kernel or cross-kernel transport is inferred.
+**This file remains the SINGLE CONTROLLING GRH ROADMAP.** The source attribution, source pins and independent-verification appendix are recorded in `Docs/roadmaps/GRHP0OriginalEveryCharacterMellinForwardWeld20261121.md`; that appendix is not a second roadmap. GRH P0 means the **original all-Dirichlet-character** statement `UpperTheory.EveryCharacter`, not just zeta RH, a finite cubic/jacobi character, a CM elliptic L-function or a Monster VOA trace. Existing original Lean #113 already writes the directional terminal consumers and root Lean has an RH↔Clay theorem target, but compatible external v4.33.1 proof admission and actual Agda per-character analytic identity are still OPEN. The independently reported original proof checks strengthen confidence in the external formal source; no locally run kernel or cross-kernel transport is inferred.
 
 **Do not rebuild Mellin.** `MellinSplitFunctionalEquationExact` is an existing exact split theorem; BSD's `EllipticCMLevel32FrickeMellinExact` already consumes it, and the RH G2 Gamma/Mellin/Weil original transport + proof-relevant character action already exists. Their currently uninhabited **same-original analytic realization** is the target. Agda #1533 now additionally projects the ORIGINAL Clay RH witness back to the analytic substrate without a separate hand-supplied witness function; this is RH only.
 
