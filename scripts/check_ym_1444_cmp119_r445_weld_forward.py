@@ -71,6 +71,7 @@ OWNERS = {
         "originalE1Cutoff3ConnectedCovarianceIsOriginalF19Effective",
         "originalE1VectorCovarianceIsOriginalThreeMomentE1",
         "originalF19EffectiveCovarianceIsOriginalR445ThreeMoment",
+        "originalF19EffectiveCovarianceErrorFromE1ThreePhysicalMoments",
         "ThreeMoment.originalE1FineBlockedCovarianceIsR445Effective",
     ],
     "DASHI/Physics/YangMills/YMClayOriginalR445NativeF19WeightedPhysicalSourceBIDIExact.agda": [
