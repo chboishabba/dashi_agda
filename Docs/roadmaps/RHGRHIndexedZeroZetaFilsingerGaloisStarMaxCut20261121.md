@@ -97,3 +97,16 @@ New Lean [#113 `RHSelectedThetaLiftConsumer.lean`](https://github.com/chboishabb
 **Next smallest unpaid seam:** select one actual source Hecke character in the chosen upstream telescope and identify its restriction to a finite order-3 subgroup if it exists. The certificate must provide source-defined C3 action, character/inverse relations and index/residual observable, then prove that the source theta lift and the Galois/star consumer preserve that SAME observation. An arbitrary finite character table is not yet such a restriction.
 
 **Trust:** 1,728 Python local exact cases are executed; both new Agda and original-version Lean source modules are written but uncompiled. No CI, Agda or Lean kernel receipts; no RH, GRH or universality acceptance claim.
+
+
+## 21 November — correction: existing order-three CM/Hecke-associated owner recovered
+
+**Do not claim DASHI lacks order-three Hecke-related structure.** Reopened actual source:
+- `chboishabba/dashi_lean4` branch `agent/eisenstein-cm-point-endomorphism-maxcut-20261016`, `Integration/EisensteinJZeroPointCMExact.lean`: real `QuadraticAlgebra ℚ (-1) (-1)`, `omega_cube`, `omegaPoint` on Mathlib's actual nonsingular Weierstrass `jZeroCurve.Point`, `omegaPoint_order_three : ∀ P, omegaPoint (omegaPoint (omegaPoint P)) = P`, bijection and slope/addition covariance. This is a genuine order-three CM automorphism on an arithmetic elliptic-curve carrier.
+- `DASHI/Mathematics/Arithmetic/EisensteinJZeroCubicSymmetryExact.agda`: source-written cubic equation (y²=x³+B) order-three action `rotateXThree` and `omegaXPreservesJZeroCubic`, with explicit **no automatic Hecke-character promotion**.
+- `DASHI/Physics/Closure/HeckeCircleU1YReceipt.agda`: Hecke translation circle, order-six CM stabiliser at (z_{-3}), therefore containing an order-three subgroup. This is a Hecke-associated geometric action, not itself automatically a global Hecke character.
+- `DASHI/Unified/TOEArithmeticCMRealizationExact.agda` and `DASHI/Mathematics/CrossPollination/EisensteinJZeroPointCMLeanReceiptExact.agda`: original source receipts mark **same-curve global Hecke/Grössencharacter construction as OPEN**, along with cubic/Jacobi, all-good-prime Euler, and L-series agreement. `Integration/EisensteinJZeroPrimaryNormalizationExact.lean` implements the primary Eisenstein generator condition at split primes, but the formal same-curve global character is not established by that normalization alone.
+
+**Revised P1 search priority:** start with this already-existing **actual** `omegaPoint` order-three arithmetic action and CM stabiliser, not an invented C3. Then search the repository branches for any separate order-three Hecke-character owner missed by the current search index. A valid map into the fork's original `χX/χW : Chr ...` must prove the exact `IsHecke`, `ResEtaPow`, `HasExp` and `IsLift` requirements, with same-function and indexed zero/sign/residual correspondence. The (j=0) elliptic curve source is not automatically the fork's `E,B,X,W` automorphic input; **same-object identification OPEN**.
+
+This is an evidence-scope distinction, not a denial that another repository file may already supply the Hecke character. The direct code search did not expose a completed global order-three Hecke character theorem; it did establish the concrete CM order-three point action and Hecke-associated stabiliser.
