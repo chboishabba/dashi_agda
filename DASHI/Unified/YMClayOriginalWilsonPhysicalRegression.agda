@@ -92,6 +92,12 @@ import DASHI.Physics.YangMills.YMClayE1TimeKResidualCylinderWaveTransportExact a
 -- source equals F19 physical effective density. No bare-coarse switch.
 import DASHI.Physics.YangMills.YMClayOriginalF19CanonicalConnectedWilsonBIDIExact as OriginalF19Connected
 
+-- F19 and native R445 first/second positive-bond selected target lists
+-- are the SAME original 128 bonds in the SAME canonical pair order;
+-- this is by original native first/second parity proof, not an arbitrary
+-- vector bijection, prior to comparing the remaining 896 spectators.
+import DASHI.Physics.YangMills.YMClayOriginalF19NativeR445SelectedOrderBIDIExact as OriginalF19R445SelectedOrder
+
 import DASHI.Physics.YangMills.YMClayD1OriginalCovarianceToR320Exact as D1OriginalCovariance
 
 import DASHI.Physics.YangMills.YMClayE1VariableCutoffCylinderLimitExact as E1VariableCutoffCylinder
