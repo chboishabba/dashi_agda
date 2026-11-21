@@ -64,6 +64,13 @@ OWNERS = {
         "originalEverySortedValueConsumerAgrees",
         "Labels.originalF19Complete1024LabelOrderMatchesR445",
     ],
+    "DASHI/Physics/YangMills/YMClayOriginalF19R445PhysicalBlockedObservableSquareExact.agda": [
+        "originalF19BlockedLinksOnR445Coordinates",
+        "originalF19BlockedWilsonObservableSquare",
+        "F19.canonicalSourceCoarseObservable",
+        "F19.coarseFromSortedOriginal",
+        "Weld.originalPhysicalF19ActualSortIsOriginalR445Codec",
+    ],
     "DASHI/Physics/YangMills/YMClayOriginalF19R445DecoderCommutingSquareExact.agda": [
         "originalFull1024DecoderSquare",
         "originalF19SortThenR445Unsort",
@@ -184,6 +191,7 @@ OWNERS = {
         "YMClayOriginalF19R445EveryLinkValueBIDIExact",
         "YMClayOriginalF19R445ActualSortedVectorBIDIExact",
         "YMClayOriginalF19R445DecoderCommutingSquareExact",
+        "YMClayOriginalF19R445PhysicalBlockedObservableSquareExact",
     ],
     "DASHI/Physics/YangMills/YMClayNativeR445TemporalReversalExact.agda": [
         "originalSUNTimeReversalTwoLink",
