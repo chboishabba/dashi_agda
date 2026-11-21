@@ -1,5 +1,14 @@
 # Alpöge/Claude RH–GRH × DASHI geometric transport (21 November 2026)
 
+## 21 November — CURRENT F02: composable k-transition/reflection square
+
+Agda #1533 now includes `DASHI/Analysis/RHGRHIndexedZeroZetaTransitionSquareExact.agda`: a concrete `k↦suc k` transition on the **existing** indexed frame, a source-premise `SourceIndexedPhaseStep` expressing index-advance/zero-mode/sign/residual/observed-zero conservation plus **true one-step reflection commutation**, and a theorem composing two steps. This adds actual transition structure over the earlier reflection-only object without a duplicate phase ontology.
+
+**Local Python regression: 480/480 PASS** for the finite step/reflection laws (10×4×2×3×2 configurations), including two-step composition; deliberately lossy zero-mode/residual transition rejected; cyclotomic balanced evaluation zero checked. This verifies the Python finite fixture only. **Agda is unavailable in the local runtime; no Agda kernel acceptance**. Script: `scripts/check_rh_k_indexed_square_20261121.py`.
+
+**Highest-alpha remaining F02/F04:** select an actual `TP.TLiftK` Hecke/automorphic witness and prove (or refute) a same-object `SourceIndexedPhaseStep` whose `Index`, `Mode`, `Sign`, `Residual` and `consume` come from that very source, with genuine theta/Galois commutation and an exact residual ledger. The finite carrier is not itself a proof of original universal `TLiftK`. Full gate matrix: [RHGRHIndexedZeroZetaFilsingerGaloisStarMaxCut20261121.md](RHGRHIndexedZeroZetaFilsingerGaloisStarMaxCut20261121.md#21-november--f02-kk-indexed-commuting-square-implemented-current). **No CI, no world/PG**.
+
+
 ## 21 November — CURRENT P1: indexed zero/ζ₃/ζ₃² with Filsinger sign and residual (LATEST)
 
 **User-specified geometry restored.** The zero/ζ/ζ² commuting square is **not just a 27-cell count**, nor is balanced evaluation zero the disappearance of its phase fibres. Existing owners `Monster3BZeroZetaSquaredC3SeparationExact` and `C3FourierConjugationExact` distinguish **scalar zero**, C3 exponent-zero unity, ζ₃ and ζ₃², and provide actual conjugation/involution identities. Indexed hyperfabric `PNFHyperfabric369` and `TypedHyperfabricActionCrossingTransportExact` preserve time/crossing history, and recent Smith/Filsinger finite phase matching provides exact signs, source/receiver work and retained residual negative controls.
