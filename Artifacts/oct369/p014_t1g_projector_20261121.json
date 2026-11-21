@@ -1,0 +1,18 @@
+{
+  "scope": "L12 3c axial-spin cubic irrep finite preflight (source-inspired, no material/gravity claim)",
+  "checked_rotations": 24,
+  "site_spin_representation_dimension": 9,
+  "projector_ranks": {
+    "T1g_uniform_dipole": 3,
+    "T1g_antiferromagnetic": 3,
+    "T2g_antiferromagnetic": 3
+  },
+  "symbolic_identity": "Pdip + P_T1gAFM + P_T2g = I_9",
+  "trial_state": "zero bulk dipole; entirely in antiferromagnetic T1g",
+  "checks_passed": 21,
+  "local_validation": "independent precursor script executed with exact SymPy before GitHub commit; committed version not rerun locally",
+  "actual_measured_PtMn3_domain_identified": false,
+  "published_cluster_octupole_normalization_recovered": false,
+  "material_Bloch_tunnelling_derived": false,
+  "complete_gravitational_stress_source_derived": false
+}

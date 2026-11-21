@@ -1,0 +1,16 @@
+{
+  "actual_octupole_tensor_derived": false,
+  "additional_gravity_acceleration_per_joule_at_1m_m_s2": "7.42616026912e-28",
+  "energy": "Ebase + a*O**2/2 - h*O",
+  "exact_assertions": 8,
+  "far_field_potential": "-G*(Ebase/c**2 + O**2*a/(2*c**2) - O*h/c**2)/r",
+  "far_field_radial_acceleration": "-G*(Ebase/c**2 + O**2*a/(2*c**2) - O*h/c**2)/r**2",
+  "gravity_anomaly_proven": false,
+  "hypothetical_nonminimal_source": "O*eta*h",
+  "metric_source_variation": "-dL_source/dPhi = E/c^2",
+  "scope": "minimal-coupling point-source/weak-field fixture; not physical PtMn3 Hamiltonian or Einstein tensor",
+  "source_controller_total_energy_included": false,
+  "subsystem_order_flip_delta_energy": "-2*h",
+  "subsystem_order_flip_delta_radial_acceleration": "2*G*h/(c**2*r**2)",
+  "zero_external_drive_order_flip_gravity": 0
+}

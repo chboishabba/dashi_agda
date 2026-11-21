@@ -1,0 +1,30 @@
+{
+  "scope": "finite classical thermodynamic/conjugate tensor on exact P0.27 model, not original bulk Bloch quantum octupole",
+  "checks_passed": 80,
+  "source_verified_local": true,
+  "expected_local_blob_sha": "e2d035196020b6b2839abe494949a91552f6d29a",
+  "actual_uploaded_blob_sha": "e2d035196020b6b2839abe494949a91552f6d29a",
+  "JK_symmetric_rank": 18,
+  "full_STF_rank": 7,
+  "symmetric_jk_unprobed_dim": 11,
+  "formal_27_unprobed_dim": 20,
+  "source_energy": "3*a**2*k_4*mu*z_body",
+  "source_force": "-3*a**2*k_4*mu",
+  "full_tensor_not_STF": true,
+  "body_fixed_physical_Pt_centred": true,
+  "direct_lattice_reciprocal_distinct_sheared_basis": true,
+  "source_cell_relabelling_invariant": true,
+  "original_Sato_Hayami_Eq11_implemented": false,
+  "material_calibrated": false,
+  "Maxwell_boundary_apparatus": false,
+  "gravitational_field_observed": false,
+  "attribution": {
+    "IUCr": "International Tables crystal Pm-3m L12 1a/3c",
+    "initial_order": "Yamasaki et al JPSJ 89 083703 (2020); Bhowal and Spaldin PRX 14 011019 (2024)",
+    "thermodynamic": "Oike, Peters and Shinada PRB 112 134412 (2025) DOI 10.1103/frq1-9xx7",
+    "quantum": "Sato and Hayami npj Quantum Materials 11 32 (2026) 10.1038/s41535-026-00865-9",
+    "experiment": "Kang et al Nature 658 1160-1166 (2026) 10.1038/s41586-026-11172-5",
+    "native": "DASHI crystallography owners, P0.26/P0.27",
+    "new": "finite source energy/force, tensor projection ranks and direct/reciprocal crystal transport"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "checks_passed": 33,
+  "scope": "scalar effective order amplitude not physical vector T1g octupole",
+  "metric_equation": "F G_mn+(g_mn Box-nabla_m nabla_n)F=T_mn",
+  "F": "M2+2 xi O^2",
+  "Ward": "nabla^mu(E_mn)=-EOM_O*nabla_n O-O*nabla_n J",
+  "restricted_metric": "Gtt=0; incompatible with positive minimal nonzero scalar Ttt",
+  "radial_intrinsic_energy": "256*pi*O0**2*(kappa*R/315+m2*R**3/3465)",
+  "drive_controller_dynamic": false,
+  "physical_material_source": false,
+  "full_Einstein_solution": false,
+  "execution": "33 tests passed in local SymPy run; exact GitHub source not separately re-run",
+  "origin": "DASHI GRFirstOrder/W4 stress and classical action variation; new P0.23 diagnostic"
+}

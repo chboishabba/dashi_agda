@@ -1,0 +1,36 @@
+{
+  "scope": "inversion-complete L12 three-Mn trial texture and Maxwell source expansion, not published material force",
+  "assertions_passed": 58,
+  "magnetostatic_3_site_force": "3 sqrt(6) a mu k3 / 2",
+  "magnetostatic_6_site_cubic_source_force": "0",
+  "magnetostatic_6_site_quartic_source_force": "-3*a**2*k_4*mu",
+  "P025_order_overlap": "1/2",
+  "P025_source_alpha_equivalent": "-6*a**2*k_4*mu",
+  "required_k4_for_upward_force": "-m*g/(3*N*mu*a**2)",
+  "STF_rank3_xyz": "-sqrt(6)*a**2*mu/18",
+  "SINGLE_three_site_source_has_lower_order_moment": true,
+  "SIX_inversion_complete_lower_order_force_cancels": true,
+  "six_site_source_field_harmonic_currentfree": true,
+  "measurement_70kg_demo": false,
+  "real_PtMn3_3c_domain_identified": false,
+  "physical_inversion_complete_unit_cell_verified": false,
+  "Maxwell_generator_controller_source_and_boundary_calibrated": false,
+  "gravity_metric_response_observed": false,
+  "example_parameters_NOT_material_calibration": {
+    "Mn_moment": "3 mu_B",
+    "cube_a_m": "4e-10",
+    "N_inversion_complete_motifs": "1000000000000000000000000",
+    "local_length_m": "0.001",
+    "local_B_reference_T": 10
+  },
+  "example_required_k4_T_per_m3": 51403022937534150000,
+  "example_max_F_N_if_B_at_1mm_10T": 1.3354574512752e-7,
+  "example_70kg_lift_weight_N": 686.4655,
+  "execution": "58 exact checks executed locally on equivalent source, independent GitHub blob replay not yet performed",
+  "source_owners": {
+    "experiment": "Kang et al Nature 2026 DOI 10.1038/s41586-026-11172-5 owns octupole torque/TMR not gravity",
+    "established": "magnetostatic multipole expansion, Maxwell source-free scalar potentials",
+    "DASHI": "P0.14 T1g projector, P0.25 endpoint alpha and native signed geometry",
+    "new": "P0.26 inversion-complete cancellation and same-source external gradient reverse solve"
+  }
+}
