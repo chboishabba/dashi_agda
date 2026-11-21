@@ -43,6 +43,14 @@ OWNERS = {
         "originalMarkedOS1AllPairsTimes",
         "originalMarkedOS1SameSpectrumClustering",
     ],
+    "DASHI/Physics/YangMills/YMClayOriginalWilsonOS1R556R281CommutingSquareExact.agda": [
+        "originalWilsonTimeTranslationSquare",
+        "originalFiniteCovarianceSquare",
+        "originalContinuumCovarianceSquare",
+        "originalSourceFiniteContinuumConverges",
+        "originalOS1SquareEndsInSameR281Spectrum",
+        "originalSelectedSourceDistanceTime",
+    ],
     "DASHI/Physics/YangMills/YMClayOriginalWilsonAllTimesOS1R556R281BIDIExact.agda": [
         "originalAllTimesWilsonTests",
         "originalAllTimesSourceCovarianceConverges",
@@ -55,6 +63,7 @@ OWNERS = {
         "originalAllWilsonPairsTimesSameR281SpectrumHasClustering",
         "SameOriginalOS1R556TimeGeometry",
         "originalWilsonSourceDistanceIsSameOS1Time",
+        "selectedNativeSiteTimeSquare",
         "R556.indexedAsContinuumClustering",
         "R332.supportDistanceIsTime",
     ],
@@ -72,6 +81,7 @@ OWNERS = {
         "YMClayOriginalWilsonAllTimesOS1R556R281BIDIExact",
         "YMClayWilsonWEXTSelectedDistanceNonVacuityExact",
         "YMClayOriginalWilsonMarkedOS1AllTimesProducerWeldExact",
+        "YMClayOriginalWilsonOS1R556R281CommutingSquareExact",
     ],
     "DASHI/Physics/YangMills/YMClayNativeR445TemporalReversalExact.agda": [
         "originalSUNTimeReversalTwoLink",
@@ -108,6 +118,7 @@ CHECKS = [
     "scripts/check_ym_cmp119116122_same_source_contract.py",
     "scripts/check_ym_r445_time_reflection_q8_20261106.py",
     "scripts/check_ym_r445_original_wilson_words_reflection.py",
+    "scripts/check_ym_original_r445_os1_translation_commuting_square.py",
 ]
 
 def main():
