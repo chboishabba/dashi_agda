@@ -114,6 +114,13 @@ numberUnit smithFigureFortyPage = pdfPage
 numberUnit smithSplitSecondaryFirstSeventeen = turns
 numberUnit smithSplitSecondarySecondSeventeen = turns
 numberUnit smithIllustrativeTwoHundredFortyDegree = degrees
+numberUnit smithIllustrativeL2HalfOneHundredSixtyInch = inch
+numberUnit smithIllustrativeL1FortyInch = inch
+numberUnit smithIllustrativeL1TwoHundredTwentyFiveHundredthInch = hundredthInch
+numberUnit smithApproxL1FiveHundredSixtyFiveHundredthTurns = hundredthTurn
+numberUnit smithOptionalParallelFortySevenNanofarad = nanofarad
+numberUnit smithClaimedTwoThousandVolt = volt
+numberUnit smithClaimedSixThousandWatt = watt
 
 -- Rational interpretation belongs to a SEPARATE measured unit/convention.
 -- A value of 38 in tenthVolt is not 38V; 33 in tenth-µF != 333 in
@@ -145,14 +152,6 @@ numberMagnitude smithFigureFortyPage = 65
 numberMagnitude smithSplitSecondaryFirstSeventeen = 17
 numberMagnitude smithSplitSecondarySecondSeventeen = 17
 numberMagnitude smithIllustrativeTwoHundredFortyDegree = 240
-
-numberUnit smithIllustrativeL2HalfOneHundredSixtyInch = inch
-numberUnit smithIllustrativeL1FortyInch = inch
-numberUnit smithIllustrativeL1TwoHundredTwentyFiveHundredthInch = hundredthInch
-numberUnit smithApproxL1FiveHundredSixtyFiveHundredthTurns = hundredthTurn
-numberUnit smithOptionalParallelFortySevenNanofarad = nanofarad
-numberUnit smithClaimedTwoThousandVolt = volt
-numberUnit smithClaimedSixThousandWatt = watt
 numberMagnitude smithIllustrativeL2HalfOneHundredSixtyInch = 160
 numberMagnitude smithIllustrativeL1FortyInch = 40
 numberMagnitude smithIllustrativeL1TwoHundredTwentyFiveHundredthInch = 225
@@ -160,6 +159,7 @@ numberMagnitude smithApproxL1FiveHundredSixtyFiveHundredthTurns = 565
 numberMagnitude smithOptionalParallelFortySevenNanofarad = 47
 numberMagnitude smithClaimedTwoThousandVolt = 2000
 numberMagnitude smithClaimedSixThousandWatt = 6000
+
 
 sourceStatus : ∀ {o} → SourceNumber o → EvidenceTier
 sourceStatus zvsCapApproximately33TenthsMicrofarad = narratedComponent
