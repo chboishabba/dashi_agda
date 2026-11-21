@@ -48,3 +48,10 @@ Important: symbolic 1+omega+omega²=0 with sum omega^(3j)=3 is only a C3 angular
 | P0.12b | Same actual PtMn3 magnetic Seitz/Bloch k-dependent Hamiltonian and intra/inter tunnelling | OPEN |
 | P0.12c | Material-derived beta coefficients and experimental switching/TMR uncertainty | OPEN |
 | P0.13-closure | Complete system stress and energy transfer: drive, barrier, medium, coils/support/environment | OPEN |
+
+| P0.13 | L12 3c Mn sites + 120-degree *trial* spins -> axial STF magnetic rank-three tensor; C3, inversion, time reversal controls | **21/21 local exact SymPy assertions**, partial source-specific geometry only |
+| P0.13a | Published PtMn3 refined positions, magnetic domain texture and spin magnitude | OPEN |
+| P0.13b | Published T1g cluster-octupole projector/normalization and actual magnetic point-group intertwiner | OPEN |
+| P0.13c | Same-source PtMn3 exchange/SOC H(k) and full Bloch sewing, not CoTaSe2 fixture | OPEN |
+| P0.13d | Same MgO barrier tunnelling channels, spin torque and TMR under measured current | OPEN |
+| P0.13e | Real covariant total stress including source and field, metric and levitation observables | OPEN |
