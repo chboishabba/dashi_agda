@@ -203,8 +203,18 @@ everyOriginalBondReadoutAtSameBH4History :
     (Tissue.fullCoarseRun actions
       (Bio.spatialProject (originalTissueReadout W x))) bond
 everyOriginalBondReadoutAtSameBH4History M W actions x bond =
-  Grid.allBondJunctionReadingsSurviveProjection
-    (originalTissueReadout W
-      (BH4.physicalRun (Paid.source M) (toBH4History W actions) x)) bond
-  -- NB: projection at initial state must be replaced with the
-  -- selected fine-to-coarse history's agreement in the next weld.
+  cong₂ _,_
+    (Tissue.junctionAgreement
+      (originalTissueReadout W
+        (BH4.physicalRun (Paid.source M) (toBH4History W actions) x))
+      (Tissue.fullCoarseRun actions
+        (Bio.spatialProject (originalTissueReadout W x)))
+      (bh4PNPTissueAndNative54BondsSameHistory M W actions x)
+      (Grid.bondStart bond))
+    (Tissue.junctionAgreement
+      (originalTissueReadout W
+        (BH4.physicalRun (Paid.source M) (toBH4History W actions) x))
+      (Tissue.fullCoarseRun actions
+        (Bio.spatialProject (originalTissueReadout W x)))
+      (bh4PNPTissueAndNative54BondsSameHistory M W actions x)
+      (Grid.bondEnd bond))
