@@ -129,3 +129,10 @@ Important: symbolic 1+omega+omega²=0 with sum omega^(3j)=3 is only a C3 angular
 | P0.24-stability | Potential Hessian m2*n2-lambda²; example det=27 positive, det=-13 unstable negative control | exact algebra; not PtMn3 parameter fit |
 | P0.24-physical-source | Replace scalar O by physical magnetic T1g vector coupled to same spinful electron H, replace C by actual EM/SC+battery/controller fields and boundary stresses | OPEN |
 | P0.24-first-order | Derive physical tetrad/Dirac stress, local Lorentz and diffeomorphism Ward, single-action Einstein/alternative field with calibrated ξ | OPEN |
+
+| P0.25-native-BIDI | Six signed Mn 3c labels embedded reversibly into **original** Ternary27Point, preserving C3, antipodes and 21 residual addresses | Agda source-written exact constructor proofs; **no Agda kernel execution** |
+| P0.25-54 | Source-site magnetic AFM T1g projector, 27/26/13 counts, C3 BIDI partial inverse, six typed native antigravity endpoints | **54/54 local SymPy assertions** in independent exact fixture |
+| P0.25-force-end | Mechanical lift F=N alpha/2 -> alpha=2mg/N, equal support reaction and zero-gradient negative control | conditional inverse PASS; real physical generalized source alpha OPEN |
+| P0.25-gravity-end | Minimal Newtonian remote response reverse |DeltaM_active|=g r²/G; positive-energy addition not repulsive | exact symbolic inverse; physical active stress, metric and anomaly OPEN |
+| P0.25-identifiability | Load+remote 2x3 rank 2; with calibrated pickup third channel 3x3 invertible; rank-null direction (-mk-1,-k,1) | exact SymPy rank and inversion PASS, empirical calibrated sensors OPEN |
+| P0.25-realweld | From actual PtMn3 OTT/MgO original data and superconducting/EM source to same-unit alpha, complete Tmunu, metric/clock/freefall, 70kg lift | OPEN |
