@@ -32,14 +32,59 @@ assert len(target) == len(set(target)) == len(canonical) == 1024
 
 bond_index = {bond: i for i, bond in enumerate(canonical)}
 forward = [bond_index[b] for b in target]
+# Real inverse of target->canonical permutation, not tautologically
+# assigning the canonical index to itself.
 inverse = [None] * 1024
-for j, bond in enumerate(target):
-    inverse[bond_index[bond]] = forward[j]
-assert inverse == list(range(1024))
+for j, canonical_position in enumerate(forward):
+    assert inverse[canonical_position] is None
+    inverse[canonical_position] = j
+assert sorted(inverse) == list(range(1024))
+assert all(inverse[forward[j]] == j for j in range(1024))
+assert all(forward[inverse[i]] == i for i in range(1024))
 
 reverse_pairs = [selected[j + 1] if j % 2 == 0 else selected[j - 1]
                  for j in range(128)] + f19_residual
 assert sum(a != b for a, b in zip(target, reverse_pairs)) == 128
+# Independent arbitrary link VALUE evaluation in a non-Abelian
+# subgroup Q8 of SU(2). This confirms F19 and R445 preserve the
+# complete original field, not merely the selected labels.
+MUL={(1,2):(1,3),(2,3):(1,1),(3,1):(1,2),
+     (2,1):(-1,3),(3,2):(-1,1),(1,3):(-1,2)}
+def qm(left,right):
+    sa,ba=left
+    sb,bb=right
+    if ba==0: return (sa*sb,bb)
+    if bb==0: return (sa*sb,ba)
+    if ba==bb: return (-sa*sb,0)
+    sign,basis=MUL[(ba,bb)]
+    return (sa*sb*sign,basis)
+reverse_products_differ=0
+for config in range(5):
+    values=[]
+    for i,(site,axis) in enumerate(canonical):
+        z=(i*13+sum((5,11,17,23)[p]*v for p,v in enumerate(site))
+           +axis*29+config*41)%8
+        values.append((1 if z<4 else -1,(z+2*axis+config)%4))
+    f19_values=[values[bond_index[b]] for b in selected+f19_residual]
+    r445_values=[values[bond_index[b]] for b in selected+r445_residual]
+    assert f19_values==r445_values
+    reconstructed=[r445_values[inverse[i]] for i in range(1024)]
+    assert reconstructed==values
+    for j in range(0,128,2):
+        forward_product=qm(r445_values[j],r445_values[j+1])
+        assert forward_product==qm(f19_values[j],f19_values[j+1])
+        reverse_products_differ+=(
+            forward_product!=qm(r445_values[j+1],r445_values[j]))
+    changed=list(r445_values)
+    changed[128+config]=(1,0) if changed[128+config]!=(1,0) else (-1,0)
+    assert sum(a!=b for a,b in zip(
+        values,[changed[inverse[i]] for i in range(1024)]))==1
+assert reverse_products_differ>0
+print("PASS original F19/R445 actual arbitrary Q8 link values: 5 x 1024")
+print("PASS original noncommutative Q8 blocked products: 320/320")
+print("NEGATIVE reversed Q8 pair order:",reverse_products_differ,"different")
+print("NEGATIVE altered interacting spectator: 5/5 original fields changed")
+
 print("PASS original F19/R445 P0 128 selected + 896 residual + 1024 inverse")
 print("PASS wrong first/second native link orientation: 128 mismatches")
 print("NOTE: independent finite Python, not original checked-out Agda kernel")
