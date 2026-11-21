@@ -26,6 +26,7 @@ import DASHI.Physics.Electromagnetism.U1AsSU2AbelianRestrictionExact as U1
 import DASHI.Physics.Electromagnetism.U1ElectromagneticApplicationExact as EM
 import DASHI.Physics.Electromagnetism.RightHandRule369Exact as RightEM
 import DASHI.Physics.Foundations.OrientedBracketEMYMNS369Regression as SharedOrientation
+import DASHI.Physics.YangMills.BalabanC3MonsterEquivarianceAuditExact as YMC3
 import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier as SU2
 import DASHI.Physics.YangMills.BalabanSU2LieBracket as Bracket
 import DASHI.Physics.ExoticGravity.AntigravitySameStateFourChannelDiscriminatorExact as Four
@@ -231,6 +232,6 @@ sourceNativeSharedOrientationDoesNotIdentifyForceAndFlux :
 sourceNativeSharedOrientationDoesNotIdentifyForceAndFlux = refl
 
 sourceNativeYMStillHasUnpaidRecoveryC3Seam :
-  SharedOrientation.ymUnifiedRecoveryC3StillGated ≡ false
+  YMC3.balabanC3ActionOnSourceSeamsRecovered ≡ false
 sourceNativeYMStillHasUnpaidRecoveryC3Seam =
   SharedOrientation.ymUnifiedRecoveryC3StillGated
