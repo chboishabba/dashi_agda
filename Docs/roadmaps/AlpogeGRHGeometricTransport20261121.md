@@ -11,6 +11,16 @@
 **Recent heads surveyed:** #1291, #1444, #1489, #1497, #1499, #1503, #1526, #1527, #1529, Lean #104/#108. Details and exact head hashes are in the lemma matrix. Existing R1 completed ζ and classical explicit-formula mathematics remain the owner, not a new synthetic spectral theory.
 
 
+## 21 November — last-week Bishop/π/CM/CRT integration review (S02–S07)
+
+The **P0-first / P1-geometry-second** owner and acceptance order remains unchanged. The exact source-reviewed donor and missing-lemma audit is appended to [RHGRH20261121P0P1ConsequencesExactLemmaMatrix.md](RHGRH20261121P0P1ConsequencesExactLemmaMatrix.md#21-november-2026--focused-last-week-bishop--π--finite-arithmetic-original-source-audit-for-s02s07).
+
+Recent exact heads examined: Bishop #1478 `fb374e50`; π/CM #1529 `7b35790d`; original CRT #1408 `28d85aa5`; Bishop-zeta #1497 `f213b5bf`; indexed cube #1291 `b9d1e3fa`. The audited modules include `HypergeometricBSplitIntegerMergeExact`, `BishopPellLucasIntegerInvariantExact`, `TwinPrimeTernary270AffineCRTCodecExact`, `GF27CompilerBootstrapIntertwinerBoundaryExact`, and the source roadmaps for constructive π and Bishop analytic tails.
+
+**Direct high-alpha integration:** S07 least prime in progression consumes original 270-wheel/CRT local-sieve/prime counting as selected arithmetic producers, then needs arbitrary (a,q), actual Dirichlet character L-function, precise GRH bound and honest bit-clock. S05 arbitrary finite-field construction consumes chosen GF27/GF729/Frobenius and native geometric 27 marked chart, but requires a generic irreducible-degree-n constructor and complexity theorem. **P0 RH remains above both.**
+
+**Critical negative controls:** finite CRT survivor != certified prime; Pell real sqrt != quadratic root mod p; integer hypergeometric binary splitting != polynomial factoring; exact finite CM j/π certificate != completed Riemann ζ or a Dirichlet GRH theorem; φ(n)-oracle factoring != factoring with no oracle. No copied/new competing generic arithmetic, Bishop real or field carrier was introduced. No CI was invoked, and no Agda/Lean kernel acceptance is claimed.
+
 ## Provenance and status
 
 External claim: Levent Alpöge's 20 Nov 2026 announcement at https://alpo.ge/remark.pdf and byte-exact mirror https://github.com/Deicyde/riemann-hypothesis. MIT independent audit: https://math.mit.edu/~drew/grh/ (snapshot 20 Nov 22:05 UTC). The MIT audit reports compilation of 175,187 modules, leanchecker replay, con-leche and nanoda independent kernel acceptance, con-leche statement comparison against a separate challenge and only Lean foundational axioms. Further checks remained underway at that timestamp. These receipts were **not executed locally by DASHI**.
