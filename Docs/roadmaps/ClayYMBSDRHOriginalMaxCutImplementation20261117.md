@@ -1,3 +1,36 @@
+## 21 Nov 2026 P0 theorem-first interpretation (newer than the ledger below)
+
+**Round-number firewall:** R445, F19, CMP, source-index Rxxx,
+K1–K5 and PR branches are successive attempts or internal donors.
+None is a separately solved Clay theorem or a chronological physical
+RG/time stage. Do not report 1024-label equality, normalized q-series,
+finite moment acceptance or a positive experimental analogue as a
+fraction of the universal proof.
+
+**BSD target:** original conductor-32 E:y²=x³−x; the actual selected
+L(E,s) must be identified with genuine `eta(4z)^2 eta(8z)^2`
+Mellin data. Existing classical S4 already uses modularity, 2-isogeny,
+Fricke and positive eta tail; a new exact-rational, conditional
+explicit bound is documented in
+`Docs/roadmaps/BSDOriginalLevel32P0PositiveTailLowerBound20261121.md`:
+`L(E,1) >= 2*(64428653584/66556260225)*exp(-pi/(2sqrt2))>0`.
+This is NOT a newly proved Agda analytic eta/elliptic L-function.
+The actual Agda arbitrary normalized coefficient families are
+not yet tied to the original E32 all-n L-series (a constant-one
+normalized receipt exists as negative control). Universal BSD
+rank equality and full Sha are OPEN.
+
+**YM target:** original interacting four-dimensional continuum
+SU(N) Wilson/OS reconstruction, full-sector same-H positive gap,
+nontriviality and all compact simple groups. The finite #1536
+F19/R445 equalities are donors only; current source W1/W3
+uniform UV/IR estimates, E1 continuum, nonvacuous RP/OS, D2/N1/G1
+remain genuinely OPEN.
+
+**Prioritization:** develop the strongest SAME-OBJECT analytic/physical
+source lemmas next; run pinned kernels on existing code when available;
+do not use the number of historical wrappers as a proof-progress metric.
+
 ## 21 Nov 2026 P0 revision: Agda BSD and YM original-owner separation
 
 - **BSD original E32:** K1--K5 producers and selected K4 genus-one/eta/Fricke arithmetic already exist on Agda `master`; do not treat #1500 historical branch as a missing replacement. New master-native `EllipticBSDOriginalLevel32SameCurveP0BIDIExact` sources original curve-typed p5 + q-series normalization and explicit coefficient BIDI, with missing original analytic modularity and Mellin as uninhabited inputs. Independent q-series/point-count finite checks 76/76 PASS, Agda compiler not run. External classical selected S4 analytic proof is not an Agda proof. K1/K2/K3/K5/S6 remain unproved.
