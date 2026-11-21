@@ -1,4 +1,15 @@
-# GRH P0 — original EveryCharacter → native terminals; reuse existing Mellin (2026-11-21)
+# GRH P0 supporting source audit — original EveryCharacter / Mellin (2026-11-21)
+
+
+**Status: SUPPORTING AUDIT / EVIDENCE ANNEX — NOT the controlling plan.**
+The pre-existing controlling roadmap is
+`Docs/roadmaps/AlpogeGRHGeometricTransport20261121.md`.
+Its latest P0 implementation commits and acceptance sequence use the
+ALREADY-EXISTING original `proofs/alpoge-lean433/RHAdmission.lean`
+and the new `check_original_p0_admission.sh` on Lean #113.
+This file preserves source pins, original-statement quantifiers,
+existing Mellin donor inventory, and independently attributed checks.
+Do not duplicate the roadmap or score history as theorem milestones.
 
 ## This is P0, not a CM/Monster/P1 spillover
 
@@ -177,3 +188,5 @@ and source-linked; in-repo proof candidate SOURCE-WRITTEN; local
 Lean/Agda kernel NOT RUN; same-object cross-kernel admission OPEN.
 Round numbers, R445/F19, Monster/369 and numbered GRH research lanes
 are iterations/donors, never independent proofs of the P0 target.
+
+
