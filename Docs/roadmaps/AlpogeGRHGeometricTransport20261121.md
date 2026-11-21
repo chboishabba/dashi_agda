@@ -1,5 +1,19 @@
 # Alpöge/Claude RH–GRH × DASHI geometric transport (21 November 2026)
 
+## 21 November — CURRENT P0 selective top-cut / P1 original geometry (supersedes world/PG)
+
+**Only trace as deep as needed.** Lean [#113](https://github.com/chboishabba/dashi_lean4/pull/113) now contains **two** source-original, DASHI-authored import candidates:
+- `proofs/alpoge-lean433/RHTopCut.lean` consumes `Statements` and `Supplements.Kernels.MainTheorems` directly, omitting `MainTheoremsAll`'s unnecessary top-level imports.
+- `proofs/alpoge-lean433/RHSelectiveProducerCut.lean` goes further and bypasses `MainConclusion` by composing the original author's already-existing `every_character_of_literature_of_vWin`, `vwin_of_row`, `galoisLocalGlobalStrong_recParameter`, `VW.rh_of_every`, `VW.critLine` and `Claim.strip` without rebuilding their mathematics. **Candidate: uncompiled**.
+
+**Source readback confirmed the first actual theta/geometric chain:**
+`UpperTheory.Gal.Int.galoisLocalGlobalStrong_recParameter`
+= `galoisRepresentations_of_thetaLift UpperTheory.TP.K.tLiftK` = `galoisLocalGlobalStrong_of_geometry_lift geoOne_holds tLiftK`, and `tLiftK` is obtained from `tLift_holds_k`. These are the mathematical **targets** for comparing our existing geometrical producers; a Monster/369 vocabulary similarity is not a theorem. We can attempt to replace an *actual theta/Galois producer step* only after constructing exactly `TP.TLiftK` or `GalStar.Row0b recT` (or a faithful same-object transport).
+
+**P0:** local kernel acceptance of TC1 and TC2 at fork Lean 4.33.1; compare actual dependency closure rather than counting all 175k source files; then consume the already existing Lean/Clay Mathlib BIDI and solve actual Agda proof transport. **P1:** geometric evaluation against original source theta, G2 determinant consumer, Weil source test space, S3/C3 six-face indexed residual and other Monster/369 source owners. **World/PostgreSQL is explicitly deferred**, not part of current proof max-cut. No CI and no Lean or Agda compile in this turn.
+
+Detailed [current selective source and geometric gates](RHGRH20261121P0P1ConsequencesExactLemmaMatrix.md#21-november--selective-rh-source-splice-and-first-genuine-thetageometric-producer-edge) and [source-first reverse-solve audit](AlpogeRHOriginalSourceBidiMonster369P0P1MaxCut20261121.md#21-november--current-shallow-p0-cut--p1-geometric-improvement-supersedes-world-ingestion-priority).
+
 ## 21 Nov 2026 — existing fork as P0 vendor, no proof rewrite (CURRENT)
 
 **Authoritative external source:** [chboishabba/riemann-hypothesis-lean](https://github.com/chboishabba/riemann-hypothesis-lean) @ `7cbf7a0c32fca1badf05931879a37c3f8a2b03b4`. Original `src/Main.lean` Git blob `dbd5db70bc11b35f18fa5751216ab335321e7bfc` matches the checker mirror. Lean v4.33.1, Mathlib `0df444a360eaa60ab8c11dca51a86af692955474`. DASHI Lean root is v4.35.0-rc3: **different kernel/toolchain pin**.
