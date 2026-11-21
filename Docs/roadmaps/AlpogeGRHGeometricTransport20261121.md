@@ -1,3 +1,84 @@
+## 22 November 2026 — SELECTED-W SOURCE WELD ALREADY PAID: next original RH cut reclassified
+
+**Important correction to the preceding inventory:** the
+17 Nov R2 source roadmap listed
+`selectedQuarticFourWActualProfileIntegralExact`
+as a first OPEN theorem. A direct reread of
+current original Lean `main` proves this
+literal mathematical identity ALREADY exists
+under its own author's native theorem names:
+
+```lean
+-- Synthesis/RiemannProjectiveQuarticFourWindowSignedPoleJointHorizontalJet.lean
+theorem QuarticFourSignedPolePair.signedNormalizedPairKernel_eq_combinedIntegral
+theorem QuarticFourSignedPolePair.signedLiteralPairSourceTerm_eq_normalizedPairKernel
+theorem QuarticFourSignedPolePair.signedNormalizedPairKernel_eq_jointJet
+```
+
+The first theorem proves the original
+source-selected (K_W(α,q)) equals the
+`quarticFourSignedPoleCombinedProfile`
+weighted `cosh(αx)*cos(qx)` integral
+**for every α,q**, including original
+pole-coefficient signs and actual W parameters.
+The second immediately attaches the literal
+off-ordinate ζ-zero source to that same W
+with actual multiplicity, horizontal
+`heightOf`, vertical `Im−t` and radius
+`t/16`. The third gives the exact base,
+horizontal quadratic and remainder split;
+the source also has a complete quartic jet.
+
+Original
+`RiemannProjectiveQuarticFourWindowSignedPoleFourthOrderQuotient.lean`
+already has selected `C^4` source-profile
+and **base** `|W.signedOrdinateTest(x)|≤
+(t/16)^2∫|P_W''''|/|x−t|^4`.
+This is paid **actual selected-W**,
+but only at α=0: its extension to
+`P_W cosh(αx)`, including explicit
+norm constants and the physical selected-W
+parameters, still needs quantitative
+payment. Do not redo the paid integral
+identity or confuse base tail with
+full off-line horizontal weighted tail.
+
+The **real terminal analytic cut is
+source-selected all-actual-zero signed
+compensation**:
+`W.UniformSignedCompensationGap rho`
+from
+`RiemannProjectiveQuarticFourWindowSignedPoleConeDecomposition.lean`
+is a **premise**, not a theorem proving
+strict correct-polarity cofinal mass.
+The standalone signed-fifth/three-taper
+and projective zero-mode/gamma routes
+remain independent candidate producers;
+no identical selected-carrier inequality
+is inferred from similarly named
+budgets. The controlling G3 roadmap
+was updated concurrently; the original
+R2 owner `Docs/roadmaps/ClayRHR2ExplicitA160SelectedWRemainingLemmas20261117.md`
+now records the exact already-owned
+source and revised unpaid work.
+
+**Higher-level work priority:** stop
+adding new abstraction; reuse these actual
+Lean source terms; next calculate/derive
+the full horizontal-weighted selected-W
+decay with actual parameter control and
+then attempt the strict signed
+cofinal compensation `W.UniformSignedCompensationGap`
+on the genuine completed ζ source. Alongside,
+external original Alpöge/Claude direct
+all-character theorem admission remains a
+parallel trusted proof-source lane.
+Neither RH nor GRH is newly proved,
+and source readback is not native
+Lean/Agda kernel acceptance.
+
+---
+
 ## 22 November 2026 — original DASHI two-sided RH and Dirichlet source audit: priority CORRECTION (CURRENT)
 
 **Finding: the prior narrow GRH P0 review materially undercounted the
