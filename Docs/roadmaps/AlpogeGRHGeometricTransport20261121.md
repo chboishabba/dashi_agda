@@ -1,3 +1,30 @@
+## 21 Nov 2026 — direct ORIGINAL theorem name fixed and source-only verification closed
+
+Lean #113 `MillenniumExternal/AlpogeRHBoundaryExact.lean`
+now records the literal author source correctly:
+`_root_.riemannHypothesis : RiemannHypothesis`
+in module `Main`, **not** a namespaced declaration
+`Main.riemannHypothesis` (commit `65ca8922`).
+Its `/-! ... -/` comment was already repaired in `4b45d7ef`.
+The RH→Clay theorem remains a consumer of a **supplied**
+root Mathlib RH proof; original source cannot be declared
+imported based on this repair or on external verification.
+
+Expanded local exact SymPy 1.14 acceptance on moduli
+**1–32, 324/324 characters, 58,320/58,320 coefficients,
+100,074 multiplicativity instances, 205 primitive characters**;
+the all-character Euler-factor open-strip symbolic identity
+and χ₅→χ₁₀ 1000/1000 coefficients also PASS.
+Lean #113 README has been updated with these exact results
+(commit `7409a3a1`). The existing GRH roadmap stays P0.
+No original Lean v4.33.1 adapter kernel compilation,
+root version-compatible proof import, or Agda all-character
+analytic same-object identity executed here. The external
+author's independently reported verification is distinct
+from those open integration obligations.
+
+---
+
 ## 21 Nov 2026 — expanded local-only GRH strip weld acceptance (current)
 
 The EXTENDED exact SymPy source `check_grh_p0_original_all_characters_sympy.py`
