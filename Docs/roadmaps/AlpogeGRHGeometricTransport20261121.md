@@ -1,3 +1,13 @@
+## 21 Nov 2026 — current GRH P0 same-object admission; Mellin recovered
+
+The controlling source and independently reported verification receipt are now centralized in `Docs/roadmaps/GRHP0OriginalEveryCharacterMellinForwardWeld20261121.md`. GRH P0 means the **original all-Dirichlet-character** statement `UpperTheory.EveryCharacter`, not just zeta RH, a finite cubic/jacobi character, a CM elliptic L-function or a Monster VOA trace. Existing original Lean #113 already writes the directional terminal consumers and root Lean has an RH↔Clay theorem target, but compatible external v4.33.1 proof admission and actual Agda per-character analytic identity are still OPEN. The independently reported original proof checks strengthen confidence in the external formal source; no locally run kernel or cross-kernel transport is inferred.
+
+**Do not rebuild Mellin.** `MellinSplitFunctionalEquationExact` is an existing exact split theorem; BSD's `EllipticCMLevel32FrickeMellinExact` already consumes it, and the RH G2 Gamma/Mellin/Weil original transport + proof-relevant character action already exists. Their currently uninhabited **same-original analytic realization** is the target. Agda #1533 now additionally projects the ORIGINAL Clay RH witness back to the analytic substrate without a separate hand-supplied witness function; this is RH only.
+
+No promotion of all-character GRH from finite tests, numbered iterations, or a `Set` interface. Original author's external theorem is credited to Levent Alpöge / Claude; independent checks to Sutherland (MIT) and Lipponen (LUMI).
+
+---
+
 # Alpöge/Claude RH–GRH × DASHI geometric transport (21 November 2026)
 
 ## 21 Nov — main-native CM conductor integration: draft Lean #114 supersedes stale cross-branch blocker
