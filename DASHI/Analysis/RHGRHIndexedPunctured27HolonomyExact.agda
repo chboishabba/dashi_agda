@@ -18,7 +18,7 @@ open import Data.Product using (_×_; _,_)
 import DASHI.Core.GovernedIndexedResidualCubeExact as CubeIndex
 import DASHI.Unified.HyperfabricPunctured27Projective13OrientationExact as Native
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Cube
-import DASHI.Analysis.RHGRHIndexedZeroZetaPhaseResidualWeldExact as Phase
+import DASHI.Unified.Hyperfabric27MinusOneAntipodalSameCarrierCutExact as Antipode
 
 -- This source index keeps all five axes; it is not the previous single
 -- Nat-time fixture. Residual, sign and observed-zero remain independent
@@ -57,7 +57,7 @@ indexedNativeRoundTrip x =
 -- follows from this exact pointwise roundtrip.
 indexedNativeAntipode :
   (x : IndexedNativeAxis) →
-  Native.encode (Native.antipode (decodeIndexedNative x))
+  Native.encode (Antipode.antipode (decodeIndexedNative x))
     ≡ just (axis x , Native.flipBit (orientation x))
 indexedNativeAntipode x =
   Native.encodeAntipode
