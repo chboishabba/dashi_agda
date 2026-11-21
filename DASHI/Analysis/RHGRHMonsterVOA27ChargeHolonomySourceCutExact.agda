@@ -28,6 +28,9 @@ import DASHI.Moonshine.Monster196884FibreInterferenceExact as Dim
 import DASHI.Moonshine.MonsterGradedVOAActual3BKernelSameElementBidiExact as ThreeB
 import DASHI.Moonshine.Monster369ZetaSameObjectWeldExact as Zeta
 import DASHI.Moonshine.Monster3BKernelCharacterCriterionExact as Criterion
+import DASHI.Moonshine.Monster27VOAVertexModeChargeSelectionExact as ModeCharge
+import DASHI.Moonshine.JInvariant369Cube27CuspCodecNonIsometryExact as Chart
+import DASHI.Foundations.SSPTritCarrier as SSP
 
 -- This is the ORIGINAL native spectral-charge chart (a chosen exact
 -- cyclic C27 label); not a property of geometric neighbours by fiat.
@@ -94,3 +97,22 @@ selectedKernelCharacterIsZetaIfAttached =
 -- A source-correct mathematical next obligation is a *genuine*
 -- same-cube source VOA operator, which is charged and carries its
 -- edge index/residual; equality of ranks does not construct it.
+
+-- The original selected literal VOA charge-adder already supplies a
+-- concrete source chart for positive x/y/z shifts (1,3,9 in C27).
+-- These are source-site label equalities, not a construction of a
+-- nonzero local hopping matrix element or a global flat gauge section.
+selectedPositiveXChargeIsNative :
+  Chart.encodeCubeDigits
+    (Cube.ternary27Point
+      SSP.sspPosOne
+      ModeCharge.SSP.sspZero
+      ModeCharge.SSP.sspZero)
+  ≡ ModeCharge.positiveXCharge
+selectedPositiveXChargeIsNative = ModeCharge.positiveXAxisSite
+
+-- Source-required witness for a *genuine* selected Monster VOA mode:
+-- LiteralMonster27ModeChargeReceipt source includes an actual Sector,
+-- a typed embedding into the same VOA carrier, and the equality
+-- tying cyclic charge addition to the original vertex mode action.
+-- It has not been inhabited here and never follows from counts.
