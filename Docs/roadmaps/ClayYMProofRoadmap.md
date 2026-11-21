@@ -1,3 +1,43 @@
+## 21 November 2026 — BIDI plug ends into original producer geometry; fix actual WEXT universal-metric vacuity
+
+**User rule: "Plug both BIDI gap ends into known producers / geometry; if an error appears, first check existing formalisms."** This cut does that. **P0 original Yang–Mills** remains before **P1 antigravity**. This source audit does not announce a Clay mass-gap proof.
+
+### Real source-level error found and repaired in existing producer
+
+Original `BalabanLiteralWilsonMarkedLocalizationSourceExact.agda.WilsonWEXTDownstreamSemantics` (on master before this cut) required, literally:
+
+```agda
+supportDistanceIsEuclideanTime :
+  (physicalDistance : Observable → Observable → Nat) →
+  ∀ left right time →
+  physicalDistance left (timeTranslate right time) ≡ time
+```
+
+For ANY inhabited Wilson-observable type this is uninhabitable: choose `physicalDistance = λ _ _ → zero` and `time = suc zero`, then `zero ≡ suc zero`. **This was a vacuous forward theorem interface, not a new physical impossibility, and not a geometry defect of Yang–Mills.** The source had been demanding time separation under *every arbitrary metric* rather than the original selected one.
+
+- **Exact negative control** `YMClayWilsonWEXTSelectedDistanceNonVacuityExact.agda` commit `838607476c9003b0508bae3f2b4f7e11bafd4057` (standard `Data.Empty` fix `bf5fb13406515ffc2fdbfb64309c31b79b51c80a`): `universalTimeForEveryDistanceIsImpossible` derives `⊥` from old field for any concrete Wilson word. Source-written `--safe` proof; local kernel pending.
+- **Surgical existing-owner correction** `BalabanLiteralWilsonMarkedLocalizationSourceExact.agda` commit `9b7f45219acc6d3cbb9bdfc64ce71f6409fda6b8`: add selected metric parameter `(selectedPhysicalDistance : Observable→Observable→Nat)` to `WilsonWEXTDownstreamSemantics`; change time field to `selectedPhysicalDistance left (timeTranslate right time) ≡ time`; instantiate its own source metric in `literalMarkedLocalizationCompilesToR556`. **No source analytic estimate added**.
+- **Only matching existing second consumer** `BalabanLiteralTwoWilsonR556CompletionExact.agda` commit `852e562859ed6f00dc675708c829fc6eb8bbe35c`: `downstream : WilsonWEXTDownstreamSemantics dataSet physicalDistance` and direct selected distance-time proof. Search of original `master` found exactly these two files using the symbol. **No other CMP owner bulk-rewritten.**
+
+### Real NEW BIDI forward proof chain (on #1536 master-based branch)
+
+- `BalabanLiteralWilsonMarkedLocalizationSourceExact.LiteralWilsonMarkedLocalizationSource` already has **original Wilson W1** (common analytic marked Wilson source/derivative/connected-normalized response), original shared physical shell geometry, and **original W3** (two-support pointwise activity bound and rooted-shell sum) as proof-bearing fields. `literalMarkedLocalizationCompilesToR556` already constructs the actual R556 source from W1/W3 and downstream time/test semantics. It is NOT an already-inhabited physical source.
+- **R332** `OSIndexedPairwiseEuclideanSemantics` owns the SAME OS1 `timeTranslation` and `supportDistanceIsTime` on R304 selected Euclidean pair distance. The new `YMClayOriginalWilsonMarkedOS1AllTimesProducerWeldExact.agda` commit `6edae4e5a24b75a25d00a5cc0e0202769bf252a3` constructs `OriginalWilsonMarkedOS1PhysicalInputs` exposing *only* the original observable decoder equality, selected marked source distance = R304 physical distance, original bounded F/G/FG, and scalar order closure. `selectedOriginalMarkedDistanceIsEuclideanTime` derives physical marked distance = OS1 time by **transitivity of existing R332/source geometry**, no second time semantics. `originalWEXTDownstreamFromOS1` inhabits the corrected original WEXT downstream source using these same witnesses.
+- `originalMarkedOS1CompilesToR556` applies the **already written `literalMarkedLocalizationCompilesToR556`** to the original marked W1/W3 source and constructed OS1 time/test semantics. No alternative Wilson cluster expansion or printed bond-valued J is introduced.
+- `originalMarkedOS1ContinuumWilsonClustering` is **existing R556/R551** half-rate continuum clustering (W1/W3 WEXT bound still an actual physical source premise); `originalMarkedOS1AllPairsTimes` delegates to the new all-time BIDI producer; `originalMarkedOS1SameSpectrumClustering` plugs the SAME all-pairs/time covariance into R281.
+- **All pairs across one spectrum, not a spectrum per pair**: `YMClayOriginalWilsonAllTimesOS1R556R281BIDIExact.agda` revised commits `8bafafaa666a1fc1c0178f41a29705d603a87074` and `1a84f3da31f5cbce298d32dfef4bbe710842a554`. `originalAllWilsonPairsTimesTests` now has **ONE `R278.SelectedConnectedCovarianceTests` index = `(Observable × Observable) × Nat`**, not per-time `⊤` nor just Nat for a fixed pair. `originalAllWilsonPairsTimesConverge` reuses R278 on the same `Gram.measureSequence`/continuum. `SameOSAllWilsonPairsTimesSpectrum` requires the already-existing R281 spectrum's `indexFor observable time` equal `((selected left,right), time)`, and `originalAllWilsonPairsTimesSameR281SpectrumHasClustering` transports R551's bound for the SAME spectrum over all selected words and times. **This does not inhabit a physical spectrum or guarantee norm density.**
+
+### Reverse endpoint and exact smallest remaining source producers
+
+1. **Original real Wilson `ℝ` ↔ R575 rational `ℚ` selected field/source**: check `YMClayP0BishopToOriginalWilsonRealWeldExact` and `BalabanCMP109116BishopRealSetoidInstantiationExact` first. Those supply semantics machinery but explicitly DO NOT currently inhabit the faithful **physical same-Gibbs/covariance and changing-cutoff** bridge. R575 `RationalCovarianceContinuityLaws` and rational embedded order also require original carrier. Do NOT coerce `ℝ` to `ℚ` by fiat.
+2. **W1/W3 original physically interacting Wilson marked analytic/localized two-support source**: `BalabanLiteralWilsonMarkedLocalizationSourceExact` and `BalabanLiteralWilsonWEXTTheoremExact` already compile the source once its actual normalized marked local cluster expansion and shell-charge bound are supplied. `BalabanWilsonTwoInsertionConnectedShellRound491Exact` correctly warns the published printed bond-valued J does NOT automatically prove Wilson-loop insertion locality. Use CMP119 anchored normalized insertion and CMP122 boundary-reinjection **on the original source** (including large-field, common analytic domain, cutoff and volume uniformity) to fill those exact source fields, not a parallel estimate.
+3. **Physical geometry**: selected native R445 site reflection/plane/word support and actual published Wilson fine RP, **R332 OS1 translation**, **R304/R349 actual selected shell distance**, original W1/W3 support. These are exact present owners with explicit source-identity bridges, not new geometric carriers. The previous universal distance type was uninhabitable; the corrected selected metric is correct.
+4. **Physical continuum and reverse one-H**: R278 finite-measure expectation/connected-covariance convergence on original E1 interacting family; R281 spectral lower representation and same H_OS, R299/F1-C norm-dense original gauge-invariant positive-time vacuum-complement test family, **one physical-unit** exponent (m>0) independent of cutoff, N1 interactions, G1 all compact simple groups. The all-pairs/time carrier fixes *index coherence*, not those true spectral/analytic lemmas.
+
+**Acceptance**: newly changed Agda source files are **source-written, not compiler/kernel checked**; pin exact local Agda 2.9 from original `scripts/check_ym_original_rg_p0_kernel.sh`. Existing local original Q8 reflection **2048/2048 PASS** (456 negative mismatches) and original free-group 64 bonds/96 plaquettes/9216 ordered word pairs **PASS**. The integrated source checker now **fails closed** if the impossible universal metric quantifier reappears and requires the new W1/W3→OS1→R556→R281 owners. PR #1536 remains DRAFT and must not be merged without kernel and same-source audit. P0 E1/D1/D2/N1/G1 OPEN; P1 antigravity later.
+
+---
+
 ## 2026-11-21 — BIDI REVERSE ENDS PLUGGED INTO THE *EXISTING* ALL-TIME / OS1 / CMP119-T5 PRODUCERS
 
 **Source-first repair:** our earlier P0 R445 n=3 finite mixed-J ↔ centered reflected original Wilson covariance was a useful *same-measure finite* identity, but it is **not** a time-indexed OS correlation for a single continuum H. **The repo ALREADY has explicit time/spectrum producers. Reuse their geometry rather than creating another toy clock/estimate.** P0 YM mass gap first, P1 antigravity second.
