@@ -58,6 +58,11 @@ OWNERS = {
         "cong₂ _-ℝ_",
         "cong₂ _*ℝ_",
     ],
+    "DASHI/Physics/YangMills/YMClayOriginalF19R445Full1024LabelsP0Exact.agda": [
+        "originalF19SelectedPrefixMatchesR445",
+        "originalF19Original896SpectatorsMatchR445",
+        "originalF19Complete1024LabelOrderMatchesR445",
+    ],
     "DASHI/Physics/YangMills/YMClayOriginalF19NativeR445SelectedOrderBIDIExact.agda": [
         "originalF19PairListIsNativeR445Parity",
         "originalParityPairsAreNativeR445SelectedEnumeration",
@@ -155,6 +160,7 @@ OWNERS = {
         "YMClayE1TimeKResidualCylinderWaveTransportExact",
         "YMClayOriginalF19CanonicalConnectedWilsonBIDIExact",
         "YMClayOriginalF19NativeR445SelectedOrderBIDIExact",
+        "YMClayOriginalF19R445Full1024LabelsP0Exact",
     ],
     "DASHI/Physics/YangMills/YMClayNativeR445TemporalReversalExact.agda": [
         "originalSUNTimeReversalTwoLink",
@@ -194,6 +200,7 @@ CHECKS = [
     "scripts/check_ym_original_r445_os1_translation_commuting_square.py",
     "scripts/check_ym_r445_time_k_residual_hyperfabric.py",
     "scripts/check_ym_original_f19_r445_selected_residual_source.py",
+    "scripts/check_ym_f19_r445_full1024_labels_p0.py",
 ]
 
 def main():
