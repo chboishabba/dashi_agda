@@ -56,6 +56,14 @@ physical theorem.
 DASHI exact source owners retain their original ownership. No
 new Clay YM proof or pinned Agda 2.9 kernel result is claimed here.
 
+### 21 Nov P0 source archaeology — the existing CMP116/W1/W3 theorem is NOT the E1/F19 physical record
+
+**New inspected source audit on #1536:** [original CMP116/W1/W3→D1→E1/F19 physical source boundary](https://github.com/chboishabba/dashi_agda/blob/agent/ym-p0-cmp119-r445-master-weld-20261121/Docs/physics/YMClayCMP116W1W3D1E1F19PhysicalSourceAudit20261121.md); audit commit `e7833e2b`. The canonical `OriginalSmallLargePhysicalSource` and `OriginalRealCMP116PhysicalSelection` records are already present and the actual Wilson cutoff-`n=3` BIDI adapter already reuses the full-Wilson estimate. A source-written conditional compiler is **not** evidence that the selected record is inhabited.
+
+**Preferred existing original W1/W3 payment:** `BalabanLiteralTwoWilsonSourceFirstJetLocalizationExact.SourceFirstLiteralWilsonJetLocalization` already owns the normalized cluster jet. Its `pointwiseLiteralWilsonJetLocalization` and `localizedLiteralShellChargeSum` explicitly remain conditional; equivalently the existing `BalabanLiteralTwoWilsonCMP116ConnectingTailExact.TwoWilsonCMP116PhysicalShellPayment.chargeSumBelowPhysicalRootedShell` must be proved on original source-supported spanning clusters. Fill the **already-existing** full-Gibbs D1 `originalFullCovarianceBelowSmallPlusLarge`, `largeFieldErrorCalibration` and both common-physical-distance rate fields, with original cutoff-independent constants and one `0 ≤ commonQ < 1`. Finite one-site plaquette-deficit/one-link-tail suppression is not spatial connected-cluster suppression; an exact Bernoulli counterexample was checked locally with SymPy. #1444-only `naturalPrefactorR342` improves prefactor bookkeeping but still takes selected localization and distance/time calibration as inputs.
+
+**No promotion:** cutoff-3 F19 weighted covariance is not an all-cutoff E1 continuum limit; C₂ time is not arbitrary Euclidean time. Agda kernel unrun. D2 same-`H_OS` dense nonvacuum spectrum, E1 interacting continuum/RP, N1 and G1 remain OPEN. Reuse estimates, do not reconstruct them.
+
 ### 21 Nov P0 local SymPy original Wilson action-fibre counterexample and finite Haar distinction
 
 **NEW exact local SymPy 1.14.0 result** (source-shaped original 4D side-four Wilson geometry): enumerated all **1536 original positive-oriented plaquettes**; all **1024 fine positive links** appear in exactly **6** plaquette boundaries, hence the 128 selected links contribute 768 incidences and the **896 retained spectators contribute 5376 original fine-action incidences**. This was executed locally (not Agda or CI) and committed to `scripts/check_ym_f19_r445_sympy_purehaar_weld.py` on #1536 [commit e3dd8f5a](https://github.com/chboishabba/dashi_agda/commit/e3dd8f5ab40702199ef6951a2a3e734bd41e2890); exact committed checkout not independently run in local container.
