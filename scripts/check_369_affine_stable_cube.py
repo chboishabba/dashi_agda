@@ -28,6 +28,26 @@ def eval02(x,u,w):
  d=tuple((b[i]+u*a[i]+w*s[i])%3 for i in range(3))
  return u,d[0],w,d[1],d[2]
 
+# Model typed vertices by partition/rotation/encode stage bits.
+# This prevents self-equality placeholders from counting as commuting faces.
+def edge(state, axis):
+ x,y,z,p=state
+ if axis=='x':
+  assert x==0
+  return (1,y,z,p)
+ if axis=='y':
+  assert y==0
+  return (x,1,z,rotate(p))
+ if axis=='z':
+  assert z==0
+  return (x,y,1,encode(p))
+ raise ValueError(axis)
+def square(state,i,j):
+ a=edge(edge(state,i),j)
+ b=edge(edge(state,j),i)
+ assert a==b
+ return a
+
 states=faces=paths=points=0
 noncommute=None
 for slope in product((1,2),repeat=3):
@@ -35,34 +55,32 @@ for slope in product((1,2),repeat=3):
   for b in product(T,repeat=3):
    x=(a,slope,b);q=pivot(x)
    assert pivot(q)==x and all(v!=0 for v in q[1])
+   assert pivot(rotate(x)) and pivot(rotate(rotate(x)))
    for u,v in product(T,repeat=2):
     w=eval01(x,u,v)[2]
     assert eval01(x,u,v)==eval02(q,u,w)
     points+=1
    assert frozenset(eval01(x,u,v) for u,v in product(T,repeat=2))==frozenset(eval02(q,u,w) for u,w in product(T,repeat=2))
-   assert all(pivot(rotate(x)) and pivot(rotate(rotate(x))) for _ in (0,))
    assert decode(encode(x))==x
-   # x partition preserves the three triples and their provenance;
-   # y rotates all three triples; z factorizes support/sign.
-   assert rotate(x)==rotate(x);faces+=2
-   assert encode(x)==encode(x);faces+=2
-   assert encode(rotate(x))==rotate(encode(x));faces+=2
+   for origin,i,j in (((0,0,0),'x','y'),((0,0,0),'x','z'),((0,0,0),'y','z'),
+                      ((0,0,1),'x','y'),((0,1,0),'x','z'),((1,0,0),'y','z')):
+    payload=encode(x) if origin[2] else (rotate(x) if origin[1] else x)
+    square((*origin,payload),i,j)
+    faces+=1
    endpoints=[]
    for ordering in permutations("xyz"):
-    state=x
-    for ax in ordering:
-     if ax=="y":state=rotate(state)
-     elif ax=="z":state=encode(state)
-     # x changes Blocks/PrefixResidual type but preserves fields.
+    state=(0,0,0,x)
+    for ax in ordering:state=edge(state,ax)
+    assert state[:3]==(1,1,1)
+    assert decode(state[3])==rotate(x)
     endpoints.append(state)
-   assert all(y==endpoints[0] for y in endpoints)
-   assert decode(endpoints[0])==rotate(x)
-   paths+=6
+    paths+=1
+   assert len(set(endpoints))==1
    if noncommute is None and pivot(rotate(x))!=rotate(pivot(x)):noncommute=x
    states+=1
 assert (states,faces,paths,points)==(5832,34992,34992,52488)
 assert noncommute is not None
 print("SymPy",sp.__version__)
-print("PASS states",states,"six faces",faces,"six endpoint orders",paths)
-print("PASS pivot roundtrips",states,"matched ambient points",points)
-print("PASS pivot/rotate noncommutation counterexample",noncommute)
+print("PASS states",states,"six independently composed faces",faces,"terminal paths",paths)
+print("PASS two-sided pivots",states,"ambient point matches",points)
+print("PASS negative control pivot/rotate do not commute:",noncommute)
