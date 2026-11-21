@@ -1,3 +1,59 @@
+## 21 November 2026 — controlling YM P0 theorem-first directive
+
+**The main mathematical goal is the original four-dimensional interacting
+Yang–Mills existence and mass gap, for each compact simple gauge group.**
+R445, F19, R320, CMP116/119, R5xx, source-owner symbols and PR numbers
+denote **iterative attempts and reusable intermediate lemmas**. They
+are neither distinct prize-problem milestones nor a physical time
+coordinate or RG iteration by default. Counting their accepted finite
+identities is NOT a measure of progress toward the continuum proof.
+
+**Physical endpoint theorem, with source obligations:**
+- **E1:** construct a nontrivial interacting 4D original Wilson/Schwinger
+  continuum at a→0 and V→∞, with projective compatibility, Euclidean
+  symmetries, full reflection positivity and the required OS axioms.
+  An abstract `originalWilsonConverges` field or a finite E1 cylinder
+  identity is NOT a source proof of this.
+- **D1 (if using the covariance-decay route):** prove genuinely
+  original full Wilson connected-covariance small+large-field bounds
+  in fixed physical units, uniform in lattice spacing and volume:
+  `|Cov_a(W_x,W_y)| <= C_G exp(-m_G d_phys(x,y))`
+  for original physically dense gauge-invariant word tests, with
+  source constants C_G<∞ and m_G>0, independent of a,V.
+  The direct reconstructed-spectrum route MAY bypass CMP116/D1,
+  but never E1 or D2.
+- **D2:** use ONE `H_OS` reconstructed from that SAME E1
+  reflection-positive Schwinger family. Prove the full nonvacuum
+  spectral projection `1_(0,m_G)(H_OS)|_(Omega^perp)=0`, not just
+  finitely many selected Wilson correlations. Positivity and
+  dense cyclic coverage are physical hypotheses to be paid.
+- **N1/G1:** certify a surviving nontrivial local continuum
+  observable and the original argument for every compact simple G,
+  not just a finite SU2 subgroup or fixed SU(N) sample.
+
+**What #1536 contributes without claiming closure:** finite original
+F19/R445 128+896 source labels, exact weighted finite pushforward,
+finite Wilson marked/covariance algebra, time/reflection commuting
+squares and source interface compilers. These can be used only to
+show that the physical source employed in the ultimate E1/D2 proof
+is the *same* one. They supply neither the missing uniform small/large
+field inequality nor a physical spectral lower bound. Their Agda
+proof candidates remain kernel-pending.
+
+**Immediate P0 maximum cut:** (1) supply actual original Wilson
+physical convergence/cutoff-uniform clustering or an alternative
+spectral-gapped reconstruction with matching density; (2) certify
+continuum RP/OS on the genuine physical word domain; (3) pay the
+same-H full-sector gap and N1; (4) extend group scope G1.
+Do not insert new finite codecs or OS/H wrappers unless a specific
+required original source identification fails. Finish kernel
+acceptance of already-written code without promoting it into a
+physical theorem.
+
+**Source attribution:** Wilson/Balaban, published OS/RP and existing
+DASHI exact source owners retain their original ownership. No
+new Clay YM proof or pinned Agda 2.9 kernel result is claimed here.
+
 ## 21 November 2026 — P0 F19/R445 full 1024-label target candidate
 
 **Original source owner check:** original F19 `YMClayNativeSideFourPairSpectatorSortProgramExact` already constructs the REAL adjacent-swap target from the source 64 ordered two-link pairs + canonical-order 896 spectators, and `YMClayNative1024ClosedReindexHaarConsequencesExact` already transports that exact permutation to arbitrary original SU(N) link vectors and original finite product Haar. R445 `YMClayR445CanonicalBondPermutationCodecExact` already supplies its original 128+896 bijective Vec codec. **Do not rebuild any of these.**
