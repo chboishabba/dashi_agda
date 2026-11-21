@@ -1,3 +1,29 @@
+## 21 Nov 2026 — P0 GRH retained; BSD/RH Mellin already owned
+
+**Source-first weld forward:** original `MellinSplitFunctionalEquationExact`
+proves the algebraic functional-equation compiler. Original BSD
+`EllipticCMLevel32FrickeMellinExact` already consumes that
+with its central twice-tail identity; do not rebuild Mellin.
+Riemann G2 original
+`RiemannG2GammaMellinProofRelevantActionCompilerExact` already
+transports literal Gamma/Mellin tests to the original Weil Test,
+retaining admissibility and spectral/transform equality obligations.
+The remaining selected BSD proof is the **actual E32 analytic
+L(E,s)↔eta newform integral realization**, not a generic Mellin interface.
+
+GRH is **P0 alongside YM and BSD**, with **all-character Dirichlet**
+scope, not just zeta RH. The external original v4.33.1 source has
+independent reported compilation/kernel/axiom/challenge checks,
+but native Lean #113 adapter and exact root/Agda all-character
+admission remain OPEN. Controlling roadmap lives on Agda #1533:
+`Docs/roadmaps/GRHP0OriginalEveryCharacterMellinForwardWeld20261121.md`.
+No signed-zero 369/CM source is allowed to replace the original
+`UpperTheory.EveryCharacter` without exact proof of transport.
+Physical YM E1/D1/D2/N1/G1 and universal BSD S6 remain separate
+main proof endpoints; round labels are iterations, never proof counts.
+
+---
+
 ## 21 Nov 2026 P0 theorem-first interpretation (newer than the ledger below)
 
 **Round-number firewall:** R445, F19, CMP, source-index Rxxx,
