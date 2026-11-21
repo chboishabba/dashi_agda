@@ -8,6 +8,49 @@ does not promote any theorem, Clay claim, external authority claim, or peer
 review status. It records how the current paper corpus should be prepared from
 the repository's proof-first surfaces.
 
+## 21 November 2026 — NON-DISPLACEMENT RULE: THEOREMS BEFORE PAPERS
+
+**This is a publication router, NOT the proof-work queue.**
+The agreed overarching work is the original five
+non-Yang–Mills Clay endpoints (RH/GRH, NS,
+BSD, Hodge and P vs NP), with GRH independently
+held at **P0** and original Yang–Mills a separate
+physical theorem programme. The limited YM
+CMP102/source weld and all finite R445/F19
+identities are donors, not Clay endpoints.
+
+The controlling GRH source/acceptance owner is
+`Docs/roadmaps/AlpogeGRHGeometricTransport20261121.md`
+on Agda #1533, updated with the exact all-character
+vs RH-only Agda seam and pinned Lean admission gates.
+NS proof owner is `Docs/roadmaps/NSProofControl20260915.md`
+on #1539; YM's original physical owner is
+`Docs/roadmaps/ClayYMProofRoadmap.md` on #1536.
+Other Clay lanes retain their source-specific theorem
+owners, not this publication document.
+
+In the following paper table, **P0 is an editorial
+review rank only**, never a mathematical P0/proof
+completion status. Paper 1/3/8 edits are **now
+packaged**; they do not justify further paper
+work ahead of actual theorem-producing receipts.
+The next tranche returns to the original pinned
+GRH all-character proof and compatible trusted
+semantic admission, not an additional manuscript
+section, diagram, adapter record, or finite
+cyclotomic repeat.
+
+**Required update trigger:** edit a manuscript only
+when a specific original theorem, counterexample,
+dependency, verification or attribution fact
+has changed. Commit the proof-owner roadmap
+with the work, then correct the corresponding
+paper as downstream support. Never promote
+source-written, local SymPy, external checker
+reports and native kernel receipts into each other.
+
+---
+
 ## 21 November 2026 — current paper-corpus review and committed updates
 
 The **original eight numbered paper families** remain tracked here.
