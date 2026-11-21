@@ -74,6 +74,13 @@ import DASHI.Physics.YangMills.YMClayOriginalWilsonMarkedOS1AllTimesProducerWeld
 -- and closes at one R281 indexed spectrum (not physical H_OS yet).
 import DASHI.Physics.YangMills.YMClayOriginalWilsonOS1R556R281CommutingSquareExact as OriginalOS1CovarianceSquare
 
+-- Source-owned actual Gibbs physical-cube strict 0<a_n gives a
+-- PROVED positive ORIGINAL native R445 two-fine-link SI path 0<2a_n.
+-- Reverse-solved physical clustering ENVELOPE length xi=L/-log(qbar)
+-- remains conditional on original full real Wilson D1 small+large q.
+-- Reverse-oriented displacement or SU(N) inverse link is not -metres.
+import DASHI.Physics.YangMills.YMClayR445PositiveSIBlockGeometryExact as OriginalR445PositiveLength
+
 -- Canonical SI/metrology source WELD at actual original two-link R445
 -- block: fine spacing [m], native pair length [m], and (under explicit
 -- coarse inverse-spacing calibration) same inverse correlation length
