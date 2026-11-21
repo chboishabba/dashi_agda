@@ -38,7 +38,7 @@ module DASHI.Physics.YangMills.YMClayOriginalE1A3NativeF19WeightedBIDIExact wher
 
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong₂; trans)
+open import Relation.Binary.PropositionalEquality using (cong₂; sym; trans)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; _*ℝ_; _-ℝ_)
 import Data.Vec.Base as Vec
 
@@ -160,6 +160,40 @@ module _
       (cong₂ _*ℝ_
         (originalE1Cutoff3NativeIsOriginalF19WeightedEffective left)
         (originalE1Cutoff3NativeIsOriginalF19WeightedEffective right))
+
+  -- Forward next producer is ALREADY ORIGINAL E1/R445 three-moment
+  -- R445 quantitative cutoff error; not a second covariance estimate.
+  -- The vector-tested F,G,FG are exactly the same side-two functions
+  -- admitted by this original source.
+  originalE1VectorCovarianceIsOriginalThreeMomentE1 :
+    ∀ left right →
+    originalE1Cutoff3FineCovariance left right
+      ≡ ThreeMoment.originalE1FineBlockedCovariance
+          theory traceData exponential beta oneLink bilateral divide
+          (coarseVectorTestAsNative left)
+          (coarseVectorTestAsNative right)
+  originalE1VectorCovarianceIsOriginalThreeMomentE1 left right = refl
+
+  -- The same source triangle closes on the ORIGINAL R445 E1 effective
+  -- covariance, with three-moment error transport already available.
+  originalF19EffectiveCovarianceIsOriginalR445ThreeMoment :
+    ∀ left right →
+    originalF19EffectiveCovariance left right
+      ≡ ThreeMoment.originalR445EffectiveCovariance
+          theory traceData exponential beta oneLink bilateral divide
+          (coarseVectorTestAsNative left)
+          (coarseVectorTestAsNative right)
+  originalF19EffectiveCovarianceIsOriginalR445ThreeMoment left right =
+    trans
+      (sym
+        (originalE1Cutoff3ConnectedCovarianceIsOriginalF19Effective
+          left right))
+      (trans
+        (originalE1VectorCovarianceIsOriginalThreeMomentE1 left right)
+        (ThreeMoment.originalE1FineBlockedCovarianceIsR445Effective
+          theory traceData exponential beta oneLink bilateral divide
+          (coarseVectorTestAsNative left)
+          (coarseVectorTestAsNative right)))
 
   -- Original E1 at n=1 is the *different* independently bare Wilson
   -- measure, whose three F/G/FG comparison errors are already owned by
