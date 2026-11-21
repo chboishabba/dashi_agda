@@ -9,7 +9,7 @@ actual positive original compact-group Wilson Gibbs law.
 from collections import defaultdict
 from fractions import Fraction as Q
 from itertools import combinations, product
-from sympy import Rational, symbols, diff, simplify, log
+from sympy import Rational, symbols, diff, simplify, log, solve
 
 L=4
 origin=(0,0,0,0)
@@ -126,6 +126,7 @@ true_z=(1+a)*(1+b)+s*a*b
 naive=(1+a*(1+s*u))*(1+b*(1+s*v))
 assert simplify(diff(true_z,s).subs(s,0))==a*b
 assert simplify(diff(naive,s).subs(s,0)-(a*u+b*v+a*b*(u+v)))==0
+assert solve((u,v,u+v-1),(u,v), dict=True)==[]
 assert simplify(diff(naive,s).subs({s:0,u:0,v:0}))==0
 qi=(0,1,0,0)
 assert mult(qi,qi)==(-1,0,0,0)
