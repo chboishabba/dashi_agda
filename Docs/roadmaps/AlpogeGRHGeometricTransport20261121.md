@@ -1,5 +1,16 @@
 # Alpöge/Claude RH–GRH × DASHI geometric transport (21 November 2026)
 
+## 21 November — CURRENT: exact DASHI BIDI gap chooses external import depth
+
+**The precise comparison is now committed:** [RHGRHCurrentBidiVsAlpogeExactGapCut20261121.md](RHGRHCurrentBidiVsAlpogeExactGapCut20261121.md). It reads DASHI's original **authoritative universal pole-quotient Off/Gamma frontier**, the older **G2 determinant scalar-to-Schur** BIDI and the independent **A1/A2/Route B** Lean frontiers *against* the original fork's literal `Claim.HalfPlane ↔ UpperTheory.EveryCharacter`, `Claim.Zeta ↔ RiemannHypothesis`, `Claim.strip` and `Formalism.VW.rh_of_every` exact source theorems.
+
+**Key source correction:** our older G2d determinant taper is **not** the authoritative final pole-quotient taper; the original source explicitly refuses their identification. The live universal analytic endgame is a common-cutoff signed **Off** allowance and independent **Gamma** allowance with `A_off + A_Gamma < M_cluster`. G2's missing target-centred local zero signed estimate, scalar→Schur exact weld and projective-balance-breaking premise are *route-internal* open mathematical gates; external zero-location alone does **not** automatically establish their signed bounds.
+
+**P0 stop:** `rhOfAll`/source `RiemannHypothesis` is deep enough to satisfy Mathlib→existing Clay BIDI. At the stronger Dirichlet GRH interface, `UpperTheory.EveryCharacter` is enough; do not trace deeper to perform terminal transport. A direct Lean #113 `RHClaimBidiExact.lean` now source-writes the exact original `HalfPlane ↔ EveryCharacter` and `Zeta ↔ Mathlib RH` and consumes the original `rh_of_every`; source-written, typechecking OPEN.
+
+**P1 reverse solve:** descend into actual `tLiftK` → `galoisRepresentations_of_thetaLift` → `Row0b recT` only to test whether our **existing** 369/Monster/Weil/theta producers can genuinely shorten the external proof. Supply actual typed theta/representation/determinant same-object identities or a specific counterexample. No inference of signed G2 estimates from RH, no world/PG ingestion and no CI.
+
+
 ## 21 November — CURRENT P0 selective top-cut / P1 original geometry (supersedes world/PG)
 
 **Only trace as deep as needed.** Lean [#113](https://github.com/chboishabba/dashi_lean4/pull/113) now contains **two** source-original, DASHI-authored import candidates:
