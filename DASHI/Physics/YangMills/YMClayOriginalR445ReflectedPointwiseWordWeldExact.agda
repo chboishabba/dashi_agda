@@ -23,7 +23,7 @@ module DASHI.Physics.YangMills.YMClayOriginalR445ReflectedPointwiseWordWeldExact
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
-open import Relation.Binary.PropositionalEquality using (cong; cong₂)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 open import DASHI.Foundations.RealAnalysisAxioms
   using (ℝ; 1ℝ; _*ℝ_)
@@ -239,6 +239,97 @@ module _
   originalActualPlaquetteWordsReflectThroughR445 source word =
     originalReflectedWordCommutesWithR445 source
       (originalFinitePlaquetteWord word)
+
+
+  -- Pure original noncommutative two-link inversion. This is a valid
+  -- symbolic identity for ANY original ExactLinkGroup, no commuting.
+  reverseOriginalTwoLink :
+    (u v : Link) →
+    Bond.multiply originalGroup
+      (Bond.inverse originalGroup v)
+      (Bond.multiply originalGroup
+        (Bond.inverse originalGroup u)
+        (Bond.identity originalGroup))
+    ≡
+    Bond.inverse originalGroup
+      (Bond.multiply originalGroup u
+        (Bond.multiply originalGroup v
+          (Bond.identity originalGroup)))
+  reverseOriginalTwoLink u v =
+    trans
+      (cong
+        (Bond.multiply originalGroup (Bond.inverse originalGroup v))
+        (Bond.identityRight originalGroup (Bond.inverse originalGroup u)))
+      (sym
+        (trans
+          (cong (Bond.inverse originalGroup)
+            (cong (Bond.multiply originalGroup u)
+              (Bond.identityRight originalGroup v)))
+          (Bond.inverseProduct originalGroup u v)))
+
+  sourceReflectedCoarsePredecessor :
+    Geometry.CoarseSite → Geometry.CoarseSite
+  sourceReflectedCoarsePredecessor site =
+    Bond.negativeStep (Geometry.reflectCoarseSite site) Torus.zeroᵢ
+
+  sourceBackwardTimeFirst : FineLinks → Geometry.CoarseSite → Link
+  sourceBackwardTimeFirst fine site =
+    fine
+      (Torus.pair
+        (Geometry.evenCoarseOrigin
+          (sourceReflectedCoarsePredecessor site))
+        Torus.zeroᵢ)
+
+  sourceBackwardTimeSecond : FineLinks → Geometry.CoarseSite → Link
+  sourceBackwardTimeSecond fine site =
+    fine
+      (Torus.pair
+        (Bond.positiveStep
+          (Geometry.evenCoarseOrigin
+            (sourceReflectedCoarsePredecessor site))
+          Torus.zeroᵢ)
+        Torus.zeroᵢ)
+
+  -- Candidate exact-source 8-case bond theorem, using 16-case
+  -- ORIGINAL Fin.combine even-origin normal form from Geometry.
+  -- Spatial cases are definitional after that rewrite; time cases
+  -- are ONLY the original group inverse-of-ordered-product law.
+  -- This proof candidate has NO postulates or placeholders.
+  -- Agda typecheck is REQUIRED before marking the P0/F0 gate closed.
+  originalNativeReflectionAtEveryBond :
+    NativeR445ReflectionPointwise
+  originalNativeReflectionAtEveryBond fine (Torus.pair (Torus.pair (Torus.pair Torus.zeroᵢ x) (Torus.pair y z)) Torus.zeroᵢ)
+    rewrite Geometry.originalR445NativeOriginIsEven originalGroup (Torus.pair (Torus.pair Torus.zeroᵢ x) (Torus.pair y z))
+          | Geometry.originalR445NativeOriginIsEven originalGroup
+              (sourceReflectedCoarsePredecessor (Torus.pair (Torus.pair Torus.zeroᵢ x) (Torus.pair y z))) =
+    reverseOriginalTwoLink
+      (sourceBackwardTimeFirst fine (Torus.pair (Torus.pair Torus.zeroᵢ x) (Torus.pair y z)))
+      (sourceBackwardTimeSecond fine (Torus.pair (Torus.pair Torus.zeroᵢ x) (Torus.pair y z)))
+  originalNativeReflectionAtEveryBond fine (Torus.pair (Torus.pair (Torus.pair Torus.zeroᵢ x) (Torus.pair y z)) (Torus.sucᵢ Torus.zeroᵢ))
+    rewrite Geometry.originalR445NativeOriginIsEven originalGroup (Torus.pair (Torus.pair Torus.zeroᵢ x) (Torus.pair y z)) =
+    refl
+  originalNativeReflectionAtEveryBond fine (Torus.pair (Torus.pair (Torus.pair Torus.zeroᵢ x) (Torus.pair y z)) (Torus.sucᵢ (Torus.sucᵢ Torus.zeroᵢ)))
+    rewrite Geometry.originalR445NativeOriginIsEven originalGroup (Torus.pair (Torus.pair Torus.zeroᵢ x) (Torus.pair y z)) =
+    refl
+  originalNativeReflectionAtEveryBond fine (Torus.pair (Torus.pair (Torus.pair Torus.zeroᵢ x) (Torus.pair y z)) (Torus.sucᵢ (Torus.sucᵢ (Torus.sucᵢ Torus.zeroᵢ))))
+    rewrite Geometry.originalR445NativeOriginIsEven originalGroup (Torus.pair (Torus.pair Torus.zeroᵢ x) (Torus.pair y z)) =
+    refl
+  originalNativeReflectionAtEveryBond fine (Torus.pair (Torus.pair (Torus.pair (Torus.sucᵢ Torus.zeroᵢ) x) (Torus.pair y z)) Torus.zeroᵢ)
+    rewrite Geometry.originalR445NativeOriginIsEven originalGroup (Torus.pair (Torus.pair (Torus.sucᵢ Torus.zeroᵢ) x) (Torus.pair y z))
+          | Geometry.originalR445NativeOriginIsEven originalGroup
+              (sourceReflectedCoarsePredecessor (Torus.pair (Torus.pair (Torus.sucᵢ Torus.zeroᵢ) x) (Torus.pair y z))) =
+    reverseOriginalTwoLink
+      (sourceBackwardTimeFirst fine (Torus.pair (Torus.pair (Torus.sucᵢ Torus.zeroᵢ) x) (Torus.pair y z)))
+      (sourceBackwardTimeSecond fine (Torus.pair (Torus.pair (Torus.sucᵢ Torus.zeroᵢ) x) (Torus.pair y z)))
+  originalNativeReflectionAtEveryBond fine (Torus.pair (Torus.pair (Torus.pair (Torus.sucᵢ Torus.zeroᵢ) x) (Torus.pair y z)) (Torus.sucᵢ Torus.zeroᵢ))
+    rewrite Geometry.originalR445NativeOriginIsEven originalGroup (Torus.pair (Torus.pair (Torus.sucᵢ Torus.zeroᵢ) x) (Torus.pair y z)) =
+    refl
+  originalNativeReflectionAtEveryBond fine (Torus.pair (Torus.pair (Torus.pair (Torus.sucᵢ Torus.zeroᵢ) x) (Torus.pair y z)) (Torus.sucᵢ (Torus.sucᵢ Torus.zeroᵢ)))
+    rewrite Geometry.originalR445NativeOriginIsEven originalGroup (Torus.pair (Torus.pair (Torus.sucᵢ Torus.zeroᵢ) x) (Torus.pair y z)) =
+    refl
+  originalNativeReflectionAtEveryBond fine (Torus.pair (Torus.pair (Torus.pair (Torus.sucᵢ Torus.zeroᵢ) x) (Torus.pair y z)) (Torus.sucᵢ (Torus.sucᵢ (Torus.sucᵢ Torus.zeroᵢ))))
+    rewrite Geometry.originalR445NativeOriginIsEven originalGroup (Torus.pair (Torus.pair (Torus.sucᵢ Torus.zeroᵢ) x) (Torus.pair y z)) =
+    refl
 
   -- No identification of the published positive-time word predicate,
   -- no Euclidean RP from positive Gibbs density, no continuum limit,
