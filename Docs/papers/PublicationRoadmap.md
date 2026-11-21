@@ -27,7 +27,7 @@ Those are not automatically promoted to the three-paper core.
 | --- | --- | --- |
 | **P0 / committed** | **Paper 3** `live/Paper3YangMillsClayDraft.md`; active Agda YM #1536 | Unified duplicate abstracts; replaced old single-`H3a` main theorem emphasis with conditional same-original `F1/F3/F4` source obligations. Added finite F19/R445 original Wilson 1,024=128+896 spectator/wilson-action counterexample and explicit no-physical-gap firewall. The live draft is revised on #1536; do not infer master publication readiness. |
 | **P0 / committed** | **Paper 8** `live/Paper8UnificationDraft.md`; active Agda GRH #1533 | Added original Dirichlet GRH five-theorem authority, independently reported source verification, Lean v4.33.1 adapter, Mathlib-to-Clay root, Agda RH-only conditional same-object boundary, and exact primitive/imprimitive Euler-factor donor as a *case study* of four-layer receipt governance. This does not convert Paper 8 into a GRH proof manuscript. |
-| **P1 / no manuscript edit from GRH** | **Paper 1** `live/Paper1NavierStokesClayDraft.md` | Already records its R752 W1/W2 integrated signed physical PDE gate and separates periodic B from whole-space A/forced C,D. Next paper edit must follow its own most recent NS source/constant and four-lane proof audit, not import GRH or cosmetic numbered milestones. |
+| **P0 / committed on NS PR #1539** | **Paper 1** `live/Paper1NavierStokesClayDraft.md`; [source-first NS #1539](https://github.com/chboishabba/dashi_agda/pull/1539) | Rewrote the stale A1–A9 opening and R752 universally-positive W2 premise as a conditional compiler, incorporated real physical R734/R735 N=2 and R820/R823/R825 3–4–5 auxiliary signed-payment no-gos, and explicitly left the R751/R752→falsified-rate same-source identity OPEN. Original W1, alternative signed B2 estimate, all-data continuation and A/C/D distinctions remain unproved. Independent SymPy 1.14 exact arithmetic and status-regression PASS; no CI/Agda/Lean kernel. The manuscript and current `NSProofControl20260915.md` roadmap changes are committed on #1539, not master. |
 | **P2 / retain as satellites** | **Papers 2,4,5,6** in `legacy/` | GR/DCHoTT, Hilbert/Stone, DHR, and Yukawa/CKM remain limited or diagnostic. Reopen only when new physical, analytic or carrier-level statements are genuinely proved and source-authority checked. |
 | **P2 / folded, not separate terminal proof** | **Paper 7** `legacy/Paper7TerminalCompositionDraft.md` | Retain its obligation-map role in Paper 8; no promoted unified-physics theorem. |
 | **Separate research drafts** | Atomic/periodic-table TeX, YM audit TeX, selected Monster/TOE studies | Audit attribution and intended venue/claims independently; do not silently renumber as Paper 9/10 or treat them as current active core without a source-based publication decision. |
@@ -62,6 +62,37 @@ only after a source-owned theorem/publication purpose is identified.
 The old June 2026 priority descriptions below remain historical
 publication staging guidance; this dated section governs current
 source-critical edits.
+
+---
+
+### 21 November 2026 — Paper 1 source-first update now committed
+
+Focused draft [NS PR #1539](https://github.com/chboishabba/dashi_agda/pull/1539)
+is based on `master` and changes the existing live
+`Paper1NavierStokesClayDraft.md`, **not** a new ninth paper.
+It retains the original A/B/C/D alternatives and R744–R752
+conditional mathematical identities, but explicitly distinguishes
+the **physically refuted unrestricted** R734/R735 and
+R820/R823/R825 positive-payment conjectures from the **unresolved**
+literal source-identity question for `G_751`. Original W1,
+a new signed replacement B2 inequality and uniform actual-flow
+continuation are not proved; the negative auxiliary decision is
+not a counterexample to NS regularity.
+
+The **single authoritative current NS roadmap**
+`Docs/roadmaps/NSProofControl20260915.md` has been
+updated and committed on the *same NS PR #1539*.
+Its historical wide NS roadmap also redirects to that owner.
+New local SymPy 1.14 regression verifies exact R853/R854
+rational rates and R820/823/825 algebra with negative controls;
+no Agda/Lean/CI result is inferred.
+
+This source-critical Paper 1 work is independent of the
+Paper 3/YM #1536 and Paper 8/GRH #1533 branches. This
+**publication roadmap is updated here on #1533** because the
+Paper 8 manuscript edit already owns the current
+eight-family publication-router update; avoid concurrent
+different edits to its master-base version.
 
 ---
 
