@@ -53,7 +53,7 @@ def sheets(path):
 def inspect(path):
     return {name:[{'row':i,'cells':{str(k+1):v for k,v in sorted(rows[i].items())}} for i in sorted(rows)[:4]] for name,rows in sheets(path).items()}
 
-def ingest(path,manifest_path,require_measured=True):
+def ingest(path,manifest_path,require_measured=True,return_pairs=False):
     raw=Path(path).read_bytes();m=json.loads(Path(manifest_path).read_text())
     assert m.get('sha256')==hashlib.sha256(raw).hexdigest(),'hash mismatch'
     assert m.get('source_reference') and m.get('frequency_unit') and m.get('intensity_unit'),'provenance/units missing'
@@ -73,9 +73,12 @@ def ingest(path,manifest_path,require_measured=True):
         assert type(x)==float and type(y)==float and math.isfinite(x) and math.isfinite(y) and y>=0,('invalid data',rowno)
         pairs.append((x,y))
     assert len(pairs)>1 and all(pairs[i][0]<pairs[i+1][0] for i in range(len(pairs)-1)),'missing or unsorted trace'
-    return {'rows':len(pairs),'frequency_min':pairs[0][0],'frequency_max':pairs[-1][0],
+    result={'rows':len(pairs),'frequency_min':pairs[0][0],'frequency_max':pairs[-1][0],
             'sha256':m['sha256'],'trace_kind':m['trace_kind'],
-            'publication_authenticated':False}
+            'source_kind':m['source_kind'],'frequency_unit':m['frequency_unit'],
+            'intensity_unit':m['intensity_unit'], 'publication_authenticated':False}
+    if return_pairs: result['pairs']=pairs
+    return result
 
 def test(path):
     count=0
