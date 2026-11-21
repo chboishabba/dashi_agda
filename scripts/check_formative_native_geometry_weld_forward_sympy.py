@@ -126,9 +126,9 @@ for seed in range(27):
         assert all(project(f[p])==c[p] for p in POINTS)
         assert all((f[u][3],f[v][3])==(c[u][2],c[v][2]) for u,v in BONDS)
         assert all(response(f,p)==response_coarse(c,p) for p in POINTS)
-check('all 216 histories commute at all 27 voxels', trials==216)
-check('all 216 histories commute at all 54 bond readouts',trials==216)
-check('all 216 histories commute on organizing responses',trials==216)
+check('216 selected trace prefixes commute at all 27 voxels', trials==216)
+check('216 selected trace prefixes commute at all 54 bond readouts',trials==216)
+check('216 selected trace prefixes commute on organizing responses',trials==216)
 check('selected simultaneous signal reaches fixed point in one step',all(fine_step('signal',fine_step('signal',make_field(i)))==fine_step('signal',make_field(i)) for i in range(27)))
 check('chromatin projection is intentionally inert in selected Boolean model', all(project((g,False,h,j,e,m))==project((g,True,h,j,e,m)) for g,h,j,e,m in product((False,True),repeat=5)))
 # Actually test retained memory with same initial visible morphology and enough neighbours.
