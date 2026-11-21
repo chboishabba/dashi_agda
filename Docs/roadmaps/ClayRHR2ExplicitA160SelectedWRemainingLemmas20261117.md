@@ -1,3 +1,33 @@
+## 22 November 2026 — FULL post-sixth BIDI min-cut (corrected P0)
+
+**Current theorem target supersedes the weaker G3 completed-residual-only threshold.** Original source `Synthesis/RiemannProjectiveQuarticFourWindowSignedPoleFourierTerminal.lean` proves
+`postSixthCanonicalSignedHighCut_iff_completed_plus_localSlack`,
+with `canonicalLocalBudgetSlack_nonneg`. Original `FourierMass`/joint-source gives `completedSignedResidual=(H-I)/2`.
+For each actual selected `W`, original nontrivial ζ zero `ρ` at target ordinate `t`, and `EV=quarticSignedPoleCanonicalV4Error CV t`, let
+`H=∑'W.signedLiteralPairSourceTerm`,
+`I=∫W.signedOrdinateTest·Zeta23.mu`,
+`d=W.combinedZeroHeightDefect ρ`,
+`S=W.canonicalLocalBudgetSlack EV≥0`,
+`T=4d+I`. **The literal complete post-sixth terminal iff `H+S<T`.**
+Earlier `UniformSignedCompensationGap ρ` and its existing stronger `UniformSharpenedSignedCompensationGap ρ` as stated only imply **`H<T`**, not necessarily `H+S<T`; `H=3,I=0,d=1,S=2` is an exact counterexample. Never drop `S` at the final endpoint.
+
+**Already-paid improved cone geometry was overlooked.** The existing same-original-zeros `Synthesis/RiemannProjectiveQuarticFourWindowSignedPoleConeDecomposition.lean` proves `literalConeExactAt_eq_debt_sub_gain`, `literalSharpenedJointBudgetAt_le_jointBudgetAt`, `literalOffOrdExactAt_le_sharpenedJointBudget`, `UniformSharpenedSignedCompensationGap`, and old→sharpened. A negative cone term is **useful signed gain**; replacing it or a negative far term by absolute value loses precisely the candidate compensation. Good-lane absolute remainder can still be slack. Reuse that source, don't reimplement another cone theorem.
+
+**Reverse-solved exact weaker/stronger alternatives (conditional on existing source far-tail inequality):**
+- **Direct finite signed certificate**: `H_n=W.literalOffOrdExactAt n` over original **half-open** `(t-n,t+n]` with actual ζ zero multiplicities; if `E_n≥|H-H_n|` and `E_n→0` for `n≥ceil(t+7)`, then
+  `H+S<T ⇔ ∃n≥ceil(t+7), H_n+E_n+S<T`.
+  Forward uses gap `g=T-H-S>0` and `2E_n<g`; converse `H≤H_n+E_n`. The existing R2 `O(log t/t)` bound is a candidate **absolute** `E_n` using the pre-existing multiplicity-weighted RvM interval theorem and fixed-W symbolic derivative constants. Actual finite signed H_n must be evaluated/estimated on the original zero carrier. For each fixed t, E_n→0 as n→∞; no uniform fixed-n global assertion.
+- **Sharpened sufficiency**: if eventually `W.literalSharpenedJointBudgetAt η n + S≤T-ε` with `ε>0`, then the exact cofinal theorem implies `H+S<T`. This is NOT necessary because the sharpened upper budget can exceed the exact finite source (absolute good remainders).
+- **Core at fixed W**: `UniformQuarticFourPoleDeterminantCompilerTarget` remains source-written but kernel-UNPAID; previous SymPy radius `δ*=5.53270840772e-7` is mathematical input only. Original `UniformQuarticFourSignedPoleCore` is a conditional compiler; still need target-radius/sixth-moment/case conditions. Source actual ζ RvM/Weil supplies counts, not the signed finite values.
+
+**Agda BIDI comparison was now checked against actual source**: `RiemannG2ClayTerminalBishopLocatedExact` and `RiemannG2UniformLiteralPhaseHighProducerExact` require an analytic **per-high-off-line-zero producer** plus Bishop low same-substrate inputs. The latter needs independent `literalNear+far+Gamma<ClusterResponse` and a **separate final balance attachment**. `RiemannG2ZeroSideHMBypassBidiExact` already compiles `H_X→H_T` and literal selected window→`H_W` without mandatory historical `H_M`; `RiemannG2HASingleSourceProducerBidiExact` already packages `H_A` as one dependent source-native producer. But Agda's literal cluster response is NOT yet proved equal to Lean's selected-W `H+S<T`; separate actual-zero, test/taper, scalar order and quantifier same-object welds would be needed. Avoid declaring this cross-language equivalence via shared terminology.
+
+**Committed audit/acceptance**: exact full source-to-consumer ledger `Docs/proofs/RHR2G3AgdaBIDIReverseExactRemainingLemmas20261122.md` (commit `1ac70327`), Python `scripts/check_rh_bidi_reverse_terminal_20261122.py` (commits `f44d4390`, `3c0f7977`, blob `6eb3222e13d178ccc855f6ae24f1641221bb79d8`). Local SymPy 1.14.0 **108/108 exact terminal substitutions**, cone/good/far negative controls, real original selected atomic `μ(1/2)=-1/78,μ(2/3)=1/162`, source atomic `K(0,2)=-320/351`, finite-tail BIDI criterion and adversarial margin checks PASS. Exact local script Git blob equals committed GitHub blob, `py_compile` PASS. Earlier radius/actual-ζ count symbolic source test rerun PASS. **Not run** Lean/Agda kernel or CI. Not actual zero census; no strict signed theorem paid.
+
+**Priority order**: P0 original mathematical `H_n+E_n+S<T` (or sharpened `B_n+S≤T-ε`) for every hypothetical high off-line ζ zero with its **same** original W, while paying source-selected W witness conditions; not another compiler. Parallel: Agda literal final scalar independent route and external all-character Lean theorem trust; avoid claiming any is already RH/GRH resolution.
+
+---
+
 ## 22 November 2026 — uniform pole radius and actual-zeta logarithmic two-sided tail
 
 **Source FIRST; original named finite analytic target mathematically
