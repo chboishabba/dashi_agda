@@ -70,6 +70,41 @@ They do NOT have that per-character analytic bridge today. Do not
 construct a new abstract Mellin compiler or confuse a Gamma/Mellin
 Weil action with proof of `EveryCharacter`.
 
+## Exact original fork source check (no paraphrase of theorem quantifiers)
+
+The *user's pinned original proof fork* was fetched directly at
+`chboishabba/riemann-hypothesis-lean@7cbf7a0c32fca1badf05931879a37c3f8a2b03b4`.
+Git blobs match Lean #113 `fork_pin.json`:
+- `src/Main.lean` blob `dbd5db70bc11b35f18fa5751216ab335321e7bfc`.
+- `src/Statements.lean` blob `1cd1bce93344065936b2b392b23306254e0785ef`.
+
+Original `src/Main.lean` (13 lines!) has exactly the five terminals:
+`riemannHypothesis : RiemannHypothesis`,
+`riemannZeta_eq_zero_re : RiemannZetaZerosOnLine`,
+`LFunction_ne_zero_of_half_lt_re : DirichletLNonvanishingRightOfHalf`,
+`LFunction_eq_zero_re : DirichletLZerosOnLine`, and
+`LFunction_eq_zero_re_of_isPrimitive :
+PrimitiveDirichletLZerosOnLine`.
+They consume original `rhOfAll`, `allChi`, `claimAll.2.1`,
+and `critAll` from the original imported `Supplements.Kernels.MainTheoremsAll`.
+
+Original `src/Statements.lean` explicitly quantifies
+`(N : ℕ) [NeZero N] (χ : DirichletCharacter ℂ N) (s : ℂ)`
+in each general Dirichlet proposition. Right-half nonvanishing
+assumes `1/2 < s.re` and excludes the trivial-character pole case
+via `(χ ≠ 1 ∨ s ≠ 1)`. The strip claim assumes `0<s.re<1`
+and zero of exactly `DirichletCharacter.LFunction χ s`.
+The primitive-specific claim additionally assumes `χ.IsPrimitive`.
+This explicitly shows the theorem addresses **all nonzero moduli /
+all characters** for the general statements, not just conductor 3,
+the trivial zeta character, or one chosen CM example.
+
+The new Lean #113 `all_original_grh_and_rh_endpoints_from_galois_row`
+is an exact single-source consumer of all five target types. It
+must still be compiled on its own v4.33.1 adapter context; its source
+is NOT the original author's proof, which already has the full
+independently reported external checks.
+
 ## External mathematical and kernel source status (as of 21 Nov 2026)
 
 Original author note: https://alpo.ge/remark.pdf
