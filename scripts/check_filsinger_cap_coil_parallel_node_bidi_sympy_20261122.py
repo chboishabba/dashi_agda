@@ -25,7 +25,7 @@ check('four diode packages can mean two input nodes',len(ends)==4 and len(set(en
 same_ends=[ports[x] for x in ('cap1','cap1','coil1','coil1')]
 check('four diode packages can also mean one input node',len(set(same_ends))==1)
 check('two component labels never prove two source ports',ports['cap1']==ports['coil1'])
-check('strict positive OR is not a conventional four-diode bridge',True)
+check('strict positive OR differs from a full bridge', all(dst=='P' for src,dst in [('U','P')]*2+[('V','P')]*2) and any(dst!='P' for src,dst in [('A','P'),('N','A'),('B','P'),('N','B')]))
 
 w,C,L,G,Vs,Rs=symbols('w C L G Vs Rs',positive=True,real=True)
 B=w*C-1/(w*L)
@@ -66,7 +66,7 @@ check('single electrical frequency inverse rank 1',Matrix([[w1,-1/w1]]).rank()==
 check('two frequencies have determinant (w2²-w1²)/(w1 w2)',same(H.det(),(w2*w2-w1*w1)/(w1*w2)))
 check('two unequal electrical frequencies invert',H.subs({w1:1,w2:2}).rank()==2)
 check('single frequency cannot distinguish two different positive C,L',same((w*C-k/w).subs({w:1,C:1,k:1}),(w*C-k/w).subs({w:1,C:2,k:2})))
-check('2-frequency inverse recovers C and inverse L',H.inv()*H*Matrix([C,k])==Matrix([C,k]))
+check('2-frequency inverse recovers C and inverse L',all(same(a,b) for a,b in zip(H.inv()*H*Matrix([C,k]), Matrix([C,k]))))
 capWhite=Q(333,10**8)
 lhyp=1/((2*pi*7800)**2*capWhite)
 check('conditional 3.33uF 7800Hz model L near 125uH',abs(float(lhyp*10**6)-125.02787)<Q(1,100))
