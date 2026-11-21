@@ -16,7 +16,8 @@ module DASHI.Analysis.RHGRHCubicCharacterCMTOEConsumerExact where
 -- global number-field Hecke/Grössencharacter, nor TLiftK/Row0b.
 -- Source written, no Agda kernel run; no CI.
 
-open import Agda.Builtin.Bool using (true; false)
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
@@ -57,7 +58,7 @@ canonicalTOEOmegaEdge = TOE.eisensteinUniversalCharacter
 
 -- One actual original time/k, mode, sign, residual, zero-observation
 -- source frame is an admissible diagnostic for this edge.
-canonicalIndexedC3Probe : Indexed.IndexedZeroPhaseFrame _ _ _
+canonicalIndexedC3Probe : Indexed.IndexedZeroPhaseFrame Nat Bool Nat
 canonicalIndexedC3Probe = Indexed.balancedObservedZeroWithZeta
 
 probeNonzeroResidualRetained :
