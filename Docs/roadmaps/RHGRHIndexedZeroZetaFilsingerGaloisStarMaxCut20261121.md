@@ -1,5 +1,14 @@
 # RH/GRH source max-cut — indexed zero/ζ/ζ², Filsinger polarity and original Galois–star theta
 
+## 21 November — PRIMARY GRH P0 directional source admission (supersedes P1-maxcut priority)
+
+**P0 GRH owns the critical path.** The original Lean 4.33.1 fork `src/Main.lean` defines all **five published target statements** (ordinary `RiemannHypothesis`, `RiemannZetaZerosOnLine`, Dirichlet right-half `LFunction_ne_zero_of_half_lt_re`, Dirichlet strip `LFunction_eq_zero_re`, primitive Dirichlet strip `LFunction_eq_zero_re_of_isPrimitive`). These are distinct targets but one source-producer all-character spine. New authored Lean #113 `RHGRHP0DirectionalSourceCut.lean` directly consumes original `RowSrc.galoisLocalGlobalStrong_recParameter`, `LiteratureTheorems.every_character_of_literature_of_vWin`, `UpperTheory.One.vwin_of_row` to produce `UpperTheory.EveryCharacter`, then applies `Formalism.VW.rh_of_every`, `Claim.strip`, `Formalism.VW.critLine` to the original five statement types. It also source-writes `Claim.HalfPlane ↔ EveryCharacter`, `Claim.Zeta ↔ RiemannHypothesis`, and `RiemannZetaZerosOnLine ↔ RiemannHypothesis`. **These BIDI are the original same-theorem types; the direction EveryCharacter → RH must not be reversed into a claim that RH proves all Dirichlet characters.** No claim mathematical converse is impossible.
+
+**P0 kernel/version receipt still OPEN:** original pinned author fork local Lean 4.33.1 theorem build/axiom inspection, root `dashi_lean4` current toolchain transfer to `Millennium.ClayRiemannHypothesis` via existing `MillenniumExternal.ExactTargetSurface`, plus original Agda complex/analytic zero/line semantic transport. No local Lean or Agda compiler, no CI. Citation of independent 4.33.1 external checks is not a DASHI accepted receipt.
+
+**P1 finite Monster/VOA 369 is optional**: selected native +Y C27 edge mode sector remains conditional on `LiteralMonster27ModeChargeReceipt`; literal 3B kernel fusion and actual Hecke/TP.TLiftK same-object intertwiner are OPEN. Only investigate this route if it produces a *typed replacement or reusable lemma for* the specific original `UpperTheory.TP.TLiftK` or `GalStar.Row0b recT` input; it cannot block P0 completion. Original indexed (h,t,k,j,v) holonomy source is still missing #1291 `GovernedIndexedResidualCubeExact` dependency on #1533. Do not promote P1 finite geometry to P0 GRH.
+
+
 **21 November 2026.** Golden [Agda PR #1533](https://github.com/chboishabba/dashi_agda/pull/1533), upstream selective [Lean PR #113](https://github.com/chboishabba/dashi_lean4/pull/113). Pinned Alpöge proof fork `chboishabba/riemann-hypothesis-lean@7cbf7a0c32fca1badf05931879a37c3f8a2b03b4`. No CI; new Agda theorem source has **no kernel receipt**.
 
 ## Correct source-owner recovery: three-mode square with zero and time/k history
