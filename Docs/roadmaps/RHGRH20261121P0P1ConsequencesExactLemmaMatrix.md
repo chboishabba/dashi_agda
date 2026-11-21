@@ -109,3 +109,105 @@ Keep S19–S21, actual Clay RH vs Dirichlet GRH vs extended ERH, and 27-cube ver
 The existing `/mnt/data/check_grh_native27_cube.py` was rerun locally: Python + SymPy exact checks PASS on 27/27 chart roundtrips, 54 native spatial edges, all six coordinate-erasure endpoint orders, explicit noncommuting carry/coordinate witness, consumer collision, and Laplacian trace moments `(108,558)` vs cyclic `(54,162)`. This **does not** check actual Agda types, the six original C3/zeta mathematical squares, or RH.
 
 **Highest-alpha next original implementation:** P0.01–P0.06 first, with P1.04–P1.07 developed in parallel only as source-owned finite geometry; attach exact native consumer and original analytic function identification before making any new terminal theorem claim.
+
+
+## 21 November 2026 — focused last-week Bishop / π / finite arithmetic original-source audit for S02–S07
+
+**Status:** inspected original module bodies, exact PR heads and controlling source roadmaps; this is an **integration and dependency audit**, not a completed GRH-conditional algorithm. No CI, Agda, Lean, or Nix checker was run. Preserve the primary programme ordering: **P0 RH source theorem and genuine analytic consequences** before **P1 native geometry/weld/consumer**. S02–S06 are downstream algorithmic consumers, and S07 is the direct P0.07 prime-in-progression priority.
+
+### Recent donor provenance and actual status
+
+| PR, latest inspected head | Date and exact original source evidence | Consumer-relevant reusable content | Boundary |
+|---|---|---|---|
+| [#1529](https://github.com/chboishabba/dashi_agda/pull/1529) `7b35790decf33e5da8a5c1ce4ba14853ae244e05` | Updated 20 Nov. `DASHI/Foundations/HypergeometricBSplitIntegerMergeExact.agda`, `BishopPellLucasIntegerInvariantExact.agda`; `Docs/roadmaps/ConstructiveConstantsAndKleinJCMMaxCut20261118.md` and `ConstructivePiBinarySplitMaxCut20261118.md` | Generic integer `P/Q/B/T` merge associativity and tree rotation; rational sum-prefix checker; original Machin atan π, exact Pell norm-one D=2,3,6, dyadic CM(-163) intervals, modular-j proof-relevant chart; total-degree Cayley coefficient/tail control and explicit 81(2/3)^(N+1) bound | Finite integer split merge is NOT a polynomial factorization algorithm; Pell real sqrt is NOT square root mod prime; q/CM analytic identification and exact-head Agda checker OPEN |
+| [#1478](https://github.com/chboishabba/dashi_agda/pull/1478) `fb374e50e59a98e2b8a1eee215c77428c5728b68` | Updated 14 Nov. `Docs/roadmaps/AnalyticJTetrationActiveMaxCut20261109.md`; `BishopComplexExpFactEqualsNativeExpExact.agda`; original selected Bishop log `8/27` remainder modules, original eta dyadic source law | Actual Bishop Cauchy-limit/setoid transport, complex exp/log, finite rectangle/triangle tails, selected branch provenance, q↔j same-function consumers | Complex log / sqrt analytic leaves and Bishop sqrt calculus partly uninhabited; no finite-field discrete logarithm or character nonresidue result; no Agda kernel receipt |
+| [#1408](https://github.com/chboishabba/dashi_agda/pull/1408) `28d85aa529155352a025de9e12853ecad1e4214e` | Updated 17 Nov. Original `DASHI/Arithmetic/TwinPrimeTernary270AffineCRTCodecExact.agda`, `CertifiedPrimePairModulusExact`, PrimeModSix and wheel owners | Actual chosen affine cube27↔27 admissible residue representatives mod 270, explicit 27-case left inverse, arithmetic local-survivor filters and C2 antipode; chart retains geometry instead of bare count | S07 requires arbitrary q, coprime a, least-prime theorem and effective bound; selected 270 *survivors* need not be prime; full Agda all-survivor surjectivity and generic CRT inverse OPEN |
+| [#1497](https://github.com/chboishabba/dashi_agda/pull/1497) `f213b5bfb893e49ae9b29b2915257884b3b0e14e` | Updated 14 Nov. `BishopFastCauchyRationalNormalizationRoundTripExact`, `BishopFastCauchyZetaWeldExact`, `BishopSetoidWeldExact` | Canonical rational embeddings, Cauchy comparison and original ζ same-value **conditional** transport; high-value P0/P1 donor for exact analytic identification | No external Z7→native Bishop complete proof or RH Weil positivity from these finite transport declarations |
+| [Lean #104](https://github.com/chboishabba/dashi_lean4/pull/104) `dbda83aec4b6aa07746d5c692d2d99440872bda1` | Last inspected update 14 Nov, selected Mathlib xi reflection and v4.35 theorem sidecar | Version-isolated same-Mathlib ζ, Dirichlet-series/xi names; avoid competing representations in RH P0 | Not a cross-version Lean proof import or same-object Agda kernel certificate |
+| [#1291](https://github.com/chboishabba/dashi_agda/pull/1291) `b9d1e3faec8eeeee1bed73840235e364130cfc27` | Updated 20 Nov. `IndexedResidualCube369NineDOFMaxCut20261120.md`, Route C | Geometry-preserving 27 chart, GF(3^9) original-field candidate, relative Frobenius, six-face indexed residual cube, consumer-specific witness retention | Finite fields `GF(27)` and spatial Cube27 are different **operations on the same chosen 27 chart** unless structure transport proved; general arbitrary `GF(p^n)` construction OPEN |
+
+### S02 — deterministic finite-field square roots
+
+**Exact deliverables** (after original GRH theorem scope proof):
+- `originalFiniteFieldQuadraticCharacterSamePrime`: use the canonical finite-field arithmetic/Legendre-symbol or Euler-criterion producer rather than Bishop real-order square-root operations.
+- `grhLeastQuadraticNonresidueSpecifiedCharacterBound`: state the actual conditional bound in characteristic p and its required L-function family; don't infer it from Pell interval widths.
+- `modularRootAlgorithmSameInputCertified`: source Tonelli–Shanks or a specified alternate algorithm; output either a root `x²≡a (mod p)` or a correct nonresidue certificate, with explicit zero and p=2 guards.
+- `modularRootAlgorithmBitClock`: complexity in `log p`, with factorization assumptions and deterministic GRH witness search explicitly priced.
+
+**Priority P2-high**, with only the shared integer/squaring/enclosure operations imported from #1529. There is no true direct mathematical identification between positive Bishop sqrt(D) and modular sqrt(a) in F_p.
+
+### S03 — deterministic cube and higher roots
+
+The π roadmap has a **C3 exact cube-root interval producer / Halley** gate and `K05` complex Cayley proof, but those are characteristic-zero algebraic/analytic calculations. Reuse finite polynomial identity, exact division and termination methods only.
+- `finiteFieldKthPowerResidueCriterionSameField`
+- `finiteFieldKthRootCorrectWitnessOrObstruction`
+- `grhKthRootCharacterSearchAndClock`
+- `charPAndNoncoprimeKBranchGuards` (p dividing k, gcd(k,p−1), fixed vs input-dependent k)
+
+**Priority P2-medium**. The actual field root problem must not be marked complete by the real Halley certificate.
+
+### S04 — deterministic finite-field polynomial factoring
+
+Reconcile #1529's **integer hypergeometric sum-splitting** with **polynomial factor splitting**, not by naming them the same algorithm:
+- `finiteFieldPolynomialOriginalRingAndRepresentation`: explicit coefficient field, degree, monic/zero input and source encoding.
+- `finiteFieldSquarefreeDistinctEqualDegreeStages`: factorization stages using original polynomial/Frobenius operations where available.
+- `grhDeterministicFactorChoiceExactAlgorithm`: inspect and instantiate the original GRH-conditional deterministic factor-selection algorithm, not a random-choice theorem.
+- `grhFiniteFieldFactorisationOutputProductAndIrreducible`: exact reconstruction incl. multiplicities.
+- `grhFiniteFieldFactorisationQuasipolyClock`: bit clock and proof of theorem's claimed quasi-polynomial exponent.
+- `splitTreeGenericReuseOnlyIfVerified`: use original `HypergeometricBSplitIntegerMergeExact` for verified auxiliary associative multiplication/certificate reduction *if* a genuine same-operation embedding is exhibited; otherwise **do not** weld it in.
+
+**Priority P2-high**. The source-written P/Q/B/T merge identity is a strong reusable certificate/parallel reduction pattern, not evidence that finite-field factoring is solved.
+
+### S05 — arbitrary finite fields (top algorithmic geometry cut)
+
+Existing GF27 and GF729 selected presentations plus #1291 Route C are **strong direct donors**. The original `GF27CompilerBootstrapIntertwinerBoundaryExact.agda` uses explicit irreducible `F₃[a]/(a³+2a+1)`, but its compiler analogy is marked conditional. The fixed-state 27 residue digit chart and spatial geometry must remain separately marked under consumer transport.
+- `fieldConstructorAllPrimePAndPositiveN`: specify type `F_p[t]/(f_{p,n})` and arbitrary p,n, not a selected cubic.
+- `deterministicIrreduciblePolynomialDegreeN`: actual construction proof, irreducibility and deterministic complexity.
+- `fieldNormalBasisFrobeniusCompatible`: original Frobenius map with chosen basis, full field add/multiply, inverses, norm/trace as selected.
+- `originalGF27GF729SelectedSpecialisations`: reuse the existing selected field owners as regression/specializations of the general constructor.
+- `fieldToGeometric27ConsumerFacts`: explicitly mark which *selected* 27 coordinate consumer facts factor through the chosen chart, and which field addition/multiplication are not spatial grid motions.
+- `grhFiniteFieldBuildBitClock`: proof against input bit lengths and explicit source conditional assumptions.
+
+**Priority P2 highest after P0.07**. Reuse #1291's indexed commuting cube for 3-way representation changes, keeping same-carrier invariants and indexed residuals.
+
+### S06 — deterministic factoring relative to φ(n)
+
+The RSA260 and `FiniteFactorArithmetic` owners already supply actual arithmetic and factor-consumer infrastructure. The #1529 integer-only split tree could accelerate auxiliary exact sums but **does not construct an oracle reduction**.
+- `integerTotientOracleDomainAndOutputEncoding`
+- `integerFactorsRecoverFromTotientOracleSameInput`: explicit adaptive or nonadaptive reduction (whichever the original cited result proves).
+- `integerFactorsRecoveryCorrectForRepeatedPrimePowers`
+- `totientReductionDeterministicTuringClock`: count oracle calls and bit operations; audit whether this reduction is already unconditional.
+- `oracleReductionIsNotFactoringWithoutOracle`: non-promotion test.
+
+**Priority P2-medium**; source-first audit of the actual totient/factoring complexity theorem before adding new code.
+
+### S07 — GRH primes in arithmetic progressions (direct RH P0.07)
+
+A concrete geometric bridge is already present: #1408's exact affine 27-point chart into the **selected** 270-wheel CRT survivor classes. This is not just a count-of-27; it constructs the actual arithmetic local sieve classification.
+- `native270WheelSurvivorsFullCoverage`: the original missing Agda proof that **every** admissible class mod 270 is covered.
+- `arbitraryModulusCoprimeResidueCRTConsumer`: move from selected 270 to explicit arbitrary coprime (a,q), retaining quotient projections and consumer provenance.
+- `dirichletCharactersSameResidueClass`: identify the actual Dirichlet characters and L-functions appearing in GRH bounds.
+- `grhLeastPrimeProgressionBoundExactLogFactors`: import or derive the exact least prime inequality with constants, q restrictions and log factors from the real external theorem.
+- `primeProgressionSearchCertifiedCorrectness`: certify least/selected prime when found with an existing primality certificate owner.
+- `progressionSearchBitClockHonest`: number of tested candidates and bit complexity; brute-force search up to polynomial(q) is exponential in log(q).
+- `native27GRHConsumerIndexedSixFaceCube`: specialize original C3/zeta commuting-square faces with actual CRT/character/prime-count observation maps; preserve failed-face residual if arithmetic and geometric operators do not commute.
+
+**Priority P0.07-high**, then P1 geometry/weld. The finite 270 sieve does not prove prime existence in arbitrary progressions.
+
+### Cross-cut reuse — exact rational arithmetic and Bishop π
+
+- `HypergeometricBSplitIntegerMergeExact.mergeAssociative` is a prior **integer algebraic** owner. Its missing semantic correctness `T/(QB)` must be paid before interpreting it as a certified partial sum; no general characteristic-p field factoring is derived.
+- `BishopPellLucasIntegerInvariantExact.doubleUnit` proves a source-written Pell norm-one recurrence for D=2,3,6. It is a **real sqrt enclosure donor**, not a finite-field quadratic-character theorem.
+- `BishopMachinArctanConstructionExact.bishopMachinPi`, `BishopMachinOriginalCayleyFormalSeriesExact` and `BishopMachinCayleyEquationForcesCoefficientsExact` retain original π/complex phase, useful for analytic constants in P0.04–P0.06 and CM generation, not modular-root witnesses by themselves.
+- `BishopOriginalEtaAbelUniformTail20261114.md` provides the classical compact-uniform eta tail estimate with a stated Bishop log/exp/FTC weld debt. It is a **direct P0 analytic same-object donor** to zeta proof admission (not a new zero-location proof).
+- `JInvariant369Zeta6561MonsterCrosswalkExact` explicitly distinguishes cyclotomic zeta from Riemann zeta; do not conflate roots of unity in finite-field/cyclic Fourier work with complex ζ(s).
+
+### Acceptance hierarchy and next work packet
+
+1. **P0.01–P0.06 (RH first):** exact external statement/provenance → original classical R1 Xi/Weil formula → original analytic same-object bridge. Consume Bishop eta and Machin π functions only where mathematically identified.
+2. **P0.07 / S07 (direct consequence):** original Dirichlet-character scope and least-prime formula plus native CRT-wheel producer with actual prime certificate. Deliver exact bound/complexity, not a claim that a 270-wheel survivor is necessarily prime.
+3. **P1 / S05 (geometry):** owner-led field basis/Frobenius and native geometric 27 consumer, six-face indexed commuting cube with actual source operations and quantified residuals.
+4. **P2 S02–S04:** conditional nonresidue/kth-root and polynomial factoring, using the known original field arithmetic and proof-preserving reducer patterns.
+5. **P2 S06:** totient oracle original reduction theorem, separate from a new unconditional factorization breakthrough.
+6. **Review gates:** no CI; locally executable finite SymPy only; no Agda/Lean acceptance unless separately actually checked. The cross-PR review **does not** claim any newly discharged mathematical theorem.
+
