@@ -3,6 +3,7 @@ module DASHI.EverythingSheldrakeFieldLevinFilsinger20261121 where
 -- Focused discovery root on the actual master branch.
 -- Source-native scientific owners retain independent attribution and authority.
 import DASHI.Physics.Foundations.SheldrakeFieldLevinFilsingerConsolidationExact
+import DASHI.Physics.Foundations.FormativeFieldWorkLevinBH4EskridgeBidiExact
 import DASHI.Physics.Foundations.SameObjectConservationLedgerExact
 import DASHI.Physics.Motors.SmithFilsingerTimeIndexedTransferExact
 import DASHI.Physics.Motors.SmithFilsingerSunEarthCoupledSourceExact
