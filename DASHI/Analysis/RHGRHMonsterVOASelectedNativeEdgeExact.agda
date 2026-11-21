@@ -10,15 +10,18 @@ module DASHI.Analysis.RHGRHMonsterVOASelectedNativeEdgeExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (sym)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Maybe using (just)
-open import Data.Product using (_×_; _,_)
+open import Data.Product using (_×_; _,_; proj₁)
+open import Data.Integer using (ℤ)
 open import Data.Empty using (⊥)
 
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Cube
 import DASHI.Unified.HyperfabricPunctured27Projective13OrientationExact as Axis
 import DASHI.Moonshine.Monster27VOACubeWeightedChargeNoGoExact as Charge
 import DASHI.Moonshine.Monster27VOAVertexModeChargeSelectionExact as VOA
+import DASHI.Moonshine.Monster27VOAOnsiteCube369BridgeExact as Parent
 import DASHI.Algebra.TriadicFiniteArithmetic as Arith
 
 -- This is not a fabricated edge: the original proof term is reused.
@@ -89,3 +92,24 @@ noGlobalOrientationAtFiveLabels h t k j v =
 -- Those original record types already demand same-group 27th/9th
 -- powers, same literal V-natural carrier, actual mode action and
 -- a charge-additive output. No standalone Fin27 "operator" is added.
+
+-- A genuine, precisely source-typed CONDITIONAL result: if the
+-- original selected literal VOA sector/mode receipt is inhabited,
+-- its own mode-output witness lands in the charge of the chosen
+-- geometrically native adjacent endpoint. This does NOT populate the
+-- receipt, assert nonzero output, or invent a spectral state.
+selectedEdgeActualVOAModeOutputSector :
+  ∀ {Monster K : Set} →
+  (source : Parent.Monster27VOAOnCubeSource Monster K) →
+  (receipt : VOA.LiteralMonster27ModeChargeReceipt source) →
+  (u : VOA.Sector receipt
+    (Charge.chargeLabel (Axis.representative Axis.axisX))) →
+  (v : VOA.Sector receipt VOA.positiveYCharge) →
+  (n : ℤ) →
+  VOA.Sector receipt
+    (Charge.chargeLabel (Axis.representative Axis.faceXYpp))
+selectedEdgeActualVOAModeOutputSector source receipt u v n
+  rewrite sym selectedXYEdgeChargeIncrement =
+  proj₁ (VOA.actualVOAModeChargeOutput receipt
+    (Charge.chargeLabel (Axis.representative Axis.axisX))
+    VOA.positiveYCharge u v n)
