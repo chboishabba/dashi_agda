@@ -141,6 +141,14 @@ import DASHI.Physics.YangMills.YMClayOriginalR445NativeF19WeightedPhysicalSource
 -- all-observable source with E1A3, then the same E1/R445 F,G,FG
 -- three-moment covariance error. Genuine analytic uniformity OPEN.
 import DASHI.Physics.YangMills.YMClayOriginalE1A3NativeF19WeightedBIDIExact as OriginalE1F19ThreeMomentBIDI
+
+-- Use ORIGINAL D1 full SU(N) Wilson small+large-field cutoff-uniform
+-- covariance theorem. Source-selection demands only pointwise identity
+-- of chosen D1 tests with actual E1/native R445 block F,G; never
+-- restate or postulate the covariance bound or discard large fields.
+-- Fixed cutoff3 F19 face; all-scale physical rates still require a
+-- source-inhabited OriginalSmallLargePhysicalSource and time geometry.
+import DASHI.Physics.YangMills.YMClayOriginalD1FullWilsonE1F19EstimateBIDIExact as OriginalD1F19UniformWeld
 import DASHI.Physics.YangMills.YMClayOriginalF19NativeR445SelectedOrderBIDIExact as OriginalF19R445SelectedOrder
 
 import DASHI.Physics.YangMills.YMClayD1OriginalCovarianceToR320Exact as D1OriginalCovariance
