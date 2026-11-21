@@ -1,5 +1,14 @@
 # Current DASHI RH BIDI vs Alpöge RH / GRH — exact gap-directed depth cut
 
+## 21 November — NEW P1 CM/Hecke ray normalization, with GRH P0 unaffected
+
+**Source-first next cut added in Lean #69** (`agent/eisenstein-lattice-counting-maxcut-20261012`): `Integration/EisensteinJZeroRayModulusLocalCandidateExact.lean` imports the **original** `EisensteinQA`, `splitJacobiEisensteinElement`, `splitJacobiEisensteinElement_norm`, and six-unit norm-fibre normalization. For `y²=x³+1`, original source sign is (a_p=-\mathrm{Tr}(J_p)). A CM Hecke-shape normalized candidate is therefore `α_p=-J_p`, so `(1−α_pT)(1−\\bar α_pT)=(1+J_pT)(1+\\bar J_pT)=1−a_pT+pT²`. Proposed modulus `f=2√(-3)=2+4ω`, Eisenstein norm **12**, aligns with the conventional conductor-36 CM curve heuristic `|D_K|N(f)=3×12` (actual conductor/minimality and global ideal character NOT proved). The file defines literal `OneModProposedRay z := ∃ w, z−1=f*w` and proves **conditional** `J_p≡−1 mod f → −J_p≡1 mod f`, plus norm and Euler sign identities. No all-primes ray-congruence theorem, no selected ideal-multiplicative Hecke character.
+
+**Independent exact finite execution:** Python explicitly computes J_p in integral (a,b) Eisenstein coordinates, norm-p/trace, and tests all six actual Eisenstein units against divisibility by `2+4ω` via the inverse multiplication matrix determinant 12. For the existing ten split primes `7,13,19,31,37,43,61,67,73,79`, **10/10 unique unit**, always `−1`, with `α_p=−J_p≡1 (mod f)`, `Norm(α_p)=p`, `Tr(α_p)=a_p`, local factor reproduced. Seven inert primes `5,11,17,23,29,41,47` retain (a_p=0). Committed reproducible script `scripts/check_eisenstein_jzero_ray_modulus_20261121.py` to Lean #69; independently executed equivalent local Python. **These ten checks do not establish uniqueness/all-split-prime ray normalization, ideal multiplicativity or a global Hecke character.** Original six-unit orbit source proves representational normal form, not modulo-f congruence.
+
+**Priority and next source gate:** (P0) original pinned Lean #113 `UpperTheory.EveryCharacter` all-Dirichlet-character theorem kernel/version/axiom admission and trusted root/Agda transport remains FIRST. (P1) for actual same-curve Hecke `Ψ`, prove the `J_p≡−1 (mod 2√−3)` source theorem at EVERY split good p using original finite-field Jacobi and Eisenstein unit data; then choose prime IDEALS multiplicatively (not just rational primes), unit-consistent ray generator, verify conductor/infinity type, both bad p=2 and p=3, ramification and all local factors, then analytic Euler-product equality. Note original Lean #69 good-prime theorem assumes `p>3`: this excludes both **2 and 3**, not merely 3. Do not conflate quadratic Dirichlet χ−3 (degree-one) with elliptic/Hecke Ψ (degree-two over ℚ), or present this as universal GRH. Lean source-written, no kernel/typechecker or CI in this cut.
+
+
 
 ## 21 November — LATEST exact split-prime local Hecke-shape factor, with global P0 firewall
 
