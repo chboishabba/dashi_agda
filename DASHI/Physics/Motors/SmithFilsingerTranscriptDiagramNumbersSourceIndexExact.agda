@@ -42,6 +42,7 @@ data QuantityUnit : Set where
   turns : QuantityUnit
   degrees : QuantityUnit
   count : QuantityUnit
+  inch hundredthInch hundredthTurn nanofarad watt : QuantityUnit
   pdfPage : QuantityUnit
 
 -- Unlike a generic Datum {occasion:String}, each source item is indexed
@@ -70,6 +71,20 @@ data SourceNumber : SourceOccasion → Set where
   smithSplitSecondaryFirstSeventeen smithSplitSecondarySecondSeventeen :
     SourceNumber smithKellyDarrerPDF
   smithIllustrativeTwoHundredFortyDegree :
+    SourceNumber smithKellyDarrerPDF
+  smithIllustrativeL2HalfOneHundredSixtyInch :
+    SourceNumber smithKellyDarrerPDF
+  smithIllustrativeL1FortyInch :
+    SourceNumber smithKellyDarrerPDF
+  smithIllustrativeL1TwoHundredTwentyFiveHundredthInch :
+    SourceNumber smithKellyDarrerPDF
+  smithApproxL1FiveHundredSixtyFiveHundredthTurns :
+    SourceNumber smithKellyDarrerPDF
+  smithOptionalParallelFortySevenNanofarad :
+    SourceNumber smithKellyDarrerPDF
+  smithClaimedTwoThousandVolt :
+    SourceNumber smithKellyDarrerPDF
+  smithClaimedSixThousandWatt :
     SourceNumber smithKellyDarrerPDF
 
 numberUnit : ∀ {o} → SourceNumber o → QuantityUnit
@@ -131,6 +146,21 @@ numberMagnitude smithSplitSecondaryFirstSeventeen = 17
 numberMagnitude smithSplitSecondarySecondSeventeen = 17
 numberMagnitude smithIllustrativeTwoHundredFortyDegree = 240
 
+numberUnit smithIllustrativeL2HalfOneHundredSixtyInch = inch
+numberUnit smithIllustrativeL1FortyInch = inch
+numberUnit smithIllustrativeL1TwoHundredTwentyFiveHundredthInch = hundredthInch
+numberUnit smithApproxL1FiveHundredSixtyFiveHundredthTurns = hundredthTurn
+numberUnit smithOptionalParallelFortySevenNanofarad = nanofarad
+numberUnit smithClaimedTwoThousandVolt = volt
+numberUnit smithClaimedSixThousandWatt = watt
+numberMagnitude smithIllustrativeL2HalfOneHundredSixtyInch = 160
+numberMagnitude smithIllustrativeL1FortyInch = 40
+numberMagnitude smithIllustrativeL1TwoHundredTwentyFiveHundredthInch = 225
+numberMagnitude smithApproxL1FiveHundredSixtyFiveHundredthTurns = 565
+numberMagnitude smithOptionalParallelFortySevenNanofarad = 47
+numberMagnitude smithClaimedTwoThousandVolt = 2000
+numberMagnitude smithClaimedSixThousandWatt = 6000
+
 sourceStatus : ∀ {o} → SourceNumber o → EvidenceTier
 sourceStatus zvsCapApproximately33TenthsMicrofarad = narratedComponent
 sourceStatus zvsOneMegohm = narratedComponent
@@ -158,6 +188,14 @@ sourceStatus smithFigureFortyPage = sourceCompiledDiagram
 sourceStatus smithSplitSecondaryFirstSeventeen = sourceCompiledDiagram
 sourceStatus smithSplitSecondarySecondSeventeen = sourceCompiledDiagram
 sourceStatus smithIllustrativeTwoHundredFortyDegree = sourceCompiledDiagram
+
+sourceStatus smithIllustrativeL2HalfOneHundredSixtyInch = sourceCompiledDiagram
+sourceStatus smithIllustrativeL1FortyInch = sourceCompiledDiagram
+sourceStatus smithIllustrativeL1TwoHundredTwentyFiveHundredthInch = sourceCompiledDiagram
+sourceStatus smithApproxL1FiveHundredSixtyFiveHundredthTurns = sourceCompiledDiagram
+sourceStatus smithOptionalParallelFortySevenNanofarad = sourceCompiledDiagram
+sourceStatus smithClaimedTwoThousandVolt = sourceCompiledDiagram
+sourceStatus smithClaimedSixThousandWatt = sourceCompiledDiagram
 
 originalEarthReelIsNotShuntReel :
   earthThreeElectrodeReel ≡ zvsShuntReel → Contradiction
