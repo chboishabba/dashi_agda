@@ -43,6 +43,11 @@ OWNERS = {
         "originalMarkedOS1AllPairsTimes",
         "originalMarkedOS1SameSpectrumClustering",
     ],
+    "DASHI/Physics/YangMills/YMClayR445SelectedTimeReflectionForwardExact.agda": [
+        "selectedNativeSiteTimeSquare",
+        "selectedFineSiteReflectShiftDihedral",
+        "selectedCoarseSiteShiftHasPeriodTwo",
+    ],
     "DASHI/Physics/YangMills/YMClayOriginalWilsonOS1R556R281CommutingSquareExact.agda": [
         "originalWilsonTimeTranslationSquare",
         "originalFiniteCovarianceSquare",
@@ -63,7 +68,6 @@ OWNERS = {
         "originalAllWilsonPairsTimesSameR281SpectrumHasClustering",
         "SameOriginalOS1R556TimeGeometry",
         "originalWilsonSourceDistanceIsSameOS1Time",
-        "selectedNativeSiteTimeSquare",
         "R556.indexedAsContinuumClustering",
         "R332.supportDistanceIsTime",
     ],
