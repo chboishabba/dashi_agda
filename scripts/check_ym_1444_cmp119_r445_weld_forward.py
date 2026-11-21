@@ -21,6 +21,28 @@ OWNERS = {
         "originalVariableN3IsNativeR445FineMeasure",
         "originalN3LiteralMixedLogJetIsActualR320PushforwardCovariance",
     ],
+    "DASHI/Physics/YangMills/YMClayWilsonWEXTSelectedDistanceNonVacuityExact.agda": [
+        "universalTimeForEveryDistanceIsImpossible",
+        "with universal",
+        "... | ()",
+    ],
+    "DASHI/Physics/YangMills/BalabanLiteralWilsonMarkedLocalizationSourceExact.agda": [
+        "(selectedPhysicalDistance : Observable → Observable → Nat)",
+        "selectedPhysicalDistance left (timeTranslate right time) ≡ time",
+        "WilsonWEXTDownstreamSemantics dataSet (physicalDistance source)",
+    ],
+    "DASHI/Physics/YangMills/BalabanLiteralTwoWilsonR556CompletionExact.agda": [
+        "Downstream.WilsonWEXTDownstreamSemantics dataSet physicalDistance",
+    ],
+    "DASHI/Physics/YangMills/YMClayOriginalWilsonMarkedOS1AllTimesProducerWeldExact.agda": [
+        "originalWEXTDownstreamFromOS1",
+        "selectedOriginalMarkedDistanceIsEuclideanTime",
+        "Marked.literalMarkedLocalizationCompilesToR556",
+        "originalMarkedOS1CompilesToR556",
+        "originalMarkedOS1ContinuumWilsonClustering",
+        "originalMarkedOS1AllPairsTimes",
+        "originalMarkedOS1SameSpectrumClustering",
+    ],
     "DASHI/Physics/YangMills/YMClayOriginalWilsonAllTimesOS1R556R281BIDIExact.agda": [
         "originalAllTimesWilsonTests",
         "originalAllTimesSourceCovarianceConverges",
@@ -48,6 +70,8 @@ OWNERS = {
         "YMClayOriginalR445ReflectedPointwiseWordWeldExact",
         "YMClayOriginalR445ReflectedWordCMP116BIDIExact",
         "YMClayOriginalWilsonAllTimesOS1R556R281BIDIExact",
+        "YMClayWilsonWEXTSelectedDistanceNonVacuityExact",
+        "YMClayOriginalWilsonMarkedOS1AllTimesProducerWeldExact",
     ],
     "DASHI/Physics/YangMills/YMClayNativeR445TemporalReversalExact.agda": [
         "originalSUNTimeReversalTwoLink",
@@ -95,6 +119,9 @@ def main():
         for symbol in symbols:
             if symbol not in text:
                 raise SystemExit(f"FAIL: source has moved: {name}: {symbol}")
+        if name.endswith("BalabanLiteralWilsonMarkedLocalizationSourceExact.agda"):
+            if "(physicalDistance : Observable → Observable → Nat) →" in text:
+                raise SystemExit("FAIL: impossible universal physical metric quantifier reintroduced")
         print("PASS source owner:", name)
     for name in CHECKS:
         file = ROOT / name
