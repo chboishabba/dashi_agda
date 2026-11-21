@@ -1,5 +1,16 @@
 # Alpöge/Claude RH–GRH × DASHI geometric transport (21 November 2026)
 
+## Canonical priority and complete screenshot inventory — 21 November 2026
+
+**P0 is RH itself**: provenance and exact independently checked theorem statement, original completed ζ / Guinand–Weil source consolidation, same-object zero/critical-line transport, and actual Weil-square consequence. **P1 is geometry/weld/consumer**: native 27 chart, `FactorsThrough`, existing C3/zeta squares as faces of the stronger indexed commuting cube, controlled residual holonomy and positive quadratic-form identification. P2–P4 are conditional algorithm/complexity/crypto consumers and negative controls. We **do not** run CI; local SymPy only for finite regression.
+
+**The complete first-image seven claims S01–S07, the remaining fifteen claims S08–S22, every named existing donor, exact pending lemma, phase, priority and deliverable are in the new [RHGRH20261121P0P1ConsequencesExactLemmaMatrix.md](RHGRH20261121P0P1ConsequencesExactLemmaMatrix.md).** That is the canonical detailed checklist. This integration roadmap is the concise decision record. Never mark a screenshot item complete because a donor exists or a different formalized theorem has a similar name.
+
+**Canonical original geometric correction:** residue-27 is the *same* 3×3×3 balanced-ternary carrier through the reversible digit chart; a bare 27-element consumer is an incomplete representation where structure is required. The cyclic +1 adjacency is not the native 54-edge grid adjacency, but that is an **operator/consumer mismatch**, not a denial of the underlying geometrically marked chart identity. The new `GRHNative27ConsumerDescentExact` directly instantiates `QueryFactorisationSufficiency.FactorsThrough` instead of defining a parallel factorization record; source-written, Agda kernel pending.
+
+**Recent heads surveyed:** #1291, #1444, #1489, #1497, #1499, #1503, #1526, #1527, #1529, Lean #104/#108. Details and exact head hashes are in the lemma matrix. Existing R1 completed ζ and classical explicit-formula mathematics remain the owner, not a new synthetic spectral theory.
+
+
 ## Provenance and status
 
 External claim: Levent Alpöge's 20 Nov 2026 announcement at https://alpo.ge/remark.pdf and byte-exact mirror https://github.com/Deicyde/riemann-hypothesis. MIT independent audit: https://math.mit.edu/~drew/grh/ (snapshot 20 Nov 22:05 UTC). The MIT audit reports compilation of 175,187 modules, leanchecker replay, con-leche and nanoda independent kernel acceptance, con-leche statement comparison against a separate challenge and only Lean foundational axioms. Further checks remained underway at that timestamp. These receipts were **not executed locally by DASHI**.
