@@ -94,3 +94,7 @@ Important: symbolic 1+omega+omega²=0 with sum omega^(3j)=3 is only a C3 angular
 | P0.18-force | Same-H finite grand potential gives equilibrium body/support reaction and independent HF/finite difference checks of force & angle torque | Local PASS; not the experimental CURRENT-driven OTT |
 | P0.18-identification | Target 363% TMR yields arbitrary model ratio t_d/t_o=sqrt(1289/200); non-identifiable without source data | Exact symbolic inverse control; no calibrated device fit |
 | P0.18-gravity | Complete covariant same-device stress incl. battery, Maxwell field, ionic lattice, support + physically calibrated gravity observable | OPEN |
+
+| P0.18b-levitation-3routes | 70kg weight, ideal magnetostatic boundary pressure, water-like diamagnetic gradient, symbolic octupole per-cell-force requirement | 14/14 local checks PASS; none experimentally demonstrated |
+| P0.18b-minimal-gravity | Reverse standard weak field for 1g at 1m to added localized energy ≈1.32e28J | source-equation benchmark PASS; nonminimal physical coupling still OPEN |
+| P0.18b-experiment | Spatially stable field engineering, body compatibility, calibrated octupole current/force, independent gravimeter/clock and no-field controls | OPEN |
