@@ -202,3 +202,10 @@ Important: symbolic 1+omega+omega²=0 with sum omega^(3j)=3 is only a C3 angular
 | P0.34-stability | Source-free rigid fixed-moment K1+K2+K3=0, axial C3 gives Kperp=-Kz/2 | numerical selected K=(.00134025,.00134025,-.00268029) N/m; active/SC material stability still OPEN |
 | P0.34-lift-source | Optimistic 1mm³ PtMn3-like active volume N=7.8125e18, a=.4nm, μ=3μB, 5cm coil 100 turns | 70kg reverse requires I_diff~5.05e23A and field >1e18T; selected linear model physically invalid at that extreme, not universal bound |
 | P0.34-metric-and-SC | Positive localized EM energy not repulsive gravity, real SC/coil finite-wire and total apparatus stress not paid | 10T in 1mm³ gives E≈.03979J, a_GR≈2.95e-29m/s² (local energy only); full tensor/clock/freefall/superconductor OPEN |
+
+
+| P0.35-form-vs-work | Original Sheldrake Galton magnetic distribution and static magnet hold: changing finite outcome kernel does not equal supplying work or new morphic field | **39/39 exact locally** in committed compact script; expanded 77/77 local artifact; no empirical claims |
+| P0.35-field-momentum | Static body/source equal opposite; time-dependent lag may be accounted by dP_EM/dt and Maxwell-stress boundary flux | Exact synthetic dynamic momentum closure; actual Filsinger field measurement **OPEN** |
+| P0.35-Filsinger | Prior #1537 finite hardbond clamp normalized P_source=4/3=1+1/9+2/9; capacitive current phase shift and zero ideal cap mean real power, still Rs I² | Historical source-author relation reused, exact algebra PASS; actual node/cap source **OPEN** |
+| P0.35-identifiability | Orthogonal local B, circuit C, hypothetical similarity-history H factorial 8×8 full rank; all-off/all-on rank 2 | Exact rank PASS, **not** a discovery of nonlocal field |
+| P0.35-source-measure | Closed-source V/I, E/B/J, Maxwell reaction/field momentum, 6DOF and local load + remote clock/freefall/testmass | Physical measurements and material SI correspondence **OPEN** |
