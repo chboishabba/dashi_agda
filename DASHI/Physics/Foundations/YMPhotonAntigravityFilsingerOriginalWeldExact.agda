@@ -130,7 +130,7 @@ claimScopedCalibrationDoesNotPromoteByNaming = refl
 -- The signed-source work owner is not rebuilt.
 ------------------------------------------------------------------------
 
-record OriginalFilsingerU1FieldBridge
+record OriginalFilsingerU1FieldMethodComparison
     (boundary : FSource.SelectedBoundary) : Set₂ where
   field
     originalU1Application : EM.U1ApplicationReduction
@@ -141,19 +141,17 @@ record OriginalFilsingerU1FieldBridge
       FEnergy.FieldMaterialEnergyWeld boundary
         selectedFieldPort selectedSourceCycle
 
-    -- No conversion from an SI-labelled U1 socket to Maxwell E/H/Poynting
-    -- or an original Filsinger mesh/terminal can be assumed by name alone.
-    ActualSameOriginalFieldPortCalibration : Set
-    actualSameOriginalFieldPortCalibration :
-      ActualSameOriginalFieldPortCalibration
+    -- The source owner's field-port and energy records retain their
+    -- UNPAID physical Maxwell/Poynting identification fields.  This
+    -- wrapper adds no vacuous Set-valued "calibration witness".
 
-open OriginalFilsingerU1FieldBridge
+open OriginalFilsingerU1FieldMethodComparison
 
 -- Same original physical gate, with the already proved field+material
 -- internal port cancellation from the source owner.
-originalFilsingerSameSourceFieldMaterialWork :
+originalFilsingerConditionalSameSourceWork :
   (boundary : FSource.SelectedBoundary)
-  (w : OriginalFilsingerU1FieldBridge boundary) →
+  (w : OriginalFilsingerU1FieldMethodComparison boundary) →
   ((FEnergy.FieldMaterialEnergyWeld.naturalInput
       (selectedFieldMaterialWork w)
     + FEnergy.FieldMaterialEnergyWeld.driverInput
@@ -193,30 +191,23 @@ originalFilsingerSameSourceFieldMaterialWork boundary w =
 -- same hardware, force channel, stress tensor or source reservoir.
 ------------------------------------------------------------------------
 
-record CrossExperimentYMFieldMethods
+record CrossExperimentYMFieldMethodComparison
     (filsinger : FSource.SelectedBoundary)
     (gravityClaim : Anti.AntigravityClaim) : Set₂ where
   field
     selectedU1Gauge : YM.U1InsideSU2YangMills
     sourceEMSocket : EM.U1ApplicationReduction
-    filsingerOriginal : OriginalFilsingerU1FieldBridge filsinger
+    filsingerOriginal : OriginalFilsingerU1FieldMethodComparison filsinger
 
     gravityExperimentDesign : Portfolio.AntigravityExperimentCandidate
     gravityRequiredChannel : Anti.RequiredDiscriminator
     channelReallyMatchesClaim :
       gravityRequiredChannel ≡ Anti.requiredDiscriminator gravityClaim
 
-    -- Only an original apparatus/physics source can identify which actual
-    -- E/H control and EM stress/force response the GR experiment tests.
-    OriginalGravityEMForceModel : Set
-    originalGravityEMForceModel : OriginalGravityEMForceModel
-
-    -- A gravity-channel anomaly must still survive independent external
-    -- probe, nuisance, ordinary GR and replicated claim-specific tests.
-    -- No inhabitant is produced merely by sharing the YM gauge language.
-    ActualCrossExperimentPhysicalIdentity : Set
-    actualCrossExperimentPhysicalIdentity :
-      ActualCrossExperimentPhysicalIdentity
+    -- This records a method crosswalk only.  It asserts NO equation
+    -- between Filsinger and gravity apparatus, E/H fields, source
+    -- currents, measured force, or metric response.  Those belong in
+    -- existing claim-scoped calibrated experiment and real port owners.
 
 -- No global postulate, no fabricated gravitation, no claim that pure
 -- SU(N) YM is Maxwell, and no measured antigravity event asserted.
