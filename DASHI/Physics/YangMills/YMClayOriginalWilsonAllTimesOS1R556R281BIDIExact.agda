@@ -29,6 +29,7 @@ module DASHI.Physics.YangMills.YMClayOriginalWilsonAllTimesOS1R556R281BIDIExact 
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
+open import Data.Product using (_×_; _,_; proj₁; proj₂)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base as ℚ using (ℚ; _≤_)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans; subst)
@@ -104,69 +105,123 @@ module _
       (R556.indexedAsContinuumClustering source)
       left right time
 
-  -- Preserve the whole Nat-indexed family in R281, not an individual
-  -- singleton index for each time (which would fail the SAME-H BIDI).
-  record SameSpectrumAllTimesSelectedIndex
+  -- Reverse-side correction: a separate R281 spectrum for each
+  -- Wilson pair would STILL be insufficient for ONE physical H on
+  -- a norm-dense family. Use a SINGLE all-pairs/all-times test family
+  -- on the SAME R556/Gram/R278 measure, with INDEX
+  -- ((left Wilson observable, right Wilson observable), Euclidean time).
+  -- This is the smallest actual shared-index carrier for the D2 cut.
+  originalAllWilsonPairsTimesTests :
+    R278.SelectedConnectedCovarianceTests dataSet
+  originalAllWilsonPairsTimesTests = record
+    { R278.SelectedConnectedCovarianceTests.Index =
+        (Observable × Observable) × Nat
+    ; R278.SelectedConnectedCovarianceTests.left =
+        λ index → proj₁ (proj₁ index)
+    ; R278.SelectedConnectedCovarianceTests.right =
+        λ index →
+          R556.timeTranslate source (proj₂ (proj₁ index)) (proj₂ index)
+    ; R278.SelectedConnectedCovarianceTests.leftBounded =
+        λ index → R556.leftBounded source (proj₁ (proj₁ index))
+    ; R278.SelectedConnectedCovarianceTests.rightBounded =
+        λ index →
+          R556.translatedRightBounded source
+            (proj₂ (proj₁ index)) (proj₂ index)
+    ; R278.SelectedConnectedCovarianceTests.productBounded =
+        λ index →
+          R556.translatedProductBounded source
+            (proj₁ (proj₁ index)) (proj₂ (proj₁ index))
+            (proj₂ index)
+    }
+
+  -- The same R278 continuum convergence proof now runs for ALL
+  -- pairs and times from this one fixed original measure carrier.
+  originalAllWilsonPairsTimesConverge :
+    ∀ left right time →
+    Gram.Converges (Gram.scalarConvergence dataSet)
+      (λ cutoff →
+        R278.connectedCovarianceMagnitude extension
+          (Gram.measureSequence dataSet cutoff)
+          left (R556.timeTranslate source right time))
+      (R278.connectedCovarianceMagnitude extension
+        (Gram.continuumMeasure dataSet)
+        left (R556.timeTranslate source right time))
+  originalAllWilsonPairsTimesConverge left right time =
+    R278.selectedConnectedCovarianceMagnitudeConverges
+      extension originalAllWilsonPairsTimesTests ((left , right) , time)
+
+  -- The ONE R281 spectrum source must index exactly the same
+  -- selected original Wilson word pair and time. The spectral
+  -- presentation, subgap lower envelope and common OS H remain
+  -- actual physical premises; no independent H is manufactured.
+  record SameOSAllWilsonPairsTimesSpectrum
       {SpectralObservable Energy : Set}
-      (left right : Observable)
       (spectrum : R281.ContinuumCovarianceSpectrumData
         {SpectralObservable = SpectralObservable}
         {Energy = Energy}
-        dataSet extension (originalAllTimesWilsonTests left right))
+        dataSet extension originalAllWilsonPairsTimesTests)
       : Set where
     field
-      indexIsThisEuclideanTime : ∀ observable time →
-        R281.indexFor spectrum observable time ≡ time
+      spectralWilsonPair : SpectralObservable → Observable × Observable
+      indexForUsesSamePairAndTime : ∀ observable time →
+        R281.indexFor spectrum observable time
+          ≡ ((spectralWilsonPair observable) , time)
 
-  open SameSpectrumAllTimesSelectedIndex public
+  open SameOSAllWilsonPairsTimesSpectrum public
 
-  originalAllTimesSameR281Correlation :
+  originalAllWilsonPairsTimesSameR281Correlation :
     ∀ {SpectralObservable Energy}
-      (left right : Observable)
       (spectrum : R281.ContinuumCovarianceSpectrumData
         {SpectralObservable = SpectralObservable}
         {Energy = Energy}
-        dataSet extension (originalAllTimesWilsonTests left right)) →
-    SameSpectrumAllTimesSelectedIndex left right spectrum →
+        dataSet extension originalAllWilsonPairsTimesTests) →
+    SameOSAllWilsonPairsTimesSpectrum spectrum →
     ∀ observable time →
-    R556.continuumCovariance source left right time
+    let selected = spectralWilsonPair
+          (SameOSAllWilsonPairsTimesSpectrum spectrum)
+          observable
+    in
+    R556.continuumCovariance source
+      (proj₁ selected) (proj₂ selected) time
     ≡ Gap.connectedCorrelation
         (R281.asReconstructedClusteringSpectrum spectrum)
         observable time
-  originalAllTimesSameR281Correlation left right spectrum indexWeld
-      observable time =
+  originalAllWilsonPairsTimesSameR281Correlation
+      spectrum dictionary observable time =
     trans
       (cong
         (λ index →
           R278.connectedCovarianceMagnitude extension
             (Gram.continuumMeasure dataSet)
-            (R278.left (originalAllTimesWilsonTests left right) index)
-            (R278.right (originalAllTimesWilsonTests left right) index))
-        (sym (indexIsThisEuclideanTime indexWeld observable time)))
+            (R278.left originalAllWilsonPairsTimesTests index)
+            (R278.right originalAllWilsonPairsTimesTests index))
+        (sym (indexForUsesSamePairAndTime
+          dictionary observable time)))
       (R281.continuumCovarianceIsSpectrumCorrelation
         spectrum observable time)
 
-  originalAllTimesSameR281SpectrumHasClustering :
+  originalAllWilsonPairsTimesSameR281SpectrumHasClustering :
     ∀ {SpectralObservable Energy}
-      (left right : Observable)
       (spectrum : R281.ContinuumCovarianceSpectrumData
         {SpectralObservable = SpectralObservable}
         {Energy = Energy}
-        dataSet extension (originalAllTimesWilsonTests left right)) →
-    SameSpectrumAllTimesSelectedIndex left right spectrum →
+        dataSet extension originalAllWilsonPairsTimesTests) →
+    SameOSAllWilsonPairsTimesSpectrum spectrum →
     ∀ observable time →
     Gap.connectedCorrelation
       (R281.asReconstructedClusteringSpectrum spectrum)
       observable time
     ≤ Shell.quarter * Power.rationalPower Geo.half time
-  originalAllTimesSameR281SpectrumHasClustering
-      left right spectrum indexWeld observable time =
+  originalAllWilsonPairsTimesSameR281SpectrumHasClustering
+      spectrum dictionary observable time =
+    let selected = spectralWilsonPair dictionary observable in
     subst
       (λ value → value ≤
         Shell.quarter * Power.rationalPower Geo.half time)
-      (originalAllTimesSameR281Correlation
-        left right spectrum indexWeld observable time)
-      (originalAllTimesSourceContinuumHalfRate left right time)
+      (originalAllWilsonPairsTimesSameR281Correlation
+        spectrum dictionary observable time)
+      (originalAllTimesSourceContinuumHalfRate
+        (proj₁ selected) (proj₂ selected) time)
 
 -- The OS1/Euclidean distance end is ALREADY proven conditionally
 -- on master in R332 and R304; construct their joint source identity,
