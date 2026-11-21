@@ -2,11 +2,110 @@
 
 Status: authoritative live routing/control document; non-promoting.
 
-Current-state date: `2026-09-23 AEST`.
+Current-state date: `2026-11-21 AEST` (newest source-first B-lane physical-payment adjudication; historical September control below retained).
 
 This is the default answer source for current NS proof-search state. Historical
 round/PR detail remains append-only in `CrossLaneProofArchaeologyLedgerExact`.
 Inspect exact owners only for a named unpaid theorem or field.
+
+## 21 November 2026 — CURRENT controlling source-first four-lane NS status
+
+The newest source/physical adjudication in
+`Docs/roadmaps/ClayRecoveredProducersW2NoGoR856SourceMaxCut20261115.md`,
+`Docs/roadmaps/ClayB1R820R825UnrestrictedSignedPaymentNoGo20261115.md`,
+`Docs/roadmaps/NSR71R853R854ShearAndSameSourceMaxCut20261114.md`
+and `Docs/papers/live/NSR828Rational345FourierWitness.md`
+**supersedes the earlier positive W2-as-OPEN classification below**.
+The old 2026-09 B_comm/S2b2d1b and R568 chronology remains a valuable
+donor ledger, not a currently paid universal physical estimate.
+
+### Four official mathematical alternatives (never equated by name)
+
+| Lane | Original theorem class | Current source-payment boundary |
+| --- | --- | --- |
+| **A** | unforced whole-space R³ regularity | Independent physically sourced whole-space signed second-moment/derivative/majorant, then actual all-data continuation; B→A and A→B not automatically valid |
+| **B** | unforced periodic T³ regularity | Genuine replacement **B2** signed physical estimate after universal auxiliary W2 no-go, independent cutoff-uniform **W1**, real-source/zero-mode correct implementation, then periodic all-data continuation |
+| **C** | forced whole-space R³ breakdown | Released author-side source plus independent in-repo Lean specification/audit; exact pinned kernel/axioms and independent mathematical/source fidelity must be distinguished from DASHI discovery |
+| **D** | forced periodic T³ breakdown | As C, with separate periodic forcing, pressure and compact-slab uniqueness clauses; no automatic A/B inference |
+
+**Two distinct original B negative findings, both targeted only at
+specific auxiliary sign hypotheses:**
+
+1. On the original real divergence-free **N=2 six-mode physical
+   Galerkin state**, the unqualified R734/R735 augmented weighted W2
+   positivity is false. The derivative identity/conditional
+   W1+W2→barrier compiler is still algebraically valid, but this
+   physical W2 is not available for all data.
+2. On the original radius-four 3–4–5 physical real-Fourier
+   state (728 nonzero modes), the R850/R853 actual selected
+   instantaneous rate is
+   `r(0)=6(12·(-557627/125)+15834)=-28273644/125`.
+   The original classical finite real-Galerkin continuation and
+   R854 rigorous short-time bound make the integral of this
+   signed rate **strictly negative** for a nonzero interval.
+   R820/R823/R824/R825 source-algebraic same-packet identities
+   therefore falsify the unrestricted every-terminal signed
+   complete-rate/reserve payment. This refutes a proposed
+   **universal auxiliary inequality**, not the NSE or Clay B.
+
+**A crucial distinction for the Paper 1 R752 surface:**
+R744–R752's swap-pairing, true dyadic-weight
+two-difference decomposition, same-shell vanishing, and
+R747/R746/R742 conditional integrated residual equivalences are
+**original mathematical infrastructure**. The algebra
+`W2_752 ↔ integral(G_751)≥0` does not supply its RHS sign.
+Neither the real R823 no-go nor R734's separate no-go
+automatically proves `G_751` nonpositive: transfer requires a
+literal source-checked equality on the **same original**
+real Galerkin packet, physical weights, zero-mode conventions,
+and integration/time parameter. That equality remains OPEN.
+Do not mark R752 positively proved, nor automatically
+refuted by a result on a nonidentical auxiliary functional.
+
+**Shortest weld-forward replacement after B1 negative decision:**
+recover a genuinely valid physically signed source inequality
+from R92/R102 helicity/dyadic defects, R568 commutator or other
+source owners, with quantitatively paid negative/remainder terms,
+and show no excluded physical data; independently pay W1 and
+derive a cutoff-uniform critical bound with original all-data
+continuation. No new generic compiler is needed.
+C/D independent author/source-admission work is parallel and
+is not a periodic regularity proof.
+
+**Manuscript and reproducible exact arithmetic (this same PR):**
+- `Docs/papers/live/Paper1NavierStokesClayDraft.md` — revised
+  leading theorem/abstract and source-corrected R752/R734/R823
+  status. Historical A1–A9, R568/R572/R503 and conditional
+  R752 compilers retained with attribution.
+- `scripts/check_ns_paper1_w2_nogo_sympy_20261121.py` —
+  local SymPy 1.14 mathematical regression, verified exact Git
+  blob `261766b264b5f5f81e8148b4f49f4341d6b31f75`.
+  PASS selected R853 rate, exact R820=R823=R825
+  algebra, original R854 rational strict negativity,
+  positive/negative sign and continuity countercontrols.
+  Fresh local SymPy 1.14.0 script execution PASS and exact
+  local Git blob hash matched connector readback.
+  The Paper 1 manuscript status needles (one abstract,
+  R734/R823/R751 distinctions, four-lane firewall)
+  were independently checked against the live draft source.
+  These tests check algebra/arithmetical implications,
+  **not** the finite ODE source proof or any Agda/Lean kernel.
+- Original source/physical proofs remain with
+  `#1271` (R734/R735), the R828/R850/R853/R854
+  and Clay #1499 donor branches. Do not assign that
+  underlying mathematics or external C/D authorship
+  to this editorial/verification PR.
+
+**Acceptance flags:** original unconditional B W2 input
+REFUTED under its actual physical scope; current Paper 1
+conditional compiler PRESENT; independent W1, substitute
+B2 signed inequality and uniform continuation OPEN;
+native exact-head Agda/Lean kernel NOT RUN;
+no Clay regularity completion or peer review.
+Any source repair or new acceptance must update this
+same control record alongside its code/manuscript commit.
+
+---
 
 ## Operating hierarchy
 

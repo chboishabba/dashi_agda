@@ -7,22 +7,30 @@ Status: live analytic manuscript draft; Clay-facing; non-promoting
 
 ## Abstract
 
-This manuscript presents a conditional Navier-Stokes blowup-reduction route
-through high-frequency tail-flux control. The fixed-shell identity separates
-tail dissipation from nonlinear replenishment, and the proof package organizes
-the remaining work into ESS localization, Abel-defect bookkeeping,
-near-diagonal stationarity, support-richness transfer, defect-from-critical
-coercivity, depletion, scale monotonicity, and CKN/BKM closure. The theorem is
-a reduction theorem: if the named `A1-A9` package supplies a uniform
-high-tail domination estimate at the dynamically selected danger shell, then
-the continuation criteria preclude finite-time blowup.
+This manuscript audits a **conditional**, physically sourced regularity
+reduction for the unforced periodic Navier–Stokes problem (Clay alternative B).
+It preserves the literal finite Fourier/Galerkin nonlinear carrier, the
+signed commutator and critical-energy algebra, and the W1 plus signed-residual
+W2 *compiler* of the R733–R752 family. The critical November 2026 correction
+is that the **unrestricted universal positive W2 auxiliary premise is
+mathematically false** on smooth real divergence-free finite-Galerkin data:
+the earlier R734/R735 augmentation has an N=2 counterexample, and a separate
+original R820/R823/R825 complete-rate premise fails on a real-time
+3–4–5-mode witness. Exact conditional algebra is not a positive physical
+inequality. The identity of the more narrowly phrased R751/R752 residual with
+either falsified premise must be proved before any transfer of the no-go; its
+unqualified all-data positivity is not a valid default hypothesis.
 
-The paper should be read as a candidate proof package, internally
-DASHI/Agda-receipted where stated, pending independent peer review, external
-authority review, and the applicable Clay Mathematics Institute eligibility
-procedures. Its live frontiers are the quantitative `A1/A3` Abel-stationarity
-package and the uniform `A4` physical-to-Fourier support-richness transfer,
-not a claim that the Clay problem is already settled.
+The research question is therefore which *different*, non-circular
+signed/coercive payment—possibly with an explicit remainder or a proved
+restriction covering the intended data class—can replace the falsified
+universal premise **while preserving W1**, cutoff-uniform control,
+continuation, and the official initial-data quantifiers. Historical A1–A9
+ESS/Abel/tail-flux, R568/R572/R503 and R752 signed-difference constructions
+remain attributed, useful donors, not completed global regularity.
+This manuscript is a proof-boundary and candidate-reduction paper;
+no local Agda/Lean kernel replay, Clay resolution or peer-review
+acceptance is inferred from source-written contracts or SymPy tests.
 
 ## 1. Introduction and main theorem
 
@@ -37,9 +45,10 @@ Lane C = forced whole-space breakdown
 Lane D = forced periodic breakdown
 ```
 
-The active manuscript construction is **Lane B**. The current preferred
-Clay-facing analytic frontier is the R752 dyadic-difference two-leaf cut. Its
-nonstandard PDE inputs are:
+The active manuscript construction is **Lane B**, but the prior R752
+dyadic-difference **two-leaf representation** is now a **conditional compiler
+subject to the physical no-go audit below**, not a claimed available
+unrestricted universal estimate. Its historical sufficient premises were:
 
 1. **W1**, a cutoff-uniform signed payment
    \[
@@ -79,11 +88,15 @@ difference channels vanish identically on same-shell nonzero triads. R751
 integrates this literal local carrier, and R747/R746 prove its nonnegativity is
 exactly equivalent to R742's packet-versus-combined spacetime inequality.
 
-Once W1 and W2 are supplied, the existing exact compiler gives the uniform
-critical barrier and the standard periodic compactness/continuation layer can
-be invoked at its typed source boundary. The present paper is therefore a
-conditional reduction manuscript, not an unconditional Clay/global-regularity
-claim.
+The implication *if W1 and a suitable genuine W2 are supplied, then the
+stated compiler yields a critical barrier* remains conditional mathematics.
+The unqualified all-data positivity of the older physical R734/R735 W2 and
+R820/R823/R825 complete signed-payment families has since been falsified.
+We do **not** assert that the R751/R752 residual is definitionally equal to
+either of those false quantities; that identity is an explicit source-audit
+gate. Merely relabelling the rejected payment as R751, or restricting data
+without proving coverage, cannot close Lane B. A new genuine PDE inequality,
+with source-valid all-data scope, is needed for the continuation consumer.
 
 The R568/R572/R503 direct-companion chain, the R726 literal-R406 transport,
 and the older centered/Taylor, second-moment, Gram/P3, Bony/Schur, radial,
@@ -97,14 +110,80 @@ unless an explicit transfer theorem is constructed. Lanes C/D are
 forced-breakdown BIDI verification/provenance lanes and do not settle either
 unforced alternative.
 
+## 1.1 November 2026 source-first status correction — physical no-go and usable welds
+
+This dated correction supersedes the historical wording below whenever it
+calls a universal nonnegative signed W2 premise merely "open". The controlling
+source is
+`Docs/roadmaps/ClayRecoveredProducersW2NoGoR856SourceMaxCut20261115.md`,
+together with
+`Docs/roadmaps/ClayB1R820R825UnrestrictedSignedPaymentNoGo20261115.md`
+and `Docs/papers/live/NSR828Rational345FourierWitness.md`.
+
+**Two distinct falsified auxiliary proposals.** First, the original
+R734/R735 augmented weighted W2 has an actual six-mode, unforced,
+real divergence-free **N=2 finite-Galerkin** counterexample.
+Second, for the radius-four (728 nonzero lattice modes)
+real finite Galerkin 3–4–5 initial state, the original
+R850/R853/R823 source-normalized rate satisfies
+```text
+C(0) = -557627/125,   P(0) = 0,    d(0) = 15834,
+r(0) = 6 (12 C(0) - P(0) + d(0)) = -28273644/125 < 0.
+```
+The classical real finite-dimensional ODE, the source-coherent
+continuity argument, and the original R854 conservative time interval
+give strictly negative signed-rate integral on a positive interval.
+Hence the **unrestricted every-terminal nonnegative** R820/R821/R823/R825
+complete rate/reserve input is not a viable universal premise.
+These are counterexamples to specific **auxiliary inequalities**;
+they do **not** show breakdown of any Navier–Stokes solution,
+nor refute the Clay regularity alternative.
+
+**Critical dependency distinction.** R744–R752's exact
+two-dyadic-difference algebra and R747/R746/R742 integrated
+*equivalences* are retained; they only yield
+`W2_752 ↔ NonnegativeIntegral(G_751)`. The proposition
+`NonnegativeIntegral(G_751)` must NOT be promoted from that
+equivalence. To infer the stronger R820/823 falsification *for
+R752 itself*, first establish the exact same-original-real-Galerkin
+identity of the two signed observables, including weight,
+normalization, zero-mode, and real-time integration. If this fails,
+the new G751 sign estimate remains independently **unproved**,
+not automatically refuted.
+
+**Replace rather than re-label the lost positive payment.** The
+next analytic producer must pay an estimate whose signed negative
+part, defect/remainder and cutoff dependence are explicit,
+or justify a state restriction with a theorem covering all
+initial data required by the chosen Clay alternative.
+R92/R102 signed-helicity/dyadic-defect decompositions,
+R568's signed commutator route and the exact same-shell
+R750 cancellation are potential source donors, not
+the estimate or a continuation theorem by themselves.
+The independent cutoff-uniform W1 payment is also unpaid.
+
+**Four-lane and authority firewall.** A (unforced whole-space)
+is neither a corollary of B nor a premise silently imported into it.
+C/D are forced breakdown/source-reconstruction alternatives, with
+independent external authorship, mathematical adjudication,
+and trusted kernel/source-alignment gates. C/D source presence
+is not A/B regularity and is not a DASHI discovery claim.
+The current controlling A/B/C/D proof status is
+`Docs/roadmaps/NSProofControl20260915.md` (updated on this
+manuscript branch), not a paper round count. A local SymPy
+rational/identity audit is distinct from an Agda or Lean kernel
+receipt.
+
 ## 1. Four-lane claim boundary and live Lane-B cutset
 
-The current preferred periodic-B interface is R752:
+The **historical conditional** periodic-B R752 interface was:
 
 ```text
 W1  cutoff-uniform signed weighted work + terminal Q_+- payment     OPEN
 
-W2  integral R751 dyadic-difference residual >= 0                  OPEN
+W2  integral R751 dyadic-difference residual >= 0                  CONDITIONAL SOURCE;
+    unrestricted universal positive-payment route NOT AVAILABLE after
+    R734/R735 and R820/R823/R825 source-correct physical counterexamples
     residual = 3*nested orbit
                - swap-paired two-dyadic-difference production
                + 3*(2nu-delta_N)*critical dissipation
@@ -217,8 +296,13 @@ the same local carrier. R747/R746 identify
 }
 \]
 
-This is the preferred W2 analytic surface. The R742 packet-versus-combined
-inequality remains an exact alternate coordinate, not a separate theorem.
+This is the selected **exact coordinate identity** for the R752
+*conditional* W2 proposal, not an established source-uniform positive
+inequality. R742's packet-versus-combined form remains an alternate
+coordinate, not a second theorem. The physical scope of both must be
+tested against the R734/R735 and R820/R823/R825 counterexamples and
+the actual complete real Fourier source before being considered
+an admissible universal premise.
 
 W1 remains
 
@@ -476,9 +560,9 @@ C_direct constructed != C_direct uniformly paid.
 
 The construction/same-object weld is not the analytic R568 estimate.
 
-## 8. Current terminal compiler and alternate direct-companion chain
+## 8. Conditional R752 compiler, falsification firewall, and alternate direct-companion chain
 
-The current terminal compiler is:
+The preserved conditional terminal compiler is:
 
 ```text
 W1: weighted + terminal Q_+- cutoff-uniform payment
@@ -508,9 +592,11 @@ CommutatorOnlySpacetimeBudget568
   -> R415 / critical-barrier consumer
 ```
 
-R572 is still a valid compiler, but R568 is not the canonical current analytic
-leaf. The nested Schur/R577 branch is likewise retained as a fallback producer
-route rather than promoted over the R752 frontier.
+R572 remains a valid conditional compiler; R568 is not yet a proved
+source-uniform signed physical producer. The nested Schur/R577 route also
+remains a fallback. After the November no-go, no one of these
+candidate producers may be called the universally *paid* Lane-B
+analytic leaf merely because its downstream compiler exists.
 
 ## 9. MathematicalStatus, StatementStatus, and CertificationStatus
 
@@ -539,9 +625,9 @@ A configured workflow is not itself a kernel receipt.
 | R503 | direct companion -> R415 compiler | compiler constructed; direct budget itself still open | alternate Lane-B producer/compiler spine | certification tracked independently |
 | R568 | commutator-only spacetime leaf | interface constructed; producer payment open | historical/alternate Lane-B producer lane | no producer receipt until an inhabitant is actually proved |
 | R572 | direct leaf-A compiler | constructed given listed receipts | alternate Lane-B compiler | source/workflow status does not constitute R568 proof |
-| R733-R736 | Q_+- endpoint weld and shared-weighted two-leaf recut | exact coordinate reductions; W1/W2 payments open | current Lane-B frontier precursor | source-written; head-specific kernel receipt not claimed here |
-| R737-R743 | augmented derivative, cancellation, packet/combined W2 normal form | derivative and same-object reductions closed; packet/combined payment open | current frontier precursor | source-written/static-audited; no fresh kernel receipt claimed |
-| R744-R752 | complete physical carrier, swap pairing, two actual dyadic differences, same-shell vanishing, integrated residual | exact carrier reductions closed; W1 and residual nonnegativity open | **current Lane-B analytic frontier** | source-written/static-audited; no fresh kernel receipt claimed |
+| R733-R736 | Q_+- endpoint weld and shared-weighted two-leaf recut | exact coordinate reductions; **unrestricted R734/R735 positive W2 refuted on physical N=2 data** | retained conditional compiler and no-go owner | source-written plus independent local SymPy; no new kernel receipt |
+| R737-R743 | augmented derivative, cancellation, packet/combined W2 normal form | derivative and same-object reductions; conditional signed-payment source must be counterexample-audited | conditional alternative representation, not a positive W2 proof | source-written/static-audited; no new kernel receipt |
+| R744-R752 | complete physical carrier, swap pairing, two actual dyadic differences, same-shell vanishing, integrated residual | exact carrier reductions; **physical universality of the selected residual remains unproved**, and identification with falsified R734/R820 inputs requires proof | candidate alternative only after source/no-go check | source-written/static-audited; no new kernel receipt |
 
 This table is intentionally conservative. Later validation work may upgrade a
 `CertificationStatus` without changing the underlying mathematical theorem.
