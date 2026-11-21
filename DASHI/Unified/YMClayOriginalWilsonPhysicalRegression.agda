@@ -55,6 +55,12 @@ import DASHI.Physics.YangMills.YMClayR445SelectedTimeReflectionForwardExact as N
 import DASHI.Physics.YangMills.YMClayOriginalR445ReflectedPointwiseWordWeldExact as NativeWordPointwiseReflection
 import DASHI.Physics.YangMills.YMClayOriginalR445ReflectedWordCMP116BIDIExact as OriginalReflectedWordBIDI
 
+-- P0 forward/reverse SAME ALL-TIME original Wilson carrier: one Nat-indexed
+-- translated family instead of per-time singleton, R556/R278/R551 + R281,
+-- and R332 original OS1 time plus R304 physical shell-distance identification.
+-- The physical WEXT, scalar ℚ↔original ℝ, same-H and E1 are still open.
+import DASHI.Physics.YangMills.YMClayOriginalWilsonAllTimesOS1R556R281BIDIExact as OriginalAllTimesOS1Weld
+
 import DASHI.Physics.YangMills.YMClayD1OriginalCovarianceToR320Exact as D1OriginalCovariance
 
 import DASHI.Physics.YangMills.YMClayE1VariableCutoffCylinderLimitExact as E1VariableCutoffCylinder
