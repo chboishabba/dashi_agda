@@ -67,7 +67,9 @@ sameCurveHeckeStillUnpaid :
 sameCurveHeckeStillUnpaid = refl
 
 -- For true Dirichlet↔Hecke comparison one must specify separately:
--- (1) pullback of χ_{-3} along a suitable norm/idelic map;
+-- (1) class-field/Artin χ_{-3} character of Gal(K/Q), with
+--     ζ_K(s)=ζ_Q(s)L(s,χ_{-3}); a naive pullback χ_{-3}∘N_K/Q
+--     is trivial away from ramification, NOT the elliptic CM Hecke ψ;
 -- (2) the genuinely *different* infinity type and conductor of
 -- the elliptic CM Grössencharacter;
 -- (3) equality of local Euler factors at every appropriate prime;
