@@ -118,6 +118,15 @@ record IndexedCommutingConsumer
       (f : IndexedZeroPhaseFrame Index Sign Residual) →
       consume (reflectFrame f) ≡ consume f
 
+consumerReflectsAt :
+  ∀ {Index Sign Residual Answer : Set}
+  (consume : IndexedZeroPhaseFrame Index Sign Residual → Answer)
+  (square : IndexedCommutingConsumer consume)
+  (f : IndexedZeroPhaseFrame Index Sign Residual) →
+  consume (reflectFrame f) ≡ consume f
+consumerReflectsAt consume square f =
+  IndexedCommutingConsumer.reflectedConsumer square f
+
 commutingSquareAt :
   ∀ {Index Sign Residual Answer : Set}
   (consume : IndexedZeroPhaseFrame Index Sign Residual → Answer)
