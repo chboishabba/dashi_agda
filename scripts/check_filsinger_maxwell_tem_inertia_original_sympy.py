@@ -98,6 +98,43 @@ accept('reverse-propagating field satisfies Ampere',simplify(-diff(backH,z)-epsi
 accept('reverse-propagating Poynting flux points toward -z',simplify(backE*backH+back**2/(eta*r*r))==0)
 accept('source-off field eliminates physical port power',Pz.subs(wave,0)==0)
 
+# The other essential source-access gate: the Maxwell solution with both
+# travelling directions is still source-free in the dielectric. A large field
+# amplitude or standing-wave energy is not the same as useful net work.
+forward=Function('Fwd')(t-z/c)
+backward=Function('Rev')(t+z/c)
+totalE=(forward+backward)/r
+totalH=(forward-backward)/(eta*r)
+netP=simplify(2*pi*ell*r*r*totalE*totalH)
+accept('counterpropagating pair obeys Maxwell Faraday',simplify(diff(totalE,z)+mu*diff(totalH,t))==0)
+accept('counterpropagating pair obeys Ampere',simplify(-diff(totalH,z)-epsilon*diff(totalE,t))==0)
+accept('no false interference work term in signed VI',simplify(netP-2*pi*ell*(forward**2-backward**2)/eta)==0)
+accept('equal incoming and outgoing waves have zero net power',simplify(netP.subs(backward,forward))==0)
+accept('standing wave can retain nonzero electric field',simplify(totalE.subs(backward,forward)-2*forward/r)==0)
+accept('standing wave can retain nonzero magnetic energy at a different phase',simplify(totalH.subs(backward,-forward)-2*forward/(eta*r))==0)
+
+# At a real resistive termination Rload, reflection is an energy-port ratio.
+# The control changes *access*, not the incident source's available budget.
+Rload,Zsource,Vinc,gsh,Rseries=symbols('Rload Zsource Vinc gsh Rseries',positive=True)
+Gamma=(Rload-Zsource)/(Rload+Zsource)
+Pincident=Vinc**2/Zsource
+Pdelivered=simplify(Pincident*(1-Gamma**2))
+accept('reflection coefficient exactly zero at match',Gamma.subs(Rload,Zsource)==0)
+accept('delivered load power equals source minus reflected',simplify(Pdelivered-4*Vinc**2*Rload/(Rload+Zsource)**2)==0)
+accept('matched passive termination attains incident maximum',simplify(Pdelivered.subs(Rload,Zsource)-Pincident)==0)
+accept('load mismatch has nonnegative passive loss fraction',simplify(1-Gamma**2-4*Rload*Zsource/(Rload+Zsource)**2)==0)
+accept('matched power derivative vanishes',simplify(diff(Pdelivered,Rload).subs(Rload,Zsource))==0)
+accept('perfect reflection blocks load power',simplify(Pdelivered.subs(Rload,0))==0)
+
+# Fixed useful load of 1 Ohm with parasitic shunt g versus a series access
+# resistance. The same controller may help or hinder target load output.
+Pshunt=4*Vinc**2/(2+gsh)**2
+Pseries=4*Vinc**2/(2+Rseries)**2
+accept('parasitic shunt reduces target load transfer',simplify(Pshunt.subs(gsh,1)-Pshunt.subs(gsh,0))==-5*Vinc**2/9)
+accept('reduce series resistance improves target load transfer',simplify(Pseries.subs(Rseries,Rational(1,2))-Pseries.subs(Rseries,2))==Rational(39,100)*Vinc**2)
+accept('one unit pump cost exceeds this illustrative series gain',simplify(1-(Pseries.subs(Rseries,Rational(1,2))-Pseries.subs(Rseries,2)).subs(Vinc,1))==Rational(61,100))
+accept('zero external incident source delivers zero load despite matching',Pdelivered.subs(Vinc,0)==0)
+
 # The EM gradient-support model and inertia-only rival are indistinguishable
 # from support/weight alone, but can be separated by independent force pulses.
 # This is a synthetically selected experiment design, not an observed apparatus.
