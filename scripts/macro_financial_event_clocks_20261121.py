@@ -1,8 +1,8 @@
 """Reference acceptance for source/news clocks and signed market responses.
 
-An observational diagnostic, not a profitable arbitrage or causal-intent claim.
-Keep this small: reuse Mirror's RSS -> news_update -> ITIR/PNF ingestion rather
-than implementing an alternative feed collector.
+An observational diagnostic, not an execution signal or causal-intent claim.
+Consumes generic, timestamped source observations; no private ingestion or
+external application integration is assumed.
 """
 from __future__ import annotations
 from dataclasses import dataclass
