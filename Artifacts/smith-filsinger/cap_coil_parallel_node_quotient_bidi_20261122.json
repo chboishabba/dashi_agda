@@ -94,10 +94,11 @@
     "local_script": "/mnt/data/check_filsinger_parallel_lc_node_bidi_sympy_20261122.py",
     "locally_executed": "78/78 exact SymPy 1.14 PASS, full source-node quotient + passive Rs,G and inverse rank, local file",
     "committed_companion": "scripts/check_filsinger_cap_coil_parallel_node_bidi_sympy_20261122.py",
-    "committed_companion_status": "Source-written after full local execution; separately verify byte-exact execution before labeling as such",
+    "committed_companion_status": "Local source-exact replay 37/37 PASS SymPy 1.14; committed Git blob 95173b7443770f83c58ed4e7bd9220f4f6d0b399 matches exact executed bytes; earlier failure on unsimplified symbolic matrix assertion corrected and rerun",
     "agda": "DASHI/Physics/Motors/SmithFilsingerCapCoilParallelNodeQuotientBidiExact.agda",
     "agda_status": "Source written only; local Agda binary unavailable; original Maxwell/meter physical weld not proved",
-    "source_hardware": "0/24 raw original real-world evidence roles supplied in preexisting audit"
+    "source_hardware": "0/24 raw original real-world evidence roles supplied in preexisting audit",
+    "independent_full_model": "78/78 exact local SymPy; separate more comprehensive file /mnt/data/check_filsinger_parallel_lc_node_bidi_sympy_20261122.py"
   },
   "next_source_specific_discriminators": [
     "Does filmed cap C actually share both physical terminal nodes with selected coil L? 'Across' is a speaker claim, not a pin proof",
