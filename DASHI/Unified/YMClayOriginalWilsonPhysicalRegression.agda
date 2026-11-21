@@ -118,6 +118,12 @@ import DASHI.Physics.YangMills.YMClayOriginalF19R445DecoderCommutingSquareExact 
 -- the full original R445 128+896 ordered field coordinates.
 -- Distinct from unproved E1/D1/D2 continuum mass-gap obligation.
 import DASHI.Physics.YangMills.YMClayOriginalF19R445PhysicalBlockedObservableSquareExact as OriginalF19R445BlockedObservableSquare
+
+-- Native source-equality payment: original constructed F19 64 pair-block
+-- and ORIGINAL native R445 SUNBlock.nativeSUNBlockLinks at each of the
+-- 64 original coarse bonds, source parity and genuine 1024-link decoder.
+-- Source-written closed 64-order computation requires pinned Agda kernel.
+import DASHI.Physics.YangMills.YMClayOriginalF19R445Native64HolonomySquareExact as OriginalF19NativeR445Square
 import DASHI.Physics.YangMills.YMClayOriginalF19NativeR445SelectedOrderBIDIExact as OriginalF19R445SelectedOrder
 
 import DASHI.Physics.YangMills.YMClayD1OriginalCovarianceToR320Exact as D1OriginalCovariance
