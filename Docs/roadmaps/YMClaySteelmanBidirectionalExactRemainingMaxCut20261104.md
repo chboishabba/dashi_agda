@@ -1,3 +1,65 @@
+## 21 November 2026 — P0 commuting-square BIDI audit (#1444 roadmap synchronization with master-based #1536)
+
+**WELD, DON'T REBUILD.** This is the original Yang–Mills source-first, steelman BIDI programme. Reverse from one reconstructed physical OS (H) and its time-translated Wilson covariance; plug forward from the **already existing** CMP119/122/116, original side-four SU(N) Wilson Gibbs, R445/R320 and R332/R556/R551/R281 donors. The actual R445/OS1 commuting-square implementation lives on **[draft PR #1536](https://github.com/chboishabba/dashi_agda/pull/1536)** based on `master`; #1444 is a stacked historical Voyager branch. **This documentation entry does not assert that #1536 source has been merged into #1444 or master.**
+
+### Square 1 — original 4D Wilson lattice link blocking, reflection and compatible translation
+
+The actual native `B: U_4→U_2` is an **ordered two-positive-link SU(N)** holonomy from the original original 4⁴ periodic 1024-bond Wilson fine source. For fine time translation `T_f`, coarse time translation `T_c`, original even-origin block and site reflection `θ`:
+
+```
+             T_f^(2k)
+ U_f --------------------------> U_f
+  |                                |
+  | original B (2-link SU(N))      | original B
+  v                                v
+ U_c --------------------------> U_c
+             T_c^k
+
+             θ_f
+ U_f --------------------------> U_f
+  |                                |
+  B                                B
+  v                                v
+ U_c --------------------------> U_c
+             θ_c
+```
+
+**EXACT tested universal noncommutative free-word relations**: `B T_f^(2k)=T_c^k B`, `B θ_f=θ_c B`, and `θ_f T_f^(2k)=T_f^(-2k) θ_f` (coarse analogue). Locally ran independent `/mnt/data/check_ym_original_r445_os1_translation_square.py`: **576/576** shifted coarse-bond equalities over nine k values, **64/64** reflected-block bonds, **9216/9216** fine time dihedral comparisons. **Negative controls**: `T_f^1` does **NOT** descend to `T_c^1` on the selected even-block source (**64/64 mismatches**); finite coarse time C2 wraps `T_c^2=id`, so times t and t+2 alias. These are *not* claims of full Agda kernel acceptance or continuum time symmetry.
+
+**Source-written Agda #1536** `YMClayR445SelectedTimeReflectionForwardExact.agda` adds `selectedNativeSiteTimeSquare`, `selectedFineSiteReflectShiftDihedral`, `selectedCoarseSiteShiftHasPeriodTwo` on actual Torus C4/C2 site-index forms. The link-field-level identification with the **actual** `Native.fineBlockOrigin` / `nativeSUNBlockLinks` is **still an explicit selected native `Fin.combine` proof payment**. Reuse original `YMClayNativeR445TemporalReversalExact.originalSUNTimeReversalTwoLink` and `YMClayNativeSideFourTwoLinkPairSameObjectExact`, not duplicate its non-Abelian group theorem. Choose OS-positive reflection plane from ORIGINAL published Wilson RP support, not from an arbitrary site mirror.
+
+### Square 2 — one OS1 Euclidean translation, actual R556 covariance, R278 limit, one R281 spectrum
+
+```
+       same selected Wilson pair (F,G), time t
+                     |
+            original R556 index ((F,G),t)
+            /                      \
+ source T5/R556 τ_tG           OS1/R332 τ_tG
+            \                      /
+       finite original *same* R278 covariance at cutoff n
+                 | R278 convergence
+       ONE original continuum covariance
+                 | R281 same all-pairs/time index
+       ONE R281 spectral connected correlation
+              (not yet actual H_OS)
+```
+
+**Source-written #1536** `YMClayOriginalWilsonOS1R556R281CommutingSquareExact.agda` proves source-side `originalWilsonTimeTranslationSquare` from original R332/R556 selected geometry witnesses, `originalFiniteCovarianceSquare` at every cutoff under the **same** `Gram.measureSequence`, `originalContinuumCovarianceSquare` under the **same** `Gram.continuumMeasure`, and `originalOS1SquareEndsInSameR281Spectrum` using the ONE all-pairs/all-times R281 index dictionary `indexFor spectrum a t = ((F,G),t)`. The vertical arrow is existing `R278.selectedConnectedCovarianceMagnitudeConverges`, **not finite=continuum equality**; arbitrary `Converges` also needs a sequence-congruence law before freely replacing equal-pointwise functions (no invented funext).
+
+**Key BIDI correction:** *a common index family alone does not prove a commuting physical square*. The original source-time map must agree with `OS1.translate`, the selected R556 physical shell distance must agree with the source R304 time-distance carrier, the exact original Wilson measure must match the chosen CMP119/T5 state at each cutoff, and the R281 object must be the **one physically reconstructed H_OS**. Finite fixed C2 time cannot model all `Nat` Euclidean time; the R332/R556 all-time source is a **changing-cutoff/continuum carrier**, not the side-two blocked torus. R349 already owns related selected R318↔R284 distance comparison; reuse it rather than invent a time theorem.
+
+### Existing producers and surviving honest payment
+
+- `BalabanLiteralWilsonMarkedLocalizationSourceExact` → R556 uses original literal Wilson W1 (actual mixed marked derivative) and W3 (two-support rooted-shell bound); **their physical original Wilson source inhabitants, small+large fields and uniform cutoff/volume estimates remain open**, notwithstanding already existing CMP119 anchored insertions, CMP122 boundary reinjection and CMP116 conditional localization. Printed CMP116 bond-J is NOT identical to Wilson-loop insertion by name.
+- Earlier `WilsonWEXTDownstreamSemantics` quantified over *every arbitrary metric*, making it vacuous on any inhabited observable type (`d≡0, t=1` yields `0=1`). #1536 surgically corrects **both existing consumers** to use their **selected physical distance**, and records exact negative-control theorem `universalTimeForEveryDistanceIsImpossible`. This is a type error repair, not newly proved physical decay.
+- The finite original **real** n=3 R445/R320 mixed-J/centered reflected pairing and the **rational** R575/T5/WEXT R556 carrier must still be identified by a faithful actual physical scalar/measure/observable interpretation. Use existing `YMClayP0BishopToOriginalWilsonRealWeldExact`, `BalabanCMP109116BishopRealSetoidInstantiationExact` and rational→real `RationalRealRingEmbedding` donors; do **not** assert an automatic real→rational equality or a second Gibbs source. Fixed finite R445 n=3 does not by itself supply an all-cutoff OS1 physical time state.
+- **P0 physical open**: published Wilson fine RP on selected positive-time (complex star), original Wilson W1/W3 analytic insertion/locality on actual small+large-field Gibbs, original E1 interacting/nontrivial continuum, source-consistent cutoff-uniform physical rate, one dense vacuum-complement Hilbert/H_OS and same correlation/spectrum identification, G1 all groups. **P1 antigravity later**.
+
+**Acceptance/trust:** exact local tests PASS as specified; new #1536 Agda sources **not pinned-Agda-kernel checked**. Existing `scripts/check_ym_original_rg_p0_kernel.sh` is the local toolchain acceptance owner; #1536 `scripts/check_ym_1444_cmp119_r445_weld_forward.py` adds this commuting-square and source-selector checks. Do not merge/promote to Clay on source-writing or finite enumeration alone.
+
+---
+
 ## 6 November 2026 correction — the FINITE analytic-J identity is NOT a new Clay leaf
 
 The previously reported "formal jet -> actual analytic mixed derivative" should not be presented as an independent, unproved *mathematical* theorem for bounded finite original Wilson marks. The rigorous finite continuous-compact-Haar proof was already written in [YMClayR320BoundedMarkedSourceLemma20261106.md](../physics/YMClayR320BoundedMarkedSourceLemma20261106.md): for each finite original Wilson Gibbs law and bounded local marks F,G, M(s,t)=E_mu exp(sF+tG) is holomorphic on a uniform nonzero neighbourhood, and (d_s d_t log M)(0,0)=E_mu(FG)-E_mu(F)E_mu(G). For |F|,|G|<=2, |s|+|t|<log(2)/2 is sufficient. Uniform *analyticity* is not uniform *spatial clustering*.
