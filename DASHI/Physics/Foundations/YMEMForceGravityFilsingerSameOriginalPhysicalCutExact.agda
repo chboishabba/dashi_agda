@@ -19,6 +19,7 @@ module DASHI.Physics.Foundations.YMEMForceGravityFilsingerSameOriginalPhysicalCu
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Nat using (Nat; _+_)
 open import Agda.Primitive using (Level; _⊔_; lsuc; lzero)
 
 import DASHI.Physics.Electromagnetism.U1AsSU2AbelianRestrictionExact as U1
