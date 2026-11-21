@@ -1,0 +1,175 @@
+{
+  "title": "Midpoint four diode / three Earth source BIDI reverse topology discriminant",
+  "date": "2026-11-22",
+  "sourceReels": {
+    "midpoint": "Dfu9Jseviz9 is candidate attribution only, exact literal transcript-to-clip not reverified",
+    "earth": "Dfi1D7CPzyM",
+    "zvs": "DfiqPnkPnP5",
+    "smith": "Kelly/Darrer distinct figure identities"
+  },
+  "literalTranscriptSummary": [
+    "accessible NST transformer midpoint",
+    "two diodes off this wire and two off the other",
+    "all forward facing; positive outputs ganged",
+    "voltage to diodes and return to midpoint/Earth/ground",
+    "half potential of big coil",
+    "capacitor across selected coil; speaker says pole shift",
+    "20kV 1uF or 10kV 2uF capacitor examples",
+    "spark-gap dump and coil intended to harvest amperage"
+  ],
+  "literalTranscriptStatus": "prior user-provided transcript; not an independently verified original screenshot/pin-by-pin continuity",
+  "constraints": [
+    {
+      "id": "C1",
+      "source": "midpoint",
+      "value": "four diode packages / two associated with each outer secondary wire",
+      "status": "source report"
+    },
+    {
+      "id": "C2",
+      "source": "midpoint",
+      "value": "ganged positive outputs",
+      "status": "source report but exact cathode/pins not proven"
+    },
+    {
+      "id": "C3",
+      "source": "midpoint",
+      "value": "return described as midpoint/Earth/ground",
+      "status": "physical node equivalence unknown"
+    },
+    {
+      "id": "C4",
+      "source": "midpoint",
+      "value": "half potential of big coil",
+      "status": "voltage reference / load condition unknown"
+    },
+    {
+      "id": "C5",
+      "source": "midpoint",
+      "value": "all forward facing",
+      "status": "semantics of visual/electrical orientation unknown"
+    },
+    {
+      "id": "C6",
+      "source": "earth reel",
+      "value": "three Earth electrodes / 3.8V 0.4W and 48V across two caps",
+      "status": "separate reel; no proof same circuit/time"
+    }
+  ],
+  "candidates": [
+    {
+      "id": "CT4",
+      "description": "center-tap positive-output full-wave, duplicate packages per branch",
+      "diodes": [
+        "A->P",
+        "A->P",
+        "B->P",
+        "B->P"
+      ],
+      "centreReturn": true,
+      "dcNegativeIsMidpoint": true,
+      "idealOutput": "P-M=abs(v)",
+      "compatibility": "if strict all diodes forward from ends and centre is the return",
+      "weakness": "two physically duplicated forward diode paths do not establish independent extra source or even current sharing"
+    },
+    {
+      "id": "BRIDGE4",
+      "description": "whole-secondary four diode full bridge, separate midpoint",
+      "diodes": [
+        "A->P",
+        "N->A",
+        "B->P",
+        "N->B"
+      ],
+      "centreReturn": false,
+      "dcNegativeIsMidpoint": false,
+      "idealOutput": "P-N=2abs(v); N-M=-abs(v)",
+      "compatibility": "if return wording refers to a separate reference and not N=M; all-forward phrasing non-literal",
+      "weakness": "would conflict with a strictly established half-winding P-to-M output or hard centre/bridge-negative bond"
+    },
+    {
+      "id": "SPLIT4",
+      "description": "four diodes giving positive and negative rails about transformer midpoint",
+      "diodes": [
+        "A->P",
+        "N->A",
+        "B->P",
+        "N->B"
+      ],
+      "centreReturn": true,
+      "dcNegativeIsMidpoint": false,
+      "idealOutput": "P-M=abs(v); M-N=abs(v); P-N=2abs(v)",
+      "compatibility": "if midpoint is mid-rail and half-potential refers P-to-M",
+      "weakness": "requires actual separately wired negative rail; all-forward strict literal reading does not match"
+    },
+    {
+      "id": "BRIDGE_N_EQ_M",
+      "description": "ordinary bridge N hard bonded to winding centre",
+      "diodes": [
+        "A->P",
+        "N->A",
+        "B->P",
+        "N->B"
+      ],
+      "centreReturn": true,
+      "dcNegativeIsMidpoint": true,
+      "idealOutput": "ordinary bridge imposes N-M=-abs(v) and hard bond imposes N-M=0",
+      "compatibility": "contradiction for nonzero v in ideal symmetric-winding model",
+      "weakness": "real current/clamping depends on finite transformer/diode impedance; does not assert actual original wired this way"
+    }
+  ],
+  "idealModel": {
+    "physicalStatus": "logical_completion_only; real Filsinger pin graph, diode polarities and same-time electrical measurements unavailable",
+    "assumptions": [
+      "ideal symmetric centre-tapped secondary: A-M=v, B-M=-v",
+      "zero-drop ideal diodes",
+      "nonzero v in active half cycles",
+      "true diode polarity not read back from photograph",
+      "Earth, center tap and rectifier DC negative are NOT identified unless specifically bonded in source evidence"
+    ]
+  },
+  "reverseCuts": {
+    "strictCentreAndBridgeNegativeSameNode": "reject ordinary bridge N=M under nonzero ideal half-winding output; real world source impedance changes fault dynamics",
+    "twoWiresFourDiodesAndCommonPositive": "cannot distinguish CT4, BRIDGE4, SPLIT4",
+    "ifOutputReported4000V": {
+      "ctPositiveRelativeMidpoint": "4kV half-secondary, 8kV end-to-end",
+      "bridgeFullWinding": "2kV half-secondary, 4kV end-to-end",
+      "status": "conditional prediction only, which two nodes measured still unknown"
+    },
+    "capacitorAlternatives": {
+      "chargeAtNarratedVoltage": "both 20mC",
+      "energyAtNarratedVoltage": "200J versus 100J",
+      "notOperatingVoltageReceipt": true
+    },
+    "capacitorAcrossCoil": "reversible reactive storage may shift phase; not necessarily positive real source work",
+    "thirdEarth": "one extra Earth contact can be reference/return/galvanic/RF source; count alone not source identification",
+    "twoWorldSourceCounterexample": {
+      "sameUsefulLoad": "0.4W",
+      "worldA": "driver 0.5W, natural 0, loss 0.1W, no storage change",
+      "worldB": "driver 0.2W, natural 0.3W, loss 0.1W, no storage change"
+    },
+    "measurementRank": "one useful-power observation of [driver, environmental, losses, storage change] has rank 1 / nullity 3, so upstream work remains unresolved",
+    "minimumDiscriminators": [
+      "exact diode anode/cathode association on both secondary leads",
+      "actual midpoint M, bridge negative N and Earth electrodes node identities",
+      "selected capacitor two terminals and capacitor polarity relative coil",
+      "which exact terminals original approximately 4kV, Earth 3.8V/0.4W and 48V span, each with own time identity",
+      "signed net Earth/chemical/RF/external drive and all loads, dissipations, full storage returns"
+    ],
+    "noPromotion": [
+      "no Filsinger original pin-complete netlist",
+      "no demonstrated positive replenished Earth/atmosphere source",
+      "no equivalence to Kelly/Smith diagram",
+      "no Agda kernel acceptance"
+    ]
+  },
+  "localScript": "/mnt/data/check_filsinger_midpoint_bidi_reverse_sympy.py",
+  "locallyExecuted": "75/75 PASS SymPy 1.14.0; source-shaped and idealized, not a physical source receipt",
+  "sourceOwnerReuse": [
+    "DASHI.Physics.Motors.SmithFilsingerTranscriptDiagramNumbersSourceIndexExact",
+    "DASHI.Physics.Motors.DonSmithFilsingerClaimBidiExact",
+    "DASHI.Physics.Motors.SmithFilsingerOriginalMaxwellMeterIntervalWeldExact",
+    "DASHI.Physics.Motors.SmithFilsingerOriginalMaxwellRestoredMeterFundingExact"
+  ],
+  "safety": "analysis of existing transcripts only; no high-voltage construction or electrical intervention instructions"
+}
