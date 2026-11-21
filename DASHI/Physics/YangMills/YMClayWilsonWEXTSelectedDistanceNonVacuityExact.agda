@@ -23,7 +23,7 @@ module DASHI.Physics.YangMills.YMClayWilsonWEXTSelectedDistanceNonVacuityExact w
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.Empty using (⊥)
+open import Data.Empty using (⊥)
 
 universalTimeForEveryDistanceIsImpossible :
   ∀ {Observable : Set} →
