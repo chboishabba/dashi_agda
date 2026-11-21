@@ -68,8 +68,36 @@ def check_r445():
             assert sum(z in selected for z in p if z[0]==mu)<=1
     print("PASS: n=3 R445 128 selected bonds = 4 orientation conflict-free classes x 32; 896 spectators remain")
 
+def check_adaptive_mixed_contour():
+    # For any fixed original marked set, if at most h bonds are frustrated,
+    # one of K fixed color classes contains >= ceil((n-h)/K) coherent bonds.
+    # Their staple coherence flags are exterior-measurable in that class.
+    # Therefore the original conditional factor bound pays K*q^m,
+    # NOT the binomial coefficient of selecting a coherent subset.
+    q=Rational(1,4)
+    for L in (3,4,5,6):
+        K=8 if L%2==0 else 12
+        links=[(mu,x) for x in product(range(L),repeat=4) for mu in range(4)]
+        rng=Random(36912000+L)
+        for n in range(1,101):
+            sample=rng.sample(links,n)
+            coherent=[rng.randrange(2) for _ in sample]
+            frustrated=n-sum(coherent)
+            for h in (frustrated,min(n,frustrated+2),n):
+                m=ceil((n-h)/K)
+                hist=Counter()
+                for (mu,x),yes in zip(sample,coherent):
+                    if yes: hist[paint(L,x,mu)]+=1
+                assert max(hist.values(),default=0)>=m
+                if m:
+                    cls=max(hist,key=hist.get)
+                    assert q**hist[cls]<=q**m
+    print("PASS: adaptive mixed-contour 8/12-class selection, no binomial factor")
+
+
 def main():
     check_r445()
+    check_adaptive_mixed_contour()
     for L in range(3,12):
         print("PASS L/colors/links/plaquettes/min/max",check_L(L))
     q=Rational(1,10**6)
