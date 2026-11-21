@@ -20,6 +20,16 @@ class ClockTests(unittest.TestCase):
         self.assertEqual(first_market_response_lag_seconds(event), 300)
         self.assertEqual(propagation_delay_seconds(event), 1800)
 
+    def test_future_market_quote_does_not_leak(self):
+        a=row("advance", "2026-11-05T09:00:00Z", "2026-11-05T09:01:00Z", "2026-11-05T10:00:00Z", -1)
+        self.assertEqual(chronology((a,),"2026-11-05T09:30:00Z"), ())
+        self.assertEqual(chronology((a,),"2026-11-05T10:01:00Z"), (a,))
+
+    def test_market_quote_may_precede_local_arrival(self):
+        a=row("fast-market", "2026-11-05T09:00:00Z", "2026-11-05T09:30:00Z", "2026-11-05T09:05:00Z", -1)
+        self.assertEqual(chronology((a,),"2026-11-05T09:20:00Z"), ())
+        self.assertEqual(chronology((a,),"2026-11-05T09:35:00Z"), (a,))
+
     def test_missing_move_is_unknown(self):
         a=row("unknown","2026-11-05T08:10:00Z","2026-11-05T08:11:00Z","2026-11-05T08:12:00Z",None)
         self.assertEqual(directional_flips((a,),"2026-11-06T00:00:00Z"),0)
