@@ -112,6 +112,12 @@ import DASHI.Physics.YangMills.YMClayOriginalF19R445ActualSortedVectorBIDIExact 
 -- original bond field ----------------identity--> original bond field.
 -- Also both original inverse vector round-trips. Not a physical OS square.
 import DASHI.Physics.YangMills.YMClayOriginalF19R445DecoderCommutingSquareExact as OriginalF19R445DecoderSquare
+
+-- Separate physical finite BLOCKED-observable square: same original
+-- Wilson 64-pair holonomies, through actual F19 adjacent sort or
+-- the full original R445 128+896 ordered field coordinates.
+-- Distinct from unproved E1/D1/D2 continuum mass-gap obligation.
+import DASHI.Physics.YangMills.YMClayOriginalF19R445PhysicalBlockedObservableSquareExact as OriginalF19R445BlockedObservableSquare
 import DASHI.Physics.YangMills.YMClayOriginalF19NativeR445SelectedOrderBIDIExact as OriginalF19R445SelectedOrder
 
 import DASHI.Physics.YangMills.YMClayD1OriginalCovarianceToR320Exact as D1OriginalCovariance
