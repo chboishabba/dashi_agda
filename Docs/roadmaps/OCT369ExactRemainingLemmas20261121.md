@@ -72,3 +72,10 @@ Important: symbolic 1+omega+omega²=0 with sum omega^(3j)=3 is only a C3 angular
 | P0.16b | Same-original SOC/exchange/Wannier material parameter source and ab-initio band comparison | OPEN |
 | P0.16c | PtMn3/MgO/PtMn3 tunnel barrier currents and quantitative OTT/TMR | OPEN |
 | P0.17 | Local covariant stress and Einstein/KK source with real controllers, source and superconducting boundaries | OPEN |
+
+| P0.16-YM01 | #1535 native R445 correct reflection and positive fine halfspace | finite words reported PASS; full Wilson RP OPEN |
+| P0.16-YM02 | #1536 n=3 Wilson mixed-J equals SAME n=3 R445 pushed centered reflected covariance | source-written exact original-owner BIDI; Agda kernel OPEN |
+| P0.16-YM03 | #1536 all-time Wilson covariance → same R281 OS spectrum | **conditional** on original time/word/real-vs-rational source weld and actual R281 spectral source; OPEN physical |
+| P0.16-YM04 | genuine non-Abelian SU(N) 4D continuum, dense OS gap, surviving observable, all compact simple G | OPEN, NOT same as U(1) EM |
+| P0.16-YM05 | explicit physically owned YM/Maxwell donor → octupolar material source tensor/stress and real gravity observable | OPEN |
+| P0.16-YM06 | exact U(1) commuting vs SU(2) Lie curvature commutator negative control | **7/7 local SymPy PASS**, not Clay proof |
