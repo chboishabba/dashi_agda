@@ -79,3 +79,11 @@ Important: symbolic 1+omega+omega²=0 with sum omega^(3j)=3 is only a C3 angular
 | P0.16-YM04 | genuine non-Abelian SU(N) 4D continuum, dense OS gap, surviving observable, all compact simple G | OPEN, NOT same as U(1) EM |
 | P0.16-YM05 | explicit physically owned YM/Maxwell donor → octupolar material source tensor/stress and real gravity observable | OPEN |
 | P0.16-YM06 | exact U(1) commuting vs SU(2) Lie curvature commutator negative control | **7/7 local SymPy PASS**, not Clay proof |
+
+| P0.17a-Q8-same-fixture | Exact Q8 Wilson-loop and 120deg transported-spin joint Gibbs: local gauge covariance and cross logjet=Cov(W,M) | **26/26 local assertions, 262144 exhaustive gauge transformations PASS**; different from original Wilson/CMP physical measure |
+| P0.17a-Abelian-negative | C4 commuting subgroup vs full Q8: open word-order 0/64 vs 48/512; different cross covariance | **finite algebra PASS**; open swapped words not gauge-invariant |
+| P0.17a-force | Conditional external gradient produces equal/opposite material-support forces; at zero gradient zero force | **exact symbolic fixture**; calibrated force/gravity OPEN |
+| P0.17b-origin | SAME physical PtMn3 Hamiltonian/T1g cluster tensor and MgO tunnelling coefficients map to physical gauge and original Wilson source | OPEN; spin SU2 gauge redundancy not equal SOC material spin |
+| P0.17c-metric | Same locally covariant matter+Maxwell/non-Abelian+controller action, source-derived conserved physical T_munu | OPEN; formal q/t cumulant is not gravitational stress |
+| P0.17d-OS | Exact original R445 real Gibbs vs CMP119 rational T5 same-source scalar/measure, published Wilson RP, E1, same H_OS gap | OPEN per YM #1536; no Clay claim |
+| P0.17e-lift | Measured external force and gravimeter null/positive signal, three routes and 70kg 686.4655N | OPEN |
