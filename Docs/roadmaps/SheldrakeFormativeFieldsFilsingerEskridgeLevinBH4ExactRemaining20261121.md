@@ -7,6 +7,47 @@ This is the **phase/deliverable/remaining-lemma ledger committed with the implem
 
 
 
+## P1 BIDI source-phrase correction — midpoint return, two diode input groups, finite-source clamp (C0–C8)
+
+**22 November 2026, user-sourced reverse correction.** Reopen the prior user's literal spoken transcript, not only the B0–B8 paraphrase. Alongside “two off of this wire, two off of that wire”, “all forward facing”, “ganging together positives”, “half the potential of the big coil”, “return to midpoint, earth, ground” and the capacitor/coil “pole shift”, the user transcript explicitly also says **“two diodes come off the cap, two diodes come off here.”** This is evidence for **two input-group descriptions**, NOT evidence that four diodes necessarily implement one conventional full bridge across the two outer transformer ends. The exact original reel/media-to-word linkage is still provisional; no original image was re-attested. Preserve Filsinger filmed three-Earth Dfi1D7CPzyM, earlier ZVS DfiqPnkPnP5, provisional midpoint/spark Dfu9Jseviz9 and compiled Smith/Kelly diagrams as separate source instances.
+
+**Correction to previous exclusion:** the earlier B0–B8 conditional \`bridgeNegativeIsNotSourceMidpoint\` applies only to an ideal *unperturbed, nonzero, symmetric centre-tapped voltage source* with a conventional bridge whose DC-negative bus N is hard-bonded to winding midpoint M. It is **not a proof the actual physical design cannot operate**. In a real winding with finite source impedance, that bond changes the circuit: when A is positive and B negative relative to M, the bridge return diode **N→B** conducts, clamping the negative half-winding; on the other half-cycle **N→A** conducts. Thus the same nominal secondary cannot sustain both its unloaded negative voltage and a direct bridge N=M constraint without source-current backaction. The current is paid by the source, not an unexplained Earth donor. Similarly **H_SPLIT4** and **H_BRIDGE4** use *the same four oriented bridge diodes*; they are distinct midpoint/load-reference assignments, not independent diode orientation graphs. The prior “three survivors” were a nonexhaustive hypothesis list.
+
+**New finite Agda original-BIDI owner** \`DASHI/Physics/Motors/SmithFilsingerMidpointReturnClampBacksolveExact.agda\` consumes the existing original transcript-number and prior midpoint-bidi owners, explicitly separates \`DiodePairGrouping\` (winding A/B vs capacitor/coil X/Y) from \`ReturnConnection\` (centre load return, isolated N, hard N=M, finite R, finite C or reactive L/C). Its \`noUniqueDiodeInputGroupingFromFourPackages\` is a finite theorem showing that diode package count cannot choose these distinct source groupings; the two-cycle \`conditionalClampingRoute\` encodes the negative-end return path under the conventional bridge/hard M bond. It reexports the **ideal** no-go under exactly its former assumptions. **Agda source-written, kernel NOT executed.** The focused root imports the module.
+
+**New [source-worded machine BIDI ledger](../../Artifacts/smith-filsinger/midpoint_return_clamp_capcoil_bidi_20261122.json)** supplies the original phrases, five conditional circuit/return mechanisms, exact equations and seven forward/reverse discriminators. Old ledger \`midpoint_four_diode_bidi_reverse_cuts_20261122.json\` receives an explicit nonexhaustive/nonideal correction rather than deleting prior result.
+
+**Executed independent local SymPy 1.14.0:** \`/mnt/data/check_filsinger_midpoint_return_backsolve_sympy.py\` **65/65 exact checks PASS**, including both source polarities, finite winding source resistance, hard-bonded bridge loop, resistive M↔N return, capacitive and LC reactive returns, diode OR input-group ambiguity and unchanged source-funding counterworlds. The committed companion \`scripts/check_filsinger_midpoint_return_backsolve_sympy.py\` contains the same selected model equations, but the original executed 65-case local file has **Git blob 8e08fde225a577df68036b618b064aa0b70786e8**; do not claim committed-byte identity unless its separate blob is verified and executed.
+
+For source half-voltage amplitude \(|v|>0\), model half-winding series resistance \(R_s>0\) and positive output load \(R_L>0\):
+
+\[
+I_{\rm clamp}=\frac{|v|}{R_s},\quad
+P_{\rm copper,clamp}=\frac{v^2}{R_s},\quad
+V_{\rm load}=\frac{|v|R_L}{R_s+R_L},\quad
+P_{\rm load}=\frac{v^2R_L}{(R_s+R_L)^2}.
+\]
+
+This assumes independent ideal half-winding Thevenin sources, zero-drop diode and an otherwise standard bridge with hard N=M, **not actual measured coils**. Exact source funding is \(P_{\rm source}=P_{\rm load}+P_{\rm copper,positive}+P_{\rm copper,clamp}\). The normalized example \(|v|=1,R_s=1,R_L=2\) gives output \(2/9\), negative winding heat 1, positive winding heat \(1/9\), source power \(4/3\), useful fraction **1/6**: direct clamping can be costly, not amplifying. When the return includes positive series resistance \(R_b\) instead, \(I_{\rm return}=|v|/(R_s+R_b)\) with \(V_N-V_M=-|v|R_b/(R_s+R_b)\). With a **capacitor** in that return, in an RMS phasor model \(I=V/[R_s+1/(i\omega C)]\) and \(\overline P_{\rm source}=R_s|I|^2\) while ideal capacitor mean real work is zero; an **LC path** \(Z=R_s+i(\omega L-1/(\omega C))\) can rotate phase or resonate but must pay all resistive/controller/source work.
+
+**Separate literal-diode input grouping:** a *hypothetical* positive diode-OR pair from a capacitor-coupled node X and coil node Y can use four packages arranged two each with ganged cathode/output P. This directly respects “two off the cap, two off here” and literal “all forward facing” better than assuming a full conventional bridge. It still requires genuine separate electrical X/Y nodes and a defined return M/N; the capacitor is not an independently replenished natural source. Two equally named wires may actually be the same node after tracing. Source count, source voltages, rectified currents and natural inflow are not established by the phrase “harvest amperage.”
+
+| Gate | Paid source/math progress | Physical or formal payment still missing |
+| --- | --- | --- |
+| **C0 exact words** | Restored direct “two diodes off cap, two off here”, return “midpoint, earth, ground” | Original filmed diode cathode/anode and exact clip provenance |
+| **C1 connectivity** | Separate diode input-group pairing from count, ordinary bridge skeleton from split-rail load choice | Whether cap/coil X/Y, winding A/B and positive P actually coincide |
+| **C2 finite bridge return** | Both half-cycle clamp routes, source finite impedance/heat, original ideal exclusion scoped | Actual transformer resistance/inductance and whether N=M really hard-wired |
+| **C3 mediated return** | Exact resistor and capacitor/LC phase-dependent work, no free source energy | Original intervening impedance/component between N, M and Earth |
+| **C4 half voltage** | CT and bridge distinct expected P-M/P-N voltage reference | Original measurement terminals, waveform, peak vs RMS, phase |
+| **C5 Earth steelman** | Receiver may couple external donor via driver; output-only funding rank underdetermined | Original signed Earth/chemical/RF and controller/drive/load work, storage return |
+| **C6 Agda and math** | New finite source-owner module, 65/65 local exact arithmetic | Agda kernel receipt; committed companion execution separately required |
+| **C7 historical identity** | No automatic Kelly/Filsinger circuit collapse; no automatic coil-cap donor | Exact original reel/source to pin correspondence |
+| **C8 safety** | Source text/ideal reverse solve only | No hazardous live HV test or construction recommendation |
+
+**Next logical step:** classify physical node **N↔M** as hard, finite-capacitive, finite-resistive, switch/diode-mediated or separated, and classify **X/Y** as distinct capacitor/coil versus the two winding ends. Those two independent decisions now dominate the source-constrained inverse problem. Original empirical raw evidence archive remains **0/24** roles; the mathematical result does not establish actual atmospheric or Earth energy extraction.
+
+---
+
 ## P1 same-source steelman BIDI reverse solve — midpoint, four diodes and Earth return (B0–B8)
 
 **22 November 2026: user-requested logical inverse cut after V0–V7 audit.** Do not ask for arbitrary new hardware drawings before exhausting source-constrained candidate completions. The prior user's literal midpoint/NST transcript states **two diodes off each secondary wire, four total, all forward facing, positive outputs ganged, centre tap accessible, return described as midpoint/Earth/ground, half the big-coil potential, capacitor across a selected coil causing a claimed pole shift, spark-gap dump and coil claimed to receive amperage**. The exact reel association to \`Dfu9Jseviz9\` is provisional; these words do not turn the separate three-Earth-contact \`Dfi1D7CPzyM\` or shunt \`DfiqPnkPnP5\` into the same physical build. Do not collapse Kelly/Smith Fig10/11/40 or the earlier user-observed blue/green part candidates into a single authoritative wire diagram.
