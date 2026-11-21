@@ -1,5 +1,14 @@
 # Current DASHI RH BIDI vs Alpöge RH / GRH — exact gap-directed depth cut
 
+## 21 November — LATEST P0 is GRH first; original source directional BIDI now explicit
+
+The user clarified **P0 GRH is controlling**, so prioritize the exact original **all-Dirichlet-character** terminal, not P1 geometric construction. New [Lean PR #113 `proofs/alpoge-lean433/RHGRHP0DirectionalSourceCut.lean`](https://github.com/chboishabba/dashi_lean4/blob/research/alpoge-rh-source-admission-20261121/proofs/alpoge-lean433/RHGRHP0DirectionalSourceCut.lean) composes source-pinned original `RowSrc.galoisLocalGlobalStrong_recParameter` → `vwin_of_row` → `every_character_of_literature_of_vWin` → `UpperTheory.EveryCharacter`, and **then** original `Formalism.VW.rh_of_every`, `Claim.strip`, `Formalism.VW.critLine` to all original published RH/Dirichlet targets.
+
+**Genuine BIDI on original RH target:** `RiemannZetaZerosOnLine ↔ Mathlib.RiemannHypothesis` is definitionally the same source predicate per pinned `src/Statements.lean`. `Claim.Zeta ↔ RiemannHypothesis` is original `Claim.zeta_iff`. `Claim.HalfPlane ↔ UpperTheory.EveryCharacter` is original definitionally identical all-character right half-plane predicate. **Direction to distinguish:** EveryCharacter → RH, but ordinary RH does **not carry a source theorem** implying EveryCharacter/Dirichlet GRH. Do NOT describe this as proof that RH→GRH is mathematically impossible. The independent root `MillenniumExternal.ExactTargetSurface` has `Millennium.ClayRiemannHypothesis ↔ Mathlib.RiemannHypothesis`; it is not a global GRH target for every character.
+
+**GRH P0 stop depth:** preserve the source-authorized `EveryCharacter` and original 4.33.1 proof spine, inspect `#print axioms` and local kernel admission, then separate proof-compatible root/Agda transport. **No local Lean binary/kerneled statement acceptance, no CI**. The external fork's reported acceptance in a separate environment is not DASHI receipt. The finite Monster C27 charge-additive conditional mode, native sign holonomy, π/CM cubic Jacobi and 9DOF may yield an interesting **future P1 source proof improvement**, but no actual source `Chr/IsHecke` or `GalStar.Row0b recT` producer from them exists; do NOT put it on the P0 critical path.
+
+
 **Date:** 21 November 2026. Source-pinned fork `chboishabba/riemann-hypothesis-lean@7cbf7a0c32fca1badf05931879a37c3f8a2b03b4`; DASHI Lean integration [#113](https://github.com/chboishabba/dashi_lean4/pull/113); golden Agda [#1533](https://github.com/chboishabba/dashi_agda/pull/1533). **Steelman → BIDI → reverse solve; original source typed objects before theoretical analogy.** No CI, no original Lean/Agda kernel run in this cut. Typed Lean source written but uncompiled.
 
 ## Executive conclusion: TWO different reverse problems, not one missing estimate
