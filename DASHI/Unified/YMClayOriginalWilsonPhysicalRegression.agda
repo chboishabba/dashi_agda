@@ -74,6 +74,12 @@ import DASHI.Physics.YangMills.YMClayOriginalWilsonMarkedOS1AllTimesProducerWeld
 -- and closes at one R281 indexed spectrum (not physical H_OS yet).
 import DASHI.Physics.YangMills.YMClayOriginalWilsonOS1R556R281CommutingSquareExact as OriginalOS1CovarianceSquare
 
+-- P0 original t × k residual HYPERFABRIC: native R445 C4 split into
+-- source-owned C2 coarse × parity remainder, original 128+896 bond
+-- complete enumeration, exact odd-step carry and independent ternary
+-- zero/sign wave symbol. This is NOT a physical continuum limit.
+import DASHI.Physics.YangMills.YMClayR445TimeKResidualHyperfabricExact as OriginalTimeKResidual
+
 import DASHI.Physics.YangMills.YMClayD1OriginalCovarianceToR320Exact as D1OriginalCovariance
 
 import DASHI.Physics.YangMills.YMClayE1VariableCutoffCylinderLimitExact as E1VariableCutoffCylinder
