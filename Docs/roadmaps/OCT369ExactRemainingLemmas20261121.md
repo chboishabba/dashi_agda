@@ -145,3 +145,10 @@ Important: symbolic 1+omega+omega²=0 with sum omega^(3j)=3 is only a C3 angular
 | P0.26-sign | Upward required k4 = -mg/(3N mu a²), not positive; magnetic domain sign different from inversion and spinor central sign | Exact opposite-domain/inversion discrimination |
 | P0.26-illustrative | Unfitted mu=3 muB, a=.4nm, N=10^24, 10T at 1mm chosen polynomial: F~1.34e-7N vs 686.47N | Illustrative only, NOT universal experimental feasibility bound |
 | P0.26-physical | Real PtMn3 T1g operator/film, applied coil gradient and source reaction, measured moment, current driven OTT, actual total stress, GR/freefall/clock | OPEN |
+
+| P0.27-crystal-centre | Correct physical inversion Pt(0,0,0), not Mn triangle centroid; old centroid-paired sites fail original Mn 3c lattice membership | **52/52 local SymPy assertions**, P0.26 finite model correction |
+| P0.27-rank3 | Pt-site actual inversion partner paired six-point STF Mxyz=-sqrt6*a²*mu/6, vs artificial centroid -sqrt6*a²*mu/18 | Exact local model; not source-defined gauge-invariant periodic quantum octupole |
+| P0.27-sample-image | Basis relabel + opposite cell index leaves physical atoms/force invariant; replacing physical members by other lattice images changes finite set and apparent force -3 to +1 in units a²*mu*k4 | Exact counterexample, **NOT** gauge dependence of fixed device |
+| P0.27-field-packing | For 6 Mn per two L12 formula cells, selected ideal field volume N≈L³/(2a³), k4≈B/L³; F≈3mu B/(2a) if ideal motif tiling and field uniformity hold | Conditional scaling; 1mm and 10T example ~1.04e-12N, not actual device |
+| P0.27-periodic-thermo | Implement Sato-Hayami original gauge-invariant Bloch/thermodynamic magnetic octupole with actual PtMn3 spin texture & bands | **OPEN**; paper's equations and original ownership retained |
+| P0.27-controller-gravity | Same-device bounded Maxwell source, coils/SC/battery/support & real Tmunu, direct force and remote gravity discrimination | OPEN |
