@@ -1,3 +1,39 @@
+## 21 Nov 2026 — expanded local-only GRH strip weld acceptance (current)
+
+The EXTENDED exact SymPy source `check_grh_p0_original_all_characters_sympy.py`
+was independently reread from Lean #113 (blob
+`a863088d5c8355271501dbecd5346829d8a120fa`).
+A fresh local equivalent-script execution for all moduli 1..32
+(`--max-modulus 32 --cutoff 180`) passed:
+**324/324 complex characters**, **58,320/58,320**
+cyclotomic coefficient identities, **100,074** group
+multiplicativity instances and **205** primitive characters.
+The generic unit-circle norm identity, critical-line lower bound,
+all boundary negative controls and selected χ5→χ10
+**1,000/1,000** coefficient weld also PASS.
+
+The root `MillenniumExternal/AlpogeRHBoundaryExact.lean`
+was reread after `4b45d7ef`: the malformed block-comment
+terminator is gone and the correct `-/` is present.
+These are actual Git source readback and local SymPy checks,
+not Lean/Agda elaboration or trusted root proof admission.
+The root code still explicitly consumes
+`(admitted : _root_.RiemannHypothesis)`, i.e. a
+**supplied** proof, not an imported original theorem.
+
+**Completion boundary:** original external author's five terminal
+theorems and independently reported kernel checks are one
+provenance layer. This DASHI integration cannot mark its
+root/Agda all-character targets **completed** without
+compatible kernel proof import and same-character complex
+analytic-function/zero identity. The classical primitive/
+imprimitive Euler-factor argument establishes that omitted
+factors do not introduce zeros in the OPEN strip only.
+Do not count their algebraic acceptance as a new GRH proof.
+This existing document is the controlling roadmap.
+
+---
+
 ## 21 Nov 2026 — P0 original RH root repaired; imprimitive Euler strip weld (CURRENT)
 
 **Weld, not another roadmap or a new zero carrier.**
