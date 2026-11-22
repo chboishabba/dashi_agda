@@ -1,3 +1,128 @@
+## 22 November 2026 — EXPLICIT original Mathlib-bump J2/q4 radius certificate (P0, no RH promotion)
+
+**Source-checked, independently calculated mathematical inequality**;
+local SymPy + exact rational majorant test:
+`scripts/check_rh_original_bump_explicit_radius_20261122.py`
+(source commit `67e6bdf2`). Earlier
+`scripts/check_rh_four_window_uniform_horizontal_transfer_20261122.py`
+supplies the independent finite-pole bound, not a surrogate Gaussian.
+All numeric radii are intentionally extremely conservative.
+
+**Attribution / exact owners.** Original
+`Synthesis/RiemannQuantitativeScaledBump.lean` has
+`unitContDiffBump : ContDiffBump 0` with `rIn=1/2`,
+`rOut=1`, and `scaledUnitBump c R u=unitBump((u-c)/R)`.
+The three needed underlying Mathlib API properties are
+`ContDiffBump.neg` (evenness at centre zero),
+`ContDiffBump.le_one` and `ContDiffBump.one_of_mem_closedBall`
+(0<=b<=1; b=1 on |x|<=1/2), together with support |x|<1
+(source already proves nonneg and support). Read source:
+https://leanprover-community.github.io/mathlib4_docs/Mathlib/Analysis/Calculus/BumpFunction/Basic.html
+These facts are from **Mathlib**, not novel DASHI results.
+Existing `RiemannQuantitativeSymBumpLocalization.lean` and
+`RiemannProjectiveQuarticFourWindow.lean` give the exact normalized
+four-window pairings; `RiemannProjectiveQuarticFourWindowAtomicCorridor.lean`
+gives the original mu corridor/J4 margin; `PoleSameObject.lean`
+and `SignedPoleJointHorizontalJet.lean` give the physical pole and
+horizontal factors. A new Lean import/weld has **not** been kernel checked.
+
+Set **R=10^-10**, and let b be the actual unit bump, Z its mass-normalized
+coordinate, Y=RZ and `eps=E[Y²]/2`.
+The plateau and upper bound give
+`1<=M0<=2`,
+`E[Z²]>=(integral_-1/2^1/2 z² dz)/2=1/24`;
+thus `R²/48<=eps<=R²/2`.
+The normalized translated/reflected bumps represent precisely this even
+Y carrier at each centre for every even source weight.
+
+**Exact J2 near-atomic branch, not a guessed linear mu.**
+For lambda in {1/2,2/3}, original `J2=A1*M2-A2*M1`.
+The mu coefficient at R=0 is `pi²(8-3lambda)/4>=3pi²/2`.
+With `mu_trial=mu0(lambda)+mu1(lambda)*eps` and previously
+source-verified `mu1`, Fourier Taylor envelopes yield
+```text
+|J2_exact(mu_trial)-J2_truncated(mu_trial)| <= 720 R^4,
+|J2_truncated(mu_trial)|                 <= 4560 R^4,
+|J2_exact(mu_trial)|                     <= 5280 R^4.
+d_mu J2_exact >= 3*pi²/2-1188 R² >10 (R<=1/100, |mu|<=1/10).
+```
+IVT on `mu_trial +/-600 R^4` (derivative>=10) gives an
+**exact unique original J2 root** for each selected endpoint,
+`|mu_exact-mu_trial|<=600 R^4`. For R=10^-10 the
+original corridor `|mu_exact-mu0|<=1/10000` and `|mu|<1/10`
+are respected. The second, remote quadratic root, if any, is
+**not** promoted.
+
+**Original J4 witness sign.** For |x|<5,k=1,2,
+`|(x^4 cos(kx))''|<=4800`, hence
+`|J4_smooth(lambda,mu)-J4_atom(lambda,mu)|<=65700 R²`.
+Atomic J4 changes by at most `392*|mu-mu0|`
+over the corridor, and `|mu_exact-mu0|<=0.56R²`.
+The total deviation from the original J4-null value is <`67000R²`.
+The original `J4_atom(lambda,mu0)<=-pi^4/243<-1/3`
+implies `J4_smooth(lambda,mu_exact)<-1/4` at R=10^-10.
+
+**High-pole positive q4 margin with explicit R4 envelope.**
+All source frequencies are at most 18. At each original endpoint,
+the Fourier surrogates obey
+`phi=1-eps*k²`, `phi'=-2eps*k`, `phi''=-2eps`
+up to the explicit R4 errors.
+For original `P=(A15+A17)A2/2-(A14+A18)A1/2`,
+`Q=2[A1(A2+A6)-A2(A3+A5)]`, `K=P_two Q_half-P_half Q_two`:
+```text
+|P_exact-P_truncated| <= 78744 R^4
+|Q_exact-Q_truncated| <=  7776 R^4
+|K_exact(mu_trial)-K_truncated(mu_trial)| <=11619072 R^4
+|K_exact(mu_exact)-K_exact(mu_trial)|     <= 2073600 R^4
+K_truncated(mu_trial)= (120/13)*eps + Rem_poly
+|Rem_poly|<= 91395200000000*eps² <=22848800000000 R^4
+total |K_exact-(120/13)*eps|<=22848813692672 R^4
+                                      <23000000000000 R^4.
+```
+These numbers follow from conservative coefficient ℓ¹
+majorants, not floating-point samples. Consequently
+```text
+kappa_R=K_infty(0,4;R)
+ >= (120/13)*(R²/48)-22848813692672 R^4
+ > R²/6  (R=10^-10).
+```
+By independent same-source finite-pole transfer,
+`|K_t(a,4;R)-kappa_R|<13,000,000/t²` for
+`|a|<=1/2,t>=200`. For **every t>=10^14**:
+```text
+K_t(a,4;R) > R²/6 - 13,000,000/(10^14)^2
+           = (11/300) R² >0.
+```
+The source-defined `q=4` is **moving physical ordinate**
+`gamma=5t/4` and is NOT an actual zero census.
+
+**Mandatory negative sign control.**
+Original atomic high-pole `K_infty(0,1)=-80/351<0`.
+There is no pointwise all-q positivity; do not transfer the
+q=4 fixed-radius certificate into a sum over unrestricted
+actual off-line zeros or infer a signed compensation from it.
+
+**Our indexed geometry / proof-state receipts.** Keep the
+three axes reflection, smoothing and finite-pole limit
+(8 typed vertices / 12 maps / 6 square faces) together with
+history/time/refinement/Frobenius/consumer, balanced ternary
+sign and the distinction between scalar zero, exponent-zero
+C3 unity phase, nonempty cancelled C3 orbit, zero Fourier
+observation and actual ζ(s)=0 (with multiplicity).
+Source-checked algebraic reflection is accepted;
+no unverified analytic zero-transport, q-to-gamma cross-chart
+or smoothing/pole face is marked proved. Retain negative far
+source, mu background, prime side and local slack
+in **`H_n+E_n+S_W<T_W(rho)` (OPEN)**.
+
+**Acceptance ledger:** local SymPy source algebra and rational
+majorants PASS; exact Mathlib bump API references identified;
+the written analytic inequalities are mathematical derivations,
+**not** independent interval-code/kernel-certified Lean/Agda
+theorems. No Agda/Lean CI or root-closing RH/GRH assertion.
+
+---
+
 ## 22 November 2026 — uniform horizontal finite-t transfer from a positive smooth high-pole margin
 
 **New explicit source estimate** (local mathematical derivation; no kernel):
