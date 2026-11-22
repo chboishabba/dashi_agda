@@ -1,3 +1,9 @@
+## 22 November 2026 — Eisenstein/BSD versus original Wilson full finite complex Gram: strict source separation
+
+YM master-based #1536 now source-writes a [full finite complex-coefficient original-Wilson C3 reflected Gram](https://github.com/chboishabba/dashi_agda/blob/agent/ym-p0-cmp119-r445-master-weld-20261121/DASHI/Physics/YangMills/YMClayOriginalC3FullFiniteComplexCoefficientGramBidiExact.agda) reusing actual original Wilson/Haar normalized expectation and pre-existing T5 full double-sum, rather than independent finite covariance/RP/H. C3 invariance is **conditional** on actual original density, native labels and reflection. Equivalent exact local SymPy 55/55 passes for known finite Q8 eigenvalues and artificial spectral no-go; exact Git script and Agda kernel not run. Finite complex coefficients are not a full complex-valued physical cylinder algebra or a same-H OS action. Original physical E1/D1/D2/N1/G1 remain OPEN.
+
+BSD selected E32 (conductor 32, CM Gaussian Z[i]) and Lean E36 (conductor 36, CM Eisenstein Z[omega]) remain **distinct curves**. Neither E32 Kummer isogeny kernel nor E36 C3 arithmetic automorphism is an original Yang–Mills physical Gram-null, Hilbert vector or H eigenmode. Character projectors are only algebraic donors until a true physical same-E1 OS unitary and dense full-sector uniform rate is built. Source owners and attribution unchanged; **BSD K1–K5 and universal endpoint remain OPEN**.
+
 ## 21 Nov 2026 — P0 GRH retained; BSD/RH Mellin already owned
 
 **Source-first weld forward:** original `MellinSplitFunctionalEquationExact`
