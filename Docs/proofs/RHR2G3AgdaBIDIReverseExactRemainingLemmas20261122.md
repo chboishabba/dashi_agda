@@ -1,3 +1,39 @@
+## 22 November 2026 — original J2 smooth-branch transversality and conditional positive wedge
+
+Local exact independent SymPy:
+`scripts/check_rh_j2_branch_wedge_20261122.py`, evaluated in a local Python environment before committing. Original four-centre source: J2=A1 M2-A2 M1 with finite atomic weights (1,-1,lambda,mu). At its exact atomic null `mu0=(13lambda-8)/(144-54lambda)`,
+
+```text
+dJ2/dmu = pi²(8-3lambda)/4 >= 3pi²/2 > 0,
+lambda in [1/2,2/3].
+mu1(1/2) = -4*(77+2sqrt(3))/(507*pi).
+mu1(2/3) = -16*(34+3sqrt(3))/(729*pi).
+```
+
+For an **individual fixed reference nonnegative even compactly supported normalized bump shape** B, scaled as Y=R*Z with E[Z²]=m2>0 and bounded support |Z|<=1, source pairings are locally real analytic in R for the trigonometric, polynomial and cosh functions actually in this source; by the nonzero derivative the exact J2=0 root mu(lambda,R) is locally unique/analytic at each endpoint and even in R. The same IFT is uniform over the compact selected lambda interval, subject to the source family hypotheses. This is a mathematical implicit-function argument, **not** Lean compiler acceptance or a numerical explicit radius. The original normalized Mathlib bump must be checked to be precisely a fixed-shape scaling before identifying this branch with its source witness.
+
+**Conditional local two-parameter positive wedge.** At q=4, u=pi/t, physical |a|<=1/2-delta with fixed 0<delta<1/2, the existing exact jets give the nonnegative leading polynomial
+```text
+K = (120/13)*eps
+  + 640*(2pi-sqrt(3))/(39pi)*eps*u²
+  + 2560*(sqrt(3)+2pi)/(39pi)*eps*a²*u²
+  + (5120/351)*(1-16a^4)*u^4
+  + Rem.
+eps=m2*R²/2.
+```
+With even compact bump and analytic J2 branch the formal Taylor remainder can be bounded on a sufficiently small compact polydisc by
+`|Rem| <= C*(R^4+R²*u^4+u^6)`, with C finite, independently of bounded physical a. This **bound is not presently explicit or kernel-checked** and must be verified against the original source branch and all omitted terms; in particular its coefficient and radius are not certified.
+
+Algebraic exact domination (SymPy tested):
+```text
+R^4+R²*u^4+u^6 <= (R²+u²)*(R²+u^4), R,u>=0.
+```
+On |a|<=1/2-delta, the coefficients of R² and u⁴ have a strictly positive minimum `cmin`. If `C*(R²+u²)<cmin`, then `K>0` for R>0 or u>0 in this small wedge. This is a mathematically valid **conditional compiler** under the source-specific remainder bound, not a proved finite-t global sign certificate. It gives no sign at other q and cannot replace a signed sum over actual off-line zeta zeros.
+
+**Retain our six-face indexed geometry:** original reflection of a, smoothing R and finite-pole u are separately typed axes; eight vertices, twelve directed maps and six face obligations. The algebraic parity of the kernel is paid; a Fourier-zero observation is not an analytic zeta zero; other smoothing/pole commuting faces and actual-zero transports remain uninhabited. Retain signed ternary orientation, multiplicity, nonempty balanced cancellation and prime-side/local slack. Main missing actual-zero terminal is still `H_n+E_n+S_W<T_W(rho)`, and no RH/GRH completion follows.
+
+---
+
 ## 22 November 2026 — off-line horizontal mixed positive-width jet (normalization explicit)
 
 Exact original-source local SymPy algebra in `scripts/check_rh_offline_positive_width_horizontal_jet_20261122.py` extends the previous q=4 a=0 result to physical off-line a=beta-1/2. The argument is **not** a generic kernel, it is the original J2-selected four-window pair and original finite pole orientation.
