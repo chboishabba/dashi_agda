@@ -1,3 +1,144 @@
+## 22 November 2026 — A2 source-exact leading local asymptotic SIGN and the true FarExact cut
+
+**Original source ownership** (re-read merged `chboishabba/dashi_lean4` PR #22 on `main`):
+`Synthesis/RiemannProjectiveQuarticFourWindowSignedPoleA2ScalarAudit.lean`
+owns the exact `postSixthTerminalM6BudgetAt_lt_threshold_iff`.
+`...SignedPolePostSixthAbsorb.lean` owns literal expanded count,
+signed M6 cap, original sixth envelope, eighth envelope,
+`literalFarExactAt`, its base+horizontal decomposition,
+and the CURRENT absolute shell `farShellBound`.
+`...SignedPoleV4EndpointAbsorb.lean` owns the actual N-mu V4
+discrepancy, expanded-count producer and smooth-mu lower envelope.
+`...SignedPoleConeDecomposition.lean` owns
+`compensationTargetThreshold rho = 4*combinedZeroHeightDefect rho
++ integral (signedOrdinateTest*Zeta23.mu)`.
+The latter smooth integral and the target's height defect MUST
+be retained separately from the local A2 budget.
+
+**Local asymptotic with no surrogate count.**
+Set `v=t/16`, `eta=1/(pi+1)`, `r=eta*v`,
+`ell=log(t)/(2*pi)`,
+`S=W.targetStrength`, `L=W.fourthLipschitz`,
+and literal `NZ=(zetaZeroConfig.N (t-r-1) (t+r) : R)`.
+The original RvM N-mu producer yields `NZ=2*r*ell+O(log t)`
+on this positive proportional width, assuming the usual
+fixed canonical eta. The source's chosen `EV=O(r^4*log t)`.
+Its contributions in local budget after dividing by `v^6`
+have orders `EV -> O(log t/t^2)`,
+`(3/2)r² NZ -> O(log t/t^3)`.
+The leading real-source *local* A2 terms are all of order
+`ell/v = O(log t/t)`:
+```text
+MuGain     =   eta^5 * ell / v * (S/15)         + lower order
+SixthDebt  =   eta^5 * ell / v * (pi^6*eta²/2400)+ lower order
+EighthDebt =   eta^5 * ell / v * (L*eta²/8500) + lower order
+
+LocalPositiveDebt - MuGain
+  = eta^5*ell/v *
+    [-S/15 + pi^6*eta²/2400 + L*eta²/8500]
+    + lower order.
+```
+Here `lower order` is for a fixed witness shape or a
+uniformly controlled witness family; the repository's
+`exists W(t)` alone does NOT imply uniform control of
+S(t), L(t), R(t), derivatives or errors. This is NOT
+a statement about `FarExact` or `T_W(rho)`.
+
+The exact negative local leading-coefficient criterion is
+```text
+S > pi^6*eta²/160 + 3*eta²*L/1700.
+```
+At the original theorem's floor `S >= 7pi^4/1600 ~=0.426165`,
+this condition is guaranteed only when the actual L is
+below approximately 737.365. The floor + sixth cap
+alone do not provide this L upper bound.
+
+**New exact original atomic high-pole test**:
+local SymPy/exact rational executable
+`scripts/check_rh_a2_atomic_high_pole_sign_20261122.py`
+(commit `5453c8f9`). Source uses the ORIGINAL 4 centres
+`(0,pi/3,pi/2,pi)`, original J2-null mu roots,
+original high pole `P_two=1`, `P_half=9/8`, and actual
+signed projective `4G*(A1 cos2-A2 cos1)`.
+The selected profile's atomic centre masses are EXACTLY
+```text
+(-40/117, 0, 160/351, -40/351).
+```
+Consequently, with ORIGINAL source normalization,
+```text
+S_atom=5*pi^4/234                      ~= 2.0813908341,
+M6_atom=-25*pi^6/234                   ~= -102.71252068,
+L_atom=5*pi^5/351*(cosh(pi/2)+8cosh(pi)) ~=415.19636904.
+```
+The `L_atom` formula is the **cosh-weighted absolute fifth
+moment** of the original high-pole *atomic* selected profile,
+matching the definition consumed by the G1 fourthLipschitz
+carrier as a formal atomic limit. It is NOT an already
+Lean-kernel-checked value of `W.fourthLipschitz` for R>0.
+Both `S_atom >=7pi^4/1600` and
+`-(3/20)pi^6 <= M6_atom < 0` hold exactly.
+The resulting leading local A2 coefficient is
+```text
+C_atom = -S_atom/15
+       + pi^6*eta²/2400
+       + L_atom*eta²/8500
+       ~= -0.11255808466253.
+```
+A **non-decimal rational certificate** proves
+`C_atom < -1/20`: use `3<pi<22/7`,
+`eta²<1/16`, `cosh(pi/2),cosh(pi)<cosh4<28`.
+The last follows from the exact rational Taylor-geometric
+bound `exp(4)<55`. The actual inequality passes exact
+SymPy rational assertions. This establishes the
+**atomic high-pole local asymptotic sign only**, and
+supplies a robust margin available for future R>0/t-large
+source-continuity weld. It does NOT establish that the
+actual smooth selected `W(t)` inherits this L/S bound
+uniformly, or that the **full** A2 strict inequality holds.
+
+**Why existing absolute far shell does not settle this.**
+Lean's owned `farShellBound A |t| J =
+18*A*log(|t|+4)/J + 72*A/sqrt(J)`, with
+`A>=1` and canonical `J=floor(t/2000)`,
+carries a positive `t^(-1/2)` MAJORANT component.
+Even optimizing J within the local far cutoff leaves
+a `sqrt(t)^(-1)` upper-envelope scale, coarser than
+the local `log(t)/t` leading balance. This is a
+**resolution obstruction of this specific absolute
+majorant**, NOT a lower bound on the true signed FarExact
+and NOT a refutation of RH. The source separately
+identifies `FarExact = FarBaseExact + FarHorizontalExact`,
+with the horizontal term's uniform bound conditional on a
+`HorizontalFarCurvatureBound CH`.
+The exact A2 remaining condition is
+```text
+FarExact - compensationTargetThreshold(rho)
+  < MuGain - LocalPositiveDebt
+```
+on the actual finite/exhausted signed source.
+Crucially `compensationTargetThreshold` contains both
+`4*combinedZeroHeightDefect rho` and the full
+`integral Psi_W*Zeta23.mu`, whose sign/scale
+has NOT been inferred from the atomic local sign.
+Keep the open left endpoint atom, true Zeros multiplicities,
+SameOrd exclusion, negative far and local slack in every weld.
+
+**Next narrow proof gate:** (1) transfer the strict atom
+`S/L/M6` margin to the **same selected R>0 finite-t W**,
+including its target band/quantitative radius, then
+(2) improve the literal far-vs-threshold comparison by
+source-aware signed cancellation or a genuinely sharper
+zero-shell theorem; do not confuse improved *absolute*
+far bounds with a signed payment.
+No Agda/Lean kernel, CI, actual off-line ζ-zero test,
+or RH/GRH completion is claimed. Our 8-vertex,
+12-map, 6-face indexed geometry retains its
+history/time/refinement/Frobenius/consumer labels,
+balanced ternary sign, distinct zero types and unpaid
+analytic commuting/transport faces.
+
+---
+
 ## 22 November 2026 — A2 source-priority recut: strongest existing actual-zero compiler
 
 Following the reflected-cloud finite negative control, the MERGED
