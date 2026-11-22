@@ -82,7 +82,7 @@ Locally executed Python/SymPy 1.14 script:
 
     scripts/check_ym_original_sun_dobrushin_strongcoupling_20261122.py
 
-GitHub commit d17e40ea. Exhaustive genuine periodic L=3,4,5 geometry tests PASS (324/1024/2500 original links; 486/1536/3750 original plaquettes; all six/18 incidences and unique shared face). Independent exact symbolic extremization for exponential-tilt TV passes, as do rational β<=1/36 and explicit graph-resolvent conservative spatial envelope. The committed code has been read back; do not claim exact checked-out bytes executed without an independent blob SHA equality receipt. This script is a geometric/elementary analytic reference **not** actual full original continuous SU(N) numerical integral, not an Agda proof, not CI.
+GitHub commit d17e40ea. Exhaustive genuine periodic L=3,4,5 geometry tests PASS (324/1024/2500 original links; 486/1536/3750 original plaquettes; all six/18 incidences and unique shared face). Independent exact symbolic extremization for exponential-tilt TV passes, as do rational β<=1/36 and explicit graph-resolvent conservative spatial envelope. The committed code has been read back and its Git blob SHA a66563d2987a2e3f3768b06519a237a3e80ae732 was verified **equal to the locally executed file's independently computed Git blob SHA**. This is an exact byte-level local-source receipt (still not Agda or CI). This script is a geometric/elementary analytic reference **not** actual full original continuous SU(N) numerical integral, not an Agda proof, not CI.
 
 Standard theorem/provenance:
 - R. L. Dobrushin, 1968, interdependence uniqueness criterion.
