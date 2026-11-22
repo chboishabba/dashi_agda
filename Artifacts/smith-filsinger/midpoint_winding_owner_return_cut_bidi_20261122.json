@@ -69,5 +69,15 @@
     "formalStatus": "Source-written, uses Circuit36927ComponentGraphExact existing part-pin owner, Agda kernel not run"
   },
   "originalEvidence": "0/24 physically verified raw evidence roles from prior audit, unchanged",
-  "safety": "Pure archival and analytical inverse; no live high-voltage construction or probing instructions."
+  "safety": "Pure archival and analytical inverse; no live high-voltage construction or probing instructions.",
+  "transientCorrection20261122": {
+    "reason": "Speaker source has spark-gap dumping; a truly floating but precharged source island may emit a transient while net island charge decreases.",
+    "generalLaw": "dQ_island/dt + sum outward diode currents = incoming return current",
+    "stationaryCut": "The old all-four-zero proof assumes no inward return and zero instantaneous net island charge derivative; or nonnegative outward currents integrated over a fully restored charge cycle.",
+    "finiteTime": "No-return source island may emit finite outward charge Q_start-Q_end. Restoration and repeated useful output require a physically supplied return or other input mechanism.",
+    "notEquivalent": "The selected capacitor across coil has internal differential storage; it does not automatically serve as an exterior/common-mode storage capacitance.",
+    "exactCheck": "28/28 PASS locally, /mnt/data/check_filsinger_transient_charge_return_sympy_20261122.py, Git hash 30de320edaea8ab5539be0c05c42977c50f48b80 local executed file only",
+    "source": "Artifacts/smith-filsinger/midpoint_transient_charge_return_bidi_20261122.json",
+    "physicalOriginal": "Undetermined physical source wiring and spark output; original raw evidence 0/24"
+  }
 }
