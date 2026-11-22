@@ -70,4 +70,19 @@ physical W3 and same-H E1/D2 remain OPEN.
 C3 and mirror act with W transformed;
 not a proof of original positive-time RP.
 end note
+
+' 22-Nov stronger original Wilson first-R445 source: actual COARSE action
+note left of OriginalWilsonC3
+Native original full Wilson R445: each first fine link
+U0_i=W_i*V_i^-1 affects exactly 6 true plaquettes
+with 19 conditional variables and total osc<=96 beta.
+At disjoint affected plaquette stars,
+actual coarse log K0(W) 4-corner contrast is
+integral Cov(Delta_i,Delta_j), bounded by
+(96 beta)^2 q^d/(1-q), q=36 tanh(beta).
+At beta<=1/72 and d=3, <=4/9.
+This is actual coarse quasilocality at SMALL beta,
+NOT CMP119/122 renormalized ABSOLUTE W3
+or physical beta(a)->infinity; no TOE spectrum.
+end note
 @enduml
