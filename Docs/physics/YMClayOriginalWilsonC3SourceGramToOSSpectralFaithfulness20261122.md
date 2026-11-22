@@ -70,3 +70,31 @@ Local independent exact SymPy 1.14.0 reference: `scripts/check_ym_original_wilso
 The selected finite density in `YMClayOriginalWilsonC3WeightedHaarTransferExact` is **definitionally** `YMClaySUNVariablePeriodicGibbsGaugeExact.periodicSUNGibbsDensity` at `n=3`. Inspection of its body shows `exp(-beta * periodicSUNSixDeficit)`, with all 256 original sites and six plaquettes per site. **It does not, by that definition alone, contain any additional independently selected CMP119 E/R/B/V contributions.** Do not accidentally treat a theorem about this six-plane density as a theorem about extra action terms.
 
 Existing upstream producer `YMClaySUNNativeSixPlaneFullC3FromInverseTraceExact.nativeSUNWilsonGibbsDensityC3` already derives native finite six-plane C3 density invariance **conditional on the actual SU(N) real trace-of-inverse authority**, using `YMClaySUNMatrixNativeSixPlaneC3FromInverseTraceExact` and `YMClaySUNMatrixSpatialC3RealFubiniExact`. Therefore the next original P0 weld is specifically: (1) establish a *source-verified*, pointwise same-field/same-sum `periodicSUNSixDeficit(n=3)` ↔ `nativeSUNSixWilsonDeficit` identification (including source site order and original link field), (2) compose the **existing** native full-C3 density theorem with the original native-vector codec without assuming function extensionality, (3) separately account for any genuinely additional CMP119 terms and their own covariance instead of silently smuggling them into the pure Wilson measure. None of these three steps is claimed completed by the time-mirror commit. Full original Haar/canonical-label closure remains another independent premise.
+
+## 22 Nov 2026 — P0 native n=3/Variable pure-Wilson C3 density BIDI, exact local acceptance
+
+**Source-written on master-based YM PR #1536; Agda kernel NOT RUN.** New `DASHI/Physics/YangMills/YMClayOriginalWilsonN3NativeC3DensityBIDIExact.agda` is imported into the original physical regression root and included in the fail-closed **local** Agda acceptance runner (not CI). It establishes a conditional, same-source chain:
+
+```text
+original n=3 periodicSUNSixDeficit
+  -> (original positive signed SU(N) plaquette identity)
+  -> (flat canonical 4^4-site fold = original native nested sum)
+  -> original nativeSUNSixWilsonDeficit
+  -> SAME original exp(-beta * deficit) Gibbs density
+  -> existing native full-six-plane C3 theorem (real trace-inverse donor)
+  -> native 1024-vector codec/pointwise density
+  -> original actual WilsonC3 weighted Gibbs action C3 condition
+  -> prior original weighted-Haar normalized expectation
+  -> prior actual R445 temporal-mirror real Gram C3
+```
+
+This **removes the need to postulate a separate pure-Wilson C3 density-invariance premise**, *provided* the actual native real trace-inversion authority and Agda kernel acceptance are supplied. The independent 1024-label adjacent-swap permutation certificate is **still unproved**, and genuine SU(N) continuous Borel Haar/integrability is still missing.
+
+The flat canonical `Torus.elements (periodicTorus4Finite 4)` sum is **not literally definitionally the same expression** as `Gibbs.sumSitesReal`: four nested right-associated sums carry intermediate real zero terms. The new source uses original additive associativity and identity to prove `realSumCartesian`, plus the literal four-index equality, instead of incorrectly claiming `refl`. The original `Variable.sideFourPlaquetteSameNativeWilsonTrace` owns positive-plaquette identity, while `YMClaySUNNativeSixPlaneFullC3FromInverseTraceExact` owns the physical native C3 producer. Neither theorem is reimplemented.
+
+**Local exact SymPy 1.14.0 acceptance:** `scripts/check_ym_original_six_plane_native_variable_20261122.py`, **29,774/29,774 PASS**; the committed blob is byte-for-byte equal to the locally run file (Git blob SHA `657ce62e19f687ce067caa51c86be4c799196921`). Original 256 sites, 1,024 bonds, all six positive planes (1,536 per field), 8 deterministic noncommutative Q8 link fields; 12,288 signed-path versus independent explicit four-factor holonomies, 12,288 C3 plaquette real traces, 2,048 same-site deficits; C3^3, theta^2, pointwise orientation/inversion and field commutation, local gauge and full-action/density agreements, and rejected anisotropic/time-mixing negative controls. This is a **finite Q8 exact regression**, not a general SU(N) proof or continuous Haar/OS acceptance.
+
+**Important physical-source firewall:** `Variable.periodicSUNGibbsDensity n=3` is the original **pure six-plane Wilson** exponential. The conditional C3 theorem does **not** establish covariance of any additional independently selected CMP119 E/R/B/V terms. Those terms require their own actual action/source correspondence and symmetry proof, or a demonstrated identity to the selected pure-Wilson action. Nothing here constructs the complex positive-time RP form, cutoff-dependent E1 physical continuum, same-H OS unitary/semigroup, full D1 quantitative rooted-shell rate, D2 all-three-sector gap, N1/G1. Keep the independent Eisenstein C3 characters and all H05 zero/ternary distinctions.
+
+**Receipt:** SOURCE_WRITTEN; LOCAL_SYMPY_EXACT_PASS; KERNEL_PENDING; ORIGINAL_COMPLEX_OS_AND_FULL_CLAY_OPEN. Standard Wilson, Bałaban, Haar, Osterwalder–Schrader and earlier DASHI producers retain attribution.
+
