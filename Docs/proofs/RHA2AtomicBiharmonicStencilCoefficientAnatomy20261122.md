@@ -35,6 +35,20 @@ P2*half-P1*twoThirds =
 The `pi/3` coordinate is a **projective rank-one cancellation**:
 `1*3-(9/8)*(8/3)=0`. Both incoming source contributions are NONZERO, and their observed difference vanishes. This is not scalar zero of the source, not an actual zeta zero, and not an empty C3 phase orbit.
 
+### Where the numerator 40 comes from — exact cofactor, not a fitted scale
+
+The raw selected `40` also has a direct original projective origin. Upon substituting the SAME atomic `J2=0` root into the cosine columns, local exact SymPy gives
+
+```text
+A1(lambda)=1/2-mu0(lambda)
+          =40*(2-lambda)/(144-54lambda),
+A2(lambda)=3/2-lambda+mu0(lambda)
+          =2*(2-lambda)*(52-27lambda)/(144-54lambda),
+A2/A1=(52-27lambda)/20.
+```
+
+Thus `40` is a **cofactor of the original J2-null on-line moment**, arising algebraically from the sampled `(0,pi/3,pi/2,pi)` cosine matrix. It survives the endpoint projective wedge, and the fourfold `160=4*40` then comes from the folded fourth-difference coefficients. Its value changes with weight/normalization conventions, unlike the relative binomial fourth-difference geometry.
+
 ## 2. Exact negative square / folded fourth difference
 
 The surviving atoms are `c=0,h=pi/2,2h=pi`; the missing `pi/3` site carries exact observed zero. Write `evenAtom(c)=(delta_{+c}+delta_{-c})/2` (with `evenAtom(0)=delta_0`). The signed atomic high-pole projective carrier is
