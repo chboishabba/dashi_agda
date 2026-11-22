@@ -1,3 +1,24 @@
+## 22 November 2026 — P0 priority correction after merged Lean A2 source audit
+
+**Do not rebuild a localized M0/M2/M4 producer as the first A2 task.** The merged [Lean PR #22](https://github.com/chboishabba/dashi_lean4/pull/22) is available on `main`. Original source owners re-read:
+`Synthesis/RiemannProjectiveQuarticFourWindowSignedPoleBidiMarkedFourth.lean` (exact same-object zero-minus-mu BIDI moment operator),
+`...SignedPoleRvMFourth.lean` (existing actual ordinate-only V4 Abel/RvM discrepancy estimate),
+`...SignedPoleV4EndpointAbsorb.lean` (closed local interval versus half-open RvM interval, including the possible LEFT-ENDPOINT ZERO ATOM, not silently dropped),
+`...SignedPolePostSixthAbsorb.lean` (complete quartic, signed sixth, eighth debt, signed literal FarExact),
+and `...SignedPoleA2ScalarAudit.lean` (exact strict scalar).
+
+The EXACT remaining A2 scalar equivalence, no abs(FarExact), is:
+
+`postSixthTerminalLocalPositiveDebt(EV) + literalFarExactAt(eta0,n) < compensationTargetThreshold(rho) + postSixthTerminalLocalMuGain`,
+
+with `eta0=1/(pi+1)`, `r=eta0*t/16`, and actual expanded multiplicity count `NZ=N(t-r-1,t+r)`. Its source local positive debt includes (1) `S/(6(t/16)^6)*(EV+(3/2)r²NZ)`, (2) signed M6 cap `(3pi^6/20)*sixthEnvelope*NZ/(720(t/16)^8)`, (3) G1-fourth-Lipschitz eighth envelope `(pi+1)^2*W.fourthLipschitz*eighthEnvelope*NZ/(t/16)^10`. Its favorable mu gain is `S/(6(t/16)^6)*(2/5)r^5*muLower(t-r)`; source proves `muGain>0` and dominant selected M6 coefficient paid for t>=200. **Only a TRUE strict overall comparison including signed FarExact and compensation remains unpaid**.
+
+The new reflected-cloud M0/M2 no-go `93198e65` is a source-geometry test forbidding count-only fourth-sign promotion, NOT a counterexample to this RvM-using A2 theorem. The A2 front can employ already-paid V4/H4 and sixth/eighth bounds directly; a separate stronger localized marked-pair estimate is an optional alternative only if it improves this exact scalar. Preserve the original left atom, SameOrd exclusion, actual Zeros multiplicities, signed far, and local slack. Do not switch to q=4 synthetic positivity as a proof of a universal signed zero sum. Indexed cube remains 8 vertices/12 maps/6 faces with proof-relevant history/sign/zero semantics.
+
+**Next research action:** audit the source magnitude/sign of the one A2 inequality, especially NZ, eighth debt and signed FarExact versus the actual compensation threshold and smooth mu gain; derive a source-backed strict inequality or a rigorous asymptotic no-go, not another scalar wrapper. Actual `H_n+E_n+S_W<T_W(rho)` and RH/GRH remain open; no Lean/Agda kernel receipt from this work.
+
+---
+
 ## 22 November 2026 — P0 ACTUAL zero-marked fourth max-cut (source owner already paid)
 
 Source-first audit of Lean main `Synthesis/RiemannProjectiveQuarticFourWindowSignedPoleBidiMarkedFourth.lean` and Agda `DASHI/Analysis/RiemannQuarticSignedPoleBidiMarkedFourthExact.agda`: original `literalLocalCenteredFourthAngularAt_eq_bidi_discrepancy` is an EXACT source-owned local zero-minus-`Zeta23.mu` 0/2/4 BIDI identity. The zero sum uses the real `centeredZeroFinset`, actual multiplicity and `SameOrd t` exclusion. `localizedBidiMarkedProducer_exact` is only a trivial packaging of the already-defined three moments; it is NOT the missing one-centre analytic marked-pair theorem. The specific short-support cosh-marked literal prime channel is already recorded source-paid as zero. The remaining full signed response/archimedean and far/slack payment is not thereby proved.
