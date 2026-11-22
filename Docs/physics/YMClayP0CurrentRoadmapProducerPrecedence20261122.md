@@ -65,3 +65,8 @@ Locally executed SymPy 1.14.0: exact probability, covariances, two-source mixed 
 Proof/status ledger: SOURCE_OWNED for exact finite dictionaries and conditional abstract compilers; LOCAL_REFERENCE_PASS only for finite SymPy tests; SOURCE_ESTIMATE_UNVERIFIED for true physical original large-field, marked activities and uniform source rates; KERNEL_PENDING for new Agda candidates; E1/D1/D2/N1/G1 NOT SOLVED.
 
 Provenance: Wilson/Haar; Bałaban CMP98/99/109/116/119/122; classical gauge reflection positivity and Fröhlich–Israel–Lieb–Simon/Biskup chessboard; Kotecký–Preiss and Fernández–Procacci; existing DASHI original source owners and #1444 Path13. No priority claim over donor work.
+
+
+## 22 Nov — cutoff-normalized physical W3 rate gate (new source-boundary diagnostic)
+
+See [YMClayCMP119W3PhysicalRateRenormalizedGate20261122.md](YMClayCMP119W3PhysicalRateRenormalizedGate20261122.md) and scripts/check_ym_cmp119_w3_physical_rate_gate_20261122.py. Exact source requirement: for the FULL entropy-corrected renormalized connecting-shell ratio Q(a), require a cutoff-independent rooted prefactor and inf_a[-log Q(a)/a]>0 in physical metres, **after** source identification of original Wilson F19 1/F/G/FG, CMP119 E/R/B/V differentiated T-products (including inherited Hessian), and termwise ABSOLUTE CMP116/W3 localized charges. Q(a)<1 for each finite a alone is insufficient. A locally SymPy-checked exact 1D Ising decimation diagnostic shows two divergent bare-coupling trajectories with contrasting physical limits exp(-2R) and 1; it is not a 4D SU(N) Yang–Mills estimate. Physical renormalized Q(a), its Wilson source-derived prefactor, D1/E1/D2/N1/G1 remain OPEN; no Agda kernel/CI.
