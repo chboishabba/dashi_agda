@@ -1,3 +1,45 @@
+## 22 November 2026 — finite-t × positive-width J2-preserving mixed jet; six-face geometry audit
+
+Original same-source definitions consumed: `RiemannProjectiveQuarticFourWindowAtomic.lean`, `RiemannProjectiveQuarticFourWindowPoleSameObject.lean`, and `RiemannProjectiveQuarticFourWindowSignedPoleJointHorizontalJet.lean`.
+Local executable: `scripts/check_rh_positive_width_finite_t_mixed_jet_20261122.py`.
+
+Fix physical horizontal a=0 and normalized q=4; u=pi/t and eps=E[Y²]/2 for a common normalized even bump around every source centre. Enforce the *same original J2=0 condition* at each lambda by mu(lambda,eps)=mu0(lambda)+mu1(lambda)eps+O(eps²). The original finite pole weight is `cosh(8x/t)*cos(16x)*cos(cx)` and the exact selected determinant/profile orientation is `P_two*K_half-P_half*K_two`.
+
+Independent local SymPy exact symbolic jets give:
+```text
+[eps^0 u^0] K = 0
+[eps^0 u^2] K = 0
+[eps^1 u^0] K = 120/13
+[eps^1 u^2] K = 640*(2*pi-sqrt(3))/(39*pi) > 0
+```
+The pre-existing atomic calculation additionally gives
+`[eps^0 u^4] K=5120/351` at a=0,q=4.
+Consequently the **formal two-variable expansion** starts
+```text
+K(0,4;eps,u) =
+  (120/13)*eps
+ +[640*(2*pi-sqrt(3))/(39*pi)]*eps*u²
+ +(5120/351)*u⁴
+ + terms of higher order in eps and u.
+```
+The displayed mixed coefficient is strictly positive because 2*pi>sqrt(3).
+No positivity for every finite u or selected compact positive radius follows without a *uniform remainder bound* and an exact source J2 branch. No numerical Gaussian surrogate is being silently identified with the Mathlib normalized bump.
+
+### Exact six-face indexed transport audit (conditional structure, not an analytic theorem)
+
+Three axes determine 8 typed vertices, 12 oriented edges, and 6 square faces:
+- Reflection r: source `a -> -a`; apply to the original complex zero carrier WITH multiplicity. A kernel-even observation is not a proof of an analytic zero map.
+- Smoothing b: atomic eps=0 -> original even-bump eps>0; preserves each signed centre, history/index and independently solves mu(eps) for J2=0.
+- Pole limit p: finite u>0 -> u=0; retains normalized q as a selected coordinate, NOT gamma as a fixed ordinate. A moving q must be tracked when t changes.
+
+Six faces are (r,b) at p=0 and p=1; (r,p) at b=0 and b=1; (b,p) at r=0 and r=1. Algebraic parity r commutes with the even source kernels at these fixed coordinates. The b/p faces are formally compatible for analytic Taylor germs *if* uniform source bump moments and mu branch hold; physical same-zero, finite-t source identification and convergence are OPEN and must not be marked as commuting Lean/Agda theorems. The q=4 moving ordinate and the fixed-physical-gamma chart are different observers and need an explicit change-of-coordinates edge, not an implicit cube equality.
+
+For each vertex keep a tagged source record: analytic ζ-zero/not-a-zero status and multiplicity; physical (beta,gamma,t) and normalized (a,q); exact signed centre weights; mu selection; source pole determinant; original Hnear/Hfar and local slack; zero-observation vs genuine scalar zero vs balanced nonempty cancellation. C3 cyclotomic zeta, a neutral exponent-zero phase, and Riemann ζ(s) are distinct types. Retain signed ternary polarity and residual histories across all 12 maps; a Fourier-zero observer is not faithful on underlying modes.
+
+**Terminal:** `H_n+E_n+S_W<T_W(rho)` for all hypothetical high off-line actual ζ zeros is still OPEN. Neither strictly positive q=4 response nor any of the six square sketches closes the signed aggregate or pays prime-side local slack.
+
+---
+
 ## 22 November 2026 — J2-preserving positive-width second-moment jet (new exact local source calculation)
 
 Read-back original source owners: Lean main
