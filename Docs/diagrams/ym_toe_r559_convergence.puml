@@ -103,4 +103,23 @@ NO global marked coarse q, no beta(a)->infinity,
 no CMP119/122 absolute W3 or E1/D2.
 TOE R559 is consumer and import graph unchanged.
 end note
+
+' GLOBALLY-MARKED original first-R445 source is external #1536 evidence.
+note right of OriginalWilsonC3
+GLOBALLY-MARKED original first-R445 source:
+TRUE original L4 Wilson/Haar, 64 R445 W,
+64 fibre V + 896 interacting spectators.
+Two GLOBAL affine plaquette marks F,G have disjoint
+conditional 4+4 variable supports; real |s|,|t|<=0.09.
+At beta<=1/144: marked fibre q<=13/25;
+all 64 induced coarse marked rows have exact
+16-term rational Neumann upper <11/20.
+Mixed coarse log source keeps E[direct J]
+PLUS Cov(first coarse source scores).
+NOT all mark configurations, complex Gibbs,
+beta(a)->infinity, absolute CMP119/122
+physical W3 shells or same-H OS/D2.
+The R559 TOE layer is only a source consumer,
+not a new Agda import or independent proof.
+end note
 @enduml
