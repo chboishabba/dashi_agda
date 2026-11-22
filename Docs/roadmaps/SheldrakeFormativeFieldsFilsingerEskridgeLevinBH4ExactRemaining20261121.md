@@ -7,6 +7,31 @@ This is the **phase/deliverable/remaining-lemma ledger committed with the implem
 
 
 
+## H0–H5: original-source PIN ADMISSION audit — four narrated edges, zero verified physical links (22 Nov 2026)
+
+**Source, not guessed diagram.** Reopened the exact existing \`Artifacts/smith-filsinger/source_indexed_transcript_diagram_values_20261122.json\`. Its midpoint/spark \`FM\` original-source owner has precisely **four** partial narrated graph relations: (1) transformer-secondary / accessible midpoint; (2) selected coil / capacitor described across it; (3) ganged rectifier positive branches; (4) rectified return / midpoint *or* Earth. **Each is explicitly marked \`proven_continuity:false\`**. No exact original reel frame or physical pin-to-node photograph was authenticated in this turn; public reel lookup did not supply one. Thus **0/4 FM pin-continuity proofs**, notwithstanding the literal speaker's meaningful words and values. The earlier original raw evidence archive remains **0/24** supplied roles. Original source transcription and mathematical circuit-completion are not physical verification.
+
+**Positive result:** the words permit the same FM speech signature in at least THREE mutually different electrical winding owners (full NST A–B, half NST A–M, separate U–V), provided each unobserved wire identification is modelled as an **explicit conditional hypothesis**. The existing E0 ideal rectifier waveform and F0 capacitor-return models therefore cannot uniquely reconstruct the original diode and load nets. This result cannot be fixed by equating “earth”, “negative”, “middle”, “cap”, and “coil” merely because the speaker uses them in adjacent sentences. The Kelly/Darrer 17+17-turn compiled source and other Filsinger ZVS/Earth reels remain independently indexed.
+
+**Reconcile latest transient-charge correction:** The companion \`G0–G6\` *transient* gate already on this branch takes precedence over any stronger instantaneous stationary no-return language. For an isolated island with four nonnegative outward diode currents and no inbound return, the general law is \`dQ_island/dt+Σi_D=0\`. Finite initial net charge can fund a **transient output pulse**; zero sustained cycle-integrated output follows only when the island's charge is restored at cycle end and there is no incoming return. Our new \`H\` gates address **source original pin evidence**, not that charge conservation theorem. A checked idealized no-return cut remains conditional on stationary/restored charge, and the output-energy ledger still has to include capacitance and spark discharge.
+
+**New exact machine source audit:** \`Artifacts/smith-filsinger/fm_original_pin_admission_20261122.json\` reproduces the *actual four* original FM source-index edges without upgrading them, and lists six physical admission targets; canonical source index has a pointer to the new ledger. \`DASHI/Physics/Motors/SmithFilsingerSourceEdgeAdmissionBidiExact.agda\` is a new finite original-owner module preserving \`NarratedEdge\` and the current \`sourceNarratedNoPinProof\` evidence tier, proving a no-unique-winding inverse for the same speech signature, and naming the actual original 36927 component pins that require same-reel identity before any claim can promote. The new module is imported by \`EverythingSheldrakeFieldLevinFilsinger20261121.agda\`. **Source-written, kernel not checked; an Agda constructor reflecting audited text is NOT physical continuity.**
+
+**Local independent exact audit:** \`/mnt/data/check_filsinger_source_edge_admission_20261122.py\` ran **45/45 PASS** under SymPy 1.14.0, local Git-compatible blob \`be0b14a26fe16cdab32d88b0787d9d1f819440f3\`. It checks the original 4 unverified speech edges, 14 original physical pin labels, three competing CONDITIONAL node quotients, outward-only stationary source cut, and capacitor-divider unloaded-centre ambiguity. This local test file was **not** committed to GitHub, so no GitHub-byte parity is claimed. The separate concurrent updated transient-charge exact regression **28/28 PASS** is preserved as its own source/test owner. Neither proof constitutes original filmed wiring or real power.
+
+| Pin-evidence gate | Exact original evidence needed | Status |
+| --- | --- | --- |
+| **H0 NST midpoint** | Original time/frame and a physical transformer-secondary midpoint terminal | OPEN |
+| **H1 tuned coil identity** | Whether selected capacitor spans NST A–B, NST A–M or independently tuned L U–V | OPEN |
+| **H2 capacitor pins** | Individually mapped C1/C2 to selected U/V, beyond the spoken “across” | OPEN |
+| **H3 diode ends** | All four physical anodes and cathodes; verification of ganged collector P | OPEN |
+| **H4 load return** | P→load/spark/bank→N and physical N–M–Earth connection or intervening impedance | OPEN |
+| **H5 same-original real work** | Signed drive/environment/load/loss and initial/final stored energy, source and time matched | OPEN |
+
+**Next source-specific operation:** inspect an *actual original reel frame or native source diagram* with visible capacitor/coil and diode lead endpoints and attach each edge with frame coordinates. Preserve unresolved pins as unknown. Do not commission a synthetic “original diagram” or repeat more abstract RLC simulations while H0–H4 remain open. No exposed high-voltage testing or construction steps.
+
+---
+
 ## G0–G6: transient-charge correction to F0 stationary no-return cut (22 November 2026)
 
 The recorded Filsinger midpoint narration includes a capacitor across the selected coil, four forward-facing diodes, an NST/Earth midpoint return, and a spark-gap dump. Therefore a precharged **transient** must not be excluded by a **stationary** no-return theorem. Reopened the source-indexed Agda and exact previous SymPy owners before changing their scope.
