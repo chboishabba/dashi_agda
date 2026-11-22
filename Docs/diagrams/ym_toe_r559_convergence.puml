@@ -14,6 +14,7 @@ package "Canonical Yang-Mills owners" {
   component "Continuum / Clay non-promotion" as NonPromotion
 }
 
+component "External original Wilson #1536 C3/mirror\n1024 links, 1536 plaquettes, 18432 influence edges\nsmall-beta only" as OriginalWilsonC3
 component "YangMillsTOEConvergenceRound559Exact" as YMTOE
 component "EverythingTOESymmetryResolved369" as Root
 component "Unified.Physics" as UnifiedPhysics
@@ -26,6 +27,7 @@ Casimir --> YMTOE : exact owner reuse
 StressShell --> YMTOE : exact owner reuse
 StressHilbert --> YMTOE : exact owner reuse
 NonPromotion --> YMTOE : fail-closed gates
+OriginalWilsonC3 ..> YMTOE : review receipt only\nNOT an Agda import
 
 YMTOE --> Root : TOE import edge
 YMTOE --> UnifiedPhysics : normalized physics facade
@@ -40,6 +42,10 @@ finite RG is not continuum YM.
 Casimir floor is not the missing Wilson/FP/Haar estimate.
 stress compiler/bounds are not literal physical source closure.
 proof ownership stays with canonical modules.
+external YM #1536 C3/mirror geometry not in this branch's import graph.
+C3/θ support and Dobrushin adjacency equivariance are not physical RP/W3.
+bare-link q<1 only for beta<atanh(1/18), not beta(a) growing.
+TOE #1291 H05 and #1217 C3 physical grades stay distinct.
 
 Postconditions:
 root, Unified.Physics, and Unifier expose one YM TOE surface.
