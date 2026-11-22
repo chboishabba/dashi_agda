@@ -7,6 +7,45 @@ This is the **phase/deliverable/remaining-lemma ledger committed with the implem
 
 
 
+## P1 original midpoint diode landing × coil-span BIDI — exact full/half-wave discriminator (E0–E8)
+
+**22 Nov 2026; source-first logical continuation of D0–D8.** The original user-supplied midpoint transcript says two diode packages off a capacitor and two off another selected wire/coil, forward-facing, positives ganged, centre-tap/Earth/ground return, and a capacitor across the selected coil. Source-reopened: \`Docs/research/SmithFilsingerSourcePortShuntMaxCut20261115.md\`, \`Docs/research/FilsingerDonSmithGoldenRectangleLissajousMaxCut20261111.md\` and the D0 source-index/Agda owner. The source **does not tell us whether the 'selected coil' is an entire A–B centre-tapped winding, a single A–M half winding, or another coil**. This is a distinct missing variable from D0's fact that capacitor C and coil L share **their own** U,V electrical nodes when physically parallel. DO NOT silently set \`U-M=+v,V-M=-v\` merely because C is across a coil, or elevate the 17+17-turn *Smith/Kelly compilation* to verified Filsinger hardware.
+
+**New four conditional inverse cases for zero-drop forward diodes, unsmoothed resistive P-to-M output and sinusoidal source with fixed half-peak x>0:**
+
+| Source quotient + input diode landing | Prescribed U,V relative to M | Ideal P–M output | Physical status |
+| --- | --- | --- | --- |
+| **E-T2** full winding, two diode packages on each distinct end U/V | U-M=+x sin θ; V-M=−x sin θ | **full wave** x|sin θ| | requires complementary input terminals and a true centre tap |
+| **E-T1** full winding but *all four packages* anodes on U (despite cap/coil physical labels) | U-M=x sin θ | **half wave** x max(0,sin θ) | two differently labelled physical component ends can be same electrical input |
+| **E-H2** capacitor across only one half winding U=A,V=M, two packages on each end | U-M=x sin θ; V=M | **half wave** x max(0,sin θ) | distinct electrical input nodes but not complementary positive/negative wrt return |
+| **E-H1** half winding and all diodes from U | U-M=x sin θ; V=M unused | **half wave** x max(0,sin θ) | same waveform as E-H2 even though package-node assignments differ |
+
+For the **same ideal source peak x**, each has the **same observed peak x**. The full-wave case has mean DC voltage \`2x/π\`, RMS \`x/√2\`, average resistive load work \`x²/(2R)\`; all three half-wave cases have mean \`x/π\`, RMS \`x/2\`, power \`x²/(4R)\`. Thus simple peak output **cannot** distinguish the selected original wiring. In this constrained sine/unfiltered model, positive conduction during both half-cycle polarities forces **both** a full secondary span and opposite electrical diode anode landing; negative-half positive current is the exact finite reverse discriminator. Measured DC or RMS alone with unknown x also lacks unique source map. Ordinary whole-secondary bridge measured between P–N has a **different voltage reference** (ideal peak 2x) and must not be compared to P–M indicators without the original meter probes.
+
+**Original spark/rectified storage caution:** Any capacitor bank on the P–M load, nonlinear spark-gap pulses, shunt, different driver phases, winding coupling and external field backaction can alter those waveforms. Specifically, in a diode-off interval with output reservoir capacitance C_o and load R, \`C_o dv_o/dt=−v_o/R\`, \`v_o(t)=V_0 exp(−t/(R C_o))\`, \`dU_o/dt=−v_o²/R\`: a half-wave rectifier can retain positive DC output through the non-conducting input half-cycle. Neither original physical smoothing network nor actual waveform is verified. The earlier **parallel LC antiresonance** \`Y=G+i(ωC−1/(ωL))\` uses an ideal linear conductance: switched rectifiers/spark outputs can replace G by a nonlinear time-dependent loading operator. Do not apply linear antiresonant voltage peak/current dip to original device without that qualification.
+
+**Package current non-identifiability:** The ideal identical diode groups from U/U,V/V have group incidence \`[[1,1,0,0],[0,0,1,1]]\`, rank 2/nullity 2; one-node four-package grouping \`[[1,1,1,1]]\`, rank 1/nullity 3. Real diode forward drops, lead impedance, thermal conditions and recovery decide parallel package current sharing; visual package count and group output current cannot identify individual diode currents or independently replenished energy-source count.
+
+**New precise source owner** \`DASHI/Physics/Motors/SmithFilsingerDiodeLandingWaveformBidiExact.agda\` reuses \`SmithFilsingerCapCoilParallelNodeQuotientBidiExact\` and the source-indexed four-diode number; defines \`CoilSpan\` × \`InputLanding\` × two half-cycle \`LoadConduction\` and proves exact conditional forward cases plus converse \`negativeHalfConductionForcesFullSpan\` and \`negativeHalfConductionForcesOppositeInputs\`. Imported into the focused \`DASHI/EverythingSheldrakeFieldLevinFilsinger20261121.agda\`. This is **source-written Agda, not kernel-checked**. Companion machine-readable \`Artifacts/smith-filsinger/diode_landing_full_half_winding_bidi_20261122.json\` preserves all hypotheses and source limits.
+
+**Exact local and committed-byte acceptance:** \`scripts/check_filsinger_diode_node_landing_half_full_sympy_20261122.py\` **64/64 PASS** under local SymPy 1.14.0, with Git blob \`099c4c4f9b006ed85affd8e8b002f573250a7dca\` **identical to the executed local** \`/mnt/data/check_filsinger_diode_node_landing_half_full_sympy_20261122.py\`. Checks cover four topology/landing combinations and both half-cycle signs, exact sinusoidal mean and RMS integrals, R-load work, current-group incidence rank, capacitive bank source-off storage budget and two opposite donor hypotheses with identical useful output. These tests do not verify physical Filsinger diode direction or original V/I source.
+
+| Gate | Proved conditional result | Remaining physical original burden |
+| --- | --- | --- |
+| **E0 source wording** | Two cap/coil-labelled diode groups, forward orientation and midpoint return preserved | Original diode anode/cathode and video-to-word alignment not reverified |
+| **E1 selected coil span** | Full A–B and half A–M are **different** BIDI cases even when C across coil | Identify exactly which transformer winding section has capacitor across it |
+| **E2 landing quotient** | Four packages may resolve into U/V or U-only anode nodes | Source photographed pin-to-net identity on the selected unit |
+| **E3 full/half waveform** | Full sine both signs iff full span AND opposite landing in simplified model | Exact load-return M and actual signed electrical waveform with zero/positive branch intervals |
+| **E4 diode package work** | Parallel-diode total-current inverses rank 2 or rank 1, individual sharing unidentifiable | Actual lead/diode drops, current, temperature and switching |
+| **E5 output storage** | Diode-off RC reservoir can preserve positive DC output; signed work paid | Identify actual output cap bank, spark path and full-cycle storage reset |
+| **E6 natural source** | No waveform, peaks or diode count identify Earth/atmosphere/chemical/RF donor | Original independently measured environment/driver/return signed energy ports |
+| **E7 local tests/Agda** | **64/64** byte-identical committed local exact SymPy; finite BIDI owner source-written | Agda 2.9 exact-head kernel check and source physics gate open |
+| **E8 attribution/reel** | Smith/Kelly 17+17 separate from Filsinger midpoint reel and three-Earth/ZVS reels | Original source-identity and recorded same-time machine acceptance, **0/24** raw evidence roles |
+
+**Next hard reverse cut:** focus on one selected physical coil, the exact endpoints of its parallel capacitor, the four diode **anode** landing nodes after the U/V quotient, and the true output return **M versus N**. Do not assume full-wave merely because a capacitor is across a coil or because four diodes were named. Reuse original source work owners only after a same-time electrically measured source and output netlist is validated. No exposed high-voltage build guidance.
+
+---
+
 ## P1 literal capacitor-across-coil reverse solve — electrical node quotient, parallel LC and source identifiability (D0–D8)
 
 **22 Nov 2026, continuation from C0–C8.** Reopened the actual archived source reports `Docs/research/SmithFilsingerSourcePortVirtualCircuitMaxCut20261112.md` and `Docs/research/FilsingerDonSmithGoldenRectangleLissajousMaxCut20261111.md`, and the literal speech inventory in `Artifacts/smith-filsinger/midpoint_return_clamp_capcoil_bidi_20261122.json`. The speaker describes **two diodes off the cap, two off the other (coil/wire)**, with all forward-facing, positives ganged and a return 'to midpoint, earth, ground'; and says the capacitor is **across the selected coil** and produces a 'pole shift'. The reel association remains provisional; no current original video frame or real pin continuity has been authenticated. **The logical inverse must collapse component terminal labels to ELECTRICAL nodes when an across-coil capacitor is assumed.**
