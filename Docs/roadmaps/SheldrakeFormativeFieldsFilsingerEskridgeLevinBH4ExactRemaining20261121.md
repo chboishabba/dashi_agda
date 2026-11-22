@@ -7,6 +7,36 @@ This is the **phase/deliverable/remaining-lemma ledger committed with the implem
 
 
 
+## G0–G6: transient-charge correction to F0 stationary no-return cut (22 November 2026)
+
+The recorded Filsinger midpoint narration includes a capacitor across the selected coil, four forward-facing diodes, an NST/Earth midpoint return, and a spark-gap dump. Therefore a precharged **transient** must not be excluded by a **stationary** no-return theorem. Reopened the source-indexed Agda and exact previous SymPy owners before changing their scope.
+
+For net source-island charge Q and nonnegative diode currents outward from an island through the four package edges, the general law is
+
+\[
+\frac{dQ}{dt}+\sum_{k=1}^4 i_{D_k}=i_{\mathrm{return}}.
+\]
+
+If there is no return path, then the time-integrated emitted charge is Q(t0)-Q(t1). A finite positive diode pulse can occur while net source-island charge falls; one cannot demand instantaneous diode currents zero without also assuming dQ/dt=0. Over a restored cycle Q(t1)=Q(t0) with zero incoming return and nonnegative diode currents, total emitted diode charge is zero (and currents vanish almost everywhere). Thus F0's stationary no-go survives with its stated premise, but is NOT a ban on an initially charged floating structure's transient.
+
+Source-charge is NOT the same as internal differential U/V LC energy. As an illustrative separate exterior-reference capacitor C discharges through R, v=V0 exp(-t/(RC)), dU/dt=-v²/R, and output work over [0,T] is 0.5*C*V0²*(1-exp(-2*T/(RC))). The capacitor funds a finite pulse, not repeated output without restoration/replenishment. A positive load-voltage bound additionally constrains work to Vmax times transferred charge; no numeric original energy receipt follows from the narrator's rated capacitor examples.
+
+**Formal/code correction:** Existing F0 Agda source now explicitly scopes the old Nat zero-sum KCL proof to stationary/restored-charge conditions; it adds an exact finite precharge discharge witness 1=0+1, without claiming that the original machine did so. New source-indexed JSON artifact: Artifacts/smith-filsinger/midpoint_transient_charge_return_bidi_20261122.json. Independently executed local SymPy 1.14 regression: **28/28 PASS** at /mnt/data/check_filsinger_transient_charge_return_sympy_20261122.py, Git hash of executed local source 30de320edaea8ab5539be0c05c42977c50f48b80 (not committed byte-identically). Existing 55/55 and 33/33 receipts cover the previous stationary/phasor model, not this stronger transient qualification. Agda kernel unverified.
+
+| Gate | Exact result | Still unverified original-world evidence |
+| --- | --- | --- |
+| G0 | Speaker-described spark-gap discharge retained, not excluded | Actual same-reel spark and capacitor wiring |
+| G1 | Isolated-source island net charge tracked separately from internal LC energy | Which capacitor actually couples to Earth or M |
+| G2 | Nonzero outward pulse can accompany negative charge derivative | Timed real source island return current |
+| G3 | Restored net charge + zero return implies no sustained positive-only diode current | Original circuit return path and state reset |
+| G4 | Separate RC source gives finite input-stored work and zero ongoing source | Original capacitor state/energy initial and final |
+| G5 | Any replenished Earth/atmosphere/chemical/RF donor remains explicitly measured signed work | Real, same-time driver, output, losses, donor data |
+| G6 | 28/28 local exact checks; original Agda conditional clarified | Pinned Agda kernel, original physical evidence 0/24 roles |
+
+**Original forward/backward next cut:** identify which coil owns the narrator's capacitor; determine whether M/Earth is a conductor or displacement/reference path; and identify diode cathodes, output reservoir and spark load. The mathematical finite-pulse counterexample does not identify any actual Filsinger pin. No live high-voltage construction or probing is proposed.
+
+---
+
 ## P1 source-selected winding ownership × physical midpoint return (F0–F8) — hard Kirchhoff BIDI cut
 
 **22 November 2026, after E0–E8: priority correction.** The earlier user's Filsinger spoken transcript explicitly describes an **NST/stable transformer with accessible midpoint**, an optional capacitor "across the one coil you want", two diodes "off the cap" and two from another wire/coil, all forward-facing and positive ends ganged, a return to "midpoint, earth, ground", "half the potential of the big coil" and a claimed Tesla "pole shift" altering the other coil's current field. The **NST secondary with midpoint and the selected resonant "one coil" are not thereby proved the same electrical winding**. Reopened original repository audit notes: \`SmithFilsingerSourcePortShuntMaxCut20261115.md\`, \`DonSmithHighPowerDevices147PageOriginalPDFMaxCut20261112.md\`, \`SmithFilsingerNonlinearQuadratureMaxCut20261112.md\`, and the E0 machine ledger. Compiled Smith/Kelly/Darrer **17+17-turn L2 / optional 47nF** belong to a different historical figure family, not direct physical pin proof of Filsinger's midpoint reel. The precise source video and the user's original Darrer PDF could not be re-opened this turn; the public alternate Kelly PDF returned an access/rate-limit error. **Do not equate original source-claims, interpreted winding ownership, and a photographed circuit.**
