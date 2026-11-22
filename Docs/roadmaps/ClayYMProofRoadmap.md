@@ -1,3 +1,30 @@
+## 22 Nov 2026 — P0 native n=3/Variable pure-Wilson C3 density BIDI, exact local acceptance
+
+**Source-written on master-based YM PR #1536; Agda kernel NOT RUN.** New `DASHI/Physics/YangMills/YMClayOriginalWilsonN3NativeC3DensityBIDIExact.agda` is imported into the original physical regression root and included in the fail-closed **local** Agda acceptance runner (not CI). It establishes a conditional, same-source chain:
+
+```text
+original n=3 periodicSUNSixDeficit
+  -> (original positive signed SU(N) plaquette identity)
+  -> (flat canonical 4^4-site fold = original native nested sum)
+  -> original nativeSUNSixWilsonDeficit
+  -> SAME original exp(-beta * deficit) Gibbs density
+  -> existing native full-six-plane C3 theorem (real trace-inverse donor)
+  -> native 1024-vector codec/pointwise density
+  -> original actual WilsonC3 weighted Gibbs action C3 condition
+  -> prior original weighted-Haar normalized expectation
+  -> prior actual R445 temporal-mirror real Gram C3
+```
+
+This **removes the need to postulate a separate pure-Wilson C3 density-invariance premise**, *provided* the actual native real trace-inversion authority and Agda kernel acceptance are supplied. The independent 1024-label adjacent-swap permutation certificate is **still unproved**, and genuine SU(N) continuous Borel Haar/integrability is still missing.
+
+The flat canonical `Torus.elements (periodicTorus4Finite 4)` sum is **not literally definitionally the same expression** as `Gibbs.sumSitesReal`: four nested right-associated sums carry intermediate real zero terms. The new source uses original additive associativity and identity to prove `realSumCartesian`, plus the literal four-index equality, instead of incorrectly claiming `refl`. The original `Variable.sideFourPlaquetteSameNativeWilsonTrace` owns positive-plaquette identity, while `YMClaySUNNativeSixPlaneFullC3FromInverseTraceExact` owns the physical native C3 producer. Neither theorem is reimplemented.
+
+**Local exact SymPy 1.14.0 acceptance:** `scripts/check_ym_original_six_plane_native_variable_20261122.py`, **29,774/29,774 PASS**; the committed blob is byte-for-byte equal to the locally run file (Git blob SHA `657ce62e19f687ce067caa51c86be4c799196921`). Original 256 sites, 1,024 bonds, all six positive planes (1,536 per field), 8 deterministic noncommutative Q8 link fields; 12,288 signed-path versus independent explicit four-factor holonomies, 12,288 C3 plaquette real traces, 2,048 same-site deficits; C3^3, theta^2, pointwise orientation/inversion and field commutation, local gauge and full-action/density agreements, and rejected anisotropic/time-mixing negative controls. This is a **finite Q8 exact regression**, not a general SU(N) proof or continuous Haar/OS acceptance.
+
+**Important physical-source firewall:** `Variable.periodicSUNGibbsDensity n=3` is the original **pure six-plane Wilson** exponential. The conditional C3 theorem does **not** establish covariance of any additional independently selected CMP119 E/R/B/V terms. Those terms require their own actual action/source correspondence and symmetry proof, or a demonstrated identity to the selected pure-Wilson action. Nothing here constructs the complex positive-time RP form, cutoff-dependent E1 physical continuum, same-H OS unitary/semigroup, full D1 quantitative rooted-shell rate, D2 all-three-sector gap, N1/G1. Keep the independent Eisenstein C3 characters and all H05 zero/ternary distinctions.
+
+**Receipt:** SOURCE_WRITTEN; LOCAL_SYMPY_EXACT_PASS; KERNEL_PENDING; ORIGINAL_COMPLEX_OS_AND_FULL_CLAY_OPEN. Standard Wilson, Bałaban, Haar, Osterwalder–Schrader and earlier DASHI producers retain attribution.
+
 ## 22 Nov 2026 — YM P0 original F19 → CMP119/122 marked effective-action mixed Hessian (finite source exact, physical W3 OPEN)
 
 **New exact source proof and independently executed Python/SymPy:** [YMClayOriginalF19CMP119MarkedActionHessianTower20261122.md](https://github.com/chboishabba/dashi_agda/blob/agent/ym-p0-cmp119-r445-master-weld-20261121/Docs/physics/YMClayOriginalF19CMP119MarkedActionHessianTower20261122.md), [check_ym_original_f19_cmp119_multiscale_marked_hessian_20261122.py](https://github.com/chboishabba/dashi_agda/blob/agent/ym-p0-cmp119-r445-master-weld-20261121/scripts/check_ym_original_f19_cmp119_multiscale_marked_hessian_20261122.py). Reuses actual original R445 64 noncommutative pairs/896 spectators, original F19 source 4 coefficients (K0,KF,KG,KFG), original Wilson finite affine partition and existing CMP119/122 E/R/B/V/T-operation + W1/W3 owners. **No duplicate KP gas or new Gibbs density.**
