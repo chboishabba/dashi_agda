@@ -1,3 +1,25 @@
+## 22 November 2026 — P0 FOUR-WINDOW BIHARMONIC STENCIL & coefficient provenance (new exact atomic geometry)
+
+Exact original-source geometry audit / local SymPy: `scripts/check_rh_a2_biharmonic_stencil_geometry_20261122.py` (commit `602b2c42`). Detailed source-by-source proof: `Docs/proofs/RHA2AtomicBiharmonicStencilCoefficientAnatomy20261122.md` (commit `efb3d5fc`). Lean owners: `RiemannProjectiveQuarticFourWindowAtomic`, `PoleSameObject`, `SignedPoleTarget`, `SignedPoleEighthRemainder`, `SignedPolePostSixthAbsorb`, and `SignedPoleA2ScalarAudit`. No Lean/Agda kernel receipt.
+
+**Unexpected exact geometry at original atomic high-pole vertex:** selected signed projective atomic profile at `c=(0,pi/3,pi/2,pi)`:
+```text
+(-40/117, 0, 160/351, -40/351)
+  = (40/351)*(-3,0,4,-1).
+```
+The pi/3 column is an **observed determinant cancellation** `1*3-(9/8)*(8/3)=0` between two NONZERO source profiles, not an empty source or ζ(s) zero. Folding symmetric ±π/2 and ±π atoms produces the **negative five-point biharmonic stencil** `(20/351)*(-1,4,-6,4,-1)` on `(-π,-π/2,0,π/2,π)`. Its entire atomic high-pole real Fourier response factors EXACTLY:
+```text
+F(q) = -(80/351)*(1-cos(pi*q/2))²
+     = -(320/351)*sin(pi*q/4)^4 <= 0.
+```
+It has **fourth-order spectral notches** precisely at `q∈4ℤ`. Thus the original q4 `-5*pi^4*z^4*u^4/1404` boundary coefficient and q1 negative `-80/351` are the SAME biharmonic source, not unrelated accidents. These notches are Fourier observations, NEVER ζ-zero statements. This exact factorization is for the atomic/high-pole vertex only; smooth and finite-pole maps in the 8-vertex/12-map/6-face indexed cube remain separate analytic debts.
+
+**Number classification rather than mystification:** `13/72=1/8+1/18` is the actual J2 projective cofactor of the π/3 and π/2 squared/angular cosine sample; `117=3²*13`, `351=3³*13` are COMPOSITE endpoint/elimination denominators (not primes). Ratios `-3:0:4:-1`, quartic notch order and zero-column cancellation are structural; absolute `40/351` is normalization dependent. The A2 asymptotic bracket `-S/15+π^6η²/2400+Lη²/8500` has `15=6*5/2` from quartic integration, `2400=720*20/(3*2)` from M6 cap, 6! and two-sided count, `8500=17000/2` from a CONSERVATIVE eighth envelope and two-sided count. `160=2400/15`; `15/8500=3/1700`. Source `1/17000` was relaxed from an intermediate `1/17920`, so 17 in 1700/8500 is not a hidden invariant. The 15 inside `Re(a+iδ)^6` is separately binomial `C(6,2)`, not the denominator 15.
+
+**Original A2 P0 unchanged:** the finite-`R,t` selected witness, exact signed `FarExact`, compensation threshold, actual-zero multiplicities, local slack, and `H_n+E_n+S_W<T_W(rho)` remain OPEN. Preserve scalar-zero vs Fourier-zero vs balanced nonempty phase cancellation and independent source histories. Do not treat this C4-period spectral notch as proof of an inherited C3/369 map.
+
+---
+
 ## 22 November 2026 — NEW A2 atomic high-pole local SIGN PASS; full signed far/threshold CUT still open
 
 Source-first audit of merged Lean PR #22
