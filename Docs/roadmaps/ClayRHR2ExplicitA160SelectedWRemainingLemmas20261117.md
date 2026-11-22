@@ -1,3 +1,57 @@
+## 22 November 2026 — P0 concrete original-bump q=4 witness, still NOT the RH signed terminal
+
+**New original-source quantitative result**, source-written on
+[PR #1533](https://github.com/chboishabba/dashi_agda/pull/1533):
+`scripts/check_rh_original_bump_explicit_radius_20261122.py`,
+and full proof ledger in
+`Docs/proofs/RHR2G3AgdaBIDIReverseExactRemainingLemmas20261122.md`.
+
+Mathlib `ContDiffBump.neg`, `ContDiffBump.le_one`,
+`ContDiffBump.one_of_mem_closedBall` plus original Lean
+`RiemannQuantitativeScaledBump` and the original projective
+four-window pairing show the **actual fixed unit bump** is even,
+bounded by 1, equal to 1 on the inner half-radius and affinely
+scaled. This gives `E[Z²]>=1/24`; the original J2 equation
+is QUADRATIC in smooth mu, so source-selected endpoint roots
+are explicitly bracketed around the original atomic roots:
+`|mu_exact-(mu0+mu1*eps)|<=600R^4`
+with the strict J2 derivative >=10 in the small-radius regime.
+The original corridor and `J4<-1/4` survive at R=10^-10.
+
+At the explicitly selected `R=10^-10` the computed rational
+majorant is `C=22848813692672` multiplying R4.
+Therefore the exact original high-pole `q=4` smooth margin
+`kappa_R>R²/6`, and via original uniform source transfer,
+`t>=10^14, |a|<=1/2 ==> K_t(a,4;R)>11R²/300>0`.
+These are mathematical source bounds checked with local SymPy,
+NOT Lean/Agda kernel-certified (and no CI).
+
+**Negative control / strict scope:** atomic high-pole
+`K_inf(0,q=1)=-80/351<0`, so **the original source remains
+sign-changing in normalized q**. q4 corresponds to moving
+physical ordinate gamma=5t/4, not an actual-zero population
+or universal sign. This fixes the earlier P0 ledger's statement
+that the original smooth selected W was entirely unquantified:
+a local single-q margin is now quantified, while a universal
+actual-zero signed/W prime compensation theorem remains open.
+
+**Geometry preserved:** an 8-vertex/12-directed-map/6-face
+indexed cube with reflection/smoothing/pole axes is a bookkeeping
+and non-promotion carrier. Keep ordered history/time/refinement,
+Frobenius and consumer indices, balanced ternary sign, multiplicity,
+and distinctions among zero scalar, unit C3 phase, nonempty
+cancelled phase orbit, Fourier observed zero, and actual ζ-zero.
+No six-face analytic transport is inferred from symbolic parity.
+
+**Next nonduplicate P0:** original actual-zero localized
+M0/M2/M4 marked-pair estimate and prime-side sign/coupling;
+control all real q, actual ordinates/multiplicities, signed
+near/far and local slack; pay the exact terminal
+`H_n+E_n+S_W<T_W(rho)` (still OPEN). Avoid further
+single-q Taylor work unless it actually supplies that payment.
+
+---
+
 ## 22 November 2026 — exact selected atomic sign bifurcation and BIDI marked-fourth cut
 
 **New local SymPy result committed, WITHOUT promotion to actual selected W or actual ζ zero distribution.** The original selected four-window *atomic* response, formed with `μ_0(λ)=(13λ−8)/(144−54λ)`, `λ=1/2,2/3` and original high-`t` pole coefficients `P∞(λ)=3(2−λ)/4`, obeys for **every real q**
