@@ -98,3 +98,10 @@ The flat canonical `Torus.elements (periodicTorus4Finite 4)` sum is **not litera
 
 **Receipt:** SOURCE_WRITTEN; LOCAL_SYMPY_EXACT_PASS; KERNEL_PENDING; ORIGINAL_COMPLEX_OS_AND_FULL_CLAY_OPEN. Standard Wilson, Bałaban, Haar, Osterwalder–Schrader and earlier DASHI producers retain attribution.
 
+
+### Same-source finite complex-coefficient Gram producer (existing on YM #1536)
+
+Source audit confirms `YMClayOriginalC3FullFiniteComplexCoefficientGramBidiExact` is already written on this PR. It imports the original weighted real Wilson expectation and existing T5 `physicalReflectedGramQuadraticForm`, retaining all finite off-diagonal terms with arbitrary `Scalar` coefficients, `conjugate`, `embedReal`, and an actual R445 time mirror. **Do not list this finite coefficient-level construction as missing.** The new `YMClayOriginalWilsonN3NativeC3DensityBIDIExact.originalActualGibbsC3FromNativeInverseTrace` supplies the earlier source density-invariance socket *conditionally* on the native SU(N) real trace-inverse theorem, and the original canonical 1024-label witness must still be provided.
+
+**Not paid by that source:** complex-valued original Wilson cylinder closure, actual `PositiveTimeSupported` and `GaugeInvariantObservable` *proofs* (these are Set-labelled metadata, not inhabited support predicates), full reflection positivity, complex OS Hilbert quotient, E1 continuum cutoff limit, or same-H time-semigroup commutation. This is finite algebraic coefficient transport, not positive-semidefinite physically admissible OS reconstruction. Kernel remains unrun; SymPy finite reference acceptance does not check Agda terms.
+
