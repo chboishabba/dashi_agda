@@ -126,3 +126,22 @@ print('PASS finite-t atomic q=4 coefficient: (5120/351)*(1-16*a^4)*(pi/t)^4')
 print('PASS q=1 zeroth coefficient -80/351; q=0 quartic horizontal negative')
 print('PASS 16/16 actual finite-t atomic high-precision sign stress pairs')
 print('OPEN: finite positive-R source W sign and actual-zeta signed high terminal')
+
+# Original Agda and Lean BIDI marked-fourth producer (already source-owned):
+# P4(a,d) = [P4(a-A,d)+P4(a+A,d)]/2
+#          -3 A^2 [P2(a-A,d)+P2(a+A,d)] + 5 A^4.
+# M0,M2,M4 are independent; zeroth and second alone do not buy the sign.
+A,xx,dd=s.symbols('A xx dd',real=True)
+P2=lambda x,d:x**2-d**2
+P4=lambda x,d:x**4-6*x**2*d**2+d**4
+bidi=(P4(xx-A,dd)+P4(xx+A,dd))/2 \
+    -3*A**2*(P2(xx-A,dd)+P2(xx+A,dd))+5*A**4
+assert s.expand(P4(xx,dd)-bidi)==0
+cfg0=[s.Integer(-1),s.Integer(-1),s.Integer(1),s.Integer(1)]
+cfg1=[-s.sqrt(2),s.Integer(0),s.Integer(0),s.sqrt(2)]
+assert len(cfg0)==len(cfg1)==4
+assert sum(y**2 for y in cfg0)==sum(y**2 for y in cfg1)==4
+assert sum(y**4 for y in cfg0)==4
+assert sum(y**4 for y in cfg1)==8
+assert sum(P4(0,y) for y in cfg0)<6<sum(P4(0,y) for y in cfg1)
+print('PASS original 0/2/4 even-marked BIDI identity; same M0/M2 opposite fourth-threshold controls')
