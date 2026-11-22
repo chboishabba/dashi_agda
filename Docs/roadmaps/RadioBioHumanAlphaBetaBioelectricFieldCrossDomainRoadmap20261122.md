@@ -150,3 +150,16 @@ A useful operator schematic is **Y = O ∘ X_K ∘ M_field(S) + noise**. Equalit
 - **Acquisition gate:** [Caltech original-file downloader](../../scripts/radiobio_caltech_acquire.py), defaults to manifest-only with original DOIs and catalogue MD5, supports fail-closed acquisition in an internet-enabled environment. A direct source download attempt in this environment **FAILED** for all three original MATLAB scripts (network/redirect inaccessible); **0 original data bytes verified and 0 original EEG results reproduced**.
 - **Original-version reconciliation:** inspected accepted manuscript has incline N=29/34; published final searchable article says N=29/36. Analysed N=29 stable, but original enrolment/exclusion records must be reconciled at exact version. Do not call it fabrication or silently flatten manuscript version differences.
 - **Next admissible physical/scientific result:** acquire and hash original Caltech scripts/representative subject data, inspect the exact MATLAB implementation, reproduce source-defined active/sham 29-person and CCW/CW/FIXED 26-person ANOVA, 18-person sham and 16-person polarity-reversal comparisons, and preregister an independent cross-fitted time-frequency sensitivity analysis. No new Agda/CI or hardware acceptance claimed.
+
+
+## 22 November 2026 — P0-A3 exact unequal-variance selection gate
+
+**New result:** [P0-A3 original-source / synthetic heteroscedastic audit](../../docs/research/RadioBioWangWindowHeteroscedasticExact20261122.md), [locally executed SymPy/NumPy code](../../scripts/radiobio_heteroscedastic_window_sympy.py), [machine-readable receipt](../../Artifacts/radiobio/radiobio_p0a3_heteroscedastic_null_receipt_20261122.json).
+
+The earlier **equal-variance** null only establishes selected-window interaction calibration under balanced exchangeable errors. For **two independent Gaussian candidate windows** with potentially unequal condition variances v_AS,v_AF,v_SS,v_SF, SymPy gives the exact pooled-minimum selection bias:
+
+    E[C_selected] = -(v_AS-v_AF-v_SS+v_SF) / sqrt(pi*(v_AS+v_AF+v_SS+v_SF)).
+
+Local **5,000 replications per case × 29 synthetic participants**: equal variances [1,1,1,1] mean interaction +0.00232, nominal 5%-test rejection 0.0536; active-sweep variance [4,1,1,1] mean interaction −0.65288, rejection **0.2596**, while independently heldout rejection 0.0564. Higher active-fixed variance reverses the bias; heterogeneous but signed-cancelling variances retain nominal calibration. This is a *specific synthetic counterexample* to generalising the earlier equal-variance reassurance, **not evidence Wang's observed EEG is imbalanced**.
+
+**P0-A immediate next gate (unchanged in empirical status):** original Caltech MATLAB + .mat verified bytes → inspect actual source preprocessing and 29-person four-cell contrasts → estimate actual condition-specific trial-level residual variances, covariance, window-selection mechanism and 18-person sham coverage → original estimator and heldout comparison. Current original Caltech signed-storage retrieval remains **BLOCKED**; this commit makes **no empirical physiological claim**. No GitHub CI or kernel result claimed.
