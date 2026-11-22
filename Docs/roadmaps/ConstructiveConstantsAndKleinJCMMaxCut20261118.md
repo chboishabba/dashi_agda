@@ -1,5 +1,28 @@
 # Constructive constants and actual Klein-j max-cut — 18 November 2026
 
+## 23 November 2026 — Bishop fast-π source consumer: RH atomic biharmonic rational-angle square
+
+The original constructive constants/fast π PR #1529 provides the rational certificates and split-tree arithmetic, **not** the RH analytic-zero theorem. New cross-programme consumer is in [RH PR #1533](https://github.com/chboishabba/dashi_agda/pull/1533), `Docs/proofs/RHFourWindowBishopPiNineDOFCommutingSquare20261123.md`, with source-written `DASHI/Analysis/RHFourWindowBiharmonicFiniteCubeExact.agda` and local SymPy checker `scripts/check_rh_bishop_pi_biharmonic_h05_square_20261123.py`. The actual finite H05 cube owner remains TOE #1291, ported byte-identically into RH branch for a real dependency rather than reinvented.
+
+The historical Machin/constructive Bishop real `pi_B` has the **actual-source rational** bracket (from `DASHI/Foundations/BishopMachinPiRationalWindowExact.agda`):
+```text
+281476/89625 < pi_B < 589067/187500,
+p* = 93841671/29875000,
+delta* = 49013/89625000,
+|p*-pi_B| < delta*.
+```
+The original Lean RH four-window atomic projector collapses `(-40/117,0,160/351,-40/351)=(40/351)(-3,0,4,-1)` to the **negative squared centered discrete Laplacian** `-(20/351)(T+T^{-1}-2)^2` on the now-evenly-spaced surviving centres `0,h,2h`. The **finite algebra** is valid for any positive real h, independent of π and any π approximation:
+```text
+F_h(q) = -(320/351) sin(h q/2)^4.
+```
+Substitute rational `h=p*/2`, q=4: exact `F=-(320/351)sin(p*)^4`. **ONLY IF** a source-checked semantic identity `pi_B = Lean.Real.pi` is supplied, sine 1-Lipschitz and `sin(pi)=0` give the fourth-order explicit bound `|F|<= (320/351)*(delta*)^4 < 8.16e-14`. This is a certified rational angle control *conditional on the same-object π equality*, not a finite Fourier zero at rational h, and not an actual ζ(s) zero.
+
+The existing `DASHI/Interop/BishopMachinPiLeanSemanticReceiptExact.agda` states `leanKernelReceiptObserved=false`, `agdaKernelReceiptForLeanTheoremObserved=false`, `serializedCrossProverSameObjectWitnessObserved=false`. This aligns with this π programme's **existing open Bishop π-period identity, classical/Lean semantic transport and kernel receipt**. The binary P/Q/B/T split tree, Chudnovsky evaluator, rational certificates and benchmarking do not substitute for these proofs; retain them as original algorithmic producers. No new π algorithm or CM/Klein-j analytic theorem claimed here.
+
+Next π-facing weld: original Bishop Machin π source equal to classical Real.pi via same analytic trigonometric period/atan identity with constructive error and an independently kernel-checked semantic receipt. Then use the existing rational-width intervals to transport exact angular source coordinates and spectral notch errors through a nonidentity refinement face. The RH programme's actual ζ-zero signed `FarExact`, μ, and local slack remain independent/unproved. Keep CM/j max-cut roadmap and all existing negative controls unchanged.
+
+---
+
 ## Exact repo owners reused; no new carrier
 - DASHI/Physics/Closure/TriadicEisensteinTransformationTheorem.agda:
   all-SL2(Z) transformation from finite lattice-index bijection,
