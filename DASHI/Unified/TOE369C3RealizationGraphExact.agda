@@ -1,5 +1,21 @@
 module DASHI.Unified.TOE369C3RealizationGraphExact where
 
+-- Marked original R445 first-coarse contraction is NOT universal C3 identity.
+-- YM #1536 external source: original SU(N) Wilson L4 64 R445 coarse W,
+-- 64 V + 896 spectator Haar; two REAL globally affine distinct original
+-- closed y-z plaquette marks at (0,0,0,0) and (0,0,0,2).
+-- Their post-R445 conditional source supports are disjoint (4+4 variables).
+-- For beta<=1/144, |s|,|t|<=9/100, original marked fibre q<=13/25.
+-- Exact 64-row rational Neumann certificate on the true induced coarse
+-- globally marked law yields q_coarse_marked<11/20, after keeping
+-- BOTH direct mixed marked/Wilson Hessian and conditional score covariance.
+-- This is fixed L4 strong-coupling original-source analytic/combinatorial
+-- evidence, NOT universal 369/spatial/internal C3 realization, physical
+-- positive-time RP, beta(a)->infinity CMP119/122 absolute W3, or same-H gap.
+-- Cross-PR GitHub documentation only: no imported unmerged Agda proof,
+-- no change of conjecturalPhysicalRealization or physicalPromotion=false.
+
+
 -- 22-Nov original R445 TWO-LEVEL Dobrushin is NOT TOE physical closure.
 -- Literal #1536 full original compact SU(N) Wilson source at SMALL beta:
 -- 64 actual R445 W, 64 Haar V + all 896 interacting spectators.
