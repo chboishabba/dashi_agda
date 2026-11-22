@@ -1,3 +1,74 @@
+## 22 November 2026 — uniform horizontal finite-t transfer from a positive smooth high-pole margin
+
+**New explicit source estimate** (local mathematical derivation; no kernel):
+`scripts/check_rh_four_window_uniform_horizontal_transfer_20261122.py`.
+Original Lean source owners reread:
+`RiemannProjectiveQuarticFourWindowPoleSameObject.lean`
+(finite pole weight `cosh(8x/t)*cos(16x)*cos(cx)`),
+`RiemannProjectiveQuarticFourWindowSignedPoleJointHorizontalJet.lean`
+(physical `cosh(16*a*x/t)` pair),
+`RiemannProjectiveQuarticFourWindow.lean`
+(normalized four signed bumps, coefficients `1,-1,lambda,mu`),
+`RiemannQuantitativeScaledBump.lean`, and
+`RiemannQuantitativeSymBumpLocalization.lean`.
+
+For `0<R<1`, `lambda in [1/2,2/3]`, `|mu|<=1/10`,
+all `t>=200`, all physical `|a|<=1/2` and fixed normalized
+`q=4`, each normalized signed source has total variation
+at most `1+1+2/3+1/10<3`, original support `|x|<pi+R<5`,
+and both pole and horizontal cosh arguments have modulus <=40/t<=1/5.
+Using `cosh z<=2` and `|cosh z-1|<=z²` in this interval:
+
+```text
+|P_lambda(t)-P_lambda(infty)| <=28800/t²;
+|P_lambda(infty)| <=18;
+|F_lambda(t,a,q)-F_lambda(infty,0,q)| <=115200/t²;
+|F_lambda(t,a,q)|<=144;
+|K_selected(t,a,4)-K_selected(infty,0,4)|<=12441600/t²
+                                            <13000000/t².
+```
+
+These are **coarse but explicit rigorous scalar estimates** for
+the original normalized source, independent of the detailed unit-bump
+shape or evenness, as long as the established normalized symmetric
+window, mass and support conditions hold. The chosen mu is held fixed
+when comparing t to infinity. The scalar `K_selected(infty,0,4)`
+is NOT assumed equal to its atomic value.
+
+For a source witness radius R with exact J2-selected muHalf and
+muTwo and strict `kappa_R=K_selected(infty,0,4;R)>0`, this yields
+```text
+t > max(200,sqrt(13000000/kappa_R))
+   ==> K_selected(t,a,4;R)>0 for all |a|<=1/2.
+```
+The earlier independent fixed-shape even-bump jet
+`kappa_R=(120/13)*eps+O(R⁴)`,
+`eps=m2*R²/2`, `m2>0`, implies **qualitative existence**
+of some small R with kappa_R>0, PROVIDED the exact selected
+J2 branch equals the locally continued IFT branch and the original
+unit bump is even (the latter remains a Lean source lemma to verify).
+No numerical kappa_R or explicit radius has been constructed.
+Unlike a merely formal mixed-jet bound, this source transfer gives an
+explicit finite-t dependence conditional only on the high-limit margin.
+
+**Geometry and no-promotion:** this estimate is uniform in horizontal a
+at one fixed normalized q=4. Since q=16*(gamma-t)/t, it is a
+moving ordinate gamma=5t/4, not a claimed actual zeta zero.
+Reflection a->-a commutes with even hyperbolic observation but does
+not identify distinct zeros or merge signed residuals. Preserve
+8 vertices, 12 typed directed edges and six face obligations, including
+the *unpaid* smoothing/pole-limit and analytic-zero transport faces.
+Keep scalar zero, neutral C3 phase, cyclotomic cancellation, kernel
+observation zero and actual zeta zeros separate.
+
+The original actual-zero/prime-side terminal
+`H_n+E_n+S_W<T_W(rho)` is **OPEN**. A positive q=4 kernel
+is not an aggregate signed payment; all real q, multiplicities, far
+signed residual, actual mu background and S_W must be retained.
+No RH/GRH closure or Lean/Agda kernel receipt.
+
+---
+
 ## 22 November 2026 — ORIGINAL finite-frequency positive-width envelope and quadratic J2 branch
 
 Local SymPy regression committed as
