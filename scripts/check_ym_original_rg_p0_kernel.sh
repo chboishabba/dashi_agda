@@ -65,6 +65,7 @@ targets=(
   DASHI/Physics/YangMills/YMClayOriginalC3GramRowEquivalenceBidiExact.agda
   DASHI/Physics/YangMills/YMClayOriginalC3FullFiniteComplexCoefficientGramBidiExact.agda
   DASHI/Physics/YangMills/YMClayOriginalWilsonSpatialC3TimeMirrorBIDIExact.agda
+  DASHI/Physics/YangMills/YMClayOriginalWilsonN3NativeC3DensityBIDIExact.agda
   DASHI/Unified/YMClayOriginalWilsonPhysicalRegression.agda
 )
 
