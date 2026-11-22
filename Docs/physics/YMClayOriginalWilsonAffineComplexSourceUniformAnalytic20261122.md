@@ -61,7 +61,7 @@ Hence using Cauchy-Schwarz and Popoviciu's range variance bound (equivalently th
         <= 1 / [(1-s²)(1-t²)]
         <= 1 / (1-r²)^2
         = 100000000/98386561
-        ~= 1.01639858.
+        ~= 1.01639898.
 
 This universal REAL-source bound is **sharp over all positive conditional probability laws**, realized by a two-atom law with F=G=+1 or F=G=-1 and original probabilities chosen proportional to (1-s)(1-t) and (1+s)(1+t), respectively, so both tilted atoms have probability 1/2. Sharpness is for the class of all bounded laws, not a claim that an original Wilson Gibbs fibre attains it.
 
@@ -70,13 +70,13 @@ For complex sources, the algebraic numerator and K denominator give the less sha
     |d_s d_t log K_W(s,t)|
        <= 2 / (1-2r-r²)^2
        = 200000000/65918161
-       ~= 3.034.
+       ~= 3.03406523.
 
 For zero source, original conditional connected covariance is |Cov(F,G | W)|<=1. **None of these bounds decreases with physical separation**: they control analytic source differentiation and the magnitude of a local marked response, not the W3 **summation over distant connecting clusters**.
 
 ## Exact local SymPy 1.14.0 reference and negative controls
 
-Executed locally in this turn: \`/mnt/data/check_ym_original_affine_analytic_polydisc_20261122.py\`. It checks 256 strictly positive two-global-mark endpoint laws (each with four atom weights from {1,2,3,4}), 1024 exact rational real source evaluations, the exact mixed-log Hessian determinant, the real density bounds and strict 8119/10000 complex zero-free floor; it verifies the sharp two-atom equality, rational real/complex constants, and a **nondecaying** global fair-sign countermodel whose Z(s,t)=1+st and connected covariance is 1 at arbitrarily selected spatial separation. This is a mathematical countermodel to the implication "uniform source holomorphy -> D1 physical clustering", NOT a counterexample to Yang-Mills. The original complex no-zero statement is an analytic theorem from positive Wilson/Haar and bounded marks, independently of this finite discrete regression; no continuous full-SU2 Haar numerical integration is claimed in this test.
+Executed locally in this turn: \`/mnt/data/check_ym_original_affine_analytic_polydisc_20261122.py\`. A shorter separately committed reproducible Git checker is [\`scripts/check_ym_original_affine_analytic_polydisc_20261122.py\`](../../scripts/check_ym_original_affine_analytic_polydisc_20261122.py) (commit b7ae667c); the exact fetched committed file bytes were not separately executed, whereas the more extensive local reference was. It checks 256 strictly positive two-global-mark endpoint laws (each with four atom weights from {1,2,3,4}), 1024 exact rational real source evaluations, the exact mixed-log Hessian determinant, the real density bounds and strict 8119/10000 complex zero-free floor; it verifies the sharp two-atom equality, rational real/complex constants, and a **nondecaying** global fair-sign countermodel whose Z(s,t)=1+st and connected covariance is 1 at arbitrarily selected spatial separation. This is a mathematical countermodel to the implication "uniform source holomorphy -> D1 physical clustering", NOT a counterexample to Yang-Mills. The original complex no-zero statement is an analytic theorem from positive Wilson/Haar and bounded marks, independently of this finite discrete regression; no continuous full-SU2 Haar numerical integration is claimed in this test.
 
 No Agda 2.9 kernel check, no GitHub CI, no new postulate-free real/complex formal library and no Clay mass gap claim. This note uses established real/complex elementary inequalities conditional on the ORIGINAL source's explicit one-link Haar positivity. Other source marks outside [-1,1] require corresponding adjusted radii.
 
