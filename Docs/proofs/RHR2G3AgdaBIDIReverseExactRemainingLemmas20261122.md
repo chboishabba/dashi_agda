@@ -1,3 +1,32 @@
+## 22 November 2026 — off-line horizontal mixed positive-width jet (normalization explicit)
+
+Exact original-source local SymPy algebra in `scripts/check_rh_offline_positive_width_horizontal_jet_20261122.py` extends the previous q=4 a=0 result to physical off-line a=beta-1/2. The argument is **not** a generic kernel, it is the original J2-selected four-window pair and original finite pole orientation.
+
+Write `u=pi/t`, `eps=E[Y^2]/2` for the symmetric normalized bump, and move mu(lambda,eps) to preserve J2=0 at both endpoints. The original horizontal response cosh(16*a*x/t) expands as
+```text
+1 + (128/pi^2)*a^2*x^2*u^2 + O(a^4*u^4).
+```
+The raw x²-profile selected jet is `20*pi*(sqrt(3)+2*pi)/39`. The actual **physical a²u² coefficient** has the indispensable factor `128/pi²`, giving
+```text
+[eps*a²*u²] K = 2560*(sqrt(3)+2*pi)/(39*pi) > 0.
+[eps*u²] K   = 640*(2*pi-sqrt(3))/(39*pi) > 0.
+[eps] K      = 120/13 > 0.
+[a²*u²] K_atomic = 0.
+[u^4] K_atomic = 5120/351*(1-16*a^4).
+```
+Any earlier informal coefficient `20*pi*(sqrt(3)+2*pi)/39` without the physical scaling is **only the raw x²-weighted moment**, NOT the physical horizontal coefficient. The two-parameter formal expansion at q=4 is
+```text
+K = 120/13 eps
+  +640*(2*pi-sqrt(3))/(39*pi) eps*u²
+  +2560*(sqrt(3)+2*pi)/(39*pi) eps*a²*u²
+  +5120/351*(1-16*a^4)*u^4
+  + higher-order terms, including eps² and eps*u^4.
+```
+
+**Geometry constraint:** a↔-a reflection is exact at the kernel level; it does not assert any off-line ζ zero exists. The q=4 high-ordinate band is a moving physical ordinate and no fixed-zero map across changes of t is assumed. Preserve eight vertices, twelve history-/sign-/residual-carrying maps and six faces, but report only algebraically checked maps as paid; smoothing/pole-limit uniformity and analytic zero/multiplicity intertwiners remain open. Distinguish actual analytic ζ-zero, scalar zero, neutral exponent-zero C3 phase and balanced nonempty C3 cancellation. The signed actual finite source still has near/far/mu background/prime-side charge and local slack. The full terminal `H_n+E_n+S_W<T_W(rho)` is unchanged and UNPAID.
+
+---
+
 ## 22 November 2026 — finite-t × positive-width J2-preserving mixed jet; six-face geometry audit
 
 Original same-source definitions consumed: `RiemannProjectiveQuarticFourWindowAtomic.lean`, `RiemannProjectiveQuarticFourWindowPoleSameObject.lean`, and `RiemannProjectiveQuarticFourWindowSignedPoleJointHorizontalJet.lean`.
