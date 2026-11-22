@@ -7,6 +7,31 @@ This is the **phase/deliverable/remaining-lemma ledger committed with the implem
 
 
 
+## P0 J10 — S5 physical dipole / open-field source-disambiguation weld (22 Nov 2026)
+
+**Source correction:** Don Smith's Kelly/Darrer compiled figures (pp. 10–16) depict a driven coil, metal/plasma dipole, and orthogonal capacitor plate. This documents a **Smith-derived physical-dipole hypothesis**, not verified Filsinger speech, a Filsinger pin-level installation, or observed natural-source work. The indexed Filsinger FM transcript mentions NST midpoint, split positive diode groups, capacitor across selected coil, and alleged pole shift, but does **not** independently attribute the exact word `dipole` to Filsinger. Preserve the 0/4 original FM pin evidence and distinct source identity.
+
+**New candidate S5:** an open electromagnetic-port coupled-mode completion, **distinct from** S1 hard centre-tap and S3 explicit capacitive-return lumped completion. Complex coil amplitude `a`, dipole amplitude `b`, driver `f`, incident port `s+`, outgoing port `s-=-s+ + sqrt(2 kr)b`:
+```
+da/dt = (i wd - ga)a + i g b + f
+db/dt = (i wa - gb - kr - kl)b + i g a + sqrt(2 kr)s+
+E_modes = |a|^2+|b|^2
+P_driver = 2 Re(conj(a) f)
+P_load = 2 kl |b|^2
+P_internal = 2 ga |a|^2 + 2 gb |b|^2
+E_bank_dot = P_load - G_bleed v^2 - G_spark(on) v^2
+E_bank = C v^2/2
+```
+The `g` coupling and natural resonant phase `wd,wa` are reactive: they cancel from global net work. The exactly conserved **two-port** power identity is
+`d(E_modes+E_bank)/dt = P_driver+|s+|²-|s-|²-P_internal-G_bleed v²-G_spark(on)v²`.
+`kr,kl,ga,gb>=0`, `g,wd,wa` real and independent, and port energy-wave normalization are assumptions. Bank transfer `P_load` is an **abstract ideal energy receiver**: S5 is NOT yet welded to S1/S3's diode finite-drop, signed-node return or hysteretic switching trajectories. In particular `C*v*dv/dt=P_load-loss` is singular as a voltage ODE at `v=0`, so integrate a nonnegative energy state and explicitly constrain switching before combining. Distinguish radiation leaving the system from genuinely independent ambient incident waves. `s+=0` rules out *incident* environmental work, not stored-energy discharge.
+
+**Executed local exact test:** `scripts/check_smith_filsinger_s5_dipole_port_20261122.py` was reproduced with local SymPy 1.14: **15/15 exact symbolic checks PASS**; includes amplitude work, input/output wave identity, complete reservoir conservation, zero-source/zero-storage and independence from reactive coupling/frequency. This does NOT add 15 to the prior nonlinear S1/S3 **64/64** count; no new S5 time-dependent nonlinear integration, numerical response comparison, or original pin evidence is claimed. Committed checker source, rather than only a local hash.
+
+**Next J11 priority — big-bite nonlinear inverse weld:** combine a *source-indexed* antenna receive/radiate port with S3's two-node capacitive-return state and diode/spark charge dynamics; account for emitted/reflected power, finite diode loss, restored cycle reservoir energy, and driver backaction without double-counting incident RF. Run source-on/off and storage-restored counterworlds, test near-field vs radiative coupling alternatives, and independently identify natural `s+` from physical measurements **before** any environmental-energy claim. Preserve S5 as a conditional Smith-style completion, not an authenticated Filsinger netlist. No exposed high-voltage build instructions.
+
+---
+
 ## P0 J0–J9 — nonlinear S1/S3 BIDI coupled coil → diode OR → reservoir → spark + explicit donor (22 Nov 2026)
 
 **User's execution instruction: keep THIS exact roadmap committed and current on PR #1537.** Latest local implementation consumes I0–I7 steelman and original source-typed owners; no new video is available or demanded. Filsinger original speech supports capacitor-across-selected-coil, NST midpoint/Earth return, four positive diodes in two narrated groups and spark dump; Smith/Kelly/Darrer historical account independently supplies magnetically coupled tuned L1/L2. The same physical winding identity, original diode pins and actual environmentally sourced power are still OPEN (FM original 0/4 verified physical edges; original empirical archive 0/24). Retain S1 and S3 as **distinct model worlds**, not certified Filsinger netlists.
