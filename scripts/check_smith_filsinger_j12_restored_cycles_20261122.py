@@ -4,7 +4,7 @@ Synthetic dimensionless case; never an authenticated Filsinger circuit.
 """
 import json,math,numpy as np
 from scipy.integrate import solve_ivp
-P=dict(L1=2.,L2=1.5,M=.6,R1=.35,R2=.28,C=1.,Cu=.4,Cv=.55,Cb=.65,Rd=.12,Vd=.1,Gbleed=.018,Gspark=1.1,Von=.22,Voff=.075,omega=1.1,gamma_rad=.085,gamma_internal=.04,k=.15,source_amp=.10)
+BASE=dict(L1=2.,L2=1.5,M=.6,R1=.35,R2=.28,C=1.,Cu=.4,Cv=.55,Cb=.65,Rd=.12,Vd=.1,Gbleed=.018,Gspark=1.1,Von=.22,Voff=.075,omega=1.1,gamma_rad=.085,gamma_internal=.04,k=.15,source_amp=.10)
 T=20*math.pi
 def advance(p,inc,phi,state,active,t0):
  L=np.array([[p['L1'],p['M']],[p['M'],p['L2']]]);A=np.array([[p['C']+p['Cu'],-p['C']],[-p['C'],p['C']+p['Cv']]])
@@ -44,15 +44,15 @@ def advance(p,inc,phi,state,active,t0):
  assert abs(resid)<1e-6
  return y[:7],active,dict(driver=wd,incident=wi,outgoing=wo,net_wave=wi-wo,spark=wsp,
          diode=wdi,heat=w1+w2+wbl+wfi,storage_delta=E1-E0,residual=resid,switches=switches)
-def restored(p,inc,phi):
+def periodic(p,inc,phi,max_iter=28,tol=2e-6):
  x=np.zeros(7);on=False
- for n in range(28):
+ for n in range(max_iter):
   y,after,r=advance(p,inc,phi,x,on,n*T)
   err=float(np.max(np.abs(y-x)))
-  if err<2e-6 and after==on:
+  if err<tol and after==on:
    z,after2,result=advance(p,inc,phi,y,after,(n+1)*T)
    close=max(err,float(np.max(np.abs(z-y))))
-   assert after2==after and close<2e-6
+   assert after2==after and close<tol
    return dict(cycles=n+2,closure=close,**result)
   x=y;on=after
  raise AssertionError('not restored')
@@ -63,7 +63,7 @@ def main():
  ('Gspark15',True,0,{'Gspark':1.5}),('lowSparkThreshold',False,0,{'Von':.003,'Voff':.0009})]
  rows=[]
  for name,inc,phi,changes in variants:
-  r=restored(P|changes,inc,phi);r.update(case=name,phase=phi,changed=changes)
+  r=periodic(BASE|changes,inc,phi);r.update(case=name,phase=phi,changed=changes)
   rows.append(r);print(name,'spark',r['spark'],'driver',r['driver'],'net',r['net_wave'])
  checks=0
  for r in rows:
