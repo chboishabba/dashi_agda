@@ -1,3 +1,17 @@
+## 22 November 2026 — P0 ACTUAL zero-marked fourth max-cut (source owner already paid)
+
+Source-first audit of Lean main `Synthesis/RiemannProjectiveQuarticFourWindowSignedPoleBidiMarkedFourth.lean` and Agda `DASHI/Analysis/RiemannQuarticSignedPoleBidiMarkedFourthExact.agda`: original `literalLocalCenteredFourthAngularAt_eq_bidi_discrepancy` is an EXACT source-owned local zero-minus-`Zeta23.mu` 0/2/4 BIDI identity. The zero sum uses the real `centeredZeroFinset`, actual multiplicity and `SameOrd t` exclusion. `localizedBidiMarkedProducer_exact` is only a trivial packaging of the already-defined three moments; it is NOT the missing one-centre analytic marked-pair theorem. The specific short-support cosh-marked literal prime channel is already recorded source-paid as zero. The remaining full signed response/archimedean and far/slack payment is not thereby proved.
+
+New local SymPy regression `scripts/check_rh_marked_fourth_reflected_cloud_obstruction_20261122.py` (commit `93198e65`) constructs two strictly off-ordinate **synthetic** reflection-complete clouds (no actual ζ-zero claim). Both have identical positive integer mass `M0=4`, vertical `M2=100h²` and marked `M2=-100h²`. Source `D_A=1/2 M4 -3 A² M2 +5 A⁴ M0` yields opposite local *zero* fourth-angular signs: `-4375h⁴/4` versus `+4841h⁴/4`, with exact marked M4 difference `4608h⁴`. This improves the previous unreflected M0/M2 negative controls: reflection, positivity, local support, and SameOrd exclusion still cannot certify the required fourth-moment sign. A shared smooth `mu` background preserves the difference but may shift BOTH centred signs.
+
+Sharp local positive-measure cone: for `V0>0`, `|δ|<=L`, `V2²/V0<=V4<=L²V2`. In a constant-|a|=A subfamily, fourth-angular sum lies in `[V2²/V0-6A²V2+A⁴V0, L²V2-6A²V2+A⁴V0]`; this band crosses zero on the two clouds. For full physical strip `|a|<=1/2`, `-8L²V2<=Σ mult*P4<=L²V2+V0/16` is a universal bound, but not a strict RH payment.
+
+**Exact new execution target (not more low-moment algebra)**: derive the genuine ACTUAL-zero localized marked fourth correction `ΔM4` relative to original `ΔM0,ΔM2` and `Zeta23.mu`. If the required local lower angular charge is `D_A(Δ)>B`, the exact reverse target is `ΔM4 > 2B+6A²ΔM2-10A⁴ΔM0` (inequality reversed for an upper charge). Couple the actual finite zero source to the merged Lean #22 A2 strict scalar `localPositiveDebt+signed FarExact < compensationTargetThreshold+localMuGain`, keeping full sign/multiplicity and local slack. A2 remains OPEN, as does `H_n+E_n+S_W<T_W(rho)`. No RH/GRH or Lean/Agda kernel claim.
+
+**Geometry/attribution**: preserve eight vertices, twelve maps, six faces with reflection/smoothing/pole axes, time/history/refinement/Frobenius/consumer, balanced ternary sign, actual-Zeros target vs excluded off-ordinate distinction, full far source and separate scalar-zero/exponent-zero-C3/Fourier-zero semantics. This is a finite **nonpromotion test** and mathematical moment cone; it is not an analytic commuting-cube theorem or a zero distribution theorem. Full details and exact provenance in `Docs/proofs/RHR2G3AgdaBIDIReverseExactRemainingLemmas20261122.md`, ledger commit `14b2ca29`.
+
+---
+
 ## 22 November 2026 — P0 concrete original-bump q=4 witness, still NOT the RH signed terminal
 
 **New original-source quantitative result**, source-written on
