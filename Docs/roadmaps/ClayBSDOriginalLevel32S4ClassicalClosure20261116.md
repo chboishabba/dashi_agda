@@ -1,3 +1,10 @@
+## 22 November 2026 — zero-aware 2-isogeny versus spatial C3/OS non-identity
+
+Cross-lane recovery: the finite C3 Wilson Gram and three-character sector detection on [YM master-based PR #1536](https://github.com/chboishabba/dashi_agda/pull/1536), [source note](https://github.com/chboishabba/dashi_agda/blob/agent/ym-p0-cmp119-r445-master-weld-20261121/Docs/physics/YMClayOriginalWilsonC3SourceGramToOSSpectralFaithfulness20261122.md), do **not** transport elliptic isogeny kernel points to Yang–Mills zero-energy eigenvectors. The original BSD owner curve is E32: y²=x³−x (CM by Z[i]), with E[2]={O,(0,0),(1,0),(-1,0)}; the Eisenstein j=0 E36 curve y²=x³+1 (CM by Z[omega]) is not the same model, has different bad primes and different character data. A separate selected 2-isogeny and its dual satisfy phi_hat o phi=[2] only with the exceptional torsion/kernel branches and actual point at infinity included, **not** merely the rational affine chart. The genuine Kummer/Selmer square requires global/local cohomology, the real and 2-adic conditions, and kernel-accepted same-object maps; no finite C3 Fourier correspondence supplies those inputs.
+
+BSD P0 remains the existing classical selected E32 K1–K5 versus native formal S4 analytic eta/Mellin/model correspondence, including true global coefficients and L(E,1), with original Kummer/dual integration; selected classical known cases do not prove universal S6. The 22-Nov YM C3 toy adds a formal Gram-null and distinct vacuum solely as a *negative control*; do not confuse either with E32 torsion or Sha[2]. Preserve original source ownership, scalar zero vs phase exponent zero, local exceptional points and Frobenius indices; Lean E36 C3 donors cannot be relabelled as E32.
+
+
 ## 21 November 2026 — Mellin source correction / weld-forward (latest)
 
 The **original Mellin compiler is ALREADY PRESENT** in
