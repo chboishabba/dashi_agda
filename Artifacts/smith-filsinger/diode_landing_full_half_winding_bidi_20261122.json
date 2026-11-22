@@ -107,5 +107,12 @@
     "Only THEN compare measured P-to-M signed electrical waveform, ideally with storage and spark dynamics modelled; peak-only measurements cannot discriminate ideal T2 vs T1.",
     "Source-origin claim requires simultaneous signed original driver, environment/earth/chemical/RF, load and storage work. Other Filsinger reels cannot be merged."
   ],
-  "safety": "Historical source and mathematical inverse study only; not HV build, direct test or probing instructions."
+  "safety": "Historical source and mathematical inverse study only; not HV build, direct test or probing instructions.",
+  "windingOwnerReturnRevision": {
+    "newCanonical": "Artifacts/smith-filsinger/midpoint_winding_owner_return_cut_bidi_20261122.json",
+    "scope": "Earlier E0 four-case waveform model prescribes U,V relative M. It does NOT establish selected tuned coil = NST full A-B or half A-M; a third candidate is separate tuned U-V with midpoint return absent, conductive, or capacitive/displacement. Ideal diode OR with fully floating no-return source island cannot sustain exterior diode currents under KCL, and capacitive return may emulate unloaded symmetric +/-half voltages.",
+    "provenance": "Source words preserved; no new original filmed pin-continuity certificate.",
+    "localSymPy": "Independent 55/55 PASS; committed focused byte-identical 33/33 PASS",
+    "agda": "DASHI/Physics/Motors/SmithFilsingerWindingOwnerReturnCutBidiExact.agda not kernel checked"
+  }
 }
