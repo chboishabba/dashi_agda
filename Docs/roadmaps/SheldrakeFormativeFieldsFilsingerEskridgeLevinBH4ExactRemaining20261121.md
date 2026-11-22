@@ -7,6 +7,26 @@ This is the **phase/deliverable/remaining-lemma ledger committed with the implem
 
 
 
+## P0 J14 — live roadmap audit, J12/J13 interface correction and rank robustness (22 Nov 2026)
+
+**Source audit (new P0):** the original committed J12 Python exported `P` and `restored`, while J13 imported `BASE` and `periodic`. Consequently previous J13 local 51/51 acceptance **did not verify the runnable committed pair**. Repaired J12 source directly on this PR (commit `033498a3`) to export matching `BASE` and `periodic(...,max_iter=28,tol=2e-6)`, with the caller's tolerance and iteration bound respected. These changes were read through the GitHub connector; the repaired GitHub bytes still await an independent execution replay, and must not be claimed byte-for-byte locally accepted. Prior 43/43 J12 and 51/51 J13 refer to *local source variants*, not accepted committed revision equivalence.
+
+**Numerical robustness audit (executed locally from mounted original J12):** independent local J14 `/mnt/data/check_smith_filsinger_j14_rank_robustness_20261122.py` recalculated central differences for the five J13 parameters and five distinct work channels at step factors `0.5` and `2` relative to J13's baseline. Committed a compact test driver at `scripts/check_smith_filsinger_j14_rank_robustness_20261122.py`. Local full numerical receipt: `/mnt/data/j14_rank_robustness_results_20261122.json` (not a GitHub artifact).
+
+| FD step relative to J13 | Smallest row/column normalized relative singular value | Rank at 1e-5 | Switching-count pairs |
+| --- | ---: | ---: | --- |
+| 0.5 | 0.0009549548 | 5/5 | all five pairs matched (16/16) |
+| 1.0 (prior J13) | 0.0140009752 | 5/5 | all five pairs matched (16/16) |
+| 2.0 | 0.00196697 | 5/5 | `k`: 18/16; `Von`: 16/18 (others 16/16) |
+
+**Correction to J13 promotion:** rank 5 at an arbitrary relative numerical cutoff is a **weak local linear-algebra diagnostic**, not yet a stable 5-parameter inverse certificate. The smallest normalized singular value differs by more than one order of magnitude with finite-difference step size. The double-step coupling and threshold stencils straddle a discrete switching-count change, and cannot be called smooth derivatives of one fixed hybrid mode. Even the half-step stencil, which retains switch counts, needs smaller-step/solver-tolerance convergence checks (matching counts alone does not guarantee identical switching histories). The full-row `Wincident` is a synthetic source-prescribed channel; availability of that measurement in real Filsinger hardware has NOT been demonstrated. Spark-only rank remains at most one.
+
+**J14 acceptance split:** local paired step replays and their energy/restoration assertions **PASS** for the tested half and double step stencils; strict *step-stable inverse condition* and *same hybrid-mode double-step* gates **NOT PASS**. Keep failures explicit; do not advertise universal 5/5 inverse robustness or measured environmental energy. Existing J12/J13 restored-cycle outcomes remain conditional synthetic results.
+
+**J15 next priority:** (1) byte-for-byte run of current committed J12+J13+J14 scripts together; (2) use fixed-hybrid-history derivatives or event-time sensitivity/continuation and shrink steps with numerical tolerance refinement; (3) constrain the measurement set to source-accessible calibrated fields instead of freely assumed `Win`; (4) separate Maxwell near-field capacitive return from propagating RF incident/outgoing fields; (5) if residual numerical ranks are unstable, report partial identifiability/nullspace rather than promote closure. Original Filsinger four physical pin edges remain 0/4, and S5 remains sourced to Smith only.
+
+---
+
 ## P0 J13 — restored-cycle nonlinear inverse rank, threshold bifurcation and source ambiguity (22 Nov 2026)
 
 **Executed local run:** original local J12 solver `/mnt/data/check_smith_filsinger_j12_restored_cycles_20261122.py` was rerun **43/43 PASS**. J13 local `/mnt/data/check_smith_filsinger_j13_inverse_rank_20261122.py` then executed **51/51 PASS** over **13 approximately restored synthetic scenarios**, finite-difference derivative windows for five parameters, and all integrated work ledgers. Machine-readable local result: `/mnt/data/j13_s3_s5_inverse_rank_results_20261122.json`. A compact equivalent J13 test driver was committed to `scripts/check_smith_filsinger_j13_inverse_rank_20261122.py` using the existing J12 script on this branch; its exact committed bytes have not separately been rerun, so do not call GitHub CI or Agda acceptance.
