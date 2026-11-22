@@ -1,0 +1,32 @@
+{
+  "title": "Filsinger F0 no-return cut corrected for precharged transient diode output",
+  "date": "2026-11-22",
+  "source": {
+    "original": "Earlier user-transcribed NST midpoint/capacitor across selected coil/diodes joined positive, spark-gap dump and Earth/midpoint return.",
+    "scope": "Original video pin map and physical storage state unknown; do not treat original as having an isolated island.",
+    "existingOwner": "DASHI/Physics/Motors/SmithFilsingerWindingOwnerReturnCutBidiExact.agda"
+  },
+  "correction": {
+    "priorImplicitAssumption": "The equality i1+i2+i3+i4=0 was written as ordinary KCL of a floating island; it actually requires zero instantaneous net island charge derivative (stationary island), or applies after integrating over a restored charge cycle.",
+    "instantaneous": "dQ_island/dt + sum_{k=1}^4 i_Dk = I_return, with positive currents leaving island and I_return positive entering. No-return imposes I_return=0; it does NOT impose dQ_island/dt=0.",
+    "finiteTimeNoReturn": "Q_start-Q_end = integral_{t0}^{t1} sum_i i_Di dt >= 0 when only positive diodes leave island; finite positive output pulses can be funded by pre-existing charge.",
+    "restoredCycle": "Q_end=Q_start and I_return=0 => integrated diode outflow 0; nonnegative currents imply zero almost everywhere in the ideal model. Sustained rectification instead requires replenishment/return or additional exterior crossing mechanisms.",
+    "boundedInitialCharge": "For finite Q_start relative to stated reference, cumulative outward charge cannot exceed available net island charge Q_start-Q_min, assuming lower charge bound Q_min. For bound |V_load|<=Vmax, energy delivered by that positive current is at most Vmax times emitted charge, but charge bound is not an energy proof without voltage or storage/source work.",
+    "RCcountermodel": "The model C Vdot = -V/R (an exterior-reference storage C, not the internal differential tank C) yields W_load(0,T)=0.5 C V0^2 (1-exp(-2T/(R C))) and a positive one-way pulse with decaying charge; finite source initial energy, not replenished Earth work.",
+    "naturalDonor": "External natural source work stays explicitly unknown; adding real return/donor may sustain a charged cycle but must be separately sourced and metered."
+  },
+  "acceptance": {
+    "localScript": "/mnt/data/check_filsinger_transient_charge_return_sympy_20261122.py",
+    "local": "28/28 exact local SymPy 1.14 PASS, corrected initial candidate after symbolic q assignment issue; not yet committed byte-for-byte.",
+    "gitBlobExecutedLocal": "30de320edaea8ab5539be0c05c42977c50f48b80",
+    "agda": "source-written finite charge receipt 1 = 0 + 1; prior zero-current conditional theorem scoped to stationary/restored charge, not Agda kernel checked"
+  },
+  "newReverseDiscriminators": [
+    "Source wording mentions spark gap: distinguishes single transient from sustainable repeated cycle, NOT proof of either particular wiring.",
+    "At steady/repeated source operation, compare source island charge before/after whole period and all return paths, not just output diode currents.",
+    "Actual capacitor across selected coil may store differential reactive energy without providing a galvanic common-mode return; retain two separate storage quantities.",
+    "Physical NST midpoint is narrated; a separate tuned secondary remains an inverse candidate but its source-to-M return must be proven.",
+    "Original signed energy source, load, losses, initial/final state and full physical ground path remain open."
+  ],
+  "physicalEvidence": "Prior original 0/24 raw evidence roles remain unfilled. No original measured device power or an original diode-pin proof inferred."
+}
