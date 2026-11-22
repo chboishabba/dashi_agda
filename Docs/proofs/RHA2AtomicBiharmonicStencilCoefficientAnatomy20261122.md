@@ -101,6 +101,8 @@ The coefficient anatomy:
 - `8500 = 17000/2`: 17000 the source's **chosen eighth-remainder majorant**, and 2 again the two-sided window. The 17 in 17000 is NOT a geometric index.
 - Multiplication by 15 to isolate S gives `160=2400/15` and `15/8500=3/1700`; hence `S>pi^6*eta²/160+(3eta²/1700)L`. No independent geometry produces 160 or 1700.
 
+**Two different appearances of 160 must NOT be equated.** The positive atomic coefficient `+160/351` comes from folding the `+4` binomial difference against the `40/351` projective scale. The **denominator 160** in the leading A2 strength threshold comes from `2400/15`, where `2400` is a Taylor/M6/count envelope and `15` an integrated mu-gain coefficient. They coincide numerically but occupy distinct typed source/consumer layers; no claimed commuting map identifies them. The analogous two `15` occurrences (sixth-phase binomial vs fourth-moment integration denominator) are likewise distinct.
+
 **Source proof slack, demonstrating non-invariance:** in `Synthesis/RiemannProjectiveQuarticFourWindowSignedPoleEighthRemainder.lean`, the sixth-degree scalar cosine bound is `q^8/35840`; the truncated cosh factor is at most 2, giving an intermediate `q^8/17920` bound. The final proof relaxes this to `q^8/17000`. A tighter eighth envelope using the already-proved intermediate estimate could replace `17000->17920`, hence `8500->8960`, `1700->1792`, without altering the five-point geometry; this tightened envelope is a **proposed source proof weld, not a new Lean theorem accepted here**. The binomial coefficients `15=C(6,2)=C(6,4)` inside the complex sixth phase ARE angular-polynomial geometry, unlike the denominator 15 of the mu gain.
 
 ## 4. Which objects are geometrical?
