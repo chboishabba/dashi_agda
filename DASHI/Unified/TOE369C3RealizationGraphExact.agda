@@ -1,5 +1,19 @@
 module DASHI.Unified.TOE369C3RealizationGraphExact where
 
+-- R445 induced coarse log source quasilocality is NOT a TOE equivalence.
+-- Actual YM #1536: a change in one original R445 W_i moves its first
+-- fine link and precisely six ORIGINAL Wilson plaquettes, on 19 actual
+-- fibre/spectator variables (site-oscillation sum <=96 beta).
+-- When two W contrasts have disjoint affected source plaquette sets,
+-- the true induced coarse log K0(W) four-corner contrast is exactly an
+-- integral of conditional first-source covariances, bounded by
+-- (96 beta)^2 q^distance/(1-q), q=36 tanh(beta), at SMALL beta only.
+-- This does not provide a physical SU(N) beta(a) running-law rate,
+-- same-object universal 369 C3, CMP119/122 W3 absolute cluster charges,
+-- positive-time RP or any same-H OS spectral gap. Cross-PR source note only;
+-- conjecturalPhysicalRealization grades / physicalPromotion=false unchanged.
+
+
 -- R445/F19 960-variable conditional source audit (2026-11-22): YM #1536 local original-Wilson source proof.
 -- Under the actual 64 two-link axial R445 product maps and all 896
 -- interacting original spectators, the fixed-coarse-W continuous SU(N)
