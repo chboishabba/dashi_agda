@@ -7,6 +7,34 @@ This is the **phase/deliverable/remaining-lemma ledger committed with the implem
 
 
 
+## P0 J11 — nonlinear S3 × S5 radiative-port, capacitive return, diode bank and hysteretic spark (22 Nov 2026)
+
+**Big-bite source implementation:** `scripts/check_smith_filsinger_j11_s3_s5_nonlinear_20261122.py` commits a reproducible fully coupled conditional ODE with original S3 two independent node voltages `u,v` and positive capacitance matrix `[[C+Cu,-C],[-C,C+Cv]]`; mutual-inductance primary/secondary with `M²<L1L2`; finite-drop/resistance positive rectifier current `ju=max((u-b-Vd)/Rd,0)` and `jv=max((v-b-Vd)/Rd,0)`; bank voltage and bleed; spark thresholds `Von=.22,Voff=.075`; plus a distinct two-quadrature S5 electromagnetic dipole mode `q,p` with incident/outgoing radiation waves.
+
+**Reciprocal field/charge mechanism:** `A [u',v']ᵀ=[-i2-ju+k q,i2-jv]ᵀ`, while `q'=omega p-(gamma_i+gamma_r)q-k u/2+sqrt(2 gamma_r)s+_Re` and `p'=-omega q-(gamma_i+gamma_r)p+sqrt(2 gamma_r)s+_Im`. With `E_field=q²+p²`, coupling transfers equal and opposite `k u q` power; it is **not** a donor. Outgoing wave `s-=-s+ + sqrt(2 gamma_r)(q+i p)`; thus `P_rad,net=|s+|²-|s-|²`. Magnetic and electric energies retain original S3 forms, and bank has `Cb b²/2`.
+
+**Full nonstationary work conservation:**
+```
+Wdriver + Wincident + E(initial)
+= Woutgoing + WR1 + WR2 + Wdiode + Wbleed
+  + Wspark + Wfield_internal + E(final).
+```
+The code checks symbolic amplitude/port/coupling conservation and integrates *all* nine work counters with event-specific switching; zero-source empty state and bank-only precharge controls included. Local SymPy 1.14 / SciPy 1.17 run on the fully specified dimensionless 8-period synthetic window: **17/17 checks PASS**, maximum integrated absolute energy residual ~**1.98e-9**. This is NEW J11 acceptance, separate from original S1/S3 **64/64** and separate S5 **15/15**. Commit includes executable test, and local full-run result remains an illustrative model, not an observed port receipt.
+
+| Synthetic condition | Wdriver | Win | Wout | Wspark | Efinal | Switching |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Drive only | 21.873173 | 0 | .078893 | .034475 | 1.440904 | 2 |
+| Drive + field incident | 21.864129 | .502655 | .579802 | .035188 | 1.440036 | 2 |
+| Field incident only | 0 | .502655 | .500764 | 0 | .000327 | 0 |
+| No source, zero storage | 0 | 0 | 0 | 0 | 0 | 0 |
+| Precharged bank only | 0 | 0 | 0 | .257213 | .000122 | 1 |
+
+**Crucial inverse correction:** Positive **gross incident** energy can coexist with **negative net field work** because the driver excites reradiation through the same port. Here `Win-Wout=-.077148` in driven+incident case, compared with `-.078893` for driven-only. Even output increase `ΔWspark≈+.000713` does NOT identify an ambient source: the driver changes its own work, and field phase changes radiation, loss, stored state and switching. A meaningful restored-cycle source test must measure the same physical driver's signed work, net incident-vs-outgoing Poynting flux and all storage states. Our 8-period endpoints are NOT a restored periodic orbit, and incident amplitude `.10` is a synthetic prescribed wave, not a naturally measured donor.
+
+**J12 next exact gate:** vary incident phase/frequency, coupling `k`, reflection/radiation rates and diode/spark uncertainty; solve end-state matched/restored-cycle comparison, separating RF absorption, driver extraction, reactive near-field transfer and spark threshold shifts. Include local recomputation from the committed exact source, Agda owner/weld only after the true analytic state contracts are settled. Original FM pin proof still **0/4**; Smith-source dipole attribution is not Filsinger speech.
+
+---
+
 ## P0 J10 — S5 physical dipole / open-field source-disambiguation weld (22 Nov 2026)
 
 **Source correction:** Don Smith's Kelly/Darrer compiled figures (pp. 10–16) depict a driven coil, metal/plasma dipole, and orthogonal capacitor plate. This documents a **Smith-derived physical-dipole hypothesis**, not verified Filsinger speech, a Filsinger pin-level installation, or observed natural-source work. The indexed Filsinger FM transcript mentions NST midpoint, split positive diode groups, capacitor across selected coil, and alleged pole shift, but does **not** independently attribute the exact word `dipole` to Filsinger. Preserve the 0/4 original FM pin evidence and distinct source identity.
