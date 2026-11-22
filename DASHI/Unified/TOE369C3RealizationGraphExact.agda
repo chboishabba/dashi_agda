@@ -1,5 +1,23 @@
 module DASHI.Unified.TOE369C3RealizationGraphExact where
 
+-- 22-Nov original R445 TWO-LEVEL Dobrushin is NOT TOE physical closure.
+-- Literal #1536 full original compact SU(N) Wilson source at SMALL beta:
+-- 64 actual R445 W, 64 Haar V + all 896 interacting spectators.
+-- Exact first-selected-link face geometry gives only 3 directly overlapping
+-- other coarse W and max_a sum_i source-face-incidences n_i(a)=12.
+-- The original COARSE marginal K0(W) 4-corner mixed logarithmic Hessian
+-- must keep direct E[J_ij] plus first-source-score conditional Cov;
+-- dropping E[J_ij] breaks exactly 96 overlapping L4 coarse pairs.
+-- Fibre q_f<=36*tanh(beta); induced unmarked coarse Gibbs conditional
+-- q_c<=3*beta+1152*beta^2/(1-q_f). At beta<=1/72,
+-- q_f<=1/2 and q_c<=35/72. Source-local full Haar theorem,
+-- locally checked, NOT Agda kernel. This is only high-temp first RG.
+-- Globally affine marked coarse q, weak-coupling beta(a) history,
+-- renormalized CMP119/122 absolute physical W3, original OS/same-H gap
+-- and universal/internal 369-C3 physical identity all remain OPEN.
+-- No conjectural realization edge or physicalPromotion flag is changed.
+
+
 -- R445 induced coarse log source quasilocality is NOT a TOE equivalence.
 -- Actual YM #1536: a change in one original R445 W_i moves its first
 -- fine link and precisely six ORIGINAL Wilson plaquettes, on 19 actual
