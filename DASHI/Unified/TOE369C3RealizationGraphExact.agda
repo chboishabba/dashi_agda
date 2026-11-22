@@ -1,5 +1,23 @@
 module DASHI.Unified.TOE369C3RealizationGraphExact where
 
+-- R445/F19 960-variable conditional source audit (2026-11-22): YM #1536 local original-Wilson source proof.
+-- Under the actual 64 two-link axial R445 product maps and all 896
+-- interacting original spectators, the fixed-coarse-W continuous SU(N)
+-- conditional Haar interaction graph has 960 variables: 64 V with weighted
+-- original-plaquette neighbour degree 36, 896 S with degree 18.
+-- Classical Dobrushin gives conditional q<=36*tanh(beta); with two GLOBAL
+-- original plaquette source labels and r=9/100: q<=36*tanh(beta)+6r,
+-- which is <=79/100 only for beta<=1/144. The conditional mixed F19
+-- action Hessian is spatially bounded in this 960-variable graph.
+-- C3/time mirror preserve variable LABEL incidence after transforming W,
+-- not the law at a fixed untransformed W, and do not prove positive-time RP.
+-- This leaves the induced coarse action K0(W), physical beta(a) UV,
+-- renormalized CMP119/122 ABSOLUTE W3, original same-H D2 and universal
+-- 369/internal gauge C3 realization as uninhabited physical sources.
+-- The source proof and locally checked geometry are branch-local to YM #1536;
+-- this is only a provenance comment, not an unmerged Agda proof import.
+
+
 -- 22 Nov 2026 CROSS-PR SOURCE NON-PROMOTION RECEIPT (YM #1536, TOE #1291/#1281):
 -- Genuine original Wilson L4 spatial C3 rotates positive-link spacetime
 -- labels while fixing time; its original time mirror commutes with C3
