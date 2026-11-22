@@ -97,9 +97,42 @@ coarse_pos=Q(1,4) # conditional means E[F|e1]=e1/2, E[G|e1]=e1/2
 fine_neg=Q(-1,4) # conditional Cov(F,G|e1) = -Var(e2)/4
 assert fine_neg+coarse_pos==neg_total and abs(fine_neg)+abs(coarse_pos)==Q(1,2)
 
+# EXACT CMP119-TYPE SOURCE ACTION CHAIN RULE ON THE SAME WILSON FIBRES:
+# A_{k+1}=-log(E[e^{-A_k}|coarse]), hence
+# D_st A_{k+1}=E[D_st A_k|coarse]-Cov(D_s A_k,D_t A_k|coarse).
+# This must retain the earlier intrinsic mixed Hessian; one cannot build
+# the next-scale marked action from first source derivatives alone.
+def action_derivatives(row,ss,tt):
+    k,b,c,d=row
+    marked=k+ss*b+tt*c+ss*tt*d
+    assert marked>0
+    return (marked,-(b+tt*d)/marked,-(c+ss*d)/marked,
+            -(k*d-b*c)/marked**2)
+chain_checks=0
+for coarse_bits in range(3):
+    outer=grouped(coarse_bits)
+    inner=grouped(coarse_bits+1)
+    for w,p in outer.items():
+        children=(inner[w],inner[w+(1<<coarse_bits)])
+        assert all(sum(x[i] for x in children)/2==p[i] for i in range(4))
+        for ss,tt in ((Q(0),Q(0)),(Q(9,100),-Q(9,100)),(Q(-1,25),Q(1,25))):
+            pr=action_derivatives(p,ss,tt)
+            cr=[action_derivatives(x,ss,tt) for x in children]
+            total=sum(x[0] for x in cr)
+            weights=[x[0]/total for x in cr]
+            Est=sum(weights[i]*cr[i][3] for i in (0,1))
+            Es=sum(weights[i]*cr[i][1] for i in (0,1))
+            Et=sum(weights[i]*cr[i][2] for i in (0,1))
+            Est_product=sum(weights[i]*cr[i][1]*cr[i][2] for i in (0,1))
+            assert pr[3]==Est-(Est_product-Es*Et)
+            assert pr[1]==Es and pr[2]==Et
+            chain_checks+=1
+assert chain_checks==21
+
 print('PASS source rerun: 1536 original Wilson plaquettes, 32768 direct and 32768 fibre configurations')
 print('PASS original four-coefficient source equality at 8 / 4 / 2 / 1 coarse states')
 print('PASS exact four-stage signed covariance/action-Hessian tower; telescoping error zero')
+print('PASS',chain_checks,'exact same-source nonzero-affine CMP119 effective-action chain rules')
 print('PASS 15 distinct same-original fibre actions, source positivity and uniform affine score bound')
 print('PASS full mixed log action = negative conditional F/G covariance; fine st source not factorizable')
 print('PASS signed-W3 negative control: covariance 0 but absolute two-scale charge 1/2')
