@@ -315,3 +315,8 @@ import DASHI.Physics.YangMills.YMClayR445AdjacentHaarPermutationCompilerExact as
 -- Full complex OS quotient, same-H completion/semigroup and D1/D2
 -- uniform gap remain OPEN, no Agda kernel receipt.
 import DASHI.Physics.YangMills.YMClayOriginalC3WeightedOSGramBidiExact as OriginalC3OSGram
+
+-- Original same-Wilson full reflected-Gram ROW equivalence under spatial C3:
+-- stronger observation/quotient guard than diagonal semiform zero alone.
+-- Conditions are source-visible; full complex RP/E1 OS still OPEN.
+import DASHI.Physics.YangMills.YMClayOriginalC3GramRowEquivalenceBidiExact as OriginalC3GramRow
