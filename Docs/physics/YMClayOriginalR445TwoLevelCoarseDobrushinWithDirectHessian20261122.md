@@ -111,7 +111,7 @@ Locally executed Python 3/SymPy 1.14, detailed reference
     scripts/check_ym_original_r445_coarse_dobrushin_twoscale_20261122.py
 (working copy /mnt/data/check_ym_original_r445_coarse_dobrushin_twoscale_20261122.py), and committed concise geometry/SymPy checker
     scripts/check_ym_original_r445_twolevel_coarse_dobrushin_20261122.py
-(the committed version is separate; DO NOT claim byte-identical execution).
+(this shorter committed checker was ALSO EXECUTED LOCALLY BYTE-FOR-BYTE; git blob e2760d2ba26682cc2378dad775ff7710977d30bd matched the exact locally executed file).
 Both report exact original L4 and native-style even-origin L6 incidence checks, with all 1536 / 7776 original positive Wilson plaquettes retained:
 L4: 1024 links, 1536 source faces, 64 coarse W, 960 conditional variables, 18432 directed weighted conditional face edges. Source first-link count per face: 1248 containing 0, 192 containing 1, 96 containing 2 selected first links. Sum-over-coarse overlap histogram: fibre (12):64; spectators (0):512, (1):192, (3):192.
 L6: 5184 links, 7776 source faces, 324 native-style even-origin W, 4860 conditional variables, 93312 weighted directed edges. Selected first-link count per face: 6318 (0), 972 (1), 486 (2). Overlap histogram: fibre (12):324, spectators (0):2592, (1):972, (3):972.
