@@ -320,3 +320,9 @@ import DASHI.Physics.YangMills.YMClayOriginalC3WeightedOSGramBidiExact as Origin
 -- stronger observation/quotient guard than diagonal semiform zero alone.
 -- Conditions are source-visible; full complex RP/E1 OS still OPEN.
 import DASHI.Physics.YangMills.YMClayOriginalC3GramRowEquivalenceBidiExact as OriginalC3GramRow
+
+-- P0 original actual R445 time-mirror/native C3 BIDI: source-owned
+-- 1024-bond time-link inverse commutes with physical spatial rotation;
+-- canonical Vec weld discharges former abstract Gram commute premise.
+-- Full Gibbs density C3, complex RP, E1 and same-H remain OPEN.
+import DASHI.Physics.YangMills.YMClayOriginalWilsonSpatialC3TimeMirrorBIDIExact as OriginalC3TimeMirror
