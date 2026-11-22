@@ -1,3 +1,57 @@
+## 22 November 2026 — exact moving q=4 atomic boundary layer (new, local SymPy)
+
+**Reuse original source; no positive-width or actual-zero claim.**
+Executable new source regression:
+`scripts/check_rh_selected_atomic_q4_boundary_layer_20261122.py`
+(committed on draft #1533). With original finite-t atomic pole determinant,
+u=pi/t, physical a=beta-1/2, and moving normalized ordinate
+q=4+z*u, exact symbolic Taylor algebra yields
+
+```text
+K_t,atom(a,4+z*u)
+ = (5/1404)*[4096-65536*a^4+1536*pi^2*a^2*z^2-pi^4*z^4]*u^4
+   + O(u^5).
+```
+
+Coefficients u^0,u^1,u^2,u^3 vanish identically. The z=0
+specialization recovers the previously proved
+(5120/351)*(1-16*a^4)*u^4. At fixed |a|<1/2, the leading
+coefficient is strictly positive exactly when
+
+```text
+|z| < (8/pi)*sqrt(12*a^2+sqrt(1+128*a^4)).
+```
+
+Because the source q=16*(gamma-t)/t, its moving centre q=4
+means gamma=5*t/4, and its *leading-coefficient* ordinate half-width is
+
+```text
+|gamma-5*t/4| < (1/2)*sqrt(12*a^2+sqrt(1+128*a^4)).
+```
+
+In particular a=0 has limiting half-width 1/2 in gamma.
+This is a fixed-physical-width boundary layer with vanishing
+kernel amplitude O(t^-4), not a uniform signed-margin estimate.
+At z on the root, the leading coefficient is zero and this
+calculation supplies **no sign**. The strict leading sign for
+each fixed (a,z) strictly inside/outside its boundary holds only
+for sufficiently high t, and the result is not uniform up to
+|a|=1/2 or the moving z boundary.
+
+The actual selected W has positive bump radius R and non-atomic
+mu parameters. No estimate here promotes the atomic sign to W.
+The relevant off-ordinate zeros must be actual zeta zeros with
+multiplicity and the same t-dependent target selection;
+the presence of zeros in the indicated ordinate band is not
+proved or assumed. Even if present, this positive local lobe
+does not prove failure or success of the aggregate signed payment
+H_n+E_n+S_W<T_W(rho). Retain the complete far-source and local
+slack. **Missing analytic leaf unchanged:** actual-zero
+localized marked-pair/prime-side sign bound plus coupling
+to the original finite signed source.
+
+---
+
 # RH R2/G3 ↔ Agda BIDI: reverse-solved exact remaining lemmas (22 November 2026)
 
 ## 22 November 2026 — exact original selected-atom sign bifurcation and marked-pair BIDI
