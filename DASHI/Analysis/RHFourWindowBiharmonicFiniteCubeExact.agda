@@ -197,6 +197,36 @@ indexedProjectiveSquare :
 indexedProjectiveSquare
   (indexedSource k s r m o (source4 c left right witness inner outer)) = refl
 
+-- Use exactly the H05 *five* independent context indices, rather than
+-- pretending those indices are nine independent geometric degrees of freedom.
+H05SourceFrame :
+  (History Time Refinement Frobenius Version Sign Residual Mode Observation Payload : Set) → Set
+H05SourceFrame History Time Refinement Frobenius Version Sign Residual Mode Observation Payload =
+  IndexedSource (Q.Index History Time Refinement Frobenius Version)
+    Sign Residual Mode Observation Payload
+
+-- Recover the original source and all attached indices, not merely the
+-- collapsed Fourier observation. This is a one-sided BIDI round-trip;
+-- arbitrary inconsistent TracedFive values are NOT claimed to invert.
+recoverIndexedRaw :
+  ∀ {Index Sign Residual Mode Observation : Set} →
+  IndexedSource Index Sign Residual Mode Observation TracedFive →
+  IndexedSource Index Sign Residual Mode Observation Source4
+recoverIndexedRaw (indexedSource k s r m o f) =
+  indexedSource k s r m o (originalFiveSource f)
+
+recoverIndexedRawAfterDirect :
+  ∀ {Index Sign Residual Mode Observation : Set}
+  (f : IndexedSource Index Sign Residual Mode Observation Source4) →
+  recoverIndexedRaw (directIndexed f) ≡ f
+recoverIndexedRawAfterDirect (indexedSource k s r m o f) = refl
+
+recoverIndexedRawAfterFold :
+  ∀ {Index Sign Residual Mode Observation : Set}
+  (f : IndexedSource Index Sign Residual Mode Observation Source4) →
+  recoverIndexedRaw (unfoldIndexed (projectIndexed f)) ≡ f
+recoverIndexedRawAfterFold (indexedSource k s r m o f) = refl
+
 -- Original pi/3 input history is inhabited and nonempty, despite
 -- its observed cancellation in the projected profile.
 sampleFour : Source4
