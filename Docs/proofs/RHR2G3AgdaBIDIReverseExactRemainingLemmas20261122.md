@@ -5,114 +5,114 @@
 ### Source-first geometry, NOT a same-object positive-width witness
 
 New original-source mathematical test is in
-\`scripts/check_rh_selected_finite_t_atomic_sign_20261122.py\`
-(commits \`964db866\` / \`ed54cef3\`; readback blob
-\`af78e6365b55b194bc23d6dd5efb14ad979f580b\`).
+`scripts/check_rh_selected_finite_t_atomic_sign_20261122.py`
+(commits `964db866` / `ed54cef3`; readback blob
+`af78e6365b55b194bc23d6dd5efb14ad979f580b`).
 Local SymPy **1.14.0** and Python byte-identical Git blob both checked.
-Original Lean \`main\` sources reread:
+Original Lean `main` sources reread:
 
-- \`Synthesis/RiemannProjectiveQuarticFourWindowAtomic.lean\`
-  blob \`f2f49ccb889e948a73a6724ce9ce1a59e36a24c1\`:
-  exact \`μ_0(λ)=(13λ−8)/(144−54λ)\`, J2=0 and signed J4.
-- \`Synthesis/RiemannProjectiveQuarticFourWindowAtomicPoleSign.lean\`
-  blob \`64584ceecb34770af0bb547249cd904d4d93706e\`:
-  high-\`t\` \`P∞(λ)=3(2−λ)/4\` and exact **finite-\`t\`** atomic
+- `Synthesis/RiemannProjectiveQuarticFourWindowAtomic.lean`
+  blob `f2f49ccb889e948a73a6724ce9ce1a59e36a24c1`:
+  exact `μ_0(λ)=(13λ−8)/(144−54λ)`, J2=0 and signed J4.
+- `Synthesis/RiemannProjectiveQuarticFourWindowAtomicPoleSign.lean`
+  blob `64584ceecb34770af0bb547249cd904d4d93706e`:
+  high-`t` `P∞(λ)=3(2−λ)/4` and exact **finite-`t`** atomic
   pole determinant.
-- \`Synthesis/RiemannProjectiveQuarticFourWindowPoleSameObject.lean\`
-  blob \`60cc239d3968e25b8a42cebc18bf4744907facd3\`:
+- `Synthesis/RiemannProjectiveQuarticFourWindowPoleSameObject.lean`
+  blob `60cc239d3968e25b8a42cebc18bf4744907facd3`:
   literal normalized pole weight
-  \`cosh(8v/t)cos(16v)cos(cv)\` at c=1,2 and exact
-  determinant \`P_t=B1 A2−B2 A1\`.
-- \`Synthesis/RiemannProjectiveQuarticFourWindowSignedPoleTarget.lean\`
-  blob \`16110e433efd16379c6b93bdc13420036b1d6411\`
-  and \`Synthesis/RiemannProjectiveQuarticFourWindowSignedPoleJointHorizontalJet.lean\`
-  blob \`4d0437ffb058c7e8b6961521a611608b1494ba3f\`:
+  `cosh(8v/t)cos(16v)cos(cv)` at c=1,2 and exact
+  determinant `P_t=B1 A2−B2 A1`.
+- `Synthesis/RiemannProjectiveQuarticFourWindowSignedPoleTarget.lean`
+  blob `16110e433efd16379c6b93bdc13420036b1d6411`
+  and `Synthesis/RiemannProjectiveQuarticFourWindowSignedPoleJointHorizontalJet.lean`
+  blob `4d0437ffb058c7e8b6961521a611608b1494ba3f`:
   the **source-defined** signed profile is
-  \`P_{2/3} P_{G,1/2} − P_{1/2}P_{G,2/3}\`,
-  with \`P_G(v)=4G(v)(A1 cos(2v)−A2 cos v)\`.
-  The exact Lean selected W uses **positive** bump radius \`R>0\`;
+  `P_{2/3} P_{G,1/2} − P_{1/2}P_{G,2/3}`,
+  with `P_G(v)=4G(v)(A1 cos(2v)−A2 cos v)`.
+  The exact Lean selected W uses **positive** bump radius `R>0`;
   these calculations concern its **R→0 atomic source model** only.
 
-**A previously unrecorded global identity for the high-\`t\` atomic BASE.**
-At \`λ=1/2,2/3\`, \`μ_0(1/2)=−1/78\`,
-\`μ_0(2/3)=1/162\`, atomic centres \`0,π/3,π/2,π\`,
-weights \`(1,−1,λ,μ_0)\`,
-\`A1=1/2−μ_0\`, \`A2=3/2−λ+μ_0\`.
-With \`α\` as **independently normalized horizontal** displacement,
+**A previously unrecorded global identity for the high-`t` atomic BASE.**
+At `λ=1/2,2/3`, `μ_0(1/2)=−1/78`,
+`μ_0(2/3)=1/162`, atomic centres `0,π/3,π/2,π`,
+weights `(1,−1,λ,μ_0)`,
+`A1=1/2−μ_0`, `A2=3/2−λ+μ_0`.
+With `α` as **independently normalized horizontal** displacement,
 the *high-pole-limit atomic* signed Fourier/cosh kernel is exactly
-\`\`\`text
+```text
 K∞(α,q)
   = (160/351)cos(πq/2)cosh(πα/2)
     −(40/351)cos(πq)cosh(πα)−40/117.
 K∞(0,q) = −(80/351)(1−cos(πq/2))² <= 0,
 equality precisely q in 4*Z.
-\`\`\`
+```
 Thus the entire BASE atom is nonpositive—not merely integer samples.
-Nevertheless, put \`h=cosh(πα/2)>1\`,
-\`c=cos(πq/2)\`, and \`c*=h/(2h²−1)∈(0,1)\`.
+Nevertheless, put `h=cosh(πα/2)>1`,
+`c=cos(πq/2)`, and `c*=h/(2h²−1)∈(0,1)`.
 The sign function is a *concave quadratic* in c,
 with exact values
-\`\`\`text
+```text
 K∞(α,4k)=−(80/351)(h−1)² < 0
 K∞(α,q with c=c*)=
     (160/351)(h²−1)²/(2h²−1) > 0.
-\`\`\`
-Both horizontal \`±α\` sides have the **same** sign.
-The \`α>0\` positive lobe is not a finite-\`t\` selected W or an
-actual-ζ-zero witness: when physical \`a=β−1/2\` is fixed and
-\`t→∞\`, \`α=16a/t→0\`.
+```
+Both horizontal `±α` sides have the **same** sign.
+The `α>0` positive lobe is not a finite-`t` selected W or an
+actual-ζ-zero witness: when physical `a=β−1/2` is fixed and
+`t→∞`, `α=16a/t→0`.
 
-**New exact FINITE-\`t\` atomic result; retains source pole correction.**
-Use \`u=π/t\`, \`a=β−1/2\`, physical normalized
-\`α=16a/t\`, and
-\`\`\`text
+**New exact FINITE-`t` atomic result; retains source pole correction.**
+Use `u=π/t`, `a=β−1/2`, physical normalized
+`α=16a/t`, and
+```text
 h1=cosh(8u/3), h2=cosh(4u), h3=cosh(8u)
 B1(λ)=1+h1/4−μ_0(λ)h3
 B2(λ)=1−h1/4−λh2+μ_0(λ)h3
 P_t(λ)=B1(λ)(3/2−λ+μ_0(λ))
         −B2(λ)(1/2−μ_0(λ)).
-\`\`\`
-Insert \`P_t(2/3),P_t(1/2)\` into the **same**
+```
+Insert `P_t(2/3),P_t(1/2)` into the **same**
 atomic four-centre signed profile and cosh/cos Fourier response.
 SymPy exact Taylor coefficient collection gives
-\`\`\`text
+```text
 K_{t,atom}(a,4)
   = [5120/351*(1−16a^4)]*(π/t)^4 + O(t^−6)
 K_{t,atom}(a,1) = −80/351 + O(t^−2).
 K_{t,atom}(a,0) = −81920/351*a^4*(π/t)^4+O(t^−6).
-\`\`\`
-In particular, **for every fixed** \`|a|<1/2\`,
-there is a sufficiently large \`t\` with
-\`K_{t,atom}(a,4)>0\` but \`K_{t,atom}(a,1)<0\`.
+```
+In particular, **for every fixed** `|a|<1/2`,
+there is a sufficiently large `t` with
+`K_{t,atom}(a,4)>0` but `K_{t,atom}(a,1)<0`.
 This is a mathematical asymptotic existence conclusion
 from an **exact strictly positive fourth-order coefficient**;
-it is NOT a claim of uniformly positive \`q=4\` over all \`t≥200\`
-or uniformity in \`a\` up to \`±1/2\`.
-At \`a=1/4\`, the exact \`(π/t)^4\` coefficient is
-\`1600/117\`. Numerically evaluated **untruncated**
-source pole cosh formula at \`t=200,400,1000,10000\`
-and \`a=0,1/16,1/4,49/100\`: **16/16**
-positive \`q=4\` / negative \`q=1\` pairs passed
+it is NOT a claim of uniformly positive `q=4` over all `t≥200`
+or uniformity in `a` up to `±1/2`.
+At `a=1/4`, the exact `(π/t)^4` coefficient is
+`1600/117`. Numerically evaluated **untruncated**
+source pole cosh formula at `t=200,400,1000,10000`
+and `a=0,1/16,1/4,49/100`: **16/16**
+positive `q=4` / negative `q=1` pairs passed
 at 55-digit precision; numerical signs are
 **stress tests**, not certified interval enclosures.
 
 **Why this matters to P0:** The original signed
-\`literalOffOrdSource(σ)\` equals
-\`mult(σ)/(t/16)^2*K_W((β−1/2)/(t/16),
-(γ−t)/(t/16))\`, with actual zero multiplicity.
+`literalOffOrdSource(σ)` equals
+`mult(σ)/(t/16)^2*K_W((β−1/2)/(t/16),
+(γ−t)/(t/16))`, with actual zero multiplicity.
 The atomic sign-change test prohibits replacing the
 signed literal sum by a *universal atom-level
 pointwise nonpositive assertion* or using the
-\`α=0\` square as its full kernel.
+`α=0` square as its full kernel.
 It does **not** say that any actual ζ-zero
 occupies a favourable or adverse toy offset.
 Since the source **positive** atomic q=4
-margin is \`O(t^-4)\`, an undifferentiated
-fixed-width smoothing error \`O(R)\`
+margin is `O(t^-4)`, an undifferentiated
+fixed-width smoothing error `O(R)`
 cannot certify that sign for arbitrarily
 large t (for fixed R>0, an upper error
-bound of size \`C R\` eventually exceeds
-the \`t^-4\` margin). A sharper
+bound of size `C R` eventually exceeds
+the `t^-4` margin). A sharper
 moment-sensitive smoothing comparison or
 a different **signed aggregate** argument
 is required if this atomic sign is used.
@@ -121,36 +121,36 @@ method*, not a no-go for all positive-R W.
 
 ### Original Agda marked-pair producer recovered in BIDI audit
 
-Additional exact Agda \`master\` source reread:
-\`DASHI/Analysis/RiemannQuarticSignedPoleBidiMarkedFourthExact.agda\`
-blob \`703d721bfd3625e31b1cf74f15d3efdb060e99ad\`,
+Additional exact Agda `master` source reread:
+`DASHI/Analysis/RiemannQuarticSignedPoleBidiMarkedFourthExact.agda`
+blob `703d721bfd3625e31b1cf74f15d3efdb060e99ad`,
 which records a **PAID**
 target/reflection fourth-angular reconstruction:
-\`\`\`text
+```text
 P2(x,d)=x²−d², P4(x,d)=x⁴−6x²d²+d⁴
 P4(x,d)=[P4(x−A,d)+P4(x+A,d)]/2
        −3 A² [P2(x−A,d)+P2(x+A,d)]
        +5 A⁴.
-\`\`\`
+```
 Source status already has the 0/2/4 even-marked
 operator **PAID**, but the localized
 one-centre marked-pair producer, prime-side
 sign/estimate, target-centred fourth angular
 bias and coupling to far source are **OPEN**.
-\`RiemannQuarticSignedPoleFrontierExact.agda\`
-blob \`ad96304383e60526bbbede5e12ddf7d0799412f7\`
+`RiemannQuarticSignedPoleFrontierExact.agda`
+blob `ad96304383e60526bbbede5e12ddf7d0799412f7`
 already owns the historical G1/G3 carrier and
 compiled fourth-Lipschitz/band; do not rebuild it.
 
 Exact SymPy BIDI identity PASS. Finite *synthetic*
 countermodels have **equal M0=4 and M2=4**
-but different \`M4=4\` versus \`M4=8\`:
-\`\`\`text
+but different `M4=4` versus `M4=8`:
+```text
 d=(-1,-1,1,1)    => M4=4
 d=(-√2,0,0,√2)   => M4=8.
-\`\`\`
+```
 The chosen fourth-moment comparison to
-\`6\` has opposite signs. These are **not**
+`6` has opposite signs. These are **not**
 actual ζ-zero configurations; they prove only
 that count/second moment cannot determine the
 fourth marked quantity from those inputs
@@ -162,14 +162,14 @@ the RvM count bound.
 
 1. **Main Lean R2 signed terminal:**
    for every hypothetical high off-line
-   actual ζ \`ρ\`, preserve original positive-width
-   \`W\`, \`t/16\`, multiplicities,
-   \`H_n\`, \`E_n\`, \`S_W\` and
-   \`T_W(ρ)\`. **OPEN:** prove a strict
-   \`H_n+E_n+S_W<T_W(ρ)\` for some
+   actual ζ `ρ`, preserve original positive-width
+   `W`, `t/16`, multiplicities,
+   `H_n`, `E_n`, `S_W` and
+   `T_W(ρ)`. **OPEN:** prove a strict
+   `H_n+E_n+S_W<T_W(ρ)` for some
    true finite half-open window, or the
    sufficient source-sharpened inequality
-   \`B_n^sharp+S_W≤T_W(ρ)−ε\`.
+   `B_n^sharp+S_W≤T_W(ρ)−ε`.
    The atomic sign algebra does NOT produce
    this certificate.
 2. **Existing BIDI marked-pair alternative:**
@@ -178,16 +178,16 @@ the RvM count bound.
    fourth-order target into an **actual ζ**
    localized marked-pair/prime-side
    quantitative signed estimate, retaining
-   actual \`μ\` background and far coupling.
+   actual `μ` background and far coupling.
    This is a genuine **analytic leaf**, not
    another abstract marked-fourth lemma.
 3. **Agda original independent high route:**
    the full literal balance-free
-   \`literalNear + far + Γ < ClusterResponse\`
+   `literalNear + far + Γ < ClusterResponse`
    for each high off-line case, with
    downstream balance attachment and
    low/located source. No presumed Lean
-   \`W\` ⇔ Agda \`G2\` equality without
+   `W` ⇔ Agda `G2` equality without
    a genuine same-zero/test/scalar weld.
 4. **Source trust**: exact Git blob and SymPy
    assertions passed; **no** Agda or Lean
