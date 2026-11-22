@@ -1,0 +1,102 @@
+{
+  "date": "2026-11-22",
+  "owner": "Filsinger midpoint/spark proposal; reel identity Dfu9Jseviz9 provisional",
+  "scope": "Exact original source-index FM narrated graph; physical photographed pin continuity not reauthenticated",
+  "originalEdges": [
+    {
+      "id": "FM1",
+      "from": "transformer_secondary",
+      "to": "midpoint_accessible",
+      "basis": "user_transcribed_topology_no_pin_graph",
+      "proven_continuity": false
+    },
+    {
+      "id": "FM2",
+      "from": "selected_coil",
+      "to": "shunt_capacitor",
+      "basis": "user_transcribed_capacitor_across_coil_no_pin_graph",
+      "proven_continuity": false
+    },
+    {
+      "id": "FM3",
+      "from": "rectifier_branch_positive_A",
+      "to": "rectifier_branch_positive_B",
+      "basis": "user_transcribed_positives_ganged_not_photographically_pin_traced",
+      "proven_continuity": false
+    },
+    {
+      "id": "FM4",
+      "from": "rectified_return",
+      "to": "center_tap_or_Earth_ground",
+      "basis": "user_transcribed_alternatives_not_traced",
+      "proven_continuity": false
+    }
+  ],
+  "sourceNarratedEdges": 4,
+  "sourcePhysicallyVerifiedEdges": 0,
+  "originalPinGates": [
+    {
+      "gate": "G0",
+      "target": "actual NST centre-tap M",
+      "status": "no source-verified terminal photograph"
+    },
+    {
+      "gate": "G1",
+      "target": "selected coil U-V",
+      "status": "cannot select NST full A-B versus NST half A-M versus independently tuned coil"
+    },
+    {
+      "gate": "G2",
+      "target": "capacitor C1,C2",
+      "status": "across coil spoken but both physical capacitor-to-coil pin joins unverified"
+    },
+    {
+      "gate": "G3",
+      "target": "four diode anode/cathode inputs and joined P",
+      "status": "ganged positives spoken, no original physical pin-to-positive netlist"
+    },
+    {
+      "gate": "G4",
+      "target": "output P/load/negative/M/Earth",
+      "status": "return alternative spoken, no physical same-conductor vs capacitor/impedance proof"
+    },
+    {
+      "gate": "G5",
+      "target": "original source/earth/drive/load/loss/storage work",
+      "status": "no simultaneous signed real-power or original time identity"
+    }
+  ],
+  "conditionalCounterworlds": [
+    {
+      "label": "NST full",
+      "winding": "L_U=NST_A,L_V=NST_B",
+      "return": "LOAD_N=NST_M",
+      "observed": false
+    },
+    {
+      "label": "NST half",
+      "winding": "L_U=NST_A,L_V=NST_M",
+      "return": "LOAD_N=NST_M",
+      "observed": false
+    },
+    {
+      "label": "separate tuned",
+      "winding": "L_U,L_V separate NST",
+      "return": "LOAD_N to Earth or M requires an independently specified physical/conductive/displacement path",
+      "observed": false
+    }
+  ],
+  "conditionalTheorems": [
+    "Fully isolated resonant island with only 4 outward ideal diode edges and no other return: sum nonnegative diode currents zero by KCL, so each zero",
+    "Equal-capacitance displacement reference to M can mimic an unloaded symmetrical centre-tap voltage signature without conductor"
+  ],
+  "acceptance": {
+    "local": "/mnt/data/check_filsinger_source_edge_admission_20261122.py",
+    "checks": "45/45 exact local SymPy 1.14 PASS",
+    "localGitCompatibleBlob": "be0b14a26fe16cdab32d88b0787d9d1f819440f3",
+    "formal": "DASHI/Physics/Motors/SmithFilsingerSourceEdgeAdmissionBidiExact.agda",
+    "agda": "source written, kernel not checked"
+  },
+  "originalEvidence": "Prior original 0/24 physical raw roles remain open",
+  "promotionRule": "Only same-reel original pin evidence can turn narrated source claims into physical equalities; the existing Kelly/Smith and other Filsinger reel graph pieces cannot be welded by similarly named components."
+}
