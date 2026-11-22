@@ -1,3 +1,25 @@
+## 22 November 2026 — original finite-t atom sign obstruction; native marked fourth producer reused
+
+**P0 math result committed**; full exact source proof/remaining-leaf register is `Docs/proofs/RHR2G3AgdaBIDIReverseExactRemainingLemmas20261122.md` (commit `7b0480f1`). The original BIDI source donor is the **same signed four-window projective atomic model** from native Lean `RiemannProjectiveQuarticFourWindowAtomic`, `AtomicPoleSign`, `PoleSameObject`, `SignedPoleTarget`, `SignedPoleJointHorizontalJet`, not a substitute kernel.
+
+**Exact SymPy all-offset source geometry**:
+```text
+K_atom_high(0,q) = -80/351*(1-cos(pi*q/2))^2 <= 0
+K_atom_high(alpha,q)
+   = 160/351 cos(pi*q/2) cosh(pi*alpha/2)
+     -40/351 cos(pi*q) cosh(pi*alpha)-40/117.
+```
+For every nonzero normalized `alpha` this high-pole-limit atom has BOTH strictly positive and strictly negative q-lobes despite the globally nonpositive alpha=0 square. Using instead exact **finite-t atomic pole** and physical `a=β−1/2`, `alpha=16a/t`, the q=4 Taylor coefficient is precisely `5120/351*(1−16a^4)*(pi/t)^4` (terms order 0,2 vanish), whereas `K_t(a,1)→−80/351`. For each fixed `|a|<1/2` the **atomic model** has both signs at sufficiently large t. This does NOT establish any positive/negative actual selected `R>0` witness for all t; an `O(R)` localization envelope cannot preserve `O(t^-4)` sign uniformly with one fixed R.
+
+**Additional Agda original producer checked:** `DASHI/Analysis/RiemannQuarticSignedPoleBidiMarkedFourthExact.agda` already proves/reports the exact fourth angular target/reflection operator using ONLY even 0/2/4 marked moments; `RiemannQuarticSignedPoleFrontierExact.agda` owns original quartic G1/G3 scaffold. **Not a new lemma**: target/reflection algebra. **OPEN**: actual ζ localized one-centre M4 marked-pair estimate, prime-side sign, and real same-source far coupling. Exact SymPy countercontrol: finite synthetic configurations have same M0=4/M2=4 but M4=4 and 8, so actual zeta count alone cannot decide signed fourth bias. Do not identify these synthetic configurations as actual zeros.
+
+**Controlling active mathematical work order unchanged and sharpened**:
+(A) original Lean selected positive-width W for each actual high off-line rho: **H_W + S_W < 4d_W(rho) + I_W** including post-sixth local slack. Reverse-solve via exact original half-open finite signed `H_n` plus certified two-sided `E_n`; alternatively original already-proved sharpened cone budget with positive *full* slack margin. (B) existing even-marked 0/2/4 producer → actual localized marked pair / prime-side quantitative theorem → same original signed far/μ weld, **not** an M0-only or base-kernel proof. (C) independent native Agda Bishop-located literal `Near+Far+Gamma<ClusterResponse` for every high off-line zero, balance held separate; no assumption Lean W scalar already equals Agda G2. (D) external original all-character theorem compatible kernel/axiom admission in parallel, NOT presumed accepted.
+
+**Local test committed & verified:** `scripts/check_rh_selected_finite_t_atomic_sign_20261122.py` commit `ed54cef3`, Git blob `af78e6365b55b194bc23d6dd5efb14ad979f580b` verified byte-for-byte with local executable; SymPy 1.14 exact checks and 16/16 high-precision finite-t atomic signs passed. No Lean/Agda, no CI, and no actual-zero signed RH or GRH theorem paid. Update this roadmap with each new original mathematical acceptance; do not open a competing RH proof roadmap.
+
+---
+
 ## 22 November 2026 — NEW BIDI reverse proof end: post-sixth FULL terminal, actual Agda RH reviewed
 
 **This corrects the current controlling P0 target; the last audit's `H<T` omitted the original post-sixth local slack.** The actual native Lean `RiemannProjectiveQuarticFourWindowSignedPoleFourierTerminal.lean` already proves `PostSixthCanonicalSignedHighCut ρ EV ↔ completedSignedResidual + canonicalLocalBudgetSlack(EV)/2 < 2*combinedZeroHeightDefect ρ`, with nonnegative slack. Original FourierMass + ConeDecomposition source gives completed `=(H-I)/2`, where `H` is **literal selected original ζ off-ordinate sum including multiplicity**, `I` is exact selected `μ` integral. Hence **terminal iff `H+S<T`, `T=4d+I`, `S=canonicalLocalBudgetSlack≥0`**. Source-written existing `UniformSignedCompensationGap` and `UniformSharpenedSignedCompensationGap` without an `S` allowance prove only the weaker `H<T`; they must not be promoted as full post-sixth discharge. The original ConeDecomposition already proves sharpened cone gain, good remainder and old→sharpened dominance; that proof is **PAID**, not a fresh donor to reprove.
