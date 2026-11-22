@@ -13,7 +13,7 @@ def advance(p,inc,phi,state,active,t0):
  def energy(x):
   i,j,u,v,b,q,z=x
   return float(np.array([i,j])@L@np.array([i,j])/2+np.array([u,v])@A@np.array([u,v])/2+p['Cb']*b*b/2+q*q+z*z)
- E0=energy(state);y=np.r_[state,np.zeros(9)];t=t0;switches=0
+ E0=energy(state);y=np.r_[state,np.zeros(9)];t=t0;switches=0;event_log=[]
  def rhs(t,y,on):
   i,j,u,v,b,q,z=y[:7];drive=2*np.sin(t)
   sr=p['source_amp']*np.cos(p['omega']*t+phi) if inc else 0.
@@ -36,14 +36,14 @@ def advance(p,inc,phi,state,active,t0):
   sol=solve_ivp(lambda t,y:rhs(t,y,active),(t,t0+T),y,events=event,rtol=2e-9,atol=3e-11,max_step=.12)
   assert sol.success,sol.message
   t=float(sol.t[-1]);y=sol.y[:,-1]
-  if len(sol.t_events[0]):active=not active;switches+=1
+  if len(sol.t_events[0]):event_log.append((float(sol.t_events[0][0]-t0),'off' if active else 'on'));active=not active;switches+=1
   else:break
  else:raise RuntimeError('switching overflow')
  wd,wi,wo,w1,w2,wdi,wbl,wsp,wfi=y[7:];E1=energy(y[:7])
  resid=wd+wi+E0-(wo+w1+w2+wdi+wbl+wsp+wfi+E1)
  assert abs(resid)<1e-6
  return y[:7],active,dict(driver=wd,incident=wi,outgoing=wo,net_wave=wi-wo,spark=wsp,
-         diode=wdi,heat=w1+w2+wbl+wfi,storage_delta=E1-E0,residual=resid,switches=switches)
+         diode=wdi,heat=w1+w2+wbl+wfi,storage_delta=E1-E0,residual=resid,switches=switches,event_log=event_log)
 def periodic(p,inc,phi,max_iter=28,tol=2e-6):
  x=np.zeros(7);on=False
  for n in range(max_iter):
