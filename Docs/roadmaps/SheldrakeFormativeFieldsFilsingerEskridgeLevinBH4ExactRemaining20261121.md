@@ -7,6 +7,56 @@ This is the **phase/deliverable/remaining-lemma ledger committed with the implem
 
 
 
+## P0 J0–J9 — nonlinear S1/S3 BIDI coupled coil → diode OR → reservoir → spark + explicit donor (22 Nov 2026)
+
+**User's execution instruction: keep THIS exact roadmap committed and current on PR #1537.** Latest local implementation consumes I0–I7 steelman and original source-typed owners; no new video is available or demanded. Filsinger original speech supports capacitor-across-selected-coil, NST midpoint/Earth return, four positive diodes in two narrated groups and spark dump; Smith/Kelly/Darrer historical account independently supplies magnetically coupled tuned L1/L2. The same physical winding identity, original diode pins and actual environmentally sourced power are still OPEN (FM original 0/4 verified physical edges; original empirical archive 0/24). Retain S1 and S3 as **distinct model worlds**, not certified Filsinger netlists.
+
+**Big-bite implementation:** local executable \`/mnt/data/check_smith_filsinger_switched_s1_s3_bidi_20261122.py\` (SHA1 \`5ba414f9fd8bc49d138a148ecdb62e336c905776\`) contains BOTH models, coupled primary/secondary inductance, positive-only rectifier groups with finite forward drop and resistance, nonlinear finite charging of a bank capacitor, bleed, hysteretic spark on/off transitions, an optional independently powered environmental-current port and full signed integrated source/work/storage channels. Under linear passive magnetic coupling require \`M²<L1 L2\`. **64/64** combined exact symbolic SymPy 1.14 conservation checks + numerical event-driven SciPy 1.17 work-window tests **PASS**, maximum absolute work residual \`3.610667320685934e-12\` in **dimensionless synthetic units**. Executed source is **LOCAL ONLY**, not a committed executable and not GitHub CI. All original human/Smith/NST numerical readings and acoustic 7.8kHz are kept separate.
+
+**S1 hard midpoint:** secondary capacitor C across outer winding with an ideal TRUE centre reference M, effective outer voltages ±v/2, four narrated diode packages represented by two positive OR groups. For bank voltage b and diode drop Vd/resistance Rd, conducting group total current is \`j=max((|v|/2-b-Vd)/Rd,0)\`; its backaction on full-tank voltage is \`sign(v)*j/2\` and the bank evolves \`Cb db/dt=j-(Gbleed+Gspark*on)*b\`. This uses an *ideal equal-centre voltage* as a model parameter, not a real source readback.
+
+**S3 independent tuned coil:** secondary U-V is magnetically driven, C is **across U-V**, and TWO explicit source-to-reference capacitances Cu:U→M and Cv:V→M produce an AC/displacement current return. This is NOT the same topology as hard S1; keeping *both* node potentials is necessary. The capacitance matrix \`A=[[C+Cu,-C],[-C,C+Cv]]\` obeys \`A*[du,dv]=[-i2-ju+Ienv,i2-jv]\`; two diode groups \`ju=max((u-b-Vd)/Rd,0)\`, \`jv=max((v-b-Vd)/Rd,0)\`; \`Cb db/dt=ju+jv-(Gbleed+Gspark*on)*b\`. The capacitance matrix is positive for Cu,Cv,C>0; when Cu=Cv=0 the external common mode is singular, so no silent virtual return is granted. This is a more physically explicit reference mechanism than the earlier constant-alpha proxy.
+
+**Exact energy identity** shared by both models (work over same time interval, signed driver and donor):
+\[
+W_{\mathrm{driver}}+W_{\mathrm{env}}+E_0
+=W_{R1}+W_{R2}+W_{\mathrm{diodes}}+W_{\mathrm{bleed}}
++W_{\mathrm{spark}}+E_1.
+\]
+Magnetic stored energy is \`0.5 L1 i1²+M i1 i2+0.5 L2 i2²\`; S1 electric energy \`0.5 C v²+0.5 Cb b²\`; S3 electric energy \`0.5 C(u−v)²+0.5 Cu u²+0.5 Cv v²+0.5 Cb b²\`. Diode losses \`Vd*sum(j)+Rd*sum(jk²)\` are explicitly paid. Spark useful work is \`∫Gspark*b²dt\` over its **on** windows. Driver \`∫Vs i1 dt\`; environment \`∫vU Ienv dt\`. No leakage/field-power double count and no hidden 'Earth means source' term. The optional donor is an EXPLICIT synthetic active current \`Ienv=0.005*vU\`, a separately powered negative-conductance-like input, NOT evidence of available Earth/atmosphere energy.
+
+**Numerical outcome** for deliberately dimensionless L1=2,L2=1.5,M=.6,R1=.35,R2=.28,C=1,Cb=.65,Cu=.4,Cv=.55,Rd=.12,Vd=.1,Gbleed=.018,Gspark=1.1,Von=.22,Voff=.075,driver \`Vs=2sin t\` and window 12 periods (T=2π):
+
+| Model and source world | Wdriver | Wenv | Wspark | Efinal | Spark on/off transitions |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| **S1 drive only** | 34.509814 | 0 | 3.359725 | 1.407380 | 45 |
+| **S1 drive + explicit donor** | 34.605648 | +0.157415 | 3.421246 | 1.413187 | 45 |
+| **S3 drive only** | 31.911332 | 0 | 0.036029 | 1.451629 | 2 |
+| **S3 drive + explicit donor** | 31.912929 | +0.086567 | **0.035537** | **1.493798** | 2 |
+| **S1 or S3 precharged bank only** | 0 | 0 | 0.257213 | ~0.000030 | 1 |
+| **S1 or S3 zero-state zero-source** | 0 | 0 | 0 | 0 | 0 |
+
+For precharged case E0=0.26325. These numbers are **not SI watts, not hardware measurements, not cross-reel values** and do not establish a natural donor. Especially important: **positive Wenv does NOT logically guarantee positive ΔWspark**. In S3 the prescribed donor raises remaining stored energy while the nonlinear spark work falls, proving that peak-output or spark-only response is not a valid environmental-work identifier. Donor also shifts the *driver's* work through backaction. Always use full signed source + storage reset plus load, loss, and measured natural port before interpreting effects.
+
+**Reused proof owners, no reinvention:** \`DASHI/Physics/Motors/SmithFilsingerSwitchedCoupledStorageBidiExact.agda\` imports \`SmithFilsingerTimeIndexedTransferExact\` for \`BoundedWorkWindow\` and its preexisting \`usefulNoGreaterThanAllSources\` theorem; \`SmithFilsingerSourceEdgeAdmissionBidiExact\` and \`Circuit36927ComponentGraphExact\` preserve original/source pin constraints; \`SameObjectConservationLedgerExact\` preserves unresolved channels; the \`OriginalMaxwellMeterIntervalWeldExact\` remains the future SAME physical-source meter certificate owner. The new Agda source defines S1 and S3 as two conditional circuits, proves identical four-phrase speech is not an injective circuit observation, and packages switched finite work + optional donor choice. **Agda source written and imported into focused root, but Agda kernel NOT run**. It does **not** falsely purport to prove the nonlinear ODE in Agda; the continuous symbolic algebra and numerical event simulation belong to the local Python executable. Full results and original source boundaries in \`Artifacts/smith-filsinger/switched_s1_s3_coupled_storage_bidi_20261122.json\`.
+
+| Gate | Closed mathematically this round | Next real mathematical/physical obligation |
+| --- | --- | --- |
+| **J0 scenario BIDI** | S1 physical midpoint vs S3 independent tuned cap-return model compared under one source/driver family | Same physical-component equivalence NOT source verified |
+| **J1 coupled source** | Symmetric L matrix, positive energy condition and reflected primary backaction in time ODE | Real core and measured source-dependent mutual coupling unknown |
+| **J2 diode/spark** | Full-wave ideal centre-OR vs floating two-anode positive OR, bank and hysteretic spark events explicit | Real diode direction/count individual sharing, spark stochastic plasma unmodelled |
+| **J3 capacitive return** | Cu/Cv explicit original-hypothesis capacitance matrix; common-mode charge retained | Original Earth geometry, Maxwell displacement and return admittance unknown |
+| **J4 source work** | Exact differential work equalities, eight integrated interval ledgers, passive heat and bank closure | Full original measured port and time provenance absent |
+| **J5 transient** | Source-off charged bank emits finite pulse, source-off empty bank remains inert | Actual bank state/precharge and full repeated-cycle reset unknown |
+| **J6 environment** | Positive synthetic donor admitted and separately paid; S3 useful output can decline despite donor work | Independent Earth/atmosphere/chemical/RF active source must be **measured** |
+| **J7 local acceptance** | 64/64 SymPy/SciPy PASS; max residual 3.61e-12, local file source hash recorded | No committed full local Python script/byte identity, no Agda kernel |
+| **J8 formal reuse** | New Agda source-typed finite S1/S3 conditional carrier and reused time-window bound, root import | Agda kernel and true physical nonlinear ODE proof not yet obtained |
+| **J9 next priority** | BIDI identifies driver-work backaction + reservoir reset as decisive metrics | Next: source-conditional diode/gap constitutive uncertainty intervals and true restored-cycle port efficiency; don't request unavailable footage again |
+
+**Roadmap policy:** continue the logical steelman BIDI with source-indexed assumptions, local SymPy (not GitHub CI), and commit roadmap updates in this same PR with each meaningful result. The absence of original Filsinger footage is not a blocker. Do not export simulated voltages or watts as observed source claims. Avoid exposed high-voltage construction or probing.
+
+---
+
 ## P0 I0–I7 — steelman BIDI reverse solve without unavailable Filsinger footage (22 Nov 2026)
 
 **User constraint accepted:** no new Filsinger original pin footage is available. **Do not block all scientific progress asking for the same missing item.** Reopen source notes and exploit the original spoken transcript plus Smith/Kelly writings as distinct original/source strata, then perform **logical forward/backward conditional inference** without promoting one guessed netlist to observed hardware. Prior G/H original hardware gates remain OPEN (FM source-index: four narrated, zero verified physical links; original 0/24 physical evidence roles); retain transient charge theorem and original phase/displacement alternatives.
