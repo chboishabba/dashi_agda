@@ -415,5 +415,12 @@
     "40-inch L1 wire vs 160-inch selected L2 section wire is a geometric example, not 4:1 electrical transformer voltage or power gain.",
     "An ordinary 4-diode whole-winding bridge hard-bonded DC-negative to centre tap conflicts with ideal nonzero half-winding voltage; this is a CONDITIONAL topology no-go and does not establish original pins.",
     "20kV*1uF and 10kV*2uF nominal alternatives have the same 20mC nominal charge but different 200J/100J stored energies if operated at those voltages."
-  ]
+  ],
+  "originalFMPinAdmission20261122": {
+    "source": "Artifacts/smith-filsinger/fm_original_pin_admission_20261122.json",
+    "verifiedOriginalConnections": 0,
+    "speechRelations": 4,
+    "allUnverified": true,
+    "physicalCoilOwnerUnresolved": true
+  }
 }
