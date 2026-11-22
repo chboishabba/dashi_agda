@@ -1,3 +1,70 @@
+## 22 November 2026 — J2-preserving positive-width second-moment jet (new exact local source calculation)
+
+Read-back original source owners: Lean main
+`Synthesis/RiemannProjectiveQuarticFourWindowPoleSameObject.lean`
+(`quarticFourNormalizedPoleWeight` = cosh(8x/t) cos(16x) cos(cx)),
+`Synthesis/RiemannProjectiveQuarticFourWindowSignedPoleJointHorizontalJet.lean`
+(signed profile 4G(x)[A1 cos(2x)-A2 cos(x)]), and
+`Synthesis/RiemannProjectiveQuarticFourWindowAtomic.lean`
+(the J2-null fourth-window family). This avoids confusing on-line pairings
+with pole pairings or freezing the wrong mu.
+
+For a normalized symmetric bump Y of small scale, let
+`eps=E[Y^2]/2`. Formally
+`E[f(c+Y)]=f(c)+eps*f''(c)+O(E[Y^4])`.
+For each lambda in {1/2,2/3}, solve the SAME source
+`J2=A1*M2-A2*M1=0` through first order via
+`mu(lambda,eps)=mu0(lambda)+eps*mu1(lambda)+O(eps^2)`,
+with mu0=(13lambda-8)/(144-54lambda). The exact jet is
+`mu1=-(partial_eps J2)/(partial_mu J2)` at atomic mu0.
+The original high-t *smooth* pole is
+`P= B1*A2-B2*A1` with Bc=E_G[cos(16x)cos(cx)],
+and `K_lambda(0,4)=4 E_G[(A1cos(2x)-A2cos(x))cos(4x)]`.
+The selected source is `P_two*K_half-P_half*K_two`.
+
+SymPy independently checks: atomic P0=3(2-lambda)/4;
+atomic K0=3(lambda-2); selected zero constant term;
+the moving-mu first-order selected coefficient is EXACTLY `120/13`:
+
+```text
+K_selected,high-t,smooth(0,4)
+   = (120/13)*eps + O(E[Y^4]+eps^2).
+```
+
+For a nondegenerate fixed-shape shrinking even bump Y=R*Z,
+eps=(R^2/2)E[Z^2], E[Y^4]=O(R^4):
+strict leading coefficient positive, so high-t *smooth* q=4
+kernel is positive for sufficiently small R (assuming the
+exact smooth J2 root is locally realized). This is not uniform
+in arbitrary even bumps lacking bounded fourth-moment
+scaling, nor is it yet source-selected positive-R finite-t
+Lean acceptance. A separate smooth mu existence/uniqueness
+via analytic implicit-function argument, uniform finite-t
+error, and actual compact bump normalization remain to be
+attached before promotion to the original selected W.
+
+Independent Gaussian *surrogate* numerical quadrature
+(with J2 root solved for each lambda) gave K/eps
+8.6507901 (sigma=.02), 9.0822512 (sigma=.01),
+9.1934151 (sigma=.005), converging toward 120/13.
+This checks the symbolic sign independently but the Gaussian
+is not the original compact Mathlib bump.
+Local SymPy script:
+`scripts/check_rh_selected_positive_width_second_moment_20261122.py`.
+
+**Impact:** earlier O(R) smoothing estimates alone lose the
+atomic O(t^-4) sign. The new J2-preserving second-moment jet
+shows that smooth high-t q=4 can instead have POSITIVE O(R^2)
+leading amplitude at fixed small R. However no claim follows
+about aggregate actual off-line zeta-zero source terms:
+q=4 is only a normalized offset, the full signed source retains
+actual multiplicities, other q lanes, far source and local slack.
+**P0 missing terminal remains** `H_n+E_n+S_W<T_W(rho)`,
+or the actual-zero marked-pair/prime-side local estimate
+coupled to the original selected source. No RH/GRH closure.
+
+---
+
 ## 22 November 2026 — exact moving q=4 atomic boundary layer (new, local SymPy)
 
 **Reuse original source; no positive-width or actual-zero claim.**
