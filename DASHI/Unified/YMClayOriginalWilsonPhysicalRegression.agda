@@ -321,6 +321,11 @@ import DASHI.Physics.YangMills.YMClayOriginalC3WeightedOSGramBidiExact as Origin
 -- Conditions are source-visible; full complex RP/E1 OS still OPEN.
 import DASHI.Physics.YangMills.YMClayOriginalC3GramRowEquivalenceBidiExact as OriginalC3GramRow
 
+-- Consume original finite REAL Wilson reflected Gram with the existing
+-- full complex-coefficient physical test double sum (ALL mixed entries).
+-- Positive-time support, continuum OS and same-H identification remain open.
+import DASHI.Physics.YangMills.YMClayOriginalC3FullFiniteComplexCoefficientGramBidiExact as OriginalC3ComplexGram
+
 -- P0 original actual R445 time-mirror/native C3 BIDI: source-owned
 -- 1024-bond time-link inverse commutes with physical spatial rotation;
 -- canonical Vec weld discharges former abstract Gram commute premise.
