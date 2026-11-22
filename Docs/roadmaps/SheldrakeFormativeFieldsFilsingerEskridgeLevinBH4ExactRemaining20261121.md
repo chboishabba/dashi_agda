@@ -7,6 +7,32 @@ This is the **phase/deliverable/remaining-lemma ledger committed with the implem
 
 
 
+## P0 J13 — restored-cycle nonlinear inverse rank, threshold bifurcation and source ambiguity (22 Nov 2026)
+
+**Executed local run:** original local J12 solver `/mnt/data/check_smith_filsinger_j12_restored_cycles_20261122.py` was rerun **43/43 PASS**. J13 local `/mnt/data/check_smith_filsinger_j13_inverse_rank_20261122.py` then executed **51/51 PASS** over **13 approximately restored synthetic scenarios**, finite-difference derivative windows for five parameters, and all integrated work ledgers. Machine-readable local result: `/mnt/data/j13_s3_s5_inverse_rank_results_20261122.json`. A compact equivalent J13 test driver was committed to `scripts/check_smith_filsinger_j13_inverse_rank_20261122.py` using the existing J12 script on this branch; its exact committed bytes have not separately been rerun, so do not call GitHub CI or Agda acceptance.
+
+**Local measurement Jacobian:** five *independent named model observables* `(Wdriver, Win, Wout, Wspark, Wdiode)` against five conditional parameters `(incident amplitude, incident phase, dipole coupling k, spark on-threshold Von, diode drop Vd)`, with `Voff` held fixed for local threshold differentiation. At `source_amp=.1, phase=.3, k=.15, Von=.003, Voff=.0009, Vd=.1`, the five central-difference stencils preserve 16 switching transitions each side, so no switching-count discontinuity occurred for these particular derivatives. Column/row normalized Jacobian singular values **relative** to largest: `[1, .75108472, .63671794, .27152379, .01400098]`; numerical rank **5/5 at an explicitly chosen 1e-5 relative cutoff**. This is a *conditional local structural sensitivity test*, not a global inversion theorem, calibration covariance, singular-value metrology estimate or claimed real-device identifiability. Spark-work alone has **rank ≤1** across the five unknowns: it cannot uniquely distinguish an environmental incident source from driver/coupling/constitutive alternatives.
+
+**Selected restored outcomes** (dimensionless work per common `20π` period; phase .3 unless named):
+| Case | Wspark | Spark transitions | Net RF work |
+| --- | ---: | ---: | ---: |
+| Drive only, low threshold | .000060964 | 20 | -.122902 |
+| Drive + incident amplitude .1, low threshold | .000070913 | 16 | -.121072 |
+| Incident amplitude .4 | .0001148 | 8 | -.093979 |
+| Raised threshold .006 | .000093279 | 12 | -.121015 |
+| Raised threshold .012 | .000120441 | 4 | -.120846 |
+| Original high threshold .22 | 0 | 0 | -.120513 |
+| Coupling k=.1 | .000022560 | 10 | -.055245 |
+| Coupling k=.2 | .000161587 | 20 | -.203729 |
+
+**Important negative result:** Spark threshold can give *nonmonotonic* load extraction and an abrupt zero-output regime; a larger `W_spark` does not certify positive *net* RF input, and even `Win>0` is not sufficient when `Wout>Win`. Work must still be paid through source driver and stored-energy accounting. Full 13-case J13 maximum work-ledger residual **3.4317e-8**, maximum approximately restored coordinate error **1.5018e-6**. No natural ambient source has been identified.
+
+**Failed wider parameter campaign kept explicit:** The first J13 wide sweep encountered a nonconverged candidate (`k=0` under the low-threshold setting at the 28-cycle closure limit, discrepancy about `5.298e-4`); a second expanded sweep exceeded the local execution timeout. Neither is counted as passed or a mathematically disproved orbit. The successful scope was deliberately narrowed to 13 restorable cases; unresolved larger-amplitude/coupling/low-threshold regimes remain a numerical-bifurcation and continuation problem.
+
+**J14 remaining:** (1) re-execute the compact committed J13 source byte-for-byte, (2) assess singular-value stability against derivative step size and solver tolerances, (3) continue nonconverged parameter regions with bounded continuation and reported time budgets, (4) distinguish near-field reactive pickup from external propagating radiation using a physically calibrated Maxwell port, (5) require exact source/port provenance and actual Filsinger pin continuity before physical promotion. Retain Smith dipole and Filsinger speech as distinct source strata, original FM 0/4 physical edges, and no high-voltage experimentation.
+
+---
+
 ## P0 J12 — restored-cycle RF source identifiability, phase and spark threshold (22 Nov 2026)
 
 **Executed local acceptance:** `/mnt/data/check_smith_filsinger_j12_restored_cycles_20261122.py` (SymPy not needed for this numerical sequel; NumPy + SciPy 1.17), **43/43 PASS**, 10 scenarios, maximum absolute full-work ledger residual **3.7622e-8**, maximum 7-component cycle closure **1.615e-6**. A reproducible standalone implementation was also committed to `scripts/check_smith_filsinger_j12_restored_cycles_20261122.py`; the local run was on its longer original form, so the condensed committed source still requires a matching fresh replay. Local results are retained at `/mnt/data/j12_s3_s5_restored_cycle_results_20261122.json`, not misrepresented as a repo artifact.
