@@ -2,6 +2,10 @@
 
 **22 November 2026. Status: source-written Agda consumer / kernel NOT run.** This is a finite original-Wilson algebraic weld, not a physical continuum mass-gap theorem.
 
+## 22 November native-mirror discharge (source-written; kernel pending)
+
+A further existing producer was recovered: `YMClayOriginalWilsonSpatialC3TimeMirrorBIDIExact.actualOriginalMirrorC3Vector` already proves exact vector commutation of the **original physical R445 temporal mirror** with the **same** native spatial C3, retaining the real SU(N) temporal-link inverse. The new `originalNativeMirrorFullFiniteGramC3` now **consumes that theorem directly** and specializes the entire existing full complex-coefficient double-sum to `NativeMirror.mirrorVector`. The generic reflection/C3 premise is therefore no longer an unpaid extra field on this *finite original-mirror theorem*. Remaining inputs are the actual original selected Gibbs density C3 invariance and native canonical-label equality, plus the still-open genuine positive-time reflection map/source admissibility, original complex cylinder algebra/RP and all-cutoff E1/OS.
+
 ## Source identity and proven conditional implication
 
 The new source [YMClayOriginalC3FullFiniteComplexCoefficientGramBidiExact.agda](../../DASHI/Physics/YangMills/YMClayOriginalC3FullFiniteComplexCoefficientGramBidiExact.agda) imports and uses **unchanged**:
