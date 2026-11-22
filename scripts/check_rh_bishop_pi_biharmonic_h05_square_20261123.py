@@ -57,25 +57,36 @@ for k in range(4):
     assert s.simplify(s.diff(F2.subs(h,s.pi/2),q,k).subs(q,4))==0
 assert s.simplify(s.diff(F2.subs(h,s.pi/2),q,4).subs(q,4)/24
                   +5*s.pi**4/1404)==0
-# Bishop rational window 3<pi_M<22/7 yields midpoint p0 and
-# a guaranteed absolute radius 1/14 for pi_M (NOT Lean pi until
-# semantic bridge supplied). If |p0-Real.pi|<=1/14, then
-# |F_{h=p0/2}(q=4)| <=(320/351)(1/14)^4
-# via sin(pi)=0 and scalar sine 1-Lipschitz.
-p0=(R(3)+R(22,7))/2
-delta=(R(22,7)-R(3))/2
-assert p0==R(43,14) and delta==R(1,14)
+# Bishop rational window from the ACTUAL source
+# BishopMachinPiRationalWindowExact (strictly tighter than 3<piB<22/7).
+# These inequalities concern Bishop's constructed piB. A separate
+# same-object cross-prover receipt is necessary before Lean Real.pi.
+lo=R(3)+R(12601,89625)
+hi=R(22,7)-R(1531,1312500)
+p0=(lo+hi)/2
+delta=(hi-lo)/2
+assert lo==R(281476,89625) and hi==R(589067,187500)
+assert p0==R(93841671,29875000) and delta==R(49013,89625000)
+assert 3<lo<hi<R(22,7)
 F_rational=s.trigsimp(F2.subs({h:p0/2,q:4}))
-assert s.simplify(s.trigsimp(F_rational+R(320,351)*s.sin(p0)**4,method="fu"))==0
+assert s.trigsimp(F_rational+R(320,351)*s.sin(p0)**4,method="fu")==0
+# If |p0-Real.pi|<=delta, then |sin p0|<=delta by Lipschitz
+# with sin(Real.pi)=0; this implication is conditional on identifying
+# Bishop's piB and classical Lean Real.pi.
 bound=R(320,351)*delta**4
-assert bound==R(20,842751)
-assert bound>0
-assert 13==3**2+2**2
+assert bound==R(5770921183044640561,70774011590782928466796875000000)
+assert bound<R(816,100)*R(1,10**14)
+assert 13==3**2+2**2 and 9==3**2 and 4==2**2
 assert R(1,8)+R(1,18)==R(13,72)
+# A projector forgets the two nonzero traces: it is NOT BIDI by itself.
+raw_a=(3,24,24,4,1)
+raw_b=(3,48,48,4,1)
+assert raw_a!=raw_b
+assert (raw_a[0],raw_a[3],raw_a[4])==(raw_b[0],raw_b[3],raw_b[4])
 print("PASS 6/6 finite H05 face equations, signed stencil, 0/1/2/3 moment nulls")
 print("PASS observed pi/3 cancellation retains two distinct source histories")
 print("PASS generic-spacing negative-square Fourier symbol")
 print("PASS q4 fourth-order zero at true h=pi/2")
-print("PASS conditional Bishop pi-window notch envelope",bound)
+print("PASS conditional Bishop certified-pi notch envelope <8.16e-14",bound)\nprint("OPEN Bishop pi = Lean Real.pi source receipt; no numerical RH promotion")
 print("OPEN Agda kernel, Bishop pi <-> Lean Real.pi receipt, true 9DOF charts")
 print("OPEN smoothing, finite-pole, actual zeros, signed far/RH")
