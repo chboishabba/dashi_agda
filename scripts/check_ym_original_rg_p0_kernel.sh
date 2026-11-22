@@ -63,6 +63,7 @@ targets=(
   DASHI/Physics/YangMills/YMClayR445OriginalFullWilsonFiberDensityExact.agda
   DASHI/Physics/YangMills/YMClayOriginalC3WeightedOSGramBidiExact.agda
   DASHI/Physics/YangMills/YMClayOriginalC3GramRowEquivalenceBidiExact.agda
+  DASHI/Physics/YangMills/YMClayOriginalWilsonSpatialC3TimeMirrorBIDIExact.agda
   DASHI/Unified/YMClayOriginalWilsonPhysicalRegression.agda
 )
 
