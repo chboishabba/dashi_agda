@@ -82,7 +82,7 @@ def acquire(item, root, timeout):
 
 def main(argv=None):
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument("--out", type=Path, default=Path("./radiobio-original-data"))
+    p.add_argument("--out", type=Path, default=Path.home() / ".cache" / "dashi" / "radiobio-original-data")
     p.add_argument("--one-subject", action="store_true",
                    help="include one DecDn and one Inc .mat file; ~110MB additional")
     p.add_argument("--download", action="store_true",
