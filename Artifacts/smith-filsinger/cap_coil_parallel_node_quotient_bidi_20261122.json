@@ -107,5 +107,17 @@
     "Does frequency-dependent electrical source current dip while terminal voltage peaks and opposing branch reactive currents rise? Requires actual electrical (not acoustic) clock.",
     "Are all original signed driver/earth/environment/output and storage terms physically sourced and time-matched?"
   ],
-  "safety": "No exposed kilovolt circuit assembly, probing or unsafe experimental instructions; purely source-stated inverse and ideal finite physical modeling."
+  "safety": "No exposed kilovolt circuit assembly, probing or unsafe experimental instructions; purely source-stated inverse and ideal finite physical modeling.",
+  "windingSpanLanding20261122": {
+    "ref": "Artifacts/smith-filsinger/diode_landing_full_half_winding_bidi_20261122.json",
+    "formal": "DASHI/Physics/Motors/SmithFilsingerDiodeLandingWaveformBidiExact.agda",
+    "exactRegression": "scripts/check_filsinger_diode_node_landing_half_full_sympy_20261122.py",
+    "gitBlob": "099c4c4f9b006ed85affd8e8b002f573250a7dca",
+    "executed": "64/64 PASS SymPy 1.14, byte-identical committed script",
+    "correction": "A capacitor physically across a coil proves only shared C/L terminal nodes U,V. It does NOT prove that U and V are the two opposite outer winding ends A,B about M. U=A,V=M for a half winding is separately compatible with speech. Full-wave positive diode OR requires complementary positive/negative U/V potentials relative to actual M, in addition to landing two packages on each.",
+    "unsmoothedMeanFull": "2x/pi",
+    "unsmoothedMeanHalf": "x/pi",
+    "outputCapCounterworld": "An output capacitor/reservoir retains DC voltage between input diode pulses; do not identify full-wave from positive DC alone.",
+    "readback": "Source original video anodes, cathodes, actual chosen winding span, M/N/Earth physical continuity and simultaneous signed V/I remain open."
+  }
 }
