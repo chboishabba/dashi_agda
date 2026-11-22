@@ -12,6 +12,13 @@
 - Existing `YMClayD2ObservedDecayDoesNotForceFullSpectralGapExact` and `Docs/physics/YMClayOriginalOSDenseTestAutocorrelationGapCut20261109.md` already contain the hidden-mode and no-uniform-rate controls and the dense SAME-OS spectral theorem. This note refines their **C3** application; it does not duplicate those results.
 - The 22-Nov original affine W1/W3 bad-sector and finite labelled marked Wilson Mayer sources on PR #1536 take precedence over generic KP analogies. In particular the literal unrenormalized microscopic Mayer singleton does NOT satisfy the physical small-activity hypothesis at large beta. The renormalized original global affine-label CMP116/119/122 response attachment remains necessary.
 
+
+## New native full-Gram-row source consumer (22 Nov follow-up)
+
+`DASHI/Physics/YangMills/YMClayOriginalC3GramRowEquivalenceBidiExact.agda` is now SOURCE-WRITTEN on original master-based YM #1536, explicitly imported into `DASHI/Unified/YMClayOriginalWilsonPhysicalRegression.agda` and targeted by the fail-closed local Agda runner. It consumes the *same original weighted finite real reflected Gram* (no new measure): defines `F ~_G G` precisely when `Gram(F,K)=Gram(G,K)` for **every** original test K, proves reflexivity/symmetry/transitivity, and derives spatial C3 preservation of this full row relation for arbitrary unrotated K via the original C3³=id and original reflection-weighted invariance. It separately preserves a full zero Gram row. That is stronger than looking only at a zero diagonal and uses no arbitrary equivalence between Fourier cancellation and OS null.
+
+The carrier is still the finite real source bilinear form. The positive-semidefinite complex OS radical, quotient completion, actual E1 physical C3 unitary and time-semigroup commutation remain unpaid. This new Agda source has **NOT** been kernel checked because the local Agda executable is unavailable here; it must not be cited as kernel-accepted. The original 54/54 SymPy numerical/symbolic countermodel checks are independent and DO NOT test this Agda declaration.
+
 ## The physical, typed correspondence required
 
 Let `D_+` be the **actual** gauge-invariant, positive-Euclidean-time original Wilson cylinder algebra for the same E1 limit, `theta` its published Wilson time reflection, and `S` the original spatial xyz C3 pullback. The desired complex sesquilinear form is
