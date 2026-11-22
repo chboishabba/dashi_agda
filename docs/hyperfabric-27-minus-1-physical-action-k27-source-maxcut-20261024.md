@@ -1,5 +1,18 @@
 # 27 − 1: same-action adversarial cut (hypervoxel / Albert / 26D string)
 
+## 23 November 2026 — RH original four-window pi/13 cross-consumer, NOT native symmetry promotion
+
+Cross-programme consumer [RH PR #1533](https://github.com/chboishabba/dashi_agda/pull/1533) reuses ORIGINAL native 27-point balanced ternary / 26 punctured points / 13 projective antipodal axes + orientation residual. New exact source analysis [full proof](https://github.com/chboishabba/dashi_agda/blob/research/alpoge-grh-geometry-bridge-20261121/Docs/proofs/RHQuarticGeneralAngleC13C26SourceCut20261123.md), [regression](https://github.com/chboishabba/dashi_agda/blob/research/alpoge-grh-geometry-bridge-20261121/scripts/check_rh_c13_c26_angle_stencil_20261123.py). **Do not duplicate the C2 13-axis codec or original Griess C13 grade actor here.**
+
+True original Griess order13 M on additive F3³ plus native antipode A=-I yields G=A∘M of order26 on the 26 NONORIGIN grade labels; G^13=A, and the whole nonzero set is one 26-cycle. Therefore the abstract one-step C26 character phase `π/13=2π/26` and projective C13 step `2π/13` are source-consistent as **representation coordinates**, not automatically lattice geometry. Full original nonwrapping P3³ adjacency is NOT preserved by M or G: 54/54 spatial edges map to nonedges. Native quotient has one centre plus thirteen antipodal pairs, fourteen C2 orbit classes; no C3 orbit claim, no 13↔J2 cofactor identity.
+
+Original RH pole cos16c is constant on the three sites 0,π/2,π. Changing only its fourth centre from π/3 to arbitrary θ yields a new exact projective identity `Pθ=(1-cos16θ)*Qθ/4`: the TWO-endpoint wedge always kills θ-site; with source J2=0 surviving three masses retain the ratio (-3,4,-1) and the original π/2-step biharmonic Fourier square, up to a θ-dependent coefficient. **This is not C13 graph/Fourier equivariance**: π/2 is 6.5 steps of π/13 and is off the 26-point integer angle grid. More importantly the naive pi/13 substitution makes both original RH positive-pole witnesses negative across the entire lambda corridor, and its fourth target strength falls below the old source bound. It therefore does NOT improve RH P0 under the existing premises.
+
+Prior art retained: antipodal 27→(13×Bool)+origin, native cube edge/holonomy, original C13 Griess/Albert Q-representation, C13-vs-full-SL3 and graph noncommutation remain separate. No source-native H05 nine-DOF metric, real Maxwell/physical lattice, actual ζ-zero or Agda/Lean kernel receipt is implied.
+
+---
+
+
 Date: 2026-10-24. Branch of Agda PR #1249; cross-prover companion Lean PR #84.
 This is a **source-selective physical and mathematical test**, not a proposal
 that dimensional coincidence identifies physical theories.
