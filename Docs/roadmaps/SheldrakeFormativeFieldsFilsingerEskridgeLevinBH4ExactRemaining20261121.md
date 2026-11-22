@@ -7,6 +7,33 @@ This is the **phase/deliverable/remaining-lemma ledger committed with the implem
 
 
 
+## P0 J12 — restored-cycle RF source identifiability, phase and spark threshold (22 Nov 2026)
+
+**Executed local acceptance:** `/mnt/data/check_smith_filsinger_j12_restored_cycles_20261122.py` (SymPy not needed for this numerical sequel; NumPy + SciPy 1.17), **43/43 PASS**, 10 scenarios, maximum absolute full-work ledger residual **3.7622e-8**, maximum 7-component cycle closure **1.615e-6**. A reproducible standalone implementation was also committed to `scripts/check_smith_filsinger_j12_restored_cycles_20261122.py`; the local run was on its longer original form, so the condensed committed source still requires a matching fresh replay. Local results are retained at `/mnt/data/j12_s3_s5_restored_cycle_results_20261122.json`, not misrepresented as a repo artifact.
+
+**Common-period selection:** driving frequency 1 and incident source carrier frequency 1.1 have a common phase repetition at `T=20π` (ten driver periods and eleven incident-wave carrier periods); each scenario is driven for repeated common periods until all seven physical state coordinates and the binary spark state match to max-coordinate tolerance `2e-6`. The next common window is checked independently with full signed source/driver/field/loss/bank integration. This is *approximately restored*, not mathematically exact periodic orbit existence. Storage difference is `<1e-5` for these runs. The strict, previously missing condition is `ΔE≈0` for each scenario, **not** just similar spark outputs.
+
+**Findings:** Under the original J11 parameter choice `Von=.22,Voff=.075`, *all* baseline and eight original perturbation scenarios settle to **zero spark work** despite the short J11 drive-only transient spark `~.0345`. A low-threshold `Von=.003,Voff=.0009` synthetic variant produces **20 spark switching transitions** and `6.0964e-5` spark work per restored common period. This is a different constitutive device world, not Filsinger evidence. Changing `Gspark=1.5` alone does not activate output above a threshold never reached. Do NOT promote transient extractions or compare J11 non-restored windows as steady efficiency.
+
+| Restored synthetic variant | Driver work per 20π | Net RF work (incoming minus outgoing) | Spark work |
+| --- | ---: | ---: | ---: |
+| Baseline driver only | 24.779282 | -0.122319 | 0 |
+| RF phase 0 | 24.779266 | -0.120513 | 0 |
+| RF phase π/2 | 24.779266 | -0.120513 | 0 |
+| RF phase π | 24.779266 | -0.120513 | 0 |
+| RF phase 3π/2 | 24.779266 | -0.120513 | 0 |
+| Incident with decoupled k=0 | 24.886942 | +0.001760 | 0 |
+| Incident with k=.30 | 24.425755 | -0.382182 | 0 |
+| Incident with Vd=.15 | 24.779370 | -0.119175 | 0 |
+| Incident with Gspark=1.5 | 24.779266 | -0.120513 | 0 |
+| Driver only, low spark threshold | 24.779324 | -0.122902 | 0.00006096 |
+
+**Physical interpretation:** The `k=0` dipole can absorb a small positive fraction of incident RF and lose it internally, while sending **zero** power to the diode/spark device; it is incorrect to force net-wave absorption ≤0 for an isolated but lossy dipole. Coupling `k` changes primary input and outgoing radiation strongly, whereas RF phase scan (for this commensurate frequency and small prescribed incident amplitude) has negligible effect on integrated work. This is conditional model sensitivity, not a proof of phase-independent response for arbitrary circuits. There is **no positive environmental-work identifier** from spark and no evidence of natural `s+`; its magnitude was prescribed.
+
+**J13 next:** (a) verify the exact committed source with local execution and frozen machine-readable results, (b) search larger admissible source amplitudes/frequencies and threshold bifurcations for true load-on restored cycles, (c) compute finite-difference sensitivity and inverse rank for `(Wdriver, Win, Wout, Wspark, ΔE)` against `(source amplitude, phase, k, threshold, diode loss)`, (d) separate electric near-field capacitance from propagating incident/outgoing radiation and keep Maxwell/actual metering promotion as an independent evidence gate. Do not conflate Smith physical-dipole diagrams with literal Filsinger speech, and do not claim measured environmental energy or high-voltage implementation.
+
+---
+
 ## P0 J11 — nonlinear S3 × S5 radiative-port, capacitive return, diode bank and hysteretic spark (22 Nov 2026)
 
 **Big-bite source implementation:** `scripts/check_smith_filsinger_j11_s3_s5_nonlinear_20261122.py` commits a reproducible fully coupled conditional ODE with original S3 two independent node voltages `u,v` and positive capacitance matrix `[[C+Cu,-C],[-C,C+Cv]]`; mutual-inductance primary/secondary with `M²<L1L2`; finite-drop/resistance positive rectifier current `ju=max((u-b-Vd)/Rd,0)` and `jv=max((v-b-Vd)/Rd,0)`; bank voltage and bleed; spark thresholds `Von=.22,Voff=.075`; plus a distinct two-quadrature S5 electromagnetic dipole mode `q,p` with incident/outgoing radiation waves.
