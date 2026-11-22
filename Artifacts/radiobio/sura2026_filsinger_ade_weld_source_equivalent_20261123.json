@@ -1,0 +1,80 @@
+{
+  "date": "2026-11-23",
+  "source": {
+    "authors": "A. A. Chernyshov et al. (full roster in Docs/research/SmithFilsingerSURA2026OriginalIonosphereHeatingWeld20261123.md)",
+    "title": "HF Heating Effects as Seen From Below and Above: First Results of Joint SURA–Ionosfera-M Experiment",
+    "doi": "10.1029/2026GL123503",
+    "observation_date": "2025-08-20",
+    "data_archive": "https://links.cosmos.ru/87-3f-d4-49",
+    "data_archive_access": "TIMEOUT_NO_BYTES"
+  },
+  "implementation": {
+    "script": "scripts/smith_filsinger_sura2026_ade_source_weld_sympy.py",
+    "confirmed_git_blob_sha": "6a126da7e41e8838112867a943519a936859c000",
+    "native_donor": "scripts/smith_filsinger_lorentz_ade_sympy.py",
+    "native_donor_test_mode": "source-equivalent local transcription, not original checked-out module",
+    "script_exact_blob_tested": true,
+    "fully_native_original_donor_checked_out": false,
+    "github_ci_run": false,
+    "agda_kernel_verified": false
+  },
+  "local_execution": {
+    "status": "PASS",
+    "sympy": "1.14.0",
+    "time_clock": {
+      "pump_on_at_1841": true,
+      "pump_off_at_1845": true,
+      "minutes_tested": 24,
+      "on": 16,
+      "off": 8
+    },
+    "spectra": {
+      "bands_khz": [
+        [
+          8,
+          9
+        ],
+        [
+          17,
+          18
+        ]
+      ],
+      "fundamental_second_harmonic_compatible_interval_khz": [
+        8.5,
+        9
+      ],
+      "nyquist_hz": 23437.5
+    },
+    "inverse": {
+      "raw_two_bands_rank": 2,
+      "leakage_diagnostic_rank": 3,
+      "effective_plasma_source_meters_rank": 4,
+      "parameters": 4
+    },
+    "sampling_design": {
+      "pump_on_pass_rank": 3,
+      "full_crossed_design_rank": 6,
+      "columns": 6
+    },
+    "ADE": {
+      "state_dimension": 4,
+      "sourced_steps": 12,
+      "pump_on_steps": 8,
+      "pump_off_steps": 4,
+      "per_step_energy_residuals": "12/12 exactly 0",
+      "total_conservation_residual": "0",
+      "pump_off_controller_work": "0",
+      "positive_synthetic_load_work": true,
+      "initial_state_restored": false,
+      "real_source_meter_present": false
+    }
+  },
+  "evidence_grade": "EXACT_SYNTHETIC_MATH_AND_SOURCE_METADATA_NOT_ORIGINAL_SURA_MEASUREMENTS",
+  "limitations": [
+    "ERP 150 MW is not electrical input power or plasma-coupled source meter",
+    "No original SURA E/B/SEE/TEC data replay; the original data link timed out",
+    "Finite ADE coefficient and source current are synthetic and dimensionless; model does not solve ionospheric plasma",
+    "No outgoing radiation boundary or physical Filsinger receiver load meter",
+    "Native donor tested via source-equivalent extracted core functions; execute actual checkout for donor exact-head acceptance"
+  ]
+}
