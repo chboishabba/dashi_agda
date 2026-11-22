@@ -62,6 +62,50 @@ finiteProjectiveSquareReverse :
   (s : Source4) → unfoldFive (projectFour s) ≡ directFive s
 finiteProjectiveSquareReverse (source4 c left right witness inner outer) = refl
 
+-- The plain projected Folded3 is a LOSSY observer; a true BIDI path
+-- must carry the original Source4 through the observation. Both layers
+-- remain separate, and downstream consumers can recover source coordinates.
+record TracedFold : Set where
+  constructor tracedFold
+  field
+    originalFour : Source4
+    foldedObservation : Folded3
+open TracedFold public
+
+record TracedFive : Set where
+  constructor tracedFive
+  field
+    originalFiveSource : Source4
+    fiveObservation : SignedFive
+open TracedFive public
+
+projectWithSource : Source4 → TracedFold
+projectWithSource s = tracedFold s (projectFour s)
+
+unfoldWithSource : TracedFold → TracedFive
+unfoldWithSource (tracedFold s f) = tracedFive s (unfoldFive f)
+
+directWithSource : Source4 → TracedFive
+directWithSource s = tracedFive s (directFive s)
+
+tracedProjectiveSquare :
+  (s : Source4) →
+  directWithSource s ≡ unfoldWithSource (projectWithSource s)
+tracedProjectiveSquare (source4 c left right witness inner outer) = refl
+
+tracedProjectiveSquareReverse :
+  (s : Source4) →
+  unfoldWithSource (projectWithSource s) ≡ directWithSource s
+tracedProjectiveSquareReverse (source4 c left right witness inner outer) = refl
+
+sourceRecoveredFromProjection :
+  (s : Source4) → originalFour (projectWithSource s) ≡ s
+sourceRecoveredFromProjection s = refl
+
+sourceRecoveredFromFive :
+  (s : Source4) → originalFiveSource (directWithSource s) ≡ s
+sourceRecoveredFromFive s = refl
+
 reflectFive : SignedFive → SignedFive
 reflectFive (signedFive a b c d e) = signedFive e d c b a
 
@@ -75,12 +119,12 @@ unfoldReflectionInvariant (folded3 c inner outer) = refl
 -- degenerate: it does NOT certify Bishop analytic/finite-pole transport.
 finiteH05Cube : Q.Cube
 finiteH05Cube = record
-  { A = Source4 ; B = Folded3 ; C = SignedFive ; D = SignedFive
-  ; E = Source4 ; F = Folded3 ; H = SignedFive ; I = SignedFive
-  ; x00 = projectFour ; x10 = λ x → x
-  ; x01 = projectFour ; x11 = λ x → x
-  ; y00 = directFive ; y10 = unfoldFive
-  ; y01 = directFive ; y11 = unfoldFive
+  { A = Source4 ; B = TracedFold ; C = TracedFive ; D = TracedFive
+  ; E = Source4 ; F = TracedFold ; H = TracedFive ; I = TracedFive
+  ; x00 = projectWithSource ; x10 = λ x → x
+  ; x01 = projectWithSource ; x11 = λ x → x
+  ; y00 = directWithSource ; y10 = unfoldWithSource
+  ; y01 = directWithSource ; y11 = unfoldWithSource
   ; z00 = λ x → x ; z10 = λ x → x
   ; z01 = λ x → x ; z11 = λ x → x
   }
@@ -97,10 +141,10 @@ finiteH05Residuals = record
 -- chart source can be inferred from this fixture.
 finiteH05ExactFaces : Q.ExactFaces finiteH05Cube finiteH05Residuals
 finiteH05ExactFaces = record
-  { pxy0 = G.commutingSquareWitness finiteProjectiveSquareReverse
+  { pxy0 = G.commutingSquareWitness tracedProjectiveSquareReverse
   ; pxz0 = G.commutingSquareWitness (λ _ → refl)
   ; pyz0 = G.commutingSquareWitness (λ _ → refl)
-  ; pxy1 = G.commutingSquareWitness finiteProjectiveSquareReverse
+  ; pxy1 = G.commutingSquareWitness tracedProjectiveSquareReverse
   ; pxz1 = G.commutingSquareWitness (λ _ → refl)
   ; pyz1 = G.commutingSquareWitness (λ _ → refl)
   }
@@ -131,20 +175,20 @@ mapIndexedPayload f (indexedSource k s r m o x) =
 projectIndexed :
   ∀ {Index Sign Residual Mode Observation : Set} →
   IndexedSource Index Sign Residual Mode Observation Source4 →
-  IndexedSource Index Sign Residual Mode Observation Folded3
-projectIndexed = mapIndexedPayload projectFour
+  IndexedSource Index Sign Residual Mode Observation TracedFold
+projectIndexed = mapIndexedPayload projectWithSource
 
 unfoldIndexed :
   ∀ {Index Sign Residual Mode Observation : Set} →
-  IndexedSource Index Sign Residual Mode Observation Folded3 →
-  IndexedSource Index Sign Residual Mode Observation SignedFive
-unfoldIndexed = mapIndexedPayload unfoldFive
+  IndexedSource Index Sign Residual Mode Observation TracedFold →
+  IndexedSource Index Sign Residual Mode Observation TracedFive
+unfoldIndexed = mapIndexedPayload unfoldWithSource
 
 directIndexed :
   ∀ {Index Sign Residual Mode Observation : Set} →
   IndexedSource Index Sign Residual Mode Observation Source4 →
-  IndexedSource Index Sign Residual Mode Observation SignedFive
-directIndexed = mapIndexedPayload directFive
+  IndexedSource Index Sign Residual Mode Observation TracedFive
+directIndexed = mapIndexedPayload directWithSource
 
 indexedProjectiveSquare :
   ∀ {Index Sign Residual Mode Observation : Set}
@@ -160,6 +204,19 @@ sampleFour = source4 3 24 24 refl 4 1
 
 sampleHistoryNotErased : thirdLeftScaled sampleFour ≡ 24
 sampleHistoryNotErased = refl
+
+sampleOtherFour : Source4
+sampleOtherFour = source4 3 48 48 refl 4 1
+
+sampleLossyCollision : projectFour sampleFour ≡ projectFour sampleOtherFour
+sampleLossyCollision = refl
+
+sampleOtherHistoryNotErased : thirdLeftScaled sampleOtherFour ≡ 48
+sampleOtherHistoryNotErased = refl
+
+sampleTrackedSourceRecovered :
+  originalFiveSource (directWithSource sampleFour) ≡ sampleFour
+sampleTrackedSourceRecovered = refl
 
 sampleFive : directFive sampleFour ≡ signedFive 1 4 6 4 1
 sampleFive = refl
