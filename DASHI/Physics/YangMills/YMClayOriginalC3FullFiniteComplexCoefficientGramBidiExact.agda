@@ -39,6 +39,8 @@ import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as Haar
 import DASHI.Physics.YangMills.YMClayNativeC3SingleVectorPermutationCertificateExact as Single
 import DASHI.Physics.YangMills.YMClayNativeC3AdjacentSortProgramExact as Sort
 import DASHI.Physics.YangMills.YMClayOriginalWilsonC3WeightedHaarTransferExact as WilsonC3
+import DASHI.Physics.YangMills.YMClaySUNProductHaarGaugeFromOneLinkExact as Bilateral
+import DASHI.Physics.YangMills.YMClayOriginalWilsonSpatialC3TimeMirrorBIDIExact as NativeMirror
 import DASHI.Physics.YangMills.YMClayOriginalC3WeightedOSGramBidiExact as Source
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
 
@@ -207,6 +209,35 @@ module _
               (originalOperations reflect) tt left right)
           (λ right →
             originalEntryC3 reflect commute canonical density left right))
+
+  -- Stronger SAME-source consumer: the original native Wilson/R445
+  -- time mirror is ALREADY source-proved to commute with this native C3.
+  -- The old generic reflection-commutation socket is discharged here,
+  -- not reintroduced as an independent uninhabited hypothesis.
+  originalNativeMirrorFullFiniteGramC3 :
+    (bilateral : Bilateral.OneLinkSUNBilateralHaar theory oneLink) →
+    Sort.constructedNativeC3CanonicalLabelGoal →
+    WilsonC3.ActualOriginalC3GibbsActionInvariant
+      theory traceData exponential betaFine oneLink divide →
+    ∀ family →
+      Gram.physicalReflectedGramQuadraticForm
+        (originalOperations
+          (NativeMirror.mirrorVector
+            theory traceData exponential betaFine oneLink bilateral divide))
+        tt (rotateFamily family)
+      ≡
+      Gram.physicalReflectedGramQuadraticForm
+        (originalOperations
+          (NativeMirror.mirrorVector
+            theory traceData exponential betaFine oneLink bilateral divide))
+        tt family
+  originalNativeMirrorFullFiniteGramC3 bilateral canonical density family =
+    originalFiniteFullGramC3
+      (NativeMirror.mirrorVector
+        theory traceData exponential betaFine oneLink bilateral divide)
+      (NativeMirror.actualOriginalMirrorC3Vector
+        theory traceData exponential betaFine oneLink bilateral divide)
+      canonical density family
 
 ------------------------------------------------------------------------
 -- NEXT physical attachments: prove the original positive-time/gauge
