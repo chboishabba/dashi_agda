@@ -5,7 +5,7 @@ set -euo pipefail
 # original Wilson R445 E1/D1 proof cut. No CI, no Docker, no implicit
 # promotion from a source-written declaration to a kernel theorem.
 #
-# Run from repository root on the PR #1444 branch:
+# Run from repository root on the master-based PR #1536 branch:
 #   bash scripts/check_ym_original_rg_p0_kernel.sh
 #
 # Preserves the project's pinned wrapper, standard library, cache
@@ -61,6 +61,8 @@ targets=(
   DASHI/Physics/YangMills/YMClayR445FlatPairedHaarIntegrationExact.agda
   DASHI/Physics/YangMills/YMClayR445OriginalPureHaarBlockWeldExact.agda
   DASHI/Physics/YangMills/YMClayR445OriginalFullWilsonFiberDensityExact.agda
+  DASHI/Physics/YangMills/YMClayOriginalC3WeightedOSGramBidiExact.agda
+  DASHI/Physics/YangMills/YMClayOriginalC3GramRowEquivalenceBidiExact.agda
   DASHI/Unified/YMClayOriginalWilsonPhysicalRegression.agda
 )
 
