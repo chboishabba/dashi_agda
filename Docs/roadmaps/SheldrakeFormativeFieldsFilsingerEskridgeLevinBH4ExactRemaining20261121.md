@@ -7,6 +7,38 @@ This is the **phase/deliverable/remaining-lemma ledger committed with the implem
 
 
 
+## P0 I0–I7 — steelman BIDI reverse solve without unavailable Filsinger footage (22 Nov 2026)
+
+**User constraint accepted:** no new Filsinger original pin footage is available. **Do not block all scientific progress asking for the same missing item.** Reopen source notes and exploit the original spoken transcript plus Smith/Kelly writings as distinct original/source strata, then perform **logical forward/backward conditional inference** without promoting one guessed netlist to observed hardware. Prior G/H original hardware gates remain OPEN (FM source-index: four narrated, zero verified physical links; original 0/24 physical evidence roles); retain transient charge theorem and original phase/displacement alternatives.
+
+**New strongest source-and-geometry ranking:** [full machine BIDI ledger](../../Artifacts/smith-filsinger/smith_filsinger_coupled_loop_ranked_steelman_20261122.json) and [human research exposition](../research/SmithFilsingerCoupledLoopRankedSteelman20261122.md) distinguish four ranked *conditional completions*:
+1. **S1 centre-referenced tuned secondary, cap across chosen winding, positive diode OR from opposite U/V ends, load returns M.** Best literal minimal extra-edge interpretation of two diode groups, combined positives, “half big coil”, “midpoint”, and a resonance-tuned coil. DOES NOT assert actual Filsinger original pin continuity or whether the tuning belongs to NST itself.
+2. **S2 single NST half-winding with effectively half-wave positive collection.** Physically compatible, but duplication/group endpoints require explanation; DC bank smoothing can mask half-wave.
+3. **S3 separately magnetically driven L2 with a true conductive or capacitive/displacement M return.** Best explanation of “one coil” affecting “other coil” via source-driven reflected impedance, but requires genuine return/coupling edges the words do not identify.
+4. **S4 finite-source conventional full bridge with N hard-bonded to M.** Retain only with paid clamp-current source cost and differing diode direction; weakest literal match for “all forward” positive ganging.
+This is **ordinal assumption minimization**, NOT sourced statistical probability, authentic pin map, or empirical performance ranking. Kelly 17+17 split L2 / 47 nF optional across historical L2 are HISTORICAL SMITH COMPILATION only; they do not assign Filsinger coil identity.
+
+**Important coupled EM/LC correction:** A capacitor *across* a selected coil is a **parallel terminal** element to an externally impressed two-terminal voltage, but in a **magnetically excited closed secondary coil-capacitor circulation loop** the induced EMF sees `Z2=R2+R_L+i(ωL2−1/(ωC))`. Two excitation ports, so prior 'series vs parallel' need not be contradictory: an external terminal antiresonance and internally source-driven loop resonance can coexist. With primary `Z1=R1+iωL1`, mutual M, equations `Vs=Z1 I1+iω M I2`, `0=iω M I1+Z2 I2` give `I2=−iω M I1/Z2`, `Zin=Z1+ω²M²/Z2`; passivity requires `M²≤L1L2`. At tuned electrical `ω0=1/√(L2 C)`, `I2=−iω0 M I1/(R2+R_L)` and **positive reflected source resistance** `ω0²M²/(R2+R_L)`. A sign reversal of winding polarity M changes phase of I2 but not real power; this is a physically consistent interpretation of a narrated “pole shift”, NOT evidence it happened. Full RMS phasor ledger `Re(Vs conj(I1))=R1|I1|²+(R2+R_L)|I2|²` exactly, no donor work from capacitor or phase.
+
+**Back-solved fixed-voltage driver extraction:** In the additionally explicitly **primary-reactance-compensated**, linear series-equivalent extractor model, `K=(ωM)²` and `Pout=K Vs² R_L/[R1(R2+R_L)+K]²`. Therefore optimum `R_L*=R2+K/R1`; the tempting `R_L=R2` optimum is valid for **fixed primary current**, not fixed finite-voltage drive. `Pmax=K Vs²/[4R1(R1R2+K)]≤Vs²/(4R1)`. The series-equivalent `R_L` describes internal extracted loss, NOT a source-identical Filsinger rectifier/spark actual connection. No original switching electrical frequency is established by ~7.8 kHz audio.
+
+**Local SymPy 1.14** executed exact **39/39 PASS**, `/mnt/data/check_smith_filsinger_coupled_coil_bidi.py`, local Git-compatible blob `a1de794883b0f1b1b34dee403f9c4feaa46c974b`, **not a committed or kernel-verified program**. Includes sign polarity, KVL, magnetic passivity bound, reflected source-load work, source-aware optimum and synthetic energy ledger. Illustrative normalized R1=2,R2=3,K=4,Vs=1 has R_L*=5, Pout=1/20, Pin=2/5, primary heat 8/25, secondary heat 3/100, 1/8 useful fraction; NOT Filsinger numbers.
+
+| Gate | Exact conditional progress | Residual |
+| --- | --- | --- |
+| **I0 source steelman** | Smith/Kelly original compiled coupled L1-L2 and Filsinger midpoint phrase kept separate and reconciled into candidate family | Actual same-machine correspondence unproven |
+| **I1 circuit ranking** | S1–S4 ordinal source fit and extra wiring assumption ledger | Not a statistical posterior or observed original pins |
+| **I2 drive/tuned coil** | Induced-EMF closed secondary loop and external parallel port distinguished | Magnetic coupling/core/drive geometry unmeasured |
+| **I3 pole phase** | Exact sign M controls I2 phase, reflected source resistance stays paid | Physical original phase polarity not observed |
+| **I4 source funding** | Mutual + reactive terms conserve real work, explicitly signed RMS ledger | Environment donor positive work not measured |
+| **I5 load inverse** | Fixed-voltage RL*=R2+K/R1 vs fixed-primary-current RL*=R2 | Nonlinear original diodes/spark/storage need their own model |
+| **I6 local/Agda** | 39/39 local SymPy, original source-typed owners reused | Agda kernel and original physical coil pin gate open |
+| **I7 next iteration** | Logical steelman proceeds in absence of footage | Compose selected candidate with existing nonlinear discharge + finite charge-energy source model; don't duplicate proven owners |
+
+**Operational direction:** prioritize **big-bite BIDI weld** of S1 and S3 into existing diode/spark/capacitor-bank and source-energy contracts, checking both driver-backaction and separate Earth-donor counterworlds. Never request new original footage as a prerequisite; treat its absence as a scoped epistemic boundary, not mathematical research blocker. No exposed high-voltage build or probing instructions.
+
+---
+
 ## H0–H5: original-source PIN ADMISSION audit — four narrated edges, zero verified physical links (22 Nov 2026)
 
 **Source, not guessed diagram.** Reopened the exact existing \`Artifacts/smith-filsinger/source_indexed_transcript_diagram_values_20261122.json\`. Its midpoint/spark \`FM\` original-source owner has precisely **four** partial narrated graph relations: (1) transformer-secondary / accessible midpoint; (2) selected coil / capacitor described across it; (3) ganged rectifier positive branches; (4) rectified return / midpoint *or* Earth. **Each is explicitly marked \`proven_continuity:false\`**. No exact original reel frame or physical pin-to-node photograph was authenticated in this turn; public reel lookup did not supply one. Thus **0/4 FM pin-continuity proofs**, notwithstanding the literal speaker's meaningful words and values. The earlier original raw evidence archive remains **0/24** supplied roles. Original source transcription and mathematical circuit-completion are not physical verification.
