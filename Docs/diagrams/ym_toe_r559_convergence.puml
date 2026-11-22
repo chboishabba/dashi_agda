@@ -55,4 +55,19 @@ end note
 note bottom of Unifier
 Legacy placeholder interfaces are not proof authority.
 end note
+
+' 22-Nov external source receipt; graph/counts proven locally, not merged Agda
+note right of OriginalWilsonC3
+Original Wilson #1536 F19 fixed-W conditional: 64 native R445 pairs,
+896 coupled spectators, true 960-variable
+original Haar fibre at fixed coarse W.
+Each V degree 36, each S degree 18.
+Unmarked q<=36 tanh(beta); real two-global-mark
+q<=36 tanh(beta)+6r<=79/100 for beta<=1/144.
+Spatial bound controls ONLY conditional F19 Hessian;
+induced coarse K0(W), original weak-coupling
+physical W3 and same-H E1/D2 remain OPEN.
+C3 and mirror act with W transformed;
+not a proof of original positive-time RP.
+end note
 @enduml
