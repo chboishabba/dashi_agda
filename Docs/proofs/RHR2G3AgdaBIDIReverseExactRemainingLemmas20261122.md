@@ -1,3 +1,50 @@
+## 22 November 2026 — A2 source-priority recut: strongest existing actual-zero compiler
+
+Following the reflected-cloud finite negative control, the MERGED
+`chboishabba/dashi_lean4` PR #22 source was re-read from Lean `main`.
+The original `RiemannProjectiveQuarticFourWindowSignedPoleRvMFourth.lean`
+ALREADY supplies the actual ordinate-only `V4` from the literal
+Riemann–von Mangoldt/Abel discrepancy, e.g. its exact
+`quarticSignedPoleRvMVerticalFourthDiscrepancy_eq_abel`
+and `abs_le_of_cumulative_bound` `<=9r^4 E`.
+The original `...SignedPoleV4EndpointAbsorb.lean` ALREADY pays
+the closed-local vs half-open-`(t-r,t+r]` mismatch with the
+possible left-endpoint atom, and retains the original `SameOrd`
+exclusion where nontrivial. `...SignedPolePostSixthAbsorb.lean`
+retains signed sixth and FarExact rather than taking their
+absolute values. `...SignedPoleA2ScalarAudit.lean` ALREADY proves
+`postSixthTerminalM6BudgetAt_lt_threshold_iff`:
+
+```text
+  postSixthTerminalLocalPositiveDebt(EV)
+    + literalFarExactAt(eta0,n)
+  < compensationTargetThreshold(rho)
+    + postSixthTerminalLocalMuGain,
+eta0=1/(pi+1), r=eta0*t/16.
+```
+
+This is an **unproved strict inequality**, although the
+equivalence/normal form itself is source-written. The positive
+mu gain for t>=200 and favorable dominant M6 coefficient are
+already source-written. A2's remaining obstruction is the
+**numerical/analytic sign of that exact real-source balance**,
+including actual RvM count NZ, the eighth profile debt,
+the literal SIGNED far, and the target/slack. Therefore a new
+Montgomery fourth-marked producer is **not the primary missing
+A2 weld**; it is a possible alternate sharpening if the
+existing V4/H4/complete-jet A2 budget cannot pay. Do not
+duplicate paid owners or mislabel the earlier reflected-cloud
+counterexample as a failure of the actual A2 theorem.
+The previous section's algebraic reverse-marked-fourth
+threshold remains a legitimate alternative lens only.
+
+This priority correction is recorded in controlling
+`Docs/roadmaps/ClayRHR2ExplicitA160SelectedWRemainingLemmas20261117.md`
+(commit `145eb63b`). No new A2 strict estimate, no Agda/Lean
+kernel check, and no RH/GRH completion is asserted.
+
+---
+
 ## 22 November 2026 — P0 marked-fourth same-source actual-zero gate and reflected-cloud no-go
 
 **Original producer already exists**: Lean main `Synthesis/RiemannProjectiveQuarticFourWindowSignedPoleBidiMarkedFourth.lean` proves `literalLocalFourthPhaseMomentAt_eq_bidi_marked` and `literalLocalCenteredFourthAngularAt_eq_bidi_discrepancy`. Its finite actual-zero terms run over `centeredZeroFinset t n` with `quarticSignedPoleLocal t eta rho` AND `rho ∈ ((SameOrd t)ᶜ : Set Zeros)`, with original positive multiplicities `zetaZeroConfig.mult`. Thus the target zero and all same-ordinate zeros are EXCLUDED from this local off-ordinate carrier. Its mu background is the real `Zeta23.mu` integral over the same local interval. The exact paid operator is `D_A(ΔM0,ΔM2,ΔM4)=ΔM4/2 - 3 A² ΔM2 + 5 A⁴ ΔM0 = literalLocalCenteredFourthAngularAt`. The existing Lean `localizedBidiMarkedProducer_exact` packages already-defined moments; it does NOT prove an analytic pair correlation or prime-side estimate.
