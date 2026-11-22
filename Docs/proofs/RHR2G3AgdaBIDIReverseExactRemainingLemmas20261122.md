@@ -1,3 +1,75 @@
+## 22 November 2026 — ORIGINAL finite-frequency positive-width envelope and quadratic J2 branch
+
+Local SymPy regression committed as
+`scripts/check_rh_original_four_window_fourier_envelope_20261122.py`.
+Source-readback: original Lean
+`Synthesis/RiemannQuantitativeScaledBump.lean`
+(`unitContDiffBump` scaled by R),
+`Synthesis/RiemannQuantitativeSymmetricBumpMass.lean`
+(`quantitativeSymBump` is the sum of reflected translated bumps),
+`Synthesis/RiemannQuantitativeSymBumpLocalization.lean`
+(exact normalizations), `Synthesis/RiemannProjectiveQuarticFourWindow.lean`,
+`Synthesis/RiemannProjectiveQuarticFourWindowPoleSameObject.lean`,
+and `Synthesis/RiemannProjectiveQuarticFourWindowSignedPoleJointHorizontalJet.lean`.
+
+**Important proof dependency:** the existing Lean source supports fixed-shape affine scaling and reflection of translated bumps. The simple cosine-only centre formula additionally requires that the base `unitBump` be even. Although Mathlib's radial `ContDiffBump` should have this symmetry, the cited source files do NOT explicitly prove it; retain as a named source lemma. Without it, use the general complex characteristic function with odd/sine components instead. Never promote the cosine-only formula to checked Lean source without paying this condition.
+
+Conditional on the even base bump, let Y=R Z be the normalized underlying even window displacement with |Z|<=1, and `phi_R(k)=E[cos(kY)]`, `eps=E[Y²]/2`. For the four weights (1,-1,lambda,mu) and centres (0,pi/3,pi/2,pi), define `A(k)=phi_R(k)*sum_j w_j cos(k*c_j)`, and `M(k)=-A''(k)`. Then the original **same-object J2** equation is `J2=A(1)M(2)-A(2)M(1)=0`, exactly a polynomial of degree at most two in mu.
+
+The exact quadratic coefficient is
+```text
+[mu²] J2 = phi_R(1)*phi_R''(2)-phi_R(2)*phi_R''(1).
+```
+At R=0 it vanishes, so the old atomic linear equation is recovered; at positive R it generally does not vanish. Therefore continue the **near-atomic IFT branch**, not an arbitrary solution of the smooth quadratic. Source-independent scalar symmetry/IFT alone does not prove the actual Mathlib bump's exact chosen J2 root equals a preexisting existential Lean witness unless that witness is selected/identified.
+
+The original q=4 high-t transform uses exactly
+```text
+B1=(A(15)+A(17))/2, B2=(A(14)+A(18))/2,
+P=B1*A(2)-B2*A(1),
+Q=2*(A(1)*(A(2)+A(6))-A(2)*(A(3)+A(5))),
+K_selected=P_two*Q_half-P_half*Q_two.
+```
+The frequencies are on-line {1,2}, profile {2,3,5,6},
+and pole {14,15,17,18}; all reuse the same original source
+rather than inventing a surrogate density. Local SymPy reproduces
+`P_atomic=3(2-lambda)/4`, `Q_atomic=3(lambda-2)`,
+zero selected atomic q4 constant, and **+120/13** epsilon coefficient
+after moving the near-atomic J2 root.
+
+**Explicit universal compact-window moment remainder envelopes:**
+For any positive even normalized bump supported in |Y|<=R,
+```text
+|phi_R(k)-(1-eps*k²)| <= |k|⁴*R⁴/24,
+|phi_R'(k)+2eps*k| <= |k|³*R⁴/6,
+|phi_R''(k)+2eps| <= |k|²*R⁴/2.
+```
+These follow from the scalar Taylor inequalities for cos and sin and
+E[Y⁴]<=R⁴. At all source frequencies |k|<=18 the respective explicit
+bounds are `4374 R⁴`, `972 R⁴`, `162 R⁴`. Derivative bounds
+are only required for k=1,2 in J2 but the larger uniform envelope
+is convenient. Local symbolic checks of coefficients and Fourier
+reduction PASS, and these elementary analytic bounds are
+mathematically derived but **not yet Lean kernel-checked**.
+
+**Remainder weld still open:** compose these explicit envelopes
+through the *near-atomic quadratic root* and the true finite-t
+`cosh(8x/t)` pole weight while retaining cancellations. A coarse
+absolute O(u²) pole perturbation is insufficient for q4 sign,
+because atomic q4 starts at O(u⁴). Establish a source-specific
+`|Rem|<=C(R⁴+R²u⁴+u⁶)` with an actual C and effective radius,
+or exhibit a counterexample to this bound before claiming a
+uniform positive finite-t wedge.
+
+**Original indexed cube invariants unchanged:** 8 vertices/12 edges/6
+faces; separate source actual analytic zero, multiplicity, reflection,
+pole/smoothing chart, physical beta/gamma/t vs normalized a/q,
+signed near/far source, observer cancellation, C3 tagged phase and
+local slack. No Fourier observation yields a zeta zero and no
+frequency identity proves the actual-zero signed terminal.
+`H_n+E_n+S_W<T_W(rho)` remains OPEN. No RH/GRH or Lean/Agda kernel completion.
+
+---
+
 ## 22 November 2026 — original J2 smooth-branch transversality and conditional positive wedge
 
 Local exact independent SymPy:
