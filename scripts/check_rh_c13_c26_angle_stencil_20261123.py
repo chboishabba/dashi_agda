@@ -37,6 +37,13 @@ C=s.factor(-vec[3])
 assert vec[1]==0
 assert s.simplify(vec[0]+3*C)==0 and s.simplify(vec[2]-4*C)==0
 assert s.simplify(C.subs({z:R(1,2),u:R(1,9),p:-R(1,2)})-R(40,351))==0
+# Closed angle-dependent projective scalar. This factorization shows
+# its 13-axis sign directly from rational cos(pi/13) bounds.
+D_two=4*u*z*z+2*u*z-2*u-4*z*z-2*z+5
+D_half=16*u*z*z+8*u*z-8*u-16*z*z-8*z+21
+Cfactor=4*(p-1)*(z-1)*(2*z+1)*(4*z*z+2*z-5)*(
+    6*z*z+3*z-7)*(u*z-z+1)/(9*D_two*D_half)
+assert s.simplify(C-Cfactor)==0
 q=s.symbols("q",real=True)
 Fourier=C*(-3+4*s.cos(s.pi*q/2)-s.cos(s.pi*q))
 assert s.simplify(s.trigsimp(Fourier+2*C*(1-s.cos(s.pi*q/2))**2))==0
