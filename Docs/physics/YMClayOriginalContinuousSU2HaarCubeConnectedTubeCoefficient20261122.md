@@ -45,7 +45,7 @@ In particular, this specific full finite original Wilson gauge-invariant covaria
 
 ## Local receipt and precise boundary
 
-Executed locally: check_ym_original_su2_continuous_haar_cube_leading.py (Python/NumPy/opt_einsum/SymPy, no CI). The exact local reference verifies all 1024 original positive links and all 1536 periodic plaquette words; all 12 cube-link incidences; full boundary histogram; source 4-edge mask uniqueness; original SU2 quaternion multiplication tensor contraction 16384/4^12; independent SU2 modified-Bessel fundamental-character expansion and beta^4 coefficient. The code is a focused mathematical reference, not full SU2 product-Haar Monte Carlo, not cutoff-uniform physical weak-coupling data, and not a pinned Agda 2.9 receipt.
+Executed locally: an independently authored, more extensive script check_ym_original_su2_continuous_haar_cube_leading.py (Python/NumPy/opt_einsum/SymPy, no CI). A corresponding reproducible repository script is scripts/check_ym_original_su2_continuous_haar_cube_leading_20261122.py (commit 9c397044); its code was read back from the repository but its exact fetched bytes were not separately locally executed; do not claim byte-for-byte execution identity. The exact local reference verifies all 1024 original positive links and all 1536 periodic plaquette words; all 12 cube-link incidences; full boundary histogram; source 4-edge mask uniqueness; original SU2 quaternion multiplication tensor contraction 16384/4^12; independent SU2 modified-Bessel fundamental-character expansion and beta^4 coefficient. The code is a focused mathematical reference, not full SU2 product-Haar Monte Carlo, not cutoff-uniform physical weak-coupling data, and not a pinned Agda 2.9 receipt.
 
 ## Actual physical maximum cut unchanged
 
