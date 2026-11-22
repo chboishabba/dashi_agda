@@ -331,3 +331,11 @@ import DASHI.Physics.YangMills.YMClayOriginalC3FullFiniteComplexCoefficientGramB
 -- canonical Vec weld discharges former abstract Gram commute premise.
 -- Full Gibbs density C3, complex RP, E1 and same-H remain OPEN.
 import DASHI.Physics.YangMills.YMClayOriginalWilsonSpatialC3TimeMirrorBIDIExact as OriginalC3TimeMirror
+
+-- Exact SAME original n=3 Wilson density / native side-four six-plane C3
+-- source BIDI: flat canonical 4^4 site list -> original nested real sum,
+-- original signed Wilson plaquettes, and native real trace-inverse donor.
+-- Actual original weighted C3 and R445 mirror Gram follow conditionally
+-- on that scalar donor plus closed 1024-label canonical permutation.
+-- No new Gibbs/OS/Hamiltonian, full CMP119 extras, or kernel receipt.
+import DASHI.Physics.YangMills.YMClayOriginalWilsonN3NativeC3DensityBIDIExact as OriginalN3NativeC3Density
