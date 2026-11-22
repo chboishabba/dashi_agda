@@ -1,3 +1,9 @@
+### Same-source finite complex-coefficient Gram producer (existing on YM #1536)
+
+Source audit confirms `YMClayOriginalC3FullFiniteComplexCoefficientGramBidiExact` is already written on this PR. It imports the original weighted real Wilson expectation and existing T5 `physicalReflectedGramQuadraticForm`, retaining all finite off-diagonal terms with arbitrary `Scalar` coefficients, `conjugate`, `embedReal`, and an actual R445 time mirror. **Do not list this finite coefficient-level construction as missing.** The new `YMClayOriginalWilsonN3NativeC3DensityBIDIExact.originalActualGibbsC3FromNativeInverseTrace` supplies the earlier source density-invariance socket *conditionally* on the native SU(N) real trace-inverse theorem, and the original canonical 1024-label witness must still be provided.
+
+**Not paid by that source:** complex-valued original Wilson cylinder closure, actual `PositiveTimeSupported` and `GaugeInvariantObservable` *proofs* (these are Set-labelled metadata, not inhabited support predicates), full reflection positivity, complex OS Hilbert quotient, E1 continuum cutoff limit, or same-H time-semigroup commutation. This is finite algebraic coefficient transport, not positive-semidefinite physically admissible OS reconstruction. Kernel remains unrun; SymPy finite reference acceptance does not check Agda terms.
+
 ## 22 Nov 2026 — P0 native n=3/Variable pure-Wilson C3 density BIDI, exact local acceptance
 
 **Source-written on master-based YM PR #1536; Agda kernel NOT RUN.** New `DASHI/Physics/YangMills/YMClayOriginalWilsonN3NativeC3DensityBIDIExact.agda` is imported into the original physical regression root and included in the fail-closed **local** Agda acceptance runner (not CI). It establishes a conditional, same-source chain:
