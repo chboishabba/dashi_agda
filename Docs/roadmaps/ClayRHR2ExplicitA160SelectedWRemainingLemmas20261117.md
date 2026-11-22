@@ -1,3 +1,78 @@
+## 22 November 2026 — NEW A2 atomic high-pole local SIGN PASS; full signed far/threshold CUT still open
+
+Source-first audit of merged Lean PR #22
+(`Synthesis/RiemannProjectiveQuarticFourWindowSignedPoleA2ScalarAudit.lean`,
+`...PostSixthAbsorb.lean`, `...V4EndpointAbsorb.lean`,
+`...ConeDecomposition.lean`, `...SignedPolePair.lean`)
+gives one nonduplicate quantitative reduction:
+
+For `v=t/16`, `eta=1/(pi+1)`,
+`ell=log(t)/(2pi)`, `r=eta*v`, the original
+actual expanded RvM count has leading `NZ=2*r*ell+O(log t)`.
+With `S=W.targetStrength`, `L=W.fourthLipschitz`,
+and a fixed/uniformly controlled selected witness family,
+the original A2 local budget has leading
+```text
+LocalPositiveDebt - MuGain
+  = eta^5*ell/v * [-S/15 + pi^6*eta²/2400 + L*eta²/8500]
+  + lower order;
+negative-leading local criterion:
+  S > pi^6*eta²/160 + 3*eta²*L/1700.
+```
+V4 RvM error and quartic r²-count correction are strictly
+lower order. The original floor `S>=7pi^4/1600` alone
+does **not** bound L or pay the bracket.
+
+New original high-pole ATOMIC exact local SymPy regression
+`scripts/check_rh_a2_atomic_high_pole_sign_20261122.py`,
+commit `5453c8f9` and full BIDI audit `d7511e9b`:
+original same-pole signed profile mass at
+`(0,pi/3,pi/2,pi)` is
+`(-40/117,0,160/351,-40/351)`. Therefore
+```text
+S_atom=5*pi^4/234 ~=2.081391;
+M6_atom=-25*pi^6/234 ~= -102.713;
+L_atom=5*pi^5*(cosh(pi/2)+8cosh(pi))/351 ~=415.196;
+local A2 bracket C_atom~= -0.112558;
+rigorously C_atom < -1/20 via exact rational bounds.
+```
+The ORIGINAL atom satisfies the selected strength floor
+and M6 cap. This is a genuine **favorable atomic high-pole
+leading local sign**, not a smooth R>0 theorem about all t
+or the actual zero carrier. R/t source-continuity must keep
+the SAME selected signed pole coefficients, J2 roots,
+strength floor, signed M6 bound, fourthLipschitz norm,
+and quantitative horizontal target radius.
+
+The already-owned far absolute shell
+`farShellBound A t J=18A log(t+4)/J+72A/sqrt(J)`,
+canonical `J=floor(t/2000)`, retains an O(t^-1/2)
+MAJORANT component against a local O(log(t)/t) balance.
+This is NOT a lower bound on actual signed FarExact.
+The exact outstanding high-zero A2 condition remains
+```text
+FarExact - compensationTargetThreshold(rho)
+  < MuGain - LocalPositiveDebt
+```
+where `compensationTargetThreshold(rho)
+=4*combinedZeroHeightDefect(rho)
++ integral signedOrdinateTest*Zeta23.mu` retains
+the crucial local slack and smooth integral. The next
+P0 bite is the SAME-SELECTED-WITNESS quantitative R/t
+margin plus this literal signed far-vs-threshold payment
+(or rigorous no-go for that selected route), not another
+operator/zero model or q=4-only positive lobe.
+
+Preserve 8 vertices / 12 signed maps / 6 indexed faces,
+source-vs-observer zeros, actual multiplicity,
+SameOrd(t) exclusion, half-open boundary left atom,
+physical-normalized ordinate chart, balanced ternary
+sign and far residual. The RH/GRH terminal
+`H_n+E_n+S_W<T_W(rho)` remains OPEN; no Lean/Agda
+kernel or GitHub CI acceptance.
+
+---
+
 ## 22 November 2026 — P0 priority correction after merged Lean A2 source audit
 
 **Do not rebuild a localized M0/M2/M4 producer as the first A2 task.** The merged [Lean PR #22](https://github.com/chboishabba/dashi_lean4/pull/22) is available on `main`. Original source owners re-read:
