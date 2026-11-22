@@ -85,4 +85,22 @@ This is actual coarse quasilocality at SMALL beta,
 NOT CMP119/122 renormalized ABSOLUTE W3
 or physical beta(a)->infinity; no TOE spectrum.
 end note
+
+' TWO-LEVEL original R445 coarse marginal Dobrushin: source-owned #1536,
+' NOT a local Agda theorem, NOT CMP119/122 weak-coupling W3.
+note right of OriginalWilsonC3
+TWO-LEVEL original R445 coarse marginal Dobrushin
+Source: exact first-RG original Wilson K0(W), 64 W,
+64 V + 896 full interacting spectator SU(N) Haar.
+Fibre q_f <= 36 tanh(beta).
+All-pairs coarse log mixed source MUST include
+E[J_ij] for THREE directly shared-source neighbours,
+plus Cov(source scores). Exact original overlap
+max_a sum_i n_i(a)=12, sum_a n_i(a)=24.
+Coarse q_c <= 3beta + 1152beta^2/(1-q_f).
+At beta<=1/72: q_f<=1/2, q_c<=35/72.
+NO global marked coarse q, no beta(a)->infinity,
+no CMP119/122 absolute W3 or E1/D2.
+TOE R559 is consumer and import graph unchanged.
+end note
 @enduml
