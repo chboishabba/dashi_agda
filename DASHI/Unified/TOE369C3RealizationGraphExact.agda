@@ -1,5 +1,23 @@
 module DASHI.Unified.TOE369C3RealizationGraphExact where
 
+-- 22 Nov 2026 CROSS-PR SOURCE NON-PROMOTION RECEIPT (YM #1536, TOE #1291/#1281):
+-- Genuine original Wilson L4 spatial C3 rotates positive-link spacetime
+-- labels while fixing time; its original time mirror commutes with C3
+-- on all 1024 native positive-link addresses. Both preserve the set of
+-- 1536 original positive-plaquette supports and the 18-neighbour / 18432
+-- directed source Dobrushin adjacency edges. Locally exact Python PASS,
+-- Git blob f7373e8d4ed4df8aa206604918f2a8a35b07881c on YM #1536.
+--
+-- This is SOURCE-SIDE SPATIAL geometry only. It does not inhabit any
+-- physical realisation edge below. In particular spatialXYZC3 is NOT
+-- an identified internal su2CartanU1Orientation, and a C3 representation
+-- does not supply the universal369Phase -> spatialXYZC3 physics map.
+-- The original SU(N) small-beta q <= 18*tanh(beta) insufficient at
+-- beta(a)->infinity; complex RP, CMP119/122 marked W3 absolute shells,
+-- same-H OS spectrum and TOE terminal physical closure remain OPEN.
+-- Cross-PR unmerged evidence is not an Agda import or kernel receipt.
+
+
 open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
