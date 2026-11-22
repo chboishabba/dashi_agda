@@ -8,10 +8,15 @@ module DASHI.Physics.Motors.SmithFilsingerWindingOwnerReturnCutBidiExact where
 -- half A-M, or separately documented Smith/Kelly L2. The full wiring,
 -- phase, source work and actual reel's pin map remain unverified.
 --
--- CONDITIONAL physical cut: when a U/V floating source island has
--- ONLY four forward-only U/V->P diode edges crossing to external nodes,
--- no other galvanic/displacement/return path, KCL + nonnegative diode
--- current yields ZERO all four package currents. A capacitive M return
+-- CONDITIONAL STATIONARY/RESTORED-CHARGE cut: when a U/V floating island
+-- has ONLY four forward-only U/V->P diode edges crossing to external nodes,
+-- no other return path and dQ_island/dt = 0, KCL + nonnegative diode
+-- current yields ZERO all four package currents. During a finite transient
+-- where Q_island declines, positive outward diode pulses are possible:
+-- dQ_island/dt + sum_i i_Di = 0. This distinction is essential for the
+-- transcribed spark-gap discharge. Do NOT apply instantaneous zero-outflow
+-- to a precharged, nonstationary island. For restored cycle, integral
+-- outward current = Q_initial - Q_final = 0 absent inward return. A capacitive M return
 -- is a DIFFERENT circuit and can carry AC displacement current.
 -- See local SymPy source: check_filsinger_midpoint_return_cut_bidi_sympy_20261122.py
 
@@ -43,8 +48,27 @@ sourceFourNarratedPackages :
   Speech.numberMagnitude Speech.midpointFourDiodes ≡ 4
 sourceFourNarratedPackages = refl
 
+-- Finite accumulated-charge bookkeeping, separately from STATIONARY KCL.
+-- The supplied receipt says: initial charge = final charge + all outward
+-- emitted charge (chosen nonnegative Nat count unit). This admits a finite
+-- transient whose final charge is smaller. Internal differential LC charge
+-- does NOT substitute for a net original exterior return connection.
+record FiniteIslandChargeReceipt (qStart qEnd qOut : Nat) : Set where
+  constructor finiteIslandChargeReceipt
+  field
+    chargeConserved : qStart ≡ qEnd + qOut
+
+-- Concrete counterexample: 1 charge unit may leave a precharged island
+-- even if no return recharges it over that interval.
+oneOutwardTransientPossible : FiniteIslandChargeReceipt (suc zero) zero (suc zero)
+oneOutwardTransientPossible = finiteIslandChargeReceipt refl
+
+-- A replenished/restored island with external inward charge is a
+-- DIFFERENT circuit. Its source/return and energy work must be sourced.
+
 -- Current unit Nat enforces forward-only nonnegativity. Island KCL
--- a+(b+(c+d))=0 is an explicit condition, NOT historical source evidence.
+-- a+(b+(c+d))=0 is an explicit STATIONARY or charge-restored condition,
+-- NOT a universal instantaneous condition and NOT historical source evidence.
 record FourZeroCurrents (a b c d : Nat) : Set where
   constructor allFourZero
   field
