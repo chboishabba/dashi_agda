@@ -8,6 +8,27 @@ This is the **phase/deliverable/remaining-lemma ledger committed with the implem
 
 
 
+## P0 J27 — validated physical diode handoff, spark-OFF root and 2/6 original J24 boxes (23 Nov 2026)
+
+**New native-source tree consumer:** [J27 byte-identical executed second-event checker](../../scripts/check_smith_filsinger_j27_second_spark_off_validated_20261123.py) Git blob **6c7d7781f11943fc5b1267a6259bf3dc14f374d3**. Replays original J26's 37 exact nominal pre-event slabs, the strict first diode-V event bracket, and first J24 9/9 box; uses original J25 arithmetic and explicit source-conserving V-diode-active nine-state equations. [Full research/geometry note](../research/SmithFilsingerJ27ValidatedDiodeHandoffAndSparkOffEvent20261123.md); [machine result](../../Artifacts/smith-filsinger/j27_first_two_events_validated_spark_off_20261123.json). No Actions/CI, Agda kernel, original source-mapping promotion, or hardware measurement.
+
+**Critical geometry: uncertain event-time handoff is paid.** J26 proved first V diode activation at `3.389367008 < t_V < 3.389367010`. Original diode current is continuous and zero at threshold; the vector field is continuous but its Jacobian changes. J27 uses the right rational endpoint `t_R=3.389367010` and bounds the difference between the validated virtual inactive-field extension and the **actual physical V-on trajectory** by exact rational Gronwall:
+
+    |x_physical(tR)-x_virtual(tR)|_inf
+    <= 13/499999900000000000 < 1e-15.
+
+The active-set Jacobian infinity norm on the event tube is strictly <100; virtual guard after first root is <1e-9, change-of-current RHS rate <13e-9; no artificial state reset. J27 adds a full `1e-15` bound to all nine subsequent initial-state uncertainties and confirms active-V guard monotonic at first handoff.
+
+**13/13 post-V activation smooth pieces PASS:** full original V-active source-only circuit retains `ju=0`, `jv=(v-b-Vd)/Rd`, spark still ON, nonlinear HF storage. Validated exact rational Taylor-defect and full nonnegative Jacobian-matrix comparison give physical no-extra-event continuation through `t=3.490367010`.
+
+**Second original spark event paid:** spark ON→OFF time uniquely in **3.49129269 < t_OFF < 3.49129275** dimensionless model-time units (width `6e-8`, NOT nanoseconds). Signed downward bank crossing slope >=**0.09124802030**, diode U inactive/V active, and exact pre/post bank slopes have opposite signs. The rank-one saltation determinant encloses **[-2.26791131,-2.26790148]**, strictly negative. Full nine-dimensional event state enclosure is inside **9/9 original J24 spark-OFF radius-1e-4 coordinate boxes**. Thus **the first two of J24's six event-state/transversality hypotheses are now paid for the actual nominal rational initial-point flow**.
+
+**Boundary:** This is **NOT** yet a closed period; the J23 rational numerical root remains a chosen exact initial point, not a certified fixed point, and J26–J27 post-J25 work is nominal only, not uniform over the original five-parameter rectangle. Original J18 numerical script is not byte-executed as part of the proof consumer, although exact J25/J26/J27 source hashes match their local Python execution. Original Filsinger device netlist/ambient incident energy/physical receiver transfer and 100% source recovery remain unverified or excluded under finite loss.
+
+**J28 next:** valid interval OFF-mode flow and switch back ON near 3.51534048, then U diode ON ~4.275489, V diode OFF ~4.323838, U diode OFF ~4.928751; isolate root/state for each and prove absence of extra switches. Weld exact source-clock `tau=20pi/11`, interval monodromy, full Poincaré return defect, and rational self-map/contraction. Only then claim mathematically exact periodic orbit. Uniform 5D parameter-box certification is separate.
+
+---
+
 ## P0 J26 — validated first diode-V activation, 9/9 original J24 event-box weld (23 Nov 2026)
 
 **Maximum-cut progress:** [J26 original-equation interval consumer](../../scripts/check_smith_filsinger_j26_first_diode_validated_taylor_20261123.py) has been executed locally **byte-identically with committed Git blob `78cfdaa6c473eb1712194a17fa5ee46fa9dd5a94`**. It imports original J25 exact rational interval primitives (not the original J18 SciPy numeric source) and retains all nine original J18 state equations, synthetic source-only, finite-loss topology and original Smith/Filsinger attribution. [Full J26 proof geometry](../research/SmithFilsingerJ26ValidatedFirstDiodeVEventAndJ24BoxWeld20261123.md); [machine acceptance/status](../../Artifacts/smith-filsinger/j26_nominal_first_diode_validated_2ns_bracket_20261123.json).
