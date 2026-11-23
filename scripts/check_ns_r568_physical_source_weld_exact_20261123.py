@@ -83,6 +83,22 @@ def proj(k,v):
 def hel(k,v,sgn):
  if not m2(k):return VZERO
  return vmul(Q(1,2),vadd(proj(k,v),vmul(I*sgn*INVRT[m2(k)],cross(kvec(k),v))))
+def exact_mode_norm(k):
+ if m2(k)==0:return Z
+ return {1:ONE,2:RT2,3:RT3}[m2(k)]
+
+def audit_helicity(k,v):
+ if m2(k)==0:
+  assert v==VZERO
+  return
+ hp,hm=hel(k,v,1),hel(k,v,-1)
+ assert vadd(hp,hm)==proj(k,v)
+ curlp=vmul(I,cross(kvec(k),hp));curlm=vmul(I,cross(kvec(k),hm))
+ norm=exact_mode_norm(k)
+ assert curlp==vmul(norm,hp),('positive curl',k)
+ assert curlm==vmul(-norm,hm),('negative curl',k)
+ assert exact_mode_norm(k)*INVRT[m2(k)]==ONE
+
 def exact_real_interval(a,precision=10**13):
  """Outward rational interval for exact a in Q(sqrt(2),sqrt(3)); no floats."""
  assert all(c==0 for c in a.c[4:]),('nonreal sign target',a)
@@ -155,6 +171,7 @@ def inspect_source(u,k):
  for p,v in u.items():
   assert dot(kvec(p),v)==Z and u[neg(p)]==conj(v),('state',p)
   assert dot(kvec(p),G[p])==Z and G[neg(p)]==conj(G[p]),('force',p)
+  audit_helicity(p,v);audit_helicity(p,G[p])
  by=defaultdict(list)
  for index,(_,_,m,D,M) in enumerate(rs):by[m].append(index)
  aggregated={m:(sumv(rs[i][3] for i in idx),sumv(rs[i][4] for i in idx)) for m,idx in by.items()}
