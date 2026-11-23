@@ -1,0 +1,113 @@
+{
+  "date": "2026-11-23",
+  "status": "PASS_LOCAL_CONDITIONAL_EXACT_RATIONAL_GUARDS_AND_PRECONDITIONER_NOT_ODE_INTERVAL_ORBIT",
+  "source_branch": "research/sheldrake-field-filsinger-levin-consolidation-20261121",
+  "pr": 1537,
+  "pr_merged_during_audit": false,
+  "master_has_j23": false,
+  "provenance": {
+    "event_centres": "Numerically located with independently reimplemented original J18/J23 source-only equations",
+    "event_interval_algebra": "Exact Python fractions on specified rational event-state boxes",
+    "newton_matrix_budget": "Exact rational multiplication of twelve-decimal approximate I-Mtau and C",
+    "rigorous_original_ODE_flow_enclosure": false,
+    "native_J18_J24_byte_exact_execution": false,
+    "github_ci_run": false
+  },
+  "nominal_tau": "20*pi/11",
+  "num_sparks": 2,
+  "num_diode_transitions": 4,
+  "events": [
+    {
+      "t": 3.389367008882,
+      "guard": "diode V ON",
+      "signed_slope_box": [
+        0.44912395633731994,
+        0.45614062495514657
+      ]
+    },
+    {
+      "t": 3.491292721185,
+      "guard": "spark OFF",
+      "signed_slope_box": [
+        0.0893154105253606,
+        0.0947568464227965
+      ],
+      "saltation_det_box": [
+        -2.3657306116513706,
+        -2.1756998566882726
+      ]
+    },
+    {
+      "t": 3.515340479137,
+      "guard": "spark ON",
+      "signed_slope_box": [
+        0.14517311482287507,
+        0.15030685841261865
+      ],
+      "saltation_det_box": [
+        -0.8912942783580713,
+        -0.8246498664441915
+      ]
+    },
+    {
+      "t": 4.275489023213,
+      "guard": "diode U ON",
+      "signed_slope_box": [
+        0.9791296030751621,
+        1.0016677919553052
+      ]
+    },
+    {
+      "t": 4.323837947628,
+      "guard": "diode V OFF",
+      "signed_slope_box": [
+        0.43628857748499544,
+        0.45567909014130387
+      ]
+    },
+    {
+      "t": 4.928751406857,
+      "guard": "diode U OFF",
+      "signed_slope_box": [
+        0.14263778164896374,
+        0.1608534468064227
+      ]
+    }
+  ],
+  "state_box_radius": "1/10000",
+  "k_interval": [
+    "0.3495",
+    "0.3505"
+  ],
+  "kh_interval": [
+    "1.9995",
+    "2.0005"
+  ],
+  "all_six_exact_rational_direction_guards_positive": true,
+  "algebra": {
+    "diode_saltation": "Identity because vector field is continuous, but Jacobian changes",
+    "spark_jump_bank": "-delta_chi * ih/Cb",
+    "spark_jump_hf_inductor": "delta_chi*(b-Rgap*ih)/Lh",
+    "spark_determinant": "post_bank_slope/pre_bank_slope"
+  },
+  "conditional_newton": {
+    "C_infty_approx": 11.731499450011,
+    "exact_rational_C_A_defect_infty_approx": 1.5860226906196e-11,
+    "rationalized_A_and_C_matrices_in_local_bundle": true,
+    "radius": "1e-7",
+    "future_required_true_jacobian_infty_error_below": "0.001",
+    "conditional_contraction_upper": 0.011731499465871226,
+    "future_required_true_center_return_residual_below": 8.424059556455097e-9,
+    "both_future_ODE_premises_validated": false
+  },
+  "proof_missing": [
+    "outward-rounded piecewise validated IVP flow through seven smooth segments",
+    "true state inclusion in all six rational guard boxes and no additional guard roots",
+    "interval rigorous DPtau(B) and centre return defect",
+    "self-map/Banach contraction actually verified using ODE enclosures",
+    "uniform five-parameter box enclosure"
+  ],
+  "periodic_orbit_certified": false,
+  "real_original_filsinger_measurement": false,
+  "real_ambient_power_measured": false
+}
