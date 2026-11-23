@@ -2,6 +2,10 @@
 
 **23 November 2026 · canonical executable-plan complement to** [the original Sheldrake/Formative/Filsinger/Eskridge/Levin/BH4 roadmap](SheldrakeFormativeFieldsFilsingerEskridgeLevinBH4ExactRemaining20261121.md). **Original work remains on PR #1537**, branch `research/sheldrake-field-filsinger-levin-consolidation-20261121`, base `master`. Preserve the original Smith/Filsinger physical-source attribution and the source/implementation credits already recorded in `Docs/SourceAttributionPolicy.md`. This is a **replacement for piecemeal J29B, J29C, J30, J31 roadmapping**, not a claim that the outstanding proof or hardware measurement has passed.
 
+## Committed full-campaign executable and acceptance limits
+
+The single [J29–J32 candidate source-period runner](../../scripts/check_filsinger_full_period_maxcut.py), Git blob `168101dd29a19dbb0433a628f9163de74242a8e6`, has been committed to PR #1537 and independently checked byte-for-byte against its local Python source. The [locally executed independent algebra suite](../../scripts/test_filsinger_full_period_maxcut_algebra.py), Git blob `edf31469175171736ac4a23c32b93704e967badc`, passes mode-jump Jacobian rank-one geometry, diode identity saltation, spark determinant, rational terminal Lipschitz bound, and source-period/Machin-π arithmetic. [Runbook](FilsingerFullPeriodMaxCutExecutionREADME20261123.md) specifies a **90-second soft local budget** and `--resume` exact checkpointing; no Actions/CI or Agda kernel. **The new full six-event interval engine has NOT yet been run end-to-end against native dependencies; no fifth/sixth event, period endpoint or fixed point is promoted by this source-only acceptance.**
+
 ## The three independent endpoints
 
 1. **Mathematical nonlinear switched-circuit orbit (P0):** the original synthetic, prescribed-incident, driver-OFF, nine-state J18/J23 model. An **exact nominal periodic orbit** requires one *validated initial-state ball*, all six ordered true root tubes and physical mode transitions, complete one-`tau` return map, its nonzero-ball derivative, and rational Banach/Krawczyk fixed-point admission.
