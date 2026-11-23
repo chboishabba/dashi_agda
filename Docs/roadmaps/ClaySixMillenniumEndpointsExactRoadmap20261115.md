@@ -1,5 +1,15 @@
 
 
+## 23 November 2026 — literal Leray-transverse source and no phantom N21 binomial gate
+
+[Big source-origin geometry/reverse-solve ledger](ClayLargeBitePhysicalNSLeraySpectatorBidiKarpRealGuard20261123.md) and [exact byte-matched local regression](../../scripts/check_ns_transverse_large_bite_20261123.py) supersede the prior axial NS fixture **as a projected-output test**: axial M was parallel k and hence Leray-null. New original 5-cell helical Fourier field has **M=(0,0,1)=P_kM**, nonzero strict-LH/deep-FL work and all 18,513/79,233 original incidences for cutoffs 16/24. With the SAME fixed initial field, the negative R236 source changes sign (`S16≈−8.55e6`, `S24≈+5.38e7`); exact (S_C=32C^5+O(C^4)) for fixed physical W and V is inherited from existing `centeredPairCovarianceAppendZero` padding algebra. This is a physical-source diagnostic; **the R568 signed nested spacetime estimate remains OPEN** and is not contradicted by an R236 cutoff-dependent coordinate.
+
+**Karp E1 constructor audit:** the original reader requires `3m≤remaining source suffix length`, not a manufactured `m≤n(n−1)/2` executable check. Corrected first-enabled replay still passes 132,281 locally; strict pair ordering implies the count as a post-parse theorem. Actual TableProgram head/heap/time and Agda E1/G2–G4 acceptance remain OPEN. The original P≠NP universal SAT lower bound is completely independent of source NP membership.
+
+**BSD/Hodge:** already classically published selected E32 S4/S5 and Hodge H1/codimension-one, selected P1 products; native analytic/cohomological inhabitants and universal all-curve/all-variety endpoints remain open. RH/GRH and YM untouched. **0/6 Clay prize endpoints advanced, no new kernel receipt.**
+
+
+
 ## 23 November 2026 — physical NS and end-to-end original Karp large bite (no Clay gate promotion)
 
 The original-source [geometry-forward large-bite ledger](ClayNonYMRHLargeBiteOriginalSourceReverseSolve20261123.md) now supersedes the earlier free-coherent-vector and sparse-graph-only diagnostics for two lanes. **NS:** actual R231 helical complex cross, Fourier reality/transversality, cutoff16/output16, complete 18,513 original incidences and R236 deep-FL/core/HH tags. At identical original coherent M and ||M||²=36, the signed source S(t)=547392384-87085152 t changes sign at t=44/7; t=1 and t=13/2 are exact positive/negative controls. Source-specific finite energy Cauchy ceiling is valid but non-cutoff-uniform; original global NSE B1–B4/continuation OPEN. [Exact executable](../../scripts/check_ns_original_helical_full_fibre_20261123.py).
