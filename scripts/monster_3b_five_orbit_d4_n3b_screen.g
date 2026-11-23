@@ -10,6 +10,9 @@
 # downstream scheduler must consume these rows rather than reconstruct worlds
 # from the compatible-fusion count.
 #
+# Stage 2 rejects AtlasRep matrix-group candidates before Size/Sylow. This
+# deliberately fails closed when no suitable permutation-group model exists;
+# it does not certify general GAP memory safety.
 # Stage 2 tries to realize an actual D8 subgroup inside the constructible MN3B
 # model already used by monster_3b_actual_kernel_structure.g. A concrete
 # subgroup is promoted only after an explicit isomorphism from the canonical D4
@@ -45,7 +48,7 @@ monsterAtlasClassNames := ClassNames(monster,"ATLAS");
 r := (1,2,3,4);
 s := (2,4);
 d4Group := Group([r,s]);
-if Size(d4Group) <> 8 or not IsNonabelian(d4Group) then
+if Size(d4Group) <> 8 or not not IsAbelian(d4Group) then
   Error("failed to construct the canonical order-eight dihedral group");
 fi;
 d4 := CharacterTable(d4Group);
@@ -168,7 +171,7 @@ for groupName in groupNames do
   infos := Filtered(infos, info -> IsBound(info.size) and info.size = expectedGroupOrder);
   for info in infos do
     candidate := AtlasGroup(info);
-    if candidate <> fail and Size(candidate) = expectedGroupOrder then
+    if candidate <> fail and IsPermGroup(candidate) and Size(candidate) = expectedGroupOrder then
       G := candidate;
       atlasGroupRealized := true;
       selectedConstructionSource := "AtlasRep-info";
@@ -181,7 +184,7 @@ od;
 if G = fail then
   for groupName in groupNames do
     candidate := AtlasGroup(groupName);
-    if candidate <> fail and Size(candidate) = expectedGroupOrder then
+    if candidate <> fail and IsPermGroup(candidate) and Size(candidate) = expectedGroupOrder then
       G := candidate;
       atlasGroupRealized := true;
       selectedConstructionSource := "AtlasGroup-direct";
@@ -194,7 +197,7 @@ if G = fail and LoadPackage("browse") = true then
   groupInfos := GroupInfoForCharacterTable(mn3b);
   for groupInfo in groupInfos do
     candidate := GroupForGroupInfo(groupInfo);
-    if candidate <> fail and Size(candidate) = expectedGroupOrder then
+    if candidate <> fail and IsPermGroup(candidate) and Size(candidate) = expectedGroupOrder then
       G := candidate;
       atlasGroupRealized := true;
       selectedConstructionSource := "CTblLib-GroupForGroupInfo";
@@ -223,7 +226,7 @@ if G <> fail then
       Order(x) = 2 and not x in C4 and rr^x = rr^-1);
     if Length(candidatesS) > 0 then
       H := Group([rr,candidatesS[1]]);
-      if Size(H) = 8 and IsNonabelian(H) then
+      if Size(H) = 8 and not IsAbelian(H) then
         actualD4 := H;
         d4SubgroupFound := true;
         break;
