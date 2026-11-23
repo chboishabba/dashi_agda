@@ -54,10 +54,10 @@ Therefore for any small real ε2,ε3, `g+ε2 h_2+ε3 h_3` has independently cont
 
 ## 4. Retaining strict off-line target positivity: tenth-order stability (not uniform tail certification)
 
-For the signed combination of the *extended* pair, denote the original same-object signed profile by `P_W`, its original positive target defect by `d_W(a)`, with PHYSICAL horizontal coordinate `a=β−1/2∈[-1/2,1/2]`. Because the original source has `M0=M2=0`, `M4=-4 T_W<0`,
+For the signed combination of the *extended* pair, denote the original same-object signed profile by `P_W`, its original positive target defect by `d_W(a)`, with PHYSICAL horizontal coordinate `a=β−1/2∈[-1/2,1/2]`. Because the original NORMALIZED source has `M0=M2=0`, `M4=-4 T_W<0`, while the PHYSICAL detector profile has fourth moment `M4^physical=-4*T_W/r^6` (including the `1/r` projective bracket factor),
 
-    d_W(a)=-1/4∫ P_W(u)cosh(a u)du
-           = T_W a^4/24 + O(a^6) >0   for 0<|a|≤1/2,
+    d_W(a)=-1/4∫ P_W^physical(u)cosh(a u)du
+           = (T_W/r^6) a^4/24 + O_t(a^6) >0   for 0<|a|≤1/2,
 
 when the original W has been selected with its source `8/t<eps` property. The new perturbation `ΔP` has `M0(ΔP)=M2=M4=M6=M8=0`, therefore
 
@@ -65,7 +65,7 @@ when the original W has been selected with its source `8/t<eps` property. The ne
       [cosh(a u)-1-(a u)^2/2!-(a u)^4/4!-(a u)^6/6!-(a u)^8/8!] du
           = O((|ε2|+|ε3|) a^10).
 
-Since original `d_W(a)/a^4` extends continuously with strictly positive limit `T_W/24` at a=0, and is strictly positive on the compact nonzero strip, it has a positive minimum for any FIXED t/W. Selecting small enough amplitudes preserves target positivity for all `0<|a|≤1/2`, the exact pole coefficient, and the original fourth target strength. **No uniform-in-t lower bound for the allowed amplitudes is established.** The post-sixth/local sixth/eighth signed-moment entries are retained, but their support/absolute-derivative/Schwartz bounds and their application to the full P0 terminal must be re-certified for this enlarged support.
+Since original `d_W(a)/a^4` extends continuously with strictly positive limit `T_W/(24*r^6)` at a=0, and is strictly positive on the compact nonzero strip, it has a positive minimum for any FIXED t/W. Selecting small enough amplitudes preserves target positivity for all `0<|a|≤1/2`, the exact pole coefficient, and the original fourth target strength. **No uniform-in-t lower bound for the allowed amplitudes is established.** The post-sixth/local sixth/eighth signed-moment entries are retained, but their support/absolute-derivative/Schwartz bounds and their application to the full P0 terminal must be re-certified for this enlarged support.
 
 ## 5. Arithmetic signal and the reversible-sign countercheck
 
