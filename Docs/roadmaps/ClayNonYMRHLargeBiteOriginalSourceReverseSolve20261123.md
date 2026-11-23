@@ -1,4 +1,12 @@
 # Clay non-RH/YM large bite — original-source physical and machine end-to-end reverse solve
+
+## 23 November 2026 — MUST READ: transverse geometry supersedes the axial projection
+
+The axial (1,8,15) source fixture documented below had `M=-6i e_x` at output `k=16e_x`. It is a legitimate **unprojected original R236 covariance** witness, but **P_kM=0**. It cannot be cited as a nonzero physical Leray-projected output argument. The [new five-cell literal transverse helical reconstruction](ClayLargeBitePhysicalNSLeraySpectatorBidiKarpRealGuard20261123.md) corrects the projector geometry: `P_kM=M=e_z`, real nonzero deep-FL work, two cutoffs with sign reversal at the same fixed source, exact `32C^5` spectator asymptotic, and a BIDI physical V recovery using the **pre-existing** Agda `centeredPairCovarianceAppendZero` theorem. The actual signed-in-time R541/R542/R573/R547/R568 route is likewise already source-written; cutoff-uniform R568 estimate OPEN.
+
+The earlier local Karp replay had also included a phantom `m<=n*(n-1)/2` executable guard, which the original source `readRawGraphWord` does not compute. PR #1543 removes this in the reference/native replay. Keep the true `3m` suffix guard, same accepted graph language and terminal threshold. These corrections *override* older wording below without deleting historical fixtures.
+
+
 23 November 2026 · Active PR #1542 · master-based, source-first, NO Clay promotion.
 
 ## Main mathematical result: original physical NS source sign-reversal, fixed coherent output
