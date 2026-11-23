@@ -8,7 +8,7 @@ CMP119/122 physical W3.
 """
 from itertools import product, combinations
 from fractions import Fraction as Q
-from collections import Counter
+from collections import Counter, defaultdict
 import sympy as s
 
 
@@ -58,10 +58,35 @@ for L in (3, 4, 5, 6):
             inside = {p for p in all_faces if boundary(p, L) <= support}
             assert inside == selected | sections, (L, d, a, b, inside ^ (selected | sections))
             assert len(inside-selected) == d-1
+            assert all(len(boundary(p, L)-support) >= 2
+                       for p in all_faces if p not in selected | sections)
             cases += 1
     print(f"PASS L={L}: 3 transverse planes, all 1<=d<L, full 6L^4 source census")
 assert cases == 42
 print("PASS 42/42 periodic 4D geometry cases; L4/d2: exactly 3 restored time sections")
+
+
+# Stronger second-restoration geometry: any two DISTINCT original
+# plaquettes on periodic L>=3 share at most one oriented link. Every
+# exterior plaquette has >=2 edges outside the reference tube. Therefore
+# no single additional distinct plaquette can eliminate all of its Haar
+# leaves. Two identical exterior insertions are independent of (F,G)
+# jointly at tau=0 and vanish from the *connected* fourth cumulant.
+for L in (3, 4, 5, 6):
+    all_faces = [(x, a, b) for x in product(range(L), repeat=4)
+                 for a, b in combinations(range(4), 2)]
+    link_faces = defaultdict(list)
+    for p in all_faces:
+        for edge in boundary(p, L):
+            link_faces[edge].append(p)
+    seen = set()
+    for incident in link_faces.values():
+        for p, q in combinations(incident, 2):
+            pair = frozenset((p, q))
+            assert pair not in seen, (L, p, q)
+            seen.add(pair)
+    print(f"PASS L={L}: distinct original plaquettes share <=1 link")
+print("PASS second-restoration exterior Haar leaf criterion for all 42 tested source geometries")
 
 
 # Independent exact cyclic-group transfer test; NOT original SU(3) Haar.
@@ -133,6 +158,75 @@ for rank, eigen, factorial, expected in (
               for power in range(4)]
     assert actual == [s.Rational(q) for q in expected], (rank, actual)
     print(f"PASS exact continuous SU({rank}) Weyl-Haar moments 0..3: {actual}")
+
+
+# SU(2) original d=2 second restoration jet, exact SU2 character ring.
+# M_t chi_j = (chi_{j+1/2}+chi_{j-1/2})/2.
+# The 4-wall native transfer has eigenvalues a=m2(beta)^4 for spin 1/2,
+# and b=(I3(beta)/I1(beta))^4 for spin 1.
+a, b, u = s.symbols("a b u")
+
+
+def multiply_t(state):
+    out = defaultdict(lambda: s.Integer(0))
+    for twice_spin, coeff in state.items():
+        out[twice_spin+1] += coeff/2
+        if twice_spin:
+            out[twice_spin-1] += coeff/2
+    return dict(out)
+
+
+def transfer_t(state):
+    eigen = {0: 1, 1: a, 2: b}
+    # Only spins 0,1/2,1 can return to the trivial channel in four marks;
+    # higher intermediates are projected out by the final Haar integral.
+    return {k: coeff*eigen.get(k, s.Symbol("discarded_channel"))
+            for k, coeff in state.items()}
+
+
+def su2_chain_moment(powers):
+    state = {0: s.Integer(1)}
+    for time in (2, 1, 0):
+        for _ in range(powers[time]):
+            state = multiply_t(state)
+        if time:
+            state = transfer_t(state)
+    return s.expand(state.get(0, 0))
+
+
+def pair_moment(i, j):
+    return s.Rational(1, 4)*a**abs(i-j)
+
+
+connected_sum = s.Integer(0)
+for i, j in product(range(3), repeat=2):
+    powers = [1, 0, 1]
+    powers[i] += 1
+    powers[j] += 1
+    fourth = su2_chain_moment(powers)
+    connected_sum += fourth - pair_moment(0, 2)*pair_moment(i, j) \
+        - pair_moment(0, i)*pair_moment(2, j) \
+        - pair_moment(0, j)*pair_moment(2, i)
+second_jet = (-3*a**2 + 4*a*b - 8*a**3 + 2*b**2 - 4*a**4)/16
+assert s.simplify(connected_sum-second_jet) == 0
+
+# Independent normalized generating source: expand exp(u*(H0+H1+H2))
+# through order u^2, including repeated-source insertion factorials.
+Z2 = N0 = N2 = N02 = s.Integer(0)
+for powers in product(range(3), repeat=3):
+    degree = sum(powers)
+    if degree > 2:
+        continue
+    weight = u**degree/s.prod(s.factorial(k) for k in powers)
+    Z2 += weight*su2_chain_moment(powers)
+    N0 += weight*su2_chain_moment((powers[0]+1, powers[1], powers[2]))
+    N2 += weight*su2_chain_moment((powers[0], powers[1], powers[2]+1))
+    N02 += weight*su2_chain_moment((powers[0]+1, powers[1], powers[2]+1))
+cov_source = N02/Z2 - N0*N2/Z2**2
+cov_jet = s.expand(s.series(cov_source, u, 0, 3).removeO())
+assert s.simplify(2*cov_jet.coeff(u, 2)-second_jet) == 0
+print("PASS original SU2 d2 second restoration: nine fourth cumulants = normalized source second derivative")
+print("SU2 second-jet coefficient: beta^2 *", second_jet)
 
 
 # Analytic SU(N) results used for the theorem:
