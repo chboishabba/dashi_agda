@@ -1,3 +1,41 @@
+## 23 November 2026 — P0 new bilateral Gamma core, 128 provenance and cubic obstruction weld
+
+**Live owners checked first:** RH PR #1533 branch at `a1bf59c5` before this new tranche; Lean PR #113 still `5b22b8f8`. Original `RiemannProjectiveQuarticFourWindowSignedPoleFourierMass.lean` proves `integral signedOrdinateTest = 128*pi*OriginDet/(t*R*M0)` and `fullMuIntegral = centerDensityMode+fullMuVariation`; original `...FourthOrderQuotient.lean` proves both `integral q^2*C_W(q) = -2*pi*P_W''(0)` and `globalCubicModeDefect = 6*pi*(t/16)*P_W''(0)`. Upstream original [Anthropic Zeta23 GammaFacts](https://github.com/anthropics/formal-math/blob/main/zeta23/Zeta23/GammaFacts/Complete.lean) establishes even/smooth `mu` and the Stirling field `|mu(x)-log(|x|/(2*pi))/(2*pi)|<=C_gamma/x^2` for |x|>=1; `GammaFacts/Mu.lean` identifies `mu(x)=(Re digamma(1/4+i*x/2)-log pi)/(2*pi)`. Attribution: these are existing producers, not new in this PR.
+
+**128 actual factorization:** `P_W(0)=4*OriginDet/(R*M0)`, whole-line even cosine inversion `integral C_W=2*pi*P_W(0)`, physical pushforward `integral Psi_t=(16/t)*integral C_W`. Hence `128=16*2*4=2^7` is EXACT as a coefficient product, with each factor retaining its distinct typed source. Existing `DASHI/Wikimedia/IbrahimE7FiftySixAnd128TypedOEISSnowballExact.agda` already licenses `128=2^7` (OEIS A000079) but **denies** same 128 carrier / Spin action from numerical equality. This is a commuting scalar normalization diagram, not a newly constructed 7D physical representation.
+
+**NEW true two-sided ordinate-reflection square (q ↦ −q, NOT horizontal alpha ↦ −alpha):**
+Let `r=t/16`, `C_W(q)=integral P_W(v)*cos(qv)dv`, `Psi_t(x)=r^(-2) C_W((x-t)/r)`. The complete original Gamma variation is EXACTLY
+```
+V_W(t) = (8/t) * integral_R C_W(q) *
+   [mu(t+t*q/16)+mu(t-t*q/16)-2*mu(t)] dq.
+```
+Use `C_W(-q)=C_W(q)` and ordinary absolutely integrable change of variables. This kills the *linear* Taylor mode of `mu` exactly, without claiming a sign for the signed `C_W`. All real `q` and the zero ordinate remain; do NOT truncate in the identity.
+
+**NEW original central quantitative Gamma estimate.** At `t>=200`, choose a declared *analysis cutoff* `|q|<=8` (not a canonical source cutoff). The two shifted ordinates satisfy `t/2<=t(1±q/16)<=3t/2`. From the already-proved Zeta23 `GammaFacts.stirling`, for `V_core=(8/t) ∫_|q|<=8 C_W(q)*Delta2_mu(t,q)`,
+```
+|V_core - (4/(pi*t))*integral_|q|<=8 C_W(q)*log(1-q^2/256) dq|
+  <= (80*C_gamma/t^3)*M0_core,  M0_core=integral_|q|<=8 |C_W(q)|dq.
+```
+This is uniform in the algebraic scalar Gamma error constant but NOT numerically uniform in the t-dependent selected W's profile norm.
+
+**NEW cubic owner and explicit q-tail weld:** define
+`M2_tail=∫_|q|>8 q^2*C_W(q)dq`,
+`M4_core=∫_|q|<=8 q^4*|C_W(q)|dq`,
+`V_tail=(8/t)∫_|q|>8 C_W(q)*Delta2_mu(t,q)dq`.
+For `z=q^2/256<=1/4`, `|log(1-z)+z|<=2*z^2/3`; the already-proved Fourier moment gives
+```
+V_W(t)= globalCubicModeDefect(W)/(12*pi*t^2)
+       + M2_tail/(64*pi*t) + V_tail + E_core
+|E_core| <= M4_core/(24576*pi*t) + 80*C_gamma*M0_core/t^3.
+```
+Here `P_W''(0)/(32*t) = globalCubicModeDefect/(12*pi*t^2)` is a genuine SAME-object existing-Lean determinant, and neither M2_tail nor V_tail has been dropped. For any integer n>=3, integration by parts gives `|C_W(q)|<=||P_W^(n)||_1/|q|^n`; with n=6, `|M2_tail|<=||P_W^(6)||_1/768`. This bound is conditional on an actual selected-W derivative norm, not a scalar theorem uniform across all W.
+
+**Correct terminal firewall:** the coefficient, Gamma mode and cubic recut do NOT imply `2D_t+S_W<4d_W(rho)`; existing source `D_t>=2d_W(rho)`, `S_W>=0` still reverses that inequality for a hypothetical off-line rho. A useful independent producer must pay `V_tail`, `M2_tail`, selected-W `M0/M4/||P^(6)||` controls and a truly new signed zero/archimedean comparison against the strict terminal. Fixed-W t→∞ Gamma convergence is not uniform for W(t) without those bounds. q sign reversals outside |q|<=8 prohibit full-line sign promotion.
+
+**Local checks:** `scripts/check_rh_128_gamma_bilateral_20261123.py` — original-factor algebra, even bilateral reflection, exact 256 log expansion, error constants, cubic determinant and nontrivial outer-tail negative controls PASS; actual upstream `digamma` evaluated at q=2,8,12,20,24,32 over t=200,2000,20000 and converged as expected. Independent local equivalent executed; new repo script committed and read back separately. No full Lean/Agda kernel/CI, and no RH/GRH conclusion.
+
+---
 ## 23 November 2026 — P0 completed-contour SAME-HEIGHT NORMALIZATION CORRECTION (source-first)
 
 **Checked latest owners:** `dashi_lean4/main` `Synthesis/RiemannProjectiveQuarticFourWindowSignedPoleCutset.lean` (`combinedCluster_eq_tsum`, `combined_reflect_eq`, `targetPair_sum_eq_two`, `two_target_le_combinedCluster`, `combinedCluster_eq_offGamma`); `...JointHorizontalJet.lean` (`signedLiteralPairSourceTerm_eq_normalizedPairKernel` ONLY on `((SameOrd t)ᶜ : Set Zeros)`, `signedNormalizedPairKernel_zero_eq_neg_four_target`, `signedNormalizedPairKernel_eq_combinedIntegral`); `...NMu.lean` (`signedNMuPair_eq_pointwise_closed`, `quarticFour_external_eq_half_NMu_add_horizontal`, `completedSignedResidual_eq_combinedCluster`); `...FourierMass.lean` (`fullMuIntegral_eq_centerDensity_add_variation`, `centerDensityMode_eq_originDet`); `...FourierTerminal.lean` (`postSixthCanonicalSignedHighCut_iff_completed_plus_localSlack`); and `Synthesis/RiemannMarkedArithmeticCompletedOperatorAudit.lean` (`unmarkedCompletedArithmetic_eq_gamma`, `selectedPointwiseMultipliers_prime_eq_zero`). Reuse existing exact owners and retain no-kernel-claim.
