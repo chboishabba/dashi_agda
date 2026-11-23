@@ -105,3 +105,89 @@ no decimal separator):
 The CM residue/CRT/PQT ternary/SWAR work is a research donor, not
 a proven faster GMP big-int multiplication backend. No GPU, Agda,
 Lean, GH CI or external SOTA execution in this tranche.
+
+
+## P0 correction — reuse existing formal performance / optimization machinery (23 Nov)
+
+**Do not reinvent the optimization formalism or treat one number of
+seconds as its replacement.** The canonical, pre-existing source
+owners on `master` are:
+
+- `DASHI/ComputerScience/FibreProgramComplexityExact.agda`:
+  `ComplexityProfile`, `ExecutionFibrePath`, consumer-indexed
+  sum/peak/head-travel costs; Git blob
+  `275abb34923b91c5c1649c4484f7c520bfc015c6`.
+- `DASHI/Core/EfficientRecoverableQuotientExact.agda`:
+  independently charge quotient construction, receipt storage
+  and reopening; blob
+  `050e3c36d14bfe86e77ce6ef7ccb3ccd4565e201`.
+- `DASHI/ComputerScience/StreamingResidencyComplexityErrorDNABidiExact.agda`:
+  semantics-preserving bounded streaming versus eager residency,
+  and resource versus transport failures; blob
+  `a703293287cff776644c379f0e378613fd8b6e36`.
+- `DASHI/ComputerScience/FibreMachineFoundation369Exact.agda`:
+  consumer-relative adequacy of representations/cost paths,
+  blob `879784c7e6e1667d984bcbbc865255ac1a21dbcc`.
+- `DASHI/ComputerScience/EuclidGCDRegisterMachineExact.agda`:
+  actual machine trace/transition/head-path cost consumer,
+  blob `8eed7e1dbfc5f917aac6eeda9237286ebe323af6`.
+- Existing `Docs/papers/drafts/Paper9ExactCMModularJetCertificates.md`
+  **section 10.1–10.4** already defines physical bit widths, actual
+  peak and summed live integer payload, register/scratch/copy,
+  bit-operation models M_int(B), D_int(B), and measured p50/etc.
+  It states a conservative fixed-constant binary split bound
+  O(M_int(d log d) log d) plus sqrt/final division. The bound is
+  conditional on conventional fast integer-multiplication
+  assumptions, and is not a proved machine-level execution theorem.
+
+**Concrete Pi P/Q/T execution fibre**, to instantiate rather than
+replace those existing Agda definitions:
+- state = (original leaf interval [a,b), P,Q,T, finite series
+  endpoint signs, current sqrt precision, certificate candidate,
+  allocator live buffer sizes and source/receipt IDs);
+- transitions = exact Chudnovsky leaf construction, ordered
+  P/Q/T merge, optional gcd/cancellation, sqrt, endpoint
+  products, quotient, strict upper boundary comparison,
+  serialization and independent verifier;
+- path time cost = sum of type- and width-indexed
+  multiplication/addition/square-root/division/serialization
+  costs plus actual memory movement, allocation and teardown;
+- peak memory = max over path states of live GMP allocated limb
+  bytes including temporary products, retained tree states,
+  scratch and receipt buffers; process RSS is an **empirical
+  upper envelope/proxy**, not the same formal quantity;
+- consumer = exact interval enclosure, certified decimal-floor
+  integer string and its independent verification (plus original
+  Bishop same-real target as a *separate OPEN* consumer).
+  SHA-256 equality is a regression, not a mathematical certificate.
+
+**Pareto admission for an optimization `new` against `base`:**
+1. consumer/source preservation first: same ordered rational
+   interval or a formally proved refinement sufficient for the
+   requested decimal floor; maintain signed zero/residual, analytic
+   premises and independent verification;
+2. measure matched distributions of end-to-end wall time and
+   separately construction, receipt and reopen/verification costs,
+   pinned compiler/GMP/hardware/temperature and cold/hot runs;
+3. compare actual allocated live limbs, peak RSS, memory
+   movement and peak scratch separately; a faster result with
+   higher residency is a *trade-off*, not overall Pareto dominance;
+4. optimize constrained target throughput under declared memory
+   budget, and retain the full time-memory-verification Pareto
+   frontier rather than a single misleading scalar;
+5. test 1M/5M/10M and scaling, include output conversion,
+   certificate generation, source recompilation and tests in
+   their respective separate ledger columns. Do not conflate
+   asymptotic upper bounds with empirical median wall times.
+
+**Named next P0 weld:** add original-GMP source instrumentation
+producing path-indexed `(operation type, input/output bitlength,
+allocation/reallocation size, live limb high-water, elapsed)`
+records. Feed these into the existing sum/peak cost consumers,
+and recover a measurement/model residual by comparing predicted
+bit-operation cost to observed wall time. Test whether
+the two-floor, one-floor, in-place and projective strategies
+are consumer-equivalent and which are actually time-space Pareto.
+Only then promote one production default. Formal Agda
+instantiation and kernel replay remain OPEN; do not call this
+roadmap note a kernel proof or a completed machine cost theorem.
