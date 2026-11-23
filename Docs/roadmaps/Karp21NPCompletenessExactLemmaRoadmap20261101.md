@@ -1,5 +1,13 @@
 # Karp 21 NP-completeness: full exact-lemma roadmap (2026-11-01)
 
+## 23 November 2026 — alpha full physical compiler P0 and six-lane cross-check
+
+[Source-original six-lane exact lemma ledger](ClaySixLaneAlphaOriginalEndsExactMissingLemmas20261123.md) and [existing detailed R568/N21 physical compiler boundary](ClayNSR568KarpE1PhysicalSourceCompletionMaxCut20261123.md). Source-read confirms actual Karp21NativeGammaAllLengthFiniteTablePhysicalExact + Karp21NativeGammaAllLengthCompositePhysicalExact ALREADY own the arbitrary-length POSITIVE gamma literal transition table: 2k+2 physical steps on length 2k+1. Do NOT duplicate prefix/payload. The original signed word has **3m≤remaining suffix** early guard, not binomial(n,2) and not 3m+1. Original source physical three-tape Python reference on #1543 passed **9,942/9,942** decision cases (up to 16 edges; max observed 10,752 local head/cell operations, 1,139 tape cells), but leaves host controller, loop/address dispatch, and polynomial worst-case **uncompiled**.
+
+**Exact unpaid:** F1 complete parser and malformed terminal branch, signed threshold/two-lane ledger/history fully local finite physical TableProgram; F3 source raw↔binary-tape original word/threshold/priority/stuttering BIDI; F2.2 all actual persistent and temporary work/head/stack/copy/heap bit resources; F4 a single polynomial in TOTAL original input/certificate bit length, physical machineRun clock, plus G2/G3/G4 pinned Agda 2.9 kernel. Classical original E2 NP membership is already independently settled; E1 completion is NOT a proof of the universal SATNotInP lower bound. No GitHub CI executed by this task.
+
+
+
 ## 23 November 2026 — full original N21 local-head interpreter, reverse certificate and exact prior gamma table
 
 [Complete large original-source physical boundary and executable receipt](ClayNSR568KarpE1PhysicalSourceCompletionMaxCut20261123.md); \`scripts/check_karp21_physical_multitape_trace_20261123.py\` blob **\`e3dd076f6b97c26003dbc70ee6d740828fa94069\`** equals locally executed file. **9,942/9,942** independently parsed original N21 graph-word/certificate decisions PASS (894 accepts); observed maximum of 10,752 individually instrumented physical tape cell read/write/head moves, 1,139 live tape cells, 3,006 uncompiled host-control descriptor bits. Actual bidirectional reconstruction of every gamma token source coordinate and the chronological original 2m-bit certificate is asserted at each completed parse; sparse huge-n original words and malformed prefixes also tested. The model charges visits to physically serialized original u/v/weight registers, history, two signed ripple ledgers and terminal W; no hidden n-wide assignment vector.
