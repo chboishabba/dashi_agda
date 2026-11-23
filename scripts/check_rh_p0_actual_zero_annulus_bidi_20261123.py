@@ -58,7 +58,7 @@ def interval(t,side):
     print('  fourth moment N=',mp.nstr(moment,19),'gamma=',mp.nstr(gamma,19),'N-mu=',mp.nstr(A,19))
     print('  sign of original W ANNULAR [sum K - integral K mu]/r2=',sign,
           'robust=',robust,'margin=',mp.nstr(margin,10),'ratio=',mp.nstr(main/E6,7))
-    return {'t':t,'side':side,'count':hi-lo,'A':A,'margin':margin,'robust':robust,'sign':sign}
+    return {'t':t,'side':side,'count':hi-lo,'A':A,'margin':margin,'robust':robust,'sign':sign,'E6':E6,'r':r}
 
 r=[]
 for t in (mp.mpf(1000000),mp.mpf(1000002)):
@@ -70,6 +70,20 @@ assert r[2]['count']==2 and r[2]['robust'] and r[2]['sign']=='positive'
 assert r[3]['count']==3 and not r[3]['robust']
 print('PASS source-uniform signed bounds GIVEN numerically sampled zeros and gamma integration')
 print('PASS independent height shifts give reversed sign, retaining neutral/undetermined controls')
+for pair in ((r[0],r[1]),(r[2],r[3])):
+    totalA=sum(z['A'] for z in pair)
+    totalE=sum(z['E6'] for z in pair)
+    rscale=pair[0]['r']
+    lower=(floor*abs(totalA)/6-totalE)/rscale**2
+    robust=lower>0
+    direction='positive' if totalA<0 else 'negative'
+    print('BILATERAL UNION t=',mp.nstr(pair[0]['t'],15),'signed sign=',direction,
+          'robust=',robust,'margin=',mp.nstr(lower,10),'A=',mp.nstr(totalA,18))
+    if pair[0]['t']==mp.mpf(1000000):
+        assert not robust
+    else:
+        assert robust and direction=='positive'
+print('PASS bilateral union at t=1000002 has positive selected-W signed N-mu lower bound given sampled zeros')
 print('OPEN: analytic certified zero isolation; original selected W numerical witness; full zero-minus-mu over all q; post-sixth S; strict P0')
 
 # SAME original selected-W horizontal correction H=K(alpha,q)-K(0,q).
