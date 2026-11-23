@@ -1,3 +1,13 @@
+## 23 November 2026 — R2 actual original selected W: prime-free Fourier support and same-ordinate -4d recut
+
+Original Lean main source already has quarticFourPhysicalDetector_support_completedRadius: for W.R<1, support radius 16(pi+1)/t<log2 for t>=200, so all conventional Euler-prime samples at log(n), n>=2, vanish. The right-line Fourier coefficient for the SAME even compact P_W is -(2/r)sum Lambda(n)n^-1/2 cos(t log n)P_W(r log n), which is identically zero by support at this height. This is a source-supported analytic reduction, not a completed right-contour/μ identity; retain gamma/digamma, rational s=0,1 terms and exact original Zeta23.mu.
+
+Crucial original already-kernel-written theorem signedNormalizedPairKernel_zero_eq_neg_four_target yields at every actual same-ordinate zero exactly m/r² K_W(a/r,0)=-4 W.combinedZeroHeightDefect(sigma). The full zero-side contour A_W therefore satisfies literal off-ordinate H_W=A_W+4 D_same. For original post-sixth H_W+S_W<4d+I_W, equivalent full-contour target A_W-I_W+S_W<4d-4D_same. With an off-line target and distinct horizontal mirror and global positive quantitative band, D_same>=2d; therefore A_W-I_W+S_W<-4d is NECESSARY. This corrects the previous generic statement that local subtraction was harmless. Prime-free alone does not pay a NEGATIVE signed margin.
+
+Source owners: SignedPoleNMu, SignedPolePair, SignedPoleJointHorizontalJet, FourierTerminal, and RvMMuGammaSameObject in original dashi_lean4 main. Exact proof detail in existing RHGRHBilateralCompletedLogPolePairQuarticAdverseMass20261123.md on PR #1533. Regression extended and local standalone SymPy checks PASS; native Lean/Agda kernel not run. Priority remains exact right-contour/μ/polar scalar sign versus full local slack, not new G3 cones or named records.
+
+---
+
 ## 23 November 2026 — P0 bilateral completed-poles → ORIGINAL W holomorphic contour *ACTUAL ZERO SUM* (new specific route to FarExact)
 
 **NEW source-specific exact construction beyond reflected pole algebra:** the original even compact signed four-window physical profile `P_W(v)` has entire cosine transform `C_W(z)`. Set original `r=t/16`, `s0=1/2+i t`, and holomorphic test `f_W(s)=r^-2 C_W(-i(s-s0)/r)`. At a real actual off-line zero `rho=1/2+a+i gamma`, its SAME-γ completed-xi reflected partner `rho#=1-bar(rho)`, source `q=(gamma-t)/r,alpha=a/r` and original kernel identity give exactly
