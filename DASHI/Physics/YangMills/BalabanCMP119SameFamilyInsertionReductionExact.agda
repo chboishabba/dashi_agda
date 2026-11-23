@@ -22,8 +22,12 @@ module DASHI.Physics.YangMills.BalabanCMP119SameFamilyInsertionReductionExact wh
 -- common scale-tail estimate.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _≤_; _*_)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; _≤_; _*_; _-_; ∣_∣)
+import Data.Nat.Base as N
+import Data.Rational.Properties as ℚP
+import DASHI.Analysis.CanonicalRationalMetric as Metric
+import DASHI.Physics.YangMills.BalabanClayDyadicCutoffTailExact as Cutoff
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanCMP119AnchoredNormalizedExpectationSourceExact as Source
@@ -110,6 +114,105 @@ asPublishedTailToCommonIncrement dataSet = record
   ; Sum.PublishedTailToCommonIncrement.characteristicResponseBelowGeneratedTail =
       responseBelowGeneratedTail dataSet characteristic
   }
+
+
+-- Derive R82's finite response-tail field from literal successive scalar
+-- expectations, rather than ask for a second independent multiscale estimate.
+-- Reuse the canonical rational metric and existing cutoff-index identities.
+-- The adjacent bound must still be proved on the actual physical insertion.
+responseBelowGeneratedTailFromAdjacent :
+  (expectation : Nat → ℚ) (increment : Nat → ℚ) →
+  (∀ k → ∣ expectation k - expectation (suc k) ∣ ≤ increment k) →
+  ∀ start count →
+  ∣ expectation start - expectation (N._+_ start count) ∣
+    ≤ Sum.generatedTail increment start count
+responseBelowGeneratedTailFromAdjacent expectation increment adjacent start zero
+  rewrite Cutoff.startPlusZero start
+        | Metric.subSelfℚ (expectation start)
+        | Metric.absZeroℚ = ℚP.≤-refl
+responseBelowGeneratedTailFromAdjacent expectation increment adjacent start (suc count)
+  rewrite Cutoff.startSuccessorCount start count =
+  ℚP.≤-trans
+    (Metric.absDifferenceTriangle
+      (expectation start) (expectation (suc start))
+      (expectation (N._+_ (suc start) count)))
+    (ℚP.+-mono-≤
+      (adjacent start)
+      (responseBelowGeneratedTailFromAdjacent
+        expectation increment adjacent (suc start) count))
+
+-- Both insertion kinds share the same generated increment; no separate
+-- finite-tail estimate for characteristic response is needed.
+sameFamilyResponseTailFromAdjacent :
+  (expectation : ResponseKind → Nat → ℚ) (increment : Nat → ℚ) →
+  (∀ kind k → ∣ expectation kind k - expectation kind (suc k) ∣
+    ≤ increment k) →
+  ∀ kind start count →
+  ∣ expectation kind start - expectation kind (N._+_ start count) ∣
+    ≤ Sum.generatedTail increment start count
+sameFamilyResponseTailFromAdjacent expectation increment adjacent kind =
+  responseBelowGeneratedTailFromAdjacent
+    (expectation kind) increment (adjacent kind)
+
+
+-- Construct the existing R82 record from the source's selected insertion
+-- values. The scalar readout is explicitly tied to the dependent source
+-- expectation, rather than supplied as an unrelated response sequence.
+module _
+    {source : Source.CMP119AnchoredNormalizedExpectationSource}
+    (Insertion : ResponseKind → Set)
+    (anchor : ∀ kind → Insertion kind → Source.Anchor source)
+    (analytic : ∀ kind → Insertion kind → Set)
+    (normalized : ∀ kind (scale : Source.Scale source)
+       (insertion : Insertion kind) →
+       Source.NormalizedExpectation source scale (anchor kind insertion))
+    (represented : ∀ kind scale insertion → analytic kind insertion →
+       Source.representedByAnchoredTerms source scale
+         (anchor kind insertion) (normalized kind scale insertion))
+    (scaleAt : Nat → Source.Scale source)
+    (selected : ∀ kind → Insertion kind)
+    (readout : ∀ {scale anchor} →
+       Source.NormalizedExpectation source scale anchor → ℚ)
+  where
+
+  selectedNormalizedResponse : ResponseKind → Nat → ℚ
+  selectedNormalizedResponse kind k =
+    readout (normalized kind (scaleAt k) (selected kind))
+
+  selectedResponseDifference : ResponseKind → Nat → Nat → ℚ
+  selectedResponseDifference kind start count =
+    ∣ selectedNormalizedResponse kind start -
+      selectedNormalizedResponse kind (N._+_ start count) ∣
+
+  selectedInsertionReductionFromAdjacent :
+    (increment : Nat → ℚ) →
+    (∀ k → 0ℚ ≤ increment k) →
+    (c : ℚ) → 0ℚ ≤ c →
+    (∀ k → increment k ≤ c * (Ursell.quarter * Geo.halfPower k)) →
+    (∀ kind k →
+      ∣ selectedNormalizedResponse kind k -
+        selectedNormalizedResponse kind (suc k) ∣ ≤ increment k) →
+    SameFamilyCMP119InsertionReduction source
+  selectedInsertionReductionFromAdjacent
+      increment incrementNN c cNN dyadic adjacent = record
+    { RepositoryInsertion = Insertion
+    ; insertionAnchor = anchor
+    ; sourceLocalAnalytic = analytic
+    ; normalizedExpectation = normalized
+    ; sourceRepresentation = represented
+    ; generatedIncrement = increment
+    ; generatedIncrementNonnegative = incrementNN
+    ; coefficient = c
+    ; coefficientNonnegative = cNN
+    ; generatedIncrementDyadic = dyadic
+    ; responseDifference = selectedResponseDifference
+    ; responseDifferenceNonnegative = λ kind start count →
+        ℚP.0≤∣p∣ (selectedNormalizedResponse kind start -
+          selectedNormalizedResponse kind (N._+_ start count))
+    ; responseBelowGeneratedTail =
+        sameFamilyResponseTailFromAdjacent
+          selectedNormalizedResponse increment adjacent
+    }
 
 sameFamilyInsertionReductionCompilerLevel : ProofLevel
 sameFamilyInsertionReductionCompilerLevel = machineChecked

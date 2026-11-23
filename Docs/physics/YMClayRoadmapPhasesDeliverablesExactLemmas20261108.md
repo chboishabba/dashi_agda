@@ -1,3 +1,220 @@
+### 20 November — CMP102 Eq. (7) plaquette owner and source norm reconciliation
+
+Supersedes broad "missing plaquette" and "missing gauge representative" labels in preceding history. Existing BalabanPeriodicPlaquetteHolonomy supplies six oriented positive planes and endpoint covariance; BalabanSU2RationalWilsonLargeFieldGapExact already proves unitChordalEqualsTwiceTraceDeficit, and BalabanClayGate4LiteralPeriodicPlaquetteHolonomyGaugeExact proves conjugationPreservesChordalDistanceSq. No new plaquette or chord theorem needed. YMClaySUNSideFourBlockedWilsonGaugeExact supplies coarse plaquette consumer for straight 2-link blocking, NOT nonlinear CMP98 averaging. CMP102 printed pp277–278 (1),(7) visually checked: on interface replace missing bond with one-step averaged finer V, with actual endpoints and ordering; source plaquettes include at least one corner in shell. CMP98 extract pp19–21 (15),(17)–(19) defines nonlinear exp(mean log relative contour) times central holonomy and distinguishes normalized trace norm from operator norm. In SU2 quaternion matrix coordinates M=P-I, M* M=||P-I||_quat² I; thus operator norm and normalized Hilbert-Schmidt norm both equal quaternion chord, and unit norm gives chord²=2(1-ReTr_normalized P). Local SymPy script scripts/check_ym_cmp102_plaquette_norm.py actually executed PASS for symbolic M* M and polynomial deficit identity. This supplies exact normalization, not an estimate of actual mixed-scale plaquette deficit. Eq7 equivalent to per-source-plaquette deficit < epsilon1²/2 in this convention; total action or fine-link radius alone not same hypothesis.
+
+BalabanCMP98Path13BishopNativeSourceExact owns relativeUnit, principalLog, outerYFrom and actual differential route; use same nonlinear group average, not straight-path blocking. Need concrete source boundary endpoint membership and group-valued reconstruction on actual mixed-scale V; targeted default-branch searches did not locate completed same-object interface, not proof of absence. BalabanRootedCoarseAnchoredOrbitSectionRound194Exact and BalabanFinitePhysicalGaugeQuotientCarrierRound196Exact supply rooted based orbit representative uniqueness and preservation of selected average under existing gauge action/root restriction inputs. Source CMP102 Eq4 fixes all mixed-scale coarse sites, so single-root section must not be assumed to preserve multi-anchor condition; use actual compatible section/quotient. BalabanCMP98SelectedPhysicalUnitCarrierErasureBridgeExact is rational-to-rational group word erasure; YMClayOriginalRationalSU2BishopUnitaryWeldExact explicitly only forward embedding into Bishop unit group, not surjective. Retain actual physical minimizer in real carrier; rational fixtures do not establish existence of rational representative. Path13 specialization's selectedBackgroundIsPath13 and selectedBondGroupIsPath13Link already refl once source instance supplied. BackgroundFieldVariationalTheorem.backgroundUnique literal equality requires identified gauge section, not just published unique critical orbit. No new generic adapter, no radius shrink, no Agda or Clay gate promotion. Next actual work: concrete mixed-scale shell V boundary link input using same CMP98 nonlinear group average, actual per-plaquette Eq7 witness and physical minimizer carrier specialization. Prior source authority remains unchanged.
+
+### 20 November — both missing primary PDFs recovered; CMP96/CMP102 exact source recut
+
+Recovered both originals from user's prior uploads: 10.1007@BF01240221.pdf (CMP96 223–250) and 220_2005_Article_BF01229381.pdf (CMP102 277–309). No further upload required. CMP96 printed p224 visually verified, p225 text read; CMP102 pp279,305–306 visually verified. CMP96 (2.1)–(2.4) nests Omega_j=B^j(Omega_j^(j)), coarse domains unions of big blocks, scale-normalized distance between successive boundaries > RM, lifted shells cover lattice with exterior Lambda0=Omega1^c and B^0 identity. Site domains extend to bonds with at least one endpoint inside; do not use induced interior-edge deletion. Empty shells/whole-lattice initial domains permitted. Need exact coarse lattice shell subtraction/support alignment per source, not raw subtraction of differently indexed coarse sites. CMP96 (2.7) gauge parameters zero in exterior and Q'_j lambda=0 on selected shells; (2.11) supplies scale-weighted Laplacian floor on this kernel; (2.14)–(2.17) regularized penalty and projector. Do not reopen scalar martingale or Schur algebra.
+
+CMP102 Theorem1 pp279 (9),(10) supplies actual minimal-orbit gauge-chart regularity including first derivative, Holder, and d* d A control at physical scale under source smallness and cube hypotheses. Section G p305 (170),(171): stationary annihilation on Q(U_k) and source R D* tangent. Stronger p306 (178): <delta A',J>=0 for Q(U_k)delta A'=0 without further gauge fixing. This is source-owned stationarity, not a new result. Eq174 actual fine reconstruction Acal=A1+H1 B-H D(A1+H1 B); (175) solves A1; (176),(177) A1 begins quadratic and reconstruction expansion has BOTH tangent correction and normal -H C^(2)(H1 B). Eq178 kills the tangent first-variation pairing, not the normal term. Eq179–180 alternative gauge-free representation with H0 and modified Green. This confirms prior CMP99/109 corrected Gaussian curvature bookkeeping and gives direct route to published regularity/applicability through actual Theorem1, not selected single-link radius alone.
+
+Inspected ScaledFilteredEstimateExact (scale algebra), GradedLocalCompatibilitySystemExact (abstract local compatibility), BalabanP33WreathBlockSpinCrossPollinationExact (prototype explicitly not gauge/RG), and P10SourceFaithfulActivityContract (P10P11WeightedRelativeDomainCarrier, actual nested relative-domain interface with terminal ownership, not concrete source instance). Prefer existing source domain interface with scale-indexed block expansion, separation and incident-bond geometry. Next identify concrete selected RG domains, original coarse smallness and source minimizer with CMP102 Theorem1 and CMP96 domain hypotheses; then apply existing BalabanExactPublishedCarrierMatching to corrected G1/H1/Delta_k. No new generic adapter, no new SymPy run this source-only round, no Agda or physical gate promotion. Both PDF access blockers resolved; source matching remains open.
+
+### 20 November — CMP99 Dirichlet compression and exact penalty-subtracted lift energy
+
+At 06a93ad5 inspected BalabanCubeEdgeDomains, BalabanCMP116DomainSpecificSupportGeometryRound447Exact, BalabanClayGate4CMP109BlockConventionSeparationExact, BalabanClayT3OperatorSchurComplementExact, BalabanBulkPropagatorAnalyticInhabitation. Existing localization closed-cube/tree geometry and Schur algebra are reusable; no evidence that the concrete CMP99 nested site-domain sequence is already instantiated. BulkPropagatorAnalyticInhabitation is an input record, not an inhabitant. CMP96 extract fetch at Docs/support/reference/balaban-source-extracts/cmp96-propagators-ii.txt returned 404. CMP99 extract (3.18)-(3.25) explicitly uses characteristic compression on enlarged Omega0 and scale-indexed Q' rows. Its (3.35),(3.36) are local gauge-chart bounds on A, first and second derivatives at physical scale L^j eta, with sufficiently small M alpha0, not a single link chord bound. Do not identify the periodic selected radius with all these hypotheses. Actual nested blocks and support alignment remain to be verified against CMP96 (2.1)-(2.4); prior CMP99 PDF verified as above.
+
+For zero extension E_Omega and correct weighted adjoint, actual Dirichlet scalar compression L_Omega=E^* D_U^*D_U E=(D_U E)^*(D_U E), retaining crossing bonds. Deleting crossing bonds changes the energy. For complete supported transported block rows, earlier weighted coisometry remains valid; for truncation use the compressed row map Q E and its true adjoint, not an assumed identity Gram. Source penalty is B=diag(a_j/ell_j²) in site metric. On finite spaces with full-row-rank Q and positive definite K=F+Q^* B Q, set G=K^-1, M=QGQ^*, H=GQ^*M^-1. Then QH=I and H^* F H=M^-1-B, since H^* K H=M^-1. This standard constrained minimization/Schur algebra isolates Eq3.156's penalty subtraction exactly; no second subtraction or coercivity claim follows from G positivity alone. Same identity applies to corrected source G1 when F includes actual inner curvature and gauge contributions, with outer curvature separately as printed. It does not identify the site Q' with bond Q, or construct physical G1. Local scripts/check_ym_cmp99_dirichlet_lift.py genuinely executed PASS: scalar six-site ambient cycle, four-site Dirichlet compression, explicit missing boundary diagonal, mixed complete block weighted adjoint, source R projector identities and penalty-subtracted H lift identity. Fixture is not physical 4D CMP99 domain. Next recover actual CMP96 nested domain definition and instantiate source transported Q' and Q on that carrier; use actual correction and published hypotheses before applying positivity. No new generic adapter, radius reduction, Agda acceptance or Clay promotion. Paper 3 and both roadmaps synchronized.
+
+### 20 November — weighted multiscale CMP99 site average, same-source domain cut
+
+At head 812fb281 recovered BalabanPropagatorSourceLedger.md (historical CMP102 variational PDF filename 220_2005_Article_BF01229381.pdf, not locally recovered in this turn), BalabanCMP98MultiscaleAveragingDerivativeRound126Exact, BalabanClayGate4FiniteWeightedAdjointFubiniExact, BalabanClayGate4FiniteWeightedAdjointFormulaExact, BalabanClayGate4PhysicalWeightedL2NormalizationExact, BalabanClayGate4PrimaryQkWeightedSchurExact, BalabanMarkedHessianPublishedDecayBoundaryExact and BalabanCMP109DirectBetaSourceRegression. Weighted formula is existing finite algebra; physical weight inputs explicitly conditional. PrimaryQkWeightedSchur concerns bond derivative, not automatically site Q'. Marked Hessian source owner already credits CMP99 Theorem 3.14/(3.154), CMP109 (4.35)-(4.37),(5.10), CMP116 localization; do not reopen marked decay shape. PositivePatchCorrection is a downstream beta patch interface, NOT a corrected G1 producer.
+
+Using CMP99 (3.18)-(3.24) site average and physical site metric: for complete disjoint B^j(y), N_j=L^(jd), ell_j=L^j eta, fine weight eta^d, coarse ell_j^d, each transport T_yx orthogonal. Weighted adjoint of Q'_j has block T_yx^* since ell_j^d/(eta^d N_j)=1. Thus Q'_j Q'_j^*=I on complete disjoint block cover, and compositions are weighted coisometries. Mixed-level complete disjoint cover retains this identity; no independent 169 row preconditioning in physical weighted metric. Do not confuse site volume with penalty (3.24), which uses a_j ell_j^(d-2), hence multiplier a_j/ell_j^2 relative to site metric. Recurrence a_(j+1)=a a_j/(a L^-2+a_j), a_1=a, implies 1/a_j=(1/a) sum_{m=0}^{j-1} L^(-2m) for j>=1 (a_0=a separately). Local script scripts/check_ym_cmp99_weighted_site.py executed PASS: rational nested site average fixture, weighted adjoint composition, mixed-level disjoint cover and truncated-support negative control, five penalty recurrence checks. Not full physical domain sequence, no uniform Green claim. Actual CMP99 nested domains and complete-block support under Dirichlet restriction still need verification; overlapping or truncated blocks are not automatically coisometries. Next use exact source domain membership and penalty normalization in G', R, Pi, then attach corrected G1/H1/Delta_k (including subtraction aI and curvature); no new generic adapter, martingale or independent marked decay theorem. Missing variational PDF still blocks independent Eq171/174 verification. No Agda kernel or Clay gate promotion. Paper and both roadmaps synchronized.
+
+### 20 November — CMP99 transported site average and exact projector reuse
+
+At 16c50551 inspected BalabanCMP109RootedLoopAverageCompatibilityExact, BalabanClayGate4PrimaryAveragingLocalityExact, BalabanSelectedBackgroundGaugeConstraintMatrixExact, BalabanSelectedFlatGaugeRegularizedGreenExact. Reuse canonical rooted path transport and covariant gradient/divergence algebra, locality composition and finite KKT projection. Flat Green donor explicitly side-four, not the source nonflat G'. No complete same-object multiscale CMP99 instance located in targeted search.
+
+CMP99(3) original supplied PDF printed pp.393–394 eqs.3.18–3.25: Q' is site-valued transported average (distinct from bond Q and background derivative of Q). On selected literal one-block side13, N=13^4, Q'=(1/N)[Ad_U(Gamma_yx)]_x, each block orthogonal. Q'Q'^*=I/N in unweighted Euclidean site and coarse norms, normalized 169 Q' coisometry at arbitrary unit background. Weighted/multiscale domain adjoints require actual source metrics. Native canonical path length <=24, chord e<=1/4096 gives each transport adjoint defect <=48e; normalized site row defect <=r=48e by Cauchy. On ker Q', flat mean mode norm <=r||lambda||, existing componentwise four-axis Poincare yields ||D0 lambda||² >=(1-r²)||lambda||²/18. Four positive directional covariant gradient defects each <=2e, total norm <=4e||lambda||. Exact rational inequalities (1-r²)/18>1/25 and 1/5-4e>1/6 yield ||D_U lambda||²>||lambda||²/36 for nonzero kernel lambda. Hence L_U+Q'^*aQ' positive definite for a>0 on this finite periodic one-block carrier, by sum of squares and kernel intersection. Not uniform in arbitrary domain or scale; radius and canonical transport semantics conditional.
+
+Eq.3.25 R=I-W^*(WW^*)^-1 W, W=Q'G', G'=(L_U+Q'^*aQ')^-1. Existing rectangular KKT algebra: R self-adjoint idempotent, Q'G'R=0, L_U G'R=R. Pi=I-D_U G' R D_U^* satisfies R D_U^* Pi=0, Pi²=Pi; not asserting orthogonal Pi. Image R=L_U ker Q' since G' maps ker W onto ker Q' and inverse penalty vanishes there. Local exact SymPy script scripts/check_ym_cmp99_site_projector.py genuinely executed: rational nonflat 3-site cycle fixture verifies all identities, R differs from I-N Q'^*Q', and exact side13 scalar budget comparisons PASS. Fixture not full physical Path13 execution; analytic side13 bound conditional. Actual multiscale transported Q', Dirichlet domain and weighted adjoints, source smallness, corrected G1/H1/Delta_k and axial/free carrier still need same-object matching. No published theorem application or Agda kernel acceptance claimed. Paper and both roadmaps synchronized.
+
+### 20 November — primary PDF verified CMP99 corrected quadratic; existing authority reuse
+
+User supplied balaban1985.pdf (CMP99(3), 389–434) and balaban1985a.pdf (CMP102, 255–275, 3D UV stability, NOT CMP102 277–309 variational paper). Visually verified printed CMP99 pp.421 and 428, equations (3.127)–(3.129), (3.155)–(3.158); CMP102 3D pp.260–261 eqs. (17)–(22) confirm separate source reconstruction and negative quadratic J pairing, not a 4D stability theorem.
+
+Critical constructor correction: CMP99 pp.393–394 (3.18)–(3.23) defines Q' as background-transported SITE gauge-parameter averaging, R orthogonal projection onto Delta_U ker Q', Delta_U=D*D. It is not the flat mean-zero projector on divergence rows. Eq. (3.128) uses Pi=I-D G' R D*, then <A,G1^-1 A>=<Pi A,Delta Pi A>-2<H C^(2)(Pi A),J>+||R D*A||²+a||QA||². H1=G1 Q*(QG1Q*)^-1 (3.129). On the unit-lattice carrier (3.156) is Delta_k=(QG1Q*)^-1-aI minus the quadratic form 2<H1 tilde D^(2)(B),J>. The minus aI subtraction is essential; cannot infer Delta_k coercivity just from a positive Schur complement. Eq. (3.156) domain B=0 outside Lambda, B=0 on designated axial bonds, Q1 B=0 (not the earlier selected reduced divergence kernel). C embeds the remaining coordinates by solving selected corridor pivot rows; (3.157)–(3.158) covariance C(C*Delta_k C)^-1 C*. Printed p.428 explicitly states uniform lower bound gamma0>0 independent of k,U under (3.35),(3.36) and sufficiently small M alpha0. No numeric gamma0=1/64 asserted. Reuse published authority, not an invented curvature penalty.
+
+Existing owners inspected at 4013691e: BalabanPublishedAnalyticAuthorities already has theorem1BackgroundUniqueModuloGauge and propagator bounds; BalabanExactPublishedCarrierMatching owns exact lattice/field/gauge action/operator/Green/norm/domain/smallness matching, not an inhabitant; BalabanCMP99EliminatedPivotDerivativeExact owns algebra of pivot derivative, actual coefficient and source Q' derivative conditional (avoid confusion with site averaging Q' above). BalabanCMP109FixedConstraintCoordinateGaussianExact and BalabanCMP109DirectBetaSourceRegression own fixed-coordinate downstream algebra. No new adapter necessary. Actual remaining source match: transported site average Q', R and Pi, inner and outer quadratic jets and J, same Delta_k and axial/free carrier, normalized scales and (3.35),(3.36) with small M alpha0. Previous conditional one-block bare Wilson floor remains auxiliary, not source Gaussian floor. Do not reopen martingale or finite KKT algebra. Missing CMP102 variational PDF still needed for direct verification of eq171/174, not for verifying CMP99 corrected quadratic. This round source audit only, no new SymPy execution or Agda kernel result. Paper and both roadmaps synchronized.
+
+### 20 November — literal CMP109 reconstruction and CMP99 corrected Gaussian source recut
+
+Recovered local text extracts CMP109 (1987), pp.265–268, eqs. (2.6)–(2.12), and CMP99(3) background propagators (1985), pp.421,428, eqs. (3.127)–(3.129), (3.155)–(3.158). These are OCR working extracts, not page-verified authoritative transcriptions. CMP102 UV-stability 3D extract is the wrong paper; actual CMP102 variational paper not in extract packet per README. Do not claim direct inspection of it.
+
+CMP109 uses a corridor-supported h, LQh=I, and B'=B-hD(B), with D(B)=C(B-hD(B)) for the nonlinear remainder C=O(B²). Thus D'(0)=0 and D²D(0)[v,v]=D²C(0)[v,v]; the reconstructed second jet is -hD²C(0)[v,v]. Existing BalabanCMP109QuadraticNormalCorrectionExact pays a conditional 4/3 residual correction; no new implicit-function theorem needed. Existing BalabanCMP109FixedConstraintCoordinateGaussianExact and BalabanCMP109DirectBetaSourceRegression own the fixed Gaussian and pivot/measure derivative interfaces.
+
+Do NOT conflate outer unit-lattice B' with lifted fine fluctuation H_1 B'. CMP109 (2.6)–(2.8) already includes an inner nonlinear lift correction contracted with the source first variation J, producing Delta_1; linear term annihilation on the final constrained tangent does not by itself erase normal acceleration. CMP99(3) (3.128) explicitly includes -2<H C^(2)(...),J> in its gauge-extended quadratic form. Its (3.156) additionally includes -2<H_1 D^(2)(B),J> in A^(k). Thus the published Gaussian operator is NOT the ambient bare Wilson Hessian; it already contains curvature terms (as well as gauge terms). Both inner and outer reconstruction contributions must be tracked on their respective levels; do not add a duplicate multiplier penalty to an A^(k) that already includes them. Exact equality/sign of every OCR term, scale normalization, H_1 and J identification, and source actual constrained carrier still require verification. The source states a uniform strictly positive lower bound for C*Delta_k C via prior propagator analysis, conditional on its own hypotheses; this is an imported theorem candidate, not proof our selected radius/normalization matches.
+
+Native flat one-block comparison only: selected Q0 per-link coefficient 1/13^4; for LQ0 the single-bond right inverse coefficient is 13^3=2197 whereas constant section coefficient is 1/13. Their Euclidean norm ratio is 169. Therefore a corridor pivot on that carrier cannot inherit the norm of the orthogonal section. Actual unit-lattice source pivot coefficient must be recovered separately (may be different). On same stationary tangent, different feasible reconstruction second jets differ tangentially and pair equally with the first variation; this does not establish equivalence of the actual multiscale carriers.
+
+Locally executed scripts/check_ym_cmp109_reconstruction_jet.py (SymPy exact polynomial model): implicit two-jet identity, two-level fine-lift correction chain rule, tangent counterexample, native-flat pivot normalization and inherited allowance PASS. Initial assertion required expansion of both polynomial sides; corrected and rerun. Not a physical evaluation of D^(2), H_1 or J. Inherited ambient allowance 146885123507709280708194373/91687345185165225945115656192 remains conditional, no new physical Hessian floor. Next recover actual CMP102 Sec C/G and Eq171 plus CMP99(3) definitions and verify the same-source H_1, D^(2), J and A^(k) against the already published coercivity and local smallness estimates. No new martingale, no radius change, no Agda kernel or Clay gate promotion. Paper and both roadmaps synchronized.
+
+### 20 November — source coordinates, stationary constraint curvature and raw gauge discriminator
+
+Actual existing CMP109 source owner BalabanCMP109FixedConstraintCoordinateGaussianExact records the nonlinear Q(B') linearization before delta(Q B'), and fixed-coordinate quadratic C(U)^* A(U) C(U). Do not add an independent second variation penalty after adopting a source A that already includes it; nor identify A with ambient Wilson Hessian without proof. Existing BalabanSelectedVariationKKTMultiplierExact, BalabanSelectedVariationSignConventionExact, BalabanPublishedCriticalToSelectedKKTAnnihilatorExact, and BalabanCMP109QRConstraintAnnihilatorReductionExact are first-variation algebra (several literal side-four). They do not supply a Path13 second-jet identity. BalabanClayGate4BackgroundFieldVariationalTheoremExact retains FineConstraint/FineRegularGauge/action as abstract fields.
+
+For the actual local nonlinear constraint map F, a chart Phi with F(Phi(z))=F(U), and D Phi(0)h=v, differentiation gives DF(U)D²Phi(0)[h,h]=-D²F(U)[v,v]. With stationary dS=DF*lambda (positive sign), D²(S∘Phi)=v^*H_S v-<lambda,D²F[v,v]>. Hence the normal acceleration term is exactly the multiplier curvature, not an additional independent correction. Tangential acceleration drops by stationarity. This is classical chain rule, not a new physics theorem. If using the previous right inverse T, an admissible second jet is -T D²F[v,v]; tangent ambiguity does not affect stationary Hessian. Previous Eq120 printed differential must first be identified as derivative of the actual constraint in the chosen tangent coordinates (it includes connector correction); differentiated moving-frame terms cannot be ignored. For the conditional inherited bare floor f=1579499892025915936100626501/91687345185165225945115656192 the remaining absolute curvature allowance for 1/64 is 146885123507709280708194373/91687345185165225945115656192 ~0.001602. Exact requirement <lambda,D²F[v,v]> <= (f-1/64)||v||², not a mandate for a stronger absolute bound. For fixed-background affine gauge condition in fluctuation coordinates its second jet is zero IF that is the actual source gauge; do not differentiate G_U with respect to the background instead of fluctuation.
+
+Important actual native geometry negative control: constant rational SU2 link q=((1-r²)/(1+r²),2r/(1+r²),0,0), r=1/16384, on direction 0 only, other links identity, lies inside native chord radius 1/4096. Constant color-y perturbation on direction 0 has G_U h=(I-Ad_{q^-1})e_y nonzero constant in space by BalabanPath13BackgroundGaugeConstraintMatrixExact's actual entry formula. Mean-zero projection kills it, raw divergence does not. This disproves automatic raw/reduced gauge-kernel equality from radius alone, NOT equality on actual joint constraint (constant h not asserted to satisfy Q_U h=0), nor a stationary-source counterexample. Gauge invariance alone does not imply zero gauge multiplier unless actual averaging is invariant along enough gauge directions (or an equivalent identity); exact small matrix discriminator A=(1,1,0), G=(0,1,0), g=(1,0,0)=A^T-G^T. Existing source may implement reduced gauge as actual gauge fixing; identify rather than reinstate all rows by fiat.
+
+Locally executed scripts/check_ym_constraint_curvature.py with Python/SymPy: chain rule/sign, gauge multiplier discriminator, native-radius constant residual and inherited allowance comparisons PASS. No numerical physical second jet, no Agda acceptance. Next actual producer: recover nonlinear fluctuation coordinate change from CMP109 §2 (and CMP102 variational constraint), identify its second jet and multiplier action on same selected Path13 source; verify actual gauge condition, then pay signed curvature allowance or show source A already contains it. Do not promote inherited ambient floor to full variational Hessian. Roadmaps and Paper 3 synchronized.
+### 20 November — paired periodic Eq120 cancellation and conditional moving-kernel bare Wilson floor
+
+See Docs/physics/YMClayPath13PairedMovingKernel20261120.md. Actual one-block wrap makes W=U and RC=UVU^-1, allowing paired connector bound p=26e(2+j), and the offset-independent central velocity permits quadratic average coefficient h via J Ad_R=J+ad_y. Exact local SymPy enumeration scripts/check_ym_path13_paired_defect.py gives normalized squared defect K~0.248064 (previous 227.54), constant max-section bound r~0.0883121 at unchanged e=1/4096. Existing martingale/Poincare and constant section give on actual selected A h=0: mean/detail norm ratio squared <=K/(1-2r)^2, scalar periodic difference floor fD>1/25. Existing reduced background gauge defect delta and flat periodic Hodge then give bare flat curl floor fD-delta on joint kernel. Literal unweighted quaternion Wilson left-exponential second variation deviates by <=96e via four-factor telescope, four-edge Cauchy and six plaquette incidence. Thus conditional ambient bare Wilson Hessian floor fD-delta-96e~0.0172270>1/64 on selected reduced joint kernel. This does NOT identify actual variational constrained Hessian including multiplier/constraint curvature, effective action terms, full gauge reduction or multiblock source. Recover original stationary constraint-curvature/second variation weld and actual selected chart/radius; side-four tangent projector is not a Path13 instance. No new martingale, no radius reduction, no Agda kernel or Clay gate promotion. Executed exact local arithmetic and incidence, not numerical Hessian. Paper and both roadmaps synchronized.
+
+### 20 November — reduced joint constraint: gauge-projected constant section at native radius
+
+Reuse BalabanPath13PreconditionedAverageGaugeOrthogonalityExact, BalabanCMP109L13ConstraintRowPreconditionerExact, BalabanPath13BackgroundGaugeConstraintMatrixExact and BalabanPath13SelectedBackgroundGaugeAdjointFloorExact. The existing BalabanPath13PreconditionedSelectedCombinedFloorExact is for normalized flat averaging plus the actual selected background gauge, NOT full nonlinear Eq120. Its reduced gauge carrier is the flat mean-zero multiplier space; here G is the covariant divergence compressed to that reduced codomain, not all gauge rows. With A=169 Q (selected twelve rows), Sbar=S/169, A0 Sbar=I, Sbar is Euclidean isometry, G0 Sbar=0. Existing gauge adjoint floor f=130991/3145728 and defect coefficient delta=9/1048576 imply ||G Sbar||_2<=sqrt(delta) and ||G^*(GG^*)^-1||_2<=1/sqrt(f). Thus P_G=I-G^*(GG^*)^-1 G satisfies ||(P_G-I)Sbar||_2<=sqrt(delta/f)<1/69. This finite-dimensional inference uses the existing reduced gauge floor, not a new gauge law.
+
+At e=1/4096, retain the preceding conditional signed Eq120 coefficient bounds a,b,c,h and row r=501336717/1379256320. On literal one-block periodic geometry translated connectors wrap onto the same fine bond labels. Sum weighted occurrences per selected row and fine label BEFORE squaring; for each color-vector block use its operator norm majorant, then vector Cauchy-Schwarz and sum four output direction squares (no extra color factor). Exact enumeration gives ||A-A0||_2^2<=K=320169499653314191/1407062127411200<256. Hence ||A||_2<17. In coarse max-of-four Euclidean color norm, ||A Sbar-I||<=r, and ||A(P_G-I)Sbar||<=2*17/69 (input Euclidean <=2 times max; output max <= Euclidean). Thus ||A P_G Sbar-I||_max<=81486948353/95168686080<7/8. The inappropriate all-Euclidean triangle estimate 2r+correction exceeds one; use the mixed norm exactly as specified. No radius reduction.
+
+Define J=P_G Sbar (A P_G Sbar)^-1, so A J=I and G J=0, inverse coarse max-norm factor <8; J maps coarse max to fine Euclidean with norm <16 (P_G contraction and Sbar isometry). Joint right inverse for any reduced gauge target g and coarse target alpha is T(alpha,g)=G^*(GG^*)^-1 g + J(alpha-A G^*(GG^*)^-1 g). This is an analytic finite-dimensional conditional certificate on selected twelve Eq120 rows plus projected mean-zero gauge, not a kernel-checked theorem, not the original variational identification, not full gauge rows. Full gauge mean modes must not be discarded without a source identity. The signed differential semantics and native chart/radius remain premises; no physical admissibility or Hessian floor follows just from this right inverse. Next check actual variational constraint and original gauge reduction, and energy-weighted moving-kernel estimate. Existing martingale and Poincare unchanged; no Clay gate promotion.
+
+Local execution of scripts/check_ym_path13_joint_projected_section.py succeeded with exact K, r, bound above and rational assertions K<256, delta/f<1/69^2, bound<7/8. Paper 3 and both roadmaps synchronized.
+
+### 20 November — geometry correction: selected one-block constraint, native radius, constant section
+
+Supersedes the interpretation of the previous multiblock Schur diagnostic as the source-native radius test. BalabanPath13BackgroundGaugeAdjointDefectExact.SelectedInverseLinkRadius13 has squared Euclidean quaternion chord <=4 rho^2, rho=1/8192, so e=1/4096, NOT 1/2048. BalabanPath13RadiusOperatorDefectRouteExact derives 1/2048 as quaternion L1 and representation-dependent operator majorant; do not treat it as the source chord or apply a second adjoint inflation to that majorant. NativeGeometry in BalabanCMP98Path13BishopNativeSourceExact uses R192.path13PeriodicIndex, the side-13 periodic site carrier; Path13PositiveBond is site x axis, not one row per coarse block of an arbitrary multiblock torus. At identity the entire all-site Q repeats the directional mean, rank 12, whereas any one selected center with four direction rows has codomain R^12. Do not demand all-site surjectivity, or infer which subset defines the original variational constraint without the existing fine-constraint identification.
+
+On the selected one-center twelve-row constraint, let S extend a coarse Lie vector as constant in space for each bond direction, with max of the four Euclidean color norms on both sides (fine max over sites and directions). Q0 S=I by the existing wrapped directional mean. Use the previously derived signed Eq120 row budget on this section, with the actual e=1/4096: ||Q S-I|| <= R_e=501336717/1379256320 <1. Neumann yields a right inverse S(QS)^-1, max-norm bound 1379256320/877919603 <8/5; no factor 13^4 from estimating arbitrary fine-domain perturbations is needed for this sufficient surjectivity test. This analytic argument is conditional on the printed left differential and the selected chart/radius and actual row identification; it is not a proof of combined gauge/averaging constraint surjectivity or moving-kernel coercivity. It does not establish the arbitrary multiblock extension, where a block-constant section has a different Q0S. No changed radius, no new martingale, no physical gate promotion. Locally executed exact script scripts/check_ym_path13_selected_constraint.py PASS (radius, wrapped stencil, rank, row budget and Neumann bound). Next identify the selected actual constraint and gauge-compatible section and compare its energy norm; reuse existing constrained Hessian owners. Do not call the prior sufficient estimate failure a physical obstruction.
+
+### 20 November — signed Eq120 coefficient defect: conservative radius audit
+
+Use the actual Eq120 source (BalabanCMP98Equation119TwoCarrierSelectedBondExact), NOT unsigned contour incidence alone. In left trivialization let M=U V, P=C W, R=M P^-1, y=log R, Y=avg y; D=dexp(Y), J=inv-dexp(y), E=Ad_exp(Y). Denote path velocities r_U,r_V,r_C,r_W, and adjoint operators by Ad. The exact Eq120 (including its translated-connector correction) is 1/13 times avg[(DJ-I)r_U + DJ Ad_U r_V + (I-DJ Ad_R) Ad_C r_W + (E-DJ Ad_R)r_C]. At flat field only r_V survives. This is a source-level analytic rewrite of the existing printed calculus, not a new averaging map. Requires the selected principal chart and ordinary SU2 left differential semantics; verify normalization on the physical background before formal promotion.
+
+For unit quaternion link chord <= e, e<=1/2048, relative contour chord <=74e; ||Ad_q-I||<=2||q-1||. Principal log angle <=3/2 chord on this ball, so ||ad_y||,||ad_Y||<=x=222e. Integral rotation representation implies ||D||<=1, ||D-I||<=x/2=d; Neumann gives ||J-I||<=j=x/(2-x). Write a=d+j, b=a+148e, c=a+74e, h=x+b. By telescoping against the flat path velocity, coefficient defect per occurrence on U,W,V,C respectively <=a,b,c,h (V includes <=24+13 prefix links; others multiply zero-flat coefficients by isometries). This retains cancellation before taking absolute values. Uniform on compatible periodic multiblock tori provided the actual selected background admits this link radius and the same source geometry. No Hessian perturbation conclusion yet.
+
+Exact occurrence class column maxima U,W,V,C = 52728,52728,13,28561. Sum weighted folded columns before maximizing, divide by 13*N (N=13^4). Row bound (168/13*(a+b)+13*(c+h))/13. Weighted Schur squared defect for coarse norm N times unweighted coarse norm = N*row*col. Locally executed scripts/check_ym_path13_signed_defect_budget.py: squared upper bounds 1349.0930479433102 at e=1/2048; 1.2739903923858924 at 1/65536; 0.004971707998158777 at 1/1048576. Compare flat squared smallest singular value 57/169 in matching normalized coarse norm. At e=2^-20 the bound proves surjectivity persistence under these assumptions, but does not establish physical admissibility of that radius or moving-kernel Hessian coercivity. At e=1/2048 the sufficient Schur estimate fails, not the actual operator. Next recover sharper source-localized/covariant coefficients or admissible smaller radius and match constrained Hessian reference/variation. Existing martingale unchanged. Local arithmetic execution only; no Agda or physical gate promotion.
+
+### 20 November — literal nonlinear contour incidence, reuse existing martingale
+
+Do not recreate Martingale or Poincare: BalabanNormalizedFourAxisMartingaleExact and BalabanPath13FourAxisPhysicalPoincareExact already own the same-carrier variance and scalar 1/18 floor. Read actual ordered signed-axis path executable check_ym_path13_full_mixed_jet.py: Eq120 includes correction average(Ad_C r_plus - r_minus)/13, not solely the differential of exp(mean log relative) C. The finite contour incidence counts the actual ordered connector, translated connector, crossing and central segment, using positive-bond labels for inverse traversal. For connector direction d=0..3, prior axes fixed and later axes zero, multiplicity on axial edge k is (6-k)13^(3-d) for k=0..5 and (k+7)13^(3-d) for k=-6..-1. Each connector total 4*42*13^3. Full unsigned contour row mean 674/13, not worst-case 74. Folding by fine residue mod 13 sums across all translated coarse rows on an arbitrary compatible periodic multiblock lattice; max column mean 10310/2197, per-axis raw maxima 134030,36686,29198,28622. At most eight unwrapped row-offset incidences per fine bond (periodic identifications can only merge rows). These are unsigned contour counts before signed cancellation, inner/outer log derivatives or the separate Eq120 correction. They are not Hessian overlap (plaquette incidence) or a perturbation norm bound. Use weighted Schur with actual operator coefficients and subtraction of flat terms; do not substitute 8 directly into LocalHessianRadiusBudget, whose 1/32 reference floor also requires matching the moving kernel. Existing 1/57 multiblock constrained bound is not automatically 1/32. Local Python/SymPy executed scripts/check_ym_path13_contour_incidence.py: PASS with above exact output. Next reconcile the actual coefficient defect and moving-constraint norm, retaining all mixed detail sectors; no new martingale or physical gate promotion. Paper and both roadmaps synchronized.
+
+### 20 November — 369 / 13 / relative j geometry reconciliation
+
+Use the actual same-carrier Path13 four-axis martingale theorem (BalabanPath13FourAxisPhysicalPoincareExact), already present, not the older AllPhysicalFibresPoincare note's outstanding martingale status. It applies the 1/18 fibre floor and conditional-expectation orthogonality on 4*13^3=8788 literal fibres. The SU2 state has (4*3)*13^4=342732 coordinates. Reuse the axis average and detail operators for factorized flat calculations: P=ones(13)/13, H=I-P, ranks 1 and 12. Tensor products give transverse ranks by detail count 1,36,432,1728 and four-axis ranks 1,48,864,6912,20736; ordered martingale ranks 26364,2028,156,12 plus constant 1. These are exact scalar carrier decompositions, not nonlinear Hessian diagonalization or gauge/constraint ranks.
+
+Cross-PR source owners: docs/crystallography_13_in_27_antipodal_diamond_crosspr_20261026.md and docs/crystallography_369_hyperfabric_thread_master_roadmap_20261026.md on default branch (not present on audited YM head); original 27-site cube = origin + 13 antipodal pairs, projective strata 3+6+4. Preserve orientation and seam/adjacency residuals. A 13-label codec to [-6,6] can index Path13 transverse factors but is not an intertwiner of cyclic translations, nearest-neighbour adjacency or gauge operators; do not replace geometry. Reuse #1249/#1261 native owners if an actual action weld is needed. 13^3 is the transverse tensor power, not the Monster 13-primary subgroup (Base369OggNestedPhaseRound7 records 13^3 exponent), nor tetration. Same cardinality is not same algebra.
+
+DASHI/Foundations/JPlusOneScaleBridge.agda gives 10+1 local j-unit extension and 10+2 relation stage, with semantic separation from modular j and McKay 196883+1. DASHI/Foundations/TernaryThirteenCentralCompletionBundleSheafExact.agda gives actual 12+1 central gluing with common-centre agreement, not independent centres. 11+1=12 is another cardinal step, requiring its own source relation constructor, not a proof of equal stage semantics. The Path13 12+1 projector split is constant plus mean-zero, distinct from the stage completion and the 12 Lie/bond components plus a scalar coordinate. JFineCoarseRelativeScaleExact (present on YM head) fixes jCoarse=3^2, jFine=3^9 relative, jAbsolute=3^11; reciprocal spatial-frequency scale. Distinguish 3^12 * 3=3^13 central trit extension from exponentiation of 13 labels. No 3-adic refinement identity between 3 and 13; exact periodic block refinement requires compatible divisibility. AnalyticJTetrationActiveMaxCut20261109 and RSA260369DNA27CodecNDimTetrationCrossPollinationExact retain natural-height iteration vs fixed tensor nesting boundaries.
+
+Local executed SymPy script scripts/check_ym_path13_369_factorisation.py: exact representative codec/strata, rational projector laws, tensor ranks and relative scale arithmetic PASS. No new physical theorem or kernel claim. Next audit actual nonflat contour incidence using transverse factorization and existing source path operators, retaining mixed terms; reuse conditional-expectation and hyperfabric local/seam reconstruction rather than equating carriers. Historical rounds provenance only. Paper 3 and both roadmaps synchronized.
+
+### 20 November — constructor correction: literal Path13, not straight F19 holonomy
+
+The straight-boundary estimate in YMClayOriginalWilsonBlockedSurfaceEnergy20261120.md applies to native ordered path blocking only. It is NOT a bound on the nonlinear CMP98 Eqs.(119)-(121) averaging operation; a side-13 square fixture is not a Path13 test. The actual owners are BalabanCMP98Path13BishopNativeSourceExact, BalabanCMP98Path13PrintedRoleSourceFamilyExact, BalabanCMP98Equation119TwoCarrierSelectedBondExact (assembledEquation120QSource), BalabanPath13RadiusOperatorDefectRouteExact, and BalabanCMP98Path13RelativeContourPrincipalImageExact. The latter already supplies the literal 74-factor contour budget 37/1024 conditional on the selected fine-link radius; do not rebuild it. NativeGeometry selects the background via BackgroundFieldVariationalTheorem, whose original fine-constraint/action identification and small-field admission remain explicit. Do not substitute the F19 straight map for that constraint.
+
+Exact separation at identity: a fine axial link at axial offset zero but nonzero transverse offset has straight center-path differential zero and literal Eq120 coefficient 7/13^5 on a multiblock direction, or 1/13^4 on the one-block wrapped torus. Thus the constructors differ even at first order. Local SymPy executed scripts/check_ym_path13_constructor_boundary.py: six exact cyclic geometries, Gram SOS identity, column sums and overlap, and off-center derivative coefficient. The existing flat Gram is (113I+28(T+T^T))/13^6; independently its difference from 57I/13^6 is 28(I+T)(I+T^T)/13^6. This is corroboration, not new flat coercivity. Flat support overlaps at most two longitudinal blocks per fine axial link; nonlinear transverse contour contributions must not inherit that overlap without an actual incidence proof.
+
+Next use actual selected variational background, complete Eq120 derivative and actual contour support/defect operators to inspect the nonflat operator budget and nonlinear RG marked activity. Do not promote the earlier straight surface transport to physical CMP116. This packet is a source/geometry correction and exact finite check, not a physical moment or spectral theorem; no Agda acceptance claimed.
+
+### 20 November — original aligned blocked surface moment transport and scale obstruction
+
+See Docs/physics/YMClayOriginalWilsonBlockedSurfaceEnergy20261120.md. The existing straight native holonomy map yields d_coarse <= b^2 sum_surface d_fine; aligned coarse faces have disjoint fine plaquette labels. Via the previous microscopic chessboard bound (conditional on its closed-cube applicability), the actual pushforward satisfies E exp(theta beta/b^2 sum_A d_coarse)<=exp(C(beta)b^2|A|/4) for theta<=1/96. Existing canonical F19 marked expectation owns the selected b=2 effective measure attachment. The resulting rate beta eps/(96 b^2)-C(beta)b^2/4 is useful only when beta eps>24 C(beta)b^4. Exact commuting rational SU2 patch control shows fine deficits O(b^-4) can produce order-one coarse holonomy. Therefore deterministic transport alone cannot pay fixed-physical-scale moments. Reuse existing nonlinear/source-localized marked CMP116 estimates and actual chargeSumBelowRootedTail, not bare coarse substitution or a new compiler. Earlier 19 November BIDI chessboard note already owns a related direct mixed-defect bound; credit both. Local executed regression: 120 noncommuting fixtures, 4 periodic incidence fixtures, 5 flux controls, 1 symbolic rate identity. Analytic finite-scale result, native formalization and physical-source verification pending; no Clay gate promoted.
+
+### 20 November — sparse microscopic Wilson energy / chessboard reduction
+
+New source-specific analytic note: Docs/physics/YMClayOriginalWilsonSparseChessboard20261120.md. Reuse the original Wilson pressure, site-plane Haar factorization and standard chessboard inequality (Biskup arXiv:math-ph/0610025, Theorem 5.8). Closed unit cubes: 24 orientation/transverse parity classes, each dissemination marks V/4 plaquettes four times. For theta<=1/96, joint moment E exp(theta beta sum_A d_p)<=exp(C(beta)|A|/4), hence sparse plaquette event rate beta epsilon/96-C(beta)/4. Frustrated links use six witness choices and four-link multiplicity; mixed contours use partition union, then existing rooted animal entropy. This is an analytic microscopic UV bound, with standard chessboard input, on even reflection-compatible SU2 tori; no fixed-physical-block/nonlinear renormalized moment, IR, or Clay endpoint promotion. Local SymPy exact combinatorial regression executed: 3 period fixtures, 72 orbit classes, incidence, one symbolic rate identity and 999 ceiling checks. Agda kernel pending; next identify native site-plane all-direction chessboard weld and true blocked-energy source. Historical rounds are provenance only.
+
+### 20 November 2026 — normalized native-real bounded-observable route
+
+Historical round identifiers (R444, R559, etc.) are provenance, not independent proof phases. Prefer the normalized original Wilson owners in PR #1444. Extended YMClayOriginalWilsonFiniteNumeratorOrderExact with originalWilsonNumeratorConstant and originalWilsonNormalizedBelowConstant, using existing source Haar scale, positivity, and partition lemmas. Given pointwise nonnegative slack to a constant B and ordered division cancellation, E_n(test)<=B on the actual original Wilson family. For a bounded word |F|<=b and lambda>0, choose test=exp(lambda |F|), B=exp(lambda b); pointwise exponential monotonicity supplies the slack. For a sum of m bounded nonnegative insertions this gives exp(lambda b m), without rational-to-real measure substitution. This elementary bound does not provide a useful rare-event exponent if b grows at the same rate as the bad-field threshold, nor does it establish moments for unbounded renormalized fields. Original signed Wilson word and three-moment cutoff owners already exist; do not duplicate them.
+
+Local SymPy regression scripts/check_ym_native_real_bounded_moments.py executed 333 exact rational assertions on a positive polynomial-weight fixture (not the physical exponential Haar measure). The earlier factorial/SZZ regression formulas were also locally replayed (25 assertions in the full prior script, not the previously reported 26). Native constant bound source-written, kernel pending; no physical endpoint promoted. Next locate actual normalized blocked-energy mark envelope and source-uniform nontrivial moment costs, then active-window/terminal curvature receipts. Preserve original-source distinctions and attribution.
+
+## 20 November 2026 — exact symbolic moment normalization and source-native IR audit
+
+Local SymPy execution of scripts/check_ym_moment_szz_weld_20261120.py passed: 25 assertions (including nine factorial scalings and nine positive Taylor bounds). This is mathematical regression evidence, not Agda elaboration or actual Wilson continuum acceptance.
+
+The exponential-to-polynomial normalization is corrected at T5, R444, R559, R560, R514 and moment compact containment: for lambda>0 the bound is n! M/lambda^n, not n! M/lambda. Counterexample to the former declaration: X=20, lambda=1/10, n=2; 400>20 exp(2). A shared scalarNatPower avoids an independent radius choice. Positivity and actual moment-production hypotheses still need source realization; no universal claim for arbitrary record operations.
+
+Recovered existing IR source owners: BalabanSZZSourceNativeHessianHandoffExact already welds the effective Hessian margin to the running coupling; BalabanSZZActiveWindowOverlapNecessaryExact already proves the necessary UV/SZZ window overlap. The perturbed threshold is u<N^2/48-N rho/24. SymPy verifies its algebra and curvature slack subtraction. The original active scale must lie in the overlap, with the actual remainder Hessian norm; a positive target does not supply that fact. Stochastic and OS physical time remain distinct.
+
+R444/R445 -> R559: BalabanRationalRealConnectedCovarianceExact provides a scalar embedding and selected-expectation identity pattern, not an exponential expectation identity. YangMillsLiteralCMP119ExponentialMomentTheoremExact is a native-real constructor consuming the actual moment producer. The finite rational fixture checks normalized expectation and polynomial scaling only. The missing transport is actual marked exponential observable/expectation equality (or native-real bounds), positivity and uniform integrability, not a second generic moment compiler.
+
+Status: SYMBOLIC_PASS / SOURCE_WRITTEN / KERNEL_PENDING. No E1/D1/D2/N1/G1 promotion. Next: find actual real marked activity inputs and source-valid active crossover. Maintain Paper 3 and both roadmaps with each implementation.
+
+## 20 November 2026 — R559 same-family and SZZ typed terminal weld implementation
+
+- R559 commit 510f57d75d9b2642fee870403cc37af2623cf578: added preOSToSameOSMoments / sameOSToPreOSMoments and definitional producer-preservation proofs in the existing YangMillsLiteralCMP119QuantitativeMomentsRound559Exact owner. The OS interface reuses the pre-OS producer on A.family and A.observableAlgebra; no second moment selection.
+- SZZ commit 415210fc567ac692c9bfc590b5e5d5c2bdf76b5f: terminalCriterionFromCrossover constructs SZZPerturbedTerminalCriterion directly from crossover drift and positive target margin, without Set-valued stochastic/OS predicates; actualTerminalCriterion preserves actual trajectory coupling and remainder cost definitionally.
+- Exact boundary: R444/R445 and Physical.MarkedMomentClosure use rational scalars, R559 uses real expectations. Do not assume definitional equality. Next weld must transport the actual marked observable operations, expectations, inequalities and uniform integrability to the original real family, or locate a native real producer. The current polynomial bound divides by lambda rather than lambda^degree; verify normalization or correct before promotion. Pre/post weld does not discharge source estimates.
+- SZZ arithmetic criterion is not proof of actual effective density, physical curvature, or OS-time gap. Verify source applicability and common physical gap separately.
+- Status: SOURCE_WRITTEN / KERNEL_PENDING. No new physical endpoint closure. Existing theorem owners extended; roadmaps synchronized in the same PR. Next: native real marked moment transport and actual crossover source cost.
+
+## 19 November 2026 — canonical weld-first maximum cut (supersedes redundant source-search work)
+
+Audited exact #1444 head `ff1cd1dfabf2fd18296d7f0f2210e3cba1facd30`. The #1440 direct mass-gap root and #1503 F19/P0/common-OS root are already present, with identical Git blobs `f94bcf270f58de263f6202b8679610ba3d6cd464` and `8eb78d7f1fb5a343824d3516592f220248df1924` respectively. The latter has 18 direct source imports. Do not transplant or recreate these roots, finite push/pull, normalized state laws, Wilson word algebra, or the spectral compiler.
+
+### 19 November continuation — R82 finite-tail assumption elimination
+
+Commit `2ba4167450988b03e8990e460909c045f235603a` extends the existing R82 owner `BalabanCMP119SameFamilyInsertionReductionExact.agda` with `responseBelowGeneratedTailFromAdjacent` and `sameFamilyResponseTailFromAdjacent`. These derive the generated finite-tail bound for a rational scalar expectation sequence by induction on count, using `CanonicalRationalMetric.absDifferenceTriangle`, `BalabanClayDyadicCutoffTailExact.startPlusZero/startSuccessorCount`, and R81's existing `generatedTail`. Both response kinds share one adjacent increment envelope.
+
+Status: source-written, not kernel-checked. This supplies a proof route for the old responseBelowGeneratedTail field when the response is the actual absolute expectation difference; the record itself remains unchanged, and no physical instance is claimed. Next: attach the actual original normalized anchored insertion expectations (including faithful real/rational representation where necessary), establish their adjacent physical bound and dyadic envelope, and consume R81. No additional independent finite telescoping assumption is needed. E1/D1/D2/N1/G1 remain open.
+
+### R82 selected normalized insertion constructor (19 November continuation)
+
+Commit `323856294974ec3a11e2544b908195b2606281a3` adds `selectedInsertionReductionFromAdjacent` inside the existing R82 owner. It constructs the existing record: selectedNormalizedResponse is the readout of the dependent source normalizedExpectation at scaleAt k and selected insertion; responseDifference is its actual absolute scalar difference; nonnegativity and finite tail are derived. No independent response sequence or finite-tail premise. R81 consumes this record via existing asPublishedTailToCommonIncrement. Remaining inputs: actual original source readout (faithful scalar interpretation, not arbitrary rational surrogate), selected admissible insertions and scale history, original adjacent estimate and dyadic bound. Existing BalabanCMP119CompatibleLocalExpectationFlowExact offers the alternative published sourceSummablePairResponse route given the actual small effective coupling history and source-local analytic pair; its authority is a field, not an inhabited physical witness. No kernel receipt or physical closure claimed. All five physical gates remain open.
+
+### 19 November continuation — finite beta indexing and natural marked amplitude
+
+Source commits:
+- `dc5e351aab222485fdb8257595763f0483a19660`: existing Balaban1989BetaDrivenCompleteDensityFlowExact now contains legacyAllScalesActiveImpossible, finiteScaleIndex, finiteBetaDrivenCompleteDensityFlow, finiteCouplingAgreesOnPhysicalScale and finiteDensityAgreesOnPhysicalScale. The legacy all-Nat activity premise is contradictory because advance from K+1 cannot reach K. The alternative total presentation clamps indices to K and reindexes coupling, density and both Section 2 predicates together. On physical k<=K these are the original indices. Terminal padding is not physical RG evolution. Legacy consumers still need migration; no use of contradiction as a physical certificate. Actual per-cutoff beta bounds, inverse-square representation, active coverage and source density remain required.
+- `afbcd11ac5c278b31fa0da504bc77f6ebddde9df`: existing R344 owner adds naturalPrefactorR342, constructs existing R342 from the original shared control and actual natural Hessian amplitude (C_H/4)*2^-t, eliminating C_H<=1 at this attachment. The selected spectrum must use that amplitude and actual distance/time and ordered convergence semantics; downstream rate/gap and dense physical realization still require verification. No physical differentiated localization is claimed.
+
+Next execution: migrate actual finite histories to the corrected flow (including functional density and original CMP119 source consumers), prove source-compatible positive beta on physical active scales and actual original marked localization, then consume the existing R82 published-source route and R342/R479/R482. No further dyadic arithmetic or generic covariance compiler. All changes source-written, no Agda kernel receipt, E1/D1/D2/N1/G1 OPEN.
+
+### 19 November continuation — finite functional density entry point
+
+Commit `eac0cafd7b49f0904f2af17b3fc411464734e251` adds finiteFunctionalDensityFlow, finiteFunctionalDensityAgrees and finiteFunctionalCouplingAgrees to Balaban1989BetaDrivenFunctionalDensityExact. The literal SlowField -> Real carrier now has a direct finite-history constructor independent of the contradictory historical record. The original Eq. 2.18 factorized functional density and BetaHistorySection2Coordinates still expose all-Nat activity premises; these must be migrated at their actual source boundaries, with physical index restriction preserved. No kernel receipt or actual original physical beta/localization estimate claimed. E1/D1/D2/N1/G1 remain OPEN.
+
+### 19 November continuation — finite Eq. 2.18 and canonical Section 2 entry points
+
+- `01de23f73fbdc850f0cca308d4acc46cd73ef610` adds finiteEquation218Density, finiteEquation218Flow, finiteEquation218PhysicalDensity to the existing Eq. 2.18 owner. Reuses realSum and realProduct; no legacy all-Nat activity input. Literal source lists, step functions, residuals and bounds are still inputs.
+- `d536b55898143fb4e193dfa419748b616879cc2c` adds finiteCoordinates, finiteCanonicalStateAgrees, finiteCanonicalInvariantRegion to the existing canonical beta-history owner. All six coordinates selected at the same min(k,K) index as the density and coupling. Existing Section 2-to-invariant-region theorem consumed, given actual Theorem 1 witness and quantitative bounds.
+
+Both changes are source-written alternative entry points, not migration of every historical caller or kernel acceptance. Before further extension, inspect section parameter elaboration and exact local Agda receipt; terminal padding must not be interpreted as physical time evolution. Next attach actual source lists and positive beta enclosure plus the same-source CMP119 expectation/marked response. All five physical gates remain OPEN.
+
+### 19 November continuation — executed original P33 Fourier Wilson vertices
+
+Commit `95d0e1e190c9d215a958df8ab877ec6fffcba5a2` adds `scripts/check_ym_p33_fourier_vertices_20261119.py`. This implements the original side-four P33 SU2 oriented plaquette geometry (256 sites, six planes), pure-quaternion exponential, and exact labelled mixed derivatives through order four. Fourier phases are Gaussian integers in the positive-link-start convention; inverse occurrences carry minus signs and correct displaced starts. The coordinate-space nilpotent polynomial evaluation is independently compared with the slot-allocation momentum vertex, including momentum conservation and all permutations of the selected external legs. Local Python execution PASS six cases: scaled by 24, (12288,0), (-12288,-12288), (49152,0), (49152,0), (0,0), (-24576,0). The constant commutator mixed fourth derivative is 8 per site; the transverse free two-jet is 2 per site at p=(pi/2,0,0,0). No floating point or proxy integrals.
+
+P0.1 has an executable finite bare Wilson cubic/quartic producer, not a proof of the full constrained background Fourier vertex or continuum momentum limit. Next use these indexed vertex coefficients in the gauge-fixed constrained CMP109 bubble/tadpole trace contractions and attach the original reduced FP and Haar source, before R471 receipt quadrature. All four physical receipt integrals, uniform beta enclosure and E1/D1/D2/N1/G1 remain open. No Agda kernel receipt. Do not re-add factorization/normalization adapters instead of performing physical source calculations.
+
+### 19 November — original finite contractions and Ward discriminator
+
+Recovered original fourth-jet, Haar and combined Wilson/FP/Haar owners (3c664f9, deeea09 and preceding recovery). Executable configured Green AAqq/Haar f9fd038 and bubble f1eab57 retained. FP 7c5a0018e68d556ba01d223197f5a670769f3a60: actual anchored reduced inverse from configured Green; four selected momentum two-jets -145912/245, -63356/105, 0, -72956/245, exact anchor comparison and reduced inverse identity. Polarization factorials checked against derivative Leibniz source (not Taylor coefficients). The new Ward audit uses the original executables: longitudinal T=2458/35, B=20728/35, FP=0, bare Haar Hessian=512/3; naive half(T-B)+FP+Haar=-271/3. This is a negative control, not the physical tensor. SymPy trace-log cancellation for a conjugated configured H and 256 exact selected momentum-pair checks pass. Actual constrained background CMP109 Hessian derivatives, gauge-fixing/constraint transport and background Haar rather than vacuum trace must be identified before Ward/physical beta extraction. No kernel receipt or Clay promotion. Do not rerun bare vertex/contraction work.
+
+### 20 November — original selected P33 bordered inverse-action execution
+
+Commits bdbffd91d010d41ec095242c55e35b3a0d04fe6e and a3b5d9a5d1201be69002def26d06b671877ce50d add and extend scripts/check_ym_p33_bordered_trace_20261120.py. Local Python NumPy/SymPy execution: original 3072 configured field coordinates, 12 selected component-sum constraints (NOT the CMP98 Path13 average), scalar Laplacian plus mean and exact Green; 256 scalar inverse equations and both bordered inverse orders on 257 representative columns (component replication); denominator 430080. Four local transported gauge pairs give identical tadpole and bubble traces 6501639/573440, -164951/114688, 2293/1720320, 2293/1720320. Freezing Q gives -365147/3440640; rank-one genuine normal motion agrees independently with Schur complement, induced-volume mixed derivative -1793/262144 and delta-constrained 255/262144. Uniform constraint row scaling distinguishes delta vs induced by mixed derivative -12. No dense full inverse, no Agda/Nix available, no original CMP109 measure or continuum claim.
+
+Source correction: R211 Eq124 qSource and R213 grouped corrections are historical diagnostics. R214 validation explicitly supersedes them with R215 Eq120 linear content -> Eq121 Q(V0), R216 Path13 derived qSource, R218 pruned frontier. The R218 actual remaining coordinates are Path13BackgroundIsSelectedPhysicalBackground and PerturbationCoordinateSemantics (physical bond-indexed field projected to oriented local Lie values, signs and scalar multiplication). Repaired R192 uses historical n=12 for side13. Do not substitute P33 selected flat 12 sums or identify Eq119 prime with background derivative without proof. Use R215/R216 actual source semantics before applying cached bordered traces; identify CMP109 delta/Jacobian/induced measure precisely. The present pure-gauge completion transports A and Q by construction, not proof that the native multiscale physical operator realizes this. Physical beta and E1/D1/D2/N1/G1 remain open.
+
+### Execution order and acceptance
+
+| Cut | Existing producer/consumer | Exact next payment |
+|---|---|---|
+| E1-A | YMClayF19OriginalAllCoarseCylinderNormalizationExact; YMClayE1A3OriginalR445CrossCutoffSourceExact | Identify native coarse maps after original codec/reindex; identify actual renormalized target, not bare beta(1). |
+| E1-B | YMClayR445OneLocalTVThreeMomentsSourceWeldExact; weighted exterior influence note (14 Nov) | On actual compatible target flow, derive local TV <= a_k(X)+b_k(X), with conditional-kernel TV and a single exterior coupling weighted by site influence. |
+| E1-C | BalabanCMP119SameFamilyInsertionReductionExact -> BalabanTopDownSummableRGIncrementExact | Prefer existing anchored normalized insertion route if cheaper: prove generatedIncrementDyadic and responseBelowGeneratedTail on actual ordinary/characteristic insertions. Otherwise sum actual projectively compatible local TV increments. Do not require both routes. |
+| E1-D | YMClayE1OriginalSUNFiniteCylinderLawsExact | Supply originalWilsonCylinderConverges on selected physical cylinders, not arbitrary cutoff sections; normalization, addition, scaling and positivity already derived. |
+| D1 | YMClayD1OriginalCovarianceToR320Exact | Supply actual full-Wilson connected covariance rooted-shell estimate, including physical unit calibration and full large-field control where needed. selectedHessianMagnitudeIsOriginalCovarianceMagnitude already proves the identity in both directions with R320 bound. |
+| D2 | YMClayOriginalWilsonNativeOSPullbackExact; R461/R582; YMClayDirectSourceOSMassGapFrontierExact | Use published fine Wilson RP on actual selected admissible algebra; same continuum reflected products, reconstructed H, dense centered physical autocorrelation with common positive physical exponent. No second H or independent finite spectral convergence required. |
+| N1 | Existing original conditional variance and noncollapse owners | Transport an actual local renormalized nonvacuum witness using the SAME E1 error modulus; nonlinear finite cumulant alone is not interacting continuum evidence. |
+| G1 | R569–R571 actual group constructors | Apply the same physical bounds per compact simple group; no need for uniform constants across all groups, but actual per-group evidence is required. |
+
+For [0,1] tests the existing local TV consumer gives three moment errors <= d and covariance error <= 3d (TV = supremum over events). For signed unit tests the corresponding elementary bound is 6d. Neither gives spatial clustering from TV alone. The weighted exterior comparison and the anchored CMP119 insertion route are alternative routes to continuum convergence, not duplicate mandatory gates. Fixed block factor 1/16 is not a scale-summable envelope; compare genuinely successive laws on common observation algebras. Do not equate effective action to bare coarse Wilson action.
+
+The latest source changes `6f96d89fb9307598d4c0af6575e86ee3262f2cbb` and `ff1cd1dfabf2fd18296d7f0f2210e3cba1facd30` add published fine RP transport and index R461 authority by cutoff. These are source-written, not kernel-accepted or inhabited physical RP certificates. The R461 fixed Configuration carrier still requires faithful interpretation of changing-cutoff cylinders. Prior finite SymPy regressions are non-promotional controls.
+
+**Acceptance policy:** existing inhabited producers first, only descend on actual type/carrier mismatch; classical published theorem use with explicit same-object identification; no new conditional wrappers. Record exact local Agda receipt (not CI) and actual source proof separately. E1/D1/D2/N1/G1 remain OPEN at audited head. This audit does not claim exhaustive absence of other donors.
+
+---
+
 **Fail-closed static ledger guard:** `python3 scripts/check_ym_clay_23_physical_producers_20261109.py` checks the actual 23 E1/D1/D2/N1/G1 producer IDs, distinct YM01–YM10 owner manifest, PH0–PH4 phase coverage, original all-word Wilson gauge/marked source declarations and physical regression import. It is a source/roadmap audit, not an Agda typecheck, not an E1 or D1 proof and not a mass-gap certificate. Run it before the exact-head `parallel_checker` with Nix/Agda 2.9; terminal physical facts must be independently proved. 
 
 ## 9 November 2026 — authoritative 23-lemma / 10-owner / five-phase crosswalk
@@ -481,3 +698,409 @@ The #1479 typed positive-division/Bishop compiler is a distinct
 sibling required for an exact branch weld. The #1444 P0.E original
 1024-bond full Wilson fibre-density/Bishop partition certificates
 remain conditional on the original scalar-carrier mapping.
+
+
+## 20 November 2026 — current #1444 implementation and manuscript crosswalk
+
+Source baseline: `33a87830df1dbc64fef7689d93150de54d602fcd`.
+Rounds R are chronological iterations; reuse later concrete producers before
+reopening an older obligation. The following are committed source changes,
+not new kernel acceptance receipts.
+
+| Work | Commit / source | Status |
+| --- | --- | --- |
+| Root-free SU2 dexp and exact rational reference | d182ad5, scripts/check_ym_path13_dexp_20261120.py | Prior reported SymPy execution; no Agda proof |
+| Same two-carrier Eq119/Eq120 | 761cdba, 88daca8 | Source-written |
+| Native Bishop Lie coordinates and signed path source | 9ee4f5a | Source-written |
+| Reused Bishop reduced polynomial, physical factor two | 1785cf2 | Source-written |
+| Direct variational selection, canonical geometry; no legacy chart input | 16924e8 | Source-written |
+| Inhabited canonical radius-six walk certificate attached | 9af3446 | Source-written; no independent geometry input |
+| Configured P33 bordered trace, moving normal constraint and measure distinction | bdbffd9, a3b5d9a; scripts/check_ym_p33_bordered_trace_20261120.py | Prior exact rational execution; not physical CMP109 beta |
+
+| Root-free scaled inverse and positivity | cb0f8f9, 1252e6f, 3ce4195 | Source-written, kernel pending |
+| Actual Bishop factorial/arcsinc series and bounds | 16ca148, de796db | Source-written, kernel pending |
+| Constructed native LocalChart | 14fd22f, 7941c56, 33a8783 | Source-written and attached to focused regression; admission and semantic identity remain |
+| Root-free chart exact executable checks | 854c1d3, scripts/check_ym_path13_rootfree_chart.py | Symbolic two-sided inverse and 16 rational contour certificates |
+| Delta/pivot determinant and mixed jet | 576daf3, scripts/check_ym_cmp109_delta_pivot_measure.py | Exact rational checks; literal CMP109 normalization not yet identified |
+| Full selected Path13 mixed jet | 4ea9811 | Exact local execution: 114244 contour projections |
+| Full finite Q matrix and pivot/Gram jets | 6f69482 | Exact local execution: 12 x 342732, four jets, flat reference |
+| Squared-chord path and direct contour admission | 10e2a4a, 066d5cf, 812e06a, f2bf18a, 4de7e33 | Source-written; consumes selected inverse-link radius, no independent norm representation |
+| Bishop arcsinc positive upper bound | 80fb1ae, 915f147 | Source-written; kernel pending |
+| Chart semantics and nontrivial commuting flat minimum | 38f9852 | Symbolic identities and exact rational fixture executed |
+| Paper 3 source semantics and matrix receipts | 9612990 | Mathematical derivation in section 5.5; explicit claim boundaries |
+| Full side-13 Wilson+covariant divergence Hessian and Green | 00e7d64 | Executed 84 stencil blocks, exact flat reduction and all 28561 Green equations; 326-bit denominator |
+| Full finite exact bordered Gaussian | 277cf8d | Executed all 165 displacement pairs and two Q cross-contractions via signed CRT |
+| Point/outer chart admission from chosen physical radius | fd89a34, 93919ea, b90e58d, 56519c7 | Source-written, pinned Bishop API checked statically; kernel pending |
+| Actual multi-block flat pivot/Gram/propagator | 42a688f, caa29fc | Exact counts and finite cyclic tests; mathematical all-volume floor; source-written cyclic Gram proof |
+| Rational near-identity root obstruction | 42b869e | Exact constant-sector counterexample, not general rational minimizer no-go |
+| Paper 3 full finite trace and multiblock proof | d22154d | Section 5.6, all mathematical and executed claims scoped |
+
+### Current execution cut (supersedes older packet lists; not new gate IDs)
+
+The active local cut is the **four remaining Path13/CMP109 attachments**, not
+a request to reconstruct the downstream RG, clustering and OS mathematics.
+The distinction between an existing theorem/compiler and its application to
+the selected original physical family is essential. R numbers are dates/order
+of research iterations, not independent theorem authorities.
+
+**Already constructed / reuse first:**
+- Native Bishop real backend, rational coordinate embedding, signed bond
+  projection, literal quaternion adjoint action, physical factor-two
+  bracket, reduced polynomial operations, and Eq119/Eq120 on the same
+  two-carrier source (`BalabanCMP98Path13BishopNativeSourceExact`).
+- **Radius-six walk agreement is inhabited**:
+  `BalabanPath13RadiusSixWalkAgreementExact.radiusSixWalkAgreement`.
+  Commit 9af34466bb2689f4f6c05ca92563060bdc76e642 attaches it directly;
+  no per-bond embedding or walk-certificate input is outstanding.
+- Direct selection from the variational theorem and canonical geometry
+  are implemented; no independent selected-background equality or legacy
+  real principal-chart record is needed on the native route.
+- Existing Bishop coefficient modulus and ad-polynomial telescope, finite
+  Wilson 64-atom mixed jet, left/right trivialization, CMP99 pivot algebra,
+  restricted trace cancellation, positive-patch arithmetic and finite
+  remainder absorption are reusable. See `BalabanCMP109DirectBetaSourceRegression`.
+- Existing downstream RG/moment/clustering/OS compilers are not fresh
+  mathematical tasks merely because their inputs are conditional.
+
+| Remaining local attachment | Exact acceptance test |
+| --- | --- |
+| A. Native chart | nativeInputsFromPhysicalRadius now constructs pointLogAdmissible, pointRelevant and outerRelevant on the same native series chart. Bishop square-reflection and normalized sum donors reused; API order transports corrected. Complete native exp/log/Fréchet identification and verify pinned Agda. No independent admission input. |
+| B. Physical variational input | Nontrivial rational commuting flat fixture and exact near-identity rational 13th-root obstruction. General selected real-carrier variational theorem, actual action/constraint/gauge and physical radius remain. Reuse Bałaban; do not assert general rational minimizers, or promote the constant-sector obstruction to a general no-go. |
+| C. Source-normalized restricted Gaussian | Full Q and chosen six-plane Wilson+covariant-divergence Hessian mixed jets, all finite delta trace terms computed exactly (CRT). Multiblock flat pivot and Green fiber inverse implemented. Attach actual selected minimizer derivatives, full printed A/H1/J and additional CMP109 measure density; a one-block trace is not the physical beta. |
+| D. Uniform physical beta | All-volume flat Q0 Gram floor 57/13^6 (57/169 preconditioned), ker Q0 Hessian floor 1/57, with source-written cyclic Gram and exact stencil counts. Use existing patch/remainder and source-specific selected perturbation control, actual coarse momentum/normalization and uniform physical beta enclosure. No interacting beta claim. |
+
+For A, the implemented root-free construction is A(w), B(w) factorial series, w=4||Y||²,
+and positive-scalar quaternion log via the arcsin(r)/r series in r².
+With h=1-wB, Delta=h²+wA² the inverse is
+J=I-(A/Delta)ad+((A²-hB)/Delta)ad²; on 0≤w≤1/4 the mathematical lower
+bound is Delta≥529/576. The coefficient convergence, interlacing and inverse cancellation are now
+source-written using the existing Bishop limits; do not re-open them absent
+a kernel failure. The executable rational certificates are not kernel receipts.
+Do not impose global inverse-dexp or a decidable Bishop-real zero split.
+
+For B, reuse the direct 74-link telescope (37/1024 threshold) wherever
+its defect normalization matches the actual source. Squared chord and
+operator norm are different quantities; do not equate them by notation.
+For C, the new determinant reduction gives ordinary delta pivot density
+1/|det P| and (-1)^m det bordered(A,Q)=(det P)^2 det(C*AC).
+Induced volume differs by sqrt(det(QQ^T)); the exact mixed jets are tested.
+Attach actual CMP109 normalization and any additional density before using
+these results in the physical beta floor. For D, use finite active-scale history, not an all-Nat
+positive-beta recurrence.
+
+
+Current exact arithmetic executed receipt (one-block, chosen background paths, no physical beta):
+
+```
+Green denominator bits = 326; all 28561 equations PASS
+exact finite 2 Gamma_st delta = 216322732729731037306399416467101947565702264504255432442831129938831157590086114944025745589515026330695342921918722859720533813302962357884707554671488525967748893665917497385415791464168273322246877/40831355640469077924296754159149697139903068972616389940473557569519290498175868526730955293070750301779577272128081390546952400138950539138107665343598731913478057839270326725044030505628195025
+approx delta = 5297956.174527001
+induced correction = -3328816224672/815730721
+approx induced = 5293875.396227281
+```
+
+The exact trace scripts have byte-identical local and repository blobs
+(bbef5abc0ee2b7c3504c444b6f5e191787729220;
+f7fb2c9d8e9fe4a8b3028d442f94fd7f8329de0b). The finite multi-block flat
+operator is the true two-box stencil, not merely the one-block constant
+row. Agda and Nix were unavailable; no kernel or CI result is claimed.
+
+### Downstream integration and endpoint acceptance (not additional local packets)
+
+Use the current R578 source-native route:
+R566/R568 selected projective Wilson projection and path factorization;
+R545 finite OS source; R559/R560 CMP119 moments to OS05;
+R576 original Wilson WEXT; R577 same reconstructed-H transfer;
+R571 compact-simple source; R563 same-family Ward kernel.
+The direct R333 route in `YMClayDirectSourceOSMassGapFrontierExact`
+already composes H1/R295/R313/R296 with physical OS transfer.
+The stronger historical F1/F3/F4/Mosco/trace-norm route is not mandatory.
+Do not schedule it as another prerequisite.
+
+After A–D, run the existing downstream consumers on the same original
+family and inspect their actual remaining typed inputs; reuse any later
+inhabitants before scheduling new proofs. This is an integration/acceptance
+checkpoint, not evidence that A–D alone imply every downstream hypothesis,
+nor a claim that all downstream physical inputs are absent. No exhaustive
+cross-branch inhabitant audit has been completed.
+
+Authoritative Clay endpoint IDs E1.01–07, D1.01–04, D2.01–05, N1.01–03,
+G1.01–04 remain acceptance criteria, not a count of independent new tasks.
+No new complete physical endpoint or exact-head Agda acceptance has been
+observed. Keep mathematical status, source implementation, same-object
+attachment and kernel certification separate. Local Agda is golden;
+SymPy is supplemental executable verification where Agda is unavailable.
+
+### Existing manuscript corpus (verified on this branch)
+
+The original eight lanes and Paper 0 are retained. The publication router
+is [PublicationRoadmap](../papers/PublicationRoadmap.md); the active
+manuscripts are Paper 3 (first priority), Paper 1, and Paper 8. The remaining
+old lanes are legacy/support, not deleted. Do not create replacement drafts.
+
+- [Paper 0 — Shared Margin Grammar](../papers/legacy/Paper0SubmissionDraft.md)
+- [Paper 1 — Navier–Stokes](../papers/live/Paper1NavierStokesClayDraft.md)
+- [Paper 2 — GR geometry](../papers/legacy/Paper2GRGeometryDraft.md)
+- [Paper 3 — literal Wilson mass-gap reduction](../papers/live/Paper3YangMillsClayDraft.md)
+- [Paper 4 — Physical Hilbert space](../papers/legacy/Paper4PhysicalHilbertSkeleton.md)
+- [Paper 5 — DHR](../papers/legacy/Paper5DHRSkeleton.md)
+- [Paper 6 — Yukawa/CKM](../papers/legacy/Paper6MatterYukawaCKMSkeleton.md)
+- [Paper 7 — Terminal composition](../papers/legacy/Paper7TerminalCompositionDraft.md)
+- [Paper 8 — Unification](../papers/live/Paper8UnificationDraft.md)
+- [Paper 3 finite geometry draft](../papers/drafts/Paper3YangMillsGeometryDraft.md)
+- [Eriksson–Balaban source intake audit](../papers/drafts/YangMillsClayTrackAuditManuscript.md)
+  ([TeX](../papers/drafts/YangMillsClayTrackAuditManuscript.tex))
+- [YM / Unification theorem navigation](../support/reference/YMUnificationPaperToProofMap.md)
+
+The active Paper 3 at d22154d supersedes its older local task list; Sections 5.5–5.6 record the full finite Q, exact bordered trace, source-semantic chart and physical multi-block flat base.
+The older source intake manuscript's P33-closed label is scoped to its
+historical reduction, not the current physical beta or Clay endpoint.
+
+
+### 2026-11-20 — CMP102 constructor-first root-free boundary reconstruction
+
+Mandatory attribution rule: on apparent errors, audit actual constructor, carrier,
+coordinate normalization, multiplication order, path endpoints, scale and gauge
+anchors before changing equations, shrinking radii or adding hypotheses.
+Separate algebraic, analytic, geometric and physical acceptance.
+
+At d88d709c the native CMP98 Path13 owner exposes outerY and nativeInputsFromPhysicalRadius,
+with SmallLie giving 0 <= w = 4||Y||² <= 1/4 for the native series chart.
+The quaternion exponential uses s = ||Y||², not the adjoint radius w.
+BalabanCMP98Equation119GeometryRelativeContourExact.coarseBackgroundHolonomy
+is the reference bond from the same nativeGeometryAt, and relativeContourElement
+is Gamma times inverse(coarse), not the reverse order. Hence the candidate
+boundary link is exp(Y) times coarse on the right. Mixed-scale endpoint and
+multi-anchor compatibility still require actual source identification.
+
+Reuse BalabanCMP109BishopRootFreeSeriesExact.aSeries and bSeries:
+C(s)=1-s A(-s), S(s)=1-s B(-s), exp(Y)=(C(s), S(s)Y).
+No zero/positive radius decision is needed; s <= 1/16 is already inside the
+series domain. BalabanP33BishopLiteralQuaternionExponentialChordExact is an
+existing conditional radius-case consumer, not a total real-radius compiler.
+Reuse BalabanClayT2BishopQuaternionNormalizationExact.multiplyQuaternionB
+and fourProductB. Do not assume the rational unit carrier is closed under exp.
+
+For n>=1 the coefficient of s^n in C²+sS² is (-1)^n/(2n)! times
+(sum of even binomial coefficients minus sum of odd coefficients at 2n);
+both sums equal 2^(2n-1). Constant term is one. Absolute convergence gives
+the classical identity. Local exact Python/SymPy execution checked coefficients
+1..40, Hamilton norm multiplicativity and right-product displacement.
+The reproducible script is scripts/check_ym_cmp102_root_free_exp.py.
+This is not native Agda acceptance.
+
+Next: formalize the same-series Cauchy product and parity-limit weld using
+BishopExponentialCauchyProductExact and existing finite parity machinery.
+JInvariantBishopTrigUnitPhaseExact consumes a Pythagorean certificate; it
+does not prove one. Prove unit norm of actual root-free exp and identify
+it with source exponential, then derive chord²=2s A(-s)<=s using alternating
+bound. Compose with the same coarseBackgroundHolonomy and existing plaquette
+consumer. Actual CMP102 mixed-scale incidence, Eq(7) strict witness, gauge
+section, real minimizer and propagator remain OPEN. No radius shrink,
+new kernel acceptance, CI or Clay endpoint promotion.
+
+
+### 2026-11-20 — CMP102 Eq(7) and Bishop donor reconciliation
+
+Exact donor heads inspected: #1478 fb374e50e59a98e2b8a1eee215c77428c5728b68,
+#1529 0626c465c2721525f432bfef57d96f02d24fbe3d,
+#1499 251b567d5242185b81dfdcd036889ca3b434f899,
+#1503 b93909a044960a90690393fdadcb9f6692a139c0.
+#1478 actual BishopComplexExpFactEqualsNativeExpExact proves source-written
+coordinate convergence of factorial series to configured native expC.
+BishopComplexCauchyTriangleLimitTransportExact transports Cartesian rectangle
+limits with vanishing upper-wing residuals; specialized factorial donor is
+for real and imaginary axis streams. BishopOriginalNativeComplexExpAdditionFromTrigExact
+still takes OriginalCosineAddition and OriginalSineAddition; do not claim
+unconditional addition from that owner. No donor kernel replay or transplant.
+For root-free quaternion use weighted pair multiplication (ac-sbd,ad+bc);
+at s=0 this formal algebra is dual numbers, not the complex field. Reuse
+coordinate limit architecture or scalar coefficient cancellation; no division
+by radius or unit imaginary direction.
+
+Eq(7) audit: distinguish CMP102 pp255–275 DOI BF01229380 (local extract,
+characteristic-function decomposition) from pp277–309 DOI BF01229381
+(variational theorem). BalabanSelectedBackgroundVariationalChartBridgeExact
+has incorrect page metadata 605–636 in header; DOI is correct.
+FiveChannelSmallFieldRadius is conditional linear-budget compiler;
+CommonSmallFieldRadius assembles input certificates; SmallFieldNonlinearConstants
+assembles input coefficient bounds; PlaquetteBoundaryStateNormChargeExact
+proves perturbation projector charge identity, not group plaquette smallness.
+BalabanClayGate4BackgroundFieldVariationalTheoremExact consumes supplied
+CoarseSmallField coarse before producing selected background and fine-bond
+estimate. BalabanPath13VariationalSpecializationExact and
+BalabanCMP98Path13VariationalRadiusSourceFamilyExact remove redundant
+same-object/radius inputs conditional on this source. Do not use downstream
+fineBondSmallness to prove its own coarse input: trace previous-scale
+admissible domain and actual mixed-scale boundary incidence instead.
+Eq(7) normalization established; producer prior-art search remains open,
+not a claim of mathematical absence. Physical same-object attachment open.
+Root-free analytic weld remains open; no new kernel acceptance, CI, radius
+reduction or Clay promotion. Constructor/geometry audit before changing math.
+
+
+### 2026-11-20 — reuse CMP99/CMP102/Cauchy and literal small-field complement
+
+At e746c117 the actual BalabanClayGate4LiteralWilsonLargeFieldPredicateExact
+defines LargePlaquette as threshold² <= literalChordalDistanceSq of the
+supplied rational unit plaquette holonomy. For an owned plaquette, the
+negative LargeFieldBlock witness excludes largeWitness; rational strict
+order then gives chord² < threshold². This is a direct complement
+specialization, not a new physical smallness estimate. Equality is large,
+not small. Preserve ownedPlaquettes membership, exact selected configuration,
+threshold vs scaleAdjustedThreshold, and rational vs Bishop-real carrier.
+Do not infer a decidable strict dichotomy for arbitrary Bishop reals.
+Actual mixed-scale shell membership and threshold/source identification
+remain open. BalabanC2SmallLargeAllScaleExact packages supplied curvature
+and one-step coercivity hypotheses; no unconditional Eq(7) producer there.
+
+CMP99 already has BalabanClayGate4BackgroundPropagatorDecayTheoremsExact
+(Theorems 3.1–3.4 source authority), BalabanCMP99CovarianceLocalityToRGStateExact
+(cmp99CovarianceCapForNextState), and BalabanCMP99PathDerivativeSourceReplayRound413Exact
+(asR408StageDifference, asR410CanonicalPathReplay,
+cmp99PathDefectBelowResolventBudget). R413 fixes the changed pathDerivativeStage
+definitionally and consumes the existing resolvent budget. Reuse R408/R409/R410
+and R360; remaining inputs are same actual perturbed/reference inverse,
+norm/order, unchanged outer dexp/log inverse/transport derivative, distance
+and regular background. Do not reconstruct CMP99 decay or marked comparison.
+BalabanPropagatorSourceLedger.md already identifies CMP99 regular configurations
+DOI BF01466594 separately from propagators DOI BF01240355, and CMP102
+variational Theorem 1 / Proposition 9 DOI BF01229381.
+CMP102 R367 consumes source critical-map contraction and same argument
+distances; source C-Lipschitz not a separate scalar primitive.
+Cauchy already has BishopExponentialFiniteCauchyCoefficientExact,
+BishopFiniteCauchyRowReindexExact, BishopFiniteCauchyTriangleInsideRectangleExact,
+BishopFiniteRectangleInsideCauchyTriangleExact, BishopFiniteCauchyWingAbsoluteBoundExact,
+BishopExponentialCauchyProductExact (bishopExpTimesNegativeIsOne).
+Reuse these scalar finite and limit owners and #1478 complex donor; only
+weighted pair same-series specialization remains, not general Cauchy theory.
+Next implement explicit rational complement consumer on existing predicate,
+then connect previous-scale mixed geometry and actual Bishop-real boundary
+links. This audit does not assert new formal complement code, donor transplant,
+kernel acceptance, radius reduction, CI or physical gate closure.
+
+
+### 2026-11-20 — literal rational small-field complement implemented
+
+In BalabanClayGate4LiteralWilsonLargeFieldPredicateExact, add SmallPlaquette,
+notLargeImpliesSmall, smallImpliesNotLarge, goodBlockOwnedPlaquetteSmall,
+allOwnedSmallImpliesGoodBlock, and gauge forward/backward transport.
+The two directions consume the original LargePlaquette and largeWitness;
+no new field, radius, or membership authority. The repository Empty is
+explicitly eliminated into stdlib bottom when applying rational strict order.
+At equality the large predicate holds. Scope is the exact rational
+holonomy and unadjusted threshold; mixed-scale Bishop source attachment
+and scaleAdjustedThreshold identification remain open. Source-written,
+Agda kernel pending; no CI or physical gate promotion.
+
+
+### 2026-11-20 — literal bad-component complement weld
+
+Source commit 4303ce641148: BalabanClayGate4LiteralWilsonLargeFieldPredicateExact
+now exposes OutsideWilsonComponents, outsideWilsonComponentsImpliesGood,
+goodImpliesOutsideWilsonComponents, outsideWilsonComponentsOwnedSmall and
+allOwnedSmallImpliesOutsideWilsonComponents. The forward direction constructs
+the original Geometry.component and Geometry.root from any large witness;
+the reverse consumes Geometry.pathEndBad. Thus absence from every original
+bad component is equivalent to strict smallness of every owned plaquette,
+on the SAME rational configuration, scale and unadjusted threshold.
+No new component allocator, geometric predicate authority, radius or axiom.
+
+Next gate: identify the actual preceding-scale good domain with this
+component complement, including any additional collars/exclusions in that
+domain (do not assume equality). Transport actual mixed-scale boundary
+incidence to the owned plaquettes; separately identify the scale-adjusted
+threshold and Bishop-real averaged holonomy. The rational result is not
+a decidable strict dichotomy for Bishop reals. CMP102 physical minimizer,
+weighted quaternion same-series specialization and CMP99 same corrected
+propagator remain open. Source-written only; exact-head Agda pending,
+no CI and no physical gate promotion.
+
+
+### 2026-11-20 — enlarged-component complement and boundary support
+
+BalabanClayGate4RBoundarySupportExtractionExact now defines
+OutsideAllWilsonEnlargements on the original Wilson bad components and
+Collar.Enlarged, with outsideAllEnlargementsImpliesOutsideComponents
+using regionIncludedInEnlargement. outsideAllEnlargementsOwnedSmall
+consumes the existing rational strict complement. boundarySupportOwnedPlaquettesSmall
+and regularDomainSupportOwnedSmall reuse everyWeaken on the original
+LocalizedSupport list. The latter consumes a forward inclusion of the
+selected regular domain, not an assumed equality. A single component's
+collar does not exclude other bad components.
+
+Source-written finite consumer; actual preceding-scale regular membership
+and global exclusion producer, selected mixed-scale plaquette incidence,
+Bishop-real averaged holonomy and adjusted threshold remain OPEN.
+No new analytic assumptions, reduced radii, or physical gate promotion.
+Agda kernel and CI not run.
+
+
+### 2026-11-20 — finite periodic regular-domain producer
+
+The existing RBoundarySupportExtraction owner now contains PeriodicRegularProducer.
+BadSeedWithin combines original Wilson badness and bounded reach on the original
+periodic physical carrier. noBadSeedDecidable searches the complete finite block
+list with decideAny; no component enumeration or path-length bound is required.
+Both directions of the global enlargement exclusion use original pathEndBad
+and component/root, respectively. periodicRegularBlocks filters the original
+enumeration; soundness and completeness use existing filterDec theorems.
+periodicRegularBlocksOwnedSmall and periodicRegularSupportOwnedSmall produce
+strict rational plaquette smallness from actual filtered-list membership.
+The component adjacency need not match the enlargement adjacency for this
+union identity; the enlargement itself is fixed to physical periodic reach.
+
+Next: identify the actual preceding-scale CMP102 regular domain (including
+additional exclusions) with a subset of this list, and recover the literal
+mixed-scale boundary incidence. Adjusted threshold and Bishop averaged
+holonomy remain separate. Source-written, kernel pending; no CI, radius
+reduction, or physical gate promotion.
+
+
+### 2026-11-20 — native root-free quaternion specialization
+
+BalabanCMP98Path13BishopNativeSourceExact now constructs quaternionW from
+the unscaled native Lie vector, proves quaternionWQuarterAdjoint and
+quaternionWBelowSixteenth from existing SmallLie admission, and derives
+quaternionSignedWInside. The convergent existing aSeries/bSeries are evaluated
+at the quaternion argument, not the fourfold adjoint argument.
+rootFreeQuaternionCandidate uses the existing QuaternionB carrier and
+nativeAveragedQuaternionCandidate consumes the actual outerY and outerRelevant
+from nativeInputsFromPhysicalRadius, with the original selected radius witness.
+This is a candidate coordinate constructor, not yet a certified unit
+quaternion or a proved exponential identification. Same-series unit norm,
+Cauchy product/exp-log identification, strict chord transport, actual CMP102
+preceding-scale domain and mixed-scale incidence remain OPEN.
+No radius reduction or new analytic authority. Source-written; kernel pending.
+
+
+### 2026-11-20 — CMP102 complementary factorial coefficient reconciliation
+
+Pinned donor: PR #1529 8fd6176551c643e72700a1410fb32d9b69e0480f, DASHI/Foundations/BishopFiniteEvenOddSeriesReindexExact.agda (originalBishopFiniteEvenOddSumReindex). Its only repository-module dependency, BalabanClayGate4BishopHalfRadiusRealEstimatesExact, has identical blob e5a4cf2f871fb4ce2892ed7a0183257b331b5848 on both branches. Transfer the donor unchanged. PR #1478 is merged; do not assume its complete dependency closure is present on this older YM branch. The local BishopExponentialBinomialCoefficientExact already supplies embeddedInverseFactorialProductBinomial and expConvolutionTermBinomial; prefer these real owners to importing the complex capstone.
+
+Write z=-w_q, C=1+za, S=1+zb using the actual shifted aSeries/bSeries. For n>=1 the coefficient of C^2-zS^2 is the signed factorial convolution at degree 2n, hence zero by (1-1)^(2n). The finite parity split has 2n+1 terms: apply the donor at n and append the final even endpoint. Shift the zero positive-degree coefficients down BEFORE limit transport; never divide by z. This proves the intended scalar identity 1-2A+w_q(A^2-2B)+w_q^2 B^2=0 including w_q=0, once the original same-series Cauchy product and shifted limit are attached. Unit norm then yields chord squared = 2w_q A. Alternating bound 0<=A<=1/2 on the admitted w_q<=1/16 is a separate proof target.
+
+Shared Paper 9 observation: multiplication by t in R[t]/(t^2-z) has matrix [[0,z],[1,0]], and conjugate norm a^2-zb^2. The exponential matrix has determinant C^2-zS^2=1. At z=0 the generator is nilpotent. Monster cyclotomic norm a^2-ab+b^2 is the analogous quadratic norm, not a representation-specific proof dependency. No new carrier required.
+
+Acceptance: unchanged parity donor source transfer only; signed specialization, shifted Cauchy limit, native quaternion unit norm, chord, exponential identification and actual physical CMP102 domain attachment OPEN. No kernel/CI acceptance or Clay promotion; original physical radius retained.
+
+
+### 2026-11-20 — CMP102 signed finite convolution specialization
+
+New source-written owner: DASHI/Foundations/BishopSignedFactorialConvolutionExact.agda.
+It reuses finiteExponentialCauchyCoefficient, expTermCongruent, expTermZeroAtPositive, finSumIsSeriesOf and originalBishopFiniteEvenOddSumReindex. signedPositiveDegreeZero specializes at (1,-1); inclusiveParity retains the final endpoint; signedInclusiveEvenDegreeZero joins these on the original Bishop sum. Existing vendor/Bishop and DASHI donor attribution retained. No new carrier, axiom, radius division or representation-specific Monster dependency.
+
+Independent local Python Fraction regression: 128 inclusive parity checks, 128 omitted-endpoint negative controls and 128 shifted bracket coefficients passed (degrees 0..127). The corresponding reference is scripts/check_cmp102_signed_factorial_normalization.py. This is a finite reference, not a proof of the Agda source.
+
+For the actual signed shifted aSeries/bSeries, the next Agda cut must identify every parity summand with the original shifted factorial coefficient, including degree zero and the two boundary terms, then transport through the same-series Cauchy limits. The bracket coefficient is (-1)^(n+1) times the inclusive signed convolution at degree 2n+2. Shifted Agda identity, analytic normalization, native unit norm/chord, alternating bound and physical CMP102 attachment remain OPEN. Agda executable unavailable locally; no kernel or CI acceptance. No Clay promotion.
+
+
+### 2026-11-20 — CMP102 original positive-coefficient endpoint cut
+
+Actual root-free series owner: BalabanCMP109BishopRootFreeSeriesExact, with positive aCoefficient(n)=1/(2n+2)! and bCoefficient(n)=1/(2n+3)!; term c X n carries X=-w_q. Added aBelowOneHalf by specializing the existing alternatingLimitBelowFirst on the same limit; aNonnegative already exists. No radius change.
+
+New source-written BalabanCMP102BishopShiftedCoefficientExact defines the actual positive-coefficient evenPart and oddPart using original Row.cauchyCoefficient and original aCoefficient/bCoefficient, handles the singleton odd row at degree zero, and gives finiteTwoEndpointSplit, shiftedBracketBaseZero, signedRowsCancel, and shiftedBracketZeroFromOriginalRows. The last theorem is explicitly conditional on the two original signed-row boundary/interior identifications; these are NOT proved by the consumer. The desired polynomial is G(X)=1-2A-XA^2+2XB+X^2B^2. Its coefficient is oddPart-evenPart, i.e. minus the inclusive signed convolution of degree 2n+2. Existing Bishop/Murray/Csimma and DASHI factorial, parity, ring and Cauchy owners retained; no new carrier, new postulate or division by radius.
+
+Local independent Python Fraction reference executed: 128 even boundary/interior, 128 odd boundary/interior (including singleton n=0), 128 shifted cancellation and 128 missing-final-endpoint negative controls, 512/512 total. Script: scripts/check_cmp102_native_shifted_coefficient.py. This is finite arithmetic, not an Agda receipt.
+
+NEXT: prove the actual signedEvenRow ~= evenPart and signedOddRow ~= -oddPart, including natural complementary indices, and attach existing convergence to the original coefficient polynomials. Analytic G=0, unit quaternion, chord and physical CMP102 remain OPEN. Agda executable not found locally, so all new theorem bodies are source-written only; no CI or Clay promotion.

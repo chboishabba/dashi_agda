@@ -151,60 +151,659 @@ yangMillsTOEHardAnalyticLemmaUpperCountIsSix =
 -- Canonical Yang-Mills scale-density-stress convergence.
 ------------------------------------------------------------------------
 
-yangMillsTOEBetaDrivenSourceFlowLevel : ProofLevel
-yangMillsTOEBetaDrivenSourceFlowLevel =
-  YMTOE.toeBetaDrivenSourceFlowLevel
+yangMillsBalabanRGReceipt : BalabanRGTOE.BalabanRGTOEReceipt
+yangMillsBalabanRGReceipt =
+  BalabanRGTOE.canonicalBalabanRGTOEReceipt
 
-yangMillsTOEBetaHistorySameStateCouplingLevel : ProofLevel
-yangMillsTOEBetaHistorySameStateCouplingLevel =
-  YMTOE.toeBetaHistorySameStateCouplingLevel
 
-yangMillsTOECanonicalCompleteDensityLevel : ProofLevel
-yangMillsTOECanonicalCompleteDensityLevel =
-  YMTOE.toeBetaHistoryToCanonicalCompleteDensityLevel
+yangMillsBalabanScaleDensityFlowLevel : ProofLevel
+yangMillsBalabanScaleDensityFlowLevel =
+  BalabanRGTOE.balabanScaleDensityFlowLevel
 
-yangMillsTOEGeneratedActionDensityCompilerLevel : ProofLevel
-yangMillsTOEGeneratedActionDensityCompilerLevel =
-  YMTOE.toeUnifiedGeneratedActionDensityCompilerLevel
+yangMillsBalabanCompleteDensitySourceShapeLevel : ProofLevel
+yangMillsBalabanCompleteDensitySourceShapeLevel =
+  BalabanRGTOE.balabanCompleteDensitySourceShapeLevel
 
-yangMillsTOECombinedRGUnifiedActionCompilerLevel : ProofLevel
-yangMillsTOECombinedRGUnifiedActionCompilerLevel =
-  YMTOE.toeCompleteDensityEffectiveActionRealizationCompilerLevel
+yangMillsBalabanCompleteDensityDerivedSummaryLevel : ProofLevel
+yangMillsBalabanCompleteDensityDerivedSummaryLevel =
+  BalabanRGTOE.balabanCompleteDensityDerivedSummaryLevel
 
-yangMillsTOEStressScaleCompilerLevel : ProofLevel
-yangMillsTOEStressScaleCompilerLevel =
-  YMTOE.toeUnifiedGeneratedActionStressScaleCompilerLevel
+yangMillsBalabanCompleteDensityPhysicalProjectionBoundsLevel : ProofLevel
+yangMillsBalabanCompleteDensityPhysicalProjectionBoundsLevel =
+  BalabanRGTOE.balabanCompleteDensityPhysicalProjectionBoundsLevel
 
-yangMillsTOEStrictCasimirCarrierLevel : ProofLevel
-yangMillsTOEStrictCasimirCarrierLevel =
-  YMTOE.toeStrictCasimirCarrierCompilerLevel
+yangMillsBalabanScaleDensityFiniteMeasureWeldLevel : ProofLevel
+yangMillsBalabanScaleDensityFiniteMeasureWeldLevel =
+  BalabanRGTOE.balabanScaleDensityFiniteMeasureWeldLevel
 
-yangMillsTOEOSWightmanContinuumBlocked :
-  YMTOE.toeOSWightmanContinuumConstructionProvedHere ≡ false
-yangMillsTOEOSWightmanContinuumBlocked =
-  YMTOE.toeOSWightmanContinuumConstructionProvedHereIsFalse
+yangMillsBalabanLiteralGeneratedActionDensityLevel : ProofLevel
+yangMillsBalabanLiteralGeneratedActionDensityLevel =
+  BalabanRGTOE.balabanLiteralGeneratedActionDensityLevel
 
-yangMillsTOETerminalPromotionBlocked :
-  YMTOE.toeTerminalPromotion ≡ false
-yangMillsTOETerminalPromotionBlocked =
-  YMTOE.toeTerminalPromotionIsFalse
+yangMillsBalabanLiteralCombinedRGEffectiveActionLevel : ProofLevel
+yangMillsBalabanLiteralCombinedRGEffectiveActionLevel =
+  BalabanRGTOE.balabanLiteralCombinedRGEffectiveActionLevel
 
-yangMillsTOEUniversalBetaFloorLevel : ProofLevel
-yangMillsTOEUniversalBetaFloorLevel =
-  YMTOE.toeCompactSimpleUniversalBetaFloorLevel
+yangMillsBalabanLiteralGeneratedActionStressScaleLevel : ProofLevel
+yangMillsBalabanLiteralGeneratedActionStressScaleLevel =
+  BalabanRGTOE.balabanLiteralGeneratedActionStressScaleLevel
 
-yangMillsTOELiteralUniformRemainderFloorLevel : ProofLevel
-yangMillsTOELiteralUniformRemainderFloorLevel =
-  YMTOE.toeLiteralUniformRegularRemainderBelowUniversalFloorLevel
+yangMillsBalabanScaleDensityStressLaneCompilerLevel : ProofLevel
+yangMillsBalabanScaleDensityStressLaneCompilerLevel =
+  BalabanRGTOE.balabanScaleDensityStressLaneCompilerLevel
 
-yangMillsTOEStressMarkedShellBoundLevel : ProofLevel
-yangMillsTOEStressMarkedShellBoundLevel =
-  YMTOE.toeStressFirstVariationMarkedShellBoundLevel
+yangMillsBalabanDensityAnchoredStressLaneCompilerLevel : ProofLevel
+yangMillsBalabanDensityAnchoredStressLaneCompilerLevel =
+  BalabanRGTOE.balabanDensityAnchoredStressLaneCompilerLevel
 
-yangMillsTOEStressShellEnergyHilbertLevel : ProofLevel
-yangMillsTOEStressShellEnergyHilbertLevel =
-  YMTOE.toeStressShellEnergyToHilbertCompilerLevel
+yangMillsBalabanLiteralDensityAnchoredStressLaneInstantiationLevel : ProofLevel
+yangMillsBalabanLiteralDensityAnchoredStressLaneInstantiationLevel =
+  BalabanRGTOE.balabanLiteralDensityAnchoredStressLaneInstantiationLevel
 
-yangMillsTOELiteralStressActivityEntropyLevel : ProofLevel
-yangMillsTOELiteralStressActivityEntropyLevel =
-  YMTOE.toeLiteralStressActivityEntropyInstantiationLevel
+yangMillsBalabanRegularESelectedDensityCompilerLevel : ProofLevel
+yangMillsBalabanRegularESelectedDensityCompilerLevel =
+  BalabanRGTOE.balabanRegularESelectedDensityCompilerLevel
+
+yangMillsBalabanRegularELocalizationSourceLevel : ProofLevel
+yangMillsBalabanRegularELocalizationSourceLevel =
+  BalabanRGTOE.balabanRegularELocalizationSourceLevel
+
+yangMillsBalabanRegularELocalizationCarrierLevel : ProofLevel
+yangMillsBalabanRegularELocalizationCarrierLevel =
+  BalabanRGTOE.balabanRegularELocalizationCarrierLevel
+
+yangMillsBalabanRegularEContinuationCompilerLevel : ProofLevel
+yangMillsBalabanRegularEContinuationCompilerLevel =
+  BalabanRGTOE.balabanRegularEContinuationCompilerLevel
+
+yangMillsBalabanHaarCasimirCoefficientLevel : ProofLevel
+yangMillsBalabanHaarCasimirCoefficientLevel =
+  BalabanRGTOE.balabanHaarCasimirCoefficientLevel
+
+yangMillsBalabanCasimirOrbitFactorizationLevel : ProofLevel
+yangMillsBalabanCasimirOrbitFactorizationLevel =
+  BalabanRGTOE.balabanCasimirOrbitFactorizationLevel
+
+yangMillsBalabanCasimirLowerBoundTransportLevel : ProofLevel
+yangMillsBalabanCasimirLowerBoundTransportLevel =
+  BalabanRGTOE.balabanCasimirLowerBoundTransportLevel
+
+yangMillsBalabanLiteralCasimirFactorizationLevel : ProofLevel
+yangMillsBalabanLiteralCasimirFactorizationLevel =
+  BalabanRGTOE.balabanLiteralCasimirFactorizationLevel
+
+yangMillsBalabanClassifiedCasimirPositivityLevel : ProofLevel
+yangMillsBalabanClassifiedCasimirPositivityLevel =
+  BalabanRGTOE.balabanClassifiedCasimirPositivityLevel
+
+yangMillsBalabanStressMarkedShellReuseLevel : ProofLevel
+yangMillsBalabanStressMarkedShellReuseLevel =
+  BalabanRGTOE.balabanStressMarkedShellReuseLevel
+
+yangMillsBalabanStressPairingPhysicalWeldLevel : ProofLevel
+yangMillsBalabanStressPairingPhysicalWeldLevel =
+  BalabanRGTOE.balabanStressPairingPhysicalWeldLevel
+
+yangMillsBalabanGeneratedActionDensityCompilerLevel : ProofLevel
+yangMillsBalabanGeneratedActionDensityCompilerLevel =
+  BalabanRGTOE.balabanGeneratedActionDensityCompilerLevel
+
+yangMillsBalabanCombinedRGEffectiveActionCompilerLevel : ProofLevel
+yangMillsBalabanCombinedRGEffectiveActionCompilerLevel =
+  BalabanRGTOE.balabanCombinedRGEffectiveActionCompilerLevel
+
+yangMillsBalabanGeneratedActionStressScaleCompilerLevel : ProofLevel
+yangMillsBalabanGeneratedActionStressScaleCompilerLevel =
+  BalabanRGTOE.balabanGeneratedActionStressScaleCompilerLevel
+
+yangMillsBalabanPublishedFlowRegularEProjectionCompilerLevel : ProofLevel
+yangMillsBalabanPublishedFlowRegularEProjectionCompilerLevel =
+  BalabanRGTOE.balabanPublishedFlowRegularEProjectionCompilerLevel
+
+yangMillsBalabanRegularESection2PredicateCompilerLevel : ProofLevel
+yangMillsBalabanRegularESection2PredicateCompilerLevel =
+  BalabanRGTOE.balabanRegularESection2PredicateCompilerLevel
+
+yangMillsBalabanConcreteRegularELocalizationWitnessLevel : ProofLevel
+yangMillsBalabanConcreteRegularELocalizationWitnessLevel =
+  BalabanRGTOE.balabanConcreteRegularELocalizationWitnessLevel
+
+yangMillsBalabanStressCauchyModulusCompilerLevel : ProofLevel
+yangMillsBalabanStressCauchyModulusCompilerLevel =
+  BalabanRGTOE.balabanStressCauchyModulusCompilerLevel
+
+yangMillsBalabanStressCauchyPhysicalInsertionLevel : ProofLevel
+yangMillsBalabanStressCauchyPhysicalInsertionLevel =
+  BalabanRGTOE.balabanStressCauchyPhysicalInsertionLevel
+
+yangMillsBalabanStressHilbertBoundCompilerLevel : ProofLevel
+yangMillsBalabanStressHilbertBoundCompilerLevel =
+  BalabanRGTOE.balabanStressHilbertBoundCompilerLevel
+
+yangMillsBalabanStressHilbertPhysicalShellLevel : ProofLevel
+yangMillsBalabanStressHilbertPhysicalShellLevel =
+  BalabanRGTOE.balabanStressHilbertPhysicalShellLevel
+
+yangMillsBalabanPublishedNonlinearRGCoreLevel : ProofLevel
+yangMillsBalabanPublishedNonlinearRGCoreLevel =
+  BalabanRGTOE.balabanPublishedNonlinearRGCoreLevel
+
+yangMillsBalabanPublishedRGPhysicalSameObjectLevel : ProofLevel
+yangMillsBalabanPublishedRGPhysicalSameObjectLevel =
+  BalabanRGTOE.balabanPublishedRGPhysicalSameObjectLevel
+
+yangMillsBalabanRGUniformKPAbsorptionStillOpen :
+  BalabanRGTOE.balabanRGUniformKPAbsorptionOpenFlag ≡ false
+yangMillsBalabanRGUniformKPAbsorptionStillOpen =
+  BalabanRGTOE.balabanRGUniformKPAbsorptionStillOpen
+
+yangMillsBalabanRGBlockSpinTransferStillOpen :
+  BalabanRGTOE.balabanRGBlockSpinTransferOpenFlag ≡ false
+yangMillsBalabanRGBlockSpinTransferStillOpen =
+  BalabanRGTOE.balabanRGBlockSpinTransferStillOpen
+
+yangMillsBalabanPublishedRGContinuumTransferStillOpen :
+  BalabanRGTOE.balabanPublishedRGContinuumTransferOpenFlag ≡ false
+yangMillsBalabanPublishedRGContinuumTransferStillOpen =
+  BalabanRGTOE.balabanPublishedRGContinuumTransferStillOpen
+
+yangMillsBalabanOSWightmanContinuumConstructionStillOpen :
+  BalabanRGTOE.balabanOSWightmanContinuumConstructionOpenFlag ≡ false
+yangMillsBalabanOSWightmanContinuumConstructionStillOpen =
+  BalabanRGTOE.balabanOSWightmanContinuumConstructionStillOpen
+
+yangMillsBalabanContinuumRouteMassGapPromotionStillOpen :
+  BalabanRGTOE.balabanContinuumRouteMassGapPromotionOpenFlag ≡ false
+yangMillsBalabanContinuumRouteMassGapPromotionStillOpen =
+  BalabanRGTOE.balabanContinuumRouteMassGapPromotionStillOpen
+
+yangMillsBalabanRGContinuumConstructionStillOpen :
+  BalabanRGTOE.balabanRGContinuumConstructionOpenFlag ≡ false
+yangMillsBalabanRGContinuumConstructionStillOpen =
+  BalabanRGTOE.balabanRGContinuumConstructionStillOpen
+
+yangMillsBalabanContinuumMassGapStillOpen :
+  BalabanRGTOE.balabanRGContinuumMassGapOpenFlag ≡ false
+yangMillsBalabanContinuumMassGapStillOpen =
+  BalabanRGTOE.balabanRGContinuumMassGapStillOpen
+
+yangMillsBalabanTerminalPromotionStillOpen :
+  BalabanRGTOE.balabanTerminalPromotionOpenFlag ≡ false
+yangMillsBalabanTerminalPromotionStillOpen =
+  BalabanRGTOE.balabanTerminalPromotionStillOpen
+
+yangMillsBalabanClayPromotionStillFalse :
+  BalabanRGTOE.balabanRGClayPromotionFlag ≡ false
+yangMillsBalabanClayPromotionStillFalse =
+  BalabanRGTOE.balabanRGClayPromotionStillFalse
+
+
+yangMillsBalabanContinuumLimitReceipt :
+  BalabanRGTOE.BalabanContinuumLimitReceipt
+yangMillsBalabanContinuumLimitReceipt =
+  BalabanRGTOE.balabanContinuumLimitReceipt
+
+yangMillsBalabanContinuumLimitPromotionImpossible :
+  BalabanRGTOE.BalabanContinuumLimitPromotion → ⊥
+yangMillsBalabanContinuumLimitPromotionImpossible =
+  BalabanRGTOE.balabanContinuumLimitPromotionImpossible
+
+yangMillsDepthContinuumLimitReceipt :
+  BalabanRGTOE.DepthContinuumLimitReceipt
+yangMillsDepthContinuumLimitReceipt =
+  BalabanRGTOE.depthContinuumLimitReceipt
+
+yangMillsDepthContinuumLimitPromotionImpossible :
+  BalabanRGTOE.DepthContinuumLimitPromotion → ⊥
+yangMillsDepthContinuumLimitPromotionImpossible =
+  BalabanRGTOE.depthContinuumLimitPromotionImpossible
+
+yangMillsGoal1ParetoZKPFrame : YMMaxCut.Goal1ParetoTOEZKPFrame
+yangMillsGoal1ParetoZKPFrame = YMMaxCut.canonicalGoal1ParetoTOEZKPFrame
+
+------------------------------------------------------------------------
+-- Joint Balaban RG + R559 same-owner max-cut physics facade.
+------------------------------------------------------------------------
+
+import DASHI.Unified.BalabanR559TOEMaxCutExact as BalabanR559TOE
+
+yangMillsBalabanR559MaxCutReceipt :
+  BalabanR559TOE.BalabanR559TOEMaxCutReceipt
+yangMillsBalabanR559MaxCutReceipt =
+  BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+yangMillsBalabanR559PublishedContinuumStillOpen :
+  BalabanR559TOE.publishedContinuumPromotion
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ false
+yangMillsBalabanR559PublishedContinuumStillOpen =
+  BalabanR559TOE.publishedContinuumPromotionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+yangMillsBalabanR559ContinuumMassGapStillBlocked :
+  BalabanR559TOE.continuumMassGapPromotion
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ false
+yangMillsBalabanR559ContinuumMassGapStillBlocked =
+  BalabanR559TOE.continuumMassGapPromotionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+yangMillsBalabanR559ClayPromotionStillBlocked :
+  BalabanR559TOE.clayPromotion
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+  ≡ false
+yangMillsBalabanR559ClayPromotionStillBlocked =
+  BalabanR559TOE.clayPromotionIsFalse
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+yangMillsBalabanR559Gate4UnresolvedCount : ℕ
+yangMillsBalabanR559Gate4UnresolvedCount =
+  BalabanR559TOE.gate4UnresolvedCount
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+yangMillsBalabanR559Gate4UnresolvedCountIs58 :
+  yangMillsBalabanR559Gate4UnresolvedCount ≡ 58
+yangMillsBalabanR559Gate4UnresolvedCountIs58 =
+  BalabanR559TOE.gate4UnresolvedCountIs58
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+yangMillsBalabanR559Gate4DefinitionLevel : ProofLevel
+yangMillsBalabanR559Gate4DefinitionLevel =
+  BalabanR559TOE.gate4DefinitionLevel
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+yangMillsBalabanR559Gate4InhabitantsLevel : ProofLevel
+yangMillsBalabanR559Gate4InhabitantsLevel =
+  BalabanR559TOE.gate4InhabitantsLevel
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+yangMillsBalabanScaleTransferNonPromotion :
+  BalabanR559TOE.ScaleTransferPromotion → ⊥
+yangMillsBalabanScaleTransferNonPromotion =
+  BalabanR559TOE.scaleTransferPromotionEliminator
+    BalabanR559TOE.canonicalBalabanR559TOEMaxCutReceipt
+
+------------------------------------------------------------------------
+-- Implement-A-to-D reuse-only Yang-Mills physics facade.
+------------------------------------------------------------------------
+
+import DASHI.Unified.YMImplementAToDTOEMaxCutExact as YMAD
+
+yangMillsImplementAToDMaxCutReceipt :
+  YMAD.YMImplementAToDTOEMaxCutReceipt
+yangMillsImplementAToDMaxCutReceipt =
+  YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+yangMillsImplementAToDZKPFrame : YMAD.YMImplementAToDZKPFrame
+yangMillsImplementAToDZKPFrame =
+  YMAD.canonicalYMImplementAToDZKPFrame
+
+yangMillsImplementAToDPublishedContinuumStillBlocked :
+  YMAD.publishedContinuumPromotion YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+  ≡ false
+yangMillsImplementAToDPublishedContinuumStillBlocked =
+  YMAD.publishedContinuumPromotionIsFalse
+    YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+yangMillsImplementAToDContinuumMassGapStillBlocked :
+  YMAD.continuumMassGapPromotion YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+  ≡ false
+yangMillsImplementAToDContinuumMassGapStillBlocked =
+  YMAD.continuumMassGapPromotionIsFalse
+    YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+yangMillsImplementAToDClayStillBlocked :
+  YMAD.clayPromotion YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+  ≡ false
+yangMillsImplementAToDClayStillBlocked =
+  YMAD.clayPromotionIsFalse YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+yangMillsImplementAToDScaleTransferNonPromotion :
+  BalabanR559TOE.ScaleTransferPromotion → ⊥
+yangMillsImplementAToDScaleTransferNonPromotion =
+  YMAD.scaleTransferPromotionEliminator
+    YMAD.canonicalYMImplementAToDTOEMaxCutReceipt
+
+import DASHI.Unified.NavierStokesBM2TOEConvergenceExact as NSBM2TOE
+
+open NSBM2TOE public using
+  ( LiteralR571DissipationFold
+  ; ExactLiteralR571DissipationFold
+  ; literalR571M2BelowPhysicalDissipation
+  ; exactLiteralR571M2BelowPhysicalDissipation
+  )
+------------------------------------------------------------------------
+-- Navier-Stokes B / R571 M2 producer-strategy physics facade.
+------------------------------------------------------------------------
+
+navierStokesBM2FiniteFoldClosed : Bool
+navierStokesBM2FiniteFoldClosed =
+  NSBM2TOE.cardinalityFreeFiniteFoldClosed
+
+navierStokesBM2SamplewisePaymentStillAnalytic :
+  NSBM2TOE.samplewisePhysicalPaymentStillAnalytic ≡ true
+navierStokesBM2SamplewisePaymentStillAnalytic =
+  NSBM2TOE.samplewisePhysicalPaymentStillAnalyticIsTrue
+
+navierStokesBM2GalerkinFoldStillAnalytic :
+  NSBM2TOE.literalFoldIntoGalerkinDissipationStillAnalytic ≡ true
+navierStokesBM2GalerkinFoldStillAnalytic =
+  NSBM2TOE.literalFoldIntoGalerkinDissipationStillAnalyticIsTrue
+
+navierStokesBM2OldPDFB1B2B3B4NotMandatory :
+  NSBM2TOE.oldPDFB1B2B3B4Mandatory ≡ false
+navierStokesBM2OldPDFB1B2B3B4NotMandatory =
+  NSBM2TOE.oldPDFB1B2B3B4MandatoryIsFalse
+
+navierStokesBM2OldPDFB7NotMandatory :
+  NSBM2TOE.oldPDFB7DirectCovarianceEqualityMandatory ≡ false
+navierStokesBM2OldPDFB7NotMandatory =
+  NSBM2TOE.oldPDFB7DirectCovarianceEqualityMandatoryIsFalse
+
+navierStokesBM2ClayPromotion : Bool
+navierStokesBM2ClayPromotion =
+  NSBM2TOE.modernNSClayPromotion
+
+navierStokesBM2ClayPromotionStillFalse :
+  navierStokesBM2ClayPromotion ≡ false
+navierStokesBM2ClayPromotionStillFalse =
+  NSBM2TOE.modernNSClayPromotionStillFalse
+
+navierStokesBM2Receipt :
+  NSBM2TOE.NavierStokesBM2TOEReceipt
+navierStokesBM2Receipt =
+  NSBM2TOE.canonicalNavierStokesBM2TOEReceipt
+
+navierStokesBM2ZKPFrame :
+  NSBM2TOE.NavierStokesBM2TOEZKPFrame
+navierStokesBM2ZKPFrame =
+  NSBM2TOE.canonicalNavierStokesBM2TOEZKPFrame
+
+------------------------------------------------------------------------
+-- Canonical Navier-Stokes Clay frontier facade.
+------------------------------------------------------------------------
+
+import DASHI.Unified.NavierStokesClayFrontierTOEConvergenceExact as NSClayTOE
+
+navierStokesClayPromotion : Bool
+navierStokesClayPromotion =
+  NSClayTOE.navierStokesABCDClayPromotion
+
+navierStokesClayPromotionStillFalse :
+  navierStokesClayPromotion ≡ false
+navierStokesClayPromotionStillFalse =
+  NSClayTOE.navierStokesABCDClayPromotionStillFalse
+
+navierStokesGeneralRegularityComplete : Bool
+navierStokesGeneralRegularityComplete =
+  NSClayTOE.generalNSGlobalRegularityComplete
+
+navierStokesGeneralRegularityStillOpen :
+  navierStokesGeneralRegularityComplete ≡ false
+navierStokesGeneralRegularityStillOpen =
+  NSClayTOE.generalNSGlobalRegularityStillOpen
+
+navierStokesCarrierToGeneralImplicationProved : Bool
+navierStokesCarrierToGeneralImplicationProved =
+  NSClayTOE.carrierToGeneralNSImplicationProved
+
+navierStokesCarrierToGeneralImplicationStillOpen :
+  navierStokesCarrierToGeneralImplicationProved ≡ false
+navierStokesCarrierToGeneralImplicationStillOpen =
+  NSClayTOE.carrierToGeneralNSImplicationStillOpen
+
+navierStokesAuthorityPromotionGuard : Bool
+navierStokesAuthorityPromotionGuard =
+  NSClayTOE.navierStokesPromotionGuard
+
+navierStokesAuthorityPromotionGuardStillFalse :
+  navierStokesAuthorityPromotionGuard ≡ false
+navierStokesAuthorityPromotionGuardStillFalse =
+  NSClayTOE.navierStokesPromotionGuardStillFalse
+
+navierStokesClayFrontierZKPFrame :
+  NSClayTOE.NavierStokesClayFrontierTOEZKPFrame
+navierStokesClayFrontierZKPFrame =
+  NSClayTOE.canonicalNavierStokesClayFrontierTOEZKPFrame
+
+navierStokesTerminalPromotionImpossible :
+  NSClayTOE.NSClayDistanceFinalPromotion → Data.Empty.⊥
+navierStokesTerminalPromotionImpossible =
+  NSClayTOE.terminalClayPromotionImpossible
+
+
+------------------------------------------------------------------------
+-- Current periodic-B shared weighted wall from R736.
+-- Proof ownership remains in R736 through the canonical NS Clay facade.
+------------------------------------------------------------------------
+
+navierStokesSharedWeightedExactlyTwoLeaves : Bool
+navierStokesSharedWeightedExactlyTwoLeaves =
+  NSClayTOE.currentSharedWeightedExactlyTwoLeaves
+
+navierStokesSharedWeightedExactlyTwoLeavesIsTrue :
+  navierStokesSharedWeightedExactlyTwoLeaves ≡ true
+navierStokesSharedWeightedExactlyTwoLeavesIsTrue =
+  NSClayTOE.currentSharedWeightedExactlyTwoLeavesIsTrue
+
+navierStokesSharedWeightedSameCarrier : Bool
+navierStokesSharedWeightedSameCarrier =
+  NSClayTOE.currentSharedWeightedSameCarrier
+
+navierStokesSharedWeightedSameCarrierIsTrue :
+  navierStokesSharedWeightedSameCarrier ≡ true
+navierStokesSharedWeightedSameCarrierIsTrue =
+  NSClayTOE.currentSharedWeightedSameCarrierIsTrue
+
+navierStokesSharedWeightedCarrierIsInputLaplacian : Bool
+navierStokesSharedWeightedCarrierIsInputLaplacian =
+  NSClayTOE.currentSharedWeightedCarrierIsInputLaplacian
+
+navierStokesWeightedPlusEndpointClosed : Bool
+navierStokesWeightedPlusEndpointClosed =
+  NSClayTOE.currentWeightedPlusEndpointClosed
+
+navierStokesWeightedPlusEndpointStillOpen :
+  navierStokesWeightedPlusEndpointClosed ≡ false
+navierStokesWeightedPlusEndpointStillOpen =
+  NSClayTOE.currentWeightedPlusEndpointStillOpen
+
+navierStokesAugmentedCriticalWeightedClosed : Bool
+navierStokesAugmentedCriticalWeightedClosed =
+  NSClayTOE.currentAugmentedCriticalWeightedClosed
+
+navierStokesAugmentedCriticalWeightedStillOpen :
+  navierStokesAugmentedCriticalWeightedClosed ≡ false
+navierStokesAugmentedCriticalWeightedStillOpen =
+  NSClayTOE.currentAugmentedCriticalWeightedStillOpen
+
+navierStokesSharedWeightedLeavesBuildBarrier : Bool
+navierStokesSharedWeightedLeavesBuildBarrier =
+  NSClayTOE.currentSharedWeightedLeavesBuildBarrier
+
+navierStokesSharedWeightedLeavesBuildBarrierIsTrue :
+  navierStokesSharedWeightedLeavesBuildBarrier ≡ true
+navierStokesSharedWeightedLeavesBuildBarrierIsTrue =
+  NSClayTOE.currentSharedWeightedLeavesBuildBarrierIsTrue
+
+navierStokesR726IndependentLeafRequired : Bool
+navierStokesR726IndependentLeafRequired =
+  NSClayTOE.legacyR726IndependentLeafRequired
+
+navierStokesR726IndependentLeafNotRequired :
+  navierStokesR726IndependentLeafRequired ≡ false
+navierStokesR726IndependentLeafNotRequired =
+  NSClayTOE.legacyR726IndependentLeafNotRequired
+
+navierStokesStrictMarginR406IndependentLeafRequired : Bool
+navierStokesStrictMarginR406IndependentLeafRequired =
+  NSClayTOE.legacyStrictMarginR406IndependentLeafRequired
+
+navierStokesStrictMarginR406IndependentLeafNotRequired :
+  navierStokesStrictMarginR406IndependentLeafRequired ≡ false
+navierStokesStrictMarginR406IndependentLeafNotRequired =
+  NSClayTOE.legacyStrictMarginR406IndependentLeafNotRequired
+
+navierStokesBarrierDependentQPlusMinusShortcutAdmissible : Bool
+navierStokesBarrierDependentQPlusMinusShortcutAdmissible =
+  NSClayTOE.barrierDependentQPlusMinusShortcutAdmissible
+
+navierStokesBarrierDependentQPlusMinusShortcutStillCircular :
+  navierStokesBarrierDependentQPlusMinusShortcutAdmissible ≡ false
+navierStokesBarrierDependentQPlusMinusShortcutStillCircular =
+  NSClayTOE.barrierDependentQPlusMinusShortcutStillCircular
+
+navierStokesSharedWeightedClayPromotion : Bool
+navierStokesSharedWeightedClayPromotion =
+  NSClayTOE.currentSharedWeightedClayPromotion
+
+navierStokesSharedWeightedClayPromotionStillFalse :
+  navierStokesSharedWeightedClayPromotion ≡ false
+navierStokesSharedWeightedClayPromotionStillFalse =
+  NSClayTOE.currentSharedWeightedClayPromotionStillFalse
+
+navierStokesContinuumBKMPassageConstructed : Bool
+navierStokesContinuumBKMPassageConstructed =
+  NSClayTOE.continuumBKMPassageConstructed
+
+navierStokesContinuumBKMPassageStillOpen :
+  navierStokesContinuumBKMPassageConstructed ≡ false
+navierStokesContinuumBKMPassageStillOpen =
+  NSClayTOE.continuumBKMPassageStillOpen
+
+navierStokesAllDataBridgeConstructed : Bool
+navierStokesAllDataBridgeConstructed =
+  NSClayTOE.allDataBridgeConstructed
+
+navierStokesAllDataBridgeStillOpen :
+  navierStokesAllDataBridgeConstructed ≡ false
+navierStokesAllDataBridgeStillOpen =
+  NSClayTOE.allDataBridgeStillOpen
+
+navierStokesSubmissionPacketReady : Bool
+navierStokesSubmissionPacketReady =
+  NSClayTOE.submissionPacketReady
+
+navierStokesSubmissionPacketStillNotReady :
+  navierStokesSubmissionPacketReady ≡ false
+navierStokesSubmissionPacketStillNotReady =
+  NSClayTOE.submissionPacketStillNotReady
+
+navierStokesClayEligible : Bool
+navierStokesClayEligible =
+  NSClayTOE.clayEligible
+
+navierStokesClayEligibilityStillFalse :
+  navierStokesClayEligible ≡ false
+navierStokesClayEligibilityStillFalse =
+  NSClayTOE.clayEligibilityStillFalse
+
+
+------------------------------------------------------------------------
+-- Canonical Row-A1 source frontier.
+-- Agda remains theorem authority. Lean cross-prover progress does not promote.
+------------------------------------------------------------------------
+
+yangMillsYMA1SourceFrontierReceipt :
+  YMA1Frontier.YMA1SourceFrontierReceipt
+yangMillsYMA1SourceFrontierReceipt =
+  YMA1Frontier.canonicalYMA1SourceFrontierReceipt
+
+yangMillsYMA1ZKPFrame :
+  YMA1Frontier.YMA1ZKPFrame
+yangMillsYMA1ZKPFrame =
+  YMA1Frontier.canonicalYMA1ZKPFrame
+
+yangMillsYMA1FrozenResearchCount :
+  ℕ
+yangMillsYMA1FrozenResearchCount =
+  YMA1Frontier.frozenResearchCount
+    YMA1Frontier.canonicalYMA1SourceFrontierReceipt
+
+yangMillsYMA1FrozenResearchCountIsFour :
+  yangMillsYMA1FrozenResearchCount ≡ 4
+yangMillsYMA1FrozenResearchCountIsFour =
+  YMA1Frontier.frozenResearchCountStillFour
+
+yangMillsYMA1RowAStillNotPromoted :
+  YMA1Frontier.rowAPromoted
+    YMA1Frontier.canonicalYMA1SourceFrontierReceipt
+  ≡ false
+yangMillsYMA1RowAStillNotPromoted =
+  YMA1Frontier.rowAStillNotPromoted
+
+yangMillsYMA1CompletionDoesNotSelfPromote :
+  Proof.promotable
+    (YMA1Frontier.rowACompletion
+      YMA1Frontier.canonicalYMA1SourceFrontierReceipt)
+  ≡ false
+yangMillsYMA1CompletionDoesNotSelfPromote =
+  YMA1Frontier.rowACompletionDoesNotSelfPromote
+
+
+------------------------------------------------------------------------
+-- Highest-alpha YM Route-S selected source -> OS max-cut (canonical owner).
+-- Reuses R320 -> R295 -> R313 -> R296 -> R333; physical inputs not promoted.
+------------------------------------------------------------------------
+
+yangMillsBalabanR320RouteSToOSCompilerLevel : ProofLevel
+yangMillsBalabanR320RouteSToOSCompilerLevel =
+  BalabanRGTOE.balabanR320RouteSToOSCompilerLevel
+
+yangMillsBalabanR320RouteSSelectedSourceLevel : ProofLevel
+yangMillsBalabanR320RouteSSelectedSourceLevel =
+  BalabanRGTOE.balabanR320RouteSSelectedPhysicalSourceLevel
+
+yangMillsBalabanR320RouteSNoDuplicateMagnitude :
+  BalabanRGTOE.balabanR320RouteSMagnitudeNotNewPhysical ≡ false
+yangMillsBalabanR320RouteSNoDuplicateMagnitude =
+  BalabanRGTOE.balabanR320RouteSNoSecondAbsoluteMagnitudeInput
+
+
+------------------------------------------------------------------------
+-- Pareto P2: existing rational SU2 trace bound -> same-physical Gram
+-- boundedness producer -> canonical Wilson S2 input.
+------------------------------------------------------------------------
+
+yangMillsBalabanRouteSP2TraceToS2Level : ProofLevel
+yangMillsBalabanRouteSP2TraceToS2Level =
+  BalabanRGTOE.balabanRouteSP2TraceToCanonicalS2CompilerLevel
+
+yangMillsBalabanRouteSP2PhysicalInterpretationLevel : ProofLevel
+yangMillsBalabanRouteSP2PhysicalInterpretationLevel =
+  BalabanRGTOE.balabanRouteSP2TracePhysicalInterpretationLevel
+
+yangMillsBalabanRouteSP2PerLoopBoundAfterInterpretation :
+  BalabanRGTOE.balabanRouteSP2TracePerLoopBoundFlag ≡ true
+yangMillsBalabanRouteSP2PerLoopBoundAfterInterpretation =
+  BalabanRGTOE.balabanRouteSP2TracePaysPerLoopBounds
+
+
+------------------------------------------------------------------------
+-- Preferred native rational-Wilson P2 (actual measure producer), not
+-- the generic external trace-to-Gram compatibility adapter.
+------------------------------------------------------------------------
+
+yangMillsBalabanRouteSP2NativeNoProductPayment :
+  BalabanRGTOE.balabanRouteSP2NativeNoExtraProduct ≡ true
+yangMillsBalabanRouteSP2NativeNoProductPayment =
+  BalabanRGTOE.balabanRouteSP2NativeNoExtraProductIsTrue
+
+yangMillsBalabanRouteSP2NativeNoDistancePayment :
+  BalabanRGTOE.balabanRouteSP2NativeNoDistance ≡ false
+yangMillsBalabanRouteSP2NativeNoDistancePayment =
+  BalabanRGTOE.balabanRouteSP2NativeNoDistanceIsFalse
+
+yangMillsBalabanRouteSP2NativeCompilerLevel : ProofLevel
+yangMillsBalabanRouteSP2NativeCompilerLevel =
+  BalabanRGTOE.balabanRouteSP2NativeCompilerLevel
+
+
+yangMillsBalabanRouteSP2R445NoSecondMoment :
+  BalabanRGTOE.balabanRouteSP2R445IndependentMomentRequired ≡ false
+yangMillsBalabanRouteSP2R445NoSecondMoment =
+  BalabanRGTOE.balabanRouteSP2R445IndependentMomentRequiredIsFalse
+
+yangMillsBalabanRouteSP2R445CompilerLevel : ProofLevel
+yangMillsBalabanRouteSP2R445CompilerLevel =
+  BalabanRGTOE.balabanRouteSP2R445NativeCompilerLevel
