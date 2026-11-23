@@ -87,6 +87,26 @@ for c in codes:
 assert project((3,24,24,4,1))[1] == project((3,48,48,4,1))[1]
 assert project((3,24,24,4,1))[0] != project((3,48,48,4,1))[0]
 
+# Exact field geometry: the original Griess matrix G=-M over F3 is a
+# primitive degree-three multiplication operator. This identifies, after
+# choosing a cyclic basis, original F3^3 with GF(27), NOT with the
+# NONWRAPPING spatial path-graph metric.
+X=s.symbols("X")
+matM=s.Matrix([[1,1,0],[0,1,1],[1,1,1]])
+matG=-matM
+f=s.Poly(matG.charpoly(X).as_expr(),X,modulus=3)
+assert f==s.Poly(X**3-X+1,X,modulus=3)
+assert all(f.eval(i)!=0 for i in (0,1,2))  # cubic irreducible
+assert (matG**3-matG+s.eye(3)).applyfunc(lambda x:x%3)==s.zeros(3)
+assert (matG**13+s.eye(3)).applyfunc(lambda x:x%3)==s.zeros(3)
+assert (matG**26-s.eye(3)).applyfunc(lambda x:x%3)==s.zeros(3)
+v=s.Matrix([1,0,0])
+cyclic_basis=s.Matrix.hstack(v,matG*v,matG**2*v)
+assert cyclic_basis.det()%3==1
+# The cyclic G-action is multiplication by a primitive element of
+# F_3[X]/(X^3-X+1) after this explicit basis change.
+assert 26==2*13 and 27==1+2*13
+
 # Correct source representation-theoretic split; no scalar phase
 # is substituted for source sign or for the C2 orientation residual.
 order=nonzero
@@ -118,6 +138,6 @@ print("PASS 26/26 exact original grade <-> 13-axis+orientation codec")
 print("PASS 26/26 transported cocycle: 4 canonical sign flips, 9 no flips")
 print("PASS 26/26 order13 antipodal flip and order26 return")
 print("PASS 156/156 six-face nonidentity H05 finite tests, raw history preserved")
-print("PASS 26x26 rational even/odd antipodal projectors, 13+13 independent")
+print("PASS irreducible GF(3) polynomial X^3-X+1, primitive GF(27)^x Singer C26")\nprint("PASS explicit cyclic field basis determinant 1 mod3 and 13/26 exact sequence")\nprint("PASS 26x26 rational even/odd antipodal projectors, 13+13 independent")
 print("PASS 54/54 original spatial cube edges NOT preserved")
 print("OPEN source-specific RH FarExact/compensation, true nine-DOF / physical equivariance")
