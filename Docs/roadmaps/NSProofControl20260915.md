@@ -1,5 +1,17 @@
 # 2026-10-25 PARETO OWNER DELIVERABLE: BISHOP A1 INVERSE AND PHYSICAL W1 CONDITIONAL BOUND
 
+## 23 November 2026 — projected-output geometry correction and exact spectator-cutoff BIDI
+
+**Primary new source-specific maximum-cut:** [transverse physical source, exact cutoff sign reversal, prior-owner audit and reverse-solved R568 gate](ClayLargeBitePhysicalNSLeraySpectatorBidiKarpRealGuard20261123.md), [executed exact SymPy script](../../scripts/check_ns_transverse_large_bite_20261123.py), Git blob `36c9b14784b5d4fe9c6cb4874b312e572ecdc3f0` (matches locally executed file).
+
+**Constructor correction, not a new theorem:** the preceding axial 3-cell fixture has (M\parallel k), so its *Leray-projected output is ZERO*. Retain it as a valuable unprojected original-R236 negative control, but NOT as a nontrivial projected R406/R568 witness. The new actual 5-cell noncollinear Fourier field has **P_kM=M=(0,0,1) != 0**, a real strict LH→R236 **deep-far-low nonzero-work** cell, and source Fourier reality. For the identical beta=1,t=0 field and output k=(16,0,0), the original complete carrier gives at cutoff 16 **18,513** incidences and S=-8,552,560.065…; at cutoff 24 **79,233** incidences and S=+53,827,526.538… (both exact algebraic signs). Independent six-block original R236 fold agrees with active-versus-all-spectator pair sum; physical V and M unchanged. In general N(C)=(2C-15)(2C+1)^2, rate mean mu(C)=128+(2/3)(C-8)(C-7)+(4/3)C(C+1), and **S_C=N(C)(mu(C)W-V)=32C^5+O(C^4)** for that fixed smooth finite-support source.
+
+**Crucial PRIOR ART:** `NSTriadKNFixedOutputCoherentCovariancePairDifferenceExact.centeredPairCovarianceAppendZero` already formally states the arbitrary zero-work padding cocycle. We have NOT created a duplicate owner. The finite *projected source realization* and cutoff-sign counterexample are new evidence. The actual physical rate-weighted work is recovered BIDI via (V=mu(C)W-S_C/N(C)); an absolute cutoff-independent bound on **uncompensated S** is false and not the actual R568 signed objective.
+
+**Existing direct theorem route:** `NSTriadKNSpectatorNestedRowFactorizationBidiExact`, `NSTriadKNNestedSpectatorR547GlobalSignedCompositionBidiExact`, `NSTriadKNLiveSpectatorResolventNestedLeafABidiExact` already transport the original signed nested source to physical time-integrated **R568**. Their source status is cutoff-uniform signed spacetime estimate **OPEN**, not generic aggregation plumbing. Next large proof attempt must use these actual owners to cancel spectator coordinate terms before absolute values, and pay the cutoff-independent R568 inequality on a genuine Galerkin trajectory. The new R236 example DOES NOT test R568 or prove its divergence. Agda 2.9 kernel/CI not run.
+
+
+
 ## 23 November 2026 — original physical R236 helical source large-bite
 
 **Source-native initial-data no-go, not a free-cell vector test:** [Full derivation and owner receipts](ClayNonYMRHLargeBiteOriginalSourceReverseSolve20261123.md) and [source-specific exact script](../../scripts/check_ns_original_helical_full_fibre_20261123.py). Use actual R231 complex helical P+u(p)×P-u(q), Fourier reality/divergence-free support, original cutoff=16/output=(16,0,0) and ALL 18,513 fixed-output physical incidences including zero-work spectators. Exact source rates sum 9,972,336; R236 deep-FL=36, core=18,477, deep-HH=0. Selected nonzero (1,15),(8,8),(15,1) cells have physical original rates (226,128,226), and the strict Round25 j+3<j' classifier assigns FL/core/FL.
