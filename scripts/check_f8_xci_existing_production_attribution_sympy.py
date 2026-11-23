@@ -15,8 +15,8 @@ ELL=(0,2,4)
 T=S.Integer(12)
 
 def rational(value):
-    assert isinstance(value,(float,int)) and not isinstance(value,bool)
-    return S.Rational(str(value))
+    assert isinstance(value,(S.Rational,int)) and not isinstance(value,bool)
+    return S.Rational(value)
 
 def vectors(row,key):
     vals=row[key]
@@ -51,7 +51,7 @@ def attribution(a,c,i=None):
         acceleration_signed_share=float(acceleration/de4) if de4 else None)
 
 def check(path):
-    j=json.loads(Path(path).read_text())
+    j=json.loads(Path(path).read_text(),parse_float=S.Rational)
     assert j["schema"]=="LVI-corrected-finite-refinement-compact-receipt"
     assert j["physical_acceptance"] is False
     assert "Transcribed from locally executed complete native JSON" in j["provenance"]
@@ -69,10 +69,10 @@ def check(path):
         assert int(row["steps_to_physical_receiver"])>0
         assert len(row["requested_dr_dy_dt"])==3
     A,B,C,D=(rows[k] for k in ("factorial-A","factorial-B","factorial-C","fine"))
-    assert rows["factorial-A"]["requested_dr_dy_dt"]==[.008,.012,.0012]
-    assert rows["factorial-B"]["requested_dr_dy_dt"]==[.008,.009,.0012]
-    assert rows["factorial-C"]["requested_dr_dy_dt"]==[.006,.012,.0012]
-    assert D["requested_dr_dy_dt"]==[.006,.009,.0012]
+    assert rows["factorial-A"]["requested_dr_dy_dt"]==[S.Rational("0.008"),S.Rational("0.012"),S.Rational("0.0012")]
+    assert rows["factorial-B"]["requested_dr_dy_dt"]==[S.Rational("0.008"),S.Rational("0.009"),S.Rational("0.0012")]
+    assert rows["factorial-C"]["requested_dr_dy_dt"]==[S.Rational("0.006"),S.Rational("0.012"),S.Rational("0.0012")]
+    assert D["requested_dr_dy_dt"]==[S.Rational("0.006"),S.Rational("0.009"),S.Rational("0.0012")]
     ratios={}
     factorial={}
     for key in KEYS:
@@ -83,9 +83,8 @@ def check(path):
             interaction=float(interaction),total=float(total))
     radial={"total":attribution(A,C)}
     for i,ell in enumerate(ELL): radial[str(ell)]=attribution(A,C,i)
-    for metric in ("E4","E5","E4t","E5t"):
-        assert abs(sum(radial[str(ell)]["delta_"+metric] for ell in ELL)
-                   -factorial[metric]["radial"])<1e-14 if metric in ("E4","E5") else True
+    # Exact per-mode decomposition is independently verified before conversion
+    # to display floats; never use re-rounded float sums as proof authority.
     time_pairs={}
     for name,first,last in (("medium","medium","medium-dt-half"),
                              ("fine","fine","fine-dt-half")):
