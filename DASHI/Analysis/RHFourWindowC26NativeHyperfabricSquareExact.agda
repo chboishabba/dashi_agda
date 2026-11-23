@@ -346,26 +346,26 @@ indexedMove = RH.mapIndexedPayload moveRaw
 
 indexedPreservesMetadata :
   ∀ {Index Sign Residual Mode Observation : Set}
-  (record : RH.IndexedSource Index Sign Residual Mode Observation Raw) →
-  RH.index (indexedMove record) ≡ RH.index record
+  (entry : RH.IndexedSource Index Sign Residual Mode Observation Raw) →
+  RH.index (indexedMove entry) ≡ RH.index entry
 indexedPreservesMetadata (RH.indexedSource k s r m o x) = refl
 
 indexedPreservesSign :
   ∀ {Index Sign Residual Mode Observation : Set}
-  (record : RH.IndexedSource Index Sign Residual Mode Observation Raw) →
-  RH.sign (indexedMove record) ≡ RH.sign record
+  (entry : RH.IndexedSource Index Sign Residual Mode Observation Raw) →
+  RH.sign (indexedMove entry) ≡ RH.sign entry
 indexedPreservesSign (RH.indexedSource k s r m o x) = refl
 
 indexedPreservesResidual :
   ∀ {Index Sign Residual Mode Observation : Set}
-  (record : RH.IndexedSource Index Sign Residual Mode Observation Raw) →
-  RH.residual (indexedMove record) ≡ RH.residual record
+  (entry : RH.IndexedSource Index Sign Residual Mode Observation Raw) →
+  RH.residual (indexedMove entry) ≡ RH.residual entry
 indexedPreservesResidual (RH.indexedSource k s r m o x) = refl
 
 indexedPreservesObservation :
   ∀ {Index Sign Residual Mode Observation : Set}
-  (record : RH.IndexedSource Index Sign Residual Mode Observation Raw) →
-  RH.observation (indexedMove record) ≡ RH.observation record
+  (entry : RH.IndexedSource Index Sign Residual Mode Observation Raw) →
+  RH.observation (indexedMove entry) ≡ RH.observation entry
 indexedPreservesObservation (RH.indexedSource k s r m o x) = refl
 
 -- Source example uses nonzero (24,24) cancellation, NOT empty pi/3.
