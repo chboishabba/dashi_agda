@@ -80,7 +80,7 @@ The original completed high source is `1/2*(sum off-ordinate pair source - full 
 
     E_{I^-}+E_{I^+}+E_rest+S_W < 4*d_W(target).
 
-**Reverse-solved P0:** `E_rest < 4*d_W(target)-S_W-E_{I^-}-E_{I^+}`, with no dropped or double-counted original contributions. The annulus proof furnishes neither the sign nor the necessary bound of `E_rest`; `E_rest` includes the full unknown signed correlation and Gamma compensation. A negative raw zero sector or a positive original off-line target defect alone does NOT settle this terminal.
+**Reverse-solved P0:** `E_rest < 4*d_W(target)-S_W-E_{I^-}-E_{I^+}`, with no dropped or double-counted original contributions. The annulus bounds alone do not supply a *separate signed upper estimate* for `E_rest`. The original Lean whole-source cluster identity ALREADY FIXES its exact total as `2*D_W(t)-E_{I^-}-E_{I^+}` (section G). This exact balance is NOT an independent upper bound: under a hypothetical off-axis target it yields precisely the **opposite** of the strict inequality sought in P0. A negative raw zero sector or a positive target defect alone cannot settle the terminal.
 
 ## C. New ORIGINAL selected-W off-axis horizontal positivity, with an alpha-squared margin
 
@@ -145,3 +145,36 @@ The conservative bounds use `T_W>567/1600`, `|E6|<225000*|q|^6`, and `int_I|mu|`
 The next required mathematical theorem (not new source geometry) is an independent same-selected-W bound on `E_rest` strong enough to defeat `S_W+E_{I^-}+E_{I^+}` at EVERY hypothetical high off-critical target, with actual zero multiplicities, complete horizontal phase, full exact mu, and all q/negative ordinate/far sectors. Equivalently directly prove `H_W+S_W<4d_W(rho)+I_W` or existing R2-S0 finite signed `H_n+E_n+S_W<T_W(rho)` / R2-S1 sharpened compensation. The boundary is exact; all-local sign, RvM, Gamma-only, finite-height count, atom/dyadic reindexing and existential test choice alone do not pay it. Maintain separate external original all-character Lean 4.33.1 kernel-axiom/root import and Agda H_X→sampleTest same-object admission.
 
 **Attribution:** Riemann–von Mangoldt original zero-count theorem, existing Zeta23 mu/zeros, Platt–Trudgian finite RH verification (only its published range), existing Lean signed quartic W and paired source/terminal owners, new P0 two-annulus zero occupancy and same-selected-W alpha-squared horizontal bound, and locally executed non-promotion tests. **RH and GRH OPEN**. No Lean/Agda kernel or GitHub CI was run.
+
+
+## G. Decisive ORIGINAL full-source audit — the global complement is EXACTLY known, not free
+
+This is crucial to preventing circular promotion of the new annular signs. The merged original Lean `main` already has the three precise theorem owners:
+
+1. `Synthesis/RiemannProjectiveQuarticFourWindowSignedPoleCutset.lean`: `combinedCluster_eq_offGamma` identifies the **same-original source** external off-ordinate plus Gamma channels with `W.combinedCluster`; `combinedCluster_eq_tsum` identifies `W.combinedCluster = ∑'_{σ:SameOrd t} W.combinedZeroHeightDefect σ`.
+2. `Synthesis/RiemannProjectiveQuarticFourWindowSignedPoleFourthOrderQuotient.lean`: `completedSignedResidual_eq_jointPairSource` is `completedSignedResidual = (H_W-I_W)/2`, with full literal `H_W=∑'_{σ∉SameOrd t}m_σK_W(α_σ,q_σ)/r²` and `I_W=∫ signedOrdinateTest(τ)*Zeta23.mu(τ)dτ`.
+3. The definition of the same `completedSignedResidual` is the external offOrd+Gamma combination owned by the original N-mu/Abel interfaces; source `literalPole_cancel` cancels the pole determinant. `Synthesis/RiemannProjectiveQuarticFourWindowHighWitness.lean` already owns `quarticFourPhysicalDetector_short_of_twoHundred`, the short `|u|<16(π+1)/t<log 2` support theorem for `t≥200`, hence original prime invisibility. No NEW prime-side sign is gained from rechecking this old support.
+
+Consequently, for every original selected witness at `t≥200` the **exact full signed spectral balance** is
+
+    D_W(t) := ∑'_{σ:SameOrd t} W.combinedZeroHeightDefect σ,
+
+    H_W - I_W = 2*D_W(t).
+
+**The factor is EXACTLY 2, not 4.** From the exact disjoint split of the real source with both left/right annuli and the complementary original off-ordinate zero/gamma measures,
+
+    E_{I^-} + E_{I^+} + E_rest = H_W-I_W = 2*D_W(t),
+
+    *** E_rest = 2*D_W(t) - E_{I^-} - E_{I^+} . ***
+
+This is **not** a missing new estimate: it is an equality inherited from original *Lean theorem-bearing source*. At a height t that is NOT an ordinate of a nontrivial zero, `D_W(t)=0` and `E_rest=−E_{I^-}−E_{I^+}`. Thus the t=1000002 **empirical conditional** positive bilateral annular source must have an offsetting negative complement—regardless of the hidden selected-W radius or choice. The numerical `zeta(1/2+i*1000002)` value is nonzero, but this is not an interval-certified exclusion of an exact zero at that height.
+
+For a hypothetical same-ordinate off-critical target, the original `two_target_le_combinedCluster` (functional equation reflection and nonnegative cluster) gives `D_W(t)≥2*d_W(target)`, while the fully post-sixth source proves `S_W≥0`. Hence
+
+    H_W-I_W+S_W-4*d_W(target)
+      = 2*(D_W(t)-2*d_W(target)) + S_W
+      >= 0.
+
+This is the old strict RH terminal obstruction in **literal actual zero-source coordinates**: it is exactly the opposite of the P0 goal `H_W-I_W+S_W-4*d_W(target)<0`. It DOES NOT prove RH or establish an independent contradiction: the positive expression follows from assuming the hypothetical off-line zero, and the unproved step is an **independent strict upper estimate** excluding it. Reusing this same source identity, a zero-count estimate, a prime-invisibility restatement or local angular sign data cannot manufacture that extra inequality. P0 R2-S0/R2-S1 still requires a genuinely new zeta-specific signed correlation/prime-analytic inequality (or a separately accepted original independent proof), keeping all other zero ordinates, multiplicities, Gamma density and full local slack.
+
+This correction supersedes any earlier wording calling `E_rest` an unconstrained *value*. It is exactly determined **algebraically** by `D_W`, but the needed **independent analytic upper bound** on the complementary weighted zero source is not proved. The existing R2 roadmap and the controlling RH/GRH roadmap must preserve this distinction.
