@@ -9969,3 +9969,10 @@ now has 87 explicit entries; Agda Bishop/Machin, Interop, analytic, foundation,
 and source-cutset module surfaces were renamed and 0 stale registry references
 remain. Lean mirrors are intentionally not changed in this batch. Full
 typechecking remains out of scope; structural validation passed.
+# Semantic naming batch 1b — Lean Bishop/Machin mirror (2026-11-23)
+
+Added language-aware registry support and migrated the corresponding Lean
+Integration modules and consumers. The combined Agda/Lean registry now has 100
+explicit entries and reports zero stale references across both repositories.
+Lean `.dashi`/GWB artifacts remain untracked and untouched; no Lean build was
+run.

@@ -5609,3 +5609,9 @@ semantic registry. Renamed active Agda module and declaration surfaces across
 Moonshine, Interop, Analysis, Foundations, Geometry, and the Bishop source
 cutset consumers. The registry checker reports zero stale references. Lean
 mirrors remain for the next language-aware batch; no full typecheck was run.
+# 2026-11-23 — Lean Bishop/Machin mirror naming batch
+
+Extended `semantic_round_rename.py` so module moves run in the owning Agda or
+Lean worktree, then migrated the Bishop/Machin Integration mirror in
+`dashi_lean4`. The combined registry check reports zero stale references. The
+tool now excludes imported Lean staging trees from active scans.

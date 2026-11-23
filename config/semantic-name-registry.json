@@ -209,6 +209,110 @@
       "historical_rounds": [11],
       "owner": "bishop/machin-source",
       "status": "batch-1"
+    },
+    {
+      "repo": "lean",
+      "from": "Integration.AxiomAuditMoonshineRound11RouteB",
+      "to": "Integration.AxiomAuditMoonshineRouteB",
+      "historical_rounds": [11],
+      "owner": "moonshine/bishop-machin",
+      "status": "batch-1"
+    },
+    {
+      "repo": "lean",
+      "from": "Integration.BishopNegativeLogNativeRound11Semantics",
+      "to": "Integration.BishopNegativeLogNativeSemantics",
+      "historical_rounds": [11],
+      "owner": "moonshine/bishop-machin",
+      "status": "batch-1"
+    },
+    {
+      "repo": "lean",
+      "from": "Integration.BishopRound11ImaginaryProductSemanticReflection",
+      "to": "Integration.BishopImaginaryProductSemanticReflection",
+      "historical_rounds": [11],
+      "owner": "moonshine/bishop-machin",
+      "status": "batch-1"
+    },
+    {
+      "repo": "lean",
+      "from": "Integration.BishopRound11MachinBindingManifest",
+      "to": "Integration.BishopMachinBindingManifest",
+      "historical_rounds": [11],
+      "owner": "moonshine/bishop-machin",
+      "status": "batch-1"
+    },
+    {
+      "repo": "lean",
+      "from": "Integration.BishopRound11MachinCanonicalBinding",
+      "to": "Integration.BishopMachinCanonicalBinding",
+      "historical_rounds": [11],
+      "owner": "moonshine/bishop-machin",
+      "status": "batch-1"
+    },
+    {
+      "repo": "lean",
+      "from": "Integration.BishopRound11MachinConcreteBinding",
+      "to": "Integration.BishopMachinConcreteBinding",
+      "historical_rounds": [11],
+      "owner": "moonshine/bishop-machin",
+      "status": "batch-1"
+    },
+    {
+      "repo": "lean",
+      "from": "Integration.BishopRound11MachinRecognition",
+      "to": "Integration.BishopMachinRecognition",
+      "historical_rounds": [11],
+      "owner": "moonshine/bishop-machin",
+      "status": "batch-1"
+    },
+    {
+      "repo": "lean",
+      "from": "Integration.BishopRound11MachinReplayIrrelevance",
+      "to": "Integration.BishopMachinReplayIrrelevance",
+      "historical_rounds": [11],
+      "owner": "moonshine/bishop-machin",
+      "status": "batch-1"
+    },
+    {
+      "repo": "lean",
+      "from": "Integration.BishopRound11MachinReplayProbe",
+      "to": "Integration.BishopMachinReplayProbe",
+      "historical_rounds": [11],
+      "owner": "moonshine/bishop-machin",
+      "status": "batch-1"
+    },
+    {
+      "repo": "lean",
+      "from": "Integration.BishopRound11MachinSourceBinding",
+      "to": "Integration.BishopMachinSourceBinding",
+      "historical_rounds": [11],
+      "owner": "moonshine/bishop-machin",
+      "status": "batch-1"
+    },
+    {
+      "repo": "lean",
+      "from": "Integration.BishopRound11OriginalArctanCayleyExact",
+      "to": "Integration.BishopOriginalArctanCayleyExact",
+      "historical_rounds": [11],
+      "owner": "moonshine/bishop-machin",
+      "status": "batch-1"
+    },
+    {
+      "repo": "lean",
+      "from": "Integration.MoonshineEisensteinRound11CanonicalRouteB",
+      "to": "Integration.MoonshineEisensteinCanonicalRouteB",
+      "historical_rounds": [11],
+      "owner": "moonshine/bishop-machin",
+      "status": "batch-1"
+    },
+    {
+      "repo": "lean",
+      "from": "Integration.MoonshineEisensteinRound11RouteB",
+      "to": "Integration.MoonshineEisensteinRouteB",
+      "historical_rounds": [11],
+      "owner": "moonshine/bishop-machin",
+      "status": "batch-1"
     }
   ],
   "symbol_renames": [
