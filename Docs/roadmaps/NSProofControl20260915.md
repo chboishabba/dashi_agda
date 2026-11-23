@@ -1,5 +1,13 @@
 # 2026-10-25 PARETO OWNER DELIVERABLE: BISHOP A1 INVERSE AND PHYSICAL W1 CONDITIONAL BOUND
 
+## 23 November 2026 — R568 analytic carrier is not R236 padded covariance
+
+**Source-owner/codomain correction; primary [NS+Karp complete maximum-cut](ClayNSR568KarpE1PhysicalSourceCompletionMaxCut20261123.md).** The existing \`NSTriadKNFixedOutputCoherentCovariancePairDifferenceExact.centeredPairCovarianceAppendZero\` pays the exact instantaneous R236 zero-work padding cocycle, and the all-rational projected helical fixture proves \`S_C=R_CW_C-N_CV_C\` can have either sign and scale as \`32 nu ||M||² C^5\` for fixed input. However, DO NOT assume this R236 \`S_C\` is the live R568 forcing square or a term that must be canceled there: \`NSTriadKNLiveCommutatorOnlyLeafABoundaryRound568Exact\` defines the actual cutoff/time/output-indexed **\`4*integratedGlobalForcingFull\`** on a physical R240/R405 trajectory, globally summing \`R543.fullSquareSum(R567.forcingPair)\`. The R541 literal resolvent depends on **two** source cells' rates and R573 nested sign factors. No unconditional same-object R236→R568 identity was found in the inspected source; do not invent one.
+
+**Already closed source-writing:** \`NSTriadKNSpectatorResolventNestedForcingSquareBidiExact\` and \`NSTriadKNLiveSpectatorResolventNestedLeafABidiExact\` prove pointwise/summed/integrated equality of the existing **R568** forcing full square and the R541/R573 nested representation under the actual trajectory/integration premises. \`nestedBudgetBuildsR568\` is an exact consumer of a **supplied** cutoff-independent nested spacetime bound, not an analytic estimate that constructs it. The still-required P0 is the direct same-original live **signed** inequality for all cutoffs/times, not more padding identities, isolated finite-time examples or an output-only norm bound. Preserve alpha/beta/output/time and zero-mode indices and do not insert absolute values before the signed beta aggregation. R568 and global 3D Navier–Stokes remain OPEN. No kernel/CI receipt.
+
+
+
 ## 23 November 2026 — rational source P0 and arbitrary-output fifth-degree padding obstruction
 
 [**Primary all-rational source geometry and exact theorem**](ClayLargeBitePhysicalNSLeraySpectatorBidiKarpRealGuard20261123.md), [**executed exact SymPy regression**](../../scripts/check_ns_rational_r236_cutoff_general_20261123.py), Git blob `892b4e5ab5c3542768038f8c6bbccc5fa8d83def` (matches locally executed file). This supersedes the earlier sqrt(2)/sqrt(226) construction as the preferred physical input realization and is completely different from the original Leray-null axial negative control.

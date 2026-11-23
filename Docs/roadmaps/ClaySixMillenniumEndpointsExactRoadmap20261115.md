@@ -1,5 +1,13 @@
 
 
+## 23 November 2026 — N21 local-head maximum-cut and R568 source-type correction
+
+[Authoritative source-first maximum-cut and trust firewall](ClayNSR568KarpE1PhysicalSourceCompletionMaxCut20261123.md) supersedes an earlier overstrong R236→R568 cancellation instruction: instantaneous \`S_C=R_CW_C-N_CV_C\` is *not definitionally* the live R568 cutoff-independent \`4∫globalForcingFull\`; the original nested R541/R573→R547→R568 source integration weld is already source-written, but the actual signed spacetime inequality is still **OPEN**. The rational Leray-transverse R236 cutoff witness remains genuine and has no bearing by itself on R568 numerical divergence or global NS regularity.
+
+Karp original whole gamma-word/chronological-history/signed two-lane/positive-threshold local-head **9,642-case** differential reference PASS, 894 accepts; source graph and 2m-bit witness recovered BIDI. [Script](../../scripts/check_karp21_physical_multitape_trace_20261123.py), byte-identical executed Git blob a12e2428ce41c6643a5040409293f32a5e802cc8. Literal **all-length gamma finite table already in original Agda source**, so no duplicate; the new three-tape interpreter still uses Python controller/host pointers and does NOT close F1/F2/F3/F4/G2–G4 or P vs NP. BSD original E32 selected classical cases and Hodge classical special families unchanged; RH and YM untouched. All actual Millennium endpoints still **0/6**; Agda/Lean kernel and GitHub CI not run.
+
+
+
 ## 23 November 2026 — all-rational NS source and arbitrary-output fifth-degree geometry
 
 **New [source-grounded large P0 geometric theorem](ClayLargeBitePhysicalNSLeraySpectatorBidiKarpRealGuard20261123.md):** selected output k=(83,64,0) with FOUR genuine rational Pythagorean helical input pairs, one physically active strict deep-FL, no square-root-inaccessible mode scalars, Fourier reality, and `P_kM=M=e_z`. Same field across cutoffs C=83/100, physical `V=154122/5`, exact original complete covariance `S83=-33634973008/5`, `S100=+73504991408/5`. General 3-axis lattice count `N=Π(2C−|k_j|+1)`, mean mass `R/N=ν[|k|²/2+Σ((2C−|k_j|+1)²−1)/6]`, hence for fixed finite Fourier velocity `S_C=32ν||M||² C^5+O(C^4)`. Exact Git-byte-identical locally executed [regression](../../scripts/check_ns_rational_r236_cutoff_general_20261123.py) 1,224 independent small geometric cutoffs plus symbolic all-output leading coefficient. **The old axial M||k fixture was Leray-null and does not pay projected output; the irrational C16 source also remains merely a diagnostic.** Existing `centeredPairCovarianceAppendZero` already proves the general padding cocycle; don't duplicate it. Critical R541/R542/R573/R547/R568 signed original spacetime cutoff budget still OPEN, 0/6 Clay endpoints.

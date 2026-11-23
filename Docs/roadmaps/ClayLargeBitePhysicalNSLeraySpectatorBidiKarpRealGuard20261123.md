@@ -1,5 +1,13 @@
 # Clay non-RH/YM — large source-to-endpoint maximum-cut: transverse R236 / spectator BIDI and original N21 machine guard
 
+## 2026-11-23 latest P0 — R568/R236 domain separation and full N21 local-head replay
+
+The [latest source-type and physical compiler maximum-cut](ClayNSR568KarpE1PhysicalSourceCompletionMaxCut20261123.md) corrects an implication in this earlier roadmap. Although **R236 raw** \`S_C=R_CW-N_CV\` is cutoff-dependent and the old owner proves the padding cocycle, **R568 actual** is \`4*integratedGlobalForcingFull\`: signed full R567 forcingPair square across original k, alpha/beta and time on R240/R405 literal trajectories. Its R541 pair-resolvent and R573 four-sign nested data are not equivalent to raw R236 by definition. Never assert that R236 padding must be canceled INSIDE R568 without a proved same-object producer. The still-open theorem is the cutoff-independent signed **nested R568 spacetime upper bound**, and existing BIDI already compiles such a supplied bound back to R568.
+
+Karp E1 stronger existing Agda owner audit finds the full arbitrary-length gamma **literal finite table already constructed** in \`Karp21NativeGammaAllLengthCompositePhysicalExact\`, not just the prefix. New original graph-word→signed history/ledger/threshold instrumented three-tape reference runs **9,642** original differential cases, exact input-token and chronological witness BIDI, primitive local tape-head movement and persistent work-cell tally; script \`check_karp21_physical_multitape_trace_20261123.py\` blob \`a12e2428ce41c6643a5040409293f32a5e802cc8\`. Python host controller, variable-length indices and access addresses are **not compiled** into a finite Agda TableProgram, so don't claim E1 F1/F2/F3/F4 closed. Correct original guards and no n-wide allocation retained. No CI/kernel or Clay promotion.
+
+
+
 ## 2026-11-23 P0 upgrade — all-rational helical witness and arbitrary-output cutoff geometry
 
 **This section supersedes the algebraic-square-root example below as the preferred source constructor.** It is a genuine **RATIONAL** Euclidean helical fixture (the selected input norms are integers), directly compatible with the numerical scalar type of the original rational Agda mode operators on the selected modes. No original Agda inhabitant or kernel proof is claimed. [Exactly locally executed script](../../scripts/check_ns_rational_r236_cutoff_general_20261123.py), identical committed Git blob `892b4e5ab5c3542768038f8c6bbccc5fa8d83def`.
