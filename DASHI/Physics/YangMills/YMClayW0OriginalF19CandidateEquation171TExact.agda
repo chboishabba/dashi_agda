@@ -126,16 +126,82 @@ module _
     Original.originalFineCoefficientEqualsF19
       theory traceData exponential beta source bilateral linear integrand
 
-  -- The true original physical F19 source has FOUR distinct marked
-  -- integrands, all through the same selected fixed-coarse T.
-  originalFourMomentCandidateTAtFixedCoarse :
-    (left right : FineTest) →
-    SlowField → ℝ
-  originalFourMomentCandidateTAtFixedCoarse left right =
+  -- Four explicit original source moment columns, one SAME finite
+  -- conditional Haar T, with both unique marks still inside that T.
+  sourceK0 : SlowField → ℝ
+  sourceK0 =
+    candidateF19Mass
+      (Original.originalFineWilsonWeight
+        theory traceData exponential beta source bilateral linear)
+
+  sourceKF : FineTest → SlowField → ℝ
+  sourceKF left =
+    candidateF19Mass
+      (Original.originalWilsonFineF
+        theory traceData exponential beta source bilateral linear left)
+
+  sourceKG : FineTest → SlowField → ℝ
+  sourceKG right =
+    candidateF19Mass
+      (Original.originalWilsonFineF
+        theory traceData exponential beta source bilateral linear right)
+
+  sourceKFG : FineTest → FineTest → SlowField → ℝ
+  sourceKFG left right =
     candidateF19Mass
       (Original.originalWilsonFineFG
         theory traceData exponential beta source bilateral linear
         left right)
 
-  -- Distinct name prevents accidental promotion:
-  -- originalFourMomentCandidateTAtFixedCoarse is K_FG, not K_F*K_G/K_0.
+  -- The same Haar reindex theorem proves each source column.
+  physicalFineZEqualsCoarseCandidateT :
+    Original.originalFineCoefficient
+      theory traceData exponential beta source bilateral linear
+      (Original.originalFineWilsonWeight
+        theory traceData exponential beta source bilateral linear)
+    ≡ Haar.productIntegral source sourceK0
+  physicalFineZEqualsCoarseCandidateT =
+    originalF19CandidateSourceTIsPhysicalFineIntegral
+      (Original.originalFineWilsonWeight
+        theory traceData exponential beta source bilateral linear)
+
+  physicalFineFEqualsCoarseCandidateT :
+    (left : FineTest) →
+    Original.originalFineCoefficient
+      theory traceData exponential beta source bilateral linear
+      (Original.originalWilsonFineF
+        theory traceData exponential beta source bilateral linear left)
+    ≡ Haar.productIntegral source (sourceKF left)
+  physicalFineFEqualsCoarseCandidateT left =
+    originalF19CandidateSourceTIsPhysicalFineIntegral
+      (Original.originalWilsonFineF
+        theory traceData exponential beta source bilateral linear left)
+
+  physicalFineGEqualsCoarseCandidateT :
+    (right : FineTest) →
+    Original.originalFineCoefficient
+      theory traceData exponential beta source bilateral linear
+      (Original.originalWilsonFineF
+        theory traceData exponential beta source bilateral linear right)
+    ≡ Haar.productIntegral source (sourceKG right)
+  physicalFineGEqualsCoarseCandidateT right =
+    originalF19CandidateSourceTIsPhysicalFineIntegral
+      (Original.originalWilsonFineF
+        theory traceData exponential beta source bilateral linear right)
+
+  physicalFineFGEqualsCoarseCandidateT :
+    (left right : FineTest) →
+    Original.originalFineCoefficient
+      theory traceData exponential beta source bilateral linear
+      (Original.originalWilsonFineFG
+        theory traceData exponential beta source bilateral linear
+        left right)
+    ≡ Haar.productIntegral source (sourceKFG left right)
+  physicalFineFGEqualsCoarseCandidateT left right =
+    originalF19CandidateSourceTIsPhysicalFineIntegral
+      (Original.originalWilsonFineFG
+        theory traceData exponential beta source bilateral linear
+        left right)
+
+  -- No sourceKF*sourceKG/sourceK0 shortcut: sourceKFG retains the
+  -- original fine-fibre mixed coefficient, including 896 spectators.
