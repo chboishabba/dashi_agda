@@ -27,6 +27,20 @@ The physical equality to seek is **an equality of integrated pushforward observa
 ]
 Here T_W is the existing fixed-density F19 64-pair/896-spectator conditional Haar functional. The additional equality to the CMP119/122 constrained, gauge-fixed Omega/Lambda/S history sum must be proved **on the same source** and with its own normalizers.
 
+## Critical recovered prior art: full original 64-link native ↔ F19 BIDI was ALREADY source-written
+
+Further import-graph readback from `DASHI/Unified/YMClayOriginalWilsonPhysicalRegression.agda` recovered pre-existing **stronger** source owners that must be cited before interpreting the new local inverse code:
+
+- `YMClayOriginalF19R445Native64HolonomySquareExact.originalNative64IsExplicitParity64`: pointwise all 64 original native link labels agree with the exact parity-selected two-link multiplication, **already source-written**;
+- `YMClayOriginalF19R445Native64HolonomySquareExact.originalF19AndNativeR445Actual64CommutingSquare` / `originalF19CoarseWilsonObservableEqualsNativeR445`: existing full native-64-vs-sorted-F19 same-original-canonical-link square, with a documented `originalF19Sorted64AreNativeParity64 = refl` source normalization requiring pinned kernel acceptance;
+- `YMClayOriginalR445NativeF19WeightedPhysicalSourceBIDIExact.originalNativeR445NumeratorIsOriginalF19` and `originalNativeR445NormalizedEqualsPhysicalF19Effective`: already source-written same-Wilson-density/same-partition normalized native R445→F19 pushed coarse-observable equality, with the above 64-index certificate/import trust pending;
+- `YMClayOriginalF19R445DecoderCommutingSquareExact`: both-way full canonical 1024-link field/128 selected pair/896 spectator bijection;
+- `YMClayOriginalWilsonF19FineTwoMarkMomentBIDIExact`: four arbitrary **fine** mark coefficients, not only coarse-blocked observables.
+
+**Therefore:** the newly appended W0 native pair inverse in `YMClayR445OriginalNativeParityPairWeldExact` supplements/clarifies the already-made full 64-link geometry, and the Q8 reference certifies its geometry in a finite group. It does NOT count as a new closure of the full native↔F19 source square, normalized weighted source or original 1024-link codec. The new work that was genuinely absent from those donors is **arbitrary transported-nonlinear-average Q(U) as a fine observable through the SAME original F19 physical density**, plus the exact Q=W^-1 relative holonomy correction, source-dependency and numerical nonidentity control. In particular the preexisting normalized theorem applies to functions F(W) of native coarse holonomies, whereas the CMP98 observable F(Q(U)) can depend on the conditional fibres and 896 spectators: it cannot be replaced by F(W).
+
+The new `YMClayW0OriginalF19CandidateEquation171TExact` is imported through `DASHI/Unified/YMClayOriginalWilsonPhysicalRegression.agda` into `DASHI/Unified/BalabanRGTOERegression.agda` for source-graph regression. These are **imports, not a pinned Agda compiler receipt**. Avoid duplicates and only add the missing Q_B source instantiation, CMP119 domain history and analytic physical source rates.
+
 ## Concrete new source-proof terms, not additional abstract records
 
 Reused the **existing** source-native Agda owners:
