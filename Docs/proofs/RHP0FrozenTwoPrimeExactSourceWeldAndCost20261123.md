@@ -111,3 +111,41 @@ The exact affine scaling of a height-one even bump gives `||∂^k h_δ||_1∝δ^
 **Acceptance gates, source-first:** **E0** attach a real `C∞` finite-codimension eight-invariant solution to the Lean carrier, and prove the *same* selected W target band with perturbation amplitude and robust small-R nondegeneracy. **E1** completed generic original Weil channel exists conditionally and literal 2/3 source is now reused; kernel-check proposed weld rather than rebuild the existing TwoScale theorem. **E2** independently certify the FULL enlarged-support absolute sixth/eighth/Schwartz/far-shell and post-sixth local costs, including near-resonance heights, not just M4 or an SVD. **E3** prove a **new independent** signed arithmetic–zero/Gamma bound strong enough for the ACTUAL extended same-object strict terminal, with no hidden RH-positive assumption. No R2-S0/S1 closure, no RHS strict inequality, and **RH/GRH OPEN**.
 
 **Attribution:** original Lean Zeta23 literal Weil source, TwoScale/ThreeTap source graph and RvM/zero/Gamma owners; elementary finite linear functionals versus point evaluations, unique factorization/irrational rotations, original four-window smooth robustness/pole localizations; DASHI exact frozen-online projection and source-specific local regression. Keep user-established original author/source reuse and JMD/DASHI distinctions.
+
+
+## 7. NEW E0 exact constructive solution — even monic 52nd-order source-annihilator (not a numerical rank assumption)
+
+The original eight source constraints are weighted integrals against the exact **physical** even weight family:
+
+    w1(u)=cos(r*u),       w2(u)=cos(2*r*u),
+    w3..w6(u)=u^k [A1*cos(2r*u)-A2*cos(r*u)], k=2,4,6,8,
+    w7..w8(u)=cosh(u/2)*cos(t*u)*cos(c*r*u), c=1,2.
+
+Here r=t/16 and A1,A2 are the **true original selected endpoint responses**. The original pole weights are read directly from `RiemannProjectiveQuarticFourWindowPoleSameObject.lean` and `quarticFourNormalizedPoleWeight`; no replacement source or assumed zero configuration is introduced.
+
+Define the following constant-coefficient differential operator, **for every fixed t and original W**:
+
+    D=d/du,
+    A_(t,r)(D) = (D²+r²)^9 * (D²+4r²)^9
+       * Π_{c=1,2} Π_{sigma∈{-1,+1}}
+           [((D−1/2)²+(t+sigma*c*r)²)
+            ((D+1/2)²+(t+sigma*c*r)²)].
+
+This has degree 2·9+2·9+4·4=52 and **leading coefficient one**. Each four-degree pole factor is
+
+    ((D−1/2)²+omega²)((D+1/2)²+omega²)
+       = (D²+omega²+1/4)²−D²,
+
+so the entire operator is EVEN in D: `A_(t,r)(-D)=A_(t,r)(D)`.
+
+- For k≤8, `(D²+omega²)^(k+1)` annihilates `u^k cos(omega u)`, since the multiplier has roots ±i omega of multiplicity at least k+1. Power 9 hence annihilates every w1–w6 for omega=r,2r, for any actual A1,A2.
+- `cosh(u/2)cos(tu)cos(c r u)` is the finite sum of exponential modes with `lambda=±1/2`, `omega=t±c r`. The four-pole factors annihilate each exactly, covering w7,w8 for both c=1,2.
+- Choose an **even**, compact C∞ bump b supported in a tiny symmetric neighborhood of ±log2 and disjoint from ±log3, ±log n(n≥4), and the original core. Define `h_2=A_(t,r)(D)b`. Differentiation preserves compact support; evenness of the operator preserves evenness of the input.
+- Integration by parts **52 times**, without boundary terms on the compact source, gives `∫ h_2(u)w_j(u)du=∫ b(u)A_(t,r)(-D)w_j(u)du=0` for EVERY one of the eight original constraints.
+- Prescribe the **jet** of the starting bump at L=log2 by `b^(j)(L)=0` for 0≤j<52 and `b^(52)(L)=1`. For example, take `b(u)=(u-L)^52 *chi(u-L)/(52!*chi(0))` locally with `chi(0)≠0`, and symmetrize in a disjoint negative neighborhood. Because A is monic, `h_2(log2)=1`; disjoint supports force `h_2(log3)=0`. Repeat with log3 to produce `h_3(log2)=0,h_3(log3)=1`.
+
+This is an explicit **mathematical C∞ construction** of the two independent eight-invariant prime-port basis functions, with NO generic rank hypothesis, NO t-dependent matrix inverse, and NO substitution of an atomic witness for the selected original W. It is stronger than the earlier abstract finite-codimension evaluation lemma. It applies separately to both original source endpoint detectors. The original `W` remains fixed and its same-object moment/pole fields unchanged exactly by adding arbitrary linear combinations of h2,h3.
+
+**Acceptance:** Independently executed exact SymPy `scripts/check_rh_p0_exact_differential_annihilator_20261123.py` passed the even/monic/degree52 factors, all Fourier-polynomial root annihilations, the ±1/2 exponential pole modes, 52-jet values and the formal-adjoint identity. **Exact locally executed Git blob d06af1995d8b4f0e579122a31036e78db74a893e read back identical from PR #1533.** The source-construction strategy is also attached as a marked **non-kernel note** to Lean PR #116.
+
+**Non-promotion:** This pays **E0 mathematical existence**, not **E0 Lean kernel inhabitation** or E2. The 52nd derivative raises severe source-specific smoothness costs: operator coefficients depend on t and r, the normalized v=r u support moves to O(t), and all sixth/eighth/Schwartz and full far-tail budgets must be redone. The current original `quarticSignedPoleExplicitK0` is NOT valid for this extension, and the old `combinedCluster_eq_offGamma` cannot be used after prime support opens. An order-8 variable-coefficient Wronskian adjoint, or a lower-norm finite projection, might be cheaper, but requires separate boundedness and possible Wronskian-zero controls; do not promote this possibility as proven. An independent strict signed RH bound remains E3.
