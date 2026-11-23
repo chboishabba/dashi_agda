@@ -66,3 +66,19 @@ print("PASS symmetric weighted wave lift: kappa0 double zero; kappa2 gap 2 INPUT
 print("PASS source discrete wave: opposite signed velocities, equal zero amplitudes, conserved energy")
 print("PASS signed wave futures persist after exact DC-mode subtraction")
 print("OPEN original SU(N) Wilson same-source OS/Hamiltonian physical identification")
+
+
+# Original transfer-to-Hamiltonian issue: H(a)=-(1/a) log T(a).
+# BOTH finite transfer gaps are strictly positive for integer n>=2,
+# but their physical Hamiltonian energy limits are different.
+n=sp.symbols('n',integer=True,positive=True)
+transfer_vanish=1/n**2
+transfer_survive=1/n
+mass_vanish=-n*sp.log(1-transfer_vanish)
+mass_survive=-n*sp.log(1-transfer_survive)
+assert sp.limit(mass_vanish,n,sp.oo)==0
+assert sp.limit(mass_survive,n,sp.oo)==1
+assert sp.simplify(mass_vanish.subs(n,2))>0
+assert sp.simplify(mass_survive.subs(n,2))>0
+print('PASS positive finite transfer gaps 1/n^2 and 1/n: continuum masses 0 vs 1')
+print('OPEN same original Wilson/OS transfer operator and physical scale-uniform bound')
