@@ -157,5 +157,16 @@
     "python scripts/j30_no_diode_return.py advance --input receipts/J30_U_HANDOFF.json --count 10 --out receipts/J30_10.json",
     "Continue advance in checkpointed chunks of <=10 steps until nsteps=78, reusing each generated --out as next --input.",
     "python scripts/j30_no_diode_return.py finish --input receipts/J30_78.json --out receipts/J30_TAU_RETURN.json"
-  ]
+  ],
+  "augmented_six_event_shooting": {
+    "status": "PASS_EXACT_RATIONAL_15X15_SCHUR_ALGEBRA_ONLY",
+    "script": "scripts/check_smith_filsinger_j30_six_guard_schur_20261123.py",
+    "locally_executed_and_repo_blob_matched": "e7726e5f65e9e0be1dc18787c85de24ea5594f0a",
+    "theorem_note": "Docs/research/SmithFilsingerJ30BSixGuardAugmentedShootingSchur20261123.md",
+    "block_identity": "det D(R,G) = product(six signed pre-event guard slopes) * det(M_tau - I_9)",
+    "physical_15D_interval_Jacobian_certified": false,
+    "numerical_periodic_fixed_point_certified": false,
+    "selected_J24_sixth_event_box_not_required_if_direct_15D_guard_validation_succeeds": true,
+    "next_true_proof": "7 independent source-owned mode slabs plus one outward 15D Krawczyk inclusion"
+  }
 }
