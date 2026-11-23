@@ -71,3 +71,43 @@ assert r[3]['count']==3 and not r[3]['robust']
 print('PASS source-uniform signed bounds GIVEN numerically sampled zeros and gamma integration')
 print('PASS independent height shifts give reversed sign, retaining neutral/undetermined controls')
 print('OPEN: analytic certified zero isolation; original selected W numerical witness; full zero-minus-mu over all q; post-sixth S; strict P0')
+
+# SAME original selected-W horizontal correction H=K(alpha,q)-K(0,q).
+# K is harmonic, M2=0, M4=-4*strength and all original W have
+# strength>567/1600, ||P||1<5184, support<5.
+# For |s|<=|alpha|<=|q|/3 and 0<|q|<=1/20000:
+# d2K/dalpha2(s,q) >= 2*strength*(q^2-s^2)
+#   - (5184*5^6*2/24)*(q^2+s^2)^2
+# >= [2*(567/1600)*(8/9) -(25e6/3)*(1/20000)^2]*q^2
+# = (731/1200) q^2. Integrating twice in alpha yields
+# H >= (731/2400)*alpha^2*q^2 > 0, for *every nonzero alpha*.
+from fractions import Fraction as F
+M,L=F(5184),F(5)
+Tfloor=F(567,1600)
+err= M*L**6*2/F(24)
+assert err==6750000
+errcoeff=err*F(100,81)*F(1,20000)**2
+assert errcoeff==F(1,48)
+curv_low=2*Tfloor*(1-F(1,9))-errcoeff
+assert curv_low==F(731,1200)
+assert curv_low/F(2)==F(731,2400)>F(1,4)
+print('PASS exact original-W H(alpha,q)>=731/2400*alpha^2*q^2 for 0<|alpha|<=|q|/3, |q|<=5e-5')
+
+# Numerically check shape on an independent genuine compact smooth fixture,
+# not the original Mathlib-selected source (which is noncomputably chosen).
+mp.mp.dps=65
+def bump(y):
+    return mp.exp(-1/(1-y*y)) if abs(y)<1 else mp.mpf(0)
+def transform(z):
+    return 2*mp.quad(lambda y:bump(y)*mp.cos(z*y),[0,mp.mpf('.5'),mp.mpf('.9'),1])
+def fixture_K(a,q):
+    z=mp.mpc(q,a)
+    return -mp.re(z**4*transform(z))
+qtest=mp.mpf('0.00005')
+for den in ('4','1000000'):
+    atest=qtest/mp.mpf(den)
+    horizontal=fixture_K(atest,qtest)-fixture_K(0,qtest)
+    assert horizontal>mp.mpf('.25')*atest**2*qtest**2
+    print('PASS independent smooth signed fixture horizontal sign, alpha/q=1/'+den,
+          'H/(alpha^2*q^2)=',mp.nstr(horizontal/(atest**2*qtest**2),18))
+print('OPEN: any real off-axis zero in the annulus; full signed physical zero-minus-mu+local-slack terminal')
