@@ -1,5 +1,11 @@
 # Non-RH/YM P0 maximum-cut: authentic R568 analytic object and N21 local-head compiler boundary
 
+## 23 November 2026 — signed R568 true source rank/nullspace and corrected admissible checker
+
+[New source-grounded exact rate-Cauchy radical/remaining-lemma theorem](NSRateResolvedCauchyRadicalOriginalSource20261123.md). The original physical triad p,q,k ALL lie in cutoff C. Corrected independent source-admissible geometry execution **37/37** output fibres and **26,934** source incidences. d=p−q gives exact integer midpoint BIDI, m=|p|²+|q|²=(|k|²+|d|²)/2 with parity, 1D-factorized exact rate multiplicity polynomial; at most 3C²+1 possible rate classes. The physical pair-rate Cauchy matrix K has **exact rank R=#distinct rates** and **kernel dimension N−R**; orthogonal rational Pi onto rate-class averages is bilinear-invariant on any original source-typed D/M. Swap-odd cancellations are a strict subset of this radical; the full ordered p/q incidence sidecar is retained for source recovery. Example C=5,k=(5,0,0): N=726,R=42,N−R=684. This is an exact finite-classical theorem independently regression-checked on free vector proxy carriers; it is **NOT** evidence actual NS forcing obeys an unproved spacetime sign/size bound. Original R541/R567/R596/R624/R687–R689 already own the finite source algebra and R652/R653 the signed C1/C2 sandwich; do not duplicate or mislabel previously merged source. Remaining R568 physical C1 upper + R653 C2 lower, R565 scalar FTC and continuum 3D regularity OPEN. Karp sections unchanged.
+
+
+
 ## 23 November 2026 — source-owned C1/C2 R568 algebra and new rate-class BIDI
 
 [**R568 exact rate bucket and C1/C2 source audit**](NSR568RateResolvedSignedBucketBidiSourceMaxCut20261123.md); [new locally executed Git-blob-identical signed cubic checker](../../scripts/check_ns_r568_rate_bucket_bidi_exact_20261123.py) at a76e8847a61521a4c4cb88fcc861ebb4a92fb85f. Full R541/R567 forcing pair exact signed source-fibre scalarization by **separate** original D/M rate sums preserves the full Cauchy resolvent with reversible sidecar, for 64 rational test fixtures (max 648 incidences). Two allowed lattice rates 13 and 17 show opposite signs unlifted F=46/16575>0 and lifted L=−1/5<0; **these free rational D/M proxies are not a physical R240 Galerkin realization**. Positive Cauchy kernel does not supply a mixed-bilinear sign transfer.
