@@ -107,7 +107,7 @@ record LiteralTwoWilsonQuarterDyadicFamily
       RationalImageOrderReflection ringEmbedding
 
     downstream :
-      Downstream.WilsonWEXTDownstreamSemantics dataSet
+      Downstream.WilsonWEXTDownstreamSemantics dataSet physicalDistance
 
 open LiteralTwoWilsonQuarterDyadicFamily public
 
@@ -236,7 +236,6 @@ asR556 family = record
   ; R556.IndexedSourceFirstWilsonCovarianceData.supportDistanceIsEuclideanTime =
       Downstream.supportDistanceIsEuclideanTime
         (downstream family)
-        (physicalDistance family)
   ; R556.IndexedSourceFirstWilsonCovarianceData.upperOrderClosed =
       Downstream.upperOrderClosed (downstream family)
   }

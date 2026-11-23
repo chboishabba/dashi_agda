@@ -1712,3 +1712,10 @@ import DASHI.Physics.YangMills.YMClayOriginalRationalS3HyperoctahedralGenerators
 
 -- All-degree odd coordinate monomial cancellation on genuine 16 signed rational S3 orbit multiset.
 import DASHI.Physics.YangMills.YMClayRationalS3OddSignOrbitCancellationExact as RationalS3OddOrbit
+
+-- YM P0 W0 ORIGINAL SOURCE import graph (2026-11-23):
+-- Native R445 ↔ F19 physical pair/spectator recovery and arbitrary
+-- CMP98-style nonlinear averaging observables on original Wilson Haar.
+-- The actual CMP98 Eq.(15) averaging and CMP119/122 Omega/Lambda/S
+-- localized constrained T still require source physical realization.
+import DASHI.Unified.YMClayOriginalWilsonPhysicalRegression as OriginalWilsonCMP98R445F19W0
