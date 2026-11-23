@@ -990,3 +990,59 @@ winding/primitive necklace, projected GMP, contour or level-163 Masser,
 or COMP6 Monster/VOA operator-level, COMP7 FRACDASH reconstruction,
 COMP8 all-future-consumer non-descent. Robin Wall Kimmerer / Braiding
 Sweetgrass is methodological attribution, not a theorem source.
+
+
+## 23 November — COMP4 ordered multiplication-tree geometry
+
+Implemented scripts/check_pi_tree_geometry.py on #1529 commit
+b7f023a8a6e68b996736f123eced00d047660225,
+connector readback blob 22ae2bfdf14df1ce226cca3d8c11ebfefb48a2aa.
+Reuse original Chudnovsky integer P,Q,T split and exact COMP3a
+pre-multiplication cross GCD: (p,q,t)*(P,Q,T) with g=gcd(p,Q)
+computed as (p/g*P,q*(Q/g),t*(Q/g)+(p/g)*T).
+Compare ordered (noncommutative upper triangular transport) contiguous
+interval trees using midpoint, predicted q-bit-weight midpoint,
+quarter and three-quarter split. Preserve ORIGINAL series order;
+never permute leaves by valuation, since arbitrary reordering changes
+the noncommutative split and may change term semantics.
+Weight predictor cumulative sum log2(640320^3)+3log2(max(k,1)).
+This is heuristic, not rigorous bit-cost optimization.
+
+Independent local CPython harness /mnt/data/check_pi_tree_geometry.py
+with same algorithms: 612/612 exact subinterval P/Q and T/Q parity;
+12/12 identical certified decimal-floor strings at 1000,10000,50000
+digits, same 50000 SHA256
+c330a1682b2ecb5907a1e4819b49b9a920223b3318c4dab73243d0afe2cc2ac1.
+Three-run sequential medians (milliseconds; includes interval,
+scaled exact floor and decimal string; excludes statistics collection):
+| digits | midpoint | weighted | quarter | three-quarter |
+|---:|---:|---:|---:|---:|
+| 1000 | .634 | .647 | .673 | .615 |
+| 10000 | 27.024 | 27.657 | 28.315 | 30.370 |
+| 50000 | 541.004 | 564.890 | 553.486 | 537.535 |
+
+All 50000-digit final sum of P/Q/T bit lengths = 451549 (same exact
+cross-cancel output at full interval), not peak process RSS.
+The initial three-quarter marginal lead is not robust:
+subsequent 7-run pseudorandomized interleaved order control at
+50000 digits (same exact consumer and source algorithm) medians:
+midpoint 544.361 ms, weighted 545.867 ms, quarter 564.761 ms,
+three-quarter 548.431 ms. Order control samples included all
+floor and string work. Baseline midpoint leads by only 1.506 ms
+over weighted and 4.070 ms over three-quarter; no statistically
+established speedup or production promotion.
+Tree max intermediate operand bits at 50000:
+midpoint 112172, weighted 108684, quarter 162012,
+three-quarter 154925; tree max depths 11,13,27,24 respectively.
+Proxy bit-products are only illustrative, not actual GMP mul cost
+or work bounds. Distinct product tree shapes cannot be treated as
+independent Monster/VOA/CM equivalence proofs; same rational
+consumer does not reconstruct original operator histories.
+COMP4 finite arithmetic parity PASS, measured improvement OPEN/negative.
+Keep midpoint COMP3a as baseline. Next test thresholded hybrid trees
+only with repeated order-controlled medians, native GMP memory/RSS,
+and genuine external pi software at matched certified output.
+COMP5 fast pi SOTA, CM winding / necklaces / 163 Masser and COMP6-8
+Monster-VOA / FRACDASH / observer-fibre remain OPEN.
+No Agda or CI. Kimmerer Sweetgrass relation is cultural/methodological
+attribution, not theorem authority.
