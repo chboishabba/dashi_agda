@@ -1963,3 +1963,56 @@ No cultural-metaphor-to-mathematical-authority promotion:
 Robin Wall Kimmerer / Braiding Sweetgrass is methodological attribution.
 No Agda/Lean compiler or CI run; classical Chudnovsky identity is
 external and Bishop same-real transport remains OPEN.
+
+
+## 23 November — COMP3b selective valuations with residual GCD (local negative result)
+
+Starting live #1529 head 8c6dd40630689b0b12f08f9a2d21f6333b89b81c.
+Committed scripts/check_pi_selective_valuation.py at
+5c718494b8c1e67d4523b753393607d9e519d58e.
+Candidate carries exact selected-prime exponents of the Chudnovsky
+P,Q leaves for all primes <=B, B in {7,31,127}. At each interior
+merge, remove the intersection of P_left and Q_right selected
+valuations before materializing products, and then apply residual
+gcd(P_left,Q_right) to preserve FULL projective exactness.
+For primes outside B, no support is discarded. Exponents of P,Q
+are updated through multiplication and tracked cancellation.
+This is not a claim that the output triple is more compressed than
+the original cross-GCD-only representation.
+
+Local CPython fixture (from the same algorithm source, not a
+byte-identical replay of GitHub script): 448/448 exact subinterval
+triples and selected-valuation invariants PASS for four prime bounds
+2/7/31/127, 16 starting indices, lengths {0,1,2,3,4,8,16}.
+All 12 certified decimal outputs for modes {cross-GCD, select <=7,
+<=31, <=127} at digits {1000,10000,50000} agree exactly and
+retain prior 50000-digit SHA256:
+c330a1682b2ecb5907a1e4819b49b9a920223b3318c4dab73243d0afe2cc2ac1.
+Exact triple summed bit lengths remain 9030/90233/451549 at
+1000/10000/50000 digits. Three sequential medians (milliseconds,
+enclosure, floor certificate, string conversion; prime list
+construction excluded but small):
+
+| digits | GCD | selected <=7 | <=31 | <=127 |
+|---:|---:|---:|---:|---:|
+| 1000 | 0.663 | 1.109 | 1.290 | 1.501 |
+| 10000 | 27.055 | 30.984 | 33.650 | 37.833 |
+| 50000 | 554.043 | 574.189 | 607.291 | 620.726 |
+
+Selective <=7 is ~3.6% slower than existing cross-GCD at 50000;
+higher selected-prime bounds become slower. More than half the
+selected <=7 merge calls still need a nontrivial residual GCD at
+50000 (5325 of 10716 calls across three runs). 127 reduces
+residual-nontrivial cases to 450/10716, but adds greater overhead.
+No native GMP, memory/RSS, randomized order, external SOTA or Agda
+acceptance in this packet. COMP3b exact constructive route retains
+PASS, matched runtime improvement FAILED at tested scales.
+
+Research next: quantify per-prime cancellation benefit vs bookkeeping
+and fuse leaf/merge valuation operations in native code only if it can
+beat GMP gcd; prioritize COMP4 trees and COMP5 production pi output
+and independent established comparator. Do NOT close the CM wheel
+winding/primitive necklace, projected GMP, contour or level-163 Masser,
+or COMP6 Monster/VOA operator-level, COMP7 FRACDASH reconstruction,
+COMP8 all-future-consumer non-descent. Robin Wall Kimmerer / Braiding
+Sweetgrass is methodological attribution, not a theorem source.
