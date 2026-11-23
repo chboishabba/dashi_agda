@@ -141,7 +141,7 @@ int main(int argc,char**argv){
    <<" gmp_free_calls="<<GA.freeCalls<<" gmp_total_requested_bytes="<<GA.requestedBytes
    <<" gmp_reallocated_old_bytes="<<GA.reallocatedOldBytes
    <<" output_hash="<<result.hash
-   <<" measured_GMP_total_live_heap=false model_is_upper_bound=false"<<"\n";
+   <<" measured_GMP_total_live_heap=true model_is_upper_bound=false"<<"\n";
  cout<<"RUN "<<mode<<" "<<digits<<" "<<i<<" "<<fixed<<setprecision(4)<<result.ms<<" bits="<<result.bits<<" hash="<<result.hash<<"\n";}
  sort(runs.begin(),runs.end());struct rusage usage{};getrusage(RUSAGE_SELF,&usage);
  // ru_maxrss may inherit a Python parent's historical high-water mark on
