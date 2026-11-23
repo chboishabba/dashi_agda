@@ -427,3 +427,92 @@ module _
   -- recovering the ORIGINAL field. This is NOT a physical assertion
   -- that the scalar Gibbs density is a solution of a traveling-wave
   -- PDE or that the free Cartan transverse mode has an OS mass gap.
+
+  ----------------------------------------------------------------------
+  -- ROUND 2 STRONGER: ACTUAL SIX-PLANE WILSON ACTION, NOT ONLY GIBBS.
+  --
+  -- This is the full 1536-original-plaquette Wilson deficit on the
+  -- ORIGINAL source-native periodic SU(N) field at each time slice.
+  -- It is the correct second-variation consumer whose Cartan
+  -- linearization gives the L4/8/16 transverse Fourier reference.
+  -- (Only side FOUR is attached to F19; arbitrary L remains the
+  -- original variable-cutoff SU(N) donor, not a fake same L=4 proof.)
+  ----------------------------------------------------------------------
+
+  actualOriginalSixPlaneActionAtTime :
+    (Nat → OriginalVector) → Nat → ℝ
+  actualOriginalSixPlaneActionAtTime trajectory t =
+    OriginalWilson.periodicSUNSixDeficit theory traceData 3
+      (Codec.decodeOriginalBonds 4 (trajectory t))
+
+  indexedOriginalSixPlaneActionAtTime :
+    Nat → (Nat → OriginalVector) → Nat → ℝ
+  indexedOriginalSixPlaneActionAtTime k trajectory t =
+    OriginalWilson.periodicSUNSixDeficit theory traceData 3
+      (Codec.decodeOriginalBonds 4
+        (recoverCanonicalFromIndexed t k (trajectory t)))
+
+  indexedOriginalSixPlaneActionAtTimeIsSource :
+    ∀ k trajectory t →
+    indexedOriginalSixPlaneActionAtTime k trajectory t
+      ≡ actualOriginalSixPlaneActionAtTime trajectory t
+  indexedOriginalSixPlaneActionAtTimeIsSource k trajectory t =
+    originalIndexedSixPlaneWilsonDeficitIsOriginal
+      t k (trajectory t)
+
+  originalSixPlaneActionSecondTimeDifference :
+    (Nat → OriginalVector) → Nat → ℝ
+  originalSixPlaneActionSecondTimeDifference trajectory t =
+    (actualOriginalSixPlaneActionAtTime trajectory (suc (suc t))
+      -ℝ actualOriginalSixPlaneActionAtTime trajectory (suc t))
+    -ℝ
+    (actualOriginalSixPlaneActionAtTime trajectory (suc t)
+      -ℝ actualOriginalSixPlaneActionAtTime trajectory t)
+
+  indexedOriginalSixPlaneActionSecondTimeDifference :
+    Nat → (Nat → OriginalVector) → Nat → ℝ
+  indexedOriginalSixPlaneActionSecondTimeDifference k trajectory t =
+    (indexedOriginalSixPlaneActionAtTime
+       k trajectory (suc (suc t))
+      -ℝ indexedOriginalSixPlaneActionAtTime k trajectory (suc t))
+    -ℝ
+    (indexedOriginalSixPlaneActionAtTime k trajectory (suc t)
+      -ℝ indexedOriginalSixPlaneActionAtTime k trajectory t)
+
+  originalIndexedSixPlaneActionTimeSecondIsOriginal :
+    ∀ k trajectory t →
+    indexedOriginalSixPlaneActionSecondTimeDifference
+      k trajectory t
+    ≡ originalSixPlaneActionSecondTimeDifference trajectory t
+  originalIndexedSixPlaneActionTimeSecondIsOriginal
+    k trajectory t =
+    cong₂ _-ℝ_
+      (cong₂ _-ℝ_
+        (indexedOriginalSixPlaneActionAtTimeIsSource
+          k trajectory (suc (suc t)))
+        (indexedOriginalSixPlaneActionAtTimeIsSource
+          k trajectory (suc t)))
+      (cong₂ _-ℝ_
+        (indexedOriginalSixPlaneActionAtTimeIsSource
+          k trajectory (suc t))
+        (indexedOriginalSixPlaneActionAtTimeIsSource
+          k trajectory t))
+
+  originalWilsonActionTimeSecondCommutesWithSingerStage :
+    ∀ k trajectory t →
+    indexedOriginalSixPlaneActionSecondTimeDifference
+      (suc k) trajectory t
+    ≡ indexedOriginalSixPlaneActionSecondTimeDifference
+        k trajectory t
+  originalWilsonActionTimeSecondCommutesWithSingerStage
+    k trajectory t =
+    trans
+      (originalIndexedSixPlaneActionTimeSecondIsOriginal
+        (suc k) trajectory t)
+      (sym (originalIndexedSixPlaneActionTimeSecondIsOriginal
+        k trajectory t))
+
+  -- This proves exact source-native action/time/k naturality.
+  -- An original Wilson trajectory obeying the nonlinear gauge field
+  -- equations, a physical F19 Hessian or its continuum limit, and a
+  -- CMP119/OS positive physical gap are NOT inferred from it.
