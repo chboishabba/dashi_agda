@@ -1,3 +1,45 @@
+## 22 November 2026 — recovered independent M-RH draft, not a ninth numbered paper
+
+The previously missed existing DASHI RH manuscript is
+*A Pole–Quotient Reduction for the Riemann Hypothesis*
+(`Riemann_Pole_Quotient_Reduction_2026.tex` plus matching
+`Riemann_Pole_Quotient_Reduction_2026.pdf`),
+a **21 September 2026 working revision** held in the
+user's ChatGPT file Library. This is the independent
+**M-RH Millennium-Series** manuscript, NOT Paper 1–8,
+not a finished RH proof, and not presumed to exist under
+a GitHub `Docs/papers/` path just because the file
+was found in Library.
+
+Its original normalized-taper / low/high / Gamma
+pole–quotient reduction remains conditional on the
+true final near-representation identity and **uniform
+strict high-ordinate inequality**
+`D_near+B_far+D_Gamma<C_cluster`.
+The November original external Alpöge/Claude
+Lean proof uses a **different** all-character
+source chain: `UpperTheory.EveryCharacter`
+→ `rh_of_every` via the modulus-one
+`DirichletCharacter.LFunction = riemannZeta`
+identity; Dirichlet GRH's remaining character
+consequences are from the same stronger source.
+Source audit 6/6 pinned files, 10/10
+dependency checks, 3/3 tamper controls.
+This does **not** prove the September pole–quotient
+inequality, supply a native Agda theorem, or
+require rewriting this independent archival draft.
+
+**Publication classification:** retain M-RH as an
+existing, separate historical/candidate proof
+manuscript. Further edits only after a genuine
+new mathematical result, direct source
+identity, or explicit publication objective;
+the existing original `AlpogeGRHGeometricTransport20261121.md`
+proof roadmap (PR #1533) controls the current
+trusted RH/GRH admission work, not paper counts.
+
+---
+
 # DASHI Publication Roadmap
 
 Date: `2026-06-14`
@@ -7,6 +49,137 @@ This roadmap is the canonical planning surface for publication sequencing. It
 does not promote any theorem, Clay claim, external authority claim, or peer
 review status. It records how the current paper corpus should be prepared from
 the repository's proof-first surfaces.
+
+## 21 November 2026 — NON-DISPLACEMENT RULE: THEOREMS BEFORE PAPERS
+
+**This is a publication router, NOT the proof-work queue.**
+The agreed overarching work is the original five
+non-Yang–Mills Clay endpoints (RH/GRH, NS,
+BSD, Hodge and P vs NP), with GRH independently
+held at **P0** and original Yang–Mills a separate
+physical theorem programme. The limited YM
+CMP102/source weld and all finite R445/F19
+identities are donors, not Clay endpoints.
+
+The controlling GRH source/acceptance owner is
+`Docs/roadmaps/AlpogeGRHGeometricTransport20261121.md`
+on Agda #1533, updated with the exact all-character
+vs RH-only Agda seam and pinned Lean admission gates.
+NS proof owner is `Docs/roadmaps/NSProofControl20260915.md`
+on #1539; YM's original physical owner is
+`Docs/roadmaps/ClayYMProofRoadmap.md` on #1536.
+Other Clay lanes retain their source-specific theorem
+owners, not this publication document.
+
+In the following paper table, **P0 is an editorial
+review rank only**, never a mathematical P0/proof
+completion status. Paper 1/3/8 edits are **now
+packaged**; they do not justify further paper
+work ahead of actual theorem-producing receipts.
+The next tranche returns to the original pinned
+GRH all-character proof and compatible trusted
+semantic admission, not an additional manuscript
+section, diagram, adapter record, or finite
+cyclotomic repeat.
+
+**Required update trigger:** edit a manuscript only
+when a specific original theorem, counterexample,
+dependency, verification or attribution fact
+has changed. Commit the proof-owner roadmap
+with the work, then correct the corresponding
+paper as downstream support. Never promote
+source-written, local SymPy, external checker
+reports and native kernel receipts into each other.
+
+---
+
+## 21 November 2026 — current paper-corpus review and committed updates
+
+The **original eight numbered paper families** remain tracked here.
+The **live three-paper core** is still Paper 3 (YM), Paper 1 (NS),
+and Paper 8 (closure/receipt grammar), NOT eight currently
+submission-ready mathematical theorems. This review also recognizes
+other separately authored or repository-local research manuscripts,
+including the atomic/periodic-table draft
+`Docs/papers/drafts/DASHIAtomicPeriodicTable369Formalism.tex`
+and the separately scoped
+`Docs/papers/drafts/YangMillsClayTrackAuditManuscript.tex`.
+Those are not automatically promoted to the three-paper core.
+
+**Update ranking for the November proof corpus:**
+
+| Priority | Paper and source owner | Editorial decision and mathematical reason |
+| --- | --- | --- |
+| **P0 / committed** | **Paper 3** `live/Paper3YangMillsClayDraft.md`; active Agda YM #1536 | Unified duplicate abstracts; replaced old single-`H3a` main theorem emphasis with conditional same-original `F1/F3/F4` source obligations. Added finite F19/R445 original Wilson 1,024=128+896 spectator/wilson-action counterexample and explicit no-physical-gap firewall. The live draft is revised on #1536; do not infer master publication readiness. |
+| **P0 / committed** | **Paper 8** `live/Paper8UnificationDraft.md`; active Agda GRH #1533 | Added original Dirichlet GRH five-theorem authority, independently reported source verification, Lean v4.33.1 adapter, Mathlib-to-Clay root, Agda RH-only conditional same-object boundary, and exact primitive/imprimitive Euler-factor donor as a *case study* of four-layer receipt governance. This does not convert Paper 8 into a GRH proof manuscript. |
+| **P0 / committed on NS PR #1539** | **Paper 1** `live/Paper1NavierStokesClayDraft.md`; [source-first NS #1539](https://github.com/chboishabba/dashi_agda/pull/1539) | Rewrote the stale A1–A9 opening and R752 universally-positive W2 premise as a conditional compiler, incorporated real physical R734/R735 N=2 and R820/R823/R825 3–4–5 auxiliary signed-payment no-gos, and explicitly left the R751/R752→falsified-rate same-source identity OPEN. Original W1, alternative signed B2 estimate, all-data continuation and A/C/D distinctions remain unproved. Independent SymPy 1.14 exact arithmetic and status-regression PASS; no CI/Agda/Lean kernel. The manuscript and current `NSProofControl20260915.md` roadmap changes are committed on #1539, not master. |
+| **P2 / retain as satellites** | **Papers 2,4,5,6** in `legacy/` | GR/DCHoTT, Hilbert/Stone, DHR, and Yukawa/CKM remain limited or diagnostic. Reopen only when new physical, analytic or carrier-level statements are genuinely proved and source-authority checked. |
+| **P2 / folded, not separate terminal proof** | **Paper 7** `legacy/Paper7TerminalCompositionDraft.md` | Retain its obligation-map role in Paper 8; no promoted unified-physics theorem. |
+| **Separate research drafts** | Atomic/periodic-table TeX, YM audit TeX, selected Monster/TOE studies | Audit attribution and intended venue/claims independently; do not silently renumber as Paper 9/10 or treat them as current active core without a source-based publication decision. |
+
+**Source-first mathematical claim boundary (November):**
+- Original 4D YM physical E1 and full nonvacuum D2 gap, required
+  continuum/volume uniform estimates, N1 nontriviality and all compact
+  simple G remain OPEN. F19/R445/CMP and finite 128+896
+  Wilson block-fibre geometry are iterative proof donors only.
+- External original all-Dirichlet-character GRH (five published Lean
+  statements; externally reported kernel verification) is distinct
+  from DASHI-local Lean toolchain-compatible admission and Agda
+  per-character analytic identity, both still OPEN. Ordinary zeta RH
+  does **not** provide the reverse all-character GRH implication.
+- Selected conductor-32 BSD has an original Mellin split and a
+  conditional positive eta tail bound; same original E32 analytic
+  L-function/newform/eta identification and universal BSD remain OPEN.
+- Paper 1 NS W1/W2 or its updated original physical frontier
+  requires its own PDE source proofs; cross-domain algebra is no
+  substitute.
+- Preserve original author, independent verifier and DASHI
+  adapter attribution separately. Local SymPy arithmetic and
+  source readback are **not** Lean/Agda kernel acceptance. No paper
+  claims Clay solution, publication approval or proof-completion
+  from a commit count.
+
+**Next editorial implementation:** synchronize each revised
+manuscript with its theorem-variable manifest and source
+citation ledger, review current YM/NS physical assumptions and
+the original GRH pinned source statements, and select any satellite
+only after a source-owned theorem/publication purpose is identified.
+The old June 2026 priority descriptions below remain historical
+publication staging guidance; this dated section governs current
+source-critical edits.
+
+---
+
+### 21 November 2026 — Paper 1 source-first update now committed
+
+Focused draft [NS PR #1539](https://github.com/chboishabba/dashi_agda/pull/1539)
+is based on `master` and changes the existing live
+`Paper1NavierStokesClayDraft.md`, **not** a new ninth paper.
+It retains the original A/B/C/D alternatives and R744–R752
+conditional mathematical identities, but explicitly distinguishes
+the **physically refuted unrestricted** R734/R735 and
+R820/R823/R825 positive-payment conjectures from the **unresolved**
+literal source-identity question for `G_751`. Original W1,
+a new signed replacement B2 inequality and uniform actual-flow
+continuation are not proved; the negative auxiliary decision is
+not a counterexample to NS regularity.
+
+The **single authoritative current NS roadmap**
+`Docs/roadmaps/NSProofControl20260915.md` has been
+updated and committed on the *same NS PR #1539*.
+Its historical wide NS roadmap also redirects to that owner.
+New local SymPy 1.14 regression verifies exact R853/R854
+rational rates and R820/823/825 algebra with negative controls;
+no Agda/Lean/CI result is inferred.
+
+This source-critical Paper 1 work is independent of the
+Paper 3/YM #1536 and Paper 8/GRH #1533 branches. This
+**publication roadmap is updated here on #1533** because the
+Paper 8 manuscript edit already owns the current
+eight-family publication-router update; avoid concurrent
+different edits to its master-base version.
+
+---
 
 ## Claim Boundary
 

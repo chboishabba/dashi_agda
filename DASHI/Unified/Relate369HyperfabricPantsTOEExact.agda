@@ -1,4 +1,13 @@
 module DASHI.Unified.Relate369HyperfabricPantsTOEExact where
+-- RH source-aligned coefficient gluing: positive normalization only, not RH/Monster promotion.
+import DASHI.Analysis.RHQuartic128SevenBitFaceCechGluingExact as RH128
+-- Finite C2-equivariant source-carrier map; NOT a Monster-group or RH-zero action.
+import DASHI.Analysis.RHQuartic128Monster3BSSPSignedC2IntertwinerExact as RH128C2
+-- Source-typed RH 163840 dyadic tail, actual H_X->H_T reuse, NO analytic/Monster promotion.
+import DASHI.Analysis.RHQuartic163840DyadicTailHXIntertwinerExact as RH163840
+-- Actual native paired translation/dual symplectic automorphisms; no Monster-normalizer promotion.
+import DASHI.Analysis.RHQuartic128HeisenbergPairedSixSymplecticExact as RHHeisenberg
+
 
 open import DASHI.Core.Prelude
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -218,3 +227,26 @@ canonicalRelate369HyperfabricPantsTOEReceipt :
 canonicalRelate369HyperfabricPantsTOEReceipt =
   relate369-hyperfabric-pants-toe-receipt
     true false false false true false false false
+
+------------------------------------------------------------------------
+-- Original RH signed quartic four-window 128 normalization BIDI receipt.
+-- This reuses seven labelled coefficient factors, original six face labels,
+-- exact corner x residual reconstruction, and sheaf-compatible gluing.
+-- No actual analytic W/zero Monster group-action intertwiner is inferred.
+------------------------------------------------------------------------
+
+toeRH128Normalization :
+  RH128.coefficient RH128.allOnes ≡ 128
+toeRH128Normalization = RH128.normalizationFull
+
+toeRH128FineToCoarseBack :
+  (state : RH128.BinarySeven) →
+  RH128.joinCornerResidual (RH128.splitCornerResidual state) ≡ state
+toeRH128FineToCoarseBack = RH128.joinAfterSplit
+
+-- Exact original source-tail coefficient donor; analytical integral remains separate.
+toeRH163840SourceDyadicTail : RH163840.tailDenominator ≡ 163840
+toeRH163840SourceDyadicTail = RH163840.tailDenominatorIs163840
+
+toeRHZeroOrdinateCrossingDyadicCell : RH163840.crossingAtSixteenCellIndex ≡ 1024
+toeRHZeroOrdinateCrossingDyadicCell = refl

@@ -52,6 +52,46 @@ def main() -> None:
                 "alpha":str(alpha),"q_over_alpha":str(ratio),
                 "quartic_sign":status(q4),
                 "normalized_sixQ_over_alpha4":str(6*q4/alpha**4)})
+    # BOTH horizontal sides of Re(s)=1/2, on the SAME original
+    # signed-quartic source. Reflection alpha -> -alpha does not
+    # reverse Q: the even defect doubles; only linear displacement cancels.
+    # This is not a zero-free theorem on the actual zeta function.
+    mirror_cases = 0
+    for den in (2,3,11,1000,1000000):
+        alpha=Q(1,den)
+        beta_right=Q(1,2)+alpha
+        beta_left=Q(1,2)-alpha
+        assert beta_right+beta_left==1
+        assert (beta_right-Q(1,2))+(beta_left-Q(1,2))==0
+        assert (beta_right-Q(1,2))**2+(beta_left-Q(1,2))**2==2*alpha**2
+        for ordinate in (Q(0), alpha, Q(2)*alpha, Q(12,5)*alpha):
+            assert quartic(alpha,ordinate)==quartic(-alpha,ordinate)
+            assert is_cone(alpha,ordinate)==is_cone(-alpha,ordinate)
+            assert quartic(alpha,ordinate)+quartic(-alpha,ordinate)==2*quartic(alpha,ordinate)
+            mirror_cases+=1
+
+    # The separate external source's conservatively rounded one-sided
+    # target cap has an exact reflected left endpoint. Importing its
+    # same-zeta nonvanishing theorem remains an INDEPENDENT obligation.
+    safe_beta=Q(437479,500000)
+    safe_left=1-safe_beta
+    safe_displacement=safe_beta-Q(1,2)
+    assert safe_left==Q(62521,500000)
+    assert safe_displacement==Q(187479,500000)
+    assert safe_beta-Q(1,2)==Q(1,2)-safe_left
+    assert Q(0)<safe_left<Q(1,2)<safe_beta<1
+
+    # Exact counterexample to the *invalid* inference
+    # "reflection symmetry alone implies every zero is on the line".
+    # This rational polynomial is NOT a zeta/completed L-function.
+    # f(s)=(s-1/4)(s-3/4)=f(1-s), but its two roots are off-line.
+    def toy_symmetric_function(s):
+        return (s-Q(1,4))*(s-Q(3,4))
+    for sample in (Q(0),Q(1,4),Q(1,2),Q(3,4),Q(1)):
+        assert toy_symmetric_function(sample)==toy_symmetric_function(1-sample)
+    assert toy_symmetric_function(Q(1,4))==toy_symmetric_function(Q(3,4))==0
+    assert Q(1,4)!=Q(1,2) and Q(3,4)!=Q(1,2)
+
     assert status(quartic(Q(1),Q(0)))=="negative"
     assert status(quartic(Q(1),Q(1)))=="positive"
     assert status(quartic(Q(1),Q(2449,1000)))=="negative"
@@ -66,6 +106,12 @@ def main() -> None:
         "schema":"rh_g3_quartic_signed_cone_geometry_exact_v1",
         "source":"RiemannQuarticSignedPoleCompensationExact + ConeDebtExact",
         "exact_fraction_cases":len(cases),
+        "horizontal_reflection_cases":mirror_cases,
+        "horizontal_signed_displacement_cancels":True,
+        "horizontal_even_defect_doubles":True,
+        "reflected_safe_left_beta":str(safe_left),
+        "reflected_safe_horizontal_radius":str(safe_displacement),
+        "reflection_symmetry_alone_implies_RH":False,
         "inside_mixed_cone_has_both_signs":True,
         "same_ordinate_quartic_negative":True,
         "q_equals_alpha_quartic_positive":True,
