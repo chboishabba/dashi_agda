@@ -107,7 +107,22 @@ def candidate_word(word, gens):
   z=mul(z,inverse(a) if invert else a)
   phase=phase*(lam if not invert else lam)%3
  return z,phase
-def check_pair(atlas_pair,monster_pair):
+def form_source():
+ from monster3b_atlas_actual_d4_word_witness import FORM_ROWS
+ return [[int(c) for c in line] for line in FORM_ROWS.splitlines()]
+def form_monster():
+ # The existing MonsterSubgroups adapter normalizes [B_i,A_j]=z^delta.
+ # Therefore the commutator form has lower-left +I and upper-right -I.
+ j=[[0]*N for _ in range(N)]
+ for i in range(6):j[i][6+i]=2;j[6+i][i]=1
+ return j
+def cocycle_defect(g,phase):
+ c=[[0]*N for _ in range(N)]
+ for i in range(6):c[6+i][i]=1
+ transported=mul(mul(transpose(g),c),g)
+ defect=[[(transported[i][j]-phase*c[i][j])%3 for j in range(N)] for i in range(N)]
+ return defect
+def check_pair(atlas_pair,monster_pair,actual_forms=False):
  c,d=atlas_pair;b,cand=monster_pair
  if powm(c,2)!=neg(eye()) or powm(d,3)!=eye():
   raise ValueError("original ATLAS source generator relations missing")
@@ -124,6 +139,28 @@ def check_pair(atlas_pair,monster_pair):
   assert mul(c,t)==mul(t,b) and mul(d,t)==mul(t,cand)
   out["T_rows_F3"]=t
   out["T_rank"]=12
+  if actual_forms:
+   ja,jm=form_source(),form_monster()
+   if (mul(mul(transpose(c),ja),c)!=neg(ja) or
+       mul(mul(transpose(d),ja),d)!=ja):
+    raise ValueError("original ATLAS source similitude form mismatch")
+   for g,phase in ((b,2),(cand,1)):
+    if mul(mul(transpose(g),jm),g)!=scaled(jm,phase):
+     raise ValueError("Monster quotient symplectic similitude mismatch")
+   transported=mul(mul(transpose(t),ja),t)
+   factors=[phase for phase in (1,2) if transported==scaled(jm,phase)]
+   if len(factors)!=1:
+    out["status"]="FORM_TRANSPORT_NOT_CERTIFIED"
+    out["form_transport_passed"]=False
+   else:
+    out["form_transport_passed"]=True
+    out["form_scale_mod3"]=factors[0]
+    defects=[cocycle_defect(b,2),cocycle_defect(cand,1)]
+    if any(z!=transpose(z) for z in defects):
+     raise ValueError("Monster Heisenberg cocycle defect not symmetric")
+    out["cocycle_defect_ranks"]=[rank(z) for z in defects]
+    out["quadratic_central_corrections_derived"]=True
+  else:out["actual_cross_source_form_test_run"]=False
  return out
 def test(root):
  C,D=atlas(root)
@@ -159,7 +196,7 @@ def main():
   targetC,phaseC=candidate_word(w["C"],gens)
   targetD,phaseD=candidate_word(w["D"],gens)
   if (phaseC,phaseD)!=(2,1):raise ValueError("centre-multiplier generator mismatch")
-  result=check_pair((C,D),(targetC,targetD))
+  result=check_pair((C,D),(targetC,targetD),actual_forms=True)
   result["monster_manifest_unmodified_source_authenticated_here"]=False
   result["supplied_quotient_word_correspondence_unproved"]=True
   result["word_lengths"]=[len(w["C"]),len(w["D"])]
